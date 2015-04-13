@@ -193,6 +193,7 @@
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
 	name_language = "Rootspeak"
+	spawns_with_stack = 0
 
 	min_age = 1
 	max_age = 300

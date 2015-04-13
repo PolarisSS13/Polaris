@@ -69,7 +69,7 @@
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "has been knocked unconscious!"
-
+	var/spawns_with_stack = 1
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
 	var/breath_type = "oxygen"                        // Non-oxygen gas breathed, if any.

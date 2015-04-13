@@ -10,6 +10,7 @@
 	flags = NO_PAIN | NO_SCAN | NO_POISON | NO_MINOR_CUT
 	spawn_flags = IS_RESTRICTED
 	siemens_coefficient = 0
+	spawns_with_stack = 0
 
 	breath_type = null
 	poison_type = null

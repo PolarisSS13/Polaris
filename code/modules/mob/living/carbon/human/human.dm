@@ -1128,6 +1128,9 @@
 
 	full_prosthetic = null
 
+	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack && should_have_organ("brain"))
+		create_stack()
+
 	if(species)
 		return 1
 	else
@@ -1445,4 +1448,3 @@
 
 /mob/living/carbon/human/is_muzzled()
 	return (wear_mask && (istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/weapon/grenade)))
-
