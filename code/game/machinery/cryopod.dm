@@ -131,12 +131,12 @@
 /obj/item/weapon/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = "/obj/machinery/computer/cryopod"
-	origin_tech = "programming=3"
+	origin_tech = list(TECH_DATA = 3)
 
 /obj/item/weapon/circuitboard/robotstoragecontrol
 	name = "Circuit board (Robotic Storage Console)"
 	build_path = "/obj/machinery/computer/cryopod/robot"
-	origin_tech = "programming=3"
+	origin_tech = list(TECH_DATA = 3)
 
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
@@ -246,12 +246,13 @@
 	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
-	control_computer = locate(/obj/machinery/computer/cryopod) in src.loc.loc
+	//control_computer = locate(/obj/machinery/computer/cryopod) in src.loc
+	control_computer = locate(/obj/machinery/computer/cryopod) in range(6,src)
 
 	// Don't send messages unless we *need* the computer, and less than five minutes have passed since last time we messaged
 	if(!control_computer && urgent && last_no_computer_message + 5*60*10 < world.time)
-		log_admin("Cryopod in [src.loc.loc] could not find control computer!")
-		message_admins("Cryopod in [src.loc.loc] could not find control computer!")
+		log_admin("Cryopod in [src.loc] could not find control computer!")
+		message_admins("Cryopod in [src.loc] could not find control computer!")
 		last_no_computer_message = world.time
 
 	return control_computer != null
@@ -393,9 +394,9 @@
 	occupant.ckey = null
 
 	//Make an announcement and log the person entering storage.
-	control_computer.frozen_crew += "[occupant.real_name]"
+	control_computer.frozen_crew += "[occupant.real_name], [occupant.mind.assigned_role] - [worldtime2text()]"
 
-	announce.autosay("[occupant.real_name] [on_store_message]", "[on_store_name]")
+	announce.autosay("[occupant.real_name], [occupant.mind.assigned_role] [on_store_message]", "[on_store_name]")
 	visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [occupant.real_name] into storage.</span>", 3)
 
 	// Delete the mob.
