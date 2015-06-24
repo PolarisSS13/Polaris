@@ -1043,12 +1043,6 @@ datum/preferences
 			SetSkills(user)
 		return 1
 
-	else if (href_list["preference"] == "loadout")
-
-		if(href_list["task"] == "input")
-
-			var/list/valid_gear_choices = list()
-
 	else if(href_list["preference"] == "traits")
 		if(href_list["cancel"])
 			user << browse(null, "window=show_traits")
@@ -1083,6 +1077,12 @@ datum/preferences
 		else
 			SetTraits(user)
 		return 1
+
+	else if (href_list["preference"] == "loadout")
+
+		if(href_list["task"] == "input")
+
+			var/list/valid_gear_choices = list()
 
 
 			for(var/gear_name in gear_datums)
@@ -1790,6 +1790,9 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
+
+	character.traits = traits
+	character.used_traitpoints = used_traitpoints
 
 	// Destroy/cyborgize organs
 
