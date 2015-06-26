@@ -109,6 +109,10 @@ datum/preferences
 	var/skill_specialization = null
 	var/list/skills = list() // skills can range from 0 to 3
 
+	var/used_traitpoints = 0
+	var/trait_specialization = null
+	var/list/traits = list() // skills can range from 0 to 3
+
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
@@ -232,6 +236,96 @@ datum/preferences
 	user << browse(null, "window=preferences")
 	user << browse(HTML, "window=show_skills;size=600x800")
 	return
+
+	/*
+	Variable Char setup
+	*/
+
+/datum/preferences/proc/ZeroTraits(var/forced = 0)
+	for(var/V in TRAITS) for(var/datum/trait/S in TRAITS[V])
+		if(!traits.Find(S.ID) || forced)
+			traits[S.ID] = TRAIT_NONE
+
+/datum/preferences/proc/CalculateTraitPoints()
+	used_traitpoints = 0
+	for(var/V in TRAITS) for(var/datum/trait/S in TRAITS[V])
+		var/multiplier = 1
+		switch(traits[S.ID])
+			if(TRAIT_NONE)
+				used_traitpoints += 0 * multiplier
+			if(TRAIT_BASIC)
+				used_traitpoints += 1 * multiplier
+			if(TRAIT_ADEPT)
+				// secondary traits cost less
+				used_traitpoints += 3 * multiplier
+			if(TRAIT_EXPERT)
+				// secondary traits cost less
+				used_traitpoints += 6 * multiplier
+
+/datum/preferences/proc/GetTraitClass(points)
+	return CalculateTraitClass(points, age)
+
+/proc/CalculateTraitClass(points, age)
+	if(points <= 0) return "Unconfigured"
+	// trait classes describe how your character compares in total points
+	points -= min(round((age - 20) / 2.5), 4) // every 2.5 years after 20, one extra traitpoint
+	if(age > 30)
+		points -= round((age - 30) / 5) // every 5 years after 30, one extra traitpoint
+	switch(points)
+		if(-1000 to 3)
+			return "Terrifying"
+		if(4 to 6)
+			return "Below Average"
+		if(7 to 10)
+			return "Average"
+		if(11 to 14)
+			return "Above Average"
+		if(15 to 18)
+			return "Exceptional"
+		if(19 to 24)
+			return "Genius"
+		if(24 to 1000)
+			return "God"
+
+/datum/preferences/proc/SetTraits(mob/user)
+	if(TRAITS == null)
+		setup_traits()
+
+	if(traits.len == 0)
+		ZeroTraits()
+
+
+	var/HTML = "<body>"
+	HTML += "<b>Select your Traits</b><br>"
+	HTML += "Current trait level: <b>[GetTraitClass(used_traitpoints)]</b> ([used_traitpoints])<br>"  //change
+	HTML += "<a href=\"byond://?src=\ref[user];preference=traits;preconfigured=1;\">Use preconfigured traitset</a><br>"
+	HTML += "<table>"
+	for(var/V in TRAITS)
+		HTML += "<tr><th colspan = 5><b>[V]</b>"
+		HTML += "</th></tr>"
+		for(var/datum/trait/S in TRAITS[V])
+			var/level = traits[S.ID]
+			HTML += "<tr style='text-align:left;'>"
+			HTML += "<th><a href='byond://?src=\ref[user];preference=traits;traitinfo=\ref[S]'>[S.name]</a></th>"
+			HTML += "<th><a href='byond://?src=\ref[user];preference=traits;settrait=\ref[S];newvalue=[TRAIT_NONE]'><font color=[(level == TRAIT_NONE) ? "red" : "black"]>\[Low\]</font></a></th>"
+			// secondary traits don't have an amateur level
+			HTML += "<th><a href='byond://?src=\ref[user];preference=traits;settrait=\ref[S];newvalue=[TRAIT_BASIC]'><font color=[(level == TRAIT_BASIC) ? "red" : "black"]>\[Medium\]</font></a></th>"
+			HTML += "<th><a href='byond://?src=\ref[user];preference=traits;settrait=\ref[S];newvalue=[TRAIT_ADEPT]'><font color=[(level == TRAIT_ADEPT) ? "red" : "black"]>\[High\]</font></a></th>"
+			HTML += "<th><a href='byond://?src=\ref[user];preference=traits;settrait=\ref[S];newvalue=[TRAIT_EXPERT]'><font color=[(level == TRAIT_EXPERT) ? "red" : "black"]>\[Very High\]</font></a></th>"
+			HTML += "</tr>"
+	HTML += "</table>"
+	HTML += "<a href=\"byond://?src=\ref[user];preference=traits;cancel=1;\">\[Done\]</a>"
+
+	user << browse(null, "window=preferences")
+	user << browse(HTML, "window=show_traits;size=600x800")
+	return
+
+
+
+/*
+	End Variable Char Setup
+*/
+
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
@@ -949,11 +1043,47 @@ datum/preferences
 			SetSkills(user)
 		return 1
 
+	else if(href_list["preference"] == "traits")
+		if(href_list["cancel"])
+			user << browse(null, "window=show_traits")
+			ShowChoices(user)
+		else if(href_list["traitinfo"])
+			var/datum/trait/S = locate(href_list["traitinfo"])
+			var/HTML = "<b>[S.name]</b><br>[S.desc]"
+			user << browse(HTML, "window=\ref[user]traitinfo")
+		else if(href_list["settrait"])
+			var/datum/trait/S = locate(href_list["settrait"])
+			var/value = text2num(href_list["newvalue"])
+			traits[S.ID] = value
+			CalculateTraitPoints()
+			SetTraits(user)
+		else if(href_list["preconfigured"])
+			var/selected = input(user, "Select a traitset", "Traitset") as null|anything in TRAIT_PRE
+			if(!selected) return
+
+			ZeroTraits(1)
+			for(var/V in TRAIT_PRE[selected])
+				if(V == "field")
+					trait_specialization = TRAIT_PRE[selected]["field"]
+					continue
+				traits[V] = TRAIT_PRE[selected][V]
+			CalculateTraitPoints()
+
+			SetTraits(user)
+		else if(href_list["setspecialization"])
+			trait_specialization = href_list["setspecialization"]
+			CalculateTraitPoints()
+			SetTraits(user)
+		else
+			SetTraits(user)
+		return 1
+
 	else if (href_list["preference"] == "loadout")
 
 		if(href_list["task"] == "input")
 
 			var/list/valid_gear_choices = list()
+
 
 			for(var/gear_name in gear_datums)
 				var/datum/gear/G = gear_datums[gear_name]
@@ -1660,6 +1790,9 @@ datum/preferences
 
 	character.skills = skills
 	character.used_skillpoints = used_skillpoints
+
+	character.traits = traits
+	character.used_traitpoints = used_traitpoints
 
 	// Destroy/cyborgize organs
 
