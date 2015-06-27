@@ -77,11 +77,11 @@ proc/show_trait_window(var/mob/user, var/mob/living/carbon/human/M)
 			var/level = M.traits[S.ID]
 			HTML += "<tr style='text-align:left;'>"
 			HTML += "<th>[S.name]</th>"
-			HTML += "<th><font color=[(level == TRAIT_NONE) ? "red" : "black"]>\[Low\]</font></th>"
+			HTML += "<th><font color=[(level == TRAIT_NONE) ? "red" : "black"]>\[Untrained\]</font></th>"
 			// secondary traits don't have an amateur level
-			HTML += "<th><font color=[(level == TRAIT_BASIC) ? "red" : "black"]>\[Medium\]</font></th>"
-			HTML += "<th><font color=[(level == TRAIT_ADEPT) ? "red" : "black"]>\[High\]</font></th>"
-			HTML += "<th><font color=[(level == TRAIT_EXPERT) ? "red" : "black"]>\[Very High\]</font></th>"
+			HTML += "<th><font color=[(level == TRAIT_BASIC) ? "red" : "black"]>\[Amateur\]</font></th>"
+			HTML += "<th><font color=[(level == TRAIT_ADEPT) ? "red" : "black"]>\[Trained\]</font></th>"
+			HTML += "<th><font color=[(level == TRAIT_EXPERT) ? "red" : "black"]>\[Professional\]</font></th>"
 			HTML += "</tr>"
 	HTML += "</table>"
 
@@ -94,3 +94,4 @@ mob/living/carbon/human/verb/show_traits()
 	set name = "Show Own Traits"
 
 	show_trait_window(src, src)
+
