@@ -61,6 +61,10 @@
 	var/skill_specialization = null
 	var/list/skills = list()
 
+	var/used_traitpoints = 0
+	var/trait_specialization = null
+	var/list/traits = list()
+
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 

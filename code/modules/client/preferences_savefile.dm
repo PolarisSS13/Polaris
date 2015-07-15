@@ -169,6 +169,9 @@
 	S["used_skillpoints"]	>> used_skillpoints
 	S["skills"]				>> skills
 	S["skill_specialization"] >> skill_specialization
+	S["used_traitpoints"]	>> used_traitpoints
+	S["traits"]				>> traits
+	S["trait_specialization"] >> trait_specialization
 	S["organ_data"]			>> organ_data
 	S["rlimb_data"]			>> rlimb_data
 	S["gear"]				>> gear
@@ -238,6 +241,8 @@
 
 	if(!skills) skills = list()
 	if(!used_skillpoints) used_skillpoints= 0
+	if(!traits) traits = list()
+	if(!used_traitpoints) used_traitpoints= 0
 	if(isnull(disabilities)) disabilities = 0
 	if(!player_alt_titles) player_alt_titles = new()
 	if(!organ_data) src.organ_data = list()
@@ -325,6 +330,9 @@
 	S["used_skillpoints"]	<< used_skillpoints
 	S["skills"]				<< skills
 	S["skill_specialization"] << skill_specialization
+	S["used_traitpoints"]	<< used_traitpoints
+	S["traits"]				<< traits
+	S["trait_specialization"] << trait_specialization
 	S["organ_data"]			<< organ_data
 	S["rlimb_data"]			<< rlimb_data
 	S["gear"]				<< gear
