@@ -1027,7 +1027,6 @@
 #include "code\modules\events\spacevine.dm"
 #include "code\modules\events\spider_infestation.dm"
 #include "code\modules\events\spontaneous_appendicitis.dm"
-#include "code\modules\events\viral_infection.dm"
 #include "code\modules\events\wallrot.dm"
 #include "code\modules\examine\examine.dm"
 #include "code\modules\examine\descriptions\atmospherics.dm"
