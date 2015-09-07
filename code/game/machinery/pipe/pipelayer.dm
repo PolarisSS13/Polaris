@@ -50,7 +50,7 @@
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return
 
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
+	if(istype(W, /obj/item/stack/material/steel))
 
 		var/result = load_metal(W)
 		if(isnull(result))
@@ -86,7 +86,7 @@
 	on=0
 	return
 
-/obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/MM)
+/obj/machinery/pipelayer/proc/load_metal(var/obj/item/stack/material/steel/MM)
 	if(istype(MM) && MM.get_amount())
 		var/cur_amount = metal
 		var/to_load = max(max_metal - round(cur_amount),0)
@@ -110,8 +110,10 @@
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
-			T.make_plating(!(T.broken || T.burnt))
-	return new_turf.is_plating()
+			if(!T.broken && !T.burnt)
+				new T.floor_type(T)
+			T.make_plating()
+	return !new_turf.intact
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
 	if(!on || !(M_Dir in list(1, 2, 4, 8)) || M_Dir==old_dir)

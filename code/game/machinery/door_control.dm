@@ -65,7 +65,7 @@
 	use_power(5)
 	icon_state = "doorctrl1"
 	desiredstate = !desiredstate
-	trigger(user)
+	trigger()
 	spawn(15)
 		update_icon()
 
@@ -85,14 +85,6 @@
 /*
 	Airlock remote control
 */
-
-// Bitmasks for door switches.
-#define OPEN   0x1
-#define IDSCAN 0x2
-#define BOLTS  0x4
-#define SHOCK  0x8
-#define SAFE   0x10
-
 /obj/machinery/button/remote/airlock
 	name = "remote door-control"
 	desc = "It controls doors, remotely."
@@ -136,12 +128,6 @@
 					D.electrify(0)
 				if(specialfunctions & SAFE)
 					D.set_safeties(1)
-
-#undef OPEN
-#undef IDSCAN
-#undef BOLTS
-#undef SHOCK
-#undef SAFE
 
 /*
 	Blast door remote control

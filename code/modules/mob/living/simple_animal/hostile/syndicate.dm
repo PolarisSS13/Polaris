@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/syndicate
 	name = "\improper Syndicate operative"
-	desc = "Death to the Company."
+	desc = "Death to Nanotrasen."
 	icon_state = "syndicate"
 	icon_living = "syndicate"
 	icon_dead = "syndicate_dead"
@@ -107,7 +107,7 @@
 	rapid = 1
 	icon_state = "syndicateranged"
 	icon_living = "syndicateranged"
-	casingtype = /obj/item/ammo_casing/a10mm
+	casingtype = /obj/item/ammo_casing/a12mm
 	projectilesound = 'sound/weapons/Gunshot_light.ogg'
 	projectiletype = /obj/item/projectile/bullet/pistol/medium
 

@@ -729,13 +729,17 @@
 
 	if (usr.stat != 0)
 		return
-	if (!holdingitems || holdingitems.len == 0)
+	if (holdingitems && holdingitems.len == 0)
 		return
 
 	for(var/obj/item/O in holdingitems)
 		O.loc = src.loc
 		holdingitems -= O
-	holdingitems.Cut()
+	holdingitems = list()
+
+/obj/machinery/reagentgrinder/proc/remove_object(var/obj/item/O)
+	holdingitems -= O
+	qdel(O)
 
 /obj/machinery/reagentgrinder/proc/grind()
 
@@ -758,6 +762,10 @@
 	// Process.
 	for (var/obj/item/O in holdingitems)
 
+		if(!O || !istype(O))
+			holdingitems -= null
+			continue
+
 		var/remaining_volume = beaker.reagents.maximum_volume - beaker.reagents.total_volume
 		if(remaining_volume <= 0)
 			break
@@ -768,16 +776,13 @@
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
-					if(deleted(stack))
-						holdingitems -= stack
 					beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
 		if(O.reagents)
 			O.reagents.trans_to(beaker, min(O.reagents.total_volume, remaining_volume))
 			if(O.reagents.total_volume == 0)
-				holdingitems -= O
-				qdel(O)
+				remove_object(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
 

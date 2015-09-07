@@ -9,7 +9,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	//Species-specific stuff.
-	species_restricted = list("Human")
+	species_restricted = list("exclude","Unathi","Tajara","Skrell","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
@@ -34,7 +34,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	species_restricted = list("Human", "Skrell")
+	species_restricted = list("exclude","Unathi","Tajara","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
@@ -112,7 +112,7 @@
 		if(istype(H))
 			if(helmet && H.head == helmet)
 				H.drop_from_inventory(helmet)
-				helmet.forceMove(src)
+				helmet.loc = src
 
 	if(boots)
 		boots.canremove = 1
@@ -120,11 +120,11 @@
 		if(istype(H))
 			if(boots && H.shoes == boots)
 				H.drop_from_inventory(boots)
-				boots.forceMove(src)
+				boots.loc = src
 
 	if(tank)
 		tank.canremove = 1
-		tank.forceMove(src)
+		tank.loc = src
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -148,7 +148,7 @@
 		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
 		H.drop_from_inventory(helmet)
-		helmet.forceMove(src)
+		helmet.loc = src
 	else
 		if(H.head)
 			H << "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>"
@@ -197,15 +197,15 @@
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				user << "You pop \the [tank] out of \the [src]'s storage compartment."
-				tank.forceMove(get_turf(src))
+				tank.loc = get_turf(src)
 				src.tank = null
 			else if(choice == helmet)
 				user << "You detatch \the [helmet] from \the [src]'s helmet mount."
-				helmet.forceMove(get_turf(src))
+				helmet.loc = get_turf(src)
 				src.helmet = null
 			else if(choice == boots)
 				user << "You detatch \the [boots] from \the [src]'s boot mounts."
-				boots.forceMove(get_turf(src))
+				boots.loc = get_turf(src)
 				src.boots = null
 		else
 			user << "\The [src] does not have anything installed."
@@ -216,7 +216,7 @@
 		else
 			user << "You attach \the [W] to \the [src]'s helmet mount."
 			user.drop_item()
-			W.forceMove(src)
+			W.loc = src
 			src.helmet = W
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
@@ -225,7 +225,7 @@
 		else
 			user << "You attach \the [W] to \the [src]'s boot mounts."
 			user.drop_item()
-			W.forceMove(src)
+			W.loc = src
 			boots = W
 		return
 	else if(istype(W,/obj/item/weapon/tank))
@@ -236,7 +236,7 @@
 		else
 			user << "You insert \the [W] into \the [src]'s storage compartment."
 			user.drop_item()
-			W.forceMove(src)
+			W.loc = src
 			tank = W
 		return
 

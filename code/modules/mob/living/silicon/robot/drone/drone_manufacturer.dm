@@ -78,8 +78,7 @@
 	flick("h_lathe_leave",src)
 
 	time_last_drone = world.time
-	if(player.mob && player.mob.mind) player.mob.mind.reset()
-	var/mob/living/silicon/robot/drone/new_drone = PoolOrNew(drone_type, get_turf(src))
+	var/mob/living/silicon/robot/drone/new_drone = new drone_type(get_turf(src))
 	new_drone.transfer_personality(player)
 	new_drone.master_fabricator = src
 
@@ -90,6 +89,7 @@
 	set category = "Ghost"
 	set name = "Join As Drone"
 	set desc = "If there is a powered, enabled fabricator in the game world with a prepared chassis, join as a maintenance drone."
+
 
 	if(ticker.current_state < GAME_STATE_PLAYING)
 		src << "<span class='danger'>The game hasn't started yet!</span>"
@@ -108,11 +108,17 @@
 	if(jobban_isbanned(src,"Cyborg"))
 		usr << "<span class='danger'>You are banned from playing synthetics and cannot spawn as a drone.</span>"
 		return
-
+		
 	if(!MayRespawn(1))
 		return
 
 	var/deathtime = world.time - src.timeofdeath
+	if(istype(src,/mob/dead/observer))
+		var/mob/dead/observer/G = src
+		if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+			usr << "<span class='notice'>Upon using the antagHUD you forfeighted the ability to join the round.</span>"
+			return
+
 	var/deathtimeminutes = round(deathtime / 600)
 	var/pluralcheck = "minute"
 	if(deathtimeminutes == 0)

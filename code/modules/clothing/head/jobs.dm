@@ -38,15 +38,15 @@
 	name = "chaplain's hood"
 	desc = "It's hood that covers the head. It keeps you warm during the space winters."
 	icon_state = "chaplain_hood"
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD
+	flags = HEADCOVERSEYES|BLOCKHAIR
+	body_parts_covered = HEAD|EYES
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
 	name = "nun hood"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun_hood"
-	flags_inv = BLOCKHAIR
+	flags = HEADCOVERSEYES|BLOCKHAIR
 	body_parts_covered = HEAD
 
 //Mime
@@ -60,54 +60,42 @@
 /obj/item/clothing/head/beret/sec
 	name = "security beret"
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
-	icon_state = "beret_officer"
-/obj/item/clothing/head/beret/sec/navy/officer
+	icon_state = "beret_badge"
+/obj/item/clothing/head/beret/sec/alt
 	name = "officer beret"
 	desc = "A navy blue beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_officer"
-/obj/item/clothing/head/beret/sec/navy/hos
+	icon_state = "officerberet"
+/obj/item/clothing/head/beret/sec/hos
 	name = "officer beret"
 	desc = "A navy blue beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_hos"
-/obj/item/clothing/head/beret/sec/navy/warden
+	icon_state = "hosberet"
+/obj/item/clothing/head/beret/sec/warden
 	name = "warden beret"
 	desc = "A navy blue beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_navy_warden"
-/obj/item/clothing/head/beret/sec/corporate/officer
-	name = "officer beret"
-	desc = "A corporate black beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_officer"
-/obj/item/clothing/head/beret/sec/corporate/hos
-	name = "officer beret"
-	desc = "A corporate black beret with a commander's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_hos"
-/obj/item/clothing/head/beret/sec/corporate/warden
-	name = "warden beret"
-	desc = "A corporate black beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
-	icon_state = "beret_corporate_warden"
-/obj/item/clothing/head/beret/engineering
+	icon_state = "wardenberet"
+/obj/item/clothing/head/beret/eng
 	name = "engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
-	icon_state = "beret_engineering"
-/obj/item/clothing/head/beret/purple
+	icon_state = "e_beret_badge"
+/obj/item/clothing/head/beret/jan
 	name = "purple beret"
 	desc = "A stylish, if purple, beret."
-	icon_state = "beret_purple"
+	icon_state = "purpleberet"
 /obj/item/clothing/head/beret/centcom/officer
 	name = "officers beret"
-	desc = "A black beret adorned with the shield - a silver kite shield with an engraved sword - of the corporate security forces."
-	icon_state = "beret_centcom_officer"
+	desc = "A black beret adorned with the shield—a silver kite shield with an engraved sword—of the NanoTrasen security forces."
+	icon_state = "centcomofficerberet"
 /obj/item/clothing/head/beret/centcom/captain
 	name = "captains beret"
-	desc = "A white beret adorned with the shield - a silver kite shield with an engraved sword - of the corporate security forces."
-	icon_state = "beret_centcom_captain"
+	desc = "A white beret adorned with the shield—a silver kite shield with an engraved sword—of the NanoTrasen security forces."
+	icon_state = "centcomcaptain"
 
 //Medical
 /obj/item/clothing/head/surgery
 	name = "surgical cap"
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = "surgcap_blue"
-	flags_inv = BLOCKHEADHAIR
+	flags = BLOCKHEADHAIR
 
 /obj/item/clothing/head/surgery/purple
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is deep purple."

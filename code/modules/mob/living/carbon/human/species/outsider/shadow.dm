@@ -18,8 +18,7 @@
 	remains_type = /obj/effect/decal/cleanable/ash
 	death_message = "dissolves into ash..."
 
-	flags = NO_BLOOD | NO_SCAN | NO_SLIP | NO_POISON | NO_MINOR_CUT
-	spawn_flags = IS_RESTRICTED
+	flags = IS_RESTRICTED | NO_BLOOD | NO_SCAN | NO_SLIP | NO_POISON
 
 /datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)

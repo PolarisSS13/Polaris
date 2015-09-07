@@ -11,7 +11,7 @@
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
-	gluttonous = 3
+	gluttonous = 2
 
 	eyes = "blank_eyes"
 
@@ -25,8 +25,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	flags =  NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT
-	spawn_flags = IS_RESTRICTED
+	flags = IS_RESTRICTED | NO_BREATHE | NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON
 
 	reagent_tag = IS_XENOS
 
@@ -54,16 +53,13 @@
 		)
 
 	bump_flag = ALIEN
-	swap_flags = ~HEAVY
-	push_flags = (~HEAVY) ^ ROBOT
+	swap_flags = ALLMOBS
+	push_flags = ALLMOBS ^ ROBOT
 
 	var/alien_number = 0
 	var/caste_name = "creature" // Used to update alien name.
 	var/weeds_heal_rate = 1     // Health regen on weeds.
 	var/weeds_plasma_rate = 5   // Plasma regen on weeds.
-
-/datum/species/xenos/get_bodytype()
-	return "Xenomorph"
 
 /datum/species/xenos/get_random_name()
 	return "alien [caste_name] ([alien_number])"

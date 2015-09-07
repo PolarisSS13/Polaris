@@ -141,7 +141,7 @@ research holder datum.
 /datum/tech/engineering
 	name = "Engineering Research"
 	desc = "Development of new and improved engineering parts."
-	id = TECH_ENGINEERING
+	id = TECH_ENGINERING
 
 /datum/tech/phorontech
 	name = "Phoron Research"
@@ -180,7 +180,7 @@ research holder datum.
 
 /datum/tech/syndicate
 	name = "Illegal Technologies Research"
-	desc = "The study of technologies that violate standard government regulations."
+	desc = "The study of technologies that violate standard Nanotrasen regulations."
 	id = TECH_ILLEGAL
 	level = 0
 

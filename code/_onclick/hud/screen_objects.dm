@@ -45,15 +45,12 @@
 /obj/screen/item_action
 	var/obj/item/owner
 
-/obj/screen/item_action/Destroy()
-	..()
-	owner = null
-
 /obj/screen/item_action/Click()
 	if(!usr || !owner)
 		return 1
-	if(!usr.canClick())
+	if(usr.next_move >= world.time)
 		return
+	usr.next_move = world.time + 6
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
 		return 1
@@ -83,7 +80,7 @@
 	name = "storage"
 
 /obj/screen/storage/Click()
-	if(!usr.canClick())
+	if(world.time <= usr.next_move)
 		return 1
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return 1
@@ -93,6 +90,7 @@
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
 			usr.ClickOn(master)
+			usr.next_move = world.time+2
 	return 1
 
 /obj/screen/gun
@@ -276,7 +274,7 @@
 						var/no_mask
 						if(!(C.wear_mask && C.wear_mask.flags & AIRTIGHT))
 							var/mob/living/carbon/human/H = C
-							if(!(H.head && H.head.item_flags & AIRTIGHT))
+							if(!(H.head && H.head.flags & AIRTIGHT))
 								no_mask = 1
 
 						if(no_mask)
@@ -370,7 +368,7 @@
 			usr.hud_used.action_intent.icon_state = "intent_help"
 		if(I_HURT)
 			usr.a_intent = I_HURT
-			usr.hud_used.action_intent.icon_state = "intent_harm"
+			usr.hud_used.action_intent.icon_state = "intent_hurt"
 		if(I_GRAB)
 			usr.a_intent = I_GRAB
 			usr.hud_used.action_intent.icon_state = "intent_grab"
@@ -478,7 +476,7 @@
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
-	if(!usr.canClick())
+	if(world.time <= usr.next_move)
 		return 1
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return 1
@@ -489,10 +487,12 @@
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
 				C.activate_hand("r")
+				usr.next_move = world.time+2
 		if("l_hand")
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
 				C.activate_hand("l")
+				usr.next_move = world.time+2
 		if("swap")
 			usr:swap_hand()
 		if("hand")
@@ -501,4 +501,5 @@
 			if(usr.attack_ui(slot_id))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
+				usr.next_move = world.time+6
 	return 1

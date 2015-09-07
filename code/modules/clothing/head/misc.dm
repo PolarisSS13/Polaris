@@ -56,7 +56,7 @@
 	name = "hastur's hood"
 	desc = "It's unspeakably stylish"
 	icon_state = "hasturhood"
-	flags_inv = BLOCKHAIR
+	flags = HEADCOVERSEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/nursehat
@@ -74,7 +74,8 @@
 		)
 	icon_state = "syndicate"
 	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags = BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -83,7 +84,8 @@
 	desc = "A large, featureless white orb mean to be worn on your head. How do you even see out of this thing?"
 	icon_state = "cueball"
 	item_state = "cueball"
-	flags_inv = BLOCKHAIR
+	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
+	flags_inv = 0
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/greenbandana
@@ -99,6 +101,7 @@
 	desc = "A helmet made out of a box."
 	icon_state = "cardborg_h"
 	item_state = "cardborg_h"
+	flags = HEADCOVERSEYES | HEADCOVERSMOUTH
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -106,8 +109,7 @@
 	name = "justice hat"
 	desc = "fight for what's righteous!"
 	icon_state = "justicered"
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|EYES
+	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 
 /obj/item/clothing/head/justice/blue
 	icon_state = "justiceblue"
@@ -199,7 +201,7 @@
 	name = "witch costume wig"
 	desc = "Eeeee~heheheheheheh!"
 	icon_state = "witch"
-	flags_inv = BLOCKHAIR
+	flags = BLOCKHAIR
 	siemens_coefficient = 2.0
 
 /obj/item/clothing/head/chicken
@@ -210,7 +212,7 @@
 		slot_l_hand_str = "chickensuit",
 		slot_r_hand_str = "chickensuit",
 		)
-	flags_inv = BLOCKHAIR
+	flags = BLOCKHAIR
 	siemens_coefficient = 0.7
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -218,7 +220,7 @@
 	name = "bear pelt hat"
 	desc = "Fuzzy."
 	icon_state = "bearpelt"
-	flags_inv = BLOCKHAIR
+	flags = BLOCKHAIR
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/xenos
@@ -229,7 +231,8 @@
 		slot_r_hand_str = "xenos_helm",
 		)
 	desc = "A helmet made out of chitinous alien hide."
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	flags = BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
 
@@ -241,7 +244,7 @@
 		slot_l_hand_str = "pwig",
 		slot_r_hand_str = "pwig",
 		)
-	flags_inv = BLOCKHAIR
+	flags = BLOCKHAIR
 	siemens_coefficient = 2.0 //why is it so conductive?!
 	body_parts_covered = 0
 

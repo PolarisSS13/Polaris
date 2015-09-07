@@ -6,6 +6,7 @@
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	small = 1
 	pass_flags = 1
+	holder_type = /obj/item/weapon/holder/pai
 
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
@@ -72,6 +73,8 @@
 	var/current_pda_messaging = null
 
 /mob/living/silicon/pai/New(var/obj/item/device/paicard)
+
+	canmove = 0
 	src.loc = paicard
 	card = paicard
 	sradio = new(src)
@@ -274,6 +277,8 @@
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
 
+	canmove = 1
+
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = src
 	src.forceMove(get_turf(card))
@@ -335,16 +340,12 @@
 	set name = "Rest"
 	set category = "IC"
 
-	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(src.loc,/obj/item/device/paicard))
 		resting = 0
-		var/obj/item/weapon/rig/rig = src.get_rig()
-		if(istype(rig))
-			rig.force_rest(src)
 	else
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+		src << "\blue You are now [resting ? "resting" : "getting up"]"
 
 	canmove = !resting
 
@@ -393,8 +394,7 @@
 	card.loc = get_turf(card)
 	src.forceMove(card)
 	card.forceMove(card.loc)
-	canmove = 1
-	resting = 0
+	canmove = 0
 	icon_state = "[chassis]"
 
 /mob/living/silicon/pai/start_pulling(var/atom/movable/AM)

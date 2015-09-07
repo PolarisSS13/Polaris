@@ -635,7 +635,7 @@ The _flatIcons list is a cache for generated icon files.
 */
 
 proc // Creates a single icon from a given /atom or /image.  Only the first argument is required.
-	getFlatIcon(image/A, defdir=2, deficon=null, defstate="", defblend=BLEND_DEFAULT, always_use_defdir = 0)
+	getFlatIcon(image/A, defdir=2, deficon=null, defstate="", defblend=BLEND_DEFAULT)
 		// We start with a blank canvas, otherwise some icon procs crash silently
 		var/icon/flat = icon('icons/effects/effects.dmi', "icon_state"="nothing") // Final flattened icon
 		if(!A)
@@ -666,7 +666,7 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 				noIcon = TRUE // Do not render this object.
 
 		var/curdir
-		if(A.dir != 2 && !always_use_defdir)
+		if(A.dir != 2)
 			curdir = A.dir
 		else
 			curdir = defdir

@@ -6,11 +6,10 @@
 	icobase = 'icons/mob/human_races/r_slime.dmi'
 	deform = 'icons/mob/human_races/r_slime.dmi'
 
-	language = null //todo?
+	language = "Sol Common" //todo?
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	flags = NO_SCAN | NO_SLIP | NO_BREATHE | NO_MINOR_CUT
-	spawn_flags = IS_RESTRICTED
-	siemens_coefficient = 3 //conductive
+	flags = IS_RESTRICTED | NO_SCAN | NO_SLIP | NO_BREATHE
+	siemens_coefficient = 3
 	darksight = 3
 
 	blood_color = "#05FF9B"

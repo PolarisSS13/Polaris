@@ -17,7 +17,6 @@ var/global/list/map_count = list()
 	var/limit_x = 128               // Default x size.
 	var/limit_y = 128               // Default y size.
 	var/auto_apply = 1
-	var/preserve_map = 1
 
 	// Turf paths.
 	var/wall_type =  /turf/simulated/wall
@@ -39,10 +38,12 @@ var/global/list/map_count = list()
 	else
 		map_count[descriptor]++
 	name = "[descriptor] #[map_count[descriptor]]"
-	if(preserve_map) random_maps[name] = src
+	random_maps[name] = src
 
 	// Get origins for applying the map later.
-	set_origins(tx, ty, tz)
+	origin_x = (!isnull(tx) ? tx : 1)
+	origin_y = (!isnull(ty) ? ty : 1)
+	origin_z = (!isnull(tz) ? tz : 1)
 	if(tlx) limit_x = tlx
 	if(tly) limit_y = tly
 
@@ -68,8 +69,6 @@ var/global/list/map_count = list()
 	if(!do_not_announce) admin_notice("<span class='danger'>[capitalize(name)] failed to generate ([round(0.1*(world.timeofday-start_time),0.1)] seconds): could not produce sane map.</span>", R_DEBUG)
 
 /datum/random_map/proc/get_map_cell(var/x,var/y)
-	if(!islist(map))
-		set_map_size()
 	var/cell = ((y-1)*limit_x)+x
 	if((cell < 1) || (cell > map.len))
 		return null
@@ -104,10 +103,15 @@ var/global/list/map_count = list()
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(current_cell)
+			if(within_bounds(current_cell))
 				dat += get_map_char(map[current_cell])
 		dat += "<br>"
 	user << "[dat]+------+</code>"
+
+/datum/random_map/proc/within_bounds(var/val)
+	if(!islist(map))
+		set_map_size()
+	return (val>0) && (val<=map.len)
 
 /datum/random_map/proc/set_map_size()
 	map = list()
@@ -144,36 +148,28 @@ var/global/list/map_count = list()
 /datum/random_map/proc/check_map_sanity()
 	return 1
 
-/datum/random_map/proc/set_origins(var/tx, var/ty, var/tz)
-	origin_x = tx ? tx : 1
-	origin_y = ty ? ty : 1
-	origin_z = tz ? tz : 1
-
-/datum/random_map/proc/apply_to_map()
-	if(!origin_x) origin_x = 1
-	if(!origin_y) origin_y = 1
-	if(!origin_z) origin_z = 1
+/datum/random_map/proc/apply_to_map(var/tx, var/ty, var/tz)
+	if(!tx) tx = isnull(origin_x) ? 1 : origin_x
+	if(!ty) ty = isnull(origin_y) ? 1 : origin_y
+	if(!tz) tz = isnull(origin_z) ? 1 : origin_z
 
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			if(!priority_process) sleep(-1)
-			apply_to_turf(x,y)
+			apply_to_turf((tx-1)+x,(ty-1)+y,tz)
 
-/datum/random_map/proc/apply_to_turf(var/x,var/y)
+/datum/random_map/proc/apply_to_turf(var/x,var/y,var/z)
 	var/current_cell = get_map_cell(x,y)
-	if(!current_cell)
+	if(!within_bounds(current_cell))
 		return 0
-	var/turf/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
+	var/turf/T = locate(x,y,z)
 	if(!T || (target_turf_type && !istype(T,target_turf_type)))
 		return 0
 	var/newpath = get_appropriate_path(map[current_cell])
 	if(newpath)
 		T.ChangeTurf(newpath)
-	get_additional_spawns(map[current_cell],T,get_spawn_dir(x, y))
+	get_additional_spawns(map[current_cell],T)
 	return T
-
-/datum/random_map/proc/get_spawn_dir()
-	return 0
 
 /datum/random_map/proc/get_appropriate_path(var/value)
 	switch(value)
@@ -197,7 +193,7 @@ var/global/list/map_count = list()
 	for(var/x = 1, x <= limit_x, x++)
 		for(var/y = 1, y <= limit_y, y++)
 			var/current_cell = get_map_cell(x,y)
-			if(!current_cell)
+			if(!within_bounds(current_cell))
 				continue
 			if(tx+x > target_map.limit_x)
 				continue

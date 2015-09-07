@@ -20,10 +20,10 @@
 
 /obj/machinery/cablelayer/attack_hand(mob/user as mob)
 	if(!cable&&!on)
-		user << "<span class='warning'>\The [src] doesn't have any cable loaded.</span>"
+		user << "\The [src] don't work with no cable."
 		return
 	on=!on
-	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
+	user.visible_message("\The [src] [!on?"dea":"a"]ctivated.", "[user] [!on?"dea":"a"]ctivated \the [src].")
 	return
 
 /obj/machinery/cablelayer/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -31,27 +31,26 @@
 
 		var/result = load_cable(O)
 		if(!result)
-			user << "<span class='warning'>\The [src]'s cable reel is full.</span>"
+			user << "Reel is full."
 		else
-			user << "You load [result] lengths of cable into [src]."
+			user << "[result] meters of cable successfully loaded."
 		return
 
-	if(istype(O, /obj/item/weapon/wirecutters))
+	if(istype(O, /obj/item/weapon/screwdriver))
 		if(cable && cable.amount)
 			var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
 			m = min(m, cable.amount)
 			m = min(m, 30)
 			if(m)
-				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				use_cable(m)
 				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
 				CC.amount = m
 		else
-			usr << "<span class='warning'>There's no more cable on the reel.</span>"
+			usr << "There's no more cable on the reel."
 
 /obj/machinery/cablelayer/examine(mob/user)
 	..()
-	user << "\The [src]'s cable reel has [cable.amount] length\s left."
+	user << "\The [src] has [cable.amount] meter\s."
 
 /obj/machinery/cablelayer/proc/load_cable(var/obj/item/stack/cable_coil/CC)
 	if(istype(CC) && CC.amount)
@@ -71,11 +70,12 @@
 
 /obj/machinery/cablelayer/proc/use_cable(amount)
 	if(!cable || cable.amount<1)
-		visible_message("A red light flashes on \the [src].")
+		visible_message("Cable depleted, [src] deactivated.")
 		return
+/*	if(cable.amount < amount)
+		visible_message("No enough cable to finish the task.")
+		return*/
 	cable.use(amount)
-	if(deleted(cable)) 
-		cable = null
 	return 1
 
 /obj/machinery/cablelayer/proc/reset()
@@ -85,8 +85,10 @@
 	if(istype(new_turf, /turf/simulated/floor))
 		var/turf/simulated/floor/T = new_turf
 		if(!T.is_plating())
-			T.make_plating(!(T.broken || T.burnt))
-	return new_turf.is_plating()
+			if(!T.broken && !T.burnt)
+				new T.floor_type(T)
+			T.make_plating()
+	return !new_turf.intact
 
 /obj/machinery/cablelayer/proc/layCable(var/turf/new_turf,var/M_Dir)
 	if(!on)

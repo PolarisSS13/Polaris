@@ -41,5 +41,3 @@
 	..(newloc,"voxalloy")
 /turf/simulated/wall/voxshuttle/attackby()
 	return
-/turf/simulated/wall/titanium/New(var/newloc)
-	..(newloc,"titanium")

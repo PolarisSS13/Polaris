@@ -103,13 +103,6 @@
 			bumpopen(M)
 		return
 
-	if(istype(AM, /obj/machinery/bot))
-		var/obj/machinery/bot/bot = AM
-		if(src.check_access(bot.botcard))
-			if(density)
-				open()
-		return
-
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
 		if(src.check_access(bot.botcard))
@@ -206,9 +199,10 @@
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/detective_scanner))
 		return
+	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 	src.add_fingerprint(user)
 
-	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
+	if(istype(I, /obj/item/stack/material/steel))
 		if(stat & BROKEN)
 			user << "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>"
 			return
@@ -223,20 +217,20 @@
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = (round(amount_needed) == amount_needed)? amount_needed : round(amount_needed) + 1 //Why does BYOND not have a ceiling proc?
 
-		var/obj/item/stack/stack = I
+		var/obj/item/stack/material/steel/metalstack = I
 		var/transfer
 		if (repairing)
-			transfer = stack.transfer_to(repairing, amount_needed - repairing.amount)
+			transfer = metalstack.transfer_to(repairing, amount_needed - repairing.amount)
 			if (!transfer)
 				user << "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>"
 		else
-			repairing = stack.split(amount_needed)
+			repairing = metalstack.split(amount_needed)
 			if (repairing)
 				repairing.loc = src
 				transfer = repairing.amount
 
 		if (transfer)
-			user << "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>"
+			user << "<span class='notice'>You fit [transfer] [metalstack.singular_name]\s to damaged and broken parts on \the [src].</span>"
 
 		return
 
@@ -254,7 +248,6 @@
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
-				repairing = null
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
@@ -267,7 +260,6 @@
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
 			if(W.force < min_force)
@@ -277,8 +269,6 @@
 				playsound(src.loc, hitsound, 100, 1)
 				take_damage(W.force)
 		return
-
-	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
 	if(src.operating) return
 
@@ -343,8 +333,7 @@
 
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
-		spawn(0)
-			open()
+		open()
 	..()
 
 

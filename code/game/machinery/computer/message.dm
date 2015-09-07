@@ -3,10 +3,11 @@
 /obj/machinery/computer/message_monitor
 	name = "messaging monitor console"
 	desc = "Used to access and maintain data on messaging servers. Allows you to view PDA and request console messages."
-	icon_screen = "comm_logs"
+	icon_state = "comm_logs"
 	light_color = "#00b000"
-	var/hack_icon = "error"
-	circuit = /obj/item/weapon/circuitboard/message_monitor
+	var/hack_icon = "comm_logsc"
+	var/normal_icon = "comm_logs"
+	circuit = "/obj/item/weapon/circuitboard/message_monitor"
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag
@@ -49,6 +50,7 @@
 	// It'll take more time if there's more characters in the password..
 	if(!emag && operable())
 		if(!isnull(src.linkedServer))
+			icon_state = hack_icon // An error screen I made in the computers.dmi
 			emag = 1
 			screen = 2
 			spark_system.set_up(5, 0, src)
@@ -59,17 +61,18 @@
 			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
 			spawn(100*length(src.linkedServer.decryptkey)) UnmagConsole()
 			message = rebootmsg
-			update_icon()
 			return 1
 		else
 			user << "<span class='notice'>A no server error appears on the screen.</span>"
 
 /obj/machinery/computer/message_monitor/update_icon()
-	if(emag || hacking)
-		icon_screen = hack_icon
-	else
-		icon_screen = initial(icon_screen)
 	..()
+	if(stat & (NOPOWER|BROKEN))
+		return
+	if(emag || hacking)
+		icon_state = hack_icon
+	else
+		icon_state = normal_icon
 
 /obj/machinery/computer/message_monitor/initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
@@ -268,12 +271,12 @@
 		var/currentKey = src.linkedServer.decryptkey
 		user << "<span class='warning'>Brute-force completed! The key is '[currentKey]'.</span>"
 	src.hacking = 0
-	update_icon()
+	src.icon_state = normal_icon
 	src.screen = 0 // Return the screen back to normal
 
 /obj/machinery/computer/message_monitor/proc/UnmagConsole()
+	src.icon_state = normal_icon
 	src.emag = 0
-	update_icon()
 
 /obj/machinery/computer/message_monitor/proc/ResetMessage()
 	customsender 	= "System Administrator"
@@ -365,7 +368,7 @@
 			if((istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot)) && (usr.mind.special_role && usr.mind.original == usr))
 				src.hacking = 1
 				src.screen = 2
-				update_icon()
+				src.icon_state = hack_icon
 				//Time it takes to bruteforce is dependant on the password length.
 				spawn(100*length(src.linkedServer.decryptkey))
 					if(src && src.linkedServer && usr)

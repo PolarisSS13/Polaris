@@ -15,9 +15,6 @@
 /datum/uplink_category/ammunition
 	name = "Ammunition"
 
-/datum/uplink_category/grenades
-	name = "Grenades and Thrown Objects"
-
 /datum/uplink_category/visible_weapons
 	name = "Highly Visible and Dangerous Weapons"
 
@@ -38,9 +35,6 @@
 
 /datum/uplink_category/hardsuit_modules
 	name = "Hardsuit Modules"
-
-/datum/uplink_category/services
-	name = "Services"
 
 /datum/uplink_category/badassery
 	name = "Badassery"

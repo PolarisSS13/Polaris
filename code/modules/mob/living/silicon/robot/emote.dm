@@ -65,12 +65,12 @@
 				m_type = 2
 		if ("flap")
 			if (!src.restrained())
-				message = "flaps its wings."
+				message = "flaps his wings."
 				m_type = 2
 
 		if ("aflap")
 			if (!src.restrained())
-				message = "flaps its wings ANGRILY!"
+				message = "flaps his wings ANGRILY!"
 				m_type = 2
 
 		if ("twitch")

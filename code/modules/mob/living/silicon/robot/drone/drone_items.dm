@@ -14,7 +14,6 @@
 		/obj/item/weapon/firealarm_electronics,
 		/obj/item/weapon/airalarm_electronics,
 		/obj/item/weapon/airlock_electronics,
-		/obj/item/weapon/tracker_electronics,
 		/obj/item/weapon/module/power_control,
 		/obj/item/weapon/stock_parts,
 		/obj/item/frame,
@@ -87,9 +86,6 @@
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
-/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
-	return
-
 /obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
 	name = "sheet loader"
 	desc = "A specialized loading device, designed to pick up and insert sheets of materials inside machines."
@@ -103,6 +99,9 @@
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
+
+/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
+	return
 
 /obj/item/weapon/gripper/verb/drop_item()
 
@@ -130,8 +129,6 @@
 		force_holder = wrapped.force
 		wrapped.force = 0.0
 		wrapped.attack(M,user)
-		if(deleted(wrapped))
-			wrapped = null
 		return 1
 	return 0
 

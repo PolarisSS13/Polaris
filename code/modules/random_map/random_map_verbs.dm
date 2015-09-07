@@ -75,8 +75,7 @@
 			tz = !isnull(tz) ? tz : T.z
 		message_admins("[key_name_admin(usr)] has applied [M.name] at x[tx],y[ty],z[tz].")
 		log_admin("[key_name(usr)] has applied [M.name] at x[tx],y[ty],z[tz].")
-		M.set_origins(tx,ty,tz)
-		M.apply_to_map()
+		M.apply_to_map(tx,ty,tz)
 
 /client/proc/overlay_random_map()
 	set category = "Debug"

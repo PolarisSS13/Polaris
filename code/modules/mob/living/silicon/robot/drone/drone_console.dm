@@ -2,10 +2,9 @@
 	name = "Maintenance Drone Control"
 	desc = "Used to monitor the station's drone population and the assembler that services them."
 	icon = 'icons/obj/computer.dmi'
-	icon_keyboard = "power_key"
-	icon_screen = "power"
+	icon_state = "power"
 	req_access = list(access_engine_equip)
-	circuit = /obj/item/weapon/circuitboard/drone_control
+	circuit = "/obj/item/weapon/circuitboard/drone_control"
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"

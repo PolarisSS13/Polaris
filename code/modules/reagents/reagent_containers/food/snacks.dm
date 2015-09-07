@@ -463,7 +463,6 @@
 	desc = "An egg!"
 	icon_state = "egg"
 	filling_color = "#FDFFD1"
-	volume = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/New()
 	..()
@@ -1616,11 +1615,11 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neaera"
+	monkey_type = "Neara"
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neaera"
+	monkey_type = "Neara"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger

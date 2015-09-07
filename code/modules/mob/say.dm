@@ -147,12 +147,11 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
-	var/prefix = copytext(message,1,2)
-	if(length(message) >= 1 && prefix == "!")
+	if(length(message) >= 1 && copytext(message,1,2) == "!")
 		return all_languages["Noise"]
 
-	if(length(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = lowertext(copytext(message, 2 ,3))
+	if(length(message) >= 2)
+		var/language_prefix = lowertext(copytext(message, 1 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

@@ -40,12 +40,14 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Vox")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.6
-	item_flags = STOPPRESSUREDAMAGE
+	flags = HEADCOVERSEYES|STOPPRESSUREDAMAGE
 	species_restricted = list("Vox")
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/head.dmi')
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
@@ -120,7 +122,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	species_restricted = list("Vox")
-
+	sprite_sheets = list("Vox" = 'icons/mob/species/vox/gloves.dmi')
 /obj/item/clothing/shoes/magboots/vox
 
 	desc = "A pair of heavy, jagged armoured foot pieces, seemingly suitable for a velociraptor."
@@ -133,7 +135,7 @@
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
 	if(src.magpulse)
-		item_flags &= ~NOSLIP
+		flags &= ~NOSLIP
 		magpulse = 0
 		canremove = 1
 		user << "You relax your deathgrip on the flooring."
@@ -146,7 +148,7 @@
 			user << "You will have to put on the [src] before you can do that."
 			return
 
-		item_flags |= NOSLIP
+		flags |= NOSLIP
 		magpulse = 1
 		canremove = 0	//kinda hard to take off magclaws when you are gripping them tightly.
 		user << "You dig your claws deeply into the flooring, bracing yourself."
@@ -158,7 +160,7 @@
 	..()
 	if(src.magpulse)
 		user.visible_message("The [src] go limp as they are removed from [usr]'s feet.", "The [src] go limp as they are removed from your feet.")
-		item_flags &= ~NOSLIP
+		flags &= ~NOSLIP
 		magpulse = 0
 		canremove = 1
 

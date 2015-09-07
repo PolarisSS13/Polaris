@@ -68,7 +68,10 @@
 
 		if (istype(E, /datum/stack_recipe_list))
 			var/datum/stack_recipe_list/srl = E
-			t1 += "<a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
+			if (src.get_amount() >= srl.req_amount)
+				t1 += "<a href='?src=\ref[src];sublist=[i]'>[srl.title] ([srl.req_amount] [src.singular_name]\s)</a>"
+			else
+				t1 += "[srl.title] ([srl.req_amount] [src.singular_name]\s)<br>"
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
@@ -184,9 +187,11 @@
 	if(!uses_charge)
 		amount -= used
 		if (amount <= 0)
-			if(usr)
-				usr.remove_from_mob(src)
-			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+			spawn(0) //delete the empty stack once the current context yields
+				if (amount <= 0) //check again in case someone transferred stuff to us
+					if(usr)
+						usr.remove_from_mob(src)
+					qdel(src)
 		return 1
 	else
 		if(get_amount() < used)
@@ -355,6 +360,8 @@
 /datum/stack_recipe_list
 	var/title = "ERROR"
 	var/list/recipes = null
-	New(title, recipes)
+	var/req_amount = 1
+	New(title, recipes, req_amount = 1)
 		src.title = title
 		src.recipes = recipes
+		src.req_amount = req_amount

@@ -124,7 +124,7 @@
 		return
 
 /obj/machinery/r_n_d/server/centcom
-	name = "Central R&D Database"
+	name = "Centcom Central R&D Database"
 	server_id = -1
 
 /obj/machinery/r_n_d/server/centcom/initialize()
@@ -155,8 +155,7 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
-	icon_keyboard = "rd_key"
-	icon_screen = "rdcomp"
+	icon_state = "rdcomp"
 	light_color = "#a97faa"
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0

@@ -59,6 +59,7 @@
 		M.equip_to_slot_or_del(new src.corpseback(M), slot_back)
 	if(src.corpseid == 1)
 		var/obj/item/weapon/card/id/W = new(M)
+		W.name = "[M.real_name]'s ID Card"
 		var/datum/job/jobdatum
 		for(var/jobtype in typesof(/datum/job))
 			var/datum/job/J = new jobtype
@@ -74,7 +75,7 @@
 				W.access = list()
 		if(corpseidjob)
 			W.assignment = corpseidjob
-		M.set_id_info(W)
+		W.registered_name = M.real_name
 		M.equip_to_slot_or_del(W, slot_wear_id)
 	qdel(src)
 

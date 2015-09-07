@@ -32,7 +32,7 @@
 	else if(istype(target,/turf))
 		user << "<span class='notice'>You scrub \the [target.name] clean.</span>"
 		var/turf/T = target
-		T.clean(src)
+		T.clean()
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
 		target.clean_blood()

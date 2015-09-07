@@ -1,7 +1,6 @@
 /obj/machinery/computer/forensic_scanning
 	name = "high-res forensic scanning computer"
-	icon_keyboard = "security_key"
-	icon_screen = "forensic"
+	icon_state = "forensic"
 
 	var/screen = "database"
 	var/authenticated = 0

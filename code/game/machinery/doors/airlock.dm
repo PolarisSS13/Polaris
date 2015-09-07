@@ -48,11 +48,6 @@
 		return
 	..()
 
-/obj/machinery/door/airlock/get_material()
-	if(mineral)
-		return get_material_by_name(mineral)
-	return get_material_by_name(DEFAULT_WALL_MATERIAL)
-
 /obj/machinery/door/airlock/command
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
@@ -689,7 +684,7 @@ About the new airlock wires panel:
 
 	return ..()
 
-/obj/machinery/door/airlock/Topic(href, href_list)
+/obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
 	if(..())
 		return 1
 
@@ -1037,9 +1032,6 @@ About the new airlock wires panel:
 			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
 
 	//wires
-	var/turf/T = get_turf(newloc)
-	if(T && (T.z in config.admin_levels))
-		secured_wires = 1
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
 	else

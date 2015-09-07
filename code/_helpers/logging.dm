@@ -109,12 +109,6 @@
 		M = whom
 		C = M.client
 		key = M.key
-	else if(istype(whom, /datum/mind))
-		var/datum/mind/D = whom
-		key = D.key
-		M = D.current
-		if(D.current)
-			C = D.current.client
 	else if(istype(whom, /datum))
 		var/datum/D = whom
 		return "*invalid:[D.type]*"

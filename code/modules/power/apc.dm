@@ -63,7 +63,6 @@
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
-	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
 	var/cell_type = /obj/item/weapon/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
@@ -506,8 +505,7 @@
 			else
 				user << "<span class='warning'>Access denied.</span>"
 	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
-		var/turf/T = loc
-		if(istype(T) && !T.is_plating())
+		if (src.loc:intact)
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
 			return
 		var/obj/item/stack/cable_coil/C = W
@@ -519,6 +517,7 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (C.amount >= 10 && !terminal && opened && has_electronics != 2)
+				var/turf/T = get_turf(src)
 				var/obj/structure/cable/N = T.get_cable_node()
 				if (prob(50) && electrocute_mob(usr, N, N))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -533,8 +532,7 @@
 				make_terminal()
 				terminal.connect_to_network()
 	else if (istype(W, /obj/item/weapon/wirecutters) && terminal && opened && has_electronics!=2)
-		var/turf/T = loc
-		if(istype(T) && !T.is_plating())
+		if (src.loc:intact)
 			user << "<span class='warning'>You must remove the floor plating in front of the APC first.</span>"
 			return
 		user.visible_message("<span class='warning'>[user.name] dismantles the power terminal from [src].</span>", \
@@ -716,7 +714,7 @@
 	if(!user)
 		return
 
-	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
+	if(wiresexposed /*&& (!istype(user, /mob/living/silicon))*/) //Commented out the typecheck to allow engiborgs to repair damaged apcs.
 		wires.Interact(user)
 
 	return ui_interact(user)
@@ -852,7 +850,7 @@
 			return 0
 	return 1
 
-/obj/machinery/power/apc/Topic(href, href_list)
+/obj/machinery/power/apc/Topic(href, href_list, var/nowindow = 0)
 	if(..())
 		return 1
 
@@ -1023,7 +1021,7 @@
 		if(src.attempt_charging())
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is capped to % per second constant
-				var/ch = min(excess*CELLRATE, cell.maxcharge*chargelevel)
+				var/ch = min(excess*CELLRATE, cell.maxcharge*CHARGELEVEL)
 
 				ch = draw_power(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch*CELLRATE) // actually recharge the cell
@@ -1040,7 +1038,7 @@
 
 		if(chargemode)
 			if(!charging)
-				if(excess > cell.maxcharge*chargelevel)
+				if(excess > cell.maxcharge*CHARGELEVEL)
 					chargecount++
 				else
 					chargecount = 0

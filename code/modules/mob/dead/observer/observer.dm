@@ -74,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
 	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	forceMove(T)
+	loc = T
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
@@ -188,7 +188,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/Stat()
 	..()
-	if(statpanel("Status"))
+	statpanel("Status")
+	if (client.statpanel == "Status")
+		stat(null, "Station Time: [worldtime2text()]")
 		if(emergency_shuttle)
 			var/eta_status = emergency_shuttle.get_status_panel_eta()
 			if(eta_status)
@@ -215,7 +217,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
-	mind.current.aghosted = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -293,7 +294,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			usr << "No area available."
 
-	usr.forceMove(pick(L))
+	usr.loc = pick(L)
 	following = null
 
 /mob/dead/observer/verb/follow(input in getmobs())
@@ -318,56 +319,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(following && following == target)
 			return
 		following = target
-		src << "<span class='notice'>Now following [target]</span>"
-		if(ismob(target))
-			forceMove(get_turf(target))
-			var/mob/M = target
-			M.following_mobs += src
-		else
-			spawn(0)
-				while(target && following == target && client)
-					var/turf/T = get_turf(target)
-					if(!T)
-						break
-					// To stop the ghost flickering.
-					if(loc != T)
-						forceMove(T)
-					sleep(15)
-
-/mob/proc/update_following()
-	. = get_turf(src)
-	for(var/mob/dead/observer/M in following_mobs)
-		if(M.following != src)
-			following_mobs -= M
-		else
-			if(M.loc != .)
-				M.forceMove(.)
-
-/mob
-	var/list/following_mobs = list()
-
-/mob/Destroy()
-	for(var/mob/dead/observer/M in following_mobs)
-		M.following = null
-	following_mobs = null
-	return ..()
-
-/mob/dead/observer/Destroy()
-	if(ismob(following))
-		var/mob/M = following
-		M.following_mobs -= src
-	following = null
-	return ..()
-
-/mob/Move()
-	. = ..()
-	if(.)
-		update_following()
-
-/mob/Life()
-	// to catch teleports etc which directly set loc
-	update_following()
-	return ..()
+		src << "\blue Now following [target]"
+		spawn(0)
+			while(target && following == target && client)
+				var/turf/T = get_turf(target)
+				if(!T)
+					break
+				// To stop the ghost flickering.
+				if(loc != T)
+					loc = T
+				sleep(15)
 
 /mob/proc/check_holy(var/turf/T)
 	return 0
@@ -392,7 +353,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			var/turf/T = get_turf(M) //Turf of the destination mob
 
 			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
-				forceMove(T)
+				src.loc = T
 				following = null
 			else
 				src << "This mob is not located in the game world."
@@ -492,7 +453,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 
 /mob/dead/observer/verb/view_manfiest()
-	set name = "Show Crew Manifest"
+	set name = "View Crew Manifest"
 	set category = "Ghost"
 
 	var/dat
@@ -599,13 +560,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(src.invisibility != 0)
 		user.visible_message( \
-			"<span class='warning'>\The [user] drags ghost, [src], to our plane of reality!</span>", \
+			"<span class='warning'>[user] drags ghost, [src], to our plane of reality!</span>", \
 			"<span class='warning'>You drag [src] to our plane of reality!</span>" \
 		)
 		toggle_visibility(1)
 	else
 		user.visible_message ( \
-			"<span class='warning'>\The [user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
+			"<span class='warning'>[user] just tried to smash \his book into that ghost!  It's not very effective.</span>", \
 			"<span class='warning'>You get the feeling that the ghost can't become any more visible.</span>" \
 		)
 
@@ -656,9 +617,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/canface()
 	return 1
-
-/mob/dead/observer/proc/can_admin_interact()
-	return check_rights(R_ADMIN, 0, src)
 
 /mob/dead/observer/verb/toggle_ghostsee()
 	set name = "Toggle Ghost Vision"

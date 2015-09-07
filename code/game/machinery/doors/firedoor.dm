@@ -1,3 +1,5 @@
+/var/const/OPEN = 1
+/var/const/CLOSED = 2
 
 #define FIREDOOR_MAX_PRESSURE_DIFF 25 // kPa
 #define FIREDOOR_MAX_TEMP 50 // °C
@@ -73,8 +75,6 @@
 		A.all_doors.Remove(src)
 	. = ..()
 
-/obj/machinery/door/firedoor/get_material()
-	return get_material_by_name(DEFAULT_WALL_MATERIAL)
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..(user, 1)
@@ -181,7 +181,7 @@
 				if(A.fire || A.air_doors_activated)
 					alarmed = 1
 			if(alarmed)
-				nextstate = FIREDOOR_CLOSED
+				nextstate = CLOSED
 				close()
 
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
@@ -322,11 +322,11 @@
 	if(operating || !nextstate)
 		return
 	switch(nextstate)
-		if(FIREDOOR_OPEN)
+		if(OPEN)
 			nextstate = null
 
 			open()
-		if(FIREDOOR_CLOSED)
+		if(CLOSED)
 			nextstate = null
 			close()
 	return
