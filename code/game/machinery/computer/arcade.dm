@@ -3,7 +3,9 @@
 	desc = "Does not support pinball."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
-	circuit = "/obj/item/weapon/circuitboard/arcade"
+	icon_keyboard = null
+	icon_screen = "invaders"
+	circuit = /obj/item/weapon/circuitboard/arcade
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
@@ -16,7 +18,7 @@
 							/obj/item/toy/blink								= 2,
 							/obj/item/clothing/under/syndicate/tacticool	= 2,
 							/obj/item/toy/sword								= 2,
-							/obj/item/toy/gun								= 2,
+							/obj/item/weapon/gun/projectile/revolver/capgun	= 2,
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/clothing/suit/syndicatefake			= 2,
 							/obj/item/weapon/storage/fancy/crayons			= 2,
@@ -166,8 +168,8 @@
 				var/prizeselect = pickweight(prizes)
 				new prizeselect(src.loc)
 
-				if(istype(prizeselect, /obj/item/toy/gun)) //Ammo comes with the gun
-					new /obj/item/toy/ammo/gun(src.loc)
+				if(istype(prizeselect, /obj/item/weapon/gun/projectile/revolver/capgun)) //Ammo comes with the gun
+					new /obj/item/projectile/bullet/pistol/cap(src.loc)
 
 				else if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
 					new	/obj/item/clothing/head/syndicatefake(src.loc)

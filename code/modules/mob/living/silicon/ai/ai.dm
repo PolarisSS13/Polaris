@@ -81,7 +81,7 @@ var/list/ai_verbs_default = list(
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
-
+	var/carded
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -357,6 +357,26 @@ var/list/ai_verbs_default = list(
 	if(confirm == "Yes")
 		cancel_call_proc(src)
 
+/mob/living/silicon/ai/var/emergency_message_cooldown = 0
+
+/mob/living/silicon/ai/proc/ai_emergency_message()
+	set category = "AI Commands"
+	set name = "Send Emergency Message"
+
+	if(check_unable(AI_CHECK_WIRELESS))
+		return
+	if(emergency_message_cooldown)
+		usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+		return
+	var/input = sanitize(input(usr, "Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
+	if(!input)
+		return
+	Centcomm_announce(input, usr)
+	usr << "<span class='notice'>Message transmitted.</span>"
+	log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
+	emergency_message_cooldown = 1
+	spawn(300)
+		emergency_message_cooldown = 0
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
 	if (!camera)
 		return -1
@@ -668,6 +688,16 @@ var/list/ai_verbs_default = list(
 	else
 		icon_state = selected_sprite.alive_icon
 		set_light(1, 1, selected_sprite.alive_light)
+
+// Pass lying down or getting up to our pet human, if we're in a rig.
+/mob/living/silicon/ai/lay_down()
+	set name = "Rest"
+	set category = "IC"
+
+	resting = 0
+	var/obj/item/weapon/rig/rig = src.get_rig()
+	if(rig)
+		rig.force_rest(src)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
