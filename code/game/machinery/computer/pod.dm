@@ -3,7 +3,7 @@
 /obj/machinery/computer/pod
 	name = "pod launch control console"
 	desc = "A control console for launching pods. Some people prefer firing Mechas."
-	icon_screen = "mass_driver"
+	icon_state = "computer_generic"
 	light_color = "#00b000"
 	circuit = /obj/item/weapon/circuitboard/pod
 	var/id = 1.0
@@ -194,9 +194,7 @@
 
 
 /obj/machinery/computer/pod/old
-	icon_state = "oldcomp"
-	icon_keyboard = null
-	icon_screen = "library"
+	icon_state = "old"
 	name = "DoorMex Control Computer"
 	title = "Door Controls"
 

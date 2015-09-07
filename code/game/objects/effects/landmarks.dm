@@ -4,7 +4,6 @@
 	icon_state = "x2"
 	anchored = 1.0
 	unacidable = 1
-	simulated = 0
 
 /obj/effect/landmark/New()
 	..()

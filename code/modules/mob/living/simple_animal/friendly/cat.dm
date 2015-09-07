@@ -59,13 +59,8 @@
 		var/mob/dead/observer/spook = locate() in range(src,5)
 		if(spook)
 			var/turf/T = spook.loc
-			var/list/visible = list()
-			for(var/obj/O in T.contents)
-				if(!O.invisibility && O.name)
-					visible += O
-			if(visible.len)
-				var/atom/A = pick(visible)
-				visible_emote("suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
+			var/obj/O = pick(T.contents)
+			visible_emote("suddenly stops and stares at something unseen[istype(O) ? " near [O]":""].")
 
 /mob/living/simple_animal/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop

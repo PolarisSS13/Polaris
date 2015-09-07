@@ -2,12 +2,11 @@
 
 /obj/machinery/computer/card
 	name = "\improper ID card modification console"
-	desc = "Terminal for programming employee ID cards to access parts of the station."
-	icon_keyboard = "id_key"
-	icon_screen = "id"
+	desc = "Terminal for programming NanoTrasen employee ID cards to access parts of the station."
+	icon_state = "id"
 	light_color = "#0099ff"
 	req_access = list(access_change_ids)
-	circuit = /obj/item/weapon/circuitboard/card
+	circuit = "/obj/item/weapon/circuitboard/card"
 	var/obj/item/weapon/card/id/scan = null
 	var/obj/item/weapon/card/id/modify = null
 	var/mode = 0.0
@@ -59,10 +58,12 @@
 	if(!istype(id_card))
 		return ..()
 
-	if(!scan && (access_change_ids in id_card.access) && user.unEquip(id_card))
+	if(!scan && access_change_ids in id_card.access)
+		user.drop_item()
 		id_card.loc = src
 		scan = id_card
 	else if(!modify)
+		user.drop_item()
 		id_card.loc = src
 		modify = id_card
 
@@ -155,7 +156,8 @@
 					modify = null
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+				if (istype(I, /obj/item/weapon/card/id))
+					usr.drop_item()
 					I.loc = src
 					modify = I
 
@@ -282,7 +284,7 @@
 
 /obj/machinery/computer/card/centcom
 	name = "\improper CentCom ID card modification console"
-	circuit = /obj/item/weapon/circuitboard/card/centcom
+	circuit = "/obj/item/weapon/circuitboard/card/centcom"
 	req_access = list(access_cent_captain)
 
 

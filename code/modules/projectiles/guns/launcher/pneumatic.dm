@@ -167,9 +167,9 @@
 			buildstate++
 			update_icon()
 			return
-	else if(istype(W,/obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
+	else if(istype(W,/obj/item/stack/material/steel))
 		if(buildstate == 2)
-			var/obj/item/stack/material/M = W
+			var/obj/item/stack/material/steel/M = W
 			if(M.use(5))
 				user << "<span class='notice'>You assemble a chassis around the cannon frame.</span>"
 				buildstate++

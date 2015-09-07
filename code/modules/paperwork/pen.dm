@@ -157,7 +157,7 @@
 			if("Yellow")
 				colour = COLOR_YELLOW
 			if("Green")
-				colour = COLOR_LIME
+				colour = COLOR_GREEN
 			if("Pink")
 				colour = COLOR_PINK
 			if("Blue")

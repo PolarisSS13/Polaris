@@ -200,7 +200,7 @@
 
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
-	var/material/M = S.get_material()
+	var/material/M = name_to_material[S.default_type]
 	if(!istype(M))
 		user << "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>"
 		return null
@@ -296,33 +296,29 @@
 		icon_state = "blank"
 		overlays.Cut()
 
-		var/image/I
-
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
-		for(var/i = 1 to 4)
-			I = image(icon, dir = 1<<(i-1), icon_state = connections[i])
-			overlays += I
+		for(var/n in connections)
+			overlays += n
 
 		// Standard table image
 		if(material)
-			for(var/i = 1 to 4)
-				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
-				if(material.icon_colour) I.color = material.icon_colour
+			for(var/n in connections)
+				var/image/I = image(icon, "[material.icon_base]_[n]")
+				I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
 				overlays += I
 
 		// Reinforcements
 		if(reinforced)
-			for(var/i = 1 to 4)
-				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
+			for(var/n in connections)
+				var/image/I = image(icon, "[reinforced.icon_reinf]_[n]")
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
 				overlays += I
 
 		if(carpeted)
-			for(var/i = 1 to 4)
-				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
-				overlays += I
+			for(var/n in connections)
+				overlays += "carpet_[n]"
 	else
 		overlays.Cut()
 		var/type = 0
@@ -357,12 +353,13 @@
 			overlays += I
 
 		if(carpeted)
-			overlays += "carpet_flip[type]"
+			for(var/n in connections)
+				overlays += "carpet_flip[type]"
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/proc/update_connections(propagate=0)
 	if(!material)
-		connections = list("0", "0", "0", "0")
+		connections = list("nw0", "ne0", "sw0", "se0")
 
 		if(propagate)
 			for(var/obj/structure/table/T in oview(src, 1))
@@ -372,7 +369,7 @@
 	var/list/blocked_dirs = list()
 	for(var/obj/structure/window/W in get_turf(src))
 		if(W.is_fulltile())
-			connections = list("0", "0", "0", "0")
+			connections = list("nw0", "ne0", "sw0", "se0")
 			return
 		blocked_dirs |= W.dir
 
@@ -415,36 +412,42 @@
 	connections = dirs_to_corner_states(connection_dirs)
 
 #define CORNER_NONE 0
-#define CORNER_COUNTERCLOCKWISE 1
+#define CORNER_EASTWEST 1
 #define CORNER_DIAGONAL 2
-#define CORNER_CLOCKWISE 4
-
-/*
-  turn() is weird:
-    turn(icon, angle) turns icon by angle degrees clockwise
-    turn(matrix, angle) turns matrix by angle degrees clockwise
-    turn(dir, angle) turns dir by angle degrees counter-clockwise
-*/
+#define CORNER_NORTHSOUTH 4
 
 /proc/dirs_to_corner_states(list/dirs)
 	if(!istype(dirs)) return
 
-	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
+	var/NE = CORNER_NONE
+	var/NW = CORNER_NONE
+	var/SE = CORNER_NONE
+	var/SW = CORNER_NONE
 
-	for(var/i = 1 to ret.len)
-		var/dir = ret[i]
-		. = CORNER_NONE
-		if(dir in dirs)
-			. |= CORNER_DIAGONAL
-		if(turn(dir,45) in dirs)
-			. |= CORNER_COUNTERCLOCKWISE
-		if(turn(dir,-45) in dirs)
-			. |= CORNER_CLOCKWISE
-		ret[i] = "[.]"
+	if(NORTH in dirs)
+		NE |= CORNER_NORTHSOUTH
+		NW |= CORNER_NORTHSOUTH
+	if(SOUTH in dirs)
+		SW |= CORNER_NORTHSOUTH
+		SE |= CORNER_NORTHSOUTH
+	if(EAST in dirs)
+		SE |= CORNER_EASTWEST
+		NE |= CORNER_EASTWEST
+	if(WEST in dirs)
+		NW |= CORNER_EASTWEST
+		SW |= CORNER_EASTWEST
+	if(NORTHWEST in dirs)
+		NW |= CORNER_DIAGONAL
+	if(NORTHEAST in dirs)
+		NE |= CORNER_DIAGONAL
+	if(SOUTHEAST in dirs)
+		SE |= CORNER_DIAGONAL
+	if(SOUTHWEST in dirs)
+		SW |= CORNER_DIAGONAL
 
-	return ret
+	return list("ne[NE]", "se[SE]", "sw[SW]", "nw[NW]")
 
 #undef CORNER_NONE
-#undef CORNER_COUNTERCLOCKWISE
+#undef CORNER_EASTWEST
 #undef CORNER_DIAGONAL
-#undef CORNER_CLOCKWISE
+#undef CORNER_NORTHSOUTH

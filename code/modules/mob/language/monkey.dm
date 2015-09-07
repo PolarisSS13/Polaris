@@ -7,7 +7,7 @@
 	key = "6"
 
 /datum/language/skrell/monkey
-	name = "Neaera"
+	name = "Neara"
 	desc = "Squik squik squik."
 	key = "8"
 

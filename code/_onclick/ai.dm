@@ -15,6 +15,7 @@
 		return
 
 	if(control_disabled || stat) return
+	next_move = world.time + 9
 
 	if(ismob(A))
 		ai_actual_track(A)
@@ -31,7 +32,7 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
-	if(stat)
+	if(control_disabled || stat)
 		return
 
 	var/list/modifiers = params2list(params)
@@ -51,8 +52,9 @@
 		CtrlClickOn(A)
 		return
 
-	if(control_disabled || !canClick())
+	if(world.time <= next_move)
 		return
+	next_move = world.time + 9
 
 	if(aiCamera.in_camera_mode)
 		aiCamera.camera_mode_off()
@@ -89,24 +91,13 @@
 */
 
 /mob/living/silicon/ai/ShiftClickOn(var/atom/A)
-	if(!control_disabled && A.AIShiftClick(src))
-		return
-	..()
-
+	A.AIShiftClick(src)
 /mob/living/silicon/ai/CtrlClickOn(var/atom/A)
-	if(!control_disabled && A.AICtrlClick(src))
-		return
-	..()
-
+	A.AICtrlClick(src)
 /mob/living/silicon/ai/AltClickOn(var/atom/A)
-	if(!control_disabled && A.AIAltClick(src))
-		return
-	..()
-
+	A.AIAltClick(src)
 /mob/living/silicon/ai/MiddleClickOn(var/atom/A)
-	if(!control_disabled && A.AIMiddleClick(src))
-		return
-	..()
+    A.AIMiddleClick(src)
 
 /*
 	The following criminally helpful code is just the previous code cleaned up;
@@ -114,6 +105,11 @@
 */
 
 /atom/proc/AICtrlShiftClick()
+	return
+
+/obj/machinery/door/airlock/AICtrlShiftClick()
+	if(emagged)
+		return
 	return
 
 /atom/proc/AIShiftClick()
@@ -124,7 +120,7 @@
 		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="open", "activate" = "0"), 1)
-	return 1
+	return
 
 /atom/proc/AICtrlClick()
 	return
@@ -134,18 +130,15 @@
 		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "0"), 1)// 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="bolts", "activate" = "1"), 1)
-	return 1
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
 	Topic(src, list("src"= "\ref[src]", "breaker"="1"), 1) // 1 meaning no window (consistency!)
-	return 1
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
 	Topic(src, list("src"= "\ref[src]", "command"="enable", "value"="[!enabled]"), 1) // 1 meaning no window (consistency!)
-	return 1
 
 /atom/proc/AIAltClick(var/atom/A)
-	return AltClick(A)
+	AltClick(A)
 
 /obj/machinery/door/airlock/AIAltClick() // Electrifies doors.
 	if(!electrified_until)
@@ -154,25 +147,20 @@
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
 		Topic(src, list("src"= "\ref[src]", "command"="electrify_permanently", "activate" = "0"), 1)
-	return 1
+	return
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	Topic(src, list("src"= "\ref[src]", "command"="lethal", "value"="[!lethal]"), 1) // 1 meaning no window (consistency!)
-	return 1
 
-/atom/proc/AIMiddleClick(var/mob/living/silicon/user)
-	return 0
+/atom/proc/AIMiddleClick()
+	return
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
-
-	if(..())
-		return
-
 	if(!src.lights)
 		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "1"), 1) // 1 meaning no window (consistency!)
 	else
 		Topic(src, list("src"= "\ref[src]", "command"="lights", "activate" = "0"), 1)
-	return 1
+	return
 
 //
 // Override AdjacentQuick for AltClicking

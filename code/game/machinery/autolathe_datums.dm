@@ -37,11 +37,6 @@
 	path = /obj/item/device/flashlight
 	category = "General"
 
-/datum/autolathe/recipe/floor_light
-	name = "floor light"
-	path = /obj/machinery/floor_light
-	category = "General"
-
 /datum/autolathe/recipe/extinguisher
 	name = "extinguisher"
 	path = /obj/item/weapon/extinguisher
@@ -337,8 +332,8 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_c20r
-	name = "ammunition (10mm)"
-	path = /obj/item/ammo_magazine/a10mm
+	name = "ammunition (12mm)"
+	path = /obj/item/ammo_magazine/a12mm
 	hidden = 1
 	category = "Arms and Ammunition"
 
@@ -393,12 +388,6 @@
 /datum/autolathe/recipe/electropack
 	name = "electropack"
 	path = /obj/item/device/radio/electropack
-	hidden = 1
-	category = "Devices and Components"
-
-/datum/autolathe/recipe/beartrap
-	name = "mechanical trap"
-	path = /obj/item/weapon/beartrap
 	hidden = 1
 	category = "Devices and Components"
 

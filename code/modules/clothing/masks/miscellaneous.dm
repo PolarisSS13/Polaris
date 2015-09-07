@@ -3,15 +3,10 @@
 	desc = "To stop that awful noise."
 	icon_state = "muzzle"
 	item_state = "muzzle"
-	body_parts_covered = FACE
+	flags = MASKCOVERSMOUTH
+	body_parts_covered = 0
 	w_class = 2
 	gas_transfer_coefficient = 0.90
-	voicechange = 1
-
-/obj/item/clothing/mask/muzzle/New()
-    ..()
-    say_messages = list("Mmfph!", "Mmmf mrrfff!", "Mmmf mnnf!")
-    say_verbs = list("mumbles", "says")
 
 // Clumsy folks can't take the mask off themselves.
 /obj/item/clothing/mask/muzzle/attack_hand(mob/user as mob)
@@ -25,8 +20,8 @@
 	icon_state = "sterile"
 	item_state = "sterile"
 	w_class = 2
-	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	flags = MASKCOVERSMOUTH
+	body_parts_covered = 0
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
@@ -46,14 +41,13 @@
 	body_parts_covered = 0
 
 //scarves (fit in in mask slot)
-//None of these actually have on-mob sprites...
+
 /obj/item/clothing/mask/bluescarf
 	name = "blue neck scarf"
 	desc = "A blue neck scarf."
 	icon_state = "blueneckscarf"
 	item_state = "blueneckscarf"
-	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -62,8 +56,7 @@
 	desc = "A red and white checkered neck scarf."
 	icon_state = "redwhite_scarf"
 	item_state = "redwhite_scarf"
-	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -72,8 +65,7 @@
 	desc = "A green neck scarf."
 	icon_state = "green_scarf"
 	item_state = "green_scarf"
-	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
@@ -82,8 +74,7 @@
 	desc = "A stealthy, dark scarf."
 	icon_state = "ninja_scarf"
 	item_state = "ninja_scarf"
-	body_parts_covered = FACE
-	item_flags = FLEXIBLEMATERIAL
+	flags = MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
@@ -93,7 +84,8 @@
 	desc = "A rubber pig mask."
 	icon_state = "pig"
 	item_state = "pig"
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags = BLOCKHAIR
+	flags_inv = HIDEFACE
 	w_class = 2
 	siemens_coefficient = 0.9
 	body_parts_covered = HEAD|FACE|EYES
@@ -103,16 +95,12 @@
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	item_state = "horsehead"
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags = BLOCKHAIR
+	flags_inv = HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
 	w_class = 2
+	var/voicechange = 0
 	siemens_coefficient = 0.9
-
-/obj/item/clothing/mask/horsehead/New()
-    ..()
-    // The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
-    say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-    say_verbs = list("whinnies", "neighs", "says")
 
 /obj/item/clothing/mask/ai
 	name = "camera MIU"

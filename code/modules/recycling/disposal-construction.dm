@@ -219,7 +219,7 @@
 				ispipe = 1
 
 		var/turf/T = src.loc
-		if(!T.is_plating())
+		if(T.intact)
 			user << "You can only attach the [nicetype] if the floor plating is removed."
 			return
 

@@ -119,8 +119,7 @@
 
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
-	damage = 50
-	armor_penetration = 15
+	damage = 60
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -140,23 +139,20 @@
 
 /* "Rifle" rounds */
 
-/obj/item/projectile/bullet/rifle
-	armor_penetration = 20
-	penetrating = 1
-
 /obj/item/projectile/bullet/rifle/a762
-	damage = 25
-
-/obj/item/projectile/bullet/rifle/a556
-	damage = 35
+	damage = 30
+	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a145
 	damage = 80
 	stun = 3
 	weaken = 3
 	penetrating = 5
-	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
+
+/obj/item/projectile/bullet/rifle/a556
+	damage = 40
+	penetrating = 1
 
 /* Miscellaneous */
 
@@ -197,15 +193,3 @@
 /obj/item/projectile/bullet/shotgun/practice
 	name = "practice"
 	damage = 5
-
-/obj/item/projectile/bullet/pistol/cap
-	name = "cap"
-	damage_type = HALLOSS
-	damage = 0
-	nodamage = 1
-	embed = 0
-	sharp = 0
-
-/obj/item/projectile/bullet/pistol/cap/process()
-	loc = null
-	qdel(src)

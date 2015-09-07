@@ -14,7 +14,7 @@
 	density = 1
 	blocks_air = 1
 	temperature = T0C
-	var/mined_turf = /turf/simulated/floor/asteroid
+	var/mined_turf = /turf/simulated/floor/plating/airless/asteroid
 	var/ore/mineral
 	var/mined_ore = 0
 	var/last_act = 0
@@ -41,8 +41,8 @@
 	var/list/step_overlays = list("s" = NORTH, "n" = SOUTH, "w" = EAST, "e" = WEST)
 	for(var/direction in step_overlays)
 		var/turf/turf_to_check = get_step(src,step_overlays[direction])
-		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/asteroid))
-			var/turf/simulated/floor/asteroid/T = turf_to_check
+		if(update_neighbors && istype(turf_to_check,/turf/simulated/floor/plating/airless/asteroid))
+			var/turf/simulated/floor/plating/airless/asteroid/T = turf_to_check
 			T.updateMineralOverlays()
 		else if(istype(turf_to_check,/turf/space) || istype(turf_to_check,/turf/simulated/floor))
 			turf_to_check.overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
@@ -283,7 +283,7 @@
 
 	//Add some rubble,  you did just clear out a big chunk of rock.
 
-	var/turf/simulated/floor/asteroid/N = ChangeTurf(mined_turf)
+	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(mined_turf)
 
 	// Kill and update the space overlays around us.
 	for(var/direction in step_overlays)
@@ -387,31 +387,25 @@
 
 /**********************Asteroid**************************/
 
-// Setting icon/icon_state initially will use these values when the turf is built on/replaced.
-// This means you can put grass on the asteroid etc.
-/turf/simulated/floor/asteroid
-	name = "sand"
-	icon = 'icons/turf/flooring/asteroid.dmi'
-	icon_state = "asteroid"
-	base_name = "sand"
-	base_desc = "Gritty and unpleasant."
-	base_icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon_state = "asteroid"
 
-	initial_flooring = null
+/turf/simulated/floor/plating/airless/asteroid //floor piece
+	name = "sand"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "asteroid"
 	oxygen = 0
 	nitrogen = 0
 	temperature = TCMB
+	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 	var/overlay_detail
 	has_resources = 1
 
-/turf/simulated/floor/asteroid/New()
+/turf/simulated/floor/plating/airless/asteroid/New()
 
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 
-/turf/simulated/floor/asteroid/ex_act(severity)
+/turf/simulated/floor/plating/airless/asteroid/ex_act(severity)
 	switch(severity)
 		if(3.0)
 			return
@@ -422,10 +416,7 @@
 			gets_dug()
 	return
 
-/turf/simulated/floor/asteroid/is_plating()
-	return 0
-
-/turf/simulated/floor/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/floor/plating/airless/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(!W || !user)
 		return 0
@@ -484,15 +475,15 @@
 			new /obj/structure/lattice(get_turf(src))
 		return
 
-	else if(istype(W, /obj/item/stack/tile/floor))
+	else if(istype(W, /obj/item/stack/tile/steel))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			var/obj/item/stack/tile/floor/S = W
+			var/obj/item/stack/tile/steel/S = W
 			if (S.get_amount() < 1)
 				return
-			qdel(L)
+			del(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			S.build(src)
 			S.use(1)
 			return
 		else
@@ -503,7 +494,7 @@
 		..(W,user)
 	return
 
-/turf/simulated/floor/asteroid/proc/gets_dug()
+/turf/simulated/floor/plating/airless/asteroid/proc/gets_dug()
 
 	if(dug)
 		return
@@ -512,10 +503,11 @@
 		new/obj/item/weapon/ore/glass(src)
 
 	dug = 1
+	icon_plating = "asteroid_dug"
 	icon_state = "asteroid_dug"
 	return
 
-/turf/simulated/floor/asteroid/proc/updateMineralOverlays(var/update_neighbors)
+/turf/simulated/floor/plating/airless/asteroid/proc/updateMineralOverlays(var/update_neighbors)
 
 	overlays.Cut()
 
@@ -528,18 +520,17 @@
 		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
 			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
-	//todo cache
-	if(overlay_detail) overlays |= image(icon = 'icons/turf/flooring/decals.dmi', icon_state = overlay_detail)
+	if(overlay_detail) overlays += overlay_detail
 
 	if(update_neighbors)
 		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
 		for(var/direction in all_step_directions)
-			var/turf/simulated/floor/asteroid/A
-			if(istype(get_step(src, direction), /turf/simulated/floor/asteroid))
+			var/turf/simulated/floor/plating/airless/asteroid/A
+			if(istype(get_step(src, direction), /turf/simulated/floor/plating/airless/asteroid))
 				A = get_step(src, direction)
 				A.updateMineralOverlays()
 
-/turf/simulated/floor/asteroid/Entered(atom/movable/M as mob|obj)
+/turf/simulated/floor/plating/airless/asteroid/Entered(atom/movable/M as mob|obj)
 	..()
 	if(istype(M,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M

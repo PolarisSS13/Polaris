@@ -1,3 +1,5 @@
+var/list/global/wall_cache = list()
+
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
@@ -19,13 +21,6 @@
 	var/last_state
 	var/construction_stage
 
-	var/list/wall_connections = list("0", "0", "0", "0")
-
-// Walls always hide the stuff below them.
-/turf/simulated/wall/levelupdate()
-	for(var/obj/O in src)
-		O.hide(1)
-
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
@@ -33,7 +28,7 @@
 		materialtype = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = get_material_by_name(rmaterialtype)
+		reinf_material = name_to_material[rmaterialtype]
 	update_material()
 
 	processing_turfs |= src
@@ -42,6 +37,7 @@
 	processing_turfs -= src
 	dismantle_wall(null,null,1)
 	..()
+
 
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
@@ -174,9 +170,9 @@
 			O.loc = src
 
 	clear_plants()
-	material = get_material_by_name("placeholder")
+	material = name_to_material["placeholder"]
 	reinf_material = null
-	update_connections(1)
+	check_relatives()
 
 	ChangeTurf(/turf/simulated/floor/plating)
 

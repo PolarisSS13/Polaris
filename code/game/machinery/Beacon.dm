@@ -18,7 +18,7 @@
 		Beacon.invisibility = INVISIBILITY_MAXIMUM
 		Beacon.loc = T
 
-		hide(!T.is_plating())
+		hide(T.intact)
 
 	Destroy()
 		if(Beacon)

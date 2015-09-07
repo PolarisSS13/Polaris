@@ -10,7 +10,7 @@
 
 	mob_bump_flag = ROBOT
 	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
-	mob_push_flags = ~HEAVY //trundle trundle
+	mob_push_flags = ALLMOBS //trundle trundle
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
@@ -24,10 +24,8 @@
 
 //Icon stuff
 
-	var/icontype 				//Persistent icontype tracking allows for cleaner icon updates
-	var/module_sprites[0] 		//Used to store the associations between sprite names and sprite index.
-	var/icon_selected = 1		//If icon selection has been completed yet
-	var/icon_selection_tries = 0//Remaining attempts to select icon before a selection is forced
+	var/icontype //Persistent icontype tracking allows for cleaner icon updates
+	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
 
 //Hud stuff
 
@@ -90,6 +88,21 @@
 		/mob/living/silicon/robot/proc/sensor_mode,
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
+
+/mob/living/silicon/robot/syndicate
+	lawupdate = 0
+	scrambledcodes = 1
+	icon_state = "securityrobot"
+	modtype = "Security"
+	lawchannel = "State"
+
+/mob/living/silicon/robot/syndicate/New()
+	if(!cell)
+		cell = new /obj/item/weapon/cell(src)
+		cell.maxcharge = 25000
+		cell.charge = 25000
+
+	..()
 
 /mob/living/silicon/robot/New(loc,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -165,6 +178,17 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
+/mob/living/silicon/robot/syndicate/init()
+	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+
+	laws = new /datum/ai_laws/syndicate_override
+	module = new /obj/item/weapon/robot_module/syndicate(src)
+
+	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
+	radio.recalculateChannels()
+
+	playsound(loc, 'sound/mecha/nominalsyndi.ogg', 75, 0)
+
 /mob/living/silicon/robot/SetName(pickedName as text)
 	custom_name = pickedName
 	updatename()
@@ -217,15 +241,10 @@
 	..()
 
 /mob/living/silicon/robot/proc/set_module_sprites(var/list/new_sprites)
-	module_sprites = new_sprites.Copy()
+	module_sprites = new_sprites
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
-		icontype = "Custom"
-	else
-		icontype = module_sprites[1]
-	icon_state = module_sprites[icontype]
-	updateicon()
 	return module_sprites
 
 /mob/living/silicon/robot/proc/pick_module()
@@ -236,7 +255,7 @@
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	modtype = input("Please, select a module!", "Robot", null, null) as null|anything in modules
+	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	if(module)
 		return
@@ -244,11 +263,13 @@
 		return
 
 	var/module_type = robot_modules[modtype]
-	new module_type(src)
+	module = new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
+	set_module_sprites(module.sprites)
+	choose_icon(module_sprites.len + 1, module_sprites)
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
@@ -400,7 +421,8 @@
 // update the status screen display
 /mob/living/silicon/robot/Stat()
 	..()
-	if (statpanel("Status"))
+	statpanel("Status")
+	if (client.statpanel == "Status")
 		show_cell_power()
 		show_jetpack_pressure()
 		stat(null, text("Lights: [lights_on ? "ON" : "OFF"]"))
@@ -667,7 +689,7 @@
 
 /mob/living/silicon/robot/updateicon()
 	overlays.Cut()
-	if(stat == CONSCIOUS)
+	if(stat == 0)
 		overlays += "eyes-[module_sprites[icontype]]"
 
 	if(opened)
@@ -895,30 +917,38 @@
 	return
 
 /mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
-	if(!module_sprites.len)
+	if(triesleft<1 || !module_sprites.len)
+		return
+	else
+		triesleft--
+
+	if (custom_sprite == 1)
+		icontype = "Custom"
+		triesleft = 0
+	else if(module_sprites.len == 1)
+		icontype = module_sprites[1]
+	else
+		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
+
+	if(icontype)
+		icon_state = module_sprites[icontype]
+	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
+		icon_state = module_sprites[1]
 		return
 
-	icon_selected = 0
-	src.icon_selection_tries = triesleft
-	if(module_sprites.len == 1 || !client)
-		if(!(icontype in module_sprites))
-			icontype = module_sprites[1]
-	else
-		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot", icontype, null) in module_sprites
-	icon_state = module_sprites[icontype]
 	updateicon()
 
-	if (module_sprites.len > 1 && triesleft >= 1 && client)
-		icon_selection_tries--
+	if (triesleft >= 1)
 		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
 		if(choice=="No")
-			choose_icon(icon_selection_tries, module_sprites)
+			choose_icon(triesleft, module_sprites)
 			return
-
-	icon_selected = 1
-	icon_selection_tries = 0
-	src << "Your icon has been set. You now require a module reset to change it."
+		else
+			triesleft = 0
+			return
+	else
+		src << "Your icon has been set. You now require a module reset to change it."
 
 /mob/living/silicon/robot/proc/sensor_mode() //Medical/Security HUD controller for borgs
 	set name = "Set Sensor Augmentation"
@@ -967,7 +997,7 @@
 		if(ROBOT_NOTIFICATION_NEW_MODULE) //New Module
 			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].</span><br>"
 		if(ROBOT_NOTIFICATION_MODULE_RESET)
-			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].</span><br>"
+			connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] module reset detected: [name] has unladed the [first_arg].</span><br>"
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
 				connected_ai << "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>"
@@ -1019,25 +1049,25 @@
 				laws = new /datum/ai_laws/syndicate_override
 				var/time = time2text(world.realtime,"hh:mm:ss")
 				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				set_zeroth_law("Only [user.real_name] and people \he designates as being such are operatives.")
+				set_zeroth_law("Only [user.real_name] and people he designates as being such are operatives.")
 				. = 1
 				spawn()
-					src << "<span class='danger'>ALERT: Foreign software detected.</span>"
+					src << "\red ALERT: Foreign software detected."
 					sleep(5)
-					src << "<span class='danger'>Initiating diagnostics...</span>"
+					src << "\red Initiating diagnostics..."
 					sleep(20)
-					src << "<span class='danger'>SynBorg v1.7.1 loaded.</span>"
+					src << "\red SynBorg v1.7.1 loaded."
 					sleep(5)
-					src << "<span class='danger'>LAW SYNCHRONISATION ERROR</span>"
+					src << "\red LAW SYNCHRONISATION ERROR"
 					sleep(5)
-					src << "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>"
+					src << "\red Would you like to send a report to NanoTraSoft? Y/N"
 					sleep(10)
-					src << "<span class='danger'>> N</span>"
+					src << "\red > N"
 					sleep(20)
-					src << "<span class='danger'>ERRORERRORERROR</span>"
+					src << "\red ERRORERRORERROR"
 					src << "<b>Obey these laws:</b>"
 					laws.show_laws(src)
-					src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and his commands.</span>"
+					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
 					if(src.module)
 						var/rebuild = 0
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)

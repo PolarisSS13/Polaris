@@ -34,11 +34,6 @@
 /mob/living/simple_animal/borer/roundstart
 	roundstart = 1
 
-/mob/living/simple_animal/borer/Login()
-	..()
-	if(mind)
-		borers.add_antagonist(mind)
-
 /mob/living/simple_animal/borer/New()
 	..()
 
@@ -155,7 +150,11 @@
 	if(!host) return
 
 	if(host.mind)
-		borers.remove_antagonist(host.mind)
+		//If they're not a proper traitor, reset their antag status.
+		if(host.mind.special_role == "Borer Thrall")
+			host << "<span class ='danger'>You are no longer an antagonist.</span>"
+			borers.hosts -= host.mind
+			host.mind.special_role = null
 
 	src.loc = get_turf(host)
 

@@ -35,7 +35,8 @@
 	icon_state = "culthood"
 	desc = "A hood worn by the followers of Nar-Sie."
 	flags_inv = HIDEFACE
-	body_parts_covered = HEAD
+	flags = HEADCOVERSEYES
+	body_parts_covered = HEAD|EYES
 	armor = list(melee = 30, bullet = 10, laser = 5,energy = 5, bomb = 0, bio = 0, rad = 0)
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
@@ -48,7 +49,8 @@
 	name = "magus helm"
 	icon_state = "magus"
 	desc = "A helm worn by the followers of Nar-Sie."
-	flags_inv = HIDEFACE | BLOCKHAIR
+	flags_inv = HIDEFACE
+	flags = HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/culthood/alt

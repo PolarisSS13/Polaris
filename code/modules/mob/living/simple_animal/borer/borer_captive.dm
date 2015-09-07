@@ -35,7 +35,7 @@
 	return
 
 /mob/living/captive_brain/can_resist()
-	return !(stat || !canClick())
+	return !(stat || next_move > world.time)
 
 /mob/living/captive_brain/process_resist()
 	//Resisting control by an alien mind.

@@ -69,34 +69,33 @@ var/global/datum/controller/gameticker/ticker
 	//Create and announce mode
 	if(master_mode=="secret")
 		src.hide_mode = 1
-
-	var/list/runnable_modes = config.get_runnable_modes()
+	var/list/datum/game_mode/runnable_modes
+	var/mode_started
 	if((master_mode=="random") || (master_mode=="secret"))
-		if(!runnable_modes.len)
+		runnable_modes = config.get_runnable_modes()
+		if (runnable_modes.len==0)
 			current_state = GAME_STATE_PREGAME
 			world << "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby."
 			return 0
 		if(secret_force_mode != "secret")
-			src.mode = config.pick_mode(secret_force_mode)
+			var/datum/game_mode/M = config.pick_mode(secret_force_mode)
+			if(M.can_start())
+				mode_started = 1
+				src.mode = config.pick_mode(secret_force_mode)
+		job_master.ResetOccupations()
 		if(!src.mode)
-			var/list/weighted_modes = list()
-			for(var/datum/game_mode/GM in runnable_modes)
-				weighted_modes[GM.config_tag] = config.probabilities[GM.config_tag]
-			src.mode = gamemode_cache[pickweight(weighted_modes)]
+			src.mode = pickweight(runnable_modes)
+		if(src.mode)
+			var/mtype = src.mode.type
+			src.mode = new mtype
 	else
 		src.mode = config.pick_mode(master_mode)
 
-	if(!src.mode)
-		current_state = GAME_STATE_PREGAME
-		world << "<span class='danger'>Serious error in mode setup!</span> Reverting to pre-game lobby."
-		return 0
-
-	job_master.ResetOccupations()
-	src.mode.create_antagonists()
 	src.mode.pre_setup()
+
 	job_master.DivideOccupations() // Apparently important for new antagonist system to register specific job antags properly.
 
-	if(!src.mode.can_start())
+	if(!mode_started && !src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
 		current_state = GAME_STATE_PREGAME
 		mode.fail_setup()
@@ -105,14 +104,12 @@ var/global/datum/controller/gameticker/ticker
 		return 0
 
 	if(hide_mode)
+		var/list/modes = new
+		for (var/datum/game_mode/M in runnable_modes)
+			modes+=M.name
+		modes = sortList(modes)
 		world << "<B>The current game mode is - Secret!</B>"
-		if(runnable_modes.len)
-			var/list/tmpmodes = new
-			for (var/datum/game_mode/M in runnable_modes)
-				tmpmodes+=M.name
-			tmpmodes = sortList(tmpmodes)
-			if(tmpmodes.len)
-				world << "<B>Possibilities:</B> [english_list(tmpmodes)]"
+		world << "<B>Possibilities:</B> [english_list(modes)]"
 	else
 		src.mode.announce()
 
@@ -155,6 +152,8 @@ var/global/datum/controller/gameticker/ticker
 	*/
 
 	processScheduler.start()
+
+	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE

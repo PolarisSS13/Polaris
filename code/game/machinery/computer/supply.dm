@@ -1,11 +1,10 @@
 /obj/machinery/computer/supplycomp
 	name = "supply control console"
 	icon = 'icons/obj/computer.dmi'
-	icon_keyboard = "tech_key"
-	icon_screen = "supply"
+	icon_state = "supply"
 	light_color = "#b88b2e"
 	req_access = list(access_cargo)
-	circuit = /obj/item/weapon/circuitboard/supplycomp
+	circuit = "/obj/item/weapon/circuitboard/supplycomp"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/hacked = 0
@@ -15,8 +14,8 @@
 /obj/machinery/computer/ordercomp
 	name = "supply ordering console"
 	icon = 'icons/obj/computer.dmi'
-	icon_screen = "request"
-	circuit = /obj/item/weapon/circuitboard/ordercomp
+	icon_state = "request"
+	circuit = "/obj/item/weapon/circuitboard/ordercomp"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/last_viewed_group = "categories"

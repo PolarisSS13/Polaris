@@ -3,9 +3,8 @@
 /obj/machinery/computer/aiupload
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
-	icon_keyboard = "rd_key"
-	icon_screen = "command"
-	circuit = /obj/item/weapon/circuitboard/aiupload
+	icon_state = "command"
+	circuit = "/obj/item/weapon/circuitboard/aiupload"
 	var/mob/living/silicon/ai/current = null
 	var/opened = 0
 
@@ -51,7 +50,7 @@
 		else
 			usr << "[src.current.name] selected for law changes."
 		return
-
+	
 	attack_ghost(user as mob)
 		return 1
 
@@ -59,9 +58,8 @@
 /obj/machinery/computer/borgupload
 	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
-	icon_keyboard = "rd_key"
-	icon_screen = "command"
-	circuit = /obj/item/weapon/circuitboard/borgupload
+	icon_state = "command"
+	circuit = "/obj/item/weapon/circuitboard/borgupload"
 	var/mob/living/silicon/robot/current = null
 
 

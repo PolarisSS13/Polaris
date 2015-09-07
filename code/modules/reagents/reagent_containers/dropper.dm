@@ -40,10 +40,10 @@
 
 					var/obj/item/safe_thing = null
 					if(victim.wear_mask)
-						if (victim.wear_mask.body_parts_covered & EYES)
+						if (victim.wear_mask.flags & MASKCOVERSEYES)
 							safe_thing = victim.wear_mask
 					if(victim.head)
-						if (victim.head.body_parts_covered & EYES)
+						if (victim.head.flags & MASKCOVERSEYES)
 							safe_thing = victim.head
 					if(victim.glasses)
 						if (!safe_thing)
@@ -65,7 +65,7 @@
 				return
 
 			else
-				trans = reagents.trans_to(target, amount_per_transfer_from_this) //sprinkling reagents on generic non-mobs
+				trans = reagents.splash(target, amount_per_transfer_from_this) //sprinkling reagents on generic non-mobs
 				user << "<span class='notice'>You transfer [trans] units of the solution.</span>"
 
 		else // Taking from something

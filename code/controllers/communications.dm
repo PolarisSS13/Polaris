@@ -97,30 +97,20 @@ On the map:
 1455 for AI access
 */
 
-var/const/RADIO_LOW_FREQ	= 1200
-var/const/PUBLIC_LOW_FREQ	= 1441
-var/const/PUBLIC_HIGH_FREQ	= 1489
-var/const/RADIO_HIGH_FREQ	= 1600
-
-var/const/BOT_FREQ	= 1447
 var/const/COMM_FREQ = 1353
-var/const/ERT_FREQ	= 1345
-var/const/AI_FREQ	= 1343
-var/const/DTH_FREQ	= 1341
 var/const/SYND_FREQ = 1213
+var/const/ERT_FREQ = 1345
+var/const/DTH_FREQ = 1341
+var/const/AI_FREQ = 1447
 
 // department channels
 var/const/PUB_FREQ = 1459
 var/const/SEC_FREQ = 1359
 var/const/ENG_FREQ = 1357
-var/const/MED_FREQ = 1355
 var/const/SCI_FREQ = 1351
-var/const/SRV_FREQ = 1349
+var/const/MED_FREQ = 1355
 var/const/SUP_FREQ = 1347
-
-// internal department channels
-var/const/MED_I_FREQ = 1485
-var/const/SEC_I_FREQ = 1475
+var/const/SRV_FREQ = 1349
 
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
@@ -134,9 +124,7 @@ var/list/radiochannels = list(
 	"Mercenary" 	= SYND_FREQ,
 	"Supply" 		= SUP_FREQ,
 	"Service" 		= SRV_FREQ,
-	"AI Private"	= AI_FREQ,
-	"Medical(I)"	= MED_I_FREQ,
-	"Security(I)"	= SEC_I_FREQ
+	"AI Private"	= AI_FREQ
 )
 
 // central command channels, i.e deathsquid & response teams
@@ -145,8 +133,8 @@ var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
 // Antag channels, i.e. Syndicate
 var/list/ANTAG_FREQS = list(SYND_FREQ)
 
-//Department channels, arranged lexically
-var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FREQ, SCI_FREQ, SRV_FREQ, SUP_FREQ)
+//depenging helpers
+var/list/DEPT_FREQS = list(SCI_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, SUP_FREQ, SRV_FREQ, ERT_FREQ, SYND_FREQ, DTH_FREQ)
 
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
@@ -156,28 +144,29 @@ var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FREQ, SCI
 	if (frequency in ANTAG_FREQS)
 		return "syndradio"
 	// centcomm channels (deathsquid and ert)
-	if(frequency in CENT_FREQS)
+	else if(frequency in CENT_FREQS)
 		return "centradio"
 	// command channel
-	if(frequency == COMM_FREQ)
+	else if(frequency == COMM_FREQ)
 		return "comradio"
 	// AI private channel
-	if(frequency == AI_FREQ)
+	else if(frequency == AI_FREQ)
 		return "airadio"
 	// department radio formatting (poorly optimized, ugh)
-	if(frequency == SEC_FREQ)
+	else if(frequency == SEC_FREQ)
 		return "secradio"
-	if (frequency == ENG_FREQ)
+	else if (frequency == ENG_FREQ)
 		return "engradio"
-	if(frequency == SCI_FREQ)
+	else if(frequency == SCI_FREQ)
 		return "sciradio"
-	if(frequency == MED_FREQ)
+	else if(frequency == MED_FREQ)
 		return "medradio"
-	if(frequency == SUP_FREQ) // cargo
+	else if(frequency == SUP_FREQ) // cargo
 		return "supradio"
-	if(frequency == SRV_FREQ) // service
+	else if(frequency == SRV_FREQ) // service
 		return "srvradio"
-	if(frequency in DEPT_FREQS)
+	// If all else fails and it's a dept_freq, color me purple!
+	else if(frequency in DEPT_FREQS)
 		return "deptradio"
 
 	return "radio"

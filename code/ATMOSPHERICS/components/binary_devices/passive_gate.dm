@@ -2,6 +2,8 @@
 #define REGULATE_INPUT	1	//shuts off when input side is below the target pressure
 #define REGULATE_OUTPUT	2	//shuts off when output side is above the target pressure
 
+#undefine
+
 /obj/machinery/atmospherics/binary/passive_gate
 	icon = 'icons/atmos/passive_gate.dmi'
 	icon_state = "map"
@@ -257,7 +259,3 @@
 			"You hear ratchet.")
 		new /obj/item/pipe(loc, make_from=src)
 		qdel(src)
-
-#undef REGULATE_NONE
-#undef REGULATE_INPUT
-#undef REGULATE_OUTPUT

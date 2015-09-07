@@ -44,9 +44,6 @@
 	update_nearby_tiles()
 	..()
 
-/obj/structure/simple_door/get_material()
-	return material
-
 /obj/structure/simple_door/Bumped(atom/user)
 	..()
 	if(!state)

@@ -3,10 +3,6 @@
 		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
-#define TURRET_PRIORITY_TARGET 2
-#define TURRET_SECONDARY_TARGET 1
-#define TURRET_NOT_TARGET 0
-
 /obj/machinery/porta_turret
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
@@ -240,7 +236,7 @@ var/list/turret_icons
 	return ..()
 
 
-/obj/machinery/porta_turret/Topic(href, href_list)
+/obj/machinery/porta_turret/Topic(href, href_list, var/nowindow = 0)
 	if(..())
 		return 1
 
@@ -338,7 +334,7 @@ var/list/turret_icons
 
 	else
 		//if the turret was attacked with the intention of harming it:
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.changeNext_move(NEXT_MOVE_DELAY)
 		take_damage(I.force * 0.5)
 		if(I.force * 0.5 > 1) //if the force of impact dealt at least 1 damage, the turret gets pissed off
 			if(!attacked && !emagged)
@@ -347,7 +343,7 @@ var/list/turret_icons
 					sleep(60)
 					attacked = 0
 		..()
-
+		
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		//Emagging the turret makes it go bonkers and stun everyone. It also makes
@@ -403,16 +399,15 @@ var/list/turret_icons
 			emagged = 1
 
 		enabled=0
-		spawn(rand(60,600))
-			if(!enabled)
-				enabled=1
+		sleep(rand(60,600))
+		if(!enabled)
+			enabled=1
 
 	..()
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
 		if (1)
-			del(src)
 			qdel(src)
 		if (2)
 			if (prob(25))
@@ -507,7 +502,7 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
-
+	
 	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
@@ -623,6 +618,7 @@ var/list/turret_icons
 	else
 		A = new projectile(loc)
 		playsound(loc, shot_sound, 75, 1)
+	A.original = target
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
@@ -630,15 +626,19 @@ var/list/turret_icons
 
 	//Turrets aim for the center of mass by default.
 	//If the target is grabbing someone then the turret smartly aims for extremities
-	var/def_zone
 	var/obj/item/weapon/grab/G = locate() in target
 	if(G && G.state >= GRAB_NECK) //works because mobs are currently not allowed to upgrade to NECK if they are grabbing two people.
-		def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
+		A.def_zone = pick("head", "l_hand", "r_hand", "l_foot", "r_foot", "l_arm", "r_arm", "l_leg", "r_leg")
 	else
-		def_zone = pick("chest", "groin")
+		A.def_zone = pick("chest", "groin")
 
 	//Shooting Code:
-	A.launch(target, def_zone)
+	A.current = T
+	A.starting = T
+	A.yo = U.y - T.y
+	A.xo = U.x - T.x
+	spawn(1)
+		A.process()
 
 /datum/turret_checks
 	var/enabled
@@ -704,8 +704,8 @@ var/list/turret_icons
 				return
 
 		if(1)
-			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
-				var/obj/item/stack/M = I
+			if(istype(I, /obj/item/stack/material/steel))
+				var/obj/item/stack/material/steel/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the interior frame.</span>"
 					build_step = 2
@@ -758,7 +758,11 @@ var/list/turret_icons
 				installation = I.type //installation becomes I.type
 				gun_charge = E.power_supply.charge //the gun's charge is stored in gun_charge
 				user << "<span class='notice'>You add [I] to the turret.</span>"
-				target_type = /obj/machinery/porta_turret
+
+				if(istype(installation, /obj/item/weapon/gun/energy/lasertag/blue) || istype(installation, /obj/item/weapon/gun/energy/lasertag/red))
+					target_type = /obj/machinery/porta_turret/tag
+				else
+					target_type = /obj/machinery/porta_turret
 
 				build_step = 4
 				qdel(I) //delete the gun :(
@@ -792,8 +796,8 @@ var/list/turret_icons
 			//attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
-				var/obj/item/stack/M = I
+			if(istype(I, /obj/item/stack/material/steel))
+				var/obj/item/stack/material/steel/M = I
 				if(M.use(2))
 					user << "<span class='notice'>You add some metal armor to the exterior frame.</span>"
 					build_step = 7
@@ -875,8 +879,3 @@ var/list/turret_icons
 
 /atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
-
-
-#undef TURRET_PRIORITY_TARGET
-#undef TURRET_SECONDARY_TARGET
-#undef TURRET_NOT_TARGET

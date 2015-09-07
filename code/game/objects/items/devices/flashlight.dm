@@ -16,9 +16,14 @@
 
 /obj/item/device/flashlight/initialize()
 	..()
-	update_icon()
+	if(on)
+		icon_state = "[initial(icon_state)]-on"
+		set_light(brightness_on)
+	else
+		icon_state = initial(icon_state)
+		set_light(0)
 
-/obj/item/device/flashlight/update_icon()
+/obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
@@ -31,7 +36,7 @@
 		user << "You cannot turn the light on while in this [user.loc]." //To prevent some lighting anomalities.
 		return 0
 	on = !on
-	update_icon()
+	update_brightness(user)
 	user.update_action_buttons()
 	return 1
 
@@ -46,7 +51,7 @@
 		var/mob/living/carbon/human/H = M	//mob has protective eyewear
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
-				if(istype(C) && (C.body_parts_covered & EYES))
+				if(istype(C) && C.flags & (HEADCOVERSEYES|MASKCOVERSEYES|GLASSESCOVERSEYES))
 					user << "<span class='warning'>You're going to need to remove [C.name] first.</span>"
 					return
 
@@ -136,7 +141,7 @@
 
 /obj/item/device/flashlight/flare
 	name = "flare"
-	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
+	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
 	w_class = 2.0
 	brightness_on = 7 // Pretty bright.
 	light_color = "#e58775"
@@ -166,7 +171,11 @@
 	on = 0
 	src.force = initial(src.force)
 	src.damtype = initial(src.damtype)
-	update_icon()
+	if(ismob(loc))
+		var/mob/U = loc
+		update_brightness(U)
+	else
+		update_brightness(null)
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 
@@ -197,11 +206,10 @@
 	on = 1 //Bio-luminesence has one setting, on.
 
 /obj/item/device/flashlight/slime/New()
-	..()
 	set_light(brightness_on)
-
-/obj/item/device/flashlight/slime/update_icon()
-	return
+	spawn(1) //Might be sloppy, but seems to be necessary to prevent further runtimes and make these work as intended... don't judge me!
+		update_brightness()
+		icon_state = initial(icon_state)
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)
 	return //Bio-luminescence does not toggle.

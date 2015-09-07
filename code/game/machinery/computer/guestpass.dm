@@ -43,9 +43,8 @@
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
 	icon_state = "guest"
-	icon_keyboard = null
-	icon_screen = "pass"
 	density = 0
+
 
 	var/obj/item/weapon/card/id/giver
 	var/list/accesses = list()
@@ -62,14 +61,13 @@
 
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/card/id))
-		if(!giver && user.unEquip(O))
+		if(!giver)
+			user.drop_item()
 			O.loc = src
 			giver = O
 			updateUsrDialog()
-		else if(giver)
+		else
 			user << "<span class='warning'>There is already ID card inside.</span>"
-		return
-	..()
 
 /obj/machinery/computer/guestpass/attack_ai(var/mob/user as mob)
 	return attack_hand(user)
@@ -152,7 +150,8 @@
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+					if (istype(I, /obj/item/weapon/card/id))
+						usr.drop_item()
 						I.loc = src
 						giver = I
 				updateUsrDialog()

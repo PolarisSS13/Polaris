@@ -27,11 +27,10 @@
 		spawn() escape_legcuffs()
 
 /mob/living/carbon/proc/escape_handcuffs()
-	//if(!(last_special <= world.time)) return
+	if(!(last_special <= world.time)) return
 
-	//These two lines represent a significant buff to grabs...
-	if(!canClick()) return
-	setClickCooldown(100)
+	next_move = world.time + 100
+	last_special = world.time + 100
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_handcuffs()
@@ -62,10 +61,10 @@
 		drop_from_inventory(handcuffed)
 
 /mob/living/carbon/proc/escape_legcuffs()
-	if(!canClick())
-		return
+	if(!(last_special <= world.time)) return
 
-	setClickCooldown(100)
+	next_move = world.time + 100
+	last_special = world.time + 100
 
 	if(can_break_cuffs()) //Don't want to do a lot of logic gating here.
 		break_legcuffs()
@@ -150,15 +149,14 @@
 	return ..()
 
 /mob/living/carbon/escape_buckle()
-	if(!canClick())
-		return
-
-	setClickCooldown(100)
 	if(!buckled) return
+	if(!(last_special <= world.time)) return
 
 	if(!restrained())
 		..()
 	else
+		next_move = world.time + 100
+		last_special = world.time + 100
 		visible_message(
 			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
 			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"

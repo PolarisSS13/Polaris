@@ -73,7 +73,7 @@
 	whisper_verb = "whispers"
 	colour = "solcom"
 	key = "1"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 	//syllables are at the bottom of the file
 
@@ -107,23 +107,11 @@
 	space_chance = 10
 
 /datum/language/machine/get_random_name()
-	var/new_name
 	if(prob(70))
-		new_name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+		name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	else
-		new_name = pick(ai_names)
-	return new_name
-
-/datum/language/resomi
-	name = "Resomi"
-	desc = "A trilling language spoken by the diminutive Resomi."
-	speech_verb = "chirps"
-	ask_verb = "chirrups"
-	exclaim_verb = "trills"
-	colour = "alien"
-	key = "v"
-	flags = WHITELISTED
-	syllables = list("caw","caw","caw","caw","ka")
+		name = pick(ai_names)
+	return name
 
 //Syllable Lists
 /*
