@@ -128,6 +128,7 @@
 	S["eyes_blue"]			>> b_eyes
 	S["underwear"]			>> underwear
 	S["undershirt"]			>> undershirt
+	S["socks"]				>> socks
 	S["backbag"]			>> backbag
 	S["b_type"]				>> b_type
 
@@ -199,6 +200,9 @@
 
 	if(isnum(undershirt))
 		undershirt = undershirt_t[undershirt_t[undershirt]]
+
+	if(isnum(socks))
+		socks = socks_t[socks_t[socks]]
 
 	if(isnull(language)) language = "None"
 	if(isnull(spawnpoint)) spawnpoint = "Arrivals Shuttle"
@@ -283,6 +287,7 @@
 	S["eyes_blue"]			<< b_eyes
 	S["underwear"]			<< underwear
 	S["undershirt"]			<< undershirt
+	S["socks"]				<< socks
 	S["backbag"]			<< backbag
 	S["b_type"]				<< b_type
 	S["spawnpoint"]			<< spawnpoint
