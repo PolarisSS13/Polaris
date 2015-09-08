@@ -302,6 +302,11 @@
 		mymob.nutrition_icon.screen_loc = ui_nutrition
 		hud_elements |= mymob.nutrition_icon
 
+	mymob.ling_chem_display = new /obj/screen/ling/chems()
+	mymob.ling_chem_display.screen_loc = ui_ling_chemical_display
+	mymob.ling_chem_display.icon_state = "ling_chems"
+	hud_elements |= mymob.ling_chem_display
+
 	mymob.blind = new /obj/screen()
 	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
 	mymob.blind.icon_state = "blackimageoverlay"
@@ -392,4 +397,12 @@
 		h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 	undershirt = null
 	underwear = null
+	socks = null
 	regenerate_icons()
+
+/obj/screen/ling
+	invisibility = 101
+
+/obj/screen/ling/chems
+	name = "chemical storage"
+	icon_state = "power_display"
