@@ -142,6 +142,7 @@ area/space/atmosalert()
 
 /area/shuttle
 	requires_power = 0
+	flags = RAD_SHIELDED
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
