@@ -185,7 +185,7 @@
 	icon_state = "duffle_sec"
 	item_state = "duffle_sec"
 
-/obj/item/weapon/storage/backpack/dufflebag/engineering
+/obj/item/weapon/storage/backpack/dufflebag/eng
 	name = "industrial dufflebag"
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon_state = "duffle_eng"
