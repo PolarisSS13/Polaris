@@ -183,8 +183,26 @@ var/global/list/gear_datums = list()
 	slot = slot_head
 
 /datum/gear/hairflower
-	display_name = "hair flower pin"
+	display_name = "hair flower pin, red"
 	path = /obj/item/clothing/head/hairflower
+	cost = 1
+	slot = slot_head
+
+/datum/gear/yhairflower
+	display_name = "hair flower pin, yellow"
+	path = /obj/item/clothing/head/hairflower/yellow
+	cost = 1
+	slot = slot_head
+
+/datum/gear/phairflower
+	display_name = "hair flower pin, pink"
+	path = /obj/item/clothing/head/hairflower/pink
+	cost = 1
+	slot = slot_head
+
+/datum/gear/bhairflower
+	display_name = "hair flower pin, blue"
+	path = /obj/item/clothing/head/hairflower/blue
 	cost = 1
 	slot = slot_head
 
