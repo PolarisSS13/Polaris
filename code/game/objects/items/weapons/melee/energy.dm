@@ -14,8 +14,8 @@
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
-//	sharp = 1
-//	edge = 1
+	sharp = 1
+	edge = 1
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 	apply_attackmode_to_weapon()
