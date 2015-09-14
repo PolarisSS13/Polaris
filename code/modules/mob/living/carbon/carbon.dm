@@ -153,6 +153,8 @@
 		src.hands.set_dir(NORTH)
 	else
 		src.hands.set_dir(SOUTH)*/
+	if(mind && hud_used)
+		attackmode_display.update_icon()
 	return
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.

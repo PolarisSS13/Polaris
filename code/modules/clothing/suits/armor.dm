@@ -326,6 +326,7 @@
 	desc = "A heavily armored suit that protects against moderate damage."
 	icon_state = "heavy"
 	item_state = "swat_suit"
+	armor = list(melee = 70, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
 	w_class = 4//bulky item
 	gas_transfer_coefficient = 0.90
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS

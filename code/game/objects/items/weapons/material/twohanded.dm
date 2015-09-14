@@ -64,6 +64,7 @@
 	return ..()
 
 /obj/item/weapon/material/twohanded/dropped(mob/user as mob)
+	..()
 	//handles unwielding a twohanded weapon when dropped as well as clearing up the offhand
 	if(user)
 		var/obj/item/weapon/material/twohanded/O = user.get_inactive_hand()
@@ -76,6 +77,7 @@
 	item_state = icon_state
 
 /obj/item/weapon/material/twohanded/pickup(mob/user)
+	..()
 	unwield()
 
 /obj/item/weapon/material/twohanded/attack_self(mob/user as mob)

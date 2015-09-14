@@ -11,6 +11,53 @@
 	2 - fullblock
 */
 /mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/absorb_text = null, var/soften_text = null)
+	if(Debug2)	world.log << "## DEBUG: getarmor() was called."
+	var/armor = getarmor(def_zone, attack_flag)
+	if(armor)
+		var/armor_variance_range = round(armor * 0.25) //Armor's effectiveness has a +25%/-25% variance.
+		var/armor_variance = rand(-armor_variance_range, armor_variance_range) //Get a random number between -25% and +25% of the armor's base value
+		if(Debug2)	world.log << "## DEBUG: The range of armor variance is [armor_variance_range].  The variance picked by RNG is [armor_variance]."
+		armor = min(armor + armor_variance,100) //Now we calcuate damage using the new armor percentage.
+		if(armor >= 100)
+			if(absorb_text)
+				src << "<span class='danger'>[absorb_text]</span>"
+			else
+				src << "<span class='danger'>Your armor absorbs the blow!</span>"
+		else if(armor > 0)
+			if(soften_text)
+				src << "<span class='danger'>[soften_text]</span>"
+			else
+				src << "<span class='danger'>Your armor softens the blow!</span>"
+		if(Debug2)	world.log << "## DEBUG: Armor when [src] was attacked was [armor]."
+	return armor
+
+/*
+/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null, armour_penetration, penetrated_text)
+	var/armor = getarmor(def_zone, attack_flag)
+
+	//the if "armor" check is because this is used for everything on /living, including humans
+	if(armor && armour_penetration)
+		armor = max(0, armor - armour_penetration)
+		if(penetrated_text)
+			src << "<span class='userdanger'>[penetrated_text]</span>"
+		else
+			src << "<span class='userdanger'>Your armor was penetrated!</span>"
+
+	if(armor >= 100)
+		if(absorb_text)
+			src << "<span class='userdanger'>[absorb_text]</span>"
+		else
+			src << "<span class='userdanger'>Your armor absorbs the blow!</span>"
+	else if(armor > 0)
+		if(soften_text)
+			src << "<span class='userdanger'>[soften_text]</span>"
+		else
+			src << "<span class='userdanger'>Your armor softens the blow!</span>"
+	return armor
+*/
+
+/*
+/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/absorb_text = null, var/soften_text = null)
 	var/armor = getarmor(def_zone, attack_flag)
 	var/absorb = 0
 	if(prob(armor))
@@ -30,6 +77,8 @@
 			show_message("\red Your armor softens the blow!")
 		return 1
 	return 0
+*/
+
 
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
@@ -74,7 +123,12 @@
 	if(!P.nodamage)
 		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
 	P.on_hit(src, absorb, def_zone)
-	return absorb
+	if(absorb == 100)
+		return 2
+	else if (absorb >= 0)
+		return 1
+	else
+		return 0
 
 //Handles the effects of "stun" weapons
 /mob/living/proc/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
@@ -119,8 +173,7 @@
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
 
-		if(armor < 2)
-			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
+		apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
 
 		O.throwing = 0		//it hit, so stop moving
 
@@ -143,8 +196,9 @@
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
-			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			stagger(T = get_edge_target_turf(src,dir))
+//			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+//			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 			if(!O || !src) return
 
@@ -251,7 +305,7 @@
 		return 0
 
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
-	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame. 
+	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame.
 	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
 
 /mob/living/proc/reagent_permeability()

@@ -14,10 +14,11 @@
 	active = 1
 	force = active_force
 	throwforce = active_throwforce
-	sharp = 1
-	edge = 1
+//	sharp = 1
+//	edge = 1
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+	apply_attackmode_to_weapon()
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	anchored = 0
@@ -54,6 +55,13 @@
 		viewers(user) << pick("<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>", \
 		                      "<span class='danger'>\The [user] is falling on \the [src]! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
+
+/obj/item/weapon/melee/energy/handle_switch_attackmode(user)
+	if(!active)
+		user << "<span class='warning'>You need to activate \the [src] first.</span>"
+		return 0
+	switch_attackmode()
+
 
 /*
  * Energy Axe
@@ -115,6 +123,38 @@
 	edge = 1
 	var/blade_color
 
+	attackmodes = list(
+		new /datum/attackmode/esword_slash,
+		new /datum/attackmode/esword_stab,
+		new /datum/attackmode/esword_block
+		)
+
+//Not subclassed under /default/ due to the esword starting with 3 force.
+/datum/attackmode/esword_slash
+	name = "slash"
+	name_short = "slash"
+	icon_state = "esword-slash"
+	force = 30
+	sharp = 1
+	edge = 1
+
+/datum/attackmode/esword_stab
+	name = "stab"
+	sharp = 1
+	edge = 0
+	name_short = "stab"
+	force = 40
+	icon_state = "esword-stab"
+	attack_verb = list("stabbed", "impaled", "pierced")
+
+/datum/attackmode/esword_block
+	name = "block"
+	name_short = "block"
+	force = 20
+	sharp = 1
+	edge = 1
+	icon_state = "esword-block"
+
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
 	if(!istype(loc,/mob))
@@ -122,18 +162,23 @@
 
 /obj/item/weapon/melee/energy/sword/New()
 	blade_color = pick("red","blue","green","purple")
+	..()
 
 /obj/item/weapon/melee/energy/sword/green/New()
 	blade_color = "green"
+	..()
 
 /obj/item/weapon/melee/energy/sword/red/New()
 	blade_color = "red"
+	..()
 
 /obj/item/weapon/melee/energy/sword/blue/New()
 	blade_color = "blue"
+	..()
 
 /obj/item/weapon/melee/energy/sword/purple/New()
 	blade_color = "purple"
+	..()
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
