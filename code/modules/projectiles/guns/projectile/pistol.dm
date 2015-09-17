@@ -9,7 +9,7 @@
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/detective
-	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
+	desc = "A Martian recreation of an old Terran pistol. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
@@ -28,6 +28,22 @@
 	if(src && input && !M.stat && in_range(M,src))
 		name = input
 		M << "You name the gun [input]. Say hello to your new friend."
+		return 1
+
+/obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
+	set name = "Reskin gun"
+	set category = "Object"
+	set desc = "Click to reskin your gun."
+
+	var/mob/M = usr
+	var/list/options = list()
+	options["NT Mk. 58"] = "secguncomp"
+	options["NT Mk. 58 Custom"] = "secgundark"
+	options["Colt M1911"] = "colt"
+	var/choice = input(M,"What do you want to skin the gun to?","Reskin Gun") in options
+	if(src && choice && !M.stat && in_range(M,src))
+		icon_state = options[choice]
+		M << "Your gun is now skinned as [choice]. Say hello to your new friend."
 		return 1
 
 /obj/item/weapon/gun/projectile/sec
@@ -173,7 +189,7 @@
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
-	
+
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/c9mmf             = "9mm",
@@ -194,7 +210,7 @@
 /obj/item/weapon/gun/projectile/pirate/New()
 	ammo_type = pick(ammo_types)
 	desc += " Uses [ammo_types[ammo_type]] rounds."
-	
+
 	var/obj/item/ammo_casing/ammo = ammo_type
 	caliber = initial(ammo.caliber)
 	..()
