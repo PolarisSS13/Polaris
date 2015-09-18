@@ -39,6 +39,7 @@
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "eshield0" // eshield1 for expanded
+	slot_flags = SLOT_EARS
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 5.0
@@ -64,6 +65,7 @@
 		force = 10
 		icon_state = "eshield[active]"
 		w_class = 4
+		slot_flags = null
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] is now active.</span>"
 
@@ -71,6 +73,7 @@
 		force = 3
 		icon_state = "eshield[active]"
 		w_class = 1
+		slot_flags = SLOT_EARS
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] can now be concealed.</span>"
 
@@ -120,6 +123,7 @@
 	desc = "An advanced riot shield made of lightweight materials that collapses for easy storage."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "teleriot0"
+	slot_flags = null
 	force = 3
 	throwforce = 3
 	throw_speed = 3
@@ -143,12 +147,14 @@
 		throwforce = 5
 		throw_speed = 2
 		w_class = 4
+		slot_flags = SLOT_BACK
 		user << "<span class='notice'>You extend \the [src].</span>"
 	else
 		force = 3
 		throwforce = 3
 		throw_speed = 3
 		w_class = 3
+		slot_flags = null
 		user << "<span class='notice'>[src] can now be concealed.</span>"
 
 	if(istype(user,/mob/living/carbon/human))
