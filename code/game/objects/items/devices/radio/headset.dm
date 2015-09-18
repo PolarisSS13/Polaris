@@ -85,7 +85,7 @@
 	ks2type = /obj/item/device/encryptionkey/headset_sec
 
 /obj/item/device/radio/headset/headset_sec/alt
-	name = "security radio headset"
+	name = "security bowman headset"
 	desc = "This is used by your elite security force."
 	icon_state = "sec_headset_alt"
 	item_state = "sec_headset_alt"
@@ -99,7 +99,7 @@
 	ks2type = /obj/item/device/encryptionkey/headset_eng
 
 /obj/item/device/radio/headset/headset_eng/alt
-	name = "engineering radio headset"
+	name = "engineering bowman headset"
 	desc = "When the engineers wish to chat like girls."
 	icon_state = "eng_headset_alt"
 	item_state = "eng_headset_alt"
@@ -120,7 +120,7 @@
 	ks2type = /obj/item/device/encryptionkey/headset_med
 
 /obj/item/device/radio/headset/headset_med/alt
-	name = "medical radio headset"
+	name = "medical bowman headset"
 	desc = "A headset for the trained staff of the medbay."
 	icon_state = "med_headset_alt"
 	item_state = "med_headset_alt"
@@ -148,7 +148,7 @@
 	ks2type = /obj/item/device/encryptionkey/headset_com
 
 /obj/item/device/radio/headset/headset_com/alt
-	name = "command radio headset"
+	name = "command bowman headset"
 	desc = "A headset with a commanding channel."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -163,7 +163,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/captain
 
 /obj/item/device/radio/headset/heads/captain/alt
-	name = "captain's headset"
+	name = "captain's bowman headset"
 	desc = "The headset of the boss."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -192,7 +192,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/rd
 
 /obj/item/device/radio/headset/heads/rd/alt
-	name = "research director's headset"
+	name = "research director's bowman headset"
 	desc = "Headset of the researching God."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -206,7 +206,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/heads/hos/alt
-	name = "head of security's headset"
+	name = "head of security's bowman headset"
 	desc = "The headset of the man who protects your worthless lifes."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -220,7 +220,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/ce
 
 /obj/item/device/radio/headset/heads/ce/alt
-	name = "chief engineer's headset"
+	name = "chief engineer's bowman headset"
 	desc = "The headset of the guy who is in charge of morons"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -234,7 +234,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/cmo
 
 /obj/item/device/radio/headset/heads/cmo/alt
-	name = "chief medical officer's headset"
+	name = "chief medical officer's bowman headset"
 	desc = "The headset of the highly trained medical chief."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -248,7 +248,7 @@
 	ks2type = /obj/item/device/encryptionkey/heads/hop
 
 /obj/item/device/radio/headset/heads/hop/alt
-	name = "head of personnel's headset"
+	name = "head of personnel's bowman headset"
 	desc = "The headset of the guy who will one day be captain."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
@@ -291,7 +291,7 @@
 	ks2type = /obj/item/device/encryptionkey/ert
 
 /obj/item/device/radio/headset/ert/alt
-	name = "emergency response team radio headset"
+	name = "emergency response team bowman headset"
 	desc = "The headset of the boss's boss."
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"

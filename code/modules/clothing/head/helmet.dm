@@ -1,7 +1,7 @@
 /obj/item/clothing/head/helmet
 	name = "helmet"
-	desc = "Standard Security gear. Protects the head from impacts."
-	icon_state = "helmet_new"
+	desc = "Standard Security gear. Protects the head from impacts. This one has a adjustable visor."
+	icon_state = "helmet"
 	item_state_slots = list(
 		slot_l_hand_str = "helmet",
 		slot_r_hand_str = "helmet",
@@ -15,20 +15,53 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+	action_button_name = "Toggle Visor"
+	var/flipped = 0 //Piggybacked from cap flipping.
+
+/obj/item/clothing/head/helmet/dropped()
+	src.icon_state = initial(icon_state)
+	src.flipped=0
+	..()
+
+/obj/item/clothing/head/helmet/attack_self(mob/user)
+	src.flipped = !src.flipped
+	if(src.flipped)
+		icon_state = "[icon_state]up"
+		user << "You activate the visor."
+	else
+		src.icon_state = initial(icon_state)
+		user << "You push the visor into the helmet."
+	update_clothing_icon()	//so our mob-overlays update
 
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
-	icon_state = "riot_new"
+	icon_state = "riot"
 	flags = HEADCOVERSEYES
 	armor = list(melee = 82, bullet = 15, laser = 5,energy = 5, bomb = 5, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
+	action_button_name = "Toggle Visor"
+
+/obj/item/clothing/head/helmet/riot/dropped()
+	src.icon_state = initial(icon_state)
+	src.flipped=0
+	..()
+
+/obj/item/clothing/head/helmet/riot/attack_self(mob/user)
+	src.flipped = !src.flipped
+	if(src.flipped)
+		icon_state = "[icon_state]up"
+		user << "You flip the visor up."
+	else
+		src.icon_state = initial(icon_state)
+		user << "You flip the visor down."
+	update_clothing_icon()	//so our mob-overlays update
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
-	desc = "They're often used by highly trained Swat Members."
-	icon_state = "swat_new"
+	desc = "They're often used by highly trained SWAT Members."
+	icon_state = "swat"
 	flags = HEADCOVERSEYES
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
