@@ -85,7 +85,7 @@
 #define ui_health "14:28,7:15"
 #define ui_internal "14:28,8:17"
 									//borgs
-#define ui_borg_health "14:28,6:13" //borgs have the health display where humans have the pressure damage indicator.
+// #define ui_borg_health "14:28,6:13" //borgs have the health display where humans have the pressure damage indicator.
 #define ui_alien_health "14:28,6:13" //aliens have the health display where humans have the pressure damage indicator.
 
 #define ui_ling_chemical_display "EAST,NORTH-6:7"

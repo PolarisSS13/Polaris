@@ -11,7 +11,7 @@
 	speed = -1
 	a_intent = I_HURT
 	stop_automated_movement = 1
-	status_flags = CANPUSH
+	status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH
 	universal_speak = 0
 	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
@@ -102,7 +102,7 @@
 	speed = 3
 	environment_smash = 2
 	attack_sound = 'sound/weapons/heavysmash.ogg'
-	status_flags = 0
+//	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
 

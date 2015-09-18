@@ -51,5 +51,8 @@
 	var/mob/living/L = .
 	if(istype(L))
 		if(prob(15))
+			L.stagger(src,strength=3) //Carp should work for their GG no re.
+			/*
 			L.Weaken(3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+			*/

@@ -64,6 +64,8 @@
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget()
 	stop_automated_movement = 1
+	if(stat || weakened || paralysis || resting || sleeping )
+		return
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
@@ -134,6 +136,10 @@
 		walk(src, 0)
 		return 0
 	if(client)
+		return 0
+
+	if(weakened || paralysis || resting || sleeping )
+		walk(src, 0)
 		return 0
 
 	if(!stat)

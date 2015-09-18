@@ -154,6 +154,11 @@
 		mymob.purged.name = "purged"
 		mymob.purged.screen_loc = ui_construct_purge
 
+	mymob.balance_display = new /obj/screen/balance()
+	mymob.balance_display.screen_loc = ui_balance
+	mymob.balance_display.icon = 'icons/mob/screen1_construct.dmi'
+	mymob.balance_display.icon_state = "balance"
+
 	mymob.client.screen = null
 
-	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash)
+	mymob.client.screen += list(mymob.fire, mymob.healths, mymob.pullin, mymob.zone_sel, mymob.purged, mymob.flash, mymob.balance_display)

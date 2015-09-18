@@ -38,9 +38,10 @@
 	force = force_wielded
 	name = "[base_name] (Wielded)"
 	update_icon()
+	apply_attackmode_to_weapon()
 
 /obj/item/weapon/material/twohanded/update_force()
-	base_name = name
+//	base_name = name
 	if(sharp || edge)
 		force_wielded = material.get_edge_damage()
 	else
@@ -53,7 +54,14 @@
 
 /obj/item/weapon/material/twohanded/New()
 	..()
+	base_name = name
 	update_icon()
+
+/obj/item/weapon/material/twohanded/handle_switch_attackmode(user)
+	if(!wielded)
+		user << "<span class='warning'>You need to wield \the [src] in both hands first.</span>"
+		return 0
+	switch_attackmode()
 
 /obj/item/weapon/material/twohanded/mob_can_equip(M as mob, slot)
 	//Cannot equip wielded items.

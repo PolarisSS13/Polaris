@@ -4,6 +4,15 @@
 /mob/living/silicon
 	var/poise = 2 //Borgs can't wear armor so they innately get poise.
 
+/mob/living/simple_animal
+	var/poise = 0 //Same for simple animals like carp and constructs.
+
+/mob/living/simple_animal/construct/armoured
+	poise = 2 //Juggs are huge and hard to knock down.
+
+/mob/living/simple_animal/construct/behemoth
+	poise = 4
+
 /mob/living/silicon/ai
 	poise = 8 //It'll be amusing if someone sends the AI flying with a sledgehammer or something.
 
@@ -11,6 +20,9 @@
 	return 0
 
 /mob/living/silicon/get_poise()
+	return poise
+
+/mob/living/simple_animal/get_poise()
 	return poise
 
 /mob/living/carbon/human/get_poise()

@@ -74,7 +74,8 @@
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
-		target.apply_effect(3, WEAKEN, armour)
+//		target.apply_effect(3, WEAKEN, armour)
+		target.stagger(user,strength = 1)
 
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
