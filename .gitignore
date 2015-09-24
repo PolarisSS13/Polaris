@@ -9,3 +9,6 @@ Thumbs.db
 data/
 cfg/
 
+config/admin_ranks.txt
+config/admins.txt
+icons/mob/custom_synthetic.dmi
