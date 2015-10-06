@@ -194,7 +194,7 @@ emp_act
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
-		return 1
+		return 0
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
@@ -234,7 +234,7 @@ emp_act
 		weapon_sharp = 0
 		weapon_edge = 0
 
-	if(armor >= 2)			return 0
+	if(armor >= 100)		return 0
 	if(!effective_force)	return 0
 	var/Iforce = effective_force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
@@ -344,8 +344,7 @@ emp_act
 		src.visible_message("\red [src] has been hit in the [hit_area] by [O].")
 		var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].") //I guess "melee" is the best fit here
 
-		if(armor < 2)
-			apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
+		apply_damage(throw_damage, dtype, zone, armor, is_sharp(O), has_edge(O), O)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
@@ -384,8 +383,9 @@ emp_act
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = get_dir(O.throw_source, src)
 
-			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			stagger(src,T = get_edge_target_turf(src,dir))
+//			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+//			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
 			if(!O || !src) return
 

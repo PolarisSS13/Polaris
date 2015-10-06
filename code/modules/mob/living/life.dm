@@ -8,6 +8,8 @@
 		return
 	var/datum/gas_mixture/environment = loc.return_air()
 
+	life_tick++
+
 	if(stat != DEAD)
 		//Breathing, if applicable
 		handle_breathing()
@@ -23,6 +25,9 @@
 
 		//Random events (vomiting etc)
 		handle_random_events()
+
+		//Regenerate our balance.
+		handle_balance()
 
 		. = 1
 

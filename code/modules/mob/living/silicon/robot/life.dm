@@ -20,6 +20,7 @@
 		process_killswitch()
 		process_locks()
 		process_queued_alarms()
+		handle_balance()
 	update_canmove()
 
 /mob/living/silicon/robot/proc/clamp_values()

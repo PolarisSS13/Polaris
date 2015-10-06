@@ -5,11 +5,27 @@
 	base_icon = "metalbat"
 	item_state = "metalbat"
 	throwforce = 7
-	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
+	attack_verb = list("smashed", "beaten", "struck")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	default_material = "wood"
 	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
+
+	attackmodes = list(
+		new /datum/attackmode/material/default/bat_smash,
+		new /datum/attackmode/material/bat_slam
+		)
+
+/datum/attackmode/material/default/bat_smash
+	name = "smash"
+	name_short = "smash"
+
+/datum/attackmode/material/bat_slam
+	name = "slam"
+	name_short = "slam"
+	attack_verb = list("slammed", "smacked", "battered", "bonked")
+	force_divisor = 0.7 //15 damage with normal metal.
+	stagger = 2
 
 //Predefined materials go here.
 /obj/item/weapon/material/twohanded/baseballbat/metal/New(var/newloc)

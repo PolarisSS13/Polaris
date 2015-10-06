@@ -43,6 +43,18 @@
 
 	armor_stats += "\n"
 
+	switch(poise)
+		if(1)
+			armor_stats += "This would help you keep your balance when being staggered."
+		if(2)
+			armor_stats += "Wearing this will help protect you against being knocked down."
+		if(3 to 4)
+			armor_stats += "This grants a significant amount of protection against being knocked down from strong forces."
+		if(5 to 6)
+			armor_stats += "You would be very hard to knock down if you wore this."
+		if(7 to 10)
+			armor_stats += "This will protect you from all but the strongest forces being able to floor you."
+
 	if(flags & AIRTIGHT)
 		armor_stats += "It is airtight. \n"
 

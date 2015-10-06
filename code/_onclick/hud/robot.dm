@@ -75,7 +75,7 @@ var/obj/screen/robot_inventory
 	mymob.healths.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.name = "health"
-	mymob.healths.screen_loc = ui_borg_health
+	mymob.healths.screen_loc = ui_health
 
 //Installed Module
 	mymob.hands = new /obj/screen()
@@ -132,6 +132,14 @@ var/obj/screen/robot_inventory
 	mymob.pullin.name = "pull"
 	mymob.pullin.screen_loc = ui_borg_pull
 
+	mymob.balance_display = new /obj/screen/balance()
+	mymob.balance_display.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.balance_display.icon_state = "balance4"
+	mymob.balance_display.screen_loc = ui_balance
+
+	mymob.attackmode_display = new /obj/screen/attackmode()
+	mymob.attackmode_display.screen_loc = ui_attackmode
+
 	mymob.blind = new /obj/screen()
 	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
 	mymob.blind.icon_state = "blackimageoverlay"
@@ -177,7 +185,7 @@ var/obj/screen/robot_inventory
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, mymob.gun_setting_icon, robot_inventory) //, mymob.rest, mymob.sleep, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.balance_display, mymob.attackmode_display, mymob.blind, mymob.flash, mymob.gun_setting_icon, robot_inventory) //, mymob.rest, mymob.sleep, mymob.mach )
 	mymob.client.screen += src.adding + src.other
 
 	return

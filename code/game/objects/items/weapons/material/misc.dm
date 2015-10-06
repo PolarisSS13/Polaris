@@ -29,6 +29,7 @@
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
 
+//Why is this not a child of other knives?
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"
 	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Nyx."
@@ -37,6 +38,11 @@
 	item_state = "knife"
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
+
+	attackmodes = list(
+		new /datum/attackmode/material/default/knife_slash,
+		new /datum/attackmode/material/knife_stab
+		)
 
 /obj/item/weapon/material/hatchet/tacknife/combatknife
 	name = "combat knife"
@@ -48,6 +54,19 @@
 	thrown_force_divisor = 1.75 // 20 with weight 20 (steel)
 	attack_verb = list("sliced", "stabbed", "chopped", "cut")
 	applies_material_colour = 1
+
+	attackmodes = list(
+		new /datum/attackmode/material/default/knife_slash,
+		new /datum/attackmode/material/strong_knife_stab
+		)
+
+/datum/attackmode/material/strong_knife_stab
+	name = "stab"
+	sharp = 1
+	edge = 0
+	name_short = "stab"
+	force_divisor = 0.50 //Will hit for 30 brute with hardness 60 (steel)
+	icon_state = "knife-stab"
 
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"

@@ -50,7 +50,7 @@
 
 	//TODO: seperate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
-	life_tick++
+//	life_tick++  //Moved to mob/living
 
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
@@ -913,11 +913,11 @@
 		return 0
 
 	if(status_flags & GODMODE)	return 0
-
+/*
 	//SSD check, if a logged player is awake put them back to sleep!
 	if(sleeping < 2 && species.show_ssd && (!client || !key || player_logged))
 		sleeping = 2
-
+*/
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 		blinded = 1
 		silent = 0

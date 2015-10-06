@@ -34,6 +34,8 @@
 	var/obj/screen/gun/run/gun_run_icon = null
 	var/obj/screen/gun/mode/gun_setting_icon = null
 	var/obj/screen/ling/chems/ling_chem_display = null
+	var/obj/screen/balance/balance_display = null
+	var/obj/screen/attackmode/attackmode_display = null
 
 	//spells hud icons - this interacts with add_spell and remove_spell
 	var/list/obj/screen/movable/spell_master/spell_masters = null

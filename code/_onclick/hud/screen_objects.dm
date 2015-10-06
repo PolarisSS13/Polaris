@@ -131,6 +131,26 @@
 	screen_loc = ui_zonesel
 	var/selecting = "chest"
 
+/obj/screen/ling
+	invisibility = 101
+
+/obj/screen/ling/chems
+	name = "chemical storage"
+	icon_state = "power_display"
+	desc = "This shows how full of chemicals you are.  You use chemicals to use changeling powers."
+
+/obj/screen/balance
+	name = "balance"
+	icon_state = "balance"
+	desc = "This shows how close to falling down you are."
+	invisibility = 101
+
+/obj/screen/attackmode
+	name = "attack mode"
+	icon_state = "blank"
+	desc = "Click this to change your method of attack with the weapon in your hand."
+	invisibility = 101
+
 /obj/screen/zone_sel/Click(location, control,params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
@@ -503,3 +523,39 @@
 				usr.update_inv_r_hand(0)
 				usr.next_move = world.time+6
 	return 1
+
+/obj/screen/attackmode/Click()
+	if(isliving(usr))
+		var/mob/living/L = usr
+		var/obj/O = L.get_active_hand()
+		if(O) //I'm paranoid.
+			if(istype(O,/obj/item/weapon)) //I think stuff like health analyzers aren't classified as weapons.
+				var/obj/item/weapon/W = O
+				W.handle_switch_attackmode(L)
+				update_icon()
+
+/obj/screen/attackmode/update_icon()
+	if(isliving(usr))
+		var/mob/living/L = usr
+		var/obj/O = L.get_active_hand()
+		if(!O) //We don't have anything in our hand.
+			invisibility = 101
+		if(O) //We're holding something!
+			if(istype(O,/obj/item/weapon)) //Some things like AI cards and analyzers aren't under the weapon class.
+				var/obj/item/weapon/W = O
+				if(W.get_number_of_attackmodes() >= 2) //Check if we have more than one attack mode.
+					invisibility = 0
+					underlays.Cut()
+					//For reasons unknown to me, the icons only work if they're not consistant in which image is underlayed first
+					//depending on if an object reference or an image() is used.  I blame BYOND.
+					if(W.current_attackmode && W.current_attackmode.icon_state)
+						underlays += image(W.current_attackmode.icon, icon_state = W.current_attackmode.icon_state)
+						underlays += image('icons/mob/screen1.dmi',"template")
+					else
+						underlays += image('icons/mob/screen1.dmi',"template")
+						underlays += W //If we lack a special icon for our attackmode, just show the weapon itself.
+					if(W.current_attackmode)
+						maptext = "<font color='#B70000'><div align='center'>[W.current_attackmode.name_short]</div></font>"
+				else
+					invisibility = 101
+

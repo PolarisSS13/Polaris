@@ -60,11 +60,14 @@
 #define ui_borg_panel "14:28,2:7"
 
 //Gun buttons
-#define ui_gun1 "13:26,3:7"
-#define ui_gun2 "14:28, 4:7"
-#define ui_gun3 "13:26,4:7"
+#define ui_gun1 "14:28, 4:7"
+#define ui_gun2 "13:26, 4:7"
+#define ui_gun3 "13:26, 5:7"
 #define ui_gun_select "14:28,3:7"
-#define ui_gun4 "12:24,3:7"
+#define ui_gun4 "12:24,4:7"
+
+//Melee button
+#define ui_attackmode "13:26,3:7"
 
 //Upper-middle right (damage indicators)
 #define ui_toxin "14:28,13:27"
@@ -82,10 +85,12 @@
 #define ui_health "14:28,7:15"
 #define ui_internal "14:28,8:17"
 									//borgs
-#define ui_borg_health "14:28,6:13" //borgs have the health display where humans have the pressure damage indicator.
+// #define ui_borg_health "14:28,6:13" //borgs have the health display where humans have the pressure damage indicator.
 #define ui_alien_health "14:28,6:13" //aliens have the health display where humans have the pressure damage indicator.
 
 #define ui_ling_chemical_display "EAST,NORTH-6:7"
+
+#define ui_balance "13:32,7:15"
 
 //Pop-up inventory
 #define ui_shoes "2:8,1:5"

@@ -307,8 +307,16 @@
 	else
 		usr << "<span class='danger'>This weapon is ineffective, it does no damage.</span>"
 
-	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
+	if(O.attack_verb)
+		visible_message("<span class='danger'>\The [src] has been [pick(O.attack_verb)] with \the [O] by [user].</span>")
+	else
+		visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
+
 	user.do_attack_animation(src)
+	if(istype(O, /obj/item/weapon))
+		var/obj/item/weapon/W = O
+		if(W.stagger)
+			src.stagger(user, strength = W.stagger)
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later

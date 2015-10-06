@@ -307,6 +307,15 @@
 	mymob.ling_chem_display.icon_state = "ling_chems"
 	hud_elements |= mymob.ling_chem_display
 
+	mymob.balance_display = new /obj/screen/balance()
+	mymob.balance_display.screen_loc = ui_balance
+	mymob.balance_display.icon_state = "balance"
+	hud_elements |= mymob.balance_display
+
+	mymob.attackmode_display = new /obj/screen/attackmode()
+	mymob.attackmode_display.screen_loc = ui_attackmode
+	hud_elements |= mymob.attackmode_display
+
 	mymob.blind = new /obj/screen()
 	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
 	mymob.blind.icon_state = "blackimageoverlay"
@@ -399,10 +408,3 @@
 	underwear = null
 	socks = null
 	regenerate_icons()
-
-/obj/screen/ling
-	invisibility = 101
-
-/obj/screen/ling/chems
-	name = "chemical storage"
-	icon_state = "power_display"

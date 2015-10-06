@@ -62,11 +62,31 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	unbreakable = 1
 
+	attackmodes = list(
+		new /datum/attackmode/material/default/knife_slash,
+		new /datum/attackmode/material/knife_stab
+		)
+
+/datum/attackmode/material/default/knife_slash
+	name = "slash"
+	name_short = "slash"
+	icon_state = "knife-slash"
+
+/datum/attackmode/material/knife_stab
+	name = "stab"
+	sharp = 1
+	edge = 0
+	name_short = "stab"
+	force_divisor = 0.25 //Will hit for 15 brute with hardness 60 (steel)
+	icon_state = "knife-stab"
+
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>", \
 	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>", \
 	                      "<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>")
 	return (BRUTELOSS)
+
+
 
 /obj/item/weapon/material/knife/hook
 	name = "meat hook"
@@ -88,3 +108,5 @@
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+	attackmodes = list() //Don't want to inherit stabbing on a clever.

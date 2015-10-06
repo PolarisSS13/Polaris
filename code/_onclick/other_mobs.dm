@@ -154,5 +154,10 @@
 		return
 
 	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc && attack_sound)
-		playsound(loc, attack_sound, 50, 1, 1)
+	if(A.attack_generic(src,damage,attacktext,environment_smash) && loc)
+		if(stagger)
+			if(istype(A,/mob/living/))
+				var/mob/living/L = A
+				L.stagger(user = src, strength = stagger)
+		if(attack_sound)
+			playsound(loc, attack_sound, 50, 1, 1)

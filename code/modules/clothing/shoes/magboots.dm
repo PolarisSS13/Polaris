@@ -22,6 +22,7 @@
 		magpulse = 0
 		set_slowdown()
 		force = 3
+		poise = 0
 		if(icon_base) icon_state = "[icon_base]0"
 		user << "You disable the mag-pulse traction system."
 	else
@@ -29,6 +30,7 @@
 		magpulse = 1
 		set_slowdown()
 		force = 5
+		poise = 1
 		if(icon_base) icon_state = "[icon_base]1"
 		user << "You enable the mag-pulse traction system."
 	user.update_inv_shoes()	//so our mob-overlays update
