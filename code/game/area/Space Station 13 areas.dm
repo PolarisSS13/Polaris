@@ -277,6 +277,7 @@ area/space/atmosalert()
 	name = "\improper Cryogenic Storage"
 
 /area/shuttle/cryo/station
+	flags = RAD_SHIELDED
 	icon_state = "shuttle2"
 
 /area/shuttle/cryo/centcom
@@ -794,7 +795,7 @@ area/space/atmosalert()
 	icon_state = "asmaint"
 
 /area/maintenance/apmaint
-	name = "Cargo Maintenance"
+	name = "Cargo Engineering Maintenance"
 	icon_state = "apmaint"
 
 /area/maintenance/maintcentral
@@ -845,6 +846,10 @@ area/space/atmosalert()
 	name = "Dormitory Maintenance"
 	icon_state = "maint_dormitory"
 
+/area/maintenance/holodeck
+	name = "Holodeck Maintenance"
+	icon_state = "maint_holodeck"
+
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
@@ -868,6 +873,14 @@ area/space/atmosalert()
 /area/maintenance/medbay_fore
 	name = "Medbay Maintenance - Fore"
 	icon_state = "maint_medbay_fore"
+
+/area/maintenance/pool
+	name = "Pool Maintenance"
+	icon_state = "maint_pool"
+
+/area/maintenance/research
+	name = "Research Maintenance"
+	icon_state = "maint_research"
 
 /area/maintenance/research_port
 	name = "Research Maintenance - Port"
@@ -940,6 +953,9 @@ area/space/atmosalert()
 /area/maintenance/substation/command // AI and central cluster. This one will be between HoP office and meeting room (probably).
 	name = "Command Substation"
 
+/area/maintenance/substation/dock // Bar, docks, hotel
+	name = "Dock Substation"
+
 /area/maintenance/substation/security // Security, Brig, Permabrig, etc.
 	name = "Security Substation"
 
@@ -992,36 +1008,48 @@ area/space/atmosalert()
 	icon_state = "construction"
 
 /area/hallway/secondary/entry/fore
-	name = "\improper Arrival Shuttle Hallway - Fore"
+	name = "\improper Shuttle Dock Hallway - Mid"
 	icon_state = "entry_1"
 
 /area/hallway/secondary/entry/port
-	name = "\improper Arrival Shuttle Hallway - Port"
+	name = "\improper Shuttle Dock Hallway - Port"
 	icon_state = "entry_2"
 
 /area/hallway/secondary/entry/starboard
-	name = "\improper Arrival Shuttle Hallway - Starboard"
+	name = "\improper Shuttle Dock Hallway - Starboard"
 	icon_state = "entry_3"
 
 /area/hallway/secondary/entry/aft
-	name = "\improper Arrival Shuttle Hallway - Aft"
+	name = "\improper Shuttle Dock Hallway - Aft"
 	icon_state = "entry_4"
 
 /area/hallway/secondary/entry/D1
-	name = "\improper Arrival Shuttle Hallway - Dock One"
+	name = "\improper Shuttle Dock Hallway - Dock One"
 	icon_state = "entry_D1"
 
 /area/hallway/secondary/entry/D2
-	name = "\improper Arrival Shuttle Hallway - Dock Two"
+	name = "\improper Shuttle Dock Hallway - Dock Two"
 	icon_state = "entry_D2"
 
 /area/hallway/secondary/entry/D3
-	name = "\improper Arrival Shuttle Hallway - Dock Three"
+	name = "\improper Shuttle Dock Hallway - Dock Three"
 	icon_state = "entry_D3"
+
+/area/hallway/secondary/entry/D4
+	name = "\improper Shuttle Dock Hallway - Dock Four"
+	icon_state = "entry_D4"
 
 /area/hallway/secondary/entry/docking_lounge
 	name = "\improper Docking Lounge"
 	icon_state = "docking_lounge"
+
+/area/hallway/secondary/escape/dock_escape_pod_hallway_port
+	name = "\improper Dock Escape Pod Hallway Port"
+	icon_state = "dock_escape_pod_hallway_port"
+
+/area/hallway/secondary/escape/dock_escape_pod_hallway_starboard
+	name = "\improper Dock Escape Pod Hallway Starboard"
+	icon_state = "dock_escape_pod_hallway_starboard"
 
 /area/hallway/secondary/escape/fore_port_escape_pod_hallway
 	name = "\improper Fore Port Escape Pod Hallway"
@@ -1035,13 +1063,25 @@ area/space/atmosalert()
 	name = "\improper Medical Escape Pod Hallway"
 	icon_state = "medical_escape_pod_hallway"
 
-/area/hallway/secondary/aft_civilian_hallway
-	name = "\improper Aft Civilian Hallway"
+/area/hallway/secondary/cargo_hallway
+	name = "\improper Cargo Hallway"
+	icon_state = "cargo_hallway"
+
+/area/hallway/secondary/civilian_hallway_aft
+	name = "\improper Civilian Hallway Aft"
 	icon_state = "aft_civilian_hallway"
 
-/area/hallway/secondary/fore_civilian_hallway
-	name = "\improper Fore Civilian Hallway"
+/area/hallway/secondary/civilian_hallway_fore
+	name = "\improper Civilian Hallway Fore"
 	icon_state = "fore_civilian_hallway"
+
+/area/hallway/secondary/civilian_hallway_mid
+	name = "\improper Civilian Hallway Mid"
+	icon_state = "mid_civilian_hallway"
+
+/area/hallway/secondary/chapel_hallway
+	name = "\improper Chapel Hallway"
+	icon_state = "chapel_hallway"
 
 /area/hallway/secondary/cryostorage_hallway
 	name = "\improper Cryostorage Hallway"
@@ -1281,6 +1321,10 @@ area/space/atmosalert()
 
 /area/crew_quarters/sleep/cryo
 	name = "\improper Cryogenic Storage"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/elevator
+	name = "\improper Main Elevator"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep_male
@@ -1548,6 +1592,10 @@ area/space/atmosalert()
 /area/engineering/workshop
 	name = "\improper Engineering Workshop"
 	icon_state = "engineering_workshop"
+
+/area/engineering/aft_hallway
+	name = "\improper Engineering Aft Hallway"
+	icon_state = "engineering_aft_hallway"
 
 
 
@@ -1844,6 +1892,10 @@ area/space/atmosalert()
 	name = "\improper Security - Armory"
 	icon_state = "armory"
 
+/area/security/briefing_room
+	name = "\improper Security - Briefing Room"
+	icon_state = "brig"
+
 /area/security/evidence_storage
 	name = "\improper Security - Equipment Storage"
 	icon_state = "security_equipment_storage"
@@ -2009,9 +2061,17 @@ area/space/atmosalert()
 	name = "\improper Research Foyer"
 	icon_state = "research_foyer"
 
+/area/rnd/research_foyer_auxiliary
+	name = "\improper Research Foyer Auxiliary"
+	icon_state = "research_foyer_aux"
+
 /area/rnd/research_restroom
 	name = "\improper Research Restroom"
 	icon_state = "research_restroom"
+
+/area/rnd/research_storage
+	name = "\improper Research Storage"
+	icon_state = "research_storage"
 
 /area/rnd/docking
 	name = "\improper Research Dock"
@@ -2091,24 +2151,31 @@ area/space/atmosalert()
 	name = "Secure Storage"
 	icon_state = "storage"
 
-/area/storage/emergency
+/area/storage/emergency_storage
+	flags = RAD_SHIELDED
+
+/area/storage/emergency_storage/emergency
 	name = "Starboard Emergency Storage"
 	icon_state = "emergencystorage"
 
-/area/storage/emergency2
+/area/storage/emergency_storage/emergency2
 	name = "Port Emergency Storage"
 	icon_state = "emergencystorage"
 
-/area/storage/emergency3
+/area/storage/emergency_storage/emergency3
 	name = "Central Emergency Storage"
 	icon_state = "emergencystorage"
 
-/area/storage/emergency4
+/area/storage/emergency_storage/emergency4
 	name = "Civilian Emergency Storage"
 	icon_state = "emergencystorage"
 
-/area/storage/emergency5
+/area/storage/emergency_storage/emergency5
 	name = "Dock Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/storage/emergency_storage/emergency6
+	name = "Cargo Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/tech

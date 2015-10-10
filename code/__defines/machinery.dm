@@ -44,6 +44,7 @@ var/list/restricted_camera_networks = list("thunder","ERT","NUKE","Secret")
 #define NETWORK_EXODUS "Exodus"
 #define NETWORK_MEDICAL "Medical"
 #define NETWORK_MINE "MINE"
+#define NETWORK_NORTHERN_STAR "Northern Star"
 #define NETWORK_RESEARCH "Research"
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
 #define NETWORK_PRISON "Prison"
