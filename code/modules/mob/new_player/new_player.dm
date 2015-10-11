@@ -298,7 +298,7 @@
 
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
-	if (src != usr)
+	if(src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 		usr << "\red The round is either not ready, or has already finished..."
