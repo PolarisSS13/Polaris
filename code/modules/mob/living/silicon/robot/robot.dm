@@ -47,6 +47,7 @@
 	var/module_state_3 = null
 
 	var/obj/item/device/radio/borg/radio = null
+	var/obj/item/device/communicator/integrated/communicator = null
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/weapon/cell/cell = null
 	var/obj/machinery/camera/camera = null
@@ -110,6 +111,8 @@
 	updateicon()
 
 	radio = new /obj/item/device/radio/borg(src)
+//	communicator = new /obj/item/device/communicator/integrated(src)
+//	communicator.register_device(src)
 	common_radio = radio
 
 	if(!scrambledcodes && !camera)
@@ -155,7 +158,7 @@
 /mob/living/silicon/robot/proc/init()
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
-	additional_law_channels["Binary"] = ":b"
+	additional_law_channels["Binary"] = "#b"
 	var/new_ai = select_active_ai_with_fewest_borgs()
 	if(new_ai)
 		lawupdate = 1
@@ -198,6 +201,11 @@
 	if (!rbPDA)
 		rbPDA = new/obj/item/device/pda/ai(src)
 	rbPDA.set_name_and_job(custom_name,"[modtype] [braintype]")
+
+/mob/living/silicon/robot/proc/setup_communicator()
+	if (!communicator)
+		communicator = new/obj/item/device/communicator/integrated(src)
+	communicator.register_device(src, "[modtype] [braintype]")
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
@@ -278,6 +286,9 @@
 
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
+
+	// as well as our communicator registration
+	setup_communicator()
 
 	//We also need to update name of internal camera.
 	if (camera)
