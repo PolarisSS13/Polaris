@@ -66,6 +66,7 @@
 	name = "cargo technician's jumpjeans"
 	desc = "Jeeeaaans! They're comfy!"
 	icon_state = "cargojf"
+	item_state = "cargojf"
 	worn_state = "cargojf"
 
 
