@@ -25,6 +25,8 @@
 
 /material/steel/generate_recipes()
 	..()
+	recipes += new/datum/stack_recipe("brass knuckles", /obj/item/weapon/material/knuckles, 2, time = 10, one_per_turf = 0, on_floor = 1, supplied_material = "brass")
+
 	recipes += new/datum/stack_recipe_list("office chairs",list( \
 		new/datum/stack_recipe("dark office chair", /obj/structure/bed/chair/office/dark, 5, one_per_turf = 1, on_floor = 1), \
 		new/datum/stack_recipe("light office chair", /obj/structure/bed/chair/office/light, 5, one_per_turf = 1, on_floor = 1) \
@@ -130,3 +132,7 @@
 		new/datum/stack_recipe("white folder", /obj/item/weapon/folder/white), \
 		new/datum/stack_recipe("yellow folder", /obj/item/weapon/folder/yellow), \
 		))
+
+/material/gold/generate_recipes()
+	..()
+	recipes += new/datum/stack_recipe("gold knuckles", /obj/item/weapon/material/knuckles, 2, time = 10, one_per_turf = 0, on_floor = 1, supplied_material = "gold")

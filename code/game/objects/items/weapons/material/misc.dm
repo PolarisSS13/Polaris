@@ -75,3 +75,14 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
+
+/obj/item/weapon/material/knuckles
+	name = "knuckles"
+	desc = "Generally used to enhance the user's punches."
+	icon_state = "brassknuckles"
+	gender = PLURAL
+	force_divisor = 0.6
+	thrown_force_divisor = 0.1
+	w_class = 2
+	default_material = "brass"
+	attack_verb = list("attacked", "punched", "beaten", "struck")

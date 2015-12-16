@@ -255,6 +255,10 @@ var/list/name_to_material
 	name = "bronze"
 	icon_colour = "#EDD12F"
 
+/material/steel/brass
+	name = "brass"
+	icon_colour = "#B5A642"
+
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver
