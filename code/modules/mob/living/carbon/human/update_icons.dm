@@ -506,6 +506,16 @@ var/global/list/damage_icon_parts = list()
 				standing.overlays |= A.get_mob_overlay()
 
 		overlays_standing[UNIFORM_LAYER]	= standing
+
+		if(gender == FEMALE && under.fitted)
+			if(species.get_bodytype() == "Human") //Nonhumans use the old sprites
+				var/index = "[under_state]_s"
+				var/icon/female_uniform_icon = female_uniform_icons[index]
+				if(!female_uniform_icon ) 	//Create standing/laying icons if they don't exist
+					generate_uniform(index,under_state)
+				standing	= image("icon" = female_uniform_icons["[under_state]_s"], "layer" =-UNIFORM_LAYER)
+				overlays_standing[UNIFORM_LAYER]	= standing
+
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
 

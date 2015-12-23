@@ -417,6 +417,7 @@
 //wedding stuff
 /obj/item/clothing/under/wedding/
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	fitted = 0
 
 /obj/item/clothing/under/wedding/bride_orange
 	name = "orange wedding dress"
