@@ -515,6 +515,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	var/fitted = 1// For use in alternate clothing styles for women, if clothes vary from a jumpsuit in shape, set this to 0
 	w_class = 3
 	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
@@ -757,3 +758,10 @@ BLIND     // can't see anything
 		for(var/obj/item/clothing/accessory/A in accessories)
 			A.emp_act(severity)
 	..()
+
+/atom/proc/generate_uniform(index, under_state)
+	var/icon/female_uniform_icon	= icon("icon"='icons/mob/uniform.dmi', "icon_state"="[under_state]_s")
+	var/icon/female_s				= icon("icon"='icons/mob/uniform.dmi', "icon_state"="female_s")
+	female_uniform_icon.Blend(female_s, ICON_MULTIPLY)
+	female_uniform_icon 			= fcopy_rsc(female_uniform_icon)
+	female_uniform_icons[index] = female_uniform_icon

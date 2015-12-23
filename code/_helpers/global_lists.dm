@@ -90,6 +90,10 @@ var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+
+//Female uniform icon cache
+var/global/list/female_uniform_icons = list()
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////

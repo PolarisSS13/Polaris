@@ -282,6 +282,7 @@
 /obj/item/clothing/under/swimsuit/
 	siemens_coefficient = 1
 	body_parts_covered = 0
+	fitted = 0
 
 /obj/item/clothing/under/swimsuit/black
 	name = "black swimsuit"
