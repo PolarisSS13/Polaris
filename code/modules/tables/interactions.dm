@@ -84,8 +84,8 @@
 				return
 			if (G.state < 2)
 				if(user.a_intent == I_HURT)
-					if (prob(15))	M.Weaken(5)
-					M.apply_damage(8,def_zone = "head")
+					if (prob(25))	M.Weaken(5)
+					M.apply_damage(15,def_zone = "head")
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					if(material)
 						playsound(loc, material.tableslam_noise, 50, 1)
@@ -98,7 +98,7 @@
 							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
 							                   "<span class='danger'>\The [S] slices your face messily!</span>")
 							M.apply_damage(10, def_zone = "head")
-							if(prob(2))
+							if(prob(10))
 								M.embed(S, def_zone = "head")
 				else
 					user << "<span class='danger'>You need a better grip to do that!</span>"
