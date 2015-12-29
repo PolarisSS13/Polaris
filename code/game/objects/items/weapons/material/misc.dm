@@ -38,6 +38,8 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
+	force_divisor = 0.15
+	thrown_force_divisor = 0.15
 
 /obj/item/weapon/material/hatchet/tacknife
 	name = "tactical knife"

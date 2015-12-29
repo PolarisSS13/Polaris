@@ -926,6 +926,13 @@ var/global/list/gear_datums = list()
 	display_name = "scarf, striped blue"
 	path = /obj/item/clothing/accessory/stripedbluescarf
 
+/datum/gear/unathi_harness
+	display_name = "decorated knife harness, Unathi"
+	path = /obj/item/clothing/accessory/storage/knifeharness
+	slot = slot_tie
+	cost = 5
+	whitelisted = "Unathi"
+
 /datum/gear/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/accessory/storage/brown_vest
