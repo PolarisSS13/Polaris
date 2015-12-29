@@ -171,6 +171,26 @@
 	path = /obj/item/weapon/module/power_control
 	category = "Engineering"
 
+/datum/autolathe/recipe/statusdisplay
+	name = "status display electronics"
+	path = /obj/item/weapon/circuitboard/status_display
+	category = "Engineering"
+
+/datum/autolathe/recipe/aistatusdisplay
+	name = "ai status display electronics"
+	path = /obj/item/weapon/circuitboard/ai_status_display
+	category = "Engineering"
+
+/datum/autolathe/recipe/newscaster
+	name = "newscaster electronics"
+	path = /obj/item/weapon/circuitboard/newscaster
+	category = "Engineering"
+
+/datum/autolathe/recipe/entertainment
+	name = "entertainment monitor electronics"
+	path = /obj/item/weapon/circuitboard/entertainment
+	category = "Engineering"
+
 /datum/autolathe/recipe/rcd_ammo
 	name = "matter cartridge"
 	path = /obj/item/weapon/rcd_ammo

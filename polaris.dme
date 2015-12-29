@@ -408,6 +408,7 @@
 #include "code\game\machinery\cryo.dm"
 #include "code\game\machinery\cryopod.dm"
 #include "code\game\machinery\deployable.dm"
+#include "code\game\machinery\display_frame.dm"
 #include "code\game\machinery\door_control.dm"
 #include "code\game\machinery\doppler_array.dm"
 #include "code\game\machinery\exonet_node.dm"

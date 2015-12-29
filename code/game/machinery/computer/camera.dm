@@ -217,7 +217,7 @@
 	icon_screen = "entertainment"
 	light_color = "#FFEEDB"
 	light_range_on = 2
-	circuit = null
+	circuit = /obj/item/weapon/circuitboard/entertainment
 
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"

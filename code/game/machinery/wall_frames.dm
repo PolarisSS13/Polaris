@@ -74,3 +74,24 @@
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
+
+/obj/item/frame/extinguisher_cabinet
+	name = "extinguisher cabinet frame"
+	desc = "Used for building fire extinguisher cabinets."
+	icon = 'icons/obj/closet.dmi'
+	icon_state = "extinguisher_empty"
+	build_machine_type = /obj/structure/extinguisher_cabinet
+
+/obj/item/frame/display
+	name = "display frame"
+	desc = "Used for building displays."
+	icon = 'icons/obj/status_display.dmi'
+	icon_state = "frame"
+	build_machine_type = /obj/structure/display_frame
+
+/obj/item/frame/noticeboard
+	name = "noticeboard frame"
+	desc = "Used for building noticeboards."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "nboard00"
+	build_machine_type = /obj/structure/noticeboard
