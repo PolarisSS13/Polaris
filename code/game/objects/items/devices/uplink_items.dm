@@ -424,9 +424,9 @@ datum/uplink_item/dd_SortValue()
 	path = /obj/item/weapon/storage/box/sinpockets
 
 /datum/uplink_item/item/medical/surgery
-	name = "Surgery kit"
+	name = "Loaded surgical belt"
 	item_cost = 6
-	path = /obj/item/weapon/storage/firstaid/surgery
+	path = /obj/item/weapon/storage/belt/medical/emt/surgical/full
 
 /datum/uplink_item/item/medical/combat
 	name = "Combat medical kit"
