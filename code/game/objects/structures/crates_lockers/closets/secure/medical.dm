@@ -106,6 +106,7 @@
 		new /obj/item/device/radio/headset/headset_med(src)
 		new /obj/item/device/radio/headset/headset_med/alt(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/medical(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		return
 
 
@@ -156,6 +157,7 @@
 		new /obj/item/device/flash(src)
 		new /obj/item/weapon/reagent_containers/hypospray(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/medical(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		return
 
 

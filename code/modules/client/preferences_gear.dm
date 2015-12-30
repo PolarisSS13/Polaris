@@ -938,7 +938,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/accessory/storage/black_vest
 	slot = slot_tie
 	cost = 1
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Security Officer","Head of Security","Warden", "Chief Medical Officer", "Medical Doctor", "Chemist", "Paramedic")
 
 /datum/gear/webbing
 	display_name = "webbing, simple"
