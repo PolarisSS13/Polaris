@@ -1051,13 +1051,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/surgicaldrill,
 					/obj/item/clothing/mask/breath/medical,
 					/obj/item/weapon/tank/anesthetic,
+					/obj/item/weapon/tank/emergency_oxygen/small_anesthetic,
+					/obj/item/weapon/tank/emergency_oxygen/small_anesthetic,
 					/obj/item/weapon/FixOVein,
 					/obj/item/weapon/hemostat,
 					/obj/item/weapon/scalpel,
 					/obj/item/weapon/bonegel,
 					/obj/item/weapon/retractor,
 					/obj/item/weapon/bonesetter,
-					/obj/item/weapon/circular_saw)
+					/obj/item/weapon/circular_saw,
+					/obj/item/weapon/storage/belt/medical/emt/surgical)
 	cost = 25
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "Surgery crate"

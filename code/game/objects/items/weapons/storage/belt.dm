@@ -106,6 +106,50 @@
 	icon_state = "emsbelt"
 	item_state = "emsbelt"
 
+/obj/item/weapon/storage/belt/medical/emt/surgical
+	name = "Emergency Surgical Utility Belt"
+	desc = "A sturdy black belt with various sterile pouches and pockets for all your assorted surgical goods!"
+	icon_state = "emsbelt"
+	item_state = "emsbelt"
+	storage_slots = 13
+	max_w_class = 3
+	max_storage_space = 52
+	can_hold = list(
+		/obj/item/weapon/cautery,
+		/obj/item/weapon/surgicaldrill,
+		/obj/item/weapon/FixOVein,
+		/obj/item/weapon/hemostat,
+		/obj/item/weapon/scalpel,
+		/obj/item/weapon/bonegel,
+		/obj/item/weapon/retractor,
+		/obj/item/weapon/bonesetter,
+		/obj/item/weapon/circular_saw,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/clothing/mask/breath/medical,
+		/obj/item/weapon/tank/emergency_oxygen/small_anesthetic,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/weapon/scalpel/laser1,
+		/obj/item/weapon/scalpel/laser2,
+		/obj/item/weapon/scalpel/laser3,
+		/obj/item/weapon/scalpel/manager
+		)
+
+/obj/item/weapon/storage/belt/medical/emt/surgical/full/New()
+	..()
+	new /obj/item/weapon/cautery(src)
+	new /obj/item/weapon/surgicaldrill(src)
+	new /obj/item/weapon/FixOVein(src)
+	new /obj/item/weapon/hemostat(src)
+	new /obj/item/weapon/scalpel(src)
+	new /obj/item/weapon/bonegel(src)
+	new /obj/item/weapon/retractor(src)
+	new /obj/item/weapon/bonesetter(src)
+	new /obj/item/weapon/circular_saw(src)
+	new /obj/item/stack/medical/advanced/bruise_pack(src)
+	new /obj/item/clothing/mask/breath/medical(src)
+	new /obj/item/weapon/tank/emergency_oxygen/small_anesthetic(src)
+	new /obj/item/clothing/gloves/latex(src)
+
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
