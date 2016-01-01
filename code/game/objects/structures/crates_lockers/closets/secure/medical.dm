@@ -43,6 +43,10 @@
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
+		new /obj/item/weapon/tank/emergency_oxygen/small_anesthetic(src)
+		new /obj/item/weapon/tank/emergency_oxygen/small_anesthetic(src)
+		new /obj/item/clothing/mask/breath/medical(src)
+		new /obj/item/clothing/mask/breath/medical(src)
 		new /obj/item/clothing/mask/breath/medical(src)
 		new /obj/item/clothing/mask/breath/medical(src)
 		new /obj/item/clothing/mask/breath/medical(src)
@@ -106,6 +110,7 @@
 		new /obj/item/device/radio/headset/headset_med(src)
 		new /obj/item/device/radio/headset/headset_med/alt(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/medical(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		return
 
 
@@ -156,6 +161,7 @@
 		new /obj/item/device/flash(src)
 		new /obj/item/weapon/reagent_containers/hypospray(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/medical(src)
+		new /obj/item/clothing/accessory/storage/black_vest(src)
 		return
 
 

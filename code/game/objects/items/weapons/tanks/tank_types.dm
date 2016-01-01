@@ -56,6 +56,17 @@
 
 	return
 
+/obj/item/weapon/tank/emergency_oxygen/small_anesthetic
+	name = "a small anesthetic tank"
+	desc = "A small tank with an N20/O2 gas mix."
+	icon_state = "anesthetic_small"
+	distribute_pressure = ONE_ATMOSPHERE
+
+/obj/item/weapon/tank/emergency_oxygen/small_anesthetic/New()
+	..()
+
+	src.air_contents.adjust_gas("sleeping_agent", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+	src.air_contents.adjust_gas("oxygen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 /*
  * Air
  */
@@ -160,7 +171,7 @@
 	force = 4.0
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2
-	
+
 	New()
 		..()
 		src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
