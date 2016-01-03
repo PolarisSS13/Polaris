@@ -7,6 +7,18 @@
 	anchored = 1
 	var/notices = 0
 
+/obj/structure/noticeboard/New(var/loc, var/dir, var/building = 0)
+	..()
+
+	if(building)
+		if(loc)
+			src.loc = loc
+
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -32 : 32)
+		pixel_y = (dir & 3)? (dir ==1 ? -27 : 27) : 0
+		update_icon()
+		return
+
 /obj/structure/noticeboard/initialize()
 	for(var/obj/item/I in loc)
 		if(notices > 4) break

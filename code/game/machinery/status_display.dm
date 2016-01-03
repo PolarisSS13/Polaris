@@ -35,6 +35,8 @@
 	var/friendc = 0      // track if Friend Computer mode
 	var/ignore_friendc = 0
 
+	var/circuit =  /obj/item/weapon/circuitboard/status_display
+
 	maptext_height = 26
 	maptext_width = 32
 
@@ -50,6 +52,27 @@
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
 	return ..()
+
+/obj/machinery/status_display/attackby(I as obj, user as mob)
+	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		if(do_after(user, 20))
+			var/obj/structure/display_frame/A = new /obj/structure/display_frame( src.loc )
+			var/obj/item/weapon/circuitboard/M = new circuit( A )
+			A.pixel_x = pixel_x
+			A.pixel_y = pixel_y
+			A.circuit = M
+			A.anchored = 1
+			for (var/obj/C in src)
+				C.loc = src.loc
+			user << "<span class='notice'>You disconnect the monitor.</span>"
+			A.state = 4
+			A.icon_state = "display_4"
+			M.deconstruct(src)
+			qdel(src)
+	else
+		src.attack_hand(user)
+	return
 
 // register for radio system
 /obj/machinery/status_display/initialize()

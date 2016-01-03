@@ -48,6 +48,7 @@
 	recipes += new/datum/stack_recipe("regular floor tile", /obj/item/stack/tile/floor, 1, 4, 20)
 	recipes += new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60)
 	recipes += new/datum/stack_recipe("computer frame", /obj/structure/computerframe, 5, time = 25, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("display frame", /obj/item/frame/display, 5, time = 20, on_floor = 1)
 	recipes += new/datum/stack_recipe("wall girders", /obj/structure/girder, 2, time = 50, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("machine frame", /obj/machinery/constructable_frame/machine_frame, 5, time = 25, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("turret frame", /obj/machinery/porta_turret_construct, 5, time = 25, one_per_turf = 1, on_floor = 1)
@@ -77,6 +78,7 @@
 	recipes += new/datum/stack_recipe("apc frame", /obj/item/frame/apc, 2)
 	recipes += new/datum/stack_recipe("air alarm frame", /obj/item/frame/air_alarm, 2)
 	recipes += new/datum/stack_recipe("fire alarm frame", /obj/item/frame/fire_alarm, 2)
+	recipes += new/datum/stack_recipe("extinguisher cabinet", /obj/item/frame/extinguisher_cabinet, 2)
 
 /material/plasteel/generate_recipes()
 	..()
@@ -110,6 +112,7 @@
 	recipes += new/datum/stack_recipe("beehive assembly", /obj/item/beehive_assembly, 4)
 	recipes += new/datum/stack_recipe("beehive frame", /obj/item/honey_frame, 1)
 	recipes += new/datum/stack_recipe("book shelf", /obj/structure/bookcase, 5, time = 15, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("noticeboard", /obj/item/frame/noticeboard, 4, time = 5, on_floor = 1)
 
 /material/cardboard/generate_recipes()
 	..()

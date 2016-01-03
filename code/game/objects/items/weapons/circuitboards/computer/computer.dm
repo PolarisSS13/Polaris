@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/message_monitor
@@ -60,11 +60,11 @@
 /obj/item/weapon/circuitboard/stationalert_engineering
 	name = T_BOARD("station alert console (engineering)")
 	build_path = /obj/machinery/computer/station_alert
-	
+
 /obj/item/weapon/circuitboard/stationalert_security
 	name = T_BOARD("station alert console (security)")
 	build_path = /obj/machinery/computer/station_alert
-	
+
 /obj/item/weapon/circuitboard/stationalert_all
 	name = T_BOARD("station alert console (all)")
 	build_path = /obj/machinery/computer/station_alert/all
@@ -191,3 +191,27 @@
 	name = T_BOARD("RCON remote control console")
 	build_path = /obj/machinery/computer/rcon
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
+
+/obj/item/weapon/circuitboard/status_display
+	name = T_BOARD("status display")
+	build_path = /obj/machinery/status_display
+	board_type = "display"
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+
+/obj/item/weapon/circuitboard/ai_status_display
+	name = T_BOARD("ai status display")
+	build_path = /obj/machinery/ai_status_display
+	board_type = "display"
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+
+/obj/item/weapon/circuitboard/newscaster
+	name = T_BOARD("newscaster")
+	build_path = /obj/machinery/newscaster
+	board_type = "display"
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
+
+/obj/item/weapon/circuitboard/entertainment
+	name = T_BOARD("entertainment")
+	build_path = /obj/machinery/computer/security/telescreen/entertainment
+	board_type = "display"
+	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
