@@ -45,7 +45,7 @@
 	//blinded get reset each cycle and then get activated later in the
 	//code. Very ugly. I dont care. Moving this stuff here so its easy
 	//to find it.
-	blinded = null
+	blinded = 0
 	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
 
 	//TODO: seperate this out
@@ -1034,10 +1034,10 @@
 			blinded =    1
 			eye_blurry = 1
 		else
-			//blindness
+			/*
 			if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
 				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
+			else */if(eye_blind)		       // Blindness, heals slowly over time
 				eye_blind =  max(eye_blind-1,0)
 				blinded =    1
 			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
@@ -1051,9 +1051,10 @@
 				eye_blurry = max(eye_blurry-1, 0)
 
 		//Ears
+		/*
 		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
 			ear_deaf = max(ear_deaf, 1)
-		else if(ear_deaf)			//deafness, heals slowly over time
+		else */if(ear_deaf)			//deafness, heals slowly over time
 			ear_deaf = max(ear_deaf-1, 0)
 		else if(istype(l_ear, /obj/item/clothing/ears/earmuffs) || istype(r_ear, /obj/item/clothing/ears/earmuffs))	//resting your ears with earmuffs heals ear damage faster
 			ear_damage = max(ear_damage-0.15, 0)
