@@ -110,6 +110,7 @@ Class Procs:
 	var/panel_open = 0
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/circuit = null
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -120,6 +121,7 @@ Class Procs:
 	else
 		machines += src
 		machinery_sort_required = 1
+//	circuit = src.circuit
 
 /obj/machinery/Destroy()
 	machines -= src
@@ -300,7 +302,7 @@ Class Procs:
 	if(!component_parts)
 		return 0
 	if(panel_open)
-		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/obj/item/weapon/circuitboard/CB = circuit
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
 			for(var/D in CB.req_components)
@@ -328,10 +330,13 @@ Class Procs:
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
-	M.set_dir(src.dir)
-	M.state = 2
-	M.icon_state = "box_1"
+	var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
+	var/obj/item/weapon/circuitboard/M = new circuit( A )
+	A.circuit = M
+	A.anchored = 1
+	A.state = 3
+	A.frame_type = "machine"
+	A.icon_state = "machine_3"
 	for(var/obj/I in component_parts)
 		I.loc = loc
 	qdel(src)
