@@ -766,6 +766,7 @@
 		for (var/obj/C in src)
 			C.loc = src.loc
 		A.state = 2
+		A.icon = 'icons/obj/monitors.dmi'
 		A.icon_state = "alarm_2"
 		M.deconstruct(src)
 		qdel(src)

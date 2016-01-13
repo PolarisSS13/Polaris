@@ -35,11 +35,13 @@
 			state = 0
 			switch(frame_type)
 				if("alarm")
+					src.icon = icon
 					if(dir)
 						src.set_dir(dir)
 					pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 					pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 				if("display")
+					src.icon = icon
 					pixel_x = (dir & 3)? 0 : (dir == 4 ? -32 : 32)
 					pixel_y = (dir & 3)? (dir ==1 ? -32 : 32) : 0
 			update_icon()
