@@ -38,7 +38,7 @@
 
 /obj/item/frame/proc/try_build(turf/on_wall, mob/user as mob)
 	if(frame_base == 0)
-		var/response = input(usr, "What kind of frame would you like to make?", "Frame type request", null) in list("Fire Alarm", "Air Alarm", "Display", "Newscaster", "WEST" )
+		var/response = input(usr, "What kind of frame would you like to make?", "Frame type request", null) in list("Fire Alarm", "Air Alarm", "Display", "Newscaster")
 		switch(response)
 			if("Fire Alarm") frame_type = "alarm"
 			if("Air Alarm")
@@ -76,7 +76,7 @@
 	if(gotwallitem(loc, ndir))
 		usr << "<span class='danger'>There's already an item on this wall!</span>"
 		return
-	var/obj/machinery/M = new build_machine_type(loc, ndir, 1, frame_type)
+	var/obj/machinery/M = new build_machine_type(loc, ndir, 1, frame_type, icon)
 	M.fingerprints = src.fingerprints
 	M.fingerprintshidden = src.fingerprintshidden
 	M.fingerprintslast = src.fingerprintslast

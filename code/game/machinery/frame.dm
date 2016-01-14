@@ -5,7 +5,7 @@
 	icon_state = "0"
 	var/state = 0
 	var/obj/item/weapon/circuitboard/circuit = null
-	var/frame_type
+	var/frame_type = null
 
 	var/list/components = null
 	var/list/req_components = null
@@ -21,14 +21,14 @@
 			D = "Requires [english_list(component_list)]."
 		desc = D
 
-/obj/structure/frame/New(var/loc, var/dir, var/building = 0, var/obj/item/frame/frame_type, mob/user as mob)
+/obj/structure/frame/New(var/loc, var/dir, var/building = 0, var/obj/item/frame/frame_type, var/obj/item/frame/icon, mob/user as mob)
 	..()
-	src.frame_type = frame_type
 
-	icon_state = "[frame_type]_0"
+	if(building)
+		src.frame_type = frame_type
+		icon_state = "[frame_type]_0"
 
-	if(frame_type == "alarm" || frame_type == "display")
-		if(building)
+		if(frame_type == "alarm" || frame_type == "display")
 			if(loc)
 				src.loc = loc
 
