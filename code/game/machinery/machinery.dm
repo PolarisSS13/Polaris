@@ -123,7 +123,6 @@ Class Procs:
 	else
 		machines += src
 		machinery_sort_required = 1
-//	circuit = src.circuit
 
 /obj/machinery/Destroy()
 	machines -= src
@@ -340,6 +339,8 @@ Class Procs:
 	A.frame_type = "machine"
 	A.icon_state = "machine_3"
 	for(var/obj/I in component_parts)
-		I.loc = loc
+		I.forceMove(loc)
+	A.check_components()
+	A.update_desc()
 	qdel(src)
 	return 1

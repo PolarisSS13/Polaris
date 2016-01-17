@@ -105,7 +105,7 @@
 			A.anchored = 1
 			A.frame_type = "computer"
 			for (var/obj/C in src)
-				C.loc = src.loc
+				C.forceMove(loc)
 			if (src.stat & BROKEN)
 				user << "<span class='notice'>The broken glass falls out.</span>"
 				new /obj/item/weapon/material/shard( src.loc )

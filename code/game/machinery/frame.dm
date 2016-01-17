@@ -11,15 +11,26 @@
 	var/list/req_components = null
 	var/list/req_component_names = null
 
-	proc/update_desc()
-		var/D
-		if(req_components)
-			var/list/component_list = new
-			for(var/I in req_components)
-				if(req_components[I] > 0)
-					component_list += "[num2text(req_components[I])] [req_component_names[I]]"
-			D = "Requires [english_list(component_list)]."
-		desc = D
+/obj/structure/frame/proc/update_desc(/*r/req_components, var/components*/)
+	var/D
+	if(req_components)
+		var/list/component_list = new
+		for(var/I in req_components)
+			if(req_components[I] > 0)
+				component_list += "[num2text(req_components[I])] [req_component_names[I]]"
+		D = "Requires [english_list(component_list)]."
+	desc = D
+
+/obj/structure/frame/proc/check_components(/*var/circuit, var/req_components, var/components, var/req_components_names, */mob/user as mob)
+	components = list()
+	req_components = circuit.req_components.Copy()
+	for(var/A in circuit.req_components)
+		req_components[A] = circuit.req_components[A]
+	req_component_names = circuit.req_components.Copy()
+	for(var/A in req_components)
+		var/cp = text2path(A)
+		var/obj/ct = new cp() // have to quickly instantiate it get name
+		req_component_names[A] = ct.name
 
 /obj/structure/frame/New(var/loc, var/dir, var/building = 0, var/obj/item/frame/frame_type, var/obj/item/frame/icon, mob/user as mob)
 	..()
@@ -54,6 +65,7 @@
 	switch(state)
 		if(0)
 			if(istype(P, /obj/item/weapon/wrench))
+				user << "<span class='notice'>You start to wrench the frame into place.</span>"
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				if(do_after(user, 20))
 					user << "<span class='notice'>You wrench the frame into place.</span>"
@@ -88,17 +100,8 @@
 					P.loc = src
 
 					if(frame_type == "machine")  //because machines are assholes
-						components = list()
-						req_components = circuit.req_components.Copy()
-						for(var/A in circuit.req_components)
-							req_components[A] = circuit.req_components[A]
-						req_component_names = circuit.req_components.Copy()
-						for(var/A in req_components)
-							var/cp = text2path(A)
-							var/obj/ct = new cp() // have to quickly instantiate it get name
-							req_component_names[A] = ct.name
+						check_components()
 						update_desc()
-						user << desc
 
 				else
 					user << "<span class='warning'>This frame does not accept circuit boards of this type!</span>"
@@ -134,6 +137,8 @@
 						user << "<span class='notice'>You add cables to the frame.</span>"
 						state = 3
 						icon_state = "[frame_type]_3"
+						if(frame_type == "machine")
+							user << desc
 		if(3) //end mostly universal steps
 			switch(frame_type)
 				if("computer")  //computer and display steps
@@ -193,18 +198,10 @@
 						else
 							user << "<span class='notice'>You remove the components.</span>"
 							for(var/obj/item/weapon/W in components)
-								W.loc = src.loc
-						components = list()
-						req_components = circuit.req_components.Copy()
-						for(var/A in circuit.req_components)
-							req_components[A] = circuit.req_components[A]
-						req_component_names = circuit.req_components.Copy()
-						for(var/A in req_components)
-							var/cp = text2path(A)
-							var/obj/ct = new cp() // have to quickly instantiate it get name
-							req_component_names[A] = ct.name
-						update_desc()
-						user << desc
+								W.forceMove(loc)
+							check_components()
+							update_desc()
+							user << desc
 					else
 						if(istype(P, /obj/item/weapon/screwdriver))
 							var/component_check = 1
@@ -223,10 +220,11 @@
 
 								src.circuit.construct(new_machine)
 								for(var/obj/O in src.components)
-									O.loc = null
+									O.forceMove(null)
 									new_machine.component_parts += O
 								new_machine.RefreshParts()
 								qdel(src)
+							return
 						else
 							if(istype(P, /obj/item))
 								for(var/I in req_components)
@@ -245,7 +243,7 @@
 												update_desc()
 												break
 										user.drop_item()
-										P.loc = src
+										P.forceMove(src)
 										components += P
 										req_components[I]--
 										update_desc()
@@ -268,10 +266,10 @@
 						var/obj/machinery/B = new src.circuit.build_path ( src.loc )
 						B.pixel_x = src.pixel_x
 						B.pixel_y = src.pixel_y
-						B.dir = src.dir
+						B.set_dir(dir)
 						src.circuit.construct(B)
 						qdel(src)
-
+					return
 		if(4)
 			switch(frame_type)
 				if("computer")  //computer and display steps
@@ -289,6 +287,7 @@
 						B.pixel_y = src.pixel_y
 						src.circuit.construct(B)
 						qdel(src)
+					return
 
 				if("display")  //computer and display steps
 					if(istype(P, /obj/item/weapon/crowbar))
@@ -305,3 +304,4 @@
 						B.pixel_y = src.pixel_y
 						src.circuit.construct(B)
 						qdel(src)
+					return

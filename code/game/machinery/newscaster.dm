@@ -763,7 +763,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			A.circuit = M
 			A.anchored = 1
 			for (var/obj/C in src)
-				C.loc = src.loc
+				C.forceMove(loc)
 			if (src.stat & isbroken == 1)
 				user << "<span class='notice'>The broken glass falls out.</span>"
 				new /obj/item/weapon/material/shard( src.loc )

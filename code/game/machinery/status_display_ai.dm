@@ -81,7 +81,7 @@ var/list/ai_status_emotions = list(
 			A.circuit = M
 			A.anchored = 1
 			for (var/obj/C in src)
-				C.loc = src.loc
+				C.forceMove(loc)
 			user << "<span class='notice'>You disconnect the monitor.</span>"
 			A.state = 4
 			A.icon_state = "display_4"

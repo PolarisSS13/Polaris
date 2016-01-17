@@ -764,12 +764,13 @@
 		A.circuit = M
 		A.anchored = 1
 		for (var/obj/C in src)
-			C.loc = src.loc
+			C.forceMove(loc)
 		A.state = 2
 		A.icon = 'icons/obj/monitors.dmi'
 		A.icon_state = "alarm_2"
 		M.deconstruct(src)
 		qdel(src)
+		return
 
 	if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
 		if(stat & (NOPOWER|BROKEN))
@@ -896,7 +897,7 @@ FIRE ALARM
 			A.circuit = M
 			A.anchored = 1
 			for (var/obj/C in src)
-				C.loc = src.loc
+				C.forceMove(loc)
 			A.state = 2
 			A.icon_state = "alarm_2"
 			M.deconstruct(src)
