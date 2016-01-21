@@ -1,183 +1,3 @@
-<<<<<<< HEAD
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
-var/cultwords = list()
-var/runedec = 0
-var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
-var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
-
-/client/proc/check_words() // -- Urist
-	set category = "Special Verbs"
-	set name = "Check Rune Words"
-	set desc = "Check the rune-word meaning"
-	if(!cultwords["travel"])
-		runerandom()
-	for (var/word in engwords)
-		usr << "[cultwords[word]] is [word]"
-
-/proc/runerandom() //randomizes word meaning
-	var/list/runewords=rnwords
-	for (var/word in engwords)
-		cultwords[word] = pick(runewords)
-		runewords-=cultwords[word]
-
-/obj/effect/rune
-	desc = "A strange collection of symbols drawn in blood."
-	anchored = 1
-	icon = 'icons/obj/rune.dmi'
-	icon_state = "1"
-	var/visibility = 0
-	unacidable = 1
-	layer = TURF_LAYER
-
-
-	var/word1
-	var/word2
-	var/word3
-	var/image/blood_image
-	var/list/converting = list()
-
-// Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
-
-// travel self [word] - Teleport to random [rune with word destination matching]
-// travel other [word] - Portal to rune with word destination matching - kinda doesnt work. At least the icon. No idea why.
-// see blood Hell - Create a new tome
-// join blood self - Incorporate person over the rune into the group
-// Hell join self - Summon TERROR
-// destroy see technology - EMP rune
-// travel blood self - Drain blood
-// see Hell join - See invisible
-// blood join Hell - Raise dead
-
-// hide see blood - Hide nearby runes
-// blood see hide - Reveal nearby runes  - The point of this rune is that its reversed obscure rune. So you always know the words to reveal the rune once oyu have obscured it.
-
-// Hell travel self - Leave your body and ghost around
-// blood see travel - Manifest a ghost into a mortal body
-// Hell tech join - Imbue a rune into a talisman
-// Hell blood join - Sacrifice rune
-// destroy travel self - Wall rune
-// join other self - Summon cultist rune
-// travel technology other - Freeing rune    //    other blood travel was freedom join other
-
-// hide other see - Deafening rune     //     was destroy see hear
-// destroy see other - Blinding rune
-// destroy see blood - BLOOD BOIL
-
-// self other technology - Communication rune  //was other hear blood
-// join hide technology - stun rune. Rune color: bright pink.
-	New()
-		..()
-		blood_image = image(loc = src)
-		blood_image.override = 1
-		for(var/mob/living/silicon/ai/AI in player_list)
-			if(AI.client)
-				AI.client.images += blood_image
-		rune_list.Add(src)
-
-	Destroy()
-		for(var/mob/living/silicon/ai/AI in player_list)
-			if(AI.client)
-				AI.client.images -= blood_image
-		qdel(blood_image)
-		blood_image = null
-		rune_list.Remove(src)
-		..()
-
-	examine(mob/user)
-		..()
-		if(iscultist(user))
-			user << "This spell circle reads: <i>[word1] [word2] [word3]</i>."
-
-
-	attackby(I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
-			user << "You retrace your steps, carefully undoing the lines of the rune."
-			qdel(src)
-			return
-		else if(istype(I, /obj/item/weapon/nullrod))
-			user << "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>"
-			qdel(src)
-			return
-		return
-
-
-	attack_hand(mob/living/user as mob)
-		if(!iscultist(user))
-			user << "You can't mouth the arcane scratchings without fumbling over them."
-			return
-		if(user.is_muzzled())
-			user << "You are unable to speak the words of the rune."
-			return
-		if(!word1 || !word2 || !word3 || prob(user.getBrainLoss()))
-			return fizzle()
-//		if(!src.visibility)
-//			src.visibility=1
-		if(word1 == cultwords["travel"] && word2 == cultwords["self"])
-			return teleport(src.word3)
-		if(word1 == cultwords["see"] && word2 == cultwords["blood"] && word3 == cultwords["hell"])
-			return tomesummon()
-		if(word1 == cultwords["hell"] && word2 == cultwords["destroy"] && word3 == cultwords["other"])
-			return armor()
-		if(word1 == cultwords["join"] && word2 == cultwords["blood"] && word3 == cultwords["self"])
-			return convert()
-		if(word1 == cultwords["hell"] && word2 == cultwords["join"] && word3 == cultwords["self"])
-			return tearreality()
-		if(word1 == cultwords["destroy"] && word2 == cultwords["see"] && word3 == cultwords["technology"])
-			return emp(src.loc,3)
-		if(word1 == cultwords["travel"] && word2 == cultwords["blood"] && word3 == cultwords["self"])
-			return drain()
-		if(word1 == cultwords["see"] && word2 == cultwords["hell"] && word3 == cultwords["join"])
-			return seer()
-		if(word1 == cultwords["blood"] && word2 == cultwords["join"] && word3 == cultwords["hell"])
-			return raise()
-		if(word1 == cultwords["hide"] && word2 == cultwords["see"] && word3 == cultwords["blood"])
-			return obscure(4)
-		if(word1 == cultwords["hell"] && word2 == cultwords["travel"] && word3 == cultwords["self"])
-			return ajourney()
-		if(word1 == cultwords["blood"] && word2 == cultwords["see"] && word3 == cultwords["travel"])
-			return manifest()
-		if(word1 == cultwords["hell"] && word2 == cultwords["technology"] && word3 == cultwords["join"])
-			return talisman()
-		if(word1 == cultwords["hell"] && word2 == cultwords["blood"] && word3 == cultwords["join"])
-			return sacrifice()
-		if(word1 == cultwords["blood"] && word2 == cultwords["see"] && word3 == cultwords["hide"])
-			return revealrunes(src)
-		if(word1 == cultwords["destroy"] && word2 == cultwords["travel"] && word3 == cultwords["self"])
-			return wall()
-		if(word1 == cultwords["travel"] && word2 == cultwords["technology"] && word3 == cultwords["other"])
-			return freedom()
-		if(word1 == cultwords["join"] && word2 == cultwords["other"] && word3 == cultwords["self"])
-			return cultsummon()
-		if(word1 == cultwords["hide"] && word2 == cultwords["other"] && word3 == cultwords["see"])
-			return deafen()
-		if(word1 == cultwords["destroy"] && word2 == cultwords["see"] && word3 == cultwords["other"])
-			return blind()
-		if(word1 == cultwords["destroy"] && word2 == cultwords["see"] && word3 == cultwords["blood"])
-			return bloodboil()
-		if(word1 == cultwords["self"] && word2 == cultwords["other"] && word3 == cultwords["technology"])
-			return communicate()
-		if(word1 == cultwords["travel"] && word2 == cultwords["other"])
-			return itemport(src.word3)
-		if(word1 == cultwords["join"] && word2 == cultwords["hide"] && word3 == cultwords["technology"])
-			return runestun()
-		else
-			return fizzle()
-
-
-	proc
-		fizzle()
-			if(istype(src,/obj/effect/rune))
-				usr.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
-			else
-				usr.whisper(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
-			for (var/mob/V in viewers(src))
-				V.show_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", 3, "<span class='warning'>You hear a faint fizzle.</span>", 2)
-			return
-
-		check_icon()
-			icon = get_uristrune_cult(word1, word2, word3)
-
 /obj/item/weapon/book/tome
 	name = "arcane tome"
 	icon = 'icons/obj/weapons.dmi'
@@ -287,8 +107,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	return 0
 
 /mob/living/carbon/human/make_rune(var/rune, var/cost, var/tome_required)
-	if(species && (species.flags & NO_BLOOD))
-		return ..()
 	if(vessel && !vessel.has_reagent("blood", 440))
 		src << "<span class='danger'>You are too weak to draw runes.</span>"
 		return
@@ -308,8 +126,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 /mob/living/carbon/human/get_blood_name()
 	if(species)
-		if(istype(species, /datum/species/machine))
-			return "oil"
 		if(istype(species, /datum/species/diona))
 			return "sap"
 	return "blood"
@@ -327,8 +143,6 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	return "#c80000"
 
 /mob/living/carbon/human/get_rune_color()
-	if(species && (species.flags & NO_BLOOD))
-		return ..()
 	return species.blood_color
 
 /mob/proc/convert_rune()
@@ -473,4 +287,3 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 /mob/living/carbon/human/message_cult_communicate()
 	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of his hand.</span>")
->>>>>>> 75a9bdc8531e738b98369e657eb5274571b42628

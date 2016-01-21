@@ -1222,18 +1222,10 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if(seer==1)
-			var/obj/effect/rune/R = locate() in loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				see_invisible = SEE_INVISIBLE_CULT
-			else
-				see_invisible = SEE_INVISIBLE_LIVING
-				seer = 0
+		sight = species.get_vision_flags(src)
+		see_in_dark = species.darksight
+		see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 
-		else
-			sight = species.get_vision_flags(src)
-			see_in_dark = species.darksight
-			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 		var/tmp/glasses_processed = 0
 		var/obj/item/weapon/rig/rig = back
 		if(istype(rig) && rig.visor)
@@ -1252,7 +1244,7 @@
 
 		if(!glasses_processed && (species.get_vision_flags(src) > 0))
 			sight |= species.get_vision_flags(src)
-		if(!seer && !glasses_processed)
+		if(!glasses_processed)
 			see_invisible = SEE_INVISIBLE_LIVING
 
 		if(healths)
@@ -1273,8 +1265,7 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
-			if(!seer)
-				see_invisible = SEE_INVISIBLE_LIVING
+			see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1403,11 +1394,11 @@
 			client.screen |= G.overlay
 		if(G.vision_flags)
 			sight |= G.vision_flags
-			if(!druggy && !seer)
+			if(!druggy)
 				see_invisible = SEE_INVISIBLE_MINIMUM
 		if(G.see_invisible >= 0)
 			see_invisible = G.see_invisible
-		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
+		if(istype(G,/obj/item/clothing/glasses/night))
 			see_invisible = SEE_INVISIBLE_MINIMUM
 /* HUD shit goes here, as long as it doesn't modify sight flags */
 // The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
@@ -1417,7 +1408,7 @@
 			O = S.hud
 		if(istype(O))
 			O.process_hud(src)
-			if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
+			if(!druggy)	see_invisible = SEE_INVISIBLE_LIVING
 
 /mob/living/carbon/human/handle_random_events()
 	if(in_stasis)

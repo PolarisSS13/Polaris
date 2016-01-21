@@ -505,8 +505,6 @@
 	for(var/mob/living/carbon/human/M in get_turf(src))
 		if(iscultist(M))
 			continue
-		if(M.species && (M.species.flags & NO_BLOOD))
-			continue
 		victim = M
 	if(!victim)
 		return fizzle(user)
@@ -524,14 +522,13 @@
 	var/list/statuses = list()
 	var/charges = 20
 	var/use
-	if(!(user.species && (user.species.flags & NO_BLOOD)))
-		use = min(charges, 560 - user.vessel.total_volume)
-		if(use)
-			user.vessel.add_reagent("blood", use)
-			charges -= use
-			statuses += "you regain lost blood"
-			if(!charges)
-				return statuses
+	use = min(charges, 560 - user.vessel.total_volume)
+	if(use)
+		user.vessel.add_reagent("blood", use)
+		charges -= use
+		statuses += "you regain lost blood"
+		if(!charges)
+			return statuses
 	if(user.getBruteLoss() || user.getFireLoss())
 		var/healbrute = user.getBruteLoss()
 		var/healburn = user.getBruteLoss()
@@ -561,7 +558,6 @@
 			if(e && e.status & ORGAN_BROKEN)
 				e.status &= ~ORGAN_BROKEN
 				e.status &= ~ORGAN_SPLINTED
-				e.perma_injury = 0
 				statuses += "bones in your [e] snap into place"
 				charges -= 10
 				if(charges < 10)
