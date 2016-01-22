@@ -257,18 +257,18 @@
 		new /obj/item/ammo_casing/shotgun/practice(src)
 
 /obj/item/weapon/storage/box/sniperammo
-	name = "box of 14.5mm shells"
+	name = "box of .50 BMG shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 
 	New()
 		..()
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
-		new /obj/item/ammo_casing/a145(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
+		new /obj/item/ammo_casing/a50bmg(src)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"

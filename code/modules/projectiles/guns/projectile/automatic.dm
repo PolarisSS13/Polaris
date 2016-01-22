@@ -5,7 +5,7 @@
 	w_class = 3
 	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
 	max_shells = 22
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c9mm
@@ -24,7 +24,7 @@
 	w_class = 3
 	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
 	max_shells = 15
-	caliber = ".45"
+	caliber = CALIBER_45
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	ammo_type = /obj/item/ammo_casing/c45
 
@@ -35,7 +35,7 @@
 	item_state = "c20r"
 	w_class = 3
 	force = 10
-	caliber = "10mm"
+	caliber = CALIBER_PISTOL_LARGE
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
@@ -59,7 +59,7 @@
 	item_state = null
 	w_class = 4
 	force = 10
-	caliber = "a762"
+	caliber = CALIBER_RIFLE_LARGE
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
@@ -82,7 +82,7 @@
 	icon_state = "wt550"
 	item_state = "wt550"
 	w_class = 3
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
 	ammo_type = "/obj/item/ammo_casing/c9mmr"
@@ -105,7 +105,7 @@
 	item_state = "z8carbine"
 	w_class = 4
 	force = 10
-	caliber = "a556"
+	caliber = CALIBER_RIFLE_SMALL
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	ammo_type = "/obj/item/ammo_casing/a556"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
@@ -173,7 +173,7 @@
 	force = 10
 	slot_flags = 0
 	max_shells = 50
-	caliber = "a762"
+	caliber = CALIBER_RIFLE_LARGE
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 2)
 	slot_flags = SLOT_BACK
 	ammo_type = "/obj/item/ammo_casing/a762"
@@ -234,7 +234,7 @@
 	item_state = null
 	w_class = 4
 	force = 10
-	caliber = "shotgun"
+	caliber = CALIBER_SHOTGUN
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE

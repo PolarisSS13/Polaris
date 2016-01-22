@@ -1,80 +1,79 @@
 /obj/item/ammo_casing/a357
 	desc = "A .357 bullet casing."
-	caliber = "357"
+	caliber = CALIBER_357
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
 /obj/item/ammo_casing/a50
 	desc = "A .50AE bullet casing."
-	caliber = ".50"
+	caliber = CALIBER_MAGNUM
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
 /obj/item/ammo_casing/a75
 	desc = "A 20mm bullet casing."
-	caliber = "75"
+	caliber = CALIBER_CANNON
 	projectile_type = /obj/item/projectile/bullet/gyro
 
 /obj/item/ammo_casing/c38
 	desc = "A .38 bullet casing."
-	caliber = "38"
+	caliber = CALIBER_38
 	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/ammo_casing/c38r
 	desc = "A .38 rubber bullet casing."
-	caliber = "38"
+	caliber = CALIBER_38
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/ammo_casing/c9mmf
 	desc = "A 9mm flash shell casing."
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	projectile_type = /obj/item/projectile/energy/flash
 
 /obj/item/ammo_casing/c9mmr
 	desc = "A 9mm rubber bullet casing."
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mmp
 	desc = "A 9mm practice bullet casing."
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
-	caliber = ".45"
+	caliber = CALIBER_45
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
 /obj/item/ammo_casing/c45p
 	desc = "A .45 practice bullet casing."
-	caliber = ".45"
+	caliber = CALIBER_45
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 /obj/item/ammo_casing/c45r
 	desc = "A .45 rubber bullet casing."
-	caliber = ".45"
+	caliber = CALIBER_45
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c45f
 	desc = "A .45 flash shell casing."
-	caliber = ".45"
+	caliber = CALIBER_45
 	projectile_type = /obj/item/projectile/energy/flash
 
 /obj/item/ammo_casing/a10mm
 	desc = "A 10mm bullet casing."
-	caliber = "10mm"
+	caliber = CALIBER_PISTOL_LARGE
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
-
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
 	desc = "A 12 gauge slug."
 	icon_state = "slshell"
-	caliber = "shotgun"
+	caliber = CALIBER_SHOTGUN
 	projectile_type = /obj/item/projectile/bullet/shotgun
 	matter = list(DEFAULT_WALL_MATERIAL = 360)
 
@@ -110,14 +109,14 @@
 //is blocked by clothing that stops tasers and is vulnerable to EMP
 /obj/item/ammo_casing/shotgun/stunshell
 	name = "stun shell"
-	desc = "A 12 gauge taser cartridge."
+	desc = "A large taser cartridge."
 	icon_state = "stunshell"
 	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	matter = list(DEFAULT_WALL_MATERIAL = 360, "glass" = 720)
 
 /obj/item/ammo_casing/shotgun/stunshell/emp_act(severity)
-	if(prob(100/severity)) BB = null
+	if(prob(100/severity)) projectile = null
 	update_icon()
 
 //Does not stun, only blinds, but has area of effect.
@@ -130,26 +129,26 @@
 
 /obj/item/ammo_casing/a762
 	desc = "A 7.62mm bullet casing."
-	caliber = "a762"
+	caliber = CALIBER_RIFLE_LARGE
 	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
-/obj/item/ammo_casing/a145
+/obj/item/ammo_casing/a50bmg
 	name = "shell casing"
 	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
 	spent_icon = "lcasing-spent"
-	caliber = "14.5mm"
-	projectile_type = /obj/item/projectile/bullet/rifle/a145
+	caliber = CALIBER_RIFLE_SNIPER
+	projectile_type = /obj/item/projectile/bullet/rifle/a50bmg
 	matter = list(DEFAULT_WALL_MATERIAL = 1250)
 
 /obj/item/ammo_casing/a556
 	desc = "A 5.56mm bullet casing."
-	caliber = "a556"
+	caliber = CALIBER_RIFLE_SMALL
 	projectile_type = /obj/item/projectile/bullet/rifle/a556
 
 /obj/item/ammo_casing/a556p
 	desc = "A 5.56mm practice bullet casing."
-	caliber = "a556"
+	caliber = CALIBER_RIFLE_SMALL
 	projectile_type = /obj/item/projectile/bullet/rifle/a556/practice
 
 /obj/item/ammo_casing/rocket
@@ -157,11 +156,11 @@
 	desc = "A high explosive designed to be fired from a launcher."
 	icon_state = "rocketshell"
 	projectile_type = /obj/item/missile
-	caliber = "rocket"
+	caliber = CALIBER_CANNON
 
 /obj/item/ammo_casing/cap
 	name = "cap"
 	desc = "A cap for children toys."
-	caliber = "caps"
+	caliber = CALIBER_TOY
 	color = "#FF0000"
 	projectile_type = /obj/item/projectile/bullet/pistol/cap

@@ -9,61 +9,56 @@
 	w_class = 1
 
 	var/leaves_residue = 1
-	var/caliber = ""					//Which kind of guns it can be loaded into
-	var/projectile_type					//The bullet type to create when New() is called
-	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
+	var/caliber = ""					// Which kind of guns it can be loaded into
+	var/projectile_type					// The bullet type to create when New() is called
+	var/obj/item/projectile/projectile  // The loaded bullet - make it so that the projectiles are created only when needed?
 	var/spent_icon = null
 
 /obj/item/ammo_casing/New()
 	..()
 	if(ispath(projectile_type))
-		BB = new projectile_type(src)
+		projectile = new projectile_type(src)
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
 
 //removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
-	. = BB
-	BB = null
+	. = projectile
+	projectile = null
 	set_dir(pick(cardinal)) //spin spent casings
 	update_icon()
 
 /obj/item/ammo_casing/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/screwdriver))
-		if(!BB)
+		if(!projectile)
 			user << "\blue There is no bullet in the casing to inscribe anything into."
 			return
 
 		var/tmp_label = ""
-		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
+		var/label_text = sanitizeSafe(input(user, "Inscribe some text into \the [initial(projectile.name)]","Inscription",tmp_label), MAX_NAME_LEN)
 		if(length(label_text) > 20)
 			user << "\red The inscription can be at most 20 characters long."
 		else if(!label_text)
-			user << "\blue You scratch the inscription off of [initial(BB)]."
-			BB.name = initial(BB.name)
+			user << "\blue You scratch the inscription off of [initial(projectile)]."
+			projectile.name = initial(projectile.name)
 		else
-			user << "\blue You inscribe \"[label_text]\" into \the [initial(BB.name)]."
-			BB.name = "[initial(BB.name)] (\"[label_text]\")"
+			user << "\blue You inscribe \"[label_text]\" into \the [initial(projectile.name)]."
+			projectile.name = "[initial(projectile.name)] (\"[label_text]\")"
 
 /obj/item/ammo_casing/update_icon()
-	if(spent_icon && !BB)
+	if(spent_icon && !projectile)
 		icon_state = spent_icon
 
 /obj/item/ammo_casing/examine(mob/user)
 	..()
-	if (!BB)
+	if (!projectile)
 		user << "This one is spent."
-
-//Gun loading types
-#define SINGLE_CASING 	1	//The gun only accepts ammo_casings. ammo_magazines should never have this as their mag_type.
-#define SPEEDLOADER 	2	//Transfers casings from the mag to the gun when used.
-#define MAGAZINE 		4	//The magazine item itself goes inside the gun
 
 //An item that holds casings and can be used to put them inside guns
 /obj/item/ammo_magazine
 	name = "magazine"
 	desc = "A magazine for some kind of gun."
-	icon_state = "357"
+	icon_state = CALIBER_357
 	icon = 'icons/obj/ammo.dmi'
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
@@ -76,7 +71,7 @@
 
 	var/list/stored_ammo = list()
 	var/mag_type = SPEEDLOADER //ammo_magazines can only be used with compatible guns. This is not a bitflag, the load_method var on guns is.
-	var/caliber = "357"
+	var/caliber = CALIBER_357
 	var/max_ammo = 7
 
 	var/ammo_type = /obj/item/ammo_casing //ammo type that is initially loaded

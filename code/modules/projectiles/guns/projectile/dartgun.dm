@@ -6,7 +6,7 @@
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
 	kill_count = 15 //shorter range
-	
+
 	muzzle_type = null
 
 /obj/item/projectile/bullet/chemdart/New()
@@ -23,7 +23,7 @@
 	name = "chemical dart"
 	desc = "A small hardened, hollow dart."
 	icon_state = "dart"
-	caliber = "dart"
+	caliber = CALIBER_DART
 	projectile_type = /obj/item/projectile/bullet/chemdart
 
 /obj/item/ammo_casing/chemdart/expend()
@@ -36,7 +36,7 @@
 	item_state = "rcdammo"
 	origin_tech = list(TECH_MATERIAL = 2)
 	mag_type = MAGAZINE
-	caliber = "dart"
+	caliber = CALIBER_DART
 	ammo_type = /obj/item/ammo_casing/chemdart
 	max_ammo = 5
 	multiple_sprites = 1
@@ -47,7 +47,7 @@
 	icon_state = "dartgun-empty"
 	item_state = null
 
-	caliber = "dart"
+	caliber = CALIBER_DART
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic click"
 	recoil = 0
