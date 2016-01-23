@@ -171,7 +171,7 @@
 			user.visible_message("<span class='warning'>\The [user] disappears in a flash of red light!</span>", "<span class='warning'>You feel as your body gets dragged into the dimension of Nar-Sie!</span>", "You hear a sickening crunch.")
 			user.forceMove(src)
 			showOptions(user)
-			while(user.loc == src)
+			while(istype(user.loc, type))
 				var/warning = 0
 				user.take_organ_damage(0, 2)
 				if(user.getFireLoss() > 50)
@@ -770,12 +770,26 @@
 		sleep(10)
 
 	if(the_end_comes >= the_time_has_come)
-		HECOMES = new /obj/singularity/narsie/large(get_turf(src))
+		if(!narsie_cometh)//so we don't initiate Hell more than one time.
+			world << "<font size='15' color='red'><b>THE VEIL HAS BEEN SHATTERED!</b></font>"
+			world << sound('sound/effects/wind/wind_5_1.ogg')
+
+			SetUniversalState(/datum/universal_state/hell)
+			narsie_cometh = 1
+
+			spawn(10 SECONDS)
+				if(emergency_shuttle)
+					emergency_shuttle.call_evac()
+					emergency_shuttle.launch_time = 0	// Cannot recall
+
+		log_and_message_admins_many(cultists, "summoned the end of days.")
+		//HECOMES = new /obj/singularity/narsie/large(get_turf(src))
 	else
 		command_announcement.Announce("Bluespace anomaly has ceased. Resetting security level.")
 		set_security_level(tmplevel)
 		qdel(src)
 
+/*
 /obj/effect/rune/tearreality/attack_hand(var/mob/living/user)
 	..()
 	if(HECOMES && !iscultist(user))
@@ -786,6 +800,7 @@
 		qdel(HECOMES)
 		qdel(src)
 		return
+		*/
 
 /obj/effect/rune/tearreality/attackby()
 	if(the_end_comes)

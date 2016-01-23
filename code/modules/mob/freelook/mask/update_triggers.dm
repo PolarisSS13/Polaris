@@ -45,6 +45,6 @@
 		cultnet.updateVisibility(player.current, 0)
 
 /datum/antagonist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
-	..()
+	. = ..()
 	if(src == cult)
 		cultnet.updateVisibility(player.current, 0)
