@@ -54,6 +54,7 @@
 	item_state = "clown"
 	worn_state = "sexyclown"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	rolled_sleeves = -1 //Pleae never
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
@@ -61,6 +62,7 @@
 	icon_state = "vice"
 	item_state = "gy_suit"
 	worn_state = "vice"
+	rolled_sleeves = -1
 
 //This set of uniforms looks fairly fancy and is generally used for high-ranking NT personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/rank/centcom
@@ -70,6 +72,7 @@
 	item_state = "lawyer_black"
 	worn_state = "officer"
 	displays_id = 0
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\""
@@ -78,6 +81,7 @@
 	item_state = "lawyer_black"
 	worn_state = "officer"
 	displays_id = 0
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/centcom_captain
 	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\""
@@ -86,6 +90,7 @@
 	item_state = "lawyer_black"
 	worn_state = "centcom"
 	displays_id = 0
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/ert
 	name = "ERT tactical uniform"
@@ -162,6 +167,7 @@
 	icon_state = "gentlesuit"
 	item_state = "gy_suit"
 	worn_state = "gentlesuit"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
@@ -265,6 +271,7 @@
 	item_state = "w_suit"
 	worn_state = "sexymime"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	rolled_sleeves = -1 //Please never
 
 /obj/item/clothing/under/gladiator
 	name = "gladiator uniform"

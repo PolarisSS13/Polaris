@@ -1,3 +1,6 @@
+/obj/item/clothing/under/color
+	rolled_sleeves = 0
+
 /obj/item/clothing/under/color/black
 	name = "black jumpsuit"
 	icon_state = "black"
@@ -10,6 +13,7 @@
 	icon_state = "black"
 	item_state = "bl_suit"
 	worn_state = "blackf"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/color/blue
 	name = "blue jumpsuit"
@@ -43,6 +47,7 @@
 	icon_state = "pink"
 	item_state = "p_suit"
 	worn_state = "pink"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/color/red
 	name = "red jumpsuit"

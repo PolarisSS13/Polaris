@@ -29,6 +29,7 @@
 	icon_state = "qmf"
 	worn_state = "qmf"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/cargo/jeans
 	name = "quartermaster's jumpjeans"
@@ -41,6 +42,7 @@
 	desc = "Jeeeaaans! They're comfy!"
 	icon_state = "qmjf"
 	worn_state = "qmjf"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/cargotech
 	name = "cargo technician's jumpsuit"
@@ -55,18 +57,21 @@
 	desc = "Skirrrrrts! They're comfy and easy to wear!"
 	icon_state = "cargof"
 	worn_state = "cargof"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/cargotech/jeans
 	name = "cargo technician's jumpjeans"
 	desc = "Jeeeaaans! They're comfy!"
 	icon_state = "cargoj"
 	worn_state = "cargoj"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/cargotech/jeans/female
 	name = "cargo technician's jumpjeans"
 	desc = "Jeeeaaans! They're comfy!"
 	icon_state = "cargojf"
 	worn_state = "cargojf"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/chaplain
@@ -75,6 +80,7 @@
 	icon_state = "chaplain"
 	item_state = "bl_suit"
 	worn_state = "chapblack"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/chef
@@ -83,6 +89,7 @@
 	icon_state = "chef"
 	item_state = "w_suit"
 	worn_state = "chef"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/clown
@@ -91,6 +98,7 @@
 	icon_state = "clown"
 	item_state = "clown"
 	worn_state = "clown"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/head_of_personnel
@@ -106,6 +114,7 @@
 	icon_state = "hopwhimsy"
 	item_state = "b_suit"
 	worn_state = "hopwhimsy"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/hydroponics
@@ -123,6 +132,7 @@
 	icon_state = "internalaffairs"
 	item_state = "ba_suit"
 	worn_state = "internalaffairs"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/rank/janitor
@@ -137,6 +147,7 @@
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
 	name = "Lawyer suit"
+	rolled_sleeves = -1
 
 
 /obj/item/clothing/under/lawyer/black
@@ -195,6 +206,7 @@
 	icon_state = "red_suit"
 	item_state = "lawyer_red"
 	worn_state = "red_suit"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/mime
 	name = "mime's outfit"
@@ -202,6 +214,7 @@
 	icon_state = "mime"
 	item_state = "ba_suit"
 	worn_state = "mime"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/miner
 	desc = "It's a snappy jumpsuit with a sturdy set of overalls. It is very dirty."
@@ -209,3 +222,4 @@
 	icon_state = "miner"
 	item_state = "lb_suit"
 	worn_state = "miner"
+	rolled_sleeves = -1

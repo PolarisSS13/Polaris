@@ -198,7 +198,7 @@ SEE_TURFS // can see all turfs (and areas), no matter what
 SEE_PIXELS// if an object is located on an unlit area, but some of its pixels are
           // in a lit area (via pixel_x,y or smooth movement), can see those pixels
 BLIND     // can't see anything
-*/
+
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
@@ -213,7 +213,7 @@ BLIND     // can't see anything
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_glasses()
-
+*/
 ///////////////////////////////////////////////////////////////////////
 //Gloves
 /obj/item/clothing/gloves
@@ -528,6 +528,7 @@ BLIND     // can't see anything
 	var/list/accessories = list()
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		"Vox" = 'icons/mob/species/vox/uniform.dmi'
 		)
@@ -721,8 +722,28 @@ BLIND     // can't see anything
 
 	rolled_down = !rolled_down
 	if(rolled_down)
-		body_parts_covered &= LOWER_TORSO|LEGS|FEET
+		body_parts_covered &= LOWER_TORSO|LEGS
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_d"
+	else
+		body_parts_covered = initial(body_parts_covered)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+	update_clothing_icon()
+	
+/obj/item/clothing/under/verb/rollsuit()
+	set name = "Roll Up Sleeves"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	if(rolled_sleeves == -1)
+		usr << "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>"
+		return
+
+	rolled_sleeves = !rolled_sleeves
+	if(rolled_sleeves)
+		body_parts_covered &= UPPER_TORSO|LOWER_TORSO|LEGS
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"

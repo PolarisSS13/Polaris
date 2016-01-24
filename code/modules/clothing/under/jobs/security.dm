@@ -69,6 +69,7 @@
 	worn_state = "swatunder"
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = -1
 
 /*
  * Detective
@@ -81,7 +82,9 @@
 	worn_state = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = 0
 
+/*
 /obj/item/clothing/under/det/verb/rollup()
 	set name = "Roll Suit Sleeves"
 	set category = "Object"
@@ -91,7 +94,7 @@
 	var/mob/living/carbon/human/H = loc
 	H.update_inv_w_uniform(1)
 	H << "<span class='notice'>You roll the sleeves of your shirt [unrolled ? "up" : "down"]</span>"
-
+*/
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"

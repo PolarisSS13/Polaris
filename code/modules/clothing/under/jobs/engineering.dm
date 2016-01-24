@@ -13,6 +13,7 @@
 	icon_state = "chieff"
 	worn_state = "chieff"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/atmospheric_technician
 	desc = "It's a jumpsuit worn by atmospheric technicians."
@@ -27,6 +28,7 @@
 	icon_state = "atmosf"
 	worn_state = "atmosf"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/engineer
 	desc = "It's an orange high visibility jumpsuit worn by engineers. It has minor radiation shielding."
@@ -42,6 +44,7 @@
 	icon_state = "enginef"
 	worn_state = "enginef"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/roboticist
 	desc = "It's a slimming black jumpsuit with reinforced seams; great for industrial work."
@@ -55,3 +58,4 @@
 	name = "roboticist's jumpskirt"
 	icon_state = "roboticsf"
 	worn_state = "roboticsf"
+	rolled_sleeves = -1
