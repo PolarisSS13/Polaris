@@ -8,7 +8,6 @@
 	item_state = "lb_suit"
 	worn_state = "director"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/research_director/rdalt
 	desc = "A dress suit and slacks stained with hard work and dedication to science. Perhaps other things as well, but mostly hard work and dedication."
@@ -17,7 +16,6 @@
 	item_state = "lb_suit"
 	worn_state = "rdalt"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/research_director/dress_rd
 	name = "research director dress uniform"
@@ -27,7 +25,6 @@
 	worn_state = "dress_rd"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
-	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/scientist
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist."
@@ -37,6 +34,7 @@
 	worn_state = "sciencewhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/scientist/skirt
 	name = "scientist's jumpskirt"
@@ -53,6 +51,7 @@
 	worn_state = "chemistrywhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/chemist/skirt
 	name = "chemist's jumpskirt"
@@ -72,6 +71,7 @@
 	worn_state = "cmo"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/chief_medical_officer/skirt
 	desc = "It's a jumpskirt worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
@@ -89,6 +89,7 @@
 	worn_state = "geneticswhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/geneticist/skirt
 	name = "geneticist's jumpskirt"
@@ -105,6 +106,7 @@
 	worn_state = "virologywhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/virologist/skirt
 	name = "virologist's jumpskirt"
@@ -143,6 +145,7 @@
 	worn_state = "orderly"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/medical
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
@@ -152,6 +155,7 @@
 	worn_state = "medical"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/medical/skirt
 	name = "medical doctor's jumpskirt"
@@ -213,6 +217,7 @@
 	icon_state = "psychturtle"
 	item_state = "b_suit"
 	worn_state = "psychturtle"
+	rolled_sleeves = 0
 
 
 /*
@@ -226,6 +231,7 @@
 	worn_state = "genetics_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/chemist_new
 	desc = "It's made of a special fiber which provides minor protection against biohazards."
@@ -235,6 +241,7 @@
 	worn_state = "chemist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/scientist_new
 	desc = "Made of a special fiber that gives special protection against biohazards and small explosions."
@@ -244,6 +251,7 @@
 	worn_state = "scientist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/virologist_new
 	desc = "Made of a special fiber that gives increased protection against biohazards."
@@ -253,3 +261,4 @@
 	worn_state = "virologist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0

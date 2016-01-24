@@ -573,6 +573,29 @@ BLIND     // can't see anything
 	else
 		rolled_down = -1
 	if(H) update_clothing_icon()
+	
+/obj/item/clothing/under/proc/update_rollsleeves_status()
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype()])
+		under_icon = sprite_sheets[H.species.get_bodytype()]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = INV_W_UNIFORM_DEF_ICON
+
+	// The _s is because the icon update procs append it.
+	if(("[worn_state]_r_s") in icon_states(under_icon))
+		if(rolled_sleeves != 1)
+			rolled_sleeves = 0
+	else
+		rolled_sleeves = -1
+	if(H) update_clothing_icon()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
@@ -719,14 +742,19 @@ BLIND     // can't see anything
 	if(rolled_down == -1)
 		usr << "<span class='notice'>You cannot roll down [src]!</span>"
 		return
+	if((rolled_sleeves == 1) && !(rolled_down))
+		rolled_sleeves = 0
 
 	rolled_down = !rolled_down
 	if(rolled_down)
-		body_parts_covered &= LOWER_TORSO|LEGS
+		body_parts_covered = initial(body_parts_covered)
+		body_parts_covered &= !(UPPER_TORSO|ARMS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_d"
+		usr << "<span class='notice'>You roll down your [src].</span>"
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+		usr << "<span class='notice'>You roll up your [src].</span>"
 	update_clothing_icon()
 	
 /obj/item/clothing/under/verb/rollsleeves()
@@ -736,17 +764,23 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
+	update_rollsleeves_status()
 	if(rolled_sleeves == -1)
 		usr << "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>"
+		return
+	if(rolled_down == 1)
+		usr << "<span class='notice'>You must roll up your [src] first!</span>"
 		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
-		body_parts_covered &= UPPER_TORSO|LOWER_TORSO|LEGS
+		body_parts_covered &= !(ARMS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
+		usr << "<span class='notice'>You roll up your [src]'s sleeves.</span>"
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+		usr << "<span class='notice'>You roll down your [src]'s sleeves.</span>"
 	update_clothing_icon()
 
 /obj/item/clothing/under/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
