@@ -88,6 +88,7 @@
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
+	var/eye = null
 	
 /obj/item/clothing/glasses/eyepatch/verb/switcheye()
 	set name = "Switch Eyepatch"
@@ -98,9 +99,9 @@
 
 	eye = !eye
 	if(eye)
-		icon_state += "_r"
+		icon_state = "[icon_state]_r"
 	else
-		icon_state = initial(item_state)
+		icon_state = initial(icon_state)
 	update_clothing_icon()
 
 /obj/item/clothing/glasses/monocle

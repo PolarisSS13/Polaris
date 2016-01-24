@@ -729,7 +729,7 @@ BLIND     // can't see anything
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 	update_clothing_icon()
 	
-/obj/item/clothing/under/verb/rollsuit()
+/obj/item/clothing/under/verb/rollsleeves()
 	set name = "Roll Up Sleeves"
 	set category = "Object"
 	set src in usr
