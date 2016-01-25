@@ -4,7 +4,6 @@
 	extended_round_description = "Mercenaries and xenomorphs spawn in this game mode."
 	config_tag = "bughunt"
 	required_players = 15
-	required_players_secret = 25
 	required_enemies = 1
 	end_on_antag_death = 1
 	antag_tags = list(MODE_XENOMORPH, MODE_DEATHSQUAD)
