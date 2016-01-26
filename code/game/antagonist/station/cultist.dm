@@ -15,8 +15,8 @@ var/datum/antagonist/cultist/cult
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
 	bantype = "cultist"
-	restricted_jobs = list("Chaplain", "AI", "Cyborg")
-	protected_jobs = list("Internal Affairs Agent", "Head of Security", "Captain", "Security Officer", "Warden", "Detective")
+	restricted_jobs = list("Chaplain", "AI", "Cyborg", "Head of Security", "Captain")
+	protected_jobs = list("Internal Affairs Agent", "Security Officer", "Warden", "Detective")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"

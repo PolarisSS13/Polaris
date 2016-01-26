@@ -130,11 +130,6 @@
 					if(75 to 100)
 						target << "<span class='cult'>Your mind turns to ash as the burning flames engulf your very soul and images of an unspeakable horror begin to bombard the last remnants of mental resistance.</span>"
 						target.take_overall_damage(0, 10)
-			if(target.stat == UNCONSCIOUS || target.getFireLoss() > 100) // Kick them out and replace them by a ghost if any is willing
-				target << "<span class='cult'>Your entire broken soul and being is engulfed in corruption and flames as your mind shatters away into nothing.</span>"
-				target.ghostize(0)
-				var/datum/ghosttrap/cult/G = get_ghost_trap("cultist")
-				G.request_player(target, "The Geomoter of Blood claimed the soul of \the [target]. ")
 
 /obj/effect/rune/convert/Topic(href, href_list)
 	if(href_list["join"])

@@ -82,7 +82,7 @@
 	if(!shade.key)
 		user << "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>"
 		user.pay_for_rune(1)
-		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
+		var/datum/ghosttrap/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
 	else if(!shade.client)
 		user << "<span class='notice'>\The [shade] in \the [src] is dormant.</span>"
