@@ -103,6 +103,7 @@
 			var/obj/item/weapon/circuitboard/M = new circuit( A )
 			A.circuit = M
 			A.anchored = 1
+			A.density = 1
 			A.frame_type = "computer"
 			for (var/obj/C in src)
 				C.forceMove(loc)
