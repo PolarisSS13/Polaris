@@ -142,7 +142,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/head/soft/red
 
 /datum/gear/cap/sec
-	display_name = "cap, security"
+	display_name = "cap, security (Security)"
 	path = /obj/item/clothing/head/soft/sec
 	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
@@ -404,7 +404,7 @@ var/global/list/gear_datums = list()
 	cost = 1
 
 /datum/gear/harness
-	display_name = "gear harness"
+	display_name = "gear harness (Full Body Prosthetic, Dionaea)"
 	path = /obj/item/clothing/under/harness
 	slot = slot_w_uniform
 	cost = 1
@@ -1146,7 +1146,7 @@ var/global/list/gear_datums = list()
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
 
 /datum/gear/labcoat/emt
-	display_name = "labcoat, emt"
+	display_name = "labcoat, EMT (Medical)"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/emt
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
 
@@ -1479,7 +1479,31 @@ var/global/list/gear_datums = list()
 
 /datum/gear/cards
 	display_name = "deck of cards"
-	path = /obj/item/weapon/deck
+	path = /obj/item/weapon/deck/cards
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/tarot
+	display_name = "deck of tarot cards"
+	path = /obj/item/weapon/deck/tarot
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/holder
+	display_name = "card holder"
+	path = /obj/item/weapon/deck/holder
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/cardemon_pack
+	display_name = "Cardemon booster pack"
+	path = /obj/item/weapon/pack/cardemon
+	sort_category = "misc"
+	cost = 1
+
+/datum/gear/spaceball_pack
+	display_name = "Spaceball booster pack"
+	path = /obj/item/weapon/pack/spaceball
 	sort_category = "misc"
 	cost = 1
 
