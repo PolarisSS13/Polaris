@@ -32,8 +32,13 @@
 	model_desc = "It's a heavy, swept-back, serious-business energy rifle."
 
 /decl/weapon_model/hi/assault
+	force_gun_name = "light machine gun"
 	model_name = "HI UR 70"
-	model_desc = "It's a heavy, swept-back, serious-business assault rifle."
+	model_desc = "It's a heavy, swept-back, serious-business light maching gun with a pleasantly lacquered pistol grip."
+	use_icon = 'icons/obj/gun_components/hesphaistos/hi_lmg.dmi'
+	ammo_indicator_icon = 'icons/obj/gun_components/hesphaistos/hi_lmg.dmi'
+	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 4
 
 /decl/weapon_model/hi/eshotgun
 	model_name = "HI CC-10 3WB-E"
@@ -56,6 +61,7 @@
 	use_icon = 'icons/obj/gun_components/hesphaistos/hi_rifle.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/hesphaistos/hi_rifle.dmi'
 	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 5
 
 /decl/weapon_model/hi/ecannon
 	model_name = "HI 3WB-E"

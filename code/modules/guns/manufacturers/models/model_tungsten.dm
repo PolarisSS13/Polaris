@@ -7,14 +7,17 @@
 	producer_path = /decl/weapon_manufacturer/tungsten
 	model_name = "TDG LA SC Semi-Niner"
 	model_desc = "It's a heavy pistol, barely usable in just a single hand."
+	use_icon = 'icons/obj/gun_components/tungsten/tdg_pistol.dmi'
+
+/decl/weapon_model/tdg/carbine
+	force_gun_name = ".223 carbine"
+	model_name = "TDG LC Auto-Fiver"
+	model_desc = "It's a huge, clunky carbine, more like a club than a precision weapon."
+	use_icon = 'icons/obj/gun_components/tungsten/tdg_carbine.dmi'
 
 /decl/weapon_model/tdg/smg
 	model_name = "TDG LA LC Auto-Niner"
 	model_desc = "It's an excitingly chunky and dangerous-looking machine pistol."
-
-/decl/weapon_model/tdg/rifle
-	model_name = "TDG LC Auto-Fiver"
-	model_desc = "It's a huge, clunky assault rifle, more like a club than a precision weapon."
 
 /decl/weapon_model/tdg/shotgun
 	model_name = "TDG HA LC Single-Twentier"

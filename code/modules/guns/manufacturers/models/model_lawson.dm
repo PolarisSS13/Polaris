@@ -6,18 +6,17 @@
 	model_desc = "It's an older-style stun pistol perfect for duels."
 	use_icon = 'icons/obj/gun_components/lawson/la_stunshot.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/lawson/la_stunshot.dmi'
+	ammo_use_state = "chamber_loaded"
 
 /decl/weapon_model/la/revolver
-	model_name = "Lawson Arms Colt"
+	model_name = "Lawson Arms Bronco"
 	model_desc = "A choice revolver for when you absolutely, positively need to put a hole in the other guy."
 	use_icon = 'icons/obj/gun_components/models/revolver.dmi'
-	ammo_indicator_icon = 'icons/obj/gun_components/models/revolver.dmi'
 
 /decl/weapon_model/la/revolver_detective
 	model_name = "Lawson Arms Eastwood"
 	model_desc = "A cheap Martian knock-off of a Smith & Wesson Model 10."
 	use_icon = 'icons/obj/gun_components/models/revolver_det.dmi'
-	ammo_indicator_icon = 'icons/obj/gun_components/models/revolver_det.dmi'
 
 /decl/weapon_model/la/highwayman
 	model_name = "Lawson Highwayman"

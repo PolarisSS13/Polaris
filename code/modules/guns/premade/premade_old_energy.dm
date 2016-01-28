@@ -53,7 +53,7 @@
 
 // xray laser gun - A high-power laser gun capable of expelling concentrated xray blasts.
 /obj/item/weapon/gun/composite/premade/xray_smg
-	set_model = /decl/weapon_model/xray
+	set_model = /decl/weapon_model/hcs/horus
 	build_components = list(
 		/obj/item/gun_component/grip/smg/laser,
 		/obj/item/gun_component/body/smg/laser,

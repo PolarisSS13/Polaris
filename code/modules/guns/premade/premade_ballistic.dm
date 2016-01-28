@@ -1,4 +1,5 @@
 /obj/item/weapon/gun/composite/premade/pistol_10mm
+	set_model = /decl/weapon_model/tdg
 	build_components = list(
 		/obj/item/gun_component/grip/pistol,
 		/obj/item/gun_component/body/pistol,
@@ -15,4 +16,3 @@
 		/obj/item/gun_component/stock/cannon,
 		/obj/item/gun_component/barrel/cannon
 		)
-

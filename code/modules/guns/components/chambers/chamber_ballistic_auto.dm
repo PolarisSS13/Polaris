@@ -19,6 +19,7 @@
 	weapon_type = GUN_SMG
 	load_method = MAGAZINE|SPEEDLOADER
 	max_shots = 22
+	ammo_indicator_state = "ballistic_smg"
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=5,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0))
@@ -33,6 +34,7 @@
 	weapon_type = GUN_ASSAULT
 	load_method = MAGAZINE
 	max_shots = 22
+	ammo_indicator_state = "ballistic_assault"
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
 		list(mode_name="5-round bursts", burst=3, fire_delay=null, move_delay=5,    burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0))
@@ -40,8 +42,6 @@
 
 /obj/item/gun_component/chamber/ballistic/assault/large
 	name = "extended-capacity autoloader"
-	weapon_type = GUN_ASSAULT
-	load_method = MAGAZINE
 	max_shots = 50
 	var/breech_open
 

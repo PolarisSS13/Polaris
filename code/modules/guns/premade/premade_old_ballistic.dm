@@ -39,7 +39,7 @@
 		)
 
 /obj/item/weapon/gun/composite/premade/ar_a556
-	set_model = /decl/weapon_model/carbine
+	set_model = /decl/weapon_model/tdg/carbine
 	build_components = list(
 		/obj/item/gun_component/grip/assault,
 		/obj/item/gun_component/body/assault,
@@ -50,7 +50,7 @@
 		)
 
 /obj/item/weapon/gun/composite/premade/lmg_saw
-	set_model = /decl/weapon_model/lmg_saw
+	set_model = /decl/weapon_model/hi/assault
 	build_components = list(
 		/obj/item/gun_component/grip/assault,
 		/obj/item/gun_component/body/assault,

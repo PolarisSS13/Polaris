@@ -41,6 +41,7 @@
 	use_icon = 'icons/obj/gun_components/wardtakahashi/wt_saber.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/wardtakahashi/wt_saber.dmi'
 	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 5
 
 /decl/weapon_model/wt/
 	model_name = "W-T 3NB-ACR Wazikashi"
