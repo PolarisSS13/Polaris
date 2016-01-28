@@ -71,6 +71,7 @@
 
 // vintage .45 pistol - A cheap Martian knock-off of a Colt M1911. Uses .45 rounds.
 /obj/item/weapon/gun/composite/premade/pistol_a45
+	set_model = /decl/weapon_model/nt/secpistol
 	build_components = list(
 		/obj/item/gun_component/grip/pistol,
 		/obj/item/gun_component/body/pistol,

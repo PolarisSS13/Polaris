@@ -36,7 +36,7 @@
 
 /obj/item/gun_component/chamber/laser/apply_shot_mod(var/val)
 	..()
-	charge_cost = n_round(charge_cost * val)
+	charge_cost = n_round(charge_cost*val)
 
 /obj/item/gun_component/chamber/laser/unload_ammo(var/mob/user)
 	if(!can_remove_cell)

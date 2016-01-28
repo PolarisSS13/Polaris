@@ -5,21 +5,32 @@
 	model_name = "NT Mk30-E"
 	model_desc = "It's a small gun used for non-lethal takedowns. It's actually a licensed version of an outdated Ward-Takahashi design."
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_taser.dmi'
+	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_taser.dmi'
+	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 4
 
 /decl/weapon_model/nt/secpistol
 	model_name = "NT Mk58"
 	model_desc = "It's a a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary."
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_pistol.dmi'
+	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_pistol.dmi'
+	ammo_use_state = "chamber_loaded"
 
 /decl/weapon_model/nt/smg
 	model_name = "NT Mk32"
 	model_desc = "It's a cheap, lightweight submachine gun. Clearly mass-produced."
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_smg.dmi'
+	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_smg.dmi'
+	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 6
 
 /decl/weapon_model/nt/esmg
 	model_name = "NT Mk32-E"
 	model_desc = "It's a cheap, lightweight energy submachine gun. Clearly mass-produced."
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_egun.dmi'
+	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_egun.dmi'
+	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 4
 
 /decl/weapon_model/nt/ion
 	force_gun_name = "ion rifle"
@@ -28,6 +39,7 @@
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_ion.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_ion.dmi'
 	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 4
 
 /decl/weapon_model/nt/adv_egun
 	force_gun_name = "prototype energy rifle"
@@ -35,6 +47,7 @@
 	use_icon = 'icons/obj/gun_components/nanotrasen/nt_nukegun.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/nanotrasen/nt_nukegun.dmi'
 	ammo_use_state = "chamber_loaded"
+	ammo_indicator_states = 4
 
 /decl/weapon_model/nt/laser_cannon
 	force_gun_name = "prototype energy cannon"
