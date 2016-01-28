@@ -35,13 +35,19 @@ var/list/all_premade_gun_types = typesof(/obj/item/weapon/gun/composite/premade)
 	for(var/guntype in all_premade_gun_types)
 		new guntype(src)
 
+/obj/structure/gun_crate/all_ammo
+	name = "endgame ammo crate"
+	desc = "You can just taste the gunpowder."
+	offset_contents = 1
+
+/obj/structure/gun_crate/all_ammo/New()
+	..()
 	for(var/ammotype in typesof(/obj/item/ammo_magazine)-/obj/item/ammo_magazine)
 		new ammotype(src)
 		new ammotype(src)
 		new ammotype(src)
 		new ammotype(src)
 		new ammotype(src)
-
 	for(var/ammotype in typesof(/obj/item/ammo_casing)-/obj/item/ammo_casing)
 		new ammotype(src)
 		new ammotype(src)

@@ -38,6 +38,7 @@
 /decl/weapon_model/hcs/horus
 	model_name = "HCS HEW p-27/WB-A Horus"
 	model_desc = "A compact X-ray energy PDW, stamped with a bird of prey on the stock."
+	use_icon = 'icons/obj/gun_components/halicon/hcs_smg.dmi'
 	ammo_indicator_icon = 'icons/obj/gun_components/halicon/hcs_smg.dmi'
 	ammo_use_state = "chamber_loaded"
 	ammo_indicator_states = 5

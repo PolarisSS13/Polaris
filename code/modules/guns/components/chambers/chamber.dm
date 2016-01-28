@@ -23,19 +23,19 @@
 	if(ammo_indicator_state)
 		var/shots_left = get_shots_remaining()
 		var/use_state = ammo_indicator_state
-		if(shots_left)
-			if(model && model.ammo_use_state)
-				use_state = model.ammo_use_state
-				if(model.ammo_indicator_states)
-					if(shots_left == max_shots)
-						use_state += "[model.ammo_indicator_states]"
-					else
-						use_state += "[n_ceil((shots_left/max_shots)*model.ammo_indicator_states)]"
-			else
-				if(ammo_indicator_states)
-					use_state += "[n_round((shots_left/max_shots)*ammo_indicator_states)]"
+		if(model && model.ammo_use_state)
+			use_state = model.ammo_use_state
+			if(model.ammo_indicator_states)
+				if(shots_left == max_shots)
+					use_state += "[model.ammo_indicator_states]"
+				else if(shots_left <= 0)
+					use_state += "0"
+				else
+					use_state += "[n_ceil((shots_left/max_shots)*model.ammo_indicator_states)]"
 		else
-			use_state = ""
+			if(ammo_indicator_states)
+				use_state += "[n_round((shots_left/max_shots)*ammo_indicator_states)]"
+
 		if(!ammo_overlay)
 			if(model && model.ammo_indicator_icon)
 				ammo_overlay = image(icon = model.ammo_indicator_icon)
