@@ -89,15 +89,18 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 
+/obj/item/weapon/gun/proc/reset_name()
+	return initial(name)
+
 /obj/item/weapon/gun/update_held_icon()
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
 			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
-				name = "[initial(name)] (wielded)"
+				name = "[reset_name()] (wielded)"
 				item_state = wielded_icon
 			else
-				name = initial(name)
+				name = reset_name()
 				item_state = initial(item_state)
 				update_icon(ignore_inhands=1) // In case item_state is set somewhere else.
 	..()

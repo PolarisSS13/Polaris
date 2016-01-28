@@ -32,6 +32,21 @@
 		qdel(assembly)
 	..(newloc)
 
+/obj/item/weapon/gun/composite/reset_name()
+	update_strings()
+	return name
+
+/obj/item/weapon/gun/composite/Destroy()
+	barrel = null
+	body = null
+	grip = null
+	stock = null
+	chamber = null
+	accessories.Cut()
+	for(var/obj/item/I in contents)
+		qdel(I)
+	return ..()
+
 /obj/item/weapon/gun/composite/proc/update_from_components()
 
 	// Should we actually exist?

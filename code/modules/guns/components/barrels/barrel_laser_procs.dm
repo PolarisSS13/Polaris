@@ -1,6 +1,12 @@
 // Laser barrel helpers.
 /proc/get_laser_type_from_caliber(var/caliber)
 	switch(caliber)
+		if(CALIBER_STAFF_FORCE)
+			return /obj/item/projectile/forcebolt
+		if(CALIBER_STAFF_ANIMATE)
+			return /obj/item/projectile/animate
+		if(CALIBER_STAFF_CHANGE)
+			return /obj/item/projectile/change
 		if(CALIBER_LASER_SHOTGUN)
 			return /obj/item/projectile/bullet/pellet/laser
 		if(CALIBER_LASER_ION)
@@ -37,7 +43,7 @@
 			return 'sound/weapons/lasercannonfire.ogg'
 		if(CALIBER_LASER_XRAY)
 			return 'sound/weapons/laser3.ogg'
-		if(CALIBER_LASER_INDUSTRIAL)
+		if(CALIBER_LASER_INDUSTRIAL, CALIBER_STAFF_ANIMATE, CALIBER_STAFF_CHANGE, CALIBER_STAFF_FORCE)
 			return 'sound/weapons/emitter.ogg'
 		if(CALIBER_LASER_PRECISION)
 			return 'sound/weapons/marauder.ogg'

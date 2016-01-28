@@ -100,10 +100,10 @@
 
 		for(var/obj/item/gun_component/temp_comp in list(body, barrel, stock, grip, chamber))
 			if(istype(temp_comp))
-				if(!isnull(temp_comp.weapon_type) && temp_comp.weapon_type != GC.weapon_type)
+				if(!isnull(GC.weapon_type) && temp_comp.weapon_type != GC.weapon_type)
 					user << "<span class='warning'>\The [GC] is designed for a different model of weapon.</span>"
 					return
-				if(!isnull(temp_comp.projectile_type) && temp_comp.projectile_type != GC.projectile_type)
+				if(!isnull(GC.projectile_type) && temp_comp.projectile_type != GC.projectile_type)
 					user << "<span class='warning'>\The [GC] is designed for a different type of weapon.</span>"
 					return
 
@@ -179,7 +179,8 @@
 	icon = 'icons/obj/gun_components/unbranded.dmi'
 	icon_state = "blank"
 
-	item_state = body.item_state
+	if(body)
+		item_state = body.item_state
 
 	overlays.Cut()
 	var/gun_type

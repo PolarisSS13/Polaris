@@ -116,12 +116,42 @@
 	origin_tech = null
 	self_recharge = 1
 	charge_meter = 0
+	var/broken_type = /obj/item/gun_component/barrel/laser/magic
 
 /obj/item/weapon/gun/energy/staff/special_check(var/mob/user)
 	if((user.mind && !wizards.is_antagonist(user.mind)))
 		usr << "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>"
 		return 0
+	return ..()
 
+/obj/item/weapon/gun/energy/staff/proc/discharge(var/mob/user)
+	if(!power_supply || !power_supply.charge)
+		return
+	var/turf/T = get_turf(src)
+	playsound(T, 'sound/effects/sparks1.ogg', 100, 1)
+	playsound(T, fire_sound, 100, 1)
+
+	var/remaining_shots = round(power_supply.charge / charge_cost)
+	for(var/x=1 to remaining_shots)
+		var/turf/target = get_edge_target_turf(T,pick(alldirs))
+		var/obj/item/projectile/P = new projectile_type(T)
+		process_projectile(P, user, target, user.zone_sel.selecting)
+	return
+
+/obj/item/weapon/gun/energy/staff/attack_self(var/mob/user)
+	if(user.a_intent == I_HURT)
+		user.unEquip(src)
+		user.visible_message("<span class='danger'>\The [user] snaps \the [src] over their knee!</span>")
+		var/turf/T = get_turf(user)
+		// POW!
+		discharge(user)
+		// Debris.
+		new /obj/item/stack/material/wood(T, rand(1,3))
+		new /obj/item/stack/material/wood(T, rand(1,3))
+		if(broken_type)
+			new broken_type(get_turf(src))
+		qdel(src)
+		return
 	return ..()
 
 /obj/item/weapon/gun/energy/staff/handle_click_empty(mob/user = null)
@@ -136,6 +166,7 @@
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
 	projectile_type = /obj/item/projectile/animate
 	max_shots = 10
+	broken_type = /obj/item/gun_component/barrel/laser/magic/animate
 
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
@@ -144,6 +175,7 @@ obj/item/weapon/gun/energy/staff/focus
 	icon_state = "focus"
 	item_state = "focus"
 	slot_flags = SLOT_BACK
+	broken_type = /obj/item/gun_component/barrel/laser/magic/force
 	projectile_type = /obj/item/projectile/forcebolt
 	/*
 	attack_self(mob/living/user as mob)

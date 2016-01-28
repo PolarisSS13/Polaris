@@ -14,7 +14,10 @@
 
 /obj/item/gun_component/barrel/update_strings()
 	..()
-	name = "[override_name ? override_name : caliber] [weapon_type] [name]"
+	if(model && model.produced_by.manufacturer_short != "unbranded")
+		name = "[model.produced_by.manufacturer_short] [override_name ? override_name : caliber] [weapon_type] [initial(name)]"
+	else
+		name = "[override_name ? override_name : caliber] [weapon_type] [initial(name)]"
 
 /obj/item/gun_component/barrel/proc/get_projectile_type()
 	return

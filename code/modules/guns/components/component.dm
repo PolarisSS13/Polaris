@@ -15,6 +15,10 @@ var/list/gun_component_icon_cache = list()
 	var/has_user_interaction                 // Can this component be interacted with via gun attack_self()?
 	var/has_alt_interaction                  // Can this component be interacted with via gun AltClick()?
 
+/obj/item/gun_component/Destroy()
+	holder = null
+	return ..()
+
 /obj/item/gun_component/New(var/newloc, var/weapontype, var/componenttype, var/use_model)
 	..(newloc)
 	if(weapontype)    weapon_type = weapontype
@@ -47,13 +51,18 @@ var/list/gun_component_icon_cache = list()
 		I.forceMove(get_turf(src))
 
 /obj/item/gun_component/proc/update_strings()
-	if(model)
-		name = "[get_gun_name(src, projectile_type, weapon_type)] [initial(name)]"
-	else
-		name = "[initial(name)]"
+
+	name = "[initial(name)]"
+	if(weapon_type)
+		name = "[weapon_type] [name]"
+	if(projectile_type == GUN_TYPE_LASER)
+		name = "laser [name]"
 
 	if(model)
-		desc = "The casing is stamped with '[model.model_name]'. [initial(desc)] This one seems like it was produced by [model.produced_by.manufacturer_name]."
+		desc = "The casing is stamped with '[model.model_name]'. [initial(desc)]"
+		if(model.produced_by.manufacturer_short != "unbranded")
+			name = "[model.produced_by.manufacturer_short] [name]"
+			desc += " This one seems like it was produced by [model.produced_by.manufacturer_name]."
 	else
 		desc = "[initial(desc)]"
 

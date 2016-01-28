@@ -177,7 +177,7 @@
 	else if(istype(A, /obj/item/ammo_casing))
 
 		var/obj/item/ammo_casing/C = A
-		if(load_method != SINGLE_CASING || holder.caliber != C.caliber)
+		if(!(load_method & SINGLE_CASING) || holder.caliber != C.caliber)
 			return //incompatible
 		if(loaded.len >= max_shots)
 			user << "<span class='warning'>\The [holder] is full.</span>"

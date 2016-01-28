@@ -1,8 +1,6 @@
 /obj/item/gun_component/barrel/laser/variable
-	name = "variable-output projector"
 	caliber = "variable"
 	weapon_type = GUN_PISTOL
-	override_name = "variable-output"
 	firemodes = list(
 		list(mode_name="stun",   caliber = CALIBER_LASER_TASER),
 		list(mode_name="lethal", caliber = CALIBER_LASER),
