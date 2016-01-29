@@ -330,12 +330,12 @@
 //Note: This should probably be moved to mob
 /obj/item/weapon/weldingtool/proc/eyecheck(mob/user as mob)
 	if(!iscarbon(user))	return 1
-	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
 		if(!E)
 			return
+		var/safety = H.eyecheck()
 		switch(safety)
 			if(1)
 				usr << "<span class='warning'>Your eyes sting a little.</span>"
@@ -351,8 +351,7 @@
 				usr << "<span class='danger'>Your thermals intensify the welder's glow. Your eyes itch and burn severely.</span>"
 				user.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
-		if(safety<2)
-
+		if(safety<FLASH_PROTECTION_MAJOR)
 			if(E.damage > 10)
 				user << "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>"
 
@@ -366,8 +365,6 @@
 				user.disabilities |= NEARSIGHTED
 				spawn(100)
 					user.disabilities &= ~NEARSIGHTED
-	return
-
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
