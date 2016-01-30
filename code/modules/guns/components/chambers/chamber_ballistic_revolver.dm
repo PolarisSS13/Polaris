@@ -4,6 +4,7 @@
 	handle_casings = CYCLE_CASINGS
 	max_shots = 6
 	has_alt_interaction = 1
+	revolver = 1
 
 	var/chamber_offset = 0
 

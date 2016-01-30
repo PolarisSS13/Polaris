@@ -11,22 +11,22 @@
 		if(istype(assembly, /obj/item/weapon/gun_assembly))
 			var/obj/item/weapon/gun_assembly/GA = assembly
 			if(istype(GA.chamber))
-				if(GA.chamber.firemodes.len)
+				if(GA.chamber.automatic)
 					auto = 1
-				if(istype(GA.chamber, /obj/item/gun_component/chamber/ballistic/breech/revolver))
+				if(GA.chamber.revolver)
 					revolver = 1
-				if(GA.barrel && GA.barrel.override_name)
-					override_type_name = GA.barrel.override_name
 			if(GA.barrel)
 				caliber = GA.barrel
+				if(GA.barrel.override_name)
+					override_type_name = GA.barrel.override_name
 		else if(istype(assembly, /obj/item/weapon/gun/composite))
 			var/obj/item/weapon/gun/composite/CG = assembly
 			caliber = CG.caliber
 			dam_type = CG.dam_type
 			gun_type = CG.gun_type
-			if(CG.firemodes.len)
+			if(CG.chamber.automatic)
 				auto = 1
-			if(istype(CG.chamber, /obj/item/gun_component/chamber/ballistic/breech/revolver))
+			if(CG.chamber.revolver)
 				revolver = 1
 			if(CG.barrel.override_name)
 				override_type_name = CG.barrel.override_name

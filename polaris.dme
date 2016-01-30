@@ -1218,6 +1218,7 @@
 #include "code\modules\guns\components\chambers\chamber_ballistic.dm"
 #include "code\modules\guns\components\chambers\chamber_ballistic_auto.dm"
 #include "code\modules\guns\components\chambers\chamber_ballistic_breech.dm"
+#include "code\modules\guns\components\chambers\chamber_ballistic_launcher.dm"
 #include "code\modules\guns\components\chambers\chamber_ballistic_pump.dm"
 #include "code\modules\guns\components\chambers\chamber_ballistic_revolver.dm"
 #include "code\modules\guns\components\chambers\chamber_energy.dm"

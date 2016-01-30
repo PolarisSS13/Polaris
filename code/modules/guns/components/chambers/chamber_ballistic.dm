@@ -102,7 +102,9 @@
 				magazine.stored_ammo += chambered
 			else
 				loaded += chambered
-
+		if(DESTROY_CASINGS)
+			qdel(chambered)
+			chambered = null
 	// If this is a gun that doesn't need unloading, clear the casing slot.
 	if(handle_casings != HOLD_CASINGS)
 		chambered = null

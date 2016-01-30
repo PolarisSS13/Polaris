@@ -6,11 +6,14 @@
 #define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
 #define EJECT_CASINGS	1 //drop spent casings on the ground after firing
 #define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns
+#define DESTROY_CASINGS 3
 
+#define CALIBER_CANNON           "20mm gyrojet"
+#define CALIBER_GRENADE          "40mm grenade"
+#define CALIBER_ROCKET           "66mm rocket"
 #define CALIBER_PISTOL_SMALL     "5.7mm"
 #define CALIBER_PISTOL_MEDIUM    "9mm"
 #define CALIBER_PISTOL_LARGE     "10mm"
-#define CALIBER_CANNON           "20mm"
 #define CALIBER_RIFLE_SMALL      ".223"
 #define CALIBER_RIFLE_LARGE      ".308"
 #define CALIBER_357              ".357"

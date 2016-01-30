@@ -11,6 +11,8 @@
 	var/ammo_indicator_states        // Range of variant states.
 	var/ammo_indicator_state         // Base ammo overlay state.
 	var/image/ammo_overlay           // Holder for the ammo overlay image.
+	var/automatic
+	var/revolver
 
 /obj/item/gun_component/chamber/New()
 	..()

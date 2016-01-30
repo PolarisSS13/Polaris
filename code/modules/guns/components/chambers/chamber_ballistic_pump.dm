@@ -26,9 +26,3 @@
 		chambered = AC
 	update_ammo_overlay()
 	return 1
-
-// For grenade launchers.
-/obj/item/gun_component/chamber/ballistic/pump/cannon
-	weapon_type = GUN_CANNON
-	handle_casings = EJECT_CASINGS
-	max_shots = 6

@@ -16,3 +16,21 @@
 		/obj/item/gun_component/stock/cannon,
 		/obj/item/gun_component/barrel/cannon
 		)
+
+/obj/item/weapon/gun/composite/premade/grenade_launcher
+	build_components = list(
+		/obj/item/gun_component/grip/cannon,
+		/obj/item/gun_component/body/cannon,
+		/obj/item/gun_component/stock/cannon,
+		/obj/item/gun_component/chamber/ballistic/pump/cannon,
+		/obj/item/gun_component/barrel/cannon/rocket
+		)
+
+/obj/item/weapon/gun/composite/premade/rocket_launcher
+	build_components = list(
+		/obj/item/gun_component/grip/cannon,
+		/obj/item/gun_component/body/cannon,
+		/obj/item/gun_component/stock/cannon,
+		/obj/item/gun_component/chamber/ballistic/launcher,
+		/obj/item/gun_component/barrel/cannon/grenade
+		)
