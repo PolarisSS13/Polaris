@@ -226,8 +226,9 @@
 			if(world.time > last_itch + 30 SECONDS)
 				last_itch = world.time
 				O.owner << "<span class='notice'>Your [O.name] itches...</span>"
-	else if(prob(1))
-		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
+	else if(!istype(loc, /obj/item/glass_jar) && prob(1)) // Stuck somewhere
+		visible_message("<span class='notice'>\The [src] crawls out of \the [loc].</span>")
+		forceMove(get_turf(loc))
 
 	if(amount_grown)
 		amount_grown += rand(0,2)

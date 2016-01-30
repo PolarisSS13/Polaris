@@ -3,12 +3,12 @@
 /datum/antagonist/cultist/proc/add_ghost_magic(var/mob/dead/observer/M)
 	M.verbs += /mob/dead/observer/proc/flick_lights
 	if(cult_level >= 2)
-		M.verbs += /mob/dead/observer/proc/bloody_doodle
+		M.verbs += /mob/dead/observer/proc/bloody_doodle_verb
 		M.verbs += /mob/dead/observer/proc/shatter_glass
 		M.verbs += /mob/dead/observer/proc/slice
 		if(cult_level >= 3)
 			M.verbs += /mob/dead/observer/proc/move_item
-			M.verbs += /mob/dead/observer/proc/whisper_to_cultist
+			M.verbs += /mob/dead/observer/proc/whisper_to_cultist_verb
 			M.verbs += /mob/dead/observer/proc/bite_someone
 			M.verbs += /mob/dead/observer/proc/chill_someone
 			if(cult_level >= 4)
@@ -31,10 +31,6 @@
 
 //Used for drawing on walls with blood puddles as a spooky ghost.
 /mob/dead/observer/proc/bloody_doodle(var/bloodless = 0)
-	set category = "Cult"
-	set name = "Write in blood"
-	set desc = "Write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
-
 	if(ghost_magic_cd > world.time)
 		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
 		return
@@ -91,6 +87,13 @@
 
 	ghost_magic_cd = world.time + 30 SECONDS
 
+/mob/dead/observer/proc/bloody_doodle_verb()
+	set category = "Cult"
+	set name = "Write in blood"
+	set desc = "Write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
+
+	bloody_doodle()
+
 /mob/dead/observer/proc/shatter_glass()
 	set category = "Cult"
 	set name = "Noise: glass shatter"
@@ -141,16 +144,14 @@
 	if(!choice || choice.w_class > 2)
 		return
 
-	if(step_to(choice, T))
+	if(!choice.anchored && step_to(choice, T))
 		choice.visible_message("<span class='warning'>\The [choice] suddenly moves!</span>")
+	else
+		src << "You try to move \the [choice], but in vain."
 
 	ghost_magic_cd = world.time + 60 SECONDS
 
 /mob/dead/observer/proc/whisper_to_cultist(var/anyone = 0)
-	set category = "Cult"
-	set name = "Whisper to mind"
-	set desc = "Whisper to a human of your choice. If they are adjusted enough, they'll hear you."
-
 	if(ghost_magic_cd > world.time)
 		src << "<span class='notice'>You need some more time before you can use your abilities.</span>"
 		return
@@ -166,13 +167,22 @@
 	var/message = sanitize(input("Decide what you want to whisper.", "Whisper", ""))
 
 	if(message)
-		if(iscultist(choice) || anyone)
+		var/heard = (iscultist(choice) || anyone)
+		log_and_message_admins("used ghost whisper to say \"[message]\" to [choice.name] ([choice.key]) and they [heard ? "heard it" : "didn't hear it"].")
+		if(heard)
 			choice << "<span class='notice'>You hear a faint whisper... It says... \"[message]\"</span>"
 		else
 			choice << "<span class='notice'>You hear a faint whisper, but you can't make out the words.</span>"
 		src << "You whisper to \the [choice]. Perhaps they heard you."
 
 	ghost_magic_cd = world.time + 100 SECONDS
+
+/mob/dead/observer/proc/whisper_to_cultist_verb()
+	set category = "Cult"
+	set name = "Whisper to mind"
+	set desc = "Whisper to a human of your choice. If they are adjusted enough, they'll hear you."
+
+	whisper_to_cultist()
 
 /mob/dead/observer/proc/bite_someone()
 	set category = "Cult"
