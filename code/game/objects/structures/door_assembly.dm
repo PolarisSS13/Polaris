@@ -282,7 +282,7 @@
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
 
-			path(src.loc, src)
+			new path(src.loc, src)
 			qdel(src)
 	else
 		..()
