@@ -65,7 +65,7 @@
 
 //For projectiles that actually represent clouds of projectiles
 /obj/item/projectile/bullet/pellet
-	name = "shrapnel" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet'
+	name = "pellet" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet' // It's also not very thematic or informative.
 	damage = 20
 	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
 	var/pellets = 4			//number of pellets
@@ -86,17 +86,17 @@
 
 	var/total_pellets = get_pellets(distance)
 	var/spread = max(base_spread - (spread_step*distance), 0)
-	
+
 	//shrapnel explosions miss prone mobs with a chance that increases with distance
 	var/prone_chance = 0
 	if(!base_spread)
 		prone_chance = max(spread_step*(distance - 2), 0)
-	
+
 	var/hits = 0
 	for (var/i in 1 to total_pellets)
 		if(target_mob.lying && target_mob != original && prob(prone_chance))
 			continue
-		
+
 		//pellet hits spread out across different zones, but 'aim at' the targeted zone with higher probability
 		//whether the pellet actually hits the def_zone or a different zone should still be determined by the parent using get_zone_with_miss_chance().
 		var/old_zone = def_zone
@@ -115,7 +115,7 @@
 
 /obj/item/projectile/bullet/pellet/Move()
 	. = ..()
-	
+
 	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
 	if(. && !base_spread && isturf(loc))
 		for(var/mob/living/M in loc)
@@ -176,7 +176,7 @@
 /obj/item/projectile/bullet/rifle/a556
 	damage = 35
 
-/obj/item/projectile/bullet/rifle/a145
+/obj/item/projectile/bullet/rifle/a50bmg
 	damage = 80
 	stun = 3
 	weaken = 3

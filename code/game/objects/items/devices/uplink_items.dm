@@ -160,7 +160,7 @@ datum/uplink_item/dd_SortValue()
 	path = /obj/item/ammo_magazine/chemdart
 
 /datum/uplink_item/item/ammo/sniperammo
-	name = "14.5mm"
+	name = ".50 BMG"
 	path = /obj/item/weapon/storage/box/sniperammo
 
 /datum/uplink_item/item/ammo/a10mm
@@ -385,7 +385,7 @@ datum/uplink_item/dd_SortValue()
 	item_cost = 3
 	path = /obj/item/weapon/storage/secure/briefcase/money
 	desc = "A briefcase with 10,000 untraceable thalers for funding your sneaky activities."
-	
+
 /datum/uplink_item/item/tools/crystal
 	name = "Tradable Crystal"
 	item_cost = 1

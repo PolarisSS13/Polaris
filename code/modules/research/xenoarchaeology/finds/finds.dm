@@ -375,7 +375,7 @@
 
 			//33% chance to be able to reload the gun with human ammunition
 			if(prob(66))
-				new_gun.caliber = "999"
+				new_gun.caliber = CALIBER_ALIEN
 
 			//33% chance to fill it with a random amount of bullets
 			new_gun.max_shells = rand(1,12)

@@ -1,7 +1,3 @@
-#define HOLD_CASINGS	0 //do not do anything after firing. Manual action, like pump shotguns, or guns that want to define custom behaviour
-#define EJECT_CASINGS	1 //drop spent casings on the ground after firing
-#define CYCLE_CASINGS 	2 //experimental: cycle casings, like a revolver. Also works for multibarrelled guns
-
 /obj/item/weapon/gun/projectile
 	name = "gun"
 	desc = "A gun that fires bullets."
@@ -11,7 +7,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
 
-	var/caliber = "357"		//determines which casings will fit
+	var/caliber = CALIBER_357		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
 	var/load_method = SINGLE_CASING|SPEEDLOADER //1 = Single shells, 2 = box or quick loader, 3 = magazine
 	var/obj/item/ammo_casing/chambered = null
@@ -52,7 +48,7 @@
 			ammo_magazine.stored_ammo -= chambered
 
 	if (chambered)
-		return chambered.BB
+		return chambered.projectile
 	return null
 
 /obj/item/weapon/gun/projectile/handle_post_fire()
@@ -168,7 +164,7 @@
 			user.put_in_hands(C)
 			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
 	else
-		user << "<span class='warning'>[src] is empty.</span>"
+		user << "<span class='warning'>\The [src] is empty.</span>"
 	update_icon()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
@@ -204,7 +200,7 @@
 	..(user)
 	if(ammo_magazine)
 		user << "It has \a [ammo_magazine] loaded."
-	user << "Has [getAmmo()] round\s remaining."
+	user << "It has [getAmmo()] shot\s remaining."
 	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()

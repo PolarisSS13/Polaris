@@ -4,7 +4,7 @@
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
 	icon_state = "colt"
-	caliber = ".45"
+	caliber = CALIBER_45
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
@@ -70,7 +70,7 @@
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/c45m/rubber
-	caliber = ".45"
+	caliber = CALIBER_45
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
@@ -103,7 +103,7 @@
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
 	icon_state = "silenced_pistol"
 	w_class = 3
-	caliber = ".45"
+	caliber = CALIBER_45
 	silenced = 1
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	load_method = MAGAZINE
@@ -115,7 +115,7 @@
 	icon_state = "deagle"
 	item_state = "deagle"
 	force = 14.0
-	caliber = ".50"
+	caliber = CALIBER_MAGNUM
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	auto_eject = 1
@@ -131,14 +131,12 @@
 	item_state = "deagleg"
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
-
-
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
 	desc = "A bulky pistol designed to fire self propelled rounds"
 	icon_state = "gyropistol"
 	max_shells = 8
-	caliber = "75"
+	caliber = CALIBER_CANNON
 	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = list(TECH_COMBAT = 3)
 	ammo_type = "/obj/item/ammo_casing/a75"
@@ -160,7 +158,7 @@
 	icon_state = "pistol"
 	item_state = null
 	w_class = 2
-	caliber = "9mm"
+	caliber = CALIBER_PISTOL_MEDIUM
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
@@ -223,20 +221,20 @@
 	max_shells = 1 //literally just a barrel
 
 	var/global/list/ammo_types = list(
-		/obj/item/ammo_casing/a357              = ".357",
-		/obj/item/ammo_casing/c9mmf             = "9mm",
-		/obj/item/ammo_casing/c45f              = ".45",
-		/obj/item/ammo_casing/a10mm             = "10mm",
-		/obj/item/ammo_casing/shotgun           = "12 gauge",
-		/obj/item/ammo_casing/shotgun           = "12 gauge",
-		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
-		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
-		/obj/item/ammo_casing/shotgun/pellet    = "12 gauge",
-		/obj/item/ammo_casing/shotgun/beanbag   = "12 gauge",
-		/obj/item/ammo_casing/shotgun/stunshell = "12 gauge",
-		/obj/item/ammo_casing/shotgun/flash     = "12 gauge",
-		/obj/item/ammo_casing/a762              = "7.62mm",
-		/obj/item/ammo_casing/a556              = "5.56mm"
+		/obj/item/ammo_casing/a357              = CALIBER_357,
+		/obj/item/ammo_casing/c9mmf             = CALIBER_PISTOL_MEDIUM,
+		/obj/item/ammo_casing/c45f              = CALIBER_45,
+		/obj/item/ammo_casing/a10mm             = CALIBER_PISTOL_LARGE,
+		/obj/item/ammo_casing/shotgun           = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun           = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/pellet    = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/pellet    = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/pellet    = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/beanbag   = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/stunshell = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/shotgun/flash     = CALIBER_SHOTGUN,
+		/obj/item/ammo_casing/a762              = CALIBER_RIFLE_LARGE,
+		/obj/item/ammo_casing/a556              = CALIBER_RIFLE_SMALL
 		)
 
 /obj/item/weapon/gun/projectile/pirate/New()

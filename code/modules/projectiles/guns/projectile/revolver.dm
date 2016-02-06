@@ -3,7 +3,7 @@
 	desc = "The Lumoco Arms HE Colt is a choice revolver for when you absolutely, positively need to put a hole in the other guy. Uses .357 ammo."
 	icon_state = "revolver"
 	item_state = "revolver"
-	caliber = "357"
+	caliber = CALIBER_357
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 7
@@ -43,7 +43,7 @@
 	desc = "A cheap Martian knock-off of a Smith & Wesson Model 10. Uses .38-Special rounds."
 	icon_state = "detective"
 	max_shells = 6
-	caliber = "38"
+	caliber = CALIBER_38
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	ammo_type = /obj/item/ammo_casing/c38
@@ -72,7 +72,7 @@
 	desc = "A custom-built revolver, based off the semi-popular Detective Special model."
 	icon_state = "deckard-empty"
 	max_shells = 6
-	caliber = "38"
+	caliber = CALIBER_38
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	ammo_type = /obj/item/ammo_casing/c38
@@ -94,7 +94,7 @@
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	icon_state = "revolver"
 	item_state = "revolver"
-	caliber = "caps"
+	caliber = CALIBER_TOY
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 7
