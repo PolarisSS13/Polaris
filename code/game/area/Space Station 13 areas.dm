@@ -1397,6 +1397,14 @@ area/space/atmosalert()
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
 
+/area/crew_quarters/bar/washroom
+	name = "\improper Bar Washroom"
+	icon_state = "bar"
+
+/area/crew_quarters/bar/backroom
+	name = "\improper Bar Backroom"
+	icon_state = "bar"
+
 /area/crew_quarters/theatre
 	name = "\improper Theatre"
 	icon_state = "Theatre"
