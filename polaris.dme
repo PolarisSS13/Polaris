@@ -962,7 +962,6 @@
 #include "code\modules\client\preference_setup\general\06_flavor.dm"
 #include "code\modules\client\preference_setup\global\01_ui.dm"
 #include "code\modules\client\preference_setup\global\02_settings.dm"
-#include "code\modules\client\preference_setup\global\03_pai.dm"
 #include "code\modules\client\preference_setup\global\04_communicators.dm"
 #include "code\modules\client\preference_setup\loadout\loadout.dm"
 #include "code\modules\client\preference_setup\loadout\loadout_accessories.dm"
