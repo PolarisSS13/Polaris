@@ -14,6 +14,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	holder_type = /obj/item/weapon/holder/diona
+	possession_candidate = 1
 	var/obj/item/hat
 
 /mob/living/carbon/alien/diona/New()

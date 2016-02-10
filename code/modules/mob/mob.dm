@@ -1162,4 +1162,3 @@ mob/proc/yank_out_object()
 
 /mob/proc/is_muzzled()
 	return 0
-

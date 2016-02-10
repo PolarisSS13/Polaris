@@ -90,6 +90,7 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 3)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)
 
+
 /datum/seed/berry/poison/death
 	name = "deathberries"
 	seed_name = "death berry"
@@ -239,6 +240,7 @@
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 7)
 
+
 //Apples/varieties.
 /datum/seed/apple
 	name = "apple"
@@ -339,7 +341,6 @@
 	set_trait(TRAIT_PLANT_ICON,"mushroom")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_IDEAL_HEAT, 288)
-	set_trait(TRAIT_LIGHT_TOLERANCE, 6)
 
 /datum/seed/mushroom/mold
 	name = "mold"
@@ -644,7 +645,6 @@
 	set_trait(TRAIT_PLANT_ICON,"tree4")
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 7)
-	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/corn
 	name = "corn"
@@ -666,7 +666,6 @@
 	set_trait(TRAIT_PLANT_ICON,"corn")
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
-	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/potato
 	name = "potato"
@@ -723,7 +722,6 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#BFAF82")
 	set_trait(TRAIT_PLANT_ICON,"stalk2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
-	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/rice
 	name = "rice"
@@ -839,7 +837,6 @@
 	set_trait(TRAIT_FLESH_COLOUR,"#F22C2C")
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
-	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/pumpkin
 	name = "pumpkin"
@@ -1045,6 +1042,7 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#4CC789")
 	set_trait(TRAIT_PLANT_ICON,"bush7")
 	set_trait(TRAIT_IDEAL_HEAT, 283)
+
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
 
 /datum/seed/telriis

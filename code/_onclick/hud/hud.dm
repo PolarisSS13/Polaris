@@ -270,7 +270,7 @@ datum/hud/New(mob/owner)
 	else
 		mymob.instantiate_hud(src)
 
-/mob/proc/instantiate_hud(var/datum/hud/HUD)
+/mob/proc/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
 	return
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)

@@ -234,4 +234,3 @@ var/const/enterloopsanity = 100
 
 /turf/proc/update_blood_overlays()
 	return
-
