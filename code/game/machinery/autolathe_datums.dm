@@ -158,17 +158,32 @@
 
 /datum/autolathe/recipe/airalarm
 	name = "air alarm electronics"
-	path = /obj/item/weapon/airalarm_electronics
+	path = /obj/item/weapon/circuitboard/airalarm
 	category = "Engineering"
 
 /datum/autolathe/recipe/firealarm
 	name = "fire alarm electronics"
-	path = /obj/item/weapon/firealarm_electronics
+	path = /obj/item/weapon/circuitboard/firealarm
 	category = "Engineering"
 
 /datum/autolathe/recipe/powermodule
 	name = "power control module"
 	path = /obj/item/weapon/module/power_control
+	category = "Engineering"
+
+/datum/autolathe/recipe/statusdisplay
+	name = "status display electronics"
+	path = /obj/item/weapon/circuitboard/status_display
+	category = "Engineering"
+
+/datum/autolathe/recipe/aistatusdisplay
+	name = "ai status display electronics"
+	path = /obj/item/weapon/circuitboard/ai_status_display
+	category = "Engineering"
+
+/datum/autolathe/recipe/newscaster
+	name = "newscaster electronics"
+	path = /obj/item/weapon/circuitboard/newscaster
 	category = "Engineering"
 
 /datum/autolathe/recipe/rcd_ammo

@@ -1,0 +1,7 @@
+
+author: Sin2
+
+delete-after: True
+
+changes: 
+  - rscadd: "Unifies frames. Machines, Computers, Alarms, etc. are now built in roughly the same way as computers."

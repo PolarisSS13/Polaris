@@ -112,6 +112,7 @@ Class Procs:
 	var/panel_open = 0
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
+	var/circuit = null
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -280,29 +281,13 @@ Class Procs:
 			return 1
 	return 0
 
-/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
-	if(!istype(C))
-		return 0
-	if(!panel_open)
-		return 0
-	. = dismantle()
-
-/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
-	if(!istype(S))
-		return 0
-	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-	panel_open = !panel_open
-	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
-	update_icon()
-	return 1
-
 /obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 	if(!istype(R))
 		return 0
 	if(!component_parts)
 		return 0
 	if(panel_open)
-		var/obj/item/weapon/circuitboard/CB = locate(/obj/item/weapon/circuitboard) in component_parts
+		var/obj/item/weapon/circuitboard/CB = circuit
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
 			for(var/D in CB.req_components)
@@ -328,13 +313,43 @@ Class Procs:
 			user << "<span class='notice'>    [C.name]</span>"
 	return 1
 
+/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
+	if(!istype(C))
+		return 0
+	if(!panel_open)
+		return 0
+	. = dismantle()
+
+/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
+	if(!istype(S))
+		return 0
+	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	panel_open = !panel_open
+	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
+	update_icon()
+	return 1
+
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
-	M.set_dir(src.dir)
-	M.state = 2
-	M.icon_state = "box_1"
-	for(var/obj/I in component_parts)
-		I.loc = loc
+	var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
+	var/obj/item/weapon/circuitboard/M = new circuit( A )
+	A.circuit = M
+	A.anchored = 1
+	A.density = 1
+	A.frame_type = "machine"
+	for (var/obj/D in src)
+		D.forceMove(loc)
+	if(A.components)
+		A.components.Cut()
+	else
+		A.components = list()
+//	for(var/obj/I in component_parts)
+//		A.components += I
+	component_parts = list()
+	A.icon_state = "machine_3"
+	A.state = 3
+	A.check_components()
+	A.update_desc()
+	M.deconstruct(src)
 	qdel(src)
 	return 1
