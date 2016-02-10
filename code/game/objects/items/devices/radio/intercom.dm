@@ -41,6 +41,11 @@
 	icon_state = "medintercom"
 	frequency = SEC_I_FREQ
 
+/obj/item/device/radio/intercom/entertainment
+	name = "entertainment intercom"
+	frequency = ENT_FREQ
+	canhear_range = 4
+
 /obj/item/device/radio/intercom/New()
 	..()
 	processing_objects += src
@@ -54,6 +59,13 @@
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(SEC_I_FREQ) = list(access_security)
+	)
+
+/obj/item/device/radio/intercom/entertainment/New()
+	..()
+	internal_channels = list(
+		num2text(PUB_FREQ) = list(),
+		num2text(ENT_FREQ) = list()
 	)
 
 /obj/item/device/radio/intercom/syndicate
@@ -113,6 +125,9 @@
 			icon_state = "intercom-p"
 		else
 			icon_state = initial(icon_state)
+
+/obj/item/device/radio/intercom/broadcasting
+	broadcasting = 1
 
 /obj/item/device/radio/intercom/locked
     var/locked_frequency

@@ -71,6 +71,10 @@
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.save_preferences(S)
 
+/datum/category_collection/player_setup_collection/proc/update_setup(var/savefile/preferences, var/savefile/character)
+	for(var/datum/category_group/player_setup_category/PS in categories)
+		. = . || PS.update_setup(preferences, character)
+
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
 	for(var/datum/category_group/player_setup_category/PS in categories)
@@ -142,6 +146,10 @@
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_preferences(S)
 
+/datum/category_group/player_setup_category/proc/update_setup(var/savefile/preferences, var/savefile/character)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. = . || PI.update_setup(preferences, character)
+
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
 	var/current = 0
@@ -199,6 +207,12 @@
 */
 /datum/category_item/player_setup_item/proc/save_preferences(var/savefile/S)
 	return
+
+/*
+* Called when the item is asked to update user/global settings
+*/
+/datum/category_item/player_setup_item/proc/update_setup(var/savefile/preferences, var/savefile/character)
+	return 0
 
 /datum/category_item/player_setup_item/proc/content()
 	return

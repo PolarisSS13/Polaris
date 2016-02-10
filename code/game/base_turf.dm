@@ -22,7 +22,7 @@ proc/get_base_turf_by_area(var/turf/T)
 	set name = "Set Base Turf"
 	set desc = "Set the base turf for a z-level."
 
-	if(!holder)	return
+	if(!check_rights(R_DEBUG)) return
 
 	var/choice = input("Which Z-level do you wish to set the base turf for?") as num|null
 	if(!choice)

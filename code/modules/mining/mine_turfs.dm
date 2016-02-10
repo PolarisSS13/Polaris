@@ -456,8 +456,30 @@ var/list/mining_overlay_cache = list()
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE)
 
+<<<<<<< HEAD
 	make_floor()
 	update_icon(1)
+=======
+
+	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
+
+	//Add some rubble,  you did just clear out a big chunk of rock.
+
+	var/turf/simulated/floor/asteroid/N = ChangeTurf(mined_turf)
+
+	// Kill and update the space overlays around us.
+	for(var/direction in step_overlays)
+		var/turf/space/T = get_step(src, step_overlays[direction])
+		if(istype(T))
+			T.overlays.Cut()
+			for(var/next_direction in step_overlays)
+				if(istype(get_step(T, step_overlays[next_direction]),/turf/simulated/mineral))
+					T.overlays += image('icons/turf/walls.dmi', "rock_side", dir = step_overlays[next_direction])
+
+	if(istype(N))
+		N.overlay_detail = "asteroid[rand(0,9)]"
+		N.updateMineralOverlays(1)
+>>>>>>> NTOSv2
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)
 	//with skill and luck, players can cleanly extract finds
@@ -516,9 +538,31 @@ var/list/mining_overlay_cache = list()
 	if(mineral)
 		return
 
+<<<<<<< HEAD
 	var/mineral_name
 	if(rare_ore)
 		mineral_name = pickweight(list("uranium" = 10, "platinum" = 10, "iron" = 20, "coal" = 20, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20))
+=======
+	for(var/i=0;i<(rand(3)+2);i++)
+		new/obj/item/weapon/ore/glass(src)
+
+	dug = 1
+	icon_state = "asteroid_dug"
+	return
+
+/turf/simulated/floor/asteroid/proc/updateMineralOverlays(var/update_neighbors)
+
+	overlays.Cut()
+
+	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
+	for(var/direction in step_overlays)
+
+		if(istype(get_step(src, step_overlays[direction]), /turf/space))
+			overlays += image('icons/turf/flooring/asteroid.dmi', "asteroid_edges", dir = step_overlays[direction])
+
+		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
+			overlays += image('icons/turf/walls.dmi', "rock_side", dir = step_overlays[direction])
+>>>>>>> NTOSv2
 
 	else
 		mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "iron" = 35, "coal" = 35, "diamond" = 1, "gold" = 5, "silver" = 5, "phoron" = 10))

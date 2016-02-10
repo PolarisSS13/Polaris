@@ -94,14 +94,14 @@ steam.start() -- spawns the effect
 // will always spawn at the items location.
 /////////////////////////////////////////////
 
-/obj/effect/effect/sparks
+/obj/effect/sparks
 	name = "sparks"
 	icon_state = "sparks"
 	var/amount = 6.0
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/effect/sparks/New()
+/obj/effect/sparks/New()
 	..()
 	playsound(src.loc, "sparks", 100, 1)
 	var/turf/T = src.loc
@@ -111,13 +111,13 @@ steam.start() -- spawns the effect
 		qdel(src)
 	return
 
-/obj/effect/effect/sparks/Destroy()
+/obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 	return ..()
 
-/obj/effect/effect/sparks/Move()
+/obj/effect/sparks/Move()
 	..()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
@@ -145,7 +145,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/sparks/sparks = PoolOrNew(/obj/effect/effect/sparks, src.location)
+				var/obj/effect/sparks/sparks = PoolOrNew(/obj/effect/sparks, src.location)
 				src.total_sparks++
 				var/direction
 				if(src.cardinals)
@@ -507,10 +507,10 @@ steam.start() -- spawns the effect
 				M << "<span class='warning'>The solution violently explodes.</span>"
 
 			explosion(
-				location, 
-				round(min(devst, BOMBCAP_DVSTN_RADIUS)), 
-				round(min(heavy, BOMBCAP_HEAVY_RADIUS)), 
-				round(min(light, BOMBCAP_LIGHT_RADIUS)), 
+				location,
+				round(min(devst, BOMBCAP_DVSTN_RADIUS)),
+				round(min(heavy, BOMBCAP_HEAVY_RADIUS)),
+				round(min(light, BOMBCAP_LIGHT_RADIUS)),
 				round(min(flash, BOMBCAP_FLASH_RADIUS))
 				)
 

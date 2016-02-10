@@ -215,4 +215,3 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	aiming_at = null
 	loc = null
 	processing_objects -= src
-

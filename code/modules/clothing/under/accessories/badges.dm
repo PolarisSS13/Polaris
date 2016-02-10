@@ -6,8 +6,9 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "Security Department detective's badge, made from gold."
+	desc = "A corporate security badge, made from gold and set on false leather."
 	icon_state = "badge"
+	item_state = "marshalbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
@@ -25,7 +26,7 @@
 /obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
-		user << "You polish your old badge fondly, shining up the surface."
+		user << "You polish your badge fondly, shining up the surface."
 		set_name(user.real_name)
 		return
 
@@ -42,8 +43,9 @@
 //.Holobadges.
 /obj/item/clothing/accessory/badge/holo
 	name = "holobadge"
-	desc = "This glowing blue badge marks the holder as THE LAW."
+	desc = "This glowing blue badge marks the holder as a member of corporate security."
 	icon_state = "holobadge"
+	item_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
 
 /obj/item/clothing/accessory/badge/holo/cord

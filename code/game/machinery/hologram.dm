@@ -147,7 +147,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/process()
 	for (var/mob/living/silicon/ai/master in masters)
-		var/active_ai = (master && !master.stat && master.client && master.eyeobj)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
+		var/active_ai = (master && !master.incapacitated() && master.client && master.eyeobj)//If there is an AI with an eye attached, it's not incapacitated, and it has a client
 		if((stat & NOPOWER) || !active_ai)
 			clear_holo(master)
 			continue
@@ -159,7 +159,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(masters[user])
 		step_to(masters[user], user.eyeobj) // So it turns.
 		var/obj/effect/overlay/H = masters[user]
-		H.loc = get_turf(user.eyeobj)
+		H.forceMove(get_turf(user.eyeobj))
 		masters[user] = H
 		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(H, src) > holo_range)))
 			clear_holo(user)

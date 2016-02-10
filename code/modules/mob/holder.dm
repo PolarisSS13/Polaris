@@ -96,6 +96,7 @@ var/list/holder_mob_icon_cache = list()
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
 
+<<<<<<< HEAD
 /mob/living/MouseDrop(var/atom/over_object)
 	var/mob/living/carbon/human/H = over_object
 	if(holder_type && istype(H) && !H.lying && !issmall(H) && Adjacent(H) && (src.a_intent == I_HELP && H.a_intent == I_HELP))
@@ -103,6 +104,8 @@ var/list/holder_mob_icon_cache = list()
 		return
 	return ..()
 
+=======
+>>>>>>> NTOSv2
 /mob/living/proc/get_scooped(var/mob/living/carbon/grabber, var/self_grab)
 
 	if(!holder_type || buckled || pinned.len)

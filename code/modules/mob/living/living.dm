@@ -864,4 +864,3 @@ default behaviour is:
 
 		sleep(350)
 		lastpuke = 0
-
