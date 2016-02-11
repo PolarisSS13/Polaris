@@ -55,13 +55,13 @@
 
 	return ..()
 
-/obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
+/obj/item/device/radio/headset/receive_range(freq, aiOverride = 0)
 	if (aiOverride)
-		return ..(freq, level)
+		return ..(freq)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		if(H.l_ear == src || H.r_ear == src)
-			return ..(freq, level)
+			return ..(freq)
 	return -1
 
 /obj/item/device/radio/headset/syndicate
@@ -182,10 +182,10 @@
 	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
 	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via intellicard menu.
 
-/obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq, level)
+/obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq)
 	if (disabledAi)
 		return -1 //Transciever Disabled.
-	return ..(freq, level, 1)
+	return ..(freq, 1)
 
 /obj/item/device/radio/headset/heads/rd
 	name = "research director's headset"

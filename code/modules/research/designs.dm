@@ -855,6 +855,7 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/aifixer
 	sort_string = "HAAAF"
 
+/*
 /datum/design/circuit/comm_monitor
 	name = "telecommunications monitoring console"
 	id = "comm_monitor"
@@ -868,6 +869,7 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/circuitboard/comm_server
 	sort_string = "HAACB"
+	*/
 
 /datum/design/circuit/message_monitor
 	name = "messaging monitor console"

@@ -63,7 +63,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/decryptkey = "password"
 
 	//Spam filtering stuff
-	var/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
+	var/global/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
 			"are happy to inform you", "account number", "enter your PIN")
 			//Messages having theese tokens will be rejected by server. Case sensitive
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
