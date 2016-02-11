@@ -58,7 +58,7 @@ var/list/organ_cache = list()
 		var/mob/living/carbon/human/H = holder
 		if(istype(H))
 			if(internal)
-				var/obj/item/organ/external/E = H.organs_by_name[src.parent_organ]
+				var/obj/item/organ/external/E = H.get_organ(parent_organ)
 				if(E)
 					if(E.internal_organs == null)
 						E.internal_organs = list()
@@ -247,6 +247,7 @@ var/list/organ_cache = list()
 	status |= ORGAN_ASSISTED
 	status |= ORGAN_ROBOT
 
+
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
 	status = 0
 	status |= ORGAN_ASSISTED
@@ -257,14 +258,10 @@ var/list/organ_cache = list()
 	if(!(status & ORGAN_ROBOT))
 		return
 	switch (severity)
-		if (1.0)
-			take_damage(20)
-			return
-		if (2.0)
-			take_damage(7)
-			return
-		if(3.0)
-			take_damage(3)
+		if (1)
+			take_damage(5)
+		if (2)
+			take_damage(2)
 
 /obj/item/organ/proc/removed(var/mob/living/user)
 
