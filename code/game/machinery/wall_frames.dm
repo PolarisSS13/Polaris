@@ -9,7 +9,7 @@
 	var/refund_type = /obj/item/stack/material/steel
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 	var/frame_type = null
-	var/frame_base = 0
+	var/frame_base = null
 
 /obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
@@ -24,30 +24,44 @@
 		return
 
 	var/ndir
+	if(!frame_base)
+		var/response = input(usr, "What kind of frame would you like to make?", "Frame type request", null) in list("Computer", "Machine", "Holopad")
+		switch(response)
+			if("Computer") frame_type = "computer"
+			if("Machine") frame_type = "machine"
+			if("Holopad")
+				frame_type = "computer"
+				frame_base = "holopad_"
 
-	var/response = alert(user, "What kind of frame would you like to make?", "Frame type request", "Computer", "Machine")
-	switch(response)
-		if("Computer") frame_type = "computer"
-		if("Machine") frame_type = "machine"
-
-	var/obj/machinery/M = new build_machine_type(get_turf(src.loc), ndir, 1, frame_type)
+	var/obj/machinery/M = new build_machine_type(get_turf(src.loc), ndir, 1, frame_type, frame_base)
 	M.fingerprints = src.fingerprints
 	M.fingerprintshidden = src.fingerprintshidden
 	M.fingerprintslast = src.fingerprintslast
 	qdel(src)
 
 /obj/item/frame/proc/try_build(turf/on_wall, mob/user as mob)
-	if(frame_base == 0)
-		var/response = input(usr, "What kind of frame would you like to make?", "Frame type request", null) in list("Fire Alarm", "Air Alarm", "Display", "Newscaster")
+	if(!frame_base)
+		var/response = input(usr, "What kind of frame would you like to make?", "Frame type request", null) in list("Fire Alarm", "Air Alarm", "Display", "Newscaster", "ATM", "Guest Pass Console", "Intercom")
 		switch(response)
-			if("Fire Alarm") frame_type = "alarm"
+			if("Fire Alarm")
+				frame_type = "alarm"
+				frame_base = "fire_"
 			if("Air Alarm")
 				frame_type = "alarm"
-				icon = 'icons/obj/monitors.dmi'
+				frame_base = "air_"
+			if("Intercom")
+				frame_type = "alarm"
+				frame_base = "intercom_"
 			if("Display") frame_type = "display"
 			if("Newscaster")
 				frame_type = "display"
-				icon = 'icons/obj/terminals.dmi'
+				frame_base = "newscaster_"
+			if("ATM")
+				frame_type = "display"
+				frame_base = "atm_"
+			if("Guest Pass Console")
+				frame_type = "display"
+				frame_base = "guestpass_"
 
 	if(!build_machine_type)
 		return
@@ -76,7 +90,7 @@
 	if(gotwallitem(loc, ndir))
 		usr << "<span class='danger'>There's already an item on this wall!</span>"
 		return
-	var/obj/machinery/M = new build_machine_type(loc, ndir, 1, frame_type, icon)
+	var/obj/machinery/M = new build_machine_type(loc, ndir, 1, frame_type, frame_base)
 	M.fingerprints = src.fingerprints
 	M.fingerprintshidden = src.fingerprintshidden
 	M.fingerprintslast = src.fingerprintslast
@@ -113,3 +127,12 @@
 	icon_state = "nboard00"
 	build_machine_type = /obj/structure/noticeboard
 	frame_base = 1
+
+/obj/item/frame/mirror
+	name = "mirror frame"
+	desc = "Used for building mirrors."
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "mirror_frame"
+	build_machine_type = /obj/structure/mirror
+	frame_base = 1
+

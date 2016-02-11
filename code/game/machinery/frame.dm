@@ -6,12 +6,13 @@
 	var/state = 0
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/frame_type = null
+	var/frame_base = null
 
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
 
-/obj/structure/frame/proc/update_desc(/*r/req_components, var/components*/)
+/obj/structure/frame/proc/update_desc()
 	var/D
 	if(req_components)
 		var/list/component_list = new
@@ -21,7 +22,7 @@
 		D = "Requires [english_list(component_list)]."
 	desc = D
 
-/obj/structure/frame/proc/check_components(/*var/circuit, var/req_components, var/components, var/req_components_names, */mob/user as mob)
+/obj/structure/frame/proc/check_components(mob/user as mob)
 	components = list()
 	req_components = circuit.req_components.Copy()
 	for(var/A in circuit.req_components)
@@ -32,12 +33,13 @@
 		var/obj/ct = new cp() // have to quickly instantiate it get name
 		req_component_names[A] = ct.name
 
-/obj/structure/frame/New(var/loc, var/dir, var/building = 0, var/obj/item/frame/frame_type, var/obj/item/frame/icon, mob/user as mob)
+/obj/structure/frame/New(var/loc, var/dir, var/building = 0, var/obj/item/frame/frame_type, var/obj/item/frame/frame_base, mob/user as mob)
 	..()
 
 	if(building)
 		src.frame_type = frame_type
-		icon_state = "[frame_type]_0"
+		src.frame_base = frame_base
+		icon_state = "[frame_type]_[frame_base]0"
 
 		if(frame_type == "alarm" || frame_type == "display")
 			if(loc)
@@ -46,15 +48,24 @@
 			state = 0
 			switch(frame_type)
 				if("alarm")
-					src.icon = icon
 					if(dir)
 						src.set_dir(dir)
-					pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-					pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+					if(frame_base == "intercom_")
+						pixel_x = (dir & 3)? 0 : (dir == 4 ? -28 : 28)
+						pixel_y = (dir & 3)? (dir == 1 ? -28 : 28) : 0
+					else
+						pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
+						pixel_y = (dir & 3)? (dir == 1 ? -24 : 24) : 0
 				if("display")
-					src.icon = icon
-					pixel_x = (dir & 3)? 0 : (dir == 4 ? -32 : 32)
-					pixel_y = (dir & 3)? (dir ==1 ? -32 : 32) : 0
+					if(frame_base == "newscaster_")
+						pixel_x = (dir & 3)? 0 : (dir == 4 ? -28 : 28)
+						pixel_y = (dir & 3)? (dir == 1 ? -30 : 30) : 0
+					if(frame_base == "guestpass_")
+						pixel_x = (dir & 3)? 0 : (dir == 4 ? -30 : 30)
+						pixel_y = (dir & 3)? (dir == 1 ? -30 : 30) : 0
+					else
+						pixel_x = (dir & 3)? 0 : (dir == 4 ? -32 : 32)
+						pixel_y = (dir & 3)? (dir == 1 ? -32 : 32) : 0
 			update_icon()
 			return
 
@@ -94,7 +105,7 @@
 				if(B.board_type == frame_type)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << "<span class='notice'>You place the circuit board inside the frame.</span>"
-					src.icon_state = "[frame_type]_1"
+					src.icon_state = "[frame_type]_[frame_base]1"
 					src.circuit = P
 					user.drop_item()
 					P.loc = src
@@ -109,12 +120,12 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "<span class='notice'>You screw the circuit board into place.</span>"
 				src.state = 2
-				src.icon_state = "[frame_type]_2"
+				src.icon_state = "[frame_type]_[frame_base]2"
 			if(istype(P, /obj/item/weapon/crowbar) && circuit)
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				user << "<span class='notice'>You remove the circuit board.</span>"
 				src.state = 1
-				src.icon_state = "[frame_type]_0"
+				src.icon_state = "[frame_type]_[frame_base]0"
 				circuit.loc = src.loc
 				src.circuit = null
 				if(frame_type == "machine") //becuase machines are assholes
@@ -124,7 +135,7 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				user << "<span class='notice'>You unfasten the circuit board.</span>"
 				src.state = 1
-				src.icon_state = "[frame_type]_1"
+				src.icon_state = "[frame_type]_[frame_base]1"
 			if(istype(P, /obj/item/stack/cable_coil))
 				var/obj/item/stack/cable_coil/C = P
 				if (C.get_amount() < 5)
@@ -136,7 +147,7 @@
 					if (C.use(5))
 						user << "<span class='notice'>You add cables to the frame.</span>"
 						state = 3
-						icon_state = "[frame_type]_3"
+						icon_state = "[frame_type]_[frame_base]3"
 						if(frame_type == "machine")
 							user << desc
 		if(3) //end mostly universal steps
@@ -160,14 +171,14 @@
 							if (G.use(2))
 								user << "<span class='notice'>You put in the glass panel.</span>"
 								src.state = 4
-								src.icon_state = "[frame_type]_4"
+								src.icon_state = "[frame_type]_[frame_base]4"
 
 				if("display")  //computer and display steps
 					if(istype(P, /obj/item/weapon/wirecutters))
 						playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 						user << "<span class='notice'>You remove the cables.</span>"
 						src.state = 2
-						src.icon_state = "[frame_type]_2"
+						src.icon_state = "[frame_type]_[frame_base]2"
 						var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 						A.amount = 5
 					if(istype(P, /obj/item/stack/material) && P.get_material_name() == "glass")
@@ -181,7 +192,7 @@
 							if (G.use(2))
 								user << "<span class='notice'>You put in the glass panel.</span>"
 								src.state = 4
-								src.icon_state = "[frame_type]_4"
+								src.icon_state = "[frame_type]_[frame_base]4"
 
 				if("machine") //machine steps
 					if(istype(P, /obj/item/weapon/wirecutters))
@@ -257,7 +268,7 @@
 						playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 						user << "<span class='notice'>You remove the cables.</span>"
 						src.state = 2
-						src.icon_state = "[frame_type]_2"
+						src.icon_state = "[frame_type]_[frame_base]2"
 						var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( src.loc )
 						A.amount = 5
 					if(istype(P, /obj/item/weapon/screwdriver))
@@ -277,7 +288,7 @@
 						playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 						user << "<span class='notice'>You remove the glass panel.</span>"
 						src.state = 3
-						src.icon_state = "[frame_type]_3"
+						src.icon_state = "[frame_type]_[frame_base]3"
 						new /obj/item/stack/material/glass( src.loc, 2 )
 					if(istype(P, /obj/item/weapon/screwdriver))
 						playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -294,7 +305,7 @@
 						playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 						user << "<span class='notice'>You remove the glass panel.</span>"
 						src.state = 3
-						src.icon_state = "[frame_type]_3"
+						src.icon_state = "[frame_type]_[frame_base]3"
 						new /obj/item/stack/material/glass( src.loc, 2 )
 					if(istype(P, /obj/item/weapon/screwdriver))
 						playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)

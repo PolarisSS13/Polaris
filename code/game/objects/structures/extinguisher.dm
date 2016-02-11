@@ -33,6 +33,15 @@
 			user << "<span class='notice'>You place [O] in [src].</span>"
 		else
 			opened = !opened
+	if(istype(O, /obj/item/weapon/wrench))
+		if(!has_extinguisher)
+			user << "<span class='notice'>You start to unwrench the extinguisher cabinet.</span>"
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			if(do_after(user, 15))
+				user << "<span class='notice'>You unwrench the extinguisher cabinet.</span>"
+				new /obj/item/frame/extinguisher_cabinet( src.loc )
+				qdel(src)
+			return
 	else
 		opened = !opened
 	update_icon()

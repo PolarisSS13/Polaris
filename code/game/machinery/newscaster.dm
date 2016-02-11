@@ -753,11 +753,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
+		user << "<span class='notice'>You start disconnecting the monitor.</span>"
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
 			var/obj/item/weapon/circuitboard/M = new circuit( A )
 			A.frame_type = "display"
+			A.frame_base = "newscaster_"
 			A.pixel_x = pixel_x
 			A.pixel_y = pixel_y
 			A.circuit = M
@@ -768,11 +770,11 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				user << "<span class='notice'>The broken glass falls out.</span>"
 				new /obj/item/weapon/material/shard( src.loc )
 				A.state = 3
-				A.icon_state = "display_3"
+				A.icon_state = "display_newscaster_3"
 			else
 				user << "<span class='notice'>You disconnect the monitor.</span>"
 				A.state = 4
-				A.icon_state = "display_4"
+				A.icon_state = "display_newscaster_4"
 			M.deconstruct(src)
 			qdel(src)
 	else

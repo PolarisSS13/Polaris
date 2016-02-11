@@ -759,6 +759,7 @@
 		var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
 		var/obj/item/weapon/circuitboard/M = new circuit( A )
 		A.frame_type = "alarm"
+		A.frame_base = "air_"
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 		A.circuit = M
@@ -766,8 +767,7 @@
 		for (var/obj/C in src)
 			C.forceMove(loc)
 		A.state = 2
-		A.icon = 'icons/obj/monitors.dmi'
-		A.icon_state = "alarm_2"
+		A.icon_state = "alarm_air_2"
 		M.deconstruct(src)
 		qdel(src)
 		return
@@ -892,6 +892,7 @@ FIRE ALARM
 			var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
 			var/obj/item/weapon/circuitboard/M = new circuit( A )
 			A.frame_type = "alarm"
+			A.frame_base = "fire_"
 			A.pixel_x = pixel_x
 			A.pixel_y = pixel_y
 			A.circuit = M
@@ -899,7 +900,7 @@ FIRE ALARM
 			for (var/obj/C in src)
 				C.forceMove(loc)
 			A.state = 2
-			A.icon_state = "alarm_2"
+			A.icon_state = "alarm_fire_2"
 			M.deconstruct(src)
 			qdel(src)
 		return

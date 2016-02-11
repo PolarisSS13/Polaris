@@ -186,6 +186,31 @@
 	path = /obj/item/weapon/circuitboard/newscaster
 	category = "Engineering"
 
+/datum/autolathe/recipe/atm
+	name = "atm electronics"
+	path = /obj/item/weapon/circuitboard/atm
+	category = "Engineering"
+
+/datum/autolathe/recipe/intercom
+	name = "intercom electronics"
+	path = /obj/item/weapon/circuitboard/intercom
+	category = "Engineering"
+
+/datum/autolathe/recipe/holopad
+	name = "holopad electronics"
+	path = /obj/item/weapon/circuitboard/holopad
+	category = "Engineering"
+
+/datum/autolathe/recipe/guestpass
+	name = "guestpass console electronics"
+	path = /obj/item/weapon/circuitboard/guestpass
+	category = "Engineering"
+
+/datum/autolathe/recipe/entertainment
+	name = "entertainment camera electronics"
+	path = /obj/item/weapon/circuitboard/security/telescreen/entertainment
+	category = "Engineering"
+
 /datum/autolathe/recipe/rcd_ammo
 	name = "matter cartridge"
 	path = /obj/item/weapon/rcd_ammo
