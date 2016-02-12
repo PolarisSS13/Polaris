@@ -20,6 +20,8 @@ var/global/list/default_medbay_channels = list(
 	num2text(MED_I_FREQ) = list(access_medical_equip)
 )
 
+var/global/list/all_radios = list()
+
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "station bounced radio"
@@ -61,10 +63,12 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/New()
 	..()
+	all_radios += src
 	wires = new(src)
 	internal_channels = default_internal_channels.Copy()
 
 /obj/item/device/radio/Destroy()
+	all_radios -= src
 	qdel(wires)
 	wires = null
 	if(radio_controller)
@@ -228,30 +232,8 @@ var/global/list/default_medbay_channels = list(
 	if(.)
 		nanomanager.update_uis(src)
 
-/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
-	var/datum/radio_frequency/connection = null
-	if(channel && channels && channels.len > 0)
-		if (channel == "department")
-			//world << "DEBUG: channel=\"[channel]\" switching to \"[channels[1]]\""
-			channel = channels[1]
-		connection = secure_radio_connections[channel]
-	else
-		connection = radio_connection
-		channel = null
-	if (!istype(connection))
-		return
-	if (!connection)
-		return
-
-	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
-	A.SetName(from)
-	/* TODO: FIX THIS SHIT
-	Broadcast_Message(connection, A,
-						0, "*garbled automated announcement*", src,
-						message, from, "Automated Announcement", from, "synthesized voice",
-						4, 0, list(0), connection.frequency, "states")
-						*/
-	qdel(A)
+/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel)
+	broadcastMessage(null, from, "states", message, handle_message_mode(null, message, channel))
 	return
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
@@ -299,7 +281,7 @@ var/global/list/default_medbay_channels = list(
 
 	sleep(rand(15, 20)) // Intercoms and station-bounced radios, on the other hand...
 
-	return broadcastMessage(M, displayname, verb, message, freq, speaking, 0)
+	return broadcastMessage(M, displayname, verb, message, freq, speaking)
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
 

@@ -990,11 +990,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			U << "ERROR: Cannot reach recipient."
 			return
 
+		var/send_result
 		for(var/obj/machinery/message_server/M in message_servers)
-			var/send_result = M.send_pda_message("[P.owner]","[owner]","[t]") // We need to make logs in all servers
-			if(send_result)
-				U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
-				return
+			send_result = M.send_pda_message("[P.owner]","[owner]","[t]") // We need to make logs in all servers
+		if(send_result)
+			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
+			return
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))

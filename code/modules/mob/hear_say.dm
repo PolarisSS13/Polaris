@@ -114,7 +114,7 @@
 		if(hard_to_hear)
 			message = stars(message)
 
-	var/speaker_name = speaker.name
+	var/speaker_name = speaker ? speaker.name : null
 
 	if(vname)
 		speaker_name = vname
@@ -124,7 +124,7 @@
 		if(H.voice)
 			speaker_name = H.voice
 
-	if(hard_to_hear)
+	if(hard_to_hear || !speaker_name)
 		speaker_name = "unknown"
 
 	var/changed_voice

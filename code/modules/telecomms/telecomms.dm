@@ -20,6 +20,23 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 	..()
 	world_telecommunications += src
 
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/telecomms(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/analyzer(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
+
 /obj/machinery/telecomms_machine/Destroy()
 	world_telecommunications -= src
 	..()
@@ -35,37 +52,44 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 	if(src.on)
 		if(stat & (EMPED|NOPOWER|BROKEN))
 			return
-		var/datum/gas_mixture/environment = src.loc.return_air()
-		var/damage_chance = 0 // Percent based chance of applying 1 integrity damage this tick
-		switch(environment.temperature)
-			if((T0C + 40) to (T0C + 70)) // 40C-70C, minor overheat, 10% chance of taking damage
-				damage_chance = 10
-			if((T0C + 70) to (T0C + 130)) // 70C-130C, major overheat, 25% chance of taking damage
-				damage_chance = 25
-			if((T0C + 130) to (T0C + 200)) // 130C-200C, dangerous overheat, 50% chance of taking damage
-				damage_chance = 50
-			if((T0C + 200) to INFINITY) // More than 200C, INFERNO. Takes damage every tick.
-				damage_chance = 100
 
-		if(damage_chance && prob(damage_chance))
-			src.integrity = between(0, src.integrity - 1, 100)
-
-		if(src.delay > 0)
-			src.delay--
-		else
-			var/turf/simulated/L = src.loc
-			if(istype(L))
-				var/datum/gas_mixture/env = L.return_air()
-				var/transfer_moles = 0.25 * env.total_moles
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
-				if(removed)
-					var/heat_produced = src.idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
-					removed.add_thermal_energy(heat_produced)
-				env.merge(removed)
-			src.delay = initial(src.delay)
+		src.check_heat()
 
 		if(!integrity)
 			stat |= BROKEN
+
+/obj/machinery/telecomms_machine/proc/check_heat()
+	var/datum/gas_mixture/environment = src.loc.return_air()
+	var/damage_chance = 0 // Percent based chance of applying 1 integrity damage this tick
+	switch(environment.temperature)
+		if((T0C + 40) to (T0C + 70)) // 40C-70C, minor overheat, 10% chance of taking damage
+			damage_chance = 10
+		if((T0C + 70) to (T0C + 130)) // 70C-130C, major overheat, 25% chance of taking damage
+			damage_chance = 25
+		if((T0C + 130) to (T0C + 200)) // 130C-200C, dangerous overheat, 50% chance of taking damage
+			damage_chance = 50
+		if((T0C + 200) to INFINITY) // More than 200C, INFERNO. Takes damage every tick.
+			damage_chance = 100
+
+	if(damage_chance && prob(damage_chance))
+		src.integrity = between(0, src.integrity - 1, 100)
+
+	if(src.delay > 0)
+		src.delay--
+	else
+		var/turf/simulated/L = src.loc
+		if(istype(L))
+			var/datum/gas_mixture/env = L.return_air()
+			var/transfer_moles = 0.25 * env.total_moles
+			var/datum/gas_mixture/removed = env.remove(transfer_moles)
+			if(removed)
+				var/heat_produced = src.idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
+				removed.add_thermal_energy(heat_produced)
+			env.merge(removed)
+		src.delay = initial(src.delay)
+
+/obj/machinery/telecomms_machine/noheat/check_heat()
+	return
 
 /obj/machinery/telecomms_machine/emp_act(var/severity)
 	if(prob(100 / severity))
@@ -132,10 +156,36 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 			user << "<span class='notice'>This machine is already in perfect condition.</span>"
 
 /obj/machinery/telecomms_machine/common
-	channels = list(PUB_FREQ)
+	name = "Telecommunications Hub (Common)"
 
-/obj/machinery/telecomms_machine/allinone
-	channels = list(PUB_FREQ, SCI_FREQ, COMM_FREQ, MED_FREQ, ENG_FREQ, SEC_FREQ, ERT_FREQ, DTH_FREQ, SYND_FREQ, SUP_FREQ, SRV_FREQ, AI_FREQ)
+/obj/machinery/telecomms_machine/common/New()
+	..()
+	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
+		channels += i
+
+/obj/machinery/telecomms_machine/medsci
+	name = "Telecommunications Hub (Medical and Science)"
+	channels = list(SCI_FREQ, MED_FREQ)
+
+/obj/machinery/telecomms_machine/supser
+	name = "Telecommunications Hub (Supply and Service)"
+	channels = list(SUP_FREQ, SRV_FREQ)
+
+/obj/machinery/telecomms_machine/comsec
+	name = "Telecommunications Hub (Command and Security)"
+	channels = list(COMM_FREQ, SEC_FREQ)
+
+/obj/machinery/telecomms_machine/engi
+	name = "Telecommunications Hub (Engineering)"
+	channels = list(AI_FREQ, ENG_FREQ)
+
+/obj/machinery/telecomms_machine/noheat/centcom
+	name = "Telecommunications Hub (ERT)"
+	channels = list(DTH_FREQ, ERT_FREQ)
+
+/obj/machinery/telecomms_machine/noheat/merc
+	name = "Telecommunications Hub (Intercepting)"
+	channels = list(SYND_FREQ)
 
 /obj/machinery/telecomms_machine/proc/processSignal(var/mob/living/source, var/mobName, var/sayVerb, var/message, var/freq, var/datum/language/speaking)
 	if(!(freq in src.channels))
@@ -144,7 +194,7 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 	if(!src.isUsable())
 		return 0
 
-	broadcastMessage(source, mobName, sayVerb, message, freq, speaking, 0)
+	broadcastMessage(source, mobName, sayVerb, message, freq, speaking)
 	return 1
 
 /obj/machinery/telecomms_machine/proc/isUsable()
@@ -154,10 +204,10 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 		return 0
 	return 1
 
-/proc/broadcastMessage(var/mob/living/source, var/mobName, var/sayVerb, var/message, var/freq, var/datum/language/speaking, var/messageFlags)
+/proc/broadcastMessage(var/mob/living/source, var/mobName, var/sayVerb, var/message, var/freq, var/datum/language/speaking, var/interceptData)
 	var/list/radios = list()
 
-	for(var/obj/item/device/radio/R in world) // AAAAAAAAAAAAAA
+	for(var/obj/item/device/radio/R in all_radios)
 		if(R.receive_range(freq) != -1)
 			radios += R
 
@@ -178,6 +228,9 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 		if(istype(R, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
 			continue
 
+		if(interceptData && istype(R, /mob/dead/observer) && R.client && R.client.prefs && (R.client.prefs.toggles & CHAT_GHOSTRADIO)) // Don't spam ghosts with double messages
+			continue
+
 		if (!source || R.say_understands(source))
 			heard_normal += R
 		else
@@ -187,13 +240,13 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 			else
 				heard_garbled += R
 
+	var/freq_text = get_frequency_name(interceptData ? interceptData : freq)
 	if(length(heard_normal) || length(heard_voice) || length(heard_garbled))
-		var/freq_text = get_frequency_name(freq)
 
 		var/part_b_extra = ""
-		if(IS_INTERCEPTED & messageFlags) // intercepted radio message
+		if(interceptData) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span class='[frequency_span_class(freq)]'><b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output//\icon[radio]
+		var/part_a = "<span class='[frequency_span_class(interceptData ? interceptData : freq)]'><b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
 
@@ -209,14 +262,14 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 			for(var/mob/R in heard_garbled)
 				R.hear_radio(message, sayVerb, speaking, part_a, part_b, source, 1, mobName)
 
-	if(!(IS_INTERCEPTED & messageFlags))
+	if(!interceptData && !(freq in ANTAG_FREQS))
 		for(var/antFreq in ANTAG_FREQS)
-			broadcastMessage(source, mobName, sayVerb, message, antFreq, speaking, messageFlags | IS_INTERCEPTED)
+			broadcastMessage(source, mobName, sayVerb, message, antFreq, speaking, freq)
 
 	return 1
 
 
-// Round up // REMIND ME TO MOVE THIS TO A BETTER PLACE
+// Round up // REMIND ME TO MOVE THIS TO A BETTER PLACE // Actually nevermind, it's fine
 proc/n_ceil(var/num)
 	if(isnum(num))
 		return round(num)+1

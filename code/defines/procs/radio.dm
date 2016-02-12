@@ -30,33 +30,3 @@
 		freq_text = format_frequency(display_freq)
 
 	return freq_text
-
-/datum/reception
-	var/obj/machinery/message_server/message_server = null
-	var/telecomms_reception = TELECOMMS_RECEPTION_NONE
-	var/message = ""
-
-/datum/receptions
-	var/obj/machinery/message_server/message_server = null
-	var/sender_reception = TELECOMMS_RECEPTION_NONE
-	var/list/receiver_reception = new
-
-/proc/get_message_server()
-	if(message_servers)
-		for (var/obj/machinery/message_server/MS in message_servers)
-			if(MS.active)
-				return MS
-	return null
-
-/proc/check_signal(var/datum/signal/signal)
-	return signal && signal.data["done"]
-
-/proc/get_sender_reception(var/atom/sender, var/datum/signal/signal)
-	return check_signal(signal) ? TELECOMMS_RECEPTION_SENDER : TELECOMMS_RECEPTION_NONE
-
-/proc/get_receiver_reception(var/receiver, var/datum/signal/signal)
-	if(receiver && check_signal(signal))
-		var/turf/pos = get_turf(receiver)
-		if(pos && (pos.z in signal.data["level"]))
-			return TELECOMMS_RECEPTION_RECEIVER
-	return TELECOMMS_RECEPTION_NONE
