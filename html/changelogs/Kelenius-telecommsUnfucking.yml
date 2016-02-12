@@ -33,5 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - experiment: "Telecomms are replaced with a MUCH simpler system. Magic box on: radios work. Magic box off: they don't."
-  - tweak: "Spam filters are shared between all messaging consoles. Limit is now as high as was possible with all upgrades. Upgrades removed."
+  - experiment: "Telecomms are replaced with a MUCH simpler system. Magic box on and frequency is listed: radios work. Otherwise: they don't. Z-level doesn't matter."
+  - tweak: "Spam filters are shared between all messaging consoles. Limit is now as high as was possible with all upgrades. Upgrades are removed."
+  - rscdel: "Icons of the radio transmitter used are removed."
