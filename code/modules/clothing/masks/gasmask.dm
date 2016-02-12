@@ -12,6 +12,7 @@
 	siemens_coefficient = 0.9
 	var/gas_filter_strength = 1			//For gas mask filters
 	var/list/filtered_gases = list("phoron", "sleeping_agent")
+	var/hanging = 0
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 75, rad = 0)
 
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
@@ -26,6 +27,37 @@
 	filtered.update_values()
 
 	return filtered
+
+/obj/item/clothing/mask/gas/attack_self()
+	toggle()
+
+/obj/item/clothing/mask/gas/proc/adjust_mask(mob/user)
+	if(user.canmove && !user.stat)
+		src.hanging = !src.hanging
+		if (src.hanging)
+			gas_transfer_coefficient = 1
+			body_parts_covered = body_parts_covered & ~FACE
+			item_flags = item_flags & ~AIRTIGHT
+			icon_state = "gas_altdn"
+			item_state = "gas_altdn"
+			user << "Your mask is now hanging on your neck."
+		else
+			gas_transfer_coefficient = initial(gas_transfer_coefficient)
+			body_parts_covered = initial(body_parts_covered)
+			item_flags = initial(item_flags)
+			icon_state = initial(icon_state)
+			user << "You pull the mask up to cover your face."
+		update_clothing_icon()
+
+/obj/item/clothing/mask/gas/attack_self(mob/user)
+	adjust_mask(user)
+
+/obj/item/clothing/mask/gas/verb/toggle()
+		set category = "Object"
+		set name = "Adjust mask"
+		set src in usr
+
+		adjust_mask(usr)
 
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
@@ -46,7 +78,7 @@
 /obj/item/clothing/mask/gas/swat/vox
 	name = "\improper alien mask"
 	desc = "Clearly not designed for a human face."
-	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask. 
+	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list("Vox")
 
 /obj/item/clothing/mask/gas/syndicate

@@ -38,6 +38,23 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
+	var/face = null
+
+/obj/item/clothing/mask/surgical/verb/pulldown()
+	set name = "Toggle mask position."
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	face = !face
+	if(face)
+		icon_state = "[icon_state]d"
+		item_state = "[item_state]d"
+	else
+		icon_state = initial(icon_state)
+	update_clothing_icon()
+
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
