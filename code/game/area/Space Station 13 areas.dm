@@ -1605,6 +1605,10 @@ area/space/atmosalert()
 	icon_state = "engineering_aft_hallway"
 
 
+/area/engineering/monitoring_station
+	name = "\improper Monitoring Station"
+	icon_state = "engine_monitoring"
+
 //Solars
 
 /area/solar
@@ -1856,6 +1860,10 @@ area/space/atmosalert()
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
+
+/area/medical/first_aid_station
+	name = "\improper First Aid Station"
+	icon_state = "medbay2"
 
 //Security
 
