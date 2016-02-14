@@ -71,7 +71,7 @@
 	item_state = "gas_mask"
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 90, rad = 0)
 	body_parts_covered = HEAD|FACE|EYES
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/swat
 	name = "\improper SWAT mask"
@@ -79,42 +79,42 @@
 	icon_state = "swat"
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE|EYES
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/swat/vox
 	name = "\improper alien mask"
 	desc = "Clearly not designed for a human face."
 	body_parts_covered = 0 //Hack to allow vox to eat while wearing this mask.
 	species_restricted = list("Vox")
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "swat"
 	siemens_coefficient = 0.7
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
 	desc = "A true prankster's facial attire. A clown is incomplete without their wig and mask."
 	icon_state = "clown"
 	item_state = "clown_hat"
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
 	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
 	desc = "The traditional mime's mask. It has an eerie facial posture."
 	icon_state = "mime"
 	item_state = "mime"
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
@@ -122,31 +122,31 @@
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
 	body_parts_covered = HEAD|FACE|EYES
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
 	desc = "A traditional female mime's mask."
 	icon_state = "sexymime"
 	item_state = "sexymime"
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/death_commando
 	name = "Death Commando Mask"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
 	siemens_coefficient = 0.2
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
 	desc = "Beep boop"
 	icon_state = "death"
-	var/pull_mask = 0
+	pull_mask = 0
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
 	desc = "Twoooo!"
 	icon_state = "owl"
 	body_parts_covered = HEAD|FACE|EYES
-	var/pull_mask = 0
+	pull_mask = 0
