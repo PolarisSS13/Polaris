@@ -1865,6 +1865,10 @@ area/space/atmosalert()
 	name = "\improper First Aid Station"
 	icon_state = "medbay2"
 
+/area/medical/first_aid_station/port
+	name = "\improper First Aid Station Port"
+	icon_state = "medbay2"
+
 //Security
 
 /area/security/main
