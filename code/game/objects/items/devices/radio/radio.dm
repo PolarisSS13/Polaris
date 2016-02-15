@@ -239,6 +239,7 @@ var/global/list/all_radios = list()
 // Interprets the message mode when talking into a radio, possibly returning a connection datum
 /obj/item/device/radio/proc/handle_message_mode(mob/living/M as mob, message, message_mode)
 	// If a channel isn't specified, send to common.
+	//world << "[M] | [message] | [message_mode]"
 	if(!message_mode || message_mode == "headset")
 		return frequency
 

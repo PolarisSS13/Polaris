@@ -205,6 +205,7 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 	return 1
 
 /proc/broadcastMessage(var/mob/living/source, var/mobName, var/sayVerb, var/message, var/freq, var/datum/language/speaking, var/interceptData)
+	//world << "[source], [mobName], [sayVerb], [message], [freq], [speaking], [interceptData]"
 	var/list/radios = list()
 
 	for(var/obj/item/device/radio/R in all_radios)
