@@ -1,15 +1,24 @@
+#define SHUTTLE_IDLE 0
+#define SHUTTLE_SPINNING 1
+#define SHUTTLE_DEEP_SPACE 2
+
 /datum/shuttle2
 	var/name
 	var/area/shuttle_area
 	//var/direction
 	var/turf/docking // The turf of the ship that is defined as the docking port
 
-	var/list/known_coordynates = list()
+	var/list/known_coordinates = list()
 
 	var/obj/machinery/embedded_controller/radio/airlock/docking_port/docking_port
 
 	var/size = 0
 	var/engines = 0
+
+	var/status = SHUTTLE_IDLE
+	var/spin_time = 40
+	var/is_deep_space = 0
+	var/move_time = 100 // Only matters if [is_deep_space] is 1
 
 /datum/shuttle2/New(var/newname)
 	..()
@@ -31,6 +40,22 @@
 	for(var/obj/structure/shuttle/engine/propulsion/P in shuttle_area)
 		++engines
 	docking_port = locate() in shuttle_area
+
+/datum/shuttle2/proc/moveTo(var/name)
+	if(status != SHUTTLE_IDLE)
+		return
+	var/list/P = known_coordinates[name]
+	if(!P)
+		return
+	undock()
+	status = SHUTTLE_SPINNING
+	sleep(spin_time)
+	if(is_deep_space)
+		
+		sleep(move_time)
+	
+	moveToCoordinates(P["x"], P["y"], P["z"])
+	dock()
 
 /datum/shuttle2/proc/undock()
 	docking_port.docking_program.initiate_undocking()
@@ -60,19 +85,13 @@
 	docking = T
 	initComponents()
 
-/datum/shuttle2/proc/addCoordynates(var/name, var/x, var/y, var/z)
-	if(known_coordynates[name])
-		known_coordynates -= name
+/datum/shuttle2/proc/addCoordinates(var/name, var/x, var/y, var/z)
+	if(known_coordinates[name])
+		known_coordinates -= name
 
-	known_coordynates[name] = list("x" = x, "y" = y, "z" = z)
+	known_coordinates[name] = list("x" = x, "y" = y, "z" = z)
 
-/datum/shuttle2/proc/moveToCoordynates(var/name)
-	var/list/P = known_coordynates[name]
-	if(!P)
-		return
-	moveTo(P["x"], P["y"], P["z"])
-
-/datum/shuttle2/proc/moveTo(var/x, var/y, var/z)
+/datum/shuttle2/proc/moveToCoordinates(var/x, var/y, var/z)
 	if(!docking)
 		return
 
@@ -129,10 +148,10 @@ var/datum/shuttle2/testShuttle = new()
 	var/datum/shuttle2/S = new()
 	for(var/turf/T in get_area(loc))
 		S.addTurf(T)
-	S.moveTo(x, y, z)
+	S.moveToCoordinates(x, y, z)
 
 /turf/verb/addToShuttle()
 	testShuttle.addTurf(src)
 
 /mob/verb/tryMove(var/x as num, var/y as num, var/z as num)
-	testShuttle.moveTo(x, y, z)
+	testShuttle.moveToCoordinates(x, y, z)

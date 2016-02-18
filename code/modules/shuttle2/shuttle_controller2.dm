@@ -1,3 +1,13 @@
+/*
+Aright, here's how the shuttle moving should work
+First, if it's docked, it undocks.
+Second, it starts a spin-up timer. For now it's arbitary, in the future it should depend on the shuttle's components.
+If it's a long-range shuttle (merc, heist, etc), it jumps to an empty spot on z-level 2.
+It jumps to the target coordinates.
+And finally it checks if there's a docking port nearby and docks.
+*/
+
+
 var/global/datum/shuttle_controller2/shuttle_controller2
 
 /datum/shuttle_controller2
@@ -20,13 +30,13 @@ var/global/datum/shuttle_controller2/shuttle_controller2
 	A = locate(/area/syndicate_station/start)
 	T = get_turf(locate(/obj/machinery/embedded_controller/radio/airlock/docking_port) in A)
 	curshuttle.attachToArea(A, T)
-	curshuttle.addCoordynates("Docked with the station", 201, 64, 1)
+	curshuttle.addCoordinates("Docked with the station", 201, 64, 1)
 	shuttles["Mercenary Shuttle"] = curshuttle
 
 /mob/verb/moveShuttleToCoordinates(var/shuttleName as text, var/x as num, var/y as num, var/z as num)
 	var/datum/shuttle2/S = shuttle_controller2.shuttles[shuttleName]
 	if(istype(S))
-		S.moveTo(x, y, z)
+		S.moveToCoordinates(x, y, z)
 
 /mob/verb/undockShip(var/shuttleName as text)
 	var/datum/shuttle2/S = shuttle_controller2.shuttles[shuttleName]
@@ -46,9 +56,9 @@ var/global/datum/shuttle_controller2/shuttle_controller2
 /mob/verb/addShipCoordynates(var/shuttleName as text, var/name as text, var/x as num, var/y as num, var/z as num)
 	var/datum/shuttle2/S = shuttle_controller2.shuttles[shuttleName]
 	if(istype(S))
-		S.addCoordynates(name, x, y, z)
+		S.addCoordinates(name, x, y, z)
 
 /mob/verb/moveShipToCoordynates(var/shuttleName as text, var/name as text)
 	var/datum/shuttle2/S = shuttle_controller2.shuttles[shuttleName]
 	if(istype(S))
-		S.moveToCoordynates(name)
+		S.moveTo(name)
