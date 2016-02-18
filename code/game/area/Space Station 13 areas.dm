@@ -1438,7 +1438,7 @@ area/space/atmosalert()
 	icon_state = "chapel_morgue"
 
 /area/lawoffice
-	name = "\improper Internal Affairs"
+	name = "\improper Corporate Office"
 	icon_state = "law"
 
 /area/holodeck_control
