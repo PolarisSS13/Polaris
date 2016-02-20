@@ -1438,7 +1438,7 @@ area/space/atmosalert()
 	icon_state = "chapel_morgue"
 
 /area/lawoffice
-	name = "\improper Internal Affairs"
+	name = "\improper Corporate Office"
 	icon_state = "law"
 
 /area/holodeck_control
@@ -1604,6 +1604,10 @@ area/space/atmosalert()
 	name = "\improper Engineering Aft Hallway"
 	icon_state = "engineering_aft_hallway"
 
+
+/area/engineering/monitoring_station
+	name = "\improper Monitoring Station"
+	icon_state = "engine_monitoring"
 
 //Solars
 
@@ -1856,6 +1860,14 @@ area/space/atmosalert()
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
+
+/area/medical/first_aid_station
+	name = "\improper First Aid Station"
+	icon_state = "medbay2"
+
+/area/medical/first_aid_station/port
+	name = "\improper First Aid Station Port"
+	icon_state = "medbay2"
 
 //Security
 

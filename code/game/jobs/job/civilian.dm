@@ -246,7 +246,7 @@
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
-
+	alt_titles = list("Sol Gov Representative","Health & Safety Inspector","Company Representative")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -255,14 +255,28 @@
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/internalaffairs(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/internalaffairs(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(H), slot_glasses)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/lawyer(H), slot_belt)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase(H), slot_l_hand)
-
-		H.implant_loyalty(H)
-
-
+		if (H.mind.role_alt_title)
+			switch(H.mind.role_alt_title)
+				if("Company Representative")
+					if(H.gender == FEMALE)
+						H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/female(H), slot_w_uniform)
+					else
+						H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/really_black(H), slot_w_uniform)
+					spawn(0)
+						var/company = "Nanotrasen"
+						var/new_company = sanitize(input(H, "As a company representative, what company do you represent? The default is Nanotrasen", "Name change", company), MAX_NAME_LEN)
+						if (!new_company)
+							new_company = company
+				if("Health & Safety Inspector")
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/tan(H), slot_w_uniform)
+				if("Sol Gov Representative")
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/vice(H), slot_w_uniform)
+					H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/internalaffairs(H), slot_wear_suit)
+				if("Internal Affairs Agent")
+					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/internalaffairs(H), slot_w_uniform)
+					H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/internalaffairs(H), slot_wear_suit)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/lawyer(H), slot_belt)
 		return 1
