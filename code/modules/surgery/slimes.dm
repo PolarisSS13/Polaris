@@ -85,7 +85,7 @@
 		if(target.cores >= 0)
 			new target.coretype(target.loc)
 		if(target.cores <= 0)
-			target.icon_state = "[target.colour] baby slime dead-nocore"
+			target.icon_state = "slime extracted"
 
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)

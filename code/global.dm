@@ -194,3 +194,6 @@ var/max_explosion_range = 14
 var/global/obj/item/device/radio/intercom/global_announcer = new(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+
+//List for hex digits, use for pick if you want custom colors.
+var/hexNumbs = list("0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F")
