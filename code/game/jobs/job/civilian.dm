@@ -266,8 +266,8 @@
 					else
 						H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/really_black(H), slot_w_uniform)
 					spawn(0)
-						var/company = "Nanotrasen"
-						var/new_company = sanitize(input(H, "As a company representative, what company do you represent? The default is Nanotrasen", "Name change", company), MAX_NAME_LEN)
+						var/company = "NanoTrasen"
+						var/new_company = sanitize(input(H, "As a company representative, what company do you represent? The default is NanoTrasen.", "Name change", company), MAX_NAME_LEN)
 						if (!new_company)
 							new_company = company
 				if("Health & Safety Inspector")
