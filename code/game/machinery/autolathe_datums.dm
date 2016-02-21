@@ -315,6 +315,11 @@
 	name = "maglight"
 	path = /obj/item/device/flashlight/maglight
 	hidden = 1
+
+/datum/autolathe/recipe/weldinggoggles
+	category = "General"
+	name = "welding goggles"
+	path = /obj/item/clothing/glasses/welding
 	category = "General"
 
 /datum/autolathe/recipe/flamethrower
