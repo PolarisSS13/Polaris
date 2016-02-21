@@ -36,7 +36,13 @@
 		var/ear_safety = 0
 		if(iscarbon(M))
 			eye_safety = M.eyecheck()
-			ear_safety = M.get_ear_protection()
+			if(ishuman(M))
+				if(istype(M:l_ear, /obj/item/clothing/ears/earmuffs) || istype(M:r_ear, /obj/item/clothing/ears/earmuffs))
+					ear_safety += 2
+				if(HULK in M.mutations)
+					ear_safety += 1
+				if(istype(M:head, /obj/item/clothing/head/helmet))
+					ear_safety += 1
 
 //Flashing everyone
 		if(eye_safety < 1)

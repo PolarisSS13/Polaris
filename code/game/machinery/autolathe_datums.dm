@@ -311,7 +311,13 @@
 	path = /obj/item/weapon/camera_assembly
 	category = "Engineering"
 
+/datum/autolathe/recipe/maglight
+	name = "maglight"
+	path = /obj/item/device/flashlight/maglight
+	hidden = 1
+
 /datum/autolathe/recipe/weldinggoggles
+	category = "General"
 	name = "welding goggles"
 	path = /obj/item/clothing/glasses/welding
 	category = "General"
