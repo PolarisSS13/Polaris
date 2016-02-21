@@ -311,6 +311,12 @@
 	path = /obj/item/weapon/camera_assembly
 	category = "Engineering"
 
+/datum/autolathe/recipe/maglight
+	name = "maglight"
+	path = /obj/item/device/flashlight/maglight
+	hidden = 1
+	category = "General"
+
 /datum/autolathe/recipe/flamethrower
 	name = "flamethrower"
 	path = /obj/item/weapon/flamethrower/full
