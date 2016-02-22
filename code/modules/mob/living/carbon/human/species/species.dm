@@ -33,6 +33,7 @@
 	var/short_sighted                                    // Permanent weldervision.
 	var/blood_volume = 560                               // Initial blood volume.
 	var/hunger_factor = 0.05                             // Multiplier for hunger.
+	var/metabolic_rate = 0.2			     // Multiplier for metabolism.
 
 	var/min_age = 17
 	var/max_age = 70
