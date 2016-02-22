@@ -6,7 +6,7 @@
 	description = "A toxic chemical."
 	reagent_state = LIQUID
 	color = "#CF3600"
-	metabolism = REM * 0.05 // 0.01 by default. They last a while and slowly kill you.
+	metabolism = metabolic_rate * 0.05 // 0.01 by default. They last a while and slowly kill you.
 	var/strength = 4 // How much damage it deals per unit
 
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -71,7 +71,7 @@
 	reagent_state = LIQUID
 	color = "#CF3600"
 	strength = 20
-	metabolism = REM * 2
+	metabolism = metabolic_rate * 2
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -122,7 +122,7 @@
 	description = "A strong neurotoxin that puts the subject into a death-like state."
 	reagent_state = SOLID
 	color = "#669900"
-	metabolism = REM
+	metabolism = metabolic_rate
 	strength = 3
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -276,7 +276,7 @@
 	description = "An effective hypnotic used to treat insomnia."
 	reagent_state = LIQUID
 	color = "#009CA8"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -306,7 +306,7 @@
 	description = "A powerful sedative."
 	reagent_state = SOLID
 	color = "#000067"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -349,7 +349,7 @@
 	description = "An illegal chemical compound used as drug."
 	reagent_state = LIQUID
 	color = "#60A584"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -367,7 +367,7 @@
 	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans."
 	reagent_state = LIQUID
 	color = "#202040"
-	metabolism = REM * 0.25
+	metabolism = metabolic_rate * 0.25
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -383,7 +383,7 @@
 	description = "Cryptobiolin causes confusion and dizzyness."
 	reagent_state = LIQUID
 	color = "#000055"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -417,7 +417,7 @@
 	description = "A powerful hallucinogen, it can cause fatal effects in users."
 	reagent_state = LIQUID
 	color = "#B31008"
-	metabolism = REM * 0.25
+	metabolism = metabolic_rate * 0.25
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -431,7 +431,7 @@
 	description = "A strong psycotropic derived from certain species of mushroom."
 	color = "#E700E7"
 	overdose = REAGENTS_OVERDOSE
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
