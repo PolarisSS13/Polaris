@@ -7,7 +7,7 @@
 	reagent_state = LIQUID
 	color = "#00BFFF"
 	overdose = REAGENTS_OVERDOSE * 2
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5	//Balance Decision; May need to be set to a defined rate, for equality
 	scannable = 1
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -122,7 +122,7 @@
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 	reagent_state = LIQUID
 	color = "#8080FF"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	scannable = 1
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -138,7 +138,7 @@
 	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
 	reagent_state = LIQUID
 	color = "#80BFFF"
-	metabolism = REM * 0.5
+	metabolism = metabolic_rate * 0.5
 	scannable = 1
 
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -209,7 +209,7 @@
 	description = "Synaptizine is used to treat various diseases."
 	reagent_state = LIQUID
 	color = "#99CCFF"
-	metabolism = REM * 0.05
+	metabolism = metabolic_rate * 0.05			//May require tweaking
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
@@ -231,7 +231,7 @@
 	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
 	reagent_state = LIQUID
 	color = "#FFFF66"
-	metabolism = REM * 0.25
+	metabolism = metabolic_rate * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
@@ -310,7 +310,7 @@
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 	reagent_state = LIQUID
 	color = "#FF3300"
-	metabolism = REM * 0.15
+	metabolism = metabolic_rate * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -346,7 +346,7 @@
 	description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
 	reagent_state = LIQUID
 	color = "#408000"
-	metabolism = REM * 0.25
+	metabolism = metabolic_rate * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
@@ -359,7 +359,7 @@
 	description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
 	reagent_state = LIQUID
 	color = "#008000"
-	metabolism = REM * 0.25
+	metabolism = metabolic_rate * 0.25
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
@@ -375,7 +375,7 @@
 	description = "An all-purpose antiviral agent."
 	reagent_state = LIQUID
 	color = "#C1C1C1"
-	metabolism = REM * 0.05
+	metabolism = metabolic_rate * 0.05
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
