@@ -456,7 +456,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Medical"
 
 /datum/supply_packs/cryobag
-	name = "Statis bag crate"
+	name = "Stasis bag crate"
 	contains = list(/obj/item/bodybag/cryobag,
 				    /obj/item/bodybag/cryobag,
 	    			/obj/item/bodybag/cryobag)
@@ -1142,8 +1142,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,
 					/obj/item/clothing/head/that,
+					/obj/item/clothing/suit/storage/toggle/internalaffairs,
 					/obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
-					/obj/item/clothing/suit/storage/lawyer/purpjacket,
+					/obj/item/clothing/suit/storage/toggle/lawyer/purpjacket,
 					/obj/item/clothing/under/suit_jacket,
 					/obj/item/clothing/under/suit_jacket/female,
 					/obj/item/clothing/under/suit_jacket/really_black,
@@ -1350,6 +1351,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 15
 	group = "Miscellaneous"
 	contains = list(/obj/item/stack/tile/carpet)
+	amount = 50
+
+/datum/supply_packs/linoleum
+	name = "Linoleum"
+	containertype = /obj/structure/closet
+	containername = "Linoleum crate"
+	cost = 15
+	group = "Miscellaneous"
+	contains = list(/obj/item/stack/tile/linoleum)
 	amount = 50
 
 /datum/supply_packs/hydrotray

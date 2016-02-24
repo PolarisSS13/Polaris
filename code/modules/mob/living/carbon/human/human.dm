@@ -116,7 +116,7 @@
 				b_loss = b_loss/1.5
 				f_loss = f_loss/1.5
 
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (!get_ear_protection() >= 2)
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70) && !shielded)
@@ -126,7 +126,7 @@
 			b_loss += 30
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (!get_ear_protection() >= 2)
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50) && !shielded)
@@ -895,7 +895,7 @@
 /mob/living/carbon/human/revive()
 
 	if(should_have_organ(O_HEART))
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		vessel.add_reagent("blood",species.blood_volume-vessel.total_volume)
 		fixblood()
 
 	species.create_organs(src) // Reset our organs/limbs.
@@ -1113,7 +1113,10 @@
 
 	spawn(0)
 		regenerate_icons()
-		vessel.add_reagent("blood",560-vessel.total_volume)
+		if(vessel.total_volume < species.blood_volume)
+			vessel.add_reagent("blood", species.blood_volume - vessel.total_volume)
+		else if(vessel.total_volume > species.blood_volume)
+			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
 		fixblood()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
