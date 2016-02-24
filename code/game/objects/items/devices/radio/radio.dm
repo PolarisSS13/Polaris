@@ -303,37 +303,29 @@ var/global/list/all_radios = list()
 	return
 */
 
-
-/obj/item/device/radio/proc/receive_range(freq)
-	// check if this radio can receive on the given frequency, and if so,
-	// what the range is in which mobs will hear the radio
-	// returns: -1 if can't receive, range otherwise
-
-	if (wires.IsIndexCut(WIRE_RECEIVE))
+// check if this radio can receive on the given frequency, and if so,
+// what the range is in which mobs will hear the radio
+// returns: -1 if can't receive, range otherwise
+/obj/item/device/radio/proc/receive_range(var/freq)
+	if(src.wires.IsIndexCut(WIRE_RECEIVE)) // Receive wire cut - can't hear anything
 		return -1
-	if(!listening)
+	if(!src.listening) // Receiver off - can't hear anything
 		return -1
-	if(freq in ANTAG_FREQS)
-		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
-			return -1
-	if (!on)
+	if(!on) // Radio off - can't hear anything
 		return -1
-	if (!freq) //recieved on main frequency
-		if (!listening)
-			return -1
-	else
-		var/accept = (freq==frequency && listening)
-		if (!accept)
-			for (var/ch_name in channels)
-				var/datum/radio_frequency/RF = secure_radio_connections[ch_name]
-				if (RF.frequency==freq && (channels[ch_name]&FREQ_LISTENING))
-					accept = 1
-					break
-		if (!accept)
-			return -1
+	if(freq)
+		if(freq in ANTAG_FREQS)
+			if(!src.syndie) //Checks to see if it's allowed on that frequency, based on the encryption keys
+				return -1
+		if(freq == frequency) // Main frequency
+			return canhear_range
+		for(var/ch_name in channels) // Channels
+			if(freq == radiochannels[ch_name])
+				return canhear_range
+		return -1
 	return canhear_range
 
-/obj/item/device/radio/proc/send_hear(freq, level)
+/obj/item/device/radio/proc/send_hear(freq)
 
 	var/range = receive_range(freq)
 	if(range > -1)
