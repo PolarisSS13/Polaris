@@ -5,5 +5,8 @@
 	if(!shuttle_controller)
 		shuttle_controller = new
 
+	if(!shuttle_controller2)
+		shuttle_controller2 = new
+
 /datum/controller/process/Shuttle/doWork()
 	shuttle_controller.process()
