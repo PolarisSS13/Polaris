@@ -35,7 +35,7 @@
 	if(temp)
 		dat = temp
 	else
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle2/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			dat += {"<BR><B>Supply shuttle</B><HR>
 			Location: [shuttle.has_arrive_time() ? "Moving to station ([shuttle.eta_minutes()] Mins.)":shuttle.at_station() ? "Docked":"Away"]<BR>
@@ -162,7 +162,7 @@
 	if (temp)
 		dat = temp
 	else
-		var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+		var/datum/shuttle2/supply/shuttle = supply_controller.shuttle
 		if (shuttle)
 			dat += "<BR><B>Supply shuttle</B><HR>"
 			dat += "\nLocation: "
@@ -170,8 +170,8 @@
 				dat += "In transit ([shuttle.eta_minutes()] Mins.)<BR>"
 			else
 				if (shuttle.at_station())
-					if (shuttle.docking_controller)
-						switch(shuttle.docking_controller.get_docking_status())
+					if (shuttle.docking_program)
+						switch(shuttle.docking_program.get_docking_status())
 							if ("docked") dat += "Docked at station<BR>"
 							if ("undocked") dat += "Undocked from station<BR>"
 							if ("docking") dat += "Docking with station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>Force Launch</A></span>" : ""]<BR>"
@@ -218,7 +218,7 @@
 	if(!supply_controller)
 		world.log << "## ERROR: Eek. The supply_controller controller datum is missing somehow."
 		return
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle2/supply/shuttle = supply_controller.shuttle
 	if (!shuttle)
 		world.log << "## ERROR: Eek. The supply/shuttle datum is missing somehow."
 		return

@@ -188,6 +188,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	)
 
 	// Supply shuttle
+	/*
 	shuttle = new/datum/shuttle/ferry/supply()
 	shuttle.location = 1
 	shuttle.warmup_time = 10
@@ -199,6 +200,7 @@ var/global/datum/shuttle_controller/shuttle_controller
 	process_shuttles += shuttle
 
 	supply_controller.shuttle = shuttle
+	*/
 
 	// Admin shuttles.
 	shuttle = new()

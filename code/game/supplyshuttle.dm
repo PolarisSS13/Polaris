@@ -135,7 +135,8 @@ var/list/mechtoys = list(
 	var/list/supply_packs = list()
 	//shuttle movement
 	var/movetime = 1200
-	var/datum/shuttle/ferry/supply/shuttle
+	//var/datum/shuttle/ferry/supply/shuttle
+	var/datum/shuttle2/supply/shuttle
 
 	New()
 		ordernum = rand(1,9000)
