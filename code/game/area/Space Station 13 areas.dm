@@ -2115,7 +2115,7 @@ area/space/atmosalert()
 	icon_state = "xeno_lab"
 
 /area/rnd/xenobiology/xenoflora_storage
-	name = "\improper Xenoflora Storage"
+	name = "\improper Xenoflora Entrance"
 	icon_state = "xeno_f_store"
 
 /area/rnd/xenobiology/xenoflora
