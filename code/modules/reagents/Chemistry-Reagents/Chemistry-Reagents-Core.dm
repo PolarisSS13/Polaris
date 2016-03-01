@@ -6,7 +6,9 @@
 	metabolism = REM * 5
 	color = "#C80000"
 
-	glass_name = "tomato juice"
+	taste_description = "copper"
+	taste_mult = 1.3
+	glass_name = "glass of tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
 /datum/reagent/blood/initialize_data(var/newdata)
@@ -72,6 +74,7 @@
 /datum/reagent/antibodies
 	data = list("antibodies"=list())
 	name = "Antibodies"
+	taste_description = "slime"
 	id = "antibodies"
 	reagent_state = LIQUID
 	color = "#0050F0"
@@ -89,8 +92,8 @@
 	reagent_state = LIQUID
 	color = "#0064C877"
 	metabolism = REM * 10
-
-	glass_name = "water"
+	taste_description = "water"
+	glass_name = "glass of water"
 	glass_desc = "The father of all refreshments."
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
@@ -149,6 +152,7 @@
 	name = "Welding fuel"
 	id = "fuel"
 	description = "Required for welders. Flamable."
+	taste_description = "gross metal"
 	reagent_state = LIQUID
 	color = "#660000"
 
