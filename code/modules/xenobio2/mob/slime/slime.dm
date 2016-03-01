@@ -26,11 +26,11 @@ Slime definitions, Life and New live here.
 	response_help = "pats"
 	response_disarm = "tries to stop"
 	response_harm = "hits"
-	
+
 	var/emote_on = null
-	
+
 	maleable = MAX_MALEABLE
-	
+
 	//Slimes can speak all of the languages, oh no!
 	universal_speak = 1
 	speak_chance = 1
@@ -45,7 +45,7 @@ Slime definitions, Life and New live here.
 
 	//Overlay information
 	var/overlay = 1 // 1 = normal lighting, 0 = shiny, 2 = too shiny, -1 = no overlay
-	
+
 	chemreact = list(	"nutriment" = list("nutr" = 0.5),
 						"radium" = list("toxic" = 0.3, "mut" = 1),
 						"mutagen" = list("nutr" = 0.4, "mut" = 2),
@@ -61,7 +61,7 @@ Slime definitions, Life and New live here.
 						"sugar" = list("toxic" = 0.4, "nutr" = 0.2),
 						"eznutrient" = list("nutr" = 0.8),
 						"cryoxadone" = list("toxic" = 0.4),
-						"flourine" = list("toxic" = 0.1),
+						"hydrazine" = list("toxic" = 0.1),
 						"robustharvest" = list("nutr" = 1.5),
 						"glucose" = list("nutr" = 0.5),
 						"blood" = list("nutr" = 0.75, "toxic" = 0.05, "mut" = 0.45),
@@ -79,7 +79,7 @@ Slime definitions, Life and New live here.
 						"glycerol" = list("nutr" = 0.6),
 						"woodpulp" = list("heal" = 0.1, "nutr" = 0.7),
 						"docilitytoxin" = list("nutr" = 0.3)	)
-	
+
 /mob/living/simple_animal/xeno/slime/New()
 	..()
 	for(var/datum/language/L in (typesof(/datum/language) - /datum/language))
@@ -91,4 +91,3 @@ Slime definitions, Life and New live here.
 	resistances[TOX] = 1.5
 	GenerateChild()
 	return 1
-	
