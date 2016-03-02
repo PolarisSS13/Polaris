@@ -15,21 +15,19 @@
 
 	if(!islist(newdata) || !newdata.len)
 		return
-
-	//add the new taste data
-	for(var/taste in newdata)
-		if(taste in data)
-			data[taste] += newdata[taste]
-		else
-			data[taste] = newdata[taste]
-
-	//cull all tastes below 10% of total
+	for(var/i in 1 to newdata.len)
+		if(!(newdata[i] in data))
+			data.Add(newdata[i])
+			data[newdata[i]] = 0
+		data[newdata[i]] += newdata[newdata[i]]
 	var/totalFlavor = 0
-	for(var/taste in data)
-		totalFlavor += data[taste]
-	for(var/taste in data)
-		if(data[taste]/totalFlavor < 0.1)
-			data -= taste
+	for(var/i in 1 to data.len)
+		totalFlavor += data[data[i]]
+	for(var/i in 1 to data.len) //cull the tasteless
+		if(data[data[i]]/totalFlavor * 100 < 10)
+			data[data[i]] = null
+			data -= data[i]
+			data -= null
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!injectable)
@@ -1887,7 +1885,11 @@
 	id = "sbiten"
 	description = "A spicy Vodka! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
+<<<<<<< HEAD
 	color = "#FFA371"
+=======
+	color = "#664300"
+>>>>>>> a62c3fc... Made some suggested changes
 	strength = 15
 	adj_temp = 50
 	targ_temp = 360
