@@ -12,6 +12,7 @@
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
 	gluttonous = 3
+	spawns_with_stack = 0
 
 	brute_mod = 0.5 // Hardened carapace.
 	burn_mod = 2    // Weak to fire.
