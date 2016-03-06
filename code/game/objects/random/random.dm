@@ -278,3 +278,20 @@
 					/obj/item/toy/plushie/kitten,\
 					/obj/item/toy/plushie/lizard)
 
+/obj/random/riotarmor
+	name = "random riot armor"
+	desc = "This is a random riot armor spawn."
+	icon = 'icons/obj/clothing/suits.dmi'
+	icon_state = "riot"
+	item_to_spawn()
+		return pick(/obj/item/clothing/suit/armor/riot,\
+					/obj/item/clothing/suit/armor/riot/alt)
+
+/obj/random/bulletvest
+	name = "random bulletproof armor"
+	desc = "This is a random bulletproof vest spawn."
+	icon = 'icons/obj/clothing/suits.dmi'
+	icon_state = "bulletproof"
+	item_to_spawn()
+		return pick(/obj/item/clothing/suit/armor/bulletproof,\
+					/obj/item/clothing/suit/armor/bulletproof/alt)

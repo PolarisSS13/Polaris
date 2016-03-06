@@ -816,9 +816,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/helmet/riot,
 					/obj/item/clothing/suit/armor/riot,
 					/obj/item/clothing/head/helmet/riot,
-					/obj/item/clothing/suit/armor/riot,
+					/obj/item/clothing/suit/armor/riot/alt,
 					/obj/item/clothing/head/helmet/riot,
-					/obj/item/clothing/suit/armor/riot,
+					/obj/item/clothing/suit/armor/riot/alt,
 					/obj/item/weapon/storage/box/flashbangs,
 					/obj/item/weapon/storage/box/beanbags,
 					/obj/item/weapon/storage/box/handcuffs)
@@ -842,7 +842,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/shotgun
 	name = "Shotgun crate"
 	contains = list(/obj/item/clothing/suit/armor/bulletproof,
-					/obj/item/clothing/suit/armor/bulletproof,
+					/obj/item/clothing/suit/armor/bulletproof/alt,
 					/obj/item/weapon/storage/box/shotgunammo,
 					/obj/item/weapon/storage/box/shotgunshells,
 					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
@@ -939,7 +939,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/clothing/suit/armor/laserproof,
 					/obj/item/clothing/suit/armor/bulletproof,
 					/obj/item/clothing/head/helmet/riot,
-					/obj/item/clothing/suit/armor/riot)
+					/obj/item/clothing/suit/armor/riot/alt,)
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Experimental armor crate"
