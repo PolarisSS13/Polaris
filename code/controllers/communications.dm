@@ -119,7 +119,7 @@ var/const/SRV_FREQ = 1349
 var/const/SUP_FREQ = 1347
 
 // internal department channels
-var/const/MED_I_FREQ = 1485
+var/const/MED_I_FREQ = 1487
 var/const/SEC_I_FREQ = 1475
 
 var/list/radiochannels = list(
