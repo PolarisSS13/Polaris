@@ -71,10 +71,6 @@
 				stat("Tank Pressure", internal.air_contents.return_pressure())
 				stat("Distribution Pressure", internal.distribute_pressure)
 
-		var/obj/item/organ/internal/xenos/plasmavessel/P = internal_organs_by_name[O_PLASMA]
-		if(P)
-			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
-
 		if(back && istype(back,/obj/item/weapon/rig))
 			var/obj/item/weapon/rig/suit = back
 			var/cell_status = "ERROR"
@@ -116,7 +112,7 @@
 				b_loss = b_loss/1.5
 				f_loss = f_loss/1.5
 
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (!get_ear_protection() >= 2)
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70) && !shielded)
@@ -126,7 +122,7 @@
 			b_loss += 30
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
-			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
+			if (!get_ear_protection() >= 2)
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50) && !shielded)
@@ -235,9 +231,9 @@
 // called when something steps onto a human
 // this handles mulebots and vehicles
 /mob/living/carbon/human/Crossed(var/atom/movable/AM)
-	if(istype(AM, /obj/machinery/bot/mulebot))
-		var/obj/machinery/bot/mulebot/MB = AM
-		MB.RunOver(src)
+	if(istype(AM, /mob/living/bot/mulebot))
+		var/mob/living/bot/mulebot/MB = AM
+		MB.runOver(src)
 
 	if(istype(AM, /obj/vehicle))
 		var/obj/vehicle/V = AM
@@ -619,6 +615,11 @@
 	if (href_list["lookmob"])
 		var/mob/M = locate(href_list["lookmob"])
 		src.examinate(M)
+
+	if (href_list["clickitem"])
+		var/obj/item/I = locate(href_list["clickitem"])
+		if(src.client)
+			src.ClickOn(I)
 
 	if (href_list["flavor_change"])
 		switch(href_list["flavor_change"])
