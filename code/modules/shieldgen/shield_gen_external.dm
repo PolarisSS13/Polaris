@@ -4,8 +4,17 @@
 /obj/machinery/shield_gen/external
 	name = "hull shield generator"
 
-/obj/machinery/shield_gen/external/New()
+/obj/machinery/shield_gen/external/preset/New()
 	..()
+	component_parts += new /obj/item/weapon/circuitboard/shield_gen_ex(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/transmitter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 5)
+	//RefreshParts() - uncomment if you add upgrade effects
 
 //NOT MULTIZ COMPATIBLE
 //Search for space turfs within range that are adjacent to a simulated turf.

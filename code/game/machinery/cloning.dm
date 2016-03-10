@@ -33,6 +33,7 @@
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "pod_0"
 	req_access = list(access_genetics) //For premature unlocking.
+	component_parts = list()
 	var/mob/living/occupant
 	var/heal_level = 20 //The clone is released once its health reaches this level.
 	var/heal_rate = 1
@@ -44,9 +45,8 @@
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
 
-/obj/machinery/clonepod/New()
+/obj/machinery/clonepod/preset/New()
 	..()
-	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/clonepod(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
@@ -54,9 +54,7 @@
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
-
 	RefreshParts()
-	update_icon()
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
 

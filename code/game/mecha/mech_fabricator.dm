@@ -9,6 +9,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
+	component_parts = list()
 
 	var/speed = 1
 	var/mat_efficiency = 1
@@ -27,8 +28,10 @@
 
 /obj/machinery/mecha_part_fabricator/New()
 	..()
+	files = new /datum/research(src) //Setup the research data holder.
 
-	component_parts = list()
+/obj/machinery/mecha_part_fabricator/preset/New()
+	..()
 	component_parts += new /obj/item/weapon/circuitboard/mechfab(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -36,9 +39,6 @@
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	RefreshParts()
-
-	files = new /datum/research(src) //Setup the research data holder.
-	return
 
 /obj/machinery/mecha_part_fabricator/initialize()
 	manufacturer = basic_robolimb.company

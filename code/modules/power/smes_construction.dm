@@ -41,14 +41,14 @@
 
 // These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
 // 1M Charge, 150K I/O
-/obj/machinery/power/smes/buildable/outpost_substation/New()
+/obj/machinery/power/smes/buildable/preset/outpost_substation/New()
 	..(0)
 	component_parts += new /obj/item/weapon/smes_coil/weak(src)
 	recalc_coils()
 
 // This one is pre-installed on engineering shuttle. Allows rapid charging/discharging for easier transport of power to outpost
 // 11M Charge, 2.5M I/O
-/obj/machinery/power/smes/buildable/power_shuttle/New()
+/obj/machinery/power/smes/buildable/preset/power_shuttle/New()
 	..(0)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
 	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
@@ -64,6 +64,7 @@
 
 // SMES itself
 /obj/machinery/power/smes/buildable
+	component_parts = list()
 	var/max_coils = 6 			//30M capacity, 1.5MW input/output when fully upgraded /w default coils
 	var/cur_coils = 1 			// Current amount of installed coils
 	var/safeties_enabled = 1 	// If 0 modifications can be done without discharging the SMES, at risk of critical failure.
@@ -74,6 +75,21 @@
 	var/RCon_tag = "NO_TAG"		// RCON tag, change to show it on SMES Remote control console.
 	charge = 0
 	should_be_mapped = 1
+
+// Proc: New()
+// Parameters: None
+// Description: Adds standard components for this SMES, and forces recalculation of properties.
+/obj/machinery/power/smes/buildable/preset/New(var/install_coils = 1)
+	..()
+	component_parts += new /obj/item/stack/cable_coil(src,30)
+	component_parts += new /obj/item/weapon/circuitboard/smes(src)
+	src.wires = new /datum/wires/smes(src)
+
+	// Allows for mapped-in SMESs with larger capacity/IO
+	if(install_coils)
+		for(var/i = 1, i <= cur_coils, i++)
+			component_parts += new /obj/item/weapon/smes_coil(src)
+		recalc_coils()
 
 /obj/machinery/power/smes/buildable/Destroy()
 	qdel(wires)
@@ -109,22 +125,6 @@
 	// Cyborgs standing next to the SMES can play with the wiring.
 	if(istype(usr, /mob/living/silicon/robot) && Adjacent(usr) && open_hatch)
 		wires.Interact(usr)
-
-// Proc: New()
-// Parameters: None
-// Description: Adds standard components for this SMES, and forces recalculation of properties.
-/obj/machinery/power/smes/buildable/New(var/install_coils = 1)
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,30)
-	component_parts += new /obj/item/weapon/circuitboard/smes(src)
-	src.wires = new /datum/wires/smes(src)
-
-	// Allows for mapped-in SMESs with larger capacity/IO
-	if(install_coils)
-		for(var/i = 1, i <= cur_coils, i++)
-			component_parts += new /obj/item/weapon/smes_coil(src)
-		recalc_coils()
-	..()
 
 // Proc: attack_hand()
 // Parameters: None

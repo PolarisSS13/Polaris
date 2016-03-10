@@ -306,9 +306,8 @@ Class Procs:
 		var/P
 		for(var/obj/item/weapon/stock_parts/A in component_parts)
 			for(var/D in CB.req_components)
-				var/T = text2path(D)
-				if(ispath(A.type, T))
-					P = T
+				if(ispath(A.type, D))
+					P = D
 					break
 			for(var/obj/item/weapon/stock_parts/B in R.contents)
 				if(istype(B, P) && istype(A, P))
@@ -332,7 +331,7 @@ Class Procs:
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
 	M.set_dir(src.dir)
-	M.state = 2
+	M.state = 1
 	M.icon_state = "box_1"
 	for(var/obj/I in component_parts)
 		I.loc = loc
