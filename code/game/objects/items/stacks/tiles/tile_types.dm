@@ -76,7 +76,7 @@
 	desc = "Those could work as a pretty decent throwing weapon" //why?
 	icon_state = "tile"
 	force = 6.0
-	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	matter = list(MATERIAL_STEEL = 250)
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20

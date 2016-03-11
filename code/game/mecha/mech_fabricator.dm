@@ -12,7 +12,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0)
+	var/list/materials = list(MATERIAL_STEEL = 0, MATERIAL_GLASS = 0, "gold" = 0, "silver" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -169,9 +169,9 @@
 		if(/obj/item/stack/material/phoron)
 			material = "phoron"
 		if(/obj/item/stack/material/steel)
-			material = DEFAULT_WALL_MATERIAL
+			material = MATERIAL_STEEL
 		if(/obj/item/stack/material/glass)
-			material = "glass"
+			material = MATERIAL_GLASS
 		if(/obj/item/stack/material/uranium)
 			material = "uranium"
 		else
@@ -304,9 +304,9 @@
 	material = lowertext(material)
 	var/mattype
 	switch(material)
-		if(DEFAULT_WALL_MATERIAL)
+		if(MATERIAL_STEEL)
 			mattype = /obj/item/stack/material/steel
-		if("glass")
+		if(MATERIAL_GLASS)
 			mattype = /obj/item/stack/material/glass
 		if("gold")
 			mattype = /obj/item/stack/material/gold

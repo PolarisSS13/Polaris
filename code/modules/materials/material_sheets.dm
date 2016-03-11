@@ -7,7 +7,7 @@
 	throw_range = 3
 	max_amount = 50
 
-	var/default_type = DEFAULT_WALL_MATERIAL
+	var/default_type = MATERIAL_STEEL
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
@@ -18,7 +18,7 @@
 	pixel_y = rand(0,4)-4
 
 	if(!default_type)
-		default_type = DEFAULT_WALL_MATERIAL
+		default_type = MATERIAL_STEEL
 	material = get_material_by_name("[default_type]")
 	if(!material)
 		qdel(src)
@@ -154,9 +154,9 @@
 	apply_colour = 1
 
 /obj/item/stack/material/steel
-	name = DEFAULT_WALL_MATERIAL
+	name = MATERIAL_STEEL
 	icon_state = "sheet-metal"
-	default_type = DEFAULT_WALL_MATERIAL
+	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/plasteel
 	name = "plasteel"
@@ -186,9 +186,9 @@
 	default_type = "leather"
 
 /obj/item/stack/material/glass
-	name = "glass"
+	name = MATERIAL_GLASS
 	icon_state = "sheet-glass"
-	default_type = "glass"
+	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"

@@ -5,7 +5,7 @@
 	icon_state = "forensic0-old" //GET A BETTER SPRITE.
 	item_state = "electronic"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	matter = list(MATERIAL_STEEL = 50)
 
 /obj/item/weapon/mining_scanner/attack_self(mob/user as mob)
 	user << "You begin sweeping \the [src] about, scanning for metal deposits."

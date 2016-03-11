@@ -2,7 +2,7 @@
 // and the weird bugs that crop up when expecting borg module code to behave sanely.
 /obj/item/stack/material/cyborg
 	uses_charge = 1
-	charge_costs = list(1000)
+	charge_costs = list(SHEET_MATERIAL_AMOUNT)
 	gender = NEUTER
 	matter = null // Don't shove it in the autholathe.
 
@@ -18,7 +18,7 @@
 
 /obj/item/stack/material/cyborg/steel
 	icon_state = "sheet-metal"
-	default_type = "steel"
+	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/cyborg/plasteel
 	icon_state = "sheet-plasteel"
@@ -30,9 +30,9 @@
 
 /obj/item/stack/material/cyborg/glass
 	icon_state = "sheet-glass"
-	default_type = "glass"
+	default_type = MATERIAL_GLASS
 
 /obj/item/stack/material/cyborg/glass/reinforced
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
-	charge_costs = list(500, 1000)
+	charge_costs = list(SHEET_MATERIAL_AMOUNT / 2, SHEET_MATERIAL_AMOUNT)

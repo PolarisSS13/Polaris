@@ -65,7 +65,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	switch(return_name)
 		if("metal")
 			return_name = "Metal"
-		if("glass")
+		if(MATERIAL_GLASS)
 			return_name = "Glass"
 		if("gold")
 			return_name = "Gold"
