@@ -459,7 +459,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	w_class = 2.0
 	throw_speed = 2
 	throw_range = 5
-	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
+	matter = list(MATERIAL_STEEL = 10, MATERIAL_GLASS = 5)
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "coil"

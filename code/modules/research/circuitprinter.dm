@@ -15,7 +15,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/mat_efficiency = 1
 	var/speed = 1
 
-	materials = list("metal" = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
+	materials = list("metal" = 0, MATERIAL_GLASS = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 
 	use_power = 1
 	idle_power_usage = 30

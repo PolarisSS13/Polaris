@@ -178,7 +178,7 @@
 			if(istype(P, /obj/item/weapon/crowbar)) // complicated check
 				remove_peripheral()
 
-			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "glass")
+			if(istype(P, /obj/item/stack/material) && P.get_material_name() == MATERIAL_GLASS)
 				var/obj/item/stack/S = P
 				if(S.amount >= 2)
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)

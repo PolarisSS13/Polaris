@@ -15,7 +15,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	show_messages = 1
 
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BLUESPACE = 2, TECH_DATA = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
+	matter = list(MATERIAL_STEEL = 20,MATERIAL_GLASS = 10)
 
 	var/list/voice_mobs = list()
 	var/list/voice_requests = list()

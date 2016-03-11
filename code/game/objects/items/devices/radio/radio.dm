@@ -46,7 +46,7 @@ var/global/list/default_medbay_channels = list(
 	w_class = 2
 	show_messages = 1
 
-	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
+	matter = list(MATERIAL_STEEL = 20, MATERIAL_GLASS = 5)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 

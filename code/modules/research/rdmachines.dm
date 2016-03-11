@@ -18,9 +18,9 @@
 
 /obj/machinery/r_n_d/proc/getMaterialType(var/name)
 	switch(name)
-		if(DEFAULT_WALL_MATERIAL)
+		if(MATERIAL_STEEL)
 			return /obj/item/stack/material/steel
-		if("glass")
+		if(MATERIAL_GLASS)
 			return /obj/item/stack/material/glass
 		if("gold")
 			return /obj/item/stack/material/gold
@@ -37,9 +37,9 @@
 /obj/machinery/r_n_d/proc/getMaterialName(var/type)
 	switch(type)
 		if(/obj/item/stack/material/steel)
-			return DEFAULT_WALL_MATERIAL
+			return MATERIAL_STEEL
 		if(/obj/item/stack/material/glass)
-			return "glass"
+			return MATERIAL_GLASS
 		if(/obj/item/stack/material/gold)
 			return "gold"
 		if(/obj/item/stack/material/silver)

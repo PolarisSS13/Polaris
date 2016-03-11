@@ -6,7 +6,7 @@
 	icon_state = "T38"
 	caliber = "357"
 	ammo_type = /obj/item/ammo_casing/a357
-	matter = list(DEFAULT_WALL_MATERIAL = 1260)
+	matter = list(MATERIAL_STEEL = 350)
 	max_ammo = 7
 	multiple_sprites = 1
 
@@ -14,7 +14,7 @@
 	name = "speed loader (.38)"
 	icon_state = "38"
 	caliber = "38"
-	matter = list(DEFAULT_WALL_MATERIAL = 360)
+	matter = list(MATERIAL_STEEL = 120)
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 6
 	multiple_sprites = 1
@@ -28,7 +28,7 @@
 	icon_state = "45"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/c45
-	matter = list(DEFAULT_WALL_MATERIAL = 525) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	matter = list(MATERIAL_STEEL = 175)
 	caliber = ".45"
 	max_ammo = 7
 	multiple_sprites = 1
@@ -53,7 +53,7 @@
 	icon_state = "9x19p"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	matter = list(MATERIAL_STEEL = 200)
 	caliber = "9mm"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	max_ammo = 10
@@ -69,7 +69,7 @@
 	name = "ammunition Box (9mm)"
 	icon_state = "9mm"
 	origin_tech = list(TECH_COMBAT = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 1800)
+	matter = list(MATERIAL_STEEL = 600)
 	caliber = "9mm"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	max_ammo = 30
@@ -82,7 +82,7 @@
 	icon_state = "9mmt"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/c9mm
-	matter = list(DEFAULT_WALL_MATERIAL = 1200)
+	matter = list(MATERIAL_STEEL = 400)
 	caliber = "9mm"
 	max_ammo = 20
 	multiple_sprites = 1
@@ -103,7 +103,7 @@
 	icon_state = "9mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	caliber = ".45"
-	matter = list(DEFAULT_WALL_MATERIAL = 2250)
+	matter = list(MATERIAL_STEEL = 600)
 	ammo_type = /obj/item/ammo_casing/c45
 	max_ammo = 30
 
@@ -116,7 +116,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "10mm"
-	matter = list(DEFAULT_WALL_MATERIAL = 1500)
+	matter = list(MATERIAL_STEEL = 600)
 	ammo_type = /obj/item/ammo_casing/a10mm
 	max_ammo = 20
 	multiple_sprites = 1
@@ -130,7 +130,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "a556"
-	matter = list(DEFAULT_WALL_MATERIAL = 1800)
+	matter = list(MATERIAL_STEEL = 500)
 	ammo_type = /obj/item/ammo_casing/a556
 	max_ammo = 10
 	multiple_sprites = 1
@@ -148,7 +148,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = ".50"
-	matter = list(DEFAULT_WALL_MATERIAL = 1260)
+	matter = list(MATERIAL_STEEL = 350)
 	ammo_type = /obj/item/ammo_casing/a50
 	max_ammo = 7
 	multiple_sprites = 1
@@ -174,7 +174,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "a762"
-	matter = list(DEFAULT_WALL_MATERIAL = 4500)
+	matter = list(MATERIAL_STEEL = 1200)
 	ammo_type = /obj/item/ammo_casing/a762
 	max_ammo = 50
 	multiple_sprites = 1
@@ -187,7 +187,7 @@
 	icon_state = "c762"
 	mag_type = MAGAZINE
 	caliber = "a762"
-	matter = list(DEFAULT_WALL_MATERIAL = 1800)
+	matter = list(MATERIAL_STEEL = 600)
 	ammo_type = /obj/item/ammo_casing/a762
 	max_ammo = 20
 	multiple_sprites = 1
@@ -198,7 +198,7 @@
 	caliber = "caps"
 	color = "#FF0000"
 	ammo_type = /obj/item/ammo_casing/cap
-	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	matter = list(MATERIAL_STEEL = 200)
 	max_ammo = 7
 	multiple_sprites = 1
 /obj/item/ammo_magazine/g12
@@ -206,7 +206,7 @@
 	icon_state = "g12"
 	mag_type = MAGAZINE
 	caliber = "shotgun"
-	matter = list(DEFAULT_WALL_MATERIAL = 2200)
+	matter = list(MATERIAL_STEEL = 800)
 	ammo_type = /obj/item/ammo_casing/shotgun
 	max_ammo = 24
 	multiple_sprites = 1

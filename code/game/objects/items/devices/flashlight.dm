@@ -8,7 +8,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
-	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
+	matter = list(MATERIAL_STEEL = 20,MATERIAL_GLASS = 10)
 
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
@@ -104,7 +104,7 @@
 	slot_flags = SLOT_BELT
 	w_class = 2
 	attack_verb = list ("smacked", "thwacked", "thunked")
-	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
+	matter = list(MATERIAL_STEEL = 50,MATERIAL_GLASS = 20)
 	hitsound = "swing_hit"
 
 /obj/item/device/flashlight/drone

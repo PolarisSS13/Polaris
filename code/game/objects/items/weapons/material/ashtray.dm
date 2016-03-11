@@ -99,4 +99,4 @@ var/global/list/ashtray_cache = list()
 	..(newloc, "bronze")
 
 /obj/item/weapon/material/ashtray/glass/New(var/newloc)
-	..(newloc, "glass")
+	..(newloc, MATERIAL_GLASS)

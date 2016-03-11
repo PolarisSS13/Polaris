@@ -9,7 +9,7 @@
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	matter = list(DEFAULT_WALL_MATERIAL = 1875)
+	matter = list(MATERIAL_STEEL = 500)
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
 
