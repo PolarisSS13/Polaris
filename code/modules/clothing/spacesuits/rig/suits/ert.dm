@@ -66,9 +66,9 @@
 		)
 
 /obj/item/weapon/rig/ert/assetprotection
-	name = "Heavy Asset Protection suit control module"
-	desc = "A heavy suit worn by the highest level of Asset Protection, don't mess with the person wearing this. Armoured and space ready."
-	suit_type = "heavy asset protection"
+	name = "ERT-H suit control module"
+	desc = "A jack of all trades RIG utilized by NanoTrasen Emergency Response Teams for extreme emergencies. Has green highlights. Armoured and space ready."
+	suit_type = "ERT heavy"
 	icon_state = "asset_protection_rig"
 	armor = list(melee = 60, bullet = 50, laser = 50,energy = 40, bomb = 40, bio = 100, rad = 100)
 
@@ -78,6 +78,7 @@
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/vision/multi,
 		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/rcd,
