@@ -122,8 +122,9 @@
 	if(user.a_intent == I_HURT)
 		if (!..())	//item/attack() does it's own messaging and logs
 			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
-		agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
-		stun *= 0.5
+		if(status)	//Check to see if the stunbaton is actually on.
+			agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
+			stun *= 0.5
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
 	else
 		//copied from human_defense.dm - human defence code should really be refactored some time.

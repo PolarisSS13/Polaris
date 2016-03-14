@@ -1,0 +1,6 @@
+author: Datraen
+
+delete-after: True
+
+changes: 
+  - bugfix: "Stunbatons no longer cause halloss while inactive in harm intent."
