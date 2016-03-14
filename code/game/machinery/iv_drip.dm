@@ -62,6 +62,16 @@
 		user << "You attach \the [W] to \the [src]."
 		src.update_icon()
 		return
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!contents)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			user << "<span class='notice'>You start to dismantle the IV drip.</span>"
+			if(do_after(user, 15))
+				user << "<span class='notice'>You dismantle the IV drip.</span>"
+				var/obj/item/stack/rods/A = new /obj/item/stack/rods( src.loc )
+				A.amount = 6
+				qdel(src)
+		return
 	else
 		return ..()
 

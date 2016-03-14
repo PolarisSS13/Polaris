@@ -6,8 +6,10 @@
 	w_class = 4.0
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
+	var/circuit = /obj/item/weapon/circuitboard/intercom
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+	var/wiresexposed = 0
 
 /obj/item/device/radio/intercom/custom
 	name = "station intercom (Custom)"
@@ -80,6 +82,38 @@
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)
+
+/obj/item/device/radio/intercom/attackby(obj/item/W as obj, mob/user as mob)
+	src.add_fingerprint(user)
+	if(istype(W, /obj/item/weapon/screwdriver))  // Opening the intercom up.
+		wiresexposed = !wiresexposed
+		user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
+		if(wiresexposed)
+			icon_state = "intercom_open"
+		else
+			icon_state = "intercom"
+		return
+	if (wiresexposed && istype(W, /obj/item/weapon/wirecutters))
+		user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+		new/obj/item/stack/cable_coil(get_turf(src), 5)
+		var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
+		var/obj/item/weapon/circuitboard/M = new circuit( A )
+		A.frame_type = "alarm"
+		A.frame_base = "intercom_"
+		A.pixel_x = pixel_x
+		A.pixel_y = pixel_y
+		A.circuit = M
+		A.anchored = 1
+		for (var/obj/C in src)
+			C.forceMove(loc)
+		A.state = 2
+		A.icon_state = "alarm_intercom_2"
+		M.deconstruct(src)
+		qdel(src)
+	else
+		src.attack_hand(user)
+	return
 
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)

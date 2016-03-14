@@ -40,7 +40,7 @@
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
-		/obj/machinery/constructable_frame,
+		/obj/structure/frame,
 		/obj/machinery/radiocarbon_spectrometer
 		)
 
