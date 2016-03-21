@@ -92,7 +92,7 @@
 			. += pick(map[min_char])
 		message = copytext(message, min_index + 1)
 
-	return jointext(., null)
+	return list2text(.)
 
 #undef AUTOHISS_OFF
 #undef AUTOHISS_BASIC
