@@ -6,6 +6,7 @@
 	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 5000
+	component_parts = list()
 
 	var/max_material_storage = 100000
 
@@ -17,9 +18,8 @@
 
 	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
 
-/obj/machinery/r_n_d/protolathe/New()
+/obj/machinery/r_n_d/protolathe/preset/New()
 	..()
-	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)

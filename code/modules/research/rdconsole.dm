@@ -111,7 +111,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	return
 
 /obj/machinery/computer/rdconsole/proc/griefProtection() //Have it automatically push research to the centcomm server so wild griffins can't fuck up R&D's work
-	for(var/obj/machinery/r_n_d/server/centcom/C in machines)
+	for(var/obj/machinery/r_n_d/server/preset/centcom/C in machines)
 		for(var/datum/tech/T in files.known_tech)
 			C.files.AddTech2Known(T)
 		for(var/datum/design/D in files.known_designs)
@@ -122,7 +122,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	..()
 	files = new /datum/research(src) //Setup the research data holder.
 	if(!id)
-		for(var/obj/machinery/r_n_d/server/centcom/S in machines)
+		for(var/obj/machinery/r_n_d/server/preset/centcom/S in machines)
 			S.initialize()
 			break
 
@@ -294,21 +294,21 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				if(src)
 					for(var/obj/machinery/r_n_d/server/S in machines)
 						var/server_processed = 0
-						if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/centcom))
+						if((id in S.id_with_upload) || istype(S, /obj/machinery/r_n_d/server/preset/centcom))
 							for(var/datum/tech/T in files.known_tech)
 								S.files.AddTech2Known(T)
 							for(var/datum/design/D in files.known_designs)
 								S.files.AddDesign2Known(D)
 							S.files.RefreshResearch()
 							server_processed = 1
-						if((id in S.id_with_download) && !istype(S, /obj/machinery/r_n_d/server/centcom))
+						if((id in S.id_with_download) && !istype(S, /obj/machinery/r_n_d/server/preset/centcom))
 							for(var/datum/tech/T in S.files.known_tech)
 								files.AddTech2Known(T)
 							for(var/datum/design/D in S.files.known_designs)
 								files.AddDesign2Known(D)
 							files.RefreshResearch()
 							server_processed = 1
-						if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
+						if(!istype(S, /obj/machinery/r_n_d/server/preset/centcom) && server_processed)
 							S.produce_heat()
 					screen = 1.6
 					updateUsrDialog()

@@ -6,6 +6,7 @@
 	icon_state = "exonet_node"
 	idle_power_usage = 2500
 	density = 1
+	component_parts = list()
 	var/on = 1
 	var/toggle = 1
 
@@ -21,7 +22,6 @@
 /obj/machinery/exonet_node/New()
 	..()
 
-	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/telecomms/exonet_node(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)

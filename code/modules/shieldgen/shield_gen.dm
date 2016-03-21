@@ -10,6 +10,7 @@
 	desc = "Machine that generates an impenetrable field of energy when activated."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
+	component_parts = list()
 	var/active = 0
 	var/field_radius = 3
 	var/max_field_radius = 100
@@ -38,6 +39,18 @@
 				break
 	field = new/list()
 	..()
+
+/obj/machinery/shield_gen/preset/New()
+	..()
+	component_parts += new /obj/item/weapon/circuitboard/shield_gen_ex(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/transmitter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 5)
+	//RefreshParts() - uncomment if you add upgrade effects
 
 /obj/machinery/shield_gen/Destroy()
 	for(var/obj/effect/energy_field/D in field)

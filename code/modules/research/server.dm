@@ -2,6 +2,7 @@
 	name = "R&D Server"
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
+	component_parts = list()
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
@@ -16,13 +17,15 @@
 
 /obj/machinery/r_n_d/server/New()
 	..()
-	component_parts = list()
+	initialize()
+
+/obj/machinery/r_n_d/server/preset/New()
+	..()
 	component_parts += new /obj/item/weapon/circuitboard/rdserver(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/stack/cable_coil(src)
 	component_parts += new /obj/item/stack/cable_coil(src)
 	RefreshParts()
-	initialize();
 
 /obj/machinery/r_n_d/server/Destroy()
 	griefProtection()
@@ -81,7 +84,7 @@
 
 //Backup files to centcomm to help admins recover data after greifer attacks
 /obj/machinery/r_n_d/server/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in machines)
+	for(var/obj/machinery/r_n_d/server/preset/centcom/C in machines)
 		for(var/datum/tech/T in files.known_tech)
 			C.files.AddTech2Known(T)
 		for(var/datum/design/D in files.known_designs)
@@ -119,11 +122,11 @@
 	if(default_part_replacement(user, O))
 		return
 
-/obj/machinery/r_n_d/server/centcom
+/obj/machinery/r_n_d/server/preset/centcom
 	name = "Central R&D Database"
 	server_id = -1
 
-/obj/machinery/r_n_d/server/centcom/initialize()
+/obj/machinery/r_n_d/server/preset/centcom/initialize()
 	..()
 	var/list/no_id_servers = list()
 	var/list/server_ids = list()
@@ -146,7 +149,7 @@
 				server_ids += num
 		no_id_servers -= S
 
-/obj/machinery/r_n_d/server/centcom/process()
+/obj/machinery/r_n_d/server/preset/centcom/process()
 	return PROCESS_KILL //don't need process()
 
 /obj/machinery/computer/rdservercontrol
@@ -242,7 +245,7 @@
 			dat += "Connected Servers:<BR><BR>"
 
 			for(var/obj/machinery/r_n_d/server/S in machines)
-				if(istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin)
+				if(istype(S, /obj/machinery/r_n_d/server/preset/centcom) && !badmin)
 					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "
@@ -300,13 +303,13 @@
 		src.updateUsrDialog()
 		return 1
 
-/obj/machinery/r_n_d/server/robotics
+/obj/machinery/r_n_d/server/preset/robotics
 	name = "Robotics R&D Server"
 	id_with_upload_string = "1;2"
 	id_with_download_string = "1;2"
 	server_id = 2
 
-/obj/machinery/r_n_d/server/core
+/obj/machinery/r_n_d/server/preset/core
 	name = "Core R&D Server"
 	id_with_upload_string = "1"
 	id_with_download_string = "1"

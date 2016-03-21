@@ -10,6 +10,7 @@
 	anchored = 1
 	use_power = 0
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
+	component_parts = list()
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L
@@ -24,13 +25,13 @@
 	..()
 	initialize_directions = dir
 
-	component_parts = list()
+/obj/machinery/atmospherics/unary/heater/preset/New()
+	..()
 	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/heater(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 5)
-
 	RefreshParts()
 
 /obj/machinery/atmospherics/unary/heater/initialize()

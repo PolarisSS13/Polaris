@@ -47,14 +47,14 @@
 	idle_power_usage = 50
 	active_power_usage = 300
 	interact_offline = 1
+	component_parts = list()
 	var/locked = 0
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/opened = 0
 
-/obj/machinery/dna_scannernew/New()
+/obj/machinery/dna_scannernew/preset/New()
 	..()
-	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/clonescanner(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)

@@ -7,6 +7,7 @@
 	desc = "Machine that charges a shield generator."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "capacitor"
+	component_parts = list()
 	var/active = 0
 	density = 1
 	var/stored_charge = 0	//not to be confused with power cell charge, this is in Joules
@@ -26,7 +27,19 @@
 				possible_gen.owned_capacitor = src
 				break
 	..()
-	
+
+/obj/machinery/shield_capacitor/preset/New()
+	..()
+	component_parts += new /obj/item/weapon/circuitboard/shield_gen_ex(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/transmitter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 5)
+	//RefreshParts() - uncomment if you add upgrade effects
+
 /obj/machinery/shield_capacitor/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked
