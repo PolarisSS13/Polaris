@@ -85,7 +85,7 @@
 					usr << "No input found please hang up and try your call again."
 					return
 
-				var/list/tempnetwork = splittext(input, ",")
+				var/list/tempnetwork = text2list(input, ",")
 				if(tempnetwork.len < 1)
 					usr << "No network found please hang up and try your call again."
 					return
