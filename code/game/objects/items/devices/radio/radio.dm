@@ -160,7 +160,7 @@ var/global/list/all_radios = list()
 	var/obj/item/weapon/card/id/I = GetIdCard()
 	return has_access(list(), req_one_accesses, I ? I.GetAccess() : list())
 
-/mob/dead/observer/has_internal_radio_channel_access(var/list/req_one_accesses)
+/mob/observer/dead/has_internal_radio_channel_access(var/list/req_one_accesses)
 	return can_admin_interact()
 
 /obj/item/device/radio/proc/text_wires()

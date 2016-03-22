@@ -229,7 +229,7 @@ var/list/obj/machinery/telecomms_machine/world_telecommunications = list()
 		if(istype(R, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
 			continue
 
-		if(interceptData && istype(R, /mob/dead/observer) && R.client && R.client.prefs && (R.client.prefs.toggles & CHAT_GHOSTRADIO)) // Don't spam ghosts with double messages
+		if(interceptData && istype(R, /mob/observer/dead) && R.client && R.client.prefs && (R.client.prefs.toggles & CHAT_GHOSTRADIO)) // Don't spam ghosts with double messages
 			continue
 
 		if (!source || R.say_understands(source))
