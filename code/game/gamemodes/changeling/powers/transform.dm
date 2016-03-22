@@ -39,6 +39,7 @@
 		H.b_type = "AB+" //For some reason we have two blood types on the mob.
 		for(var/flavor in H.flavor_texts) //Nulls out flavor text, so we don't keep our previous mob's flavor.
 			flavor = null
+	src.fixblood()  // This is a fix for Teshari->Human blood quantity changes.  This might nullify the previous 5 lines.
 	src.real_name = chosen_dna.real_name
 	src.flavor_text = ""
 	src.UpdateAppearance()
