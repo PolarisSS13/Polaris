@@ -324,6 +324,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			icon = 'icons/obj/pda_old.dmi'
 			log_debug("Invalid switch for PDA, defaulting to old PDA icons. [pdachoice] chosen.")
 
+/obj/item/device/pda/proc/has_connection()
+	for(var/obj/machinery/telecomms_machine/M in world_telecommunications)
+		if(M.isUsable())
+			for(var/obj/machinery/message_server/MS in message_servers)
+				if(MS.active)
+					return 1
+			return 0
+	return 0
 
 /obj/item/device/pda/proc/can_use()
 
@@ -428,8 +436,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["new_Message"] = new_message
 	data["new_News"] = new_news
 
-	var/datum/reception/reception = get_reception(src, do_sleep = 0)
-	var/has_reception = reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER
+	var/has_reception = has_connection()
 	data["reception"] = has_reception
 
 	if(mode==2)
@@ -791,12 +798,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if("Detonate")//Detonate PDA... maybe
 			if(cartridge && cartridge.access_detonate_pda)
-				var/obj/item/device/pda/P = locate(href_list["target"])
-				var/datum/reception/reception = get_reception(src, P, "", do_sleep = 0)
-				if(!(reception.message_server && reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER))
+				if(!src.has_connection())
 					U.show_message("<span class='warning'>An error flashes on your [src]: Connection unavailable</span>", 1)
 					return
-				if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recepient have a broadcaster on their level?
+				var/obj/item/device/pda/P = locate(href_list["target"])
+				if(!P || !P.has_connection())
 					U.show_message("<span class='warning'>An error flashes on your [src]: Recipient unavailable</span>", 1)
 					return
 				if(!isnull(P))
@@ -975,15 +981,16 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	last_text = world.time
-	var/datum/reception/reception = get_reception(src, P, t)
-	t = reception.message
 
-	if(reception.message_server && (reception.telecomms_reception & TELECOMMS_RECEPTION_SENDER)) // only send the message if it's stable
-		if(reception.telecomms_reception & TELECOMMS_RECEPTION_RECEIVER == 0) // Does our recipient have a broadcaster on their level?
+	if(src.has_connection()) // only send the message if it's stable
+		if(!P.has_connection()) // Does our recipient have a broadcaster on their level?
 			U << "ERROR: Cannot reach recipient."
 			return
-		var/send_result = reception.message_server.send_pda_message("[P.owner]","[owner]","[t]")
-		if (send_result)
+
+		var/send_result
+		for(var/obj/machinery/message_server/M in message_servers)
+			send_result = M.send_pda_message("[P.owner]","[owner]","[t]") // We need to make logs in all servers
+		if(send_result)
 			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
 			return
 

@@ -1,6 +1,3 @@
-#define MESSAGE_SERVER_SPAM_REJECT 1
-#define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
-
 var/global/list/obj/machinery/message_server/message_servers = list()
 
 /datum/data_pda_msg
@@ -63,10 +60,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/decryptkey = "password"
 
 	//Spam filtering stuff
-	var/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
+	var/global/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
 			"are happy to inform you", "account number", "enter your PIN")
-			//Messages having theese tokens will be rejected by server. Case sensitive
-	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
+			//Messages having theese tokens will be rejected by servers. Case sensitive
 
 /obj/machinery/message_server/New()
 	message_servers += src
@@ -142,16 +138,6 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	update_icon()
 
 	return
-
-/obj/machinery/message_server/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
-	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/weapon/circuitboard/message_monitor))
-		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
-		user.drop_item()
-		qdel(O)
-		user << "You install additional memory and processors into message server. Its filtering capabilities been enhanced."
-	else
-		..(O, user)
 
 /obj/machinery/message_server/update_icon()
 	if((stat & (BROKEN|NOPOWER)))

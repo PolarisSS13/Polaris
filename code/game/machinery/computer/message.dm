@@ -248,7 +248,7 @@
 					break
 				dat += "<dd>[index]&#09; <a href='?src=\ref[src];deltoken=[index]'>\[[token]\]</a><br></dd>"
 			dat += "<hr>"
-			if (linkedServer.spamfilter.len < linkedServer.spamfilter_limit)
+			if (linkedServer.spamfilter.len < MESSAGE_SERVER_SPAM_LIMIT)
 				dat += "<a href='?src=\ref[src];addtoken=1'>Add token</a><br>"
 
 

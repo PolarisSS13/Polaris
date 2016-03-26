@@ -89,7 +89,8 @@
 
 /obj/machinery/power/supermatter/New()
 	. = ..()
-	radio = new /obj/item/device/radio{channels=list("Engineering")}(src)
+	radio = new /obj/item/device/radio(src)
+	radio.frequency = ENG_FREQ
 
 
 /obj/machinery/power/supermatter/Destroy()
@@ -146,7 +147,7 @@
 	else
 		alert_msg = null
 	if(alert_msg)
-		radio.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		radio.autosay(alert_msg, "Supermatter Monitor")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
 			radio.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT!", "Supermatter Monitor")

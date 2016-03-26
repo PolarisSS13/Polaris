@@ -26,7 +26,7 @@ var/specops_shuttle_timeleft = 0
 
 /proc/specops_return()
 	var/obj/item/device/radio/intercom/announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
-	announcer.config(list("Response Team" = 0))
+	announcer.frequency = ERT_FREQ
 
 	var/message_tracker[] = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
 	var/message = "\"THE SPECIAL OPERATIONS SHUTTLE IS PREPARING TO RETURN\""//Initial message shown.
