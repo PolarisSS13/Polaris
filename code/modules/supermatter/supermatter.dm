@@ -265,6 +265,9 @@
 		var/radius = max(get_dist(l, src), 1)
 		var/rads = (power / 10) * ( 1 / (radius**2) )
 		l.apply_effect(rads, IRRADIATE)
+	//set all sirens in range
+	for(var/obj/machinery/siren/S in range(src, round(sqrt(power / 2))))
+		S.setAlarm()
 
 	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
 
