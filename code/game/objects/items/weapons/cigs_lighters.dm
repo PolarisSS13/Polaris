@@ -109,12 +109,20 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(location)
 		location.hotspot_expose(700, 5)
 	if(reagents && reagents.total_volume) // check if it has any reagents at all
+
+		//process all reagents in the current part of the smokable
+		var/base = reagents.total_volume/smoketime //chemical density for smoketime
+
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
-				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
-		else // else just remove some of the reagents
-			reagents.remove_any(REM)
+			if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
+				var/drag = rand(0,10)/1000.0 //strength of ingestant's inhalation, mostly useful for near-threshold doses
+				reagents.trans_to_mob(C, base+drag, CHEM_INGEST, REM)
+			else
+				//in hand, behind ear, etc.
+				reagents.remove_any(base)
+		else //just burning
+			reagents.remove_any(base)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
