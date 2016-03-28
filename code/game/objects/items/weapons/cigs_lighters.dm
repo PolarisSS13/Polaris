@@ -114,35 +114,32 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(location)
 		location.hotspot_expose(700, 5)
 
-	//deprecated: non-dipped cigs are handled generally
-	//if(reagents && reagents.total_volume) // check if it has any reagents at all
-
 	//process all reagents in the current part of the smokable
 	var/base = reagents.total_volume/smoketime //chemical density for smoketime
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/C = loc
 		if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
-			//world << "timeout was [timeout]"
 			if (prob(20) && timeout <= 0) //in mouth, inhaling
 				timeout = todefault
 
+				//random drag strength
 				var/rvar = rand(1,5)
 				var/drag = rvar*base
 
 				//compensate for drag
 				smoketime -= rvar
 
+				//hint the smoker about non-tobacco presence
 				if (reagents && reagents.total_volume && prob(20))
 					C << "You inhale the [src.name], there is an off taste to it..."
 				else
 					C << "You inhale the [src.name]."
 
-				//world << "Drag-Ingestion [(base+drag)*REM]"
+				//transfer any smoked reagents
 				reagents.trans_to_mob(C, base+drag, CHEM_INGEST, REM)
 			else
 				//in mouth, not actively inhaling 
-				//world << "Ingested [0.1*base*REM], wasted [0.9*base]"
 				reagents.trans_to_mob(C, 0.1*base, CHEM_INGEST, REM)
 				reagents.remove_any(0.9*base)
 
