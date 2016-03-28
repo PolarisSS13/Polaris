@@ -89,6 +89,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
+	var/timeout = 0 //rate limiter
+	var/todefault = 5
 	var/matchmes = "USER lights NAME with FLAME"
 	var/lightermes = "USER lights NAME with FLAME"
 	var/zippomes = "USER lights NAME with FLAME"
@@ -102,27 +104,53 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
+
 	smoketime--
+	timeout = (timeout<=0)?0:timeout-1
+
 	if(smoketime < 1)
 		die()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
-	if(reagents && reagents.total_volume) // check if it has any reagents at all
 
-		//process all reagents in the current part of the smokable
-		var/base = reagents.total_volume/smoketime //chemical density for smoketime
+	//deprecated: non-dipped cigs are handled generally
+	//if(reagents && reagents.total_volume) // check if it has any reagents at all
 
-		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
-				var/drag = rand(0,5)/100.0 //strength of ingestant's inhalation
-				reagents.trans_to_mob(C, base, CHEM_INGEST, REM+drag)
+	//process all reagents in the current part of the smokable
+	var/base = reagents.total_volume/smoketime //chemical density for smoketime
+
+	if(ishuman(loc))
+		var/mob/living/carbon/human/C = loc
+		if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
+			//world << "timeout was [timeout]"
+			if (prob(20) && timeout <= 0) //in mouth, inhaling
+				timeout = todefault
+
+				var/rvar = rand(1,5)
+				var/drag = rvar*base
+
+				//compensate for drag
+				smoketime -= rvar
+
+				if (reagents && reagents.total_volume && prob(20))
+					C << "You inhale the [src.name], there is an off taste to it..."
+				else
+					C << "You inhale the [src.name]."
+
+				//world << "Drag-Ingestion [(base+drag)*REM]"
+				reagents.trans_to_mob(C, base+drag, CHEM_INGEST, REM)
 			else
-				//in hand, behind ear, etc.
-				reagents.remove_any(base)
-		else //just burning
+				//in mouth, not actively inhaling 
+				//world << "Ingested [0.1*base*REM], wasted [0.9*base]"
+				reagents.trans_to_mob(C, 0.1*base, CHEM_INGEST, REM)
+				reagents.remove_any(0.9*base)
+
+		else
+			//in hand, behind ear, etc.
 			reagents.remove_any(base)
+	else //just burning
+		reagents.remove_any(base)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -274,6 +302,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
+	todefault = 7
 	chem_volume = 75 //75 ~= cigarette
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with FLAME.</span>"
@@ -335,6 +364,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	icon_off = "pipeoff"
 	smoketime = 0
+	todefault = 7
 	chem_volume = 50 //50 ~= cigarette
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
