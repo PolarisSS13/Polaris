@@ -116,8 +116,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(ishuman(loc))
 			var/mob/living/carbon/human/C = loc
 			if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
-				var/drag = rand(0,10)/1000.0 //strength of ingestant's inhalation, mostly useful for near-threshold doses
-				reagents.trans_to_mob(C, base+drag, CHEM_INGEST, REM)
+				var/drag = rand(0,5)/100.0 //strength of ingestant's inhalation
+				reagents.trans_to_mob(C, base, CHEM_INGEST, REM+drag)
 			else
 				//in hand, behind ear, etc.
 				reagents.remove_any(base)
@@ -274,7 +274,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
-	chem_volume = 20
+	chem_volume = 75 //75 ~= cigarette
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
@@ -295,7 +295,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "cigar2on"
 	icon_off = "cigar2off"
 	smoketime = 7200
-	chem_volume = 30
+	chem_volume = 75 //360 ~= cigarette
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
@@ -335,7 +335,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	icon_off = "pipeoff"
 	smoketime = 0
-	chem_volume = 50
+	chem_volume = 50 //50 ~= cigarette
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
 	zippomes = "<span class='rose'>With much care, USER lights their NAME with their FLAME.</span>"
