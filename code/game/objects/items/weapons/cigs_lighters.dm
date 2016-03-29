@@ -102,7 +102,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	..()
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
-	max_smoketime = smoketime
 
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
@@ -258,6 +257,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 
+/obj/item/clothing/mask/smokable/cigarette/New()
+	..()
+	max_smoketime = smoketime
+
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
@@ -364,8 +367,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	icon_off = "pipeoff"
 	smoketime = 0
+	max_smoketime = 900
 	todefault = 7
-	chem_volume = 50 //50 ~= cigarette
+	chem_volume = 45
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
 	zippomes = "<span class='rose'>With much care, USER lights their NAME with their FLAME.</span>"
@@ -417,10 +421,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if (!G.dry)
 			user << "<span class='notice'>[G] must be dried before you stuff it into [src].</span>"
 			return
-		if (smoketime)
-			user << "<span class='notice'>[src] is already packed.</span>"
+		world << "smoketime [smoketime] max [max_smoketime]"
+		if (smoketime>=max_smoketime)
+			user << "<span class='notice'>[src] is already stuffed!</span>"
 			return
-		smoketime = 1000
+		else
+			smoketime += 300
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
@@ -450,7 +456,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "cobpipeoff"
 	icon_on = "cobpipeon"  //Note - these are in masks.dmi
 	icon_off = "cobpipeoff"
-	chem_volume = 35
+	chem_volume = 45
 
 /////////
 //ZIPPO//
