@@ -120,7 +120,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(ishuman(loc))
 		var/mob/living/carbon/human/C = loc
 		if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
-			if (prob(20) && timeout <= 0) //in mouth, inhaling
+			if (C.sleeping <= 0 && prob(20) && timeout <= 0) //in mouth, inhaling
 				timeout = todefault
 
 				//random drag strength
@@ -137,10 +137,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 					C << "You inhale the [src.name]."
 
 				//transfer any smoked reagents
-				reagents.trans_to_mob(C, base+drag, CHEM_INGEST, REM)
+				reagents.trans_to_mob(C, base+drag, CHEM_BLOOD, 1)
 			else
 				//in mouth, not actively inhaling 
-				reagents.trans_to_mob(C, 0.1*base, CHEM_INGEST, REM)
+				reagents.trans_to_mob(C, 0.1*base, CHEM_BLOOD, 1)
 				reagents.remove_any(0.9*base)
 
 		else
