@@ -421,7 +421,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if (!G.dry)
 			user << "<span class='notice'>[G] must be dried before you stuff it into [src].</span>"
 			return
-		world << "smoketime [smoketime] max [max_smoketime]"
 		if (smoketime>=max_smoketime)
 			user << "<span class='notice'>[src] is already stuffed!</span>"
 			return
