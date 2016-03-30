@@ -89,6 +89,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
+	var/max_smoketime = 0
+	var/timeout = 0 //rate limiter
+	var/todefault = 5
 	var/matchmes = "USER lights NAME with FLAME"
 	var/lightermes = "USER lights NAME with FLAME"
 	var/zippomes = "USER lights NAME with FLAME"
@@ -102,19 +105,50 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/process()
 	var/turf/location = get_turf(src)
+
 	smoketime--
+	timeout = (timeout<=0)?0:timeout-1
+
 	if(smoketime < 1)
 		die()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
-	if(reagents && reagents.total_volume) // check if it has any reagents at all
-		if(ishuman(loc))
-			var/mob/living/carbon/human/C = loc
-			if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
-				reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.2) // Most of it is not inhaled... balance reasons.
-		else // else just remove some of the reagents
-			reagents.remove_any(REM)
+
+	//process all reagents in the current part of the smokable
+	var/base = reagents.total_volume/smoketime //chemical density for smoketime
+
+	if(ishuman(loc))
+		var/mob/living/carbon/human/C = loc
+		if (src == C.wear_mask && C.check_has_mouth()) //cigarette in mouth
+			if (C.sleeping <= 0 && prob(20) && timeout <= 0) //in mouth, inhaling
+				timeout = todefault
+
+				//random drag strength
+				var/rvar = rand(1,5)
+				var/drag = rvar*base
+
+				//compensate for drag
+				smoketime -= rvar
+
+				//hint the smoker about non-tobacco presence
+				if (reagents && reagents.total_volume && prob(20))
+					C << "You inhale the [src.name], there is an off taste to it..."
+				else
+					C << "You inhale the [src.name]."
+
+				//transfer any smoked reagents
+				reagents.trans_to_mob(C, base+drag, CHEM_BLOOD, 1)
+			else
+				//in mouth, not actively inhaling 
+				reagents.trans_to_mob(C, 0.1*base, CHEM_BLOOD, 1)
+				reagents.remove_any(0.9*base)
+
+		else
+			//in hand, behind ear, etc.
+			reagents.remove_any(base)
+	else //just burning
+		reagents.remove_any(base)
 
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(!src.lit)
@@ -223,6 +257,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 
+/obj/item/clothing/mask/smokable/cigarette/New()
+	..()
+	max_smoketime = smoketime
+
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
@@ -238,7 +276,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!proximity)
 		return
 	if(istype(glass)) //you can dip cigarettes into beakers
-		var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
+		//don't fill more than there is cigarette to fill, if that makes sense...
+		var/transfered = glass.reagents.trans_to_obj(src, chem_volume*(smoketime/max_smoketime) - reagents.total_volume)
 		if(transfered)	//if reagents were transfered, show the message
 			user << "<span class='notice'>You dip \the [src] into \the [glass].</span>"
 		else			//if not, either the beaker was empty, or the cigarette was full
@@ -266,7 +305,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
-	chem_volume = 20
+	todefault = 7
+	chem_volume = 75 //75 ~= cigarette
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to offend their NAME by lighting it with FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
@@ -287,7 +327,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "cigar2on"
 	icon_off = "cigar2off"
 	smoketime = 7200
-	chem_volume = 30
+	chem_volume = 75 //360 ~= cigarette
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
@@ -327,7 +367,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	icon_off = "pipeoff"
 	smoketime = 0
-	chem_volume = 50
+	max_smoketime = 900
+	todefault = 7
+	chem_volume = 45
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
 	zippomes = "<span class='rose'>With much care, USER lights their NAME with their FLAME.</span>"
@@ -379,10 +421,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if (!G.dry)
 			user << "<span class='notice'>[G] must be dried before you stuff it into [src].</span>"
 			return
-		if (smoketime)
-			user << "<span class='notice'>[src] is already packed.</span>"
+		if (smoketime>=max_smoketime)
+			user << "<span class='notice'>[src] is already stuffed!</span>"
 			return
-		smoketime = 1000
+		else
+			smoketime += 300
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		name = "[G.name]-packed [initial(name)]"
@@ -412,7 +455,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "cobpipeoff"
 	icon_on = "cobpipeon"  //Note - these are in masks.dmi
 	icon_off = "cobpipeoff"
-	chem_volume = 35
+	chem_volume = 45
 
 /////////
 //ZIPPO//
