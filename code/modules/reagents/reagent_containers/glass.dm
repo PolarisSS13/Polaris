@@ -84,6 +84,15 @@
 		if(standard_pour_into(user, target))
 			return
 
+		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
+		if (istype(target, /turf))
+			for (var/thing in target)
+				if (is_type_in_list(thing, can_be_placed_into))
+					var/response = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
+					if (response == "Abort")
+						return
+					break
+
 		if(reagents.total_volume)
 			user << "<span class='notice'>You splash the solution onto [target].</span>"
 			reagents.splash(target, reagents.total_volume)
