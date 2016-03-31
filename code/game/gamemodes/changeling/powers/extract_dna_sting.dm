@@ -31,10 +31,8 @@
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return 0
 
-	T.dna.real_name = T.real_name
-	changeling.absorbed_dna |= T.dna
-	if(T.species && !(T.species.name in changeling.absorbed_species))
-		changeling.absorbed_species += T.species.name
+	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
+	absorbDNA(newDNA)
 
 	feedback_add_details("changeling_powers","ED")
 	return 1
