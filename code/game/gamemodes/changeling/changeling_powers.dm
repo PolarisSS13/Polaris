@@ -1,8 +1,8 @@
 var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Mu","Nu","Xi","Omicron","Pi","Rho","Sigma","Tau","Upsilon","Phi","Chi","Psi","Omega")
 
 /datum/changeling //stores changeling powers, changeling recharge thingie, changeling absorbed DNA and changeling ID (for changeling hivemind)
-	var/list/absorbed_dna = list()
-	var/list/absorbed_species = list()
+	var/list/datum/absorbed_dna/absorbed_dna = list()
+	//var/list/absorbed_species = list()
 	var/list/absorbed_languages = list()
 	var/absorbedcount = 0
 	var/chem_charges = 20
@@ -36,12 +36,26 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	geneticdamage = max(0, geneticdamage-1)
 
 /datum/changeling/proc/GetDNA(var/dna_owner)
-	var/datum/dna/chosen_dna
-	for(var/datum/dna/DNA in absorbed_dna)
-		if(dna_owner == DNA.real_name)
-			chosen_dna = DNA
-			break
-	return chosen_dna
+	for(var/datum/absorbed_dna/DNA in absorbed_dna)
+		if(dna_owner == DNA.name)
+			return DNA
+
+/mob/proc/absorbDNA(var/datum/absorbed_dna/newDNA)
+	var/datum/changeling/changeling = null
+	if(src.mind && src.mind.changeling)
+		changeling = src.mind.changeling
+	if(!changeling)
+		return
+
+	if(newDNA in changeling.absorbed_dna)
+		return
+
+	changeling.absorbed_dna += newDNA
+	for(var/language in newDNA.languages)
+		if(!(language in changeling.absorbed_languages))
+			changeling.absorbed_languages += language
+
+	changeling_update_languages(changeling.absorbed_languages)
 
 //Restores our verbs. It will only restore verbs allowed during lesser (monkey) form if we are not human
 /mob/proc/make_changeling()
@@ -70,11 +84,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 			if(!(P in src.verbs))
 				src.verbs += P.verbpath
 
-	mind.changeling.absorbed_dna |= dna
-
 	var/mob/living/carbon/human/H = src
 	if(istype(H))
-		mind.changeling.absorbed_species += H.species.name
+		var/datum/absorbed_dna/newDNA = new(H.real_name, H.dna, H.species.name, H.languages)
+		absorbDNA(newDNA)
 
 	for(var/language in languages)
 		mind.changeling.absorbed_languages |= language
@@ -171,9 +184,3 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!T.mind || !T.mind.changeling)	return T	//T will be affected by the sting
 	T << "<span class='warning'>You feel a tiny prick.</span>"
 	return
-
-
-
-
-
-
