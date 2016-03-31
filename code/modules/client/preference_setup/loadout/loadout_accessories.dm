@@ -122,14 +122,19 @@
 	path = /obj/item/clothing/accessory/stripedbluescarf
 
 /datum/gear/accessory/brown_vest
-	display_name = "webbing, engineering"
+	display_name = "webbing, brown"
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer")
 
 /datum/gear/accessory/black_vest
-	display_name = "webbing, security"
+	display_name = "webbing, black"
 	path = /obj/item/clothing/accessory/storage/black_vest
 	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/accessory/white_vest
+	display_name = "webbing, white"
+	path = /obj/item/clothing/accessory/storage/white_vest
+	allowed_roles = list("Paramedic","Chief Medical Officer")
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"
