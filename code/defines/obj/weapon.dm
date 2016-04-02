@@ -129,6 +129,13 @@
 		icon_state = "nullrod"
 		item_state = "foldcane"
 
+/obj/item/weapon/cane/whitecane
+	name = "white cane"
+	desc = "A cane used by those with poor eyesight."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "whitecane"
+	item_state = "whitecane"
+
 /obj/item/weapon/disk
 	name = "disk"
 	icon = 'icons/obj/items.dmi'
