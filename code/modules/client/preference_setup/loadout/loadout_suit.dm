@@ -120,7 +120,7 @@
 /datum/gear/suit/poncho/New()
 	..()
 	var/list/ponchos = list()
-	for(var/poncho_style in typesof(/obj/item/clothing/suit/poncho))
+	for(var/poncho_style in (typesof(/obj/item/clothing/suit/poncho)) - typesof(/obj/item/clothing/suit/poncho/roles)))
 		var/obj/item/clothing/suit/storage/toggle/hoodie/poncho = poncho_style
 		ponchos[initial(poncho.name)] = poncho
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
