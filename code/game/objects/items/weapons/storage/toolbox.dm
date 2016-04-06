@@ -86,6 +86,7 @@
 	item_state = "toolbox_pink"
 	desc = "A little lunchbox. This one is the colors of the rainbow!"
 	w_class = 3
+	max_w_class = 2
 	var/filled = FALSE
 	attack_verb = list("lunched")
 
