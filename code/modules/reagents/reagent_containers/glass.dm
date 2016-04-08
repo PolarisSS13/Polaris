@@ -85,7 +85,12 @@
 			return
 
 		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
-		if (istype(target, /turf))
+		if  (user.clumsy == 0 && istype(target, /obj/item/weapon/reagent_containers))
+			var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
+			if (resp == "Abort")
+				return
+
+		if (user.clumsy <= 1 && istype(target, /turf))
 			for (var/thing in target)
 				if (is_type_in_list(thing, can_be_placed_into))
 					var/response = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")

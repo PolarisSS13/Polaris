@@ -6,6 +6,7 @@
 	var/datum/mind/mind
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/clumsy = 0 // Consider moving this as well...
 
 	//Not in use yet
 	var/obj/effect/organstructure/organStructure = null

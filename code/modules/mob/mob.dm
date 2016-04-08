@@ -317,6 +317,23 @@
 	return
 */
 
+/mob/living/verb/set_clumsiness()
+	set name = "Set Clumsiness"
+	set category = "IC"
+	set desc = "Toggles whether or not your character is clumsy and will fail at pouring stuff without warning."
+
+	if (src.clumsy == 0)
+		usr<<"You will now splash onto reagent holders."
+		src.clumsy = 1
+	else if (src.clumsy == 1)
+		usr<<"You will now splash onto reagent holders and placeables."
+		src.clumsy = 2
+	else
+		usr<<"You will no longer splash onto things without confirmation."
+		src.clumsy = 0
+
+	return
+
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
