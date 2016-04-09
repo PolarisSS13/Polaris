@@ -85,16 +85,24 @@
 			return
 
 		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
-		if  (user.clumsy == 0 && istype(target, /obj/item/weapon/reagent_containers))
+		//for lidded containers as well as effects (radium puddles, blood, etc.)
+		if  (user.clumsy == 0 && (istype(target, /obj/item/weapon/reagent_containers) || istype(target, /obj/effect)))
 			var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
 			if (resp == "Abort")
 				return
+			else if (get_dist(user, target)>1)
+				user << "You are too far away."
+				return
 
+		//handles splashes onto floors
 		if (user.clumsy <= 1 && istype(target, /turf))
 			for (var/thing in target)
 				if (is_type_in_list(thing, can_be_placed_into))
 					var/response = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
 					if (response == "Abort")
+						return
+					else if (get_dist(user, target)>1)
+						user << "You are too far away."
 						return
 					break
 

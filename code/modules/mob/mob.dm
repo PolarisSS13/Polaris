@@ -321,16 +321,20 @@
 	set name = "Set Clumsiness"
 	set category = "IC"
 	set desc = "Toggles whether or not your character is clumsy and will fail at pouring stuff without warning."
+	var/list/modes = list("Holders", "Holders/Placeables", "Clumsy")
+	var/selection = input("Set clumsiness:", "Sensitivity", modes[src.clumsy+1]) in modes
 
-	if (src.clumsy == 0)
-		usr<<"You will now splash onto reagent holders."
-		src.clumsy = 1
-	else if (src.clumsy == 1)
-		usr<<"You will now splash onto reagent holders and placeables."
-		src.clumsy = 2
-	else
+	if (selection == modes[1])
 		usr<<"You will no longer splash onto things without confirmation."
 		src.clumsy = 0
+	else if (selection == modes[2])
+		usr<<"You will now splash reagents onto reagent holders."
+		src.clumsy = 1
+	else if (selection == modes[3])
+		usr<<"You will now splash reagents onto reagent holders and placeables."
+		src.clumsy = 2
+	else
+		usr<<"Something went wrong, you should ahelp this."
 
 	return
 
