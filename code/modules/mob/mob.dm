@@ -325,13 +325,13 @@
 	var/selection = input("Set clumsiness:", "Sensitivity", modes[src.clumsy+1]) in modes
 
 	if (selection == modes[1])
-		usr<<"You will no longer splash onto things without confirmation."
+		usr<<"You will no longer miss loadables and fillables without confirmation."
 		src.clumsy = 0
 	else if (selection == modes[2])
-		usr<<"You will now splash reagents onto reagent holders."
+		usr<<"You will now splash reagents onto fillables."
 		src.clumsy = 1
 	else if (selection == modes[3])
-		usr<<"You will now splash reagents onto reagent holders and placeables."
+		usr<<"You will now splash reagents onto fillables and placeables."
 		src.clumsy = 2
 	else
 		usr<<"Something went wrong, you should ahelp this."
