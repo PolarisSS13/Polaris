@@ -85,6 +85,7 @@
 			return
 
 		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
+		//TODO: add check for turf accesibility, refactor into one block
 		//for lidded containers as well as effects (radium puddles, blood, etc.)
 		if  (user.clumsy == 0 && (istype(target, /obj/item/weapon/reagent_containers)))
 			var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
@@ -92,6 +93,8 @@
 				return
 			else if (get_dist(user, target)>1)
 				user << "You are too far away."
+				return
+			else if (user.stat != 0)
 				return
 
 		//handles splashes onto floors and effects (puddles, blood etc.)
@@ -103,6 +106,8 @@
 						return
 					else if (get_dist(user, target)>1)
 						user << "You are too far away."
+						return
+					else if (user.stat != 0)
 						return
 					break
 
