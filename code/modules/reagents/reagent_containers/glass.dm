@@ -85,36 +85,44 @@
 			return
 
 		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
-		//TODO: add check for blockage, windows etc.
-		//for lidded containers as well as effects (radium puddles, blood, etc.)
-		if  (user.clumsy == 0 && (istype(target, /obj/item/weapon/reagent_containers)))
-			var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
-			if (resp == "Abort")
-				return
-			else if (get_dist(user, target)>1)
-				user << "You are too far away."
-				return
-			else if (user.stat != 0)
-				return
-			else if (src.loc != user)
-				user << "You need to hold the [src] to splash with it."
-				return
+		if (reagents.total_volume) //don't pop a dialog if it's empty...
+			//handle lidded containers
+			if  (user.clumsy == 0 && (istype(target, /obj/item/weapon/reagent_containers)))
+				var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
+				if (resp == "Abort")
+					return
+				else if (!user.Adjacent(target))
+					user << "You cannot reach the [src]."
+					return
+				else if (user.stat != 0)
+					return
+				else if (src.loc != user)
+					user << "You need to hold the [src] to splash with it."
+					return
 
-		//handles splashes onto floors and effects (puddles, blood etc.)
-		if (user.clumsy <= 1 && (istype(target, /turf) || istype(target, /obj/effect) ))
-			for (var/thing in target)
-				if (is_type_in_list(thing, can_be_placed_into))
-					var/response = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
-					if (response == "Abort")
-						return
-					else if (get_dist(user, target)>1)
-						user << "You are too far away."
-						return
-					else if (user.stat != 0) //mob isn't fully alive
-						return
-					else if (src.loc != user) //mob doesn't carry the container in an equipment slot
-						user << "You need to hold the [src] to splash with it."
-						return
+			//handles splashes onto floors and effects (puddles, blood etc.)
+			if (user.clumsy <= 1 && (istype(target, /turf) || istype(target, /obj/effect) ))
+
+				//resolve contentless effects
+				var/intarget = null
+				if (istype(target, /obj/effect))
+					intarget = target.loc
+				else intarget = target
+
+				//iterate over things in content
+				for (var/thing in intarget)
+					if (is_type_in_list(thing, can_be_placed_into))
+						var/response = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
+						if (response == "Abort")
+							return
+						else if (!user.Adjacent(target))
+							user << "You cannot reach that."
+							return
+						else if (user.stat != 0) //mob isn't fully alive
+							return
+						else if (src.loc != user) //mob doesn't carry the container in an equipment slot
+							user << "You need to hold the [src] to splash with it."
+							return
 					break
 
 		if(reagents.total_volume)
@@ -137,6 +145,7 @@
 			name = base_name
 		else
 			name = "[base_name] ([label_text])"
+
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
