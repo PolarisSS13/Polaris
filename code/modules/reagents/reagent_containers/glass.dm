@@ -85,7 +85,7 @@
 			return
 
 		//Help the user avoid clumsy splashing mistakes due to finicky sprites etc.
-		//TODO: add check for turf accesibility, refactor into one block
+		//TODO: add check for blockage, windows etc.
 		//for lidded containers as well as effects (radium puddles, blood, etc.)
 		if  (user.clumsy == 0 && (istype(target, /obj/item/weapon/reagent_containers)))
 			var/resp = alert(user, "Do you really want to splash the solution?", "Splash the solution?", "Abort", "Proceed")
@@ -95,6 +95,9 @@
 				user << "You are too far away."
 				return
 			else if (user.stat != 0)
+				return
+			else if (src.loc != user)
+				user << "You need to hold the [src] to splash with it."
 				return
 
 		//handles splashes onto floors and effects (puddles, blood etc.)
@@ -107,7 +110,10 @@
 					else if (get_dist(user, target)>1)
 						user << "You are too far away."
 						return
-					else if (user.stat != 0)
+					else if (user.stat != 0) //mob isn't fully alive
+						return
+					else if (src.loc != user) //mob doesn't carry the container in an equipment slot
+						user << "You need to hold the [src] to splash with it."
 						return
 					break
 
