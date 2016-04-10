@@ -48,6 +48,10 @@
 	if(!B)
 		return
 
+	if(B.neutered)
+		B.verbs -= /mob/living/carbon/proc/spawn_larvae
+		return
+
 	if(B.chemicals >= 100)
 		src << "<span class='danger'>Your host twitches and quivers as you rapidly excrete a larva from your sluglike body.</span>"
 		visible_message("<span class='danger'>\The [src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</span>")

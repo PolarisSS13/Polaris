@@ -31,13 +31,14 @@
 	var/docile = 0                          // Sugar can stop borers from acting.
 	var/has_reproduced
 	var/roundstart
+	var/neutered = 0
 
 /mob/living/simple_animal/borer/roundstart
 	roundstart = 1
 
 /mob/living/simple_animal/borer/Login()
 	..()
-	if(mind)
+	if(mind && !neutered)
 		borers.add_antagonist(mind)
 
 /mob/living/simple_animal/borer/New()
@@ -57,7 +58,6 @@
 	if(host)
 
 		if(!stat && !host.stat)
-
 			if(host.reagents.has_reagent("sugar"))
 				if(!docile)
 					if(controlling)
@@ -76,17 +76,24 @@
 			if(chemicals < 250)
 				chemicals++
 			if(controlling)
-
 				if(docile)
 					host << "\blue You are feeling far too docile to continue controlling your host..."
 					host.release_control()
 					return
+<<<<<<< HEAD
 
 				if(prob(5))
 					host.adjustBrainLoss(0.1)
 
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
+=======
+				if(!neutered)
+					if(prob(5))
+						host.adjustBrainLoss(rand(1,2))
+					if(prob(host.brainloss/20))
+						host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
+>>>>>>> refs/remotes/origin/borers
 
 /mob/living/simple_animal/borer/Stat()
 	..()
@@ -97,7 +104,7 @@
 		if(eta_status)
 			stat(null, eta_status)
 
-	if (client.statpanel == "Status")
+	if (client && client.statpanel == "Status")
 		stat("Chemicals", chemicals)
 
 /mob/living/simple_animal/borer/proc/detatch()
