@@ -348,28 +348,24 @@
 	desc = "A simple, comfortable cloak without sleeves. This one is black and red, standard NanoTrasen Security colors."
 	icon_state = "secponcho"
 	item_state = "secponcho"
-	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/poncho/roles/medical
 	name = "medical poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with green and blue tint, standard Medical colors."
 	icon_state = "medponcho"
 	item_state = "medponcho"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0)
 
 /obj/item/clothing/suit/poncho/roles/engineering
 	name = "engineering poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, standard Engineering colors."
 	icon_state = "engiponcho"
 	item_state = "engiponcho"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 10)
 
 /obj/item/clothing/suit/poncho/roles/science
 	name = "science poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with purple trim, standard NanoTrasen Science colors."
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/poncho/roles/cargo
 	name = "cargo poncho"
