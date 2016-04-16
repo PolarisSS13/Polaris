@@ -11,7 +11,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list("Sol Common")
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
-	min_age = 17
+	min_age = 18
 	max_age = 110
 
 	spawn_flags = CAN_JOIN
@@ -97,7 +97,7 @@
 	secondary_langs = list("Siik'tajr")
 	name_language = "Siik'tajr"
 
-	min_age = 17
+	min_age = 18
 	max_age = 80
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
@@ -152,7 +152,7 @@
 	secondary_langs = list("Skrellian", "Teshari")
 	name_language = null
 
-	min_age = 19
+	min_age = 18
 	max_age = 80
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED

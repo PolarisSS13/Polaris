@@ -9,7 +9,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list("Schechi", "Skrellian")
 	name_language = "Schechi"
-	min_age = 12
+	min_age = 18
 	max_age = 45
 
 	blood_color = "#D514F7"
