@@ -230,14 +230,14 @@
 			limb_icon = new /icon(icobase, "[name]")
 		// Skin color
 		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-			limb_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+			limb_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
 		preview_icon.Blend(limb_icon, ICON_OVERLAY)
 
 	//Tail
 	if(current_species && (current_species.tail))
 		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
 		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
 		preview_icon.Blend(temp, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.
@@ -252,7 +252,7 @@
 
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = use_eye_icon)
 	if ((current_species && (current_species.appearance_flags & HAS_EYE_COLOR)))
-		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]
 	if(hair_style)
