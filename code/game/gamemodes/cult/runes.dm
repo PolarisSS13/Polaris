@@ -463,7 +463,6 @@ var/list/sacrificed = list()
 					break
 			D.universal_speak = 1
 			D.status_flags &= ~GODMODE
-			D.s_tone = 35
 			D.b_eyes = 200
 			D.r_eyes = 200
 			D.g_eyes = 200

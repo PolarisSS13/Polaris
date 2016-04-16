@@ -5,8 +5,6 @@
 	var/datum/species/current_species = all_species[species]
 
 	if(current_species)
-		if(current_species.flags & HAS_SKIN_TONE)
-			s_tone = random_skin_tone()
 		if(current_species.flags & HAS_EYE_COLOR)
 			randomize_eyes_color()
 		if(current_species.flags & HAS_SKIN_COLOR)
@@ -233,12 +231,6 @@
 		// Skin color
 		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
 			limb_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		// Skin tone
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_TONE))
-			if (s_tone >= 0)
-				limb_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-			else
-				limb_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		preview_icon.Blend(limb_icon, ICON_OVERLAY)
 
 	//Tail
@@ -246,11 +238,6 @@
 		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
 		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
 			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_TONE))
-			if (s_tone >= 0)
-				temp.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-			else
-				temp.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		preview_icon.Blend(temp, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.

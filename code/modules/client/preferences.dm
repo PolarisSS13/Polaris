@@ -43,7 +43,6 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin tone
 	var/r_skin = 0						//Skin color
 	var/g_skin = 0						//Skin color
 	var/b_skin = 0						//Skin color
@@ -303,8 +302,6 @@ datum/preferences
 	character.r_skin = r_skin
 	character.g_skin = g_skin
 	character.b_skin = b_skin
-
-	character.s_tone = s_tone
 
 	character.h_style = h_style
 	character.f_style = f_style
