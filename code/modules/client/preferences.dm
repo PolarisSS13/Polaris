@@ -43,12 +43,21 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 255					//Skin color
+	var/g_skin = 220					//Skin color
+	var/b_skin = 177					//Skin color
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/c_type = "None"					//Breast Type
+	var/d_type = "None"					//Dick Type
+	var/v_type = "None"					//Vagina Type
+	var/r_genital = 255					//Genitals color
+	var/g_genital = 220					//Genitals color
+	var/b_genital = 177					//Genitals color
+	var/ears_type = "None"				//Ears Type
+	var/wings_type = "None"				//Wings Type
+	var/tail_type = "None"				//Tail Type
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
@@ -305,6 +314,18 @@ datum/preferences
 
 	character.h_style = h_style
 	character.f_style = f_style
+
+	character.c_type = c_type
+	character.d_type = d_type
+	character.v_type = v_type
+
+	character.r_genital = r_genital
+	character.g_genital = g_genital
+	character.b_genital = b_genital
+
+	character.wings_type = wings_type
+	character.ears_type = ears_type
+	character.tail_type = tail_type
 
 	character.home_system = home_system
 	character.citizenship = citizenship

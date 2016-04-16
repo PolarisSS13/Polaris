@@ -234,11 +234,11 @@
 		preview_icon.Blend(limb_icon, ICON_OVERLAY)
 
 	//Tail
-	if(current_species && (current_species.tail))
-		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
-		preview_icon.Blend(temp, ICON_OVERLAY)
+//	if(current_species && (current_species.tail))
+//		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
+//		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
+//			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+//		preview_icon.Blend(temp, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.
 	var/use_eye_icon = "eyes_s"
