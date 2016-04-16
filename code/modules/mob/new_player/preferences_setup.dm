@@ -5,8 +5,6 @@
 	var/datum/species/current_species = all_species[species]
 
 	if(current_species)
-		if(current_species.flags & HAS_SKIN_TONE)
-			s_tone = random_skin_tone()
 		if(current_species.flags & HAS_EYE_COLOR)
 			randomize_eyes_color()
 		if(current_species.flags & HAS_SKIN_COLOR)
@@ -232,26 +230,15 @@
 			limb_icon = new /icon(icobase, "[name]")
 		// Skin color
 		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-			limb_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		// Skin tone
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_TONE))
-			if (s_tone >= 0)
-				limb_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-			else
-				limb_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+			limb_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
 		preview_icon.Blend(limb_icon, ICON_OVERLAY)
 
 	//Tail
-	if(current_species && (current_species.tail))
-		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		if(current_species && (current_species.appearance_flags & HAS_SKIN_TONE))
-			if (s_tone >= 0)
-				temp.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-			else
-				temp.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-		preview_icon.Blend(temp, ICON_OVERLAY)
+//	if(current_species && (current_species.tail))
+//		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
+//		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
+//			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+//		preview_icon.Blend(temp, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.
 	var/use_eye_icon = "eyes_s"
@@ -265,7 +252,7 @@
 
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = use_eye_icon)
 	if ((current_species && (current_species.appearance_flags & HAS_EYE_COLOR)))
-		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]
 	if(hair_style)

@@ -164,8 +164,8 @@
 		eye_blind =  0
 		blinded =    0
 		eye_blurry = 0
-		
-		
+
+
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
 			src << "\red You have a seizure!"
@@ -918,7 +918,6 @@
 		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
-			animate_tail_reset()
 			adjustHalLoss(-3)
 
 		if(paralysis)

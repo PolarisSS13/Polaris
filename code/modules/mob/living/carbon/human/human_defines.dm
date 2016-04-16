@@ -16,12 +16,23 @@
 	var/g_eyes = 0
 	var/b_eyes = 0
 
-	var/s_tone = 0	//Skin tone
-
 	//Skin colour
-	var/r_skin = 0
-	var/g_skin = 0
-	var/b_skin = 0
+	var/r_skin = 255
+	var/g_skin = 220
+	var/b_skin = 170
+
+	//Gender stuff
+	var/c_type = "None"  //breasts
+	var/d_type = "None"  //dicks
+	var/v_type = "None"  //vagina
+	var/r_genital = 255
+	var/g_genital = 220
+	var/b_genital = 170
+
+	//Extras
+	var/ears_type = "None"
+	var/wings_type = "None"
+	var/tail_type = "None"
 
 	var/size_multiplier = 1 //multiplier for the mob's icon size
 	var/damage_multiplier = 1 //multiplies melee combat damage

@@ -770,3 +770,249 @@
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_skrell.dmi'
 		species_allowed = list("Skrell")
+
+
+/*
+/////////////////////////////
+/  =---------------------=  /
+/  == Dicks Definitions ==  /
+/  =---------------------=  /
+/////////////////////////////
+*/
+
+/datum/sprite_accessory/dicks
+	icon = 'icons/mob/human_races/extras/dicks.dmi'
+
+	dik_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	dik_normal
+		name = "Normal Dick"
+		icon_state = "normal"
+
+	dik_circumcised
+		name = "Circumcised Dick"
+		icon_state = "cut"
+
+	dik_big
+		name = "Big Dick"
+		icon_state = "big"
+
+	dik_big2
+		name = "Bigger Dick"
+		icon_state = "big2"
+
+	dik_small
+		name = "Small Dick"
+		icon_state = "small"
+
+	dik_knotted
+		name = "Knotted Dick"
+		icon_state = "knotted"
+
+	dik_feline
+		name = "Feline Dick"
+		icon_state = "feline"
+
+	dik_tentacle
+		name = "Tentacle Dicks"
+		icon_state = "tentacle"
+
+	dik_tentacle2
+		name = "Tentacle Big Dicks"
+		icon_state = "tentacle_big"
+
+	dik_amputed
+		name = "Amputed Dick"
+		icon_state = "amputed"
+		do_colouration = 0
+
+/*
+//////////////////////////////
+/  =----------------------=  /
+/  == Vagina Definitions ==  /
+/  =----------------------=  /
+//////////////////////////////
+*/
+
+/datum/sprite_accessory/vaginas
+	icon = 'icons/mob/human_races/extras/vaginas.dmi'
+
+	vag_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	vag_normal
+		name = "Normal Vagina"
+		icon_state = "normal"
+
+	vag_gaping
+		name = "Gaping Vagina"
+		icon_state = "gaping"
+
+	vag_dripping
+		name = "Dripping Vagina"
+		icon_state = "dripping"
+
+	vag_tentacle
+		name = "Tentacle Vagina"
+		icon_state = "tentacles"
+
+	vag_dentata
+		name = "Vagina Dentata"
+		icon_state = "dentata"
+		do_colouration = 0
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Breasts Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/breasts
+	icon = 'icons/mob/human_races/extras/breasts.dmi'
+
+	brt_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	brt_normala
+		name = "A Cup Breasts"
+		icon_state = "normal_a"
+
+	brt_normalb
+		name = "B Cup Breasts"
+		icon_state = "normal_b"
+
+	brt_normalc
+		name = "C Cup Breasts"
+		icon_state = "normal_c"
+
+	brt_normald
+		name = "D Cup Breasts"
+		icon_state = "normal_d"
+
+	brt_normale
+		name = "E Cup Breasts"
+		icon_state = "normal_e"
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Ears	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/ears
+	icon = 'icons/mob/human_races/extras/ears.dmi'
+	do_colouration = 1
+
+	ear_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	ear_squirrel_orange
+		name = "Squirrel Ears, Orange"
+		icon_state = "squirrel-orange"
+
+
+	ear_squirrel
+		name = "Squirrel Ears"
+		icon_state = "squirrel"
+		do_colouration = 1
+
+
+	ear_kitsune_colour
+		name = "Kitsune Ears"
+		icon_state = "kitsune2"
+		do_colouration = 1
+
+	ear_kitsune_bicolour
+		name = "Kitsune Ears, bicolour"
+		icon_state = "kitsune1"
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Wings	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/wings
+	icon = 'icons/mob/human_races/extras/wings.dmi'
+	do_colouration = 0
+
+	wng_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	wng_bat_black
+		name = "Bat Wings, Black"
+		icon_state = "bat-black"
+
+	wng_bat_red
+		name = "Bat Wings, Red"
+		icon_state = "bat-red"
+
+	wng_feathered_heresy
+		name = "(test) Colourable Feathered Wings"
+		icon_state = "feathered"
+		do_colouration = 1
+
+	wng_angel
+		name = "Angel Wings"
+		icon_state = "angelwings"
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Tails	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/tails
+	icon = 'icons/mob/human_races/extras/tails.dmi'
+	do_colouration = 0
+
+	tal_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+
+	tal_squirrel_orange
+		name = "Squirrel tail, Orange"
+		icon_state = "squirrel-orange"
+
+	tal_squirrel
+		name = "Squirrel tail"
+		icon_state = "squirrel"
+		do_colouration = 1
+
+	tal_kitsune_bicolor
+		name = "Kitsune Tails, bicolour"
+		icon_state = "kitsune1"
+
+	tal_squirrel
+		name = "Kitsune Tails, colourable"
+		icon_state = "kitsune2"
+		do_colouration = 1
