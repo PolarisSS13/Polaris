@@ -1885,11 +1885,7 @@
 	id = "sbiten"
 	description = "A spicy Vodka! Might be a little hot for the little guys!"
 	taste_description = "hot and spice"
-<<<<<<< HEAD
-	color = "#FFA371"
-=======
 	color = "#664300"
->>>>>>> a62c3fc... Made some suggested changes
 	strength = 15
 	adj_temp = 50
 	targ_temp = 360
