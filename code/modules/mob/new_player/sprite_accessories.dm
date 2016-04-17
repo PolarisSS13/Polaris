@@ -782,6 +782,7 @@
 
 /datum/sprite_accessory/dicks
 	icon = 'icons/mob/human_races/extras/dicks.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	dik_none
 		name = "None"
@@ -840,6 +841,7 @@
 
 /datum/sprite_accessory/vaginas
 	icon = 'icons/mob/human_races/extras/vaginas.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	vag_none
 		name = "None"
@@ -878,6 +880,7 @@
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/mob/human_races/extras/breasts.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	brt_none
 		name = "None"
@@ -917,6 +920,7 @@
 /datum/sprite_accessory/ears
 	icon = 'icons/mob/human_races/extras/ears.dmi'
 	do_colouration = 1
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	ear_none
 		name = "None"
@@ -924,14 +928,14 @@
 		icon_state = null
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
 
+	ear_bear
+		name = "Bear Ears"
+		icon_state = "bear"
+
 	ear_bear_brown
 		name = "Bear Ears, Brown"
 		icon_state = "bear-brown"
 		do_colouration = 0
-
-	ear_bear
-		name = "Bear Ears"
-		icon_state = "bear"
 
 	ear_bee
 		name = "Bee Antenae"
@@ -1030,6 +1034,7 @@
 /datum/sprite_accessory/wings
 	icon = 'icons/mob/human_races/extras/wings.dmi'
 	do_colouration = 0
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	wng_none
 		name = "None"
@@ -1069,6 +1074,7 @@
 /datum/sprite_accessory/tails
 	icon = 'icons/mob/human_races/extras/tails.dmi'
 	do_colouration = 1
+	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	tal_none
 		name = "None"
@@ -1076,108 +1082,107 @@
 		icon_state = null
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
 
-
-		tal_bunny
+	tal_bunny
 		name = "Bunny Tail"
 		icon_state = "bunny"
 
-		tal_bear
+	tal_bear
 		name = "Bear Tail"
 		icon_state = "bear"
 
-		tal_bear_brown
+	tal_bear_brown
 		name = "Bear Tail, Brown"
 		icon_state = "bear-brown"
 		do_colouration = 0
 
-		tal_cat_down
+	tal_cat_down
 		name = "Cat Tail, Down"
 		icon_state = "kittydown"
 
-		tal_cat_up
+	tal_cat_up
 		name = "Cat Tail, Up"
 		icon_state = "kittyup"
 
-		tal_fox_cross
+	tal_fox_cross
 		name = "Fox Tail, Cross"
 		icon_state = "crossfox"
 		do_colouration = 0
 
-		tal_mouse
+	tal_mouse
 		name = "Mouse Tail"
 		icon_state = "mouse"
 
-		tal_mouse_grey
+	tal_mouse_grey
 		name = "Mouse Tail, Grey"
 		icon_state = "mouse-grey"
 		do_colouration = 0
 
-		tal_deathclaw
+	tal_deathclaw
 		name = "Deathclaw Tail"
 		icon_state = "deathclaw"
 		do_colouration = 0
 
-		tal_kitsune
+	tal_kitsune
 		name = "Kitsune Tails"
 		icon_state = "kitsune2"
 
-		tal_kitsune_bicolor
+	tal_kitsune_bicolor
 		name = "Kitsune Tails, Bicolor"
 		icon_state = "kitsune1"
 		do_colouration = 0
 
-		tal_kitsune_blue
+	tal_kitsune_blue
 		name = "Kitsune Tail, Blue"
 		icon_state = "kitsune3"
 		do_colouration = 0
 
-		tal_squirrel
+	tal_squirrel
 		name = "Squirrel Tail"
 		icon_state = "squirrel"
 
-		tal_squirrel_orange
+	tal_squirrel_orange
 		name = "Squirrel Tail, Orange"
 		icon_state = "squirrel-orange"
 		do_colouration = 0
 
-		tal_squirrel_red
+	tal_squirrel_red
 		name = "Squirrel Tail, Red"
 		icon_state = "squirrel-red"
 		do_colouration = 0
 
-		tal_tiger
+	tal_tiger
 		name = "Tiger Tail"
 		icon_state = "tiger"
 
-		tal_tiger_stripped
+	tal_tiger_stripped
 		name = "Tiger Tail, Stripped"
 		icon_state = "stripeytiger"
 
-		tal_tiger_stripped
+	tal_tiger_stripped
 		name = "Tiger Tail, Stripped, Brown"
 		icon_state = "stripeytiger-brown"
 		do_colouration = 0
 
-		tal_wolf
+	tal_wolf
 		name = "Wolf Tail"
 		icon_state = "wolf"
 
-		tal_wolf_grey
+	tal_wolf_grey
 		name = "Wolf Tail, Grey"
 		icon_state = "wolf-grey"
 		do_colouration = 0
 
-		tal_wolf_green
+	tal_wolf_green
 		name = "Wolf Tail, Green"
 		icon_state = "wolf-green"
 		do_colouration = 0
 
-		tal_wolf_wise
+	tal_wolf_wise
 		name = "Wolf Tail, Wise"
 		icon_state = "wisewolf"
 		do_colouration = 0
 
-		tal_xeno
+	tal_xeno
 		name = "Xenomorph Tail"
 		icon_state = "xeno"
 		do_colouration = 0

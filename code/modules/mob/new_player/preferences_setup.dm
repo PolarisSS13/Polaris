@@ -234,11 +234,28 @@
 		preview_icon.Blend(limb_icon, ICON_OVERLAY)
 
 	//Tail
-//	if(current_species && (current_species.tail))
-//		var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
-//		if(current_species && (current_species.appearance_flags & HAS_SKIN_COLOR))
-//			temp.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
-//		preview_icon.Blend(temp, ICON_OVERLAY)
+	var/datum/sprite_accessory/tail_style = body_tails_list[tail_type]
+	if(tail_style)
+		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.icon_state)
+		if (tail_style.do_colouration == 1)
+			tail_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
+		preview_icon.Blend(tail_s, ICON_OVERLAY)
+
+	//Wings
+	var/datum/sprite_accessory/wings_style = body_wings_list[wings_type]
+	if(wings_style)
+		var/icon/wings_s = new/icon("icon" = wings_style.icon, "icon_state" = wings_style.icon_state)
+		if (wings_style.do_colouration == 1)
+			wings_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+		preview_icon.Blend(wings_s, ICON_OVERLAY)
+
+	//Ears
+	var/datum/sprite_accessory/ears_style = body_ears_list[ears_type]
+	if(ears_style)
+		var/icon/ears_s = new/icon("icon" = ears_style.icon, "icon_state" = ears_style.icon_state)
+		if (ears_style.do_colouration == 1)
+			ears_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
+		preview_icon.Blend(ears_s, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.
 	var/use_eye_icon = "eyes_s"
@@ -280,6 +297,28 @@
 	var/icon/socks_s = null
 	if(socks && current_species.appearance_flags & HAS_UNDERWEAR)
 		socks_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = socks)
+
+	var/icon/breasts_s = null
+	if(c_type && current_species.appearance_flags & HAS_UNDERWEAR)
+		var/datum/sprite_accessory/breasts_style = body_breast_list[c_type]
+		breasts_s = new/icon("icon" = breasts_style.icon, "icon_state" = breasts_style.icon_state)
+		if (breasts_style.do_colouration)
+			breasts_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+
+	var/icon/dick_s = null
+	if(d_type && current_species.appearance_flags & HAS_UNDERWEAR)
+		var/datum/sprite_accessory/dick_style = body_dicks_list[d_type]
+		dick_s = new/icon("icon" = dick_style.icon, "icon_state" = dick_style.icon_state)
+		if (dick_style.do_colouration)
+			dick_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+
+	var/icon/vagina_s = null
+	if(v_type && current_species.appearance_flags & HAS_UNDERWEAR)
+		var/datum/sprite_accessory/vagina_style = body_vaginas_list[v_type]
+		vagina_s = new/icon("icon" = vagina_style.icon, "icon_state" = vagina_style.icon_state)
+		if (vagina_style.do_colouration)
+			vagina_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+
 
 	var/icon/clothes_s = null
 	if(job_civilian_low & ASSISTANT)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
@@ -714,6 +753,12 @@
 		preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 
 	preview_icon.Blend(eyes_s, ICON_OVERLAY)
+	if(breasts_s)
+		preview_icon.Blend(breasts_s, ICON_OVERLAY)
+	if(vagina_s)
+		preview_icon.Blend(vagina_s, ICON_OVERLAY)
+	if(dick_s)
+		preview_icon.Blend(dick_s, ICON_OVERLAY)
 	if(underwear_top_s)
 		preview_icon.Blend(underwear_top_s, ICON_OVERLAY)
 	if(underwear_bottom_s)
@@ -728,6 +773,9 @@
 	preview_icon_side = new(preview_icon, dir = WEST)
 
 	qdel(eyes_s)
+	qdel(breasts_s)
+	qdel(dick_s)
+	qdel(vagina_s)
 	qdel(underwear_top_s)
 	qdel(underwear_bottom_s)
 	qdel(undershirt_s)
