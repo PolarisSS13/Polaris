@@ -109,25 +109,25 @@ Please contact me on #coderbus IRC. ~Carn x
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
 #define SURGERY_LEVEL			3		//bs12 specific.
-#define GENITALS_LAYER			4
-#define UNIFORM_LAYER			5
-#define ID_LAYER				6
-#define SHOES_LAYER				7
-#define GLOVES_LAYER			8
-#define BELT_LAYER				9
-#define SUIT_LAYER				10
+#define UNIFORM_LAYER			4
+#define ID_LAYER				5
+#define SHOES_LAYER				6
+#define GLOVES_LAYER			7
+#define BELT_LAYER				8
+#define SUIT_LAYER				9
+#define WINGS_LAYER				10
 #define TAIL_LAYER				11		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GLASSES_LAYER			12
-#define BELT_LAYER_ALT			13
-#define SUIT_STORE_LAYER		14
-#define BACK_LAYER				15
-#define HAIR_LAYER				16		//TODO: make part of head layer?
-#define NATURAL_EARS_LAYER		17
-#define EARS_LAYER				18
-#define FACEMASK_LAYER			19
-#define HEAD_LAYER				20
-#define COLLAR_LAYER			21
-#define WINGS_LAYER				22
+#define GENITALS_LAYER			12
+#define GLASSES_LAYER			13
+#define BELT_LAYER_ALT			14
+#define SUIT_STORE_LAYER		15
+#define BACK_LAYER				16
+#define HAIR_LAYER				17		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		18
+#define EARS_LAYER				19
+#define FACEMASK_LAYER			20
+#define HEAD_LAYER				21
+#define COLLAR_LAYER			22
 #define HANDCUFF_LAYER			23
 #define LEGCUFF_LAYER			24
 #define L_HAND_LAYER			25
@@ -1082,7 +1082,6 @@ var/global/list/damage_icon_parts = list()
 #undef MUTATIONS_LAYER
 #undef DAMAGE_LAYER
 #undef SURGERY_LEVEL
-#undef GENITALS_LAYER
 #undef UNIFORM_LAYER
 #undef ID_LAYER
 #undef SHOES_LAYER
@@ -1090,7 +1089,9 @@ var/global/list/damage_icon_parts = list()
 #undef NATURAL_EARS_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef WINGS_LAYER
 #undef TAIL_LAYER
+#undef GENITALS_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER
@@ -1099,7 +1100,6 @@ var/global/list/damage_icon_parts = list()
 #undef HAIR_LAYER
 #undef HEAD_LAYER
 #undef COLLAR_LAYER
-#undef WINGS_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
 #undef L_HAND_LAYER

@@ -924,26 +924,100 @@
 		icon_state = null
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
 
-	ear_squirrel_orange
-		name = "Squirrel Ears, Orange"
-		icon_state = "squirrel-orange"
+	ear_bear_brown
+		name = "Bear Ears, Brown"
+		icon_state = "bear-brown"
+		do_colouration = 0
 
+	ear_bear
+		name = "Bear Ears"
+		icon_state = "bear"
 
-	ear_squirrel
-		name = "Squirrel Ears"
-		icon_state = "squirrel"
-		do_colouration = 1
+	ear_bee
+		name = "Bee Antenae"
+		icon_state = "bee"
+		do_colouration = 0
 
+	ear_bunny
+		name = "Bunny Ears"
+		icon_state = "bunny"
+
+	ear_bunny_white
+		name = "Bunny Ears, White"
+		icon_state = "bunny-white"
+		do_colouration = 0
+
+	ear_cat
+		name = "Cat Ears"
+		icon_state = "kitty"
+
+	ear_deathclaw
+		name = "Deathclaw Ears"
+		icon_state = "deathclaw"
+		do_colouration = 0
+
+	ear_demon_oni
+		name = "Demon Horns, Oni "
+		icon_state = "demon-oni"
+
+	ear_demon
+		name = "Demon Horns"
+		icon_state = "demon-horns"
 
 	ear_kitsune_colour
 		name = "Kitsune Ears"
 		icon_state = "kitsune2"
-		do_colouration = 1
 
 	ear_kitsune_bicolour
 		name = "Kitsune Ears, bicolour"
 		icon_state = "kitsune1"
+		do_colouration = 0
 
+	ear_kitsune_blue
+		name = "Kitsune Ears, Blue"
+		icon_state = "kitsune3"
+
+	ear_mouse
+		name = "Mouse Ears"
+		icon_state = "mouse"
+
+	ear_mouse_grey
+		name = "Mouse Ears, Grey"
+		icon_state = "mouse-grey"
+		do_colouration = 0
+
+	ear_squirrel
+		name = "Squirrel Ears"
+		icon_state = "squirrel"
+
+	ear_squirrel_red
+		name = "Squirrel Ears, Red"
+		icon_state = "squirrel-red"
+		do_colouration = 0
+
+	ear_squirrel_orange
+		name = "Squirrel Ears, Orange"
+		icon_state = "squirrel-orange"
+		do_colouration = 0
+
+	ear_wolf
+		name = "Wolf Ears"
+		icon_state = "wolf"
+
+	ear_wolf_grey
+		name = "Wolf Ears, Grey"
+		icon_state = "wolf-grey"
+		do_colouration = 0
+
+	ear_wolf_green
+		name = "Wolf Ears, Green"
+		icon_state = "wolf-green"
+		do_colouration = 0
+
+	ear_wolf_wise
+		name = "Wolf Ears, Wise"
+		icon_state = "wolf-wise"
+		do_colouration = 0
 
 /*
 ///////////////////////////////
@@ -963,6 +1037,14 @@
 		icon_state = null
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
 
+	wng_angel
+		name = "Angel Wings"
+		icon_state = "angel"
+
+	wng_
+		name = "Bee Wings"
+		icon_state = "bee"
+
 	wng_bat_black
 		name = "Bat Wings, Black"
 		icon_state = "bat-black"
@@ -971,14 +1053,9 @@
 		name = "Bat Wings, Red"
 		icon_state = "bat-red"
 
-	wng_feathered_heresy
-		name = "(test) Colourable Feathered Wings"
+	wng_feathered
+		name = "Feathered Wings"
 		icon_state = "feathered"
-		do_colouration = 1
-
-	wng_angel
-		name = "Angel Wings"
-		icon_state = "angelwings"
 
 
 /*
@@ -991,7 +1068,7 @@
 
 /datum/sprite_accessory/tails
 	icon = 'icons/mob/human_races/extras/tails.dmi'
-	do_colouration = 0
+	do_colouration = 1
 
 	tal_none
 		name = "None"
@@ -999,20 +1076,110 @@
 		icon_state = null
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
 
-	tal_squirrel_orange
-		name = "Squirrel tail, Orange"
-		icon_state = "squirrel-orange"
 
-	tal_squirrel
-		name = "Squirrel tail"
-		icon_state = "squirrel"
-		do_colouration = 1
+		tal_bunny
+		name = "Bunny Tail"
+		icon_state = "bunny"
 
-	tal_kitsune_bicolor
-		name = "Kitsune Tails, bicolour"
-		icon_state = "kitsune1"
+		tal_bear
+		name = "Bear Tail"
+		icon_state = "bear"
 
-	tal_squirrel
-		name = "Kitsune Tails, colourable"
+		tal_bear_brown
+		name = "Bear Tail, Brown"
+		icon_state = "bear-brown"
+		do_colouration = 0
+
+		tal_cat_down
+		name = "Cat Tail, Down"
+		icon_state = "kittydown"
+
+		tal_cat_up
+		name = "Cat Tail, Up"
+		icon_state = "kittyup"
+
+		tal_fox_cross
+		name = "Fox Tail, Cross"
+		icon_state = "crossfox"
+		do_colouration = 0
+
+		tal_mouse
+		name = "Mouse Tail"
+		icon_state = "mouse"
+
+		tal_mouse_grey
+		name = "Mouse Tail, Grey"
+		icon_state = "mouse-grey"
+		do_colouration = 0
+
+		tal_deathclaw
+		name = "Deathclaw Tail"
+		icon_state = "deathclaw"
+		do_colouration = 0
+
+		tal_kitsune
+		name = "Kitsune Tails"
 		icon_state = "kitsune2"
-		do_colouration = 1
+
+		tal_kitsune_bicolor
+		name = "Kitsune Tails, Bicolor"
+		icon_state = "kitsune1"
+		do_colouration = 0
+
+		tal_kitsune_blue
+		name = "Kitsune Tail, Blue"
+		icon_state = "kitsune3"
+		do_colouration = 0
+
+		tal_squirrel
+		name = "Squirrel Tail"
+		icon_state = "squirrel"
+
+		tal_squirrel_orange
+		name = "Squirrel Tail, Orange"
+		icon_state = "squirrel-orange"
+		do_colouration = 0
+
+		tal_squirrel_red
+		name = "Squirrel Tail, Red"
+		icon_state = "squirrel-red"
+		do_colouration = 0
+
+		tal_tiger
+		name = "Tiger Tail"
+		icon_state = "tiger"
+
+		tal_tiger_stripped
+		name = "Tiger Tail, Stripped"
+		icon_state = "stripeytiger"
+
+		tal_tiger_stripped
+		name = "Tiger Tail, Stripped, Brown"
+		icon_state = "stripeytiger-brown"
+		do_colouration = 0
+
+		tal_wolf
+		name = "Wolf Tail"
+		icon_state = "wolf"
+
+		tal_wolf_grey
+		name = "Wolf Tail, Grey"
+		icon_state = "wolf-grey"
+		do_colouration = 0
+
+		tal_wolf_green
+		name = "Wolf Tail, Green"
+		icon_state = "wolf-green"
+		do_colouration = 0
+
+		tal_wolf_wise
+		name = "Wolf Tail, Wise"
+		icon_state = "wisewolf"
+		do_colouration = 0
+
+		tal_xeno
+		name = "Xenomorph Tail"
+		icon_state = "xeno"
+		do_colouration = 0
+
+
