@@ -645,7 +645,7 @@
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
 			stat("Station Time", worldtime2text())
-			stat("Round Duration", round_duration())
+			stat("Round Duration", round_duration_as_text())
 
 		if(client.holder)
 			if(statpanel("Status"))
@@ -913,49 +913,6 @@ mob/proc/yank_out_object()
 		if(!pinned.len)
 			anchored = 0
 	return 1
-
-/mob/living/proc/handle_statuses()
-	handle_stunned()
-	handle_weakened()
-	handle_stuttering()
-	handle_silent()
-	handle_drugged()
-	handle_slurring()
-
-/mob/living/proc/handle_stunned()
-	if(stunned)
-		AdjustStunned(-1)
-	return stunned
-
-/mob/living/proc/handle_weakened()
-	if(weakened)
-		weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
-	return weakened
-
-/mob/living/proc/handle_stuttering()
-	if(stuttering)
-		stuttering = max(stuttering-1, 0)
-	return stuttering
-
-/mob/living/proc/handle_silent()
-	if(silent)
-		silent = max(silent-1, 0)
-	return silent
-
-/mob/living/proc/handle_drugged()
-	if(druggy)
-		druggy = max(druggy-1, 0)
-	return druggy
-
-/mob/living/proc/handle_slurring()
-	if(slurring)
-		slurring = max(slurring-1, 0)
-	return slurring
-
-/mob/living/proc/handle_paralysed() // Currently only used by simple_animal.dm, treated as a special case in other mobs
-	if(paralysis)
-		AdjustParalysis(-1)
-	return paralysis
 
 //Check for brain worms in head.
 /mob/proc/has_brain_worms()
