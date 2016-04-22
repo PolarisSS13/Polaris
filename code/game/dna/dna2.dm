@@ -42,7 +42,10 @@
 #define DNA_UI_EARS		   23
 #define DNA_UI_WINGS	   24
 #define DNA_UI_TAIL		   25
-#define DNA_UI_LENGTH      25 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_WINGS_R 	   26
+#define DNA_UI_WINGS_G     27
+#define DNA_UI_WINGS_B     28
+#define DNA_UI_LENGTH      28 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -163,6 +166,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_GENITAL_R,    character.r_genital,    255,    1)
 	SetUIValueRange(DNA_UI_GENITAL_G,    character.g_genital,    255,    1)
 	SetUIValueRange(DNA_UI_GENITAL_B,    character.b_genital,    255,    1)
+
+	SetUIValueRange(DNA_UI_WINGS_R,    character.r_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_G,    character.g_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_B,    character.b_wings,    255,    1)
 
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 

@@ -9,6 +9,9 @@
 	S["r_genital"]			>> pref.r_genital
 	S["g_genital"]			>> pref.g_genital
 	S["b_genital"]			>> pref.b_genital
+	S["r_wings"]			>> pref.r_wings
+	S["g_wings"]			>> pref.g_wings
+	S["b_wings"]			>> pref.b_wings
 	S["ears_type"]			>> pref.ears_type
 	S["wings_type"]			>> pref.wings_type
 	S["tail_type"]			>> pref.tail_type
@@ -20,6 +23,9 @@
 	S["r_genital"]			<< pref.r_genital
 	S["g_genital"]			<< pref.g_genital
 	S["b_genital"]			<< pref.b_genital
+	S["r_wings"]			>> pref.r_wings
+	S["g_wings"]			>> pref.g_wings
+	S["b_wings"]			>> pref.b_wings
 	S["ears_type"]			<< pref.ears_type
 	S["wings_type"]			<< pref.wings_type
 	S["tail_type"]			<< pref.tail_type
@@ -34,7 +40,9 @@
 	pref.ears_type		= sanitize_inlist(pref.ears_type, body_ears_list, initial(pref.ears_type))
 	pref.wings_type		= sanitize_inlist(pref.wings_type, body_wings_list, initial(pref.wings_type))
 	pref.tail_type		= sanitize_inlist(pref.tail_type, body_tails_list, initial(pref.tail_type))
-
+	pref.r_wings		= sanitize_integer(pref.r_wings, 0, 255, initial(pref.r_wings))
+	pref.g_wings		= sanitize_integer(pref.g_wings, 0, 255, initial(pref.g_wings))
+	pref.b_wings		= sanitize_integer(pref.b_wings, 0, 255, initial(pref.b_wings))
 
 /datum/category_item/player_setup_item/general/eros/content(var/mob/user)
 	pref.update_preview_icon()
@@ -52,8 +60,10 @@
 	. += "<table><tr style='vertical-align:top'><td><b>Body Modifications</b> "
 	. += "<br>"
 	. += "Ears Type: <a href='?src=\ref[src];cears_type=1'>[pref.ears_type]</a><br>"
-	. += "Wings Type: <a href='?src=\ref[src];cwings_type=1'>[pref.wings_type]</a><br>"
 	. += "Tail Type: <a href='?src=\ref[src];ctail_type=1'>[pref.tail_type]</a><br>"
+	. += "Wings Type: <a href='?src=\ref[src];cwings_type=1'>[pref.wings_type]</a><br>"
+	. += "<br><b>Wings Color</b><br>"
+	. += "<a href='?src=\ref[src];wings_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings)]'><tr><td>__</td></tr></table></font><br>"
 
 
 /datum/category_item/player_setup_item/general/eros/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -101,3 +111,10 @@
 		if(new_tail_type && CanUseTopic(user))
 			pref.tail_type = new_tail_type
 			return TOPIC_REFRESH
+
+	else if(href_list["wings_color"])
+		var/new_wings = input(user, "Choose your character's wings colour: ", "Character Preference", rgb(pref.r_wings, pref.g_wings, pref.b_wings)) as color|null
+		pref.r_wings = hex2num(copytext(new_wings, 2, 4))
+		pref.g_wings = hex2num(copytext(new_wings, 4, 6))
+		pref.b_wings = hex2num(copytext(new_wings, 6, 8))
+		return TOPIC_REFRESH

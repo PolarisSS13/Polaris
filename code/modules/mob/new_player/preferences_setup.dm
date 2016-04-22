@@ -246,7 +246,7 @@
 	if(wings_style)
 		var/icon/wings_s = new/icon("icon" = wings_style.icon, "icon_state" = wings_style.icon_state)
 		if (wings_style.do_colouration == 1)
-			wings_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+			wings_s.Blend(rgb(r_wings, g_wings, b_wings), ICON_MULTIPLY)
 		preview_icon.Blend(wings_s, ICON_OVERLAY)
 
 	//Ears

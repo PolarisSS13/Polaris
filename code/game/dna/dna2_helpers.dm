@@ -147,6 +147,10 @@
 		H.g_genital   = dna.GetUIValueRange(DNA_UI_GENITAL_G,    255)
 		H.b_genital   = dna.GetUIValueRange(DNA_UI_GENITAL_B,    255)
 
+		H.r_wings   = dna.GetUIValueRange(DNA_UI_WINGS_R,    255)
+		H.g_wings   = dna.GetUIValueRange(DNA_UI_WINGS_G,    255)
+		H.b_wings   = dna.GetUIValueRange(DNA_UI_WINGS_B,    255)
+
 		H.r_eyes   = dna.GetUIValueRange(DNA_UI_EYES_R,    255)
 		H.g_eyes   = dna.GetUIValueRange(DNA_UI_EYES_G,    255)
 		H.b_eyes   = dna.GetUIValueRange(DNA_UI_EYES_B,    255)

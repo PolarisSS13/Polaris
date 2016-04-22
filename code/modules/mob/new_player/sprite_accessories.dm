@@ -989,7 +989,7 @@
 
 /datum/sprite_accessory/wings
 	icon = 'icons/mob/human_races/extras/wings.dmi'
-	do_colouration = 0
+	do_colouration = 1
 	species_allowed = list("Human","Unathi","Tajara","Skrell")
 
 	wng_none

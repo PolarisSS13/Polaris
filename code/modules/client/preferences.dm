@@ -58,6 +58,9 @@ datum/preferences
 	var/ears_type = "None"				//Ears Type
 	var/wings_type = "None"				//Wings Type
 	var/tail_type = "None"				//Tail Type
+	var/r_wings = 200					//Wings color
+	var/g_wings = 200					//Wings color
+	var/b_wings = 200					//Wings color
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
@@ -322,6 +325,10 @@ datum/preferences
 	character.r_genital = r_genital
 	character.g_genital = g_genital
 	character.b_genital = b_genital
+
+	character.r_wings = r_wings
+	character.g_wings = g_wings
+	character.b_wings = b_wings
 
 	character.wings_type = wings_type
 	character.ears_type = ears_type
