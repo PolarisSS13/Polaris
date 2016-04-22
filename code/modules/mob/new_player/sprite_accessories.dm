@@ -932,11 +932,6 @@
 		name = "Bear Ears"
 		icon_state = "bear"
 
-	ear_bear_brown
-		name = "Bear Ears, Brown"
-		icon_state = "bear-brown"
-		do_colouration = 0
-
 	ear_bee
 		name = "Bee Antenae"
 		icon_state = "bee"
@@ -945,11 +940,6 @@
 	ear_bunny
 		name = "Bunny Ears"
 		icon_state = "bunny"
-
-	ear_bunny_white
-		name = "Bunny Ears, White"
-		icon_state = "bunny-white"
-		do_colouration = 0
 
 	ear_cat
 		name = "Cat Ears"
@@ -961,7 +951,7 @@
 		do_colouration = 0
 
 	ear_demon_oni
-		name = "Demon Horns, Oni "
+		name = "Oni Horns"
 		icon_state = "demon-oni"
 
 	ear_demon
@@ -970,58 +960,24 @@
 
 	ear_kitsune_colour
 		name = "Kitsune Ears"
-		icon_state = "kitsune2"
-
-	ear_kitsune_bicolour
-		name = "Kitsune Ears, bicolour"
-		icon_state = "kitsune1"
-		do_colouration = 0
-
-	ear_kitsune_blue
-		name = "Kitsune Ears, Blue"
-		icon_state = "kitsune3"
+		icon_state = "kitsune"
 
 	ear_mouse
 		name = "Mouse Ears"
 		icon_state = "mouse"
 
-	ear_mouse_grey
-		name = "Mouse Ears, Grey"
-		icon_state = "mouse-grey"
-		do_colouration = 0
-
 	ear_squirrel
 		name = "Squirrel Ears"
 		icon_state = "squirrel"
-
-	ear_squirrel_red
-		name = "Squirrel Ears, Red"
-		icon_state = "squirrel-red"
-		do_colouration = 0
-
-	ear_squirrel_orange
-		name = "Squirrel Ears, Orange"
-		icon_state = "squirrel-orange"
-		do_colouration = 0
 
 	ear_wolf
 		name = "Wolf Ears"
 		icon_state = "wolf"
 
-	ear_wolf_grey
-		name = "Wolf Ears, Grey"
-		icon_state = "wolf-grey"
-		do_colouration = 0
+	ear_dog
+		name = "Dog Ears"
+		icon_state = "lab"
 
-	ear_wolf_green
-		name = "Wolf Ears, Green"
-		icon_state = "wolf-green"
-		do_colouration = 0
-
-	ear_wolf_wise
-		name = "Wolf Ears, Wise"
-		icon_state = "wolf-wise"
-		do_colouration = 0
 
 /*
 ///////////////////////////////
@@ -1046,22 +1002,21 @@
 		name = "Angel Wings"
 		icon_state = "angel"
 
-	wng_
+	wng_bee
 		name = "Bee Wings"
 		icon_state = "bee"
 
-	wng_bat_black
-		name = "Bat Wings, Black"
-		icon_state = "bat-black"
-
-	wng_bat_red
-		name = "Bat Wings, Red"
-		icon_state = "bat-red"
+	wng_bat
+		name = "Bat Wings"
+		icon_state = "bat"
 
 	wng_feathered
 		name = "Feathered Wings"
 		icon_state = "feathered"
 
+	wng_succubus
+		name = "Succubus Wings"
+		icon_state = "succubus"
 
 /*
 ///////////////////////////////
@@ -1090,11 +1045,6 @@
 		name = "Bear Tail"
 		icon_state = "bear"
 
-	tal_bear_brown
-		name = "Bear Tail, Brown"
-		icon_state = "bear-brown"
-		do_colouration = 0
-
 	tal_cat_down
 		name = "Cat Tail, Down"
 		icon_state = "kittydown"
@@ -1106,15 +1056,10 @@
 	tal_fox_cross
 		name = "Fox Tail, Cross"
 		icon_state = "crossfox"
-		do_colouration = 0
 
 	tal_mouse
 		name = "Mouse Tail"
 		icon_state = "mouse"
-
-	tal_mouse_grey
-		name = "Mouse Tail, Grey"
-		icon_state = "mouse-grey"
 		do_colouration = 0
 
 	tal_deathclaw
@@ -1124,67 +1069,44 @@
 
 	tal_kitsune
 		name = "Kitsune Tails"
-		icon_state = "kitsune2"
-
-	tal_kitsune_bicolor
-		name = "Kitsune Tails, Bicolor"
-		icon_state = "kitsune1"
-		do_colouration = 0
-
-	tal_kitsune_blue
-		name = "Kitsune Tail, Blue"
-		icon_state = "kitsune3"
-		do_colouration = 0
+		icon_state = "kitsune"
 
 	tal_squirrel
 		name = "Squirrel Tail"
 		icon_state = "squirrel"
 
-	tal_squirrel_orange
-		name = "Squirrel Tail, Orange"
-		icon_state = "squirrel-orange"
-		do_colouration = 0
-
-	tal_squirrel_red
-		name = "Squirrel Tail, Red"
-		icon_state = "squirrel-red"
-		do_colouration = 0
-
 	tal_tiger
 		name = "Tiger Tail"
 		icon_state = "tiger"
 
-	tal_tiger_stripped
-		name = "Tiger Tail, Stripped"
+	tal_tiger_striped
+		name = "Tiger Tail, Striped"
 		icon_state = "stripeytiger"
-
-	tal_tiger_stripped
-		name = "Tiger Tail, Stripped, Brown"
-		icon_state = "stripeytiger-brown"
-		do_colouration = 0
 
 	tal_wolf
 		name = "Wolf Tail"
 		icon_state = "wolf"
 
-	tal_wolf_grey
-		name = "Wolf Tail, Grey"
-		icon_state = "wolf-grey"
-		do_colouration = 0
-
-	tal_wolf_green
-		name = "Wolf Tail, Green"
-		icon_state = "wolf-green"
-		do_colouration = 0
-
-	tal_wolf_wise
-		name = "Wolf Tail, Wise"
-		icon_state = "wisewolf"
-		do_colouration = 0
+	tal_fox
+		name = "Fox Tail"
+		icon_state = "fox"
 
 	tal_xeno
 		name = "Xenomorph Tail"
 		icon_state = "xeno"
 		do_colouration = 0
 
+	tal_dog
+		name = "Dog Tail"
+		icon_state = "corgi"
+
+
+	tal_taj
+		name = "Tajara Tail"
+		icon_state = "tajara"
+
+
+	tal_liz
+		name = "Unathi Tail"
+		icon_state = "unathi"
 
