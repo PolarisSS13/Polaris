@@ -1101,12 +1101,16 @@
 		icon_state = "corgi"
 
 
-	tal_taj
+	tal_tajara
 		name = "Tajara Tail"
 		icon_state = "tajara"
 
 
-	tal_liz
+	tal_lizard
 		name = "Unathi Tail"
 		icon_state = "unathi"
 
+
+	tal_succubus
+		name = "Succubus Tail"
+		icon_state = "succubus"
