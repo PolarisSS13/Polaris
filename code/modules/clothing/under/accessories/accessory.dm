@@ -272,6 +272,7 @@
 	icon_state = "collar_spik"
 	item_state = "collar_spik"
 
+/obj/item/clothing/accessory/collar/collar_pink
 	name = "Pink collar"
 	desc = "This collar will make your pets look FA-BU-LOUS."
 	slot_flags = SLOT_TIE | SLOT_OCLOTHING

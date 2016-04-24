@@ -36,6 +36,12 @@
 	var/r_wings = 200
 	var/g_wings = 200
 	var/b_wings = 200
+	var/r_ears = 200
+	var/g_ears = 200
+	var/b_ears = 200
+	var/r_tail = 200
+	var/g_tail = 200
+	var/b_tail = 200
 
 	var/size_multiplier = 1 //multiplier for the mob's icon size
 	var/damage_multiplier = 1 //multiplies melee combat damage

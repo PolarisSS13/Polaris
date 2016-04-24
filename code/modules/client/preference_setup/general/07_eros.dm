@@ -12,6 +12,12 @@
 	S["r_wings"]			>> pref.r_wings
 	S["g_wings"]			>> pref.g_wings
 	S["b_wings"]			>> pref.b_wings
+	S["r_ears"]				>> pref.r_ears
+	S["g_ears"]				>> pref.g_ears
+	S["b_ears"]				>> pref.b_ears
+	S["r_tail"]				>> pref.r_tail
+	S["g_tail"]				>> pref.g_tail
+	S["b_tail"]				>> pref.b_tail
 	S["ears_type"]			>> pref.ears_type
 	S["wings_type"]			>> pref.wings_type
 	S["tail_type"]			>> pref.tail_type
@@ -23,9 +29,15 @@
 	S["r_genital"]			<< pref.r_genital
 	S["g_genital"]			<< pref.g_genital
 	S["b_genital"]			<< pref.b_genital
-	S["r_wings"]			>> pref.r_wings
-	S["g_wings"]			>> pref.g_wings
-	S["b_wings"]			>> pref.b_wings
+	S["r_wings"]			<< pref.r_wings
+	S["g_wings"]			<< pref.g_wings
+	S["b_wings"]			<< pref.b_wings
+	S["r_ears"]				<< pref.r_ears
+	S["g_ears"]				<< pref.g_ears
+	S["b_ears"]				<< pref.b_ears
+	S["r_tail"]				<< pref.r_tail
+	S["g_tail"]				<< pref.g_tail
+	S["b_tail"]				<< pref.b_tail
 	S["ears_type"]			<< pref.ears_type
 	S["wings_type"]			<< pref.wings_type
 	S["tail_type"]			<< pref.tail_type
@@ -43,6 +55,13 @@
 	pref.r_wings		= sanitize_integer(pref.r_wings, 0, 255, initial(pref.r_wings))
 	pref.g_wings		= sanitize_integer(pref.g_wings, 0, 255, initial(pref.g_wings))
 	pref.b_wings		= sanitize_integer(pref.b_wings, 0, 255, initial(pref.b_wings))
+	pref.r_ears			= sanitize_integer(pref.r_ears, 0, 255, initial(pref.r_ears))
+	pref.g_ears			= sanitize_integer(pref.g_ears, 0, 255, initial(pref.g_ears))
+	pref.b_ears			= sanitize_integer(pref.b_ears, 0, 255, initial(pref.b_ears))
+	pref.r_tail			= sanitize_integer(pref.r_tail, 0, 255, initial(pref.r_tail))
+	pref.g_tail			= sanitize_integer(pref.g_tail, 0, 255, initial(pref.g_tail))
+	pref.b_tail			= sanitize_integer(pref.b_tail, 0, 255, initial(pref.b_tail))
+
 
 /datum/category_item/player_setup_item/general/eros/content(var/mob/user)
 	pref.update_preview_icon()
@@ -60,9 +79,10 @@
 	. += "<table><tr style='vertical-align:top'><td><b>Body Modifications</b> "
 	. += "<br>"
 	. += "Ears Type: <a href='?src=\ref[src];cears_type=1'>[pref.ears_type]</a><br>"
+	. += "<a href='?src=\ref[src];ears_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_ears, 2)][num2hex(pref.g_ears, 2)][num2hex(pref.b_ears, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_ears, 2)][num2hex(pref.g_ears, 2)][num2hex(pref.b_ears)]'><tr><td>__</td></tr></table></font><br>"
 	. += "Tail Type: <a href='?src=\ref[src];ctail_type=1'>[pref.tail_type]</a><br>"
+	. += "<a href='?src=\ref[src];tail_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_tail, 2)][num2hex(pref.g_tail, 2)][num2hex(pref.b_tail, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_tail, 2)][num2hex(pref.g_tail, 2)][num2hex(pref.b_tail)]'><tr><td>__</td></tr></table></font><br>"
 	. += "Wings Type: <a href='?src=\ref[src];cwings_type=1'>[pref.wings_type]</a><br>"
-	. += "<br><b>Wings Color</b><br>"
 	. += "<a href='?src=\ref[src];wings_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_wings, 2)][num2hex(pref.g_wings, 2)][num2hex(pref.b_wings)]'><tr><td>__</td></tr></table></font><br>"
 
 
@@ -113,8 +133,22 @@
 			return TOPIC_REFRESH
 
 	else if(href_list["wings_color"])
-		var/new_wings = input(user, "Choose your character's wings colour: ", "Character Preference", rgb(pref.r_wings, pref.g_wings, pref.b_wings)) as color|null
+		var/new_wings = input(user, "Choose your character's Wings colour: ", "Character Preference", rgb(pref.r_wings, pref.g_wings, pref.b_wings)) as color|null
 		pref.r_wings = hex2num(copytext(new_wings, 2, 4))
 		pref.g_wings = hex2num(copytext(new_wings, 4, 6))
 		pref.b_wings = hex2num(copytext(new_wings, 6, 8))
+		return TOPIC_REFRESH
+
+	else if(href_list["ears_color"])
+		var/new_ears = input(user, "Choose your character's Ears colour: ", "Character Preference", rgb(pref.r_ears, pref.g_ears, pref.b_ears)) as color|null
+		pref.r_ears = hex2num(copytext(new_ears, 2, 4))
+		pref.g_ears = hex2num(copytext(new_ears, 4, 6))
+		pref.b_ears = hex2num(copytext(new_ears, 6, 8))
+		return TOPIC_REFRESH
+
+	else if(href_list["tail_color"])
+		var/new_tail = input(user, "Choose your character's Tail colour: ", "Character Preference", rgb(pref.r_tail, pref.g_tail, pref.b_tail)) as color|null
+		pref.r_tail = hex2num(copytext(new_tail, 2, 4))
+		pref.g_tail = hex2num(copytext(new_tail, 4, 6))
+		pref.b_tail = hex2num(copytext(new_tail, 6, 8))
 		return TOPIC_REFRESH

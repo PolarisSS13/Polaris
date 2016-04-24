@@ -238,7 +238,7 @@
 	if(tail_style)
 		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = tail_style.icon_state)
 		if (tail_style.do_colouration == 1)
-			tail_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
+			tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
 		preview_icon.Blend(tail_s, ICON_OVERLAY)
 
 	//Wings
@@ -254,7 +254,7 @@
 	if(ears_style)
 		var/icon/ears_s = new/icon("icon" = ears_style.icon, "icon_state" = ears_style.icon_state)
 		if (ears_style.do_colouration == 1)
-			ears_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
+			ears_s.Blend(rgb(r_ears, g_ears, b_ears), ICON_MULTIPLY)
 		preview_icon.Blend(ears_s, ICON_OVERLAY)
 
 	// This is absolute garbage but whatever. It will do until this entire file can be rewritten without crashes.
