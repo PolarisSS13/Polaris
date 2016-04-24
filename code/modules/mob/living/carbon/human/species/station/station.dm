@@ -54,7 +54,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
@@ -116,7 +116,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
@@ -149,13 +149,13 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 	num_alternate_languages = 2
-	secondary_langs = list("Skrellian", "Teshari")
+	secondary_langs = list("Skrellian", "Schechi")
 	name_language = null
 
 	min_age = 18
 	max_age = 80
 
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
@@ -246,7 +246,7 @@
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP | NO_MINOR_CUT
-	spawn_flags = CAN_JOIN | IS_WHITELISTED
+	spawn_flags = CAN_JOIN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
