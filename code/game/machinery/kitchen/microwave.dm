@@ -1,4 +1,3 @@
-
 /obj/machinery/microwave
 	name = "Microwave"
 	icon = 'icons/obj/kitchen.dmi'
@@ -18,7 +17,7 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
-	
+
 	var/list/ingredient_list = list()	//MUST BE INTIALIZED OR YOU GET RUNTIME ERRORS
 
 
@@ -33,6 +32,9 @@
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 
+/obj/machinery/microwave/map/New()
+	..()
+	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	component_parts += new /obj/item/weapon/stock_parts/motor(src)
