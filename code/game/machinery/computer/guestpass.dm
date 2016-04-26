@@ -82,8 +82,7 @@
 			qdel(src)
 		return
 	if(istype(I, /obj/item/weapon/card/id))
-		if(!giver && user.unEquip(I))
-			I.loc = src
+		if(!giver && user.removeItem(I, src))
 			giver = I
 			updateUsrDialog()
 		else if(giver)
@@ -155,8 +154,12 @@
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
 					accesses.Remove(A)
-				else
-					accesses.Add(A)
+				else 
+					if(A in giver.access)	//Let's make sure the ID card actually has the access.
+						accesses.Add(A)
+					else
+						usr << "<span class='warning'>Invalid selection, please consult technical support if there are any issues.</span>"
+						log_debug("[key_name_admin(usr)] tried selecting an invalid guest pass terminal option.")
 	if (href_list["action"])
 		switch(href_list["action"])
 			if ("id")
@@ -172,8 +175,7 @@
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-						I.loc = src
+					if (istype(I, /obj/item/weapon/card/id) && usr.removeItem(I, src))
 						giver = I
 				updateUsrDialog()
 

@@ -56,6 +56,7 @@
 	var/disfigured = 0                 // Scarred/burned beyond recognition.
 	var/cannot_amputate                // Impossible to amputate.
 	var/cannot_break                   // Impossible to fracture.
+	var/cannot_gib                     // Impossible to gib, distinct from amputation.
 	var/joint = "joint"                // Descriptive string used in dislocation.
 	var/amputation_point               // Descriptive string used in amputation.
 	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
@@ -727,12 +728,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 					"<span class='moderate'><b>Your [src.name] goes flying off!</b></span>",\
 					"<span class='danger'>You hear a terrible sound of [gore_sound].</span>")
 		if(DROPLIMB_BURN)
+			if(cannot_gib)
+				return
 			var/gore = "[(status & ORGAN_ROBOT) ? "": " of burning flesh"]"
 			owner.visible_message(
 				"<span class='danger'>\The [owner]'s [src.name] flashes away into ashes!</span>",\
 				"<span class='moderate'><b>Your [src.name] flashes away into ashes!</b></span>",\
 				"<span class='danger'>You hear a crackling sound[gore].</span>")
 		if(DROPLIMB_BLUNT)
+			if(cannot_gib)
+				return
 			var/gore = "[(status & ORGAN_ROBOT) ? "": " in shower of gore"]"
 			var/gore_sound = "[(status & ORGAN_ROBOT) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
 			owner.visible_message(
@@ -828,12 +833,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 		holder.visible_message(\
 			"\The [holder.handcuffed.name] falls off of [holder.name].",\
 			"\The [holder.handcuffed.name] falls off you.")
-		holder.drop_from_inventory(holder.handcuffed)
+		holder.removeItem(holder.handcuffed, force = 1)
 	if (holder.legcuffed && body_part in list(FOOT_LEFT, FOOT_RIGHT, LEG_LEFT, LEG_RIGHT))
 		holder.visible_message(\
 			"\The [holder.legcuffed.name] falls off of [holder.name].",\
 			"\The [holder.legcuffed.name] falls off you.")
-		holder.drop_from_inventory(holder.legcuffed)
+		holder.removeItem(holder.legcuffed, force = 1)
 
 /obj/item/organ/external/proc/bandage()
 	var/rval = 0
@@ -1000,7 +1005,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.add_blood(owner)
 	if(ismob(W.loc))
 		var/mob/living/H = W.loc
-		H.drop_from_inventory(W)
+		H.removeItem(W)
 	W.loc = owner
 
 /obj/item/organ/external/removed(var/mob/living/user, var/ignore_children = 0)

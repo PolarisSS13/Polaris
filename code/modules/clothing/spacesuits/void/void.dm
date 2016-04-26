@@ -121,24 +121,28 @@
 		H = helmet.loc
 		if(istype(H))
 			if(helmet && H.head == helmet)
-				H.drop_from_inventory(helmet)
-				helmet.forceMove(src)
+				H.removeItem(helmet, src)
 
 	if(boots)
 		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
 			if(boots && H.shoes == boots)
-				H.drop_from_inventory(boots)
-				boots.forceMove(src)
+				H.removeItem(boots, src)
 
 	if(tank)
 		tank.canremove = 1
-		tank.forceMove(src)
+		H = tank.loc
+		if(istype(H))
+			if(tank && H.s_store == tank)
+				H.removeItem(tank, src)
 
 	if(cooler)
 		cooler.canremove = 1
-		cooler.forceMove(src)
+		H = cooler.loc
+		if(istype(H))
+			if(cooler && H.s_store == cooler)
+				H.removeItem(cooler, src)
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -161,8 +165,7 @@
 	if(H.head == helmet)
 		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
-		H.drop_from_inventory(helmet)
-		helmet.forceMove(src)
+		H.removeItem(helmet, src)
 	else
 		if(H.head)
 			H << "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>"
@@ -200,7 +203,7 @@
 		cooler = null
 	H << "<span class='info'>You press the emergency release, ejecting \the [removing] from your suit.</span>"
 	removing.canremove = 1
-	H.drop_from_inventory(removing)
+	H.removeItem(removing)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 

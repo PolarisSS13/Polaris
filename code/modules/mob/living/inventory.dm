@@ -10,13 +10,13 @@
 	// Try put it in their backpack
 	if(istype(src.back,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/backpack = src.back
-		if(backpack.contents.len < backpack.storage_slots)
+		if(backpack.can_be_inserted(newitem, 1))
 			newitem.forceMove(src.back)
 			return 1
 
 	// Try to place it in any item that can store stuff, on the mob.
 	for(var/obj/item/weapon/storage/S in src.contents)
-		if (S.contents.len < S.storage_slots)
+		if (S.can_be_inserted(newitem, 1))
 			newitem.forceMove(S)
 			return 1
 	return 0
@@ -38,11 +38,11 @@
 
 //Drops the item in our left hand
 /mob/living/drop_l_hand(var/atom/Target)
-	return drop_from_inventory(l_hand, Target)
+	return removeItem(l_hand, Target)
 
 //Drops the item in our right hand
 /mob/living/drop_r_hand(var/atom/Target)
-	return drop_from_inventory(r_hand, Target)
+	return removeItem(r_hand, Target)
 
 /mob/living/proc/hands_are_full()
 	return (r_hand && l_hand)

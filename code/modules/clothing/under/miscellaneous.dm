@@ -140,7 +140,7 @@
 	worn_state = "johnny"
 	item_state = "johnny"
 
-/obj/item/clothing/under/rainbow
+/obj/item/clothing/under/color/rainbow
 	name = "rainbow jumpsuit"
 	desc = "A multi-colored jumpsuit."
 	icon_state = "rainbow"
@@ -482,13 +482,6 @@
 	worn_state = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-/obj/item/clothing/under/blackjumpskirt
-	name = "black jumpskirt"
-	desc = "A black jumpskirt, Sol size 0."
-	icon_state = "blackjumpskirt"
-	item_state = "bl_suit"
-	worn_state = "blackjumpskirt"
-
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
@@ -567,6 +560,27 @@
 	item_state = "mai_yang"
 	worn_state = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/cheongsam/red
+	name = "red cheongsam"
+	desc = "It is a red cheongsam dress."
+	icon_state = "cheongsam-red"
+	item_state = "cheongsam-red"
+	worn_state = "cheongsam-red"
+
+/obj/item/clothing/under/cheongsam/blue
+	name = "blue cheongsam"
+	desc = "It is a blue cheongsam dress."
+	icon_state = "cheongsam-blue"
+	item_state = "cheongsam-blue"
+	worn_state = "cheongsam-blue"
+
+/obj/item/clothing/under/cheongsam/black
+	name = "black cheongsam"
+	desc = "It is a black cheongsam dress."
+	icon_state = "cheongsam-black"
+	item_state = "cheongsam-black"
+	worn_state = "cheongsam-black"
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
