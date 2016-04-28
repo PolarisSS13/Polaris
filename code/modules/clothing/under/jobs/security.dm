@@ -72,13 +72,13 @@
 	icon_state = "sec_corporate"
 	//item_state = "sec_corporate"
 	worn_state = "sec_corporate"
-	rolled_sleeves = -1
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/warden/corp
 	icon_state = "warden_corporate"
 	//item_state = "warden_corporate"
 	worn_state = "warden_corporate"
-	rolled_sleeves = -1
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
@@ -88,7 +88,7 @@
 	worn_state = "swatunder"
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
-	rolled_sleeves = -1
+	rolled_sleeves = 0
 
 /*
  * Detective
@@ -185,7 +185,7 @@
 	icon_state = "hos_corporate"
 	//item_state = "hos_corporate"
 	worn_state = "hos_corporate"
-	rolled_sleeves = -1
+	rolled_sleeves = 0
 
 /obj/item/clothing/head/helmet/HoS
 	name = "Head of Security Hat"
