@@ -87,6 +87,6 @@
 			new /obj/item/weapon/spacecash/c1000(src)
 		for(var/i = 1 to 4)
 			new /obj/item/weapon/spacecash/c500(src)
-		for(var/i = 1 to 6)
+		for(var/i = 1 to 5)
 			new /obj/item/weapon/spacecash/c200(src)
 		return
