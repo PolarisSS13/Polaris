@@ -333,6 +333,8 @@
 		new /obj/item/weapon/grenade/smokebomb(src)
 		new /obj/item/weapon/grenade/smokebomb(src)
 		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
+		new /obj/item/weapon/grenade/smokebomb(src)
 
 /obj/item/weapon/storage/box/anti_photons
 	name = "box of anti-photon grenades"
@@ -360,6 +362,19 @@
 		new /obj/item/weapon/grenade/explosive(src)
 		new /obj/item/weapon/grenade/explosive(src)
 		new /obj/item/weapon/grenade/explosive(src)
+
+/obj/item/weapon/storage/box/teargas
+	name = "box of tear gas grenades"
+	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
+	icon_state = "flashbang"
+
+	New()
+		..()
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
+		new /obj/item/weapon/grenade/chem_grenade/teargas(src)
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"

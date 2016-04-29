@@ -498,19 +498,24 @@ datum/uplink_item/dd_SortValue()
 	category = /datum/uplink_category/grenades
 
 /datum/uplink_item/item/grenades/anti_photon
-	name = "5xPhoton Disruption Grenades"
+	name = "5x Photon Disruption Grenades"
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/anti_photons
 
 /datum/uplink_item/item/grenades/emp
-	name = "5xEMP Grenades"
+	name = "5x EMP Grenades"
 	item_cost = 3
 	path = /obj/item/weapon/storage/box/emps
 
 /datum/uplink_item/item/grenades/smoke
-	name = "5xSmoke Grenades"
+	name = "7x Smoke Grenades"
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/smokes
+
+/datum/uplink_item/item/grenades/smoke/teargas
+	name = "5x Tear Gas Grenades"
+	item_cost = 3
+	path = /obj/item/weapon/storage/box/teargas
 
 /************
 * Badassery *
