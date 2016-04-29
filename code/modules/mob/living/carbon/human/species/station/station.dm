@@ -287,3 +287,60 @@
 			qdel(D)
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+
+
+/datum/species/akula
+	name = "Akula"
+	name_plural = "Akulas"
+	icobase = 'icons/mob/human_races/r_shark.dmi'
+	deform = 'icons/mob/human_races/r_def_shark.dmi'
+	blurb = "dun dun dun dun dadadaada dun dun duuuun dun dun"
+	tail = "sharktail"
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	darksight = 8
+	slowdown = -0.5
+	brute_mod = 1.15
+	burn_mod =  1.15
+	gluttonous = 1
+	num_alternate_languages = 2
+	secondary_langs = list("Skrellian", "Schechi")
+	name_language = null
+
+	min_age = 18
+	max_age = 80
+
+	spawn_flags = CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+
+	flesh_color = "#8CD7A3"
+	blood_color = "#1D2CBF"
+	base_color = "#006666"
+
+	reagent_tag = IS_SKRELL
+
+	has_limbs = list(
+		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/skrell),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+		)
+
+	heat_discomfort_strings = list(
+		"Your skin feels sore and unbearably itchy.",
+		"You're feeling irritable from the unpleasant heat.",
+		"You feel dizzy and dehyrdrated."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your skin bristles against the cold."
+		)
+
