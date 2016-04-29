@@ -1111,3 +1111,7 @@
 	tal_succubus
 		name = "Succubus Tail"
 		icon_state = "succubus"
+
+	tal_bee
+		name = "Bee Stinger (do not use with bee wings)"
+		icon_state = "bee"
