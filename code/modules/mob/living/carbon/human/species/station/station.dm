@@ -296,6 +296,7 @@
 	deform = 'icons/mob/human_races/r_def_shark.dmi'
 	blurb = "dun dun dun dun dadadaada dun dun duuuun dun dun"
 	tail = "sharktail"
+	tail_animation = 'icons/mob/species/akula/tail.dmi' // not actually animated
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
 	darksight = 8
 	slowdown = -0.5
@@ -312,9 +313,9 @@
 	spawn_flags = CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
-	flesh_color = "#8CD7A3"
+	flesh_color = "#AFA59E"
 	blood_color = "#1D2CBF"
-	base_color = "#006666"
+	base_color = "#AFA59E"
 
 	reagent_tag = IS_SKRELL
 
