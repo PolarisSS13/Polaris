@@ -1006,7 +1006,7 @@
 
 	ear_angler
 		name = "Angler Lure"
-		icon_state = "lab"
+		icon_state = "angler"
 
 	ear_deer1
 		name = "Deer Ears"
@@ -1068,7 +1068,7 @@
 		name = "Turtle Shell"
 		icon_state = "turtle"
 
-	wng_turtle
+	wng_tentacles
 		name = "Back Tentacles"
 		icon_state = "tentacles"
 
