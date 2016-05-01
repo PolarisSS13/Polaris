@@ -185,10 +185,10 @@
 	deform = 'icons/mob/human_races/r_def_shark.dmi'
 	blurb = "Place Akula lore here."
 	tail = "sharktail"
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
-	slowdown = -0.5
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/bite/sharp)
 	brute_mod = 1.15
-	gluttonous = 1
+	burn_mod = 0.90
+	gluttonous = 2
 	num_alternate_languages = 2
 	secondary_langs = list("Skrellian")
 	name_language = null
