@@ -178,6 +178,47 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+/datum/species/akula
+	name = "Akula"
+	name_plural = "Akulas"
+	icobase = 'icons/mob/human_races/r_shark.dmi'
+	deform = 'icons/mob/human_races/r_def_shark.dmi'
+	blurb = "Place Akula lore here."
+	tail = "sharktail"
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/bite/sharp)
+	brute_mod = 1.15
+	burn_mod = 0.90
+	gluttonous = 2
+	num_alternate_languages = 2
+	secondary_langs = list("Skrellian")
+	name_language = null
+
+	min_age = 18
+	max_age = 100
+
+	spawn_flags = CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+
+	flesh_color = "#AFA59E"
+	blood_color = "#1D2CBF"
+	base_color = "#AFA59E"
+
+	reagent_tag = IS_AKULA
+
+
+	heat_discomfort_strings = list(
+		"Your skin feels sore and unbearably itchy.",
+		"You're feeling irritable from the unpleasant heat.",
+		"You feel dizzy and dehyrdrated."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your skin bristles against the cold."
+		)
+
+
 /datum/species/diona
 	name = "Diona"
 	name_plural = "Dionaea"

@@ -771,6 +771,12 @@
 		icon = 'icons/mob/human_races/r_skrell.dmi'
 		species_allowed = list("Skrell")
 
+	akula
+		name = "Default Akula skin"
+		icon_state = "default"
+		icon = 'icons/mob/human_races/r_shark.dmi'
+		species_allowed = list("Akula")
+
 
 /*
 /////////////////////////////
@@ -782,13 +788,13 @@
 
 /datum/sprite_accessory/dicks
 	icon = 'icons/mob/human_races/extras/dicks.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	dik_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	dik_normal
 		name = "Normal Dick"
@@ -841,13 +847,13 @@
 
 /datum/sprite_accessory/vaginas
 	icon = 'icons/mob/human_races/extras/vaginas.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	vag_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	vag_normal
 		name = "Normal Vagina"
@@ -880,13 +886,13 @@
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/mob/human_races/extras/breasts.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	brt_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	brt_normala
 		name = "A Cup Breasts"
@@ -919,13 +925,13 @@
 
 /datum/sprite_accessory/ears
 	icon = 'icons/mob/human_races/extras/ears.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	ear_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	ear_bear
 		name = "Bear Ears"
@@ -988,13 +994,13 @@
 
 /datum/sprite_accessory/wings
 	icon = 'icons/mob/human_races/extras/wings.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	wng_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	wng_angel
 		name = "Angel Wings"
@@ -1026,13 +1032,13 @@
 
 /datum/sprite_accessory/tails
 	icon = 'icons/mob/human_races/extras/tails.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
 
 	tal_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	tal_bunny
 		name = "Bunny Tail"
@@ -1108,10 +1114,15 @@
 		icon_state = "unathi"
 
 
+	tal_sharktail
+		name = "Akula Tail"
+		icon_state = "sharktail"
+
+
 	tal_succubus
 		name = "Succubus Tail"
 		icon_state = "succubus"
 
 	tal_bee
-		name = "Bee Stinger (do not use with bee wings)"
+		name = "Bee Stinger"
 		icon_state = "bee"
