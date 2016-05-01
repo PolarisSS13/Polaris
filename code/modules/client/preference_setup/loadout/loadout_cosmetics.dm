@@ -14,3 +14,11 @@
 /datum/gear/lipstick/red
 	display_name = "lipstick, red"
 	path = /obj/item/weapon/lipstick
+
+/datum/gear/lipstick/cyan
+	display_name = "lipstick, cyan"
+	path = /obj/item/weapon/lipstick/purple
+
+/datum/gear/lipstick/pink
+	display_name = "lipstick, pink"
+	path = /obj/item/weapon/lipstick

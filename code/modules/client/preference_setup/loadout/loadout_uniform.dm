@@ -337,3 +337,11 @@
 	display_name = "uniform, navy blue (Head of Security)"
 	path = /obj/item/clothing/under/rank/head_of_security/navyblue
 	allowed_roles = list("Head of Security")
+
+/datum/gear/permit
+	display_name = "nudity permit"
+	path = /obj/item/clothing/under/permit
+
+/datum/gear/uniform/harness
+	display_name = "gear harness"
+	path = /obj/item/clothing/under/harness
