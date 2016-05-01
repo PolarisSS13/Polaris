@@ -1730,7 +1730,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/securityclothing
 	name = "Security uniform crate"
 	contains = list(
-			/obj/item/weapon/storage/backpack/satchel_sec = 2,
+			/obj/item/weapon/storage/backpack/satchel/sec = 2,
 			/obj/item/weapon/storage/backpack/security = 2,
 			/obj/item/clothing/accessory/armband = 4,
 			/obj/item/clothing/under/rank/security = 4,
@@ -1751,15 +1751,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/navybluesecurityclothing
 	name = "Navy blue security uniform crate"
 	contains = list(
-			/obj/item/weapon/storage/backpack/satchel_sec = 2,
+			/obj/item/weapon/storage/backpack/satchel/sec = 2,
 			/obj/item/weapon/storage/backpack/security = 2,
-			/obj/item/clothing/under/rank/security/navyblue = 2,
-			/obj/item/clothing/suit/security/navyofficer = 2,
+			/obj/item/clothing/under/rank/security/navyblue = 4,
+			/obj/item/clothing/suit/security/navyofficer = 4,
 			/obj/item/clothing/under/rank/warden/navyblue,
 			/obj/item/clothing/suit/security/navywarden,
 			/obj/item/clothing/under/rank/head_of_security/navyblue,
 			/obj/item/clothing/suit/security/navyhos,
-			/obj/item/clothing/head/beret/sec/navy/officer = 2,
+			/obj/item/clothing/head/beret/sec/navy/officer = 4,
 			/obj/item/clothing/head/beret/sec/navy/warden,
 			/obj/item/clothing/head/beret/sec/navy/hos,
 			/obj/item/clothing/gloves/black = 4,
@@ -1774,7 +1774,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/corporatesecurityclothing
 	name = "Corporate security uniform crate"
 	contains = list(
-			/obj/item/weapon/storage/backpack/satchel_sec = 2,
+			/obj/item/weapon/storage/backpack/satchel/sec = 2,
 			/obj/item/weapon/storage/backpack/security = 2,
 			/obj/item/clothing/under/rank/security/corp = 4,
 			/obj/item/clothing/head/soft/sec/corp = 4,
@@ -2046,7 +2046,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Shaft miner equipment"
 	contains = list(
 			/obj/item/weapon/storage/backpack/industrial,
-			/obj/item/weapon/storage/backpack/satchel_eng,
+			/obj/item/weapon/storage/backpack/satchel/eng,
 			/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
 			/obj/item/device/radio/headset/headset_cargo,
 			/obj/item/clothing/under/rank/miner,
