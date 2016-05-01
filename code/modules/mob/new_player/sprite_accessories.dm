@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -225,12 +225,12 @@
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	bun
 		name = "Bun"
@@ -251,7 +251,7 @@
 	buzz
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	crew
 		name = "Crewcut"
@@ -340,7 +340,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	jensen
 		name = "Adam Jensen Hair"
@@ -357,7 +357,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	kusangi
 		name = "Kusanagi Hair"
@@ -510,7 +510,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari","Akula")
 
 	teshari_beard
 		name = "Teshari Beard"
@@ -569,7 +569,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula")
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -955,13 +955,25 @@
 		icon_state = "deathclaw"
 		do_colouration = 0
 
-	ear_demon_oni
+	ear_horn_oni
 		name = "Oni Horns"
-		icon_state = "demon-oni"
+		icon_state = "horns_oni"
 
-	ear_demon
+	ear_horn_demon
 		name = "Demon Horns"
-		icon_state = "demon-horns"
+		icon_state = "horns_demon"
+
+	ear_horn_curled
+		name = "Curled Horns"
+		icon_state = "horns_curled"
+
+	ear_horn_ram
+		name = "Ram Horns"
+		icon_state = "horns_ram"
+
+	ear_horn_curled
+		name = "Short Horns"
+		icon_state = "horns_short"
 
 	ear_kitsune_colour
 		name = "Kitsune Ears"
@@ -982,6 +994,32 @@
 	ear_dog
 		name = "Dog Ears"
 		icon_state = "lab"
+
+	ear_cow
+		name = "Cow Ears + Horns"
+		icon_state = "cow"
+		do_colouration = 0		// Needs greyscale. -- Ursa
+
+	ear_lop
+		name = "Lop Bunny Ears"
+		icon_state = "lop"
+
+	ear_angler
+		name = "Angler Lure"
+		icon_state = "lab"
+
+	ear_deer1
+		name = "Deer Ears"
+		icon_state = "deer1"
+
+	ear_deer2
+		name = "Deer Ears + Antlers"
+		icon_state = "deer2"
+
+	ear_antlers
+		name = "Antlers"
+		icon_state = "antlers"
+		do_colouration = 0		// Needs greyscale? -- Ursa
 
 
 /*
@@ -1021,6 +1059,19 @@
 	wng_succubus
 		name = "Succubus Wings"
 		icon_state = "succubus"
+
+	wng_smallfairy
+		name = "Small Fairy Wings"
+		icon_state = "smallfairy"
+
+	wng_turtle
+		name = "Turtle Shell"
+		icon_state = "turtle"
+
+	wng_turtle
+		name = "Back Tentacles"
+		icon_state = "tentacles"
+
 
 /*
 ///////////////////////////////
@@ -1103,21 +1154,17 @@
 		name = "Dog Tail"
 		icon_state = "corgi"
 
-
 	tal_tajara
 		name = "Tajara Tail"
 		icon_state = "tajara"
-
 
 	tal_lizard
 		name = "Unathi Tail"
 		icon_state = "unathi"
 
-
 	tal_sharktail
 		name = "Akula Tail"
 		icon_state = "sharktail"
-
 
 	tal_succubus
 		name = "Succubus Tail"
@@ -1126,3 +1173,16 @@
 	tal_bee
 		name = "Bee Stinger"
 		icon_state = "bee"
+
+	tal_feathers
+		name = "Feathers"
+		icon_state = "feathers"
+
+	tal_cow
+		name = "Cow Tail"
+		icon_state = "cow"
+		do_colouration = 0		// Needs greyscale -- Ursa
+
+	tal_deer
+		name = "Deer Tail"
+		icon_state = "deer"
