@@ -345,3 +345,35 @@
 /datum/gear/uniform/harness
 	display_name = "gear harness"
 	path = /obj/item/clothing/under/harness
+
+/datum/gear/uniform/shortplaindress
+	display_name = "plain dress"
+	path = /obj/item/clothing/under/dress/white3
+
+/datum/gear/uniform/shortplaindress/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/uniform/longdress
+	display_name = "long dress"
+	path = /obj/item/clothing/under/dress/white2
+
+/datum/gear/uniform/longdress/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/uniform/longwidedress
+	display_name = "long wide dress"
+	path = /obj/item/clothing/under/dress/white4
+
+/datum/gear/uniform/longwidedress/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/uniform/reddress
+	display_name = "red dress with belt"
+	path = /obj/item/clothing/under/dress/darkred
+
+/datum/gear/uniform/whitewedding
+	display_name= "white wedding dress"
+	path = /obj/item/clothing/under/dress/white
