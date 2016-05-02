@@ -895,23 +895,23 @@
 		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
 
 	brt_normala
-		name = "A Cup Breasts"
+		name = "Tiny Breasts"
 		icon_state = "normal_a"
 
 	brt_normalb
-		name = "B Cup Breasts"
+		name = "Small Breasts"
 		icon_state = "normal_b"
 
 	brt_normalc
-		name = "C Cup Breasts"
+		name = "Normal Breasts"
 		icon_state = "normal_c"
 
 	brt_normald
-		name = "D Cup Breasts"
+		name = "Big Breasts"
 		icon_state = "normal_d"
 
 	brt_normale
-		name = "E Cup Breasts"
+		name = "Very Big Breasts"
 		icon_state = "normal_e"
 
 
