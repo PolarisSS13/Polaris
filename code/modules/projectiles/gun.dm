@@ -66,6 +66,7 @@
 	var/mode_name = null
 	var/requires_two_hands
 	var/wielded_icon = "gun_wielded"
+	var/one_handed_penalty = 0 // Penalty applied if someone fires a two-handed gun with one hand.
 
 	var/next_fire_time = 0
 
@@ -93,7 +94,7 @@
 	if(requires_two_hands)
 		var/mob/living/M = loc
 		if(istype(M))
-			if((M.l_hand == src && !M.r_hand) || (M.r_hand == src && !M.l_hand))
+			if(M.item_is_in_hands(src) && !M.hands_are_full())
 				name = "[initial(name)] (wielded)"
 				item_state = wielded_icon
 			else
@@ -145,7 +146,7 @@
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 		return
 
-	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+	if(user && user.a_intent == I_HELP && user.is_preference_enabled(/datum/client_preference/safefiring)) //regardless of what happens, refuse to shoot if help intent is on
 		user << "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>"
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
@@ -163,6 +164,8 @@
 
 	add_fingerprint(user)
 
+	user.break_cloak()
+
 	if(!special_check(user))
 		return
 
@@ -179,9 +182,9 @@
 	var/held_acc_mod = 0
 	var/held_disp_mod = 0
 	if(requires_two_hands)
-		if((user.l_hand == src && user.r_hand) || (user.r_hand == src && user.l_hand))
-			held_acc_mod = -3
-			held_disp_mod = 3
+		if(user.item_is_in_hands(src) && user.hands_are_full())
+			held_acc_mod = held_acc_mod - one_handed_penalty
+			held_disp_mod = held_disp_mod - round(one_handed_penalty / 2)
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -208,6 +211,12 @@
 		if(!(target && target.loc))
 			target = targloc
 			pointblank = 0
+
+	// We do this down here, so we don't get the message if we fire an empty gun.
+	if(requires_two_hands)
+		if(user.item_is_in_hands(src) && user.hands_are_full())
+			if(one_handed_penalty >= 2)
+				user << "<span class='warning'>You struggle to keep \the [src] pointed at the correct position with just one hand!</span>"
 
 	admin_attack_log(usr, attacker_message="Fired [src]", admin_message="fired a gun ([src]) (MODE: [src.mode_name]) [reflex ? "by reflex" : "manually"].")
 
@@ -284,7 +293,7 @@
 			for(var/obj/item/weapon/grab/G in M.grabbed_by)
 				grabstate = max(grabstate, G.state)
 			if(grabstate >= GRAB_NECK)
-				damage_mult = 3.0
+				damage_mult = 2.5
 			else if(grabstate >= GRAB_AGGRESSIVE)
 				damage_mult = 1.5
 	P.damage *= damage_mult
@@ -363,7 +372,8 @@
 
 		in_chamber.on_hit(M)
 		if (in_chamber.damage_type != HALLOSS)
-			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
+			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
+			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]", sharp=1)
 			user.death()
 		else
 			user << "<span class = 'notice'>Ow...</span>"

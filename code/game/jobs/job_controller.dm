@@ -111,7 +111,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
-			if(job in command_positions) //If you want a command position, select it!
+			if(job.title in command_positions) //If you want a command position, select it!
 				continue
 
 			if(jobban_isbanned(player, job.title))
@@ -191,36 +191,6 @@ var/global/datum/controller/occupations/job_master
 		return
 
 
-	proc/FillAIPosition()
-		var/ai_selected = 0
-		var/datum/job/job = GetJob("AI")
-		if(!job)	return 0
-		if((job.title == "AI") && (config) && (!config.allow_ai))	return 0
-
-		for(var/i = job.total_positions, i > 0, i--)
-			for(var/level = 1 to 3)
-				var/list/candidates = list()
-				if(ticker.mode.name == "AI malfunction")//Make sure they want to malf if its malf
-					candidates = FindOccupationCandidates(job, level, BE_MALF)
-				else
-					candidates = FindOccupationCandidates(job, level)
-				if(candidates.len)
-					var/mob/new_player/candidate = pick(candidates)
-					if(AssignRole(candidate, "AI"))
-						ai_selected++
-						break
-			//Malf NEEDS an AI so force one if we didn't get a player who wanted it
-			if((ticker.mode.name == "AI malfunction")&&(!ai_selected))
-				unassigned = shuffle(unassigned)
-				for(var/mob/new_player/player in unassigned)
-					if(jobban_isbanned(player, "AI"))	continue
-					if(AssignRole(player, "AI"))
-						ai_selected++
-						break
-			if(ai_selected)	return 1
-			return 0
-
-
 /** Proc DivideOccupations
  *  fills var "assigned_role" for all ready players.
  *  This proc must not have any side effect besides of modifying "assigned_role".
@@ -266,11 +236,6 @@ var/global/datum/controller/occupations/job_master
 		FillHeadPosition()
 		Debug("DO, Head Check end")
 
-		//Check for an AI
-		Debug("DO, Running AI Check")
-		FillAIPosition()
-		Debug("DO, AI Check end")
-
 		//Other jobs are now checked
 		Debug("DO, Running Standard Check")
 
@@ -281,6 +246,7 @@ var/global/datum/controller/occupations/job_master
 
 		// Loop through all levels from high to low
 		var/list/shuffledoccupations = shuffle(occupations)
+		// var/list/disabled_jobs = ticker.mode.disabled_jobs  // So we can use .Find down below without a colon.
 		for(var/level = 1 to 3)
 			//Check the head jobs first each level
 			CheckHeadPositions(level)
@@ -290,7 +256,7 @@ var/global/datum/controller/occupations/job_master
 
 				// Loop through all jobs
 				for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-					if(!job)
+					if(!job || ticker.mode.disabled_jobs.Find(job.title) )
 						continue
 
 					if(jobban_isbanned(player, job.title))
@@ -365,7 +331,6 @@ var/global/datum/controller/occupations/job_master
 			var/list/custom_equip_slots = list() //If more than one item takes the same slot, all after the first one spawn in storage.
 			var/list/custom_equip_leftovers = list()
 			if(H.client.prefs.gear && H.client.prefs.gear.len && job.title != "Cyborg" && job.title != "AI")
-
 				for(var/thing in H.client.prefs.gear)
 					var/datum/gear/G = gear_datums[thing]
 					if(G)
@@ -387,10 +352,11 @@ var/global/datum/controller/occupations/job_master
 						if(G.slot && !(G.slot in custom_equip_slots))
 							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
 							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z
+							var/metadata = H.client.prefs.gear[G.display_name]
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
-							else if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-								H << "<span class='notice'>Equipping you with [thing]!</span>"
+							else if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
+								H << "<span class='notice'>Equipping you with \the [thing]!</span>"
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
@@ -409,8 +375,9 @@ var/global/datum/controller/occupations/job_master
 				if(G.slot in custom_equip_slots)
 					spawn_in_storage += thing
 				else
-					if(H.equip_to_slot_or_del(new G.path(H), G.slot))
-						H << "<span class='notice'>Equipping you with [thing]!</span>"
+					var/metadata = H.client.prefs.gear[G.display_name]
+					if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
+						H << "<span class='notice'>Equipping you with \the [thing]!</span>"
 						custom_equip_slots.Add(G.slot)
 					else
 						spawn_in_storage += thing
@@ -473,16 +440,17 @@ var/global/datum/controller/occupations/job_master
 
 				if(!isnull(B))
 					for(var/thing in spawn_in_storage)
-						H << "<span class='notice'>Placing [thing] in your [B]!</span>"
+						H << "<span class='notice'>Placing \the [thing] in your [B.name]!</span>"
 						var/datum/gear/G = gear_datums[thing]
-						new G.path(B)
+						var/metadata = H.client.prefs.gear[G.display_name]
+						G.spawn_item(B, metadata)
 				else
 					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
 			var/obj/item/organ/external/r_foot = H.get_organ("r_foot")
-			if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+			if(!l_foot || !r_foot)
 				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
 				H.buckled = W
 				H.update_canmove()

@@ -85,6 +85,7 @@
 			var/obj/machinery/artifact/A = scanned_object
 			A.anchored = 0
 			A.being_used = 0
+			scanned_object = null
 
 /obj/machinery/artifact_analyser/Topic(href, href_list)
 	if(href_list["begin_scan"])
@@ -97,8 +98,8 @@
 					continue
 				if(O.invisibility)
 					continue
-				if(istype(scanned_object, /obj/machinery/artifact))
-					var/obj/machinery/artifact/A = scanned_object
+				if(istype(O, /obj/machinery/artifact))
+					var/obj/machinery/artifact/A = O
 					if(A.being_used)
 						artifact_in_use = 1
 					else
@@ -180,7 +181,7 @@
 				out += " have been detected "
 
 				//how the artifact does it's effect
-				switch(A.my_effect.effect_type)
+				switch(A.my_effect.effect)
 					if(1)
 						out += " emitting in an ambient energy field."
 					if(2)
@@ -223,7 +224,7 @@
 						out += "low level radiation"
 
 				//how the artifact does it's effect
-				switch(A.secondary_effect.effect_type)
+				switch(A.secondary_effect.effect)
 					if(1)
 						out += " emitting in an ambient energy field."
 					if(2)

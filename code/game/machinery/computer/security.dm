@@ -248,8 +248,7 @@ What a mess.*/
 					scan = null
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-						I.loc = src
+					if (istype(I, /obj/item/weapon/card/id) && usr.removeItem(I, src))
 						scan = I
 
 			if("Log Out")
@@ -286,7 +285,7 @@ What a mess.*/
 					return
 				Perp = new/list()
 				t1 = lowertext(t1)
-				var/list/components = text2list(t1, " ")
+				var/list/components = splittext(t1, " ")
 				if(components.len > 5)
 					return //Lets not let them search too greedily.
 				for(var/datum/data/record/R in data_core.general)
@@ -391,7 +390,7 @@ What a mess.*/
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
-				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
+				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD")] [worldtime2text()], [game_year]<BR>[t1]")
 
 			if ("Delete Record (ALL)")
 				if (active1)

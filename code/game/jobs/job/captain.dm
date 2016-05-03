@@ -19,6 +19,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_player_age = 14
 	economic_modifier = 20
 
+	minimum_character_age = 25
 	ideal_character_age = 70 // Old geezer captains ftw
 
 
@@ -27,7 +28,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(H), slot_l_ear)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/captain(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_cap(H), slot_back)
+			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/cap(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		var/obj/item/clothing/under/U = new /obj/item/clothing/under/rank/captain(H)
 		if(H.age>49)
@@ -67,6 +68,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	req_admin_notify = 1
 	minimal_player_age = 10
 	economic_modifier = 10
+
+	minimum_character_age = 25
 	ideal_character_age = 50
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
@@ -88,7 +91,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/hop(H), slot_l_ear)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
+			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/head_of_personnel(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)

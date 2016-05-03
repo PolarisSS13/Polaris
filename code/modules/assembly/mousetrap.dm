@@ -54,7 +54,7 @@
 		if(!armed)
 			user << "<span class='notice'>You arm [src].</span>"
 		else
-			if(((user.getBrainLoss() >= 60 || (CLUMSY in user.mutations)) && prob(50)))
+			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = "l_hand"
 				if(!user.hand)
 					which_hand = "r_hand"
@@ -70,7 +70,7 @@
 
 	attack_hand(mob/living/user as mob)
 		if(armed)
-			if(((user.getBrainLoss() >= 60 || CLUMSY in user.mutations)) && prob(50))
+			if((CLUMSY in user.mutations) && prob(50))
 				var/which_hand = "l_hand"
 				if(!user.hand)
 					which_hand = "r_hand"
@@ -94,7 +94,7 @@
 		..()
 
 
-	on_found(mob/finder as mob)
+	on_found(mob/living/finder as mob)
 		if(armed)
 			finder.visible_message("<span class='warning'>[finder] accidentally sets off [src], breaking their fingers.</span>", \
 								   "<span class='warning'>You accidentally trigger [src]!</span>")

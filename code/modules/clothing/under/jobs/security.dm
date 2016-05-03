@@ -16,6 +16,14 @@
 	worn_state = "warden"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/warden/skirt
+	desc = "Standard feminine fashion for a Warden. It is made of sturdier material than standard jumpskirts. It has the word \"Warden\" written on the shoulders."
+	name = "warden's jumpskirt"
+	icon_state = "wardenf"
+	item_state = "r_suit"
+	worn_state = "wardenf"
 
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
@@ -31,6 +39,14 @@
 	worn_state = "secred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/security/skirt
+	name = "security officer's jumpskirt"
+	desc = "Standard feminine fashion for Security Officers.  It's made of sturdier material than the standard jumpskirts."
+	icon_state = "secredf"
+	item_state = "r_suit"
+	worn_state = "secredf"
 
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
@@ -50,16 +66,19 @@
 	worn_state = "redshirt2"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/security/corp
 	icon_state = "sec_corporate"
 	//item_state = "sec_corporate"
 	worn_state = "sec_corporate"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/warden/corp
 	icon_state = "warden_corporate"
 	//item_state = "warden_corporate"
 	worn_state = "warden_corporate"
+	rolled_sleeves = -1
 
 /obj/item/clothing/under/tactical
 	name = "tactical jumpsuit"
@@ -69,6 +88,7 @@
 	worn_state = "swatunder"
 	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = -1
 
 /*
  * Detective
@@ -81,7 +101,9 @@
 	worn_state = "detective"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+	rolled_sleeves = 0
 
+/*
 /obj/item/clothing/under/det/verb/rollup()
 	set name = "Roll Suit Sleeves"
 	set category = "Object"
@@ -91,7 +113,7 @@
 	var/mob/living/carbon/human/H = loc
 	H.update_inv_w_uniform(1)
 	H << "<span class='notice'>You roll the sleeves of your shirt [unrolled ? "up" : "down"]</span>"
-
+*/
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"
 	worn_state = "detective2"
@@ -119,6 +141,7 @@
 	icon_state = "detective2_waistcoat"
 	worn_state = "detective2_waistcoat"
 	desc = "A serious-looking tan dress shirt paired with freshly-pressed black slacks, complete with a red striped tie and waistcoat."
+
 
 /obj/item/clothing/head/det
 	name = "fedora"
@@ -149,11 +172,20 @@
 	worn_state = "hosred"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.8
+	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/head_of_security/skirt
+	desc = "It's a fashionable jumpskirt worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
+	name = "head of security's jumpskirt"
+	icon_state = "hosredf"
+	item_state = "r_suit"
+	worn_state = "hosredf"
 
 /obj/item/clothing/under/rank/head_of_security/corp
 	icon_state = "hos_corporate"
 	//item_state = "hos_corporate"
 	worn_state = "hos_corporate"
+	rolled_sleeves = -1
 
 /obj/item/clothing/head/helmet/HoS
 	name = "Head of Security Hat"
@@ -186,15 +218,15 @@
 	item_state = "jensen"
 	worn_state = "jensen"
 	siemens_coefficient = 0.6
+	rolled_sleeves = -1
 
 /obj/item/clothing/suit/armor/hos/jensen
 	name = "armored trenchcoat"
 	desc = "A trenchcoat augmented with a special alloy for some protection and style."
-	icon_state = "jensencoat"
-	item_state = "jensencoat"
+	icon_state = "hostrench"
+	item_state = "hostrench"
 	flags_inv = 0
 	siemens_coefficient = 0.6
-	body_parts_covered = UPPER_TORSO|ARMS
 
 /*
  * Navy uniforms
@@ -206,6 +238,7 @@
 	icon_state = "officerblueclothes"
 	item_state = "ba_suit"
 	worn_state = "officerblueclothes"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/head_of_security/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
@@ -213,6 +246,7 @@
 	icon_state = "hosblueclothes"
 	item_state = "ba_suit"
 	worn_state = "hosblueclothes"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/warden/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Warden."
@@ -220,3 +254,4 @@
 	icon_state = "wardenblueclothes"
 	item_state = "ba_suit"
 	worn_state = "wardenblueclothes"
+	rolled_sleeves = 0

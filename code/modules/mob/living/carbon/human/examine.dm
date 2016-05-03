@@ -48,7 +48,7 @@
 			else if(gender == FEMALE)
 				use_gender = "a gynoid"
 
-			msg += ", <font color='#555555'>[use_gender]!</font></b>"
+			msg += ", <b><font color='#555555'>[use_gender]!</font></b>"
 
 		else if(species.name != "Human")
 			msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species.name]!</font></b>"
@@ -210,7 +210,7 @@
 		msg += "[T.He] [T.is] small halfling!\n"
 
 	var/distance = get_dist(usr,src)
-	if(istype(usr, /mob/dead/observer) || usr.stat == 2) // ghosts can see anything
+	if(istype(usr, /mob/observer/dead) || usr.stat == 2) // ghosts can see anything
 		distance = 1
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be asleep.</span>\n"
@@ -243,9 +243,6 @@
 
 	msg += "</span>"
 
-	if(getBrainLoss() >= 60)
-		msg += "[T.He] [T.has] a stupid expression on [T.his] face.\n"
-
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ("brain") || has_brain()) && stat != DEAD)
 		if(!key)
@@ -254,14 +251,12 @@
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
 
 	var/list/wound_flavor_text = list()
-	var/list/is_destroyed = list()
 	var/list/is_bleeding = list()
 
 	for(var/organ_tag in species.has_limbs)
 
 		var/list/organ_data = species.has_limbs[organ_tag]
 		var/organ_descriptor = organ_data["descriptor"]
-		is_destroyed["organ_descriptor"] = 1
 
 		var/obj/item/organ/external/E = organs_by_name[organ_tag]
 		if(!E)
@@ -269,13 +264,11 @@
 		else if(E.is_stump())
 			wound_flavor_text["[organ_descriptor]"] = "<span class='warning'><b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b></span>\n"
 		else
-			is_destroyed["organ_descriptor"] = 0
 			continue
 
 	for(var/obj/item/organ/external/temp in organs)
 		if(temp)
 			if(temp.status & ORGAN_DESTROYED)
-				is_destroyed["[temp.name]"] = 1
 				wound_flavor_text["[temp.name]"] = "<span class='warning'><b>[T.He] [T.is] missing [T.his] [temp.name].</b></span>\n"
 				continue
 			if(!is_synth && temp.status & ORGAN_ROBOT)

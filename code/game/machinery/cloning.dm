@@ -30,6 +30,7 @@
 	desc = "An electronically-lockable pod for growing organic tissue."
 	density = 1
 	anchored = 1
+	circuit = /obj/item/weapon/circuitboard/clonepod
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "pod_0"
 	req_access = list(access_genetics) //For premature unlocking.
@@ -44,10 +45,10 @@
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
 
-/obj/machinery/clonepod/New()
+/obj/machinery/clonepod/map/New()
 	..()
+	circuit = new circuit(src)
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/clonepod(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
@@ -87,7 +88,7 @@
 		if(ckey(clonemind.key) != R.ckey)
 			return 0
 	else
-		for(var/mob/dead/observer/G in player_list)
+		for(var/mob/observer/dead/G in player_list)
 			if(G.ckey == R.ckey)
 				if(G.can_reenter_corpse)
 					break
@@ -110,7 +111,6 @@
 
 	//Get the clone body ready
 	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
-	H.adjustBrainLoss(50) // Even if healed to full health, it will have some brain damage
 	H.Paralyse(4)
 
 	//Here let's calculate their health so the pod doesn't immediately eject them!!!
@@ -170,7 +170,7 @@
 			occupant.adjustCloneLoss(-2 * heal_rate)
 
 			//Premature clones may have brain damage.
-			occupant.adjustBrainLoss(-1 * heal_rate)
+			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
 
 			//So clones don't die of oxyloss in a running pod.
 			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)

@@ -100,7 +100,7 @@
 		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.drop_from_inventory(src)
+		user.removeItem(src)
 		user.put_in_hands(concealed_blade)
 		user.put_in_hands(src)
 		user.update_inv_l_hand(0)
@@ -112,8 +112,7 @@
 /obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/butterfly/W, var/mob/user)
 	if(!src.concealed_blade && istype(W))
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into \his [src]!</span>", "You sheathe \the [W] into \the [src].")
-		user.drop_from_inventory(W)
-		W.loc = src
+		user.removeItem(W, src)
 		src.concealed_blade = W
 		update_icon()
 	else
@@ -128,6 +127,13 @@
 		name = "cane shaft"
 		icon_state = "nullrod"
 		item_state = "foldcane"
+
+/obj/item/weapon/cane/whitecane
+	name = "white cane"
+	desc = "A cane used by the blind."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "whitecane"
+	item_state = "whitecane"
 
 /obj/item/weapon/disk
 	name = "disk"
@@ -174,7 +180,7 @@
 	w_class = 3.0
 	origin_tech = list(TECH_MATERIAL = 1)
 	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
-	sprite_sheets = list("Seromi" = 'icons/mob/species/seromi/handcuffs.dmi')
+	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/handcuffs.dmi')
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"
@@ -268,21 +274,6 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
-
-/obj/item/weapon/wire
-	desc = "This is just a simple piece of regular insulated wire."
-	name = "wire"
-	icon = 'icons/obj/power.dmi'
-	icon_state = "item_wire"
-	var/amount = 1.0
-	var/laying = 0.0
-	var/old_lay = null
-	matter = list(DEFAULT_WALL_MATERIAL = 40)
-	attack_verb = list("whipped", "lashed", "disciplined", "tickled")
-
-	suicide_act(mob/user)
-		viewers(user) << "<span class='warning'><b>[user] is strangling \himself with \the [src]! It looks like \he's trying to commit suicide.</b></span>"
-		return (OXYLOSS)
 
 /obj/item/weapon/module
 	icon = 'icons/obj/module.dmi'
@@ -599,3 +590,29 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "smes_coil"
 	origin_tech = list(TECH_MATERIAL = 19, TECH_ENGINEERING = 19, TECH_PHORON = 19, TECH_POWER = 19, TECH_BLUESPACE = 19, TECH_BIO = 19, TECH_COMBAT = 19, TECH_MAGNET = 19, TECH_DATA = 19, TECH_ILLEGAL = 19, TECH_ARCANE = 19)
+
+// Additional construction stock parts
+
+/obj/item/weapon/stock_parts/gear
+	name = "gear"
+	desc = "A gear used for construction."
+	icon = 'icons/obj/stock_parts.dmi'
+	icon_state = "gear"
+	origin_tech = list(TECH_ENGINEERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 50)
+
+/obj/item/weapon/stock_parts/motor
+	name = "motor"
+	desc = "A motor used for construction."
+	icon = 'icons/obj/stock_parts.dmi'
+	icon_state = "motor"
+	origin_tech = list(TECH_ENGINEERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 60, "glass" = 10)
+
+/obj/item/weapon/stock_parts/spring
+	name = "spring"
+	desc = "A spring used for construction."
+	icon = 'icons/obj/stock_parts.dmi'
+	icon_state = "spring"
+	origin_tech = list(TECH_ENGINEERING = 1)
+	matter = list(DEFAULT_WALL_MATERIAL = 40)

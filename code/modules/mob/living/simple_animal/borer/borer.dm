@@ -83,7 +83,7 @@
 					return
 
 				if(prob(5))
-					host.adjustBrainLoss(rand(1,2))
+					host.adjustBrainLoss(0.1)
 
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
@@ -173,7 +173,7 @@
 
 //Procs for grabbing players.
 /mob/living/simple_animal/borer/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/observer/dead/O in player_list)
 		if(jobban_isbanned(O, "Borer"))
 			continue
 		if(O.client)

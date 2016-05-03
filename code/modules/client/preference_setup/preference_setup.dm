@@ -23,9 +23,14 @@
 	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
+/datum/category_group/player_setup_category/loadout_preferences
+	name = "Loadout"
+	sort_order = 5
+	category_item_type = /datum/category_item/player_setup_item/loadout
+
 /datum/category_group/player_setup_category/global_preferences
 	name = "Global"
-	sort_order = 5
+	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
 /****************************
@@ -207,13 +212,13 @@
 /datum/category_item/player_setup_item/Topic(var/href,var/list/href_list)
 	if(..())
 		return 1
-	var/mob/user = usr
-	if(!user.client)
+	var/mob/pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
 		return 1
 
-	. = OnTopic(href, href_list, user)
+	. = OnTopic(href, href_list, usr)
 	if(. == TOPIC_REFRESH)
-		user.client.prefs.ShowChoices(user)
+		pref_mob.client.prefs.ShowChoices(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
 	return 1
@@ -222,5 +227,11 @@
 	return TOPIC_NOACTION
 
 /datum/category_item/player_setup_item/proc/preference_mob()
-	if(pref && pref.client && pref.client.mob)
+	if(!pref.client)
+		for(var/client/C)
+			if(C.ckey == pref.client_ckey)
+				pref.client = C
+				break
+
+	if(pref.client)
 		return pref.client.mob

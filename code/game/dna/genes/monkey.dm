@@ -22,7 +22,7 @@
 		for(var/obj/item/W in (H.contents-implants))
 			if (W==H.w_uniform) // will be teared
 				continue
-			H.drop_from_inventory(W)
+			H.removeItem(W, force = 1)
 		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
@@ -51,13 +51,6 @@
 		if (M.suiciding)
 			O.suiciding = M.suiciding
 			M.suiciding = null
-
-
-	for(var/datum/disease/D in M.viruses)
-		O.viruses += D
-		D.affected_mob = O
-		M.viruses -= D
-
 
 	for(var/obj/T in (M.contents-implants))
 		qdel(T)
@@ -97,7 +90,7 @@
 		W.loc = null
 	if(!connected)
 		for(var/obj/item/W in (Mo.contents-implants))
-			Mo.drop_from_inventory(W)
+			Mo.removeItem(W, force = 1)
 		M.transforming = 1
 		M.canmove = 0
 		M.icon = null
@@ -129,11 +122,6 @@
 		if (M.suiciding)
 			O.suiciding = M.suiciding
 			M.suiciding = null
-
-	for(var/datum/disease/D in M.viruses)
-		O.viruses += D
-		D.affected_mob = O
-		M.viruses -= D
 
 	//for(var/obj/T in M)
 	//	qdel(T)

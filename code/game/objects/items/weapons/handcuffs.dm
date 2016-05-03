@@ -17,7 +17,7 @@
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
-	sprite_sheets = list("Seromi" = 'icons/mob/species/seromi/handcuffs.dmi')
+	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/handcuffs.dmi')
 
 /obj/item/weapon/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
 
@@ -81,7 +81,7 @@
 	if(dispenser)
 		cuffs = new(get_turf(user))
 	else
-		user.drop_from_inventory(cuffs)
+		user.removeItem(cuffs)
 	cuffs.loc = target
 	target.handcuffed = cuffs
 	target.update_inv_handcuffed()

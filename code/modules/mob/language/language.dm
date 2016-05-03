@@ -114,7 +114,7 @@
 /mob/new_player/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
 	return
 
-/mob/dead/observer/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
+/mob/observer/dead/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
 	if(speaker.name == speaker_name || antagHUD)
 		src << "<i><span class='game say'>[language.name], <span class='name'>[speaker_name]</span> ([ghost_follow_link(speaker, src)]) [message]</span></i>"
 	else
@@ -158,7 +158,12 @@
 
 // Can we speak this language, as opposed to just understanding it?
 /mob/proc/can_speak(datum/language/speaking)
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
+//Prevents someone from speaking a null language.
+	if(speaking)
+		return (speaking.can_speak_special(src) && (universal_speak || (speaking && (speaking.flags & INNATE)) || speaking in src.languages))
+	else
+		log_debug("[src] attempted to speak a null language.")
+		return 0
 
 /mob/proc/get_language_prefix()
 	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)

@@ -11,7 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = 2.0
 	slot_flags = SLOT_ID | SLOT_BELT
-	sprite_sheets = list("Seromi" = 'icons/mob/species/seromi/id.dmi')
+	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/id.dmi')
 
 	//Main variables
 	var/pdachoice = 1
@@ -235,7 +235,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		ownrank = ownjob
 	name = newname + " (" + ownjob + ")"
 
-
 //AI verb and proc for sending PDA messages.
 /obj/item/device/pda/ai/verb/cmd_send_pdamesg()
 	set category = "AI IM"
@@ -252,7 +251,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/selected = plist[c]
 		create_message(usr, selected, 0)
 
-
 /obj/item/device/pda/ai/verb/cmd_toggle_pda_receiver()
 	set category = "AI IM"
 	set name = "Toggle Sender/Receiver"
@@ -262,7 +260,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 	toff = !toff
 	usr << "<span class='notice'>PDA sender/receiver toggled [(toff ? "Off" : "On")]!</span>"
-
 
 /obj/item/device/pda/ai/verb/cmd_toggle_pda_silent()
 	set category = "AI IM"
@@ -420,8 +417,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					cartdata["radio"] = 1
 				if(istype(cartridge.radio, /obj/item/radio/integrated/signal))
 					cartdata["radio"] = 2
-				if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
-					cartdata["radio"] = 3
+				//if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
+				//	cartdata["radio"] = 3
 
 		if(mode == 2)
 			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
@@ -465,7 +462,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				data["convo_job"] = sanitize(c["job"])
 				break
 	if(mode==41)
-		data_core.get_manifest_json()
+		data_core.get_manifest_list()
 
 
 	if(mode==3)
@@ -534,7 +531,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-	data["manifest"] = list("__json_cache" = ManifestJSON)
+	data["manifest"] = PDA_Manifest
 
 	nanoUI = data
 	// update the ui if it exists, returns null if no ui is passed/found
@@ -993,7 +990,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
-			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS)) // src.client is so that ghosts don't have to listen to mice
+			if(M.stat == DEAD && M.client && (M.is_preference_enabled(/datum/client_preference/ghost_ears))) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
 				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
@@ -1155,15 +1152,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
-				I.loc = src
+			if (istype(I, /obj/item/weapon/card/id) && user.removeItem(I, src))
 				id = I
 			return 1
 	else
 		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
+		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.removeItem(I, src))
 			var/obj/old_id = id
-			I.loc = src
 			id = I
 			user.put_in_hands(old_id)
 			return 1
@@ -1246,10 +1241,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 									capitalize(org.name), (org.brute_dam > 0) ? "warning" : "notice", org.brute_dam, (org.burn_dam > 0) ? "warning" : "notice", org.burn_dam),1)
 					else
 						user.show_message("<span class='notice'>    Limbs are OK.</span>",1)
-
-				for(var/datum/disease/D in C.viruses)
-					if(!D.hidden[SCANNER])
-						user.show_message("<span class='warning'><b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</span>")
 
 			if(2)
 				if (!istype(C:dna, /datum/dna))

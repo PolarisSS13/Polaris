@@ -7,7 +7,6 @@
 	health = 100
 	maxHealth = 100
 
-	bot_version = "2.5"
 	is_ranged = 1
 	preparing_arrest_sounds = new()
 
@@ -20,7 +19,7 @@
 	var/last_shot = 0
 
 /mob/living/bot/secbot/ed209/update_icons()
-	if(on && is_attacking)
+	if(on && busy)
 		icon_state = "ed209-c"
 	else
 		icon_state = "ed209[on]"
@@ -41,7 +40,7 @@
 		if(prob(50))
 			new /obj/item/clothing/head/helmet(Tsec)
 		else
-			new /obj/item/clothing/suit/armor/vest(Tsec)
+			new /obj/item/clothing/suit/storage/vest(Tsec)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -49,6 +48,9 @@
 
 	new /obj/effect/decal/cleanable/blood/oil(Tsec)
 	qdel(src)
+
+/mob/living/bot/secbot/ed209/handleRangedTarget()
+	RangedAttack(target)
 
 /mob/living/bot/secbot/ed209/RangedAttack(var/atom/A)
 	if(last_shot + shot_delay > world.time)
@@ -183,7 +185,5 @@
 				user << "<span class='notice'>You complete the ED-209.</span>"
 				var/turf/T = get_turf(src)
 				new /mob/living/bot/secbot/ed209(T,created_name,lasercolor)
-				user.drop_item()
 				qdel(W)
-				user.drop_from_inventory(src)
-				qdel(src)
+				user.deleteItem(src)

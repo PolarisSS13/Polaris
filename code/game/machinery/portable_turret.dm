@@ -502,7 +502,7 @@ var/list/turret_icons
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
-	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
+	if(isalien(L)) // Xenos are dangerous
 		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
@@ -746,7 +746,7 @@ var/list/turret_icons
 				if(isrobot(user))
 					return
 				var/obj/item/weapon/gun/energy/E = I //typecasts the item to an energy gun
-				if(!user.unEquip(I))
+				if(!user.removeItem(I))
 					user << "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>"
 					return
 				installation = I.type //installation becomes I.type
@@ -767,7 +767,7 @@ var/list/turret_icons
 		if(4)
 			if(isprox(I))
 				build_step = 5
-				if(!user.unEquip(I))
+				if(!user.removeItem(I))
 					user << "<span class='notice'>\the [I] is stuck to your hand, you cannot put it in \the [src]</span>"
 					return
 				user << "<span class='notice'>You add the prox sensor to the turret.</span>"

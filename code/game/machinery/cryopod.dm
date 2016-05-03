@@ -219,12 +219,13 @@
 	var/disallow_occupant_types = list()
 
 	var/mob/occupant = null       // Person waiting to be despawned.
-	var/time_till_despawn = 18000 // 30 minutes-ish safe period before being despawned.
+	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
 	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
 
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
+	var/applies_stasis = 1
 
 	// These items are preserved when the process() despawn proc occurs.
 	var/list/preserve_items = list(
@@ -254,6 +255,7 @@
 	on_enter_occupant_message = "The storage unit broadcasts a sleep signal to you. Your systems start to shut down, and you enter low-power mode."
 	allow_occupant_types = list(/mob/living/silicon/robot)
 	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
+	applies_stasis = 0
 
 /obj/machinery/cryopod/robot/door
 	//This inherits from the robot cryo, so synths can be properly cryo'd.  If a non-synth enters and is cryo'd, ..() is called and it'll still work.
@@ -384,8 +386,7 @@
 /obj/machinery/cryopod/proc/despawn_occupant()
 	//Drop all items into the pod.
 	for(var/obj/item/W in occupant)
-		occupant.drop_from_inventory(W)
-		W.forceMove(src)
+		occupant.removeItem(W, src, force = 1)
 
 		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
@@ -485,32 +486,33 @@
 
 	if(istype(G, /obj/item/weapon/grab))
 
+		var/obj/item/weapon/grab/grab = G
 		if(occupant)
 			user << "<span class='notice'>\The [src] is in use.</span>"
 			return
 
-		if(!ismob(G:affecting))
+		if(!ismob(grab.affecting))
 			return
 
-		if(!check_occupant_allowed(G:affecting))
+		if(!check_occupant_allowed(grab.affecting))
 			return
 
 		var/willing = null //We don't want to allow people to be forced into despawning.
-		var/mob/M = G:affecting
+		var/mob/M = grab.affecting
 
 		if(M.client)
 			if(alert(M,"Would you like to enter long-term storage?",,"Yes","No") == "Yes")
-				if(!M || !G || !G:affecting) return
+				if(!M || !grab || !grab:affecting) return
 				willing = 1
 		else
 			willing = 1
 
 		if(willing)
 
-			visible_message("[user] starts putting [G:affecting:name] into \the [src].", 3)
+			visible_message("\The [user] starts putting [grab:affecting:name] into \the [src].", 3)
 
 			if(do_after(user, 20))
-				if(!M || !G || !G:affecting) return
+				if(!M || !grab || !grab:affecting) return
 
 				M.forceMove(src)
 
@@ -524,6 +526,9 @@
 			M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 			set_occupant(M)
 			time_entered = world.time
+			if(ishuman(M) && applies_stasis)
+				var/mob/living/carbon/human/H = M
+				H.in_stasis = 1
 
 			// Book keeping!
 			var/turf/location = get_turf(src)
@@ -589,6 +594,9 @@
 		usr.client.eye = src
 		usr.forceMove(src)
 		set_occupant(usr)
+		if(ishuman(usr) && applies_stasis)
+			var/mob/living/carbon/human/H = occupant
+			H.in_stasis = 1
 
 		icon_state = occupied_icon_state
 
@@ -622,6 +630,9 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 
 	occupant.forceMove(get_turf(src))
+	if(ishuman(occupant) && applies_stasis)
+		var/mob/living/carbon/human/H = occupant
+		H.in_stasis = 0
 	set_occupant(null)
 
 	icon_state = base_icon_state

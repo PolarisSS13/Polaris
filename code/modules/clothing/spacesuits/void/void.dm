@@ -15,12 +15,14 @@
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
+		"Skrell" = 'icons/mob/species/skrell/helmet.dmi'
+		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(
 		"Unathi" = 'icons/obj/clothing/species/unathi/hats.dmi',
 		"Tajara" = 'icons/obj/clothing/species/tajaran/hats.dmi',
 		"Skrell" = 'icons/obj/clothing/species/skrell/hats.dmi',
+		"Teshari" = 'icons/obj/clothing/species/seromi/hats.dmi'
 		)
 
 	light_overlay = "helmet_light"
@@ -40,12 +42,14 @@
 	sprite_sheets_refit = list(
 		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
 		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
-		"Skrell" = 'icons/mob/species/skrell/suit.dmi',
+		"Skrell" = 'icons/mob/species/skrell/suit.dmi'
+		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(
 		"Unathi" = 'icons/obj/clothing/species/unathi/suits.dmi',
 		"Tajara" = 'icons/obj/clothing/species/tajaran/suits.dmi',
 		"Skrell" = 'icons/obj/clothing/species/skrell/suits.dmi',
+		"Teshari" = 'icons/obj/clothing/species/seromi/suits.dmi'
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
@@ -57,11 +61,12 @@
 	var/obj/item/clothing/shoes/magboots/boots = null // Deployable boots, if any.
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
+	var/obj/item/device/suit_cooling_unit/cooler = null// Cooling unit, for FBPs.  Cannot be installed alongside a tank.
 
 /obj/item/clothing/suit/space/void/examine(user)
 	..(user)
 	var/list/part_list = new
-	for(var/obj/item/I in list(helmet,boots,tank))
+	for(var/obj/item/I in list(helmet,boots,tank,cooler))
 		part_list += "\a [I]"
 	user << "\The [src] has [english_list(part_list)] installed."
 	if(tank && in_range(src,user))
@@ -102,6 +107,13 @@
 			M << "The valve on your suit's installed tank safely engages."
 			tank.canremove = 0
 
+	if(cooler)
+		if(H.s_store) //Ditto
+			M << "Alarmingly, the cooling unit installed into your suit fails to deploy."
+		else if (H.equip_to_slot_if_possible(cooler, slot_s_store))
+			M << "Your suit's cooling unit deploys."
+			cooler.canremove = 0
+
 
 /obj/item/clothing/suit/space/void/dropped()
 	..()
@@ -113,20 +125,28 @@
 		H = helmet.loc
 		if(istype(H))
 			if(helmet && H.head == helmet)
-				H.drop_from_inventory(helmet)
-				helmet.forceMove(src)
+				H.removeItem(helmet, src)
 
 	if(boots)
 		boots.canremove = 1
 		H = boots.loc
 		if(istype(H))
 			if(boots && H.shoes == boots)
-				H.drop_from_inventory(boots)
-				boots.forceMove(src)
+				H.removeItem(boots, src)
 
 	if(tank)
 		tank.canremove = 1
-		tank.forceMove(src)
+		H = tank.loc
+		if(istype(H))
+			if(tank && H.s_store == tank)
+				H.removeItem(tank, src)
+
+	if(cooler)
+		cooler.canremove = 1
+		H = cooler.loc
+		if(istype(H))
+			if(cooler && H.s_store == cooler)
+				H.removeItem(cooler, src)
 
 /obj/item/clothing/suit/space/void/verb/toggle_helmet()
 
@@ -149,8 +169,7 @@
 	if(H.head == helmet)
 		H << "<span class='notice'>You retract your suit helmet.</span>"
 		helmet.canremove = 1
-		H.drop_from_inventory(helmet)
-		helmet.forceMove(src)
+		H.removeItem(helmet, src)
 	else
 		if(H.head)
 			H << "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>"
@@ -163,14 +182,14 @@
 
 /obj/item/clothing/suit/space/void/verb/eject_tank()
 
-	set name = "Eject Voidsuit Tank"
+	set name = "Eject Voidsuit Tank/Cooler"
 	set category = "Object"
 	set src in usr
 
 	if(!istype(src.loc,/mob/living)) return
 
-	if(!tank)
-		usr << "There is no tank inserted."
+	if(!tank && !cooler)
+		usr << "There is no tank or cooling unit inserted."
 		return
 
 	var/mob/living/carbon/human/H = usr
@@ -179,10 +198,16 @@
 	if(H.stat) return
 	if(H.wear_suit != src) return
 
-	H << "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>"
-	tank.canremove = 1
-	H.drop_from_inventory(tank)
-	src.tank = null
+	var/obj/item/removing = null
+	if(tank)
+		removing = tank
+		tank = null
+	else
+		removing = cooler
+		cooler = null
+	H << "<span class='info'>You press the emergency release, ejecting \the [removing] from your suit.</span>"
+	removing.canremove = 1
+	H.removeItem(removing)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -194,13 +219,17 @@
 
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(helmet || boots || tank)
-			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
+			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank,cooler)
 			if(!choice) return
 
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				user << "You pop \the [tank] out of \the [src]'s storage compartment."
 				tank.forceMove(get_turf(src))
 				src.tank = null
+			else if(choice == cooler)
+				user << "You pop \the [cooler] out of \the [src]'s storage compartment."
+				cooler.forceMove(get_turf(src))
+				src.cooler = null
 			else if(choice == helmet)
 				user << "You detatch \the [helmet] from \the [src]'s helmet mount."
 				helmet.forceMove(get_turf(src))
@@ -233,6 +262,8 @@
 	else if(istype(W,/obj/item/weapon/tank))
 		if(tank)
 			user << "\The [src] already has an airtank installed."
+		else if(cooler)
+			user << "\The [src]'s suit cooling unit is in the way.  Remove it first."
 		else if(istype(W,/obj/item/weapon/tank/phoron))
 			user << "\The [W] cannot be inserted into \the [src]'s storage compartment."
 		else
@@ -240,6 +271,17 @@
 			user.drop_item()
 			W.forceMove(src)
 			tank = W
+		return
+	else if(istype(W,/obj/item/device/suit_cooling_unit))
+		if(cooler)
+			user << "\The [src] already has a suit cooling unit installed."
+		else if(tank)
+			user << "\The [src]'s airtank is in the way.  Remove it first."
+		else
+			user << "You insert \the [W] into \the [src]'s storage compartment."
+			user.drop_item()
+			W.forceMove(src)
+			cooler = W
 		return
 
 	..()

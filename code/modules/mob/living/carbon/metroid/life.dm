@@ -36,11 +36,13 @@
 	bodytemperature += adjust_body_temperature(bodytemperature, loc_temp, 1)
 
 	if(bodytemperature < (T0C + 5)) // start calculating temperature damage etc
-		if(bodytemperature <= (T0C - 50)) // hurt temperature
-			if(bodytemperature <= 50) // sqrting negative numbers is bad
+		if(bodytemperature <= hurt_temperature)
+			if(bodytemperature <= die_temperature)
 				adjustToxLoss(200)
 			else
-				adjustToxLoss(round(sqrt(bodytemperature)) * 2)
+				// could be more fancy, but doesn't worth the complexity: when the slimes goes into a cold area
+				// the damage is mostly determined by how fast its body cools
+				adjustToxLoss(30)
 
 	updatehealth()
 
@@ -104,14 +106,11 @@
 	else
 		if (src.paralysis || src.stunned || src.weakened || (status_flags && FAKEDEATH)) //Stunned etc.
 			if (src.stunned > 0)
-				AdjustStunned(-1)
 				src.stat = 0
 			if (src.weakened > 0)
-				AdjustWeakened(-1)
 				src.lying = 0
 				src.stat = 0
 			if (src.paralysis > 0)
-				AdjustParalysis(-1)
 				src.blinded = 0
 				src.lying = 0
 				src.stat = 0

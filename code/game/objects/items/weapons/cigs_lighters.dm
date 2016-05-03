@@ -156,7 +156,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/M = loc
 			if (!nomessage)
 				M << "<span class='notice'>Your [name] goes out.</span>"
-			M.remove_from_mob(src) //un-equip it so the overlays can update
+			M.removeItem(src) //un-equip it so the overlays can update
 			M.update_inv_wear_mask(0)
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
@@ -194,6 +194,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		text = replacetext(text, "NAME", "[name]")
 		text = replacetext(text, "FLAME", "[W.name]")
 		light(text)
+
+/obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)
+	if(istype(M) && M.on_fire)
+		user.do_attack_animation(M)
+		light("<span class='notice'>[user] coldly lights the [name] with the burning body of [M].</span>")
+		return 1
+	else
+		return ..()
 
 /obj/item/clothing/mask/smokable/cigarette
 	name = "cigarette"
@@ -437,39 +445,36 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter/attack_self(mob/living/user)
 	if(!base_state)
 		base_state = icon_state
-	if(user.r_hand == src || user.l_hand == src)
-		if(!lit)
-			lit = 1
-			icon_state = "[base_state]on"
-			item_state = "[base_state]on"
-			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
-				user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
-			else
-				if(prob(95))
-					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
-				else
-					user << "<span class='warning'>You burn yourself while lighting the lighter.</span>"
-					if (user.l_hand == src)
-						user.apply_damage(2,BURN,"l_hand")
-					else
-						user.apply_damage(2,BURN,"r_hand")
-					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
-
-			set_light(2)
-			processing_objects.Add(src)
+	if(!lit)
+		lit = 1
+		icon_state = "[base_state]on"
+		item_state = "[base_state]on"
+		if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
+			user.visible_message("<span class='rose'>Without even breaking stride, [user] flips open and lights [src] in one smooth movement.</span>")
 		else
-			lit = 0
-			icon_state = "[base_state]"
-			item_state = "[base_state]"
-			if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
-				user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
+			if(prob(95))
+				user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
 			else
-				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
+				user << "<span class='warning'>You burn yourself while lighting the lighter.</span>"
+				if (user.get_left_hand() == src)
+					user.apply_damage(2,BURN,"l_hand")
+				else
+					user.apply_damage(2,BURN,"r_hand")
+				user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
-			set_light(0)
-			processing_objects.Remove(src)
+		set_light(2)
+		processing_objects.Add(src)
 	else
-		return ..()
+		lit = 0
+		icon_state = "[base_state]"
+		item_state = "[base_state]"
+		if(istype(src, /obj/item/weapon/flame/lighter/zippo) )
+			user.visible_message("<span class='rose'>You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing.</span>")
+		else
+			user.visible_message("<span class='notice'>[user] quietly shuts off the [src].</span>")
+
+		set_light(0)
+		processing_objects.Remove(src)
 	return
 
 

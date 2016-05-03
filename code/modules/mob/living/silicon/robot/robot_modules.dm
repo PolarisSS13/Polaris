@@ -20,6 +20,7 @@ var/global/list/robot_modules = list(
 	w_class = 100.0
 	item_state = "electronic"
 	flags = CONDUCT
+	var/hide_on_manifest = 0
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(LANGUAGE_SOL_COMMON = 1, LANGUAGE_TRADEBAND = 1, LANGUAGE_UNATHI = 0, LANGUAGE_SIIK_TAJR = 0, LANGUAGE_SKRELLIAN = 0, LANGUAGE_GUTTER = 0)
@@ -314,6 +315,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.modules += new /obj/item/device/floor_painter(src)
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal()
 	var/datum/matter_synth/plasteel = new /datum/matter_synth/plasteel()
@@ -566,7 +568,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner/New()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/borg/sight/meson(src)
+	src.modules += new /obj/item/borg/sight/material(src)
 	src.modules += new /obj/item/weapon/wrench(src)
 	src.modules += new /obj/item/weapon/screwdriver(src)
 	src.modules += new /obj/item/weapon/storage/bag/ore(src)
@@ -616,6 +618,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
+	hide_on_manifest = 1
 	languages = list(
 					LANGUAGE_SOL_COMMON = 1,
 					LANGUAGE_TRADEBAND = 1,
@@ -650,6 +653,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security/combat
 	name = "combat robot module"
+	hide_on_manifest = 1
 	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/combat/New()
@@ -664,6 +668,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
+	hide_on_manifest = 1
 	no_slip = 1
 	networks = list(NETWORK_ENGINEERING)
 
@@ -677,6 +682,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/weapon/gripper(src)
 	src.modules += new /obj/item/weapon/soap(src)
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
 	src.modules += new /obj/item/device/floor_painter(src)
@@ -745,6 +751,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
+	hide_on_manifest = 1
 	channels = list("Engineering" = 1)
 	languages = list()
 

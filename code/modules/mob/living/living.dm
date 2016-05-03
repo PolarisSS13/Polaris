@@ -125,10 +125,10 @@ default behaviour is:
 			..()
 			if (!istype(AM, /atom/movable) || AM.anchored)
 				if(confused && prob(50) && m_intent=="run")
-					Paralyse(1)
+					Weaken(2)
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
-					src.take_organ_damage(5)
+					src.apply_damage(5, BRUTE)
 				return
 			if (!now_pushing)
 				now_pushing = 1
@@ -149,9 +149,9 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < 0 && src.health > -95.0))
-		src.adjustOxyLoss(src.health + 200)
-		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
+	if ((src.health < 0 && src.health > (5-src.maxHealth))) // Health below Zero but above 5-away-from-death, as before, but variable
+		src.adjustOxyLoss(src.health + src.maxHealth * 2) // Deal 2x health in OxyLoss damage, as before but variable.
+		src.health = src.maxHealth - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
 		src << "\blue You have given up life and succumbed to death."
 
 
@@ -393,11 +393,11 @@ default behaviour is:
 		var/mob/living/carbon/C = src
 
 		if (C.handcuffed && !initial(C.handcuffed))
-			C.drop_from_inventory(C.handcuffed)
+			C.removeItem(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
 
 		if (C.legcuffed && !initial(C.legcuffed))
-			C.drop_from_inventory(C.legcuffed)
+			C.removeItem(C.legcuffed)
 		C.legcuffed = initial(C.legcuffed)
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
@@ -510,52 +510,38 @@ default behaviour is:
 			if ((get_dist(src, pulling) > 1 || diag))
 				if (isliving(pulling))
 					var/mob/living/M = pulling
-					var/ok = 1
-					if (locate(/obj/item/weapon/grab, M.grabbed_by))
-						if (prob(75))
-							var/obj/item/weapon/grab/G = pick(M.grabbed_by)
-							if (istype(G, /obj/item/weapon/grab))
-								for(var/mob/O in viewers(M, null))
-									O.show_message(text("\red [] has been pulled from []'s grip by []", G.affecting, G.assailant, src), 1)
-								//G = null
-								qdel(G)
-						else
-							ok = 0
-						if (locate(/obj/item/weapon/grab, M.grabbed_by.len))
-							ok = 0
-					if (ok)
-						var/atom/movable/t = M.pulling
-						M.stop_pulling()
+					var/atom/movable/t = M.pulling
+					M.stop_pulling()
 
-						if(!istype(M.loc, /turf/space))
-							var/area/A = get_area(M)
-							if(A.has_gravity)
-								//this is the gay blood on floor shit -- Added back -- Skie
-								if (M.lying && (prob(M.getBruteLoss() / 6)))
+					if(!istype(M.loc, /turf/space))
+						var/area/A = get_area(M)
+						if(A.has_gravity)
+							//this is the gay blood on floor shit -- Added back -- Skie
+							if (M.lying && (prob(M.getBruteLoss() / 6)))
+								var/turf/location = M.loc
+								if (istype(location, /turf/simulated))
+									location.add_blood(M)
+							//pull damage with injured people
+								if(prob(25))
+									M.adjustBruteLoss(1)
+									visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
+							if(M.pull_damage())
+								if(prob(25))
+									M.adjustBruteLoss(2)
+									visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
 									var/turf/location = M.loc
 									if (istype(location, /turf/simulated))
 										location.add_blood(M)
-								//pull damage with injured people
-									if(prob(25))
-										M.adjustBruteLoss(1)
-										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state worsens": "wounds open more"] from being dragged!</span>")
-								if(M.pull_damage())
-									if(prob(25))
-										M.adjustBruteLoss(2)
-										visible_message("<span class='danger'>\The [M]'s [M.isSynthetic() ? "state" : "wounds"] worsen terribly from being dragged!</span>")
-										var/turf/location = M.loc
-										if (istype(location, /turf/simulated))
-											location.add_blood(M)
-											if(ishuman(M))
-												var/mob/living/carbon/human/H = M
-												var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
-												if(blood_volume > 0)
-													H.vessel.remove_reagent("blood", 1)
+										if(ishuman(M))
+											var/mob/living/carbon/human/H = M
+											var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+											if(blood_volume > 0)
+												H.vessel.remove_reagent("blood", 1)
 
 
-						step(pulling, get_dir(pulling.loc, T))
-						if(t)
-							M.start_pulling(t)
+					step(pulling, get_dir(pulling.loc, T))
+					if(t)
+						M.start_pulling(t)
 				else
 					if (pulling)
 						if (istype(pulling, /obj/structure/window))
@@ -580,7 +566,7 @@ default behaviour is:
 	set name = "Resist"
 	set category = "IC"
 
-	if(!(stat || next_move > world.time))
+	if(!stat && canClick())
 		setClickCooldown(20)
 		resist_grab()
 		if(!weakened)
@@ -595,11 +581,13 @@ default behaviour is:
 	//unbuckling yourself
 	if(buckled)
 		spawn() escape_buckle()
+		return TRUE
 
 	//Breaking out of a locker?
 	if( src.loc && (istype(src.loc, /obj/structure/closet)) )
 		var/obj/structure/closet/C = loc
 		spawn() C.mob_breakout(src)
+		return TRUE
 
 /mob/living/proc/escape_inventory(obj/item/weapon/holder/H)
 	if(H != src.loc) return
@@ -607,7 +595,7 @@ default behaviour is:
 	var/mob/M = H.loc //Get our mob holder (if any).
 
 	if(istype(M))
-		M.drop_from_inventory(H)
+		M.removeItem(H)
 		M << "<span class='warning'>\The [H] wriggles out of your grip!</span>"
 		src << "<span class='warning'>You wriggle out of \the [M]'s grip!</span>"
 
@@ -662,7 +650,7 @@ default behaviour is:
 	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return isnull(get_inventory_slot(carried_item))
+	return (get_inventory_slot(carried_item) == 0)
 
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item == held_item)
@@ -730,10 +718,12 @@ default behaviour is:
 		return
 
 	if(!ignore_items)
+		var/list/badItems = list()
 		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
-			if(is_allowed_vent_crawl_item(carried_item))
-				continue
-			src << "<span class='warning'>You can't be carrying items or have items equipped when vent crawling!</span>"
+			if(!is_allowed_vent_crawl_item(carried_item))
+				badItems += carried_item.name
+		if(badItems.len)
+			src << "<span class='warning'>Your [english_list(badItems)] prevent[badItems.len == 1 ? "s" : ""] you from ventcrawling.</span>"
 			return
 
 	if(isslime(src))
@@ -781,10 +771,10 @@ default behaviour is:
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
 
-/mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
-	if(W in internal_organs)
-		return
-	..()
+/mob/living/carbon/removeItem(var/obj/item/I, var/atom/T = loc, var/force = 0)
+	if(I in src.internal_organs)
+		return 0
+	return ..()
 
 /mob/living/touch_map_edge()
 
@@ -864,4 +854,64 @@ default behaviour is:
 
 		sleep(350)
 		lastpuke = 0
+
+/mob/living/update_canmove()
+	if(!resting && cannot_stand() && can_stand_overridden())
+		lying = 0
+		canmove = 1
+	else
+		if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/V = buckled
+			if(cannot_stand())
+				lying = 0
+				canmove = 1
+				pixel_y = V.mob_offset_y - 5
+			else
+				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				canmove = 1
+				pixel_y = V.mob_offset_y
+		else if(buckled)
+			anchored = 1
+			canmove = 0
+			if(istype(buckled))
+				if(buckled.buckle_lying != -1)
+					lying = buckled.buckle_lying
+				if(buckled.buckle_movable)
+					anchored = 0
+					canmove = 1
+
+		else if(cannot_stand())
+			lying = 1
+			canmove = 0
+		else if(stunned)
+			canmove = 0
+		else if(captured)
+			anchored = 1
+			canmove = 0
+			lying = 0
+		else
+			lying = 0
+			canmove = 1
+
+	if(lying)
+		density = 0
+		if(l_hand) removeItem(l_hand)
+		if(r_hand) removeItem(r_hand)
+	else
+		density = initial(density)
+
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
+
+	//Temporarily moved here from the various life() procs
+	//I'm fixing stuff incrementally so this will likely find a better home.
+	//It just makes sense for now. ~Carn
+	if( update_icon )	//forces a full overlay update
+		update_icon = 0
+		regenerate_icons()
+	else if( lying != lying_prev )
+		update_icons()
+	return canmove
 

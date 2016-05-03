@@ -21,7 +21,7 @@
 	name = "mounted grenade launcher"
 	desc = "A shoulder-mounted micro-explosive dispenser."
 	selectable = 1
-	icon_state = "grenade"
+	icon_state = "grenadelauncher"
 
 	interface_name = "integrated grenade launcher"
 	interface_desc = "Discharges loaded grenades against the wearer's location."
@@ -55,8 +55,7 @@
 		return 0
 
 	user << "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>"
-	user.drop_from_inventory(input_device)
-	qdel(input_device)
+	user.deleteItem(input_device)
 	accepted_item.charges++
 	return 1
 
@@ -117,7 +116,7 @@
 
 	if(!target)
 		gun.attack_self(holder.wearer)
-		return 1
+		return
 
 	gun.Fire(target,holder.wearer)
 	return 1
@@ -204,8 +203,7 @@
 		return
 
 	for(var/obj/item/weapon/melee/energy/blade/blade in M.contents)
-		M.drop_from_inventory(blade)
-		qdel(blade)
+		M.deleteItem(blade)
 
 /obj/item/rig_module/fabricator
 

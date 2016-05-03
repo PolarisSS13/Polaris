@@ -5,11 +5,11 @@
 	self-explanatory but the various object types may have their own documentation. ~Z
 
 	PATHS THAT USE DATUMS
-		/turf/simulated/wall
-		/obj/item/weapon/material
-		/obj/structure/barricade
-		/obj/item/stack/material
-		/obj/structure/table
+		turf/simulated/wall
+		obj/item/weapon/material
+		obj/structure/barricade
+		obj/item/stack/material
+		obj/structure/table
 
 	VALID ICONS
 		WALLS
@@ -128,7 +128,7 @@ var/list/name_to_material
 	S.add_fingerprint(user)
 	S.add_to_stacks(user)
 
-/material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
+/material/proc/build_wired_product(var/mob/living/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
 		user << "<span class='warning'>You cannot make anything out of \the [target_stack]</span>"
 		return
@@ -140,8 +140,7 @@ var/list/name_to_material
 	target_stack.use(1)
 	user << "<span class='notice'>You attach wire to the [name].</span>"
 	var/obj/item/product = new wire_product(get_turf(user))
-	if(!(user.l_hand && user.r_hand))
-		user.put_in_hands(product)
+	user.put_in_hands(product)
 
 // Make sure we have a display name and shard icon even if they aren't explicitly set.
 /material/New()
@@ -356,7 +355,7 @@ var/list/name_to_material
 	hardness = 80
 	weight = 23
 	stack_origin_tech = list(TECH_MATERIAL = 2)
-	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT, "platinum" = SHEET_MATERIAL_AMOUNT) //todo
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -467,7 +466,7 @@ var/list/name_to_material
 	hardness = 40
 	weight = 30
 	stack_origin_tech = "materials=2"
-	composite_material = list(DEFAULT_WALL_MATERIAL = 1875,"glass" = 3750)
+	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 2, "glass" = SHEET_MATERIAL_AMOUNT)
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 5)
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
@@ -556,8 +555,8 @@ var/list/name_to_material
 	sheet_plural_name = "ingots"
 
 // Adminspawn only, do not let anyone get this.
-/material/voxalloy
-	name = "voxalloy"
+/material/alienalloy
+	name = "alienalloy"
 	display_name = "durable alloy"
 	stack_type = null
 	icon_colour = "#6C7364"
@@ -571,7 +570,7 @@ var/list/name_to_material
 	name = "wood"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
-	integrity = 25
+	integrity = 50
 	icon_base = "solid"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
@@ -639,21 +638,6 @@ var/list/name_to_material
 
 /material/cult/reinf/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/remains/human(target)
-
-/material/resin
-	name = "resin"
-	icon_colour = "#E85DD8"
-	dooropen_noise = 'sound/effects/attackblob.ogg'
-	door_icon_base = "resin"
-	melting_point = T0C+300
-	sheet_singular_name = "blob"
-	sheet_plural_name = "blobs"
-
-/material/resin/can_open_material_door(var/mob/living/user)
-	var/mob/living/carbon/M = user
-	if(istype(M) && locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
-		return 1
-	return 0
 
 //TODO PLACEHOLDERS:
 /material/leather

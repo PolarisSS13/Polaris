@@ -58,7 +58,7 @@
 			return
 
 		// Antagonistic cyborgs? Left here for downstream
-		if(target.mind && target.mind.special_role && target.emagged)
+		if(target.mind && (target.mind.special_role || target.emagged))
 			target << "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered."
 			target.ResetSecurityCodes()
 		else
@@ -91,15 +91,24 @@
 		if(!target || !istype(target))
 			return
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] [target.canmove ? "locked down" : "released"] [target.name]!</span>")
-		log_game("[key_name(usr)] [target.canmove ? "locked down" : "released"] [target.name]!")
-		target.canmove = !target.canmove
-		if (target.lockcharge)
+		var/istraitor = target.mind.special_role
+		if (istraitor)
 			target.lockcharge = !target.lockcharge
-			target << "Your lockdown has been lifted!"
+			if (target.lockcharge)
+				target << "Someone tried to lock you down!"
+			else
+				target << "Someone tried to lift your lockdown!"
 		else
-			target.lockcharge = !target.lockcharge
-			target << "You have been locked down!"
+			target.canmove = !target.canmove
+			target.lockcharge = !target.canmove //when canmove is 1, lockcharge should be 0
+			target.lockdown = !target.canmove
+			if (target.lockcharge)
+				target << "You have been locked down!"
+			else
+				target << "Your lockdown has been lifted!"
+		message_admins("<span class='notice'>[key_name_admin(usr)] [istraitor ? "failed (target is traitor) " : ""][target.lockcharge ? "lockdown" : "release"] on [target.name]!</span>")
+		log_game("[key_name(usr)] attempted to [target.lockcharge ? "lockdown" : "release"] [target.name] on the robotics console!")
+
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
 	else if (href_list["hack"])
@@ -107,8 +116,8 @@
 		if(!target || !istype(target))
 			return
 
-		// Antag AI checks
-		if(!istype(user, /mob/living/silicon/ai) || !(user.mind.special_role && user.mind.original == user))
+		// Antag synthetic checks
+		if(!istype(user, /mob/living/silicon) || !(user.mind.special_role && user.mind.original == user))
 			user << "Access Denied"
 			return
 
@@ -123,7 +132,7 @@
 		if(!target || !istype(target))
 			return
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] emagged [target.name] using robotic console!</span>")
+		message_admins("<span class='notice'>[key_name_admin(usr)] emagged [target.name] using the robotic console!</span>")
 		log_game("[key_name(usr)] emagged [target.name] using robotic console!")
 		target.emagged = 1
 		target << "<span class='notice'>Failsafe protocols overriden. New tools available.</span>"
@@ -178,7 +187,7 @@
 		robot["name"] = R.name
 		if(R.stat)
 			robot["status"] = "Not Responding"
-		else if (!R.canmove)
+		else if (R.lockcharge)
 			robot["status"] = "Lockdown"
 		else
 			robot["status"] = "Operational"
@@ -194,8 +203,12 @@
 		robot["module"] = R.module ? R.module.name : "None"
 		robot["master_ai"] = R.connected_ai ? R.connected_ai.name : "None"
 		robot["hackable"] = 0
+		//Antag synths should be able to hack themselves and see their hacked status.
+		if(operator && isrobot(operator) && (operator.mind.special_role && operator.mind.original == operator) && (operator == R))
+			robot["hacked"] = R.emagged ? 1 : 0
+			robot["hackable"] = R.emagged? 0 : 1
 		// Antag AIs know whether linked cyborgs are hacked or not.
-		if(operator && istype(operator, /mob/living/silicon/ai) && (R.connected_ai == operator) && (operator.mind.special_role && operator.mind.original == operator))
+		if(operator && isAI(operator) && (R.connected_ai == operator) && (operator.mind.special_role && operator.mind.original == operator))
 			robot["hacked"] = R.emagged ? 1 : 0
 			robot["hackable"] = R.emagged? 0 : 1
 		robots.Add(list(robot))

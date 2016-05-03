@@ -135,7 +135,7 @@
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) == dir)
+	if(get_dir(loc, target) & dir)
 		return !density
 	else
 		return 1
@@ -187,8 +187,8 @@
 
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		user.do_attack_animation(src)
-		usr.visible_message("<span class='danger'>[usr.name] bangs against the [src.name]!</span>",
-							"<span class='danger'>You bang against the [src.name]!</span>",
+		usr.visible_message("<span class='danger'>\The [usr] bangs against \the [src]!</span>",
+							"<span class='danger'>You bang against \the [src]!</span>",
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
@@ -246,11 +246,13 @@
 		else if(reinf && state == 0)
 			anchored = !anchored
 			update_nearby_icons()
+			update_verbs()
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>")
 		else if(!reinf)
 			anchored = !anchored
 			update_nearby_icons()
+			update_verbs()
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>")
 	else if(istype(W, /obj/item/weapon/crowbar) && reinf && state <= 1)
@@ -261,6 +263,7 @@
 		if(!glasstype)
 			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
 		else
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
 			if(dir == SOUTHWEST)
 				var/obj/item/stack/material/mats = new glasstype(loc)
@@ -288,14 +291,14 @@
 	return
 
 
-/obj/structure/window/verb/rotate()
+/obj/structure/window/proc/rotate()
 	set name = "Rotate Window Counter-Clockwise"
 	set category = "Object"
 	set src in oview(1)
 
 	if(usr.incapacitated())
 		return 0
-	
+
 	if(anchored)
 		usr << "It is fastened to the floor therefore you can't rotate it!"
 		return 0
@@ -307,7 +310,7 @@
 	return
 
 
-/obj/structure/window/verb/revrotate()
+/obj/structure/window/proc/revrotate()
 	set name = "Rotate Window Clockwise"
 	set category = "Object"
 	set src in oview(1)
@@ -331,6 +334,7 @@
 	//player-constructed windows
 	if (constructed)
 		anchored = 0
+		update_verbs()
 
 	if (start_dir)
 		set_dir(start_dir)
@@ -372,6 +376,15 @@
 	update_icon()
 	for(var/obj/structure/window/W in orange(src, 1))
 		W.update_icon()
+
+//Updates the availabiliy of the rotation verbs
+/obj/structure/window/proc/update_verbs()
+	if(anchored)
+		verbs -= /obj/structure/window/proc/rotate
+		verbs -= /obj/structure/window/proc/revrotate
+	else
+		verbs += /obj/structure/window/proc/rotate
+		verbs += /obj/structure/window/proc/revrotate
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()

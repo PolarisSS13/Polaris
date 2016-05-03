@@ -1,15 +1,7 @@
 /*
 Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
-
 */
-/mob/living/carbon/human/put_in_l_hand(var/obj/item/W)
-	. = ..()
-	if(.) W.add_fingerprint(src)
-
-/mob/living/carbon/human/put_in_r_hand(var/obj/item/W)
-	. = ..()
-	if(.) W.add_fingerprint(src)
 
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
@@ -40,7 +32,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = organs_by_name[name]
-	return (O && !(O.status & ORGAN_DESTROYED) && !O.is_stump())
+	return (O && !O.is_stump())
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
@@ -93,18 +85,18 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 	if (W == wear_suit)
 		if(s_store)
-			drop_from_inventory(s_store)
+			removeItem(s_store)
 		wear_suit = null
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
-			drop_from_inventory(r_store)
+			removeItem(r_store)
 		if (l_store)
-			drop_from_inventory(l_store)
+			removeItem(l_store)
 		if (wear_id)
-			drop_from_inventory(wear_id)
+			removeItem(wear_id)
 		if (belt)
-			drop_from_inventory(belt)
+			removeItem(belt)
 		w_uniform = null
 		update_inv_w_uniform()
 	else if (W == gloves)
@@ -275,7 +267,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_shoes(redraw_mob)
 		if(slot_wear_suit)
 			src.wear_suit = W
-			if(wear_suit.flags_inv & HIDESHOES)
+			if((wear_suit.flags_inv & HIDESHOES) || (w_uniform.flags_inv & HIDESHOES))
 				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_wear_suit(redraw_mob)
@@ -297,7 +289,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_s_store(redraw_mob)
 		if(slot_in_backpack)
 			if(src.get_active_hand() == W)
-				src.remove_from_mob(W)
+				src.removeItem(W)
 			W.loc = src.back
 		if(slot_tie)
 			var/obj/item/clothing/under/uniform = src.w_uniform

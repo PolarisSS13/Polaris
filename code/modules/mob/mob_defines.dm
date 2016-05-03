@@ -60,7 +60,6 @@
 	var/next_move = null
 	var/transforming = null	//Carbon
 	var/other = 0.0
-	var/hand = null
 	var/eye_blind = null	//Carbon
 	var/eye_blurry = null	//Carbon
 	var/ear_deaf = null		//Carbon
@@ -119,12 +118,6 @@
 	var/m_intent = "run"//Living
 	var/lastKnownIP = null
 	var/obj/buckled = null//Living
-	var/obj/item/l_hand = null//Living
-	var/obj/item/r_hand = null//Living
-	var/obj/item/weapon/back = null//Human/Monkey
-	var/obj/item/weapon/tank/internal = null//Human/Monkey
-	var/obj/item/weapon/storage/s_active = null//Carbon
-	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
 	var/seer = 0 //for cult//Carbon, probably Human
 
@@ -136,8 +129,6 @@
 	var/list/mapobjs = list()
 
 	var/in_throw_mode = 0
-
-	var/coughedtime = null
 
 	var/inertia_dir = 0
 
@@ -184,14 +175,6 @@
 
 //Changlings, but can be used in other modes
 //	var/obj/effect/proc_holder/changpower/list/power_list = list()
-
-//List of active diseases
-
-	var/list/viruses = list() // replaces var/datum/disease/virus
-
-//Monkey/infected mode
-	var/list/resistances = list()
-	var/datum/disease/virus = null
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 

@@ -88,22 +88,15 @@
 		if(S.seed && S.seed.get_trait(TRAIT_IMMUTABLE) > 0)
 			user << "That seed is not compatible with our genetics technology."
 		else
-			user.drop_from_inventory(W)
-			W.loc = src
+			user.removeItem(W, src)
 			seed = W
 			user << "You load [W] into [src]."
 		return
 
-	if(istype(W,/obj/item/weapon/screwdriver))
-		open = !open
-		user << "<span class='notice'>You [open ? "open" : "close"] the maintenance panel.</span>"
+	if(default_deconstruction_screwdriver(user, W))
 		return
-
-	if(open)
-		if(istype(W, /obj/item/weapon/crowbar))
-			dismantle()
-			return
-
+	if(default_deconstruction_crowbar(user, W))
+		return
 	if(istype(W,/obj/item/weapon/disk/botany))
 		if(loaded_disk)
 			user << "There is already a data disk loaded."
@@ -120,8 +113,7 @@
 					user << "That disk does not have any gene data loaded."
 					return
 
-			user.drop_from_inventory(W)
-			W.loc = src
+			user.removeItem(W, src)
 			loaded_disk = W
 			user << "You load [W] into [src]."
 

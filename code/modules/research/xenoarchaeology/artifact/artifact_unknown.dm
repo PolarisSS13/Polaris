@@ -26,7 +26,7 @@ var/list/valid_primary_effect_types = list(\
 	/datum/artifact_effect/forcefield,\
 	/datum/artifact_effect/gasoxy,\
 	/datum/artifact_effect/gasplasma,\
-/*	/datum/artifact_effect/gassleeping,\*/
+//	/datum/artifact_effect/gassleeping,\
 	/datum/artifact_effect/heal,\
 	/datum/artifact_effect/hurt,\
 	/datum/artifact_effect/emp,\
@@ -45,7 +45,7 @@ var/list/valid_secondary_effect_types = list(\
 	/datum/artifact_effect/gasnitro,\
 	/datum/artifact_effect/gasoxy,\
 	/datum/artifact_effect/gasphoron,\
-/*	/datum/artifact_effect/gassleeping,\*/
+//	/datum/artifact_effect/gassleeping,\
 	/datum/artifact_effect/goodfeeling,\
 	/datum/artifact_effect/heal,\
 	/datum/artifact_effect/hurt,\
@@ -257,7 +257,7 @@ var/list/valid_secondary_effect_types = list(\
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_WATER && prob(25))
 				secondary_effect.ToggleActivate(0)
-		else if(W.reagents.has_reagent("acid", 1) || W.reagents.has_reagent("pacid", 1) || W.reagents.has_reagent("diethylamine", 1))
+		else if(W.reagents.has_reagent("sacid", 1) || W.reagents.has_reagent("pacid", 1) || W.reagents.has_reagent("diethylamine", 1))
 			if(my_effect.trigger == TRIGGER_ACID)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_ACID && prob(25))

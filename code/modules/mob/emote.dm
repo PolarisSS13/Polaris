@@ -2,9 +2,8 @@
 //m_type == 1 --> visual.
 //m_type == 2 --> audible
 /mob/proc/custom_emote(var/m_type=1,var/message = null)
-
 	if(stat || !use_me && usr == src)
-		usr << "You are unable to emote."
+		src << "You are unable to emote."
 		return
 
 	var/muzzled = is_muzzled()
@@ -34,7 +33,7 @@
 				continue
 			if(findtext(message," snores.")) //Because we have so many sleeping people.
 				break
-			if(M.stat == 2 && (M.client.prefs.toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
+			if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_sight) && !(M in viewers(src,null)))
 				M.show_message(message, m_type)
 
 		if (m_type & 1)
@@ -67,7 +66,7 @@
 		src << "<span class='danger'>You cannot send deadchat emotes (muted).</span>"
 		return
 
-	if(!(client.prefs.toggles & CHAT_DEAD))
+	if(!is_preference_enabled(/datum/client_preference/show_dsay))
 		src << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
@@ -85,4 +84,7 @@
 
 	if(input)
 		log_emote("Ghost/[src.key] : [input]")
-		say_dead_direct(input, src)
+		if(!invisibility) //If the ghost is made visible by admins or cult. And to see if the ghost has toggled its own visibility, as well. -Mech
+			visible_message("<span class='deadsay'><B>[src]</B> [input]</span>")
+		else
+			say_dead_direct(input, src)

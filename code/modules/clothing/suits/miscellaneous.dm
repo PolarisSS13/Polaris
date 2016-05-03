@@ -343,6 +343,36 @@
 	icon_state = "blueponcho"
 	item_state = "blueponcho"
 
+/obj/item/clothing/suit/poncho/roles/security
+	name = "security poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is black and red, standard NanoTrasen Security colors."
+	icon_state = "secponcho"
+	item_state = "secponcho"
+
+/obj/item/clothing/suit/poncho/roles/medical
+	name = "medical poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with green and blue tint, standard Medical colors."
+	icon_state = "medponcho"
+	item_state = "medponcho"
+
+/obj/item/clothing/suit/poncho/roles/engineering
+	name = "engineering poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, standard Engineering colors."
+	icon_state = "engiponcho"
+	item_state = "engiponcho"
+
+/obj/item/clothing/suit/poncho/roles/science
+	name = "science poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is white with purple trim, standard NanoTrasen Science colors."
+	icon_state = "sciponcho"
+	item_state = "sciponcho"
+
+/obj/item/clothing/suit/poncho/roles/cargo
+	name = "cargo poncho"
+	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
+	icon_state = "cargoponcho"
+	item_state = "cargoponcho"
+
 /obj/item/clothing/suit/jacket/puffer
 	name = "puffer jacket"
 	desc = "A thick jacket with a rubbery, water-resistant shell."
@@ -480,7 +510,7 @@
 
 /obj/item/clothing/suit/storage/toggle/hoodie/cti
 	name = "CTI hoodie"
-	desc = "A warm, black sweatshirt.  It bears the letters ‘CTI’ on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
+	desc = "A warm, black sweatshirt.  It bears the letters Â‘CTIÂ’ on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
 	icon_state = "cti_hoodie"
 	item_state = "cti_hoodie"
 	icon_open = "cti_hoodie_open"
@@ -488,7 +518,7 @@
 
 /obj/item/clothing/suit/storage/toggle/hoodie/mu
 	name = "mars university hoodie"
-	desc = "A warm, gray sweatshirt.  It bears the letters ‘MU’ on the front, a lettering to the well-known public college, Mars University."
+	desc = "A warm, gray sweatshirt.  It bears the letters Â‘MUÂ’ on the front, a lettering to the well-known public college, Mars University."
 	icon_state = "mu_hoodie"
 	item_state = "mu_hoodie"
 	icon_open = "mu_hoodie_open"
@@ -501,6 +531,14 @@
 	item_state = "nt_hoodie"
 	icon_open = "nt_hoodie_open"
 	icon_closed = "nt_hoodie"
+
+/obj/item/clothing/suit/storage/toggle/hoodie/smw
+	name = "Space Mountain Wind hoodie"
+	desc = "A warm, black sweatshirt.  It has the logo for the popular softdrink Space Mountain Wind on both the front and the back."
+	icon_state = "smw_hoodie"
+	item_state = "smw_hoodie"
+	icon_open = "smw_hoodie_open"
+	icon_closed = "smw_hoodie"
 
 // FUN!
 

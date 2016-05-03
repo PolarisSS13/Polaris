@@ -52,14 +52,14 @@
 	..()
 
 /obj/item/weapon/mop_deploy/attack_self(mob/user as mob)
-	user.drop_from_inventory(src)
+	user.removeItem(src, force = 1)
 	spawn(1) if(src) del(src)
 
 /obj/item/weapon/mop_deploy/dropped()
 	spawn(1) if(src) del(src)
 
 /obj/item/weapon/mop_deploy/process()
-	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
+	if(!creator || loc != creator || !creator.item_is_in_hands(src))
 		// Tidy up a bit.
 		if(istype(loc,/mob/living))
 			var/mob/living/carbon/human/host = loc
@@ -70,5 +70,5 @@
 							organ.implants -= src
 			host.pinned -= src
 			host.embedded -= src
-			host.drop_from_inventory(src)
+			host.removeItem(src, force = 1)
 		spawn(1) if(src) del(src)

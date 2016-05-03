@@ -13,7 +13,7 @@
 	if(CE_SPEEDBOOST in chem_effects)
 		return -1
 
-	var/health_deficiency = (100 - health)
+	var/health_deficiency = (maxHealth - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if(can_feel_pain())
@@ -22,13 +22,20 @@
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
 
-	if(wear_suit)
-		tally += wear_suit.slowdown
+	// Loop through some slots, and add up their slowdowns.  Shoes are handled below, unfortunately.
+	// Includes slots which can provide armor, the back slot, and suit storage.
+	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store) )
+		tally += I.slowdown
+
+	// Hands are also included, to make the 'take off your armor instantly and carry it with you to go faster' trick no longer viable.
+	// This is done seperately to disallow negative numbers.
+	for(var/obj/item/I in list(r_hand, l_hand) )
+		tally += max(I.slowdown, 0)
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(organ_name)
-			if(!E || (E.status & ORGAN_DESTROYED))
+			if(!E || E.is_stump())
 				tally += 4
 			if(E.status & ORGAN_SPLINTED)
 				tally += 0.5
@@ -40,7 +47,7 @@
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
-			if(!E || (E.status & ORGAN_DESTROYED))
+			if(!E || E.is_stump())
 				tally += 4
 			else if(E.status & ORGAN_SPLINTED)
 				tally += 0.5

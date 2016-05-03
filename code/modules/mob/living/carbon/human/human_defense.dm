@@ -56,7 +56,7 @@ emp_act
 			if(c_hand && (stun_amount || agony_amount > 10))
 				msg_admin_attack("[src.name] ([src.ckey]) was disarmed by a stun effect")
 
-				drop_from_inventory(c_hand)
+				removeItem(c_hand)
 				if (affected.status & ORGAN_ROBOT)
 					emote("me", 1, "drops what they were holding, their [affected.name] malfunctioning!")
 				else
@@ -139,13 +139,6 @@ emp_act
 		if(.) return
 	return 0
 
-/mob/living/carbon/human/emp_act(severity)
-	for(var/obj/O in src)
-		if(!O)	continue
-		O.emp_act(severity)
-	..()
-
-
 //Returns 1 if the attack hit, 0 if it missed.
 /mob/living/carbon/human/proc/attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone)
 	if(!I || !user)	return 0
@@ -160,7 +153,7 @@ emp_act
 
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
-	if (!affecting || (affecting.status & ORGAN_DESTROYED) || affecting.is_stump())
+	if (!affecting || affecting.is_stump())
 		user << "<span class='danger'>They are missing that limb!</span>"
 		return 0
 

@@ -118,7 +118,7 @@
 			B.loc = get_turf(src)
 			user << "<span class='notice'>You armed the robot frame.</span>"
 			if (user.get_inactive_hand()==src)
-				user.remove_from_mob(src)
+				user.removeItem(src)
 				user.put_in_inactive_hand(B)
 			qdel(src)
 		else
@@ -185,7 +185,7 @@
 			if(!M.brainmob.key)
 				var/ghost_can_reenter = 0
 				if(M.brainmob.mind)
-					for(var/mob/dead/observer/G in player_list)
+					for(var/mob/observer/dead/G in player_list)
 						if(G.can_reenter_corpse && G.mind == M.brainmob.mind)
 							ghost_can_reenter = 1
 							break

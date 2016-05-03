@@ -43,13 +43,30 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	node = get_exonet_node()
 	processing_objects |= src
 	//This is a pretty terrible way of doing this.
-	spawn(50) //Wait for our mob to finish spawning.
+	spawn(5 SECONDS) //Wait for our mob to finish spawning.
 		if(ismob(loc))
 			register_device(loc)
+			initialize_exonet(loc)
 		else if(istype(loc, /obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = loc
 			if(ismob(S.loc))
 				register_device(S.loc)
+				initialize_exonet(S.loc)
+
+// Proc: initialize_exonet()
+// Parameters: 1 (user - the person the communicator belongs to)
+// Description: Sets up the exonet datum, gives the device an address, and then gets a node reference.  Afterwards, populates the device
+//				list.
+/obj/item/device/communicator/proc/initialize_exonet(mob/user)
+	if(!user || !istype(user, /mob/living))
+		return
+	if(!exonet)
+		exonet = new(src)
+	if(!exonet.address)
+		exonet.make_address("communicator-[user.client]-[user.name]")
+	if(!node)
+		node = get_exonet_node()
+	populate_known_devices()
 
 // Proc: examine()
 // Parameters: 1 (user - the person examining the device)
@@ -109,7 +126,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 		if(!comm || !comm.exonet || !comm.exonet.address || comm.exonet.address == src.exonet.address) //Don't add addressless devices, and don't add ourselves.
 			continue
 		src.known_devices |= comm
-	for(var/mob/dead/observer/O in dead_mob_list)
+	for(var/mob/observer/dead/O in dead_mob_list)
 		if(!O.client || O.client.prefs.communicator_visibility == 0)
 			continue
 		src.known_devices |= O
@@ -139,13 +156,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Description: Makes an exonet datum if one does not exist, allocates an address for it, maintains the lists of all devies, clears the alert icon, and
 //				finally makes NanoUI appear.
 /obj/item/device/communicator/attack_self(mob/user)
-	if(!exonet)
-		exonet = new(src)
-	if(!exonet.address)
-		exonet.make_address("communicator-[user.client]-[user.name]")
-	if(!node)
-		node = get_exonet_node()
-	populate_known_devices()
+	initialize_exonet(user)
 	alert_called = 0
 	update_icon()
 	ui_interact(user)
@@ -157,13 +168,13 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	populate_known_devices() //Update the devices so ghosts can see the list on NanoUI.
 	..()
 
-/mob/dead/observer
+/mob/observer/dead
 	var/datum/exonet_protocol/exonet = null
 
 // Proc: New()
 // Parameters: None
 // Description: Gives ghosts an exonet address based on their key and ghost name.
-/mob/dead/observer/New()
+/mob/observer/dead/New()
 	. = ..()
 	spawn(20)
 		exonet = new(src)
@@ -175,7 +186,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Proc: Destroy()
 // Parameters: None
 // Description: Removes the ghost's address and nulls the exonet datum, to allow qdel()ing.
-/mob/dead/observer/Destroy()
+/mob/observer/dead/Destroy()
 	. = ..()
 	if(exonet)
 		exonet.remove_address()
@@ -200,7 +211,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			communicators[++communicators.len] = list("name" = sanitize(comm.name), "address" = comm.exonet.address)
 
 	//Now for ghosts who we pretend have communicators.
-	for(var/mob/dead/observer/O in known_devices)
+	for(var/mob/observer/dead/O in known_devices)
 		if(O.client && O.client.prefs.communicator_visibility == 1 && O.exonet)
 			communicators[++communicators.len] = list("name" = sanitize("[O.client.prefs.real_name]'s communicator"), "address" = O.exonet.address)
 
@@ -210,7 +221,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			invites[++invites.len] = list("name" = sanitize(comm.name), "address" = comm.exonet.address)
 
 	//Ghosts we invited.
-	for(var/mob/dead/observer/O in voice_invites)
+	for(var/mob/observer/dead/O in voice_invites)
 		if(O.exonet && O.client)
 			invites[++invites.len] = list("name" = sanitize("[O.client.prefs.real_name]'s communicator"), "address" = O.exonet.address)
 
@@ -220,7 +231,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			requests[++requests.len] = list("name" = sanitize(comm.name), "address" = comm.exonet.address)
 
 	//Ghosts that want to talk to us.
-	for(var/mob/dead/observer/O in voice_requests)
+	for(var/mob/observer/dead/O in voice_requests)
 		if(O.exonet && O.client)
 			requests[++requests.len] = list("name" = sanitize("[O.client.prefs.real_name]'s communicator"), "address" = O.exonet.address)
 
@@ -292,7 +303,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			return
 		var/their_address = href_list["dial"]
 		exonet.send_message(their_address, "voice")
-		
+
 	if(href_list["disconnect"])
 		var/name_to_disconnect = href_list["disconnect"]
 		for(var/mob/living/voice/V in contents)
@@ -304,13 +315,13 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	if(href_list["copy"])
 		target_address = href_list["copy"]
-		
+
 	if(href_list["hang_up"])
 		for(var/mob/living/voice/V in contents)
 			close_connection(usr, V, "[usr] hung up.")
 		for(var/obj/item/device/communicator/comm in communicating)
 			close_connection(usr, comm, "[usr] hung up.")
-			
+
 	if(href_list["switch_tab"])
 		selected_tab = href_list["switch_tab"]
 
@@ -342,7 +353,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Proc: receive_exonet_message()
 // Parameters: 3 (origin atom - the source of the message's holder, origin_address - where the message came from, message - the message received)
 // Description: Handles voice requests and invite messages originating from both real communicators and ghosts.  Also includes a ping response.
-/mob/dead/observer/receive_exonet_message(origin_atom, origin_address, message)
+/mob/observer/dead/receive_exonet_message(origin_atom, origin_address, message)
 	if(message == "voice")
 		if(istype(origin_atom, /obj/item/device/communicator))
 			var/obj/item/device/communicator/comm = origin_atom
@@ -600,7 +611,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Verb: join_as_voice()
 // Parameters: None
 // Description: Allows ghosts to call communicators, if they meet all the requirements.
-/mob/dead/verb/join_as_voice()
+/mob/observer/dead/verb/join_as_voice()
 	set category = "Ghost"
 	set name = "Call Communicator"
 	set desc = "If there is a communicator available, send a request to speak through it.  This will reset your respawn timer, if someone picks up."
@@ -643,7 +654,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/choice = input(src,"Send a voice request to whom?") as null|anything in choices
 	if(choice)
 		var/obj/item/device/communicator/chosen_communicator = choice
-		var/mob/dead/observer/O = src
+		var/mob/observer/dead/O = src
 		if(O.exonet)
 			O.exonet.send_message(chosen_communicator.exonet.address, "voice")
 

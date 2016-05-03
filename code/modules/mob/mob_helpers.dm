@@ -1,15 +1,24 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
-/proc/isxenomorph(A)
-	if(istype(A, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = A
-		return istype(H.species, /datum/species/xenos)
-	return 0
-
 /proc/issmall(A)
 	if(A && istype(A, /mob/living))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SMALL
 	return 0
+
+
+/proc/istiny(A)
+	if(A && istype(A, /mob/living))
+		var/mob/living/L = A
+		return L.mob_size <= MOB_TINY
+	return 0
+
+
+/proc/ismini(A)
+	if(A && istype(A, /mob/living))
+		var/mob/living/L = A
+		return L.mob_size <= MOB_MINISCULE
+	return 0
+
 
 // If they are 100% robotic, they count as synthetic.
 /mob/living/carbon/human/isSynthetic()
@@ -36,6 +45,12 @@ proc/isdeaf(A)
 		var/mob/M = A
 		return (M.sdisabilities & DEAF) || M.ear_deaf
 	return 0
+
+/mob/proc/get_ear_protection()
+	return 0
+
+/mob/proc/break_cloak()
+	return
 
 proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
@@ -266,7 +281,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/eye/aiEye))
+		if(istype(oldeye, /mob/observer/eye/aiEye))
 			aiEyeFlag = 1
 
 		var/x
@@ -288,12 +303,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 
 /mob/proc/abiotic(var/full_body = 0)
-	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask)))
-		return 1
-
-	if((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )))
-		return 1
-
 	return 0
 
 //converts intent-strings into numbers and back
@@ -391,7 +400,7 @@ proc/is_blind(A)
 				name = realname
 
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && (M.client.prefs.toggles & CHAT_DEAD))
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
 			if(subject)
@@ -399,8 +408,8 @@ proc/is_blind(A)
 					follow = "([ghost_follow_link(subject, M)]) "
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
-				var/mob/dead/observer/DM
-				if(istype(subject, /mob/dead/observer))
+				var/mob/observer/dead/DM
+				if(istype(subject, /mob/observer/dead))
 					DM = subject
 				if(M.client.holder) 							// What admins see
 					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
@@ -465,6 +474,12 @@ proc/is_blind(A)
 // Returns true if the mob has a client which has been active in the last given X minutes.
 /mob/proc/is_client_active(var/active = 1)
 	return client && client.inactivity < active MINUTES
+
+/mob/proc/can_eat()
+	return 1
+
+/mob/proc/can_force_feed()
+	return 1
 
 #define SAFE_PERP -50
 /mob/living/proc/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)

@@ -342,13 +342,15 @@
 		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")
 
-	user.drop_from_inventory(W)
+	user.removeItem(W)
 	Consume(W)
 
 	user.apply_effect(150, IRRADIATE)
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
+	if(istype(AM, /obj/effect))
+		return
 	if(istype(AM, /mob/living))
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\

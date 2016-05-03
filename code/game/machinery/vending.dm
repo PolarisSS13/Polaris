@@ -96,7 +96,7 @@
 	wires = new(src)
 	spawn(4)
 		if(src.product_slogans)
-			src.slogan_list += text2list(src.product_slogans, ";")
+			src.slogan_list += splittext(src.product_slogans, ";")
 
 			// So not all machines speak at the exact same time.
 			// The first time this machine says something will be at slogantime + this random value,
@@ -104,7 +104,7 @@
 			src.last_slogan = world.time + rand(0, slogan_delay)
 
 		if(src.product_ads)
-			src.ads_list += text2list(src.product_ads, ";")
+			src.ads_list += splittext(src.product_ads, ";")
 
 		src.build_inventory()
 		power_change()
@@ -232,7 +232,6 @@
 			user << "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>"
 			anchored = !anchored
 		return
-
 	else
 
 		for(var/datum/data/vending_product/R in product_records)
@@ -255,31 +254,15 @@
 		usr << "\icon[cashmoney] <span class='warning'>That is not enough money.</span>"
 		return 0
 
-	if(istype(cashmoney, /obj/item/weapon/spacecash/bundle))
-		// Bundles can just have money subtracted, and will work
+	if(istype(cashmoney, /obj/item/weapon/spacecash))
 
 		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-		var/obj/item/weapon/spacecash/bundle/cashmoney_bundle = cashmoney
-		cashmoney_bundle.worth -= currently_vending.price
+		cashmoney.worth -= currently_vending.price
 
-		if(cashmoney_bundle.worth <= 0)
-			usr.drop_from_inventory(cashmoney_bundle)
-			qdel(cashmoney_bundle)
+		if(cashmoney.worth <= 0)
+			usr.deleteItem(cashmoney)
 		else
-			cashmoney_bundle.update_icon()
-	else
-		// Bills (banknotes) cannot really have worth different than face value,
-		// so we have to eat the bill and spit out change in a bundle
-		// This is really dirty, but there's no superclass for all bills, so we
-		// just assume that all spacecash that's not something else is a bill
-
-		visible_message("<span class='info'>\The [usr] inserts a bill into \the [src].</span>")
-		var/left = cashmoney.worth - currently_vending.price
-		usr.drop_from_inventory(cashmoney)
-		qdel(cashmoney)
-
-		if(left)
-			spawn_money(left, src.loc, user)
+			cashmoney.update_icon()
 
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
@@ -774,8 +757,7 @@
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 5,
-					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5,
-					/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
+					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5)
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,
 					/obj/item/weapon/storage/fancy/cigarettes/luckystars = 17,
 					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 22,
@@ -846,7 +828,7 @@
 	product_ads = "We like plants!;Don't you want some?;The greenest thumbs ever.;We like big plants.;Soft soil..."
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
-	products = list(/obj/item/weapon/reagent_containers/glass/fertilizer/ez = 35,/obj/item/weapon/reagent_containers/glass/fertilizer/l4z = 25,/obj/item/weapon/reagent_containers/glass/fertilizer/rh = 15,/obj/item/weapon/plantspray/pests = 20,
+	products = list(/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 6,/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 4,/obj/item/weapon/reagent_containers/glass/bottle/robustharvest = 3,/obj/item/weapon/plantspray/pests = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -903,7 +885,6 @@
 	vend_reply = "Have an enchanted evening!"
 	product_ads = "FJKLFJSD;AJKFLBJAKL;1234 LOONIES LOL!;>MFW;Kill them fuckers!;GET DAT FUKKEN DISK;HONK!;EI NATH;Destroy the station!;Admin conspiracies since forever!;Space-time bending hardware!"
 	products = list(/obj/item/clothing/head/wizard = 1,/obj/item/clothing/suit/wizrobe = 1,/obj/item/clothing/head/wizard/red = 1,/obj/item/clothing/suit/wizrobe/red = 1,/obj/item/clothing/shoes/sandal = 1,/obj/item/weapon/staff = 2)
-	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/wizarditis = 1)	//No one can get to the machine to hack it anyways; for the lulz - Microwave
 
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"
@@ -939,9 +920,20 @@
 	icon_state = "engivend"
 	icon_deny = "engivend-deny"
 	req_access = list(access_engine_equip)
-	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,/obj/item/weapon/airalarm_electronics = 10,/obj/item/weapon/cell/high = 10)
+	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/weapon/cell/high = 10,
+					/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,
+					/obj/item/weapon/circuitboard/airalarm = 10,/obj/item/weapon/circuitboard/firealarm = 10,/obj/item/weapon/circuitboard/status_display = 2,
+					/obj/item/weapon/circuitboard/ai_status_display = 2,/obj/item/weapon/circuitboard/newscaster = 2,/obj/item/weapon/circuitboard/holopad = 2,
+					/obj/item/weapon/circuitboard/intercom = 4,/obj/item/weapon/circuitboard/security/telescreen/entertainment = 4,
+					/obj/item/weapon/stock_parts/motor = 2,/obj/item/weapon/stock_parts/spring = 2,/obj/item/weapon/stock_parts/gear = 2,
+					/obj/item/weapon/circuitboard/atm,/obj/item/weapon/circuitboard/guestpass,/obj/item/weapon/circuitboard/keycard_auth,
+					/obj/item/weapon/circuitboard/photocopier,/obj/item/weapon/circuitboard/fax,/obj/item/weapon/circuitboard/request,
+					/obj/item/weapon/circuitboard/microwave,/obj/item/weapon/circuitboard/washing,/obj/item/weapon/circuitboard/scanner_console,
+					/obj/item/weapon/circuitboard/sleeper_console,/obj/item/weapon/circuitboard/body_scanner,/obj/item/weapon/circuitboard/sleeper,
+					/obj/item/weapon/circuitboard/dna_analyzer)
 	contraband = list(/obj/item/weapon/cell/potato = 3)
 	premium = list(/obj/item/weapon/storage/belt/utility = 3)
+	product_records = list()
 
 //This one's from bay12
 /obj/machinery/vending/engineering

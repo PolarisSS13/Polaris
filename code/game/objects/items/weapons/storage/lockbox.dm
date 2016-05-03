@@ -8,7 +8,6 @@
 	w_class = 4
 	max_w_class = 3
 	max_storage_space = 14 //The sum of the w_classes of all the items in this storage item.
-	storage_slots = 4
 	req_access = list(access_armory)
 	var/locked = 1
 	var/broken = 0
@@ -35,7 +34,7 @@
 			else
 				user << "<span class='warning'>Access Denied</span>"
 		else if(istype(W, /obj/item/weapon/melee/energy/blade))
-			if(emag_act(INFINITY, user, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
+			if(emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 				spark_system.set_up(5, 0, src.loc)
 				spark_system.start()
@@ -55,7 +54,7 @@
 			..()
 		return
 
-/obj/item/weapon/storage/lockbox/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback = "", var/audible_feedback = "")
+/obj/item/weapon/storage/lockbox/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
 	if(!broken)
 		if(visual_feedback)
 			visual_feedback = "<span class='warning'>[visual_feedback]</span>"

@@ -32,6 +32,7 @@
 	icon_state = "sl_suit"
 	worn_state = "sl_suit"
 	item_state = "sl_suit"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/waiter
 	name = "waiter's outfit"
@@ -39,6 +40,7 @@
 	icon_state = "waiter"
 	item_state = "waiter"
 	worn_state = "waiter"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/mailman
 	name = "mailman's jumpsuit"
@@ -46,6 +48,7 @@
 	icon_state = "mailman"
 	item_state = "b_suit"
 	worn_state = "mailman"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/sexyclown
 	name = "sexy-clown suit"
@@ -54,6 +57,7 @@
 	item_state = "clown"
 	worn_state = "sexyclown"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	rolled_sleeves = -1 //Please never
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
@@ -106,6 +110,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS //Needs gloves and shoes with cold protection to be fully protected.
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/acj
 	name = "administrative cybernetic jumpsuit"
@@ -135,9 +140,9 @@
 	worn_state = "johnny"
 	item_state = "johnny"
 
-/obj/item/clothing/under/rainbow
-	name = "rainbow"
-	desc = "rainbow"
+/obj/item/clothing/under/color/rainbow
+	name = "rainbow jumpsuit"
+	desc = "A multi-colored jumpsuit."
 	icon_state = "rainbow"
 	item_state = "rainbow"
 	worn_state = "rainbow"
@@ -162,6 +167,7 @@
 	icon_state = "gentlesuit"
 	item_state = "gy_suit"
 	worn_state = "gentlesuit"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
@@ -265,6 +271,7 @@
 	item_state = "w_suit"
 	worn_state = "sexymime"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	rolled_sleeves = -1 //Please never
 
 /obj/item/clothing/under/gladiator
 	name = "gladiator uniform"
@@ -475,13 +482,6 @@
 	worn_state = "sundress_white"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 
-/obj/item/clothing/under/blackjumpskirt
-	name = "black jumpskirt"
-	desc = "A black jumpskirt, Sol size 0."
-	icon_state = "blackjumpskirt"
-	item_state = "bl_suit"
-	worn_state = "blackjumpskirt"
-
 /obj/item/clothing/under/captainformal
 	name = "captain's formal uniform"
 	desc = "A captain's formal-wear, for special occasions."
@@ -551,6 +551,7 @@
 	icon_state = "mechanic"
 	item_state = "lb_suit"
 	worn_state = "mechanic"
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/cheongsam
 	name = "white cheongsam"
@@ -559,6 +560,27 @@
 	item_state = "mai_yang"
 	worn_state = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/cheongsam/red
+	name = "red cheongsam"
+	desc = "It is a red cheongsam dress."
+	icon_state = "cheongsam-red"
+	item_state = "cheongsam-red"
+	worn_state = "cheongsam-red"
+
+/obj/item/clothing/under/cheongsam/blue
+	name = "blue cheongsam"
+	desc = "It is a blue cheongsam dress."
+	icon_state = "cheongsam-blue"
+	item_state = "cheongsam-blue"
+	worn_state = "cheongsam-blue"
+
+/obj/item/clothing/under/cheongsam/black
+	name = "black cheongsam"
+	desc = "It is a black cheongsam dress."
+	icon_state = "cheongsam-black"
+	item_state = "cheongsam-black"
+	worn_state = "cheongsam-black"
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
@@ -608,3 +630,41 @@
 	icon_state = "gear_harness"
 	worn_state = "gear_harness"
 	body_parts_covered = 0
+
+/obj/item/clothing/under/dress/white
+	name = "white wedding dress"
+	desc = "A fancy white dress with a blue underdress."
+	icon_state = "whitedress1"
+	item_state = "whitedress1"
+	worn_state = "whitedress1"
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/white2
+	name = "long dress"
+	desc = "A long dress."
+	icon_state = "whitedress2"
+	item_state = "whitedress2"
+	worn_state = "whitedress2"
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/white3
+	name = "short dress"
+	desc = "A short, plain dress."
+	icon_state = "whitedress3"
+	item_state = "whitedress3"
+	worn_state = "whitedress3"
+
+/obj/item/clothing/under/dress/white4
+	name = "long flared dress"
+	desc = "A long white dress that flares out at the bottom."
+	icon_state = "whitedress4"
+	item_state = "whitedress4"
+	worn_state = "whitedress4"
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/darkred
+	name = "fancy dark red dress"
+	desc = "A short, red dress with a black belt. Fancy."
+	icon_state = "darkreddress"
+	item_state = "darkreddress"
+	worn_state = "darkreddress"

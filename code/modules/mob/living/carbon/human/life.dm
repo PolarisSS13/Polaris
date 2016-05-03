@@ -56,9 +56,6 @@
 	if(wearing_rig && wearing_rig.offline)
 		wearing_rig = null
 
-	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
-	if(in_stasis) loc:used++
-
 	..()
 
 	if(life_tick%30==15)
@@ -86,7 +83,6 @@
 		if(!client)
 			species.handle_npc(src)
 
-	handle_stasis_bag()
 
 	if(!handle_some_updates())
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
@@ -153,6 +149,23 @@
 		return ONE_ATMOSPHERE + pressure_difference
 
 /mob/living/carbon/human/handle_disabilities()
+	..()
+	//Vision
+	if(species.vision_organ)
+		if(internal_organs_by_name[species.vision_organ])  // Vision organs cut out? Permablind.
+			eye_blind =  0
+			blinded =    0
+			eye_blurry = 0
+		else
+			eye_blind =  1
+			blinded =    1
+			eye_blurry = 1
+	else // Presumably if a species has no vision organs, they see via some other means.
+		eye_blind =  0
+		blinded =    0
+		eye_blurry = 0
+		
+		
 	if (disabilities & EPILEPSY)
 		if ((prob(1) && paralysis < 1))
 			src << "\red You have a seizure!"
@@ -178,29 +191,12 @@
 						emote("twitch")
 					if(2 to 3)
 						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-				var/old_x = pixel_x
-				var/old_y = pixel_y
-				pixel_x += rand(-2,2)
-				pixel_y += rand(-1,1)
-				sleep(2)
-				pixel_x = old_x
-				pixel_y = old_y
+				make_jittery(100)
 				return
 	if (disabilities & NERVOUS)
 		speech_problem_flag = 1
 		if (prob(10))
 			stuttering = max(10, stuttering)
-	// No. -- cib
-	/*if (getBrainLoss() >= 60 && stat != 2)
-		if (prob(3))
-			switch(pick(1,2,3))
-				if(1)
-					say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that meatball traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
-				if(2)
-					say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
-				if(3)
-					emote("drool")
-	*/
 
 	if(stat != 2)
 		var/rn = rand(0, 200)
@@ -224,15 +220,7 @@
 					src << "<span class='danger'>Your legs won't respond properly, you fall down!</span>"
 					Weaken(10)
 
-/mob/living/carbon/human/proc/handle_stasis_bag()
-	// Handle side effects from stasis bag
-	if(in_stasis)
-		// First off, there's no oxygen supply, so the mob will slowly take brain damage
-		adjustBrainLoss(0.1)
 
-		// Next, the method to induce stasis has some adverse side-effects, manifesting
-		// as cloneloss
-		adjustCloneLoss(0.1)
 
 /mob/living/carbon/human/handle_mutations_and_radiation()
 	if(in_stasis)
@@ -583,7 +571,14 @@
 			pl_effects()
 			break
 
-	if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
+	if(istype(get_turf(src), /turf/space))
+		//Don't bother if the temperature drop is less than 0.1 anyways. Hopefully BYOND is smart enough to turn this constant expression into a constant
+		if(bodytemperature > (0.1 * HUMAN_HEAT_CAPACITY/(HUMAN_EXPOSED_SURFACE_AREA*STEFAN_BOLTZMANN_CONSTANT))**(1/4) + COSMIC_RADIATION_TEMPERATURE)
+			//Thermal radiation into space
+			var/heat_loss = HUMAN_EXPOSED_SURFACE_AREA * STEFAN_BOLTZMANN_CONSTANT * ((bodytemperature - COSMIC_RADIATION_TEMPERATURE)**4)
+			var/temperature_loss = heat_loss/HUMAN_HEAT_CAPACITY
+			bodytemperature -= temperature_loss
+	else
 		var/loc_temp = T0C
 		if(istype(loc, /obj/mecha))
 			var/obj/mecha/M = loc
@@ -597,7 +592,7 @@
 			pressure_alert = 0
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
-		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
+		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
 		var/temp_adj = 0
 		if(loc_temp < bodytemperature)			//Place is colder than we are
 			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
@@ -617,31 +612,32 @@
 		//Body temperature is too hot.
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
-
-		if(bodytemperature < species.heat_level_2)
-			take_overall_damage(burn=HEAT_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
-			fire_alert = max(fire_alert, 2)
-		else if(bodytemperature < species.heat_level_3)
-			take_overall_damage(burn=HEAT_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
-			fire_alert = max(fire_alert, 2)
-		else
-			take_overall_damage(burn=HEAT_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
-			fire_alert = max(fire_alert, 2)
+		var/burn_dam = 0
+		switch(bodytemperature)
+			if(species.heat_level_1 to species.heat_level_2)
+				burn_dam = HEAT_DAMAGE_LEVEL_1
+			if(species.heat_level_2 to species.heat_level_3)
+				burn_dam = HEAT_DAMAGE_LEVEL_2
+			if(species.heat_level_3 to INFINITY)
+				burn_dam = HEAT_DAMAGE_LEVEL_3
+		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
+		fire_alert = max(fire_alert, 2)
 
 	else if(bodytemperature <= species.cold_level_1)
 		fire_alert = max(fire_alert, 1)
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			if(bodytemperature > species.cold_level_2)
-				take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
-				fire_alert = max(fire_alert, 1)
-			else if(bodytemperature > species.cold_level_3)
-				take_overall_damage(burn=COLD_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
-				fire_alert = max(fire_alert, 1)
-			else
-				take_overall_damage(burn=COLD_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
-				fire_alert = max(fire_alert, 1)
+			var/burn_dam = 0
+			switch(bodytemperature)
+				if(-INFINITY to species.cold_level_3)
+					burn_dam = COLD_DAMAGE_LEVEL_1
+				if(species.cold_level_3 to species.cold_level_2)
+					burn_dam = COLD_DAMAGE_LEVEL_2
+				if(species.cold_level_2 to species.cold_level_1)
+					burn_dam = COLD_DAMAGE_LEVEL_3
+			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
+			fire_alert = max(fire_alert, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
@@ -691,6 +687,8 @@
 	// We produce heat naturally.
 	if (species.passive_temp_gain)
 		bodytemperature += species.passive_temp_gain
+	if (species.body_temperature == null)
+		return //this species doesn't have metabolic thermoregulation
 
 	// Robolimbs cause overheating too.
 	if(robolimb_count)
@@ -702,7 +700,7 @@
 		return //fuck this precision
 
 	if (on_fire)
-		return //too busy for pesky convection
+		return //too busy for pesky metabolic regulation
 
 	if(bodytemperature < species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 		if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
@@ -725,85 +723,25 @@
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
-	var/thermal_protection_flags = 0
+	. = 0
 	//Handle normal clothing
-	if(head)
-		if(head.max_heat_protection_temperature && head.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= head.heat_protection
-	if(wear_suit)
-		if(wear_suit.max_heat_protection_temperature && wear_suit.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= wear_suit.heat_protection
-	if(w_uniform)
-		if(w_uniform.max_heat_protection_temperature && w_uniform.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= w_uniform.heat_protection
-	if(shoes)
-		if(shoes.max_heat_protection_temperature && shoes.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= shoes.heat_protection
-	if(gloves)
-		if(gloves.max_heat_protection_temperature && gloves.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= gloves.heat_protection
-	if(wear_mask)
-		if(wear_mask.max_heat_protection_temperature && wear_mask.max_heat_protection_temperature >= temperature)
-			thermal_protection_flags |= wear_mask.heat_protection
-
-	return thermal_protection_flags
-
-/mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
-	var/thermal_protection_flags = get_heat_protection_flags(temperature)
-
-	var/thermal_protection = 0.0
-	if(thermal_protection_flags)
-		if(thermal_protection_flags & HEAD)
-			thermal_protection += THERMAL_PROTECTION_HEAD
-		if(thermal_protection_flags & UPPER_TORSO)
-			thermal_protection += THERMAL_PROTECTION_UPPER_TORSO
-		if(thermal_protection_flags & LOWER_TORSO)
-			thermal_protection += THERMAL_PROTECTION_LOWER_TORSO
-		if(thermal_protection_flags & LEG_LEFT)
-			thermal_protection += THERMAL_PROTECTION_LEG_LEFT
-		if(thermal_protection_flags & LEG_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_LEG_RIGHT
-		if(thermal_protection_flags & FOOT_LEFT)
-			thermal_protection += THERMAL_PROTECTION_FOOT_LEFT
-		if(thermal_protection_flags & FOOT_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_FOOT_RIGHT
-		if(thermal_protection_flags & ARM_LEFT)
-			thermal_protection += THERMAL_PROTECTION_ARM_LEFT
-		if(thermal_protection_flags & ARM_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_ARM_RIGHT
-		if(thermal_protection_flags & HAND_LEFT)
-			thermal_protection += THERMAL_PROTECTION_HAND_LEFT
-		if(thermal_protection_flags & HAND_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
-
-
-	return min(1,thermal_protection)
+	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+		if(C)
+			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
+				. |= C.heat_protection
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
-	var/thermal_protection_flags = 0
+	. = 0
 	//Handle normal clothing
+	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
+		if(C)
+			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
+				. |= C.cold_protection
 
-	if(head)
-		if(head.min_cold_protection_temperature && head.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= head.cold_protection
-	if(wear_suit)
-		if(wear_suit.min_cold_protection_temperature && wear_suit.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= wear_suit.cold_protection
-	if(w_uniform)
-		if(w_uniform.min_cold_protection_temperature && w_uniform.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= w_uniform.cold_protection
-	if(shoes)
-		if(shoes.min_cold_protection_temperature && shoes.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= shoes.cold_protection
-	if(gloves)
-		if(gloves.min_cold_protection_temperature && gloves.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= gloves.cold_protection
-	if(wear_mask)
-		if(wear_mask.min_cold_protection_temperature && wear_mask.min_cold_protection_temperature <= temperature)
-			thermal_protection_flags |= wear_mask.cold_protection
-
-	return thermal_protection_flags
+/mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
+	var/thermal_protection_flags = get_heat_protection_flags(temperature)
+	return get_thermal_protection(thermal_protection_flags)
 
 /mob/living/carbon/human/get_cold_protection(temperature)
 	if(COLD_RESISTANCE in mutations)
@@ -811,33 +749,34 @@
 
 	temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
 	var/thermal_protection_flags = get_cold_protection_flags(temperature)
+	return get_thermal_protection(thermal_protection_flags)
 
-	var/thermal_protection = 0.0
-	if(thermal_protection_flags)
-		if(thermal_protection_flags & HEAD)
-			thermal_protection += THERMAL_PROTECTION_HEAD
-		if(thermal_protection_flags & UPPER_TORSO)
-			thermal_protection += THERMAL_PROTECTION_UPPER_TORSO
-		if(thermal_protection_flags & LOWER_TORSO)
-			thermal_protection += THERMAL_PROTECTION_LOWER_TORSO
-		if(thermal_protection_flags & LEG_LEFT)
-			thermal_protection += THERMAL_PROTECTION_LEG_LEFT
-		if(thermal_protection_flags & LEG_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_LEG_RIGHT
-		if(thermal_protection_flags & FOOT_LEFT)
-			thermal_protection += THERMAL_PROTECTION_FOOT_LEFT
-		if(thermal_protection_flags & FOOT_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_FOOT_RIGHT
-		if(thermal_protection_flags & ARM_LEFT)
-			thermal_protection += THERMAL_PROTECTION_ARM_LEFT
-		if(thermal_protection_flags & ARM_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_ARM_RIGHT
-		if(thermal_protection_flags & HAND_LEFT)
-			thermal_protection += THERMAL_PROTECTION_HAND_LEFT
-		if(thermal_protection_flags & HAND_RIGHT)
-			thermal_protection += THERMAL_PROTECTION_HAND_RIGHT
-
-	return min(1,thermal_protection)
+/mob/living/carbon/human/proc/get_thermal_protection(var/flags)
+	.=0
+	if(flags)
+		if(flags & HEAD)
+			. += THERMAL_PROTECTION_HEAD
+		if(flags & UPPER_TORSO)
+			. += THERMAL_PROTECTION_UPPER_TORSO
+		if(flags & LOWER_TORSO)
+			. += THERMAL_PROTECTION_LOWER_TORSO
+		if(flags & LEG_LEFT)
+			. += THERMAL_PROTECTION_LEG_LEFT
+		if(flags & LEG_RIGHT)
+			. += THERMAL_PROTECTION_LEG_RIGHT
+		if(flags & FOOT_LEFT)
+			. += THERMAL_PROTECTION_FOOT_LEFT
+		if(flags & FOOT_RIGHT)
+			. += THERMAL_PROTECTION_FOOT_RIGHT
+		if(flags & ARM_LEFT)
+			. += THERMAL_PROTECTION_ARM_LEFT
+		if(flags & ARM_RIGHT)
+			. += THERMAL_PROTECTION_ARM_RIGHT
+		if(flags & HAND_LEFT)
+			. += THERMAL_PROTECTION_HAND_LEFT
+		if(flags & HAND_RIGHT)
+			. += THERMAL_PROTECTION_HAND_RIGHT
+	return min(1,.)
 
 /mob/living/carbon/human/handle_chemicals_in_body()
 
@@ -874,9 +813,9 @@
 				var/turf/T = loc
 				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
 				if(L)
-					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 5 //hardcapped so it's not abused by having a ton of flashlights
+					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 2 //hardcapped so it's not abused by having a ton of flashlights
 				else
-					light_amount =  5
+					light_amount =  10
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
@@ -907,7 +846,7 @@
 
 	// nutrition decrease
 	if (nutrition > 0 && stat != 2)
-		nutrition = max (0, nutrition - HUNGER_FACTOR)
+		nutrition = max (0, nutrition - species.hunger_factor)
 
 	if (nutrition > 450)
 		if(overeatduration < 600) //capped so people don't take forever to unfat
@@ -929,6 +868,7 @@
 
 	return //TODO: DEFERRED
 
+//DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
 	if(!handle_some_updates())
 		return 0
@@ -951,7 +891,7 @@
 			return 1
 
 		//UNCONSCIOUS. NO-ONE IS HOME
-		if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
+		if((getOxyLoss() > (species.total_health/2)) || (health <= config.health_threshold_crit))
 			Paralyse(3)
 
 		if(hallucination)
@@ -970,11 +910,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(halloss > 100)
+		if(halloss >= species.total_health)
 			src << "<span class='notice'>You're in too much pain to keep going...</span>"
 			src.visible_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.")
 			Paralyse(10)
-			setHalLoss(99)
+			setHalLoss(species.total_health - 1)
 
 		if(paralysis || sleeping)
 			blinded = 1
@@ -982,19 +922,16 @@
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
-		if(paralysis)
-			AdjustParalysis(-1)
-
-		else if(sleeping)
-			speech_problem_flag = 1
-			handle_dreams()
-			if (mind)
-				//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-				if(client || sleeping > 3)
-					AdjustSleeping(-1)
-			if( prob(2) && health && !hal_crit )
-				spawn(0)
-					emote("snore")
+			if(sleeping)
+				speech_problem_flag = 1
+				handle_dreams()
+				if (mind)
+					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
+					if(client || sleeping > 3)
+						AdjustSleeping(-1)
+				if( prob(2) && health && !hal_crit )
+					spawn(0)
+						emote("snore")
 		//CONSCIOUS
 		else
 			stat = CONSCIOUS
@@ -1055,7 +992,7 @@
 			ear_deaf = max(ear_deaf, 1)
 		else if(ear_deaf)			//deafness, heals slowly over time
 			ear_deaf = max(ear_deaf-1, 0)
-		else if(istype(l_ear, /obj/item/clothing/ears/earmuffs) || istype(r_ear, /obj/item/clothing/ears/earmuffs))	//resting your ears with earmuffs heals ear damage faster
+		else if(get_ear_protection() >= 2)	//resting your ears with earmuffs heals ear damage faster
 			ear_damage = max(ear_damage-0.15, 0)
 			ear_deaf = max(ear_deaf, 1)
 		else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
@@ -1070,9 +1007,6 @@
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
 			adjustHalLoss(-1)
-
-		//Other
-		handle_statuses()
 
 		if (drowsyness)
 			drowsyness--
@@ -1257,7 +1191,7 @@
 
 		if(healths)
 			if (analgesic > 100)
-				healths.icon_state = "health_health_numb"
+				healths.icon_state = "health_numb"
 			else
 				switch(hal_screwyhud)
 					if(1)	healths.icon_state = "health6"
@@ -1273,8 +1207,6 @@
 							if(0 to 20)				healths.icon_state = "health5"
 							else					healths.icon_state = "health6"
 
-			if(!seer)
-				see_invisible = SEE_INVISIBLE_LIVING
 		if(nutrition_icon)
 			switch(nutrition)
 				if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1312,31 +1244,36 @@
 					if(260 to 280)			bodytemp.icon_state = "temp-3"
 					else					bodytemp.icon_state = "temp-4"
 			else
+				//TODO: precalculate all of this stuff when the species datum is created
+				var/base_temperature = species.body_temperature
+				if(base_temperature == null) //some species don't have a set metabolic temperature
+					base_temperature = (species.heat_level_1 + species.cold_level_1)/2
+
 				var/temp_step
-				if (bodytemperature >= species.body_temperature)
-					temp_step = (species.heat_level_1 - species.body_temperature)/4
+				if (bodytemperature >= base_temperature)
+					temp_step = (species.heat_level_1 - base_temperature)/4
 
 					if (bodytemperature >= species.heat_level_1)
 						bodytemp.icon_state = "temp4"
-					else if (bodytemperature >= species.body_temperature + temp_step*3)
+					else if (bodytemperature >= base_temperature + temp_step*3)
 						bodytemp.icon_state = "temp3"
-					else if (bodytemperature >= species.body_temperature + temp_step*2)
+					else if (bodytemperature >= base_temperature + temp_step*2)
 						bodytemp.icon_state = "temp2"
-					else if (bodytemperature >= species.body_temperature + temp_step*1)
+					else if (bodytemperature >= base_temperature + temp_step*1)
 						bodytemp.icon_state = "temp1"
 					else
 						bodytemp.icon_state = "temp0"
 
-				else if (bodytemperature < species.body_temperature)
-					temp_step = (species.body_temperature - species.cold_level_1)/4
+				else if (bodytemperature < base_temperature)
+					temp_step = (base_temperature - species.cold_level_1)/4
 
 					if (bodytemperature <= species.cold_level_1)
 						bodytemp.icon_state = "temp-4"
-					else if (bodytemperature <= species.body_temperature - temp_step*3)
+					else if (bodytemperature <= base_temperature - temp_step*3)
 						bodytemp.icon_state = "temp-3"
-					else if (bodytemperature <= species.body_temperature - temp_step*2)
+					else if (bodytemperature <= base_temperature - temp_step*2)
 						bodytemp.icon_state = "temp-2"
-					else if (bodytemperature <= species.body_temperature - temp_step*1)
+					else if (bodytemperature <= base_temperature - temp_step*1)
 						bodytemp.icon_state = "temp-1"
 					else
 						bodytemp.icon_state = "temp0"
@@ -1629,9 +1566,6 @@
 
 	if (BITTEST(hud_updateflag, STATUS_HUD))
 		var/foundVirus = 0
-		for(var/datum/disease/D in viruses)
-			if(!D.hidden[SCANNER])
-				foundVirus++
 		for (var/ID in virus2)
 			if (ID in virusDB)
 				foundVirus = 1

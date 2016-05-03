@@ -85,7 +85,7 @@
 	var/mob/choice = input("Choose a player to play the pAI", "Spawn pAI") in available
 	if(!choice)
 		return 0
-	if(!istype(choice, /mob/dead/observer))
+	if(!istype(choice, /mob/observer/dead))
 		var/confirm = input("[choice.key] isn't ghosting right now. Are you sure you want to yank them out of them out of their body and place them in this pAI?", "Spawn pAI Confirmation", "No") in list("Yes", "No")
 		if(confirm != "Yes")
 			return 0
@@ -99,23 +99,6 @@
 		if(candidate.key == choice.key)
 			paiController.pai_candidates.Remove(candidate)
 	feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/cmd_admin_alienize(var/mob/M in mob_list)
-	set category = "Fun"
-	set name = "Make Alien"
-
-	if(!ticker)
-		alert("Wait until the game starts")
-		return
-	if(ishuman(M))
-		log_admin("[key_name(src)] has alienized [M.key].")
-		spawn(10)
-			M:Alienize()
-			feedback_add_details("admin_verb","MKAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_admin("[key_name(usr)] made [key_name(M)] into an alien.")
-		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into an alien.", 1)
-	else
-		alert("Invalid mob")
 
 /client/proc/cmd_admin_slimeize(var/mob/M in mob_list)
 	set category = "Fun"
@@ -231,7 +214,7 @@
 	set name = "Del-All"
 
 	// to prevent REALLY stupid deletions
-	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human, /mob/dead, /mob/dead/observer, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
+	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human, /mob/observer/dead, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
 	var/hsbitem = input(usr, "Choose an object to delete.", "Delete:") as null|anything in typesof(/obj) + typesof(/mob) - blocked
 	if(hsbitem)
 		for(var/atom/O in world)
@@ -299,7 +282,7 @@
 		if(alert("This mob is being controlled by [M.ckey]. Are you sure you wish to assume control of it? [M.ckey] will be made a ghost.",,"Yes","No") != "Yes")
 			return
 		else
-			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
+			var/mob/observer/dead/ghost = new/mob/observer/dead(M,1)
 			ghost.ckey = M.ckey
 	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
 	log_admin("[key_name(usr)] assumed direct control of [M].")
@@ -443,7 +426,7 @@
 	for (var/obj/item/I in M)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
-		M.drop_from_inventory(I)
+		M.removeItem(I)
 		if(I.loc != M)
 			qdel(I)
 	switch(dresscode)
@@ -495,8 +478,6 @@
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_trench(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/plain/monocle(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/det(M), slot_head)
-
-			M.equip_to_slot_or_del(new /obj/item/weapon/cloaking_device(M), slot_r_store)
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver(M), slot_r_hand)
 			M.equip_to_slot_or_del(new /obj/item/ammo_magazine/a357(M), slot_l_store)
@@ -604,7 +585,6 @@
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/wcoat(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(M), slot_l_store)
-			M.equip_to_slot_or_del(new /obj/item/weapon/cloaking_device(M), slot_r_store)
 
 			var/obj/item/weapon/storage/secure/briefcase/sec_briefcase = new(M)
 			for(var/obj/item/briefcase_item in sec_briefcase)
@@ -752,7 +732,7 @@
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
 		if("blue wizard")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/lightpurple(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
@@ -764,7 +744,7 @@
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box(M), slot_in_backpack)
 
 		if("red wizard")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/lightpurple(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/red(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
@@ -776,7 +756,7 @@
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box(M), slot_in_backpack)
 
 		if("marisa wizard")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/lightpurple(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/marisa(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal/marisa(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
@@ -952,17 +932,17 @@
 
 	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
 		if("Players")
-			usr << list2text(player_list,",")
+			usr << jointext(player_list,",")
 		if("Admins")
-			usr << list2text(admins,",")
+			usr << jointext(admins,",")
 		if("Mobs")
-			usr << list2text(mob_list,",")
+			usr << jointext(mob_list,",")
 		if("Living Mobs")
-			usr << list2text(living_mob_list,",")
+			usr << jointext(living_mob_list,",")
 		if("Dead Mobs")
-			usr << list2text(dead_mob_list,",")
+			usr << jointext(dead_mob_list,",")
 		if("Clients")
-			usr << list2text(clients,",")
+			usr << jointext(clients,",")
 
 // DNA2 - Admin Hax
 /client/proc/cmd_admin_toggle_block(var/mob/M,var/block)

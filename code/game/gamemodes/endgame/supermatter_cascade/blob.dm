@@ -93,7 +93,7 @@
 
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
 
-	user.drop_from_inventory(W)
+	user.removeItem(W, force = 1)
 	Consume(W)
 
 
@@ -112,7 +112,7 @@
 
 
 /turf/unsimulated/wall/supermatter/proc/Consume(var/mob/living/user)
-	if(istype(user,/mob/dead/observer))
+	if(istype(user,/mob/observer))
 		return
 
 	qdel(user)

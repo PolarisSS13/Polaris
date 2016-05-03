@@ -38,6 +38,7 @@
 	interface_desc = "A self-sustaining plasma arc capable of cutting through walls."
 	suit_overlay_active = "plasmacutter"
 	suit_overlay_inactive = "plasmacutter"
+	use_power_cost = 0.5
 
 	device_type = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -58,6 +59,7 @@
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
+	use_power_cost = 0.1
 
 	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
@@ -137,7 +139,7 @@
 		list("dexalin plus",  "dexalinp",      0, 80),
 		list("antibiotics",   "spaceacillin",  0, 80),
 		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 80),
 		list("radium",        "radium",        0, 80)
 		)
@@ -154,7 +156,7 @@
 		list("dexalin plus",  "dexalinp",      0, 20),
 		list("antibiotics",   "spaceacillin",  0, 20),
 		list("antitoxins",    "anti_toxin",    0, 20),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 20),
 		list("radium",        "radium",        0, 20)
 		)
@@ -243,7 +245,7 @@
 		list("synaptizine",   "synaptizine",   0, 30),
 		list("hyperzine",     "hyperzine",     0, 30),
 		list("oxycodone",     "oxycodone",     0, 30),
-		list("nutrients",     "nutriment",     0, 80),
+		list("nutrients",     "glucose",     0, 80),
 		)
 
 	interface_name = "combat chem dispenser"
@@ -456,8 +458,7 @@
 		return
 
 	for(var/obj/item/weapon/mop_deploy/blade in M.contents)
-		M.drop_from_inventory(blade)
-		del(blade)
+		M.deleteItem(blade)
 
 
 	//Space Cleaner Launcher
@@ -499,8 +500,7 @@
 		return 0
 
 	user << "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>"
-	user.drop_from_inventory(input_device)
-	del(input_device)
+	user.deleteItem(input_device)
 	accepted_item.charges++
 	return 1
 

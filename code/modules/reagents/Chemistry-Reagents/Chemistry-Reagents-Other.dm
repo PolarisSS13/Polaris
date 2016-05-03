@@ -66,7 +66,7 @@
 		O.color = color
 
 /datum/reagent/paint/touch_mob(var/mob/M)
-	if(istype(M) && !istype(M, /mob/dead)) //painting ghosts: not allowed
+	if(istype(M) && !istype(M, /mob/observer)) //painting ghosts: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
 /datum/reagent/paint/get_data()
@@ -141,11 +141,6 @@
 	M.confused = 0
 	M.sleeping = 0
 	M.jitteriness = 0
-	for(var/datum/disease/D in M.viruses)
-		D.spread = "Remissive"
-		D.stage--
-		if(D.stage < 1)
-			D.cure()
 
 /datum/reagent/gold
 	name = "Gold"

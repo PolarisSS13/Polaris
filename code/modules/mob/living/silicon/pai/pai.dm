@@ -7,6 +7,12 @@
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
+	can_pull_size = 2
+	can_pull_mobs = MOB_PULL_SMALLER
+
+	idcard_type = /obj/item/weapon/card/id
+	var/idaccessible = 0
+
 	var/network = "SS13"
 	var/obj/machinery/camera/current = null
 
@@ -262,7 +268,7 @@
 					affecting.implants -= card
 					H.visible_message("<span class='danger'>\The [src] explodes out of \the [H]'s [affecting.name] in shower of gore!</span>")
 					break
-		holder.drop_from_inventory(card)
+		holder.removeItem(card)
 	else if(istype(card.loc,/obj/item/device/pda))
 		var/obj/item/device/pda/holder = card.loc
 		holder.pai = null
@@ -380,7 +386,7 @@
 	if(istype(H))
 		var/mob/living/M = H.loc
 		if(istype(M))
-			M.drop_from_inventory(H)
+			M.removeItem(H)
 		H.loc = get_turf(src)
 		src.loc = get_turf(H)
 
@@ -406,3 +412,35 @@
 	grabber.update_inv_l_hand()
 	grabber.update_inv_r_hand()
 	return H
+
+/mob/living/silicon/pai/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	var/obj/item/weapon/card/id/ID = W.GetID()
+	if(ID)
+		if (idaccessible == 1)
+			switch(alert(user, "Do you wish to add access to [src] or remove access from [src]?",,"Add Access","Remove Access", "Cancel"))
+				if("Add Access")
+					idcard.access |= ID.access
+					user << "<span class='notice'>You add the access from the [W] to [src].</span>"
+					return
+				if("Remove Access")
+					idcard.access = null
+					user << "<span class='notice'>You remove the access from [src].</span>"
+					return
+				if("Cancel")
+					return
+		else if (istype(W, /obj/item/weapon/card/id) && idaccessible == 0)
+			user << "<span class='notice'>[src] is not accepting access modifcations at this time.</span>"
+			return
+
+/mob/living/silicon/pai/verb/allowmodification()
+	set name = "Change Access Modifcation Permission"
+	set category = "pAI Commands"
+	desc = "Allows people to modify your access or block people from modifying your access."
+
+	if(idaccessible == 0)
+		idaccessible = 1
+		src << "<span class='notice'>You allow access modifications.</span>"
+
+	else
+		idaccessible = 0
+		src << "<span class='notice'>You block access modfications.</span>"

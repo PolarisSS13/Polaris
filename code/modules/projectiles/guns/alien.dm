@@ -1,11 +1,11 @@
-//Vox pinning weapon.
+// Alien pinning weapon.
 /obj/item/weapon/gun/launcher/spikethrower
 
 	name = "spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
 	var/last_regen = 0
-	var/spike_gen_time = 100
+	var/spike_gen_time = 150
 	var/max_spikes = 3
 	var/spikes = 3
 	release_force = 30
@@ -36,14 +36,6 @@
 
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
-
-/obj/item/weapon/gun/launcher/spikethrower/special_check(user)
-	if(istype(user,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = user
-		if(H.species && H.species.get_bodytype() != "Vox")
-			user << "<span class='warning'>\The [src] does not respond to you!</span>"
-			return 0
-	return ..()
 
 /obj/item/weapon/gun/launcher/spikethrower/update_release_force()
 	return

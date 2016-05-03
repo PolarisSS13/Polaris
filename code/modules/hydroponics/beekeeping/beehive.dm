@@ -67,8 +67,7 @@
 		++frames
 		user.visible_message("<span class='notice'>[user] loads \the [I] into \the [src].</span>", "<span class='notice'>You load \the [I] into \the [src].</span>")
 		update_icon()
-		user.drop_from_inventory(I)
-		qdel(I)
+		user.deleteItem(I)
 		return
 	else if(istype(I, /obj/item/bee_pack))
 		var/obj/item/bee_pack/B = I
@@ -89,7 +88,7 @@
 			bee_count = 20
 			B.empty()
 		else
-			user.visible_message("<span class='notice'>[user] puts bees and larvae from \the [src] into \the [I].</span>", "<span class='notice'>You put puts bees and larvae from \the [src] into \the [I].</span>")
+			user.visible_message("<span class='notice'>[user] puts bees and larvae from \the [src] into \the [I].</span>", "<span class='notice'>You put bees and larvae from \the [src] into \the [I].</span>")
 			bee_count /= 2
 			B.fill()
 		update_icon()
@@ -229,8 +228,7 @@
 	if(do_after(user, 30))
 		user.visible_message("<span class='notice'>[user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
-		user.drop_from_inventory(src)
-		qdel(src)
+		user.deleteItem(src)
 	return
 
 /obj/item/stack/wax

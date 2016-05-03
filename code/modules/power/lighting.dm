@@ -255,7 +255,7 @@
 		use_power = 1
 		set_light(0)
 
-	active_power_usage = ((light_range + light_power) * 10)
+	active_power_usage = light_range * light_power
 	if(on != on_gs)
 		on_gs = on
 
@@ -590,7 +590,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	force = 2
 	throwforce = 5
-	w_class = 2
+	w_class = 1
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched

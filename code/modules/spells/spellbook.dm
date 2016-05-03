@@ -361,7 +361,7 @@
 		for(var/V in stored_swap.mind.special_verbs)
 			stored_swap.verbs -= V
 
-	var/mob/dead/observer/ghost = stored_swap.ghostize(0)
+	var/mob/observer/dead/ghost = stored_swap.ghostize(0)
 	ghost.spell_list = stored_swap.spell_list
 
 	user.mind.transfer_to(stored_swap)
@@ -421,7 +421,7 @@
 		magichead.canremove = 0		//curses!
 		magichead.flags_inv = null	//so you can still see their face
 		magichead.voicechange = 1	//NEEEEIIGHH
-		user.drop_from_inventory(user.wear_mask)
+		user.removeItem(user.wear_mask)
 		user.equip_to_slot_if_possible(magichead, slot_wear_mask, 1, 1)
 		qdel(src)
 	else

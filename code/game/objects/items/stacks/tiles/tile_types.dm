@@ -4,6 +4,7 @@
  *		Grass
  *		Wood
  *		Carpet
+ *		Linoleum
  */
 
 /obj/item/stack/tile
@@ -75,7 +76,7 @@
 	desc = "Those could work as a pretty decent throwing weapon" //why?
 	icon_state = "tile"
 	force = 6.0
-	matter = list(DEFAULT_WALL_MATERIAL = 937.5)
+	matter = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 4)
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
@@ -91,13 +92,13 @@
 	name = "steel floor tile"
 	singular_name = "steel floor tile"
 	icon_state = "tile_steel"
-	matter = list("plasteel" = 937.5)
+	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
 
 /obj/item/stack/tile/floor_white
 	name = "white floor tile"
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
-	matter = list("plastic" = 937.5)
+	matter = list("plastic" = SHEET_MATERIAL_AMOUNT / 4)
 
 /obj/item/stack/tile/floor_yellow
 	name = "yellow floor tile"
@@ -109,13 +110,13 @@
 	name = "dark floor tile"
 	singular_name = "dark floor tile"
 	icon_state = "fr_tile"
-	matter = list("plasteel" = 937.5)
+	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
 
 /obj/item/stack/tile/floor_freezer
 	name = "freezer floor tile"
 	singular_name = "freezer floor tile"
 	icon_state = "tile_freezer"
-	matter = list("plastic" = 937.5)
+	matter = list("plastic" = SHEET_MATERIAL_AMOUNT / 4)
 
 /obj/item/stack/tile/floor/cyborg
 	name = "floor tile synthesizer"
@@ -126,3 +127,14 @@
 	charge_costs = list(250)
 	stacktype = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
+
+/obj/item/stack/tile/linoleum
+	name = "linoleum"
+	singular_name = "linoleum"
+	desc = "A piece of linoleum. It is the same size as a normal floor tile!"
+	icon_state = "tile-linoleum"
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0

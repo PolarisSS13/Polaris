@@ -17,6 +17,8 @@ var/global/list/additional_antag_types = list()
 	var/ert_disabled = 0                     // ERT cannot be called.
 	var/deny_respawn = 0	                 // Disable respawn during this round.
 
+	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
+
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
@@ -37,10 +39,6 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/New()
 	..()
-	// Enforce some formatting.
-	// This will probably break something.
-	name = capitalize(lowertext(name))
-	config_tag = lowertext(config_tag)
 
 /datum/game_mode/Topic(href, href_list[])
 	if(..())
@@ -252,13 +250,13 @@ var/global/list/additional_antag_types = list()
 		"suspected criminal operatives",
 		"malfunctioning von Neumann probe swarms",
 		"shadowy interlopers",
-		"a stranded Vox arkship",
+		"a stranded alien arkship",
 		"haywire IPC constructs",
 		"rogue Unathi exiles",
 		"artifacts of eldritch horror",
 		"a brain slug infestation",
 		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenomorph specimens",
+		"a deserted transport carrying alien specimens",
 		"an emissary for the gestalt requesting a security detail",
 		"a Tajaran slave rebellion",
 		"radical Skrellian transevolutionaries",
@@ -535,7 +533,7 @@ proc/display_roundstart_logout_report()
 					continue //Dead
 
 			continue //Happy connected client
-		for(var/mob/dead/observer/D in mob_list)
+		for(var/mob/observer/dead/D in mob_list)
 			if(D.mind && (D.mind.original == L || D.mind.current == L))
 				if(L.stat == DEAD)
 					if(L.suiciding)	//Suicider
@@ -569,24 +567,9 @@ proc/get_nt_opposed()
 	if(dudes.len == 0) return null
 	return pick(dudes)
 
-//Announces objectives/generic antag text.
-/proc/show_generic_antag_text(var/datum/mind/player)
-	if(player.current)
-		player.current << \
-		"You are an antagonist! <font color=blue>Within the rules,</font> \
-		try to act as an opposing force to the crew. Further RP and try to make sure \
-		other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
-		and before taking extreme actions, please try to also contact the administration! \
-		Think through your actions and make the roleplay immersive! <b>Please remember all \
-		rules aside from those without explicit exceptions apply to antagonists.</b>"
-
 /proc/show_objectives(var/datum/mind/player)
 
 	if(!player || !player.current) return
-
-	if(config.objectives_disabled)
-		show_generic_antag_text(player)
-		return
 
 	var/obj_count = 1
 	player.current << "<span class='notice'>Your current objectives:</span>"

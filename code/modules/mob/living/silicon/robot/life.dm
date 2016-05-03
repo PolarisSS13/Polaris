@@ -97,6 +97,8 @@
 		else	//Not stunned.
 			src.stat = 0
 
+		confused = max(0, confused - 1)
+
 	else //Dead.
 		src.blinded = 1
 		src.stat = 2
@@ -146,19 +148,23 @@
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
 
-	if (src.stat == 2 || XRAY in mutations || src.sight_mode & BORGXRAY)
+	if (src.stat == 2 || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
 		src.sight |= SEE_OBJS
 		src.see_in_dark = 8
 		src.see_invisible = SEE_INVISIBLE_MINIMUM
-	else if (src.sight_mode & BORGMESON && src.sight_mode & BORGTHERM)
+	else if ((src.sight_mode & BORGMESON) && (src.sight_mode & BORGTHERM))
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
 		src.see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_MINIMUM
 	else if (src.sight_mode & BORGMESON)
 		src.sight |= SEE_TURFS
+		src.see_in_dark = 8
+		see_invisible = SEE_INVISIBLE_MINIMUM
+	else if (src.sight_mode & BORGMATERIAL)
+		src.sight |= SEE_OBJS
 		src.see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_MINIMUM
 	else if (src.sight_mode & BORGTHERM)
@@ -330,7 +336,7 @@
 			weaponlock_time = 120
 
 /mob/living/silicon/robot/update_canmove()
-	if(paralysis || stunned || weakened || buckled || lockcharge || !is_component_functioning("actuator")) canmove = 0
+	if(paralysis || stunned || weakened || buckled || lockdown || !is_component_functioning("actuator")) canmove = 0
 	else canmove = 1
 	return canmove
 

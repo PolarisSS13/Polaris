@@ -73,14 +73,14 @@
 
 /obj/item/weapon/paper/examine(mob/user)
 	..()
-	if(in_range(user, src) || istype(user, /mob/dead/observer))
+	if(in_range(user, src) || istype(user, /mob/observer/dead))
 		show_content(usr)
 	else
 		user << "<span class='notice'>You have to go closer if you want to read it.</span>"
 	return
 
 /obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/dead/observer) || istype(user, /mob/living/silicon)) && !forceshow)
+	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/observer/dead) || istype(user, /mob/living/silicon)) && !forceshow)
 		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
 		onclose(user, "[name]")
 	else
@@ -307,7 +307,7 @@
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
 				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
+					user.removeItem(src)
 
 				new /obj/effect/decal/cleanable/ash(src.loc)
 				qdel(src)
@@ -337,8 +337,9 @@
 		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check if he's using a crayon or pen.
 		var/iscrayon = 0
 		if(!istype(i, /obj/item/weapon/pen))
-			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
-				var/obj/item/weapon/rig/r = usr.back
+			var/mob/living/M = usr
+			if(istype(M) && M.back && istype(M.back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/r = M.back
 				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
 				if(!r.offline && m)
 					i = m.device
@@ -414,23 +415,23 @@
 			B.name = name
 		else if (P.name != "paper" && P.name != "photo")
 			B.name = P.name
-		user.drop_from_inventory(P)
+		user.removeItem(P)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/h_user = user
 			if (h_user.r_hand == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				h_user.put_in_r_hand(B)
 			else if (h_user.l_hand == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				h_user.put_in_l_hand(B)
 			else if (h_user.l_store == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				B.loc = h_user
 				B.layer = 20
 				h_user.l_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.r_store == src)
-				h_user.drop_from_inventory(src)
+				h_user.removeItem(src)
 				B.loc = h_user
 				B.layer = 20
 				h_user.r_store = B

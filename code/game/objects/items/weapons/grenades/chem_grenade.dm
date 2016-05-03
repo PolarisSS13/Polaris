@@ -17,9 +17,7 @@
 	var/affected_area = 3
 
 	New()
-		var/datum/reagents/R = new/datum/reagents(1000)
-		reagents = R
-		R.my_atom = src
+		create_reagents(1000)
 
 	attack_self(mob/user as mob)
 		if(!stage || stage==1)
@@ -61,8 +59,7 @@
 			path = 1
 			user << "<span class='notice'>You add [W] to the metal casing.</span>"
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
-			user.remove_from_mob(det)
-			det.loc = src
+			user.removeItem(det, src)
 			detonator = det
 			if(istimer(detonator.a_left))
 				var/obj/item/device/assembly/timer/T = detonator.a_left
@@ -164,7 +161,7 @@
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
 
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-			G.reagents.trans_to(src, G.reagents.total_volume)
+			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 
 		if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
 			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
@@ -178,7 +175,7 @@
 
 		if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
 			var/mob/living/carbon/C = loc
-			C.drop_from_inventory(src)
+			C.removeItem(src)
 			C.throw_mode_off()
 
 		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?

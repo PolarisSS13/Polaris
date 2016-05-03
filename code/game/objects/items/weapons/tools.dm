@@ -173,7 +173,7 @@
 		user << text("\icon[] [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel )
 
 
-/obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/living/user as mob)
 	if(istype(W,/obj/item/weapon/screwdriver))
 		if(welding)
 			user << "<span class='danger'>Stop welding first!</span>"
@@ -195,12 +195,12 @@
 		if (user.client)
 			user.client.screen -= src
 		if (user.r_hand == src)
-			user.remove_from_mob(src)
+			user.removeItem(src)
 		else
-			user.remove_from_mob(src)
+			user.removeItem(src)
 		src.master = F
 		src.layer = initial(src.layer)
-		user.remove_from_mob(src)
+		user.removeItem(src)
 		if (user.client)
 			user.client.screen -= src
 		src.loc = F
@@ -216,15 +216,15 @@
 		if(prob(5))
 			remove_fuel(1)
 
-		if(get_fuel() == 0)
+		if(get_fuel() < 1)
 			setWelding(0)
 
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
 	var/turf/location = src.loc
-	if(istype(location, /mob/))
-		var/mob/M = location
-		if(M.l_hand == src || M.r_hand == src)
+	if(istype(location, /mob/living))
+		var/mob/living/M = location
+		if(M.item_is_in_hands(src))
 			location = get_turf(M)
 	if (istype(location, /turf))
 		location.hotspot_expose(700, 5)

@@ -40,7 +40,7 @@
 /obj/item/weapon/reagent_containers/glass/rag/attack_self(mob/user as mob)
 	if(on_fire)
 		user.visible_message("<span class='warning'>\The [user] stamps out [src].</span>", "<span class='warning'>You stamp out [src].</span>")
-		user.unEquip(src)
+		user.removeItem(src)
 		extinguish()
 	else
 		remove_contents(user)
@@ -143,7 +143,7 @@
 		return
 
 	if(!on_fire && istype(A) && (src in user))
-		if(A.is_open_container())
+		if(A.is_open_container() && !(A in user))
 			remove_contents(user, A)
 		else if(!ismob(A)) //mobs are handled in attack() - this prevents us from wiping down people while smothering them.
 			wipe_down(A, user)

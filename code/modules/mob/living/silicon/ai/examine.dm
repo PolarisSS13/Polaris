@@ -17,7 +17,7 @@
 				msg += "It looks slightly charred.\n"
 			else
 				msg += "<B>Its casing is melted and heat-warped!</B>\n"
-		if (src.getOxyLoss())
+		if (src.getOxyLoss() && (aiRestorePowerRoutine != 0 && !APU_power))
 			if (src.getOxyLoss() > 175)
 				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
 			else if(src.getOxyLoss() > 100)
@@ -39,6 +39,6 @@
 /mob/proc/showLaws(var/mob/living/silicon/S)
 	return
 
-/mob/dead/observer/showLaws(var/mob/living/silicon/S)
+/mob/observer/dead/showLaws(var/mob/living/silicon/S)
 	if(antagHUD || is_admin(src))
 		S.laws.show_laws(src)

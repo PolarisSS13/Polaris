@@ -23,32 +23,7 @@
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
-
-// Age limits on a character.
-#define AGE_MIN 17
-#define AGE_MAX 85
-
 #define MAX_GEAR_COST 10 // Used in chargen for accessory loadout limit.
-
-// Preference toggles.
-#define SOUND_ADMINHELP 0x1
-#define SOUND_MIDI      0x2
-#define SOUND_AMBIENCE  0x4
-#define SOUND_LOBBY     0x8
-#define CHAT_OOC        0x10
-#define CHAT_DEAD       0x20
-#define CHAT_GHOSTEARS  0x40
-#define CHAT_GHOSTSIGHT 0x80
-#define CHAT_PRAYER     0x100
-#define CHAT_RADIO      0x200
-#define CHAT_ATTACKLOGS 0x400
-#define CHAT_DEBUGLOGS  0x800
-#define CHAT_LOOC       0x1000
-#define CHAT_GHOSTRADIO 0x2000
-#define SHOW_TYPING     0x4000
-#define CHAT_NOICONS    0x8000
-
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
 // For secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
 #define      HEALTH_HUD 1 // A simple line rounding the mob's number health.
@@ -103,10 +78,10 @@
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
 #define MAX_MESSAGE_LEN       1024
-#define MAX_PAPER_MESSAGE_LEN 3072
-#define MAX_BOOK_MESSAGE_LEN  9216
+#define MAX_PAPER_MESSAGE_LEN 6144
+#define MAX_BOOK_MESSAGE_LEN  12288
 #define MAX_LNAME_LEN         64
-#define MAX_NAME_LEN          26
+#define MAX_NAME_LEN          52
 
 // Event defines.
 #define EVENT_LEVEL_MUNDANE  1

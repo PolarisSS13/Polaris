@@ -3,7 +3,7 @@
 
 	var/obj/item/organ/external/E = H.get_organ(target_zone)
 
-	if(!E || (E.status & ORGAN_DESTROYED))
+	if(!E || E.is_stump())
 		user << "<span class='notice'>[H] is missing that bodypart.</span>"
 		return
 
@@ -106,9 +106,7 @@
 	target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Headbutted by [attacker.name] ([attacker.ckey])</font>")
 	msg_admin_attack("[key_name(attacker)] has headbutted [key_name(target)]")
 
-	attacker.drop_from_inventory(src)
-	src.loc = null
-	qdel(src)
+	attacker.deleteItem(src)
 	return
 
 /obj/item/weapon/grab/proc/dislocate(mob/living/carbon/human/target, mob/living/attacker, var/target_zone)
@@ -142,14 +140,14 @@
 
 /obj/item/weapon/grab/proc/devour(mob/target, mob/user)
 	var/can_eat
-	if((FAT in user.mutations) && issmall(target))
+	if((FAT in user.mutations) && ismini(target))
 		can_eat = 1
 	else
 		var/mob/living/carbon/human/H = user
 		if(istype(H) && H.species.gluttonous)
 			if(H.species.gluttonous == 2)
 				can_eat = 2
-			else if((H.mob_size > target.mob_size) && !ishuman(target) && iscarbon(target))
+			else if((H.mob_size > target.mob_size) && !ishuman(target) && ismini(target))
 				can_eat = 1
 
 	if(can_eat)
@@ -158,7 +156,7 @@
 		if(can_eat == 2)
 			if(!do_mob(user, target)||!do_after(user, 30)) return
 		else
-			if(!do_mob(user, target)||!do_after(user, 100)) return
+			if(!do_mob(user, target)||!do_after(user, 70)) return
 		user.visible_message("<span class='danger'>[user] devours [target]!</span>")
 		target.loc = user
 		attacker.stomach_contents.Add(target)

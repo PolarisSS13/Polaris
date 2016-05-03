@@ -85,7 +85,7 @@
 					usr << "No input found please hang up and try your call again."
 					return
 
-				var/list/tempnetwork = text2list(input, ",")
+				var/list/tempnetwork = splittext(input, ",")
 				if(tempnetwork.len < 1)
 					usr << "No network found please hang up and try your call again."
 					return
@@ -127,8 +127,7 @@
 	if(is_type_in_list(W, possible_upgrades) && !is_type_in_list(W, upgrades)) // Is a possible upgrade and isn't in the camera already.
 		user << "You attach \the [W] into the assembly inner circuits."
 		upgrades += W
-		user.remove_from_mob(W)
-		W.loc = src
+		user.removeItem(W, src)
 		return
 
 	// Taking out upgrades

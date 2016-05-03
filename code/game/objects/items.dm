@@ -10,12 +10,16 @@
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
+	var/storage_cost = null
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	var/no_attack_log = 0			//If it's an item we don't want to log attack_logs with, set this to 1
 	pass_flags = PASSTABLE
 	pressure_resistance = 5
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
+	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
+	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/force = 0
 
 	var/heat_protection = 0 //flags which determine which body parts are protected from heat. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
 	var/cold_protection = 0 //flags which determine which body parts are protected from cold. Use the HEAD, UPPER_TORSO, LOWER_TORSO, etc. flags. See setup.dm
@@ -73,18 +77,15 @@
 
 /obj/item/equipped()
 	..()
-	var/mob/M = loc
+	var/mob/living/M = loc
 	if(!istype(M))
 		return
-	if(M.l_hand)
-		M.l_hand.update_held_icon()
-	if(M.r_hand)
-		M.r_hand.update_held_icon()
+	M.update_held_icons()
 
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
-		m.drop_from_inventory(src)
+		m.removeItem(src, force = 1)
 		m.update_inv_r_hand()
 		m.update_inv_l_hand()
 		src.loc = null
@@ -95,8 +96,8 @@
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_held_icon()
-	if(ismob(src.loc))
-		var/mob/M = src.loc
+	if(isliving(src.loc))
+		var/mob/living/M = src.loc
 		if(M.l_hand == src)
 			M.update_inv_l_hand()
 		else if(M.r_hand == src)
@@ -157,7 +158,7 @@
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 
-/obj/item/attack_hand(mob/user as mob)
+/obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
@@ -167,6 +168,9 @@
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 			return
+		if(!temp)
+			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
+			return
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -174,7 +178,7 @@
 
 	src.throwing = 0
 	if (src.loc == user)
-		if(!user.unEquip(src))
+		if(!user.removeItem(src))
 			return
 	else
 		if(isliving(src.loc))
@@ -257,6 +261,9 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
+	layer = 20
+	if(user.client)	user.client.screen |= src
+	if(user.pulling == src) user.stop_pulling()
 	return
 
 //Defines which slots correspond to which slot flags
@@ -352,7 +359,7 @@ var/list/global/slot_flags_enumeration = list(
 			var/allow = 0
 			if(H.back && istype(H.back, /obj/item/weapon/storage/backpack))
 				var/obj/item/weapon/storage/backpack/B = H.back
-				if(B.contents.len < B.storage_slots && w_class <= B.max_w_class)
+				if(B.can_be_inserted(src,1))
 					allow = 1
 			if(!allow)
 				return 0
@@ -390,17 +397,15 @@ var/list/global/slot_flags_enumeration = list(
 	if((!istype(usr, /mob/living/carbon)) || (istype(usr, /mob/living/carbon/brain)))//Is humanoid, and is not a brain
 		usr << "<span class='warning'>You can't pick things up!</span>"
 		return
+	var/mob/living/carbon/C = usr
 	if( usr.stat || usr.restrained() )//Is not asleep/dead and is not restrained
 		usr << "<span class='warning'>You can't pick things up!</span>"
 		return
 	if(src.anchored) //Object isn't anchored
 		usr << "<span class='warning'>You can't pick that up!</span>"
 		return
-	if(!usr.hand && usr.r_hand) //Right hand is not full
-		usr << "<span class='warning'>Your right hand is full.</span>"
-		return
-	if(usr.hand && usr.l_hand) //Left hand is not full
-		usr << "<span class='warning'>Your left hand is full.</span>"
+	if(C.get_active_hand()) //Hand is not full
+		usr << "<span class='warning'>Your hand is full.</span>"
 		return
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		usr << "<span class='warning'>You can't pick that up!</span>"

@@ -37,6 +37,8 @@
 
 /obj/machinery/iv_drip/MouseDrop(over_object, src_location, over_location)
 	..()
+	if(!isliving(usr))
+		return
 
 	if(attached)
 		visible_message("[src.attached] is detached from \the [src]")
@@ -61,6 +63,19 @@
 		src.beaker = W
 		user << "You attach \the [W] to \the [src]."
 		src.update_icon()
+		return
+
+	if(istype(W, /obj/item/weapon/screwdriver))
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		user << "<span class='notice'>You start to dismantle the IV drip.</span>"
+		if(do_after(user, 15))
+			user << "<span class='notice'>You dismantle the IV drip.</span>"
+			var/obj/item/stack/rods/A = new /obj/item/stack/rods( src.loc )
+			A.amount = 6
+			if(src.beaker)
+				src.beaker.loc = get_turf(src)
+				src.beaker = null
+			qdel(src)
 		return
 	else
 		return ..()
@@ -110,7 +125,7 @@
 				return
 
 			// If the human is losing too much blood, beep.
-			if(T.vessel.get_reagent_amount("blood") < BLOOD_VOLUME_SAFE) if(prob(5))
+			if(((T.vessel.get_reagent_amount("blood")/T.species.blood_volume)*100) < BLOOD_VOLUME_SAFE)
 				visible_message("\The [src] beeps loudly.")
 
 			var/datum/reagent/B = T.take_blood(beaker,amount)

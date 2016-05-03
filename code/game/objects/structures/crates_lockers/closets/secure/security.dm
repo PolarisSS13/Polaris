@@ -10,31 +10,16 @@
 
 	New()
 		..()
-		if(prob(50))
-			new /obj/item/weapon/storage/backpack/captain(src)
-		else
-			new /obj/item/weapon/storage/backpack/satchel_cap(src)
-		if(prob(50))
-			new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
-		new /obj/item/clothing/suit/captunic(src)
-		new /obj/item/clothing/suit/captunic/capjacket(src)
-		new /obj/item/clothing/head/caphat/cap(src)
-		new /obj/item/clothing/under/rank/captain(src)
+		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
 		new /obj/item/clothing/suit/storage/vest(src)
 		new /obj/item/weapon/cartridge/captain(src)
 		new /obj/item/clothing/head/helmet/swat(src)
 		new /obj/item/weapon/storage/lockbox/medal(src)
-		new /obj/item/clothing/shoes/brown(src)
 		new /obj/item/device/radio/headset/heads/captain(src)
 		new /obj/item/device/radio/headset/heads/captain/alt(src)
-		new /obj/item/clothing/gloves/captain(src)
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/clothing/suit/armor/captain(src)
 		new /obj/item/weapon/melee/telebaton(src)
-		new /obj/item/clothing/under/dress/dress_cap(src)
-		new /obj/item/clothing/head/caphat/formal(src)
-		new /obj/item/clothing/under/captainformal(src)
-		new /obj/item/clothing/suit/storage/hooded/wintercoat/captain(src)
 		return
 
 
@@ -51,7 +36,6 @@
 
 	New()
 		..()
-		new /obj/item/clothing/glasses/sunglasses(src)
 		new /obj/item/clothing/suit/storage/vest(src)
 		new /obj/item/clothing/head/helmet(src)
 		new /obj/item/weapon/cartridge/hop(src)
@@ -89,6 +73,8 @@
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/under/rank/head_of_personnel_whimsy(src)
 		new /obj/item/clothing/head/caphat/hop(src)
+		new /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit(src)
+		new /obj/item/clothing/glasses/sunglasses(src)
 		return
 
 
@@ -102,13 +88,14 @@
 	icon_opened = "hossecureopen"
 	icon_broken = "hossecurebroken"
 	icon_off = "hossecureoff"
+	storage_capacity = 2.5 * MOB_MEDIUM
 
 	New()
 		..()
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
-			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+			new /obj/item/weapon/storage/backpack/satchel/sec(src)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
 		new /obj/item/clothing/head/helmet/HoS(src)
@@ -125,7 +112,8 @@
 		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/shield/riot(src)
 		new /obj/item/weapon/shield/riot/tele(src)
-		new /obj/item/clothing/accessory/badge/hos(src)
+		new /obj/item/weapon/storage/box/holobadge/hos(src)
+		new /obj/item/clothing/accessory/badge/holo/hos(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/device/flash(src)
@@ -135,6 +123,7 @@
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/head/beret/sec/corporate/hos(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/security(src)
+		new /obj/item/device/flashlight/maglight(src)
 		return
 
 
@@ -155,7 +144,7 @@
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
-			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+			new /obj/item/weapon/storage/backpack/satchel/sec(src)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
 		new /obj/item/clothing/suit/storage/vest/warden(src)
@@ -169,7 +158,7 @@
 		new /obj/item/device/radio/headset/headset_sec/alt(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
 		new /obj/item/taperoll/police(src)
-		new /obj/item/clothing/accessory/badge/warden(src)
+		new /obj/item/clothing/accessory/badge/holo/warden(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/weapon/reagent_containers/spray/pepper(src)
@@ -178,6 +167,8 @@
 		new /obj/item/weapon/storage/box/holobadge(src)
 		new /obj/item/clothing/head/beret/sec/corporate/warden(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/security(src)
+		new /obj/item/device/flashlight/maglight(src)
+		new /obj/item/device/megaphone(src)
 		return
 
 
@@ -197,7 +188,7 @@
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/security(src)
 		else
-			new /obj/item/weapon/storage/backpack/satchel_sec(src)
+			new /obj/item/weapon/storage/backpack/satchel/sec(src)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
 		new /obj/item/clothing/suit/storage/vest/officer(src)
@@ -220,6 +211,7 @@
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/weapon/gun/energy/taser(src)
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/security(src)
+		new /obj/item/device/flashlight/maglight(src)
 		return
 
 
@@ -268,20 +260,8 @@
 
 	New()
 		..()
-		new /obj/item/clothing/under/det(src)
-		new /obj/item/clothing/under/det/grey(src)
-		new /obj/item/clothing/under/det/black(src)
-		new /obj/item/clothing/under/det/waistcoat(src)
-		new /obj/item/clothing/under/det/grey/waistcoat(src)
-		new /obj/item/clothing/suit/storage/det_trench(src)
-		new /obj/item/clothing/suit/storage/det_trench/grey(src)
-		new /obj/item/clothing/suit/storage/forensics/blue(src)
-		new /obj/item/clothing/suit/storage/forensics/red(src)
-		new /obj/item/clothing/accessory/badge/detective(src)
+		new /obj/item/clothing/accessory/badge/holo/detective(src)
 		new /obj/item/clothing/gloves/black(src)
-		new /obj/item/clothing/head/det(src)
-		new /obj/item/clothing/head/det/grey(src)
-		new /obj/item/clothing/shoes/laceup(src)
 		new /obj/item/weapon/storage/belt/detective(src)
 		new /obj/item/weapon/storage/box/evidence(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
@@ -292,6 +272,9 @@
 		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/gun/projectile/colt/detective(src)
 		new /obj/item/clothing/accessory/holster/armpit(src)
+		new /obj/item/device/flashlight/maglight(src)
+		new /obj/item/weapon/reagent_containers/food/drinks/flask/detflask(src)
+		new /obj/item/weapon/storage/briefcase/crimekit(src)
 		return
 
 /obj/structure/closet/secure_closet/detective/update_icon()

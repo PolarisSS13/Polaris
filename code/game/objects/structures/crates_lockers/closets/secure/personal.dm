@@ -10,7 +10,7 @@
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack(src)
 		else
-			new /obj/item/weapon/storage/backpack/satchel_norm(src)
+			new /obj/item/weapon/storage/backpack/satchel/norm(src)
 		new /obj/item/device/radio/headset( src )
 	return
 
@@ -66,11 +66,12 @@
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
 		if (W) W.forceMove(src.loc)
-	else if(istype(W, /obj/item/weapon/card/id))
+	else if(W.GetID())
+		var/obj/item/weapon/card/id/I = W.GetID()
+
 		if(src.broken)
 			user << "<span class='warning'>It appears to be broken.</span>"
 			return
-		var/obj/item/weapon/card/id/I = W
 		if(!I || !I.registered_name)	return
 		if(src.allowed(user) || !src.registered_name || (istype(I) && (src.registered_name == I.registered_name)))
 			//they can open all lockers, or nobody owns this, or they own this locker
@@ -93,7 +94,7 @@
 	else
 		user << "<span class='warning'>Access Denied</span>"
 	return
-	
+
 /obj/structure/closet/secure_closet/personal/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
 	if(!broken)
 		broken = 1
@@ -101,7 +102,7 @@
 		desc = "It appears to be broken."
 		icon_state = src.icon_broken
 		if(visual_feedback)
-			visible_message("<span class='warning'>[visual_feedback]</span>", "<span class='warning'>[audible_feedback]</span>")	
+			visible_message("<span class='warning'>[visual_feedback]</span>", "<span class='warning'>[audible_feedback]</span>")
 		return 1
 
 /obj/structure/closet/secure_closet/personal/verb/reset()

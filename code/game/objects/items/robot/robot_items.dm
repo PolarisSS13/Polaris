@@ -19,7 +19,7 @@
 	if(!istype(user))
 		var/mob/living/temp = user
 		if(istype(temp))
-			temp.drop_from_inventory(src)
+			temp.removeItem(src, force = 1)
 		qdel(src)
 		return
 
@@ -70,6 +70,10 @@
 	sight_mode = BORGMESON
 	icon_state = "meson"
 	icon = 'icons/obj/clothing/glasses.dmi'
+
+/obj/item/borg/sight/material
+	name = "\proper material scanner vision"
+	sight_mode = BORGMATERIAL
 
 /obj/item/borg/sight/hud
 	name = "hud"

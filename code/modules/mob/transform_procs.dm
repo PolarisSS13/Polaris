@@ -4,7 +4,7 @@
 	for(var/obj/item/W in src)
 		if (W==w_uniform) // will be torn
 			continue
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -31,7 +31,7 @@
 		return
 
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	set_species(species.primitive_form)
 	dna.SetSEState(MONKEYBLOCK,1)
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
@@ -57,7 +57,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	transforming = 1
 	canmove = 0
 	icon = null
@@ -113,7 +113,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -161,35 +161,11 @@
 		qdel(src)
 	return O
 
-//human -> alien
-/mob/living/carbon/human/proc/Alienize()
-	if (transforming)
-		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
-	regenerate_icons()
-	transforming = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-	for(var/t in organs)
-		qdel(t)
-
-	var/alien_caste = pick("Hunter","Sentinel","Drone")
-	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
-
-	new_xeno.a_intent = I_HURT
-	new_xeno.key = key
-
-	new_xeno << "<B>You are now an alien.</B>"
-	qdel(src)
-	return
-
 /mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -223,7 +199,7 @@
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 	regenerate_icons()
 	transforming = 1
 	canmove = 0
@@ -252,7 +228,7 @@
 	if(transforming)
 		return
 	for(var/obj/item/W in src)
-		drop_from_inventory(W)
+		removeItem(W, force = 1)
 
 	regenerate_icons()
 	transforming = 1

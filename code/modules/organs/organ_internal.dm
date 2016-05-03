@@ -104,6 +104,7 @@
 	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "camera"
 	dead_icon = "camera_broken"
+	verbs |= /obj/item/organ/internal/eyes/proc/change_eye_color
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
@@ -111,6 +112,26 @@
 /obj/item/organ/internal/eyes/robot/New()
 	..()
 	robotize()
+
+/obj/item/organ/internal/eyes/proc/change_eye_color()
+	set name = "Change Eye Color"
+	set desc = "Changes your robotic eye color instantly."
+	set category = "IC"
+	set src in usr
+
+	var/current_color = rgb(eye_colour[1],eye_colour[2],eye_colour[3])
+	var/new_color = input("Pick a new color for your eyes.","Eye Color", current_color) as null|color
+	if(new_color && owner)
+		// input() supplies us with a hex color, which we can't use, so we convert it to rbg values.
+		var/list/new_color_rgb_list = hex2rgb(new_color)
+		// First, update mob vars.
+		owner.r_eyes = new_color_rgb_list[1]
+		owner.g_eyes = new_color_rgb_list[2]
+		owner.b_eyes = new_color_rgb_list[3]
+		// Now sync the organ's eye_colour list.
+		update_colour()
+		// Finally, update the eye icon on the mob.
+		owner.update_eyes()
 
 /obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
 
@@ -205,15 +226,51 @@
 	icon_state = "appendix"
 	parent_organ = BP_GROIN
 	organ_tag = "appendix"
+	var/inflamed = 0
+	var/inflame_progress = 0
+
+/mob/living/carbon/human/proc/appendicitis()
+	if(stat == DEAD)
+		return 0
+	var/obj/item/organ/internal/appendix/A = internal_organs_by_name[O_APPENDIX]
+	if(istype(A) && !A.inflamed)
+		A.inflamed = 1
+		return 1
+	return 0
+
+/obj/item/organ/internal/appendix/process()
+	if(!inflamed || !owner)
+		return
+
+	if(++inflame_progress > 200)
+		++inflamed
+		inflame_progress = 0
+
+	if(inflamed == 1)
+		if(prob(5))
+			owner << "<span class='warning'>You feel a stinging pain in your abdomen!</span>"
+			owner.emote("me", 1, "winces slightly.")
+	if(inflamed > 1)
+		if(prob(3))
+			owner << "<span class='warning'>You feel a stabbing pain in your abdomen!</span>"
+			owner.emote("me", 1, "winces painfully.")
+			owner.adjustToxLoss(1)
+	if(inflamed > 2)
+		if(prob(1))
+			owner.vomit()
+	if(inflamed > 3)
+		if(prob(1))
+			owner << "<span class='danger'>Your abdomen is a world of pain!</span>"
+			owner.Weaken(10)
+
+			var/obj/item/organ/external/groin = owner.get_organ(BP_GROIN)
+			var/datum/wound/W = new /datum/wound/internal_bleeding(20)
+			owner.adjustToxLoss(25)
+			groin.wounds += W
+			inflamed = 0
 
 /obj/item/organ/internal/appendix/removed()
-	if(owner)
-		var/inflamed = 0
-		for(var/datum/disease/appendicitis/appendicitis in owner.viruses)
-			inflamed = 1
-			appendicitis.cure()
-			owner.resistances += appendicitis
-		if(inflamed)
-			icon_state = "appendixinflamed"
-			name = "inflamed appendix"
+	if(inflamed)
+		icon_state = "appendixinflamed"
+		name = "inflamed appendix"
 	..()
