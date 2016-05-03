@@ -346,7 +346,6 @@ var/list/sacrificed = list()
 			for(var/mob/observer/dead/O in loc)
 				if(!O.client)	continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
-				if(!(O.client.prefs.be_special & BE_CULTIST)) continue
 				ghost = O
 				break
 
@@ -443,7 +442,6 @@ var/list/sacrificed = list()
 				if(!O.client)	continue
 				if(!O.MayRespawn()) continue
 				if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
-				if(!(O.client.prefs.be_special & BE_CULTIST)) continue
 				ghost = O
 				break
 			if(!ghost)
