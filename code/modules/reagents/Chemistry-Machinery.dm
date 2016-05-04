@@ -21,7 +21,7 @@
 	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
 	var/condi = 0
-	var/useramount = 30 // Last used amount
+	var/useramount = 60 // Last used amount
 	var/pillamount = 10
 	var/bottlesprite = "bottle-1" //yes, strings
 	var/pillsprite = "1"
