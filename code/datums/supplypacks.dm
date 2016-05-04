@@ -1441,7 +1441,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Engineering"
 	contains = list(
 			/obj/item/device/pipe_painter = 2,
-			/obj/item/device/floor_painter = 2
+			/obj/item/device/floor_painter = 2,
+			/obj/item/device/closet_painter = 2
 			)
 
 /datum/supply_packs/randomised/exosuit_mod
