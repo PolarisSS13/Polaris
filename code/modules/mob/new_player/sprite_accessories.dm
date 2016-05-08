@@ -46,7 +46,7 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
-species_allowed = list("Human","Unathi","Akula")
+	species_allowed = list("Human","Unathi","Akula")
 
 	bald
 		name = "Bald"
