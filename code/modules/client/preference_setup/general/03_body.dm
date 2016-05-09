@@ -354,13 +354,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else if(pref.organ_data[BP_TORSO] == "cyborg")
 			limb_selection_list |= "Head"
 
-		if(current_species.has_organ[BP_TAUR])
+		if(current_species.has_limbs[BP_TAUR])
 			limb_selection_list -= list("Left Leg","Right Leg","Left Foot","Right Foot")
 			limb_selection_list |= "Lamia Tail"
 
 		var/organ_tag = input(user, "Which limb do you want to change?") as null|anything in limb_selection_list
 
-		if(!organ_tag && !CanUseTopic(user)) return TOPIC_NOACTION
+		if(!organ_tag || !CanUseTopic(user)) return TOPIC_NOACTION
 
 		var/limb = null
 		var/second_limb = null // if you try to change the arm, the hand should also change
