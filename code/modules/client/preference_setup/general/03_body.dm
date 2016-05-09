@@ -110,6 +110,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = "left foot"
 			if(BP_R_FOOT)
 				organ_name = "right foot"
+			if(BP_TAUR)
+				organ_name = "lamia tail"
 			if(BP_L_HAND)
 				organ_name = "left hand"
 			if(BP_R_HAND)
@@ -161,7 +163,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else
 		. += "<br><br>"
 
-	. += "</td><td><b>Preview</b><br><img src=preview_icon.png height=64 width=64><img src=preview_icon2.png height=64 width=64>"
+	. += "</td><td><b>Preview</b><br><img src=preview_icon.png height=[pref.preview_icon_front.Height() * 2] width=[pref.preview_icon_front.Width() * 2]>\
+	      <img src=preview_icon2.png height=[pref.preview_icon_side.Height() * 2] width=[pref.preview_icon_side.Width() * 2]>"
 	. += "</td></tr></table>"
 
 	. += "<b>Hair</b><br>"
@@ -351,9 +354,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else if(pref.organ_data[BP_TORSO] == "cyborg")
 			limb_selection_list |= "Head"
 
+		if(current_species.has_limbs[BP_TAUR])
+			limb_selection_list -= list("Left Leg","Right Leg","Left Foot","Right Foot")
+			limb_selection_list |= "Lamia Tail"
+
 		var/organ_tag = input(user, "Which limb do you want to change?") as null|anything in limb_selection_list
 
-		if(!organ_tag && !CanUseTopic(user)) return TOPIC_NOACTION
+		if(!organ_tag || !CanUseTopic(user)) return TOPIC_NOACTION
 
 		var/limb = null
 		var/second_limb = null // if you try to change the arm, the hand should also change
@@ -380,6 +387,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if("Right Foot")
 				limb =        BP_R_FOOT
 				third_limb =  BP_R_LEG
+			if("Lamia Tail")
+				limb =        BP_TAUR
+				choice_options = list("Normal","Prosthesis")
 			if("Left Hand")
 				limb =        BP_L_HAND
 				third_limb =  BP_L_ARM
@@ -399,7 +409,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		switch(new_state)
 			if("Normal")
-
 				if(limb == BP_TORSO)
 					for(var/other_limb in BP_ALL - BP_TORSO)
 						pref.organ_data[other_limb] = null

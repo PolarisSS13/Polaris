@@ -768,6 +768,8 @@
 			. += THERMAL_PROTECTION_FOOT_LEFT
 		if(flags & FOOT_RIGHT)
 			. += THERMAL_PROTECTION_FOOT_RIGHT
+		if(flags & TAIL_SNAKE)
+			. += THERMAL_PROTECTION_TAIL_SNAKE
 		if(flags & ARM_LEFT)
 			. += THERMAL_PROTECTION_ARM_LEFT
 		if(flags & ARM_RIGHT)
@@ -1377,13 +1379,12 @@
 			if(M.loc != src)
 				stomach_contents.Remove(M)
 				continue
-			if(istype(M, /mob/living/carbon) && stat != 2)
-				if(M.stat == 2)
-					M.death(1)
-					stomach_contents.Remove(M)
-					qdel(M)
+			if(istype(M, /mob/living/carbon) && stat != DEAD)
+				if(M.stat == DEAD)
+					if(species.gluttonous < 3)
+						qdel(M)
 					continue
-				if(air_master.current_cycle%3==1)
+				if(air_master.current_cycle % 3 == 1)
 					if(!(M.status_flags & GODMODE))
 						M.adjustBruteLoss(5)
 					nutrition += 10

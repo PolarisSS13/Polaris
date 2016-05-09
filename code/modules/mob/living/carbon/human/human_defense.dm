@@ -11,8 +11,14 @@ emp_act
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	def_zone = check_zone(def_zone)
+
+
 	if(!has_organ(def_zone))
-		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
+		if(def_zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+			if(!organs_by_name[BP_TAUR])
+				return PROJECTILE_FORCE_MISS
+		else
+			return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
 
 	var/obj/item/organ/external/organ = get_organ()
 

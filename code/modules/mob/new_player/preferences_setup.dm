@@ -212,6 +212,10 @@
 
 	preview_icon = new /icon(icobase, "")
 	for(var/name in BP_ALL)
+		if(name == BP_TAUR)
+			continue //handled later
+		if(!current_species.has_limbs[name])
+			continue //unique external organ for a species, ignore it
 		if(organ_data[name] == "amputated")
 			continue
 		if(organ_data[name] == "cyborg")
@@ -769,8 +773,22 @@
 		preview_icon.Blend(socks_s, ICON_OVERLAY)
 	if(clothes_s)
 		preview_icon.Blend(clothes_s, ICON_OVERLAY)
+
+	if(current_species.has_limbs[BP_TAUR])
+		var/datum/robolimb/R
+		if(rlimb_data[BP_TAUR]) R = all_robolimbs[rlimb_data[BP_TAUR]]
+		if(!R) R = basic_robolimb
+
+		var/taur_state = "s_tail[organ_data[BP_TAUR] == "cyborg" ? "_" + lowertext(R.company) : "" ]"
+		var/icon/limb_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', taur_state)
+		limb_icon.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
+		preview_icon.Crop(1, 1, limb_icon.Width(), limb_icon.Height())
+		preview_icon.Blend(limb_icon, ICON_OVERLAY, -15, 1)
+
 	preview_icon_front = new(preview_icon, dir = SOUTH)
+	preview_icon_front.Shrink()
 	preview_icon_side = new(preview_icon, dir = WEST)
+	preview_icon_side.Shrink()
 
 	qdel(eyes_s)
 	qdel(breasts_s)

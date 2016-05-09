@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Lamia")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -52,7 +52,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -226,12 +226,12 @@
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	bun
 		name = "Bun"
@@ -252,7 +252,7 @@
 	buzz
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	crew
 		name = "Crewcut"
@@ -341,7 +341,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	jensen
 		name = "Adam Jensen Hair"
@@ -358,7 +358,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	kusangi
 		name = "Kusanagi Hair"
@@ -511,7 +511,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari","Akula","Lamia")
 
 	teshari_beard
 		name = "Teshari Beard"
@@ -570,7 +570,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human","Unathi","Akula")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -789,13 +789,13 @@
 
 /datum/sprite_accessory/dicks
 	icon = 'icons/mob/human_races/extras/dicks.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	dik_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
 
 	dik_normal
 		name = "Normal Dick"
@@ -848,13 +848,13 @@
 
 /datum/sprite_accessory/vaginas
 	icon = 'icons/mob/human_races/extras/vaginas.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	vag_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
 
 	vag_normal
 		name = "Normal Vagina"
@@ -887,13 +887,13 @@
 
 /datum/sprite_accessory/breasts
 	icon = 'icons/mob/human_races/extras/breasts.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	brt_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
 
 	brt_normala
 		name = "Tiny Breasts"
@@ -926,13 +926,13 @@
 
 /datum/sprite_accessory/ears
 	icon = 'icons/mob/human_races/extras/ears.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	ear_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
 
 	ear_bear
 		name = "Bear Ears"
@@ -1033,13 +1033,13 @@
 
 /datum/sprite_accessory/wings
 	icon = 'icons/mob/human_races/extras/wings.dmi'
-	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
 
 	wng_none
 		name = "None"
 		icon = null
 		icon_state = null
-		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
 
 	wng_angel
 		name = "Angel Wings"
