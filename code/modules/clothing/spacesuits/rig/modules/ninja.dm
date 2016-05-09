@@ -19,7 +19,7 @@
 	use_power_cost = 50
 	active_power_cost = 10
 	passive_power_cost = 0
-	module_cooldown = 30
+	module_cooldown = 50
 
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
@@ -29,6 +29,8 @@
 
 	suit_overlay_active =   "stealth_active"
 	suit_overlay_inactive = "stealth_inactive"
+
+	var/cloak_overuse = 0 // Tracks how long the module has been in use recently.
 
 /obj/item/rig_module/stealth_field/activate()
 
@@ -61,13 +63,26 @@
 		O.show_message("[H.name] appears from thin air!",1)
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
+/obj/item/rig_module/stealth_field/emp_act(severity_class) // EMP disables the cloak.
+	deactivate()
+
+// This makes the cloak cost exponentially more as they stay cloaked, which punishes cloak spam and rewards careful use of the cloak.
+// The cloak can last for just under two minutes with a 20K cell, if used nonstop.
+/obj/item/rig_module/stealth_field/process()
+	if(active)
+		cloak_overuse++
+	else
+		cloak_overuse = max(--cloak_overuse, 0)
+	active_power_cost = (2 ** (Floor(cloak_overuse / 10))) * 5 // Every ten ticks spent cloaked doubles the cost.
+	return ..()
+
 
 /obj/item/rig_module/teleporter
 
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 200
+	use_power_cost = 300
 	redundant = 1
 	usable = 1
 	selectable = 1

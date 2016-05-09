@@ -82,7 +82,7 @@
 
 	chest_type = /obj/item/clothing/suit/space/rig/light/ninja
 	glove_type = /obj/item/clothing/gloves/rig/light/ninja
-	cell_type =  /obj/item/weapon/cell/hyper
+	cell_type =  /obj/item/weapon/cell/super
 
 	req_access = list(access_syndicate)
 
