@@ -16,9 +16,9 @@ var/global/list/limb_icon_cache = list()
 	s_col = null
 	h_col = null
 	if(status & ORGAN_ROBOT)
-		return
+		return 1
 	if(species && human.species && species.name != human.species.name)
-		return
+		return 1
 	if(human.species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 	h_col = list(human.r_hair, human.g_hair, human.b_hair)
@@ -27,7 +27,7 @@ var/global/list/limb_icon_cache = list()
 	s_col = null
 	h_col = null
 	if(status & ORGAN_ROBOT)
-		return
+		return 1
 	if(species.appearance_flags & HAS_SKIN_COLOR)
 		s_col = list(dna.GetUIValue(DNA_UI_SKIN_R), dna.GetUIValue(DNA_UI_SKIN_G), dna.GetUIValue(DNA_UI_SKIN_B))
 	h_col = list(dna.GetUIValue(DNA_UI_HAIR_R),dna.GetUIValue(DNA_UI_HAIR_G),dna.GetUIValue(DNA_UI_HAIR_B))
@@ -87,6 +87,7 @@ var/global/list/limb_icon_cache = list()
 	if(owner && owner.gender == MALE)
 		gender = "m"
 
+	mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]"
 	if(force_icon)
 		mob_icon = new /icon(force_icon, "[icon_name][gendered_icon ? "_[gender]" : ""]")
 	else

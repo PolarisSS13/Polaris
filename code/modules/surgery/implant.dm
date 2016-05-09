@@ -168,6 +168,45 @@
 
 		var/find_prob = 0
 
+		if(target_zone == BP_TORSO)
+			if(target.stomach_contents.len)
+				find_prob = 50
+				user.visible_message("<span class='notice'>[user] starts poking around [target]'s stomach!</span>",
+									 "<span class='notice'>You start poking around [target]'s stomach.</span></span>")
+				var/a = pick(target.stomach_contents)
+
+				if(ismob(a))
+					var/mob/M = a
+					user.visible_message("<span class='notice'>[user] starts to pull [M] out of [target]'s stomach!</span>",
+										 "<span class='notice'>You start to pull [M] out of [target]'s stomach!</span>")
+					if(!prob(find_prob))
+						user.visible_message("<span class='warning'>[user] loses their grip on [M], failing to extract them from [target]'s stomach!</span>",
+											 "<span class='warning'>You lose you grip on [M], failing to extract them from [target]'s stomach!</span>")
+						return
+
+					if(do_after(user, 30))
+						user.visible_message("<span class='notice'>[user] pulls [M] out of [target]'s stomach!</span>",
+											 "<span class='notice'>You pull [M] out of [target]'s stomach!</span>")
+						target.stomach_contents -= M
+						M.loc = get_turf(target)
+						return
+					else
+						user.visible_message("<span class='warning'>[user] loses their grip on [M], failing to extract them from [target]'s stomach!</span>",
+											 "<span class='warning'>You lose you grip on [M], failing to extract them from [target]'s stomach! You have to stay still to extract them!</span>")
+						return
+
+				if(isobj(a))
+					var/obj/O = a
+					find_prob = 25 + (O.w_class * 5)
+
+					if(prob(find_prob))
+						user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.name] with \the [tool].", \
+						"\blue You take [O] out of incision on [target]'s [affected.name]s with \the [tool]." )
+						target.stomach_contents -= O
+						O.loc = get_turf(target)
+						O.add_blood(target)
+						O.update_icon()
+
 		if (affected.implants.len)
 
 			var/obj/item/obj = pick(affected.implants)
