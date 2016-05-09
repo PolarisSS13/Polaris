@@ -137,6 +137,7 @@
 /datum/language/unathi/lamia
 	name = "Sehlin"
 	desc = "A hissing language spoken by Lamias."
+	colour = "lamia"
 	syllables = list("ss","ss","ss","ss","hiss","sshs","ssss","sas","es","sh")
 	key = "/"
 
