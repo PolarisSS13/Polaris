@@ -1379,8 +1379,10 @@
 			if(M.loc != src)
 				stomach_contents.Remove(M)
 				continue
-			if(istype(M, /mob/living/carbon) && stat != 2)
+			if(istype(M, /mob/living/carbon) && stat != DEAD)
 				if(M.stat == DEAD)
+					if(species.gluttonous < 3)
+						qdel(M)
 					continue
 				if(air_master.current_cycle % 3 == 1)
 					if(!(M.status_flags & GODMODE))
