@@ -111,3 +111,5 @@
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
+
+	var/identifying_gender // In case the human identifies as another gender than it's biological
