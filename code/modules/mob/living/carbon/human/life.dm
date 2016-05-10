@@ -1375,19 +1375,25 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/mob/living/M in stomach_contents)
-			if(M.loc != src)
-				stomach_contents.Remove(M)
+		for(var/A in stomach_contents)
+			var/mob/living/M = A
+			if(!istype(M))
+				stomach_contents -= A
 				continue
-			if(istype(M, /mob/living/carbon) && stat != DEAD)
-				if(M.stat == DEAD)
-					if(species.gluttonous < 3)
-						qdel(M)
-					continue
-				if(air_master.current_cycle % 3 == 1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
+			if(M.loc != src)
+				stomach_contents -= M
+				continue
+			if(stat == DEAD)
+				return
+			if(M.stat == DEAD)
+				if(species.gluttonous < 3 || M.mob_size <= MOB_SMALL)
+					qdel(M)
+					stomach_contents -= M
+				continue
+			if(air_master.current_cycle % 3 == 1)
+				if(!(M.status_flags & GODMODE))
+					M.adjustBruteLoss(5)
+				nutrition += M.mob_size / 2
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
