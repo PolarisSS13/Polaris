@@ -15,6 +15,6 @@
 	path = /obj/item/weapon/storage/box/emps
 
 /datum/uplink_item/item/grenades/smoke
-	name = "5xSmoke Grenades"
+	name = "7xSmoke Grenades"
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/smokes
