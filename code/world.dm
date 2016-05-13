@@ -604,7 +604,7 @@ proc/establish_db_connection()
 /hook/startup/proc/connectOldDB()
 	if(!config.sql_enabled)
 		world.log << "SQL connection disabled in config."
-	if(!setup_old_database_connection())
+	else if(!setup_old_database_connection())
 		world.log << "Your server failed to establish a connection with the SQL database."
 	else
 		world.log << "SQL database connection established."
