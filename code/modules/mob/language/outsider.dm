@@ -38,7 +38,7 @@
 	..(speaker,message,speaker_mask)
 
 /datum/language/cultcommon
-	name = "Cult"
+	name = LANGUAGE_CULT
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"
