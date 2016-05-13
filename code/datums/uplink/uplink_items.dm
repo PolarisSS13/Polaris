@@ -49,7 +49,7 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U))
 		return
 
-	var/cost = cost(U.uses)
+	var/cost = cost(U.uses, U)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
 	if(!goods)
@@ -65,7 +65,7 @@ var/datum/uplink/uplink = new()
 	return 1
 
 /datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
-	if(cost(U.uses) > U.uses)
+	if(cost(U.uses, U) > U.uses)
 		return 0
 
 	return can_view(U)
@@ -85,8 +85,12 @@ var/datum/uplink/uplink = new()
 			return 1
 	return 0
 
-/datum/uplink_item/proc/cost(var/telecrystals)
-	return item_cost
+/datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
+	. = item_cost
+	if(U)
+		. = U.get_item_cost(src, .)
+	else
+		world << "No uplink."
 
 /datum/uplink_item/proc/description()
 	return desc
@@ -162,6 +166,6 @@ var/image/default_abstract_uplink_icon
 		if(!I)
 			break
 		bought_items += I
-		remaining_TC -= I.cost(remaining_TC)
+		remaining_TC -= I.cost(remaining_TC, U)
 
 	return bought_items
