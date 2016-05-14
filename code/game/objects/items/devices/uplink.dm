@@ -115,6 +115,11 @@
 /obj/item/device/uplink/hidden/interact(mob/user)
 	ui_interact(user)
 
+/obj/item/device/uplink/hidden/CanUseTopic()
+	if(!active)
+		return STATUS_CLOSE
+	return ..()
+
 // The purchasing code.
 /obj/item/device/uplink/hidden/Topic(href, href_list)
 	if(..())

@@ -35,3 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Uplinks now have a discounted item every 15 minutes. This is per uplink, and random, the discount is also random, but weighted as such that a low discount such as 10% off, or 20% off has a higher chance of happening than a high discount such as 90% of. An item will never cost less than 1."
   - tweak: "Mercenaries now spawn with their own, personal uplinks."
+  - bugfix: "Faked announcements are now once again purchasable from the uplink, and actually work."
