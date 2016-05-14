@@ -322,7 +322,7 @@
 
 /obj/item/weapon/storage/box/smokes
 	name = "box of smoke bombs"
-	desc = "A box containing 5 smoke bombs."
+	desc = "A box containing 7 smoke bombs."
 	icon_state = "flashbang"
 
 
@@ -362,6 +362,23 @@
 		new /obj/item/weapon/grenade/explosive(src)
 		new /obj/item/weapon/grenade/explosive(src)
 		new /obj/item/weapon/grenade/explosive(src)
+
+/obj/item/weapon/storage/box/metalfoam
+	name = "box of metal foam grenades."
+	desc = "A box containing 7 metal foam grenades."
+	icon_state = "flashbang"
+
+	New()
+		..()
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+		new /obj/item/weapon/grenade/chem_grenade/metalfoam
+
+
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
@@ -701,3 +718,18 @@
 	max_storage_space = 21
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 
+/obj/item/weapon/storage/box/ambrosia
+	name = "ambrosia seeds box"
+	desc = "Contains the seeds you need to get a little high."
+	New()
+		..()
+		for(var/i = 1 to 8)
+			new /obj/item/seeds/ambrosiavulgarisseed(src)
+
+/obj/item/weapon/storage/box/ambrosiadeus
+	name = "ambrosia deus seeds box"
+	desc = "Contains the seeds you need to get a proper healthy high."
+	New()
+		..()
+		for(var/i = 1 to 8)
+			new /obj/item/seeds/ambrosiadeusseed(src)

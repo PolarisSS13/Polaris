@@ -57,3 +57,11 @@
 /datum/uplink_item/item/ammo/g12/pellet
 	name = "12 gauge pellet"
 	path = /obj/item/ammo_magazine/g12/pellet
+
+/datum/uplink_item/item/ammo/g12/stun
+	name = "12 gauge stun"
+	path = /obj/item/weapon/storage/box/stunshells
+
+/datum/uplink_item/item/ammo/g12/flash
+	name = "12 gauge flash"
+	path = /obj/item/weapon/storage/box/flashshells

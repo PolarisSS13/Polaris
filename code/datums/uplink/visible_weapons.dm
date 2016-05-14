@@ -79,3 +79,13 @@
 	name = "Xray Gun"
 	item_cost = 7
 	path = /obj/item/weapon/gun/energy/xray
+
+/datum/uplink_item/item/visible_weapons/tactknife
+	name = "Tactical Knife"
+	item_cost = 1
+	path = /obj/item/weapon/material/hatchet/tacknife
+
+/datum/uplink_item/item/visible_weapons/combatknife
+	name = "Combat Knife"
+	item_cost = 3
+	path = /obj/item/weapon/material/hatchet/tacknife/combatknife
