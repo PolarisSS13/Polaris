@@ -2,22 +2,24 @@
 Title: Communicator UI
 Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
  -->
+ 
 
-<div class='statusDisplay' style="overflow: auto;">
+
+<div class="statusDisplay" style="overflow: auto;">
 	<div class='item'>
 		<div class="itemContent" style="width: 100%; text-align: center;">
 			<span class="average">{{:data.time}} | </span>
 			{{if data.connectionStatus == 1}}
-				<div class='uiIcon16 icon-signal-green' style='float: none; vertical-align: top;'></div>
+				<img class='uiIcon16 icon-signal-green' style='float: none;'></img>
 			{{else}}
-				<div class='uiIcon16 icon-notice-red' style='float: none; vertical-align: top;'></div>
+				<img class='uiIcon16 icon-notice-red' style='float: none;'></img>
 			{{/if}}
 			<span class="average"> | {{:data.owner}} | {{:data.occupation}}</span>
 		</div>
 	</div>
 </div>
 
-<!-- First tab, Home 
+<!-- First tab, Home -->
 {{if data.currentTab == 1}}
 
 	<h3>Home</h3>
@@ -31,7 +33,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
-<!-- Second Tab, Dialing 
+<!-- Second Tab, Dialing -->
 {{else data.currentTab == 2}}
 
 	<h3>Manual Dial</h3>
@@ -81,7 +83,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 				</div>
 				<div style="clear: both; padding-top: 1px;">
 					{{:helper.link('Dial', 'signal-diag', {'dial' : data.targetAddress})}}
-					{{:helper.link('Message', 'comment', {'message' : data.targetAddress})}} <!--, 'switch_tab' : 4
+					{{:helper.link('Message', 'comment', {'message' : data.targetAddress})}} <!--, 'switch_tab' : 4-->
 					{{:helper.link('Hang Up', 'close', {'hang_up' : '1'})}}
 				</div>
 			</div>
@@ -135,7 +137,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		{{/for}}
 	
-<!-- Third Tab, Contacts 
+<!-- Third Tab, Contacts -->
 {{else data.currentTab == 3}}
 
 	<h3>Known Devices</h3>
@@ -150,12 +152,12 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 				{{:value.name}}
 				</div>
 				<div class="itemContent">
-					<div style="float: left; width: 300px;">{{:value.address}}</div> {{:helper.link('Copy', 'pencil', {'copy' : value.address})}} <!--, 'switch_tab' : 2
+					<div style="float: left; width: 300px;">{{:value.address}}</div> {{:helper.link('Copy', 'pencil', {'copy' : value.address})}} <!--, 'switch_tab' : 2-->
 				</div>
 			</div>
 		{{/for}}
 	
-<!-- Fourth Tab, Messaging 
+<!-- Fourth Tab, Messaging -->
 {{else data.currentTab == 4}}
 
 	<h3>Messaging</h3>
@@ -175,7 +177,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	{{/for}}
 	
-<!-- 40th Tab, Messaging - Threads 
+<!-- 40th Tab, Messaging - Threads -->
 {{else data.currentTab == 40}}
 
 	<h3>Conversation With: {{:data.targetAddressName}}</h3>
@@ -203,7 +205,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
-<!-- Fifth Tab, Settings 
+<!-- Fifth Tab, Settings -->
 {{else data.currentTab == 5}}
 	<h3>Settings</h3>
 	
@@ -254,11 +256,11 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
-<!--Someone fucked up
+<!--Someone fucked up-->
 {{else}}
 	<span class="bad">ERROR GO BACK!</span>
 	<HR>
 	<div style="float: left;">{{:helper.link('Home', 'home', {'switch_tab' : 1})}}</div>
 	<HR>
 	
-{{/if}}-->
+{{/if}}
