@@ -92,8 +92,6 @@ var/datum/uplink/uplink = new()
 	. = item_cost
 	if(U)
 		. = U.get_item_cost(src, .)
-	else
-		world << "No uplink."
 
 /datum/uplink_item/proc/description()
 	return desc
