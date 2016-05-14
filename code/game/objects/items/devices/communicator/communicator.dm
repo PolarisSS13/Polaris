@@ -24,13 +24,14 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/list/im_contacts = list()
 	var/list/im_list = list()
 
-	var/selected_tab = "home"
+	var/selected_tab = 1
 	var/owner = ""
 	var/occupation = ""
 	var/alert_called = 0
 	var/obj/machinery/exonet_node/node = null //Reference to the Exonet node, to avoid having to look it up so often.
 
 	var/target_address = ""
+	var/target_address_name = ""
 	var/network_visibility = 1
 	var/list/known_devices = list()
 	var/datum/exonet_protocol/exonet = null
@@ -174,8 +175,6 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			return
 	else return
 
-
-
 // Proc: attack_self()
 // Parameters: 1 (user - the mob that clicked the device in their hand)
 // Description: Makes an exonet datum if one does not exist, allocates an address for it, maintains the lists of all devies, clears the alert icon, and
@@ -221,8 +220,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Proc: ui_interact()
 // Parameters: 4 (standard NanoUI arguments)
 // Description: Uses a bunch of for loops to turn lists into lists of lists, so they can be displayed in nanoUI, then displays various buttons to the user.
-/obj/item/device/communicator/ui_interact(mob/user, ui_key = "main", var/force_open = 1)
+/obj/item/device/communicator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
+	var/data[0]						//General nanoUI information
 	var/communicators[0]			//List of communicators
 	var/invites[0]					//Communicators and ghosts we've invited to our communicator.
 	var/requests[0]					//Communicators and ghosts wanting to go in our communicator.
@@ -279,118 +279,35 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	for(var/I in im_list)
 		im_list_ui[++im_list_ui.len] = list("address" = I["address"], "to_address" = I["to_address"], "im" = I["im"])
 
-	var/ui_owner = owner ? owner : "Unset"
-	var/ui_occupation = occupation ? occupation : "Swipe ID to set."
-	var/ui_address = exonet.address ? exonet.address : "Unallocated"
-	var/ui_connection_status = get_connection_to_tcomms()
+	data["owner"] = owner ? owner : "Unset"
+	data["occupation"] = occupation ? occupation : "Swipe ID to set."
+	data["connectionStatus"] = get_connection_to_tcomms()
+	data["visible"] = network_visibility
+	data["address"] = exonet.address ? exonet.address : "Unallocated"
+	data["targetAddress"] = target_address
+	data["targetAddressName"] = target_address_name
+	data["currentTab"] = selected_tab
+	data["knownDevices"] = communicators
+	data["invitesSent"] = invites
+	data["requestsReceived"] = requests
+	data["voice_mobs"] = voices
+	data["communicating"] = connected_communicators
+	data["imContacts"] = im_contacts_ui
+	data["imList"] = im_list_ui
+	data["time"] = worldtime2text()
 
-	var/w = "<BR>"
-	switch(selected_tab)
-
-		if("home") //Home
-			w += "<A href='?src=\ref[src];switch_tab=dial' class='icon'><img class='uiIcon16 icon-phone'></img>Dialing</A>\
-				<A href='?src=\ref[src];switch_tab=contacts' class='icon'><img class='uiIcon16 icon-list'></img>Known Devices</A><BR>"
-			w += "<A href='?src=\ref[src];switch_tab=messaging' class='icon'><img class='uiIcon16 icon-comment'></img>Messaging</A>\
-				<A href='?src=\ref[src];switch_tab=settings' class='icon'><img class='uiIcon16 icon-gear'></img>Settings</A><BR>"
-
-		if("dial") //Dialing
-			w += "<h3>Manual Dial</h3><BR>"
-			w += "<A href='?src=\ref[src];switch_tab=home' class='icon'><img class='uiIcon16 icon-home'></img>Home</A><HR>"
-
-			w += "<div class='item'><div class='itemLabel'>Target EPv2 Address:</div><div class='itemContent'><div style='float:left; width:180px;'>[target_address]</div></div>\
-				<div class='itemContent'><div style='float:left; width:180px;'><A href='?src=\ref[src];write_target_address=1' class='icon'><img class='uiIcon16 icon-pencil'></img>Write</A>\
-				<A href='?src=\ref[src];clear_target_address=1' class='icon'><img class='uiIcon16 icon-close'></img>Clear</A></div></div></div><BR>"
-
-			w += "<div class='item'><div class='itemContent'><div style='width: 100%;'><div style='clear: both; padding-top: 1px;'>\
-				<A href='?src=\ref[src];add_hex=0'>0</A><A href='?src=\ref[src];add_hex=1'>1</A><A href='?src=\ref[src];add_hex=2'>2</A>\
-				<A href='?src=\ref[src];add_hex=3'>3</A></div>"
-			w += "<div style='clear: both; padding-top: 1px;'><A href='?src=\ref[src];add_hex=4'>4</A><A href='?src=\ref[src];add_hex=5'>5</A>\
-				<A href='?src=\ref[src];add_hex=6'>6</A><A href='?src=\ref[src];add_hex=7'>7</A></div>"
-			w += "<div style='clear: both; padding-top: 1px;'><A href='?src=\ref[src];add_hex=8'>8</A><A href='?src=\ref[src];add_hex=9'>9</A>\
-				<A href='?src=\ref[src];add_hex=A'>A</A><A href='?src=\ref[src];add_hex=B'>B</A></div>"
-			w += "<div style='clear: both; padding-top: 1px;'><A href='?src=\ref[src];add_hex=C'>C</A><A href='?src=\ref[src];add_hex=D'>D</A>\
-				<A href='?src=\ref[src];add_hex=E'>E</A><A href='?src=\ref[src];add_hex=F'>F</A></div>"
-			w += "<div style='clear: both; padding-top: 1px;'><A href='?src=\ref[src];dial=[target_address]' class='icon'><img class='uiIcon16 icon-phone'></img>Dial</A>\
-				<A href='?src=\ref[src];message=[target_address];switch_tab=messaging' class='icon'><img class='uiIcon16 icon-comment'></img>Message</A>\
-				<A href='?src=\ref[src];hang_up=1' class='icon'><img class='uiIcon16 icon-close'></img>Hang Up</A></div></div></div></div><HR>"
-
-			w += "<h3>External Connections</h3><BR>"
-			for(var/V in voices)
-				w += "<div class='item'><div class='itemLabel'>[V["name"]]</div><div class='itemContent'><div style='float:left; width:200px'>\
-					<A href='?src=\ref[src];disconect=[V["true_name"]]' class='icon'><img class='uiIcon16 icon-close'></img>Disconnect</A></div></div></div><BR>"
-
-			w += "<h3>Internal Connections</h3><BR>"
-			for(var/V in connected_communicators)
-				w += "<div class='item'><div class='itemLabel'>[V["name"]]</div><div class='itemContent'><div style='float:left; width:200px'>\
-					<A href='?src=\ref[src];disconect=[V["name"]]' class='icon'><img class='uiIcon16 icon-close'></img>Disconnect</A></div></div></div><BR>"
-
-			w += "<h3>Requests Received</h3><BR>"
-			for(var/V in requests)
-				w += "<div class='item'><div class='itemLabel'>[V["name"]]</div><div class='itemContent'><div style='float:left; width:300px'>\
-					[V["address"]]<A href='?src=\ref[src];dial=[V["address"]]' class='icon'><img class='uiIcon16 icon-phone'></img>Answer</A></div></div></div><BR>"
-
-			w += "<h3>Invites Received</h3><BR>"
-			for(var/V in invites)
-				w += "<div class='item'><div class='itemLabel'>[V["name"]]</div><div class='itemContent'><div style='float:left; width:300px'>\
-					[V["address"]]<A href='?src=\ref[src];copy=[target_address]' class='icon'><img class='uiIcon16 icon-pencil'></img>Copy</A></div></div></div><BR>"
-
-		if("contacts") //Known Devices
-			w += "<h3>Known Devices</h3><BR>"
-			w += "<A href='?src=\ref[src];switch_tab=home' class='icon'><img class='uiIcon16 icon-home'></img>Home</A><HR>"
-
-			for(var/C in communicators)
-				w += "<div class='item'><div class='itemLabel'>[C["name"]]</div><div class='itemContent'><div style='float:left; width:300px;'>[C["address"]]</div>\
-					<A href='?src=\ref[src];copy=[C["address"]];switch_tab=dial' class='icon'><img class='uiIcon16 icon-pencil'></img>Copy</A></div></div><BR>"
-
-		if("messaging") //Messaging
-			w += "<h3>Messaging</h3><BR>"
-			w += "<A href='?src=\ref[src];switch_tab=home' class='icon'><img class='uiIcon16 icon-home'></img>Home</A><HR>"
-
-			for(var/M in im_contacts_ui)
-				w += "<div class='item'><div class='itemLabel'>[M["name"]]</div><div class='itemContent' style='width:100%;'>"
-				for(var/I in im_list_ui)
-					if(I["address"] == M["address"])
-						w += "<span class='average'><B>Them</B>: [I["im"]]</span><BR>"
-					if(I["to_address"] == M["address"])
-						w += "<span class='good'><B>You</B>: [I["im"]]</span><BR>"
-				w += "</div><A href='?src=\ref[src];message=[M["address"]]' class='icon'><img class='uiIcon16 icon-comment'></img>Message</A>"
-				w += "</div><HR>"
-
-		if("settings") //Settings
-			w += "<h3>Settings</h3><BR>"
-			w += "<A href='?src=\ref[src];switch_tab=home' class='icon'><img class='uiIcon16 icon-home'></img>Home</A><HR>"
-
-			w += "<div class='item'><div class='itemLabel'>Owner:</div><div class='itemContent'><div style='float:left; width:180px;'>\
-				[ui_owner]</div><A href='?src=\ref[src];rename=1' class='icon'><img class='uiIcon16 icon-pencil'></img>Rename</A></div></div><BR>"
-			w += "<div class='item'><div class='itemLabel'>Occupation:</div><div class='itemContent'><div style='float:left; width:180px;'>\
-				[ui_occupation]</div></div></div><BR>"
-			w += "<div class='item'><div class='itemLabel'>Connection:</div>"
-
-			if(ui_connection_status == 1)
-				w += "<div class='itemContent'><span class='good'>Connected</span></div></div><BR>"
-			else
-				w += "<div class='itemContent'><span class='bad'>Disconnected</span></div></div><BR>"
-
-			w += "<div class='item'><div class='itemLabel'>Device EPv2 Address:</div><div class='itemContent'><div style='float:left; width:180px;'>[ui_address]</div></div>"
-
-			if(network_visibility)
-				w += "<div style='float:left; width:180px;'><span class='linkOn icon'><img class='uiIcon16 icon-signal-diag'></img>Visible</span><A href='?src=\ref[src];toggle_visibility=0' class='icon'><img class='uiIcon16 icon-close'></img>Invisible</A></div></div><BR>"
-			else
-				w += "<div style='float:left; width:180px;'><A href='?src=\ref[src];toggle_visibility=1' class='icon'><img class='uiIcon16 icon-signal-diag'></img>Visible</A>\
-					<span class='linkOn icon'><img class='uiIcon16 icon-close'></img>Invisible</span></div></div><BR>"
-
-	var/title = "[worldtime2text()] | "
-	if(ui_connection_status == 1)
-		title += "<img class='uiIcon16 icon-signal-green'></img> | "
-	else
-		title += "<img class='uiIcon16 icon-notice-red'></img> | "
-	title += "[ui_owner] | [ui_occupation]"
-
-	var/datum/browser/popup = new(user, "communicator", title)
-	popup.set_content(w)
-	popup.open()
-
-	return
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "communicator.tmpl", "Communicator", 450, 700)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)
+		// open the new ui window
+		ui.open()
+		// auto update every five Master Controller tick
+		ui.set_auto_update(5)
 
 // Proc: Topic()
 // Parameters: 2 (standard Topic arguments)
@@ -448,6 +365,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(href_list["copy"])
 		target_address = href_list["copy"]
 
+	if(href_list["copy_name"])
+		target_address_name = href_list["copy_name"]
+
 	if(href_list["hang_up"])
 		for(var/mob/living/voice/V in contents)
 			close_connection(usr, V, "[usr] hung up.")
@@ -457,8 +377,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(href_list["switch_tab"])
 		selected_tab = href_list["switch_tab"]
 
-	ui_interact(usr)
-	//nanomanager.update_uis(src)
+	nanomanager.update_uis(src)
 	add_fingerprint(usr)
 
 // Proc: receive_exonet_message()

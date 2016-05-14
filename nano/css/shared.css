@@ -100,6 +100,20 @@ a.icon img, .linkOn.icon img, .linkOff.icon img, .selected.icon img, .disabled.i
     width: 18px;
     height: 18px;
 }
+/*
+a.icon64, .linkOn.icon64, .linkOff.icon64, .selected.icon64, .disabled.icon64 {
+    position: relative;
+	padding: 1px 4px 2px 68px;
+	font-size: 55px;
+}
+
+a.icon64 img, .linkOn.icon64 img, .linkOff.icon64 img, .selected.icon64 img, .disabled.icon64 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 66px;
+    height: 66px;
+}*/
 
 .linkDanger, a.linkDanger:link, a.linkDanger:visited, a.linkDanger:active {
     color: #ffffff;

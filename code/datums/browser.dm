@@ -29,7 +29,6 @@
 	if (nref)
 		ref = nref
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
-	add_stylesheet("icons", 'html/browser/icons.css')
 
 /datum/browser/proc/set_title(ntitle)
 	title = format_text(ntitle)
