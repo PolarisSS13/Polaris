@@ -487,3 +487,11 @@ its easier to just keep the beam vertical.
 		else if(ismob(I))
 			var/mob/M = I
 			M.show_message( message, 2, deaf_message, 1)
+
+// Byond seemingly calls stat, each tick.
+// Calling things each tick can get expensive real quick.
+// So we slow this down a little.
+// See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
+/atom/Stat()
+	. = ..()
+	sleep(1)
