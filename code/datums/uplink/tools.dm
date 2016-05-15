@@ -75,3 +75,11 @@
 	item_cost = 1
 	path = /obj/item/device/telecrystal
 	desc = "A telecrystal that can be transferred from one user to another. Be sure not to give it to just anyone."
+
+/datum/uplink_item/item/tools/hacking_tool
+	name = "Door Hacking Tool"
+	item_cost = 2
+	path = /obj/item/device/multitool/hacktool
+	desc = "Appears and functions as a standard multitool until the mode is toggled by applying a screwdriver appropriately. \
+			When in hacking mode this device will grant full access to any standard airlock within 20 to 40 seconds. \
+			This device will also be able to immediately access the last 6 to 8 hacked airlocks."
