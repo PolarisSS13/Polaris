@@ -16,6 +16,9 @@
 
 /mob/living/carbon/human/diona/New(var/new_loc)
 	..(new_loc, "Diona")
+	
+/mob/living/carbon/human/teshari/New(var/new_loc)
+	..(new_loc, "Diona")
 
 /mob/living/carbon/human/teshari/New(var/new_loc)
 	..(new_loc, "Teshari")
