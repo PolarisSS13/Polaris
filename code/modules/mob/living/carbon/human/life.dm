@@ -977,10 +977,10 @@
 			blinded =    1
 			eye_blurry = 1
 		else
-			//blindness
+			/*
 			if(sdisabilities & BLIND) // Disabled-blind, doesn't get better on its own
 				blinded =    1
-			else if(eye_blind)		       // Blindness, heals slowly over time
+			else */if(eye_blind)		       // Blindness, heals slowly over time
 				eye_blind =  max(eye_blind-1,0)
 				blinded =    1
 			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
@@ -994,9 +994,10 @@
 				eye_blurry = max(eye_blurry-1, 0)
 
 		//Ears
+		/*
 		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
 			ear_deaf = max(ear_deaf, 1)
-		else if(ear_deaf)			//deafness, heals slowly over time
+		else */if(ear_deaf)			//deafness, heals slowly over time
 			ear_deaf = max(ear_deaf-1, 0)
 		else if(get_ear_protection() >= 2)	//resting your ears with earmuffs heals ear damage faster
 			ear_damage = max(ear_damage-0.15, 0)
