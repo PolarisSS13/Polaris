@@ -48,10 +48,12 @@
 				if(!H.check_has_mouth())
 					user << "Where do you intend to put \the [src]? You don't have a mouth!"
 					return
+				/*
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
+				*/
 
 			if (fullness <= 50)
 				M << "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>"
@@ -70,10 +72,12 @@
 				if(!H.check_has_mouth())
 					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 					return
+				/*
 				var/obj/item/blocked = H.check_mouth_coverage()
 				if(blocked)
 					user << "<span class='warning'>\The [blocked] is in the way!</span>"
 					return
+				*/
 
 			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
 

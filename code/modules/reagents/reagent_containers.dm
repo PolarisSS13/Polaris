@@ -101,10 +101,12 @@
 			if(!H.check_has_mouth())
 				user << "Where do you intend to put \the [src]? You don't have a mouth!"
 				return
+			/*
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
+			*/
 
 		self_feed_message(user)
 		reagents.trans_to_mob(user, issmall(user) ? ceil(amount_per_transfer_from_this/2) : amount_per_transfer_from_this, CHEM_INGEST)
@@ -116,10 +118,12 @@
 			if(!H.check_has_mouth())
 				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 				return
+			/*
 			var/obj/item/blocked = H.check_mouth_coverage()
 			if(blocked)
 				user << "<span class='warning'>\The [blocked] is in the way!</span>"
 				return
+			*/
 
 		other_feed_message_start(user, target)
 
