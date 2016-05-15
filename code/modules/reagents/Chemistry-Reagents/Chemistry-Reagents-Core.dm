@@ -3,7 +3,7 @@
 	name = "Blood"
 	id = "blood"
 	reagent_state = LIQUID
-	metabolism = REM * 5
+	metabolism = metabolic_rate * 5
 	color = "#C80000"
 
 	glass_icon_state = "glass_red"
@@ -89,7 +89,7 @@
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064C877"
-	metabolism = REM * 10
+	metabolism = metabolic_rate * 10
 
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"

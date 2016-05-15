@@ -111,6 +111,7 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	affects_dead = 1 //This can even heal dead people.
+	metabolism = 0.2 //Keeps it the same as it is now, regardless of metabolism
 
 	glass_icon_state = "golden_cup"
 	glass_name = "golden cup"

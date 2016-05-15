@@ -18,7 +18,7 @@
 	var/reagent_state = SOLID
 	var/list/data = null
 	var/volume = 0
-	var/metabolism = REM // This would be 0.2 normally
+	var/metabolism = metabolic_rate // This would be 0.2 normally
 	var/ingest_met = 0
 	var/touch_met = 0
 	var/dose = 0

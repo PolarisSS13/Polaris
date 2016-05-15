@@ -5,7 +5,7 @@
 	id = "nutriment"
 	description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
 	reagent_state = SOLID
-	metabolism = REM * 4
+	metabolism = metabolic_rate * 4
 	var/nutriment_factor = 30 // Per unit
 	var/injectable = 0
 	color = "#664330"
@@ -655,7 +655,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
+		M.adjustToxLoss(4 * metabolic_rate)
 		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
 
@@ -1146,7 +1146,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
+		M.adjustToxLoss(4 * metabolic_rate)
 		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
 

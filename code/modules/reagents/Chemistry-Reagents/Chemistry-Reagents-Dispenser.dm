@@ -11,7 +11,7 @@
 	description = "A chemical element, the builing block of life."
 	reagent_state = SOLID
 	color = "#1C1300"
-	ingest_met = REM * 5
+	ingest_met = metabolic_rate * 5
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -40,10 +40,10 @@
 	color = "#808080"
 
 /datum/reagent/chlorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.take_organ_damage(1*REM, 0)
+	M.take_organ_damage(1*metabolic_rate, 0)
 
 /datum/reagent/chlorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	M.take_organ_damage(1*REM, 0)
+	M.take_organ_damage(1*metabolic_rate, 0)
 
 /datum/reagent/copper
 	name = "Copper"
@@ -268,7 +268,7 @@
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	reagent_state = LIQUID
 	color = "#DB5008"
-	metabolism = REM * 2
+	metabolism = metabolic_rate * 2
 	touch_met = 50 // It's acid!
 	var/power = 5
 	var/meltdose = 10 // How much is needed to melt
