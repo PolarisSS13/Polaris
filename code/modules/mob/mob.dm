@@ -329,6 +329,27 @@
 	return
 */
 
+/mob/living/verb/set_clumsiness()
+	set name = "Set Clumsiness"
+	set category = "IC"
+	set desc = "Toggles whether or not your character is clumsy and will fail at pouring stuff without warning."
+	var/list/modes = list("Holders", "Holders/Placeables", "Clumsy")
+	var/selection = input("Set clumsiness:", "Sensitivity", modes[src.clumsy+1]) in modes
+
+	if (selection == modes[1])
+		src<<"You will no longer miss loadables and fillables without confirmation."
+		src.clumsy = 0
+	else if (selection == modes[2])
+		src<<"You will now splash reagents onto fillables."
+		src.clumsy = 1
+	else if (selection == modes[3])
+		src<<"You will now splash reagents onto fillables and placeables."
+		src.clumsy = 2
+	else
+		src<<"Something went wrong, you should ahelp this."
+
+	return
+
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
