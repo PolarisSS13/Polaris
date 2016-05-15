@@ -91,6 +91,7 @@ h1.alert, h2.alert		{color: #000000;}
 .changeling				{color: #800080;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
+.sign_font				{color: #330033; font-style: italic; font-family: Impact, sans-serif}
 
 .interface				{color: #330033;}
 
