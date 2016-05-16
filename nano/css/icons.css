@@ -31,14 +31,6 @@
 	background-image: url(uiIcons16.png);
 }
 
-.uiIcon64 {
-	float: left;
-	width: 64px;
-	height: 64px;
-	margin: 4px 2px 0 2px;
-	background-image: url(uiIcons64.png);
-}
-
 .uiLinkPendingIcon {
 	display: none;
 	float: left;
@@ -180,9 +172,9 @@
 .uiIcon16.icon-video { background-position: -224px -128px; }
 .uiIcon16.icon-script { background-position: -240px -128px; }
 .uiIcon16.icon-alert { background-position: 0 -144px; }
+.uiIcon16.icon-alert-red { background-image: url(uiIcons16Red.png); background-position: 0 -144px; }
 .uiIcon16.icon-info { background-position: -16px -144px; }
 .uiIcon16.icon-notice { background-position: -32px -144px; }
-.uiIcon16.icon-notice-red { background-image: url(uiIcons16Red.png); background-position: -32px -144px; }
 .uiIcon16.icon-help { background-position: -48px -144px; }
 .uiIcon16.icon-check { background-position: -64px -144px; }
 .uiIcon16.icon-bullet { background-position: -80px -144px; }
@@ -241,12 +233,15 @@
 .uiIcon16.icon-batt_full { background-image: url(c_max.gif); background-position: 0px 0px }
 .uiIcon16.icon-batt_disc { background-image: url(c_discharging.gif); background-position: 0px 0px }
 .uiIcon16.icon-batt_chrg { background-image: url(c_charging.gif); background-position: 0px 0px }
-
-.uiIcon64.icon64-empty { background-position: 0 0; }
-.uiIcon64.icon64-phone { background-position: -64px 0; }
-.uiIcon64.icon64-message { background-position: -128px 0; }
-.uiIcon64.icon64-list { background-position: -192px 0; }
-.uiIcon64.icon64-gear { background-position: -256px 0; }
+/*yes, defining these all like this is awful, but unless the javascript for icon handling is sorted out this will have to do*/
+.uiIcon16.icon-empty64 { background-image: url(uiIcons64.png); background-position: 0 0; width: 64px; height: 64px; }
+.uiIcon16.icon-phone64 { background-image: url(uiIcons64.png); background-position: -64px 0; width: 64px; height: 64px; }
+.uiIcon16.icon-comment64 { background-image: url(uiIcons64.png); background-position: -128px 0; width: 64px; height: 64px; }
+.uiIcon16.icon-list64 { background-image: url(uiIcons64.png); background-position: -192px 0; width: 64px; height: 64px; }
+.uiIcon16.icon-gear64 { background-image: url(uiIcons64.png); background-position: -256px 0; width: 64px; height: 64px; }
+.uiIcon16.icon-person64 { background-image: url(uiIcons64.png); background-position: -320px 0; width: 64px; height: 64px; }
+.uiIcon16.icon-newspaper64 { background-image: url(uiIcons64.png); background-position: 0 -64px; width: 64px; height: 64px; }
+.uiIcon16.icon-note64 { background-image: url(uiIcons64.png); background-position: -64px -64px; width: 64px; height: 64px; }
 
 .mapIcon16 {
     position: absolute;

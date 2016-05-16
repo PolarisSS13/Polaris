@@ -24,6 +24,18 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/list/im_contacts = list()
 	var/list/im_list = list()
 
+	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
+	var/notehtml = ""
+
+	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
+	var/list/modules = list(
+							list("module" = "Phone", "icon" = "phone64", "number" = 2),
+							list("module" = "Contacts", "icon" = "person64", "number" = 3),
+							list("module" = "Messaging", "icon" = "comment64", "number" = 4),
+							list("module" = "Note", "icon" = "note64", "number" = 5),
+							list("module" = "Settings", "icon" = "gear64", "number" = 6)
+							)	//list("module" = "Name of Module", "icon" = "icon name64", "number" = "what tab is the module")
+
 	var/selected_tab = 1
 	var/owner = ""
 	var/occupation = ""
@@ -33,6 +45,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/target_address = ""
 	var/target_address_name = ""
 	var/network_visibility = 1
+	var/ringer = 1
 	var/list/known_devices = list()
 	var/datum/exonet_protocol/exonet = null
 	var/list/communicating = list()
@@ -232,6 +245,8 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/im_contacts_ui[0]			//List of communicators that have been messaged.
 	var/im_list_ui[0]				//List of messages.
 
+	var/modules_ui[0]				//Home screen info.
+
 	//First we add other 'local' communicators.
 	for(var/obj/item/device/communicator/comm in known_devices)
 		if(comm.network_visibility && comm.exonet)
@@ -279,6 +294,10 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	for(var/I in im_list)
 		im_list_ui[++im_list_ui.len] = list("address" = I["address"], "to_address" = I["to_address"], "im" = I["im"])
 
+	//Modules for homescreen.
+	for(var/list/R in modules)
+		modules_ui[++modules_ui.len] = R
+
 	data["owner"] = owner ? owner : "Unset"
 	data["occupation"] = occupation ? occupation : "Swipe ID to set."
 	data["connectionStatus"] = get_connection_to_tcomms()
@@ -295,6 +314,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	data["imContacts"] = im_contacts_ui
 	data["imList"] = im_list_ui
 	data["time"] = worldtime2text()
+	data["ring"] = ringer
+	data["homeScreen"] = modules_ui
+	data["note"] = note					// current notes
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -323,6 +345,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	if(href_list["toggle_visibility"])
 		network_visibility = !network_visibility
+
+	if(href_list["toggle_ringer"])
+		ringer = !ringer
 
 	if(href_list["add_hex"])
 		var/hex = href_list["add_hex"]
@@ -376,6 +401,14 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	if(href_list["switch_tab"])
 		selected_tab = href_list["switch_tab"]
+
+	if(href_list["edit"])
+		var/n = input(usr, "Please enter message", name, notehtml) as message
+		n = sanitizeSafe(n, extra = 0)
+		if (selected_tab == 5)
+			note = html_decode(n)
+			notehtml = note
+			note = replacetext(note, "\n", "<br>")
 
 	nanomanager.update_uis(src)
 	add_fingerprint(usr)
@@ -571,9 +604,10 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	voice_requests |= candidate
 
-	playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-	for (var/mob/O in hearers(2, loc))
-		O.show_message(text("\icon[src] *beep*"))
+	if(ringer)
+		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
+		for (var/mob/O in hearers(2, loc))
+			O.show_message(text("\icon[src] *beep*"))
 
 	alert_called = 1
 	update_icon()
@@ -606,9 +640,10 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(!who)
 		return
 
-	playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
-	for (var/mob/O in hearers(2, loc))
-		O.show_message(text("\icon[src] *beep*"))
+	if(ringer)
+		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
+		for (var/mob/O in hearers(2, loc))
+			O.show_message(text("\icon[src] *beep*"))
 
 	alert_called = 1
 	update_icon()
