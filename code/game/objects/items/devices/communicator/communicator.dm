@@ -24,7 +24,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/list/im_contacts = list()
 	var/list/im_list = list()
 
-	var/note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant!" //Current note in the notepad function
+	var/note = "Thank you for choosing the T-14.2 Communicator, this is your notepad!" //Current note in the notepad function
 	var/notehtml = ""
 
 	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
@@ -172,7 +172,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 // Proc: attackby()
 // Parameters: 2 (C - what is used on the communicator. user - the mob that has the communicator)
-// Description: When an ID is swiped on the communicator, the communicator reads the job and checks it against the Owner name, if succes, the occupation is added.
+// Description: When an ID is swiped on the communicator, the communicator reads the job and checks it against the Owner name, if success, the occupation is added.
 /obj/item/device/communicator/attackby(obj/item/C as obj, mob/user as mob)
 	if(istype(C, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/idcard = C
@@ -414,8 +414,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	add_fingerprint(usr)
 
 // Proc: receive_exonet_message()
-// Parameters: 3 (origin atom - the source of the message's holder, origin_address - where the message came from, message - the message received)
-// Description: Handles voice requests and invite messages originating from both real communicators and ghosts.  Also includes a ping response.
+// Parameters: 4 (origin atom - the source of the message's holder, origin_address - where the message came from, message - the message received,
+//				  text - message text to send if message is of type "text")
+// Description: Handles voice requests and invite messages originating from both real communicators and ghosts.  Also includes a ping response and IM function.
 /obj/item/device/communicator/receive_exonet_message(var/atom/origin_atom, origin_address, message, text)
 	if(message == "voice")
 		if(isobserver(origin_atom) || istype(origin_atom, /obj/item/device/communicator))
@@ -456,7 +457,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			var/random = rand(450,700)
 			random = random / 10
 			exonet.send_message(origin_address, "64 bytes received from [exonet.address] ecmp_seq=1 ttl=51 time=[random] ms")
-	if(message == "text")
+	if(message == "text") //Ghosts don't get texting yet. Mostly for spam prevention by ghosts but also due to ui requirements not sorted out yet.
 		return
 
 // Proc: register_device()

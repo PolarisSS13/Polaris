@@ -103,7 +103,7 @@ var/global/list/all_exonet_connections = list()
 	return null
 
 // Proc: send_message()
-// Parameters: 2 (target_address - the desired address to send the message to, message - the message to send)
+// Parameters: 3 (target_address - the desired address to send the message to, message - the message to send, text - the message text if message is of type "text")
 // Description: Sends the message to target_address, by calling receive_message() on the desired datum.
 /datum/exonet_protocol/proc/send_message(var/target_address, var/message, var/text)
 	if(!address)
@@ -114,7 +114,8 @@ var/global/list/all_exonet_connections = list()
 			break
 
 // Proc: receive_message()
-// Parameters: 3 (origin_atom - the origin datum's holder, origin_address - the address the message originated from, message - the message that was sent)
+// Parameters: 4 (origin_atom - the origin datum's holder, origin_address - the address the message originated from, message - the message that was sent,
+//				  text - the message text if message is of type "text")
 // Description: Called when send_message() successfully reaches the intended datum.  By default, calls receive_exonet_message() on the holder atom.
 /datum/exonet_protocol/proc/receive_message(var/atom/origin_atom, var/origin_address, var/message, var/text)
 	holder.receive_exonet_message(origin_atom, origin_address, message, text)
