@@ -9,7 +9,7 @@
 	num_alternate_languages = 2
 	secondary_langs = list("Schechi", "Skrellian")
 	name_language = "Schechi"
-	min_age = 18
+	min_age = 12
 	max_age = 45
 
 	blood_color = "#D514F7"
@@ -36,7 +36,7 @@
 	blood_volume = 400
 	hunger_factor = 0.2
 
-	spawn_flags = CAN_JOIN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL

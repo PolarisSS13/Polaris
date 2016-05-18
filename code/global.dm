@@ -22,19 +22,14 @@ var/global/datum/universal_state/universe = new
 var/global/list/global_map = null
 
 // Noises made when hit while typing.
-var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
 var/diary				= null
-var/href_logfile        = null
-var/station_name        = "Eros Research Platform"
-var/station_short       = "Eros"
-var/const/dock_name     = "CentComm Orbital Spaceport"
-var/const/boss_name     = "Central Command"
-var/const/boss_short    = "CentComm"
-var/const/company_name  = "NanoTrasen"
-var/const/company_short = "NT"
-var/game_version        = "Polaris"
-var/changelog_hash      = ""
-var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/href_logfile		= null
+var/const/boss_name		= "Central Command"
+var/const/company_name	= "NanoTrasen"
+var/const/company_short	= "NT"
+var/changelog_hash		= ""
+var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/round_progressing = 1
 
 	//On some maps, it does not make sense for space turf to appear when something blows up (e.g. on an asteroid colony, or planetside)
