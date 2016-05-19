@@ -700,7 +700,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 /obj/item/device/communicator/see_emote(mob/living/M, text)
 	var/rendered = "\icon[src] <span class='message'>[text]</span>"
 	for(var/obj/item/device/communicator/comm in communicating)
-		for(var/mob/mob in viewers(get_turf(comm))) //We can't use visible_message(), or else we will get an infinite loop if two communicators hear each other.
+		for(var/mob/mob in hearers(get_turf(comm))) //We can't use visible_message(), or else we will get an infinite loop if two communicators hear each other.
 			mob.show_message(rendered)
 		for(var/mob/living/voice/V in comm.contents)
 			V.show_message(rendered)
@@ -713,7 +713,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 /obj/item/device/communicator/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	for(var/obj/item/device/communicator/comm in communicating)
 		var/list/mobs_to_relay = list()
-		mobs_to_relay |= viewers(get_turf(comm))
+		mobs_to_relay |= hearers(get_turf(comm))
 		mobs_to_relay |= comm.contents //Needed so ghost-callers can see speech.
 		for(var/mob/mob in mobs_to_relay)
 			//Can whoever is hearing us understand?
