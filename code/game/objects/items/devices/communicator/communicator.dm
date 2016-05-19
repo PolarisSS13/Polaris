@@ -709,7 +709,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 /obj/item/device/communicator/hear_talk(mob/living/M, text, verb, datum/language/speaking)
 	for(var/obj/item/device/communicator/comm in communicating)
 		var/list/mobs_to_relay = list()
-		mobs_to_relay |= viewers(get_turf(comm))
+		mobs_to_relay |= hearers(get_turf(comm))
 		mobs_to_relay |= comm.contents //Needed so ghost-callers can see speech.
 		for(var/mob/mob in mobs_to_relay)
 			//Can whoever is hearing us understand?
