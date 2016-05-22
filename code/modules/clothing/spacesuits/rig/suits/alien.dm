@@ -13,6 +13,7 @@
 	chest_type = /obj/item/clothing/suit/space/rig/breacher
 	helm_type = /obj/item/clothing/head/helmet/space/rig/breacher
 	boot_type = /obj/item/clothing/shoes/magboots/rig/breacher
+
 /obj/item/weapon/rig/breacher/fancy
 	name = "breacher chassis control module"
 	desc = "An authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank."
