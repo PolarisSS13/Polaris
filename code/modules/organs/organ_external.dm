@@ -33,11 +33,14 @@
 	var/model                          // Used when caching robolimb icons.
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
+	var/mob_icon_state = ""            // The icon state to use, if applicable.
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
-	var/s_tone                         // Skin tone.
 	var/list/s_col                     // skin colour
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
+	var/no_blend = 0                   // If the organ should be Blend()ed into the human icon or put in the overlays
+	var/offset_x = 0                   // Used with no_blend to offset the icon.
+	var/offset_y = 0                   // Same as above.
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -1303,6 +1306,76 @@ Note that amputating the affected organ does in fact remove the infection from t
 	parent_organ = "r_leg"
 	joint = "right ankle"
 	amputation_point = "right ankle"
+
+/obj/item/organ/external/snake
+	organ_tag = BP_TAUR
+	name = "lamia tail"
+	icon_name = "s_tail"
+	body_part = TAIL_SNAKE
+	parent_organ = BP_GROIN
+	joint = "tail"
+	max_damage = 120
+	min_broken_damage = 60
+	amputation_point = "groin"
+	can_stand = 1
+	dislocated = -1
+	no_blend = 1
+	offset_x = -16
+	var/list/t_col
+
+/obj/item/organ/external/snake/robotize(var/company, var/skip_prosthetics, var/keep_organs)
+	. = ..()
+	force_icon = null
+
+/obj/item/organ/external/snake/sync_colour_to_human(var/mob/living/carbon/human/human)
+	if(!..(human))
+		t_col = list(human.r_tail, human.g_tail, human.b_tail)
+
+/obj/item/organ/external/snake/sync_colour_to_dna()
+	if(!..())
+		t_col = list(dna.GetUIValue(DNA_UI_TAIL_R),dna.GetUIValue(DNA_UI_TAIL_G),dna.GetUIValue(DNA_UI_TAIL_B))
+
+/obj/item/organ/external/snake/get_icon(var/skeletal)
+	var/gender = "f"
+	if(owner && owner.gender == MALE)
+		gender = "m"
+
+	if(dna)
+		if(dna.GetUIState(DNA_UI_GENDER))
+			gender = "f"
+		else
+			gender = "m"
+
+	if(force_icon)
+		mob_icon = new /icon(force_icon, "[icon_name][gendered_icon ? "_[gender]" : ""]")
+		mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]"
+	else
+		if(skeletal)
+			mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gendered_icon ? "_[gender]" : ""]_skele")
+			mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]_skele"
+		else if(status & ORGAN_ROBOT)
+			mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gendered_icon ? "_[gender]" : ""]_[model ? lowertext(model) : "robot"]")
+			mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]_[model ? lowertext(model) : "robot"]"
+		else
+			if(status & ORGAN_MUTATED)
+				mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gender ? "_[gender]" : ""]_deform")
+				mob_icon_state = "[icon_name][gender ? "_[gender]" : ""]_deform"
+			else
+				mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+				mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]"
+
+			if(status & ORGAN_DEAD)
+				mob_icon.ColorTone(rgb(10,50,0))
+				mob_icon.SetIntensity(0.7)
+
+			if(t_col && t_col.len >= 3)
+				mob_icon.Blend(rgb(t_col[1], t_col[2], t_col[3]), ICON_MULTIPLY)
+
+	dir = EAST
+	icon = mob_icon
+	icon_state = mob_icon_state
+
+	return mob_icon
 
 /obj/item/organ/external/hand
 	organ_tag = "l_hand"

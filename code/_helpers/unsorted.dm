@@ -1022,7 +1022,10 @@ proc/get_mob_with_client_list()
 	return mobs
 
 
-/proc/parse_zone(zone)
+/proc/parse_zone(zone, mob/living/carbon/human/H)
+	if(istype(H))
+		if(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT) && H.get_organ(BP_TAUR))
+			return "lamia tail"
 	if(zone == "r_hand") return "right hand"
 	else if (zone == "l_hand") return "left hand"
 	else if (zone == "l_arm") return "left arm"
@@ -1035,6 +1038,7 @@ proc/get_mob_with_client_list()
 	else if (zone == "r_hand") return "right hand"
 	else if (zone == "l_foot") return "left foot"
 	else if (zone == "r_foot") return "right foot"
+	else if (zone == "taur")   return "lamia tail"
 	else return zone
 
 //gets the turf the atom is located in (or itself, if it is a turf).
@@ -1322,3 +1326,16 @@ var/mob/dview/dview_mob = new
 	tY = max(1, min(world.maxy, origin.y + (text2num(tY) - (world.view + 1))))
 	return locate(tX, tY, tZ)
 
+/icon/proc/Shrink()
+	var/list/states = IconStates(0)
+	var/list/x_p = list()
+	var/list/y_p = list()
+	for(var/x in 1 to Width())
+		for(var/y in 1 to Height())
+			var/p = GetPixel(x, y, states[1])
+			if(!isnull(p))
+				x_p += x
+				y_p += y
+	x_p = sortNum(x_p)
+	y_p = sortNum(y_p)
+	Crop(x_p[1]-1, y_p[1]-1, x_p[x_p.len]+1, y_p[y_p.len]+1)

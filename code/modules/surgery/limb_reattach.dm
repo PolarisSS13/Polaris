@@ -9,11 +9,17 @@
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		if (!hasorgans(target))
 			return 0
+		if (target_zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+			if(istype(tool, /obj/item/organ/external/snake))
+				target_zone = BP_TAUR
+			if(istype(tool, /obj/item/robot_parts/snake))
+				target_zone = BP_TAUR
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected)
 			return 0
 		var/list/organ_data = target.species.has_limbs["[target_zone]"]
-		return !isnull(organ_data)
+		var/can_use = (!isnull(organ_data) || istype(tool, /obj/item/robot_parts/snake))
+		return can_use
 
 /datum/surgery_step/limb/attach
 	allowed_tools = list(/obj/item/organ/external = 100)
@@ -91,6 +97,15 @@
 			var/obj/item/robot_parts/p = tool
 			if (p.part)
 				if (!(target_zone in p.part))
+					if(BP_TAUR in p.part)
+						if(target_zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+							if(p.force_path)
+								for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)) //all leg parts must be missing to attach a taur
+									if(!isnull(target.get_organ(organ)))
+										return 0
+								if(!isnull(target.get_organ(p.part[1]))) //forcing path only first part is valid
+									return 0
+								return 1
 					return 0
 			return isnull(target.get_organ(target_zone))
 
@@ -100,21 +115,29 @@
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/robot_parts/L = tool
-		user.visible_message("<span class='notice'>[user] has attached \the [tool] to [target].</span>",	\
-		"<span class='notice'>You have attached \the [tool] to [target].</span>")
 
 		if(L.part)
-			for(var/part_name in L.part)
-				if(!isnull(target.get_organ(part_name)))
-					continue
-				var/list/organ_data = target.species.has_limbs["[part_name]"]
-				if(!organ_data)
-					continue
-				var/new_limb_type = organ_data["path"]
-				var/obj/item/organ/external/new_limb = new new_limb_type(target)
+			if(L.force_path)
+				var/obj/item/organ/external/new_limb = new L.force_path(target)
 				new_limb.robotize(L.model_info)
 				if(L.sabotaged)
 					new_limb.sabotaged = 1
+			else
+				for(var/part_name in L.part)
+					if(!isnull(target.get_organ(part_name)))
+						continue
+					var/list/organ_data = target.species.has_limbs["[part_name]"]
+					if(!organ_data)
+						continue
+					var/new_limb_type = organ_data["path"]
+					var/obj/item/organ/external/new_limb = new new_limb_type(target)
+					new_limb.robotize(L.model_info)
+					if(L.sabotaged)
+						new_limb.sabotaged = 1
+
+
+		user.visible_message("<span class='notice'>[user] has attached \the [tool] to [target].</span>",	\
+		"<span class='notice'>You have attached \the [tool] to [target].</span>")
 
 		target.update_body()
 		target.updatehealth()

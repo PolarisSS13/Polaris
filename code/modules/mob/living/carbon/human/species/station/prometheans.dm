@@ -22,7 +22,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
-	spawn_flags =      SPECIES_IS_RESTRICTED
+	spawn_flags =      SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 
 	breath_type = null
 	poison_type = null
@@ -30,8 +30,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	gluttonous =            2
 	virus_immune =          1
 	blood_volume =          600
-	min_age =               1
-	max_age =               5
+	min_age =               18
+	max_age =               30
 	brute_mod =             0.5
 	burn_mod =              2
 	oxy_mod =               0

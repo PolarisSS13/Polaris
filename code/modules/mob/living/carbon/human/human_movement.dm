@@ -45,14 +45,23 @@
 		if(shoes)
 			tally += shoes.slowdown
 
-		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(organ_name)
-			if(!E || E.is_stump())
-				tally += 4
+		if(get_organ(BP_TAUR))
+			var/obj/item/organ/external/E = get_organ(BP_TAUR)
+			if(E.is_stump())
+				tally += 16
 			else if(E.status & ORGAN_SPLINTED)
-				tally += 0.5
+				tally += 2
 			else if(E.status & ORGAN_BROKEN)
-				tally += 1.5
+				tally += 6
+		else
+			for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+				var/obj/item/organ/external/E = get_organ(organ_name)
+				if(!E || E.is_stump())
+					tally += 4
+				else if(E.status & ORGAN_SPLINTED)
+					tally += 0.5
+				else if(E.status & ORGAN_BROKEN)
+					tally += 1.5
 
 	if(shock_stage >= 10) tally += 3
 

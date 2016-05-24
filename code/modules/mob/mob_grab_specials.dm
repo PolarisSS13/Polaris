@@ -149,6 +149,11 @@
 		if(istype(H) && H.species.gluttonous)
 			if(H.species.gluttonous == 2)
 				can_eat = 2
+			if(H.species.gluttonous == 3)
+				can_eat = 2
+				if(H.stomach_contents.len)
+					user << "<span class='danger'>You're too full to eat another person!</span>"
+					return
 			else if((H.mob_size > target.mob_size) && !ishuman(target) && ismini(target))
 				can_eat = 1
 

@@ -42,13 +42,30 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin tone
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 255					//Skin color
+	var/g_skin = 220					//Skin color
+	var/b_skin = 177					//Skin color
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/c_type = "None"					//Breast Type
+	var/d_type = "None"					//Dick Type
+	var/v_type = "None"					//Vagina Type
+	var/r_genital = 255					//Genitals color
+	var/g_genital = 220					//Genitals color
+	var/b_genital = 177					//Genitals color
+	var/ears_type = "None"				//Ears Type
+	var/wings_type = "None"				//Wings Type
+	var/tail_type = "None"				//Tail Type
+	var/r_wings = 200					//Wings color
+	var/g_wings = 200					//Wings color
+	var/b_wings = 200					//Wings color
+	var/r_ears = 200					//Ears color
+	var/g_ears = 200					//Ears color
+	var/b_ears = 200					//Ears color
+	var/r_tail = 200					//Tail color
+	var/g_tail = 200					//Tail color
+	var/b_tail = 200					//Tail color
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
@@ -309,10 +326,32 @@ datum/preferences
 	character.g_skin = g_skin
 	character.b_skin = b_skin
 
-	character.s_tone = s_tone
-
 	character.h_style = h_style
 	character.f_style = f_style
+
+	character.c_type = c_type
+	character.d_type = d_type
+	character.v_type = v_type
+
+	character.r_genital = r_genital
+	character.g_genital = g_genital
+	character.b_genital = b_genital
+
+	character.r_wings = r_wings
+	character.g_wings = g_wings
+	character.b_wings = b_wings
+
+	character.r_ears = r_ears
+	character.g_ears = g_ears
+	character.b_ears = b_ears
+
+	character.r_tail = r_tail
+	character.g_tail = g_tail
+	character.b_tail = b_tail
+
+	character.wings_type = wings_type
+	character.ears_type = ears_type
+	character.tail_type = tail_type
 
 	character.home_system = home_system
 	character.citizenship = citizenship
@@ -323,7 +362,7 @@ datum/preferences
 	character.used_skillpoints = used_skillpoints
 
 	// Destroy/cyborgize organs and limbs.
-	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO))
+	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO, BP_TAUR))
 		var/status = organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)

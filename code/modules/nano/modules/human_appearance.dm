@@ -30,17 +30,12 @@
 		if(can_change(APPEARANCE_GENDER) && (href_list["gender"] in get_genders()))
 			if(owner.change_gender(href_list["gender"]))
 				cut_and_generate_data()
-				return 1
+
 	if(href_list["gender_id"])
 		if(can_change(APPEARANCE_GENDER) && (href_list["gender_id"] in all_genders_define_list))
 			owner.identifying_gender = href_list["gender_id"]
 			return 1
-	if(href_list["skin_tone"])
-		if(can_change_skin_tone())
-			var/new_s_tone = input(usr, "Choose your character's skin-tone:\n(Light 1 - 220 Dark)", "Skin Tone", -owner.s_tone + 35) as num|null
-			if(isnum(new_s_tone) && can_still_topic(state))
-				new_s_tone = 35 - max(min( round(new_s_tone), 220),1)
-				return owner.change_skin_tone(new_s_tone)
+
 	if(href_list["skin_color"])
 		if(can_change_skin_color())
 			var/new_skin = input(usr, "Choose your character's skin colour: ", "Skin Color", rgb(owner.r_skin, owner.g_skin, owner.b_skin)) as color|null
@@ -113,6 +108,7 @@
 		data["species"] = species
 
 	data["change_gender"] = can_change(APPEARANCE_GENDER)
+
 	if(data["change_gender"])
 		var/genders[0]
 		for(var/gender in get_genders())
@@ -123,8 +119,6 @@
 			id_genders[++id_genders.len] =  list("gender_name" = gender2text(gender), "gender_key" = gender)
 		data["id_genders"] = id_genders
 
-
-	data["change_skin_tone"] = can_change_skin_tone()
 	data["change_skin_color"] = can_change_skin_color()
 	data["change_eye_color"] = can_change(APPEARANCE_EYE_COLOR)
 	data["change_hair"] = can_change(APPEARANCE_HAIR)
@@ -158,9 +152,6 @@
 
 /datum/nano_module/appearance_changer/proc/can_change(var/flag)
 	return owner && (flags & flag)
-
-/datum/nano_module/appearance_changer/proc/can_change_skin_tone()
-	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_TONE
 
 /datum/nano_module/appearance_changer/proc/can_change_skin_color()
 	return owner && (flags & APPEARANCE_SKIN) && owner.species.appearance_flags & HAS_SKIN_COLOR

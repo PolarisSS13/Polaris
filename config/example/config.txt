@@ -16,7 +16,7 @@ ADMIN_LEGACY_SYSTEM
 BAN_LEGACY_SYSTEM
 
 ## Add a # here if you wish to use the setup where jobs have more access. This is intended for servers with low populations - where there are not enough players to fill all roles, so players need to do more than just one job. Also for servers where they don't want people to hide in their own departments.
-JOBS_HAVE_MINIMAL_ACCESS
+#JOBS_HAVE_MINIMAL_ACCESS
 
 ## Unhash this entry to have certain jobs require your account to be at least a certain number of days old to select. You can configure the exact age requirement for different jobs by editing
 ## the minimal_player_age variable in the files in folder /code/game/jobs/job/.. for the job you want to edit. Set minimal_player_age to 0 to disable age requirement for that job.
@@ -67,8 +67,8 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
-## Enable/disable SQL connection (comment out to disable)
-SQL_ENABLED
+## sql switching
+# SQL_ENABLED
 
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
@@ -76,8 +76,10 @@ SQL_ENABLED
 ##Show mods on staffwho
 SHOW_MODS
 
+
 ##Show mentors on staffwho
 SHOW_MENTORS
+
 
 ## Chooses whether mods have the ability to tempban or not
 MODS_CAN_TEMPBAN
@@ -103,9 +105,6 @@ PROBABILITY WIZARD 1
 PROBABILITY CHANGELING 1
 PROBABILITY CULT 1
 PROBABILITY EXTEND-A-TRAITORMONGOUS 6
-PROBABILITY LIZARD 1
-PROBABILITY INTRIGUE 1
-PROBABILITY VISITORS 1
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -114,13 +113,14 @@ ALLOW_RANDOM_EVENTS
 TRAITOR_SCALING
 
 ## if objectives are disabled
-#OBJECTIVES_DISABLED
+OBJECTIVES_DISABLED
 
 ## make ERT's be only called by admins
 #ERT_ADMIN_ONLY
 
 ## If uncommented, votes can be called to add extra antags to the round.
 #ALLOW_EXTRA_ANTAGS
+
 
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
@@ -144,13 +144,13 @@ VOTE_DELAY 6000
 VOTE_PERIOD 600
 
 ## autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes)
-VOTE_AUTOTRANSFER_INITIAL 108000
+VOTE_AUTOTRANSFER_INITIAL 144000
 
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
 VOTE_AUTOTRANSFER_INTERVAL 36000
 
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
-VOTE_AUTOGAMEMODE_TIMELEFT 100
+VOTE_AUTOGAMEMODE_TIMELEFT 90000
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
@@ -159,14 +159,13 @@ VOTE_AUTOGAMEMODE_TIMELEFT 100
 DEFAULT_NO_VOTE
 
 ## Allow ghosts to see antagonist through AntagHUD
-ALLOW_ANTAG_HUD
+#ALLOW_ANTAG_HUD
 
 ## If ghosts use antagHUD they are no longer allowed to join the round.
 ANTAG_HUD_RESTRICTED
 
 ## allow AI job
 ALLOW_AI
-
 
 ## disable abandon mob
 # NORESPAWN
@@ -175,35 +174,37 @@ ALLOW_AI
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY yournamehere
+HOSTEDBY Werebear
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
-GUEST_JOBBAN
+GUEST_JOBBAN 1
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)
 GUEST_BAN
+
 ## Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Uncomment to 1 to jobban, leave commented out to allow these positions for everyone (but see GUEST_JOBBAN above and regular jobbans)
 # USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
-#SERVER server.net:port
+SERVER games.servermint.net:8000
 
 ## set a server URL for the IRC bot to use; like SERVER, don't include the byond://
 ## Unlike SERVER, this one shouldn't break auto-reconnect
 #SERVERURL server.net:port
 
 ## forum address
-# FORUMURL http://example.com
+ FORUMURL http://erosresearchplatform.com/forums/index.php
 
 ## Wiki address
-# WIKIURL http://example.com
+ WIKIURL http://erosresearchplatform.com/wiki/index.php?title=Main_Page
 
 ## GitHub address
-# GITHUBURL https://github.com/example-user/example-repository
+ GITHUBURL https://github.com/ursamedium/ErosResearchPlatform
+
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-# BANAPPEALS http://example.com
+ BANAPPEALS http://erosresearchplatform.com/forums/viewforum.php?f=10
 
 ## In-game features
 ## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
@@ -213,7 +214,7 @@ GUEST_BAN
 # LOAD_JOBS_FROM_TXT
 
 ##Remove the # mark infront of this to forbid admins from posssessing the singularity.
-#FORBID_SINGULO_POSSESSION
+# FORBID_SINGULO_POSSESSION
 
 ## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM. 
 ## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
@@ -221,8 +222,9 @@ GUEST_BAN
 
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
+
 ##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.9
+TICKLAG 0.5
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 0
@@ -240,19 +242,20 @@ SOCKET_TALK 0
 GATEWAY_DELAY 18000
 
 ## Remove the # to give assistants maint access.
-#ASSISTANT_MAINT
+ASSISTANT_MAINT
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
 #CONTINUOUS_ROUNDS
 
 ## Uncomment to restrict non-admins from using humanoid alien races
-USEALIENWHITELIST
+#USEALIENWHITELIST
 
 ## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
 #ALIEN_PLAYER_RATIO 0.2
+
 ##Remove the # to let ghosts spin chairs
-#GHOST_INTERACTION
+GHOST_INTERACTION
 
 ## Password used for authorizing ircbot and other external tools.
 #COMMS_PASSWORD
@@ -287,7 +290,7 @@ ALLOW_CULT_GHOSTWRITER
 REQ_CULT_GHOSTWRITER 6
 
 ## Sets the number of available character slots
-CHARACTER_SLOTS 10
+CHARACTER_SLOTS 20
 
 ## Uncomment to use overmap system for zlevel travel
 #USE_OVERMAP
@@ -305,7 +308,7 @@ CONTACT_LEVELS 1;5
 PLAYER_LEVELS 1;3;4;5;6
 
 ## Expected round length in minutes
-EXPECTED_ROUND_LENGTH 180
+EXPECTED_ROUND_LENGTH 240
 
 ## The lower delay between events in minutes.
 ## Affect mundane, moderate, and major events respectively
@@ -327,10 +330,10 @@ EVENT_CUSTOM_START_MAJOR 80;100
 #DEBUG_PARANOID
 
 ## Uncomment to allow aliens to spawn.
-#ALIENS_ALLOWED
+ALIENS_ALLOWED
 
 ## Uncomment to allow xenos to spawn.
-#NINJAS_ALLOWED
+NINJAS_ALLOWED
 
 ## Uncomment to disable the restrictive weldervision overlay.
 #DISABLE_WELDER_VISION
@@ -365,9 +368,11 @@ STARLIGHT 0
 # GENERATE_ASTEROID
 
 
+
 ## If you've enabled asteroid generation, you need to supply which z-levels to apply it to, in integer form, and seperated using ;
 ## An example: 1;4;5
 # ASTEROID_Z_LEVELS 1;4;5
+
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
 

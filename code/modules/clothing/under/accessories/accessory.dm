@@ -242,3 +242,73 @@
 /obj/item/clothing/accessory/stripedbluescarf
 	name = "striped blue scarf"
 	icon_state = "stripedbluescarf"
+
+/obj/item/clothing/accessory/collar/collar_blk
+	name = "Silver tag collar"
+	desc = "A collar for your little pets... or the big ones."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_blk"
+	item_state = "collar_blk"
+
+/obj/item/clothing/accessory/collar/collar_gld
+	name = "Golden tag collar"
+	desc = "A collar for your little pets... or the big ones."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_gld"
+	item_state = "collar_gld"
+
+/obj/item/clothing/accessory/collar/collar_bell
+	name = "Bell collar"
+	desc = "A collar with a tiny bell hanging from it, purrfect furr kitties."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_bell"
+	item_state = "collar_bell"
+
+
+/obj/item/clothing/accessory/collar/collar_spike
+	name = "Spiked collar"
+	desc = "A collar with spikes that look as sharp as your teeth."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_spik"
+	item_state = "collar_spik"
+
+/obj/item/clothing/accessory/collar/collar_pink
+	name = "Pink collar"
+	desc = "This collar will make your pets look FA-BU-LOUS."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_pnk"
+	item_state = "collar_pnk"
+
+/obj/item/clothing/accessory/collar/collar_steel
+	name = "Steel collar"
+	desc = "A durable industrial collar, show your pet how much they mean to YOU!"
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_steel"
+	item_state = "collar_steel"
+
+//obj/item/clothing/accessory/collar_steel/attack_hand(mob/user as mob)
+//	if (istype(wear_suit, obj/item/clothing/accessory/collar_steel))
+//		user << "<span class='notice'>You need help taking this off!</span>"
+//		return
+//	..()
+
+/obj/item/clothing/accessory/collar/collar_holo
+	name = "Holo-collar"
+	desc = "An expensive holo-collar for the modern day pet."
+	slot_flags = SLOT_TIE | SLOT_OCLOTHING
+	icon_state = "collar_holo"
+	item_state = "collar_holo"
+
+/obj/item/clothing/accessory/collar_holo/attack_self(mob/user as mob)
+	user << "<span class='notice'>[name]'s interface is projected onto your hand.</span>"
+
+	var/str = copytext(reject_bad_text(input(user,"Tag text?","Set tag","")),1,MAX_NAME_LEN)
+
+	if(!str || !length(str))
+		user << "<span class='notice'>[name]'s tag set to be blank.</span>"
+		name = initial(name)
+		desc = initial(desc)
+	else
+		user << "<span class='notice'>You set the [name]'s tag to '[str]'.</span>"
+		name = initial(name) + " ([str])"
+		desc = initial(desc) + " The tag says \"[str]\"."

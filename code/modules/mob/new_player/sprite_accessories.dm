@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Lamia")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -46,12 +46,13 @@
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face.dmi'	  // default icon for all hairs
+	species_allowed = list("Human","Unathi","Akula", "Lamia")
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -225,12 +226,12 @@
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	bun
 		name = "Bun"
@@ -251,7 +252,7 @@
 	buzz
 		name = "Buzzcut"
 		icon_state = "hair_buzzcut"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	crew
 		name = "Crewcut"
@@ -340,7 +341,7 @@
 	mohawk
 		name = "Mohawk"
 		icon_state = "hair_d"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	jensen
 		name = "Adam Jensen Hair"
@@ -357,7 +358,7 @@
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	kusangi
 		name = "Kusanagi Hair"
@@ -510,7 +511,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari")
+		species_allowed = list("Human","Unathi","Tajara","Skrell", "Machine","Teshari","Akula","Lamia")
 
 	teshari_beard
 		name = "Teshari Beard"
@@ -569,7 +570,7 @@
 	elvis
 		name = "Elvis Sideburns"
 		icon_state = "facial_elvis"
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Akula","Lamia")
 
 	abe
 		name = "Abraham Lincoln Beard"
@@ -770,3 +771,419 @@
 		icon_state = "default"
 		icon = 'icons/mob/human_races/r_skrell.dmi'
 		species_allowed = list("Skrell")
+
+	akula
+		name = "Default Akula skin"
+		icon_state = "default"
+		icon = 'icons/mob/human_races/r_shark.dmi'
+		species_allowed = list("Akula")
+
+
+/*
+/////////////////////////////
+/  =---------------------=  /
+/  == Dicks Definitions ==  /
+/  =---------------------=  /
+/////////////////////////////
+*/
+
+/datum/sprite_accessory/dicks
+	icon = 'icons/mob/human_races/extras/dicks.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+
+	dik_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
+
+	dik_normal
+		name = "Normal Dick"
+		icon_state = "normal"
+
+	dik_circumcised
+		name = "Circumcised Dick"
+		icon_state = "cut"
+
+	dik_big
+		name = "Big Dick"
+		icon_state = "big"
+
+	dik_big2
+		name = "Bigger Dick"
+		icon_state = "big2"
+
+	dik_small
+		name = "Small Dick"
+		icon_state = "small"
+
+	dik_knotted
+		name = "Knotted Dick"
+		icon_state = "knotted"
+
+	dik_feline
+		name = "Feline Dick"
+		icon_state = "feline"
+
+	dik_tentacle
+		name = "Tentacle Dicks"
+		icon_state = "tentacle"
+
+	dik_tentacle2
+		name = "Tentacle Big Dicks"
+		icon_state = "tentacle_big"
+
+	dik_amputed
+		name = "Amputed Dick"
+		icon_state = "amputed"
+		do_colouration = 0
+
+/*
+//////////////////////////////
+/  =----------------------=  /
+/  == Vagina Definitions ==  /
+/  =----------------------=  /
+//////////////////////////////
+*/
+
+/datum/sprite_accessory/vaginas
+	icon = 'icons/mob/human_races/extras/vaginas.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+
+	vag_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
+
+	vag_normal
+		name = "Normal Vagina"
+		icon_state = "normal"
+
+	vag_gaping
+		name = "Gaping Vagina"
+		icon_state = "gaping"
+
+	vag_dripping
+		name = "Dripping Vagina"
+		icon_state = "dripping"
+
+	vag_tentacle
+		name = "Tentacle Vagina"
+		icon_state = "tentacles"
+
+	vag_dentata
+		name = "Vagina Dentata"
+		icon_state = "dentata"
+		do_colouration = 0
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Breasts Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/breasts
+	icon = 'icons/mob/human_races/extras/breasts.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+
+	brt_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
+
+	brt_normala
+		name = "Tiny Breasts"
+		icon_state = "normal_a"
+
+	brt_normalb
+		name = "Small Breasts"
+		icon_state = "normal_b"
+
+	brt_normalc
+		name = "Normal Breasts"
+		icon_state = "normal_c"
+
+	brt_normald
+		name = "Big Breasts"
+		icon_state = "normal_d"
+
+	brt_normale
+		name = "Very Big Breasts"
+		icon_state = "normal_e"
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Ears	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/ears
+	icon = 'icons/mob/human_races/extras/ears.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+
+	ear_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
+
+	ear_bear
+		name = "Bear Ears"
+		icon_state = "bear"
+
+	ear_bee
+		name = "Bee Antenae"
+		icon_state = "bee"
+		do_colouration = 0
+
+	ear_bunny
+		name = "Bunny Ears"
+		icon_state = "bunny"
+
+	ear_cat
+		name = "Cat Ears"
+		icon_state = "kitty"
+
+	ear_deathclaw
+		name = "Deathclaw Ears"
+		icon_state = "deathclaw"
+		do_colouration = 0
+
+	ear_horn_oni
+		name = "Oni Horns"
+		icon_state = "horns_oni"
+
+	ear_horn_demon
+		name = "Demon Horns"
+		icon_state = "horns_demon"
+
+	ear_horn_curled
+		name = "Curled Horns"
+		icon_state = "horns_curled"
+
+	ear_horn_ram
+		name = "Ram Horns"
+		icon_state = "horns_ram"
+
+	ear_horn_curled
+		name = "Short Horns"
+		icon_state = "horns_short"
+
+	ear_kitsune_colour
+		name = "Kitsune Ears"
+		icon_state = "kitsune"
+
+	ear_mouse
+		name = "Mouse Ears"
+		icon_state = "mouse"
+
+	ear_squirrel
+		name = "Squirrel Ears"
+		icon_state = "squirrel"
+
+	ear_wolf
+		name = "Wolf Ears"
+		icon_state = "wolf"
+
+	ear_dog
+		name = "Dog Ears"
+		icon_state = "lab"
+
+	ear_cow
+		name = "Cow Ears + Horns"
+		icon_state = "cow"
+		do_colouration = 0		// Needs greyscale. -- Ursa
+
+	ear_lop
+		name = "Lop Bunny Ears"
+		icon_state = "lop"
+
+	ear_angler
+		name = "Angler Lure"
+		icon_state = "angler"
+
+	ear_deer1
+		name = "Deer Ears"
+		icon_state = "deer1"
+
+	ear_deer2
+		name = "Deer Ears + Antlers"
+		icon_state = "deer2"
+
+	ear_antlers
+		name = "Antlers"
+		icon_state = "antlers"
+		do_colouration = 0		// Needs greyscale? -- Ursa
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Wings	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/wings
+	icon = 'icons/mob/human_races/extras/wings.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula","Lamia")
+
+	wng_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula","Lamia")
+
+	wng_angel
+		name = "Angel Wings"
+		icon_state = "angel"
+
+	wng_bee
+		name = "Bee Wings"
+		icon_state = "bee"
+
+	wng_bat
+		name = "Bat Wings"
+		icon_state = "bat"
+
+	wng_feathered
+		name = "Feathered Wings"
+		icon_state = "feathered"
+
+	wng_succubus
+		name = "Succubus Wings"
+		icon_state = "succubus"
+
+	wng_smallfairy
+		name = "Small Fairy Wings"
+		icon_state = "smallfairy"
+
+	wng_turtle
+		name = "Turtle Shell"
+		icon_state = "turtle"
+
+	wng_tentacles
+		name = "Back Tentacles"
+		icon_state = "tentacles"
+
+
+/*
+///////////////////////////////
+/  =-----------------------=  /
+/  == Tails	  Definitions ==  /
+/  =-----------------------=  /
+///////////////////////////////
+*/
+
+/datum/sprite_accessory/tails
+	icon = 'icons/mob/human_races/extras/tails.dmi'
+	species_allowed = list("Human","Unathi","Tajara","Skrell","Akula")
+
+	tal_none
+		name = "None"
+		icon = null
+		icon_state = null
+		species_allowed = list("Human","Unathi","Tajara","Skrell","Vox","Machine","Akula")
+
+	tal_bunny
+		name = "Bunny Tail"
+		icon_state = "bunny"
+
+	tal_bear
+		name = "Bear Tail"
+		icon_state = "bear"
+
+	tal_cat_down
+		name = "Cat Tail, Down"
+		icon_state = "kittydown"
+
+	tal_cat_up
+		name = "Cat Tail, Up"
+		icon_state = "kittyup"
+
+	tal_fox_cross
+		name = "Fox Tail, Cross"
+		icon_state = "crossfox"
+
+	tal_mouse
+		name = "Mouse Tail"
+		icon_state = "mouse"
+		do_colouration = 0
+
+	tal_deathclaw
+		name = "Deathclaw Tail"
+		icon_state = "deathclaw"
+		do_colouration = 0
+
+	tal_kitsune
+		name = "Kitsune Tails"
+		icon_state = "kitsune"
+
+	tal_squirrel
+		name = "Squirrel Tail"
+		icon_state = "squirrel"
+
+	tal_tiger
+		name = "Tiger Tail"
+		icon_state = "tiger"
+
+	tal_tiger_striped
+		name = "Tiger Tail, Striped"
+		icon_state = "stripeytiger"
+
+	tal_wolf
+		name = "Wolf Tail"
+		icon_state = "wolf"
+
+	tal_fox
+		name = "Fox Tail"
+		icon_state = "fox"
+
+	tal_xeno
+		name = "Xenomorph Tail"
+		icon_state = "xeno"
+		do_colouration = 0
+
+	tal_dog
+		name = "Dog Tail"
+		icon_state = "corgi"
+
+	tal_tajara
+		name = "Tajara Tail"
+		icon_state = "tajara"
+
+	tal_lizard
+		name = "Unathi Tail"
+		icon_state = "unathi"
+
+	tal_sharktail
+		name = "Akula Tail"
+		icon_state = "sharktail"
+
+	tal_succubus
+		name = "Succubus Tail"
+		icon_state = "succubus"
+
+	tal_bee
+		name = "Bee Stinger"
+		icon_state = "bee"
+
+	tal_feathers
+		name = "Feathers"
+		icon_state = "feathers"
+
+	tal_cow
+		name = "Cow Tail"
+		icon_state = "cow"
+		do_colouration = 0		// Needs greyscale -- Ursa
+
+	tal_deer
+		name = "Deer Tail"
+		icon_state = "deer"

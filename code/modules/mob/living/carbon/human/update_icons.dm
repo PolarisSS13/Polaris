@@ -2,7 +2,7 @@
 	Global associative list for caching humanoid icons.
 	Index format m or f, followed by a string of 0 and 1 to represent bodyparts followed by husk fat hulk skeleton 1 or 0.
 	TODO: Proper documentation
-	icon_key is [species.race_key][g][husk][fat][hulk][skeleton][s_tone]
+	icon_key is [species.race_key][g][husk][fat][hulk][skeleton]
 */
 var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
@@ -115,23 +115,27 @@ Please contact me on #coderbus IRC. ~Carn x
 #define GLOVES_LAYER			7
 #define BELT_LAYER				8
 #define SUIT_LAYER				9
-#define TAIL_LAYER				10		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GLASSES_LAYER			11
-#define BELT_LAYER_ALT			12
-#define SUIT_STORE_LAYER		13
-#define BACK_LAYER				14
-#define HAIR_LAYER				15		//TODO: make part of head layer?
-#define EARS_LAYER				16
-#define FACEMASK_LAYER			17
-#define HEAD_LAYER				18
-#define COLLAR_LAYER			19
-#define HANDCUFF_LAYER			20
-#define LEGCUFF_LAYER			21
-#define L_HAND_LAYER			22
-#define R_HAND_LAYER			23
-#define FIRE_LAYER				24		//If you're on fire
-#define TARGETED_LAYER			25		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			25
+#define ORGAN_OVERLAY_LAYER		10		//for any organs that are bigger than a standard human (Blend() crops images)
+#define WINGS_LAYER				11
+#define TAIL_LAYER				12		//bs12 specific. this hack is probably gonna come back to haunt me
+#define GENITALS_LAYER			13
+#define GLASSES_LAYER			14
+#define BELT_LAYER_ALT			15
+#define SUIT_STORE_LAYER		16
+#define BACK_LAYER				17
+#define HAIR_LAYER				18		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		19
+#define EARS_LAYER				20
+#define FACEMASK_LAYER			21
+#define HEAD_LAYER				22
+#define COLLAR_LAYER			23
+#define HANDCUFF_LAYER			24
+#define LEGCUFF_LAYER			25
+#define L_HAND_LAYER			26
+#define R_HAND_LAYER			27
+#define FIRE_LAYER				28		//If you're on fire
+#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			29
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -211,7 +215,7 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
-
+	overlays_standing[ORGAN_OVERLAY_LAYER] = null
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -232,7 +236,7 @@ var/global/list/damage_icon_parts = list()
 	if(gender == FEMALE)
 		g = "female"
 
-	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
+	var/icon_key = "[species.get_race_key(src)][g][r_skin][g_skin][b_skin]"
 	if(lip_style)
 		icon_key += "[lip_style]"
 	else
@@ -256,7 +260,6 @@ var/global/list/damage_icon_parts = list()
 		if(part)
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
-			icon_key += "[part.dna.GetUIValue(DNA_UI_SKIN_TONE)]"
 			if(part.s_col && part.s_col.len >= 3)
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
@@ -293,7 +296,8 @@ var/global/list/damage_icon_parts = list()
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
 				base_icon.Blend(temp2, ICON_UNDERLAY)
 			else
-				base_icon.Blend(temp, ICON_OVERLAY)
+				if(!part.no_blend)
+					base_icon.Blend(temp, ICON_OVERLAY)
 
 		if(!skeleton)
 			if(husk)
@@ -327,11 +331,14 @@ var/global/list/damage_icon_parts = list()
 	if(socks && species.appearance_flags & HAS_UNDERWEAR)
 		stand_icon.Blend(new /icon('icons/mob/human.dmi', socks), ICON_OVERLAY)
 
+	for(var/obj/item/organ/external/E in organs)
+		if(E.no_blend)
+			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.mob_icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
+			overlays_standing[ORGAN_OVERLAY_LAYER] = S
+
 	if(update_icons)
 		update_icons()
 
-	//tail
-	update_tail_showing(0)
 
 //HAIR OVERLAY
 /mob/living/carbon/human/proc/update_hair(var/update_icons=1)
@@ -356,7 +363,7 @@ var/global/list/damage_icon_parts = list()
 		if(facial_hair_style && facial_hair_style.species_allowed && (src.species.get_bodytype(src) in facial_hair_style.species_allowed))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
+				facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_MULTIPLY)
 
 			face_standing.Blend(facial_s, ICON_OVERLAY)
 
@@ -365,7 +372,7 @@ var/global/list/damage_icon_parts = list()
 		if(hair_style && (src.species.get_bodytype(src) in hair_style.species_allowed))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 			if(hair_style.do_colouration)
-				hair_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+				hair_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_MULTIPLY)
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
@@ -499,6 +506,8 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
 
+	update_genitals_showing(0)
+
 	//hiding/revealing shoes if necessary
 	update_inv_shoes(0)
 
@@ -580,7 +589,6 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	if(l_ear || r_ear)
-		// Blank image upon which to layer left & right overlays.
 		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
 
 		if(l_ear)
@@ -596,7 +604,7 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = l_ear.color
 			both.overlays += standing
-			
+
 		if(r_ear)
 			var/image/standing
 			var/t_type = r_ear.icon_state
@@ -610,11 +618,12 @@ var/global/list/damage_icon_parts = list()
 				standing = image("icon" = 'icons/mob/ears.dmi', "icon_state" = "[t_type]")
 			standing.color = r_ear.color
 			both.overlays += standing
-			
+
 		overlays_standing[EARS_LAYER] = both
 
 	else
 		overlays_standing[EARS_LAYER]	= null
+	update_ears(0)
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_shoes(var/update_icons=1)
@@ -773,14 +782,16 @@ var/global/list/damage_icon_parts = list()
 				standing.overlays	+= bloodsies
 
 		overlays_standing[SUIT_LAYER]	= standing
-		update_tail_showing(0)
 
 	else
 		overlays_standing[SUIT_LAYER]	= null
-		update_tail_showing(0)
 
+	update_inv_shoes(0)
+	update_tail_showing(0)
+	update_genitals_showing(0)
+	update_wings(0)
+	update_ears(0)
 	update_collar(0)
-
 	//hide/show shoes if necessary
 	update_inv_shoes(0)
 
@@ -975,93 +986,6 @@ var/global/list/damage_icon_parts = list()
 
 	if(update_icons) update_icons()
 
-/mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_standing[TAIL_LAYER] = null
-
-	var/species_tail = species.get_tail(src)
-
-	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
-		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(tail_s, icon_state = "[species_tail]_s")
-		animate_tail_reset(0)
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/get_tail_icon()
-	var/icon_key = "[species.get_race_key(src)][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
-	var/icon/tail_icon = tail_icon_cache[icon_key]
-	if(!tail_icon)
-		//generate a new one
-		var/species_tail_anim = species.get_tail_animation(src)
-		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
-		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
-		// The following will not work with animated tails.
-		var/use_species_tail = species.get_tail_hair(src)
-		if(use_species_tail)
-			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
-			tail_icon.Blend(hair_icon, ICON_OVERLAY)
-		tail_icon_cache[icon_key] = tail_icon
-
-	return tail_icon
-
-
-/mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
-
-	if(tail_overlay && species.get_tail_animation(src))
-		tail_overlay.icon_state = t_state
-		return tail_overlay
-	return null
-
-//Not really once, since BYOND can't do that.
-//Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
-/mob/living/carbon/human/proc/animate_tail_once(var/update_icons=1)
-	var/t_state = "[species.get_tail(src)]_once"
-
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
-	if(tail_overlay && tail_overlay.icon_state == t_state)
-		return //let the existing animation finish
-
-	tail_overlay = set_tail_state(t_state)
-	if(tail_overlay)
-		spawn(20)
-			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
-				animate_tail_stop()
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_start(var/update_icons=1)
-	set_tail_state("[species.get_tail(src)]_slow[rand(0,9)]")
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_fast(var/update_icons=1)
-	set_tail_state("[species.get_tail(src)]_loop[rand(0,9)]")
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_reset(var/update_icons=1)
-	if(stat != DEAD)
-		set_tail_state("[species.get_tail(src)]_idle[rand(0,9)]")
-	else
-		set_tail_state("[species.get_tail(src)]_static")
-
-	if(update_icons)
-		update_icons()
-
-/mob/living/carbon/human/proc/animate_tail_stop(var/update_icons=1)
-	set_tail_state("[species.get_tail(src)]_static")
-
-	if(update_icons)
-		update_icons()
-
 
 //Adds a collar overlay above the helmet layer if the suit has one
 //	Suit needs an identically named sprite in icons/mob/collar.dmi
@@ -1095,6 +1019,87 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
 
+//Eros Stuff
+
+/mob/living/carbon/human/proc/update_genitals_showing(var/update_icons=1)
+	overlays_standing[GENITALS_LAYER] = null
+	if(species.appearance_flags & HAS_UNDERWEAR)
+		var/datum/sprite_accessory/breasts = body_breast_list[c_type]
+		var/datum/sprite_accessory/vaginas = body_vaginas_list[v_type]
+		var/datum/sprite_accessory/dicks = body_dicks_list[d_type]
+		var/icon/genitals_standing	=new /icon('icons/mob/human_face.dmi',"bald_s") //blank icon by excelency
+		if(breasts && breasts.species_allowed && (src.species.get_bodytype() in breasts.species_allowed))
+			if(!(w_uniform && (w_uniform.body_parts_covered & UPPER_TORSO)) && !(wear_suit && (wear_suit.body_parts_covered & UPPER_TORSO)))
+				var/icon/breasts_s = new/icon("icon" = breasts.icon, "icon_state" = breasts.icon_state)
+				if(breasts.do_colouration)
+					breasts_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_MULTIPLY)
+				genitals_standing.Blend(breasts_s, ICON_OVERLAY)
+		if(vaginas && vaginas.species_allowed && (src.species.get_bodytype() in vaginas.species_allowed))
+			if(!(w_uniform && (w_uniform.body_parts_covered & LOWER_TORSO)) && !(wear_suit && (wear_suit.body_parts_covered & LOWER_TORSO)))
+				var/icon/vaginas_s = new/icon("icon" = vaginas.icon, "icon_state" = vaginas.icon_state)
+				if(vaginas.do_colouration)
+					vaginas_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+				genitals_standing.Blend(vaginas_s, ICON_OVERLAY)
+		if(dicks && dicks.species_allowed && (src.species.get_bodytype() in dicks.species_allowed))
+			if(!(w_uniform && (w_uniform.body_parts_covered & LOWER_TORSO)) && !(wear_suit && (wear_suit.body_parts_covered & LOWER_TORSO)))
+				var/icon/dicks_s = new/icon("icon" = dicks.icon, "icon_state" = dicks.icon_state)
+				if(dicks.do_colouration)
+					dicks_s.Blend(rgb(r_genital, g_genital, b_genital), ICON_MULTIPLY)
+				genitals_standing.Blend(dicks_s, ICON_OVERLAY)
+		overlays_standing[GENITALS_LAYER] = image(genitals_standing)
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
+	overlays_standing[TAIL_LAYER] = null
+
+	if(species.appearance_flags & HAS_UNDERWEAR) //change has underwear to a more sane flag when needed
+		var/icon/tail_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
+		var/datum/sprite_accessory/tail = body_tails_list[tail_type]
+		if (wear_suit && wear_suit.flags_inv & HIDETAIL)
+		else
+			if(tail && tail.species_allowed && (src.species.get_bodytype() in tail.species_allowed))
+				var/icon/tail_s = new/icon("icon" = tail.icon, "icon_state" = tail.icon_state)
+				if(tail.do_colouration)
+					tail_s.Blend(rgb(r_tail, g_tail, b_tail), ICON_MULTIPLY)
+				tail_standing.Blend(tail_s, ICON_OVERLAY)
+		overlays_standing[TAIL_LAYER] = image(tail_standing)
+
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/update_ears(var/update_icons=1)
+	overlays_standing[NATURAL_EARS_LAYER] = null
+	if(species.appearance_flags & HAS_UNDERWEAR) //change to different flag when justified.
+		var/icon/ears_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
+		var/datum/sprite_accessory/ears = body_ears_list[ears_type]
+		if( (head && (head.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))) || (wear_mask && (wear_mask.flags_inv & (BLOCKHAIR | BLOCKHEADHAIR))))
+			if(update_icons)   update_icons()
+			return
+		if(ears && ears.species_allowed && (src.species.get_bodytype() in ears.species_allowed))
+			var/icon/ears_s = new/icon("icon" = ears.icon, "icon_state" = ears.icon_state)
+			if(ears.do_colouration)
+				ears_s.Blend(rgb(r_ears, g_ears, b_ears), ICON_MULTIPLY)
+			ears_standing.Blend(ears_s, ICON_OVERLAY)
+		overlays_standing[NATURAL_EARS_LAYER] = image(ears_standing)
+	if(update_icons)
+		update_icons()
+
+/mob/living/carbon/human/proc/update_wings(var/update_icons=1)
+	overlays_standing[WINGS_LAYER] = null
+	if(species.appearance_flags & HAS_UNDERWEAR) //change to different flag when justified.
+		var/icon/wings_standing	=new /icon('icons/mob/human_face.dmi',"bald_s")
+		var/datum/sprite_accessory/wings = body_wings_list[wings_type]
+		if(wings && wings.species_allowed && (src.species.get_bodytype() in wings.species_allowed))
+			var/icon/wings_s = new/icon("icon" = wings.icon, "icon_state" = wings.icon_state)
+			if(wings.do_colouration)
+				wings_s.Blend(rgb(r_wings, g_wings, b_wings), ICON_MULTIPLY)
+			wings_standing.Blend(wings_s, ICON_OVERLAY)
+		overlays_standing[WINGS_LAYER] = image(wings_standing)
+	if(update_icons)
+		update_icons()
+
+
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
 #undef DAMAGE_LAYER
@@ -1103,9 +1108,12 @@ var/global/list/damage_icon_parts = list()
 #undef ID_LAYER
 #undef SHOES_LAYER
 #undef GLOVES_LAYER
+#undef NATURAL_EARS_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef WINGS_LAYER
 #undef TAIL_LAYER
+#undef GENITALS_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER

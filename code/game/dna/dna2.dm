@@ -23,7 +23,7 @@
 #define DNA_UI_BEARD_R     4
 #define DNA_UI_BEARD_G     5
 #define DNA_UI_BEARD_B     6
-#define DNA_UI_SKIN_TONE   7
+#define DNA_UI_SECRET	   7
 #define DNA_UI_SKIN_R      8
 #define DNA_UI_SKIN_G      9
 #define DNA_UI_SKIN_B      10
@@ -33,7 +33,25 @@
 #define DNA_UI_GENDER      14
 #define DNA_UI_BEARD_STYLE 15
 #define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_LENGTH      16 // Update this when you add something, or you WILL break shit.
+#define DNA_UI_BREAST_TYPE 17
+#define DNA_UI_PENIS_TYPE  18
+#define DNA_UI_VAGINA_TYPE 19
+#define DNA_UI_GENITAL_R   20
+#define DNA_UI_GENITAL_G   21
+#define DNA_UI_GENITAL_B   22
+#define DNA_UI_EARS		   23
+#define DNA_UI_WINGS	   24
+#define DNA_UI_TAIL		   25
+#define DNA_UI_WINGS_R 	   26
+#define DNA_UI_WINGS_G     27
+#define DNA_UI_WINGS_B     28
+#define DNA_UI_EARS_R 	   29
+#define DNA_UI_EARS_G      30
+#define DNA_UI_EARS_B      31
+#define DNA_UI_TAIL_R 	   32
+#define DNA_UI_TAIL_G      33
+#define DNA_UI_TAIL_B	   34
+#define DNA_UI_LENGTH      34 // Update this when you add something, or you WILL break shit.
 
 #define DNA_SE_LENGTH 27
 // For later:
@@ -107,11 +125,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Create random UI.
 /datum/dna/proc/ResetUI(var/defer=0)
 	for(var/i=1,i<=DNA_UI_LENGTH,i++)
-		switch(i)
-			if(DNA_UI_SKIN_TONE)
-				SetUIValueRange(DNA_UI_SKIN_TONE,rand(1,220),220,1) // Otherwise, it gets fucked
-			else
-				UI[i]=rand(0,4095)
+		UI[i]=rand(0,4095)
 	if(!defer)
 		UpdateUI()
 
@@ -129,6 +143,16 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		character.f_style = "Shaved"
 	var/beard	= facial_hair_styles_list.Find(character.f_style)
 
+	//Gender stuff
+	var/breast = body_breast_list.Find(character.c_type)
+	var/dick = body_dicks_list.Find(character.d_type)
+	var/vagina = body_vaginas_list.Find(character.v_type)
+
+	//Races stuff
+	var/ears = body_ears_list.Find(character.ears_type)
+	var/wings = body_wings_list.Find(character.wings_type)
+	var/tail = body_tails_list.Find(character.tail_type)
+
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
@@ -145,12 +169,33 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_SKIN_G,    character.g_skin,    255,    1)
 	SetUIValueRange(DNA_UI_SKIN_B,    character.b_skin,    255,    1)
 
-	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.s_tone, 220,    1) // Value can be negative.
+	SetUIValueRange(DNA_UI_GENITAL_R,    character.r_genital,    255,    1)
+	SetUIValueRange(DNA_UI_GENITAL_G,    character.g_genital,    255,    1)
+	SetUIValueRange(DNA_UI_GENITAL_B,    character.b_genital,    255,    1)
+
+	SetUIValueRange(DNA_UI_WINGS_R,    character.r_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_G,    character.g_wings,    255,    1)
+	SetUIValueRange(DNA_UI_WINGS_B,    character.b_wings,    255,    1)
+
+	SetUIValueRange(DNA_UI_EARS_R,    character.r_ears,    255,    1)
+	SetUIValueRange(DNA_UI_EARS_G,    character.g_ears,    255,    1)
+	SetUIValueRange(DNA_UI_EARS_B,    character.b_ears,    255,    1)
+
+	SetUIValueRange(DNA_UI_TAIL_R,    character.r_tail,    255,    1)
+	SetUIValueRange(DNA_UI_TAIL_G,    character.g_tail,    255,    1)
+	SetUIValueRange(DNA_UI_TAIL_B,    character.b_tail,    255,    1)
 
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
+
+	SetUIValueRange(DNA_UI_BREAST_TYPE, breast, body_breast_list.len,1)
+	SetUIValueRange(DNA_UI_PENIS_TYPE, dick, body_dicks_list.len,1)
+	SetUIValueRange(DNA_UI_VAGINA_TYPE, vagina, body_vaginas_list.len,1)
+	SetUIValueRange(DNA_UI_EARS, ears, body_ears_list.len,1)
+	SetUIValueRange(DNA_UI_WINGS, wings, body_wings_list.len,1)
+	SetUIValueRange(DNA_UI_TAIL, tail, body_tails_list.len,1)
 
 	UpdateUI()
 

@@ -776,6 +776,8 @@
 			. += THERMAL_PROTECTION_FOOT_LEFT
 		if(flags & FOOT_RIGHT)
 			. += THERMAL_PROTECTION_FOOT_RIGHT
+		if(flags & TAIL_SNAKE)
+			. += THERMAL_PROTECTION_TAIL_SNAKE
 		if(flags & ARM_LEFT)
 			. += THERMAL_PROTECTION_ARM_LEFT
 		if(flags & ARM_RIGHT)
@@ -927,7 +929,6 @@
 		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
-			animate_tail_reset()
 			adjustHalLoss(-3)
 
 			if(sleeping)
@@ -1382,20 +1383,25 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/mob/living/M in stomach_contents)
-			if(M.loc != src)
-				stomach_contents.Remove(M)
+		for(var/A in stomach_contents)
+			var/mob/living/M = A
+			if(!istype(M))
+				stomach_contents -= A
 				continue
-			if(istype(M, /mob/living/carbon) && stat != 2)
-				if(M.stat == 2)
-					M.death(1)
-					stomach_contents.Remove(M)
+			if(M.loc != src)
+				stomach_contents -= M
+				continue
+			if(stat == DEAD)
+				return
+			if(M.stat == DEAD)
+				if(species.gluttonous < 3 || M.mob_size <= MOB_SMALL)
 					qdel(M)
-					continue
-				if(air_master.current_cycle%3==1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
+					stomach_contents -= M
+				continue
+			if(air_master.current_cycle % 3 == 1)
+				if(!(M.status_flags & GODMODE))
+					M.adjustBruteLoss(5)
+				nutrition += M.mob_size / 2
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

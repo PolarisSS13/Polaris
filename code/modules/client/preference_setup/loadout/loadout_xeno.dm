@@ -119,7 +119,4 @@
 	path = /obj/item/clothing/mask/monitor
 	sort_category = "Xenowear"
 
-/datum/gear/uniform/harness
-	display_name = "gear harness (Full Body Prosthetic, Diona)"
-	path = /obj/item/clothing/under/harness
-	sort_category = "Xenowear"
+

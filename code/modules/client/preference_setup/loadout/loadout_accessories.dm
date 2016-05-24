@@ -155,3 +155,31 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/collar/collar_blk
+	display_name = "collar, silver tag"
+	path = /obj/item/clothing/accessory/collar/collar_blk
+
+/datum/gear/accessory/collar/collar_gld
+	display_name = "collar, golden tag"
+	path = /obj/item/clothing/accessory/collar/collar_gld
+
+/datum/gear/accessory/collar/collar_bell
+	display_name = "collar, bell"
+	path = /obj/item/clothing/accessory/collar/collar_bell
+
+/datum/gear/accessory/collar/collar_spike
+	display_name = "collar, spiked"
+	path = /obj/item/clothing/accessory/collar/collar_spike
+
+/datum/gear/accessory/collar/collar_pink
+	display_name = "collar, pink"
+	path = /obj/item/clothing/accessory/collar/collar_pink
+
+/datum/gear/accessory/collar/collar_steel
+	display_name = "collar, steel"
+	path = /obj/item/clothing/accessory/collar/collar_steel
+
+/datum/gear/accessory/collar/collar_holo
+	display_name = "collar, holo"
+	path = /obj/item/clothing/accessory/collar/collar_holo
