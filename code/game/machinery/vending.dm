@@ -1068,3 +1068,20 @@
 					/obj/item/weapon/reagent_containers/pill/diet = 25)
 
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
+
+
+/obj/machinery/vending/adult
+	name = "XXXVend"
+	desc = "How lewd. Does NT really endorse this?"
+	icon_state = "adult"
+	products = list(/obj/item/weapon/fluff/dildos/bigblackdick = 4,
+					/obj/item/weapon/fluff/dildos/metal_dildo = 4,
+					/obj/item/weapon/fluff/dildos/canine = 4,
+					/obj/item/weapon/fluff/dildos/floppydick = 4,
+					/obj/item/weapon/fluff/dildos/purpledong = 4)
+
+	prices = list(/obj/item/weapon/fluff/dildos/bigblackdick = 15,
+					/obj/item/weapon/fluff/dildos/metal_dildo = 8,
+					/obj/item/weapon/fluff/dildos/canine = 5,
+					/obj/item/weapon/fluff/dildos/floppydick = 3,
+					/obj/item/weapon/fluff/dildos/purpledong = 5)
