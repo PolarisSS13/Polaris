@@ -19,7 +19,7 @@
 	if(user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'><b>\The [user]</b> teases \himself with the [src]!</span>","<span class='notice'>You tease yourself with the [src]!</span>")
 	else if (user.a_intent == I_HURT)
-		user.visible_message("<span class='warning'><b>\The [user]</b> fuck \himself with the [src]!</span>","<span class='warning'>You fuck yourself with the [src]!</span>")
+		user.visible_message("<span class='warning'><b>\The [user]</b> fucks \himself with the [src]!</span>","<span class='warning'>You fuck yourself with the [src]!</span>")
 	else if (user.a_intent == I_GRAB)
 		user.visible_message("<span class='warning'><b>\The [user]</b> violates \himself with the [src]!</span>","<span class='warning'>You violate yourself with the [src]!</span>")
 	else
