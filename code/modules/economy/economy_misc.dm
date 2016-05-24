@@ -51,6 +51,7 @@
 										/datum/species/human	= 10,
 										/datum/species/skrell	= 12,
 										/datum/species/teshari	= 9, // Skrell sponsored,
+										/datum/species/akula	= 9, // Also tied to Skrell lore-wise
 										/datum/species/tajaran	= 7,
 										/datum/species/unathi	= 7,
 										/datum/species/diona 	= 7

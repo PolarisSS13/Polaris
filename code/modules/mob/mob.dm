@@ -360,8 +360,8 @@
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
 
-		if (deathtime < (15 * 600))
-			usr << "You must wait 15 minutes to respawn!"
+		if (deathtime < (5 * 600))
+			usr << "You must wait 5 minutes to respawn!"
 			return
 		else
 			usr << "You can respawn now, enjoy your new life!"
