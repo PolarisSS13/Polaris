@@ -51,7 +51,7 @@ var/destroy_floor_override_path = /turf/simulated/mineral/floor
 var/list/destroy_floor_override_z_levels = list(1,4,5)
 	//Some areas you may want to not turn into the override path you made above, like space or the solars.
 var/list/destroy_floor_override_ignore_areas = list(/area/space,/area/solar,/area/shuttle)
-var/master_mode       = "extended" // "extended"
+var/master_mode       = "secret" // "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
