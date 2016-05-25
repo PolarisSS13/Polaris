@@ -431,19 +431,14 @@
 		if(!S || !(S.status & ORGAN_ROBOT))
 			return ..()
 
-		if(S.brute_dam)
-			if(S.brute_dam < ROBOLIMB_SELF_REPAIR_CAP)
-				S.heal_damage(15,0,0,1)
-				user.visible_message("<span class='notice'>\The [user] patches some dents on \the [H]'s [S.name] with \the [src].</span>")
-			else if(S.open < 3)
-				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
-			else
-				return ..()
-		else
-			user << "<span class='notice'>Nothing to fix!</span>"
-			S.update_wounds()
-		return
-	return ..()
+		if(!welding)
+			user << "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>"
+			return 1
+
+		S.robo_repair(15, BRUTE, "some dents", src, user)
+
+	else
+		return ..()
 
 /*/obj/item/weapon/combitool
 	name = "combi-tool"

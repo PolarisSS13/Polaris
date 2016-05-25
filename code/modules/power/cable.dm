@@ -525,19 +525,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!S || !(S.status & ORGAN_ROBOT))
 			return ..()
 
-		if(S.burn_dam)
-			if(S.burn_dam < ROBOLIMB_SELF_REPAIR_CAP)
-				S.heal_damage(0,15,0,1)
-				user.visible_message("<span class='danger'>\The [user] repairs some burn damage on \the [H]'s [S.name] with \the [src].</span>")
-			else if(S.open < 3)
-				user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
-			else
-				return ..()
-		else
-			user << "<span class='notice'>Nothing to fix!</span>"
-		return
-	return ..()
+		S.robo_repair(15, BURN, "some damaged wiring", src, user)
 
+	else
+		return ..()
 
 /obj/item/stack/cable_coil/update_icon()
 	if (!color)
