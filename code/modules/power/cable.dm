@@ -525,7 +525,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!S || !(S.status & ORGAN_ROBOT))
 			return ..()
 
-		S.robo_repair(15, BURN, "some damaged wiring", src, user)
+		var/use_amt = min(src.amount, ceil(S.burn_dam/3), 5)
+		if(can_use(use_amt))
+			if(S.robo_repair(3*use_amt, BURN, "some damaged wiring", src, user))
+				src.use(use_amt)
 
 	else
 		return ..()
