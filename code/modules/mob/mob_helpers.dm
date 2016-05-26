@@ -22,14 +22,10 @@
 
 // If they are 100% robotic, they count as synthetic.
 /mob/living/carbon/human/isSynthetic()
-	if(isnull(full_prosthetic))
-		robolimb_count = 0
-		for(var/obj/item/organ/external/E in organs)
-			if(E.status & ORGAN_ROBOT)
-				robolimb_count++
-		if(robolimb_count == organs.len)
-			full_prosthetic = 1
-	return full_prosthetic
+	for(var/obj/item/organ/external/E in organs)
+		if(!(E.robotic >= ORGAN_ROBOT))
+			return 0
+	return 1
 
 /mob/living/silicon/isSynthetic()
 	return 1

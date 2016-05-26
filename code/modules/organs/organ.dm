@@ -77,7 +77,7 @@ var/list/organ_cache = list()
 		blood_DNA[dna.unique_enzymes] = dna.b_type
 
 /obj/item/organ/proc/die()
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 	damage = max_damage
 	status |= ORGAN_DEAD
@@ -99,7 +99,7 @@ var/list/organ_cache = list()
 	if(istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
 		return
 	//Process infections
-	if ((status & ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
+	if ((robotic >= ORGAN_ROBOT) || (owner && owner.species && (owner.species.flags & IS_PLANT)))
 		germ_level = 0
 		return
 
@@ -231,7 +231,7 @@ var/list/organ_cache = list()
 
 //Note: external organs have their own version of this proc
 /obj/item/organ/proc/take_damage(amount, var/silent=0)
-	if(src.status & ORGAN_ROBOT)
+	if(src.robotic >= ORGAN_ROBOT)
 		src.damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		src.damage = between(0, src.damage + amount, max_damage)
@@ -243,19 +243,20 @@ var/list/organ_cache = list()
 				owner.custom_pain("Something inside your [parent.name] hurts a lot.", 1)
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
-	status = 0
-	status |= ORGAN_ASSISTED
-	status |= ORGAN_ROBOT
-
+	robotic = ORGAN_ROBOT
+	src.status &= ~ORGAN_BROKEN
+	src.status &= ~ORGAN_BLEEDING
+	src.status &= ~ORGAN_SPLINTED
+	src.status &= ~ORGAN_CUT_AWAY
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
-	status = 0
-	status |= ORGAN_ASSISTED
+	robotize()
+	robotic = ORGAN_ASSISTED
 	min_bruised_damage = 15
 	min_broken_damage = 35
 
 /obj/item/organ/emp_act(severity)
-	if(!(status & ORGAN_ROBOT))
+	if(!(robotic >= ORGAN_ROBOT))
 		return
 	switch (severity)
 		if (1)
@@ -313,6 +314,16 @@ var/list/organ_cache = list()
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
+
+/obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
+
+	// Apply our eye colour to the target.
+	if(istype(target) && eye_colour)
+		target.r_eyes = eye_colour[1]
+		target.g_eyes = eye_colour[2]
+		target.b_eyes = eye_colour[3]
+		target.update_eyes()
+	..()
 
 /obj/item/organ/proc/bitten(mob/user)
 
