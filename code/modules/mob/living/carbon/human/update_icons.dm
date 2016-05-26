@@ -499,6 +499,9 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
 
+	//hiding/revealing shoes if necessary
+	update_inv_shoes(0)
+
 	if(update_icons)
 		update_icons()
 
@@ -577,8 +580,9 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	if(l_ear || r_ear)
-		var/image/both = image("icon" = null)
-		
+		// Blank image upon which to layer left & right overlays.
+		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
+
 		if(l_ear)
 			var/image/standing
 			var/t_type = l_ear.icon_state
@@ -774,9 +778,11 @@ var/global/list/damage_icon_parts = list()
 	else
 		overlays_standing[SUIT_LAYER]	= null
 		update_tail_showing(0)
-		update_inv_shoes(0)
 
 	update_collar(0)
+
+	//hide/show shoes if necessary
+	update_inv_shoes(0)
 
 	if(update_icons)   update_icons()
 
