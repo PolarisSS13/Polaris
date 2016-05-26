@@ -457,13 +457,6 @@
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 
-/datum/reagent/nicotine
-	name = "Nicotine"
-	id = "nicotine"
-	description = "A highly addictive stimulant extracted from the tobacco plant."
-	reagent_state = LIQUID
-	color = "#181818"
-
 /* Transformations */
 
 /datum/reagent/slimetoxin

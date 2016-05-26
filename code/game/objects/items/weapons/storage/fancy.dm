@@ -141,7 +141,7 @@
 	flags |= NOREACT
 	for(var/i = 1 to storage_slots)
 		new /obj/item/clothing/mask/smokable/cigarette(src)
-	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
+	create_reagents(5 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 	flags |= OPENCONTAINER
 
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
@@ -177,7 +177,7 @@
 		remove_from_storage(cig, null)
 		user.equip_to_slot(cig, slot_wear_mask)
 
-		reagents.maximum_volume = 15 * contents.len
+		reagents.maximum_volume = 5 * contents.len
 		user << "<span class='notice'>You take a cigarette out of the pack.</span>"
 		update_icon()
 	else
@@ -197,7 +197,7 @@
 
 	New()
 		..()
-		fill_cigarre_package(src,list("fuel" = 15))
+		fill_cigarre_package(src,list("fuel" = 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 
@@ -249,7 +249,7 @@
 	flags |= NOREACT
 	for(var/i = 1 to storage_slots)
 		new /obj/item/clothing/mask/smokable/cigarette/cigar(src)
-	create_reagents(15 * storage_slots)
+	create_reagents(10 * storage_slots)
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()
 	icon_state = "[initial(icon_state)][contents.len]"
