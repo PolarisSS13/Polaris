@@ -244,7 +244,7 @@
 			brute -= brute / 2
 
 	if(status & ORGAN_BROKEN && prob(40) && brute)
-		if(!((species.flags & NO_PAIN) || (status & ORGAN_ROBOT)))
+		if(!((species.flags & NO_PAIN) || (robotic >= ORGAN_ROBOT)))
 			owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
@@ -368,8 +368,7 @@
 		else return 0
 
 	if(!damage_amount)
-		if(src.open != 2)
-			user << "<span class='notice'>Nothing to fix!</span>"
+		user << "<span class='notice'>Nothing to fix!</span>"
 		return 0
 
 	if(damage_amount >= ROBOLIMB_SELF_REPAIR_CAP)
@@ -409,7 +408,6 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/rejuvenate(var/ignore_prosthetic_prefs)
 	damage_state = "00"
 	status = 0
-	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
 	germ_level = 0
@@ -477,7 +475,7 @@ This function completely restores a damaged organ to perfect condition.
 				var/datum/wound/W = pick(compatible_wounds)
 				W.open_wound(damage)
 				if(prob(25))
-					if(status >= ORGAN_ROBOT)
+					if(robotic >= ORGAN_ROBOT)
 						owner.visible_message("<span class='danger'>The damage to [owner.name]'s [name] worsens.</span>",\
 						"<span class='danger'>The damage to your [name] worsens.</span>",\
 						"<span class='danger'>You hear the screech of abused metal.</span>")
@@ -723,7 +721,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			else
 				brute_dam += W.damage
 
-		if(!(robotic >= ORGAN_ROBOT) && W.bleeding() && (H && !(H.species.flags & NO_BLOOD)))
+		if(!(robotic >= ORGAN_ROBOT) && W.bleeding() && (H && !H.should_have_organ(O_HEART)))
 			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
@@ -806,7 +804,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if(DROPLIMB_BLUNT)
 			if(cannot_gib)
 				return
-			var/gore = "[(status >= ORGAN_ROBOT) ? "": " in shower of gore"]"
+			var/gore = "[(robotic >= ORGAN_ROBOT) ? "": " in shower of gore"]"
 			var/gore_sound = "[(status >= ORGAN_ROBOT) ? "rending sound of tortured metal" : "sickening splatter of gore"]"
 			owner.visible_message(
 				"<span class='danger'>\The [owner]'s [src.name] explodes[gore]!</span>",\
@@ -861,7 +859,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore
-			if(status & ORGAN_ROBOT)
+			if(robotic >= ORGAN_ROBOT)
 				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
 			else
 				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
@@ -1018,7 +1016,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
 
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 
 	..()

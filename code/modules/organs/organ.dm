@@ -10,9 +10,10 @@ var/list/organ_cache = list()
 	var/parent_organ = BP_TORSO       // Organ holding this object.
 
 	// Status tracking.
-	var/status = 0                    // Various status flags (such as robotic)
+	var/status = 0                    // Various status flags
 	var/vital                         // Lose a vital limb, die immediately.
 	var/damage = 0                    // Current damage to the organ
+	var/robotic = 0
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
@@ -315,19 +316,9 @@ var/list/organ_cache = list()
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src
 
-/obj/item/organ/eyes/replaced(var/mob/living/carbon/human/target)
-
-	// Apply our eye colour to the target.
-	if(istype(target) && eye_colour)
-		target.r_eyes = eye_colour[1]
-		target.g_eyes = eye_colour[2]
-		target.b_eyes = eye_colour[3]
-		target.update_eyes()
-	..()
-
 /obj/item/organ/proc/bitten(mob/user)
 
-	if(status & ORGAN_ROBOT)
+	if(robotic >= ORGAN_ROBOT)
 		return
 
 	user << "<span class='notice'>You take an experimental bite out of \the [src].</span>"
@@ -353,9 +344,9 @@ var/list/organ_cache = list()
 /obj/item/organ/attack_self(mob/user as mob)
 
 	// Convert it to an edible form, yum yum.
-	if(!(status & ORGAN_ROBOT) && user.a_intent == I_HELP && user.zone_sel.selecting == O_MOUTH)
+	if(!(robotic >= ORGAN_ROBOT) && user.a_intent == I_HELP && user.zone_sel.selecting == O_MOUTH)
 		bitten(user)
 		return
 
 /obj/item/organ/proc/can_feel_pain()
-	return !(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) && !(species.flags & NO_PAIN)
+	return !(robotic >= (ORGAN_ROBOT|ORGAN_DESTROYED)) && !(species.flags & NO_PAIN)

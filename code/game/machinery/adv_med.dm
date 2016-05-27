@@ -479,7 +479,7 @@
 		var/mech = ""
 		if(i.status & ORGAN_ASSISTED)
 			mech = "Assisted:"
-		if(i.status & ORGAN_ROBOT)
+		if(i.robotic >= ORGAN_ROBOT)
 			mech = "Mechanical:"
 
 		var/infection = "None"

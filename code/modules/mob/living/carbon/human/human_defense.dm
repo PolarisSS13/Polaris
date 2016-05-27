@@ -165,7 +165,7 @@ emp_act
 		return 0
 
 	if(istype(I,/obj/item/weapon/card/emag))
-		if(!(affecting.status & ORGAN_ROBOT))
+		if(!(affecting.robotic >= ORGAN_ROBOT))
 			user << "\red That limb isn't robotic."
 			return
 		if(affecting.sabotaged)

@@ -213,7 +213,7 @@
 		if(!affected) return
 		var/is_organ_damaged = 0
 		for(var/obj/item/organ/I in affected.internal_organs)
-			if(I.damage > 0 && (I.status & ORGAN_ROBOT))
+			if(I.damage > 0 && (I.robotic >= ORGAN_ROBOT))
 				is_organ_damaged = 1
 				break
 		return affected.open == 3 && is_organ_damaged
@@ -226,7 +226,7 @@
 
 		for(var/obj/item/organ/I in affected.internal_organs)
 			if(I && I.damage > 0)
-				if(I.status & ORGAN_ROBOT)
+				if(I.robotic >= ORGAN_ROBOT)
 					user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
 					"You start mending the damage to [target]'s [I.name]'s mechanisms." )
 
@@ -242,7 +242,7 @@
 		for(var/obj/item/organ/I in affected.internal_organs)
 
 			if(I && I.damage > 0)
-				if(I.status & ORGAN_ROBOT)
+				if(I.robotic >= ORGAN_ROBOT)
 					user.visible_message("<span class='notice'>[user] repairs [target]'s [I.name] with [tool].</span>", \
 					"<span class='notice'>You repair [target]'s [I.name] with [tool].</span>" )
 					I.damage = 0
@@ -388,12 +388,11 @@
 			user << "<span class='danger'>That brain is not usable.</span>"
 			return SURGERY_FAILURE
 
-		if(!(affected.status >= ORGAN_ROBOT))
+		if(!(affected.robotic >= ORGAN_ROBOT))
 			user << "<span class='danger'>You cannot install a computer brain into a meat skull.</span>"
 			return SURGERY_FAILURE
 
 		if(!target.should_have_organ("brain"))
-
 			user << "<span class='danger'>You're pretty sure [target.species.name_plural] don't normally have a brain.</span>"
 			return SURGERY_FAILURE
 

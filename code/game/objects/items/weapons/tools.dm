@@ -428,11 +428,11 @@
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
 
-		if(!S || !(S.robotic >= ORGAN_ROBOT) || user.a_intent != I_HELP)
+		if(!S || S.robotic < ORGAN_ROBOT || S.open == 3)
 			return ..()
 
 		if(!welding)
-			user << "<span class='warning'>You'll need to turn [src] on to patch the damage on [M]'s [S.name]!</span>"
+			user << "<span class='warning'>You'll need to turn [src] on to patch the damage on [H]'s [S.name]!</span>"
 			return 1
 
 		if(S.robo_repair(15, BRUTE, "some dents", src, user))
