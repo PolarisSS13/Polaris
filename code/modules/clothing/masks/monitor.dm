@@ -9,28 +9,44 @@
 
 	icon = 'icons/mob/monitor_icons.dmi'
 	icon_override = 'icons/mob/monitor_icons.dmi'
-	icon_state = "ipc_blank"
-	item_state = null
+	icon_state = "monitor"
 
 	var/monitor_state_index = "blank"
-	var/global/list/monitor_states = list(
-		"blank" =    "ipc_blank",
-		"pink" =     "ipc_pink",
-		"red" =      "ipc_red",
-		"green" =    "ipc_green",
-		"blue" =     "ipc_blue",
-		"breakout" = "ipc_breakout",
-		"eight" =    "ipc_eight",
-		"goggles" =  "ipc_goggles",
-		"heart" =    "ipc_heart",
-		"monoeye" =  "ipc_monoeye",
-		"nature" =   "ipc_nature",
-		"orange" =   "ipc_orange",
-		"purple" =   "ipc_purple",
-		"shower" =   "ipc_shower",
-		"static" =   "ipc_static",
-		"yellow" =   "ipc_yellow"
+
+	var/list/standard_monitors = list(
+		"blank"		= "ipc_blank",
+		"pink"		= "ipc_pink",
+		"green"		= "ipc_green",
+		"red"		= "ipc_red",
+		"blue"		= "ipc_blue",
+		"shower"	= "ipc_shower",
+		"orange"	= "ipc_orange",
+		"nature"	= "ipc_nature",
+		"eight"		= "ipc_eight",
+		"goggles"	= "ipc_goggles",
+		"heart"		= "ipc_heart",
+		"monoeye"	= "ipc_monoeye",
+		"breakout"	= "ipc_breakout",
+		"yellow"	= "ipc_yellow",
+		"static"	= "ipc_static",
+		"purple"	= "ipc_purple",
+		"scroll"	= "ipc_scroll",
+		"console"	= "ipc_console",
+		"glider"	= "ipc_gol_glider",
+		"rainbow"	= "ipc_rainbow"
 		)
+
+	var/list/hesphiastos_alt_monitors = list(
+		"blank"		= "hesphiastos_alt_off",
+		"pink"		= "hesphiastos_alt_pink",
+		"orange"	= "hesphiastos_alt_orange",
+		"goggles"	= "hesphiastos_alt_goggles",
+		"scroll"	= "hesphiastos_alt_scroll",
+		"rgb"		= "hesphiastos_alt_rgb",
+		"rainbow"	= "hesphiastos_alt_rainbow"
+		)
+
+	var/list/monitor_states
 
 /obj/item/clothing/mask/monitor/set_dir()
 	dir = SOUTH
@@ -40,8 +56,17 @@
 	..()
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_mask == src)
+		var/obj/item/organ/external/E = H.organs_by_name[BP_HEAD]
+		var/datum/robolimb/robohead = all_robolimbs[E.model]
 		canremove = 0
-		H << "<span class='notice'>\The [src] connects to your display output.</span>"
+		if(robohead.is_monitor)
+			if(robohead.is_monitor == 1)
+				monitor_states = standard_monitors
+				icon_state = "ipc_blank"
+			else if(robohead.is_monitor == 2)
+				monitor_states = hesphiastos_alt_monitors
+				icon_state = "hesphiastos_alt_off"
+			H << "<span class='notice'>\The [src] connects to your display output.</span>"
 
 /obj/item/clothing/mask/monitor/dropped()
 	canremove = 1
@@ -52,9 +77,10 @@
 		return 0
 	if(istype(user))
 		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
-		if(istype(E) && (E.status & ORGAN_ROBOT))
+		var/datum/robolimb/robohead = all_robolimbs[E.model]
+		if(istype(E) && (E.status & ORGAN_ROBOT) && robohead.is_monitor)
 			return 1
-		user << "<span class='warning'>You must have a robotic head to install this upgrade.</span>"
+		user << "<span class='warning'>You must have a compatible robotic head to install this upgrade.</span>"
 	return 0
 
 /obj/item/clothing/mask/monitor/verb/set_monitor_state()
