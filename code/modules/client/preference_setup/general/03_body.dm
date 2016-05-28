@@ -441,49 +441,25 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			if("Prosthesis")
 				var/tmp_species = pref.species ? pref.species : "Human"
 				var/list/usable_manufacturers = list()
-				var/datum/robolimb/M
-				var/in_model
-				var/subchoice
-				for(var/company in all_robolimbs) //This loop populates a list of companies that offer the limb the user selected previously as one of their cybernetic products.
-					M = all_robolimbs[company]
-					if((limb in M.parts) && M.has_subtypes) //Ensures users can only choose companies that offer the parts they want, that singular models get added to the list as well companies that offer more than one model, and...
-						if(tmp_species in M.species_cannot_use)
-							continue
-						usable_manufacturers[M.company] = M //List only main brands that have the parts we're looking for.
+				for(var/company in chargen_robolimbs)
+					var/datum/robolimb/M = chargen_robolimbs[company]
+					if(!(limb in M.parts))
+						continue
+					if(tmp_species in M.species_cannot_use)
+						continue
+					usable_manufacturers[company] = M
 				if(!usable_manufacturers.len)
 					return
 				var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in usable_manufacturers
 				if(!choice)
 					return
 
-				M.company = choice
-				M = all_robolimbs[M.company]
-				if(M.has_subtypes == 1) //If the company the user selected provides more than just one base model, lets handle it.
-					var/list/robolimb_models = list()
-					for(var/model in typesof(M)) //Handling the different models of parts that manufacturers can provide.
-						var/datum/robolimb/L = new model()
-						if(limb in L.parts) //Make sure that only models that provide the parts the user needs populate the list.
-							robolimb_models[L.company] = L
-							if(robolimb_models.len == 1) //If there's only one model available in the list, autoselect it to avoid having to bother the user with a dialog that provides only one option.
-								subchoice = L.company //If there ends up being more than one model populating the list, subchoice will be overwritten later anyway, so this isn't a problem.
-							if(second_limb in L.parts) //If the child limb of the limb the user selected is also present in the model's parts list, state it's been found so the second limb can be set later.
-								in_model = 1
-					if(robolimb_models.len > 1) //If there's more than one model in the list that can provide the part the user wants, let them choose.
-						subchoice = input(user, "Which model of [choice] [organ_tag] do you wish to use?") as null|anything in robolimb_models
-					if(subchoice)
-						choice = subchoice
-
 				pref.rlimb_data[limb] = choice
 				pref.organ_data[limb] = "cyborg"
 
 				if(second_limb)
-					if(subchoice)
-						if(in_model)
-							pref.rlimb_data[second_limb] = choice
-							pref.organ_data[second_limb] = "cyborg"
-					else
-						pref.rlimb_data[second_limb] = choice
-						pref.organ_data[second_limb] = "cyborg"
+					pref.rlimb_data[second_limb] = choice
+					pref.organ_data[second_limb] = "cyborg"
 				if(third_limb && pref.organ_data[third_limb] == "amputated")
 					pref.organ_data[third_limb] = null
 
