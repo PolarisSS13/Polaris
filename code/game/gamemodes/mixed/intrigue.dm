@@ -7,6 +7,7 @@
 	required_players_secret = 8
 	required_enemies = 3
 	end_on_antag_death = 0
-	antag_tags = list(MODE_NINJA, MODE_AUTOTRAITOR)
+	antag_tags = list(MODE_NINJA, MODE_TRAITOR)
 	round_autoantag = 1
 	require_all_templates = 1
+	latejoin_antags = list(MODE_TRAITOR)
