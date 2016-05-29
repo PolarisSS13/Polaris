@@ -553,7 +553,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
 
 //This is called when a ghost is drag clicked to something.
-/mob/dead/observer/MouseDrop(atom/over)
+/mob/observer/dead/MouseDrop(atom/over)
 	if(!usr || !over) return
 	if(isobserver(usr) && usr.client && isliving(over))
 		var/mob/living/M = over
@@ -569,7 +569,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return ..()
 
-/mob/dead/observer/proc/try_possession(var/mob/living/M)
+/mob/observer/dead/proc/try_possession(var/mob/living/M)
 	if(!config.ghosts_can_possess_animals)
 		usr << "<span class='warning'>Ghosts are not permitted to possess animals.</span>"
 		return 0

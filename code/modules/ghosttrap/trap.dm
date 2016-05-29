@@ -36,7 +36,7 @@ var/list/ghost_traps
 	..()
 
 // Check for bans, proper atom types, etc.
-/datum/ghosttrap/proc/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
+/datum/ghosttrap/proc/assess_candidate(var/mob/observer/dead/candidate, var/mob/target)
 	if(!candidate.MayRespawn(1, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
@@ -50,7 +50,7 @@ var/list/ghost_traps
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
 	if(request_timeout)
 		request_timeouts[target] = world.time + request_timeout
-		target.destruction.register(src, /datum/ghosttrap/proc/target_destroyed)
+		destroyed_event.register(target, src, /datum/ghosttrap/proc/target_destroyed)
 	else
 		request_timeouts -= target
 
@@ -176,7 +176,7 @@ var/list/ghost_traps
 	minutes_since_death = DRONE_SPAWN_DELAY
 	..()
 
-datum/ghosttrap/drone/assess_candidate(var/mob/dead/observer/candidate, var/mob/target)
+datum/ghosttrap/drone/assess_candidate(var/mob/observer/dead/candidate, var/mob/target)
 	. = ..()
 	if(. && !target.can_be_possessed_by(candidate))
 		return 0
