@@ -46,14 +46,14 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_main.dmi'
 
 /datum/robolimb/bishop_alt1
-	company = "Bishop alt."
+	company = "Bishop - Glyph"
 	desc = "This limb has a white polymer casing with blue holo-displays."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt1.dmi'
 	parts = list(BP_HEAD)
 
 /datum/robolimb/bishop_monitor
-	company = "Bishop mtr."
-	desc = "This limb has a white polymer casing with blue holo-displays."
+	company = "Bishop Monitor"
+	desc = "Bishop Cybernetics' unique spin on a popular prosthetic head model. The themes conflict in an intriguing way."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_monitor.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
@@ -64,8 +64,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_main.dmi'
 
 /datum/robolimb/hesphiastos_alt1
-	company = "Hesphiastos alt."
-	desc = "This limb has a militaristic black and green casing with gold stripes."
+	company = "Hesphiastos - Frontier"
+	desc = "A rugged prosthetic head featuring the standard Hesphiastos theme, a visor and an external display."
 	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_alt1.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = "blank=hesphiastos_alt_off;\
@@ -77,8 +77,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 		rainbow=hesphiastos_alt_rainbow"
 
 /datum/robolimb/hesphiastos_monitor
-	company = "Hesphiastos mtr."
-	desc = "This limb has a militaristic black and green casing with gold stripes."
+	company = "Hesphiastos Monitor"
+	desc = "Hesphiastos' unique spin on a popular prosthetic head model. It looks rugged and sturdy."
 	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_monitor.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
@@ -90,7 +90,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	monitor_styles = standard_monitor_styles
 
 /datum/robolimb/morpheus_alt1
-	company = "Morpheus alt."
+	company = "Morpheus - Zenith"
 	desc = "This limb is simple and functional; no effort has been made to make it look human."
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_alt1.dmi'
 	parts = list(BP_HEAD)
@@ -107,14 +107,14 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_main.dmi'
 
 /datum/robolimb/wardtakahashi_alt1
-	company = "Ward-Takahashi alt."
-	desc = "This limb features sleek black and white polymers."
+	company = "Ward-Takahashi - Shroud"
+	desc = "This limb features sleek black and white polymers. This one looks more like a helmet of some sort."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt1.dmi'
 	parts = list(BP_HEAD)
 
 /datum/robolimb/wardtakahashi_monitor
-	company = "Ward-Takahashi mtr."
-	desc = "This limb features sleek black and white polymers."
+	company = "Ward-Takahashi Monitor"
+	desc = "Ward-Takahashi's unique spin on a popular prosthetic head model. It looks sleek and modern."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_monitor.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
@@ -125,14 +125,14 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_main.dmi'
 
 /datum/robolimb/xion_alt1
-	company = "Xion Manufacturing Group alt."
-	desc = "This limb has a minimalist black and red casing."
+	company = "Xion Mfg. - Breach"
+	desc = "This limb has a minimalist black and red casing. Looks a bit menacing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt1.dmi'
 	parts = list(BP_HEAD)
 
 /datum/robolimb/xion_monitor
-	company = "Xion Manufacturing Group mtr."
-	desc = "This limb has a minimalist black and red casing."
+	company = "Xion Mfg. Monitor"
+	desc = "Xion Mfg.'s unique spin on a popular prosthetic head model. It looks and minimalist and utilitarian."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_monitor.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
