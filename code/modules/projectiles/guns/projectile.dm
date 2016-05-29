@@ -24,6 +24,7 @@
 	//For MAGAZINE guns
 	var/magazine_type = null	//the type of magazine that the gun comes preloaded with
 	var/obj/item/ammo_magazine/ammo_magazine = null //stored magazine
+	var/allowed_magazines		//determines list of which magazines will fit in the gun
 	var/auto_eject = 0			//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
 	//TODO generalize ammo icon states for guns
@@ -97,8 +98,11 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		var/obj/item/ammo_magazine/AM = A
 		if(!(load_method & AM.mag_type) || caliber != AM.caliber)
-			return //incompatible
-
+			user << "<span class='warning'>[src] is not meant for this kind of ammunition!</span>"
+			return //incompatible ammo type
+		if(allowed_magazines && !is_type_in_list(A, allowed_magazines)) // Checks if there's a list to begin with, then checks if the magazine is compatible.
+			user << "<span class='warning'>[src] is not compatible with this kind of magazine!</span>"
+			return //incompatible magazine type
 		switch(AM.mag_type)
 			if(MAGAZINE)
 				if(ammo_magazine)
