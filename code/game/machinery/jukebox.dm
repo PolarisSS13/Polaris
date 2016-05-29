@@ -1,3 +1,5 @@
+//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
+
 datum/track
 	var/title
 	var/sound
@@ -20,11 +22,6 @@ datum/track/New(var/title_name, var/audio)
 
 	var/playing = 0
 
-	// Vars for hacking
-	var/datum/wires/jukebox/wires = null
-	var/hacked = 0 // Whether to show the hidden songs or not
-	var/freq = 0
-
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
 		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
@@ -38,42 +35,10 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
-	// Only visible if hacked
-	var/list/datum/track/secret_tracks = list(
-		//new/datum/track("Bandit Radio", 'sound/music/bandit_radio.ogg'), // Waiting on email from GSC World about the copyright status of this.
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
-		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
-		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
-	)
-
-/obj/machinery/media/jukebox/New()
-	..()
-	wires = new/datum/wires/jukebox(src)
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
-	qdel(wires)
-	wires = null
 	..()
-
-/obj/machinery/media/jukebox/proc/set_hacked(var/newhacked)
-	if (hacked == newhacked) return
-	hacked = newhacked
-	if (hacked)
-		tracks.Add(secret_tracks)
-	else
-		tracks.Remove(secret_tracks)
-	updateDialog()
-
-/obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-	if (default_deconstruction_screwdriver(user, W))
-		return
-	if(istype(W, /obj/item/weapon/wirecutters))
-		return wires.Interact(user)
-	if(istype(W, /obj/item/device/multitool))
-		return wires.Interact(user)
-	return ..()
 
 /obj/machinery/media/jukebox/power_change()
 	if(!powered(power_channel) || !anchored)
@@ -99,8 +64,6 @@ datum/track/New(var/title_name, var/audio)
 			overlays += "[state_base]-emagged"
 		else
 			overlays += "[state_base]-running"
-	if (panel_open)
-		overlays += "panel_open"
 
 /obj/machinery/media/jukebox/Topic(href, href_list)
 	if(..() || !(Adjacent(usr) || istype(usr, /mob/living/silicon)))
@@ -237,13 +200,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	var/area/main_area = get_area(src)
-	if(freq)
-		var/sound/new_song = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
-		new_song.frequency = freq
-		main_area.forced_ambience = list(new_song)
-	else
-		main_area.forced_ambience = list(current_track.sound)
-
+	main_area.forced_ambience = list(current_track.sound)
 	for(var/mob/living/M in mobs_in_area(main_area))
 		if(M.mind)
 			main_area.play_ambience(M)
