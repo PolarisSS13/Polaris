@@ -310,6 +310,7 @@ var/list/mob/living/forced_ambiance_list = new
 /proc/has_gravity(atom/AT, turf/T)
 	if(!T)
 		T = get_turf(AT)
+		if(!T) return 1	//Still no turf, give up. Used for null space entities that shouldn't be bouncing up and down.
 	var/area/A = get_area(T)
 	if(A && A.has_gravity())
 		return 1
