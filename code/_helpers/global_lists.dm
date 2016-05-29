@@ -33,6 +33,8 @@ var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
 var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
+var/list/mannequins_
+
 // Posters
 var/global/list/poster_designs = list()
 
@@ -137,6 +139,14 @@ var/global/list/string_slot_flags = list(
 	"holster" = SLOT_HOLSTER
 )
 
+/proc/get_mannequin(var/ckey)
+	if(!mannequins_)
+		mannequins_ = new()
+ 	. = mannequins_[ckey]
+	if(!.)
+		. = new/mob/living/carbon/human/dummy/mannequin()
+		mannequins_[ckey] = .
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -231,3 +241,5 @@ var/global/list/string_slot_flags = list(
 				. += "    has: [t]\n"
 	world << .
 */
+//Hexidecimal numbers
+var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")

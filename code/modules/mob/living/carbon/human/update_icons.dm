@@ -247,7 +247,7 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
-		else if(part.status & ORGAN_ROBOT)
+		else if(part.robotic >= ORGAN_ROBOT)
 			icon_key += "2[part.model ? "-[part.model]": ""]"
 		else if(part.status & ORGAN_DEAD)
 			icon_key += "3"
@@ -771,6 +771,12 @@ var/global/list/damage_icon_parts = list()
 				var/image/bloodsies = image("icon" = species.get_blood_mask(src), "icon_state" = "[S.blood_overlay_type]blood")
 				bloodsies.color = wear_suit.blood_color
 				standing.overlays	+= bloodsies
+
+		// Accessories - copied from uniform, BOILERPLATE because fuck this system.
+		var/obj/item/clothing/suit/suit = wear_suit
+		if(istype(suit) && suit.accessories.len)
+			for(var/obj/item/clothing/accessory/A in suit.accessories)
+				standing.overlays |= A.get_mob_overlay()
 
 		overlays_standing[SUIT_LAYER]	= standing
 		update_tail_showing(0)

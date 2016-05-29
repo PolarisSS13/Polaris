@@ -39,8 +39,7 @@
 		return 0
 	if(istype(user))
 		var/obj/item/organ/external/E = user.organs_by_name[BP_HEAD]
-		var/datum/robolimb/robohead = all_robolimbs[E.model]
-		if(istype(E) && (E.status & ORGAN_ROBOT) && robohead.monitor_styles)
+		if(istype(E) && (E.robotic >= ORGAN_ROBOT) && robohead.monitor_styles)
 			return 1
 		user << "<span class='warning'>You must have a compatible robotic head to install this upgrade.</span>"
 	return 0
