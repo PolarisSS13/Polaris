@@ -2,7 +2,6 @@ var/datum/antagonist/borer/borers
 
 /datum/antagonist/borer
 	id = MODE_BORER
-	role_type = BE_ALIEN
 	role_text = "Cortical Borer"
 	role_text_plural = "Cortical Borers"
 	mob_path = /mob/living/simple_animal/borer
