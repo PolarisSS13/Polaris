@@ -32,10 +32,7 @@
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 
-	var/underwear_top = 1	//Which underwear the player wants
-	var/underwear_bottom = 1
-	var/undershirt = 0	//Which undershirt the player wants.
-	var/socks = 0		//Which socks the player wants.
+	var/list/all_underwear = list()
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 	var/pdachoice = 1	//Which PDA type the player has chosen. Default, Slim, or Old.
 
