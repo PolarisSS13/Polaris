@@ -130,7 +130,7 @@
 
 /obj/item/projectile/bullet/pistol/small
 	damage = 15
-	penetration = 1
+	armor_penetration = 50
 
 /obj/item/projectile/bullet/pistol/medium
 	damage = 25
