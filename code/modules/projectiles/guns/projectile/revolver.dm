@@ -104,6 +104,4 @@
 	icon_state = "derringer"
 	item_state = "concealed"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 6)
-	handle_casings = CYCLE_CASINGS
 	max_shells = 2
-	ammo_type = /obj/item/ammo_casing/a357
