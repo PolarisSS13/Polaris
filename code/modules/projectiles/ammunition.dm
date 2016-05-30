@@ -46,8 +46,10 @@
 			BB.name = "[initial(BB.name)] (\"[label_text]\")"
 
 /obj/item/ammo_casing/update_icon()
-	if(spent_icon && !BB)
-		icon_state = spent_icon
+/*	if(spent_icon && !BB)
+		icon_state = spent_icon*/
+	if(!BB) // This is really just a much better way of doing this.
+		icon_state = "[initial(icon_state)]-spent"
 
 /obj/item/ammo_casing/examine(mob/user)
 	..()
