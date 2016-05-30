@@ -262,6 +262,10 @@
 	name = "rifle clip (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
 
+/obj/item/ammo_magazine/a762_clip/practice
+	name = "rifle clip (7.62mm practice)"
+	ammo_type = /obj/item/ammo_casing/a762p
+
 /obj/item/ammo_magazine/c762
 	name = "magazine (7.62mm)"
 	icon_state = "c762"
