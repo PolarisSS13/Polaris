@@ -144,6 +144,17 @@
 	desc = "A 7.62mm armor-piercing bullet casing."
 	projectile_type = /obj/item/projectile/bullet/rifle/a762/ap
 
+/obj/item/ammo_casing/a762p
+	desc = "A 7.62mm practice bullet casing."
+	caliber = "a762"
+	icon_state = "rifle-casing" // Need to make an icon for these
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
+
+/obj/item/ammo_casing/a762/blank
+	desc = "A blank 7.62mm bullet casing."
+	projectile_type = /obj/item/projectile/bullet/blank
+	matter = list(DEFAULT_WALL_MATERIAL = 90)
+
 /obj/item/ammo_casing/a145
 	name = "shell casing"
 	desc = "A 14.5mm shell."
@@ -166,7 +177,7 @@
 	desc = "A 5.56mm practice bullet casing."
 	caliber = "a556"
 	icon_state = "rifle-casing" // Need to make an icon for these
-	projectile_type = /obj/item/projectile/bullet/rifle/a556/practice
+	projectile_type = /obj/item/projectile/bullet/rifle/practice
 
 /obj/item/ammo_casing/rocket
 	name = "rocket shell"
