@@ -240,6 +240,16 @@
 	max_ammo = 20
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/c762
+	name = "\improper SVD magazine (7.62mm)"
+	icon_state = "SVD"
+	mag_type = MAGAZINE
+	caliber = "a762"
+	matter = list(DEFAULT_WALL_MATERIAL = 900)
+	ammo_type = /obj/item/ammo_casing/a762
+	max_ammo = 10
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/c762/ap
 	name = "magazine (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap

@@ -72,7 +72,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
-	allowed_magazines = list(/obj/item/ammo_magazine/c762/*,/obj/item/ammo_magazine/SVD*/)
+	allowed_magazines = list(/obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/SVD)
 
 	one_handed_penalty = 4
 

@@ -137,13 +137,19 @@
 	name = "\improper FiveSeven"
 	desc = "This tacticool pistol makes you feel like you're playing Counter Strike in Space. Uses 5mm ammo."
 	icon_state = "fnseven"
-	origin_tech = "combat=2;materials=2"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "5mm"
 	load_method = MAGAZINE
 	fire_sound = 'sound/weapons/semiauto.ogg'
 	magazine_type = /obj/item/ammo_magazine/c5mm
 	allowed_magazines = list(/obj/item/ammo_magazine/c5mm)
 
+/obj/item/weapon/gun/projectile/fiveseven/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "fnseven"
+	else
+		icon_state = "fnseven-empty"
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "gyrojet pistol"
