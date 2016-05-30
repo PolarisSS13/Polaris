@@ -119,7 +119,7 @@
 	force = 10
 	caliber = "a556"
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
-	ammo_type = "/obj/item/ammo_casing/a556"
+	ammo_type = "/obj/item/ammo_casing/a556" // Is this really needed anymore?
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
@@ -192,7 +192,7 @@
 	caliber = "a762"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 2)
 	slot_flags = SLOT_BACK
-	ammo_type = "/obj/item/ammo_casing/a762"
+	ammo_type = "/obj/item/ammo_casing/a762" // Is this really needed anymore?
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
