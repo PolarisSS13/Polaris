@@ -277,3 +277,24 @@
 	load_method = SINGLE_CASING
 	max_shells = 2
 	ammo_type = /obj/item/ammo_casing/a357
+
+/obj/item/weapon/gun/projectile/luger
+	name = "\improper P08 Luger"
+	desc = "Not some cheap Scheisse .45 caliber Martian knockoff! This Luger is an authentic reproduction by RauMauser. Accuracy, easy handling, and its signature appearance make it popular among collectors... and space Nazis. Uses 9mm ammo."
+	icon_state = "p08"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	caliber = "9mm"
+	load_method = MAGAZINE
+	fire_sound = 'sound/weapons/semiauto.ogg'
+	magazine_type = /obj/item/ammo_magazine/c9mm
+	allowed_magazines = list(/obj/item/ammo_magazine/c9mm)
+
+/obj/item/weapon/gun/projectile/luger/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "[initial(icon_state)]"
+	else
+		icon_state = "[initial(icon_state)]-e"
+
+/obj/item/weapon/gun/projectile/luger/brown
+	icon_state = "p08b"
