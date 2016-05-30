@@ -90,7 +90,7 @@ obj/item/weapon/gun/energy/retro
 	standard photonic beams, resulting in an effective 'anti-armor' energy weapon."
 	icon_state = "xray"
 	item_state = "xray"
-	fire_sound = 'sound/weapons/laser3.ogg'
+	fire_sound = 'sound/weapons/eluger.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 100
