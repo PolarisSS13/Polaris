@@ -259,7 +259,11 @@
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/c762
+/obj/item/ammo_magazine/c762/ap
+	name = "magazine (7.62mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a762/ap
+
+/obj/item/ammo_magazine/SVD
 	name = "\improper SVD magazine (7.62mm)"
 	icon_state = "SVD"
 	mag_type = MAGAZINE
@@ -269,8 +273,8 @@
 	max_ammo = 10
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/c762/ap
-	name = "magazine (7.62mm armor-piercing)"
+/obj/item/ammo_magazine/SVD/ap
+	name = "\improper SVD magazine (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
 
 /obj/item/ammo_magazine/caps

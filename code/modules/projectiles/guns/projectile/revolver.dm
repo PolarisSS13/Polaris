@@ -97,11 +97,3 @@
 	handle_casings = CYCLE_CASINGS
 	max_shells = 7
 	ammo_type = /obj/item/ammo_casing/cap
-
-/obj/item/weapon/gun/projectile/revolver/derringer // Probably doesn't belong here but whatever. -Spades
-	name = "derringer"
-	desc = "It's not size of your gun that matters, just the size of your load. Uses .357 rounds." //OHHH MYYY~
-	icon_state = "derringer"
-	item_state = "concealed"
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 6)
-	max_shells = 2
