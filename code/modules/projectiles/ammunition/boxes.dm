@@ -249,6 +249,17 @@
 /obj/item/ammo_magazine/a762/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/a762_clip
+	caliber = "a762"
+	ammo_type = /obj/item/ammo_casing/a762
+	matter = list(DEFAULT_WALL_MATERIAL = 450)
+	max_ammo = 5
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a762_clip/ap
+	name = "rifle clip (7.62mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a762/ap
+
 /obj/item/ammo_magazine/c762
 	name = "magazine (7.62mm)"
 	icon_state = "c762"
