@@ -9,7 +9,7 @@
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	caliber = "14.5mm"
 	recoil = 2 //extra kickback
-	//fire_sound = 'sound/weapons/sniper.ogg'
+	fire_sound = 'sound/weapons/cannon.ogg' // extra boom
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1

@@ -361,8 +361,9 @@
 	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber))
 		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
-		if(silenced)
-			playsound(user, fire_sound, 10, 1)
+			if(silenced)
+				/*playsound(user, fire_sound, 10, 1)*/
+				playsound(user, 'sound/weapons/silenced.ogg', 10, 1)
 		else
 			playsound(user, fire_sound, 50, 1)
 		if(istype(in_chamber, /obj/item/projectile/beam/lastertag))

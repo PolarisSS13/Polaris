@@ -102,7 +102,7 @@ obj/item/weapon/gun/energy/retro
 	ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "laser"
-	fire_sound = 'sound/weapons/marauder.ogg'
+	fire_sound = 'sound/weapons/gauss_shoot.ogg'
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
 	slot_flags = SLOT_BACK
