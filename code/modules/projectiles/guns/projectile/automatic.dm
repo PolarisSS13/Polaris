@@ -45,6 +45,7 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a10mm
+	allowed_magazines = list(/obj/item/ammo_magazine/a10mm)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -71,6 +72,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
+	allowed_magazines = list(/obj/item/ammo_magazine/c762/*,/obj/item/ammo_magazine/SVD*/)
 
 	one_handed_penalty = 4
 
@@ -98,6 +100,7 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+	allowed_magazines = list(/obj/item/ammo_magazine/mc9mmt)
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()
@@ -121,6 +124,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556
+	allowed_magazines = list(/obj/item/ammo_magazine/a556)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -192,6 +196,7 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
+	allowed_magazines = list(/obj/item/ammo_magazine/a762) // ToDo: Make the icon work with c762 magazines
 
 	one_handed_penalty = 6
 
@@ -253,6 +258,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/g12
+	allowed_magazines = list(/obj/item/ammo_magazine/g12)
 
 	one_handed_penalty = 4
 

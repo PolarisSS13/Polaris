@@ -3,6 +3,7 @@
 	name = ".45 pistol"
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/c45m
+	allowed_magazines = list(/obj/item/ammo_magazine/c45m)
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
@@ -108,6 +109,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
+	allowed_magazines = list(/obj/item/ammo_magazine/c45m)
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
@@ -118,6 +120,7 @@
 	caliber = ".50"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
+	allowed_magazines = list(/obj/item/ammo_magazine/a50)
 	auto_eject = 1
 
 /obj/item/weapon/gun/projectile/deagle/gold
@@ -144,6 +147,7 @@
 	ammo_type = "/obj/item/ammo_casing/a75"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a75
+	allowed_magazines = list(/obj/item/ammo_magazine/a75)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -166,6 +170,7 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
+	allowed_magazines = list(/obj/item/ammo_magazine/mc9mm)
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "holdout signal pistol"
