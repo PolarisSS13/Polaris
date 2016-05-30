@@ -21,17 +21,6 @@
 //		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2,-2), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "\improper Uzi"
-	desc = "The UZI is a lightweight, fast firing gun. For when you want someone dead. Uses .45 rounds."
-	icon_state = "mini-uzi"
-	w_class = 3
-	load_method = SPEEDLOADER //yup. until someone sprites a magazine for it.
-	max_shells = 15
-	caliber = ".45"
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
-	ammo_type = /obj/item/ammo_casing/c45
-
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "submachine gun"
 	desc = "The C-20r is a lightweight and rapid firing SMG, for when you REALLY need someone dead. Uses 10mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
@@ -279,8 +268,7 @@
 		icon_state = "ashot"
 	return
 
-
-/obj/item/weapon/gun/projectile/automatic/uzi
+/obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
 	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 caliber ammo."
 	icon_state = "mini-uzi"
