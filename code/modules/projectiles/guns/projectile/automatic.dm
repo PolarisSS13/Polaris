@@ -196,7 +196,7 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
-	allowed_magazines = list(/obj/item/ammo_magazine/a762/*, /obj/item/ammo_magazine/c762*/)
+	allowed_magazines = list(/obj/item/ammo_magazine/a762, /obj/item/ammo_magazine/c762)
 
 	one_handed_penalty = 6
 
@@ -232,7 +232,7 @@
 		return ..() //once open, behave like normal
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
-	if(istype(magazine_type,/obj/item/ammo_magazine/c762))
+	if(istype(ammo_magazine,/obj/item/ammo_magazine/c762))
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
