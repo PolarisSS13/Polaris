@@ -122,7 +122,6 @@
 	fire_sound = 'sound/weapons/deagle.ogg'
 	magazine_type = /obj/item/ammo_magazine/a50
 	allowed_magazines = list(/obj/item/ammo_magazine/a50)
-	auto_eject = 1
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
@@ -134,6 +133,15 @@
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
 
+/obj/item/weapon/gun/projectile/fiveseven
+	desc = "This tacticool pistol makes you feel like you're playing Counter Strike in Space. Uses 5mm ammo."
+	icon_state = "fnseven"
+	origin_tech = "combat=2;materials=2"
+	caliber = "5mm"
+	load_method = MAGAZINE
+	fire_sound = 'sound/weapons/semiauto.ogg'
+	magazine_type = /obj/item/ammo_magazine/c5mm
+	allowed_magazines = list(/obj/item/ammo_magazine/c5mm)
 
 
 /obj/item/weapon/gun/projectile/gyropistol

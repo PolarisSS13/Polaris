@@ -279,5 +279,50 @@
 		icon_state = "ashot"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/uzi
+	name = "\improper Uzi"
+	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 caliber ammo."
+	icon_state = "mini-uzi"
+	w_class = 3
+	load_method = MAGAZINE
+	caliber = ".45"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
+	magazine_type = /obj/item/ammo_magazine/c45uzi
+	allowed_magazines = list(/obj/item/ammo_magazine/c45uzi)
 
+	firemodes = list(
+		list(mode_name="semiauto", burst=1, fire_delay=0),
+		list(mode_name="short burst", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2)),
+		)
 
+/obj/item/weapon/gun/projectile/automatic/uzi/update_icon()
+	..()
+	icon_state = (ammo_magazine)? "mini-uzi" : "mini-uzi-empty"
+	update_held_icon()
+
+/obj/item/weapon/gun/projectile/automatic/p90
+	name = "\improper FN P90"
+	desc = "Despite its fierce reputation, it still manages to feel like a toy. Uses 9mm ammo." // Uses 5.7×28mm ammo."
+	icon_state = "p90"
+	item_state = "p90"
+	w_class = 3
+	caliber = "5mm"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
+	slot_flags = SLOT_BELT // ToDo: Belt sprite.
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/c5mmt
+	allowed_magazines = list(/obj/item/ammo_magazine/c5mmt)
+
+	firemodes = list(
+		list(mode_name="semiauto", burst=1, fire_delay=0),
+		list(mode_name="short burst", burst=5, burst_delay=1, fire_delay=4, move_delay=4, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.2, 1.2)),
+		)
+
+/obj/item/weapon/gun/projectile/automatic/p90/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "p90-[round(ammo_magazine.stored_ammo.len,4)]"
+	else
+		icon_state = "p90-empty"
+	return

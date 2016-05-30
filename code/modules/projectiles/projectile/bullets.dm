@@ -128,6 +128,10 @@
 /obj/item/projectile/bullet/pistol
 	damage = 20
 
+/obj/item/projectile/bullet/pistol/small
+	damage = 15
+	penetration = 1
+
 /obj/item/projectile/bullet/pistol/medium
 	damage = 25
 

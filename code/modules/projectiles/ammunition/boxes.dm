@@ -48,6 +48,16 @@
 	name = "magazine (.45 flash)"
 	ammo_type = "/obj/item/ammo_casing/c45f"
 
+/obj/item/ammo_magazine/c45uzi
+	name = "stick magazine (.45)"
+	icon_state = "45"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c45
+	matter = list(DEFAULT_WALL_MATERIAL = 525) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	caliber = ".45"
+	max_ammo = 16
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/mc9mm
 	name = "magazine (9mm)"
 	icon_state = "9x19p"
@@ -97,6 +107,36 @@
 /obj/item/ammo_magazine/mc9mmt/practice
 	name = "top mounted magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/c9mmp
+
+/obj/item/ammo_magazine/mc9mmt
+	name = "top mounted magazine (9mm)"
+	icon_state = "9mmt"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c9mm
+	matter = list(DEFAULT_WALL_MATERIAL = 1200)
+	caliber = "9mm"
+	max_ammo = 20
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/c5mmt
+	name = "top mounted magazine (5mm)"
+	icon_state = "p90"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c5mm
+	matter = list(DEFAULT_WALL_MATERIAL = 3000)
+	caliber = "5mm"
+	max_ammo = 50
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/c5mm
+	name = "magazine (5mm)"
+	icon_state = "fiveseven"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c5mm
+	matter = list(DEFAULT_WALL_MATERIAL = 1200)
+	caliber = "5mm"
+	max_ammo = 20
+	//multiple_sprites = 1
 
 /obj/item/ammo_magazine/c45
 	name = "ammunition Box (.45)"
