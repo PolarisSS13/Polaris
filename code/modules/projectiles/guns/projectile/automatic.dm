@@ -233,7 +233,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
 	if(magazine_type = istype(/obj/item/ammo_magazine/c762)
-		icon_state = "l6mag[cover_open ? "open" : "closed"]mag"
+		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
 
