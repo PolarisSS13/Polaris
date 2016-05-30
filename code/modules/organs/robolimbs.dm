@@ -53,6 +53,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb has a white polymer casing with blue holo-displays."
 	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt1.dmi'
 	parts = list(BP_HEAD)
+	monitor_styles = "blank=bishop_alt1.dmi"
+		"optics=bishop_alt_optics_s.dmi"
 
 /datum/robolimb/bishop_monitor
 	company = "Bishop Monitor"
@@ -98,6 +100,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_alt1.dmi'
 	parts = list(BP_HEAD)
 	unavailable_at_chargen = null
+	monitor_styles = "blank=morpheus_alt1.dmi"
+		"optics=morpheus_alt_optics_s.dmi"
 
 /datum/robolimb/veymed
 	lifelike = 1
@@ -116,6 +120,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb features sleek black and white polymers. This one looks more like a helmet of some sort."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt1.dmi'
 	parts = list(BP_HEAD)
+	monitor_styles = "blank=wardtakahashi_alt1.dmi"
+		"optics=wardtakahashi_alt_optics_s.dmi"
 
 /datum/robolimb/wardtakahashi_monitor
 	company = "Ward-Takahashi Monitor"
@@ -134,6 +140,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb has a minimalist black and red casing. Looks a bit menacing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt1.dmi'
 	parts = list(BP_HEAD)
+	monitor_styles = "blank=xion_alt1.dmi"
+		"optics=xion_alt_optics_s.dmi"
 
 /datum/robolimb/xion_monitor
 	company = "Xion Mfg. Monitor"
