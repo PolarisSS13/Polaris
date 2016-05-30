@@ -21,6 +21,7 @@
 /obj/item/ammo_casing/c38r
 	desc = "A .38 rubber bullet casing."
 	caliber = "38"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mm
@@ -31,16 +32,19 @@
 /obj/item/ammo_casing/c9mmf
 	desc = "A 9mm flash shell casing."
 	caliber = "9mm"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/energy/flash
 
 /obj/item/ammo_casing/c9mmr
 	desc = "A 9mm rubber bullet casing."
 	caliber = "9mm"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c9mmp
 	desc = "A 9mm practice bullet casing."
 	caliber = "9mm"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 
@@ -52,16 +56,19 @@
 /obj/item/ammo_casing/c45p
 	desc = "A .45 practice bullet casing."
 	caliber = ".45"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
 
 /obj/item/ammo_casing/c45r
 	desc = "A .45 rubber bullet casing."
 	caliber = ".45"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
 
 /obj/item/ammo_casing/c45f
 	desc = "A .45 flash shell casing."
 	caliber = ".45"
+	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/energy/flash
 
 /obj/item/ammo_casing/a10mm
@@ -130,11 +137,11 @@
 /obj/item/ammo_casing/a762
 	desc = "A 7.62mm bullet casing."
 	caliber = "a762"
+	icon_state = "rifle-casing"
 	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
 /obj/item/ammo_casing/a762/ap
 	desc = "A 7.62mm armor-piercing bullet casing."
-	caliber = "a762"
 	projectile_type = /obj/item/projectile/bullet/rifle/a762/ap
 
 /obj/item/ammo_casing/a145
@@ -148,16 +155,17 @@
 /obj/item/ammo_casing/a556
 	desc = "A 5.56mm bullet casing."
 	caliber = "a556"
+	icon_state = "rifle-casing"
 	projectile_type = /obj/item/projectile/bullet/rifle/a556
 
 /obj/item/ammo_casing/a556/ap
 	desc = "A 5.56mm armor-piercing bullet casing."
-	caliber = "a556"
 	projectile_type = /obj/item/projectile/bullet/rifle/a556/ap
 
 /obj/item/ammo_casing/a556p
 	desc = "A 5.56mm practice bullet casing."
 	caliber = "a556"
+	icon_state = "rifle-casing" // Need to make an icon for these
 	projectile_type = /obj/item/projectile/bullet/rifle/a556/practice
 
 /obj/item/ammo_casing/rocket
@@ -171,5 +179,11 @@
 	name = "cap"
 	desc = "A cap for children toys."
 	caliber = "caps"
+	icon_state = "r-casing"
 	color = "#FF0000"
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
+
+/obj/item/ammo_casing/spent // For mobs only.
+	desc = "A spent bullet casing."
+	BB = null
+	projectile_type = null
