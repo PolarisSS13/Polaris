@@ -134,6 +134,7 @@
 	item_state = "deagleg"
 
 /obj/item/weapon/gun/projectile/fiveseven
+	name = "\improper FiveSeven"
 	desc = "This tacticool pistol makes you feel like you're playing Counter Strike in Space. Uses 5mm ammo."
 	icon_state = "fnseven"
 	origin_tech = "combat=2;materials=2"
