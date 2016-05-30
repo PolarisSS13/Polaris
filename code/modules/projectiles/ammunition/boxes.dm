@@ -53,10 +53,29 @@
 	icon_state = "45"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/c45
-	matter = list(DEFAULT_WALL_MATERIAL = 525) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	matter = list(DEFAULT_WALL_MATERIAL = 525)
 	caliber = ".45"
 	max_ammo = 16
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/tommymag
+	name = "tommygun magazine (.45)"
+	icon_state = "tommy-mag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c45
+	matter = list(DEFAULT_WALL_MATERIAL = 1500) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	caliber = ".45"
+	max_ammo = 20
+
+/obj/item/ammo_magazine/tommydrum
+	name = "tommygun drum magazine (.45)"
+	icon_state = "tommy-drum"
+	w_class = 3 // Bulky ammo!
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/c45
+	matter = list(DEFAULT_WALL_MATERIAL = 3750) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	caliber = ".45"
+	max_ammo = 50
 
 /obj/item/ammo_magazine/mc9mm
 	name = "magazine (9mm)"

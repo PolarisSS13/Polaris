@@ -279,6 +279,7 @@
 		icon_state = "ashot"
 	return
 
+
 /obj/item/weapon/gun/projectile/automatic/uzi
 	name = "\improper Uzi"
 	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 caliber ammo."
@@ -292,13 +293,14 @@
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
-		list(mode_name="short burst", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2)),
+		list(mode_name="short bursts", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2)),
 		)
 
 /obj/item/weapon/gun/projectile/automatic/uzi/update_icon()
 	..()
 	icon_state = (ammo_magazine)? "mini-uzi" : "mini-uzi-empty"
 	update_held_icon()
+
 
 /obj/item/weapon/gun/projectile/automatic/p90
 	name = "\improper FN P90"
@@ -316,7 +318,7 @@
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
-		list(mode_name="short burst", burst=5, burst_delay=1, fire_delay=4, move_delay=4, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.2, 1.2)),
+		list(mode_name="short bursts", burst=5, burst_delay=1, fire_delay=4, move_delay=4, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.2, 1.2)),
 		)
 
 /obj/item/weapon/gun/projectile/automatic/p90/update_icon()
@@ -326,3 +328,27 @@
 	else
 		icon_state = "p90-empty"
 	return
+
+
+/obj/item/weapon/gun/projectile/automatic/tommygun
+	name = "\improper M1A1 \"Thompson\""
+	desc = "Some little typewriter, huh? I'm gonna write my name all over this town with big letters! Uses .45 rounds."
+	icon_state = "tommygun"
+	w_class = 3
+	caliber = ".45"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
+	slot_flags = SLOT_BELT // ToDo: Belt sprite.
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/tommymag
+	allowed_magazines = list(/obj/item/ammo_magazine/tommymag, /obj/item/ammo_magazine/tommydrum)
+
+	firemodes = list(
+		list(mode_name="semiauto", burst=1, fire_delay=0),
+		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
+		)
+
+/obj/item/weapon/gun/projectile/tommygun/p90/update_icon()
+	..()
+	icon_state = (ammo_magazine)? "tommygun" : "tommygun-empty"
+	update_held_icon()
