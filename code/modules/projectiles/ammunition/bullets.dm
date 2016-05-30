@@ -112,7 +112,6 @@
 	name = "stun shell"
 	desc = "A 12 gauge taser cartridge."
 	icon_state = "stunshell"
-	spent_icon = "stunshell-spent"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
 	matter = list(DEFAULT_WALL_MATERIAL = 360, "glass" = 720)
 
@@ -142,7 +141,6 @@
 	name = "shell casing"
 	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
-	spent_icon = "lcasing-spent"
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
 	matter = list(DEFAULT_WALL_MATERIAL = 1250)
