@@ -73,6 +73,7 @@
 	name = "\improper Dragunov"
 	desc = "The SVD, also known as the Dragunov, was mass produced with an Optical Sniper Sight so simple that even Ivan can figure out how it works. Too bad for you that it's written in Russian. Uses 7.62mm ammo."
 	icon_state = "SVD"
+	item_state = "SVD"
 	w_class = 5 // So it can't fit in a backpack.
 	force = 10
 	slot_flags = SLOT_BACK // Needs a sprite.
