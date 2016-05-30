@@ -250,6 +250,8 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/a762_clip
+	name = "ammo clip (7.62mm)"
+	icon_state = "762"
 	caliber = "a762"
 	ammo_type = /obj/item/ammo_casing/a762
 	matter = list(DEFAULT_WALL_MATERIAL = 450)
