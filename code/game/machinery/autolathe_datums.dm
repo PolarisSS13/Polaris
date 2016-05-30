@@ -360,6 +360,11 @@
 	path = /obj/item/ammo_magazine/mc9mmt/rubber
 	category = "Arms and Ammunition"
 
+/datum/autolathe/recipe/rifle_clip_practice
+	name = "ammunition (7.62mm practice)"
+	path = /obj/item/ammo_magazine/a762_clip/practice
+	category = "Arms and Ammunition"
+
 /datum/autolathe/recipe/consolescreen
 	name = "console screen"
 	path = /obj/item/weapon/stock_parts/console_screen
@@ -460,6 +465,12 @@
 /datum/autolathe/recipe/magazine_arifle
 	name = "ammunition (7.62mm)"
 	path = /obj/item/ammo_magazine/c762
+	hidden = 1
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/rifle_clip
+	name = "ammunition (7.62mm)"
+	path = /obj/item/ammo_magazine/a762_clip
 	hidden = 1
 	category = "Arms and Ammunition"
 
