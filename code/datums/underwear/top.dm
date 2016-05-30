@@ -31,6 +31,11 @@
 /datum/category_item/underwear/top/lacy_bra_alt
 	name = "Lacy bra, alt"
 	icon_state = "lacy_bra_alt"
+	has_color = TRUE
+
+/datum/category_item/underwear/top/lacy_bra_alt_stripe
+	name = "Lacy bra, alt, stripe"
+	icon_state = "lacy_bra_alt_stripe"
 
 /datum/category_item/underwear/top/halterneck_bra
 	name = "Halterneck bra"
