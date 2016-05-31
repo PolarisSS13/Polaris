@@ -4,7 +4,7 @@
 		alt_name = "(as [get_id_name("Unknown")])"
 
 	message = sanitize(message)
-	..(message, alt_name = alt_name)
+	..(message, alt_name = alt_name, whispering = whispering)
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
