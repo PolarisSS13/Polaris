@@ -21,7 +21,7 @@ Slime cube lives here.
 		if(!O.MayRespawn())
 			continue
 		if(O.client)
-			if(O.client.prefs.be_special & BE_ALIEN)
+			if(BE_PROMETHEN in O.client.prefs.be_special_role)
 				question(O.client)
 
 /obj/item/slime_cube/proc/question(var/client/C)
@@ -34,8 +34,8 @@ Slime cube lives here.
 		if(response == "Yes")
 			transfer_personality(C.mob)
 		else if (response == "Never for this round")
-			C.prefs.be_special ^= BE_ALIEN
-			
+			C.prefs.be_special_role -= BE_PROMETHEN
+
 /obj/item/slime_cube/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
 	icon_state = "slime cube"
 	if(searching == 1)
@@ -43,7 +43,7 @@ Slime cube lives here.
 		var/turf/T = get_turf_or_move(src.loc)
 		for (var/mob/M in viewers(T))
 			M.show_message("<span class='warning'>The activity in the cube dies down. Maybe it will spark another time.</span>")
-			
+
 /obj/item/slime_cube/proc/transfer_personality(var/mob/candidate)
 	announce_ghost_joinleave(candidate, 0, "They are a promethean now.")
 	src.searching = 2
@@ -62,4 +62,3 @@ Slime cube lives here.
 		S.dna.real_name = newname
 	if(S.mind) S.mind.name = S.name
 	qdel(src)
-	

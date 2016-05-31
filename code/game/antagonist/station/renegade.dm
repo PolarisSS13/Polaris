@@ -2,7 +2,6 @@ var/datum/antagonist/renegade/renegades
 
 /datum/antagonist/renegade
 	id = MODE_RENEGADE
-	role_type = BE_RENEGADE
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
 	bantype = "renegade"

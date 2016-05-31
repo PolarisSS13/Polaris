@@ -913,3 +913,45 @@ default behaviour is:
 		update_icons()
 	return canmove
 
+/mob/proc/can_be_possessed_by(var/mob/observer/dead/possessor)
+	return istype(possessor) && possessor.client
+
+/mob/living/can_be_possessed_by(var/mob/observer/dead/possessor)
+	if(!..())
+		return 0
+	if(!possession_candidate)
+		possessor << "<span class='warning'>That animal cannot be possessed.</span>"
+		return 0
+	if(jobban_isbanned(possessor, "Animal"))
+		possessor << "<span class='warning'>You are banned from animal roles.</span>"
+		return 0
+	if(!possessor.MayRespawn(1,ANIMAL_SPAWN_DELAY))
+		return 0
+	return 1
+
+/mob/living/proc/do_possession(var/mob/observer/dead/possessor)
+
+	if(!(istype(possessor) && possessor.ckey))
+		return 0
+
+	if(src.ckey || src.client)
+		possessor << "<span class='warning'>\The [src] already has a player.</span>"
+		return 0
+
+	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	log_admin("[key_name(possessor)] took control of \the [src].")
+	src.ckey = possessor.ckey
+	qdel(possessor)
+
+	if(round_is_spooky(6)) // Six or more active cultists.
+		src << "<span class='notice'>You reach out with tendrils of ectoplasm and invade the mind of \the [src]...</span>"
+		src << "<b>You have assumed direct control of \the [src].</b>"
+		src << "<span class='notice'>Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly.</span>"
+		src.universal_speak = 1
+		src.universal_understand = 1
+		//src.cultify() // Maybe another time.
+		return
+
+	src << "<b>You are now \the [src]!</b>"
+	src << "<span class='notice'>Remember to stay in character for a mob of this type!</span>"
+	return 1

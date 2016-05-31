@@ -298,7 +298,7 @@
 
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
-	if (src != usr)
+	if(src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 		usr << "\red The round is either not ready, or has already finished..."
@@ -332,7 +332,7 @@
 		character.loc = C.loc
 
 		AnnounceCyborg(character, rank, "has been downloaded to the empty core in \the [character.loc.loc]")
-		ticker.mode.latespawn(character)
+		ticker.mode.handle_latejoin(character)
 
 		qdel(C)
 		qdel(src)
@@ -347,7 +347,7 @@
 		character.buckled.loc = character.loc
 		character.buckled.set_dir(character.dir)
 
-	ticker.mode.latespawn(character)
+	ticker.mode.handle_latejoin(character)
 
 	if(character.mind.assigned_role != "Cyborg")
 		data_core.manifest_inject(character)

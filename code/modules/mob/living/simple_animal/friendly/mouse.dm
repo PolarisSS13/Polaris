@@ -30,6 +30,7 @@
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/mouse
 	mob_size = MOB_MINISCULE
+	possession_candidate = 1
 
 	can_pull_size = 1
 	can_pull_mobs = MOB_PULL_NONE

@@ -32,6 +32,8 @@ var/list/whitelist = list()
 
 //todo: admin aliens
 /proc/is_alien_whitelisted(mob/M, var/species)
+	if(!M || !species)
+		return 0
 	if(!config.usealienwhitelist)
 		return 1
 	if(species == "human" || species == "Human")

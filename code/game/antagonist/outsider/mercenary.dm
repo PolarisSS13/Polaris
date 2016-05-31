@@ -2,7 +2,6 @@ var/datum/antagonist/mercenary/mercs
 
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY
-	role_type = BE_OPERATIVE
 	role_text = "Mercenary"
 	bantype = "operative"
 	antag_indicator = "synd"
@@ -46,7 +45,7 @@ var/datum/antagonist/mercenary/mercs
 	player.mind.tcrystals = DEFAULT_TELECRYSTAL_AMOUNT
 	player.mind.accept_tcrystals = 1
 
-	var/obj/item/device/radio/uplink/U = new(player.loc, player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
+	var/obj/item/device/radio/uplink/U = new(get_turf(player), player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	player.put_in_hands(U)
 
 	player.update_icons()

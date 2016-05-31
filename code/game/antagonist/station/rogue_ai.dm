@@ -2,7 +2,6 @@ var/datum/antagonist/rogue_ai/malf
 
 /datum/antagonist/rogue_ai
 	id = MODE_MALFUNCTION
-	role_type = BE_MALF
 	role_text = "Rampant AI"
 	role_text_plural = "Rampant AIs"
 	mob_path = /mob/living/silicon/ai
@@ -22,13 +21,11 @@ var/datum/antagonist/rogue_ai/malf
 	malf = src
 
 
-/datum/antagonist/rogue_ai/get_candidates()
+/datum/antagonist/rogue_ai/build_candidate_list()
 	..()
 	for(var/datum/mind/player in candidates)
 		if(player.assigned_role && player.assigned_role != "AI")
 			candidates -= player
-	if(!candidates.len)
-		return list()
 	return candidates
 
 

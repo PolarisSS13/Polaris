@@ -358,21 +358,6 @@ proc/isInSight(var/atom/A, var/atom/B)
 		i++
 	return candidates
 
-// Same as above but for alien candidates.
-
-/proc/get_alien_candidates()
-
-	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
-	var/i = 0
-	while(candidates.len <= 0 && i < 5)
-		for(var/mob/observer/dead/G in player_list)
-			if(G.client.prefs.be_special & BE_ALIEN)
-				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
-					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
-						candidates += G.key
-		i++
-	return candidates
-
 /proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
 	if(!isobj(O))	O = new /obj/screen/text()
 	O.maptext = maptext
@@ -556,3 +541,6 @@ datum/projectile_data
 
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
+
+/proc/round_is_spooky(var/spookiness_threshold = config.cult_ghostwriter_req_cultists)
+	return (cult.current_antagonists.len > spookiness_threshold)

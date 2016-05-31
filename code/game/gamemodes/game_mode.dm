@@ -24,7 +24,7 @@ var/global/list/additional_antag_types = list()
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_templates = list()
+	var/list/latejoin_antags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
@@ -186,6 +186,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
+		antag.update_current_antag_max()
 		antag.build_candidate_list() //compile a list of all eligible candidates
 
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
@@ -209,8 +210,6 @@ var/global/list/additional_antag_types = list()
 		if(!(antag.flags & ANTAG_OVERRIDE_JOB))
 			antag.attempt_spawn() //select antags to be spawned
 		antag.finalize_spawn() //actually spawn antags
-		if(antag.is_latejoin_template())
-			latejoin_templates |= antag
 
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
@@ -223,7 +222,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/fail_setup()
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.reset()
+		antag.reset_antag_selection()
 
 /datum/game_mode/proc/announce_ert_disabled()
 	if(!ert_disabled)
@@ -280,17 +279,21 @@ var/global/list/additional_antag_types = list()
 	return
 
 /datum/game_mode/proc/declare_completion()
+	set waitfor = FALSE
 
-	var/is_antag_mode = (antag_templates && antag_templates.len)
 	check_victory()
-	if(is_antag_mode)
-		sleep(10)
-		for(var/datum/antagonist/antag in antag_templates)
-			sleep(10)
-			antag.check_victory()
-			antag.print_player_summary()
-		sleep(10)
-		print_ownerless_uplinks()
+	sleep(2)
+	for(var/datum/antagonist/antag in antag_templates)
+		antag.check_victory()
+		antag.print_player_summary()
+		sleep(2)
+	for(var/antag_type in all_antag_types)
+		var/datum/antagonist/antag = all_antag_types[antag_type]
+		if(!antag.current_antagonists.len || (antag in antag_templates))
+			continue
+		sleep(2)
+		antag.print_player_summary()
+	sleep(2)
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -387,7 +390,7 @@ var/global/list/additional_antag_types = list()
 				continue
 			if(istype(player, /mob/new_player))
 				continue
-			if(!role || (player.client.prefs.be_special & role))
+			if(!role || (role in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 				candidates |= player.mind
 	else
@@ -398,7 +401,7 @@ var/global/list/additional_antag_types = list()
 
 		// Get a list of all the people who want to be the antagonist for this round
 		for(var/mob/new_player/player in players)
-			if(!role || (player.client.prefs.be_special & role))
+			if(!role || (role in player.client.prefs.be_special_role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
 				candidates += player.mind
 				players -= player
@@ -445,6 +448,7 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
+	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
 /datum/game_mode/proc/check_victory()

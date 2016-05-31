@@ -83,6 +83,8 @@
 	M.update_held_icons()
 
 /obj/item/Destroy()
+	qdel(hidden_uplink)
+	hidden_uplink = null
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
