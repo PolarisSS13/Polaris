@@ -129,8 +129,9 @@
 		L.stored_ammo -= AC //Remove this casing from loaded list of the clip.
 		AC.loc = src
 		stored_ammo.Insert(1, AC) //add it to the head of our magazine's list
-		update_icon()
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		L.update_icon()
+		update_icon()
 
 /obj/item/ammo_magazine/attack_self(mob/user)
 	if(!stored_ammo.len)
