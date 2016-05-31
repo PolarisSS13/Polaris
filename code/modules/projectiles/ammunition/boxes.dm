@@ -50,7 +50,7 @@
 
 /obj/item/ammo_magazine/c45uzi
 	name = "stick magazine (.45)"
-	icon_state = "45"
+	icon_state = "uzi45"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/c45
 	matter = list(DEFAULT_WALL_MATERIAL = 525)
