@@ -70,7 +70,7 @@
 /obj/item/ammo_magazine/tommydrum
 	name = "tommygun drum magazine (.45)"
 	icon_state = "tommy-drum"
-	w_class = 3 // Bulky ammo!
+	w_class = 3 // Bulky ammo doesn't fit in your pockets!
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/c45
 	matter = list(DEFAULT_WALL_MATERIAL = 3750) //metal costs are very roughly based around 1 .45 casing = 75 metal
