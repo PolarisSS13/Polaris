@@ -109,33 +109,34 @@ Please contact me on #coderbus IRC. ~Carn x
 #define MUTATIONS_LAYER			1
 #define DAMAGE_LAYER			2
 #define SURGERY_LEVEL			3		//bs12 specific.
-#define UNIFORM_LAYER			4
-#define ID_LAYER				5
-#define SHOES_LAYER				6
-#define GLOVES_LAYER			7
-#define BELT_LAYER				8
-#define SUIT_LAYER				9
-#define ORGAN_OVERLAY_LAYER		10		//for any organs that are bigger than a standard human (Blend() crops images)
-#define WINGS_LAYER				11
+#define UNDERWEAR_LAYER  		4
+#define UNIFORM_LAYER			5
+#define ID_LAYER				6
+#define SHOES_LAYER				7
+#define GLOVES_LAYER			8
+#define BELT_LAYER				9
+#define SUIT_LAYER				10
+#define ORGAN_OVERLAY_LAYER		11		//for any organs that are bigger than a standard human (Blend() crops images)
 #define TAIL_LAYER				12		//bs12 specific. this hack is probably gonna come back to haunt me
-#define GENITALS_LAYER			13
-#define GLASSES_LAYER			14
-#define BELT_LAYER_ALT			15
-#define SUIT_STORE_LAYER		16
-#define BACK_LAYER				17
-#define HAIR_LAYER				18		//TODO: make part of head layer?
-#define NATURAL_EARS_LAYER		19
-#define EARS_LAYER				20
-#define FACEMASK_LAYER			21
-#define HEAD_LAYER				22
-#define COLLAR_LAYER			23
-#define HANDCUFF_LAYER			24
-#define LEGCUFF_LAYER			25
-#define L_HAND_LAYER			26
-#define R_HAND_LAYER			27
-#define FIRE_LAYER				28		//If you're on fire
-#define TARGETED_LAYER			29		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			29
+#define WINGS_LAYER				13
+#define GENITALS_LAYER			14
+#define GLASSES_LAYER			15
+#define BELT_LAYER_ALT			16
+#define SUIT_STORE_LAYER		17
+#define BACK_LAYER				18
+#define HAIR_LAYER				19		//TODO: make part of head layer?
+#define NATURAL_EARS_LAYER		20
+#define EARS_LAYER				21
+#define FACEMASK_LAYER			22
+#define HEAD_LAYER				23
+#define COLLAR_LAYER			24
+#define HANDCUFF_LAYER			25
+#define LEGCUFF_LAYER			26
+#define L_HAND_LAYER			27
+#define R_HAND_LAYER			28
+#define FIRE_LAYER				29		//If you're on fire
+#define TARGETED_LAYER			30		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			30
 //////////////////////////////////
 
 /mob/living/carbon/human

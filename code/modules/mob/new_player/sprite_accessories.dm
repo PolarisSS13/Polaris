@@ -1087,7 +1087,7 @@
 
 	wng_tentacles
 		name = "Back Tentacles"
-		icon_state = "tentacles"
+		icon_state = "tentacle"
 
 
 /*

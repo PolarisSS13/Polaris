@@ -15,7 +15,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["facial_red"]			>> pref.r_facial
 	S["facial_green"]		>> pref.g_facial
 	S["facial_blue"]		>> pref.b_facial
-	S["skin_tone"]			>> pref.s_tone
 	S["skin_red"]			>> pref.r_skin
 	S["skin_green"]			>> pref.g_skin
 	S["skin_blue"]			>> pref.b_skin
@@ -271,8 +270,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			pref.r_hair = 0//hex2num(copytext(new_hair, 2, 4))
 			pref.g_hair = 0//hex2num(copytext(new_hair, 4, 6))
 			pref.b_hair = 0//hex2num(copytext(new_hair, 6, 8))
-			pref.s_tone = 0
-
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 
 			var/datum/species/S = all_species[pref.species]

@@ -64,10 +64,7 @@
 
 
 /datum/category_item/player_setup_item/general/eros/content(var/mob/user)
-	pref.update_preview_icon()
-	if(pref.preview_icon_front && pref.preview_icon_side)
-		user << browse_rsc(pref.preview_icon_front, "preview_icon.png")
-		user << browse_rsc(pref.preview_icon_side, "preview_icon2.png")
+
 
 	. += "<table><tr style='vertical-align:top'><td><b>Sexual Preferences</b> "
 	. += "<br>"
@@ -96,62 +93,62 @@
 		var/new_c_type = input(user, "Choose your character's Chest Type:", "Character Preference") as null|anything in body_breast_list
 		if(new_c_type && CanUseTopic(user))
 			pref.c_type = new_c_type
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["dick_type"])
 		var/new_d_type = input(user, "Choose your character's Dick:", "Character Preference") as null|anything in body_dicks_list
 		if(new_d_type && CanUseTopic(user))
 			pref.d_type = new_d_type
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["vagina_type"])
 		var/new_v_type = input(user, "Choose your character's Vagina:", "Character Preference") as null|anything in body_vaginas_list
 		if(new_v_type && CanUseTopic(user))
 			pref.v_type = new_v_type
-			return TOPIC_REFRESH
+			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["genital_color"])
 		var/new_genital = input(user, "Choose your character's genital colour: ", "Character Preference", rgb(pref.r_genital, pref.g_genital, pref.b_genital)) as color|null
 		pref.r_genital = hex2num(copytext(new_genital, 2, 4))
 		pref.g_genital = hex2num(copytext(new_genital, 4, 6))
 		pref.b_genital = hex2num(copytext(new_genital, 6, 8))
-		return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cears_type"])
 		var/new_ears_type = input(user, "Choose your character's Ears:", "Character Preference") as null|anything in body_ears_list
 		if(new_ears_type && CanUseTopic(user))
 			pref.ears_type = new_ears_type
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["cwings_type"])
 		var/new_wings_type = input(user, "Choose your character's Wings:", "Character Preference") as null|anything in body_wings_list
 		if(new_wings_type && CanUseTopic(user))
 			pref.wings_type = new_wings_type
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["ctail_type"])
 		var/new_tail_type = input(user, "Choose your character's Tail:", "Character Preference") as null|anything in body_tails_list
 		if(new_tail_type && CanUseTopic(user))
 			pref.tail_type = new_tail_type
-			return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["wings_color"])
 		var/new_wings = input(user, "Choose your character's Wings colour: ", "Character Preference", rgb(pref.r_wings, pref.g_wings, pref.b_wings)) as color|null
 		pref.r_wings = hex2num(copytext(new_wings, 2, 4))
 		pref.g_wings = hex2num(copytext(new_wings, 4, 6))
 		pref.b_wings = hex2num(copytext(new_wings, 6, 8))
-		return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["ears_color"])
 		var/new_ears = input(user, "Choose your character's Ears colour: ", "Character Preference", rgb(pref.r_ears, pref.g_ears, pref.b_ears)) as color|null
 		pref.r_ears = hex2num(copytext(new_ears, 2, 4))
 		pref.g_ears = hex2num(copytext(new_ears, 4, 6))
 		pref.b_ears = hex2num(copytext(new_ears, 6, 8))
-		return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["tail_color"])
 		var/new_tail = input(user, "Choose your character's Tail colour: ", "Character Preference", rgb(pref.r_tail, pref.g_tail, pref.b_tail)) as color|null
 		pref.r_tail = hex2num(copytext(new_tail, 2, 4))
 		pref.g_tail = hex2num(copytext(new_tail, 4, 6))
 		pref.b_tail = hex2num(copytext(new_tail, 6, 8))
-		return TOPIC_REFRESH
+		return TOPIC_REFRESH_UPDATE_PREVIEW
