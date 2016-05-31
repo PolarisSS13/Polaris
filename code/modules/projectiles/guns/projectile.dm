@@ -168,6 +168,7 @@
 			loaded.len--
 			user.put_in_hands(C)
 			user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	else
 		user << "<span class='warning'>[src] is empty.</span>"
 	update_icon()
