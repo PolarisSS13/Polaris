@@ -609,13 +609,6 @@
 	body_parts_covered = 0
 
 
-/obj/item/clothing/under/permit
-	name = "public nudity permit"
-	desc = "This permit entitles the bearer to conduct their duties without a uniform. Normally issued to those with nothing to hide."
-	icon_state = "permit"
-	worn_state = "permit"
-	body_parts_covered = 0
-
 /obj/item/clothing/under/dress/white
 	name = "white wedding dress"
 	desc = "A fancy white dress with a blue underdress."
