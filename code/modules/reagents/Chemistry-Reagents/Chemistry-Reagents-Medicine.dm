@@ -280,7 +280,8 @@
 			if(I.robotic >= ORGAN_ROBOT)
 				continue
 			if(I.damage > 0) //Peridaxon heals only non-robotic organs
-				I.damage = max(I.damage - removed, 0)
+				I.damage -= removed
+				I.rejecting -= 5
 			if(I.damage <= 5 && I.organ_tag == O_EYES)
 				H.sdisabilities &= ~BLIND
 

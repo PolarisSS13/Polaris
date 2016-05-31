@@ -190,7 +190,7 @@
 	if(owner.life_tick % PROCESS_ACCURACY == 0)
 
 		//High toxins levels are dangerous
-		if(owner.getToxLoss() >= 60 && !owner.reagents.has_reagent("anti_toxin"))
+		if(owner.getToxLoss() >= 30 && !owner.reagents.has_reagent("anti_toxin"))
 			//Healthy liver suffers on its own
 			if (src.damage < min_broken_damage)
 				src.damage += 0.2 * PROCESS_ACCURACY
@@ -199,6 +199,20 @@
 				var/obj/item/organ/internal/O = pick(owner.internal_organs)
 				if(O)
 					O.damage += 0.2  * PROCESS_ACCURACY
+		//So much fun
+		if(owner.getToxLoss() >= 10 && !owner.reagents.has_reagent("anti_toxin"))
+			if (src.damage > min_broken_damage)
+				var/obj/item/organ/internal/O = pick(owner.internal_organs)
+				if(O)
+					O.damage += 0.2 * PROCESS_ACCURACY
+
+
+//	Broken liver means your blood turns to poison
+		if(is_bruised())
+			owner.adjustToxLoss(0.2 * PROCESS_ACCURACY)
+		else if(is_broken())
+			owner.adjustToxLoss(0.6 * PROCESS_ACCURACY)
+
 
 		//Detox can heal small amounts of damage
 		if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("anti_toxin"))

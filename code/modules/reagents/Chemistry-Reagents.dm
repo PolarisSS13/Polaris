@@ -24,6 +24,7 @@
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose = 0
+//	var/overdosing = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/glass_icon_state = null
@@ -55,7 +56,9 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (volume > overdose) && (location != CHEM_TOUCH))
+	if(overdose && (volume >= overdose) && (location != CHEM_TOUCH))
+//		M.overdosing += volume * 0.2
+//	if(M.overdosing > 0)
 		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
@@ -86,8 +89,14 @@
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
-/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
-	M.adjustToxLoss(REM)
+/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien)
+//	M.overdosing -= REM
+	if (istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/C = M
+		var/obj/item/organ/internal/liver/L = C.internal_organs_by_name[O_LIVER]
+		L.damage += rand(2,5)
+	else
+		M.adjustToxLoss(REM)
 	return
 
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.

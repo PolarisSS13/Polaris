@@ -27,7 +27,7 @@ var/list/organ_cache = list()
 	var/min_bruised_damage = 10       // Damage before considered bruised
 	var/min_broken_damage = 30        // Damage before becoming broken
 	var/max_damage                    // Damage cap
-	var/rejecting                     // Is this organ already being rejected?
+	var/rejecting = 0                 // Is this organ already being rejected?
 
 /obj/item/organ/Destroy()
 
@@ -85,14 +85,17 @@ var/list/organ_cache = list()
 	processing_objects -= src
 	if(owner && vital)
 		owner.death()
+	else
+		rejecting ++
 
 /obj/item/organ/process()
 
 	if(loc != owner)
 		owner = null
 
-	//dead already, no need for more processing
+	//dead already, no need for more processing		//BUT WAIT THERE'S MORE! TOXINS! - Anewbe
 	if(status & ORGAN_DEAD)
+		handle_rejection()
 		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
 	if(istype(loc,/obj/item/device/mmi))
@@ -165,7 +168,9 @@ var/list/organ_cache = list()
 		if(!rejecting)
 			if(blood_incompatible(dna.b_type, owner.dna.b_type, species, owner.species))
 				rejecting = 1
-		else
+		if(rejecting <= 0)
+			rejecting = 0
+		else if(rejecting > 0)
 			rejecting++ //Rejection severity increases over time.
 			if(rejecting % 10 == 0) //Only fire every ten rejection ticks.
 				switch(rejecting)
