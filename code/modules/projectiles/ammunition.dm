@@ -114,6 +114,22 @@
 		C.loc = src
 		stored_ammo.Insert(1, C) //add to the head of the list
 		update_icon()
+	if(istype(W, /obj/item/ammo_magazine/clip))
+		var/obj/item/ammo_magazine/clip/L = W
+		if(L.caliber != caliber)
+			user << "<span class='warning'>The ammo in [L] does not fit into [src].</span>"
+			return
+		if(!L.stored_ammo)
+			user << "<span class='warning'>There's no more ammo [L]!</span>"
+			return
+		if(stored_ammo.len >= max_ammo)
+			user << "<span class='warning'>[src] is full!</span>"
+			return
+		var/obj/item/ammo_casing/AC = L.stored_ammo[1] //select the next casing.
+		L.stored_ammo -= AC //Remove this casing from loaded list of the clip.
+		AC.loc = src
+		stored_ammo.Insert(1, AC) //add it to the head of our magazine's list
+		update_icon()
 
 /obj/item/ammo_magazine/attack_self(mob/user)
 	if(!stored_ammo.len)

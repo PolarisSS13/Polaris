@@ -249,7 +249,7 @@
 /obj/item/ammo_magazine/a762/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/a762_clip
+/obj/item/ammo_magazine/clip/a762
 	name = "ammo clip (7.62mm)"
 	icon_state = "762"
 	caliber = "a762"
@@ -258,11 +258,11 @@
 	max_ammo = 5
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/a762_clip/ap
+/obj/item/ammo_magazine/clip/a762/ap
 	name = "rifle clip (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
 
-/obj/item/ammo_magazine/a762_clip/practice
+/obj/item/ammo_magazine/clip/a762/practice
 	name = "rifle clip (7.62mm practice)"
 	ammo_type = /obj/item/ammo_casing/a762p
 

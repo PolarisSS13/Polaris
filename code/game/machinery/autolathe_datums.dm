@@ -362,7 +362,7 @@
 
 /datum/autolathe/recipe/rifle_clip_practice
 	name = "ammunition (7.62mm practice)"
-	path = /obj/item/ammo_magazine/a762_clip/practice
+	path = /obj/item/ammo_magazine/clip/a762/practice
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/consolescreen
@@ -470,7 +470,7 @@
 
 /datum/autolathe/recipe/rifle_clip
 	name = "ammunition (7.62mm)"
-	path = /obj/item/ammo_magazine/a762_clip
+	path = /obj/item/ammo_magazine/clip/a762
 	hidden = 1
 	category = "Arms and Ammunition"
 

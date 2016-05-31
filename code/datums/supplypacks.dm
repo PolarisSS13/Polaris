@@ -1810,7 +1810,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(
 			/obj/item/device/assembly/timer,
 			/obj/item/weapon/gun/projectile/shotgun/pump/rifle/practice = 2,
-			/obj/item/ammo_magazine/a762_clip/practice = 4,
+			/obj/item/ammo_magazine/clip/a762/practice = 4,
 			/obj/item/target = 2,
 			/obj/item/target/alien = 2,
 			/obj/item/target/syndicate = 2
@@ -1825,7 +1825,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Surplus Soviet rifles"
 	contains = list(
 			/obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin = 3,
-			/obj/item/ammo_magazine/a762_clip = 6
+			/obj/item/ammo_magazine/clip/a762 = 6
 			)
 	cost = 50
 	hidden = 1
