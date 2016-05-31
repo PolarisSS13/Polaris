@@ -9,7 +9,7 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
 /obj/item/ammo_casing/a75
-	desc = "A 20mm bullet casing."
+	desc = "A .75 gyrojet rocket sheathe."
 	caliber = "75"
 	projectile_type = /obj/item/projectile/bullet/gyro
 
