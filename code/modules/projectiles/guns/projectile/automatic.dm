@@ -284,7 +284,7 @@
 		list(mode_name="short bursts", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/automatic/uzi/update_icon()
+/obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "mini-uzi"
