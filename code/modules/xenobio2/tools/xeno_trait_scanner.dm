@@ -50,7 +50,7 @@
 		var/mob/living/simple_animal/xeno/X = target
 		if(istype(X, /mob/living/simple_animal/xeno/slime))
 			var/mob/living/simple_animal/xeno/slime/S = X
-			if(is_child)
+			if(S.is_child)
 				growth_level = S.growthcounter
 				growth_max = S.growthpoint
 				
