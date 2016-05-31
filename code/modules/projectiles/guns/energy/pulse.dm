@@ -7,13 +7,14 @@
 	force = 10
 	fire_sound='sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam
+	charge_cost=100
+	max_shots = 20 // This is cut in half by "DESTROY" mode.
 	sel_mode = 2
-	max_shots = 10
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', fire_delay=null, charge_cost=null),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', fire_delay=null, charge_cost=null),
-		list(mode_name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/gauss_shoot.ogg', fire_delay=null, charge_cost=100),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', fire_delay=null, charge_cost=100),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', fire_delay=null, charge_cost=100),
+		list(mode_name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/gauss_shoot.ogg', fire_delay=null, charge_cost=200),
 		)
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted

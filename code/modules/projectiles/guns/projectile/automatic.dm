@@ -73,7 +73,10 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon(var/ignore_inhands)
 	..()
-	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
+	if(istype(ammo_magazine,/obj/item/ammo_magazine/SVD))
+		icon_state = "arifle-small"
+	else
+		icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 	if(!ignore_inhands) update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
@@ -250,6 +253,7 @@
 	w_class = 4
 	force = 10
 	caliber = "shotgun"
+	fire_sound = 'sound/weapons/shotgun.ogg'
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
@@ -325,7 +329,6 @@
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 	slot_flags = SLOT_BELT // ToDo: Belt sprite.
-	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/tommymag
 	allowed_magazines = list(/obj/item/ammo_magazine/tommymag, /obj/item/ammo_magazine/tommydrum)
@@ -364,7 +367,7 @@
 /obj/item/weapon/gun/projectile/automatic/fn3000/update_icon(var/ignore_inhands)
 	..()
 	if(istype(ammo_magazine,/obj/item/ammo_magazine/a556m))
-		icon_state = (ammo_magazine)? "bullpupm" : "bullpup-empty"
+		icon_state = "bullpupm"
 	else
 		icon_state = (ammo_magazine)? "bullpup" : "bullpup-empty"
 	item_state = (ammo_magazine)? "bullpup" : "bullpup-empty"
