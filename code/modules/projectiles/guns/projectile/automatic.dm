@@ -293,7 +293,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/p90
 	name = "\improper FN P90"
-	desc = "Despite its fierce reputation, it still manages to feel like a toy. Uses 9mm ammo." // Uses 5.7×28mm ammo."
+	desc = "Despite its fierce reputation, it still manages to feel like a toy. Uses 5mm ammo."
 	icon_state = "p90"
 	item_state = "p90"
 	w_class = 3
