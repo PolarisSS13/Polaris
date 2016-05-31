@@ -311,13 +311,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/p90/update_icon()
-	..()
-	if(ammo_magazine)
-		icon_state = "p90-[round(ammo_magazine.stored_ammo.len,4)]"
-	else
-		icon_state = "p90-empty"
-	return
-
+	icon_state = "p90[ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "\improper M1A1 \"Thompson\""
