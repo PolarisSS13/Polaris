@@ -171,6 +171,10 @@
 		name = "Ponytail 6"
 		icon_state = "hair_ponytail6"
 
+	fringetail
+		name = "Fringetail"
+		icon_state = "hair_fringetail"
+
 	sideponytail
 		name = "Side Ponytail"
 		icon_state = "hair_stail"
@@ -198,6 +202,10 @@
 	pompadour
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
+
+	sleeze
+		name = "Sleeze"
+		icon_state = "hair_sleeze"
 
 	quiff
 		name = "Quiff"
@@ -293,6 +301,14 @@
 	afro_large
 		name = "Big Afro"
 		icon_state = "hair_bigafro"
+
+	rows
+		name = "Rows"
+		icon_state = "hair_rows1"
+
+	rows2
+		name = "Rows 2"
+		icon_state = "hair_rows2"
 
 	sargeant
 		name = "Flat Top"
@@ -943,6 +959,10 @@
 		icon_state = "bee"
 		do_colouration = 0
 
+	ear_bee_c
+		name = "Bee Antenae (Colorable)"
+		icon_state = "bee_c"
+
 	ear_bunny
 		name = "Bunny Ears"
 		icon_state = "bunny"
@@ -955,6 +975,10 @@
 		name = "Deathclaw Ears"
 		icon_state = "deathclaw"
 		do_colouration = 0
+
+	ear_deathclaw_c
+		name = "Deathclaw Ears (Colorable)"
+		icon_state = "deathclaw_c"
 
 	ear_horn_oni
 		name = "Oni Horns"
@@ -993,35 +1017,37 @@
 		icon_state = "wolf"
 
 	ear_dog
-		name = "Dog Ears"
+		name = "Dog Ears"		// Citadel
 		icon_state = "lab"
 
 	ear_cow
-		name = "Cow Ears + Horns"
+		name = "Cow Ears + Horns"		// Citadel
 		icon_state = "cow"
-		do_colouration = 0		// Needs greyscale. -- Ursa
 
 	ear_lop
-		name = "Lop Bunny Ears"
+		name = "Lop Bunny Ears"		// Citadel
 		icon_state = "lop"
 
 	ear_angler
-		name = "Angler Lure"
+		name = "Angler Lure"		// /tg/
 		icon_state = "angler"
 
 	ear_deer1
-		name = "Deer Ears"
+		name = "Deer Ears"		// Citadel
 		icon_state = "deer1"
 
 	ear_deer2
-		name = "Deer Ears + Antlers"
+		name = "Deer Ears + Antlers"		// Citadel
 		icon_state = "deer2"
 
 	ear_antlers
-		name = "Antlers"
+		name = "Antlers (Brown)"		// Citadel
 		icon_state = "antlers"
-		do_colouration = 0		// Needs greyscale? -- Ursa
+		do_colouration = 0
 
+	ear_antlers_c
+		name = "Antlers (Colorable)"		// Citadel
+		icon_state = "antlers_c"
 
 /*
 ///////////////////////////////
@@ -1049,6 +1075,11 @@
 		name = "Bee Wings"
 		icon_state = "bee"
 
+	wng_bee
+		name = "Bee Wings (Uncolored)"
+		icon_state = "bee"
+		do_colouration = 0
+
 	wng_bat
 		name = "Bat Wings"
 		icon_state = "bat"
@@ -1062,16 +1093,20 @@
 		icon_state = "succubus"
 
 	wng_smallfairy
-		name = "Small Fairy Wings"
+		name = "Small Fairy Wings"		// /vg/
 		icon_state = "smallfairy"
 
 	wng_turtle
-		name = "Turtle Shell"
+		name = "Turtle Shell"		// Citadel
 		icon_state = "turtle"
 
 	wng_tentacles
-		name = "Back Tentacles"
-		icon_state = "tentacles"
+		name = "Back Tentacles"		// Citadel
+		icon_state = "tentacle"
+
+	wng_deathclawspines
+		name = "Deathclaw Spines"
+		icon_state = "deathclawspines"
 
 
 /*
@@ -1117,10 +1152,18 @@
 		icon_state = "mouse"
 		do_colouration = 0
 
+	tal_mouse_c
+		name = "Mouse Tail (Colorable)"
+		icon_state = "mouse_c"
+
 	tal_deathclaw
 		name = "Deathclaw Tail"
 		icon_state = "deathclaw"
 		do_colouration = 0
+
+	tal_deathclaw_c
+		name = "Deathclaw Tail (Colorable)"
+		icon_state = "deathclaw_c"
 
 	tal_kitsune
 		name = "Kitsune Tails"
@@ -1151,6 +1194,10 @@
 		icon_state = "xeno"
 		do_colouration = 0
 
+	tal_xeno_c
+		name = "Xenomorph Tail (Colorable)"
+		icon_state = "xeno_c"
+
 	tal_dog
 		name = "Dog Tail"
 		icon_state = "corgi"
@@ -1176,14 +1223,13 @@
 		icon_state = "bee"
 
 	tal_feathers
-		name = "Feathers"
+		name = "Feathers"		// Citadel
 		icon_state = "feathers"
 
 	tal_cow
-		name = "Cow Tail"
+		name = "Cow Tail"		// Citadel
 		icon_state = "cow"
-		do_colouration = 0		// Needs greyscale -- Ursa
 
 	tal_deer
-		name = "Deer Tail"
+		name = "Deer Tail"		// Citadel
 		icon_state = "deer"

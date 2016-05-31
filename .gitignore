@@ -11,6 +11,3 @@ cfg/
 
 #ignore other compiler files
 .atom-build.json
-
-ErosResearchPlatform.dme
-
