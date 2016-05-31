@@ -17,7 +17,7 @@
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0))
 //		list(mode_name="short bursts",   burst=5, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2,-2), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		)
 
@@ -67,7 +67,7 @@
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-2),       dispersion=list(0.0, 0.6, 0.6)),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-2), dispersion=list(0.0, 0.6, 0.6))
 //		list(mode_name="short bursts", 	burst=5, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-2,-2,-3), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		)
 
@@ -173,7 +173,7 @@
 	name = "light machine gun"
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
 	icon_state = "l6closed100"
-	item_state = "l6closedmag"
+	item_state = "l6closed"
 	w_class = 4
 	force = 10
 	slot_flags = 0
@@ -191,8 +191,8 @@
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2))
 		)
 
 	var/cover_open = 0
@@ -207,6 +207,7 @@
 	cover_open = !cover_open
 	user << "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>"
 	update_icon()
+	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
 	if(cover_open)
@@ -223,8 +224,10 @@
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
 	if(istype(ammo_magazine,/obj/item/ammo_magazine/c762))
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
+		item_state = icon_state
 	else
 		icon_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
+		item_state = "l6[cover_open ? "open" : "closed"][ammo_magazine ? "" : "-empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/load_ammo(var/obj/item/A, mob/user)
 	if(!cover_open)
@@ -256,7 +259,7 @@
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
-		list(mode_name="3-round bursts", burst=3, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 0.6)),
+		list(mode_name="3-round bursts", burst=3, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 0.6))
 //		list(mode_name="6-round bursts", burst=6, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2, 1.2)),
 		)
 
@@ -270,7 +273,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
-	desc = "A lightweight, fast firing gun, for when you want someone dead. Uses .45 caliber ammo."
+	desc = "A lightweight, compact, fast firing gun, for when you want someone really dead. Uses .45 rounds."
 	icon_state = "mini-uzi"
 	w_class = 3
 	load_method = MAGAZINE
@@ -281,7 +284,7 @@
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
-		list(mode_name="short bursts", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2)),
+		list(mode_name="short bursts", burst=4, burst_delay=1, fire_delay=3, move_delay=3, burst_accuracy = list(0,-1,-1,-2), dispersion = list(0.6, 1.0, 1.0, 1.2))
 		)
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi/update_icon()
@@ -293,8 +296,8 @@
 
 /obj/item/weapon/gun/projectile/automatic/p90
 	name = "\improper FN P90"
-	desc = "Despite its fierce reputation, it still manages to feel like a toy. Uses 5mm ammo."
-	icon_state = "p90"
+	desc = "Despite its fierce reputation, it still manages to feel like a toy. Uses 5mm rounds."
+	icon_state = "p90smg"
 	item_state = "p90"
 	w_class = 3
 	caliber = "5mm"
@@ -311,7 +314,7 @@
 		)
 
 /obj/item/weapon/gun/projectile/automatic/p90/update_icon()
-	icon_state = "p90[ammo_magazine ? round(ammo_magazine.stored_ammo.len, 25) : "-empty"]"
+	icon_state = "p90smg-[ammo_magazine ? round(ammo_magazine.stored_ammo.len, 6) : "empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "\improper M1A1 \"Thompson\""
@@ -334,4 +337,34 @@
 /obj/item/weapon/gun/projectile/automatic/tommygun/update_icon()
 	..()
 	icon_state = (ammo_magazine)? "tommygun" : "tommygun-empty"
-	update_held_icon()
+//	update_held_icon()
+
+/obj/item/weapon/gun/projectile/automatic/fn3000
+	name = "bullpup assault rifle"
+	desc = "The tacticool bullpup configured FN3000 is a light, compact, military-grade assault rifle that is most <i>definitely</i> illegal for civilians to own. What fun! Uses 5.56mm rounds."
+	icon_state = "bullpupm"
+	item_state = "bullpup"
+	w_class = 4
+	force = 10
+	caliber = "a556"
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/a556m
+	allowed_magazines = list(/obj/item/ammo_magazine/a556, /obj/item/ammo_magazine/a556m)
+
+	one_handed_penalty = 4
+
+	firemodes = list(
+		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-2), dispersion=list(0.0, 0.6, 0.6))
+		)
+
+/obj/item/weapon/gun/projectile/automatic/fn3000/update_icon(var/ignore_inhands)
+	..()
+	if(istype(ammo_magazine,/obj/item/ammo_magazine/a556m))
+		icon_state = (ammo_magazine)? "bullpupm" : "bullpup-empty"
+	else
+		icon_state = (ammo_magazine)? "bullpup" : "bullpup-empty"
+	item_state = (ammo_magazine)? "bullpup" : "bullpup-empty"
+	if(!ignore_inhands) update_held_icon()

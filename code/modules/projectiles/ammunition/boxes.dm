@@ -85,7 +85,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "9mm"
 	ammo_type = /obj/item/ammo_casing/c9mm
-	max_ammo = 10
+	max_ammo = 8
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/mc9mm/empty
@@ -204,6 +204,25 @@
 /obj/item/ammo_magazine/a556/ap
 	name = "magazine (5.56mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a556/ap
+
+/obj/item/ammo_magazine/a556m
+	name = "20rnd magazine (5.56mm)"
+	icon_state = "5.56mid"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	caliber = "a556"
+	matter = list(DEFAULT_WALL_MATERIAL = 1800)
+	ammo_type = /obj/item/ammo_casing/a556
+	max_ammo = 20
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a556m/ap
+	name = "20rnd magazine (5.56mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a556/ap
+
+/obj/item/ammo_magazine/a556m/practice
+	name = "20rnd magazine (5.56mm practice)"
+	ammo_type = /obj/item/ammo_casing/a556p
 
 /obj/item/ammo_magazine/a50
 	name = "magazine (.50)"

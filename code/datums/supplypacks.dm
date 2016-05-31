@@ -861,6 +861,15 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_armory
 	group = "Security"
 
+/datum/supply_packs/randomised/automatic/hidden
+	name = "Assault weapon crate"
+	contains = list(
+			/obj/item/weapon/gun/projectile/automatic/fn3000,
+			/obj/item/weapon/gun/projectile/automatic/fn3000
+			)
+	cost = 100
+	hidden = 1
+
 /datum/supply_packs/randomised/autoammo
 	name = "Automatic weapon ammunition crate"
 	num_contained = 6
@@ -874,6 +883,18 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Automatic weapon ammunition crate"
 	access = access_armory
 	group = "Security"
+
+/datum/supply_packs/randomised/autoammo/hidden
+	name = "Assault weapon ammunition crate"
+	num_contained = 4
+	contains = list(
+			/obj/item/ammo_magazine/a556,
+			/obj/item/ammo_magazine/a556,
+			/obj/item/ammo_magazine/a556m,
+			/obj/item/ammo_magazine/a556m
+			)
+	hidden = 1
+	cost = 30
 
 /datum/supply_packs/energy_guns
 	name = "energy guns crate"

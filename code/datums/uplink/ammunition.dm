@@ -35,28 +35,38 @@
 	path = /obj/item/weapon/storage/box/sniperammo
 
 /datum/uplink_item/item/ammo/a556
-	name = "Rifle Magazine (5.56mm)"
+	name = "10rnd Rifle Magazine (5.56mm)"
 	path = /obj/item/ammo_magazine/a556
 
 /datum/uplink_item/item/ammo/a556/ap
-	name = "Rifle Magazine (5.56mm AP)"
+	name = "10rnd Rifle Magazine (5.56mm AP)"
 	path = /obj/item/ammo_magazine/a556/ap
 
+/datum/uplink_item/item/ammo/a556m
+	name = "20rnd Rifle Magazine (5.56mm)"
+	path = /obj/item/ammo_magazine/a556m
+	item_cost = 4
+
+/datum/uplink_item/item/ammo/a556m/ap
+	name = "20rnd Rifle Magazine (5.56mm AP)"
+	path = /obj/item/ammo_magazine/a556m/ap
+	item_cost = 4
+
 /datum/uplink_item/item/ammo/c762
-	name = "Rifle Magazine (7.62mm)"
+	name = "20rnd Rifle Magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/c762
 
 /datum/uplink_item/item/ammo/c762/ap
-	name = "Rifle Magazine (7.62mm AP)"
+	name = "20rnd Rifle Magazine (7.62mm AP)"
 	path = /obj/item/ammo_magazine/c762/ap
 
 /datum/uplink_item/item/ammo/SVD
-	name = "Small Rifle Magazine (7.62mm)"
+	name = "10rnd Rifle Magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/SVD
 	item_cost = 1 // Half the capacity.
 
 /datum/uplink_item/item/ammo/SVD/ap
-	name = "Small Magazine (7.62mm AP)"
+	name = "10rnd Rifle Magazine (7.62mm AP)"
 	path = /obj/item/ammo_magazine/SVD/ap
 
 /datum/uplink_item/item/ammo/a10mm

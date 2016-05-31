@@ -160,7 +160,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
 /obj/item/ammo_casing/a145
-	name = "shell casing"
 	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
 	caliber = "14.5mm"

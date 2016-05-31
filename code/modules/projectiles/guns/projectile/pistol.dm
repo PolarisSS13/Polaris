@@ -113,7 +113,7 @@
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
-	desc = "A robust handgun that uses .50 AE ammo."
+	desc = "A robust handgun that uses .50 AE rounds."
 	icon_state = "deagle"
 	item_state = "deagle"
 	force = 14.0
@@ -124,18 +124,18 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/a50)
 
 /obj/item/weapon/gun/projectile/deagle/gold
-	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
+	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE rounds."
 	icon_state = "deagleg"
 	item_state = "deagleg"
 
 /obj/item/weapon/gun/projectile/deagle/camo
-	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
+	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE rounds."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
 
 /obj/item/weapon/gun/projectile/fiveseven
 	name = "\improper FiveSeven"
-	desc = "This tacticool pistol makes you feel like you're playing Counter Strike in Space. Uses 5mm ammo."
+	desc = "This tacticool pistol makes you feel like you're playing Counter Strike in Space. Uses 5mm rounds."
 	icon_state = "fnseven"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "5mm"
@@ -281,7 +281,7 @@
 
 /obj/item/weapon/gun/projectile/luger
 	name = "\improper P08 Luger"
-	desc = "Not some cheap Scheisse .45 caliber Martian knockoff! This Luger is an authentic reproduction by RauMauser. Accuracy, easy handling, and its signature appearance make it popular among collectors... and space Nazis. Uses 9mm ammo."
+	desc = "Not some cheap Scheisse .45 caliber Martian knockoff! This Luger is an authentic reproduction by RauMauser. Accuracy, easy handling, and its signature appearance make it popular among collectors... and space Nazis. Uses 9mm rounds."
 	icon_state = "p08"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "9mm"

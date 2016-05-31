@@ -4,14 +4,14 @@
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon_state = "heavysniper"
-	item_state = "l6closednomag" //placeholder
+	item_state = "sniper" // still a placeholder
 	w_class = 5 // So it can't fit in a backpack.
 	force = 10
 	slot_flags = SLOT_BACK
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	caliber = "14.5mm"
-	recoil = 2 //extra kickback
-	fire_sound = 'sound/weapons/cannon.ogg' // extra boom
+	recoil = 3 //extra kickback
+	fire_sound = 'sound/weapons/sniper.ogg' // extra boom
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
@@ -71,7 +71,7 @@
 
 /obj/item/weapon/gun/projectile/SVD
 	name = "\improper Dragunov"
-	desc = "The SVD, also known as the Dragunov, was mass produced with an Optical Sniper Sight so simple that even Ivan can figure out how it works. Too bad for you that it's written in Russian. Uses 7.62mm ammo."
+	desc = "The SVD, also known as the Dragunov, was mass produced with an Optical Sniper Sight so simple that even Ivan can figure out how it works. Too bad for you that it's written in Russian. Uses 7.62mm rounds."
 	icon_state = "SVD"
 	item_state = "SVD"
 	w_class = 5 // So it can't fit in a backpack.

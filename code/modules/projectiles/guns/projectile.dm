@@ -185,6 +185,7 @@
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
 		unload_ammo(user, allow_dump=0)
+		update_held_icon()
 	else
 		return ..()
 

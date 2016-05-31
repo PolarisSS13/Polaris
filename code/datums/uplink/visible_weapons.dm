@@ -65,6 +65,11 @@
 	item_cost = 7
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
+/datum/uplink_item/item/visible_weapons/bullpuprifle
+	name = "Assault Rifle (5.56mm)"
+	item_cost = 7
+	path = /obj/item/weapon/gun/projectile/automatic/fn3000
+
 /datum/uplink_item/item/visible_weapons/combatshotgun
 	name = "Combat Shotgun"
 	item_cost = 7
