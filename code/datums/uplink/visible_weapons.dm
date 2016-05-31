@@ -40,12 +40,12 @@
 	path = /obj/item/weapon/gun/projectile/derringer
 
 /datum/uplink_item/item/visible_weapons/SVD
-	name = "Dragunov Sniper"
+	name = "Dragunov Sniper (7.62mm"
 	item_cost = 7
 	path = /obj/item/weapon/gun/projectile/SVD
 
 /datum/uplink_item/item/visible_weapons/heavysniper
-	name = "Anti-materiel Rifle"
+	name = "Anti-Materiel Rifle (14.7mm)"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/projectile/heavysniper
 
