@@ -34,7 +34,7 @@
 		if(loaded.len)
 			afterattack(user, user)	//will this work? //it will. we call it twice, for twice the FUN
 			playsound(user, fire_sound, 50, 1)
-			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
+			user.visible_message("<span class='danger'>[src] goes off!</span>", "<span class='danger'>The rifle goes off in your face!</span>")
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "obrez"
@@ -44,7 +44,7 @@
 			item_state = "gun"
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.
-			name = "Obrez"
+			name = "\improper Obrez"
 			desc = "cheeki breeki"
 			user << "<span class='warning'>You shorten the barrel and stock of \the [src]!</span>"
 	else

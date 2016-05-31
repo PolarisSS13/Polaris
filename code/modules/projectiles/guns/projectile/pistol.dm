@@ -287,8 +287,8 @@
 	caliber = "9mm"
 	load_method = MAGAZINE
 	fire_sound = 'sound/weapons/semiauto.ogg'
-	magazine_type = /obj/item/ammo_magazine/c9mm
-	allowed_magazines = list(/obj/item/ammo_magazine/c9mm)
+	magazine_type = /obj/item/ammo_magazine/mc9mm
+	allowed_magazines = list(/obj/item/ammo_magazine/mc9mm)
 
 /obj/item/weapon/gun/projectile/luger/update_icon()
 	..()

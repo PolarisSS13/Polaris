@@ -286,9 +286,10 @@
 
 /obj/item/weapon/gun/projectile/automatic/uzi/update_icon()
 	..()
-	icon_state = (ammo_magazine)? "mini-uzi" : "mini-uzi-empty"
-	update_held_icon()
-
+	if(ammo_magazine)
+		icon_state = "mini-uzi"
+	else
+		icon_state = "mini-uzi-empty"
 
 /obj/item/weapon/gun/projectile/automatic/p90
 	name = "\improper FN P90"
@@ -336,7 +337,7 @@
 		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/projectile/tommygun/p90/update_icon()
+/obj/item/weapon/gun/projectile/automatic/tommygun/update_icon()
 	..()
 	icon_state = (ammo_magazine)? "tommygun" : "tommygun-empty"
 	update_held_icon()

@@ -199,6 +199,6 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/cap
 
 /obj/item/ammo_casing/spent // For mobs only.
-	desc = "A spent bullet casing."
+	icon_state = "s-casing-spent"
 	BB = null
 	projectile_type = null
