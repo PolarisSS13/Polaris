@@ -152,8 +152,12 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	if (icon_update)
 		icon = stand_icon
-		for(var/image/I in overlays_standing)
-			overlays += I
+		for(var/entry in overlays_standing)
+			if(istype(entry, /image))
+				overlays += entry
+			else if(istype(entry, /list))
+				for(var/inner_entry in entry)
+					overlays += inner_entry
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		var/matrix/M = matrix()
@@ -215,7 +219,7 @@ var/global/list/damage_icon_parts = list()
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/proc/update_body(var/update_icons=1)
-	overlays_standing[ORGAN_OVERLAY_LAYER] = null
+
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 
@@ -223,6 +227,8 @@ var/global/list/damage_icon_parts = list()
 	var/fat = (FAT in src.mutations)
 	var/hulk = (HULK in src.mutations)
 	var/skeleton = (SKELETON in src.mutations)
+
+	robolimb_count = 0
 
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
@@ -251,8 +257,9 @@ var/global/list/damage_icon_parts = list()
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
-		else if(part.status & ORGAN_ROBOT)
+		else if(part.robotic >= ORGAN_ROBOT)
 			icon_key += "2[part.model ? "-[part.model]": ""]"
+			robolimb_count++
 		else if(part.status & ORGAN_DEAD)
 			icon_key += "3"
 		else
@@ -296,8 +303,7 @@ var/global/list/damage_icon_parts = list()
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
 				base_icon.Blend(temp2, ICON_UNDERLAY)
 			else
-				if(!part.no_blend)
-					base_icon.Blend(temp, ICON_OVERLAY)
+				base_icon.Blend(temp, ICON_OVERLAY)
 
 		if(!skeleton)
 			if(husk)
@@ -319,26 +325,23 @@ var/global/list/damage_icon_parts = list()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
-	//Underwear
-	if(underwear_top && species.appearance_flags & HAS_UNDERWEAR)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', underwear_top), ICON_OVERLAY)
-	if(underwear_bottom && species.appearance_flags & HAS_UNDERWEAR)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', underwear_bottom), ICON_OVERLAY)
-
-	if(undershirt && species.appearance_flags & HAS_UNDERWEAR)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', undershirt), ICON_OVERLAY)
-
-	if(socks && species.appearance_flags & HAS_UNDERWEAR)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', socks), ICON_OVERLAY)
-
-	for(var/obj/item/organ/external/E in organs)
-		if(E.no_blend)
-			var/image/S = image("icon" = E.get_icon(skeleton), "icon_state" = E.mob_icon_state, "pixel_x" = E.offset_x, "pixel_y" = E.offset_y)
-			overlays_standing[ORGAN_OVERLAY_LAYER] = S
-
 	if(update_icons)
 		update_icons()
 
+	//tail
+	update_tail_showing(0)
+
+//UNDERWEAR OVERLAY
+/mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
+	overlays_standing[UNDERWEAR_LAYER] = null
+
+	if(species.appearance_flags & HAS_UNDERWEAR)
+		overlays_standing[UNDERWEAR_LAYER] = list()
+		for(var/category in all_underwear)
+			var/datum/category_item/underwear/UWI = all_underwear[category]
+			overlays_standing[UNDERWEAR_LAYER] += UWI.generate_image(all_underwear_metadata[category])
+
+	if(update_icons)   update_icons()
 
 //HAIR OVERLAY
 /mob/living/carbon/human/proc/update_hair(var/update_icons=1)
@@ -434,6 +437,7 @@ var/global/list/damage_icon_parts = list()
 
 	update_mutations(0)
 	update_body(0)
+	update_underwear(0)
 	update_hair(0)
 	update_inv_w_uniform(0)
 	update_inv_wear_id(0)
@@ -589,6 +593,7 @@ var/global/list/damage_icon_parts = list()
 		return
 
 	if(l_ear || r_ear)
+		// Blank image upon which to layer left & right overlays.
 		var/image/both = image("icon" = 'icons/effects/effects.dmi', "icon_state" = "nothing")
 
 		if(l_ear)
@@ -781,10 +786,18 @@ var/global/list/damage_icon_parts = list()
 				bloodsies.color = wear_suit.blood_color
 				standing.overlays	+= bloodsies
 
+		// Accessories - copied from uniform, BOILERPLATE because fuck this system.
+		var/obj/item/clothing/suit/suit = wear_suit
+		if(istype(suit) && suit.accessories.len)
+			for(var/obj/item/clothing/accessory/A in suit.accessories)
+				standing.overlays |= A.get_mob_overlay()
+
 		overlays_standing[SUIT_LAYER]	= standing
+		update_tail_showing(0)
 
 	else
 		overlays_standing[SUIT_LAYER]	= null
+		update_tail_showing(0)
 
 	update_inv_shoes(0)
 	update_tail_showing(0)
@@ -792,6 +805,7 @@ var/global/list/damage_icon_parts = list()
 	update_wings(0)
 	update_ears(0)
 	update_collar(0)
+
 	//hide/show shoes if necessary
 	update_inv_shoes(0)
 
@@ -1098,7 +1112,6 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[WINGS_LAYER] = image(wings_standing)
 	if(update_icons)
 		update_icons()
-
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
