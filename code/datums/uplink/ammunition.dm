@@ -31,7 +31,7 @@
 	path = /obj/item/ammo_magazine/chemdart
 
 /datum/uplink_item/item/ammo/sniperammo
-	name = "Anti-Materiel Rifle ammo box (14.7mm)"
+	name = "Anti-Materiel Rifle ammo box (14.5mm)"
 	path = /obj/item/weapon/storage/box/sniperammo
 
 /datum/uplink_item/item/ammo/a556
