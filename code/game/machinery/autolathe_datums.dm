@@ -380,7 +380,7 @@
 	hidden = 1
 
 /datum/autolathe/recipe/smg_5mm
-	name = "top-mounted magazine (5mm)"
+	name = "top-mounted SMG magazine (5mm)"
 	path = /obj/item/ammo_magazine/c5mmt
 	category = "Arms and Ammunition"
 	hidden = 1
@@ -414,12 +414,12 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/smg_9mm
-	name = "top-mounted magazine (9mm)"
+	name = "top-mounted SMG magazine (9mm)"
 	path = /obj/item/ammo_magazine/mc9mmt/empty
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/smg_10mm
-	name = "SMG magazine (9mm)"
+	name = "SMG magazine (10mm)"
 	path = /obj/item/ammo_magazine/a10mm/empty
 	category = "Arms and Ammunition"
 	hidden = 1
@@ -449,7 +449,7 @@
 
 /datum/autolathe/recipe/rifle_762
 	name = "20rnd rifle magazine (7.62mm)"
-	path = /obj/item/ammo_magazine/a762/empty
+	path = /obj/item/ammo_magazine/c762/empty
 	category = "Arms and Ammunition"
 	hidden = 1
 
