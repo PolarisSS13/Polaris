@@ -119,6 +119,7 @@
 		if(L.caliber != caliber)
 			user << "<span class='warning'>The ammo in [L] does not fit into [src].</span>"
 			return
+		if(!L.stored_ammo.len)
 			user << "<span class='warning'>There's no more ammo [L]!</span>"
 			return
 		if(stored_ammo.len >= max_ammo)
