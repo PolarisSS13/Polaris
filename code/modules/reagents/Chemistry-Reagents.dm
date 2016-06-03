@@ -24,7 +24,7 @@
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose = 0
-//	var/overdosing = 0
+	var/od_type = null
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/glass_icon_state = null
@@ -91,13 +91,27 @@
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien)
 //	M.overdosing -= REM
-	if (istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/C = M
-		var/obj/item/organ/internal/liver/L = C.internal_organs_by_name[O_LIVER]
-		L.damage += rand(2,5)
+	if(od_type == "heart")
+		if (istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/C = M
+			var/obj/item/organ/internal/heart/H = C.internal_organs_by_name[O_HEART]
+			playsound(M.loc, 'sound/effects/singlebeat.ogg', 5, -1)	//Don't know how to keep this mob specific
+			C.pulse += 2
+			if (prob (5))
+				H.damage += 1
+				M << "<span class='danger'>You feel a stabbing pain in your chest!</span>"
+		else
+			M.adjustToxLoss(2)
+		return
 	else
-		M.adjustToxLoss(REM)
-	return
+		if (istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/C = M
+			var/obj/item/organ/internal/liver/L = C.internal_organs_by_name[O_LIVER]
+			L.damage += rand(3,6)
+		else
+			M.adjustToxLoss(2)
+		return
+	M.adjustToxLoss(2)
 
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(!isnull(newdata))

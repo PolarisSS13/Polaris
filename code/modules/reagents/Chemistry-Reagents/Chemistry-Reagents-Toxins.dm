@@ -323,8 +323,8 @@
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(effective_dose >= overdose)
-		M.adjustToxLoss(removed * 2)
+	if(effective_dose > 10)
+		M.adjustToxLoss(removed * 15)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
 	name = "Beer"

@@ -311,6 +311,7 @@
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 	reagent_state = LIQUID
 	color = "#FF3300"
+	od_type = "heart"
 	metabolism = REM * 0.15
 	overdose = REAGENTS_OVERDOSE * 0.5
 
