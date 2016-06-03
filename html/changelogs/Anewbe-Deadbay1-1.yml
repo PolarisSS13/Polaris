@@ -1,0 +1,12 @@
+author: Anewbe
+
+
+delete-after: True
+
+changes: 
+  - rscadd: "Makes Overdoses cause organ damage."
+  - rscadd: "Makes liver damage cause tox damamge."
+  - rscadd: "Makes tox damage cause liver damage at a lower threshold."
+  - rscadd: "Dead organs are now rejected in a manner similar to transplants."
+  - rscadd: "Peridaxon now slowly lessens organ rejection."
+  - rscdel: "Removes a sense of joy and wellbeing from medical players."
