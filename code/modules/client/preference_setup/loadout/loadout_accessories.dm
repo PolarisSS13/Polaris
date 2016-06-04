@@ -57,18 +57,17 @@
 	display_name = "tie, blue with clip"
 	path = /obj/item/clothing/accessory/blue_clip
 
-/*/datum/gear/accessory/tie/blue_long
+/datum/gear/accessory/tie/blue_long
 	display_name = "tie, blue long"
-	path = /obj/item/clothing/accessory/blue_long //dmi was uploaded broken, leaving this out.
-*/
+	path = /obj/item/clothing/accessory/blue_long
+
 /datum/gear/accessory/tie/red
 	display_name = "tie, red"
 	path = /obj/item/clothing/accessory/red
 
-/*/datum/gear/accessory/tie/red_clip
+/datum/gear/accessory/tie/red_clip
 	display_name = "tie, red with clip"
-	path = /obj/item/clothing/accessory/red_clip //dmi was uploaded broken, leaving this out.
-*/
+	path = /obj/item/clothing/accessory/red_clip .
 
 /datum/gear/accessory/tie/red_long
 	display_name = "tie, red long"
