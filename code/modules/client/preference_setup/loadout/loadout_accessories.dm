@@ -67,7 +67,7 @@
 
 /datum/gear/accessory/tie/red_clip
 	display_name = "tie, red with clip"
-	path = /obj/item/clothing/accessory/red_clip .
+	path = /obj/item/clothing/accessory/red_clip
 
 /datum/gear/accessory/tie/red_long
 	display_name = "tie, red long"
