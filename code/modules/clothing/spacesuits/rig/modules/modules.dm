@@ -198,6 +198,8 @@
 
 	active = 0
 
+	next_use = world.time + module_cooldown
+
 	spawn(1)
 		if(suit_overlay_inactive)
 			suit_overlay = suit_overlay_inactive

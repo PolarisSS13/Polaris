@@ -74,14 +74,14 @@
 	damage_type = CLONE
 	irradiate = 40
 
-
+// Ninja dart
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
 	damage = 5
 	damage_type = TOX
-	weaken = 5
-
+	agony = 120
+	check_armour = "energy"
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
