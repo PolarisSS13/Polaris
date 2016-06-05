@@ -270,7 +270,7 @@
 	caliber = "a556"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
 	ammo_type = /obj/item/ammo_casing/a556
-	max_ammo = 10
+	max_ammo = 30
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a556/empty
@@ -286,7 +286,7 @@
 
 /obj/item/ammo_magazine/a556m
 	name = "20rnd magazine (5.56mm)"
-	icon_state = "5.56mid"
+	icon_state = "5.56"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = "a556"
@@ -377,7 +377,7 @@
 	caliber = "a762"
 	matter = list(DEFAULT_WALL_MATERIAL = 4000)
 	ammo_type = /obj/item/ammo_casing/a762
-	max_ammo = 20
+	max_ammo = 10
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/c762/ap

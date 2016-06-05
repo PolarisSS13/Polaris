@@ -51,17 +51,17 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "assault rifle"
-	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. This one is unmarked."
+	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Uses 5.56mm rounds. This one is unmarked."
 	icon_state = "arifle"
 	item_state = null
 	w_class = 4
 	force = 10
-	caliber = "a762"
+	caliber = "a556"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/c762
-	allowed_magazines = list(/obj/item/ammo_magazine/c762, /obj/item/ammo_magazine/SVD)
+	magazine_type = /obj/item/ammo_magazine/a556m
+	allowed_magazines = list(/obj/item/ammo_magazine/a556, /obj/item/ammo_magazine/a556m) //, /obj/item/ammo_magazine/SVD)	//wrong caliber
 
 	one_handed_penalty = 4
 
@@ -73,10 +73,11 @@
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon(var/ignore_inhands)
 	..()
-	if(istype(ammo_magazine,/obj/item/ammo_magazine/SVD))
-		icon_state = "arifle-small"
-	else
-		icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
+	icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
+//	if(istype(ammo_magazine,/obj/item/ammo_magazine/SVD))
+//		icon_state = "arifle-small"
+//	else
+//		icon_state = (ammo_magazine)? "arifle" : "arifle-empty"
 	if(!ignore_inhands) update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/wt550
@@ -104,19 +105,19 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "designated marksman rifle"
-	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 5.56mm rounds and has an under barrel grenade launcher."
+	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 7.62mm rounds and has an under barrel grenade launcher."
 	icon_state = "carbine" // This isn't a carbine. :T
 	item_state = "z8carbine"
 	w_class = 4
 	force = 10
-	caliber = "a556"
+	caliber = "a762"
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
-	ammo_type = "/obj/item/ammo_casing/a556" // Is this really needed anymore?
+	ammo_type = "/obj/item/ammo_casing/a762" // Is this really needed anymore?
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a556
-	allowed_magazines = list(/obj/item/ammo_magazine/a556)
+	magazine_type = /obj/item/ammo_magazine/c762
+	allowed_magazines = list(/obj/item/ammo_magazine/c762)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -305,7 +306,7 @@
 	icon_state = "p90smg"
 	item_state = "p90"
 	w_class = 3
-	caliber = "5mm"
+	caliber = "9mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT // ToDo: Belt sprite.
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
@@ -354,7 +355,7 @@
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a556m
+	magazine_type = /obj/item/ammo_magazine/a556
 	allowed_magazines = list(/obj/item/ammo_magazine/a556, /obj/item/ammo_magazine/a556m)
 
 	one_handed_penalty = 4
