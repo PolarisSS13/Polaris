@@ -355,7 +355,7 @@
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a556
+	magazine_type = /obj/item/ammo_magazine/a556m
 	allowed_magazines = list(/obj/item/ammo_magazine/a556, /obj/item/ammo_magazine/a556m)
 
 	one_handed_penalty = 4
