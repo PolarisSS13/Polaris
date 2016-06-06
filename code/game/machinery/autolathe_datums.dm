@@ -490,37 +490,37 @@
 
 /////// 5.56mm
 /datum/autolathe/recipe/rifle_556
-	name = "10rnd rifle magazine (5.56mm)"
-	path = /obj/item/ammo_magazine/a556/empty
+	name = "30rnd rifle magazine (5.56mm)"
+	path = /obj/item/ammo_magazine/a556
 	category = "Arms and Ammunition"
 	hidden = 1
 
 /datum/autolathe/recipe/rifle_556p
-	name = "10rnd rifle magazine (5.56mm practice)"
+	name = "30rnd rifle magazine (5.56mm practice)"
 	path = /obj/item/ammo_magazine/a556/practice
 	category = "Arms and Ammunition"
+	hidden = 1
 
 /datum/autolathe/recipe/rifle_556m
-	name = "20rnd rifle magazine (5.56mm)"
+	name = "rifle magazine (5.56mm)"
 	path = /obj/item/ammo_magazine/a556m
 	category = "Arms and Ammunition"
 	hidden = 1
 
 /datum/autolathe/recipe/rifle_556mp
-	name = "20rnd rifle magazine (5.56mm practice)"
+	name = "rifle magazine (5.56mm practice)"
 	path = /obj/item/ammo_magazine/a556m/practice
 	category = "Arms and Ammunition"
-	hidden = 1
 
 /////// 7.62
-/datum/autolathe/recipe/rifle_SVD
+/*/datum/autolathe/recipe/rifle_SVD
 	name = "10rnd rifle magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/SVD
 	category = "Arms and Ammunition"
-	hidden = 1
+	hidden = 1	*/
 
 /datum/autolathe/recipe/rifle_762
-	name = "20rnd rifle magazine (7.62mm)"
+	name = "rifle magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/c762
 	category = "Arms and Ammunition"
 	hidden = 1
