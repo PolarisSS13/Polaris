@@ -77,8 +77,9 @@
 		S.nameVar = core.nameVar
 		S.name = "[S.nameVar] baby slime"
 		S.ProcessTraits()
-		qdel(core)
 		spawn(30)
+			qdel(core)
+			core = null	//If qdel's being a bit slow or acting up, let's just make sure we can't clone the core.
 			inuse = 0
 			eject_slime()
 			icon_state = "restruct_0"
