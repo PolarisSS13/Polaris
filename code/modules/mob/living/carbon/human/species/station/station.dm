@@ -192,8 +192,6 @@
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
 	num_alternate_languages = 1
-	universal_understand = 1
-	universal_speak = 0
 	name_language = "Rootspeak"
 
 	min_age = 1
