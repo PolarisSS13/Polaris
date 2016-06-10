@@ -95,3 +95,7 @@ Also includes Life and New
 	if(!health)
 		stat = DEAD
 		
+/mob/living/simple_animal/xeno/Destroy()
+	traitdat.Destroy()	//Let's clean up after ourselves.
+	traitdat = null
+	..()
