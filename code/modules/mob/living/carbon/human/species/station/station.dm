@@ -147,7 +147,7 @@
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/bite/sharp)
 	brute_mod = 1.15
 	burn_mod = 0.90
-	gluttonous = 2
+	gluttonous = 1
 	darksight = 4
 	num_alternate_languages = 2
 	secondary_langs = list("Skrellian")
