@@ -29,7 +29,7 @@ Slime specific procs go here.
 	if(prob(40))
 		var/hasMutToxin
 		for(var/R in traitdat.chems)
-			if(R == "amutationtoxin")
+			if(R == "mutationtoxin")
 				hasMutToxin = 1
 		var/chemamount
 		if(hasMutToxin)
@@ -40,7 +40,7 @@ Slime specific procs go here.
 			traitdat.chems[chemtype] = chemamount
 		else
 			chemamount = rand(1,5)
-			traitdat.chems["amutationtoxin"] = chemamount
+			traitdat.chems["mutationtoxin"] = chemamount
 
 /mob/living/simple_animal/xeno/slime/proc/GrowUp()
 	GenerateAdult()
