@@ -190,21 +190,21 @@
 	if(owner.life_tick % PROCESS_ACCURACY == 0)
 
 		//High toxins levels are dangerous
-		if(owner.getToxLoss() >= 30 && !owner.reagents.has_reagent("anti_toxin"))
+		if(owner.getToxLoss() >= 30)
 			//Healthy liver suffers on its own
 			if (src.damage < min_broken_damage)
-				src.damage += 0.3 * PROCESS_ACCURACY
+				src.take_damage(0.3 * PROCESS_ACCURACY)
 			//Damaged one shares the fun
 			else
 				var/obj/item/organ/internal/O = pick(owner.internal_organs)
 				if(O)
-					O.damage += 0.2  * PROCESS_ACCURACY
+					O.take_damage(0.2  * PROCESS_ACCURACY)
 		//So much !!FUN!!, a broken liver won't be able to handle smaller amounts of toxins either
-		if(owner.getToxLoss() >= 10 && !owner.reagents.has_reagent("anti_toxin"))
-			if (src.damage > min_broken_damage)
+		if(owner.getToxLoss() >= 10)
+			if (src.is_broken())
 				var/obj/item/organ/internal/O = pick(owner.internal_organs)
 				if(O)
-					O.damage += 0.2 * PROCESS_ACCURACY
+					O.take_damage(0.2 * PROCESS_ACCURACY)
 
 
 //	Broken liver means your blood turns to poison
