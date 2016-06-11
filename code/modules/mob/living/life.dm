@@ -8,7 +8,7 @@
 		return
 	if(!loc)
 		return
-	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
+	var/datum/gas_mixture/environment = loc.return_air()
 
 	if(stat != DEAD)
 		//Breathing, if applicable

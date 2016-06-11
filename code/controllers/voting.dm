@@ -120,6 +120,8 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 			if(choices[current_votes[key]] == .)
 				round_voters += key // Keep track of who voted for the winning round.
 		if(mode != VOTE_GAMEMODE || . == "Extended" || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+			text += "<b>Vote Result: [.]</b>"
+		else
 			text += "<b>The vote has ended.</b>"
 
 	else

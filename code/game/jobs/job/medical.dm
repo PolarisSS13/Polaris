@@ -9,7 +9,7 @@
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#026865"
-	idtype = /obj/item/weapon/card/id/silver
+	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
 	economic_modifier = 10
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
@@ -47,6 +47,7 @@
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
+	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
@@ -108,6 +109,7 @@
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
+	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 5
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
@@ -169,6 +171,7 @@
 	economic_modifier = 5
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
+	idtype = /obj/item/weapon/card/id/medical
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	alt_titles = list("Psychologist")
@@ -201,6 +204,7 @@
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
+	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 4
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)

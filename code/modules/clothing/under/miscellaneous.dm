@@ -608,7 +608,6 @@
 	worn_state = "gear_harness"
 	body_parts_covered = 0
 
-
 /obj/item/clothing/under/dress/white
 	name = "white wedding dress"
 	desc = "A fancy white dress with a blue underdress."
