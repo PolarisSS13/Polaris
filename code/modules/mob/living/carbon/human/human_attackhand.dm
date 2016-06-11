@@ -56,8 +56,6 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
-			if(M in src)
-				return 0 //kek
 			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
 				if(!H.check_has_mouth())
 					H << "<span class='danger'>You don't have a mouth, you cannot perform CPR!</span>"
@@ -95,7 +93,7 @@
 			return 1
 
 		if(I_GRAB)
-			if(M == src || anchored || M in src)
+			if(M == src || anchored)
 				return 0
 			for(var/obj/item/weapon/grab/G in src.grabbed_by)
 				if(G.assailant == M)
@@ -158,7 +156,7 @@
 				// Someone got a good grip on them, they won't be able to do much damage
 				rand_damage = max(1, rand_damage - 2)
 
-			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H || H in src)
+			if(src.grabbed_by.len || src.buckled || !src.canmove || src==H)
 				accurate = 1 // certain circumstances make it impossible for us to evade punches
 				rand_damage = 5
 
@@ -240,8 +238,6 @@
 			apply_damage(real_damage, (attack.deal_halloss ? HALLOSS : BRUTE), affecting, armour, sharp=attack.sharp, edge=attack.edge)
 
 		if(I_DISARM)
-			if(M in src)
-				return 0 //kek
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 

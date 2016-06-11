@@ -457,9 +457,3 @@
 	if(isSynthetic())
 		return 0
 	return !(species.flags & NO_PAIN)
-
-/mob/living/carbon/return_air_for_internal_lifeform()
-	var/datum/gas_mixture/GM = new /datum/gas_mixture
-	GM.adjust_multi("oxygen", MOLES_O2STANDARD, "nitrogen", MOLES_N2STANDARD)
-	GM.temperature = bodytemperature
-	return GM
