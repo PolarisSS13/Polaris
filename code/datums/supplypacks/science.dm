@@ -1,9 +1,9 @@
 /*
 *	Here is where any supply packs
-*	related to security tasks live
+*	related to science tasks live
 */
 /datum/supply_packs/sci
-	group = "Security"
+	group = "Science"
 	
 /datum/supply_packs/sci/virus
 	name = "Virus sample crate"
