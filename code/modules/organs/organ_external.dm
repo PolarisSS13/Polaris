@@ -1108,7 +1108,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	W.loc = owner
 
 /obj/item/organ/external/removed(var/mob/living/user, var/ignore_children = 0)
-
 	if(!owner)
 		return
 	var/is_robotic = robotic >= ORGAN_ROBOT
@@ -1163,6 +1162,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		spawn(10)
 			qdel(spark_system)
 		qdel(src)
+
+	victim.update_body()
 
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if (disfigured)
