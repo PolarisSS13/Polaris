@@ -161,7 +161,7 @@
 	encased = "skull"
 	base_miss_chance = 40
 	var/can_intake_reagents = 1
-	var/eye_icon = "eyes_s"
+	eye_icon = "eyes_s"
 
 /obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs)
 	return ..(company, skip_prosthetics, 1)
