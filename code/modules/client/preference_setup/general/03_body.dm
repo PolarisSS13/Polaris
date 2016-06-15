@@ -90,7 +90,6 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	character.r_skin	= pref.r_skin
 	character.g_skin	= pref.g_skin
 	character.b_skin	= pref.b_skin
-	character.s_tone	= pref.s_tone
 	character.h_style	= pref.h_style
 	character.f_style	= pref.f_style
 	character.b_type	= pref.b_type
