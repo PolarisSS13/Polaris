@@ -1270,8 +1270,8 @@
 					else
 						bodytemp.icon_state = "temp0"
 		if(blind)
-			if(blinded)		blind.layer = 18
-			else			blind.layer = 0
+			if(blinded)		blind.invisibility = 0
+			else			blind.invisibility = INVISIBILITY_MAXIMUM
 
 		if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
 			if(glasses)					//to every /obj/item
