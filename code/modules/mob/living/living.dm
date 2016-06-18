@@ -660,6 +660,15 @@ default behaviour is:
 		return 0
 	return ..()
 
+//called when the mob receives a bright flash
+/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(override_blindness_check || !(disabilities & BLIND))
+		overlay_fullscreen("flash", type)
+		spawn(25)
+			if(src)
+				clear_fullscreen("flash", 25)
+		return 1
+
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
 		src << "You must be conscious to do this!"
@@ -667,7 +676,6 @@ default behaviour is:
 	if(lying)
 		src << "You can't vent crawl while you're stunned!"
 		return
-
 	var/special_fail_msg = cannot_use_vents()
 	if(special_fail_msg)
 		src << "<span class='warning'>[special_fail_msg]</span>"
