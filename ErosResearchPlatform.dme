@@ -199,12 +199,16 @@
 #include "code\datums\repositories\repository.dm"
 #include "code\datums\supplypacks\atmospherics.dm"
 #include "code\datums\supplypacks\contraband.dm"
+#include "code\datums\supplypacks\costumes.dm"
 #include "code\datums\supplypacks\engineering.dm"
 #include "code\datums\supplypacks\hospitality.dm"
 #include "code\datums\supplypacks\hydroponics.dm"
+#include "code\datums\supplypacks\materials.dm"
 #include "code\datums\supplypacks\medical.dm"
 #include "code\datums\supplypacks\misc.dm"
-#include "code\datums\supplypacks\operations.dm"
+#include "code\datums\supplypacks\munitions.dm"
+#include "code\datums\supplypacks\recreation.dm"
+#include "code\datums\supplypacks\robotics.dm"
 #include "code\datums\supplypacks\science.dm"
 #include "code\datums\supplypacks\security.dm"
 #include "code\datums\supplypacks\supply.dm"
@@ -1981,3 +1985,4 @@
 #include "maps\polaris-4.dmm"
 #include "maps\polaris-5.dmm"
 // END_INCLUDE
+
