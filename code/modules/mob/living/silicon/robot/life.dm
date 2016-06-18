@@ -279,9 +279,9 @@
 
 	if ((src.blind && src.stat != 2))
 		if(src.blinded)
-			src.blind.layer = 18
+			src.blind.invisibility = 0
 		else
-			src.blind.layer = 0
+			src.blind.invisibility = INVISIBILITY_MAXIMUM
 			if (src.disabilities & NEARSIGHTED)
 				src.client.screen += global_hud.vimpaired
 

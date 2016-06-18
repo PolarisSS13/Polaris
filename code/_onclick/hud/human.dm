@@ -309,7 +309,7 @@
 	mymob.blind.name = " "
 	mymob.blind.screen_loc = "1,1"
 	mymob.blind.mouse_opacity = 0
-	mymob.blind.layer = 0
+	mymob.blind.invisibility = INVISIBILITY_MAXIMUM
 	hud_elements |= mymob.blind
 
 	mymob.damageoverlay = new /obj/screen()
