@@ -1014,3 +1014,29 @@
 					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
+
+// Eros.
+/obj/machinery/vending/adult
+	name = "XXXVend"
+	desc = "How lewd. Does NT really endorse this?"
+	icon_state = "adult"
+	product_ads = "Mmm.. mmmm.. MMMM! Buy something!;Oh, baby, please, vend me harder.;Oh, oh... OH! Vend me!;Don't ask about the stains.;I know you have... needs. I can provide."
+	products = list(/obj/item/weapon/fluff/dildos/bigblackdick = 2,
+					/obj/item/weapon/fluff/dildos/metal_dildo = 2,
+					/obj/item/weapon/fluff/dildos/canine = 4,
+					/obj/item/weapon/fluff/dildos/floppydick = 4,
+					/obj/item/weapon/fluff/dildos/purpledong = 4,
+					/obj/item/weapon/fluff/dildos/blue = 4,
+					/obj/item/weapon/fluff/fleshlight = 4,
+					/obj/item/weapon/fluff/bulletvibe = 4)
+
+	prices = list(/obj/item/weapon/fluff/dildos/bigblackdick = 15,
+					/obj/item/weapon/fluff/dildos/metal_dildo = 13,
+					/obj/item/weapon/fluff/dildos/canine = 8,
+					/obj/item/weapon/fluff/dildos/floppydick = 3,
+					/obj/item/weapon/fluff/dildos/purpledong = 8,
+					/obj/item/weapon/fluff/dildos/blue = 8,
+					/obj/item/weapon/fluff/fleshlight = 10,
+					/obj/item/weapon/fluff/bulletvibe = 4,)
+
+	contraband = list(/obj/item/weapon/fluff/dildos/uglyhorse = 2)

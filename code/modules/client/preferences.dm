@@ -38,13 +38,30 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin tone
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 255					//Skin color
+	var/g_skin = 220					//Skin color
+	var/b_skin = 177					//Skin color
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/c_type = "None"					//Breast Type
+	var/d_type = "None"					//Dick Type
+	var/v_type = "None"					//Vagina Type
+	var/r_genital = 255					//Genitals color
+	var/g_genital = 220					//Genitals color
+	var/b_genital = 177					//Genitals color
+	var/ears_type = "None"				//Ears Type
+	var/wings_type = "None"				//Wings Type
+	var/tail_type = "None"				//Tail Type
+	var/r_wings = 200					//Wings color
+	var/g_wings = 200					//Wings color
+	var/b_wings = 200					//Wings color
+	var/r_ears = 200					//Ears color
+	var/g_ears = 200					//Ears color
+	var/b_ears = 200					//Ears color
+	var/r_tail = 200					//Tail color
+	var/g_tail = 200					//Tail color
+	var/b_tail = 200					//Tail color
 	var/species = "Human"               //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
@@ -258,9 +275,139 @@ datum/preferences
 	if(be_random_name)
 		real_name = random_name(identifying_gender,species)
 
-	// Ask the preferences datums to apply their own settings to the new mob 
-	player_setup.copy_to_mob(character)
+	if(config.humans_need_surnames)
+		var/firstspace = findtext(real_name, " ")
+		var/name_length = length(real_name)
+		if(!firstspace)	//we need a surname
+			real_name += " [pick(last_names)]"
+		else if(firstspace == name_length)
+			real_name += "[pick(last_names)]"
 
+	character.real_name = real_name
+	character.name = character.real_name
+	if(character.dna)
+		character.dna.real_name = character.real_name
+
+	character.flavor_texts["general"] = flavor_texts["general"]
+	character.flavor_texts["head"] = flavor_texts["head"]
+	character.flavor_texts["face"] = flavor_texts["face"]
+	character.flavor_texts["eyes"] = flavor_texts["eyes"]
+	character.flavor_texts["torso"] = flavor_texts["torso"]
+	character.flavor_texts["arms"] = flavor_texts["arms"]
+	character.flavor_texts["hands"] = flavor_texts["hands"]
+	character.flavor_texts["legs"] = flavor_texts["legs"]
+	character.flavor_texts["feet"] = flavor_texts["feet"]
+
+	character.med_record = med_record
+	character.sec_record = sec_record
+	character.gen_record = gen_record
+	character.exploit_record = exploit_record
+
+	character.gender = biological_gender
+	character.identifying_gender = identifying_gender
+	character.age = age
+	character.b_type = b_type
+
+	character.r_eyes = r_eyes
+	character.g_eyes = g_eyes
+	character.b_eyes = b_eyes
+
+	character.h_style = h_style
+	character.r_hair = r_hair
+	character.g_hair = g_hair
+	character.b_hair = b_hair
+
+	character.f_style = f_style
+	character.r_facial = r_facial
+	character.g_facial = g_facial
+	character.b_facial = b_facial
+
+	character.r_skin = r_skin
+	character.g_skin = g_skin
+	character.b_skin = b_skin
+
+	character.h_style = h_style
+	character.f_style = f_style
+
+	character.c_type = c_type
+	character.d_type = d_type
+	character.v_type = v_type
+
+	character.r_genital = r_genital
+	character.g_genital = g_genital
+	character.b_genital = b_genital
+
+	character.r_wings = r_wings
+	character.g_wings = g_wings
+	character.b_wings = b_wings
+
+	character.r_ears = r_ears
+	character.g_ears = g_ears
+	character.b_ears = b_ears
+
+	character.r_tail = r_tail
+	character.g_tail = g_tail
+	character.b_tail = b_tail
+
+	character.wings_type = wings_type
+	character.ears_type = ears_type
+	character.tail_type = tail_type
+
+	character.home_system = home_system
+	character.citizenship = citizenship
+	character.personal_faction = faction
+	character.religion = religion
+
+	character.skills = skills
+	character.used_skillpoints = used_skillpoints
+
+	// Destroy/cyborgize organs and limbs.
+	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO, BP_TAUR))
+		var/status = organ_data[name]
+		var/obj/item/organ/external/O = character.organs_by_name[name]
+		if(O)
+			if(status == "amputated")
+				O.remove_rejuv()
+			else if(status == "cyborg")
+				if(rlimb_data[name])
+					O.robotize(rlimb_data[name])
+				else
+					O.robotize()
+
+	for(var/name in list(O_HEART,O_EYES,O_BRAIN))
+		var/status = organ_data[name]
+		if(!status)
+			continue
+		var/obj/item/organ/I = character.internal_organs_by_name[name]
+		if(I)
+			if(status == "assisted")
+				I.mechassist()
+			else if(status == "mechanical")
+				I.robotize()
+
+	character.all_underwear.Cut()
+	character.all_underwear_metadata.Cut()
+
+	for(var/underwear_category_name in all_underwear)
+		var/datum/category_group/underwear/underwear_category = global_underwear.categories_by_name[underwear_category_name]
+		if(underwear_category)
+			var/underwear_item_name = all_underwear[underwear_category_name]
+			character.all_underwear[underwear_category_name] = underwear_category.items_by_name[underwear_item_name]
+			if(all_underwear_metadata[underwear_category_name])
+				character.all_underwear_metadata[underwear_category_name] = all_underwear_metadata[underwear_category_name]
+		else
+			all_underwear -= underwear_category_name
+
+	if(backbag > 4 || backbag < 1)
+		backbag = 1 //Same as above
+	character.backbag = backbag
+
+	if(pdachoice > 3 || pdachoice < 1)
+		pdachoice = 1
+	character.pdachoice = pdachoice
+
+	// Ask the preferences datums to apply their own settings to the new mob
+	player_setup.copy_to_mob(character)
 	if(icon_updates)
 		character.force_update_limbs()
 		character.update_mutations(0)

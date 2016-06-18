@@ -231,7 +231,6 @@ proc/check_panel(mob/M)
 	var/image/stand_icon = null
 	var/image/currentimage = null
 	var/icon/base = null
-	var/s_tone
 	var/mob/living/clone = null
 	var/image/left
 	var/image/right

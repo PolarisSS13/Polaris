@@ -7,8 +7,6 @@
 	h_style = random_hair_style(biological_gender, species)
 	f_style = random_facial_hair_style(biological_gender, species)
 	if(current_species)
-		if(current_species.appearance_flags & HAS_SKIN_TONE)
-			s_tone = random_skin_tone()
 		if(current_species.appearance_flags & HAS_SKIN_COLOR)
 			r_skin = rand (0,255)
 			g_skin = rand (0,255)
@@ -251,16 +249,32 @@
 	preview_icon = icon('icons/effects/effects.dmi', "nothing")
 	preview_icon.Scale(48+32, 16+32)
 
+	var/list/offsets = list("x1" = 0,
+							"x2" = 0,
+							"x3" = 0,
+							"y1" = 0,
+							"y2" = 0,
+							"y3" = 0)
+
+	if(mannequin.get_organ(BP_TAUR))
+		preview_icon.Scale(64+32, 16+32)
+		offsets["x1"] = -8
+		offsets["y1"] = 2
+		offsets["x2"] = -20
+		offsets["y2"] = -8
+		offsets["x3"] = 0
+		offsets["y3"] = 0
+
 	mannequin.dir = NORTH
 	var/icon/stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 25 + offsets["x1"], 17 + offsets["y1"])
 
 	mannequin.dir = WEST
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 1 + offsets["x2"], 9 + offsets["y2"])
 
 	mannequin.dir = SOUTH
 	stamp = getFlatIcon(mannequin)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 49 + offsets["x3"], 1 + offsets["y3"])
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.

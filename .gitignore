@@ -9,3 +9,5 @@ Thumbs.db
 data/
 cfg/
 
+#ignore other compiler files
+.atom-build.json

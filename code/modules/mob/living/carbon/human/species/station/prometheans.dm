@@ -5,7 +5,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 	name =             "Promethean"
 	name_plural =      "Prometheans"
-	blurb =            "What has Science done?"
+	blurb =            "What has Science done? Prometheans are soft, shapeshifting slime-people. The ones that are older ages tend to be scientists that have experimented on themselves and turned into a Promethean. Younger ones were created by science."
 	show_ssd =         "totally quiescent"
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
@@ -22,7 +22,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
-	spawn_flags =      SPECIES_IS_RESTRICTED
+	spawn_flags =      SPECIES_CAN_JOIN
 
 	breath_type = null
 	poison_type = null
@@ -30,8 +30,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	gluttonous =            2
 	virus_immune =          1
 	blood_volume =          600
-	min_age =               1
-	max_age =               5
+	min_age =               18
+	max_age =               30
 	brute_mod =             0.5
 	burn_mod =              2
 	oxy_mod =               0

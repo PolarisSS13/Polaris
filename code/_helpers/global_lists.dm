@@ -54,6 +54,14 @@ var/global/list/skin_styles_female_list = list()		//unused
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
+//Body Parts
+var/global/list/body_breast_list = list()
+var/global/list/body_dicks_list = list()
+var/global/list/body_vaginas_list = list()
+var/global/list/body_ears_list  = list()
+var/global/list/body_wings_list = list()
+var/global/list/body_tails_list = list()
+
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
 var/global/list/pdachoicelist = list("Default", "Slim", "Old")
@@ -140,6 +148,48 @@ var/global/list/string_slot_flags = list(
 			else
 				facial_hair_styles_male_list += H.name
 				facial_hair_styles_female_list += H.name
+
+//Breasts Initialization
+	paths = typesof(/datum/sprite_accessory/breasts) - /datum/sprite_accessory/breasts
+	for(var/path in paths)
+		var/datum/sprite_accessory/breasts/H = new path()
+		body_breast_list[H.name] = H
+		body_breast_list += H.name
+
+	//Dicks Initialization
+	paths = typesof(/datum/sprite_accessory/dicks) - /datum/sprite_accessory/dicks
+	for(var/path in paths)
+		var/datum/sprite_accessory/dicks/H = new path()
+		body_dicks_list[H.name] = H
+		body_dicks_list += H.name
+
+	//Vaginas Initialization
+	paths = typesof(/datum/sprite_accessory/vaginas) - /datum/sprite_accessory/vaginas
+	for(var/path in paths)
+		var/datum/sprite_accessory/vaginas/H = new path()
+		body_vaginas_list[H.name] = H
+		body_vaginas_list += H.name
+
+	//Ears Initialization
+	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	for(var/path in paths)
+		var/datum/sprite_accessory/ears/H = new path()
+		body_ears_list[H.name] = H
+		body_ears_list += H.name
+
+	//Wings Initialization
+	paths = typesof(/datum/sprite_accessory/wings) - /datum/sprite_accessory/wings
+	for(var/path in paths)
+		var/datum/sprite_accessory/wings/H = new path()
+		body_wings_list[H.name] = H
+		body_wings_list += H.name
+
+	//Tails Initialization
+	paths = typesof(/datum/sprite_accessory/tails) - /datum/sprite_accessory/tails
+	for(var/path in paths)
+		var/datum/sprite_accessory/tails/H = new path()
+		body_tails_list[H.name] = H
+		body_tails_list += H.name
 
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = typesof(/datum/surgery_step)-/datum/surgery_step

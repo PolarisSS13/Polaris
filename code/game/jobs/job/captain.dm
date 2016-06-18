@@ -30,13 +30,13 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/captain(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/cap(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/captain(H), slot_w_uniform) 
-		if(H.age>49)
-			// Since we can have something other than the default uniform at this  
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/captain(H), slot_w_uniform)
+		if(H.age>40)
+			// Since we can have something other than the default uniform at this
 			// point, check if we can actually attach the medal
 			var/obj/item/clothing/uniform = H.w_uniform
 			var/obj/item/clothing/accessory/medal/gold/captain/medal = new()
-			
+
 			if(uniform && uniform.can_attach_accessory(medal))
 				uniform.attach_accessory(null, medal)
 			else

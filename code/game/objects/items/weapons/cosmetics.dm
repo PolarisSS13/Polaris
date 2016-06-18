@@ -22,13 +22,21 @@
 	name = "black lipstick"
 	colour = "black"
 
+/obj/item/weapon/lipstick/pink
+	name = "pink lipstick"
+	colour = "pink"
+
+/obj/item/weapon/lipstick/cyan
+	name = "cyan lipstick"
+	colour = "cyan"
 
 /obj/item/weapon/lipstick/random
 	name = "lipstick"
 
 /obj/item/weapon/lipstick/random/New()
-	colour = pick("red","purple","jade","black")
+	colour = pick("red","purple","jade","black","pink","cyan")
 	name = "[colour] lipstick"
+
 
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)

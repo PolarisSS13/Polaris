@@ -32,7 +32,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
-	var/global/list/overlays_cache = null
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -758,6 +757,8 @@
 			. += THERMAL_PROTECTION_FOOT_LEFT
 		if(flags & FOOT_RIGHT)
 			. += THERMAL_PROTECTION_FOOT_RIGHT
+		if(flags & TAIL_SNAKE)
+			. += THERMAL_PROTECTION_TAIL_SNAKE
 		if(flags & ARM_LEFT)
 			. += THERMAL_PROTECTION_ARM_LEFT
 		if(flags & ARM_RIGHT)
@@ -909,7 +910,6 @@
 		if(paralysis || sleeping)
 			blinded = 1
 			stat = UNCONSCIOUS
-			animate_tail_reset()
 			adjustHalLoss(-3)
 
 			if(sleeping)
@@ -1012,32 +1012,6 @@
 	return 1
 
 /mob/living/carbon/human/handle_regular_hud_updates()
-	if(!overlays_cache)
-		overlays_cache = list()
-		overlays_cache.len = 23
-		overlays_cache[1] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage1")
-		overlays_cache[2] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage2")
-		overlays_cache[3] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage3")
-		overlays_cache[4] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage4")
-		overlays_cache[5] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage5")
-		overlays_cache[6] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage6")
-		overlays_cache[7] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage7")
-		overlays_cache[8] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage8")
-		overlays_cache[9] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage9")
-		overlays_cache[10] = image('icons/mob/screen1_full.dmi', "icon_state" = "passage10")
-		overlays_cache[11] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay1")
-		overlays_cache[12] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay2")
-		overlays_cache[13] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay3")
-		overlays_cache[14] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay4")
-		overlays_cache[15] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay5")
-		overlays_cache[16] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay6")
-		overlays_cache[17] = image('icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay7")
-		overlays_cache[18] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
-		overlays_cache[19] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay2")
-		overlays_cache[20] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay3")
-		overlays_cache[21] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay4")
-		overlays_cache[22] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay5")
-		overlays_cache[23] = image('icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay6")
 
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
@@ -1057,75 +1031,53 @@
 		var/obj/machinery/camera/cam = client.eye
 		client.screen |= cam.client_huds
 
-	if(damageoverlay.overlays)
-		damageoverlay.overlays = list()
-
-	if(stat == UNCONSCIOUS)
+	if(stat == UNCONSCIOUS && health <= 0)
 		//Critical damage passage overlay
-		if(health <= 0)
-			var/image/I
-			switch(health)
-				if(-20 to -10)
-					I = overlays_cache[1]
-				if(-30 to -20)
-					I = overlays_cache[2]
-				if(-40 to -30)
-					I = overlays_cache[3]
-				if(-50 to -40)
-					I = overlays_cache[4]
-				if(-60 to -50)
-					I = overlays_cache[5]
-				if(-70 to -60)
-					I = overlays_cache[6]
-				if(-80 to -70)
-					I = overlays_cache[7]
-				if(-90 to -80)
-					I = overlays_cache[8]
-				if(-95 to -90)
-					I = overlays_cache[9]
-				if(-INFINITY to -95)
-					I = overlays_cache[10]
-			damageoverlay.overlays += I
+		var/severity = 0
+		switch(health)
+			if(-20 to -10)			severity = 1
+			if(-30 to -20)			severity = 2
+			if(-40 to -30)			severity = 3
+			if(-50 to -40)			severity = 4
+			if(-60 to -50)			severity = 5
+			if(-70 to -60)			severity = 6
+			if(-80 to -70)			severity = 7
+			if(-90 to -80)			severity = 8
+			if(-95 to -90)			severity = 9
+			if(-INFINITY to -95)	severity = 10
+		overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
 	else
+		clear_fullscreen("crit")
 		//Oxygen damage overlay
 		if(oxyloss)
-			var/image/I
+			var/severity = 0
 			switch(oxyloss)
-				if(10 to 20)
-					I = overlays_cache[11]
-				if(20 to 25)
-					I = overlays_cache[12]
-				if(25 to 30)
-					I = overlays_cache[13]
-				if(30 to 35)
-					I = overlays_cache[14]
-				if(35 to 40)
-					I = overlays_cache[15]
-				if(40 to 45)
-					I = overlays_cache[16]
-				if(45 to INFINITY)
-					I = overlays_cache[17]
-			damageoverlay.overlays += I
+				if(10 to 20)		severity = 1
+				if(20 to 25)		severity = 2
+				if(25 to 30)		severity = 3
+				if(30 to 35)		severity = 4
+				if(35 to 40)		severity = 5
+				if(40 to 45)		severity = 6
+				if(45 to INFINITY)	severity = 7
+			overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+		else
+			clear_fullscreen("oxy")
 
 		//Fire and Brute damage overlay (BSSR)
 		var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
 		damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 		if(hurtdamage)
-			var/image/I
+			var/severity = 0
 			switch(hurtdamage)
-				if(10 to 25)
-					I = overlays_cache[18]
-				if(25 to 40)
-					I = overlays_cache[19]
-				if(40 to 55)
-					I = overlays_cache[20]
-				if(55 to 70)
-					I = overlays_cache[21]
-				if(70 to 85)
-					I = overlays_cache[22]
-				if(85 to INFINITY)
-					I = overlays_cache[23]
-			damageoverlay.overlays += I
+				if(10 to 25)		severity = 1
+				if(25 to 40)		severity = 2
+				if(40 to 55)		severity = 3
+				if(55 to 70)		severity = 4
+				if(70 to 85)		severity = 5
+				if(85 to INFINITY)	severity = 6
+			overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+		else
+			clear_fullscreen("brute")
 
 	if( stat == DEAD )
 		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
@@ -1210,9 +1162,6 @@
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 
-//			if(rest)	//Not used with new UI
-//				if(resting || lying || sleeping)		rest.icon_state = "rest1"
-//				else									rest.icon_state = "rest0"
 		if(toxin)
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
@@ -1269,20 +1218,20 @@
 						bodytemp.icon_state = "temp-1"
 					else
 						bodytemp.icon_state = "temp0"
-		if(blind)
-			if(blinded)		blind.layer = 18
-			else			blind.layer = 0
+
+		if(blinded)		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		else			clear_fullscreens()
 
 		if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
 			if(glasses)					//to every /obj/item
 				var/obj/item/clothing/glasses/G = glasses
 				if(!G.prescription)
-					client.screen += global_hud.vimpaired
+					set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 			else
-				client.screen += global_hud.vimpaired
+				set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
 
-		if(eye_blurry)			client.screen += global_hud.blurry
-		if(druggy)				client.screen += global_hud.druggy
+		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
+		set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
 
 		if(config.welder_vision)
 			var/found_welder
@@ -1366,20 +1315,25 @@
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)
-		for(var/mob/living/M in stomach_contents)
-			if(M.loc != src)
-				stomach_contents.Remove(M)
+		for(var/A in stomach_contents)
+			var/mob/living/M = A
+			if(!istype(M))
+				stomach_contents -= A
 				continue
-			if(istype(M, /mob/living/carbon) && stat != 2)
-				if(M.stat == 2)
-					M.death(1)
-					stomach_contents.Remove(M)
+			if(M.loc != src)
+				stomach_contents -= M
+				continue
+			if(stat == DEAD)
+				return
+			if(M.stat == DEAD)
+				if(species.gluttonous < 3 || M.mob_size <= MOB_SMALL)
 					qdel(M)
-					continue
-				if(air_master.current_cycle%3==1)
-					if(!(M.status_flags & GODMODE))
-						M.adjustBruteLoss(5)
-					nutrition += 10
+					stomach_contents -= M
+				continue
+			if(air_master.current_cycle % 3 == 1)
+				if(!(M.status_flags & GODMODE))
+					M.adjustBruteLoss(5)
+				nutrition += M.mob_size / 2
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

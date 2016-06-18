@@ -11,11 +11,11 @@
 	num_alternate_languages = 2
 	secondary_langs = list("Sol Common")
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
-	min_age = 17
+	min_age = 18
 	max_age = 110
 
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return "Human"
@@ -54,7 +54,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#34AF10"
@@ -97,7 +97,7 @@
 	secondary_langs = list("Siik'tajr")
 	name_language = "Siik'tajr"
 
-	min_age = 17
+	min_age = 18
 	max_age = 80
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
@@ -116,7 +116,7 @@
 
 	primitive_form = "Farwa"
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 
 	flesh_color = "#AFA59E"
@@ -136,6 +136,47 @@
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
+
+/datum/species/akula
+	name = "Akula"
+	name_plural = "Akulas"
+	icobase = 'icons/mob/human_races/r_shark.dmi'
+	deform = 'icons/mob/human_races/r_def_shark.dmi'
+	blurb = "Place Akula lore here."
+	tail = "sharktail"
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/bite/sharp)
+	brute_mod = 1.15
+	burn_mod = 0.90
+	gluttonous = 1
+	darksight = 4
+	num_alternate_languages = 2
+	secondary_langs = list("Skrellian")
+	name_language = null
+
+	min_age = 18
+	max_age = 100
+
+	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+
+	flesh_color = "#AFA59E"
+	blood_color = "#1D2CBF"
+	base_color = "#AFA59E"
+
+	reagent_tag = IS_AKULA
+
+	heat_discomfort_strings = list(
+		"Your skin feels sore and unbearably itchy.",
+		"You're feeling irritable from the unpleasant heat.",
+		"You feel dizzy and dehyrdrated."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your skin bristles against the cold."
+		)
+
 /datum/species/skrell
 	name = "Skrell"
 	name_plural = "Skrell"
@@ -152,10 +193,10 @@
 	secondary_langs = list("Skrellian", "Schechi")
 	name_language = "Skrellian"
 
-	min_age = 19
+	min_age = 18
 	max_age = 80
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
@@ -246,7 +287,7 @@
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
 	flags = NO_SCAN | IS_PLANT | NO_PAIN | NO_SLIP | NO_MINOR_CUT
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -288,3 +329,36 @@
 			qdel(D)
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
+
+/datum/species/lamia
+	name = "Lamia"
+	name_plural = "Lamias"
+	icobase = 'icons/mob/human_races/r_lamia.dmi'
+	deform = 'icons/mob/human_races/r_def_lamia.dmi'
+	//primitive_form = "Monkey"
+	unarmed_types = list(/datum/unarmed_attack/punch, /datum/unarmed_attack/bite)
+	blurb = "Put Lamia lore here."
+	num_alternate_languages = 2
+	secondary_langs = list("Sehlin")
+	name_language = "Sehlin"
+	min_age = 18
+	max_age = 110
+
+	gluttonous = 3 // they eat people! (only one at a time)
+
+	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+	has_limbs = list(
+		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_TAUR =  list("path" = /obj/item/organ/external/snake)
+		)
+
+/datum/species/lamia/get_bodytype()
+	return "Lamia"

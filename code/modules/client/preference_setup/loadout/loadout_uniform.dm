@@ -334,6 +334,10 @@
 	path = /obj/item/clothing/under/rank/head_of_security/navyblue
 	allowed_roles = list("Head of Security")
 
+/datum/gear/uniform/harness
+	display_name = "gear harness"
+	path = /obj/item/clothing/under/harness
+
 /datum/gear/uniform/shortplaindress
 	display_name = "plain dress"
 	path = /obj/item/clothing/under/dress/white3

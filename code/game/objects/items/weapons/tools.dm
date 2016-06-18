@@ -427,7 +427,7 @@
 /obj/item/weapon/weldingtool/attack(var/atom/A, var/mob/living/user, var/def_zone)
 	if(ishuman(A) && user.a_intent == I_HELP)
 		var/mob/living/carbon/human/H = A
-		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
+		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
 		if(!S || S.robotic < ORGAN_ROBOT || S.open == 3)
 			return ..()

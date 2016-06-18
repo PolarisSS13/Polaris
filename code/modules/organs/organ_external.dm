@@ -33,11 +33,14 @@
 	var/model                          // Used when caching robolimb icons.
 	var/force_icon                     // Used to force override of species-specific limb icons (for prosthetics).
 	var/icon/mob_icon                  // Cached icon for use in mob overlays.
+	var/mob_icon_state = ""            // The icon state to use, if applicable.
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
-	var/s_tone                         // Skin tone.
 	var/list/s_col                     // skin colour
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
+	var/no_blend = 0                   // If the organ should be Blend()ed into the human icon or put in the overlays
+	var/offset_x = 0                   // Used with no_blend to offset the icon.
+	var/offset_y = 0                   // Same as above.
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
@@ -1247,3 +1250,286 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(6 to INFINITY)
 					flavor_text += "a ton of [wound]\s"
 		return english_list(flavor_text)
+
+/****************************************************
+			   ORGAN DEFINES
+****************************************************/
+
+/obj/item/organ/external/chest
+	name = "upper body"
+	organ_tag = BP_TORSO
+	icon_name = "torso"
+	max_damage = 100
+	min_broken_damage = 35
+	w_class = 5
+	body_part = UPPER_TORSO
+	vital = 1
+	amputation_point = "spine"
+	joint = "neck"
+	dislocated = -1
+	gendered_icon = 1
+	cannot_amputate = 1
+	parent_organ = null
+	encased = "ribcage"
+	organ_rel_size = 70
+	base_miss_chance = 10
+
+/obj/item/organ/external/chest/robotize()
+	if(..())
+		// Give them a new cell.
+		owner.internal_organs_by_name["cell"] = new /obj/item/organ/internal/cell(owner,1)
+
+/obj/item/organ/external/groin
+	name = "lower body"
+	organ_tag = BP_GROIN
+	icon_name = "groin"
+	max_damage = 100
+	min_broken_damage = 35
+	w_class = 5
+	body_part = LOWER_TORSO
+	vital = 1
+	parent_organ = BP_TORSO
+	amputation_point = "lumbar"
+	joint = "hip"
+	dislocated = -1
+	gendered_icon = 1
+	organ_rel_size = 30
+
+/obj/item/organ/external/arm
+	organ_tag = "l_arm"
+	name = "left arm"
+	icon_name = "l_arm"
+	max_damage = 50
+	min_broken_damage = 30
+	w_class = 3
+	body_part = ARM_LEFT
+	parent_organ = BP_TORSO
+	joint = "left elbow"
+	amputation_point = "left shoulder"
+	can_grasp = 1
+
+/obj/item/organ/external/arm/right
+	organ_tag = "r_arm"
+	name = "right arm"
+	icon_name = "r_arm"
+	body_part = ARM_RIGHT
+	joint = "right elbow"
+	amputation_point = "right shoulder"
+
+/obj/item/organ/external/leg
+	organ_tag = "l_leg"
+	name = "left leg"
+	icon_name = "l_leg"
+	max_damage = 50
+	min_broken_damage = 30
+	w_class = 3
+	body_part = LEG_LEFT
+	icon_position = LEFT
+	parent_organ = BP_GROIN
+	joint = "left knee"
+	amputation_point = "left hip"
+	can_stand = 1
+
+/obj/item/organ/external/leg/right
+	organ_tag = "r_leg"
+	name = "right leg"
+	icon_name = "r_leg"
+	body_part = LEG_RIGHT
+	icon_position = RIGHT
+	joint = "right knee"
+	amputation_point = "right hip"
+
+/obj/item/organ/external/foot
+	organ_tag = "l_foot"
+	name = "left foot"
+	icon_name = "l_foot"
+	min_broken_damage = 15
+	w_class = 2
+	body_part = FOOT_LEFT
+	icon_position = LEFT
+	parent_organ = "l_leg"
+	joint = "left ankle"
+	amputation_point = "left ankle"
+	can_stand = 1
+	organ_rel_size = 10
+	base_miss_chance = 50
+
+/obj/item/organ/external/foot/removed()
+	if(owner) owner.u_equip(owner.shoes)
+	..()
+
+/obj/item/organ/external/foot/right
+	organ_tag = "r_foot"
+	name = "right foot"
+	icon_name = "r_foot"
+	body_part = FOOT_RIGHT
+	icon_position = RIGHT
+	parent_organ = "r_leg"
+	joint = "right ankle"
+	amputation_point = "right ankle"
+
+/obj/item/organ/external/snake
+	organ_tag = BP_TAUR
+	name = "lamia tail"
+	icon_name = "s_tail"
+	body_part = TAIL_SNAKE
+	parent_organ = BP_GROIN
+	joint = "tail"
+	max_damage = 120
+	min_broken_damage = 60
+	amputation_point = "groin"
+	can_stand = 1
+	dislocated = -1
+	no_blend = 1
+	offset_x = -16
+	var/list/t_col
+
+/obj/item/organ/external/snake/robotize(var/company, var/skip_prosthetics, var/keep_organs)
+	. = ..()
+	force_icon = null
+
+/obj/item/organ/external/snake/sync_colour_to_human(var/mob/living/carbon/human/human)
+	if(!..(human))
+		t_col = list(human.r_tail, human.g_tail, human.b_tail)
+
+/obj/item/organ/external/snake/sync_colour_to_dna()
+	if(!..())
+		t_col = list(dna.GetUIValue(DNA_UI_TAIL_R),dna.GetUIValue(DNA_UI_TAIL_G),dna.GetUIValue(DNA_UI_TAIL_B))
+
+/obj/item/organ/external/snake/get_icon(var/skeletal)
+	var/gender = "f"
+	if(owner && owner.gender == MALE)
+		gender = "m"
+
+	if(dna)
+		if(dna.GetUIState(DNA_UI_GENDER))
+			gender = "f"
+		else
+			gender = "m"
+
+	if(force_icon)
+		mob_icon = new /icon(force_icon, "[icon_name][gendered_icon ? "_[gender]" : ""]")
+		mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]"
+	else
+		if(skeletal)
+			mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gendered_icon ? "_[gender]" : ""]_skele")
+			mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]_skele"
+		else if(status & ORGAN_ROBOT)
+			mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gendered_icon ? "_[gender]" : ""]_[model ? lowertext(model) : "robot"]")
+			mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]_[model ? lowertext(model) : "robot"]"
+		else
+			if(status & ORGAN_MUTATED)
+				mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gender ? "_[gender]" : ""]_deform")
+				mob_icon_state = "[icon_name][gender ? "_[gender]" : ""]_deform"
+			else
+				mob_icon = new /icon('icons/mob/human_races/lamia_tail.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+				mob_icon_state = "[icon_name][gendered_icon ? "_[gender]" : ""]"
+
+			if(status & ORGAN_DEAD)
+				mob_icon.ColorTone(rgb(10,50,0))
+				mob_icon.SetIntensity(0.7)
+
+			if(t_col && t_col.len >= 3)
+				mob_icon.Blend(rgb(t_col[1], t_col[2], t_col[3]), ICON_MULTIPLY)
+
+	dir = EAST
+	icon = mob_icon
+	icon_state = mob_icon_state
+
+	return mob_icon
+
+/obj/item/organ/external/hand
+	organ_tag = "l_hand"
+	name = "left hand"
+	icon_name = "l_hand"
+	min_broken_damage = 15
+	w_class = 2
+	body_part = HAND_LEFT
+	parent_organ = "l_arm"
+	joint = "left wrist"
+	amputation_point = "left wrist"
+	can_grasp = 1
+	organ_rel_size = 10
+	base_miss_chance = 50
+
+/obj/item/organ/external/hand/removed()
+	owner.u_equip(owner.gloves)
+	..()
+
+/obj/item/organ/external/hand/right
+	organ_tag = "r_hand"
+	name = "right hand"
+	icon_name = "r_hand"
+	body_part = HAND_RIGHT
+	parent_organ = "r_arm"
+	joint = "right wrist"
+	amputation_point = "right wrist"
+
+/obj/item/organ/external/head
+	organ_tag = BP_HEAD
+	icon_name = "head"
+	name = "head"
+	max_damage = 75
+	min_broken_damage = 35
+	w_class = 3
+	body_part = HEAD
+	vital = 1
+	parent_organ = BP_TORSO
+	joint = "jaw"
+	amputation_point = "neck"
+	gendered_icon = 1
+	encased = "skull"
+	base_miss_chance = 40
+
+	var/eye_icon = "eyes_s"
+
+// These organs are important for robotizing at chargen.
+/obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs)
+	return ..(company, skip_prosthetics, 1)
+
+/obj/item/organ/external/head/removed()
+	if(owner)
+		name = "[owner.real_name]'s head"
+		owner.u_equip(owner.glasses)
+		owner.u_equip(owner.head)
+		owner.u_equip(owner.l_ear)
+		owner.u_equip(owner.r_ear)
+		owner.u_equip(owner.wear_mask)
+		spawn(1)
+			owner.update_hair()
+	..()
+
+/obj/item/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)
+	if (!disfigured)
+		if (brute_dam > 40)
+			if (prob(50))
+				disfigure("brute")
+		if (burn_dam > 40)
+			disfigure("burn")
+
+/obj/item/organ/external/head/skrell
+	eye_icon = "skrell_eyes_s"
+
+/obj/item/organ/external/head/seromi
+	eye_icon = "eyes_seromi"
+
+/obj/item/organ/external/head/no_eyes
+	eye_icon = "blank_eyes"
+
+/obj/item/organ/external/head/no_eyes/diona
+	max_damage = 50
+	min_broken_damage = 25
+	cannot_break = 1
+	amputation_point = "branch"
+	joint = "structural ligament"
+	dislocated = -1
+	vital = 0
+
+/obj/item/organ/external/head/no_eyes/diona/removed()
+	var/mob/living/carbon/human/H = owner
+	..()
+	if(!istype(H) || !H.organs || !H.organs.len)
+		H.death()
+	if(prob(50) && spawn_diona_nymph(get_turf(src)))
+		qdel(src)
