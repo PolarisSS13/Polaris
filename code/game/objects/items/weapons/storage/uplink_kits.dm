@@ -265,4 +265,18 @@
 	new /obj/item/clothing/suit/armor/combat(src)
 	new /obj/item/clothing/gloves/arm_guard/combat(src)
 	new /obj/item/clothing/shoes/leg_guard/combat(src)
+	new /obj/item/clothing/mask/gas/syndicate(src)
+	new /obj/item/clothing/under/syndicate/combat(src)
+	return
+
+/obj/item/weapon/storage/box/syndie_kit/void
+	name = "boxed combat voidsuit"
+
+/obj/item/weapon/storage/box/syndie_kit/void/New()
+	..()
+	new /obj/item/clothing/suit/space/void/merc(src)
+	new /obj/item/clothing/head/helmet/space/void/merc(src)
+	new /obj/item/clothing/shoes/magboots(src)
+	new /obj/item/clothing/mask/gas/syndicate(src)
+	new /obj/item/weapon/tank/emergency_oxygen/double(src)
 	return

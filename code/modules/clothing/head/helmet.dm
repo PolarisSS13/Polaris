@@ -35,6 +35,21 @@
 		user << "You lower the visor on the riot helmet."
 	update_clothing_icon()	//so our mob-overlays update
 
+/obj/item/clothing/head/helmet/riot/stealth
+	name = "ushanka"
+	desc = "Perfect for winter in Siberia, da?"
+	icon_state = "ushanka"
+	action_button_name = "Toggle Flaps"
+
+/obj/item/clothing/head/helmet/riot/stealth/attack_self(mob/user as mob)
+	if(src.icon_state == initial(icon_state))
+		src.icon_state = "[icon_state]up"
+		user << "You raise the ear flaps on the ushanka."
+	else
+		src.icon_state = initial(icon_state)
+		user << "You lower the ear flaps on the ushanka."
+	update_clothing_icon()
+
 /obj/item/clothing/head/helmet/laserproof
 	name = "ablative helmet"
 	desc = "It's a helmet specifically designed to protect against energy projectiles."
@@ -43,6 +58,11 @@
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.1
 
+/obj/item/clothing/head/helmet/laserproof/stealth
+	name = "chaplain's hood"
+	desc = "It's hood that covers the head. It keeps you warm during the space winters."
+	icon_state = "chaplain_hood"
+
 /obj/item/clothing/head/helmet/bulletproof
 	name = "bullet-resistant helmet"
 	desc = "It's a helmet specifically designed to protect against ballistic projectiles."
@@ -50,6 +70,11 @@
 	armor = list(melee = 10, bullet = 80, laser = 10 ,energy = 10, bomb = 0, bio = 0, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/head/helmet/bulletproof/stealth
+	name = "hard hat"
+	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
+	icon_state = "hardhat0_yellow"
 
 /obj/item/clothing/head/helmet/combat
 	name = "combat helmet"

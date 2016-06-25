@@ -6,6 +6,12 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 
+/obj/item/clothing/gloves/yellow/stealth
+	desc = "These work gloves are thick and fire-resistant."
+	name = "black gloves"
+	icon_state = "black"
+	item_state = "bgloves"
+
 /obj/item/clothing/gloves/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
 	name = "budget insulated gloves"
@@ -16,7 +22,7 @@
 
 	New()
 		//average of 0.5, somewhat better than regular gloves' 0.75
-		siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35) 
+		siemens_coefficient = pick(0,0.1,0.3,0.5,0.5,0.75,1.35)
 
 /obj/item/clothing/gloves/black
 	desc = "These work gloves are thick and fire-resistant."

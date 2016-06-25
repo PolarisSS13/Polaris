@@ -11,22 +11,22 @@
 
 /datum/uplink_item/item/stealthy_weapons/concealed_cane
 	name = "Concealed Cane Sword"
-	item_cost = 1
+	item_cost = 3
 	path = /obj/item/weapon/cane/concealed
 
 /datum/uplink_item/item/stealthy_weapons/detomatix
 	name = "Detomatix PDA Cartridge"
-	item_cost = 3
+	item_cost = 6
 	path = /obj/item/weapon/cartridge/syndicate
 
 /datum/uplink_item/item/stealthy_weapons/parapen
 	name = "Paralysis Pen"
-	item_cost = 3
+	item_cost = 4
 	path = /obj/item/weapon/pen/reagent/paralysis
 
 /datum/uplink_item/item/stealthy_weapons/cigarette_kit
 	name = "Cigarette Kit"
-	item_cost = 3
+	item_cost = 4
 	path = /obj/item/weapon/storage/box/syndie_kit/cigarette
 
 /datum/uplink_item/item/stealthy_weapons/random_toxin

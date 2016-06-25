@@ -104,16 +104,18 @@
 /obj/item/clothing/head/ushanka
 	name = "ushanka"
 	desc = "Perfect for winter in Siberia, da?"
-	icon_state = "ushankadown"
+	icon_state = "ushanka"
 	flags_inv = HIDEEARS
+	action_button_name = "Toggle Flaps"
 
 /obj/item/clothing/head/ushanka/attack_self(mob/user as mob)
-	if(src.icon_state == "ushankadown")
-		src.icon_state = "ushankaup"
+	if(src.icon_state == initial(icon_state))
+		src.icon_state = "[icon_state]up"
 		user << "You raise the ear flaps on the ushanka."
 	else
-		src.icon_state = "ushankadown"
+		src.icon_state = initial(icon_state)
 		user << "You lower the ear flaps on the ushanka."
+	update_clothing_icon()
 
 /*
  * Pumpkin head
