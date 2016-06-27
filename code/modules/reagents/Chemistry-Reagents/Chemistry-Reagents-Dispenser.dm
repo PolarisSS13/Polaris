@@ -1,32 +1,3 @@
-/datum/reagent/acetone
-	name = "Acetone"
-	id = "acetone"
-	description = "A colorless liquid solvent used in chemical synthesis."
-	taste_description = "acid"
-	reagent_state = LIQUID
-	color = "#808080"
-	metabolism = REM * 0.2
-
-/datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(removed * 3)
-
-/datum/reagent/acetone/touch_obj(var/obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
-		paperaffected.clearpaper()
-		usr << "The solution dissolves the ink on the paper."
-		return
-	if(istype(O, /obj/item/weapon/book))
-		if(volume < 5)
-			return
-		if(istype(O, /obj/item/weapon/book/tome))
-			usr << "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>"
-			return
-		var/obj/item/weapon/book/affectedbook = O
-		affectedbook.dat = null
-		usr << "<span class='notice'>The solution dissolves the ink on the book.</span>"
-	return
-
 /datum/reagent/aluminum
 	name = "Aluminum"
 	id = "aluminum"
@@ -35,22 +6,6 @@
 	description = "A silvery white and ductile member of the boron group of chemical elements."
 	reagent_state = SOLID
 	color = "#A8A8A8"
-
-/datum/reagent/ammonia
-	name = "Ammonia"
-	id = "ammonia"
-	taste_description = "mordant"
-	taste_mult = 2
-	description = "A caustic substance commonly used in fertilizer or household cleaners."
-	reagent_state = LIQUID
-	color = "#404030"
-	metabolism = REM * 0.5
-
-/datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
-		M.adjustOxyLoss(-removed * 10)
-	else if(alien != IS_DIONA)
-		M.adjustToxLoss(removed * 1.5)
 
 /datum/reagent/carbon
 	name = "Carbon"
@@ -184,27 +139,28 @@
 		usr << "<span class='notice'>The solution dissolves the ink on the book.</span>"
 	return
 
-/datum/reagent/hydrazine
-	name = "Hydrazine"
-	id = "hydrazine"
-	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
-	taste_description = "toxin"
-	reagent_state = LIQUID
+/datum/reagent/fluorine
+	name = "Fluorine"
+	id = "fluorine"
+	description = "A highly-reactive chemical element."
+	taste_mult = 0
+	reagent_state = GAS
 	color = "#808080"
 
-/datum/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/fluorine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed)
 
-/datum/reagent/hydrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/fluorine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed)
-/*
+
 /datum/reagent/hydrogen
 	name = "Hydrogen"
 	id = "hydrogen"
 	description = "A colorless, odorless, nonmetallic, tasteless, highly combustible diatomic gas."
+	taste_mult = 0
 	reagent_state = GAS
 	color = "#808080"
-*/
+
 /datum/reagent/iron
 	name = "Iron"
 	id = "iron"
@@ -247,11 +203,12 @@
 		if(prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
 		M.adjustBrainLoss(0.1)
-/*
+
 /datum/reagent/nitrogen
 	name = "Nitrogen"
 	id = "nitrogen"
 	description = "A colorless, odorless, tasteless gas."
+	taste_mult = 0
 	reagent_state = GAS
 	color = "#808080"
 
@@ -263,13 +220,14 @@
 	name = "Oxygen"
 	id = "oxygen"
 	description = "A colorless, odorless gas."
+	taste_mult = 0
 	reagent_state = GAS
 	color = "#808080"
 
 /datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 3)
-*/
+
 /datum/reagent/phosphorus
 	name = "Phosphorus"
 	id = "phosphorus"
@@ -405,16 +363,6 @@
 			M << "<span class='warning'>\The [O] melts.</span>"
 		qdel(O)
 		remove_self(meltdose) // 10 units of acid will not melt EVERYTHING on the tile
-
-/datum/reagent/acid/hydrochloric //Like sulfuric, but less toxic and more acidic.
-	name = "Hydrochloric Acid"
-	id = "hclacid"
-	description = "A very corrosive mineral acid with the molecular formula HCl."
-	taste_description = "stomach acid"
-	reagent_state = LIQUID
-	color = "#808080"
-	power = 3
-	meltdose = 8
 
 /datum/reagent/silicon
 	name = "Silicon"

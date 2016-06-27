@@ -192,8 +192,6 @@
 #define COLORMUT 	1
 #define SPECIESMUT	2
 
-#define MOVED_DROP 1
-
 //carbon taste sensitivity defines, used in mob/living/carbon/proc/ingest
 #define TASTE_HYPERSENSITIVE 3 //anything below 5%
 #define TASTE_SENSITIVE 2 //anything below 7%

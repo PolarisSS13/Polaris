@@ -37,7 +37,8 @@
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.heal_organ_damage(0.5 * removed, 0) //what
-
+	switch(alien)
+		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	adjust_nutrition(M, alien, removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
@@ -307,7 +308,7 @@
 	M.adjustToxLoss(0.5 * removed)
 
 /datum/reagent/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA || alien == IS_MACHINE)
+	if(alien == IS_DIONA)
 		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -605,12 +606,20 @@
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
 
+	cup_icon_state = "cup_cream"
+	cup_name = "cup of milk"
+	cup_desc = "White and nutritious goodness!"
+
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
 	id = "chocolate_milk"
 	description = "A mixture of perfectly healthy milk and delicious chocolate."
 	taste_description = "chocolate milk"
 	color = "#74533b"
+
+	cup_icon_state = "cup_brown"
+	cup_name = "cup of chocolate milk"
+	cup_desc = "Deliciously fattening!"
 
 	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
@@ -632,6 +641,10 @@
 	glass_name = "cream"
 	glass_desc = "Ewwww..."
 
+	cup_icon_state = "cup_cream"
+	cup_name = "cup of cream"
+	cup_desc = "Ewwww..."
+
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
 	id = "soymilk"
@@ -641,6 +654,10 @@
 
 	glass_name = "soy milk"
 	glass_desc = "White and nutritious soy goodness!"
+
+	cup_icon_state = "cup_cream"
+	cup_name = "cup of milk"
+	cup_desc = "White and nutritious goodness!"
 
 /datum/reagent/drink/tea
 	name = "Tea"
@@ -687,6 +704,10 @@
 	adj_temp = 25
 	overdose = 45
 
+	cup_icon_state = "cup_coffee"
+	cup_name = "cup of coffee"
+	cup_desc = "Don't drop it, or you'll send scalding liquid and porcelain shards everywhere."
+
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
@@ -702,10 +723,17 @@
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(2 * removed)
+		M.make_jittery(4)
+		return
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
 		return
+	if(alien == IS_TAJARA)
+		M.adjustToxLoss(4 * REM)
+		M.apply_effect(3, STUTTER)
 	M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
@@ -731,6 +759,10 @@
 	glass_name = "soy latte"
 	glass_desc = "A nice and refrshing beverage while you are reading."
 
+	cup_icon_state = "cup_latte"
+	cup_name = "cup of soy latte"
+	cup_desc = "A nice and refreshing beverage while you are reading."
+
 /datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
@@ -745,6 +777,10 @@
 
 	glass_name = "cafe latte"
 	glass_desc = "A nice, strong and refreshing beverage while you are reading."
+
+	cup_icon_state = "cup_latte"
+	cup_name = "cup of cafe latte"
+	cup_desc = "A nice and refreshing beverage while you are reading."
 
 /datum/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -763,7 +799,11 @@
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
 
-/datum/reagent/drink/sodawater
+	cup_icon_state = "cup_coco"
+	cup_name = "cup of hot chocolate"
+	cup_desc = "Made with love! And cocoa beans."
+
+/datum/reagent/drink/soda/sodawater
 	name = "Soda Water"
 	id = "sodawater"
 	description = "A can of club soda. Why not make a scotch and soda?"
@@ -2062,7 +2102,7 @@
 	description = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
 	taste_description = "liquid fire"
 	color = "#523600"
-	strength = 25
+	strength = 7
 
 	glass_name = "special blend whiskey"
 	glass_desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."

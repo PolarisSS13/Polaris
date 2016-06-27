@@ -515,10 +515,9 @@
 	M.apply_effect(16 * removed, IRRADIATE, 0)
 
 /datum/reagent/aslimetoxin
-	name = "Advanced Mutation Toxin"
-	id = "amutationtoxin"
-	description = "An advanced corruptive toxin produced by slimes."
-	taste_description = "sludge"
+	name = "Docility Toxin"
+	id = "docilitytoxin"
+	description = "A corruptive toxin produced by slimes."
 	reagent_state = LIQUID
 	color = "#FF69B4"
 
@@ -529,33 +528,6 @@
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && (H.species.flags & NO_SCAN))
 		return
-/*  Microbes that transform the infected person into-... A robot or xeno? No.
-/datum/reagent/nanites
-	name = "Nanomachines"
-	id = "nanites"
-	description = "Microscopic construction robots."
-	taste_description = "slimey metal"
-	reagent_state = LIQUID
-	color = "#535E66"
-
-/datum/reagent/nanites/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(10))
-		M.contract_disease(new /datum/disease/robotic_transformation(0), 1) //What
-
-/datum/reagent/nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.contract_disease(new /datum/disease/robotic_transformation(0), 1)
-
-/datum/reagent/xenomicrobes
-	name = "Xenomicrobes"
-	id = "xenomicrobes"
-	description = "Microbes with an entirely alien cellular structure."
-	taste_description = "sludge"
-	reagent_state = LIQUID
-	color = "#535E66"
-
-/datum/reagent/xenomicrobes/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(prob(10))
-		M.contract_disease(new /datum/disease/xeno_transformation(0), 1)
 
 	if(M.dna)
 		if(prob(removed * 0.1))
@@ -567,4 +539,3 @@
 			domutcheck(M, null)
 			M.UpdateAppearance()
 	M.apply_effect(6 * removed, IRRADIATE, 0)
-*/

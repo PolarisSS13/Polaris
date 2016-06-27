@@ -232,11 +232,10 @@
 	reagent_state = LIQUID
 	color = "#604030"
 
-/datum/reagent/surfactant // Foam precursor
-	name = "Azosurfactant"
-	id = "surfactant"
-	description = "A isocyanate liquid that forms a foam when mixed with water."
-	taste_description = "metal"
+/datum/reagent/fluorosurfactant // Foam precursor
+	name = "Fluorosurfactant"
+	id = "fluorosurfactant"
+	description = "A perfluoronated sulfonic acid that forms a foam when mixed with water."
 	reagent_state = LIQUID
 	color = "#9E6B38"
 
