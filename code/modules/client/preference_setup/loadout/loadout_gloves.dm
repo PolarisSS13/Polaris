@@ -52,7 +52,7 @@
 
 /datum/gear/eveninggloves
 	display_name = "evening gloves"
-	path = /obj/item/clothing/evening_gloves
+	path = /obj/item/clothing/gloves/evening
 
 /datum/gear/eveninggloves/New()
 	..()
