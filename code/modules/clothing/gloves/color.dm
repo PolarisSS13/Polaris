@@ -85,7 +85,7 @@
 	icon_state = "brown"
 	item_state = "browngloves"
 
-/obj/item/clothing/evening_gloves
+/obj/item/clothing/gloves/evening
 	desc = "A pair of gloves that reach past the elbow.  Fancy!"
 	name = "evening gloves"
 	icon_state = "evening_gloves"
