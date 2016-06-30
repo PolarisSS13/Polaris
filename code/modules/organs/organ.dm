@@ -259,6 +259,10 @@ var/list/organ_cache = list()
 	min_bruised_damage = 15
 	min_broken_damage = 35
 
+/obj/item/organ/proc/digitize() //Used to make circuit organs like robobrains
+	robotize()
+	src.status &= "digital"
+
 /obj/item/organ/emp_act(severity)
 	if(!(robotic >= ORGAN_ROBOT))
 		return
