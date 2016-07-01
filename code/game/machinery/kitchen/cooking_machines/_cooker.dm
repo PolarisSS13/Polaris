@@ -76,9 +76,15 @@
 	else if(istype(check, /obj/item/weapon/disk/nuclear))
 		user << "Central Command would kill you if you [cook_type] that."
 		return 0
-	else if(!istype(check) && !istype(check, /obj/item/weapon/holder))
+	else if(!istype(check) && !istype(check, /obj/item/weapon/holder) && !istype(check, /obj/item/organ))
 		user << "<span class='warning'>That's not edible.</span>"
 		return 0
+		
+	if(istype(I, /obj/item/organ))
+		var/obj/item/organ/O = I
+		if(O.robotic)
+			user << "<span class='warning'>That would probably break [src].</span>"
+			return
 
 	// Gotta hurt.
 	if(istype(cooking_obj, /obj/item/weapon/holder))
