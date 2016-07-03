@@ -373,9 +373,18 @@
 
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
+	icon_state = "industrialwelder"
 	max_fuel = 40
 	origin_tech = list(TECH_ENGINEERING = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 60)
+
+/obj/item/weapon/weldingtool/largetank/update_icon()
+	..()
+	icon_state = welding ? "industrialwelder1" : "industrialwelder"
+	var/mob/M = loc
+	if(istype(M))
+		M.update_inv_l_hand()
+		M.update_inv_r_hand()
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
