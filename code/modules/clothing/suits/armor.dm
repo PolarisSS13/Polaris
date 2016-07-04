@@ -42,14 +42,14 @@
 	item_state = "armor"
 
 /obj/item/clothing/suit/armor/vest/warden
-	name = "Warden's jacket"
+	name = "warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
 	item_state = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/suit/armor/vest/warden/alt
-	name = "Warden's jacket"
+	name = "warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_alt"
 	item_state = "warden_alt"
@@ -70,6 +70,13 @@
 	icon_state = "riot_new"
 	item_state = "riot_new"
 
+/obj/item/clothing/suit/armor/riot/stealth
+	name = "leather jacket"
+	desc = "A black leather coat."
+	icon_state = "leather_jacket"
+	item_state = "leather_jacket"
+	slowdown = 0
+
 /obj/item/clothing/suit/armor/bulletproof
 	name = "bullet resistant vest"
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
@@ -83,6 +90,12 @@
 	icon_state = "bulletproof_new"
 	item_state = "bulletproof_new"
 	blood_overlay_type = "armor"
+
+/obj/item/clothing/suit/armor/bulletproof/stealth
+	name = "waistcoat"
+	desc = "For some classy, murderous fun."
+	icon_state = "vest"
+	item_state = "wcoat"
 
 /obj/item/clothing/suit/armor/laserproof
 	name = "ablative armor vest"
@@ -112,6 +125,12 @@
 			P.redirect(new_x, new_y, curloc, user)
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
+
+/obj/item/clothing/suit/armor/laserproof/stealth
+	name = "labcoat"
+	desc = "A suit that protects against minor chemical spills."
+	icon_state = "labcoat"
+	item_state = "labcoat"
 
 /obj/item/clothing/suit/armor/combat
 	name = "combat vest"

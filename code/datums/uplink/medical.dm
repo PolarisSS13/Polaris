@@ -10,12 +10,12 @@
 	path = /obj/item/weapon/storage/box/sinpockets
 
 /datum/uplink_item/item/medical/surgery
-	name = "Surgery kit"
+	name = "Surgery Kit"
 	item_cost = 6
 	path = /obj/item/weapon/storage/firstaid/surgery
 
 /datum/uplink_item/item/medical/combat
-	name = "Combat medical kit"
+	name = "Combat Medical Kit"
 	item_cost = 6
 	path = /obj/item/weapon/storage/firstaid/combat
 
@@ -25,12 +25,12 @@
 	path = /obj/item/weapon/storage/box/freezer
 
 /datum/uplink_item/item/medical/ambrosiaseeds
-	name = "Box of 7x ambrosia seed packets"
+	name = "Box of 7x Ambrosia seed packets"
 	item_cost = 1
 	path = /obj/item/weapon/storage/box/ambrosia
 
 /datum/uplink_item/item/medical/ambrosiadeusseeds
-	name = "Box of 7x ambrosia deus seed packets"
+	name = "Box of 7x Ambrosia Deus seed packets"
 	item_cost = 2
 	path = /obj/item/weapon/storage/box/ambrosiadeus
 

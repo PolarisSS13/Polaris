@@ -38,3 +38,8 @@
 	name = "Mounted Laser Cannon"
 	item_cost = 8
 	path = /obj/item/rig_module/mounted
+
+/datum/uplink_item/item/hardsuit_modules/chem_dispenser
+	name = "Mounted Chemical Dispenser"
+	item_cost = 8
+	path = /obj/item/rig_module/chem_dispenser
