@@ -33,33 +33,33 @@
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/pistol
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/c9mm/ap
 	desc = "A 9mm armor-piercing bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/ap
-	atter = list(DEFAULT_WALL_MATERIAL = 80)
+	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
 /obj/item/ammo_casing/c9mmf
 	desc = "A 9mm flash shell casing."
 	caliber = "9mm"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/energy/flash
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/c9mmr
 	desc = "A 9mm rubber bullet casing."
 	caliber = "9mm"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/c9mmp
 	desc = "A 9mm practice bullet casing."
 	caliber = "9mm"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /*
 /obj/item/ammo_casing/c5mm
@@ -72,34 +72,34 @@
 	desc = "A .45 bullet casing."
 	caliber = ".45"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
-	atter = list(DEFAULT_WALL_MATERIAL = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 
 /obj/item/ammo_casing/c45p
 	desc = "A .45 practice bullet casing."
 	caliber = ".45"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/practice
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/c45r
 	desc = "A .45 rubber bullet casing."
 	caliber = ".45"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/bullet/pistol/rubber
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/c45f
 	desc = "A .45 flash shell casing."
 	caliber = ".45"
 	icon_state = "r-casing"
 	projectile_type = /obj/item/projectile/energy/flash
-	atter = list(DEFAULT_WALL_MATERIAL = 60)
+	matter = list(DEFAULT_WALL_MATERIAL = 60)
 
 /obj/item/ammo_casing/a10mm
 	desc = "A 10mm bullet casing."
 	caliber = "10mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
-	atter = list(DEFAULT_WALL_MATERIAL = 75)
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"
