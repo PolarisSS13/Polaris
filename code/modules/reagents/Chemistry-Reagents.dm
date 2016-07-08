@@ -24,6 +24,7 @@
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose = 0
+	var/od_type = null
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/cup_icon_state = null
@@ -57,7 +58,9 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (volume > overdose) && (location != CHEM_TOUCH))
+	if(overdose && (volume >= overdose) && (location != CHEM_TOUCH))
+//		M.overdosing += volume * 0.2
+//	if(M.overdosing > 0)
 		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
@@ -88,9 +91,29 @@
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
-/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
-	M.adjustToxLoss(REM)
-	return
+/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien)
+//	M.overdosing -= REM
+	if(od_type == "heart")
+//		if (istype(M, /mob/living/carbon/human))
+		if (ishuman(M))
+			var/mob/living/carbon/human/C = M
+			var/obj/item/organ/internal/heart/H = C.internal_organs_by_name[O_HEART]
+			playsound(M.loc, 'sound/effects/singlebeat.ogg', 5, -1)	//Don't know how to keep this mob specific
+			if (prob (5))
+				H.take_damage(1)
+				M << "<span class='danger'>You feel a stabbing pain in your chest!</span>"
+		else
+			M.adjustToxLoss(2)
+		return
+	else
+		if (istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/C = M
+			var/obj/item/organ/internal/liver/L = C.internal_organs_by_name[O_LIVER]
+			L.take_damage(rand(3,6))
+		else
+			M.adjustToxLoss(2)
+		return
+	M.adjustToxLoss(2)
 
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(!isnull(newdata))

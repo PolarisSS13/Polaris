@@ -323,8 +323,8 @@
 	else
 		M.sleeping = max(M.sleeping, 30)
 
-	if(effective_dose > 1)
-		M.adjustToxLoss(removed)
+	if(effective_dose > 10)
+		M.adjustToxLoss(removed * 15)
 
 /datum/reagent/chloralhydrate/beer2 //disguised as normal beer for use by emagged brobots
 	name = "Beer"
@@ -479,7 +479,7 @@
 		return
 
 	if(M.dna)
-		if(prob(removed * 0.1)) 
+		if(prob(removed * 0.1))
 			randmuti(M)
 			if(prob(98))
 				randmutb(M)
@@ -505,7 +505,7 @@
 		return
 
 	if(M.dna)
-		if(prob(removed * 0.1)) 
+		if(prob(removed * 0.1))
 			randmuti(M)
 			if(prob(98))
 				randmutb(M)
