@@ -1,8 +1,9 @@
 ///////// Smart Mags /////////
 
-/obj/item/ammo_magazine/lathe
+/obj/item/ammo_magazine/smart
 	name = "smart magazine"
 	icon_state = "smartmag-empty"
+	desc = "A Hephaistos Industries brand Smart Magazine. It uses advanced matter manipulation technology to create bullets from energy. Simply present your loaded gun or magazine to the Smart Magazine."
 	multiple_sprites = 1
 	max_ammo = 20
 	mag_type = MAGAZINE
@@ -18,28 +19,30 @@
 
 	var/obj/item/weapon/cell/attached_cell = null
 
-/obj/item/ammo_magazine/lathe/New()
+	var/emagged = 0
+
+/obj/item/ammo_magazine/smart/New()
 	processing_objects |= src
 	..()
 
-/obj/item/ammo_magazine/lathe/Destroy()
+/obj/item/ammo_magazine/smart/Destroy()
 	processing_objects -= src
 	..()
 
-/obj/item/ammo_magazine/lathe/examine(mob/user)
+/obj/item/ammo_magazine/smart/examine(mob/user)
 	..()
 	if(attached_cell)
 		user << "<span class='notice'>\The [src] is loaded with a [attached_cell.name]. It is [round(attached_cell.percent())]% charged.</span>"
 	if(!attached_cell)
 		user << "<span class='warning'>\The [src] does not appear to have a power source installed.</span>"
 
-/obj/item/ammo_magazine/lathe/update_icon()
+/obj/item/ammo_magazine/smart/update_icon()
 	if(attached_cell)
 		icon_state = "smartmag-filled"
 	else if(!(attached_cell))
 		icon_state = "smartmag-empty"
 
-/obj/item/ammo_magazine/lathe/proc/chargereduction()
+/obj/item/ammo_magazine/smart/proc/chargereduction()
 	if(attached_cell)
 		if(attached_cell.checked_use(production_cost))
 			return 1
@@ -48,7 +51,7 @@
 
 	return null
 
-/obj/item/ammo_magazine/lathe/proc/set_production_cost(var/obj/item/ammo_casing/A)
+/obj/item/ammo_magazine/smart/proc/set_production_cost(var/obj/item/ammo_casing/A)
 	var/list/matters = ammo_repository.get_materials_from_object(A)
 	var/tempcost
 	for(var/key in matters)
@@ -59,11 +62,20 @@
 	production_cost = tempcost
 	world << "Production cost is: [production_cost]"
 
-/obj/item/ammo_magazine/lathe/attack_self(mob/user)
-	user << "<span class='notice'>\The [src] is not designed to be unloaded.</span>"
-	return
+/obj/item/ammo_magazine/smart/attack_self(mob/user)
+	if(emagged)
+		return ..()
+	else
+		user << "<span class='notice'>\The [src] is not designed to be unloaded.</span>"
+		return
 
-/obj/item/ammo_magazine/lathe/attackby(var/obj/item/I as obj, mob/user)
+/obj/item/ammo_magazine/smart/emag_act(var/remaining_charges, var/mob/user)
+	if(!emagged)
+		user << "<span class='notice'>You overload \the [src]'s security measures causing widespread destabilisation. It is likely you could empty \the [src] now.</span>"
+		emagged = 1
+		return 1
+
+/obj/item/ammo_magazine/smart/attackby(var/obj/item/I as obj, mob/user)
 	if(istype(I, /obj/item/weapon/cell))
 		if(attached_cell)
 			user << "<span class='notice'>\The [src] already has a [attached_cell.name] attached.</span>"
@@ -118,7 +130,7 @@
 
 		stored_ammo.Cut()
 
-/obj/item/ammo_magazine/lathe/proc/produce()
+/obj/item/ammo_magazine/smart/proc/produce()
 	if(chargereduction())
 		var/obj/item/ammo_casing/W = new ammo_type(src.loc)
 		W.loc = src
@@ -127,7 +139,7 @@
 		return 1
 	return 0
 
-/obj/item/ammo_magazine/lathe/process()
+/obj/item/ammo_magazine/smart/process()
 	if(caliber && ammo_type && attached_cell)
 		if(stored_ammo.len == max_ammo)
 			return
