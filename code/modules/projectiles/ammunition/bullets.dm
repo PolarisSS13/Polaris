@@ -128,7 +128,6 @@
 	desc = "A practice shell."
 	icon_state = "pshell"
 	projectile_type = /obj/item/projectile/bullet/shotgun/practice
-	matter = list("metal" = 90)
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
 /obj/item/ammo_casing/shotgun/beanbag
