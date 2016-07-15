@@ -4,7 +4,8 @@
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
-	max_shots = 10
+	charge_cost = 240
+//	max_shots = 10
 	fire_delay = 10 // Handguns should be inferior to two-handed weapons.
 
 	projectile_type = /obj/item/projectile/beam/stun
@@ -28,7 +29,8 @@
 	icon_state = "fm-2tstun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
-	max_shots = 21	//7 trigger pulls
+	charge_cost = 100
+//	max_shots = 24	//8 trigger pulls
 
 	projectile_type = /obj/item/projectile/beam/stun/weak
 	origin_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 2, TECH_ILLEGAL = 3)

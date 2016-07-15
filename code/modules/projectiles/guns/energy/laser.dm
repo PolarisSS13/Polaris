@@ -56,7 +56,8 @@ obj/item/weapon/gun/energy/retro
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
-	max_shots = 5 //to compensate a bit for self-recharging
+	charge_cost = 480
+//	max_shots = 5 //to compensate a bit for self-recharging
 	self_recharge = 1
 
 /obj/item/weapon/gun/energy/lasercannon
@@ -69,12 +70,12 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
-	max_shots = 1
+	charge_cost = 2400
+//	max_shots = 1
 	fire_delay = 30
 //	requires_two_hands = 1
 	one_handed_penalty = 6 // The thing's heavy and huge.
 	accuracy = 3
-	charge_cost = 400
 
 
 /obj/item/weapon/gun/energy/lasercannon/mounted
@@ -86,7 +87,7 @@ obj/item/weapon/gun/energy/retro
 	requires_two_hands = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 400
-	max_shots = 6
+//	max_shots = 6
 	fire_delay = 20
 
 /obj/item/weapon/gun/energy/xray
@@ -98,8 +99,8 @@ obj/item/weapon/gun/energy/retro
 	fire_sound = 'sound/weapons/eluger.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2)
 	projectile_type = /obj/item/projectile/beam/xray
-	charge_cost = 100
-	max_shots = 12
+	charge_cost = 200
+//	max_shots = 12
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
@@ -111,8 +112,8 @@ obj/item/weapon/gun/energy/retro
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
 	slot_flags = SLOT_BACK
-	charge_cost = 400
-	max_shots = 4
+	charge_cost = 600
+//	max_shots = 4
 	fire_delay = 35
 	force = 10
 	w_class = 5 // So it can't fit in a backpack.
