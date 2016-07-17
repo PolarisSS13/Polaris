@@ -15,8 +15,8 @@
 	one_handed_penalty = 2
 
 	firemodes = list(
-		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 200),
-		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 50),
+		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 240),
+		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 60),
 		)
 
 /obj/item/weapon/gun/energy/laser/mounted
@@ -30,8 +30,8 @@
 	projectile_type = /obj/item/projectile/beam/practice
 
 	firemodes = list(
-		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 200),
-		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 50),
+		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 240),
+		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 60),
 		)
 
 obj/item/weapon/gun/energy/retro

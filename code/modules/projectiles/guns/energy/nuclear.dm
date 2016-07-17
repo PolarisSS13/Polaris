@@ -40,11 +40,11 @@
 	one_handed_penalty = 2
 
 	firemodes = list(
-		list(mode_name="stun", burst=1, projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="fm-2tstun", fire_sound='sound/weapons/Taser.ogg'),
+//		list(mode_name="stun", burst=1, projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="fm-2tstun", fire_sound='sound/weapons/Taser.ogg'),
 		list(mode_name="stun burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0), projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="fm-2tstun", fire_sound='sound/weapons/Taser.ogg'),
-		list(mode_name="lethal", burst=1, projectile_type=/obj/item/projectile/beam/weaklaser, modifystate="fm-2tkill", fire_sound='sound/weapons/Laser.ogg'),
+//		list(mode_name="lethal", burst=1, projectile_type=/obj/item/projectile/beam/weaklaser, modifystate="fm-2tkill", fire_sound='sound/weapons/Laser.ogg'),
 		list(mode_name="lethal burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0), projectile_type=/obj/item/projectile/beam/weaklaser, modifystate="fm-2tkill", fire_sound='sound/weapons/Laser.ogg'),
-		)
+		)		//Removed the single shots because the extra toggles is annoying
 
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"

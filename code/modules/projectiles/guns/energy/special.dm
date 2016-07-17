@@ -151,11 +151,11 @@ obj/item/weapon/gun/energy/staff/focus
 	/*
 	attack_self(mob/living/user as mob)
 		if(projectile_type == "/obj/item/projectile/forcebolt")
-			charge_cost = 400
+			charge_cost = 480
 			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt/strong"
 		else
-			charge_cost = 200
+			charge_cost = 240
 			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
