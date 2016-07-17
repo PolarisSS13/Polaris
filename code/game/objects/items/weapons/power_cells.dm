@@ -21,15 +21,15 @@
 		return (FIRELOSS)
 
 //currently only used by energy-type guns, that may change in the future.
-/obj/item/weapon/cell/device
-	name = "device power cell"
+/obj/item/weapon/cell/weapon
+	name = "weapons grade power cell"
 	desc = "A small power cell designed to power handheld devices."
 	icon_state = "cell" //placeholder
 	w_class = 2
 	force = 0
 	throw_speed = 5
 	throw_range = 7
-	maxcharge = 1000
+	maxcharge = 2400	//rounds nicely with shot numbers
 	matter = list("metal" = 350, "glass" = 50)
 
 /obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
