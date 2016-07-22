@@ -7,14 +7,14 @@
 	force = 10
 	fire_sound='sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam
-	charge_cost=120
+	charge_cost = 120
 //	max_shots = 20 // This is cut in half by "DESTROY" mode.
 	sel_mode = 2
 
 	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', charge_cost=120),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', charge_cost=120),
-		list(mode_name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/gauss_shoot.ogg', charge_cost=240),
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', charge_cost = 120),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', charge_cost = 120),
+		list(mode_name="DESTROY", projectile_type=/obj/item/projectile/beam/pulse, fire_sound='sound/weapons/gauss_shoot.ogg', charge_cost = 240),
 		)
 
 /obj/item/weapon/gun/energy/pulse_rifle/mounted
@@ -25,10 +25,10 @@
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
 //	cell_type = /obj/item/weapon/cell/super
-	fire_delay = null		//Aspawn only gun doesn't really need to be balanced against the station/antags
+	fire_delay = 25
 	fire_sound='sound/weapons/gauss_shoot.ogg'
 	projectile_type=/obj/item/projectile/beam/pulse
-	charge_cost=400		//6 shots standard cell
+	charge_cost = 400		//6 shots standard cell
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
 	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"
