@@ -21,21 +21,58 @@
 		return (FIRELOSS)
 
 //currently only used by energy-type guns, that may change in the future.
-/obj/item/weapon/cell/device
-	name = "device power cell"
+/obj/item/weapon/cell/weapon
+	name = "weapon cell"
 	desc = "A small power cell designed to power handheld devices."
-	icon_state = "cell" //placeholder
-	w_class = 2
+	icon_state = "cell_weapon"
+	origin_tech = list(TECH_POWER = 2, TECH_COMBAT = 2)
 	force = 0
 	throw_speed = 5
 	throw_range = 7
-	maxcharge = 1000
+	w_class = 2
+	maxcharge = 2400	//rounds nicely with shot numbers
 	matter = list("metal" = 350, "glass" = 50)
 
-/obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
+/*/obj/item/weapon/cell/weapon/variable/New(newloc, charge_amount)		//Dunno if this is really needed, inherits from cell?
 	..(newloc)
 	maxcharge = charge_amount
 	charge = maxcharge
+*/
+/obj/item/weapon/cell/weapon/high
+	name = "high-capacity weapon cell"
+	desc = "A high-capacity weapons grade power cell. It's a miracle that this much power can fit in a battery this small."
+	icon_state = "cell_weapon"
+	origin_tech = list(TECH_POWER = 3, TECH_COMBAT = 3)
+	maxcharge = 3600
+	matter = list(DEFAULT_WALL_MATERIAL = 350, "glass" = 60)
+
+/obj/item/weapon/cell/weapon/super
+	name = "weapon cell"
+	desc = "A super-capacity weapons grade power cell. This'll keep your gun going for a long while."
+	icon_state = "cell_weapon"
+	origin_tech = list(TECH_POWER = 5, TECH_COMBAT = 5)
+	maxcharge = 4800
+	matter = list(DEFAULT_WALL_MATERIAL = 350, "glass" = 70)
+
+/obj/item/weapon/cell/weapon/hyper
+	name = "weapon cell"
+	desc = "A hyper-capacity weapons grade power cell. Can't stop the phoron top!"
+	icon_state = "cell_weapon"
+	origin_tech = list(TECH_POWER = 6, TECH_COMBAT = 6)
+	maxcharge = 6000
+	matter = list(DEFAULT_WALL_MATERIAL = 350, "glass" = 80, "phoron" = 50)
+
+/obj/item/weapon/cell/weapon/infinite
+	name = "infinite-capacity weapon cell"
+	desc = "What're you even doing with this thing? Put it back in your weapon and get back to work."
+	icon_state = "cell_weapon"
+	origin_tech = list(null)
+	maxcharge = 6000
+
+	/obj/item/weapon/cell/weapon/infinite/check_charge()
+		return 1
+	/obj/item/weapon/cell/weapon/infinite/use()
+		return 1
 
 /obj/item/weapon/cell/crap
 	name = "\improper rechargable AA battery"

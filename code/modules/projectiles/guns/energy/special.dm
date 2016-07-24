@@ -9,8 +9,8 @@
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	charge_cost = 300
-	max_shots = 10
+	charge_cost = 240
+//	max_shots = 10
 	projectile_type = /obj/item/projectile/ion
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
@@ -30,7 +30,8 @@
 	item_state = "decloner"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_POWER = 3)
-	max_shots = 10
+	charge_cost = 240
+//	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/declone
 
 /obj/item/weapon/gun/energy/floragun
@@ -39,8 +40,8 @@
 	icon_state = "floramut100"
 	item_state = "floramut"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	charge_cost = 100
-	max_shots = 10
+	charge_cost = 240
+//	max_shots = 10
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
@@ -110,7 +111,8 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 4.0
-	max_shots = 5
+	charge_cost = 480
+//	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
 	self_recharge = 1
@@ -134,7 +136,8 @@
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
 	projectile_type = /obj/item/projectile/animate
-	max_shots = 10
+	charge_cost = 240
+//	max_shots = 10
 
 obj/item/weapon/gun/energy/staff/focus
 	name = "mental focus"
@@ -146,11 +149,11 @@ obj/item/weapon/gun/energy/staff/focus
 	/*
 	attack_self(mob/living/user as mob)
 		if(projectile_type == "/obj/item/projectile/forcebolt")
-			charge_cost = 400
+			charge_cost = 480
 			user << "<span class='warning'>The [src.name] will now strike a small area.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt/strong"
 		else
-			charge_cost = 200
+			charge_cost = 240
 			user << "<span class='warning'>The [src.name] will now strike only a single person.</span>"
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/

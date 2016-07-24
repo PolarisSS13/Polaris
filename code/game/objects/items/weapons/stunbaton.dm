@@ -17,7 +17,7 @@
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null
-	var/hitcost = 1000	//oh god why do power cells carry so much charge? We probably need to make a distinction between "industrial" sized power cells for APCs and power cells for everything else.
+	var/hitcost = 240
 
 /obj/item/weapon/melee/baton/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>")
@@ -30,7 +30,7 @@
 
 /obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
 	..()
-	bcell = new/obj/item/weapon/cell/high(src)
+	bcell = new/obj/item/weapon/cell/weapon(src)
 	update_icon()
 	return
 
@@ -68,13 +68,19 @@
 		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/cell))
+	if(istype(W, /obj/item/weapon/cell/weapon))
 		if(!bcell)
 			user.drop_item()
 			W.loc = src
 			bcell = W
 			user << "<span class='notice'>You install a cell in [src].</span>"
 			update_icon()
+		else
+			user << "<span class='notice'>[src] already has a cell.</span>"
+
+	else if(istype(W, /obj/item/weapon/cell))
+		if(!bcell)
+			user << "<span class='notice'>This cell is too large to fit in [src].</span>"
 		else
 			user << "<span class='notice'>[src] already has a cell.</span>"
 

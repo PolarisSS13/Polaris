@@ -4,7 +4,7 @@
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
-	max_shots = 10
+//	max_shots = 10
 	projectile_type = /obj/item/projectile/beam/stun
 
 /obj/item/weapon/gun/energy/taser/mounted
@@ -14,7 +14,8 @@
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
 	name = "taser gun"
-	max_shots = 6
+	charge_cost = 400
+//	max_shots = 6
 	recharge_time = 7 //Time it takes for shots to recharge (in ticks)
 
 
@@ -26,7 +27,8 @@
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	projectile_type = /obj/item/projectile/energy/electrode/strong
-	max_shots = 8
+	charge_cost = 300
+//	max_shots = 8
 
 
 /obj/item/weapon/gun/energy/crossbow
@@ -41,7 +43,8 @@
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
-	max_shots = 5
+	charge_cost = 480
+//	max_shots = 5
 	self_recharge = 1
 	charge_meter = 0
 
