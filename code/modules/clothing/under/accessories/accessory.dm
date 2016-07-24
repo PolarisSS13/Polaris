@@ -3,7 +3,7 @@
 	desc = "A neosilk clip-on tie."
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "bluetie"
-	item_state = ""	//no inhands
+	item_state_slots = list(slot_r_hand_str = "", slot_l_hand_str = "")
 	slot_flags = SLOT_TIE
 	w_class = 2.0
 	var/slot = "decor"
@@ -51,7 +51,7 @@
 
 	if(user)
 		user << "<span class='notice'>You attach \the [src] to \the [has_suit].</span>"
-		src.add_fingerprint(user)
+		add_fingerprint(user)
 
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
 	if(!has_suit)
@@ -60,9 +60,9 @@
 	has_suit = null
 	if(user)
 		usr.put_in_hands(src)
-		src.add_fingerprint(user)
+		add_fingerprint(user)
 	else
-		src.forceMove(get_turf(src))
+		forceMove(get_turf(src))
 
 //default attackby behaviour
 /obj/item/clothing/accessory/attackby(obj/item/I, mob/user)
@@ -172,7 +172,6 @@
 				user.visible_message("[user] places [src] against [M]'s [body_part] and listens attentively.", "You place [src] against [their] [body_part]. You [sound_strength] [sound].")
 				return
 	return ..(M,user)
-
 
 //Medals
 /obj/item/clothing/accessory/medal

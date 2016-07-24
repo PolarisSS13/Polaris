@@ -68,7 +68,7 @@
 		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/cell))
+	if(istype(W, /obj/item/weapon/cell/weapon))
 		if(!bcell)
 			user.drop_item()
 			W.loc = src
@@ -77,7 +77,11 @@
 			update_icon()
 		else
 			user << "<span class='notice'>[src] already has a cell.</span>"
-
+	if(istype(W, /obj/item/weapon/cell))
+		if(!bcell)
+			user << "<span class='notice'><This cell is too large for [src].</span>"
+		else
+			user << "<span class='notice'>[src] already has a cell.</span>"
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
 			bcell.update_icon()
