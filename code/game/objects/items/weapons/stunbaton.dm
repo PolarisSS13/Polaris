@@ -82,6 +82,12 @@
 			user << "<span class='notice'><This cell is too large for [src].</span>"
 		else
 			user << "<span class='notice'>[src] already has a cell.</span>"
+	else if(istype(W, /obj/item/weapon/cell))
+		if(!bcell)
+			user << "<span class='notice'>This cell is too large to fit in [src].</span>"
+		else
+			user << "<span class='notice'>[src] already has a cell.</span>"
+
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(bcell)
 			bcell.update_icon()
