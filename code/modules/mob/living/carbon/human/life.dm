@@ -1197,7 +1197,7 @@
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
 			if(hal_screwyhud == 3 || (oxygen_alert && !does_not_breathe))	oxygen.icon_state = "oxy1"
-			else															oxygen.icon_state = "oxy0"
+			else								oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
 			else									fire.icon_state = "fire0"
