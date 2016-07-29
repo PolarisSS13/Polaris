@@ -85,6 +85,7 @@
 	var/gunshot_residue
 	var/pulling_punches    // Are you trying not to hurt your opponent?
 	var/robolimb_count = 0 // Number of robot limbs.
+	var/robobody_count = 0 // Number of non-extremity robot parts
 
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
