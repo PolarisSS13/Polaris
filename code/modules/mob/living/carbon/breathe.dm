@@ -7,7 +7,7 @@
 
 /mob/living/carbon/proc/breathe()
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(!should_have_organ(O_LUNGS) || does_not_breathe) return
+	if(!should_have_organ(O_LUNGS)) return
 
 	var/datum/gas_mixture/breath = null
 
@@ -19,8 +19,7 @@
 		losebreath--
 		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
 			spawn emote("gasp")
-	else
-		//Okay, we can breathe, now check if we can get air
+	else	//Okay, we can breathe, now check if we can get air
 		breath = get_breath_from_internal() //First, check for air from internals
 		if(!breath)
 			breath = get_breath_from_environment() //No breath from internals so let's try to get air from our location
