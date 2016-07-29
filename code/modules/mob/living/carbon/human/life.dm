@@ -327,7 +327,7 @@
 	if(status_flags & GODMODE)
 		return
 
-	if(!breath || (breath.total_moles == 0) || suiciding)
+	if((!breath || (breath.total_moles == 0) || suiciding) && !does_not_breathe)
 		failed_last_breath = 1
 		if(suiciding)
 			adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
@@ -391,12 +391,21 @@
 	else
 		exhaling = 0
 
-	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
-	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
-	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
+	var/inhale_pp
+	var/toxins_pp
+	var/exhaled_pp
+
+	if(does_not_breathe)
+		inhale_pp = 0
+		toxins_pp = 0
+		exhaled_pp = 0
+	else
+		inhale_pp = (inhaling/breath.total_moles)*breath_pressure
+		toxins_pp = (poison/breath.total_moles)*breath_pressure
+		exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
 
 	// Not enough to breathe
-	if(inhale_pp < safe_pressure_min)
+	if((inhale_pp < safe_pressure_min) && !does_not_breathe)
 		if(prob(20))
 			spawn(0) emote("gasp")
 
@@ -480,7 +489,7 @@
 		breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"]/6, update = 0) //update after
 
 	// Were we able to breathe?
-	if (failed_inhale || failed_exhale)
+	if ((failed_inhale || failed_exhale) && !does_not_breathe)
 		failed_last_breath = 1
 	else
 		failed_last_breath = 0
@@ -1187,8 +1196,8 @@
 			if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 			else									toxin.icon_state = "tox0"
 		if(oxygen)
-			if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"
-			else									oxygen.icon_state = "oxy0"
+			if(hal_screwyhud == 3 || (oxygen_alert && !does_not_breathe))	oxygen.icon_state = "oxy1"
+			else															oxygen.icon_state = "oxy0"
 		if(fire)
 			if(fire_alert)							fire.icon_state = "fire[fire_alert]" //fire_alert is either 0 if no alert, 1 for cold and 2 for heat.
 			else									fire.icon_state = "fire0"
