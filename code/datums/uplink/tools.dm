@@ -4,6 +4,11 @@
 /datum/uplink_item/item/tools
 	category = /datum/uplink_category/tools
 
+/datum/uplink_item/item/tools/binoculars
+	name = "Binoculars"
+	item_cost = 5
+	path = /obj/item/device/binoculars
+
 /datum/uplink_item/item/tools/toolbox
 	name = "Fully Loaded Toolbox"
 	item_cost = 10
@@ -11,8 +16,25 @@
 
 /datum/uplink_item/item/tools/plastique
 	name = "C-4 (Destroys walls)"
-	item_cost = 20
+	item_cost = 10
 	path = /obj/item/weapon/plastique
+
+/datum/uplink_item/item/tools/packagebomb
+	name = "Package Bomb (Small)"
+	item_cost = 20
+	path = /obj/item/weapon/storage/box/syndie_kit/demolitions
+
+/datum/uplink_item/item/tools/packagebomb/large
+	name = "Package Bomb (Large)"
+	item_cost = 40
+	path = /obj/item/weapon/storage/box/syndie_kit/demolitions_heavy
+
+/*
+/datum/uplink_item/item/tools/packagebomb/huge
+	name = "Package Bomb (Huge)
+	item_cost = 60
+	path = /obj/item/weapon/storage/box/syndie_kit/demolitions_super_heavy
+*/
 
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"
@@ -77,3 +99,4 @@
 	name = "Teleporter Circuit Board"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 1.5
 	path = /obj/item/weapon/circuitboard/teleporter
+	blacklisted = 1
