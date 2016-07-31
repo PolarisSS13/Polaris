@@ -327,6 +327,11 @@
 	if(status_flags & GODMODE)
 		return
 
+	if(does_not_breathe)
+		failed_last_breath = 0
+		adjustOxyLoss(-5)
+		return
+
 	if(!breath || (breath.total_moles == 0) || suiciding)
 		failed_last_breath = 1
 		if(suiciding)
