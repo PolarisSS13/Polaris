@@ -6,7 +6,7 @@
 	..()
 
 /mob/living/carbon/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)
-	if(!effective_force || blocked >= 100) 
+	if(!effective_force || blocked >= 100)
 		return 0
 
 	//Hulk modifier
@@ -23,6 +23,8 @@
 	apply_damage(effective_force, I.damtype, hit_zone, blocked, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	//Melee weapon embedded object code.
+	if (I.embed == 0)
+		return 1
 	if (I && I.damtype == BRUTE && !I.anchored && !is_robot_module(I))
 		var/damage = effective_force
 		if (blocked)
@@ -32,8 +34,7 @@
 		var/embed_chance = weapon_sharp? damage/I.w_class : damage/(I.w_class*3)
 		var/embed_threshold = weapon_sharp? 5*I.w_class : 15*I.w_class
 
-		//Sharp objects will always embed if they do enough damage.
-		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
+		if(damage > embed_threshold && prob(embed_chance))
 			src.embed(I, hit_zone)
 
 	return 1
@@ -50,7 +51,7 @@
 // Knifing
 /mob/living/carbon/proc/attack_throat(obj/item/W, obj/item/weapon/grab/G, mob/user)
 
-	if(!W.edge || !W.force || W.damtype != BRUTE) 
+	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return 0 //unsuitable weapon
 
 	user.visible_message("<span class='danger'>\The [user] begins to slit [src]'s throat with \the [W]!</span>")
