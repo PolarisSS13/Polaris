@@ -103,8 +103,6 @@ var/global/datum/global_init/init = new ()
 		for(var/turf/simulated/mineral/M in world) // Ugh.
 			M.update_icon()
 
-	// Create autolathe recipes, as above.
-	populate_lathe_recipes()
 
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
@@ -159,8 +157,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
-		s["stationtime"] = worldtime2text()
-		s["roundduration"] = round_duration_as_text()
+		s["stationtime"] = stationtime2text()
+		s["roundduration"] = roundduration2text()
 
 		if(input["status"] == "2")
 			var/list/players = list()
