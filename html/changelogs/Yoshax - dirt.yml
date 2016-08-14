@@ -33,4 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Some items such as commonly found tools are now slightly more effective when wielded as weapons. This change has been made because many of them were too low, and low because of mostly holdovers from other servers where things such as grey tide are big concerns."
+  - bugfix: "Dirt accumulation on tiles will now work again."
