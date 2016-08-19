@@ -90,10 +90,8 @@
 	if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/pickaxe/plasmacutter))
 		user << "<span class='notice'>You begin to shorten the barrel of \the [src].</span>"
 		if(loaded.len)
-			for(var/i in 1 to max_shells)
-				afterattack(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-				playsound(user, fire_sound, 50, 1)
-			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
+			burst = 2			//Both shells go off for maximum fun
+			Fire(user, user, pointblank = 1)
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
