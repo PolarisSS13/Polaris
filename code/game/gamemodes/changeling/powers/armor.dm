@@ -68,6 +68,7 @@
 	name = "fleshy grippers"
 	icon_state = "lingspacesuit"
 	action_button_name = "Toggle Grippers"
+	canremove = 0
 
 /obj/item/clothing/shoes/magboots/changeling/set_slowdown()
 	slowdown = shoes? max(SHOES_SLOWDOWN, shoes.slowdown): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
@@ -130,9 +131,6 @@
 	name = "chitinous talons"
 	icon_state = "lingarmor"
 	action_button_name = "Toggle Talons"
-	armor = list(melee = 75, bullet = 60, laser = 60,energy = 60, bomb = 60, bio = 0, rad = 0)
-	siemens_coefficient = 0.3
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/shoes/magboots/changeling/armored/dropped()
 	..()
