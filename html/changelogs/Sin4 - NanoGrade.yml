@@ -35,4 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Upgrades NanoUI to version used by Paradise."
   - rscadd: "Ports tgui from Baystation."
-  - rscadd: "Airlock electronics, APC, ATM, Brig Door Timers, Space Heaters, and Canisters now use tgui."
+  - rscadd: "Airlock electronics, APC, ATM, Brig Door Timers, and Canisters now use tgui."
