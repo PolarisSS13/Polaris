@@ -37,7 +37,7 @@ var/datum/antagonist/ert/ert
 	if(!..())
 		return
 	player.current << "The Emergency Response Team works for Asset Protection; your job is to protect [company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem."
-	player.current << "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready."
+	player.current << "You should first quickly gear up and discuss a plan with your team. More members may be joining, so don't move out before you're ready."
 
 /datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
 
