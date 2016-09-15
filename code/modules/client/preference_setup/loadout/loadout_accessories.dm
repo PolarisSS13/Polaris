@@ -219,3 +219,11 @@
 /datum/gear/accessory/chaps/black
 	display_name = "chaps, black"
 	path = /obj/item/clothing/accessory/chaps/black
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaiian shirt, blue"
+	path = /obj/item/clothing/accessory/hawaii
+
+/datum/gear/accessory/hawaii/red
+	display_name = "hawaiian shirt, red"
+	path = /obj/item/clothing/accessory/hawaii/red

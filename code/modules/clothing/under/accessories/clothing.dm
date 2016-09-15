@@ -113,3 +113,22 @@
 	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
+
+/obj/item/clothing/accessory/hawaii
+	name = "flower-pattern shirt"
+	desc = "You probably need some welder googles to look at this."
+	icon_state = "hawaii"
+	item_state = "hawaii"
+
+/obj/item/clothing/accessory/hawaii/red
+	icon_state = "hawaii2"
+	item_state = "hawaii2"
+
+//TODO: Get this to work
+/*/obj/item/clothing/accessory/hawaii/random
+	name = "flower-pattern shirt"
+
+/obj/item/clothing/accessory/hawaii/random/New()
+	if(prob(50))
+		icon_state = "hawaii2"
+	color = color_rotation(rand(-11,12)*15) */

@@ -28,6 +28,7 @@
 			if("[tmp_icon_state]_tie" in icon_states(icon_override))
 				tmp_icon_state = "[tmp_icon_state]_tie"
 		inv_overlay = image(icon = mob_overlay.icon, icon_state = tmp_icon_state, dir = SOUTH)
+	inv_overlay.color = color
 	return inv_overlay
 
 /obj/item/clothing/accessory/proc/get_mob_overlay()
