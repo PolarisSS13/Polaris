@@ -306,6 +306,7 @@
 
 	if(src.loc == W)
 		return 0 //Means the item is already in the storage item
+
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
 			usr << "<span class='notice'>[src] is full, make some space.</span>"
@@ -337,10 +338,10 @@
 			usr << "<span class='notice'>[src] is too full, make some space.</span>"
 		return 0
 
-	if(W.w_class >= src.w_class && (istype(W, /obj/item/weapon/storage)))
+	if(W.w_class >= src.w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
-		return 0 //To prevent the stacking of same sized storage items.
+			usr << "<span class='notice'>[src] cannot hold [W] as it's an item of the same size.</span>"
+		return 0
 
 	return 1
 
