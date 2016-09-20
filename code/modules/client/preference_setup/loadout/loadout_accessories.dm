@@ -233,7 +233,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
 
 /datum/gear/accessory/football_jersey
-	display_name = "hair bow"
+	display_name = "football jersey"
 	path = /obj/item/clothing/accessory/football_jersey
 
 /datum/gear/accessory/football_jersey/New()
