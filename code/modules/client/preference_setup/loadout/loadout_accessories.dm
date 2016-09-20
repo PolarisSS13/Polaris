@@ -219,3 +219,11 @@
 /datum/gear/accessory/chaps/black
 	display_name = "chaps, black"
 	path = /obj/item/clothing/accessory/chaps/black
+
+/datum/gear/accessory/football_jersey
+	display_name = "hair bow"
+	path = /obj/item/clothing/accessory/football_jersey
+
+/datum/gear/accessory/football_jersey/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)

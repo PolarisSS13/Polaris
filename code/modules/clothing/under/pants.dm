@@ -159,3 +159,8 @@
 	name = "baggy camo pants"
 	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
 	icon_state = "baggy_camopants"
+
+/obj/item/clothing/under/pants/sports
+	name = "sports pants"
+	desc = "A pair of pants, for sports."
+	icon_state = "sports_pants"

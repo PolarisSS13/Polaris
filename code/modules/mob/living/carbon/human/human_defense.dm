@@ -293,12 +293,21 @@ emp_act
 					visible_message("<span class='warning'>[src] catches [O]!</span>")
 					throw_mode_off()
 					return
+		else if(in_throw_mode && speed <= THROWFORCE_SPEED_DIVISOR)
+			var/obj/held_item = get_active_hand()
+			if(istype(held_item, /obj/item/weapon/baseball_glove))
+				var/obj/item/weapon/baseball_glove/G = held_item
+				if(canmove && !restrained())
+					if(isturf(O.loc))
+						G.glove_catch(src, O)
+						throw_mode_off()
+						return
 
 		var/dtype = O.damtype
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone
-		if (istype(O.thrower, /mob/living))
+		if(istype(O.thrower, /mob/living))
 			var/mob/living/L = O.thrower
 			zone = check_zone(L.zone_sel.selecting)
 		else
@@ -315,6 +324,11 @@ emp_act
 			var/shield_check = check_shields(throw_damage, O, thrower, zone, "[O]")
 			if(shield_check == PROJECTILE_FORCE_MISS)
 				zone = null
+			else if(shield_check == PROJECTILE_REFLECT)
+				//var/obj/item/weapon/B = O
+				var/obj/item/weapon/ball/B = O
+				B.reflected(src)
+				return
 			else if(shield_check)
 				return
 
