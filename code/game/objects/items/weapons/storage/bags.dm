@@ -72,7 +72,7 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
 	slot_flags = SLOT_BELT | SLOT_POCKET
-	w_class = 3
+	w_class = 4
 	max_storage_space = 100
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
@@ -88,7 +88,7 @@
 	icon_state = "plantbag"
 	max_storage_space = 100
 	max_w_class = 3
-	w_class = 2
+	w_class = 4
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
 
 
@@ -105,7 +105,7 @@
 	desc = "A patented storage system designed for any kind of mineral sheet."
 
 	var/capacity = 300; //the number of sheets it can carry.
-	w_class = 3
+	w_class = 5
 	storage_slots = 7
 
 	allow_quick_empty = 1 // this function is superceded
@@ -245,5 +245,5 @@
 	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
 	max_storage_space = 100
 	max_w_class = 3
-	w_class = 2
+	w_class = 4
 	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)

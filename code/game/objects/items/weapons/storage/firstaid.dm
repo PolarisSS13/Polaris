@@ -14,7 +14,7 @@
 	throw_speed = 2
 	throw_range = 8
 	var/empty = 0
-	max_storage_space = 14
+	max_storage_space = 12
 
 
 /obj/item/weapon/storage/firstaid/fire
@@ -132,6 +132,7 @@
 /obj/item/weapon/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery."
+	w_class = 4
 	max_storage_space = 21
 	max_w_class = 3
 
@@ -159,7 +160,7 @@
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
 	item_state_slots = list(slot_r_hand_str = "contsolid", slot_l_hand_str = "contsolid")
-	w_class = 2.0
+	w_class = 2
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1
 	use_to_pickup = 1

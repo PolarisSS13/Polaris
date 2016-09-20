@@ -4,7 +4,7 @@
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utility"
 	storage_slots = 7
-	max_storage_space = 28 //This should ensure belts always have enough room to store whatever.
+	max_storage_space = 21 //This should ensure belts always have enough room to store whatever.
 	max_w_class = 3
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined")
