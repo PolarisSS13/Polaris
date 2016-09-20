@@ -84,3 +84,37 @@
 	new /obj/item/clothing/suit/bluetag(src)
 	new /obj/item/clothing/suit/bluetag(src)
 	new /obj/item/clothing/suit/bluetag(src)
+
+/obj/structure/closet/sports/baseball
+	name = "baseball equipment"
+	desc = "It's a storage unit for baseball equipment."
+
+/obj/structure/closet/sports/baseball/New()
+	..()
+	new /obj/item/weapon/ball/baseball(src)
+	new /obj/item/weapon/ball/baseball(src)
+	new /obj/item/weapon/baseball_glove(src)
+	new /obj/item/weapon/baseball_glove(src)
+	new /obj/item/weapon/baseball_glove(src)
+	new /obj/item/clothing/head/baseball_helmet(src)
+	new /obj/item/clothing/head/baseball_helmet(src)
+	new /obj/item/clothing/head/baseball_helmet(src)
+	new /obj/item/weapon/material/twohanded/baseballbat(src)
+
+/obj/structure/closet/sports/football
+	name = "football equipment"
+	desc = "It's a storage unit for football equipment."
+
+/obj/structure/closet/sports/football/New()
+	..()
+	new /obj/item/weapon/ball/football(src)
+	new /obj/item/weapon/ball/football(src)
+	new /obj/item/clothing/accessory/football_jersey(src)
+	new /obj/item/clothing/accessory/football_jersey(src)
+	new /obj/item/clothing/accessory/football_jersey(src)
+	new /obj/item/clothing/suit/armor/football_pads(src)
+	new /obj/item/clothing/suit/armor/football_pads(src)
+	new /obj/item/clothing/suit/armor/football_pads(src)
+	new /obj/item/clothing/head/football_helmet(src)
+	new /obj/item/clothing/head/football_helmet(src)
+	new /obj/item/clothing/head/football_helmet(src)
