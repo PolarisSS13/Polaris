@@ -33,7 +33,7 @@
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon_state = "crossbow"
-	w_class = 2.0
+	w_class = 2
 	item_state = "crossbow"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)

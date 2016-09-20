@@ -96,7 +96,7 @@
 	force = 0
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "syndballoon"
-	w_class = 4.0
+	w_class = 4
 
 /obj/item/toy/nanotrasenballoon
 	name = "criminal balloon"
@@ -107,7 +107,7 @@
 	force = 0
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "ntballoon"
-	w_class = 4.0
+	w_class = 4
 
 /*
  * Fake telebeacon
@@ -141,7 +141,7 @@
 		icon_l_hand = 'icons/mob/items/lefthand_guns.dmi',
 		icon_r_hand = 'icons/mob/items/righthand_guns.dmi',
 		)
-	w_class = 2.0
+	w_class = 2
 	attack_verb = list("attacked", "struck", "hit")
 	var/bullets = 5
 
@@ -234,7 +234,7 @@
 	desc = "It's nerf or nothing! Ages 8 and up."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
-	w_class = 1.0
+	w_class = 1
 	slot_flags = SLOT_EARS
 
 /obj/effect/foam_dart_dummy
@@ -258,7 +258,7 @@
 		slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
 		)
 	var/active = 0.0
-	w_class = 2.0
+	w_class = 2
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)
@@ -295,7 +295,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
-	w_class = 3
+	w_class = 4
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
 /*

@@ -76,6 +76,7 @@
 	armor = list(melee = 50, bullet = 30, laser = 50, energy = 20, bomb = 25, bio = 10, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0
+	w_class = 4
 
 /obj/item/clothing/suit/cultrobes/cultify()
 	return

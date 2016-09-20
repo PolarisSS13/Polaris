@@ -41,7 +41,7 @@ obj/item/weapon/gun/energy/retro
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
-	w_class = 3
+	w_class = 4
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 10 //old technology
 
@@ -53,7 +53,7 @@ obj/item/weapon/gun/energy/retro
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
-	w_class = 3
+	w_class = 4
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
 	max_shots = 5 //to compensate a bit for self-recharging
@@ -101,6 +101,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 100
 	max_shots = 12
+	w_class = 4
 
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
@@ -141,6 +142,7 @@ obj/item/weapon/gun/energy/retro
 	fire_sound = 'sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
+	w_class = 4
 
 /obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
 	if(ishuman(M))

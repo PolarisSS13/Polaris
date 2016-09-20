@@ -25,7 +25,7 @@
 	icon_state = "hatchet"
 	force_divisor = 0.2 // 12 with hardness 60 (steel)
 	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
-	w_class = 2
+	w_class = 3
 	sharp = 1
 	edge = 1
 	origin_tech = "materials=2;combat=1"

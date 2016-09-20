@@ -77,7 +77,7 @@
 	..()
 	pockets = new/obj/item/weapon/storage/internal(src)
 	pockets.max_w_class = 2
-	pockets.max_storage_space = 8
+	pockets.max_storage_space = 6
 
 /obj/item/clothing/suit/storage/vest
 	var/icon_badge

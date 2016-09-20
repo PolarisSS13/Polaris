@@ -103,7 +103,7 @@
 	force = 6
 	throw_speed = 2
 	throw_range = 9
-	w_class = 2.0
+	w_class = 2
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 	attack_verb = list("pinched", "nipped")
@@ -144,7 +144,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = 2
 
 	//Cost to make in the autolathe
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 30)
@@ -380,14 +380,14 @@
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
-	w_class = 3.0
+	w_class = 3
 	origin_tech = list(TECH_ENGINEERING = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
-	w_class = 3.0
+	w_class = 3
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120)
 	var/last_gen = 0
