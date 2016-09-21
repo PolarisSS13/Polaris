@@ -9,9 +9,9 @@
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
 		if(prob(get_block_chance(user, damage, damage_source, attacker)))
-			if(istype(damage_source, /obj/item/weapon/ball/baseball))
-			//if(istype(damage_source, /obj/item/weapon))
-				user.visible_message("<span class='danger'>\The [user] blocks [attack_text] with \the [src]!</span>")
+			//if(istype(damage_source, /obj/item/weapon/ball/baseball)) ---------------------------------------------------------------------------------------
+			if(istype(damage_source, /obj/item/weapon))
+				user.visible_message("<span class='danger'>\The [user] hits [attack_text] with \the [src]!</span>")
 				return PROJECTILE_REFLECT
 	return 0
 
@@ -21,7 +21,7 @@
 /*
 	ball
 */
-/obj/item/weapon/ball/proc/reflected(mob/user)
+/atom/movable/proc/reflected(mob/user)
 	return
 
 /obj/item/weapon/ball/attack_self(mob/user as mob)
@@ -40,9 +40,13 @@
 	desc = "A ball."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "baseball"
+	w_class = 2
 
-//obj/item/weapon/proc/reflected(mob/user)
-/obj/item/weapon/ball/baseball/reflected(mob/user)
+/*
+	Reflection on being hit
+*/
+/obj/item/weapon/reflected(mob/user)
+//obj/item/weapon/ball/baseball/reflected(mob/user) ---------------------------------------------------------------------------------------
 	var/target_x = src.x
 	var/target_y = src.y
 
@@ -57,8 +61,6 @@
 	var/target_range = get_dist(src.loc, target)
 	var/target_speed = rand(1, target_range)
 
-	//world << "X: [target_x], Y: [target_y], target_range: [target_range], target_speed: [target_speed]"  //debug
-
 	throw_at(target, target_range, target_speed)
 
 /*
@@ -69,7 +71,6 @@
 	desc = "A baseball glove."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "baseball_glove"
-//	var/ball
 
 /obj/item/weapon/baseball_glove/attack_self(mob/user as mob)
 	if(iscarbon(user))

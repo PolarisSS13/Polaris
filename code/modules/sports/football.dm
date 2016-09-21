@@ -3,6 +3,7 @@
 	desc = "A football."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "football"
+	w_class = 2
 
 /obj/item/clothing/suit/armor/football_pads
 	name = "football pads"

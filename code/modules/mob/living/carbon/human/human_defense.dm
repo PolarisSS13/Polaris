@@ -325,8 +325,7 @@ emp_act
 			if(shield_check == PROJECTILE_FORCE_MISS)
 				zone = null
 			else if(shield_check == PROJECTILE_REFLECT)
-				//var/obj/item/weapon/B = O
-				var/obj/item/weapon/ball/B = O
+				var/obj/item/weapon/B = O
 				B.reflected(src)
 				return
 			else if(shield_check)
