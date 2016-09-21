@@ -6,6 +6,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	max_shots = 10
 	fire_delay = 10 // Handguns should be inferior to two-handed weapons.
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)

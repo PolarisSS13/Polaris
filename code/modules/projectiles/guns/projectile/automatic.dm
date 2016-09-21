@@ -30,7 +30,7 @@
 	force = 10
 	caliber = "10mm"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
-	slot_flags = SLOT_BELT|SLOT_BACK
+	slot_flags = SLOT_BELT
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a10mm
@@ -286,6 +286,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 	magazine_type = /obj/item/ammo_magazine/c45uzi
 	allowed_magazines = list(/obj/item/ammo_magazine/c45uzi)
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
@@ -328,7 +329,7 @@
 	w_class = 4
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
-	slot_flags = SLOT_BELT // ToDo: Belt sprite.
+	slot_flags = SLOT_BELT|SLOT_BACK // ToDo: Belt sprite.
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/tommymag
 	allowed_magazines = list(/obj/item/ammo_magazine/tommymag, /obj/item/ammo_magazine/tommydrum)
@@ -352,7 +353,7 @@
 	force = 10
 	caliber = "a556"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
-	slot_flags = SLOT_BACK
+	slot_flags = SLOT_BACK|SLOT_BELT
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a556m
 	allowed_magazines = list(/obj/item/ammo_magazine/a556, /obj/item/ammo_magazine/a556m)

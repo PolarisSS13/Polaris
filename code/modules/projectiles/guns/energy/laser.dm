@@ -40,7 +40,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	fire_sound = 'sound/weapons/Laser.ogg'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 10 //old technology
@@ -52,7 +52,7 @@ obj/item/weapon/gun/energy/retro
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = 3
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
