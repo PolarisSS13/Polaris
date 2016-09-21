@@ -43,17 +43,7 @@
 /datum/uplink_item/item/ammo/a556/ap
 	name = "10rnd Rifle Magazine (5.56mm AP)"
 	path = /obj/item/ammo_magazine/a556/ap
-/*
-/datum/uplink_item/item/ammo/a556m
-	name = "20rnd Rifle Magazine (5.56mm)"
-	path = /obj/item/ammo_magazine/a556m
-	item_cost = 4
 
-/datum/uplink_item/item/ammo/a556m/ap
-	name = "20rnd Rifle Magazine (5.56mm AP)"
-	path = /obj/item/ammo_magazine/a556m/ap
-	item_cost = 4
-*/
 /datum/uplink_item/item/ammo/c762
 	name = "20rnd Rifle Magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/c762
@@ -84,24 +74,24 @@
 	path = /obj/item/ammo_magazine/a762/ap
 
 /datum/uplink_item/item/ammo/g12
-	name = "12g Auto-Shotgun Magazine (Slug)"
-	path = /obj/item/ammo_magazine/g12
-
-/datum/uplink_item/item/ammo/g12/beanbag
-	name = "12g Auto-Shotgun Magazine (Beanbag)"
-	path = /obj/item/ammo_magazine/g12/beanbag
-	item_cost = 10 // Discount due to it being LTL.
+	name = "12g Shotgun Box Magazine (Slug)"
+	path = /obj/item/weapon/storage/box/shotgunammo/large
 
 /datum/uplink_item/item/ammo/g12/pellet
 	name = "12g Auto-Shotgun Magazine (Pellet)"
-	path = /obj/item/ammo_magazine/g12/pellet
+	path = /obj/item/weapon/storage/box/shotgunshells/large
+
+/datum/uplink_item/item/ammo/g12/beanbag
+	name = "12g Shotgun Box (Beanbag)"
+	path = /obj/item/weapon/storage/box/beanbags/large
+	item_cost = 10 // Discount due to it being LTL.
 
 /datum/uplink_item/item/ammo/g12/stun
-	name = "12g Auto-Shotgun Magazine (Stun)"
-	path = /obj/item/weapon/storage/box/stunshells
+	name = "12g Shotgun Box Magazine (Stun)"
+	path = /obj/item/weapon/storage/box/stunshells/large
 	item_cost = 10 // Discount due to it being LTL.
 
 /datum/uplink_item/item/ammo/g12/flash
-	name = "12g Auto-Shotgun Magazine (Flash)"
-	path = /obj/item/weapon/storage/box/flashshells
+	name = "12g Shotgun Box Magazine (Flash)"
+	path = /obj/item/weapon/storage/box/flashshells/large
 	item_cost = 10 // Discount due to it being LTL.
