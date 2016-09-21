@@ -51,7 +51,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	player.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(player), slot_s_store)
 //	player.implant_loyalty()
 
-	var/obj/item/weapon/card/id/id = create_id("Asset Protection", player)
+	var/obj/item/weapon/card/id/id = create_id("Heavy Asset Protection", player)
 	if(id)
 		id.access |= get_all_station_access()
 		id.icon_state = "centcom"

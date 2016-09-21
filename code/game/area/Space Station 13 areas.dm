@@ -1698,7 +1698,12 @@ area/space/atmosalert()
 //Teleporter
 
 /area/teleporter
-	name = "\improper Teleporter"
+	name = "\improper Teleporter Room"
+	icon_state = "teleporter"
+	music = "signal"
+
+/area/teleporter/exit
+	name = "\improper Public Long-Range Teleporter Hub"
 	icon_state = "teleporter"
 	music = "signal"
 

@@ -288,20 +288,20 @@
 	on_store_visible_message_1 = "makes a ding as it moves"
 	on_store_visible_message_2 = "to the passenger deck."
 
-/obj/machinery/cryopod/robot/door/gateway
-	name = "Gateway"
-	desc = "The gateway you might've came in from.  You could leave the colony easily using this."
-	icon = 'icons/obj/machines/gateway.dmi'
-	icon_state = "offcenter"
-	base_icon_state = "offcenter"
-	occupied_icon_state = "oncenter"
+/obj/machinery/cryopod/robot/door/teleporter
+	name = "Public Teleporter"
+	desc = "The teleporter you might've came in from. You could leave the colony easily using this."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "tele0"
+	base_icon_state = "tele0"
+	occupied_icon_state = "tele1"
 	on_store_message = "has departed from the colony."
 	on_store_name = "Travel Oversight"
-	on_enter_occupant_message = "The gateway activates, and you step into the swirling portal."
+	on_enter_occupant_message = "The teleporter activates, and you step into the swirling portal."
 	on_store_visible_message_1 = "'s portal disappears just after"
 	on_store_visible_message_2 = "finishes walking across it."
 
-	time_till_despawn = 60 //1 second, because gateway.
+	time_till_despawn = 60 //1 second, because teleporter.
 
 /obj/machinery/cryopod/New()
 	announce = new /obj/item/device/radio/intercom(src)
@@ -373,11 +373,6 @@
 	qdel(R.module)
 
 	return ..()
-
-/obj/machinery/cryopod/robot/door/gateway/despawn_occupant()
-	for(var/obj/machinery/gateway/G in range(1,src))
-		G.icon_state = "off"
-	..()
 
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer

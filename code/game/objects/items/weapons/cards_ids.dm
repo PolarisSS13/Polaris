@@ -271,6 +271,7 @@
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
 	access |= get_all_station_access()
+	access += list(access_cent_specops, access_cent_general, access_cent_living)
 
 // Department-flavor IDs
 /obj/item/weapon/card/id/medical

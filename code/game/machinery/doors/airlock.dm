@@ -103,7 +103,6 @@
 /obj/machinery/door/airlock/centcom
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorele.dmi'
-	opacity = 0
 
 /obj/machinery/door/airlock/vault
 	name = "Vault"
