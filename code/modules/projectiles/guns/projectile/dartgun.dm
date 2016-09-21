@@ -8,6 +8,7 @@
 	kill_count = 15 //shorter range
 
 	muzzle_type = null
+	w_class = 4
 
 /obj/item/projectile/bullet/chemdart/New()
 	reagents = new/datum/reagents(reagent_amount)

@@ -10,6 +10,7 @@
 	charge_cost=100
 	max_shots = 20 // This is cut in half by "DESTROY" mode.
 	sel_mode = 2
+	w_class = 4
 
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', fire_delay=null, charge_cost=100),
@@ -40,3 +41,4 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon_state = "m1911-p"
 	max_shots = 5
+	w_class = 3

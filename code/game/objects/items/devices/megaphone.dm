@@ -3,7 +3,7 @@
 	desc = "A device used to project your voice. Loudly."
 	icon_state = "megaphone"
 	item_state = "radio"
-	w_class = 2.0
+	w_class = 3
 	flags = CONDUCT
 
 	var/spamcheck = 0

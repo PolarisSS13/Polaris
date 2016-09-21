@@ -102,7 +102,7 @@
 	flags = CONDUCT
 	brightness_on = 4
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = 3
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
 	hitsound = "swing_hit"
@@ -149,7 +149,7 @@
 /obj/item/device/flashlight/flare
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
-	w_class = 2.0
+	w_class = 2
 	brightness_on = 8 // Pretty bright.
 	light_power = 3
 	light_color = "#e58775"
@@ -211,7 +211,7 @@
 /obj/item/device/flashlight/glowstick
 	name = "green glowstick"
 	desc = "A green military-grade glowstick."
-	w_class = 2.0
+	w_class = 2
 	brightness_on = 4
 	light_power = 2
 	light_color = "#49F37C"

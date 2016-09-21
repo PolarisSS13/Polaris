@@ -18,7 +18,7 @@
 	icon_state = "retractor"
 	matter = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 5000)
 	flags = CONDUCT
-	w_class = 2.0
+	w_class = 2
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 
 /*
@@ -31,7 +31,7 @@
 	icon_state = "hemostat"
 	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
 	flags = CONDUCT
-	w_class = 2.0
+	w_class = 2
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("attacked", "pinched")
 
@@ -45,7 +45,7 @@
 	icon_state = "cautery"
 	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
 	flags = CONDUCT
-	w_class = 2.0
+	w_class = 2
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("burnt")
 
@@ -153,7 +153,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone-gel"
 	force = 0
-	w_class = 2.0
+	w_class = 2
 	throwforce = 1.0
 
 /obj/item/weapon/FixOVein
@@ -163,7 +163,7 @@
 	force = 0
 	throwforce = 1.0
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 3)
-	w_class = 2.0
+	w_class = 2
 	var/usage_amount = 10
 
 /obj/item/weapon/bonesetter
@@ -174,5 +174,5 @@
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
-	w_class = 2.0
+	w_class = 2
 	attack_verb = list("attacked", "hit", "bludgeoned")

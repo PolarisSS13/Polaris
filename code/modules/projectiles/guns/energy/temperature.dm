@@ -8,6 +8,7 @@
 	charge_cost = 100
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 3, TECH_MAGNET = 2)
 	slot_flags = SLOT_BELT|SLOT_BACK
+	w_class = 4
 
 	projectile_type = /obj/item/projectile/temp
 	cell_type = /obj/item/weapon/cell/high

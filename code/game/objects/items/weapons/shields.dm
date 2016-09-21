@@ -63,7 +63,7 @@
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 4
-	w_class = 4.0
+	w_class = 5
 	origin_tech = list(TECH_MATERIAL = 2)
 	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
 	attack_verb = list("shoved", "bashed")
@@ -115,7 +115,7 @@
 	icon_state = "eshield0" // eshield1 for expanded
 	slot_flags = SLOT_EARS
 	flags = CONDUCT
-	force = 3.0
+	force = 3
 	throwforce = 5.0
 	throw_speed = 1
 	throw_range = 4
@@ -150,7 +150,7 @@
 	if (active)
 		force = 10
 		update_icon()
-		w_class = 4
+		w_class = 5
 		slot_flags = null
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "<span class='notice'>\The [src] is now active.</span>"
@@ -206,7 +206,7 @@
 		force = 8
 		throwforce = 5
 		throw_speed = 2
-		w_class = 4
+		w_class = 5
 		slot_flags = SLOT_BACK
 		user << "<span class='notice'>You extend \the [src].</span>"
 	else

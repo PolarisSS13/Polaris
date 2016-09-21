@@ -4,6 +4,7 @@
 	name = "spike thrower"
 	desc = "A vicious alien projectile weapon. Parts of it quiver gelatinously, as though the thing is insectile and alive."
 
+	w_class = 5
 	var/last_regen = 0
 	var/spike_gen_time = 150
 	var/max_spikes = 3
