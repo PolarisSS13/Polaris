@@ -20,7 +20,6 @@
 /obj/item/projectile/beam/practice
 	name = "laser"
 	icon_state = "laser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
 	check_armour = "laser"
@@ -30,6 +29,7 @@
 	name = "weak laser"
 	icon_state = "laser"
 	damage = 15
+	armor_penetration = 5
 
 /obj/item/projectile/beam/burstlaser
 	damage = 30
@@ -73,7 +73,7 @@
 	name = "pulse"
 	icon_state = "u_laser"
 	damage = 50
-	armor_penetration = 30
+	armor_penetration = 50
 	light_color = "#0066FF"
 
 	muzzle_type = /obj/effect/projectile/laser_pulse/muzzle
@@ -89,6 +89,7 @@
 	name = "emitter beam"
 	icon_state = "emitter"
 	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
+	armor_penetration = 75
 	light_color = "#00CC33"
 
 	muzzle_type = /obj/effect/projectile/emitter/muzzle
@@ -98,7 +99,6 @@
 /obj/item/projectile/beam/lastertag/blue
 	name = "lasertag beam"
 	icon_state = "bluelaser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
@@ -119,7 +119,6 @@
 /obj/item/projectile/beam/lastertag/red
 	name = "lasertag beam"
 	icon_state = "laser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	no_attack_log = 1
 	damage_type = BURN
@@ -136,7 +135,6 @@
 /obj/item/projectile/beam/lastertag/omni//A laser tag bolt that stuns EVERYONE
 	name = "lasertag beam"
 	icon_state = "omnilaser"
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
 	check_armour = "laser"
@@ -157,7 +155,7 @@
 	name = "sniper beam"
 	icon_state = "xray"
 	damage = 50
-	armor_penetration = 10
+	armor_penetration = 30
 	light_color = "#00CC33"
 
 	muzzle_type = /obj/effect/projectile/xray/muzzle

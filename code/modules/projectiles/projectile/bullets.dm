@@ -125,6 +125,7 @@
 
 /obj/item/projectile/bullet/pistol
 	damage = 20
+	armor_penetration = 5
 
 /obj/item/projectile/bullet/pistol/ap
 	damage = 20
@@ -135,6 +136,8 @@
 
 /obj/item/projectile/bullet/pistol/strong //revolvers and matebas
 	damage = 60
+	armor_penetration = 15
+	penetrating = 1
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -150,6 +153,8 @@
 	name = "slug"
 	damage = 50
 	armor_penetration = 15
+	penetrating = 1
+
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
