@@ -7,7 +7,7 @@
 	icon_state = "bolt"
 	item_state = "bolt"
 	throwforce = 8
-	w_class = 3.0
+	w_class = 3
 	sharp = 1
 	edge = 0
 

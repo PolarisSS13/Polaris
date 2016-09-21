@@ -105,7 +105,7 @@
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "designated marksman rifle"
 	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 5.56mm rounds and has an under barrel grenade launcher."
-	icon_state = "carbine" // This isn't a carbine. :T
+	icon_state = "carbine"
 	item_state = "z8carbine"
 	w_class = 4
 	force = 10
@@ -177,7 +177,7 @@
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
 	icon_state = "l6closed100"
 	item_state = "l6closed"
-	w_class = 4
+	w_class = 5
 	force = 10
 	slot_flags = 0
 	max_shells = 50
@@ -325,7 +325,7 @@
 	name = "\improper Tommygun"
 	desc = "This weapon was made famous by gangsters in the 20th century. Cybersun Industries is currently reproducing these for a target market of historic gun collectors and classy criminals. Uses .45 rounds."
 	icon_state = "tommygun"
-	w_class = 3
+	w_class = 4
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 	slot_flags = SLOT_BELT // ToDo: Belt sprite.
@@ -348,7 +348,7 @@
 	desc = "The bullpup configured GP3000 is a lightweight, compact, military-grade assault rifle produced by Gurov Projectile Weapons LLC. It is sold almost exclusively to standing armies. The serial number on this one has been scratched off. Uses 5.56mm rounds."
 	icon_state = "bullpupm"
 	item_state = "bullpup"
-	w_class = 4
+	w_class = 3
 	force = 10
 	caliber = "a556"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)

@@ -25,12 +25,12 @@
 /obj/item/weapon/gun/energy/gun/burst
 	name = "burst laser"
 	desc = "The FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
-	icon_state = "fm-2tstun100"	//May resprite this to be more rifley
+	icon_state = "fm-2tstun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
 	max_shots = 18
 	force = 8
-	w_class = 4	//Probably gonna make it a rifle sooner or later
+	w_class = 3	//Same as SMGs
 	fire_delay = 6
 
 	projectile_type = /obj/item/projectile/beam/stun/weak
@@ -54,7 +54,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	slot_flags = SLOT_BELT
 	force = 8 //looks heavier than a pistol
-	w_class = 4	//Looks bigger than a pistol, too.
+	w_class = 3	//Can't be bigger than the various SMGs
 	fire_delay = 6	//This one's not a handgun, it should have the same fire delay as everything else
 	self_recharge = 1
 	modifystate = null

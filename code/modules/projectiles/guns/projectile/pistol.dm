@@ -212,7 +212,6 @@
 			user << "<span class='notice'>You unscrew [silenced] from [src].</span>"
 			user.put_in_hands(silenced)
 			silenced = 0
-			w_class = 2
 			update_icon()
 			return
 	..()
@@ -225,7 +224,6 @@
 		user.drop_item()
 		user << "<span class='notice'>You screw [I] onto [src].</span>"
 		silenced = I	//dodgy?
-		w_class = 3
 		I.loc = src		//put the silencer into the gun
 		update_icon()
 		return
@@ -243,7 +241,7 @@
 	desc = "a silencer"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
-	w_class = 2
+	w_class = 1
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"
