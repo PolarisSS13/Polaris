@@ -35,3 +35,4 @@ delete-after: True
 changes: 
   - tweak: "The sizes of some firearms have been tweaked. Pistols/SMGs/Carbines are now w_class = 3, pistols should be smaller, but the limitations of the weight class system do not allow such. Assault rifles, shotguns, and bolt-action rifles are larger and are w_class = 4, the largest weapons are the heaviest and are now w_class = 5.
   - tweak: "Most bullets, even small calibres now have a small amount of armor penetration. Furthermore, the larger sizes of bullets are now penetrating that were not before, meaning they are far more likely to go through objects."
+  - tweak: "The antag uplink no longer provides ridiculous magazines of shotgun rounds, and now provides reasonable boxes. In addition, all shotgun boxes now contain 8 rounds instead of 7, to allow you to fully load your shotgun."
