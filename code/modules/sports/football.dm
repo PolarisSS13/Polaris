@@ -1,9 +1,15 @@
-/obj/item/weapon/ball/football
+/obj/item/weapon/football
 	name = "football"
 	desc = "A football."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "football"
 	w_class = 2
+	throw_speed = 1
+	throw_range = 20
+
+/obj/item/weapon/baseball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
+		user.drop_item()
+		src.throw_at(target, throw_range, throw_speed, user)
 
 /obj/item/clothing/suit/armor/football_pads
 	name = "football pads"

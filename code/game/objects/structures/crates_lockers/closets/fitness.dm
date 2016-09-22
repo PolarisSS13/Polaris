@@ -91,8 +91,8 @@
 
 /obj/structure/closet/sports/baseball/New()
 	..()
-	new /obj/item/weapon/ball/baseball(src)
-	new /obj/item/weapon/ball/baseball(src)
+	new /obj/item/weapon/baseball(src)
+	new /obj/item/weapon/baseball(src)
 	new /obj/item/weapon/baseball_glove(src)
 	new /obj/item/weapon/baseball_glove(src)
 	new /obj/item/weapon/baseball_glove(src)
@@ -107,8 +107,8 @@
 
 /obj/structure/closet/sports/football/New()
 	..()
-	new /obj/item/weapon/ball/football(src)
-	new /obj/item/weapon/ball/football(src)
+	new /obj/item/weapon/football(src)
+	new /obj/item/weapon/football(src)
 	new /obj/item/clothing/accessory/football_jersey(src)
 	new /obj/item/clothing/accessory/football_jersey(src)
 	new /obj/item/clothing/accessory/football_jersey(src)
