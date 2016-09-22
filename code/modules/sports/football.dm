@@ -3,7 +3,7 @@
 	desc = "A football."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "football"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 1
 	throw_range = 20
 
@@ -42,5 +42,5 @@
 	slot_flags = SLOT_OCLOTHING | SLOT_TIE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	siemens_coefficient = 0.9
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	slot = "over"

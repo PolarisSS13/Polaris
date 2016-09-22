@@ -48,7 +48,7 @@
 	desc = "A ball."
 	icon = 'icons/obj/sports.dmi'
 	icon_state = "baseball"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 2
 	throw_range = 20
 
