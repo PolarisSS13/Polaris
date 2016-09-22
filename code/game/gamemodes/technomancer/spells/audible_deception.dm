@@ -60,6 +60,7 @@
 		"Nymph Chirping"		=	'sound/misc/nymphchirp.ogg',
 		"Sad Trombone"			=	'sound/misc/sadtrombone.ogg',
 		"Honk"					=	'sound/items/bikehorn.ogg',
+		"Bone Breaking"			=	'sound/effects/bone_break.wav',
 		)
 	var/selected_sound = null
 
