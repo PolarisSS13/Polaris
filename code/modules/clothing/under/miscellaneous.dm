@@ -102,7 +102,7 @@
 	name = "\improper NASA jumpsuit"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
 	icon_state = "black"
-	w_class = 4//bulky item
+	w_class = ITEMSIZE_LARGE//bulky item
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
@@ -181,6 +181,13 @@
 	desc = "A formal trouser suit for women, intended for the station's finest."
 	icon_state = "black_suit_fem"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
+
+/obj/item/clothing/under/suit_jacket/female/skirt
+	name = "executive skirt"
+	desc = "A formal suit skirt  for women, intended for the station's finest."
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	icon_state = "black_suit_fem"
+	item_state = "black_formal_skirt"
 
 /obj/item/clothing/under/suit_jacket/red
 	name = "red suit"

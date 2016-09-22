@@ -4,7 +4,7 @@
 	icon_state = "clipboard"
 	item_state = "clipboard"
 	throwforce = 0
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 3
 	throw_range = 10
 	var/obj/item/weapon/pen/haspen		//The stored pen.
@@ -146,6 +146,13 @@
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
 
 			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paper) )
+
+				if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/observer/dead) || istype(usr, /mob/living/silicon)))
+					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+					onclose(usr, "[P.name]")
+				else
+					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+					onclose(usr, "[P.name]")
 
 				P.show_content(usr)
 
