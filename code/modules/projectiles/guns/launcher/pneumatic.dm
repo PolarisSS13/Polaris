@@ -4,14 +4,14 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	slot_flags = SLOT_BELT
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 	flags =  CONDUCT
 	fire_sound_text = "a loud whoosh of moving air"
 	fire_delay = 50
 	fire_sound = 'sound/weapons/tablehit1.ogg'
 
 	var/fire_pressure                                   // Used in fire checks/pressure checks.
-	var/max_w_class = 3                                 // Hopper intake size.
+	var/max_w_class = ITEMSIZE_NORMAL                   // Hopper intake size.
 	var/max_storage_space = 20                       // Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
 
@@ -25,8 +25,8 @@
 	..()
 	item_storage = new(src)
 	item_storage.name = "hopper"
-	item_storage.max_w_class = max_w_class
-	item_storage.max_storage_space = max_storage_space
+	item_storage.max_w_class = ITEMSIZE_NORMAL
+	item_storage.max_storage_space = ITEMSIZE_COST_NORMAL * 5
 	item_storage.use_sound = null
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.

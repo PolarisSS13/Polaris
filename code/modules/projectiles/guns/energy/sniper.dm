@@ -12,7 +12,7 @@
 	max_shots = 4
 	fire_delay = 35
 	force = 10
-	w_class = 5 // So it can't fit in a backpack.
+	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	accuracy = -3 //shooting at the hip
 	scoped_accuracy = 0
 //	requires_two_hands = 1

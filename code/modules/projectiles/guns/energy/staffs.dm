@@ -9,7 +9,7 @@
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 4
+	w_class = ITEMSIZE_LARGE
 	max_shots = 5
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null

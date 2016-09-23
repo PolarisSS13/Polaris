@@ -104,7 +104,7 @@
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
 	icon_state = "silenced_pistol"
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	caliber = ".45"
 	silenced = 1
 	fire_delay = 1
@@ -190,7 +190,7 @@
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
@@ -241,7 +241,7 @@
 	desc = "a silencer"
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "silencer"
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 
 /obj/item/weapon/gun/projectile/pirate
 	name = "zip gun"
@@ -282,7 +282,7 @@
 	desc = "It's not size of your gun that matters, just the size of your load. Uses .357 rounds." //OHHH MYYY~
 	icon_state = "derringer"
 	item_state = "concealed"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
