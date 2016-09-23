@@ -62,7 +62,7 @@ Buildable meters
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "simple"
 	item_state = "buildpipe"
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3
 	level = 2
 
 /obj/item/pipe/New(var/loc, var/pipe_type as num, var/dir as num, var/obj/machinery/atmospherics/make_from = null)
@@ -1160,7 +1160,7 @@ Buildable meters
 	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "meter"
 	item_state = "buildpipe"
-	w_class = ITEMSIZE_LARGE
+	w_class = 4
 
 /obj/item/pipe_meter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	..()

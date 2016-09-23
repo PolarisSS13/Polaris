@@ -15,7 +15,7 @@
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
 	item_state = "camera"
-	w_class = ITEMSIZE_TINY
+	w_class = 1.0
 
 
 /********
@@ -28,7 +28,7 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
@@ -121,7 +121,7 @@ var/global/photo_count = 0
 	desc = "A polaroid camera. 10 photos left."
 	icon_state = "camera"
 	item_state = "camera"
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)

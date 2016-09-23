@@ -2,7 +2,7 @@
 	name = "Force Missile"
 	desc = "This fires a missile at your target.  It's cheap to use, however the projectile itself moves and impacts in such a way \
 	that armor designed to protect from blunt force will mitigate this function as well."
-	cost = 50
+	cost = 100
 	obj_path = /obj/item/weapon/spell/projectile/force_missile
 	category = OFFENSIVE_SPELLS
 

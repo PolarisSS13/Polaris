@@ -49,7 +49,7 @@ var/list/civilian_cartridges = list(
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "cart"
 	item_state = "electronic"
-	w_class = ITEMSIZE_TINY
+	w_class = 1
 
 	var/obj/item/radio/integrated/radio = null
 	var/access_security = 0

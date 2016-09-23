@@ -3,7 +3,7 @@
 	desc = "Talk through this."
 	icon_state = "intercom"
 	anchored = 1
-	w_class = ITEMSIZE_LARGE
+	w_class = 4.0
 	canhear_range = 2
 	flags = CONDUCT | NOBLOODY
 	var/circuit = /obj/item/weapon/circuitboard/intercom

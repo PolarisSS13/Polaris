@@ -3,7 +3,7 @@
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "aicard" // aicard-full
 	item_state = "electronic"
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 	slot_flags = SLOT_BELT
 	show_messages = 0
 

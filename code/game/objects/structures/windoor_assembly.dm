@@ -16,7 +16,7 @@ obj/structure/windoor_assembly
 	anchored = 0
 	density = 0
 	dir = NORTH
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3
 
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/created_name = null

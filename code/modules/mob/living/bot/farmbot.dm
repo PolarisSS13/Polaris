@@ -313,7 +313,7 @@
 	var/build_step = 0
 	var/created_name = "Farmbot"
 	var/obj/tank
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3.0
 
 
 /obj/item/weapon/farmbot_arm_assembly/New(var/newloc, var/theTank)

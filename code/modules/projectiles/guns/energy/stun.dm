@@ -33,7 +33,7 @@
 	name = "mini energy-crossbow"
 	desc = "A weapon favored by many mercenary stealth specialists."
 	icon_state = "crossbow"
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 	item_state = "crossbow"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
@@ -52,7 +52,7 @@
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
 	desc = "A weapon favored by mercenary infiltration teams."
-	w_class = ITEMSIZE_LARGE
+	w_class = 4
 	force = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)
 	projectile_type = /obj/item/projectile/energy/bolt/large

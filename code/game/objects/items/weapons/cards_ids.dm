@@ -15,7 +15,7 @@
 	name = "card"
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
-	w_class = ITEMSIZE_TINY
+	w_class = 1
 	slot_flags = SLOT_EARS
 	var/associated_account_number = 0
 

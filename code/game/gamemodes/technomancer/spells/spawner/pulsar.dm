@@ -1,7 +1,7 @@
 /datum/technomancer/spell/pulsar
 	name = "Pulsar"
 	desc = "Emits electronic pulses to destroy, disable, or otherwise harm devices and machines.  Be sure to not hit yourself with this."
-	cost = 100
+	cost = 150
 	obj_path = /obj/item/weapon/spell/spawner/pulsar
 	category = OFFENSIVE_SPELLS
 

@@ -8,7 +8,7 @@
 
 	flags = CONDUCT
 	force = 5.0
-	w_class = ITEMSIZE_TINY
+	w_class = 1.0
 	slot_flags = SLOT_EARS
 	throwforce = 5.0
 	throw_range = 15
@@ -51,7 +51,7 @@
 	icon_state = "pda"
 	item_state = "electronic"
 
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ILLEGAL = 3)
 

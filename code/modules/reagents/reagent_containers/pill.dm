@@ -8,7 +8,7 @@
 	icon_state = null
 	item_state = "pill"
 	possible_transfer_amounts = null
-	w_class = ITEMSIZE_TINY
+	w_class = 1
 	slot_flags = SLOT_EARS
 	volume = 60
 

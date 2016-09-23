@@ -1,7 +1,7 @@
 /datum/technomancer/spell/darkness
 	name = "Darkness"
 	desc = "Disrupts photons moving in a local area, causing darkness to shroud yourself or a position of your choosing."
-	cost = 25
+	cost = 30
 	obj_path = /obj/item/weapon/spell/spawner/darkness
 	category = UTILITY_SPELLS
 

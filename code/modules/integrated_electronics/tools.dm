@@ -12,7 +12,7 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "wirer-wire"
 	flags = CONDUCT
-	w_class = ITEMSIZE_SMALL
+	w_class = 2
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
 
@@ -111,12 +111,12 @@
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "debugger"
 	flags = CONDUCT
-	w_class = ITEMSIZE_SMALL
+	w_class = 2
 	var/data_to_write = null
 	var/accepting_refs = 0
 
 /obj/item/device/integrated_electronics/debugger/attack_self(mob/user)
-	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref", "null")
+	var/type_to_use = input("Please choose a type to use.","[src] type setting") as null|anything in list("string","number","ref")
 	var/new_data = null
 	switch(type_to_use)
 		if("string")
@@ -135,9 +135,6 @@
 			accepting_refs = 1
 			user << "<span class='notice'>You turn \the [src]'s ref scanner on.  Slide it across \
 			an object for a ref of that object to save it in memory.</span>"
-		if("null")
-			data_to_write = null
-			user << "<span class='notice'>You set \the [src]'s memory to absolutely nothing.</span>"
 
 /obj/item/device/integrated_electronics/debugger/afterattack(atom/target, mob/living/user, proximity)
 	if(accepting_refs && proximity)
@@ -162,10 +159,10 @@
 	desc = "This kit's essential for any circuitry projects."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "circuit_kit"
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3
 	storage_slots = 200
-	max_storage_space = ITEMSIZE_COST_NORMAL * 100
-	max_w_class = ITEMSIZE_NORMAL
+	max_storage_space = 400
+	max_w_class = 3
 	display_contents_with_number = 1
 	can_hold = list(/obj/item/integrated_circuit, /obj/item/device/integrated_electronics, /obj/item/device/electronic_assembly,
 	/obj/item/weapon/screwdriver, /obj/item/weapon/crowbar)

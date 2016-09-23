@@ -2,7 +2,7 @@
 	name = "Phase Shift"
 	desc = "Hides you in the safest possible place, where no harm can come to you.  Unfortunately you can only stay inside for a few moments before \
 	draining your powercell."
-	cost = 50
+	cost = 80
 	obj_path = /obj/item/weapon/spell/phase_shift
 	category = DEFENSIVE_SPELLS
 

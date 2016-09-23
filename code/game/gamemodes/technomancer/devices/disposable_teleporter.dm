@@ -2,7 +2,7 @@
 	name = "Disposable Teleporter"
 	desc = "An ultra-safe teleportation device that can directly teleport you to a number of locations at minimal risk, however \
 	it has a limited amount of charges."
-	cost = 50
+	cost = 100
 	obj_path = /obj/item/weapon/disposable_teleporter
 
 /obj/item/weapon/disposable_teleporter
@@ -11,7 +11,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "hand_tele" //temporary
 	var/uses = 3.0
-	w_class = ITEMSIZE_TINY
+	w_class = 1
 	item_state = "paper"
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_POWER = 3)
 

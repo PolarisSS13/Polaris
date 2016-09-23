@@ -5,7 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_stake"
 	density = 1
-	w_class = ITEMSIZE_HUGE
+	w_class = 5
 	flags = CONDUCT
 	var/obj/item/target/pinned_target // the current pinned target
 

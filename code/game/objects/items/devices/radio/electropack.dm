@@ -10,7 +10,7 @@
 	frequency = 1449
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = ITEMSIZE_HUGE
+	w_class = 5.0
 
 	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 2500)
 

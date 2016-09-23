@@ -1,7 +1,7 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3.0
 
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
@@ -143,19 +143,18 @@
 
 	src.loc = T
 
-// See inventory_sizes.dm for the defines.
 /obj/item/examine(mob/user, var/distance = -1)
 	var/size
 	switch(src.w_class)
-		if(ITEMSIZE_TINY)
+		if(1.0)
 			size = "tiny"
-		if(ITEMSIZE_SMALL)
+		if(2.0)
 			size = "small"
-		if(ITEMSIZE_NORMAL)
+		if(3.0)
 			size = "normal-sized"
-		if(ITEMSIZE_LARGE)
+		if(4.0)
 			size = "bulky"
-		if(ITEMSIZE_HUGE)
+		if(5.0)
 			size = "huge"
 	return ..(user, distance, "", "It is a [size] item.")
 

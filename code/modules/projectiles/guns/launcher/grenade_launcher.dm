@@ -3,7 +3,7 @@
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon_state = "riotgun"
 	item_state = "riotgun"
-	w_class = ITEMSIZE_LARGE
+	w_class = 4
 	force = 10
 
 	fire_sound = 'sound/weapons/empty.ogg'
@@ -94,7 +94,7 @@
 /obj/item/weapon/gun/launcher/grenade/underslung
 	name = "underslung grenade launcher"
 	desc = "Not much more than a tube and a firing mechanism, this grenade launcher is designed to be fitted to a rifle."
-	w_class = ITEMSIZE_NORMAL
+	w_class = 3
 	force = 5
 	max_grenades = 0
 

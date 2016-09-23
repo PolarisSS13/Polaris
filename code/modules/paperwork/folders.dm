@@ -3,7 +3,7 @@
 	desc = "A folder."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "folder"
-	w_class = ITEMSIZE_SMALL
+	w_class = 2
 	pressure_resistance = 2
 
 /obj/item/weapon/folder/blue

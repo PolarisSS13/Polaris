@@ -1,7 +1,7 @@
 /datum/technomancer/spell/biomed_aura
 	name = "Restoration Aura"
 	desc = "Heals you and your allies (or everyone, if you want) of trauma and burns slowly, as long as they remain within four meters."
-	cost = 100
+	cost = 150
 	obj_path = /obj/item/weapon/spell/aura/biomed
 	ability_icon_state = "tech_biomedaura"
 	category = SUPPORT_SPELLS

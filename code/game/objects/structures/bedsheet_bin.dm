@@ -14,7 +14,7 @@ LINEN BINS
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
-	w_class = ITEMSIZE_SMALL
+	w_class = 2.0
 
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)
 	user.drop_item()
