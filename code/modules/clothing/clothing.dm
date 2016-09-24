@@ -111,7 +111,7 @@
 // Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
 	throwforce = 2
 	slot_flags = SLOT_EARS
 	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/ears.dmi')
@@ -157,7 +157,7 @@
 
 /obj/item/clothing/ears/offear
 	name = "Other ear"
-	w_class = 5.0
+	w_class = ITEMSIZE_HUGE
 	icon = 'icons/mob/screen1_Midnight.dmi'
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
@@ -169,50 +169,20 @@
 		icon_state = O.icon_state
 		set_dir(O.dir)
 
-/obj/item/clothing/ears/earmuffs
-	name = "earmuffs"
-	desc = "Protects your hearing from loud noises, and quiet ones as well."
-	icon_state = "earmuffs"
-	item_state = "earmuffs"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
-	ear_protection = 2
-
-/obj/item/clothing/ears/earmuffs/headphones
-	name = "headphones"
-	desc = "Unce unce unce unce."
-	var/headphones_on = 0
-	icon_state = "headphones_off"
-	item_state = "headphones"
-	slot_flags = SLOT_EARS | SLOT_TWOEARS
-
-/obj/item/clothing/ears/earmuffs/headphones/verb/togglemusic()
-	set name = "Toggle Headphone Music"
-	set category = "Object"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	if(headphones_on)
-		icon_state = "headphones_off"
-		headphones_on = 0
-		usr << "<span class='notice'>You turn the music off.</span>"
-	else
-		icon_state = "headphones_on"
-		headphones_on = 1
-		usr << "<span class='notice'>You turn the music on.</span>"
-
-	update_clothing_icon()
-
 //Gloves
 /obj/item/clothing/gloves
 	name = "gloves"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_gloves.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_gloves.dmi',
+		)
 	gender = PLURAL //Carn: for grammarically correct text-parsing
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	icon = 'icons/obj/clothing/gloves.dmi'
 	siemens_coefficient = 0.75
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
-	var/clipped = 0
+	var/overgloves = 0
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
@@ -267,7 +237,7 @@
 		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 
 	var/light_overlay = "helmet_light"
 	var/light_applied
@@ -369,6 +339,10 @@
 /obj/item/clothing/mask
 	name = "mask"
 	icon = 'icons/obj/clothing/masks.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_masks.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_masks.dmi',
+		)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
@@ -393,6 +367,10 @@
 /obj/item/clothing/shoes
 	name = "shoes"
 	icon = 'icons/obj/clothing/shoes.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_shoes.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_shoes.dmi',
+		)
 	desc = "Comfortable-looking shoes."
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	siemens_coefficient = 0.9
@@ -471,6 +449,10 @@
 //Suit
 /obj/item/clothing/suit
 	icon = 'icons/obj/clothing/suits.dmi'
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_suits.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_suits.dmi',
+		)
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
@@ -479,11 +461,13 @@
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	sprite_sheets = list(
 		"Teshari" = 'icons/mob/species/seromi/suit.dmi'
 		)
+
+	valid_accessory_slots = list("over")
 
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
@@ -503,7 +487,7 @@
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	show_messages = 1
 
 	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
@@ -523,7 +507,7 @@
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.
 	//Also used by rolling/unrolling.
 	var/worn_state = null
-	valid_accessory_slots = list("utility","armband","decor")
+	valid_accessory_slots = list("utility","armband","decor","over")
 	restricted_accessory_slots = list("utility", "armband")
 
 

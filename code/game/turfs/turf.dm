@@ -38,9 +38,6 @@
 	else
 		luminosity = 1
 
-/turf/proc/update_icon()
-	return
-
 /turf/Destroy()
 	turfs -= src
 	..()
@@ -134,7 +131,7 @@ var/const/enterloopsanity = 100
 			M.lastarea = get_area(M.loc)
 		if(M.lastarea.has_gravity == 0)
 			inertial_drift(M)
-		else if(is_space())
+		else if(!is_space())
 			M.inertia_dir = 0
 			M.make_floating(0)
 	..()

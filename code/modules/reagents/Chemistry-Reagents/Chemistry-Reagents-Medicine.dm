@@ -112,9 +112,9 @@
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustOxyLoss(-6 * removed)
-		M.heal_organ_damage(3 * removed, 3 * removed)
-		M.adjustToxLoss(-3 * removed)
+		M.adjustOxyLoss(-3 * removed)
+		M.heal_organ_damage(1.5 * removed, 1.5 * removed)
+		M.adjustToxLoss(-1.5 * removed)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
@@ -310,7 +310,7 @@
 	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 	reagent_state = LIQUID
 	color = "#FF3300"
-	metabolism = REM * 0.15
+	metabolism = REM * 0.3
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

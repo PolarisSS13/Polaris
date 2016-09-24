@@ -31,6 +31,21 @@
 	path = /obj/item/clothing/head/beret/sec/navy/hos
 	allowed_roles = list("Head of Security")
 
+/datum/gear/head/beret/csec
+	display_name = "beret, corporate (officer)"
+	path = /obj/item/clothing/head/beret/sec/corporate/officer
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
+/datum/gear/head/beret/csec_warden
+	display_name = "beret, corporate (warden)"
+	path = /obj/item/clothing/head/beret/sec/corporate/warden
+	allowed_roles = list("Head of Security","Warden")
+
+/datum/gear/head/beret/csec_hos
+	display_name = "beret, corporate (hos)"
+	path = /obj/item/clothing/head/beret/sec/corporate/hos
+	allowed_roles = list("Head of Security")
+
 /datum/gear/head/beret/eng
 	display_name = "beret, engie-orange"
 	path = /obj/item/clothing/head/beret/engineering
@@ -207,5 +222,49 @@
 	path = /obj/item/clothing/head/turban
 
 /datum/gear/head/turban/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/beanie
+	display_name = "beanie"
+	path = /obj/item/clothing/head/beanie
+
+/datum/gear/head/beanie/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/loose_beanie
+	display_name = "loose beanie"
+	path = /obj/item/clothing/head/beanie_loose
+
+/datum/gear/head/loose_beanie/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/beretg
+	display_name = "beret"
+	path = /obj/item/clothing/head/beretg
+
+/datum/gear/head/beretg/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/sombrero
+	display_name = "sombrero"
+	path = /obj/item/clothing/head/sombrero
+
+/datum/gear/head/flatcapg
+	display_name = "flat cap"
+	path = /obj/item/clothing/head/flatcap/grey
+
+/datum/gear/head/flatcapg/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/bow
+	display_name = "hair bow"
+	path = /obj/item/clothing/head/hairflower/bow
+
+/datum/gear/head/bow/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)

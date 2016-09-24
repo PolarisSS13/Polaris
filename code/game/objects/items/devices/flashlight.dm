@@ -3,8 +3,7 @@
 	desc = "A hand-held emergency light."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flashlight"
-	item_state = "flashlight"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
@@ -89,22 +88,21 @@
 	name = "penlight"
 	desc = "A pen-sized light, used by medical staff."
 	icon_state = "penlight"
-	item_state = ""
+	item_state = "pen"
 	flags = CONDUCT
 	slot_flags = SLOT_EARS
 	brightness_on = 2
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 
 /obj/item/device/flashlight/maglight
 	name = "maglight"
 	desc = "A very, very heavy duty flashlight."
 	icon_state = "maglight"
-	item_state = "maglight"
 	force = 10
 	flags = CONDUCT
 	brightness_on = 4
 	slot_flags = SLOT_BELT
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(DEFAULT_WALL_MATERIAL = 200,"glass" = 50)
 	hitsound = "swing_hit"
@@ -113,10 +111,10 @@
 	name = "low-power flashlight"
 	desc = "A miniature lamp, that might be used by small robots."
 	icon_state = "penlight"
-	item_state = ""
+	item_state = null
 	flags = CONDUCT
 	brightness_on = 2
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 
 
 // the desk lamps are a bit special
@@ -124,9 +122,8 @@
 	name = "desk lamp"
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
-	item_state = "lamp"
 	brightness_on = 5
-	w_class = 4
+	w_class = ITEMSIZE_LARGE
 	flags = CONDUCT
 
 	on = 1
@@ -136,7 +133,6 @@
 /obj/item/device/flashlight/lamp/green
 	desc = "A classic green-shaded desk lamp."
 	icon_state = "lampgreen"
-	item_state = "lampgreen"
 	brightness_on = 5
 	light_color = "#FFC58F"
 
@@ -153,7 +149,7 @@
 /obj/item/device/flashlight/flare
 	name = "flare"
 	desc = "A red standard-issue flare. There are instructions on the side reading 'pull cord, make light'."
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	brightness_on = 8 // Pretty bright.
 	light_power = 3
 	light_color = "#e58775"
@@ -215,7 +211,7 @@
 /obj/item/device/flashlight/glowstick
 	name = "green glowstick"
 	desc = "A green military-grade glowstick."
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	brightness_on = 4
 	light_power = 2
 	light_color = "#49F37C"
@@ -287,7 +283,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "floor1" //not a slime extract sprite but... something close enough!
 	item_state = "slime"
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	brightness_on = 6
 	on = 1 //Bio-luminesence has one setting, on.
 

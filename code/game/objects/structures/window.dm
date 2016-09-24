@@ -3,7 +3,7 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	layer = 3.2//Just above doors
 	pressure_resistance = 4*ONE_ATMOSPHERE
@@ -161,6 +161,7 @@
 	if(reinf) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf)
 		anchored = 0
+		update_verbs()
 		update_nearby_icons()
 		step(src, get_dir(AM, src))
 	take_damage(tforce)

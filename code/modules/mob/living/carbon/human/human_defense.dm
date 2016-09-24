@@ -18,12 +18,11 @@ emp_act
 
 	//Shields
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
-	if(shield_check)
-		if(shield_check < 0)
-			return shield_check
-		else
-			P.on_hit(src, 2, def_zone)
-			return 2
+	if(shield_check) // If the block roll succeeded, this is true.
+		if(shield_check < 0) // The shield did something weird and the bullet needs to keep doing things (e.g. it was reflected).
+			return shield_check // Likely equal to PROJECTILE_FORCE_MISS or PROJECTILE_CONTINUE.
+		else // Otherwise we blocked normally and stopped all the damage.
+			return 0
 
 	//Shrapnel
 	if(P.can_embed())
@@ -40,6 +39,8 @@ emp_act
 /mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
 	var/siemens_coeff = get_siemens_coefficient_organ(affected)
+	if(fire_stacks < 0) // Water makes you more conductive.
+		siemens_coeff *= 1.5
 	stun_amount *= siemens_coeff
 	agony_amount *= siemens_coeff
 
@@ -146,13 +147,22 @@ emp_act
 	..()
 
 /mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
-	if(check_attack_throat(I, user))
+	if(check_neckgrab_attack(I, user, target_zone))
 		return null
 
 	if(user == src) // Attacking yourself can't miss
 		return target_zone
 
-	var/hit_zone = get_zone_with_miss_chance(target_zone, src)
+	// Certain statuses make it harder to score a hit.  These are the same as gun accuracy, however melee doesn't use multiples of 15.
+	var/accuracy_penalty = 0
+	if(user.eye_blind)
+		accuracy_penalty += 75
+	if(user.eye_blurry)
+		accuracy_penalty += 30
+	if(user.confused)
+		accuracy_penalty += 45
+
+	var/hit_zone = get_zone_with_miss_chance(target_zone, src, accuracy_penalty)
 
 	if(!hit_zone)
 		visible_message("<span class='danger'>\The [user] misses [src] with \the [I]!</span>")
@@ -454,3 +464,30 @@ emp_act
 
 	return perm
 
+/mob/living/carbon/human/shank_attack(obj/item/W, obj/item/weapon/grab/G, mob/user, hit_zone)
+
+	if(!..())
+		return 0
+
+	var/organ_chance = 50
+	var/damage = shank_armor_helper(W, G, user)
+	var/obj/item/organ/external/chest = get_organ(hit_zone)
+
+	if(W.edge)
+		organ_chance = 75
+	user.next_move = world.time + 20
+	user.visible_message("<span class='danger'>\The [user] begins to twist \the [W] around inside [src]'s [chest]!</span>")
+	if(!do_after(user, 20))
+		return 0
+	if(!(G && G.assailant == user && G.affecting == src)) //check that we still have a grab
+		return 0
+
+	user.visible_message("<span class='danger'>\The [user] twists \the [W] around inside [src]'s [chest]!</span>")
+
+	if(prob(organ_chance))
+		var/obj/item/organ/internal/selected_organ = pick(chest.internal_organs)
+		selected_organ.damage = max(selected_organ.damage, damage * 0.5)
+		G.last_action = world.time
+		flick(G.hud.icon_state, G.hud)
+
+	return 1

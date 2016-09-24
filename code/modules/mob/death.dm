@@ -46,6 +46,25 @@
 		if(animation)	qdel(animation)
 		if(src)			qdel(src)
 
+/mob/proc/ash(anim="dust-m")
+	death(1)
+	var/atom/movable/overlay/animation = null
+	transforming = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'icons/mob/mob.dmi'
+	animation.master = src
+
+	flick(anim, animation)
+
+	dead_mob_list -= src
+	spawn(15)
+		if(animation)	qdel(animation)
+		if(src)			qdel(src)
 
 /mob/proc/death(gibbed,deathmessage="seizes up and falls limp...")
 
@@ -74,10 +93,11 @@
 	drop_l_hand()
 
 	if(healths)
+		healths.overlays = null // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
 		healths.icon_state = "health6"
 
 	timeofdeath = world.time
-	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)
+	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
 	living_mob_list -= src
 	dead_mob_list |= src
 

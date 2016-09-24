@@ -4,6 +4,7 @@
 	helptext = "Does not provide a warning to the victim, though they will likely realize they are suddenly freezing.  Has \
 	a three minute cooldown between uses."
 	enhancedtext = "Increases the amount of chemicals injected."
+	ability_icon_state = "ling_sting_cryo"
 	genomecost = 1
 	verbpath = /mob/proc/changeling_cryo_sting
 
@@ -19,7 +20,6 @@
 	if(src.mind.changeling.recursive_enhancement)
 		inject_amount = inject_amount * 1.5
 		src << "<span class='notice'>We inject extra chemicals.</span>"
-		src.mind.changeling.recursive_enhancement = 0
 	if(T.reagents)
 		T.reagents.add_reagent("cryotoxin", inject_amount)
 	feedback_add_details("changeling_powers","CS")

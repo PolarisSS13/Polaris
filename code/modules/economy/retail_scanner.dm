@@ -6,7 +6,7 @@
 	flags = NOBLUDGEON|CONDUCT
 	slot_flags = SLOT_BELT
 	req_access = list(access_heads)
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1)
 
 	var/locked = 1
@@ -231,7 +231,7 @@
 					T.amount = "([transaction_amount])"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					D.transaction_log.Add(T)
 
 					// Create log entry in owner's account
@@ -241,7 +241,7 @@
 					T.amount = "[transaction_amount]"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					linked_account.transaction_log.Add(T)
 
 					// Save log
@@ -274,7 +274,7 @@
 			T.amount = "[transaction_amount]"
 			T.source_terminal = machine_id
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			linked_account.transaction_log.Add(T)
 
 			// Save log
@@ -348,7 +348,7 @@
 	<tr></tr>
 	<tr><td class="tx-name">Customer</td><td class="tx-data">[c_name]</td></tr>
 	<tr><td class="tx-name">Pay Method</td><td class="tx-data">[p_method]</td></tr>
-	<tr><td class="tx-name">Station Time</td><td class="tx-data">[worldtime2text()]</td></tr>
+	<tr><td class="tx-name">Station Time</td><td class="tx-data">[stationtime2text()]</td></tr>
 	</table>
 	<table width=300>
 	"}

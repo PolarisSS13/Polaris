@@ -7,10 +7,6 @@
 	icon_state = "space"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment."
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
-	item_state_slots = list(
-		slot_l_hand_str = "s_helmet",
-		slot_r_hand_str = "s_helmet",
-		)
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
@@ -50,8 +46,7 @@
 	name = "Space suit"
 	desc = "A suit that protects against low pressure environments. \""+station_short+"\" is written in large block letters on the back."
 	icon_state = "space"
-	item_state = "s_suit"
-	w_class = 5 // So you can't fit this in your bag and be prepared at all times.
+	w_class = ITEMSIZE_HUGE // So you can't fit this in your bag and be prepared at all times.
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.02
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
@@ -68,7 +63,7 @@
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
 
 /obj/item/clothing/suit/space/equipped(mob/M)
-	check_limb_support()
+	check_limb_support(M)
 	..()
 
 /obj/item/clothing/suit/space/dropped(var/mob/user)
@@ -82,14 +77,24 @@
 /obj/item/clothing/suit/space/proc/check_limb_support(var/mob/living/carbon/human/user)
 
 	// If this isn't set, then we don't need to care.
-	if(!supporting_limbs || !supporting_limbs.len)
+	if(!istype(user) || isnull(supporting_limbs))
 		return
 
-	if(!istype(user) || user.wear_suit == src)
-		return
+	if(user.wear_suit == src)
+		for(var/obj/item/organ/external/E in user.bad_external_organs)
+			if(E.is_broken() && E.apply_splint(src))
+				user << "You feel [src] constrict about your [E.name], supporting it."
+				supporting_limbs |= E
+	else
+		// Otherwise, remove the splints.
+		for(var/obj/item/organ/external/E in supporting_limbs)
+			if(E.splinted == src && E.remove_splint(src))
+				user << "\The [src] stops supporting your [E.name]."
+		supporting_limbs.Cut()
 
-	// Otherwise, remove the splints.
-	for(var/obj/item/organ/external/E in supporting_limbs)
-		E.status &= ~ ORGAN_SPLINTED
-		user << "The suit stops supporting your [E.name]."
-	supporting_limbs = list()
+/obj/item/clothing/suit/space/proc/handle_fracture(var/mob/living/carbon/human/user, var/obj/item/organ/external/E)
+	if(!istype(user) || isnull(supporting_limbs))
+		return
+	if(E.is_broken() && E.apply_splint(src))
+		user << "You feel [src] constrict about your [E.name], supporting it."
+		supporting_limbs |= E

@@ -50,7 +50,7 @@
 	var/flags = 0                           // Various runtime options.
 
 	// Used for setting appearance.
-	var/list/valid_species =       list("Unathi","Tajara","Skrell","Human")
+	var/list/valid_species =       list("Unathi","Tajara","Skrell","Human","Diona","Teshari")
 
 	// Runtime vars.
 	var/datum/mind/leader                   // Current leader, if any.
@@ -104,6 +104,9 @@
 		if(ghosts_only && !istype(player.current, /mob/observer/dead))
 			candidates -= player
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role! They have been removed from the draft.")
+		else if(istype(player.current, /mob/living/voice))
+			candidates -= player
+			log_debug("[key_name(player)] is not eligible to become a [role_text]: They are only a communicator voice. They have been removed from the draft.")
 		else if(player.special_role)
 			candidates -= player
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: They already have a special role ([player.special_role])! They have been removed from the draft.")

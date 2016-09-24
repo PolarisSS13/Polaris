@@ -4,8 +4,8 @@
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "ed2090"
 	density = 1
-	health = 100
-	maxHealth = 100
+	health = 200
+	maxHealth = 200
 
 	is_ranged = 1
 	preparing_arrest_sounds = new()
@@ -76,7 +76,7 @@
 	desc = "Some sort of bizarre assembly."
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "ed209_frame"
-	item_state = "ed209_frame"
+	item_state = "buildpipe"
 	created_name = "ED-209 Security Robot"
 	var/lasercolor = ""
 
@@ -94,17 +94,15 @@
 
 	switch(build_step)
 		if(0, 1)
-			if(istype(W, /obj/item/robot_parts/l_leg) || istype(W, /obj/item/robot_parts/r_leg))
+			if(istype(W, /obj/item/robot_parts/l_leg) || istype(W, /obj/item/robot_parts/r_leg) || (istype(W, /obj/item/organ/external/leg) && ((W.name == "robotic right leg") || (W.name == "robotic left leg"))))
 				user.drop_item()
 				qdel(W)
 				build_step++
 				user << "<span class='notice'>You add the robot leg to [src].</span>"
 				name = "legs/frame assembly"
 				if(build_step == 1)
-					item_state = "ed209_leg"
 					icon_state = "ed209_leg"
 				else
-					item_state = "ed209_legs"
 					icon_state = "ed209_legs"
 
 		if(2)

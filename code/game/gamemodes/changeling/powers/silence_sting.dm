@@ -3,6 +3,7 @@
 	desc = "We silently sting a human, completely silencing them for a short time."
 	helptext = "Does not provide a warning to a victim that they have been stung, until they try to speak and cannot."
 	enhancedtext = "Silence duration is extended."
+	ability_icon_state = "ling_sting_mute"
 	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_silence_sting
@@ -18,7 +19,6 @@
 	if(src.mind.changeling.recursive_enhancement)
 		duration = duration + 10
 		src << "<span class='notice'>They will be unable to cry out in fear for a little longer.</span>"
-		src.mind.changeling.recursive_enhancement = 0
 	T.silent += duration
 	feedback_add_details("changeling_powers","SS")
 	return 1

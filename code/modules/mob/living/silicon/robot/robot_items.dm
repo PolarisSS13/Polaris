@@ -152,9 +152,9 @@
 
 			if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
 				var/add = 0
-				if(I.w_class == 1.0)
+				if(I.w_class == ITEMSIZE_TINY)
 					add = 1
-				else if(I.w_class == 2.0)
+				else if(I.w_class == ITEMSIZE_SMALL)
 					add = 3
 				else
 					add = 5
@@ -267,6 +267,10 @@
 	name = "paper dispenser"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
+			)
 	item_state = "sheet-metal"
 
 /obj/item/weapon/form_printer/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

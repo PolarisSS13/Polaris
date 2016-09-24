@@ -14,7 +14,8 @@
 	slot_flags = SLOT_BACK
 	req_one_access = list()
 	req_access = list()
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
+	action_button_name = "Toggle Heatsink"
 
 	// These values are passed on to all component pieces.
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 20)
@@ -36,7 +37,7 @@
 	var/chest_type = /obj/item/clothing/suit/space/rig
 	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
 	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
-	var/glove_type = /obj/item/clothing/gloves/rig
+	var/glove_type = /obj/item/clothing/gloves/gauntlets/rig
 	var/cell_type =  /obj/item/weapon/cell/high
 	var/air_type =   /obj/item/weapon/tank/oxygen
 
@@ -45,7 +46,7 @@
 	var/obj/item/clothing/shoes/boots = null                  // Deployable boots, if any.
 	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
-	var/obj/item/clothing/gloves/rig/gloves = null            // Deployable gauntlets, if any.
+	var/obj/item/clothing/gloves/gauntlets/rig/gloves = null  // Deployable gauntlets, if any.
 	var/obj/item/weapon/cell/cell                             // Power supply, if any.
 	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
 	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
@@ -53,6 +54,12 @@
 	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
 	var/image/mob_icon                                        // Holder for on-mob icon.
 	var/list/installed_modules = list()                       // Power consumption/use bookkeeping.
+
+	// Cooling system vars.
+	var/cooling_on = 0					//is it turned on?
+	var/max_cooling = 15				// in degrees per second - probably don't need to mess with heat capacity here
+	var/charge_consumption = 2			// charge per second at max_cooling		//more effective on a rig, because it's all built in already
+	var/thermostat = T20C
 
 	// Rig status vars.
 	var/open = 0                                              // Access panel status.
@@ -91,8 +98,13 @@
 			usr << "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed."
 
 	if(src.loc == usr)
+		usr << "The access panel is [locked? "locked" : "unlocked"]."
 		usr << "The maintenance panel is [open ? "open" : "closed"]."
 		usr << "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"]."
+		usr << "The cooling stystem is [cooling_on ? "active" : "inactive"]."
+
+		if(open)
+			usr << "It's equipped with [english_list(installed_modules)]."
 
 /obj/item/weapon/rig/New()
 	..()
@@ -298,8 +310,97 @@
 			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
 	update_icon(1)
 
-/obj/item/weapon/rig/process()
+/obj/item/weapon/rig/ui_action_click()
+	toggle_cooling(usr)
 
+/obj/item/weapon/rig/proc/toggle_cooling(var/mob/user)
+	if(cooling_on)
+		turn_cooling_off(user)
+	else
+		turn_cooling_on(user)
+
+/obj/item/weapon/rig/proc/turn_cooling_on(var/mob/user)
+	if(!cell)
+		return
+	if(cell.charge <= 0)
+		user << "<span class='notice'>\The [src] has no power!.</span>"
+		return
+	if(!suit_is_deployed())
+		user << "<span class='notice'>The hardsuit needs to be deployed first!.</span>"
+		return
+
+	cooling_on = 1
+	usr << "<span class='notice'>You switch \the [src]'s cooling system on.</span>"
+
+
+/obj/item/weapon/rig/proc/turn_cooling_off(var/mob/user, var/failed)
+	if(failed) visible_message("\The [src]'s cooling system clicks and whines as it powers down.")
+	else usr << "<span class='notice'>You switch \the [src]'s cooling system off.</span>"
+	cooling_on = 0
+
+/obj/item/weapon/rig/proc/get_environment_temperature()
+	if (ishuman(loc))
+		var/mob/living/carbon/human/H = loc
+		if(istype(H.loc, /obj/mecha))
+			var/obj/mecha/M = H.loc
+			return M.return_temperature()
+		else if(istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))
+			var/obj/machinery/atmospherics/unary/cryo_cell/cryo = H.loc
+			return cryo.air_contents.temperature
+
+	var/turf/T = get_turf(src)
+	if(istype(T, /turf/space))
+		return 0	//space has no temperature, this just makes sure the cooling unit works in space
+
+	var/datum/gas_mixture/environment = T.return_air()
+	if (!environment)
+		return 0
+
+	return environment.temperature
+
+/obj/item/weapon/rig/proc/attached_to_back(mob/M)
+	if (!ishuman(M))
+		return 0
+
+	var/mob/living/carbon/human/H = M
+
+	if (!H.wear_suit || H.back != src)
+		return 0
+
+	return 1
+
+/obj/item/weapon/rig/proc/coolingProcess()
+	if (!cooling_on || !cell)
+		return
+
+	if (!ismob(loc))
+		return
+
+	if (!attached_to_back(loc))		//make sure the rig's not just in their hands
+		return
+
+	if (!suit_is_deployed())		//inbuilt systems only work on the suit they're designed to work on
+		return
+
+	var/mob/living/carbon/human/H = loc
+
+	var/efficiency = 1 - H.get_pressure_weakness()		//you need to have a good seal for effective cooling
+	var/env_temp = get_environment_temperature()		//wont save you from a fire
+	var/temp_adj = min(H.bodytemperature - max(thermostat, env_temp), max_cooling)
+
+	if (temp_adj < 0.5)	//only cools, doesn't heat, also we don't need extreme precision
+		return
+
+	var/charge_usage = (temp_adj/max_cooling)*charge_consumption
+
+	H.bodytemperature -= temp_adj*efficiency
+
+	cell.use(charge_usage)
+
+	if(cell.charge <= 0)
+		turn_cooling_off(H, 1)
+
+/obj/item/weapon/rig/process()
 	// If we've lost any parts, grab them back.
 	var/mob/living/M
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
@@ -308,6 +409,8 @@
 				M = piece.loc
 				M.unEquip(piece)
 			piece.forceMove(src)
+	// Run through cooling
+	coolingProcess()
 
 	if(!istype(wearer) || loc != wearer || wearer.back != src || canremove || !cell || cell.charge <= 0)
 		if(!cell || cell.charge <= 0)

@@ -1,11 +1,10 @@
-
 /obj/item/weapon/plantspray
 	icon = 'icons/obj/hydroponics_machines.dmi'
-	item_state = "spray"
+	item_state = "spraycan"
 	flags = NOBLUDGEON
 	slot_flags = SLOT_BELT
 	throwforce = 4
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 2
 	throw_range = 10
 	var/toxicity = 4

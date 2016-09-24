@@ -4,6 +4,7 @@
 	implicate ourselves."
 	helptext = "The toxin takes effect in about two minutes.  The sting has a three minute cooldown between uses."
 	enhancedtext = "The toxic damage is doubled."
+	ability_icon_state = "ling_sting_del_toxin"
 	genomecost = 1
 	verbpath = /mob/proc/changeling_delayed_toxic_sting
 
@@ -19,7 +20,6 @@
 	if(src.mind.changeling.recursive_enhancement)
 		i = i * 2
 		src << "<span class='notice'>Our toxin will be extra potent, when it strikes.</span>"
-		src.mind.changeling.recursive_enhancement = 0
 	spawn(2 MINUTES)
 		if(T) //We might not exist in two minutes, for whatever reason.
 			T << "<span class='danger'>You feel a burning sensation flowing through your veins!</span>"

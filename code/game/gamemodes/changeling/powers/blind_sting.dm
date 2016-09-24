@@ -2,6 +2,7 @@
 	name = "Blind Sting"
 	desc = "We silently sting a human, completely blinding them for a short time."
 	enhancedtext = "Duration is extended."
+	ability_icon_state = " ling_sting_blind"
 	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_blind_sting
@@ -20,7 +21,6 @@
 	if(src.mind.changeling.recursive_enhancement)
 		duration = duration + 150
 		src << "<span class='notice'>They will be deprived of sight for longer.</span>"
-		src.mind.changeling.recursive_enhancement = 0
 	spawn(duration)
 		T.disabilities &= ~NEARSIGHTED
 	T.eye_blind = 10

@@ -110,6 +110,17 @@ var/list/possible_cable_coil_colours = list(
 	cable_list -= src							//remove it from global cable list
 	..()										// then go ahead and delete the cable
 
+// Ghost examining the cable -> tells him the power
+/obj/structure/cable/attack_ghost(mob/user)
+	if(user.client && user.client.inquisitive_ghost)
+		user.examinate(src)
+		// following code taken from attackby (multitool)
+		if(powernet && (powernet.avail > 0))
+			user << "<span class='warning'>[powernet.avail]W in power network.</span>"
+		else
+			user << "<span class='warning'>The cable is not powered.</span>"
+	return
+
 ///////////////////////////////////
 // General procedures
 ///////////////////////////////////
@@ -477,7 +488,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_RED
 	desc = "A coil of power cable."
 	throwforce = 10
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 20)
@@ -559,9 +570,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/proc/update_wclass()
 	if(amount == 1)
-		w_class = 1.0
+		w_class = ITEMSIZE_TINY
 	else
-		w_class = 2.0
+		w_class = ITEMSIZE_SMALL
 
 /obj/item/stack/cable_coil/examine(mob/user)
 	if(get_dist(src, user) > 1)

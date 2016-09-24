@@ -3,13 +3,17 @@
 	desc = "You are a firestarter!"
 	icon = 'icons/obj/flamethrower.dmi'
 	icon_state = "flamethrowerbase"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_guns.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_guns.dmi',
+			)
 	item_state = "flamethrower_0"
 	flags = CONDUCT
 	force = 3.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/status = 0

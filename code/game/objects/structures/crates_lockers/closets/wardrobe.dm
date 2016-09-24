@@ -131,6 +131,7 @@
 	new /obj/item/clothing/mask/bandana(src)
 	new /obj/item/clothing/mask/bandana(src)
 	new /obj/item/clothing/mask/bandana(src)
+	new /obj/item/weapon/storage/backpack/messenger/black(src)
 	return
 
 
@@ -246,9 +247,9 @@
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
-	new /obj/item/clothing/under/rank/engineer/atmospheric_technician/skirt(src)
-	new /obj/item/clothing/under/rank/engineer/atmospheric_technician/skirt(src)
-	new /obj/item/clothing/under/rank/engineer/atmospheric_technician/skirt(src)
+	new /obj/item/clothing/under/rank/atmospheric_technician/skirt(src)
+	new /obj/item/clothing/under/rank/atmospheric_technician/skirt(src)
+	new /obj/item/clothing/under/rank/atmospheric_technician/skirt(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
@@ -396,8 +397,8 @@
 	..()
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/under/rank/chemist(src)
-	new /obj/item/clothing/under/rank/medical/chemist/skirt(src)
-	new /obj/item/clothing/under/rank/medical/chemist/skirt(src)
+	new /obj/item/clothing/under/rank/chemist/skirt(src)
+	new /obj/item/clothing/under/rank/chemist/skirt(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/chemist(src)
@@ -418,8 +419,8 @@
 	..()
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/under/rank/geneticist(src)
-	new /obj/item/clothing/under/rank/medical/geneticist/skirt(src)
-	new /obj/item/clothing/under/rank/medical/geneticist/skirt(src)
+	new /obj/item/clothing/under/rank/geneticist/skirt(src)
+	new /obj/item/clothing/under/rank/geneticist/skirt(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(src)
@@ -440,8 +441,8 @@
 	..()
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/under/rank/virologist(src)
-	new /obj/item/clothing/under/rank/medical/virologist/skirt(src)
-	new /obj/item/clothing/under/rank/medical/virologist/skirt(src)
+	new /obj/item/clothing/under/rank/virologist/skirt(src)
+	new /obj/item/clothing/under/rank/virologist/skirt(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(src)
@@ -517,9 +518,9 @@
 	new /obj/item/clothing/under/color/yellow(src)
 	new /obj/item/clothing/under/color/green(src)
 	new /obj/item/clothing/under/color/pink(src)
-	new /obj/item/clothing/under/skirt/plaid_blue(src)
-	new /obj/item/clothing/under/skirt/plaid_red(src)
-	new /obj/item/clothing/under/skirt/plaid_purple(src)
+	new /obj/item/clothing/under/skirt/outfit/plaid_blue(src)
+	new /obj/item/clothing/under/skirt/outfit/plaid_red(src)
+	new /obj/item/clothing/under/skirt/outfit/plaid_purple(src)
 	new /obj/item/clothing/shoes/blue(src)
 	new /obj/item/clothing/shoes/yellow(src)
 	new /obj/item/clothing/shoes/green(src)
@@ -539,6 +540,8 @@
 	new /obj/item/clothing/under/pants/khaki(src)
 	new /obj/item/clothing/mask/bandana/blue(src)
 	new /obj/item/clothing/mask/bandana/blue(src)
+	new /obj/item/clothing/accessory/hawaii(src)
+	new /obj/item/clothing/accessory/hawaii/random(src)
 	return
 
 /obj/structure/closet/wardrobe/tactical
@@ -603,6 +606,7 @@
 	new /obj/item/clothing/under/sl_suit(src)
 	new /obj/item/clothing/under/suit_jacket(src)
 	new /obj/item/clothing/under/suit_jacket/female(src)
+	new /obj/item/clothing/under/suit_jacket/female/skirt(src)
 	new /obj/item/clothing/under/suit_jacket/really_black(src)
 	new /obj/item/clothing/under/suit_jacket/red(src)
 	new /obj/item/clothing/under/scratch(src)
@@ -611,7 +615,7 @@
 	return
 
 /obj/structure/closet/wardrobe/captain
-	name = "captain's wardrobe"
+	name = "station administrator's wardrobe"
 	icon_state = "cabinet_closed"
 	icon_closed = "cabinet_closed"
 	icon_opened = "cabinet_open"

@@ -125,14 +125,11 @@
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		var/needed = L.fire_stacks * 10
+		var/needed = L.fire_stacks * 5
 		if(amount > needed)
-			L.fire_stacks = 0
 			L.ExtinguishMob()
-			remove_self(needed)
-		else
-			L.adjust_fire_stacks(-(amount / 10))
-			remove_self(amount)
+		L.adjust_fire_stacks(-(amount / 5))
+		remove_self(needed)
 
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(istype(M, /mob/living/carbon/slime))

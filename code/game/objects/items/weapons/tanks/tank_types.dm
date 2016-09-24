@@ -16,18 +16,15 @@
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 
-
 	New()
 		..()
 		air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 		return
 
-
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 10)
 			user << text("<span class='warning'>The meter on \the [src] indicates you are almost out of oxygen!</span>")
 			//playsound(usr, 'sound/effects/alert.ogg', 50, 1)
-
 
 /obj/item/weapon/tank/oxygen/yellow
 	desc = "A tank of oxygen, this one is yellow."
@@ -37,7 +34,6 @@
 	desc = "A tank of oxygen, this one is red."
 	icon_state = "oxygen_fr"
 
-
 /*
  * Anesthetic
  */
@@ -45,7 +41,6 @@
 	name = "anesthetic tank"
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
-	item_state = "an_tank"
 
 /obj/item/weapon/tank/anesthetic/New()
 	..()
@@ -64,7 +59,6 @@
 	desc = "Mixed anyone?"
 	icon_state = "oxygen"
 
-
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 1 && loc==user)
 			user << "<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>"
@@ -77,7 +71,6 @@
 
 	return
 
-
 /*
  * Phoron
  */
@@ -88,7 +81,6 @@
 	gauge_icon = null
 	flags = CONDUCT
 	slot_flags = null	//they have no straps!
-
 
 /obj/item/weapon/tank/phoron/New()
 	..()
@@ -119,18 +111,16 @@
 	gauge_cap = 4
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	force = 4.0
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
-
 
 	New()
 		..()
 		src.air_contents.adjust_gas("oxygen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 		return
-
 
 	examine(mob/user)
 		if(..(user, 0) && air_contents.gas["oxygen"] < 0.2 && loc==user)
@@ -156,7 +146,6 @@
 	desc = "A tank of nitrogen."
 	icon_state = "oxygen_fr"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-
 
 /obj/item/weapon/tank/nitrogen/New()
 	..()

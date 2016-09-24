@@ -23,6 +23,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
 	spawn_flags =      SPECIES_IS_RESTRICTED
+	health_hud_intensity = 2
 
 	breath_type = null
 	poison_type = null
@@ -96,17 +97,25 @@ var/datum/species/shapeshifter/promethean/prometheans
 	else
 		H.equip_to_slot_or_del(L, slot_in_backpack)
 
-/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H,var/mob/living/target)
+/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H, var/mob/living/target)
 
 	var/t_him = "them"
-	switch(target.gender)
-		if(MALE)
-			t_him = "him"
-		if(FEMALE)
-			t_him = "her"
+	if(ishuman(target))
+		var/mob/living/carbon/human/T = target
+		switch(T.identifying_gender)
+			if(MALE)
+				t_him = "him"
+			if(FEMALE)
+				t_him = "her"
+	else
+		switch(target.gender)
+			if(MALE)
+				t_him = "him"
+			if(FEMALE)
+				t_him = "her"
 
 	H.visible_message("<span class='notice'>\The [H] glomps [target] to make [t_him] feel better!</span>", \
-					"<span class='notice'>You glomps [target] to make [t_him] feel better!</span>")
+					"<span class='notice'>You glomp [target] to make [t_him] feel better!</span>")
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(var/mob/living/carbon/human/H)
@@ -170,11 +179,11 @@ var/datum/species/shapeshifter/promethean/prometheans
 		return
 
 	var/t_she = "She is"
-	if(H.gender == MALE)
+	if(H.identifying_gender == MALE)
 		t_she = "He is"
-	else if(H.gender == PLURAL)
+	else if(H.identifying_gender == PLURAL)
 		t_she = "They are"
-	else if(H.gender == NEUTER)
+	else if(H.identifying_gender == NEUTER)
 		t_she = "It is"
 
 	switch(stored_shock_by_ref["\ref[H]"])

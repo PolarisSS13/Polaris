@@ -159,11 +159,7 @@ Works together with spawning an observer, noted above.
 	if(!loc) return
 	if(!client) return 0
 
-
-	if(client.images.len)
-		for(var/image/hud in client.images)
-			if(copytext(hud.icon_state,1,4) == "hud")
-				client.images.Remove(hud)
+	handle_regular_hud_updates()
 
 	if(antagHUD)
 		var/list/target_list = list()
@@ -824,16 +820,26 @@ mob/observer/dead/MayRespawn(var/feedback = 0)
 	set category = "Ghost"
 	set name = "Choose Sprite"
 
-	icon = 'icons/mob/ghost.dmi'
-	overlays.Cut()
 	var/choice
+	var/previous_state
 	var/finalized = "No"
+
 	while(finalized == "No" && src.client)
-
 		choice = input(usr,"What would you like to use for your ghost sprite?") as null|anything in possible_ghost_sprites
-		if(!choice) return
+		if(!choice)
+			return
 
-		icon_state = possible_ghost_sprites[choice]
-		finalized = alert("Look at your sprite. Is this what you wish to use?",,"No","Yes")
+		if(choice)
+			icon = 'icons/mob/ghost.dmi'
+			overlays.Cut()
 
-	ghost_sprite = possible_ghost_sprites[choice]
+			if(icon_state && icon)
+				previous_state = icon_state
+
+			icon_state = possible_ghost_sprites[choice]
+			finalized = alert("Look at your sprite. Is this what you wish to use?",,"No","Yes")
+
+			ghost_sprite = possible_ghost_sprites[choice]
+
+			if(finalized == "No")
+				icon_state = previous_state

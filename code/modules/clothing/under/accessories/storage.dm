@@ -7,13 +7,13 @@
 
 	var/slots = 3
 	var/obj/item/weapon/storage/internal/hold
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/New()
 	..()
 	hold = new/obj/item/weapon/storage/internal(src)
 	hold.max_storage_space = slots * 2
-	hold.max_w_class = 2
+	hold.max_w_class = ITEMSIZE_SMALL
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if (has_suit)	//if we are part of a suit
@@ -43,7 +43,7 @@
 	hold.hide_from(usr)
 	for(var/obj/item/I in hold.contents)
 		hold.remove_from_storage(I, T)
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 
 /obj/item/clothing/accessory/storage/webbing
 	name = "webbing"
@@ -97,7 +97,7 @@
 
 /obj/item/clothing/accessory/storage/knifeharness/New()
 	..()
-	hold.max_storage_space = 4
+	hold.max_storage_space = ITEMSIZE_COST_SMALL * 2
 	hold.can_hold = list(/obj/item/weapon/material/hatchet/unathiknife,\
 	/obj/item/weapon/material/kitchen/utensil/knife,\
 	/obj/item/weapon/material/kitchen/utensil/knife/plastic,\

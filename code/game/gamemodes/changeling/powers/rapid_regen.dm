@@ -4,6 +4,7 @@
 	helptext = "This will heal a significant amount of brute, fire, oxy, clone, and brain damage, and heal broken bones, internal bleeding, low blood, \
 	and organ damage.  The process is fast, but anyone who sees us do this will likely realize we are not what we seem."
 	enhancedtext = "Healing increased to heal up to maximum health."
+	ability_icon_state = "ling_rapid_regeneration"
 	genomecost = 2
 	verbpath = /mob/proc/changeling_rapid_regen
 
@@ -24,7 +25,6 @@
 		if(src.mind.changeling.recursive_enhancement)
 			healing_amount = C.maxHealth
 			src << "<span class='notice'>We completely heal ourselves.</span>"
-			src.mind.changeling.recursive_enhancement = 0
 		spawn(0)
 			C.adjustBruteLoss(-healing_amount)
 			C.adjustFireLoss(-healing_amount)
@@ -32,6 +32,7 @@
 			C.adjustCloneLoss(-healing_amount)
 			C.adjustBrainLoss(-healing_amount)
 			C.restore_blood()
+			C.species.create_organs(C)
 			C.restore_all_organs()
 			C.blinded = 0
 			C.eye_blind = 0

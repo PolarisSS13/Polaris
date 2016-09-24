@@ -54,6 +54,7 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
+	var/reflected = 0 // This should be set to 1 if reflected by any means, to prevent infinite reflections.
 
 	var/hitscan = 0		// whether the projectile should be hitscan
 	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
@@ -169,7 +170,7 @@
 		return
 
 	//roll to-hit
-	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
+	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier + round(15*target_mob.evasion), 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS
@@ -292,6 +293,7 @@
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
+		update_light() //energy projectiles will look glowy and fun
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
@@ -353,6 +355,7 @@
 			M.set_transform(T)
 			M.pixel_x = location.pixel_x
 			M.pixel_y = location.pixel_y
+			M.update_light()
 			M.activate()
 
 /obj/item/projectile/proc/tracer_effect(var/matrix/M)
@@ -363,6 +366,7 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
+			P.update_light()
 			if(!hitscan)
 				P.activate(step_delay)	//if not a hitscan projectile, remove after a single delay
 			else
@@ -376,6 +380,7 @@
 			P.set_transform(M)
 			P.pixel_x = location.pixel_x
 			P.pixel_y = location.pixel_y
+			P.update_light()
 			P.activate()
 
 //"Tracing" projectile

@@ -11,6 +11,7 @@
 	name_language = "Schechi"
 	min_age = 12
 	max_age = 45
+	health_hud_intensity = 3
 
 	blood_color = "#D514F7"
 	flesh_color = "#5F7BB0"
@@ -48,7 +49,7 @@
 	heat_level_1 = 320
 	heat_level_2 = 370
 	heat_level_3 = 600
-	heat_discomfort_level = 292
+	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
 		"Your feathers prickle in the heat.",
 		"You feel uncomfortably warm.",
@@ -56,7 +57,7 @@
 	cold_discomfort_level = 180
 
 	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
 		BP_HEAD =   list("path" = /obj/item/organ/external/head/seromi),
 		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),

@@ -4,6 +4,7 @@
 	We are undetectable, so long as we move slowly.(Toggle)"
 	helptext = "Running, and performing most acts will reveal us.  Our chemical regeneration is halted while we are hidden."
 	enhancedtext = "True invisiblity while cloaked."
+	ability_icon_state = "ling_camoflage"
 	genomecost = 3
 	verbpath = /mob/proc/changeling_visible_camouflage
 
@@ -38,7 +39,6 @@
 		if(src.mind.changeling.recursive_enhancement)
 			H.invisibility = INVISIBILITY_OBSERVER
 			src << "<span class='notice'>We are now truly invisible.</span>"
-			src.mind.changeling.recursive_enhancement = 0
 
 		while(H.m_intent == "walk" && H.mind.changeling.cloaked && !H.stat) //This loop will keep going until the player uncloaks.
 			if(mind.changeling.chem_recharge_rate != 0) //Without this, there is an exploit that can be done, if one buys engorged chem sacks while cloaked.

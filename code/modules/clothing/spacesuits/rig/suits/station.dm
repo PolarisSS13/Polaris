@@ -61,7 +61,7 @@
 	desc = "A heavy, powerful rig used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
-	slowdown = 3
+	slowdown = 1
 	offline_slowdown = 10
 	offline_vision_restriction = 2
 	emp_protection = -20
@@ -102,6 +102,8 @@
 
 /obj/item/weapon/rig/eva/equipped
 
+	req_access = list(access_engine)
+
 	initial_modules = list(
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/maneuvering_jets,
@@ -122,15 +124,16 @@
 	offline_vision_restriction = 0
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
+	glove_type = /obj/item/clothing/gloves/gauntlets/rig/ce
 
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
-
 
 	req_access = list()
 	req_one_access = list()
 
-	boot_type =  null
-	glove_type = null
+/obj/item/clothing/gloves/gauntlets/rig/ce
+	name = "insulated gauntlets"
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ce/equipped
 
@@ -143,14 +146,6 @@
 		/obj/item/rig_module/device/rcd,
 		/obj/item/rig_module/vision/meson
 		)
-
-	chest_type = /obj/item/clothing/suit/space/rig/ce
-	boot_type =  null
-	glove_type = null
-
-/obj/item/clothing/suit/space/rig/ce
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /obj/item/weapon/rig/hazmat
 
@@ -166,7 +161,7 @@
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/box/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
 
 	req_access = list()
 	req_one_access = list()
@@ -199,6 +194,8 @@
 	req_one_access = list()
 
 /obj/item/weapon/rig/medical/equipped
+
+	req_access = list(access_medical)
 
 	initial_modules = list(
 		/obj/item/rig_module/chem_dispenser/injector,

@@ -33,6 +33,21 @@
 			overlays -= wet_overlay
 			wet_overlay = null
 
+/turf/simulated/proc/freeze_floor()
+	if(!wet) // Water is required for it to freeze.
+		return
+	wet = 3 // icy
+	if(wet_overlay)
+		overlays -= wet_overlay
+		wet_overlay = null
+	wet_overlay = image('icons/turf/overlays.dmi',src,"snowfloor")
+	overlays += wet_overlay
+	spawn(5 MINUTES)
+		wet = 0
+		if(wet_overlay)
+			overlays -= wet_overlay
+			wet_overlay = null
+
 /turf/simulated/clean_blood()
 	for(var/obj/effect/decal/cleanable/blood/B in contents)
 		B.clean_blood()
@@ -64,7 +79,7 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
-	dirt = min(dirt++, 101)
+	dirt = min(dirt+1, 101)
 	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 	if (dirt > 50)
 		if (!dirtoverlay)
@@ -132,6 +147,7 @@
 				if(3) // Ice
 					floor_type = "icy"
 					slip_stun = 4
+					slip_dist = 2
 
 			if(M.slip("the [floor_type] floor",slip_stun))
 				for(var/i = 0;i<slip_dist;i++)

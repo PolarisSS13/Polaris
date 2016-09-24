@@ -3,6 +3,7 @@
 	desc = "Begins a slow rengeration of our form.  Does not effect stuns or chemicals."
 	helptext = "Can be used while unconscious."
 	enhancedtext = "Healing is twice as effective."
+	ability_icon_state = "ling_fleshmend"
 	genomecost = 1
 	verbpath = /mob/proc/changeling_fleshmend
 
@@ -22,7 +23,6 @@
 	if(src.mind.changeling.recursive_enhancement)
 		heal_amount = heal_amount * 2
 		src << "<span class='notice'>We will heal much faster.</span>"
-		src.mind.changeling.recursive_enhancement = 0
 
 	spawn(0)
 		src << "<span class='notice'>We begin to heal ourselves.</span>"

@@ -8,14 +8,18 @@
 /obj/item/weapon/storage
 	name = "storage"
 	icon = 'icons/obj/storage.dmi'
-	w_class = 3
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_storage.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_storage.dmi',
+		)
+	w_class = ITEMSIZE_NORMAL
 	show_messages = 1
 
 	var/list/can_hold = new/list() //List of objects which this item can store (if set, it can't store anything else)
 	var/list/cant_hold = new/list() //List of objects which this item can't store (in effect only if can_hold isn't set)
 	var/list/is_seeing = new/list() //List of mobs which are currently seeing the contents of this item's storage
-	var/max_w_class = 2 //Max size of objects that this object can store (in effect only if can_hold isn't set)
-	var/max_storage_space = 8 //The sum of the storage costs of all the items in this storage item.
+	var/max_w_class = ITEMSIZE_SMALL //Max size of objects that this object can store (in effect only if can_hold isn't set)
+	var/max_storage_space = ITEMSIZE_COST_SMALL * 4 //The sum of the storage costs of all the items in this storage item.
 	var/storage_slots = null //The number of storage slots in this container.  If null, it uses the volume-based storage instead.
 	var/obj/screen/storage/boxes = null
 	var/obj/screen/storage/storage_start = null //storage UI
@@ -207,7 +211,10 @@
 
 /obj/item/weapon/storage/proc/space_orient_objs(var/list/obj/item/display_contents)
 
-	var/baseline_max_storage_space = 16 //should be equal to default backpack capacity
+	var/baseline_max_storage_space = INVENTORY_STANDARD_SPACE / 2 //should be equal to default backpack capacity // This is a lie.
+	// Above var is misleading, what it does upon changing is makes smaller inventory sizes have smaller space on the UI.
+	// It's cut in half because otherwise boxes of IDs and other tiny items are unbearably cluttered.
+
 	var/storage_cap_width = 2 //length of sprite for start and end of the box representing total storage space
 	var/stored_cap_width = 4 //length of sprite for start and end of the box representing the stored item
 	var/storage_width = min( round( 224 * max_storage_space/baseline_max_storage_space ,1) ,274) //length of sprite for the box representing total storage space
@@ -348,7 +355,7 @@
 	if(usr)
 		usr.remove_from_mob(W)
 		usr.update_icons()	//update our overlays
-	W.loc = src
+	W.forceMove(src)
 	W.on_enter_storage(src)
 	if(usr)
 		if (usr.client && usr.s_active != src)
@@ -391,9 +398,9 @@
 			W.layer = 20
 		else
 			W.layer = initial(W.layer)
-		W.loc = new_location
+		W.forceMove(new_location)
 	else
-		W.loc = get_turf(src)
+		W.forceMove(get_turf(src))
 
 	if(usr)
 		src.orient2hud(usr)
@@ -437,7 +444,7 @@
 				user << "<span class='warning'>The tray won't fit in [src].</span>"
 				return
 			else
-				W.loc = user.loc
+				W.forceMove(get_turf(user))
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)
@@ -605,20 +612,21 @@
 
 	return depth
 
+// See inventory_sizes.dm for the defines.
 /obj/item/proc/get_storage_cost()
 	if (storage_cost)
 		return storage_cost
 	else
 		switch(w_class)
-			if(1)
-				return 1
-			if(2)
-				return 2
-			if(3)
-				return 4
-			if(4)
-				return 8
-			if(5)
-				return 16
+			if(ITEMSIZE_TINY)
+				return ITEMSIZE_COST_TINY
+			if(ITEMSIZE_SMALL)
+				return ITEMSIZE_COST_SMALL
+			if(ITEMSIZE_NORMAL)
+				return ITEMSIZE_COST_NORMAL
+			if(ITEMSIZE_LARGE)
+				return ITEMSIZE_COST_LARGE
+			if(ITEMSIZE_HUGE)
+				return ITEMSIZE_COST_HUGE
 			else
-				return 1000
+				return ITEMSIZE_COST_NO_CONTAINER

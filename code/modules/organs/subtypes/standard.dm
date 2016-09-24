@@ -10,7 +10,7 @@
 	icon_name = "torso"
 	max_damage = 100
 	min_broken_damage = 35
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 	body_part = UPPER_TORSO
 	vital = 1
 	amputation_point = "spine"
@@ -34,7 +34,7 @@
 	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 35
-	w_class = 4
+	w_class = ITEMSIZE_LARGE
 	body_part = LOWER_TORSO
 	vital = 1
 	parent_organ = BP_TORSO
@@ -42,15 +42,16 @@
 	joint = "hip"
 	dislocated = -1
 	gendered_icon = 1
+	cannot_amputate = 1
 	organ_rel_size = 30
 
 /obj/item/organ/external/arm
 	organ_tag = "l_arm"
 	name = "left arm"
 	icon_name = "l_arm"
-	max_damage = 50
+	max_damage = 80
 	min_broken_damage = 30
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	body_part = ARM_LEFT
 	parent_organ = BP_TORSO
 	joint = "left elbow"
@@ -69,9 +70,9 @@
 	organ_tag = "l_leg"
 	name = "left leg"
 	icon_name = "l_leg"
-	max_damage = 50
+	max_damage = 80
 	min_broken_damage = 30
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = BP_GROIN
@@ -92,9 +93,9 @@
 	organ_tag = "l_foot"
 	name = "left foot"
 	icon_name = "l_foot"
-	max_damage = 30
+	max_damage = 50
 	min_broken_damage = 15
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -121,9 +122,9 @@
 	organ_tag = "l_hand"
 	name = "left hand"
 	icon_name = "l_hand"
-	max_damage = 30
+	max_damage = 50
 	min_broken_damage = 15
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	joint = "left wrist"
@@ -153,7 +154,7 @@
 	slot_flags = SLOT_BELT
 	max_damage = 75
 	min_broken_damage = 35
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	body_part = HEAD
 	vital = 1
 	parent_organ = BP_TORSO

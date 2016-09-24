@@ -39,11 +39,15 @@
 /datum/gear/accessory/holster
 	display_name = "holster, armpit"
 	path = /obj/item/clothing/accessory/holster/armpit
-	allowed_roles = list("Captain", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
+	allowed_roles = list("Station Administrator", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
 
 /datum/gear/accessory/holster/hip
 	display_name = "holster, hip"
 	path = /obj/item/clothing/accessory/holster/hip
+
+/datum/gear/accessory/holster/leg
+	display_name = "holster, leg"
+	path = /obj/item/clothing/accessory/holster/leg
 
 /datum/gear/accessory/holster/waist
 	display_name = "holster, waist"
@@ -207,3 +211,23 @@
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
+
+/datum/gear/accessory/chaps
+	display_name = "chaps, brown"
+	path = /obj/item/clothing/accessory/chaps
+
+/datum/gear/accessory/chaps/black
+	display_name = "chaps, black"
+	path = /obj/item/clothing/accessory/chaps/black
+
+/datum/gear/accessory/hawaii
+	display_name = "hawaii shirt"
+	path = /obj/item/clothing/accessory/hawaii
+
+/datum/gear/accessory/hawaii/New()
+	..()
+	var/list/shirts = list()
+	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/hawaii
+	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
+	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
+	gear_tweaks += new/datum/gear_tweak/path(shirts)

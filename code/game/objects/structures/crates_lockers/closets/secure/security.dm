@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/captains
-	name = "captain's locker"
+	name = "station administrator's locker"
 	req_access = list(access_captain)
 	icon_state = "capsecure1"
 	icon_closed = "capsecure"
@@ -11,15 +11,15 @@
 	New()
 		..()
 		new /obj/item/weapon/storage/backpack/dufflebag/captain(src)
+		new /obj/item/clothing/head/helmet(src)
 		new /obj/item/clothing/suit/storage/vest(src)
 		new /obj/item/weapon/cartridge/captain(src)
-		new /obj/item/clothing/head/helmet/swat(src)
 		new /obj/item/weapon/storage/lockbox/medal(src)
 		new /obj/item/device/radio/headset/heads/captain(src)
 		new /obj/item/device/radio/headset/heads/captain/alt(src)
 		new /obj/item/weapon/gun/energy/gun(src)
-		new /obj/item/clothing/suit/armor/captain(src)
 		new /obj/item/weapon/melee/telebaton(src)
+		new /obj/item/device/flash(src)
 		return
 
 
@@ -102,8 +102,8 @@
 		new /obj/item/clothing/suit/storage/vest/hos(src)
 		new /obj/item/clothing/under/rank/head_of_security/jensen(src)
 		new /obj/item/clothing/under/rank/head_of_security/corp(src)
-		new /obj/item/clothing/suit/armor/hos/jensen(src)
-		new /obj/item/clothing/suit/armor/hos(src)
+		new /obj/item/clothing/suit/storage/vest/hoscoat/jensen(src)
+		new /obj/item/clothing/suit/storage/vest/hoscoat(src)
 		new /obj/item/clothing/head/helmet/HoS/dermal(src)
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos(src)
@@ -114,6 +114,8 @@
 		new /obj/item/weapon/shield/riot/tele(src)
 		new /obj/item/weapon/storage/box/holobadge/hos(src)
 		new /obj/item/clothing/accessory/badge/holo/hos(src)
+		new /obj/item/weapon/reagent_containers/spray/pepper(src)
+		new /obj/item/weapon/crowbar/red(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/device/flash(src)
@@ -150,8 +152,8 @@
 		new /obj/item/clothing/suit/storage/vest/warden(src)
 		new /obj/item/clothing/under/rank/warden(src)
 		new /obj/item/clothing/under/rank/warden/corp(src)
-		new /obj/item/clothing/suit/armor/vest/warden(src)
-		new /obj/item/clothing/suit/armor/vest/warden/alt(src)
+		new /obj/item/clothing/suit/storage/vest/wardencoat(src)
+		new /obj/item/clothing/suit/storage/vest/wardencoat/alt(src)
 		new /obj/item/clothing/head/helmet/warden(src)
 		new /obj/item/weapon/cartridge/security(src)
 		new /obj/item/device/radio/headset/headset_sec(src)

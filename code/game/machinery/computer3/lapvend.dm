@@ -178,7 +178,7 @@
 			else
 				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 		else
-			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentCom Support.</span>"
 	else
 		transfer_and_vend(CH, C)
 
@@ -201,7 +201,7 @@
 			T.amount = "[transaction_amount]"
 		T.source_terminal = src.name
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		D.transaction_log.Add(T)
 		//
 		T = new()
@@ -210,7 +210,7 @@
 		T.amount = "[transaction_amount]"
 		T.source_terminal = src.name
 		T.date = current_date_string
-		T.time = worldtime2text()
+		T.time = stationtime2text()
 		vendor_account.transaction_log.Add(T)
 
 		newlap = new /obj/machinery/computer3/laptop/vended(src.loc)
@@ -328,7 +328,7 @@
 				usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call [boss_short] Support.</span>"
 				return 0
 		else
-			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
+			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentCom Support.</span>"
 			return 0
 	else
 		transfer_and_reimburse(CH)
@@ -350,7 +350,7 @@
 		T.amount = "[transaction_amount]"
 	T.source_terminal = src.name
 	T.date = current_date_string
-	T.time = worldtime2text()
+	T.time = stationtime2text()
 	D.transaction_log.Add(T)
 	//
 	T = new()
@@ -359,7 +359,7 @@
 	T.amount = "[transaction_amount]"
 	T.source_terminal = src.name
 	T.date = current_date_string
-	T.time = worldtime2text()
+	T.time = stationtime2text()
 	vendor_account.transaction_log.Add(T)
 
 	qdel(relap)

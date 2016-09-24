@@ -1,8 +1,8 @@
 /obj/item/weapon/ore
-	name = "rock"
+	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/material
 

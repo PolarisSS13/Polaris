@@ -7,9 +7,13 @@
 	gender = NEUTER
 	throw_speed = 3
 	throw_range = 7
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	sharp = 0
 	edge = 0
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
+			)
 
 	var/applies_material_colour = 1
 	var/unbreakable

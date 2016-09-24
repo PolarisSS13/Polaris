@@ -30,7 +30,7 @@
 	icon_name = "torso"
 	max_damage = 200
 	min_broken_damage = 50
-	w_class = 5
+	w_class = ITEMSIZE_HUGE
 	body_part = UPPER_TORSO
 	vital = 1
 	cannot_amputate = 1
@@ -43,7 +43,7 @@
 	icon_name = "groin"
 	max_damage = 100
 	min_broken_damage = 50
-	w_class = 4
+	w_class = ITEMSIZE_LARGE
 	body_part = LOWER_TORSO
 	parent_organ = BP_TORSO
 	gendered_icon = 1
@@ -52,9 +52,9 @@
 	name = "left upper tendril"
 	organ_tag = "l_arm"
 	icon_name = "l_arm"
-	max_damage = 35
+	max_damage = 50
 	min_broken_damage = 20
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	body_part = ARM_LEFT
 	parent_organ = BP_TORSO
 	can_grasp = 1
@@ -69,9 +69,9 @@
 	name = "left lower tendril"
 	organ_tag = "l_leg"
 	icon_name = "l_leg"
-	max_damage = 35
+	max_damage = 50
 	min_broken_damage = 20
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	body_part = LEG_LEFT
 	icon_position = LEFT
 	parent_organ = BP_GROIN
@@ -88,9 +88,9 @@
 	name = "left foot"
 	organ_tag = "l_foot"
 	icon_name = "l_foot"
-	max_damage = 20
+	max_damage = 35
 	min_broken_damage = 10
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 	parent_organ = "l_leg"
@@ -110,9 +110,9 @@
 	name = "left grasper"
 	organ_tag = "l_hand"
 	icon_name = "l_hand"
-	max_damage = 30
+	max_damage = 40
 	min_broken_damage = 15
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
 	can_grasp = 1

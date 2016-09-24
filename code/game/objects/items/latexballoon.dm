@@ -2,10 +2,14 @@
 	name = "latex glove"
 	desc = "A latex glove, usually used as a balloon."
 	icon_state = "latexballon"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_gloves.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_gloves.dmi',
+			)
 	item_state = "lgloves"
 	force = 0
 	throwforce = 0
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	throw_speed = 1
 	throw_range = 15
 	var/state

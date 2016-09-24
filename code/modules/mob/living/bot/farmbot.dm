@@ -10,7 +10,7 @@
 	icon_state = "farmbot0"
 	health = 50
 	maxHealth = 50
-	req_access = list(access_hydroponics)
+	req_one_access = list(access_robotics, access_hydroponics)
 
 	var/action = "" // Used to update icon
 	var/waters_trays = 1
@@ -313,7 +313,7 @@
 	var/build_step = 0
 	var/created_name = "Farmbot"
 	var/obj/tank
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 
 
 /obj/item/weapon/farmbot_arm_assembly/New(var/newloc, var/theTank)
@@ -329,6 +329,18 @@
 		..()
 		return
 
+
+	user << "You add the robot arm to [src]."
+
+	user.drop_from_inventory(S)
+	qdel(S)
+
+	new /obj/item/weapon/farmbot_arm_assembly(loc, src)
+
+/obj/structure/reagent_dispensers/watertank/attackby(var/obj/item/organ/external/S, mob/user as mob)
+	if ((!istype(S, /obj/item/organ/external/arm)) && (!S.robotic == ORGAN_ROBOT))
+		..()
+		return
 
 	user << "You add the robot arm to [src]."
 
