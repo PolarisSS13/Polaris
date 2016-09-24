@@ -98,7 +98,7 @@
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
 			item_state = "sawnshotgun"
-			w_class = 3
+			w_class = ITEMSIZE_NORMAL
 			force = 5
 			slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 			slot_flags |= (SLOT_BELT|SLOT_HOLSTER) //but you can wear it on your belt (poorly concealed under a trenchcoat, ideally) - or in a holster, why not.

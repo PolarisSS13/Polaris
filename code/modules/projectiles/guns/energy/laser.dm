@@ -71,7 +71,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
 	max_shots = 4
 	fire_delay = 20
-	w_class = ITEMSIZE_LARGE //Should be 5 as it's a CANNON, but 4 for balance and antags, etc.
+	w_class = ITEMSIZE_LARGE //Should be HUGE as it's a CANNON, but LARGE for balance and antags, etc.
 //	requires_two_hands = 1
 	one_handed_penalty = 6 // The thing's heavy and huge.
 	accuracy = 3

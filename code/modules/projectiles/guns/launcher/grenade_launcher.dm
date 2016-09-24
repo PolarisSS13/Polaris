@@ -3,7 +3,7 @@
 	desc = "A bulky pump-action grenade launcher. Holds up to 6 grenades in a revolving magazine."
 	icon_state = "riotgun"
 	item_state = "riotgun"
-	w_class = ITEMSIZE_LARGE //Should probably be 5 but leaving at 4 because it rarely appears and isn't too useful
+	w_class = ITEMSIZE_LARGE //Should probably be HUGE but leaving at LARGE because it rarely appears and isn't too useful
 	force = 10
 
 	fire_sound = 'sound/weapons/empty.ogg'

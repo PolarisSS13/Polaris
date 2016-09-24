@@ -33,6 +33,7 @@
 	force = 8
 	w_class = ITEMSIZE_NORMAL	//Same as SMGs
 	fire_delay = 6
+	slot_flags = SLOT_BELT
 
 	projectile_type = /obj/item/projectile/beam/stun/weak
 	origin_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 2, TECH_ILLEGAL = 3)
