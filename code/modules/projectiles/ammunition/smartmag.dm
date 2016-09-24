@@ -72,6 +72,11 @@
 		emagged = 1
 		return 1
 
+/obj/item/ammo_magazine/smart/emp_act(severity)
+	..()
+	if(attached_cell)
+		attached_cell.emp_act(severity)
+
 /obj/item/ammo_magazine/smart/attackby(var/obj/item/I as obj, mob/user)
 	if(istype(I, /obj/item/weapon/cell))
 		if(attached_cell)
