@@ -56,11 +56,8 @@
 	var/tempcost
 	for(var/key in matters)
 		var/value = matters[key]
-		world << "Value: [value]"
-		tempcost += value*production_modifier
-		world << "Tempcost: [tempcost]"
+		tempcost += value * production_modifier
 	production_cost = tempcost
-	world << "Production cost is: [production_cost]"
 
 /obj/item/ammo_magazine/smart/attack_self(mob/user)
 	if(emagged)
@@ -101,33 +98,48 @@
 				update_icon()
 				return
 
-
 	var/obj/item/ammo_magazine/A
 	var/obj/item/weapon/gun/projectile/G
+	var/obj/item/ammo_casing/C
+
 	if(istype(I, /obj/item/ammo_magazine))
 		A = I
 	else if(istype(I, /obj/item/weapon/gun/projectile))
 		G = I
+	else if(istype(I, /obj/item/ammo_casing))
+		C = I
 	else
 		return
 
-	if(G && caliber == G.caliber && ammo_type == G.ammo_type || A && caliber == A.caliber && ammo_type == A.ammo_type)
+	//if(G && caliber == G.caliber && ammo_type == G.ammo_type || A && caliber == A.caliber && ammo_type == A.ammo_type)
+	if(G && G.ammo_magazine && caliber == G.caliber && ammo_type == G.ammo_magazine.type || A && caliber == A.caliber && ammo_type == A.ammo_type || C && caliber == C.caliber && ammo_type == C.projectile_type)
 		..()
 	else
-		user << "<span class='notice'>You scan \the [I] with \the [src], copying \the [I]'s caliber and ammunition type.</span>"
-		if(A || G)
-			if(G)
+		if(A || G || C)
+
+			if(G && G.ammo_magazine)
 				A = G.ammo_magazine
-			if(A.caliber)
-				caliber = A.caliber
-			if(A.ammo_type)
-				set_production_cost(A.ammo_type)
-				ammo_type = A.ammo_type
+
+			if(A)
+				if(A.caliber)
+					caliber = A.caliber
+				if(A.ammo_type)
+					set_production_cost(A.ammo_type)
+					ammo_type = A.ammo_type
+			else if(C)
+				if(C.caliber)
+					caliber = C.caliber
+				if(C.projectile_type)
+					set_production_cost(C.projectile_type)
+					ammo_type = C.projectile_type
+
 			else
 				return
+
 		else
 			return
 
+		user << "<span class='notice'>You scan \the [I] with \the [src], copying \the [I]'s caliber and ammunition type.</span>"
 		stored_ammo.Cut()
 
 /obj/item/ammo_magazine/smart/proc/produce()
