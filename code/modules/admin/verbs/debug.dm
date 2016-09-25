@@ -960,6 +960,20 @@
 	else
 		alert("Invalid mob")
 
+/client/proc/reload_nanoui_resources()
+	set category = "Debug"
+	set name = "Reload NanoUI Resources"
+	set desc = "Force the client to redownload NanoUI Resources"
+
+	// Close open NanoUIs.
+	nanomanager.close_user_uis(usr)
+
+	// Re-load the assets.
+	var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
+	assets.register()
+
+	// Clear the user's cache so they get resent.
+	usr.client.cache = list()
 /datum/admins/proc/view_runtimes()
 	set category = "Debug"
 	set name = "View Runtimes"

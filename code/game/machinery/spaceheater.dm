@@ -110,7 +110,6 @@
 		update_icon()
 	return
 
-
 /obj/machinery/space_heater/Topic(href, href_list)
 	if(usr.stat)
 		return
@@ -133,7 +132,6 @@
 					cell.add_fingerprint(usr)
 					cell = null
 					power_change()
-
 
 			if("cellinstall")
 				if(panel_open && !cell)
