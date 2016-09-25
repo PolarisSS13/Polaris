@@ -231,3 +231,11 @@
 	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
+
+/datum/gear/accessory/football_jersey
+	display_name = "football jersey"
+	path = /obj/item/clothing/accessory/football_jersey
+
+/datum/gear/accessory/football_jersey/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
