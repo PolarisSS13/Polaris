@@ -6,7 +6,7 @@
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT|SLOT_BACK
-	w_class = ITEMSIZE_LARGE
+	w_class = ITEMSIZE_NORMAL
 	force = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
@@ -40,7 +40,7 @@ obj/item/weapon/gun/energy/retro
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 	fire_sound = 'sound/weapons/Laser.ogg'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	fire_delay = 10 //old technology
@@ -52,7 +52,7 @@ obj/item/weapon/gun/energy/retro
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
 	fire_sound = 'sound/weapons/Laser.ogg'
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
@@ -71,7 +71,7 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
 	max_shots = 4
 	fire_delay = 20
-	w_class = ITEMSIZE_LARGE
+	w_class = ITEMSIZE_LARGE //Should be HUGE as it's a CANNON, but LARGE for balance and antags, etc.
 //	requires_two_hands = 1
 	one_handed_penalty = 6 // The thing's heavy and huge.
 	accuracy = 3
@@ -101,62 +101,5 @@ obj/item/weapon/gun/energy/retro
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 100
 	max_shots = 12
-
-/obj/item/weapon/gun/energy/sniperrifle
-	name = "marksman energy rifle"
-	desc = "The HI DMR 9E is an older design of Hesphaistos Industries. A designated marksman rifle capable of shooting powerful \
-	ionized beams, this is a weapon to kill from a distance."
-	icon_state = "sniper"
-	item_state_slots = list(slot_r_hand_str = "laser", slot_l_hand_str = "laser") //placeholder
-	fire_sound = 'sound/weapons/gauss_shoot.ogg'
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
-	projectile_type = /obj/item/projectile/beam/sniper
-	slot_flags = SLOT_BACK
-	charge_cost = 400
-	max_shots = 4
-	fire_delay = 35
-	force = 10
-	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
-	accuracy = -3 //shooting at the hip
-	scoped_accuracy = 0
-//	requires_two_hands = 1
-	one_handed_penalty = 4 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
-
-/obj/item/weapon/gun/energy/sniperrifle/verb/scope()
-	set category = "Object"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(2.0)
-
-////////Laser Tag////////////////////
-
-/obj/item/weapon/gun/energy/lasertag
-	name = "laser tag gun"
-	item_state = "laser"
-	desc = "Standard issue weapon of the Imperial Guard"
-	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
-	self_recharge = 1
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	fire_sound = 'sound/weapons/Laser.ogg'
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
-	var/required_vest
-
-/obj/item/weapon/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
-	if(ishuman(M))
-		if(!istype(M.wear_suit, required_vest))
-			M << "<span class='warning'>You need to be wearing your laser tag vest!</span>"
-			return 0
-	return ..()
-
-/obj/item/weapon/gun/energy/lasertag/blue
-	icon_state = "bluetag"
-	item_state = "bluetag"
-	projectile_type = /obj/item/projectile/beam/lastertag/blue
-	required_vest = /obj/item/clothing/suit/bluetag
-
-/obj/item/weapon/gun/energy/lasertag/red
-	icon_state = "redtag"
-	item_state = "redtag"
-	projectile_type = /obj/item/projectile/beam/lastertag/red
-	required_vest = /obj/item/clothing/suit/redtag
+	w_class = ITEMSIZE_LARGE
+	slot_flags = SLOT_BELT|SLOT_BACK

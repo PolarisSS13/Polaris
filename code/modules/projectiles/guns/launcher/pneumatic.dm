@@ -12,7 +12,7 @@
 
 	var/fire_pressure                                   // Used in fire checks/pressure checks.
 	var/max_w_class = ITEMSIZE_NORMAL                   // Hopper intake size.
-	var/max_storage_space = ITEMSIZE_COST_NORMAL * 5    // Total internal storage size.
+	var/max_storage_space = ITEMSIZE_NORMAL * 5			// Total internal storage size.
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
 
 	var/obj/item/weapon/storage/item_storage
@@ -25,8 +25,8 @@
 	..()
 	item_storage = new(src)
 	item_storage.name = "hopper"
-	item_storage.max_w_class = max_w_class
-	item_storage.max_storage_space = max_storage_space
+	item_storage.max_w_class = ITEMSIZE_NORMAL
+	item_storage.max_storage_space = ITEMSIZE_COST_NORMAL * 5
 	item_storage.use_sound = null
 
 /obj/item/weapon/gun/launcher/pneumatic/verb/set_pressure() //set amount of tank pressure.

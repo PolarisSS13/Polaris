@@ -6,6 +6,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	max_shots = 10
 	fire_delay = 10 // Handguns should be inferior to two-handed weapons.
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
@@ -25,13 +26,14 @@
 /obj/item/weapon/gun/energy/gun/burst
 	name = "burst laser"
 	desc = "The FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
-	icon_state = "fm-2tstun100"	//May resprite this to be more rifley
+	icon_state = "fm-2tstun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
 	max_shots = 18
 	force = 8
-	w_class = ITEMSIZE_LARGE	//Probably gonna make it a rifle sooner or later
+	w_class = ITEMSIZE_NORMAL	//Same as SMGs
 	fire_delay = 6
+	slot_flags = SLOT_BELT
 
 	projectile_type = /obj/item/projectile/beam/stun/weak
 	origin_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 2, TECH_ILLEGAL = 3)
@@ -54,7 +56,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	slot_flags = SLOT_BELT
 	force = 8 //looks heavier than a pistol
-	w_class = ITEMSIZE_LARGE	//Looks bigger than a pistol, too.
+	w_class = ITEMSIZE_NORMAL	//Can't be bigger than the various SMGs
 	fire_delay = 6	//This one's not a handgun, it should have the same fire delay as everything else
 	self_recharge = 1
 	modifystate = null
