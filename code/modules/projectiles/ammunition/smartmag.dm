@@ -31,25 +31,20 @@
 
 /obj/item/ammo_magazine/smart/examine(mob/user)
 	..()
+
 	if(attached_cell)
 		user << "<span class='notice'>\The [src] is loaded with a [attached_cell.name]. It is [round(attached_cell.percent())]% charged.</span>"
-	if(!attached_cell)
+	else
 		user << "<span class='warning'>\The [src] does not appear to have a power source installed.</span>"
 
 /obj/item/ammo_magazine/smart/update_icon()
 	if(attached_cell)
 		icon_state = "smartmag-filled"
-	else if(!(attached_cell))
+	else
 		icon_state = "smartmag-empty"
 
 /obj/item/ammo_magazine/smart/proc/chargereduction()
-	if(attached_cell)
-		if(attached_cell.checked_use(production_cost))
-			return 1
-		else
-			return 0
-
-	return null
+	return attached_cell && attached_cell.checked_use(production_cost)
 
 /obj/item/ammo_magazine/smart/proc/set_production_cost(var/obj/item/ammo_casing/A)
 	var/list/matters = ammo_repository.get_materials_from_object(A)
@@ -103,46 +98,34 @@
 				update_icon()
 				return
 
-	var/obj/item/ammo_magazine/A
-	var/obj/item/weapon/gun/projectile/G
-	var/obj/item/ammo_casing/C
+	var/new_caliber = caliber
+	var/new_ammo_type = ammo_type
 
 	if(istype(I, /obj/item/ammo_magazine))
-		A = I
+		var/obj/item/ammo_magazine/A = I
+		new_caliber = A.caliber
+		new_ammo_type = A.ammo_type
+
 	else if(istype(I, /obj/item/weapon/gun/projectile))
-		G = I
+		var/obj/item/weapon/gun/projectile/G = I
+		if(G.ammo_magazine)
+			new_caliber = G.ammo_magazine.caliber
+			new_ammo_type = G.ammo_magazine.ammo_type
+
 	else if(istype(I, /obj/item/ammo_casing))
-		C = I
+		var/obj/item/ammo_casing/C = I
+		new_caliber = C.caliber
+		new_ammo_type = C.projectile_type
+
 	else
 		return
 
-	//if(G && caliber == G.caliber && ammo_type == G.ammo_type || A && caliber == A.caliber && ammo_type == A.ammo_type)
-	if(G && G.ammo_magazine && caliber == G.caliber && ammo_type == G.ammo_magazine.type || A && caliber == A.caliber && ammo_type == A.ammo_type || C && caliber == C.caliber && ammo_type == C.projectile_type)
+	if(caliber == new_caliber && ammo_type == new_ammo_type)
 		..()
 	else
-		if(A || G || C)
-
-			if(G && G.ammo_magazine)
-				A = G.ammo_magazine
-
-			if(A)
-				if(A.caliber)
-					caliber = A.caliber
-				if(A.ammo_type)
-					set_production_cost(A.ammo_type)
-					ammo_type = A.ammo_type
-			else if(C)
-				if(C.caliber)
-					caliber = C.caliber
-				if(C.projectile_type)
-					set_production_cost(C.projectile_type)
-					ammo_type = C.projectile_type
-
-			else
-				return
-
-		else
-			return
+		caliber = new_caliber
+		ammo_type = new_ammo_type
+		set_production_cost(new_ammo_type)
 
 		user << "<span class='notice'>You scan \the [I] with \the [src], copying \the [I]'s caliber and ammunition type.</span>"
 		stored_ammo.Cut()
@@ -152,7 +135,6 @@
 		var/obj/item/ammo_casing/W = new ammo_type(src.loc)
 		W.loc = src
 		stored_ammo.Insert(1, W) //add to the head of the list
-		chargereduction()
 		return 1
 	return 0
 
@@ -160,9 +142,6 @@
 	if(caliber && ammo_type && attached_cell)
 		if(stored_ammo.len == max_ammo)
 			return
-		if(last_production_time == 0)
-			last_production_time = world.time
-			produce()
 		if(world.time > last_production_time + production_time)
 			last_production_time = world.time
 			produce()
