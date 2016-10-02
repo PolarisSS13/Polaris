@@ -53,11 +53,11 @@
 
 /client/verb/github()
 	set name = "GitHub"
-	set desc = "Visit the GitHub"
+	set desc = "View Source Code Repository"
 	set hidden = 1
 
 	if(config.githuburl)
-		if(alert("This will open the GitHub in your browser. Are you sure?",,"Yes","No")=="No")
+		if(alert("This will open the GitHub Repository in your browser. Are you sure?",,"Yes","No")=="No")
 			return
 		src << link(config.githuburl)
 	else

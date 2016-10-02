@@ -15,7 +15,7 @@ datum/preferences
 	var/last_id
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+	var/lastchangelog = ""				//Saved changlog SHA to detect if there was a change
 	var/ooccolor = "#010000"			//Whatever this is set to acts as 'reset' color and is thus unusable as an actual custom color
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
@@ -262,7 +262,7 @@ datum/preferences
 	if(be_random_name)
 		real_name = random_name(identifying_gender,species)
 
-	// Ask the preferences datums to apply their own settings to the new mob 
+	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
 
 	if(icon_updates)
