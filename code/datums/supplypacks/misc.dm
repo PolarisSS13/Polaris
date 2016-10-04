@@ -70,3 +70,17 @@
 	cost = 10
 	containertype = "/obj/structure/closet/crate"
 	containername = "Webbing crate"
+
+/datum/supply_packs/randomised/misc/armor
+	num_contained = 5
+	contains = list(
+			/obj/item/clothing/suit/storage/vest/medical,
+			/obj/item/clothing/suit/storage/vest/research,
+			/obj/item/clothing/suit/storage/vest/engi,
+			/obj/item/clothing/suit/storage/vest/cargo
+			)
+
+	name = "Emergency Armor crate"
+	cost = 35
+	containertype = "/obj/structure/closet/crate/secure"
+	containername = "Emergency Armor crate"
