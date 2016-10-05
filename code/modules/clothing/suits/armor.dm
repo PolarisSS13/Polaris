@@ -324,9 +324,38 @@
 
 /obj/item/clothing/suit/storage/vest/press
 	name = "press vest"
+	icon_state = "pvest"
 	desc = "A simple kevlar plate carrier. This one has the word 'Press' embroidered on patches on the back and front."
 	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
 	allowed = list(/obj/item/device/flashlight,/obj/item/device/taperecorder,/obj/item/weapon/pen,/obj/item/device/camera_film,/obj/item/device/camera)
+
+/obj/item/clothing/suit/storage/vest/medical
+	name = "emergency medical kevlar vest"
+	icon_state = "kvest_m"
+	desc = "A simple kevlar plate carrier intended for use by people in the Medical department during emergencies. This one has a red cross embroidered on patches on the back."
+	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+
+/obj/item/clothing/suit/storage/vest/research
+	name = "emergency research kevlar vest"
+	icon_state = "kvest_r"
+	desc = "A simple kevlar plate carrier intended for use by people in the Research department during emergencies. This one has test tubes embroidered on patches on the back."
+	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+
+/obj/item/clothing/suit/storage/vest/engi
+	name = "emergency engineering kevlar vest"
+	icon_state = "kvest_e"
+	desc = "A simple kevlar plate carrier intended for use by people in the Engineering department during emergencies. This one has a wrench embroidered on a patch on the back."
+	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
+	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, /obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency_oxygen, /obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
+
+/obj/item/clothing/suit/storage/vest/cargo
+	name = "emergency supply kevlar vest"
+	icon_state = "kvest_s"
+	desc = "A simple kevlar plate carrier intended for use by people in the Supply department during emergencies. This one has a crate embroidered on a patch on the back."
+	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
+	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, /obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency_oxygen, /obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
 
 /obj/item/clothing/suit/storage/vest/heavy
 	name = "heavy armor vest"
