@@ -12,6 +12,7 @@
 	desc = "A variation of the engineering space helmet designed for work in radioactive environments."
 	icon_state = "rig0-engineering_rad"
 	item_state_slots = list(slot_r_hand_str = "eng_helm_rad", slot_l_hand_str = "eng_helm_rad")
+	armor = list(melee = 30, bullet = 5, laser = 20, energy = 5, bomb = 50, bio = 100, rad = 100)
 
 /obj/item/clothing/head/helmet/space/void/engineering/construction
 	name = "construction voidsuit helmet"
@@ -68,6 +69,7 @@
 	desc = "A special helmet designed for work around hazardous biological materials."
 	icon_state = "rig0-medical_bio"
 	item_state_slots = list(slot_r_hand_str = "medical_helm_bio", slot_l_hand_str = "medical_helm_bio")
+	armor = list(melee = 45, bullet = 5, laser = 10, energy = 5, bomb = 15, bio = 100, rad = 75)
 
 /obj/item/clothing/suit/space/void/medical
 	name = "medical voidsuit"
@@ -108,6 +110,7 @@
 	desc = "A security helmet designed for close encounters in low pressure environments."
 	icon_state = "rig0-sec_riot"
 	item_state_slots = list(slot_r_hand_str = "sec_helm_riot", slot_l_hand_str = "sec_helm_riot")
+	armor = list(melee = 70, bullet = 10, laser = 10, energy = 5, bomb = 5, bio = 100, rad = 10)
 
 /obj/item/clothing/suit/space/void/security/riot
 	name = "crowd control voidsuit"
