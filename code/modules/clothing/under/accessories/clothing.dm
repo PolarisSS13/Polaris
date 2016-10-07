@@ -7,6 +7,7 @@
 	name = "tan suit jacket"
 	desc = "Cozy suit jacket."
 	icon_state = "tan_jacket"
+	slot = "jacket"
 
 /obj/item/clothing/accessory/charcoal_jacket
 	name = "charcoal suit jacket"
