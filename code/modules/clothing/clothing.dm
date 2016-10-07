@@ -377,8 +377,10 @@
 	body_parts_covered = FEET
 	slot_flags = SLOT_FEET
 
-	var/can_hold_knife
+	var/can_hold_item
 	var/obj/item/holding
+	var/list/item_holding_blacklist = list(/obj/item/weapon/forensics/swab, /obj/item/weapon/reagent_containers/spray/luminol, /obj/item/device/uv_light,
+										/obj/item/weapon/sample, /obj/item/weapon/forensics/sample_kit, /obj/item/weapon/storage/box, /obj/item/clothing/shoes) //no you can't boots with boots in your boots
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
@@ -389,36 +391,35 @@
 		"Teshari" = 'icons/mob/species/seromi/shoes.dmi',
 		)
 
-/obj/item/clothing/shoes/proc/draw_knife()
-	set name = "Draw Boot Knife"
-	set desc = "Pull out your boot knife."
+/obj/item/clothing/shoes/proc/withdraw_item()
+	set name = "Draw Boot Item"
+	set desc = "Pull out your boot item."
 	set category = "IC"
 	set src in usr
+	draw_item()
 
+/obj/item/clothing/shoes/proc/draw_item()
 	if(usr.stat || usr.restrained() || usr.incapacitated())
 		return
 
 	holding.forceMove(get_turf(usr))
 
 	if(usr.put_in_hands(holding))
-		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
+		usr.visible_message("<span class='warning'>\The [usr] pulls \a [holding.name] out of their [src.name]!</span>")
 		holding = null
 	else
 		usr << "<span class='warning'>Your need an empty, unbroken hand to do that.</span>"
 		holding.forceMove(src)
 
 	if(!holding)
-		verbs -= /obj/item/clothing/shoes/proc/draw_knife
+		verbs -= /obj/item/clothing/shoes/proc/withdraw_item
 
 	update_icon()
 	return
 
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_knife && istype(I, /obj/item/weapon/material/shard) || \
-	 istype(I, /obj/item/weapon/material/butterfly) || \
-	 istype(I, /obj/item/weapon/material/kitchen/utensil) || \
-	 istype(I, /obj/item/weapon/material/hatchet/tacknife))
+	if(can_hold_item && !is_type_in_list(I, item_holding_blacklist) && I.w_class <= ITEMSIZE_SMALL)
 		if(holding)
 			user << "<span class='warning'>\The [src] is already holding \a [holding].</span>"
 			return
@@ -426,16 +427,16 @@
 		I.forceMove(src)
 		holding = I
 		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>")
-		verbs |= /obj/item/clothing/shoes/proc/draw_knife
+		verbs |= /obj/item/clothing/shoes/proc/withdraw_item
 		update_icon()
 	else
 		return ..()
 
-/obj/item/clothing/shoes/update_icon()
-	overlays.Cut()
+/obj/item/clothing/shoes/attack_hand(var/mob/user)
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
-	return ..()
+		draw_item()
+	else
+		..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	return
