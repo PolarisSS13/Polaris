@@ -153,6 +153,7 @@
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	log_client_to_db()
+	log_client_to_sqlite()
 
 	send_resources()
 	nanomanager.send_resources(src)
