@@ -380,7 +380,10 @@
 	var/can_hold_item
 	var/obj/item/holding
 	var/list/item_holding_blacklist = list(/obj/item/weapon/forensics/swab, /obj/item/weapon/reagent_containers/spray/luminol, /obj/item/device/uv_light,
-										/obj/item/weapon/sample, /obj/item/weapon/forensics/sample_kit, /obj/item/weapon/storage/box, /obj/item/clothing/shoes) //no you can't boots with boots in your boots
+										/obj/item/weapon/sample, /obj/item/weapon/forensics/sample_kit) //no you can't boots with boots in your boots
+	var/list/item_holding_whitelist = list(/obj/item/weapon/material/butterfly, /obj/item/weapon/material/butterfly/switchblade, /obj/item/weapon/material/knife,
+											/obj/item/weapon/material/kitchen/utensil, /obj/item/weapon/material/hatchet/unathiknife, /obj/item/weapon/material/hatchet/tacknife/combatknife,
+											/obj/item/weapon/gun/projectile/derringer, /obj/item/weapon/melee/telebaton, /obj/item/weapon/melee/energy/sword)
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
@@ -419,16 +422,17 @@
 
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if(can_hold_item && !is_type_in_list(I, item_holding_blacklist) && I.w_class <= ITEMSIZE_SMALL)
-		if(holding)
-			user << "<span class='warning'>\The [src] is already holding \a [holding].</span>"
-			return
-		user.unEquip(I)
-		I.forceMove(src)
-		holding = I
-		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>")
-		verbs |= /obj/item/clothing/shoes/proc/withdraw_item
-		update_icon()
+	if(can_hold_item && !is_type_in_list(I, item_holding_blacklist))
+		if(I.w_class <= ITEMSIZE_TINY || is_type_in_list(I,item_holding_whitelist))
+			if(holding)
+				user << "<span class='warning'>\The [src] is already holding \a [holding].</span>"
+				return
+			user.unEquip(I)
+			I.forceMove(src)
+			holding = I
+			user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>")
+			verbs |= /obj/item/clothing/shoes/proc/withdraw_item
+			update_icon()
 	else
 		return ..()
 
