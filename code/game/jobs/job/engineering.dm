@@ -2,7 +2,8 @@
 	title = "Chief Engineer"
 	flag = CHIEF
 	head_position = 1
-	department = "Engineering"
+	department = ROLE_ENGINEERING
+	department_groups = list(ROLE_ENGINEERING, ROLE_COMMAND)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
@@ -15,6 +16,7 @@
 
 	minimum_character_age = 25
 	ideal_character_age = 50
+	required_playtime = list(ROLE_ENGINEERING = 360)
 
 
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
@@ -53,7 +55,8 @@
 /datum/job/engineer
 	title = "Station Engineer"
 	flag = ENGINEER
-	department = "Engineering"
+	department = ROLE_ENGINEERING
+	department_groups = list(ROLE_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5
@@ -92,7 +95,8 @@
 /datum/job/atmos
 	title = "Atmospheric Technician"
 	flag = ATMOSTECH
-	department = "Engineering"
+	department = ROLE_ENGINEERING
+	department_groups = list(ROLE_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
@@ -105,6 +109,7 @@
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 
 	minimal_player_age = 3
+	required_playtime = list(ROLE_ENGINEERING = 180)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

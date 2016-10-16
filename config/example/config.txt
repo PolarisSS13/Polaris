@@ -21,6 +21,9 @@ ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are
 ## Use SQLite for player tracking?  Keep a # in front if you wish to use MySQL player tracking instead.
 #SQLITE_PLAYERS
 
+## Use SQLite for play time tracking and restricting of job roles? 
+#SQLITE_PLAYTIME
+
 ## Use SQLite for statistical feedback?  Keep a # in front if you wish to use MySQL player tracking instead.
 #SQLITE_STATS
 

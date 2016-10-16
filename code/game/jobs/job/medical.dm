@@ -2,7 +2,8 @@
 	title = "Chief Medical Officer"
 	flag = CMO
 	head_position = 1
-	department = "Medical"
+	department = ROLE_MEDICAL
+	department_groups = list(ROLE_MEDICAL, ROLE_COMMAND)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -22,6 +23,7 @@
 	minimum_character_age = 25
 	minimal_player_age = 10
 	ideal_character_age = 50
+	required_playtime = list(ROLE_MEDICAL = 360)
 
 	equip(var/mob/living/carbon/human/H, var/alt_title)
 		if(!H)	return 0
@@ -42,7 +44,8 @@
 /datum/job/doctor
 	title = "Medical Doctor"
 	flag = DOCTOR
-	department = "Medical"
+	department = ROLE_MEDICAL
+	department_groups = list(ROLE_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
@@ -106,7 +109,8 @@
 /datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
-	department = "Medical"
+	department = ROLE_MEDICAL
+	department_groups = list(ROLE_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
@@ -118,6 +122,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	alt_titles = list("Pharmacist")
+	required_playtime = list(ROLE_MEDICAL = 180) // One round.
 
 	minimal_player_age = 3
 
@@ -140,7 +145,7 @@
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	department = "Medical"
+	department = ROLE_MEDICAL
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 0
@@ -169,7 +174,8 @@
 /datum/job/psychiatrist
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
-	department = "Medical"
+	department = ROLE_MEDICAL
+	department_groups = list(ROLE_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -204,7 +210,8 @@
 /datum/job/Paramedic
 	title = "Paramedic"
 	flag = PARAMEDIC
-	department = "Medical"
+	department = ROLE_MEDICAL
+	department_groups = list(ROLE_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

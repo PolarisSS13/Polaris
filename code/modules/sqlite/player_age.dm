@@ -1,8 +1,3 @@
-/client/verb/test_log_client_to_sqlite()
-	set category = "sqlite"
-	set name = "test log client to sqlite"
-	log_client_to_sqlite()
-
 // here because it's similar to below
 // Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
 /proc/get_player_sqlite_age(key)
@@ -67,9 +62,17 @@
 
 	if(player_exists)
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
-		var/database/query/query_update = new("UPDATE player SET lastseen = julianday('now'), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' WHERE ckey = [sql_ckey]")
+		var/database/query/query_update = new(
+		"UPDATE player SET lastseen = julianday('now'), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' \
+		WHERE ckey = [sql_ckey]"
+		)
 		query_update.Execute(sqlite_db)
 	else
 		//New player!! Need to insert all the stuff
-		var/database/query/query_insert = new("INSERT INTO player VALUES ('[sql_ckey]', julianday('now'), julianday('now'), '[sql_ip]', '[sql_computerid]', '[sql_admin_rank]')")
+		var/database/query/query_insert = new(
+		"INSERT INTO player (ckey, firstseen, lastseen, ip, computerid, lastadminrank)\
+		VALUES ('[sql_ckey]', julianday('now'), julianday('now'), '[sql_ip]', '[sql_computerid]', '[sql_admin_rank]')")
 		query_insert.Execute(sqlite_db)
+
+		if(query_insert.ErrorMsg())
+			world.log << "SQLite ERROR: player (log_client_to_sqlite() ):  [query_insert.ErrorMsg()]."

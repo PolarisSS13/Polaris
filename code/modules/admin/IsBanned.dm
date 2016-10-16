@@ -4,6 +4,11 @@ world/IsBanned(key,address,computer_id)
 	if(ckey(key) in admin_datums)
 		return ..()
 
+	if(config.sqlite_bans) // Are we using the new SQLite database?  If not, it's probably MySQL, or legacy.
+		var/list/ban_check_result = sqlite_check_is_server_banned(key, address, computer_id)
+		if(islist(ban_check_result))
+			return ban_check_result
+
 	//Guest Checking
 	if(!config.guests_allowed && IsGuestKey(key))
 		log_access("Failed Login: [key] - Guests not allowed")

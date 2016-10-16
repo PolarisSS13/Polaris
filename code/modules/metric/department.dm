@@ -7,7 +7,9 @@
 	// Records are usually the most reliable way to get what job someone is.
 	var/datum/data/record/R = find_general_record("name", M.real_name)
 	if(R) // We found someone with a record.
-		var/recorded_rank = R.fields["real_rank"]
+	//	var/recorded_rank = R.fields["real_rank"]
+		var/recorded_rank = make_list_rank(R.fields["real_rank"]) // Make titles like Acting Chief Engineer count as Chief Engineer.
+
 		found_roles = role_name_to_department(recorded_rank)
 		. = found_roles[1]
 		if(. != ROLE_UNKNOWN) // We found the correct department, so we can stop now.

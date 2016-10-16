@@ -1,9 +1,3 @@
-/client/verb/sqlite_connect_test()
-	set category = "sqlite"
-	set name = "connect to sqlite"
-	establish_sqlite_connection()
-
-
 var/database/sqlite_db
 
 /proc/establish_sqlite_connection()
@@ -22,7 +16,8 @@ var/database/sqlite_db
 
 		// Playerdata table.
 		var/database/query/init_schema = new(
-			"CREATE TABLE IF NOT EXISTS player ( \
+			"CREATE TABLE IF NOT EXISTS player \
+			(\
 			ckey TEXT PRIMARY KEY NOT NULL UNIQUE, \
 			firstseen datetime NOT NULL, \
 			lastseen datetime NOT NULL, \
@@ -30,36 +25,63 @@ var/database/sqlite_db
 			computerid TEXT NOT NULL, \
 			lastadminrank TEXT NOT NULL DEFAULT 'Player' \
 			);")
-
 		init_schema.Execute(sqlite_db)
 
-		if(init_schema.ErrorMsg())
-			world.log << "SQL ERROR: player: [init_schema.ErrorMsg()]."
+		// Ban table.
+		init_schema = new(
+			"CREATE TABLE IF NOT EXISTS ban \
+			(\
+			id INTEGER PRIMARY KEY NOT NULL, \
+			bantype TEXT NOT NULL, \
+			reason text NOT NULL, \
+			job TEXT DEFAULT NULL, \
+			expiration_datetime datetime DEFAULT NULL, \
+			ckey TEXT NOT NULL, \
+			computerid TEXT DEFAULT NULL, \
+			ip TEXT DEFAULT NULL, \
+			banning_ckey TEXT NOT NULL, \
+			banning_datetime datetime NOT NULL, \
+			unbanned_ckey TEXT DEFAULT NULL, \
+			unbanned_datetime datetime DEFAULT NULL \
+			);")
+		init_schema.Execute(sqlite_db)
+
+		// Playtime table.
+		init_schema = new(
+			"CREATE TABLE IF NOT EXISTS playtime \
+			(\
+			ckey TEXT NOT NULL, \
+			department TEXT NOT NULL, \
+			time INTEGER NOT NULL\
+			);")
+		init_schema.Execute(sqlite_db)
 
 		// Death table.
 		init_schema = new(
-			"CREATE TABLE IF NOT EXISTS death ( \
+			"CREATE TABLE IF NOT EXISTS death \
+			(\
 			id INTEGER PRIMARY KEY NOT NULL UNIQUE, \
-			pod TEXT NOT NULL, \
+			death_area TEXT NOT NULL, \
 			coord TEXT NOT NULL, \
-			tod DATETIME NOT NULL, \
+			time_of_death DATETIME NOT NULL, \
 			job TEXT NOT NULL, \
-			special TEXT NOT NULL, \
+			special_role TEXT NOT NULL, \
 			name TEXT NOT NULL, \
 			byondkey TEXT NOT NULL, \
-			laname TEXT NOT NULL, \
-			lakey TEXT NOT NULL, \
+			killer_name TEXT NOT NULL, \
+			killer_key TEXT NOT NULL, \
 			gender TEXT NOT NULL, \
+			species TEXT NOT NULL, \
 			bruteloss INTEGER NOT NULL, \
 			brainloss INTEGER NOT NULL, \
 			fireloss INTEGER NOT NULL, \
 			oxyloss INTEGER NOT NULL, \
 			cloneloss INTEGER NOT NULL \
 			);")
-
 		init_schema.Execute(sqlite_db)
-		if(init_schema.ErrorMsg())
-			world.log << "SQL ERROR: death: [init_schema.ErrorMsg()]."
+
+		if(!sqlite_db)
+			world.log << "Failed to load or create an SQLite database."
 
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sql_sanitize_text(var/t = "")
@@ -69,3 +91,8 @@ var/database/sqlite_db
 	t = replacetext(t, ";", "")
 	t = replacetext(t, "&", "")
 	return sanitize(t)
+
+// General error checking for SQLite.
+/proc/sqlite_check_for_errors(var/database/query/query_used, var/desc)
+	if(query_used && query_used.ErrorMsg())
+		world.log << "SQLite Error: [query_used.ErrorMsg()] : [desc]"

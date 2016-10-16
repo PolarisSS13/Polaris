@@ -2,7 +2,8 @@
 	title = "Research Director"
 	flag = RD
 	head_position = 1
-	department = "Science"
+	department = ROLE_RESEARCH
+	department_groups = list(ROLE_RESEARCH, ROLE_COMMAND)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
@@ -25,6 +26,7 @@
 	minimum_character_age = 25
 	minimal_player_age = 14
 	ideal_character_age = 50
+	required_playtime = list(ROLE_RESEARCH = 360)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -46,7 +48,8 @@
 /datum/job/scientist
 	title = "Scientist"
 	flag = SCIENTIST
-	department = "Science"
+	department = ROLE_RESEARCH
+	department_groups = list(ROLE_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
@@ -78,7 +81,8 @@
 /datum/job/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
-	department = "Science"
+	department = ROLE_RESEARCH
+	department_groups = list(ROLE_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 3
@@ -110,7 +114,8 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
-	department = "Science"
+	department = ROLE_RESEARCH
+	department_groups = list(ROLE_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

@@ -6,13 +6,13 @@
 	if(!L.key || !L.mind)
 		return
 
-	world << "Reporting death of [L]."
 	var/area/death_area = get_area(L)
 	var/area_name = death_area ? death_area.name : "Unknown area"
+	var/sqlite_species = L.get_species() ? sql_sanitize_text(L.get_species()) : "Unknown species"
 	// The prefix of 'sqlite_' indicates that the variable is sanitzed by sql_sanitize_text().
 
 	var/sqlite_name = sql_sanitize_text(L.real_name)
-	var/sqlite_key = sql_sanitize_text(L.key)
+	var/sqlite_key = sql_sanitize_text(ckey(L.key))
 	var/sqlite_death_area = sql_sanitize_text(area_name)
 	var/sqlite_special_role = sql_sanitize_text(L.mind.special_role)
 	var/sqlite_job = sql_sanitize_text(L.mind.assigned_role)
@@ -42,6 +42,7 @@
 		killer_name, \
 		killer_key, \
 		gender, \
+		species, \
 		bruteloss, \
 		fireloss, \
 		brainloss, \
@@ -59,6 +60,7 @@
 		'[sqlite_killer_name]', \
 		'[sqlite_killer_key]', \
 		'[L.gender]', \
+		'[sqlite_species]', \
 		[L.getBruteLoss()], \
 		[L.getFireLoss()], \
 		[L.brainloss], \

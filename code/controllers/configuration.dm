@@ -226,6 +226,7 @@ var/list/gamemode_cache = list()
 	var/sqlite_path = "data/sqlite/station.db" // Location of where the .db file is.
 	var/sqlite_bans = 0  		// If bans should be handled by SQLite in favor of legacy or MySQL.
 	var/sqlite_players = 0		// If player tracking should be handled by SQLite.
+	var/sqlite_playtime = 0
 	var/sqlite_stats = 0		// If statistical feedback should be handled by SQLite.
 
 /datum/configuration/New()
@@ -310,6 +311,9 @@ var/list/gamemode_cache = list()
 
 				if ("sqlite_players")
 					config.sqlite_players = 1
+
+				if ("sqlite_playtime")
+					config.sqlite_playtime = 1
 
 				if ("sqlite_stats")
 					config.sqlite_stats = 1

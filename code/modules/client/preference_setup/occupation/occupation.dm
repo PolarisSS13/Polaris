@@ -93,6 +93,13 @@
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
+		if(!check_if_playtime_is_sufficent(user.client, job, job.department))
+			var/list/requirements_list = list()
+			for(var/dept in job.required_playtime)
+				var/time_left = max(job.required_playtime[dept] - user.client.get_playtime_from_sqlite(job.department), 0)
+				requirements_list.Add(uppertext("[dept] - [time_left]M") )
+			. += "<del>[rank]</del></td><td> \[PLAYTIME REQUIRED: [english_list(requirements_list)]\]</td></tr>"
+			continue
 		if((pref.job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 			. += "<font color=grey>[rank]</font></td><td></td></tr>"
 			continue
