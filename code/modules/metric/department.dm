@@ -1,35 +1,51 @@
 
 // This proc tries to find the department of an arbitrary mob.
 /datum/metric/proc/guess_department(var/mob/M)
+	if(!M)
+		return null
 	var/list/found_roles = list()
-	. = ROLE_UNKNOWN
+
+	// We do this first because borgs exist.
+	found_roles = M.get_department_from_mob()
+	if(check_if_finished(found_roles))
+		return found_roles
 
 	// Records are usually the most reliable way to get what job someone is.
+	found_roles = get_department_from_records()
+	if(check_if_finished(found_roles))
+		return found_roles
+
+	// They have a custom title, aren't crew, or someone deleted their record, so we need a fallback method.
+	// Let's check the mind.
+	found_roles = get_department_from_mind()
+	if(check_if_finished(found_roles))
+		return found_roles
+
+	// At this point, they don't have a mind, or for some reason assigned_role didn't work.
+	found_roles = role_name_to_department(M.job)
+	if(check_if_finished(found_roles))
+		return found_roles
+
+	return list(ROLE_UNKNOWN) // Welp.
+
+/datum/metric/proc/get_department_from_records(var/mob/M)
 	var/datum/data/record/R = find_general_record("name", M.real_name)
 	if(R) // We found someone with a record.
 	//	var/recorded_rank = R.fields["real_rank"]
 		var/recorded_rank = make_list_rank(R.fields["real_rank"]) // Make titles like Acting Chief Engineer count as Chief Engineer.
 
-		found_roles = role_name_to_department(recorded_rank)
-		. = found_roles[1]
-		if(. != ROLE_UNKNOWN) // We found the correct department, so we can stop now.
-			return
+		return role_name_to_department(recorded_rank)
+	return list(ROLE_UNKNOWN)
 
-	// They have a custom title, aren't crew, or someone deleted their record, so we need a fallback method.
-	// Let's check the mind.
+/datum/metric/proc/get_department_from_mind(var/mob/M)
 	if(M.mind)
-		found_roles = role_name_to_department(M.mind.assigned_role)
-		. = found_roles[1]
-		if(. != ROLE_UNKNOWN)
-			return
+		return role_name_to_department(M.mind.assigned_role)
+	return list(ROLE_UNKNOWN)
 
-	// At this point, they don't have a mind, or for some reason assigned_role didn't work.
-	found_roles = role_name_to_department(M.job)
-	. = found_roles[1]
-	if(. != ROLE_UNKNOWN)
-		return
-
-	return ROLE_UNKNOWN // Welp.
+/datum/metric/proc/check_if_finished(var/list/roles)
+	if(!roles.len || ROLE_UNKNOWN in roles)
+		return FALSE
+	return TRUE
 
 // Feed this proc the name of a job, and it will try to figure out what department they are apart of.
 // Note that this returns a list, as some jobs are in more than one department, like Command.  The 'primary' department is the first

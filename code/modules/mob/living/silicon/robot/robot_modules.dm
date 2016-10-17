@@ -33,6 +33,7 @@ var/global/list/robot_modules = list(
 	var/obj/item/borg/upgrade/jetpack = null
 	var/list/subsystems = list()
 	var/list/obj/item/borg/upgrade/supported_upgrades = list()
+	var/department
 
 	// Bookkeeping
 	var/list/original_languages = list()
@@ -169,6 +170,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical
 	name = "medical robot module"
+	department = ROLE_MEDICAL
 	channels = list("Medical" = 1)
 	networks = list(NETWORK_MEDICAL)
 	subsystems = list(/mob/living/silicon/proc/subsystem_crew_monitor)
@@ -176,6 +178,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical/surgeon
 	name = "surgeon robot module"
+	department = ROLE_MEDICAL
 	sprites = list(
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
@@ -227,6 +230,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/medical/crisis
 	name = "crisis robot module"
+	department = ROLE_MEDICAL
 	sprites = list(
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
@@ -292,6 +296,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/engineering
 	name = "engineering robot module"
+	department = ROLE_ENGINEERING
 	channels = list("Engineering" = 1)
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
@@ -305,6 +310,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/engineering/construction
 	name = "construction robot module"
+	department = ROLE_ENGINEERING
 	no_slip = 1
 
 /obj/item/weapon/robot_module/engineering/construction/New()
@@ -409,6 +415,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/security
 	name = "security robot module"
+	department = ROLE_SECURITY
 	channels = list("Security" = 1)
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(/mob/living/silicon/proc/subsystem_crew_monitor)
@@ -456,6 +463,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/janitor
 	name = "janitorial robot module"
+	department = ROLE_CIVILIAN
 	channels = list("Service" = 1)
 	sprites = list(
 					"Basic" = "JanBot2",
@@ -484,6 +492,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
+	department = ROLE_CIVILIAN
 	channels = list("Service" = 1)
 	languages = list(
 					LANGUAGE_SOL_COMMON	= 1,
@@ -541,6 +550,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/clerical/general
 	name = "clerical robot module"
+	department = ROLE_CIVILIAN
 	sprites = list(
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
@@ -570,6 +580,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
+	department = ROLE_CARGO
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
@@ -596,6 +607,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/research
 	name = "research module"
+	department = ROLE_RESEARCH
 	channels = list("Science" = 1)
 	sprites = list(
 					"Droid" = "droid-science",
@@ -695,6 +707,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
+	department = ROLE_ENGINEERING
 	hide_on_manifest = 1
 	no_slip = 1
 	networks = list(NETWORK_ENGINEERING)
@@ -778,6 +791,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
+	department = ROLE_ENGINEERING
 	hide_on_manifest = 1
 	channels = list("Engineering" = 1)
 	languages = list()

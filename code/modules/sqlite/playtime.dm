@@ -99,20 +99,16 @@
 	if(is_afk(5 MINUTES))
 		return
 
-	var/role = metric.guess_department(src.mob)
-	if(!role || role == ROLE_UNKNOWN)
+	var/list/roles = metric.guess_department(src.mob)
+	if(!roles.len || ROLE_UNKNOWN in roles)
 		return
 
 	if(!immediate)
 		playtime_to_log++
-		world << "Incremented, it is now at [playtime_to_log]."
 
 	if( (playtime_to_log >= 10) || immediate)
-		var/list/departments_to_log = metric.role_name_to_department(role)
-		if(departments_to_log.len)
-			for(var/dept in departments_to_log)
-				log_playtime_to_sqlite(dept, playtime_to_log)
-				world << "Logged [dept] to [playtime_to_log]."
+		for(var/dept in roles)
+			log_playtime_to_sqlite(dept, playtime_to_log)
 		playtime_to_log = 0
 
 /proc/check_if_playtime_is_sufficent(var/client/C, var/datum/job/J, var/department = null)

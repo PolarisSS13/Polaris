@@ -1011,3 +1011,6 @@ mob/proc/yank_out_object()
 /mob/proc/is_muzzled()
 	return 0
 
+/mob/proc/get_department_from_mob()
+	return list(ROLE_UNKNOWN)
+
