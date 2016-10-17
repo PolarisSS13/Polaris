@@ -13,6 +13,22 @@
 	data.Cut()
 	return ..()
 
+// Use this to update the datum with new information from the sqlite db.
+// Using sqlite_load_bans() is very expensive.
+/datum/ban/proc/update_data()
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
+	var/database/query/query = new(
+		"SELECT * FROM ban \
+		WHERE (id == ?);", data["id"]
+		)
+	query.Execute(sqlite_db)
+	if(query.ErrorMsg())
+		world.log << "SQLite ERROR: update_data (1): [query.ErrorMsg()]."
+	if(query.NextRow())
+		data = query.GetRowData()
+
 /datum/ban/proc/get_summary()
 
 	var/banstatus = "<b>(bID #[data["id"]])</b> "
@@ -69,6 +85,9 @@
 			return B
 
 /datum/ban/proc/unban(var/unbanner)
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
 	if(!unbanner)
 		return
 	var/database/query/query = new(
@@ -78,9 +97,12 @@
 	if(query.ErrorMsg())
 		world.log << "SQLite ERROR: unban (1): [query.ErrorMsg()]."
 	log_and_message_admins("unbanned [data["ckey"]]'s [data["bantype"]].")
-	sqlite_load_bans()
+	update_data()
 
 /datum/ban/proc/edit_reason(var/new_reason)
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
 	if(!new_reason)
 		return
 	var/current_reason = data["reason"]
@@ -91,9 +113,12 @@
 	if(query.ErrorMsg())
 		world.log << "SQLite ERROR: edit_reason (1): [query.ErrorMsg()]."
 	log_and_message_admins("changed [data["ckey"]]'s ban reason from ([current_reason]), to ([new_reason]).")
-	sqlite_load_bans()
+	update_data()
 
 /datum/ban/proc/edit_ip(var/new_ip)
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
 	if(!new_ip)
 		return
 	var/current_ip = data["ip"]
@@ -104,9 +129,12 @@
 	if(query.ErrorMsg())
 		world.log << "SQLite ERROR: edit_ip (1): [query.ErrorMsg()]."
 	log_and_message_admins("changed [data["ckey"]]'s ban IP address from ([current_ip]), to ([new_ip]).")
-	sqlite_load_bans()
+	update_data()
 
 /datum/ban/proc/edit_cid(var/new_cid)
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
 	if(!new_cid)
 		return
 	var/current_cid = data["computerid"]
@@ -117,9 +145,12 @@
 	if(query.ErrorMsg())
 		world.log << "SQLite ERROR: edit_cid (1): [query.ErrorMsg()]."
 	log_and_message_admins("changed [data["ckey"]]'s ban Comp. ID from ([current_cid]), to ([new_cid]).")
-	sqlite_load_bans()
+	update_data()
 
 /datum/ban/proc/edit_expiration_datetime(var/new_datetime)
+	establish_sqlite_connection()
+	if(!sqlite_db)
+		return
 	if(!new_datetime)
 		return
 	var/current_datetime = data["expiration_datetime"]
@@ -130,7 +161,7 @@
 	if(query.ErrorMsg())
 		world.log << "SQLite ERROR: edit_expiration_datetime (1): [query.ErrorMsg()]."
 	log_and_message_admins("changed [data["ckey"]]'s ban expiration time from ([current_datetime]), to ([new_datetime]).")
-	sqlite_load_bans()
+	update_data()
 /*
 /client/verb/view_ban_vars()
 	var/list/bans = list()

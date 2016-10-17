@@ -7,6 +7,9 @@ var/list/allbans = list()
 	sqlite_load_bans()
 	return 1
 
+
+// Try to avoid using this, since it can cause significant lag.  Use update_datum() on the specific datum if you just
+// changed one thing.
 /proc/sqlite_load_bans()
 	establish_sqlite_connection()
 	if(!sqlite_db)
@@ -79,4 +82,12 @@ var/list/allbans = list()
 				del(C) // qdel() complains if it takes a client.
 			break
 
-	sqlite_load_bans()
+	var/database/query/select = new(
+		"SELECT * FROM ban \
+		ORDER BY id DESC LIMIT 1;"
+		)
+	select.Execute(sqlite_db)
+	if(select.ErrorMsg())
+		world.log << "SQLite ERROR: sqlite_add_ban (2): [select.ErrorMsg()]."
+	if(select.NextRow())
+		new /datum/ban(select.GetRowData())
