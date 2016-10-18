@@ -341,6 +341,11 @@ var/global/datum/controller/gameticker/ticker
 				if(blackbox)
 					blackbox.save_all_data_to_sql()
 
+				if(config.sqlite_enabled && config.sqlite_playtime)
+					for(var/mob/player in player_list)
+						if(player.client) // Shouldn't be needed but paranoid.
+							player.client.increment_playtime(1) // 1 means it gets saved to the database immediately.
+
 				if(!delay_end)
 					while(time_left > 0)
 						if(delay_end)

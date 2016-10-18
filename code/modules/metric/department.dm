@@ -1,3 +1,13 @@
+/datum/metric/proc/guess_job(var/mob/M)
+	if(!M)
+		return null
+	var/result = get_job_from_records(M)
+	if(result)
+		return result
+	if(M.mind)
+		return M.mind.assigned_role
+	return M.job
+
 
 // This proc tries to find the department of an arbitrary mob.
 /datum/metric/proc/guess_department(var/mob/M)
@@ -36,6 +46,14 @@
 
 		return role_name_to_department(recorded_rank)
 	return list(ROLE_UNKNOWN)
+
+/datum/metric/proc/get_job_from_records(var/mob/M)
+	var/datum/data/record/R = find_general_record("name", M.real_name)
+	if(R)
+		var/recorded_rank = make_list_rank(R.fields["real_rank"]) // Make titles like Acting Chief Engineer count as Chief Engineer.
+
+		return recorded_rank
+	return null
 
 /datum/metric/proc/get_department_from_mind(var/mob/M)
 	if(M.mind)
@@ -80,6 +98,14 @@
 	if(!result.len) // No department was found.
 		result += ROLE_UNKNOWN
 	return result
+
+// Feed a name to this to hopefully get back the job datum that is desired.
+/datum/metric/proc/role_name_to_job_datum(var/role_name)
+	role_name = make_list_rank(role_name) // Make titles like Acting Chief Engineer count as Chief Engineer.
+	var/list/jobs = get_job_datums()
+	for(var/datum/job/J in jobs)
+		if(J.title == role_name)
+			return J
 
 /datum/metric/proc/count_people_in_department(var/department)
 	if(!department)

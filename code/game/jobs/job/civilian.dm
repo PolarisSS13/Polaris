@@ -257,7 +257,7 @@
 	title = "Internal Affairs Agent"
 	flag = LAWYER
 	department = ROLE_CIVILIAN
-	department_groups = list(ROLE_CIVILIAN)
+	department_groups = list(ROLE_COMMAND)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2

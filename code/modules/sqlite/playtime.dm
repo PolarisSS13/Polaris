@@ -99,7 +99,15 @@
 	if(is_afk(5 MINUTES))
 		return
 
-	var/list/roles = metric.guess_department(src.mob)
+	var/list/roles = list()
+
+	var/job_name = metric.guess_job(src.mob)
+	var/datum/job/J = metric.role_name_to_job_datum(job_name)
+	if(J)
+		roles = J.department_groups
+	else
+		roles = metric.guess_department(src.mob)
+
 	if(!roles.len || ROLE_UNKNOWN in roles)
 		return
 
