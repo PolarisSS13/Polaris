@@ -53,9 +53,10 @@
 			return "Guest Job-ban"
 		if(config.usewhitelist && !check_whitelist(M))
 			return "Whitelisted Job"
-	for(var/thing in jobbans)
-		var/datum/ban/JB = thing
-		if(M.ckey == JB.data["ckey"] && rank == JB.data["job"])
+	for(var/datum/ban/JB in jobbans)
+		if(M.ckey == JB.data["ckey"] && rank == JB.data["job"]) // Is it their ban?
+			if(JB.expired() || JB.lifted() ) // If so, is it still in effect?
+				continue
 			return JB.data["reason"]
 	return FALSE
 

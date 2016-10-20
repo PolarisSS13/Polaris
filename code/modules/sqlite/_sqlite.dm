@@ -95,4 +95,4 @@ var/database/sqlite_db
 // General error checking for SQLite.
 /proc/sqlite_check_for_errors(var/database/query/query_used, var/desc)
 	if(query_used && query_used.ErrorMsg())
-		world.log << "SQLite Error: [query_used.ErrorMsg()] : [desc]"
+		log_debug("SQLite Error: [desc] : [query_used.ErrorMsg()]")

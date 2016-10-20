@@ -60,8 +60,7 @@ var/list/allbans = list()
 		)
 
 	insert.Execute(sqlite_db)
-	if(insert.ErrorMsg())
-		world.log << "SQLite ERROR in add_ban(ckey:[_ckey], cid:[_cid], ip:[_ip], job:[_job], reason:[_reason], banningkey:[_banningkey], expires:[_expires]): ban: [insert.ErrorMsg()]."
+	sqlite_check_for_errors(insert, "sqlite_add_ban (1)")
 
 	message_admins("<span class='danger'>[_banningkey] has banned [_ckey] from [_job ? "from job ([_job])" : "the server"] for reason: [_reason]</span>")
 	for(var/client/C in clients)
@@ -87,7 +86,6 @@ var/list/allbans = list()
 		ORDER BY id DESC LIMIT 1;"
 		)
 	select.Execute(sqlite_db)
-	if(select.ErrorMsg())
-		world.log << "SQLite ERROR: sqlite_add_ban (2): [select.ErrorMsg()]."
+	sqlite_check_for_errors(insert, "sqlite_add_ban (2)")
 	if(select.NextRow())
 		new /datum/ban(select.GetRowData())

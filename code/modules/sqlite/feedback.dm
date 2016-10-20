@@ -68,9 +68,8 @@
 		[L.getCloneLoss()], \
 		'[coord]')"
 		)
-		if(!query.Execute(sqlite_db))
-			var/err = query.ErrorMsg()
-			log_game("SQLite ERROR during death reporting. Error : \[[err]\]\n")
+		query.Execute(sqlite_db)
+		sqlite_check_for_errors(query, "sqlite_report_death (1)")
 /*
 // Add a string to feedback table.
 /proc/feedback_add_details(var/feedback_type, var/feedback_data)

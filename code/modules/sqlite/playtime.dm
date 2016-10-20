@@ -4,8 +4,6 @@
 		return null
 	if(!config.sqlite_playtime) // Tracking disabled.
 		return
-	if(department == 1)
-		CRASH()
 
 	if(!department || department == ROLE_UNKNOWN)
 		return
@@ -22,7 +20,7 @@
 		WHERE ckey = '[sqlite_ckey]'")
 
 	query_record.Execute(sqlite_db)
-	sqlite_check_for_errors(query_record, "log_client_to_sqlite([department],[amount]), Checking record existance.")
+	sqlite_check_for_errors(query_record, "log_playtime_to_sqlite (1)")
 
 	while(query_record.NextRow())
 		var/list/querydata = query_record.GetRowData()
@@ -36,7 +34,7 @@
 		"INSERT INTO playtime (ckey, department, time)\
 		VALUES ('[sqlite_ckey]', '[sqlite_department]', [amount])")
 		query_insert.Execute(sqlite_db)
-		sqlite_check_for_errors(query_insert, "log_playtime_to_sqlite([department],[amount]), Inserting new record.")
+		sqlite_check_for_errors(query_insert, "log_playtime_to_sqlite (2)")
 
 	else
 		// Existing record to update.
@@ -46,7 +44,7 @@
 		WHERE ckey = '[sqlite_ckey]' AND department = '[sqlite_department]'"
 		)
 		query_update.Execute(sqlite_db)
-		sqlite_check_for_errors(query_update, "log_playtime_to_sqlite([department],[amount]), Updating existing record.")
+		sqlite_check_for_errors(query_update, "log_playtime_to_sqlite (3)")
 
 /client/proc/get_playtime_from_sqlite(var/department)
 	establish_sqlite_connection()
@@ -68,7 +66,7 @@
 			WHERE ckey = '[sqlite_ckey]' AND department = '[sqlite_department]'")
 
 		query_record.Execute(sqlite_db)
-		sqlite_check_for_errors(query_record, "get_playtime_from_sqlite([department]), Retrieving specific time.")
+		sqlite_check_for_errors(query_record, "get_playtime_from_sqlite (1)")
 
 		if(query_record.NextRow())
 			var/list/data = query_record.GetRowData()
@@ -81,7 +79,7 @@
 			WHERE ckey = '[sqlite_ckey]'")
 
 		query_record.Execute(sqlite_db)
-		sqlite_check_for_errors(query_record, "get_playtime_from_sqlite([department]), Retrieving sum of time.")
+		sqlite_check_for_errors(query_record, "get_playtime_from_sqlite (2)")
 
 		if(query_record.NextRow())
 			var/list/data = query_record.GetRowData()

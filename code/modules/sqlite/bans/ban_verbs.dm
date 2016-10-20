@@ -19,7 +19,6 @@
 	if(!sqlite_db)
 		usr << "<span class='danger'>Failed to establish database connection!</span>"
 		return
-//	sqlite_load_bans()
 
 	var/list/data = list(filter_ckey, filter_ip, filter_cid, filter_admin)
 	var/encoded_data = json_encode(data)
@@ -27,12 +26,11 @@
 	var/HTML = "<html><head><title>Ban Panel</title></head><body>"
 	HTML += "<h1>Ban Panel</h1><br>"
 	HTML += "<b>Add New Bans</b><br>"
-	HTML += "<a href='?src=\ref[src];ban_panel_add_ban=1'>\[Add Server Ban\]</a> | "
-	HTML += "<a href='?src=\ref[src];ban_panel_add_jobban=1'>\[Add Job Ban\]</a>"
+	HTML += "<a href='?src=\ref[src];sqlite_topic_add_manual_ban=1'>\[Add Ban\]</a>"
 	HTML += "<br>"
 	HTML += "<b>Ban Filters</b><br>"
 	if(filter_ckey || filter_ip || filter_cid || filter_admin)
-		HTML += "Active filters: ckey=[filter_ckey] ip=[filter_ip] cid=[filter_cid] admin=[filter_admin]<br>"
+		HTML += "Active filters: ckey=[filter_ckey], ip=[filter_ip], cid=[filter_cid], admin=[filter_admin]<br>"
 	HTML += "<a href='?src=\ref[src];ban_panel_filter=ckey;ban_panel_data=[encoded_data]'>\[Filter Ckey\]</a> | "
 	HTML += "<a href='?src=\ref[src];ban_panel_filter=ip;ban_panel_data=[encoded_data]'>\[Filter IP\]</a> | "
 	HTML += "<a href='?src=\ref[src];ban_panel_filter=cid;ban_panel_data=[encoded_data]'>\[Filter Comp. ID\]</a> | "

@@ -24,8 +24,7 @@
 		WHERE (id == ?);", data["id"]
 		)
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: update_data (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "update_data (1)")
 	if(query.NextRow())
 		data = query.GetRowData()
 
@@ -58,8 +57,7 @@
 		WHERE (id == ? AND expiration_datetime < datetime('now'));", data["id"]
 		)
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: expired (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "expired (1)")
 	if(query.NextRow()) // If this is true, the ban ID provided is expired.
 		return TRUE
 	return FALSE // Tough luck otherwise.
@@ -94,8 +92,7 @@
 		"UPDATE ban SET unbanned_ckey = ?, unbanned_datetime = datetime('now') \
 		WHERE id == ?;", sql_sanitize_text(ckey(unbanner)), data["id"])
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: unban (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "unban (1)")
 	log_and_message_admins("unbanned [data["ckey"]]'s [data["bantype"]].")
 	update_data()
 
@@ -110,8 +107,7 @@
 		"UPDATE ban SET reason = ? \
 		WHERE id == ?;", new_reason, data["id"])
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: edit_reason (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "edit_reason (1)")
 	log_and_message_admins("changed [data["ckey"]]'s ban reason from ([current_reason]), to ([new_reason]).")
 	update_data()
 
@@ -126,8 +122,7 @@
 		"UPDATE ban SET ip = ? \
 		WHERE id == ?;", new_ip, data["id"])
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: edit_ip (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "edit_ip (1)")
 	log_and_message_admins("changed [data["ckey"]]'s ban IP address from ([current_ip]), to ([new_ip]).")
 	update_data()
 
@@ -142,8 +137,7 @@
 		"UPDATE ban SET computerid = ? \
 		WHERE id == ?;", new_cid, data["id"])
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: edit_cid (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "edit_cid (1)")
 	log_and_message_admins("changed [data["ckey"]]'s ban Comp. ID from ([current_cid]), to ([new_cid]).")
 	update_data()
 
@@ -158,20 +152,10 @@
 		"UPDATE ban SET expiration_datetime = ? \
 		WHERE id == ?;", new_datetime, data["id"])
 	query.Execute(sqlite_db)
-	if(query.ErrorMsg())
-		world.log << "SQLite ERROR: edit_expiration_datetime (1): [query.ErrorMsg()]."
+	sqlite_check_for_errors(query, "edit_expiration_datetime (1)")
 	log_and_message_admins("changed [data["ckey"]]'s ban expiration time from ([current_datetime]), to ([new_datetime]).")
 	update_data()
-/*
-/client/verb/view_ban_vars()
-	var/list/bans = list()
-	for(var/datum/ban/B in allbans)
-		bans["[B.data["id"]] - [B.data["ckey"]]"] = B
-	var/choice = input(usr, "Choose a ban!", "Debug") as null|anything in bans
-	if(choice)
-		choice = bans[choice]
-		debug_variables(choice)
-*/
+
 /datum/ban/Topic(href, href_list)
 	if(..())
 		return 1

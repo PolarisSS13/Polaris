@@ -35,6 +35,7 @@
 
 	var/database/query/query_ip = new("SELECT ckey FROM player WHERE ip = '[address]'")
 	query_ip.Execute(sqlite_db)
+	sqlite_check_for_errors(query_ip, "log_client_to_sqlite (1)")
 	related_accounts_ip = ""
 	while(query_ip.NextRow())
 		var/list/querydata = query_ip.GetRowData()
@@ -44,6 +45,7 @@
 
 	var/database/query/query_cid = new("SELECT ckey FROM player WHERE computerid = '[computer_id]'")
 	query_cid.Execute(sqlite_db)
+	sqlite_check_for_errors(query_cid, "log_client_to_sqlite (2)")
 	related_accounts_cid = ""
 	while(query_cid.NextRow())
 		var/list/querydata = query_cid.GetRowData()
@@ -64,15 +66,14 @@
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
 		var/database/query/query_update = new(
 		"UPDATE player SET lastseen = julianday('now'), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' \
-		WHERE ckey = [sql_ckey]"
+		WHERE ckey == '[sql_ckey]'"
 		)
 		query_update.Execute(sqlite_db)
+		sqlite_check_for_errors(query_update, "log_client_to_sqlite (3)")
 	else
 		//New player!! Need to insert all the stuff
 		var/database/query/query_insert = new(
 		"INSERT INTO player (ckey, firstseen, lastseen, ip, computerid, lastadminrank)\
 		VALUES ('[sql_ckey]', julianday('now'), julianday('now'), '[sql_ip]', '[sql_computerid]', '[sql_admin_rank]')")
 		query_insert.Execute(sqlite_db)
-
-		if(query_insert.ErrorMsg())
-			world.log << "SQLite ERROR: player (log_client_to_sqlite() ):  [query_insert.ErrorMsg()]."
+		sqlite_check_for_errors(query_insert, "log_client_to_sqlite (4)")

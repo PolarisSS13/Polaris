@@ -178,7 +178,7 @@
 	if(holder)
 		holder.owner = null
 		admins -= src
-	log_playtime_to_sqlite(null, TRUE)
+	increment_playtime(TRUE)
 	directory -= ckey
 	clients -= src
 	return ..()

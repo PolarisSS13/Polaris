@@ -211,52 +211,72 @@
 
 			sqlite_ban_panel(data["ckey"], data["ip"], data["cid"], data["banningadmin"])
 
-	else if(href_list["sqlite_topic_addban_type"])
-
-		var/bantype = text2num(href_list["sqlite_topic_addban_type"])
-		var/banckey = href_list["sqlite_topic_addban_ckey"]
-		var/banip = href_list["sqlite_topic_addban_ip"]
-		var/bancid = href_list["sqlite_topic_addban_cid"]
-		var/banduration = href_list["sqlite_topic_addban_cid"]
-		var/banjob = href_list["sqlite_topic_addban_job"]
-		var/banreason = href_list["sqlite_topic_addban_reason"]
-
-		banckey = ckey(banckey)
-
-		if(!banckey)
-			usr << "You need to specify a ckey to ban."
-			return
-		if(!banreason)
-			usr << "You need to specify a reason for the ban to be shown to them."
-			return
-		if(!bantype)
-			usr << "You need to specify the type of ban to apply."
+	else if(href_list["sqlite_topic_add_manual_ban"])
+		var/ban_ckey = ckey(input("Enter the key of the person to be banned.  This is required.", "Banning - Key - 1 of 7") as null|text)
+		if(!ban_ckey)
 			return
 
-		if(bantype == BAN_SERVERBAN)
-			banjob = null
-
-		var/mob/playermob
-
-		for(var/mob/M in player_list)
-			if(M.ckey == banckey)
-				playermob = M
+		var/mob/last_mob = null // If someone with the same ckey is found in the world, it uses this to autofill some information.
+		for(var/mob/M in mob_list)
+			if(M.ckey == ban_ckey)
+				last_mob = M
 				break
 
-		banreason = "(MANUAL BAN) "+banreason
+		var/ban_job = null // This needs to stay null if it is not a jobban.
+		var/ban_type = alert("Is this a normal server ban, or a jobban?", "Banning - Type - 2 of 7", "Server Ban", "Job Ban")
+		if(ban_type == "Job Ban")
+			var/list/list_of_job_titles = list()
 
-		if(!playermob)
-			if(banip)
-				banreason = "[banreason] (CUSTOM IP)"
-			if(bancid)
-				banreason = "[banreason] (CUSTOM CID)"
-		else
-			message_admins("Ban process: A mob matching [playermob.ckey] was found at location \
-			[playermob.x], [playermob.y], [playermob.z]. Custom ip and computer id fields replaced \
-			with the ip and computer id from the located mob")
-		notes_add(banckey, banreason, usr)
+			var/list/job_datums = get_job_datums()
+			// Jobs
+			for(var/datum/job/J in job_datums)
+				if(J.title)
+					list_of_job_titles |= J.title
 
-		sqlite_add_ban(banckey, bancid, banip, banjob, banreason, usr.key, banduration)
+			// Antagonists
+			for(var/antag_type in all_antag_types)
+				var/datum/antagonist/antag = all_antag_types[antag_type]
+				if(!antag || !antag.bantype)
+					continue
+				list_of_job_titles |= antag.bantype
+
+			// Other stuff.
+			list_of_job_titles |= "pAI"
+			list_of_job_titles |= "AntagHUD"
+			list_of_job_titles |= "Dionaea"
+
+			ban_job = lowertext(input("Choose a job to ban from.", "Banning - Job - 2 1/2 of 7") as null|anything in list_of_job_titles) //todo: add antag
+			if(!ban_job)
+				return
+
+		var/ban_ip = input("Enter the IP address of the person to be banned.  Optional but highly suggested \
+		to fill.", "Banning - IP - 3 of 7", "[last_mob ? "[last_mob.lastKnownIP]" : ""]") as null|text
+
+		var/ban_cid = input("Enter the Comp. ID of the person to be banned.  Optional but highly suggested \
+		to fill.", "Banning - CID - 4 of 7", "[last_mob ? "[last_mob.computer_id]" : ""]") as null|text // Byond converts it to scientific notation if it's a num
+
+		var/ban_reason = input("Enter the reason for [ban_ckey]'s ban.", "Banning - Reason - 5 of 7", "Griefer.") as null|message
+
+		var/ban_duration = input("Enter how many MINUTES that [ban_ckey]'s ban will last.  Leave it at zero to make it last forever.",
+		"Banning - Duration - 6 of 7", 1440) as num
+		if(ban_duration <= 0)
+			ban_duration = null // Perma
+
+		var/confirm = alert("Please confirm if this information is correct. \nCkey: [ban_ckey] \nCID: [ban_cid] \nIP: [ban_ip] \n\
+		Type: [ban_type] \nJob: [ban_job ? "[ban_job]" : "N/A"] \nReason: [ban_reason] \nExpires: [ban_duration ? "[ban_duration]" : "Never"]", "Banning - Confirm - 7 of 7", "Yes", "No")
+
+		if(confirm == "No")
+			return
+
+		sqlite_add_ban(
+			_ckey = ban_ckey,
+			_cid = ban_cid,
+			_ip = ban_ip,
+			_job = ban_job,
+			_reason = ban_reason,
+			_banningkey = usr.ckey,
+			_expires = ban_duration
+			)
 
 	else if(href_list["call_shuttle"])
 		if(!check_rights(R_ADMIN))	return
@@ -916,7 +936,7 @@
 		var/mob/M = locate(href_list["newban"])
 		if(!ismob(M)) return
 
-//		if(M.client && M.client.holder)	return	//admins cannot be banned. Even if they could, the ban doesn't affect them anyway
+		if(M.client && M.client.holder)	return	//admins cannot be banned. Even if they could, the ban doesn't affect them anyway
 
 		switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 			if("Yes")
