@@ -261,3 +261,97 @@
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
 				step(machine, wanted_dir.data)
+
+/obj/item/integrated_circuit/manipulation/grenade
+	name = "grenade primer"
+	desc = "This circuit comes with the ability to attach most types of grenades at prime them at will."
+	extended_desc = "Time between priming and detonation is limited to between 1 to 12 seconds but is optional. \
+					If unset, not a number, or a number less than 1 then the grenade's built-in timing will be used. \
+					Beware: Once primed there is no aborting the process!"
+	icon_state = "grenade"
+	complexity = 30
+	size = 2
+	inputs = list("detonation time")
+	outputs = list()
+	activators = list("prime grenade")
+	var/obj/item/weapon/grenade/attached_grenade
+
+/obj/item/integrated_circuit/manipulation/grenade/Destroy()
+	if(attached_grenade && !attached_grenade.active)
+		attached_grenade.dropInto(loc)
+	attached_grenade = null
+	. = ..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
+	if(istype(G))
+		if(attached_grenade)
+			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
+		else if(user.unEquip(G, target = src))
+			attached_grenade = G
+			size += G.w_class
+			desc += " \An [attached_grenade] is attached to it!"
+			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attack_self(var/mob/user)
+	if(attached_grenade)
+		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
+		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
+		attached_grenade = null
+		size = initial(size)
+		desc = initial(desc)
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/do_work()
+	if(attached_grenade && !attached_grenade.active)
+		var/datum/integrated_io/detonation_time = inputs[1]
+		if(isnum(detonation_time.data) && detonation_time.data > 0)
+			attached_grenade.det_time = between(1, detonation_time.data, 12) SECONDS
+		attached_grenade.activate()
+		var/atom/holder = loc
+		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift
+	name = "bluespace rift generator"
+	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
+	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as \
+	destination point, and if not an undefined destination point is selected. Rift direction is a cardinal value determening in \
+	which direction the rift will be opened, relative to the local north. A direction value of 0 will open the rift on top of \
+	the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
+	icon_state = "bluespace"
+	flags = OPENCONTAINER
+	complexity = 25
+	size = 3
+	cooldown_per_use = 10 SECONDS
+	inputs = list("teleporter", "rift direction" = 0)
+	outputs = list()
+	activators = list("open rift")
+
+	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
+	var/datum/integrated_io/tdata = inputs[1]
+	var/datum/integrated_io/step_dir = inputs[2]
+
+	var/turf/rift_location = get_turf(src)
+	if(!rift_location || !isPlayerLevel(rift_location.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
+
+	if(isnum(step_dir.data) && (!step_dir.data || step_dir.data in cardinal))
+		rift_location = get_step(rift_location, step_dir.data) || rift_location
+	else
+		rift_location = get_step(rift_location, dir) || rift_location
+
+	var/obj/machinery/computer/teleporter/tporter = tdata.data_as_type(/obj/machinery/computer/teleporter)
+	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
+		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
+	else
+		var/turf/destination = get_random_turf_in_range(src, 10)
+		if(destination)
+			new /obj/effect/portal(rift_location, destination)
+		else
+			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)

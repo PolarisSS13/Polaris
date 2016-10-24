@@ -48,4 +48,6 @@
 
 #define to_chat(target, message) target << message
 
+#define any2ref(x) "\ref[x]"
+
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)

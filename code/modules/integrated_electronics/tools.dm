@@ -158,6 +158,44 @@
 
 	io.holder.interact(user) // This is to update the UI.
 
+/obj/item/device/integrated_electronics/analyzer
+	name = "circuit analyzer"
+	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
+	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon_state = "analyzer"
+	flags = CONDUCT
+	w_class = 2
+	var/last_scan = ""
+
+/obj/item/device/integrated_electronics/analyzer/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
+		if(last_scan)
+			to_chat(user, last_scan)
+		else
+			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
+
+/obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
+	if(!istype(assembly))
+		return ..()
+
+	user.visible_message("<span class='notify'>\The [user] begins to scan \the [assembly].</span>", "<span class='notify'>You begin to scan \the [assembly].</span>")
+	if(!do_after(user, assembly.get_part_complexity(), assembly))
+		return
+
+	playsound(src.loc, 'sound/piano/A#6.ogg', 25, 0, -3)
+
+	last_scan = list()
+	last_scan += "Results from the scan of \the [assembly]:"
+	var/found_parts = FALSE
+	for(var/obj/item/integrated_circuit/part in assembly)
+		found_parts = TRUE
+		last_scan += "\t [initial(part.name)]"
+	if(!found_parts)
+		last_scan += "*No Components Found*"
+	last_scan = jointext(last_scan,"\n")
+	to_chat(user, last_scan)
+
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
