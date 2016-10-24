@@ -18,6 +18,15 @@ var/total_unit_tests = 0
 	reported = 1
 	log_unit_test("[ASCII_GREEN]** SUCCESS ** \[[name]\]: [message][ASCII_RESET]")
 
+/datum/unit_test/proc/log_bad(var/message)
+	log_unit_test("[ASCII_RED]\[[name]\]: [message][ASCII_RESET]")
+
+/datum/unit_test/proc/log_debug(var/message)
+	log_unit_test("[ASCII_YELLOW]---  DEBUG  --- \[[name]\]: [message][ASCII_RESET]")
+
+/datum/unit_test/proc/get_standard_turf()
+	return locate(20,20,1)
+
 /datum/unit_test/proc/start_test()
 	fail("No test proc.")
 

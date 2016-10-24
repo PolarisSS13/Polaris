@@ -424,7 +424,7 @@ datum/objective/steal
 
 	var/global/possible_items[] = list(
 		"the Colony Director's antique laser gun" = /obj/item/weapon/gun/energy/captain,
-		"a hand teleporter" = /obj/item/weapon/hand_tele,
+		"a bluespace rift generator" = /obj/item/integrated_circuit/manipulation/bluespace_rift,
 		"an RCD" = /obj/item/weapon/rcd,
 		"a jetpack" = /obj/item/weapon/tank/jetpack,
 		"a colony director's jumpsuit" = /obj/item/clothing/under/rank/captain,
