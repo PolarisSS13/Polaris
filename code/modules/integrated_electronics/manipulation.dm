@@ -329,7 +329,7 @@
 	outputs = list()
 	activators = list("open rift")
 
-	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
+	origin_tech = list(TECH_MAGNET = 3, TECH_BLUESPACE = 4)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()

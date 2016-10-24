@@ -110,8 +110,10 @@
 
 /obj/item/integrated_circuit/logic/multiplexer
 	name = "multiplexer"
-	desc = "This is what those in the business tend to refer to as a 'mux' or data selector. It moves data from one of the selected inputs to the output."
-	extended_desc = "The first input pin is used to select which of the other input pins which has its data moved to the output. If the input selection is outside the valid range then no output is given."
+	desc = "This is what those in the business tend to refer to as a 'mux' or data selector. It moves data from one of the \
+	selected inputs to the output."
+	extended_desc = "The first input pin is used to select which of the other input pins which has its data moved to the \
+	output. If the input selection is outside the valid range then no output is given."
 	complexity = 2
 	icon_state = "mux2"
 	inputs = list("input selection")
@@ -151,8 +153,10 @@
 
 /obj/item/integrated_circuit/logic/demultiplexer
 	name = "demultiplexer"
-	desc = "This is what those in the business tend to refer to as a 'demux'. It moves data from the input to one of the selected outputs."
-	extended_desc = "The first input pin is used to select which of the output pins is given the data from the second input pin. If the output selection is outside the valid range then no output is given."
+	desc = "This is what those in the business tend to refer to as a 'demux'. It moves data from the input to one of the \
+	selected outputs."
+	extended_desc = "The first input pin is used to select which of the output pins is given the data from the second \
+	input pin. If the output selection is outside the valid range then no output is given."
 	complexity = 2
 	icon_state = "dmux2"
 	inputs = list("output selection","input")

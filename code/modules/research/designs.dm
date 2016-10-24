@@ -1788,6 +1788,62 @@ CIRCUITS BELOW
 	sort_string = "WAAEL"
 	req_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
 
+/datum/design/circuit/integrated_circuit/input_output/teleporter_locator
+	id = "cc-teleporter_locator"
+	build_path = /obj/item/integrated_circuit/input/teleporter_locator
+	sort_string = "WAAEM"
+	req_tech = list(TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
+
+/datum/design/circuit/integrated_circuit/input_output/led/red
+	id = "cc-led_red"
+	build_path = /obj/item/integrated_circuit/output/led/red
+	sort_string = "WAAEN"
+
+/datum/design/circuit/integrated_circuit/input_output/led/orange
+	id = "cc-led_orange"
+	build_path = /obj/item/integrated_circuit/output/led/orange
+	sort_string = "WAAEO"
+
+/datum/design/circuit/integrated_circuit/input_output/led/yellow
+	id = "cc-led_yellow"
+	build_path = /obj/item/integrated_circuit/output/led/yellow
+	sort_string = "WAAEP"
+
+/datum/design/circuit/integrated_circuit/input_output/led/green
+	id = "cc-led_green"
+	build_path = /obj/item/integrated_circuit/output/led/green
+	sort_string = "WAAEQ"
+
+/datum/design/circuit/integrated_circuit/input_output/led/blue
+	id = "cc-led_blue"
+	build_path = /obj/item/integrated_circuit/output/led/blue
+	sort_string = "WAAER"
+
+/datum/design/circuit/integrated_circuit/input_output/led/purple
+	id = "cc-led_purple"
+	build_path = /obj/item/integrated_circuit/output/led/purple
+	sort_string = "WAAES"
+
+/datum/design/circuit/integrated_circuit/input_output/led/cyan
+	id = "cc-led_cyan"
+	build_path = /obj/item/integrated_circuit/output/led/cyan
+	sort_string = "WAAET"
+
+/datum/design/circuit/integrated_circuit/input_output/led/white
+	id = "cc-led_white"
+	build_path = /obj/item/integrated_circuit/output/led/white
+	sort_string = "WAAEU"
+
+/datum/design/circuit/integrated_circuit/input_output/led/pink
+	id = "cc-led_pink"
+	build_path = /obj/item/integrated_circuit/output/led/pink
+	sort_string = "WAAEV"
+
+/datum/design/circuit/integrated_circuit/input_output/text_to_speech
+	id = "cc-text_to_speech"
+	build_path = /obj/item/integrated_circuit/output/text_to_speech
+	sort_string = "WAAEW"
+
 
 /datum/design/circuit/integrated_circuit/logic/AssembleDesignName()
 	..()
@@ -1833,6 +1889,50 @@ CIRCUITS BELOW
 	build_path = /obj/item/integrated_circuit/logic/binary/greater_than_or_equal
 	sort_string = "WAAFH"
 
+/datum/design/circuit/integrated_circuit/logic/multiplexer
+	id = "cc-multiplexer"
+	build_path = /obj/item/integrated_circuit/logic/multiplexer
+	sort_string = "WAAFG"
+
+/datum/design/circuit/integrated_circuit/logic/multiplexer/medium
+	id = "cc-multiplexer_medium"
+	build_path = /obj/item/integrated_circuit/logic/multiplexer/medium
+	sort_string = "WAAFH"
+
+/datum/design/circuit/integrated_circuit/logic/multiplexer/large
+	id = "cc-multiplexer_large"
+	build_path = /obj/item/integrated_circuit/logic/multiplexer/large
+	sort_string = "WAAFI"
+
+/datum/design/circuit/integrated_circuit/logic/multiplexer/huge
+	id = "cc-multiplexer_huge"
+	build_path = /obj/item/integrated_circuit/logic/multiplexer/huge
+	sort_string = "WAAFJ"
+
+/datum/design/circuit/integrated_circuit/logic/demultiplexer
+	id = "cc-demultiplexer"
+	build_path = /obj/item/integrated_circuit/logic/demultiplexer
+	sort_string = "WAAFK"
+
+/datum/design/circuit/integrated_circuit/logic/demultiplexer
+	id = "cc-demultiplexer"
+	build_path = /obj/item/integrated_circuit/logic/demultiplexer
+	sort_string = "WAAFL"
+
+/datum/design/circuit/integrated_circuit/logic/demultiplexer/medium
+	id = "cc-demultiplexer_medium"
+	build_path = /obj/item/integrated_circuit/logic/demultiplexer/medium
+	sort_string = "WAAFM"
+
+/datum/design/circuit/integrated_circuit/logic/demultiplexer/large
+	id = "cc-demultiplexer_large"
+	build_path = /obj/item/integrated_circuit/logic/demultiplexer/large
+	sort_string = "WAAFN"
+
+/datum/design/circuit/integrated_circuit/logic/demultiplexer/huge
+	id = "cc-demultiplexer_huge"
+	build_path = /obj/item/integrated_circuit/logic/demultiplexer/huge
+	sort_string = "WAAFO"
 
 
 /datum/design/circuit/integrated_circuit/manipulation/AssembleDesignName()
@@ -1888,6 +1988,13 @@ CIRCUITS BELOW
 	sort_string = "WAAGF"
 	req_tech = list(TECH_MATERIALS = 3, TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 2)
 
+/datum/design/circuit/integrated_circuit/manipulation/bluespace_rift
+	name = "bluespace_rift"
+	id = "cc-bluespace_rift"
+	build_path = /obj/item/integrated_circuit/manipulation/bluespace_rift
+	sort_string = "WAAGG"
+	req_tech = list(TECH_MAGNET = 3, TECH_BLUESPACE = 4)
+
 /datum/design/circuit/integrated_circuit/memory/AssembleDesignName()
 	..()
 	name = "Custom circuitry \[Memory\] ([item_name])"
@@ -1911,6 +2018,11 @@ CIRCUITS BELOW
 	id = "cc-memory16"
 	build_path = /obj/item/integrated_circuit/memory/huge
 	sort_string = "WAAHD"
+
+/datum/design/circuit/integrated_circuit/memory/constant
+	id = "cc-constant"
+	build_path = /obj/item/integrated_circuit/memory/constant
+	sort_string = "WAAHH"
 
 /datum/design/circuit/integrated_circuit/memory/constant
 	id = "cc-constant"
