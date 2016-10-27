@@ -5,12 +5,14 @@
 	inputs = list()
 	outputs = list()
 	category = /obj/item/integrated_circuit/time
+	category_text = "Time"
 
 /obj/item/integrated_circuit/time/delay
 	name = "two-sec delay circuit"
 	desc = "This sends a pulse signal out after a delay, critical for ensuring proper control flow in a complex machine.  \
 	This circuit is set to send a pulse after a delay of two seconds."
 	icon_state = "delay-20"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	var/delay = 2 SECONDS
 	activators = list("incoming pulse","outgoing pulse")
 
@@ -69,6 +71,7 @@
 	name = "ticker circuit"
 	desc = "This circuit sends an automatic pulse every four seconds."
 	icon_state = "tick-m"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 8
 	var/ticks_to_pulse = 4
 	var/ticks_completed = 0
@@ -106,6 +109,7 @@
 	name = "fast ticker"
 	desc = "This advanced circuit sends an automatic pulse every two seconds."
 	icon_state = "tick-f"
+	spawn_flags = IC_RESEARCH
 	complexity = 12
 	ticks_to_pulse = 2
 
@@ -120,6 +124,7 @@
 	name = "integrated clock"
 	desc = "Tells you what the local time is, specific to your station or planet."
 	icon_state = "clock"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list()
 	outputs = list("time (string)", "hours (number)", "minutes (number)", "seconds (number)")
 	activators = list("update")

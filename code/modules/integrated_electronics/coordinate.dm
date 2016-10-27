@@ -3,10 +3,12 @@
 	name = "global positioning system"
 	desc = "This allows you to easily know the position of a machine containing this device."
 	icon_state = "gps"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list()
 	outputs = list("X (abs)", "Y (abs)")
 	activators = list("get coordinates")
+	category_text = "Coords"
 
 /obj/item/integrated_circuit/gps/do_work()
 	var/turf/T = get_turf(src)
@@ -28,9 +30,11 @@
 	name = "abs to rel coordinate converter"
 	desc = "Easily convert absolute coordinates to relative coordinates with this."
 	complexity = 4
+	spawn_flags = IC_RESEARCH
 	inputs = list("X1 (abs)", "Y1 (abs)", "X2 (abs)", "Y2 (abs)")
 	outputs = list("X (rel)", "Y (rel)")
 	activators = list("compute rel coordinates")
+	category_text = "Coords"
 
 /obj/item/integrated_circuit/abs_to_rel_coords/do_work()
 	var/datum/integrated_io/x1 = inputs[1]

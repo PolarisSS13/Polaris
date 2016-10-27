@@ -5,6 +5,7 @@
 	outputs = list("result")
 	activators = list("compute")
 	category = /obj/item/integrated_circuit/arithmetic
+	category_text = "Arithmetic"
 
 // +Adding+ //
 
@@ -12,6 +13,7 @@
 	name = "addition circuit"
 	desc = "This circuit can add numbers together."
 	icon_state = "addition"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/arithmetic/addition/do_work()
 	var/result = 0
@@ -30,6 +32,7 @@
 	name = "subtraction circuit"
 	desc = "This circuit can subtract numbers."
 	icon_state = "subtraction"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/arithmetic/subtraction/do_work()
 	if(..())
@@ -49,6 +52,7 @@
 	name = "multiplication circuit"
 	desc = "This circuit can multiply numbers."
 	icon_state = "multiplication"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/arithmetic/subtraction/do_work()
 	var/result = 0
@@ -67,6 +71,7 @@
 	name = "division circuit"
 	desc = "This circuit can divide numbers, just don't think about trying to divide by zero!"
 	icon_state = "division"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/arithmetic/division/do_work()
 	var/result = 0
@@ -85,6 +90,7 @@
 	name = "absolute circuit"
 	desc = "This outputs a non-negative version of the number you put in.  This may also be thought of as its distance from zero."
 	icon_state = "absolute"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("A")
 
 /obj/item/integrated_circuit/arithmetic/absolute/do_work()
@@ -104,6 +110,7 @@
 	name = "average circuit"
 	desc = "This circuit is of average quality, however it will compute the average for numbers you give it."
 	icon_state = "average"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/arithmetic/average/do_work()
 	var/result = 0
@@ -126,6 +133,7 @@
 	name = "pi constant circuit"
 	desc = "Not recommended for cooking.  Outputs '3.14159' when it receives a pulse."
 	icon_state = "pi"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list()
 
 /obj/item/integrated_circuit/arithmetic/pi/do_work()
@@ -138,6 +146,7 @@
 	name = "random number generator circuit"
 	desc = "This gives a random (integer) number between values A and B inclusive."
 	icon_state = "random"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("L","H")
 
 /obj/item/integrated_circuit/arithmetic/random/do_work()

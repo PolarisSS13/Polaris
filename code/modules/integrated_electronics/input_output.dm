@@ -1,3 +1,7 @@
+/obj/item/integrated_circuit/input
+	category = /obj/item/integrated_circuit/input
+	category_text = "Input"
+
 /obj/item/integrated_circuit/input/external_examine(var/mob/user)
 	var/initial_name = initial(name)
 	var/message
@@ -11,6 +15,7 @@
 	name = "button"
 	desc = "This tiny button must do something, right?"
 	icon_state = "button"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 1
 	inputs = list()
 	outputs = list()
@@ -32,6 +37,7 @@
 	name = "number pad"
 	desc = "This small number pad allows someone to input a number into the system."
 	icon_state = "numberpad"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 2
 	inputs = list()
 	outputs = list("number entered")
@@ -55,6 +61,7 @@
 	name = "text pad"
 	desc = "This small text pad allows someone to input a string into the system."
 	icon_state = "textpad"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 2
 	inputs = list()
 	outputs = list("string entered")
@@ -78,10 +85,12 @@
 	name = "integrated medical analyser"
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is."
 	icon_state = "medscan"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list("target ref")
 	outputs = list("total health %", "total missing health")
 	activators = list("scan")
+	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNETS = 2, TECH_BIOMED = 2)
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -106,6 +115,7 @@
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is.  \
 	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
 	icon_state = "medscan_adv"
+	spawn_flags = IC_RESEARCH
 	complexity = 12
 	inputs = list("target ref")
 	outputs = list(
@@ -118,6 +128,7 @@
 		"clone damage"
 	)
 	activators = list("scan")
+	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNETS = 3, TECH_BIOMED = 4)
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -151,6 +162,7 @@
 	name = "local locator"
 	desc = "This is needed for certain devices that demand a reference for a target to act upon.  This type only locates something \
 	that is holding the machine containing it."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list()
 	outputs = list("located ref")
 	activators = list("locate")
@@ -173,6 +185,7 @@
 	extended_desc = "The first pin requires a ref to a kind of object that you want the locator to acquire.  This means that it will \
 	give refs to nearby objects that are similar.  If more than one valid object is found nearby, it will choose one of them at \
 	random."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("desired type ref")
 	outputs = list("located ref")
 	activators = list("locate")
@@ -206,11 +219,13 @@
 	second pin on each side, with additonal data reserved for the third pin.  When a message is received, the second activaiton pin \
 	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message."
 	icon_state = "signal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list("target EPv2 address", "data to send", "secondary text")
 	outputs = list("address received", "data received", "secondary text received")
 	activators = list("send data", "on data received")
 	var/datum/exonet_protocol/exonet = null
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
 
 /obj/item/integrated_circuit/input/EPv2/New()
 	..()
@@ -250,6 +265,7 @@
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
 	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin."
 	icon_state = "signal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list("frequency","code")
 	outputs = list()
@@ -326,10 +342,12 @@
 	name = "teleporter locator"
 	desc = "This circuit can locate and allow for selection of teleporter computers."
 	icon_state = "gps"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 5
 	inputs = list()
 	outputs = list("teleporter")
 	activators = list("on selected")
+	origin_tech = list(TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
 
 /obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
 	var/datum/integrated_io/O = outputs[1]
@@ -354,10 +372,15 @@
 		A.push_data()
 		return IC_TOPIC_REFRESH
 
+/obj/item/integrated_circuit/output
+	category = /obj/item/integrated_circuit/output
+	category_text = "Output"
+
 /obj/item/integrated_circuit/output/screen
 	name = "screen"
 	desc = "This small screen can display a single piece of data, when the machine is examined closely."
 	icon_state = "screen"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("displayed data")
 	outputs = list()
 	activators = list("load data")
@@ -385,7 +408,8 @@
 /obj/item/integrated_circuit/output/light
 	name = "light"
 	desc = "This light can turn on and off on command."
-	icon_state = "light_adv"
+	icon_state = "light"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list()
 	outputs = list()
@@ -424,6 +448,7 @@
 	name = "advanced light"
 	desc = "This light can turn on and off on command, in any color, and in various brightness levels."
 	icon_state = "light_adv"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 8
 	inputs = list(
 		"R",
@@ -479,6 +504,7 @@
 	desc = "A miniature speaker is attached to this component.  This is often used in the construction of motherboards, which use \
 	the speaker to tell the user if something goes very wrong when booting up.  It can also do other similar synthetic sounds such \
 	as buzzing, pinging, chiming, and more."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	sounds = list(
 		"beep"			= 'sound/machines/twobeep.ogg',
 		"chime"			= 'sound/machines/chime.ogg',
@@ -493,6 +519,7 @@
 /obj/item/integrated_circuit/output/sound/beepsky
 	name = "securitron sound circuit"
 	desc = "A miniature speaker is attached to this component.  Considered by some to be the essential component for a securitron."
+	spawn_flags = IC_RESEARCH
 	sounds = list(
 		"creep"			= 'sound/voice/bcreep.ogg',
 		"criminal"		= 'sound/voice/bcriminal.ogg',
@@ -503,12 +530,14 @@
 		"radio"			= 'sound/voice/bradio.ogg',
 		"secure day"	= 'sound/voice/bsecureday.ogg',
 		)
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_ILLEGAL = 1)
 
 /obj/item/integrated_circuit/output/text_to_speech
 	name = "text-to-speech circuit"
 	desc = "A miniature speaker is attached to this component."
 	extended_desc = "This unit is more advanced than the plain speaker circuit, able to transpose any valid text to speech."
 	icon_state = "speaker"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 12
 	cooldown_per_use = 4 SECONDS
 	inputs = list("text")
@@ -553,35 +582,44 @@
 /obj/item/integrated_circuit/output/led/red
 	name = "red LED"
 	led_color = COLOR_RED
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/orange
 	name = "orange LED"
 	led_color = COLOR_ORANGE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/yellow
 	name = "yellow LED"
 	led_color = COLOR_YELLOW
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/green
 	name = "green LED"
 	led_color = COLOR_GREEN
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/blue
 	name = "blue LED"
 	led_color = COLOR_BLUE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/purple
 	name = "purple LED"
 	led_color = COLOR_PURPLE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/cyan
 	name = "cyan LED"
 	led_color = COLOR_CYAN
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/white
 	name = "white LED"
 	led_color = COLOR_WHITE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/output/led/pink
 	name = "pink LED"
 	led_color = COLOR_PINK
+	spawn_flags = IC_DEFAULT|IC_RESEARCH

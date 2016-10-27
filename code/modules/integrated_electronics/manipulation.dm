@@ -1,3 +1,7 @@
+/obj/item/integrated_circuit/manipulation
+	category = /obj/item/integrated_circuit/manipulation
+	category_text = "Manipulation"
+
 /obj/item/integrated_circuit/manipulation/weapon_firing
 	name = "weapon firing mechanism"
 	desc = "This somewhat complicated system allows one to slot in a gun, direct it towards a position, and remotely fire it."
@@ -6,6 +10,7 @@
 	The 'fire' activator will cause the mechanism to attempt to fire the weapon at the coordinates, if possible.  Note that the \
 	normal limitations to firearms, such as ammunition requirements and firing delays, still hold true if fired by the mechanism."
 	complexity = 20
+	spawn_flags = IC_RESEARCH
 	inputs = list(
 		"target X rel",
 		"target Y rel"
@@ -15,6 +20,7 @@
 		"fire"
 	)
 	var/obj/item/weapon/gun/installed_gun = null
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3, TECH_COMBAT = 4)
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/Destroy()
 	qdel(installed_gun)
@@ -89,6 +95,7 @@
 	name = "smoke generator"
 	desc = "Unlike most electronics, creating smoke is completely intentional."
 	icon_state = "smoke"
+	spawn_flags = IC_RESEARCH
 	extended_desc = "This smoke generator creates clouds of smoke on command.  It can also hold liquids inside, which will go \
 	into the smoke clouds when activated."
 	flags = OPENCONTAINER
@@ -115,6 +122,7 @@
 	name = "integrated hypo-injector"
 	desc = "This scary looking thing is able to pump liquids into whatever it's pointed at."
 	icon_state = "injector"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This autoinjector can push reagents into another container or someone else outside of the machine.  The target \
 	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing."
 	flags = OPENCONTAINER
@@ -123,6 +131,7 @@
 	inputs = list("target ref", "injection amount" = 5)
 	outputs = list()
 	activators = list("inject")
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 3)
 
 /obj/item/integrated_circuit/manipulation/injector/New()
 	..()
@@ -161,6 +170,7 @@
 	name = "reagent pump"
 	desc = "Moves liquids safely inside a machine, or even nearby it."
 	icon_state = "reagent_pump"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This is a pump, which will move liquids from the source ref to the target ref.  The third pin determines \
 	how much liquid is moved per pulse, between 0 and 50.  The pump can move reagents to any open container inside the machine, or \
 	outside the machine if it is next to the machine.  Note that this cannot be used on entities."
@@ -170,6 +180,7 @@
 	outputs = list()
 	activators = list("transfer reagents")
 	var/transfer_amount = 10
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1, TECH_BIO = 2)
 
 /obj/item/integrated_circuit/manipulation/reagent_pump/on_data_written()
 	var/datum/integrated_io/amount = inputs[3]
@@ -202,12 +213,14 @@
 	name = "reagent storage"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u."
 	icon_state = "reagent_storage"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This is effectively an internal beaker."
 	flags = OPENCONTAINER
 	complexity = 4
 	inputs = list()
 	outputs = list("volume used")
 	activators = list()
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1, TECH_BIO = 1)
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/New()
 	..()
@@ -222,17 +235,20 @@
 	name = "cryo reagent storage"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u.  This will also suppress reactions."
 	icon_state = "reagent_storage_cryo"
+	spawn_flags = IC_RESEARCH
 	extended_desc = "This is effectively an internal cryo beaker."
 	flags = OPENCONTAINER | NOREACT
 	complexity = 8
 	inputs = list()
 	outputs = list("volume used")
 	activators = list()
+	origin_tech = list(TECH_MATERIALS = 3, TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 2)
 
 /obj/item/integrated_circuit/manipulation/locomotion
 	name = "locomotion circuit"
 	desc = "This allows a machine to move in a given direction."
 	icon_state = "locomotion"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "The circuit accepts a number as a direction to move towards.<br>  \
 	North/Fore = 1,<br>\
 	South/Aft = 2,<br>\
@@ -249,6 +265,7 @@
 	inputs = list("dir num")
 	outputs = list()
 	activators = list("step towards dir")
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3)
 
 /obj/item/integrated_circuit/manipulation/locomotion/do_work()
 	..()
@@ -269,6 +286,7 @@
 					If unset, not a number, or a number less than 1 then the grenade's built-in timing will be used. \
 					Beware: Once primed there is no aborting the process!"
 	icon_state = "grenade"
+	spawn_flags = IC_RESEARCH
 	complexity = 30
 	size = 2
 	inputs = list("detonation time")
@@ -321,6 +339,7 @@
 	which direction the rift will be opened, relative to the local north. A direction value of 0 will open the rift on top of \
 	the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
 	icon_state = "bluespace"
+	spawn_flags = IC_RESEARCH
 	flags = OPENCONTAINER
 	complexity = 25
 	size = 3
@@ -328,7 +347,6 @@
 	inputs = list("teleporter", "rift direction" = 0)
 	outputs = list()
 	activators = list("open rift")
-
 	origin_tech = list(TECH_MAGNET = 3, TECH_BLUESPACE = 4)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 

@@ -2,11 +2,13 @@
 	name = "memory chip"
 	desc = "This tiny chip can store one piece of data."
 	icon_state = "memory"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 1
 	inputs = list()
 	outputs = list()
 	activators = list("set")
 	category = /obj/item/integrated_circuit/memory
+	category_text = "Memory"
 	var/memory_pins = 1
 
 /obj/item/integrated_circuit/memory/New()

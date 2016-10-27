@@ -6,6 +6,7 @@
 	outputs = list("result")
 	activators = list("compare", "on true result")
 	category = /obj/item/integrated_circuit/logic
+	category_text = "Logic"
 
 /obj/item/integrated_circuit/logic/do_work(var/activator_pin)
 	if(activator_pin != activators[1])
@@ -48,6 +49,7 @@
 	name = "equal gate"
 	desc = "This gate compares two values, and outputs the number one if both are the same."
 	icon_state = "equal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/equals/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() == B.get_data()
@@ -56,6 +58,7 @@
 	name = "and gate"
 	desc = "This gate will output 'one' if both inputs evaluate to true."
 	icon_state = "and"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/and/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() && B.get_data()
@@ -64,6 +67,7 @@
 	name = "or gate"
 	desc = "This gate will output 'one' if one of the inputs evaluate to true."
 	icon_state = "or"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/or/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() || B.get_data()
@@ -72,6 +76,7 @@
 	name = "less than gate"
 	desc = "This will output 'one' if the first input is less than the second input."
 	icon_state = "less_than"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/less_than/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() < B.get_data()
@@ -80,6 +85,7 @@
 	name = "less than or equal gate"
 	desc = "This will output 'one' if the first input is less than, or equal to the second input."
 	icon_state = "less_than_or_equal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/less_than_or_equal/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() <= B.get_data()
@@ -88,6 +94,7 @@
 	name = "greater than gate"
 	desc = "This will output 'one' if the first input is greater than the second input."
 	icon_state = "greater_than"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/greater_than/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() > B.get_data()
@@ -96,6 +103,7 @@
 	name = "greater_than or equal gate"
 	desc = "This will output 'one' if the first input is greater than, or equal to the second input."
 	icon_state = "greater_than_or_equal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/binary/greater_than_or_equal/do_compare(var/datum/integrated_io/A, var/datum/integrated_io/B)
 	return A.get_data() >= B.get_data()
@@ -104,6 +112,7 @@
 	name = "not gate"
 	desc = "This gate inverts what's fed into it."
 	icon_state = "not"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 
 /obj/item/integrated_circuit/logic/unary/not/do_check(var/datum/integrated_io/A)
 	return !A.get_data()
@@ -116,6 +125,7 @@
 	output. If the input selection is outside the valid range then no output is given."
 	complexity = 2
 	icon_state = "mux2"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("input selection")
 	activators = list("select")
 	category = /obj/item/integrated_circuit/logic
@@ -159,6 +169,7 @@
 	input pin. If the output selection is outside the valid range then no output is given."
 	complexity = 2
 	icon_state = "dmux2"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("output selection","input")
 	outputs = list()
 	activators = list("select")

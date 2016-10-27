@@ -7,6 +7,7 @@
 	outputs = list("output")
 	activators = list("filter")
 	category = /obj/item/integrated_circuit/filter
+	category_text = "Filter"
 
 /obj/item/integrated_circuit/filter/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -34,6 +35,7 @@
 	desc = "Only allow refs belonging to more complex, currently or formerly, living but not necessarily biological entities through"
 	complexity = 15
 	icon_state = "filter_mob"
+	spawn_flags = IC_RESEARCH
 	filter_type = /mob/living
 
 /obj/item/integrated_circuit/filter/ref/mob/humanoid
@@ -41,18 +43,21 @@
 	desc = "Only allow refs belonging to humanoids (dead or alive) through"
 	complexity = 25
 	icon_state = "filter_humanoid"
+	spawn_flags = IC_RESEARCH
 	filter_type = /mob/living/carbon/human
 
 /obj/item/integrated_circuit/filter/ref/obj
 	name = "object filter"
 	desc = "Allows most kinds of refs to pass, as long as they are not considered (once) living entities."
 	icon_state = "filter_obj"
+	spawn_flags = IC_RESEARCH
 	filter_type = /obj
 
 /obj/item/integrated_circuit/filter/ref/obj/item
 	name = "item filter"
 	desc = "Only allow refs belonging to minor items through, typically hand-held such."
 	icon_state = "filter_item"
+	spawn_flags = IC_RESEARCH
 	filter_type = /obj/item
 
 /obj/item/integrated_circuit/filter/ref/obj/machinery
@@ -60,6 +65,7 @@
 	desc = "Only allow refs belonging machinery or complex objects through, such as computers and consoles."
 	complexity = 15
 	icon_state = "filter_machinery"
+	spawn_flags = IC_RESEARCH
 	filter_type = /obj/machinery
 
 /obj/item/integrated_circuit/filter/ref/object/structure
@@ -67,6 +73,7 @@
 	desc = "Only allow refs belonging larger objects and structures through, such as closets and beds."
 	complexity = 15
 	icon_state = "filter_structure"
+	spawn_flags = IC_RESEARCH
 	filter_type = /obj/structure
 
 /obj/item/integrated_circuit/filter/ref/custom
@@ -75,6 +82,7 @@
 	complexity = 25
 	size = 3
 	icon_state = "filter_custom"
+	spawn_flags = IC_RESEARCH
 
 /obj/item/integrated_circuit/filter/ref/custom/may_pass(var/weakref/data)
 	if(!filter_type)

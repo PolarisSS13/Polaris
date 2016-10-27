@@ -2,9 +2,11 @@
 	name = "splitter"
 	desc = "Splits incoming data into all of the output pins."
 	icon_state = "splitter"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 3
 	inputs = list("data to split")
 	outputs = list("A","B")
+	category_text = "Data Transfer"
 
 /obj/item/integrated_circuit/transfer/splitter/medium
 	name = "four splitter"
@@ -27,7 +29,9 @@
 	name = "activator splitter"
 	desc = "Splits incoming activation pulses into all of the output pins."
 	icon_state = "splitter"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 3
+	category_text = "Data Transfer"
 	activators = list(
 		"incoming pulse",
 		"outgoing pulse A",
