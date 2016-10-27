@@ -46,7 +46,6 @@
 /datum/gear/eyes/secaviators/prescription
 	display_name = "Security HUD Aviators, prescription"
 	path = /obj/item/clothing/glasses/sunglasses/sechud/aviator/prescription
-	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/eyes/medical
 	display_name = "Medical HUD (Medical)"
@@ -58,19 +57,17 @@
 	path = /obj/item/clothing/glasses/hud/health/prescription
 
 /datum/gear/eyes/shades
-	display_name = "Sunglasses, fat (Security/Command)"
+	display_name = "Sunglasses, fat"
 	path = /obj/item/clothing/glasses/sunglasses/big
-	allowed_roles = list("Security Officer","Head of Security","Warden","Colony Director","Head of Personnel","Quartermaster","Internal Affairs Agent","Detective")
 
-/datum/gear/eyes/glasses/fakesun
-	display_name = "Sunglasses, stylish"
-	path = /obj/item/clothing/glasses/fakesunglasses
+/datum/gear/eyes/glasses/sunglasses
+	display_name = "Sunglasses"
+	path = /obj/item/clothing/glasses/sunglasses
 
-/datum/gear/eyes/glasses/fakeaviator
-	display_name = "Sunglasses, stylish aviators"
-	path = /obj/item/clothing/glasses/fakesunglasses/aviator
+/datum/gear/eyes/glasses/aviator
+	display_name = "Aviators"
+	path = /obj/item/clothing/glasses/sunglasses/aviator
 
 /datum/gear/eyes/shades/prescriptionsun
-	display_name = "sunglasses, presciption (Security/Command)"
+	display_name = "Sunglasses, presciption"
 	path = /obj/item/clothing/glasses/sunglasses/prescription
-	cost = 2
