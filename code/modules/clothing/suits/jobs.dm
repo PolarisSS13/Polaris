@@ -30,10 +30,11 @@
 //Chaplain
 /obj/item/clothing/suit/chaplain_hoodie
 	name = "chaplain hoodie"
-	desc = "This suit says to you 'hush'!"
+	desc = "This suit says to you \"Hush\"!"
 	icon_state = "chaplain_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
 	body_parts_covered = UPPER_TORSO|ARMS
+	allowed = list (/obj/item/weapon/storage/bible)
 
 //Chaplain
 /obj/item/clothing/suit/nun
