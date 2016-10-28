@@ -1,15 +1,13 @@
 /datum/technomancer/equipment/default_core
 	name = "Manipulation Core"
-//	desc = "The default core that you most likely already have.  This is here in-case you change your mind after buying \
-//	another core, don't forget to refund the old core.  This has a capacity of 10,000 units of energy, and recharges at a \
-//	rate of 50 units.  It also reduces incoming instability from functions by 20%."
 	desc = "The default core that you most likely already have.  This is here in-case you change your mind after buying \
 	another core, don't forget to refund the old core.<br>\
 	Capacity: 10k<br>\
 	Recharge: 50/s<br>\
 	Instability Modifier: 80%<br>\
 	Energy Cost Modifier: 100%<br>\
-	Spell Power: 100%"
+	Spell Power: 100%<br>\
+	Special Ability: Purges half of your current instability.  Has a cooldown of fifteen minutes."
 	cost = 100
 	obj_path = /obj/item/weapon/technomancer_core
 
@@ -21,7 +19,9 @@
 	<font color='green'><b>Recharge: 70/s</b></font><br>\
 	<font color='red'>Instability Modifier: 90%</font><br>\
 	Energy Cost Modifier: 100%<br>\
-	Spell Power: 100%"
+	Spell Power: 100%<br>\
+	Special Ability: Removes function cooldowns, increases movement speed, reduces energy cost by 70%, \
+	instability of functions by 70%, and spell power by 70%, for ten seconds.  Has a cooldown of fifteen minutes."
 	cost = 100
 	obj_path = /obj/item/weapon/technomancer_core/rapid
 
@@ -47,7 +47,8 @@
 	<font color='green'>Recharge: 35/s to 110/s+</font><br>\
 	<font color='red'><b>Instability Modifier: 130%</b></font><br>\
 	<font color='green'>Energy Cost Modifier: 70%</font><br>\
-	<font color='green'>Spell Power: 110%</font>"
+	Spell Power: 100%<br>\
+	Special Ability: For twenty seconds, gain 2% spell power for each point of instability clinging to you.  Cooldown of ten minutes."
 	cost = 100
 	obj_path = /obj/item/weapon/technomancer_core/unstable
 
@@ -59,7 +60,9 @@
 	<font color='red'>Recharge: 40/s</font><br>\
 	<font color='green'>Instability Modifier: 60%</font><br>\
 	<font color='green'>Energy Cost Modifier: 80%</font><br>\
-	Spell Power: 100%"
+	Spell Power: 100%<br>\
+	Special Ability: Spell recycle chance increased to 100%, and amount returned increased to 75% for ten seconds.  Cooldown of \
+	five minutes."
 	cost = 100
 	obj_path = /obj/item/weapon/technomancer_core/recycling
 
@@ -72,7 +75,9 @@
 	<font color='red'>Recharge: 35/s</font><br>\
 	<font color='red'>Instability Modifier: 120%</font><br>\
 	Energy Cost Modifier: 100%<br>\
-	<font color='green'>Spell Power: 120%</font>"
+	<font color='green'>Spell Power: 120%</font><br>\
+	Special Ability: Heals yourself, all allies in vision, and all summoned mobs globally for a significant amount of damage.  \
+	Cooldown of ten minutes."
 	cost = 100
 	obj_path = /obj/item/weapon/technomancer_core/summoner
 
