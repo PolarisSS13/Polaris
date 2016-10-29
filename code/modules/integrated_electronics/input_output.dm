@@ -1,72 +1,96 @@
 /obj/item/integrated_circuit/input
-	var/can_be_asked_input = 0
+	category = /obj/item/integrated_circuit/input
+	category_text = "Input"
 
-/obj/item/integrated_circuit/input/proc/ask_for_input(mob/user)
-	return
+/obj/item/integrated_circuit/input/external_examine(var/mob/user)
+	var/initial_name = initial(name)
+	var/message
+	if(initial_name == name)
+		message = "There is \a [src]."
+	else
+		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
+	to_chat(user, message)
 
 /obj/item/integrated_circuit/input/button
 	name = "button"
 	desc = "This tiny button must do something, right?"
 	icon_state = "button"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 1
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list()
 	activators = list("on pressed")
 
-/obj/item/integrated_circuit/input/button/ask_for_input(mob/user) //Bit misleading name for this specific use.
-	var/datum/integrated_io/A = activators[1]
-	if(A.linked.len)
-		for(var/datum/integrated_io/activate/target in A.linked)
-			target.holder.check_then_do_work()
-	to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
+/obj/item/integrated_circuit/input/button/get_topic_data(mob/user)
+	return list("Press" = "press=1")
+
+/obj/item/integrated_circuit/input/button/OnTopic(href_list, user)
+	if(href_list["press"])
+		to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
+		var/datum/integrated_io/A = activators[1]
+		if(A.linked.len)
+			for(var/datum/integrated_io/activate/target in A.linked)
+				target.holder.check_then_do_work()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
 	name = "number pad"
 	desc = "This small number pad allows someone to input a number into the system."
 	icon_state = "numberpad"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("number entered")
 	activators = list("on entered")
 
-/obj/item/integrated_circuit/input/numberpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
-	if(isnum(new_input) && CanInteract(user, physical_state))
-		var/datum/integrated_io/O = outputs[1]
-		O.data = new_input
-		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+/obj/item/integrated_circuit/input/numberpad/get_topic_data(mob/user)
+	return list("Enter Number" = "enter_number=1")
+
+/obj/item/integrated_circuit/input/numberpad/OnTopic(href_list, user)
+	if(href_list["enter_number"])
+		var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
+		if(isnum(new_input) && CanInteract(user, physical_state))
+			var/datum/integrated_io/O = outputs[1]
+			O.data = new_input
+			O.push_data()
+			var/datum/integrated_io/A = activators[1]
+			A.push_data()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/textpad
 	name = "text pad"
 	desc = "This small text pad allows someone to input a string into the system."
 	icon_state = "textpad"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 2
-	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("string entered")
 	activators = list("on entered")
 
-/obj/item/integrated_circuit/input/textpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
-	if(istext(new_input) && CanInteract(user, physical_state))
-		var/datum/integrated_io/O = outputs[1]
-		O.data = new_input
-		O.push_data()
-		var/datum/integrated_io/A = activators[1]
-		A.push_data()
+/obj/item/integrated_circuit/input/textpad/get_topic_data(mob/user)
+	return list("Enter Words" = "enter_words=1")
+
+/obj/item/integrated_circuit/input/textpad/OnTopic(href_list, user)
+	if(href_list["enter_words"])
+		var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
+		if(istext(new_input) && CanInteract(user, physical_state))
+			var/datum/integrated_io/O = outputs[1]
+			O.data = new_input
+			O.push_data()
+			var/datum/integrated_io/A = activators[1]
+			A.push_data()
+		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/med_scanner
 	name = "integrated medical analyser"
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is."
 	icon_state = "medscan"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list("target ref")
 	outputs = list("total health %", "total missing health")
 	activators = list("scan")
+	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNETS = 2, TECH_BIOMED = 2)
 
 /obj/item/integrated_circuit/input/med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -91,6 +115,7 @@
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is.  \
 	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
 	icon_state = "medscan_adv"
+	spawn_flags = IC_RESEARCH
 	complexity = 12
 	inputs = list("target ref")
 	outputs = list(
@@ -103,6 +128,7 @@
 		"clone damage"
 	)
 	activators = list("scan")
+	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNETS = 3, TECH_BIOMED = 4)
 
 /obj/item/integrated_circuit/input/adv_med_scanner/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -136,6 +162,7 @@
 	name = "local locator"
 	desc = "This is needed for certain devices that demand a reference for a target to act upon.  This type only locates something \
 	that is holding the machine containing it."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list()
 	outputs = list("located ref")
 	activators = list("locate")
@@ -143,8 +170,9 @@
 /obj/item/integrated_circuit/input/local_locator/do_work()
 	var/datum/integrated_io/O = outputs[1]
 	O.data = null
-	if(istype(src.loc, /obj/item/device/electronic_assembly)) // Check to make sure we're actually in a machine.
-		var/obj/item/device/electronic_assembly/assembly = src.loc
+
+	var/obj/item/device/electronic_assembly/assembly = get_assembly(loc)
+	if(assembly) // Check to make sure we're actually in a machine.
 		if(istype(assembly.loc, /mob/living)) // Now check if someone's holding us.
 			O.data = weakref(assembly.loc)
 
@@ -157,6 +185,7 @@
 	extended_desc = "The first pin requires a ref to a kind of object that you want the locator to acquire.  This means that it will \
 	give refs to nearby objects that are similar.  If more than one valid object is found nearby, it will choose one of them at \
 	random."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("desired type ref")
 	outputs = list("located ref")
 	activators = list("locate")
@@ -183,6 +212,52 @@
 		O.data = weakref(pick(valid_things))
 	O.push_data()
 
+/obj/item/integrated_circuit/input/EPv2
+	name = "\improper EPv2 circuit"
+	desc = "Enables the sending and receiving of messages on the Exonet with the EPv2 protocol."
+	extended_desc = "An EPv2 address is a string with the format of XXXX:XXXX:XXXX:XXXX.  Data can be send or received using the \
+	second pin on each side, with additonal data reserved for the third pin.  When a message is received, the second activaiton pin \
+	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message."
+	icon_state = "signal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+	complexity = 4
+	inputs = list("target EPv2 address", "data to send", "secondary text")
+	outputs = list("address received", "data received", "secondary text received")
+	activators = list("send data", "on data received")
+	var/datum/exonet_protocol/exonet = null
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
+
+/obj/item/integrated_circuit/input/EPv2/New()
+	..()
+	exonet = new(src)
+	exonet.make_address("EPv2_circuit-\ref[src]")
+	desc += "<br>This circuit's EPv2 address is: [exonet.address]."
+
+/obj/item/integrated_circuit/input/EPv2/Destroy()
+	if(exonet)
+		exonet.remove_address()
+		qdel(exonet)
+	..()
+
+/obj/item/integrated_circuit/input/EPv2/do_work()
+	var/datum/integrated_io/target_address = inputs[1]
+	var/datum/integrated_io/message = inputs[2]
+	var/datum/integrated_io/text = inputs[3]
+	if(istext(target_address.data))
+		exonet.send_message(target_address.data, message.data, text.data)
+
+/obj/item/integrated_circuit/input/receive_exonet_message(var/atom/origin_atom, var/origin_address, var/message, var/text)
+	var/datum/integrated_io/message_received = outputs[1]
+	var/datum/integrated_io/data_received = outputs[2]
+	var/datum/integrated_io/text_received = outputs[3]
+
+	var/datum/integrated_io/A = activators[2]
+	A.push_data()
+
+	message_received.write_data_to_pin(origin_address)
+	data_received.write_data_to_pin(message)
+	text_received.write_data_to_pin(text)
+
 /obj/item/integrated_circuit/input/signaler
 	name = "integrated signaler"
 	desc = "Signals from a signaler can be received with this, allowing for remote control.  Additionally, it can send signals as well."
@@ -190,6 +265,7 @@
 	The two input pins are to configure the integrated signaler's settings.  Note that the frequency should not have a decimal in it.  \
 	Meaning the default frequency is expressed as 1457, not 145.7.  To send a signal, pulse the 'send signal' activator pin."
 	icon_state = "signal"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list("frequency","code")
 	outputs = list()
@@ -221,7 +297,6 @@
 		set_frequency(new_freq.data)
 	if(isnum(new_code.data))
 		code = new_code.data
-
 
 /obj/item/integrated_circuit/input/signaler/do_work() // Sends a signal.
 	if(!radio_connection)
@@ -263,58 +338,63 @@
 	for(var/mob/O in hearers(1, get_turf(src)))
 		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
 
-/obj/item/integrated_circuit/input/EPv2
-	name = "\improper EPv2 circuit"
-	desc = "Enables the sending and receiving of messages on the Exonet with the EPv2 protocol."
-	extended_desc = "An EPv2 address is a string with the format of XXXX:XXXX:XXXX:XXXX.  Data can be send or received using the \
-	second pin on each side, with additonal data reserved for the third pin.  When a message is received, the second activaiton pin \
-	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message."
-	icon_state = "signal"
-	complexity = 4
-	inputs = list("target EPv2 address", "data to send", "secondary text")
-	outputs = list("address received", "data received", "secondary text received")
-	activators = list("send data", "on data received")
-	var/datum/exonet_protocol/exonet = null
+/obj/item/integrated_circuit/input/teleporter_locator
+	name = "teleporter locator"
+	desc = "This circuit can locate and allow for selection of teleporter computers."
+	icon_state = "gps"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+	complexity = 5
+	inputs = list()
+	outputs = list("teleporter")
+	activators = list("on selected")
+	origin_tech = list(TECH_MAGNETS = 2, TECH_BLUESPACE = 2)
 
-/obj/item/integrated_circuit/input/EPv2/New()
-	..()
-	exonet = new(src)
-	exonet.make_address("EPv2_circuit-\ref[src]")
-	desc += "<br>This circuit's EPv2 address is: [exonet.address]."
+/obj/item/integrated_circuit/input/teleporter_locator/get_topic_data(mob/user)
+	var/datum/integrated_io/O = outputs[1]
+	var/obj/machinery/computer/teleporter/current_console = O.data_as_type(/obj/machinery/computer/teleporter)
 
-/obj/item/integrated_circuit/input/EPv2/Destroy()
-	if(exonet)
-		exonet.remove_address()
-		qdel(exonet)
-	..()
+	. = list()
+	. += "Current selection: [(current_console && current_console.id) || "None"]"
+	. += "Please select a teleporter to lock in on:"
+	for(var/obj/machinery/teleport/hub/R in machines)
+		var/obj/machinery/computer/teleporter/com = R.com
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
+			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
+	.["None (Dangerous)"] = "tport=random"
 
-/obj/item/integrated_circuit/input/EPv2/do_work()
-	var/datum/integrated_io/target_address = inputs[1]
-	var/datum/integrated_io/message = inputs[2]
-	var/datum/integrated_io/text = inputs[3]
-	if(istext(target_address.data))
-		exonet.send_message(target_address.data, message.data, text.data)
+/obj/item/integrated_circuit/input/teleporter_locator/OnTopic(href_list, user)
+	if(href_list["tport"])
+		var/datum/integrated_io/O = outputs[1]
+		var/output = href_list["tport"] == "random" ? null : locate(href_list["tport"])
+		O.data = output && weakref(output)
+		O.push_data()
+		var/datum/integrated_io/A = activators[1]
+		A.push_data()
+		return IC_TOPIC_REFRESH
 
-/obj/item/integrated_circuit/input/receive_exonet_message(var/atom/origin_atom, var/origin_address, var/message, var/text)
-	var/datum/integrated_io/message_received = outputs[1]
-	var/datum/integrated_io/data_received = outputs[2]
-	var/datum/integrated_io/text_received = outputs[3]
-
-	var/datum/integrated_io/A = activators[2]
-	A.push_data()
-
-	message_received.write_data_to_pin(origin_address)
-	data_received.write_data_to_pin(message)
-	text_received.write_data_to_pin(text)
+/obj/item/integrated_circuit/output
+	category = /obj/item/integrated_circuit/output
+	category_text = "Output"
 
 /obj/item/integrated_circuit/output/screen
 	name = "screen"
 	desc = "This small screen can display a single piece of data, when the machine is examined closely."
 	icon_state = "screen"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	inputs = list("displayed data")
 	outputs = list()
 	activators = list("load data")
 	var/stuff_to_display = null
+
+/obj/item/integrated_circuit/output/screen/disconnect_all()
+	..()
+	stuff_to_display = null
+
+/obj/item/integrated_circuit/output/screen/any_examine(mob/user)
+	to_chat(user, "There is a little screen labeled '[name]', which displays [stuff_to_display ? "'[stuff_to_display]'" : "nothing"].")
+
+/obj/item/integrated_circuit/output/screen/get_topic_data()
+	return stuff_to_display ? list(stuff_to_display) : list()
 
 /obj/item/integrated_circuit/output/screen/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -328,7 +408,8 @@
 /obj/item/integrated_circuit/output/light
 	name = "light"
 	desc = "This light can turn on and off on command."
-	icon_state = "light_adv"
+	icon_state = "light"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 4
 	inputs = list()
 	outputs = list()
@@ -367,6 +448,7 @@
 	name = "advanced light"
 	desc = "This light can turn on and off on command, in any color, and in various brightness levels."
 	icon_state = "light_adv"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	complexity = 8
 	inputs = list(
 		"R",
@@ -408,19 +490,21 @@
 	var/datum/integrated_io/ID = inputs[1]
 	var/datum/integrated_io/vol = inputs[2]
 	var/datum/integrated_io/frequency = inputs[3]
-	if(istext(ID.data) && isnum(vol.data) && isnum(frequency.data))
+	if(istext(ID.data) && isnum(vol.data) && (!frequency.data || isnum(frequency.data)))
 		var/selected_sound = sounds[ID.data]
 		if(!selected_sound)
 			return
 		vol.data = Clamp(vol.data, 0, 100)
 		frequency.data = round(Clamp(frequency.data, 0, 1))
 		playsound(get_turf(src), selected_sound, vol.data, frequency.data, -1)
+		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] plays the sound '[ID.data]'.")
 
 /obj/item/integrated_circuit/output/sound/beeper
 	name = "beeper circuit"
 	desc = "A miniature speaker is attached to this component.  This is often used in the construction of motherboards, which use \
 	the speaker to tell the user if something goes very wrong when booting up.  It can also do other similar synthetic sounds such \
 	as buzzing, pinging, chiming, and more."
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	sounds = list(
 		"beep"			= 'sound/machines/twobeep.ogg',
 		"chime"			= 'sound/machines/chime.ogg',
@@ -435,6 +519,7 @@
 /obj/item/integrated_circuit/output/sound/beepsky
 	name = "securitron sound circuit"
 	desc = "A miniature speaker is attached to this component.  Considered by some to be the essential component for a securitron."
+	spawn_flags = IC_RESEARCH
 	sounds = list(
 		"creep"			= 'sound/voice/bcreep.ogg',
 		"criminal"		= 'sound/voice/bcriminal.ogg',
@@ -445,3 +530,96 @@
 		"radio"			= 'sound/voice/bradio.ogg',
 		"secure day"	= 'sound/voice/bsecureday.ogg',
 		)
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_ILLEGAL = 1)
+
+/obj/item/integrated_circuit/output/text_to_speech
+	name = "text-to-speech circuit"
+	desc = "A miniature speaker is attached to this component."
+	extended_desc = "This unit is more advanced than the plain speaker circuit, able to transpose any valid text to speech."
+	icon_state = "speaker"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+	complexity = 12
+	cooldown_per_use = 4 SECONDS
+	inputs = list("text")
+	outputs = list()
+	activators = list("to speech")
+
+/obj/item/integrated_circuit/output/text_to_speech/do_work()
+	var/datum/integrated_io/text = inputs[1]
+	if(istext(text.data))
+		audible_message("\The [istype(loc, /obj/item/device/electronic_assembly) ? loc : src] states, \"[text.data]\"")
+
+/obj/item/integrated_circuit/output/led
+	name = "light-emitting diode"
+	desc = "This a LED that is lit whenever there is TRUE-equivalent data on its input."
+	extended_desc = "TRUE-equivalent values are: Non-empty strings, non-zero numbers, and valid refs."
+	complexity = 0.1
+	size = 0.1
+	icon_state = "led"
+	inputs = list("lit")
+	outputs = list()
+	activators = list()
+
+	var/led_color
+	category = /obj/item/integrated_circuit/output/led
+
+/obj/item/integrated_circuit/output/led/external_examine(mob/user)
+	var/text_output = list()
+	var/initial_name = initial(name)
+
+	// Doing all this work just to have a color-blind friendly output.
+	text_output += "There is "
+	if(name == initial_name)
+		text_output += "\an [name]"
+	else
+		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
+	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
+	to_chat(user,jointext(text_output,null))
+
+/obj/item/integrated_circuit/output/led/get_topic_data()
+	return list("\An [initial(name)] that is currently [get_pin_data(IC_INPUT, 1) ? "lit" : "unlit."]")
+
+/obj/item/integrated_circuit/output/led/red
+	name = "red LED"
+	led_color = COLOR_RED
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/orange
+	name = "orange LED"
+	led_color = COLOR_ORANGE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/yellow
+	name = "yellow LED"
+	led_color = COLOR_YELLOW
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/green
+	name = "green LED"
+	led_color = COLOR_GREEN
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/blue
+	name = "blue LED"
+	led_color = COLOR_BLUE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/purple
+	name = "purple LED"
+	led_color = COLOR_PURPLE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/cyan
+	name = "cyan LED"
+	led_color = COLOR_CYAN
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/white
+	name = "white LED"
+	led_color = COLOR_WHITE
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
+
+/obj/item/integrated_circuit/output/led/pink
+	name = "pink LED"
+	led_color = COLOR_PINK
+	spawn_flags = IC_DEFAULT|IC_RESEARCH

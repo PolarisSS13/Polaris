@@ -122,6 +122,7 @@ Frequency:
 /*
  * Hand-tele
  */
+/*
 /obj/item/weapon/hand_tele
 	name = "hand tele"
 	desc = "A portable item using blue-space technology."
@@ -172,3 +173,4 @@ Frequency:
 	P.creator = src
 	src.add_fingerprint(user)
 	return
+*/

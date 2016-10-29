@@ -39,6 +39,7 @@
 		to_chat(user, "<span class='notice'>You connect \the [selected_io.holder]'s [selected_io.name] to \the [io.holder]'s [io.name].</span>")
 		mode = WIRE
 		update_icon()
+		io.holder.interact(user)
 		selected_io.holder.interact(user) // This is to update the UI.
 		selected_io = null
 
@@ -158,6 +159,44 @@
 
 	io.holder.interact(user) // This is to update the UI.
 
+/obj/item/device/integrated_electronics/analyzer
+	name = "circuit analyzer"
+	desc = "This tool allows one to analyze custom assemblies and their components from a distance."
+	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon_state = "analyzer"
+	flags = CONDUCT
+	w_class = 2
+	var/last_scan = ""
+
+/obj/item/device/integrated_electronics/analyzer/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
+		if(last_scan)
+			to_chat(user, last_scan)
+		else
+			to_chat(user, "\The [src] has not yet been used to analyze any assemblies.")
+
+/obj/item/device/integrated_electronics/analyzer/afterattack(var/obj/item/device/electronic_assembly/assembly, var/mob/user)
+	if(!istype(assembly))
+		return ..()
+
+	user.visible_message("<span class='notify'>\The [user] begins to scan \the [assembly].</span>", "<span class='notify'>You begin to scan \the [assembly].</span>")
+	if(!do_after(user, assembly.get_part_complexity(), assembly))
+		return
+
+	playsound(src.loc, 'sound/piano/A#6.ogg', 25, 0, -3)
+
+	last_scan = list()
+	last_scan += "Results from the scan of \the [assembly]:"
+	var/found_parts = FALSE
+	for(var/obj/item/integrated_circuit/part in assembly)
+		found_parts = TRUE
+		last_scan += "\t [initial(part.name)]"
+	if(!found_parts)
+		last_scan += "*No Components Found*"
+	last_scan = jointext(last_scan,"\n")
+	to_chat(user, last_scan)
+
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
@@ -168,46 +207,19 @@
 
 /obj/item/weapon/storage/bag/circuits/basic/New()
 	..()
-	var/list/types_to_spawn = typesof(/obj/item/integrated_circuit/arithmetic,
-		/obj/item/integrated_circuit/logic,
-		/obj/item/integrated_circuit/memory,
-		) - list(/obj/item/integrated_circuit/arithmetic,
-		/obj/item/integrated_circuit/memory,
-		/obj/item/integrated_circuit/logic,
-		)
+	spawn(2 SECONDS) // So the list has time to initialize.
+		for(var/obj/item/integrated_circuit/IC in all_integrated_circuits)
+			if(IC.spawn_flags & IC_DEFAULT)
+				for(var/i = 1 to 3)
+					new IC.type(src)
 
-	types_to_spawn.Add(/obj/item/integrated_circuit/input/numberpad,
-		/obj/item/integrated_circuit/input/textpad,
-		/obj/item/integrated_circuit/input/button,
-		/obj/item/integrated_circuit/input/signaler,
-		/obj/item/integrated_circuit/input/local_locator,
-		/obj/item/integrated_circuit/output/screen,
-		/obj/item/integrated_circuit/converter/num2text,
-		/obj/item/integrated_circuit/converter/text2num,
-		/obj/item/integrated_circuit/converter/uppercase,
-		/obj/item/integrated_circuit/converter/lowercase,
-		/obj/item/integrated_circuit/time/delay/five_sec,
-		/obj/item/integrated_circuit/time/delay/one_sec,
-		/obj/item/integrated_circuit/time/delay/half_sec,
-		/obj/item/integrated_circuit/time/delay/tenth_sec,
-		/obj/item/integrated_circuit/time/ticker/slow,
-		/obj/item/integrated_circuit/time/clock
-		)
-
-	for(var/thing in types_to_spawn)
-		var/obj/item/integrated_circuit/ic = thing
-		if(initial(ic.category) == thing)
-			continue
-
-		for(var/i = 1 to 4)
-			new thing(src)
-
-	new /obj/item/device/electronic_assembly(src)
-	new /obj/item/device/integrated_electronics/wirer(src)
-	new /obj/item/device/integrated_electronics/debugger(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/screwdriver(src)
-	make_exact_fit()
+		new /obj/item/device/electronic_assembly(src)
+		new /obj/item/device/integrated_electronics/wirer(src)
+		new /obj/item/device/integrated_electronics/debugger(src)
+		new /obj/item/device/integrated_electronics/analyzer(src)
+		new /obj/item/weapon/crowbar(src)
+		new /obj/item/weapon/screwdriver(src)
+		make_exact_fit()
 
 /obj/item/weapon/storage/bag/circuits/all/New()
 	..()
@@ -221,6 +233,7 @@
 	new /obj/item/device/electronic_assembly(src)
 	new /obj/item/device/integrated_electronics/wirer(src)
 	new /obj/item/device/integrated_electronics/debugger(src)
+	new /obj/item/device/integrated_electronics/analyzer(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/screwdriver(src)
 	make_exact_fit()

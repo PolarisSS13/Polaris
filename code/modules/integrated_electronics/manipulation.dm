@@ -1,3 +1,7 @@
+/obj/item/integrated_circuit/manipulation
+	category = /obj/item/integrated_circuit/manipulation
+	category_text = "Manipulation"
+
 /obj/item/integrated_circuit/manipulation/weapon_firing
 	name = "weapon firing mechanism"
 	desc = "This somewhat complicated system allows one to slot in a gun, direct it towards a position, and remotely fire it."
@@ -6,6 +10,7 @@
 	The 'fire' activator will cause the mechanism to attempt to fire the weapon at the coordinates, if possible.  Note that the \
 	normal limitations to firearms, such as ammunition requirements and firing delays, still hold true if fired by the mechanism."
 	complexity = 20
+	spawn_flags = IC_RESEARCH
 	inputs = list(
 		"target X rel",
 		"target Y rel"
@@ -15,6 +20,7 @@
 		"fire"
 	)
 	var/obj/item/weapon/gun/installed_gun = null
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3, TECH_COMBAT = 4)
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/Destroy()
 	qdel(installed_gun)
@@ -89,6 +95,7 @@
 	name = "smoke generator"
 	desc = "Unlike most electronics, creating smoke is completely intentional."
 	icon_state = "smoke"
+	spawn_flags = IC_RESEARCH
 	extended_desc = "This smoke generator creates clouds of smoke on command.  It can also hold liquids inside, which will go \
 	into the smoke clouds when activated."
 	flags = OPENCONTAINER
@@ -115,6 +122,7 @@
 	name = "integrated hypo-injector"
 	desc = "This scary looking thing is able to pump liquids into whatever it's pointed at."
 	icon_state = "injector"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This autoinjector can push reagents into another container or someone else outside of the machine.  The target \
 	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing."
 	flags = OPENCONTAINER
@@ -123,6 +131,7 @@
 	inputs = list("target ref", "injection amount" = 5)
 	outputs = list()
 	activators = list("inject")
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 3)
 
 /obj/item/integrated_circuit/manipulation/injector/New()
 	..()
@@ -161,6 +170,7 @@
 	name = "reagent pump"
 	desc = "Moves liquids safely inside a machine, or even nearby it."
 	icon_state = "reagent_pump"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This is a pump, which will move liquids from the source ref to the target ref.  The third pin determines \
 	how much liquid is moved per pulse, between 0 and 50.  The pump can move reagents to any open container inside the machine, or \
 	outside the machine if it is next to the machine.  Note that this cannot be used on entities."
@@ -170,6 +180,7 @@
 	outputs = list()
 	activators = list("transfer reagents")
 	var/transfer_amount = 10
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1, TECH_BIO = 2)
 
 /obj/item/integrated_circuit/manipulation/reagent_pump/on_data_written()
 	var/datum/integrated_io/amount = inputs[3]
@@ -202,12 +213,14 @@
 	name = "reagent storage"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u."
 	icon_state = "reagent_storage"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "This is effectively an internal beaker."
 	flags = OPENCONTAINER
 	complexity = 4
 	inputs = list()
 	outputs = list("volume used")
 	activators = list()
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_DATA = 1, TECH_BIO = 1)
 
 /obj/item/integrated_circuit/manipulation/reagent_storage/New()
 	..()
@@ -222,17 +235,20 @@
 	name = "cryo reagent storage"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u.  This will also suppress reactions."
 	icon_state = "reagent_storage_cryo"
+	spawn_flags = IC_RESEARCH
 	extended_desc = "This is effectively an internal cryo beaker."
 	flags = OPENCONTAINER | NOREACT
 	complexity = 8
 	inputs = list()
 	outputs = list("volume used")
 	activators = list()
+	origin_tech = list(TECH_MATERIALS = 3, TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 2)
 
 /obj/item/integrated_circuit/manipulation/locomotion
 	name = "locomotion circuit"
 	desc = "This allows a machine to move in a given direction."
 	icon_state = "locomotion"
+	spawn_flags = IC_DEFAULT|IC_RESEARCH
 	extended_desc = "The circuit accepts a number as a direction to move towards.<br>  \
 	North/Fore = 1,<br>\
 	South/Aft = 2,<br>\
@@ -249,6 +265,7 @@
 	inputs = list("dir num")
 	outputs = list()
 	activators = list("step towards dir")
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3)
 
 /obj/item/integrated_circuit/manipulation/locomotion/do_work()
 	..()
@@ -261,3 +278,98 @@
 			var/datum/integrated_io/wanted_dir = inputs[1]
 			if(isnum(wanted_dir.data))
 				step(machine, wanted_dir.data)
+
+/obj/item/integrated_circuit/manipulation/grenade
+	name = "grenade primer"
+	desc = "This circuit comes with the ability to attach most types of grenades at prime them at will."
+	extended_desc = "Time between priming and detonation is limited to between 1 to 12 seconds but is optional. \
+					If unset, not a number, or a number less than 1 then the grenade's built-in timing will be used. \
+					Beware: Once primed there is no aborting the process!"
+	icon_state = "grenade"
+	spawn_flags = IC_RESEARCH
+	complexity = 30
+	size = 2
+	inputs = list("detonation time")
+	outputs = list()
+	activators = list("prime grenade")
+	var/obj/item/weapon/grenade/attached_grenade
+
+/obj/item/integrated_circuit/manipulation/grenade/Destroy()
+	if(attached_grenade && !attached_grenade.active)
+		attached_grenade.dropInto(loc)
+	attached_grenade = null
+	. = ..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
+	if(istype(G))
+		if(attached_grenade)
+			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
+		else if(user.unEquip(G, target = src))
+			attached_grenade = G
+			size += G.w_class
+			desc += " \An [attached_grenade] is attached to it!"
+			user.visible_message("<span class='warning'>\The [user] attaches \a [G] to \the [src]!</span>", "<span class='notice'>You attach \the [G] to \the [src].</span>")
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/attack_self(var/mob/user)
+	if(attached_grenade)
+		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
+		user.put_in_any_hand_if_possible(attached_grenade) || attached_grenade.dropInto(loc)
+		attached_grenade = null
+		size = initial(size)
+		desc = initial(desc)
+	else
+		..()
+
+/obj/item/integrated_circuit/manipulation/grenade/do_work()
+	if(attached_grenade && !attached_grenade.active)
+		var/datum/integrated_io/detonation_time = inputs[1]
+		if(isnum(detonation_time.data) && detonation_time.data > 0)
+			attached_grenade.det_time = between(1, detonation_time.data, 12) SECONDS
+		attached_grenade.activate()
+		var/atom/holder = loc
+		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift
+	name = "bluespace rift generator"
+	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
+	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as \
+	destination point, and if not an undefined destination point is selected. Rift direction is a cardinal value determening in \
+	which direction the rift will be opened, relative to the local north. A direction value of 0 will open the rift on top of \
+	the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
+	icon_state = "bluespace"
+	spawn_flags = IC_RESEARCH
+	flags = OPENCONTAINER
+	complexity = 25
+	size = 3
+	cooldown_per_use = 10 SECONDS
+	inputs = list("teleporter", "rift direction" = 0)
+	outputs = list()
+	activators = list("open rift")
+	origin_tech = list(TECH_MAGNET = 3, TECH_BLUESPACE = 4)
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
+
+/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
+	var/datum/integrated_io/tdata = inputs[1]
+	var/datum/integrated_io/step_dir = inputs[2]
+
+	var/turf/rift_location = get_turf(src)
+	if(!rift_location || !isPlayerLevel(rift_location.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
+
+	if(isnum(step_dir.data) && (!step_dir.data || step_dir.data in cardinal))
+		rift_location = get_step(rift_location, step_dir.data) || rift_location
+	else
+		rift_location = get_step(rift_location, dir) || rift_location
+
+	var/obj/machinery/computer/teleporter/tporter = tdata.data_as_type(/obj/machinery/computer/teleporter)
+	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
+		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
+	else
+		var/turf/destination = get_random_turf_in_range(src, 10)
+		if(destination)
+			new /obj/effect/portal(rift_location, destination)
+		else
+			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
