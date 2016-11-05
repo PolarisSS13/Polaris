@@ -30,7 +30,7 @@
 
 /obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
 	..()
-	bcell = new/obj/item/weapon/cell/device(src)
+	bcell = new/obj/item/weapon/cell/device/weapon(src)
 	update_icon()
 	return
 
@@ -167,7 +167,7 @@
 
 //secborg stun baton module
 /obj/item/weapon/melee/baton/robot
-	hitcost = 120
+	hitcost = 500
 
 /obj/item/weapon/melee/baton/robot/attack_self(mob/user)
 	//try to find our power cell
