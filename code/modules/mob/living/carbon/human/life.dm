@@ -346,7 +346,7 @@
 		if(should_have_organ(O_LUNGS))
 			var/obj/item/organ/internal/lungs/L = internal_organs_by_name[O_LUNGS]
 			if(!L.is_bruised() && prob(8))
-				if(breath.total_moles)
+				if(breath && breath.total_moles)
 					if(breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
 						rupture_lung()
 				else
