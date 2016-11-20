@@ -32,6 +32,7 @@ var/datum/uplink/uplink = new()
 	var/datum/uplink_category/category		// Item category
 	var/list/datum/antagonist/antag_roles	// Antag roles this item is displayed to. If empty, display to all.
 	var/blacklisted = 0
+	var/list/new_args = list()
 
 /datum/uplink_item/item
 	var/path = null
@@ -39,8 +40,6 @@ var/datum/uplink/uplink = new()
 /datum/uplink_item/New()
 	..()
 	antag_roles = list()
-
-
 
 /datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/extra_args = extra_args(user)
@@ -132,7 +131,9 @@ datum/uplink_item/dd_SortValue()
 	return I
 
 /datum/uplink_item/item/get_goods(var/obj/item/device/uplink/U, var/loc)
-	var/obj/item/I = new path(loc)
+	var/list/input_args = new_args.Copy()
+	input_args.Insert(1, loc)
+	var/obj/item/I = new path(arglist(input_args))
 	return I
 
 /datum/uplink_item/item/description()
