@@ -8,6 +8,7 @@
 	w_class = ITEMSIZE_HUGE
 	slot_flags = SLOT_BACK
 	unacidable = 1
+	action_button_name = "Stablize Form"
 	origin_tech = list(
 		TECH_MATERIAL = 8, TECH_ENGINEERING = 8, TECH_POWER = 8, TECH_BLUESPACE = 10,
 		TECH_COMBAT = 7, TECH_MAGNET = 9, TECH_DATA = 5
@@ -23,6 +24,7 @@
 	var/instability_modifier = 0.8	// Multiplier on how much instability is added.
 	var/energy_cost_modifier = 1.0	// Multiplier on how much spells will cost.
 	var/spell_power_modifier = 1.0	// Multiplier on how strong spells are.
+	var/cooldown_modifier 	 = 1.0	// Multiplier on cooldowns for spells.
 	var/list/spells = list()		// This contains the buttons used to make spells in the user's hand.
 	var/list/appearances = list(	// Assoc list containing possible icon_states that the wiz can change the core to.
 		"default"			= "technomancer_core",
@@ -34,6 +36,8 @@
 	var/list/summoned_mobs = list()	// Maintained horribly with maintain_summon_list().
 	var/list/wards_in_use = list()	// Wards don't count against the cap for other summons.
 	var/max_summons = 10			// Maximum allowed summoned entities.  Some cores will have different caps.
+	var/active_cooldown_time = 15 MINUTES	// How long the 'active' core ability's cooldown is.  Each core gets a unique active ability.
+	var/active_ready = TRUE			// If the ability is ready or not.
 
 /obj/item/weapon/technomancer_core/New()
 	..()
@@ -92,6 +96,35 @@
 	if(!wearer || wearer.stat == DEAD) // Unlock if we're dead or not worn.
 		canremove = TRUE
 
+/obj/item/weapon/technomancer_core/update_icon()
+	if(!active_ready)
+		icon_state = "technomancer_core_recharging"
+	else
+		icon_state = "technomancer_core"
+	if(wearer)
+		wearer.update_action_buttons()
+
+/obj/item/weapon/technomancer_core/attack_self(mob/user)
+	if(active_ready)
+		active_ability_setup(user)
+	else
+		to_chat(user, "<span class='warning'>\The [src] is still recharging its special ability.</span>")
+
+/obj/item/weapon/technomancer_core/proc/active_ability_setup(var/mob/user)
+	to_chat(user, "<span class='notice'>You activate \the [src]'s [action_button_name].</span>")
+	if(active_cooldown_time)
+		active_ready = FALSE
+		update_icon()
+		spawn(active_cooldown_time)
+			active_ready = TRUE
+			update_icon()
+	spawn(1)
+		active_ability(user)
+
+/obj/item/weapon/technomancer_core/proc/active_ability(var/mob/living/carbon/human/user)
+	user.adjust_instability(-round(user.instability / 2), 1)
+	to_chat(user, "<span class='notice'>Half of your instability has been purged.</span>")
+
 /obj/item/weapon/technomancer_core/proc/regenerate()
 	energy = min(max(energy + regen_rate, 0), max_energy)
 	if(wearer && ishuman(wearer))
@@ -118,7 +151,11 @@
 			var/mob/living/L = A
 			if(L.stat == DEAD)
 				summoned_mobs -= L
-				qdel(L)
+				spawn(1)
+					L.visible_message("<span class='notice'>\The [L] begins to fade away...</span>")
+					animate(L, alpha = 255, alpha = 0, time = 30) // Makes them fade into nothingness.
+					sleep(30)
+					qdel(L)
 
 // Deletes all the summons and wards from the core, so that Destroy() won't have issues.
 /obj/item/weapon/technomancer_core/proc/dismiss_all_summons()
@@ -226,7 +263,9 @@
 	regen_rate = 35 //~371 seconds to full, 118 seconds to full at 50 instability (rate of 110)
 	instability_modifier = 1.2
 	energy_cost_modifier = 0.7
-	spell_power_modifier = 1.1
+	spell_power_modifier = 1.0
+	active_cooldown_time = 10 MINUTES
+	action_button_name = "Chaotic Power"
 
 /obj/item/weapon/technomancer_core/unstable/regenerate()
 	var/instability_bonus = 0
@@ -238,6 +277,13 @@
 		var/mob/living/carbon/human/H = loc
 		H.wiz_energy_update_hud()
 
+/obj/item/weapon/technomancer_core/unstable/active_ability(var/mob/living/carbon/human/user)
+	spell_power_modifier = 1.0 + ((user.instability * 2) / 100 )
+	to_chat(user, "<span class='notice'><font size='3'>Most functions are now [(spell_power_modifier - 1) * 100]% stronger!</font></span>")
+	sleep(20 SECONDS)
+	spell_power_modifier = initial(spell_power_modifier)
+	to_chat(user, "<span class='warning'>Your unstable power has expired, sadly.</span>")
+
 //Lower capacity but safer core.
 /obj/item/weapon/technomancer_core/rapid
 	name = "rapid core"
@@ -248,6 +294,23 @@
 	regen_rate = 70 //100 seconds to full
 	slowdown = -1
 	instability_modifier = 0.9
+	active_cooldown_time = 15 MINUTES
+	action_button_name = "Rapid Fire"
+
+/obj/item/weapon/technomancer_core/rapid/active_ability(var/mob/living/carbon/human/user)
+	cooldown_modifier = 0
+	instability_modifier = 0.3
+	energy_cost_modifier = 0.3
+	spell_power_modifier = 0.3
+	slowdown = -3
+	to_chat(user, "<span class='notice'><font size='3'>Your functions have no cooldown!</font></span>")
+	sleep(10 SECONDS)
+	cooldown_modifier = initial(cooldown_modifier)
+	instability_modifier = initial(instability_modifier)
+	energy_cost_modifier = initial(energy_cost_modifier)
+	spell_power_modifier = initial(spell_power_modifier)
+	slowdown = initial(slowdown)
+	to_chat(user, "<span class='warning'>Your functions return to requiring a moment inbetween uses.</span>")
 
 //Big batteries but slow regen, buying energy spells is highly recommended.
 /obj/item/weapon/technomancer_core/bulky
@@ -273,15 +336,27 @@
 	regen_rate = 40 //300 seconds to full
 	instability_modifier = 0.6
 	energy_cost_modifier = 0.8
+	active_cooldown_time = 5 MINUTES
+	action_button_name = "Ultimate Efficiency"
+	var/ultimate_efficiency = FALSE
 
 /obj/item/weapon/technomancer_core/recycling/pay_energy(amount)
 	var/success = ..()
 	if(success)
-		if(prob(30))
+		if(ultimate_efficiency)
+			give_energy(round(amount * 0.75))
+		else if(prob(30))
 			give_energy(round(amount / 2))
 			if(amount >= 50) // Managing to recover less than half of this isn't worth telling the user about.
 				wearer << "<span class='notice'>\The [src] has recovered [amount/2 >= 1000 ? "a lot of" : "some"] energy.</span>"
 	return success
+
+/obj/item/weapon/technomancer_core/recycling/active_ability(var/mob/living/carbon/human/user)
+	ultimate_efficiency = TRUE
+	to_chat(user, "<span class='notice'><font size='3'>You will always recover 75% of all energy costs for twenty seconds!</font></span>")
+	sleep(20 SECONDS)
+	ultimate_efficiency = FALSE
+	to_chat(user, "<span class='warning'>Your core is now back to recycling at normal levels.</span>")
 
 // For those dedicated to summoning hoards of things.
 /obj/item/weapon/technomancer_core/summoner
@@ -295,10 +370,28 @@
 	max_summons = 40
 	instability_modifier = 1.2
 	spell_power_modifier = 1.2
+	active_cooldown_time = 10 MINUTES
+	action_button_name = "Mass Heal"
 
 /obj/item/weapon/technomancer_core/summoner/pay_dues()
 	if(summoned_mobs.len)
 		pay_energy( round(summoned_mobs.len) )
+
+/obj/item/weapon/technomancer_core/summoner/active_ability(var/mob/living/carbon/human/user)
+	var/list/mobs_to_heal = list()
+	var/list/nearby_things = view(7)
+	for(var/mob/living/L in nearby_things)
+		if(L == wearer)
+			mobs_to_heal.Add(L)
+		if(L.mind && technomancers.is_antagonist(L.mind))
+			mobs_to_heal.Add(L)
+	for(var/mob/living/L in summoned_mobs)
+		mobs_to_heal.Add(L)
+
+	for(var/mob/living/L in mobs_to_heal)
+		L.adjustBruteLoss(-40)
+		L.adjustFireLoss(-40)
+	to_chat(user, "<span class='notice'>You've healed yourself, your friends within sight, and all of your summons.</span>")
 
 // For those who hate instability.
 /obj/item/weapon/technomancer_core/safety
