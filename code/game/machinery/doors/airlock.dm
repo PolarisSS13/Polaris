@@ -12,7 +12,8 @@
 	var/backup_power_lost_until = -1	//World time when backup power is restored.
 	var/has_beeped = 0					//If 1, will not beep on failed closing attempt. Resets when door closes.
 	var/spawnPowerRestoreRunning = 0
-	var/welded = null
+	var/welded = 0
+	var/welding = 0
 	var/locked = 0
 	var/lights = 1 // bolt lights show by default
 	var/aiDisabledIdScanner = 0
@@ -514,8 +515,10 @@ About the new airlock wires panel:
 			icon_state = "door_locked"
 		else
 			icon_state = "door_closed"
-		if(p_open || welded)
-			overlays = list()
+		if(welding)
+			icon_state = src.icon_state + "_waro" //Basically a copy of door_closed/door_locked to workaround a BYOND overlay 'feature'. The only other option would be to fully animate a door to flick.
+		if(p_open || welded || welding)
+			overlays = list()	//This is redundant with 512, but this entire if statement might need a good looking over anyway...
 			if(p_open)
 				overlays += image(icon, "panel_open")
 			if (!(stat & NOPOWER))
@@ -523,7 +526,12 @@ About the new airlock wires panel:
 					overlays += image(icon, "sparks_broken")
 				else if (health < maxhealth * 3/4)
 					overlays += image(icon, "sparks_damaged")
-			if(welded)
+			if(welding)
+				if(welded)
+					overlays += image(icon, "unwelding")
+				else
+					overlays += image(icon, "welding")
+			else if(welded)
 				overlays += image(icon, "welded")
 		else if (health < maxhealth * 3/4 && !(stat & NOPOWER))
 			overlays += image(icon, "sparks_damaged")
@@ -752,12 +760,22 @@ About the new airlock wires panel:
 	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
-			if(!src.welded)
-				src.welded = 1
-			else
-				src.welded = null
+			src.operating = !src.operating
+			src.welding = !src.welding
+			spawn(2)
+				src.update_icon()
+			user.visible_message("<span class='danger'>\The [user] starts to [src.welded ? "unweld" : "weld"] \the [src] with \a [W]!</span>",\
+								"You start [src.welded ? "unwelding" : "welding"] \the [src] with \the [W]!",\
+								"You hear something being welded.")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			src.update_icon()
+			if(do_after(user,60))
+				user.visible_message("<span class='danger'>\The [user] [src.welded ? "unwelds" : "welds"] \the [src] with \a [W].</span>",\
+									"You [src.welded ? "unweld" : "weld"] \the [src] with \the [W].")
+				src.welded = !src.welded
+			src.operating = !src.operating
+			src.welding = !src.welding
+			spawn(2)
+				src.update_icon()
 			return
 		else
 			return

@@ -25,6 +25,8 @@
 	block_air_zones = 0
 
 	var/blocked = 0
+	var/welding = 0
+	var/prying = 0
 	var/lockdown = 0 // When the door has detected a problem, it locks.
 	var/pdiff_alert = 0
 	var/pdiff = 0
@@ -187,16 +189,33 @@
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	add_fingerprint(user)
 	if(operating)
+		if(welding)
+			user << "Someone's busy welding \the [src]!"
+			return
+		if(prying)
+			user << "Someone's busy prying \the [src]!"
+			return
+		user << "\The [src] is busy!"
 		return//Already doing something.
 	if(istype(C, /obj/item/weapon/weldingtool) && !repairing)
 		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0, user))
-			blocked = !blocked
-			user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
-			"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
-			"You hear something being welded.")
+		if(W.remove_fuel(0, user) && !welding)
+			welding = !welding
+			operating = !operating
+			spawn(2)
+				update_icon()
+			user.visible_message("<span class='danger'>\The [user] starts to [blocked ? "unweld" : "weld"] \the [src] with \a [W]!</span>",\
+								"You start [blocked ? "unwelding" : "welding"] \the [src] with \the [W]!",\
+								"You hear something being welded.")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			update_icon()
+			if(do_after(user,60))
+				user.visible_message("<span class='danger'>\The [user] [blocked ? "unwelds" : "welds"] \the [src] with \a [W].</span>",\
+									"You [blocked ? "unweld" : "weld"] \the [src] with \the [W].")
+				blocked = !blocked
+			operating = !operating
+			welding = !welding
+			spawn(2)
+				update_icon()
 			return
 
 	if(density && istype(C, /obj/item/weapon/screwdriver))
@@ -250,10 +269,16 @@
 			if(!F.wielded)
 				return
 
+		operating = !operating
+		prying = !prying
+		update_icon()
 		user.visible_message("<span class='danger'>\The [user] starts to force \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
 				"You start forcing \the [src] [density ? "open" : "closed"] with \the [C]!",\
 				"You hear metal strain.")
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		if(do_after(user,30))
+			operating = !operating
+			prying = !prying
 			if(istype(C, /obj/item/weapon/crowbar))
 				if(stat & (BROKEN|NOPOWER) || !density)
 					user.visible_message("<span class='danger'>\The [user] forces \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\
@@ -270,6 +295,10 @@
 				spawn(0)
 					close()
 			return
+		operating = !operating
+		prying = !prying
+		update_icon()
+		return
 
 	return ..()
 
@@ -365,10 +394,18 @@
 	overlays.Cut()
 	if(density)
 		icon_state = "door_closed"
+		if(prying)
+			icon_state = "prying"
+		else if(welding)
+			icon_state = "door_closed_waro" //Basically a copy of door_closed to workaround a BYOND overlay 'feature'. The only other option would be to fully animate a door to flick.
+			if(blocked)
+				overlays += "unwelding"
+			else
+				overlays += "welding"
+		else if(blocked)
+			overlays += "welded"
 		if(hatch_open)
 			overlays += "hatch"
-		if(blocked)
-			overlays += "welded"
 		if(pdiff_alert)
 			overlays += "palert"
 		if(dir_alerts)
@@ -379,8 +416,17 @@
 						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
 	else
 		icon_state = "door_open"
-		if(blocked)
+		if (prying)
+			icon_state = "prying_open"
+		else if(welding)
+			icon_state = "door_open_waro"
+			if(blocked)
+				overlays += "unwelding_open"
+			else
+				overlays += "welding_open"
+		else if (blocked)
 			overlays += "welded_open"
+
 	return
 
 //These are playing merry hell on ZAS.  Sorry fellas :(
