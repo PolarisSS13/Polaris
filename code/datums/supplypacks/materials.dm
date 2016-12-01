@@ -31,7 +31,7 @@
 /datum/supply_packs/materials/plastic50
 	name = "50 plastic sheets"
 	contains = list(/obj/item/stack/material/plastic/fifty)
-	cost = 10
+	cost = 30
 	containertype = /obj/structure/closet/crate
 	containername = "Plastic sheets crate"
 
