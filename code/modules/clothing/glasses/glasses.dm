@@ -241,15 +241,9 @@ BLIND     // can't see anything
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Larger than average enhanced shielding blocks many flashes."
 	icon_state = "bigsunglasses"
 
-/obj/item/clothing/glasses/fakesunglasses //Sunglasses without flash immunity
-	desc = "A pair of designer sunglasses. Doesn't seem like it'll block flashes."
-	name = "stylish sunglasses"
-	icon_state = "sun"
-	item_state_slots = list(slot_r_hand_str = "sunglasses", slot_l_hand_str = "sunglasses")
-
-/obj/item/clothing/glasses/fakesunglasses/aviator
-	desc = "A pair of designer sunglasses. Doesn't seem like it'll block flashes."
-	name = "stylish aviators"
+/obj/item/clothing/glasses/sunglasses/aviator
+	desc = "A pair of classic Aviators. Larger than average enhanced shielding blocks many flashes."
+	name = "aviators"
 	icon_state = "sec_flash"
 
 /obj/item/clothing/glasses/sunglasses/sechud
