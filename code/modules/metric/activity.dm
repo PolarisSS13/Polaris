@@ -28,7 +28,7 @@
 	var/departmental_activity = 0
 	var/departmental_size = 0
 	for(var/mob/M in player_list)
-		if(guess_department(M) != department) // Ignore people outside the department we're assessing.
+		if(!(department in guess_department(M))) // Ignore people outside the department we're assessing.
 			continue
 		departmental_activity += assess_player_activity(M)
 		departmental_size++

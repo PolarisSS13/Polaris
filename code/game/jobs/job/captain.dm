@@ -3,7 +3,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/captain
 	title = "Colony Director"
 	flag = CAPTAIN
-	department = "Command"
+	department = ROLE_COMMAND
+	department_groups = list(ROLE_COMMAND)
 	head_position = 1
 	department_flag = ENGSEC
 	faction = "Station"
@@ -21,6 +22,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	minimum_character_age = 25
 	ideal_character_age = 70 // Old geezer captains ftw
+	required_playtime = list(ROLE_COMMAND = 540) // Three rounds.
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -64,7 +66,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
-	department = "Civilian"
+	department = ROLE_CIVILIAN
+	department_groups = list(ROLE_CIVILIAN, ROLE_COMMAND)
 	head_position = 1
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -80,6 +83,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	minimum_character_age = 25
 	ideal_character_age = 50
+	required_playtime = list(ROLE_COMMAND = 360) // Two rounds.
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
@@ -115,7 +119,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/secretary
 	title = "Command Secretary"
 	flag = BRIDGE
-	department = "Civilian"
+	department = ROLE_CIVILIAN
+	department_groups = list(ROLE_CIVILIAN, ROLE_COMMAND)
 	head_position = 1
 	department_flag = CIVILIAN
 	faction = "Station"

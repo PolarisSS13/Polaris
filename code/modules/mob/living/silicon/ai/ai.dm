@@ -780,5 +780,8 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 		src << "Extra verbs toggled on."
 		verbs |= ai_verbs_hidden
 
+/mob/living/silicon/ai/get_department_from_mob()
+	return list(ROLE_SYNTHETIC)
+
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

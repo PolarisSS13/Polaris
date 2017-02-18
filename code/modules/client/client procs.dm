@@ -153,6 +153,7 @@
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	log_client_to_db()
+	log_client_to_sqlite()
 
 	send_resources()
 	nanomanager.send_resources(src)
@@ -177,6 +178,7 @@
 	if(holder)
 		holder.owner = null
 		admins -= src
+	increment_playtime(TRUE)
 	directory -= ckey
 	clients -= src
 	return ..()

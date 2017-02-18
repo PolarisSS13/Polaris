@@ -21,6 +21,8 @@
 	var/head_position = 0                 // Is this position Command?
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
+	var/list/required_playtime = list()   // Assoc list of departmental playtime required to play.  Format is list("department" = minutes).  Requires SQLite database to be enabled.
+	var/list/department_groups = list()   // Departments that this job is a member of, which can be more than one, e.g. HoS = Sec, Command.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?

@@ -1068,3 +1068,10 @@
 				src << "Hack attempt detected."
 			return 1
 		return
+
+/mob/living/silicon/robot/get_department_from_mob()
+	var/list/roles = list()
+	roles += ROLE_SYNTHETIC
+	if(module && module.department)
+		roles += module.department
+	return roles

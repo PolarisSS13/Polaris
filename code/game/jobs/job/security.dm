@@ -2,7 +2,8 @@
 	title = "Head of Security"
 	flag = HOS
 	head_position = 1
-	department = "Security"
+	department = ROLE_SECURITY
+	department_groups = list(ROLE_SECURITY, ROLE_COMMAND)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
@@ -23,6 +24,7 @@
 	alt_titles = list("Commander")
 	minimum_character_age = 25
 	minimal_player_age = 14
+	required_playtime = list(ROLE_SECURITY = 360) // Two rounds.
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -50,7 +52,8 @@
 /datum/job/warden
 	title = "Warden"
 	flag = WARDEN
-	department = "Security"
+	department = ROLE_SECURITY
+	department_groups = list(ROLE_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
@@ -62,6 +65,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
+	required_playtime = list(ROLE_SECURITY = 180) //One round.
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -89,7 +93,8 @@
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
-	department = "Security"
+	department = ROLE_SECURITY
+	department_groups = list(ROLE_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2
@@ -133,7 +138,8 @@
 /datum/job/officer
 	title = "Security Officer"
 	flag = OFFICER
-	department = "Security"
+	department = ROLE_SECURITY
+	department_groups = list(ROLE_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 4

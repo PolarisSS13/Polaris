@@ -1,6 +1,8 @@
 /datum/job/ai
 	title = "AI"
 	flag = AI
+	department = ROLE_SYNTHETIC
+	department_groups = list(ROLE_SYNTHETIC, ROLE_COMMAND)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
@@ -11,6 +13,8 @@
 	minimal_player_age = 7
 	account_allowed = 0
 	economic_modifier = 0
+	required_playtime = list(ROLE_SYNTHETIC = 360, ROLE_ENGINEERING = 180)
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		return 1
@@ -34,6 +38,8 @@
 /datum/job/cyborg
 	title = "Cyborg"
 	flag = CYBORG
+	department = ROLE_SYNTHETIC
+	department_groups = list(ROLE_SYNTHETIC)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2

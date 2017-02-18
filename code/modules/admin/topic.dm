@@ -183,6 +183,101 @@
 
 		edit_admin_permissions()
 
+	else if(href_list["ban_panel_filter"])
+		if(href_list["ban_panel_data"])
+			var/list/data = json_decode(href_list["ban_panel_data"])
+			switch(href_list["ban_panel_filter"])
+				if("ckey")
+					var/new_data = input(usr, "Filter for what ckey?", "Filter", data["ckey"]) as null|text
+					if(new_data && istext(new_data))
+						data["ckey"] = ckey(new_data)
+				if("ip")
+					var/new_data = input(usr, "Filter for what IP?", "Filter", data["ip"]) as null|text
+					if(new_data && istext(new_data))
+						data["ip"] = new_data
+				if("cid")
+					var/new_data = input(usr, "Filter for what computer ID?", "Filter", data["cid"]) as null|text
+					if(new_data && istext(new_data))
+						data["cid"] = text2num(new_data)
+				if("banningadmin")
+					var/new_data = input(usr, "Filter for what admin?", "Filter", data["banningadmin"]) as null|text
+					if(new_data && istext(new_data))
+						data["banningadmin"] = ckey(new_data)
+				if("reset")
+					data["ckey"] = null
+					data["ip"] = null
+					data["cid"] = null
+					data["banningadmin"] = null
+
+			sqlite_ban_panel(data["ckey"], data["ip"], data["cid"], data["banningadmin"])
+
+	else if(href_list["sqlite_topic_add_manual_ban"])
+		var/ban_ckey = ckey(input("Enter the key of the person to be banned.  This is required.", "Banning - Key - 1 of 7") as null|text)
+		if(!ban_ckey)
+			return
+
+		var/mob/last_mob = null // If someone with the same ckey is found in the world, it uses this to autofill some information.
+		for(var/mob/M in mob_list)
+			if(M.ckey == ban_ckey)
+				last_mob = M
+				break
+
+		var/ban_job = null // This needs to stay null if it is not a jobban.
+		var/ban_type = alert("Is this a normal server ban, or a jobban?", "Banning - Type - 2 of 7", "Server Ban", "Job Ban")
+		if(ban_type == "Job Ban")
+			var/list/list_of_job_titles = list()
+
+			var/list/job_datums = get_job_datums()
+			// Jobs
+			for(var/datum/job/J in job_datums)
+				if(J.title)
+					list_of_job_titles |= J.title
+
+			// Antagonists
+			for(var/antag_type in all_antag_types)
+				var/datum/antagonist/antag = all_antag_types[antag_type]
+				if(!antag || !antag.bantype)
+					continue
+				list_of_job_titles |= antag.bantype
+
+			// Other stuff.
+			list_of_job_titles |= "pAI"
+			list_of_job_titles |= "AntagHUD"
+			list_of_job_titles |= "Dionaea"
+
+			ban_job = lowertext(input("Choose a job to ban from.", "Banning - Job - 2 1/2 of 7") as null|anything in list_of_job_titles) //todo: add antag
+			if(!ban_job)
+				return
+
+		var/ban_ip = input("Enter the IP address of the person to be banned.  Optional but highly suggested \
+		to fill.", "Banning - IP - 3 of 7", "[last_mob ? "[last_mob.lastKnownIP]" : ""]") as null|text
+
+		var/ban_cid = input("Enter the Comp. ID of the person to be banned.  Optional but highly suggested \
+		to fill.", "Banning - CID - 4 of 7", "[last_mob ? "[last_mob.computer_id]" : ""]") as null|text // Byond converts it to scientific notation if it's a num
+
+		var/ban_reason = input("Enter the reason for [ban_ckey]'s ban.", "Banning - Reason - 5 of 7", "Griefer.") as null|message
+
+		var/ban_duration = input("Enter how many MINUTES that [ban_ckey]'s ban will last.  Leave it at zero to make it last forever.",
+		"Banning - Duration - 6 of 7", 1440) as num
+		if(ban_duration <= 0)
+			ban_duration = null // Perma
+
+		var/confirm = alert("Please confirm if this information is correct. \nCkey: [ban_ckey] \nCID: [ban_cid] \nIP: [ban_ip] \n\
+		Type: [ban_type] \nJob: [ban_job ? "[ban_job]" : "N/A"] \nReason: [ban_reason] \nExpires: [ban_duration ? "[ban_duration]" : "Never"]", "Banning - Confirm - 7 of 7", "Yes", "No")
+
+		if(confirm == "No")
+			return
+
+		sqlite_add_ban(
+			_ckey = ban_ckey,
+			_cid = ban_cid,
+			_ip = ban_ip,
+			_job = ban_job,
+			_reason = ban_reason,
+			_banningkey = usr.ckey,
+			_expires = ban_duration
+			)
+
 	else if(href_list["call_shuttle"])
 		if(!check_rights(R_ADMIN))	return
 
@@ -685,7 +780,7 @@
 					if(!check_rights(R_MOD,0) && !check_rights(R_BAN, 0))
 						usr << "<span class='warning'> You Cannot issue temporary job-bans!</span>"
 						return
-					if(config.ban_legacy_system)
+					if(config.ban_legacy_system && !config.sqlite_enabled && !config.sqlite_bans)
 						usr << "\red Your server is using the legacy banning system, which does not support temporary job bans. Consider upgrading. Aborting ban."
 						return
 					var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
@@ -698,8 +793,21 @@
 					if(!reason)
 						return
 
+					if(config.sqlite_enabled && config.sqlite_bans) // Using SQLite.
+						for(var/job in notbannedlist)
+							sqlite_add_ban(
+								_ckey = M.ckey,
+								_cid = M.computer_id,
+								_ip = M.lastKnownIP,
+								_job = job,
+								_reason = reason,
+								_banningkey = usr.ckey,
+								_expires = mins
+								)
+						return 1
+
 					var/msg
-					for(var/job in notbannedlist)
+					for(var/job in notbannedlist) //MySQL
 						ban_unban_log_save("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins] minutes. reason: [reason]")
 						log_admin("[key_name(usr)] temp-jobbanned [key_name(M)] from [job] for [mins] minutes")
 						feedback_inc("ban_job_tmp",1)
@@ -721,7 +829,22 @@
 					if(!check_rights(R_BAN))  return
 					var/reason = sanitize(input(usr,"Reason?","Please State Reason","") as text|null)
 					if(reason)
+
+						if(config.sqlite_enabled && config.sqlite_bans) // Using SQLite.
+							for(var/job in notbannedlist)
+								sqlite_add_ban(
+									_ckey = M.ckey,
+									_cid = M.computer_id,
+									_ip = M.lastKnownIP,
+									_job = job,
+									_reason = reason,
+									_banningkey = usr.ckey,
+									_expires = null
+									)
+							return 1
+
 						var/msg
+
 						for(var/job in notbannedlist)
 							ban_unban_log_save("[key_name(usr)] perma-jobbanned [key_name(M)] from [job]. reason: [reason]")
 							log_admin("[key_name(usr)] perma-banned [key_name(M)] from [job]")
@@ -824,9 +947,22 @@
 					usr << "<span class='warning'>Moderators can only job tempban up to [config.mod_tempban_max] minutes!</span>"
 					return
 				if(mins >= 525600) mins = 525599
-				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as message|null)
 				if(!reason)
 					return
+				if(config.sqlite_enabled && config.sqlite_bans) // Using SQLite.
+					sqlite_add_ban(
+						_ckey = M.ckey,
+						_cid = M.computer_id,
+						_ip = M.lastKnownIP,
+						_job = null,
+						_reason = reason,
+						_banningkey = usr.ckey,
+						_expires = mins
+						)
+					return
+
+				// Using MySQL.
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
 				ban_unban_log_save("[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.")
 				notes_add(M.ckey,"[usr.client.ckey] has banned [M.ckey]. - Reason: [reason] - This will be removed in [mins] minutes.",usr)
@@ -846,15 +982,41 @@
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
-				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
+				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as message|null)
 				if(!reason)
 					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
 					if("Cancel")	return
 					if("Yes")
-						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
+						if(config.sqlite_enabled && config.sqlite_bans) // SQLite bans
+//							sqlite_add_ban(M.ckey, M.computer_id, M.lastKnownIP, null, reason, usr.ckey, null)
+							sqlite_add_ban(
+								_ckey = M.ckey,
+								_cid = M.computer_id,
+								_ip = M.lastKnownIP,
+								_job = null,
+								_reason = reason,
+								_banningkey = usr.ckey,
+								_expires = null
+								)
+							return
+						else
+							AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0, M.lastKnownIP)
 					if("No")
-						AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
+						if(config.sqlite_enabled && config.sqlite_bans) // SQLite bans
+//							sqlite_add_ban(M.ckey, M.computer_id, "NULL", null, reason, usr.ckey, null)
+							sqlite_add_ban(
+								_ckey = M.ckey,
+								_cid = M.computer_id,
+								_ip = null,
+								_job = null,
+								_reason = reason,
+								_banningkey = usr.ckey,
+								_expires = null
+								)
+							return
+						else
+							AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)
 				M << "\red<BIG><B>You have been banned by [usr.client.ckey].\nReason: [reason].</B></BIG>"
 				M << "\red This is a permanent ban."
 				if(config.banappeals)

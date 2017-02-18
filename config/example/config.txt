@@ -9,6 +9,24 @@ ALERT_RED_UPTO There is an immediate serious threat to the station. Security may
 ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
 ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
 
+## This determines if SQLite is used for the various database functions in favor of the MySQL based system that was used previously.
+#SQLITE_ENABLED
+
+## The SQLite path for the .db file.
+#SQLITE_PATH data/sqlite/station.db
+
+## Use SQLite for bans?  Do not remove the # if you wish to use legacy bans or MySQL bans.
+#SQLITE_BANS
+
+## Use SQLite for player tracking?  Keep a # in front if you wish to use MySQL player tracking instead.
+#SQLITE_PLAYERS
+
+## Use SQLite for play time tracking and restricting of job roles? 
+#SQLITE_PLAYTIME
+
+## Use SQLite for statistical feedback?  Keep a # in front if you wish to use MySQL player tracking instead.
+#SQLITE_STATS
+
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
 

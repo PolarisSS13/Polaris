@@ -104,6 +104,9 @@ var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans
 	)
+var/list/admin_verbs_ban_sqlite = list(
+	/client/proc/sqlite_ban_panel
+	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
@@ -335,7 +338,11 @@ var/list/admin_verbs_mentor = list(
 		verbs += admin_verbs_default
 		if(holder.rights & R_BUILDMODE)		verbs += /client/proc/togglebuildmodeself
 		if(holder.rights & R_ADMIN)			verbs += admin_verbs_admin
-		if(holder.rights & R_BAN)			verbs += admin_verbs_ban
+		if(holder.rights & R_BAN)
+			if(config.sqlite_enabled && config.sqlite_bans) // Using SQLite
+				verbs += admin_verbs_ban_sqlite
+			else //Using MySQL
+				verbs += admin_verbs_ban
 		if(holder.rights & R_FUN)			verbs += admin_verbs_fun
 		if(holder.rights & R_SERVER)		verbs += admin_verbs_server
 		if(holder.rights & R_DEBUG)

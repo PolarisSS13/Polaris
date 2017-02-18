@@ -68,6 +68,7 @@
 
 	if(ticker && ticker.mode)
 		sql_report_death(src)
+		sqlite_report_death(src)
 		ticker.mode.check_win()
 
 	if(wearing_rig)

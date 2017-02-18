@@ -20,6 +20,9 @@ var/jobban_keylist[0]		//to store the keys & ranks
 		if(_jobban_isbanned(M, rank)) return "Reason Unspecified"	//for old jobban
 		*/
 
+		if(config.sqlite_enabled && config.sqlite_bans) // SQLite system.
+			return sqlite_check_is_jobbanned(M, rank)
+
 		if (guest_jobbans(rank))
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"

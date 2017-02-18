@@ -179,3 +179,7 @@
 #define ROLE_SYNTHETIC			"synthetic"
 #define ROLE_UNKNOWN			"unknown"
 #define ROLE_EVERYONE			"everyone"
+
+// Ban types
+#define BAN_SERVERBAN "serverban"
+#define BAN_JOBBAN "jobban"

@@ -223,6 +223,13 @@ var/list/gamemode_cache = list()
 
 	var/show_human_death_message = 1
 
+	var/sqlite_enabled = 0				// Distinct from sql_enabled, in case legacy support is desired.  See config.txt
+	var/sqlite_path = "data/sqlite/station.db" // Location of where the .db file is.
+	var/sqlite_bans = 0  		// If bans should be handled by SQLite in favor of legacy or MySQL.
+	var/sqlite_players = 0		// If player tracking should be handled by SQLite.
+	var/sqlite_playtime = 0
+	var/sqlite_stats = 0		// If statistical feedback should be handled by SQLite.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -296,6 +303,24 @@ var/list/gamemode_cache = list()
 
 				if ("sql_enabled")
 					config.sql_enabled = 1
+
+				if ("sqlite_enabled")
+					config.sqlite_enabled = 1
+
+				if ("sqlite_path")
+					config.sqlite_path = value
+
+				if ("sqlite_bans")
+					config.sqlite_bans = 1
+
+				if ("sqlite_players")
+					config.sqlite_players = 1
+
+				if ("sqlite_playtime")
+					config.sqlite_playtime = 1
+
+				if ("sqlite_stats")
+					config.sqlite_stats = 1
 
 				if ("log_say")
 					config.log_say = 1
