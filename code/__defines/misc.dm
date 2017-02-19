@@ -179,3 +179,13 @@
 #define ROLE_SYNTHETIC			"synthetic"
 #define ROLE_UNKNOWN			"unknown"
 #define ROLE_EVERYONE			"everyone"
+
+//MultiZ directions for ZAS checks.
+#define NORTHUP (NORTH|UP)
+#define EASTUP (EAST|UP)
+#define SOUTHUP (SOUTH|UP)
+#define WESTUP (WEST|UP)
+#define NORTHDOWN (NORTH|DOWN)
+#define EASTDOWN (EAST|DOWN)
+#define SOUTHDOWN (SOUTH|DOWN)
+#define WESTDOWN (WEST|DOWN)
