@@ -72,25 +72,87 @@
 
 /datum/language/skrell
 	name = LANGUAGE_SKRELLIAN
-	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
+	desc = "A melodic set of warbles and humms, the language itself a complex mesh of both melodic and rhythmic components, exceptionally capable of conveying intent and emotion of the speaker."
+	speech_verb = "warbles"
+	ask_verb = "warbles"
+	exclaim_verb = "sings"
+	whisper_verb = "hums"
+	colour = "skrell"
+	key = "k"
+	space_chance = 30
+	flags = WHITELISTED
+	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!", "'")
+
+/datum/language/qerrkatish
+	name = LANGUAGE_QERRKATISH
+	desc = "Qerr-Katish Skrellian is used to formulate clear cut, sober statements and propositions"
 	speech_verb = "warbles"
 	ask_verb = "warbles"
 	exclaim_verb = "warbles"
+	whisper_verb = "hums"
 	colour = "skrell"
-	key = "k"
+	key = "y"
+	space_chance = 40
 	flags = WHITELISTED
-	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
+	syllables = list("kir","quer","xuq","quil","qum","xum","vol","zrim","zoo","qix","qoo","zix","xim","vir")
 
 /datum/language/human
 	name = LANGUAGE_SOL_COMMON
-	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
+	desc = "A bastardized hybrid of many languages, including Chinese, English, French, and more; it is the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
 	key = "1"
 	flags = WHITELISTED
-
 	//syllables are at the bottom of the file
+
+/datum/language/english
+	name = LANGUAGE_ENGLISH
+	desc = "The lingua franca of old Earth, Common English is a distant child of modern English incorporating lend-words from all over the globe into the english grammar structure."
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "solcom"
+	key = "p"
+	flags = WHITELISTED
+	syllables = list(
+    		"al", "an", "ar", "as", "at", "ea", "ed", "en", "er", "es", "ha", "he", "hi", "in", "is", "it",
+			"le", "me", "nd", "ne", "ng", "nt", "on", "or", "ou", "re", "se", "st", "te", "th", "ti", "to",
+			"ve", "wa", "all", "and", "are", "but", "ent", "era", "ere", "eve", "for", "had", "hat", "hen", "her", "hin"
+			)
+
+/datum/language/russian
+	name = LANGUAGE_RUSSIAN
+	desc = "A syncretic mixture of the eastern european languages developed over centuries of relatively peaceful contact."
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "solcom"
+	key = "5"
+	flags = WHITELISTED
+	syllables = list(
+    		"ah", "be", "bo", "eh", "ep", "et", "ka", "ko", "ha", "he", "ho", "ob", "oh", "op", "oc", "ot", "pa", "pe", "ct", "ta", "te", "to",
+			"vse", "tak", "nak", "no", "epo", "pre", "kan", "dly", "ime", "sha", "kur", "yey", "khi", "yeg", "ne",
+			"ion", "ne", "nas", "v"
+		)
+
+/datum/language/arabic
+	name = LANGUAGE_ARABIC
+	desc = "Lughatina is a closely knit diaspora of languages deeply influenced by old Earth Hindi and Arabic."
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "solcom"
+	key = "8"
+	flags = WHITELISTED
+	syllables = list("ra","dal","ta","kaf","hamza","zay","sin","ya","raa","dhaal","laam","faa","qaaf","ha")
+
+/datum/language/chinese
+	name = LANGUAGE_CHINESE
+	desc = "Also called Hanhonghua in the language, Nihangyo is the pan eastern asian language, incorporating many elements of Burmese, Korean, Chinese and Japanese."
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "solcom"
+	key = "a"
+	flags = WHITELISTED
+	//Syllables here are also at the bottom.
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
@@ -118,7 +180,7 @@
 	colour = "changeling"
 	key = "6"
 	flags = NO_STUTTER
-	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz","shh","shk")
 	space_chance = 10
 
 /datum/language/machine/can_speak_special(var/mob/speaker)
@@ -155,9 +217,13 @@
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,
 	and the english syllables had to be duplicated so that there is roughly a 50-50 weighting.
+	The other 3 languages were duplicated just so they could show occasionally.
 
 	Sources:
 	http://www.sttmedia.com/syllablefrequency-english
+	http://www.sttmedia.com/syllablefrequency-spanish
+	http://www.sttmedia.com/syllablefrequency-russian
+	http://www.sttmedia.com/syllablefrequency-french
 	http://www.chinahighlights.com/travelguide/learning-chinese/pinyin-syllables.htm
 */
 /datum/language/human/syllables = list(
@@ -210,4 +276,58 @@
 "al", "an", "ar", "as", "at", "ea", "ed", "en", "er", "es", "ha", "he", "hi", "in", "is", "it",
 "le", "me", "nd", "ne", "ng", "nt", "on", "or", "ou", "re", "se", "st", "te", "th", "ti", "to",
 "ve", "wa", "all", "and", "are", "but", "ent", "era", "ere", "eve", "for", "had", "hat", "hen", "her", "hin",
-"his", "ing", "ion", "ith", "not", "ome", "oul", "our", "sho", "ted", "ter", "tha", "the", "thi")
+"his", "ing", "ion", "ith", "not", "ome", "oul", "our", "sho", "ted", "ter", "tha", "the", "thi",
+"ah", "be", "bo", "eh", "ep", "et", "ka", "ko", "ha", "he", "ho", "ob", "oh", "op", "oc", "ot", "pa", "pe", "ct", "ta", "te", "to",
+"vse", "tak", "nak", "no", "epo", "pre", "kan", "dly", "ime", "sha", "kur", "yey", "khi", "yeg", "ne",
+"ion", "ne", "nas", "v",
+"ah", "be", "bo", "eh", "ep", "et", "ka", "ko", "ha", "he", "ho", "ob", "oh", "op", "oc", "ot", "pa", "pe", "ct", "ta", "te", "to",
+"vse", "tak", "nak", "no", "epo", "pre", "kan", "dly", "ime", "sha", "kur", "yey", "khi", "yeg", "ne",
+"ion", "ne", "nas", "v",
+"ah", "be", "bo", "eh", "ep", "et", "ka", "ko", "ha", "he", "ho", "ob", "oh", "op", "oc", "ot", "pa", "pe", "ct", "ta", "te", "to",
+"vse", "tak", "nak", "no", "epo", "pre", "kan", "dly", "ime", "sha", "kur", "yey", "khi", "yeg", "ne",
+"ion", "ne", "nas", "v",
+"ai", "an", "ar", "au", "ce", "ch", "co", "de", "em", "en", "er", "es", "et", "eu", "il", "in", "is", "la", "le",
+"ma", "me", "ne", "ns", "nt", "on", "ou", "pa", "qu", "ra", "re", "se", "te", "ti", "tr", "ue", "ur", "us", "ve",
+"tou", "e", "eve", "hen", "son", "non", "not", "le",
+"ai", "an", "ar", "au", "ce", "ch", "co", "de", "em", "en", "er", "es", "et", "eu", "il", "in", "is", "la", "le",
+"ma", "me", "ne", "ns", "nt", "on", "ou", "pa", "qu", "ra", "re", "se", "te", "ti", "tr", "ue", "ur", "us", "ve",
+"tou", "e", "eve", "hen", "son", "non", "not", "le",
+"ai", "an", "ar", "au", "ce", "ch", "co", "de", "em", "en", "er", "es", "et", "eu", "il", "in", "is", "la", "le",
+"ma", "me", "ne", "ns", "nt", "on", "ou", "pa", "qu", "ra", "re", "se", "te", "ti", "tr", "ue", "ur", "us", "ve",
+"tou", "e", "eve", "hen", "son", "non", "not", "le",
+"ad", "al", "an", "ar", "as", "ci", "co", "de", "do", "el", "en", "er", "es", "ie", "in", "la", "lo", "me", "na",
+"no", "nt", "or", "os", "pa", "qu", "ra", "re", "ro", "se", "st", "ta", "te", "to", "ue", "un",
+"tod", "ser", "su", "no", "nue", "el",
+"ad", "al", "an", "ar", "as", "ci", "co", "de", "do", "el", "en", "er", "es", "ie", "in", "la", "lo", "me", "na",
+"no", "nt", "or", "os", "pa", "qu", "ra", "re", "ro", "se", "st", "ta", "te", "to", "ue", "un",
+"tod", "ser", "su", "no", "nue", "el",
+"ad", "al", "an", "ar", "as", "ci", "co", "de", "do", "el", "en", "er", "es", "ie", "in", "la", "lo", "me", "na",
+"no", "nt", "or", "os", "pa", "qu", "ra", "re", "ro", "se", "st", "ta", "te", "to", "ue", "un",
+"tod", "ser", "su", "no", "nue", "el")
+
+/datum/language/chinese/syllables = list("a", "ai", "an", "ang", "ao", "ba", "bai", "ban", "bang", "bao", "bei", "ben", "beng", "bi", "bian", "biao",
+"bie", "bin", "bing", "bo", "bu", "ca", "cai", "can", "cang", "cao", "ce", "cei", "cen", "ceng", "cha", "chai",
+"chan", "chang", "chao", "che", "chen", "cheng", "chi", "chong", "chou", "chu", "chua", "chuai", "chuan", "chuang", "chui", "chun",
+"chuo", "ci", "cong", "cou", "cu", "cuan", "cui", "cun", "cuo", "da", "dai", "dan", "dang", "dao", "de", "dei",
+"den", "deng", "di", "dian", "diao", "die", "ding", "diu", "dong", "dou", "du", "duan", "dui", "dun", "duo", "e",
+"ei", "en", "er", "fa", "fan", "fang", "fei", "fen", "feng", "fo", "fou", "fu", "ga", "gai", "gan", "gang",
+"gao", "ge", "gei", "gen", "geng", "gong", "gou", "gu", "gua", "guai", "guan", "guang", "gui", "gun", "guo", "ha",
+"hai", "han", "hang", "hao", "he", "hei", "hen", "heng", "hm", "hng", "hong", "hou", "hu", "hua", "huai", "huan",
+"huang", "hui", "hun", "huo", "ji", "jia", "jian", "jiang", "jiao", "jie", "jin", "jing", "jiong", "jiu", "ju", "juan",
+"jue", "jun", "ka", "kai", "kan", "kang", "kao", "ke", "kei", "ken", "keng", "kong", "kou", "ku", "kua", "kuai",
+"kuan", "kuang", "kui", "kun", "kuo", "la", "lai", "lan", "lang", "lao", "le", "lei", "leng", "li", "lia", "lian",
+"liang", "liao", "lie", "lin", "ling", "liu", "long", "lou", "lu", "luan", "lun", "luo", "ma", "mai", "man", "mang",
+"mao", "me", "mei", "men", "meng", "mi", "mian", "miao", "mie", "min", "ming", "miu", "mo", "mou", "mu", "na",
+"nai", "nan", "nang", "nao", "ne", "nei", "nen", "neng", "ng", "ni", "nian", "niang", "niao", "nie", "nin", "ning",
+"niu", "nong", "nou", "nu", "nuan", "nuo", "o", "ou", "pa", "pai", "pan", "pang", "pao", "pei", "pen", "peng",
+"pi", "pian", "piao", "pie", "pin", "ping", "po", "pou", "pu", "qi", "qia", "qian", "qiang", "qiao", "qie", "qin",
+"qing", "qiong", "qiu", "qu", "quan", "que", "qun", "ran", "rang", "rao", "re", "ren", "reng", "ri", "rong", "rou",
+"ru", "rua", "ruan", "rui", "run", "ruo", "sa", "sai", "san", "sang", "sao", "se", "sei", "sen", "seng", "sha",
+"shai", "shan", "shang", "shao", "she", "shei", "shen", "sheng", "shi", "shou", "shu", "shua", "shuai", "shuan", "shuang", "shui",
+"shun", "shuo", "si", "song", "sou", "su", "suan", "sui", "sun", "suo", "ta", "tai", "tan", "tang", "tao", "te",
+"teng", "ti", "tian", "tiao", "tie", "ting", "tong", "tou", "tu", "tuan", "tui", "tun", "tuo", "wa", "wai", "wan",
+"wang", "wei", "wen", "weng", "wo", "wu", "xi", "xia", "xian", "xiang", "xiao", "xie", "xin", "xing", "xiong", "xiu",
+"xu", "xuan", "xue", "xun", "ya", "yan", "yang", "yao", "ye", "yi", "yin", "ying", "yong", "you", "yu", "yuan",
+"yue", "yun", "za", "zai", "zan", "zang", "zao", "ze", "zei", "zen", "zeng", "zha", "zhai", "zhan", "zhang", "zhao",
+"zhe", "zhei", "zhen", "zheng", "zhi", "zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang", "zhui", "zhun", "zhuo", "zi",
+"zong", "zou", "zuan", "zui", "zun", "zuo", "zu")
