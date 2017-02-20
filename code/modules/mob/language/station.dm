@@ -72,7 +72,7 @@
 
 /datum/language/skrell
 	name = LANGUAGE_SKRELLIAN
-	desc = "A melodic set of warbles and humms, the language itself a complex mesh of both melodic and rhythmic components, exceptionally capable of conveying intent and emotion of the speaker."
+	desc = "A melodic set of warbles and hums, the language itself a complex mesh of both melodic and rhythmic components, exceptionally capable of conveying intent and emotion of the speaker."
 	speech_verb = "warbles"
 	ask_verb = "warbles"
 	exclaim_verb = "sings"
