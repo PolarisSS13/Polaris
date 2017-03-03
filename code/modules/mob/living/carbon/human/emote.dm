@@ -626,11 +626,11 @@
 				if(!muzzled)
 					message = "[species.scream_verb]!"
 					m_type = 2
-					if(gender == FEMALE)
-						//playsound(loc, "[species.female_scream_sound]", 80, 1)
+					/*if(gender == FEMALE)
+						playsound(loc, "[species.female_scream_sound]", 80, 1)
 					else
-						//playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
-
+						playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
+					*/
 				else
 					message = "makes a very loud noise."
 					m_type = 2
