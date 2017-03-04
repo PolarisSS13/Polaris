@@ -533,7 +533,8 @@ var/global/list/robot_modules = list(
 					"CUPCAKE" = "Noble-SRV",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
-					"Eyebot" = "eyebot-standard"
+					"Eyebot - Hydro" = "eyebot-standard"
+					"Eyebot - Service" = "eyebot-clerical"
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
