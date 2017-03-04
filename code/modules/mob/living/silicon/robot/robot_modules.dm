@@ -520,15 +520,17 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/clerical/butler
 	sprites = list(
-					"Default" = "robotServ",
-					"Sleek" = "sleekservice",
+					"Default - Service" = "robot"
+					"Default - Hydro" = "robotServ",
+					"Sleek - Service" = "sleekstandard"
+					"Sleek - Hydro" = "sleekservice",
+					"Standard" = "Service2",
 					"Waitress" = "Service",
-					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
+					"Kent" = "toiletbot",
 					"Heavy" = "heavyServ",
 					"CUPCAKE" = "Noble-SRV",
-					"Standard" = "Service2",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
 					"Eyebot" = "eyebot-standard"
@@ -579,7 +581,7 @@ var/global/list/robot_modules = list(
 					"Standard" = "Service2",
 					"Spider" = "spidercom",
 					"Drone" = "drone-blu",
-					"Eyebot" = "eyebot-standard"
+					"Eyebot" = "eyebot-clerical"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
