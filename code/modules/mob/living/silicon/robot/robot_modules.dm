@@ -158,10 +158,15 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
-	sprites = list(	"Basic" = "robot_old",
-					"Android" = "droid",
+	sprites = list(
 					"Default" = "robot",
+					"Sleek" = "sleekstandard",
+					"Basic" = "robot_old",
+					"CUPCAKE" = "Noble-STD"
+					"Android" = "droid",
+					"Spider" = "spider",
 					"Drone" = "drone-standard"
+					"Eyebot" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/robot/standard/New()
@@ -181,11 +186,16 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/surgeon
 	name = "surgeon robot module"
 	sprites = list(
+					"Default" = "robotMedi",
+					"Sleek" = "cmoborg",
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
+					"Heavy" = "heavyMed",
+					"CUPCAKE" = "Noble-MED",
 					"Advanced Droid" = "droid-medical",
-					"Needles" = "medicalrobot",
-					"Drone" = "drone-surgery"
+					"Cyborg" = "medicalrobot",
+					"Drone" = "drone-surgery",
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
@@ -229,12 +239,18 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/crisis
 	name = "crisis robot module"
 	sprites = list(
+					"Default" = "robotMedi",
+					"Sleek - Medical" = "cmoborg",
+					"Sleek - Crisis" = "sleekmedic",
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
+					"Heavy" = "heavyMed",
+					"CUPCAKE" = "Noble-MED",
 					"Advanced Droid" = "droid-medical",
-					"Needles" = "medicalrobot",
+					"Cyborg" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry"
+					"Drone - Chemistry" = "drone-chemistry",
+					"Eyebot" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -294,11 +310,18 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
 	sprites = list(
+					"Default" = "robotEngi",
+					"Sleek - Electrician" = "sleekengineering"
+					"Sleek - Construction" = "ceborg",
 					"Basic" = "Engineering",
 					"Antique" = "engineerrobot",
+					"Heavy" = "heavyEng",
+					"CUPCAKE" = "Noble-ENG",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Drone" = "drone-engineer"
+					"Spider" = "spidereng",
+					"Drone" = "drone-engineer",
+					"Eyebot" = "eyebot-engineering"
 					)
 
 /obj/item/weapon/robot_module/robot/engineering/construction
@@ -407,12 +430,17 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/security/general
 	sprites = list(
+					"Default" = "robotSecy",
+					"Standard" = "securityrobot",
 					"Basic" = "secborg",
-					"Red Knight" = "Security",
-					"Black Knight" = "securityrobot",
+					"Sleek - Patrol" = "Security",
+					"Sleek - Riot" = "hosborg",
+					"CUPCAKE" = "Noble-SEC",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Drone" = "drone-sec"
+					"Spider" = "spidersec",
+					"Drone" = "drone-sec",
+					"Eyebot" = "eyebot-security"
 				)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -447,10 +475,14 @@ var/global/list/robot_modules = list(
 	name = "janitorial robot module"
 	channels = list("Service" = 1)
 	sprites = list(
+					"Default" = "robotJani",
 					"Basic" = "JanBot2",
+					"Sleek" = "sleekjanitor",
 					"Mopbot"  = "janitorrobot",
+					"CUPCAKE" = "Noble-CLN"
 					"Mop Gear Rex" = "mopgearrex",
-					"Drone" = "drone-janitor"
+					"Drone" = "drone-janitor",
+					"Eyebot" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -487,13 +519,19 @@ var/global/list/robot_modules = list(
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/butler
-	sprites = list(	"Waitress" = "Service",
+	sprites = list(
+					"Default" = "robotServ",
+					"Sleek" = "sleekservice",
+					"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
-					"Default" = "Service2",
+					"Heavy" = "heavyServ",
+					"CUPCAKE" = "Noble-SRV"
+					"Standard" = "Service2",
 					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro"
+					"Drone - Hydro" = "drone-hydro",
+					"Eyebot" = "eyebot-standard"
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
@@ -531,12 +569,17 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/clerical/general
 	name = "clerical robot module"
 	sprites = list(
+					"Default" = "robotCler",
+					"Sleek" = "captainborg",
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
-					"Default" = "Service2",
-					"Drone" = "drone-service"
+					"Classic" = "clericalrobot",
+					"Standard" = "Service2",
+					"Spider" = "spidercom",
+					"Drone" = "drone-blu",
+					"Eyebot" = "eyebot-standard"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
@@ -562,10 +605,16 @@ var/global/list/robot_modules = list(
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
+					"Default" = "robotMine",
+					"Sleek" = "sleekminer",
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
+					"Heavy" = "heavyMine",
+					"CUPCAKE" = "Noble-DIG"
 					"Treadhead" = "Miner",
-					"Drone" = "drone-miner"
+					"Spider" = "spidermining",
+					"Drone" = "drone-miner",
+					"Eyebot" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -585,8 +634,11 @@ var/global/list/robot_modules = list(
 	name = "research module"
 	channels = list("Science" = 1)
 	sprites = list(
+					"Sleek - Development" = "sleekscience",
+					"Sleek - Hazard" = "rdborg",
 					"Droid" = "droid-science",
-					"Drone" = "drone-science"
+					"Drone" = "drone-science",
+					"Eyebot" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/robot/research/New()
@@ -640,7 +692,9 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIGN	 = 0
 					)
 	sprites = list(
+					"Sleek" = "hosborg",
 					"Dread" = "securityrobot",
+					"Spider" = "spidersec"
 				)
 	var/id
 
