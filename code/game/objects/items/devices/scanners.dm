@@ -237,6 +237,7 @@ REAGENT SCANNER
 		return
 
 	analyze_gases(src, user)
+	flick("atmos2", src)
 	return
 
 /obj/item/device/mass_spectrometer
