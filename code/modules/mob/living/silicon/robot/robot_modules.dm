@@ -159,14 +159,14 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
 	sprites = list(
-					"Default" = "robot",
-					"Sleek" = "sleekstandard",
-					"Basic" = "robot_old",
+					"M-USE NanoTrasen" = "robot",
+					"WTOperator" = "sleekstandard",
 					"CUPCAKE" = "Noble-STD",
+					"XI-GUS" = "spider",
+					"Basic" = "robot_old",
 					"Android" = "droid",
-					"Spider" = "spider",
 					"Drone" = "drone-standard",
-					"Eyebot" = "eyebot-standard"
+					"Cabeiri" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/robot/standard/New()
@@ -186,16 +186,16 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/surgeon
 	name = "surgeon robot module"
 	sprites = list(
-					"Default" = "robotMedi",
-					"Sleek" = "cmoborg",
+					"M-USE NanoTrasen" = "robotMedi",
+					"WTOperator" = "cmoborg",
+					"CUPCAKE" = "Noble-MED",
+					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
-					"Heavy" = "heavyMed",
-					"CUPCAKE" = "Noble-MED",
 					"Advanced Droid" = "droid-medical",
 					"Cyborg" = "medicalrobot",
 					"Drone" = "drone-surgery",
-					"Eyebot" = "eyebot-medical"
+					"Cabeiri" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
@@ -239,18 +239,17 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/crisis
 	name = "crisis robot module"
 	sprites = list(
-					"Default" = "robotMedi",
-					"Sleek - Medical" = "cmoborg",
-					"Sleek - Crisis" = "sleekmedic",
+					"M-USE NanoTrasen" = "robotMedi",
+					"WTOperator" = "sleekmedic",
+					"CUPCAKE" = "Noble-MED",
+					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
 					"Standard" = "surgeon",
-					"Heavy" = "heavyMed",
-					"CUPCAKE" = "Noble-MED",
 					"Advanced Droid" = "droid-medical",
 					"Cyborg" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
 					"Drone - Chemistry" = "drone-chemistry",
-					"Eyebot" = "eyebot-medical"
+					"Cabeiri" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -310,18 +309,17 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
 	sprites = list(
-					"Default" = "robotEngi",
-					"Sleek - Electrician" = "sleekengineer",
-					"Sleek - Construction" = "ceborg",
+					"M-USE NanoTrasen" = "robotEngi",
+					"WTOperator" = "ceborg",
+					"CUPCAKE" = "Noble-ENG",
+					"XI-GUS" = "spidereng",
+					"XI-ALP" = "heavyEng",
 					"Basic" = "Engineering",
 					"Antique" = "engineerrobot",
-					"Heavy" = "heavyEng",
-					"CUPCAKE" = "Noble-ENG",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Spider" = "spidereng",
 					"Drone" = "drone-engineer",
-					"Eyebot" = "eyebot-engineering"
+					"Cabeiri" = "eyebot-engineering"
 					)
 
 /obj/item/weapon/robot_module/robot/engineering/construction
@@ -430,17 +428,16 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/security/general
 	sprites = list(
-					"Default" = "robotSecy",
-					"Standard" = "securityrobot",
-					"Basic" = "secborg",
-					"Sleek - Patrol" = "Security",
-					"Sleek - Riot" = "hosborg",
+					"M-USE NanoTrasen" = "robotSecy",
+					"WTOperator" = "Security",
 					"CUPCAKE" = "Noble-SEC",
+					"XI-GUS" = "spidersec",
+					"Basic" = "secborg",
+					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Spider" = "spidersec",
 					"Drone" = "drone-sec",
-					"Eyebot" = "eyebot-security"
+					"Cabeiri" = "eyebot-security"
 				)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -475,14 +472,14 @@ var/global/list/robot_modules = list(
 	name = "janitorial robot module"
 	channels = list("Service" = 1)
 	sprites = list(
-					"Default" = "robotJani",
-					"Basic" = "JanBot2",
-					"Sleek" = "sleekjanitor",
-					"Mopbot"  = "janitorrobot",
+					"M-USE NanoTrasen" = "robotJani",
+					"WTOperator" = "sleekjanitor",
 					"CUPCAKE" = "Noble-CLN",
+					"Basic" = "JanBot2",
+					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor",
-					"Eyebot" = "eyebot-janitor"
+					"Cabeiri" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -520,18 +517,18 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/clerical/butler
 	sprites = list(
-					"Default" = "robotServ",
-					"Sleek" = "sleekservice",
+					"M-USE NanoTrasen" = "robotServ",
+					"WTOperator" = "sleekservice",
+					"CUPCAKE" = "Noble-SRV",
+					"XI-ALP" = "heavyServ",
 					"Standard" = "Service2",
 					"Waitress" = "Service",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Kent" = "toiletbot",
-					"Heavy" = "heavyServ",
-					"CUPCAKE" = "Noble-SRV",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
-					"Eyebot" = "eyebot-clerical",
+					"Cabeiri" = "eyebot-clerical",
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
@@ -569,17 +566,17 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/clerical/general
 	name = "clerical robot module"
 	sprites = list(
-					"Default" = "robotCler",
-					"Sleek" = "captainborg",
+					"M-USE NanoTrasen" = "robotCler",
+					"WTOperator" = "sleekclerical",
+					"XI-GUS" = "spidercom",
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Classic" = "clericalrobot",
 					"Standard" = "Service2",
-					"Spider" = "spidercom",
 					"Drone" = "drone-blu",
-					"Eyebot" = "eyebot-clerical"
+					"Cabeiri" = "eyebot-clerical"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
@@ -605,16 +602,16 @@ var/global/list/robot_modules = list(
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
-					"Default" = "robotMine",
-					"Sleek" = "sleekminer",
+					"NM-USE NanoTrasen" = "robotMine",
+					"WTOperator" = "sleekminer",
+					"XI-GUS" = "spidermining",
+					"XI-ALP" = "heavyMine",
+					"CUPCAKE" = "Noble-DIG",
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
-					"Heavy" = "heavyMine",
-					"CUPCAKE" = "Noble-DIG",
 					"Treadhead" = "Miner",
-					"Spider" = "spidermining",
 					"Drone" = "drone-miner",
-					"Eyebot" = "eyebot-miner"
+					"Cabeiri" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -634,11 +631,10 @@ var/global/list/robot_modules = list(
 	name = "research module"
 	channels = list("Science" = 1)
 	sprites = list(
-					"Sleek - Development" = "sleekscience",
-					"Sleek - Hazard" = "rdborg",
+					"WTOperator" = "sleekscience",
 					"Droid" = "droid-science",
 					"Drone" = "drone-science",
-					"Eyebot" = "eyebot-science"
+					"Cabeiri" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/robot/research/New()
@@ -692,9 +688,8 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIGN	 = 0
 					)
 	sprites = list(
-					"Sleek" = "hosborg",
-					"Dread" = "securityrobot",
-					"Spider" = "spidersec"
+					"OPERATOR" = "hosborg",
+					"Dread" = "securityrobot"
 				)
 	var/id
 
