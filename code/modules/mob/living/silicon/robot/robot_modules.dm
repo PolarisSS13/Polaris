@@ -165,6 +165,7 @@ var/global/list/robot_modules = list(
 					"XI-GUS" = "spider",
 					"Basic" = "robot_old",
 					"Android" = "droid",
+					"Telemachus" = "toiletbot",
 					"Drone" = "drone-standard",
 					"Cabeiri" = "eyebot-standard"
 				  )
@@ -191,8 +192,8 @@ var/global/list/robot_modules = list(
 					"CUPCAKE" = "Noble-MED",
 					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
-					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
+					"Telemachus" = "toiletbotmedical",
 					"Cyborg" = "medicalrobot",
 					"Drone" = "drone-surgery",
 					"Cabeiri" = "eyebot-medical"
@@ -244,9 +245,9 @@ var/global/list/robot_modules = list(
 					"CUPCAKE" = "Noble-MED",
 					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
-					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
 					"Cyborg" = "medicalrobot",
+					"Telemachus" = "toiletbotmedical",
 					"Drone - Medical" = "drone-medical",
 					"Drone - Chemistry" = "drone-chemistry",
 					"Cabeiri" = "eyebot-medical"
@@ -318,6 +319,7 @@ var/global/list/robot_modules = list(
 					"Antique" = "engineerrobot",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
+					"Telemachus" = "toiletbotengineering",
 					"Drone" = "drone-engineer",
 					"Cabeiri" = "eyebot-engineering"
 					)
@@ -436,6 +438,7 @@ var/global/list/robot_modules = list(
 					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
+					"Telemachus" = "toiletsecurity",
 					"Drone" = "drone-sec",
 					"Cabeiri" = "eyebot-security"
 				)
@@ -478,6 +481,7 @@ var/global/list/robot_modules = list(
 					"Basic" = "JanBot2",
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
+					"Telemachus" = "toiletbotjanitor",
 					"Drone" = "drone-janitor",
 					"Cabeiri" = "eyebot-janitor"
 					)
@@ -525,7 +529,7 @@ var/global/list/robot_modules = list(
 					"Waitress" = "Service",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
-					"Kent" = "toiletbot",
+					"Telemachus" = "toiletbot",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro",
 					"Cabeiri" = "eyebot-clerical",
@@ -575,6 +579,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Classic" = "clericalrobot",
 					"Standard" = "Service2",
+					"Telemachus" = "toiletbot",
 					"Drone" = "drone-blu",
 					"Cabeiri" = "eyebot-clerical"
 					)
@@ -610,6 +615,7 @@ var/global/list/robot_modules = list(
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
+					"Telemachus" = "toiletbotminer",
 					"Drone" = "drone-miner",
 					"Cabeiri" = "eyebot-miner"
 				)
@@ -689,7 +695,8 @@ var/global/list/robot_modules = list(
 					)
 	sprites = list(
 					"OPERATOR" = "hosborg",
-					"Dread" = "securityrobot"
+					"Dread" = "securityrobot",
+					"ACHILLES" = "toiletbotcombat"
 				)
 	var/id
 
