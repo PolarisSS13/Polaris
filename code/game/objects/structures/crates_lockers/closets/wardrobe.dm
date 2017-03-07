@@ -382,7 +382,7 @@
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/weapon/storage/backpack(src)
 	new /obj/item/weapon/storage/backpack(src)
-	new /obj/item/weapon/storage/backpack/satchelsrc)
+	new /obj/item/weapon/storage/backpack/satchel(src)
 	new /obj/item/weapon/storage/backpack/satchel(src)
 	return
 
