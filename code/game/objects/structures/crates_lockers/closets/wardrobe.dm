@@ -374,16 +374,16 @@
 	..()
 	new /obj/item/clothing/under/rank/roboticist(src)
 	new /obj/item/clothing/under/rank/roboticist(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/robotics(src)
+	new /obj/item/clothing/suit/storage/toggle/labcoat/robotics(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/gloves/black(src)
-	new /obj/item/weapon/storage/backpack/toxins(src)
-	new /obj/item/weapon/storage/backpack/toxins(src)
-	new /obj/item/weapon/storage/backpack/satchel/tox(src)
-	new /obj/item/weapon/storage/backpack/satchel/tox(src)
+	new /obj/item/weapon/storage/backpack(src)
+	new /obj/item/weapon/storage/backpack(src)
+	new /obj/item/weapon/storage/backpack/satchelsrc)
+	new /obj/item/weapon/storage/backpack/satchel(src)
 	return
 
 

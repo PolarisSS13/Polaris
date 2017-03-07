@@ -134,5 +134,5 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/roboticist(H), slot_r_store)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
+		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/robotics(H), slot_wear_suit)
 		return 1
