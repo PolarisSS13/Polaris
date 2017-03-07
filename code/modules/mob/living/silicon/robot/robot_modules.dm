@@ -694,9 +694,7 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIGN	 = 0
 					)
 	sprites = list(
-					"OPERATOR" = "hosborg",
-					"Dread" = "securityrobot",
-					"ACHILLES" = "toiletbotcombat"
+					"Dread" = "securityrobot"
 				)
 	var/id
 
