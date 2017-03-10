@@ -525,8 +525,8 @@
 	icon_closed = "engi_e_crate"
 
 /obj/structure/closet/crate/science
- 	name = "science crate"
- 	icon_state = "scicrate"
+	name = "science crate"
+	icon_state = "scicrate"
 	icon_opened = "scicrateopen"
 	icon_closed = "scicrate"
 
