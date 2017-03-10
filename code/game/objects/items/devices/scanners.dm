@@ -68,6 +68,7 @@ REAGENT SCANNER
 		OX = fake_oxy > 50 			? 	"<b>[fake_oxy]</b>" 			: fake_oxy
 		user.show_message("<span class='notice'>Analyzing Results for [M]:</span>")
 		user.show_message("<span class='notice'>Overall Status: dead</span>")
+		flick("health1", src)
 	else
 		user.show_message("<span class='notice'>Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "dead" : "[round((M.health/M.maxHealth)*100) ]% healthy"]</span>")
 	user.show_message("<span class='notice'>    Key: <font color='cyan'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font></span>", 1)

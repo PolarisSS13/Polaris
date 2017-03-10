@@ -283,14 +283,12 @@
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
 	cost = 2
+	path = /obj/item/weapon/storage/belt/fannypack
+
 
 /datum/gear/accessory/fannypack/New()
 	..()
-	var/list/fannys = list()
-	for(var/fanny in typesof(/obj/item/weapon/storage/belt/fannypack))
-		var/obj/item/weapon/storage/belt/fannypack/fanny_type = fanny
-		fannys[initial(fanny_type.name)] = fanny_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
+	gear_tweaks = list(gear_tweak_free_color_choice)
 
 /datum/gear/accessory/webbing
 	display_name = "webbing, simple"

@@ -5,6 +5,11 @@
 	slot = slot_shoes
 	sort_category = "Shoes and Footwear"
 
+/datum/gear/shoes/whiteboots
+	display_name = "white jackboots"
+	path = /obj/item/clothing/shoes/boots/jackboots/white
+	slot = slot_shoes
+
 /datum/gear/shoes/toeless
 	display_name = "toe-less jackboots"
 	path = /obj/item/clothing/shoes/boots/jackboots/toeless
@@ -64,42 +69,6 @@
 /datum/gear/shoes/red
 	display_name = "shoes, red"
 	path = /obj/item/clothing/shoes/red
-
-/datum/gear/shoes/white
-	display_name = "shoes, white"
-	path = /obj/item/clothing/shoes/white
-
-/datum/gear/shoes/yellow
-	display_name = "shoes, yellow"
-	path = /obj/item/clothing/shoes/yellow
-
-/datum/gear/shoes/flats
-	display_name = "flats, black"
-	path = /obj/item/clothing/shoes/flats
-
-/datum/gear/shoes/flats/blue
-	display_name = "flats, blue"
-	path = /obj/item/clothing/shoes/flats/blue
-
-/datum/gear/shoes/flats/brown
-	display_name = "flats, brown"
-	path = /obj/item/clothing/shoes/flats/brown
-
-/datum/gear/shoes/flats/orange
-	display_name = "flats, orange"
-	path = /obj/item/clothing/shoes/flats/orange
-
-/datum/gear/shoes/flats/purple
-	display_name = "flats, purple"
-	path = /obj/item/clothing/shoes/flats/purple
-
-/datum/gear/shoes/flats/red
-	display_name = "flats, red"
-	path = /obj/item/clothing/shoes/flats/red
-
-/datum/gear/shoes/flats/white
-	display_name = "flats, white"
-	path = /obj/item/clothing/shoes/flats/white
 
 /datum/gear/shoes/flipflops
 	display_name = "flip flops"

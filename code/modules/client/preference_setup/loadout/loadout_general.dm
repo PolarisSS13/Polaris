@@ -1,3 +1,7 @@
+/datum/gear/browncane
+	display_name = "brown cane"
+	path = /obj/item/weapon/cane/brown
+
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
