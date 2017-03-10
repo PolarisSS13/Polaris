@@ -97,6 +97,7 @@
 	O.forceMove(src)
 	occupant = O
 	icon_state = "body_scanner_1"
+	playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 	add_fingerprint(user)
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
