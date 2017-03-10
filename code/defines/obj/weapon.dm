@@ -74,13 +74,6 @@
 	throw_speed = 4
 	throw_range = 5
 
-/obj/item/weapon/cane/brown
-	name = "brown cane"
-	desc = "A lovely mahogany cane used by a true gentlemen. Or a clown."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "browncane"
-	item_sate = "browncane"
-
 /obj/item/weapon/cane
 	name = "cane"
 	desc = "A cane used by a true gentlemen. Or a clown."
@@ -97,6 +90,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
+/obj/item/weapon/cane/brown
+	name = "brown cane"
+	desc = "A lovely mahogany cane used by a true gentlemen. Or a clown."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "browncane"
 
 /obj/item/weapon/cane/concealed
 	var/concealed_blade

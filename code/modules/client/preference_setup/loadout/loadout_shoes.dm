@@ -8,7 +8,6 @@
 /datum/gear/shoes/whiteboots
 	display_name = "white jackboots"
 	path = /obj/item/clothing/shoes/boots/jackboots/white
-	slot = slot_shoes
 
 /datum/gear/shoes/toeless
 	display_name = "toe-less jackboots"
@@ -69,6 +68,14 @@
 /datum/gear/shoes/red
 	display_name = "shoes, red"
 	path = /obj/item/clothing/shoes/red
+
+/datum/gear/shoes/white
+	display_name = "shoes, white"
+	path = /obj/item/clothing/shoes/white
+
+/datum/gear/shoes/yellow
+	display_name = "shoes, yellow"
+	path = /obj/item/clothing/shoes/yellow
 
 /datum/gear/shoes/flipflops
 	display_name = "flip flops"

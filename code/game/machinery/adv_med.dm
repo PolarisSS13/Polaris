@@ -56,6 +56,7 @@
 			return
 		M.forceMove(src)
 		occupant = M
+		playsound(src.loc, 'sound/machines/medbayscanner1.ogg', 75, 0)
 		icon_state = "body_scanner_1"
 		add_fingerprint(user)
 		qdel(G)

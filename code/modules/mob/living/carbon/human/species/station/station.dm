@@ -136,7 +136,7 @@
 		)
 	cold_discomfort_level = 275
 
-has_organ = list(    //No appendix.
+	has_organ = list(    //No appendix.
 		O_HEART =    /obj/item/organ/internal/heart,
 		O_LUNGS =    /obj/item/organ/internal/lungs,
 		O_LIVER =    /obj/item/organ/internal/liver,
