@@ -1693,6 +1693,7 @@
 #include "code\modules\mob\living\simple_animal\animals\mouse.dm"
 #include "code\modules\mob\living\simple_animal\animals\parrot.dm"
 #include "code\modules\mob\living\simple_animal\animals\penguin.dm"
+#include "code\modules\mob\living\simple_animal\animals\slime.dm"
 #include "code\modules\mob\living\simple_animal\animals\spiderbot.dm"
 #include "code\modules\mob\living\simple_animal\animals\tomato.dm"
 #include "code\modules\mob\living\simple_animal\animals\tree.dm"
