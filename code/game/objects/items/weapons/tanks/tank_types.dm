@@ -104,6 +104,7 @@
 	name = "phoron tank"
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron_vox"
+	item_state = "oxygen_fr"
 	gauge_icon = null
 	flags = CONDUCT
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
