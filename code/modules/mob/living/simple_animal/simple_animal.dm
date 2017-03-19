@@ -128,8 +128,8 @@
 								)
 
 	//Scary debug things
-	var/debug_ai = 3				// Logging level for this mob (1,2,3)
-	var/path_display = 1			// Will display the path in green when pathing
+	var/debug_ai = 0				// Logging level for this mob (1,2,3)
+	var/path_display = 0			// Will display the path in green when pathing
 	var/path_icon = 'icons/misc/debug_group.dmi' // What icon to use for the overlay
 	var/path_icon_state = "red"		// What state to use for the overlay
 	var/icon/path_overlay			// A reference to restart
