@@ -284,8 +284,8 @@
 	name = "\improper RCD crate"
 	desc = "A crate with rapid construction device."
 	icon_state = "engi_crate"
-	icon_opened = "crateopen"
-	icon_closed = "crate"
+	icon_opened = "engi_crateopen"
+	icon_closed = "engi_crate"
 
 /obj/structure/closet/crate/rcd/New()
 	..()
