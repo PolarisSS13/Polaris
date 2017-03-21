@@ -26,7 +26,7 @@
 				m_type = 1
 
 		//Machine-only emotes
-		if("ping", "beep", "buzz", "yes", "no", "rcough", "rsneeze", "rscream")
+		if("ping", "beep", "buzz", "yes", "no", "rcough", "rsneeze")
 
 			if(!isSynthetic())
 				src << "<span class='warning'>You are not a synthetic.</span>"
@@ -67,9 +67,6 @@
 					use_sound = 'sound/effects/mob_effects/machine_sneeze.ogg'
 				else
 					use_sound = 'sound/effects/mob_effects/f_machine_sneeze.ogg'
-			else if(act == "rscream")
-				display_msg = "emits a robotic scream"
-				use_sound = 'sound/goonstation/voice/robot_scream.ogg'
 
 			if (param)
 				message = "[display_msg] at [param]."
@@ -626,7 +623,8 @@
 				if(!muzzled)
 					message = "[species.scream_verb]!"
 					m_type = 2
-					/*if(gender == FEMALE)
+					/* Removed, pending the location of some actually good, properly licensed sounds.
+					if(gender == FEMALE)
 						playsound(loc, "[species.female_scream_sound]", 80, 1)
 					else
 						playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
