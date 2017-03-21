@@ -90,6 +90,12 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
+/obj/item/weapon/cane/brown
+	name = "brown cane"
+	desc = "A lovely mahogany cane used by a true gentlemen. Or a clown."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "browncane"
+
 /obj/item/weapon/cane/concealed
 	var/concealed_blade
 

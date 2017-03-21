@@ -165,6 +165,24 @@
 	desc = "A large dufflebag for holding extra medical supplies."
 	icon_state = "duffle_med"
 
+/obj/item/weapon/storage/backpack/dufflebag/med/chemistry
+	name = "chemistry dufflebag"
+	desc = "A large dufflebag for holding extra medical supplies. This one is in Chemistry colors."
+	icon_state = "duffle-chemistry"
+	item_state = "duffle-chemistry"
+
+/obj/item/weapon/storage/backpack/dufflebag/med/genetics
+	name = "genetics dufflebag"
+	desc = "A large dufflebag for holding extra medical supplies. This one is in Genetics colors."
+	icon_state = "duffle-genetics"
+	item_state = "duffle-genetics"
+
+/obj/item/weapon/storage/backpack/dufflebag/med/virology
+	name = "virology dufflebag"
+	desc = "A large dufflebag for holding extra medical supplies. This one is in Virology colors."
+	icon_state = "duffle-virology"
+	item_state = "duffle-virology"
+
 /obj/item/weapon/storage/backpack/dufflebag/emt
 	name = "EMT dufflebag"
 	desc = "A large dufflebag for holding extra medical supplies. This one has reflective stripes!"
@@ -295,7 +313,7 @@
 
 /obj/item/weapon/storage/backpack/messenger/chem
 	name = "chemistry messenger bag"
-	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
+	desc = "A serile backpack worn over one shoulder.  This one is in Chemistry colors."
 	icon_state = "courierbagchem"
 	item_state_slots = list(slot_r_hand_str = "chempack", slot_l_hand_str = "chempack")
 
