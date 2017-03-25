@@ -131,3 +131,11 @@
 	icon_open = "labcoat_emt_open"
 	icon_closed = "labcoat_emt"
 	item_state_slots = list(slot_r_hand_str = "emt_labcoat", slot_l_hand_str = "emt_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/robotics
+	name = "Roboticist's Labcoat"
+	desc = "A black labcoat with reinforced seams; great for industrial work."
+	icon_state = "labcoat_robotics_open"
+	icon_open = "labcoat_robotics_open"
+	icon_closed = "labcoat_robotics"
+	item_state_slots = list(slot_r_hand_str = "robotics_labcoat", slot_l_hand_str = "robotics_labcoat")
