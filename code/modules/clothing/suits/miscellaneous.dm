@@ -627,8 +627,6 @@ obj/item/clothing/suit/kimono
     icon_state = "redandblackjacket"
     icon_open = "redandblackjacket_open"
     icon_closed = "redandblackjacket"
-    min_cold_protection_temperature = T0C - 20
-    cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
     flags_inv = HIDEHOLSTER
 
 /obj/item/clothing/suit/whitedress
