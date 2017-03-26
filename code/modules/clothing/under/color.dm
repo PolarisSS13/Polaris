@@ -1,3 +1,6 @@
+/obj/item/clothing/under/color
+	icon = 'icons/mob/uniforms/color.dmi'
+
 /obj/item/clothing/under/color/black
 	name = "black jumpsuit"
 	icon_state = "black"
