@@ -2,7 +2,6 @@
 	name = "tracking beacon"
 	desc = "A beacon used by a teleporter."
 	icon_state = "beacon"
-	item_state = "beacon"
 	var/code = "electronic"
 	origin_tech = list(TECH_BLUESPACE = 1)
 
