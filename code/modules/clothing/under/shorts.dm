@@ -2,6 +2,7 @@
 /obj/item/clothing/under/shorts
 	name = "athletic shorts"
 	desc = "95% Polyester, 5% Spandex!"
+	icon = 'icons/mob/uniforms/pants.dmi'
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO
 
@@ -91,16 +92,12 @@
 	name = "khaki short shorts"
 	icon_state = "khaki_shorts_f"
 
-/obj/item/clothing/under/shorts/loincloth
-	name = "loincloth"
-	desc = "A piece of cloth wrapped around the waist."
-	icon_state = "loincloth"
-
 //Argh, skirts be below this line -> ------------------------------
 
 /obj/item/clothing/under/skirt
 	name = "short black skirt"
 	desc = "A skirt that is a shiny black."
+	icon = 'icons/mob/uniforms/dresses.dmi'
 	icon_state = "skirt_short_black"
 	body_parts_covered = LOWER_TORSO
 	rolled_sleeves = -1
@@ -129,6 +126,11 @@
 	name = "swept skirt"
 	desc = "A skirt that is swept to one side."
 	icon_state = "skirt_swept"
+
+/obj/item/clothing/under/skirt/loincloth
+	name = "loincloth"
+	desc = "A piece of cloth wrapped around the waist."
+	icon_state = "loincloth"
 
 /obj/item/clothing/under/skirt/outfit
 	name = "black skirt"

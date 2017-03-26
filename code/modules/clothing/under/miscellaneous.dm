@@ -255,6 +255,7 @@
  */
 /obj/item/clothing/under/dress
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	icon = 'icons/mob/uniforms/dresses.dmi'
 
 /obj/item/clothing/under/dress/blacktango
 	name = "black tango dress"
@@ -344,8 +345,9 @@
 /*
  * wedding stuff
  */
-/obj/item/clothing/under/wedding/
+/obj/item/clothing/under/wedding
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	icon = 'icons/mob/uniforms/dresses.dmi'
 
 /obj/item/clothing/under/wedding/bride_orange
 	name = "orange wedding dress"
@@ -459,6 +461,7 @@
 /obj/item/clothing/under/cheongsam
 	name = "white cheongsam"
 	desc = "It is a white cheongsam dress."
+	icon = 'icons/mob/uniforms/dresses.dmi'
 	icon_state = "mai_yang"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
@@ -486,6 +489,7 @@
 /obj/item/clothing/under/croptop
 	name = "crop top"
 	desc = "A shirt that has had the top cropped. This one is NT sponsored."
+	icon = 'icons/mob/uniforms/dresses.dmi'
 	icon_state = "croptop"
 	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
 
