@@ -44,8 +44,8 @@
 	name = "Alden-Saraspova counter"
 	desc = "Aids in triangulation of exotic particles."
 	icon = 'icons/obj/xenoarchaeology.dmi'
-	icon_state = "flashgun"
-	item_state = "lampgreen"
+	icon_state = "ano_scanner"
+	item_state = "emp"
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 
@@ -99,9 +99,9 @@
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
 	desc = "Used to check spatial depth and density of rock outcroppings."
-	icon = 'icons/obj/pda.dmi'
-	icon_state = "crap"
-	item_state = "analyzer"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "dep_scanner"
+	item_state = "signaler"
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()

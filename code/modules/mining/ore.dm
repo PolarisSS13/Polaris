@@ -2,9 +2,14 @@
 	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
+			)
 	w_class = ITEMSIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/material
+
 
 /obj/item/weapon/ore/uranium
 	name = "pitchblende"

@@ -71,6 +71,10 @@
 	desc = "This little bugger can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_storage.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_storage.dmi',
+			)
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	w_class = ITEMSIZE_NORMAL
 	max_storage_space = ITEMSIZE_COST_NORMAL * 25
