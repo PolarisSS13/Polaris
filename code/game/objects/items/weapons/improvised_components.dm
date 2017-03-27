@@ -68,3 +68,30 @@
 		qdel(src)
 		user.put_in_hands(finished)
 	update_icon(user)
+
+/obj/item/woodcirclet
+    name = "wood circlet"
+    desc = "A small wood circlet for making a flower crown."
+    icon = 'icons/obj/buildingobject.dmi'
+    icon_state = "woodcirclet"
+    w_class = ITEMSIZE_SMALL
+
+/obj/item/woodcirclet/attackby(obj/item/W as obj, mob/user as mob)
+    if(istype(W,/obj/item/seeds/poppyseed))
+        user << "You attach the poppy to the circlet and create a beautiful flower crown."
+        new /obj/item/clothing/head/poppy_crown(user.loc)
+        qdel(W)
+        qdel(src)
+        return
+    else if(istype(W,/obj/item/seeds/sunflowerseed))
+        user << "You attach the sunflower to the circlet and create a beautiful flower crown."
+        new /obj/item/clothing/head/sunflower_crown(user.loc)
+        qdel(W)
+        qdel(src)
+        return
+    else if(istype(W,/obj/item/seeds/lavenderseed))
+        user << "You attach the lavender to the circlet and create a beautiful flower crown."
+        new /obj/item/clothing/head/lavender_crown(user.loc)
+        qdel(W)
+        qdel(src)
+        return
