@@ -158,10 +158,16 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
-	sprites = list(	"Basic" = "robot_old",
+	sprites = list(
+					"M-USE NanoTrasen" = "robot",
+					"WTOperator" = "sleekstandard",
+					"CUPCAKE" = "Noble-STD",
+					"XI-GUS" = "spider",
+					"Basic" = "robot_old",
 					"Android" = "droid",
-					"Default" = "robot",
-					"Drone" = "drone-standard"
+					"Telemachus" = "toiletbot",
+					"Drone" = "drone-standard",
+					"Cabeiri" = "eyebot-standard"
 				  )
 
 /obj/item/weapon/robot_module/robot/standard/New()
@@ -181,11 +187,16 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/surgeon
 	name = "surgeon robot module"
 	sprites = list(
+					"M-USE NanoTrasen" = "robotMedi",
+					"WTOperator" = "cmoborg",
+					"CUPCAKE" = "Noble-MED",
+					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
-					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
-					"Needles" = "medicalrobot",
-					"Drone" = "drone-surgery"
+					"Telemachus" = "toiletbotmedical",
+					"Cyborg" = "medicalrobot",
+					"Drone" = "drone-surgery",
+					"Cabeiri" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
@@ -230,12 +241,17 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/medical/crisis
 	name = "crisis robot module"
 	sprites = list(
+					"M-USE NanoTrasen" = "robotMedi",
+					"WTOperator" = "sleekmedic",
+					"CUPCAKE" = "Noble-MED",
+					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
-					"Standard" = "surgeon",
 					"Advanced Droid" = "droid-medical",
-					"Needles" = "medicalrobot",
+					"Cyborg" = "medicalrobot",
+					"Telemachus" = "toiletbotmedical",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry"
+					"Drone - Chemistry" = "drone-chemistry",
+					"Cabeiri" = "eyebot-medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -295,11 +311,18 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
 	sprites = list(
+					"M-USE NanoTrasen" = "robotEngi",
+					"WTOperator" = "ceborg",
+					"CUPCAKE" = "Noble-ENG",
+					"XI-GUS" = "spidereng",
+					"XI-ALP" = "heavyEng",
 					"Basic" = "Engineering",
 					"Antique" = "engineerrobot",
 					"Landmate" = "landmate",
 					"Landmate - Treaded" = "engiborg+tread",
-					"Drone" = "drone-engineer"
+					"Telemachus" = "toiletbotengineering",
+					"Drone" = "drone-engineer",
+					"Cabeiri" = "eyebot-engineering"
 					)
 
 /obj/item/weapon/robot_module/robot/engineering/construction
@@ -408,12 +431,17 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/robot/security/general
 	sprites = list(
+					"M-USE NanoTrasen" = "robotSecy",
+					"WTOperator" = "Security",
+					"CUPCAKE" = "Noble-SEC",
+					"XI-GUS" = "spidersec",
 					"Basic" = "secborg",
-					"Red Knight" = "Security",
 					"Black Knight" = "securityrobot",
 					"Bloodhound" = "bloodhound",
 					"Bloodhound - Treaded" = "secborg+tread",
-					"Drone" = "drone-sec"
+					"Telemachus" = "toiletsecurity",
+					"Drone" = "drone-sec",
+					"Cabeiri" = "eyebot-security"
 				)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -448,10 +476,15 @@ var/global/list/robot_modules = list(
 	name = "janitorial robot module"
 	channels = list("Service" = 1)
 	sprites = list(
+					"M-USE NanoTrasen" = "robotJani",
+					"WTOperator" = "sleekjanitor",
+					"CUPCAKE" = "Noble-CLN",
 					"Basic" = "JanBot2",
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
-					"Drone" = "drone-janitor"
+					"Telemachus" = "toiletbotjanitor",
+					"Drone" = "drone-janitor",
+					"Cabeiri" = "eyebot-janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -488,13 +521,19 @@ var/global/list/robot_modules = list(
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/butler
-	sprites = list(	"Waitress" = "Service",
-					"Kent" = "toiletbot",
+	sprites = list(
+					"M-USE NanoTrasen" = "robotServ",
+					"WTOperator" = "sleekservice",
+					"CUPCAKE" = "Noble-SRV",
+					"XI-ALP" = "heavyServ",
+					"Standard" = "Service2",
+					"Waitress" = "Service",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
-					"Default" = "Service2",
+					"Telemachus" = "toiletbot",
 					"Drone - Service" = "drone-service",
-					"Drone - Hydro" = "drone-hydro"
+					"Drone - Hydro" = "drone-hydro",
+					"Cabeiri" = "eyebot-clerical",
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
@@ -532,12 +571,18 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/clerical/general
 	name = "clerical robot module"
 	sprites = list(
+					"M-USE NanoTrasen" = "robotCler",
+					"WTOperator" = "sleekclerical",
+					"XI-GUS" = "spidercom",
 					"Waitress" = "Service",
 					"Kent" = "toiletbot",
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
-					"Default" = "Service2",
-					"Drone" = "drone-service"
+					"Classic" = "clericalrobot",
+					"Standard" = "Service2",
+					"Telemachus" = "toiletbot",
+					"Drone" = "drone-blu",
+					"Cabeiri" = "eyebot-clerical"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
@@ -563,10 +608,17 @@ var/global/list/robot_modules = list(
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 	sprites = list(
+					"NM-USE NanoTrasen" = "robotMine",
+					"WTOperator" = "sleekminer",
+					"XI-GUS" = "spidermining",
+					"XI-ALP" = "heavyMine",
+					"CUPCAKE" = "Noble-DIG",
 					"Basic" = "Miner_old",
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
-					"Drone" = "drone-miner"
+					"Telemachus" = "toiletbotminer",
+					"Drone" = "drone-miner",
+					"Cabeiri" = "eyebot-miner"
 				)
 	supported_upgrades = list(/obj/item/borg/upgrade/jetpack)
 
@@ -586,8 +638,10 @@ var/global/list/robot_modules = list(
 	name = "research module"
 	channels = list("Science" = 1)
 	sprites = list(
+					"WTOperator" = "sleekscience",
 					"Droid" = "droid-science",
-					"Drone" = "drone-science"
+					"Drone" = "drone-science",
+					"Cabeiri" = "eyebot-science"
 					)
 
 /obj/item/weapon/robot_module/robot/research/New()
@@ -641,7 +695,7 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SIGN	 = 0
 					)
 	sprites = list(
-					"Dread" = "securityrobot",
+					"Dread" = "securityrobot"
 				)
 	var/id
 
