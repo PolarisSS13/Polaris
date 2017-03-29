@@ -21,8 +21,8 @@
 #   experiment
 #################################
 
-# Your name.  
-author: N3X15
+# Your name. Original author: N3X15
+author: Unknown
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
