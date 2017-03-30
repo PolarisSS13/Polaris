@@ -1,0 +1,44 @@
+/obj/item/organ/external/chest/unathi
+	max_damage = 100
+	min_broken_damage = 40
+	encased = "upper ribplates"
+
+/obj/item/organ/external/groin/unathi
+	max_damage = 100
+	min_broken_damage = 40
+	encased = "lower ribplates"
+
+/obj/item/organ/external/head/unathi
+	max_damage = 75
+	min_broken_damage = 35
+	eye_icon = "eyes_s"
+	force = 5
+	throwforce = 10
+
+/obj/item/organ/internal/brain/unathi
+	color = "#b3cbc3"
+
+/obj/item/organ/internal/heart/unathi
+//	icon_state = "unathi_heart"
+//	dead_icon = "unath_heart-dead"
+	color = "#b3cbc3"
+
+/obj/item/organ/internal/liver/unathi
+	name = "filtration organ"
+//	icon_state = "unathi_liver"
+	color = "#b3cbc3"
+
+/obj/item/organ/internal/lungs/unathi
+	color = "#b3cbc3"
+
+//Unathi liver acts as kidneys, too.
+/obj/item/organ/internal/liver/unath/process()
+	..()
+	if(!owner) return
+
+	var/datum/reagent/coffee = locate(/datum/reagent/drink/coffee) in owner.reagents.reagent_list
+	if(coffee)
+		if(is_bruised())
+			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
+		else if(is_broken())
+			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
