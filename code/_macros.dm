@@ -34,6 +34,8 @@
 
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
+#define isDrone(A) istype(A, /mob/living/silicon/robot/drone)
+
 #define isrobot(A) istype(A, /mob/living/silicon/robot)
 
 #define issilicon(A) istype(A, /mob/living/silicon)
