@@ -43,7 +43,7 @@
 	health_hud_intensity = 2.5
 
 	min_age = 32
-	max_age = 300
+	max_age = 260
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, unfriendly \
