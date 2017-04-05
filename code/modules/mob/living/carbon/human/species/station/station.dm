@@ -46,8 +46,8 @@
 	max_age = 300
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
-	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
-	desert planet, they mostly hold ideals of honesty, virtue, martial combat and bravery above all \
+	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, unfriendly \
+	planet, they mostly hold ideals of honesty, virtue, proficiency and bravery above all \
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage called Sinta'Unathi."
 
