@@ -423,6 +423,7 @@
 
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
+
 /* Drugs */
 
 /datum/reagent/space_drugs

@@ -32,12 +32,19 @@
 	color = "#b3cbc3"
 
 //Unathi liver acts as kidneys, too.
-/obj/item/organ/internal/liver/unath/process()
+/obj/item/organ/internal/liver/unathi/process()
 	..()
 	if(!owner) return
 
 	var/datum/reagent/coffee = locate(/datum/reagent/drink/coffee) in owner.reagents.reagent_list
 	if(coffee)
+		if(is_bruised())
+			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
+		else if(is_broken())
+			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
+
+	var/datum/reagent/sugar = locate(/datum/reagent/sugar) in owner.reagents.reagent_list
+	if(sugar)
 		if(is_bruised())
 			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
 		else if(is_broken())
