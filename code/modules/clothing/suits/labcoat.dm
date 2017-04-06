@@ -99,3 +99,11 @@
 	desc = "A dark blue labcoat with reflective strips for emergency medical technicians."
 	icon_state = "labcoat_emt"
 	item_state_slots = list(slot_r_hand_str = "emt_labcoat", slot_l_hand_str = "emt_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/skrellcoat
+	name = "skrellian labcoat"
+	desc = "A protective labcoat, typically worn by Skrell of the Malish-Katish caste."
+	icon_state = "skrellcoat"
+	item_state_slots = list(slot_r_hand_str = "skrellcoat", slot_l_hand_str = "skrellcoat")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	open = -1
