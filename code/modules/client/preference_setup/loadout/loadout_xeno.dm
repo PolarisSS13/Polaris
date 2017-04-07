@@ -10,6 +10,13 @@
 	cost = 1
 	sort_category = "Xenowear"
 
+/datum/gear/suit/skrell/skrellcoat
+	display_name = "Skrellian Labcoat (Science)"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/skrellcoat
+	sort_category = "Xenowear"
+	whitelisted = "Skrell"
+	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
+
 /datum/gear/ears/skrell/chains	//Chains
 	display_name = "headtail chain selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/chain
