@@ -15,21 +15,17 @@
 	force = 5
 	throwforce = 10
 
-/obj/item/organ/internal/brain/unathi
-	color = "#b3cbc3"
 
 /obj/item/organ/internal/heart/unathi
-//	icon_state = "unathi_heart"
-//	dead_icon = "unath_heart-dead"
+	icon_state = "unathi_heart-on"
+	dead_icon = "unath_heart-off"
+
+/obj/item/organ/internal/lungs/unathi
 	color = "#b3cbc3"
 
 /obj/item/organ/internal/liver/unathi
 	name = "filtration organ"
-//	icon_state = "unathi_liver"
-	color = "#b3cbc3"
-
-/obj/item/organ/internal/lungs/unathi
-	color = "#b3cbc3"
+	icon_state = "unathi_liver"
 
 //Unathi liver acts as kidneys, too.
 /obj/item/organ/internal/liver/unathi/process()
@@ -49,3 +45,6 @@
 			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
 		else if(is_broken())
 			owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
+
+/obj/item/organ/internal/brain/unathi
+	color = "#b3cbc3"
