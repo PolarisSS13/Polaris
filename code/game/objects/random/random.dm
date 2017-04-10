@@ -559,7 +559,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(4);/obj/item/clothing/shoes/leather,
 				prob(1);/obj/item/clothing/gloves/yellow,
 				prob(3);/obj/item/clothing/gloves/botanic_leather,
-				prob(2);/obj/item/clothing/gloves/latex,
+				prob(2);/obj/item/clothing/gloves/sterile/latex,
 				prob(5);/obj/item/clothing/gloves/white,
 				prob(5);/obj/item/clothing/gloves/rainbow,
 				prob(2);/obj/item/clothing/gloves/fyellow,
@@ -583,7 +583,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(3);/obj/item/clothing/suit/storage/toggle/brown_jacket,
 				prob(3);/obj/item/clothing/suit/storage/toggle/leather_jacket,
 				prob(1);/obj/item/clothing/suit/storage/vest/press,
-				prob(3);/obj/item/clothing/suit/apron,
+				prob(3);/obj/item/clothing/suit/storage/apron,
 				prob(4);/obj/item/clothing/under/color/grey,
 				prob(2);/obj/item/clothing/under/syndicate/tacticool,
 				prob(2);/obj/item/clothing/under/pants/camo,
@@ -630,9 +630,9 @@ something, make sure it's not in one of the other lists.*/
 				prob(1);/obj/item/weapon/grenade/flashbang,
 				prob(1);/obj/item/weapon/melee/baton,
 				prob(1);/obj/item/weapon/reagent_containers/spray/pepper,
-				prob(3);/obj/item/clothing/shoes/jackboots,
-				prob(1);/obj/item/clothing/shoes/swat,
-				prob(1);/obj/item/clothing/shoes/combat,
+				prob(3);/obj/item/clothing/shoes/boots/jackboots,
+				prob(1);/obj/item/clothing/shoes/boots/swat,
+				prob(1);/obj/item/clothing/shoes/boots/combat,
 				prob(1);/obj/item/clothing/gloves/swat,
 				prob(1);/obj/item/clothing/gloves/combat,
 				prob(1);/obj/item/clothing/glasses/sunglasses/big,
@@ -684,9 +684,9 @@ something, make sure it's not in one of the other lists.*/
 				prob(3);/obj/item/weapon/storage/box/gloves,
 				prob(2);/obj/item/weapon/storage/belt/medical/emt,
 				prob(2);/obj/item/weapon/storage/belt/medical,
-				prob(1);/obj/item/clothing/shoes/combat,
+				prob(1);/obj/item/clothing/shoes/boots/combat,
 				prob(3);/obj/item/clothing/shoes/white,
-				prob(2);/obj/item/clothing/gloves/latex,
+				prob(2);/obj/item/clothing/gloves/sterile/nitrile,
 				prob(5);/obj/item/clothing/gloves/white,
 				prob(2);/obj/item/clothing/glasses/hud/health,
 				prob(1);/obj/item/clothing/glasses/hud/health/prescription,
@@ -730,7 +730,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(2);/obj/item/clothing/head/welding,
 				prob(4);/obj/item/clothing/suit/storage/hazardvest,
 				prob(2);/obj/item/clothing/under/overalls,
-				prob(3);/obj/item/clothing/shoes/workboots,
+				prob(3);/obj/item/clothing/shoes/boots/workboots,
 				prob(1);/obj/item/clothing/shoes/magboots,
 				prob(2);/obj/item/clothing/accessory/storage/black_vest,
 				prob(2);/obj/item/clothing/accessory/storage/brown_vest,
@@ -761,7 +761,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(3);/obj/item/weapon/storage/box/beakers,
 				prob(3);/obj/item/weapon/storage/box/syringes,
 				prob(3);/obj/item/weapon/storage/box/gloves,
-				prob(2);/obj/item/clothing/gloves/latex,
+				prob(2);/obj/item/clothing/gloves/sterile/latex,
 				prob(4);/obj/item/clothing/glasses/science,
 				prob(3);/obj/item/clothing/glasses/material,
 				prob(1);/obj/item/clothing/head/beret/purple,
@@ -795,8 +795,8 @@ something, make sure it's not in one of the other lists.*/
 				prob(3);/obj/item/clothing/glasses/material,
 				prob(3);/obj/item/clothing/head/soft/yellow,
 				prob(4);/obj/item/clothing/suit/storage/hazardvest,
-				prob(3);/obj/item/clothing/suit/apron/overalls,
-				prob(4);/obj/item/clothing/suit/apron,
+				prob(3);/obj/item/clothing/suit/storage/apron/overalls,
+				prob(4);/obj/item/clothing/suit/storage/apron,
 				prob(2);/obj/item/clothing/under/syndicate/tacticool,
 				prob(1);/obj/item/clothing/under/syndicate/combat,
 				prob(2);/obj/item/clothing/accessory/storage/black_vest,
@@ -840,3 +840,59 @@ var/list/random_useful_
 		return pick(random_junk_)
 	// Misc. actually useful stuff
 	return get_random_useful_type()
+
+/*
+	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
+*/
+var/list/multi_point_spawns
+
+/obj/random_multi
+	name = "random object spawn point"
+	desc = "This item type is used to spawn random objects at round-start. Only one spawn point for a given group id is selected."
+	icon = 'icons/misc/mark.dmi'
+	icon_state = "x3"
+	invisibility = INVISIBILITY_MAXIMUM
+	var/id     // Group id
+	var/weight // Probability weight for this spawn point
+
+/obj/random_multi/initialize()
+	..()
+	weight = max(1, round(weight))
+
+	if(!multi_point_spawns)
+		multi_point_spawns = list()
+	var/list/spawnpoints = multi_point_spawns[id]
+	if(!spawnpoints)
+		spawnpoints = list()
+		multi_point_spawns[id] = spawnpoints
+	spawnpoints[src] = weight
+
+/obj/random_multi/Destroy()
+	var/list/spawnpoints = multi_point_spawns[id]
+	spawnpoints -= src
+	if(!spawnpoints.len)
+		multi_point_spawns -= id
+	. = ..()
+
+/obj/random_multi/proc/generate_items()
+	return
+
+/obj/random_multi/single_item
+	var/item_path  // Item type to spawn
+
+/obj/random_multi/single_item/generate_items()
+	new item_path(loc)
+
+/hook/roundstart/proc/generate_multi_spawn_items()
+	for(var/id in multi_point_spawns)
+		var/list/spawn_points = multi_point_spawns[id]
+		var/obj/random_multi/rm = pickweight(spawn_points)
+		rm.generate_items()
+		for(var/entry in spawn_points)
+			qdel(entry)
+	return 1
+
+/obj/random_multi/single_item/captains_spare_id
+	name = "Multi Point - Captain's Spare"
+	id = "Captain's spare id"
+	item_path = /obj/item/weapon/card/id/captains_spare
