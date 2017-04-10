@@ -59,6 +59,11 @@
 		/obj/item/device/integrated_electronics/wirer,
 		)
 
+/obj/item/weapon/storage/belt/utility/atmospherics
+	name = "atmospherics belt"
+	desc = "A tool belt sporting some patriotic Atmosian colors."
+	icon_state = "atmosbelt"
+
 /obj/item/weapon/storage/belt/utility/full/New()
 	..()
 	new /obj/item/weapon/screwdriver(src)
@@ -68,7 +73,7 @@
 	new /obj/item/weapon/wirecutters(src)
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 
-/obj/item/weapon/storage/belt/utility/atmostech/New()
+/obj/item/weapon/storage/belt/utility/atmospherics/atmostech/New()
 	..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
