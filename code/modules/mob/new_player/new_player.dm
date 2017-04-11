@@ -89,9 +89,10 @@
 			totalPlayers = 0
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in player_list)
-				stat("[player.key]", (player.ready)?("(Playing)"):(null))
-				totalPlayers++
-				if(player.ready)totalPlayersReady++
+				var/highjob
+				if(player.client && player.client.prefs.highjob)
+					highjob = " as [player.client.prefs.highjob]"
+				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 
 /mob/new_player/Topic(href, href_list[])
 	if(!client)	return 0
