@@ -234,42 +234,63 @@
 
 	last_action = world.time
 
-	if(state < GRAB_AGGRESSIVE)
+	if(assailant.a_intent == I_HELP)
 		if(!allow_upgrade)
 			return
-		if(!affecting.lying || size_difference(affecting, assailant) > 0)
-			assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
+		if(state > GRAB_NECK)
+			state = GRAB_NECK
+			icon_state = "grabbed+1"
+			hud.icon_state = "reinforce1"
+			assailant.visible_message("<span class='warning'>[assailant] lessens their grip on [affecting]!</span>")
+		else if(state > GRAB_AGGRESSIVE)
+			state = GRAB_AGGRESSIVE
+			icon_state = "grabbed1"
+			hud.icon_state = "reinforce1"
+			assailant.visible_message("<span class='warning'>[assailant] lessens their grip on [affecting]!</span>")
+		else if(state > GRAB_PASSIVE)
+			state = GRAB_PASSIVE
+			icon_state = "reinforce"
+			hud.icon_state = "reinforce"
+			assailant.visible_message("<span class='warning'>[assailant] lessens their grip on [affecting]!</span>")
 		else
-			assailant.visible_message("<span class='warning'>[assailant] pins [affecting] down to the ground (now hands)!</span>")
-			apply_pinning(affecting, assailant)
+			to_chat(assailant, "You cannot loosen your grip any more without losing hold.")
+	else
+		if(state < GRAB_AGGRESSIVE)
+			if(!allow_upgrade)
+				return
+			if(!affecting.lying || size_difference(affecting, assailant) > 0)
+				assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
+			else
+				assailant.visible_message("<span class='warning'>[assailant] pins [affecting] down to the ground (now hands)!</span>")
+				apply_pinning(affecting, assailant)
 
-		state = GRAB_AGGRESSIVE
-		icon_state = "grabbed1"
-		hud.icon_state = "reinforce1"
-	else if(state < GRAB_NECK)
-		if(isslime(affecting))
-			assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
-			return
+			state = GRAB_AGGRESSIVE
+			icon_state = "grabbed1"
+			hud.icon_state = "reinforce1"
+		else if(state < GRAB_NECK)
+			if(isslime(affecting))
+				assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
+				return
 
-		assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
-		state = GRAB_NECK
-		icon_state = "grabbed+1"
-		assailant.set_dir(get_dir(assailant, affecting))
-		affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>"
-		assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>"
-		msg_admin_attack("[key_name(assailant)] grabbed the neck of [key_name(affecting)]")
-		hud.icon_state = "kill"
-		hud.name = "kill"
-		affecting.Stun(10) //10 ticks of ensured grab
-	else if(state < GRAB_UPGRADING)
-		assailant.visible_message("<span class='danger'>[assailant] starts to tighten \his grip on [affecting]'s neck!</span>")
-		hud.icon_state = "kill1"
+			assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
+			state = GRAB_NECK
+			icon_state = "grabbed+1"
+			assailant.set_dir(get_dir(assailant, affecting))
+			affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>"
+			assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>"
+			msg_admin_attack("[key_name(assailant)] grabbed the neck of [key_name(affecting)]")
+			hud.icon_state = "kill"
+			hud.name = "kill"
+			affecting.Stun(10) //10 ticks of ensured grab
+		else if(state < GRAB_UPGRADING)
+			assailant.visible_message("<span class='danger'>[assailant] starts to tighten \his grip on [affecting]'s neck!</span>")
+			hud.icon_state = "kill1"
 
-		state = GRAB_KILL
-		assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
-		affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>"
-		assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
-		msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
+			state = GRAB_KILL
+			assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
+			affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>"
+			assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>"
+			msg_admin_attack("[key_name(assailant)] strangled (kill intent) [key_name(affecting)]")
 
 		affecting.setClickCooldown(10)
 		affecting.losebreath += 1
