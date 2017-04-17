@@ -31,7 +31,30 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["body_markings"]		>> pref.body_markings
 	pref.preview_icon = null
 
+	// Emergency fix for a reversion from full body prosthetics, do not keep this if you
+	// are running full prosthetics.
+	pref.organ_data["torso"] = null
+	pref.organ_data["chest"] = null
+	pref.organ_data["groin"] = null
+	pref.organ_data["head"] = null
+	pref.rlimb_data["torso"] = null
+	pref.rlimb_data["chest"] = null
+	pref.rlimb_data["groin"] = null
+	pref.rlimb_data["head"] = null
+
 /datum/category_item/player_setup_item/general/body/save_character(var/savefile/S)
+
+	// Emergency fix for a reversion from full body prosthetics, do not keep this if you
+	// are running full prosthetics.
+	pref.organ_data["torso"] = null
+	pref.organ_data["chest"] = null
+	pref.organ_data["groin"] = null
+	pref.organ_data["head"] = null
+	pref.rlimb_data["torso"] = null
+	pref.rlimb_data["chest"] = null
+	pref.rlimb_data["groin"] = null
+	pref.rlimb_data["head"] = null
+
 	S["species"]			<< pref.species
 	S["hair_red"]			<< pref.r_hair
 	S["hair_green"]			<< pref.g_hair
