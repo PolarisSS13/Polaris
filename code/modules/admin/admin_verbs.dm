@@ -312,6 +312,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/jobbans,
 	/client/proc/toggle_attack_logs,
 	/client/proc/cmd_admin_subtle_message, 	//send an message to somebody as a 'voice in their head',
+	/client/proc/aooc,
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/allow_character_respawn,   // Allows a ghost to respawn ,
