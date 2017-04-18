@@ -108,16 +108,24 @@
 
 	if(!(skipjumpsuit && skipface))
 		if(looks_synth)
-			var/use_gender = "a synthetic"
-			if(gender == MALE)
-				use_gender = "an android"
-			else if(gender == FEMALE)
-				use_gender = "a gynoid"
+			var/line
+			var/use_fbp = get_FBP_type()
+			var/use_gender = " synthetic"
 
-			msg += ", <b><font color='#555555'>[use_gender]!</font></b>"
+			if(gender == MALE)
+				use_gender = " android"
+			else if(gender == FEMALE)
+				use_gender = " gynoid"
+
+			// Cyborgs show their species instead of 'cyborg'
+			if(use_fbp == FBP_CYBORG)
+				use_fbp = species.get_examine_name()
+
+			line = "a [use_fbp][use_gender]!"
+			msg += ", <b><font color='#555555'>[line]</font></b>"
 
 		else if(species.name != "Human")
-			msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species.get_examine_name()]!</font></b>"
+			msg += ", <b><font color='[species.get_flesh_colour(src)]'>a [species.get_examine_name()]!</font></b>"
 
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
