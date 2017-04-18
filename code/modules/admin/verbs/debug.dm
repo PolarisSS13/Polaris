@@ -560,12 +560,12 @@
 		if("masked killer")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/overalls(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
-			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/sterile/latex(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/latex(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/clothing/mask/surgical(M), slot_wear_mask)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/welding(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/plain/monocle(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/apron(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/weapon/material/knife(M), slot_l_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/surgical/scalpel(M), slot_r_store)
 
@@ -977,7 +977,7 @@
 	if(!check_rights(R_DEBUG))
 		return
 
-	var/datum/planet/planet = input(usr, "Which planet do you want to modify the weather on?", "Change Weather") in planet_controller.planets
+	var/datum/planet/planet = input(usr, "Which planet do you want to modify the weather on?", "Change Weather") in list(planet_sif)
 	var/datum/weather/new_weather = input(usr, "What weather do you want to change to?", "Change Weather") as null|anything in planet.weather_holder.allowed_weather_types
 	if(new_weather)
 		planet.weather_holder.change_weather(new_weather)
@@ -993,7 +993,7 @@
 	if(!check_rights(R_DEBUG))
 		return
 
-	var/datum/planet/planet = input(usr, "Which planet do you want to modify time on?", "Change Time") in planet_controller.planets
+	var/datum/planet/planet = input(usr, "Which planet do you want to modify time on?", "Change Time") in list(planet_sif)
 
 	var/datum/time/current_time_datum = planet.current_time
 	var/new_hour = input(usr, "What hour do you want to change to?", "Change Time", text2num(current_time_datum.show_time("hh"))) as null|num

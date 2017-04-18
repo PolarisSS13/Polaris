@@ -4,7 +4,12 @@
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(loc)) //else, there's considered to be no light
 		var/turf/T = loc
-		light_amount = T.get_lumcount() * 5
+		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
+		if(L)
+			light_amount = 2 * (min(5,L.lum_r + L.lum_g + L.lum_b) - 2.5) //hardcapped so it's not abused by having a ton of flashlights
+		else
+			light_amount =  5
+
 
 	nutrition += light_amount
 

@@ -218,11 +218,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			++ind
 			if(ind > 1)
 				. += ", "
-			switch(organ_name)
-				if ("brain")
-					. += "\tPositronic [organ_name]"
-				else
-					. += "\tSynthetic [organ_name]"
+			. += "\tSynthetic [organ_name]"
 		else if(status == "digital")
 			++ind
 			if(ind > 1)
@@ -611,23 +607,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = O_LUNGS
 			if("Brain")
 				if(pref.organ_data[BP_HEAD] != "cyborg")
-					user << "<span class='warning'>You may only select a cybernetic or synthetic brain if you have a full prosthetic body.</span>"
+					user << "<span class='warning'>You may only select an assisted or synthetic brain if you have a full prosthetic body.</span>"
 					return
 				organ = "brain"
 
-		var/list/organ_choices = list("Normal")
+		var/list/organ_choices = list("Normal","Assisted","Mechanical")
 		if(pref.organ_data[BP_TORSO] == "cyborg")
 			organ_choices -= "Normal"
 			if(organ_name == "Brain")
-				organ_choices += "Cybernetic"
-				organ_choices += "Positronic"
-				organ_choices += "Drone"
-			else
-				organ_choices += "Assisted"
-				organ_choices += "Mechanical"
-		else
-			organ_choices += "Assisted"
-			organ_choices += "Mechanical"
+				organ_choices += "Digital"
 
 		var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in organ_choices
 		if(!new_state) return
@@ -637,15 +625,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				pref.organ_data[organ] = null
 			if("Assisted")
 				pref.organ_data[organ] = "assisted"
-			if("Cybernetic")
-				pref.organ_data[organ] = "assisted"
-			if ("Mechanical")
+			if("Mechanical")
 				pref.organ_data[organ] = "mechanical"
-			if("Drone")
+			if("Digital")
 				pref.organ_data[organ] = "digital"
-			if("Positronic")
-				pref.organ_data[organ] = "mechanical"
-
 		return TOPIC_REFRESH
 
 	else if(href_list["disabilities"])

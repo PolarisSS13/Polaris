@@ -12,8 +12,7 @@
 		return 1
 	if(locate(/obj/structure/table/bench) in get_turf(mover))
 		return 0
-	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(mover)
-	if(table && !table.flipped)
+	if(locate(/obj/structure/table) in get_turf(mover))
 		return 1
 	return 0
 

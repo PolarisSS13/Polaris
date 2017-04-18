@@ -36,8 +36,6 @@
 	max_n2 = 0
 	minbodytemp = 0
 
-	has_langs = list("Mouse")
-
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 
 	var/mob/living/owner

@@ -7,11 +7,10 @@
 	log_say("Ghost/[src.key] : [message]")
 
 	if (src.client)
-		if(message)
-			client.handle_spam_prevention(MUTE_DEADCHAT)
-			if(src.client.prefs.muted & MUTE_DEADCHAT)
-				src << "\red You cannot talk in deadchat (muted)."
-				return
+		client.handle_spam_prevention(MUTE_DEADCHAT)
+		if(src.client.prefs.muted & MUTE_DEADCHAT)
+			src << "\red You cannot talk in deadchat (muted)."
+			return
 
 	. = src.say_dead(message)
 
@@ -28,11 +27,10 @@
 	log_emote("Ghost/[src.key] : [message]")
 
 	if(src.client)
-		if(message)
-			client.handle_spam_prevention(MUTE_DEADCHAT)
-			if(src.client.prefs.muted & MUTE_DEADCHAT)
-				src << "\red You cannot emote in deadchat (muted)."
-				return
+		client.handle_spam_prevention(MUTE_DEADCHAT)
+		if(src.client.prefs.muted & MUTE_DEADCHAT)
+			src << "\red You cannot emote in deadchat (muted)."
+			return
 
 	. = src.emote_dead(message)
 

@@ -85,7 +85,6 @@
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	unwielded_force_divisor = 0.25
 	force_divisor = 0.7 // 10/42 with hardness 60 (steel) and 0.25 unwielded divisor
-	dulled_divisor = 0.75	//Still metal on a stick
 	sharp = 1
 	edge = 1
 	w_class = ITEMSIZE_LARGE
@@ -142,4 +141,3 @@
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = "glass"
 	applies_material_colour = 0
-	fragile = 1	//It's a haphazard thing of glass, wire, and steel

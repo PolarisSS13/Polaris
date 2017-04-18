@@ -216,34 +216,6 @@ macro "borghotkeymode"
 		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
-		name = "NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "NUMPAD3"
-		command = "body-l-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD8"
-		command = "body-toggle-head"
-		is-disabled = false
-	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
@@ -436,34 +408,6 @@ macro "macro"
 	elem 
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD3"
-		command = "body-l-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD8"
-		command = "body-toggle-head"
 		is-disabled = false
 	elem 
 		name = "F1"
@@ -748,34 +692,6 @@ macro "hotkeymode"
 		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
-		name = "NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "NUMPAD3"
-		command = "body-l-leg"
-		is-disabled = false
-	elem 
-		name = "NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "NUMPAD8"
-		command = "body-toggle-head"
-		is-disabled = false
-	elem 
 		name = "F1"
 		command = "adminhelp"
 		is-disabled = false
@@ -964,34 +880,6 @@ macro "borgmacro"
 	elem 
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD1"
-		command = "body-r-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD2"
-		command = "body-groin"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD3"
-		command = "body-l-leg"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD4"
-		command = "body-r-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD5"
-		command = "body-chest"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD6"
-		command = "body-l-arm"
-		is-disabled = false
-	elem 
-		name = "CTRL+NUMPAD8"
-		command = "body-head-toggle"
 		is-disabled = false
 	elem 
 		name = "F1"
