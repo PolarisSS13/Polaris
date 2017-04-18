@@ -960,6 +960,20 @@ About the new airlock wires panel:
 	SetWeakened(5)
 	var/turf/T = get_turf(src)
 	T.add_blood(src)
+	var/list/valid_turfs = list() //A turf is valid if it is not a wall (not dense) and nothing on the turf is dense.
+	for(var/dir_to_test in cardinal)
+		var/turf/new_turf = get_step(T, dir_to_test)
+		if(new_turf.density)
+			continue //No point checking contents if this is a wall.
+		var/valid = 1
+		for(var/atom/movable/AM in new_turf.contents)
+			if(AM.density)
+				valid = 0
+				break
+		if(valid)
+			valid_turfs |= new_turf
+	if(valid_turfs.len) //Now we 'push' the unfortunate mob being crushed away in a random open dir, to prevent stunlocks.
+		src.forceMove(pick(valid_turfs))
 
 /mob/living/carbon/airlock_crush(var/crush_damage)
 	. = ..()
