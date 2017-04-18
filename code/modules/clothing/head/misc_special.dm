@@ -57,6 +57,16 @@
 			M.update_inv_wear_mask()
 		usr.update_action_buttons()
 
+
+/obj/item/clothing/head/welding/carp
+	name = "carp welding helmet"
+	desc = "A customized welding helmet, made to look like a space carp."
+	icon_state = "carpwelding"
+	item_state_slots = list(
+		slot_l_hand_str = "carpwelding",
+		slot_r_hand_str = "carpwelding",
+		)
+
 /obj/item/clothing/head/welding/demon
 	name = "demonic welding helmet"
 	desc = "A painted welding helmet, this one has a demonic face on it."

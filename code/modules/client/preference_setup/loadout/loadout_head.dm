@@ -313,30 +313,18 @@
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
 /datum/gear/head/welding/
-	display_name = "welding, normal (engineering/robotics)"
+	display_name = "Welding Helmet Selection"
 	path = /obj/item/clothing/head/welding
 	cost = 2
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist", "Cargo Techinician", "Quartermaster")
 
-/datum/gear/head/welding/demon
-	display_name = "welding, demon (engineering/robotics)"
-	path = /obj/item/clothing/head/welding/demon
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
-
-/datum/gear/head/welding/knight
-	display_name = "welding, knight (engineering/robotics)"
-	path = /obj/item/clothing/head/welding/knight
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
-
-/datum/gear/head/welding/fancy
-	display_name = "welding, fancy (engineering/robotics)"
-	path = /obj/item/clothing/head/welding/fancy
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
-
-/datum/gear/head/welding/engie
-	display_name = "welding, engie (engineering/robotics)"
-	path = /obj/item/clothing/head/welding/engie
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+/datum/gear/head/welding/New()
+	..()
+	var/list/welders = list()
+	for(var/welder in typesof(/obj/item/clothing/head/welding))
+		var/obj/item/clothing/head/welding/welder_type = welder
+		welders[initial(welder_type.name)] = welder_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(welders))
 
 /datum/gear/head/beret/sol
 	display_name = "beret sol, selection"
