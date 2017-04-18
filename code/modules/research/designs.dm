@@ -676,7 +676,17 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/mmi/digital/posibrain
 	category = "Misc"
 	sort_string = "VACAB"
-
+	
+/datum/design/item/mmi/digital/robot
+	name = "Robot Intelligence Circuit"
+	id = "robobrain"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
+	build_type = PROTOLATHE | MECHFAB | IMPRINTER
+	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 500)
+	build_path = /obj/item/device/mmi/digital/robot
+	category = "Misc"
+	sort_string = "VACAD"
+	
 /datum/design/item/mmi
 	name = "Man-machine interface"
 	id = "mmi"
