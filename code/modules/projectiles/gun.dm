@@ -283,6 +283,7 @@
 			held_disp_mod = held_disp_mod - round(one_handed_penalty / 2)
 
 	//actually attempt to shoot
+	user.break_cloak()
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
 	for(var/i in 1 to burst)
 		var/obj/projectile = consume_next_projectile(user)
