@@ -492,7 +492,7 @@ This function completely restores a damaged organ to perfect condition.
 
 //Burn damage can cause fluid loss due to blistering and cook-off
 	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT))
-		var/fluid_loss = (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume*(1 - BLOOD_VOLUME_SURVIVE/100)
+		var/fluid_loss = 0.75 * (damage/(owner.maxHealth - config.health_threshold_dead)) * owner.species.blood_volume*(1 - BLOOD_VOLUME_SURVIVE/100)
 		owner.remove_blood(fluid_loss)
 
 	// first check whether we can widen an existing wound
@@ -1127,7 +1127,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return !(status & (ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
-	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= 10 && prob(brute_dam + burn_dam))
+	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= 25 && prob(brute_dam + burn_dam))
 
 /obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
 	if(!owner || loc != owner)
