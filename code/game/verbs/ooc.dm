@@ -37,8 +37,7 @@
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
-	if(msg)
-		handle_spam_prevention(MUTE_OOC)
+	handle_spam_prevention(MUTE_OOC)
 
 	var/ooc_style = "everyone"
 	if(holder && !holder.fakekey)
@@ -108,8 +107,7 @@
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
-	if(msg)
-		handle_spam_prevention(MUTE_OOC)
+	handle_spam_prevention(MUTE_OOC)
 
 	var/mob/source = mob.get_looc_source()
 	var/turf/T = get_turf(source)

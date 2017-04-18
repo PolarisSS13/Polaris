@@ -15,7 +15,6 @@
 	gender = PLURAL
 	w_class = ITEMSIZE_SMALL
 	force_divisor = 0.63
-	dulled_divisor = 0.75	//It's a heavy bit of metal
 	attack_verb = list("punched", "beaten", "struck")
 	applies_material_colour = 0
 
@@ -29,7 +28,7 @@
 	w_class = ITEMSIZE_SMALL
 	sharp = 1
 	edge = 1
-	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
+	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 
@@ -83,7 +82,6 @@
 	icon_state = "hoe"
 	force_divisor = 0.25 // 5 with weight 20 (steel)
 	thrown_force_divisor = 0.25 // as above
-	dulled_divisor = 0.75	//Still metal on a long pole
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
@@ -99,5 +97,5 @@
 	throw_range = 3
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BACK
-	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 2)
+	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")

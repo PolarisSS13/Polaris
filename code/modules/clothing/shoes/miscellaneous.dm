@@ -22,7 +22,6 @@
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
 
-
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"
 	desc = "Sharp looking low quarters, perfect for a formal uniform."
@@ -140,12 +139,3 @@
 	name = "high heels"
 	desc = "A pair of high-heeled shoes. Fancy!"
 	icon_state = "heels"
-
-/obj/item/clothing/shoes/footwraps
-	name = "cloth footwraps"
-	desc = "A roll of treated canvas used for wrapping claws or paws"
-	icon_state = "clothwrap"
-	item_state = "clothwrap"
-	force = 0
-	w_class = ITEMSIZE_SMALL
-	species_restricted = null

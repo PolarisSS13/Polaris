@@ -4,7 +4,6 @@
 	speech_verb = "says"
 	colour = "changeling"
 	key = "g"
-	machine_understands = 0
 	flags = RESTRICTED | HIVEMIND
 
 /datum/language/ling/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
@@ -22,7 +21,6 @@
 	exclaim_verb = "sings"
 	colour = "alien"
 	key = "x"
-	machine_understands = 0
 	flags = RESTRICTED | HIVEMIND
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
@@ -82,5 +80,4 @@
 	exclaim_verb = "chants"
 	colour = "cult"
 	key = "y"
-	machine_understands = 0
 	flags = RESTRICTED | HIVEMIND

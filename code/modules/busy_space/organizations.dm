@@ -2,7 +2,6 @@
 /datum/lore/organization
 	var/name = ""				// Organization's name
 	var/short_name = ""			// Organization's shortname (NanoTrasen for "NanoTrasen Incorporated")
-	var/acronym = ""			// Organization's acronym, e.g. 'NT' for NanoTrasen'.
 	var/desc = ""				// One or two paragraph description of the organization, but only current stuff.  Currently unused.
 	var/history = ""			// Historical discription of the organization's origins  Currently unused.
 	var/work = ""				// Short description of their work, eg "an arms manufacturer"
@@ -53,22 +52,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 // TSCs
-/datum/lore/organization/tsc/nanotrasen
+/datum/lore/organization/nanotrasen
 	name = "NanoTrasen Incorporated"
 	short_name = "NanoTrasen"
-	acronym = "NT"
-	desc = "NanoTrasen is one of the foremost research and development companies in SolGov space. \
-	Originally focused on consumer products, their swift move into the field of Phoron has lead to \
-	them being the foremost experts on the substance and its uses. In the modern day, NanoTrasen prides \
-	itself on being an early adopter to as many new technologies as possible, often offering the newest \
-	products to their employees. In an effort to combat complaints about being 'guinea pigs', Nanotrasen \
-	also offers one of the most comprehensive medical plans in SolGov space, up to and including cloning \
-	and therapy.\
-	<br><br>\
-	NT's most well known products are its phoron based creations, especially those used in Cryotherapy. \
-	It also boasts an prosthetic line, which is provided to its employees as needed, and is used as an incentive \
-	for newly tested posibrains to remain with the company."
-	history = "" // To be written someday.
+	desc = "" // Todo: Write this.
+	history = "" // This too.
 	work = "research giant"
 	headquarters = "Luna"
 	motto = ""
@@ -87,20 +75,18 @@
 		"Vir Interstellar Spaceport"
 		)
 
-/datum/lore/organization/tsc/nanotrasen/New()
+/datum/lore/organization/nanotrasen/New()
 	..()
-	spawn(1) // BYOND shenanigans means using_map is not initialized yet.  Wait a tick.
-		// Get rid of the current map from the list, so ships flying in don't say they're coming to the current map.
-		var/string_to_test = "[using_map.station_name] in [using_map.starsys_name]"
-		if(string_to_test in destination_names)
-			destination_names.Remove(string_to_test)
+	// Get rid of the current map from the list, so ships flying in don't say they're coming to the current map.
+	var/string_to_test = "[using_map.station_name] in [using_map.starsys_name]"
+	if(string_to_test in destination_names)
+		destination_names.Remove(string_to_test)
 
 
 
-/datum/lore/organization/tsc/hephaestus
+/datum/lore/organization/hephaestus
 	name = "Hephaestus Industries"
 	short_name = "Hephaestus"
-	acronym = "HI"
 	desc = "Hephaestus Industries is the largest supplier of arms, ammunition, and small millitary vehicles in Sol space. \
 	Hephaestus products have a reputation for reliability, and the corporation itself has a noted tendency to stay removed \
 	from corporate politics. They enforce their neutrality with the help of a fairly large asset-protection contingent which \
@@ -116,10 +102,9 @@
 		"a SolGov dockyard on Luna"
 		)
 
-/datum/lore/organization/tsc/vey_med
+/datum/lore/organization/vey_med
 	name = "Vey Medical"
 	short_name = "Vey Med"
-	acronym = "VM"
 	desc = "Vey-Med is one of the newer TSCs on the block and is notable for being largely owned and opperated by Skrell. \
 	Despite the suspicion and prejudice leveled at them for their alien origin, Vey-Med has obtained market dominance in \
 	the sale of medical equipment-- from surgical tools to large medical devices to the Oddyseus trauma response mecha \
@@ -135,10 +120,9 @@
 	ship_prefixes = list("VTV" = "transportation", "VMV" = "medical resupply")
 	destination_names = list()
 
-/datum/lore/organization/tsc/zeng_hu
+/datum/lore/organization/zeng_hu
 	name = "Zeng-Hu pharmaceuticals"
 	short_name = "Zeng-Hu"
-	acronym = "ZH"
 	desc = "Zeng-Hu is an old TSC, based in the Sol system. Until the discovery of Phoron, Zeng-Hu maintained a stranglehold \
 	on the market for medications, and many household names are patentted by Zeng-Hu-- Bicaridyne, Dylovene, Tricordrizine, \
 	and Dexalin all came from a Zeng-Hu medical laboratory. Zeng-Hu’s fortunes have been in decline as Nanotrasen’s near monopoly \
@@ -153,10 +137,9 @@
 	ship_prefixes = list("ZTV" = "transportation", "ZMV" = "medical resupply")
 	destination_names = list()
 
-/datum/lore/organization/tsc/ward_takahashi
+/datum/lore/organization/ward_takahashi
 	name = "Ward-Takahashi General Manufacturing Conglomerate"
 	short_name = "Ward-Takahashi"
-	acronym = "WT"
 	desc = "Ward-Takahashi focuses on the sale of small consumer electronics, with its computers, communicators, \
 	and even mid-class automobiles a fixture of many households. Less famously, Ward-Takahashi also supplies most \
 	of the AI cores on which vital control systems are mounted, and it is this branch of their industry that has \
@@ -171,10 +154,9 @@
 	ship_prefixes = list("WTV" = "freight")
 	destination_names = list()
 
-/datum/lore/organization/tsc/bishop
+/datum/lore/organization/bishop
 	name = "Bishop Cybernetics"
 	short_name = "Bishop"
-	acronym = "BC"
 	desc = "Bishop’s focus is on high-class, stylish cybernetics. A favorite among transhumanists (and a bête noire for \
 	bioconservatives), Bishop manufactures not only prostheses but also brain augmentation, synthetic organ replacements, \
 	and odds and ends like implanted wrist-watches. Their business model tends towards smaller, boutique operations, giving \
@@ -189,10 +171,9 @@
 	ship_prefixes = list("BTV" = "transportation")
 	destination_names = list()
 
-/datum/lore/organization/tsc/morpheus
+/datum/lore/organization/morpheus
 	name = "Morpheus Cyberkinetics"
 	short_name = "Morpheus"
-	acronym = "MC"
 	desc = "The only large corporation run by positronic intelligences, Morpheus caters almost exclusively to their sensibilities \
 	and needs. A product of the synthetic colony of Shelf, Morpheus eschews traditional advertising to keep their prices low and \
 	relied on word of mouth among positronics to reach their current economic dominance. Morpheus in exchange lobbies heavily for \
@@ -255,7 +236,7 @@
 		)
 	destination_names = list()
 
-/datum/lore/organization/tsc/xion
+/datum/lore/organization/xion
 	name = "Xion Manufacturing Group"
 	short_name = "Xion"
 	desc = "Xion, quietly, controls most of the market for industrial equipment. Their portfolio includes mining exosuits, \
@@ -272,7 +253,7 @@
 
 // Governments
 
-/datum/lore/organization/gov/sifgov
+/datum/lore/organization/sifgov
 	name = "Sif Governmental Authority"
 	short_name = "SifGov"
 	desc = "SifGov is the sole governing administration for the Vir system, based in New Reykjavik, Sif.  It is a representative \
@@ -293,14 +274,13 @@
 						"Vir Interstellar Spaceport"
 						)
 
-/datum/lore/organization/gov/solgov
+/datum/lore/organization/solgov
 	name = "Solar Confederate Government"
 	short_name = "SolGov"
-	acronym = "SCG"
 	desc = "SolGov is a decentralized confederation of human governmental entities based on Luna, Sol, which defines top-level law for their member states.  \
 	Member states receive various benefits such as defensive pacts, trade agreements, social support and funding, and being able to participate \
 	in the Colonial Assembly.  The majority, but not all human territories are members of SolGov.  As such, SolGov is a major power and \
-	defacto represents humanity on the galactic stage."
+	defacto represents humanity on the galatic stage."
 	history = "" // Todo
 	work = "governing polity of humanity's Confederation"
 	headquarters = "Luna"
@@ -321,7 +301,7 @@
 
 // Military
 
-/datum/lore/organization/mil/sif_guard
+/datum/lore/organization/sif_guard
 	name = "Sif Homeguard Forces" // Todo: Get better name from lorepeople.
 	short_name = "SifGuard"
 	desc = ""

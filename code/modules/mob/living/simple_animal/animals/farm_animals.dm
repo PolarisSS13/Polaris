@@ -167,7 +167,6 @@
 	response_harm   = "kicks"
 	attacktext = "kicked"
 
-	has_langs = list("Bird")
 	speak_chance = 2
 	speak = list("Cherp.","Cherp?","Chirrup.","Cheep!")
 	speak_emote = list("cheeps")
@@ -214,7 +213,6 @@ var/global/chicken_count = 0
 	response_harm   = "kicks"
 	attacktext = "kicked"
 
-	has_langs = list("Bird")
 	speak_chance = 2
 	speak = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
 	speak_emote = list("clucks","croons")

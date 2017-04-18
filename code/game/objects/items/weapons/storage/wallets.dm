@@ -23,9 +23,7 @@
 		/obj/item/weapon/photo,
 		/obj/item/weapon/reagent_containers/dropper,
 		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/stamp,
-		/obj/item/weapon/permit
-		)
+		/obj/item/weapon/stamp)
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null

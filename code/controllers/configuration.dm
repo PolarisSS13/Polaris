@@ -94,7 +94,6 @@ var/list/gamemode_cache = list()
 	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
-	var/panic_bunker = 0
 
 	var/serverurl
 	var/server

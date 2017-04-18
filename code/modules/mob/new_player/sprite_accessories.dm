@@ -61,10 +61,6 @@
 		name = "Short Hair 2"
 		icon_state = "hair_shorthair3"
 
-	twintail
-		name = "Twintail"
-		icon_state = "hair_twintail"
-
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
@@ -388,7 +384,7 @@
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
-		gender = MALE
+		gender = MALE // turnoff!
 
 	familyman
 		name = "The Family Man"
@@ -529,19 +525,9 @@
 		icon_state = "hair_coffeehouse"
 		gender = MALE
 
-	undercut1
+	undercut
 		name = "Undercut"
-		icon_state = "hair_undercut1"
-		gender = MALE
-
-	undercut2
-		name = "Undercut Swept Right"
-		icon_state = "hair_undercut2"
-		gender = MALE
-
-	undercut3
-		name = "Undercut Swept Left"
-		icon_state = "hair_undercut3"
+		icon_state = "hair_undercut"
 		gender = MALE
 
 	partfade
@@ -561,7 +547,7 @@
 /datum/sprite_accessory/facial_hair
 
 	icon = 'icons/mob/Human_face.dmi'
-	gender = MALE
+	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
 
 	shaved
 		name = "Shaved"
@@ -1035,13 +1021,9 @@
 		icon_state = "tat_campbell"
 		body_parts = list(BP_R_ARM)
 
-		left
-			name = "Tattoo (Campbell, L.Arm)"
-			body_parts = list(BP_L_ARM)
-
 	tat_tiger
 		name = "Tattoo (Tiger Stripes, Body)"
-		icon_state = "tat_tiger"
+		icon_state = "tat_campbell"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_TORSO,BP_GROIN)
 
 	taj_paw_socks
@@ -1090,13 +1072,11 @@
 		name = "Color Patches"
 		icon_state = "patches"
 		body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_TORSO,BP_GROIN)
-		species_allowed = list("Tajara")
 
 	patchesface
 		name = "Color Patches (Face)"
 		icon_state = "patchesface"
 		body_parts = list(BP_HEAD)
-		species_allowed = list("Tajara")
 
 	bands
 		name = "Color Bands"

@@ -58,6 +58,11 @@
 	item_cost = 15
 	path = /obj/item/device/encryptionkey/binary
 
+/datum/uplink_item/item/tools/packagebomb
+	name = "Package Bomb (Small)"
+	item_cost = 20
+	path = /obj/item/weapon/storage/box/syndie_kit/demolitions
+
 /datum/uplink_item/item/tools/hacking_tool
 	name = "Door Hacking Tool"
 	item_cost = 20
@@ -76,11 +81,6 @@
 	item_cost = 30
 	path = /obj/item/clothing/glasses/thermal/syndi
 
-/datum/uplink_item/item/tools/packagebomb
-	name = "Package Bomb (Small)"
-	item_cost = 30
-	path = /obj/item/weapon/storage/box/syndie_kit/demolitions
-
 /datum/uplink_item/item/tools/powersink
 	name = "Powersink (DANGER!)"
 	item_cost = 40
@@ -88,13 +88,13 @@
 
 /datum/uplink_item/item/tools/packagebomb/large
 	name = "Package Bomb (Large)"
-	item_cost = 60
+	item_cost = 40
 	path = /obj/item/weapon/storage/box/syndie_kit/demolitions_heavy
 
 /*
 /datum/uplink_item/item/tools/packagebomb/huge
 	name = "Package Bomb (Huge)
-	item_cost = 100
+	item_cost = 60
 	path = /obj/item/weapon/storage/box/syndie_kit/demolitions_super_heavy
 */
 

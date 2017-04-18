@@ -134,7 +134,7 @@
 	if(rag)
 		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
 		underlays += underlay_image
-		set_light(rag.light_range, rag.light_power, rag.light_color)
+		copy_light(rag)
 	else
 		set_light(0)
 

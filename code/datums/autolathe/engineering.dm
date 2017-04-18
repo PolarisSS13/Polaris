@@ -74,10 +74,6 @@
 	name = "request console electronics"
 	path =/obj/item/weapon/circuitboard/request
 
-/datum/category_item/autolathe/engineering/pipelayer
-	name = "pipe layer electronics"
-	path =/obj/item/weapon/circuitboard/pipelayer
-
 /datum/category_item/autolathe/engineering/motor
 	name = "motor"
 	path =/obj/item/weapon/stock_parts/motor
