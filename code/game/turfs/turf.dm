@@ -21,7 +21,6 @@
 	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
 	var/blessed = 0             // Has the turf been blessed?
-	var/dynamic_lighting = 1    // Does the turf use dynamic lighting?
 
 	var/list/decals
 
@@ -244,3 +243,11 @@ var/const/enterloopsanity = 100
 /turf/proc/update_blood_overlays()
 	return
 
+// Called when turf is hit by a thrown object
+/turf/hitby(atom/movable/AM as mob|obj, var/speed)
+	if(src.density)
+		spawn(2)
+			step(AM, turn(AM.last_move, 180))
+		if(isliving(AM))
+			var/mob/living/M = AM
+			M.turf_collision(src, speed)
