@@ -305,6 +305,7 @@
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER
+	H.universal_understand = 1
 	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
