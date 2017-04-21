@@ -87,7 +87,7 @@
 
 	var/last_shot = 0			//records the last shot fired
 
-/obj/item/weapon/gun/New()
+/obj/item/weapon/gun/New(loc, dna_lock = 0)
 	..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])

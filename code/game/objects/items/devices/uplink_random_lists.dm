@@ -53,14 +53,14 @@ var/datum/uplink_random_selection/all_uplink_selection = new/datum/uplink_random
 /datum/uplink_random_selection/default/New()
 	..()
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/silenced_45)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/ranged/silenced_45)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/mc9mm)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/ranged/revolver)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/a357)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/ranged/heavysniper, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/sniperammo, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/crossbow, 33)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/ranged/crossbow, 33)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/energy_sword, 75)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealthy_weapons/soap, 5, 100)
