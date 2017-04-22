@@ -352,13 +352,6 @@
 			if(!L.is_bruised() && prob(8))
 				rupture_lung()
 
-		if(should_have_organ("brain"))
-			var/brainOxPercent = 0.02		//Default2% of your current oxyloss is applied as brain damage, 50 oxyloss is 1 brain damage
-			if(CE_STABLE in chem_effects)
-				brainOxPercent = 0.01		//Halved in effect
-			if(prob(5))
-				adjustBrainLoss(brainOxPercent * oxyloss)
-
 		oxygen_alert = max(oxygen_alert, 1)
 
 		return 0
@@ -377,8 +370,9 @@
 			safe_pressure_min *= 1.25
 		else if(breath)
 			if(breath.total_moles < BREATH_MOLES / 10 || breath.total_moles > BREATH_MOLES * 5)
-				if (prob(8))
-					rupture_lung()
+				if(is_below_sound_pressure(get_turf(src)))	//No more popped lungs from choking/drowning
+					if (prob(8))
+						rupture_lung()
 
 	var/safe_exhaled_max = 10
 	var/safe_toxins_max = 0.2
@@ -823,11 +817,7 @@
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
-				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-				if(L)
-					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 2 //hardcapped so it's not abused by having a ton of flashlights
-				else
-					light_amount =  10
+				light_amount = T.get_lumcount() * 10
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
@@ -846,11 +836,7 @@
 		var/light_amount = 0
 		if(isturf(loc))
 			var/turf/T = loc
-			var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-			if(L)
-				light_amount = L.lum_r + L.lum_g + L.lum_b //hardcapped so it's not abused by having a ton of flashlights
-			else
-				light_amount =  10
+			light_amount = T.get_lumcount() * 10
 		if(light_amount > species.light_dam) //if there's enough light, start dying
 			take_overall_damage(1,1)
 		else //heal in the dark
@@ -924,6 +910,14 @@
 		else
 			for(var/atom/a in hallucinations)
 				qdel(a)
+
+		//Brain damage from Oxyloss
+		if(should_have_organ("brain"))
+			var/brainOxPercent = 0.015		//Default 1.5% of your current oxyloss is applied as brain damage, 50 oxyloss is 1 brain damage
+			if(CE_STABLE in chem_effects)
+				brainOxPercent = 0.008		//Halved in effect
+			if(oxyloss >= 20 && prob(5))
+				adjustBrainLoss(brainOxPercent * oxyloss)
 
 		if(halloss >= species.total_health)
 			src << "<span class='notice'>You're in too much pain to keep going...</span>"
@@ -1356,8 +1350,7 @@
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
 		var/turf/T = loc
-		var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
-		if(L && L.lum_r + L.lum_g + L.lum_b == 0)
+		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
 /mob/living/carbon/human/handle_stomach()
