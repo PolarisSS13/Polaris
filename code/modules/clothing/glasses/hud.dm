@@ -2,6 +2,10 @@
 	name = "HUD"
 	desc = "A heads-up display that provides important info in (almost) real time."
 	flags = 0 //doesn't protect eyes because it's a monocle, duh
+	toggleable = 1
+	off_state = "hudoff"
+	action_button_name = "Toggle HUD"
+	activation_sound = 'sound/effects/pop.ogg'
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2)
 	var/list/icon/current = list() //the current hud icons
 
@@ -20,6 +24,7 @@
 	desc = "A medical HUD integrated with a set of prescription glasses"
 	prescription = 1
 	icon_state = "healthhudpresc"
+	off_state = "prescoff"
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
@@ -38,6 +43,7 @@
 	desc = "A security HUD integrated with a set of prescription glasses"
 	prescription = 1
 	icon_state = "sechudpresc"
+	off_state = "prescoff"
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 
 /obj/item/clothing/glasses/hud/security/jensenshades
