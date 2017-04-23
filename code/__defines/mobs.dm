@@ -207,3 +207,8 @@
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
+
+#define FBP_NONE	""
+#define FBP_CYBORG	"cyborg"
+#define FBP_POSI	"positronic"
+#define FBP_DRONE	"drone"
