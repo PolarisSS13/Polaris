@@ -173,8 +173,6 @@
 	New()
 		..()
 		icon_state = "datadisk[rand(0,6)]"
-		src.pixel_x = rand(-5, 5)
-		src.pixel_y = rand(-5, 5)
 		files = list()
 		if(istype(spawn_files))
 			for(var/typekey in spawn_files)

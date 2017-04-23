@@ -222,10 +222,6 @@ research holder datum.
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
-/obj/item/weapon/disk/tech_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
-
 /obj/item/weapon/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
@@ -235,7 +231,3 @@ research holder datum.
 	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/design/blueprint
-
-/obj/item/weapon/disk/design_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
