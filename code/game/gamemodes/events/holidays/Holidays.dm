@@ -115,7 +115,8 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Holiday["Blood Donor Day"] = "This holiday was created to raise awareness of the need for safe blood and blood products, \
 					and to thank blood donors for their voluntary, life-saving gifts of blood."
 				
-				if(20) Holiday["Civil Servan"] =
+				if(20) Holiday["Civil Servant's Day"] = "Civil Servant's day is a holiday observed in SCG member states that honors civil servants everywhere,\
+					especially those who are members of the armed services and law enforcement forces, or have served in them."
 
 		if(7)	//Jul
 			switch(DD)
