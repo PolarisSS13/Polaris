@@ -8,18 +8,18 @@
 #define HEAT_DAMAGE_LEVEL_2 10 //Amount of damage applied when your body temperature passes the 400K point
 #define HEAT_DAMAGE_LEVEL_3 20 //Amount of damage applied when your body temperature passes the 1000K point
 
-#define COLD_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when your body temperature just passes the 260.15k safety point
-#define COLD_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 200K point
-#define COLD_DAMAGE_LEVEL_3 3 //Amount of damage applied when your body temperature passes the 120K point
+#define COLD_DAMAGE_LEVEL_1 6 //Amount of damage applied when your body temperature just passes the 260.15k safety point
+#define COLD_DAMAGE_LEVEL_2 10 //Amount of damage applied when your body temperature passes the 200K point
+#define COLD_DAMAGE_LEVEL_3 20 //Amount of damage applied when your body temperature passes the 120K point
 
 //Note that gas heat damage is only applied once every FOUR ticks.
 #define HEAT_GAS_DAMAGE_LEVEL_1 2 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
 #define HEAT_GAS_DAMAGE_LEVEL_2 4 //Amount of damage applied when the current breath's temperature passes the 400K point
 #define HEAT_GAS_DAMAGE_LEVEL_3 8 //Amount of damage applied when the current breath's temperature passes the 1000K point
 
-#define COLD_GAS_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when the current breath's temperature just passes the 260.15k safety point
-#define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
-#define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
+#define COLD_GAS_DAMAGE_LEVEL_1 2 //Amount of damage applied when the current breath's temperature just passes the 260.15k safety point
+#define COLD_GAS_DAMAGE_LEVEL_2 4 //Amount of damage applied when the current breath's temperature passes the 200K point
+#define COLD_GAS_DAMAGE_LEVEL_3 8 //Amount of damage applied when the current breath's temperature passes the 120K point
 
 #define RADIATION_SPEED_COEFFICIENT 0.1
 
@@ -530,13 +530,13 @@
 
 		else if(breath.temperature <= species.cold_level_1)
 			if(breath.temperature > species.cold_level_2)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				adjustOxyLoss(COLD_GAS_DAMAGE_LEVEL_1)
 				fire_alert = max(fire_alert, 1)
 			else if(breath.temperature > species.cold_level_3)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				adjustOxyLoss(COLD_GAS_DAMAGE_LEVEL_2)
 				fire_alert = max(fire_alert, 1)
 			else
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				adjustOxyLoss(COLD_GAS_DAMAGE_LEVEL_3)
 				fire_alert = max(fire_alert, 1)
 
 
@@ -637,15 +637,15 @@
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			var/burn_dam = 0
+			var/cold_dam = 0
 			switch(bodytemperature)
 				if(species.cold_level_1 to species.cold_level_2)
-					burn_dam = COLD_DAMAGE_LEVEL_1
+					cold_dam = COLD_DAMAGE_LEVEL_1
 				if(species.cold_level_2 to species.cold_level_3)
-					burn_dam = COLD_DAMAGE_LEVEL_2
+					cold_dam = COLD_DAMAGE_LEVEL_2
 				if(species.cold_level_3 to -INFINITY)
-					burn_dam = COLD_DAMAGE_LEVEL_3
-			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
+					cold_dam = COLD_DAMAGE_LEVEL_3
+			adjustOxyLoss(cold_dam)
 			fire_alert = max(fire_alert, 1)
 
 	// Account for massive pressure differences.  Done by Polymorph
