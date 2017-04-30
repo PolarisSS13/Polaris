@@ -22,22 +22,27 @@
 	var/input_level = 50000 		// amount of power the SMES attempts to charge by
 	var/input_level_max = 200000 	// cap on input_level
 	var/input_available = 0 		// amount of charge available from input last tick
-
-	var/output_attempt = 1 			// 1 = attempting to output, 0 = not attempting to output
-	var/outputting = 1 				// 1 = actually outputting, 0 = not outputting
+	var/output_attempt = 0 			// 1 = attempting to output, 0 = not attempting to output
+	var/outputting = 0 				// 1 = actually outputting, 0 = not outputting
 	var/output_level = 50000		// amount of power the SMES attempts to output
 	var/output_level_max = 200000	// cap on output_level
 	var/output_used = 0				// amount of power actually outputted. may be less than output_level if the powernet returns excess power
 
 	//Holders for powerout event.
-	var/last_output_attempt	= 0
-	var/last_input_attempt	= 0
-	var/last_charge			= 0
+	//var/last_output_attempt	= 0
+	//var/last_input_attempt	= 0
+	//var/last_charge			= 0
+
+	//For icon overlay updates
+	var/last_disp
+	var/last_chrg
+	var/last_onln
 
 	var/input_cut = 0
 	var/input_pulsed = 0
 	var/output_cut = 0
 	var/output_pulsed = 0
+	var/target_load
 
 	var/open_hatch = 0
 	var/name_tag = null
@@ -116,52 +121,57 @@
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
 
+/obj/machinery/power/smes/proc/input_power(var/percentage)
+	var/inputted_power = target_load * (percentage/100)
+	inputted_power = between(0, inputted_power, target_load)
+	if(terminal && terminal.powernet)
+		inputted_power = terminal.powernet.draw_power(inputted_power)
+		charge += inputted_power * SMESRATE
+		if(inputted_power == input_level)
+			inputting = 2
+		else if(inputted_power)
+			inputting = 1
+		// else inputting = 0, as set in process()
+
 /obj/machinery/power/smes/process()
 	if(stat & BROKEN)	return
 
-	//store machine state to see if we need to update the icon overlays
-	var/last_disp = chargedisplay()
-	var/last_chrg = inputting
-	var/last_onln = outputting
-
-	//inputting
-	if(input_attempt && (!input_pulsed && !input_cut) && !grid_check)
-		var/target_load = min((capacity-charge)/SMESRATE, input_level)	// charge at set rate, limited to spare capacity
-		var/actual_load = draw_power(target_load)						// add the load to the terminal side network
-		charge += actual_load * SMESRATE								// increase the charge
-
-		if (actual_load >= target_load) // Did we charge at full rate?
-			inputting = 2
-		else if (actual_load) // If not, did we charge at least partially?
-			inputting = 1
-		else // Or not at all?
-			inputting = 0
-
-	//outputting
-	if(outputting && (!output_pulsed && !output_cut) && !grid_check)
-		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
-
-		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
-
-		add_avail(output_used)				// add output to powernet (smes side)
-
-		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting(0)
-			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
-	else if(output_attempt && output_level > 0)
-		outputting = 1
-	else
-		output_used = 0
 
 	// only update icon if state changed
 	if(last_disp != chargedisplay() || last_chrg != inputting || last_onln != outputting)
 		update_icon()
 
+	//store machine state to see if we need to update the icon overlays
+	last_disp = chargedisplay()
+	last_chrg = inputting
+	last_onln = outputting
 
+	// inputting
+	if(input_attempt && (!input_pulsed && !input_cut))
+		target_load = min((capacity-charge)/SMESRATE, input_level)	// Amount we will request from the powernet.
+		if(terminal && terminal.powernet)
+			terminal.powernet.smes_demand += target_load
+			terminal.powernet.inputting.Add(src)
+		else
+			target_load = 0 // We won't input any power without powernet connection.
+		inputting = 0
+
+	//outputting
+	if(output_attempt && (!output_pulsed && !output_cut) && !grid_check && powernet && charge)
+		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
+
+		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
+
+		add_avail(output_used)				// add output to powernet (smes side)
+		outputting = 2
+	else if(!powernet || !charge)
+		outputting = 1
+	else
+		outputting = 0
 
 // called after all power processes are finished
 // restores charge level to smes if there was excess this ptick
-/obj/machinery/power/smes/proc/restore()
+/obj/machinery/power/smes/proc/restore(var/percent_load)
 	if(stat & BROKEN)
 		return
 
@@ -169,20 +179,18 @@
 		output_used = 0
 		return
 
-	var/excess = powernet.netexcess		// this was how much wasn't used on the network last ptick, minus any removed by other SMESes
-
-	excess = min(output_used, excess)				// clamp it to how much was actually output by this SMES last ptick
-
-	excess = min((capacity-charge)/SMESRATE, excess)	// for safety, also limit recharge by space capacity of SMES (shouldn't happen)
+	var/total_restore = output_used * (percent_load / 100) // First calculate amount of power used from our output
+	total_restore = between(0, total_restore, output_used) // Now clamp the value between 0 and actual output, just for clarity.
+	total_restore = output_used - total_restore			   // And, at last, subtract used power from outputted power, to get amount of power we will give back to the SMES.
 
 	// now recharge this amount
 
 	var/clev = chargedisplay()
 
-	charge += excess * SMESRATE			// restore unused power
-	powernet.netexcess -= excess		// remove the excess from the powernet, so later SMESes don't try to use it
+	charge += total_restore * SMESRATE			// restore unused power
+	powernet.netexcess -= total_restore		// remove the excess from the powernet, so later SMESes don't try to use it
 
-	output_used -= excess
+	output_used -= total_restore
 
 	if(clev != chargedisplay() ) //if needed updates the icons overlay
 		update_icon()
@@ -316,13 +324,7 @@
 	data["outputLevel"] = round(output_level/1000, 0.1)
 	data["outputMax"] = round(output_level_max/1000)
 	data["outputLoad"] = round(output_used/1000, 0.1)
-
-	if(outputting)
-		data["outputting"] = 2			// smes is outputting
-	else if(!outputting && output_attempt)
-		data["outputting"] = 1			// smes is online but not outputting because it's charge level is too low
-	else
-		data["outputting"] = 0			// smes is not outputting
+	data["outputting"] = outputting
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
