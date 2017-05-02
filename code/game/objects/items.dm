@@ -86,10 +86,12 @@
 		else
 			embed_chance = force/(w_class*3)
 	..()
+/*
 	if(randpixel && (!pixel_x && !pixel_y)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, 0) - randpixel //an idea borrowed from some of the older pixel_y randomizations. Intended to make items appear to drop at a character's feet
-
+*/
+	//keeping this here if it's ever wanted.
 
 /obj/item/equipped()
 	..()
