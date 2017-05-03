@@ -9,6 +9,7 @@ LINEN BINS
 	desc = "A surprisingly soft linen bedsheet."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "sheet"
+	randpixel = 0
 	slot_flags = SLOT_BACK
 	layer = 4.0
 	throwforce = 1

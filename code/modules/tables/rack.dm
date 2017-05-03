@@ -12,6 +12,11 @@
 	verbs -= /obj/structure/table/verb/do_flip
 	verbs -= /obj/structure/table/proc/do_put
 
+
+/obj/structure/table/rack/initialize()
+	auto_align()
+	..()
+
 /obj/structure/table/rack/update_connections()
 	return
 
