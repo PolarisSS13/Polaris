@@ -96,10 +96,11 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 				
 				if(18)
 					Holiday["Remembrance Day"] = "Remembrance Day (or, as it is more informally known, Armistice Day) is a confederation-wide holiday \ 
-					mostly observed in its member states since the late 2520's. Officially, it is a day of remembering the men and women who died in various armed conflicts \
+					mostly observed by its member states since late 2520. Officially, it is a day of remembering the men and women who died in various armed conflicts \
 					throughout human history. Unofficially, however, it is commonly treated as a holiday honoring the victims of the Human-Unathi war. \
 					Observance of this day varies throughout human space, but most common traditions are the act of bringing flowers to graves,\
 					attending parades, and the wearing of poppies (either paper or real) in one's clothing."
+				
 				
 				if(28)
 					Holiday["Jiql-tes"] = "A Skrellian holiday that translates to 'Day of Celebration', Skrell communities \
@@ -117,8 +118,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 				
 				if(20)
 					Holiday["Civil Servant's Day"] = "Civil Servant's Day is a holiday observed in SCG member states that honors civil servants everywhere,\
-					(especially those who are members of the armed forces and the emergency services), or have been or have been civil servants in the past.
-"
+					(especially those who are members of the armed forces and the emergency services), or have been or have been civil servants in the past."
 
 		if(7)	//Jul
 			switch(DD)
