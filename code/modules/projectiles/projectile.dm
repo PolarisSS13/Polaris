@@ -65,6 +65,8 @@
 	var/tracer_type
 	var/impact_type
 
+	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
+
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
 	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
@@ -171,7 +173,7 @@
 		return
 
 	//roll to-hit
-	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier + round(15*target_mob.evasion), 0)
+	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier + round(15*target_mob.get_evasion()), 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS
@@ -298,6 +300,10 @@
 
 		if(!location)
 			qdel(src)	// if it's left the world... kill it
+			return
+
+		if (is_below_sound_pressure(get_turf(src)) && !vacuum_traversal) //Deletes projectiles that aren't supposed to bein vacuum if they leave pressurised areas
+			qdel(src)
 			return
 
 		before_move()

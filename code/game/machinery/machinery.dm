@@ -136,7 +136,13 @@ Class Procs:
 				component_parts -= A
 	if(contents) // The same for contents.
 		for(var/atom/A in contents)
-			qdel(A)
+			if(ishuman(A))
+				var/mob/living/carbon/human/H = A
+				H.client.eye = H.client.mob
+				H.client.perspective = MOB_PERSPECTIVE
+				H.loc = src.loc
+			else
+				qdel(A)
 	return ..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
@@ -276,6 +282,13 @@ Class Procs:
 		if(user.stunned)
 			return 1
 	return 0
+
+/obj/machinery/proc/default_apply_parts()
+	var/obj/item/weapon/circuitboard/CB = circuit
+	if(!istype(CB))
+		return
+	CB.apply_default_parts(src)
+	RefreshParts()
 
 /obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 	if(!istype(R))

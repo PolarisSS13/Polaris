@@ -8,11 +8,15 @@
 	light_range = 2
 	light_power = 0.5
 	light_color = "#55AAFF"
+	var/pulse_range = 1
 
 
 	on_hit(var/atom/target, var/blocked = 0)
-		empulse(target, 1, 1)
+		empulse(target, pulse_range, pulse_range, pulse_range, pulse_range)
 		return 1
+
+/obj/item/projectile/ion/small
+	pulse_range = 0
 
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
@@ -146,7 +150,7 @@
 	on_hit(var/atom/target, var/blocked = 0)
 		if(ishuman(target))
 			var/mob/living/carbon/human/M = target
-			M.confused += rand(5,8)
+			M.Confuse(rand(5,8))
 
 /obj/item/projectile/chameleon
 	name = "bullet"
@@ -156,4 +160,3 @@
 	nodamage = 1
 	damage_type = HALLOSS
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
-

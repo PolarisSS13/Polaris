@@ -32,12 +32,12 @@
 			user << "<span class='notice'>You stab \the [L] with a hidden integrated hypo, attempting to bring them back...</span>"
 			if(istype(L, /mob/living/simple_animal))
 				var/mob/living/simple_animal/SM = L
-				SM.health = SM.maxHealth / 3
+				SM.health = SM.getMaxHealth() / 3
 				SM.stat = CONSCIOUS
 				dead_mob_list -= SM
 				living_mob_list += SM
 				SM.icon_state = SM.icon_living
-				adjust_instability(30)
+				adjust_instability(15)
 			else if(ishuman(L))
 				var/mob/living/carbon/human/H = L
 
@@ -48,6 +48,9 @@
 							revive you. Return to your body if you want to be resurrected!</b> \
 							(Verbs -> Ghost -> Re-enter corpse)</font></font>"
 							break
+
+				H.adjustBruteLoss(-40)
+				H.adjustFireLoss(-40)
 
 				sleep(10 SECONDS)
 				if(H.client)

@@ -135,7 +135,7 @@
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/mask/smokable/cigarette/cigar/havana(src.loc)
-	new /obj/item/clothing/shoes/jackboots(src.loc)
+	new /obj/item/clothing/shoes/boots/jackboots(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/nyangirl/New()
@@ -194,7 +194,7 @@
 	new /obj/item/clothing/under/waiter(src.loc)
 	var/CHOICE= pick( /obj/item/clothing/head/kitty, /obj/item/clothing/head/rabbitears)
 	new CHOICE(src.loc)
-	new /obj/item/clothing/suit/apron(src.loc)
+	new /obj/item/clothing/suit/storage/apron(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/pirate/New()

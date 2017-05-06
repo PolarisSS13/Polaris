@@ -212,6 +212,19 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	alert_called = 0
 	update_icon()
 	ui_interact(user)
+	if(video_source)
+		watch_video(user)
+
+// Proc: MouseDrop()
+//Same thing PDAs do
+/obj/item/device/communicator/MouseDrop(obj/over_object as obj)
+	var/mob/M = usr
+	if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
+		return
+	if(!istype(over_object, /obj/screen))
+		return attack_self(M)
+	return
+
 
 // Proc: attack_ghost()
 // Parameters: 1 (user - the ghost clicking on the device)
@@ -1021,7 +1034,8 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(!Adjacent(user) || !video_source) return
 	user.set_machine(video_source)
 	user.reset_view(video_source)
-	user << "<span class='notice'>Now viewing video session. To leave camera view: OOC -> Cancel Camera View</span>"
+	to_chat(user,"<span class='notice'>Now viewing video session. To leave camera view, close the communicator window OR: OOC -> Cancel Camera View</span>")
+	to_chat(user,"<span class='notice'>To return to an active video session, use the communicator in your hand.</span>")
 	spawn(0)
 		while(user.machine == video_source && Adjacent(user))
 			var/turf/T = get_turf(video_source)

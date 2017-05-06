@@ -24,7 +24,7 @@
 
 	if(held_item == null)
 		if(src.mind.changeling.recursive_enhancement)
-			if(changeling_generic_weapon(/obj/item/weapon/electric_hand/efficent))
+			if(changeling_generic_weapon(/obj/item/weapon/electric_hand/efficent,0))
 				src << "<span class='notice'>We will shock others more efficently.</span>"
 				return 1
 		else
@@ -43,7 +43,7 @@
 		if(istype(held_item,/obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = held_item
 			if(G.affecting)
-				G.affecting.electrocute_act(10 * siemens,src,1.0,BP_TORSO)
+				G.affecting.electrocute_act(10 * siemens, src, 1.0, BP_TORSO, 0)
 				var/agony = 80 * siemens //Does more than if hit with an electric hand, since grabbing is slower.
 				G.affecting.stun_effect_act(0, agony, BP_TORSO, src)
 

@@ -158,7 +158,8 @@
 
 proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	if(automute)
-		if(!config.automute_on)	return
+		if(!config.automute_on)
+			return
 	else
 		if(!usr || !usr.client)
 			return
@@ -169,8 +170,10 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 			usr << "<font color='red'>Error: cmd_admin_mute: This mob doesn't have a client tied to it.</font>"
 		if(M.client.holder)
 			usr << "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>"
-	if(!M.client)		return
-	if(M.client.holder)	return
+	if(!M.client)
+		return
+	if(M.client.holder)
+		return
 
 	var/muteunmute
 	var/mute_string
@@ -256,7 +259,7 @@ Ccomp's first proc.
 /client/proc/allow_character_respawn()
 	set category = "Special Verbs"
 	set name = "Allow player to respawn"
-	set desc = "Let's the player bypass the 15 minute wait to respawn or allow them to re-enter their corpse."
+	set desc = "Let's the player bypass the wait to respawn or allow them to re-enter their corpse."
 	if(!holder)
 		src << "Only administrators and moderators may use this command."
 	var/list/ghosts= get_ghosts(1,1)
@@ -278,8 +281,8 @@ Ccomp's first proc.
 	G.can_reenter_corpse = 1
 
 	G:show_message(text("\blue <B>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</B>"), 1)
-	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the 15 minute respawn limit")
-	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the 15 minute respawn limit", 1)
+	log_admin("[key_name(usr)] allowed [key_name(G)] to bypass the respawn time limit")
+	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(G)] to bypass the respawn time limit", 1)
 
 
 /client/proc/toggle_antagHUD_use()
@@ -458,18 +461,23 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	//Write the appearance and whatnot out to the character
 	picked_client.prefs.copy_to(new_character)
+	if(new_character.dna)
+		new_character.dna.ResetUIFrom(new_character)
+		new_character.sync_organ_dna()
 	if(inhabit)
 		new_character.key = player_key
-
-	//Were they any particular special role? If so, copy.
-	var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
-	if(antag_data)
-		antag_data.add_antagonist(new_character.mind)
-		antag_data.place_mob(new_character)
+		//Were they any particular special role? If so, copy.
+		if(new_character.mind)
+			var/datum/antagonist/antag_data = get_antag_data(new_character.mind.special_role)
+			if(antag_data)
+				antag_data.add_antagonist(new_character.mind)
+				antag_data.place_mob(new_character)
 
 	//If desired, apply equipment.
-	if(equipment && charjob)
-		job_master.EquipRank(new_character, charjob, 1)
+	if(equipment)
+		if(charjob)
+			job_master.EquipRank(new_character, charjob, 1)
+		equip_custom_items(new_character)
 
 	//If desired, add records.
 	if(records)
@@ -550,7 +558,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 	if(!customname)
-		customname = "[company_name] Update"
+		customname = "[using_map.company_name] Update"
 	for (var/obj/machinery/computer/communications/C in machines)
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
@@ -565,7 +573,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if("Yes")
 			command_announcement.Announce(input, customname, new_sound = 'sound/AI/commandreport.ogg', msg_sanitized = 1);
 		if("No")
-			world << "\red New [company_name] Update available at all communication consoles."
+			world << "\red New [using_map.company_name] Update available at all communication consoles."
 			world << sound('sound/AI/commandreport.ogg')
 
 	log_admin("[key_name(src)] has created a command report: [input]")
@@ -634,14 +642,18 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
 	if(heavy == null) return
+	var/med = input("Range of medium pulse.", text("Input"))  as num|null
+	if(med == null) return
 	var/light = input("Range of light pulse.", text("Input"))  as num|null
 	if(light == null) return
+	var/long = input("Range of long pulse.", text("Input"))  as num|null
+	if(long == null) return
 
-	if (heavy || light)
+	if (heavy || med || light || long)
 
-		empulse(O, heavy, light)
-		log_admin("[key_name(usr)] created an EM Pulse ([heavy],[light]) at ([O.x],[O.y],[O.z])")
-		message_admins("[key_name_admin(usr)] created an EM PUlse ([heavy],[light]) at ([O.x],[O.y],[O.z])", 1)
+		empulse(O, heavy, med, light, long)
+		log_admin("[key_name(usr)] created an EM Pulse ([heavy],[med],[light],[long]) at ([O.x],[O.y],[O.z])")
+		message_admins("[key_name_admin(usr)] created an EM PUlse ([heavy],[med],[light],[long]) at ([O.x],[O.y],[O.z])", 1)
 		feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 		return

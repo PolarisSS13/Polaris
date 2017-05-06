@@ -126,7 +126,7 @@
 						safe_blink(src, range = 6)
 						src << "<span class='warning'>You're teleported against your will!</span>"
 					if(4)
-						emp_act(2)
+						emp_act(3)
 
 			if(51 to 100) //Severe
 				rng = rand(0,3)
@@ -285,4 +285,4 @@
 				to_chat(H, "<span class='warning'>The purple glow makes you feel strange...</span>")
 			H.adjust_instability(outgoing_instability)
 
-	set_light(distance, distance * 2, l_color = "#C26DDE")
+	set_light(distance, distance * 4, l_color = "#C26DDE")

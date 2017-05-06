@@ -158,7 +158,7 @@
 //Body Scan Console
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/scanner
-	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking)
+	var/known_implants = list(/obj/item/weapon/implant/health, /obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking, /obj/item/weapon/implant/language, /obj/item/weapon/implant/language/eal)
 	var/delete
 	var/temphtml
 	name = "Body Scanner Console"
@@ -301,6 +301,15 @@
 
 			occupantData["reagents"] = reagentData
 
+			var/ingestedData[0]
+			if(H.ingested.reagent_list.len >= 1)
+				for(var/datum/reagent/R in H.ingested.reagent_list)
+					ingestedData[++ingestedData.len] = list("name" = R.name, "amount" = R.volume)
+			else
+				ingestedData = null
+
+			occupantData["ingested"] = ingestedData
+
 			var/extOrganData[0]
 			for(var/obj/item/organ/external/E in H.organs)
 				var/organData[0]
@@ -333,16 +342,17 @@
 					organStatus["splinted"] = 1
 				if(E.status & ORGAN_BLEEDING)
 					organStatus["bleeding"] = 1
+				if(E.status & ORGAN_DEAD)
+					organStatus["dead"] = 1
+				for(var/datum/wound/W in E.wounds)
+					if(W.internal)
+						organStatus["internalBleeding"] = 1
+						break
 
 				organData["status"] = organStatus
 
 				if(istype(E, /obj/item/organ/external/chest) && H.is_lung_ruptured())
 					organData["lungRuptured"] = 1
-
-				for(var/datum/wound/W in E.wounds)
-					if(W.internal)
-						organData["internalBleeding"] = 1
-						break
 
 				extOrganData.Add(list(organData))
 
@@ -393,7 +403,7 @@
 			P.info += "<b>Time of scan:</b> [worldtime2stationtime(world.time)]<br><br>"
 			P.info += "[printing_text]"
 			P.info += "<br><br><b>Notes:</b><br>"
-			P.name = "Body Scan - [href_list["name"]]"
+			P.name = "Body Scan - [href_list["name"]] ([worldtime2stationtime(world.time)])"
 			printing = null
 			printing_text = null
 
@@ -456,8 +466,12 @@
 				dat += "[extra_font]\tBlood Level %: [blood_percent] ([blood_volume] units)</font><br>"
 
 			if(occupant.reagents)
-				for(var/datum/reagent/R in occupant.reagents)
+				for(var/datum/reagent/R in occupant.reagents.reagent_list)
 					dat += "Reagent: [R.name], Amount: [R.volume]<br>"
+
+			if(occupant.ingested)
+				for(var/datum/reagent/R in occupant.ingested.reagent_list)
+					dat += "Stomach: [R.name], Amount: [R.volume]<br>"
 
 			dat += "<hr><table border='1'>"
 			dat += "<tr>"
@@ -478,6 +492,7 @@
 				var/splint = ""
 				var/internal_bleeding = ""
 				var/lung_ruptured = ""
+				var/o_dead = ""
 				for(var/datum/wound/W in e.wounds) if(W.internal)
 					internal_bleeding = "<br>Internal bleeding"
 					break
@@ -491,6 +506,8 @@
 					AN = "[e.broken_description]:"
 				if(e.status & ORGAN_ROBOT)
 					robot = "Prosthetic:"
+				if(e.status & ORGAN_DEAD)
+					o_dead = "Necrotic:"
 				if(e.open)
 					open = "Open:"
 				switch (e.germ_level)
@@ -504,10 +521,10 @@
 						infected = "Acute Infection:"
 					if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
 						infected = "Acute Infection+:"
-					if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_TWO + 400)
+					if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_THREE - 50)
 						infected = "Acute Infection++:"
-					if (INFECTION_LEVEL_THREE to INFINITY)
-						infected = "Septic:"
+					if (INFECTION_LEVEL_THREE -49 to INFINITY)
+						infected = "Gangrene Detected:"
 
 				var/unknown_body = 0
 				for(var/I in e.implants)
@@ -521,19 +538,22 @@
 				if(!AN && !open && !infected & !imp)
 					AN = "None:"
 				if(!(e.status & ORGAN_DESTROYED))
-					dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+					dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured][o_dead]</td>"
 				else
 					dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not Found</td>"
 				dat += "</tr>"
 			for(var/obj/item/organ/i in occupant.internal_organs)
 				var/mech = ""
+				var/i_dead = ""
 				if(i.status & ORGAN_ASSISTED)
 					mech = "Assisted:"
 				if(i.robotic >= ORGAN_ROBOT)
 					mech = "Mechanical:"
+				if(i.status & ORGAN_DEAD)
+					i_dead = "Necrotic:"
 				var/infection = "None"
 				switch (i.germ_level)
-					if (1 to INFECTION_LEVEL_ONE + 200)
+					if (INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + 200)
 						infection = "Mild Infection:"
 					if (INFECTION_LEVEL_ONE + 200 to INFECTION_LEVEL_ONE + 300)
 						infection = "Mild Infection+:"
@@ -543,11 +563,13 @@
 						infection = "Acute Infection:"
 					if (INFECTION_LEVEL_TWO + 200 to INFECTION_LEVEL_TWO + 300)
 						infection = "Acute Infection+:"
-					if (INFECTION_LEVEL_TWO + 300 to INFINITY)
+					if (INFECTION_LEVEL_TWO + 300 to INFECTION_LEVEL_THREE - 50)
 						infection = "Acute Infection++:"
+					if (INFECTION_LEVEL_THREE -49 to INFINITY)
+						infection = "Necrosis Detected:"
 
 				dat += "<tr>"
-				dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech]</td><td></td>"
+				dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>[infection]:[mech][i_dead]</td><td></td>"
 				dat += "</tr>"
 			dat += "</table>"
 			if(occupant.sdisabilities & BLIND)

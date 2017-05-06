@@ -50,13 +50,13 @@
 	if(!client)	return
 
 	if (type)
-		if((type & 1) && ((sdisabilities & BLIND) || blinded || paralysis) )//Vision related
+		if((type & 1) && (is_blind() || paralysis) )//Vision related
 			if (!( alt ))
 				return
 			else
 				msg = alt
 				type = alt_type
-		if ((type & 2) && ((sdisabilities & DEAF) || ear_deaf))//Hearing related
+		if ((type & 2) && is_deaf())//Hearing related
 			if (!( alt ))
 				return
 			else
@@ -153,6 +153,12 @@
 	if(!buckled)
 		return UNBUCKLED
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
+
+/mob/proc/is_blind()
+	return ((sdisabilities & BLIND) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
+
+/mob/proc/is_deaf()
+	return ((sdisabilities & DEAF) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
@@ -335,7 +341,7 @@
 	if ((stat != 2 || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
-	if (ticker.mode.deny_respawn) //BS12 EDIT
+	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else
@@ -356,7 +362,7 @@
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
 
-		if (deathtime < (5 * 600))
+		if ((deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
 			usr << "You must wait 5 minutes to respawn!"
 			return
 		else
@@ -653,6 +659,7 @@
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
 			stat("Station Time", stationtime2text())
+			stat("Station Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
 
 		if(client.holder)
@@ -699,12 +706,13 @@
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface() || client.moving || world.time < client.move_delay)
+	if(!canface() || (client && (client.moving || (world.time < client.move_delay))))
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	client.move_delay += movement_delay()
+	if(client)
+		client.move_delay += movement_delay()
 	return 1
 
 
@@ -794,6 +802,30 @@
 
 /mob/proc/AdjustSleeping(amount)
 	sleeping = max(sleeping + amount,0)
+	return
+
+/mob/proc/Confuse(amount)
+	confused = max(max(confused,amount),0)
+	return
+
+/mob/proc/SetConfused(amount)
+	confused = max(amount,0)
+	return
+
+/mob/proc/AdjustConfused(amount)
+	confused = max(confused + amount,0)
+	return
+
+/mob/proc/Blind(amount)
+	eye_blind = max(max(eye_blind,amount),0)
+	return
+
+/mob/proc/SetBlinded(amount)
+	eye_blind = max(amount,0)
+	return
+
+/mob/proc/AdjustBlinded(amount)
+	eye_blind = max(eye_blind + amount,0)
 	return
 
 /mob/proc/Resting(amount)
@@ -895,7 +927,7 @@ mob/proc/yank_out_object()
 		if(prob(selection.w_class * 5) && (affected.robotic < ORGAN_ROBOT)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (min(selection.w_class * 5, 15))
 			affected.wounds += I
-			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 50)
 
 		if (ishuman(U))
 			var/mob/living/carbon/human/human_user = U
@@ -1009,3 +1041,47 @@ mob/proc/yank_out_object()
 /mob/proc/is_muzzled()
 	return 0
 
+
+/client/proc/check_has_body_select()
+	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_sel)
+
+/client/verb/body_toggle_head()
+	set name = "body-toggle-head"
+	set hidden = 1
+	toggle_zone_sel(list(BP_HEAD, O_EYES, O_MOUTH))
+
+/client/verb/body_r_arm()
+	set name = "body-r-arm"
+	set hidden = 1
+	toggle_zone_sel(list(BP_R_ARM,BP_R_HAND))
+
+/client/verb/body_l_arm()
+	set name = "body-l-arm"
+	set hidden = 1
+	toggle_zone_sel(list(BP_L_ARM,BP_L_HAND))
+
+/client/verb/body_chest()
+	set name = "body-chest"
+	set hidden = 1
+	toggle_zone_sel(list(BP_TORSO))
+
+/client/verb/body_groin()
+	set name = "body-groin"
+	set hidden = 1
+	toggle_zone_sel(list(BP_GROIN))
+
+/client/verb/body_r_leg()
+	set name = "body-r-leg"
+	set hidden = 1
+	toggle_zone_sel(list(BP_R_LEG,BP_R_FOOT))
+
+/client/verb/body_l_leg()
+	set name = "body-l-leg"
+	set hidden = 1
+	toggle_zone_sel(list(BP_L_LEG,BP_L_FOOT))
+
+/client/proc/toggle_zone_sel(list/zones)
+	if(!check_has_body_select())
+		return
+	var/obj/screen/zone_sel/selector = mob.zone_sel
+	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))

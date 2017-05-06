@@ -5,7 +5,7 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/list/hud_list[10]
+	var/list/hud_list[TOTAL_HUDS]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/last_push_time	//For human_attackhand.dm, keeps track of the last use of disarm
@@ -28,10 +28,12 @@
 		if(mind)
 			mind.name = real_name
 
+	nutrition = rand(200,400)
+
 	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
 	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
 	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudunknown")
+	hud_list[ID_HUD]          = new /image/hud_overlay(using_map.id_hud_icons, src, "hudunknown")
 	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
@@ -86,6 +88,7 @@
 			if(mind.changeling)
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
+				stat("Re-Adaptations", "[mind.changeling.readapts]/[mind.changeling.max_readapts]")
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
@@ -154,6 +157,15 @@
 			else
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
+
+/mob/living/carbon/human/proc/implant_loadout(var/datum/gear/G = new/datum/gear/utility/implant)
+	var/obj/item/weapon/implant/I = new G.path(src)
+	I.imp_in = src
+	I.implanted = 1
+	var/obj/item/organ/external/affected = src.organs_by_name[BP_HEAD]
+	affected.implants += I
+	I.part = affected
+	I.implanted(src)
 
 /mob/living/carbon/human/proc/implant_loyalty(override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
@@ -674,12 +686,20 @@
 	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
 		number -= 2
 	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
-		number -= 1
+		var/obj/item/clothing/glasses/thermal/T = src.glasses
+		if(T.active)
+			number -= 1
+	if(istype(src.glasses, /obj/item/clothing/glasses/night))
+		var/obj/item/clothing/glasses/night/N = src.glasses
+		if(N.active)
+			number -= 1
 	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
 		if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses/sechud/aviator))
 			var/obj/item/clothing/glasses/sunglasses/sechud/aviator/S = src.glasses
 			if(!S.on)
 				number += 1
+		else if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses/medhud/aviator))
+			number += 0
 		else
 			number += 1
 	if(istype(src.glasses, /obj/item/clothing/glasses/welding))
@@ -1031,7 +1051,7 @@
 						"<span class='warning'>A spike of pain jolts your [organ.name] as you bump [O] inside.</span>", \
 						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>", \
 						"<span class='warning'>Your movement jostles [O] in your [organ.name] painfully.</span>")
-					src << msg
+					custom_pain(msg, 40)
 
 				organ.take_damage(rand(1,3), 0, 0)
 				if(!(organ.robotic >= ORGAN_ROBOT) && (should_have_organ(O_HEART))) //There is no blood in protheses.
@@ -1304,7 +1324,8 @@
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
 	if((species.flags & NO_SLIP) || (shoes && (shoes.item_flags & NOSLIP)))
 		return 0
-	..(slipped_on,stun_duration)
+	if(..(slipped_on,stun_duration))
+		return 1
 
 /mob/living/carbon/human/proc/undislocate()
 	set category = "Object"
@@ -1432,6 +1453,7 @@
 
 	if(stat) return
 	var/datum/category_group/underwear/UWC = input(usr, "Choose underwear:", "Show/hide underwear") as null|anything in global_underwear.categories
+	if(!UWC) return
 	var/datum/category_item/underwear/UWI = all_underwear[UWC.name]
 	if(!UWI || UWI.name == "None")
 		src << "<span class='notice'>You do not have [UWC.gender==PLURAL ? "[UWC.display_name]" : "\a [UWC.display_name]"].</span>"
@@ -1469,9 +1491,17 @@
 	if(check_organ)
 		if(!istype(check_organ))
 			return 0
-		return check_organ.can_feel_pain()
+		return check_organ.organ_can_feel_pain()
 	return !(species.flags & NO_PAIN)
 
 /mob/living/carbon/human/is_muzzled()
 	return (wear_mask && (istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/weapon/grenade)))
 
+// Called by job_controller.  Makes drones start with a permit, might be useful for other people later too.
+/mob/living/carbon/human/equip_post_job()
+	var/braintype = get_FBP_type()
+	if(braintype == FBP_DRONE)
+		var/turf/T = get_turf(src)
+		var/obj/item/weapon/permit/drone/permit = new(T)
+		permit.set_name(real_name)
+		equip_to_appropriate_slot(permit) // If for some reason it can't find room, it'll still be on the floor.

@@ -80,6 +80,9 @@
 	if(istype(damage_source, /obj/item/projectile/energy) || istype(damage_source, /obj/item/projectile/beam))
 		var/obj/item/projectile/P = damage_source
 
+		if(P.reflected) // Can't reflect twice
+			return ..()
+
 		var/reflectchance = 40 - round(damage/3)
 		if(!(def_zone in list(BP_TORSO, BP_GROIN)))
 			reflectchance /= 2
@@ -126,7 +129,7 @@
 	permeability_coefficient = 0.01
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen,/obj/item/clothing/head/helmet)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/head/helmet)
 	slowdown = 1
 	w_class = ITEMSIZE_HUGE
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 100, rad = 100)
@@ -316,6 +319,34 @@
 	icon_badge = "pcrcvest_badge"
 	icon_nobadge = "pcrcvest_nobadge"
 
+/obj/item/clothing/suit/storage/vest/solgov
+	name = "\improper Solar Confederate Government armored vest"
+	desc = "A synthetic armor vest. This one is marked with the crest of the Solar Confederate Government."
+	icon_state = "solvest"
+	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
+
+/obj/item/clothing/suit/storage/vest/solgov/heavy
+	name = "\improper Solar Confederate Government heavy armored vest"
+	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "solwebvest"
+
+/obj/item/clothing/suit/storage/vest/solgov/security
+	name = "master at arms heavy armored vest"
+	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "secwebvest"
+
+/obj/item/clothing/suit/storage/vest/solgov/command
+	name = "command heavy armored vest"
+	desc = "A synthetic armor vest with Solar Confederate Government printed in detailed gold lettering on the chest. This one has added webbing and ballistic plates."
+	icon_state = "comwebvest"
+
+/obj/item/clothing/suit/storage/vest/tactical //crack at a more balanced mid-range armor, minor improvements over standard vests, with the idea "modern" combat armor would focus on energy weapon protection.
+	name = "tactical armored vest"
+	desc = "A heavy armored vest in a fetching tan. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
+	icon_state = "tacwebvest"
+	item_state = "tacwebvest"
+	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+
 /obj/item/clothing/suit/storage/vest/detective
 	name = "detective armor vest"
 	desc = "A simple kevlar plate carrier in a vintage brown, it has a badge clipped to the chest that reads, 'Private investigator'."
@@ -389,7 +420,7 @@
 	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
 	w_class = ITEMSIZE_LARGE//bulky item
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen,/obj/item/clothing/head/helmet)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/head/helmet)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

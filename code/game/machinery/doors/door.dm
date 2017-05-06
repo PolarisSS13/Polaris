@@ -95,14 +95,18 @@
 	return 1
 
 /obj/machinery/door/Bumped(atom/AM)
-	if(p_open || operating) return
+	if(p_open || operating)
+		return
 	if(ismob(AM))
 		var/mob/M = AM
-		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
+		if(world.time - M.last_bumped <= 10)
+			return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
-		if(!M.restrained())
+		if(M.restrained() && !check_access(null))
+			return
+		else
 			bumpopen(M)
-		return
+
 
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
@@ -308,6 +312,8 @@
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
+	if(src.health <= 0)
+		user << "\The [src] is broken!"
 	if(src.health < src.maxhealth / 4)
 		user << "\The [src] looks like it's about to break!"
 	else if(src.health < src.maxhealth / 2)
