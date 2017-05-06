@@ -95,11 +95,11 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Holiday["Interstellar Workers' Day"] = "This holiday celebrates the work of laborers and the working class."
 				
 				if(18)
-					Holiday["Remembrance Day"] = "Rembrance Day (or, as it is more informally known, Armistice Day) is confederate-wide holiday mostly observed \ 
-					in it's member states since the late 2520's. Offcially, it is a day of remembering the men and women who died in various armed conflicts \
-					throughout human history. Unoficially, however, it is commonly treated as a holiday honoring the victims of the Hegemony-Sol war. \
+					Holiday["Remembrance Day"] = "Remembrance Day (or, as it is more informally known, Armistice Day) is a confederation-wide holiday \ 
+					mostly observed in its member states since the late 2520's. Officially, it is a day of remembering the men and women who died in various armed conflicts \
+					throughout human history. Unofficially, however, it is commonly treated as a holiday honoring the victims of the Human-Unathi war. \
 					Observance of this day varies throughout human space, but most common traditions are the act of bringing flowers to graves,\
-					attending parades, and the wear of poppies (either paper or real) in one's clothing."
+					attending parades, and the wearing of poppies (either paper or real) in one's clothing."
 				
 				if(28)
 					Holiday["Jiql-tes"] = "A Skrellian holiday that translates to 'Day of Celebration', Skrell communities \
@@ -116,8 +116,9 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					and to thank blood donors for their voluntary, life-saving gifts of blood."
 				
 				if(20)
-					Holiday["Civil Servant's Day"] = "Civil Servant's day is a holiday observed in SCG member states that honors civil servants everywhere,\
-					especially those who are members of the armed forces and the emergency services, or have been members of the aforementioned in the past."
+					Holiday["Civil Servant's Day"] = "Civil Servant's Day is a holiday observed in SCG member states that honors civil servants everywhere,\
+					(especially those who are members of the armed forces and the emergency services), or have been or have been civil servants in the past.
+"
 
 		if(7)	//Jul
 			switch(DD)
