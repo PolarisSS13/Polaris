@@ -50,8 +50,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/sts35
-	name = "assault rifle"
-	desc = "The rugged STS-35 is a durable automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. This one is unmarked."
+	name = "battle rifle"
+	desc = "The rugged STS-35 is a powerful and durable automatic weapon that is banned in most systems due to its deadly stopping power. Uses 7.62mm rounds."
 	icon_state = "arifle"
 	item_state = null
 	w_class = ITEMSIZE_LARGE
@@ -104,7 +104,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "designated marksman rifle"
-	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 5.56mm rounds and has an under barrel grenade launcher."
+	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 7.62mm rounds and has an under barrel grenade launcher."
 	icon_state = "carbine" // This isn't a carbine. :T
 	item_state = "z8carbine"
 	w_class = ITEMSIZE_LARGE
@@ -115,8 +115,8 @@
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/a556
-	allowed_magazines = list(/obj/item/ammo_magazine/a556)
+	magazine_type = /obj/item/ammo_magazine/s762
+	allowed_magazines = list(/obj/item/ammo_magazine/s762)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -174,7 +174,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "light machine gun"
-	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
+	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever. Uses 7.62mm rounds."
 	icon_state = "l6closed100"
 	item_state = "l6closed"
 	w_class = ITEMSIZE_LARGE
@@ -344,8 +344,8 @@
 //	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/carbine
-	name = "assault carbine"
-	desc = "The bullpup configured GP3000 is a lightweight, compact, military-grade assault rifle produced by Gurov Projectile Weapons LLC. It is sold almost exclusively to standing armies. The serial number on this one has been scratched off. Uses 5.56mm rounds."
+	name = "assault rifle"
+	desc = "The bullpup configured GP3000 is a lightweight, compact weapon produced by Gurov Projectile Weapons LLC. Uses 5.56mm rounds."
 	icon_state = "bullpupm"
 	item_state = "bullpup"
 	w_class = ITEMSIZE_LARGE

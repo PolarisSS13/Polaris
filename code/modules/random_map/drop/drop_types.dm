@@ -61,9 +61,9 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/weapon/shield/riot/tele,
 		/obj/item/weapon/storage/box/emps,
 		/obj/item/weapon/storage/box/flashbangs,
-		/obj/item/weapon/gun/projectile/automatic/sts35,
-		/obj/item/ammo_magazine/c762/ap,
-		/obj/item/ammo_magazine/c762/ap,
+		/obj/item/weapon/gun/projectile/automatic/carbine,
+		/obj/item/ammo_magazine/a556m/ap,
+		/obj/item/ammo_magazine/a556m/ap,
 		/obj/item/weapon/gun/projectile/colt,
 		/obj/item/ammo_magazine/c45m,
 		/obj/item/weapon/material/hatchet/tacknife/combatknife)
