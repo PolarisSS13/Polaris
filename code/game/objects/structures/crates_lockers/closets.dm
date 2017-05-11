@@ -148,6 +148,8 @@
 /obj/structure/closet/proc/store_mobs(var/stored_units)
 	var/added_units = 0
 	for(var/mob/living/M in src.loc)
+		if(M.stat && istype(M, /mob/living/simple_animal/hostile))
+			continue
 		if(M.buckled || M.pinned.len)
 			continue
 		if(stored_units + added_units + M.mob_size > storage_capacity)
