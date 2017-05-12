@@ -98,6 +98,7 @@
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)
 	if(status_flags & GODMODE)	return 0	//godmode
+	if(src.species.get_bodytype() == "Diona") return 0 //Diona shouldn't get shocked
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
