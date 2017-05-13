@@ -384,6 +384,9 @@
 
 	var/shoes_under_pants = 0
 
+	var/snow_speed = 0		//Negatives mean faster on snow
+	var/water_speed = 0		//Negatives mean faster in water
+
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	force = 2
