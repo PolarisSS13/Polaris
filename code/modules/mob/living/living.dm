@@ -969,7 +969,7 @@ default behaviour is:
 /mob/living/proc/can_feel_pain(var/check_organ, var/mob/living/carbon/human/H)
 	if(isSynthetic())
 		return FALSE
-	if(H.species.get_bodytype() == "Diona")
+	if(H.species.flags & NO_PAIN)
 		return FALSE
 	return TRUE
 
