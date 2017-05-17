@@ -966,10 +966,8 @@ default behaviour is:
 /mob/living/proc/update_water() // Involves overlays for humans.  Maybe we'll get submerged sprites for borgs in the future?
 	return
 
-/mob/living/proc/can_feel_pain(var/check_organ, var/mob/living/carbon/human/H)
+/mob/living/proc/can_feel_pain(var/check_organ)
 	if(isSynthetic())
-		return FALSE
-	if(H.species.flags & NO_PAIN)
 		return FALSE
 	return TRUE
 
