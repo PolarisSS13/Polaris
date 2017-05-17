@@ -113,3 +113,8 @@
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT * 1.5
 	path = /obj/item/weapon/circuitboard/teleporter
 	blacklisted = 1
+	
+/datum/uplink_item/item/tools/dnalock
+	name = "Gun DNA Lock"
+	item_cost = 20
+	path = /obj/item/dnalockingchip
