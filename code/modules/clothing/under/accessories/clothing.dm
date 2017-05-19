@@ -7,27 +7,31 @@
 	name = "tan suit jacket"
 	desc = "Cozy suit jacket."
 	icon_state = "tan_jacket"
+	slot = "jacket"
 
 /obj/item/clothing/accessory/charcoal_jacket
 	name = "charcoal suit jacket"
 	desc = "Strict suit jacket."
 	icon_state = "charcoal_jacket"
+	slot = "jacket"
 
 /obj/item/clothing/accessory/navy_jacket
 	name = "navy suit jacket"
 	desc = "Official suit jacket."
 	icon_state = "navy_jacket"
+	slot = "jacket"
 
 /obj/item/clothing/accessory/burgundy_jacket
 	name = "burgundy suit jacket"
 	desc = "Expensive suit jacket."
 	icon_state = "burgundy_jacket"
+	slot = "jacket"
 
 /obj/item/clothing/accessory/checkered_jacket
 	name = "checkered suit jacket"
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
-
+	slot = "jacket"
 
 /obj/item/clothing/accessory/chaps
 	name = "brown chaps"

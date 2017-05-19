@@ -491,7 +491,7 @@
 		"Vox" = 'icons/mob/species/vox/suit.dmi'
 		)
 
-	valid_accessory_slots = list("over", "armband")
+	valid_accessory_slots = list("over", "armband","jacket")
 	restricted_accessory_slots = list("armband")
 
 /obj/item/clothing/suit/update_clothing_icon()
