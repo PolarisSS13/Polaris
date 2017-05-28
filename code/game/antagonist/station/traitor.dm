@@ -162,7 +162,7 @@ var/datum/antagonist/traitor/traitors
 
 	else if (istype(R, /obj/item/device/pda))
 		// generate a passcode if the uplink is hidden in a PDA
-		var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Delta","Omega")]"
+		var/pda_pass = "[rand(100,999)] [pick("Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","India","Juliet","Kilo","Lima","Mike","November","Oscar","Papa","Quebec","Romeo","Sierra","Tango","Uniform","Victor","Whiskey","X-ray","Yankee","Zulu")]"
 		var/obj/item/device/uplink/hidden/T = new(R, traitor_mob.mind)
 		R.hidden_uplink = T
 		var/obj/item/device/pda/P = R
