@@ -235,7 +235,7 @@
 	icon_state = "lcasing"
 	caliber = "14.5mm"
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
-	matter = list(DEFAULT_WALL_MATERIAL = 1250)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 
 /*
  * 556mm

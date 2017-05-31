@@ -33,6 +33,11 @@
 	path =/obj/item/ammo_casing/shotgun/stunshell
 	hidden = 1
 
+/datum/category_item/autolathe/arms/a145
+	name = "ammunition (14.5mm shell)"
+	path =/obj/item/ammo_casing/a145
+	hidden = 1
+
 //////////////////
 /*Ammo magazines*/
 //////////////////
