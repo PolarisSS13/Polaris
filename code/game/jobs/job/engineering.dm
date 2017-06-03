@@ -104,21 +104,21 @@
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
-
+	alt_titles = list("Life Support Specialist")
 	minimal_player_age = 3
 
 /datum/job/atmos/equip(var/mob/living/carbon/human/H, var/alt_title)
 	if(!H)	return 0
 	H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
 	switch(H.backbag)
-		if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-		if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
+		if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
+		if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/eng(H), slot_back)
 		if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		if(5) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/messenger/engi(H), slot_back)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/atmospheric_technician(H), slot_w_uniform)
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/boots/workboots(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/device/pda/atmos(H), slot_l_store)
-	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
+	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmospherics/atmostech/(H), slot_belt)
 	return 1
 
 /datum/job/atmos/equip_survival(var/mob/living/carbon/human/H)
