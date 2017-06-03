@@ -987,14 +987,15 @@
 			else if(eye_blind)		  	// Blindness, heals slowly over time
 				AdjustBlinded(-1)
 				blinded =    1
-			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
-				eye_blurry = max(eye_blurry-3, 0)
-				blinded =    1
 
 			//blurry sight
 			if(vision.is_bruised())   // Vision organs impaired? Permablurry.
 				eye_blurry = 1
-			if(eye_blurry)	           // Blurry eyes heal slowly
+			if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
+				if(eye_blurry)
+					eye_blurry = max(eye_blurry-3, 0)
+				blinded = 1
+			else if(eye_blurry)	           // Blurry eyes heal slowly
 				eye_blurry = max(eye_blurry-1, 0)
 
 		//Ears
