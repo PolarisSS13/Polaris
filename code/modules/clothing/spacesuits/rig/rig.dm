@@ -13,6 +13,7 @@
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
 	req_one_access = list()
+	species_restricted = list("exclude","Teshari")
 	req_access = list()
 	w_class = ITEMSIZE_HUGE
 	action_button_name = "Toggle Heatsink"
