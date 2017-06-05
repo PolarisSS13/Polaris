@@ -38,9 +38,6 @@
 
 	req_access = list(access_syndicate)
 
-	airtight = 0
-	seal_delay = 5 //not being vaccum-proof has an upside I guess
-
 	helm_type = /obj/item/clothing/head/lightrig/hacker
 	chest_type = /obj/item/clothing/suit/lightrig/hacker
 	glove_type = /obj/item/clothing/gloves/gauntlets/lightrig/hacker
@@ -55,7 +52,6 @@
 		/obj/item/rig_module/vision,
 		)
 
-//The cybersuit is not space-proof. It does however, have good siemens_coefficient values
 /obj/item/clothing/head/lightrig/hacker
 	name = "HUD"
 	siemens_coefficient = 0.4
