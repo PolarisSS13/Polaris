@@ -52,15 +52,26 @@
 	new foldable(get_turf(src))
 	qdel(src)
 
+/obj/item/weapon/storage/box/survival
+	name = "survival equipment box"
+	desc = "Makes braving the hazards of space a little bit easier."
+	icon_state = "box_emergency"
+
 /obj/item/weapon/storage/box/survival/New()
 	..()
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/weapon/tank/emergency/oxygen(src)
 
+/obj/item/weapon/storage/box/survival/vox
+	icon_state = "box_hazard"
+
 /obj/item/weapon/storage/box/vox/New()
 	..()
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/weapon/tank/emergency/phoron(src)
+
+/obj/item/weapon/storage/box/survival/engineer
+	icon_state = "box_eva"
 
 /obj/item/weapon/storage/box/engineer/New()
 	..()
