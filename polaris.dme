@@ -1209,6 +1209,8 @@
 #include "code\modules\client\preference_setup\loadout\loadout_xeno.dm"
 #include "code\modules\client\preference_setup\occupation\occupation.dm"
 #include "code\modules\client\preference_setup\skills\skills.dm"
+#include "code\modules\client\preference_setup\traits\trait_defines.dm"
+#include "code\modules\client\preference_setup\traits\traits.dm"
 #include "code\modules\clothing\chameleon.dm"
 #include "code\modules\clothing\clothing.dm"
 #include "code\modules\clothing\clothing_accessories.dm"
