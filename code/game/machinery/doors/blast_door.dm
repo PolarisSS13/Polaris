@@ -118,7 +118,7 @@
 				usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 			return
 
-	if(istype(C, /obj/item/stack/material) && C.get_material_name() == "plasteel") // Repairing.
+	else if(istype(C, /obj/item/stack/material) && C.get_material_name() == "plasteel") // Repairing.
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
 			usr << "<span class='notice'>\The [src] is already fully repaired.</span>"
@@ -136,18 +136,18 @@
 				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 
 
-		else if(src.density)
-			var/obj/item/weapon/W = C
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(W.damtype == BRUTE || W.damtype == BURN)
-				user.do_attack_animation(src)
-				if(W.force < min_force)
-					user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
-				else
-					user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
-					playsound(src.loc, hitsound, 100, 1)
-					take_damage(W.force*0.35) //it's a blast door, it should take a while. -Luke
-				return
+	else if(src.density)
+		var/obj/item/weapon/W = C
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		if(W.damtype == BRUTE || W.damtype == BURN)
+			user.do_attack_animation(src)
+			if(W.force < min_force)
+				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
+			else
+				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
+				playsound(src.loc, hitsound, 100, 1)
+				take_damage(W.force*0.35) //it's a blast door, it should take a while. -Luke
+			return
 
 
 // Proc: open()
