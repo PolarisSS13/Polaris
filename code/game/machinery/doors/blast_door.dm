@@ -118,6 +118,20 @@
 				usr << "<span class='notice'>[src]'s motors resist your effort.</span>"
 			return
 
+
+		else if(src.density && (user.a_intent = I_HURT) //If we can't pry it open and it's a weapon, let's hit it.
+			var/obj/item/weapon/W = C
+			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			if(W.damtype == BRUTE || W.damtype == BURN)
+				user.do_attack_animation(src)
+				if(W.force < min_force)
+					user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
+				else
+					user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
+					playsound(src.loc, hitsound, 100, 1)
+					take_damage(W.force*0.35) //it's a blast door, it should take a while. -Luke
+				return
+
 	else if(istype(C, /obj/item/stack/material) && C.get_material_name() == "plasteel") // Repairing.
 		var/amt = Ceiling((maxhealth - health)/150)
 		if(!amt)
@@ -135,8 +149,7 @@
 			else
 				usr << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
 
-
-	else if(src.density)
+	else if(src.density && (user.a_intent = I_HURT) //If we can't pry it open and it's not a weapon.... Eh, let's attack it anyway.
 		var/obj/item/weapon/W = C
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -146,9 +159,8 @@
 			else
 				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
 				playsound(src.loc, hitsound, 100, 1)
-				take_damage(W.force*0.35) //it's a blast door, it should take a while. -Luke
+				take_damage(W.force*0.15) //If the item isn't a weapon, let's make this take longer than usual to break it down.
 			return
-
 
 // Proc: open()
 // Parameters: None
