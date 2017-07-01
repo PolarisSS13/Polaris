@@ -77,7 +77,8 @@
 //		/obj/item/slime_extract,		### Outdated
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/xenoproduct/slime/core
+		/obj/item/xenoproduct/slime/core,
+		/obj/item/device/assembly/prox_sensor
 
 		)
 
