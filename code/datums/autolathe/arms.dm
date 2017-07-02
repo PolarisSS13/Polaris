@@ -164,6 +164,16 @@
 	path =/obj/item/ammo_magazine/m12gdrum
 	hidden = 1
 
+/datum/category_item/autolathe/arms/shotgun_magazinebeanbag
+	name = "24rnd shotgun magazine (beanbag)(12g)"
+	path =/obj/item/ammo_magazine/m12gdrum/beanbag
+	hidden = 1
+
+/datum/category_item/autolathe/arms/shotgun_magazinepellet
+	name = "24rnd shotgun magazine (pellet)(12g)"
+	path =/obj/item/ammo_magazine/m12gdrum/pellet
+	hidden = 1
+
 /*
 /datum/category_item/autolathe/arms/rifle_small_762
 	name = "rifle magazine (7.62mm)"
