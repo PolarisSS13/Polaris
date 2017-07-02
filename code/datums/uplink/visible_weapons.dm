@@ -70,11 +70,6 @@
 	item_cost = 75
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
-/datum/uplink_item/item/visible_weapons/automaticshotgun
-	name = "Automatic Shotgun (12g)"
-	item_cost = 100 //it's an automatic shotgun. Has a lot of potential for destruction.
-	path = /obj/item/weapon/gun/projectile/automatic/as24
-
 /*/datum/uplink_item/item/visible_weapons/bullpuprifle
 	name = "Assault Rifle (5.56mm)"
 	item_cost = 7

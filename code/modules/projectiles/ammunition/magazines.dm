@@ -512,3 +512,31 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	max_ammo = 7
 	multiple_sprites = 1
+
+
+/obj/item/ammo_magazine/ma12gclip
+	name = "ammo clip (12g beanbag)"
+	icon_state = "12gclip_bean" //largely a codersprite, looks good enough. feel free to make a better one.
+	desc = "A metal clip for holding and quickly loading shotgun shells. This one is loaded with beanbag shells."
+	caliber = "12g"
+	ammo_type = /obj/item/ammo_casing/a12g/beanbag
+	matter = list(DEFAULT_WALL_MATERIAL = 1580) // beanbag shells x6 + 500 metal for the clip itself.
+	max_ammo = 6
+	multiple_sprites = 1
+	mag_type = SPEEDLOADER
+
+/obj/item/ammo_magazine/ma12gclip/pellet
+	name = "ammo clip (12g buckshot)"
+	icon_state = "12gclip_p"
+	ammo_type = /obj/item/ammo_casing/a12g/pellet
+	matter = list(DEFAULT_WALL_MATERIAL = 2660)
+
+/obj/item/ammo_magazine/ma12gclip/slug
+	name = "ammo clip (12g slug)"
+	icon_state = "12gclip_s"
+	ammo_type = /obj/item/ammo_casing/a12g
+	matter = list(DEFAULT_WALL_MATERIAL = 2660) //pellets / slugs cost the same
+
+
+
+

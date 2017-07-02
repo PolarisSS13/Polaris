@@ -159,19 +159,18 @@
 	path =/obj/item/ammo_magazine/m762
 	hidden = 1
 
-/datum/category_item/autolathe/arms/shotgun_magazine
-	name = "24rnd shotgun magazine (12g)"
-	path =/obj/item/ammo_magazine/m12gdrum
+/datum/category_item/autolathe/arms/shotgun_clip_beanbag
+	name = "6-round 12g shell clip (beanbag)"
+	path =/obj/item/ammo_magazine/ma12gclip
+
+/datum/category_item/autolathe/arms/shotgun_clip_pellet
+	name = "6-round 12g shell clip (buckshot)"
+	path =/obj/item/ammo_magazine/ma12gclip/pellet
 	hidden = 1
 
-/datum/category_item/autolathe/arms/shotgun_magazinebeanbag
-	name = "24rnd shotgun magazine (beanbag)(12g)"
-	path =/obj/item/ammo_magazine/m12gdrum/beanbag
-	hidden = 1
-
-/datum/category_item/autolathe/arms/shotgun_magazinepellet
-	name = "24rnd shotgun magazine (pellet)(12g)"
-	path =/obj/item/ammo_magazine/m12gdrum/pellet
+/datum/category_item/autolathe/arms/shotgun_clip_slug
+	name = "6-round 12g shell clip (slug)"
+	path =/obj/item/ammo_magazine/ma12gclip/slug
 	hidden = 1
 
 /*
