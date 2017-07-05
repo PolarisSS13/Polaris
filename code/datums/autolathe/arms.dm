@@ -159,8 +159,8 @@
 	path =/obj/item/ammo_magazine/m762
 	hidden = 1
 
-/datum/category_item/autolathe/arms/shotgun_clip_beanbag
-	name = "4-round 12g shell clip (beanbag)"
+/datum/category_item/autolathe/arms/shotgun_clip_slug
+	name = "4-round 12g shell clip (slug)"
 	path =/obj/item/ammo_magazine/clip/c12g
 
 /datum/category_item/autolathe/arms/shotgun_clip_pellet
@@ -168,9 +168,9 @@
 	path =/obj/item/ammo_magazine/clip/c12g/pellet
 	hidden = 1
 
-/datum/category_item/autolathe/arms/shotgun_clip_slug
-	name = "4-round 12g shell clip (slug)"
-	path =/obj/item/ammo_magazine/clip/c12g/slug
+/datum/category_item/autolathe/arms/shotgun_clip_beanbag
+	name = "4-round 12g shell clip (beanbag)"
+	path =/obj/item/ammo_magazine/clip/c12g/beanbag
 	hidden = 1
 
 /*
