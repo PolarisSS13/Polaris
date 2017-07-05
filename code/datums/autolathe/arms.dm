@@ -160,17 +160,17 @@
 	hidden = 1
 
 /datum/category_item/autolathe/arms/shotgun_clip_beanbag
-	name = "6-round 12g shell clip (beanbag)"
-	path =/obj/item/ammo_magazine/ma12gclip
+	name = "4-round 12g shell clip (beanbag)"
+	path =/obj/item/ammo_magazine/clip/c12g
 
 /datum/category_item/autolathe/arms/shotgun_clip_pellet
-	name = "6-round 12g shell clip (buckshot)"
-	path =/obj/item/ammo_magazine/ma12gclip/pellet
+	name = "4-round 12g shell clip (buckshot)"
+	path =/obj/item/ammo_magazine/clip/c12g/pellet
 	hidden = 1
 
 /datum/category_item/autolathe/arms/shotgun_clip_slug
-	name = "6-round 12g shell clip (slug)"
-	path =/obj/item/ammo_magazine/ma12gclip/slug
+	name = "4-round 12g shell clip (slug)"
+	path =/obj/item/ammo_magazine/clip/c12g/slug
 	hidden = 1
 
 /*
