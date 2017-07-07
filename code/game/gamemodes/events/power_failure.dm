@@ -1,7 +1,10 @@
 
-/proc/power_failure(var/announce = 1)
+/proc/power_failure(var/announce = 1, var/severity = 2)
 	if(announce)
 		command_announcement.Announce("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
+
+	if(var/obj/machinery/power/smes/buildable/S in world)
+		S.energy_fail(rand(15 * severity, 30 * severity))
 
 	var/list/skipped_areas = list(/area/ai)
 
@@ -36,8 +39,6 @@
 		if(current_area.type in skipped_areas || isNotStationLevel(S.z))
 			continue
 		S.charge = S.last_charge
-		S.output_attempt = S.last_output_attempt
-		S.input_attempt = S.last_input_attempt
 		S.update_icon()
 		S.power_change()
 
