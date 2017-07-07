@@ -150,6 +150,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Fancy"
 	disabled_description = "Plain"
 
+/datum/client_preference/show_ready_job
+	description ="Show job ready preference in Lobby"
+	key = "READY_JOB"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
 /********************
 * Staff Preferences *
 ********************/

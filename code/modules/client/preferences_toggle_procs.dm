@@ -192,6 +192,22 @@
 
 	feedback_add_details("admin_verb","TFiringMode") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/verb/toggle_lobby_job()
+	set name = "Show/Hide Lobby Job Preference"
+	set category = "Preferences"
+	set desc = "Toggles between displaying your high-slot job in lobby and not."
+
+	var/pref_path = /datum/client_preference/show_ready_job
+
+	toggle_preference(pref_path)
+
+	src << "You will [ (is_preference_enabled(pref_path)) ? "now" : "no longer"] show your highslot job when readied in the lobby."
+
+	prefs.save_preferences()
+
+	feedback_add_details("admin_verb","LobbyJob") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
 //Toggles for Staff
 //Developers
 
@@ -223,3 +239,4 @@
 		prefs.save_preferences()
 
 	feedback_add_details("admin_verb","TBeSpecial") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
