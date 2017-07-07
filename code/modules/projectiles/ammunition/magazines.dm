@@ -535,7 +535,7 @@
 	icon_state = "12gclip_bean"
 	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with beanbags."
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
-	matter = list(DEFAULT_WALL_MATERIAL = 1070) //beanbags x5 + 350 metal
+	matter = list(DEFAULT_WALL_MATERIAL = 1070) //beanbags x4 + 350 metal
 
 
 
