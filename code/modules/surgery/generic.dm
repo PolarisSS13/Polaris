@@ -196,7 +196,7 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		var/msg = "[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool].</font>"
+		var/msg = "[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool]."
 		var/self_msg = "You start to pry open the incision on [target]'s [affected.name] with \the [tool]."
 		if (target_zone == BP_TORSO)
 			msg = "[user] starts to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool].</font>"

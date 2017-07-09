@@ -174,7 +174,7 @@
 		affected.fracture()
 
 		/*if (prob(40)) //TODO: ORGAN REMOVAL UPDATE.
-			user.visible_message("<font color='red'> A rib pierces the lung!")
+			user.visible_message("<font color='red'> A rib pierces the lung!</font>")
 			target.rupture_lung()*/
 
 /datum/surgery_step/open_encased/mend
