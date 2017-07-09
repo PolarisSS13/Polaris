@@ -146,12 +146,12 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M << "<br>"
 					M << "<font color='red'> THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED</font>"
 					M << "<br>"
-					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION</font>")
+					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
 				if(4)
 					M << "<br>"
 					M << "<font color='red'> HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED</font>"
 					M << "<br>"
-					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE</font>")
+					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE")
 				if(5)
 					M << "<br>"
 					M << "<font color='red'> THE COLONY DIRECTOR, HOP AND HOS ARE [who2]...LAWS UPDATED</font>"

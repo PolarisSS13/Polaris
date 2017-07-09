@@ -55,8 +55,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>", \
-		"You start making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>" )
+		user.visible_message("[user] starts making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].", \
+		"You start making some space inside [target]'s [get_cavity(affected)] cavity with \the [tool]." )
 		target.custom_pain("The pain in your chest is living hell!",1)
 		affected.cavity = 1
 		..()
@@ -85,8 +85,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts mending [target]'s [get_cavity(affected)] cavity wall with \the [tool].</font>", \
-		"You start mending [target]'s [get_cavity(affected)] cavity wall with \the [tool].</font>" )
+		user.visible_message("[user] starts mending [target]'s [get_cavity(affected)] cavity wall with \the [tool].", \
+		"You start mending [target]'s [get_cavity(affected)] cavity wall with \the [tool]." )
 		target.custom_pain("The pain in your chest is living hell!",1)
 		affected.cavity = 0
 		..()

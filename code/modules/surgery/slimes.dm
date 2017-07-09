@@ -89,5 +89,5 @@
 
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		user.visible_message("<font color='red'> [user]'s hand slips, causing \him to miss the core!", \
-		"<font color='red'> Your hand slips, causing you to miss the core!")
+		user.visible_message("<font color='red'> [user]'s hand slips, causing \him to miss the core!</font>", \
+		"<font color='red'> Your hand slips, causing you to miss the core!</font>")

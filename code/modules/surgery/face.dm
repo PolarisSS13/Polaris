@@ -29,8 +29,8 @@
 		return ..() && target_zone == O_MOUTH && target.op_stage.face == 0
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts to cut open [target]'s face and neck with \the [tool].</font>", \
-		"You start to cut open [target]'s face and neck with \the [tool].</font>")
+		user.visible_message("[user] starts to cut open [target]'s face and neck with \the [tool].", \
+		"You start to cut open [target]'s face and neck with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -59,8 +59,8 @@
 		return ..() && target.op_stage.face == 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts mending [target]'s vocal cords with \the [tool].</font>", \
-		"You start mending [target]'s vocal cords with \the [tool].</font>")
+		user.visible_message("[user] starts mending [target]'s vocal cords with \the [tool].", \
+		"You start mending [target]'s vocal cords with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -86,8 +86,8 @@
 		return ..() && target.op_stage.face == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts pulling the skin on [target]'s face back in place with \the [tool].</font>", \
-		"You start pulling the skin on [target]'s face back in place with \the [tool].</font>")
+		user.visible_message("[user] starts pulling the skin on [target]'s face back in place with \the [tool].", \
+		"You start pulling the skin on [target]'s face back in place with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

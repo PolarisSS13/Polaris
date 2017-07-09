@@ -244,7 +244,7 @@ proc/check_panel(mob/M)
 	attackby(var/obj/item/weapon/P as obj, mob/user as mob)
 		step_away(src,my_target,2)
 		for(var/mob/M in oviewers(world.view,my_target))
-			M << "<font color='red'> <B>[my_target] flails around wildly.</B>"
+			M << "<font color='red'> <B>[my_target] flails around wildly.</B></font>"
 		my_target.show_message("<font color='red'> <B>[src] has been attacked by [my_target] </B></font>", 1) //Lazy.
 
 		src.health -= P.force

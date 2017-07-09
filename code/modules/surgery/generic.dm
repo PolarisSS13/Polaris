@@ -40,8 +40,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts the bloodless incision on [target]'s [affected.name] with \the [tool].</font>", \
-		"You start the bloodless incision on [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("[user] starts the bloodless incision on [target]'s [affected.name] with \the [tool].", \
+		"You start the bloodless incision on [target]'s [affected.name] with \the [tool].")
 		target.custom_pain("You feel a horrible, searing pain in your [affected.name]!", 50)
 		..()
 
@@ -79,8 +79,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].</font>", \
-		"You start to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("[user] starts to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].", \
+		"You start to construct a prepared incision on and within [target]'s [affected.name] with \the [tool].")
 		target.custom_pain("You feel a horrible, searing pain in your [affected.name] as it is pushed apart!", 50)
 		..()
 
@@ -122,8 +122,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts the incision on [target]'s [affected.name] with \the [tool].</font>", \
-		"You start the incision on [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("[user] starts the incision on [target]'s [affected.name] with \the [tool].", \
+		"You start the incision on [target]'s [affected.name] with \the [tool].")
 		target.custom_pain("You feel a horrible pain as if from a sharp knife in your [affected.name]!", 40)
 		..()
 
@@ -161,8 +161,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts clamping bleeders in [target]'s [affected.name] with \the [tool].</font>", \
-		"You start clamping bleeders in [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("[user] starts clamping bleeders in [target]'s [affected.name] with \the [tool].", \
+		"You start clamping bleeders in [target]'s [affected.name] with \the [tool].")
 		target.custom_pain("The pain in your [affected.name] is maddening!", 40)
 		..()
 
@@ -197,13 +197,13 @@
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		var/msg = "[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool].</font>"
-		var/self_msg = "You start to pry open the incision on [target]'s [affected.name] with \the [tool].</font>"
+		var/self_msg = "You start to pry open the incision on [target]'s [affected.name] with \the [tool]."
 		if (target_zone == BP_TORSO)
 			msg = "[user] starts to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool].</font>"
-			self_msg = "You start to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool].</font>"
+			self_msg = "You start to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool]."
 		if (target_zone == BP_GROIN)
 			msg = "[user] starts to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool].</font>"
-			self_msg = "You start to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool].</font>"
+			self_msg = "You start to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool]."
 		user.visible_message(msg, self_msg)
 		target.custom_pain("It feels like the skin on your [affected.name] is on fire!", 40)
 		..()
@@ -252,15 +252,15 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to cauterize the incision on [target]'s [affected.name] with \the [tool].</font>" , \
-		"You are beginning to cauterize the incision on [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("[user] is beginning to cauterize the incision on [target]'s [affected.name] with \the [tool]." , \
+		"You are beginning to cauterize the incision on [target]'s [affected.name] with \the [tool].")
 		target.custom_pain("Your [affected.name] is being burned!", 40)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='blue'> [user] cauterizes the incision on [target]'s [affected.name] with \the [tool].</font>", \
-		"<font color='blue'> You cauterize the incision on [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("<font color='blue'> [user] cauterizes the incision on [target]'s [affected.name] with \the [tool].", \
+		"<font color='blue'> You cauterize the incision on [target]'s [affected.name] with \the [tool].")
 		affected.open = 0
 		affected.germ_level = 0
 		affected.status &= ~ORGAN_BLEEDING
@@ -293,8 +293,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to amputate [target]'s [affected.name] with \the [tool].</font>" , \
-		"You are beginning to cut through [target]'s [affected.amputation_point] with \the [tool].</font>")
+		user.visible_message("[user] is beginning to amputate [target]'s [affected.name] with \the [tool]." , \
+		"You are beginning to cut through [target]'s [affected.amputation_point] with \the [tool].")
 		target.custom_pain("Your [affected.amputation_point] is being ripped apart!", 100)
 		..()
 

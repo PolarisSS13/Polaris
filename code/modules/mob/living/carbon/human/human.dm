@@ -417,7 +417,7 @@
 												U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecord"])
 		if(hasHUD(usr,"security"))
@@ -447,7 +447,7 @@
 								read = 1
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecordComment"])
 		if(hasHUD(usr,"security"))
@@ -477,7 +477,7 @@
 								usr << "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>"
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
@@ -545,7 +545,7 @@
 											U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecord"])
 		if(hasHUD(usr,"medical"))
@@ -576,7 +576,7 @@
 								read = 1
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecordComment"])
 		if(hasHUD(usr,"medical"))
@@ -606,7 +606,7 @@
 								usr << "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>"
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person."
+				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
@@ -872,10 +872,10 @@
 
 	var/say = sanitize(input("What do you wish to say"))
 	if(mRemotetalk in target.mutations)
-		target.show_message("<font color='blue'> You hear [src.real_name]'s voice: [say]")
+		target.show_message("<font color='blue'> You hear [src.real_name]'s voice: [say]</font>")
 	else
-		target.show_message("<font color='blue'> You hear a voice that seems to echo around the room: [say]")
-	usr.show_message("<font color='blue'> You project your mind into [target.real_name]: [say]")
+		target.show_message("<font color='blue'> You hear a voice that seems to echo around the room: [say]</font>")
+	usr.show_message("<font color='blue'> You project your mind into [target.real_name]: [say]</font>")
 	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
 	for(var/mob/observer/dead/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")

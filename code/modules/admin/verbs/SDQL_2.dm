@@ -258,7 +258,7 @@
 				if("or", "||")
 					result = (result || val)
 				else
-					usr << "<font color='red'> SDQL2: Unknown op [op]"
+					usr << "<font color='red'> SDQL2: Unknown op [op]</font>"
 					result = null
 		else
 			result = val

@@ -206,7 +206,7 @@ var/savefile/Banlistjob
 /datum/admins/proc/unjobbanpanel()
 	var/count = 0
 	var/dat
-	//var/dat = "<HR><B>Unban Player:</B> <font color='blue'>(U) = Unban , (E) = Edit Ban\green (Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >"
+	//var/dat = "<HR><B>Unban Player:</B> <font color='blue'>(U) = Unban , (E) = Edit Ban</font> <font color='green'> (Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 </font>>"
 	Banlistjob.cd = "/base"
 	for (var/A in Banlistjob.dir)
 		count++

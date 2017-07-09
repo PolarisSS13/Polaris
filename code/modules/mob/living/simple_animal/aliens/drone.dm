@@ -78,7 +78,7 @@
 
 	//repair a bit of damage
 	if(prob(1))
-		src.visible_message("<font color='red'> \icon[src] [src] shudders and shakes as some of it's damaged systems come back online.")
+		src.visible_message("<font color='red'> \icon[src] [src] shudders and shakes as some of it's damaged systems come back online.</font>")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, src)
 		s.start()

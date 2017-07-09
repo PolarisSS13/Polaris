@@ -23,8 +23,8 @@
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		if (affected.stage == 0)
-			user.visible_message("[user] starts applying medication to the damaged bones in [target]'s [affected.name] with \the [tool].</font>" , \
-			"You start applying medication to the damaged bones in [target]'s [affected.name] with \the [tool].</font>")
+			user.visible_message("<font color='blue'>[user] starts applying medication to the damaged bones in [target]'s [affected.name] with \the [tool].</font>" , \
+			"<font color='blue'>You start applying medication to the damaged bones in [target]'s [affected.name] with \the [tool].</font>")
 		target.custom_pain("Something in your [affected.name] is causing you a lot of pain!", 50)
 		..()
 
@@ -94,8 +94,8 @@
 		return affected && affected.organ_tag == BP_HEAD && (affected.robotic < ORGAN_ROBOT) && affected.open >= 2 && affected.stage == 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] is beginning to piece together [target]'s skull with \the [tool].</font>"  , \
-			"You are beginning to piece together [target]'s skull with \the [tool].</font>")
+		user.visible_message("<font color='blue'>[user] is beginning to piece together [target]'s skull with \the [tool].</font>"  , \
+			"<font color='blue'>You are beginning to piece together [target]'s skull with \the [tool].</font>")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -131,8 +131,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] starts to finish mending the damaged bones in [target]'s [affected.name] with \the [tool].</font>", \
-		"You start to finish mending the damaged bones in [target]'s [affected.name] with \the [tool].</font>")
+		user.visible_message("<font color='blue'>[user] starts to finish mending the damaged bones in [target]'s [affected.name] with \the [tool].</font>", \
+		"<font color='blue'>You start to finish mending the damaged bones in [target]'s [affected.name] with \the [tool].</font>")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
