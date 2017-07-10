@@ -511,7 +511,7 @@ var/global/list/robot_modules = list(
 	channels = list("Service" = 1)
 	sprites = list(
 					"M-USE NanoTrasen" = "robotJani",
-					"Arachne" = "crawler"
+					"Arachne" = "crawler",
 					"Cabeiri" = "eyebot-janitor",
 					"CUPCAKE" = "Noble-CLN",
 					"Haruka" = "marinaJN",
@@ -687,7 +687,7 @@ var/global/list/robot_modules = list(
 					"L'Ouef" = "peaceborg",
 					"Cabeiri" = "eyebot-science",
 					"Haruka" = "marinaSCI",
-					"WTDove" = "whitespider"
+					"WTDove" = "whitespider",
 					"WTOperator" = "sleekscience",
 					"Droid" = "droid-science",
 					"Drone" = "drone-science"
