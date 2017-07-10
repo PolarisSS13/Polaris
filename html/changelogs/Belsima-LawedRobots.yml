@@ -33,6 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - imageaddadd: "Added several new robot icons."
+  - imageadd: "Added several new robot icons."
   - imageadd: "Added animations to some robots."
   - bugfix "Fixed Usagi's eyes not turning off when dead."
