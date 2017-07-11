@@ -28,8 +28,11 @@
 		"Drone" = "repairbot",
 		"Cat" = "cat",
 		"Mouse" = "mouse",
-		"Monkey" = "monkey"
-		"Corgi" = "borgi"
+		"Monkey" = "monkey",
+		"Corgi" = "borgi",
+		"Fox" = "fox",
+		"Parrot" = "parrot",
+		"Rabbit" = "rabbit"
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -38,6 +41,7 @@
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows")
+		"Canine" = list("barks","yelps","yaps")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
