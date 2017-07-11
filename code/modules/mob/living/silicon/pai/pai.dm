@@ -40,8 +40,8 @@
 		"Natural" = list("says","yells","asks"),
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows")
-		"Canine" = list("barks","yelps","yaps")
+		"Feline" = list("purrs","yowls","meows"),
+		"Canine" = list("yaps","barks","woofs")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
