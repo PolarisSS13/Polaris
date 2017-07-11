@@ -1228,14 +1228,14 @@
 	result = "icecoffee"
 	required_reagents = list("ice" = 1, "coffee" = 2)
 	result_amount = 3
-/*
+
 /datum/chemical_reaction/drinks/nuka_cola
-	name = "Nuka Cola"
+	name = "Nuclear Cola"
 	id = "nuka_cola"
 	result = "nuka_cola"
 	required_reagents = list("uranium" = 1, "cola" = 5)
 	result_amount = 5
-*/
+
 /datum/chemical_reaction/drinks/moonshine
 	name = "Moonshine"
 	id = "moonshine"
