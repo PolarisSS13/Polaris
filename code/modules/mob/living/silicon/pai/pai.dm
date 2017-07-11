@@ -29,6 +29,7 @@
 		"Cat" = "cat",
 		"Mouse" = "mouse",
 		"Monkey" = "monkey"
+		"Corgi" = "borgi"
 		)
 
 	var/global/list/possible_say_verbs = list(
