@@ -35,4 +35,3 @@ delete-after: True
 changes: 
   - rscadd: "Added a lot of new lore-friendly drinks."
   - spellcheck: "Adjusted the descriptions of some drinks."
-  - rscdel: "Removed radioactive drinks."

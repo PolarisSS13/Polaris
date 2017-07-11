@@ -1392,14 +1392,14 @@
 	result = "tequillasunrise"
 	required_reagents = list("tequilla" = 2, "orangejuice" = 1)
 	result_amount = 3
-/*
+
 /datum/chemical_reaction/drinks/phoron_special
 	name = "Toxins Special"
 	id = "phoronspecial"
 	result = "phoronspecial"
 	required_reagents = list("rum" = 2, "vermouth" = 2, "phoron" = 2)
 	result_amount = 6
-*/
+
 /datum/chemical_reaction/drinks/beepsky_smash
 	name = "Beepksy Smash"
 	id = "beepksysmash"
@@ -1448,14 +1448,14 @@
 	result = "b52"
 	required_reagents = list("irishcream" = 1, "kahlua" = 1, "cognac" = 1)
 	result_amount = 3
-/*
+
 /datum/chemical_reaction/drinks/atomicbomb
 	name = "Atomic Bomb"
 	id = "atomicbomb"
 	result = "atomicbomb"
 	required_reagents = list("b52" = 10, "uranium" = 1)
 	result_amount = 10
-*/
+
 /datum/chemical_reaction/drinks/margarita
 	name = "Margarita"
 	id = "margarita"
@@ -1476,14 +1476,14 @@
 	result = "longislandicedtea"
 	required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 3)
 	result_amount = 6
-/*
+
 /datum/chemical_reaction/drinks/threemileisland
 	name = "Three Mile Island Iced Tea"
 	id = "threemileisland"
 	result = "threemileisland"
 	required_reagents = list("longislandicedtea" = 10, "uranium" = 1)
 	result_amount = 10
-*/
+
 /datum/chemical_reaction/drinks/whiskeysoda
 	name = "Whiskey Soda"
 	id = "whiskeysoda"
@@ -1504,14 +1504,14 @@
 	result = "manhattan"
 	required_reagents = list("whiskey" = 2, "vermouth" = 1)
 	result_amount = 3
-/*
+
 /datum/chemical_reaction/drinks/manhattan_proj
 	name = "Manhattan Project"
 	id = "manhattan_proj"
 	result = "manhattan_proj"
 	required_reagents = list("manhattan" = 10, "uranium" = 1)
 	result_amount = 10
-*/
+
 /datum/chemical_reaction/drinks/vodka_tonic
 	name = "Vodka and Tonic"
 	id = "vodkatonic"
@@ -1532,14 +1532,14 @@
 	result = "bahama_mama"
 	required_reagents = list("rum" = 2, "orangejuice" = 2, "limejuice" = 1, "ice" = 1)
 	result_amount = 6
-/*
+
 /datum/chemical_reaction/drinks/singulo
 	name = "Singulo"
 	id = "singulo"
 	result = "singulo"
 	required_reagents = list("vodka" = 5, "radium" = 1, "wine" = 5)
 	result_amount = 10
-*/
+
 /datum/chemical_reaction/drinks/alliescocktail
 	name = "Allies Cocktail"
 	id = "alliescocktail"
@@ -1857,9 +1857,9 @@
 	result_amount = 15
 
 /datum/chemical_reaction/drinks/ginzamary
-	name = "Tamagozake"
-	id = "tamagozake"
-	result = "tamagozake"
+	name = "Ginza Mary"
+	id = "ginzamary"
+	result = "ginzamary"
 	required_reagents = list("sake" = 2, "vodka" = 2, "tomatojuice" = 1)
 	result_amount = 5
 
