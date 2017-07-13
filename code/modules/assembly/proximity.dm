@@ -117,7 +117,7 @@
 
 	interact(mob/user as mob)//TODO: Change this to the wires thingy
 		if(!secured)
-			user.show_message("<font color='red'> The [name] is unsecured!</font>")
+			user.show_message("<font color='red'>The [name] is unsecured!</font>")
 			return 0
 		var/second = time % 60
 		var/minute = (time - second) / 60

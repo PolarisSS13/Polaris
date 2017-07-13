@@ -417,7 +417,7 @@
 												U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecord"])
 		if(hasHUD(usr,"security"))
@@ -447,7 +447,7 @@
 								read = 1
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecordComment"])
 		if(hasHUD(usr,"security"))
@@ -477,7 +477,7 @@
 								usr << "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>"
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
@@ -545,7 +545,7 @@
 											U.handle_regular_hud_updates()
 
 			if(!modified)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecord"])
 		if(hasHUD(usr,"medical"))
@@ -576,7 +576,7 @@
 								read = 1
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecordComment"])
 		if(hasHUD(usr,"medical"))
@@ -606,7 +606,7 @@
 								usr << "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>"
 
 			if(!read)
-				usr << "<font color='red'> Unable to locate a data core entry for this person.</font>"
+				usr << "<font color='red'>Unable to locate a data core entry for this person.</font>"
 
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
@@ -758,7 +758,7 @@
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
-		visible_message("<font color='red'> \The [src] begins playing \his ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'> You begin to play a spooky refrain on your ribcage.</font>","<font color='red'> You hear a spooky xylophone melody.</font>")
+		visible_message("<font color='red'>\The [src] begins playing \his ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'>You begin to play a spooky refrain on your ribcage.</font>","<font color='red'>You hear a spooky xylophone melody.</font>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(loc, song, 50, 1, -1)
 		xylophone = 1
@@ -849,7 +849,7 @@
 	regenerate_icons()
 	check_dna()
 
-	visible_message("<font color='blue'> \The [src] morphs and changes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] appearance!</font>", "<font color='blue'> You change your appearance!</font>", "<font color='red'> Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</font>")
+	visible_message("<font color='blue'>\The [src] morphs and changes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] appearance!</font>", "<font color='blue'>You change your appearance!</font>", "<font color='red'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</font>")
 
 /mob/living/carbon/human/proc/remotesay()
 	set name = "Project mind"

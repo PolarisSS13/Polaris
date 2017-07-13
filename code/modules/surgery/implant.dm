@@ -34,8 +34,8 @@
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='red'> [user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</font>", \
-		"<font color='red'> Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</font>")
+		user.visible_message("<font color='red'>[user]'s hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</font>", \
+		"<font color='red'>Your hand slips, scraping around inside [target]'s [affected.name] with \the [tool]!</font>")
 		affected.createwound(CUT, 20)
 
 /datum/surgery_step/cavity/make_space
@@ -63,8 +63,8 @@
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='blue'> [user] makes some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>", \
-		"<font color='blue'> You make some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>" )
+		user.visible_message("<font color='blue'>[user] makes some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>", \
+		"<font color='blue'>You make some space inside [target]'s [get_cavity(affected)] cavity with \the [tool].</font>" )
 
 /datum/surgery_step/cavity/close_space
 	priority = 2
@@ -93,8 +93,8 @@
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='blue'> [user] mends [target]'s [get_cavity(affected)] cavity walls with \the [tool].</font>", \
-		"<font color='blue'> You mend [target]'s [get_cavity(affected)] cavity walls with \the [tool].</font>" )
+		user.visible_message("<font color='blue'>[user] mends [target]'s [get_cavity(affected)] cavity walls with \the [tool].</font>", \
+		"<font color='blue'> You mend[target]'s [get_cavity(affected)] cavity walls with \the [tool].</font>" )
 
 /datum/surgery_step/cavity/place_item
 	priority = 0
@@ -119,15 +119,15 @@
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("<font color='blue'>[user] starts putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>", \
-		"<font color='blue'> start putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>" ) //Nobody will probably ever see this, but I made these two blue. ~CK
+		"<font color='blue'>You start putting \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>" ) //Nobody will probably ever see this, but I made these two blue. ~CK
 		target.custom_pain("The pain in your chest is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/chest/affected = target.get_organ(target_zone)
 
-		user.visible_message("<font color='blue'> [user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>", \
-		"<font color='blue'> You put \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>" )
+		user.visible_message("<font color='blue'>[user] puts \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>", \
+		"<font color='blue'>You put \the [tool] inside [target]'s [get_cavity(affected)] cavity.</font>" )
 		if (tool.w_class > get_max_wclass(affected)/2 && prob(50) && (affected.robotic < ORGAN_ROBOT))
 			user << "<font color='red'> You tear some blood vessels trying to fit such a big object in this cavity.</font>"
 			var/datum/wound/internal_bleeding/I = new (10)
@@ -162,8 +162,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='blue'> [user] starts poking around inside [target]'s [affected.name] with \the [tool].</font>", \
-		"<font color='blue'> You start poking around inside [target]'s [affected.name] with \the [tool].</font>" )
+		user.visible_message("<font color='blue'>[user] starts poking around inside [target]'s [affected.name] with \the [tool].</font>", \
+		"<font color='blue'>You start poking around inside [target]'s [affected.name] with \the [tool].</font>" )
 		target.custom_pain("The pain in your [affected.name] is living hell!",1)
 		..()
 
@@ -186,8 +186,8 @@
 				find_prob +=50
 
 			if (prob(find_prob))
-				user.visible_message("<font color='blue'> [user] takes something out of incision on [target]'s [affected.name] with \the [tool]!</font>", \
-				"<font color='blue'> You take [obj] out of incision on [target]'s [affected.name]s with \the [tool]!</font>" )
+				user.visible_message("<font color='blue'>[user] takes something out of incision on [target]'s [affected.name] with \the [tool]!</font>", \
+				"<font color='blue'>You take [obj] out of incision on [target]'s [affected.name]s with \the [tool]!</font>" )
 				affected.implants -= obj
 
 				BITSET(target.hud_updateflag, IMPLOYAL_HUD)
@@ -208,11 +208,11 @@
 						imp.imp_in = null
 						imp.implanted = 0
 			else
-				user.visible_message("<font color='blue'> [user] removes \the [tool] from [target]'s [affected.name].</font>", \
-				"<font color='blue'> There's something inside [target]'s [affected.name], but you just missed it this time.</font>" )
+				user.visible_message("<font color='blue'>[user] removes \the [tool] from [target]'s [affected.name].</font>", \
+				"<font color='blue'>There's something inside [target]'s [affected.name], but you just missed it this time.</font>" )
 		else
-			user.visible_message("<font color='blue'> [user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out.</font>", \
-			"<font color='blue'> You could not find anything inside [target]'s [affected.name].</font>" )
+			user.visible_message("<font color='blue'>[user] could not find anything inside [target]'s [affected.name], and pulls \the [tool] out.</font>", \
+			"<font color='blue'>You could not find anything inside [target]'s [affected.name].</font>" )
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		..()

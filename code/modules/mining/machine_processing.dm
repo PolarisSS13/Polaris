@@ -32,7 +32,7 @@
 		return
 
 	if(!allowed(user))
-		user << "<font color='red'> Access denied.</font>"
+		user << "<font color='red'>Access denied.</font>"
 		return
 
 	user.set_machine(src)
