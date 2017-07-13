@@ -133,6 +133,6 @@
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='red'>[user]'s hand slips, leaving a small burn on [target]'s face with \the [tool]!", \
-		"<font color='red'>Your hand slips, leaving a small burn on [target]'s face with \the [tool]!")
+		user.visible_message("<font color='red'>[user]'s hand slips, leaving a small burn on [target]'s face with \the [tool]!</font>", \
+		"<font color='red'>Your hand slips, leaving a small burn on [target]'s face with \the [tool]!</font>")
 		target.apply_damage(4, BURN, affected)

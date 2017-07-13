@@ -68,8 +68,8 @@
 				"<font color='blue'>You set the bone in [target]'s [affected.name] in place with \the [tool].</font>")
 			affected.stage = 2
 		else
-			user.visible_message("<font color='blue'>[user] sets the bone in [target]'s [affected.name]<font color='red'> in the WRONG place with \the [tool].</font>", \
-				"<font color='blue'>You set the bone in [target]'s [affected.name]<font color='red'> in the WRONG place with \the [tool].</font>")
+			user.visible_message("[user] sets the bone in [target]'s [affected.name]<font color='red'> in the WRONG place with \the [tool].</font>", \
+				"You set the bone in [target]'s [affected.name]<font color='red'> in the WRONG place with \the [tool].</font>")
 			affected.fracture()
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
