@@ -116,8 +116,8 @@
 		return ..() && target.op_stage.face > 0
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] is beginning to cauterize the incision on [target]'s face and neck with \the [tool].</font>" , \
-		"You are beginning to cauterize the incision on [target]'s face and neck with \the [tool].</font>")
+		user.visible_message("<font color='blue'>[user] is beginning to cauterize the incision on [target]'s face and neck with \the [tool].</font>" , \
+		"<font color='blue'>You are beginning to cauterize the incision on [target]'s face and neck with \the [tool].</font>")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

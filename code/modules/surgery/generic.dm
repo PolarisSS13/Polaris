@@ -199,10 +199,10 @@
 		var/msg = "[user] starts to pry open the incision on [target]'s [affected.name] with \the [tool]."
 		var/self_msg = "You start to pry open the incision on [target]'s [affected.name] with \the [tool]."
 		if (target_zone == BP_TORSO)
-			msg = "[user] starts to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool].</font>"
+			msg = "[user] starts to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool]."
 			self_msg = "You start to separate the ribcage and rearrange the organs in [target]'s torso with \the [tool]."
 		if (target_zone == BP_GROIN)
-			msg = "[user] starts to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool].</font>"
+			msg = "[user] starts to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool]."
 			self_msg = "You start to pry open the incision and rearrange the organs in [target]'s lower abdomen with \the [tool]."
 		user.visible_message(msg, self_msg)
 		target.custom_pain("It feels like the skin on your [affected.name] is on fire!", 40)
@@ -259,8 +259,8 @@
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("<font color='blue'>[user] cauterizes the incision on [target]'s [affected.name] with \the [tool].", \
-		"<font color='blue'>You cauterize the incision on [target]'s [affected.name] with \the [tool].")
+		user.visible_message("<font color='blue'>[user] cauterizes the incision on [target]'s [affected.name] with \the [tool].</font>", \
+		"<font color='blue'>You cauterize the incision on [target]'s [affected.name] with \the [tool].</font>")
 		affected.open = 0
 		affected.germ_level = 0
 		affected.status &= ~ORGAN_BLEEDING

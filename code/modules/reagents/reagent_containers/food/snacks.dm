@@ -130,11 +130,11 @@
 	if (bitecount==0)
 		return
 	else if (bitecount==1)
-		user << "<font color='blue'> \The [src] was bitten by someone!</font>"
+		user << "<font color='blue'>\The [src] was bitten by someone!</font>"
 	else if (bitecount<=3)
-		user << "<font color='blue'> \The [src] was bitten [bitecount] times!</font>"
+		user << "<font color='blue'>\The [src] was bitten [bitecount] times!</font>"
 	else
-		user << "<font color='blue'> \The [src] was bitten multiple times!</font>"
+		user << "<font color='blue'>\The [src] was bitten multiple times!</font>"
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
@@ -149,12 +149,12 @@
 				U.create_reagents(5)
 
 			if (U.reagents.total_volume > 0)
-				user << "<font color='red'> You already have something on your [U].</font>"
+				user << "<font color='red'>You already have something on your [U].</font>"
 				return
 
 			user.visible_message( \
 				"[user] scoops up some [src] with \the [U]!", \
-				"<font color='blue'> You scoop up some [src] with \the [U]!</font>" \
+				"<font color='blue'>You scoop up some [src] with \the [U]!</font>" \
 			)
 
 			src.bitecount++
@@ -536,7 +536,7 @@
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.splash(hit_atom, reagents.total_volume)
-	src.visible_message("<font color='red'> [src.name] has been squashed.</font>","<font color='red'> You hear a smack.</font>")
+	src.visible_message("<font color='red'>[src.name] has been squashed.</font>","<font color='red'>You hear a smack.</font>")
 	qdel(src)
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -545,10 +545,10 @@
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			usr << "<font color='blue'> The egg refuses to take on this color!</font>"
+			usr << "<font color='blue'>The egg refuses to take on this color!</font>"
 			return
 
-		usr << "<font color='blue'> You color \the [src] [clr]</font>"
+		usr << "<font color='blue'>You color \the [src] [clr]</font>"
 		icon_state = "egg-[clr]"
 	else
 		..()
@@ -1262,7 +1262,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/popcorn/On_Consume()
 	if(prob(unpopped))	//lol ...what's the point?
-		usr << "<font color='red'> You bite down on an un-popped kernel!</font>"
+		usr << "<font color='red'>You bite down on an un-popped kernel!</font>"
 		unpopped = max(0, unpopped-1)
 	..()
 

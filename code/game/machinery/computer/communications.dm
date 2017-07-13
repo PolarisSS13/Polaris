@@ -53,7 +53,7 @@
 	if(..())
 		return 1
 	if (using_map && !(src.z in using_map.contact_levels))
-		usr << "<font color='red'><b>Unable to establish a connection</b></font>: <font color='black'>You're too far away from the station!</font>"
+		usr << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the station!</font>"
 		return
 	usr.set_machine(src)
 
@@ -275,7 +275,7 @@
 	if(..())
 		return
 	if (using_map && !(src.z in using_map.contact_levels))
-		user << "<font color='red'><b>Unable to establish a connection</b></font>: <font color='black'>You're too far away from the station!</font>"
+		user << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the station!</font>"
 		return
 
 	user.set_machine(src)

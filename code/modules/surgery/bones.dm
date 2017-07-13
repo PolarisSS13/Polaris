@@ -56,8 +56,8 @@
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		user.visible_message("[user] is beginning to set the bone in [target]'s [affected.name] in place with \the [tool].</font>" , \
-			"You are beginning to set the bone in [target]'s [affected.name] in place with \the [tool].</font>")
+		user.visible_message("<font color='blue'>[user] is beginning to set the bone in [target]'s [affected.name] in place with \the [tool].</font>" , \
+			"<font color='blue'>You are beginning to set the bone in [target]'s [affected.name] in place with \the [tool].</font>")
 		target.custom_pain("The pain in your [affected.name] is going to make you pass out!", 50)
 		..()
 
