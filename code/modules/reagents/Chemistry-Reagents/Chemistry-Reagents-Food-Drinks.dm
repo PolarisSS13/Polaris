@@ -2322,7 +2322,7 @@
 	description = "For when you're too weeb for a real martini."
 	taste_description = "dry alcohol"
 	color = "#0064C8"
-	strength = 22
+	strength = 50
 
 	glass_name = "Saketini"
 	glass_desc = "What are you doing drinking this outside of New Kyoto?"
@@ -2416,6 +2416,27 @@
 	glass_name = "Spacer's Brew"
 	glass_desc = "Ethanol and orange soda. A common emergency drink on frontier colonies."
 
+/datum/reagent/ethanol/binmanbliss
+	name = "Binman Bliss"
+	id = "binmanbliss"
+	description = "A dry cocktail popular on Binma."
+	taste_description = "very dry alcohol"
+	color = "#c3c3c3"
+	strength = 24
+
+	glass_name = "Binman Bliss"
+	glass_desc = "A dry cocktail popular on Binma."
+
+/datum/reagent/ethanol/chrysanthemum
+	name = "Chrysanthemum"
+	id = "chrysanthemum"
+	description = "An exotic cocktail from New Kyoto."
+	taste_description = "fruity liquor"
+	color = "#9999FF"
+	strength = 38
+
+	glass_name = "Chrysanthemum"
+	glass_desc = "An exotic cocktail from New Kyoto."
 
 /datum/reagent/ethanol/unathiliquor/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
