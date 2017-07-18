@@ -2276,7 +2276,7 @@
 	description = "Alcohol in more alcohol."
 	taste_description = "thick, dry alcohol"
 	color = "#FFFF7F"
-	strength = 30
+	strength = 15
 	nutriment_factor = 1
 
 	glass_name = "Sake Bomb"
@@ -2288,7 +2288,7 @@
 	description = "Sake, egg, and sugar. A disgusting folk cure."
 	taste_description = "eggy booze"
 	color = "#E8C477"
-	strength = 50
+	strength = 30
 	nutriment_factor = 3
 
 	glass_name = "Tamagozake"
@@ -2300,7 +2300,7 @@
 	description = "An alcoholic drink made with vodka, sake, and juices."
 	taste_description = "spicy tomato sake"
 	color = "#FF3232"
-	strength = 30
+	strength = 25
 
 	glass_name = "Ginza Mary"
 	glass_desc = "Tomato juice, vodka, and sake make something not quite completely unlike a Bloody Mary."
@@ -2311,7 +2311,7 @@
 	description = "A pale pink cocktail made with sake and berry juice."
 	taste_description = "fruity booze"
 	color = "#FA8072"
-	strength = 45
+	strength = 35
 
 	glass_name = "Tokyo Rose"
 	glass_desc = "It's kinda pretty!"
@@ -2322,7 +2322,7 @@
 	description = "For when you're too weeb for a real martini."
 	taste_description = "dry alcohol"
 	color = "#0064C8"
-	strength = 50
+	strength = 15
 
 	glass_name = "Saketini"
 	glass_desc = "What are you doing drinking this outside of New Kyoto?"
@@ -2333,7 +2333,7 @@
 	description = "A lothesome cocktail favored by Heaven's skeleton shift workers."
 	taste_description = "sour coffee"
 	color = "#8f7729"
-	strength = 28
+	strength = 20
 
 	glass_name = "Elysium Facepunch"
 	glass_desc = "A lothesome cocktail favored by Heaven's skeleton shift workers."
@@ -2400,7 +2400,7 @@
 	description = "From Shelf. Not for human consumption."
 	taste_description = "oily bitterness"
 	color = "#d3d3d3"
-	strength = 37
+	strength = 36
 
 	glass_name = "Debugger"
 	glass_desc = "From Shelf. Not for human consumption."
@@ -2411,7 +2411,7 @@
 	description = "Ethanol and orange soda. A common emergency drink on frontier colonies."
 	taste_description = "bitter oranges"
 	color = "#ffc04c"
-	strength = 50
+	strength = 43
 
 	glass_name = "Spacer's Brew"
 	glass_desc = "Ethanol and orange soda. A common emergency drink on frontier colonies."
@@ -2433,7 +2433,7 @@
 	description = "An exotic cocktail from New Kyoto."
 	taste_description = "fruity liquor"
 	color = "#9999FF"
-	strength = 38
+	strength = 35
 
 	glass_name = "Chrysanthemum"
 	glass_desc = "An exotic cocktail from New Kyoto."
