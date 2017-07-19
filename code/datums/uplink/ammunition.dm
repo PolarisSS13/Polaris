@@ -48,19 +48,19 @@
 	name = "Anti-Materiel Rifle ammo box (14.5mm)"
 	path = /obj/item/weapon/storage/box/sniperammo
 
-/datum/uplink_item/item/ammo/c556
+/datum/uplink_item/item/ammo/c545
 	name = "Rifle Magazine (5.45mm)"
 	path = /obj/item/ammo_magazine/m545
 
-/datum/uplink_item/item/ammo/c556/ext
+/datum/uplink_item/item/ammo/c545/ext
 	name = "Rifle Magazine (5.45mm Extended)"
 	path = /obj/item/ammo_magazine/m545/ext
 
-/datum/uplink_item/item/ammo/c556/ap
+/datum/uplink_item/item/ammo/c545/ap
 	name = "Rifle Magazine (5.45mm AP)"
 	path = /obj/item/ammo_magazine/m545/ap
 
-/datum/uplink_item/item/ammo/c556/ap/ext
+/datum/uplink_item/item/ammo/c545/ap/ext
 	name = "Rifle Magazine (5.45mm AP Extended)"
 	path = /obj/item/ammo_magazine/m545/ap/ext
 
