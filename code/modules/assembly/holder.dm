@@ -142,11 +142,11 @@
 	..()
 	return
 
+
 /obj/item/device/assembly_holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(isscrewdriver(W))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'> BUG:Assembly part missing, please report this!</span>")
-
 			return
 		a_left.toggle_secure()
 		a_right.toggle_secure()
@@ -164,7 +164,6 @@
 	return
 
 
-
 /obj/item/device/assembly_holder/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
 	if(src.secured)
@@ -176,7 +175,6 @@
 				if("Left")	a_left.attack_self(user)
 				if("Right")	a_right.attack_self(user)
 			return
-
 		else
 			if(!istype(a_left,/obj/item/device/assembly/igniter))
 				a_left.attack_self(user)
