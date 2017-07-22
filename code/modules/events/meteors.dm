@@ -1,6 +1,6 @@
 /datum/event/meteor_wave
-	startWhen		= 5
-	endWhen 		= 7
+	startWhen		= 150
+	endWhen 		= 175
 	var/next_meteor = 6
 	var/waves = 1
 	var/start_side
