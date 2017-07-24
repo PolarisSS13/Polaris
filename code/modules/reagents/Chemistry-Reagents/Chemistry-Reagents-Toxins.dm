@@ -65,9 +65,9 @@
 	if(!istype(T))
 		return
 	T.assume_gas("phoron", ceil(volume/2), T20C)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(1, 1, T)
-	s.start()
+	for(var/turf/simulated/floor/target_tile in range(0,T))
+		target_tile.assume_gas("volatile_fuel", volume, 400+T0C)
+		spawn (0) target_tile.hotspot_expose(700, 400)
 	remove_self(volume)
 
 /datum/reagent/toxin/spidertoxin
