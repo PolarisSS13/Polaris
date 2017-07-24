@@ -64,8 +64,10 @@
 /datum/reagent/toxin/hydrophoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
-	T.assume_gas("oxygen", ceil(volume/2), T20C)
 	T.assume_gas("phoron", ceil(volume/2), T20C)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(1, 1, T)
+	s.start()
 	remove_self(volume)
 
 /datum/reagent/toxin/spidertoxin
