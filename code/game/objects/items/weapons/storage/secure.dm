@@ -149,6 +149,7 @@
 	force = 8.0
 	throw_speed = 1
 	throw_range = 4
+	max_w_class = ITEMSIZE_NORMAL
 	w_class = ITEMSIZE_LARGE
 
 	attack_hand(mob/user as mob)
