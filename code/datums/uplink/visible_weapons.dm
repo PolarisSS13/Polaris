@@ -57,7 +57,7 @@
 
 /datum/uplink_item/item/visible_weapons/heavysnipertraitor
 	name = "Anti-Materiel Rifle (14.5mm)"
-	desc = "A convenient collapsible rifle for covert assassination. Comes with 5 shots and its own carrying case."
+	desc = "A convenient collapsible rifle for covert assassination. Comes with 4 shots and its own secure carrying case."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/storage/secure/briefcase/rifle
 	antag_roles = list("traitor")

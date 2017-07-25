@@ -293,5 +293,5 @@
 	new /obj/item/sniper_rifle_part/stock(src)
 	new /obj/item/sniper_rifle_part/trigger_group(src)
 
-	for(var/i = 1 to 5)
+	for(var/i = 1 to 4)
 		new /obj/item/ammo_casing/a145(src)

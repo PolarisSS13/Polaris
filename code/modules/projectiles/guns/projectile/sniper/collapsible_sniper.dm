@@ -49,25 +49,25 @@
 	name = "AM rifle barrel"
 	icon_state = "heavysniper-barrel"
 
-	New()
-		..()
-		barrel = src
+/obj/item/sniper_rifle_part/barrel/New()
+	..()
+	barrel = src
 
 /obj/item/sniper_rifle_part/stock
 	name = "AM rifle stock"
 	icon_state = "heavysniper-stock"
 
-	New()
-		..()
-		stock = src
+/obj/item/sniper_rifle_part/stock/New()
+	..()
+	stock = src
 
 /obj/item/sniper_rifle_part/trigger_group
 	name = "AM rifle trigger assembly"
 	icon_state = "heavysniper-trig"
 
-	New()
-		..()
-		trigger_group = src
+/obj/item/sniper_rifle_part/trigger_group/New()
+	..()
+	trigger_group = src
 
 /obj/item/sniper_rifle_part/attack_self(mob/user as mob)
 	if(part_count == 1)
