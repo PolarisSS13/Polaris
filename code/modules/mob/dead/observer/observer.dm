@@ -312,7 +312,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	var/mentor = is_mentor(usr.client)
 	if(!config.antag_hud_allowed && (!client.holder || mentor))
-		src << "<font color='red'>Admins have disabled this for this round.</font></font>"
+		src << "<font color='red'>Admins have disabled this for this round.</font>"
 		return
 	var/mob/observer/dead/M = src
 	if(jobban_isbanned(M, "AntagHUD"))
