@@ -107,6 +107,10 @@
 	var/environment_smash = 0		// How much environment damage do I do when I hit stuff?
 	var/melee_miss_chance = 25		// percent chance to miss a melee attack.
 
+	//Mob autopsoy stuff
+	var/extraction_tool = /obj/item/weapon/surgical/scalpel // Used to extract organs. Could be a saw for something with a hard shell, or a wrench for a robot, etc.
+	var/can_harvest_organ = 1				// Prevents harvesting multiple organs.
+
 	//Special attacks
 	var/spattack_prob = 0			// Chance of the mob doing a special attack (0 for never)
 	var/spattack_min_range = 0		// Min range to perform the special attacks from
@@ -532,7 +536,17 @@
 
 // When somoene clicks us with an item in hand
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/stack/medical))
+	if(istype(O, extraction_tool) && stat == DEAD && can_harvest_organ)
+		//if (mob is on an operating table)
+			//else
+				//user << "<span class='notice'>You can't work on this specimen here.</span>"
+				//return
+		user << "<span class='notice'>You begin to operate on \the [src].</span>"
+		M.visible_message("<span class='notice'>[user] begins to operate on \the [src] with a [O].</span>")
+		// Cooldown
+		harvest_organ()
+		can_harvest_organ = 0
+	else if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < getMaxHealth())
@@ -556,6 +570,43 @@
 			O.attack(src, user, user.zone_sel.selecting)
 			ai_log("attackby() I was weapon'd by: [user]",2)
 			react_to_attack(user)
+
+//Spawns internal organs.
+/mob/living/simple_animal/harvest_organ()
+	// This way of doing this is crazy and inefficient, but it works for now. Feel free to make this less shitty.
+	var/organ_type = pick(/obj/item/organ/internal/heart,
+						/obj/item/organ/internal/lungs,
+						/obj/item/organ/internal/liver,
+						/obj/item/organ/internal/kidneys,
+						/obj/item/organ/internal/brain,
+						/obj/item/organ/internal/appendix,
+						/obj/item/organ/internal/eyes)
+	var/obj/item/new_organ = new organ_type // Doesn't HAVE to be an actual organ. Could be a crowbar for all I care.
+	if (istype(new_organ, /obj/item/organ/internal/heart)
+		new_organ.name = "[name] heart"
+		new_organ.desc = "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body."
+	if (istype(organ, /obj/item/organ/internal/lungs)
+		new_organ.name = "[name] lungs"
+		new_organ.desc = "It's \the [name]'s lungs. It provides oxygen to \the [name]'s body."
+	if (istype(organ, /obj/item/organ/internal/liver)
+		new_organ.name = "[name] liver"
+		new_organ.desc = "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body."
+	if (istype(organ, /obj/item/organ/internal/kidneys)
+		new_organ.name = "[name] kidneys"
+		new_organ.desc = "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body."
+	if (istype(organ, /obj/item/organ/internal/brain)
+		new_organ.name = "[name] brain"
+		new_organ.desc = "It's \the [name]'s brain. It controls \the [name]'s body."
+	if (istype(organ, /obj/item/organ/internal/appendix)
+		new_organ.name = "[name] appendix"
+		new_organ.desc = "It's \the [name]'s appendix. It doesn't seem to do anything useful."
+	if (istype(organ, /obj/item/organ/internal/eyes)
+		new_organ.name = "[name] eyes"
+		new_organ.desc = "It's \the [name]'s eyes. They allow \the [name] to see."
+
+	user << "<span class='notice'>You harvest a [new_organ.name] from \the [src].</span>"
+	M.visible_message("<span class='notice'>[user] harvests a [new_organ.name] from \the [src].</span>")
+	new_organ.loc = src.loc
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
