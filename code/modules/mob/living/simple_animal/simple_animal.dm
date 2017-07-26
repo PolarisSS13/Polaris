@@ -542,7 +542,7 @@
 				//user << "<span class='notice'>You can't work on this specimen here.</span>"
 				//return
 		user << "<span class='notice'>You begin to operate on \the [src].</span>"
-		M.visible_message("<span class='notice'>[user] begins to operate on \the [src] with a [O].</span>")
+		//src.visible_message("<span class='notice'>[user] begins to operate on \the [src] with a [O].</span>")
 		// Cooldown
 		harvest_organ()
 		can_harvest_organ = 0
@@ -572,8 +572,9 @@
 			react_to_attack(user)
 
 //Spawns internal organs.
-/mob/living/simple_animal/harvest_organ()
+/mob/living/simple_animal/proc/harvest_orgac()
 	// This way of doing this is crazy and inefficient, but it works for now. Feel free to make this less shitty.
+	// I wanted to make a multi-dimensional list, but couldn't figure out how to do that correctly. -Spades
 	var/organ_type = pick(/obj/item/organ/internal/heart,
 						/obj/item/organ/internal/lungs,
 						/obj/item/organ/internal/liver,
@@ -582,30 +583,30 @@
 						/obj/item/organ/internal/appendix,
 						/obj/item/organ/internal/eyes)
 	var/obj/item/new_organ = new organ_type // Doesn't HAVE to be an actual organ. Could be a crowbar for all I care.
-	if (istype(new_organ, /obj/item/organ/internal/heart)
+	if (istype(new_organ, /obj/item/organ/internal/heart))
 		new_organ.name = "[name] heart"
 		new_organ.desc = "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body."
-	if (istype(organ, /obj/item/organ/internal/lungs)
+	if (istype(new_organ, /obj/item/organ/internal/lungs))
 		new_organ.name = "[name] lungs"
 		new_organ.desc = "It's \the [name]'s lungs. It provides oxygen to \the [name]'s body."
-	if (istype(organ, /obj/item/organ/internal/liver)
+	if (istype(new_organ, /obj/item/organ/internal/liver))
 		new_organ.name = "[name] liver"
 		new_organ.desc = "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body."
-	if (istype(organ, /obj/item/organ/internal/kidneys)
+	if (istype(new_organ, /obj/item/organ/internal/kidneys))
 		new_organ.name = "[name] kidneys"
 		new_organ.desc = "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body."
-	if (istype(organ, /obj/item/organ/internal/brain)
+	if (istype(new_organ, /obj/item/organ/internal/brain))
 		new_organ.name = "[name] brain"
 		new_organ.desc = "It's \the [name]'s brain. It controls \the [name]'s body."
-	if (istype(organ, /obj/item/organ/internal/appendix)
+	if (istype(new_organ, /obj/item/organ/internal/appendix))
 		new_organ.name = "[name] appendix"
 		new_organ.desc = "It's \the [name]'s appendix. It doesn't seem to do anything useful."
-	if (istype(organ, /obj/item/organ/internal/eyes)
+	if (istype(new_organ, /obj/item/organ/internal/eyes))
 		new_organ.name = "[name] eyes"
 		new_organ.desc = "It's \the [name]'s eyes. They allow \the [name] to see."
 
-	user << "<span class='notice'>You harvest a [new_organ.name] from \the [src].</span>"
-	M.visible_message("<span class='notice'>[user] harvests a [new_organ.name] from \the [src].</span>")
+	/*user << "<span class='notice'>You harvest a [new_organ.name] from \the [src].</span>"
+	src.visible_message("<span class='notice'>[user] harvests a [new_organ.name] from \the [src].</span>")*/
 	new_organ.loc = src.loc
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
