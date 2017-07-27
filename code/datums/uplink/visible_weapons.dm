@@ -53,14 +53,14 @@
 	name = "Anti-Materiel Rifle (14.5mm)"
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/gun/projectile/heavysniper
-	antag_roles = list("mercenary")
+	antag_roles = list("Mercenary")
 
 /datum/uplink_item/item/visible_weapons/heavysnipertraitor
 	name = "Anti-Materiel Rifle (14.5mm)"
 	desc = "A convenient collapsible rifle for covert assassination. Comes with 4 shots and its own secure carrying case."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/storage/secure/briefcase/rifle
-	antag_roles = list("traitor")
+	antag_roles = list("Traitor")
 
 /datum/uplink_item/item/visible_weapons/tommygun
 	name = "Tommygun (.45)" // We're keeping this because it's CLASSY. -Spades

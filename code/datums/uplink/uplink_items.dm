@@ -38,7 +38,8 @@ var/datum/uplink/uplink = new()
 
 /datum/uplink_item/New()
 	..()
-	antag_roles = list()
+	if(!antag_roles)
+		antag_roles = list()
 
 
 
