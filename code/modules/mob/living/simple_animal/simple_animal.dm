@@ -572,7 +572,7 @@
 			react_to_attack(user)
 
 //Spawns internal organs.
-/mob/living/simple_animal/proc/harvest_orgac()
+/mob/living/simple_animal/proc/harvest_organ()
 	// This way of doing this is crazy and inefficient, but it works for now. Feel free to make this less shitty.
 	// I wanted to make a multi-dimensional list, but couldn't figure out how to do that correctly. -Spades
 	var/organ_type = pick(/obj/item/organ/internal/heart,
@@ -584,25 +584,26 @@
 						/obj/item/organ/internal/eyes)
 	var/obj/item/new_organ = new organ_type // Doesn't HAVE to be an actual organ. Could be a crowbar for all I care.
 	if (istype(new_organ, /obj/item/organ/internal/heart))
-		new_organ.name = "[name] heart"
+		new_organ.name = "[name]'s heart"
 		new_organ.desc = "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body."
+		// You could also use this code to change the icons of an object!
 	if (istype(new_organ, /obj/item/organ/internal/lungs))
-		new_organ.name = "[name] lungs"
+		new_organ.name = "[name]'s lungs"
 		new_organ.desc = "It's \the [name]'s lungs. It provides oxygen to \the [name]'s body."
 	if (istype(new_organ, /obj/item/organ/internal/liver))
-		new_organ.name = "[name] liver"
+		new_organ.name = "[name]'s liver"
 		new_organ.desc = "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body."
 	if (istype(new_organ, /obj/item/organ/internal/kidneys))
-		new_organ.name = "[name] kidneys"
+		new_organ.name = "[name]'s kidneys"
 		new_organ.desc = "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body."
 	if (istype(new_organ, /obj/item/organ/internal/brain))
-		new_organ.name = "[name] brain"
+		new_organ.name = "[name]'s brain"
 		new_organ.desc = "It's \the [name]'s brain. It controls \the [name]'s body."
 	if (istype(new_organ, /obj/item/organ/internal/appendix))
-		new_organ.name = "[name] appendix"
+		new_organ.name = "[name]'s appendix"
 		new_organ.desc = "It's \the [name]'s appendix. It doesn't seem to do anything useful."
 	if (istype(new_organ, /obj/item/organ/internal/eyes))
-		new_organ.name = "[name] eyes"
+		new_organ.name = "[name]'s eyes"
 		new_organ.desc = "It's \the [name]'s eyes. They allow \the [name] to see."
 
 	/*user << "<span class='notice'>You harvest a [new_organ.name] from \the [src].</span>"
