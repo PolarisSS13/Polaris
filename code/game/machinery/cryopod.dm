@@ -622,7 +622,7 @@
 	if(!M)
 		return
 	if(occupant)
-		user << "<span class='warning'>\The [src] is already occupied.</span>"
+		to_chat(user,"<span class='warning'>\The [src] is already occupied.</span>")
 		return
 
 	var/willing = null //We don't want to allow people to be forced into despawning.
@@ -642,13 +642,14 @@
 
 		if(do_after(user, 20))
 			if(occupant)
-				user << "<span class='warning'>\The [src] is already occupied.</span>"
+				to_chat(user,"<span class='warning'>\The [src] is already occupied.</span>")
 				return
 			M.forceMove(src)
 
 			if(M.client)
 				M.client.perspective = EYE_PERSPECTIVE
 				M.client.eye = src
+		else return
 
 		icon_state = occupied_icon_state
 
