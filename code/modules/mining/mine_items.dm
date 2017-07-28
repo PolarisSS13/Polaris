@@ -134,12 +134,12 @@
 	drill_verb = "drilling"
 
 /obj/item/weapon/pickaxe/borgdrill
-	name = "enhanced sonic jackhammer"
-	icon_state = "jackhammer"
+	name = "cyborg mining drill"
+	icon_state = "diamonddrill"
 	item_state = "jackhammer"
 	digspeed = 15
-	desc = "Cracks rocks with sonic blasts. This one seems like an improved design."
-	drill_verb = "hammering"
+	desc = ""
+	drill_verb = "drilling"
 
 /*****************************Shovel********************************/
 
