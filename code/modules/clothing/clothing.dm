@@ -69,7 +69,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Human", "Skrell")	//humanoid bodytypes
-			species_restricted = list("Human", "Skrell") //skrell/humans can wear each other's suits
+			species_restricted = list("Human", "Skrell", "Promethean") //skrell/humans can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -91,7 +91,7 @@
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
-			species_restricted = list("Human", "Skrell") //skrell helmets fit humans too
+			species_restricted = list("Human", "Skrell", "Promethean") //skrell helmets fit humans too
 
 		else
 			species_restricted = list(target_species)
@@ -184,6 +184,7 @@
 	var/wired = 0
 	var/obj/item/weapon/cell/cell = 0
 	var/overgloves = 0
+	var/fingerprint_chance = 0	//How likely the glove is to let fingerprints through
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
