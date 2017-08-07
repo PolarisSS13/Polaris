@@ -43,6 +43,24 @@
 	var/poison_chance = 10
 	var/poison_type = "spidertoxin"
 
+	autopsy_tool = /obj/item/weapon/surgical/circular_saw
+
+/mob/living/simple_animal/hostile/giant_spider/spawn_organ()
+	var/list/heart = list(/obj/item/organ/internal/heart, "[name]'s heart", "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body.", "innards")
+	organs += heart
+	var/list/tracheae = list(/obj/item/organ/internal, "[name]'s tracheae", "It's a sample of \the [name]'s tracheae. It provides oxygen to \the [name]'s body through tiny openings across its body.", "cortical-stack")
+	organs += tracheae
+	var/list/liver = list(/obj/item/organ/internal/liver, "[name]'s liver", "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body.")
+	organs += liver
+	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body.")
+	organs += kidneys
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.", "roro core")
+	organs += brain
+	var/list/venom = list(/obj/item/organ/internal, "[name]'s venom sack", "It's \the [name]'s venom sacks. The venom is also poisonous when eaten, but for some reason it doesn't bother the spider's anatomy at all.")
+	organs += venom
+	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's a pair of the many eyes that \the [name] uses to see. They are highly advanced; possibly even more than a human's eyes.", "eyes_assisted")
+	organs += eyes
+
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "Furry and black, it makes you shudder to look at it. This one has brilliant green eyes."

@@ -44,6 +44,24 @@
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
 
+	autopsy_tool = /obj/item/weapon/surgical/circular_saw
+
+/mob/living/simple_animal/hostile/alien/spawn_organ()
+	var/list/heart = list(/obj/item/organ/internal, "[name]'s heart", "It's \the [name]'s heart. It pumps a highly acidic blood throughout \the [name]'s body.", "unathi_heart-off")
+	organs += heart
+	var/list/lungs = list(/obj/item/organ/internal, "[name]'s lungs", "It's \the [name]'s lungs. Through evolution, the lungs have become weak and shriveled, and don't appear to be of any importance for /the [name]'s body.", "lungs_prosthetic") // I have no idea what xenos breathe.
+	organs += lungs
+	var/list/liver = list(/obj/item/organ/internal, "[name]'s liver", "It's \the [name]'s liver. It appears to produce a thick, durable resin of some sort.", "unathi_liver") // ToDo: Add construction tech levels.
+	organs += liver
+	var/list/acid_sack = list(/obj/item/organ/internal, "[name]'s acid sack", "It's \the [name]'s acid sack. It's surrounded by muscles, likely meant to contract around the sack to spit the acids at things.", "vox_lung")
+	organs += acid_sack
+	var/list/kidneys = list(/obj/item/organ/internal, "[name]'s kidneys", "It's \the [name]'s kidneys. It adds toxins to \the [name]'s body for some reason. Maybe this is why the blood is acidic.","vox_heart")
+	organs += kidneys
+	var/list/brain = list(/obj/item/organ/internal/brain/xeno, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body. It looks kind of like an enormous wad of purple bubblegum.")
+	organs += brain
+	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's \the [name]'s eyes. They allow \the [name] to see from behind the black carapace on its head. The evolutionary benefit could be similar to why a body guard wears sunglasses to avoid prey knowing they're being watched, or it could also be for protection.", "eyes_assisted")
+	organs += eyes
+
 /mob/living/simple_animal/hostile/alien/drone
 	name = "alien drone"
 	icon_state = "aliend_running"
@@ -129,6 +147,10 @@
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")
 
+	autopsy_tool = /obj/item/weapon/surgical/circular_saw
+
+	// ToDo: Add organs.
+
 /mob/living/simple_animal/hostile/diyaab
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
@@ -193,6 +215,8 @@
 
 	faction = "yithian"
 
+	// ToDo: Add organs.
+
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
 	desc = "It looks like a large, flightless grasshopper."
@@ -202,3 +226,5 @@
 	icon = 'icons/jungle.dmi'
 
 	faction = "tindalos"
+
+	// ToDo: Add organs.

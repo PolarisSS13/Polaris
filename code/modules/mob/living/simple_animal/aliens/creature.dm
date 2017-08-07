@@ -34,6 +34,7 @@
 	minbodytemp = 0
 
 	supernatural = 1
+	can_harvest_organ = 0 // Because what the actual fuck is in these things, anyway? -Spades
 
 /mob/living/simple_animal/hostile/creature/cult/cultify()
 	return

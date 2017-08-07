@@ -36,6 +36,22 @@
 			say(pick("Blub", "Glub", "Burble"))
 		adjustBruteLoss(unsuitable_atoms_damage)
 
+/mob/living/simple_animal/fish/spawn_organ()
+	var/list/heart = list(/obj/item/organ/internal/heart, "[name]'s heart", "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body.")
+	organs += heart
+	var/list/gills = list(/obj/item/organ/internal, "[name]'s gills", "It's \the [name]'s gills. It provides oxygen to \the [name]'s body.", "innards")
+	organs += gills
+	var/list/liver = list(/obj/item/organ/internal/liver, "[name]'s liver", "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body.")
+	organs += liver
+	var/list/swim_bladder = list(/obj/item/organ/internal, "[name]'s swim bladder", "It's \the [name]'s swim bladder. It allows \the [name] to change its buoyancy.", "innards")
+	organs += swim_bladder
+	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body.")
+	organs += kidneys
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.")
+	organs += brain
+	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's \the [name]'s eyes. They allow \the [name] to see.")
+	organs += eyes
+
 /mob/living/simple_animal/fish/bass
 	name = "bass"
 	icon_state = "bass-swim"

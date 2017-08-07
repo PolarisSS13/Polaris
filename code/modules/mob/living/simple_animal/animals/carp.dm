@@ -35,6 +35,22 @@
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
 
+/mob/living/simple_animal/hostile/carp/spawn_organ()
+	var/list/heart = list(/obj/item/organ/internal/heart, "[name]'s heart", "It's \the [name]'s heart. It pumps a phoron-rich blood throughout \the [name]'s body.")
+	organs += heart
+	var/list/gills = list(/obj/item/organ/internal, "[name]'s gills", "It's \the [name]'s gills. It provides phoron to \the [name]'s body.", "innards")
+	organs += gills
+	var/list/liver = list(/obj/item/organ/internal/liver, "[name]'s liver", "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body. Strangely, not phoron.")
+	organs += liver
+	var/list/swim_bladder = list(/obj/item/organ/internal, "[name]'s swim bladder", "It's \the [name]'s... swim bladder? It looks like a swim bladder, but it's highly active with bluespace radiation.", "vox_heart")
+	organs += swim_bladder
+	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body. Strangely, not phoron.")
+	organs += kidneys
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body. It is very small and smooth, which might explain the creature's aggressive nature.", "roro core")
+	organs += brain
+	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's \the [name]'s eyes. They allow \the [name] to see, but they're not very complex, and can only see a few colors.")
+	organs += eyes
+
 /mob/living/simple_animal/hostile/carp/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
 
