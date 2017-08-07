@@ -47,7 +47,7 @@
 	organs += swim_bladder
 	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body.")
 	organs += kidneys
-	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.")
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.", "roro core")
 	organs += brain
 	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's \the [name]'s eyes. They allow \the [name] to see.")
 	organs += eyes

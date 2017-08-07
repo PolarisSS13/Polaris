@@ -590,7 +590,7 @@ Only an item path is required, but if you change anything else, don't leave anyt
 	organs += liver
 	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body.")
 	organs += kidneys
-	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.", "roro core")
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.")
 	organs += brain
 	var/list/appendix = list(/obj/item/organ/internal/appendix, "[name]'s appendix", "It's \the [name]'s appendix. It doesn't seem to do anything useful.")
 	organs += appendix
@@ -600,7 +600,7 @@ Only an item path is required, but if you change anything else, don't leave anyt
 /mob/living/simple_animal/proc/harvest_organ()
 	var/list/random_organ = pick(organs)
 	var/organ_type
-	var/obj/item/new_organ = new organ_type // Doesn't have to be an actual organ. Could be a crowbar for all I care.
+	var/obj/item/new_organ
 	for(var/x = 1, x <= random_organ.len, x++)
 		switch(x)
 			if(1)
