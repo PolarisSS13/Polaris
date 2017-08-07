@@ -32,7 +32,11 @@
 	var/datum/wires/airlock/wires = null
 
 	var/open_sound_powered = 'sound/machines/airlock.ogg'
-	var/open_sound_unpowered = 'sound/machines/airlock_creaking.ogg'
+	var/open_sound_unpowered = 'sound/machines/airlockforced.ogg'
+	var/close_sound_powered = 'sound/machines/airlockclose.ogg'
+	var/denied_sound = 'sound/machines/deniedbeep.ogg'
+	var/bolt_up_sound = 'sound/machines/boltsup.ogg'
+	var/bolt_down_sound = 'sound/machines/boltsdown.ogg'
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -581,8 +585,7 @@ About the new airlock wires panel:
 		if("deny")
 			if(density && src.arePowerSystemsOn())
 				flick("door_deny", src)
-				if(secured_wires)
-					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+				playsound(src, denied_sound, 50, 0, 3)
 	return
 
 /obj/machinery/door/airlock/attack_ai(mob/user as mob)
@@ -761,7 +764,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/can_remove_electronics()
 	return src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && (!src.locked || (stat & BROKEN))))
 
-/obj/machinery/door/airlock/attackby(C as obj, mob/user as mob)
+/obj/machinery/door/airlock/attackby(obj/item/C, mob/user as mob)
 	//world << text("airlock attackby src [] obj [] mob []", src, C, user)
 	if(!istype(usr, /mob/living/silicon))
 		if(src.isElectrified())
@@ -781,7 +784,7 @@ About the new airlock wires panel:
 				src.welded = 1
 			else
 				src.welded = null
-			playsound(src, 'sound/items/Welder.ogg', 75, 1)
+			playsound(src.loc, C.usesound, 75, 1)
 			src.update_icon()
 			return
 		else
@@ -792,8 +795,10 @@ About the new airlock wires panel:
 				to_chat(usr,"<span class='warning'>The panel is broken and cannot be closed.</span>")
 			else
 				src.p_open = 0
+				playsound(src, C.usesound, 50, 1)
 		else
 			src.p_open = 1
+			playsound(src, C.usesound, 50, 1)
 		src.update_icon()
 	else if(istype(C, /obj/item/weapon/wirecutters))
 		return src.attack_hand(user)
@@ -806,9 +811,9 @@ About the new airlock wires panel:
 		cable.plugin(src, user)
 	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
 		if(can_remove_electronics())
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 75, 1)
+			playsound(src, C.usesound, 75, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
-			if(do_after(user,40))
+			if(do_after(user,40 * C.toolspeed))
 				to_chat(user,"<span class='notice'>You removed the airlock electronics!</span>")
 
 				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
@@ -899,7 +904,7 @@ About the new airlock wires panel:
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
 	if(arePowerSystemsOn())
-		playsound(src.loc, open_sound_powered, 75, 1)
+		playsound(src.loc, open_sound_powered, 50, 1)
 	else
 		playsound(src.loc, open_sound_unpowered, 75, 1)
 
@@ -996,7 +1001,7 @@ About the new airlock wires panel:
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	has_beeped = 0
 	if(arePowerSystemsOn())
-		playsound(src.loc, open_sound_powered, 75, 1)
+		playsound(src.loc, close_sound_powered, 50, 1)
 	else
 		playsound(src.loc, open_sound_unpowered, 75, 1)
 	for(var/turf/turf in locs)
@@ -1013,6 +1018,7 @@ About the new airlock wires panel:
 	if (operating && !forced) return 0
 
 	src.locked = 1
+	playsound(src, bolt_down_sound, 30, 0, 3)
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
@@ -1026,6 +1032,7 @@ About the new airlock wires panel:
 		if(operating || !src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS)) return
 
 	src.locked = 0
+	playsound(src, bolt_up_sound, 30, 0, 3)
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
