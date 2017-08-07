@@ -3,6 +3,7 @@
 #if !defined(USING_MAP_DATUM)
 
 	#include "southern_cross_areas.dm"
+	#include "southern_cross_defines.dm"
 	#include "southern_cross_elevator.dm"
 	#include "southern_cross_presets.dm"
 	#include "southern_cross_shuttles.dm"
@@ -21,8 +22,6 @@
 	#include "southern_cross-5.dmm"
 	#include "southern_cross-6.dmm"
 	#include "southern_cross-7.dmm"
-	#include "southern_cross-8.dmm"
-	#include "southern_cross-9.dmm"
 
 	#define USING_MAP_DATUM /datum/map/southern_cross
 

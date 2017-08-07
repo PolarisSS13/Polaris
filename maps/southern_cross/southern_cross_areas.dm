@@ -98,6 +98,10 @@
 	name = "North Mining Restroom"
 	sound_env = SMALL_ENCLOSED
 
+/area/surface/outpost/mining_main/cave
+	name = "North Mining Outpost Cave"
+	icon_state = "outpost_mine_main"
+
 //Research Surface Outpost
 
 /area/surface/outpost/research
@@ -935,7 +939,7 @@ area/crew_quarters/heads/sc/hop/quarters
 //Shuttle One
 
 /area/shuttle/shuttle1
-	name = "\improper SEV Torch Hangar Deck"
+	name = "\improper Hangar Deck"
 	icon_state = "yellow"
 	requires_power = 0
 	dynamic_lighting = 0
@@ -1048,7 +1052,7 @@ area/crew_quarters/heads/sc/hop/quarters
 	icon_state = "northwest"
 
 /area/syndicate_station/seconddeck
-	name = "north-east of third deck"
+	name = "north-east of second deck"
 	icon_state = "northeast"
 
 /area/syndicate_station/thirddeck
