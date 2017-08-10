@@ -206,7 +206,7 @@
 	ambiguous_genders = TRUE
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR | NO_SLIP | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
