@@ -10,36 +10,60 @@
 	desc = "A formal hat for SolGov Customs Officers."
 	icon_state = "customshat"
 
-/obj/item/clothing/head/hairflower
+/obj/item/clothing/head/pin
 	name = "hair flower pin"
 	icon_state = "hairflower"
 	desc = "Smells nice."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
 
-/obj/item/clothing/head/hairflower/blue
+/obj/item/clothing/head/pin/blue
 	icon_state = "hairflower_blue"
 
-/obj/item/clothing/head/hairflower/pink
+/obj/item/clothing/head/pin/pink
 	icon_state = "hairflower_pink"
 
-/obj/item/clothing/head/hairflower/yellow
+/obj/item/clothing/head/pin/yellow
 	icon_state = "hairflower_yellow"
 
-/obj/item/clothing/head/hairflower/violet
+/obj/item/clothing/head/pin/violet
 	icon_state = "hairflower_violet"
 
-/obj/item/clothing/head/hairflower/orange
+/obj/item/clothing/head/pin/orange
 	icon_state = "hairflower_orange"
 
-/obj/item/clothing/head/hairflower/white
+/obj/item/clothing/head/pin/white
 	icon_state = "hairflower_white"
 
-/obj/item/clothing/head/hairflower/bow
+/obj/item/clothing/head/pin/clover
+	name = "clover pin"
+	icon_state = "pinclover"
+	desc = "A green pin to help hold your hair."
+
+/obj/item/clothing/head/pin/butterfly
+	name = "butterfly pin"
+	icon_state = "pinbutterfly"
+	desc = "A pin with a design borrowed from nature's own butterfly."
+
+/obj/item/clothing/head/pin/pinkplastic
+	name = "pink pin"
+	icon_state = "pinpink"
+	desc = "A pink hairpin."
+
+/obj/item/clothing/head/bow
 	icon_state = "bow"
 	name = "hair bow"
 	desc = "A ribbon tied into a bow with a clip on the back to attach to hair."
-	item_state_slots = list(slot_r_hand_str = "pill", slot_l_hand_str = "pill")
+	slot_flags = SLOT_HEAD | SLOT_EARS
+	body_parts_covered = 0
+
+/obj/item/clothing/head/bow/redribbon
+	icon_state = "redribbon"
+	name = "red ribbon"
+
+/obj/item/clothing/head/bow/whiteribbon
+	icon_state = "whiteribbon"
+	name = "white ribbon"
 
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
