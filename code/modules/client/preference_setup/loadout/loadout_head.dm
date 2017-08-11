@@ -154,37 +154,29 @@
 	display_name = "fedora, grey"
 	path = /obj/item/clothing/head/fedora/grey
 
-/datum/gear/head/hairflower
-	display_name = "hair flower pin, red"
-	path = /obj/item/clothing/head/hairflower
+/datum/gear/head/pin
+	display_name = "pin selection"
+	path = /obj/item/clothing/head/pin
 
-/datum/gear/head/hairflower/yellow
-	display_name = "hair flower pin, yellow"
-	path = /obj/item/clothing/head/hairflower/yellow
-
-/datum/gear/head/hairflower/pink
-	display_name = "hair flower pin, pink"
-	path = /obj/item/clothing/head/hairflower/pink
-
-/datum/gear/head/hairflower/blue
-	display_name = "hair flower pin, blue"
-	path = /obj/item/clothing/head/hairflower/blue
-
-/datum/gear/head/hairflower/violet
-	display_name = "hair flower pin, violet"
-	path = /obj/item/clothing/head/hairflower/violet
-
-/datum/gear/head/hairflower/orange
-	display_name = "hair flower pin, orange"
-	path = /obj/item/clothing/head/hairflower/orange
-
-/datum/gear/head/hairflower/white
-	display_name = "hair flower pin"
-	path = /obj/item/clothing/head/hairflower/white
-
-/datum/gear/head/hairflower/white/New()
+/datum/gear/head/pin/New()
 	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
+	var/list/pins = list()
+	for(var/pin in typesof(/obj/item/clothing/head/pin))
+		var/obj/item/clothing/head/pin/pin_type = pin
+		pins[initial(pin_type.name)] = pin_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pins))
+
+/datum/gear/head/bow
+	display_name = "bow selection"
+	path = /obj/item/clothing/head/bow
+
+/datum/gear/head/bow/New()
+	..()
+	var/list/bows = list()
+	for(var/bow in typesof(/obj/item/clothing/head/bow))
+		var/obj/item/clothing/head/bow/bow_type = bow
+		bows[initial(bow_type.name)] = bow_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bows))
 
 /datum/gear/head/hardhat
 	display_name = "hardhat, yellow"
@@ -305,8 +297,8 @@
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
 /datum/gear/head/bow
-	display_name = "hair bow"
-	path = /obj/item/clothing/head/hairflower/bow
+	display_name = "bow, colorable"
+	path = /obj/item/clothing/head/bow
 
 /datum/gear/head/bow/New()
 	..()
