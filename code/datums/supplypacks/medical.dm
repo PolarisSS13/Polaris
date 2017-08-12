@@ -189,7 +189,7 @@
 			/obj/item/weapon/storage/belt/medical/emt,
 			/obj/item/device/radio/headset/headset_med,
 			/obj/item/clothing/under/rank/medical/black,
-			/obj/item/clothing/accessory/armband/medgreen,
+			/obj/item/clothing/accessory/armband/med,
 			/obj/item/clothing/glasses/hud/health,
 			/obj/item/clothing/suit/storage/toggle/labcoat/emt,
 			/obj/item/clothing/under/rank/medical/paramedic,

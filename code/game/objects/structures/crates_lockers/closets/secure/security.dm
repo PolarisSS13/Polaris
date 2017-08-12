@@ -256,7 +256,7 @@
 
 	New()
 		..()
-		new /obj/item/clothing/accessory/armband/medgreen(src)
+		new /obj/item/clothing/accessory/armband/med(src)
 		new /obj/item/device/encryptionkey/headset_med(src)
 		return
 
