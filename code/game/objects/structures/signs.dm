@@ -224,16 +224,15 @@
 /obj/structure/sign/warning/vent_port
 	name = "\improper EJECTION/VENTING PORT"
 
-
-/obj/structure/sign/redcross
-	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
-	icon_state = "redcross"
-
 /obj/structure/sign/greencross
 	name = "medbay"
 	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
 	icon_state = "greencross"
+
+/obj/structure/sign/redcross
+	name = "medbay"
+	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
+	icon_state = "greencross" //We're gonna not violate the geneva conventions, but also I don't know how to use the map merger.
 
 /obj/structure/sign/goldenplaque
 	name = "The Most Robust Men Award for Robustness"

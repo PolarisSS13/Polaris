@@ -8,10 +8,6 @@
 	display_name = "armband, cargo"
 	path = /obj/item/clothing/accessory/armband/cargo
 
-/datum/gear/accessory/emt
-	display_name = "armband, EMT"
-	path = /obj/item/clothing/accessory/armband/medgreen
-
 /datum/gear/accessory/engineering
 	display_name = "armband, engineering"
 	path = /obj/item/clothing/accessory/armband/engine
@@ -23,10 +19,6 @@
 /datum/gear/accessory/medical
 	display_name = "armband, medical"
 	path = /obj/item/clothing/accessory/armband/med
-
-/datum/gear/accessory/medical/cross
-	display_name = "armband, medic"
-	path = /obj/item/clothing/accessory/armband/med/cross
 
 /datum/gear/accessory/science
 	display_name = "armband, science"
