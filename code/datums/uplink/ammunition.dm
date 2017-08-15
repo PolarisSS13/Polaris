@@ -68,6 +68,11 @@
 	name = "Rifle Magazine (7.62mm)"
 	path = /obj/item/ammo_magazine/m762
 
+/datum/uplink_item/item/ammo/m762akm48
+	name = "Curved ammo magazine (7.62)"
+	path = /obj/item/ammo_magazine/m762akm48
+	item_cost = 30
+
 /datum/uplink_item/item/ammo/c762/ap
 	name = "Rifle Magazine (7.62mm AP)"
 	path = /obj/item/ammo_magazine/m762/ap

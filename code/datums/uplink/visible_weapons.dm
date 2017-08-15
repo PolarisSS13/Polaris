@@ -128,6 +128,11 @@
 	item_cost = 75
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
+/datum/uplink_item/item/visible_weapons/akm
+	name = "AKM-48 (7.62)"
+	item_cost = 65 //slightly cheaper than the above.
+	path = /obj/item/weapon/gun/projectile/automatic/akm
+
 /datum/uplink_item/item/visible_weapons/combatshotgun
 	name = "Combat Shotgun"
 	item_cost = 75
