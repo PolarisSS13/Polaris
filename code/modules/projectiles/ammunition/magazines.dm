@@ -381,6 +381,16 @@
 /obj/item/ammo_magazine/m545saw/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/m545m116 //spades why did you change 5.56 to 5.45 you make no sense
+	name = "curved magazine (5.45mm)"
+	icon_state = "556curvedmag"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	caliber = "5.45mm"
+	matter = list(DEFAULT_WALL_MATERIAL = 1800)
+	ammo_type = /obj/item/ammo_casing/a545
+	max_ammo = 20
+	multiple_sprites = 1
 ///////// .44 Magnum /////////
 
 /obj/item/ammo_magazine/m44
@@ -460,6 +470,15 @@
 	name = "rifle clip (7.62mm practice)"
 	ammo_type = /obj/item/ammo_casing/a762p
 
+/obj/item/ammo_magazine/m762akm48
+	name = "curved magazine (7.62)"
+	icon_state = "762mag"
+	mag_type = MAGAZINE
+	caliber = "7.62mm"
+	matter = list(DEFAULT_WALL_MATERIAL = 6000)
+	ammo_type = /obj/item/ammo_casing/a762
+	max_ammo = 30
+	multiple_sprites = 1
 ///////// 12g /////////
 
 /obj/item/ammo_magazine/m12gdrum
