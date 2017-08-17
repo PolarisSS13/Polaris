@@ -894,3 +894,55 @@
 	w_class = ITEMSIZE_TINY
 	force = 1
 	throwforce = 1
+
+//Dakimakuras. I'm sorry to all of you.
+
+
+/obj/item/toy/daki
+	name = "plain body pillow"
+	desc = "Probably the closest to non-degeneracy you'll get with these."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_base"
+	w_class = ITEMSIZE_LARGE
+
+/obj/item/toy/daki/attack_self(mob/user as mob)
+	if(user.a_intent == I_HELP)
+		user.visible_message("<span class='notice'><b>\The [user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+	else if (user.a_intent == I_HURT)
+		user.visible_message("<span class='warning'><b>\The [user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+	else if (user.a_intent == I_GRAB)
+		user.visible_message("<span class='warning'><b>\The [user]</b> gropes [src]!</span>","<span class='warning'>You grope [src]!</span>")
+	else
+		user.visible_message("<span class='notice'><b>\The [user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+
+
+/obj/item/toy/daki/skrell
+	name = "Skrell body pillow"
+	desc = "The Skrellian girl of Interstellar Diplomacy, Kuq'xem Xurqex. This doesn't really resemble an actual Skrell."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_skrell"
+
+/obj/item/toy/daki/tajara
+	name = "Tajaran body pillow"
+	desc = "The Tajaran girl of Interstellar Diplomacy, Semrikeii Rhakajr. Please stop."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_arja"
+
+/obj/item/toy/daki/unathi
+	name = "Unathi body pillow"
+	desc = "The generic buff Unathi guy, from Interstellar Diplomacy. Nobody remembers his name, because he doesn't have breasts."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_unathi"
+
+/obj/item/toy/daki/diona
+	name = "Diona body pillow"
+	desc = "Why does it have boobs?"
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_diona"
+
+/obj/item/toy/daki/drone
+	name = "Drone body pillow"
+	desc = "The most popular 'waifu' of Interstellar Diplomacy, YaYo-E. If you own this, chances are your life is going nowhere fast."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "daki_yayoe"
