@@ -52,4 +52,20 @@
  	cost = 50
  	contraband = 1
  	containertype = /obj/structure/closet/crate/secure/weapon
- 	containername = "Weapons crate"
+ 	containername = "Weapons crate"\
+
+/datum/supply_packs/randomised/anime
+ 	name = "Interstellar Diplomacy merchandise"
+ 	num_contained = 1
+ 	contains = list(
+ 			/obj/item/toy/daki/skrell,
+ 			/obj/item/toy/daki/diona,
+ 			/obj/item/toy/daki/unathi,
+ 			/obj/item/toy/daki/tajara,
+ 			/obj/item/toy/daki/drone
+ 			)
+ 	cost = 25
+ 	contraband = 1
+ 	containertype = /obj/structure/closet/crate
+ 	containername = "Unlabeled crate"
+ 	group = "Recreation"
