@@ -100,3 +100,8 @@
 /datum/gear/utility/wheelchair/color/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/utility/beltpouch
+	display_name = "belt pouch"
+	path = /obj/item/weapon/storage/belt/pouch
+	cost = 2

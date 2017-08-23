@@ -282,6 +282,7 @@
 
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
+	path = /obj/item/weapon/storage/belt/fannypack
 	cost = 2
 
 /datum/gear/accessory/fannypack/New()

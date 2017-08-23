@@ -373,3 +373,11 @@
  	icon_state = "fannypack_yellow"
  	item_state = "fannypack_yellow"
 
+/obj/item/weapon/storage/belt/pouch
+	name = "belt pouch"
+	desc = "A tacticool alternative to the fannypack."
+	icon_state = "beltpouch"
+	item_state = "beltpouch"
+	max_w_class = ITEMSIZE_SMALL
+	storage_slots = null
+	max_storage_space = ITEMSIZE_COST_SMALL * 2
