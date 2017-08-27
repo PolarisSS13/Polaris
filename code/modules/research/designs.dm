@@ -511,6 +511,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/gun/energy/gun/nuclear
 	sort_string = "TAAAB"
 
+
+/datum/design/item/weapon/advancedtaser
+	id = "advancedtaser"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 1000, "uranium" = 250)
+	build_path = /obj/item/weapon/gun/energy/taser/advanced
+	sort_string = "TAAABA"
+
 /datum/design/item/weapon/lasercannon
 	desc = "The lasing medium of this prototype is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core."
 	id = "lasercannon"
