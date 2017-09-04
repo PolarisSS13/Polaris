@@ -69,8 +69,8 @@
 
 /obj/item/weapon/gun/energy/taser/advanced
 	name = "advanced taser gun"
-	desc = "A true step forward for stunning technology, this taser can refill its batteries, slowly."
-	icon_state = "scitase"
-	item_state = null
+	desc = "A true step forward for non-lethal technology, this taser can slowly refill its batteries."
+	icon_state = "taser"
+	item_state = "taser"
 	self_recharge = 1
-	charge_delay = 50
+	charge_delay = 100
