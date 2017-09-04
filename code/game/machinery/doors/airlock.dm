@@ -86,6 +86,11 @@
 	icon = 'icons/obj/doors/Doorengatmos.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_eat
 
+/obj/machinery/door/airlock/engineeringtech
+	name = "Airlock"
+	icon = 'icons/obj/doors/techstorage.dmi'
+	assembly_type = /obj/structure/door_assembly/door_assembly_eng
+
 /obj/machinery/door/airlock/medical
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doormed.dmi'
