@@ -66,3 +66,11 @@
 	fire_delay = 20
 	charge_cost = 600
 	projectile_type = /obj/item/projectile/energy/plasmastun
+
+/obj/item/weapon/gun/energy/taser/advanced
+	name = "advanced taser gun"
+	desc = "A true step forward for non-lethal technology, this taser can slowly refill its batteries."
+	icon_state = "taser"
+	item_state = "taser"
+	self_recharge = 1
+	charge_delay = 100
