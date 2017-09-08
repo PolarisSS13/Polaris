@@ -49,10 +49,12 @@
 			if(2)
 				src << "<span class='notice'>We extend a proboscis.</span>"
 				src.visible_message("<span class='warning'>[src] extends a proboscis!</span>")
+				playsound(get_turf(src), 'sound/effects/lingextends.ogg', 50, 1)
 			if(3)
 				src << "<span class='notice'>We stab [T] with the proboscis.</span>"
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
+				playsound(get_turf(src), 'sound/effects/lingstabs.ogg', 50, 1)
 				T.attack_log += text("\[[time_stamp()]\] <font color='red'>Was absorbed by [key_name(src)]</font>")
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'> Absorbed [key_name(T)]</font>")
 				msg_admin_attack("[key_name(T)] was absorbed by [key_name(src)]")
@@ -69,6 +71,7 @@
 	src << "<span class='notice'>We have absorbed [T]!</span>"
 	src.visible_message("<span class='danger'>[src] sucks the fluids from [T]!</span>")
 	T << "<span class='danger'>You have been absorbed by the changeling!</span>"
+	playsound(get_turf(src), 'sound/effects/lingabsorbs.ogg', 50, 1)
 	if(src.nutrition < 400)
 		src.nutrition = min((src.nutrition + T.nutrition), 400)
 	changeling.chem_charges += 10
