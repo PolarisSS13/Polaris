@@ -86,7 +86,7 @@
 			if(prob(10))
 				M.apply_damage(10, BRUTE, "head")
 				M.apply_damage(30, HALLOSS)
-				M.visible_message("<span class='danger'> [user]'s hair catches in the [src]!</span>", "\red Your hair gets caught in the [src]!</span>")
+				M.visible_message("<span class='danger'> [user]'s hair catches in the [src]!</span>", "<span class='danger'> Your hair gets caught in the [src]!</span>")
 				M.say("*scream")
 		if(M.h_style == "Skrell Long Tentacles")
 			if(prob(15))
