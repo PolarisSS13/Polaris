@@ -102,6 +102,21 @@
 	move_into_gibber(user,G.affecting)
 	// Grab() process should clean up the grab item, no need to del it.
 
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = user
+		if(M.h_style == "Floorlength Braid" || M.h_style == "Very Long Hair")
+			if(prob(10))
+				M.apply_damage(10, BRUTE, "head")
+				M.apply_damage(30, HALLOSS)
+				M.visible_message("<span class='danger'> [user]'s hair catches in the [src]!</span>", "\red Your hair gets caught in the [src]!</span>")
+				M.say("*scream")
+		if(M.h_style == "Skrell Long Tentacles")
+			if(prob(15))
+				M.apply_damage(20, BRUTE, "head")
+				M.apply_damage(40, HALLOSS)
+				M.visible_message("<span class='danger'> [user]'s get caught in the [src]!</span>", "<span class='danger'> Your headtails get caught in the [src]!</span>")
+				M.say("*scream")
+
 /obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
 	if(user.stat || user.restrained())
 		return
