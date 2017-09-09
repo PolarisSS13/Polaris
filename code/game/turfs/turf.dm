@@ -1,4 +1,4 @@
-/turf
+	/turf
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 	var/holy = 0
