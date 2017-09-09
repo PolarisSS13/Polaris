@@ -16,7 +16,7 @@
 		)
 
 obj/item/weapon/gun/energy/gun/small
-	name = "energy pistol"
+	name = "energy holdout"
 	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package, but without the efficiency of the larger one. Best used in situations where full-sized sidearms are inappropriate."
 	icon_state = "smallgunstun"
 	w_class = ITEMSIZE_SMALL
