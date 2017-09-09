@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	desc = "Another bestseller of Lawson Arms and the FTU, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
+	desc = "Another bestseller of Lawson Arms, a subsidiary of Hephaestus Industries, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
@@ -13,6 +13,19 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/med, modifystate="energystun", fire_sound='sound/weapons/Taser.ogg', charge_cost = 240),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill", fire_sound='sound/weapons/Laser.ogg', charge_cost = 480),
+		)
+
+obj/item/weapon/gun/energy/gun/small
+	name = "energy pistol"
+	desc = "A smaller model of the versatile LAEP90 Perun, packing considerable utility in a smaller package, but without the efficiency of the larger one. Best used in situations where full-sized sidearms are inappropriate."
+	icon_state = "smallgunstun"
+	w_class = ITEMSIZE_SMALL
+	force = 2 //it's the size of a car key, what did you expect?
+	modifystate = "smallgunstun"
+
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, modifystate="smallgunstun", charge_cost = 360),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam/smalllaser, modifystate="smallgunkill", fire_sound='sound/weapons/Laser2.ogg', charge_cost = 720),
 		)
 
 /obj/item/weapon/gun/energy/gun/mounted
