@@ -70,7 +70,6 @@ datum/controller/game_controller/proc/setup_objects()
 		var/turf/T = item
 		if(T.decals) T.apply_decals()
 		CHECK_SLEEP_MASTER
-	floor_decals_initialized = TRUE
 	sleep(1)
 
 	admin_notice("<span class='danger'>Initializing objects</span>", R_DEBUG)
