@@ -43,7 +43,7 @@
 		new /obj/item/device/radio/headset/heads/hop/alt(src)
 		new /obj/item/weapon/storage/box/ids(src)
 		new /obj/item/weapon/storage/box/ids( src )
-		new /obj/item/weapon/gun/energy/gun(src)
+		new /obj/item/weapon/gun/energy/gun/small(src)
 		new /obj/item/weapon/gun/projectile/sec/flash(src)
 		new /obj/item/device/flash(src)
 		return

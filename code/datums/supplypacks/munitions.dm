@@ -14,6 +14,7 @@
 	contains = list(
 			/obj/item/weapon/melee/baton/loaded = 2,
 			/obj/item/weapon/gun/energy/gun = 2,
+			/obj/item/weapon/gun/energy/gun/small = 1,
 			/obj/item/weapon/gun/energy/taser = 2,
 			/obj/item/weapon/gun/projectile/colt/detective = 2,
 			/obj/item/weapon/storage/box/flashbangs = 2
@@ -118,7 +119,9 @@
 
 /datum/supply_packs/munitions/energy_guns
 	name = "Energy gun crate"
-	contains = list(/obj/item/weapon/gun/energy/gun = 2)
+	contains = list(
+			/obj/item/weapon/gun/energy/gun = 2,
+			/obj/item/weapon/gun/energy/gun/small = 1)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Energy gun crate"

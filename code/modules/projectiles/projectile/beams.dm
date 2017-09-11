@@ -20,7 +20,6 @@
 
 /obj/item/projectile/beam/practice
 	name = "laser"
-	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 0
 	damage_type = BURN
@@ -31,6 +30,11 @@
 	name = "weak laser"
 	icon_state = "laser"
 	damage = 15
+
+/obj/item/projectile/beam/smalllaser
+	damage = 25
+	icon_state = "lasersmall"
+	light_power = 0.25
 
 /obj/item/projectile/beam/burstlaser
 	damage = 30
