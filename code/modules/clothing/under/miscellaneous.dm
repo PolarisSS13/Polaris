@@ -529,27 +529,6 @@
 	item_state_slots = list(slot_r_hand_str = "cargo", slot_l_hand_str = "cargo")
 	rolled_sleeves = 0
 
-/obj/item/clothing/under/cheongsam
-	name = "white cheongsam"
-	desc = "It is a white cheongsam dress."
-	icon_state = "mai_yang"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
-
-/obj/item/clothing/under/cheongsam/red
-	name = "red cheongsam"
-	desc = "It is a red cheongsam dress."
-	icon_state = "cheongsam-red"
-
-/obj/item/clothing/under/cheongsam/blue
-	name = "blue cheongsam"
-	desc = "It is a blue cheongsam dress."
-	icon_state = "cheongsam-blue"
-
-/obj/item/clothing/under/cheongsam/black
-	name = "black cheongsam"
-	desc = "It is a black cheongsam dress."
-	icon_state = "cheongsam-black"
-
 /obj/item/clothing/under/blazer
 	name = "blue blazer"
 	desc = "A bold but yet conservative outfit, red corduroys, navy blazer and a tie."
@@ -776,3 +755,44 @@
 	icon_state = "medicalgown"
 	worn_state = "medicalgown"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/cheongsam
+	name = "white cheongsam"
+	desc = "It is a white cheongsam dress."
+	icon_state = "cheongsam-white"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/under/cheongsam/red
+	name = "red cheongsam"
+	desc = "It is a red cheongsam dress."
+	icon_state = "cheongsam-red"
+
+/obj/item/clothing/under/cheongsam/blue
+	name = "blue cheongsam"
+	desc = "It is a blue cheongsam dress."
+	icon_state = "cheongsam-blue"
+
+/obj/item/clothing/under/cheongsam/black
+	name = "black cheongsam"
+	desc = "It is a black cheongsam dress."
+	icon_state = "cheongsam-black"
+
+/obj/item/clothing/under/cheongsam/darkblue
+	name = "dark blue cheongsam"
+	desc = "It is a dark blue cheongsam dress."
+	icon_state = "cheongsam-bluedark"
+
+/obj/item/clothing/under/cheongsam/green
+	name = "green cheongsam"
+	desc = "It is a green cheongsam dress."
+	icon_state = "cheongsam-green"
+
+/obj/item/clothing/under/cheongsam/purple
+	name = "purple cheongsam"
+	desc = "It is a purple cheongsam dress."
+	icon_state = "cheongsam-purple"
+
+/obj/item/clothing/under/cheongsam/darkred
+	name = "dark red cheongsam"
+	desc = "It is a dark red cheongsam dress."
+	icon_state = "cheongsam-reddark"
