@@ -550,18 +550,23 @@
 	desc = "It is a black cheongsam dress."
 	icon_state = "cheongsam-black"
 
-/obj/item/clothing/under/cheongsam/black
-	name = "black cheongsam"
-	desc = "It is a black cheongsam dress."
-	icon_state = "cheongsam-black"
+/obj/item/clothing/under/cheongsam/darkred
+	name = "dark red cheongsam"
+	desc = "It is a dark red cheongsam dress."
+	icon_state = "cheongsam-darkred"
 
-/obj/item/clothing/under/cheongsam/black
-	name = "black cheongsam"
-	desc = "It is a black cheongsam dress."
-	icon_state = "cheongsam-black"
+/obj/item/clothing/under/cheongsam/green
+	name = "green cheongsam"
+	desc = "It is a green cheongsam dress."
+	icon_state = "cheongsam-green"
+
+/obj/item/clothing/under/cheongsam/purple
+	name = "purple cheongsam"
+	desc = "It is a purple cheongsam dress."
+	icon_state = "cheongsam-purple"
 
 /obj/item/clothing/under/cheongsam/darkblue
-	name = "black cheongsam"
+	name = "dark blue cheongsam"
 	desc = "It is a dark blue cheongsam dress."
 	icon_state = "cheongsam-darkblue"
 
