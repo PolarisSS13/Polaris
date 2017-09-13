@@ -361,16 +361,17 @@
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(prob(10) && alien != IS_SLIME) //Partially made of the stuff. Why would it hurt them?
-		M << "<span class='danger'>Your insides are burning!</span>"
-		M.adjustToxLoss(rand(100, 300) * removed)
-	else if(prob(40) || (alien == IS_SLIME && prob(75)))
-		if(alien == IS_SLIME) //Production of the stuff naturally slows as age increases. Added artificially later, it's like a stimpack. Though not all that effective if only one limb has the damage.
+	if(alien == IS_SLIME) //Partially made of the stuff. Why would it hurt them?
+		if(prob(75))
 			M.heal_overall_damage(25 * removed, 25 * removed)
 			M.adjustToxLoss(rand(-30, -10) * removed)
 			M.druggy = max(M.druggy, 10)
 			M.add_chemical_effect(CE_PAINKILLER, 60)
-		else
+	else
+		if(prob(10))
+			M << "<span class='danger'>Your insides are burning!</span>"
+			M.adjustToxLoss(rand(100, 300) * removed)
+		else if(prob(40))
 			M.heal_organ_damage(25 * removed, 0)
 
 /datum/reagent/soporific
