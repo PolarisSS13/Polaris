@@ -84,7 +84,14 @@
 
 	var/turf/T = get_turf(src)
 	if(T && T.movement_cost)
-		tally += T.movement_cost
+		var/movecost = T.movement_cost
+		if(src.shoes)
+			var/obj/item/clothing/shoes/feet = src.shoes
+			if(istype(T, /turf/simulated/floor/outdoors/snow))
+				movecost += feet.snow_speed
+			else if(istype(T, /turf/simulated/floor/water))
+				movecost += feet.water_speed
+		tally += movecost
 
 	item_tally *= species.item_slowdown_mod
 
