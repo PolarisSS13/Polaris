@@ -115,31 +115,31 @@
 	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/medical/scrubs
-	name = "medical scrubs"
+	name = "blue scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in baby blue."
 	icon_state = "scrubsblue"
 	item_state_slots = list(slot_r_hand_str = "blue", slot_l_hand_str = "blue")
 
 /obj/item/clothing/under/rank/medical/scrubs/green
-	name = "medical scrubs"
+	name = "green scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in dark green."
 	icon_state = "scrubsgreen"
 	item_state_slots = list(slot_r_hand_str = "green", slot_l_hand_str = "green")
 
 /obj/item/clothing/under/rank/medical/scrubs/purple
-	name = "medical scrubs"
+	name = "purple scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in deep purple."
 	icon_state = "scrubspurple"
 	item_state_slots = list(slot_r_hand_str = "purple", slot_l_hand_str = "purple")
 
 /obj/item/clothing/under/rank/medical/scrubs/black
-	name = "medical scrubs"
+	name = "black scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
 	icon_state = "scrubsblack"
 	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
 
 /obj/item/clothing/under/rank/medical/scrubs/navyblue
-	name = "medical scrubs"
+	name = "navy blue scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in navy blue."
 	icon_state = "scrubsnavyblue"
 	item_state_slots = list(slot_r_hand_str = "blue", slot_l_hand_str = "blue")
