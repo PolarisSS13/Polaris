@@ -644,6 +644,12 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrm"))
 					if("female skrell")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrf"))
+					if("WTOperator")
+						holo_icon = getHologramIcon(icon('icons/mob/robots.dmi',"sleekstandard"))
+					if("WTDove")
+						holo_icon = getHologramIcon(icon('icons/mob/robots.dmi',"whitespider"))
+					if("Droid")
+						holo_icon = getHologramIcon(icon('icons/mob/robots.dmi',"droid-science"))
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()

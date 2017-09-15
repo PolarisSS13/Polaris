@@ -170,7 +170,14 @@ var/list/datum/ai_icon/ai_icons
 	alive_icon = "ai-triumvirate"
 	alive_light = "#020B2B"
 
-/datum/ai_icon/triumvirate_static
-	name = "Triumvirate Static"
-	alive_icon = "ai-static"
-	alive_light = "#020B2B"
+/datum/ai_icon/terminal
+	name = "Terminal"
+	alive_icon = "ai-terminal"
+
+/datum/ai_icon/Girl
+	name = "Girl"
+	alive_icon = "ai-girl"
+
+/datum/ai_icon/boy
+	name = "Boy"
+	alive_icon = "ai-boy"
