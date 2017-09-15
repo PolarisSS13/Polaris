@@ -61,6 +61,13 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "A simple but efficient robotic limb, created by NanoTrasen."
 	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_main.dmi'
 
++/datum/robolimb/nanotrasen_alt1
++	company = "NanoTrasen - Array"
++	desc = "This limb is simple and functional; array of sensors on a featureless case."
++	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_alt1.dmi'
++	unavailable_to_build = 1
++	parts = list(BP_HEAD)
+
 /datum/robolimb/bishop
 	company = "Bishop"
 	desc = "This limb has a white polymer casing with blue holo-displays."
