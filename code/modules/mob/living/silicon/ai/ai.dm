@@ -126,7 +126,7 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 	aiCommunicator = new /obj/item/device/communicator/integrated(src)
 
 
-	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
+	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 
 	proc_holder_list = new()
 
@@ -573,8 +573,7 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 
 		else //A premade from the dmi
 			var/icon_list[] = list(
-				"default",
-				"floating face",
+				"default"
 				"singularity",
 				"drone",
 				"carp",
@@ -601,8 +600,6 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 				qdel(holo_icon)
 				switch(input)
 					if("default")
-						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
-					if("floating face")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 					if("singularity")
 						holo_icon = getHologramIcon(icon('icons/obj/singularity.dmi',"singularity_s1"))
