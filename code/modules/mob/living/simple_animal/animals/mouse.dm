@@ -48,7 +48,7 @@
 
 	if(prob(speak_chance))
 		for(var/mob/M in view())
-			M << 'sound/effects/mouse_squeak.ogg'
+			M << 'sound/effects/mousesqueek.ogg'
 
 	if(!resting && prob(0.5))
 		lay_down()
@@ -96,12 +96,11 @@
 		if(!stat)
 			var/mob/M = AM
 			M << "<font color='blue'>\icon[src] Squeek!</font>"
-			M << 'sound/effects/mouse_squeak_loud.ogg'
+			M << 'sound/effects/mousesqueek.ogg'
 	..()
 
 /mob/living/simple_animal/mouse/death()
 	layer = MOB_LAYER
-	playsound(src, 'sound/effects/mouse_squeak_loud.ogg', 50, 1)
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()
