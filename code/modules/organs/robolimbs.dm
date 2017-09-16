@@ -94,7 +94,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_main.dmi'
 	unavailable_to_build = 1
 
-/datum/robolimb/cybersolutions
+/datum/robolimb/cybersolutions_alt1
 	company = "Cyber Solutions - Array"
 	desc = "This limb is simple and functional; array of sensors on a featureless case."
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
