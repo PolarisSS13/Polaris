@@ -90,9 +90,16 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /datum/robolimb/cybersolutions
 	company = "Cyber Solutions"
-	desc = "This limb has an orange, jagged plating."
+	desc = "This limb is grey and rough, with little in the way of aesthetic."
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_main.dmi'
 	unavailable_to_build = 1
+
+/datum/robolimb/cybersolutions
+	company = "Cyber Solutions - Array"
+	desc = "This limb is simple and functional; array of sensors on a featureless case."
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
 
 /datum/robolimb/grayson
 	company = "Grayson"
