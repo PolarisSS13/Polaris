@@ -7,6 +7,7 @@
 	"White"        = 'icons/mob/screen/white.dmi',
 	"old-noborder" = 'icons/mob/screen/old-noborder.dmi',
 	"minimalist"   = 'icons/mob/screen/minimalist.dmi'
+	"Hologram"     = 'icons/mob/screen/holo.dmi'
 	)
 
 /var/all_ui_styles_robot = list(
@@ -15,7 +16,8 @@
 	"old"          = 'icons/mob/screen1_robot.dmi',
 	"White"        = 'icons/mob/screen1_robot.dmi',
 	"old-noborder" = 'icons/mob/screen1_robot.dmi',
-	"minimalist"   = 'icons/mob/screen1_robot_minimalist.dmi'
+	"minimalist"   = 'icons/mob/screen1_robot_minimalist.dmi',
+	"Hologram"     = 'icons/mob/screen/holo.dmi'
 	)
 
 /proc/ui_style2icon(ui_style)
