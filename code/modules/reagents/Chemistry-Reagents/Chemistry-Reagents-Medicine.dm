@@ -689,8 +689,8 @@
 		return
 	if(volume <= 0.1 && data != -1)
 		data = -1
-		to_chat(user,"<span class='warning'>You feel antsy, your concentration wavers...</span>")
+		to_chat(M, "<span class='warning'>You feel antsy, your concentration wavers...</span>")
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
-			to_chat(user,"<span class='notice'>You feel invigorated and calm.</span>")
+			to_chat(M, "<span class='notice'>You feel invigorated and calm.</span>")
