@@ -16,8 +16,8 @@
 	"old"          = 'icons/mob/screen1_robot.dmi',
 	"White"        = 'icons/mob/screen1_robot.dmi',
 	"old-noborder" = 'icons/mob/screen1_robot.dmi',
-	"minimalist"   = 'icons/mob/screen1_robot_minimalist.dmi'
-	"Hologram"     = 'icons/mob/screen1_robot_minimalist.dmi',
+	"minimalist"   = 'icons/mob/screen1_robot_minimalist.dmi',
+	"Hologram"     = 'icons/mob/screen1_robot_minimalist.dmi'
 	)
 
 /proc/ui_style2icon(ui_style)
