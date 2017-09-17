@@ -133,6 +133,49 @@
 		icon_state = "nullrod"
 		item_state = "foldcane"
 
+/obj/item/weapon/cane/concealed/hypo
+	var/concealed_hypo
+
+/obj/item/weapon/cane/concealed/hypo/New()
+	..()
+	var/obj/item/weapon/reagent_containers/hypospray/temp_hypo = new(src)
+	concealed_hypo = temp_hypo
+	temp_hypo.attack_self()
+
+/obj/item/weapon/cane/concealed/hypo/attack_self(var/mob/user)
+	if(concealed_hypo)
+		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_hypo] from \his [src]!</span>", "You unsheathe \the [concealed_hypo] from \the [src].")
+		// Calling drop/put in hands to properly call item drop/pickup procs
+		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
+		user.drop_from_inventory(src)
+		user.put_in_hands(concealed_hypo)
+		user.put_in_hands(src)
+		user.update_inv_l_hand(0)
+		user.update_inv_r_hand()
+		concealed_hypo = null
+	else
+		..()
+
+/obj/item/weapon/cane/concealed/hypo/attackby(var/obj/item/weapon/reagent_containers/hypospray/W, var/mob/user)
+	if(!src.concealed_hypo && istype(W))
+		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into \his [src]!</span>", "You sheathe \the [W] into \the [src].")
+		user.drop_from_inventory(W)
+		W.loc = src
+		src.concealed_hypo = W
+		update_icon()
+	else
+		..()
+
+/obj/item/weapon/cane/concealed/hypo/update_icon()
+	if(concealed_hypo)
+		name = initial(name)
+		icon_state = initial(icon_state)
+		item_state = initial(icon_state)
+	else
+		name = "cane shaft"
+		icon_state = "nullrod"
+		item_state = "foldcane"
+
 /obj/item/weapon/cane/whitecane
 	name = "white cane"
 	desc = "A cane used by the blind."
