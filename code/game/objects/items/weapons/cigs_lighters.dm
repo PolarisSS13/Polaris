@@ -344,7 +344,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/New()
 	..()
-	reagents.add_reagent(/datum/reagent/nicotine, 5))
+	reagents.add_reagent(/datum/reagent/nicotine, 3))
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
@@ -361,7 +361,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana/New()
 	..()
-	reagents.add_reagent(/datum/reagent/nicotine, 10))
+	reagents.add_reagent(/datum/reagent/nicotine, 5))
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
