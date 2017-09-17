@@ -131,7 +131,7 @@
 	else
 		last_spit = world.time
 
-	if(spitting && (stat || paralysis || stunned || weakened || lying || restrained() || buckled))
+	if(spitting && incapacitated(INCAPACITATION_DISABLED))
 		to_chat(src, "You cannot spit in your current state.")
 		spitting = 0
 		return
