@@ -285,10 +285,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 
-/obj/item/clothing/mask/smokable/cigarette/New()
-	..()
-	reagents.add_reagent(/datum/reagent/nicotine, 2)
-
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
@@ -342,10 +338,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nicotine, 5)
-
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
 	desc = "There's little more you could want from a cigar."
@@ -358,10 +350,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	max_smoketime = 7200
 	smoketime = 7200
 	chem_volume = 30
-
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nicotine, 10)
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
