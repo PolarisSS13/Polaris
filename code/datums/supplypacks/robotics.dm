@@ -76,14 +76,6 @@
 	containername = "Robolimb blueprints (Xion)"
 	access = access_robotics
 
-/datum/supply_packs/robotics/robolimbs/hypnos
-	name = "Hypnos robolimb blueprints"
-	contains = list(/obj/item/weapon/disk/limb/hypnos)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure/science
-	containername = "Robolimb blueprints (Hypnos)"
-	access = access_robotics
-
 /datum/supply_packs/robotics/robolimbs/grayson
 	name = "Grayson robolimb blueprints"
 	contains = list(/obj/item/weapon/disk/limb/grayson)
@@ -100,28 +92,12 @@
 	containername = "Robolimb blueprints (Hephaestus)"
 	access = access_robotics
 
-/datum/supply_packs/robotics/robolimbs/athena
-	name = "Athena robolimb blueprints"
-	contains = list(/obj/item/weapon/disk/limb/athena)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure/science
-	containername = "Robolimb blueprints (Athena)"
-	access = access_robotics
-
 /datum/supply_packs/robotics/robolimbs/wardtakahashi
 	name = "Ward-Takahashi robolimb blueprints"
 	contains = list(/obj/item/weapon/disk/limb/wardtakahashi)
 	cost = 35
 	containertype = /obj/structure/closet/crate/secure/science
 	containername = "Robolimb blueprints (Ward-Takahashi)"
-	access = access_robotics
-
-/datum/supply_packs/robotics/robolimbs/wasikeltabet
-	name = "Wasik/el-Tabet robolimb blueprints"
-	contains = list(/obj/item/weapon/disk/limb/wasikeltabet)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure/science
-	containername = "Robolimb blueprints (Wasik/el-Tabet)"
 	access = access_robotics
 
 /datum/supply_packs/robotics/robolimbs/zenghu
@@ -138,14 +114,6 @@
 	cost = 70
 	containertype = /obj/structure/closet/crate/secure/science
 	containername = "Robolimb blueprints (Bishop)"
-	access = access_robotics
-
-/datum/supply_packs/robotics/robolimbs/rook
-	name = "Rook robolimb blueprints"
-	contains = list(/obj/item/weapon/disk/limb/rook)
-	cost = 60
-	containertype = /obj/structure/closet/crate/secure/science
-	containername = "Robolimb blueprints (Rook)"
 	access = access_robotics
 
 /datum/supply_packs/robotics/robolimbs/veymed

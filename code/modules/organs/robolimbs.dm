@@ -74,6 +74,12 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/bishop_alt2
+	company = "Bishop - Rook"
+	desc = "This limb has a solid plastic casing with blue lights along it."
+	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt2.dmi'
+	unavailable_to_build = 1
+
 /datum/robolimb/bishop_monitor
 	company = "Bishop Monitor"
 	desc = "Bishop Cybernetics' unique spin on a popular prosthetic head model. The themes conflict in an intriguing way."
@@ -81,12 +87,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
-
-/datum/robolimb/rook //Knockoff of Bishop.
-	company = "Rook"
-	desc = "This limb has a solid plastic casing with blue lights along it."
-	icon = 'icons/mob/human_races/cyberlimbs/rook/rook_main.dmi'
-	unavailable_to_build = 1
 
 /datum/robolimb/cybersolutions
 	company = "Cyber Solutions"
@@ -150,6 +150,13 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 		rgb=hephaestus_alt_rgb;\
 		rainbow=hephaestus_alt_rainbow"
 
+/datum/robolimb/hephaestus_alt2
+	company = "Hephaestus - Lelantos"
+	desc = "This rather thick limb has a militaristic green plating."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt2.dmi'
+	unavailable_to_build = 1
+
+
 /datum/robolimb/hephaestus_monitor
 	company = "Hephaestus Monitor"
 	desc = "Hephaestus' unique spin on a popular prosthetic head model. It looks rugged and sturdy."
@@ -157,12 +164,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
-
-/datum/robolimb/athena //Knockoff Hephaestus.
-	company = "Athena"
-	desc = "This rather thick limb has a militaristic green plating."
-	icon = 'icons/mob/human_races/cyberlimbs/athena/athena_main.dmi'
-	unavailable_to_build = 1
 
 /datum/robolimb/morpheus
 	company = "Morpheus"
@@ -207,6 +208,13 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/wardtakahashi_alt2
+	company = "Ward-Takahashi - Sarasvati"
+	desc = "This limb has white and purple features, with a heavier casing."
+	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt2.dmi'
+	unavailable_to_build = 1
+
+
 /datum/robolimb/wardtakahashi_monitor
 	company = "Ward-Takahashi Monitor"
 	desc = "Ward-Takahashi's unique spin on a popular prosthetic head model. It looks sleek and modern."
@@ -215,12 +223,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
 
-/datum/robolimb/wasikeltabet //Knockoff W-T.
-	company = "Wasik/el-Tabet"
-	desc = "This limb has white and purple features, with a heavier casing."
-	icon = 'icons/mob/human_races/cyberlimbs/wasikeltabet/wasikeltabet_main.dmi'
-	unavailable_to_build = 1
-
 /datum/robolimb/xion
 	company = "Xion"
 	desc = "This limb has a minimalist black and red casing."
@@ -228,28 +230,28 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 
 /datum/robolimb/xion_alt1
-	company = "Xion Mfg. - Breach"
+	company = "Xion - Breach"
 	desc = "This limb has a minimalist black and red casing. Looks a bit menacing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt1.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/xion_alt2
+	company = "Xion - Shell"
+	desc = "This limb has a thick orange casing with steel plating."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt2.dmi'
+	unavailable_to_build = 1
+	monitor_styles = "blank=xion_off;\
+		green=xion_green;\
+		rgb=xion_rgb"
+
 /datum/robolimb/xion_monitor
-	company = "Xion Mfg. Monitor"
+	company = "Xion Monitor"
 	desc = "Xion Mfg.'s unique spin on a popular prosthetic head model. It looks and minimalist and utilitarian."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_monitor.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
-
-/datum/robolimb/hypnos //Knockoff Xion.
-	company = "Hypnos"
-	desc = "This limb has a thick orange casing with steel plating."
-	icon = 'icons/mob/human_races/cyberlimbs/hypnos/hypnos_main.dmi'
-	unavailable_to_build = 1
-	monitor_styles = "blank=hypnos_off;\
-		green=hypnos_green;\
-		rgb=hypnos_rgb"
 
 /datum/robolimb/zenghu
 	company = "Zeng-Hu"
@@ -272,9 +274,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /obj/item/weapon/disk/limb/bishop
 	company = "Bishop"
 
-/obj/item/weapon/disk/limb/rook
-	company = "Rook"
-
 /obj/item/weapon/disk/limb/cybersolutions
 	company = "Cyber Solutions"
 
@@ -283,9 +282,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /obj/item/weapon/disk/limb/hephaestus
 	company = "Hephaestus"
-
-/obj/item/weapon/disk/limb/athena
-	company = "Athena"
 
 /obj/item/weapon/disk/limb/morpheus
 	company = "Morpheus"
@@ -296,14 +292,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /obj/item/weapon/disk/limb/wardtakahashi
 	company = "Ward-Takahashi"
 
-/obj/item/weapon/disk/limb/wasikeltabet
-	company = "Wasik/el-Tabet"
-
 /obj/item/weapon/disk/limb/xion
 	company = "Xion"
-
-/obj/item/weapon/disk/limb/hypnos
-	company = "Hypnos"
 
 /obj/item/weapon/disk/limb/zenghu
 	company = "Zeng-Hu"
