@@ -214,7 +214,7 @@
 		spitting = 0
 		return
 
-	if(!check_alien_ability(50,0,O_ACID))
+	if(!check_alien_ability(60,0,O_ACID))
 		spitting = 0
 		return
 
