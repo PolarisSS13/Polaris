@@ -185,7 +185,7 @@
 
 /mob/living/carbon/human/proc/neurotoxin()
 	set name = "Toggle Neurotoxic Spit (40)"
-	set desc = "Readies a neurotoxic spit, which paralyzes them for a short time if they are not wearing protective gear."
+	set desc = "Readies a neurotoxic spit, which paralyzes the target for a short time if they are not wearing protective gear."
 	set category = "Abilities"
 
 	if(spitting)
@@ -206,7 +206,7 @@
 
 /mob/living/carbon/human/proc/acidspit()
 	set name = "Toggle Acid Spit (50)"
-	set desc = "Readies an acidic spit, which burns them if they are not wearing protective gear."
+	set desc = "Readies an acidic spit, which burns the target if they are not wearing protective gear."
 	set category = "Abilities"
 
 	if(spitting)
@@ -214,7 +214,7 @@
 		spitting = 0
 		return
 
-	if(!check_alien_ability(40,0,O_ACID))
+	if(!check_alien_ability(50,0,O_ACID))
 		spitting = 0
 		return
 
