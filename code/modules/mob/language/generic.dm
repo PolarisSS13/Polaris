@@ -44,15 +44,11 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
-	space_chance = 100
-	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
-					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
-					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud",
-					 "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo",
-					 "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in",
-					 "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla",
-					 "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt",
-					 "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum")
+syllables = list(
+"fea","vea","vei","veh","vee","feh","fa","soa","su","sua","sou","se","seh",
+"twa","twe","twi","ahm","lea","lee","nae","nah","pa","pau","fae","fai","soh",
+"mou","ahe","ll","ea","ai","thi","hie","zei","zie","ize","ehy","uy","oya","dor",
+"di","ja","ej")
 
 // Criminal language.
 /datum/language/gutter
