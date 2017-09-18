@@ -347,3 +347,9 @@
 	desc = "A wide-brimmed hat popularly worn in Mexico."
 	icon_state = "sombrero"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/maidhat
+	name = "maid headband"
+	desc = "Keeps hair out of the way for important... jobs."
+	icon_state = "maid"
+	body_parts_covered = 0

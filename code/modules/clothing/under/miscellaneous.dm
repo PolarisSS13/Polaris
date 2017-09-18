@@ -319,13 +319,14 @@
 	name = "maid costume"
 	desc = "Maid in China."
 	icon_state = "maid"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 5, rad = 0)
 
-/obj/item/clothing/under/dress/janimaid
+/obj/item/clothing/under/dress/maid/janimaid
 	name = "maid uniform"
 	desc = "A simple maid uniform for housekeeping."
 	icon_state = "janimaid"
 
-/obj/item/clothing/under/dress/sexymaid
+/obj/item/clothing/under/dress/maid/sexymaid
 	name = "sexy maid uniform"
 	desc = "You must be a bit risque teasing all of them in a maid uniform!"
 	icon_state = "sexymaid"
