@@ -364,7 +364,7 @@
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
 	if(user.a_intent == I_HELP)
-		user.visible_message("<span class='notice'>[user] pets [src].</span>")
+		user.visible_message("<span class='notice'>[user.name] pats [src].</span>")
 	else
 		visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
 		close_up()
