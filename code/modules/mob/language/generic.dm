@@ -44,11 +44,7 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
-syllables = list(
-"fea","vea","vei","veh","vee","feh","fa","soa","su","sua","sou","se","seh",
-"twa","twe","twi","ahm","lea","lee","nae","nah","pa","pau","fae","fai","soh",
-"mou","ahe","ll","ea","ai","thi","hie","zei","zie","ize","ehy","uy","oya","dor",
-"di","ja","ej")
+	syllables = list("fea","vea","vei","veh","vee","feh","fa","soa","su","sua","sou","se","seh","twa","twe","twi","ahm","lea","lee","nae","nah","pa","pau","fae","fai","soh","mou","ahe","ll","ea","ai","thi","hie","zei","zie","ize","ehy","uy","oya","dor","di","ja","ej")
 
 // Criminal language.
 /datum/language/gutter
