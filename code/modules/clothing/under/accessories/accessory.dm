@@ -237,11 +237,8 @@
 //Scarves
 
 /obj/item/clothing/accessory/scarf
-	name = "scarf"
+	name = "red carf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
-
-/obj/item/clothing/accessory/scarf/red
-	name = "red scarf"
 	icon_state = "redscarf"
 
 /obj/item/clothing/accessory/scarf/green
@@ -284,14 +281,14 @@
 	name = "christmas scarf"
 	icon_state = "christmasscarf"
 
-/obj/item/clothing/accessory/stripedredscarf
+/obj/item/clothing/accessory/scarf/stripedredscarf
 	name = "striped red scarf"
 	icon_state = "stripedredscarf"
 
-/obj/item/clothing/accessory/stripedgreenscarf
+/obj/item/clothing/accessory/scarf/stripedgreenscarf
 	name = "striped green scarf"
 	icon_state = "stripedgreenscarf"
 
-/obj/item/clothing/accessory/stripedbluescarf
+/obj/item/clothing/accessory/scarf/stripedbluescarf
 	name = "striped blue scarf"
 	icon_state = "stripedbluescarf"
