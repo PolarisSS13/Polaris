@@ -1,6 +1,6 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon
 	name = "8.8cm KwK 47"
-	desc = "Do to enemy mechs what the King Tiger did to Allied tanks with 88 milimeters of armor-piercing German steel!"
+	desc = "<i>Precision German engineering!</i>" // Why would you ever take this off the mech, anyway?
 	icon_state = "mecha_uac2"
 	equip_cooldown = 55 // 5.5 seconds
 	projectile = /obj/item/projectile/bullet/cannon
@@ -55,7 +55,7 @@
 	opacity = 0 // Because there's big tall legs to look through. Also it looks fucky if this is set to 1.
 	deflect_chance = 50
 	damage_absorption = list("brute"=0.1,"fire"=0.7,"bullet"=0.1,"laser"=0.6,"energy"=0.7,"bomb"=0.7) //values show how much damage will pass through, not how much will be absorbed.
-	max_temperature = 25000
+	//max_temperature = 25000 // Removed by request, making fire yet another means of defeating the Gorilla where normal guns will not.
 	infra_luminosity = 3
 	var/zoom = 0
 	var/smoke = 5
@@ -69,7 +69,7 @@
 	max_equip = 4
 	New()
 		..()
-		var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay(src)
+		var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay(src) // This thing basically cannot function without an external power supply.
 		ME.attach(src)
 		ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon(src)
 		ME.attach(src)
