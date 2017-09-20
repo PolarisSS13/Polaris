@@ -236,7 +236,7 @@
 
 //Scarves
 
-/obj/item/clothing/accessory/scarf/red
+/obj/item/clothing/accessory/scarf
 	name = "red carf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
 	icon_state = "redscarf"
