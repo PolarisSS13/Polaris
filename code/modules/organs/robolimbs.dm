@@ -151,7 +151,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 		rainbow=hephaestus_alt_rainbow"
 
 /datum/robolimb/hephaestus_alt2
-	company = "Hephaestus - Lelantos"
+	company = "Hephaestus - Athena"
 	desc = "This rather thick limb has a militaristic green plating."
 	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt2.dmi'
 	unavailable_to_build = 1
@@ -209,7 +209,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	parts = list(BP_HEAD)
 
 /datum/robolimb/wardtakahashi_alt2
-	company = "Ward-Takahashi - Sarasvati"
+	company = "Ward-Takahashi - Spirit"
 	desc = "This limb has white and purple features, with a heavier casing."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt2.dmi'
 	unavailable_to_build = 1
@@ -237,7 +237,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	parts = list(BP_HEAD)
 
 /datum/robolimb/xion_alt2
-	company = "Xion - Shell"
+	company = "Xion - Hull"
 	desc = "This limb has a thick orange casing with steel plating."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt2.dmi'
 	unavailable_to_build = 1
