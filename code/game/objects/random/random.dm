@@ -668,7 +668,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(2);/obj/item/clothing/under/pants/camo,
 				prob(1);/obj/item/clothing/under/harness,
 				prob(1);/obj/item/clothing/under/tactical,
-				prob(3);/obj/item/clothing/accessory/storage/webbing,
+				prob(3);/obj/item/clothing/accessory/storage,
 				prob(4);/obj/item/weapon/spacecash/c1,
 				prob(3);/obj/item/weapon/spacecash/c10,
 				prob(3);/obj/item/weapon/spacecash/c20,

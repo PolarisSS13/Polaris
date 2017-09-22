@@ -64,7 +64,8 @@
 			/obj/item/clothing/accessory/storage/black_drop_pouches,
 			/obj/item/clothing/accessory/storage/brown_drop_pouches,
 			/obj/item/clothing/accessory/storage/white_drop_pouches,
-			/obj/item/clothing/accessory/storage/webbing
+			/obj/item/clothing/accessory/storage,
+			/obj/item/clothing/accessory/storage/knifeharness
 			)
 	cost = 10
 	containertype = "/obj/structure/closet/crate"

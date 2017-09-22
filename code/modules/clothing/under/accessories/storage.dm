@@ -1,6 +1,6 @@
 /obj/item/clothing/accessory/storage
-	name = "load bearing equipment"
-	desc = "Used to hold things when you don't have enough hands."
+	name = "webbing"
+	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
 	icon_state = "webbing"
 	slot = "utility"
 	show_messages = 1
@@ -44,11 +44,6 @@
 	for(var/obj/item/I in hold.contents)
 		hold.remove_from_storage(I, T)
 	add_fingerprint(user)
-
-/obj/item/clothing/accessory/storage/webbing
-	name = "webbing"
-	desc = "Sturdy mess of synthcotton belts and buckles, ready to share your burden."
-	icon_state = "webbing"
 
 /obj/item/clothing/accessory/storage/black_vest
 	name = "black webbing vest"
