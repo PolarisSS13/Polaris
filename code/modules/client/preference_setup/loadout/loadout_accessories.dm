@@ -199,6 +199,20 @@
 	display_name = "suit vest"
 	path = /obj/item/clothing/accessory/vest
 
+/datum/gear/accessory/fannypack
+	display_name = "fannypack"
+	path = /obj/item/weapon/storage/belt/fannypack
+	cost = 2
+
+/datum/gear/accessory/fannypack/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/accessory/webbing
+	display_name = "webbing, simple"
+	path = /obj/item/clothing/accessory/storage
+	cost = 2
+
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
 	path = /obj/item/clothing/accessory/storage/brown_vest
@@ -229,24 +243,6 @@
 	path = /obj/item/clothing/accessory/storage/white_drop_pouches
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
 
-/datum/gear/accessory/fannypack
-	display_name = "fannypack"
-	path = /obj/item/weapon/storage/belt/fannypack
-	cost = 2
-
-/datum/gear/accessory/fannypack/New()
-	..()
-	gear_tweaks = list(gear_tweak_free_color_choice)
-
-/datum/gear/accessory/freewebbing
-	display_name = "webbing, simple"
-	path = /obj/item/clothing/accessory/storage
-	cost = 2
-
-/datum/gear/accessory/webbing
-	display_name = "webbing & pouch selection"
-	path = /obj/item/clothing/accessory/storage
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
 
 /datum/gear/accessory/webbing/New()
 	..()
@@ -260,7 +256,7 @@
 	display_name = "chaps"
 	path = /obj/item/clothing/accessory/chaps
 
-/datum/gear/accessory/webbing/New()
+/datum/gear/accessory/chaps/New()
 	..()
 	var/list/chaps = list()
 	for(var/chap in typesof(/obj/item/clothing/accessory/chaps))
