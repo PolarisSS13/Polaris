@@ -160,11 +160,13 @@ var/global/list/robot_modules = list(
 	name = "standard robot module"
 	sprites = list(
 					"M-USE NanoTrasen" = "robot",
+					"Ares" = "durin",
 					"Cabeiri" = "eyebot-standard",
 					"CUPCAKE" = "Noble-STD",
 					"Haruka" = "marinaSD",
 					"Usagi" = "tallflower",
 					"Telemachus" = "toiletbot",
+					"WTDove" = "grayspider",
 					"WTOperator" = "sleekstandard",
 					"WTOmni" = "omoikane",
 					"XI-GUS" = "spider",
@@ -192,12 +194,14 @@ var/global/list/robot_modules = list(
 	name = "surgeon robot module"
 	sprites = list(
 					"M-USE NanoTrasen" = "robotMedi",
+					"Ares" = "gibbs",
 					"Cabeiri" = "eyebot-medical",
 					"CUPCAKE" = "Noble-MED",
 					"Haruka" = "marinaMD",
 					"Minako" = "arachne",
 					"Usagi" = "tallwhite",
 					"Telemachus" = "toiletbotsurgeon",
+					"WTDove" = "whitespider",
 					"WTOperator" = "sleekcmo",
 					"XI-ALP" = "heavyMed",
 					"Basic" = "Medbot",
@@ -253,6 +257,7 @@ var/global/list/robot_modules = list(
 	name = "crisis robot module"
 	sprites = list(
 					"M-USE NanoTrasen" = "robotMedi",
+					"Ares" = "gibbs",
 					"Cabeiri" = "eyebot-medical",
 					"CUPCAKE" = "Noble-MED",
 					"Haruka" = "marinaMD",
@@ -265,7 +270,8 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-medical",
 					"Needles" = "medicalrobot",
 					"Drone - Medical" = "drone-medical",
-					"Drone - Chemistry" = "drone-chemistry"
+					"Drone - Chemistry" = "drone-chemistry",
+					"Handy" = "handy-med"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -327,6 +333,7 @@ var/global/list/robot_modules = list(
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
 	sprites = list(
 					"M-USE NanoTrasen" = "robotEngi",
+					"Ares" = "conagher",
 					"Cabeiri" = "eyebot-engineering",
 					"CUPCAKE" = "Noble-ENG",
 					"Haruka" = "marinaENG",
@@ -467,6 +474,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/security/general
 	sprites = list(
 					"M-USE NanoTrasen" = "robotSecy",
+					"Ares" = "woody",
 					"Cabeiri" = "eyebot-security",
 					"Cerberus" = "bloodhound",
 					"Cerberus - Treaded" = "treadhound",
@@ -479,7 +487,8 @@ var/global/list/robot_modules = list(
 					"XI-ALP" = "heavySec",
 					"Basic" = "secborg",
 					"Black Knight" = "securityrobot",
-					"Drone" = "drone-sec"
+					"Drone" = "drone-sec",
+					"Handy" = "handy-security"
 					)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -516,6 +525,7 @@ var/global/list/robot_modules = list(
 	sprites = list(
 					"M-USE NanoTrasen" = "robotJani",
 					"Arachne" = "crawler",
+					"Ares" = "flynn",
 					"Cabeiri" = "eyebot-janitor",
 					"CUPCAKE" = "Noble-CLN",
 					"Haruka" = "marinaJN",
@@ -525,7 +535,8 @@ var/global/list/robot_modules = list(
 					"Basic" = "JanBot2",
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
-					"Drone" = "drone-janitor"
+					"Drone" = "drone-janitor",
+					"Handy" = "handy-janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -564,6 +575,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/clerical/butler
 	sprites = list(
 					"M-USE NanoTrasen" = "robotServ",
+					"Ares" = "durin",
 					"Cabeiri" = "eyebot-standard",
 					"CUPCAKE" = "Noble-SRV",
 					"Haruka" = "marinaSV",
@@ -619,6 +631,7 @@ var/global/list/robot_modules = list(
 	name = "clerical robot module"
 	sprites = list(
 					"M-USE NanoTrasen" = "robotCler",
+					"Ares" = "lloyd",
 					"Cabeiri" = "eyebot-standard",
 					"CUPCAKE" = "Noble-SRV",
 					"Haruka" = "marinaSV",
@@ -659,6 +672,7 @@ var/global/list/robot_modules = list(
 	networks = list(NETWORK_MINE)
 	sprites = list(
 					"NM-USE NanoTrasen" = "robotMine",
+					"Ares" = "ishimura",
 					"Cabeiri" = "eyebot-miner",
 					"CUPCAKE" = "Noble-DIG",
 					"Haruka" = "marinaMN",
