@@ -155,8 +155,8 @@
 
 /datum/gear/shoes/jungle
 	display_name = "jungle boots"
-		path = /obj/item/clothing/shoes/boots/jungle
-		cost = 2
+	path = /obj/item/clothing/shoes/boots/jungle
+	cost = 2
 
 /datum/gear/shoes/duty
 	display_name = "duty boots"
