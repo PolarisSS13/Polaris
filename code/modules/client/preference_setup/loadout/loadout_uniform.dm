@@ -134,7 +134,7 @@
 /datum/gear/uniform/job_skirt/sci
 	display_name = "skirt, scientist"
 	path = /obj/item/clothing/under/rank/scientist/skirt
-	allowed_roles = list("Research Director","Scientist", "Xenobiologist")
+	allowed_roles = list("Research Director","Scientist")
 
 /datum/gear/uniform/job_skirt/cargo
 	display_name = "skirt, cargo"
