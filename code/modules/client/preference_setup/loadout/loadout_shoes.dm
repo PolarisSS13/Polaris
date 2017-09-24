@@ -242,4 +242,4 @@
 /datum/gear/shoes/boots/winter/hydro
 	display_name = "hydroponics winter boots"
 	path = /obj/item/clothing/shoes/boots/winter/hydro
-	allowed_roles = list("Botanist", "Xenobiologist")
+	allowed_roles = list("Botanist", "Scientist")

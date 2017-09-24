@@ -192,7 +192,7 @@
 /datum/gear/suit/roles/poncho/science
 	display_name = "poncho, science"
 	path = /obj/item/clothing/accessory/poncho/roles/science
-	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
+	allowed_roles = list("Research Director","Scientist", "Roboticist")
 
 /datum/gear/suit/roles/poncho/cargo
 	display_name = "poncho, cargo"
@@ -262,7 +262,7 @@
 /datum/gear/suit/wintercoat/science
 	display_name = "winter coat, science"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/science
-	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
+	allowed_roles = list("Research Director","Scientist", "Roboticist")
 
 /datum/gear/suit/wintercoat/engineering
 	display_name = "winter coat, engineering"
@@ -277,7 +277,7 @@
 /datum/gear/suit/wintercoat/hydro
 	display_name = "winter coat, hydroponics"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
-	allowed_roles = list("Botanist", "Xenobiologist")
+	allowed_roles = list("Botanist", "Scientist")
 
 /datum/gear/suit/wintercoat/cargo
 	display_name = "winter coat, cargo"
@@ -415,7 +415,7 @@
 /datum/gear/suit/snowsuit/science
 	display_name = "snowsuit, science"
 	path = /obj/item/clothing/suit/storage/snowsuit/science
-	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
+	allowed_roles = list("Research Director","Scientist", "Roboticist")
 
 /datum/gear/suit/snowsuit/engineering
 	display_name = "snowsuit, engineering"
