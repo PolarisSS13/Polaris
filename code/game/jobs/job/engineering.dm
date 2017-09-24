@@ -41,6 +41,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/boots/workboots(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat/white(H), slot_head)
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/chief/full(H), slot_belt)
+	H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
 	H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 	return 1
 
