@@ -184,7 +184,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/clothing/under/syndicate/tacticool,
 		/obj/item/clothing/under/pants/camo,
 		/obj/item/clothing/under/harness,
-		/obj/item/clothing/accessory/storage/webbing,
+		/obj/item/clothing/accessory/storage,
 		/obj/item/weapon/spacecash/c1,
 		/obj/item/weapon/spacecash/c10,
 		/obj/item/weapon/spacecash/c20,

@@ -45,20 +45,16 @@
 	icon_state = "rain_bow"
 
 /obj/item/clothing/shoes/flats
-	name = "black flats"
-	desc = "Sleek black flats."
-	icon_state = "flatsblack"
-	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
-
-/obj/item/clothing/shoes/flats/white
-	name = "white flats"
-	desc = "Shiny white flats."
-	icon_state = "flatswhite"
-	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
-
-/obj/item/clothing/shoes/flats/white/color
 	name = "flats"
 	desc = "Sleek flats."
+	icon_state = "flatsblack"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
+
+/obj/item/clothing/shoes/flats/black
+	name = "black flats"
+	desc = "Sleek black flats."
+	icon_state = "flatswhite"
+	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
 
 /obj/item/clothing/shoes/flats/red
 	name = "red flats"

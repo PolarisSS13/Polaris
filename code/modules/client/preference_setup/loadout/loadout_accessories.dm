@@ -106,21 +106,17 @@
 	path = /obj/item/clothing/accessory/wcoat/swvest/red
 
 /datum/gear/accessory/holster
-	display_name = "holster, armpit"
-	path = /obj/item/clothing/accessory/holster/armpit
+	display_name = "holster selection"
+	path = /obj/item/clothing/accessory/holster
 	allowed_roles = list("Colony Director", "Head of Personnel", "Security Officer", "Warden", "Head of Security","Detective")
 
-/datum/gear/accessory/holster/hip
-	display_name = "holster, hip"
-	path = /obj/item/clothing/accessory/holster/hip
-
-/datum/gear/accessory/holster/leg
-	display_name = "holster, leg"
-	path = /obj/item/clothing/accessory/holster/leg
-
-/datum/gear/accessory/holster/waist
-	display_name = "holster, waist"
-	path = /obj/item/clothing/accessory/holster/waist
+/datum/gear/accessory/holster/New()
+	..()
+	var/list/holsters = list()
+	for(var/holster in typesof(/obj/item/clothing/accessory/holster))
+		var/obj/item/clothing/accessory/holster/holster_type = holster
+		holsters[initial(holster_type.name)] = holster_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(holsters))
 
 /datum/gear/accessory/tie
 	display_name = "tie, black"
@@ -166,65 +162,18 @@
 	display_name = "tie, socially disgraceful"
 	path = /obj/item/clothing/accessory/horrible
 
+
 /datum/gear/accessory/scarf
-	display_name = "scarf"
+	display_name = "scarf selection"
 	path = /obj/item/clothing/accessory/scarf
 
-/datum/gear/accessory/scarf/red
-	display_name = "scarf, red"
-	path = /obj/item/clothing/accessory/scarf/red
-
-/datum/gear/accessory/scarf/green
-	display_name = "scarf, green"
-	path = /obj/item/clothing/accessory/scarf/green
-
-/datum/gear/accessory/scarf/darkblue
-	display_name = "scarf, dark blue"
-	path = /obj/item/clothing/accessory/scarf/darkblue
-
-/datum/gear/accessory/scarf/purple
-	display_name = "scarf, purple"
-	path = /obj/item/clothing/accessory/scarf/purple
-
-/datum/gear/accessory/scarf/yellow
-	display_name = "scarf, yellow"
-	path = /obj/item/clothing/accessory/scarf/yellow
-
-/datum/gear/accessory/scarf/orange
-	display_name = "scarf, orange"
-	path = /obj/item/clothing/accessory/scarf/orange
-
-/datum/gear/accessory/scarf/lightblue
-	display_name = "scarf, light blue"
-	path = /obj/item/clothing/accessory/scarf/lightblue
-
-/datum/gear/accessory/scarf/white
-	display_name = "scarf, white"
-	path = /obj/item/clothing/accessory/scarf/white
-
-/datum/gear/accessory/scarf/black
-	display_name = "scarf, black"
-	path = /obj/item/clothing/accessory/scarf/black
-
-/datum/gear/accessory/scarf/zebra
-	display_name = "scarf, zebra"
-	path = /obj/item/clothing/accessory/scarf/zebra
-
-/datum/gear/accessory/scarf/christmas
-	display_name = "scarf, christmas"
-	path = /obj/item/clothing/accessory/scarf/christmas
-
-/datum/gear/accessory/scarf/stripedred
-	display_name = "scarf, striped red"
-	path = /obj/item/clothing/accessory/stripedredscarf
-
-/datum/gear/accessory/scarf/stripedgreen
-	display_name = "scarf, striped green"
-	path = /obj/item/clothing/accessory/stripedgreenscarf
-
-/datum/gear/accessory/scarf/stripedblue
-	display_name = "scarf, striped blue"
-	path = /obj/item/clothing/accessory/stripedbluescarf
+/datum/gear/accessory/scarf/New()
+	..()
+	var/list/scarves = list()
+	for(var/scarf in typesof(/obj/item/clothing/accessory/scarf/))
+		var/obj/item/clothing/accessory/scarf/scarf_type = scarf
+		scarves[initial(scarf_type.name)] = scarf_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(scarves))
 
 /datum/gear/accessory/suitjacket
 	display_name = "suit jacket, tan"
@@ -249,6 +198,20 @@
 /datum/gear/accessory/suitvest
 	display_name = "suit vest"
 	path = /obj/item/clothing/accessory/vest
+
+/datum/gear/accessory/fannypack
+	display_name = "fannypack"
+	path = /obj/item/weapon/storage/belt/fannypack
+	cost = 2
+
+/datum/gear/accessory/fannypack/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/accessory/webbing
+	display_name = "webbing, simple"
+	path = /obj/item/clothing/accessory/storage
+	cost = 2
 
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, engineering"
@@ -280,30 +243,26 @@
 	path = /obj/item/clothing/accessory/storage/white_drop_pouches
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
 
-/datum/gear/accessory/fannypack
-	display_name = "fannypack selection"
-	cost = 2
 
-/datum/gear/accessory/fannypack/New()
+/datum/gear/accessory/webbing/New()
 	..()
-	var/list/fannys = list()
-	for(var/fanny in typesof(/obj/item/weapon/storage/belt/fannypack))
-		var/obj/item/weapon/storage/belt/fannypack/fanny_type = fanny
-		fannys[initial(fanny_type.name)] = fanny_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
-
-/datum/gear/accessory/webbing
-	display_name = "webbing, simple"
-	path = /obj/item/clothing/accessory/storage/webbing
-	cost = 2
+	var/list/webbings = list()
+	for(var/webbing in typesof(/obj/item/clothing/accessory/storage))
+		var/obj/item/clothing/accessory/storage/webbing_type = webbing
+		webbings[initial(webbing_type.name)] = webbing_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(webbings))
 
 /datum/gear/accessory/chaps
-	display_name = "chaps, brown"
+	display_name = "chaps"
 	path = /obj/item/clothing/accessory/chaps
 
-/datum/gear/accessory/chaps/black
-	display_name = "chaps, black"
-	path = /obj/item/clothing/accessory/chaps/black
+/datum/gear/accessory/chaps/New()
+	..()
+	var/list/chaps = list()
+	for(var/chap in typesof(/obj/item/clothing/accessory/chaps))
+		var/obj/item/clothing/accessory/chaps/chap_type = chap
+		chaps[initial(chap_type.name)] = chap_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(chaps))
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"
