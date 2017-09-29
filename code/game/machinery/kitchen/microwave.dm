@@ -18,6 +18,7 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0 // why the fuck is this a global
+	var/list/held_items = list()
 
 
 // see code/modules/food/recipes_microwave.dm for recipes
@@ -136,6 +137,7 @@
 		else
 			user.drop_item()
 			O.loc = src // forcemove equiv
+			held_items += O
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -198,7 +200,7 @@
 				items_measures_p[display_name] = "turnovers"
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/carpmeat))
 				items_measures[display_name] = "fillet of meat"
-				items_measures_p[display_name] = "fillets of meat"
+				items_measures_p[display_name] = "fillets of meat" // TODO: decide whether to axe this shit entirely or no
 			items_counts[display_name]++
 		for (var/O in items_counts)
 			var/N = items_counts[O]
@@ -238,7 +240,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume==0 && !(locate(/obj) in ((contents - component_parts) - circuit))) //dry run // >>>USING LOCATE
+	if (!reagents.total_volume && !(locate(/obj) in ((contents - component_parts) - circuit))) //dry run // >>>USING LOCATE
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -300,7 +302,7 @@
 	return 1
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in ((contents - component_parts) - circuit))
+	for (var/obj/O in held_items)
 		if ( \
 				!istype(O,/obj/item/weapon/reagent_containers/food) && \
 				!istype(O, /obj/item/weapon/grown) \
@@ -326,8 +328,9 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/dispose()
-	for (var/obj/O in ((contents-component_parts)-circuit))
+	for (var/obj/O in held_items)
 		O.loc = src.loc
+		held_items -= O
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
@@ -359,9 +362,9 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/fail()
-	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/burned_food = new(src)
 	var/amount = 0
-	for (var/obj/O in (((contents - ffuu) - component_parts) - circuit))
+	for (var/obj/O in held_items) // this used to be for (var/obj/O in (((contents - ffuu) - component_parts) - circuit)), painful
 		amount++
 		if (O.reagents)
 			var/id = O.reagents.get_master_reagent_id()
