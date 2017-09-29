@@ -989,7 +989,7 @@ I said no!
 
 // Cakes.
 /datum/recipe/cake
-	reagents = list("milk" = 5, "flour" = 15, "sugar" = 15, "egg" = 9)
+	reagents = list("milk" = 5, "flour" = 15, "sugar" = 15)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
 
 /datum/recipe/cake/carrot
@@ -1005,22 +1005,22 @@ I said no!
 
 /datum/recipe/cake/orange
 	fruit = list("orange" = 1)
-	reagents = list("milk" = 5, "flour" = 15, "egg" = 9, "orangejuice" = 3, "sugar" = 5)
+	reagents = list("milk" = 5, "flour" = 15, "orangejuice" = 3, "sugar" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
 
 /datum/recipe/cake/lime
 	fruit = list("lime" = 1)
-	reagents = list("milk" = 5, "flour" = 15, "egg" = 9, "limejuice" = 3, "sugar" = 5)
+	reagents = list("milk" = 5, "flour" = 15, "limejuice" = 3, "sugar" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
 
 /datum/recipe/cake/lemon
 	fruit = list("lemon" = 1)
-	reagents = list("milk" = 5, "flour" = 15, "egg" = 9, "lemonjuice" = 3, "sugar" = 5)
+	reagents = list("milk" = 5, "flour" = 15, "lemonjuice" = 3, "sugar" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
 
 /datum/recipe/cake/chocolate
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/chocolatebar)
-	reagents = list("milk" = 5, "flour" = 15, "egg" = 9, "coco" = 4, "sugar" = 5)
+	reagents = list("milk" = 5, "flour" = 15, "coco" = 4, "sugar" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 
 /datum/recipe/cake/birthday
