@@ -57,7 +57,7 @@
 	economic_modifier = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Geologist", "Physicist")
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Physicist")
 	minimal_player_age = 14
 
 /datum/job/scientist/equip(var/mob/living/carbon/human/H, var/alt_title)
