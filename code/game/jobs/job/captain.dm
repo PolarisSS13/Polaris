@@ -11,7 +11,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#1D1D4F"
-	alt_titles = list("Site Manager", "Overseer")
+	alt_titles = list("Colony Manager", "Colony Overseer", "Colony Commander", "Colony Supervisor")
 	idtype = /obj/item/weapon/card/id/gold
 	req_admin_notify = 1
 	access = list() 			//See get_access()
@@ -73,7 +73,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	supervisors = "the Colony Director"
 	selection_color = "#2F2F7F"
 	idtype = /obj/item/weapon/card/id/silver
-	alt_titles = list("Crew Resources Officer")
+	alt_titles = list("Crew Resources Officer", "Deputy Supervisor", "Deputy Director")
 	req_admin_notify = 1
 	minimal_player_age = 10
 	economic_modifier = 10
@@ -126,7 +126,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	supervisors = "command staff"
 	selection_color = "#2F2F7F"
 	idtype = /obj/item/weapon/card/id/silver
-	alt_titles = list("Command Liaison", "Bridge Secretary")
+	alt_titles = list("Command Liaison", "Bridge Secretary", "Administrative Assistant") // That's all you are. A glorified but worthless assistant. :-)
 	minimal_player_age = 5
 	economic_modifier = 7
 
