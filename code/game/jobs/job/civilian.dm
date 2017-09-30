@@ -212,7 +212,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
-	alt_titles = list("Custodian", "Sanitation Technician", "Caretaker", "Maid")
+	alt_titles = list("Custodian", "Sanitation Technician", "Maid")
 
 
 /datum/job/janitor/equip(var/mob/living/carbon/human/H, var/alt_title)
