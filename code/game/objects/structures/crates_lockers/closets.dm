@@ -8,8 +8,8 @@
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
-	var/welded = 0
-	var/use_screwdriver = 0	//If 1, you use a screwdriver to seal the closet
+	var/sealed = 0
+	var/seal_tool = /obj/item/weapon/weldingtool	//Tool used to seal the closet, defaults to welder
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
 
@@ -49,7 +49,7 @@
 			content_size += Ceiling(I.w_class/2)
 		if(content_size > storage_capacity-5)
 			storage_capacity = content_size + 5
-
+	update_icon()
 
 /obj/structure/closet/examine(mob/user)
 	if(..(user, 1) && !opened)
@@ -73,7 +73,7 @@
 	return (!density)
 
 /obj/structure/closet/proc/can_open()
-	if(src.welded)
+	if(src.sealed)
 		return 0
 	return 1
 
@@ -81,7 +81,8 @@
 	var/closet_count = 0
 	for(var/obj/structure/closet/closet in get_turf(src))
 		if(closet != src)
-			closet_count ++
+			if(!closet.anchored)
+				closet_count ++
 	if(closet_count > max_closets)
 		return 0
 	return 1
@@ -112,7 +113,7 @@
 	src.icon_state = src.icon_opened
 	src.opened = 1
 	playsound(src.loc, open_sound, 15, 1, -3)
-	density = 0
+	density = !density
 	return 1
 
 /obj/structure/closet/proc/close()
@@ -136,7 +137,7 @@
 	src.opened = 0
 
 	playsound(src.loc, close_sound, 15, 1, -3)
-	density = 1
+	density = !density
 	return 1
 
 //Cham Projector Exception
@@ -180,6 +181,8 @@
 		if(C == src)	//Don't store ourself
 			continue
 		if(C.anchored)	//Don't worry about anchored things on the same tile
+			continue
+		if(C.store_closets)	//Prevents recursive storage
 			continue
 		if(stored_units + added_units + storage_cost > storage_capacity)
 			break
@@ -271,35 +274,25 @@
 			W.forceMove(src.loc)
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
-	else if(istype(W, /obj/item/weapon/weldingtool))
-		if(use_screwdriver)
-			to_chat(user, "<span class='warning'>That's is the wrong tool for the job.</span>")
-			return
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.remove_fuel(0,user))
-			if(!WT.isOn())
-				return
-			else
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
-		if(do_after(user, 20 * W.toolspeed))
-			playsound(src, WT.usesound, 50)
-			src.welded = !src.welded
-			src.update_icon()
-			for(var/mob/M in viewers(src))
-				M.show_message("<span class='warning'>[src] has been [welded?"welded shut":"unwelded"] by [user.name].</span>", 3, "You hear welding.", 2)
-	else if(istype(W, /obj/item/weapon/screwdriver))
-		if(!use_screwdriver)
-			to_chat(user, "<span class='warning'>That's is the wrong tool for the job.</span>")
-			return
-		if(do_after(user, 20 * W.toolspeed))
-			playsound(src, W.usesound, 50)
-			src.welded = !src.welded
-			src.update_icon()
-			for(var/mob/M in viewers(src))
-				M.show_message("<span class='warning'>[src] has been [welded?"sealed":"unsealed"] by [user.name].</span>", 3, "You hear screws turning.", 2)
+	else if(seal_tool)
+		if(istype(W, seal_tool))
+			var/obj/item/weapon/S = W
+			if(istype(S, /obj/item/weapon/weldingtool))
+				var/obj/item/weapon/weldingtool/WT = S
+				if(!WT.remove_fuel(0,user))
+					if(!WT.isOn())
+						return
+					else
+						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+						return
+			if(do_after(user, 20 * S.toolspeed))
+				playsound(src, S.usesound, 50)
+				src.sealed = !src.sealed
+				src.update_icon()
+				for(var/mob/M in viewers(src))
+					M.show_message("<span class='warning'>[src] has been [sealed?"sealed":"unsealed"] by [user.name].</span>", 3)
 	else if(istype(W, /obj/item/weapon/wrench))
-		if(welded)
+		if(sealed)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 			else
@@ -369,12 +362,12 @@
 	else
 		to_chat(usr, "<span class='warning'>This mob type can't use this verb.</span>")
 
-/obj/structure/closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
+/obj/structure/closet/update_icon()//Putting the sealed stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
 	if(!opened)
 		icon_state = icon_closed
-		if(welded)
-			overlays += "welded"
+		if(sealed)
+			overlays += "sealed"
 	else
 		icon_state = icon_opened
 
@@ -390,8 +383,8 @@
 /obj/structure/closet/proc/req_breakout()
 	if(opened)
 		return 0 //Door's open... wait, why are you in it's contents then?
-	if(!welded)
-		return 0 //closed but not welded...
+	if(!sealed)
+		return 0 //closed but not sealed...
 	return 1
 
 /obj/structure/closet/proc/mob_breakout(var/mob/living/escapee)
@@ -401,7 +394,7 @@
 
 	escapee.setClickCooldown(100)
 
-	//okay, so the closet is either welded or locked... resist!!!
+	//okay, so the closet is either sealed or locked... resist!!!
 	to_chat(escapee, "<span class='warning'>You lean on the back of \the [src] and start pushing the door open. (this will take about [breakout_time] minutes)</span>")
 
 	visible_message("<span class='danger'>\The [src] begins to shake violently!</span>")
@@ -432,7 +425,7 @@
 	animate_shake()
 
 /obj/structure/closet/proc/break_open()
-	welded = 0
+	sealed = 0
 	update_icon()
 	//Do this to prevent contents from being opened into nullspace (read: bluespace)
 	if(istype(loc, /obj/structure/bigDelivery))
@@ -450,7 +443,7 @@
 	return
 
 /obj/structure/closet/return_air_for_internal_lifeform(var/mob/living/L)
-	var/mob/living/internal = L
-	if(!isturf(loc))
-		return loc.return_air_for_internal_lifeform(internal)
-	..()
+	if(src.loc)
+		if(istype(src.loc, /obj/structure/closet))
+			return (loc.return_air_for_internal_lifeform(L))
+	return return_air()

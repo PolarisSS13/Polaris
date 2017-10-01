@@ -89,7 +89,7 @@
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
 	else if(istype(W, /obj/item/weapon/wrench))
-		if(welded)
+		if(sealed)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 			else
@@ -141,7 +141,7 @@
 	else
 		usr << "<span class='warning'>This mob type can't use this verb.</span>"
 
-/obj/structure/closet/secure_closet/update_icon()//Putting the welded stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
+/obj/structure/closet/secure_closet/update_icon()//Putting the sealed stuff in updateicon() so it's easy to overwrite for special cases (Fridges, cabinets, and whatnot)
 	overlays.Cut()
 
 	if(!opened)
@@ -151,8 +151,8 @@
 			icon_state = icon_locked
 		else
 			icon_state = icon_closed
-		if(welded)
-			overlays += "welded"
+		if(sealed)
+			overlays += "sealed"
 	else
 		icon_state = icon_opened
 

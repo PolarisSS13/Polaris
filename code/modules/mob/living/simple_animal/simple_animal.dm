@@ -317,7 +317,7 @@
 		//Resisting out of closets
 		if(istype(loc,/obj/structure/closet))
 			var/obj/structure/closet/C = loc
-			if(C.welded)
+			if(C.sealed)
 				resist()
 			else
 				C.open()
