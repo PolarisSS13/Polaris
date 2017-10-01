@@ -14,7 +14,7 @@
 	description_fluff = "Stealth Assault Enterprises ex-contractors once decided to make a cigarette that was easy to light and had a waterproof case, specifically tailored for soldiers.  They created Jerichos.  Jerichos are known for their hickory smoke and warm feeling in your lungs.  They are loved by soldiers and people employed in para-military outfits."
 
 /obj/item/weapon/storage/fancy/cigarettes/menthols
-	description_fluff = "The Temperamento Menthol Company is a large cigarette company based in Mars.  They have been around since the very dawn of Human colonization and have remained a favorite for those seeking a more.. numbing cigarette.<br>\
+	description_fluff = "The Temperamento Menthol Company is a large cigarette company based in Mars.  They have been around since the very dawn of human colonization and have remained a favorite for those seeking a more numbing cigarette.<br>\
 	<br>\
 	This is a pack of Temperamento Menthols, the main product of the company.  They taste like menthol, surprisingly enough."
 
