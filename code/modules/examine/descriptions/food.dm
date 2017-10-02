@@ -26,7 +26,7 @@
   description_fluff = "Originally Raisin Blend no. 4, 4noraisins obtained their current name in the Skadi Positronic Exclusion Crisis of 2442, where they were rebranded as part of the protests." //the exclusion crisis, presumably, involved positronic immigration being banned for no raisin
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
-  description_fluff = "Space Twinkies, a modification of a flagship product of one of Centauri Provision's predecessor corporations, are designed to withstand vacume, radiation, dehydration, and long periods of acceleration without losing their shape or taste. They're not great, but they have earned their names (and enormous revenue for their parent company)."
+  description_fluff = "Space Twinkies, a modification of a flagship product of one of Centauri Provision's predecessor corporations, are designed to withstand vacuum, radiation, dehydration, and long periods of acceleration without losing their shape or taste. They're not great, but they have earned their names (and enormous revenue for their parent company)."
   
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
   description_fluff = "Cheesie Honkers, a previously niche line of cheese puffs from a subsidiary of a subsidiary of Centauri Provisions, rose to household-name status when their tell-tale orange dust was used as evidence to convict notorious positronic serial killer Etoid in 2404."
