@@ -1,7 +1,4 @@
 /obj/item/weapon/reagent_containers/food/snacks/candy
-  description_fluff = 
-
-/obj/item/weapon/reagent_containers/food/snacks/candy
   description_fluff = "The Candy Bar is a copylefted recipe designed by information freedom activists to bring the delicious taste of nougat to the masses. It's cheap, familiar, and easy to synthesize, so most food vendors stock it."
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
