@@ -2,7 +2,7 @@
   description_fluff = "The Candy Bar is a copylefted recipe designed by information freedom activists to bring the delicious taste of nougat to the masses. It's cheap, familiar, and easy to synthesize, so most food vendors stock it."
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
-	description_fluff = "The SWOLEMAX protien bar is the flagship product of SWOLEMAX, a health foods corporation recently independent of Centauri Provisions. It tastes like a brick of ashes."
+  description_fluff = "The SWOLEMAX protien bar is the flagship product of SWOLEMAX, a health foods corporation recently independent of Centauri Provisions. It tastes like a brick of ashes."
 
 /obj/item/weapon/reagent_containers/food/snacks/candy_corn
   description_fluff = "Nobody knows why Nanotrasen keeps making these waxy pieces of sugar and bone glue, but a handful of people swear by them. Purportedly popular with Skrell children, dubiously enough."
@@ -43,7 +43,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
   description_fluff = "This is the product that brought Centauri Provisions into the limelight. A product of the earliest extrasolar colony of Heaven, the Bread Tube, while bland, contains all the nutrients a spacer needs to get through the day and is decidedly edible when compared to some of its competitors."
   
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks // fix proper desc too
+/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
   description_fluff = "A jerky product made of Go'moa mushrooms native to the Skrellian homeworld of Qerr'balak. SkrellSnaks are actually a product of Natuna, designed to welcome Ue-Katish refugees to their colony. The brand was recreated by Centauri Provisions after Natuna and SolGov broke off diplomatic relations."
   
 /obj/item/weapon/reagent_containers/food/snacks/unajerky
