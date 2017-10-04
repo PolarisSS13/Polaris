@@ -805,5 +805,36 @@ var/list/ai_verbs_hidden = list( // For why this exists, refer to https://xkcd.c
 		src << "Extra verbs toggled on."
 		verbs |= ai_verbs_hidden
 
+/mob/living/silicon/ai/ghost()
+	set category = "OOC"
+	set name = "Ghost"
+	set desc = "Relinquish your life and enter the land of the dead."
+
+	if(stat == DEAD && !forbid_seeing_deadchat)
+		announce_ghost_joinleave(ghostize(1))
+	else
+		var/response
+		if(src.client && src.client.holder)
+			response = alert(src, "You have the ability to Admin-Ghost. The regular Ghost verb will announce your presence to dead chat. Both variants will allow you to return to your body using 'aghost'.\n\nWhat do you wish to do?", "Are you sure you want to ghost?", "Ghost", "Admin Ghost", "Stay in body")
+			if(response == "Admin Ghost")
+				if(!src.client)
+					return
+				src.client.admin_ghost()
+		else
+			response = alert(src, "Are you -sure- you want to ghost?\n(You are alive, or otherwise have the potential to become alive. If you ghost, you won't be able to play this round until you respawn as a new character! You can't change your mind so choose wisely!)", "Are you sure you want to ghost?", "Ghost", "Stay in body")
+		if(response != "Ghost")
+			return
+		resting = 1
+		var/turf/location = get_turf(src)
+		message_admins("[key_name_admin(usr)] has ghosted. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
+		log_game("[key_name_admin(usr)] has ghosted.")
+		var/mob/observer/dead/ghost = ghostize(0)	//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
+		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
+		announce_ghost_joinleave(ghost)
+
+		empty_playable_ai_cores += new /obj/structure/AIcore/deactivated(loc)
+		global_announcer.autosay("[src] has been moved to intelligence storage.", "Artificial Intelligence Oversight")
+		clear_client()
+
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
