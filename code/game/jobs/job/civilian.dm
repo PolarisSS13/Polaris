@@ -66,7 +66,7 @@
 
 
 /datum/job/hydro
-	title = "Gardener"
+	title = "Botanist"
 	flag = BOTANIST
 	department = "Civilian"
 	department_flag = CIVILIAN
@@ -78,7 +78,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
-	alt_titles = list("Hydroponicist")
+	alt_titles = list("Hydroponicist", "Gardener")
 
 
 /datum/job/hydro/equip(var/mob/living/carbon/human/H, var/alt_title)
