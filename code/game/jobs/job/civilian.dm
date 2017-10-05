@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
-	alt_titles = list("Barista")
+	alt_titles = list("Barista", "Barkeeper")
 
 
 /datum/job/bartender/equip(var/mob/living/carbon/human/H, var/alt_title)
@@ -66,7 +66,7 @@
 
 
 /datum/job/hydro
-	title = "Gardener"
+	title = "Botanist"
 	flag = BOTANIST
 	department = "Civilian"
 	department_flag = CIVILIAN
@@ -78,7 +78,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
-	alt_titles = list("Hydroponicist")
+	alt_titles = list("Hydroponicist", "Gardener")
 
 
 /datum/job/hydro/equip(var/mob/living/carbon/human/H, var/alt_title)
@@ -114,7 +114,7 @@
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
-	alt_titles = list("Supply Chief")
+	alt_titles = list("Supply Chief", "Logistics Manager")
 
 	ideal_character_age = 40
 
@@ -145,6 +145,7 @@
 	idtype = /obj/item/weapon/card/id/cargo
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+	alt_titles = list("Cargo Courier")
 
 /datum/job/cargo_tech/equip(var/mob/living/carbon/human/H, var/alt_title)
 	if(!H)	return 0
@@ -211,7 +212,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
-	alt_titles = list("Custodian", "Sanitation Technician")
+	alt_titles = list("Custodian", "Sanitation Technician", "Maid")
 
 
 /datum/job/janitor/equip(var/mob/living/carbon/human/H, var/alt_title)

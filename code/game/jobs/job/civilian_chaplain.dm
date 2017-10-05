@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
+	alt_titles = list("Counselor", "Cleric")
 
 
 /datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)

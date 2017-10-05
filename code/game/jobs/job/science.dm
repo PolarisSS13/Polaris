@@ -20,7 +20,7 @@
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
-	alt_titles = list("Research Supervisor")
+	alt_titles = list("Research Supervisor", "Head of Research")
 
 	minimum_character_age = 25
 	minimal_player_age = 14
@@ -57,8 +57,7 @@
 	economic_modifier = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
-
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher", "Physicist")
 	minimal_player_age = 14
 
 /datum/job/scientist/equip(var/mob/living/carbon/human/H, var/alt_title)
@@ -121,7 +120,7 @@
 	economic_modifier = 5
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
-	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+	alt_titles = list("Biomechanical Engineer", "Mechatronic Engineer", "Prosthesis Technician")
 
 	minimal_player_age = 7
 
