@@ -232,7 +232,7 @@ datum/weather/sif
 			if(!T.outdoors)
 				return // They're indoors, so no need to rain on them.
 
-			L.adjust_fire_stacks(-5)
+			L.water_act(1)
 			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
 
 /datum/weather/sif/storm
@@ -255,7 +255,7 @@ datum/weather/sif
 			if(!T.outdoors)
 				return // They're indoors, so no need to rain on them.
 
-			L.adjust_fire_stacks(-10)
+			L.water_act(2)
 			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
 
 /datum/weather/sif/hail
