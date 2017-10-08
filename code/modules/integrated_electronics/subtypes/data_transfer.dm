@@ -102,3 +102,50 @@
 	icon_state = "dmux16"
 	w_class = ITEMSIZE_SMALL
 	number_of_outputs = 16
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer
+	name = "two pulse demultiplexer"
+	desc = "Selector switch to choose the pin to be activated by number."
+	extended_desc = "The first input pin is used to select which of the pulse out pins will be activated after activation of the circuit. \
+	If the output selection is outside the valid range then no output is given."
+	complexity = 2
+	icon_state = "dmux2"
+	inputs = list("output selection" = IC_PINTYPE_NUMBER)
+	outputs = list()
+	activators = list("select" = IC_PINTYPE_PULSE_IN)
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	power_draw_per_use = 4
+	var/number_of_outputs = 2
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer/New()
+	for(var/i = 1 to number_of_outputs)
+	//	outputs += "output [i]"
+		activators["output [i]"] = IC_PINTYPE_PULSE_OUT
+	complexity = number_of_outputs
+
+	..()
+	desc += " It has [number_of_outputs] output pins."
+	extended_desc += " This pulse demultiplexer has a range from 1 to [activators.len - 1]."
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer/do_work()
+	var/output_index = get_pin_data(IC_INPUT, 1)
+
+	if(output_index == Clamp(output_index, 1, number_of_outputs))
+		activate_pin(round(output_index + 1 ,1))
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer/medium
+	name = "four pulse demultiplexer"
+	icon_state = "dmux4"
+	number_of_outputs = 4
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer/large
+	name = "eight pulse demultiplexer"
+	icon_state = "dmux8"
+	w_class = ITEMSIZE_SMALL
+	number_of_outputs = 8
+
+/obj/item/integrated_circuit/transfer/pulsedemultiplexer/huge
+	name = "sixteen pulse demultiplexer"
+	icon_state = "dmux16"
+	w_class = ITEMSIZE_SMALL
+	number_of_outputs = 16

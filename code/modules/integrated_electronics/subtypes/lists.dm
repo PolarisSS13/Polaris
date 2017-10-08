@@ -52,12 +52,119 @@
 	push_data()
 	activate_pin(2)
 
+/obj/item/integrated_circuit/list/search
+	name = "search circuit"
+	desc = "This circuit will give index of desired element in the list."
+	extended_desc = "Search will start at 1 position and will return first matching position"
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		"item" = IC_PINTYPE_ANY
+	)
+	outputs = list(
+		"index" = IC_PINTYPE_NUMBER
+	)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/list/search/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/item = get_pin_data(IC_INPUT, 2)
+	set_pin_data(IC_OUTPUT, 1, input_list.Find(item))
+	push_data()
+	activate_pin(2)
+
+/obj/item/integrated_circuit/list/at
+	name = "at circuit"
+	desc = "This circuit will pick element from the list by number"
+	extended_desc = "If there is no element with such number, result will be null"
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		"index" = IC_PINTYPE_NUMBER
+	)
+	outputs = list("item" = IC_PINTYPE_ANY)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/list/at/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/index = get_pin_data(IC_INPUT, 2)
+	var/item = input_list[index]
+	set_pin_data(IC_OUTPUT, 1, item)
+	push_data()
+	activate_pin(2)
+
+/obj/item/integrated_circuit/list/delete
+	name = "delete circuit"
+	desc = "This circuit will pick element from the list by number"
+	extended_desc = "If there is no element with such number, result will be null"
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		"index" = IC_PINTYPE_NUMBER
+	)
+	outputs = list(
+		"item" = IC_PINTYPE_LIST
+	)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/list/delete/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/index = get_pin_data(IC_INPUT, 2)
+	var/list/red_list = input_list.Cut(Start=index,End=index)
+	set_pin_data(IC_OUTPUT, 1, red_list)
+	push_data()
+	activate_pin(2)
+
+/obj/item/integrated_circuit/list/write
+	name = "write circuit"
+	desc = "This circuit will write element in list with given index"
+	extended_desc = "If there is no element with such index,it will give the same list,as before."
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		"index" = IC_PINTYPE_NUMBER,
+		"item" = IC_PINTYPE_ANY
+	)
+	outputs = list(
+		"redacted list" = IC_PINTYPE_LIST
+	)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/list/write/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/index = get_pin_data(IC_INPUT, 2)
+	var/item = get_pin_data(IC_INPUT, 3)
+	input_list[index] = item
+	set_pin_data(IC_OUTPUT, 1, input_list)
+	push_data()
+	activate_pin(2)
+
+obj/item/integrated_circuit/list/len
+	name = "len circuit"
+	desc = "This circuit will give lenght of the list"
+	extended_desc = "selfdescriptive"
+	inputs = list(
+		"list" = IC_PINTYPE_LIST,
+		)
+	outputs = list(
+		"item" = IC_PINTYPE_NUMBER
+	)
+	icon_state = "addition"
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/list/len/do_work()
+	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	set_pin_data(IC_OUTPUT, 1, input_list.len)
+	push_data()
+	activate_pin(2)
+
+
 /obj/item/integrated_circuit/list/jointext
 	name = "join text circuit"
 	desc = "This circuit will add all elements of a list into one string, seperated by a character."
 	extended_desc = "Default settings will encode the entire list into a string."
 	inputs = list(
-		"list to join" = IC_PINTYPE_LIST,
+		"list to join" = IC_PINTYPE_LIST,//
 		"delimiter" = IC_PINTYPE_CHAR,
 		"start" = IC_PINTYPE_NUMBER,
 		"end" = IC_PINTYPE_NUMBER

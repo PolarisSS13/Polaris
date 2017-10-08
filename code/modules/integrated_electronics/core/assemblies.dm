@@ -1,5 +1,5 @@
-#define IC_COMPONENTS_BASE		20
-#define IC_COMPLEXITY_BASE		60
+#define IC_COMPONENTS_BASE		25
+#define IC_COMPLEXITY_BASE		75
 
 /obj/item/device/electronic_assembly
 	name = "electronic assembly"
@@ -29,14 +29,35 @@
 	w_class = ITEMSIZE_LARGE
 	max_components = IC_COMPONENTS_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
+	anchored = 0
+
+/obj/item/device/electronic_assembly/large/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(istype(O, /obj/item/weapon/wrench))
+		if(!istype(src.loc,/turf))
+			return
+		src.anchored = !anchored
+		user << "You [src.anchored ? "wrench" : "unwrench"] \the [src]."
+		return
+	..()
+
+/obj/item/device/electronic_assembly/large/attack_tk(mob/user as mob)
+	if(anchored)
+		return
+	..()
+
+/obj/item/device/electronic_assembly/large/attack_hand(mob/user as mob)
+	if(anchored)
+		src.attack_self(user)
+		return
+	..()
 
 /obj/item/device/electronic_assembly/drone
 	name = "electronic drone"
 	icon_state = "setup_drone"
 	desc = "It's a case, for building mobile electronics with."
 	w_class = ITEMSIZE_NORMAL
-	max_components = IC_COMPONENTS_BASE * 1.5
-	max_complexity = IC_COMPLEXITY_BASE * 1.5
+	max_components = IC_COMPONENTS_BASE * 3
+	max_complexity = IC_COMPLEXITY_BASE * 3
 
 /obj/item/device/electronic_assembly/implant
 	name = "electronic implant"
