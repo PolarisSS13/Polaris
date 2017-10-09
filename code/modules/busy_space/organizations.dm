@@ -169,6 +169,7 @@
 	motto = ""
 
 	ship_prefixes = list("VTV" = "transportation", "VMV" = "medical resupply")
+	// Diona names
 	ship_names = list(
 		"Wind That Stirs The Waves",
 		"Sustained Note Of Metal",
