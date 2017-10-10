@@ -492,8 +492,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/new_player/M in sortmob)
 		moblist.Add(M)
-	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
 	for(var/mob/living/simple_animal/M in sortmob)
 		moblist.Add(M)
 //	for(var/mob/living/silicon/hivebot/M in world)
@@ -1293,6 +1291,13 @@ var/mob/dview/dview_mob = new
 		dead_mob_list -= src
 	else
 		living_mob_list -= src
+
+/mob/dview/Destroy(var/force)
+	crash_with("Attempt to delete the dview_mob: [log_info_line(src)]")
+	if (!force)
+		return QDEL_HINT_LETMELIVE
+	global.dview_mob = new
+	return ..()
 
 // call to generate a stack trace and print to runtime logs
 /proc/crash_with(msg)

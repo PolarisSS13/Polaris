@@ -22,20 +22,15 @@ var/global/repository/radiation/radiation_repository = new()
 	src.source_turf = null
 	. = ..()
 
-// TEMPORARY HACK - hard del()'ing sources is too expensive!  Until we implement qdel() hints we need to override behavior here
-/datum/radiation_source/finalize_qdel()
-	if(garbage_collector)
-		garbage_collector.AddTrash(src)
-	else
-		delayed_garbage |= src
-// TEMPORARY HACK END
-
 /datum/radiation_source/proc/update_rad_power(var/new_power = null)
-	if(new_power != null && new_power != rad_power)
+	if(new_power == null || new_power == rad_power)
+		return // No change
+	else if(new_power <= 0)
+		qdel(src) // Decayed to nothing
+	else
 		rad_power = new_power
-		. = 1
-	if(. && !flat)
-		range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
+		if(!flat)
+			range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
 
 // Ray trace from all active radiation sources to T and return the strongest effect.
 /repository/radiation/proc/get_rads_at_turf(var/turf/T)
@@ -46,6 +41,8 @@ var/global/repository/radiation/radiation_repository = new()
 		var/datum/radiation_source/source = value
 		if(source.rad_power < .)
 			continue // Already being affected by a stronger source
+		if(source.source_turf.z != T.z)
+			continue // Radiation is not multi-z
 		var/dist = get_dist(source.source_turf, T)
 		if(dist > source.range)
 			continue // Too far to possibly affect
@@ -71,6 +68,8 @@ var/global/repository/radiation/radiation_repository = new()
 
 // Add a radiation source instance to the repository.  It will override any existing source on the same turf.
 /repository/radiation/proc/add_source(var/datum/radiation_source/S)
+	if(!isturf(S.source_turf))
+		return
 	var/datum/radiation_source/existing = sources_assoc[S.source_turf]
 	if(existing)
 		qdel(existing)

@@ -57,7 +57,7 @@
 		//closing the doors on red and opening on green provides a bit of hysteresis that will hopefully prevent fire doors from opening and closing repeatedly due to noise
 		if (danger_level < 1 || danger_level >= 2)
 			firedoors_update()
-		
+
 		for (var/obj/machinery/alarm/AA in src)
 			AA.update_icon()
 
@@ -75,6 +75,8 @@
 /area/proc/firedoors_close()
 	if(!firedoors_closed)
 		firedoors_closed = TRUE
+		if(!all_doors)
+			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
@@ -87,6 +89,8 @@
 /area/proc/firedoors_open()
 	if(firedoors_closed)
 		firedoors_closed = FALSE
+		if(!all_doors)
+			return
 		for(var/obj/machinery/door/firedoor/E in all_doors)
 			if(!E.blocked)
 				if(E.operating)
@@ -270,7 +274,7 @@ var/list/mob/living/forced_ambiance_list = new
 			return // Being buckled to something solid keeps you in place.
 		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 			return
-		
+
 		if(H.m_intent == "run")
 			H.AdjustStunned(6)
 			H.AdjustWeakened(6)
@@ -278,6 +282,7 @@ var/list/mob/living/forced_ambiance_list = new
 			H.AdjustStunned(3)
 			H.AdjustWeakened(3)
 		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
+		playsound(get_turf(src), "bodyfall", 50, 1)
 
 /area/proc/prison_break()
 	var/obj/machinery/power/apc/theAPC = get_apc()

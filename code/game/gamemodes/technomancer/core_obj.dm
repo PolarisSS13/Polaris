@@ -43,7 +43,7 @@
 /obj/item/weapon/technomancer_core/Destroy()
 	dismiss_all_summons()
 	processing_objects.Remove(src)
-	..()
+	return ..()
 
 // Add the spell buttons to the HUD.
 /obj/item/weapon/technomancer_core/equipped(mob/user)
@@ -170,7 +170,8 @@
 	if(core && statpanel("Spell Core"))
 		var/charge_status = "[core.energy]/[core.max_energy] ([round( (core.energy / core.max_energy) * 100)]%) \
 		([round(core.energy_delta)]/s)"
-		var/instability_status = "[src.instability]"
+		var/instability_delta = instability - last_instability
+		var/instability_status = "[src.instability] ([round(instability_delta, 0.1)]/s)"
 		stat("Core charge", charge_status)
 		stat("User instability", instability_status)
 		for(var/obj/spellbutton/button in core.spells)

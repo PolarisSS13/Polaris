@@ -18,6 +18,7 @@
 	var/mind=null
 	var/languages=null
 	var/list/flavor=null
+	var/list/genetic_modifiers = list() // Modifiers with the MODIFIER_GENETIC flag are saved.  Note that only the type is saved, not an instance.
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
@@ -91,6 +92,11 @@
 	if(!occupant)
 		for(var/mob/M in src)//Failsafe so you can get mobs out
 			M.loc = get_turf(src)
+
+/obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to clone people without external assistance
+	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
+		return
+	put_in(target)
 
 /obj/machinery/dna_scannernew/verb/move_inside()
 	set src in oview(1)

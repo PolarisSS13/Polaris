@@ -160,7 +160,7 @@
 
 /obj/machinery/artifact/attack_hand(var/mob/user as mob)
 	if (get_dist(user, src) > 1)
-		user << "\red You can't reach [src] from here."
+		user << "<font color='red'>You can't reach [src] from here.</font>"
 		return
 	if(ishuman(user) && user:gloves)
 		user << "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
@@ -259,8 +259,7 @@
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
-	if(istype(P,/obj/item/projectile/bullet) ||\
-		istype(P,/obj/item/projectile/hivebotbullet))
+	if(istype(P,/obj/item/projectile/bullet))
 		if(my_effect.trigger == TRIGGER_FORCE)
 			my_effect.ToggleActivate()
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_FORCE && prob(25))

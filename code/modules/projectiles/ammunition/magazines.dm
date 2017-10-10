@@ -30,7 +30,7 @@
 	name = "speedloader (.357)"
 	desc = "A speedloader for .357 revolvers."
 	icon_state = "38"
-	caliber = "357"
+	caliber = ".357"
 	ammo_type = /obj/item/ammo_casing/a357
 	matter = list(DEFAULT_WALL_MATERIAL = 1260)
 	max_ammo = 6
@@ -288,121 +288,121 @@
 	name = "ammunition box (10mm haywire)"
 	ammo_type = /obj/item/ammo_casing/a10mm/emp
 
-///////// 5.56mm /////////
+///////// 5.45mm /////////
 
-/obj/item/ammo_magazine/m556
-	name = "magazine (5.56mm)"
-	icon_state = "m556"
+/obj/item/ammo_magazine/m545
+	name = "magazine (5.45mm)"
+	icon_state = "m545"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "5.56mm"
+	caliber = "5.45mm"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
-	ammo_type = /obj/item/ammo_casing/a556
+	ammo_type = /obj/item/ammo_casing/a545
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m556/ext
-	name = "extended magazine (5.56mm)"
+/obj/item/ammo_magazine/m545/ext
+	name = "extended magazine (5.45mm)"
 	matter = list(DEFAULT_WALL_MATERIAL = 2700)
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m556/empty
+/obj/item/ammo_magazine/m545/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m556/ext/empty
+/obj/item/ammo_magazine/m545/ext/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m556/practice
-	name = "magazine (5.56mm practice)"
-	ammo_type = /obj/item/ammo_casing/a556p
+/obj/item/ammo_magazine/m545/practice
+	name = "magazine (5.45mm practice)"
+	ammo_type = /obj/item/ammo_casing/a545p
 
-/obj/item/ammo_magazine/m556/practice/ext
-	name = "extended magazine (5.56mm practice)"
+/obj/item/ammo_magazine/m545/practice/ext
+	name = "extended magazine (5.45mm practice)"
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m556/ap
-	name = "magazine (5.56mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a556/ap
+/obj/item/ammo_magazine/m545/ap
+	name = "magazine (5.45mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a545/ap
 
-/obj/item/ammo_magazine/m556/ap/ext
-	name = "extended magazine (5.56mm armor-piercing)"
+/obj/item/ammo_magazine/m545/ap/ext
+	name = "extended magazine (5.45mm armor-piercing)"
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m556/small
-	name = "reduced magazine (5.56mm)"
-	icon_state = "m556-small"
+/obj/item/ammo_magazine/m545/small
+	name = "reduced magazine (5.45mm)"
+	icon_state = "m545-small"
 	matter = list(DEFAULT_WALL_MATERIAL = 900)
 	max_ammo = 10
 
-/obj/item/ammo_magazine/m556/small/empty
+/obj/item/ammo_magazine/m545/small/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m556/small/practice
-	name = "magazine (5.56mm practice)"
-	ammo_type = /obj/item/ammo_casing/a556p
+/obj/item/ammo_magazine/m545/small/practice
+	name = "magazine (5.45mm practice)"
+	ammo_type = /obj/item/ammo_casing/a545p
 
-/obj/item/ammo_magazine/m556/small/ap
-	name = "magazine (5.56mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a556/ap
+/obj/item/ammo_magazine/m545/small/ap
+	name = "magazine (5.45mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a545/ap
 
-/obj/item/ammo_magazine/clip/c556
-	name = "ammo clip (5.56mm)"
+/obj/item/ammo_magazine/clip/c545
+	name = "ammo clip (5.45mm)"
 	icon_state = "clip_rifle"
-	caliber = "5.56mm"
-	ammo_type = /obj/item/ammo_casing/a556
+	caliber = "5.45mm"
+	ammo_type = /obj/item/ammo_casing/a545
 	matter = list(DEFAULT_WALL_MATERIAL = 450) // metal costs are very roughly based around one 10mm casing = 180 metal
 	max_ammo = 5
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/clip/c556/ap
-	name = "rifle clip (5.56mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a556/ap
+/obj/item/ammo_magazine/clip/c545/ap
+	name = "rifle clip (5.45mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a545/ap
 
-/obj/item/ammo_magazine/clip/c556/practice
-	name = "rifle clip (5.56mm practice)"
-	ammo_type = /obj/item/ammo_casing/a556
+/obj/item/ammo_magazine/clip/c545/practice
+	name = "rifle clip (5.45mm practice)"
+	ammo_type = /obj/item/ammo_casing/a545
 
-/obj/item/ammo_magazine/m556saw
-	name = "magazine box (5.56mm)"
-	icon_state = "a556"
+/obj/item/ammo_magazine/m545saw
+	name = "magazine box (5.45mm)"
+	icon_state = "a545"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "5.56mm"
+	caliber = "5.45mm"
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
-	ammo_type = /obj/item/ammo_casing/a556
+	ammo_type = /obj/item/ammo_casing/a545
 	w_class = ITEMSIZE_NORMAL // This should NOT fit in your pocket!!
 	max_ammo = 50
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m556saw/ap
-	name = "magazine box (5.56mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a556/ap
+/obj/item/ammo_magazine/m545saw/ap
+	name = "magazine box (5.45mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a545/ap
 
-/obj/item/ammo_magazine/m556saw/empty
+/obj/item/ammo_magazine/m545saw/empty
 	initial_ammo = 0
 
-///////// .50 AE /////////
+///////// .44 Magnum /////////
 
-/obj/item/ammo_magazine/m50
-	name = "magazine (.50 AE)"
-	icon_state = "50ae"
+/obj/item/ammo_magazine/m44
+	name = "magazine (.44)"
+	icon_state = "44"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = ".50AE"
+	caliber = ".44"
 	matter = list(DEFAULT_WALL_MATERIAL = 1260)
-	ammo_type = /obj/item/ammo_casing/a50ae
+	ammo_type = /obj/item/ammo_casing/a44
 	max_ammo = 7
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m50/empty
+/obj/item/ammo_magazine/m44/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/clip/c50
-	name = "ammo clip (.50 AE)"
+/obj/item/ammo_magazine/clip/c44
+	name = "ammo clip (.44)"
 	icon_state = "clip_pistol"
-	desc = "A stripper clip for reloading .50 Action Express rounds into magazines."
-	caliber = ".50AE"
-	ammo_type = /obj/item/ammo_casing/a50ae
+	desc = "A stripper clip for reloading .44 rounds into magazines."
+	caliber = ".44"
+	ammo_type = /obj/item/ammo_casing/a44
 	matter = list(DEFAULT_WALL_MATERIAL = 1620) // metal costs are very roughly based around one .50 casing = 180 metal
 	max_ammo = 9
 	multiple_sprites = 1
@@ -443,6 +443,23 @@
 /obj/item/ammo_magazine/m762m/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/m762garand
+	name = "garand clip (7.62mm)" // The clip goes into the magazine, hence the name. I'm very sure this is correct.
+	icon_state = "gclip"
+	mag_type = MAGAZINE
+	caliber = "7.62mm"
+	matter = list(DEFAULT_WALL_MATERIAL = 1600)
+	ammo_type = /obj/item/ammo_casing/a762
+	max_ammo = 8
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m762garand/ap
+	name = "garand clip (7.62mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a762/ap
+
+/obj/item/ammo_magazine/m762/empty
+	initial_ammo = 0
+
 /obj/item/ammo_magazine/clip/c762
 	name = "ammo clip (7.62mm)"
 	icon_state = "clip_rifle"
@@ -460,6 +477,23 @@
 	name = "rifle clip (7.62mm practice)"
 	ammo_type = /obj/item/ammo_casing/a762p
 
+/obj/item/ammo_magazine/m762svd
+	name = "\improper SVD magazine (7.62mm)"
+	icon_state = "SVD"
+	mag_type = MAGAZINE
+	caliber = "7.62mm"
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	ammo_type = /obj/item/ammo_casing/a762
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m762svd/ap
+	name = "\improper SVD magazine (7.62mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a762/ap
+
+/obj/item/ammo_magazine/m762svd/empty
+	initial_ammo = 0
+
 ///////// 12g /////////
 
 /obj/item/ammo_magazine/m12gdrum
@@ -467,7 +501,7 @@
 	icon_state = "12g"
 	mag_type = MAGAZINE
 	caliber = "12g"
-	matter = list(DEFAULT_WALL_MATERIAL = 2200)
+	matter = list(DEFAULT_WALL_MATERIAL = 13000) //did the math. now fixed the exploityness of this thing. Have fun!
 	ammo_type = /obj/item/ammo_casing/a12g
 	max_ammo = 24
 	multiple_sprites = 1
@@ -487,10 +521,34 @@
 /obj/item/ammo_magazine/m12gdrum/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/clip/c12g
+	name = "ammo clip (12g slug)"
+	icon_state = "12gclipslug" //largely a codersprite, looks good enough. feel free to make a better one.
+	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with slugs."
+	caliber = "12g"
+	ammo_type = /obj/item/ammo_casing/a12g
+	matter = list(DEFAULT_WALL_MATERIAL = 1790) // slugs shells x4 + 350 metal for the clip itself.
+	max_ammo = 4
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/clip/c12g/pellet
+	name = "ammo clip (12g buckshot)"
+	icon_state = "12gclipshell"
+	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with buckshot."
+	ammo_type = /obj/item/ammo_casing/a12g/pellet
+	matter = list(DEFAULT_WALL_MATERIAL = 1790) // buckshot and slugs cost the same
+
+/obj/item/ammo_magazine/clip/c12g/beanbag
+	name = "ammo clip (12g beanbag)"
+	icon_state = "12gclipbean"
+	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with beanbags."
+	ammo_type = /obj/item/ammo_casing/a12g/beanbag
+	matter = list(DEFAULT_WALL_MATERIAL = 1070) //beanbags x4 + 350 metal
+
 ///////// .75 Gyrojet /////////
 
 /obj/item/ammo_magazine/m75
-	name = "ammo magazine (.75 Gyrojet)"
+	name = "magazine (.75 Gyrojet)"
 	icon_state = "75"
 	mag_type = MAGAZINE
 	caliber = ".75"

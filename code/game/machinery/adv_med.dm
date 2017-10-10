@@ -46,8 +46,8 @@
 		if(occupant)
 			user << "<span class='notice'>The scanner is already occupied!</span>"
 			return
-		for(var/mob/living/carbon/slime/M in range(1, H.affecting))
-			if(M.Victim == H.affecting)
+		for(var/mob/living/simple_animal/slime/M in range(1, H.affecting))
+			if(M.victim == H.affecting)
 				user << "<span class='danger'>[H.affecting.name] has a fucking slime attached to them, deal with that first.</span>"
 				return
 		var/mob/M = H.affecting
@@ -83,8 +83,8 @@
 	if(O.abiotic())
 		user << "<span class='notice'>Subject cannot have abiotic items on.</span>"
 		return 0
-	for(var/mob/living/carbon/slime/M in range(1, O))
-		if(M.Victim == O)
+	for(var/mob/living/simple_animal/slime/M in range(1, O))
+		if(M.victim == O)
 			user << "<span class='danger'>[O] has a fucking slime attached to them, deal with that first.</span>"
 			return 0
 
@@ -287,8 +287,9 @@
 			var/bloodData[0]
 			if(H.vessel)
 				var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+				var/blood_max = H.species.blood_volume
 				bloodData["volume"] = blood_volume
-				bloodData["percent"] = round(((blood_volume / 560)*100))
+				bloodData["percent"] = round(((blood_volume / blood_max)*100))
 
 			occupantData["blood"] = bloodData
 
@@ -459,7 +460,8 @@
 
 			if(occupant.vessel)
 				var/blood_volume = round(occupant.vessel.get_reagent_amount("blood"))
-				var/blood_percent =  blood_volume / 560
+				var/blood_max = occupant.species.blood_volume
+				var/blood_percent =  blood_volume / blood_max
 				blood_percent *= 100
 
 				extra_font = "<font color=[blood_volume > 448 ? "blue" : "red"]>"

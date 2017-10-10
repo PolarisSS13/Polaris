@@ -443,7 +443,7 @@ var/global/list/damage_icon_parts = list()
 //For legacy support.
 /mob/living/carbon/human/regenerate_icons()
 	..()
-	if(transforming)		return
+	if(transforming || QDELETED(src))		return
 
 	update_mutations(0)
 	update_body(0)
@@ -1138,7 +1138,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_fire(var/update_icons=1)
 	overlays_standing[FIRE_LAYER] = null
 	if(on_fire)
-		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=FIRE_LAYER)
+		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state" = get_fire_icon_state(), "layer"=FIRE_LAYER)
 
 	if(update_icons)   update_icons()
 
