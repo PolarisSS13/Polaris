@@ -350,6 +350,14 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/pickaxe/diamonddrill
 	sort_string = "KAAAE"
 
+/datum/design/item/device/depth_scanner
+	desc = "Used to check spatial depth and density of rock outcroppings."
+	id = "depth_scanner"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 1000)
+	build_path = /obj/item/device/depth_scanner
+	sort_string = "KAAAF"
+
 ///////////////////////////////////
 /////////Shield Generators/////////
 ///////////////////////////////////
@@ -464,6 +472,15 @@ other types of metals and chemistry for reagents).
 	materials = list (DEFAULT_WALL_MATERIAL = 12500, "glass" = 7500, "silver" = 1500, "gold" = 1500, "diamond" = 750)
 	build_path = /obj/item/weapon/surgical/scalpel/manager
 	sort_string = "MBBAD"
+
+/datum/design/item/bone_clamp
+	name = "Bone Clamp"
+	desc = "A miracle of modern science, this tool rapidly knits together bone, without the need for bone gel."
+	id = "bone_clamp"
+	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 5, TECH_MAGNET = 4, TECH_DATA = 4)
+	materials = list (DEFAULT_WALL_MATERIAL = 12500, "glass" = 7500, "silver" = 2500)
+	build_path = /obj/item/weapon/surgical/bone_clamp
+	sort_string = "MBBAE"
 
 /datum/design/item/implant
 	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
@@ -631,14 +648,14 @@ other types of metals and chemistry for reagents).
 
 /datum/design/item/weapon/slimebation
 	id = "slimebation"
-	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3, TECH_COMBAT = 3)
+	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2, TECH_POWER = 3, TECH_COMBAT = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000)
 	build_path = /obj/item/weapon/melee/baton/slime
 	sort_string = "TBAAB"
 
 /datum/design/item/weapon/slimetaser
 	id = "slimetaser"
-	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4, TECH_POWER = 4, TECH_COMBAT = 4)
+	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 3, TECH_POWER = 4, TECH_COMBAT = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000)
 	build_path = /obj/item/weapon/gun/energy/taser/xeno
 	sort_string = "TBAAC"
@@ -692,6 +709,15 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/stock_parts/subspace/transmitter
 	sort_string = "UAAAG"
 
+/datum/design/item/device/ano_scanner
+	name = "Alden-Saraspova counter"
+	id = "ano_scanner"
+	desc = "Aids in triangulation of exotic particles."
+	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 5000)
+	build_path = /obj/item/device/ano_scanner
+	sort_string = "UAAAH"
+
 /datum/design/item/light_replacer
 	name = "Light replacer"
 	desc = "A device to automatically replace lights. Refill with working lightbulbs."
@@ -718,6 +744,16 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/device/aicard
 	sort_string = "VACAA"
 
+/datum/design/item/dronebrain
+	name = "Robotic intelligence circuit"
+	id = "dronebrain"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 5, TECH_DATA = 4)
+	build_type = PROTOLATHE | PROSFAB
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "silver" = 1000, "gold" = 500)
+	build_path = /obj/item/device/mmi/digital/robot
+	category = "Misc"
+	sort_string = "VACAC"
+
 /datum/design/item/posibrain
 	name = "Positronic brain"
 	id = "posibrain"
@@ -738,16 +774,6 @@ other types of metals and chemistry for reagents).
 	category = "Misc"
 	sort_string = "VACBA"
 
-/datum/design/item/mmi_radio
-	name = "Radio-enabled man-machine interface"
-	id = "mmi_radio"
-	req_tech = list(TECH_DATA = 2, TECH_BIO = 4)
-	build_type = PROTOLATHE | PROSFAB
-	materials = list(DEFAULT_WALL_MATERIAL = 1200, "glass" = 500)
-	build_path = /obj/item/device/mmi/radio_enabled
-	category = "Misc"
-	sort_string = "VACBB"
-
 /datum/design/item/beacon
 	name = "Bluespace tracking beacon design"
 	id = "beacon"
@@ -755,6 +781,24 @@ other types of metals and chemistry for reagents).
 	materials = list (DEFAULT_WALL_MATERIAL = 20, "glass" = 10)
 	build_path = /obj/item/device/radio/beacon
 	sort_string = "VADAA"
+
+/datum/design/item/gps
+	name = "Triangulating device design"
+	desc = "Triangulates approximate co-ordinates using a nearby satellite network."
+	id = "gps"
+	req_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 500)
+	build_path = /obj/item/device/gps
+	sort_string = "VADAB"
+
+/datum/design/item/beacon_locator
+	name = "Beacon tracking pinpointer"
+	desc = "Used to scan and locate signals on a particular frequency."
+	id = "beacon_locator"
+	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
+	build_path = /obj/item/device/beacon_locator
+	sort_string = "VADAC"
 
 /datum/design/item/bag_holding
 	name = "'Bag of Holding', an infinite capacity bag prototype"
