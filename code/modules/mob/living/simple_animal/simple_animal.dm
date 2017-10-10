@@ -109,6 +109,11 @@
 	var/environment_smash = 0		// How much environment damage do I do when I hit stuff?
 	var/melee_miss_chance = 25		// percent chance to miss a melee attack.
 
+	//Mob autopsy stuff
+	var/autopsy_tool = /obj/item/weapon/surgical/scalpel
+	var/can_harvest_organ = 1		// Prevents harvesting multiple organs.
+	var/list/organs					// A list of lists containing data for organs.
+
 	//Special attacks
 	var/spattack_prob = 0			// Chance of the mob doing a special attack (0 for never)
 	var/spattack_min_range = 0		// Min range to perform the special attacks from
@@ -182,6 +187,7 @@
 			faction_friends |= src
 		else
 			faction_friends |= src
+	spawn_organ()
 
 /mob/living/simple_animal/Destroy()
 	home_turf = null
@@ -558,7 +564,17 @@
 
 // When somoene clicks us with an item in hand
 /mob/living/simple_animal/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/stack/medical))
+	if(istype(O, autopsy_tool) && stat == DEAD && can_harvest_organ && !istype(src, /mob/living/simple_animal/adultslime) && !istype(src, /mob/living/simple_animal/slime))
+		//if (mob is on an operating table)
+			//else
+				//user << "<span class='notice'>You can't work on this specimen here.</span>"
+				//return
+		user << "<span class='notice'>You begin to operate on \the [src].</span>"
+		//src.visible_message("<span class='notice'>[user] begins to operate on \the [src] with a [O].</span>")
+		// Cooldown
+		harvest_organ()
+		can_harvest_organ = 0
+	else if(istype(O, /obj/item/stack/medical))
 		if(stat != DEAD)
 			var/obj/item/stack/medical/MED = O
 			if(health < getMaxHealth())
@@ -580,6 +596,49 @@
 		ai_log("attackby() I was weapon'd by: [user]",2)
 		if(O.force)
 			react_to_attack(user)
+
+/*
+Organs are added in the following format:
+
+var/list/your_organ = list(path, name, desc, icon_state, icon)
+organs += your_organ
+
+Only an item path is required, but if you change anything else, don't leave anything out that comes before.
+*/
+/mob/living/simple_animal/proc/spawn_organ()
+	var/list/heart = list(/obj/item/organ/internal/heart, "[name]'s heart", "It's \the [name]'s heart. It pumps blood throughout \the [name]'s body.")
+	organs += heart
+	var/list/lungs = list(/obj/item/organ/internal/lungs, "[name]'s lungs", "It's \the [name]'s lungs. It provides oxygen to \the [name]'s body.")
+	organs += lungs
+	var/list/liver = list(/obj/item/organ/internal/liver, "[name]'s liver", "It's \the [name]'s liver. It helps filter out toxins from \the [name]'s body.")
+	organs += liver
+	var/list/kidneys = list(/obj/item/organ/internal/kidneys, "[name]'s kidneys", "It's \the [name]'s kidneys. It removes toxins from \the [name]'s body.")
+	organs += kidneys
+	var/list/brain = list(/obj/item/organ/internal/brain, "[name]'s brain", "It's \the [name]'s brain. It controls \the [name]'s body.")
+	organs += brain
+	var/list/appendix = list(/obj/item/organ/internal/appendix, "[name]'s appendix", "It's \the [name]'s appendix. It doesn't seem to do anything useful.")
+	organs += appendix
+	var/list/eyes = list(/obj/item/organ/internal/eyes, "[name]'s eyes", "It's \the [name]'s eyes. They allow \the [name] to see.")
+	organs += eyes
+
+/mob/living/simple_animal/proc/harvest_organ()
+	var/list/random_organ = pick(organs)
+	var/organ_type
+	var/obj/item/new_organ
+	for(var/x = 1, x <= random_organ.len, x++)
+		switch(x)
+			if(1)
+				organ_type = random_organ[x]
+				new_organ = new organ_type
+			if(2)
+				new_organ.name = random_organ[x]
+			if(3)
+				new_organ.desc = random_organ[x]
+			if(4)
+				new_organ.icon_state = random_organ[x]
+			if(5)
+				new_organ.icon = random_organ[x]
+	new_organ.loc = src.loc
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
