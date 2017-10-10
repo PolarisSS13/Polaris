@@ -2,24 +2,27 @@
 	name = "microwave"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
-	layer = 2.9
-	density = 1
-	anchored = 1
-	use_power = 1
+	layer = 2.9 // ARBITRARY NUMBERS
+	density = TRUE
+	anchored = TRUE
+	use_power = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
 	flags = OPENCONTAINER | NOREACT
 	circuit = /obj/item/weapon/circuitboard/microwave
-	var/operating = 0 // Is it on?
+	var/operating = 0 // Is it on? gee thanks i needed that clarified
 	var/dirty = 0 // = {0..100} Does it need cleaning?
 	var/broken = 0 // ={0,1,2} How broken is it???
-	var/global/list/datum/recipe/available_recipes // List of the recipes you can use
+	// typecache and global these
+	var/global/list/datum/recipe/available_recipes // List of the recipes you can use 
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
-	var/global/max_n_of_items = 0
+	var/global/max_n_of_items = 0 // why the fuck is this a global
+	var/list/held_items = list()
 
 
 // see code/modules/food/recipes_microwave.dm for recipes
+// see code/modules/hell/occupants.dm for coder
 
 /*******************
 *   Initialising
@@ -28,7 +31,7 @@
 /obj/machinery/microwave/New()
 	..()
 	reagents = new/datum/reagents(100)
-	reagents.my_atom = src
+	reagents.my_atom = src // turn this into a helper and remove copypaste
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
@@ -37,11 +40,11 @@
 
 	if (!available_recipes)
 		available_recipes = new
-		for (var/type in (typesof(/datum/recipe)-/datum/recipe))
-			available_recipes+= new type
-		acceptable_items = new
+		for (var/type in (typesof(/datum/recipe)-/datum/recipe)) // subtypesof
+			available_recipes+= new type // oh dear god no, use initial() trick here
+		acceptable_items = new // lazyinit all these
 		acceptable_reagents = new
-		for (var/datum/recipe/recipe in available_recipes)
+		for (var/datum/recipe/recipe in available_recipes) // what the fuck
 			for (var/item in recipe.items)
 				acceptable_items |= item
 			for (var/reagent in recipe.reagents)
@@ -51,7 +54,7 @@
 		// This will do until I can think of a fun recipe to use dionaea in -
 		// will also allow anything using the holder item to be microwaved into
 		// impure carbon. ~Z
-		acceptable_items |= /obj/item/weapon/holder
+		acceptable_items |= /obj/item/weapon/holder // I Can't Believe It's Hacky(tm)
 		acceptable_items |= /obj/item/weapon/reagent_containers/food/snacks/grown
 
 	RefreshParts()
@@ -60,8 +63,8 @@
 *   Item Adding
 ********************/
 
-/obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(src.broken > 0)
+/obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob) // as mob/as obj is shit
+	if(src.broken > 0) // magic fucking numbers
 		if(src.broken == 2 && istype(O, /obj/item/weapon/screwdriver)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
@@ -86,18 +89,19 @@
 				)
 				src.icon_state = "mw"
 				src.broken = 0 // Fix it!
-				src.dirty = 0 // just to be sure
+				src.dirty = 0 // just to be sure // MAGIC NUMBERS
 				src.flags = OPENCONTAINER
 		else
 			user << "<span class='warning'>It's broken!</span>"
-			return 1
+			return TRUE
 	else if(default_deconstruction_screwdriver(user, O))
 		return
 	else if(default_deconstruction_crowbar(user, O))
 		return
 
-	else if(src.dirty==100) // The microwave is all dirty so can't be used!
-		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/soap)) // If they're trying to clean it then let them
+	else if(src.dirty==100) // The microwave is all dirty so can't be used! // what the absolute fuck
+		// lmao i can clean this with space lube if i put it in the cleaner bottle
+		if(istype(O, /obj/item/weapon/reagent_containers/spray/cleaner) || istype(O, /obj/item/weapon/soap)) // this shit needs to not be hardcoded/spray should use the actual reagent
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to clean the microwave.</span>", \
 				"<span class='notice'>You start to clean the microwave.</span>" \
@@ -109,27 +113,31 @@
 				)
 				src.dirty = 0 // It's clean!
 				src.broken = 0 // just to be sure
-				src.icon_state = "mw"
+				src.icon_state = "mw" // shit icon state name, rename
 				src.flags = OPENCONTAINER
 		else //Otherwise bad luck!!
 			user << "<span class='warning'>It's dirty!</span>"
 			return 1
-	else if(is_type_in_list(O,acceptable_items))
+	else if(is_type_in_list(O,acceptable_items)) // typecache this
 		if (contents.len>=(max_n_of_items + component_parts.len + 1))	//Adds component_parts to the maximum number of items.	The 1 is from the circuit
 			user << "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>"
 			return 1
-		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
+		if(istype(O, /obj/item/stack)) // >literally acknowledges using a colon here is bad >DOESNT WANT TO TAKE THE 5 SECONDS IT TAKES TO TYPECASTE THIS SHIT
 			var/obj/item/stack/S = O
-			new O.type (src)
-			S.use(1)
-			user.visible_message( \
-				"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
-				"<span class='notice'>You add one of [O] to \the [src].</span>")
-			return
+			if(S.get_amount() > 1)
+				new O.type (src)
+				S.use(1)
+				user.visible_message( \
+					"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
+					"<span class='notice'>You add one of [O] to \the [src].</span>")
+				return
+			else
+				user << "There's not enough in [S]."
+				return FALSE
 		else
-		//	user.remove_from_mob(O)	//This just causes problems so far as I can tell. -Pete
 			user.drop_item()
-			O.loc = src
+			O.loc = src // forcemove equiv
+			held_items += O
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
@@ -137,15 +145,16 @@
 	else if(istype(O,/obj/item/weapon/reagent_containers/glass) || \
 	        istype(O,/obj/item/weapon/reagent_containers/food/drinks) || \
 	        istype(O,/obj/item/weapon/reagent_containers/food/condiment) \
-		)
+		) // jesus christ why just check if it has reagents and opencontainer
 		if (!O.reagents)
 			return 1
-		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.id in acceptable_reagents))
+		for (var/R in O.reagents.reagent_list) // saves us a istype()
+			var/datum/reagent/RE = R
+			if (!(RE.id in acceptable_reagents))
 				user << "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>"
 				return 1
 		return
-	else if(istype(O,/obj/item/weapon/grab))
+	else if(istype(O,/obj/item/weapon/grab)) // todo: allow slamming microwave door into face of grabee
 		var/obj/item/weapon/grab/G = O
 		user << "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>"
 		return 1
@@ -153,10 +162,6 @@
 		user << "<span class='warning'>You have no idea what you can cook with this [O].</span>"
 	..()
 	src.updateUsrDialog()
-
-/obj/machinery/microwave/attack_ai(mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
-		attack_hand(user)
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -166,13 +171,13 @@
 *   Microwave Menu
 ********************/
 
-/obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/microwave/interact(mob/user as mob) // hell on earth, as mob is useless
 	var/dat = ""
-	if(src.broken > 0)
+	if(broken > 0) // MAGIC FUCKING NUMBERS also you DONT NEED TO USE SRC
 		dat = {"<TT>Bzzzzttttt</TT>"}
-	else if(src.operating)
+	else if(operating)
 		dat = {"<TT>Microwaving in progress!<BR>Please wait...!</TT>"}
-	else if(src.dirty==100)
+	else if(dirty == 100)
 		dat = {"<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"}
 	else
 		var/list/items_counts = new
@@ -195,7 +200,7 @@
 				items_measures_p[display_name] = "turnovers"
 			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/carpmeat))
 				items_measures[display_name] = "fillet of meat"
-				items_measures_p[display_name] = "fillets of meat"
+				items_measures_p[display_name] = "fillets of meat" // TODO: decide whether to axe this shit entirely or no
 			items_counts[display_name]++
 		for (var/O in items_counts)
 			var/N = items_counts[O]
@@ -207,22 +212,19 @@
 				else
 					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
 
-		for (var/datum/reagent/R in reagents.reagent_list)
-			var/display_name = R.name
-			if (R.id == "capsaicin")
-				display_name = "Hotsauce"
-			if (R.id == "frostoil")
-				display_name = "Coldsauce"
-			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
+		for (var/R in reagents.reagent_list)
+			var/datum/reagent/RE = R
+			var/display_name = RE.name
+			dat += {"<B>[display_name]:</B> [RE.volume] unit\s<BR>"}
 
-		if (items_counts.len==0 && reagents.reagent_list.len==0)
-			dat = {"<B>The microwave is empty</B><BR>"}
+		if (!items_counts.len && !reagents.reagent_list.len)
+			dat = {"<B>The microwave is empty.</B><BR>"}
 		else
 			dat = {"<b>Ingredients:</b><br>[dat]"}
 		dat += {"<HR><BR>\
-<A href='?src=\ref[src];action=cook'>Turn on!<BR>\
-<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
-"}
+			<A href='?src=\ref[src];action=cook'>Turn on!<BR>\
+			<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
+			"}
 
 	user << browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
 	onclose(user, "microwave")
@@ -238,7 +240,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume==0 && !(locate(/obj) in ((contents - component_parts) - circuit))) //dry run
+	if (!reagents.total_volume && !(locate(/obj) in ((contents - component_parts) - circuit))) //dry run // >>>USING LOCATE
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -300,7 +302,7 @@
 	return 1
 
 /obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in ((contents - component_parts) - circuit))
+	for (var/obj/O in held_items)
 		if ( \
 				!istype(O,/obj/item/weapon/reagent_containers/food) && \
 				!istype(O, /obj/item/weapon/grown) \
@@ -326,8 +328,9 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/dispose()
-	for (var/obj/O in ((contents-component_parts)-circuit))
+	for (var/obj/O in held_items)
 		O.loc = src.loc
+		held_items -= O
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
@@ -359,9 +362,9 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/fail()
-	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/burned_food = new(src)
 	var/amount = 0
-	for (var/obj/O in (((contents - ffuu) - component_parts) - circuit))
+	for (var/obj/O in held_items) // this used to be for (var/obj/O in (((contents - ffuu) - component_parts) - circuit)), painful
 		amount++
 		if (O.reagents)
 			var/id = O.reagents.get_master_reagent_id()
