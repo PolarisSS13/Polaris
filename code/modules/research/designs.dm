@@ -1729,7 +1729,7 @@ CIRCUITS BELOW
 /datum/design/item/circuit_printer_clone_upgrade
 	name = "Integrated circuit printer upgrade - cloning"
 	desc = "Allows the integrated circuit printer to recreate assemblies by code"
-	id = "ic_printer_upgrade_adv"
+	id = "ic_printer_upgrade_clone"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_DATA = 5)
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/disk/integrated_circuit/upgrade/clone
