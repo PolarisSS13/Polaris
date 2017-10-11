@@ -109,8 +109,13 @@
 
 /obj/item/integrated_circuit/list/delete/do_work()
 	var/list/input_list = get_pin_data(IC_INPUT, 1)
+	var/list/red_list = list()
 	var/index = get_pin_data(IC_INPUT, 2)
-	var/list/red_list = input_list.Cut(Start=index,End=index)
+	var/j = 0
+	for(var/I in input_list)
+		j = j + 1
+		if(j != index)
+			red_list.Add(I)
 	set_pin_data(IC_OUTPUT, 1, red_list)
 	push_data()
 	activate_pin(2)
