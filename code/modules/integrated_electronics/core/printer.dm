@@ -87,6 +87,7 @@
 						to_chat(user, "<span class='notice'>Assembly has been printed</span>")
 						as_printing = FALSE
 						as_needs = 0
+						max_metal = init_max_metal
 					else
 						to_chat(user, "<span class='notice'>Please,insert [as_needs-metal] more metal!</span>")
 				interact(user)
@@ -260,7 +261,7 @@
 	name = "integrated circuit printer upgrade disk - circuit cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies."
 	icon_state = "upgrade_disk_clone"
-	origin_tech = list(TECH_ENGINEERING = 5, TECH_DATA = 6)
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_DATA = 5)
 
 /obj/item/device/integrated_circuit_printer/proc/sanity_check(var/program)
 	var/debug = 0
