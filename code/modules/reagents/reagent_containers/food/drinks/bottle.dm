@@ -319,7 +319,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine
 	name = "Doublebeard Bearded Special Wine"
-	desc = "Cheap cooking wind pretending to be drinkable."
+	desc = "Cheap cooking wine pretending to be drinkable."
 	icon_state = "winebottle"
 	center_of_mass = list("x"=16, "y"=4)
 
