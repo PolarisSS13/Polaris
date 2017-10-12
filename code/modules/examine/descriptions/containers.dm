@@ -50,7 +50,7 @@
 	description_fluff = "Centauri Provisions claims that their vodka wins in blind taste-tests against traditional mixes from Earth, but they're not fooling anyone."
 	
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla
-	description_fluff = "This tequilla comes from the 'Cancer Craze' of the 20's, where consumer products would openly advertize their blatently carcinogenic nature to a burgeoning middle class with newfound access to cloned organs.'
+	description_fluff = "This tequilla comes from the 'Cancer Craze' of the 20's, where consumer products would openly advertize their blatently carcinogenic nature to a burgeoning middle class with newfound access to cloned organs."
 	
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron
 	description_fluff = "This emerged as a response to Caccavo, with Patron advertising claiming to be even more toxic and dangerous. Unfortunately, when the Cancer Craze ended, Patron's stocks nosedived and they now operate only a handful of distilleries."
@@ -80,7 +80,7 @@
 	description_fluff = "Melon liquor, formerly an obscure drink, took off when young Skrell started dabbling in alcohol. This brand is owned by Vey-Med, one of their few diversified holdings."
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao
-	description_fluff = "Centauri Provisions is currently marketting Miss Blue as the next big thing in mixed drinks. Analysts suggest that they're mistaken."
+	description_fluff = "Centauri Provisions is currently marketing Miss Blue as the next big thing in mixed drinks. Analysts suggest that they're mistaken."
 	
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
 	description_fluff = "You've never heard of this before, but it looks vaguely Gilthari, so it's probably good, right?"
