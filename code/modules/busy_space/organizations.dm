@@ -81,7 +81,6 @@
 		"Sagan",
 		"Tyson",
 		"Galilei",
-		"Tesla",
 		"Jans",
 		"Fhriede",
 		"Franklin",
