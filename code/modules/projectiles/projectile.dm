@@ -325,7 +325,6 @@
 			tracer_effect(effect_transform)
 
 		if(incendiary >= 2)
-			world << "(incendiary >= 2)"
 			var/trail_volume = (flammability * 0.10)
 			new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(src.loc, trail_volume, src.dir)
 
