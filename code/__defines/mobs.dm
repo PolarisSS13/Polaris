@@ -152,7 +152,7 @@
 #define MODIFIER_STACK_EXTEND	2	// Disallows a second instance, but will extend the first instance if possible.
 #define MODIFIER_STACK_ALLOWED	3	// Multiple instances are allowed.
 
-#define MODIFIER_GENETIC	0	// Modifiers with this flag will be copied to mobs who get cloned.
+#define MODIFIER_GENETIC	1	// Modifiers with this flag will be copied to mobs who get cloned.
 
 // Bodyparts and organs.
 #define O_MOUTH    "mouth"
@@ -207,3 +207,20 @@
 #define TASTE_NORMAL 1 //anything below 15%
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
+
+// If they're in an FBP, what braintype.
+#define FBP_NONE	""
+#define FBP_CYBORG	"Cyborg"
+#define FBP_POSI	"Positronic"
+#define FBP_DRONE	"Drone"
+
+// Used to seperate simple animals by ""intelligence"".
+#define SA_PLANT	1
+#define SA_ANIMAL	2
+#define SA_ROBOTIC	3
+#define SA_HUMANOID	4
+
+// For slime commanding.  Higher numbers allow for more actions.
+#define SLIME_COMMAND_OBEY		1 // When disciplined.
+#define SLIME_COMMAND_FACTION	2 // When in the same 'faction'.
+#define SLIME_COMMAND_FRIEND	3 // When befriended with a slime friendship agent.

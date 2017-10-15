@@ -17,6 +17,9 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 	if(vessel)
 		return
 
+	if(species.flags & NO_BLOOD)
+		return
+
 	vessel = new/datum/reagents(species.blood_volume)
 	vessel.my_atom = src
 
@@ -37,7 +40,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/handle_blood()
-	if(in_stasis)
+	if(inStasisNow())
 		return
 
 	if(!should_have_organ(O_HEART))
@@ -96,10 +99,10 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 				pale = 1
 				update_body()
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel [word]"
+				src << "<font color='red'>You feel [word]</font>"
 			if(prob(1))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel [word]"
+				src << "<font color='red'>You feel [word]</font>"
 			if(getOxyLoss() < 20 * threshold_coef)
 				adjustOxyLoss(3 * dmg_coef)
 		else if(blood_volume >= BLOOD_VOLUME_BAD)
@@ -113,13 +116,13 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 			if(prob(15))
 				Paralyse(rand(1,3))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel extremely [word]"
+				src << "<font color='red'>You feel extremely [word]</font>"
 		else if(blood_volume >= BLOOD_VOLUME_SURVIVE)
 			adjustOxyLoss(5 * dmg_coef)
 			adjustToxLoss(3 * dmg_coef)
 			if(prob(15))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel extremely [word]"
+				src << "<font color='red'>You feel extremely [word]</font>"
 		else //Not enough blood to survive (usually)
 			if(!pale)
 				pale = 1
@@ -139,6 +142,16 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		//Bleeding out
 		var/blood_max = 0
 		var/blood_loss_divisor = 30	//lower factor = more blood loss
+
+		// Some modifiers can make bleeding better or worse.  Higher multiplers = more bleeding.
+		var/blood_loss_modifier_multiplier = 1.0
+		for(var/datum/modifier/M in modifiers)
+			if(!isnull(M.bleeding_rate_percent))
+				blood_loss_modifier_multiplier += (M.bleeding_rate_percent - 1.0)
+
+		blood_loss_divisor /= blood_loss_modifier_multiplier
+
+
 		//This 30 is the "baseline" of a cut in the "vital" regions (head and torso).
 		for(var/obj/item/organ/external/temp in bad_external_organs)
 			if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))

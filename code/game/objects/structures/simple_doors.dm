@@ -42,7 +42,7 @@
 /obj/structure/simple_door/Destroy()
 	processing_objects -= src
 	update_nearby_tiles()
-	..()
+	return ..()
 
 /obj/structure/simple_door/get_material()
 	return material
@@ -168,8 +168,7 @@
 /obj/structure/simple_door/process()
 	if(!material.radioactivity)
 		return
-	for(var/mob/living/L in range(1,src))
-		L.apply_effect(round(material.radioactivity/3),IRRADIATE,0)
+	radiation_repository.radiate(src, round(material.radioactivity/3))
 
 /obj/structure/simple_door/iron/New(var/newloc,var/material_name)
 	..(newloc, "iron")
@@ -194,6 +193,9 @@
 
 /obj/structure/simple_door/wood/New(var/newloc,var/material_name)
 	..(newloc, "wood")
+
+/obj/structure/simple_door/sifwood/New(var/newloc,var/material_name)
+	..(newloc, "alien wood")
 
 /obj/structure/simple_door/resin/New(var/newloc,var/material_name)
 	..(newloc, "resin")

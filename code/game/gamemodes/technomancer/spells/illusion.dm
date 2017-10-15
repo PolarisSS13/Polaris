@@ -64,7 +64,7 @@
 /obj/item/weapon/spell/illusion/Destroy()
 	if(illusion)
 		qdel(illusion)
-	..()
+	return ..()
 
 // Makes a tiny overlay of the thing the player has copied, so they can easily tell what they currently have.
 /obj/item/weapon/spell/illusion/update_icon()
@@ -92,6 +92,9 @@
 	var/list/path = list() //Used for AStar pathfinding.
 	var/walking = 0
 	var/step_delay = 10
+
+/mob/living/simple_animal/illusion/update_icon() // We don't want the appearance changing AT ALL unless by copy_appearance().
+	return
 
 /mob/living/simple_animal/illusion/proc/copy_appearance(var/atom/movable/thing_to_copy)
 	if(!thing_to_copy)
@@ -178,7 +181,7 @@
 
 			if(I_HURT)
 				adjustBruteLoss(harm_intent_damage)
-				M.visible_message("\red [M] [response_harm] \the [src]")
+				M.visible_message("<font color='red'>[M] [response_harm] \the [src]</font>")
 				M.do_attack_animation(src)
 
 	return

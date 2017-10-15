@@ -47,7 +47,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/jumptomob,				//allows us to jump to a specific mob,
 	/client/proc/jumptoturf,			//allows us to jump to a specific turf,
 	/client/proc/admin_call_shuttle,	//allows us to call the emergency shuttle,
-	/client/proc/admin_cancel_shuttle,	//allows us to cancel the emergency shuttle, sending it back to centcomm,
+	/client/proc/admin_cancel_shuttle,	//allows us to cancel the emergency shuttle, sending it back to CentCom,
 	/client/proc/cmd_admin_direct_narrate,	//send text directly to a player with no padding. Useful for narratives and fluff-text,
 	/client/proc/cmd_admin_world_narrate,	//sends text to all players with no padding,
 	/client/proc/cmd_admin_create_centcom_report,
@@ -68,8 +68,9 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/toggledsay,		//toggles dsay on/off for everyone,
 	/client/proc/game_panel,			//game panel, allows to change game-mode etc,
 	/client/proc/cmd_admin_say,			//admin-only ooc chat,
-	/datum/admins/proc/PlayerNotes,
 	/client/proc/cmd_mod_say,
+	/client/proc/cmd_event_say,
+	/datum/admins/proc/PlayerNotes,
 	/datum/admins/proc/show_player_info,
 	/client/proc/free_slot,			//frees slot for chosen job,
 	/client/proc/cmd_admin_change_custom_event,
@@ -111,7 +112,7 @@ var/list/admin_verbs_sounds = list(
 	)
 var/list/admin_verbs_fun = list(
 	/client/proc/object_talk,
-	/client/proc/cmd_admin_dress,
+	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/everyone_random,
@@ -136,7 +137,10 @@ var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		//allows us to spawn instances,
 	/client/proc/respawn_character,
 	/client/proc/virus2_editor,
-	/client/proc/spawn_chemdisp_cartridge
+	/client/proc/spawn_chemdisp_cartridge,
+	/client/proc/map_template_load,
+	/client/proc/map_template_upload,
+	/client/proc/map_template_load_on_new_z
 	)
 var/list/admin_verbs_server = list(
 	/datum/admins/proc/capture_map,
@@ -176,6 +180,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/debug_controller,
 	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_debug_mob_lists,
+	/client/proc/cmd_debug_using_map,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
 	/client/proc/cmd_debug_tog_aliens,
@@ -183,13 +188,13 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reload_admins,
 	/client/proc/reload_mentors,
 	/client/proc/restart_controller,
+	/datum/admins/proc/restart,
 	/client/proc/print_random_map,
 	/client/proc/create_random_map,
 	/client/proc/apply_random_map,
 	/client/proc/overlay_random_map,
 	/client/proc/delete_random_map,
 	/client/proc/show_plant_genes,
-	/client/proc/show_xenobio_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
 	/client/proc/callproc_target,
@@ -204,7 +209,8 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/view_runtimes,
 	/client/proc/show_gm_status,
 	/datum/admins/proc/change_weather,
-	/datum/admins/proc/change_time
+	/datum/admins/proc/change_time,
+	/client/proc/admin_give_modifier
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -249,7 +255,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/play_sound,
 	/client/proc/play_server_sound,
 	/client/proc/object_talk,
-	/client/proc/cmd_admin_dress,
+	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/cinematic,
@@ -286,6 +292,7 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/debug_controller,
 	/client/proc/startSinglo,
 	/client/proc/cmd_debug_mob_lists,
+	/client/proc/cmd_debug_using_map,
 	/client/proc/cmd_debug_del_all,
 	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
@@ -302,6 +309,7 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/admin_ghost,			//allows us to ghost/reenter body at will,
 	/client/proc/cmd_mod_say,
+	/client/proc/cmd_event_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
 	/client/proc/dsay,
@@ -447,11 +455,11 @@ var/list/admin_verbs_mentor = list(
 	if(holder && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.invisibility = initial(mob.invisibility)
-			mob << "\red <b>Invisimin off. Invisibility reset.</b>"
+			mob << "<font color='red'><b>Invisimin off. Invisibility reset.</b></font>"
 			mob.alpha = max(mob.alpha + 100, 255)
 		else
 			mob.invisibility = INVISIBILITY_OBSERVER
-			mob << "\blue <b>Invisimin on. You are now as invisible as a ghost.</b>"
+			mob << "<font color='blue'><b>Invisimin on. You are now as invisible as a ghost.</b></font>"
 			mob.alpha = max(mob.alpha - 100, 0)
 
 
@@ -617,7 +625,7 @@ var/list/admin_verbs_mentor = list(
 			var/light_impact_range = input("Light impact range (in tiles):") as num
 			var/flash_range = input("Flash range (in tiles):") as num
 			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
-	message_admins("\blue [ckey] creating an admin explosion at [epicenter.loc].")
+	message_admins("<font color='blue'>[ckey] creating an admin explosion at [epicenter.loc].</font>")
 	feedback_add_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/give_disease2(mob/T as mob in mob_list) // -- Giacom
@@ -649,7 +657,30 @@ var/list/admin_verbs_mentor = list(
 
 	feedback_add_details("admin_verb","GD2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].")
-	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] gave [key_name(T)] a [greater] disease2 with infection chance [D.infectionchance].</font>", 1)
+
+/client/proc/admin_give_modifier(var/mob/living/L)
+	set category = "Debug"
+	set name = "Give Modifier"
+	set desc = "Makes a mob weaker or stronger by adding a specific modifier to them."
+
+	if(!L)
+		to_chat(usr, "<span class='warning'>Looks like you didn't select a mob.</span>")
+		return
+
+	var/list/possible_modifiers = typesof(/datum/modifier) - /datum/modifier
+
+	var/new_modifier_type = input("What modifier should we add to [L]?", "Modifier Type") as null|anything in possible_modifiers
+	if(!new_modifier_type)
+		return
+	var/duration = input("How long should the new modifier last, in seconds.  To make it last forever, write '0'.", "Modifier Duration") as num
+	if(duration == 0)
+		duration = null
+	else
+		duration = duration SECONDS
+
+	L.add_modifier(new_modifier_type, duration)
+	log_and_message_admins("has given [key_name(L)] the modifer [new_modifier_type], with a duration of [duration ? "[duration / 600] minutes" : "forever"].")
 
 /client/proc/make_sound(var/obj/O in world) // -- TLE
 	set category = "Special Verbs"
@@ -662,7 +693,7 @@ var/list/admin_verbs_mentor = list(
 		for (var/mob/V in hearers(O))
 			V.show_message(message, 2)
 		log_admin("[key_name(usr)] made [O] at [O.x], [O.y], [O.z]. make a sound")
-		message_admins("\blue [key_name_admin(usr)] made [O] at [O.x], [O.y], [O.z]. make a sound", 1)
+		message_admins("<font color='blue'>[key_name_admin(usr)] made [O] at [O.x], [O.y], [O.z]. make a sound.</font>", 1)
 		feedback_add_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -696,7 +727,7 @@ var/list/admin_verbs_mentor = list(
 		usr << "<b>Disabled air processing.</b>"
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")
-	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] used 'kill air'.</font>", 1)
 
 /client/proc/readmin_self()
 	set name = "Re-Admin self"
@@ -837,7 +868,7 @@ var/list/admin_verbs_mentor = list(
 	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in human_mob_list
 
 	if(!istype(M, /mob/living/carbon/human))
-		usr << "\red You can only do this to humans!"
+		usr << "<font color='red'>You can only do this to humans!</font>"
 		return
 	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi, Tajaran can result in unintended consequences.",,"Yes","No"))
 		if("No")
@@ -957,7 +988,7 @@ var/list/admin_verbs_mentor = list(
 	T << "<span class='notice'>Move on.</span>"
 
 	log_admin("[key_name(usr)] told [key_name(T)] to man up and deal with it.")
-	message_admins("\blue [key_name_admin(usr)] told [key_name(T)] to man up and deal with it.", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] told [key_name(T)] to man up and deal with it.</font>", 1)
 
 /client/proc/global_man_up()
 	set category = "Fun"
@@ -969,7 +1000,7 @@ var/list/admin_verbs_mentor = list(
 		T << 'sound/voice/ManUp1.ogg'
 
 	log_admin("[key_name(usr)] told everyone to man up and deal with it.")
-	message_admins("\blue [key_name_admin(usr)] told everyone to man up and deal with it.", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] told everyone to man up and deal with it.</font>", 1)
 
 /client/proc/give_spell(mob/T as mob in mob_list) // -- Urist
 	set category = "Fun"
@@ -980,4 +1011,4 @@ var/list/admin_verbs_mentor = list(
 	T.spell_list += new S
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
-	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] gave [key_name(T)] the spell [S].</font>", 1)

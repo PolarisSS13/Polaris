@@ -63,7 +63,13 @@
 		return
 	var/removed = metabolism
 	if(!mrate_static == TRUE)
+		// Modifiers
+		for(var/datum/modifier/mod in M.modifiers)
+			if(!isnull(mod.metabolism_percent))
+				removed *= mod.metabolism_percent
+		// Species
 		removed *= M.species.metabolic_rate
+
 	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
 	if(touch_met && (location == CHEM_TOUCH))
@@ -118,8 +124,8 @@
 	return null
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
-	..()
 	holder = null
+	. = ..()
 
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 

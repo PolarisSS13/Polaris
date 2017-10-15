@@ -485,13 +485,13 @@ This function completely restores a damaged organ to perfect condition.
 	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage (because of the return)
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
-	if((damage > 15) && (type != BURN) && (local_damage > 30) && prob(damage) && (robotic < ORGAN_ROBOT))
+	if((damage > 15) && (type != BURN) && (local_damage > 30) && prob(damage) && (robotic < ORGAN_ROBOT) && !(species.flags & NO_BLOOD))
 		var/datum/wound/internal_bleeding/I = new (min(damage - 15, 15))
 		wounds += I
 		owner.custom_pain("You feel something rip in your [name]!", 50)
 
 //Burn damage can cause fluid loss due to blistering and cook-off
-	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT))
+	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT) && !(species.flags & NO_BLOOD))
 		var/fluid_loss = 0.75 * (damage/(owner.getMaxHealth() - config.health_threshold_dead)) * owner.species.blood_volume*(1 - BLOOD_VOLUME_SURVIVE/100)
 		owner.remove_blood(fluid_loss)
 
@@ -679,7 +679,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /obj/item/organ/external/proc/update_wounds()
 
-	if((robotic >= ORGAN_ROBOT)) //Robotic limbs don't heal or get worse.
+	if((robotic >= ORGAN_ROBOT) || (species.flags & UNDEAD)) //Robotic and dead limbs don't heal or get worse.
 		for(var/datum/wound/W in wounds) //Repaired wounds disappear though
 			if(W.damage <= 0)  //and they disappear right away
 				wounds -= W    //TODO: robot wounds for robot limbs
@@ -754,7 +754,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			else
 				brute_dam += W.damage
 
-		if(!(robotic >= ORGAN_ROBOT) && W.bleeding() && (H && H.should_have_organ(O_HEART)))
+		if(!(robotic >= ORGAN_ROBOT) && W.bleeding() && (H && H.should_have_organ(O_HEART)) && !(H.species.flags & NO_BLOOD))
 			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
@@ -882,7 +882,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(!clean)
 				// Throw limb around.
 				if(src && istype(loc,/turf))
-					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 				dir = 2
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
@@ -901,19 +901,19 @@ Note that amputating the affected organ does in fact remove the infection from t
 					gore.basecolor =  use_blood_colour
 					gore.update_icon()
 
-			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+			gore.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 
 			for(var/obj/item/organ/I in internal_organs)
 				I.removed()
 				if(istype(loc,/turf))
-					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+					I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 
 			for(var/obj/item/I in src)
 				if(I.w_class <= ITEMSIZE_SMALL)
 					qdel(I)
 					continue
 				I.loc = get_turf(src)
-				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),30)
+				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 
 			qdel(src)
 

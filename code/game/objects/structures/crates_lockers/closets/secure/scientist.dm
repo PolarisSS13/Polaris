@@ -18,6 +18,12 @@
 		new /obj/item/device/radio/headset/headset_sci(src)
 		new /obj/item/weapon/tank/air(src)
 		new /obj/item/clothing/mask/gas(src)
+		new /obj/item/clothing/suit/storage/hooded/wintercoat/science(src)
+		new /obj/item/clothing/shoes/boots/winter/science(src)
+		if(prob(50))
+			new /obj/item/weapon/storage/backpack/dufflebag/sci(src)
+		else
+			new /obj/item/weapon/storage/backpack/toxins(src)
 		return
 
 
@@ -49,4 +55,6 @@
 		new /obj/item/weapon/tank/air(src)
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/clothing/suit/storage/hooded/wintercoat/science(src)
+		new /obj/item/clothing/shoes/boots/winter/science(src)
 		return

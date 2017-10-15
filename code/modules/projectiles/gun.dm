@@ -182,7 +182,11 @@
 	if (A == user && user.zone_sel.selecting == O_MOUTH && !mouthshoot)
 		handle_suicide(user)
 	else if(user.a_intent == I_HURT) //point blank shooting
-		Fire(A, user, pointblank=1)
+		if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A && A != user)
+			PreFire(A,user) //They're using the new gun system, locate what they're aiming at.
+			return
+		else
+			Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
 
@@ -204,7 +208,8 @@
 	if(istype(A, /obj/item/weapon/screwdriver))
 		if(dna_lock && attached_lock && !attached_lock.controller_lock)
 			user << "<span class='notice'>You begin removing \the [attached_lock] from \the [src].</span>"
-			if(do_after(user, 25))
+			playsound(src, A.usesound, 50, 1)
+			if(do_after(user, 25 * A.toolspeed))
 				user << "<span class='notice'>You remove \the [attached_lock] from \the [src].</span>"
 				user.put_in_hands(attached_lock)
 				dna_lock = 0
@@ -326,6 +331,8 @@
 	user.setMoveCooldown(move_delay)
 	next_fire_time = world.time + fire_delay
 
+	accuracy = initial(accuracy)	//Reset the gun's accuracy
+
 	if(muzzle_flash)
 		set_light(0)
 
@@ -395,6 +402,8 @@
 
 	//update timing
 	next_fire_time = world.time + fire_delay
+
+	accuracy = initial(accuracy)	//Reset the gun's accuracy
 
 	if(muzzle_flash)
 		set_light(0)
@@ -471,7 +480,7 @@
 				damage_mult = 1.5
 	P.damage *= damage_mult
 
-/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/user, atom/target, acc_mod, dispersion)
+/obj/item/weapon/gun/proc/process_accuracy(obj/projectile, mob/living/user, atom/target, acc_mod, dispersion)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
 		return //default behaviour only applies to true projectiles
@@ -482,11 +491,11 @@
 
 	// Certain statuses make it harder to aim, blindness especially.  Same chances as melee, however guns accuracy uses multiples of 15.
 	if(user.eye_blind)
-		accuracy -= 5
+		P.accuracy -= 5
 	if(user.eye_blurry)
-		accuracy -= 2
+		P.accuracy -= 2
 	if(user.confused)
-		accuracy -= 3
+		P.accuracy -= 3
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
@@ -494,6 +503,13 @@
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
 		P.accuracy += 2
+
+	// Some modifiers make it harder or easier to hit things.
+	for(var/datum/modifier/M in user.modifiers)
+		if(!isnull(M.accuracy))
+			P.accuracy += M.accuracy
+		if(!isnull(M.accuracy_dispersion))
+			P.dispersion = max(P.dispersion + M.accuracy_dispersion, 0)
 
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
@@ -533,9 +549,9 @@
 	var/mob/living/carbon/human/M = user
 
 	mouthshoot = 1
-	M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
+	M.visible_message("<font color='red'>[user] sticks their gun in their mouth, ready to pull the trigger...</font>")
 	if(!do_after(user, 40))
-		M.visible_message("\blue [user] decided life was worth living")
+		M.visible_message("<font color='blue'>[user] decided life was worth living</font>")
 		mouthshoot = 0
 		return
 	var/obj/item/projectile/in_chamber = consume_next_projectile()

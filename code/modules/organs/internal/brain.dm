@@ -67,10 +67,8 @@
 			brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/Destroy()
-	if(brainmob)
-		qdel(brainmob)
-		brainmob = null
-	..()
+	qdel_null(brainmob)
+	. = ..()
 
 /obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
 
@@ -81,8 +79,15 @@
 		brainmob.dna = H.dna.Clone()
 		brainmob.timeofhostdeath = H.timeofdeath
 
+		// Copy modifiers.
+		for(var/datum/modifier/M in H.modifiers)
+			if(M.flags & MODIFIER_GENETIC)
+				brainmob.add_modifier(M.type)
+
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
+
+	brainmob.languages = H.languages
 
 	brainmob << "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>"
 	callHook("debrain", list(brainmob))
@@ -127,6 +132,7 @@
 	desc = "A complex, organic knot of jelly and crystalline particles."
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "green slime extract"
+	parent_organ = BP_TORSO
 
 /obj/item/organ/internal/brain/golem
 	name = "chem"

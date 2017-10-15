@@ -107,7 +107,7 @@
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
-			usr << "<span class='warning'>You need your gun equiped to holster it.</span>"
+			usr << "<span class='warning'>You need your gun equipped to holster it.</span>"
 			return
 		H.holster(W, usr)
 	else
@@ -134,6 +134,6 @@
 /obj/item/clothing/accessory/holster/leg
 	name = "leg holster"
 	desc = "A tacticool handgun holster. Worn on the upper leg."
-	icon_state = "holster_hip"
+	icon_state = "holster_leg"
 	overlay_state = "holster_leg"
 	concealed_holster = 0

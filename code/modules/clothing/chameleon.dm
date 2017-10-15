@@ -401,13 +401,14 @@
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
 	icon_state = "deagle"
 	w_class = ITEMSIZE_NORMAL
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
 	matter = list()
 
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	projectile_type = /obj/item/projectile/chameleon
 	charge_meter = 0
 	charge_cost = 48 //uses next to no power, since it's just holograms
+	battery_lock = 1
 
 	var/obj/item/projectile/copy_projectile
 	var/global/list/gun_choices

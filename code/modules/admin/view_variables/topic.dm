@@ -74,6 +74,18 @@
 		src.give_spell(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
 
+	else if(href_list["give_modifier"])
+		if(!check_rights(R_ADMIN|R_FUN|R_DEBUG))
+			return
+
+		var/mob/living/M = locate(href_list["give_modifier"])
+		if(!istype(M))
+			usr << "This can only be used on instances of type /mob/living"
+			return
+
+		src.admin_give_modifier(M)
+		href_list["datumrefresh"] = href_list["give_modifier"]
+
 	else if(href_list["give_disease2"])
 		if(!check_rights(R_ADMIN|R_FUN))	return
 
@@ -280,20 +292,6 @@
 			usr << "Mob doesn't exist anymore"
 			return
 		holder.Topic(href, list("makealien"=href_list["makealien"]))
-
-	else if(href_list["makeslime"])
-		if(!check_rights(R_SPAWN))	return
-
-		var/mob/living/carbon/human/H = locate(href_list["makeslime"])
-		if(!istype(H))
-			usr << "This can only be done to instances of type /mob/living/carbon/human"
-			return
-
-		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
-		if(!H)
-			usr << "Mob doesn't exist anymore"
-			return
-		holder.Topic(href, list("makeslime"=href_list["makeslime"]))
 
 	else if(href_list["makeai"])
 		if(!check_rights(R_SPAWN))	return

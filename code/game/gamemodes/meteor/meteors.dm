@@ -9,7 +9,7 @@
 						  /obj/effect/meteor/flaming=3, /obj/effect/meteor/irradiated=3, /obj/effect/meteor/emp=3) //for threatening meteor event
 
 /var/list/meteors_catastrophic = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=75, \
-						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
+						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10) //, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
 
 /var/list/meteors_dust = list(/obj/effect/meteor/dust) //for space dust event
 
@@ -133,7 +133,7 @@
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
-	..()
+	return ..()
 
 /obj/effect/meteor/New()
 	..()
@@ -271,8 +271,7 @@
 	if(explode)
 		explosion(src.loc, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 4, flash_range = 6, adminlog = 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
-	for(var/mob/living/L in view(10, src))
-		L.apply_effect(40, IRRADIATE)
+	radiation_repository.radiate(src, 50)
 
 // This meteor fries toasters.
 /obj/effect/meteor/emp

@@ -22,6 +22,10 @@
 	icon_state = "sheater[on]"
 	if(panel_open)
 		overlays  += "sheater-open"
+	if(on)
+		set_light(3, 3, "#FFCC00")
+	else
+		set_light(0)
 
 /obj/machinery/space_heater/examine(mob/user)
 	..(user)
@@ -68,6 +72,7 @@
 			return
 	else if(istype(I, /obj/item/weapon/screwdriver))
 		panel_open = !panel_open
+		playsound(src, I.usesound, 50, 1)
 		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
 		update_icon()
 		if(!panel_open && user.machine == src)

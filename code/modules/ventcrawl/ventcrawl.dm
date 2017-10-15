@@ -35,8 +35,8 @@ var/list/ventcrawl_machinery = list(
 		remove_ventcrawl()
 		add_ventcrawl(loc)
 
-/mob/living/carbon/slime/can_ventcrawl()
-	if(Victim)
+/mob/living/simple_animal/slime/can_ventcrawl()
+	if(victim)
 		to_chat(src, "<span class='warning'>You cannot ventcrawl while feeding.</span>")
 		return FALSE
 	. = ..()
@@ -44,10 +44,15 @@ var/list/ventcrawl_machinery = list(
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item == ability_master)
 		return 1
+
+	var/list/allowed = list()
 	for(var/type in can_enter_vent_with)
-		if(istype(carried_item, can_enter_vent_with))
-			return get_inventory_slot(carried_item) == 0
-	return 0
+		var/list/types = typesof(type)
+		allowed += types
+
+	if(carried_item.type in allowed)
+		if(get_inventory_slot(carried_item) == 0)
+			return 1
 
 /mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item in internal_organs)

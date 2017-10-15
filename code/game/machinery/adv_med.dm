@@ -46,8 +46,8 @@
 		if(occupant)
 			user << "<span class='notice'>The scanner is already occupied!</span>"
 			return
-		for(var/mob/living/carbon/slime/M in range(1, H.affecting))
-			if(M.Victim == H.affecting)
+		for(var/mob/living/simple_animal/slime/M in range(1, H.affecting))
+			if(M.victim == H.affecting)
 				user << "<span class='danger'>[H.affecting.name] has a fucking slime attached to them, deal with that first.</span>"
 				return
 		var/mob/M = H.affecting
@@ -83,8 +83,8 @@
 	if(O.abiotic())
 		user << "<span class='notice'>Subject cannot have abiotic items on.</span>"
 		return 0
-	for(var/mob/living/carbon/slime/M in range(1, O))
-		if(M.Victim == O)
+	for(var/mob/living/simple_animal/slime/M in range(1, O))
+		if(M.victim == O)
 			user << "<span class='danger'>[O] has a fucking slime attached to them, deal with that first.</span>"
 			return 0
 
@@ -266,6 +266,7 @@
 			occupantData["name"] = H.name
 			occupantData["stat"] = H.stat
 			occupantData["health"] = H.health
+			occupantData["maxHealth"] = H.getMaxHealth()
 
 			occupantData["hasVirus"] = H.virus2.len
 
@@ -287,8 +288,9 @@
 			var/bloodData[0]
 			if(H.vessel)
 				var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+				var/blood_max = H.species.blood_volume
 				bloodData["volume"] = blood_volume
-				bloodData["percent"] = round(((blood_volume / 560)*100))
+				bloodData["percent"] = round(((blood_volume / blood_max)*100))
 
 			occupantData["blood"] = bloodData
 
@@ -300,6 +302,15 @@
 				reagentData = null
 
 			occupantData["reagents"] = reagentData
+
+			var/ingestedData[0]
+			if(H.ingested.reagent_list.len >= 1)
+				for(var/datum/reagent/R in H.ingested.reagent_list)
+					ingestedData[++ingestedData.len] = list("name" = R.name, "amount" = R.volume)
+			else
+				ingestedData = null
+
+			occupantData["ingested"] = ingestedData
 
 			var/extOrganData[0]
 			for(var/obj/item/organ/external/E in H.organs)
@@ -394,7 +405,7 @@
 			P.info += "<b>Time of scan:</b> [worldtime2stationtime(world.time)]<br><br>"
 			P.info += "[printing_text]"
 			P.info += "<br><br><b>Notes:</b><br>"
-			P.name = "Body Scan - [href_list["name"]]"
+			P.name = "Body Scan - [href_list["name"]] ([worldtime2stationtime(world.time)])"
 			printing = null
 			printing_text = null
 
@@ -413,7 +424,7 @@
 					t1 = "Unconscious"
 				else
 					t1 = "*dead*"
-			dat += "<font color=[occupant.health > 50 ? "blue" : "red"]>\tHealth %: [occupant.health], ([t1])</font><br>"
+			dat += "<font color=[occupant.health > (occupant.getMaxHealth() / 2) ? "blue" : "red"]>\tHealth %: [(occupant.health / occupant.getMaxHealth())*100], ([t1])</font><br>"
 
 			if(occupant.virus2.len)
 				dat += "<font color='red'>Viral pathogen detected in blood stream.</font><BR>"
@@ -450,15 +461,20 @@
 
 			if(occupant.vessel)
 				var/blood_volume = round(occupant.vessel.get_reagent_amount("blood"))
-				var/blood_percent =  blood_volume / 560
+				var/blood_max = occupant.species.blood_volume
+				var/blood_percent =  blood_volume / blood_max
 				blood_percent *= 100
 
 				extra_font = "<font color=[blood_volume > 448 ? "blue" : "red"]>"
 				dat += "[extra_font]\tBlood Level %: [blood_percent] ([blood_volume] units)</font><br>"
 
 			if(occupant.reagents)
-				for(var/datum/reagent/R in occupant.reagents)
+				for(var/datum/reagent/R in occupant.reagents.reagent_list)
 					dat += "Reagent: [R.name], Amount: [R.volume]<br>"
+
+			if(occupant.ingested)
+				for(var/datum/reagent/R in occupant.ingested.reagent_list)
+					dat += "Stomach: [R.name], Amount: [R.volume]<br>"
 
 			dat += "<hr><table border='1'>"
 			dat += "<tr>"

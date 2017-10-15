@@ -72,6 +72,7 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
+	var/exploit_addons = list()		//Assorted things that show up at the end of the exploit_record list
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
@@ -154,6 +155,8 @@
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
+	var/can_be_antagged = FALSE // To prevent pAIs/mice/etc from getting antag in autotraitor and future auto- modes. Uses inheritance instead of a bunch of typechecks.
+
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.
 	//Also unlike the spell list, this would only store the object in contents, not an object in itself.
@@ -207,3 +210,6 @@
 
 	var/list/active_genes=list()
 	var/mob_size = MOB_MEDIUM
+	var/forbid_seeing_deadchat = FALSE // Used for lings to not see deadchat, and to have ghosting behave as if they were not really dead.
+
+	var/seedarkness = 1	//Determines mob's ability to see shadows. 1 = Normal vision, 0 = darkvision

@@ -55,17 +55,17 @@
 				var/mob/living/carbon/C = usr
 				C.toggle_throw_mode()
 			else
-				usr << "\red This mob type cannot throw items."
+				usr << "<font color='red'>This mob type cannot throw items.</font>"
 			return
 		if(NORTHWEST)
 			if(iscarbon(usr))
 				var/mob/living/carbon/C = usr
 				if(!C.get_active_hand())
-					usr << "\red You have nothing to drop in your hand."
+					usr << "<font color='red'>You have nothing to drop in your hand.</font>"
 					return
 				drop_item()
 			else
-				usr << "\red This mob type cannot drop items."
+				usr << "<font color='red'>This mob type cannot drop items.</font>"
 			return
 
 //This gets called when you press the delete button.
@@ -73,7 +73,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		usr << "\blue You are not pulling anything."
+		usr << "<font color='blue'>You are not pulling anything.</font>"
 		return
 	usr.stop_pulling()
 
@@ -199,7 +199,7 @@
 			if(S.victim == mob)
 				return
 
-	if(mob.stat==DEAD && isliving(mob))
+	if(mob.stat==DEAD && isliving(mob) && !mob.forbid_seeing_deadchat)
 		mob.ghostize()
 		return
 
@@ -255,13 +255,13 @@
 			for(var/mob/M in range(mob, 1))
 				if(M.pulling == mob)
 					if(!M.restrained() && M.stat == 0 && M.canmove && mob.Adjacent(M))
-						src << "\blue You're restrained! You can't move!"
+						src << "<font color='blue'>You're restrained! You can't move!</font>"
 						return 0
 					else
 						M.stop_pulling()
 
 		if(mob.pinned.len)
-			src << "\blue You're pinned to a wall by [mob.pinned[1]]!"
+			src << "<font color='blue'>You're pinned to a wall by [mob.pinned[1]]!</font>"
 			return 0
 
 		move_delay = world.time//set move delay
@@ -470,7 +470,7 @@
 
 	//Check to see if we slipped
 	if(prob(Process_Spaceslipping(5)) && !buckled)
-		src << "\blue <B>You slipped!</B>"
+		src << "<font color='blue'><B>You slipped!</B></font>"
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 0
@@ -501,6 +501,10 @@
 	if(!dense_object && (locate(/obj/structure/lattice) in oview(1, src)))
 		dense_object++
 
+	if(!dense_object && (locate(/obj/structure/catwalk) in oview(1, src)))
+		dense_object++
+
+
 	//Lastly attempt to locate any dense objects we could push off of
 	//TODO: If we implement objects drifing in space this needs to really push them
 	//Due to a few issues only anchored and dense objects will now work.
@@ -529,3 +533,23 @@
 
 /mob/proc/update_gravity()
 	return
+
+// The real Move() proc is above, but touching that massive block just to put this in isn't worth it.
+/mob/Move(var/newloc, var/direct)
+	. = ..(newloc, direct)
+	if(.)
+		post_move(newloc, direct)
+
+// Called when a mob successfully moves.
+// Would've been an /atom/movable proc but it caused issues.
+/mob/proc/post_move(var/newloc, var/direct)
+	for(var/obj/O in contents)
+		O.on_loc_moved(newloc, direct)
+
+// Received from post_move(), useful for items that need to know that their loc just moved.
+/obj/proc/on_loc_moved(var/newloc, var/direct)
+	return
+
+/obj/item/weapon/storage/on_loc_moved(var/newloc, var/direct)
+	for(var/obj/O in contents)
+		O.on_loc_moved(newloc, direct)

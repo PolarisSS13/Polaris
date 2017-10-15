@@ -5,6 +5,7 @@
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
+	intelligence_level = SA_HUMANOID // Because its piloted by players.
 
 	health = 10
 	maxHealth = 10
@@ -38,6 +39,15 @@
 	var/obj/item/device/mmi/mmi = null
 	var/list/req_access = list(access_robotics) //Access needed to pop out the brain.
 	var/positronic
+
+	can_enter_vent_with = list(
+	/obj/item/weapon/implant,
+	/obj/item/device/radio/borg,
+	/obj/item/weapon/holder,
+	/obj/machinery/camera,
+	/mob/living/simple_animal/borer,
+	/obj/item/device/mmi,
+	)
 
 	var/emagged = 0
 	var/obj/item/held_item = null //Storage for single item they can hold.
@@ -149,6 +159,7 @@
 		src.mind.key = M.brainmob.key
 		src.ckey = M.brainmob.ckey
 		src.name = "spider-bot ([M.brainmob.name])"
+		src.languages = M.brainmob.languages
 
 /mob/living/simple_animal/spiderbot/proc/explode() //When emagged.
 	src.visible_message("<span class='danger'>\The [src] makes an odd warbling noise, fizzles, and explodes!</span>")
@@ -219,7 +230,7 @@
 		return
 
 	if(!held_item)
-		usr << "\red You have nothing to drop!"
+		usr << "<font color='red'>You have nothing to drop!</font>"
 		return 0
 
 	if(istype(held_item, /obj/item/weapon/grenade))

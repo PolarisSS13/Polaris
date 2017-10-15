@@ -19,7 +19,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
-	desc = "A LAEP20 Zeus. Designed by Lawson Arms and produced under the wing of the FTU, several TSCs have been trying to get a hold of the blueprints for half a decade."
+	desc = "A LAEP20 Zeus. Designed by Lawson Arms and produced under the wing of Hephaestus, several TSCs have been trying to get a hold of the blueprints for half a decade."
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
 	fire_sound = 'sound/weapons/Gunshot.ogg'
@@ -36,7 +36,7 @@
 	item_state = "crossbow"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT | SLOT_HOLSTER
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
@@ -54,6 +54,7 @@
 	w_class = ITEMSIZE_LARGE
 	force = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 200000)
+	slot_flags = SLOT_BELT
 	projectile_type = /obj/item/projectile/energy/bolt/large
 
 /obj/item/weapon/gun/energy/plasmastun

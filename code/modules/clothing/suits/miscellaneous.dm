@@ -208,7 +208,7 @@
 
 /obj/item/clothing/suit/iasexy
 	name = "sexy internal affairs suit"
-	desc = "Now where's your pen?~..."
+	desc = "Now where's your pen?~"
 	icon_state = "iacost"
 	body_parts_covered = UPPER_TORSO|FEET|LOWER_TORSO|EYES
 	flags_inv = HIDEJUMPSUIT|HIDESHOES|HIDETIE|HIDEHOLSTER
@@ -256,6 +256,14 @@
 	icon_state = "straight_jacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL|HIDETIE|HIDEHOLSTER
+
+/obj/item/clothing/suit/straight_jacket/attack_hand(mob/living/user as mob)
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(src == H.wear_suit)
+			to_chat(H, "<span class='notice'>You need help taking this off!</span>")
+			return
+	..()
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"
@@ -332,6 +340,12 @@ obj/item/clothing/suit/kimono
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 	flags_inv = HIDEHOLSTER
 
+obj/item/clothing/suit/storage/toggle/peacoat
+	name = "peacoat"
+	desc = "A well-tailored, stylish peacoat."
+	icon_state = "peacoat"
+	item_state_slots = list(slot_r_hand_str = "peacoat", slot_l_hand_str = "peacoat")
+	flags_inv = HIDEHOLSTER
 /*
  * stripper
  */
@@ -363,12 +377,18 @@ obj/item/clothing/suit/kimono
 	desc = "A thick jacket with a rubbery, water-resistant shell."
 	icon_state = "pufferjacket"
 	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	flags_inv = HIDEHOLSTER
 
 /obj/item/clothing/suit/jacket/puffer/vest
 	name = "puffer vest"
 	desc = "A thick vest with a rubbery, water-resistant shell."
 	icon_state = "puffervest"
 	item_state_slots = list(slot_r_hand_str = "chainmail", slot_l_hand_str = "chainmail")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	cold_protection = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/suit/storage/miljacket
 	name = "military jacket"
@@ -576,7 +596,7 @@ obj/item/clothing/suit/kimono
 
 /obj/item/clothing/suit/whitedress
 	name = "white dress"
-	desc = "A fancy white dress."
+	desc = "A fancy dress."
 	icon_state = "white_dress"
 	item_state_slots = list(slot_r_hand_str = "white_dress", slot_l_hand_str = "white_dress")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
@@ -813,7 +833,7 @@ obj/item/clothing/suit/kimono
  */
 /obj/item/clothing/suit/storage/toggle/track
 	name = "track jacket"
-	desc = "a track jacket, for the athletic."
+	desc = "A track jacket, for the athletic."
 	icon_state = "trackjacket"
 	item_state_slots = list(slot_r_hand_str = "black_labcoat", slot_l_hand_str = "black_labcoat")
 	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
@@ -863,9 +883,11 @@ obj/item/clothing/suit/kimono
 
 	if(rolled == 0)
 		rolled = 1
+		body_parts_covered &= ~(ARMS)
 		usr << "<span class='notice'>You roll up the sleeves of your [src].</span>"
 	else
 		rolled = 0
+		body_parts_covered = initial(body_parts_covered)
 		usr << "<span class='notice'>You roll down the sleeves of your [src].</span>"
 	update_icon()
 
@@ -937,3 +959,38 @@ obj/item/clothing/suit/kimono
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
 
+/obj/item/clothing/suit/storage/snowsuit
+	name = "snowsuit"
+	desc = "A suit made to keep you nice and toasty on cold winter days. Or at least alive."
+	icon_state = "snowsuit"
+	item_state_slots = list(slot_r_hand_str = "labcoat", slot_l_hand_str = "labcoat")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	flags_inv = HIDEHOLSTER
+	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+
+/obj/item/clothing/suit/storage/snowsuit/command
+	name = "command snowsuit"
+	icon_state = "snowsuit_command"
+
+/obj/item/clothing/suit/storage/snowsuit/security
+	name = "security snowsuit"
+	icon_state = "snowsuit_security"
+
+/obj/item/clothing/suit/storage/snowsuit/medical
+	name = "medical snowsuit"
+	icon_state = "snowsuit_medical"
+
+/obj/item/clothing/suit/storage/snowsuit/engineering
+	name = "engineering snowsuit"
+	icon_state = "snowsuit_engineering"
+
+/obj/item/clothing/suit/storage/snowsuit/cargo
+	name = "cargo snowsuit"
+	icon_state = "snowsuit_cargo"
+
+/obj/item/clothing/suit/storage/snowsuit/science
+	name = "science snowsuit"
+	icon_state = "snowsuit_science"

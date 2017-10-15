@@ -31,6 +31,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
 	w_class = ITEMSIZE_SMALL
+	slot_flags = SLOT_HOLSTER
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -58,6 +59,7 @@
 	item_state = "bike_horn"
 	throwforce = 3
 	w_class = ITEMSIZE_SMALL
+	slot_flags = SLOT_HOLSTER
 	throw_speed = 3
 	throw_range = 15
 	attack_verb = list("HONKED")
@@ -172,19 +174,6 @@
 	var/obj/item/gift = null
 	item_state = "gift"
 	w_class = ITEMSIZE_LARGE
-
-/obj/item/weapon/legcuffs
-	name = "legcuffs"
-	desc = "Use this to keep prisoners in line."
-	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
-	icon_state = "handcuff"
-	flags = CONDUCT
-	throwforce = 0
-	w_class = ITEMSIZE_NORMAL
-	origin_tech = list(TECH_MATERIAL = 1)
-	var/breakouttime = 300	//Deciseconds = 30s = 0.5 minute
-	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/handcuffs.dmi')
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"
@@ -388,6 +377,10 @@
 
 	var/obj/machinery/machine
 
+/obj/item/weapon/pai_cable/Destroy()
+		machine = null
+		return ..()
+
 ///////////////////////////////////////Stock Parts /////////////////////////////////
 
 /obj/item/weapon/storage/part_replacer
@@ -433,6 +426,24 @@
 	icon_state = "capacitor"
 	origin_tech = list(TECH_POWER = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
+
+	var/charge = 0
+	var/max_charge = 1000
+
+/obj/item/weapon/stock_parts/capacitor/New()
+	. = ..()
+	max_charge *= rating
+
+/obj/item/weapon/stock_parts/capacitor/proc/charge(var/amount)
+	charge += amount
+	if(charge > max_charge)
+		charge = max_charge
+
+/obj/item/weapon/stock_parts/capacitor/proc/use(var/amount)
+	if(charge)
+		charge -= amount
+		if(charge < 0)
+			charge = 0
 
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"

@@ -50,6 +50,7 @@ datum/preferences
 	var/list/alternate_languages = list() //Secondary language(s)
 	var/list/language_prefixes = list() //Kanguage prefix keys
 	var/list/gear						//Custom/fluff item loadout.
+	var/list/traits						//Traits which modifier characters for better or worse (mostly worse).
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -76,7 +77,7 @@ datum/preferences
 	var/job_engsec_low = 0
 
 	//Keeps track of preferrence for not getting any wanted jobs
-	var/alternate_option = 0
+	var/alternate_option = 1
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
