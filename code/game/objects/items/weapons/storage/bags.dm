@@ -257,8 +257,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "chembag"
 	desc = "A bag for storing pills, patches, and bottles."
-	storage_slots = 50
 	max_storage_space = 200
-	w_class = ITEMSIZE_NORMAL
-	max_w_class = ITEMSIZE_SMALL
+	w_class = ITEMSIZE_LARGE
+	slowdown = 1
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/glass/bottle)
