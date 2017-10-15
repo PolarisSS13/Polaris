@@ -702,6 +702,22 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	name = "medical winter hood"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 
+/obj/item/clothing/suit/storage/hooded/wintercoat/whiteout
+	name = "Tajaran death angel robe"
+	desc = "A long, flowing robe themed after the Rishizirr, the mythological Tajaran angels of death said to shepherd souls to the afterlife. Their coming is marked by a snowstorm severe enough to cover windows."
+	icon_state = "whiteout_robe"
+	item_state_slots = list(slot_r_hand_str = "suit_white", slot_l_hand_str = "suit_white")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	flags_inv = HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
+	hoodtype = /obj/item/clothing/head/winterhood/whiteout
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+
+/obj/item/clothing/head/winterhood/whiteout
+	name = "Tajaran death angel hood"
+	desc = "A hood themed after the Rishizarr. It looks pretty warm."
+	icon_state = "whiteout_hood"
+
 /obj/item/clothing/suit/storage/hooded/wintercoat/science
 	name = "science winter coat"
 	icon_state = "coatscience"
