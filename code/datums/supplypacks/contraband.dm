@@ -7,7 +7,7 @@
 /datum/supply_packs/randomised/contraband
 	num_contained = 5
 	contains = list(
-			/obj/item/seeds/bloodtomatoseed,
+		/obj/item/seeds/bloodtomatoseed,
 			/obj/item/weapon/storage/pill_bottle/zoom,
 			/obj/item/weapon/storage/pill_bottle/happy,
 			/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
@@ -108,7 +108,6 @@
 					/obj/item/weapon/cell/hyper
 					)
 				)
-
 	cost = 250 //more than a hat crate!
 	contraband = 1
 	containertype = /obj/structure/largecrate
