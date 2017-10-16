@@ -58,7 +58,7 @@
 	name = "ERR_NULL_ENTRY"
 	num_contained = 1
 	contains = list(
-				list( //the operator
+				list( //the operator,
 					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
 					/obj/item/clothing/suit/storage/vest/heavy/merc,
 					/obj/item/clothing/glasses/night,
@@ -66,7 +66,7 @@
 					/obj/item/ammo_magazine/clip/c12g/pellet,
 					/obj/item/ammo_magazine/clip/c12g
 					),
-				list( //the doc
+				list( //the doc,
 					/obj/item/weapon/storage/firstaid/combat,
 					/obj/item/weapon/gun/projectile/dartgun,
 					/obj/item/weapon/reagent_containers/hypospray,
@@ -74,7 +74,7 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/cyanide,
 					/obj/item/ammo_magazine/chemdart
 					),
-				list( //the sapper
+				list( //the sapper,
 					/obj/item/weapon/melee/energy/sword/ionic_rapier,
 					/obj/item/weapon/storage/box/syndie_kit/space, //doesn't matter what species you are
 					/obj/item/weapon/storage/box/syndie_kit/demolitions,
@@ -82,7 +82,7 @@
 					/obj/item/weapon/plastique,
 					/obj/item/weapon/storage/toolbox/syndicate
 					),
-				list( //the infiltrator
+				list( //the infiltrator,
 					/obj/item/weapon/gun/projectile/silenced,
 					/obj/item/device/chameleon,
 					/obj/item/weapon/storage/box/syndie_kit/chameleon,
@@ -90,7 +90,7 @@
 					/obj/item/weapon/card/id/syndicate,
 					/obj/item/clothing/mask/gas/voice
 					),
-				list( //the professional
+				list( //the professional,
 					/obj/item/weapon/gun/projectile/silenced,
 					/obj/item/weapon/gun/energy/ionrifle/pistol,
 					/obj/item/clothing/glasses/thermal/syndi,
@@ -99,7 +99,7 @@
 					/obj/item/weapon/material/hatchet/tacknife/combatknife,
 					/obj/item/clothing/mask/balaclava
 					),
-				list( //the heavy
+				list( //the heavy,
 					/obj/item/weapon/rig/merc/empty,
 					/obj/item/rig_module/mounted/egun,
 					/obj/item/rig_module/maneuvering_jets,
