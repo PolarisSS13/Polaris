@@ -1,8 +1,16 @@
-/datum/gear/accessory
-	display_name = "armband, red"
+/datum/gear/accessory/
+	display_name = "armband selection"
 	path = /obj/item/clothing/accessory/armband
 	slot = slot_tie
 	sort_category = "Accessories"
+
+/datum/gear/accessory/New()
+	..()
+	var/list/armbands = list()
+	for(var/armband in typesof(/obj/item/clothing/accessory/armband))
+		var/obj/item/clothing/accessory/armband_type = armband
+		armbands[initial(armband_type.name)] = armband_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(armbands))
 
 /datum/gear/accessory/cargo
 	display_name = "armband, cargo"
