@@ -1,7 +1,9 @@
-/datum/gear/accessory/
+/datum/gear/accessory
+	display_name = "accessory"
 	slot = slot_tie
 	sort_category = "Accessories"
 	type_category = /datum/gear/accessory
+	path = /obj/item/clothing/accessory
 	cost = 1
 
 /datum/gear/accessory/armband
@@ -160,6 +162,7 @@
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
 	cost = 2
+	path = /obj/item/weapon/storage/belt/fannypack
 
 /datum/gear/accessory/fannypack/New()
 	..()
