@@ -35,7 +35,7 @@
 	alt_titles = list("Cook")
 
 /datum/job/hydro
-	title = "Gardener"
+	title = "Botanist"
 	flag = BOTANIST
 	department = "Civilian"
 	department_flag = CIVILIAN
@@ -49,7 +49,7 @@
 	minimal_access = list(access_hydroponics)
 
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
-	alt_titles = list("Hydroponicist")
+	alt_titles = list("Hydroponicist", "Gardener")
 
 //Cargo
 /datum/job/qm
@@ -161,7 +161,9 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 
+/*
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(H)
+*/
