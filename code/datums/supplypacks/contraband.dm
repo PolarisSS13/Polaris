@@ -55,7 +55,7 @@
  	containername = "Weapons crate"
 
 /datum/supply_packs/randomised/misc/telecrate //you get something awesome, a couple of decent things, and a few weak/filler things
-	name = "ERR_NULL_ENTRY"
+	name = "ERR_NULL_ENTRY" //null crate! also dream maker is hell,
 	num_contained = 1
 	contains = list(
 			list( //the operator,
@@ -74,7 +74,7 @@
 					),
 			list( //the sapper,
 					/obj/item/weapon/melee/energy/sword/ionic_rapier,
-					/obj/item/weapon/storage/box/syndie_kit/space, //doesn't matter what species you are
+					/obj/item/weapon/storage/box/syndie_kit/space, //doesn't matter what species you are,
 					/obj/item/weapon/storage/box/syndie_kit/demolitions,
 					/obj/item/device/multitool/ai_detector,
 					/obj/item/weapon/plastique,
@@ -106,7 +106,7 @@
 					/obj/item/weapon/cell/hyper
 					)
 			)
-	cost = 250 //more than a hat crate!
+	cost = 250 //more than a hat crate!,
 	contraband = 1
 	containertype = /obj/structure/largecrate
 	containername = "Suspicious crate"
