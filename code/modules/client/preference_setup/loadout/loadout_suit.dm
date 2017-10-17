@@ -461,8 +461,3 @@
 	display_name = "snowsuit, supply"
 	path = /obj/item/clothing/suit/storage/snowsuit/cargo
 	allowed_roles = list("Quartermaster","shaft Miner","Cargo Technician","Head of Personnel")
-
-/datum/gear/suit/ianshirt
-	display_name = "worn shirt, Ian (HoP)"
-	path = /obj/item/clothing/suit/ianshirt
-	allowed_roles = list("Head of Personnel")

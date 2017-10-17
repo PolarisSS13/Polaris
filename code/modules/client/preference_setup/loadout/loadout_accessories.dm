@@ -2,6 +2,7 @@
 	slot = slot_tie
 	sort_category = "Accessories"
 	type_category = /datum/gear/accessory
+	cost = 1
 
 /datum/gear/accessory/armband
 	display_name = "armband selection"
