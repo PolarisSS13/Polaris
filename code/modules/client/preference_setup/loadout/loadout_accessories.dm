@@ -1,50 +1,25 @@
 /datum/gear/accessory/
-	display_name = "armband selection"
-	path = /obj/item/clothing/accessory/armband
 	slot = slot_tie
 	sort_category = "Accessories"
+	type_category = /datum/gear/accessory
 
-/datum/gear/accessory/New()
+/datum/gear/accessory/armband
+	display_name = "armband selection"
+	path = /obj/item/clothing/accessory/armband
+
+/datum/gear/accessory/armband/New()
 	..()
 	var/list/armbands = list()
-	for(var/armband in typesof(/obj/item/clothing/accessory/armband))
+	for(var/armband in (typesof(/obj/item/clothing/accessory/armband) - typesof(/obj/item/clothing/accessory/armband/med/color)))
 		var/obj/item/clothing/accessory/armband_type = armband
 		armbands[initial(armband_type.name)] = armband_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(armbands))
 
-/datum/gear/accessory/cargo
-	display_name = "armband, cargo"
-	path = /obj/item/clothing/accessory/armband/cargo
-
-/datum/gear/accessory/emt
-	display_name = "armband, EMT"
-	path = /obj/item/clothing/accessory/armband/medblue
-
-/datum/gear/accessory/engineering
-	display_name = "armband, engineering"
-	path = /obj/item/clothing/accessory/armband/engine
-
-/datum/gear/accessory/hydroponics
-	display_name = "armband, hydroponics"
-	path = /obj/item/clothing/accessory/armband/hydro
-
-/datum/gear/accessory/medical
-	display_name = "armband, medical"
-	path = /obj/item/clothing/accessory/armband/med
-
-/datum/gear/accessory/medical/cross
-	display_name = "armband, medic"
-	path = /obj/item/clothing/accessory/armband/med/cross
-
-/datum/gear/accessory/science
-	display_name = "armband, science"
-	path = /obj/item/clothing/accessory/armband/science
-
-/datum/gear/accessory/colored
+/datum/gear/accessory/armband/colored
 	display_name = "armband"
 	path = /obj/item/clothing/accessory/armband/med/color
 
-/datum/gear/accessory/colored/New()
+/datum/gear/accessory/armband/colored/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
