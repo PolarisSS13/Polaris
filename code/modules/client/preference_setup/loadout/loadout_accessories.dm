@@ -1,4 +1,6 @@
-/datum/gear/accessory/
+/datum/gear/accessory
+	display_name = "accessory"
+	path = /obj/item/accessory/
 	slot = slot_tie
 	sort_category = "Accessories"
 	type_category = /datum/gear/accessory
