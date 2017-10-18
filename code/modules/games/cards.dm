@@ -59,6 +59,9 @@
 		return
 	..()
 
+/obj/item/weapon/deck/attack_hand(mob/user as mob)
+	draw_card()
+
 /obj/item/weapon/deck/verb/draw_card()
 
 	set category = "Object"
@@ -113,20 +116,49 @@
 	var/mob/living/M = input("Who do you wish to deal a card?") as null|anything in players
 	if(!usr || !src || !M) return
 
-	deal_at(usr, M)
+	deal_at(usr, M, 1)
 
-/obj/item/weapon/deck/proc/deal_at(mob/user, mob/target)
+/obj/item/weapon/deck/verb/deal_card_multi()
+
+	set category = "Object"
+	set name = "Deal Multiple Cards"
+	set desc = "Deal multiple cards from a deck."
+	set src in view(1)
+
+	if(usr.stat || !Adjacent(usr)) return
+
+	if(!cards.len)
+		usr << "There are no cards in the deck."
+		return
+
+	var/list/players = list()
+	for(var/mob/living/player in viewers(3))
+		if(!player.stat)
+			players += player
+	//players -= usr
+	var/maxcards = max(min(cards.len,10),1)
+	var/dcard = input("How many card(s) do you wish to deal? You may deal up to [maxcards] cards.") as num
+	if(dcard > maxcards)
+		return
+	var/mob/living/M = input("Who do you wish to deal [dcard] card(s)?") as null|anything in players
+	if(!usr || !src || !M) return
+
+	deal_at(usr, M, dcard)
+
+/obj/item/weapon/deck/proc/deal_at(mob/user, mob/target, dcard) // Take in the no. of card to be dealt
 	var/obj/item/weapon/hand/H = new(get_step(user, user.dir))
-
-	H.cards += cards[1]
-	cards -= cards[1]
-	H.concealed = 1
-	H.update_icon()
+	var/i
+	for(i = 0, i < dcard, i++)
+		H.cards += cards[1]
+		cards -= cards[1]
+		H.concealed = 1
+		H.update_icon()
 	if(user==target)
-		user.visible_message("\The [user] deals a card to \himself.")
+		user.visible_message("\The [user] deals [dcard] card(s) to \himself.")
 	else
-		user.visible_message("\The [user] deals a card to \the [target].")
+		user.visible_message("\The [user] deals [dcard] card(s) to \the [target].")
 	H.throw_at(get_step(target,target.dir),10,1,H)
+
 
 /obj/item/weapon/hand/attackby(obj/O as obj, mob/user as mob)
 	if(cards.len == 1 && istype(O, /obj/item/weapon/pen))
@@ -162,17 +194,23 @@
 	cards = newcards
 	user.visible_message("\The [user] shuffles [src].")
 
-/obj/item/weapon/deck/MouseDrop(atom/over)
-	if(!usr || !over) return
-	if(!Adjacent(usr) || !over.Adjacent(usr)) return // should stop you from dragging through windows
+/obj/item/weapon/deck/MouseDrop(mob/user as mob) // Code from Paper bin, so you can still pick up the deck
+	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
+		if(!istype(usr, /mob/living/simple_animal))
+			if( !usr.get_active_hand() )		//if active hand is empty
+				var/mob/living/carbon/human/H = user
+				var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
 
-	if(!ishuman(over) || !(over in viewers(3))) return
+				if (H.hand)
+					temp = H.organs_by_name["l_hand"]
+				if(temp && !temp.is_usable())
+					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+					return
 
-	if(!cards.len)
-		usr << "There are no cards in the deck."
-		return
+				user << "<span class='notice'>You pick up the [src].</span>"
+				user.put_in_hands(src)
 
-	deal_at(usr, over)
+	return
 
 /obj/item/weapon/pack/
 	name = "Card Pack"
