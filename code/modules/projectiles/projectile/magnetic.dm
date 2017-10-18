@@ -101,6 +101,7 @@
 	armor_penetration = 100
 	penetrating = 100 //Theoretically, this shouldn't stop flying for a while, unless someone lines it up with a wall or fires it into a mountain.
 	irradiate = 120
+	kill_count = 75
 	searing = 1
 	detonate_travel = 1
 	detonate_mob = 1
