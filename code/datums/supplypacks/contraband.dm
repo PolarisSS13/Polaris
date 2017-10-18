@@ -96,14 +96,6 @@
 					/obj/item/ammo_magazine/m45/ap,
 					/obj/item/weapon/material/hatchet/tacknife/combatknife,
 					/obj/item/clothing/mask/balaclava
-					),
-			list( //the heavy,
-					/obj/item/weapon/rig/merc/empty,
-					/obj/item/rig_module/mounted/egun,
-					/obj/item/rig_module/maneuvering_jets,
-					/obj/item/rig_module/vision/thermal,
-					/obj/item/rig_module/device/plasmacutter,
-					/obj/item/weapon/cell/hyper
 					)
 			)
 	cost = 250 //more than a hat crate!,
