@@ -35,7 +35,7 @@
 			new_religion = religion_name
 		switch(lowertext(new_religion))
 			if("unitarianism")
-				B.name = "The Tulmudic Quran"
+				B.name = "The Talmudic Quran"
 			if("christianity")
 				B.name = pick("The Holy Bible","The Dead Sea Scrolls")
 			if("Judaism")
