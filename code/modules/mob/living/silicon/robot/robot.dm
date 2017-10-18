@@ -1024,15 +1024,11 @@
 /mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
 	if(!opened)//Cover is closed
 		if(locked)
-			if(prob(90))
-				user << "You emag the cover lock."
-				locked = 0
-			else
-				user << "You fail to emag the cover lock."
-				src << "Hack attempt detected."
+			to_chat(user,"You emag the cover lock.")
+			locked = 0
 			return 1
 		else
-			user << "The cover is already unlocked."
+			to_chat(user,"The cover is already unlocked.")
 		return
 
 	if(opened)//Cover is open
