@@ -216,4 +216,4 @@
 
 /datum/gear/accessory/locket
 	display_name = "locket"
-	path = /obj/item/clothing/accessory/locke
+	path = /obj/item/clothing/accessory/locket
