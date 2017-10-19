@@ -116,8 +116,8 @@
 
 /decl/hierarchy/outfit/h_whiteout
 	name = "Costume - Snow Ghost"
-	uniform = /obj/item/clothing/under/dress/white3
+	uniform = /obj/item/clothing/under/color/white{ starting_accessories=list(/obj/item/clothing/accessory/scarf/white) }
 	shoes = /obj/item/clothing/shoes/white
-	suit = /obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whitoeut
+	suit = /obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whiteout
 	gloves = /obj/item/clothing/gloves/white
-	mask = /obj/item/clothing/mask/sterile
+	mask = /obj/item/clothing/mask/surgical
