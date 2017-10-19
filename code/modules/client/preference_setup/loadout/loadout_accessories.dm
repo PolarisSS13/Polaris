@@ -216,10 +216,4 @@
 
 /datum/gear/accessory/locket
 	display_name = "locket"
-	path = /obj/item/clothing/accessory/locket
-
-/datum/gear/accessory/medal
-	display_name = "security medal"
-	path = /obj/item/clothing/accessory/medal/silver/security
-	cost = 6
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	path = /obj/item/clothing/accessory/locke
