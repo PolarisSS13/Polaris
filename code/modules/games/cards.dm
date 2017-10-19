@@ -213,7 +213,7 @@
 					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
 					return
 
-				user << "<span class='notice'>You pick up the [src].</span>"
+				user << "<span class='notice'>You pick up [src].</span>"
 				user.put_in_hands(src)
 
 	return
