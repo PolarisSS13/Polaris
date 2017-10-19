@@ -70,3 +70,55 @@
 			debugger.write_data(pin, usr)
 			return 1
 	return 0
+
+/obj/item/integrated_circuit/proc/asc2b64(var/S)
+	var/list/b64 = list("A"=1,"B"=2,"C"=3,"D"=4,"E"=5,"F"=6,"G"=7,"H"=8,"I"=9,"J"=10,"K"=11,"L"=12,"M"=13,"N"=14,"O"=15,"P"=16,"Q"=17,"R"=18,
+	"S"=19,"T"=20,"U"=21,"V"=22,"W"=23,"X"=24,"Y"=25,"Z"=26,"a"=27,"b"=28,"c"=29,"d"=30,"e"=31,"f"=32,"g"=33,"h"=34,"i"=35,"j"=36,"k"=37,"l"=38,"m"=39,"n"=40,"o"=41,
+	"p"=42,"q"=43,"r"=44,"s"=45,"t"=46,"u"=47,"v"=48,"w"=49,"x"=50,"y"=51,"z"=52,"0"=53,"1"=54,"2"=55,"3"=56,"4"=57,"5"=58,"6"=59,"7"=60,"8"=61,"9"=62,","=63,"."=64)
+	var/ls = lentext(S)
+	var/c
+	var/sb1
+	var/sb2
+	var/sb3
+	var/cb1
+	var/cb2
+	var/cb3
+	var/cb4
+	var/i=1
+	while(i<=ls)
+		sb1=text2ascii(S,i)
+		sb2=text2ascii(S,i+1)
+		sb3=text2ascii(S,i+2)
+		cb1=sb1 & 63
+		cb2=(sb1 & 192)>>6 +(sb2 & 15)<<2
+		cb3=(sb2 & 240)>>4 +(sb3 & 3)<<4
+		cb4=(sb3 & 252)>>2
+		c=c+b64[cb1+1]+b64[cb2+1]+b64[cb3+1]+b64[cb4+1]
+		i=i+3
+	return c
+
+/obj/item/integrated_circuit/proc/b642asc(var/S)
+	var/list/b64 = list("A"=1,"B"=2,"C"=3,"D"=4,"E"=5,"F"=6,"G"=7,"H"=8,"I"=9,"J"=10,"K"=11,"L"=12,"M"=13,"N"=14,"O"=15,"P"=16,"Q"=17,"R"=18,
+	"S"=19,"T"=20,"U"=21,"V"=22,"W"=23,"X"=24,"Y"=25,"Z"=26,"a"=27,"b"=28,"c"=29,"d"=30,"e"=31,"f"=32,"g"=33,"h"=34,"i"=35,"j"=36,"k"=37,"l"=38,"m"=39,"n"=40,"o"=41,
+	"p"=42,"q"=43,"r"=44,"s"=45,"t"=46,"u"=47,"v"=48,"w"=49,"x"=50,"y"=51,"z"=52,"0"=53,"1"=54,"2"=55,"3"=56,"4"=57,"5"=58,"6"=59,"7"=60,"8"=61,"9"=62,","=63,"."=64)
+	var/ls = lentext(S)
+	var/c=""
+	var/sb1=0
+	var/sb2=0
+	var/sb3=0
+	var/cb1=0
+	var/cb2=0
+	var/cb3=0
+	var/cb4=0
+	var/i=1
+	while(i<=ls)
+		cb1=b64[copytext(S,i,i+1)]-1
+		cb2=b64[copytext(S,i+1,i+2)]-1
+		cb3=b64[copytext(S,i+2,i+3)]-1
+		cb4=b64[copytext(S,i+3,i+4)]-1
+		sb1=cb1 + (cb2 & 3)<<6
+		sb2=(cb2 & (2<<6 - 2<<2)) >> 2 + cb3 & (2>>4 - 1)
+		sb3=(cb3 & 48)>>4 + cb4<<4
+		c=c+ascii2text(sb1)+ascii2text(sb2)+ascii2text(sb3)
+		i=i+4
+	return c

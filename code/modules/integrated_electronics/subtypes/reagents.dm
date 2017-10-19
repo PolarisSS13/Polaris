@@ -52,7 +52,7 @@
 	desc = "This scary looking thing is able to pump liquids into whatever it's pointed at."
 	icon_state = "injector"
 	extended_desc = "This autoinjector can push reagents into another container or someone else outside of the machine.  The target \
-	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing.Negative given amount makes injector suck out reagents."
+	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing. Negative given amount makes injector suck out reagents."
 	flags = OPENCONTAINER
 	complexity = 20
 	cooldown_per_use = 6 SECONDS
@@ -272,7 +272,7 @@
 	origin_tech = list(TECH_MATERIALS = 4, TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 2)
 
 /obj/item/integrated_circuit/reagent/storage/big
-	name = "Big reagent storage"
+	name = "big reagent storage"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 180u."
 	icon_state = "reagent_storage_big"
 	extended_desc = "This is effectively an internal beaker."
@@ -286,7 +286,7 @@
 	name = "reagent scanner"
 	desc = "Stores liquid inside, and away from electrical components.  Can store up to 60u.  On pulse this beaker will send list of contained reagents."
 	icon_state = "reagent_scan"
-	extended_desc = "This is effectively an internal cryo beaker."
+	extended_desc = "Mostly useful for reagent filter."
 	flags = OPENCONTAINER
 	complexity = 8
 	outputs = list("volume used" = IC_PINTYPE_NUMBER,"self reference" = IC_PINTYPE_REF,"list of reagents" = IC_PINTYPE_LIST)
@@ -307,7 +307,7 @@
 	desc = "Filtering liquids by list of desired or unwanted reagents."
 	icon_state = "reagent_filter"
 	extended_desc = "This is a filter, which will move liquids from the source ref to the target ref. \
-	It will move all reagents, except list,given in fourth pin if amount value is positive.\
+	It will move all reagents, except list, given in fourth pin if amount value is positive.\
 	Or it will move only desired reagents if amount is negative, The third pin determines \
 	how much reagent is moved per pulse, between 0 and 50. Amount is given for each separate reagent."
 	flags = OPENCONTAINER

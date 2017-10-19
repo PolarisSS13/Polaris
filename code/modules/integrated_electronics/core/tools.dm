@@ -242,7 +242,7 @@
 
 /obj/item/device/integrated_electronics/analyzer
 	name = "circuit analyzer"
-	desc = "This tool can scan assembly and give code ,that is neeed to recreate this assembly in circuit printer."
+	desc = "This tool can scan an assembly in generate code necessary to recreate it in a circuit printer."
 	icon = 'icons/obj/electronic_assemblies.dmi'
 	icon_state = "analyzer"
 	flags = CONDUCT

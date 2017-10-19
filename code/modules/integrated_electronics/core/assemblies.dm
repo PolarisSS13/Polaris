@@ -36,7 +36,7 @@
 		if(!istype(src.loc,/turf))
 			return
 		src.anchored = !anchored
-		user << "You [src.anchored ? "wrench" : "unwrench"] \the [src]."
+		to_chat(user,"You [src.anchored ? "wrench" : "unwrench"] \the [src].")
 		return
 	..()
 

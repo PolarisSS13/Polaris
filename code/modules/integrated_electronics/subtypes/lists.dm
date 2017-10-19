@@ -55,7 +55,7 @@
 /obj/item/integrated_circuit/list/search
 	name = "search circuit"
 	desc = "This circuit will give index of desired element in the list."
-	extended_desc = "Search will start at 1 position and will return first matching position"
+	extended_desc = "Search will start at 1 position and will return first matching position."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		"item" = IC_PINTYPE_ANY
@@ -75,8 +75,8 @@
 
 /obj/item/integrated_circuit/list/at
 	name = "at circuit"
-	desc = "This circuit will pick element from the list by number"
-	extended_desc = "If there is no element with such number, result will be null"
+	desc = "This circuit will pick an element from a list by index."
+	extended_desc = "If there is no element with such index, result will be null."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		"index" = IC_PINTYPE_NUMBER
@@ -95,8 +95,8 @@
 
 /obj/item/integrated_circuit/list/delete
 	name = "delete circuit"
-	desc = "This circuit will pick element from the list by number"
-	extended_desc = "If there is no element with such number, result will be null"
+	desc = "This circuit will delete the element from a list by index."
+	extended_desc = "If there is no element with such index, result list will be unchanged."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		"index" = IC_PINTYPE_NUMBER
@@ -122,8 +122,8 @@
 
 /obj/item/integrated_circuit/list/write
 	name = "write circuit"
-	desc = "This circuit will write element in list with given index"
-	extended_desc = "If there is no element with such index,it will give the same list,as before."
+	desc = "This circuit will write element in list with given index."
+	extended_desc = "If there is no element with such index, it will give the same list, as before."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		"index" = IC_PINTYPE_NUMBER,
@@ -146,8 +146,7 @@
 
 obj/item/integrated_circuit/list/len
 	name = "len circuit"
-	desc = "This circuit will give lenght of the list"
-	extended_desc = "selfdescriptive"
+	desc = "This circuit will give lenght of the list."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		)

@@ -69,7 +69,7 @@
 
 /obj/item/integrated_circuit/converter/refcode
 	name = "reference encoder"
-	desc = "This circuit can convert a reference in encoded string,which can be transferred throught EPV2 circuit"
+	desc = "This circuit can encode a reference into a string, which can then be read by an EPV2 circuit."
 	icon_state = "ref-string"
 	inputs = list("input" = IC_PINTYPE_REF)
 	outputs = list("output" = IC_PINTYPE_STRING)
@@ -88,7 +88,7 @@
 
 /obj/item/integrated_circuit/converter/refdecode
 	name = "reference decoder"
-	desc = "This circuit can convert a encoded refference to actual reference."
+	desc = "This circuit can convert a encoded reference to actual reference."
 	icon_state = "ref-string"
 	inputs = list("input" = IC_PINTYPE_STRING)
 	outputs = list("output" = IC_PINTYPE_REF)
@@ -205,8 +205,8 @@
 /obj/item/integrated_circuit/converter/findstring
 	name = "find text"
 	desc = "This gives position of sample in the string. Or returns 0."
-	extended_desc = "first pin is string,to be examined.Second pin is sample,which shoul be found. \
-	For example, 'eat this burger',' ' will give you position 4.This circuit isn't case sensitive."
+	extended_desc = "The first pin is the string to be examined. The second pin is the sample to be found. \
+	For example, 'eat this burger',' ' will give you position 4. This circuit isn't case sensitive."
 	complexity = 4
 	inputs = list(
 		"string" = IC_PINTYPE_STRING,
@@ -229,8 +229,8 @@
 
 /obj/item/integrated_circuit/converter/exploders
 	name = "string exploder"
-	desc = "This splits single string by delimiter into list of strings."
-	extended_desc = "This circuits splits a given string into list of strings, based on the string, and given delimiter. \
+	desc = "This splits a single string into a list of strings."
+	extended_desc = "This circuit splits a given string into a list of strings based on the string and given delimiter. \
 	For example, 'eat this burger',' ' will be converted to list('eat','this','burger')."
 	complexity = 4
 	inputs = list(

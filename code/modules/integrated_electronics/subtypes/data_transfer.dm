@@ -27,13 +27,10 @@
 
 /obj/item/integrated_circuit/transfer/multiplexer/do_work()
 	var/input_index = get_pin_data(IC_INPUT, 1)
-	var/output = null
 
 	if(!isnull(input_index) && (input_index >= 1 && input_index < inputs.len))
-		output = get_pin_data(IC_INPUT, input_index + 1)
-
-	set_pin_data(IC_OUTPUT, 1, output)
-	push_data()
+		set_pin_data(IC_OUTPUT, 1,get_pin_data(IC_INPUT, input_index + 1))
+		push_data()
 	activate_pin(2)
 
 /obj/item/integrated_circuit/transfer/multiplexer/medium
@@ -79,10 +76,8 @@
 
 /obj/item/integrated_circuit/transfer/demultiplexer/do_work()
 	var/output_index = get_pin_data(IC_INPUT, 1)
-	var/output = get_pin_data(IC_INPUT, 2)
-
 	for(var/i = 1 to outputs.len)
-		set_pin_data(IC_OUTPUT, i, i == output_index ? output : null)
+		set_pin_data(IC_OUTPUT, i, i == output_index ? get_pin_data(IC_INPUT, 2) : null)
 
 	activate_pin(2)
 

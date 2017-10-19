@@ -208,14 +208,19 @@
 	name = "shocker circuit"
 	desc = "Used to shock adjastent creatures with electricity."
 	icon_state = "shocker"
-	extended_desc = "The circuit accepts a reference to creature,who needs to be shocked. It can shock target on adjastent tiles.."
+	extended_desc = "The circuit accepts a reference to creature,who needs to be shocked. It can shock target on adjacent tiles. \
+	Severity determines  hardness of shock and it's power consumption. It's given between 0 and 60."
 	w_class = ITEMSIZE_TINY
 	complexity = 10
-	inputs = list("target" = IC_PINTYPE_REF)
+	inputs = list("target" = IC_PINTYPE_REF,"severity" = IC_PINTYPE_NUMBER)
 	outputs = list()
 	activators = list("shock" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_RESEARCH
-	power_draw_per_use = 50
+	power_draw_per_use = 0
+
+/obj/item/integrated_circuit/manipulation/shocker/on_data_written()
+	var/s = get_pin_data(IC_INPUT, 2)
+	power_draw_per_use = Clamp(s,0,60)*4
 
 /obj/item/integrated_circuit/manipulation/shocker/do_work()
 	..()
@@ -226,17 +231,18 @@
 	var/mob/living/M = AM
 	if(!M.Adjacent(T))
 		return //Can't reach
-	M << "<span class='danger'>You feel a sharp shock!</span>"
+	to_chat(M, "<span class='danger'>You feel a sharp shock!</span>")
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, M)
 	s.start()
-	M.Weaken(10)
+	M.stun_effect_act(0, Clamp(get_pin_data(IC_INPUT, 2),0,60), null)
+
 
 /obj/item/integrated_circuit/manipulation/grabber
 	name = "grabber"
-	desc = "circuit with it's own inventory for small/medium items ,used to grab and store things."
+	desc = "A circuit with it's own inventory for small/medium items, used to grab and store things."
 	icon_state = "grabber"
-	extended_desc = "The circuit accepts a reference to thing to be grabbed. It can store up to 10 things.Modes:1 for grab. 0 for eject the first thing. -1 for eject all"
+	extended_desc = "The circuit accepts a reference to thing to be grabbed. It can store up to 10 things. Modes: 1 for grab. 0 for eject the first thing. -1 for eject all."
 	w_class = ITEMSIZE_NORMAL
 	size = 3
 
@@ -289,12 +295,14 @@
 	push_data()
 	activate_pin(2)
 
+
+
 /obj/item/integrated_circuit/manipulation/thrower
 	name = "thrower"
-	desc = "compact launcher to throw things from inside or nearby tiles"
+	desc = "A compact launcher to throw things from inside or nearby tiles"
 	extended_desc = "The first and second inputs need to be numbers.  They are coordinates to throw thing at, relative to the machine itself.  \
 	The 'fire' activator will cause the mechanism to attempt to throw thing at the coordinates, if possible.  Note that the \
-	projectile need to be insie the machine or to be on adjastent tiles.And to be up to medium size."
+	projectile need to be inside the machine, or to be on an adjacent tile, and to be up to medium size."
 	complexity = 15
 	w_class = ITEMSIZE_NORMAL
 	size = 2

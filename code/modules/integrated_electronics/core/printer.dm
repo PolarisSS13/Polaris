@@ -84,12 +84,12 @@
 						PR = new/obj/item/device/integrated_electronics/prefab(get_turf(loc))
 						PR.program = program
 						metal = metal - as_needs
-						to_chat(user, "<span class='notice'>Assembly has been printed</span>")
+						to_chat(user, "<span class='notice'>Assembly has been printed.</span>")
 						as_printing = FALSE
 						as_needs = 0
 						max_metal = init_max_metal
 					else
-						to_chat(user, "<span class='notice'>Please,insert [as_needs-metal] more metal!</span>")
+						to_chat(user, "<span class='notice'>Please insert [as_needs-metal] more metal!</span>")
 				interact(user)
 				return TRUE
 
@@ -135,7 +135,7 @@
 	HTML += "Metal: [metal/metal_per_sheet]/[max_metal/metal_per_sheet] sheets.<br>"
 	HTML += "Circuits available: [upgraded ? "Advanced":"Regular"]."
 	HTML += "Assembly Cloning: [can_clone ? "Available": "Unavailable"]."
-	HTML += "Crossed out circuits mean that the printer is not sufficentally upgraded to create that circuit.<br>"
+	HTML += "Crossed out circuits mean that the printer is not sufficiently upgraded to create that circuit.<br>"
 	HTML += "<hr>"
 	if(can_clone)
 		HTML += "Here you can load script for your assembly.<br>"
@@ -152,7 +152,7 @@
 		else
 			HTML += " <A href='?src=\ref[src];print=print'>{Print assembly}</a> "
 		if(as_printing)
-			HTML += "<br> printing in process. Please,insert more metal. "
+			HTML += "<br> printing in process. Please insert more metal. "
 		HTML += "<br><hr>"
 	HTML += "Categories:"
 	for(var/category in recipe_list)
@@ -215,7 +215,7 @@
 					visible_message( "<span class='warning'>Invalid program.</span>")
 				else if(sc == -1)
 
-					visible_message( "<span class='warning'>Unknown circuits occured. Need upgrade to process.</span>")
+					visible_message( "<span class='warning'>Unknown circuits found. Upgrades required to process this design.</span>")
 				else if(sc == null)
 					visible_message( "<span class='warning'>Invalid program.</span>")
 				else
@@ -225,21 +225,21 @@
 				if(sc == 0)
 					visible_message( "<span class='warning'>Invalid program.</span>")
 				else if(sc == -1)
-					visible_message( "<span class='warning'>Unknown circuits occured. Need upgrade to process.</span>")
+					visible_message( "<span class='warning'>Unknown circuits found. Upgrades required to process this design.</span>")
 				else
 					as_printing = TRUE
 					if(sc <= metal)
 						PR = new/obj/item/device/integrated_electronics/prefab(get_turf(loc))
 						PR.program = program
 						metal = metal - sc
-						visible_message( "<span class='notice'>Assembly has been printed</span>")
+						visible_message( "<span class='notice'>Assembly has been printed.</span>")
 						as_printing = FALSE
 						as_needs = 0
 						max_metal=init_max_metal
 					else
 						max_metal = sc + metal_per_sheet
 						as_needs = sc
-						visible_message( "<span class='notice'>Please,insert [as_needs-metal] more metal!</span>")
+						visible_message( "<span class='notice'>Please insert [as_needs-metal] more metal!</span>")
 	interact(usr)
 
 // FUKKEN UPGRADE DISKS

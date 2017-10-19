@@ -17,6 +17,8 @@
 	activators = list("on pressed" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
+
+
 /obj/item/integrated_circuit/input/button/ask_for_input(mob/user) //Bit misleading name for this specific use.
 	to_chat(user, "<span class='notice'>You press the button labeled '[src.name]'.</span>")
 	activate_pin(1)
@@ -191,8 +193,8 @@
 
 /obj/item/integrated_circuit/input/examiner
 	name = "examiner"
-	desc = "It' s a little machine vision system. It can return name,description,distance,relative coordinates,\
-	total amount of reagents and maximum amount of reagents."
+	desc = "It' s a little machine vision system. It can return the name, description, distance, \
+	relative coordinates, total amount of reagents, and maximum amount of reagents of the referenced object."
 	icon_state = "video_camera"
 	complexity = 6
 	inputs = list("\<REF\> target" = IC_PINTYPE_REF)
@@ -349,12 +351,12 @@
 /obj/item/integrated_circuit/input/advanced_locator
 	complexity = 6
 	name = "advanced locator"
-	desc = "This is needed for certain devices that demand a reference for a target to act upon.  This type locates something \
+	desc = "This is needed for certain devices that demand a reference for a target to act upon. This type locates something \
 	that is standing in given radius up to 8 meters"
 	extended_desc = "The first pin requires a ref to a kind of object that you want the locator to acquire. If  This means that it will \
-	give refs to nearby objects that are similar.  If this pin is string, locator will search\
+	give refs to nearby objects that are similar. If this pin is string, locator will search\
 	 item by matching desired text in name + description. If more than one valid object is found nearby, it will choose one of them at \
-	random.The second pin is a radius"
+	random. The second pin is a radius."
 	inputs = list("desired type" = IC_PINTYPE_ANY, "radius" = IC_PINTYPE_NUMBER)
 	outputs = list("located ref")
 	activators = list("locate" = IC_PINTYPE_PULSE_IN,"found" = IC_PINTYPE_PULSE_OUT,"not found" = IC_PINTYPE_PULSE_OUT)
@@ -633,9 +635,9 @@
 
 /obj/item/integrated_circuit/input/internalbm
 	name = "internal battery monitor"
-	desc = "This can help to watch the internal battery state"
+	desc = "This monitors the charge level of an internal battery."
 	icon_state = "internalbm"
-	extended_desc = "This circuit will give you values of charge,max charge and percentage of the internal battery by demand"
+	extended_desc = "This circuit will give you values of charge, max charge and percentage of the internal battery on demand."
 	w_class = ITEMSIZE_TINY
 	complexity = 1
 	inputs = list()
@@ -666,9 +668,9 @@
 
 /obj/item/integrated_circuit/input/externalbm
 	name = "external battery monitor"
-	desc = "This can help to watch battery state of any device in viev"
+	desc = "This can help to watch battery state of any device in view"
 	icon_state = "externalbm"
-	extended_desc = "This circuit will give you values of charge,max charge and percentage of any device or battery in viev"
+	extended_desc = "This circuit will give you values of charge, max charge and percentage of any device or battery in view"
 	w_class = ITEMSIZE_TINY
 	complexity = 2
 	inputs = list("target" = IC_PINTYPE_REF)
