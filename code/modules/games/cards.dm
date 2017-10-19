@@ -7,6 +7,7 @@
 	w_class = ITEMSIZE_SMALL
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
+	var/cooldown = 0 // to prevent spam shuffle
 
 /obj/item/weapon/deck/holder
 	name = "card box"
@@ -186,13 +187,18 @@
 
 /obj/item/weapon/deck/attack_self(var/mob/user as mob)
 
-	var/list/newcards = list()
-	while(cards.len)
-		var/datum/playingcard/P = pick(cards)
-		newcards += P
-		cards -= P
-	cards = newcards
-	user.visible_message("\The [user] shuffles [src].")
+	if (cooldown < world.time - 15) // 15 ticks cooldown
+		var/list/newcards = list()
+		while(cards.len)
+			var/datum/playingcard/P = pick(cards)
+			newcards += P
+			cards -= P
+		cards = newcards
+		user.visible_message("\The [user] shuffles [src].")
+		playsound(user, 'sound/items/cardshuffle.ogg', 50, 1)
+		cooldown = world.time
+	else
+		return
 
 /obj/item/weapon/deck/MouseDrop(mob/user as mob) // Code from Paper bin, so you can still pick up the deck
 	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
