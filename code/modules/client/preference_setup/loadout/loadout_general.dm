@@ -4,7 +4,7 @@
 
 /datum/gear/cane/white
 	display_name = "white cane"
-	path = /obj/item/weapon/whitecane
+	path = /obj/item/weapon/cane/whitecane
 
 /datum/gear/bag
 	display_name = "plastic bag"
