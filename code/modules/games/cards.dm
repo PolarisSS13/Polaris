@@ -185,8 +185,18 @@
 		return
 	..()
 
-/obj/item/weapon/deck/attack_self(var/mob/user as mob)
+/obj/item/weapon/deck/attack_self()
+	shuffle(usr)
 
+
+/obj/item/weapon/deck/verb/verb_shuffle(mob/user as mob)
+	set category = "Object"
+	set name = "Shuffle"
+	set desc = "Shuffle the cards in the deck."
+	set src in view(1)
+	shuffle(usr)
+
+/obj/item/weapon/deck/proc/shuffle(mob/user as mob)
 	if (cooldown < world.time - 15) // 15 ticks cooldown
 		var/list/newcards = list()
 		while(cards.len)
@@ -199,6 +209,7 @@
 		cooldown = world.time
 	else
 		return
+
 
 /obj/item/weapon/deck/MouseDrop(mob/user as mob) // Code from Paper bin, so you can still pick up the deck
 	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
@@ -216,6 +227,23 @@
 				user << "<span class='notice'>You pick up [src].</span>"
 				user.put_in_hands(src)
 
+	return
+
+/obj/item/weapon/deck/verb_pickup(mob/user as mob) // Snowflaked so pick up verb work as intended
+	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
+		if(!istype(usr, /mob/living/simple_animal))
+			if( !usr.get_active_hand() )		//if active hand is empty
+				var/mob/living/carbon/human/H = user
+				var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
+
+				if (H.hand)
+					temp = H.organs_by_name["l_hand"]
+				if(temp && !temp.is_usable())
+					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+					return
+
+				user << "<span class='notice'>You pick up [src].</span>"
+				user.put_in_hands(src)
 	return
 
 /obj/item/weapon/pack/
@@ -254,26 +282,32 @@
 
 	set category = "Object"
 	set name = "Discard"
-	set desc = "Place a card from your hand in front of you."
+	set desc = "Place (a) card(s) from your hand in front of you."
 
-	var/list/to_discard = list()
-	for(var/datum/playingcard/P in cards)
-		to_discard[P.name] = P
-	var/discarding = input("Which card do you wish to put down?") as null|anything in to_discard
+	var/i
+	var/maxcards = min(cards.len,5) // Maximum of 5 cards at once
+	var/discards = input("How many cards do you want to discard? You may discard up to [maxcards] card(s)") as num
+	if(discards > maxcards)
+		return
+	for	(i = 0;i < discards;i++)
+		var/list/to_discard = list()
+		for(var/datum/playingcard/P in cards)
+			to_discard[P.name] = P
+		var/discarding = input("Which card do you wish to put down?") as null|anything in to_discard
 
-	if(!discarding || !to_discard[discarding] || !usr || !src) return
+		if(!discarding || !to_discard[discarding] || !usr || !src) return
 
-	var/datum/playingcard/card = to_discard[discarding]
-	to_discard.Cut()
+		var/datum/playingcard/card = to_discard[discarding]
+		to_discard.Cut()
 
-	var/obj/item/weapon/hand/H = new(src.loc)
-	H.cards += card
-	cards -= card
-	H.concealed = 0
-	H.update_icon()
-	src.update_icon()
-	usr.visible_message("\The [usr] plays \the [discarding].")
-	H.loc = get_step(usr,usr.dir)
+		var/obj/item/weapon/hand/H = new(src.loc)
+		H.cards += card
+		cards -= card
+		H.concealed = 0
+		H.update_icon()
+		src.update_icon()
+		usr.visible_message("\The [usr] plays \the [discarding].")
+		H.loc = get_step(usr,usr.dir)
 
 	if(!cards.len)
 		qdel(src)
