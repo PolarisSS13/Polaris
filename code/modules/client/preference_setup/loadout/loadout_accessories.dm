@@ -199,7 +199,7 @@
 
 
 /datum/gear/accessory/sweater
-	display_name = "Sweater Selection"
+	display_name = "sweater selection"
 	path = /obj/item/clothing/accessory/sweater
 
 /datum/gear/accessory/sweater/New()
@@ -209,3 +209,17 @@
 		var/obj/item/clothing/suit/sweater_type = sweater
 		sweaters[initial(sweater_type.name)] = sweater_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sweaters))
+
+/datum/gear/accessory/stethoscope
+	display_name = "stethoscope"
+	path = /obj/item/clothing/accessory/stethoscope
+
+/datum/gear/accessory/locket
+	display_name = "locket"
+	path = /obj/item/clothing/accessory/locket
+
+/datum/gear/accessory/medal
+	display_name = "security medal"
+	path = /obj/item/clothing/accessory/medal/silver/security
+	cost = 6
+	allowed_roles = list("Head of Security", "Warden", "Security Officer")
