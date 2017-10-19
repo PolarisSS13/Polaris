@@ -6,15 +6,6 @@
 	display_name = "white cane"
 	path = /obj/item/weapon/cane/whitecane
 
-/datum/gear/bag
-	display_name = "plastic bag"
-	path = /obj/item/weapon/storage/bag/plasticbag
-	cost = 2
-
-/datum/gear/bag/cash
-	display_name = "cash bag"
-	path = /obj/item/weapon/storage/bag/cash
-
 /datum/gear/dice
 	display_name = "dice pack"
 	path = /obj/item/weapon/storage/pill_bottle/dice
