@@ -110,6 +110,14 @@
 	name = "Costume - Pirate"
 	uniform = /obj/item/clothing/under/pirate
 	shoes = /obj/item/clothing/shoes/brown
-	head = /obj/item/clothing/head/helmet/space
+	head = /obj/item/clothing/head/pirate
 	suit = /obj/item/clothing/suit/pirate
 	glasses = /obj/item/clothing/glasses/eyepatch
+
+/decl/hierarchy/outfit/h_whiteout
+	name = "Costume - Snow Ghost"
+	uniform = /obj/item/clothing/under/dress/white3
+	shoes = /obj/item/clothing/shoes/white
+	suit = /obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whitoeut
+	gloves = /obj/item/clothing/gloves/white
+	mask = /obj/item/clothing/mask/sterile
