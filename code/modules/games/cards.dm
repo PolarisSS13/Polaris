@@ -70,12 +70,16 @@
 	set desc = "Draw a card from a deck."
 	set src in view(1)
 
+	var/mob/living/carbon/user = usr
+
 	if(usr.stat || !Adjacent(usr)) return
+
+	if(user.hands_are_full()) // Safety check lest the card disappear into oblivion
+		usr << "Your hands are full!"
+		return
 
 	if(!istype(usr,/mob/living/carbon))
 		return
-
-	var/mob/living/carbon/user = usr
 
 	if(!cards.len)
 		usr << "There are no cards in the deck."
@@ -323,6 +327,42 @@
 		user << "It contains: "
 		for(var/datum/playingcard/P in cards)
 			user << "\The [P.name]."
+
+/obj/item/weapon/hand/verb/Removecard()
+
+	set category = "Object"
+	set name = "Remove card"
+	set desc = "Remove a card from the hand."
+	set src in view(1)
+
+	var/mob/living/carbon/user = usr
+
+	if(user.stat || !Adjacent(user)) return
+
+	if(user.hands_are_full()) // Safety check lest the card disappear into oblivion
+		usr << "Your hands are full!"
+		return
+
+	var/pickablecards = list()
+	for(var/datum/playingcard/P in cards)
+		pickablecards[P.name] += P
+	var/pickedcard = input("Which card do you want to remove from the hand?")	as null|anything in pickablecards
+
+	if(!pickedcard || !pickablecards[pickedcard] || !usr || !src) return
+
+	var/datum/playingcard/card = pickablecards[pickedcard]
+
+	var/obj/item/weapon/hand/H = new(get_turf(src))
+	user.put_in_hands(H)
+	H.cards += card
+	cards -= card
+	H.concealed = src.concealed
+	H.update_icon()
+	src.update_icon()
+
+	if(!cards.len)
+		qdel(src)
+	return
 
 /obj/item/weapon/hand/update_icon(var/direction = 0)
 
