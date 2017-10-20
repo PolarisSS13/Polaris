@@ -24,7 +24,7 @@
 			P.back_icon = "card_back_tarot"
 			cards += P
 
-/obj/item/weapon/deck/shuffle()
+/obj/item/weapon/deck/tarot/shuffle()
 	var/mob/living/user = usr
 	if (cooldown < world.time - 15)
 		var/list/newcards = list()
