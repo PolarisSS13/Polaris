@@ -21,11 +21,15 @@
 	display_name = "Monocle"
 	path = /obj/item/clothing/glasses/monocle
 
-/datum/gear/eyes/scanning_goggles
+/datum/gear/eyes/goggles
+	display_name = "plain goggles"
+	path = /obj/item/clothing/glasses/goggles
+
+/datum/gear/eyes/goggles/scanning
 	display_name = "scanning goggles"
 	path = /obj/item/clothing/glasses/regular/scanners
 
-/datum/gear/eyes/sciencegoggles
+/datum/gear/eyes/goggles/science
 	display_name = "Science Goggles"
 	path = /obj/item/clothing/glasses/science
 
@@ -92,8 +96,6 @@
 /datum/gear/eyes/meson/aviator/prescription
 	display_name = "Optical Meson Aviators, prescription (Engineering)"
 	path = /obj/item/clothing/glasses/meson/aviator/prescription
-
-/datum/gear/eyes/meson/aviator/prescription
 
 /datum/gear/eyes/glasses/fakesun
 	display_name = "Sunglasses, stylish"

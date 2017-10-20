@@ -4,6 +4,10 @@
 	path = /obj/item/weapon/storage/briefcase
 	sort_category = "Utility"
 
+/datum/gear/utility/camera
+	display_name = "camera"
+	path = /obj/item/device/camera
+
 /datum/gear/utility/clipboard
 	display_name = "clipboard"
 	path = /obj/item/weapon/clipboard
