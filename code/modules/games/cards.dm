@@ -53,11 +53,15 @@
 /obj/item/weapon/deck/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
-		for(var/datum/playingcard/P in H.cards)
-			cards += P
-		qdel(O)
-		user << "You place your cards on the bottom of \the [src]."
-		return
+		if(H.parentdeck == src)
+			for(var/datum/playingcard/P in H.cards)
+				cards += P
+			qdel(H)
+			user << "You place your cards on the bottom of \the [src]."
+			return
+		else
+			user << "You can't mix card(s) from other deck!"
+			return
 	..()
 
 /obj/item/weapon/deck/attack_hand(mob/user as mob)
@@ -86,6 +90,10 @@
 		return
 
 	var/obj/item/weapon/hand/H = user.get_type_in_hands(/obj/item/weapon/hand)
+	if(H && !(H.parentdeck == src))
+		user << "You can't mix card(s) from other deck!"
+		return
+
 	if(!H)
 		H = new(get_turf(src))
 		user.put_in_hands(H)
@@ -95,6 +103,7 @@
 	var/datum/playingcard/P = cards[1]
 	H.cards += P
 	cards -= P
+	H.parentdeck = src
 	H.update_icon()
 	user.visible_message("\The [user] draws a card.")
 	user << "It's the [P]."
@@ -156,6 +165,7 @@
 	for(i = 0, i < dcard, i++)
 		H.cards += cards[1]
 		cards -= cards[1]
+		H.parentdeck = src
 		H.concealed = 1
 		H.update_icon()
 	if(user==target)
@@ -180,13 +190,18 @@
 		update_icon()
 	else if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
-		for(var/datum/playingcard/P in cards)
-			H.cards += P
-		H.concealed = src.concealed
-		user.drop_from_inventory(src)
-		qdel(src)
-		H.update_icon()
-		return
+		if(H.parentdeck == src.parentdeck) // Prevent cardmixing
+			for(var/datum/playingcard/P in cards)
+				H.cards += P
+			H.concealed = src.concealed
+			user.drop_from_inventory(src)
+			qdel(src)
+			H.update_icon()
+			return
+		else
+			user << "You cannot mix card(s) from other deck!"
+			return
+
 	..()
 
 /obj/item/weapon/deck/attack_self()
@@ -259,6 +274,7 @@
 	icon = 'icons/obj/playing_cards.dmi'
 	w_class = ITEMSIZE_TINY
 	var/list/cards = list()
+	var/parentdeck = null // This variable is added here so that card pack dependent card can be mixed together by defining a "parentdeck" for them
 
 
 /obj/item/weapon/pack/attack_self(var/mob/user as mob)
@@ -266,6 +282,7 @@
 	var/obj/item/weapon/hand/H = new()
 
 	H.cards += cards
+	H.parentdeck = src.parentdeck
 	cards.Cut();
 	user.drop_item()
 	qdel(src)
@@ -282,6 +299,7 @@
 
 	var/concealed = 0
 	var/list/cards = list()
+	var/parentdeck = null
 
 /obj/item/weapon/hand/verb/discard()
 
@@ -309,6 +327,7 @@
 		H.cards += card
 		cards -= card
 		H.concealed = 0
+		H.parentdeck = src.parentdeck
 		H.update_icon()
 		src.update_icon()
 		usr.visible_message("\The [usr] plays \the [discarding].")
@@ -357,6 +376,7 @@
 	user.put_in_hands(H)
 	H.cards += card
 	cards -= card
+	H.parentdeck = src.parentdeck
 	H.concealed = src.concealed
 	H.update_icon()
 	src.update_icon()
