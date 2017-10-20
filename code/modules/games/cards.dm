@@ -190,17 +190,18 @@
 	..()
 
 /obj/item/weapon/deck/attack_self()
-	shuffle(usr)
+	shuffle()
 
 
-/obj/item/weapon/deck/verb/verb_shuffle(mob/user as mob)
+/obj/item/weapon/deck/verb/verb_shuffle()
 	set category = "Object"
 	set name = "Shuffle"
 	set desc = "Shuffle the cards in the deck."
 	set src in view(1)
-	shuffle(usr)
+	shuffle()
 
-/obj/item/weapon/deck/proc/shuffle(mob/user as mob)
+/obj/item/weapon/deck/proc/shuffle()
+	var/mob/living/user = usr
 	if (cooldown < world.time - 15) // 15 ticks cooldown
 		var/list/newcards = list()
 		while(cards.len)
@@ -323,7 +324,7 @@
 
 /obj/item/weapon/hand/examine(mob/user)
 	..(user)
-	if((!concealed || src.loc == user) && cards.len)
+	if((!concealed) && cards.len)
 		user << "It contains: "
 		for(var/datum/playingcard/P in cards)
 			user << "\The [P.name]."
