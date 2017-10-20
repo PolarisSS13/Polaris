@@ -18,7 +18,7 @@
 	into the smoke clouds when activated.  The reagents are consumed when smoke is made."
 	flags = OPENCONTAINER
 	complexity = 20
-	cooldown_per_use = 30 SECONDS
+	cooldown_per_use = 1 SECONDS
 	inputs = list()
 	outputs = list("volume used" = IC_PINTYPE_NUMBER,"self reference" = IC_PINTYPE_REF)
 	activators = list("create smoke" = IC_PINTYPE_PULSE_IN,"on smoked" = IC_PINTYPE_PULSE_OUT)
@@ -358,3 +358,6 @@
 					source.reagents.trans_id_to(target, G.id, transfer_amount)
 		activate_pin(2)
 		push_data()
+
+
+

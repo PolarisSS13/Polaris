@@ -41,7 +41,7 @@
 	activate_pin(2)
 
 /obj/item/integrated_circuit/memory/tiny
-	name = "Small memory circuit"
+	name = "small memory circuit"
 	desc = "This circuit can store two pieces of data."
 	icon_state = "memory4"
 	power_draw_per_use = 2
