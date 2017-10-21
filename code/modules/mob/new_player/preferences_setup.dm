@@ -259,7 +259,7 @@
 	dress_preview_mob(mannequin)
 	var/icon/bgstate = pick("000", "FFF", "steel", "white", "plating", "reinforced")
 
-	preview_icon = icon('icons/effects/128x48.dmi', bgstate")
+	preview_icon = icon('icons/effects/128x48.dmi', "bgstate")
 	preview_icon.Scale(48+32, 16+32)
 
 	mannequin.dir = NORTH
