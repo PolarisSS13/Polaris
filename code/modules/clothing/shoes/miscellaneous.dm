@@ -149,3 +149,11 @@
 	force = 0
 	w_class = ITEMSIZE_SMALL
 	species_restricted = null
+
+//Halloween
+
+/obj/item/clothing/shoes/jester
+	name = "jester shoes"
+	desc = "A court jesters shoes, squeak not included."
+	icon_state = "jester_shoes"
+	force = 0
