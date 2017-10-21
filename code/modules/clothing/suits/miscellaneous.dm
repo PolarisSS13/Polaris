@@ -988,3 +988,12 @@ obj/item/clothing/suit/storage/toggle/peacoat
 /obj/item/clothing/suit/storage/snowsuit/science
 	name = "science snowsuit"
 	icon_state = "snowsuit_science"
+
+//Halloween
+
+/obj/item/clothing/suit/dracula
+	name = "dracula jacket"
+	desc = "Looks like this belongs in a very old movie set."
+	icon_state = "draculacoat"
+	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
+	flags_inv = HIDEHOLSTER
