@@ -363,13 +363,13 @@
 
 /obj/item/clothing/under/dress/dress_cap
 	name = "colony director's dress uniform"
-	desc = "Feminine fashion for the style conscious Colony Director."
+	desc = "Feminine fashion for the style concious Colony Director."
 	icon_state = "dress_cap"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personnel dress uniform"
-	desc = "Feminine fashion for the style conscious HoP."
+	desc = "Feminine fashion for the style concious HoP."
 	icon_state = "dress_hop"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
@@ -809,3 +809,58 @@
 	desc = "A fluffy robe to keep you from showing off to the world."
 	icon_state = "bathrobe"
 	worn_state = "bathrobe"
+
+//Halloween Outfits
+
+/obj/item/clothing/under/costumes/mummy
+	name = "mummy wrapping"
+	desc = "Return the slab or suffer my stale references."
+	icon_state = "mummy"
+	worn_state = "mummy"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
+/obj/item/clothing/under/costumes/scarecrow
+	name = "scarecrow clothes"
+	desc = "Perfect camouflage for hiding in botany."
+	icon_state = "scarecrow"
+	worn_state = "scarecrow"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
+/obj/item/clothing/under/costumes/draculass
+	name = "draculass coat"
+	desc = "A dress inspired by the ancient \"Victorian\" era."
+	icon_state = "draculass"
+	worn_state = "draculass"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+
+/obj/item/clothing/under/skeleton
+	name = "skeleton jumpsuit"
+	desc = "A black jumpsuit with a white bone pattern printed on it. Spooky!"
+	icon_state = "skeleton"
+	worn_state = "skeleton"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
+
+/obj/item/clothing/under/jester
+	name = "jester suit"
+	desc = "A jolly dress, well suited to entertain your master, nuncle."
+	icon_state = "jester"
+	worn_state = "jester"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/jester/alt
+	icon_state = "jester2"
+	worn_state = "jester2"
+
+/obj/item/clothing/under/geisha
+	name = "geisha suit"
+	desc = "Cute space ninja senpai not included."
+	icon_state = "geisha"
+	worn_state = "geisha"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/sailor
+	name = "sailor suit"
+	desc = "Skipper's in the wardroom drinkin gin'."
+	icon_state = "sailor"
+	worn_state = "sailor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO

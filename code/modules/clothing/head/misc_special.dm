@@ -189,6 +189,8 @@
 	body_parts_covered = HEAD|FACE
 	flags_inv = BLOCKHAIR
 
+//Christmas
+
 /obj/item/clothing/head/santa
 	name = "santa hat"
 	desc = "It's a festive christmas hat, in red!"
@@ -202,3 +204,26 @@
 	icon_state = "santahatgreen"
 	item_state_slots = list(slot_r_hand_str = "santahatgreen", slot_l_hand_str = "santahatgreen")
 	body_parts_covered = 0
+
+//Halloween
+
+
+/obj/item/clothing/head/scarecrow_hat
+	name = "scarecrow hat"
+	desc = "A simple straw hat."
+	icon_state = "scarecrow_hat"
+	item_state_slots = list(slot_r_hand_str = "detective", slot_l_hand_str = "detective")
+	body_parts_covered = 0
+
+/obj/item/clothing/head/jester
+	name = "jester hat"
+	desc = "A hat with bells, to add some merriness to the suit."
+	icon_state = "jester"
+	item_state_slots = list(slot_r_hand_str = "santahatgreen", slot_l_hand_str = "santahatgreen")
+	flags = BLOCKHAIR
+
+/obj/item/clothing/head/jester/alt
+	name = "jester hat"
+	desc = "A hat with bells, to add some merriness to the suit."
+	icon_state = "jester2"
+	flags = BLOCKHAIR
