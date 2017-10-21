@@ -51,8 +51,8 @@
 	containername = "Integrated circuit crate"
 
 /datum/supply_packs/sci/integrated_circuit_printer_upgrade
-	name = "Integrated circuit printer upgrade - advanced designs"
-	contains = list(/obj/item/weapon/disk/integrated_circuit/upgrade/advanced)
+	name = "Integrated circuit printer upgrades"
+	contains = list(/obj/item/weapon/disk/integrated_circuit/upgrade/advanced,/obj/item/weapon/disk/integrated_circuit/upgrade/clone)
 	cost = 30
 	containertype = /obj/structure/closet/crate
 	containername = "Integrated circuit crate"
