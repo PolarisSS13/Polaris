@@ -339,7 +339,7 @@
 /obj/item/weapon/hand/attack_self(var/mob/user as mob)
 	concealed = !concealed
 	update_icon()
-	user.visible_message("<span class = 'notice>\The [user] [concealed ? "conceals" : "reveals"] their hand.</span>")
+	user.visible_message("<span class = 'notice'>\The [user] [concealed ? "conceals" : "reveals"] their hand.</span>")
 
 /obj/item/weapon/hand/examine(mob/user)
 	..(user)
