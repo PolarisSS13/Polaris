@@ -395,28 +395,28 @@
 
 /obj/structure/sign/atmos
 	name = "\improper WASTE"
-	icon_state = "atmos-waste"
+	icon_state = "atmos_waste"
 
 /obj/structure/sign/atmos/o2
 	name = "\improper OXYGEN"
-	icon_state = "atmos-o2"
+	icon_state = "atmos_o2"
 
 /obj/structure/sign/atmos/co2
 	name = "\improper CARBON DIOXIDE"
-	icon_state = "atmos-co2"
+	icon_state = "atmos_co2"
 
 /obj/structure/sign/atmos/phoron
 	name = "\improper PHORON"
-	icon_state = "atmos-phoron"
+	icon_state = "atmos_phoron"
 
 /obj/structure/sign/atmos/n2o
 	name = "\improper NITROUS OXIDE"
-	icon_state = "atmos-n2o"
+	icon_state = "atmos_n2o"
 
 /obj/structure/sign/atmos/n2
 	name = "\improper NITROGEN"
-	icon_state = "atmos-n2"
+	icon_state = "atmos_n2"
 
 /obj/structure/sign/atmos/air
 	name = "\improper AIR"
-	icon_state = "atmos-air"
+	icon_state = "atmos_air"
