@@ -179,7 +179,7 @@
 		visible_message = 1 // Prevent chatspam when multiple meat are near
 
 	if(visible_message)
-		visible_message("[src] sucks in and processes the nearby biomass.")
+		visible_message("<span class = 'notice'>[src] sucks in and processes the nearby biomass.</span>")
 
 	if(stat & NOPOWER) //Autoeject if power is lost
 		if(occupant)
