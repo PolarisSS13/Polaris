@@ -31,7 +31,7 @@
 
 /obj/item/integrated_circuit/passive/power/starter
 	name = "starter"
-	desc = "This tiny circuit will send pulse right after device is turned on. Or when power is restored."
+	desc = "This tiny circuit will send a pulse right after device is turned on. Or when power is restored."
 	icon_state = "led"
 	complexity = 1
 	activators = list("pulse out" = IC_PINTYPE_PULSE_OUT)
@@ -110,8 +110,8 @@
 	name = "fuel cell"
 	desc = "Produces electricity from chemicals."
 	icon_state = "chemical_cell"
-	extended_desc = "This is effectively an internal beaker.It will consume and produce power from phoron, slime jelly, welding fuel, carbon,\
-	 ethanol, nutriments and blood , in order of decreasing efficiency. It will consume fuel only if the battery can take more energy."
+	extended_desc = "This is effectively an internal beaker. It will consume and produce power from phoron, slime jelly, welding fuel, carbon,\
+	 ethanol, nutriments and blood, in order of decreasing efficiency. It will consume fuel only if the battery can take more energy."
 	flags = OPENCONTAINER
 	complexity = 4
 	inputs = list()
