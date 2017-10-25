@@ -57,7 +57,7 @@
 
 /obj/item/integrated_circuit/logic/binary/jklatch
 	name = "JK latch"
-	desc = "This gate is synchronysed JK latch."
+	desc = "This gate is a synchronysed JK latch."
 	icon_state = "jklatch"
 	inputs = list("J","K")
 	outputs = list("Q","!Q")
@@ -89,7 +89,7 @@
 
 /obj/item/integrated_circuit/logic/binary/rslatch
 	name = "RS latch"
-	desc = "This gate is synchronysed RS latch. If both R and S are true, state will not change."
+	desc = "This gate is synchronysed a RS latch. If both R and S are true, the state will not change."
 	icon_state = "sr_nor"
 	inputs = list("S","R")
 	outputs = list("Q","!Q")
@@ -119,7 +119,7 @@
 
 /obj/item/integrated_circuit/logic/binary/gdlatch
 	name = "gated D latch"
-	desc = "This gate is synchronysed gated D latch."
+	desc = "This gate is a synchronysed gated D latch."
 	icon_state = "gated_d"
 	inputs = list("D","E")
 	outputs = list("Q","!Q")
