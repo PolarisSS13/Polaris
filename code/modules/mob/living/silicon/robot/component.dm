@@ -77,6 +77,10 @@
 	external_type = /obj/item/robot_parts/robot_component/armour
 	max_damage = 90
 
+/datum/robot_component/armour
+	name = "advanced armour plating"
+	external_type = /obj/item/robot_parts/robot_component/armour/advanced
+	max_damage = 150
 
 // ACTUATOR
 // Enables movement.
@@ -235,6 +239,9 @@
 	name = "armour plating"
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
+
+/obj/item/robot_parts/robot_component/armour/advanced
+	name = "advanced armour plating"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"

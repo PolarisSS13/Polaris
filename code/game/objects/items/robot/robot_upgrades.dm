@@ -173,3 +173,26 @@
 
 	R.emag_items = 1
 	return 1
+
+/obj/item/borg/upgrade/shield
+	name = "integrated shield module"
+	desc = "A shield generator array, made portable."
+	icon_state = "cyborg_upgrade3"
+	item_state = "cyborg_upgrade"
+	require_module = 1
+
+/obj/item/borg/upgrade/shield/action(var/mob/living/silicon/robot/R)
+	if(..()) return 0
+
+	var/obj/item/borg/combat/shield/S= locate() in R.module
+	if(!S)
+		S = locate() in R.module.contents
+	if(!S)
+		S = locate() in R.module.modules
+	if(!S)
+		R.module.modules += new /obj/item/borg/combat/shield(R)
+		return 1
+	if(S)
+		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
+		to_chat(usr, "There's no mounting point for the module!")
+		return 0

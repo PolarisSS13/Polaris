@@ -281,6 +281,13 @@
 	id = "armour"
 	build_path = /obj/item/robot_parts/robot_component/armour
 
+/datum/design/item/prosfab/cyborg/component/armour_advanced
+	name = "Advanced armour plating"
+	id = "advanced_armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/advanced
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 7500, "uranium" = 5000)
+
 
 //////////////////// Cyborg Modules ////////////////////
 /datum/design/item/prosfab/robot_upgrade
@@ -336,3 +343,11 @@
 	req_tech = list(TECH_COMBAT = 4, TECH_ILLEGAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 7500, "glass" = 11250, "diamond" = 7500)
 	build_path = /obj/item/borg/upgrade/syndicate
+
+/datum/design/item/prosfab/robot_upgrade/shield
+	name = "Integrated Shield module"
+	desc = "Allows cyborgs to use an energy shield."
+	id = "borg_shield_module"
+	req_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4, TECH_POWER = 6)
+	materials = list(DEFAULT_WALL_MATERIAL = 7500, "glass" = 11250, "phoron" = 11250, "uranium" = 15000)
+	build_path = /obj/item/borg/upgrade/shield
