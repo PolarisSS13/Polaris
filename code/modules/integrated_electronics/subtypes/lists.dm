@@ -146,7 +146,7 @@
 
 obj/item/integrated_circuit/list/len
 	name = "len circuit"
-	desc = "This circuit will give lenght of the list."
+	desc = "This circuit will give length of the list."
 	inputs = list(
 		"list" = IC_PINTYPE_LIST,
 		)

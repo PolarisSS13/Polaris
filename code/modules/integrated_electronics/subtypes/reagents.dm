@@ -306,7 +306,7 @@
 	name = "reagent filter"
 	desc = "Filtering liquids by list of desired or unwanted reagents."
 	icon_state = "reagent_filter"
-	extended_desc = "This is a filter, which will move liquids from the source ref to the target ref. \
+	extended_desc = "This is a filter which will move liquids from the source ref to the target ref. \
 	It will move all reagents, except list, given in fourth pin if amount value is positive.\
 	Or it will move only desired reagents if amount is negative, The third pin determines \
 	how much reagent is moved per pulse, between 0 and 50. Amount is given for each separate reagent."
