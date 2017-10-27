@@ -144,8 +144,6 @@
 
 /obj/item/device/t_scanner/advanced
 	name = "Advanced T-ray Scanner"
-	icon_state = "t-rayu0"
-	base_state = "t-rayu0"
 	item_state = "analyzer"
 	desc = "An advanced version of the terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
 	matter = list(DEFAULT_WALL_MATERIAL = 1500, PHORON = 200, SILVER = 250)
