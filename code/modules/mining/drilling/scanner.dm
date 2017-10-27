@@ -2,7 +2,7 @@
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
 	icon = 'icons/obj/device.dmi'
-	icon_state = "forensic0-old" //GET A BETTER SPRITE.
+	icon_state = "mining1"
 	item_state = "electronic"
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 150)

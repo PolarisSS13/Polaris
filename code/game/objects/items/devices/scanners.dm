@@ -305,8 +305,8 @@ REAGENT SCANNER
 /obj/item/device/reagent_scanner
 	name = "reagent scanner"
 	desc = "A hand-held reagent scanner which identifies chemical agents."
-	icon_state = "spectrometer"
-	item_state = "analyzer"
+	icon_state = "reagent"
+	item_state = "syringe"
 	w_class = ITEMSIZE_SMALL
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
