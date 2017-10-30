@@ -15,7 +15,7 @@
 
 	var/obj/item/loaded                                        // Currently loaded object, for retrieval/unloading.
 	var/load_type = /obj/item/stack/rods                       // Type of stack to load with.
-	var/projectile_type = /obj/item/projectile/bullet/magnetic // Actual fire type, since this isn't throw_at rod launcher.
+	projectile_type = /obj/item/projectile/bullet/magnetic 	   // Actual fire type, since this isn't throw_at rod launcher.
 
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.

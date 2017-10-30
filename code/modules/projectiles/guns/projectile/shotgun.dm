@@ -12,6 +12,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	load_method = SINGLE_CASING|SPEEDLOADER
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
+	projectile_type = /obj/item/projectile/bullet/shotgun
 	handle_casings = HOLD_CASINGS
 	var/recentpump = 0 // to prevent spammage
 	var/action_sound = 'sound/weapons/shotgunpump.ogg'

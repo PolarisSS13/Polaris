@@ -9,6 +9,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/a9mm
+	projectile_type = /obj/item/projectile/bullet/pistol
 	multi_aim = 1
 	burst_delay = 2
 
@@ -34,6 +35,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m10mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m10mm)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -60,6 +62,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m545
 	allowed_magazines = list(/obj/item/ammo_magazine/m545)
+	projectile_type = /obj/item/projectile/bullet/rifle/a545
 
 //	one_handed_penalty = 30
 
@@ -91,6 +94,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mmt/rubber
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mmt)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()
@@ -114,6 +118,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762
 	allowed_magazines = list(/obj/item/ammo_magazine/m762)
+	projectile_type = /obj/item/projectile/bullet/rifle/a762
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -185,6 +190,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m545saw
 	allowed_magazines = list(/obj/item/ammo_magazine/m545saw, /obj/item/ammo_magazine/m545)
+	projectile_type = /obj/item/projectile/bullet/rifle/a545
 
 //	one_handed_penalty = 90
 
@@ -254,6 +260,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m12gdrum
 	allowed_magazines = list(/obj/item/ammo_magazine/m12gdrum)
+	projectile_type = /obj/item/projectile/bullet/shotgun
 
 //	one_handed_penalty = 60
 
@@ -351,6 +358,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762
 	allowed_magazines = list(/obj/item/ammo_magazine/m762, /obj/item/ammo_magazine/m762m)
+	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
 //	one_handed_penalty = 45
 

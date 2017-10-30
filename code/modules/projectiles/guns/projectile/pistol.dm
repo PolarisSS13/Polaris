@@ -4,6 +4,7 @@
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
@@ -79,6 +80,7 @@
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/m45/rubber
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	load_method = MAGAZINE
@@ -119,6 +121,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
@@ -203,6 +206,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
+	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "holdout signal pistol"
@@ -295,6 +299,7 @@
 	load_method = SINGLE_CASING
 	max_shells = 2
 	ammo_type = /obj/item/ammo_casing/a357
+	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
 /obj/item/weapon/gun/projectile/luger
 	name = "\improper P08 Luger"
@@ -305,6 +310,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
+	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/weapon/gun/projectile/luger/update_icon()
 	..()

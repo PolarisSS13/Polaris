@@ -15,6 +15,7 @@
 	load_method = SINGLE_CASING
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145
+	projectile_type = /obj/item/projectile/bullet/rifle/a145
 	accuracy = -75
 	scoped_accuracy = 75
 //	one_handed_penalty = 90
