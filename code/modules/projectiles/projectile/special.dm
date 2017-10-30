@@ -27,9 +27,9 @@
 	sharp = 1
 	edge = 1
 
-	on_hit(var/atom/target, var/blocked = 0)
-		explosion(target, -1, 0, 2)
-		return 1
+/obj/item/projectile/bullet/gyro/on_hit(var/atom/target, var/blocked = 0)
+	explosion(target, -1, 0, 2)
+	..()
 
 /obj/item/projectile/temp
 	name = "freeze beam"
