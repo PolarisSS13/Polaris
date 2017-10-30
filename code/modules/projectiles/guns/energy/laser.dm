@@ -4,15 +4,14 @@
 	switch between standard fire and a more efficent but weaker 'suppressive' fire."
 	icon_state = "laser"
 	item_state = "laser"
-	fire_sound = 'sound/weapons/Laser.ogg'
+	wielded_item_state = "laser-wielded"
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEMSIZE_LARGE
 	force = 10
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
-//	requires_two_hands = 1
-	one_handed_penalty = 2
+//	one_handed_penalty = 30
 
 	firemodes = list(
 		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 240),
@@ -22,7 +21,7 @@
 /obj/item/weapon/gun/energy/laser/mounted
 	self_recharge = 1
 	use_external_power = 1
-	requires_two_hands = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
+	one_handed_penalty = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
@@ -42,7 +41,6 @@
 	icon_state = "retro"
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
-	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
@@ -58,7 +56,6 @@
 	item_state = "caplaser"
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
 	force = 5
-	fire_sound = 'sound/weapons/Laser.ogg'
 	slot_flags = SLOT_BELT
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
@@ -75,15 +72,13 @@
 	flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	item_state = null
-	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
 	battery_lock = 1
 	fire_delay = 20
 	w_class = ITEMSIZE_LARGE
-//	requires_two_hands = 1
-	one_handed_penalty = 6 // The thing's heavy and huge.
+//	one_handed_penalty = 90 // The thing's heavy and huge.
 	accuracy = 3
 	charge_cost = 600
 
@@ -94,7 +89,7 @@
 	use_external_power = 1
 	recharge_time = 10
 	accuracy = 0 // Mounted cannons are just fine the way they are.
-	requires_two_hands = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
+	one_handed_penalty = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 400
 	fire_delay = 20
@@ -105,7 +100,6 @@
 	standard photonic beams, resulting in an effective 'anti-armor' energy weapon."
 	icon_state = "xray"
 	item_state = "xray"
-	fire_sound = 'sound/weapons/eluger.ogg'
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 200
@@ -126,10 +120,10 @@
 	fire_delay = 35
 	force = 10
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
-	accuracy = -3 //shooting at the hip
+	accuracy = -45 //shooting at the hip
 	scoped_accuracy = 0
 //	requires_two_hands = 1
-	one_handed_penalty = 4 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
+//	one_handed_penalty = 60 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/scope()
 	set category = "Object"
@@ -147,7 +141,6 @@
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	fire_sound = 'sound/weapons/Laser.ogg'
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

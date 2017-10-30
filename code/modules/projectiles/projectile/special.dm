@@ -1,6 +1,7 @@
 /obj/item/projectile/ion
 	name = "ion bolt"
 	icon_state = "ion"
+	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
@@ -33,6 +34,7 @@
 /obj/item/projectile/temp
 	name = "freeze beam"
 	icon_state = "ice_2"
+	fire_sound = 'sound/weapons/pulse3.ogg'
 	damage = 0
 	damage_type = BURN
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
@@ -105,6 +107,7 @@
 /obj/item/projectile/energy/floramut
 	name = "alpha somatoray"
 	icon_state = "energy"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
@@ -147,6 +150,7 @@
 /obj/item/projectile/energy/floramut/gene
 	name = "gamma somatoray"
 	icon_state = "energy2"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
 	nodamage = 1
@@ -156,6 +160,7 @@
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"
 	icon_state = "energy2"
+	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
 	nodamage = 1

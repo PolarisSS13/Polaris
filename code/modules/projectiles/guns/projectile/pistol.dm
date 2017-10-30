@@ -7,7 +7,6 @@
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/update_icon()
@@ -67,6 +66,14 @@
 		M << "Your gun is now sprited as [choice]. Say hello to your new friend."
 		return 1
 
+/*//apart of reskins that have two sprites, touching may result in frustration and breaks
+/obj/item/weapon/gun/projectile/colt/detective/attack_hand(var/mob/living/user)
+	if(!unique_reskin && loc == user)
+		reskin_gun(user)
+		return
+	..()
+*/
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
@@ -74,7 +81,6 @@
 	magazine_type = /obj/item/ammo_magazine/m45/rubber
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
@@ -194,7 +200,6 @@
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m9mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
@@ -298,7 +303,6 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "9mm"
 	load_method = MAGAZINE
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	magazine_type = /obj/item/ammo_magazine/m9mm
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
 

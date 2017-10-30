@@ -110,9 +110,8 @@
 	caliber = "12g"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
 	max_shells = 5
-	fire_sound = 'sound/weapons/shotgun.ogg'
 	recoil = 2 // ow my fucking hand
-	accuracy = -1 // smooth bore + short barrel = shit accuracy
+	accuracy = -15 // smooth bore + short barrel = shit accuracy
 	ammo_type = /obj/item/ammo_casing/a12g
 	// ToDo: Remove accuracy debuf in exchange for slightly injuring your hand every time you fire it.
 
@@ -124,7 +123,6 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS
 	max_shells = 9
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	caliber = ".38"
 	ammo_type = /obj/item/ammo_casing/a38
 	var/secondary_max_shells = 1
@@ -156,7 +154,6 @@
 
 		if(caliber && secondary_caliber)
 			caliber = secondary_caliber
-			fire_sound = 'sound/weapons/shotgun.ogg'
 
 		if(ammo_type && secondary_ammo_type)
 			ammo_type = secondary_ammo_type
@@ -173,7 +170,6 @@
 
 		if(caliber && secondary_caliber)
 			caliber = initial(caliber)
-			fire_sound = initial(fire_sound)
 
 		if(ammo_type && secondary_ammo_type)
 			ammo_type = initial(ammo_type)
