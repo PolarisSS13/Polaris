@@ -203,35 +203,35 @@
 				var/mob/living/carbon/C = usr
 				if(C.legcuffed)
 					C << "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>"
-					C.m_intent = "walk"	//Just incase
+					C.m_intent = M_WALK	//Just incase
 					C.hud_used.move_intent.icon_state = "walking"
 					return 1
 				switch(usr.m_intent)
-					if("run")
-						usr.m_intent = "walk"
+					if(M_RUN)
+						usr.m_intent = M_WALK
 						usr.hud_used.move_intent.icon_state = "walking"
-					if("walk")
-						usr.m_intent = "run"
+					if(M_WALK)
+						usr.m_intent = M_RUN
 						usr.hud_used.move_intent.icon_state = "running"
 		if("m_intent")
 			if(!usr.m_int)
 				switch(usr.m_intent)
-					if("run")
+					if(M_RUN)
 						usr.m_int = "13,14"
-					if("walk")
+					if(M_WALK)
 						usr.m_int = "14,14"
 					if("face")
 						usr.m_int = "15,14"
 			else
 				usr.m_int = null
 		if("walk")
-			usr.m_intent = "walk"
+			usr.m_intent = M_WALK
 			usr.m_int = "14,14"
 		if("face")
 			usr.m_intent = "face"
 			usr.m_int = "15,14"
 		if("run")
-			usr.m_intent = "run"
+			usr.m_intent = M_RUN
 			usr.m_int = "13,14"
 		if("Reset Machine")
 			usr.unset_machine()

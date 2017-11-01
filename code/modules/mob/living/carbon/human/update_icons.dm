@@ -941,8 +941,8 @@ var/global/list/damage_icon_parts = list()
 			standing = image("icon" = 'icons/mob/mob.dmi', "icon_state" = "legcuff1")
 		overlays_standing[LEGCUFF_LAYER] = standing
 
-		if(src.m_intent != "walk")
-			src.m_intent = "walk"
+		if(src.m_intent > M_WALK)
+			src.m_intent = M_WALK
 			if(src.hud_used && src.hud_used.move_intent)
 				src.hud_used.move_intent.icon_state = "walking"
 

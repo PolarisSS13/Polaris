@@ -267,12 +267,18 @@
 		move_delay = world.time//set move delay
 
 		switch(mob.m_intent)
-			if("run")
+			if(M_SPRINT)
+				if(mob.drowsyness > 0)
+					move_delay += 6
+				move_delay += config.sprint_speed
+			if(M_RUN)
 				if(mob.drowsyness > 0)
 					move_delay += 6
 				move_delay += config.run_speed
-			if("walk")
+			if(M_WALK)
 				move_delay += config.walk_speed
+			if(M_STALK)
+				move_delay += config.stalk_speed
 		move_delay += mob.movement_delay()
 
 		var/tickcomp = 0 //moved this out here so we can use it for vehicles
@@ -309,10 +315,18 @@
 				//drunk wheelchair driving
 				else if(mob.confused)
 					switch(mob.m_intent)
-						if("run")
-							if(prob(50))	direct = turn(direct, pick(90, -90))
-						if("walk")
-							if(prob(25))	direct = turn(direct, pick(90, -90))
+						if(M_SPRINT)
+							if(prob(75))
+								direct = turn(direct, pick(90, -90))
+						if(M_RUN)
+							if(prob(50))
+								direct = turn(direct, pick(90, -90))
+						if(M_WALK)
+							if(prob(25))
+								direct = turn(direct, pick(90, -90))
+						if(M_STALK)
+							if(prob(13))
+								direct = turn(direct, pick(90, -90))
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 
@@ -354,12 +368,20 @@
 		else
 			if(mob.confused)
 				switch(mob.m_intent)
-					if("run")
+					if(M_SPRINT)
 						if(prob(75))
 							direct = turn(direct, pick(90, -90))
 							n = get_step(mob, direct)
-					if("walk")
+					if(M_RUN)
+						if(prob(50))
+							direct = turn(direct, pick(90, -90))
+							n = get_step(mob, direct)
+					if(M_WALK)
 						if(prob(25))
+							direct = turn(direct, pick(90, -90))
+							n = get_step(mob, direct)
+					if(M_STALK)
+						if(prob(13))
 							direct = turn(direct, pick(90, -90))
 							n = get_step(mob, direct)
 			. = mob.SelfMove(n, direct)

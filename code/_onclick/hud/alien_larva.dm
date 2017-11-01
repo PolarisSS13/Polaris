@@ -9,7 +9,7 @@
 	using.name = "mov_intent"
 	using.set_dir(SOUTHWEST)
 	using.icon = 'icons/mob/screen1_alien.dmi'
-	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
+	using.icon_state = (mymob.m_intent == M_RUN ? "running" : "walking")
 	using.screen_loc = ui_acti
 	using.layer = 20
 	src.adding += using
