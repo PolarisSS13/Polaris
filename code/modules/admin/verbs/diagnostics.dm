@@ -83,12 +83,12 @@
 		if (!fqs)
 			output += "&nbsp;&nbsp;<b>ERROR</b><br>"
 			continue
-		for (var/filter in fqs.devices)
-			var/list/f = fqs.devices[filter]
+		for (var/radio_filter in fqs.devices)
+			var/list/f = fqs.devices[radio_filter]
 			if (!f)
-				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
+				output += "&nbsp;&nbsp;[radio_filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
+			output += "&nbsp;&nbsp;[radio_filter]: [f.len]<br>"
 			for (var/device in f)
 				if (isobj(device))
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device:loc)])<br>"
@@ -108,13 +108,13 @@
 	load_admins()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/reload_mentors()
-	set name = "Reload Mentors"
+/client/proc/reload_eventMs()
+	set name = "Reload Event Managers"
 	set category = "Debug"
 
 	if(!check_rights(R_SERVER)) return
 
-	message_admins("[usr] manually reloaded Mentors")
+	message_admins("[usr] manually reloaded Event Managers")
 	world.load_mods()
 
 
@@ -177,11 +177,11 @@
 	set desc = "This searches all the active jobban entries for the current round and outputs the results to standard output."
 	set category = "Debug"
 
-	var/filter = input("Contains what?","Filter") as text|null
-	if(!filter)
+	var/job_filter = input("Contains what?","Job Filter") as text|null
+	if(!job_filter)
 		return
 
 	usr << "<b>Jobbans active in this round.</b>"
 	for(var/t in jobban_keylist)
-		if(findtext(t, filter))
+		if(findtext(t, job_filter))
 			usr << "[t]"

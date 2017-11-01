@@ -333,9 +333,11 @@
 		else if(!bumped)
 			tracer_effect(effect_transform)
 
-		if(incendiary >= 2)
-			var/trail_volume = (flammability * 0.10)
-			new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(src.loc, trail_volume, src.dir)
+		if(incendiary >= 2) //This should cover the bases of 'Why is there fuel here?' in a much cleaner way than previous.
+			if(src && src.loc) //Safety.
+				if(!src.loc.density)
+					var/trail_volume = (flammability * 0.20)
+					new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(src.loc, trail_volume, src.dir)
 
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
@@ -418,6 +420,8 @@
 		loc = A.loc
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
+		return
+	if(istype(A, /obj/structure/foamedmetal)) //Turrets can detect through foamed metal, but will have to blast through it. Similar to windows, if someone runs behind it, a person should probably just not shoot.
 		return
 	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
