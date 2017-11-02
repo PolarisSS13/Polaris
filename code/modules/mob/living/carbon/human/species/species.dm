@@ -275,7 +275,7 @@
 	var/t_him = "them"
 	if(ishuman(target))
 		var/mob/living/carbon/human/T = target
-		if(T.species.ambiguous_genders && H.species == T.species)
+		if(!T.species.ambiguous_genders || (T.species.ambiguous_genders && H.species == T.species))
 			switch(T.identifying_gender)
 				if(MALE)
 					t_him = "him"
