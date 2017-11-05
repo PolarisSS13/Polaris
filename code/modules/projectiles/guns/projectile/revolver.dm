@@ -77,7 +77,7 @@
 	max_shells = 7
 
 
-obj/item/weapon/gun/projectile/revolver/detective45/detective/verb/rename_gun()
+obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 	set name = "Name Gun"
 	set category = "Object"
 	set desc = "Rename your gun. If you're the Detective."
@@ -96,7 +96,7 @@ obj/item/weapon/gun/projectile/revolver/detective45/detective/verb/rename_gun()
 		M << "You name the gun [input]. Say hello to your new friend."
 		return 1
 
-/obj/item/weapon/gun/projectile/revolver/detective45/detective/verb/reskin_gun()
+/obj/item/weapon/gun/projectile/revolver/detective45/verb/reskin_gun()
 	set name = "Resprite gun"
 	set category = "Object"
 	set desc = "Click to choose a sprite for your gun."
