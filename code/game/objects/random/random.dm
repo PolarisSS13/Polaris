@@ -149,7 +149,7 @@
 				prob(6);/obj/item/weapon/reagent_containers/syringe/antitoxin,
 				prob(1);/obj/item/weapon/reagent_containers/syringe/antiviral,
 				prob(6);/obj/item/weapon/reagent_containers/syringe/inaprovaline,
-				prob(1);/obj/item/weapon/reagent_containers/hypospray,
+				prob(1);/obj/item/weapon/reagent_containers/hypospray/vial,
 				prob(1);/obj/item/weapon/storage/box/freezer,
 				prob(2);/obj/item/stack/nanopaste)
 
