@@ -68,6 +68,7 @@ Radiochat range: 1441 to 1489 (most devices refuse to be tune to other frequency
 Radio:
 1459 - standard radio chat
 1351 - Science
+1361 - Exploration
 1353 - Command
 1355 - Medical
 1357 - Engineering
@@ -98,7 +99,7 @@ On the map:
 */
 
 var/const/RADIO_LOW_FREQ	= 1200
-var/const/PUBLIC_LOW_FREQ	= 1441
+var/const/PUBLIC_LOW_FREQ	= 1361
 var/const/PUBLIC_HIGH_FREQ	= 1489
 var/const/RADIO_HIGH_FREQ	= 1600
 
@@ -119,6 +120,7 @@ var/const/MED_FREQ = 1355
 var/const/SCI_FREQ = 1351
 var/const/SRV_FREQ = 1349
 var/const/SUP_FREQ = 1347
+var/const/EXP_FREQ = 1361
 
 // internal department channels
 var/const/MED_I_FREQ = 1485
@@ -140,7 +142,8 @@ var/list/radiochannels = list(
 	"AI Private"	= AI_FREQ,
 	"Entertainment" = ENT_FREQ,
 	"Medical(I)"	= MED_I_FREQ,
-	"Security(I)"	= SEC_I_FREQ
+	"Security(I)"	= SEC_I_FREQ,
+	"Exploration"	= EXP_FREQ
 )
 
 // central command channels, i.e deathsquid & response teams
@@ -175,6 +178,8 @@ var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC
 		return "engradio"
 	if(frequency == SCI_FREQ)
 		return "sciradio"
+	if(frequency == EXP_FREQ)
+		return "expradio"
 	if(frequency == MED_FREQ)
 		return "medradio"
 	if(frequency == SUP_FREQ) // cargo

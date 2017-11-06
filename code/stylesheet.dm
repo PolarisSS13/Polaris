@@ -55,6 +55,7 @@ em						{font-style: normal;font-weight: bold;}
 .engradio				{color: #A66300;}
 .medradio				{color: #008160;}
 .sciradio				{color: #993399;}
+.expradio				{color: #b9cafe;}
 .supradio				{color: #5F4519;}
 .srvradio				{color: #6eaa2c;}
 

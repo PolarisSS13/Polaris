@@ -202,6 +202,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	default_cartridge = /obj/item/weapon/cartridge/signal/science
 	icon_state = "pda-robot"
 
+/obj/item/device/pda/explorer
+	default_cartridge = /obj/item/weapon/cartridge/explorer
+	icon_state = "pda-h"
+
 /obj/item/device/pda/librarian
 	default_cartridge = /obj/item/weapon/cartridge/service
 	icon_state = "pda-libb"

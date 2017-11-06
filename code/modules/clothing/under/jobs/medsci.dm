@@ -39,6 +39,15 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	rolled_sleeves = 0
 
+/obj/item/clothing/under/rank/explorer
+	desc = "It's made of uniquely strong fibers that have seen hours of hard training."
+	name = "explorer's jumpsuit"
+	icon_state = "blue_blazer"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	rolled_sleeves = 0
+
 /*
  * Medical
  */

@@ -28,7 +28,8 @@ var/list/medical_cartridges = list(
 
 var/list/research_cartridges = list(
 	/obj/item/weapon/cartridge/signal/science,
-	/obj/item/weapon/cartridge/rd
+	/obj/item/weapon/cartridge/rd,
+	/obj/item/weapon/cartridge/explorer
 	)
 
 var/list/cargo_cartridges = list(
@@ -161,6 +162,13 @@ var/list/civilian_cartridges = list(
 	name = "\improper Signal Ace 2 cartridge"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
+	access_reagent_scanner = 1
+	access_atmos = 1
+
+/obj/item/weapon/cartridge/explorer
+	name = "\improper Space Explorer 4.2"
+	desc = "It's space-hardened."
+	icon_state = "cart-h"
 	access_reagent_scanner = 1
 	access_atmos = 1
 

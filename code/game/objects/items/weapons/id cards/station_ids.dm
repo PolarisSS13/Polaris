@@ -315,6 +315,11 @@
 	rank = "Roboticist"
 	job_access_type = /datum/job/roboticist
 
+/obj/item/weapon/card/id/science/explorer
+	assignment = "Explorer"
+	rank = "Explorer"
+	job_access_type = /datum/job/explorer
+
 /obj/item/weapon/card/id/science/head
 	name = "identification card"
 	desc = "A card which represents knowledge and reasoning."

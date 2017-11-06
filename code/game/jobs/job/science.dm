@@ -86,3 +86,23 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+
+/datum/job/explorer
+	title = "Explorer"
+	flag = EXPLORER
+	department = "Science"
+	department_flag = MEDSCI
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the research director and the colony director"
+	selection_color = "#9b5f9b"
+	idtype = /obj/item/weapon/card/id/science/roboticist
+	economic_modifier = 5
+	access = list(access_eva, access_external_airlocks, access_teleporter, access_research, access_tech_storage, access_tcomsat, access_xenoarch)
+	minimal_access = list(access_eva, access_external_airlocks, access_teleporter, access_research, access_tech_storage, access_tcomsat, access_xenoarch)
+	minimum_character_age = 20
+	minimal_player_age = 12
+
+	outfit_type = /decl/hierarchy/outfit/job/science/explorer
+	alt_titles = list("Pioneer", "Space Invader", "Expeditioner")

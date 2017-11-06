@@ -39,3 +39,13 @@
 	pda_type = /obj/item/device/pda/roboticist
 	backpack = /obj/item/weapon/storage/backpack
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/norm
+
+/decl/hierarchy/outfit/job/science/explorer
+	name = OUTFIT_JOB_NAME("Explorer")
+	l_ear = /obj/item/device/radio/headset/headset_exp
+	uniform = /obj/item/clothing/under/rank/explorer
+	shoes = /obj/item/clothing/shoes/boots/duty
+	belt = /obj/item/weapon/storage/belt/utility/full
+	id_type = /obj/item/weapon/card/id/science/explorer
+	pda_slot = slot_r_store
+	pda_type = /obj/item/device/pda/explorer
