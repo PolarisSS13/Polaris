@@ -664,7 +664,7 @@
 
 /*
 /obj/machinery/vending/atmospherics //Commenting this out until someone ponies up some actual working, broken, and unpowered sprites - Quarxink
-	name = "Tank Vendor"
+	name = "tank vendor"
 	desc = "A vendor with a wide variety of masks and gas tanks."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dispenser"
@@ -737,7 +737,7 @@
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/coffee
-	name = "Hot Drinks machine"
+	name = "hot drinks machine"
 	desc = "A vending machine which dispenses hot drinks."
 	product_ads = "Have a drink!;Drink up!;It's good for you!;Would you like a hot joe?;I'd kill for some coffee!;The best beans in the galaxy.;Only the finest brew for you.;Mmmm. Nothing like a coffee.;I like coffee, don't you?;Coffee helps you work!;Try some tea.;We hope you like the best!;Try our new chocolate!;Admin conspiracies"
 	icon_state = "coffee"
@@ -814,14 +814,35 @@
 	icon_state = "cart"
 	icon_deny = "cart-deny"
 	req_access = list(access_hop)
-	products = list(/obj/item/weapon/cartridge/medical = 10,/obj/item/weapon/cartridge/engineering = 10,/obj/item/weapon/cartridge/security = 10,
-					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/science = 10,/obj/item/device/pda/heads = 10,
-					/obj/item/weapon/cartridge/captain = 3,/obj/item/weapon/cartridge/quartermaster = 10)
+	products = list(
+		/obj/item/weapon/cartridge/captain = 3,
+		/obj/item/weapon/cartridge/hop = 3,
+		/obj/item/weapon/cartridge/cmo = 3,
+		/obj/item/weapon/cartridge/medical = 5,
+		/obj/item/weapon/cartridge/chemistry = 5,
+		/obj/item/weapon/cartridge/ce = 3,
+		/obj/item/weapon/cartridge/engineering = 5,
+		/obj/item/weapon/cartridge/atmos = 5,
+		/obj/item/weapon/cartridge/mechanic = 5,
+		/obj/item/weapon/cartridge/rd = 3,
+		/obj/item/weapon/cartridge/signal/toxins = 5,
+		/obj/item/weapon/cartridge/robotics = 5,
+		/obj/item/weapon/cartridge/hos = 3,
+		/obj/item/weapon/cartridge/security = 5,
+		/obj/item/weapon/cartridge/detective = 5,
+		/obj/item/weapon/cartridge/lawyer = 5,
+		/obj/item/weapon/cartridge/quartermaster = 5,
+		/obj/item/weapon/cartridge/chef = 5,
+		/obj/item/weapon/cartridge/janitor = 5)
+		)
+	contraband = list(
+		/obj/item/weapon/cartridge/clown = 3,
+		/obj/item/weapon/cartridge/mime = 3)
 	req_log_access = access_hop
 	has_logs = 1
 
 /obj/machinery/vending/cigarette
-	name = "Cigarette machine" //OCD had to be uppercase to look nice with the new formating
+	name = "cigarette machine" //OCD had to be uppercase to look nice with the new formating
 	desc = "If you want to get cancer, might as well do it in style!"
 	product_slogans = "Space cigs taste good like a cigarette should.;I'd rather toolbox than switch.;Smoke!;Don't believe the reports - smoke today!"
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs.;Feeling temperamental? Try a Temperamento!;Carcinoma Angels - go fuck yerself!;Don't be so hard on yourself, kid. Smoke a Lucky Star!"
@@ -829,16 +850,19 @@
 	icon_state = "cigs"
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco = 5,
-					/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/luckystars = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 5,
 					/obj/item/weapon/storage/box/matches = 10,
 					/obj/item/weapon/flame/lighter/random = 4)
-	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
+	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4
+					/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5,)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 5,
-					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5)
+					/obj/item/weapon/storage/fancy/cigarettes/professionals = 5,
+					/obj/item/weapon/flame/lighter/zippo/capitalist = 1
+					/obj/item/weapon/flame/lighter/zippo/royal = 1
+					/obj/item/clothing/mask/smokable/pipe)
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 12,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco = 15,
 					/obj/item/weapon/storage/fancy/cigarettes/killthroat = 17,
@@ -847,6 +871,7 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 18,
 					/obj/item/weapon/storage/box/matches = 1,
 					/obj/item/weapon/flame/lighter/random = 2)
+					
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
@@ -865,13 +890,13 @@
 	req_log_access = access_cmo
 	has_logs = 1
 
-//This one's from bay12
 /obj/machinery/vending/phoronresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
 					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
 					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
+	contraband = list(/obj/item/weapon/flame/lighter = 2)
 	req_log_access = access_rd
 	has_logs = 1
 
@@ -907,8 +932,10 @@
 	icon_deny = "sec-deny"
 	req_access = list(access_security)
 	products = list(/obj/item/weapon/handcuffs = 8,/obj/item/weapon/grenade/flashbang = 4,/obj/item/device/flash = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6)
-	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
+					/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,/obj/item/weapon/storage/box/evidence = 6,
+					/obj/item/weapon/grenade/chem_grenade/teargas = 2)		
+	premium = list(/obj/item/weapon/storage/box/donut = 2)
+	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/handcuffs/fuzzy = 2)
 	req_log_access = access_armory
 	has_logs = 1
 
@@ -922,6 +949,7 @@
 	products = list(/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 6,/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 4,/obj/item/weapon/reagent_containers/glass/bottle/robustharvest = 3,/obj/item/weapon/plantspray/pests = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
+	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/mutagen = 2)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/hydroseeds
@@ -978,7 +1006,7 @@
 	products = list(/obj/item/clothing/head/wizard = 1,/obj/item/clothing/suit/wizrobe = 1,/obj/item/clothing/head/wizard/red = 1,/obj/item/clothing/suit/wizrobe/red = 1,/obj/item/clothing/shoes/sandal = 1,/obj/item/weapon/staff = 2)
 
 /obj/machinery/vending/dinnerware
-	name = "Dinnerware"
+	name = "dinnerware vendor"
 	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
@@ -1011,6 +1039,7 @@
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
+	premium = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool
@@ -1081,6 +1110,7 @@
 					/obj/item/weapon/cell/high = 12, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
 					/obj/item/weapon/surgical/scalpel = 2,/obj/item/weapon/surgical/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
+	contraband = list(/obj/item/device/flash = 2)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 	req_log_access = access_rd
 	has_logs = 1
