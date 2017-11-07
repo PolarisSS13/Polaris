@@ -35,7 +35,7 @@
 	qdel_null(paddles)
 	qdel_null(bcell)
 
-/obj/item/device/defib_kit/loaded //starts with highcap cell
+/obj/item/device/defib_kit/loaded //starts with a cell
 	bcell = /obj/item/weapon/cell/apc
 
 
