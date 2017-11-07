@@ -31,7 +31,7 @@
 
 /obj/item/integrated_circuit/passive/power/starter
 	name = "starter"
-	desc = "This tiny circuit will send a pulse right after device is turned on. Or when power is restored."
+	desc = "This tiny circuit will send a pulse right after device is turned on, or when power is restored."
 	icon_state = "led"
 	complexity = 1
 	activators = list("pulse out" = IC_PINTYPE_PULSE_OUT)

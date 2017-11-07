@@ -18,7 +18,7 @@
 	into the smoke clouds when activated.  The reagents are consumed when smoke is made."
 	flags = OPENCONTAINER
 	complexity = 20
-	cooldown_per_use = 1 SECONDS
+	cooldown_per_use = 30 SECONDS
 	inputs = list()
 	outputs = list("volume used" = IC_PINTYPE_NUMBER,"self reference" = IC_PINTYPE_REF)
 	activators = list("create smoke" = IC_PINTYPE_PULSE_IN,"on smoked" = IC_PINTYPE_PULSE_OUT)
@@ -52,7 +52,7 @@
 	desc = "This scary looking thing is able to pump liquids into whatever it's pointed at."
 	icon_state = "injector"
 	extended_desc = "This autoinjector can push reagents into another container or someone else outside of the machine.  The target \
-	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing. Negative given amount makes injector suck out reagents."
+	must be adjacent to the machine, and if it is a person, they cannot be wearing thick clothing. A negative amount makes the injector draw out reagents."
 	flags = OPENCONTAINER
 	complexity = 20
 	cooldown_per_use = 6 SECONDS
