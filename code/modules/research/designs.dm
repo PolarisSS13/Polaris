@@ -639,13 +639,6 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/ammo_casing/chemdart
 	sort_string = "TACAF"
 
-/datum/design/item/weapon/fuelrod
-	id = "fuelrod_gun"
-	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ILLEGAL = 5, TECH_MAGNET = 5)
-	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 2000, "gold" = 500, "silver" = 500, "uranium" = 1000, "phoron" = 3000, "diamond" = 1000)
-	build_path = /obj/item/weapon/gun/magnetic/fuelrod
-	sort_string = "TACBA"
-
 /datum/design/item/weapon/flora_gun
 	id = "flora_gun"
 	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
@@ -860,25 +853,6 @@ other types of metals and chemistry for reagents).
 	materials = list(DEFAULT_WALL_MATERIAL = 300, "silver" = 100)
 	build_path = /obj/item/weapon/crowbar/power
 	sort_string = "VASEA"
-
-/datum/design/item/device/t_scanner_upg
-	name = "Upgraded T-ray Scanner"
-	desc = "An upgraded version of the terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
-	id = "upgradedtscanner"
-	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 4, TECH_MATERIAL = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 500, "phoron" = 150)
-	build_path = /obj/item/device/t_scanner/upgraded
-	sort_string = "VASSA"
-
-
-/datum/design/item/device/t_scanner_adv
-	name = "Advanced T-ray Scanner"
-	desc = "An advanced version of the terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
-	id = "advancedtscanner"
-	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
-	materials = list(DEFAULT_WALL_MATERIAL = 1250, "phoron" = 500, "silver" = 50)
-	build_path = /obj/item/device/t_scanner/advanced
-	sort_string = "VASSB"
 /*
 CIRCUITS BELOW
 */
@@ -1751,6 +1725,15 @@ CIRCUITS BELOW
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/disk/integrated_circuit/upgrade/advanced
 	sort_string = "VCAAH"
+
+/datum/design/item/circuit_printer_clone_upgrade
+	name = "Integrated circuit printer upgrade - cloning"
+	desc = "Allows the integrated circuit printer to recreate assemblies by code"
+	id = "ic_printer_upgrade_clone"
+	req_tech = list(TECH_ENGINEERING = 4, TECH_DATA = 5)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
+	build_path = /obj/item/weapon/disk/integrated_circuit/upgrade/clone
+	sort_string = "VCAAJ"
 
 /datum/design/item/translator
 	name = "handheld translator"
