@@ -2152,13 +2152,6 @@
 	required_reagents = list("rum" = 3, "limejuice" = 2, "sugar" = 1)
 	result_amount = 5
 
-/datum/chemical_reaction/drinks/mojito
-	name = "Mojito"
-	id = "mojito"
-	result = "mojito"
-	required_reagents = list("rum" = 3, "limejuice" = 1, "mint" = 1)
-	result_amount = 5
-
 /datum/chemical_reaction/drinks/mintjulep
 	name = "Mint Julep"
 	id = "mintjulep"
@@ -2179,6 +2172,7 @@
 	result = "mojito"
 	required_reagents = list("rum" = 3, "limejuice" = 1, "mint" = 1)
 	result_amount = 5
+	
 /datum/chemical_reaction/drinks/piscosour
 	name = "Pisco Sour"
 	id = "piscosour"
