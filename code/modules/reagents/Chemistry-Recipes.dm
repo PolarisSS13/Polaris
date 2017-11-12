@@ -1986,9 +1986,9 @@
 	name = "Bitters"
 	id = "bitters"
 	result = "bitters"
-	required_reagents = list("orangejuice" = 5, "water" = 5)
-	catalysts = list("enzyme" = 10)
-	result_amount = 10
+	required_reagents = list("mint" = 5)
+	catalysts = list("enzyme" = 5)
+	result_amount = 5
 
 /datum/chemical_reaction/drinks/soemmerfire
 	name = "Soemmer Fire"
