@@ -2033,13 +2033,6 @@
 	required_reagents = list("vodka" = 3, "rum" = 1, "whiskey" = 1, "cola" = 3)
 	result_amount = 8
 
-/datum/chemical_reaction/drinks/rotgut
-	name = "Rotgut Fever Dream"
-	id = "rotgut"
-	result = "rotgut"
-	required_reagents = list("vodka" = 3, "rum" = 1, "whiskey" = 1, "cola" = 3)
-	result_amount = 8
-
 /datum/chemical_reaction/drinks/entdraught
 	name = "Ent's Draught"
 	id = "entdraught"
