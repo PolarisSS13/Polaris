@@ -1981,7 +1981,7 @@
 	result = "chrysanthemum"
 	required_reagents = list("sake" = 1, "melonliquor" = 1)
 	result_amount = 2
-	
+
 /datum/chemical_reaction/bitters
 	name = "Bitters"
 	id = "bitters"
@@ -1989,14 +1989,14 @@
 	required_reagents = list("orangejuice" = 5)
 	catalysts = list("enzyme" = 5)
 	result_amount = 1
-	
+
 /datum/chemical_reaction/drinks/soemmerfire
 	name = "Soemmer Fire"
 	id = "soemmerfire"
 	result = "soemmerfire"
 	required_reagents = list("manhattan" = 2, "condensedcapsaicin" = 1)
 	result_amount = 3
-	
+
 /datum/chemical_reaction/drinks/winebrandy
     name = "Wine brandy"
     id = "winebrandy"
@@ -2011,7 +2011,7 @@
 	result = "lovepotion"
 	required_reagents = list("cream" = 1, "berryjuice" = 1, "sugar" = 1)
 	result_amount = 3
-	
+
 /datum/chemical_reaction/drinks/morningafter
 	name = "Morning After"
 	id = "morningafter"
@@ -2025,7 +2025,7 @@
 	result = "vesper"
 	required_reagents = list("gin" = 3, "vodka" = 1, "wine" = 1)
 	result_amount = 4
-	
+
 /datum/chemical_reaction/drinks/rotgut
 	name = "Rotgut Fever Dream"
 	id = "rotgut"
@@ -2039,35 +2039,35 @@
 	result = "rotgut"
 	required_reagents = list("vodka" = 3, "rum" = 1, "whiskey" = 1, "cola" = 3)
 	result_amount = 8
-	
+
 /datum/chemical_reaction/drinks/entdraught
 	name = "Ent's Draught"
 	id = "entdraught"
 	result = "entdraught"
 	required_reagents = list("tonic" = 1, "holywater" = 1, "honey" = 1)
 	result_amount = 3
-	
+
 /datum/chemical_reaction/drinks/voxdelight
 	name = "Vox's Delight"
 	id = "voxdelight"
 	result = "voxdelight"
-	required_reagents = list("phoron" = 3, "fuel" = 1)
+	required_reagents = list("phoron" = 3, "fuel" = 1, "water" = 1)
 	result_amount = 4
-	
+
 /datum/chemical_reaction/drinks/screamingviking
 	name = "Screaming Viking"
 	id = "screamingviking"
 	result = "screamingviking"
-	required_reagents = list("vodka" = 1, "vermouth" = 1, "limejuice" = 1, "rum" = 1, "gin" = 1, "tonic" = 1")
+	required_reagents = list("vodka" = 1, "vermouth" = 1, "limejuice" = 1, "rum" = 1, "gin" = 1, "tonic" = 1)
 	result_amount = 6
-	
+
 /datum/chemical_reaction/drinks/vilelemon
 	name = "Vile Lemon"
 	id = "vilelemon"
 	result = "vilelemon"
-	required_reagents = list("lemonade" = 5, "spacemountainwind" = 1"
+	required_reagents = list("lemonade" = 5, "spacemountainwind" = 1)
 	result_amount = 6
-	
+
 /datum/chemical_reaction/drinks/dreamcream
 	name = "Dream Cream"
 	id = "dreamcream"
@@ -2081,14 +2081,14 @@
 	result = "robustin"
 	required_reagents = list("antifreeze" = 1, "phoron" = 1, "fuel" = 1, "vodka" = 1)
 	result_amount = 4
-	
+
 /datum/chemical_reaction/drinks/virginsip
 	name = "Virgin Sip"
 	id = "virginsip"
 	result = "virginsip"
 	required_reagents = list("driestmartini" = 1, "water" = 1)
 	result_amount = 2
-	
+
 /datum/chemical_reaction/drinks/chocoshake
 	name = "Chocolate Milkshake"
 	id = "chocoshake"
@@ -2102,49 +2102,49 @@
 	result = "berryshake"
 	required_reagents = list("milkshake" = 1, "berryjuice" = 1)
 	result_amount = 2
-	
+
 /datum/chemical_reaction/drinks/coffeeshake
 	name = "Coffee Milkshake"
 	id = "coffeeshake"
 	result = "coffeeshake"
 	required_reagents = list("milkshake" = 1, "coffee" = 1)
 	result_amount = 2
-	
+
 /datum/chemical_reaction/drinks/jellyshot
 	name = "Jelly Shot"
 	id = "jellyshot"
 	result = "jellyshot"
 	required_reagents = list("cherryjelly" = 4, "vodka" = 1)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/slimeshot
 	name = "Named Bullet"
 	id = "slimeshot"
 	result = "slimeshot"
 	required_reagents = list("slimejelly" = 4, "vodka" = 1)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/negroni
 	name = "Negroni"
 	id = "negroni"
 	result = "negroni"
 	required_reagents = list("gin" = 1, "bitters" = 1, "vermouth" = 1)
 	result_amount = 3
-	
+
 /datum/chemical_reaction/drinks/cloverclub
 	name = "Clover Club"
 	id = "cloverclub"
 	result = "cloverclub"
 	required_reagents = list("berryjuice" = 1, "lemonjuice" = 1, "gin" = 3)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/oldfashioned
 	name = "Old Fashioned"
 	id = "oldfashioned"
 	result = "oldfashioned"
 	required_reagents = list("whiskey" = 3, "bitters" = 1, "sugar" = 1)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/whiskeysour
 	name = "Whiskey Sour"
 	id = "whiskeysour"
@@ -2165,7 +2165,7 @@
 	result = "mojito"
 	required_reagents = list("rum" = 3, "limejuice" = 1, "mint" = 1)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/mintjulep
 	name = "Mint Julep"
 	id = "mintjulep"
@@ -2179,7 +2179,7 @@
 	result = "paloma"
 	required_reagents = list("orangejuice" = 1, "sodawater" = 1, "tequilla" = 1)
 	result_amount = 3
-	
+
 /datum/chemical_reaction/drinks/mojito
 	name = "Mojito"
 	id = "mojito"
