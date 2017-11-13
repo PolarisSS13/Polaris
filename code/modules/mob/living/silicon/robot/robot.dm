@@ -637,7 +637,8 @@
 
 	else
 		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
-			spark_system.start()
+			if(W.force > 0)
+				spark_system.start()
 		return ..()
 
 /mob/living/silicon/robot/attack_hand(mob/user)
