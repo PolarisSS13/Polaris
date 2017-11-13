@@ -132,7 +132,7 @@ var/global/list/limb_icon_cache = list()
 				mob_icon = new /icon(species.get_icobase(owner, (status & ORGAN_MUTATED)), "[icon_name][gender ? "_[gender]" : ""]")
 				apply_colouration(mob_icon)
 
-			//Body markings, does not include head, that shit's above.
+			//Body markings, actually does not include head this time. Done separately above.
 			if(!istype(src,/obj/item/organ/external/head))
 				for(var/M in markings)
 					var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
