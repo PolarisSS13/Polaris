@@ -2180,6 +2180,14 @@
 	required_reagents = list("winebrandy" = 1, "lemonjuice" = 1, "sugar" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/drinks/coldfront
+	name = "Cold Front"
+	id = "coldfront"
+	result = "coldfront"
+	required_reagents = list("icecoffee" = 1, "whiskey" = 1, "mint" = 1)
+	result_amount = 3
+	
+	
 //R-UST Port
 /datum/chemical_reaction/hyrdophoron
 	name = "Hydrophoron"

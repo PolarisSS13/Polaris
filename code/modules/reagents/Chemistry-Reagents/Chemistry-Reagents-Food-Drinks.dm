@@ -2769,3 +2769,16 @@
 
     glass_name = "Pisco Sour"
     glass_desc = "South American bliss, served ice cold."
+	
+/datum/reagent/ethanol/coldfront
+    name = "Cold Front"
+    id = "coldfront"
+    description = "Minty, rich, and painfully cold. It's a blizzard in a cup."
+    taste_description = "biting cold"
+    color = "#ffe8c4" // rgb(255, 232, 196)
+    strength = 30
+    adj_temp = -20
+    targ_temp = 220 //Dangerous to certain races. Drink in moderation.
+	
+    glass_name = "Cold Front"
+    glass_desc = "Minty, rich, and painfully cold. It's a blizzard in a cup."
