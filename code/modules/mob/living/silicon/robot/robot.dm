@@ -394,9 +394,9 @@
 		C.toggled = 1
 		src << "<font color='red'>You enable [C.name].</font>"
 
-/mob/living/silicon/robot/verb/party_sparkle() //So you can still sparkle on demand without violence.
+/mob/living/silicon/robot/verb/spark_plug() //So you can still sparkle on demand without violence.
 	set category = "Robot Commands"
-	set name = "Do The Sparks"
+	set name = "Emit Sparks"
 	spark_system.start()
 
 // this function displays jetpack pressure in the stat panel
