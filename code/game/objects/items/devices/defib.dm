@@ -210,7 +210,7 @@
 	var/cooldowntime = (6 SECONDS) // How long in deciseconds until the defib is ready again after use.
 	var/chargetime = (2 SECONDS)
 	var/chargecost = 1000 //units of charge
-	var/burn_damage_amt = 5
+	var/burn_damage_amt = 10
 	var/use_on_synthetic = 0 //If 1, this is only useful on FBPs, if 0, this is only useful on fleshies
 
 	var/wielded = 0
