@@ -35,8 +35,8 @@
 	qdel_null(paddles)
 	qdel_null(bcell)
 
-/obj/item/device/defib_kit/loaded //starts with highcap cell
-	bcell = /obj/item/weapon/cell/high
+/obj/item/device/defib_kit/loaded //starts with a cell
+	bcell = /obj/item/weapon/cell/apc
 
 
 /obj/item/device/defib_kit/update_icon()
@@ -175,8 +175,7 @@
 	origin_tech = list(TECH_BIO = 5, TECH_POWER = 3)
 
 /obj/item/device/defib_kit/compact/loaded
-	bcell = /obj/item/weapon/cell/high
-
+	bcell = /obj/item/weapon/cell/apc
 
 /obj/item/device/defib_kit/compact/combat
 	name = "combat defibrillator"
@@ -646,7 +645,7 @@
 	paddles = /obj/item/weapon/shockpaddles/linked/jumper
 
 /obj/item/device/defib_kit/jumper_kit/loaded
-	bcell = /obj/item/weapon/cell/high
+	bcell = /obj/item/weapon/cell/apc
 
 /obj/item/weapon/shockpaddles/linked/jumper
 	name = "jumper cables"
