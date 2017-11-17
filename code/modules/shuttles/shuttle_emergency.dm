@@ -145,16 +145,19 @@
 
 	if (dna_hash in authorized)
 		src.visible_message("\The [src] buzzes. That ID has already been scanned.")
+		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return 0
 
 	if (!(access_heads in access))
 		src.visible_message("\The [src] buzzes, rejecting [ident].")
+		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return 0
 
 	src.visible_message("\The [src] beeps as it scans [ident].")
+	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 	authorized[dna_hash] = auth_name
 	if (req_authorizations - authorized.len)
-		world << "<span class='notice'><b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b></span>"
+		to_chat(world, "<span class='notice'><b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b></span>") //TODO- Belsima, make this an announcement instead of magic.
 
 	if(usr)
 		log_admin("[key_name(usr)] has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
@@ -164,7 +167,7 @@
 
 /obj/machinery/computer/shuttle_control/emergency/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
-		user << "<span class='notice'>You short out \the [src]'s authorization protocols.</span>"
+		to_chat(user, "<span class='notice'>You short out \the [src]'s authorization protocols.</span>")
 		emagged = 1
 		return 1
 
@@ -194,7 +197,7 @@
 			else
 				shuttle_status = "Standing-by at [using_map.dock_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)
