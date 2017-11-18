@@ -1,7 +1,7 @@
 //////Kitchen Spike
 
 /obj/structure/kitchenspike
-	name = "a meat spike"
+	name = "meat spike"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "spike"
 	desc = "A spike for collecting meat from animals."
@@ -16,7 +16,7 @@
 	if(!istype(G, /obj/item/weapon/grab) || !ismob(G.affecting))
 		return
 	if(occupied)
-		user << "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>"
+		to_chat(user, "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>")
 	else
 		if(spike(G.affecting))
 			visible_message("<span class = 'danger'>[user] has forced [G.affecting] onto the spike, killing them instantly!</span>")
@@ -33,7 +33,7 @@
 
 	if(istype(victim, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = victim
-		if(!issmall(H))
+		if(!isMonkey(H))
 			return 0
 		meat_type = H.species.meat_type
 		icon_state = "spikebloody"
@@ -54,8 +54,8 @@
 	meat--
 	new meat_type(get_turf(src))
 	if(meat > 1)
-		user << "You remove some meat from \the [victim_name]."
+		to_chat(user, "You remove some meat from \the [victim_name].")
 	else if(meat == 1)
-		user << "You remove the last piece of meat from \the [victim_name]!"
+		to_chat(user, "You remove the last piece of meat from \the [victim_name]!")
 		icon_state = "spike"
 		occupied = 0
