@@ -448,7 +448,7 @@
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)
-				to_chat(user, "<span class='warning'>God damnit!</span>")
+				to_chat(user, "<span class='warning'>God damn it!</span>")
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
@@ -506,9 +506,9 @@
 	collection_mode = !collection_mode
 	switch (collection_mode)
 		if(1)
-			usr << "[src] now picks up all items in a tile at once."
+			to_chat(usr, "[src] now picks up all items on a tile at once.")
 		if(0)
-			usr << "[src] now picks up one item at a time."
+			to_chat(usr, "[src] now picks up one item at a time.")
 
 
 /obj/item/weapon/storage/verb/quick_empty()
@@ -539,7 +539,7 @@
 		var/total_storage_space = 0
 		for(var/obj/item/I in contents)
 			total_storage_space += I.get_storage_cost()
-		max_storage_space = max(total_storage_space,max_storage_space) //prevents spawned containers from being too small for their contents
+		max_storage_space = max(total_storage_space,max_storage_space) //Prevents spawned containers from being too small for their contents.
 
 	src.boxes = new /obj/screen/storage(  )
 	src.boxes.name = "storage"
