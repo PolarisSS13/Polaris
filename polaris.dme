@@ -1511,6 +1511,7 @@
 #include "code\modules\integrated_electronics\core\helpers.dm"
 #include "code\modules\integrated_electronics\core\integrated_circuit.dm"
 #include "code\modules\integrated_electronics\core\pins.dm"
+#include "code\modules\integrated_electronics\core\prefab.dm"
 #include "code\modules\integrated_electronics\core\printer.dm"
 #include "code\modules\integrated_electronics\core\tools.dm"
 #include "code\modules\integrated_electronics\core\special_pins\boolean_pin.dm"
