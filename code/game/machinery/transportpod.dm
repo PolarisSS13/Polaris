@@ -8,7 +8,6 @@
 	anchored = 1
 	use_power = 0
 
-	var/used = 0
 	var/in_transit = 0
 	var/mob/occupant = null
 
@@ -19,9 +18,6 @@
 	var/limit_y = 3
 
 /obj/machinery/transportpod/process()
-	if(used == 1) // Just to make sure.
-		return
-
 	if(occupant)
 		if(in_transit)
 			var/locNum = rand(0, 7) //pick a random location
@@ -33,12 +29,10 @@
 			src.forceMove(L)
 			playsound(src, pick('sound/effects/Explosion1.ogg', 'sound/effects/Explosion2.ogg', 'sound/effects/Explosion3.ogg', 'sound/effects/Explosion4.ogg'))
 			in_transit = 0
-			used = 1
-
-
-/obj/machinery/transportpod/examine(mob/user)
-	..(user)
-	to_chat(user, "The pod is [(used == 1)? "already used." : "ready to be used."]")
+			sleep(2)
+			go_out()
+			sleep(2)
+			del(src)
 
 /obj/machinery/transportpod/relaymove(mob/user as mob)
 	if(user.stat)
@@ -54,14 +48,9 @@
 		icon_state = "borg_pod_opened"
 
 /obj/machinery/transportpod/Bumped(var/mob/living/O)
-	if(used)
-		return
 	go_in(O)
 
 /obj/machinery/transportpod/proc/go_in(var/mob/living/carbon/human/O)
-	if(used)
-		return
-
 	if(occupant)
 		return
 
