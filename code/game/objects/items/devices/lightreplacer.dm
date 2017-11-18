@@ -95,10 +95,10 @@
 		var/mob/living/silicon/robot/R = user
 		if(R.emagged)
 			src.Emag()
-			to_chat(user, You shortcircuit the [src].")
+			to_chat(usr, You short circuit the [src].")
 			return
 	*/
-	to_chat(user, "It has [uses] lights remaining.")
+	to_chat(usr, "It has [uses] lights remaining.")
 
 /obj/item/device/lightreplacer/update_icon()
 	icon_state = "lightreplacer[emagged]"
