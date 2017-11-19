@@ -10,7 +10,7 @@
 	slot_flags = SLOT_BACK
 	caliber = "12g"
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
-	load_method = SINGLE_CASING|SPEEDLOADER
+	load_method = SINGLE_CASING
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
 	handle_casings = HOLD_CASINGS
 	fire_sound = 'sound/weapons/shotgun.ogg'
