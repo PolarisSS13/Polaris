@@ -31,7 +31,7 @@
 	mappath = 'maps/submaps/cave_submaps/quarantineshuttle.dmm'
 
 /datum/map_template/cave/Mineshaft1
-	name = "Abandoned Mineshaft 1
+	name = "Abandoned Mineshaft 1"
 	desc = "An abandoned minning tunnel from a lost money making effort."
 	mappath = 'maps/submaps/cave_submaps/Mineshaft1.dmm'
 

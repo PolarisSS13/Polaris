@@ -49,7 +49,7 @@
 
 /datum/map_template/surface/Rocky1
 	name = "Rocky1"
-	desc = "DununanununanununuNAnana
+	desc = "DununanununanununuNAnana"
 	mappath = 'maps/submaps/surface/Rocky1'
 
 /datum/map_template/surface/Rocky2
@@ -63,7 +63,7 @@
 	mappath = 'maps/submaps/surface/Rocky3'
 
 /datum/map_template/surface/Shack1
-	name = "Shack1
+	name = "Shack1"
 	desc = "A small shack in the middle of nowhere, Your halloween murder happens here"
 	mappath = 'maps/submaps/surface/Shack1'
 
@@ -71,3 +71,8 @@
 	name = "Smol1"
 	desc = "A tiny grove of trees, The Nemesis of thicc"
 	mappath = 'maps/submaps/surface/Smol1'
+
+/datum/map_template/surface/Snowrock1
+	name = "Snowrock1"
+	desc = "A rocky snow covered area"
+	mappath = 'maps/submaps/surface/Snowrock1'
