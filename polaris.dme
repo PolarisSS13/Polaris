@@ -11,6 +11,7 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "code\_macros.dm"
+#include "code\_map_tests.dm"
 #include "code\_unit_tests.dm"
 #include "code\global.dm"
 #include "code\hub.dm"
@@ -402,6 +403,7 @@
 #include "code\game\gamemodes\changeling\powers\enfeebling_string.dm"
 #include "code\game\gamemodes\changeling\powers\engorged_glands.dm"
 #include "code\game\gamemodes\changeling\powers\epinephrine_overdose.dm"
+#include "code\game\gamemodes\changeling\powers\escape_restraints.dm"
 #include "code\game\gamemodes\changeling\powers\extract_dna_sting.dm"
 #include "code\game\gamemodes\changeling\powers\fabricate_clothing.dm"
 #include "code\game\gamemodes\changeling\powers\fake_death.dm"
@@ -2338,7 +2340,7 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\southern_cross\southern_cross.dm"
+#include "maps\northern_star\northern_star.dm"
 #include "maps\submaps\_readme.dm"
 #include "maps\submaps\cave_submaps\cave.dm"
 #include "maps\submaps\cave_submaps\cave_areas.dm"
