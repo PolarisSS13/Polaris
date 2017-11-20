@@ -59,7 +59,8 @@
 	w_class = ITEMSIZE_HUGE
 	charge_cost = 300
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
-	self_recharge = 1
+	cell_type = /obj/item/weapon/cell/device/weapon/recharge
+	battery_lock = 1
 	accuracy = 30
 
 	firemodes = list(
@@ -86,7 +87,7 @@
 	name = "dark matter bolt"
 	icon_state = "darkb"
 	fire_sound = 'sound/weapons/eLuger.ogg'
-	damage = 60
+	damage = 35
 	armor_penetration = 35
 	damage_type = BRUTE
 	check_armour = "energy"
@@ -119,7 +120,8 @@
 	icon_state = "noise"
 	item_state = "noise"
 	w_class = ITEMSIZE_HUGE
-	self_recharge = 1
+	cell_type = /obj/item/weapon/cell/device/weapon/recharge
+	battery_lock = 1
 	charge_cost = 600
 
 	projectile_type=/obj/item/projectile/sonic/weak
