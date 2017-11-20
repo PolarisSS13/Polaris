@@ -31,3 +31,43 @@
 	name = "Spider Nest 1"
 	desc = "A small spider nest, in the forest."
 	mappath = 'maps/submaps/surface_submaps/spider1.dmm'
+
+/datum/map_template/surface/Flake
+	name = "Forest Lake"
+	desc = "A serene lake sitting amidst the surface."
+	mappath = 'maps/submaps/surface/Flake1'
+
+/datum/map_template/surfance/Mcamp1
+	name = "Military Camp 1"
+	desc = "A derelict military camp host to some unsavory dangers"
+	mappath = 'maps/submaps/surface/MCamp1'
+
+/datum/map_template/surface/Mudpit
+	name = "Mudpit"
+	desc = "What happens when someone is a bit too careless with gas.."
+	mappath = 'maps/submaps/surface/mudpit'
+
+/datum/map_template/surface/Rocky1
+	name = "Rocky1"
+	desc = "DununanununanununuNAnana
+	mappath = 'maps/submaps/surface/Rocky1'
+
+/datum/map_template/surface/Rocky2
+	name =  "Rocky2"
+	desc = "More rocks."
+	mappath = 'maps/submaps/surface/Rocky2'
+
+/datum/map_template/surface/Rocky3
+	name = "Rocky3"
+	desc = "More and more and more rocks."
+	mappath = 'maps/submaps/surface/Rocky3'
+
+/datum/map_template/surface/Shack1
+	name = "Shack1
+	desc = "A small shack in the middle of nowhere, Your halloween murder happens here"
+	mappath = 'maps/submaps/surface/Shack1'
+
+/datum/map_template/surface/Smol1
+	name = "Smol1"
+	desc = "A tiny grove of trees, The Nemesis of thicc"
+	mappath = 'maps/submaps/surface/Smol1'

@@ -5,6 +5,8 @@
 #include "deadBeacon.dmm"
 #include "prepper1.dmm"
 #include "quarantineshuttle.dmm"
+#include "Mineshaft1"
+#include "Scave1"
 #endif
 
 /datum/map_template/cave
@@ -27,3 +29,13 @@
 	name = "Quarantined Shuttle"
 	desc = "An emergency landing turned viral outbreak turned tragedy."
 	mappath = 'maps/submaps/cave_submaps/quarantineshuttle.dmm'
+
+/datum/map_template/cave/Mineshaft1
+	name = "Abandoned Mineshaft 1
+	desc = "An abandoned minning tunnel from a lost money making effort."
+	mappath = 'maps/submaps/cave_submaps/Mineshaft1.dmm'
+
+/datum/map_template/cave/Scave1
+	name = "Spider Cave 1"
+	desc = "A minning tunnel home to an aggressive collection of spiders."
+	mappath = 'maps/submaps/cave_submaps/Scave1.dmm'
