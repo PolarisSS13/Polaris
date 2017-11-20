@@ -45,34 +45,34 @@
 /datum/map_template/surface/Mudpit
 	name = "Mudpit"
 	desc = "What happens when someone is a bit too careless with gas.."
-	mappath = 'maps/submaps/surface/Mudpit.dmm'
+	mappath = 'maps/submaps/surface_submaps/Mudpit.dmm'
 
 /datum/map_template/surface/Rocky1
 	name = "Rocky1"
 	desc = "DununanununanununuNAnana"
-	mappath = 'maps/submaps/surface/Rocky1.dmm'
+	mappath = 'maps/submaps/surface_submaps/Rocky1.dmm'
 
 /datum/map_template/surface/Rocky2
 	name =  "Rocky2"
 	desc = "More rocks."
-	mappath = 'maps/submaps/surface/Rocky2.dmm'
+	mappath = 'maps/submaps/surface_submaps/Rocky2.dmm'
 
 /datum/map_template/surface/Rocky3
 	name = "Rocky3"
 	desc = "More and more and more rocks."
-	mappath = 'maps/submaps/surface/Rocky3.dmm'
+	mappath = 'maps/submaps/surface_submaps/Rocky3.dmm'
 
 /datum/map_template/surface/Shack1
 	name = "Shack1"
 	desc = "A small shack in the middle of nowhere, Your halloween murder happens here"
-	mappath = 'maps/submaps/surface/Shack1.dmm'
+	mappath = 'maps/submaps/surface_submaps/Shack1.dmm'
 
 /datum/map_template/surface/Smol1
 	name = "Smol1"
 	desc = "A tiny grove of trees, The Nemesis of thicc"
-	mappath = 'maps/submaps/surface/Smol1.dmm'
+	mappath = 'maps/submaps/surface_submaps/Smol1.dmm'
 
 /datum/map_template/surface/Snowrock1
 	name = "Snowrock1"
 	desc = "A rocky snow covered area"
-	mappath = 'maps/submaps/surface/Snowrock1.dmm'
+	mappath = 'maps/submaps/surface_submaps/Snowrock1.dmm'
