@@ -35,12 +35,12 @@
 /datum/map_template/surface/Flake
 	name = "Forest Lake"
 	desc = "A serene lake sitting amidst the surface."
-	mappath = 'maps/submaps/surface/Flake1.dmm'
+	mappath = 'maps/submaps/surface_submaps/Flake1.dmm'
 
 /datum/map_template/surfance/Mcamp1
 	name = "Military Camp 1"
 	desc = "A derelict military camp host to some unsavory dangers"
-	mappath = 'maps/submaps/surface/MCamp1.dmm'
+	mappath = 'maps/submaps/surface_submaps/MCamp1.dmm'
 
 /datum/map_template/surface/Mudpit
 	name = "Mudpit"

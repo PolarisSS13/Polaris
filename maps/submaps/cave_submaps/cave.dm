@@ -5,8 +5,8 @@
 #include "deadBeacon.dmm"
 #include "prepper1.dmm"
 #include "quarantineshuttle.dmm"
-#include "Mineshaft1"
-#include "Scave1"
+#include "Mineshaft1.dmm"
+#include "Scave1.dmm"
 #endif
 
 /datum/map_template/cave
