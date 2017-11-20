@@ -34,3 +34,6 @@
 
 /area/submap/Small1
 	name = "Small1"
+
+/area/submap/SnowR1
+	name = "SnowR1"

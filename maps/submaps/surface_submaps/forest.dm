@@ -4,6 +4,16 @@
 #if MAP_TEST
 #include "farm1.dmm"
 #include "spider1.dmm"
+#include "Flake.dmm"
+#include "Field1.dmm"
+#include "MCamp1.dmm"
+#include "Rocky1.dmm"
+#include "Rocky2.dmm"
+#include "Rocky3.dmm"
+#include "Shack1.dmm"
+#include "Smol1.dmm"
+#include "Mudpit.dmm"
+#include "Snowrock1.dmm"
 #endif
 
 /datum/map_template/surface
