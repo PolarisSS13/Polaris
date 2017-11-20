@@ -48,7 +48,7 @@
 
 	if(prob(speak_chance))
 		for(var/mob/M in view())
-			M << 'sound/effects/mouse_squeak.ogg'
+			playsound(M, 'sound/effects/mouse_squeak.ogg', 50, 0)
 
 	if(!resting && prob(0.5))
 		lay_down()
@@ -95,16 +95,19 @@
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
-			M << "<font color='blue'>\icon[src] Squeek!</font>"
-			M << 'sound/effects/mouse_squeak.ogg'
+			M.visible_message("<font color='blue'>\icon[src] Squeek!</font>")
+			playsound(M, 'sound/effects/mouse_squeak.ogg', 50, 0)
 	..()
 
 /mob/living/simple_animal/mouse/death()
 	layer = MOB_LAYER
-	playsound(src, 'sound/effects/mouse_squeak_loud.ogg', 50, 1)
+	playsound(src, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()
+
+/mob/living/simple_animal/mouse/Bump(atom/movable/AM, yes)
+	return
 
 /*
  * Mouse types
