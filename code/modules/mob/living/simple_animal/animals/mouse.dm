@@ -95,7 +95,7 @@
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
-			M << "<font color='blue'>\icon[src] Squeek!</font>"
+			M.visible_message("<font color='blue'>\icon[src] Squeek!</font>")
 			M << 'sound/effects/mouse_squeak.ogg'
 	..()
 
@@ -105,9 +105,6 @@
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()
-
-/mob/living/simple_animal/mouse/Bump(atom/movable/AM, yes)
-	return
 
 /*
  * Mouse types
