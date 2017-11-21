@@ -212,7 +212,6 @@
 /obj/structure/bed/roller/adv
 	name = "advanced roller bed"
 	icon_state = "advdown"
-	surgery_odds = 95 //still not perfect!
 	bedtype = "advanced"
 
 /obj/structure/bed/roller/update_icon()
