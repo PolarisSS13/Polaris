@@ -202,10 +202,18 @@
  */
 /obj/structure/bed/roller
 	name = "roller bed"
+	desc = "A portable bed-on-wheels made for transporting medical patients."
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
 	surgery_odds = 75
+	var/bedtype = "regular"
+
+/obj/structure/bed/roller/adv
+	name = "advanced roller bed"
+	icon_state = "advdown"
+	surgery_odds = 95 //still not perfect!
+	bedtype = "advanced"
 
 /obj/structure/bed/roller/update_icon()
 	return // Doesn't care about material or anything else.
@@ -218,7 +226,10 @@
 			user_unbuckle_mob(user)
 		else
 			visible_message("[user] collapses \the [src.name].")
-			new/obj/item/roller(get_turf(src))
+			if(bedtype == "advanced")
+				new/obj/item/roller/adv(get_turf(src))
+			else
+				new/obj/item/roller(get_turf(src))
 			spawn(0)
 				qdel(src)
 		return
@@ -230,12 +241,17 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "folded"
 	slot_flags = SLOT_BACK
-	w_class = ITEMSIZE_LARGE // Can't be put in backpacks. Oh well.
+	w_class = ITEMSIZE_LARGE
+	var/rollertype = "regular"
 
 /obj/item/roller/attack_self(mob/user)
+	if(rollertype == "advanced")
+		var/obj/structure/bed/roller/adv/R = new /obj/structure/bed/roller/adv(user.loc)
+		R.add_fingerprint(user)
+	else
 		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 		R.add_fingerprint(user)
-		qdel(src)
+	qdel(src)
 
 /obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -248,6 +264,13 @@
 			return
 
 	..()
+
+/obj/item/roller/adv
+	name = "advanced roller bed"
+	desc = "A high-tech, compact version of the regular roller bed."
+	w_class = ITEMSIZE_NORMAL
+	icon_state = "advfolded"
+	rollertype = "advanced"
 
 /obj/item/roller_holder
 	name = "roller bed rack"
@@ -286,12 +309,18 @@
 		M.pixel_y = 6
 		M.old_y = 6
 		density = 1
-		icon_state = "up"
+		if(bedtype == "advanced")
+			icon_state = "advup"
+		else
+			icon_state = "up"
 	else
 		M.pixel_y = 0
 		M.old_y = 0
 		density = 0
-		icon_state = "down"
+		if(bedtype == "advanced")
+			icon_state = "advdown"
+		else
+			icon_state = "down"
 
 	return ..()
 
@@ -301,7 +330,10 @@
 		if(!ishuman(usr))	return
 		if(buckled_mob)	return 0
 		visible_message("[usr] collapses \the [src.name].")
-		new/obj/item/roller(get_turf(src))
+		if(bedtype == "advanced")
+			new/obj/item/roller/adv(get_turf(src))
+		else
+			new/obj/item/roller(get_turf(src))
 		spawn(0)
 			qdel(src)
 		return
