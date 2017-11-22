@@ -45,7 +45,7 @@ REAGENT SCANNER
 		for(var/mob/O in viewers(M, null))
 			O.show_message("<span class='warning'>\The [user] has analyzed the floor's vitals!</span>", 1)
 		user.show_message("<span class='notice'>Analyzing Results for The floor:</span>", 1)
-		user.show_message("Overall Status: Healthy</span>", 1)
+		user.show_message("<span class='notice'>Overall Status: Healthy</span>", 1)
 		user.show_message("<span class='notice'>    Damage Specifics: 0-0-0-0</span>", 1)
 		user.show_message("<span class='notice'>Key: Suffocation/Toxin/Burns/Brute</span>", 1)
 		user.show_message("<span class='notice'>Body Temperature: ???</span>", 1)
@@ -114,10 +114,7 @@ REAGENT SCANNER
 			else if(M.radiation >= 25)
 				user.show_message("<span class='warning'>Moderate levels of radiation detected.</span>")
 			else if(M.radiation >= 1)
-				if(prob(5))
-					user.show_message("Low levels of radiation detected. Should've worn a radiation suit.</span>")
-				else
-					user.show_message("Low levels of radiation detected.</span>")
+				user.show_message("<span_class='warning'>Low levels of radiation detected.</span>")
 		else
 			user.show_message("<span class='warning'>Radiation detected.</span>")
 	if(istype(M, /mob/living/carbon))
@@ -188,10 +185,7 @@ REAGENT SCANNER
 	else if (M.getBrainLoss() >= 10)
 		user.show_message("<span class='warning'>Significant brain damage detected. Subject may have had a concussion.</span>")
 	else if (M.getBrainLoss() >= 1 && advscan == 1)
-		if(prob(5))
-			user.show_message("<span class='warning'>Minor brain damage detected. Professional analysis: not the sharpest tool in the shed.</span>")
-		else
-			user.show_message("<span class='warning'>Minor brain damage detected.</span>")
+		user.show_message("<span class='warning'>Minor brain damage detected.</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name_i in H.internal_organs_by_name)
