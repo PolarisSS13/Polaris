@@ -23,6 +23,12 @@ REAGENT SCANNER
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
+	var/advscan = 0
+
+/obj/item/device/healthanalyzer/New()
+	if(advscan == 1)
+		verbs += /obj/item/device/healthanalyzer/proc/toggle_adv
+	..()
 
 /obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
 	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
@@ -100,39 +106,75 @@ REAGENT SCANNER
 		OX = fake_oxy > 50 ? 		"<span class='warning'>Severe oxygen deprivation detected</span>" 	: 	"Subject bloodstream oxygen level normal"
 	user.show_message("[OX] | [TX] | [BU] | [BR]")
 	if(M.radiation)
-		user.show_message("<span class='warning'>Radiation detected.</span>")
+		if(advscan == 1)
+			if(M.radiation >= 30)
+				user.show_message("<span class='warning'>Critical levels of radiation detected. Immediate treatment advised.</span>")
+			else if(M.radiation >= 20)
+				user.show_message("<span class='warning'>Severe levels of radiation detected.</span>")
+			else if(M.radiation >= 10)
+				user.show_message("<span class='warning'>Moderate levels of radiation detected.</span>")
+			else if(M.radiation >= 1)
+				if(prob(5))
+					user.show_message("Low levels of radiation detected. Should've worn a radiation suit.</span>")
+				else
+					user.show_message("Low levels of radiation detected.</span>")
+		else
+			user.show_message("<span class='warning'>Radiation detected.</span>")
 	if(istype(M, /mob/living/carbon))
 		var/mob/living/carbon/C = M
 		if(C.reagents.total_volume)
 			var/unknown = 0
 			var/reagentdata[0]
+			var/unknownreagents[0]
 			for(var/A in C.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
 					reagentdata["[R.id]"] = "<span class='notice'>    [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
 				else
 					unknown++
+					unknownreagents["[R.id]"] = "<span class='notice'>    [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
 			if(reagentdata.len)
 				user.show_message("<span class='notice'>Beneficial reagents detected in subject's blood:</span>")
 				for(var/d in reagentdata)
 					user.show_message(reagentdata[d])
 			if(unknown)
-				user.show_message("<span class='warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>")
+				if(advscan == 1)
+					user.show_message("<span class='warning'>Warning: Non-medical reagent[(unknown>1)?"s":""] detected in subject's blood:</span>")
+					for(var/d in unknownreagents)
+						user.show_message(unknownreagents[d])
+				else
+					user.show_message("<span class='warning'>Warning: Unknown substance[(unknown>1)?"s":""] detected in subject's blood.</span>")
 		if(C.ingested && C.ingested.total_volume)
 			var/unknown = 0
-			for(var/datum/reagent/R in C.ingested.reagent_list)
-				if(R.scannable)
-					user << "<span class='notice'>[R.name] found in subject's stomach.</span>"
+			var/stomachreagentdata[0]
+			var/stomachunknownreagents[0]
+			for(var/B in C.ingested.reagent_list)
+				var/datum/reagent/T = B
+				if(T.scannable)
+					stomachreagentdata["[T.id]"] = "<span class='notice'>    [round(C.ingested.get_reagent_amount(T.id), 1)]u [T.name]</span>"
+					if (advscan == 0)
+						user.show_message("<span class='notice'>[T.name] found in subject's stomach.</span>")
 				else
 					++unknown
+					stomachunknownreagents["[T.id]"] = "<span class='notice'>    [round(C.ingested.get_reagent_amount(T.id), 1)]u [T.name]</span>"
+			if(advscan == 1)
+				user.show_message("<span class='notice'>Beneficial reagents detected in subject's stomach:</span>")
+				for(var/d in stomachreagentdata)
+					user.show_message(stomachreagentdata[d])
 			if(unknown)
-				user << "<span class='warning'>Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach.</span>"
+				if(advscan == 1)
+					user.show_message("<span class='warning'>Warning: Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach:</span>")
+					for(var/d in stomachunknownreagents)
+						user.show_message(stomachunknownreagents[d])
+				else
+					user.show_message("<span class='warning'>Unknown substance[(unknown > 1)?"s":""] found in subject's stomach.</span>")
 		if(C.virus2.len)
 			for (var/ID in C.virus2)
 				if (ID in virusDB)
 					var/datum/data/record/V = virusDB[ID]
 					user.show_message("<span class='warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>")
-//			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>"))
+				else
+					user.show_message("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>")
 	if (M.getCloneLoss())
 		user.show_message("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
 //	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
@@ -145,6 +187,11 @@ REAGENT SCANNER
 		user.show_message("<span class='warning'>Severe brain damage detected. Subject likely to have a traumatic brain injury.</span>")
 	else if (M.getBrainLoss() >= 10)
 		user.show_message("<span class='warning'>Significant brain damage detected. Subject may have had a concussion.</span>")
+	else if (M.getBrainLoss() >= 1 && advscan == 1)
+		if(prob(5))
+			user.show_message("<span class='warning'>Minor brain damage detected. Professional analysis: not the sharpest tool in the shed.</span>")
+		else
+			user.show_message("<span class='warning'>Minor brain damage detected.</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name_i in H.internal_organs_by_name)
@@ -166,21 +213,28 @@ REAGENT SCANNER
 			var/limb = e.name
 			if(e.status & ORGAN_BROKEN)
 				if(((e.name == "l_arm") || (e.name == "r_arm") || (e.name == "l_leg") || (e.name == "r_leg")) && (!e.splinted))
-					user << "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>"
+					to_chat(user, "<span class='warning'>Unsecured fracture in subject [limb]. Splinting recommended for transport.</span>")
 			if(e.has_infected_wound())
-				user << "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>"
+				to_chat(user, "<span class='warning'>Infected wound detected in subject [limb]. Disinfection recommended.</span>")
 
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
 			if(e && e.status & ORGAN_BROKEN)
-				user.show_message(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"), 1)
-				break
+				if(advscan == 1)
+					user.show_message(text("<span class='warning'>Bone fractures detected in subject [e.name].</span>"), 1)
+				else
+					user.show_message(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"), 1)
+					break
 		for(var/obj/item/organ/external/e in H.organs)
 			if(!e)
 				continue
 			for(var/datum/wound/W in e.wounds) if(W.internal)
-				user.show_message(text("<span class='warning'>Internal bleeding detected. Advanced scanner required for location.</span>"), 1)
-				break
+				if(advscan == 1)
+					user.show_message(text("<span class='warning'>Internal bleeding detected in subject [e.name].</span>"), 1)
+				else
+					user.show_message(text("<span class='warning'>Internal bleeding detected. Advanced scanner required for location.</span>"), 1)
+					break
+			break
 
 		if(M:vessel)
 			var/blood_volume = H.vessel.get_reagent_amount("blood")
@@ -202,10 +256,26 @@ REAGENT SCANNER
 	mode = !mode
 	switch (mode)
 		if(1)
-			usr << "The scanner now shows specific limb damage."
+			to_chat(usr, "The scanner now shows specific limb damage.")
 		if(0)
-			usr << "The scanner no longer shows limb damage."
+			to_chat(usr, "The scanner no longer shows limb damage.")
 
+/obj/item/device/healthanalyzer/proc/toggle_adv()
+	set name = "Toggle Advanced Scan"
+	set category = "Object"
+
+	advscan = !advscan
+	switch (advscan)
+		if(1)
+			to_chat(usr, "The scanner will now perform an advanced analysis.")
+		if(0)
+			to_chat(usr, "The scanner will now perform a basic analysis.")
+
+/obj/item/device/healthanalyzer/advanced
+	name = "advanced health analyzer"
+	desc = "A miracle of medical technology, this handheld scanner can produce an accurate and specific report of a patient's biosigns."
+	advscan = 1
+	origin_tech = list(TECH_MAGNET = 5, TECH_BIO = 6)
 
 /obj/item/device/analyzer
 	name = "analyzer"
@@ -235,7 +305,7 @@ REAGENT SCANNER
 	if (user.stat)
 		return
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
+		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 
 	analyze_gases(src, user)
@@ -274,14 +344,14 @@ REAGENT SCANNER
 	if (user.stat)
 		return
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
+		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.id != "blood")
 				reagents.clear_reagents()
-				user << "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
+				to_chat(user, "<span class='warning'>The sample was contaminated! Please insert another sample</span>")
 				return
 			else
 				blood_traces = params2list(R.data["trace_chem"])
@@ -292,7 +362,7 @@ REAGENT SCANNER
 				dat += "[R] ([blood_traces[R]] units) "
 			else
 				dat += "[R] "
-		user << "[dat]"
+		to_chat(user, "[dat]")
 		reagents.clear_reagents()
 	return
 
@@ -325,7 +395,7 @@ REAGENT SCANNER
 	if (user.stat)
 		return
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
+		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 	if(!istype(O))
 		return
@@ -337,7 +407,7 @@ REAGENT SCANNER
 			for (var/datum/reagent/R in O.reagents.reagent_list)
 				dat += "\n \t <span class='notice'>[R][details ? ": [R.volume / one_percent]%" : ""]"
 		if(dat)
-			user << "<span class='notice'>Chemicals found: [dat]</span>"
+			to_chat(user, "<span class='notice'>Chemicals found: [dat]</span>")
 		else
 			user << "<span class='notice'>No active chemical agents found in [O].</span>"
 	else
