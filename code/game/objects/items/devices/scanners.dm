@@ -276,6 +276,7 @@ REAGENT SCANNER
 	desc = "A miracle of medical technology, this handheld scanner can produce an accurate and specific report of a patient's biosigns."
 	advscan = 1
 	origin_tech = list(TECH_MAGNET = 5, TECH_BIO = 6)
+	icon_state = "advhealth"
 
 /obj/item/device/analyzer
 	name = "analyzer"
