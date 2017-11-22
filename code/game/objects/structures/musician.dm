@@ -27,6 +27,24 @@
 		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
 		icon_state = "piano"
 
+/obj/structure/device/piano/verb/rotate()
+	set name = "Rotate Piano"
+	set category = "Object"
+	set src in oview(1)
+
+	if(!usr || !Adjacent(usr))
+		return
+
+	if(usr.stat == DEAD)
+		if(!round_is_spooky())
+			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
+			return
+	else if(usr.incapacitated())
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	return
+
 /obj/structure/device/piano/proc/playnote(var/note as text)
 	//world << "Note: [note]"
 	var/soundfile
