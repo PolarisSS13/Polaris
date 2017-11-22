@@ -32,18 +32,19 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(!usr || !Adjacent(usr))
+	if(config.ghost_interaction)
+		src.set_dir(turn(src.dir, 90))
 		return
-
-	if(usr.stat == DEAD)
-		if(!round_is_spooky())
-			to_chat(src, "<span class='warning'>The veil is not thin enough for you to do that.</span>")
+	else
+		if(istype(usr,/mob/living/simple_animal/mouse))
 			return
-	else if(usr.incapacitated())
-		return
+		if(!usr || !isturf(usr.loc))
+			return
+		if(usr.stat || usr.restrained())
+			return
 
-	src.set_dir(turn(src.dir, 90))
-	return
+		src.set_dir(turn(src.dir, 90))
+		return
 
 /obj/structure/device/piano/proc/playnote(var/note as text)
 	//world << "Note: [note]"
