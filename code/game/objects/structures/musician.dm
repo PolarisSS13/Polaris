@@ -32,17 +32,15 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(config.ghost_interaction)
-		src.set_dir(turn(src.dir, 90))
+	if(istype(usr,/mob/living/simple_animal/mouse))
+		return
+	else if(!usr || !isturf(usr.loc))
+		return
+	else if(usr.stat || usr.restrained())
+		return
+	else if (istype(usr,/mob/observer/ghost) && !config.ghost_interaction)
 		return
 	else
-		if(istype(usr,/mob/living/simple_animal/mouse))
-			return
-		if(!usr || !isturf(usr.loc))
-			return
-		if(usr.stat || usr.restrained())
-			return
-
 		src.set_dir(turn(src.dir, 90))
 		return
 
