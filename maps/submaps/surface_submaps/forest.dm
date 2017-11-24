@@ -32,7 +32,8 @@
 	name = "Spider Nest 1"
 	desc = "A small spider nest, in the forest."
 	mappath = 'maps/submaps/surface_submaps/spider1.dmm'
-<<<<<<< HEAD
+	allow_duplicates = TRUE
+	cost = 5
 
 /datum/map_template/surface/Flake
 	name = "Forest Lake"
@@ -78,7 +79,4 @@
 	name = "Snowrock1"
 	desc = "A rocky snow covered area"
 	mappath = 'maps/submaps/surface_submaps/Snowrock1.dmm'
-=======
-	allow_duplicates = TRUE
-	cost = 5
->>>>>>> f1280b234b2fa494439ceaf71222784be2a81d53
+
