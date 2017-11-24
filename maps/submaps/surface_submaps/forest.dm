@@ -18,7 +18,7 @@
 
 /datum/map_template/surface
 	name = "Surface Content"
-	desc = "Used to make the surface by 17% less boring."
+	desc = "Used to make the surface be 17% less boring."
 
 // To be added: Templates for surface exploration when they are made.
 
@@ -26,11 +26,13 @@
 	name = "Farm 1"
 	desc = "A small farm tended by a farmbot."
 	mappath = 'maps/submaps/surface_submaps/farm1.dmm'
+	cost = 10
 
 /datum/map_template/surface/spider1
 	name = "Spider Nest 1"
 	desc = "A small spider nest, in the forest."
 	mappath = 'maps/submaps/surface_submaps/spider1.dmm'
+<<<<<<< HEAD
 
 /datum/map_template/surface/Flake
 	name = "Forest Lake"
@@ -76,3 +78,7 @@
 	name = "Snowrock1"
 	desc = "A rocky snow covered area"
 	mappath = 'maps/submaps/surface_submaps/Snowrock1.dmm'
+=======
+	allow_duplicates = TRUE
+	cost = 5
+>>>>>>> f1280b234b2fa494439ceaf71222784be2a81d53
