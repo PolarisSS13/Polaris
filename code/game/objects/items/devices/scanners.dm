@@ -278,7 +278,7 @@ REAGENT SCANNER
 	advscan = 2
 
 /obj/item/device/healthanalyzer/enhanced //reports all of the above, as well as name and quantity of nonmed reagents in stomach
-	name = "enhanced health analyzer"
+	name = "phasic health analyzer"
 	advscan = 3
 
 /obj/item/device/analyzer
