@@ -23,7 +23,7 @@
 	display_name = "Zippo selection"
 	path = /obj/item/weapon/flame/lighter/zippo
 
-/datum/gear/zippo/New()
+/datum/gear/lighter/zippo/New()
 	..()
 	var/list/zippos = list()
 	for(var/zippo in typesof(/obj/item/weapon/flame/lighter/zippo))
