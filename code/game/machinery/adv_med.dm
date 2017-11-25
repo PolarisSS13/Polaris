@@ -287,7 +287,7 @@
 
 			var/bloodData[0]
 			if(H.vessel)
-				var/blood_volume = round(H.vessel.get_reagent_amount("blood"))
+				var/blood_volume = round(H.vessel.get_reagent_amount(/datum/reagent/blood))
 				var/blood_max = H.species.blood_volume
 				bloodData["volume"] = blood_volume
 				bloodData["percent"] = round(((blood_volume / blood_max)*100))
@@ -460,7 +460,7 @@
 				dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<br>"
 
 			if(occupant.vessel)
-				var/blood_volume = round(occupant.vessel.get_reagent_amount("blood"))
+				var/blood_volume = round(occupant.vessel.get_reagent_amount(/datum/reagent/blood))
 				var/blood_max = occupant.species.blood_volume
 				var/blood_percent =  blood_volume / blood_max
 				blood_percent *= 100

@@ -42,7 +42,7 @@
 	var/busy = 0
 	var/poison_per_bite = 5
 	var/poison_chance = 10
-	var/poison_type = "spidertoxin"
+	var/poison_type = /datum/reagent/toxin/spidertoxin
 	var/image/eye_layer = null
 
 /mob/living/simple_animal/hostile/giant_spider/proc/add_eyes()
@@ -72,7 +72,7 @@ Nurse Family
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	poison_per_bite = 7
-	poison_type = "stoxin"
+	poison_type = /datum/reagent/soporific
 
 	var/fed = 0
 	var/atom/cocoon_target
@@ -118,7 +118,7 @@ Nurse Family
 	melee_damage_lower = 5
 	melee_damage_upper = 10
 	poison_per_bite = 2
-	poison_type = "psilocybin"
+	poison_type = /datum/reagent/psilocybin
 
 	spattack_prob = 15
 	spattack_min_range = 0
@@ -152,7 +152,7 @@ Nurse Family
 	melee_damage_upper = 20
 
 	poison_per_bite = 3
-	poison_type = "chloralhydrate"
+	poison_type = /datum/reagent/chloralhydrate
 
 	var/spiderling_count = 0
 	var/spiderling_type = /obj/effect/spider/spiderling
@@ -229,7 +229,7 @@ Hunter Family
 
 
 	poison_chance = 20
-	poison_type = "cryptobiolin"
+	poison_type = /datum/reagent/cryptobiolin
 	poison_per_bite = 2
 
 /mob/living/simple_animal/hostile/giant_spider/lurker/death()
@@ -251,7 +251,7 @@ Hunter Family
 
 	poison_chance = 15
 	poison_per_bite = 3
-	poison_type = "serotrotium_v"
+	poison_type = /datum/reagent/serotrotium/venom
 
 /mob/living/simple_animal/hostile/giant_spider/tunneler/death()
 	spawn(1)
@@ -280,7 +280,7 @@ Guard Family
 
 	poison_chance = 20
 	poison_per_bite = 5
-	poison_type = "condensedcapsaicin_v"
+	poison_type = /datum/reagent/condensedcapsaicin/venom
 
 /mob/living/simple_animal/hostile/giant_spider/pepper/New()
 	adjust_scale(1.1)
@@ -300,7 +300,7 @@ Guard Family
 
 	poison_chance = 30
 	poison_per_bite = 1
-	poison_type = "thermite_v"
+	poison_type = /datum/reagent/thermite/venom
 
 /mob/living/simple_animal/hostile/giant_spider/electric
 	desc = "Spined and yellow, it makes you shudder to look at it. This one has flickering gold eyes."
@@ -323,7 +323,7 @@ Guard Family
 
 	poison_chance = 15
 	poison_per_bite = 3
-	poison_type = "stimm"
+	poison_type = /datum/reagent/toxin/stimm
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic
 	desc = "Crystalline and purple, it makes you shudder to look at it. This one has haunting purple eyes."
@@ -340,7 +340,7 @@ Guard Family
 
 	poison_chance = 30
 	poison_per_bite = 0.5
-	poison_type = "phoron"
+	poison_type = /datum/reagent/toxin/phoron
 
 	var/exploded = 0
 
@@ -370,7 +370,7 @@ Guard Family
 	melee_damage_upper = 20
 
 	poison_per_bite = 5
-	poison_type = "cryotoxin"
+	poison_type = /datum/reagent/frostoil/cryotoxin
 
 /*
 Spider Procs

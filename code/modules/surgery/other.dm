@@ -117,7 +117,7 @@
 			return 0
 
 		var/obj/item/weapon/reagent_containers/container = tool
-		if(!container.reagents.has_reagent("peridaxon"))
+		if(!container.reagents.has_reagent(/datum/reagent/peridaxon))
 			return 0
 
 		if(!hasorgans(target))

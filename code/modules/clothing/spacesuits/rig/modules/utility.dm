@@ -134,14 +134,14 @@
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
 
 	charges = list(
-		list("tricordrazine", "tricordrazine", 0, 80),
-		list("tramadol",      "tramadol",      0, 80),
-		list("dexalin plus",  "dexalinp",      0, 80),
-		list("antibiotics",   "spaceacillin",  0, 80),
-		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "glucose",     0, 80),
-		list("hyronalin",     "hyronalin",     0, 80),
-		list("radium",        "radium",        0, 80)
+		list("tricordrazine", /datum/reagent/tricordrazine, 0, 80),
+		list("tramadol",      /datum/reagent/tramadol,      0, 80),
+		list("dexalin plus",  /datum/reagent/dexalinp,      0, 80),
+		list("antibiotics",   /datum/reagent/spaceacillin,  0, 80),
+		list("antitoxins",    /datum/reagent/dylovene,    0, 80),
+		list("nutrients",     /datum/reagent/nutriment/glucose,     0, 80),
+		list("hyronalin",     /datum/reagent/hyronalin,     0, 80),
+		list("radium",        /datum/reagent/radium,        0, 80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -151,17 +151,17 @@
 
 	//Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
-		list("tricordrazine", "tricordrazine", 0, 30),
-		list("tramadol",      "tramadol",      0, 30),
-		list("dexalin plus",  "dexalinp",      0, 30),
-		list("antibiotics",   "spaceacillin",  0, 30),
-		list("antitoxins",    "anti_toxin",    0, 60),
-		list("nutrients",     "glucose",       0, 80),
-		list("bicaridine",	  "bicaridine",    0, 30),
-		list("clotting agent", "myelamine",    0, 30),
-		list("peridaxon",     "peridaxon",     0, 30),
-		list("hyronalin",     "hyronalin",     0, 30),
-		list("radium",        "radium",        0, 30)
+		list("tricordrazine", /datum/reagent/tricordrazine, 0, 30),
+		list("tramadol",      /datum/reagent/tramadol,      0, 30),
+		list("dexalin plus",  /datum/reagent/dexalinp,      0, 30),
+		list("antibiotics",   /datum/reagent/spaceacillin,  0, 30),
+		list("antitoxins",    /datum/reagent/dylovene,    0, 60),
+		list("nutrients",     /datum/reagent/nutriment/glucose,       0, 80),
+		list("bicaridine",	  /datum/reagent/bicaridine,    0, 30),
+		list("clotting agent", /datum/reagent/myelamine,    0, 30),
+		list("peridaxon",     /datum/reagent/peridaxon,     0, 30),
+		list("hyronalin",     /datum/reagent/hyronalin,     0, 30),
+		list("radium",        /datum/reagent/radium,        0, 30)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -178,7 +178,7 @@
 	for(var/datum/reagent/R in input_item.reagents.reagent_list)
 		for(var/chargetype in charges)
 			var/datum/rig_charge/charge = charges[chargetype]
-			if(charge.display_name == R.id)
+			if(charge.display_name == R.type)
 
 				var/chems_to_transfer = R.volume
 
@@ -186,7 +186,7 @@
 					chems_to_transfer = max_reagent_volume - charge.charges
 
 				charge.charges += chems_to_transfer
-				input_item.reagents.remove_reagent(R.id, chems_to_transfer)
+				input_item.reagents.remove_reagent(R.type, chems_to_transfer)
 				total_transferred += chems_to_transfer
 
 				break
@@ -245,11 +245,11 @@
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
 
 	charges = list(
-		list("synaptizine",   "synaptizine",   0, 30),
-		list("hyperzine",     "hyperzine",     0, 30),
-		list("oxycodone",     "oxycodone",     0, 30),
-		list("nutrients",     "glucose",     0, 80),
-		list("clotting agent", "myelamine", 0, 80)
+		list("synaptizine",   /datum/reagent/synaptizine,   0, 30),
+		list("hyperzine",     /datum/reagent/hyperzine,     0, 30),
+		list("oxycodone",     /datum/reagent/oxycodone,     0, 30),
+		list("nutrients",     /datum/reagent/nutriment/glucose,     0, 80),
+		list("clotting agent", /datum/reagent/myelamine, 0, 80)
 		)
 
 	interface_name = "combat chem dispenser"
@@ -270,15 +270,15 @@
 /obj/item/rig_module/chem_dispenser/injector/advanced
 
 	charges = list(
-		list("tricordrazine", "tricordrazine", 0, 80),
-		list("tramadol",      "tramadol",      0, 80),
-		list("dexalin plus",  "dexalinp",      0, 80),
-		list("antibiotics",   "spaceacillin",  0, 80),
-		list("antitoxins",    "anti_toxin",    0, 80),
-		list("nutrients",     "glucose",     0, 80),
-		list("hyronalin",     "hyronalin",     0, 80),
-		list("radium",        "radium",        0, 80),
-		list("clotting agent", "myelamine", 0, 80)
+		list("tricordrazine", /datum/reagent/tricordrazine, 0, 80),
+		list("tramadol",      /datum/reagent/tramadol,      0, 80),
+		list("dexalin plus",  /datum/reagent/dexalinp,      0, 80),
+		list("antibiotics",   /datum/reagent/spaceacillin,  0, 80),
+		list("antitoxins",    /datum/reagent/dylovene,    0, 80),
+		list("nutrients",     /datum/reagent/nutriment/glucose,     0, 80),
+		list("hyronalin",     /datum/reagent/hyronalin,     0, 80),
+		list("radium",        /datum/reagent/radium,        0, 80),
+		list("clotting agent", /datum/reagent/myelamine, 0, 80)
 		)
 
 /obj/item/rig_module/voice

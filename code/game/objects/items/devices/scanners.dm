@@ -109,7 +109,7 @@ REAGENT SCANNER
 			for(var/A in C.reagents.reagent_list)
 				var/datum/reagent/R = A
 				if(R.scannable)
-					reagentdata["[R.id]"] = "<span class='notice'>    [round(C.reagents.get_reagent_amount(R.id), 1)]u [R.name]</span>"
+					reagentdata["[R.type]"] = "<span class='notice'>    [round(C.reagents.get_reagent_amount(R.type), 1)]u [R.name]</span>"
 				else
 					unknown++
 			if(reagentdata.len)
@@ -135,8 +135,8 @@ REAGENT SCANNER
 //			user.show_message(text("<span class='warning'>Warning: Unknown pathogen detected in subject's blood.</span>"))
 	if (M.getCloneLoss())
 		user.show_message("<span class='warning'>Subject appears to have been imperfectly cloned.</span>")
-//	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
-//		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.</span>")
+//	if (M.reagents && M.reagents.get_reagent_amount(/datim/reagent/inaprovaline))
+//		user.show_message("<span class='notice'>Bloodstream Analysis located [M.reagents:get_reagent_amount(/datum/reagent/inaprovaline)] units of rejuvenation chemicals.</span>")
 	if (M.has_brain_worms())
 		user.show_message("<span class='warning'>Subject suffering from aberrant brain activity. Recommend further scanning.</span>")
 	else if (M.getBrainLoss() >= 60 || !M.has_brain())
@@ -183,7 +183,7 @@ REAGENT SCANNER
 				break
 
 		if(M:vessel)
-			var/blood_volume = H.vessel.get_reagent_amount("blood")
+			var/blood_volume = H.vessel.get_reagent_amount(/datum/reagent/blood)
 			var/blood_percent =  round((blood_volume / H.species.blood_volume)*100)
 			var/blood_type = H.dna.b_type
 			if((blood_percent <= BLOOD_VOLUME_SAFE) && (blood_percent > BLOOD_VOLUME_BAD))
@@ -279,7 +279,7 @@ REAGENT SCANNER
 	if(reagents.total_volume)
 		var/list/blood_traces = list()
 		for(var/datum/reagent/R in reagents.reagent_list)
-			if(R.id != "blood")
+			if(R.type != /datum/reagent/blood)
 				reagents.clear_reagents()
 				user << "<span class='warning'>The sample was contaminated! Please insert another sample</span>"
 				return

@@ -71,7 +71,7 @@
 	name = "Slime Spawn"
 	id = "m_spawn"
 	result = null
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/grey
 
@@ -84,7 +84,7 @@
 	name = "Slime Monkey"
 	id = "m_monkey"
 	result = null
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/grey
 
@@ -96,8 +96,8 @@
 /datum/chemical_reaction/slime/grey_slimejelly
 	name = "Slime Jelly"
 	id = "m_jelly"
-	result = "slimejelly"
-	required_reagents = list("peridaxon" = 5)
+	result = /datum/reagent/slimejelly
+	required_reagents = list(/datum/reagent/peridaxon = 5)
 	result_amount = 15
 	required = /obj/item/slime_extract/grey
 
@@ -126,8 +126,8 @@
 /datum/chemical_reaction/slime/metal_metamorphic
 	name = "Slime Metal"
 	id = "m_metal"
-	required_reagents = list("phoron" = 5)
-	result = "metamorphic"
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
+	result = /datum/reagent/toxin/metamorphic_metal
 	result_amount = REAGENTS_PER_SHEET // Makes enough to make one sheet of any metal.
 	required = /obj/item/slime_extract/metal
 
@@ -144,7 +144,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/metamorphic/New()
 	..()
-	reagents.add_reagent("metamorphic", 60)
+	reagents.add_reagent(/datum/reagent/toxin/metamorphic_metal, 60)
 	update_icon()
 
 
@@ -152,51 +152,51 @@
 /datum/chemical_reaction/metamorphic/iron
 	name = "Morph into Iron"
 	id = "morph_iron"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "iron" = REAGENTS_PER_SHEET)
-	result = "iron"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/iron = REAGENTS_PER_SHEET)
+	result = /datum/reagent/iron
 
 
 /datum/chemical_reaction/metamorphic/silver
 	name = "Morph into Silver"
 	id = "morph_silver"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "silver" = REAGENTS_PER_SHEET)
-	result = "silver"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/silver = REAGENTS_PER_SHEET)
+	result = /datum/reagent/silver
 
 
 /datum/chemical_reaction/metamorphic/gold
 	name = "Morph into Gold"
 	id = "morph_gold"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "gold" = REAGENTS_PER_SHEET)
-	result = "gold"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/gold = REAGENTS_PER_SHEET)
+	result = /datum/reagent/gold
 
 
 /datum/chemical_reaction/metamorphic/platinum
 	name = "Morph into Platinum"
 	id = "morph_platinum"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "platinum" = REAGENTS_PER_SHEET)
-	result = "platinum"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/platinum = REAGENTS_PER_SHEET)
+	result = /datum/reagent/platinum
 
 
 /datum/chemical_reaction/metamorphic/uranium
 	name = "Morph into Uranium"
 	id = "morph_uranium"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "uranium" = REAGENTS_PER_SHEET)
-	result = "uranium"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/uranium = REAGENTS_PER_SHEET)
+	result = /datum/reagent/uranium
 
 
 /datum/chemical_reaction/metamorphic/phoron
 	name = "Morph into Phoron"
 	id = "morph_phoron"
-	required_reagents = list("metamorphic" = REAGENTS_PER_SHEET, "phoron" = REAGENTS_PER_SHEET)
-	result = "phoron"
+	required_reagents = list(/datum/reagent/toxin/metamorphic_metal = REAGENTS_PER_SHEET, /datum/reagent/toxin/phoron = REAGENTS_PER_SHEET)
+	result = /datum/reagent/toxin/phoron
 
 
 // Creates 'alloys' which can be finalized with frost oil.
 /datum/chemical_reaction/slime/metal_binding
 	name = "Slime Binding"
 	id = "m_binding"
-	required_reagents = list("water" = 5)
-	result = "binding"
+	required_reagents = list(/datum/reagent/water = 5)
+	result = /datum/reagent/toxin/binding_metal
 	result_amount = REAGENTS_PER_SHEET // Makes enough to make one sheet of any metal.
 	required = /obj/item/slime_extract/metal
 
@@ -219,15 +219,15 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/binding/New()
 	..()
-	reagents.add_reagent("binding", 60)
+	reagents.add_reagent(/datum/reagent/toxin/binding_metal, 60)
 	update_icon()
 
 
 /datum/chemical_reaction/binding
 	name = "Bind into Steel"
 	id = "bind_steel"
-	result = "steel"
-	required_reagents = list("binding" = REAGENTS_PER_SHEET, "iron" = REAGENTS_PER_SHEET, "carbon" = REAGENTS_PER_SHEET)
+	result = /datum/reagent/steel
+	required_reagents = list(/datum/reagent/toxin/binding_metal = REAGENTS_PER_SHEET, /datum/reagent/iron = REAGENTS_PER_SHEET, /datum/reagent/carbon = REAGENTS_PER_SHEET)
 	result_amount = REAGENTS_PER_SHEET
 
 /datum/reagent/steel
@@ -242,8 +242,8 @@
 /datum/chemical_reaction/binding/plasteel // Two parts 'steel', one part platnium matches the smelter alloy recipe.
 	name = "Bind into Plasteel"
 	id = "bind_plasteel"
-	required_reagents = list("binding" = REAGENTS_PER_SHEET, "steel" = REAGENTS_PER_SHEET * 2, "platinum" = REAGENTS_PER_SHEET)
-	result = "plasteel"
+	required_reagents = list(/datum/reagent/toxin/binding_metal = REAGENTS_PER_SHEET, /datum/reagent/steel = REAGENTS_PER_SHEET * 2, "platinum" = REAGENTS_PER_SHEET)
+	result = /datum/reagent/plasteel
 
 /datum/reagent/plasteel
 	name = "Liquid Plasteel"
@@ -269,8 +269,8 @@
 /datum/chemical_reaction/slime/blue_frostoil
 	name = "Slime Frost Oil"
 	id = "m_frostoil"
-	result = "frostoil"
-	required_reagents = list("phoron" = 5)
+	result = /datum/reagent/frostoil
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 20
 	required = /obj/item/slime_extract/blue
 
@@ -278,7 +278,7 @@
 /datum/chemical_reaction/slime/blue_stability
 	name = "Slime Stability"
 	id = "m_stability"
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/blue
 
@@ -302,7 +302,7 @@
 /datum/chemical_reaction/slime/purple_steroid
 	name = "Slime Steroid"
 	id = "m_steroid"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/purple
 
@@ -324,7 +324,7 @@
 /datum/chemical_reaction/slime/orange_fire
 	name = "Slime Fire"
 	id = "m_fire"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/orange
 
@@ -361,7 +361,7 @@
 /datum/chemical_reaction/slime/yellow_emp
 	name = "Slime EMP"
 	id = "m_emp"
-	required_reagents = list("water" = 5)
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/yellow
 
@@ -379,7 +379,7 @@
 /datum/chemical_reaction/slime/yellow_battery
 	name = "Slime Cell"
 	id = "m_cell"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/yellow
 
@@ -391,7 +391,7 @@
 /datum/chemical_reaction/slime/yellow_flashlight
 	name = "Slime Flashlight"
 	id = "m_flashlight"
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/yellow
 
@@ -412,8 +412,8 @@
 /datum/chemical_reaction/slime/gold_gold
 	name = "Slime Gold"
 	id = "m_gold"
-	result = "gold"
-	required_reagents = list("phoron" = 5)
+	result = /datum/reagent/gold
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 5
 	required = /obj/item/slime_extract/gold
 
@@ -431,8 +431,8 @@
 /datum/chemical_reaction/slime/silver_silver
 	name = "Slime Silver"
 	id = "m_silver"
-	result = "silver"
-	required_reagents = list("phoron" = 5)
+	result = /datum/reagent/silver
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 5
 	required = /obj/item/slime_extract/silver
 
@@ -451,8 +451,8 @@
 /datum/chemical_reaction/slime/dark_purple_phoron
 	name = "Slime Phoron"
 	id = "m_phoron_harvest"
-	result = "phoron"
-	required_reagents = list("water" = 5)
+	result = /datum/reagent/toxin/phoron
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = REAGENTS_PER_SHEET * 2
 	required = /obj/item/slime_extract/dark_purple
 
@@ -473,7 +473,7 @@
 /datum/chemical_reaction/slime/dark_blue_cold_snap
 	name = "Slime Cold Snap"
 	id = "m_cold_snap"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/dark_blue
 
@@ -555,7 +555,7 @@
 /datum/chemical_reaction/slime/red_enrage
 	name = "Slime Enrage"
 	id = "m_enrage"
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/red
 
@@ -580,7 +580,7 @@
 /datum/chemical_reaction/slime/red_mutation
 	name = "Slime Mutation"
 	id = "m_mutation"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/red
 
@@ -600,8 +600,8 @@
 /datum/chemical_reaction/slime/green_uranium
 	name = "Slime Uranium"
 	id = "m_uranium"
-	result = "uranium"
-	required_reagents = list("phoron" = 5)
+	result = /datum/reagent/uranium
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 5
 	required = /obj/item/slime_extract/green
 
@@ -620,8 +620,8 @@
 /datum/chemical_reaction/slime/pink_clotting
 	name = "Slime Clotting Med"
 	id = "m_clotting"
-	result = "slime_bleed_fixer"
-	required_reagents = list("blood" = 5)
+	result = /datum/reagent/myelamine/slime
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 30
 	required = /obj/item/slime_extract/pink
 
@@ -629,8 +629,8 @@
 /datum/chemical_reaction/slime/pink_bone_fix
 	name = "Slime Bone Med"
 	id = "m_bone_fixer"
-	result = "slime_bone_fixer"
-	required_reagents = list("phoron" = 5)
+	result = /datum/reagent/osteodaxon/slime
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 30
 	required = /obj/item/slime_extract/pink
 
@@ -638,8 +638,8 @@
 /datum/chemical_reaction/slime/pink_organ_fix
 	name = "Slime Organ Med"
 	id = "m_organ_fixer"
-	result = "slime_organ_fixer"
-	required_reagents = list("water" = 5)
+	result = /datum/reagent/peridaxon/slime
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 30
 	required = /obj/item/slime_extract/pink
 
@@ -680,7 +680,7 @@
 /datum/chemical_reaction/slime/oil_griff
 	name = "Slime Explosion"
 	id = "m_boom"
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/oil
 
@@ -718,7 +718,7 @@
 /datum/chemical_reaction/slime/bluespace_lesser
 	name = "Slime Lesser Tele"
 	id = "m_tele_lesser"
-	required_reagents = list("water" = 5)
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/bluespace
 
@@ -730,7 +730,7 @@
 /datum/chemical_reaction/slime/bluespace_greater
 	name = "Slime Greater Tele"
 	id = "m_tele_lesser"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/bluespace
 
@@ -752,7 +752,7 @@
 /datum/chemical_reaction/slime/cerulean_enhancer
 	name = "Slime Enhancer"
 	id = "m_enhancer"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/cerulean
 
@@ -774,7 +774,7 @@
 /datum/chemical_reaction/slime/amber_slimefood
 	name = "Slime Feeding"
 	id = "m_slime_food"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/amber
 
@@ -786,7 +786,7 @@
 /datum/chemical_reaction/slime/amber_peoplefood
 	name = "Slime Food"
 	id = "m_people_food"
-	required_reagents = list("water" = 5)
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/amber
 
@@ -809,7 +809,7 @@
 /datum/chemical_reaction/slime/sapphire_promethean
 	name = "Slime Promethean"
 	id = "m_promethean"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/sapphire
 
@@ -830,7 +830,7 @@
 /datum/chemical_reaction/slime/ruby_swole
 	name = "Slime Strength"
 	id = "m_strength"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/ruby
 
@@ -858,7 +858,7 @@
 /datum/chemical_reaction/slime/ruby_loyalty
 	name = "Slime Loyalty"
 	id = "m_strength"
-	required_reagents = list("blood" = 5)
+	required_reagents = list(/datum/reagent/blood = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/ruby
 
@@ -879,7 +879,7 @@
 /datum/chemical_reaction/slime/emerald_fast
 	name = "Slime Agility"
 	id = "m_agility"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/emerald
 
@@ -915,7 +915,7 @@
 /datum/chemical_reaction/slime/light_pink_docility
 	name = "Slime Docility"
 	id = "m_docile"
-	required_reagents = list("water" = 5)
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/light_pink
 
@@ -927,7 +927,7 @@
 /datum/chemical_reaction/slime/light_pink_friendship
 	name = "Slime Friendship"
 	id = "m_friendship"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/light_pink
 
@@ -951,7 +951,7 @@
 /datum/chemical_reaction/slime/rainbow_random_slime
 	name = "Slime Random Slime"
 	id = "m_rng_slime"
-	required_reagents = list("phoron" = 5)
+	required_reagents = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/rainbow
 
@@ -968,7 +968,7 @@
 /datum/chemical_reaction/slime/rainbow_unity
 	name = "Slime Unity"
 	id = "m_unity"
-	required_reagents = list("water" = 5)
+	required_reagents = list(/datum/reagent/water = 5)
 	result_amount = 1
 	required = /obj/item/slime_extract/rainbow
 

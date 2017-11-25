@@ -195,7 +195,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/gin/New()
 	..()
-	reagents.add_reagent("gin", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/gin, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
@@ -205,7 +205,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey/New()
 	..()
-	reagents.add_reagent("whiskey", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/whiskey, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
 	name = "Special Blend Whiskey"
@@ -215,7 +215,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey/New()
 	..()
-	reagents.add_reagent("specialwhiskey", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/specialwhiskey, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
@@ -225,7 +225,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka/New()
 	..()
-	reagents.add_reagent("vodka", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/vodka, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla
 	name = "Caccavo Guaranteed Quality Tequilla"
@@ -235,7 +235,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla/New()
 	..()
-	reagents.add_reagent("tequilla", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/tequilla, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing
 	name = "Bottle of Nothing"
@@ -245,7 +245,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing/New()
 	..()
-	reagents.add_reagent("nothing", 100)
+	reagents.add_reagent(/datum/reagent/drink/nothing, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
@@ -255,7 +255,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron/New()
 	..()
-	reagents.add_reagent("patron", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/patron, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/rum
 	name = "Captain Pete's Cuban Spiced Rum"
@@ -265,7 +265,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/rum/New()
 	..()
-	reagents.add_reagent("rum", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/rum, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater
 	name = "Flask of Holy Water"
@@ -275,7 +275,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater/New()
 	..()
-	reagents.add_reagent("holywater", 100)
+	reagents.add_reagent(/datum/reagent/water/holywater, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth
 	name = "Goldeneye Vermouth"
@@ -285,7 +285,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth/New()
 	..()
-	reagents.add_reagent("vermouth", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/vermouth, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua
 	name = "Robert Robust's Coffee Liqueur"
@@ -295,7 +295,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua/New()
 	..()
-	reagents.add_reagent("kahlua", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/coffee/kahlua, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager
 	name = "College Girl Goldschlager"
@@ -305,7 +305,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager/New()
 	..()
-	reagents.add_reagent("goldschlager", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/goldschlager, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cognac
 	name = "Chateau De Baton Premium Cognac"
@@ -315,7 +315,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cognac/New()
 	..()
-	reagents.add_reagent("cognac", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/cognac, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine
 	name = "Doublebeard Bearded Special Wine"
@@ -325,7 +325,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine/New()
 	..()
-	reagents.add_reagent("wine", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/wine, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
@@ -335,7 +335,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe/New()
 	..()
-	reagents.add_reagent("absinthe", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/absinthe, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor
 	name = "Emeraldine Melon Liquor"
@@ -345,7 +345,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor/New()
 	..()
-	reagents.add_reagent("melonliquor", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/melonliquor, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao
 	name = "Miss Blue Curacao"
@@ -355,7 +355,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao/New()
 	..()
-	reagents.add_reagent("bluecuracao", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/bluecuracao, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
@@ -365,7 +365,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine/New()
 	..()
-	reagents.add_reagent("grenadine", 100)
+	reagents.add_reagent(/datum/reagent/drink/grenadine, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola
 	name = "\improper Space Cola"
@@ -375,7 +375,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola/New()
 	..()
-	reagents.add_reagent("cola", 100)
+	reagents.add_reagent(/datum/reagent/drink/soda/space_cola, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up
 	name = "\improper Space-Up"
@@ -385,7 +385,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up/New()
 	..()
-	reagents.add_reagent("space_up", 100)
+	reagents.add_reagent(/datum/reagent/drink/soda/space_up, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -395,7 +395,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind/New()
 	..()
-	reagents.add_reagent("spacemountainwind", 100)
+	reagents.add_reagent(/datum/reagent/drink/soda/spacemountainwind, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
 	name = "Warlock's Velvet"
@@ -405,7 +405,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/pwine/New()
 	..()
-	reagents.add_reagent("pwine", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/pwine, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/redeemersbrew
 	name = "Redeemer's Brew"
@@ -415,7 +415,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/redeemersbrew/New()
 	..()
-	reagents.add_reagent("unathiliquor", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/unathiliquor, 100)
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -429,7 +429,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice/New()
 	..()
-	reagents.add_reagent("orangejuice", 100)
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/milk
 	name = "Large Milk Carton"
@@ -441,7 +441,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/milk/New()
 	..()
-	reagents.add_reagent("milk", 100)
+	reagents.add_reagent(/datum/reagent/drink/milk, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cream
 	name = "Milk Cream"
@@ -453,7 +453,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cream/New()
 	..()
-	reagents.add_reagent("cream", 100)
+	reagents.add_reagent(/datum/reagent/drink/milk/cream, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice
 	name = "Tomato Juice"
@@ -465,7 +465,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice/New()
 	..()
-	reagents.add_reagent("tomatojuice", 100)
+	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice
 	name = "Lime Juice"
@@ -477,7 +477,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice/New()
 	..()
-	reagents.add_reagent("limejuice", 100)
+	reagents.add_reagent(/datum/reagent/drink/juice/lime, 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/lemonjuice
 	name = "Lemon Juice"
@@ -489,7 +489,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/lemonjuice/New()
 	..()
-	reagents.add_reagent("lemonjuice", 100)
+	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 100)
 
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
@@ -506,7 +506,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/New()
 	..()
-	reagents.add_reagent("beer", 30)
+	reagents.add_reagent(/datum/reagent/ethanol/beer, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
@@ -517,7 +517,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
 	..()
-	reagents.add_reagent("ale", 30)
+	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/sake
 	name = "Mono-No-Aware Luxury Sake"
@@ -527,4 +527,4 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/sake/New()
 	..()
-	reagents.add_reagent("sake", 100)
+	reagents.add_reagent(/datum/reagent/ethanol/sake, 100)

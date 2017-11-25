@@ -19,7 +19,7 @@
 	processing_objects |= src
 
 /turf/proc/clean_deploy(atom/source)
-	if(source.reagents.has_reagent("water", 1))
+	if(source.reagents.has_reagent(/datum/reagent/water, 1))
 		clean_blood()
 		if(istype(src, /turf/simulated))
 			var/turf/simulated/T = src

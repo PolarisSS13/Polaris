@@ -35,8 +35,8 @@
 	C.SetWeakened(0)
 	C.lying = 0
 	C.update_canmove()
-//	C.reagents.add_reagent("toxin", 10)
-	C.reagents.add_reagent("epinephrine", 20)
+//	C.reagents.add_reagent(/datum/reagent/toxin, 10)
+	C.reagents.add_reagent(/datum/reagent/epinephrine, 20)
 
 	if(src.mind.changeling.recursive_enhancement)
 		C.add_modifier(/datum/modifier/unstoppable, 30 SECONDS)

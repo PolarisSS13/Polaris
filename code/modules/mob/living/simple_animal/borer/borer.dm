@@ -61,7 +61,7 @@
 
 		if(!stat && !host.stat)
 
-			if(host.reagents.has_reagent("sugar"))
+			if(host.reagents.has_reagent(/datum/reagent/sugar))
 				if(!docile)
 					if(controlling)
 						host << "<font color='blue'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</font>"

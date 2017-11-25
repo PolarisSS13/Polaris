@@ -173,7 +173,7 @@
 			if(href_list["amount"])
 				var/id = href_list["add"]
 				var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
-				R.trans_id_to(src, id, amount)
+				R.trans_type_to(src, id, amount)
 
 		else if (href_list["addcustom"])
 
@@ -188,7 +188,7 @@
 				var/id = href_list["remove"]
 				var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
 				if(mode)
-					reagents.trans_id_to(beaker, id, amount)
+					reagents.trans_type_to(beaker, id, amount)
 				else
 					reagents.remove_reagent(id, amount)
 
@@ -289,13 +289,13 @@
 	var/limit = 10
 	var/list/holdingitems = list()
 	var/list/sheet_reagents = list(
-		/obj/item/stack/material/iron = "iron",
-		/obj/item/stack/material/uranium = "uranium",
-		/obj/item/stack/material/phoron = "phoron",
-		/obj/item/stack/material/gold = "gold",
-		/obj/item/stack/material/silver = "silver",
-		/obj/item/stack/material/platinum = "platinum",
-		/obj/item/stack/material/mhydrogen = "hydrogen"
+		/obj/item/stack/material/iron = /datum/reagent/iron,
+		/obj/item/stack/material/uranium = /datum/reagent/uranium,
+		/obj/item/stack/material/phoron = /datum/reagent/toxin/phoron,
+		/obj/item/stack/material/gold = /datum/reagent/gold,
+		/obj/item/stack/material/silver = /datum/reagent/silver,
+		/obj/item/stack/material/platinum = /datum/reagent/platinum,
+		/obj/item/stack/material/mhydrogen = /datum/reagent/hydrogen
 		)
 
 /obj/machinery/reagentgrinder/New()

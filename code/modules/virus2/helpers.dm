@@ -81,7 +81,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 	var/list/antibodies_in_common = M.antibodies & disease.antigen
 	if(antibodies_in_common.len)
 		return
-	if(M.reagents.has_reagent("spaceacillin"))
+	if(M.reagents.has_reagent(/datum/reagent/spaceacillin))
 		return
 
 	if(!disease.affected_species.len)

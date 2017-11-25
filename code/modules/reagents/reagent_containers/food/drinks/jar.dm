@@ -9,8 +9,8 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/jar/on_reagent_change()
 	if (reagents.reagent_list.len > 0)
-		switch(reagents.get_master_reagent_id())
-			if("slime")
+		switch(reagents.get_master_reagent_type())
+			if(/datum/reagent/slimejelly)
 				icon_state = "jar_slime"
 				name = "slime jam"
 				desc = "A jar of slime jam. Delicious!"

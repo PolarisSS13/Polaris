@@ -103,7 +103,7 @@
 
 /obj/item/weapon/reagent_containers/pill/antitox/New()
 	..()
-	reagents.add_reagent("anti_toxin", 25)
+	reagents.add_reagent(/datum/reagent/dylovene, 25)
 
 
 /obj/item/weapon/reagent_containers/pill/tox
@@ -113,7 +113,7 @@
 
 /obj/item/weapon/reagent_containers/pill/tox/New()
 	..()
-	reagents.add_reagent("toxin", 50)
+	reagents.add_reagent(/datum/reagent/toxin, 50)
 
 
 /obj/item/weapon/reagent_containers/pill/cyanide
@@ -123,7 +123,7 @@
 
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
-	reagents.add_reagent("cyanide", 50)
+	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
 
 
 /obj/item/weapon/reagent_containers/pill/adminordrazine
@@ -133,7 +133,7 @@
 
 /obj/item/weapon/reagent_containers/pill/adminordrazine/New()
 	..()
-	reagents.add_reagent("adminordrazine", 50)
+	reagents.add_reagent(/datum/reagent/adminordrazine, 50)
 
 /obj/item/weapon/reagent_containers/pill/stox
 	name = "Sleeping pill"
@@ -142,7 +142,7 @@
 
 /obj/item/weapon/reagent_containers/pill/stox/New()
 	..()
-	reagents.add_reagent("stoxin", 15)
+	reagents.add_reagent(/datum/reagent/soporific, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/kelotane
@@ -152,7 +152,7 @@
 
 /obj/item/weapon/reagent_containers/pill/kelotane/New()
 	..()
-	reagents.add_reagent("kelotane", 15)
+	reagents.add_reagent(/datum/reagent/kelotane, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
@@ -162,7 +162,7 @@
 
 /obj/item/weapon/reagent_containers/pill/paracetamol/New()
 	..()
-	reagents.add_reagent("paracetamol", 15)
+	reagents.add_reagent(/datum/reagent/paracetamol, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/tramadol
@@ -172,7 +172,7 @@
 
 /obj/item/weapon/reagent_containers/pill/tramadol/New()
 	..()
-	reagents.add_reagent("tramadol", 15)
+	reagents.add_reagent(/datum/reagent/tramadol, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/methylphenidate
@@ -182,7 +182,7 @@
 
 /obj/item/weapon/reagent_containers/pill/methylphenidate/New()
 	..()
-	reagents.add_reagent("methylphenidate", 15)
+	reagents.add_reagent(/datum/reagent/methylphenidate, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/citalopram
@@ -192,7 +192,7 @@
 
 /obj/item/weapon/reagent_containers/pill/citalopram/New()
 	..()
-	reagents.add_reagent("citalopram", 15)
+	reagents.add_reagent(/datum/reagent/citalopram, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
@@ -202,7 +202,7 @@
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline/New()
 	..()
-	reagents.add_reagent("inaprovaline", 30)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 30)
 
 
 /obj/item/weapon/reagent_containers/pill/dexalin
@@ -212,7 +212,7 @@
 
 /obj/item/weapon/reagent_containers/pill/dexalin/New()
 	..()
-	reagents.add_reagent("dexalin", 15)
+	reagents.add_reagent(/datum/reagent/dexalin, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/dexalin_plus
@@ -222,7 +222,7 @@
 
 /obj/item/weapon/reagent_containers/pill/dexalin_plus/New()
 	..()
-	reagents.add_reagent("dexalinp", 15)
+	reagents.add_reagent(/datum/reagent/dexalinp, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/dermaline
@@ -232,7 +232,7 @@
 
 /obj/item/weapon/reagent_containers/pill/dermaline/New()
 	..()
-	reagents.add_reagent("dermaline", 15)
+	reagents.add_reagent(/datum/reagent/dermaline, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/dylovene
@@ -242,17 +242,7 @@
 
 /obj/item/weapon/reagent_containers/pill/dylovene/New()
 	..()
-	reagents.add_reagent("anti_toxin", 15)
-
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline
-	name = "Inaprovaline pill"
-	desc = "Used to stabilize patients."
-	icon_state = "pill20"
-
-/obj/item/weapon/reagent_containers/pill/inaprovaline/New()
-	..()
-	reagents.add_reagent("inaprovaline", 30)
+	reagents.add_reagent(/datum/reagent/dylovene, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/bicaridine
@@ -262,7 +252,7 @@
 
 /obj/item/weapon/reagent_containers/pill/bicaridine/New()
 	..()
-	reagents.add_reagent("bicaridine", 20)
+	reagents.add_reagent(/datum/reagent/bicaridine, 20)
 
 
 /obj/item/weapon/reagent_containers/pill/happy
@@ -272,8 +262,8 @@
 
 /obj/item/weapon/reagent_containers/pill/happy/New()
 	..()
-	reagents.add_reagent("space_drugs", 15)
-	reagents.add_reagent("sugar", 15)
+	reagents.add_reagent(/datum/reagent/space_drugs, 15)
+	reagents.add_reagent(/datum/reagent/sugar, 15)
 
 
 /obj/item/weapon/reagent_containers/pill/zoom
@@ -283,9 +273,9 @@
 
 /obj/item/weapon/reagent_containers/pill/zoom/New()
 	..()
-	reagents.add_reagent("impedrezene", 10)
-	reagents.add_reagent("synaptizine", 5)
-	reagents.add_reagent("hyperzine", 5)
+	reagents.add_reagent(/datum/reagent/impedrezene, 10)
+	reagents.add_reagent(/datum/reagent/synaptizine, 5)
+	reagents.add_reagent(/datum/reagent/hyperzine, 5)
 
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin
@@ -295,7 +285,7 @@
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin/New()
 	..()
-	reagents.add_reagent("spaceacillin", 15)
+	reagents.add_reagent(/datum/reagent/spaceacillin, 15)
 
 /obj/item/weapon/reagent_containers/pill/diet
 	name = "diet pill"
@@ -304,4 +294,4 @@
 
 /obj/item/weapon/reagent_containers/pill/diet/New()
 	..()
-	reagents.add_reagent("lipozine", 2)
+	reagents.add_reagent(/datum/reagent/lipozine, 2)

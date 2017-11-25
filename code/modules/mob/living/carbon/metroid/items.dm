@@ -29,7 +29,7 @@
 /obj/item/slime_extract/New()
 	..()
 	create_reagents(5)
-//	reagents.add_reagent("slimejelly", 30)
+//	reagents.add_reagent(/datum/reagent/slimejelly, 30)
 
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
@@ -358,8 +358,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/egg/slime/New()
 	..()
-	reagents.add_reagent("nutriment", 4)
-	reagents.add_reagent("slimejelly", 1)
+	reagents.add_reagent(/datum/reagent/nutriment, 4)
+	reagents.add_reagent(/datum/reagent/slimejelly, 1)
 	spawn(rand(1200,1500))//the egg takes a while to "ripen"
 		Grow()
 

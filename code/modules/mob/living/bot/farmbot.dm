@@ -201,7 +201,7 @@
 				if(do_after(src, 30, A))
 
 					visible_message("<span class='notice'>[src] fertilizes \the [A].</span>")
-					T.reagents.add_reagent("ammonia", 10)
+					T.reagents.add_reagent(/datum/reagent/ammonia, 10)
 
 		busy = 0
 		action = ""
@@ -216,7 +216,7 @@
 
 		busy = 1
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			tank.reagents.add_reagent("water", 10)
+			tank.reagents.add_reagent(/datum/reagent/water, 10)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 
@@ -292,7 +292,7 @@
 	if(tray.dead && removes_dead || tray.harvest && collects_produce)
 		return FARMBOT_COLLECT
 
-	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent("water"))
+	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent(/datum/reagent/water))
 		return FARMBOT_WATER
 
 	else if(uproots_weeds && tray.weedlevel > 3)

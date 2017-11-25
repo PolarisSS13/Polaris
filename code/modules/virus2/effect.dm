@@ -288,9 +288,10 @@
 		if(c_data)
 			data = c_data
 		else
-			data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "space_drugs", "sugar",
-						"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
-						"mindbreaker", "glucose")
+			data = pick(/datum/reagent/bicaridine, /datum/reagent/kelotane, /datum/reagent/dylovene, /datum/reagent/inaprovaline,
+						/datum/reagent/space_drugs, /datum/reagent/sugar, /datum/reagent/tramadol, /datum/reagent/dexalin,
+						/datum/reagent/cryptobiolin, /datum/reagent/impedrezene, /datum/reagent/hyperzine, /datum/reagent/ethylredoxrazine,
+						/datum/reagent/mindbreaker, /datum/reagent/nutriment/glucose)
 		var/datum/reagent/R = chemical_reagents_list[data]
 		name = "[initial(name)] ([initial(R.name)])"
 
@@ -364,8 +365,8 @@
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "<span class='notice'>You feel a rush of energy inside you!</span>"
-		if (mob.reagents.get_reagent_amount("hyperzine") < 10)
-			mob.reagents.add_reagent("hyperzine", 4)
+		if (mob.reagents.get_reagent_amount(/datum/reagent/hyperzine) < 10)
+			mob.reagents.add_reagent(/datum/reagent/hyperzine, 4)
 		if (prob(30))
 			mob.jitteriness += 10
 

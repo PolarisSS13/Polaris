@@ -100,13 +100,13 @@
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda
 	New()
 		..()
-		reagents.add_reagent("sodawater", 50)
+		reagents.add_reagent(/datum/reagent/drink/soda/sodawater, 50)
 		on_reagent_change()
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola
 	New()
 		..()
-		reagents.add_reagent("cola", 50)
+		reagents.add_reagent(/datum/reagent/drink/soda/space_cola, 50)
 		on_reagent_change()
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass
@@ -171,8 +171,8 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask/proteinshake/New()
 	..()
-	reagents.add_reagent("nutriment", 30)
-	reagents.add_reagent("iron", 10)
-	reagents.add_reagent("protein", 15)
-	reagents.add_reagent("water", 45)
+	reagents.add_reagent(/datum/reagent/nutriment, 30)
+	reagents.add_reagent(/datum/reagent/iron, 10)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 15)
+	reagents.add_reagent(/datum/reagent/water, 45)
 	on_reagent_change()

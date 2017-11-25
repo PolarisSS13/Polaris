@@ -297,7 +297,7 @@
 /obj/item/integrated_circuit/reagent/storage/scan/do_work()
 	var/cont[0]
 	for(var/datum/reagent/RE in reagents.reagent_list)
-		cont += RE.id
+		cont += RE.type
 	set_pin_data(IC_OUTPUT, 3, cont)
 	push_data()
 
@@ -351,11 +351,11 @@
 			return
 		for(var/datum/reagent/G in source.reagents.reagent_list)
 			if (!direc)
-				if(G.id in demand)
-					source.reagents.trans_id_to(target, G.id, transfer_amount)
+				if(G.type in demand)
+					source.reagents.trans_type_to(target, G.type, transfer_amount)
 			else
-				if(!(G.id in demand))
-					source.reagents.trans_id_to(target, G.id, transfer_amount)
+				if(!(G.type in demand))
+					source.reagents.trans_type_to(target, G.type, transfer_amount)
 		activate_pin(2)
 		push_data()
 

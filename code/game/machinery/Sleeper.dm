@@ -68,7 +68,8 @@
 	anchored = 1
 	circuit = /obj/item/weapon/circuitboard/sleeper
 	var/mob/living/carbon/human/occupant = null
-	var/list/available_chemicals = list("inaprovaline" = "Inaprovaline", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
+	var/list/available_chemicals = list(/datum/reagent/inaprovaline = "Inaprovaline", /datum/reagent/paracetamol = "Paracetamol", /datum/reagent/dylovene = "Dylovene",
+										/datum/reagent/dexalin = "Dexalin")
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/obj/machinery/sleep_console/console

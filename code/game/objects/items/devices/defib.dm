@@ -325,7 +325,7 @@
 	if(!heart)
 		return TRUE
 
-	var/blood_volume = round((H.vessel.get_reagent_amount("blood")/H.species.blood_volume)*100)
+	var/blood_volume = round((H.vessel.get_reagent_amount(/datum/reagent/blood)/H.species.blood_volume)*100)
 	if(!heart || heart.is_broken())
 		blood_volume *= 0.3
 	else if(heart.is_bruised())

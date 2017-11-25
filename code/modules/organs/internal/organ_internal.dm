@@ -52,7 +52,7 @@
 	. = ..() //Should be an interger value for infection level
 	if(!.) return
 
-	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	var/antibiotics = owner.reagents.get_reagent_amount(/datum/reagent/spaceacillin)
 
 	if(. >= 2 && antibiotics < 5) //INFECTION_LEVEL_TWO
 		if (prob(3))

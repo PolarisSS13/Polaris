@@ -363,7 +363,7 @@ other types of metals and chemistry for reagents).
 ///////////////////////////////////
 /datum/design/circuit/shield
 	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
-	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+	materials = list("$glass" = 2000, /datum/reagent/acid = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
 /datum/design/item/medical
 	materials = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 20)
@@ -547,7 +547,7 @@ other types of metals and chemistry for reagents).
 	id = "decloner"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
 	materials = list("gold" = 5000,"uranium" = 10000)
-	chemicals = list("mutagen" = 40)
+	chemicals = list(/datum/reagent/mutagen = 40)
 	build_path = /obj/item/weapon/gun/energy/decloner
 	sort_string = "TAAAE"
 
@@ -887,7 +887,7 @@ CIRCUITS BELOW
 	build_type = IMPRINTER
 	req_tech = list(TECH_DATA = 2)
 	materials = list("glass" = 2000)
-	chemicals = list("sacid" = 20)
+	chemicals = list(/datum/reagent/acid = 20)
 	time = 5
 
 /datum/design/circuit/AssembleDesignName()
@@ -1780,7 +1780,7 @@ CIRCUITS BELOW
 	id = "rust_core_control"
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_core_control"
 
 datum/design/rust_fuel_control
@@ -1789,7 +1789,7 @@ datum/design/rust_fuel_control
 	id = "rust_fuel_control"
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_fuel_control"
 
 datum/design/rust_fuel_port
@@ -1798,7 +1798,7 @@ datum/design/rust_fuel_port
 	id = "rust_fuel_port"
 	req_tech = list("engineering" = 4, "materials" = 5)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20, "uranium" = 3000)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20, "uranium" = 3000)
 	build_path = "/obj/item/weapon/module/rust_fuel_port"
 
 datum/design/rust_fuel_compressor
@@ -1807,7 +1807,7 @@ datum/design/rust_fuel_compressor
 	id = "rust_fuel_compressor"
 	req_tech = list("materials" = 6, "phorontech" = 4)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20, "phoron" = 3000, "diamond" = 1000)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20, "phoron" = 3000, "diamond" = 1000)
 	build_path = "/obj/item/weapon/module/rust_fuel_compressor"
 
 datum/design/rust_core
@@ -1816,7 +1816,7 @@ datum/design/rust_core
 	id = "pacman"
 	req_tech = list(bluespace = 3, phorontech = 4, magnets = 5, powerstorage = 6)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20, "phoron" = 3000, "diamond" = 2000)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20, "phoron" = 3000, "diamond" = 2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"
 
 datum/design/rust_injector
@@ -1825,6 +1825,6 @@ datum/design/rust_injector
 	id = "pacman"
 	req_tech = list(powerstorage = 3, engineering = 4, phorontech = 4, materials = 6)
 	build_type = IMPRINTER
-	materials = list("glass" = 2000, "sacid" = 20, "phoron" = 3000, "uranium" = 2000)
+	materials = list("glass" = 2000, /datum/reagent/acid = 20, "phoron" = 3000, "uranium" = 2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"
 */

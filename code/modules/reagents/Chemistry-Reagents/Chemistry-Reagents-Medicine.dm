@@ -131,7 +131,7 @@
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-15 * removed)
 
-	holder.remove_reagent("lexorin", 2 * removed)
+	holder.remove_reagent(/datum/reagent/lexorin, 2 * removed)
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
@@ -149,7 +149,7 @@
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-150 * removed)
 
-	holder.remove_reagent("lexorin", 3 * removed)
+	holder.remove_reagent(/datum/reagent/lexorin, 3 * removed)
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
@@ -284,7 +284,7 @@
 	M.AdjustParalysis(-1)
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
-	holder.remove_reagent("mindbreaker", 5)
+	holder.remove_reagent(/datum/reagent/mindbreaker, 5)
 	M.hallucination = max(0, M.hallucination - 10)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)

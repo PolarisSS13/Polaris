@@ -8,7 +8,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/New()
 	..()
-	reagents.add_reagent("protein", 9)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 	src.bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/attackby(obj/item/weapon/W as obj, mob/user as mob)

@@ -27,36 +27,46 @@
 		if(.)
 			nanomanager.update_uis(src)
 
+
+
 /obj/machinery/chemical_dispenser
 	dispense_reagents = list(
-		"hydrogen", "lithium", "carbon", "nitrogen", "oxygen", "fluorine", "sodium",
-		"aluminum", "silicon", "phosphorus", "sulfur", "chlorine", "potassium", "iron",
-		"copper", "mercury", "radium", "water", "ethanol", "sugar", "sacid", "tungsten"
+		/datum/reagent/hydrogen, /datum/reagent/lithium, /datum/reagent/carbon, /datum/reagent/nitrogen, /datum/reagent/oxygen, /datum/reagent/fluorine,
+		/datum/reagent/sodium, /datum/reagent/aluminum, /datum/reagent/silicon, /datum/reagent/phosphorus, /datum/reagent/sulfur, /datum/reagent/chlorine,
+		/datum/reagent/potassium, /datum/reagent/iron, /datum/reagent/copper, /datum/reagent/mercury, /datum/reagent/radium, /datum/reagent/water,
+		/datum/reagent/ethanol, /datum/reagent/sugar, /datum/reagent/acid, /datum/reagent/tungsten
 		)
 
 /obj/machinery/chemical_dispenser/ert
 	dispense_reagents = list(
-		"inaprovaline", "ryetalyn", "paracetamol", "tramadol", "oxycodone", "sterilizine", "leporazine",
-		"kelotane", "dermaline", "dexalin", "dexalinp", "tricordrazine", "anti_toxin", "synaptizine",
-		"hyronalin", "arithrazine", "alkysine", "imidazoline", "peridaxon", "bicaridine", "hyperzine",
-		"rezadone", "spaceacillin", "ethylredoxrazine", "stoxin", "chloralhydrate", "cryoxadone",
-		"clonexadone"
+		/datum/reagent/inaprovaline, /datum/reagent/ryetalyn, /datum/reagent/paracetamol, /datum/reagent/tramadol, /datum/reagent/oxycodone,
+		/datum/reagent/sterilizine, /datum/reagent/leporazine, /datum/reagent/kelotane, /datum/reagent/dermaline, /datum/reagent/dexalin,
+		/datum/reagent/dexalinp, /datum/reagent/tricordrazine, /datum/reagent/dylovene, /datum/reagent/synaptizine,	/datum/reagent/hyronalin,
+		/datum/reagent/arithrazine, /datum/reagent/alkysine, /datum/reagent/imidazoline, /datum/reagent/peridaxon, /datum/reagent/bicaridine,
+		/datum/reagent/hyperzine, /datum/reagent/rezadone, /datum/reagent/spaceacillin, /datum/reagent/ethylredoxrazine, /datum/reagent/soporific,
+		/datum/reagent/chloralhydrate, /datum/reagent/cryoxadone, /datum/reagent/clonexadone
 		)
 
 /obj/machinery/chemical_dispenser/bar_soft
 	dispense_reagents = list(
-		"water", "ice", "coffee", "cream", "tea", "icetea", "cola", "spacemountainwind", "dr_gibb", "space_up", "tonic",
-		"sodawater", "lemon_lime", "sugar", "orangejuice", "limejuice", "watermelonjuice", "thirteenloko", "grapesoda"
+		/datum/reagent/water, /datum/reagent/drink/ice, /datum/reagent/drink/coffee, /datum/reagent/drink/milk/cream, /datum/reagent/drink/tea,
+		/datum/reagent/drink/tea/icetea, /datum/reagent/drink/soda/space_cola, /datum/reagent/drink/soda/spacemountainwind, /datum/reagent/drink/soda/dr_gibb,
+		/datum/reagent/drink/soda/space_up, /datum/reagent/drink/soda/tonic, /datum/reagent/drink/soda/sodawater, /datum/reagent/drink/soda/lemon_lime,
+		/datum/reagent/sugar, /datum/reagent/drink/juice/orange, /datum/reagent/drink/juice/lime, /datum/reagent/drink/juice/watermelon,
+		/datum/reagent/ethanol/thirteenloko, /datum/reagent/drink/soda/grapesoda
 		)
 
 /obj/machinery/chemical_dispenser/bar_alc
 	dispense_reagents = list(
-		"lemon_lime", "sugar", "orangejuice", "limejuice", "sodawater", "tonic", "beer", "kahlua",
-		"whiskey", "wine", "vodka", "gin", "rum", "tequilla", "vermouth", "cognac", "ale", "mead"
+		/datum/reagent/drink/soda/lemon_lime, /datum/reagent/sugar, /datum/reagent/drink/juice/orange, /datum/reagent/drink/juice/lime,
+		/datum/reagent/drink/soda/sodawater, /datum/reagent/drink/soda/tonic, /datum/reagent/ethanol/beer, /datum/reagent/ethanol/coffee/kahlua,
+		/datum/reagent/ethanol/whiskey, /datum/reagent/ethanol/wine, /datum/reagent/ethanol/vodka, /datum/reagent/ethanol/gin, /datum/reagent/ethanol/rum,
+		/datum/reagent/ethanol/tequilla, /datum/reagent/ethanol/vermouth, /datum/reagent/ethanol/cognac, /datum/reagent/ethanol/ale, /datum/reagent/ethanol/mead
 		)
 
 /obj/machinery/chemical_dispenser/bar_coffee
 	dispense_reagents = list(
-		"coffee", "cafe_latte", "soy_latte", "hot_coco", "milk", "cream", "tea", "ice",
-		"orangejuice", "lemonjuice", "limejuice", "berryjuice", "mint"
+		/datum/reagent/drink/coffee, /datum/reagent/drink/coffee/cafe_latte, /datum/reagent/drink/coffee/soy_latte, /datum/reagent/drink/hot_coco,
+		/datum/reagent/drink/milk, /datum/reagent/drink/milk/cream, /datum/reagent/drink/tea, /datum/reagent/drink/ice, /datum/reagent/drink/juice/orange,
+		/datum/reagent/drink/juice/lemon, /datum/reagent/drink/juice/lime, /datum/reagent/drink/juice/berry, /datum/reagent/nutriment/mint
 		)

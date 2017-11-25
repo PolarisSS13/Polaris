@@ -5,7 +5,7 @@
 	color = "#CC23FF"
 	slime_color = "purple"
 	coretype = /obj/item/slime_extract/purple
-	reagent_injected = "toxin"
+	reagent_injected = /datum/reagent/toxin
 
 	description_info = "This slime spreads a toxin when it attacks.  A biosuit or other thick armor can protect from the toxic attack."
 
@@ -44,7 +44,7 @@
 	color = "#19FFFF"
 	slime_color = "blue"
 	coretype = /obj/item/slime_extract/blue
-	reagent_injected = "cryotoxin"
+	reagent_injected = /datum/reagent/frostoil/cryotoxin
 
 	description_info = "Attacks from this slime can chill you.  A biosuit or other thick armor can protect from the chilling attack."
 
@@ -123,7 +123,7 @@
 	color = "#CC23FF"
 	slime_color = "dark purple"
 	coretype = /obj/item/slime_extract/dark_purple
-	reagent_injected = "phoron"
+	reagent_injected = /datum/reagent/toxin/phoron
 
 	description_info = "This slime applies phoron to enemies it attacks.  A biosuit or other thick armor can protect from the toxic attack.  \
 	If hit with a burning attack, it will erupt in flames."
@@ -455,7 +455,7 @@
 	slime_color = "green"
 	coretype = /obj/item/slime_extract/green
 	glows = TRUE
-	reagent_injected = "radium"
+	reagent_injected = /datum/reagent/radium
 	var/rads = 25
 
 	description_info = "This slime will irradiate anything nearby passively, and will inject radium on attack.  \
