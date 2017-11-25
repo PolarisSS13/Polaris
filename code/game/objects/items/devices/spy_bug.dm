@@ -87,8 +87,7 @@
 /obj/item/device/camerabug/examine(mob/user)
 	. = ..(user, 0)
 	if(.)
-		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
-		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
+		to_chat(user, "It has a tiny camera inside. Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
 /obj/item/device/camerabug/attackby(obj/item/W as obj, mob/living/user as mob)
 	if(istype(W, /obj/item/device/bug_monitor))
