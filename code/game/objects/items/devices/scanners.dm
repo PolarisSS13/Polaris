@@ -24,9 +24,10 @@ REAGENT SCANNER
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 	var/mode = 1;
 	var/advscan = 0
+	var/showadvscan = 1
 
 /obj/item/device/healthanalyzer/New()
-	if(advscan == 1)
+	if(advscan >= 1)
 		verbs += /obj/item/device/healthanalyzer/proc/toggle_adv
 	..()
 
@@ -106,7 +107,7 @@ REAGENT SCANNER
 		OX = fake_oxy > 50 ? 		"<span class='warning'>Severe oxygen deprivation detected</span>" 	: 	"Subject bloodstream oxygen level normal"
 	user.show_message("[OX] | [TX] | [BU] | [BR]")
 	if(M.radiation)
-		if(advscan == 1)
+		if(advscan >= 2 && showadvscan == 1)
 			if(M.radiation >= 75)
 				user.show_message("<span class='warning'>Critical levels of radiation detected. Immediate treatment advised.</span>")
 			else if(M.radiation >= 50)
@@ -135,7 +136,7 @@ REAGENT SCANNER
 				for(var/d in reagentdata)
 					user.show_message(reagentdata[d])
 			if(unknown)
-				if(advscan == 1)
+				if(advscan >= 3 && showadvscan == 1)
 					user.show_message("<span class='warning'>Warning: Non-medical reagent[(unknown>1)?"s":""] detected in subject's blood:</span>")
 					for(var/d in unknownreagents)
 						user.show_message(unknownreagents[d])
@@ -149,17 +150,17 @@ REAGENT SCANNER
 				var/datum/reagent/T = B
 				if(T.scannable)
 					stomachreagentdata["[T.id]"] = "<span class='notice'>    [round(C.ingested.get_reagent_amount(T.id), 1)]u [T.name]</span>"
-					if (advscan == 0)
+					if (advscan == 0 || showadvscan == 0)
 						user.show_message("<span class='notice'>[T.name] found in subject's stomach.</span>")
 				else
 					++unknown
 					stomachunknownreagents["[T.id]"] = "<span class='notice'>    [round(C.ingested.get_reagent_amount(T.id), 1)]u [T.name]</span>"
-			if(advscan == 1)
+			if(advscan >= 1 && showadvscan == 1)
 				user.show_message("<span class='notice'>Beneficial reagents detected in subject's stomach:</span>")
 				for(var/d in stomachreagentdata)
 					user.show_message(stomachreagentdata[d])
 			if(unknown)
-				if(advscan == 1)
+				if(advscan >= 3 && showadvscan == 1)
 					user.show_message("<span class='warning'>Warning: Non-medical reagent[(unknown > 1)?"s":""] found in subject's stomach:</span>")
 					for(var/d in stomachunknownreagents)
 						user.show_message(stomachunknownreagents[d])
@@ -184,7 +185,7 @@ REAGENT SCANNER
 		user.show_message("<span class='warning'>Severe brain damage detected. Subject likely to have a traumatic brain injury.</span>")
 	else if (M.getBrainLoss() >= 10)
 		user.show_message("<span class='warning'>Significant brain damage detected. Subject may have had a concussion.</span>")
-	else if (M.getBrainLoss() >= 1 && advscan == 1)
+	else if (M.getBrainLoss() >= 1 && advscan >= 2 && showadvscan == 1)
 		user.show_message("<span class='warning'>Minor brain damage detected.</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -214,7 +215,7 @@ REAGENT SCANNER
 		for(var/name in H.organs_by_name)
 			var/obj/item/organ/external/e = H.organs_by_name[name]
 			if(e && e.status & ORGAN_BROKEN)
-				if(advscan == 1)
+				if(advscan >= 1 && showadvscan == 1)
 					user.show_message(text("<span class='warning'>Bone fractures detected in subject [e.name].</span>"), 1)
 				else
 					user.show_message(text("<span class='warning'>Bone fractures detected. Advanced scanner required for location.</span>"), 1)
@@ -223,7 +224,7 @@ REAGENT SCANNER
 			if(!e)
 				continue
 			for(var/datum/wound/W in e.wounds) if(W.internal)
-				if(advscan == 1)
+				if(advscan >= 1 && showadvscan == 1)
 					user.show_message(text("<span class='warning'>Internal bleeding detected in subject [e.name].</span>"), 1)
 				else
 					user.show_message(text("<span class='warning'>Internal bleeding detected. Advanced scanner required for location.</span>"), 1)
@@ -258,19 +259,27 @@ REAGENT SCANNER
 	set name = "Toggle Advanced Scan"
 	set category = "Object"
 
-	advscan = !advscan
-	switch (advscan)
+	showadvscan = !showadvscan
+	switch (showadvscan)
 		if(1)
 			to_chat(usr, "The scanner will now perform an advanced analysis.")
 		if(0)
 			to_chat(usr, "The scanner will now perform a basic analysis.")
 
-/obj/item/device/healthanalyzer/advanced
+/obj/item/device/healthanalyzer/improved //reports bone fractures, IB, quantity of beneficial reagents in stomach; also regular health analyzer stuff
 	name = "advanced health analyzer"
 	desc = "A miracle of medical technology, this handheld scanner can produce an accurate and specific report of a patient's biosigns."
 	advscan = 1
 	origin_tech = list(TECH_MAGNET = 5, TECH_BIO = 6)
 	icon_state = "advhealth"
+
+/obj/item/device/healthanalyzer/advanced //reports all of the above, as well as radiation severity and minor brain damage
+	name = "advanced health analyzer"
+	advscan = 2
+
+/obj/item/device/healthanalyzer/enhanced //reports all of the above, as well as name and quantity of nonmed reagents in stomach
+	name = "enhanced health analyzer"
+	advscan = 3
 
 /obj/item/device/analyzer
 	name = "analyzer"
