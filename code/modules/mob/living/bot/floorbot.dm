@@ -101,7 +101,7 @@
 		addTiles(1)
 
 	if(prob(1))
-		custom_emote(2, "makes an excited booping beeping sound!")
+		custom_emote(2, "makes an excited beeping sound!")
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 
 /mob/living/bot/floorbot/handleAdjacentTarget()
