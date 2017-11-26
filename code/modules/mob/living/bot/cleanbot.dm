@@ -21,7 +21,7 @@
 
 /mob/living/bot/cleanbot/handleIdle()
 	if(!screwloose && !oddbutton && prob(5))
-		custom_emote(2, "makes an excited beeping booping sound!")
+		custom_emote(2, "makes an excited booping sound!")
 		playsound(src.loc, 'sound/machines/synth_yes.ogg', 50, 0)
 
 	if(screwloose && prob(5)) // Make a mess
