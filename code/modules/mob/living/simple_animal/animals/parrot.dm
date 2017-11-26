@@ -47,7 +47,7 @@
 	stop_automated_movement = 1
 	universal_speak = 1
 
-	has_langs = list("Bird", "Galactic Common")
+	has_langs = list("Bird", LANGUAGE_GALCOM)
 	speak_chance = 2
 	speak = list("Hi","Hello!","Cracker?","Bawk!")
 	speak_emote = list("squawks","says","yells")
