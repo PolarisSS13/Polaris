@@ -31,6 +31,7 @@ datum/preferences
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/backbag = 2						//backpack type
 	var/pdachoice = 1					//PDA type
+	var/sensorpref = 5					//Sensor preferences
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
