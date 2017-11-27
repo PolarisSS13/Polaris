@@ -276,10 +276,12 @@ REAGENT SCANNER
 /obj/item/device/healthanalyzer/advanced //reports all of the above, as well as radiation severity and minor brain damage
 	name = "advanced health analyzer"
 	advscan = 2
+	icon_state = "advhealth"
 
 /obj/item/device/healthanalyzer/enhanced //reports all of the above, as well as name and quantity of nonmed reagents in stomach
 	name = "phasic health analyzer"
 	advscan = 3
+	icon_state = "advhealth"
 
 /obj/item/device/analyzer
 	name = "analyzer"
