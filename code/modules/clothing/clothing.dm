@@ -582,7 +582,8 @@
 	show_messages = 1
 
 	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
-	var/sensor_mode = 0
+	var/sensor_mode = 3
+	var/sensorpref = 5
 		/*
 		1 = Report living/dead
 		2 = Report detailed damages
@@ -805,6 +806,15 @@
 	update_clothing_icon()
 
 
-/obj/item/clothing/under/rank/New()
-	sensor_mode = pick(0,1,2,3)
+/obj/item/clothing/under/New(var/mob/living/carbon/human/H)
 	..()
+	sensorpref = isnull(H) ? 1 : (ishuman(H) ? H.sensorpref : 1)
+	switch(sensorpref)
+		if(1) sensor_mode = 0 //off
+		if(2) sensor_mode = 1 //binary
+		if(3) sensor_mode = 2 //vitals
+		if(4) sensor_mode = 3 //tracking
+		if(5) sensor_mode = pick(0,1,2,3) //random
+		else
+			sensor_mode = pick(0,1,2,3)
+			log_debug("Invalid switch for suit sensors, defaulting to random. [sensorpref] chosen.")
