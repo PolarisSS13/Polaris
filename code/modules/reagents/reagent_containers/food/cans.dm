@@ -13,7 +13,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola/New()
 	..()
-	reagents.add_reagent("cola", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/space_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
 	name = "bottled water"
@@ -23,7 +23,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/New()
 	..()
-	reagents.add_reagent("water", 30)
+	reagents.add_reagent(/datum/reagent/water, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind
 	name = "\improper Space Mountain Wind"
@@ -33,7 +33,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind/New()
 	..()
-	reagents.add_reagent("spacemountainwind", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/spacemountainwind, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
@@ -43,7 +43,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko/New()
 	..()
-	reagents.add_reagent("thirteenloko", 30)
+	reagents.add_reagent(/datum/reagent/ethanol/thirteenloko, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb
 	name = "\improper Dr. Gibb"
@@ -53,7 +53,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb/New()
 		..()
-		reagents.add_reagent("dr_gibb", 30)
+		reagents.add_reagent(/datum/reagent/drink/soda/dr_gibb, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist
 	name = "\improper Star-kist"
@@ -63,7 +63,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist/New()
 	..()
-	reagents.add_reagent("brownstar", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/brownstar, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -73,7 +73,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up/New()
 	..()
-	reagents.add_reagent("space_up", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/space_up, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime
 	name = "\improper Lemon-Lime"
@@ -83,7 +83,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime/New()
 	..()
-	reagents.add_reagent("lemon_lime", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/lemon_lime, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
 	name = "\improper Vrisk Serket Iced Tea"
@@ -93,7 +93,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea/New()
 	..()
-	reagents.add_reagent("icetea", 30)
+	reagents.add_reagent(/datum/reagent/drink/tea/icetea, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"
@@ -103,7 +103,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice/New()
 	..()
-	reagents.add_reagent("grapejuice", 30)
+	reagents.add_reagent(/datum/reagent/drink/juice, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
 	name = "\improper T-Borg's Tonic Water"
@@ -113,7 +113,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic/New()
 	..()
-	reagents.add_reagent("tonic", 50)
+	reagents.add_reagent(/datum/reagent/drink/soda/tonic, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater
 	name = "soda water"
@@ -123,7 +123,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
 	..()
-	reagents.add_reagent("sodawater", 50)
+	reagents.add_reagent(/datum/reagent/drink/soda/sodawater, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/gingerale
 	name = "\improper Classic Ginger Ale"
@@ -133,4 +133,4 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/gingerale/New()
 	..()
-	reagents.add_reagent("gingerale", 30)
+	reagents.add_reagent(/datum/reagent/drink/soda/gingerale, 30)

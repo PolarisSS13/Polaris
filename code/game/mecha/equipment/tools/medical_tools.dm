@@ -185,10 +185,10 @@
 		if(!R || !occupant || !SG || !(SG in chassis.equipment))
 			return 0
 		var/to_inject = min(R.volume, inject_amount)
-		if(to_inject && occupant.reagents.get_reagent_amount(R.id) + to_inject <= inject_amount*2)
+		if(to_inject && occupant.reagents.get_reagent_amount(R.type) + to_inject <= inject_amount*2)
 			occupant_message("Injecting [occupant] with [to_inject] units of [R.name].")
 			log_message("Injecting [occupant] with [to_inject] units of [R.name].")
-			SG.reagents.trans_id_to(occupant,R.id,to_inject)
+			SG.reagents.trans_type_to(occupant,R.type,to_inject)
 			update_equip_info()
 		return
 
@@ -223,8 +223,8 @@
 		M.Paralyse(2)
 		M.Weaken(2)
 		M.Stun(2)
-		if(M.reagents.get_reagent_amount("inaprovaline") < 5)
-			M.reagents.add_reagent("inaprovaline", 5)
+		if(M.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 5)
+			M.reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 		S.chassis.use_power(S.energy_drain)
 		S.update_equip_info()
 		return
@@ -391,7 +391,7 @@
 		..()
 		flags |= NOREACT
 		syringes = new
-		known_reagents = list("inaprovaline"="Inaprovaline","anti_toxin"="Dylovene")
+		known_reagents = list(/datum/reagent/inaprovaline="Inaprovaline",/datum/reagent/dylovene="Dylovene")
 		processed_reagents = new
 		create_reagents(max_volume)
 		synth = new (list(src),0)
@@ -555,15 +555,15 @@
 	proc/get_reagents_list()
 		var/output
 		for(var/i=1 to known_reagents.len)
-			var/reagent_id = known_reagents[i]
-			output += {"<input type="checkbox" value="[reagent_id]" name="reagent_[i]" [(reagent_id in processed_reagents)? "checked=\"1\"" : null]> [known_reagents[reagent_id]]<br />"}
+			var/reagent_type = known_reagents[i]
+			output += {"<input type="checkbox" value="[reagent_type]" name="reagent_[i]" [(reagent_type in processed_reagents)? "checked=\"1\"" : null]> [known_reagents[reagent_type]]<br />"}
 		return output
 
 	proc/get_current_reagents()
 		var/output
 		for(var/datum/reagent/R in reagents.reagent_list)
 			if(R.volume > 0)
-				output += "[R]: [round(R.volume,0.001)] - <a href=\"?src=\ref[src];purge_reagent=[R.id]\">Purge Reagent</a><br />"
+				output += "[R]: [round(R.volume,0.001)] - <a href=\"?src=\ref[src];purge_reagent=[R.type]\">Purge Reagent</a><br />"
 		if(output)
 			output += "Total: [round(reagents.total_volume,0.001)]/[reagents.maximum_volume] - <a href=\"?src=\ref[src];purge_all=1\">Purge All</a>"
 		return output || "None"
@@ -599,18 +599,18 @@
 			return 0
 		occupant_message("Analyzing reagents...")
 		for(var/datum/reagent/R in A.reagents.reagent_list)
-			if(R.reagent_state == 2 && add_known_reagent(R.id,R.name))
+			if(R.reagent_state == 2 && add_known_reagent(R.type,R.name))
 				occupant_message("Reagent analyzed, identified as [R.name] and added to database.")
 				send_byjax(chassis.occupant,"msyringegun.browser","reagents_form",get_reagents_form())
 		occupant_message("Analyzis complete.")
 		return 1
 
-	proc/add_known_reagent(r_id,r_name)
+	proc/add_known_reagent(r_type,r_name)
 		set_ready_state(0)
 		do_after_cooldown()
-		if(!(r_id in known_reagents))
-			known_reagents += r_id
-			known_reagents[r_id] = r_name
+		if(!(r_type in known_reagents))
+			known_reagents += r_type
+			known_reagents[r_type] = r_name
 			return 1
 		return 0
 

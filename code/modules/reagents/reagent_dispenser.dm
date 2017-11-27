@@ -72,16 +72,18 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
-	New()
-		..()
-		reagents.add_reagent("water",1000)
+/obj/structure/reagent_dispensers/watertank/New()
+	..()
+	reagents.add_reagent(/datum/reagent/water, 1000)
 
-/obj/structure/reagent_dispensers/watertank/high/New()
+/obj/structure/reagent_dispensers/watertank/high
 	name = "high-capacity water tank"
 	desc = "A highly-pressurized water tank made to hold vast amounts of water.."
 	icon_state = "watertank_high"
+
+/obj/structure/reagent_dispensers/watertank/high/New()
 	..()
-	reagents.add_reagent("water",4000)
+	reagents.add_reagent(/datum/reagent/water,4000)
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -93,7 +95,7 @@
 	var/obj/item/device/assembly_holder/rig = null
 	New()
 		..()
-		reagents.add_reagent("fuel",1000)
+		reagents.add_reagent(/datum/reagent/fuel,1000)
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	if(!..(user, 2))
@@ -186,7 +188,7 @@
 		return
 
 	amount = min(amount, reagents.total_volume)
-	reagents.remove_reagent("fuel",amount)
+	reagents.remove_reagent(/datum/reagent/fuel,amount)
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
@@ -199,7 +201,7 @@
 	amount_per_transfer_from_this = 45
 	New()
 		..()
-		reagents.add_reagent("condensedcapsaicin",1000)
+		reagents.add_reagent(/datum/reagent/condensedcapsaicin,1000)
 
 
 /obj/structure/reagent_dispensers/water_cooler
@@ -222,7 +224,7 @@
 /obj/structure/reagent_dispensers/water_cooler/New()
 	..()
 	if(bottle)
-		reagents.add_reagent("water",120)
+		reagents.add_reagent(/datum/reagent/water,120)
 	update_icon()
 
 /obj/structure/reagent_dispensers/water_cooler/examine(mob/user)
@@ -239,8 +241,8 @@
 				user << "<span class='notice'>You unfasten the jug.</span>"
 				var/obj/item/weapon/reagent_containers/glass/cooler_bottle/G = new /obj/item/weapon/reagent_containers/glass/cooler_bottle( src.loc )
 				for(var/datum/reagent/R in reagents.reagent_list)
-					var/total_reagent = reagents.get_reagent_amount(R.id)
-					G.reagents.add_reagent(R.id, total_reagent)
+					var/total_reagent = reagents.get_reagent_amount(R.type)
+					G.reagents.add_reagent(R.type, total_reagent)
 				reagents.clear_reagents()
 				bottle = 0
 				update_icon()
@@ -288,8 +290,8 @@
 					update_icon()
 					user << "<span class='notice'>You screw the bottle onto the water-cooler!</span>"
 					for(var/datum/reagent/R in G.reagents.reagent_list)
-						var/total_reagent = G.reagents.get_reagent_amount(R.id)
-						reagents.add_reagent(R.id, total_reagent)
+						var/total_reagent = G.reagents.get_reagent_amount(R.type)
+						reagents.add_reagent(R.type, total_reagent)
 					qdel(G)
 			else
 				user << "<span class='warning'>You need to wrench down the cooler first.</span>"
@@ -345,7 +347,7 @@
 	amount_per_transfer_from_this = 10
 	New()
 		..()
-		reagents.add_reagent("beer",1000)
+		reagents.add_reagent(/datum/reagent/ethanol/beer,1000)
 
 /obj/structure/reagent_dispensers/beerkeg/fakenuke
 	name = "nuclear beer keg"
@@ -363,7 +365,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("virusfood", 1000)
+		reagents.add_reagent(/datum/reagent/nutriment/virus_food, 1000)
 
 /obj/structure/reagent_dispensers/acid
 	name = "Sulphuric Acid Dispenser"
@@ -375,4 +377,4 @@
 
 	New()
 		..()
-		reagents.add_reagent("sacid", 1000)
+		reagents.add_reagent(/datum/reagent/acid, 1000)

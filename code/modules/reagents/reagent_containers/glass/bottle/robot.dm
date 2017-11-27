@@ -16,7 +16,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/robot/inaprovaline/New()
 	..()
-	reagents.add_reagent("inaprovaline", 60)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
 
 
@@ -29,6 +29,6 @@
 
 /obj/item/weapon/reagent_containers/glass/bottle/robot/antitoxin/New()
 	..()
-	reagents.add_reagent("anti_toxin", 60)
+	reagents.add_reagent(/datum/reagent/dylovene, 60)
 	update_icon()
 

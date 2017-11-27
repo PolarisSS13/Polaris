@@ -53,48 +53,48 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/on_reagent_change()
 	if(reagents.reagent_list.len > 0)
-		switch(reagents.get_master_reagent_id())
-			if("ketchup")
+		switch(reagents.get_master_reagent_type())
+			if(/datum/reagent/nutriment/ketchup)
 				name = "Ketchup"
 				desc = "You feel more American already."
 				icon_state = "ketchup"
 				center_of_mass = list("x"=16, "y"=6)
-			if("capsaicin")
+			if(/datum/reagent/capsaicin)
 				name = "Hotsauce"
 				desc = "You can almost TASTE the stomach ulcers now!"
 				icon_state = "hotsauce"
 				center_of_mass = list("x"=16, "y"=6)
-			if("enzyme")
+			if(/datum/reagent/enzyme)
 				name = "Universal Enzyme"
 				desc = "Used in cooking various dishes."
 				icon_state = "enzyme"
 				center_of_mass = list("x"=16, "y"=6)
-			if("soysauce")
+			if(/datum/reagent/nutriment/soysauce)
 				name = "Soy Sauce"
 				desc = "A salty soy-based flavoring."
 				icon_state = "soysauce"
 				center_of_mass = list("x"=16, "y"=6)
-			if("frostoil")
+			if(/datum/reagent/frostoil)
 				name = "Coldsauce"
 				desc = "Leaves the tongue numb in its passage."
 				icon_state = "coldsauce"
 				center_of_mass = list("x"=16, "y"=6)
-			if("sodiumchloride")
+			if(/datum/reagent/sodiumchloride)
 				name = "Salt Shaker"
 				desc = "Salt. From space oceans, presumably."
 				icon_state = "saltshaker"
 				center_of_mass = list("x"=16, "y"=10)
-			if("blackpepper")
+			if(/datum/reagent/blackpepper)
 				name = "Pepper Mill"
 				desc = "Often used to flavor food or make people sneeze."
 				icon_state = "peppermillsmall"
 				center_of_mass = list("x"=16, "y"=10)
-			if("cornoil")
+			if(/datum/reagent/nutriment/cornoil)
 				name = "Corn Oil"
 				desc = "A delicious oil used in cooking. Made from corn."
 				icon_state = "oliveoil"
 				center_of_mass = list("x"=16, "y"=6)
-			if("sugar")
+			if(/datum/reagent/sugar)
 				name = "Sugar"
 				desc = "Tastey space sugar!"
 				center_of_mass = list("x"=16, "y"=6)
@@ -120,11 +120,11 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
 	..()
-	reagents.add_reagent("enzyme", 50)
+	reagents.add_reagent(/datum/reagent/enzyme, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/sugar/New()
 	..()
-	reagents.add_reagent("sugar", 50)
+	reagents.add_reagent(/datum/reagent/sugar, 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = list(1,20)
@@ -142,7 +142,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker/New()
 	..()
-	reagents.add_reagent("sodiumchloride", 20)
+	reagents.add_reagent(/datum/reagent/sodiumchloride, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill
 	name = "pepper mill"
@@ -151,7 +151,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppermill/New()
 	..()
-	reagents.add_reagent("blackpepper", 20)
+	reagents.add_reagent(/datum/reagent/blackpepper, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
@@ -160,7 +160,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar/New()
 	..()
-	reagents.add_reagent("sugar", 20)
+	reagents.add_reagent(/datum/reagent/sugar, 20)
 
 /obj/item/weapon/reagent_containers/food/condiment/flour
 	name = "flour sack"
@@ -173,6 +173,6 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/flour/New()
 	..()
-	reagents.add_reagent("flour", 30)
+	reagents.add_reagent(/datum/reagent/nutriment/flour, 30)
 	src.pixel_x = rand(-10.0, 10)
 	src.pixel_y = rand(-10.0, 10)

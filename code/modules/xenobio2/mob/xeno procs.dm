@@ -61,9 +61,9 @@ Divergence proc, used in mutation to make unique datums.
 		var/list/reagent_response = list()
 		for(var/datum/reagent/R in temp_chem_holder.reagents.reagent_list)
 
-			reagent_total = temp_chem_holder.reagents.get_reagent_amount(R.id)
+			reagent_total = temp_chem_holder.reagents.get_reagent_amount(R.type)
 
-			reagent_response = chemreact[R.id]
+			reagent_response = chemreact[R.type]
 
 			if(!reagent_response)
 				continue // just skip this reagent, rather than clearing the whole thing
@@ -85,7 +85,7 @@ Divergence proc, used in mutation to make unique datums.
 		return 1 //Everything worked out okay.
 
 	return 0
-	
+
 /mob/living/simple_animal/xeno/proc/diverge()
 	var/datum/xeno/traits/newtraits = new()
 	newtraits.copy_traits(traitdat)

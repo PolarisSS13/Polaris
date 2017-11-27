@@ -75,7 +75,7 @@
 				return
 
 			if(ismob(target))//Blood!
-				if(reagents.has_reagent("blood"))
+				if(reagents.has_reagent(/datum/reagent/blood))
 					to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 					return
 
@@ -324,7 +324,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/inaprovaline/New()
 	..()
-	reagents.add_reagent("inaprovaline", 15)
+	reagents.add_reagent(/datum/reagent/inaprovaline, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -334,7 +334,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/antitoxin/New()
 	..()
-	reagents.add_reagent("anti_toxin", 15)
+	reagents.add_reagent(/datum/reagent/dylovene, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -344,7 +344,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/antiviral/New()
 	..()
-	reagents.add_reagent("spaceacillin", 15)
+	reagents.add_reagent(/datum/reagent/spaceacillin, 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -354,15 +354,15 @@
 
 /obj/item/weapon/reagent_containers/syringe/drugs/New()
 	..()
-	reagents.add_reagent("space_drugs",  5)
-	reagents.add_reagent("mindbreaker",  5)
-	reagents.add_reagent("cryptobiolin", 5)
+	reagents.add_reagent(/datum/reagent/space_drugs,  5)
+	reagents.add_reagent(/datum/reagent/mindbreaker,  5)
+	reagents.add_reagent(/datum/reagent/cryptobiolin, 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral/New()
 	..()
-	reagents.add_reagent("chloralhydrate", 50)
+	reagents.add_reagent(/datum/reagent/chloralhydrate, 50)
 	mode = SYRINGE_INJECT
 	update_icon()
 
@@ -372,5 +372,5 @@
 
 /obj/item/weapon/reagent_containers/syringe/steroid/New()
 	..()
-	reagents.add_reagent("adrenaline",5)
-	reagents.add_reagent("hyperzine",10)
+	reagents.add_reagent(/datum/reagent/adrenaline,5)
+	reagents.add_reagent(/datum/reagent/hyperzine,10)

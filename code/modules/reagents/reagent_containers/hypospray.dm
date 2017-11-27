@@ -110,7 +110,7 @@
 			user << "<span class='notice'>\The [src] already has a vial.</span>"
 	else
 		..()
-		
+
 /obj/item/weapon/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
@@ -120,7 +120,7 @@
 	volume = 5
 	reusable = 0
 	filled = 1
-	filled_reagents = list("inaprovaline" = 5)
+	filled_reagents = list(/datum/reagent/inaprovaline = 5)
 	preserve_item = 0
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/on_reagent_change()
@@ -162,9 +162,9 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting
 	name = "clotting agent"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity. This variant excels at treating bleeding wounds and internal bleeding."
-	filled_reagents = list("inaprovaline" = 5, "myelamine" = 10)
+	filled_reagents = list(/datum/reagent/inaprovaline = 5, /datum/reagent/myelamine = 10)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/bonemed
 	name = "bone repair injector"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity. This one excels at treating damage to bones."
-	filled_reagents = list("inaprovaline" = 5, "osteodaxon" = 10)
+	filled_reagents = list(/datum/reagent/inaprovaline = 5, /datum/reagent/osteodaxon = 10)

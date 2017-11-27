@@ -53,7 +53,7 @@
 			if(S.is_child)
 				growth_level = S.growthcounter
 				growth_max = S.growthpoint
-				
+
 		targetName = X.name
 		trait_info = X.traitdat
 
@@ -82,7 +82,7 @@
 
 		dat += "<br>This sample contains: "
 		for(var/datum/reagent/R in prod_reagents.reagent_list)
-			dat += "<br>- [R.name], [prod_reagents.get_reagent_amount(R.id)] unit(s)"
+			dat += "<br>- [R.name], [prod_reagents.get_reagent_amount(R.type)] unit(s)"
 
 	dat += "<h2>Other Data</h2>"
 
@@ -109,7 +109,7 @@
 			dat += "It bears characteristics that indicate susceptibility to damage.<br>"
 		else
 			dat += "It bears no characters indicating resilience to damage.<br>"
-			
+
 	if(growth_max)
 		if(growth_level < 35)
 			dat += "It appears to be far to growing up.<br>"
@@ -137,7 +137,7 @@
 			dat += "It appears to be agile.<br>"
 		else if(trait_info.get_trait(TRAIT_XENO_SPEED) > 0)
 			dat += "It appears to be slower.<br>"
-			
+
 	if(trait_info.get_trait(TRAIT_XENO_CANSPEAK))
 		dat += "<br>The subject appears to be able to articulate."
 
@@ -149,18 +149,18 @@
 
 	if(trait_info.get_trait(TRAIT_XENO_CANLEARN))
 		dat += "<br>The subject appears to have process verbal information."
-		
+
 	if(trait_info.get_trait(TRAIT_XENO_LEARNCHANCE))
 		if(trait_info.get_trait(TRAIT_XENO_LEARNCHANCE) < 50)
 			dat += "The subject appears to comprehend verbal information infrequently.<br>"
 		else if(trait_info.get_trait(TRAIT_XENO_LEARNCHANCE) > 51)
 			dat += "The subject appears to comprehend verbal information frequently.<br>"
-			
+
 	if(trait_info.get_trait(TRAIT_XENO_STRENGTH) < 5)
 		dat += "It appears to have lower average physical capacity.<br>"
 	else if(trait_info.get_trait(TRAIT_XENO_STRENGTH) > 7)
 		dat += "It appears to have greater average physical capacity.<br>"
-		
+
 	if(trait_info.get_trait(TRAIT_XENO_STR_RANGE))
 		if(trait_info.get_trait(TRAIT_XENO_STR_RANGE) < 50)
 			dat += "The subject appears to have more consistent attacks.<br>"
@@ -172,11 +172,11 @@
 
 	if(trait_info.get_trait(TRAIT_XENO_HOSTILE))
 		dat += "<br>The subject appears to have hostile tendencies."
-		
+
 	if(trait_info.get_trait(TRAIT_XENO_CHROMATIC))
 		dat += "<br>The subject appears to have chromatic particles inside of it."
 
-	
+
 	if(dat)
 		last_data = dat
 		dat += "<br><br>\[<a href='?src=\ref[src];print=1'>print report</a>\]"

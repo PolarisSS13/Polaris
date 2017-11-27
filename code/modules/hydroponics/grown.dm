@@ -78,33 +78,33 @@
 		desc = plant_controller.product_descs["[seed.uid]"]
 	else
 		var/list/descriptors = list()
-		if(reagents.has_reagent("sugar") || reagents.has_reagent("cherryjelly") || reagents.has_reagent("honey") || reagents.has_reagent("berryjuice"))
+		if(reagents.has_reagent(/datum/reagent/sugar) || reagents.has_reagent(/datum/reagent/nutriment/cherryjelly) || reagents.has_reagent(/datum/reagent/nutriment/honey) || reagents.has_reagent(/datum/reagent/drink/juice/berry))
 			descriptors |= "sweet"
-		if(reagents.has_reagent("anti_toxin"))
+		if(reagents.has_reagent(/datum/reagent/dylovene))
 			descriptors |= "astringent"
-		if(reagents.has_reagent("frostoil"))
+		if(reagents.has_reagent(/datum/reagent/frostoil))
 			descriptors |= "numbing"
-		if(reagents.has_reagent("nutriment"))
+		if(reagents.has_reagent(/datum/reagent/nutriment))
 			descriptors |= "nutritious"
-		if(reagents.has_reagent("condensedcapsaicin") || reagents.has_reagent("capsaicin"))
+		if(reagents.has_reagent(/datum/reagent/condensedcapsaicin) || reagents.has_reagent(/datum/reagent/capsaicin))
 			descriptors |= "spicy"
-		if(reagents.has_reagent("coco"))
+		if(reagents.has_reagent(/datum/reagent/nutriment/coco))
 			descriptors |= "bitter"
-		if(reagents.has_reagent("orangejuice") || reagents.has_reagent("lemonjuice") || reagents.has_reagent("limejuice"))
+		if(reagents.has_reagent(/datum/reagent/drink/juice/orange) || reagents.has_reagent(/datum/reagent/drink/juice/lemon) || reagents.has_reagent(/datum/reagent/drink/juice/lime))
 			descriptors |= "sweet-sour"
-		if(reagents.has_reagent("radium") || reagents.has_reagent("uranium"))
+		if(reagents.has_reagent(/datum/reagent/radium) || reagents.has_reagent(/datum/reagent/uranium))
 			descriptors |= "radioactive"
-		if(reagents.has_reagent("amatoxin") || reagents.has_reagent("toxin"))
+		if(reagents.has_reagent(/datum/reagent/toxin/amatoxin) || reagents.has_reagent(/datum/reagent/toxin))
 			descriptors |= "poisonous"
-		if(reagents.has_reagent("psilocybin") || reagents.has_reagent("space_drugs"))
+		if(reagents.has_reagent(/datum/reagent/psilocybin) || reagents.has_reagent(/datum/reagent/space_drugs))
 			descriptors |= "hallucinogenic"
-		if(reagents.has_reagent("bicaridine"))
+		if(reagents.has_reagent(/datum/reagent/bicaridine))
 			descriptors |= "medicinal"
-		if(reagents.has_reagent("gold"))
+		if(reagents.has_reagent(/datum/reagent/gold))
 			descriptors |= "shiny"
-		if(reagents.has_reagent("lube"))
+		if(reagents.has_reagent(/datum/reagent/lube))
 			descriptors |= "slippery"
-		if(reagents.has_reagent("pacid") || reagents.has_reagent("sacid"))
+		if(reagents.has_reagent(/datum/reagent/acid/polyacid) || reagents.has_reagent(/datum/reagent/acid))
 			descriptors |= "acidic"
 		if(seed.get_trait(TRAIT_JUICY))
 			descriptors |= "juicy"

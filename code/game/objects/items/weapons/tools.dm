@@ -298,7 +298,7 @@
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("fuel", max_fuel)
+	R.add_reagent(/datum/reagent/fuel, max_fuel)
 	update_icon()
 	if(always_process)
 		processing_objects |= src
@@ -410,7 +410,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return reagents.get_reagent_amount(/datum/reagent/fuel)
 
 /obj/item/weapon/weldingtool/proc/get_max_fuel()
 	return max_fuel
@@ -422,7 +422,7 @@
 	if(amount)
 		burned_fuel_for = 0 // Reset the counter since we're removing fuel.
 	if(get_fuel() >= amount)
-		reagents.remove_reagent("fuel", amount)
+		reagents.remove_reagent(/datum/reagent/fuel, amount)
 		if(M)
 			eyecheck(M)
 		update_icon()
@@ -633,7 +633,7 @@
 
 /obj/item/weapon/weldingtool/alien/process()
 	if(get_fuel() <= get_max_fuel())
-		reagents.add_reagent("fuel", 1)
+		reagents.add_reagent(/datum/reagent/fuel, 1)
 	..()
 
 /obj/item/weapon/weldingtool/experimental
@@ -654,7 +654,7 @@
 	..()
 	if(get_fuel() < get_max_fuel() && nextrefueltick < world.time)
 		nextrefueltick = world.time + 10
-		reagents.add_reagent("fuel", 1)
+		reagents.add_reagent(/datum/reagent/fuel, 1)
 
 /*
  * Backpack Welder.

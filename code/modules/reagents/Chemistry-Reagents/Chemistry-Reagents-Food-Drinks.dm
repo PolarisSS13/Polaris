@@ -288,7 +288,7 @@
 		M.emote("shiver")
 	if(istype(M, /mob/living/simple_animal/slime))
 		M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
-	holder.remove_reagent("capsaicin", 5)
+	holder.remove_reagent(/datum/reagent/capsaicin, 5)
 
 /datum/reagent/frostoil/cryotoxin //A longer lasting version of frost oil.
 	name = "Cryotoxin"
@@ -328,7 +328,7 @@
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/simple_animal/slime))
 		M.bodytemperature += rand(10, 25)
-	holder.remove_reagent("frostoil", 5)
+	holder.remove_reagent(/datum/reagent/frostoil, 5)
 
 /datum/reagent/condensedcapsaicin
 	name = "Condensed Capsaicin"
@@ -413,7 +413,7 @@
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
 	if(istype(M, /mob/living/simple_animal/slime))
 		M.bodytemperature += rand(15, 30)
-	holder.remove_reagent("frostoil", 5)
+	holder.remove_reagent(/datum/reagent/frostoil, 5)
 
 /* Drinks */
 
@@ -477,7 +477,7 @@
 
 /datum/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.reagents.add_reagent("imidazoline", removed * 0.2)
+	M.reagents.add_reagent(/datum/reagent/imidazoline, removed * 0.2)
 
 /datum/reagent/drink/juice/
 	name = "Grape Juice"
@@ -638,7 +638,7 @@
 	if(alien == IS_DIONA)
 		return
 	M.heal_organ_damage(0.5 * removed, 0)
-	holder.remove_reagent("capsaicin", 10 * removed)
+	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
 
 /datum/reagent/drink/milk/cream
 	name = "Cream"
@@ -802,7 +802,7 @@
 		M.adjustToxLoss(0.5 * removed)
 		M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
-		holder.remove_reagent("frostoil", 10 * removed)
+		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
 
 /datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1103,7 +1103,6 @@
 	glass_name = "lemon lime soda"
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
-
 
 /datum/reagent/drink/soda/gingerale
 	name = "Ginger Ale"

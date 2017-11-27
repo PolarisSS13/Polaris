@@ -227,7 +227,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/reagent_containers/dropper(src) // Allows surgeon borg to fix necrosis
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("pacid", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(10000)
@@ -247,7 +247,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/medical/robot/surgeon/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2 * amount)
+		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 	..()
 
 /obj/item/weapon/robot_module/robot/medical/crisis
@@ -283,7 +283,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gripper/medical(src)
 	src.modules += new /obj/item/weapon/shockpaddles/robot(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("pacid", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
 	src.emag.name = "Polyacid spray"
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
@@ -316,7 +316,7 @@ var/global/list/robot_modules = list(
 
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/PS = src.emag
-		PS.reagents.add_reagent("pacid", 2 * amount)
+		PS.reagents.add_reagent(/datum/reagent/acid/polyacid, 2 * amount)
 
 	..()
 
@@ -550,7 +550,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/mop(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-	src.emag.reagents.add_reagent("lube", 250)
+	src.emag.reagents.add_reagent(/datum/reagent/lube, 250)
 	src.emag.name = "Lube spray"
 
 /obj/item/weapon/robot_module/robot/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
@@ -558,7 +558,7 @@ var/global/list/robot_modules = list(
 	LR.Charge(R, amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/spray/S = src.emag
-		S.reagents.add_reagent("lube", 2 * amount)
+		S.reagents.add_reagent(/datum/reagent/lube, 2 * amount)
 
 /obj/item/weapon/robot_module/robot/clerical
 	name = "service robot module"
@@ -627,7 +627,7 @@ var/global/list/robot_modules = list(
 	var/datum/reagents/R = new/datum/reagents(50)
 	src.emag.reagents = R
 	R.my_atom = src.emag
-	R.add_reagent("beer2", 50)
+	R.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
 	src.emag.name = "Mickey Finn's Special Brew"
 
 /obj/item/weapon/robot_module/robot/clerical/general
@@ -663,10 +663,10 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
-	E.reagents.add_reagent("enzyme", 2 * amount)
+	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)
 	if(src.emag)
 		var/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer/B = src.emag
-		B.reagents.add_reagent("beer2", 2 * amount)
+		B.reagents.add_reagent(/datum/reagent/chloralhydrate/beer2, 2 * amount)
 
 /obj/item/weapon/robot_module/robot/miner
 	name = "miner robot module"

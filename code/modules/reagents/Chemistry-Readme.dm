@@ -48,8 +48,8 @@ About the Holder:
 		get_master_reagent_name()
 			Ditto, but returns the name.
 
-		get_master_reagent_id()
-			Ditto, but returns ID.
+		get_master_reagent_type()
+			Ditto, but returns type.
 
 		update_total()
 			Updates total volume, called automatically.
@@ -57,29 +57,29 @@ About the Holder:
 		handle_reactions()
 			Checks reagents and triggers any reactions that happen. Usually called automatically.
 
-		add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
-			Adds [amount] units of [id] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, handle_reactions() will be called. Returns 1 if successful, 0 otherwise.
+		add_reagent(var/type, var/amount, var/data = null, var/safety = 0)
+			Adds [amount] units of [type] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, handle_reactions() will be called. Returns 1 if successful, 0 otherwise.
 
-		remove_reagent(var/id, var/amount, var/safety = 0)
+		remove_reagent(var/type, var/amount, var/safety = 0)
 			Ditto, but removes reagent. Returns 1 if successful, 0 otherwise.
 
-		del_reagent(var/id)
+		del_reagent(var/type)
 			Removes all of the reagent.
 
-		has_reagent(var/id, var/amount = 0)
-			Checks if holder has at least [amount] of [id] reagent. Returns 1 if the reagent is found and volume is above [amount]. Returns 0 otherwise.
+		has_reagent(var/type, var/amount = 0)
+			Checks if holder has at least [amount] of [type] reagent. Returns 1 if the reagent is found and volume is above [amount]. Returns 0 otherwise.
 
 		clear_reagents()
 			Removes all reagents.
 
-		get_reagent_amount(var/id)
+		get_reagent_amount(var/type)
 			Returns reagent volume. Returns 0 if reagent is not found.
 
 		get_data(var/id)
 			Returns get_data() of the reagent.
 
 		get_reagents()
-			Returns a string containing all reagent ids and volumes, e.g. "carbon(4),nittrogen(5)".
+			Returns a string containing all reagent types and volumes, e.g. "/datum/reagent/carbon(4), /datum/reagent/nitrogen(5)".
 
 		remove_any(var/amount = 1)
 			Removes up to [amount] of reagents from [src]. Returns actual amount removed.
@@ -105,14 +105,14 @@ About the Holder:
 			Calls each reagent's touch_obj(target).
 
 		trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
-			The general proc for applying reagents to things externally (as opposed to directly injected into the contents). 
+			The general proc for applying reagents to things externally (as opposed to directly injected into the contents).
 			It first calls touch, then the appropriate trans_to_*() or splash_mob().
 			If for some reason you want touch effects to be bypassed (e.g. injecting stuff directly into a reagent container or person), call the appropriate trans_to_*() proc.
-			
+
 			Calls touch() before checking the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
 
-		trans_id_to(var/atom/target, var/id, var/amount = 1)
-			Transfers [amount] of [id] to [target]. Returns amount transferred.
+		trans_type_to(var/atom/target, var/type, var/amount = 1)
+			Transfers [amount] of [type] to [target]. Returns amount transferred.
 
 		splash_mob(var/mob/target, var/amount = 1, var/clothes = 1)
 			Checks mob's clothing if [clothes] is 1 and transfers [amount] reagents to mob's skin.

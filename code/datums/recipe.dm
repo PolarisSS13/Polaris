@@ -130,14 +130,14 @@
 		var/obj/machinery/machine = container
 		for (var/obj/O in ((machine.contents-result_obj - machine.component_parts) - machine.circuit))
 			if (O.reagents)
-				O.reagents.del_reagent("nutriment")
+				O.reagents.del_reagent(/datum/reagent/nutriment)
 				O.reagents.update_total()
 				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 			qdel(O)
 	else
 		for (var/obj/O in (container.contents-result_obj))
 			if (O.reagents)
-				O.reagents.del_reagent("nutriment")
+				O.reagents.del_reagent(/datum/reagent/nutriment)
 				O.reagents.update_total()
 				O.reagents.trans_to_obj(result_obj, O.reagents.total_volume)
 			qdel(O)

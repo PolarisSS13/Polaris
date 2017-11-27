@@ -119,7 +119,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/milk/New()
 	..()
-	reagents.add_reagent("milk", 50)
+	reagents.add_reagent(/datum/reagent/drink/milk, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
 	name = "soymilk carton"
@@ -129,7 +129,7 @@
 	center_of_mass = list("x"=16, "y"=9)
 /obj/item/weapon/reagent_containers/food/drinks/soymilk/New()
 	..()
-	reagents.add_reagent("soymilk", 50)
+	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 50)
 
 /obj/item/weapon/reagent_containers/food/drinks/smallmilk
 	name = "small milk carton"
@@ -140,7 +140,7 @@
 	center_of_mass = list("x"=16, "y"=9)
 /obj/item/weapon/reagent_containers/food/drinks/smallmilk/New()
 	..()
-	reagents.add_reagent("milk", 30)
+	reagents.add_reagent(/datum/reagent/drink/milk, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/smallchocmilk
 	name = "small chocolate milk carton"
@@ -151,7 +151,7 @@
 	center_of_mass = list("x"=16, "y"=9)
 /obj/item/weapon/reagent_containers/food/drinks/smallchocmilk/New()
 	..()
-	reagents.add_reagent("chocolate_milk", 30)
+	reagents.add_reagent(/datum/reagent/drink/milk/chocolate, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/coffee
 	name = "\improper Robust Coffee"
@@ -160,7 +160,7 @@
 	center_of_mass = list("x"=15, "y"=10)
 /obj/item/weapon/reagent_containers/food/drinks/coffee/New()
 	..()
-	reagents.add_reagent("coffee", 30)
+	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/tea
 	name = "cup of Duke Purple Tea"
@@ -171,7 +171,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/tea/New()
 	..()
-	reagents.add_reagent("tea", 30)
+	reagents.add_reagent(/datum/reagent/drink/tea, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "cup of ice"
@@ -180,7 +180,7 @@
 	center_of_mass = list("x"=15, "y"=10)
 /obj/item/weapon/reagent_containers/food/drinks/ice/New()
 	..()
-	reagents.add_reagent("ice", 30)
+	reagents.add_reagent(/datum/reagent/drink/ice, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
 	name = "cup of Dutch hot coco"
@@ -191,7 +191,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate/New()
 	..()
-	reagents.add_reagent("hot_coco", 30)
+	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen
 	name = "Cup Ramen"
@@ -200,7 +200,7 @@
 	center_of_mass = list("x"=16, "y"=11)
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen/New()
 	..()
-	reagents.add_reagent("dry_ramen", 30)
+	reagents.add_reagent(/datum/reagent/drink/dry_ramen, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
 	name = "paper cup"

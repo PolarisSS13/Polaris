@@ -701,11 +701,11 @@ default behaviour is:
 									if(H.species.flags & NO_BLOOD)
 										bloodtrail = 0
 									else
-										var/blood_volume = round((H.vessel.get_reagent_amount("blood")/H.species.blood_volume)*100)
+										var/blood_volume = round((H.vessel.get_reagent_amount(/datum/reagent/blood)/H.species.blood_volume)*100)
 										if(blood_volume < BLOOD_VOLUME_SURVIVE)
 											bloodtrail = 0	//Most of it's gone already, just leave it be
 										else
-											H.vessel.remove_reagent("blood", 1)
+											H.vessel.remove_reagent(/datum/reagent/blood, 1)
 								if(bloodtrail)
 									var/turf/location = M.loc
 									if(istype(location, /turf/simulated))
@@ -726,11 +726,11 @@ default behaviour is:
 											if(H.species.flags & NO_BLOOD)
 												bloodtrail = 0
 											else
-												var/blood_volume = round((H.vessel.get_reagent_amount("blood")/H.species.blood_volume)*100)
+												var/blood_volume = round((H.vessel.get_reagent_amount(/datum/reagent/blood)/H.species.blood_volume)*100)
 												if(blood_volume < BLOOD_VOLUME_SURVIVE)
 													bloodtrail = 0	//Most of it's gone already, just leave it be
 												else
-													H.vessel.remove_reagent("blood", 1)
+													H.vessel.remove_reagent(/datum/reagent/blood, 1)
 										if(bloodtrail)
 											if(istype(location, /turf/simulated))
 												location.add_blood(M)

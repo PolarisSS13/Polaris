@@ -424,15 +424,15 @@
 
 	chems = list()
 	if(prob(80))
-		chems["nutriment"] = list(rand(1,10),rand(10,20))
+		chems[/datum/reagent/nutriment] = list(rand(1,10),rand(10,20))
 
 	var/additional_chems = rand(0,5)
 
 	if(additional_chems)
 
 		var/list/banned_chems = list(
-			"adminordrazine",
-			"nutriment"
+			/datum/reagent/adminordrazine,
+			/datum/reagent/nutriment
 			)
 
 		for(var/x=1;x<=additional_chems;x++)

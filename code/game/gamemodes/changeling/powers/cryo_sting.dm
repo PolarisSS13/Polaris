@@ -24,7 +24,7 @@
 		inject_amount = inject_amount * 1.5
 		src << "<span class='notice'>We inject extra chemicals.</span>"
 	if(T.reagents)
-		T.reagents.add_reagent("cryotoxin", inject_amount)
+		T.reagents.add_reagent(/datum/reagent/frostoil/cryotoxin, inject_amount)
 	feedback_add_details("changeling_powers","CS")
 	src.verbs -= /mob/proc/changeling_cryo_sting
 	spawn(3 MINUTES)

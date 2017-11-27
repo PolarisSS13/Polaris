@@ -14,25 +14,29 @@
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
 	var/bypass_protection = FALSE // If true, can inject through things like spacesuits and armor.
 
-	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "anti_toxin", "tramadol", "dexalin" ,"spaceacillin")
+	var/list/reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/dylovene, /datum/reagent/tramadol,
+								/datum/reagent/dexalin ,/datum/reagent/spaceacillin)
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
-	reagent_ids = list("tricordrazine", "inaprovaline", "oxycodone", "dexalin" ,"spaceacillin")
+	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/oxycodone, /datum/reagent/dexalin, /datum/reagent/spaceacillin)
 
 /obj/item/weapon/reagent_containers/borghypo/crisis
-	reagent_ids = list("tricordrazine", "inaprovaline", "anti_toxin", "tramadol", "dexalin" ,"spaceacillin")
+	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/dylovene, /datum/reagent/tramadol, /datum/reagent/dexalin,
+						/datum/reagent/spaceacillin)
 
 /obj/item/weapon/reagent_containers/borghypo/lost
-	reagent_ids = list("tricordrazine", "bicaridine", "dexalin", "anti_toxin", "tramadol", "spaceacillin")
+	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/bicaridine, /datum/reagent/dexalin, /datum/reagent/dylovene, /datum/reagent/tramadol,
+						/datum/reagent/spaceacillin)
 
 /obj/item/weapon/reagent_containers/borghypo/merc
 	name = "advanced cyborg hypospray"
 	desc = "An advanced nanite and chemical synthesizer and injection system, designed for heavy-duty medical equipment.  This type is capable of safely bypassing \
 	thick materials that other hyposprays would struggle with."
 	bypass_protection = TRUE // Because mercs tend to be in spacesuits.
-	reagent_ids = list("healing_nanites", "hyperzine", "tramadol", "oxycodone", "spaceacillin", "peridaxon", "osteodaxon", "myelamine")
+	reagent_ids = list(/datum/reagent/healing_nanites, /datum/reagent/hyperzine, /datum/reagent/tramadol, /datum/reagent/oxycodone, /datum/reagent/spaceacillin,
+						/datum/reagent/peridaxon, /datum/reagent/osteodaxon, /datum/reagent/myelamine)
 
 /obj/item/weapon/reagent_containers/borghypo/New()
 	..()
@@ -132,7 +136,16 @@
 	recharge_time = 3
 	volume = 60
 	possible_transfer_amounts = list(5, 10, 20, 30)
-	reagent_ids = list("ale", "beer", "berryjuice", "coffee", "cognac", "cola", "dr_gibb", "egg", "gin", "gingerale", "hot_coco", "ice", "icetea", "kahlua", "lemonjuice", "lemon_lime", "limejuice", "mead", "milk", "mint", "orangejuice", "rum", "sake", "sodawater", "soymilk", "space_up", "spacemountainwind", "specialwhiskey", "sugar", "tea", "tequilla", "tomatojuice", "tonic", "vermouth", "vodka", "water", "watermelonjuice", "whiskey", "wine")
+	reagent_ids = list(/datum/reagent/ethanol/ale, /datum/reagent/ethanol/beer, /datum/reagent/drink/juice/berry, /datum/reagent/drink/coffee,
+						/datum/reagent/ethanol/cognac, /datum/reagent/drink/soda/space_cola, /datum/reagent/drink/soda/dr_gibb, /datum/reagent/nutriment/protein/egg,
+						/datum/reagent/ethanol/gin, /datum/reagent/drink/soda/gingerale, /datum/reagent/drink/hot_coco, /datum/reagent/drink/ice,
+						/datum/reagent/drink/tea/icetea, /datum/reagent/ethanol/coffee/kahlua, /datum/reagent/drink/juice/lemon, /datum/reagent/drink/soda/lemon_lime,
+						/datum/reagent/drink/juice/lime, /datum/reagent/ethanol/mead, /datum/reagent/drink/milk, /datum/reagent/nutriment/mint,
+						/datum/reagent/drink/juice/orange, /datum/reagent/ethanol/rum, /datum/reagent/ethanol/sake, /datum/reagent/drink/soda/sodawater,
+						/datum/reagent/drink/milk/soymilk, /datum/reagent/drink/soda/space_up, /datum/reagent/drink/soda/spacemountainwind,
+						/datum/reagent/ethanol/specialwhiskey, /datum/reagent/sugar, /datum/reagent/drink/tea, /datum/reagent/ethanol/tequilla,
+						/datum/reagent/drink/juice/tomato, /datum/reagent/drink/soda/tonic, /datum/reagent/ethanol/vermouth, /datum/reagent/ethanol/vodka,
+						/datum/reagent/water, /datum/reagent/drink/juice/watermelon, /datum/reagent/ethanol/whiskey, /datum/reagent/ethanol/wine)
 
 /obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return
