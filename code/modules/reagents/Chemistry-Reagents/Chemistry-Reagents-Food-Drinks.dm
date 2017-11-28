@@ -994,6 +994,43 @@
 			M.sleeping = max(M.sleeping, 20)
 			M.drowsyness = max(M.drowsyness, 60)
 
+/datum/reagent/drink/milkshake/chocoshake
+	name = "Chocolate Milkshake"
+	id = "chocoshake"
+	description = "A refreshing chocolate milkshake."
+	taste_description = "cold refreshing chocolate and cream"
+	color = "#8e6f44" // rgb(142, 111, 68)
+	adj_temp = -9
+
+	glass_name = "Chocolate Milkshake"
+	glass_desc = "A refreshing chocolate milkshake, just like mom used to make."
+
+/datum/reagent/drink/milkshake/berryshake
+	name = "Berry Milkshake"
+	id = "Berryshake"
+	description = "A refreshing berry milkshake."
+	taste_description = "cold refreshing berries and cream"
+	color = "#ffb2b2" // rgb(255, 178, 178)
+	adj_temp = -9
+
+	glass_name = "Berry Milkshake"
+	glass_desc = "A refreshing berry milkshake, just like mom used to make."
+
+/datum/reagent/drink/milkshake/coffeeshake
+	name = "Coffee Milkshake"
+	id = "coffeeshake"
+	description = "A refreshing coffee milkshake."
+	taste_description = "cold energizing coffee and cream"
+	color = "#8e6f44" // rgb(142, 111, 68)
+	adj_temp = -9
+	adj_dizzy = -5
+	adj_drowsy = -3
+	adj_sleepy = -2
+	overdose = 45
+
+	glass_name = "Coffee Milkshake"
+	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
+
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
 	id = "rewriter"
@@ -1288,42 +1325,6 @@
 	glass_name = "Ent's Draught"
 	glass_desc = "You can almost smell the tranquility emanating from this."
 
-/datum/reagent/drink/chocoshake
-	name = "Chocolate Milkshake"
-	id = "chocoshake"
-	description = "A refreshing chocolate milkshake."
-	taste_description = "cold refreshing chocolate and cream"
-	color = "#8e6f44" // rgb(142, 111, 68)
-	adj_temp = -9
-
-	glass_name = "Chocolate Milkshake"
-	glass_desc = "A refreshing chocolate milkshake, just like mom used to make."
-
-/datum/reagent/drink/berryshake
-	name = "Berry Milkshake"
-	id = "Berryshake"
-	description = "A refreshing berry milkshake."
-	taste_description = "cold refreshing berries and cream"
-	color = "#ffb2b2" // rgb(255, 178, 178)
-	adj_temp = -9
-
-	glass_name = "Berry Milkshake"
-	glass_desc = "A refreshing berry milkshake, just like mom used to make."
-
-/datum/reagent/drink/coffeeshake
-	name = "Coffee Milkshake"
-	id = "coffeeshake"
-	description = "A refreshing coffee milkshake."
-	taste_description = "cold energizing coffee and cream"
-	color = "#8e6f44" // rgb(142, 111, 68)
-	adj_temp = -9
-	adj_dizzy = -5
-	adj_drowsy = -3
-	adj_sleepy = -2
-	overdose = 45
-
-	glass_name = "Coffee Milkshake"
-	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
 
 /* Alcohol */
 
@@ -2678,7 +2679,7 @@
 	..()
 	if(alien == IS_DIONA)
 		return
-	M.reagents.add_reagent("slimejelly", 2)
+	M.reagents.add_reagent("slimejelly", 0.25)
 
 /datum/reagent/ethanol/cloverclub
 	name = "Clover Club"

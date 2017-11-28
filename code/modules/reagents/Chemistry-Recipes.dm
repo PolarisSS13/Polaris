@@ -2157,7 +2157,7 @@
 	id = "mintjulep"
 	result = "mintjulep"
 	required_reagents = list("whiskey" = 2, "water" = 1, "mint" = 1)
-	result_amount = 5
+	result_amount = 4
 
 /datum/chemical_reaction/drinks/paloma
 	name = "Paloma"
