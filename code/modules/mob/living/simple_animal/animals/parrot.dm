@@ -47,7 +47,7 @@
 	stop_automated_movement = 1
 	universal_speak = 1
 
-	has_langs = list("Bird")
+	has_langs = list("Bird", "Galactic Common")
 	speak_chance = 2
 	speak = list("Hi","Hello!","Cracker?","Bawk!")
 	speak_emote = list("squawks","says","yells")
@@ -651,7 +651,7 @@
 			var/obj/item/weapon/grenade/G = held_item
 			G.forceMove(src.loc)
 			G.prime()
-			to_chat(src, "You let go of the [held_item]!"
+			to_chat(src, "You let go of the [held_item]!")
 			held_item = null
 			return 1
 
