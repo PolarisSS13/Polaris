@@ -167,16 +167,6 @@
 	containername = "Security surplus equipment"
 	access = null
 
-/datum/supply_packs/security/camerapods
-	name = "Mobile camera pod crate"
-	contains = list(
-			/obj/item/weapon/storage/box/camerabug
-			)
-	cost = 15
-	containertype = "obj/structure/closet/crate/secure"
-	containername = "Mobile camera pod crate"
-	access = null
-
 /datum/supply_packs/security/detectivegear
 	name = "Forensic investigation equipment"
 	contains = list(
