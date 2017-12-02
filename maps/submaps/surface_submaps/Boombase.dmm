@@ -14,6 +14,7 @@
 "n" = (/obj/effect/decal/cleanable/dirt,/obj/effect/spider,/obj/item/weapon/material/shard,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "o" = (/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "p" = (/mob/living/simple_animal/hostile/giant_spider/phorogenic{returns_home = 1},/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
+"p" = (/mob/living/simple_animal/hostile/giant_spider/phorogenic,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "q" = (/obj/machinery/portable_atmospherics/canister/empty/phoron,/turf/simulated/floor/tiled/steel{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/submap/BoomBase)
 "r" = (/obj/machinery/portable_atmospherics/canister/empty/phoron,/obj/item/weapon/material/shard,/turf/simulated/floor/tiled/steel{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/submap/BoomBase)
 "s" = (/obj/item/weapon/material/shard,/turf/simulated/floor/plating,/area/submap/BoomBase)
@@ -33,6 +34,7 @@
 "G" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/outdoors/dirt,/area/submap/BoomBase)
 "H" = (/obj/structure/table,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "I" = (/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/giant_spider/phorogenic{returns_home = 1},/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
+"I" = (/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/giant_spider/phorogenic,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "J" = (/turf/simulated/floor/tiled/steel{tag = "icon-burned2"; icon_state = "burned2"},/area/submap/BoomBase)
 "K" = (/turf/simulated/floor/outdoors/rocks,/area/submap/BoomBase)
 "L" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/standard,/obj/item/weapon/tank/phoron,/obj/item/weapon/fuel_assembly/phoron,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
@@ -48,6 +50,14 @@
 "V" = (/obj/effect/spider/stickyweb,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/steel{tag = "icon-burned1"; icon_state = "burned1"},/area/submap/BoomBase)
 "W" = (/obj/effect/decal/remains/human,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/BoomBase)
 "X" = (/obj/structure/flora/tree/dead,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/BoomBase)
+"P" = (/obj/item/weapon/material/shard,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/BoomBase)
+"Q" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/plating,/area/submap/BoomBase)
+"R" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
+"S" = (/obj/effect/spider/stickyweb,/obj/item/weapon/material/shard,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
+"T" = (/obj/effect/spider/stickyweb,/mob/living/simple_animal/hostile/giant_spider/phorogenic,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
+"U" = (/obj/effect/spider/stickyweb,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/steel{tag = "icon-burned1"; icon_state = "burned1"},/area/submap/BoomBase)
+"V" = (/obj/effect/decal/remains/human,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/BoomBase)
+"W" = (/obj/structure/flora/tree/dead,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/BoomBase)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaa
@@ -69,5 +79,13 @@ abbbbbbAbuuuuuuuuuuAAToba
 abbbbbbfAbuuuuuuuuAAUVeba
 abbbbbbAfbuubbbuuuAeeheba
 abWbbbbbXbbbbbbuubbbbbbca
+abbbbeoNuuuuuKKOKuuuuuuba
+abbbPeAzuuuuuKKKKuuuubbba
+adbbbeQyuuuuuKuuuuuuubAba
+abbbbfAgbuuuuuuuuuuuuARba
+abbbbbbAbuuuuuuuuuuAASoba
+abbbbbbfAbuuuuuuuuAATUeba
+abbbbbbAfbuubbbuuuAeeheba
+abVbbbbbWbbbbbbuubbbbbbca
 aaaaaaaaaaaaaaaaaaaaaaaaa
 "}
