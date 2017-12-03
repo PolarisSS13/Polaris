@@ -258,6 +258,59 @@
 		M << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book")
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
 
+/obj/item/weapon/book/bundle
+	var/page = 1 //current page
+	var/list/pages = list() //the contents of each page
+
+/obj/item/weapon/book/bundle/proc/show_content(mob/user as mob)
+	var/dat
+	var/obj/item/weapon/W = pages[page]
+
+	// first
+	if(page == 1)
+		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Front</A></DIV>"
+		dat+= "<DIV STYLE='float:right; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+	// last
+	else if(page == pages.len)
+		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+		dat+= "<DIV STYLE='float:right; text-align:right; with:33.33333%'><A href='?src=\ref[src];next_page=1'>Back</A></DIV><BR><HR>"
+	// middle pages
+	else
+		dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+		dat+= "<DIV STYLE='float:right; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+
+	if(istype(pages[page], /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/P = W
+		if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/observer/dead) || istype(usr, /mob/living/silicon)))
+			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
+		else
+			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
+		user << browse(dat, "window=[name]")
+
+/obj/item/weapon/book/bundle/attack_self(mob/user as mob)
+	src.show_content(user)
+	add_fingerprint(usr)
+	update_icon()
+	return
+
+/obj/item/weapon/book/bundle/Topic(href, href_list)
+	if(..())
+		return 1
+	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
+		usr.set_machine(src)
+		if(href_list["next_page"])
+			if(page != pages.len)
+				page++
+				playsound(src.loc, "pageturn", 50, 1)
+		if(href_list["prev_page"])
+			if(page > 1)
+				page--
+				playsound(src.loc, "pageturn", 50, 1)
+		src.attack_self(usr)
+		updateUsrDialog()
+	else
+		to_chat(usr, "<span class='notice'>You need to hold it in hands!</span>")
+
 
 /*
  * Barcode Scanner

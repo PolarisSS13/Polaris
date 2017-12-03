@@ -13,6 +13,8 @@
 	attack_verb = list("bapped")
 	var/page = 1    // current page
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
+	var/hasphotos = 0
+	var/numphotos = 0
 
 
 /obj/item/weapon/paper_bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -59,6 +61,8 @@
 	if(istype(sheet, /obj/item/weapon/paper))
 		user << "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 	else if(istype(sheet, /obj/item/weapon/photo))
+		hasphotos = 1
+		numphotos = numphotos + 1
 		user << "<span class='notice'>You add [(sheet.name == "photo") ? "the photo" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 
 	user.drop_from_inventory(sheet)
@@ -165,6 +169,10 @@
 			pages.Remove(pages[page])
 
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
+			if(istype(W, /obj/item/weapon/photo))
+				numphotos = numphotos - 1
+				if(numphotos == 0)
+					hasphotos = 0
 
 			if(pages.len <= 1)
 				var/obj/item/weapon/paper/P = src[1]

@@ -457,17 +457,37 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	density = 1
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/paper))
-		user.drop_item()
-		O.loc = src
-		user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")
-		src.visible_message("[src] begins to hum as it warms up its printing drums.")
-		sleep(rand(200,400))
-		src.visible_message("[src] whirs as it prints and binds a new book.")
-		var/obj/item/weapon/book/b = new(src.loc)
-		b.dat = O:info
-		b.name = "Print Job #" + "[rand(100, 999)]"
-		b.icon_state = "book[rand(1,7)]"
-		qdel(O)
+	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/paper_bundle))
+		if(istype(O, /obj/item/weapon/paper))
+			user.drop_item()
+			O.loc = src
+			user.visible_message("[user] loads a sheet of paper into [src].", "You load a sheet of paper into [src].")
+			src.visible_message("[src] begins to hum as it warms up its printing drums.")
+			sleep(rand(200,400))
+			src.visible_message("[src] whirs as it prints and binds a new book.")
+			var/obj/item/weapon/book/b = new(src.loc)
+			b.dat = O:info
+			b.name = "Print Job #" + "[rand(100, 999)]"
+			b.icon_state = "book[rand(1,7)]"
+			qdel(O)
+		else //photos probably will not play nice with the sql database so make sure we don't have any
+			var/obj/item/weapon/paper_bundle/bundle = O
+			if(!bundle.hasphotos)
+				user.drop_item()
+				bundle.loc = src
+				user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")
+				src.visible_message("[src] begins to hum as it warms up its printing drums.")
+				sleep(rand(200,500))
+				src.visible_message("[src] whirs as it prints and binds a new book.")
+				var/obj/item/weapon/book/bundle/b = new(src.loc)
+				b.pages = bundle:pages
+				for(var/obj/item/weapon/paper/P in bundle.contents)
+					P.forceMove(b)
+				b.name = "Print Job #" + "[rand(100, 999)]"
+				b.icon_state = "book[rand(1,7)]"
+				qdel(O)
+			else
+				user.visible_message("<span class='warning'>You can't bind a book with photos in it! Remove the photo and try again.</span>")
+				return
 	else
 		..()
