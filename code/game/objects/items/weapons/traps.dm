@@ -57,7 +57,7 @@
 			"<span class='notice'>You begin disarming \the [src]!</span>",
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
-			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
 		if(do_after(user, 60))
 			user.visible_message(
