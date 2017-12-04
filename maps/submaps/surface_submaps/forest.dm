@@ -19,6 +19,7 @@
 #include "Blackshuttledown.dmm"
 #include "Lab1.dmm"
 #include "Rocky4.dmm"
+#include "DJOutpost1.dmm"
 
 #endif
 
