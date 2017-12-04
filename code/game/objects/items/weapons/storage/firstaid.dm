@@ -177,6 +177,7 @@
 	w_class = ITEMSIZE_SMALL
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1
+	allow_quick_empty = 1
 	use_to_pickup = 1
 	use_sound = null
 	max_storage_space = ITEMSIZE_COST_TINY * 14
