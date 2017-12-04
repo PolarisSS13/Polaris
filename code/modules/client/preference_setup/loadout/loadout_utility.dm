@@ -13,6 +13,11 @@
 	path = /obj/item/device/communicator
 	cost = 0
 
+/datum/gear/utility/communicator/watch
+	display_name = "communicator watch"
+	path = /obj/item/device/communicator/watch
+	cost = 0
+
 /datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
 	path = /obj/item/weapon/book/codex/lore/vir
