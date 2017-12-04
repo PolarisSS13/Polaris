@@ -20,7 +20,7 @@
 /mob/proc/changeling_resonant_shriek()
 	set category = "Changeling"
 	set name = "Resonant Shriek (20)"
-	set desc = "Emits a high-frequency sound that confuses and deafens organics, blows out nearby lights, and overloads synthetic's sensors."
+	set desc = "Emits a high-frequency sound that confuses and deafens organics, blows out nearby lights, and overloads synthetics' sensors."
 
 	var/datum/changeling/changeling = changeling_power(20,0,100,CONSCIOUS)
 	if(!changeling)	return 0
