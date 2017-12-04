@@ -114,7 +114,9 @@ FLOOR SAFES
 				tumbler_2_pos = decrement(tumbler_2_pos)
 				if(canhear)
 					user << "<span class='notice'>You hear a [pick("click", "chink", "clink")] from [src].</span>"
-			check_unlocked(user, canhear)
+			check_unlocked(user, canhear)		
+			playsound(user, 'sound/machines/click.ogg', 20, 1)
+
 		updateUsrDialog()
 		return
 
@@ -127,7 +129,8 @@ FLOOR SAFES
 			if(tumbler_1_pos == tumbler_2_pos - 37 || tumbler_1_pos == tumbler_2_pos + 35)
 				tumbler_2_pos = increment(tumbler_2_pos)
 				if(canhear)
-					user << "<span class='notice'>You hear a [pick("click", "chink", "clink")] from [src].</span>"
+					user << "<span class='notice'>You hear a [pick("click", "chink", "clink")] from [src].</span>"	
+					playsound(user, 'sound/machines/click.ogg', 20, 1)
 			check_unlocked(user, canhear)
 		updateUsrDialog()
 		return
