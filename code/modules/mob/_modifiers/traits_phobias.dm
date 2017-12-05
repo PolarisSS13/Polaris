@@ -359,7 +359,7 @@
 
 /datum/modifier/trait/phobia/blennophobe
 	name = "blennophobia"
-	desc = "Slimes are quite dangerous, but just the aspect of something being slimey is uncomfortable.."
+	desc = "Slimes are quite dangerous, but just the aspect of something being slimey is uncomfortable."
 	fear_decay_rate = 1
 
 	on_created_text = "<span class='warning'>You are disgusted and horrified by slime.</span>"
@@ -384,9 +384,8 @@
 		)
 
 	full_fear_up = list(
-		"<span class='danger'><font size='4'>The chittering is driving you mad!</font></span>",
-		"<span class='danger'><font size='4'>You're gonna be spider-food if you don't run!</font></span>",
-		"<span class='danger'><font size='4'>The spiders are gonna feast on your eyes!</font></span>"
+		"<span class='danger'><font size='4'>The slime is everywhere!</font></span>",
+		"<span class='danger'><font size='4'>You're gonna get absorbed if you don't get out!</font></span>"
 		)
 	full_fear_down = list(
 		"<span class='danger'>There must be more of that slime somewhere...</span>",
@@ -402,6 +401,15 @@
 		if(istype(thing, /obj/structure/blob)) // blobs are uncomfortable things
 			fear_amount += 3
 
+		if(istype(thing, /obj/effect/alien/resin)) // Resin's a bit slimy according to its own description.
+			fear_amount += 1
+
+		if(istype(thing, /obj/item/weed_extract))
+			fear_amount += 1
+
+		if(istype(thing, /obj/effect/decal/cleanable/mucus)) // Blennophobia apparently includes mucus, so!
+			fear_amount += 2
+
 		if(istype(thing, /obj/item/slime_extract)) // Gooey.
 			fear_amount += 1
 
@@ -409,7 +417,7 @@
 			fear_amount += 2
 
 		if(istype(thing, /obj/item/organ/internal/brain/slime))
-			fear_amount += 1
+			fear_amount += 2
 
 		if(istype(thing, /obj/item/clothing/head/collectable/slime)) // Some hats are spooky so people can be assholes with them.
 			fear_amount += 1
@@ -428,7 +436,7 @@
 			if(istype(S.species, /datum/species/skrell)) //Skrell ARE slimey.
 				fear_amount += 1
 			if(istype(S.species, /datum/species/shapeshifter/promethean))
-				fear_amount += 3
+				fear_amount += 4
 			else
 				return
 	return fear_amount
