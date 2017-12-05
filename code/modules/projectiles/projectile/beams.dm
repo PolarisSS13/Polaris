@@ -2,7 +2,7 @@
 	name = "laser"
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	damage = 40
+	damage = 30
 	damage_type = BURN
 	check_armour = "laser"
 	eyeblur = 4
@@ -33,12 +33,12 @@
 	damage = 15
 
 /obj/item/projectile/beam/burstlaser
-	damage = 30
+	damage = 25
 	armor_penetration = 10
 
 
 /obj/item/projectile/beam/midlaser
-	damage = 40
+	damage = 30
 	armor_penetration = 10
 
 /obj/item/projectile/beam/heavylaser
