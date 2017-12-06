@@ -18,7 +18,7 @@
 
 /obj/item/device/flash/proc/clown_check(var/mob/user)
 	if(user && (CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>\The [src] slips out of your hand.</span>"
+		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
 		user.drop_item()
 		return 0
 	return 1
@@ -51,8 +51,8 @@
 			return TRUE
 	else	//can only use it 10 times a minute
 		if(user)
-			to_chat(user, "<span class='warning'>*click* *click*</span>")
-			playsound(src.loc, 'sound/machines/click.ogg', 100, 1)
+			to_chat(user, "<span class='warning'><i>click</i></span>")
+			playsound(src.loc, 'sound/weapons/empty.ogg', 80, 1)
 		return FALSE
 
 //attack_as_weapon
