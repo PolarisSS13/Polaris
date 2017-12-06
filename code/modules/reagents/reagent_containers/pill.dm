@@ -31,12 +31,12 @@
 				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 				return
 
-		to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
-		M.drop_from_inventory(src) //icon update
-		if(reagents.total_volume)
-			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
-		qdel(src)
-		return 1
+			to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
+			M.drop_from_inventory(src) //icon update
+			if(reagents.total_volume)
+				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
+			qdel(src)
+			return 1
 
 	else if(istype(M, /mob/living/carbon/human))
 

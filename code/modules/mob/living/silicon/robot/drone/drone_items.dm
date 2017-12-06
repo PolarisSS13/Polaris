@@ -204,11 +204,12 @@
 		wrapped.force = 0.0
 		if(QDELETED(wrapped) || wrapped.loc != src.loc)	 //qdel check here so it doesn't duplicate/spawn ghost items
 			wrapped = null
-		wrapped.attack(M,user)
-		M.attackby(wrapped, user)	//attackby reportedly gets procced by being clicked on, at least according to Anewbe.
-		if(QDELETED(wrapped) || wrapped.loc != src.loc)
-			wrapped = null
-		return 1
+		else
+			wrapped.attack(M,user)
+			M.attackby(wrapped, user)	//attackby reportedly gets procced by being clicked on, at least according to Anewbe.
+			if(QDELETED(wrapped) || wrapped.loc != src.loc)
+				wrapped = null
+			return 1
 	return 0
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
