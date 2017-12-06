@@ -139,11 +139,11 @@
 
 /obj/random/medical/item_to_spawn()
 	return pick(prob(21);/obj/random/medical/lite,
-				prob(6);/obj/random/medical/pillbottle,
+				prob(5);/obj/random/medical/pillbottle,
 				prob(1);/obj/item/weapon/storage/pill_bottle/tramadol,
 				prob(1);/obj/item/weapon/storage/pill_bottle/antitox,
 				prob(1);/obj/item/weapon/storage/pill_bottle/carbon,
-				prob(4);/obj/item/bodybag/cryobag,
+				prob(3);/obj/item/bodybag/cryobag,
 				prob(5);/obj/item/weapon/reagent_containers/syringe/antitoxin,
 				prob(3);/obj/item/weapon/reagent_containers/syringe/antiviral,
 				prob(5);/obj/item/weapon/reagent_containers/syringe/inaprovaline,
