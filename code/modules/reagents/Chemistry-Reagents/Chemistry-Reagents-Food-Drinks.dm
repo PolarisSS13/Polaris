@@ -1324,6 +1324,16 @@
 
 	glass_name = "Ent's Draught"
 	glass_desc = "You can almost smell the tranquility emanating from this."
+	
+/datum/reagent/drink/lovepotion
+	name = "Love Potion"
+	id = "lovepotion"
+	description = "Creamy strawberries and sugar, simple and sweet."
+	taste_description = "strawberries and cream"
+	color = "#fc8a8a" // rrgb(252, 138, 138)
+
+	glass_name = "Love Potion"
+	glass_desc = "Love me tender, love me sweet."
 
 
 /* Alcohol */
@@ -2783,3 +2793,15 @@
 	
 	glass_name = "Cold Front"
 	glass_desc = "Minty, rich, and painfully cold. It's a blizzard in a cup."
+	
+/datum/reagent/ethanol/mintjulep
+	name = "Mint Julep"
+	id = "mintjulep"
+	description = "Minty and refreshing, perfect for a hot day."
+	taste_description = "refreshing mint"
+	color = "#bbfc8a" // rgb(187, 252, 138)
+	strength = 25
+	adj_temp = -5
+	
+	glass_name = "Mint Julep"
+	glass_desc = "Minty and refreshing, perfect for a hot day."
