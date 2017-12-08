@@ -101,7 +101,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 	
-/datum/robolimb/cybersolutions_alt1
+/datum/robolimb/cybersolutions_alt2
 	company = "Cyber Solutions - Wight"
 	desc = "This limb has cheap plastic panels, mounted on grey metal."
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
