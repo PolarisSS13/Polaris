@@ -412,10 +412,9 @@
 	desc = "Ion Jetpack"
 	desc = "Using directed ion bursts and cunning solar wind reflection technique, this device enables controlled space flight."
 	id = "mech_jetpack"
-	req_tech = list(TECH_PHORON = 1, TECH_POWER= 2, TECH_ENGINEERING = 3, TECH_MAGNET = 2)
+	req_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 4) //One less magnet than the actual got-damn teleporter.
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/jetpack
-	materials = list(DEFAULT_WALL_MATERIAL = 7500, "silver" = 375, "glass" = 750)
-
+	materials = list(DEFAULT_WALL_MATERIAL = 7500, "silver" = 300, "glass" = 600)
 
 /datum/design/item/mecha/phoron_generator
 	desc = "Phoron Reactor"
