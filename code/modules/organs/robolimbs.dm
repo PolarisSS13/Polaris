@@ -103,7 +103,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	
 /datum/robolimb/cybersolutions_alt1
 	company = "Cyber Solutions - Wight"
-	desc = "This limb has cheap plastic panels, mounted on grey metal."
+	desc = "This limb has cheap plastic panels mounted on grey metal."
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
 	unavailable_to_build = 1
 
