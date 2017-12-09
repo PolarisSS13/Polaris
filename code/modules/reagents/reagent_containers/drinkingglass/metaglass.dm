@@ -9,40 +9,40 @@
 	matter = list("glass" = 500)
 	icon = 'icons/obj/drinks.dmi'
 
-	on_reagent_change()
-		if (reagents.reagent_list.len > 0)
-			var/datum/reagent/R = reagents.get_master_reagent()
+/obj/item/weapon/reagent_containers/food/drinks/metaglass/on_reagent_change()
+	if (reagents.reagent_list.len > 0)
+		var/datum/reagent/R = reagents.get_master_reagent()
 
-			if(R.glass_icon_state)
-				icon_state = R.glass_icon_state
-			else
-				icon_state = "glass_brown"
-
-			if(R.glass_name)
-				name = R.glass_name
-			else
-				name = "Glass of.. what?"
-
-			if(R.glass_desc)
-				desc = R.glass_desc
-			else
-				desc = "You can't really tell what this is."
-
-			if(R.glass_center_of_mass)
-				center_of_mass = R.glass_center_of_mass
-			else
-				center_of_mass = list("x"=16, "y"=10)
-
-			if(R.price_tag)
-				price_tag = R.price_tag
-			else
-				price_tag = null
+		if(R.glass_icon_state)
+			icon_state = R.glass_icon_state
 		else
-			icon_state = "glass_empty"
-			name = "metamorphic glass"
-			desc = "This glass changes shape and form depending on the drink inside... fancy!"
+			icon_state = "glass_brown"
+
+		if(R.glass_name)
+			name = R.glass_name
+		else
+			name = "Glass of.. what?"
+
+		if(R.glass_desc)
+			desc = R.glass_desc
+		else
+			desc = "You can't really tell what this is."
+
+		if(R.glass_center_of_mass)
+			center_of_mass = R.glass_center_of_mass
+		else
 			center_of_mass = list("x"=16, "y"=10)
-			return
+
+		if(R.price_tag)
+			price_tag = R.price_tag
+		else
+			price_tag = null
+	else
+		icon_state = "glass_empty"
+		name = "metamorphic glass"
+		desc = "This glass changes shape and form depending on the drink inside... fancy!"
+		center_of_mass = list("x"=16, "y"=10)
+		return
 
 
 /*
