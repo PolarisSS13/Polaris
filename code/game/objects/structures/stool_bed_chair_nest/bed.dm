@@ -95,7 +95,7 @@
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
 		if(padding_material)
-			to_chat(user, "\The [src] is already padded.")
+			user << "\The [src] is already padded."
 			return
 		var/obj/item/stack/C = W
 		if(C.get_amount() < 1) // How??
@@ -110,21 +110,21 @@
 			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
-			to_chat(user, "You cannot pad \the [src] with that.")
+			user << "You cannot pad \the [src] with that."
 			return
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
-		to_chat(user, "You add padding to \the [src].")
+		user << "You add padding to \the [src]."
 		add_padding(padding_type)
 		return
 
 	else if (istype(W, /obj/item/weapon/wirecutters))
 		if(!padding_material)
-			to_chat(user, "\The [src] has no padding to remove.")
+			user << "\The [src] has no padding to remove."
 			return
-		to_chat(user, "You remove the padding from \the [src].")
+		user << "You remove the padding from \the [src]."
 		playsound(src.loc, W.usesound, 100, 1)
 		remove_padding()
 
@@ -132,7 +132,7 @@
 		var/obj/item/weapon/grab/G = W
 		var/mob/living/affecting = G.affecting
 		if(buckled_mob) //Handles trying to buckle someone else to a chair when someone else is on it
-			to_chat(user, "<span class='notice'>\The [src] already has someone buckled to it.</span>")
+			user  << "<span class='notice'>\The [src] already has someone buckled to it.</span>"
 			return
 		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
 		if(do_after(user, 20, G.affecting))
@@ -220,7 +220,7 @@
 			user_unbuckle_mob(user)
 		else
 			visible_message("[user] collapses \the [src.name].")
-			new rollertype(get_turf(src))
+			new bedtype(get_turf(src))
 			spawn(0)
 				qdel(src)
 		return
@@ -246,7 +246,7 @@
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
-			to_chat(user, "<span class='notice'>You collect the roller bed.</span>")
+			user << "<span class='notice'>You collect the roller bed.</span>"
 			src.loc = RH
 			RH.held = src
 			return
@@ -275,11 +275,11 @@
 /obj/item/roller_holder/attack_self(mob/user as mob)
 
 	if(!held)
-		to_chat(user, "<span class='notice'>The rack is empty.</span>")
+		user << "<span class='notice'>The rack is empty.</span>"
 		return
 
-	to_chat(user, "<span class='notice'>You deploy the roller bed.</span>")
-	var/obj/structure/bed/roller/R = new held.bedtype(user.loc)
+	user << "<span class='notice'>You deploy the roller bed.</span>"
+	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
 	R.add_fingerprint(user)
 	qdel(held)
 	held = null
