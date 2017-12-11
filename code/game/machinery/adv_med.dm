@@ -88,7 +88,7 @@
 		return 0
 	for(var/mob/living/simple_animal/slime/M in range(1, O))
 		if(M.victim == O)
-			to_chat(user, "<span class='danger'>[O] has a fucking slime attached to them, deal with that first.</span>")
+			to_chat(user, "<span class='danger'>[O] has a slime attached to them, deal with that first.</span>")
 			return 0
 
 	if(O == user)
