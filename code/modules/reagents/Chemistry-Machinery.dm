@@ -288,7 +288,7 @@
 	var/obj/item/weapon/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
-	var/list/sheet_reagents = list(
+	var/list/sheet_reagents = list( //have a number of reageents divisible by REAGENTS_PER_SHEET (default 20) unless you like decimals
 		/obj/item/stack/material/iron = list("iron"),
 		/obj/item/stack/material/uranium = list("uranium"),
 		/obj/item/stack/material/phoron = list("phoron"),
@@ -297,10 +297,11 @@
 		/obj/item/stack/material/platinum = list("platinum"),
 		/obj/item/stack/material/mhydrogen = list("hydrogen"),
 		/obj/item/stack/material/steel = list("iron", "carbon"),
-		/obj/item/stack/material/plasteel = list("iron", "carbon", "platinum"),
+		/obj/item/stack/material/plasteel = list("iron", "iron", "carbon", "carbon", "platinum"), //8 iron, 8 carbon, 4 platinum
 		/obj/item/stack/material/snow = list("water"),
 		/obj/item/stack/material/sandstone = list("silicon", "oxygen"),
 		/obj/item/stack/material/glass = list("silicon"),
+		/obj/item/stack/material/glass/phoronglass = list("platinum", "silicon", "silicon", "silicon"), //5 platinum, 15 silicon
 		)
 
 /obj/machinery/reagentgrinder/New()
@@ -503,7 +504,7 @@
 			var/obj/item/stack/stack = O
 			if(istype(stack))
 				var/list/sheet_components = sheet_reagents[stack.type]
-				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/(REAGENTS_PER_SHEET*sheet_components.len))))
+				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
 					if(QDELETED(stack))
@@ -511,7 +512,7 @@
 					if(islist(sheet_reagents[stack.type]))
 						amount_to_take = (amount_to_take/(sheet_components.len))
 						for(var/i in sheet_reagents[stack.type])
-							beaker.reagents.add_reagent(i, (amount_to_take*REAGENTS_PER_SHEET*sheet_components.len))
+							beaker.reagents.add_reagent(i, (amount_to_take*REAGENTS_PER_SHEET))
 					else
 						beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
 					continue
