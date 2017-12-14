@@ -297,11 +297,11 @@
 		/obj/item/stack/material/platinum = list("platinum"),
 		/obj/item/stack/material/mhydrogen = list("hydrogen"),
 		/obj/item/stack/material/steel = list("iron", "carbon"),
-		/obj/item/stack/material/plasteel = list("iron", "iron", "carbon", "carbon", "platinum"), //8 iron, 8 carbon, 4 platinum
+		/obj/item/stack/material/plasteel = list("iron", "iron", "carbon", "carbon", "platinum"), //8 iron, 8 carbon, 4 platinum,
 		/obj/item/stack/material/snow = list("water"),
 		/obj/item/stack/material/sandstone = list("silicon", "oxygen"),
 		/obj/item/stack/material/glass = list("silicon"),
-		/obj/item/stack/material/glass/phoronglass = list("platinum", "silicon", "silicon", "silicon"), //5 platinum, 15 silicon
+		/obj/item/stack/material/glass/phoronglass = list("platinum", "silicon", "silicon", "silicon"), //5 platinum, 15 silicon,
 		)
 
 /obj/machinery/reagentgrinder/New()
