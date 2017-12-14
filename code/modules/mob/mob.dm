@@ -582,7 +582,7 @@
 		if(M.grabbed_by.len)
 			// Only start pulling when nobody else has a grab on them
 			. = 1
-			for(var/obj/item/weapon/grab/G in M.grabbed_by)
+			for(var/obj/item/grab/G in M.grabbed_by)
 				if(G.assailant != usr)
 					. = 0
 				else

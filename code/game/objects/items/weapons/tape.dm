@@ -11,8 +11,8 @@
 		if(istype(user, /mob/living/silicon/robot))
 			can_place = 1
 		else
-			for (var/obj/item/weapon/grab/G in H.grabbed_by)
-				if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+			for (var/obj/item/grab/G in H.grabbed_by)
+				if (G.loc == user && G.force_danger())
 					can_place = 1
 					break
 		if(!can_place)
@@ -43,8 +43,8 @@
 				if(istype(user, /mob/living/silicon/robot))
 					can_place = 1
 				else
-					for (var/obj/item/weapon/grab/G in H.grabbed_by)
-						if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+					for (var/obj/item/grab/G in H.grabbed_by)
+						if (G.loc == user && G.force_danger())
 							can_place = 1
 
 				if(!can_place)
@@ -80,8 +80,8 @@
 				if(istype(user, /mob/living/silicon/robot))
 					can_place = 1
 				else
-					for (var/obj/item/weapon/grab/G in H.grabbed_by)
-						if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+					for (var/obj/item/grab/G in H.grabbed_by)
+						if (G.loc == user && G.force_danger())
 							can_place = 1
 
 				if(!can_place)
@@ -101,8 +101,8 @@
 				if(istype(user, /mob/living/silicon/robot))
 					can_place = 1
 				else
-					for (var/obj/item/weapon/grab/G in H.grabbed_by)
-						if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+					for (var/obj/item/grab/G in H.grabbed_by)
+						if (G.loc == user && G.force_danger())
 							can_place = 1
 
 				if(!can_place)

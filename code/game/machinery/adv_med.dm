@@ -36,8 +36,8 @@
 		return
 	else if(default_deconstruction_crowbar(user, G))
 		return
-	else if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/H = G
+	else if(istype(G, /obj/item/grab))
+		var/obj/item/grab/H = G
 		if(panel_open)
 			to_chat(user, "<span class='notice'>Close the maintenance panel first.</span>")
 			return

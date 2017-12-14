@@ -235,20 +235,11 @@
 		var/mob/M = A
 		if(istype(A, /mob/living))
 			//if they have a neck grab on someone, that person gets hit instead
-			var/obj/item/weapon/grab/G = locate() in M
-			if(G && G.state >= GRAB_NECK)
-				if(G.affecting.stat == DEAD)
-					var/shield_chance = min(80, (30 * (M.mob_size / 10)))	//Small mobs have a harder time keeping a dead body as a shield than a human-sized one. Unathi would have an easier job, if they are made to be SIZE_LARGE in the future. -Mech
-					if(prob(shield_chance))
-						visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
-						if(Bump(G.affecting, forced=1))
-							return
-					else
-						visible_message("<span class='danger'>\The [M] tries to use [G.affecting] as a shield, but fails!</span>")
-				else
-					visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
-					if(Bump(G.affecting, forced=1))
-						return //If Bump() returns 0 (keep going) then we continue on to attack M.
+			var/obj/item/grab/G = locate() in M
+			if(G && G.shield_assailant())
+				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				if(Bump(G.affecting, forced=1))
+					return //If Bump() returns 0 (keep going) then we continue on to attack M.
 
 			passthrough = !attack_mob(M, distance)
 		else

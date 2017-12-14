@@ -8,7 +8,9 @@
 #define NO_EMBED		  0x40	 // Can step on broken glass with no ill-effects and cannot have shrapnel embedded in it.
 #define NO_HALLUCINATION  0x80	 // Don't hallucinate, ever
 #define NO_BLOOD		  0x100  // Never bleed, never show blood amount
-#define UNDEAD			  0x200	 // Various things that living things don't do, mostly for skeletons
+#define CAN_NAB           0x200  // Uses the nab special grab set
+#define NO_BLOCK          0x400  // Can't block stuff
+#define UNDEAD			  0x800	 // Various things that living things don't do, mostly for skeletons
 // unused: 0x8000 - higher than this will overflow
 
 // Species spawn flags

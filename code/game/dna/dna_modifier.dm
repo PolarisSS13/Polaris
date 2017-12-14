@@ -134,9 +134,9 @@
 		item.loc = src
 		user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
 		return
-	else if (!istype(item, /obj/item/weapon/grab))
+	else if (!istype(item, /obj/item/grab))
 		return
-	var/obj/item/weapon/grab/G = item
+	var/obj/item/grab/G = item
 	if (!ismob(G.affecting))
 		return
 	if (src.occupant)

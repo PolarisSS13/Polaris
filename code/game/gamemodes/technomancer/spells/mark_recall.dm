@@ -89,7 +89,7 @@
 			var/turf/target_turf = get_turf(mark_spell_ref)
 			var/turf/old_turf = get_turf(user)
 
-			for(var/obj/item/weapon/grab/G in user.contents) // People the Technomancer is grabbing come along for the ride.
+			for(var/obj/item/grab/G in user.contents) // People the Technomancer is grabbing come along for the ride.
 				if(G.affecting)
 					G.affecting.forceMove(locate( target_turf.x+rand(-1,1), target_turf.y+rand(-1,1), target_turf.z))
 					G.affecting << "<span class='warning'>You are teleported along with [user]!</span>"

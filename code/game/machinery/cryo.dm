@@ -179,8 +179,8 @@
 		user.drop_item()
 		G.loc = src
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
-	else if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/grab = G
+	else if(istype(G, /obj/item/grab))
+		var/obj/item/grab/grab = G
 		if(!ismob(grab.affecting))
 			return
 		for(var/mob/living/simple_animal/slime/M in range(1,grab.affecting))

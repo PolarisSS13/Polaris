@@ -14,7 +14,7 @@
 	var/datum/changeling/changeling = changeling_power(0,0,100)
 	if(!changeling)	return
 
-	var/obj/item/weapon/grab/G = src.get_active_hand()
+	var/obj/item/grab/G = src.get_active_hand()
 	if(!istype(G))
 		src << "<span class='warning'>We must be grabbing a creature in our active hand to absorb them.</span>"
 		return
@@ -33,7 +33,7 @@
 			src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 			return
 
-	if(G.state != GRAB_KILL)
+	if(!G.can_absorb())
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"
 		return
 
@@ -61,7 +61,7 @@
 					T:UpdateDamageIcon()
 
 		feedback_add_details("changeling_powers","A[stage]")
-		if(!do_mob(src, T, 150) || G.state != GRAB_KILL)
+		if(!do_mob(src, T, 150))
 			src << "<span class='warning'>Our absorption of [T] has been interrupted!</span>"
 			changeling.isabsorbing = 0
 			return

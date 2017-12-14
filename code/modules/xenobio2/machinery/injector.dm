@@ -125,7 +125,7 @@
 	if(panel_open)
 		user << "<span class='warning'>Close the panel first!</span>"
 
-	var/obj/item/weapon/grab/G = W
+	var/obj/item/grab/G = W
 
 	if(!istype(G))
 		return ..()

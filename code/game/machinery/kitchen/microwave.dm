@@ -145,8 +145,8 @@
 				user << "<span class='warning'>Your [O] contains components unsuitable for cookery.</span>"
 				return 1
 		return
-	else if(istype(O,/obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = O
+	else if(istype(O,/obj/item/grab))
+		var/obj/item/grab/G = O
 		user << "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>"
 		return 1
 	else

@@ -40,8 +40,8 @@
 			siemens = gloves.siemens_coefficient
 
 		//If we're grabbing someone, electrocute them.
-		if(istype(held_item,/obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = held_item
+		if(istype(held_item,/obj/item/grab))
+			var/obj/item/grab/G = held_item
 			if(G.affecting)
 				G.affecting.electrocute_act(10 * siemens, src, 1.0, BP_TORSO, 0)
 				var/agony = 80 * siemens //Does more than if hit with an electric hand, since grabbing is slower.

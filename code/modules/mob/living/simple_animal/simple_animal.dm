@@ -540,12 +540,7 @@
 				M.visible_message("<span class='warning'>[M] tries to grab [src] but fails!</span>")
 				return
 
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
-
-			M.put_in_active_hand(G)
-
-			G.synch()
-			G.affecting = src
+			M.make_grab(M, src)
 			LAssailant = M
 
 			M.visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
