@@ -1,7 +1,7 @@
 /obj/item/integrated_circuit/memory
 	name = "memory chip"
 	desc = "This tiny chip can store one piece of data."
-	icon_state = "memory"
+	icon_state = "memory1"
 	complexity = 1
 	inputs = list()
 	outputs = list()
@@ -40,8 +40,15 @@
 		O.push_data()
 	activate_pin(2)
 
+/obj/item/integrated_circuit/memory/tiny
+	name = "small memory circuit"
+	desc = "This circuit can store two pieces of data."
+	icon_state = "memory2"
+	power_draw_per_use = 2
+	number_of_pins = 2
+
 /obj/item/integrated_circuit/memory/medium
-	name = "memory circuit"
+	name = "medium memory circuit"
 	desc = "This circuit can store four pieces of data."
 	icon_state = "memory4"
 	power_draw_per_use = 2

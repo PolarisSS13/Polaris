@@ -30,6 +30,8 @@
 	var/tail_animation                                   // If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
+	var/icon_scale = 1                                   // Makes the icon larger/smaller.
+
 	var/race_key = 0       	                             // Used for mob icon cache string.
 	var/icon/icon_template                               // Used for mob icon generation for non-32x32 species.
 	var/mob_size	= MOB_MEDIUM
@@ -37,6 +39,7 @@
 	var/virus_immune
 	var/short_sighted                                    // Permanent weldervision.
 	var/blood_volume = 560                               // Initial blood volume.
+	var/bloodloss_rate = 1								 // Multiplier for how fast a species bleeds out. Higher = Faster
 	var/hunger_factor = 0.05                             // Multiplier for hunger.
 
 	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
