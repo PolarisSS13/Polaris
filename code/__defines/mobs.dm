@@ -34,8 +34,9 @@
 #define STANCE_FOLLOW    6	// Following somone
 #define STANCE_BUSY      7	// Do nothing on life ticks (Other code is running)
 
-#define LEFT  1
-#define RIGHT 2
+#define LEFT  0x1
+#define RIGHT 0x2
+#define UNDER 0x4
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
