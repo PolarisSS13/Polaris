@@ -159,6 +159,8 @@
 
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
+	var/list/skin_overlays = list()
+	var/has_floating_eyes = 0     // Whether the eyes can be shown above other icons
 	var/water_movement = 0		  // How much faster or slower the species is in water
 	var/snow_movement = 0		  // How much faster or slower the species is on snow
 
@@ -367,3 +369,9 @@
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
+
+/datum/species/proc/update_skin(var/mob/living/carbon/human/H)
+	return
+
+/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
+	return
