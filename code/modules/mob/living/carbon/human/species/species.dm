@@ -375,3 +375,18 @@
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
+	return FALSE
+
+// Used for any extra behaviour when falling and to see if a species will fall at all.
+/datum/species/proc/can_fall(var/mob/living/carbon/human/H)
+	return TRUE
+
+// Used to find a special target for falling on, such as pouncing on someone from above.
+/datum/species/proc/find_fall_target_special(src, landing)
+	return FALSE
+
+// Used to override normal fall behaviour. Use only when the species does fall down a level.
+/datum/species/proc/fall_impact_special(var/mob/living/carbon/human/H, var/atom/A)
+	return FALSE
