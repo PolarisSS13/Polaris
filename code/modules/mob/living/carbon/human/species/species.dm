@@ -158,6 +158,7 @@
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
+	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 	var/water_movement = 0		  // How much faster or slower the species is in water
 	var/snow_movement = 0		  // How much faster or slower the species is on snow
 
@@ -359,3 +360,10 @@
 // Called when lying down on a water tile.
 /datum/species/proc/can_breathe_water()
 	return FALSE
+
+// Impliments different trails for species depending on if they're wearing shoes.
+/datum/species/proc/get_move_trail(var/mob/living/carbon/human/H)
+	if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
+		return /obj/effect/decal/cleanable/blood/tracks/footprints
+	else
+		return move_trail
