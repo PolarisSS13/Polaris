@@ -509,12 +509,12 @@
 					stack.use(amount_to_take)
 					if(QDELETED(stack))
 						holdingitems -= stack
-					if(islist(sheet_reagents[stack.type]))
+					if(islist(sheet_components))
 						amount_to_take = (amount_to_take/(sheet_components.len))
-						for(var/i in sheet_reagents[stack.type])
+						for(var/i in sheet_components)
 							beaker.reagents.add_reagent(i, (amount_to_take*REAGENTS_PER_SHEET))
 					else
-						beaker.reagents.add_reagent(sheet_reagents[stack.type], (amount_to_take*REAGENTS_PER_SHEET))
+						beaker.reagents.add_reagent(sheet_components, (amount_to_take*REAGENTS_PER_SHEET))
 					continue
 
 		if(O.reagents)
