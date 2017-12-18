@@ -30,7 +30,7 @@
 	var/kit_name
 	var/kit_desc
 	var/kit_icon
-	var/additional_data
+	var/additional_data //for modular modkits, item path; for mech modkits, allowed mechs; for voidsuit modkits, light overlays
 
 /datum/custom_item/proc/spawn_item(var/newloc)
 	var/obj/item/citem = new item_path(newloc)
