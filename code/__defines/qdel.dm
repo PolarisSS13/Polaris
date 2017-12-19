@@ -15,3 +15,5 @@
 
 #define QDELETED(X) (!X || X.gc_destroyed)
 #define QDESTROYING(X) (!X || X.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
+
+#define QDEL_NULL(item) qdel(item); item = null

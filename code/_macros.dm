@@ -2,6 +2,8 @@
 
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
+#define span(class, text) ("<span class='[class]'>[text]</span>")
+
 #define get_turf(A) get_step(A,0)
 
 #define isAI(A) istype(A, /mob/living/silicon/ai)
@@ -88,3 +90,5 @@
 #define LAZYCLEARLIST(L) if(L) L.Cut()
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
+
+#define isopenturf(target) istype(target, /turf/simulated/open)
