@@ -23,9 +23,10 @@
 	var/obj/structure/hoist/source_hoist
 	can_buckle = 1
 	anchored = 1
+	description_info = "Click and drag someone (or any object) to this to attach them to the clamp. If you are within reach, when you click and drag this to a turf adjacent to you, it will move the attached object there and release it."
 
 /obj/effect/hoist_hook/attack_hand(mob/living/user)
-	return // no, bad
+	return // This has to be overridden so that it works properly.
 
 /obj/effect/hoist_hook/MouseDrop_T(atom/movable/AM,mob/user)
 	if (use_check(user, USE_DISALLOW_SILICONS))
@@ -84,7 +85,7 @@
 	if (. && !QDELETED(source_hoist))
 		var/mob/M = .
 		source_hoist.hoistee = null
-		ADD_FALLING_ATOM(M)	// fuck you, you fall now!
+		ADD_FALLING_ATOM(M)
 
 /obj/structure/hoist
 	icon = 'icons/obj/hoists.dmi'
@@ -97,6 +98,7 @@
 	var/atom/movable/hoistee
 	var/movedir = UP
 	var/obj/effect/hoist_hook/source_hook
+	description_info = "Click this to raise or lower the hoist, or to switch directions if it can't move any further. It can also be collapsed into a hoist kit."
 
 /obj/structure/hoist/Initialize(mapload, ndir)
 	. = ..()
@@ -248,7 +250,7 @@
 				return 0
 	if (!dest) // can't move if there's nothing to move to
 		return 0
-	return 1 // i thought i could trust myself to write something as simple as this, guess i was wrong
+	return 1
 
 /obj/structure/hoist/proc/move_dir(direction, ishoisting)
 	var/can = can_move_dir(direction)
