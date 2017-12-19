@@ -241,12 +241,12 @@
 	var/turf/dest = direction == UP ? GetAbove(source_hook) : GetBelow(source_hook)
 	switch(direction)
 		if (UP)
-			if (!isopenturf(dest)) // can't move into a solid tile
+			if (!isopenspace(dest)) // can't move into a solid tile
 				return 0
 			if (source_hook in get_step(src, dir)) // you don't get to move above the hoist
 				return 0
 		if (DOWN)
-			if (!isopenturf(get_turf(source_hook))) // can't move down through a solid tile
+			if (!isopenspace(get_turf(source_hook))) // can't move down through a solid tile
 				return 0
 	if (!dest) // can't move if there's nothing to move to
 		return 0
