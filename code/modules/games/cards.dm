@@ -65,7 +65,8 @@
 	..()
 
 /obj/item/weapon/deck/attack_hand(mob/user as mob)
-	if(istype(src.loc, /obj/item/weapon/storage) || src.loc == user.r_store || src.loc == user.l_store) // so objects can be removed from storage containers or pockets
+	var/mob/living/carbon/human/H = user
+	if(istype(src.loc, /obj/item/weapon/storage) || src.loc == H.r_store || src.loc == H.l_store) // so objects can be removed from storage containers or pockets
 		..()
 	else // but if they're not, or are in your hands, you can still draw cards.
 		draw_card()
