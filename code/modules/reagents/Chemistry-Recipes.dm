@@ -410,6 +410,13 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
+/datum/chemical_reaction/saline
+	name = "Saline"
+	id = "saline"
+	result = "saline"
+	required_reagents = list("sodiumchloride" = 1, "water" = 3)
+	result_amount = 4
+
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
 	id = "spaceacillin"
@@ -2172,7 +2179,7 @@
 	result = "mojito"
 	required_reagents = list("rum" = 3, "limejuice" = 1, "mint" = 1)
 	result_amount = 5
-	
+
 /datum/chemical_reaction/drinks/piscosour
 	name = "Pisco Sour"
 	id = "piscosour"
@@ -2186,8 +2193,8 @@
 	result = "coldfront"
 	required_reagents = list("icecoffee" = 1, "whiskey" = 1, "mint" = 1)
 	result_amount = 3
-	
-	
+
+
 //R-UST Port
 /datum/chemical_reaction/hyrdophoron
 	name = "Hydrophoron"

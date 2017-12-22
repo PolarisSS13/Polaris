@@ -202,6 +202,32 @@
 		M.heal_organ_damage(30 * removed, 30 * removed)
 		M.adjustToxLoss(-30 * removed)
 
+/datum/reagent/saline
+	name = "Saline"
+	id = "saline"
+	description = "A mixture of sodium chloride in water, saline can be used to treat minor eye and brain trauma. It's really just salt-water."
+	taste_description = "salt"
+	reagent_state = LIQUID
+	color = "#F4F4F4"
+	scannable = 1
+
+/datum/reagent/saline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	M.adjustBrainLoss(-1 * removed)
+	M.eye_blurry = max(M.eye_blurry - 1, 0)
+	M.AdjustBlinded(-1)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
+		if(istype(E))
+			if(E.robotic >= ORGAN_ROBOT)
+				return
+			if(E.damage > 0)
+				E.damage = max(E.damage - 1 * removed, 0)
+			if(E.damage <= 1 && E.organ_tag == O_EYES)
+				H.sdisabilities &= ~BLIND
+
 /* Painkillers */
 
 /datum/reagent/paracetamol
