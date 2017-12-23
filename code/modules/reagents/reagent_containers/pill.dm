@@ -157,7 +157,7 @@
 
 /obj/item/weapon/reagent_containers/pill/paracetamol
 	name = "Paracetamol pill"
-	desc = "Tylenol! A painkiller for the ages. Chewables! Contains 15 units of Paracetamol."
+	desc = "Paracetamol! A painkiller for the ages. Chewables! Contains 15 units of Paracetamol."
 	icon_state = "pill8"
 
 /obj/item/weapon/reagent_containers/pill/paracetamol/New()
