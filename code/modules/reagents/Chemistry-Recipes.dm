@@ -410,13 +410,6 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/datum/chemical_reaction/saline
-	name = "Saline"
-	id = "saline"
-	result = "saline"
-	required_reagents = list("sodiumchloride" = 1, "water" = 3)
-	result_amount = 4
-
 /datum/chemical_reaction/spaceacillin
 	name = "Spaceacillin"
 	id = "spaceacillin"
