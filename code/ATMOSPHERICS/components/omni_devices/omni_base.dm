@@ -86,7 +86,7 @@
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	playsound(src, W.usesound, 50, 1)
 	if(do_after(user, 40 * W.toolspeed))
 		user.visible_message( \

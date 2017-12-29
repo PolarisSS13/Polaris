@@ -138,7 +138,7 @@
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	if (connected_device)
-		user << "<span class='warning'>You cannot unwrench \the [src], dettach \the [connected_device] first.</span>"
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], dettach \the [connected_device] first.</span>")
 		return 1
 	if (locate(/obj/machinery/portable_atmospherics, src.loc))
 		return 1
@@ -147,7 +147,7 @@
 		add_fingerprint(user)
 		return 1
 	playsound(src, W.usesound, 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	if (do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \

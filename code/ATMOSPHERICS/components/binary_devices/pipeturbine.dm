@@ -87,7 +87,7 @@
 		if(istype(W, /obj/item/weapon/wrench))
 			anchored = !anchored
 			playsound(src, W.usesound, 50, 1)
-			user << "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>"
+			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 
 			if(anchored)
 				if(dir & (NORTH|SOUTH))
@@ -260,7 +260,7 @@
 			anchored = !anchored
 			playsound(src, W.usesound, 50, 1)
 			turbine = null
-			user << "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>"
+			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 			updateConnection()
 		else
 			..()
