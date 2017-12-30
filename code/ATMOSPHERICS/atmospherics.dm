@@ -33,6 +33,7 @@ Pipelines + Other Objects -> Pipe network
 	var/obj/machinery/atmospherics/node2
 
 /obj/machinery/atmospherics/New()
+	..()
 	if(!icon_manager)
 		icon_manager = new()
 
@@ -42,7 +43,11 @@ Pipelines + Other Objects -> Pipe network
 
 	if(!pipe_color_check(pipe_color))
 		pipe_color = null
-	..()
+	init_dir()
+
+// This is used to set up what directions pipes will connect to.  Should be called inside New() and whenever a dir changes.
+/obj/machinery/atmospherics/proc/init_dir()
+	return
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/pipe_painter))

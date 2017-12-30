@@ -46,10 +46,6 @@
 /obj/machinery/atmospherics/tvalve/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/tvalve/New()
-	init_dir()
-	..()
-
 /obj/machinery/atmospherics/tvalve/init_dir()
 	switch(dir)
 		if(NORTH)
@@ -188,26 +184,21 @@
 	var/node2_dir
 	var/node3_dir
 
-	init_dir()
-
 	node1_dir = turn(dir, 180)
 	node2_dir = turn(dir, -90)
 	node3_dir = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node3 = target

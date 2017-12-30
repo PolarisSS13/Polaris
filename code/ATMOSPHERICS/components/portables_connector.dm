@@ -21,10 +21,6 @@
 /obj/machinery/atmospherics/portables_connector/init_dir()
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/portables_connector/New()
-	init_dir()
-	..()
-
 /obj/machinery/atmospherics/portables_connector/update_icon()
 	icon_state = "connector"
 
@@ -78,12 +74,9 @@
 	if(node)
 		return
 
-	init_dir()
-
 	var/node_connect = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node = target

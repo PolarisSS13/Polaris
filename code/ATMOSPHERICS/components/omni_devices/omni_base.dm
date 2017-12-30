@@ -252,7 +252,6 @@
 		if(P.node || P.mode == 0)
 			continue
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
-			target.init_dir()
 			if(target.initialize_directions & get_dir(target,src))
 				if (check_connect_types(target,src))
 					P.node = target

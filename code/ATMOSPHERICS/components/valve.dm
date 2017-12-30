@@ -141,7 +141,6 @@
 	return
 
 /obj/machinery/atmospherics/valve/initialize()
-	init_dir()
 	normalize_dir()
 
 	var/node1_dir
@@ -155,13 +154,11 @@
 				node2_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node1 = target
 				break
 	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		target.init_dir()
 		if(target.initialize_directions & get_dir(target,src))
 			if (check_connect_types(target,src))
 				node2 = target
