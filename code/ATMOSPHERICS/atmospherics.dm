@@ -10,9 +10,6 @@ Pipelines + Other Objects -> Pipe network
 
 */
 /obj/machinery/atmospherics
-
-	auto_init = 0
-
 	anchored = 1
 	idle_power_usage = 0
 	active_power_usage = 0
@@ -47,6 +44,14 @@ Pipelines + Other Objects -> Pipe network
 
 // This is used to set up what directions pipes will connect to.  Should be called inside New() and whenever a dir changes.
 /obj/machinery/atmospherics/proc/init_dir()
+	return
+
+// Initializes nodes by looking at neighboring atmospherics machinery to connect to.
+// When we're being constructed at runtime, atmos_init() is called by the construction code.
+// When dynamically loading a map atmos_init is called by the maploader (initTemplateBounds proc)
+// But during initial world creation its called by the master_controller.
+// TODO - Consolidate these different ways of being called once SSatoms is created.
+/obj/machinery/atmospherics/proc/atmos_init()
 	return
 
 /obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)

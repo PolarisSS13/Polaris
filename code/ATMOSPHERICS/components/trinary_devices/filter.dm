@@ -247,9 +247,7 @@ obj/machinery/atmospherics/trinary/atmos_filter/m_filter/init_dir()
 		if(WEST)
 			initialize_directions = WEST|SOUTH|EAST
 
-/obj/machinery/atmospherics/trinary/atmos_filter/m_filter/initialize()
-	set_frequency(frequency)
-
+/obj/machinery/atmospherics/trinary/atmos_filter/m_filter/atmos_init()
 	if(node1 && node2 && node3) return
 
 	var/node1_connect = turn(dir, -180)

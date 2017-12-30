@@ -41,7 +41,7 @@
 
 	node = null
 
-/obj/machinery/atmospherics/unary/initialize()
+/obj/machinery/atmospherics/unary/atmos_init()
 	if(node)
 		return
 
