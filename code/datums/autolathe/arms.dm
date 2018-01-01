@@ -81,17 +81,6 @@
 
 /////// 9mm
 
-/obj/item/ammo_magazine/m9mm/flash
-	ammo_type =/obj/item/ammo_casing/a9mmf
-
-/obj/item/ammo_magazine/m9mm/rubber
-	name = "magazine (9mm rubber)"
-	ammo_type =/obj/item/ammo_casing/a9mmr
-
-/obj/item/ammo_magazine/m9mm/practice
-	name = "magazine (9mm practice)"
-	ammo_type =/obj/item/ammo_casing/a9mmp
-
 /datum/category_item/autolathe/arms/pistol_9mm
 	name = "pistol magazine (9mm)"
 	path =/obj/item/ammo_magazine/m9mm
