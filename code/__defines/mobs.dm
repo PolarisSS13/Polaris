@@ -228,3 +228,9 @@
 #define SLIME_COMMAND_OBEY		1 // When disciplined.
 #define SLIME_COMMAND_FACTION	2 // When in the same 'faction'.
 #define SLIME_COMMAND_FRIEND	3 // When befriended with a slime friendship agent.
+
+// Movement states
+#define M_SPRINT	1
+#define M_RUN		2
+#define M_WALK		3
+#define M_STALK		4

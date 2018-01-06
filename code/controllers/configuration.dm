@@ -146,8 +146,10 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
+	var/sprint_speed = 0
 	var/run_speed = 0
 	var/walk_speed = 0
+	var/stalk_speed = 0
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -769,10 +771,14 @@ var/list/gamemode_cache = list()
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
+				if("sprint_speed")
+					config.sprint_speed = value
 				if("run_speed")
 					config.run_speed = value
 				if("walk_speed")
 					config.walk_speed = value
+				if("stalk_speed")
+					config.stalk_speed = value
 
 				if("human_delay")
 					config.human_delay = value

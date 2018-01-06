@@ -117,7 +117,7 @@
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
 	var/m_int = null//Living
-	var/m_intent = "run"//Living
+	var/m_intent = 3//Living
 	var/lastKnownIP = null
 	var/obj/buckled = null//Living
 
