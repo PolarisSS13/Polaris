@@ -82,7 +82,6 @@
 
 /datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) //This used to do just toxin. That's boring. Let's make this FUN.
 	if(issmall(M)) removed *= 2
-	M.nutrition += nutriment_factor * removed
 	var/strength_mod = 3 //Alcohol is 3x stronger when injected into the veins.
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
