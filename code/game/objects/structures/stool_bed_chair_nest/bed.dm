@@ -128,8 +128,8 @@
 		playsound(src.loc, W.usesound, 100, 1)
 		remove_padding()
 
-	else if(istype(W, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
+	else if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
 		var/mob/living/affecting = G.affecting
 		if(buckled_mob) //Handles trying to buckle someone else to a chair when someone else is on it
 			to_chat(user, "<span class='notice'>\The [src] already has someone buckled to it.</span>")

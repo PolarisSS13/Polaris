@@ -30,6 +30,8 @@ var/list/organ_cache = list()
 	var/rejecting                     // Is this organ already being rejected?
 	var/preserved = 0                 // If this is 1, prevents organ decay.
 
+	var/list/assists_languages = list()
+
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null

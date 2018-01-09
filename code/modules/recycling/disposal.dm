@@ -116,7 +116,7 @@
 			update()
 			return
 
-	var/obj/item/weapon/grab/G = I
+	var/obj/item/grab/G = I
 	if(istype(G))	// handle grabbed mob
 		if(ismob(G.affecting))
 			var/mob/GM = G.affecting

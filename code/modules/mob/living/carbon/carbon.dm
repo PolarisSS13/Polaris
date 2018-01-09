@@ -336,8 +336,8 @@
 	if(!item) return
 
 	var/throw_range = item.throw_range
-	if (istype(item, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = item
+	if (istype(item, /obj/item/grab))
+		var/obj/item/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
 		if(ismob(item))
 			var/mob/M = item
@@ -413,7 +413,11 @@
 	return
 
 //generates realistic-ish pulse output based on preset levels
-/mob/living/carbon/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+	var/obj/item/organ/internal/heart/H = internal_organs_by_name["heart"]
+	if(H.open && !method)
+		return "muddled and unclear; you can't seem to find a vein"
+
 	var/temp = 0								//see setup.dm:694
 	switch(src.pulse)
 		if(PULSE_NONE)
@@ -484,3 +488,7 @@
 	if(isSynthetic())
 		return 0
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/proc/need_breathe()
+	return
+

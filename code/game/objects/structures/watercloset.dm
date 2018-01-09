@@ -53,14 +53,14 @@
 			update_icon()
 			return
 
-	if(istype(I, /obj/item/weapon/grab))
+	if(istype(I, /obj/item/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
-		var/obj/item/weapon/grab/G = I
+		var/obj/item/grab/G = I
 
 		if(isliving(G.affecting))
 			var/mob/living/GM = G.affecting
 
-			if(G.state>1)
+			if(G.force_danger())
 				if(!GM.loc == get_turf(src))
 					to_chat(user, "<span class='notice'>[GM.name] needs to be on the toilet.</span>")
 					return
@@ -102,11 +102,11 @@
 	anchored = 1
 
 /obj/structure/urinal/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 		if(isliving(G.affecting))
 			var/mob/living/GM = G.affecting
-			if(G.state>1)
+			if(G.force_danger())
 				if(!GM.loc == get_turf(src))
 					to_chat(user, "<span class='notice'>[GM.name] needs to be on the urinal.</span>")
 					return

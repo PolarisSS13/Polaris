@@ -90,12 +90,12 @@
 	return 1
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
-	var/obj/item/weapon/grab/G = W
+	var/obj/item/grab/G = W
 
 	if(!istype(G))
 		return ..()
 
-	if(G.state < 2)
+	if(G.force_danger())
 		user << "<span class='danger'>You need a better grip to do that!</span>"
 		return
 

@@ -6,6 +6,7 @@
 	organ_tag = O_HEART
 	parent_organ = BP_TORSO
 	dead_icon = "heart-off"
+	var/open
 
 
 /obj/item/organ/internal/heart/handle_germ_effects()

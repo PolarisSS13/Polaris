@@ -47,7 +47,7 @@
 		//Now let's try to teleport a living mob.
 		else if(istype(hit_atom, /mob/living))
 			var/mob/living/L = hit_atom
-			L << "<span class='danger'>You are teleported towards \the [user].</span>"
+			to_chat(L, "<span class='danger'>You are teleported towards \the [user].</span>")
 			var/datum/effect/effect/system/spark_spread/s1 = new /datum/effect/effect/system/spark_spread
 			var/datum/effect/effect/system/spark_spread/s2 = new /datum/effect/effect/system/spark_spread
 			s1.set_up(2, 1, user)
@@ -57,22 +57,17 @@
 			L.throw_at(get_step(get_turf(src),get_turf(L)), 4, 1, src)
 			user.drop_item(src)
 			src.loc = null
+			if(istype(user, /mob/living))
+				var/mob/living/U = user
+				spawn(1 SECOND)
+					if(!user.Adjacent(L))
+						to_chat(src, "<span class='warning'>\The [L] is out of your reach.</span>")
+						qdel(src)
+						return
 
-			spawn(1 SECOND)
-				if(!user.Adjacent(L))
-					user << "<span class='warning'>\The [L] is out of your reach.</span>"
+					L.Weaken(3)
+					user.visible_message("<span class='warning'><b>\The [user]</b> seizes [L]!</span>")
+
+					U.make_grab(user, L)
+
 					qdel(src)
-					return
-
-				L.Weaken(3)
-				user.visible_message("<span class='warning'><b>\The [user]</b> seizes [L]!</span>")
-
-				var/obj/item/weapon/grab/G = new(user,L)
-
-				user.put_in_hands(G)
-
-				G.state = GRAB_PASSIVE
-				G.icon_state = "grabbed1"
-				G.synch()
-				qdel(src)
-

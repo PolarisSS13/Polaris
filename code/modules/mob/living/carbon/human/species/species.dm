@@ -52,10 +52,12 @@
 	var/language = LANGUAGE_GALCOM         // Default racial language, if any.
 	var/species_language = LANGUAGE_GALCOM	// Used on the Character Setup screen
 	var/list/secondary_langs = list()        // The names of secondary languages that are available to this species.
+	var/assisted_langs = list()               // The languages the species can't speak without an assisted organ.
 	var/list/speech_sounds                   // A list of sounds to potentially play when speaking.
 	var/list/speech_chance                   // The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0          // How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM    // The language to use when determining names for this species, or null to use the first name/last name generator
+	var/additional_langs                      // Any other languages the species always gets.
 
 	//Soundy emotey things.
 	var/scream_verb = "screams"
@@ -148,6 +150,8 @@
 	var/hud_type
 	var/health_hud_intensity = 1  // This modifies how intensely the health hud is colored.
 
+	var/grab_type = GRAB_NORMAL        // The species' default grab type.
+
 	// Body/form vars.
 	var/list/inherent_verbs 	  // Species-specific verbs.
 	var/has_fine_manipulation = 1 // Can use small items.
@@ -182,6 +186,7 @@
 		O_EYES =     /obj/item/organ/internal/eyes
 		)
 	var/vision_organ              // If set, this organ is required for vision. Defaults to "eyes" if the species has them.
+	var/breathing_organ           // If set, this organ is required for breathing. Defaults to "lungs" if the species has them.
 
 	var/list/has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
@@ -216,6 +221,9 @@
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[O_EYES])
 		vision_organ = O_EYES
+	//If the species has lungs, they are the default breathing organ
+	if(!breathing_organ && has_organ[O_LUNGS])
+		breathing_organ = O_LUNGS
 
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
@@ -325,6 +333,9 @@
 /datum/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
 	return
 
+/datum/species/proc/handle_movement_delay_special(var/mob/living/carbon/human/H)
+	return 0
+
 // Used to update alien icons for aliens.
 /datum/species/proc/handle_login_special(var/mob/living/carbon/human/H)
 	return
@@ -344,7 +355,7 @@
 // Called when using the shredding behavior.
 /datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
 
-	if(!ignore_intent && H.a_intent != I_HURT)
+	if((!ignore_intent && H.a_intent != I_HURT) || H.pulling_punches)
 		return 0
 
 	for(var/datum/unarmed_attack/attack in unarmed_attacks)

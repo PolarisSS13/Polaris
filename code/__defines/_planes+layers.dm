@@ -52,3 +52,7 @@ What is the naming convention for planes or layers?
 #define OPENSPACE_PLANE -25 // /turf/simulated/open will use OPENSPACE_PLANE + z (Valid z's being 2 thru 17)
 
 #define OVER_OPENSPACE_PLANE -7
+
+/atom/proc/reset_plane_and_layer()
+	plane = initial(plane)
+	layer = initial(layer)

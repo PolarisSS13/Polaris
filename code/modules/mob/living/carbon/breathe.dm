@@ -5,9 +5,9 @@
 	if(air_master.current_cycle%4==2 || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 		breathe()
 
-/mob/living/carbon/proc/breathe()
+/mob/living/carbon/proc/breathe(var/active_breathe = 1)
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(!should_have_organ(O_LUNGS)) return
+	if(!need_breathe()) return
 
 	var/datum/gas_mixture/breath = null
 
@@ -17,7 +17,7 @@
 
 	if(losebreath>0) //Suffocating so do not take a breath
 		AdjustLosebreath(-1)
-		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
+		if (prob(10) && active_breathe) //Gasp per 10 ticks? Sounds about right.
 			spawn emote("gasp")
 	else
 		//Okay, we can breathe, now check if we can get air

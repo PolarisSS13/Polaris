@@ -146,8 +146,8 @@
 			return
 		if(default_part_replacement(user, O))
 			return
-		if (istype(O, /obj/item/weapon/grab) && get_dist(src,user)<2)
-			var/obj/item/weapon/grab/G = O
+		if (istype(O, /obj/item/grab) && get_dist(src,user)<2)
+			var/obj/item/grab/G = O
 			if(istype(G.affecting,/mob/living))
 				var/mob/living/M = G.affecting
 				qdel(O)

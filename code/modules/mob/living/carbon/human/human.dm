@@ -741,7 +741,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation)
+	if(species.has_fine_manipulation && !nabbing)
 		return 1
 	if(!silent)
 		src << "<span class='warning'>You don't have the dexterity to use that!</span>"
@@ -1101,7 +1101,6 @@
 		usr << "<span class='warning'>You failed to check the pulse. Try again.</span>"
 
 /mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour)
-
 	if(!dna)
 		if(!new_species)
 			new_species = "Human"
@@ -1123,6 +1122,8 @@
 			remove_language(species.language)
 		if(species.default_language)
 			remove_language(species.default_language)
+		for(var/datum/language/L in species.assisted_langs)
+			remove_language(L)
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
 		holder_type = null
@@ -1131,8 +1132,16 @@
 
 	if(species.language)
 		add_language(species.language)
+		species_language = all_languages[species.language]
+
+	for(var/L in species.additional_langs)
+		add_language(L)
 
 	if(species.default_language)
+		add_language(species.default_language)
+
+	if(species.grab_type)
+		current_grab_type = all_grabobjects[species.grab_type]
 		add_language(species.default_language)
 
 	if(species.icon_scale != 1)
@@ -1488,6 +1497,9 @@
 
 	if(stat) return
 	pulling_punches = !pulling_punches
+	if(species.flags & CAN_NAB)
+		nabbing = !pulling_punches
+
 	src << "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>"
 	return
 
@@ -1526,3 +1538,9 @@
 		var/obj/item/clothing/accessory/permit/drone/permit = new(T)
 		permit.set_name(real_name)
 		equip_to_appropriate_slot(permit) // If for some reason it can't find room, it'll still be on the floor.
+
+/mob/living/carbon/human/need_breathe()
+	if(species.breathing_organ)
+		return 1
+	else
+		return 0

@@ -148,7 +148,7 @@
 		data["health"] = occupant.health
 		data["maxHealth"] = occupant.getMaxHealth()
 		if(iscarbon(occupant))
-			var/mob/living/carbon/C = occupant
+			var/mob/living/carbon/human/C = occupant
 			data["pulse"] = C.get_pulse(GETPULSE_TOOL)
 		data["brute"] = occupant.getBruteLoss()
 		data["burn"] = occupant.getFireLoss()
@@ -206,8 +206,8 @@
 
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
 	add_fingerprint(user)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 		if(G.affecting)
 			go_in(G.affecting, user)
 	else if(default_deconstruction_screwdriver(user, I))

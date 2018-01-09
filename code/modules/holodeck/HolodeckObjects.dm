@@ -128,31 +128,6 @@
 	item_state = "boxing"
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
-	if(!istype(W)) return//I really wish I did not need this
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if(istype(G.affecting,/mob/living))
-			var/mob/living/M = G.affecting
-			var/state = G.state
-			qdel(W)	//gotta delete it here because if window breaks, it won't get deleted
-			switch (state)
-				if(1)
-					M.visible_message("<span class='warning'>[user] slams [M] against \the [src]!</span>")
-					M.apply_damage(7)
-					hit(10)
-				if(2)
-					M.visible_message("<span class='danger'>[user] bashes [M] against \the [src]!</span>")
-					if (prob(50))
-						M.Weaken(1)
-					M.apply_damage(10)
-					hit(25)
-				if(3)
-					M.visible_message("<span class='danger'><big>[user] crushes [M] against \the [src]!</big></span>")
-					M.Weaken(5)
-					M.apply_damage(20)
-					hit(50)
-			return
-
 	if(W.flags & NOBLUDGEON) return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
@@ -302,22 +277,6 @@
 	anchored = 1
 	density = 1
 	throwpass = 1
-
-/obj/structure/holohoop/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if(G.state<2)
-			user << "<span class='warning'>You need a better grip to do that!</span>"
-			return
-		G.affecting.loc = src.loc
-		G.affecting.Weaken(5)
-		visible_message("<span class='warning'>[G.assailant] dunks [G.affecting] into the [src]!</span>", 3)
-		qdel(W)
-		return
-	else if (istype(W, /obj/item) && get_dist(src,user)<2)
-		user.drop_item(src.loc)
-		visible_message("<span class='notice'>[user] dunks [W] into the [src]!</span>", 3)
-		return
 
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if (istype(mover,/obj/item) && mover.throwing)

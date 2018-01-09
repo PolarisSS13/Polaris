@@ -6,6 +6,7 @@
 
 	if(species.slowdown)
 		tally = species.slowdown
+		tally += species.handle_movement_delay_special(src)
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 

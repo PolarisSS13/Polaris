@@ -227,15 +227,15 @@
 			return
 
 	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
+	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
+		var/obj/item/grab/G = W
 		if (istype(G.affecting, /mob/living))
 			var/mob/living/M = G.affecting
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
 				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
 				return
-			if (G.state < 2)
+			if (G.force_danger())
 				if(user.a_intent == I_HURT)
 					if (prob(15))	M.Weaken(5)
 					M.apply_damage(8,def_zone = "head")

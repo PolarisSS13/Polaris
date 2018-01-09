@@ -56,7 +56,7 @@ default behaviour is:
 			spread_fire(tmob)
 
 			for(var/mob/living/M in range(tmob, 1))
-				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
+				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
 					now_pushing = 0
@@ -145,7 +145,7 @@ default behaviour is:
 						return
 				step(AM, t)
 				if(ishuman(AM) && AM:grabbed_by)
-					for(var/obj/item/weapon/grab/G in AM:grabbed_by)
+					for(var/obj/item/grab/G in AM:grabbed_by)
 						step(G:assailant, get_dir(G:assailant, AM))
 						G.adjust_position()
 				now_pushing = 0
@@ -826,7 +826,7 @@ default behaviour is:
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/weapon/grab/G in grabbed_by)
+	for(var/obj/item/grab/G in grabbed_by)
 		resisting++
 		G.handle_resist()
 	if(resisting)
@@ -977,10 +977,12 @@ default behaviour is:
 	else
 		density = initial(density)
 
-	for(var/obj/item/weapon/grab/G in grabbed_by)
-		if(G.state >= GRAB_AGGRESSIVE)
+	for(var/obj/item/grab/G in grabbed_by)
+		if(G.stop_move())
 			canmove = 0
-			break
+
+		if(G.force_stand())
+			lying = 0
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.

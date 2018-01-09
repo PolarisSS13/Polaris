@@ -277,8 +277,8 @@
 	RefreshParts()
 
 /obj/machinery/xenobio/editor/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
+	if(istype(W,/obj/item/grab))
+		var/obj/item/grab/G = W
 		if(occupant)
 			user << "There is already an organism loaded."
 			return

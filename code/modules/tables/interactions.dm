@@ -77,8 +77,8 @@
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
+	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
+		var/obj/item/grab/G = W
 		if (istype(G.affecting, /mob/living))
 			var/mob/living/M = G.affecting
 			var/obj/occupied = turf_is_crowded()
@@ -87,7 +87,7 @@
 				return
 			if(!user.Adjacent(M))
 				return
-			if (G.state < 2)
+			if (G.force_danger())
 				if(user.a_intent == I_HURT)
 					if (prob(15))	M.Weaken(5)
 					M.apply_damage(8,def_zone = BP_HEAD)
@@ -105,13 +105,11 @@
 							M.apply_damage(10, def_zone = BP_HEAD)
 							if(prob(2))
 								M.embed(S, def_zone = BP_HEAD)
+
 				else
-					user << "<span class='danger'>You need a better grip to do that!</span>"
-					return
-			else if(G.state > GRAB_AGGRESSIVE || world.time >= (G.last_action + UPGRADE_COOLDOWN))
-				M.forceMove(get_turf(src))
-				M.Weaken(5)
-				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+					M.forceMove(get_turf(src))
+					M.Weaken(5)
+					visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
 			qdel(W)
 			return
 

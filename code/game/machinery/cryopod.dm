@@ -474,9 +474,9 @@
 
 /obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 
-	if(istype(G, /obj/item/weapon/grab))
+	if(istype(G, /obj/item/grab))
 
-		var/obj/item/weapon/grab/grab = G
+		var/obj/item/grab/grab = G
 		if(occupant)
 			user << "<span class='notice'>\The [src] is in use.</span>"
 			return
