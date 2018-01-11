@@ -49,6 +49,14 @@
 		icon_state = "trashbag2"
 	else icon_state = "trashbag3"
 
+/obj/item/weapon/storage/bag/trash/attackby(var/obj/O, mob/user as mob)
+	if(isprox(O))
+		to_chat(user, "You add [O] to [src].")
+		qdel(O)
+		user.put_in_hands(new /obj/item/weapon/trash_sensor)
+		user.drop_from_inventory(src)
+		qdel(src)
+		return
 
 // -----------------------------
 //        Plastic Bag
