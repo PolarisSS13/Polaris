@@ -47,7 +47,7 @@
 
 /obj/singularity/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
 	consume(user)
@@ -169,7 +169,7 @@
 				pixel_y = -64
 				grav_pull = 8
 				consume_range = 2
-				dissipate_delay = 10
+				dissipate_delay = 4
 				dissipate_track = 0
 				dissipate_strength = 20
 				overlays = 0
@@ -268,6 +268,8 @@
 
 /obj/singularity/proc/eat()
 	for(var/atom/X in orange(grav_pull, src))
+		if(X.type == /atom/movable/lighting_overlay) //since there's one on every turf
+			continue
 		var/dist = get_dist(X, src)
 		var/obj/singularity/S = src
 		if(!istype(src))
