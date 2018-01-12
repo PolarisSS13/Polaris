@@ -267,21 +267,15 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
-		if(X.type == /atom/movable/lighting_overlay) //since there's one on every turf
+	for(var/T in orange(grav_pull, src))
+		var/atom/X = T
+		if(!X.simulated)
 			continue
 		var/dist = get_dist(X, src)
-		var/obj/singularity/S = src
-		if(!istype(src))
-			return
 		if(dist > consume_range)
-			X.singularity_pull(S, current_size)
-		else if(dist <= consume_range)
+			X.singularity_pull(src, current_size)
+		else
 			consume(X)
-
-	//for (var/turf/T in trange(grav_pull, src)) //TODO: Create a similar trange for orange to prevent snowflake of self check.
-	//	consume(T)
-
 	return
 
 /obj/singularity/proc/consume(const/atom/A)
