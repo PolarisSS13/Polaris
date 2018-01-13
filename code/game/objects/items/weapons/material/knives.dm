@@ -101,3 +101,4 @@
 	item_state = "knife"
 	applies_material_colour = FALSE
 	should_cleave = FALSE
+	toolspeed = 2 // Use a real axe if you want to chop logs.
