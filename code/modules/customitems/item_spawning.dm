@@ -12,8 +12,10 @@
 // Mech kits must have mech icons in CUSTOM_ITEM_OBJ under [kit_icon].
 // Broken must be [kit_icon]-broken and open must be [kit_icon]-open.
 
-// Hardsuit kits must also have hardsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
-// and [kit_icon]_helmet, and in CUSTOM_ITEM_OBJ as [kit_icon].
+// Voidsuits and hooded kits must also have hardsuit icons in CUSTOM_ITEM_MOB as [kit_icon]_suit
+// and [kit_icon]_helmet, and in CUSTOM_ITEM_OBJ as [kit_icon]_suit.
+// If hooded, have [kit_icon]_suit_t in both files for the hood-up version.
+// If not using the default overlay, have [kit_icon]_light in both files for custom light overlays.
 
 /var/list/custom_items = list()
 

@@ -66,7 +66,7 @@
 	var/new_light_overlay
 
 /obj/item/device/kit/suit/can_customize(var/obj/item/I)
-	return istype(I, /obj/item/clothing/head/helmet/space/void) || istype(I, /obj/item/clothing/suit/space/void)
+	return istype(I, /obj/item/clothing/head/helmet/space/void) || istype(I, /obj/item/clothing/suit/space/void) || istype(I, /obj/item/clothing/suit/storage/hooded/explorer)
 
 /obj/item/device/kit/suit/set_info(var/kit_name, var/kit_desc, var/kit_icon, var/kit_icon_file = CUSTOM_ITEM_OBJ, var/kit_icon_override_file = CUSTOM_ITEM_MOB, var/additional_data)
 	..()
@@ -92,6 +92,26 @@
 			var/mob/living/carbon/human/H = user
 			if(istype(H))
 				helmet.species_restricted = list(H.species.get_bodytype(H))
+		else if(istype(I, /obj/item/clothing/suit/storage/hooded))
+			var/obj/item/clothing/suit/storage/hooded/suit = I
+			suit.name = "[new_name] suit"
+			suit.desc = new_desc
+			suit.icon_state = "[new_icon]_suit"
+			suit.toggleicon = "[new_icon]_suit"
+			suit.item_state = "[new_icon]_suit"
+			var/obj/item/clothing/head/hood/S = suit.hood
+			S.icon_state = "[new_icon]_helmet"
+			S.item_state = "[new_icon]_helmet"
+			if(new_icon_file)
+				suit.icon = new_icon_file
+				S.icon = new_icon_file
+			if(new_icon_override_file)
+				suit.icon_override = new_icon_override_file
+				S.icon_override = new_icon_override_file
+			to_chat(user, "You set about modifying the suit into [suit].")
+			var/mob/living/carbon/human/H = user
+			if(istype(H))
+				suit.species_restricted = list(H.species.get_bodytype(H))
 		else
 			var/obj/item/clothing/suit/space/void/suit = I
 			suit.name = "[new_name] voidsuit"
@@ -121,6 +141,14 @@
 		kit.customize(src, user)
 		return
 	return ..()
+
+/obj/item/clothing/suit/storage/hooded/attackby(var/obj/item/O, var/mob/user)
+	if(istype(O,/obj/item/device/kit/suit))
+		var/obj/item/device/kit/suit/kit = O
+		kit.customize(src, user)
+		return
+	return ..()
+
 
 /obj/item/device/kit/paint
 	name = "mecha customisation kit"
