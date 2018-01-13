@@ -174,24 +174,6 @@
 
 /datum/riding/boat/big // 'Big' boats can hold up to five people.
 
-/* Boat seats are divided like so.
-
-N      S
-  |
- /1\   /---\
-|3X2|  |4 5|
-|5 4|  |2X3|
-\---/   \1/
-         |
-E     W
-/--     --\
-|53\   /24|
-| X1- -1X |
-|42/   \35|
-\--     --/
-
-*/
-
 /datum/riding/boat/big/get_offsets(pass_index) // list(dir = x, y, layer)
 	var/H = 12 // Horizontal seperation. Halved when facing up-down.
 	var/V = 4 // Vertical seperation.
