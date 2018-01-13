@@ -316,7 +316,7 @@
 /obj/item/weapon/gun/projectile/p92x
 	name = "9mm pistol"
 	desc = "A widespread sidearm called the P92X which is used by military, police, and security forces across the galaxy. Uses 9mm rounds."
-	icon_state = "beretta" // It's not an actual Beretta, but the sprite was based on one, plus a few creative liberties.
+	icon_state = "p92x"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "9mm"
 	load_method = MAGAZINE
@@ -332,7 +332,7 @@
 		icon_state = "[initial(icon_state)]-e"
 
 /obj/item/weapon/gun/projectile/p92x/brown
-	icon_state = "beretta-brown"
+	icon_state = "p92x-brown"
 
 /obj/item/weapon/gun/projectile/p92x/large
 	magazine_type = /obj/item/ammo_magazine/m9mm/large // Spawns with illegal magazines.
