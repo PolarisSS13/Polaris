@@ -1131,7 +1131,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	desc = "A personal device used to enable long range dialog between two people, utilizing existing telecommunications infrastructure to allow \
 	communications across different stations, planets, or even star systems. You can wear this one on your wrist!"
 	icon = 'icons/obj/device.dmi'
-	icon_state = "communicator"
+	icon_state = "commwatch"
 	slot_flags = SLOT_GLOVES
 
 /obj/item/device/communicator/watch/update_icon()
