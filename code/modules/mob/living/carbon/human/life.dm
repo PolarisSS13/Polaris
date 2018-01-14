@@ -1712,7 +1712,7 @@
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
-	update_icons()
+	update_icons_huds()
 
 /mob/living/carbon/human/handle_stunned()
 	if(!can_feel_pain())
