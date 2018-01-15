@@ -1,5 +1,5 @@
 obj/item/weapon/chainsaw
-	name = "Chainsaw"
+	name = "chainsaw"
 	desc = "Vroom vroom."
 	icon_state = "chainsaw0"
 	item_state = "chainsaw0"
@@ -97,9 +97,10 @@ obj/item/weapon/chainsaw/process()
 	if(on)
 		if(get_fuel() > 0)
 			reagents.remove_reagent("fuel", 1)
+			playsound(src, 'sound/weapons/chainsaw_turnoff.ogg',15,1)
 		if(get_fuel() <= 0)
 			to_chat(usr, "\The [src] sputters to a stop!")
-			on = !on
+			turnOff()
 
 obj/item/weapon/chainsaw/proc/get_fuel()
 	return reagents.get_reagent_amount("fuel")
