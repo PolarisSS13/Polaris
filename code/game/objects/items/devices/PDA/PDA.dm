@@ -642,10 +642,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		data["feed"] = feed
 
-//	var/PDA_Manifest_Array[0]
-//	for(var/cat in PDA_Manifest)
-//		PDA_Manifest_Array[++PDA_Manifest_Array.len] = cat
-
 	data["manifest"] = PDA_Manifest
 
 	nanoUI = data
