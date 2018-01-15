@@ -67,6 +67,8 @@ What is the naming convention for planes or layers?
 	#define ABOVE_MOB_LAYER		4.1
 
 	//#define FLY_LAYER			5 //For easy recordkeeping; this is a byond define
+	#define LIGHTING_LAYER		11 //Layer that lighting used to be on (now it's on a plane)
+	#define HUD_LAYER			20 //Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
 	#define OBFUSCATION_LAYER	21 //Where images covering the view for eyes are put
 	#define SCREEN_LAYER		22 //Mob HUD/effects layer
 
