@@ -27,7 +27,7 @@ var/list/grass_types = list(
 
 /turf/simulated/floor/outdoors/grass/initialize()
 	if(prob(50))
-		icon_state += "2"
+		icon_state = "[initial(icon_state)]2"
 		//edge_blending_priority++
 
 	if(grass_chance && prob(grass_chance))
