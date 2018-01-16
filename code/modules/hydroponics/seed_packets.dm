@@ -12,8 +12,6 @@ var/global/list/plant_seed_sprites = list()
 	var/modified = 0
 
 /obj/item/seeds/initialize()
-	while(!plant_controller)
-		sleep(30)
 	update_seed()
 	..()
 
@@ -79,8 +77,6 @@ var/global/list/plant_seed_sprites = list()
 	seed_type = null
 
 /obj/item/seeds/random/initialize()
-	while(!plant_controller)
-		sleep(100) //10s sleep until the controller is actually on
 	seed = plant_controller.create_random_seed()
 	seed_type = seed.name
 	update_seed()
