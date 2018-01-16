@@ -17,7 +17,7 @@
 
 
 /obj/structure/janitorialcart/New()
-	create_reagents(100)
+	create_reagents(500)
 
 
 /obj/structure/janitorialcart/examine(mob/user)
@@ -178,7 +178,7 @@
 
 
 /obj/structure/bed/chair/janicart/New()
-	create_reagents(100)
+	create_reagents(500)
 	update_layer()
 
 
