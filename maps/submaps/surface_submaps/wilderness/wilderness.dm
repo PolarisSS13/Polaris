@@ -22,6 +22,11 @@
 
 #endif
 
+// The 'wilderness' is the endgame for Explorers. Extremely dangerous and far away from help, but with vast shinies.
+// POIs here spawn in two different sections, the top half and bottom half of the map.
+// The top half connects to the outpost z-level, and is seperated from the bottom half by a river. It should provide a challenge to a well equiped Explorer team.
+// The bottom half should be even more dangerous, where only the robust, fortunate, or lucky can survive.
+
 /datum/map_template/surface/wilderness
 	name = "Surface Content - Wildy"
 	desc = "Used to make the surface's wilderness be 17% less boring."
@@ -29,7 +34,7 @@
 // 'Normal' templates get used on the top half, and should be challenging.
 /datum/map_template/surface/wilderness/normal
 
-// 'Deep' templates get used on the bottom half, and should be more dangerous and rewarding.
+// 'Deep' templates get used on the bottom half, and should be (even more) dangerous and rewarding.
 /datum/map_template/surface/wilderness/deep
 
 // To be added: Templates for surface exploration when they are made.

@@ -174,11 +174,19 @@
 	teleport_y = 2
 	teleport_z = Z_LEVEL_SURFACE
 
+
 /obj/effect/step_trigger/teleporter/bridge/east_to_west/New()
 	..()
 	teleport_x = src.x - 4
 	teleport_y = src.y
 	teleport_z = src.z
+
+/obj/effect/step_trigger/teleporter/bridge/east_to_west/small/New()
+	..()
+	teleport_x = src.x - 3
+	teleport_y = src.y
+	teleport_z = src.z
+
 
 /obj/effect/step_trigger/teleporter/bridge/west_to_east/New()
 	..()
@@ -186,17 +194,26 @@
 	teleport_y = src.y
 	teleport_z = src.z
 
+/obj/effect/step_trigger/teleporter/bridge/west_to_east/small/New()
+	..()
+	teleport_x = src.x + 3
+	teleport_y = src.y
+	teleport_z = src.z
+
+
 /obj/effect/step_trigger/teleporter/bridge/north_to_south/New()
 	..()
 	teleport_x = src.x
 	teleport_y = src.y - 4
 	teleport_z = src.z
 
+
 /obj/effect/step_trigger/teleporter/bridge/south_to_north/New()
 	..()
 	teleport_x = src.x
 	teleport_y = src.y + 4
 	teleport_z = src.z
+
 
 /datum/planet/sif
 	expected_z_levels = list(

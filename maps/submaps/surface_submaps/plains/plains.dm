@@ -6,7 +6,11 @@
 #include "construction1.dmm"
 #include "camp1.dmm"
 #include "house1.dmm"
+#include "beacons.dmm"
 #endif
+
+// The 'plains' is the area outside the immediate perimeter of the big outpost.
+// POIs here should not be dangerous, be mundane, and be somewhat conversative on the loot. Some of the loot can be useful, but it shouldn't trivialize the Wilderness.
 
 /datum/map_template/surface/plains
 	name = "Surface Content - Plains"
@@ -37,3 +41,9 @@
 	desc = "A fair sized house out in the frontier, that belonged to a well-traveled explorer."
 	mappath = 'maps/submaps/surface_submaps/plains/house1.dmm'
 	cost = 10
+
+/datum/map_template/surface/plains/beacons
+	name = "Collection of Marker Beacons"
+	desc = "A bunch of marker beacons, scattered in a strange pattern."
+	mappath = 'maps/submaps/surface_submaps/plains/beacons.dmm'
+	cost = 5

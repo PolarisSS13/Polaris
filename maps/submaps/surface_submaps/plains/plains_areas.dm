@@ -9,3 +9,6 @@
 
 /area/submap/house1
 	name = "old explorer's home"
+
+/area/submap/beacons
+	name = "collection of marker beacons"
