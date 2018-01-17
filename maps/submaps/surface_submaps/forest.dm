@@ -141,3 +141,9 @@
 	desc = "Home of Sif Free Radio, the best - and only - radio station for miles around."
 	mappath = 'maps/submaps/surface_submaps/DJOutpost1.dmm'
 	cost = 5
+
+/datum/map_template/surface/GovPatrol
+	name = "GovPatrol"
+	desc = "A long lost SifGuard ground survey patrol. Now they have you guys!"
+	mappath = 'maps/submaps/surface_submaps/GovPatrol.dmm'
+	cost = 5

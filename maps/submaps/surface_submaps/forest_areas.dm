@@ -59,3 +59,6 @@
 
 /area/submap/DJOutpost1
 	name = "DJOutpost1"
+
+/area/submap/GovPatrol
+	name = "GovPatrol"
