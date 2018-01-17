@@ -40,7 +40,7 @@
 "aN" = (/obj/structure/table/wooden_reinforced,/obj/item/device/binoculars/spyglass,/turf/simulated/floor/carpet/turcarpet,/area/submap/house1)
 "aO" = (/obj/structure/table/wooden_reinforced,/obj/item/device/flashlight/lantern,/turf/simulated/floor/carpet/turcarpet,/area/submap/house1)
 "aP" = (/obj/structure/bed/chair/wood{dir = 1},/turf/simulated/floor/carpet/turcarpet,/area/submap/house1)
-"aQ" = (/obj/structure/table/rack,/obj/item/device/gps/explorer,/obj/item/device/radio/headset/explorer,/turf/simulated/floor/wood,/area/submap/house1)
+"aQ" = (/obj/structure/table/rack,/obj/item/device/gps/explorer,/turf/simulated/floor/wood,/area/submap/house1)
 "aR" = (/obj/structure/simple_door/wood,/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)
 "aS" = (/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)
 "aT" = (/obj/machinery/space_heater,/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)

@@ -122,6 +122,16 @@
 	nitrogen	= MOLES_N2SIF
 	temperature	= TEMPERATURE_SIF
 
+/turf/simulated/floor/plating/external
+	oxygen		= MOLES_O2SIF
+	nitrogen	= MOLES_N2SIF
+	temperature	= TEMPERATURE_SIF
+
+/turf/simulated/floor/tiled/external
+	oxygen		= MOLES_O2SIF
+	nitrogen	= MOLES_N2SIF
+	temperature	= TEMPERATURE_SIF
+
 // Space mineral tiles are now not the default, so they get demoted to subtype status.
 
 /turf/simulated/mineral/vacuum
