@@ -36,9 +36,7 @@
 	..()
 
 /datum/plane_holder/Destroy()
-	if(my_mob)
-		my_mob.plane_holder = null
-		my_mob = null
+	my_mob = null
 	plane_masters.Cut() //Goodbye my children, be free
 	..() //We will get qdel'd, as there will not be references to us, then our planelets will disappear on their own.
 
