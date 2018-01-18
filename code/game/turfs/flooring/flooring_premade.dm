@@ -189,6 +189,10 @@
 	icon_state = "reinforced"
 	initial_flooring = /decl/flooring/reinforced
 
+/turf/simulated/floor/reinforced/ex_act(severity)
+	// These floors are supposed to be reinforced, so they are explosion-proof. Remove the reinforcement first if you wanna bomb it.
+	return
+
 /turf/simulated/floor/reinforced/airless
 	oxygen = 0
 	nitrogen = 0
