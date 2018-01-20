@@ -1368,7 +1368,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/mashedpotato
 	name = "Mashed Potato"
-	desc = "Pillowy mounds of Mashed Potato."
+	desc = "Pillowy mounds of mashed potato."
 	icon_state = "mashedpotato"
 	trash = /obj/item/trash/plate
 	filling_color = "#EDDD00"
@@ -1397,13 +1397,13 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesymash
 	name = "Cheesy Mashed Potato"
-	desc = "The only thing that could make Mash better."
+	desc = "The only thing that could make mash better."
 	icon_state = "cheesymash"
 	trash = /obj/item/trash/plate
 	filling_color = "#EDDD00"
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 4
-	nutriment_desc = list("cheesey potato" = 4)
+	nutriment_desc = list("cheesy potato" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesymash/New()
 	..()
