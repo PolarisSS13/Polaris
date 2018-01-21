@@ -438,7 +438,7 @@
 			if(istype(S.species, /datum/species/shapeshifter/promethean))
 				fear_amount += 4
 			else
-				return
+				continue
 	return fear_amount
 
 /datum/modifier/trait/phobia/trypanophobe
