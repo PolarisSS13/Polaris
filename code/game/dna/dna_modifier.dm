@@ -53,7 +53,6 @@
 	var/mob/living/carbon/occupant = null
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/opened = 0
-	var/allowed_braintype = /obj/item/organ/internal/brain/slime //Incase an admin wishes to varchange this to allow another type of brain, or subtypes are needed.
 
 /obj/machinery/dna_scannernew/New()
 	..()
@@ -135,17 +134,22 @@
 		item.loc = src
 		user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
 		return
-	else if(istype(item, allowed_braintype))
+
+	else if(istype(item, /obj/item/organ/internal/brain))
 		if (src.occupant)
 			user << "<span class='warning'>The scanner is already occupied!</span>"
 			return
 		var/obj/item/organ/internal/brain/brain = item
-		user.drop_item()
-		brain.loc = src
-		put_in(brain.brainmob)
-		src.add_fingerprint(user)
-		user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
-		return
+		if(brain.clone_source)
+			user.drop_item()
+			brain.loc = src
+			put_in(brain.brainmob)
+			src.add_fingerprint(user)
+			user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
+			return
+		else
+			to_chat(user,"\The [brain] is not acceptable for genetic sampling!")
+
 	else if (!istype(item, /obj/item/weapon/grab))
 		return
 	var/obj/item/weapon/grab/G = item
