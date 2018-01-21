@@ -134,6 +134,9 @@
 	icon_state = "green slime extract"
 	parent_organ = BP_TORSO
 
+/obj/item/orgam/internal/brain/slime/is_open_container()
+	return 1
+
 /obj/item/organ/internal/brain/golem
 	name = "chem"
 	desc = "A tightly furled roll of paper, covered with indecipherable runes."
