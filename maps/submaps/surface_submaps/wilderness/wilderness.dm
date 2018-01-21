@@ -20,6 +20,7 @@
 #include "DJOutpost1.dmm"
 #include "Rockybase.dmm"
 #include "MHR.dmm"
+#include "GovPatrol.dmm"
 
 #endif
 
