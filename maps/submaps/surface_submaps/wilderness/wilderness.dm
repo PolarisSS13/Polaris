@@ -157,4 +157,4 @@
 /datum/map_template/surface/GovPatrol
 	name = "GovPatrol"
 	desc = "A long lost SifGuard ground survey patrol. Now they have you guys!"
-	mappath = 'maps/submaps/surface_submaps/GovPatrol.dmm'
+	mappath = 'maps/submaps/surface_submaps/wilderness/GovPatrol.dmm'
