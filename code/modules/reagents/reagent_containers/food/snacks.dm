@@ -1374,7 +1374,7 @@
 	filling_color = "#EDDD00"
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 4
-	nutriment_desc = list("fluffy mashed potatos" = 4)
+	nutriment_desc = list("fluffy mashed potatoes" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/mashedpotato/New()
 	..()
