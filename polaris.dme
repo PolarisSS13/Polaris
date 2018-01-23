@@ -961,6 +961,7 @@
 #include "code\game\objects\items\weapons\id cards\station_ids.dm"
 #include "code\game\objects\items\weapons\id cards\syndicate_ids.dm"
 #include "code\game\objects\items\weapons\implants\implant.dm"
+#include "code\game\objects\items\weapons\implants\implantbear.dm"
 #include "code\game\objects\items\weapons\implants\implantcase.dm"
 #include "code\game\objects\items\weapons\implants\implantchair.dm"
 #include "code\game\objects\items\weapons\implants\implantcircuits.dm"
