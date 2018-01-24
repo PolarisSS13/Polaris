@@ -47,6 +47,7 @@ var/list/fusion_cores = list()
 			owned_field.radiation_scale()
 			owned_field.temp_dump()
 			owned_field.temp_color()
+
 /obj/machinery/power/fusion_core/Topic(href, href_list)
 	if(..())
 		return 1
@@ -70,7 +71,7 @@ var/list/fusion_cores = list()
 	if(owned_field)
 		icon_state = "core0"
 		if(force_rupture || owned_field.plasma_temperature > 1000)
-			owned_field.Rupture()
+			owned_field.MRC()
 		else
 			owned_field.RadiateAll()
 		qdel(owned_field)
