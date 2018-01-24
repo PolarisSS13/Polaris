@@ -216,13 +216,9 @@
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			if(check_destroy_override())
-				if(girder_material.explosion_resistance >= 25 && prob(girder_material.explosion_resistance))
-					new /obj/structure/girder/displaced(src, girder_material.name)
-				src.ChangeTurf(destroy_floor_override_path)
-			else
-				src.ChangeTurf(/turf/space)
-		if(2.0)
+			if(girder_material.explosion_resistance >= 25 && prob(girder_material.explosion_resistance))
+				new /obj/structure/girder/displaced(src, girder_material.name)
+			src.ChangeTurf(get_base_turf_by_area(src))		if(2.0)
 			if(prob(75))
 				take_damage(rand(150, 250))
 			else
