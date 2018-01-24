@@ -47,7 +47,7 @@
 	if(!girder_material)
 		qdel(src)
 	name = "[girder_material.display_name] [initial(name)]"
-	max_health = round(girder_material.integrity * 1.34) //Should be around 200 with default integrity (steel)
+	max_health = round(girder_material.integrity) //Should be 150 with default integrity (steel). Weaker than ye-olden Girders now.
 	health = max_health
 	displaced_health = round(max_health/4)
 	if(applies_material_colour)
