@@ -1902,6 +1902,34 @@
 	reagents.add_reagent("tomatojuice", 10)
 	bitesize = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/onionsoup
+	name = "Onion Soup"
+	desc = "A soup with layers."
+	icon_state = "onionsoup"
+	trash = /obj/item/trash/snack_bowl
+	filling_color = "#E0C367"
+	center_of_mass = list("x"=16, "y"=7)
+	nutriment_amt = 5
+	nutriment_desc = list("soup" = 5)
+
+/obj/item/weapon/reagent_containers/food/snacks/onionsoup/New()
+	..()
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/onionrings
+	name = "Onion Rings"
+	desc = "Crispy rings."
+	icon_state = "onionrings"
+	trash = /obj/item/trash/plate
+	filling_color = "#E0C367"
+	center_of_mass = list("x"=16, "y"=7)
+	nutriment_amt = 5
+	nutriment_desc = list("savory" = 2, "onion" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/onionrings/New()
+	..()
+	bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
 	name = "Roffle Waffles"
 	desc = "Waffles from Roffle. Co."

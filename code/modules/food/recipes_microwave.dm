@@ -495,6 +495,16 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 
+/datum/recipe/onionsoup
+	fruit = list("onion" = 1)
+	reagents = list("water" = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/onionsoup
+
+/datum/recipe/onionrings
+	fruit = list("onion" = 1)
+	reagents = list("flour" = 5)
+	result = /obj/item/weapon/reagent_containers/food/snacks/onionrings
+
 /datum/recipe/spacylibertyduff
 	reagents = list("water" = 5, "vodka" = 5, "psilocybin" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff
