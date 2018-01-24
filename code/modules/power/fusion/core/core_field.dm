@@ -241,7 +241,7 @@
 		critical += 0.2
 	else if (instability > 0.45)
 		critical += 0.6
-	if(critical >= 25 && prob(percent_unstable*100)
+	if(critical >= 25 && prob(percent_unstable*100))
 		if (critical >= 90)
 			visible_message("<span class='danger'>\The [src] rumbles and quivers violently, threatening to break free!</span>")
 		else if(critical >= 50)
@@ -611,8 +611,25 @@
 							empulse(pick(things_in_range), 10, 15)
 	return
 
-/obj/effect/fusion_em_field/proc/QuantumFluxCascade() //spews hot phoron and oxygen in a radius around the RUST. Will probably set fire to things.
-
+/obj/effect/fusion_em_field/proc/QuantumFluxCascade() //spews hot phoron and oxygen in a radius around the RUST. Will probably set fire to things
+	var/list/things_in_range = range(15, owned_core)
+	var/list/turfs_in_range = list()
+	var/turf/T
+	for (T in things_in_range)
+		turfs_in_range.Add(T)
+	for(var/loopcount = 1 to 10)
+		var/turf/TT = get_turf(pick(turfs_in_range))
+		if(istype(TT))
+			var/datum/gas_mixture/plasma = new
+			plasma.adjust_gas("oxygen", (size*100), 0)
+			plasma.adjust_gas("phoron", (size*100), 0)
+			plasma.temperature = (plasma_temperature/2)
+			plasma.update_values()
+			TT.assume_air(plasma)
+			TT.hotspot_expose(plasma_temperature)
+			plasma = null
+	return
+	owned_core.Shutdown()
 /obj/effect/fusion_em_field/proc/MagneticQuench() //standard hard shutdown. dumps hot oxygen/phoron into the core's area and releases an EMP in the area around the core.
 
 /obj/effect/fusion_em_field/proc/BluespaceQuenchEvent() //!!FUN!! causes a number of explosions in an area around the core. Will likely destory or heavily damage the reactor.

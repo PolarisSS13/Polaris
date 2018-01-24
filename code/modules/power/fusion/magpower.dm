@@ -14,7 +14,7 @@
 	var/id_tag //needed for !!rasins!!
 
 /obj/machinery/power/hydromagnetic_trap/process()
-	if(!powernet)
+	if(!powernet && anchored == 1)
 		return
 	spawn(1)
 		Active()
