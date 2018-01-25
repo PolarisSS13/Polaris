@@ -1018,7 +1018,7 @@
 
 /datum/reagent/drink/milkshake/berryshake
 	name = "Berry Milkshake"
-	id = "Berryshake"
+	id = "berryshake"
 	description = "A refreshing berry milkshake."
 	taste_description = "cold refreshing berries and cream"
 	color = "#ffb2b2" // rgb(255, 178, 178)
@@ -1604,6 +1604,18 @@
 
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
+
+
+/datum/reagent/ethanol/cider
+	name = "Cider"
+	id = "cider"
+	description = "Hard? Soft? No-one knows but it'll get you drunk."
+	taste_description = "tartness"
+	color = "#CE9C00" // rgb: 206, 156, 0
+	strength = 10
+
+	glass_name = "cider"
+	glass_desc = "The second most Irish drink."
 
 // Cocktails
 
