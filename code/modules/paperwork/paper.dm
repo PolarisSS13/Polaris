@@ -432,6 +432,9 @@
 				add_fingerprint(user)
 				return
 		var/obj/item/weapon/paper_bundle/B = new(src.loc)
+		if(istype(P, /obj/item/weapon/photo))
+			B.hasphotos = 1
+			B.numphotos = 1
 		if (name != "paper")
 			B.name = name
 		else if (P.name != "paper" && P.name != "photo")
@@ -471,6 +474,7 @@
 		B.pages.Add(src)
 		B.pages.Add(P)
 		B.update_icon()
+
 
 	else if(istype(P, /obj/item/weapon/pen))
 		if(icon_state == "scrap")
