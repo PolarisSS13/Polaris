@@ -694,6 +694,18 @@
 	chems = list("nutriment" = list(1,10), "potato" = list(10,10))
 	kitchen_tag = "potato"
 
+/datum/seed/potato/New()
+	..()
+	set_trait(TRAIT_PRODUCES_POWER,1)
+	set_trait(TRAIT_MATURATION,10)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"potato")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#D4CAB4")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
 /datum/seed/onion
     name = "onion"
     seed_name = "onion"
