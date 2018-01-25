@@ -68,11 +68,17 @@ var/list/fuel_injectors = list()
 		cur_assembly = W
 		return
 
-	if(iswrench(W))
+	if(iswrench(W) || isscrewdriver(W) || iscrowbar(W) || istype(W, /obj/item/weapon/storage/part_replacer))
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return
 		if(default_unfasten_wrench(user, W))
+			return
+		if(default_deconstruction_screwdriver(user, W))
+			return
+		if(default_deconstruction_crowbar(user, W))
+			return
+		if(default_part_replacement(user, W))
 			return
 
 	return ..()
