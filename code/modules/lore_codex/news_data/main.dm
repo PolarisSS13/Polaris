@@ -1,7 +1,7 @@
 /datum/lore/codex/category/main_news // The top-level categories for the news thing
 	name = "Index"
 	data = "Below you'll find a list of articles relevant to the current (as of 2562) political climate, especially concerning the Almach Rim \
-	region. Each is labled by date of publication and title. This book is self-updating, and from time to time the publisher will push new \
+	region. Each is labled by date of publication and title. This list is self-updating, and from time to time the publisher will push new \
 	articles. You are encouraged to check back frequently."
 	children = list(
 		/datum/lore/codex/page/article1,
@@ -10,7 +10,7 @@
 
 /datum/lore/codex/page/about_news
 	name = "About the Publisher"
-	data = "The <i>Daedalus Political Almanac</i> is published and maintained by Occulum Broadcast, the foremost authority on media distribution \
+	data = "The <i>Daedalus Pocket Newscaster</i> is produced and maintained by Occulum Broadcast, the foremost authority on media distribution \
 	and owner-operator of the award-winning Daedalus Dispatch newsletter. We use our unparalleled network of freelance reporters, political scientists, \
 	and other experts to deliver hour-by-hour analysis of a complex interstellar political climate, an analysis which you now hold in your hands. For more \
 	information, feel free to visit our homepage at oc.about.tsc, or the sites of any of our constituents."

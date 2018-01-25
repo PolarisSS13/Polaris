@@ -31,7 +31,7 @@
 	cost = 0
 	
 /datum/gear/utility/news
-	display_name = "daedalus political almanac"
+	display_name = "daedalus pocket newscaster"
 	path = /obj/item/weapon/book/codex/lore/news
 	cost = 0
 
