@@ -158,3 +158,4 @@
 	name = "GovPatrol"
 	desc = "A long lost SifGuard ground survey patrol. Now they have you guys!"
 	mappath = 'maps/submaps/surface_submaps/wilderness/GovPatrol.dmm'
+	cost = 5

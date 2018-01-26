@@ -9,6 +9,7 @@
 #include "beacons.dmm"
 #include "Epod.dmm"
 #include "PascalB.dmm"
+#include "bonfire.dmm"
 #endif
 
 // The 'plains' is the area outside the immediate perimeter of the big outpost.
@@ -56,7 +57,7 @@
 	mappath = 'maps/submaps/surface_submaps/plains/Epod.dmm'
 	cost = 5
 
-/datum/map_template/surface/wilderness/normal/Rocky2
+/datum/map_template/surface/plains/normal/Rocky2
 	name =  "Rocky2"
 	desc = "More rocks."
 	mappath = 'maps/submaps/surface_submaps/wilderness/Rocky2.dmm'
@@ -70,7 +71,7 @@
 	cost = 5
 
 /datum/map_template/surface/plains/bonfire
-	name = "Abandon Bonfire"
-	desc = "Someone seemed to have enjoyed orange juice a bit too much."
+	name = "Abandoned Bonfire"
+	desc = "Someone seems to enjoy orange juice a bit too much."
 	mappath = 'maps/submaps/surface_submaps/plains/bonfire.dmm'
 	cost = 5
