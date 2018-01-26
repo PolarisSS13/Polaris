@@ -102,7 +102,7 @@ Drinks Data
 /datum/reagent/toxin/poisonberryjuice
 	glass_icon_state = "poisonberryjuice"
 
-/datum/reagent/drink/juice/potato
+/datum/reagent/drink/juice/potatojuice
 	glass_icon_state = "glass_brown"
 
 /datum/reagent/drink/juice/tomato
