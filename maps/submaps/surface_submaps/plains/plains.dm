@@ -68,3 +68,9 @@
 	desc = "How did this old thing get all the way out here?"
 	mappath = 'maps/submaps/surface_submaps/plains/PascalB.dmm'
 	cost = 5
+
+/datum/map_template/surface/plains/bonfire
+	name = "Abandon Bonfire"
+	desc = "Someone seemed to have enjoyed orange juice a bit too much."
+	mappath = 'maps/submaps/surface_submaps/plains/bonfire.dmm'
+	cost = 5
