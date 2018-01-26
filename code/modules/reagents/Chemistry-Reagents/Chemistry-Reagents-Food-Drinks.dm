@@ -1018,7 +1018,7 @@
 
 /datum/reagent/drink/milkshake/berryshake
 	name = "Berry Milkshake"
-	id = "Berryshake"
+	id = "berryshake"
 	description = "A refreshing berry milkshake."
 	taste_description = "cold refreshing berries and cream"
 	color = "#ffb2b2" // rgb(255, 178, 178)
@@ -1604,6 +1604,18 @@
 
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
+
+
+/datum/reagent/ethanol/cider
+	name = "Cider"
+	id = "cider"
+	description = "Hard? Soft? No-one knows but it'll get you drunk."
+	taste_description = "tartness"
+	color = "#CE9C00" // rgb: 206, 156, 0
+	strength = 10
+
+	glass_name = "cider"
+	glass_desc = "The second most Irish drink."
 
 // Cocktails
 
@@ -2486,13 +2498,13 @@
 /datum/reagent/ethanol/euphoria
 	name = "Euphoria"
 	id = "euphoria"
-	description = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existance."
+	description = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existence."
 	taste_description = "impossibly rich alcohol"
 	color = "#614126"
 	strength = 9
 
 	glass_name = "Euphoria"
-	glass_desc = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existance."
+	glass_desc = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existence."
 
 /datum/reagent/ethanol/xanaducannon
 	name = "Xanadu Cannon"
@@ -2580,7 +2592,7 @@
 /datum/reagent/ethanol/winebrandy
 	name = "Wine Brandy"
 	id = "winebrandy"
-	description = "An premium spirit made from distilled wine."
+	description = "A premium spirit made from distilled wine."
 	taste_description = "very sweet dried fruit with many elegant notes"
 	color = "#4C130B" // rgb(76,19,11)
 	strength = 20
@@ -2732,7 +2744,7 @@
 	color = "#a0692e" // rgb(160, 105, 46)
 	strength = 20
 
-	glass_name = "Whisker Sour"
+	glass_name = "Whiskey Sour"
 	glass_desc = "A smokey, refreshing lemoned whiskey."
 
 /datum/reagent/ethanol/oldfashioned

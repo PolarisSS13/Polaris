@@ -13,7 +13,6 @@
 	path = /obj/item/device/communicator
 	cost = 0
 
-	display_name = "communicator watch"
 /datum/gear/utility/communicator/New()
 	..()
 	var/list/communicators = list()
@@ -29,6 +28,11 @@
 /datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
 	path = /obj/item/weapon/book/codex/lore/vir
+	cost = 0
+	
+/datum/gear/utility/news
+	display_name = "daedalus pocket newscaster"
+	path = /obj/item/weapon/book/codex/lore/news
 	cost = 0
 
 /datum/gear/utility/corp_regs
