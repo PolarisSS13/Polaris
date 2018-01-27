@@ -99,7 +99,7 @@ var/list/name_to_material
 	var/conductivity = null      // How conductive the material is. Iron acts as the baseline, at 10.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 	var/luminescence
-	var/radiation_resistance = 0 // Radiation resistance, used in calculating how much radiation a material absorbs. Equivlent to weight, but does not affect weaponry.
+	var/radiation_resistance = 20 // Radiation resistance, used in calculating how much radiation a material absorbs. Equivlent to weight, but does not affect weaponry.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
