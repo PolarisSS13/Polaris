@@ -82,12 +82,15 @@
 /obj/machinery/computer/card/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
+	if(data_core)
+		data_core.get_manifest_list()
+
 	var/data[0]
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
 	data["mode"] = mode
 	data["printing"] = printing
-	data["manifest"] = data_core ? data_core.get_manifest(0) : null
+	data["manifest"] = PDA_Manifest
 	data["target_name"] = modify ? modify.name : "-----"
 	data["target_owner"] = modify && modify.registered_name ? modify.registered_name : "-----"
 	data["target_rank"] = get_target_rank()
@@ -99,13 +102,16 @@
 	data["all_centcom_access"] = null
 	data["regions"] = null
 
-	data["engineering_jobs"] = format_jobs(engineering_positions)
-	data["medical_jobs"] = format_jobs(medical_positions)
-	data["science_jobs"] = format_jobs(science_positions)
-	data["security_jobs"] = format_jobs(security_positions)
-	data["cargo_jobs"] = format_jobs(cargo_positions)
-	data["civilian_jobs"] = format_jobs(civilian_positions)
-	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
+	data["jobs"] = list(
+				list("cat" = "Engineering", "jobs" = format_jobs(engineering_positions)),
+				list("cat" = "Medical", "jobs" = format_jobs(medical_positions)),
+				list("cat" = "Science", "jobs" = format_jobs(science_positions)),
+				list("cat" = "Security", "jobs" = format_jobs(security_positions)),
+				list("cat" = "Cargo", "jobs" = format_jobs(cargo_positions)),
+				list("cat" = "Planetside", "jobs" = format_jobs(planet_positions)),
+				list("cat" = "Civilian", "jobs" = format_jobs(civilian_positions)),
+				list("cat" = "CentCom", "jobs" = format_jobs(get_all_centcom_jobs()))
+			)
 
 	if (modify && is_centcom())
 		var/list/all_centcom_access = list()
