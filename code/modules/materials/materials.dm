@@ -99,6 +99,7 @@ var/list/name_to_material
 	var/conductivity = null      // How conductive the material is. Iron acts as the baseline, at 10.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 	var/luminescence
+	var/radiation_resistance = 20 // Radiation resistance, used in calculating how much radiation a material absorbs. Equivlent to weight, but does not affect weaponry.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
@@ -231,6 +232,7 @@ var/list/name_to_material
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	door_icon_base = "stone"
+	radiation_resistance = 80 //dense, so it's okay-ish as rad shielding.
 
 /material/diamond
 	name = "diamond"
@@ -256,6 +258,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	radiation_resistance = 120 //gold is dense.
 
 /material/gold/bronze //placeholder for ashtrays
 	name = "bronze"
@@ -271,7 +274,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 3)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-
+	radiation_resistance = 22
 //R-UST port
 /material/supermatter
 	name = "supermatter"
@@ -332,6 +335,7 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
+	radiation_resistance = 22
 
 /material/stone/marble
 	name = "marble"
@@ -340,6 +344,7 @@ var/list/name_to_material
 	hardness = 100
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
+	radiation_resistance = 26
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
@@ -386,6 +391,7 @@ var/list/name_to_material
 	conductivity = 13 // For the purposes of balance.
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT, "platinum" = SHEET_MATERIAL_AMOUNT) //todo
+	radiation_resistance = 60 //Plasteel is presumably dense and is the dominant material used in the engine. Still not great.
 
 // Very rare alloy that is reflective, should be used sparingly.
 /material/durasteel
@@ -403,6 +409,7 @@ var/list/name_to_material
 	reflectivity = 0.7 // Not a perfect mirror, but close.
 	stack_origin_tech = list(TECH_MATERIAL = 8)
 	composite_material = list("plasteel" = SHEET_MATERIAL_AMOUNT, "diamond" = SHEET_MATERIAL_AMOUNT) //shrug
+	radiation_resistance = 120 //it reflects XRAY LASERS.
 
 /material/plasteel/titanium
 	name = "titanium"
@@ -431,6 +438,7 @@ var/list/name_to_material
 	window_options = list("One Direction" = 1, "Full Window" = 4, "Windoor" = 2)
 	created_window = /obj/structure/window/basic
 	rod_product = /obj/item/stack/material/glass/reinforced
+	radiation_resistance = 15
 
 /material/glass/build_windows(var/mob/living/user, var/obj/item/stack/used_stack)
 
@@ -522,6 +530,7 @@ var/list/name_to_material
 	created_window = /obj/structure/window/reinforced
 	wire_product = null
 	rod_product = null
+	radiation_resistance = 30
 
 /material/glass/phoron
 	name = "borosilicate glass"
@@ -549,6 +558,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list() //todo
 	rod_product = null
+	radiation_resistance = 30
 
 /material/plastic
 	name = "plastic"
@@ -563,6 +573,7 @@ var/list/name_to_material
 	conductivity = 2 // For the sake of material armor diversity, we're gonna pretend this plastic is a good insulator.
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
+	radiation_resistance = 12
 
 /material/plastic/holographic
 	name = "holoplastic"
@@ -613,6 +624,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	radiation_resistance = 27
 
 /material/iron
 	name = "iron"
@@ -622,6 +634,17 @@ var/list/name_to_material
 	conductivity = 10
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+	radiation_resistance = 22
+
+/material/lead
+	name = "lead"
+	stack_type = /obj/item/stack/material/lead
+	icon_colour = "#273956"
+	weight = 35
+	conductivity = 10
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	radiation_resistance = 350 //actual radiation shielding, yay...
 
 // Adminspawn only, do not let anyone get this.
 /material/alienalloy
@@ -635,6 +658,7 @@ var/list/name_to_material
 	hardness = 500
 	weight = 500
 	protectiveness = 80 // 80%
+	radiation_resistance = 500
 
 // Likewise.
 /material/alienalloy/elevatorium
@@ -692,6 +716,7 @@ var/list/name_to_material
 	destruction_desc = "splinters"
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
+	radiation_resistance = 18
 
 /material/wood/log
 	name = MAT_LOG
@@ -734,7 +759,7 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 1)
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
-
+	radiation_resistance = 1
 /material/snow
 	name = MAT_SNOW
 	stack_type = /obj/item/stack/material/snow
@@ -751,7 +776,7 @@ var/list/name_to_material
 	destruction_desc = "crumples"
 	sheet_singular_name = "pile"
 	sheet_plural_name = "pile" //Just a bigger pile
-
+	radiation_resistance = 1
 /material/cloth //todo
 	name = "cloth"
 	stack_origin_tech = list(TECH_MATERIAL = 2)
