@@ -14,7 +14,7 @@
 	var/assembled = 1 //Are we closed up?
 	var/max_burst_size = 5 //Don't let our maximum burst size get too high.
 	var/list/guncomponents = list() //Generate our list of components.
-	var/accepted_components = list( //Excessively long because it won't accept subtypes for some reason!
+	var/accepted_components = list(
 		/obj/item/weapon/stock_parts/capacitor/,
 		/obj/item/weapon/stock_parts/capacitor/adv,
 		/obj/item/weapon/stock_parts/capacitor/super,
@@ -25,7 +25,7 @@
 		/obj/item/weapon/stock_parts/manipulator/nano,
 		/obj/item/weapon/stock_parts/manipulator/pico,
 		)
-
+	//Excessively long because it won't accept subtypes for some reason!
 
 
 /obj/item/weapon/gun/energy/modular/New() //Initialize our components.
