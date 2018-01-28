@@ -9,6 +9,7 @@
 #define NO_HALLUCINATION  0x80	 // Don't hallucinate, ever
 #define NO_BLOOD		  0x100  // Never bleed, never show blood amount
 #define UNDEAD			  0x200	 // Various things that living things don't do, mostly for skeletons
+#define NO_INFECT		  0x400  // Don't allow infections in limbs or organs, similar to IS_PLANT, without other strings.
 // unused: 0x8000 - higher than this will overflow
 
 // Species spawn flags
@@ -56,3 +57,7 @@
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
 #define ALT_TRANSMIT 512 // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)
+
+#define SKIN_NORMAL 0
+#define SKIN_THREAT 1
+#define SKIN_CLOAK  2

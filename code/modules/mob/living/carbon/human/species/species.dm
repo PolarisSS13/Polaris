@@ -15,6 +15,7 @@
 
 	var/speech_bubble_appearance = "normal"              // Part of icon_state to use for speech bubbles when talking.  See talk.dmi for available icons.
 	var/fire_icon_state = "humanoid"                     // The icon_state used inside OnFire.dmi for when on fire.
+	var/suit_storage_icon = 'icons/mob/belt_mirror.dmi'  // Icons used for worn items in suit storage slot.
 
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
@@ -90,6 +91,7 @@
 	var/death_sound
 	var/death_message = "seizes up and falls limp, their eyes dead and lifeless..."
 	var/knockout_message = "has been knocked unconscious!"
+	var/cloning_modifier = /datum/modifier/cloning_sickness
 
 	// Environment tolerance/life processes vars.
 	var/reagent_tag                                   //Used for metabolizing reagents.
@@ -158,6 +160,9 @@
 	var/spawn_flags = 0           // Flags that specify who can spawn as this species
 
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
+	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
+	var/list/skin_overlays = list()
+	var/has_floating_eyes = 0     // Whether the eyes can be shown above other icons
 	var/water_movement = 0		  // How much faster or slower the species is in water
 	var/snow_movement = 0		  // How much faster or slower the species is on snow
 
@@ -358,4 +363,32 @@
 
 // Called when lying down on a water tile.
 /datum/species/proc/can_breathe_water()
+	return FALSE
+
+// Impliments different trails for species depending on if they're wearing shoes.
+/datum/species/proc/get_move_trail(var/mob/living/carbon/human/H)
+	if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
+		return /obj/effect/decal/cleanable/blood/tracks/footprints
+	else
+		return move_trail
+
+/datum/species/proc/update_skin(var/mob/living/carbon/human/H)
+	return
+
+/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
+	return
+
+/datum/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
+	return FALSE
+
+// Used for any extra behaviour when falling and to see if a species will fall at all.
+/datum/species/proc/can_fall(var/mob/living/carbon/human/H)
+	return TRUE
+
+// Used to find a special target for falling on, such as pouncing on someone from above.
+/datum/species/proc/find_fall_target_special(src, landing)
+	return FALSE
+
+// Used to override normal fall behaviour. Use only when the species does fall down a level.
+/datum/species/proc/fall_impact_special(var/mob/living/carbon/human/H, var/atom/A)
 	return FALSE

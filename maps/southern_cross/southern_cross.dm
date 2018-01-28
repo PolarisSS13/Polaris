@@ -15,6 +15,13 @@
 	#include "shuttles/ninja.dm"
 	#include "shuttles/ert.dm"
 
+	#include "items/encryptionkey_sc.dm"
+	#include "items/headset_sc.dm"
+	#include "items/clothing/sc_suit.dm"
+	#include "items/clothing/sc_under.dm"
+	#include "items/clothing/sc_head.dm"
+	#include "items/clothing/sc_accessory.dm"
+	#include "job/outfits.dm"
 	#include "structures/closets/engineering.dm"
 	#include "structures/closets/medical.dm"
 	#include "structures/closets/misc.dm"

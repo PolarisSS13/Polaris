@@ -181,6 +181,9 @@
 	icon_state = "alienplating"
 	block_tele = TRUE
 
+/turf/simulated/shuttle/floor/alienplating/external // For the outer rim of the UFO, to avoid active edges.
+// The actual temperature adjustment is defined if the SC or other future map is compiled.
+
 /turf/simulated/shuttle/plating
 	name = "plating"
 	icon = 'icons/turf/floors.dmi'
@@ -233,3 +236,9 @@
 	name = "voidcraft tiles"
 	icon_state = "void_light"
 
+/turf/simulated/shuttle/floor/voidcraft/external // For avoiding active edges.
+// The actual temperature adjustment is defined if the SC or other future map is compiled.
+
+/turf/simulated/shuttle/floor/voidcraft/external/dark
+
+/turf/simulated/shuttle/floor/voidcraft/external/light

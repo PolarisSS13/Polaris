@@ -100,7 +100,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	dynamic_lighting = 1
+	dynamic_lighting = 0
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -156,6 +156,7 @@ area/space/atmosalert()
 
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
+	dynamic_lighting = 0
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
@@ -164,6 +165,7 @@ area/space/atmosalert()
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
 	icon_state = "shuttle2"
+	dynamic_lighting = 0
 
 /area/shuttle/escape/centcom
 	name = "\improper Emergency Shuttle CentCom"
@@ -1643,7 +1645,6 @@ area/space/atmosalert()
 	requires_power = 1
 	always_unpowered = 1
 	dynamic_lighting = 0
-	base_turf = /turf/space
 
 	auxport
 		name = "\improper Fore Port Solar Array"
@@ -2732,7 +2733,7 @@ area/space/atmosalert()
 		for(var/mob/living/carbon/human/H in src)
 			if(H.s_tone > -55)
 				H.s_tone--
-				H.update_body()
+				H.update_icons_body()
 			if(H.client)
 				mysound.status = SOUND_UPDATE
 				H << mysound
@@ -2853,7 +2854,7 @@ var/list/the_station_areas = list (
 		for(var/mob/living/carbon/human/H in src)
 //			if(H.s_tone > -55)	//ugh...nice/novel idea but please no.
 //				H.s_tone--
-//				H.update_body()
+//				H.update_icons_body()
 			if(H.client)
 				mysound.status = SOUND_UPDATE
 				H << mysound

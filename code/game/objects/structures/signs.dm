@@ -348,6 +348,11 @@
 	desc = "A direction sign, pointing out which way the Cargo department is."
 	icon_state = "direction_crg"
 
+/obj/structure/sign/directions/cryo
+	name = "\improper Cryogenic Storage"
+	desc = "A direction sign, pointing out which way cryogenic storage is."
+	icon_state = "direction_cry"
+
 /obj/structure/sign/directions/roomnum
 	name = "room number"
 	desc = "A sign detailing the number of the room beside it."
@@ -420,3 +425,13 @@
 /obj/structure/sign/atmos/air
 	name = "\improper AIR"
 	icon_state = "atmos_air"
+
+/obj/structure/sign/poi/engineleft
+	name = "I.C.V."
+	desc = "The charred name of a cargo ship of some description."
+	icon_state = "poi_engine1"
+
+/obj/structure/sign/poi/engineright
+	name = "I.C.V."
+	desc = "The charred name of a cargo ship of some description."
+	icon_state = "poi_engine2"
