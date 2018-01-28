@@ -220,7 +220,18 @@
 					rupture = prob(25)
 
 				if(rupture)
-					owned_core.Shutdown(force_rupture=1)
+					if(prob(80))
+						MagneticQuench()
+						return
+					else if(prob(15))
+						MRC()
+						return
+					else if(prob(5))
+						QuantumFluxCascade()
+						return
+					else if(prob(5))
+						BluespaceQuenchEvent()
+						return
 				else
 					var/lost_plasma = (plasma_temperature*percent_unstable)
 					radiation += lost_plasma
@@ -596,22 +607,14 @@
 	var/turf/T
 	for (T in things_in_range)
 		turfs_in_range.Add(T)
-	spawn(200)
-		Destroy()
-		empulse(pick(things_in_range), 10, 15)
-		spawn(10)
+	for(var/loopcount = 1 to 10)
+		spawn(200)
 			empulse(pick(things_in_range), 10, 15)
-			spawn(10)
-				empulse(pick(things_in_range), 10, 15)
-				spawn(10)
-					empulse(pick(things_in_range), 10, 15)
-					spawn(10)
-						empulse(pick(things_in_range), 10, 15)
-						spawn(10)
-							empulse(pick(things_in_range), 10, 15)
+	Destroy()
 	return
 
 /obj/effect/fusion_em_field/proc/QuantumFluxCascade() //spews hot phoron and oxygen in a radius around the RUST. Will probably set fire to things
+	global_announcer.autosay("Warning! Quantum fluxuation detected! Flammable gas release expected.", "Field Stability Monitor")
 	var/list/things_in_range = range(15, owned_core)
 	var/list/turfs_in_range = list()
 	var/turf/T
@@ -628,11 +631,43 @@
 			TT.assume_air(plasma)
 			TT.hotspot_expose(plasma_temperature)
 			plasma = null
+	Destroy()
 	return
-	owned_core.Shutdown()
+
 /obj/effect/fusion_em_field/proc/MagneticQuench() //standard hard shutdown. dumps hot oxygen/phoron into the core's area and releases an EMP in the area around the core.
+	global_announcer.autosay("Warning! Magnetic Quench event detected, engaging hard shutdown.", "Field Stability Monitor")
+	empulse(owned_core, 10, 15)
+	var/turf/TT = get_turf(owned_core)
+	if(istype(TT))
+		var/datum/gas_mixture/plasma = new
+		plasma.adjust_gas("oxygen", (size*100), 0)
+		plasma.adjust_gas("phoron", (size*100), 0)
+		plasma.temperature = (plasma_temperature/2)
+		plasma.update_values()
+		TT.assume_air(plasma)
+		TT.hotspot_expose(plasma_temperature)
+		plasma = null
+	Destroy()
+	owned_core.Shutdown()
+	return
 
 /obj/effect/fusion_em_field/proc/BluespaceQuenchEvent() //!!FUN!! causes a number of explosions in an area around the core. Will likely destory or heavily damage the reactor.
+	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
+	set_light(15, 15, "#CCCCFF")
+	empulse(get_turf(src), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	global_announcer.autosay("WARNING: FIELD RUPTURE IMMINENT!", "Containment Monitor")
+	RadiateAll()
+	var/list/things_in_range = range(10, owned_core)
+	var/list/turfs_in_range = list()
+	var/turf/T
+	for (T in things_in_range)
+		turfs_in_range.Add(T)
+	for(var/loopcount = 1 to 10)
+		explosion(pick(things_in_range), -1, 5, 5, 5)
+		empulse(pick(things_in_range), ceil(plasma_temperature/1000), ceil(plasma_temperature/300))
+	Destroy()
+	owned_core.Shutdown()
+	return
 
 #undef FUSION_HEAT_CAP
 #undef FUSION_MAX_ENVIRO_HEAT
