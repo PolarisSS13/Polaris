@@ -1,24 +1,37 @@
 /obj/effect/mine
 	name = "mine"
-	desc = "Normal procedure is to jump 200 feet in the air and scatter yourself over a wide area."
+	desc = "A small explosive mine with 'HE' and a grenade symbol on the side."
 	density = 0
 	anchored = 1
-	layer = 3
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"
-	var/triggerproc = "explode" //name of the proc called when the mine is triggered
 	var/triggered = 0
 	var/smoke_strength = 3
 	var/mineitemtype = /obj/item/weapon/mine
-	var/exposed = 0
-	var/isolated = 0
+	var/panel_open = 0
+	var/datum/wires/mines/wires = null
 
 /obj/effect/mine/New()
 	icon_state = "uglyminearmed"
+	wires = new(src)
+
+/obj/effect/mine/proc/explode()
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
+	triggered = 1
+	s.set_up(3, 1, src)
+	s.start()
+	explosion(loc, 0, 2, 3, 4) //land mines are dangerous, folks.
+	qdel(s)
+	qdel(src)
 
 /obj/effect/mine/bullet_act()
-	if(prob(25))
-		call(src, triggerproc)()
+	if(prob(50))
+		explode()
+
+/obj/effect/mine/ex_act(severity)
+	if(severity <= 2 || prob(50))
+		explode()
+	..()
 
 /obj/effect/mine/Crossed(AM as mob|obj)
 	Bumped(AM)
@@ -28,60 +41,26 @@
 	if(triggered) return
 
 	if(istype(M, /mob/living/))
-		call(src,triggerproc)(M)
+		explode()
 
-/obj/effect/mine/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
-		if(src.exposed == 0)
-			to_chat(user, "<span class='notice'>You begin to unscrew the cover from \the [src]...</span>")
-			if(do_after(user, 30))
-				src.exposed = 1
-				to_chat(user, "<span class='notice'>You unscrew the cover from \the [src].</span>")
-				return
-			else
-				to_chat(user, "<span class='danger'>You accidentally activate \the [src]! Run!</span>")
-				playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-				spawn(10)
-					call(src,triggerproc)(user)
-					return
-		else
-			to_chat(user, "<span class='notice'>You carefully screw the cover back onto \the [src].</span>")
-			src.exposed = 0
-			return
-	else if(istype(W, /obj/item/weapon/wirecutters) && src.exposed == 1)
-		to_chat(user, "<span class='notice'>You carefully look for the detonation wire...</span>")
-		if(do_after(user, 30))
-			to_chat(user, "<span class='notice'>You locate the detonation wire and begin isolating it from the rest...</span>")
-		else
-			to_chat(user, "<span class='danger'>You nick one of the wires! Run!</span>")
-			spawn(10)
-				call(src,triggerproc)(user)
-				return
-		if(do_after(user, 30))
-			to_chat(user, "<span class='notice'>You isolate the detonation wire and...</span>")
-			isolated = 1
-		else
-			to_chat(user, "<span class='danger'>Your tools brush against the activator! Run!</span>")
-			spawn(10)
-				call(src,triggerproc)(user)
-				return
-		if(prob(80) && isolated == 1)
-			to_chat(user, "<span class='notice'>Snip!</span>")
-			visible_message("<span class='danger'>[user] safely disarms \the [src]!</span>")
-			new mineitemtype(get_turf(src))
-			spawn(0)
-				qdel(src)
-				return
-		else
-			to_chat(user, "<span class='danger'>Snip! ... wait... wrong wire!</span>")
-			spawn(10)
-				visible_message("<span class='danger'>\The [src] starts beeping rapidly!</span>")
-				playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-				spawn(30)
-					call(src,triggerproc)(user)
-					return
+/obj/effect/mine/attackby(obj/item/W as obj, mob/living/user as mob)
+	if(isscrewdriver(W))
+		panel_open = !panel_open
+		user.visible_message("<span class='warning'>[user] very carefully screws the mine's panel [panel_open ? "open" : "closed"].</span>",
+		"<span class='notice'>You very carefully screw the mine's panel [panel_open ? "open" : "closed"].</span>")
+		playsound(src.loc, W.usesound, 50, 1)
 
-/obj/effect/mine/proc/triggerrad(obj)
+	else if((iswirecutter(W) || ismultitool(W)) && panel_open)
+		interact(user)
+
+/obj/effect/mine/interact(mob/living/user as mob)
+	if(!panel_open || istype(user, /mob/living/silicon/ai))
+		return
+
+	user.set_machine(src)
+	wires.Interact(user)
+
+/obj/effect/mine/dnascramble/explode(obj)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	triggered = 1
 	s.set_up(3, 1, src)
@@ -89,10 +68,10 @@
 	obj:radiation += 50
 	randmutb(obj)
 	domutcheck(obj,null)
-	spawn(0)
-		qdel(src)
+	qdel(s)
+	qdel(src)
 
-/obj/effect/mine/proc/triggerstun(obj)
+/obj/effect/mine/stun/explode(obj)
 	triggered = 1
 	if(ismob(obj))
 		var/mob/M = obj
@@ -100,102 +79,81 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-	spawn(0)
-		qdel(src)
+	qdel(s)
+	qdel(src)
 
-/obj/effect/mine/proc/triggern2o(obj)
-	//example: n2o triggerproc
-	//note: im lazy //thats okay so am i
+/obj/effect/mine/n2o/explode()
 	triggered = 1
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas("sleeping_agent", 30)
+	qdel(src)
 
-	spawn(0)
-		qdel(src)
-
-/obj/effect/mine/proc/triggerphoron(obj)
+/obj/effect/mine/phoron/explode()
 	triggered = 1
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas("phoron", 30)
 
 			target.hotspot_expose(1000, CELL_VOLUME)
+	qdel(src)
 
-	spawn(0)
-		qdel(src)
-
-/obj/effect/mine/proc/triggerkick(obj)
+/obj/effect/mine/kick/explode(obj)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	triggered = 1
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(obj:client)
-	spawn(0)
-		qdel(src)
+	qdel(s)
+	qdel(src)
 
-/obj/effect/mine/proc/explode(obj)
+/obj/effect/mine/frag/explode()
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	triggered = 1
 	s.set_up(3, 1, src)
 	s.start()
-	explosion(loc, 0, 2, 3, 5) //land mines are dangerous, folks.
-	spawn(0)
-		qdel(src)
-
-/obj/effect/mine/proc/triggerfrag(obj)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
-	triggered = 1
-	s.set_up(3, 1, src)
-	s.start()
-	..()
 	var/turf/O = get_turf(src)
 	if(!O)
 		return
 	src.fragmentate(O, 20, 7, list(/obj/item/projectile/bullet/pellet/fragment)) //only 20 weak fragments because you're stepping directly on it
+	qdel(s)
 	qdel(src)
 
 
 /obj/effect/mine/dnascramble
 	name = "radiation mine"
-	desc = "Through the rain of Strontium 90..."
+	desc = "A small explosive mine with a radiation symbol on the side."
 	icon_state = "uglymine"
-	triggerproc = "triggerrad"
 	mineitemtype = /obj/item/weapon/mine/dnascramble
 
 /obj/effect/mine/phoron
 	name = "incendiary mine"
-	desc = "We didn't start the fire. This mine did."
+	desc = "A small explosive mine with a fire symbol on the side."
 	icon_state = "uglymine"
-	triggerproc = "triggerphoron"
 	mineitemtype = /obj/item/weapon/mine/phoron
 
 /obj/effect/mine/kick
 	name = "kick mine"
 	desc = "Concentrated war crimes. Handle with care."
 	icon_state = "uglymine"
-	triggerproc = "triggerkick"
 	mineitemtype = /obj/item/weapon/mine/kick
 
 /obj/effect/mine/n2o
 	name = "nitrous oxide mine"
-	desc = "Nitrous oxide is no laughing matter."
+	desc = "A small explosive mine with three Z's on the side."
 	icon_state = "uglymine"
-	triggerproc = "triggern2o"
 	mineitemtype = /obj/item/weapon/mine/n2o
 
 /obj/effect/mine/stun
 	name = "stun mine"
-	desc = "Stronger than a Pan-Galactic, but only half as volatile."
+	desc = "A small explosive mine with a lightning bolt symbol on the side."
 	icon_state = "uglymine"
-	triggerproc = "triggerstun"
 	mineitemtype = /obj/item/weapon/mine/stun
 
 /obj/effect/mine/frag
 	name = "fragmentation mine"
-	desc = "Ever wanted to become a pincushion?"
+	desc = "A small explosive mine with 'FRAG' and a grenade symbol on the side."
 	icon_state = "uglymine"
-	triggerproc = "triggerfrag"
 	mineitemtype = /obj/item/weapon/mine/frag
 	var/fragment_types = list(/obj/item/projectile/bullet/pellet/fragment)
 	var/num_fragments = 20  //total number of fragments produced by the grenade
@@ -204,7 +162,7 @@
 
 /obj/item/weapon/mine
 	name = "mine"
-	desc = "Normal procedure is to jump 200 feet in the air and scatter yourself over a wide area."
+	desc = "A small explosive mine with 'HE' and a grenade symbol on the side."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"
 	var/arming = 0
@@ -243,19 +201,21 @@
 
 /obj/item/weapon/mine/proc/prime(mob/user as mob)
 	visible_message("\The [src.name] beeps as the priming sequence completes.")
-	new minetype(get_turf(src))
+	var/atom/R = new minetype(get_turf(src))
+	src.transfer_fingerprints_to(R)
+	R.add_fingerprint(user)
 	spawn(0)
 		qdel(src)
 
 /obj/item/weapon/mine/dnascramble
 	name = "radiation mine"
-	desc = "Through the rain of Strontium 90..."
+	desc = "A small explosive mine with a radiation symbol on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/dnascramble
 
 /obj/item/weapon/mine/phoron
 	name = "incendiary mine"
-	desc = "We didn't start the fire. This mine did."
+	desc = "A small explosive mine with a fire symbol on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/phoron
 
@@ -267,18 +227,18 @@
 
 /obj/item/weapon/mine/n2o
 	name = "nitrous oxide mine"
-	desc = "Nitrous oxide is no laughing matter."
+	desc = "A small explosive mine with three Z's on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/n2o
 
 /obj/item/weapon/mine/stun
 	name = "stun mine"
-	desc = "Stronger than a Pan-Galactic, but only half as volatile."
+	desc = "A small explosive mine with a lightning bolt symbol on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/stun
 
 /obj/item/weapon/mine/frag
 	name = "fragmentation mine"
-	desc = "Ever wanted to become a pincushion?"
+	desc = "A small explosive mine with 'FRAG' and a grenade symbol on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/frag
