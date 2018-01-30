@@ -9,7 +9,6 @@
 	return null
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/M as mob)
-	var/datum/gender/TU = gender_datums[get_visible_gender()]
 	var/datum/gender/TT = gender_datums[M.get_visible_gender()]
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
