@@ -892,7 +892,7 @@ var/list/sacrificed = list()
 				if (cultist == user) //just to be sure.
 					return
 				if(cultist.buckled || cultist.handcuffed || (!isturf(cultist.loc) && !istype(cultist.loc, /obj/structure/closet)))
-					var/datum/gender/TU = gender_datums[get_visible_gender()]
+					var/datum/gender/TU = gender_datums[cultist.get_visible_gender()]
 					user << "<span class='warning'>You cannot summon \the [cultist], for [TU.his] shackles of blood are strong.</span>"
 					return fizzle()
 				cultist.loc = src.loc

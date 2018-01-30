@@ -648,7 +648,7 @@
 	return gender
 
 /mob/proc/get_visible_gender()
-	return gender()
+	return gender
 
 /mob/proc/see(message)
 	if(!is_active())

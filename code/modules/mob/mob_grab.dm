@@ -350,7 +350,7 @@
 /obj/item/weapon/grab/proc/reset_kill_state()
 	if(state == GRAB_KILL)
 		var/datum/gender/T = gender_datums[assailant.get_visible_gender()]
-		assailant.visible_message("<span class='warning'>[assailant] lost [TU.his] tight grip on [affecting]'s neck!</span>")
+		assailant.visible_message("<span class='warning'>[assailant] lost [T.his] tight grip on [affecting]'s neck!</span>")
 		hud.icon_state = "kill"
 		state = GRAB_NECK
 

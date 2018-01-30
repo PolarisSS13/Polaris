@@ -103,7 +103,7 @@ var/global/list/sparring_attack_cache = list()
 		var/eye_pain = eyes.organ_can_feel_pain()
 		target << "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>"
 		return
-	user.visible_message("<span class='danger'>[user] attempts to press [TU.his] [eye_attack_text] into [target]'s eyes, but [TT.he] [TT.do]n't have any!</span>")
+	user.visible_message("<span class='danger'>[user] attempts to press [TU.his] [eye_attack_text] into [target]'s eyes, but [TT.he] [TT.does]n't have any!</span>")
 
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")

@@ -30,6 +30,6 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 /obj/item/weapon/material/sword/katana/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[get_visible_gender()]
-	visible_message(span('danger', "[user] is slitting [TU.his] stomach open with \the [src.name]! It looks like [TU.he] [TU.is] trying to commit seppuku."), span('danger', "You slit your stomach open with \the [src.name]!"), span('danger', "You hear the sound of flesh tearing open.")) // gory, but it gets the point across
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+	visible_message(span("danger", "[user] is slitting [TU.his] stomach open with \the [src.name]! It looks like [TU.hes] trying to commit seppuku."), span("danger", "You slit your stomach open with \the [src.name]!"), span("danger", "You hear the sound of flesh tearing open.")) // gory, but it gets the point across
 	return(BRUTELOSS)
