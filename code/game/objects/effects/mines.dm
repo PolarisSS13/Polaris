@@ -6,7 +6,6 @@
 	layer = 3
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"
-	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
 	var/triggered = 0
 
 /obj/effect/mine/New()
@@ -19,36 +18,48 @@
 
 	if(triggered) return
 
-	if(istype(M, /mob/living/carbon/human))
+	if(isliving(M))
 		for(var/mob/O in viewers(world.view, src.loc))
 			O << "<font color='red'>[M] triggered the \icon[src] [src]</font>"
 		triggered = 1
-		call(src,triggerproc)(M)
+		Detonate(M)
 
-/obj/effect/mine/proc/triggerrad(obj)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
-	s.set_up(3, 1, src)
-	s.start()
-	obj:radiation += 50
-	randmutb(obj)
-	domutcheck(obj,null)
+/obj/effect/mine/proc/Detonate(var/mob/living/M)
+	explosion(loc, 0, 1, 2, 3)
 	spawn(0)
 		qdel(src)
 
-/obj/effect/mine/proc/triggerstun(obj)
-	if(ismob(obj))
-		var/mob/M = obj
-		M.Stun(30)
+
+/obj/effect/mine/dnascramble
+	name = "Radiation Mine"
+
+/obj/effect/mine/dnascramble/Detonate(var/mob/living/M)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
+	s.set_up(3, 1, src)
+	s.start()
+	M.radiation += 50
+	randmutb(M)
+	domutcheck(M,null)
+	spawn(0)
+		qdel(src)
+
+
+/obj/effect/mine/stun
+	name = "Stun Mine"
+
+/obj/effect/mine/stun/Detonate(var/mob/living/M)
+	M.Stun(30)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
 	spawn(0)
 		qdel(src)
 
-/obj/effect/mine/proc/triggern2o(obj)
-	//example: n2o triggerproc
-	//note: im lazy
 
+/obj/effect/mine/n2o
+	name = "N2O Mine"
+
+/obj/effect/mine/n20/Detonate(var/mob/living/M)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas("sleeping_agent", 30)
@@ -56,7 +67,11 @@
 	spawn(0)
 		qdel(src)
 
-/obj/effect/mine/proc/triggerphoron(obj)
+
+/obj/effect/mine/phoron
+	name = "Phoron Mine"
+
+/obj/effect/mine/phoron/Detonate(var/mob/living/M)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas("phoron", 30)
@@ -66,40 +81,25 @@
 	spawn(0)
 		qdel(src)
 
-/obj/effect/mine/proc/triggerkick(obj)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
-	s.set_up(3, 1, src)
-	s.start()
-	qdel(obj:client)
-	spawn(0)
-		qdel(src)
-
-/obj/effect/mine/proc/explode(obj)
-	explosion(loc, 0, 1, 2, 3)
-	spawn(0)
-		qdel(src)
-
-/obj/effect/mine/dnascramble
-	name = "Radiation Mine"
-	icon_state = "uglymine"
-	triggerproc = "triggerrad"
-
-/obj/effect/mine/phoron
-	name = "Phoron Mine"
-	icon_state = "uglymine"
-	triggerproc = "triggerphoron"
 
 /obj/effect/mine/kick
 	name = "Kick Mine"
-	icon_state = "uglymine"
-	triggerproc = "triggerkick"
 
-/obj/effect/mine/n2o
-	name = "N2O Mine"
-	icon_state = "uglymine"
-	triggerproc = "triggern2o"
+/obj/effect/mine/kick/Detonate(var/mob/living/M)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
+	s.set_up(3, 1, src)
+	s.start()
+	qdel(M.client)
+	spawn(0)
+		qdel(src)
 
-/obj/effect/mine/stun
-	name = "Stun Mine"
-	icon_state = "uglymine"
-	triggerproc = "triggerstun"
+/obj/effect/mine/emp
+	name = "EMP Mine"
+
+/obj/effect/mine/emp/Detonate(var/mob/living/M)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
+	s.set_up(3, 1, src)
+	s.start()
+	empulse(loc, 2, 4, 7, 10, 1) // As strong as an EMP grenade
+	spawn(0)
+		qdel(src)
