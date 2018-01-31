@@ -128,6 +128,7 @@
 	new /obj/item/weapon/storage/pill_bottle/spaceacillin(src)
 	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting(src)
 	new /obj/item/stack/medical/splint(src)
+	new /obj/item/device/healthanalyzer/improved(src)
 	return
 
 /obj/item/weapon/storage/firstaid/surgery

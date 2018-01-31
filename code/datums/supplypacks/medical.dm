@@ -330,8 +330,18 @@
 	access = access_cmo
 
 /datum/supply_packs/med/defib
-	name = "Defibrilator crate"
+	name = "Defibrillator crate"
 	contains = list(/obj/item/device/defib_kit = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/medical
-	containername = "Defibrilator crate"
+	containername = "Defibrillator crate"
+
+/datum/supply_packs/med/advgear
+	name = "Prototype medical gear crate"
+	contains = list(
+			/obj/item/device/healthanalyzer/improved = 2,
+			/obj/item/roller/adv = 2,
+			/obj/item/weapon/storage/firstaid/adv = 2)
+	cost = 50
+	containertype = /obj/structure/closet/crate/medical
+	containername = "Prototype medical gear crate"

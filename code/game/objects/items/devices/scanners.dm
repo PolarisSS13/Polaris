@@ -267,7 +267,7 @@ REAGENT SCANNER
 			to_chat(usr, "The scanner will now perform a basic analysis.")
 
 /obj/item/device/healthanalyzer/improved //reports bone fractures, IB, quantity of beneficial reagents in stomach; also regular health analyzer stuff
-	name = "advanced health analyzer"
+	name = "enhanced health analyzer"
 	desc = "A miracle of medical technology, this handheld scanner can produce an accurate and specific report of a patient's biosigns."
 	advscan = 1
 	origin_tech = list(TECH_MAGNET = 5, TECH_BIO = 6)
@@ -275,12 +275,16 @@ REAGENT SCANNER
 
 /obj/item/device/healthanalyzer/advanced //reports all of the above, as well as radiation severity and minor brain damage
 	name = "advanced health analyzer"
+	desc = "An even more advanced handheld health scanner, complete with a full biosign monitor and on-board radiation and neurological analysis suites."
 	advscan = 2
+	origin_tech = list(TECH_MAGNET = 6, TECH_BIO = 7)
 	icon_state = "advhealth"
 
 /obj/item/device/healthanalyzer/enhanced //reports all of the above, as well as name and quantity of nonmed reagents in stomach
 	name = "phasic health analyzer"
+	desc = "Possibly the most advanced health analyzer to ever have existed, utilising bluespace technology to determine almost everything worth knowing about a patient."
 	advscan = 3
+	origin_tech = list(TECH_MAGNET = 7, TECH_BIO = 8)
 	icon_state = "advhealth"
 
 /obj/item/device/analyzer
