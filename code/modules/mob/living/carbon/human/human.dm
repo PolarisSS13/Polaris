@@ -1340,9 +1340,9 @@
 	if(..(slipped_on,stun_duration))
 		return 1
 
-/mob/living/carbon/human/proc/relocate()
+/mob/living/carbon/human/proc/reduce()
 	set category = "Object"
-	set name = "Relocate Joint"
+	set name = "Reduce Joint"
 	set desc = "Pop a joint back into place. Extremely painful."
 	set src in view(1)
 
@@ -1368,17 +1368,17 @@
 	var/list/limbs = list()
 	for(var/limb in organs_by_name)
 		var/obj/item/organ/external/current_limb = organs_by_name[limb]
-		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to relocate that first
+		if(current_limb && current_limb.dislocated > 0 && !current_limb.is_parent_dislocated()) //if the parent is also dislocated you will have to reduce that first
 			limbs |= current_limb
-	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to relocate?") as null|anything in limbs
+	var/obj/item/organ/external/current_limb = input(usr,"Which joint do you wish to reduce?") as null|anything in limbs
 
 	if(!current_limb)
 		return
 
 	if(self)
-		src << "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>"
+		src << "<span class='warning'>You brace yourself to reduce your [current_limb.joint]...</span>"
 	else
-		U << "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>"
+		U << "<span class='warning'>You begin to reduce [S]'s [current_limb.joint]...</span>"
 
 	if(!do_after(U, 30))
 		return
@@ -1390,7 +1390,7 @@
 	else
 		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
 		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
-	current_limb.relocate()
+	current_limb.reduce()
 
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in organs)
