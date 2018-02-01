@@ -168,8 +168,8 @@
 
 			if(I_HELP)
 				var/datum/gender/T = gender_datums[src.get_visible_gender()]
-				M.visible_message("<span class='notice'>[M] hugs [src] to make [T.him] feel better!</span>", \ // slightly redundant as at the moment most mobs still use the normal gender var, but it works and future-proofs it
-				"<span class='notice'>You hug [src] to make [T.him] feel better!</span>")
+				M.visible_message("<span class='notice'>[M] hugs [src] to make [T.him] feel better!</span>", \
+				"<span class='notice'>You hug [src] to make [T.him] feel better!</span>") // slightly redundant as at the moment most mobs still use the normal gender var, but it works and future-proofs it
 				playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 			if(I_DISARM)
