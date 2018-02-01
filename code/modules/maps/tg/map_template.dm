@@ -23,6 +23,7 @@ var/list/global/map_templates = list()
 	it runs out. The cost of a submap should roughly corrispond with several factors such as size, loot, difficulty, desired scarcity, etc. \
 	Set to -1 to force the submap to always be made.
 	var/allow_duplicates = FALSE // If false, only one map template will be spawned by the game. Doesn't affect admins spawning then manually.
+	var/discard_prob = 0 // If non-zero, there is a chance that the map seeding algorithm will skip this template when selecting potential templates to use.
 
 	var/static/dmm_suite/maploader = new
 
@@ -82,7 +83,7 @@ var/list/global/map_templates = list()
 
 	admin_notice("<span class='danger'>Initializing atmos pipenets and machinery in submap.</span>", R_DEBUG)
 	for(var/obj/machinery/atmospherics/machine in atmos_machines)
-		machine.initialize()
+		machine.atmos_init()
 		i++
 
 	for(var/obj/machinery/atmospherics/machine in atmos_machines)
@@ -98,7 +99,7 @@ var/list/global/map_templates = list()
 	admin_notice("<span class='danger'>[i] pipe\s initialized.</span>", R_DEBUG)
 
 	admin_notice("<span class='danger'>Rebuilding powernets due to submap creation.</span>", R_DEBUG)
-	makepowernets()
+	SSmachines.makepowernets()
 
 	admin_notice("<span class='danger'>Submap initializations finished.</span>", R_DEBUG)
 
@@ -196,6 +197,8 @@ var/list/global/map_templates = list()
 		if(!MT.allow_duplicates && MT.loaded > 0) // This probably won't be an issue but we might as well.
 			continue
 		if(!istype(MT, desired_map_template_type)) // Not the type wanted.
+			continue
+		if(MT.discard_prob && prob(MT.discard_prob))
 			continue
 		if(MT.cost && MT.cost < 0) // Negative costs always get spawned.
 			priority_submaps += MT

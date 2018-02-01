@@ -141,11 +141,7 @@
 	desc = "A small bottle. Contains some really weird liquid metal."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-
-/obj/item/weapon/reagent_containers/glass/bottle/metamorphic/New()
-	..()
-	reagents.add_reagent("metamorphic", 60)
-	update_icon()
+	prefill = list("metamorphic" = 60)
 
 
 // This is kind of a waste since iron is in the chem dispenser but it would be inconsistent if this wasn't here.
@@ -216,11 +212,7 @@
 	desc = "A small bottle. Contains some really weird liquid metal."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
-
-/obj/item/weapon/reagent_containers/glass/bottle/binding/New()
-	..()
-	reagents.add_reagent("binding", 60)
-	update_icon()
+	prefill = list("binding" = 60)
 
 
 /datum/chemical_reaction/binding
@@ -564,11 +556,18 @@
 		if(S.stat || S.docile || S.rabid)
 			continue
 
+		S.add_modifier(/datum/modifier/berserk, 30 SECONDS)
+
 		if(S.client) // Player slimes always have free will.
-			to_chat(S, "<span class='warning'>An intense wave of rage almost overcomes you, but you remain in control of yourself.</span>")
+			to_chat(S, "<span class='warning'>An intense wave of rage is felt from inside, but you remain in control of yourself.</span>")
 			continue
 
 		S.enrage()
+
+	for(var/mob/living/carbon/human/H in view(get_turf(holder.my_atom)))
+		if(H.species.name == "Promethean")
+			H.add_modifier(/datum/modifier/berserk, 30 SECONDS)
+			to_chat(H, "<span class='warning'>An intense wave of rage is felt from inside, but you remain in control of yourself.</span>")
 
 	log_and_message_admins("Red extract reaction (enrage) has been activated in [get_area(holder.my_atom)].  Last fingerprints: [holder.my_atom.fingerprintslast]")
 
@@ -956,15 +955,21 @@
 	result_amount = 1
 	required = /obj/item/slime_extract/rainbow
 
-/datum/chemical_reaction/slime/rainbow_random_slime/on_reaction(var/datum/reagents/holder)
-	var/list/forbidden_types = list(
-		/mob/living/simple_animal/slime/rainbow/kendrick
-	)
-	var/list/potential_types = typesof(/mob/living/simple_animal/slime) - forbidden_types
-	var/slime_type = pick(potential_types)
-	new slime_type(get_turf(holder.my_atom))
-	..()
 
+/datum/chemical_reaction/slime/rainbow_random_slime/on_reaction(var/datum/reagents/holder)
+	var/mob/living/simple_animal/slime/S
+	var/list/slime_types = typesof(/mob/living/simple_animal/slime)
+
+	while(slime_types.len)
+		S = pick(slime_types)
+		if(initial(S.rainbow_core_candidate) == TRUE)
+			break
+		else
+			slime_types -= S
+			S = null
+
+	if(S)
+		new S(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/rainbow_unity
 	name = "Slime Unity"

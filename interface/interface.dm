@@ -5,8 +5,11 @@
 	set category = "OOC"
 	if(config.wikiurl)
 		if(query)
-			var/output = config.wikiurl + "/doku.php?do=search&id=" + query
-			src << link(output)
+			if(config.wikisearchurl)
+				var/output = replacetext(config.wikisearchurl, "%s", url_encode(query))	
+				src << link(output)
+			else
+				src << "<span class='warning'> The wiki search URL is not set in the server configuration.</span>"
 		else
 			src << link(config.wikiurl)
 	else
@@ -97,8 +100,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t2 = disarm-intent
 \t3 = grab-intent
 \t4 = harm-intent
-\tCtrl = drag
-\tShift = examine
+\tCtrl+Click = pull
+\tShift+Click = examine
 </font>"}
 
 	var/other = {"<font color='purple'>
@@ -122,7 +125,7 @@ Any-Mode: (hotkey doesn't need to be on)
 \tF2 = ooc
 \tF3 = say
 \tF4 = emote
-\tDEL = pull
+\tDEL = stop pulling
 \tINS = cycle-intents-right
 \tHOME = drop
 \tPGUP = swap-hand
@@ -148,8 +151,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t3 = activate module 3
 \t4 = toggle intents
 \t5 = emote
-\tCtrl = drag
-\tShift = examine
+\tCtrl+Click = pull
+\tShift+Click = examine
 </font>"}
 
 	var/robot_other = {"<font color='purple'>
@@ -171,7 +174,7 @@ Any-Mode: (hotkey doesn't need to be on)
 \tF2 = ooc
 \tF3 = say
 \tF4 = emote
-\tDEL = pull
+\tDEL = stop pulling
 \tINS = toggle intents
 \tPGUP = cycle active modules
 \tPGDN = activate held object

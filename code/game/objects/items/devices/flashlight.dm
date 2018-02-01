@@ -141,7 +141,7 @@
 
 			user.visible_message("<span class='notice'>\The [user] directs [src] to [M]'s eyes.</span>", \
 							 	 "<span class='notice'>You direct [src] to [M]'s eyes.</span>")
-			if(H == user)	//can't look into your own eyes buster
+			if(H != user)	//can't look into your own eyes buster
 				if(M.stat == DEAD || M.blinded)	//mob is dead or fully blind
 					user << "<span class='warning'>\The [M]'s pupils do not react to the light!</span>"
 					return
@@ -321,7 +321,7 @@
 	w_class = ITEMSIZE_SMALL
 	brightness_on = 8 // Pretty bright.
 	light_power = 3
-	light_color = "#e58775"
+	light_color = LIGHT_COLOR_FLARE
 	icon_state = "flare"
 	item_state = "flare"
 	action_button_name = null //just pull it manually, neckbeard.

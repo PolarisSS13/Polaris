@@ -54,6 +54,10 @@
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
+/obj/machinery/atmospherics/trinary/atmos_filter/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
 /obj/machinery/atmospherics/trinary/atmos_filter/update_icon()
 	if(istype(src, /obj/machinery/atmospherics/trinary/atmos_filter/m_filter))
 		icon_state = "m"
@@ -136,7 +140,7 @@
 		add_fingerprint(user)
 		return 1
 	playsound(src, W.usesound, 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	if (do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
@@ -151,7 +155,7 @@
 		return
 
 	if(!src.allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	var/dat
@@ -247,9 +251,7 @@ obj/machinery/atmospherics/trinary/atmos_filter/m_filter/init_dir()
 		if(WEST)
 			initialize_directions = WEST|SOUTH|EAST
 
-/obj/machinery/atmospherics/trinary/atmos_filter/m_filter/initialize()
-	set_frequency(frequency)
-
+/obj/machinery/atmospherics/trinary/atmos_filter/m_filter/atmos_init()
 	if(node1 && node2 && node3) return
 
 	var/node1_connect = turn(dir, -180)

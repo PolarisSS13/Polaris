@@ -169,7 +169,7 @@ SUBSYSTEM_DEF(garbage)
 				#endif
 				var/type = D.type
 				var/datum/qdel_item/I = items[type]
-				testing("GC: -- \ref[src] | [type] was unable to be GC'd --")
+				testing("GC: -- \ref[D] | [type] was unable to be GC'd --")
 				I.failures++
 			if (GC_QUEUE_HARDDELETE)
 				HardDelete(D)
@@ -330,16 +330,6 @@ SUBSYSTEM_DEF(garbage)
 				SSgarbage.PreQueue(D)
 	else if(D.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 		CRASH("[D.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
-
-// Default implementation of clean-up code.
-// This should be overridden to remove all references pointing to the object being destroyed.
-// Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
-/datum/proc/Destroy(force=FALSE)
-	tag = null
-	nanomanager.close_uis(src)
-	return QDEL_HINT_QUEUE
-
-/datum/var/gc_destroyed //Time when this object was destroyed.
 
 #ifdef TESTING
 

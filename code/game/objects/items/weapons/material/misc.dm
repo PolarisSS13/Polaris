@@ -19,7 +19,7 @@
 	attack_verb = list("punched", "beaten", "struck")
 	applies_material_colour = 0
 
-/obj/item/weapon/material/hatchet
+/obj/item/weapon/material/knife/machete/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
@@ -33,39 +33,42 @@
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 
-/obj/item/weapon/material/hatchet/unathiknife
+/obj/item/weapon/material/knife/machete/hatchet/unathiknife
 	name = "duelling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
+	should_cleave = FALSE
 	var hits = 0
 
-/obj/item/weapon/material/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/material/knife/machete/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
 	if(hits > 0)
 		return
 	var/obj/item/I = user.get_inactive_hand()
-	if(istype(I, /obj/item/weapon/material/hatchet/unathiknife))
+	if(istype(I, /obj/item/weapon/material/knife/machete/hatchet/unathiknife))
 		hits ++
 		var/obj/item/weapon/W = I
 		W.attack(M, user)
 		W.afterattack(M, user)
 	..()
 
-/obj/item/weapon/material/hatchet/unathiknife/afterattack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/material/knife/machete/hatchet/unathiknife/afterattack(mob/M as mob, mob/user as mob)
 	hits = initial(hits)
 	..()
 
-/obj/item/weapon/material/hatchet/tacknife
+// These no longer inherit from hatchets.
+/obj/item/weapon/material/knife/tacknife
 	name = "tactical knife"
 	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
+	force_divisor = 0.25 //15 when hardness 60 (steel)
 	attack_verb = list("stabbed", "chopped", "cut")
 	applies_material_colour = 1
 
-/obj/item/weapon/material/hatchet/tacknife/combatknife
+/obj/item/weapon/material/knife/tacknife/combatknife
 	name = "combat knife"
 	desc = "If only you had a boot to put it in."
 	icon = 'icons/obj/weapons.dmi'
