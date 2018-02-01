@@ -19,7 +19,7 @@
 		to_chat(user, "<span class = 'danger'>The spike already has something on it, finish collecting its meat first!</span>")
 	else
 		if(spike(G.affecting))
-			visible_message("<span class = 'danger'>[user] has forced [G.affecting] onto the spike, killing \him instantly!</span>")
+			visible_message("<span class = 'danger'>[user] has forced [G.affecting] onto the spike, killing [gender_datums[G.affecting.get_visible_gender()].him] instantly!</span>")
 			var/mob/M = G.affecting
 			M.forceMove(src)
 			qdel(G)

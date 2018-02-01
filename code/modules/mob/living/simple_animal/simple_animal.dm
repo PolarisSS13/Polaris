@@ -577,7 +577,7 @@
 						if ((M.client && !( M.blinded )))
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
-			user << "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>"
+			user << "<span class='notice'>\The [src] is dead, medical items won't bring [gender_datums[src.get_visible_gender()].him] back to life.</span>" // the gender lookup is somewhat overkill, but it functions identically to the obsolete gender macros and future-proofs this code
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
