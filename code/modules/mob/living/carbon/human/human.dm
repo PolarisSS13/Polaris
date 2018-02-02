@@ -925,7 +925,10 @@
 
 /mob/living/carbon/human/get_visible_gender()
 	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
-		return NEUTER
+		return PLURAL //plural is the gender-neutral default
+	if(species)
+		if(species.ambiguous_genders)
+			return PLURAL // regardless of what you're wearing, your gender can't be figured out
 	return get_gender()
 
 /mob/living/carbon/human/proc/increase_germ_level(n)

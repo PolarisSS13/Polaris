@@ -48,7 +48,7 @@
 	has  = "has"
 	is   = "is"
 	does = "does"
-	himself = "himself"
+	himself = "herself"
 	s = "s"
 	hes = "she's"
 
