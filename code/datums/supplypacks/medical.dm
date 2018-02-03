@@ -339,7 +339,7 @@
 /datum/supply_packs/med/advgear
 	name = "Prototype medical gear crate"
 	contains = list(
-			/obj/item/device/healthanalyzer/improved = 2,
+			/obj/item/device/healthanalyzer/advanced = 2,
 			/obj/item/roller/adv = 2,
 			/obj/item/weapon/storage/firstaid/adv = 2)
 	cost = 50
