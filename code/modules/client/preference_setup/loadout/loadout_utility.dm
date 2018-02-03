@@ -10,7 +10,7 @@
 
 /datum/gear/utility/tts_device
 	display_name = "text to speech device"
-	path = /obj/item/weapon/text_to_speech
+	path = /obj/item/device/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
 
 /datum/gear/utility/communicator
