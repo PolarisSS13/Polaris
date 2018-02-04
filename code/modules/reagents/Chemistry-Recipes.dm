@@ -280,7 +280,6 @@
 	result = "kelotane"
 	required_reagents = list("silicon" = 1, "carbon" = 1)
 	result_amount = 2
-	log_is_important = 1
 
 /datum/chemical_reaction/peridaxon
 	name = "Peridaxon"
@@ -551,7 +550,6 @@
 	result = "coolant"
 	required_reagents = list("tungsten" = 1, "oxygen" = 1, "water" = 1)
 	result_amount = 3
-	log_is_important = 1
 
 /datum/chemical_reaction/rezadone
 	name = "Rezadone"
@@ -2210,7 +2208,7 @@
 	name = "Deuterium"
 	id = "deuterium"
 	result = null
-	required_reagents = list("water" = 10)
+	required_reagents = list("water" = 10, "coolant" = 3, "foaming_agent" = 2)
 	catalysts = list("hydrophoron" = 5)
 	result_amount = 1
 
