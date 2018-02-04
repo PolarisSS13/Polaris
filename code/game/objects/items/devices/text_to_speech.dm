@@ -12,7 +12,7 @@
 		return
 
 	if(!named)
-		user << "You input your name into the device."
+		to_chat(user, "You input your name into the device.")
 		name = "[initial(name)] ([user.real_name])"
 		desc = "[initial(desc)] This one is assigned to [user.real_name]."
 		named = 1
@@ -23,6 +23,6 @@
 		*/
 
 	var/message = sanitize(input(user,"Choose a message to relay to those around you.") as text|null)
-	if(!isnull(message))
+	if(message)
 		var/obj/item/device/text_to_speech/O = src
 		audible_message("\icon[O] \The [O.name] states, \"[message]\"")
