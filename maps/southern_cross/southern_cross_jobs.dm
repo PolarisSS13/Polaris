@@ -96,12 +96,14 @@ var/const/access_explorer = 43
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/explorer
 	economic_modifier = 4
-	access = list(access_pilot, access_explorer)
-	minimal_access = list(access_pilot, access_explorer)
+	access = list(access_explorer)
+	minimal_access = list(access_explorer)
 	outfit_type = /decl/hierarchy/outfit/job/explorer2
+/*
 	alt_titles = list(
 		"Explorer Technician" = /decl/hierarchy/outfit/job/explorer2/technician,
 		"Explorer Medic" = /decl/hierarchy/outfit/job/explorer2/medic)
+*/
 
 /datum/job/sar
 	title = "Search and Rescue"

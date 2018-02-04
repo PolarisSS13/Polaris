@@ -58,6 +58,8 @@ What is the naming convention for planes or layers?
 ////////////////////////////////////////////////////////////////////////////////////////
 
 	//#define TURF_LAYER		2 //For easy recordkeeping; this is a byond define
+	#define DECALS_LAYER		2.01
+	#define OVERTURF_LAYER		2.1
 	#define DOOR_OPEN_LAYER		2.7 //Under all objects if opened. 2.7 due to tables being at 2.6
 	//#define OBJ_LAYER			3 //For easy recordkeeping; this is a byond define
 	#define DOOR_CLOSED_LAYER	3.1 //Above most items if closed
@@ -70,7 +72,6 @@ What is the naming convention for planes or layers?
 	//#define FLY_LAYER			5 //For easy recordkeeping; this is a byond define
 	#define LIGHTING_LAYER		11 //Layer that lighting used to be on (now it's on a plane)
 	#define HUD_LAYER			20 //Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
-	#define OBFUSCATION_LAYER	21 //Where images covering the view for eyes are put
 	#define SCREEN_LAYER		22 //Mob HUD/effects layer
 
 #define PLANE_LIGHTING			5 //Where the lighting (and darkness) lives
@@ -91,9 +92,11 @@ What is the naming convention for planes or layers?
 #define PLANE_CH_SPECIAL		23 //Special role icon (revhead or w/e)
 #define PLANE_CH_STATUS_OOC		24 //OOC status hud for spooks
 
+#define PLANE_MESONS			30 //Stuff seen with mesons, like open ceilings. This is 30 for downstreams.
 
 //Fullscreen overlays under inventory
-#define PLANE_FULLSCREEN		90	//Blindness, mesons, druggy, etc
+#define PLANE_FULLSCREEN		90 //Blindness, mesons, druggy, etc
+	#define OBFUSCATION_LAYER	5 //Where images covering the view for eyes are put
 	#define FULLSCREEN_LAYER	18
 	#define DAMAGE_LAYER		18.1
 	#define BLIND_LAYER			18.2

@@ -96,7 +96,18 @@
 	Trigger(var/atom/movable/A)
 		if(teleport_x && teleport_y && teleport_z)
 			var/turf/T = locate(teleport_x, teleport_y, teleport_z)
-			A.forceMove(T)
+			if(isliving(A))
+				var/mob/living/L = A
+				if(L.pulling)
+					var/atom/movable/P = L.pulling
+					L.stop_pulling()
+					P.forceMove(T)
+					L.forceMove(T)
+					L.start_pulling(P)
+				else
+					A.forceMove(T)
+			else
+				A.forceMove(T)
 
 /* Random teleporter, teleports atoms to locations ranging from teleport_x - teleport_x_offset, etc */
 
@@ -146,9 +157,6 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 /obj/effect/step_trigger/teleporter/planetary_fall
 	var/datum/planet/planet = null
 
-/obj/effect/step_trigger/teleporter/planetary_fall/sif/initialize()
-	planet = planet_sif
-
 /obj/effect/step_trigger/teleporter/planetary_fall/Trigger(var/atom/movable/A)
 	if(planet)
 		if(!planet.planet_floors.len)
@@ -158,7 +166,10 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 		var/safety = 100 // Infinite loop protection.
 		while(!T && safety)
 			var/turf/simulated/candidate = pick(planet.planet_floors)
-			if(!istype(candidate) || istype(candidate, /turf/simulated/sky) || !T.outdoors)
+			if(!istype(candidate) || istype(candidate, /turf/simulated/sky))
+				safety--
+				continue
+			else if(candidate && !candidate.outdoors)
 				safety--
 				continue
 			else
@@ -173,11 +184,11 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 			A.forceMove(T) // Harmlessly move ghosts.
 			return
 
+		A.forceMove(T)
 		if(isliving(A)) // Someday, implement parachutes.  For now, just turbomurder whoever falls.
+			message_admins("\The [A] fell out of the sky.")
 			var/mob/living/L = A
 			L.fall_impact(T, 42, 90, FALSE, TRUE)	//You will not be defibbed from this.
-		message_admins("\The [A] fell out of the sky.")
-		A.forceMove(T)
 	else
 		message_admins("ERROR: planetary_fall step trigger lacks a planet to fall onto.")
 		return

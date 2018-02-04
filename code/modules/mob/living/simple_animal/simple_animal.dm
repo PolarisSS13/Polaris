@@ -20,7 +20,7 @@
 	//Mob icon/appearance settings
 	var/icon_living = ""			// The iconstate if we're alive, required
 	var/icon_dead = ""				// The iconstate if we're dead, required
-	var/icon_gib = null				// The iconstate for being gibbed, optional
+	var/icon_gib = "generic_gib"	// The iconstate for being gibbed, optional. Defaults to a generic gib animation.
 	var/icon_rest = null			// The iconstate for resting, optional
 	var/image/modifier_overlay = null // Holds overlays from modifiers.
 
@@ -483,7 +483,7 @@
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(icon_gib,1)
+	..(icon_gib,1,icon) // we need to specify where the gib animation is stored
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)
@@ -577,7 +577,8 @@
 						if ((M.client && !( M.blinded )))
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
-			user << "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>"
+			var/datum/gender/T = gender_datums[src.get_visible_gender()]
+			user << "<span class='notice'>\The [src] is dead, medical items won't bring [T.him] back to life.</span>" // the gender lookup is somewhat overkill, but it functions identically to the obsolete gender macros and future-proofs this code
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
