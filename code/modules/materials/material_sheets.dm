@@ -106,6 +106,13 @@
 	default_type = "marble"
 	no_variants = FALSE
 
+/obj/item/stack/material/cult
+	name = "disturbing stone brick"
+	icon_state = "sheet-marble"
+	default_type = "cult"
+	apply_colour = 1
+	no_variants = FALSE
+
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"

@@ -131,6 +131,29 @@
 				prob(1);/obj/item/taperoll/atmos,
 				prob(1);/obj/item/device/flashlight/maglight)
 
+/obj/random/tech_supply/component
+	name = "random tech component"
+	desc = "This is a random machine component."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "portable_analyzer"
+
+/obj/random/tech_supply/component/item_to_spawn()
+	return pick(prob(3);/obj/item/weapon/stock_parts/gear,
+		prob(2);/obj/item/weapon/stock_parts/console_screen,
+		prob(1);/obj/item/weapon/stock_parts/spring,
+		prob(3);/obj/item/weapon/stock_parts/capacitor,
+		prob(2);/obj/item/weapon/stock_parts/capacitor/adv,
+		prob(1);/obj/item/weapon/stock_parts/capacitor/super,
+		prob(3);/obj/item/weapon/stock_parts/manipulator,
+		prob(2);/obj/item/weapon/stock_parts/manipulator/nano,
+		prob(1);/obj/item/weapon/stock_parts/manipulator/pico,
+		prob(3);/obj/item/weapon/stock_parts/matter_bin,
+		prob(2);/obj/item/weapon/stock_parts/matter_bin/adv,
+		prob(1);/obj/item/weapon/stock_parts/matter_bin/super,
+		prob(3);/obj/item/weapon/stock_parts/scanning_module,
+		prob(2);/obj/item/weapon/stock_parts/scanning_module/adv,
+		prob(1);/obj/item/weapon/stock_parts/scanning_module/phasic)
+
 /obj/random/medical
 	name = "Random Medicine"
 	desc = "This is a random medical item."
