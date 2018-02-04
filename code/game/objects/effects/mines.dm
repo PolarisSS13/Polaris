@@ -52,6 +52,8 @@
 
 	else if((iswirecutter(W) || ismultitool(W)) && panel_open)
 		interact(user)
+	else
+		..()
 
 /obj/effect/mine/interact(mob/living/user as mob)
 	if(!panel_open || istype(user, /mob/living/silicon/ai))
@@ -119,6 +121,11 @@
 	qdel(s)
 	qdel(src)
 
+/obj/effect/mine/training/explode()
+	triggered = 1
+	visible_message("\The [src.name]'s light flashes rapidly as it 'explodes'.")
+	new src.mineitemtype(get_turf(src))
+	qdel(src)
 
 /obj/effect/mine/dnascramble
 	name = "radiation mine"
@@ -160,6 +167,12 @@
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7
 
+/obj/effect/mine/training
+	name = "training mine"
+	desc = "A mine with its payload removed, for EOD training and demonstrations."
+	icon_state = "uglymine"
+	mineitemtype = /obj/item/weapon/mine/training
+
 /obj/item/weapon/mine
 	name = "mine"
 	desc = "A small explosive mine with 'HE' and a grenade symbol on the side."
@@ -172,11 +185,19 @@
 /obj/item/weapon/mine/attack_self(mob/user as mob)
 	if(!arming)
 		to_chat(user, "<span class='warning'>You prime \the [name]! [countdown] seconds!</span>")
-		activate(user)
+		icon_state = initial(icon_state) + "armed"
+		arming = 1
+		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 		add_fingerprint(user)
 		if(iscarbon(user))
 			var/mob/living/carbon/C = user
 			C.throw_mode_on()
+		spawn(countdown*10)
+			if(arming)
+				prime()
+				if(user)
+					msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+				return
 	else
 		to_chat(user, "You cancel \the [name]'s priming sequence.")
 		arming = 0
@@ -184,20 +205,6 @@
 		icon_state = initial(icon_state)
 		add_fingerprint(user)
 	return
-
-/obj/item/weapon/mine/proc/activate(mob/user as mob)
-	if(arming)
-		return
-	icon_state = initial(icon_state) + "armed"
-	arming = 1
-	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-
-	spawn(countdown*10)
-		if(arming)
-			prime()
-			if(user)
-				msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-			return
 
 /obj/item/weapon/mine/proc/prime(mob/user as mob)
 	visible_message("\The [src.name] beeps as the priming sequence completes.")
@@ -242,3 +249,9 @@
 	desc = "A small explosive mine with 'FRAG' and a grenade symbol on the side."
 	icon_state = "uglymine"
 	minetype = /obj/effect/mine/frag
+
+/obj/item/weapon/mine/training
+	name = "training mine"
+	desc = "A mine with its payload removed, for EOD training and demonstrations."
+	icon_state = "uglymine"
+	minetype = /obj/effect/mine/training
