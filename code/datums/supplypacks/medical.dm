@@ -335,13 +335,3 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate/medical
 	containername = "Defibrillator crate"
-
-/datum/supply_packs/med/advgear
-	name = "Prototype medical gear crate"
-	contains = list(
-			/obj/item/device/healthanalyzer/advanced = 2,
-			/obj/item/roller/adv = 2,
-			/obj/item/weapon/storage/firstaid/adv = 2)
-	cost = 50
-	containertype = /obj/structure/closet/crate/medical
-	containername = "Prototype medical gear crate"
