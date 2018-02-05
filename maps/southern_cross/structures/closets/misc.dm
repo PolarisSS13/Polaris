@@ -47,6 +47,8 @@
 	new	/obj/item/clothing/mask/gas/explorer(src)
 	new /obj/item/clothing/shoes/boots/winter/explorer(src)
 	new /obj/item/clothing/gloves/black(src)
+	new /obj/item/clothing/accessory/storage/brown_vest(src)
+	new /obj/item/clothing/accessory/storage/brown_drop_pouches(src)
 	new /obj/item/device/radio/headset/explorer(src)
 	new /obj/item/device/flashlight(src)
 	new /obj/item/device/gps/explorer(src)
