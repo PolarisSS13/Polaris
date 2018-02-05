@@ -9,7 +9,6 @@
 	attack_verb = list("patted", "tapped")
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
-	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
@@ -67,7 +66,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
@@ -102,6 +100,7 @@
 	force_divisor = 0.3 // 18 when hardness 60 (steel)
 	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
 	var/should_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
+	slot_flags = SLOT_BELT
 
 // This cannot go into afterattack since some mobs delete themselves upon dying.
 /obj/item/weapon/material/knife/machete/pre_attack(var/mob/living/target, var/mob/living/user)
