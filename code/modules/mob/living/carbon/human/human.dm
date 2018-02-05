@@ -16,7 +16,7 @@
 	var/last_spit = 0 //Timestamp.
 
 	var/can_defib = 1	//Horrible damage (like beheadings) will prevent defibbing organics.
-	var/active_regen = 0 //Used for the regenerate proc in human_powers.dm
+	var/active_regen = FALSE //Used for the regenerate proc in human_powers.dm
 	var/active_regen_delay = 300
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)

@@ -75,7 +75,7 @@
 	icon_state = "taserblue"
 	item_state = "taser"
 	projectile_type = /obj/item/projectile/beam/stun/xeno/weak
-	charge_cost = 300
+	charge_cost = 240
 	accuracy = 0 //Same accuracy as a normal Sec taser.
 	description_fluff = "An NT Mk30 NL retrofitted after the events that occurred aboard the NRS Prometheus."
 
@@ -97,9 +97,9 @@
 	impact_type = /obj/effect/projectile/laser_omni/impact
 
 /obj/item/projectile/beam/stun/xeno/weak //Weaker variant for non-research equipment, turrets, or rapid fire types.
-	agony = 2
+	agony = 3
 
-/obj/item/projectile/beam/stun/xeno/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/beam/stun/xeno/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
 
@@ -116,6 +116,6 @@
 		if(ishuman(L))
 			var/mob/living/carbon/human/H = L
 			if(H.species && H.species.name == "Promethean")
-				var/agony_to_apply = round((14 * agony) - agony) //60-4 = 56, 56 / 4 = 14. Prior was flat 60 - agony of the beam to equate to 60.
-				H.apply_damage(agony_to_apply, HALLOSS)
+				if(agony == initial(agony))
+					agony = round((14 * agony) - agony) //60-4 = 56, 56 / 4 = 14. Prior was flat 60 - agony of the beam to equate to 60.
 	..()
