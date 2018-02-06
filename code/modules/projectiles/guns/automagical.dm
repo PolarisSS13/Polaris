@@ -65,7 +65,6 @@
 /obj/screen/auto_target/MouseUp(object,location,control,params)
 	del(src)
 	return
-/*
 
 //This pseudo code is being left in place to serve as references to the modifications to gun.dm, the Fire() proc, and the afterattack() proc. -k22
 //Code donated by Mport.
