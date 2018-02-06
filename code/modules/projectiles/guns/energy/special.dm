@@ -197,7 +197,8 @@ obj/item/weapon/gun/energy/staff/focus
 	origin_tech = list(TECH_COMBAT = 6, TECH_MAGNET = 6, TECH_ILLEGAL = 6)
 
 	firemodes = list(
-		list(mode_name="single shot", burst = 1, burst_accuracy = list(5), dispersion = list(0), charge_cost = 24),
-		list(mode_name="five shot burst", burst = 5, burst_accuracy = list(5,5,5,5,5), dispersion = list(1,1,1,1,1)),
-		list(mode_name="ten shot burst", burst = 10, burst_accuracy = list(5,5,5,5,5,5,5,5,5,5), dispersion = list(2,2,2,2,2,2,2,2,2,2)),
+		list(mode_name="single shot", burst = 1, burst_accuracy = list(5), dispersion = list(0), charge_cost = 24, automatic = 0),
+		list(mode_name="five shot burst", burst = 5, burst_accuracy = list(5,5,5,5,5), dispersion = list(1,1,1,1,1), automatic = 0),
+		list(mode_name="ten shot burst", burst = 10, burst_accuracy = list(5,5,5,5,5,5,5,5,5,5), dispersion = list(2,2,2,2,2,2,2,2,2,2), automatic = 0),
+		list(mode_name="single shot true automatic", burst = 1, burst_accuracy = list(5), dispersion = list(2), charge_cost = 24, automatic = 1)
 		)
