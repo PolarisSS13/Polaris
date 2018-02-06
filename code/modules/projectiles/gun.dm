@@ -186,12 +186,12 @@
 		if(auto_target)//If they already have one then update it
 			auto_target.loc = get_turf(A)
 			auto_target.delay_del = 1//And reset the del so its like they got a new one and doesnt instantly vanish
-			user << "\blue You ready \the [src]!  Click and drag the target around to shoot."
+			to_chat(user, "<span class='notice'>You ready \the [src]!  Click and drag the target around to shoot.</span>"
 		else//Otherwise just make a new one
 			auto_target = new/obj/screen/auto_target(get_turf(A), src)
 			visible_message("<span class='danger'>\[user] readies the [src]!</span>")
 			playsound(src, 'sound/weapons/TargetOn.ogg', 50, 1)
-			user << "\blue You ready \the [src]!  Click and drag the target around to shoot."
+			to_chat(user, "<span class='notice'>You ready \the [src]!  Click and drag the target around to shoot.</span>"
 			return
 	Fire(A,user,params) //Otherwise, fire normally.
 
