@@ -22,7 +22,7 @@
 "v" = (/obj/structure/table/woodentable,/obj/item/weapon/book/codex/lore/vir,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 "w" = (/obj/effect/decal/cleanable/blood/xeno,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "x" = (/obj/effect/decal/cleanable/blood/xeno,/obj/effect/decal/remains/posi,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
-"y" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle/candelabra/everburn,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
+"y" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle/candleabra/everburn,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 "z" = (/obj/structure/simple_door/gold,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "A" = (/obj/effect/decal/remains/posi,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "B" = (/obj/machinery/crystal{icon_state = "crystal3"; light_color = "#f44256"; light_power = 3},/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/crystal1)
@@ -36,8 +36,8 @@
 "J" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "K" = (/obj/structure/table/bench/wooden,/obj/effect/decal/remains/xeno,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "L" = (/obj/structure/simple_door/sandstone,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
-"M" = (/obj/effect/decal/cleanable/cobweb,/obj/item/weapon/flame/candle/candelabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
-"N" = (/obj/effect/decal/cleanable/cobweb2,/obj/item/weapon/flame/candle/candelabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
+"M" = (/obj/effect/decal/cleanable/cobweb,/obj/item/weapon/flame/candle/candleabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
+"N" = (/obj/effect/decal/cleanable/cobweb2,/obj/item/weapon/flame/candle/candleabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "O" = (/obj/effect/decal/cleanable/blood,/turf/simulated/mineral/floor,/area/submap/AbandonedTemple)
 
 (1,1,1) = {"

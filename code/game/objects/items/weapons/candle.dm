@@ -71,19 +71,19 @@
 		update_icon()
 		set_light(0)
 
-/obj/item/weapon/flame/candle/candleabra
-	name = "candleabra"
-	desc = "a small gold candleabra. The cups that hold the candles save some of the wax from dripping off, allowing the candles to burn longer."
+/obj/item/weapon/flame/candle/candelabra
+	name = "candelabra"
+	desc = "a small gold candelabra. The cups that hold the candles save some of the wax from dripping off, allowing the candles to burn longer."
 	icon = 'icons/obj/candle.dmi'
-	icon_state = "candleabra"
+	icon_state = "candelabra"
 	w_class = ITEMSIZE_SMALL
 	wax = 20000
 
-/obj/item/weapon/flame/candle/candleabra/update_icon()
+/obj/item/weapon/flame/candle/candelabra/update_icon()
 	if(wax == 0)
-		icon_state = "candleabra_melted"
+		icon_state = "candelabra_melted"
 	else
-		icon_state = "candleabra[lit ? "_lit" : ""]"
+		icon_state = "candelabra[lit ? "_lit" : ""]"
 
 /obj/item/weapon/flame/candle/everburn
 	wax = 99999
@@ -97,11 +97,11 @@
 		set_light(CANDLE_LUM)
 		processing_objects.Add(src)
 
-/obj/item/weapon/flame/candle/candleabra/everburn
+/obj/item/weapon/flame/candle/candelabra/everburn
 	wax = 99999
 	light()
 
-/obj/item/weapon/flame/candle/candleabra/everburn/New()
+/obj/item/weapon/flame/candle/candelabra/everburn/New()
 	if(!src.lit)
 		src.lit = 1
 		//src.damtype = "fire"
