@@ -11,7 +11,7 @@
 	var/active = 0//Just tells us that it was clicked on so we should start shooting
 	var/delay_del = 0//Delays the del if we retarget without shooting
 
-	New(loc, var/obj/item/weapon/gun/G)
+/obj/screen/auto_target/New(loc, var/obj/item/weapon/gun/G)
 		..()
 		gun = G
 		var/image/I = image('icons/effects/Targeted.dmi', src, "locked")
@@ -20,7 +20,7 @@
 		//autodel() //Currently doesn't really work right.
 		return
 
-	CanPass()//Everything should ignore this guy and just pass by
+/obj/screen/auto_target/CanPass()//Everything should ignore this guy and just pass by
 		return 1
 
 	//Used to get rid of this if they target but dont actually shoot or stop shooting (no ammo) yet are still dragging us around
