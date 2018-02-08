@@ -277,8 +277,8 @@
 	if (!hiding)
 		layer = 2.45 //Just above cables with their 2.44
 		hiding = 1
-		src << text("<font color='blue'>You are now hiding.</font>")
+		to_chat(src, "<font color='blue'>You are now hiding.</font>")
 	else
 		layer = MOB_LAYER
 		hiding = 0
-		src << text("<font color='blue'>You have stopped hiding.</font>")
+		to_chat(src, "<font color='blue'>You have stopped hiding.</font>")
