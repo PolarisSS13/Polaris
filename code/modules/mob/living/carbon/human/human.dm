@@ -1540,8 +1540,8 @@
 
 /mob/living/carbon/human/proc/update_icon_special() //For things such as teshari hiding and whatnot.
 	if(hiding) // Hiding? Carry on.
-		if(incapacitated(INCAPACITATION_STUNNED)) //stunned/knocked down by something that isn't the rest verb?
-			hiding = 0 //No hiding for you. Mob layer should be updated naturally.
+		if(stat == DEAD || paralysis || weakened || stunned) //stunned/knocked down by something that isn't the rest verb? Note: This was tried with INCAPACITATION_STUNNED, but that refused to work.
+			hiding = 0 //No hiding for you. Mob layer should be updated naturally, but it actually doesn't.
 		else
 			layer = 2.45
 	else //Replace this else with other variables if added in the future. Alternatively, could make other things effect this hiding variable.

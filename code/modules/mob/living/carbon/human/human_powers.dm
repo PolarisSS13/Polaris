@@ -271,7 +271,7 @@
 	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
 	set category = "Abilities"
 
-	if(incapacitated(INCAPACITATION_STUNNED)) // No hiding if you're stunned!
+	if(stat == DEAD || paralysis || weakened || stunned) // No hiding if you're stunned!
 		return
 
 	if (!hiding)
