@@ -99,7 +99,6 @@
 
 /obj/item/weapon/flame/candle/candelabra/everburn
 	wax = 99999
-	light()
 
 /obj/item/weapon/flame/candle/candelabra/everburn/New()
 	if(!src.lit)
