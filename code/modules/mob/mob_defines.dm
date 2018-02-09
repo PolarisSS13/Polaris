@@ -218,3 +218,10 @@
 	var/seedarkness = 1	//Determines mob's ability to see shadows. 1 = Normal vision, 0 = darkvision
 
 	var/get_rig_stats = 0 //Moved from computer.dm
+
+	var/hud_typing = 0 //Typing indicator stuff.
+	var/typing
+	var/last_typed
+	var/last_typed_time
+	var/obj/effect/decal/typing_indicator
+	var/chatbar_typing
