@@ -403,7 +403,7 @@
 	desc = "An exosuit-mounted rapid construction device."
 	id = "mech_rcd"
 	time = 120
-	materials = list(DEFAULT_WALL_MATERIAL = 22500, "plastic" = 10000, "phoron" = 18750, "silver" = 15000, "gold" = 15000)
+	materials = list(DEFAULT_WALL_MATERIAL = 20000, "plastic" = 10000, "phoron" = 18750, "silver" = 15000, "gold" = 15000)
 	req_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/rcd
 
