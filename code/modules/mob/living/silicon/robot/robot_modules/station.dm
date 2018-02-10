@@ -657,7 +657,7 @@ var/global/list/robot_modules = list(
 					"Bro" = "Brobot",
 					"Rich" = "maximillion",
 					"Default" = "Service2",
-					"Drone" = "drone-blu"
+					"Drone" = "drone-blu",
 					"Handy" = "handy-clerk"
 					)
 
