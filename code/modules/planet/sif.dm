@@ -174,7 +174,7 @@ datum/weather/sif
 	temp_high = T0C		// 0c
 	temp_low = 243.15	// -30c
 	light_modifier = 0.5
-	flight_falure_modifier = 5
+	flight_failure_modifier = 5
 	transition_chances = list(
 		WEATHER_LIGHT_SNOW = 20,
 		WEATHER_SNOW = 50,
@@ -198,7 +198,7 @@ datum/weather/sif
 	temp_high = 243.15 // -30c
 	temp_low = 233.15  // -40c
 	light_modifier = 0.3
-	flight_falure_modifier = 10
+	flight_failure_modifier = 10
 	transition_chances = list(
 		WEATHER_SNOW = 45,
 		WEATHER_BLIZZARD = 40,
@@ -243,7 +243,7 @@ datum/weather/sif
 	temp_high = 243.15 // -30c
 	temp_low = 233.15  // -40c
 	light_modifier = 0.3
-	flight_falure_modifier = 10
+	flight_failure_modifier = 10
 	transition_chances = list(
 		WEATHER_RAIN = 45,
 		WEATHER_STORM = 40,
@@ -267,7 +267,7 @@ datum/weather/sif
 	temp_high = T0C		// 0c
 	temp_low = 243.15	// -30c
 	light_modifier = 0.3
-	flight_falure_modifier = 15
+	flight_failure_modifier = 15
 	transition_chances = list(
 		WEATHER_RAIN = 45,
 		WEATHER_STORM = 10,
