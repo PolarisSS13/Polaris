@@ -39,7 +39,7 @@
 /obj/effect/mine/Bumped(mob/M as mob|obj)
 
 	if(triggered) return
-  
+
 	if(istype(M, /mob/living/))
 		explode(M)
 
@@ -171,8 +171,8 @@
 
 /obj/effect/mine/emp
 	name = "EMP Mine"
-  desc = "A small explosive mine with a lightning bolt symbol on the side."
-  mineitemtype = /obj/item/weapon/mine/emp
+	desc = "A small explosive mine with a lightning bolt symbol on the side."
+	mineitemtype = /obj/item/weapon/mine/emp
 
 /obj/effect/mine/emp/explode(var/mob/living/M)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
@@ -257,7 +257,7 @@
 	name = "training mine"
 	desc = "A mine with its payload removed, for EOD training and demonstrations."
 	minetype = /obj/effect/mine/training
-  
+
 /obj/item/weapon/mine/emp
 	name = "emp mine"
 	desc = "A small explosive mine with a lightning bolt symbol on the side."
