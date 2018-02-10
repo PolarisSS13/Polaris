@@ -1,0 +1,18 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/floor/outdoors/snow/sif/planetuse,/area/submap/RationCache)
+"c" = (/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
+"d" = (/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/turf/simulated/mineral/floor/ignore_mapgen/sif{sand_dug = 1},/area/submap/RationCache)
+"e" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
+
+(1,1,1) = {"
+aaaabbbaaa
+aabbbbbbaa
+abbbbbbbbb
+abbbcbbbbb
+bbbcdcbbbb
+bbbcecbbbb
+bbbbcbbbbb
+bbbbbbbbaa
+aabbbbbaaa
+aabbbaaaaa
+"}

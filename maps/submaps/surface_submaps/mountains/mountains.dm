@@ -17,6 +17,7 @@
 #include "Rockb1.dmm"
 #include "ritual.dmm"
 #include "temple.dmm"
+#include "SupplyDrop1.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.

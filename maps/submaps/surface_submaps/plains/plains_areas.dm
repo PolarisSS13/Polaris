@@ -36,3 +36,6 @@
 
 /area/submap/Field1
 	name = "Field 1"
+
+/area/submap/RationCache
+	name = "Ration Cache"

@@ -12,6 +12,7 @@
 #include "bonfire.dmm"
 #include "Rocky5.dmm"
 #include "Field1.dmm"
+#include "RationCache.dmm"
 #endif
 
 // The 'plains' is the area outside the immediate perimeter of the big outpost.
@@ -95,3 +96,9 @@
 	desc = "A regular field with a tug on it"
 	mappath = 'maps/submaps/surface_submaps/plains/Field1.dmm'
 	cost = 20
+
+/datum/map_template/surface/plains/RationCache
+	name = "Ration Cache"
+	desc = "A forgotten cache of emergency rations."
+	mappath = 'maps/submaps/surface_submaps/plains/RationCache.dmm'
+	cost = 5
