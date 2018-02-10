@@ -253,19 +253,19 @@ Please contact me on #coderbus IRC. ~Carn x
 
 //TYPING INDICATOR CODE.
 	if(client && !stat) //They have a client & aren't dead? Continue on!
-		if(typing_indicator && (hud_typing || chatbar_typing)) //They already have the indicator and are still typing
+		if(typing_indicator && hud_typing) //They already have the indicator and are still typing
 			overlays += typing_indicator //This might not be needed? It works, so I'm leaving it.
 			list_huds += typing_indicator
 			typing_indicator.invisibility = invisibility
 
-		else if(!typing_indicator && (hud_typing || chatbar_typing) && is_preference_enabled(/datum/client_preference/show_typing_indicator)) //Are they in their body, NOT dead, have hud_typing, do NOT have a typing indicator. and have it enabled?
+		else if(!typing_indicator && hud_typing && is_preference_enabled(/datum/client_preference/show_typing_indicator)) //Are they in their body, NOT dead, have hud_typing, do NOT have a typing indicator. and have it enabled?
 			typing_indicator = new
 			typing_indicator.icon = 'icons/mob/talk.dmi'
 			typing_indicator.icon_state = "[speech_bubble_appearance()]_typing"
 			overlays += typing_indicator
 			list_huds += typing_indicator
 
-		else if(typing_indicator && !hud_typing && !chatbar_typing) //Did they stop typing?
+		else if(typing_indicator && !hud_typing) //Did they stop typing?
 			overlays -= typing_indicator
 			typing = 0
 			hud_typing = 0
