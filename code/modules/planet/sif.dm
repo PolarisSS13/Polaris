@@ -232,7 +232,7 @@ datum/weather/sif
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
-				return // They're indoors, so no need to rain on them.
+				continue // They're indoors, so no need to rain on them.
 
 			L.water_act(1)
 			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
@@ -256,7 +256,7 @@ datum/weather/sif
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
-				return // They're indoors, so no need to rain on them.
+				continue // They're indoors, so no need to rain on them.
 
 			L.water_act(2)
 			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
@@ -280,17 +280,17 @@ datum/weather/sif
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
-				return // They're indoors, so no need to pelt them with ice.
+				continue // They're indoors, so no need to pelt them with ice.
 
 			var/target_zone = pick(BP_ALL)
 			var/amount_blocked = L.run_armor_check(target_zone, "melee")
 			var/amount_soaked = L.get_armor_soak(target_zone, "melee")
 
 			if(amount_blocked >= 100)
-				return // No need to apply damage.
+				continue // No need to apply damage.
 
 			if(amount_soaked >= 10)
-				return // No need to apply damage.
+				continue // No need to apply damage.
 
 			L.apply_damage(rand(5, 10), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
 			to_chat(L, "<span class='warning'>The hail raining down on you [L.can_feel_pain() ? "hurts" : "damages you"]!</span>")
