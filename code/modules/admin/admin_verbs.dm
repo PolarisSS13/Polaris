@@ -101,7 +101,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_attack_logs,
 	/datum/admins/proc/paralyze_mob,
 	/client/proc/fixatmos,
-	/datum/admins/proc/sendFax
+	/datum/admins/proc/sendFax,
+	/client/proc/despawn_player
 	)
 
 var/list/admin_verbs_ban = list(
@@ -779,11 +780,11 @@ var/list/admin_verbs_event_manager = list(
 	set category = "Debug"
 	set name = "Kill Air"
 	set desc = "Toggle Air Processing"
-	if(air_processing_killed)
-		air_processing_killed = 0
+	if(!SSair.can_fire)
+		SSair.can_fire = TRUE
 		usr << "<b>Enabled air processing.</b>"
 	else
-		air_processing_killed = 1
+		SSair.can_fire = FALSE
 		usr << "<b>Disabled air processing.</b>"
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")
@@ -887,13 +888,13 @@ var/list/admin_verbs_event_manager = list(
 	if(!H.client)
 		usr << "Only mobs with clients can alter their own appearance."
 		return
-
+	var/datum/gender/T = gender_datums[H.get_visible_gender()]
 	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
 		if("Yes")
-			log_and_message_admins("has allowed [H] to change \his appearance, without whitelisting of races.")
+			log_and_message_admins("has allowed [H] to change [T.his] appearance, without whitelisting of races.")
 			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 0)
 		if("No")
-			log_and_message_admins("has allowed [H] to change \his appearance, with whitelisting of races.")
+			log_and_message_admins("has allowed [H] to change [T.his] appearance, with whitelisting of races.")
 			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
 	feedback_add_details("admin_verb","CMAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

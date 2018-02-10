@@ -42,6 +42,7 @@
 	var/blood_volume = 560                               // Initial blood volume.
 	var/bloodloss_rate = 1								 // Multiplier for how fast a species bleeds out. Higher = Faster
 	var/hunger_factor = 0.05                             // Multiplier for hunger.
+	var/active_regen_mult = 1							 // Multiplier for 'Regenerate' power speed, in human_powers.dm
 
 	var/taste_sensitivity = TASTE_NORMAL                 // How sensitive the species is to minute tastes.
 
@@ -163,6 +164,7 @@
 	var/obj/effect/decal/cleanable/blood/tracks/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // What marks are left when walking
 	var/list/skin_overlays = list()
 	var/has_floating_eyes = 0     // Whether the eyes can be shown above other icons
+	var/has_glowing_eyes = 0      // Whether the eyes are shown above all lighting
 	var/water_movement = 0		  // How much faster or slower the species is in water
 	var/snow_movement = 0		  // How much faster or slower the species is on snow
 

@@ -14,6 +14,9 @@
 #include "lost_explorer.dmm"
 #include "CaveTrench.dmm"
 #include "Cavelake.dmm"
+#include "Rockb1.dmm"
+#include "ritual.dmm"
+#include "temple.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -88,6 +91,24 @@
 	cost = 5
 	allow_duplicates = TRUE
 
+/datum/map_template/surface/mountains/normal/Rockb1
+	name = "Rocky Base 1"
+	desc = "Someones underground hidey hole"
+	mappath = 'maps/submaps/surface_submaps/mountains/Rockb1.dmm'
+	cost = 15
+
+/datum/map_template/surface/mountains/normal/corgiritual
+	name = "Dark Ritual"
+	desc = "Who put all these plushies here? What are they doing?"
+	mappath = 'maps/submaps/surface_submaps/mountains/ritual.dmm'
+	cost = 15
+
+/datum/map_template/surface/mountains/normal/abandonedtemple
+	name = "Abandoned Temple"
+	desc = "An ancient temple, long since abandoned. Perhaps alien in origin?"
+	mappath = 'maps/submaps/surface_submaps/mountains/temple.dmm'
+	cost = 20
+
 /**************
  * Deep Caves *
  **************/
@@ -104,6 +125,7 @@
 	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet it still seems to be running..."
 	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
 	cost = 40
+	discard_prob = 50
 
 /datum/map_template/surface/mountains/deep/Scave1
 	name = "Spider Cave 1"
@@ -113,7 +135,7 @@
 
 /datum/map_template/surface/mountains/deep/CaveTrench
 	name = "Cave River"
-	desc = "A strange underground river"
+	desc = "A strange underground river."
 	mappath = 'maps/submaps/surface_submaps/mountains/CaveTrench.dmm'
 	cost = 20
 
