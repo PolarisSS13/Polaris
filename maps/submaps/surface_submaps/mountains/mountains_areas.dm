@@ -47,3 +47,6 @@
 
 /area/submap/AbandonedTemple
 	name = "Abandoned Temple"
+
+/area/submap/cave/SupplyDrop1
+	name = "Supply Drop 1"
