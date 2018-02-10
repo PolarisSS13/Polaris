@@ -58,7 +58,6 @@
 /obj/effect/mine/interact(mob/living/user as mob)
 	if(!panel_open || istype(user, /mob/living/silicon/ai))
 		return
-
 	user.set_machine(src)
 	wires.Interact(user)
 
@@ -75,9 +74,9 @@
 	M.radiation += 50
 	randmutb(M)
 	domutcheck(M,null)
-  spawn(0)
-  	qdel(s)
-	  qdel(src)
+	spawn(0)
+		qdel(s)
+		qdel(src)
 
 /obj/effect/mine/stun
 	name = "stun mine"
@@ -90,9 +89,9 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-  spawn(0)
-  	qdel(s)
-	  qdel(src)
+	spawn(0)
+		qdel(s)
+		qdel(src)
 
 /obj/effect/mine/n2o
 	name = "nitrous oxide mine"
@@ -105,7 +104,7 @@
 		if(!target.blocks_air)
 			target.assume_gas("sleeping_agent", 30)
 	spawn(0)
-    qdel(src)
+		qdel(src)
 
 /obj/effect/mine/phoron
 	name = "incendiary mine"
@@ -117,10 +116,9 @@
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 			target.assume_gas("phoron", 30)
-
 			target.hotspot_expose(1000, CELL_VOLUME)
 	spawn(0)
-    qdel(src)
+		qdel(src)
 
 /obj/effect/mine/kick
 	name = "kick mine"
@@ -133,9 +131,9 @@
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(M.client)
-  spawn(0)
-  	qdel(s)
-	  qdel(src)
+	spawn(0)
+		qdel(s)
+		qdel(src)
 
 /obj/effect/mine/frag
 	name = "fragmentation mine"
@@ -156,8 +154,8 @@
 		return
 	src.fragmentate(O, 20, 7, list(/obj/item/projectile/bullet/pellet/fragment)) //only 20 weak fragments because you're stepping directly on it
 	spawn(0)
-    qdel(s)
-	  qdel(src)
+		qdel(s)
+		qdel(src)
 
 /obj/effect/mine/training
 	name = "training mine"
@@ -168,8 +166,8 @@
 	triggered = 1
 	visible_message("\The [src.name]'s light flashes rapidly as it 'explodes'.")
 	new src.mineitemtype(get_turf(src))
-  spawn(0)
-  	qdel(src)
+	spawn(0)
+		qdel(src)
 
 /obj/effect/mine/emp
 	name = "EMP Mine"
@@ -261,6 +259,6 @@
 	minetype = /obj/effect/mine/training
   
 /obj/item/weapon/mine/emp
-  name = "emp mine"
-  desc = "A small explosive mine with a lightning bolt symbol on the side."
-  minetype = /obj/effect/mine/emp
+	name = "emp mine"
+	desc = "A small explosive mine with a lightning bolt symbol on the side."
+	minetype = /obj/effect/mine/emp
