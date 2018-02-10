@@ -3,12 +3,12 @@
 	random = 1
 	holder_type = /obj/effect/mine
 
-var/const/WIRE_DETONATE  = 1
-var/const/WIRE_TIMED_DET = 2
-var/const/WIRE_DISARM    = 4
-var/const/WIRE_DUMMY_1   = 8
-var/const/WIRE_DUMMY_2   = 16
-var/const/WIRE_BADDISARM = 32
+#define WIRE_DETONATE  = 1
+#define WIRE_TIMED_DET = 2
+#define WIRE_DISARM    = 4
+#define WIRE_DUMMY_1   = 8
+#define WIRE_DUMMY_2   = 16
+#define WIRE_BADDISARM = 32
 
 /datum/wires/mines/GetInteractWindow()
 	. = ..()
