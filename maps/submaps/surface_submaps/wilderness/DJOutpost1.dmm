@@ -37,7 +37,7 @@
 "K" = (/obj/machinery/light/flamp,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
 "L" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 15; tag = "icon-sink (EAST)"},/turf/simulated/floor/wood,/area/submap/DJOutpost1)
 "M" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/clown,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
-"N" = (/obj/structure/table/rack,/obj/item/ammo_magazine/clip/c545/hunter,/obj/item/weapon/gun/projectile/shotgun/pump/rifle,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
+"N" = (/obj/structure/table/rack,/obj/item/ammo_magazine/clip/c762/hunter,/obj/item/weapon/gun/projectile/shotgun/pump/rifle,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
 "O" = (/obj/structure/table/rack,/obj/item/device/gps/on{gps_tag = "Sif Free Radio"},/obj/item/device/flashlight/lantern,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
 "P" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/wood,/area/submap/DJOutpost1)
 
