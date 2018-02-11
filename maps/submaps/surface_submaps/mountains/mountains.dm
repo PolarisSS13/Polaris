@@ -151,3 +151,9 @@
 	desc = "A large underground lake."
 	mappath = 'maps/submaps/surface_submaps/mountains/Cavelake.dmm'
 	cost = 20
+
+/datum/map_template/surface/mountains/deep/BlastMine1
+	name = "Blast Mine 1"
+	desc = "A long-forgotten blast mining operation. Seems someone wasn't practicing proper safety procedures..."
+	mappath = 'maps/submaps/surface_submaps/mountains/BlastMine1.dmm'
+	cost = 10
