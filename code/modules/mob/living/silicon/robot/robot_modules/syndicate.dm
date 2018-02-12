@@ -141,7 +141,7 @@
 /obj/item/weapon/robot_module/robot/syndicate/combat_medic/New(var/mob/living/silicon/robot/R)
 	..()
 	src.modules += new /obj/item/borg/sight/hud/med(src)
-	src.modules += new /obj/item/device/healthanalyzer(src)
+	src.modules += new /obj/item/device/healthanalyzer/advanced(src)
 	src.modules += new /obj/item/weapon/reagent_containers/borghypo/merc(src)
 
 	// Surgery things.
@@ -182,3 +182,13 @@
 	src.modules += O
 	src.modules += B
 	src.modules += S
+
+/obj/item/weapon/robot_module/robot/syndicate/combat_medic/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+
+	var/obj/item/weapon/reagent_containers/syringe/S = locate() in src.modules
+	if(S.mode == 2)
+		S.reagents.clear_reagents()
+		S.mode = initial(S.mode)
+		S.desc = initial(S.desc)
+		S.update_icon()
+	..()

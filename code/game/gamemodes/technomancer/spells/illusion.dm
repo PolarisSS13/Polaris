@@ -62,8 +62,8 @@
 					illusion.emote(what_to_emote)
 
 /obj/item/weapon/spell/illusion/Destroy()
-	if(illusion)
-		qdel(illusion)
+	qdel_null(illusion)
+	copied = null
 	return ..()
 
 // Makes a tiny overlay of the thing the player has copied, so they can easily tell what they currently have.
@@ -167,8 +167,9 @@
 		switch(M.a_intent)
 
 			if(I_HELP)
-				M.visible_message("<span class='notice'>[M] hugs [src] to make \him feel better!</span>", \
-				"<span class='notice'>You hug [src] to make \him feel better!</span>")
+				var/datum/gender/T = gender_datums[src.get_visible_gender()]
+				M.visible_message("<span class='notice'>[M] hugs [src] to make [T.him] feel better!</span>", \
+				"<span class='notice'>You hug [src] to make [T.him] feel better!</span>") // slightly redundant as at the moment most mobs still use the normal gender var, but it works and future-proofs it
 				playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 			if(I_DISARM)

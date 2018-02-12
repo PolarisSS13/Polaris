@@ -7,6 +7,9 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
+	sprite_sheets = list(
+		"Teshari" = 'icons/mob/species/seromi/back.dmi'
+		)
 
 	var/gauge_icon = "indicator_tank"
 	var/last_gauge_pressure
@@ -67,10 +70,10 @@ var/list/global/tank_gauge_cache = list()
 	return
 
 /obj/item/weapon/tank/Destroy()
-	qdel(air_contents)
+	qdel_null(air_contents)
 
 	processing_objects.Remove(src)
-	qdel(src.proxyassembly)
+	qdel_null(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -609,6 +612,10 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
+/obj/item/device/tankassemblyproxy/Destroy()
+	. = ..()
+	tank = null
+	assembly = null
 
 /obj/item/weapon/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
 	var/obj/item/device/assembly_holder/S = W

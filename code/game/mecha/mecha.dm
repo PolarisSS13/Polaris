@@ -7,7 +7,6 @@
 #define MELEE 1
 #define RANGED 2
 
-
 /obj/mecha
 	name = "Mecha"
 	desc = "Exosuit"
@@ -505,7 +504,7 @@
 	return
 
 /obj/mecha/attack_hand(mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
 	if(istype(user,/mob/living/carbon/human))
@@ -513,7 +512,6 @@
 		if(H.species.can_shred(user))
 			if(!prob(src.deflect_chance))
 				src.take_damage(15)
-				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
 				user << "<span class='danger'>You slash at the armored suit!</span>"
@@ -666,7 +664,7 @@
 	return
 
 /obj/mecha/proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(W))
 	src.log_message("Attacked by [W]. Attacker - [user]")
 	if(prob(src.deflect_chance))
 		user << "<span class='danger'>\The [W] bounces off [src.name].</span>"
@@ -1052,6 +1050,17 @@
 	return
 
 
+/obj/mecha/MouseDrop_T(mob/O, mob/user as mob)
+	//Humans can pilot mechs.
+	if(!ishuman(O))
+		return
+
+	//Can't put other people into mechs (can comment this out if you want that to be possible)
+	if(O != user)
+		return
+
+	move_inside()
+
 /obj/mecha/verb/move_inside()
 	set category = "Object"
 	set name = "Enter Exosuit"
@@ -1061,17 +1070,17 @@
 		return
 
 	if (usr.buckled)
-		usr << "<span class='warning'>You can't climb into the exosuit while buckled!</span>"
+		to_chat(usr,"<span class='warning'>You can't climb into the exosuit while buckled!</span>")
 		return
 
 	src.log_message("[usr] tries to move in.")
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
 		if(C.handcuffed)
-			usr << "<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>"
+			to_chat(usr,"<span class='danger'>Kinda hard to climb in while handcuffed don't you think?</span>")
 			return
 	if (src.occupant)
-		usr << "<span class='danger'>The [src.name] is already occupied!</span>"
+		to_chat(usr,"<span class='danger'>The [src.name] is already occupied!</span>")
 		src.log_append_to_last("Permission denied.")
 		return
 /*
@@ -1086,12 +1095,12 @@
 	else if(src.operation_allowed(usr))
 		passed = 1
 	if(!passed)
-		usr << "<span class='warning'>Access denied</span>"
+		to_chat(usr,"<span class='warning'>Access denied</span>")
 		src.log_append_to_last("Permission denied.")
 		return
 	for(var/mob/living/simple_animal/slime/M in range(1,usr))
 		if(M.victim == usr)
-			usr << "You're too busy getting your life sucked out of you."
+			to_chat(usr,"You're too busy getting your life sucked out of you.")
 			return
 //	usr << "You start climbing into [src.name]"
 
@@ -1101,9 +1110,9 @@
 		if(!src.occupant)
 			moved_inside(usr)
 		else if(src.occupant!=usr)
-			usr << "[src.occupant] was faster. Try better next time, loser."
+			to_chat(usr,"[src.occupant] was faster. Try better next time, loser.")
 	else
-		usr << "You stop entering the exosuit."
+		to_chat(usr,"You stop entering the exosuit.")
 	return
 
 /obj/mecha/proc/moved_inside(var/mob/living/carbon/human/H as mob)
@@ -1763,7 +1772,7 @@
 
 /obj/mecha/attack_generic(var/mob/user, var/damage, var/attack_message)
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	if(!damage)
 		return 0
 

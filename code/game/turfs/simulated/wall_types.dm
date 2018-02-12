@@ -48,16 +48,16 @@
 	..(newloc,"durasteel", "durasteel")
 
 /turf/simulated/wall/wood/New(var/newloc)
-	..(newloc,"wood")
+	..(newloc, MAT_WOOD)
 
 /turf/simulated/wall/sifwood/New(var/newloc)
-	..(newloc,"alien wood")
+	..(newloc, MAT_SIFWOOD)
 
 /turf/simulated/wall/log/New(var/newloc)
-	..(newloc,"log")
+	..(newloc, MAT_LOG)
 
 /turf/simulated/wall/log_sif/New(var/newloc)
-	..(newloc,"alien log")
+	..(newloc, MAT_SIFLOG)
 
 // Shuttle Walls
 /turf/simulated/shuttle/wall
@@ -107,13 +107,32 @@
 	icon_state = "dark-nj"
 	join_group = null
 
+/turf/simulated/shuttle/wall/alien
+	icon = 'icons/turf/shuttle_alien.dmi'
+	icon_state = "alien"
+	base_state = "alien"
+	light_range = 3
+	light_power = 3
+	light_color = "#ff0066" // Pink-ish
+	block_tele = TRUE // Will be used for dungeons so this is needed to stop cheesing with handteles.
+
+/turf/simulated/shuttle/wall/alien/hard_corner
+	name = "hardcorner wall"
+	icon_state = "alien-hc"
+	hard_corner = 1
+
+/turf/simulated/shuttle/wall/alien/no_join
+	name = "nojoin wall"
+	icon_state = "alien-nj"
+	join_group = null
+
 /turf/simulated/shuttle/wall/New()
 	..()
 	//To allow mappers to rename shuttle walls to like "redfloor interior" or whatever for ease of use.
 	name = true_name
 
 /turf/simulated/shuttle/wall/initialize()
-	..()
+	. = ..()
 
 	if(join_group)
 		src.auto_join()
@@ -194,7 +213,7 @@
 	stripe_color = "#00FF00"
 
 /turf/simulated/shuttle/wall/voidcraft/initialize()
-	..()
+	. = ..()
 	update_icon()
 
 /turf/simulated/shuttle/wall/voidcraft/update_icon()

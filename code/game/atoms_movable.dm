@@ -16,15 +16,8 @@
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/icon_scale = 1 // Used to scale icons up or down in update_transform().
-	var/auto_init = 1
-
-/atom/movable/New()
-	..()
-	if(auto_init && ticker && ticker.current_state == GAME_STATE_PLAYING)
-		if(SScreation && SScreation.map_loading) // If a map is being loaded, newly created objects need to wait for it to finish.
-			SScreation.atoms_needing_initialize += src
-		else
-			initialize()
+	var/old_x = 0
+	var/old_y = 0
 
 /atom/movable/Destroy()
 	. = ..()
@@ -44,10 +37,6 @@
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
-
-/atom/movable/proc/initialize()
-	if(QDELETED(src))
-		crash_with("GC: -- [type] had initialize() called after qdel() --")
 
 /atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
@@ -91,6 +80,8 @@
 					AM.Crossed(src)
 			if(is_new_area && is_destination_turf)
 				destination.loc.Entered(src, origin)
+
+	Moved(origin)
 	return 1
 
 //called when src is thrown into hit_atom

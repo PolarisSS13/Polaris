@@ -1,5 +1,5 @@
 /obj/machinery/vr_sleeper
-	name = "VR sleeper"
+	name = "virtual reality sleeper"
 	desc = "A fancy bed with built-in sensory I/O ports and connectors to interface users' minds with their bodies in virtual reality."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "syndipod_0"
@@ -24,6 +24,7 @@
 	RefreshParts()
 
 /obj/machinery/vr_sleeper/initialize()
+	. = ..()
 	update_icon()
 
 /obj/machinery/vr_sleeper/process()
@@ -53,6 +54,10 @@
 	if(default_deconstruction_screwdriver(user, I))
 		return
 	else if(default_deconstruction_crowbar(user, I))
+		if(occupant && avatar)
+			avatar.exit_vr()
+			avatar = null
+			go_out()
 		return
 
 
@@ -213,7 +218,7 @@
 		occupant.enter_vr(avatar)
 
 		// Prompt for username after they've enterred the body.
-		var/newname = sanitize(input(avatar, "You are enterring virtual reality. Your username is currently [src.name]. Would you like to change it to something else?", "Name change") as null|text, MAX_NAME_LEN)
+		var/newname = sanitize(input(avatar, "You are entering virtual reality. Your username is currently [src.name]. Would you like to change it to something else?", "Name change") as null|text, MAX_NAME_LEN)
 		if (newname)
 			avatar.real_name = newname
 

@@ -6,7 +6,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
-	layer = TURF_LAYER + 0.01
+	layer = DECALS_LAYER
 	var/supplied_dir
 
 /obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
@@ -21,8 +21,8 @@ var/list/floor_decals = list()
 	add_to_turf_decals()
 	var/turf/T = get_turf(src)
 	T.apply_decals()
-	qdel(src)
-	return
+	initialized = TRUE
+	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/reset
 	name = "reset marker"
@@ -32,8 +32,8 @@ var/list/floor_decals = list()
 	if(T.decals && T.decals.len)
 		T.decals.Cut()
 		T.update_icon()
-	qdel(src)
-	return
+	initialized = TRUE
+	return INITIALIZE_HINT_QDEL
 
 /obj/effect/floor_decal/corner
 	icon_state = "corner_white"

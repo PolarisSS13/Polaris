@@ -497,10 +497,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	charge_costs = list(1)
 
 /obj/item/stack/cable_coil/suicide_act(mob/user)
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 	if(locate(/obj/item/weapon/stool) in user.loc)
-		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like \he's trying to commit suicide.</span>")
+		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
 	else
-		user.visible_message("<span class='suicide'>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
+		user.visible_message("<span class='suicide'>[user] is strangling [TU.himself] with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
 	return(OXYLOSS)
 
 /obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
@@ -900,6 +901,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = null
+	toolspeed = 0.25
 
 /obj/item/stack/cable_coil/alien/New(loc, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
 	if(embed_chance == -1)		//From /obj/item, don't want to do what the normal cable_coil does
@@ -912,14 +914,17 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/alien/update_icon()
 	icon_state = initial(icon_state)
 
+/obj/item/stack/cable_coil/alien/can_use(var/used)
+	return 1
+
 /obj/item/stack/cable_coil/alien/use()	//It's endless
-	return
+	return 1
 
 /obj/item/stack/cable_coil/alien/add()	//Still endless
-	return
+	return 0
 
 /obj/item/stack/cable_coil/alien/update_wclass()
-	return
+	return 0
 
 /obj/item/stack/cable_coil/alien/examine(mob/user)
 	var/msg = "A spool of cable."

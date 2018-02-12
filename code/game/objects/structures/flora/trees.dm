@@ -36,7 +36,7 @@
 			to_chat(user, "<span class='warning'>\The [W] is ineffective at harming \the [src].</span>")
 
 	hit_animation()
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(W))
 	user.do_attack_animation(src)
 
 // Shakes the tree slightly, more or less stolen from lockers.
@@ -47,13 +47,19 @@
 	animate(transform=null, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
 
 // Used when the tree gets hurt.
-/obj/structure/flora/tree/proc/adjust_health(var/amount)
+/obj/structure/flora/tree/proc/adjust_health(var/amount, var/is_ranged = FALSE)
 	if(is_stump)
 		return
+
+	// Bullets and lasers ruin some of the wood
+	if(is_ranged && product_amount > 0)
+		var/wood = initial(product_amount)
+		product_amount -= round(wood * (abs(amount)/max_health))
 
 	health = between(0, health + amount, max_health)
 	if(health <= 0)
 		die()
+		return
 
 // Called when the tree loses all health, for whatever reason.
 /obj/structure/flora/tree/proc/die()
@@ -73,6 +79,7 @@
 		return
 
 	is_stump = TRUE
+	density = FALSE
 	icon_state = "[base_state]_stump"
 	overlays.Cut() // For the Sif tree and other future glowy trees.
 	set_light(0)
@@ -80,6 +87,9 @@
 /obj/structure/flora/tree/ex_act(var/severity)
 	adjust_health(-(max_health / severity))
 
+/obj/structure/flora/tree/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.get_structure_damage())
+		adjust_health(-Proj.get_structure_damage(), TRUE)
 
 /obj/structure/flora/tree/get_description_interaction()
 	var/list/results = list()
@@ -198,5 +208,6 @@
 
 /obj/structure/flora/tree/sif/update_icon()
 	set_light(5, 1, "#33ccff")
-	overlays.Cut()
-	overlays.Add(image(icon = 'icons/obj/flora/deadtrees.dmi', icon_state = "[icon_state]_glow", layer = LIGHTING_LAYER + 0.1))
+	var/image/glow = image(icon = 'icons/obj/flora/deadtrees.dmi', icon_state = "[icon_state]_glow")
+	glow.plane = PLANE_LIGHTING_ABOVE
+	overlays = list(glow)

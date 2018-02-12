@@ -183,7 +183,7 @@
 	else
 		if (M.ear_damage >= 5)
 			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
-	M.update_icons()
+	M.update_icons() //Just to apply matrix transform for laying asap
 
 /obj/item/projectile/energy/plasmastun/on_hit(var/atom/target)
 	bang(target)
@@ -202,3 +202,9 @@
 
 	embed_chance = 0
 	muzzle_type = /obj/effect/projectile/pulse/muzzle
+
+/obj/item/projectile/energy/phase
+	kill_count = 4
+	damage = 5
+	SA_bonus_damage = 55 // 60 total on animals.
+	SA_vulnerability = SA_ANIMAL

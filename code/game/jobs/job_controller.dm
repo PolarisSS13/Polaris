@@ -25,6 +25,7 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	continue
 			if(job.faction != faction)	continue
 			occupations += job
+		sortTim(occupations, /proc/cmp_job_datums)
 
 
 		return 1
@@ -467,10 +468,9 @@ var/global/datum/controller/occupations/job_master
 				R = locate() in S.contents
 			if(!l_foot || !r_foot || R)
 				var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(H.loc)
-				H.buckled = W
+				W.buckle_mob(H)
 				H.update_canmove()
 				W.set_dir(H.dir)
-				W.buckled_mob = H
 				W.add_fingerprint(H)
 				if(R)
 					W.color = R.color

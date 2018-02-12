@@ -24,7 +24,7 @@
 	var/list/will_contain
 
 /obj/structure/closet/initialize()
-	..()
+	. = ..()
 	if(will_contain)
 		create_objects_in_loc(src, will_contain)
 
@@ -185,6 +185,9 @@
 					A.forceMove(src.loc)
 				qdel(src)
 
+/obj/structure/closet/blob_act()
+	damage(100)
+
 /obj/structure/closet/proc/damage(var/damage)
 	health -= damage
 	if(health <= 0)
@@ -311,6 +314,12 @@
 	src.add_fingerprint(user)
 	if(!src.toggle())
 		usr << "<span class='notice'>It won't budge!</span>"
+
+/obj/structure/closet/attack_ghost(mob/ghost)
+	if(ghost.client && ghost.client.inquisitive_ghost)
+		ghost.examinate(src)
+		if (!src.opened)
+			to_chat(ghost, "It contains: [english_list(contents)].")
 
 /obj/structure/closet/verb/verb_toggleopen()
 	set src in oview(1)

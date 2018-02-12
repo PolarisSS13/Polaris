@@ -2,20 +2,23 @@
 	name = "unknown"
 	real_name = "unknown"
 	voice_name = "unknown"
-	icon = 'icons/mob/human.dmi'
-	icon_state = "body_m_s"
+	icon = 'icons/effects/effects.dmi'	//We have an ultra-complex update icons that overlays everything, don't load some stupid random male human
+	icon_state = "nothing"
 
 	var/list/hud_list[TOTAL_HUDS]
-	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
+	var/embedded_flag					//To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
-	var/last_push_time	//For human_attackhand.dm, keeps track of the last use of disarm
+	var/last_push_time					//For human_attackhand.dm, keeps track of the last use of disarm
 
-	var/spitting = 0 //Spitting and spitting related things. Any human based ranged attacks, be it innate or added abilities.
-	var/spit_projectile = null //Projectile type.
-	var/spit_name = null //String
-	var/last_spit = 0 //Timestamp.
+	var/spitting = 0 					//Spitting and spitting related things. Any human based ranged attacks, be it innate or added abilities.
+	var/spit_projectile = null			//Projectile type.
+	var/spit_name = null 				//String
+	var/last_spit = 0 					//Timestamp.
 
-	var/can_defib = 1	//Horrible damage (like beheadings) will prevent defibbing organics.
+	var/can_defib = 1					//Horrible damage (like beheadings) will prevent defibbing organics.
+	var/hiding = 0						// If the mob is hiding or not. Makes them appear under tables and the like.
+	var/active_regen = FALSE //Used for the regenerate proc in human_powers.dm
+	var/active_regen_delay = 300
 
 /mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
@@ -37,20 +40,7 @@
 
 	nutrition = rand(200,400)
 
-	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
-	if(isSynthetic())
-		hud_list[STATUS_HUD]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudrobo")
-		hud_list[LIFE_HUD]	  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudrobo")
-	else
-		hud_list[STATUS_HUD]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-		hud_list[LIFE_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = new /image/hud_overlay(using_map.id_hud_icons, src, "hudunknown")
-	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+	make_hud_overlays()
 
 	human_mob_list |= src
 	..()
@@ -69,6 +59,14 @@
 	human_mob_list -= src
 	for(var/organ in organs)
 		qdel(organ)
+
+	LAZYCLEARLIST(list_layers)
+	list_layers = null //Be free!
+	LAZYCLEARLIST(list_body)
+	list_body = null
+	LAZYCLEARLIST(list_huds)
+	list_huds = null
+
 	return ..()
 
 /mob/living/carbon/human/Stat()
@@ -330,7 +328,7 @@
 		return get_id_name("Unknown")		//Likewise for hats
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")
-	if(id_name && (id_name != face_name))
+	if((face_name == "Unknown") && id_name && (id_name != face_name))
 		return "[face_name] (as [id_name])"
 	return face_name
 
@@ -688,42 +686,37 @@
 ///Returns a number between -1 to 2
 /mob/living/carbon/human/eyecheck()
 
-	var/obj/item/organ/I = internal_organs_by_name[O_EYES]
-	if(!I || I.status & (ORGAN_CUT_AWAY|ORGAN_DESTROYED))
-		return 2
+	var/obj/item/organ/internal/eyes/I
 
-	var/number = 0
-	if(istype(src.head, /obj/item/clothing/head/welding))
-		if(!src.head:up)
-			number += 2
-	if(istype(back, /obj/item/weapon/rig))
-		var/obj/item/weapon/rig/O = back
-		if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
-			number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space))
-		number += 2
-	if(istype(src.head, /obj/item/clothing/head/helmet/space/emergency))
-		number -= 2
-	if(istype(src.glasses, /obj/item/clothing/glasses/thermal))
-		var/obj/item/clothing/glasses/thermal/T = src.glasses
-		if(T.active)
-			number -= 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/night))
-		var/obj/item/clothing/glasses/night/N = src.glasses
-		if(N.active)
-			number -= 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses))
-		if(istype(src.glasses, /obj/item/clothing/glasses/sunglasses/sechud/aviator))
-			var/obj/item/clothing/glasses/sunglasses/sechud/aviator/S = src.glasses
-			if(!S.on)
-				number += 1
-		else
-			number += 1
-	if(istype(src.glasses, /obj/item/clothing/glasses/welding))
-		var/obj/item/clothing/glasses/welding/W = src.glasses
-		if(!W.up)
-			number += 2
+	if(internal_organs_by_name[O_EYES]) // Eyes are fucked, not a 'weak point'.
+		I = internal_organs_by_name[O_EYES]
+		if(I.is_broken())
+			return FLASH_PROTECTION_MAJOR
+	else // They can't be flashed if they don't have eyes.
+		return FLASH_PROTECTION_MAJOR
+
+	var/number = get_equipment_flash_protection()
+	number = I.get_total_protection(number)
+	I.additional_flash_effects(number)
 	return number
+
+#define add_clothing_protection(A)	\
+	var/obj/item/clothing/C = A; \
+	flash_protection += C.flash_protection; \
+
+/mob/living/carbon/human/proc/get_equipment_flash_protection()
+	var/flash_protection = 0
+
+	if(istype(src.head, /obj/item/clothing/head))
+		add_clothing_protection(head)
+	if(istype(src.glasses, /obj/item/clothing/glasses))
+		add_clothing_protection(glasses)
+	if(istype(src.wear_mask, /obj/item/clothing/mask))
+		add_clothing_protection(wear_mask)
+
+	return flash_protection
+
+#undef add_clothing_protection
 
 //Used by various things that knock people out by applying blunt trauma to the head.
 //Checks that the species has a "head" (brain containing organ) and that hit_zone refers to it.
@@ -773,7 +766,8 @@
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
-		visible_message("<font color='red'>\The [src] begins playing \his ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'>You begin to play a spooky refrain on your ribcage.</font>","<font color='red'>You hear a spooky xylophone melody.</font>")
+		var/datum/gender/T = gender_datums[get_visible_gender()]
+		visible_message("<font color='red'>\The [src] begins playing [T.his] ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'>You begin to play a spooky refrain on your ribcage.</font>","<font color='red'>You hear a spooky xylophone melody.</font>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(loc, song, 50, 1, -1)
 		xylophone = 1
@@ -863,8 +857,8 @@
 			gender = NEUTER
 	regenerate_icons()
 	check_dna()
-
-	visible_message("<font color='blue'>\The [src] morphs and changes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] appearance!</font>", "<font color='blue'>You change your appearance!</font>", "<font color='red'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</font>")
+	var/datum/gender/T = gender_datums[get_visible_gender()]
+	visible_message("<font color='blue'>\The [src] morphs and changes [T.his] appearance!</font>", "<font color='blue'>You change your appearance!</font>", "<font color='red'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</font>")
 
 /mob/living/carbon/human/proc/remotesay()
 	set name = "Project mind"
@@ -932,10 +926,13 @@
 		remoteview_target = null
 		reset_view(0)
 
-/mob/living/carbon/human/proc/get_visible_gender()
+/mob/living/carbon/human/get_visible_gender()
 	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
-		return NEUTER
-	return gender
+		return PLURAL //plural is the gender-neutral default
+	if(species)
+		if(species.ambiguous_genders)
+			return PLURAL // regardless of what you're wearing, your gender can't be figured out
+	return get_gender()
 
 /mob/living/carbon/human/proc/increase_germ_level(n)
 	if(gloves)
@@ -1084,13 +1081,16 @@
 
 	if(usr.stat || usr.restrained() || !isliving(usr)) return
 
+	var/datum/gender/TU = gender_datums[usr.get_visible_gender()]
+	var/datum/gender/T = gender_datums[get_visible_gender()]
+
 	if(usr == src)
 		self = 1
 	if(!self)
-		usr.visible_message("<span class='notice'>[usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.</span>",\
+		usr.visible_message("<span class='notice'>[usr] kneels down, puts [TU.his] hand on [src]'s wrist and begins counting [T.his] pulse.</span>",\
 		"You begin counting [src]'s pulse")
 	else
-		usr.visible_message("<span class='notice'>[usr] begins counting their pulse.</span>",\
+		usr.visible_message("<span class='notice'>[usr] begins counting [T.his] pulse.</span>",\
 		"You begin counting your pulse.")
 
 	if(src.pulse)
@@ -1345,14 +1345,20 @@
 	return 0
 
 /mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
-	if((species.flags & NO_SLIP) || (shoes && (shoes.item_flags & NOSLIP)))
+	var/list/equipment = list(src.w_uniform,src.wear_suit,src.shoes)
+	var/footcoverage_check = FALSE
+	for(var/obj/item/clothing/C in equipment)
+		if(C.body_parts_covered & FEET)
+			footcoverage_check = TRUE
+			break
+	if((species.flags & NO_SLIP && !footcoverage_check) || (shoes && (shoes.item_flags & NOSLIP))) //Footwear negates a species' natural traction.
 		return 0
 	if(..(slipped_on,stun_duration))
 		return 1
 
-/mob/living/carbon/human/proc/undislocate()
+/mob/living/carbon/human/proc/relocate()
 	set category = "Object"
-	set name = "Undislocate Joint"
+	set name = "Relocate Joint"
 	set desc = "Pop a joint back into place. Extremely painful."
 	set src in view(1)
 
@@ -1400,7 +1406,7 @@
 	else
 		U << "<span class='danger'>You pop [S]'s [current_limb.joint] back in!</span>"
 		S << "<span class='danger'>[U] pops your [current_limb.joint] back in!</span>"
-	current_limb.undislocate()
+	current_limb.relocate()
 
 /mob/living/carbon/human/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in organs)
@@ -1511,11 +1517,19 @@
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
 	if(isSynthetic())
 		return 0
+	for(var/datum/modifier/M in modifiers)
+		if(M.pain_immunity == TRUE)
+			return 0
 	if(check_organ)
 		if(!istype(check_organ))
 			return 0
 		return check_organ.organ_can_feel_pain()
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/human/is_sentient()
+	if(get_FBP_type() == FBP_DRONE)
+		return FALSE
+	return ..()
 
 /mob/living/carbon/human/is_muzzled()
 	return (wear_mask && (istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/weapon/grenade)))
@@ -1532,53 +1546,11 @@
 		permit.set_name(real_name)
 		equip_to_appropriate_slot(permit) // If for some reason it can't find room, it'll still be on the floor.
 
-// enter_vr is called on the original mob, and puts the mind into the supplied vr mob
-/mob/living/carbon/human/proc/enter_vr(var/mob/living/carbon/human/avatar) // Avatar is currently a human, because we have preexisting setup code for appearance manipulation, etc.
-	if(!istype(avatar))
+/mob/living/carbon/human/proc/update_icon_special() //For things such as teshari hiding and whatnot.
+	if(hiding) // Hiding? Carry on.
+		if(stat == DEAD || paralysis || weakened || stunned) //stunned/knocked down by something that isn't the rest verb? Note: This was tried with INCAPACITATION_STUNNED, but that refused to work.
+			hiding = 0 //No hiding for you. Mob layer should be updated naturally, but it actually doesn't.
+		else
+			layer = 2.45
+	else //Replace this else with other variables if added in the future. Alternatively, could make other things effect this hiding variable.
 		return
-
-	// Link the two mobs for client transfer
-	avatar.vr_holder = src
-	src.teleop = avatar
-	src.vr_link = avatar // Can't reuse vr_holder so that death can automatically eject users from VR
-
-	// Move the mind
-	avatar.Sleeping(1)
-	src.mind.transfer_to(avatar)
-	to_chat(avatar, "<b>You have enterred Virtual Reality!\nAll normal gameplay rules still apply.\nWounds you suffer here won't persist when you leave VR, but some of the pain will.\nYou can leave VR at any time by using the \"Exit Virtual Reality\" verb in the Abilities tab, or by ghosting.\nYou can modify your appearance by using various \"Change \[X\]\" verbs in the Abilities tab.</b>")
-	to_chat(avatar, "<span class='notice'> You black out for a moment, and wake to find yourself in a new body in virtual reality.</span>") // So this is what VR feels like?
-
-// exit_vr is called on the vr mob, and puts the mind back into the original mob
-/mob/living/carbon/human/verb/exit_vr()
-	set name = "Exit Virtual Reality"
-	set category = "Abilities"
-
-	if(!vr_holder)
-		return
-	if(!mind)
-		return
-
-	var/total_damage
-	// Tally human damage
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		total_damage = H.getBruteLoss() + H.getFireLoss() + H.getOxyLoss() + H.getToxLoss()
-
-	// Move the mind back to the original mob
-//	vr_holder.Sleeping(1)
-	src.mind.transfer_to(vr_holder)
-	to_chat(vr_holder, "<span class='notice'>You black out for a moment, and wake to find yourself back in your own body.</span>")
-	// Two-thirds damage is transferred as agony for /humans
-	// Getting hurt in VR doesn't damage the physical body, but you still got hurt.
-	if(ishuman(vr_holder) && total_damage)
-		var/mob/living/carbon/human/V = vr_holder
-		V.stun_effect_act(0, total_damage*2/3, null)												// 200 damage leaves the user in paincrit for several seconds, agony reaches 0 after around 2m.
-		to_chat(vr_holder, "<span class='warning'>Pain from your time in VR lingers.</span>")		// 250 damage leaves the user unconscious for several seconds in addition to paincrit
-
-	// Maintain a link with the mob, but don't use teleop
-	vr_holder.vr_link = src
-	vr_holder.teleop = null
-
-	if(istype(vr_holder.loc, /obj/machinery/vr_sleeper))
-		var/obj/machinery/vr_sleeper/V = vr_holder.loc
-		V.go_out()

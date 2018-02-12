@@ -118,16 +118,15 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(machines, src)
-	else
-		machines += src
-		machinery_sort_required = 1
 	if(circuit)
 		circuit = new circuit(src)
 
+/obj/machinery/initialize()
+	. = ..()
+	START_MACHINE_PROCESSING(src)
+
 /obj/machinery/Destroy()
-	machines -= src
+	STOP_MACHINE_PROCESSING(src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
@@ -320,6 +319,27 @@ Class Procs:
 		for(var/var/obj/item/C in component_parts) //var/var/obj/item/C?
 			user << "<span class='notice'>    [C.name]</span>"
 	return 1
+
+// Default behavior for wrenching down machines.  Supports both delay and instant modes.
+/obj/machinery/proc/default_unfasten_wrench(var/mob/user, var/obj/item/weapon/wrench/W, var/time = 0)
+	if(!istype(W))
+		return FALSE
+	if(panel_open)
+		return FALSE // Close panel first!
+	playsound(loc, W.usesound, 50, 1)	
+	var/actual_time = W.toolspeed * time
+	if(actual_time != 0)
+		user.visible_message( \
+			"<span class='warning'>\The [user] begins [anchored ? "un" : ""]securing \the [src].</span>", \
+			"<span class='notice'>You start [anchored ? "un" : ""]securing \the [src].</span>")
+	if(actual_time == 0 || do_after(user, actual_time, target = src))
+		user.visible_message( \
+			"<span class='warning'>\The [user] has [anchored ? "un" : ""]secured \the [src].</span>", \
+			"<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
+		anchored = !anchored
+		power_change() //Turn on or off the machine depending on the status of power in the new area.
+		update_icon()
+	return TRUE
 
 /obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
 	if(!istype(C))

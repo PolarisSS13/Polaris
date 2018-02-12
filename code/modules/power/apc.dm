@@ -107,6 +107,7 @@
 	var/failure_timer = 0
 	var/force_update = 0
 	var/updating_icon = 0
+	var/secret = FALSE // If true, it won't show up on the alert computer.
 	var/global/list/status_overlays_lock
 	var/global/list/status_overlays_charging
 	var/global/list/status_overlays_equipment
@@ -223,6 +224,10 @@
 		src.area = get_area_name(areastring)
 		name = "\improper [area.name] APC"
 	area.apc = src
+
+	if(istype(area, /area/submap))
+		secret = TRUE
+
 	update_icon()
 
 	make_terminal()
@@ -687,6 +692,12 @@
 				update_icon()
 				return 1
 
+/obj/machinery/power/apc/blob_act()
+	if(!wires.IsAllCut())
+		wiresexposed = TRUE
+		wires.CutAll()
+		update_icon()
+
 /obj/machinery/power/apc/attack_hand(mob/user)
 //	if (!can_use(user)) This already gets called in interact() and in topic()
 //		return
@@ -699,7 +710,7 @@
 		var/mob/living/carbon/human/H = user
 
 		if(H.species.can_shred(H))
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			user.setClickCooldown(user.get_attack_speed())
 			user.visible_message("<span call='warning'>[user.name] slashes at the [src.name]!</span>", "<span class='notice'>You slash at the [src.name]!</span>")
 			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 
@@ -1102,7 +1113,8 @@
 		equipment = autoset(equipment, 0)
 		lighting = autoset(lighting, 0)
 		environ = autoset(environ, 0)
-		power_alarm.triggerAlarm(loc, src)
+		if(!secret)
+			power_alarm.triggerAlarm(loc, src)
 		autoflag = 0
 
 	// update icon & area power if anything changed
@@ -1132,21 +1144,24 @@
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 1)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!secret)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 2
 	else if(cell.percent() <= 15)        // <15%, turn off lighting & equipment
 		if((autoflag > 1 && longtermpower < 0) || (autoflag > 1 && longtermpower >= 0))
 			equipment = autoset(equipment, 2)
 			lighting = autoset(lighting, 2)
 			environ = autoset(environ, 1)
-			power_alarm.triggerAlarm(loc, src)
+			if(!secret)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 1
 	else                                   // zero charge, turn all off
 		if(autoflag != 0)
 			equipment = autoset(equipment, 0)
 			lighting = autoset(lighting, 0)
 			environ = autoset(environ, 0)
-			power_alarm.triggerAlarm(loc, src)
+			if(!secret)
+				power_alarm.triggerAlarm(loc, src)
 			autoflag = 0
 
 // val 0=off, 1=off(auto) 2=on 3=on(auto)

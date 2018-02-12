@@ -159,17 +159,17 @@
 
 /obj/item/weapon/storage/box/syndie_kit/spy/New()
 	..()
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_bug(src)
-	new /obj/item/device/spy_monitor(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/camerabug/spy(src)
+	new /obj/item/device/bug_monitor/spy(src)
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm
 	name = "\improper Smooth operator"
-	desc = "9mm with silencer kit."
+	desc = "Compact 9mm with silencer kit."
 
 /obj/item/weapon/storage/box/syndie_kit/g9mm/New()
 	..()

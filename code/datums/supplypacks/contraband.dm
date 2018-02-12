@@ -43,10 +43,10 @@
 	containername = "Moghes imports crate"
 	contraband = 1
 
-/datum/supply_packs/security/bolt_rifles_mosin
+/datum/supply_packs/security/bolt_rifles_militia
  	name = "Surplus militia rifles"
  	contains = list(
- 			/obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin = 3,
+ 			/obj/item/weapon/gun/projectile/shotgun/pump/rifle = 3,
  			/obj/item/ammo_magazine/clip/c762 = 6
  			)
  	cost = 50
@@ -96,7 +96,7 @@
 					/obj/item/clothing/glasses/thermal/syndi,
 					/obj/item/weapon/card/emag,
 					/obj/item/ammo_magazine/m45/ap,
-					/obj/item/weapon/material/hatchet/tacknife/combatknife,
+					/obj/item/weapon/material/knife/tacknife/combatknife,
 					/obj/item/clothing/mask/balaclava
 					)
 			)

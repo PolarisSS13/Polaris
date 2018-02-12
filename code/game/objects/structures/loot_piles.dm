@@ -6,7 +6,7 @@ If that roll fails, they do one final roll, using chance_uncommon.  If they succ
 If that fails again, they walk away with some common junk.
 
 The same player cannot roll again, however other players can.  This has two benefits.  The first benefit is that someone raiding all of
-maintenance will not deprive other people from a shot at loot, and that for the surface varients, it quietly encourages bringing along
+maintenance will not deprive other people from a shot at loot, and that for the surface variants, it quietly encourages bringing along
 buddies, to get more chances at getting cool things instead of someone going solo to hoard all the stuff.
 
 Loot piles can be depleted, if loot_depleted is turned on.  Note that players who searched the pile already won't deplete the loot furthers when searching again.
@@ -119,7 +119,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 /obj/structure/loot_pile/maint/initialize()
 	icon_state = pick(icon_states_to_use)
-	..()
+	. = ..()
 
 // Has large amounts of possible items, most of which may or may not be useful.
 /obj/structure/loot_pile/maint/junk
@@ -204,7 +204,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/clothing/under/tactical,
 		/obj/item/weapon/beartrap,
 		/obj/item/clothing/suit/storage/vest/press,
-		/obj/item/weapon/material/hatchet/tacknife,
+		/obj/item/weapon/material/knife/tacknife,
 		/obj/item/weapon/material/butterfly/switchblade
 	)
 
@@ -400,6 +400,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/device/universal_translator,
 		/obj/item/device/aicard,
 		/obj/item/borg/upgrade/jetpack,
+		/obj/item/borg/upgrade/advhealth,
 		/obj/item/borg/upgrade/vtec,
 		/obj/item/borg/upgrade/tasercooler,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser,
@@ -435,3 +436,89 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	loot_depletion = TRUE
 	loot_left = 5 // This is to prevent people from asking the whole station to go down to some alien ruin to get massive amounts of phat lewt.
 
+// Base type for alien piles.
+/obj/structure/loot_pile/surface/alien
+	name = "alien pod"
+	desc = "A pod which looks bigger on the inside. Something quiet shiny might be inside?"
+	icon_state = "alien_pile1"
+
+/obj/structure/loot_pile/surface/alien
+	common_loot = list(
+		/obj/item/prop/alien/junk
+	)
+
+// May contain alien tools.
+/obj/structure/loot_pile/surface/alien/engineering
+	uncommon_loot = list(
+		/obj/item/device/multitool/alien,
+		/obj/item/stack/cable_coil/alien,
+		/obj/item/weapon/crowbar/alien,
+		/obj/item/weapon/screwdriver/alien,
+		/obj/item/weapon/weldingtool/alien,
+		/obj/item/weapon/wirecutters/alien,
+		/obj/item/weapon/wrench/alien
+	)
+	rare_loot = list(
+		/obj/item/weapon/storage/belt/utility/alien/full
+	)
+
+// May contain alien surgery equipment or powerful medication.
+/obj/structure/loot_pile/surface/alien/medical
+	uncommon_loot = list(
+		/obj/item/weapon/surgical/FixOVein/alien,
+		/obj/item/weapon/surgical/bone_clamp/alien,
+		/obj/item/weapon/surgical/cautery/alien,
+		/obj/item/weapon/surgical/circular_saw/alien,
+		/obj/item/weapon/surgical/hemostat/alien,
+		/obj/item/weapon/surgical/retractor/alien,
+		/obj/item/weapon/surgical/scalpel/alien,
+		/obj/item/weapon/surgical/surgicaldrill/alien
+	)
+	rare_loot = list(
+		/obj/item/weapon/storage/belt/medical/alien
+	)
+
+// May contain powercells or alien weaponry.
+/obj/structure/loot_pile/surface/alien/security
+	uncommon_loot = list(
+		/obj/item/weapon/cell/device/weapon/recharge/alien,
+		/obj/item/clothing/suit/armor/alien,
+		/obj/item/clothing/head/helmet/alien
+	)
+	rare_loot = list(
+		/obj/item/clothing/suit/armor/alien/tank,
+		/obj/item/weapon/gun/energy/alien
+	)
+
+// The pile found at the very end, and as such has the best loot.
+/obj/structure/loot_pile/surface/alien/end
+	chance_uncommon = 30
+	chance_rare = 10
+
+	common_loot = list(
+		/obj/item/device/multitool/alien,
+		/obj/item/stack/cable_coil/alien,
+		/obj/item/weapon/crowbar/alien,
+		/obj/item/weapon/screwdriver/alien,
+		/obj/item/weapon/weldingtool/alien,
+		/obj/item/weapon/wirecutters/alien,
+		/obj/item/weapon/wrench/alien,
+		/obj/item/weapon/surgical/FixOVein/alien,
+		/obj/item/weapon/surgical/bone_clamp/alien,
+		/obj/item/weapon/surgical/cautery/alien,
+		/obj/item/weapon/surgical/circular_saw/alien,
+		/obj/item/weapon/surgical/hemostat/alien,
+		/obj/item/weapon/surgical/retractor/alien,
+		/obj/item/weapon/surgical/scalpel/alien,
+		/obj/item/weapon/surgical/surgicaldrill/alien,
+		/obj/item/weapon/cell/device/weapon/recharge/alien,
+		/obj/item/clothing/suit/armor/alien,
+		/obj/item/clothing/head/helmet/alien,
+		/obj/item/weapon/gun/energy/alien
+	)
+	uncommon_loot = list(
+		/obj/item/weapon/storage/belt/medical/alien,
+		/obj/item/weapon/storage/belt/utility/alien/full,
+		/obj/item/clothing/suit/armor/alien/tank,
+		/obj/item/clothing/head/helmet/alien/tank,
+	)

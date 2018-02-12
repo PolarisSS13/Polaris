@@ -16,10 +16,11 @@
 		for(var/mob/living/carbon/M in hear(7, get_turf(src)))
 			bang(get_turf(src), M)
 
-		for(var/obj/effect/blob/B in hear(8,get_turf(src)))       		//Blob damage here
+		for(var/obj/structure/blob/B in hear(8,get_turf(src)))       		//Blob damage here
 			var/damage = round(30/(get_dist(B,get_turf(src))+1))
-			B.health -= damage
-			B.update_icon()
+			if(B.overmind)
+				damage *= B.overmind.blob_type.burn_multiplier
+			B.adjust_integrity(-damage)
 
 		new/obj/effect/effect/sparks(src.loc)
 		new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=30, color="#FFFFFF")
@@ -89,7 +90,7 @@
 		else
 			if (M.ear_damage >= 5)
 				M << "<span class='danger'>Your ears start to ring!</span>"
-		M.update_icons()
+		M.update_icons() //Forces matrix transform to proc if they are now laying, I guess?
 
 /obj/item/weapon/grenade/flashbang/Destroy()
 	walk(src, 0) // Because we might have called walk_away, we must stop the walk loop or BYOND keeps an internal reference to us forever.

@@ -48,14 +48,13 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	s_react = "deuterium"
 	energy_consumption = 1
 	energy_production = 2
-
 // Advanced production reactions (todo)
+
 /decl/fusion_reaction/deuterium_helium
 	p_react = "deuterium"
 	s_react = "helium-3"
 	energy_consumption = 1
 	energy_production = 5
-	radiation = 2
 
 /decl/fusion_reaction/deuterium_tritium
 	p_react = "deuterium"
@@ -64,7 +63,6 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 1
 	products = list("helium-3" = 1)
 	instability = 0.5
-	radiation = 3
 
 /decl/fusion_reaction/deuterium_lithium
 	p_react = "deuterium"
@@ -119,7 +117,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
 	qdel(holder)
-	var/radiation_level = rand(100, 200)
+	var/radiation_level = 200
 
 	// Copied from the SM for proof of concept. //Not any more --Cirra //Use the whole z proc --Leshana
 	radiation_repository.z_radiate(locate(1, 1, holder.z), radiation_level, 1)
@@ -142,7 +140,6 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	explosion(origin, 1, 2, 5)
 
 	return 1
-
 
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen

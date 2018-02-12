@@ -28,11 +28,10 @@
 	var/datum/controller/subsystem/queue_next
 	var/datum/controller/subsystem/queue_prev
 
-	var/static/failure_strikes = 0 //How many times we suspect this subsystem has crashed the MC, 3 strikes and you're out!
+	var/static/list/failure_strikes //How many times we suspect a subsystem type has crashed the MC, 3 strikes and you're out!
 
 //Do not override
-/datum/controller/subsystem/New()
-	return
+///datum/controller/subsystem/New()
 
 // Used to initialize the subsystem BEFORE the map has loaded
 // Called AFTER Recover if that is called
@@ -66,7 +65,7 @@
 	can_fire = 0
 	flags |= SS_NO_FIRE
 	Master.subsystems -= src
-
+	return ..()
 
 //Queue it to run.
 //	(we loop thru a linked list until we get to the end or find the right point)
@@ -167,7 +166,7 @@
 
 
 
-	if(can_fire && !(SS_NO_FIRE in flags))
+	if(can_fire && !(SS_NO_FIRE & flags))
 		msg = "[round(cost,1)]ms|[round(tick_usage,1)]%|[round(ticks,0.1)]\t[msg]"
 	else
 		msg = "OFFLINE\t[msg]"

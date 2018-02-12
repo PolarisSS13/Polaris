@@ -226,7 +226,7 @@
 			if(gene.is_active(src))
 				gene.OnMobLife(src)
 
-	radiation = Clamp(radiation,0,100)
+	radiation = Clamp(radiation,0,250)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -285,8 +285,12 @@
 					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
 					emote("gasp")
 
+		if (radiation > 150)
+			damage = 6
+			radiation -= 4 * RADIATION_SPEED_COEFFICIENT
+
 		if(damage)
-			damage *= isSynthetic() ? 0.5 : species.radiation_mod
+			damage *= species.radiation_mod
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
@@ -816,18 +820,34 @@
 
 		if(!isSynthetic())
 
-			if(touching) touching.metabolize()
-			if(ingested) ingested.metabolize()
-			if(bloodstr) bloodstr.metabolize()
+			if(touching)
+				touching.metabolize()
+			if(ingested)
+				ingested.metabolize()
+			if(bloodstr)
+				bloodstr.metabolize()
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
 					if(src.species && src.species.get_bodytype() != "Vox")
-						total_phoronloss += vsc.plc.CONTAMINATION_LOSS
-			if(!(status_flags & GODMODE)) adjustToxLoss(total_phoronloss)
+						// This is hacky, I'm so sorry.
+						if(I != l_hand && I != r_hand)	//If the item isn't in your hands, you're probably wearing it. Full damage for you.
+							total_phoronloss += vsc.plc.CONTAMINATION_LOSS
+						else if(I == l_hand)	//If the item is in your hands, but you're wearing protection, you might be alright.
+							var/l_hand_blocked = 0
+							l_hand_blocked = 1-(100-getarmor(BP_L_HAND, "bio"))/100	//This should get a number between 0 and 1
+							total_phoronloss += vsc.plc.CONTAMINATION_LOSS * l_hand_blocked
+						else if(I == r_hand)	//If the item is in your hands, but you're wearing protection, you might be alright.
+							var/r_hand_blocked = 0
+							r_hand_blocked = 1-(100-getarmor(BP_R_HAND, "bio"))/100	//This should get a number between 0 and 1
+							total_phoronloss += vsc.plc.CONTAMINATION_LOSS * r_hand_blocked
+			if(total_phoronloss)
+				if(!(status_flags & GODMODE))
+					adjustToxLoss(total_phoronloss)
 
-	if(status_flags & GODMODE)	return 0	//godmode
+	if(status_flags & GODMODE)
+		return 0	//godmode
 
 	var/obj/item/organ/internal/diona/node/light_organ = locate() in internal_organs
 
@@ -952,7 +972,7 @@
 
 		if(paralysis || sleeping)
 			blinded = 1
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 			animate_tail_reset()
 			adjustHalLoss(-3)
 
@@ -967,7 +987,7 @@
 						emote("snore")
 		//CONSCIOUS
 		else
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 
 		//Periodically double-check embedded_flag
 		if(embedded_flag && !(life_tick % 10))
@@ -1055,6 +1075,11 @@
 
 	return 1
 
+/mob/living/carbon/human/proc/set_stat(var/new_stat)
+	stat = new_stat
+	if(stat)
+		update_skin(1)
+
 /mob/living/carbon/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
@@ -1066,7 +1091,7 @@
 
 	..()
 
-	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science, global_hud.whitense)
+	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg, global_hud.thermal, global_hud.meson, global_hud.science, global_hud.material, global_hud.whitense)
 
 	if(istype(client.eye,/obj/machinery/camera))
 		var/obj/machinery/camera/cam = client.eye
@@ -1186,8 +1211,10 @@
 				healths.icon_state = "health_numb"
 			else
 				// Generate a by-limb health display.
-				healths.icon_state = "blank"
-				healths.overlays = null
+				var/mutable_appearance/healths_ma = new(healths)
+				healths_ma.icon_state = "blank"
+				healths_ma.overlays = null
+				healths_ma.plane = PLANE_PLAYER_HUD
 
 				var/no_damage = 1
 				var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
@@ -1215,7 +1242,8 @@
 				else if(no_damage)
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 
-				healths.overlays += health_images
+				healths_ma.overlays += health_images
+				healths.appearance = healths_ma
 
 		if(nutrition_icon)
 			switch(nutrition)
@@ -1350,24 +1378,13 @@
 			client.screen |= G.overlay
 		if(G.vision_flags)
 			sight |= G.vision_flags
-			if(!druggy && !seer)
-				see_invisible = SEE_INVISIBLE_MINIMUM
-		if(G.see_invisible >= 0)
-			see_invisible = G.see_invisible
 		if(istype(G,/obj/item/clothing/glasses/night) && !seer)
 			see_invisible = SEE_INVISIBLE_MINIMUM
-/* HUD shit goes here, as long as it doesn't modify sight flags */
-// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
-		var/obj/item/clothing/glasses/hud/O = G
-		if(istype(G, /obj/item/clothing/glasses/sunglasses/sechud))
-			var/obj/item/clothing/glasses/sunglasses/sechud/S = G
-			O = S.hud
-		if(istype(G, /obj/item/clothing/glasses/sunglasses/medhud))
-			var/obj/item/clothing/glasses/sunglasses/medhud/M = G
-			O = M.hud
-		if(istype(O))
-			O.process_hud(src)
-			if(!druggy && !seer)	see_invisible = SEE_INVISIBLE_LIVING
+
+		if(G.see_invisible >= 0)
+			see_invisible = G.see_invisible
+		else if(!druggy && !seer)
+			see_invisible = SEE_INVISIBLE_LIVING
 
 /mob/living/carbon/human/handle_random_events()
 	if(inStasisNow())
@@ -1375,8 +1392,14 @@
 
 	// Puke if toxloss is too high
 	if(!stat)
+		if (getToxLoss() >= 30 && isSynthetic())
+			if(!confused)
+				if(prob(5))
+					to_chat(src, "<span class='danger'>You lose directional control!</span>")
+					Confuse(10)
 		if (getToxLoss() >= 45)
 			spawn vomit()
+
 
 	//0.1% chance of playing a scary sound to someone who's in complete darkness
 	if(isturf(loc) && rand(1,1000) == 1)
@@ -1689,6 +1712,7 @@
 				holder.icon_state = "hudsyndicate"
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
+	update_icons_huds()
 
 /mob/living/carbon/human/handle_stunned()
 	if(!can_feel_pain())

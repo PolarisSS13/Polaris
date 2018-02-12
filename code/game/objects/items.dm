@@ -80,6 +80,8 @@
 	var/list/sprite_sheets_obj = list()
 
 	var/toolspeed = 1.0 // This is a multipler on how 'fast' a tool works.  e.g. setting this to 0.5 will make the tool work twice as fast.
+	var/attackspeed = DEFAULT_ATTACK_COOLDOWN // How long click delay will be when using this, in 1/10ths of a second. Checked in the user's get_attack_speed().
+	var/reach = 1 // Length of tiles it can reach, 1 is adjacent.
 	var/addblends // Icon overlay for ADD highlights when applicable.
 
 /obj/item/New()
@@ -106,20 +108,8 @@
 		src.loc = null
 	return ..()
 
-/obj/item/device
-	icon = 'icons/obj/device.dmi'
-
-//Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
 	update_held_icon()
-
-/obj/item/proc/update_held_icon()
-	if(isliving(src.loc))
-		var/mob/living/M = src.loc
-		if(M.l_hand == src)
-			M.update_inv_l_hand()
-		else if(M.r_hand == src)
-			M.update_inv_r_hand()
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
 	var/check_hand
@@ -138,6 +128,16 @@
 		if(istype(hand) && hand.is_usable())
 			return TRUE
 	return FALSE
+
+
+//Checks if the item is being held by a mob, and if so, updates the held icons
+/obj/item/proc/update_held_icon()
+	if(isliving(src.loc))
+		var/mob/living/M = src.loc
+		if(M.l_hand == src)
+			M.update_inv_l_hand()
+		else if(M.r_hand == src)
+			M.update_inv_r_hand()
 
 /obj/item/ex_act(severity)
 	switch(severity)
@@ -251,18 +251,11 @@
 	return
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
-/obj/item/proc/dropped(mob/living/user as mob)
+/obj/item/proc/dropped(mob/user as mob)
 	..()
 	if(zoom)
-		zoom(user) //binoculars, scope, etc
-
-	update_twohanding()
-	if(user)
-		if(user.l_hand)
-			user.l_hand.update_twohanding()
-		if(user.r_hand)
-			user.r_hand.update_twohanding()
-
+		zoom() //binoculars, scope, etc
+	appearance_flags &= ~NO_CLIENT_COLOR
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -286,7 +279,7 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	hud_layerise()
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
 	return
@@ -487,7 +480,7 @@ var/list/global/slot_flags_enumeration = list(
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)") //BS12 EDIT ALG
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	user.do_attack_animation(M)
 
 	src.add_fingerprint(user)
@@ -670,3 +663,19 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
+// Used for non-adjacent melee attacks with specific weapons capable of reaching more than one tile.
+// This uses changeling range string A* but for this purpose its also applicable.
+/obj/item/proc/attack_can_reach(var/atom/us, var/atom/them, var/range)
+	if(us.Adjacent(them))
+		return TRUE // Already adjacent.
+	if(AStar(get_turf(us), get_turf(them), /turf/proc/AdjacentTurfsRangedSting, /turf/proc/Distance, max_nodes=25, max_node_depth=range))
+		return TRUE
+	return FALSE
+
+// Check if an object should ignite others, like a lit lighter or candle.
+/obj/item/proc/is_hot()
+	return FALSE
+
+// My best guess as to why this is here would be that it does so little. Still, keep it under all the procs, for sanity's sake.
+/obj/item/device
+	icon = 'icons/obj/device.dmi'

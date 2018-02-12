@@ -59,19 +59,6 @@
 		holy = 1
 	levelupdate()
 
-/turf/simulated/proc/initialize()
-	return
-
-/turf/simulated/proc/check_destroy_override()
-	if(destroy_floor_override) //Don't bother doing the additional checks if we don't have to.
-		var/area/my_area = get_area(src)
-//		my_area = my_area.master
-		if(is_type_in_list(my_area, destroy_floor_override_ignore_areas))
-			return 0
-		if(z in destroy_floor_override_z_levels)
-			return 1
-	return 0
-
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor="#A10808")
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
@@ -119,10 +106,10 @@
 					H.track_blood--
 
 			if (bloodDNA)
-				src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,H.dir,0,bloodcolor) // Coming
+				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
 				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)
-					from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,0,H.dir,bloodcolor) // Going
+					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
 
 				bloodDNA = null
 

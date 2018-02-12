@@ -1,3 +1,20 @@
+/mob/living/New()
+	..()
+
+	//I'll just hang my coat up over here
+	dsoverlay = image('icons/mob/darksight.dmi',global_hud.darksight) //This is a secret overlay! Go look at the file, you'll see.
+	var/mutable_appearance/dsma = new(dsoverlay) //Changing like ten things, might as well.
+	dsma.alpha = 0
+	dsma.plane = PLANE_LIGHTING
+	dsma.layer = LIGHTING_LAYER + 0.1
+	dsma.blend_mode = BLEND_ADD
+	dsoverlay.appearance = dsma
+
+/mob/living/Destroy()
+	dsoverlay.loc = null //I'll take my coat with me
+	dsoverlay = null
+	return ..()
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
@@ -58,12 +75,12 @@ default behaviour is:
 			for(var/mob/living/M in range(tmob, 1))
 				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
-						src << "<span class='warning'>[tmob] is restrained, you cannot push past</span>"
+						to_chat(src, "<span class='warning'>[tmob] is restrained, you cannot push past</span>")
 					now_pushing = 0
 					return
 				if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
 					if ( !(world.time % 5) )
-						src << "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>"
+						to_chat(src, "<span class='warning'>[tmob] is restraining [M], you cannot push past</span>")
 					now_pushing = 0
 					return
 
@@ -103,7 +120,7 @@ default behaviour is:
 				return
 			if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
 				if(prob(40) && !(FAT in src.mutations))
-					src << "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>"
+					to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
 					now_pushing = 0
 					return
 			if(tmob.r_hand && istype(tmob.r_hand, /obj/item/weapon/shield/riot))
@@ -129,9 +146,13 @@ default behaviour is:
 					playsound(loc, "punch", 25, 1, -1)
 					visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 					src.apply_damage(5, BRUTE)
-					src << ("<span class='warning'>You just [pick("ran", "slammed")] into \the [AM]!</span>")
+					to_chat(src, "<span class='warning'>You just [pick("ran", "slammed")] into \the [AM]!</span>")
 				return
 			if (!now_pushing)
+				if(isobj(AM))
+					var/obj/I = AM
+					if(!can_pull_size || can_pull_size < I.w_class)
+						return
 				now_pushing = 1
 
 				var/t = get_dir(src, AM)
@@ -153,7 +174,7 @@ default behaviour is:
 	if ((src.health < 0 && src.health > (5-src.getMaxHealth()))) // Health below Zero but above 5-away-from-death, as before, but variable
 		src.adjustOxyLoss(src.health + src.getMaxHealth() * 2) // Deal 2x health in OxyLoss damage, as before but variable.
 		src.health = src.getMaxHealth() - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
-		src << "<font color='blue'>You have given up life and succumbed to death.</font>"
+		to_chat(src, "<font color='blue'>You have given up life and succumbed to death.</font>")
 
 
 /mob/living/proc/updatehealth()
@@ -239,6 +260,7 @@ default behaviour is:
 				amount *= M.incoming_healing_percent
 
 	bruteloss = min(max(bruteloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
@@ -258,6 +280,7 @@ default behaviour is:
 				amount *= M.incoming_healing_percent
 
 	oxyloss = min(max(oxyloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -281,6 +304,7 @@ default behaviour is:
 				amount *= M.incoming_healing_percent
 
 	toxloss = min(max(toxloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -309,6 +333,7 @@ default behaviour is:
 				amount *= M.incoming_healing_percent
 
 	fireloss = min(max(fireloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
@@ -328,6 +353,7 @@ default behaviour is:
 				amount *= M.incoming_healing_percent
 
 	cloneloss = min(max(cloneloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/setCloneLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -362,6 +388,7 @@ default behaviour is:
 			if(!isnull(M.incoming_healing_percent))
 				amount *= M.incoming_healing_percent
 	halloss = min(max(halloss + amount, 0),(getMaxHealth()*2))
+	updatehealth()
 
 /mob/living/proc/setHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
@@ -640,20 +667,20 @@ default behaviour is:
 
 	if(config.allow_Metadata)
 		if(client)
-			usr << "[src]'s Metainfo:<br>[client.prefs.metadata]"
+			to_chat(usr, "[src]'s Metainfo:<br>[client.prefs.metadata]")
 		else
-			usr << "[src] does not have any stored infomation!"
+			to_chat(usr, "[src] does not have any stored infomation!")
 	else
-		usr << "OOC Metadata is not supported by this server!"
+		to_chat(usr, "OOC Metadata is not supported by this server!")
 
 	return
 
 /mob/living/Move(a, b, flag)
 
 	if (buckled && buckled.loc != a) //not updating position
-		if (!buckled.anchored)
+		if(istype(buckled, /mob))	//If you're buckled to a mob, a la slime things, keep on rolling.
 			return buckled.Move(a, b)
-		else
+		else	//Otherwise, no running around for you.
 			return 0
 
 	if (restrained())
@@ -791,8 +818,8 @@ default behaviour is:
 
 	if(istype(M))
 		M.drop_from_inventory(H)
-		M << "<span class='warning'>\The [H] wriggles out of your grip!</span>"
-		src << "<span class='warning'>You wriggle out of \the [M]'s grip!</span>"
+		to_chat(M, "<span class='warning'>\The [H] wriggles out of your grip!</span>")
+		to_chat(src, "<span class='warning'>You wriggle out of \the [M]'s grip!</span>")
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
@@ -804,15 +831,15 @@ default behaviour is:
 		var/obj/item/clothing/accessory/holster/holster = H.loc
 		if(holster.holstered == H)
 			holster.clear_holster()
-		src << "<span class='warning'>You extricate yourself from \the [holster].</span>"
+		to_chat(src, "<span class='warning'>You extricate yourself from \the [holster].</span>")
 		H.forceMove(get_turf(H))
 	else if(istype(H.loc,/obj/item))
-		src << "<span class='warning'>You struggle free of \the [H.loc].</span>"
+		to_chat(src, "<span class='warning'>You struggle free of \the [H.loc].</span>")
 		H.forceMove(get_turf(H))
 
 /mob/living/proc/escape_buckle()
 	if(buckled)
-		buckled.user_unbuckle_mob(src)
+		buckled.user_unbuckle_mob(src, src)
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
@@ -827,7 +854,7 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 /mob/living/proc/cannot_use_vents()
 	if(mob_size > MOB_SMALL)
@@ -863,7 +890,7 @@ default behaviour is:
 					inertia_dir = 1
 				else if(y >= world.maxy -TRANSITIONEDGE)
 					inertia_dir = 2
-				src << "<span class='warning'>Something you are carrying is preventing you from leaving.</span>"
+				to_chat(src, "<span class='warning'>Something you are carrying is preventing you from leaving.</span>")
 				return
 
 	..()
@@ -881,54 +908,52 @@ default behaviour is:
 		ear_deaf = deaf
 
 /mob/living/proc/vomit(var/skip_wait, var/blood_vomit)
-
-	if(isSynthetic())
-		src << "<span class='danger'>A sudden, dizzying wave of internal feedback rushes over you!</span>"
-		src.Weaken(5)
-		return
-
 	if(!check_has_mouth())
 		return
 
 	if(!lastpuke)
 		lastpuke = 1
-		if (nutrition <= 100)
-			src << "<span class='danger'>You gag as you want to throw up, but there's nothing in your stomach!</span>"
-			src.Weaken(10)
+		if(isSynthetic())
+			to_chat(src, "<span class='danger'>A sudden, dizzying wave of internal feedback rushes over you!</span>")
+			src.Weaken(5)
 		else
-			src << "<span class='warning'>You feel nauseous...</span>"
-
-			if(!skip_wait)
-				sleep(150)	//15 seconds until second warning
-				src << "<span class='warning'>You feel like you are about to throw up!</span>"
-				sleep(100)	//and you have 10 more for mad dash to the bucket
-
-			//Damaged livers cause you to vomit blood.
-			if(!blood_vomit)
-				if(ishuman(src))
-					var/mob/living/carbon/human/H = src
-					if(!H.isSynthetic())
-						var/obj/item/organ/internal/liver/L = H.internal_organs_by_name["liver"]
-						if(L.is_broken())
-							blood_vomit = 1
-
-			Stun(5)
-			src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
-			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
-
-			var/turf/simulated/T = get_turf(src)	//TODO: Make add_blood_floor remove blood from human mobs
-			if(istype(T))
-				if(blood_vomit)
-					T.add_blood_floor(src)
-				else
-					T.add_vomit_floor(src, 1)
-
-			if(blood_vomit)
-				if(getBruteLoss() < 50)
-					adjustBruteLoss(3)
+			if (nutrition <= 100)
+				to_chat(src, "<span class='danger'>You gag as you want to throw up, but there's nothing in your stomach!</span>")
+				src.Weaken(10)
 			else
-				nutrition -= 40
-				adjustToxLoss(-3)
+				to_chat(src, "<span class='warning'>You feel nauseous...</span>")
+
+				if(!skip_wait)
+					sleep(150)	//15 seconds until second warning
+					to_chat(src, "<span class='warning'>You feel like you are about to throw up!</span>")
+					sleep(100)	//and you have 10 more for mad dash to the bucket
+
+				//Damaged livers cause you to vomit blood.
+				if(!blood_vomit)
+					if(ishuman(src))
+						var/mob/living/carbon/human/H = src
+						if(!H.isSynthetic())
+							var/obj/item/organ/internal/liver/L = H.internal_organs_by_name["liver"]
+							if(L.is_broken())
+								blood_vomit = 1
+
+				Stun(5)
+				src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+
+				var/turf/simulated/T = get_turf(src)	//TODO: Make add_blood_floor remove blood from human mobs
+				if(istype(T))
+					if(blood_vomit)
+						T.add_blood_floor(src)
+					else
+						T.add_vomit_floor(src, 1)
+
+				if(blood_vomit)
+					if(getBruteLoss() < 50)
+						adjustBruteLoss(3)
+				else
+					nutrition -= 40
+					adjustToxLoss(-3)
 
 		sleep(350)
 		lastpuke = 0
@@ -943,11 +968,14 @@ default behaviour is:
 			if(is_physically_disabled())
 				lying = 0
 				canmove = 1
-				pixel_y = V.mob_offset_y - 5
+				if(!V.riding_datum) // If it has a riding datum, the datum handles moving the pixel_ vars.
+					pixel_y = V.mob_offset_y - 5
 			else
-				if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
+				if(buckled.buckle_lying != -1)
+					lying = buckled.buckle_lying
 				canmove = 1
-				pixel_y = V.mob_offset_y
+				if(!V.riding_datum) // If it has a riding datum, the datum handles moving the pixel_ vars.
+					pixel_y = V.mob_offset_y
 		else if(buckled)
 			anchored = 1
 			canmove = 0
@@ -1005,6 +1033,9 @@ default behaviour is:
 /mob/living/proc/equip_post_job()
 	return
 
+// Used to check if something is capable of thought, in the traditional sense.
+/mob/living/proc/is_sentient()
+	return TRUE
 
 /mob/living/update_transform()
 	// First, get the correct size.
@@ -1017,4 +1048,40 @@ default behaviour is:
 	var/matrix/M = matrix()
 	M.Scale(desired_scale)
 	M.Translate(0, 16*(desired_scale-1))
-	src.transform = M
+	animate(src, transform = M, time = 10)
+
+// This handles setting the client's color variable, which makes everything look a specific color.
+// This proc is here so it can be called without needing to check if the client exists, or if the client relogs.
+/mob/living/update_client_color()
+	if(!client)
+		return
+
+	var/list/colors_to_blend = list()
+	for(var/datum/modifier/M in modifiers)
+		if(!isnull(M.client_color))
+			colors_to_blend += M.client_color
+
+	if(colors_to_blend.len)
+		var/final_color
+		if(colors_to_blend.len == 1) // If it's just one color we can skip all of this work.
+			final_color = colors_to_blend[1]
+
+		else // Otherwise we need to do some messy additive blending.
+			var/R = 0
+			var/G = 0
+			var/B = 0
+
+			for(var/C in colors_to_blend)
+				var/RGB = hex2rgb(C)
+				R = between(0, R + RGB[1], 255)
+				G = between(0, G + RGB[2], 255)
+				B = between(0, B + RGB[3], 255)
+			final_color = rgb(R,G,B)
+
+		if(final_color)
+			var/old_color = client.color // Don't know if BYOND has an internal optimization to not care about animate() calls that effectively do nothing.
+			if(final_color != old_color) // Gonna do a check just incase.
+				animate(client, color = final_color, time = 10)
+
+	else // No colors, so remove the client's color.
+		animate(client, color = null, time = 10)

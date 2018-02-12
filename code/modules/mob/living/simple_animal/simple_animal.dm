@@ -20,7 +20,7 @@
 	//Mob icon/appearance settings
 	var/icon_living = ""			// The iconstate if we're alive, required
 	var/icon_dead = ""				// The iconstate if we're dead, required
-	var/icon_gib = null				// The iconstate for being gibbed, optional
+	var/icon_gib = "generic_gib"	// The iconstate for being gibbed, optional. Defaults to a generic gib animation.
 	var/icon_rest = null			// The iconstate for resting, optional
 	var/image/modifier_overlay = null // Holds overlays from modifiers.
 
@@ -483,7 +483,7 @@
 		purge -= 1
 
 /mob/living/simple_animal/gib()
-	..(icon_gib,1)
+	..(icon_gib,1,icon) // we need to specify where the gib animation is stored
 
 /mob/living/simple_animal/emote(var/act, var/type, var/desc)
 	if(act)
@@ -504,7 +504,10 @@
 		stun_effect_act(0, Proj.agony)
 
 	if(!Proj.nodamage)
-		adjustBruteLoss(Proj.damage)
+		var/true_damage = Proj.damage
+		if(!Proj.SA_vulnerability || Proj.SA_vulnerability == intelligence_level)
+			true_damage += Proj.SA_bonus_damage
+		adjustBruteLoss(true_damage)
 
 	if(Proj.firer)
 		react_to_attack(Proj.firer)
@@ -574,7 +577,8 @@
 						if ((M.client && !( M.blinded )))
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
-			user << "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>"
+			var/datum/gender/T = gender_datums[src.get_visible_gender()]
+			user << "<span class='notice'>\The [src] is dead, medical items won't bring [T.him] back to life.</span>" // the gender lookup is somewhat overkill, but it functions identically to the obsolete gender macros and future-proofs this code
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
@@ -742,13 +746,13 @@
 	if(stat || M == target_mob) return //Not if we're dead or already hitting them
 	if(M in friends || M.faction == faction) return //I'll overlook it THIS time...
 	ai_log("react_to_attack([M])",1)
-	if(retaliate && set_target(M))
+	if(retaliate && set_target(M, 1))
 		handle_stance(STANCE_ATTACK)
 		return M
 
 	return 0
 
-/mob/living/simple_animal/proc/set_target(var/mob/M)
+/mob/living/simple_animal/proc/set_target(var/mob/M, forced = 0)
 	ai_log("SetTarget([M])",2)
 	if(!M || (world.time - last_target_time < 5 SECONDS) && target_mob)
 		ai_log("SetTarget() can't set it again so soon",3)
@@ -762,7 +766,7 @@
 		annoyed += 14
 		sleep(1 SECOND) //For realism
 
-	if(M in ListTargets(view_range))
+	if(forced || (M in ListTargets(view_range)))
 		try_say_list(say_got_target)
 		target_mob = M
 		last_target_time = world.time
@@ -1162,7 +1166,7 @@
 	//They ran away!
 	else
 		ai_log("AttackTarget() out of range!",3)
-		sleep(1) // Unfortunately this is needed to protect from ClosestDistance() sometimes not updating fast enough to prevent an infinite loop.
+		stoplag(1) // Unfortunately this is needed to protect from ClosestDistance() sometimes not updating fast enough to prevent an infinite loop.
 		handle_stance(STANCE_ATTACK)
 		return 0
 
@@ -1470,6 +1474,9 @@
 	if(intelligence_level == SA_HUMANOID && !forced)
 		return
 	set_target(new_target)
+
+/mob/living/simple_animal/is_sentient()
+	return intelligence_level != SA_PLANT && intelligence_level != SA_ROBOTIC
 
 //Commands, reactions, etc
 /mob/living/simple_animal/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)

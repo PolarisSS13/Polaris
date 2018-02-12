@@ -85,7 +85,7 @@
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
 
 
-	var/datum/gender/T = gender_datums[get_gender()]
+	var/datum/gender/T = gender_datums[get_visible_gender()]
 
 	if(skipjumpsuit && skipface) //big suits/masks/helmets make it hard to tell their gender
 		T = gender_datums[PLURAL]
@@ -475,9 +475,9 @@
 		var/mob/living/silicon/robot/R = M
 		switch(hudtype)
 			if("security")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/sec) || istype(R.module_state_2, /obj/item/borg/sight/hud/sec) || istype(R.module_state_3, /obj/item/borg/sight/hud/sec)
+				return R.hudmode == "Security"
 			if("medical")
-				return istype(R.module_state_1, /obj/item/borg/sight/hud/med) || istype(R.module_state_2, /obj/item/borg/sight/hud/med) || istype(R.module_state_3, /obj/item/borg/sight/hud/med)
+				return R.hudmode == "Medical"
 			else
 				return 0
 	else

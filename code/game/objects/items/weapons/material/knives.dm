@@ -68,9 +68,10 @@
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
-	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting \his stomach open with \the [src]! It looks like \he's trying to commit seppuku.</span>")
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+	viewers(user) << pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
+	                      "<span class='danger'>\The [user] is slitting [TU.his] throat with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
+	                      "<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.hes] trying to commit seppuku.</span>")
 	return (BRUTELOSS)
 
 /obj/item/weapon/material/knife/hook
@@ -87,8 +88,31 @@
 
 /obj/item/weapon/material/knife/butch
 	name = "butcher's cleaver"
-	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+/obj/item/weapon/material/knife/machete
+	name = "machete"
+	desc = "A sharp machete often found in survival kits."
+	icon_state = "machete"
+	force_divisor = 0.3 // 18 when hardness 60 (steel)
+	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
+	var/should_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
+	slot_flags = SLOT_BELT
+
+// This cannot go into afterattack since some mobs delete themselves upon dying.
+/obj/item/weapon/material/knife/machete/pre_attack(var/mob/living/target, var/mob/living/user)
+	if(should_cleave && istype(target))
+		cleave(user, target)
+	..()
+
+/obj/item/weapon/material/knife/tacknife/survival
+	name = "survival knife"
+	desc = "A hunting grade survival knife."
+	icon = 'icons/obj/kitchen.dmi'
+	icon_state = "survivalknife"
+	item_state = "knife"
+	applies_material_colour = FALSE
+	toolspeed = 2 // Use a real axe if you want to chop logs.

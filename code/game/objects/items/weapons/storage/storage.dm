@@ -174,7 +174,7 @@
 	src.boxes.screen_loc = "[tx]:,[ty] to [mx],[my]"
 	for(var/obj/O in src.contents)
 		O.screen_loc = "[cx],[cy]"
-		O.layer = 20
+		O.hud_layerise()
 		cx++
 		if (cx > mx)
 			cx = tx
@@ -192,7 +192,7 @@
 		for(var/datum/numbered_display/ND in display_contents)
 			ND.sample_object.screen_loc = "[cx]:16,[cy]:16"
 			ND.sample_object.maptext = "<font color='white'>[(ND.number > 1)? "[ND.number]" : ""]</font>"
-			ND.sample_object.layer = 20
+			ND.sample_object.hud_layerise()
 			cx++
 			if (cx > (4+cols))
 				cx = 4
@@ -201,7 +201,7 @@
 		for(var/obj/O in contents)
 			O.screen_loc = "[cx]:16,[cy]:16"
 			O.maptext = ""
-			O.layer = 20
+			O.hud_layerise()
 			cx++
 			if (cx > (4+cols))
 				cx = 4
@@ -252,7 +252,7 @@
 
 		O.screen_loc = "4:[round((startpoint+endpoint)/2)+2],2:16"
 		O.maptext = ""
-		O.layer = 20
+		O.hud_layerise()
 
 	src.closer.screen_loc = "4:[storage_width+19],2:16"
 	return
@@ -311,24 +311,24 @@
 		return 0 //Means the item is already in the storage item
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] is full, make some space.</span>"
+			to_chat(usr, "<span class='notice'>[src] is full, make some space.</span>")
 		return 0 //Storage item is full
 
 	if(can_hold.len && !is_type_in_list(W, can_hold))
 		if(!stop_messages)
 			if (istype(W, /obj/item/weapon/hand_labeler))
 				return 0
-			usr << "<span class='notice'>[src] cannot hold [W].</span>"
+			to_chat(usr, "<span class='notice'>[src] cannot hold [W].</span>")
 		return 0
 
 	if(cant_hold.len && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] cannot hold [W].</span>"
+			to_chat(usr, "<span class='notice'>[src] cannot hold [W].</span>")
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			usr << "<span class='notice'>[W] is too long for \the [src].</span>"
+			to_chat(usr, "<span class='notice'>[W] is too long for \the [src].</span>")
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
@@ -337,12 +337,12 @@
 
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] is too full, make some space.</span>"
+			to_chat(usr, "<span class='notice'>[src] is too full, make some space.</span>")
 		return 0
 
 	if(W.w_class >= src.w_class && (istype(W, /obj/item/weapon/storage)))
 		if(!stop_messages)
-			usr << "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>"
+			to_chat(usr, "<span class='notice'>[src] cannot hold [W] as it's a storage item of the same size.</span>")
 		return 0 //To prevent the stacking of same sized storage items.
 
 	return 1
@@ -366,7 +366,7 @@
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
-					usr << "<span class='notice'>You put \the [W] into [src].</span>"
+					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
 					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
 				else if (W && W.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
@@ -395,9 +395,9 @@
 		if(ismob(loc))
 			W.dropped(usr)
 		if(ismob(new_location))
-			W.layer = 20
+			W.hud_layerise()
 		else
-			W.layer = initial(W.layer)
+			W.reset_plane_and_layer()
 		W.forceMove(new_location)
 	else
 		W.forceMove(get_turf(src))
@@ -515,7 +515,7 @@
 	set name = "Empty Contents"
 	set category = "Object"
 
-	if((!ishuman(usr) && (src.loc != usr)) || usr.stat || usr.restrained())
+	if(((!(ishuman(usr) || isrobot(usr))) && (src.loc != usr)) || usr.stat || usr.restrained())
 		return
 
 	var/turf/T = get_turf(src)
@@ -546,41 +546,38 @@
 	src.boxes.master = src
 	src.boxes.icon_state = "block"
 	src.boxes.screen_loc = "7,7 to 10,8"
-	src.boxes.layer = 19
 
 	src.storage_start = new /obj/screen/storage(  )
 	src.storage_start.name = "storage"
 	src.storage_start.master = src
 	src.storage_start.icon_state = "storage_start"
 	src.storage_start.screen_loc = "7,7 to 10,8"
-	src.storage_start.layer = 19
+
 	src.storage_continue = new /obj/screen/storage(  )
 	src.storage_continue.name = "storage"
 	src.storage_continue.master = src
 	src.storage_continue.icon_state = "storage_continue"
 	src.storage_continue.screen_loc = "7,7 to 10,8"
-	src.storage_continue.layer = 19
+
 	src.storage_end = new /obj/screen/storage(  )
 	src.storage_end.name = "storage"
 	src.storage_end.master = src
 	src.storage_end.icon_state = "storage_end"
 	src.storage_end.screen_loc = "7,7 to 10,8"
-	src.storage_end.layer = 19
 
 	src.stored_start = new /obj //we just need these to hold the icon
 	src.stored_start.icon_state = "stored_start"
-	src.stored_start.layer = 19
+
 	src.stored_continue = new /obj
 	src.stored_continue.icon_state = "stored_continue"
-	src.stored_continue.layer = 19
+
 	src.stored_end = new /obj
 	src.stored_end.icon_state = "stored_end"
-	src.stored_end.layer = 19
 
 	src.closer = new /obj/screen/close(  )
 	src.closer.master = src
 	src.closer.icon_state = "storage_close"
-	src.closer.layer = 20
+	src.closer.hud_layerise()
 	orient2hud()
 	return
 
@@ -591,8 +588,7 @@
 	..()
 
 /obj/item/weapon/storage/attack_self(mob/user as mob)
-	//Clicking on itself will empty it, if it has the verb to do that.
-	if(user.get_active_hand() == src)
+	if((user.get_active_hand() == src) || (isrobot(user)) && allow_quick_empty)
 		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1

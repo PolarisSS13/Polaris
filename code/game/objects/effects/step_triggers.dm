@@ -96,7 +96,18 @@
 	Trigger(var/atom/movable/A)
 		if(teleport_x && teleport_y && teleport_z)
 			var/turf/T = locate(teleport_x, teleport_y, teleport_z)
-			A.forceMove(T)
+			if(isliving(A))
+				var/mob/living/L = A
+				if(L.pulling)
+					var/atom/movable/P = L.pulling
+					L.stop_pulling()
+					P.forceMove(T)
+					L.forceMove(T)
+					L.start_pulling(P)
+				else
+					A.forceMove(T)
+			else
+				A.forceMove(T)
 
 /* Random teleporter, teleports atoms to locations ranging from teleport_x - teleport_x_offset, etc */
 
@@ -118,6 +129,7 @@
 	var/landmark_id = null
 
 /obj/effect/step_trigger/teleporter/landmark/initialize()
+	. = ..()
 	for(var/obj/effect/landmark/teleport_mark/mark in tele_landmarks)
 		if(mark.landmark_id == landmark_id)
 			the_landmark = mark
@@ -146,9 +158,6 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 /obj/effect/step_trigger/teleporter/planetary_fall
 	var/datum/planet/planet = null
 
-/obj/effect/step_trigger/teleporter/planetary_fall/sif/initialize()
-	planet = planet_sif
-
 /obj/effect/step_trigger/teleporter/planetary_fall/Trigger(var/atom/movable/A)
 	if(planet)
 		if(!planet.planet_floors.len)
@@ -159,6 +168,9 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 		while(!T && safety)
 			var/turf/simulated/candidate = pick(planet.planet_floors)
 			if(!istype(candidate) || istype(candidate, /turf/simulated/sky))
+				safety--
+				continue
+			else if(candidate && !candidate.outdoors)
 				safety--
 				continue
 			else
@@ -173,14 +185,12 @@ var/global/list/tele_landmarks = list() // Terrible, but the alternative is loop
 			A.forceMove(T) // Harmlessly move ghosts.
 			return
 
-		if(isliving(A)) // Someday, implement parachutes.  For now, just turbomurder whoever falls.
-			var/mob/living/L = A
-			for(var/i = 1 to 6)
-				L.adjustBruteLoss(100)
-		message_admins("\The [A] fell out of the sky.")
-		explosion(T, 0, 1, 2)
 		A.forceMove(T)
-		T.visible_message("<span class='danger'><font size='3'>\A [A] falls out of the sky and crashes into \the [T]!</font></span>")
+		// Living things should probably be logged when they fall...
+		if(isliving(A))
+			message_admins("\The [A] fell out of the sky.")
+		// ... because they're probably going to die from it.
+		A.fall_impact(T, 42, 90, FALSE, TRUE)	//You will not be defibbed from this.
 	else
 		message_admins("ERROR: planetary_fall step trigger lacks a planet to fall onto.")
 		return

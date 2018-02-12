@@ -20,6 +20,7 @@
 	..()
 
 /obj/machinery/computer/initialize()
+	. = ..()
 	power_change()
 	update_icon()
 
@@ -58,6 +59,9 @@
 	if(prob(Proj.get_structure_damage()))
 		set_broken()
 	..()
+
+/obj/machinery/computer/blob_act()
+	ex_act(2)
 
 /obj/machinery/computer/update_icon()
 	overlays.Cut()

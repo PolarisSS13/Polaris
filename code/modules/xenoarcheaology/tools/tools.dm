@@ -1,17 +1,3 @@
-/obj/item/device/gps
-	name = "relay positioning device"
-	desc = "Triangulates the approximate co-ordinates using a nearby satellite network."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "locator"
-	item_state = "locator"
-	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
-	w_class = ITEMSIZE_SMALL
-
-/obj/item/device/gps/attack_self(var/mob/user as mob)
-	var/turf/T = get_turf(src)
-	user << "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>"
-
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -71,8 +57,8 @@
 		var/nearestSimpleTargetDist = -1
 		var/turf/cur_turf = get_turf(src)
 
-		if(master_controller) //Sanity check due to runtimes ~Z
-			for(var/A in master_controller.artifact_spawning_turfs)
+		if(SSxenoarch) //Sanity check due to runtimes ~Z
+			for(var/A in SSxenoarch.artifact_spawning_turfs)
 				var/turf/simulated/mineral/T = A
 				if(T.density && T.artifact_find)
 					if(T.z == cur_turf.z)
@@ -81,9 +67,9 @@
 							nearestTargetDist = cur_dist + rand() * 2 - 1
 							nearestTargetId = T.artifact_find.artifact_id
 				else
-					master_controller.artifact_spawning_turfs.Remove(T)
+					SSxenoarch.artifact_spawning_turfs.Remove(T)
 
-			for(var/A in master_controller.digsite_spawning_turfs)
+			for(var/A in SSxenoarch.digsite_spawning_turfs)
 				var/turf/simulated/mineral/T = A
 				if(T.density && T.finds && T.finds.len)
 					if(T.z == cur_turf.z)
@@ -91,7 +77,7 @@
 						if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
 							nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
 				else
-					master_controller.digsite_spawning_turfs.Remove(T)
+					SSxenoarch.digsite_spawning_turfs.Remove(T)
 
 		if(nearestTargetDist >= 0)
 			user << "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"

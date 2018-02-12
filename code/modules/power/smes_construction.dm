@@ -1,6 +1,6 @@
 // BUILDABLE SMES(Superconducting Magnetic Energy Storage) UNIT
 //
-// Last Change 1.1.2015 by Atlantis - Happy New Year!
+// Last Change 2.8.2018 by Neerti. Also signing this is still dumb.
 //
 // This is subtype of SMES that should be normally used. It can be constructed, deconstructed and hacked.
 // It also supports RCON System which allows you to operate it remotely, if properly set.
@@ -55,8 +55,14 @@
 	component_parts += new /obj/item/weapon/smes_coil(src)
 	recalc_coils()
 
-
-
+// Pre-installed and pre-charged SMES hidden from the station, for use in submaps.
+/obj/machinery/power/smes/buildable/point_of_interest/New()
+	..(1)
+	charge = 1e7 // Should be enough for an individual POI.
+	RCon = FALSE
+	input_level = input_level_max
+	output_level = output_level_max
+	input_attempt = TRUE
 
 
 

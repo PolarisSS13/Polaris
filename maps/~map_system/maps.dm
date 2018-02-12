@@ -38,6 +38,12 @@ var/list/all_maps = list()
 	//This list contains the z-level numbers which can be accessed via space travel and the percentile chances to get there.
 	var/list/accessible_z_levels = list()
 
+	//List of additional z-levels to load above the existing .dmm file z-levels using the maploader. Must be map template >>> NAMES <<<.
+	var/list/lateload_z_levels = list()
+
+	//Similar to above, but only pick ONE to load, useful for random away missions and whatnot
+	var/list/lateload_single_pick = list()
+
 	var/list/allowed_jobs = list() //Job datums to use.
 	                               //Works a lot better so if we get to a point where three-ish maps are used
 	                               //We don't have to C&P ones that are only common between two of them
@@ -78,6 +84,7 @@ var/list/all_maps = list()
 	var/list/unit_test_exempt_areas = list()
 	var/list/unit_test_exempt_from_atmos = list()
 	var/list/unit_test_exempt_from_apc = list()
+	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
 /datum/map/New()
 	..()
@@ -135,6 +142,10 @@ var/list/all_maps = list()
 	else
 		return list()
 
+/datum/map/proc/get_zlevel_name(var/index)
+	var/datum/map_z_level/Z = zlevels["[index]"]
+	return Z.name
+
 // Another way to setup the map datum that can be convenient.  Just declare all your zlevels as subtypes of a common
 // subtype of /datum/map_z_level and set zlevel_datum_type on /datum/map to have the lists auto-initialized.
 
@@ -173,3 +184,22 @@ var/list/all_maps = list()
 	if (using_map.zlevels["[z]"] == src)
 		using_map.zlevels -= "[z]"
 	return ..()
+
+// Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
+// This list needs to be purged but people insist on adding more cruft to the radio.
+/datum/map/proc/default_internal_channels()
+	return list(
+		num2text(PUB_FREQ)   = list(),
+		num2text(AI_FREQ)    = list(access_synth),
+		num2text(ENT_FREQ)   = list(),
+		num2text(ERT_FREQ)   = list(access_cent_specops),
+		num2text(COMM_FREQ)  = list(access_heads),
+		num2text(ENG_FREQ)   = list(access_engine_equip, access_atmospherics),
+		num2text(MED_FREQ)   = list(access_medical_equip),
+		num2text(MED_I_FREQ) = list(access_medical_equip),
+		num2text(SEC_FREQ)   = list(access_security),
+		num2text(SEC_I_FREQ) = list(access_security),
+		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
+		num2text(SUP_FREQ)   = list(access_cargo),
+		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
+	)

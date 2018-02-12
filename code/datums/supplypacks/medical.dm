@@ -82,7 +82,7 @@
 	contains = list(
 			/obj/item/weapon/storage/firstaid/clotting
 			)
-	cost = 40
+	cost = 100
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "Clotting Medicine crate"
 	access = access_medical
@@ -330,8 +330,8 @@
 	access = access_cmo
 
 /datum/supply_packs/med/defib
-	name = "Defibrilator crate"
+	name = "Defibrillator crate"
 	contains = list(/obj/item/device/defib_kit = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/medical
-	containername = "Defibrilator crate"
+	containername = "Defibrillator crate"

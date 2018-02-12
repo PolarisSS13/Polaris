@@ -52,7 +52,7 @@
 		/obj/item/device/radio/headset,
 		/obj/item/device/robotanalyzer,
 		/obj/item/weapon/material/minihoe,
-		/obj/item/weapon/material/hatchet,
+		/obj/item/weapon/material/knife/machete/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/tape_roll,
@@ -160,6 +160,7 @@
 		/obj/item/weapon/melee,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/weapon/gun/projectile/sec,
+		/obj/item/weapon/gun/projectile/p92x,
 		/obj/item/taperoll,
 		/obj/item/weapon/gun/projectile/colt/detective
 		)
@@ -247,6 +248,7 @@
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "belt"
 	item_state = "security"
+	storage_slots = 8
 	can_hold = list(
 		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/dnainjector,
@@ -284,6 +286,7 @@
 	new /obj/item/weapon/surgical/FixOVein/alien(src)
 	new /obj/item/weapon/surgical/bone_clamp/alien(src)
 	new /obj/item/weapon/surgical/cautery/alien(src)
+	new /obj/item/weapon/surgical/surgicaldrill/alien(src)
 
 /obj/item/weapon/storage/belt/champion
 	name = "championship belt"

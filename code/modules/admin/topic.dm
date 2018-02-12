@@ -1001,7 +1001,11 @@
 		//strip their stuff and stick it in the crate
 		for(var/obj/item/I in M)
 			M.drop_from_inventory(I, locker)
-		M.update_icons()
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.update_icons_layers() //Cheaper
+		else
+			M.update_icons()
 
 		//so they black out before warping
 		M.Paralyse(5)
@@ -1859,6 +1863,17 @@
 					usr << "Failed to add language '[lang2toggle]' from \the [M]!"
 
 			show_player_panel(M)
+
+	else if(href_list["cryoplayer"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/M = locate(href_list["cryoplayer"])
+		if(!istype(M))
+			to_chat(usr,"<span class='warning'>Mob doesn't exist!</span>")
+			return
+
+		var/client/C = usr.client
+		C.despawn_player(M)
 
 	// player info stuff
 

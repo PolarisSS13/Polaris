@@ -34,6 +34,10 @@
 	var/obj/screen/wizard/energy/wiz_energy_display = null
 	var/obj/screen/wizard/instability/wiz_instability_display = null
 
+	var/datum/plane_holder/plane_holder = null
+	var/list/vis_enabled = null		// List of vision planes that should be graphically visible (list of their VIS_ indexes).
+	var/list/planes_visible = null	// List of atom planes that are logically visible/interactable (list of actual plane numbers).
+
 	//spells hud icons - this interacts with add_spell and remove_spell
 	var/list/obj/screen/movable/spell_master/spell_masters = null
 	var/obj/screen/movable/ability_master/ability_master = null
@@ -104,8 +108,6 @@
 	var/cpr_time = 1.0//Carbon
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/old_x = 0
-	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
@@ -214,3 +216,9 @@
 	var/forbid_seeing_deadchat = FALSE // Used for lings to not see deadchat, and to have ghosting behave as if they were not really dead.
 
 	var/seedarkness = 1	//Determines mob's ability to see shadows. 1 = Normal vision, 0 = darkvision
+
+	var/get_rig_stats = 0 //Moved from computer.dm
+
+	var/hud_typing = 0 //Typing indicator stuff.
+	var/typing //Simple mobs use this variable.
+	var/obj/effect/decal/typing_indicator

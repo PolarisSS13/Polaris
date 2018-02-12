@@ -36,6 +36,7 @@
 	var/gendered_icon = 0              // Whether or not the icon state appends a gender.
 	var/s_tone                         // Skin tone.
 	var/list/s_col                     // skin colour
+	var/s_col_blend = ICON_ADD         // How the skin colour is applied.
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
 	var/mob/living/applied_pressure
@@ -192,9 +193,9 @@
 
 	dislocated = 1
 	if(owner)
-		owner.verbs |= /mob/living/carbon/human/proc/undislocate
+		owner.verbs |= /mob/living/carbon/human/proc/relocate
 
-/obj/item/organ/external/proc/undislocate()
+/obj/item/organ/external/proc/relocate()
 	if(dislocated == -1)
 		return
 
@@ -206,7 +207,7 @@
 		for(var/obj/item/organ/external/limb in owner.organs)
 			if(limb.dislocated == 1)
 				return
-		owner.verbs -= /mob/living/carbon/human/proc/undislocate
+		owner.verbs -= /mob/living/carbon/human/proc/relocate
 
 /obj/item/organ/external/update_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
@@ -322,7 +323,8 @@
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
-	owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
+	if(owner)
+		owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
 
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner && !is_stump())
@@ -411,7 +413,7 @@
 			user << "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>"
 			return 0
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(tool))
 	if(!do_mob(user, owner, 10))
 		user << "<span class='warning'>You must stand still to do that.</span>"
 		return 0
@@ -423,7 +425,8 @@
 
 	if(damage_desc)
 		if(user == src.owner)
-			user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on \his [src.name] with [tool].</span>")
+			var/datum/gender/T = gender_datums[user.get_visible_gender()]
+			user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on [T.his] [src.name] with [tool].</span>")
 		else
 			user.visible_message("<span class='notice'>\The [user] patches [damage_desc] on [owner]'s [src.name] with [tool].</span>")
 
@@ -602,7 +605,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 */
 /obj/item/organ/external/proc/update_germs()
 
-	if(robotic >= ORGAN_ROBOT || (owner.species && owner.species.flags & IS_PLANT)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(robotic >= ORGAN_ROBOT || (owner.species && (owner.species.flags & IS_PLANT || (owner.species.flags & NO_INFECT)))) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
 		germ_level = 0
 		return
 
@@ -672,7 +675,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		if (!(status & ORGAN_DEAD))
 			status |= ORGAN_DEAD
 			owner << "<span class='notice'>You can't feel your [name] anymore...</span>"
-			owner.update_body(1)
+			owner.update_icons_body()
 			for (var/obj/item/organ/external/child in children)
 				child.germ_level += 110 //Burst of infection from a parent organ becoming necrotic
 
@@ -874,6 +877,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
+			appearance_flags &= ~PIXEL_SCALE
 			compile_icon()
 			add_blood(victim)
 			var/matrix/M = matrix()
@@ -1108,11 +1112,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(src.robotic >= ORGAN_ROBOT)
 		return
 	src.status |= ORGAN_MUTATED
-	if(owner) owner.update_body()
+	if(owner) owner.update_icons_body()
 
 /obj/item/organ/external/proc/unmutate()
 	src.status &= ~ORGAN_MUTATED
-	if(owner) owner.update_body()
+	if(owner) owner.update_icons_body()
 
 /obj/item/organ/external/proc/get_damage()	//returns total damage
 	return (brute_dam+burn_dam)	//could use max_damage?
@@ -1199,7 +1203,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(spark_system)
 		qdel(src)
 
-	victim.update_body()
+	victim.update_icons_body()
 
 /obj/item/organ/external/proc/disfigure(var/type = "brute")
 	if (disfigured)

@@ -20,7 +20,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	bump_flag =        SLIME
 	swap_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
-	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT | NO_HALLUCINATION
+	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR
 	spawn_flags		 = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	health_hud_intensity = 2
@@ -39,10 +39,12 @@ var/datum/species/shapeshifter/promethean/prometheans
 	virus_immune =	1
 	blood_volume =	560
 	min_age =		1
-	max_age =		5
+	max_age =		10
 	brute_mod =		0.75
 	burn_mod =		2
 	oxy_mod =		0
+
+	cloning_modifier = /datum/modifier/cloning_sickness/promethean
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -54,7 +56,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 	body_temperature =      310.15
 
-	siemens_coefficient =   0.3
+	siemens_coefficient =   0.4
 	rarity_value =          5
 
 	genders = list(MALE, FEMALE, NEUTER, PLURAL)
@@ -81,12 +83,12 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_shape,
 		/mob/living/carbon/human/proc/shapeshifter_select_colour,
 		/mob/living/carbon/human/proc/shapeshifter_select_hair,
+		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
 		/mob/living/carbon/human/proc/shapeshifter_select_gender,
 		/mob/living/carbon/human/proc/regenerate
 		)
 
 	valid_transform_species = list("Human", "Vatborn", "Unathi", "Tajara", "Skrell", "Diona", "Teshari", "Monkey")
-	monochromatic = 1
 
 	var/heal_rate = 0.5 // Temp. Regen per tick.
 

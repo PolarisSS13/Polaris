@@ -11,7 +11,8 @@
 	w_class = ITEMSIZE_SMALL
 
 	suicide_act(mob/user)
-		viewers(user) << "<span class='danger'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
+		var/datum/gender/T = gender_datums[user.get_visible_gender()]
+		viewers(user) << "<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>"
 		return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
@@ -21,7 +22,7 @@
 
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(src))
 	user.do_attack_animation(M)
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
@@ -111,39 +112,41 @@
 	processing_objects |= src
 
 /obj/effect/energy_net/Destroy()
-	if(buckled_mob)
-		to_chat(buckled_mob,"<span class='notice'>You are free of the net!</span>")
-		unbuckle_mob()
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			to_chat(A,"<span class='notice'>You are free of the net!</span>")
+			unbuckle_mob(A)
 
 	processing_objects -= src
 	return ..()
 
 /obj/effect/energy_net/process()
-	if(isnull(buckled_mob) || buckled_mob.loc != loc)
+	if(!has_buckled_mobs())
 		qdel(src)
 
 /obj/effect/energy_net/Move()
 	..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.forceMove(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			unbuckle_mob()
-			qdel(src)
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/occupant = A
+			occupant.buckled = null
+			occupant.forceMove(src.loc)
+			occupant.buckled = src
+			if (occupant && (src.loc != occupant.loc))
+				unbuckle_mob(occupant)
+				qdel(src)
 
-/obj/effect/energy_net/user_unbuckle_mob(mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+/obj/effect/energy_net/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	user.setClickCooldown(user.get_attack_speed())
 	visible_message("<span class='danger'>[user] begins to tear at \the [src]!</span>")
 	if(do_after(usr, escape_time, src, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
-		if(!buckled_mob)
+		if(!has_buckled_mobs())
 			return
 		visible_message("<span class='danger'>[user] manages to tear \the [src] apart!</span>")
-		unbuckle_mob()
+		unbuckle_mob(buckled_mob)
 
 /obj/effect/energy_net/post_buckle_mob(mob/living/M)
-	if(buckled_mob) //Just buckled someone
+	if(M.buckled == src) //Just buckled someone
 		..()
 		layer = M.layer+1
 		M.can_pull_size = 0

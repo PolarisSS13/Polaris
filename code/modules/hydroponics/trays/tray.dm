@@ -165,16 +165,19 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
-/obj/machinery/portable_atmospherics/hydroponics/New()
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/initialize()
+	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	create_reagents(200)
 	if(mechanical)
 		connect()
 	update_icon()
+	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/portable_atmospherics/hydroponics/initialize()
+// Give the seeds time to initialize itself
+/obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
+	. = ..()
 	var/obj/item/seeds/S = locate() in loc
 	if(S)
 		plant_seeds(S)
@@ -568,7 +571,7 @@
 		return
 
 	else if(O.force && seed)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(O))
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)
 			health -= O.force
