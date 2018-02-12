@@ -6,6 +6,7 @@
 	children = list(
 		/datum/lore/codex/page/article1,
 		/datum/lore/codex/page/article2,
+		/datum/lore/codex/page/article3,
 		/datum/lore/codex/page/about_news,
 		)
 
