@@ -115,6 +115,7 @@
 	desc = "A drop pod that landed deep within the mountains."
 	mappath = 'maps/submaps/surface_submaps/mountains/SupplyDrop1.dmm'
 	cost = 10
+	allow_duplicates = TRUE
 
 /**************
  * Deep Caves *

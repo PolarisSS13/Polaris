@@ -39,3 +39,6 @@
 
 /area/submap/RationCache
 	name = "Ration Cache"
+
+/area/submap/SupplyDrop2
+	name = "Supply Drop 2"
