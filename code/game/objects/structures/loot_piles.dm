@@ -539,7 +539,6 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
         /obj/item/weapon/bone/leg,
         /obj/item/weapon/bone/arm,
         /obj/item/weapon/bone/ribs,
-        /obj/item/weapon/arrow
     )
     uncommon_loot = list(
         /obj/item/weapon/coin/gold,
