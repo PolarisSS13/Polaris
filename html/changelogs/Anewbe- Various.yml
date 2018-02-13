@@ -22,7 +22,7 @@
 #################################
 
 # Your name.  
-author: MistyLuminescence
+author: Anewbe
 
 # Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
 delete-after: True
@@ -33,4 +33,6 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - tweak: "Mines are now very, /very/ dangerous to step on (so don't do that). You can disarm them with a multitool and wirecutters - ping is good, beep is bad - or by shooting or exploding them from a distance. Be careful!"
+  - rscadd: "Cyborg Chargers now decrease radiation on FBPs."
+  - tweak: "Falling one floor now does a lot less damage, on average."
+  - bugfix: "Falling one floor in a Mech no longer hurts the occupant."
