@@ -32,7 +32,6 @@
 			return 0
 	if(gloves)
 		to_chat(user, "You slip \the [src] on over \the [gloves].")
-		punch_force = initial(punch_force)
 	wearer = H
 	return 1
 
@@ -45,4 +44,3 @@
 			gloves.ring = ring
 		src.gloves = null
 	wearer = null
-	punch_force = initial(punch_force)
