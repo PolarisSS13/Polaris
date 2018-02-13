@@ -188,69 +188,60 @@
 	log_game("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100")
 	message_admins("SMES FAILURE: <b>[src.x]X [src.y]Y [src.z]Z</b> User: [usr.ckey], Intensity: [intensity]/100 - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>")
 
+	var/used_hand = h_user.hand?"l_hand":"r_hand"
 
 	switch (intensity)
 		if (0 to 15)
 			// Small overcharge
 			// Sparks, Weak shock
 			s.set_up(2, 1, src)
-			s.start()
 			if (user_protected && prob(80))
 				to_chat(h_user, "A small electrical arc almost burns your hand. Luckily you had your gloves on!")
 			else
 				to_chat(h_user, "A small electrical arc sparks and burns your hand as you touch the [src]!")
-				h_user.adjustFireLoss(rand(5,10))
+				h_user.adjustFireLossByPart(rand(5,10), used_hand)
 				h_user.Weaken(2)
-			charge = 0
 
 		if (16 to 35)
 			// Medium overcharge
 			// Sparks, Medium shock, Weak EMP
 			s.set_up(4,1,src)
-			s.start()
 			if (user_protected && prob(25))
 				to_chat(h_user, "A medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!")
 			else
-				to_chat(h_user, "A medium electrical sparks as you touch the [src], severely burning your hand!")
-				h_user.adjustFireLoss(rand(10,25))
+				to_chat(h_user, "A medium electrical arc sparks as you touch the [src], severely burning your hand!")
+				h_user.adjustFireLossByPart(rand(10,25), used_hand)
 				h_user.Weaken(5)
-			spawn(0)
+			spawn()
 				empulse(get_turf(src), 1, 2, 3, 4)
-			charge = 0
 
 		if (36 to 60)
 			// Strong overcharge
 			// Sparks, Strong shock, Strong EMP, 10% light overload. 1% APC failure
 			s.set_up(7,1,src)
-			s.start()
 			if (user_protected)
 				to_chat(h_user, "A strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!")
-				h_user.adjustFireLoss(rand(25,60))
-				h_user.Paralyse(8)
+				h_user.adjustFireLossByPart(rand(25,60), used_hand)
+				h_user.Weaken(8)
 			else
 				to_chat(h_user, "A strong electrical arc sparks between you and [src], knocking you out for a while!")
-				h_user.adjustFireLoss(rand(35,75))
-				h_user.Paralyse(12)
-			spawn(0)
+				h_user.electrocute_act(rand(35,75), src, def_zone = BP_TORSO)
+			spawn()
 				empulse(get_turf(src), 6, 8, 12, 16)
-			charge = 0
 			apcs_overload(1, 10)
-			ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
+			ping("Caution. Output regulator malfunction. Uncontrolled discharge detected.")
 
 		if (61 to INFINITY)
 			// Massive overcharge
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
 			s.set_up(10,1,src)
-			s.start()
 			to_chat(h_user, "A massive electrical arc sparks between you and [src]. The last thing you can think about is \"Oh shit...\"")
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
-			h_user.adjustFireLoss(rand(150,195))
-			h_user.Paralyse(25)
-			spawn(0)
+			h_user.electrocute_act(rand(150,195), src, def_zone = BP_TORSO)
+			spawn()
 				empulse(get_turf(src), 32, 64)
-			charge = 0
 			apcs_overload(5, 25)
-			ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
+			ping("Caution. Output regulator malfunction. Significant uncontrolled discharge detected.")
 
 			if (prob(50))
 				// Added admin-notifications so they can stop it when griffed.
@@ -269,6 +260,9 @@
 					explosion(get_turf(src),1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
 					qdel(src)
+
+	s.start()
+	charge = 0
 
 
 
