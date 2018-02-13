@@ -7,7 +7,10 @@
 			return 1
 		return (!mover.density || !density || lying)
 	else
-		return (!mover.density || !density || lying)
+		if(height > 0)
+			return 1
+		else
+			return (!mover.density || !density || lying)
 	return
 
 /mob/proc/setMoveCooldown(var/timeout)
