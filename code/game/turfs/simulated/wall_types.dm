@@ -35,6 +35,8 @@
 	..(newloc,"silver","gold")
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
 	..(newloc,"sandstone","diamond")
+/turf/simulated/wall/snowbrick/New(var/newloc)
+	..(newloc,"packed snow")
 
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/skipjack/New(var/newloc)
