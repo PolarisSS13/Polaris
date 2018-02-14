@@ -169,6 +169,9 @@
 	recipes = list()
 	recipes += new/datum/stack_recipe("snowball", /obj/item/weapon/material/snow/snowball, 1, time = 10)
 	recipes += new/datum/stack_recipe("snow brick", /obj/item/stack/material/snowbrick, 2, time = 10)
+	recipes += new/datum/stack_recipe("snowman", /obj/structure/snowman, 2, time = 15)
+	recipes += new/datum/stack_recipe("snow robot", /obj/structure/snowman/borg, 2, time = 10)
+	recipes += new/datum/stack_recipe("snow spider", /obj/structure/snowman/spider, 3, time = 20)
 
 /material/snowbrick/generate_recipes()
 	recipes = list()
