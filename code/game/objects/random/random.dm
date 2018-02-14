@@ -1126,8 +1126,8 @@ var/list/multi_point_spawns
 		)
 
 /obj/random/landmine
-	name = "Random Landmine"
-	desc = "This is a random landmine."
+	name = "Random Land Mine"
+	desc = "This is a random land mine."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "uglymine"
 	spawn_nothing_percentage = 25

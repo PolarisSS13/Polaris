@@ -1,6 +1,6 @@
 /obj/effect/mine
-	name = "land mine"	//The name and description are deliberately NOT modified, so you can't game the landmines you find.
-	desc = "A small explosive landmine."
+	name = "land mine"	//The name and description are deliberately NOT modified, so you can't game the mines you find.
+	desc = "A small explosive land mine."
 	density = 0
 	anchored = 1
 	icon = 'icons/obj/weapons.dmi'
@@ -76,7 +76,7 @@
 		M.radiation += 50
 		randmutb(M)
 		domutcheck(M,null)
-	visible_message("\The [src.name] flashes violently before disintigrating!")
+	visible_message("\The [src.name] flashes violently before disintegrating!")
 	spawn(0)
 		qdel(s)
 		qdel(src)
@@ -91,7 +91,7 @@
 	s.start()
 	if(M)
 		M.Stun(30)
-	visible_message("\The [src.name] flashes violently before disintigrating!")
+	visible_message("\The [src.name] flashes violently before disintegrating!")
 	spawn(0)
 		qdel(s)
 		qdel(src)
@@ -175,7 +175,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-	visible_message("\The [src.name] flashes violently before disintigrating!")
+	visible_message("\The [src.name] flashes violently before disintegrating!")
 	empulse(loc, 2, 4, 7, 10, 1) // As strong as an EMP grenade
 	spawn(0)
 		qdel(src)
@@ -191,7 +191,7 @@
 	if(M)
 		M.adjust_fire_stacks(5)
 		M.fire_act()
-	visible_message("\The [src.name] bursts into flame!")
+	visible_message("\The [src.name] bursts into flames!")
 	spawn(0)
 		qdel(src)
 
