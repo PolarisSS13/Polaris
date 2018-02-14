@@ -57,7 +57,7 @@
 	cell_type = /obj/item/weapon/cell/hyper
 
 /obj/machinery/power/apc/hidden
-	hidden = 1
+	hidden = TRUE
 
 /obj/machinery/power/apc
 	name = "area power controller"
@@ -115,7 +115,7 @@
 	var/global/list/status_overlays_equipment
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
-	var/hidden = 0 //If power alarms from this APC are visible on consoles
+	var/hidden = FALSE //If power alarms from this APC are visible on consoles
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
