@@ -36,7 +36,7 @@
 
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : machines))
-		if(!monitored_alarms.len && alarm.hidden)
+		if(!monitored_alarms.len && alarm.alarms_hidden)
 			continue
 		alarms[++alarms.len] = list(
 			"name" = sanitize(alarm.name),
