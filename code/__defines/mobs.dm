@@ -25,7 +25,7 @@
 #define BORGTHERM 0x2
 #define BORGXRAY  0x4
 #define BORGMATERIAL  8
-
+/*
 #define STANCE_IDLE      1	// Looking for targets if hostile.  Does idle wandering.
 #define STANCE_ALERT     2	// Bears
 #define STANCE_ATTACK    3	// Attempting to get into attack position
@@ -33,6 +33,17 @@
 #define STANCE_TIRED     5	// Bears
 #define STANCE_FOLLOW    6	// Following somone
 #define STANCE_BUSY      7	// Do nothing on life ticks (Other code is running)
+*/
+#define STANCE_SLEEP        0	// Doing (almost) nothing, to save on CPU because nobody is around to notice or the mob died.
+#define STANCE_IDLE         1	// The more or less default state. Wanders around, looks for baddies, and spouts one-liners.
+#define STANCE_ALERT        2	// A baddie is visible but not too close, and essentially we tell them to go away or die.
+#define STANCE_ATTACK       3	// Attempting to get into range to attack them.
+#define STANCE_ATTACKING    4	// Actually fighting, with melee or ranged.
+#define STANCE_REPOSITION   5	// Relocating to a better position while in combat. Only used for ranged mobs since melee only has one better position, which STANCE_ATTACK already handles.
+#define STANCE_MOVE         6	// Similar to above but for out of combat. If a baddie is seen, they'll cancel and fight them.
+#define STANCE_FOLLOW       7	// Following somone, without trying to murder them.
+#define STANCE_FLEE         8	// Run away from the target because they're too spooky/we're dying/some other reason.
+#define STANCE_STUNNED      9	// Do nothing, because the mob is unable to act in some form. Can be applied by other disabling effects besides stuns.
 
 #define LEFT  0x1
 #define RIGHT 0x2
