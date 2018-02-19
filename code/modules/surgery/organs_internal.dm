@@ -120,6 +120,8 @@
 					target.sdisabilities &= ~BLIND
 				if(I.organ_tag == O_LUNGS)
 					target.SetLosebreath(0)
+				if (I.status == ORGAN_DEAD)
+					I.status = 0
 
 /datum/surgery_step/internal/fix_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
