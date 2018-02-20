@@ -18,6 +18,9 @@
 		return ..()
 
 	if(is_stump)
+		if(istype(W,/obj/item/weapon/shovel))
+			visible_message("<span class='notice'>\The [user] digs up \the [src] stump with \the [W].</span>")
+			qdel(src)
 		return
 
 	visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W]!</span>")
