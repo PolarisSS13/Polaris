@@ -79,18 +79,18 @@
 //Mining
 /obj/item/clothing/head/helmet/space/void/mining
 	name = "mining voidsuit helmet"
-	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating."
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. Has reinforced plating and minor radiation shielding."
 	icon_state = "rig0-mining"
 	item_state_slots = list(slot_r_hand_str = "mining_helm", slot_l_hand_str = "mining_helm")
-	armor = list(melee = 50, bullet = 5, laser = 20, energy = 5, bomb = 55, bio = 100, rad = 20)
+	armor = list(melee = 50, bullet = 5, laser = 20, energy = 5, bomb = 25, bio = 100, rad = 50)
 	light_overlay = "helmet_light_dual"
 
 /obj/item/clothing/suit/space/void/mining
 	name = "mining voidsuit"
-	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
+	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating and minor radiation shielding."
 	icon_state = "rig-mining"
 	item_state_slots = list(slot_r_hand_str = "mining_voidsuit", slot_l_hand_str = "mining_voidsuit")
-	armor = list(melee = 50, bullet = 5, laser = 20, energy = 5, bomb = 55, bio = 100, rad = 20)
+	armor = list(melee = 50, bullet = 5, laser = 20, energy = 5, bomb = 25, bio = 100, rad = 50)
 
 //Mining Surplus Voidsuit
 
