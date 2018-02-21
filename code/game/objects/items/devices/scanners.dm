@@ -242,12 +242,11 @@ HALOGEN COUNTER	- Radcount on mobs
 			var/blood_percent =  round((blood_volume / H.species.blood_volume)*100)
 			var/blood_type = H.dna.b_type
 			if(blood_percent <= BLOOD_VOLUME_BAD)
-				dat += "<span class='danger'><i>Warning: Blood Level CRITICAL: "
+				dat += "<span class='danger'><i>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span><br>"
 			else if(blood_percent <= BLOOD_VOLUME_SAFE)
-				dat += "<span class='danger'>Warning: Blood Level LOW: "
+				dat += "<span class='danger'>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span><br>"
 			else
-				dat += "<span class='notice'>Blood Level Normal: "
-			dat += "[blood_percent]% [blood_volume]cl. Type: [blood_type]</span><br>"
+				dat += "<span class='notice'>Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]</span><br>"
 		dat += "<span class='notice'>Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font></span>"
 	user.show_message(dat, 1)
 
