@@ -1,5 +1,6 @@
 #define AI_CHECK_WIRELESS 1
 #define AI_CHECK_RADIO 2
+#define TRACKING_POSSIBLE 0
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
@@ -528,22 +529,36 @@ var/list/ai_verbs_default = list(
 	if(check_unable())
 		return
 
-	var/input
+	var/received //var/input caused too many problems, because there's also the input proc.
 	var/choice = alert("Would you like to select a hologram based on a (visible) crew member, switch to unique avatar, or load your character from your character slot?",,"Crew Member","Unique","My Character")
 
 	switch(choice)
 		if("Crew Member") //A seeable crew member (or a dog)
-			var/list/targets = trackable_mobs()
+			var/list/targets = list()
+			for(var/mob/living/M in player_list)
+				if(!M)
+					continue
+				if(M == usr)
+					continue
+				if(M.tracking_status() != TRACKING_POSSIBLE)
+					continue
+
+				targets += M
+
 			if(targets.len)
-				input = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
-				//This is torture, I know. If someone knows a better way...
-				if(!input) return
-				var/new_holo = getHologramIcon(getCompoundIcon(targets[input]))
+				received = input("Select a crew member to imitate:") as null|anything in targets
+				var/mob/living/carbon/human/dummy/dummy = new ()
+				received.client.prefs.dress_preview_mob(dummy)
+				sleep(1 SECOND)
+				dummy.regenerate_icons()
+
+				var/new_holo = getHologramIcon(getCompoundIcon(dummy))
 				qdel(holo_icon)
+				qdel(dummy)
 				holo_icon = new_holo
 
 			else
-				alert("No suitable records found. Aborting.")
+				alert("No crew currently active. Aborting.")
 
 		if("My Character") //Loaded character slot
 			if(!client || !client.prefs) return
@@ -583,10 +598,10 @@ var/list/ai_verbs_default = list(
 				"male skrell",
 				"female skrell"
 			)
-			input = input("Please select a hologram:") as null|anything in icon_list
-			if(input)
+			received = input("Please select a hologram:") as null|anything in icon_list
+			if(received)
 				qdel(holo_icon)
-				switch(input)
+				switch(received)
 					if("default")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 					if("floating face")
@@ -788,3 +803,4 @@ var/list/ai_verbs_default = list(
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
+#undef TRACKING_POSSIBLE
