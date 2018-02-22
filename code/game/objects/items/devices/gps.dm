@@ -107,10 +107,11 @@ var/list/GPS_list = list()
 		var/direction = get_adir(curr, T)
 		var/distX = T.x - curr.x
 		var/distY = T.y - curr.y
+		var/distance = get_dist(curr, T)
 		var/local = curr.z == T.z ? TRUE : FALSE
 
 		if(istype(T, /obj/item/device/gps/internal/poi))
-			signals += "    [G.gps_tag]: [area_name] - [local ? "[direction] Dist: [distX ? "[abs(round(distX, 1))]m [(distX > 0) ? "E" : "W"], " : ""][distY ? "[abs(round(distY, 1))]m [(distY > 0) ? "N" : "S"]" : ""]" : "in \the [Z_name]"]"
+			signals += "    [G.gps_tag]: [area_name] - [local ? "[direction] Dist: [round(distance, 10)]" : "in \the [Z_name]"]"
 		else
 			signals += "    [G.gps_tag]: [area_name], ([T.x], [T.y]) - [local ? "[direction] Dist: [distX ? "[abs(round(distX, 1))]m [(distX > 0) ? "E" : "W"], " : ""][distY ? "[abs(round(distY, 1))]m [(distY > 0) ? "N" : "S"]" : ""]" : "in \the [Z_name]"]"
 
