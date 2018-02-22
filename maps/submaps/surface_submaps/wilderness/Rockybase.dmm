@@ -4,7 +4,7 @@
 "ad" = (/turf/template_noop,/area/submap/Rockybase)
 "ae" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/submap/Rockybase)
 "af" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Rockybase)
-"ag" = (/mob/living/simple_animal/hostile/malf_drone/lesser,/turf/template_noop,/area/submap/Rockybase)
+"ag" = (/mob/living/simple_animal/hostile/malf_drone/lesser/weak,/turf/template_noop,/area/submap/Rockybase)
 "ah" = (/turf/simulated/floor,/area/submap/Rockybase)
 "ai" = (/obj/machinery/porta_turret/stationary,/turf/simulated/floor,/area/submap/Rockybase)
 "aj" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor,/area/submap/Rockybase)

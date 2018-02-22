@@ -280,9 +280,12 @@
 // A slightly easier drone, for POIs.
 // Difference is that it should not be faster than you.
 /mob/living/simple_animal/hostile/malf_drone/lesser
-	desc = "An automated combat drone with an aged apperance."
+	desc = "An automated combat drone with an aged appearance."
 	returns_home = TRUE
 	move_to_delay = 6
+
+/mob/living/simple_animal/hostile/malf_drone/lesser/weak
+	desc = "An automated combat drone with an aged appearance. It's dented in several places, and its weapons look rusty."
 	maxHealth = 200
 	health = 200
 	rapid = 0
