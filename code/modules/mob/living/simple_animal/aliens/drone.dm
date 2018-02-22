@@ -283,3 +283,6 @@
 	desc = "An automated combat drone with an aged apperance."
 	returns_home = TRUE
 	move_to_delay = 6
+	maxHealth = 200
+	health = 200
+	rapid = 0
