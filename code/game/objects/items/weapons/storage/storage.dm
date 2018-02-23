@@ -672,9 +672,9 @@
 		max_storage_space += I.get_storage_cost()
 
 /*
- * Trinket Box
+ * Trinket Box - READDING SOON
  */
-
+/*
 /obj/item/weapon/storage/trinketbox
 	name = "trinket box"
 	desc = "A box that can hold small trinkets, such as a ring."
@@ -725,3 +725,4 @@
 	if(open && contents.len)
 		var/display_item = contents[1]
 		to_chat(user, "<span class='notice'>\The [src] contains \the [display_item]!</span>")
+		*/
