@@ -45,3 +45,56 @@
 		H.update_inv_l_hand(0)
 		H.update_inv_r_hand()
 	..()
+
+/obj/item/weapon/melee/cursedblade
+	name = "crystal blade"
+	desc = "The red crystal blade's polished surface glints in the light, giving off a faint glow."
+	icon_state = "soulblade"
+	slot_flags = SLOT_BELT | SLOT_BACK
+	force = 30
+	throwforce = 10
+	w_class = ITEMSIZE_NORMAL
+	sharp = 1
+	edge = 1
+	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	can_speak = 1
+	var/mob/living/carbon/brain/brainmob = null //The curse of the sword is that it has someone trapped inside.
+
+
+/obj/item/weapon/melee/cursedblade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(default_parry_check(user, attacker, damage_source) && prob(50))
+		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
+		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
+		return 1
+	return 0
+
+/obj/item/weapon/melee/cursedblade/New()
+	src.brainmob = new(src)
+	src.brainmob.add_language(LANGUAGE_GALCOM)
+	src.brainmob.loc = src
+	src.brainmob.container = src
+	src.brainmob.stat = 0
+	src.brainmob.silent = 0
+	src.brainmob.name = "cursed sword"
+	src.brainmob.real_name = "cursed sword"
+	dead_mob_list -= src.brainmob
+
+/obj/item/weapon/melee/cursedblade/examine(mob/user)
+	if(!..(user))
+		return
+
+	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
+	msg += "<span class='warning'>"
+
+	if(src.brainmob && src.brainmob.key)
+		switch(src.brainmob.stat)
+			if(CONSCIOUS)
+				if(!src.brainmob.client)	msg += "The blade's bright glint seems dull.\n" //afk
+			if(UNCONSCIOUS)		msg += "<span class='warning'>The blade seems oddly lifeless.</span>\n"
+			if(DEAD)			msg += "<span class='deadsay'>The blade seems completely lifeless.</span>\n"
+	else
+		msg += "<span class='deadsay'>The blade seems completely lifeless, its bright glow now dull.</span>\n"
+	msg += "</span><span class='info'>*---------*</span>"
+	user << msg
+	return
