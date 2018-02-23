@@ -34,5 +34,5 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - rscadd: "Added Gilthari Luxury Champagne. Drink responsibly. Added a trinket box for rings, coins, and medals."
-  - rscadd: "Added a singular AlliCo Hallmark Goods vending machine in the locker rooms. Dispenses a variety of gifts."
+  - rscadd: "Added a singular AlliCo Baubles and Confectionaries vending machine in the locker rooms. Dispenses a variety of gifts."
   - rscdel: "Removed hot drinks vendor from locker room."

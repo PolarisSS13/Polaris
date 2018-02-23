@@ -1087,7 +1087,7 @@
 	has_logs = 1
 
 /obj/machinery/vending/giftvendor
-	name = "AlliCo Hallmark Goods"
+	name = "AlliCo Baubles and Confectionaries"
 	desc = "For that special someone!"
 	icon_state = "giftvendor"
 	vend_delay = 15
@@ -1098,6 +1098,7 @@
 					/obj/item/weapon/paper/card/heart = 3,
 					/obj/item/weapon/paper/card/cat = 3,
 					/obj/item/weapon/paper/card/flower = 3,
+					/obj/item/clothing/accessory/bracelet/friendship = 5,
 					/obj/item/toy/plushie/therapy/red = 2,
 					/obj/item/toy/plushie/therapy/purple = 2,
 					/obj/item/toy/plushie/therapy/blue = 2,
@@ -1120,6 +1121,7 @@
 					/obj/item/weapon/paper/card/heart = 1,
 					/obj/item/weapon/paper/card/cat = 1,
 					/obj/item/weapon/paper/card/flower = 1,
+					/obj/item/clothing/accessory/bracelet/friendship = 5,
 					/obj/item/toy/plushie/therapy/red = 20,
 					/obj/item/toy/plushie/therapy/purple = 20,
 					/obj/item/toy/plushie/therapy/blue = 20,
