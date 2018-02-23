@@ -96,5 +96,5 @@
 	else
 		msg += "<span class='deadsay'>The blade seems completely lifeless, its bright glow now dull.</span>\n"
 	msg += "</span><span class='info'>*---------*</span>"
-	user << msg
+	to_chat(usr,msg)
 	return
