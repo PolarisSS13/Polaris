@@ -125,7 +125,7 @@
 	equip_cooldown = 150
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 4, TECH_ILLEGAL = 1)
 
-	action(target)
+	/obj/item/mecha_parts/mecha_equipment/honker/action(target)
 		if(!chassis)
 			return 0
 		if(energy_drain && chassis.get_charge() < energy_drain)
