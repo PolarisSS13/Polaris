@@ -822,7 +822,6 @@
 	name = "black cohesion suit"
 	desc = "A plain black cohesion suit intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
 	icon_state = "cohesionsuit"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	rolled_sleeves = -1 // defeats the purpose!!!
 
 /obj/item/clothing/under/cohesion/striped
