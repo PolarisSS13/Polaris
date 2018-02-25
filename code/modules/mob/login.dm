@@ -50,9 +50,10 @@
 
 	if(!plane_holder) //Lazy
 		plane_holder = new(src) //Not a location, it takes it and saves it.
+	if(!vis_enabled)
 		vis_enabled = list()
 	client.screen += plane_holder.plane_masters
 	recalculate_vis()
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
-	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5")
+	client.set_hotkeys_macro("macro", "hotkeymode")

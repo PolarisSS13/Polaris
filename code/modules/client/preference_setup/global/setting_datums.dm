@@ -98,6 +98,19 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/attack_icons
+	description ="Attack icons"
+	key = "ATTACK_ICONS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
+/datum/client_preference/hotkeys_default
+	description ="Hotkeys Default"
+	key = "HUD_HOTKEYS"
+	enabled_description = "Enabled"
+	disabled_description = "Disabled"
+	enabled_by_default = FALSE // Backwards compatibility
+
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"

@@ -25,11 +25,18 @@
 
 	..()
 
-/area/proc/initialize()
+/area/initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
+
+/area/LateInitialize()
 	if(!requires_power || !apc)
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
+	return INITIALIZE_HINT_LATELOAD
+
+/area/LateInitialize()
 	power_change()		// all machines set to current power level, also updates lighting icon
 
 /area/proc/get_contents()
@@ -45,7 +52,11 @@
 	if (danger_level == 0)
 		atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
-		atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+		var/obj/machinery/alarm/atmosalarm = alarm_source //maybe other things can trigger these, who knows
+		if(istype(atmosalarm))
+			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level, hidden = atmosalarm.alarms_hidden)
+		else
+			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)

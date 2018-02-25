@@ -81,12 +81,17 @@
 
 	var/report_danger_level = 1
 
+	var/alarms_hidden = FALSE //If the alarms from this machine are visible on consoles
+
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
 	breach_detection = 0
+
+/obj/machinery/alarm/alarms_hidden
+	alarms_hidden = TRUE
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -131,6 +136,7 @@
 
 
 /obj/machinery/alarm/initialize()
+	. = ..()
 	set_frequency(frequency)
 	if(!master_is_operating())
 		elect_master()
@@ -811,6 +817,10 @@ FIRE ALARM
 	panel_open = 0
 	var/seclevel
 	circuit = /obj/item/weapon/circuitboard/firealarm
+	var/alarms_hidden = FALSE //If the alarms from this machine are visible on consoles
+
+/obj/machinery/firealarm/alarms_hidden
+	alarms_hidden = TRUE
 
 /obj/machinery/firealarm/update_icon()
 	overlays.Cut()
@@ -979,7 +989,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.triggerAlarm(loc, FA, duration)
+		fire_alarm.triggerAlarm(loc, FA, duration, hidden = alarms_hidden)
 	update_icon()
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
@@ -990,6 +1000,7 @@ FIRE ALARM
 		update_icon()
 
 /obj/machinery/firealarm/initialize()
+	. = ..()
 	if(z in using_map.contact_levels)
 		set_security_level(security_level? get_security_level() : "green")
 

@@ -15,6 +15,15 @@
 #include "CaveTrench.dmm"
 #include "Cavelake.dmm"
 #include "Rockb1.dmm"
+#include "ritual.dmm"
+#include "temple.dmm"
+#include "CrashedMedShuttle1.dmm"
+#include "digsite.dmm"
+#include "vault1.dmm"
+#include "vault2.dmm"
+#include "vault3.dmm"
+#include "vault4.dmm"
+#include "vault5.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -95,6 +104,50 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/Rockb1.dmm'
 	cost = 15
 
+/datum/map_template/surface/mountains/normal/corgiritual
+	name = "Dark Ritual"
+	desc = "Who put all these plushies here? What are they doing?"
+	mappath = 'maps/submaps/surface_submaps/mountains/ritual.dmm'
+	cost = 15
+
+/datum/map_template/surface/mountains/normal/abandonedtemple
+	name = "Abandoned Temple"
+	desc = "An ancient temple, long since abandoned. Perhaps alien in origin?"
+	mappath = 'maps/submaps/surface_submaps/mountains/temple.dmm'
+	cost = 20
+
+/datum/map_template/surface/mountains/normal/crashedmedshuttle
+	name = "Crashed Med Shuttle"
+	desc = "A medical response shuttle that went missing some time ago. So this is where they went."
+	mappath = 'maps/submaps/surface_submaps/mountains/CrashedMedShuttle1.dmm'
+	cost = 20
+
+/datum/map_template/surface/mountains/normal/digsite
+	name = "Dig Site"
+	desc = "A small abandoned dig site."
+	mappath = 'maps/submaps/surface_submaps/mountains/digsite.dmm'
+	cost = 10
+
+/datum/map_template/surface/mountains/normal/vault1
+	name = "Mine Vault 1"
+	desc = "A small vault with potential loot."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault1.dmm'
+	cost = 5
+	allow_duplicates = TRUE
+
+/datum/map_template/surface/mountains/normal/vault2
+	name = "Mine Vault 2"
+	desc = "A small vault with potential loot."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault2.dmm'
+	cost = 5
+	allow_duplicates = TRUE
+
+/datum/map_template/surface/mountains/normal/vault3
+	name = "Mine Vault 3"
+	desc = "A small vault with potential loot. Also a horrible suprise."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault3.dmm'
+	cost = 15
+
 /**************
  * Deep Caves *
  **************/
@@ -130,3 +183,35 @@
 	desc = "A large underground lake."
 	mappath = 'maps/submaps/surface_submaps/mountains/Cavelake.dmm'
 	cost = 20
+
+/datum/map_template/surface/mountains/deep/vault1
+	name = "Mine Vault 1"
+	desc = "A small vault with potential loot."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault1.dmm'
+	cost = 5
+	allow_duplicates = TRUE
+
+/datum/map_template/surface/mountains/deep/vault2
+	name = "Mine Vault 2"
+	desc = "A small vault with potential loot."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault2.dmm'
+	cost = 5
+	allow_duplicates = TRUE
+
+/datum/map_template/surface/mountains/deep/vault3
+	name = "Mine Vault 3"
+	desc = "A small vault with potential loot. Also a horrible suprise."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault3.dmm'
+	cost = 15
+
+/datum/map_template/surface/mountains/deep/vault4
+	name = "Mine Vault 4"
+	desc = "A small xeno vault with potential loot. Also horrible suprises."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault4.dmm'
+	cost = 20
+
+/datum/map_template/surface/mountains/deep/vault5
+	name = "Mine Vault 5"
+	desc = "A small xeno vault with potential loot. Also major horrible suprises."
+	mappath = 'maps/submaps/surface_submaps/mountains/vault5.dmm'
+	cost = 25
