@@ -4,7 +4,7 @@
 "d" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Rockb1)
 "e" = (/turf/simulated/wall/r_wall,/area/submap/Rockb1)
 "f" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/lino,/area/submap/Rockb1)
-"g" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/weapon/gun/projectile/pistol,/obj/item/ammo_magazine/m9mm/compact,/obj/item/ammo_magazine/m9mm/compact,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"g" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/weapon/gun/projectile/pistol,/obj/item/ammo_magazine/m9mm/compact,/turf/simulated/floor/lino,/area/submap/Rockb1)
 "h" = (/obj/structure/bookcase,/turf/simulated/floor/lino,/area/submap/Rockb1)
 "i" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "j" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/submap/Rockb1)
