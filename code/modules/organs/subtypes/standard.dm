@@ -307,7 +307,7 @@
 			owner.eye_blurry += 20 //Specific level 2 'feature
 
 /obj/item/organ/external/head/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/toy/plushie) || istype,(I, /obj/item/organ/external/head))
+	if(istype(I, /obj/item/toy/plushie) || istype(I, /obj/item/organ/external/head))
 		user.visible_message("<span class='notice'>[user] makes \the [I] kiss \the [src]!.</span>", \
 		"<span class='notice'>You make \the [I] kiss \the [src]!.</span>")
 	return ..()
