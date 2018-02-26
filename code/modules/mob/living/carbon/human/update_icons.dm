@@ -170,16 +170,13 @@ Please contact me on #coderbus IRC. ~Carn x
 	ma_compiled.overlays += list_layers
 
 	//4: Apply transforms based on situation
-	update_transform(ma_compiled, FALSE)
+	update_transform(ma_compiled)
 
-	//4.5 Set layer to PLANE_WORLD to make sure its not magically FLOAT_PLANE due to byond madness
-	ma_compiled.plane = PLANE_WORLD
+	//5: Do any species specific layering updates, such as when hiding.
+	update_icon_special(ma_compiled, FALSE)
 
-	//5: Set appearance once
+	//6: Set appearance once
 	appearance = ma_compiled
-
-	//6: Do any species specific layering updates, such as when hiding.
-	update_icon_special()
 
 /mob/living/carbon/human/update_transform(var/mutable_appearance/passed_ma)
 	if(QDESTROYING(src))
@@ -214,9 +211,9 @@ Please contact me on #coderbus IRC. ~Carn x
 		M.Translate(0, 16*(desired_scale-1))
 		ma.transform = M
 		ma.layer = MOB_LAYER // Fix for a byond bug where turf entry order no longer matters
-	update_icon_special() //Adjust their layer, like when they are hiding.
 
 	if(!passed_ma)
+		update_icon_special(ma)
 		appearance = ma
 
 //Update the layers from the defines above
@@ -251,10 +248,9 @@ Please contact me on #coderbus IRC. ~Carn x
 		list_huds = hud_list.Copy()
 		list_huds += backplane // Required to mask HUDs in context menus: http://www.byond.com/forum/?post=2336679
 
-//TYPING INDICATOR CODE.
+	//Typing indicator code
 	if(client && !stat) //They have a client & aren't dead/KO'd? Continue on!
 		if(typing_indicator && hud_typing) //They already have the indicator and are still typing
-			overlays += typing_indicator //This might not be needed? It works, so I'm leaving it.
 			list_huds += typing_indicator
 			typing_indicator.invisibility = invisibility
 
@@ -262,13 +258,11 @@ Please contact me on #coderbus IRC. ~Carn x
 			typing_indicator = new
 			typing_indicator.icon = 'icons/mob/talk.dmi'
 			typing_indicator.icon_state = "[speech_bubble_appearance()]_typing"
-			overlays += typing_indicator
 			list_huds += typing_indicator
 
 		else if(typing_indicator && !hud_typing) //Did they stop typing?
-			overlays -= typing_indicator
-			typing = 0
-			hud_typing = 0
+			typing = FALSE
+			hud_typing = FALSE
 
 	if(update_icons)
 		update_icons()
@@ -419,20 +413,24 @@ var/global/list/damage_icon_parts = list()
 			var/icon/temp = part.get_icon(skeleton)
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
-			if(part.icon_position & (LEFT | RIGHT))
+			if(part.icon_position == RIGHT)
 				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
+				var/icon/temp3 = new('icons/mob/human.dmi',"blank")
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
-				if(!(part.icon_position & LEFT))
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-				if(!(part.icon_position & RIGHT))
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
+				temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
 				base_icon.Blend(temp2, ICON_OVERLAY)
-				if(part.icon_position & LEFT)
-					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
-				if(part.icon_position & RIGHT)
-					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
-				base_icon.Blend(temp2, ICON_UNDERLAY)
+				temp3.Insert(new/icon(temp,dir=WEST),dir=WEST)
+				base_icon.Blend(temp3, ICON_UNDERLAY)
+			else if(part.icon_position == LEFT)
+				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
+				var/icon/temp3 = new('icons/mob/human.dmi',"blank")
+				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
+				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
+				temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
+				base_icon.Blend(temp2, ICON_OVERLAY)
+				temp3.Insert(new/icon(temp,dir=EAST),dir=EAST)
+				base_icon.Blend(temp3, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
 				base_icon.Blend(temp, ICON_UNDERLAY)
 			else
@@ -656,7 +654,7 @@ var/global/list/damage_icon_parts = list()
 	update_fire(0)
 	update_water(0)
 	update_surgery(0)
-	UpdateDamageIcon()
+	UpdateDamageIcon(0)
 	update_icons_layers(0)
 	update_icons_huds(0)
 	update_icons()
@@ -1004,6 +1002,13 @@ var/global/list/damage_icon_parts = list()
 			standing = image(base)
 		else
 			standing.color = head.color
+
+		// Accessories - copied from uniform, BOILERPLATE because fuck this system.
+		var/obj/item/clothing/head/hat = head
+		if(istype(hat) && hat.accessories.len)
+			for(var/obj/item/clothing/accessory/A in hat.accessories)
+				standing.overlays |= A.get_mob_overlay()
+
 		overlays_standing[HEAD_LAYER] = standing
 
 	else
