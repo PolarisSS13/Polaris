@@ -1,6 +1,7 @@
 /obj/item/weapon/nullrod
 	name = "null rod"
 	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of paranormal phenomenae."
+	icon = 'icons/obj/holy.dmi'
 	icon_state = "nullrod"
 	item_state = "nullrod"
 	slot_flags = SLOT_BELT
@@ -55,6 +56,48 @@
 	if (istype(A, /turf/simulated/floor))
 		user << "<span class='notice'>You hit the floor with the [src].</span>"
 		call(/obj/effect/rune/proc/revealrunes)(src)
+
+/obj/item/weapon/nullrod/beads
+	icon_state = "beads"
+	name = "prayer beads"
+	desc = "A set of prayer beads used by many of the more traditional religions."
+	force = 0
+	throwforce = 0
+	slot_flags = null
+	w_class = ITEMSIZE_TINY
+
+/obj/item/weapon/nullrod/kirpan
+	name = "kirpan"
+	desc = "A traditional knife for the Sikh peoples."
+	sharp = 1
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "slashed", "sliced", "cut")
+	slot_flags = null
+	w_class = ITEMSIZE_NORMAL
+
+/obj/item/weapon/nullrod/itembox
+	name = "holy item box"
+	desc = "A box to safe keep your religious items. What item did you bring to work today?"
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "box"
+	item_state = "box"
+
+/obj/item/weapon/nullrod/itembox/attack_self(mob/user as mob)
+	if(..()) return
+
+	var/selection = input("Pick a null item type.") in list("Rod", "Kirpan", "Athame")
+	switch(selection)
+		if ("Rod")
+			new /obj/item/weapon/nullrod(user.loc)
+			to_chat(user, "<span class='notice'>A simple obsidian rod, a classic. Rods like these are seen in the hands of religious folks all across the galaxy.</span>")
+		if ("Kirpan")
+			new /obj/item/weapon/nullrod/kirpan(user.loc)
+			to_chat(user, "<span class='notice'>A kirpan, a traditional sikh blade.</span>")
+		if ("Beads")
+			new /obj/item/weapon/nullrod/beads(user.loc)
+	to_chat(user, "<span class='notice'>You take your [selection] from the box, and throw the empty box away.</span>")
+	qdel(src)
+	return
 
 /obj/item/weapon/energy_net
 	name = "energy net"
