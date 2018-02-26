@@ -22,6 +22,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	density = FALSE
 	anchored = TRUE
 
+	var/list/icon_states_to_use = list() // List of icon states the pile can choose from on initialization. If empty or null, it will stay the initial icon_state.
+
 	var/list/searched_by = list()	// Keys that have searched this loot pile, with values of searched time.
 	var/allow_multiple_looting = FALSE	// If true, the same person can loot multiple times.  Mostly for debugging.
 	var/busy = FALSE				// Used so you can't spamclick to loot.
@@ -113,12 +115,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	var/path = pick(rare_loot)
 	return new path(src)
 
-
-/obj/structure/loot_pile/maint
-	var/list/icon_states_to_use = list()
-
-/obj/structure/loot_pile/maint/initialize()
-	icon_state = pick(icon_states_to_use)
+/obj/structure/loot_pile/initialize()
+	if(icon_states_to_use && icon_states_to_use.len)
+		icon_state = pick(icon_states_to_use)
 	. = ..()
 
 // Has large amounts of possible items, most of which may or may not be useful.
@@ -568,7 +567,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
         /obj/item/weapon/gun/launcher/crossbow
     )
 
-// Subtype for mecha and mecha accessories.
+// Subtype for mecha and mecha accessories. These might not always be on the surface.
 /obj/structure/loot_pile/mecha
 	name = "pod wreckage"
 	desc = "The ruins of some unfortunate pod. Perhaps something is salvageable."
@@ -616,7 +615,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 /obj/structure/loot_pile/mecha/ripley
 	name = "ripley wreckage"
 	desc = "The ruins of some unfortunate ripley. Perhaps something is salvageable."
-	icon_state = "ripley-broken"
+	icon_states_to_use = list("ripley-broken", "firefighter-broken", "ripley-broken-old")
 
 	common_loot = list(
 		/obj/random/tool,
@@ -649,15 +648,6 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/tool/rcd,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/flamer/rigged
 		)
-
-
-/obj/structure/loot_pile/mecha/ripley/New()
-	..()
-	if(icon_state == "ripley-broken") //Incase someone gives one a custom wreckage sprite in-map.
-		icon_state = pick(
-			prob(40);"ripley-broken",
-			prob(30);"firefighter-broken",
-			prob(30);"ripley-broken-old")
 
 //Death-Ripley, same common, but more combat-exosuit-based
 /obj/structure/loot_pile/mecha/deathripley

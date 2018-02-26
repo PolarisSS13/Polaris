@@ -42,7 +42,7 @@
 /obj/random/tool
 	name = "random tool"
 	desc = "This is a random tool"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
 
 /obj/random/tool/item_to_spawn()
@@ -54,6 +54,32 @@
 				/obj/item/weapon/wrench,
 				/obj/item/device/flashlight,
 				/obj/item/device/multitool)
+
+/obj/random/tool/power
+	name = "random powertool"
+	desc = "This is a random powertool"
+	icon_state = "jaws_pry"
+
+/obj/random/tool/power/item_to_spawn()
+	return pick(/obj/item/weapon/screwdriver/power,
+				/obj/item/weapon/wirecutters/power,
+				/obj/item/weapon/weldingtool/electric,
+				/obj/item/weapon/weldingtool/experimental)
+
+/obj/random/tool/alien
+	name = "random alien tool"
+	desc = "This is a random tool"
+	icon = 'icons/obj/abductor.dmi'
+	icon_state = "welder"
+
+/obj/random/tool/alien/item_to_spawn()
+	return pick(/obj/item/weapon/screwdriver/alien,
+				/obj/item/weapon/wirecutters/alien,
+				/obj/item/weapon/weldingtool/alien,
+				/obj/item/weapon/crowbar/alien,
+				/obj/item/weapon/wrench/alien,
+				/obj/item/stack/cable_coil/alien,
+				/obj/item/device/multitool/alien)
 
 /obj/random/technology_scanner
 	name = "random scanner"
