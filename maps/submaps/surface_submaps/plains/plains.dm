@@ -181,3 +181,9 @@
 	desc = "Please stop the snow"
 	mappath = 'maps/submaps/surface_submaps/plains/snow5.dmm'
 	cost = 5
+
+/datum/map_template/surface/plains/RationCache
+	name = "Ration Cache"
+	desc = "A forgotten cache of emergency rations."
+	mappath = 'maps/submaps/surface_submaps/plains/RationCache.dmm'
+	cost = 5

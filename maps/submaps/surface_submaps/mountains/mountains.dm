@@ -24,6 +24,7 @@
 #include "vault3.dmm"
 #include "vault4.dmm"
 #include "vault5.dmm"
+#include "SupplyDrop1.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
