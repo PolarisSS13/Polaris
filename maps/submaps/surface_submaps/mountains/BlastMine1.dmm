@@ -1,0 +1,32 @@
+"a" = (/turf/simulated/mineral/sif,/area/submap/cave/BlastMine1)
+"b" = (/turf/simulated/mineral/floor/sif,/area/submap/cave/BlastMine1)
+"c" = (/obj/structure/sign/warning/bomb_range,/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"d" = (/obj/structure/table/rack,/obj/item/weapon/syndie/c4explosive/heavy,/turf/simulated/mineral/floor/sif,/area/submap/cave/BlastMine1)
+"e" = (/obj/structure/table/rack,/obj/item/clothing/head/bomb_hood,/obj/item/clothing/suit/bomb_suit,/turf/simulated/mineral/floor/sif,/area/submap/cave/BlastMine1)
+"f" = (/obj/item/device/gps/internal/poi{gps_tag = "Faint Signal"},/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"g" = (/obj/structure/table/reinforced,/obj/item/weapon/flame/lighter/zippo/c4detonator{detonator_mode = 1},/turf/simulated/mineral/floor/sif,/area/submap/cave/BlastMine1)
+"h" = (/obj/machinery/floodlight,/turf/simulated/mineral/floor/sif{sand_dug = 1},/area/submap/cave/BlastMine1)
+"i" = (/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"j" = (/turf/simulated/mineral/floor/sif{sand_dug = 1},/area/submap/cave/BlastMine1)
+"k" = (/obj/structure/girder/displaced,/obj/structure/sign/warning/bomb_range,/turf/simulated/mineral/floor/sif{sand_dug = 1},/area/submap/cave/BlastMine1)
+"l" = (/obj/structure/table,/turf/simulated/mineral/floor/sif{sand_dug = 1},/area/submap/cave/BlastMine1)
+"m" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/sif{sand_dug = 1},/area/submap/cave/BlastMine1)
+"n" = (/obj/structure/sign/warning/bomb_range,/turf/simulated/wall/sandstone{damage = 20},/area/submap/cave/BlastMine1)
+
+(1,1,1) = {"
+aaabbbaaaa
+aabbbbaaaa
+aacbbbbaaa
+aadbbbbbbb
+abdbbbcbbb
+abdbbbebbb
+abfbbbbbba
+abdbbbegaa
+bbdbbhiaaa
+bbdbjjbbba
+bakjjbbbbb
+ajjjjjbbbb
+aalmjjnbbb
+jjjjjjbbba
+baajjbaaaa
+"}
