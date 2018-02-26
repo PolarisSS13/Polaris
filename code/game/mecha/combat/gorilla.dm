@@ -2,7 +2,7 @@
 	name = "8.8cm KwK 47"
 	desc = "<i>Precision German engineering!</i>" // Why would you ever take this off the mech, anyway?
 	icon_state = "mecha_uac2"
-	equip_cooldown = 55 // 5.5 seconds
+	equip_cooldown = 60 // 6 seconds
 	projectile = /obj/item/projectile/bullet/cannon
 	fire_sound = 'sound/weapons/cannon.ogg'
 	projectiles = 1
@@ -11,13 +11,25 @@
 
 /obj/item/projectile/bullet/cannon
 	name ="armor-piercing shell"
-	icon = 'icons/obj/grenade.dmi'
+	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "shell"
 	damage = 1000 // In order to 1-hit any other mech and royally fuck anyone unfortunate enough to get in the way.
 
-	on_hit(var/atom/target, var/blocked = 0)
-		explosion(target, 0, 0, 2, 4)
-		return 1
+/obj/item/projectile/bullet/cannon/on_hit(var/atom/target, var/blocked = 0)
+	explosion(target, 0, 0, 2, 4)
+	return 1
+
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon/weak
+	name = "8.8 cm KwK 36"
+	equip_cooldown = 120 // 12 seconds.
+	projectile = /obj/item/projectile/bullet/cannon/weak
+	projectile_energy_cost = 400
+	salvageable = 1
+
+/obj/item/projectile/bullet/cannon/weak
+	name ="canister shell"
+	icon_state = "canister"
+	damage = 120 //Do not get fucking shot.
 
 /* // GLITCHY UND LAGGY. Will later look into fixing.
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/mg42
@@ -66,20 +78,23 @@
 	add_req_access = 0
 	internal_damage_threshold = 25
 	force = 60
-	max_equip = 4
-	New()
-		..()
-		var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay(src) // This thing basically cannot function without an external power supply.
-		ME.attach(src)
-		ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon(src)
-		ME.attach(src)
-		ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive(src)
-		ME.attach(src)
-		ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg(src)
-		ME.attach(src)
-		src.smoke_system.set_up(3, 0, src)
-		src.smoke_system.attach(src)
-		return
+	max_equip = 5
+
+/obj/mecha/combat/gorilla/New()
+	..()
+	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay(src) // This thing basically cannot function without an external power supply.
+	ME.attach(src)
+	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon(src)
+	ME.attach(src)
+	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/cannon/weak(src) //Saves energy, I suppose. Anti-infantry.
+	ME.attach(src)
+	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive(src)
+	ME.attach(src)
+	ME = new /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg(src)
+	ME.attach(src)
+	src.smoke_system.set_up(3, 0, src)
+	src.smoke_system.attach(src)
+	return
 
 /obj/mecha/combat/gorilla/mechstep(direction)
 	var/result = step(src,direction)
@@ -157,7 +172,7 @@
 		src.occupant_message("<font color='[src.zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>")
 		if(zoom)
 			src.occupant.client.view = 12
-			src.occupant << sound('sound/mecha/imag_enh.ogg',volume=50)
+			playsound(src.occupant, 'sound/mecha/imag_enh.ogg',50)
 		else
 			src.occupant.client.view = world.view//world.view - default mob view size
 	return
