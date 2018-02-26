@@ -148,6 +148,12 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/vault3.dmm'
 	cost = 15
 
+/datum/map_template/surface/mountains/normal/supplydrop1
+	name = "Supply Drop 1"
+	desc = "A drop pod that landed deep within the mountains."
+	mappath = 'maps/submaps/surface_submaps/mountains/SupplyDrop1.dmm'
+	cost = 10
+
 /**************
  * Deep Caves *
  **************/
