@@ -611,9 +611,9 @@
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/card/robot))			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
-			user << "The interface seems slightly damaged"
+			to_chat(user, "The interface seems slightly damaged")
 		if(opened)
-			user << "You must close the cover to swipe an ID card."
+			to_chat(user, "You must close the cover to swipe an ID card.")
 		else
 			if(allowed(usr))
 				locked = !locked
@@ -1046,15 +1046,11 @@
 /mob/living/silicon/robot/emag_act(var/remaining_charges, var/mob/user)
 	if(!opened)//Cover is closed
 		if(locked)
-			if(prob(90))
-				user << "You emag the cover lock."
-				locked = 0
-			else
-				user << "You fail to emag the cover lock."
-				src << "Hack attempt detected."
+			to_chat(user,"You emag the cover lock.")
+			locked = 0
 			return 1
 		else
-			user << "The cover is already unlocked."
+			to_chat(user,"The cover is already unlocked.")
 		return
 
 	if(opened)//Cover is open
