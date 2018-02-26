@@ -25,6 +25,7 @@
 #include "vault4.dmm"
 #include "vault5.dmm"
 #include "SupplyDrop1.dmm"
+#include "BlastMine1.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -223,3 +224,9 @@
 	desc = "A small xeno vault with potential loot. Also major horrible suprises."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault5.dmm'
 	cost = 25
+
+/datum/map_template/surface/mountains/deep/BlastMine1
+	name = "Blast Mine 1"
+	desc = "An abandoned blast mining site, seems that local wildlife has moved in."
+	mappath = 'maps/submaps/surface_submaps/mountains/BlastMine1.dmm'
+	cost = 20
