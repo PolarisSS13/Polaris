@@ -1,0 +1,25 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/floor/outdoors/grass/sif/planetuse,/area/submap/SupplyDrop2)
+"c" = (/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+"d" = (/obj/structure/girder/displaced,/turf/simulated/floor/outdoors/grass/sif/forest/planetuse,/area/submap/SupplyDrop2)
+"e" = (/turf/simulated/floor/outdoors/grass/sif/forest/planetuse,/area/submap/SupplyDrop2)
+"f" = (/turf/simulated/wall/titanium,/area/submap/SupplyDrop2)
+"g" = (/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"h" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"i" = (/obj/item/device/flashlight,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"j" = (/obj/item/weapon/gun/energy/plasmastun,/obj/structure/loot_pile/maint/technical,/obj/item/device/gps/internal/poi,/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+"k" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"l" = (/obj/structure/girder,/turf/simulated/floor/outdoors/grass/sif/planetuse,/area/submap/SupplyDrop2)
+"m" = (/obj/structure/girder,/turf/simulated/floor/outdoors/grass/sif/forest/planetuse,/area/submap/SupplyDrop2)
+"n" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"o" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+
+(1,1,1) = {"
+aabbcdaaa
+aeefgeeeb
+eeffhffeb
+eggijkggg
+beflcfmeb
+beelndeba
+abeeoebba
+"}

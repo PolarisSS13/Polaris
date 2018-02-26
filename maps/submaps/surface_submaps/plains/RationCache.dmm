@@ -1,17 +1,20 @@
 "a" = (/turf/template_noop,/area/template_noop)
 "b" = (/turf/simulated/floor/outdoors/snow/sif/planetuse,/area/submap/RationCache)
-"c" = (/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
-"d" = (/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/turf/simulated/mineral/floor/ignore_mapgen/sif{sand_dug = 1},/area/submap/RationCache)
-"e" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
+"c" = (/mob/living/simple_animal/hostile/diyaab{returns_home = 1},/turf/simulated/floor/outdoors/snow/sif/planetuse,/area/submap/RationCache)
+"d" = (/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
+"e" = (/mob/living/simple_animal/hostile/diyaab,/turf/simulated/floor/outdoors/snow/sif/planetuse,/area/submap/RationCache)
+"f" = (/mob/living/simple_animal/hostile/diyaab,/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
+"g" = (/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/obj/item/trash/liquidfood,/turf/simulated/mineral/floor/ignore_mapgen/sif{sand_dug = 1},/area/submap/RationCache)
+"h" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/RationCache)
 
 (1,1,1) = {"
 aaaabbbaaa
 aabbbbbbaa
-abbbbbbbbb
 abbbcbbbbb
-bbbcdcbbbb
-bbbcecbbbb
-bbbbcbbbbb
+abbbdebbbb
+bbbfgdbbbb
+bbbdhdebbb
+bebbfbbbbb
 bbbbbbbbaa
 aabbbbbaaa
 aabbbaaaaa
