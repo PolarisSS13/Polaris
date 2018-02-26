@@ -569,3 +569,48 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
         /obj/item/weapon/gun/launcher/crossbow
     )
 
+//for deactivated drones in rockybase
+/obj/structure/loot_pile/surface/deaddrone
+	name = "deactivated combat drone"
+	desc = "A deactivated combat drone, lost to the sands of time. It might yield some valuable technology, if you dare get close enough."
+	icon = 'icons/mob/animal.dmi'
+	icon_state = "drone_dead"
+
+	common_loot = list(
+		/obj/item/robot_parts/robot_component/binary_communication_device,
+		/obj/item/robot_parts/robot_component/armour,
+		/obj/item/robot_parts/robot_component/actuator,
+		/obj/item/robot_parts/robot_component/camera,
+		/obj/item/robot_parts/robot_component/diagnosis_unit,
+		/obj/item/robot_parts/robot_component/radio,
+		/obj/item/weapon/circuitboard/security,
+		/obj/item/weapon/circuitboard/crew,
+		/obj/item/weapon/aiModule/reset,
+		/obj/item/weapon/smes_coil/super_capacity,
+		/obj/item/weapon/smes_coil/super_io,
+		/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser,
+		/obj/item/robot_parts/head,
+		/obj/item/robot_parts/robot_suit,
+		/obj/item/robot_parts/chest
+	)
+
+	uncommon_loot = list(
+		/obj/item/weapon/cell/super,
+		/obj/item/weapon/cell/device/weapon,
+		/obj/item/weapon/aiModule/freeform,
+		/obj/item/weapon/aiModule/asimov,
+		/obj/item/weapon/aiModule/paladin,
+		/obj/item/weapon/aiModule/safeguard,
+		/obj/item/weapon/disposable_teleporter,
+		/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
+		/obj/item/borg/upgrade/jetpack,
+		/obj/item/borg/upgrade/advhealth,
+		/obj/item/borg/upgrade/vtec,
+		/obj/item/borg/upgrade/tasercooler
+	)
+	rare_loot = list(
+		/obj/item/weapon/cell/hyper,
+		/obj/item/weapon/screwdriver/power,
+		/obj/item/weapon/crowbar/power,
+		/obj/item/weapon/weldingtool/experimental
+	)
