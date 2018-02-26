@@ -481,7 +481,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			user << "<span class='notice'>[G] must be dried before you roll it into [src].</span>"
 			return
 		var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint(user.loc)
-		tochat(usr,"<span class='notice'>You roll the [G.name] into a joint!</span>")
+		to_chat(usr,"<span class='notice'>You roll the [G.name] into a joint!</span>")
 		J.add_fingerprint(user)
 		if(G.reagents)
 			G.reagents.trans_to_obj(J, G.reagents.total_volume)
