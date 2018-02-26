@@ -67,7 +67,7 @@
 	name = "Mine Vault"
 
 /area/submap/cave/vault5
-	name = "Mine Vault"	name = "Abandoned Temple"
+	name = "Mine Vault"
 
 /area/submap/cave/SupplyDrop1
 	name = "Supply Drop 1"

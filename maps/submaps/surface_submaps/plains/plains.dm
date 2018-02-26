@@ -192,4 +192,4 @@
 	name = "Supply Drop 2"
 	desc = "A drop pod that's clearly been here a while, most of the things inside are rusted and worthless."
 	mappath = 'maps/submaps/surface_submaps/plains/SupplyDrop2.dmm'
-	cost = 10
+	cost = 8
