@@ -116,7 +116,7 @@
 
 	return 0
 
-//for your antag purposes. machine-translatable, if you don't want that use Cult or one of the animal langs
+//for your antag purposes.
 /datum/language/minbus
 	name = LANGUAGE_MINBUS
 	desc = "The Powers That Be have seen it fit to grace you with a special language that sounds like Russian for some reason."
@@ -125,7 +125,8 @@
 	exclaim_verb = "shouts"
 	colour = "deadsay"
 	key = "r"
-	flags = RESTRICTED | WHITELISTED
+	machine_understands = 0
+	flags = RESTRICTED
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")

@@ -42,7 +42,7 @@
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
 	name = LANGUAGE_TRADEBAND
-	desc = "Spoken by the humans of the upper-class Sagittarius Heights, Tradeband was designed to be pleasing both to humans and to their Skrellian trading partners."
+	desc = "Spoken by the humans of the upper-class Sagittarius Heights, Tradeband was designed to be pleasing to both humans and their Skrellian trading partners."
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
@@ -55,7 +55,7 @@
 
 /datum/language/terminus
 	name = LANGUAGE_TERMINUS
-	desc = "A soft language spoken by the people of the sparsely populated, socially-concious Precursors' Crypt region."
+	desc = "A soft language spoken by the people of the sparsely populated, socially-conscious Precursors' Crypt region."
 	speech_verb = "mentions"
 	exclaim_verb = "insinuates"
 	colour = "terminus"
@@ -68,7 +68,7 @@
 // Criminal language.
 /datum/language/gutter
 	name = LANGUAGE_GUTTER
-	desc = "Gutterspeak originated as a Thieves' Cant of sorts during the early colonization era. The language eventually spread from the cartels and triads to the disenfranchised people of the Bowl."
+	desc = "Gutter originated as a Thieves' Cant of sorts during the early colonization era. The language eventually spread from the cartels and triads to the disenfranchised people of the Bowl."
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
