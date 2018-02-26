@@ -308,8 +308,8 @@
 
 /obj/item/organ/external/head/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/toy/plushie) || istype,(I, /obj/item/organ/external/head))
-		user.visible_message("<span class='notice'>[user] makes \the [src] kiss \the [I]!.</span>", \
-		"<span class='notice'>You make \the [src] kiss \the [I]!.</span>")
+		user.visible_message("<span class='notice'>[user] makes \the [I] kiss \the [src]!.</span>", \
+		"<span class='notice'>You make \the [I] kiss \the [src]!.</span>")
 	return ..()
 
 /obj/item/organ/external/head/skrell
