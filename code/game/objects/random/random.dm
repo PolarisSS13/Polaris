@@ -9,9 +9,13 @@
 // creates a new object and deletes itself
 /obj/random/New()
 	..()
-	if (!prob(spawn_nothing_percentage))
-		spawn_item()
-	qdel(src)
+	spawn()
+		if(istype(src.loc, /obj/structure/loot_pile)) //Spawning from a lootpile is weird, need to wait until we're out of it to do our work.
+			while(istype(src.loc, /obj/structure/loot_pile))
+				sleep(1)
+		if (!prob(spawn_nothing_percentage))
+			spawn_item()
+		qdel(src)
 
 
 // this function should return a specific item to spawn

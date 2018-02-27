@@ -594,7 +594,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/effect/decal/remains/lizard,
 		/obj/effect/decal/remains/mouse,
 		/obj/effect/decal/remains/robot,
-		/obj/fiftyspawner/steel
+		/obj/item/stack/material/steel{amount = 40}
 		)
 
 	uncommon_loot = list(
@@ -772,7 +772,6 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/stack/material/steel{amount = 25},
 		/obj/item/stack/material/glass{amount = 10},
 		/obj/item/stack/material/plasteel{amount = 5},
-		/obj/item/stack/material/durasteel{amount = 3},
 		/obj/item/mecha_parts/chassis/durand,
 		/obj/item/mecha_parts/part/durand_head,
 		/obj/item/mecha_parts/part/durand_torso,
