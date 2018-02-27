@@ -170,7 +170,7 @@
 //Lisa already has a cute bow!
 /mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(user, "<font color='red'>[src] already has a cute bow!</font>")
+		to_chat(usr, "<font color='red'>[src] already has a cute bow!</font>")
 		return
 	..()
 
