@@ -35,7 +35,7 @@
 "I" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/power/terminal{dir = 8},/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating,/area/submap/Rockb1)
 "J" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/excavation,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "K" = (/obj/structure/table/standard,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/tiled,/area/submap/Rockb1)
-"L" = (/obj/structure/table/standard,/obj/item/stack/material/cyborg/steel,/obj/item/stack/material/cyborg/glass,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"L" = (/obj/structure/table/standard,/obj/fiftyspawner/glass,/obj/fiftyspawner/steel,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "M" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "N" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "O" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/tiled,/area/submap/Rockb1)

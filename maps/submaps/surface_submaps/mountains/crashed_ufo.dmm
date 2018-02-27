@@ -67,7 +67,7 @@
 "bo" = (/obj/item/weapon/reagent_containers/hypospray/autoinjector/used,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bp" = (/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/burn,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bq" = (/obj/effect/decal/remains/human{desc = "They look like human remains. Based on the equipment you saw nearby when you walked in, they were some kind of command person, and a poor one at that."},/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
-"br" = (/obj/item/clothing/gloves/fyellow,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
+"br" = (/obj/item/clothing/gloves/yellow,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bs" = (/obj/item/weapon/storage/belt/utility/full,/obj/item/device/multitool,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bt" = (/obj/machinery/door/airlock/alien/public,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bu" = (/obj/item/clothing/suit/storage/hooded/wintercoat/captain,/obj/item/clothing/shoes/boots/winter/command,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
