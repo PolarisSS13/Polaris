@@ -111,8 +111,8 @@
 	cost = 20
 
 /datum/map_template/surface/plains/Thiefc
-	name = "Thief Cave"
-	desc = "A thieve's stash"
+	name = "Thieves Cave"
+	desc = "A thieves stash"
 	mappath = 'maps/submaps/surface_submaps/plains/Thiefc.dmm'
 	cost = 20
 
