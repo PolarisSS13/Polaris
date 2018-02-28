@@ -15,7 +15,6 @@
 	var/spit_name = null 				//String
 	var/last_spit = 0 					//Timestamp.
 
-	var/can_defib = 1					//Horrible damage (like beheadings) will prevent defibbing organics.
 	var/hiding = 0						// If the mob is hiding or not. Makes them appear under tables and the like.
 	var/active_regen = FALSE //Used for the regenerate proc in human_powers.dm
 	var/active_regen_delay = 300
