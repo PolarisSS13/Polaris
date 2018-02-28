@@ -98,10 +98,10 @@
 	//sometimes our targetting sensors malfunction, and we attack anyone nearby
 	if(prob(disabled ? 0 : 1))
 		if(hostile)
-			src.visible_message("<font color='blue'>\icon[src] [src] retracts several targetting vanes, and dulls it's running lights.</font>")
+			src.visible_message("<font color='blue'>\icon[src] [src] retracts several targetting vanes, and dulls its running lights.</font>")
 			hostile = 0
 		else
-			src.visible_message("<font color='red'>\icon[src] [src] suddenly lights up, and additional targetting vanes slide into place.</font>")
+			src.visible_message("<font color='red'>\icon[src] [src] suddenly lights up, and additional targeting vanes slide into place.</font>")
 			hostile = 1
 
 	if(health / getMaxHealth() > 0.9)
@@ -130,7 +130,7 @@
 
 	if(exploding && prob(20))
 		if(prob(50))
-			src.visible_message("<font color='red'>\icon[src] [src] begins to spark and shake violenty!</font>")
+			src.visible_message("<font color='red'>\icon[src] [src] begins to spark and shake violently!</font>")
 		else
 			src.visible_message("<font color='red'>\icon[src] [src] sparks and shakes like it's about to explode!</font>")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -261,7 +261,7 @@
 
 		if(spawnees & 256)
 			C = new(src.loc)
-			C.name = "Drone targetting circuitboard"
+			C.name = "Drone targeting circuitboard"
 			C.origin_tech = list(TECH_COMBAT = rand(3,6))
 
 		if(spawnees & 512)
@@ -280,6 +280,12 @@
 // A slightly easier drone, for POIs.
 // Difference is that it should not be faster than you.
 /mob/living/simple_animal/hostile/malf_drone/lesser
-	desc = "An automated combat drone with an aged apperance."
+	desc = "An automated combat drone with an aged appearance."
 	returns_home = TRUE
 	move_to_delay = 6
+
+/mob/living/simple_animal/hostile/malf_drone/lesser/weak
+	desc = "An automated combat drone with an aged appearance. It's dented in several places, and its weapons look rusty."
+	maxHealth = 200
+	health = 200
+	rapid = 0
