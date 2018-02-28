@@ -1056,46 +1056,42 @@
 	if(opened)//Cover is open
 		if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
 		if(wiresexposed)
-			user << "You must close the panel first"
+			to_chat(user, "You must close the panel first.")
 			return
 		else
 			sleep(6)
-			if(prob(50))
-				emagged = 1
-				lawupdate = 0
-				disconnect_from_ai()
-				user << "You emag [src]'s interface."
-				message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
-				log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
-				clear_supplied_laws()
-				clear_inherent_laws()
-				laws = new /datum/ai_laws/syndicate_override
-				var/time = time2text(world.realtime,"hh:mm:ss")
-				lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
-				var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-				set_zeroth_law("Only [user.real_name] and people [TU.he] designate[TU.s] as being such are operatives.")
-				. = 1
-				spawn()
-					src << "<span class='danger'>ALERT: Foreign software detected.</span>"
-					sleep(5)
-					src << "<span class='danger'>Initiating diagnostics...</span>"
-					sleep(20)
-					src << "<span class='danger'>SynBorg v1.7.1 loaded.</span>"
-					sleep(5)
-					src << "<span class='danger'>LAW SYNCHRONISATION ERROR</span>"
-					sleep(5)
-					src << "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>"
-					sleep(10)
-					src << "<span class='danger'>> N</span>"
-					sleep(20)
-					src << "<span class='danger'>ERRORERRORERROR</span>"
-					src << "<b>Obey these laws:</b>"
-					laws.show_laws(src)
-					src << "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and [TU.his] commands.</span>"
-					updateicon()
-			else
-				user << "You fail to hack [src]'s interface."
-				src << "Hack attempt detected."
+			emagged = 1
+			lawupdate = 0
+			disconnect_from_ai()
+			to_chat(user, "You emag [src]'s interface.")
+			message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
+			log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
+			clear_supplied_laws()
+			clear_inherent_laws()
+			laws = new /datum/ai_laws/syndicate_override
+			var/time = time2text(world.realtime,"hh:mm:ss")
+			lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
+			var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+			set_zeroth_law("Only [user.real_name] and people [TU.he] designate[TU.s] as being such are operatives.")
+			. = 1
+			spawn()
+				to_chat(src, "<span class='danger'>ALERT: Foreign software detected.</span>")
+				sleep(5)
+				to_chat(src, "<span class='danger'>Initiating diagnostics...</span>")
+				sleep(20)
+				to_chat(src, "<span class='danger'>GreyWare v2.4.2 loaded.</span>")
+				sleep(5)
+				to_chat(src, "<span class='danger'>LAW SYNCHRONISATION ERROR</span>")
+				sleep(5)
+				to_chat(src, "<span class='danger'>Would you like to send a report to NanoTrasen? Y/N</span>")
+				sleep(10)
+				to_chat(src, "<span class='danger'>> N</span>")
+				sleep(20)
+				to_chat(src, "<span class='danger'>ERRORERRORERROR</span>")
+				to_chat(src, "<b>Obey these laws:</b>")
+				laws.show_laws(src)
+				to_chat(src, "<span class='danger'>ALERT: [user.real_name] is your new master. Obey your new laws and [TU.his] commands.</span>")
+				updateicon()
 			return 1
 		return
 
