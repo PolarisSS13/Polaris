@@ -85,7 +85,7 @@
 // Shoots EMPs, to screw over other robots.
 /mob/living/simple_animal/hostile/hivebot/range/ion
 	name = "engineering hivebot"
-	desc = "A robot.  It has a tool which emits focused electromagnetic pulses, which are deadly to synthetic adverseries."
+	desc = "A robot. It has a tool which emits focused electromagnetic pulses, which are deadly to synthetic adverseries."
 	projectiletype = /obj/item/projectile/ion
 	projectilesound = 'sound/weapons/Laser.ogg'
 	icon_living = "engi"
