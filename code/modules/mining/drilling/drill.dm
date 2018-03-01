@@ -15,6 +15,7 @@
 	var/supported = 0
 	var/active = 0
 	var/list/resource_field = list()
+	var/obj/item/device/radio/intercom/faultreporter = new /obj/item/device/radio/intercom{channels=list("Supply")}(null)
 
 	var/ore_types = list(
 		"hematite" = /obj/item/weapon/ore/iron,
@@ -85,7 +86,10 @@
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			harvesting = pick(resource_field)
+			if(resource_field.len) // runtime protection
+				harvesting = pick(resource_field)
+			else
+				harvesting = null
 
 		if(!harvesting) return
 
@@ -131,12 +135,19 @@
 		active = 0
 		need_player_check = 1
 		update_icon()
+		system_error("resources depleted")
 
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/machinery/mining/drill/attackby(obj/item/O as obj, mob/user as mob)
 	if(!active)
+		if(istype(O, /obj/item/device/multitool))
+			var/newtag = text2num(sanitizeSafe(input(user, "Enter new ID number or leave empty to cancel.", "Assign ID number") as text, 4))
+			if(newtag)
+				name = "[initial(name)] #[newtag]"
+				user << "<span class='notice'>You changed the drill ID to: [newtag]</span>"
+			return
 		if(default_deconstruction_screwdriver(user, O))
 			return
 		if(default_deconstruction_crowbar(user, O))
@@ -234,6 +245,7 @@
 
 	if(error)
 		src.visible_message("<span class='notice'>\The [src] flashes a '[error]' warning.</span>")
+		faultreporter.autosay(error, src.name, "Supply")
 	need_player_check = 1
 	active = 0
 	update_icon()
