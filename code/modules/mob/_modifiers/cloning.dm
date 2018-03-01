@@ -83,7 +83,7 @@
 	evasion = -5							// 55% easier to hit.
 	accuracy_dispersion = 1					// Inaccurate trait level of tile dispersion.
 
-	stacks = MODIFIER_STACK_ALLOWED //You have somehow had the surgery done twice. Your brain is very, very fucked.
+	stacks = MODIFIER_STACK_ALLOWED //You have somehow had the surgery done twice. Your brain is very, very fucked, but I won't say no.
 
 /datum/modifier/franken_sickness/can_apply(var/mob/living/L)
 	if(!ishuman(L))
