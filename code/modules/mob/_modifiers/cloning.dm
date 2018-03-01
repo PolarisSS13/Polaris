@@ -75,7 +75,7 @@
 
 	max_health_percent = 0.9				// -10% max health.
 	incoming_damage_percent = 1.1			// 10% more incoming damage.
-	incoming_hal_damage_percent = 1.5		// 50% more halloss damage.
+	incoming_hal_damage_percent = 1.5		// 50% more halloss damage, stacking on the previous 1.1 widespread.
 	outgoing_melee_damage_percent = 0.9		// 10% less melee damage.
 	disable_duration_percent = 1.25			// Stuns last 25% longer.
 	incoming_healing_percent = 0.9			// -10% to all healing
@@ -96,6 +96,6 @@
 /datum/modifier/franken_sickness/tick()
 	if(holder.stat != DEAD)
 		if(istype(holder, /mob/living/carbon/human))
-			var/mob/living/carbon/human/F
+			var/mob/living/carbon/human/F = holder
 			if(F.can_defib)
 				F.can_defib = 0

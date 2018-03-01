@@ -5,14 +5,14 @@
 
 /datum/surgery_step/brainstem
 	priority = 2
-	req_open = 3
+	req_open = 1
 	can_infect = 1
 
 /datum/surgery_step/brainstem/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if (!affected || (affected.robotic >= ORGAN_ROBOT))
+	if (!affected || (affected.robotic >= ORGAN_ROBOT) || !(affected.open >= 3))
 		return 0
 	return target_zone == BP_HEAD
 
@@ -110,13 +110,13 @@
 	return ..() && target_zone == BP_HEAD && target.op_stage.brainstem == 2
 
 /datum/surgery_step/brainstem/clean_chips/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts to pick around [target]'s brainstem with \the [tool].", \
-	"You start to pick around [target]'s brainstem with \the [tool].")
+	user.visible_message("[user] starts to pick around [target]'s brainstem for bone chips with \the [tool].", \
+	"You start to pick around [target]'s brainstem for bone chips with \the [tool].")
 	..()
 
 /datum/surgery_step/brainstem/clean_chips/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("<font color='blue'>[user] has drilled around [target]'s brainstem with \the [tool].</font>" , \
-	"<font color='blue'> You have drilled around [target]'s brainstem with \the [tool].</font>",)
+	user.visible_message("<font color='blue'>[user] has cleaned around [target]'s brainstem with \the [tool].</font>" , \
+	"<font color='blue'> You have cleaned around [target]'s brainstem with \the [tool].</font>",)
 	target.AdjustParalysis(10) //Still invasive.
 	target.op_stage.brainstem = 3
 
@@ -143,7 +143,7 @@
 		/obj/item/device/assembly/mousetrap = 5)
 
 	min_duration = 100
-	max_duration = 120
+	max_duration = 200
 
 /datum/surgery_step/brainstem/mend_cord/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return ..() && target_zone == BP_HEAD && target.op_stage.brainstem == 3
@@ -181,8 +181,8 @@
 		/obj/item/stack/nanopaste = 50,
 		/obj/item/weapon/tape_roll = 5)
 
-	min_duration = 90
-	max_duration = 120
+	min_duration = 100
+	max_duration = 160
 
 /datum/surgery_step/brainstem/mend_vertebrae/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return ..() && target_zone == BP_HEAD && target.op_stage.brainstem == 4
@@ -226,13 +226,13 @@
 	return ..() && target_zone == BP_HEAD && target.op_stage.brainstem == 5
 
 /datum/surgery_step/brainstem/realign_tissue/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts to move the tissues in [target]'s skull with \the [tool].", \
-	"You start to move the tissues in [target]'s skull with \the [tool].")
+	user.visible_message("[user] starts to realign the tissues in [target]'s skull with \the [tool].", \
+	"You start to realign the tissues in [target]'s skull with \the [tool].")
 	..()
 
 /datum/surgery_step/brainstem/realign_tissue/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("<font color='blue'>[user] has moved the tissues in [target]'s skull back into place with \the [tool].</font>" , \
-	"<font color='blue'> You have moved the tissues in [target]'s skull back into place with \the [tool].</font>",)
+	user.visible_message("<font color='blue'>[user] has realigned the tissues in [target]'s skull back into place with \the [tool].</font>" , \
+	"<font color='blue'> You have realigned the tissues in [target]'s skull back into place with \the [tool].</font>",)
 	target.AdjustParalysis(5) //I n v a s i v e
 	target.op_stage.brainstem = 0 //The cycle begins anew.
 
