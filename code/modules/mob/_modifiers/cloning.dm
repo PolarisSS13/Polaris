@@ -61,3 +61,41 @@
 
 	outgoing_melee_damage_percent = 0.5 //50% less outgoing melee damage.
 	attack_speed_percent = 1.2 //20% slower attack speed.
+
+//////////////////////
+//Surgical Modifiers// As of writing, limited to the 'Frankenstein' modifier.
+//////////////////////
+
+/datum/modifier/franken_sickness
+	name = "surgically attached brain"
+	desc = "You feel weak, as your central nervous system is still recovering from being repaired."
+
+	on_created_text = "<span class='warning'><font size='3'>You feel... off, and your head hurts.</font></span>"
+	on_expired_text = "<span class='notice'><font size='3'>You feel your strength returning to you.</font></span>"
+
+	max_health_percent = 0.9				// -10% max health.
+	incoming_damage_percent = 1.1			// 10% more incoming damage.
+	incoming_hal_damage_percent = 1.5		// 50% more halloss damage.
+	outgoing_melee_damage_percent = 0.9		// 10% less melee damage.
+	disable_duration_percent = 1.25			// Stuns last 25% longer.
+	incoming_healing_percent = 0.9			// -10% to all healing
+	slowdown = 0.5							// Slower, by a smidge.
+	evasion = -5							// 55% easier to hit.
+	accuracy_dispersion = 1					// Inaccurate trait level of tile dispersion.
+
+	stacks = MODIFIER_STACK_ALLOWED //You have somehow had the surgery done twice. Your brain is very, very fucked.
+
+/datum/modifier/franken_sickness/can_apply(var/mob/living/L)
+	if(!ishuman(L))
+		return FALSE
+	if(L.isSynthetic()) //Nonhumans and Machines cannot be Frankensteined, at this time.
+		return FALSE
+
+	return ..()
+
+/datum/modifier/franken_sickness/tick()
+	if(holder.stat != DEAD)
+		if(istype(holder, /mob/living/carbon/human))
+			var/mob/living/carbon/human/F
+			if(F.can_defib)
+				F.can_defib = 0
