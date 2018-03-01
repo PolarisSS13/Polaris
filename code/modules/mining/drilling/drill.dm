@@ -146,7 +146,7 @@
 			var/newtag = text2num(sanitizeSafe(input(user, "Enter new ID number or leave empty to cancel.", "Assign ID number") as text, 4))
 			if(newtag)
 				name = "[initial(name)] #[newtag]"
-				user << "<span class='notice'>You changed the drill ID to: [newtag]</span>"
+				to_chat(user, "<span class='notice'>You changed the drill ID to: [newtag]</span>")
 			return
 		if(default_deconstruction_screwdriver(user, O))
 			return
