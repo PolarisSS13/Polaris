@@ -77,3 +77,6 @@
 
 /area/submap/cave/IceCave1C
 	name = "Ice Cave 1C"
+
+/area/submap/cave/swordcave
+	name = "Cursed Sword Cave"
