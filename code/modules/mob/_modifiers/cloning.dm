@@ -71,7 +71,7 @@
 	desc = "You feel weak, as your central nervous system is still recovering from being repaired."
 
 	on_created_text = "<span class='warning'><font size='3'>You feel... off, and your head hurts.</font></span>"
-	on_expired_text = "<span class='notice'><font size='3'>You feel your strength returning to you.</font></span>"
+	on_expired_text = "<span class='notice'><font size='3'>You feel some strength returning to you.</font></span>"
 
 	max_health_percent = 0.9				// -10% max health.
 	incoming_damage_percent = 1.1			// 10% more incoming damage.
@@ -80,7 +80,7 @@
 	disable_duration_percent = 1.25			// Stuns last 25% longer.
 	incoming_healing_percent = 0.9			// -10% to all healing
 	slowdown = 0.5							// Slower, by a smidge.
-	evasion = -5							// 55% easier to hit.
+	evasion = -5							// 5% easier to hit.
 	accuracy_dispersion = 1					// Inaccurate trait level of tile dispersion.
 
 	stacks = MODIFIER_STACK_ALLOWED //You have somehow had the surgery done twice. Your brain is very, very fucked, but I won't say no.
@@ -99,3 +99,28 @@
 			var/mob/living/carbon/human/F = holder
 			if(F.can_defib)
 				F.can_defib = 0
+
+/datum/modifier/franken_sickness/on_expire() //Not permanent, but its child is.
+	holder.add_modifier(/datum/modifier/franken_recovery, 0)
+
+/datum/modifier/franken_recovery //When Franken_Sickness expires, this will be permanently applied in its place.
+	name = "neural recovery"
+	desc = "You feel out of touch, as your central nervous system is still recovering from being repaired."
+
+	on_created_text = "<span class='warning'><font size='3'>You feel... off. Everything is fuzzy.</font></span>"
+	on_expired_text = "<span class='notice'><font size='3'>You feel your senses returning to you.</font></span>"
+
+	incoming_hal_damage_percent = 1.5		// 50% more halloss damage.
+	disable_duration_percent = 1.25			// Stuns last 25% longer.
+	evasion = -5							// 5% easier to hit.
+	accuracy_dispersion = 1					// Inaccurate trait level of tile dispersion.
+
+	stacks = MODIFIER_STACK_ALLOWED
+
+/datum/modifier/franken_recovery/can_apply(var/mob/living/L)
+	if(!ishuman(L))
+		return FALSE
+	if(L.isSynthetic()) //Nonhumans and Machines cannot be Frankensteined, at this time.
+		return FALSE
+
+	return ..()
