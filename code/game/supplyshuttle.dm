@@ -253,6 +253,8 @@ var/list/mechtoys = list(
                 continue
             clear_turfs += T
 
+        var/orderedamount = shoppinglist.len
+
         for(var/S in shoppinglist)
             if(!clear_turfs.len)    break
             var/i = rand(1,clear_turfs.len)
@@ -275,7 +277,7 @@ var/list/mechtoys = list(
                 slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
                 slip.info +="Order #[SO.ordernum]<br>"
                 slip.info +="Destination: [station_name()]<br>"
-                slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
+                slip.info +="[orderedamount] PACKAGES IN THIS SHIPMENT<br>"
                 slip.info +="CONTENTS:<br><ul>"
 
             //spawn the stuff, finish generating the manifest while you're at it
