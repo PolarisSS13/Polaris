@@ -237,6 +237,8 @@ var/list/mechtoys = list(
     proc/buy()
         if(!shoppinglist.len) return
 
+        var/orderedamount = shoppinglist.len
+
         var/area/area_shuttle = shuttle.get_location_area()
         if(!area_shuttle)   return
 
@@ -252,8 +254,6 @@ var/list/mechtoys = list(
             if(contcount)
                 continue
             clear_turfs += T
-
-        var/orderedamount = shoppinglist.len
 
         for(var/S in shoppinglist)
             if(!clear_turfs.len)    break
