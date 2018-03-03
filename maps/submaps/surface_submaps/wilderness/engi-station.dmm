@@ -14,14 +14,14 @@
 "n" = (/mob/living/simple_animal/hostile/giant_spider/nurse,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "o" = (/obj/structure/girder,/turf/snow/plating,/area/space)
 "p" = (/mob/living/simple_animal/corgi/tamaskan,/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"q" = (/obj/structure/table/rack,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"q" = (/obj/item/weapon/caution/cone,/turf/template_noop,/area/space)
 "r" = (/obj/structure/loot_pile/mecha/ripley,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "s" = (/obj/item/weapon/card/id/engineering/atmos,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "t" = (/obj/item/weapon/smes_coil/weak,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "u" = (/obj/machinery/the_singularitygen/tesla,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "v" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "w" = (/obj/machinery/door/airlock/engineering{name = "Engineering Hard Storage"; req_access = list(11); welded = 1},/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"x" = (/obj/item/weapon/weldingtool/mini,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"x" = (/obj/item/weapon/extinguisher,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "y" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "z" = (/obj/item/weapon/module/power_control,/obj/item/frame/apc{pixel_y = 32},/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "A" = (/obj/item/weapon/shovel,/turf/snow/plating,/area/space)
@@ -36,27 +36,27 @@
 "J" = (/obj/structure/table/rack,/obj/item/weapon/stock_parts/matter_bin,/obj/item/weapon/stock_parts/console_screen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "K" = (/obj/item/weapon/crowbar/rusted,/turf/template_noop,/area/space)
 "L" = (/obj/item/weapon/wrench/rusted,/turf/template_noop,/area/space)
-"M" = (/obj/item/weapon/crowbar,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"M" = (/obj/structure/table/rack,/obj/item/weapon/tape_roll,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "N" = (/obj/item/weapon/wrench/pipe,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "O" = (/obj/machinery/power/emitter/old{dir = 1},/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "P" = (/obj/item/device/radio/ham,/turf/template_noop,/area/space)
 "Q" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "R" = (/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"S" = (/obj/item/weapon/pickaxe/plasmacutter,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"S" = (/obj/item/weapon/weldingtool/mini,/obj/item/weapon/toolbox_tiles,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "T" = (/obj/item/weapon/screwdriver,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "U" = (/obj/item/inflatable/torn,/turf/snow/plating,/area/space)
 "V" = (/obj/item/weapon/storage/backpack/dufflebag/eng,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 
 (1,1,1) = {"
 KaabaaaaaaaaL
-aaaaaaaaaaaaa
+aaaaaaaaaqaaa
 aaccdcccecfaa
-aacgSzhstijaa
+aacghzhstijaa
 aakhlmuniAoaa
 aacQVTpiUicaa
-aachBlvCMncaa
-aacDnqErhFcaa
-aawxhRhhhNkaa
+aachBlvCxncaa
+aacDnMErhFcaa
+aawShRhhhNkaa
 aacGHIJlyOcaa
 aaccecccdccaa
 Paaaaaaaaaaaa
