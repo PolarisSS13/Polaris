@@ -542,9 +542,7 @@
 	overlays.Cut()
 	if(holding)
 		overlays += image(icon, "[icon_state]_knife")
-	if(ismob(usr))
-		var/mob/M = usr
-		M.update_inv_shoes()
+	update_clothing_icon()
 	return ..()
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
