@@ -7,11 +7,11 @@
 "g" = (/mob/living/simple_animal/hostile/giant_spider/webslinger,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "h" = (/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "i" = (/turf/snow/plating,/area/space)
-"j" = (/mob/living/simple_animal/hostile/giant_spider,/turf/snow/plating,/area/space)
+"j" = (/mob/living/simple_animal/hostile/giant_spider{returns_home = 1},/turf/snow/plating,/area/space)
 "k" = (/obj/structure/door_assembly/door_assembly_eng,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "l" = (/obj/structure/frame,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "m" = (/obj/machinery/power/smes/batteryrack/makeshift,/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"n" = (/mob/living/simple_animal/hostile/giant_spider/nurse,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"n" = (/mob/living/simple_animal/hostile/giant_spider/nurse{returns_home = 1},/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "o" = (/obj/structure/girder,/turf/snow/plating,/area/space)
 "p" = (/mob/living/simple_animal/corgi/tamaskan,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "q" = (/obj/item/weapon/caution/cone,/turf/template_noop,/area/space)
@@ -43,20 +43,19 @@
 "Q" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "R" = (/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "S" = (/obj/item/weapon/weldingtool/mini,/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"T" = (/obj/item/weapon/screwdriver,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "U" = (/obj/item/inflatable/torn,/turf/snow/plating,/area/space)
 "V" = (/obj/item/weapon/storage/backpack/dufflebag/eng,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "W" = (/obj/item/weapon/toolbox_tiles,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 
 (1,1,1) = {"
-KaabaaaaaaaaL
+aaabaaaaaaaaL
 aaaaaaaaaqaaa
 aaccdcccecfaa
 aacghzhstijaa
 aakhlmuniAoaa
-aacQVTpiUicaa
+aacQVhpiUicaa
 aachBlvCxncaa
-aacDnMErhFcaa
+aacDnMErhFcaK
 aawShRWhhNkaa
 aacGHIJlyOcaa
 aaccecccdccaa

@@ -195,8 +195,8 @@
 	mappath = 'maps/submaps/surface_submaps/wilderness/Musk.dmm'
 	cost = 10
 
-/datum/map_template/surface/wilderness/normal/Musk
+/datum/map_template/surface/wilderness/normal/engi-station
 	name = "Engineering Station"
 	desc = "An old, abandoned engineering storage room. Spider shave made it their home."
 	mappath = 'maps/submaps/surface_submaps/wilderness/engi-station.dmm'
-	cost = 22
+	cost = 20
