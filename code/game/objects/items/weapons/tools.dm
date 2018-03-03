@@ -62,6 +62,16 @@
 	toolspeed = 0.25
 	var/obj/item/weapon/screwdriver/power/counterpart = null
 
+/obj/item/weapon/wrench/rusted
+	desc = "This wrench seems to have seen a few many days."
+	icon_state = "wrench-rusty"
+	toolspeed = 2
+
+/obj/item/weapon/wrench/pipe
+	name = "pipe wrench"
+	icon_state = "pipewrench"
+	force = 9
+
 /obj/item/weapon/wrench/power/New(newloc, no_counterpart = TRUE)
 	..(newloc)
 	if(!counterpart && no_counterpart)
@@ -910,6 +920,12 @@
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
+
+/obj/item/weapon/crowbar/rusted
+	desc = "This one doesn't seem like it'd be the most useful."
+	icon_state = "crowbar-rusty"
+	toolspeed = 2
+
 
 /obj/item/weapon/weldingtool/attack(var/atom/A, var/mob/living/user, var/def_zone)
 	if(ishuman(A) && user.a_intent == I_HELP)

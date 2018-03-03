@@ -778,3 +778,9 @@ var/global/list/default_medbay_channels = list(
 /obj/item/device/radio/phone/medbay/New()
 	..()
 	internal_channels = default_medbay_channels.Copy()
+
+
+/obj/item/device/radio/ham
+	name = "rigged radio"
+	icon_state = "ham"
+	broadcasting = 0
