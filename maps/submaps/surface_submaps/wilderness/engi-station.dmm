@@ -42,10 +42,11 @@
 "P" = (/obj/item/device/radio/ham,/turf/template_noop,/area/space)
 "Q" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "R" = (/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/turf/simulated/floor/plating/sif/planetuse,/area/space)
-"S" = (/obj/item/weapon/weldingtool/mini,/obj/item/weapon/toolbox_tiles,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"S" = (/obj/item/weapon/weldingtool/mini,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "T" = (/obj/item/weapon/screwdriver,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 "U" = (/obj/item/inflatable/torn,/turf/snow/plating,/area/space)
 "V" = (/obj/item/weapon/storage/backpack/dufflebag/eng,/turf/simulated/floor/plating/sif/planetuse,/area/space)
+"W" = (/obj/item/weapon/toolbox_tiles,/turf/simulated/floor/plating/sif/planetuse,/area/space)
 
 (1,1,1) = {"
 KaabaaaaaaaaL
@@ -56,7 +57,7 @@ aakhlmuniAoaa
 aacQVTpiUicaa
 aachBlvCxncaa
 aacDnMErhFcaa
-aawShRhhhNkaa
+aawShRWhhNkaa
 aacGHIJlyOcaa
 aaccecccdccaa
 Paaaaaaaaaaaa
