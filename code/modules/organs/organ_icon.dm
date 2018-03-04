@@ -160,7 +160,7 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/proc/apply_colouration(var/icon/applying)
 
-	if(nonsolid)
+	if(transparent)
 		applying.MapColors("#4D4D4D","#969696","#1C1C1C", "#000000")
 		if(species && species.get_bodytype(owner) != "Human")
 			applying.SetIntensity(1.5) // Unathi, Taj and Skrell have -very- dark base icons.
@@ -184,7 +184,7 @@ var/global/list/limb_icon_cache = list()
 			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"
 
 	// Translucency.
-	if(nonsolid) applying += rgb(,,,180) // SO INTUITIVE TY BYOND
+	if(transparent) applying += rgb(,,,180) // SO INTUITIVE TY BYOND
 
 	return applying
 

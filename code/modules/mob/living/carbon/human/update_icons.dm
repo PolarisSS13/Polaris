@@ -508,7 +508,7 @@ var/global/list/damage_icon_parts = list()
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
-	if(head_organ.nonsolid)
+	if(head_organ.transparent)
 		face_standing += rgb(,,,120)
 
 	overlays_standing[HAIR_LAYER]	= image(face_standing)
