@@ -61,7 +61,7 @@
 	if(!active) return
 
 	if(!anchored || !use_cell_power())
-		system_error("system configuration or charge error")
+		system_error("System configuration or charge error.")
 		return
 
 	if(need_update_field)
@@ -99,7 +99,7 @@
 		for(var/metal in ore_types)
 
 			if(contents.len >= capacity)
-				system_error("insufficient storage space")
+				system_error("Insufficient storage space.")
 				active = 0
 				need_player_check = 1
 				update_icon()
@@ -135,7 +135,7 @@
 		active = 0
 		need_player_check = 1
 		update_icon()
-		system_error("resources depleted")
+		system_error("Resources depleted.")
 
 /obj/machinery/mining/drill/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
