@@ -379,6 +379,8 @@ var/global/list/damage_icon_parts = list()
 				icon_key += "3"
 			else
 				icon_key += "1"
+			if(part.transparent)
+				icon_key += "_t"
 
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 

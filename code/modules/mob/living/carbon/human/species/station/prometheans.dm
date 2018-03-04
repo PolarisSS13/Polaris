@@ -85,7 +85,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_hair,
 		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
 		/mob/living/carbon/human/proc/shapeshifter_select_gender,
-		/mob/living/carbon/human/proc/regenerate
+		/mob/living/carbon/human/proc/regenerate,
+		/mob/living/carbon/human/proc/promethean_select_opaqueness
 		)
 
 	valid_transform_species = list("Human", "Vatborn", "Unathi", "Tajara", "Skrell", "Diona", "Teshari", "Monkey")
