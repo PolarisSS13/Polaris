@@ -75,3 +75,5 @@
 /area/submap/Drugd
 	name = "DrugDen"
 
+/area/submap/engi-station
+	name = "engi-station"

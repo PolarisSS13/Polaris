@@ -289,3 +289,14 @@
 
 /obj/machinery/power/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
+
+/obj/machinery/power/emitter/old
+	desc = "This emitter seems to be an older model, and doesn't seem to be in the best condition."
+	icon_state = "shit-emitter"
+
+	fire_delay = 300
+	max_burst_delay = 150
+	min_burst_delay = 50
+	burst_shots = 2
+
+	integrity = 40
