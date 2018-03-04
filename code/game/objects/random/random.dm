@@ -1598,9 +1598,12 @@ var/list/multi_point_spawns
 				prob(45);/mob/living/simple_animal/hostile/shantak)
 
 /obj/random/mob/spider
-	name = "Random Spider"
+	name = "Random Spider" //Spiders should patrol where they spawn.
 	desc = "This is a random boring spider."
 	icon_state = "guard"
+
+	mob_returns_home = 1
+	mob_wander_distance = 4
 
 /obj/random/mob/spider/item_to_spawn()
 	return pick(prob(22);/mob/living/simple_animal/hostile/giant_spider/nurse,
