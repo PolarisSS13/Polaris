@@ -1520,10 +1520,9 @@ var/list/multi_point_spawns
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "chicken_white"
 
-	var/overwrite_faction = 0
 	var/overwrite_hostility = 0
 
-	var/mob_faction = "neutral"
+	var/mob_faction = null
 	var/mob_returns_home = 0
 	var/mob_wander = 1
 	var/mob_wander_distance = 3
@@ -1555,7 +1554,7 @@ var/list/multi_point_spawns
 
 	var/mob/living/simple_animal/M = new build_path(src.loc)
 	M.ai_inactive = 1 //Don't fight eachother while we're still setting up!
-	if(overwrite_faction)
+	if(mob_faction)
 		M.faction = mob_faction
 	M.returns_home = mob_returns_home
 	M.wander = mob_wander
@@ -1632,7 +1631,6 @@ var/list/multi_point_spawns
 	desc = "This is a random robot."
 	icon_state = "drone_dead"
 
-	overwrite_faction = 1
 	overwrite_hostility = 1
 
 	mob_faction = "malf_drone"
