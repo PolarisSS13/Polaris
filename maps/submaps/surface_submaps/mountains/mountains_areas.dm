@@ -69,6 +69,16 @@
 /area/submap/cave/vault5
 	name = "Mine Vault"
 
+/area/submap/cave/IceCave1A
+	name = "Ice Cave 1A"
+
+/area/submap/cave/IceCave1B
+	name = "Ice Cave 1B"
+
+/area/submap/cave/IceCave1C
+	name = "Ice Cave 1C"
+	name = "Mine Vault"
+
 /area/submap/cave/SupplyDrop1
 	name = "Supply Drop 1"
 

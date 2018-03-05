@@ -24,6 +24,9 @@
 #include "vault3.dmm"
 #include "vault4.dmm"
 #include "vault5.dmm"
+#include "IceCave1A.dmm"
+#include "IceCave1B.dmm"
+#include "IceCave1C.dmm"
 #include "SupplyDrop1.dmm"
 #include "BlastMine1.dmm"
 #endif
@@ -149,6 +152,26 @@
 	desc = "A small vault with potential loot. Also a horrible suprise."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault3.dmm'
 	cost = 15
+
+/datum/map_template/surface/mountains/normal/IceCave1A
+	name = "Ice Cave 1A"
+	desc = "This cave's slippery ice makes it hard to navigate, but determined explorers will be rewarded."
+	mappath = 'maps/submaps/surface_submaps/mountains/IceCave1A.dmm'
+	cost = 10
+
+/datum/map_template/surface/mountains/normal/IceCave1B
+	name = "Ice Cave 1B"
+	desc = "This cave's slippery ice makes it hard to navigate, but determined explorers will be rewarded."
+	mappath = 'maps/submaps/surface_submaps/mountains/IceCave1B.dmm'
+	cost = 10
+
+/datum/map_template/surface/mountains/normal/IceCave1C
+	name = "Ice Cave 1C"
+	desc = "This cave's slippery ice makes it hard to navigate, but determined explorers will be rewarded."
+	mappath = 'maps/submaps/surface_submaps/mountains/IceCave1C.dmm'
+	cost = 10
+
+
 
 /datum/map_template/surface/mountains/normal/supplydrop1
 	name = "Supply Drop 1"
