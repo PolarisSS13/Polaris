@@ -1,6 +1,6 @@
 "a" = (/turf/template_noop,/area/template_noop)
 "b" = (/turf/template_noop,/area/submap/SupplyDrop2)
-"c" = (/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+"c" = (/turf/simulated/floor/plating,/area/submap/SupplyDrop2)
 "d" = (/obj/structure/girder/displaced,/turf/template_noop,/area/submap/SupplyDrop2)
 "e" = (/turf/simulated/wall/titanium,/area/submap/SupplyDrop2)
 "f" = (/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
@@ -9,15 +9,16 @@
 "i" = (/obj/structure/loot_pile/maint/technical,/obj/item/device/gps/internal/poi,/obj/item/weapon/cell/device/weapon/empty,/obj/item/weapon/cell/device/weapon/empty,/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
 "j" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
 "k" = (/obj/structure/girder,/turf/template_noop,/area/submap/SupplyDrop2)
-"l" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
-"m" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+"l" = (/turf/simulated/floor/plating/sif/planetuse,/area/submap/SupplyDrop2)
+"m" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/reinforced,/area/submap/SupplyDrop2)
+"n" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/plating,/area/submap/SupplyDrop2)
 
 (1,1,1) = {"
 aabbcdaaa
 abbefbbbb
 bbeegeebb
 bffhijfff
-bbekcekbb
-bbbkldbba
-abbbmbbba
+bbeklekbb
+bbbkmdbba
+abbbnbbba
 "}
