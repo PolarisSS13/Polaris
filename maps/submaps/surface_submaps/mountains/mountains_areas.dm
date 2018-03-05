@@ -76,6 +76,7 @@
 	name = "Ice Cave 1B"
 
 /area/submap/cave/IceCave1C
+
 	name = "Ice Cave 1C"
 	name = "Mine Vault"
 
@@ -84,3 +85,4 @@
 
 /area/submap/cave/BlastMine1
 	name = "Blast Mine 1"
+
