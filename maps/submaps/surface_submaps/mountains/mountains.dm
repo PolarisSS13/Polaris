@@ -171,8 +171,6 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/IceCave1C.dmm'
 	cost = 10
 
-
-
 /datum/map_template/surface/mountains/normal/supplydrop1
 	name = "Supply Drop 1"
 	desc = "A drop pod that landed deep within the mountains."
