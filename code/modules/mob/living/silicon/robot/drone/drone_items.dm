@@ -199,6 +199,22 @@
 	wrapped = null
 	//update_icon()
 
+/obj/item/weapon/gripper/proc/drop_item_nm()
+
+	if(!wrapped)
+		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
+		for(var/obj/item/thing in src.contents)
+			thing.loc = get_turf(src)
+		return
+
+	if(wrapped.loc != src)
+		wrapped = null
+		return
+
+	wrapped.loc = get_turf(src)
+	wrapped = null
+	//update_icon()
+
 /obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		force_holder = wrapped.force

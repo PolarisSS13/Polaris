@@ -687,6 +687,34 @@
 
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	/*
+	if(istype(W, /obj/item/weapon/gripper))			//Damn grippers and their fuckyness
+		var/obj/item/weapon/gripper/G = W
+		if(istype(G.wrapped, /obj/item/mecha_parts/mecha_equipment))
+			var/obj/item/mecha_parts/mecha_equipment/E = G.wrapped
+			spawn()
+				if(E.can_attach(src))
+					G.drop_item()
+					E.attach(src)
+					user.visible_message("[user] attaches [E] to [src]", "You attach [E] to [src]")
+				else
+					user << "You were unable to attach [E] to [src]"
+			return
+
+		if(istype(G.wrapped, /obj/item/weapon/cell))
+			if(state==4)
+				var/obj/item/weapon/cell/C = G.wrapped
+				if(!src.cell)
+					user << "You install the powercell"
+					G.drop_item()
+					C.forceMove(src)
+					src.cell = C
+					src.log_message("Powercell installed")
+				else
+					user << "There's already a powercell installed."
+			return
+		return*/
+
 	if(istype(W, /obj/item/device/mmi))
 		if(mmi_move_inside(W,user))
 			to_chat(user,"[src]-MMI interface initialized successfuly")

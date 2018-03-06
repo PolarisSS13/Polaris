@@ -24,7 +24,7 @@
 		return
 	..()
 
-/obj/item/frame/attack_self(mob/user as mob)
+/obj/item/frame/attack_self(mob/usr as mob)
 	..()
 	update_type_list()
 	var/datum/frame/frame_types/frame_type
@@ -48,6 +48,9 @@
 	M.fingerprints = fingerprints
 	M.fingerprintshidden = fingerprintshidden
 	M.fingerprintslast = fingerprintslast
+	/*if(istype(src.loc, /obj/item/weapon/gripper)) //Typical gripper stuff
+		var/obj/item/weapon/gripper/G = src.loc
+		G.drop_item()*/
 	qdel(src)
 
 /obj/item/frame/proc/try_build(turf/on_wall, mob/user as mob)
