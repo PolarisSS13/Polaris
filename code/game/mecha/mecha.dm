@@ -251,7 +251,7 @@
 ///// Action processing ////
 ////////////////////////////
 /*
-atom/DblClick(object,location,control,params)
+/atom/DblClick(object,location,control,params)
 	var/mob/M = src.mob
 	if(M && M.in_contents_of(/obj/mecha))
 
