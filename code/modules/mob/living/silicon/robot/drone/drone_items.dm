@@ -202,7 +202,6 @@
 /obj/item/weapon/gripper/proc/drop_item_nm()
 
 	if(!wrapped)
-		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 		for(var/obj/item/thing in src.contents)
 			thing.loc = get_turf(src)
 		return
