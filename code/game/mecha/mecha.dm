@@ -250,28 +250,6 @@
 ////////////////////////////
 ///// Action processing ////
 ////////////////////////////
-/*
-/atom/DblClick(object,location,control,params)
-	var/mob/M = src.mob
-	if(M && M.in_contents_of(/obj/mecha))
-
-		if(mech_click == world.time) return
-		mech_click = world.time
-
-		if(!istype(object, /atom)) return
-		if(istype(object, /obj/screen))
-			var/obj/screen/using = object
-			if(using.screen_loc == ui_acti || using.screen_loc == ui_iarrowleft || using.screen_loc == ui_iarrowright)//ignore all HUD objects save 'intent' and its arrows
-				return ..()
-			else
-				return
-		var/obj/mecha/Mech = M.loc
-		spawn() //this helps prevent clickspam fest.
-			if (Mech)
-				Mech.click_action(object,M)
-//	else
-//		return ..()
-*/
 
 /obj/mecha/proc/click_action(atom/target,mob/user)
 	if(!src.occupant || src.occupant != user ) return
@@ -686,34 +664,6 @@
 //////////////////////
 
 /obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
-	/*
-	if(istype(W, /obj/item/weapon/gripper))			//Damn grippers and their fuckyness
-		var/obj/item/weapon/gripper/G = W
-		if(istype(G.wrapped, /obj/item/mecha_parts/mecha_equipment))
-			var/obj/item/mecha_parts/mecha_equipment/E = G.wrapped
-			spawn()
-				if(E.can_attach(src))
-					G.drop_item()
-					E.attach(src)
-					user.visible_message("[user] attaches [E] to [src]", "You attach [E] to [src]")
-				else
-					user << "You were unable to attach [E] to [src]"
-			return
-
-		if(istype(G.wrapped, /obj/item/weapon/cell))
-			if(state==4)
-				var/obj/item/weapon/cell/C = G.wrapped
-				if(!src.cell)
-					user << "You install the powercell"
-					G.drop_item()
-					C.forceMove(src)
-					src.cell = C
-					src.log_message("Powercell installed")
-				else
-					user << "There's already a powercell installed."
-			return
-		return*/
 
 	if(istype(W, /obj/item/device/mmi))
 		if(mmi_move_inside(W,user))
