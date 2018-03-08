@@ -39,11 +39,6 @@
 	var/bolt_up_sound = 'sound/machines/boltsup.ogg'
 	var/bolt_down_sound = 'sound/machines/boltsdown.ogg'
 
-/obj/machinery/door/airlock/New()
-	.=..()
-	if(emergency_override)
-		desc += " This one is equipped with an emergency bolt override under its panel."
-
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
 		if(damage >= 10)
@@ -1198,6 +1193,8 @@ About the new airlock wires panel:
 			if(A.closeOtherId == src.closeOtherId && A != src)
 				src.closeOther = A
 				break
+	if(emergency_override)
+		desc += " This one is equipped with an emergency bolt override under its panel."
 	. = ..()
 
 /obj/machinery/door/airlock/Destroy()
