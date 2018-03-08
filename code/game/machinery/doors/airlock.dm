@@ -11,6 +11,7 @@
 	var/main_power_lost_until = 0	 	//World time when main power is restored.
 	var/backup_power_lost_until = -1	//World time when backup power is restored.
 	var/has_beeped = 0					//If 1, will not beep on failed closing attempt. Resets when door closes.
+	var/emergency_override = 0				//If 1, the airlock's bolts have an emergency override crank.
 	var/spawnPowerRestoreRunning = 0
 	var/welded = null
 	var/locked = 0
@@ -37,6 +38,11 @@
 	var/denied_sound = 'sound/machines/deniedbeep.ogg'
 	var/bolt_up_sound = 'sound/machines/boltsup.ogg'
 	var/bolt_down_sound = 'sound/machines/boltsdown.ogg'
+
+/obj/machinery/door/airlock/New()
+	.=..()
+	if(emergency_override)
+		desc += " This one is equipped with an emergency bolt override under its panel."
 
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
@@ -161,6 +167,7 @@
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
+	emergency_override = 1
 
 /obj/machinery/door/airlock/glass_external
 	name = "External Airlock"
@@ -168,6 +175,7 @@
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 	opacity = 0
 	glass = 1
+	emergency_override = 1
 
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
@@ -900,6 +908,19 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
+	else if(emergency_override && p_open && istype(C, /obj/item/weapon/wrench))
+		if(arePowerSystemsOn())
+			to_chat(user,"<span class='notice'>The airlock's motors resist your efforts to force the emergency override.</span>")
+			return
+		playsound(src, C.usesound, 75, 1)
+		user.visible_message("[user] begins cranking the airlock's emergency override with \the [C.name].", "You start cranking the airlock's emergency override with \the [C.name].")
+		if(do_after(user,80 * C.toolspeed))
+			to_chat(user,"<span class='notice'>You finish cranking the airlock's emergency override!</span>")
+			if(locked)
+				unlock(1)
+			else
+				lock(1)
+			return
 	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
 		if(can_remove_electronics())
 			playsound(src, C.usesound, 75, 1)
