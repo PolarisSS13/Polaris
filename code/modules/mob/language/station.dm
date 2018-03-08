@@ -69,7 +69,7 @@
 	speech_verb = "chatters"
 	ask_verb = "mrowls"
 	exclaim_verb = "wails"
-	colour = "tajaran"
+	colour = "akhani"
 	key = "h"
 	flags = WHITELISTED
 	syllables = list("mrr","rr","marr","tar","ahk","ket","hal","kah","dra","nal","kra","vah","dar","hrar", "eh",
