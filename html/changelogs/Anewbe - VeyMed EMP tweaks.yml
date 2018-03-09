@@ -33,4 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscdel: "Removes Command Liaison, Bridge Secretary, Hydroponicist, Prospector, Sanitation Technician, Professor, and Historian alt-titles. "
+  - rscadd: "Assisted robotic organs (internals, eyes) are less vulnerable to EMP."
+  - rscdel: "Lifelike robotic organs (currently VeyMed) are more vulnerable to EMP."
