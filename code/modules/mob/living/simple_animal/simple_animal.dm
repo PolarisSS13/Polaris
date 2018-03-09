@@ -782,6 +782,9 @@
 	return verb
 
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
+	if(has_hands)
+		put_in_active_hand(W)
+		return 1
 	W.forceMove(get_turf(src))
 	return 1
 
@@ -1263,7 +1266,7 @@
 
 // This is the actual act of 'punching'.  Override for special behaviour.
 /mob/living/simple_animal/proc/DoPunch(var/atom/A)
-	if(!Adjacent(A)) // They could've moved in the meantime.
+	if(!Adjacent(A) && !istype(A, /obj/structure/window)) // They could've moved in the meantime. But a Window probably wouldn't have. This allows player simple-mobs to attack windows.
 		return FALSE
 
 	var/damage_to_do = rand(melee_damage_lower, melee_damage_upper)
@@ -1564,11 +1567,11 @@
 			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	return
-
+/*
 /mob/living/simple_animal/put_in_active_hand(var/obj/item/I)
 	if(!has_hands || !istype(I))
 		return
-
+*/
 //Puts the item into our active hand if possible. returns 1 on success.
 /mob/living/simple_animal/put_in_active_hand(var/obj/item/W)
 	if(!has_hands)
