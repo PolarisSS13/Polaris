@@ -174,6 +174,27 @@
 	visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
 	src.break_to_parts()
 
+/obj/structure/table/attack_generic(mob/user as mob, var/damage)
+	if(damage >= 10)
+		if(reinforced)
+			if(prob(50))
+				visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
+				src.break_to_parts()
+				user.do_attack_animation(src)
+				return 1
+			else
+				visible_message("<span class='danger'>\The [user] smashes against \the [src]!</span>")
+				take_damage(damage/2)
+				user.do_attack_animation(src)
+				..()
+				return 1
+		visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
+		src.break_to_parts()
+		user.do_attack_animation(src)
+		return 1
+	visible_message("<span class='notice'>\The [user] scratches at \the [src]!</span>")
+	return ..()
+
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
 	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
 		reinforce_table(what, usr)
