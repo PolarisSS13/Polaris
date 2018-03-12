@@ -337,6 +337,16 @@ var/list/mining_overlay_cache = list()
 				user << "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>"
 			return
 
+		if(istype(W, /obj/item/device/xenoarch_multi_tool))
+			var/obj/item/device/xenoarch_multi_tool/C = W
+			if(C.scanning)
+				C.scan_atom(user, src)
+			else if(C.measuring)
+				user.visible_message("<span class='notice'>\The [user] extends \the [C] over \the [src], a flurry of red beams scanning \the [src]'s surface!</span>", "<span class='notice'>You extend \the [C] over \the [src], a flurry of red beams scanning \the [src]'s surface!</span>")
+				if(do_after(user, 15))
+					user << "<span class='notice'>\The [src] has been excavated to a depth of [2 * src.excavation_level]cm.</span>"
+			return
+
 		if (istype(W, /obj/item/weapon/pickaxe))
 			if(!istype(user.loc, /turf))
 				return
