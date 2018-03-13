@@ -824,8 +824,8 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(species_tail)
 		var/icon/tail_s = get_tail_icon()
 		if(!(wear_suit && wear_suit.flags_inv & HIDETAIL))		
-		  overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
-		  animate_tail_reset()
+			overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
+			animate_tail_reset()
 
 //TODO: Is this the appropriate place for this, and not on species...?
 /mob/living/carbon/human/proc/get_tail_icon()
