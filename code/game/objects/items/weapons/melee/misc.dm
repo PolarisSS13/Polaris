@@ -65,7 +65,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	can_speak = 1
-	var/mob/living/carbon/brain/brainmob = null //The curse of the sword is that it has someone trapped inside.
+	var/list/voice_mobs = list() //The curse of the sword is that it has someone trapped inside.
 
 
 /obj/item/weapon/melee/cursedblade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -75,32 +75,16 @@
 		return 1
 	return 0
 
-/obj/item/weapon/melee/cursedblade/New()
-	src.brainmob = new(src)
-	src.brainmob.add_language(LANGUAGE_GALCOM)
-	src.brainmob.loc = src
-	src.brainmob.container = src
-	src.brainmob.stat = 0
-	src.brainmob.silent = 0
-	src.brainmob.name = "cursed sword"
-	src.brainmob.real_name = "cursed sword"
-	dead_mob_list -= src.brainmob
-
-/obj/item/weapon/melee/cursedblade/examine(mob/user)
-	if(!..(user))
+/obj/item/weapon/melee/cursedblade/proc/ghost_inhabit(var/mob/candidate)
+	if(!isobserver(candidate))
 		return
-
-	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
-	msg += "<span class='warning'>"
-
-	if(src.brainmob && src.brainmob.key)
-		switch(src.brainmob.stat)
-			if(CONSCIOUS)
-				if(!src.brainmob.client)	msg += "The blade's bright glint seems dull.\n" //afk
-			if(UNCONSCIOUS)		msg += "<span class='warning'>The blade seems oddly lifeless.</span>\n"
-			if(DEAD)			msg += "<span class='deadsay'>The blade seems completely lifeless.</span>\n"
-	else
-		msg += "<span class='deadsay'>The blade seems completely lifeless, its bright glow now dull.</span>\n"
-	msg += "</span><span class='info'>*---------*</span>"
-	to_chat(usr,msg)
-	return
+	//Handle moving the ghost into the new shell.
+	announce_ghost_joinleave(candidate, 0, "They are occupying a cursed sword now.")
+	var/mob/living/voice/new_voice = new /mob/living/voice(src) 	//Make the voice mob the ghost is going to be.
+	new_voice.transfer_identity(candidate) 	//Now make the voice mob load from the ghost's active character in preferences.
+	new_voice.mind = candidate.mind			//Transfer the mind, if any.
+	new_voice.ckey = candidate.ckey			//Finally, bring the client over.
+	new_voice.name = "cursed sword"			//Cursed swords shouldn't be known characters.
+	new_voice.real_name = "cursed sword"
+	voice_mobs.Add(new_voice)
+	listening_objects |= src
