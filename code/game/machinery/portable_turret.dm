@@ -397,7 +397,7 @@ var/list/turret_icons
 	var/mob/living/simple_animal/S = null
 	if(istype(user, /mob/living/simple_animal))
 		S = user
-	if(damage >= 10)
+	if(damage >= 10 && S)
 		var/incoming_damage = round(damage - (damage / 5)) //Turrets are slightly armored, assumedly.
 		if(S)
 			visible_message("<span class='danger'>\The [S] [pick(S.attacktext)] \the [src]!</span>")

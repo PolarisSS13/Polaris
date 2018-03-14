@@ -8,6 +8,7 @@
 
 	ui_icons = 'icons/mob/screen1_construct.dmi'
 	has_hands = 1
+	hand_form = "stone manipulators"
 
 	response_help  = "thinks better of touching"
 	response_disarm = "flailed at"
@@ -61,6 +62,8 @@
 	can_be_antagged = TRUE
 
 	taser_kill = 0 // no
+
+	shock_resistance = 0.9 //Electricity isn't very effective on stone, especially that from hell.
 
 	armor = list(
 				"melee" = 10,
