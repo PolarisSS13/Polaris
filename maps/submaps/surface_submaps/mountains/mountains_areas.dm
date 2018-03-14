@@ -80,3 +80,9 @@
 
 /area/submap/cave/swordcave
 	name = "Cursed Sword Cave"
+
+/area/submap/cave/SupplyDrop1
+	name = "Supply Drop 1"
+
+/area/submap/cave/BlastMine1
+	name = "Blast Mine 1"
