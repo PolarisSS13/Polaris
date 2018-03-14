@@ -80,13 +80,13 @@
 					SSxenoarch.digsite_spawning_turfs.Remove(T)
 
 		if(nearestTargetDist >= 0)
-			user << "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"
+			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
 		else if(nearestSimpleTargetDist >= 0)
-			user << "Small anomaly detected in a radius of [nearestSimpleTargetDist]m."
+			to_chat(user, "Small anomaly detected in a radius of [nearestSimpleTargetDist]m.")
 		else
-			user << "Background radiation levels detected."
+			to_chat(user, "Background radiation levels detected.")
 	else
-		user << "Scanning array is recharging."
+		to_chat(user, "Scanning array is recharging.")
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
@@ -133,7 +133,7 @@
 
 			positive_locations.Add(D)
 
-			user << "<span class='notice'>\icon[src] [src] pings.</span>"
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -151,7 +151,7 @@
 
 			positive_locations.Add(D)
 
-			user << "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>"
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
@@ -321,159 +321,30 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 5000)
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
-	//Multitool specific
-	var/scanning = 1 //Lets start on scanning mode.
+	var/scanning = 1
 	var/measuring = 0
+	var/obj/item/device/ano_scanner/anomaly_scanner = null
+	var/obj/item/device/depth_scanner/depth_scanner = null
 
-	//Counter Specific
-	var/last_scan_time = 0
-	var/scan_delay = 25
-
-	//Depth Specific
-	var/list/positive_locations = list()
-	var/datum/depth_scan/current
+/obj/item/device/xenoarch_multi_tool/New()
+	anomaly_scanner = new/obj/item/device/ano_scanner(src)
+	depth_scanner = new/obj/item/device/depth_scanner(src)
 
 /obj/item/device/xenoarch_multi_tool/attack_self(var/mob/living/user)
-	var/choice
-	if(!scanning) //Are they not in the view records mode?
-		choice = input(user, "What do you wish to do?") as null|anything in list("Scan/View Records", "Measure", "Detect")
+	depth_scanner.interact(user)
 
-	if(choice == "Scan/View Records" || scanning)
-		if(!scanning)
-			to_chat(usr,"You switch the multitool to scanning mode. Use again to view scan records.")
-			scanning = 1
-			measuring = 0 //Just to make sure!
-			return
-		else
-			var/dat = "<b>Coordinates with positive matches</b><br>"
-			dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
-			if(current)
-				dat += "Time: [current.time]<br>"
-				dat += "Coords: [current.coords]<br>"
-				dat += "Anomaly depth: [current.depth] cm<br>"
-				dat += "Anomaly size: [current.clearance] cm<br>"
-				dat += "Dissonance spread: [current.dissonance_spread]<br>"
-				var/index = responsive_carriers.Find(current.material)
-				if(index > 0 && index <= finds_as_strings.len)
-					dat += "Anomaly material: [finds_as_strings[index]]<br>"
-				else
-					dat += "Anomaly material: Unknown<br>"
-				dat += "<A href='?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"
-			else
-				dat += "Select an entry from the list<br>"
-				dat += "<br><br><br><br>"
-			dat += "<hr>"
-			if(positive_locations.len)
-				for(var/index = 1 to positive_locations.len)
-					var/datum/depth_scan/D = positive_locations[index]
-					dat += "<A href='?src=\ref[src];select=[index]'>[D.time], coords: [D.coords]</a><br>"
-			else
-				dat += "No entries recorded."
-			dat += "<hr>"
-			dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
-			dat += "<A href='?src=\ref[src];change_mode=1'>Change Multitool Mode</a><br>"
-			dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-			user << browse(dat,"window=xenoarch_multi_tool")
+/obj/item/device/xenoarch_multi_tool/verb/swap_settings(var/mob/living/user)
+	set name = "Swap Functionality"
+	set desc = "Swap between the scanning and measuring functionality.."
+	scanning = !scanning
+	measuring = !measuring
+	if(scanning)
+		to_chat(user, "The device will now scan for artifacts.")
+	else
+		to_chat(user, "The device will now measure depth dug.")
 
-	else if(choice == "Measure")
-		measuring = 1
-		to_chat(usr,"You switch the multitool to measure mode.")
-		scanning = 0
+/obj/item/device/xenoarch_multi_tool/verb/scan_for_anomalies(var/mob/living/user)
+	set name = "Scan for Anomalies"
+	set desc = "Scan for artifacts and anomalies within your vicinity."
+	anomaly_scanner.interact(user)
 
-	else if(choice == "Detect")
-		if(world.time - last_scan_time >= scan_delay)
-			last_scan_time = world.time
-			var/nearestTargetDist = -1
-			var/nearestTargetId
-			var/nearestSimpleTargetDist = -1
-			var/turf/cur_turf = get_turf(src)
-			if(SSxenoarch) //Sanity check due to runtimes ~Z
-				for(var/A in SSxenoarch.artifact_spawning_turfs)
-					var/turf/simulated/mineral/T = A
-					if(T.density && T.artifact_find)
-						if(T.z == cur_turf.z)
-							var/cur_dist = get_dist(cur_turf, T) * 2
-							if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
-								nearestTargetDist = cur_dist + rand() * 2 - 1
-								nearestTargetId = T.artifact_find.artifact_id
-					else
-						SSxenoarch.artifact_spawning_turfs.Remove(T)
-				for(var/A in SSxenoarch.digsite_spawning_turfs)
-					var/turf/simulated/mineral/T = A
-					if(T.density && T.finds && T.finds.len)
-						if(T.z == cur_turf.z)
-							var/cur_dist = get_dist(cur_turf, T) * 2
-							if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
-								nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
-					else
-						SSxenoarch.digsite_spawning_turfs.Remove(T)
-			if(nearestTargetDist >= 0)
-				to_chat(usr,"Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
-			else if(nearestSimpleTargetDist >= 0)
-				to_chat(usr,"Small anomaly detected in a radius of [nearestSimpleTargetDist]m.")
-			else
-				to_chat(usr,"Background radiation levels detected.")
-		else
-			to_chat(usr,"Scanning array is recharging.")
-
-/obj/item/device/xenoarch_multi_tool/Topic(href, href_list)
-	..()
-	usr.set_machine(src)
-	if(href_list["select"])
-		var/index = text2num(href_list["select"])
-		if(index && index <= positive_locations.len)
-			current = positive_locations[index]
-	else if(href_list["clear"])
-		var/index = text2num(href_list["clear"])
-		if(index)
-			if(index <= positive_locations.len)
-				var/datum/depth_scan/D = positive_locations[index]
-				positive_locations.Remove(D)
-				qdel(D)
-		else
-			//GC will hopefully pick them up before too long
-			positive_locations = list()
-			qdel(current)
-	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=xenoarch_multi_tool")
-	else if(href_list["change_mode"])
-		usr.unset_machine()
-		scanning = 0
-		measuring = 1
-		to_chat(usr,"You swap the multitool's functionality to 'Measure' mode.")
-		usr << browse(null, "window=xenoarch_multi_tool")
-	updateSelfDialog()
-/obj/item/device/xenoarch_multi_tool/proc/scan_atom(var/mob/user, var/atom/A)
-	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")
-	if(istype(A, /turf/simulated/mineral))
-		var/turf/simulated/mineral/M = A
-		if((M.finds && M.finds.len) || M.artifact_find)
-			//create a new scanlog entry
-			var/datum/depth_scan/D = new()
-			D.coords = "[M.x]:[M.y]:[M.z]"
-			D.time = stationtime2text()
-			D.record_index = positive_locations.len + 1
-			D.material = M.mineral ? M.mineral.display_name : "Rock"
-			//find the first artifact and store it
-			if(M.finds.len)
-				var/datum/find/F = M.finds[1]
-				D.depth = "[F.excavation_required - F.clearance_range] - [F.excavation_required]"
-				D.clearance = F.clearance_range
-				D.material = get_responsive_reagent(F.find_type)
-			positive_locations.Add(D)
-			to_chat(usr,"<span class='notice'>\icon[src] [src] pings.</span>")
-	else if(istype(A, /obj/structure/boulder))
-		var/obj/structure/boulder/B = A
-		if(B.artifact_find)
-			//create a new scanlog entry
-			var/datum/depth_scan/D = new()
-			D.coords = "[B.x]:[B.y]:[B.z]"
-			D.time = stationtime2text()
-			D.record_index = positive_locations.len + 1
-			//these values are arbitrary
-			D.depth = rand(150, 200)
-			D.clearance = rand(10, 50)
-			D.dissonance_spread = rand(750, 2500) / 100
-			positive_locations.Add(D)
-			to_chat(usr,"<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
