@@ -341,3 +341,8 @@
 		return TRUE
 	return FALSE
 
+
+// Returns the object that is supposed to be used in attack messages, location checks, etc.
+// Override in children for special behavior.
+/obj/item/device/electronic_assembly/proc/get_object()
+	return src
