@@ -316,9 +316,9 @@
 		if(!M.unEquip(A))
 			return
 
-	var/x_abs = max(0,min(T.x + target_x_rel,world.maxx))
-	var/y_abs = max(0,min(T.y + target_y_rel,world.maxy))
-	var/range = round(max(0,min(sqrt(target_x_rel*target_x_rel+target_y_rel*target_y_rel),8)),1)
+	var/x_abs = Clamp(T.x + target_x_rel,0,world.maxx)
+	var/y_abs = Clamp(T.y + target_y_rel,0,world.maxy)
+	var/range = round(Clamp(sqrt(target_x_rel*target_x_rel+target_y_rel*target_y_rel),0,8),1)
 
 	var/atom/L = loc
 	var/newmove
