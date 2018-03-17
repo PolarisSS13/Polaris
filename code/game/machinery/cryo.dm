@@ -40,8 +40,8 @@
 	fluid = image(icon, "tube_filler")
 	fluid.pixel_y = 18
 	fluid.alpha = 200
-	tank.plane = MOB_PLANE
-	tank.layer = MOB_LAYER+0.1 //Below glass, above mob
+	fluid.plane = MOB_PLANE
+	fluid.layer = MOB_LAYER+0.1 //Below glass, above mob
 	add_overlay(tank)
 	update_icon()
 
@@ -283,7 +283,7 @@
 	occupant.loc = get_step(src.loc, SOUTH)	//this doesn't account for walls or anything, but i don't forsee that being a problem.
 	if(occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
-	unbuckle_mob(occupant)
+	unbuckle_mob(occupant, force = TRUE)
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(1)
@@ -313,7 +313,7 @@
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
 		M << "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>"
 	occupant = M
-	buckle_mob(occupant)
+	buckle_mob(occupant, forced = TRUE, check_loc = FALSE)
 	vis_contents |= occupant
 	occupant.pixel_y += 19
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
