@@ -517,7 +517,7 @@ proc/is_blind(A)
 		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(species.name != "Human")
+		if(species.name != SPECIES_HUMAN)
 			threatcount += 2
 
 	if(check_records || check_arrest)
@@ -629,6 +629,13 @@ var/global/image/backplane
 
 	return TRUE
 
+/mob/proc/get_sound_env(var/pressure_factor)
+	if (pressure_factor < 0.5)
+		return SPACE
+	else
+		var/area/A = get_area(src)
+		return A.sound_env
+
 /mob/proc/position_hud_item(var/obj/item/item, var/slot)
 	if(!istype(hud_used) || !slot || !LAZYLEN(hud_used.slot_info))
 		return
@@ -642,7 +649,7 @@ var/global/image/backplane
 	if(!hud_used.inventory_shown && slot > slot_r_store)
 		item.screen_loc = null
 		return
-		
+
 	var/screen_place = hud_used.slot_info["[slot]"]
 	if(!screen_place)
 		item.screen_loc = null
