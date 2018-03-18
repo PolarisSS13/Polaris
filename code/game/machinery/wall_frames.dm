@@ -81,15 +81,15 @@
 	var/turf/loc = get_turf(user)
 	var/area/A = loc.loc
 	if(!istype(loc, /turf/simulated/floor))
-		user << "<span class='danger'>\The frame cannot be placed on this spot.</span>"
+		to_chat(user, "<span class='danger'>\The frame cannot be placed on this spot.</span>")
 		return
 
 	if(A.requires_power == 0 || A.name == "Space")
-		user << "<span class='danger'>\The [src] Alarm cannot be placed in this area.</span>"
+		to_chat(user, "<span class='danger'>\The [src] Alarm cannot be placed in this area.</span>")
 		return
 
 	if(gotwallitem(loc, ndir))
-		user << "<span class='danger'>There's already an item on this wall!</span>"
+		to_chat(user, "<span class='danger'>There's already an item on this wall!</span>")
 		return
 
 	var/obj/machinery/M = new build_machine_type(loc, ndir, 1, frame_type)
