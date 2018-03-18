@@ -274,7 +274,7 @@
 		//Now, deal with gloves.
 		if (H.gloves && H.gloves != src)
 			if(fingerprintslast != H.key)
-				fingerprintshidden += text("\[[]\] Real name: [], Key: [] (Wearing gloves).",time_stamp(), H.real_name, H.key)
+				fingerprintshidden += text("\[[]\]Real name: [], Key: [] (Wearing gloves).",time_stamp(), H.real_name, H.key)
 				fingerprintslast = H.key
 			H.gloves.add_fingerprint(M)
 
