@@ -231,7 +231,7 @@
 			return 0
 		if (H.gloves)
 			if(src.fingerprintslast != H.key)
-				src.fingerprintshidden += text("\[[time_stamp()]\] (Wearing gloves). Real name: [], Key: []",H.real_name, H.key)
+				src.fingerprintshidden += text("\[[time_stamp()]\] Real name: [], Key: [] (Wearing gloves). ",H.real_name, H.key)
 				src.fingerprintslast = H.key
 			return 0
 		if (!( src.fingerprints ))
@@ -260,7 +260,7 @@
 		//He has no prints!
 		if (mFingerprints in M.mutations)
 			if(fingerprintslast != M.key)
-				fingerprintshidden += "(Has no fingerprints) Real name: [M.real_name], Key: [M.key]"
+				fingerprintshidden += "Real name: [M.real_name], Key: [M.key] (Has no fingerprints)"
 				fingerprintslast = M.key
 			return 0		//Now, lets get to the dirty work.
 		//First, make sure their DNA makes sense.
@@ -274,7 +274,7 @@
 		//Now, deal with gloves.
 		if (H.gloves && H.gloves != src)
 			if(fingerprintslast != H.key)
-				fingerprintshidden += text("\[[]\](Wearing gloves). Real name: [], Key: []",time_stamp(), H.real_name, H.key)
+				fingerprintshidden += text("\[[]\]Real name: [], Key: [] (Wearing gloves).",time_stamp(), H.real_name, H.key)
 				fingerprintslast = H.key
 			H.gloves.add_fingerprint(M)
 
