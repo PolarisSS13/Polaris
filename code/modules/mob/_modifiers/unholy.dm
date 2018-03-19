@@ -139,10 +139,8 @@
 							affected.wounds -= W
 							affected.update_damages()
 
-				if(iscultist(H))
-					H.restore_blood()
-				else
-					H.apply_effect(10, AGONY)
-					if(prob(5))
-						to_chat(H, "<span class='danger'>It feels as though your body is being torn apart!</span>")
+				H.restore_blood()
+				H.apply_effect(15, AGONY)
+				if(prob(10))
+					to_chat(H, "<span class='danger'>It feels as though your body is being torn apart!</span>")
 			L.updatehealth()

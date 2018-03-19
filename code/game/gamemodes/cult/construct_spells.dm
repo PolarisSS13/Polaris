@@ -152,14 +152,9 @@ proc/findNullRod(var/atom/target)
 	invocation_type = SpI_NONE
 	range = 0
 
-	hud_state = "const_door"
+	summon_type = list(/obj/structure/simple_door/cult)
 
-/spell/aoe_turf/conjure/door/cast(list/targets)
-	..()
-	var/turf/spawn_place = pick(targets)
-	if(spawn_place)
-		new /obj/structure/simple_door/cult(spawn_place)
-	return
+	hud_state = "const_door"
 
 /spell/aoe_turf/conjure/grille
 	name = "Arcane Grille"
@@ -171,14 +166,9 @@ proc/findNullRod(var/atom/target)
 	invocation_type = SpI_NONE
 	range = 0
 
-	hud_state = "const_grille"
+	summon_type = list(/obj/structure/grille/cult)
 
-/spell/aoe_turf/conjure/grille/cast(list/targets)
-	..()
-	var/turf/spawn_place = pick(targets)
-	if(spawn_place)
-		new /obj/structure/grille/cult(spawn_place)
-	return
+	hud_state = "const_grille"
 
 /spell/aoe_turf/conjure/forcewall/lesser
 	name = "Shield"
