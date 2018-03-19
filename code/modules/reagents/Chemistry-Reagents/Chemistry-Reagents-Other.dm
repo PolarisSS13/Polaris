@@ -58,6 +58,11 @@
 	color = "#888888"
 	overdose = 5
 
+/datum/reagent/marker_ink/black
+	name = "Black marker ink"
+	id = "marker_ink_black"
+	color = "#000000"
+
 /datum/reagent/marker_ink/red
 	name = "Red marker ink"
 	id = "marker_ink_red"

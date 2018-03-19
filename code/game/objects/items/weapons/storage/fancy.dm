@@ -125,6 +125,7 @@
 		/obj/item/weapon/pen/crayon/marker
 	)
 	starts_with = list(
+		/obj/item/weapon/pen/crayon/marker/black,
 		/obj/item/weapon/pen/crayon/marker/red,
 		/obj/item/weapon/pen/crayon/marker/orange,
 		/obj/item/weapon/pen/crayon/marker/yellow,
@@ -141,7 +142,7 @@
 	var/mutable_appearance/ma = new(src)
 	ma.overlays = list()
 	for(var/obj/item/weapon/pen/crayon/marker/marker in contents)
-		ma.overlays += image("m"+'icons/obj/crayons.dmi',marker.colourName)
+		ma.overlays += image('icons/obj/crayons.dmi',"m"+marker.colourName)
 	appearance = ma
 
 /obj/item/weapon/storage/fancy/markers/attackby(obj/item/W as obj, mob/user as mob)

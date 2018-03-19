@@ -104,6 +104,12 @@
 	else
 		..()
 
+/obj/item/weapon/pen/crayon/marker/black
+	icon_state = "markerblack"
+	colour = "#2D2D2D"
+	shadeColour = "#000000"
+	colourName = "black"
+
 /obj/item/weapon/pen/crayon/marker/red
 	icon_state = "markerred"
 	colour = "#DA0000"
@@ -173,7 +179,7 @@
 
 /obj/item/weapon/pen/crayon/marker/attack(mob/M as mob, mob/user as mob)
 	if(M == user)
-		to_chat(usr,"You take a bite of the crayon and swallow it.")
+		to_chat(usr,"You take a bite of the marker and swallow it.")
 		user.nutrition += 1
 		user.reagents.add_reagent("marker_ink",6)
 		if(uses)
