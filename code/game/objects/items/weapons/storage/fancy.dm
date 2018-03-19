@@ -151,7 +151,7 @@
 				to_chat(usr,"This marker is too depressing to be contained in this box.")
 				return
 			if("rainbow")
-				to_chat(usr,"This crayon is too childish to be contained in this box.")
+				to_chat(usr,"This marker is too childish to be contained in this box.")
 				return
 	..()
 

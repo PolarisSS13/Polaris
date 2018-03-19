@@ -203,3 +203,11 @@
 	New()
 		name = "[colourName] crayon"
 		..()
+
+/obj/item/weapon/pen/crayon/marker
+	name = "marker"
+	desc = "A permanent marker. Very professional. Hopefully non-toxic."
+
+	New()
+		name = "[colourName] marker"
+		..()
