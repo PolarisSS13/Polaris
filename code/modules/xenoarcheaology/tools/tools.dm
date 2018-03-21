@@ -321,8 +321,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 5000)
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
-	var/scanning = 1
-	var/measuring = 0
+	var/mode = 1 //Start off scanning. 1 = scanning, 0 = measuring
 	var/obj/item/device/ano_scanner/anomaly_scanner = null
 	var/obj/item/device/depth_scanner/depth_scanner = null
 
@@ -336,9 +335,8 @@
 /obj/item/device/xenoarch_multi_tool/verb/swap_settings(var/mob/living/user)
 	set name = "Swap Functionality"
 	set desc = "Swap between the scanning and measuring functionality.."
-	scanning = !scanning
-	measuring = !measuring
-	if(scanning)
+	mode = !mode
+	if(mode)
 		to_chat(user, "The device will now scan for artifacts.")
 	else
 		to_chat(user, "The device will now measure depth dug.")

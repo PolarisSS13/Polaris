@@ -31,10 +31,10 @@
 
 	if(istype(I, /obj/item/device/xenoarch_multi_tool))
 		var/obj/item/device/xenoarch_multi_tool/C = I
-		if(C.scanning)
+		if(C.mode) //Mode means scanning.
 			C.depth_scanner.scan_atom(user, src)
 			return
-		else if(C.measuring)
+		else
 			user.visible_message("<span class='notice'>\The [user] extends \the [C] over \the [src], a flurry of red beams scanning \the [src]'s surface!</span>", "<span class='notice'>You extend \the [C] over \the [src], a flurry of red beams scanning \the [src]'s surface!</span>")
 			if(do_after(user, 15))
 				to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [2 * src.excavation_level]cm.</span>")
