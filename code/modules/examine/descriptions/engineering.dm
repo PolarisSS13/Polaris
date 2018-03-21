@@ -62,6 +62,8 @@
 		results += "[desc_panel_image("screwdriver")]to close the wire panel."
 		results += "[desc_panel_image("wirecutters")]to cut an internal wire while hacking."
 		results += "[desc_panel_image("multitool")]to pulse an internal wire while hacking."
+		if(emergency_override)
+			results += "[desc_panel_image("wrench")]to crank the emergency bolt override."
 	else
 		results += "[desc_panel_image("screwdriver")]to open the wire panel, enabling the ability to hack."
 
