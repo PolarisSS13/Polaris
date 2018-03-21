@@ -82,7 +82,7 @@
 			majormutate()
 
 	//Space antibiotics have a good chance to stop disease completely
-	if(owner.chem_effects[CE_ANTIBIOTIC])
+	if(mob.chem_effects[CE_ANTIBIOTIC])
 		if(stage == 1 && prob(70-resistance))
 			src.cure(mob)
 		else
