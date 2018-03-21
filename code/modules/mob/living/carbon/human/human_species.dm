@@ -9,6 +9,7 @@
 	living_mob_list -= src
 	dead_mob_list -= src
 	delete_inventory()
+	update_icons_body()
 
 /mob/living/carbon/human/skrell/New(var/new_loc)
 	h_style = "Skrell Short Tentacles"
