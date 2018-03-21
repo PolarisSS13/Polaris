@@ -1554,7 +1554,7 @@
 		var/turf/T = get_turf(src)
 		var/obj/item/clothing/accessory/permit/drone/permit = new(T)
 		permit.set_name(real_name)
-		equip_to_slot_or_del(permit, slot_in_backpack)
+		equip_to_appropriate_slot(permit) // If for some reason it can't find room, it'll still be on the floor.
 
 /mob/living/carbon/human/proc/update_icon_special() //For things such as teshari hiding and whatnot.
 	if(status_flags & HIDING) // Hiding? Carry on.
