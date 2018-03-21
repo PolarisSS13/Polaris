@@ -490,7 +490,7 @@ var/list/mining_overlay_cache = list()
 		if(prob(50))
 			pain = 1
 		for(var/mob/living/M in range(src, 200))
-			to_chat(usr, "<span class='danger'>[pick("A high-pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</span>")
+			to_chat(M, "<span class='danger'>[pick("A high-pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</span>")
 			if(pain)
 				flick("pain",M.pain)
 				if(prob(50))
