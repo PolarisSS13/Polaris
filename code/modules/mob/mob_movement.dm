@@ -11,8 +11,7 @@
 	return
 
 /mob/proc/setMoveCooldown(var/timeout)
-	if(client)
-		client.move_delay = max(world.time + timeout, client.move_delay)
+	move_delay = max(world.time + timeout, move_delay)
 
 /client/North()
 	..()
@@ -199,7 +198,7 @@
 
 	if(moving)	return 0
 
-	if(world.time < move_delay)	return
+	if(world.time < mob.move_delay)	return
 
 	if(locate(/obj/effect/stop/, mob.loc))
 		for(var/obj/effect/stop/S in mob.loc)
@@ -271,27 +270,27 @@
 			src << "<font color='blue'>You're pinned to a wall by [mob.pinned[1]]!</font>"
 			return 0
 
-		move_delay = world.time//set move delay
+		mob.move_delay = world.time//set move delay
 
 		switch(mob.m_intent)
 			if("run")
 				if(mob.drowsyness > 0)
-					move_delay += 6
-				move_delay += config.run_speed
+					mob.move_delay += 6
+				mob.move_delay += config.run_speed
 			if("walk")
-				move_delay += config.walk_speed
-		move_delay += mob.movement_delay()
+				mob.move_delay += config.walk_speed
+		mob.move_delay += mob.movement_delay()
 
 		var/tickcomp = 0 //moved this out here so we can use it for vehicles
 		if(config.Tickcomp)
 			// move_delay -= 1.3 //~added to the tickcomp calculation below
 			tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
-			move_delay = move_delay + tickcomp
+			mob.move_delay = mob.move_delay + tickcomp
 
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time + tickcomp
+			mob.move_delay = world.time + tickcomp
 			//drunk driving
 			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
 				direct = turn(direct, pick(90, -90))
@@ -320,14 +319,14 @@
 							if(prob(50))	direct = turn(direct, pick(90, -90))
 						if("walk")
 							if(prob(25))	direct = turn(direct, pick(90, -90))
-				move_delay += 2
+				mob.move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
 		if(locate(/obj/item/weapon/grab, mob))
-			move_delay = max(move_delay, world.time + 7)
+			mob.move_delay = max(mob.move_delay, world.time + 7)
 			var/list/L = mob.ret_grab()
 			if(istype(L, /list))
 				if(L.len == 2)

@@ -21,6 +21,7 @@
 	var/list/atom/hallucinations = list() //A list of hallucinated people that try to attack the mob. See /obj/effect/fake_attacker in hallucinations.dm
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
+	var/base_attack_cooldown = DEFAULT_ATTACK_COOLDOWN
 
 	var/t_phoron = null
 	var/t_oxygen = null

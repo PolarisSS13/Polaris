@@ -1,147 +1,108 @@
 /datum/ai_holder
-	var/use_astar = FALSE				// Do we use the more expensive A* implementation or stick with BYOND's default step_to()?
-	var/using_astar = FALSE				// Are we currently using an A* path?
-	var/list/path = list()				// A list of tiles that A* gave us as a solution to reach the target.
-	var/list/obstacles = list()			// Things A* will try to avoid.
-	var/astar_adjacent_proc = /turf/proc/CardinalTurfsWithAccess // Proc to use when A* pathfinding.  Default makes them bound to cardinals.
-	var/failed_steps = 0				// If move_once() fails to move the mob onto the correct tile, this increases. When it reaches 3, the path is recalc'd since they're probably stuck.
+	// General.
+	var/turf/destination = null			// The targeted tile the mob wants to walk to.
+	var/min_distance_to_destination = 1	// Holds how close the mob should go to destination until they're done.
 
+	// Home.
 	var/turf/home_turf = null			// The mob's 'home' turf. It will try to stay near it if told to do so.
-	var/return_home = FALSE				// If true, makes the mob go to its 'home' if it strays too far.
+	var/returns_home = FALSE			// If true, makes the mob go to its 'home' if it strays too far.
+	var/max_home_distance = 3			// How far the mob can go away from its home before being told to go_home().
 
-/**************
-* Strategical *
-**************/
+	// Wandering.
+	var/wander = FALSE					// If true, the mob will randomly move in the four cardinal directions when idle.
+	var/wander_delay = 0				// How many ticks until the mob can move a tile in handle_wander_movement().
+	var/base_wander_delay = 2			// What the above var gets set to when it wanders. Note that a tick happens every half a second.
+	var/wander_when_pulled = FALSE		// If the mob will refrain from wandering if someone is pulling it.
 
-//Giving up on moving
-/datum/ai_holder/proc/give_up_movement()
-//	ai_log("GiveUpMoving()",1)
-	forget_path()
-//	stop_automated_movement = 0
 
-//Forget the path entirely
-/datum/ai_holder/proc/forget_path()
-//	ai_log("ForgetPath()",2)
-	if(path_display)
-		for(var/turf/T in path)
-			T.overlays -= path_overlay
-	using_astar = FALSE
-//	walk_list.Cut()
-	path.Cut()
 
-/datum/ai_holder/proc/calculate_path(atom/A, get_to = 1)
-	if(!A)
+/datum/ai_holder/proc/walk_to_destination()
+	ai_log("walk_to_destination() : Entering.",AI_LOG_DEBUG)
+	if(!destination)
+		ai_log("walk_to_destination() : No destination.", AI_LOG_WARNING)
+		forget_path()
+		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
+		ai_log("walk_to_destination() : Exiting.", AI_LOG_DEBUG)
 		return
 
-	if(!use_astar) // If we don't use A* then this is pointless.
-		return
-
-	get_path(get_turf(A), get_to)
-
-//A* now, try to a path to a target
-/datum/ai_holder/proc/get_path(var/turf/target,var/get_to = 1, var/max_distance = world.view*6)
-//	ai_log("GetPath([target],[get_to],[max_distance])",2)
-	forget_path()
-	var/list/new_path = AStar(get_turf(holder.loc), target, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = get_to, max_node_depth = max_distance, id = holder.IGetID(), exclude = obstacles)
-
-	if(new_path && new_path.len)
-		path = new_path
-		if(path_display)
-			for(var/turf/T in path)
-				T.overlays |= path_overlay
-	else
-		return 0
-
-	return path.len
-
-/*
-/datum/ai_holder/proc/walk_to_target()
-	//If we were chasing someone and we can't anymore, give up.
-	if(!target_mob)
-	//	ai_log("MoveToTarget() Losing target at top",2)
-		lose_target()
-		return
-
-	//We recompute our path every time we're called if we can still see them
-	if(target in list_targets(vision_range))
-
-		if(using_astar)
-			forget_path()
-
-		// Find out where we're going.
-		var/get_to = 1 // TODO
-		var/distance = get_dist(holder, target)
-
-		//We're here!
-		if(distance <= get_to)
-		//	ai_log("MoveToTarget() [src] attack range",2)
-			set_stance(STANCE_ATTACKING)
-			return
-
-		//We're just setting out, making a new path, or we can't path with A*
-		if(!path.len)
-		//	ai_log("SA: MoveToTarget() pathing to [target_mob]",2)
-
-			//GetPath failed for whatever reason, just smash into things towards them
-			if(run_at_them || !GetPath(get_turf(target_mob),get_to))
-
-				//We try the built-in way to stay close
-				walk_to(src, target_mob, get_to, move_to_delay)
-		//		ai_log("MoveToTarget() walk_to([src],[target_mob],[get_to],[move_to_delay])",3)
-
-				//Break shit in their direction! LEME SMAHSH
-				var/dir_to_mob = get_dir(src,target_mob)
-				face_atom(target_mob)
-		//		DestroySurroundings(dir_to_mob)
-		//		ai_log("MoveToTarget() DestroySurroundings([get_dir(src,target_mob)])",3)
-*/
-
-/***********
-* Tactical *
-***********/
-
-// Goes to the target, to attack them.
-// Called when in STANCE_ATTACK.
-/datum/ai_holder/proc/walk_to_target()
-	// Make sure we can still chase/attack them.
-	if(!target || !can_attack(target))
-		lose_target()
-		return
-
-	// Find out where we're going.
-	var/get_to = closest_distance()
-	var/distance = get_dist(holder, target)
+	var/get_to = min_distance_to_destination
+	var/distance = get_dist(holder, destination)
+	ai_log("walk_to_destination() : get_to is [get_to].", AI_LOG_TRACE)
 
 	// We're here!
 	if(distance <= get_to)
-	//	ai_log("MoveToTarget() [src] attack range",2)
-		forget_path()
-		set_stance(STANCE_ATTACKING)
+		give_up_movement()
+		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
+		ai_log("walk_to_destination() : Destination reached. Exiting.", AI_LOG_INFO)
 		return
 
-	// Otherwise keep walking.
-	walk_path(target, get_to)
+	ai_log("walk_to_destination() : Walking.", AI_LOG_TRACE)
+	walk_path(destination, get_to)
+	ai_log("walk_to_destination() : Exiting.",AI_LOG_DEBUG)
+
+/datum/ai_holder/proc/should_go_home()
+	return (returns_home && home_turf) && (get_dist(holder, home_turf) > max_home_distance)
+
+/datum/ai_holder/proc/go_home()
+	if(home_turf)
+		ai_log("go_home() : Telling holder to go home.", AI_LOG_INFO)
+		lose_follow() // So they don't try to path back and forth.
+		give_destination(home_turf, max_home_distance)
+	else
+		ai_log("go_home() : Told to go home without home_turf.", AI_LOG_ERROR)
+
+/datum/ai_holder/proc/give_destination(turf/new_destination, min_distance = 1, combat = FALSE)
+	ai_log("give_destination() : Entering.", AI_LOG_DEBUG)
+
+	destination = new_destination
+	min_distance_to_destination = min_distance
+
+	if(new_destination != null)
+		ai_log("give_destination() : Going to new destination.", AI_LOG_TRACE)
+		set_stance(combat ? STANCE_REPOSITION : STANCE_MOVE)
+		return TRUE
+	else
+		ai_log("give_destination() : Given null destination.", AI_LOG_ERROR)
+
+	ai_log("give_destination() : Exiting.", AI_LOG_DEBUG)
+
 
 // Walk towards whatever.
 /datum/ai_holder/proc/walk_path(atom/A, get_to = 1)
+	ai_log("walk_path() : Entered.", AI_LOG_DEBUG)
+	var/turf/pre_step_turf = get_turf(holder)
+
 	if(use_astar)
 		if(!path.len) // If we're missing a path, make a new one.
+			ai_log("walk_path() : No path. Attempting to calculate path.", AI_LOG_TRACE)
 			calculate_path(A, get_to)
 
-		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us.
+		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
+			ai_log("walk_path() : Failed to obtain path to target. Using step_to() instead.", AI_LOG_INFO)
+			step_to(holder, A)
+			if(get_turf(holder) == pre_step_turf)
+				breakthrough(A) // We failed to move, time to smash things.
 			return
 
 		if(!move_once()) // Start walking the path.
+			ai_log("walk_path() : Failed to step.", AI_LOG_TRACE)
 			++failed_steps
 			if(failed_steps > 3) // We're probably stuck.
+				ai_log("walk_path() : Too many failed_steps.", AI_LOG_INFO)
 				forget_path() // So lets try again with a new path.
 				failed_steps = 0
 
 	else
 		step_to(holder, A)
+		if(get_turf(holder) == pre_step_turf)
+			breakthrough(A) // We failed to move, time to smash things.
+
+	ai_log("walk_path() : Exited.", AI_LOG_DEBUG)
+
 
 //Take one step along a path
 /datum/ai_holder/proc/move_once()
+	ai_log("move_once() : Entered.", AI_LOG_DEBUG)
 	if(!path.len)
 		return
 
@@ -151,9 +112,29 @@
 
 	step_towards(holder, src.path[1])
 	if(holder.loc != src.path[1])
-//		ai_log("MoveOnce() step_towards returning 0",3)
+		ai_log("move_once() : Failed step. Exiting.", AI_LOG_TRACE)
 		return FALSE
 	else
 		path -= src.path[1]
-//		ai_log("MoveOnce() step_towards returning 1",3)
+		ai_log("move_once() : Successful step. Exiting.", AI_LOG_TRACE)
 		return TRUE
+
+/datum/ai_holder/proc/should_wander()
+	return wander && !leader
+
+// Wanders randomly in cardinal directions.
+/datum/ai_holder/proc/handle_wander_movement()
+	ai_log("handle_wander_movement() : Entered.", AI_LOG_DEBUG)
+	if(isturf(holder.loc) && can_act())
+		wander_delay--
+		if(wander_delay <= 0)
+			if(!wander_when_pulled && holder.pulledby)
+				ai_log("handle_wander_movement() : Being pulled and cannot wander. Exiting.", AI_LOG_DEBUG)
+				return
+
+			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
+			moving_to = pick(cardinal)
+			holder.set_dir(moving_to)
+			holder.Move(get_step(holder,moving_to))
+			wander_delay = base_wander_delay
+	ai_log("handle_wander_movement() : Exited.", AI_LOG_DEBUG)

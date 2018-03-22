@@ -29,7 +29,7 @@ Berserk is a somewhat rare modifier to obtain freely (and for good reason), howe
 - Red Slimes will berserk if they go rabid.
 - Red slime core reactions will berserk slimes that can see the user in addition to making them go rabid.
 - Red slime core reactions will berserk prometheans that can see the user.
-- Bears will berserk when losing a fight.
+- Saviks will berserk when losing a fight.
 - Changelings can evolve a 2 point ability to use a changeling-specific variant of Berserk, that replaces the text with a 'we' variant.
 Recursive Enhancement allows the changeling to instead used an improved variant that features less exhaustion time and less nutrition drain.
 - Xenoarch artifacts may have forced berserking as one of their effects. This is especially fun if an artifact that makes hostile mobs is nearby.

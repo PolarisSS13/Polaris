@@ -3,17 +3,23 @@
 // since some actions work very differently between mob types (e.g. executing an attack as a simple animal compared to a human).
 // The AI can just call holder.IAttack(target) and the mob is responsible for determining how to actually attack the target.
 
-/mob/living/proc/IAttack(atom/movable/AM)
+/mob/living/proc/IAttack(atom/A)
+	return FALSE
 
-/mob/living/simple_animal/IAttack(atom/movable/AM)
-	target_mob = AM
-	return PunchTarget(AM) // TODO: Clean up on SA side.
+/mob/living/simple_animal/IAttack(atom/A)
+	return attack_target(A)
 
-/mob/living/proc/IRangedAttack(atom/movable/AM)
+/mob/living/proc/IRangedAttack(atom/A)
+	return FALSE
 
-/mob/living/simple_animal/IRangedAttack(atom/movable/AM)
-	target_mob = AM
-	return ShootTarget(AM, src.loc, src)
+/mob/living/simple_animal/IRangedAttack(atom/A)
+	return shoot_target(A)
+
+/mob/living/proc/ISpecialAttack(atom/A)
+	return FALSE
+
+/mob/living/simple_animal/ISpecialAttack(atom/A)
+	return special_attack_target()
 
 /mob/living/proc/ISay(message)
 
