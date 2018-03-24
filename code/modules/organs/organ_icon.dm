@@ -65,23 +65,24 @@ var/global/list/limb_icon_cache = list()
 		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 		icon_cache_key += "[M][markings[M]["color"]]"
 
+
+	if(owner.should_have_organ(O_EYES))
+		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[O_EYES]
+		if(eye_icon)
+			var/icon/eyes_icon = new/icon(eye_icon_location, eye_icon)
+			if(eyes)
+				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
+			else
+				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
+			overlays |= eyes_icon
+
+	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
+		var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
+		overlays |= lip_icon
+		mob_icon.Blend(lip_icon, ICON_OVERLAY)
+
 	if(severed) //Properly applied on intact mobs at update_icons_body
-		if(owner.should_have_organ(O_EYES))
-			var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[O_EYES]
-			if(eye_icon)
-				var/icon/eyes_icon = new/icon(eye_icon_location, eye_icon)
-				if(eyes)
-					eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
-				else
-					eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
-				mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-				overlays |= eyes_icon
-
-		if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
-			var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
-			overlays |= lip_icon
-			mob_icon.Blend(lip_icon, ICON_OVERLAY)
-
 		if(owner.f_style)
 			var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
 			if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
