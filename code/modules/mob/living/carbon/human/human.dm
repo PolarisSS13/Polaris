@@ -94,6 +94,8 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 				stat("Re-Adaptations", "[mind.changeling.readapts]/[mind.changeling.max_readapts]")
+	if(species)
+		species.Stat(src)
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
@@ -876,7 +878,7 @@
 	else
 		target.show_message("<font color='blue'> You hear a voice that seems to echo around the room: [say]</font>")
 	usr.show_message("<font color='blue'> You project your mind into [target.real_name]: [say]</font>")
-	log_say("[key_name(usr)] sent a telepathic message to [key_name(target)]: [say]")
+	log_say("(TPATH to [key_name(target)]) [say]",src)
 	for(var/mob/observer/dead/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
 
@@ -1548,7 +1550,7 @@
 	return species.fire_icon_state
 
 // Called by job_controller.  Makes drones start with a permit, might be useful for other people later too.
-/mob/living/carbon/human/equip_post_job()	//Drone Permit moved to equip_survival_gear()
+/mob/living/carbon/human/equip_post_job()
 	var/braintype = get_FBP_type()
 	if(braintype == FBP_DRONE)
 		var/turf/T = get_turf(src)
@@ -1563,3 +1565,52 @@
 		else
 			layer = HIDING_LAYER
 
+/mob/living/carbon/human/proc/get_display_species()
+	//Shows species in tooltip
+	//Beepboops get special text if obviously beepboop
+	if(looksSynthetic())
+		if(gender == MALE)
+			return "Android"
+		else if(gender == FEMALE)
+			return "Gynoid"
+		else
+			return "Synthetic"
+	//Else species name
+	if(species)
+		return species.get_examine_name()
+	//Else CRITICAL FAILURE!
+	return ""
+
+/mob/living/carbon/human/get_nametag_name(mob/user)
+	return name //Could do fancy stuff here?
+
+/mob/living/carbon/human/get_nametag_desc(mob/user)
+	var/msg = ""
+	if(hasHUD(user,"security"))
+		//Try to find their name
+		var/perpname
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			if(I)
+				perpname = I.registered_name
+			else
+				perpname = name
+		else
+			perpname = name
+		//Try to find their record
+		var/criminal = "None"
+		if(perpname)
+			var/datum/data/record/G = find_general_record("name", perpname)
+			if(G)
+				var/datum/data/record/S = find_security_record("id", G.fields["id"])
+				if(S)
+					criminal = S.fields["criminal"]
+		//If it's interesting, append
+		if(criminal != "None")
+			msg += "([criminal]) "
+
+	if(hasHUD(user,"medical"))
+		msg += "(Health: [round((health/getMaxHealth())*100)]%) "
+
+	msg += get_display_species()
+	return msg
