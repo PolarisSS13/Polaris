@@ -288,9 +288,14 @@ var/global/photo_count = 0
 	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
 	if(findtext(mobs, "Its stare makes you feel uneasy"))
 		p.cursed = 1
-		visible_message("Something starts to slowly manifest from the picture!")
+		user.visible_message("<span class='userdanger'>Something starts to slowly manifest from the picture!</span>")
 		spawn(150)
-			new /mob/living/simple_animal/hostile/statue(usr.loc)
+			var/turf/T = get_turf(p)
+			var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue/(T)
+			S.banishable = 1//At least you can get rid of those bastards
+			T.visible_message("<span class='userdanger'>The photo turns into another statue! Run!</span>")
+			qdel(p)
+
 
 	printpicture(user, p)
 
@@ -336,9 +341,14 @@ var/global/photo_count = 0
 	p.scribble = scribble
 	p.cursed = cursed
 	if(p.cursed)
-		visible_message("Something starts to slowly manifest from the picture!")
+		var/turf/T = get_turf(p)
+		T.visible_message("<span class='userdanger'>Something starts to slowly manifest from the picture!</span>")
 		spawn(150)
-			new /mob/living/simple_animal/hostile/statue(usr.loc)
+			T = get_turf(p) //second time, because the photo could've moved
+			var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue/(T)
+			S.banishable = 1//At least you can get rid of those bastards
+			T.visible_message("<span class='userdanger'>The photo turns into another statue! Run!</span>")
+			qdel(p)
 
 	if(copy_id)
 		p.id = id

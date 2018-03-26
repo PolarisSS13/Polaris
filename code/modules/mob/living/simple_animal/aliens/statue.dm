@@ -1,5 +1,5 @@
 // A mob which only moves when it isn't being watched by living beings.
-//SCP - 173 hype
+//Weeping angels/SCP-173 hype
 //Horrible shitcoding and stolen code adaptations below. You have been warned.
 
 /mob/living/simple_animal/hostile/statue
@@ -10,8 +10,9 @@
 	icon_living = "human_male"
 	icon_dead = "human_male"
 	intelligence_level = SA_HUMANOID
-	var/annoyance = 0 //stop fucking staring you creep
-	var/last_response = 0
+	var/annoyance = 30 //stop staring you creep
+	var/respond = 1
+	var/banishable = 0
 	faction = "statue"
 	mob_size = MOB_HUGE
 	response_help = "touches"
@@ -24,9 +25,9 @@
 //	investigates = 1
 
 
-	harm_intent_damage = 35
-	melee_damage_lower = 30
-	melee_damage_upper = 45
+	harm_intent_damage = 50
+	melee_damage_lower = 45
+	melee_damage_upper = 65
 	attacktext = "clawed"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
@@ -49,10 +50,7 @@
 
 	see_in_dark = 13
 	view_range = 35 //So it can run at the victim when out of the view
-//	supernatural = 1
-/*	aggro_vision_range = 12
-	idle_vision_range = 12
-*/
+
 	melee_miss_chance = 0
 
 
@@ -69,7 +67,6 @@
 
 /mob/living/simple_animal/hostile/statue/New(loc, var/mob/living/creator)
 	..()
-	last_response = world.time
 	// Give spells
 	add_spell(new/spell/aoe_turf/flicker_lights)
 	add_spell(new/spell/aoe_turf/blindness)
@@ -87,6 +84,20 @@
 		return 0
 	return ..()
 
+/mob/living/simple_animal/hostile/statue/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(istype(O, /obj/item/weapon/nullrod))
+		visible_message("<span class='warning'>[user] tries to banish [src] with [O]!</span>")
+		if(do_after(user, 15, src))
+			if(banishable == 1)
+				visible_message("<span class='warning'>[src] crumbles into dust!</span>")
+				gib()
+			else
+				visible_message("<span class='warning'>[src] is too strong to be banished!</span>")
+				Paralyse(rand(8,15))
+/*
+/mob/living/simple_animal/hostile/statue/death()
+	new /obj/item/stack/material/marble(loc)	*/
+
 /mob/living/simple_animal/hostile/statue/Move(turf/NewLoc)
 	if(can_be_seen(NewLoc))
 		if(client)
@@ -97,11 +108,11 @@
 /mob/living/simple_animal/hostile/statue/Life()
 	..()
 	handleAnnoyance()
-	if ((annoyance - 2) > 0)
-		annoyance -= 2
 	if(target_mob)
-		if((annoyance + 5) < 800)
-			annoyance += 5
+		if((annoyance + 4) < 800)
+			annoyance += 4
+	else if ((annoyance - 2) > 0)
+		annoyance -= 2
 
 /mob/living/simple_animal/hostile/statue/handle_stance()
 	if(!..())
@@ -117,18 +128,18 @@
 
 
 /mob/living/simple_animal/hostile/statue/proc/handleAnnoyance()
-	if(last_response + 3 SECONDS < world.time) //so it won't blind people 24/7
-		return
-	var/turf/T = get_turf(loc)
-	if (annoyance > 60)
-		AI_blind()
-		annoyance -= 25
-		if (prob(50))
-			if(T.get_lumcount() * 10 > 1.5)
-				AI_flash()
-				annoyance -= 35
-	last_response = world.time
-	return
+	if(respond) //so it won't blind people 24/7
+		respond = 0
+		if (annoyance > 50)
+			AI_blind()
+			annoyance -= 15
+			if (prob(30))
+				var/turf/T = get_turf(loc)
+				if(T.get_lumcount() * 10 > 1.5)
+					AI_flash()
+					annoyance -= 35
+	spawn(18)
+		respond = 1
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_blind()
@@ -141,21 +152,22 @@
 				if (H.species == "Diona" || H.species == "Promethean")// can't blink and organic
 					return
 			to_chat(L, "<span class='notice'>Your eyes feel very heavy.</span>")
-			L.Blind(5)
+			L.Blind(2)
 	return
 
 /mob/living/simple_animal/hostile/statue/proc/AI_flash()
 	if (prob(60))
 		visible_message("The statue slowly points at the light.")
-	for(var/obj/machinery/light/L in range(10, src))
+	for(var/obj/machinery/light/L in range(12, src))
 		L.flicker()
 	return
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_mirrorshmash()
-	for(var/obj/structure/mirror/M in range(10, src))
+	for(var/obj/structure/mirror/M in range(4, src))
 		if ((!M.shattered )||(!M.glass))
-			visible_message("The mirror shatters!")
+			visible_message("The statue slowly points at the mirror!")
+			sleep(5)
 			M.shatter()
 	return
 
@@ -166,9 +178,34 @@
 		if(client)
 			to_chat(src, "<span class='warning'>You cannot attack, there are eyes on you!</span>")
 			return
-	else if(prob(80))
+	else
 		spawn(4)
 		..()
+
+
+
+/mob/living/simple_animal/hostile/statue/DoPunch(var/atom/A)
+	if(!Adjacent(A)) // They could've moved in the meantime.
+		return FALSE
+
+	var/damage_to_do = rand(melee_damage_lower, melee_damage_upper)
+
+	for(var/datum/modifier/M in modifiers)
+		if(!isnull(M.outgoing_melee_damage_percent))
+			damage_to_do *= M.outgoing_melee_damage_percent
+
+	// SA attacks can be blocked with shields.
+	if(ishuman(A))
+		var/mob/living/carbon/human/H = A
+		H.adjustBruteLossByPart(damage_to_do*0.9, pick(BP_HEAD, BP_TORSO))
+		playsound(src, attack_sound, 75, 1)
+
+	else if(A.attack_generic(src, damage_to_do, pick(attacktext), attack_armor_type, attack_armor_pen, attack_sharp, attack_edge) && attack_sound)
+		playsound(src, attack_sound, 75, 1)
+
+	return TRUE
+
+
 
 
 
@@ -182,7 +219,7 @@
 	// Check for darkness
 	var/turf/T = get_turf(loc)
 	if(T && destination && T.lighting_overlay)
-		if(T.get_lumcount() * 10 < 1 && destination.get_lumcount() * 10 < 1) // No one can see us in the darkness, right?
+		if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right?
 			return null
 		if(T == destination)
 			destination = null
@@ -202,12 +239,12 @@
 			if(M.occupant && M.occupant.client)
 				if(M.occupant.has_vision() && !M.occupant.isSynthetic())
 					return M.occupant
-		for(var/obj/structure/mirror/M in view(7, check)) //Weeping angels hate mirrors. Probably because they're ugly af
+		for(var/obj/structure/mirror/M in range(3, check)) //Weeping angels hate mirrors. Probably because they're ugly af
 			if ((!M.shattered )||(!M.glass))
-				annoyance += 2
-				if ((annoyance > 200) && (ai_inactive == 0))
+				annoyance += 3
+				if (prob(5) && (ai_inactive == 0))
 					AI_mirrorshmash()
-					annoyance -= 200
+					annoyance -= 50
 				return src //if it sees the mirror, it sees itself, right?
 	return null
 
@@ -239,7 +276,7 @@
 	desc = "You will trigger a large amount of lights around you to flicker."
 	spell_flags = 0
 	charge_max = 400
-	range = 14
+	range = 10
 
 /spell/aoe_turf/flicker_lights/cast(list/targets, mob/user = usr)
 	for(var/turf/T in targets)
@@ -263,7 +300,7 @@
 			continue
 		var/turf/T = get_turf(L.loc)
 		if(T && T in targets)
-			L.Blind(7)
+			L.Blind(4)
 	return
 
 
@@ -281,7 +318,7 @@
 
 
 /spell/aoe_turf/shatter/cast(list/targets, mob/user = usr)
-	for(var/obj/structure/mirror/M in range(10, src))
+	for(var/obj/structure/mirror/M in range(5, src))
 		if ((!M.shattered )||(!M.glass))
 			M.shatter()
 	return
@@ -307,9 +344,85 @@
 
 /mob/living/simple_animal/hostile/statue/ListTargets()
 	. = ..()
-
 	for(var/mob/living/V in mobs_in_xray_view(20, src))
+		if(V == creator)
+			continue
 		. += V
-
-
 	return .
+
+
+
+/obj/item/cursed_marble
+	name = "marble slab"
+	desc = "A peculiar slab of marble, radiating with dark energy."
+	icon = 'icons/obj/stacks.dmi'
+	icon_state = "sheet-marble"
+	description_info = "Summons the Statue - mysterious powerful creature, that can move only when unsurveyed by living eyes."
+	var/searching = 0
+
+/obj/item/cursed_marble/attack_self(mob/user as mob)
+	if(!searching)
+		user << "<span class='warning'>You rub the slab in hopes a wandering spirit wishes to inhabit it. [src] starts to sparkle!</span>"
+		icon_state = "sheet-snowbrick"
+		searching = 1
+		request_player()
+		spawn(60 SECONDS)
+			reset_search()
+
+
+/obj/item/cursed_marble/proc/request_player()
+	for(var/mob/observer/dead/O in player_list)
+		if(!O.MayRespawn())
+			continue
+		if(O.client)
+			if(O.client.prefs.be_special & BE_ALIEN)
+				question(O.client)
+
+/obj/item/cursed_marble/proc/question(var/client/C)
+	spawn(0)
+		if(!C)
+			return
+		var/response = alert(C, "Someone is requesting a soul for the statue. Would you like to play as one?", "Statue request", "Yes", "No", "Never for this round")
+		if(response == "Yes")
+			response = alert(C, "Are you sure you want to play as the statue?", "Statue request", "Yes", "No")
+		if(!C || 2 == searching)
+			return //handle logouts that happen whilst the alert is waiting for a response, and responses issued after a brain has been located.
+		if(response == "Yes")
+			transfer_personality(C.mob)
+		else if(response == "Never for this round")
+			C.prefs.be_special ^= BE_ALIEN
+
+/obj/item/cursed_marble/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+	icon_state = "sheet-marble"
+	if(searching == 1)
+		searching = 0
+		var/turf/T = get_turf_or_move(src.loc)
+		for (var/mob/M in viewers(T))
+			M.show_message("<span class='warning'>[src] fades. Maybe it will spark another time.</span>")
+
+/obj/item/cursed_marble/proc/transfer_personality(var/mob/candidate)
+	announce_ghost_joinleave(candidate, 0, "They are the statue now.")
+	src.searching = 2
+	var/mob/living/simple_animal/hostile/statue/S = new(get_turf(src))
+	S.client = candidate.client
+	to_chat(S, "<b>You are the statue, brought into existence on [station_name()] by [usr]! Obey all their orders.</b>")
+	S.mind.assigned_role = "The Statue"
+	visible_message("<span class='warning'>The slab suddenly takes the shape of a humanoid!</span>")
+	qdel(src)
+
+
+/obj/item/cursed_marble/verb/crush()
+	set name = "Crush the marble slab"
+	set category = "Object"
+	set src in usr
+	summonmob(usr)
+
+/obj/item/cursed_marble/proc/summonmob(mob/user as mob)
+	if(searching == 0)
+		var/choice = alert(user, "Are you sure you want to crush the marble? (this will spawn a clientless version of the statue)", "Crush it?", "Yes", "No")
+		if(choice)
+			if(choice == "Yes")
+				var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue(get_turf(user))
+				visible_message("<span class='warning'>The slab suddenly takes the shape of a humanoid!</span>")
+				S.creator = user
+				qdel(src)
