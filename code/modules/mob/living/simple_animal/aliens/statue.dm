@@ -6,6 +6,7 @@
 	name = "statue" // matches the name of the statue with the flesh-to-stone spell
 	desc = "An incredibly lifelike marble carving. Its eyes seems to follow you..." // same as an ordinary statue with the added "eye following you" description
 	icon = 'icons/obj/statue.dmi'
+	tt_desc = "angelum weepicus"
 	icon_state = "human_male"
 	icon_living = "human_male"
 	icon_dead = "human_male"
@@ -57,7 +58,6 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
 	anchored = 1
-	status_flags = GODMODE // Cannot push also
 	var/last_hit = 0
 	var/cannot_be_seen = 1
 	var/mob/living/creator = null
@@ -65,17 +65,12 @@
 
 // No movement while seen code.
 
-/mob/living/simple_animal/hostile/statue/New(loc, var/mob/living/creator)
+/mob/living/simple_animal/hostile/statue/New(loc)
 	..()
 	// Give spells
 	add_spell(new/spell/aoe_turf/flicker_lights)
 	add_spell(new/spell/aoe_turf/blindness)
 	add_spell(new/spell/aoe_turf/shatter)
-
-
-	// Set creator
-	if(creator)
-		src.creator = creator
 
 /mob/living/simple_animal/hostile/statue/DestroySurroundings()
 	if(can_be_seen(get_turf(loc)))
@@ -94,9 +89,9 @@
 			else
 				visible_message("<span class='warning'>[src] is too strong to be banished!</span>")
 				Paralyse(rand(8,15))
-/*
+
 /mob/living/simple_animal/hostile/statue/death()
-	new /obj/item/stack/material/marble(loc)	*/
+	new /obj/item/stack/material/marble(loc)
 
 /mob/living/simple_animal/hostile/statue/Move(turf/NewLoc)
 	if(can_be_seen(NewLoc))
@@ -341,14 +336,16 @@
 		return 1
 
 
+/mob/living/simple_animal/hostile/statue/ListTargets(dist = view_range)
+	var/list/L = mobs_in_xray_view(dist, src)
 
-/mob/living/simple_animal/hostile/statue/ListTargets()
-	. = ..()
-	for(var/mob/living/V in mobs_in_xray_view(20, src))
-		if(V == creator)
-			continue
-		. += V
-	return .
+	for(var/obj/mecha/M in mechas_list)
+		if ((M.z == src.z) && (get_dist(src, M) <= dist) && (isInSight(src,M)))
+			L += M
+	if(creator)
+		L -= creator
+
+	return L
 
 
 
@@ -357,7 +354,7 @@
 	desc = "A peculiar slab of marble, radiating with dark energy."
 	icon = 'icons/obj/stacks.dmi'
 	icon_state = "sheet-marble"
-	description_info = "Summons the Statue - mysterious powerful creature, that can move only when unsurveyed by living eyes."
+	description_info = "Summons the Statue - a mysterious powerful creature, that can move only when unsurveyed by living eyes."
 	var/searching = 0
 
 /obj/item/cursed_marble/attack_self(mob/user as mob)
