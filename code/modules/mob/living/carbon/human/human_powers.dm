@@ -74,7 +74,7 @@
 		src << "Not even a [src.species.name] can speak to the dead."
 		return
 
-	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
+	log_say("(COMMUNE to [key_name(M)]) [text]",src)
 
 	M << "<font color='blue'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]</font>"
 	if(istype(M,/mob/living/carbon/human))
@@ -104,7 +104,7 @@
 
 	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)
-		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
+		log_say("(PWHISPER to [key_name(M)]) [msg]", src)
 		M << "<font color='green'>You hear a strange, alien voice in your head... <i>[msg]</i></font>"
 		src << "<font color='green'>You said: \"[msg]\" to [M]</font>"
 	return
@@ -282,17 +282,17 @@
 
 /mob/living/carbon/human/proc/hide_humanoid()
 	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
+	set desc = "Allows you to hide beneath tables or certain items. Toggled on or off."
 	set category = "Abilities"
 
-	if(stat == DEAD || paralysis || weakened || stunned) // No hiding if you're stunned!
+	if(stat == DEAD || paralysis || weakened || stunned || restrained()) // No hiding if you're stunned!
 		return
 
-	if (!hiding)
-		layer = 2.45 //Just above cables with their 2.44
-		hiding = 1
-		to_chat(src, "<font color='blue'>You are now hiding.</font>")
-	else
+	if(status_flags & HIDING)
 		layer = MOB_LAYER
-		hiding = 0
 		to_chat(src, "<font color='blue'>You have stopped hiding.</font>")
+	else
+		layer = HIDING_LAYER //Just above cables with their 2.44
+		to_chat(src, "<font color='blue'>You are now hiding.</font>")
+
+	status_flags ^= HIDING
