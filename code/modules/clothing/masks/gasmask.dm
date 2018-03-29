@@ -61,6 +61,15 @@
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list("oxygen", "sleeping_agent")
 
+/obj/item/clothing/mask/gas/vanax
+	name = "Vaxan livemask"
+	desc = "A clear survival mask used by the Vaxan to filter out harmful nitrogen. Can be connected to an air supply and reconfigured to allow for safe eating."
+	icon_state = "vax_mask"
+	body_parts_covered = 0 //same hack as above
+	species_restricted = list(SPECIES_VANAX)
+	flags_inv = HIDEEARS //transparent
+	filtered_gases = list("phoron", "nitrogen", "sleeping_agent")
+
 /obj/item/clothing/mask/gas/syndicate
 	name = "tactical mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."

@@ -287,6 +287,83 @@
 /datum/species/skrell/can_breathe_water()
 	return TRUE
 
+/datum/species/vanax
+	name = SPECIES_VANAX
+	name_plural = "Vanax"
+	icobase = 'icons/mob/human_races/r_vanax.dmi'
+	deform = 'icons/mob/human_races/r_def_vanax.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
+	slowdown = -0.5 //they're wearing 1 slowdown worth of livesuit at all times anyway
+	brute_mod = 1.15
+	burn_mod =  0.85
+	toxins_mod = 1.5
+	metabolic_rate = 1.5 //hungry bugs
+	gluttonous = 1
+	taste_sensitivity = TASTE_SENSITIVE
+	num_alternate_languages = 3
+	secondary_langs = list(LANGUAGE_VANAX, LANGUAGE_UNATHI)
+	name_language = LANGUAGE_VANAX
+	species_language = LANGUAGE_VANAX
+	health_hud_intensity = 2.5
+
+	min_age = 16
+	max_age = 90
+
+	blurb = "THEY BE FUCKIN BUG MEN WHAT LIVE IN LIL SUITS. GODDAMN LOVE THEM."
+
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE + 500  // Dangerously high pressure. Placeholderish
+	warning_high_pressure = WARNING_HIGH_PRESSURE + 500 // High pressure warning. Placeholderish
+	warning_low_pressure = 300   // Low pressure warning. Placeholder
+	hazard_low_pressure = 220     // Dangerously low pressure.
+	safe_pressure = 400
+	poison_type = "nitrogen"                        // technically it's a partial pressure thing but IDK if we can emulate that
+
+	genders = list(FEMALE, NEUTER)
+
+
+	spawn_flags = SPECIES_CAN_JOIN// | SPECIES_IS_WHITELISTED
+	appearance_flags = HAS_UNDERWEAR | HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
+	base_color = "#000000"
+	blood_color = "#FFCC00" //a gross sort of orange color
+
+	reagent_tag = IS_VANAX
+
+	heat_discomfort_strings = list(
+		"Your joints itch.",
+		"You feel uncomfortably warm.",
+		"Your carapace feels like a stove."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your antenna ache."
+		)
+
+	has_organ = list(    //No appendix. placeholder
+	O_HEART =    /obj/item/organ/internal/heart,
+	O_LUNGS =    /obj/item/organ/internal/lungs,
+	O_LIVER =    /obj/item/organ/internal/liver,
+	O_KIDNEYS =  /obj/item/organ/internal/kidneys,
+	O_BRAIN =    /obj/item/organ/internal/brain,
+	O_EYES =     /obj/item/organ/internal/eyes
+	)
+
+/datum/species/vanax/equip_survival_gear(var/mob/living/carbon/human/H)
+	..()
+	if(H.wear_suit && !istype(H.wear_suit, /obj/item/clothing/suit/space/void/vanax)) //get rid of job labcoats so they don't stop us from equipping the livesuit
+		H.drop_from_inventory(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
+	if(H.wear_mask && !istype(H.wear_mask, /obj/item/clothing/mask/gas/vanax))
+		H.drop_from_inventory(H.wear_mask)
+
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vanax(H), slot_wear_mask) // mask has to come first or livesuit helmet will get in the way
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/vanax/(H), slot_wear_suit) //currently doesn't allow for loadout livesuits to start pre-equiped but like, fuck if I'm gonna let people die of overpressure bc they forgot to give the suit people a suit
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vanax(H), slot_wear_mask)
+
+
+
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"

@@ -53,3 +53,8 @@
 	shoes = /obj/item/clothing/shoes/boots/jackboots/toeless
 	uniform = /obj/item/clothing/under/vox/vox_robes
 	suit = /obj/item/clothing/suit/armor/vox_scrap
+
+/decl/hierarchy/outfit/vanax
+	name = "Vanax Suit"
+	suit = /obj/item/clothing/suit/space/void/vanax/
+	mask = /obj/item/clothing/mask/gas/vanax

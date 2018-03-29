@@ -1,4 +1,19 @@
 // Alien clothing.
+
+/datum/gear/suit/livesuit
+	display_name = "Livesuit Selection (Vanax)"
+	path = /obj/item/clothing/suit/space/void/vanax
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_VANAX
+
+/datum/gear/suit/livesuit/New()
+	..()
+	var/list/livesuits = list()
+	for(var/live_suit in (typesof(/obj/item/clothing/suit/space/void/vanax)))
+		var/obj/item/clothing/suit/space/void/vanax/livesuit_type = live_suit
+		livesuits[initial(livesuit_type.name)] = livesuit_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(livesuits))
+
 /datum/gear/suit/zhan_furs
 	display_name = "Zhan-Khazan furs (Tajaran)"
 	path = /obj/item/clothing/suit/tajaran/furs

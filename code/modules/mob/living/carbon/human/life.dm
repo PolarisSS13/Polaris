@@ -107,7 +107,6 @@
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
 // Suitdamage can modifiy this in 10% steps.
 /mob/living/carbon/human/proc/get_pressure_weakness()
-
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
 	if(wear_suit && (wear_suit.item_flags & STOPPRESSUREDAMAGE) && head && (head.item_flags & STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
@@ -128,11 +127,11 @@
 	var/pressure_difference
 
 	// First get the absolute pressure difference.
-	if(pressure < ONE_ATMOSPHERE) // We are in an underpressure.
-		pressure_difference = ONE_ATMOSPHERE - pressure
+	if(pressure < species.safe_pressure) // We are in an underpressure.
+		pressure_difference = species.safe_pressure - pressure
 
 	else //We are in an overpressure or standard atmosphere.
-		pressure_difference = pressure - ONE_ATMOSPHERE
+		pressure_difference = pressure - species.safe_pressure
 
 	if(pressure_difference < 5) // If the difference is small, don't bother calculating the fraction.
 		pressure_difference = 0
@@ -145,10 +144,10 @@
 	// The difference is always positive to avoid extra calculations.
 	// Apply the relative difference on a standard atmosphere to get the final result.
 	// The return value will be the adjusted_pressure of the human that is the basis of pressure warnings and damage.
-	if(pressure < ONE_ATMOSPHERE)
-		return ONE_ATMOSPHERE - pressure_difference
+	if(pressure < species.safe_pressure)
+		return species.safe_pressure - pressure_difference
 	else
-		return ONE_ATMOSPHERE + pressure_difference
+		return species.safe_pressure + pressure_difference
 
 /mob/living/carbon/human/handle_disabilities()
 	..()
