@@ -1570,10 +1570,10 @@
 		//Try to find their name
 		var/perpname
 		var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
+		if(I)
+			perpname = I.registered_name
+		else
+			perpname = name
 		//Try to find their record
 		var/criminal = "None"
 		if(perpname)
