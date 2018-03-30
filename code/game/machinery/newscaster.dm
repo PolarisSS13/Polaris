@@ -936,17 +936,11 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
 		if(human_user.wear_id)                                      //Newscaster scans you
-			if(istype(human_user.wear_id, /obj/item/device/pda))	//autorecognition, woo!
-				var/obj/item/device/pda/P = human_user.wear_id
-				if(P.id)
-					scanned_user = GetNameAndAssignmentFromId(P.id)
-				else
-					scanned_user = "Unknown"
-			else if(istype(human_user.wear_id, /obj/item/weapon/card/id))
-				var/obj/item/weapon/card/id/ID = human_user.wear_id
-				scanned_user = GetNameAndAssignmentFromId(ID)
+			var/obj/item/weapon/card/id/I = human_user.wear_id.GetID()
+			if(I)
+				scanned_user = GetNameAndAssignmentFromId(I)
 			else
-				scanned_user ="Unknown"
+				scanned_user = "Unknown"
 		else
 			scanned_user ="Unknown"
 	else
