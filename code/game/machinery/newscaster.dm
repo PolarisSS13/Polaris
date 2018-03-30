@@ -935,14 +935,11 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
-		if(human_user.wear_id)                                      //Newscaster scans you
-			var/obj/item/weapon/card/id/I = human_user.wear_id.GetID()
-			if(I)
-				scanned_user = GetNameAndAssignmentFromId(I)
-			else
-				scanned_user = "Unknown"
+		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
+		if(I)
+			scanned_user = GetNameAndAssignmentFromId(I)
 		else
-			scanned_user ="Unknown"
+			scanned_user = "Unknown"
 	else
 		var/mob/living/silicon/ai_user = user
 		scanned_user = "[ai_user.name] ([ai_user.job])"
