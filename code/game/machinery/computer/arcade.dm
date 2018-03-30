@@ -1008,7 +1008,7 @@
 		desc = "Learn how our ancestors got to Orion, and try not to die in the process!"
 		newgame()
 		emagged = 1
-
+		return 1
 
 /obj/item/weapon/orion_ship
 	name = "model settler ship"
