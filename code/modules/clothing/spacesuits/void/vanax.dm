@@ -5,6 +5,7 @@
 	item_state_slots = list(slot_r_hand_str = "syndicate", slot_l_hand_str = "syndicate") //placeholder
 	heat_protection = HEAD
 	body_parts_covered = HEAD|FACE|EYES
+	slowdown = 0.5
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 0) //realistically would have some armor but muhbalance.
 
 	species_restricted = list(SPECIES_VANAX) //todo: make them unretrofitable.
