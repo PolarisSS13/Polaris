@@ -91,6 +91,7 @@
 	add_language(LANGUAGE_SCHECHI, 1)
 	add_language(LANGUAGE_SIGN, 1)
 	add_language(LANGUAGE_TERMINUS, 1)
+	add_language(LANGUAGE_VANAX, 1)
 
 	// Lorefolks say it may be so.
 	if(O.client && O.client.prefs)

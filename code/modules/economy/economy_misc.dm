@@ -49,13 +49,14 @@
 
 /var/list/economic_species_modifier = list(
 										/datum/species/human							= 10,
-										/datum/species/human/vatgrown						= 10,
+										/datum/species/human/vatgrown					= 10,
 										/datum/species/skrell							= 12,
 										/datum/species/unathi							= 7,
 										/datum/species/tajaran							= 7,
 										/datum/species/teshari							= 6,
 										/datum/species/diona 							= 4,
-										/datum/species/shapeshifter/promethean			= 3
+										/datum/species/shapeshifter/promethean			= 3,
+										/datum/species/vanax							= 5
 											)
 
 //---- The following corporations are friendly with NanoTrasen and loosely enable trade and travel:

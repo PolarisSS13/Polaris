@@ -36,6 +36,9 @@
 /mob/living/carbon/human/promethean/New(var/new_loc)
 	..(new_loc, SPECIES_PROMETHEAN)
 
+/mob/living/carbon/human/vanax/New(var/new_loc)
+	..(new_loc, SPECIES_VANAX)
+
 /mob/living/carbon/human/machine/New(var/new_loc)
 	h_style = "blue IPC screen"
 	..(new_loc, "Machine")
