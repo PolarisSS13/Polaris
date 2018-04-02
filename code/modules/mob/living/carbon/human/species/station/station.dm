@@ -293,7 +293,6 @@
 	icobase = 'icons/mob/human_races/r_vanax.dmi'
 	deform = 'icons/mob/human_races/r_def_vanax.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
-	slowdown = -0.5 //they're wearing 1 slowdown worth of livesuit at all times anyway
 	brute_mod = 1.15
 	burn_mod =  0.85
 	toxins_mod = 1.5
