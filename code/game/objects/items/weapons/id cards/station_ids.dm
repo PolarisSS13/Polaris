@@ -417,10 +417,3 @@
 	icon_state = "permit"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(191,159,95)
-
-/obj/item/weapon/card/id/hacker
-	name = "Certified Hacker Identification Card"
-	desc = "An identification card; just to make sure you're legit."
-	icon_state = "syndicate"
-	primary_color = rgb(26, 26, 26)
-	secondary_color = rgb(26, 255, 26)

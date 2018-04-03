@@ -267,12 +267,6 @@
 	adhoc_fallback = TRUE
 	ks2type = /obj/item/device/encryptionkey/headset_cargo
 
-/obj/item/device/radio/headset/hacker
-	name = "ominous hacker headset"
-	desc = "A hacker's first headset! C++ Not included!"
-	icon_state = "cent_headset_alt"
-	ks2type = /obj/item/device/encryptionkey/hacker
-
 /obj/item/device/radio/headset/headset_cargo
 	name = "supply radio headset"
 	desc = "A headset used by the QM and his slaves."
