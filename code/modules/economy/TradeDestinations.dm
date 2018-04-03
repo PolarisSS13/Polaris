@@ -28,7 +28,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/nohio
 	name = "New Ohio"
-	description = "A world in the Saggitarius Heights, home to Vey-Medical's research and development facilities."
+	description = "A world in the Sagitarius Heights, home to Vey-Medical's research and development facilities."
 	distance = 1.7
 	willing_to_buy = list()
 	willing_to_sell = list()
@@ -73,7 +73,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/nisp
 	name = "Nisp"
-	description = "A near-garden world known for its hostile wildlife and its NO2 atmosphere."
+	description = "A near-garden world known for its hostile wildlife and its N2O atmosphere."
 	distance = 8.9
 	willing_to_buy = list()
 	willing_to_sell = list()
