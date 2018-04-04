@@ -7,12 +7,14 @@
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
 	level = 2
-	layer = 2.4 //under wires with their 2.44
 
 	volume = 35
 
 	dir = SOUTH
 	initialize_directions = SOUTH
+
+	construction_type = /obj/item/pipe/directional
+	pipe_state = "cap"
 
 	var/obj/machinery/atmospherics/node
 
@@ -56,10 +58,9 @@
 
 /obj/machinery/atmospherics/pipe/cap/atmos_init()
 	for(var/obj/machinery/atmospherics/target in get_step(src, dir))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node = target
-				break
+		if (can_be_node(target, 1))
+			node = target
+			break
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level == 1 && !T.is_plating()) hide(1)
@@ -77,6 +78,7 @@
 	desc = "An endcap for scrubbers pipes"
 	icon_state = "cap-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
+	piping_layer = PIPING_LAYER_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -86,6 +88,7 @@
 	desc = "An endcap for supply pipes"
 	icon_state = "cap-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
+	piping_layer = PIPING_LAYER_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
@@ -100,6 +103,7 @@
 	desc = "An endcap for scrubbers pipes"
 	icon_state = "cap-f-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
+	piping_layer = PIPING_LAYER_SCRUBBER
 	layer = 2.38
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
@@ -109,6 +113,7 @@
 	desc = "An endcap for supply pipes"
 	icon_state = "cap-f-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
+	piping_layer = PIPING_LAYER_SUPPLY
 	layer = 2.39
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
