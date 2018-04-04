@@ -79,7 +79,7 @@
 	name = "agonize"
 	desc = "Your body is wracked with pain."
 
-	on_created_text = "<span class='cult'>A red lighting quickly covers your body. The pain is horrendous.</span>"
+	on_created_text = "<span class='cult'>A red lightning quickly covers your body. The pain is horrendous.</span>"
 	on_expired_text = "<span class='notice'>The lightning fades, and so too does the ongoing pain.</span>"
 
 	stacks = MODIFIER_STACK_EXTEND

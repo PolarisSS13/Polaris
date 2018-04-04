@@ -217,19 +217,28 @@
 	var/reflectchance = 80 - round(P.damage/3)
 	if(prob(reflectchance))
 		var/damage_mod = rand(2,4)
+		var/projectile_dam_type = P.damage_type
+		var/incoming_damage = (round(P.damage / damage_mod) - (round((P.damage / damage_mod) * 0.3)))
+		var/armorcheck = run_armor_check(null, P.check_armour)
+		var/soakedcheck = get_armor_soak(null, P.check_armour)
 		if(!(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam)))
 			visible_message("<span class='danger'>The [P.name] bounces off of [src]'s shell!</span>", \
 						"<span class='userdanger'>The [P.name] bounces off of [src]'s shell!</span>")
 			new /obj/item/weapon/material/shard/shrapnel(src.loc)
-			var/incoming_brute = (round(P.damage / damage_mod) - (round((P.damage / damage_mod) * 0.3))) //Calculates incoming damage with respect to standard resistance.
-			adjustBruteLoss(incoming_brute)
+			if(!(P.damage_type == BRUTE || P.damage_type == BURN))
+				projectile_dam_type = BRUTE
+				incoming_damage = round(incoming_damage / 4) //Damage from strange sources is converted to brute for physical projectiles, though severely decreased.
+			apply_damage(incoming_damage, projectile_dam_type, null, armorcheck, soakedcheck, is_sharp(P), has_edge(P), P)
 			return -1 //Doesn't reflect non-beams or non-energy projectiles. They just smack and drop with little to no effect.
 		else
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 						"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 			damage_mod = rand(3,5)
-			var/incoming_burn = (round(P.damage / damage_mod) - (round((P.damage / damage_mod) * 0.3)))
-			adjustFireLoss(incoming_burn)
+			incoming_damage = (round(P.damage / damage_mod) - (round((P.damage / damage_mod) * 0.3)))
+			if(!(P.damage_type == BRUTE || P.damage_type == BURN))
+				projectile_dam_type = BURN
+				incoming_damage = round(incoming_damage / 4) //Damage from strange sources is converted to burn for energy-type projectiles, though severely decreased.
+			apply_damage(incoming_damage, P.damage_type, null, armorcheck, soakedcheck, is_sharp(P), has_edge(P), P)
 
 		// Find a turf near or on the original location to bounce to
 		if(P.starting)

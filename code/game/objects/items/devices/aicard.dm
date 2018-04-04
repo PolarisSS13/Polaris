@@ -102,7 +102,7 @@
 		user << "<span class='danger'>Transfer failed:</span> Existing AI found on remote device. Remove existing AI to install a new one."
 		return 0
 
-	if(!user.IsAdvancedToolUser() || istype(user, /mob/living/simple_animal))
+	if(!user.IsAdvancedToolUser() && isanimal(user))
 		var/mob/living/simple_animal/S = user
 		if(!S.IsHumanoidToolUser(src))
 			return 0

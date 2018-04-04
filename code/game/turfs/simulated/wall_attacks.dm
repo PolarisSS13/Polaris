@@ -58,7 +58,7 @@
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash against the wall!</span>")
-	if(istype(user,/mob/living/simple_animal))
+	if(isanimal(user))
 		var/mob/living/simple_animal/S = user
 		playsound(src, S.attack_sound, 75, 1)
 	user.do_attack_animation(src)
@@ -67,7 +67,7 @@
 /turf/simulated/wall/proc/success_smash(var/mob/user)
 	to_chat(user, "<span class='danger'>You smash through the wall!</span>")
 	user.do_attack_animation(src)
-	if(istype(user,/mob/living/simple_animal))
+	if(isanimal(user))
 		var/mob/living/simple_animal/S = user
 		playsound(src, S.attack_sound, 75, 1)
 	spawn(1)
