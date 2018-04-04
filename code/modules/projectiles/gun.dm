@@ -18,7 +18,7 @@
 
 		if(propname == "mode_name")
 			name = propvalue
-		else if(isnull(propvalue))
+		if(isnull(propvalue))
 			settings[propname] = gun.vars[propname] //better than initial() as it handles list vars like burst_accuracy
 		else
 			settings[propname] = propvalue
@@ -58,6 +58,7 @@
 	var/move_delay = 1
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/fire_sound_text = "gunshot"
+	var/fire_anim = null
 	var/recoil = 0		//screen shake
 	var/silenced = 0
 	var/muzzle_flash = 3
@@ -379,10 +380,13 @@
 		if(one_handed_penalty >= 20)
 			to_chat(user, "<span class='warning'>You struggle to keep \the [src] pointed at the correct position with just one hand!</span>")
 
-	if(reflex)
-		admin_attack_log(user, target, attacker_message = "fired [src] by reflex.", victim_message = "triggered a reflex shot from [src].", admin_message = "shot [target], who triggered gunfire ([src]) by reflex)")
+	var/target_for_log
+	if(ismob(target))
+		target_for_log = target
 	else
-		admin_attack_log(usr, attacker_message="Fired [src]", admin_message="fired a gun ([src]) (MODE: [src.mode_name]) [reflex ? "by reflex" : "manually"].")
+		target_for_log = "[target.name]"
+
+	add_attack_logs(user,target_for_log,"Fired gun [src.name] ([reflex ? "REFLEX" : "MANUAL"])")
 
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -454,9 +458,13 @@
 			target = targloc
 			//pointblank = 0
 
-	log_and_message_admins("Fired [src].")
+	var/target_for_log
+	if(ismob(target))
+		target_for_log = target
+	else
+		target_for_log = "[target.name]"
 
-	//admin_attack_log(usr, attacker_message="Fired [src]", admin_message="fired a gun ([src]) (MODE: [src.mode_name]) [reflex ? "by reflex" : "manually"].")
+	add_attack_logs("Unmanned",target_for_log,"Fired [src.name]")
 
 	//update timing
 	next_fire_time = world.time + fire_delay
@@ -491,6 +499,9 @@
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	if(fire_anim)
+		flick(fire_anim, src)
+
 	if(silenced)
 		if(reflex)
 			user.visible_message(

@@ -644,6 +644,10 @@
 				if(M)
 					message = "<span class='danger'>slaps [M] across the face. Ouch!</span>"
 					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+					if(ishuman(M)) //Snowflakey!
+						var/mob/living/carbon/human/H = M
+						if(istype(H.wear_mask,/obj/item/clothing/mask/smokable))
+							H.drop_from_inventory(H.wear_mask)
 				else
 					message = "<span class='danger'>slaps [T.himself]!</span>"
 					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
@@ -728,9 +732,7 @@
 			src << "<font color='blue'>Unusable emote '[act]'. Say *help for a list.</font>"
 
 	if (message)
-		log_emote("[name]/[key] : [message]")
 		custom_emote(m_type,message)
-
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

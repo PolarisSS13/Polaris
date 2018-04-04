@@ -12,6 +12,7 @@
 	var/list/adding = list()
 	var/list/other = list()
 	var/list/hotkeybuttons = list()
+	var/list/slot_info = list()
 
 	hud.adding = adding
 	hud.other = other
@@ -34,6 +35,7 @@
 			inv_box.screen_loc =  slot_data["loc"]
 			inv_box.slot_id =     slot_data["slot"]
 			inv_box.icon_state =  slot_data["state"]
+			slot_info["[inv_box.slot_id]"] = inv_box.screen_loc
 
 			if(slot_data["dir"])
 				inv_box.set_dir(slot_data["dir"])
@@ -74,7 +76,7 @@
 	ico = new(ui_style, "black")
 	ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 	ico.DrawBox(rgb(255,255,255,1),1,ico.Height()/2,ico.Width()/2,ico.Height())
-	using = new /obj/screen( src )
+	using = new /obj/screen()
 	using.name = I_HELP
 	using.icon = ico
 	using.screen_loc = ui_acti
@@ -86,7 +88,7 @@
 	ico = new(ui_style, "black")
 	ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 	ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,ico.Height()/2,ico.Width(),ico.Height())
-	using = new /obj/screen( src )
+	using = new /obj/screen()
 	using.name = I_DISARM
 	using.icon = ico
 	using.screen_loc = ui_acti
@@ -98,7 +100,7 @@
 	ico = new(ui_style, "black")
 	ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 	ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,1,ico.Width(),ico.Height()/2)
-	using = new /obj/screen( src )
+	using = new /obj/screen()
 	using.name = I_GRAB
 	using.icon = ico
 	using.screen_loc = ui_acti
@@ -110,7 +112,7 @@
 	ico = new(ui_style, "black")
 	ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
 	ico.DrawBox(rgb(255,255,255,1),1,1,ico.Width()/2,ico.Height()/2)
-	using = new /obj/screen( src )
+	using = new /obj/screen()
 	using.name = I_HURT
 	using.icon = ico
 	using.screen_loc = ui_acti
@@ -249,9 +251,9 @@
 		inv_box.slot_id = slot_r_hand
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
-
 		hud.r_hand_hud_object = inv_box
 		hud.adding += inv_box
+		slot_info["[slot_r_hand]"] = inv_box.screen_loc
 
 		inv_box = new /obj/screen/inventory/hand()
 		inv_box.hud = src
@@ -266,6 +268,7 @@
 		inv_box.alpha = ui_alpha
 		hud.l_hand_hud_object = inv_box
 		hud.adding += inv_box
+		slot_info["[slot_l_hand]"] = inv_box.screen_loc
 
 		//Swaphand titlebar
 		using = new /obj/screen/inventory()

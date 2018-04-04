@@ -425,8 +425,8 @@
 	var/icon/front
 	var/icon/side
 	if(H)
-		front = getFlatIcon(H, SOUTH, always_use_defdir = 1)
-		side = getFlatIcon(H, WEST, always_use_defdir = 1)
+		front = getFlatIcon(H, SOUTH)
+		side = getFlatIcon(H, WEST)
 	else
 		var/mob/living/carbon/human/dummy = new()
 		front = new(get_id_photo(dummy), dir = SOUTH)
@@ -446,7 +446,7 @@
 	G.fields["fingerprint"] = "Unknown"
 	G.fields["p_stat"] = "Active"
 	G.fields["m_stat"] = "Stable"
-	G.fields["species"] = "Human"
+	G.fields["species"] = SPECIES_HUMAN
 	G.fields["home_system"]	= "Unknown"
 	G.fields["citizenship"]	= "Unknown"
 	G.fields["faction"]		= "Unknown"

@@ -131,7 +131,7 @@
 		ui = nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
-			ui = new(user, user, id, "pai_manifest.tmpl", "Crew Manifest", 450, 600)
+			ui = new(user, user, id, "crew_manifest.tmpl", "Crew Manifest", 450, 600)
 			ui.set_initial_data(data)
 			ui.open()
 			ui.set_auto_update(1)
@@ -473,16 +473,18 @@
 	id = "translator"
 
 	toggle(mob/living/silicon/pai/user)
-		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages
+		// 	Sol Common, Tradeband, Terminus and Gutter are added with New() and are therefore the current default, always active languages
 		user.translator_on = !user.translator_on
 		if(user.translator_on)
 			user.add_language(LANGUAGE_UNATHI)
 			user.add_language(LANGUAGE_SIIK)
+			user.add_language(LANGUAGE_AKHANI)
 			user.add_language(LANGUAGE_SKRELLIAN)
 			user.add_language(LANGUAGE_SCHECHI)
 		else
 			user.remove_language(LANGUAGE_UNATHI)
 			user.remove_language(LANGUAGE_SIIK)
+			user.remove_language(LANGUAGE_AKHANI)
 			user.remove_language(LANGUAGE_SKRELLIAN)
 			user.remove_language(LANGUAGE_SCHECHI)
 

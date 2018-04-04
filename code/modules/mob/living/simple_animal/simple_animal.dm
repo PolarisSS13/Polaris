@@ -5,6 +5,7 @@
 
 /mob/living/simple_animal
 	name = "animal"
+	desc = ""
 	icon = 'icons/mob/animal.dmi'
 	health = 20
 	maxHealth = 20
@@ -12,6 +13,8 @@
 	mob_bump_flag = SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|HUMAN
 	mob_push_flags = MONKEY|SLIME|HUMAN
+
+	var/tt_desc = "Uncataloged Life Form" //Tooltip description
 
 	//Settings for played mobs
 	var/show_stat_health = 1		// Does the percentage health show in the stat panel for the mob
@@ -119,6 +122,10 @@
 	var/melee_miss_chance = 15		// percent chance to miss a melee attack.
 	var/melee_attack_minDelay = 5		// How long between attacks at least
 	var/melee_attack_maxDelay = 10		// How long between attacks at most
+	var/attack_armor_type = "melee"		// What armor does this check?
+	var/attack_armor_pen = 0			// How much armor pen this attack has.
+	var/attack_sharp = 0				// Is the attack sharp?
+	var/attack_edge = 0					// Does the attack have an edge?
 
 	//Special attacks
 	var/spattack_prob = 0			// Chance of the mob doing a special attack (0 for never)
@@ -636,7 +643,6 @@
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
 	else
-		O.attack(src, user, user.zone_sel.selecting)
 		ai_log("attackby() I was weapon'd by: [user]",2)
 		if(O.force)
 			react_to_attack(user)
@@ -1242,8 +1248,7 @@
 		var/mob/living/L = target_mob
 
 		if(prob(melee_miss_chance))
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [L.name] ([L.ckey])</font>")
-			L.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [src.name] ([src.ckey])</font>")
+			add_attack_logs(src,L,"Animal-attacked (miss)", admin_notify = FALSE)
 			visible_message("<span class='danger'>[src] misses [L]!</span>")
 			do_attack_animation(src)
 			return L
@@ -1272,7 +1277,7 @@
 		if(H.check_shields(damage = damage_to_do, damage_source = src, attacker = src, def_zone = null, attack_text = "the attack"))
 			return FALSE
 
-	if(A.attack_generic(src, damage_to_do, pick(attacktext)) && attack_sound)
+	if(A.attack_generic(src, damage_to_do, pick(attacktext), attack_armor_type, attack_armor_pen, attack_sharp, attack_edge) && attack_sound)
 		playsound(src, attack_sound, 75, 1)
 
 	return TRUE
@@ -1697,3 +1702,6 @@
 /mob/living/simple_animal/retaliate
 	retaliate = 1
 	destroy_surroundings = 1
+
+/mob/living/simple_animal/get_nametag_desc(mob/user)
+	return "<i>[tt_desc]</i>"

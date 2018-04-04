@@ -526,10 +526,10 @@
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
-					if(((e.status & ORGAN_BROKEN && !(e.splinted)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
+					if((e.status & ORGAN_BROKEN && (!e.splinted || (e.splinted && e.splinted in e.contents && prob(30))) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
-		return 0
+	return 0
 
 /mob/MouseDrop(mob/M as mob)
 	..()
@@ -767,16 +767,19 @@
 	if(status_flags & CANSTUN)
 		facing_dir = null
 		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/SetStunned(amount) //if you REALLY need to set stun to a set amount without the whole "can't go below current stunned"
 	if(status_flags & CANSTUN)
 		stunned = max(amount,0)
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/AdjustStunned(amount)
 	if(status_flags & CANSTUN)
 		stunned = max(stunned + amount,0)
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/Weaken(amount)
@@ -789,7 +792,7 @@
 /mob/proc/SetWeakened(amount)
 	if(status_flags & CANWEAKEN)
 		weakened = max(amount,0)
-		update_canmove()	//updates lying, canmove and icons
+		update_canmove()	//can you guess what this does yet?
 	return
 
 /mob/proc/AdjustWeakened(amount)
@@ -854,14 +857,17 @@
 /mob/proc/Resting(amount)
 	facing_dir = null
 	resting = max(max(resting,amount),0)
+	update_canmove()
 	return
 
 /mob/proc/SetResting(amount)
 	resting = max(amount,0)
+	update_canmove()
 	return
 
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
+	update_canmove()
 	return
 
 /mob/proc/AdjustLosebreath(amount)
@@ -1136,3 +1142,19 @@ mob/proc/yank_out_object()
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
 	return
+
+/mob/MouseEntered(location, control, params)
+	if(usr != src && usr.is_preference_enabled(/datum/client_preference/mob_tooltips))
+		openToolTip(user = usr, tip_src = src, params = params, title = get_nametag_name(usr), content = get_nametag_desc(usr))
+
+	..()
+
+/mob/MouseDown()
+	closeToolTip(usr) //No reason not to, really
+
+	..()
+
+/mob/MouseExited()
+	closeToolTip(usr) //No reason not to, really
+
+	..()

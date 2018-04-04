@@ -15,9 +15,12 @@
 	move_to_delay = 2
 
 	melee_damage_lower = 15
-	melee_damage_upper = 25
+	melee_damage_upper = 35
+	attack_armor_pen = 15
+	attack_sharp = 1
+	attack_edge = 1
 
-	attacktext = "mauled"
+	attacktext = list("mauled")
 	cold_damage_per_tick = 0
 
 	speak_chance = 5

@@ -1,5 +1,7 @@
 /turf
 	icon = 'icons/turf/floors.dmi'
+	layer = TURF_LAYER
+	plane = TURF_PLANE
 	level = 1
 	var/holy = 0
 
@@ -101,6 +103,12 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 	if (do_after(user, 25 + (5 * user.weakened)) && !(user.stat))
 		step_towards(O, src)
+		if(ismob(O))
+			animate(O, transform = turn(O.transform, 20), time = 2)
+			sleep(2)
+			animate(O, transform = turn(O.transform, -40), time = 4)
+			sleep(4)
+			animate(O, transform = turn(O.transform, 20), time = 2)
 
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
@@ -277,3 +285,6 @@ var/const/enterloopsanity = 100
 		if(isliving(AM))
 			var/mob/living/M = AM
 			M.turf_collision(src, speed)
+
+/turf/AllowDrop()
+	return TRUE

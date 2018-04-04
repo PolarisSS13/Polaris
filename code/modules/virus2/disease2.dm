@@ -10,7 +10,7 @@
 	var/list/datum/disease2/effectholder/effects = list()
 	var/antigen = list() // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
-	var/list/affected_species = list("Human","Unathi","Skrell","Tajara")
+	var/list/affected_species = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_TAJ)
 	var/resistance = 10 // % chance a disease will resist cure, up to 100
 
 /datum/disease2/disease/New()
@@ -82,7 +82,7 @@
 			majormutate()
 
 	//Space antibiotics have a good chance to stop disease completely
-	if(mob.reagents.has_reagent("spaceacillin"))
+	if(mob.chem_effects[CE_ANTIBIOTIC])
 		if(stage == 1 && prob(70-resistance))
 			src.cure(mob)
 		else

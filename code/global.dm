@@ -21,7 +21,10 @@ var/global/list/global_map = null
 
 // Noises made when hit while typing.
 var/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/log_path			= "data/logs/" //See world.dm for the full calculated path
 var/diary				= null
+var/error_log			= null
+var/debug_log			= null
 var/href_logfile		= null
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
@@ -184,7 +187,7 @@ var/static/list/scarySounds = list(
 var/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
-var/global/obj/item/device/radio/intercom/global_announcer = new /obj/item/device/radio/intercom{channels=list("Engineering")}(null)
+var/global/obj/item/device/radio/intercom/omni/global_announcer = new /obj/item/device/radio/intercom/omni(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
 
