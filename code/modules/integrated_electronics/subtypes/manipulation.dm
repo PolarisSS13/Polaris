@@ -204,3 +204,129 @@
 	pre_attached_grenade_type = /obj/item/weapon/grenade/explosive
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3, TECH_COMBAT = 10)
 	spawn_flags = null			// Used for world initializing, see the #defines above.
+
+/obj/item/integrated_circuit/manipulation/grabber
+	name = "grabber"
+	desc = "A circuit with its own inventory for items, used to grab and store things."
+	icon_state = "grabber"
+	extended_desc = "The circuit accepts a reference to an object to be grabbed and can store up to 10 objects. Modes: 1 to grab, 0 to eject the first object, and -1 to eject all objects."
+	w_class = ITEMSIZE_SMALL
+	size = 3
+
+	complexity = 10
+	inputs = list("target" = IC_PINTYPE_REF,"mode" = IC_PINTYPE_NUMBER)
+	outputs = list("first" = IC_PINTYPE_REF, "last" = IC_PINTYPE_REF, "amount" = IC_PINTYPE_NUMBER,"contents" = IC_PINTYPE_LIST)
+	activators = list("pulse in" = IC_PINTYPE_PULSE_IN,"pulse out" = IC_PINTYPE_PULSE_OUT)
+	spawn_flags = IC_SPAWN_RESEARCH
+	power_draw_per_use = 50
+	var/max_items = 10
+
+/obj/item/integrated_circuit/manipulation/grabber/do_work()
+	var/max_w_class = assembly.w_class
+	var/atom/movable/acting_object = get_object()
+	var/turf/T = get_turf(acting_object)
+	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
+	if(AM)
+		var/mode = get_pin_data(IC_INPUT, 2)
+		if(mode == 1)
+			if(check_target(AM))
+				var/weightcheck = FALSE
+				if (AM.w_class < max_w_class)
+					weightcheck = TRUE
+				else
+					weightcheck = FALSE
+				if((contents.len < max_items) && (weightcheck))
+					AM.forceMove(src)
+		if(mode == 0)
+			if(contents.len)
+				var/obj/item/U = contents[1]
+				U.forceMove(T)
+		if(mode == -1)
+			if(contents.len)
+				var/obj/item/U
+				for(U in contents)
+					U.forceMove(T)
+	if(contents.len)
+		set_pin_data(IC_OUTPUT, 1, contents[1])
+		set_pin_data(IC_OUTPUT, 2, contents[contents.len])
+	else
+		set_pin_data(IC_OUTPUT, 1, null)
+		set_pin_data(IC_OUTPUT, 2, null)
+	set_pin_data(IC_OUTPUT, 3, contents.len)
+	set_pin_data(IC_OUTPUT, 4, contents)
+	push_data()
+	activate_pin(2)
+
+/obj/item/integrated_circuit/manipulation/grabber/attack_self(var/mob/user)
+	if(contents.len)
+		var/turf/T = get_turf(src)
+		var/obj/item/U
+		for(U in contents)
+			U.forceMove(T)
+	set_pin_data(IC_OUTPUT, 1, null)
+	set_pin_data(IC_OUTPUT, 2, null)
+	set_pin_data(IC_OUTPUT, 3, contents.len)
+	push_data()
+
+/obj/item/integrated_circuit/manipulation/thrower
+	name = "thrower"
+	desc = "A compact launcher to throw things from inside or nearby tiles."
+	extended_desc = "The first and second inputs need to be numbers which correspond to coordinates to throw objects at relative to the machine itself. \
+	The 'fire' activator will cause the mechanism to attempt to throw objects at the coordinates, if possible. Note that the \
+	projectile need to be inside the machine, or to be on an adjacent tile, and must be medium sized or smaller."
+	complexity = 15
+	w_class = ITEMSIZE_SMALL
+	size = 2
+	inputs = list(
+		"target X rel" = IC_PINTYPE_NUMBER,
+		"target Y rel" = IC_PINTYPE_NUMBER,
+		"projectile" = IC_PINTYPE_REF
+		)
+	outputs = list()
+	activators = list(
+		"fire" = IC_PINTYPE_PULSE_IN
+	)
+	spawn_flags = IC_SPAWN_RESEARCH
+	//action_flags = IC_ACTION_COMBAT
+	power_draw_per_use = 50
+
+/obj/item/integrated_circuit/manipulation/thrower/do_work()
+	var/max_w_class = assembly.w_class
+	var/target_x_rel = round(get_pin_data(IC_INPUT, 1))
+	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
+	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
+
+	if(!A || A.anchored || A.throwing)
+		return
+
+	if(max_w_class && (A.w_class > max_w_class))
+		return
+
+	// Is the target inside the assembly or close to it?
+	if(!check_target(A, exclude_components = TRUE))
+		return
+
+	var/turf/T = get_turf(get_object())
+	if(!T)
+		return
+
+	// If the item is in mob's inventory, try to remove it from there.
+	if(ismob(A.loc))
+		var/mob/living/M = A.loc
+		if(!M.unEquip(A))
+			return
+
+	var/x_abs = Clamp(T.x + target_x_rel,0,world.maxx)
+	var/y_abs = Clamp(T.y + target_y_rel,0,world.maxy)
+	var/range = round(Clamp(sqrt(target_x_rel*target_x_rel+target_y_rel*target_y_rel),0,8),1)
+
+	var/atom/L = loc
+	var/newmove
+	if(!L)
+		newmove = null
+	if(isturf(L))
+		newmove = L
+	else
+		newmove = get_turf(L)
+	A.forceMove(newmove)
+	A.throw_at(locate(x_abs, y_abs, T.z), range, 3)

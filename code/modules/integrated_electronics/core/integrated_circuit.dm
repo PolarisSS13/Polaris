@@ -394,3 +394,40 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		O.disconnect()
 	for(var/datum/integrated_io/activate/A in activators)
 		A.disconnect()
+
+
+// Returns the object that is supposed to be used in attack messages, location checks, etc.
+/obj/item/integrated_circuit/proc/get_object()
+	// If the component is located in an assembly, let assembly determine it.
+	if(assembly)
+		return assembly.get_object()
+	else
+		return src	// If not, the component is acting on its own.
+
+/obj/item/integrated_circuit/proc/check_target(atom/target, exclude_contents = FALSE, exclude_components = FALSE, exclude_self = FALSE)
+	if(!target)
+		return FALSE
+
+	var/atom/movable/acting_object = get_object()
+
+	if(exclude_self && target == acting_object)
+		return FALSE
+
+	if(exclude_components && assembly)
+		if(target in assembly.contents)
+			return FALSE
+
+		if(target == assembly.battery)
+			return FALSE
+
+	if(target.Adjacent(acting_object) && isturf(target.loc))
+		return TRUE
+
+	if(!exclude_contents && (target in acting_object.GetAllContents()))
+		return TRUE
+
+	if(target in acting_object.loc)
+		return TRUE
+
+	return FALSE
+
