@@ -6,10 +6,6 @@
 	icon = 'icons/effects/static.dmi'
 	icon_state = "hacker_static"
 
-/mob/hacker/New()
-	create_eyeobj(src.loc)
-	..()
-
 //Basically a copy/paste from the AI eye code.
 
 /mob/hacker/proc/destroy_eyeobj(var/atom/new_eye)
@@ -42,7 +38,7 @@
 	return ..()
 
 /mob/hacker/proc/toggle_acceleration()
-	set category = "Database Settings"
+	set category = "Hacker Settings"
 	set name = "Toggle Camera Acceleration"
 
 	if(!eyeobj)

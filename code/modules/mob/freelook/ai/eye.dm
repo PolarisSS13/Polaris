@@ -62,7 +62,7 @@
 	return ..()
 
 /atom/proc/move_camera_by_click()
-	if(istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/hacker))
+	if(istype(usr, /mob))
 		var/mob/M = usr
 		if(M.eyeobj && M.client.eye == M.eyeobj)
 			var/turf/T = get_turf(src)

@@ -25,8 +25,8 @@
 #define BE_MUTINEER   0x2000
 #define BE_PAI        0x4000
 #define BE_LOYALIST   0x8000
-#define BE_HACKER     0x10000
-#define BE_SPY        0x20000
+#define BE_HACKER     0x1F
+#define BE_SPY        0x2F
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
