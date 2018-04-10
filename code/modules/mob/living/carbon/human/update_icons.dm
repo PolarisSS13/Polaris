@@ -824,10 +824,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/species_tail = species.get_tail(src) // Species tail icon_state prefix.
 
 	//This one is actually not that bad I guess.
-	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+	if(species_tail)
 		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
-		animate_tail_reset()
+		if(!(wear_suit && wear_suit.flags_inv & HIDETAIL))		
+			overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
+			animate_tail_reset()
 
 //TODO: Is this the appropriate place for this, and not on species...?
 /mob/living/carbon/human/proc/get_tail_icon()
