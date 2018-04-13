@@ -59,7 +59,7 @@
 	economic_modifier = 5
 	minimal_player_age = 3
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
-	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic, "Investigator")
+	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic)
 
 /datum/job/officer
 	title = "Security Officer"
