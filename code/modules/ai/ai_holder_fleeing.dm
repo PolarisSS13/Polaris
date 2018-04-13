@@ -16,7 +16,7 @@
 		return TRUE
 
 	if(can_flee)
-		if(!hostile)
+		if(!hostile && !retaliate)
 			return TRUE // We're not hostile and someone attacked us first.
 		if(flee_when_dying && (holder.health / holder.getMaxHealth()) <= dying_threshold)
 			return TRUE // We're gonna die!

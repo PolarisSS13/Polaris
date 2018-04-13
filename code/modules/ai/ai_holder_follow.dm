@@ -57,4 +57,12 @@
 	ai_log("lose_follow() : Exited.", AI_LOG_DEBUG)
 
 /datum/ai_holder/proc/should_follow_leader()
-	return leader && get_dist(holder, leader) > follow_distance
+	if(!leader)
+		return FALSE
+	if(follow_until_time && world.time > follow_until_time)
+		lose_follow()
+		set_stance(STANCE_IDLE)
+		return FALSE
+	if(get_dist(holder, leader) > follow_distance)
+		return TRUE
+	return FALSE

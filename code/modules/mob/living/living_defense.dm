@@ -92,6 +92,13 @@
 /mob/living/proc/getsoak(var/def_zone, var/type)
 	return 0
 
+// Clicking with an empty hand
+/mob/living/attack_hand(mob/living/L)
+	..()
+	if(istype(L) && L.a_intent != I_HELP)
+		if(ai_holder) // Using disarm, grab, or harm intent is considered a hostile action to the mob's AI.
+			ai_holder.react_to_attack(L)
+
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	//Being hit while using a deadman switch
@@ -101,6 +108,9 @@
 			log_and_message_admins("has triggered a signaler deadman's switch")
 			src.visible_message("<font color='red'>[src] triggers their deadman's switch!</font>")
 			signaler.signal()
+
+	if(ai_holder && P.firer)
+		ai_holder.react_to_attack(P.firer)
 
 	//Armor
 	var/soaked = get_armor_soak(def_zone, P.check_armour, P.armor_penetration)
@@ -272,6 +282,8 @@
 			var/client/assailant = M.client
 			if(assailant)
 				add_attack_logs(M,src,"Hit by thrown [O.name]")
+			if(ai_holder)
+				ai_holder.react_to_attack(O.thrower)
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
@@ -335,6 +347,8 @@
 
 	adjustBruteLoss(damage)
 	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_animal attacks
+	if(ai_holder)
+		ai_holder.react_to_attack(user)
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()

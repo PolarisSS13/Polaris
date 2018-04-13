@@ -56,9 +56,11 @@
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
-	New()
-		if(prob(50))
-			icon_state = "stickyweb2"
+
+/obj/effect/spider/stickyweb/initialize()
+	if(prob(50))
+		icon_state = "stickyweb2"
+	return ..()
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -80,10 +82,12 @@
 	var/spiders_min = 6
 	var/spiders_max = 24
 	var/spider_type = /obj/effect/spider/spiderling
-	New()
-		pixel_x = rand(3,-3)
-		pixel_y = rand(3,-3)
-		processing_objects |= src
+
+/obj/effect/spider/eggcluster/initialize()
+	pixel_x = rand(3,-3)
+	pixel_y = rand(3,-3)
+	processing_objects |= src
+	return ..()
 
 /obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
 	get_light_and_color(parent)

@@ -1,13 +1,29 @@
-// A simple datum that just holds many lists of lines for AI mobs to pick from.
+// A simple datum that just holds many lists of lines for mobs to pick from.
 // This is its own datum in order to be able to have different types of mobs be able to use the same lines if desired,
 // even when inheritence wouldn't be able to do so.
 
 // Also note this also contains emotes, despite its name.
+// and now sounds because its probably better that way.
+
+/mob/living
+	var/datum/say_list/say_list = null
+	var/say_list_type = /datum/say_list	// Type to give us on initialization. Default has empty lists, so the mob will be silent.
+
+/mob/living/initialize()
+	if(say_list_type)
+		say_list = new say_list_type(src)
+	return ..()
+
+/mob/living/Destroy()
+	qdel_null(say_list)
+	return ..()
+
 
 /datum/say_list
 	var/list/speak = list()				// Things the mob might say if it talks while idle.
 	var/list/emote_hear = list()		// Hearable emotes it might perform
 	var/list/emote_see = list()			// Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
+
 	var/list/say_understood = list()	// When accepting an order.
 	var/list/say_cannot = list()		// When they cannot comply.
 	var/list/say_maybe_target = list()	// When they briefly see something.
@@ -15,6 +31,11 @@
 	var/list/say_threaten = list()		// When threatening someone.
 	var/list/say_stand_down = list()	// When the threatened thing goes away.
 	var/list/say_escalate = list()		// When the threatened thing doesn't go away.
+
+	var/threaten_sound = null			// Sound file played when the mob's AI calls threaten_target() for the first time.
+	var/stand_down_sound = null			// Sound file played when the mob's AI loses sight of the threatened target.
+
+
 
 
 
@@ -25,6 +46,7 @@
 // This one's pretty dumb, but pirates are dumb anyways and it makes for a good test.
 /datum/say_list/pirate
 	speak = list("Yarr!")
+
 	say_understood = list("Alright, matey.")
 	say_cannot = list("No, matey.")
 	say_maybe_target = list("Eh?")
@@ -32,3 +54,30 @@
 	say_threaten = list("You best leave, this booty is mine.", "No plank to walk on, just walk away.")
 	say_stand_down = list("Good.")
 	say_escalate = list("Yarr! The booty is mine!")
+
+/datum/say_list/malf_drone
+	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
+	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
+
+	say_understood = list("Affirmative.", "Positive.")
+	say_cannot = list("Denied.", "Negative.")
+	say_maybe_target = list("Possible threat detected. Investigating.", "Motion detected.", "Investigating.")
+	say_got_target = list("Threat detected.", "New task: Remove threat.", "Threat removal engaged.", "Engaging target.")
+	say_threaten = list("Motion detected, judging target...")
+	say_stand_down = list("Visual lost.", "Error: Target not found.")
+	say_escalate = list("Viable target found. Removing.", "Engaging target.", "Target judgement complete. Removal required.")
+
+	threaten_sound = 'sound/effects/turret/move1.wav'
+	stand_down_sound = 'sound/effects/turret/move2.wav'
+
+/datum/say_list/mercenary
+	threaten_sound = 'sound/weapons/TargetOn.ogg'
+	stand_down_sound = 'sound/weapons/TargetOff.ogg'
+
+
+/datum/say_list/crab
+	emote_hear = list("clicks")
+	emote_see = list("clacks")
+
+/datum/say_list/spider
+	emote_hear = list("chitters")

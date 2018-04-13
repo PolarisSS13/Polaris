@@ -102,9 +102,6 @@
 	threaten = TRUE
 	wander = TRUE
 
-	threaten_sound = 'sound/weapons/TargetOn.ogg'
-	stand_down_sound = 'sound/weapons/TargetOff.ogg'
-
 /datum/ai_holder/hostile/ranged/debug
 	wander = FALSE
 	conserve_ammo = FALSE
@@ -114,8 +111,6 @@
 	path_display = TRUE
 	last_turf_display = TRUE
 	debug_ai = AI_LOG_INFO
-
-	say_list_type = /datum/say_list/pirate
 
 /mob/living/simple_animal/hostile/pirate
 	hostile = FALSE

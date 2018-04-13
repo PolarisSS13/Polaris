@@ -14,6 +14,12 @@
 #define AI_LOG_DEBUG	4 // More detailed information about the flow of execution.
 #define AI_LOG_TRACE	5 // Even more detailed than the last.
 
+// Results of pre-movement checks.
+// Todo: Move outside AI code?
+#define MOVEMENT_ON_COOLDOWN	-1	// Recently moved and needs to try again soon.
+#define MOVEMENT_FAILED		0		// Move() returned false for whatever reason and the mob didn't move.
+#define MOVEMENT_SUCCESSFUL	1		// Move() returned true and the mob hopefully moved.
+
 // Reasons for targets to not be valid. Based on why, the AI responds differently.
 #define AI_TARGET_VALID			0 // We can fight them.
 #define AI_TARGET_INVIS			1 // They were in field of view but became invisible. Switch to STANCE_BLINDFIGHT if no other viable targets exist.

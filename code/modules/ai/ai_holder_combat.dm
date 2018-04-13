@@ -86,12 +86,16 @@
 		set_stance(STANCE_APPROACH)
 
 // We're not entirely sure how holder will do melee attacks since any /mob/living could be holder, but we don't have to care because Interfaces.
-/datum/ai_holder/proc/melee_attack(atom/movable/AM)
-	return holder.IAttack(AM)
+/datum/ai_holder/proc/melee_attack(atom/A)
+	. = holder.IAttack(A)
+	if(.)
+		post_melee_attack(A)
 
 // Ditto.
-/datum/ai_holder/proc/ranged_attack(atom/movable/AM)
-	return holder.IRangedAttack(AM)
+/datum/ai_holder/proc/ranged_attack(atom/A)
+	. = holder.IRangedAttack(A)
+	if(.)
+		post_ranged_attack(A)
 
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/proc/special_attack(atom/movable/AM)
@@ -100,7 +104,13 @@
 // Called when within striking/shooting distance, however cooldown is not considered.
 // Override to do things like move in a random step for evasiveness.
 // Note that this is called BEFORE the attack.
-/datum/ai_holder/proc/on_engagement(atom/movable/AM)
+/datum/ai_holder/proc/on_engagement(atom/A)
+
+// Called after a successful (IE not on cooldown) ranged attack.
+/datum/ai_holder/proc/post_ranged_attack(atom/A)
+
+// Ditto but for melee.
+/datum/ai_holder/proc/post_melee_attack(atom/A)
 
 // Used to make sure projectiles will probably hit the target and not the wall or a friend.
 /datum/ai_holder/proc/test_projectile_safety(atom/movable/AM)

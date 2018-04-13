@@ -7,17 +7,9 @@
 	var/threaten_timeout = 1 MINUTE		// If the mob threatens someone, they leave, and then come back before this timeout period, the mob escalates to fighting immediately.
 	var/last_conflict_time = null		// Last occurance of threatening or fighting being used, in world.time.
 
-	var/threaten_sound = null			// Sound file played when the mob calls threaten_target() for the first time.
-	var/stand_down_sound = null			// Sound file played when the mob loses sight of the threatened target.
-
 	var/speak_chance = 0				// Probability that the mob talks (this is 'X in 200' chance since even 1/100 is pretty noisy)
 	var/reacts = 0						// Reacts to some things being said.
-	var/datum/say_list/say_list = null	// Datum containing all of our lines.
-	var/say_list_type = /datum/say_list	// Type to give us on initialization. Default has empty lists, so the mob will be silent.
 
-/datum/ai_holder/New()
-	..()
-	say_list = new say_list_type()
 
 /datum/ai_holder/proc/should_threaten()
 	if(!threaten)
@@ -37,25 +29,28 @@
 		threatening = TRUE
 		last_conflict_time = world.time
 
-		holder.say(safepick(say_list.say_threaten))
-		playsound(holder.loc, threaten_sound, 75, 1) // We do this twice to make the sound -very- noticable to the target.
-		playsound(target.loc, threaten_sound, 75, 1) // Actual aim-mode also does that so at least it's consistant.
+		if(holder.say_list)
+			holder.say(safepick(holder.say_list.say_threaten))
+			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 
 			if(threaten_delay && last_conflict_time + threaten_delay < world.time) // Waited too long.
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
-				holder.say(safepick(say_list.say_escalate))
+				if(holder.say_list)
+					holder.say(safepick(holder.say_list.say_escalate))
 			else
 				return // Wait a bit.
 
 		else // They left, or so we think.
 			threatening = FALSE
 			set_stance(STANCE_IDLE)
-			holder.say(safepick(say_list.say_stand_down))
-			playsound(holder.loc, stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-			playsound(target.loc, stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			if(holder.say_list)
+				holder.say(safepick(holder.say_list.say_stand_down))
+				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
+				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)
@@ -75,13 +70,25 @@
 
 /datum/ai_holder/proc/handle_idle_speaking()
 	if(rand(0,200) < speak_chance)
-		var/list/comm_types = list() // What kinds of things can we do?
+		// Check if anyone is around to 'appreciate' what we say.
+		var/alone = TRUE
+		for(var/m in viewers(holder))
+			var/mob/M = m
+			if(M.client)
+				alone = FALSE
+				break
+		if(alone) // Forever alone. No point doing anything else.
+			return
 
-		if(say_list.speak.len)
+		var/list/comm_types = list() // What kinds of things can we do?
+		if(!holder.say_list)
+			return
+
+		if(holder.say_list.speak.len)
 			comm_types += COMM_SAY
-		if(say_list.emote_hear.len)
+		if(holder.say_list.emote_hear.len)
 			comm_types += COMM_AUDIBLE_EMOTE
-		if(say_list.emote_see.len)
+		if(holder.say_list.emote_see.len)
 			comm_types += COMM_VISUAL_EMOTE
 
 		if(!comm_types.len)
@@ -89,11 +96,11 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.say(safepick(say_list.speak))
+				holder.say(safepick(holder.say_list.speak))
 			if(COMM_AUDIBLE_EMOTE)
-				holder.audible_emote(safepick(say_list.emote_hear))
+				holder.audible_emote(safepick(holder.say_list.emote_hear))
 			if(COMM_VISUAL_EMOTE)
-				holder.visible_emote(safepick(say_list.emote_see))
+				holder.visible_emote(safepick(holder.say_list.emote_see))
 
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE

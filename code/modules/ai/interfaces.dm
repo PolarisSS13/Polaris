@@ -6,20 +6,20 @@
 /mob/living/proc/IAttack(atom/A)
 	return FALSE
 
-/mob/living/simple_animal/IAttack(atom/A)
+/mob/living/simple_mob/IAttack(atom/A)
 	return attack_target(A)
 
 /mob/living/proc/IRangedAttack(atom/A)
 	return FALSE
 
-/mob/living/simple_animal/IRangedAttack(atom/A)
+/mob/living/simple_mob/IRangedAttack(atom/A)
 	return shoot_target(A)
 
 /mob/living/proc/ISpecialAttack(atom/A)
 	return FALSE
 
-/mob/living/simple_animal/ISpecialAttack(atom/A)
-	return special_attack_target()
+/mob/living/simple_mob/ISpecialAttack(atom/A)
+	return special_attack_target(A)
 
 /mob/living/proc/ISay(message)
 
@@ -31,8 +31,32 @@
 	if(!.) // Outside the faction, try to see if they're friends.
 		return L in friends
 
+/mob/living/simple_mob/IIsAlly(mob/living/L)
+	. = ..()
+	if(!.) // Outside the faction, try to see if they're friends.
+		return L in friends
+
 /mob/living/proc/IGetID()
 
 /mob/living/simple_animal/IGetID()
 	if(myid)
 		return myid.GetID()
+
+// Respects move cooldowns as if it had a client.
+/mob/living/proc/IMove(newloc)
+	if(check_move_cooldown())
+//		if(!newdir)
+//			newdir = get_dir(get_turf(src), newloc)
+
+		// Move()ing to another tile successfully returns 32 because BYOND. Would rather deal with TRUE/FALSE-esque terms.
+		// Note that moving to the same tile will be 'successful'.
+		var/turf/old_T = get_turf(src)
+		. = SelfMove(newloc) ? MOVEMENT_SUCCESSFUL : MOVEMENT_FAILED
+		if(. == MOVEMENT_SUCCESSFUL)
+			set_dir(get_dir(old_T, newloc))
+			// Apply movement delay.
+			// Player movement has more factors but its all in the client and fixing that would be its own project.
+			setMoveCooldown(movement_delay())
+		return
+
+	. = MOVEMENT_ON_COOLDOWN // To avoid superfast mobs that aren't meant to be superfast. Is actually -1.

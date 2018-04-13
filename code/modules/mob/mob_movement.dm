@@ -13,6 +13,11 @@
 /mob/proc/setMoveCooldown(var/timeout)
 	move_delay = max(world.time + timeout, move_delay)
 
+/mob/proc/check_move_cooldown()
+	if(world.time < src.move_delay)
+		return FALSE // Need to wait more.
+	return TRUE
+
 /client/North()
 	..()
 
@@ -198,7 +203,8 @@
 
 	if(moving)	return 0
 
-	if(world.time < mob.move_delay)	return
+	if(!mob.check_move_cooldown())
+		return
 
 	if(locate(/obj/effect/stop/, mob.loc))
 		for(var/obj/effect/stop/S in mob.loc)

@@ -1,8 +1,5 @@
-// Reorganized and somewhat cleaned up.
-// AI code has been made into a datum, inside the AI module folder.
-
 // Does a melee attack.
-/mob/living/simple_animal/proc/attack_target(atom/A)
+/mob/living/simple_mob/proc/attack_target(atom/A)
 	set waitfor = FALSE // For attack animations, if they're ever added. Don't want the AI processor to get held up.
 
 	if(!A.Adjacent(src))
@@ -13,8 +10,10 @@
 
 	return do_attack(A)
 
+
 // This does the actual attack.
-/mob/living/simple_animal/proc/do_attack(atom/A)
+// This is a seperate proc for the purposes of attack animations.
+/mob/living/simple_mob/proc/do_attack(atom/A)
 	if(!A.Adjacent(src)) // They could've moved in the meantime.
 		return FALSE
 
@@ -27,10 +26,8 @@
 	if(isliving(A)) // Check defenses.
 		var/mob/living/L = A
 
-		if(prob(melee_miss_chance)) // This is stupid (The logging part).
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [L.name] ([L.ckey])</font>")
-			L.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [src.name] ([src.ckey])</font>")
-			visible_message("<span class='danger'>[src] misses [L]!</span>")
+		if(prob(melee_miss_chance))
+			add_attack_logs(src, L, "Animal-attacked (miss)", admin_notify = FALSE)
 			do_attack_animation(src)
 			return FALSE // We missed.
 
@@ -40,12 +37,16 @@
 				return FALSE // We were blocked.
 
 	if(A.attack_generic(src, damage_to_do, pick(attacktext)) && attack_sound)
+		apply_melee_effects(A)
 		playsound(src, attack_sound, 75, 1)
 
 	return TRUE
 
+// Override for special effects after a successful attack.
+/mob/living/simple_mob/proc/apply_melee_effects(atom/A)
+
 //The actual top-level ranged attack proc
-/mob/living/simple_animal/proc/shoot_target(atom/A)
+/mob/living/simple_mob/proc/shoot_target(atom/A)
 	if(!canClick())
 		return FALSE
 
@@ -58,8 +59,9 @@
 
 	return TRUE
 
+
 //Shoot a bullet at someone (idk why user is an argument when src would fit???)
-/mob/living/simple_animal/proc/shoot(atom/A, turf/start, mob/living/user, bullet = 0)
+/mob/living/simple_mob/proc/shoot(atom/A, turf/start, mob/living/user, bullet = 0)
 	if(A == start)
 		return
 
@@ -69,6 +71,7 @@
 		return
 	P.launch(A)
 
+
 //Special attacks, like grenades or blinding spit or whatever
-/mob/living/simple_animal/proc/special_attack_target(atom/A)
+/mob/living/simple_mob/proc/special_attack_target(atom/A)
 	return FALSE

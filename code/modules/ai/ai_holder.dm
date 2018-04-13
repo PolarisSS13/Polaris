@@ -19,6 +19,10 @@
 	var/mob/living/holder = null		// The mob this datum is going to control.
 	var/stance = STANCE_IDLE			// Determines if the mob should be doing a specific thing, e.g. attacking, following, standing around, etc.
 	var/intelligence_level = AI_NORMAL	// Adjust to make the AI be intentionally dumber, or make it more robust (e.g. dodging grenades).
+	var/autopilot = FALSE				// If true, the AI won't be deactivated if a client gets attached to the AI's mob.
+	var/busy = FALSE					// If true, the ticker will skip processing this mob until this is false. Good for if you need the
+										// mob to stay still (e.g. delayed attacking). If you need the mob to be inactive for an extended period of time,
+										// consider sleeping the AI instead.
 
 
 
@@ -73,11 +77,14 @@
 
 // 'Tactical' processes such as moving a step, meleeing an enemy, firing a projectile, and other fairly cheap actions that need to happen quickly.
 /datum/ai_holder/proc/handle_tactics()
+	if(busy)
+		return
 	handle_stance_tactical()
 
 // 'Strategical' processes that are more expensive on the CPU and so don't get run as often as the above proc, such as A* pathfinding or robust targeting.
 /datum/ai_holder/proc/handle_strategicals()
-//	world << "[holder.name] Strategicals!"
+	if(busy)
+		return
 	handle_stance_strategical()
 
 /*
@@ -301,3 +308,23 @@
 		return FALSE
 	return TRUE
 
+
+// Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
+/mob/living/proc/set_AI_busy(value)
+	if(ai_holder)
+		ai_holder.busy = value
+
+/mob/living/proc/is_AI_busy()
+	if(!ai_holder)
+		return FALSE
+	return ai_holder.busy
+
+// Helper proc to check for the AI's stance.
+// Returns null if there's no AI holder, or the mob has a player and autopilot is not on.
+// Otherwise returns the stance.
+/mob/living/proc/get_AI_stance()
+	if(!ai_holder)
+		return null
+	if(client && !ai_holder.autopilot)
+		return null
+	return ai_holder.stance

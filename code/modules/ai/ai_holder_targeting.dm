@@ -1,8 +1,8 @@
 // Used for assigning a target for attacking.
 
 /datum/ai_holder
-	var/hostile = FALSE						// Do we try to hurt others? Setting to false disables most combat processing.
-	var/retaliate = FALSE					// Attacks whatever struck it first.
+	var/hostile = FALSE						// Do we try to hurt others?
+	var/retaliate = FALSE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
 
 	var/atom/movable/target = null			// The thing (mob or object) we're trying to kill.
 	var/turf/target_last_seen_turf = null 	// Where the mob last observed the target being, used if the target disappears but the mob wants to keep fighting.
@@ -26,6 +26,8 @@
 
 // Step 2, filter down possible targets to things we actually care about.
 /datum/ai_holder/proc/find_target(var/list/possible_targets, var/has_targets_list = FALSE)
+	if(!hostile) // So retaliating mobs only attack the thing that hit it.
+		return null
 	. = list()
 	if(!has_targets_list)
 		possible_targets = list_targets()
@@ -45,12 +47,13 @@
 // Step 3, pick among the possible, attackable targets.
 /datum/ai_holder/proc/pick_target(list/targets)
 	if(target != null) // If we already have a target, but are told to pick again, calculate the lowest distance between all possible, and pick from the lowest distance targets.
-		for(var/possible_target in targets)
-			var/atom/A = possible_target
-			var/target_dist = get_dist(holder, target)
-			var/possible_target_distance = get_dist(holder, A)
-			if(target_dist < possible_target_distance)
-				targets -= A
+		targets = target_filter_distance(targets)
+//		for(var/possible_target in targets)
+//			var/atom/A = possible_target
+//			var/target_dist = get_dist(holder, target)
+//			var/possible_target_distance = get_dist(holder, A)
+//			if(target_dist < possible_target_distance)
+//				targets -= A
 	if(!targets.len) // We found nothing.
 		return
 	var/chosen_target = pick(targets)
@@ -65,6 +68,18 @@
 		else
 			set_stance(STANCE_APPROACH)
 		return TRUE
+
+// Filters return one or more 'preferred' targets.
+
+// This one is for closest targets.
+/datum/ai_holder/proc/target_filter_distance(list/targets)
+	for(var/possible_target in targets)
+		var/atom/A = possible_target
+		var/target_dist = get_dist(holder, target)
+		var/possible_target_distance = get_dist(holder, A)
+		if(target_dist < possible_target_distance)
+			targets -= A
+	return targets
 
 /datum/ai_holder/proc/can_attack(atom/movable/the_target)
 	if(!can_see_target(the_target))
@@ -157,3 +172,30 @@
 		target_last_seen_turf.overlays -= last_turf_overlay
 	ai_log("lose_target_position() : Last position is being reset.", AI_LOG_INFO)
 	target_last_seen_turf = null
+
+// Responds to a hostile action against its mob.
+/datum/ai_holder/proc/react_to_attack(atom/movable/attacker)
+	if(holder.stat) // We're dead.
+		ai_log("react_to_attack() : Was attacked by [attacker], but we are dead/unconscious.", AI_LOG_TRACE)
+		return FALSE
+	if(!hostile && !retaliate) // Not allowed to defend ourselves.
+		ai_log("react_to_attack() : Was attacked by [attacker], but we are not allowed to attack back.", AI_LOG_TRACE)
+		return FALSE
+	if(holder.IIsAlly(attacker)) // I'll overlook it THIS time...
+		ai_log("react_to_attack() : Was attacked by [attacker], but they were an ally.", AI_LOG_TRACE)
+		return FALSE
+	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
+		ai_log("react_to_attack() : Was attacked by [attacker], but we already have a target.", AI_LOG_TRACE)
+		return FALSE
+
+	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
+		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
+		go_wake()
+
+	ai_log("react_to_attack() : Was attacked by [attacker].", AI_LOG_INFO)
+	return give_target(attacker) // Also handles setting the appropiate stance.
+
+/*
+	if(ai_inactive || stat || M == target_mob) return //Not if we're dead or already hitting them
+	if(M in friends || M.faction == faction) return //I'll overlook it THIS time...
+*/
