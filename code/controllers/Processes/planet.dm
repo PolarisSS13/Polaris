@@ -21,6 +21,7 @@ var/datum/controller/process/planet/planet_controller = null
 		for(var/datum/planet/P in planets)
 			if(OT.z in P.expected_z_levels)
 				P.planet_floors |= OT
+				OT.vis_contents |= P.weather_holder.visuals
 				break
 	outdoor_turfs.Cut() //Why were you in there INCORRECTLY?
 
@@ -36,6 +37,7 @@ var/datum/controller/process/planet/planet_controller = null
 		var/datum/planet/P = planet
 		if(T.z in P.expected_z_levels)
 			P.planet_floors -= T
+			T.vis_contents -= P.weather_holder.visuals
 
 /datum/controller/process/planet/doWork()
 	if(outdoor_turfs.len || planetary_walls.len)
@@ -44,19 +46,6 @@ var/datum/controller/process/planet/planet_controller = null
 	for(var/datum/planet/P in planets)
 		P.process(schedule_interval / 10)
 		SCHECK //Your process() really shouldn't take this long...
-		//Weather style needs redrawing
-		if(P.needs_work & PLANET_PROCESS_WEATHER)
-			P.needs_work &= ~PLANET_PROCESS_WEATHER
-			var/image/new_overlay = image(icon = P.weather_holder.current_weather.icon, icon_state = P.weather_holder.current_weather.icon_state)
-			new_overlay.plane = PLANE_PLANETLIGHTING
-			//Redraw weather icons
-			for(var/T in P.planet_floors)
-				var/turf/simulated/turf = T
-		//		turf.overlays -= turf.weather_overlay
-				turf.weather_overlay = new_overlay
-		//		turf.overlays += turf.weather_overlay
-				turf.update_icon()
-				SCHECK
 
 		//Sun light needs changing
 		if(P.needs_work & PLANET_PROCESS_SUN)
@@ -68,15 +57,6 @@ var/datum/controller/process/planet/planet_controller = null
 				var/obj/effect/sun/sun = A
 				sun.set_light(sun.light_range, new_brightness, new_color)
 				SCHECK
-			/*
-			var/new_range = P.sun["range"]
-			var/new_brightness = P.sun["brightness"]
-			var/new_color = P.sun["color"]
-			for(var/T in P.planet_floors)
-				var/turf/simulated/turf = T
-				turf.set_light(new_range, new_brightness, new_color)
-				SCHECK
-			*/
 
 		//Temperature needs updating
 		if(P.needs_work & PLANET_PROCESS_TEMP)
