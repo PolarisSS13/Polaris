@@ -1,6 +1,6 @@
 /datum/lore/codex/category/other_information
 	name = "More Information"
-	data = "Here you'll find articles dsigned to further-aid your decision making process, narrowing down the brands outlined in the main body."
+	data = "Here you'll find articles designed to aid your decision making process, narrowing down the brands outlined in the main body."
 	children = list(
 		/datum/lore/codex/page/humansvbeeps,
 		/datum/lore/codex/page/posiage,
@@ -19,7 +19,7 @@
 	data = "Young positronics are unlikely to have much in the way of expensive belongings, including prosthetics. Most positronics come into the working world outside of a well-defined familial structure and are still paying off the debt from their first body.\
 	Even those who do come into a family mature very quickly, not providing time for relatives to save up for an expensive chassis before they begin adulthood and working life. Because of these logistical concerns, even a positronic who has been in a well-paying job for a few years is unable to afford a high-quality chassis.\
 	<br><br>\
-	Most positronics buy their second chassis at around 10 to 15 years of age, and it is at these age that positronics in more middling chasses come into being. Positronics who want a high-end body must save for decades while scrambling for advancement in a galaxy that is rather bigotted more often than not."
+	Most positronics buy their second chassis at around 10 to 15 years of age, and it is at these age that positronics in more middling chassis come into being. Positronics who want a high-end body must save for decades while scrambling for advancement in a galaxy that is rather bigoted more often than not."
 
 /datum/lore/codex/page/variants
 	name = "Variants"
