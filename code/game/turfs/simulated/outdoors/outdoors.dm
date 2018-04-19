@@ -22,10 +22,10 @@ var/list/outdoor_turfs = list()
 	update_icon()
 	. = ..()
 
-/turf/simulated/floor/initialize()
+/turf/simulated/floor/New()
 	if(outdoors)
 		outdoor_turfs.Add(src)
-	return ..()
+	..()
 
 /turf/simulated/floor/Destroy()
 	if(outdoors)
