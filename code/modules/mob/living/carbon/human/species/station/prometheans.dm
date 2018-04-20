@@ -43,6 +43,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 	brute_mod =		0.75
 	burn_mod =		2
 	oxy_mod =		0
+	flash_mod =		0.5 //No centralized, lensed eyes.
+	item_slowdown_mod = 1.33
 
 	cloning_modifier = /datum/modifier/cloning_sickness/promethean
 
@@ -63,6 +65,9 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
 	has_organ =     list(O_BRAIN = /obj/item/organ/internal/brain/slime) // Slime core.
+
+	dispersed_eyes = TRUE
+
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest/unbreakable/slime),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/unbreakable/slime),
@@ -147,15 +152,31 @@ var/datum/species/shapeshifter/promethean/prometheans
 			if (istype(T, /turf/simulated))
 				var/turf/simulated/S = T
 				S.dirt = 0
-			H.nutrition += rand(15, 45)
+			H.nutrition = min(400, max(0, rand(15, 30)))
 
 	// Heal remaining damage.
 	if(H.fire_stacks >= 0)
 		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
-			H.adjustBruteLoss(-heal_rate)
-			H.adjustFireLoss(-heal_rate)
-			H.adjustOxyLoss(-heal_rate)
-			H.adjustToxLoss(-heal_rate)
+			var/nutrition_cost = 0
+			var/nutrition_debt = H.getBruteLoss()
+			var/starve_mod = 1
+			if(H.nutrition <= 4)
+				starve_mod = 0.75
+			H.adjustBruteLoss(-heal_rate * starve_mod)
+			nutrition_cost = nutrition_debt - H.getBruteLoss()
+
+			nutrition_debt = H.getFireLoss()
+			H.adjustFireLoss(-heal_rate * starve_mod)
+			nutrition_cost = nutrition_cost + (nutrition_debt - H.getFireLoss())
+
+			nutrition_debt = H.getOxyLoss()
+			H.adjustOxyLoss(-heal_rate * starve_mod)
+			nutrition_cost = nutrition_cost + (nutrition_debt - H.getOxyLoss())
+
+			nutrition_debt = H.getToxLoss()
+			H.adjustToxLoss(-heal_rate * starve_mod)
+			nutrition_cost = nutrition_cost + (nutrition_debt - H.getToxLoss())
+			H.nutrition = (2 * max(0, H.nutrition - nutrition_cost)) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
 	else
 		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
 
