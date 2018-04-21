@@ -509,7 +509,7 @@
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
 	if(alien == IS_SLIME)
-		strength_mod = 4
+		strength_mod = 3
 	M.adjustToxLoss(removed * strength_mod) // Probably not a good idea; not very deadly though
 	return
 
@@ -523,7 +523,7 @@
 	if(adj_temp < 0 && M.bodytemperature > 310)
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed * 4)
+		M.adjustToxLoss(removed * 2)
 
 /datum/reagent/drink/overdose(var/mob/living/carbon/M, var/alien) //Add special interactions here in the future if desired.
 	..()
@@ -564,7 +564,7 @@
 	..()
 	M.reagents.add_reagent("imidazoline", removed * 0.2)
 
-/datum/reagent/drink/juice/
+/datum/reagent/drink/juice
 	name = "Grape Juice"
 	id = "grapejuice"
 	description = "It's grrrrrape!"
@@ -804,6 +804,24 @@
 	cup_name = "cup of iced tea"
 	cup_desc = "No relation to a certain rap artist/ actor."
 
+/datum/reagent/drink/tea/icetea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/tea/icetea/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
 /datum/reagent/drink/tea/minttea
 	name = "Mint Tea"
 	id = "minttea"
@@ -925,6 +943,24 @@
 	glass_name = "iced coffee"
 	glass_desc = "A drink to perk you up and refresh you!"
 	glass_special = list(DRINK_ICE)
+
+/datum/reagent/drink/coffee/icecoffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/coffee/icecoffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
 
 /datum/reagent/drink/coffee/soy_latte
 	name = "Soy Latte"
@@ -1383,6 +1419,24 @@
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."
 	glass_icon = DRINK_ICON_NOISY
+
+/datum/reagent/drink/ice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= rand(1,3)
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += rand(1,3)
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/ice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= rand(1,3)
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += rand(1,3)
+		M.adjustToxLoss(5 * removed)
 
 /datum/reagent/drink/nothing
 	name = "Nothing"

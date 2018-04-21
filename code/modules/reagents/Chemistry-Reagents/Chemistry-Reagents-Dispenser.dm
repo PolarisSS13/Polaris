@@ -95,7 +95,7 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
+		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 
