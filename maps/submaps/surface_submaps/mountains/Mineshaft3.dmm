@@ -1,0 +1,79 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/cave/AMine1)
+"c" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"d" = (/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"e" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"f" = (/turf/simulated/wall,/area/submap/cave/AMine1)
+"g" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/weapon/storage/toolbox/mechanical{pixel_x = -2; pixel_y = -1},/obj/item/weapon/storage/belt/utility,/turf/simulated/floor,/area/submap/cave/AMine1)
+"h" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/rack,/obj/item/weapon/pickaxe{pixel_x = 5},/obj/item/weapon/shovel{pixel_x = -5},/turf/simulated/floor,/area/submap/cave/AMine1)
+"i" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"j" = (/obj/structure/closet/crate,/obj/random/maintenance/cargo,/obj/random/maintenance/cargo,/obj/random/maintenance/cargo,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"k" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"l" = (/obj/machinery/door/airlock/mining,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"m" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"n" = (/obj/item/device/flashlight/lamp{on = 0},/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"o" = (/obj/structure/frame/computer,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"p" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"q" = (/obj/effect/decal/cleanable/dirt,/obj/structure/loot_pile/maint/junk,/turf/simulated/floor,/area/submap/cave/AMine1)
+"r" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"s" = (/obj/structure/window/reinforced/full,/turf/simulated/floor,/area/submap/cave/AMine1)
+"t" = (/obj/machinery/recharge_station,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"u" = (/obj/machinery/door/blast/shutters{dir = 8; id = "mineshaft3"; name = "Mining Shutters"},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"v" = (/obj/machinery/drone_fabricator/mining,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"w" = (/obj/structure/table/steel_reinforced,/obj/effect/decal/cleanable/dirt,/obj/item/weapon/folder/yellow,/turf/simulated/floor,/area/submap/cave/AMine1)
+"x" = (/obj/structure/table/steel_reinforced,/obj/effect/decal/cleanable/dirt,/obj/machinery/cell_charger,/obj/random/powercell,/turf/simulated/floor,/area/submap/cave/AMine1)
+"y" = (/obj/effect/decal/cleanable/dirt,/obj/structure/closet/crate/secure/loot,/turf/simulated/floor,/area/submap/cave/AMine1)
+"z" = (/obj/machinery/space_heater,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"A" = (/obj/machinery/light,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"B" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"C" = (/obj/structure/table/standard,/obj/item/weapon/cell/high,/obj/item/weapon/cell/high,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"D" = (/obj/machinery/power/smes/buildable/point_of_interest,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"E" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"F" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"G" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"H" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"I" = (/obj/machinery/door/airlock/mining,/obj/effect/decal/cleanable/dirt,/turf/simulated/wall,/area/submap/cave/AMine1)
+"J" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"K" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"L" = (/obj/structure/cable/green,/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"M" = (/obj/structure/closet,/obj/item/weapon/storage/backpack/satchel/eng,/obj/item/clothing/gloves/black,/obj/item/clothing/shoes/black,/obj/item/device/flashlight/lantern,/obj/item/clothing/glasses/material,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"N" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5; dir = 8},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"O" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"P" = (/obj/structure/table/rack,/obj/item/weapon/pickaxe/drill,/obj/machinery/light,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"Q" = (/obj/structure/table/rack,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
+"R" = (/obj/structure/closet/crate/trashcart,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"S" = (/obj/machinery/light/small,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"T" = (/turf/template_noop,/area/submap/cave/AMine1)
+"U" = (/obj/structure/closet/crate/engineering,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"V" = (/obj/machinery/light,/obj/machinery/power/port_gen/pacman,/obj/structure/cable,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/cave/AMine1)
+"W" = (/obj/machinery/button/remote/blast_door{id = "mineshaft3"; name = "Warehouse Door Control"; pixel_x = 0; pixel_y = 0; req_access = null},/turf/simulated/wall,/area/submap/cave/AMine1)
+"X" = (/obj/machinery/mining/brace,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"Y" = (/obj/machinery/mining/drill,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaa
+aTTbbbbbbbbbbbcccccccccTa
+aTbbbbbbbbbbcddddddddddda
+abbbbbbbbbbbbdffffffffffa
+abbbcccbbbbbbdfeghfddijfa
+abcccccbbbbbbdfkkkldmdjfa
+abccccccccbbbdfkkkfnoopfa
+abccccccccbbbdfqkkffssffa
+abccccccccbbbOWdkkrkkktfa
+abccccccccbbddudkkvkkkwfa
+abccccccXccbddudkkkkkkxfa
+abccccccYcccddudkkvkkkyfa
+abbccccccccccOfzkkAkkktfa
+abbccccccccccKfslfffffffa
+abbbccXccccccdfdddfBCDEfa
+abbbcccccccccdfdddfFkGHfa
+abbbfNcccccccdldddIFkJLfa
+abbbbccccccccOfMPQfRUVefa
+abbbbbbbcccccdffffffffffa
+abbbbbbbbccccdddddddddbba
+abbbbbbbbbcccccccccccbbba
+abbbbbbbbbbccccccScbbbbba
+abbbbbbbbbbbcccccfbbbbbTa
+aTbbbbbbbbbbcccccbbbbbTTa
+aaaaaaaaaaaaaaaaaaaaaaaaa
+"}

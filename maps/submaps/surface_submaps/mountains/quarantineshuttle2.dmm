@@ -113,34 +113,39 @@
 "ci" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/syringe/antiviral,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cj" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'"; name = "Chemistry Cleaner"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "ck" = (/obj/structure/table/steel,/obj/item/weapon/crowbar/power,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
-"cl" = (/obj/structure/table/rack,/obj/item/clothing/head/bio_hood,/obj/item/clothing/suit/bio_suit,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cl" = (/obj/item/tape/medical{dir = 2; icon_state = "tape_dir_0"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cm" = (/obj/item/weapon/weldingtool/largetank,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
-"cn" = (/obj/structure/closet/crate/medical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cn" = (/obj/structure/closet/crate/medical,/obj/random/maintenance/medical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"co" = (/obj/item/tape/medical{dir = 1; icon_state = "tape_dir_0"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cp" = (/obj/structure/table/steel,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cq" = (/obj/structure/closet/l3closet/medical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cr" = (/obj/item/tape/medical{dir = 1; icon_state = "tape_dir_0"},/obj/item/tape/medical{dir = 8; icon_state = "tape_dir_0"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"cs" = (/obj/structure/table/steel,/obj/item/clothing/suit/bio_suit,/obj/item/clothing/head/bio_hood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaabacababaaaaadadadacaa
-aaabababababaeafaeaeabaaaaabababababababadagahabaa
-aaacababadaiajakakalaiadaiadadadadadadadadadadaaaa
-aaababadadamanaoapadaqaqaradasatadauavauadagahaaaa
-aaaaadadadadadawaxayazaAaBaCaDaEadaFaGaHadaIadabaa
-aaaaaiaJaKaLadaMaNaOaPaQaQaRaSaTaUaVaAaWaXaAaYabaa
-aaabaiaZbababbbcbdadbebfbgadbhbiadbjaAbkaAblaYabaa
-aaabaiaJbmbnadbobpbqbrbsbtbqaNbuaUbvaAbwaVbxaYabaa
-aaabadadadadadaDbyaAbzaAbAbBbCbDadbEaGbFadadbGabaa
+aaaaaaabababababababaaaaaaaaaaaaaaaaababababaaaaaa
+aaaaabababababababababaaaaaaaaaaaaababababababaaaa
+aaacabababababababababababaaaaaaaaababababababacaa
+aaabababababababababababababababababababadadadabaa
+aaaaababababaeaeaeaeababababababababababadagahabaa
+aaaaababadaiajakakalaiadaiadadadadadadadadadadabaa
+aaababadadamanaoapadaqaqaradasatadauavauadagahabaa
+aacladadadadadawaxayazaAaBaCaDaEadaFaGaHadaIadaeaa
+aabTaiaJaKaLadaMaNaOaPaQaQaRaSaTaUaVaAaWaXaAaYaeaa
+aabTaiaZbababbbcbdadbebfbgadbhbiadbjaAbkaAblaYaeaa
+aabTaiaJbmbnadbobpbqbrbsbtbqaNbuaUbvaAbwaVbxaYaeaa
+aacoadadadadadaDbyaAbzaAbAbBbCbDadbEaGbFadadbGaeaa
 aaababadadbHbIbJbKadbLaQbMadbNbOadbPbQbRadagahabaa
-ababacabadaiajakakbSaiadaiadadadadadadadadadadaaaa
-ababababbTabaeaeafaeababababbUabababababadagahaaaa
-aaabababbVbWbWbWbWbWbWbWbWbWbWbWbWbWbWbWadadadaaaa
-aaaaababababababababbXbYbZcacbcbcbabcccdceabcfaaaa
-aaaaacababcgchcicjckclababcmabcbcbababababababaaaa
-aaaaaaababcnchababababababababaaaaaaaaaaababacaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaababadaiajakakbSaiadaiadadadadadadadadadadabaa
+aaaaaaabbTaeceababcpaebTababcbcbcbabcccdadagahabaa
+aaaaababbTaecqababcgaebTabababcbcbabababadadadabaa
+aaacababbTaeaeafaeaeaebTababababababababceabcfacaa
+aaabababbVbWbWbWbWbWbWcrabcfababababababababababaa
+aaabababababababababababababbUabababababababababaa
+aaaaababababcscnabchabbXbYbZcaababababababababaaaa
+aaaaaaaaababchcicjckababababcmababababababaaaaaaaa
+aaaaaaaaaaababababababaaaaaaabababababaaaaaaaaaaaa
+aaaaaaaaaaaaababababaaaaaaaaaaababababaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

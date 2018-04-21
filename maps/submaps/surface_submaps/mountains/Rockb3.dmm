@@ -4,7 +4,7 @@
 "d" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Rockb1)
 "e" = (/turf/simulated/wall/r_wall,/area/submap/Rockb1)
 "f" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/lino,/area/submap/Rockb1)
-"g" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/random/multiple/gun/projectile/handgun,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"g" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/random/multiple/gun/projectile/handgun,/obj/item/weapon/material/butterfly/switchblade,/turf/simulated/floor/lino,/area/submap/Rockb1)
 "h" = (/obj/structure/bookcase,/turf/simulated/floor/lino,/area/submap/Rockb1)
 "i" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "j" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/submap/Rockb1)
@@ -33,16 +33,18 @@
 "G" = (/obj/structure/toilet{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
 "H" = (/obj/machinery/power/smes/buildable/point_of_interest,/obj/structure/cable/green,/turf/simulated/floor/plating,/area/submap/Rockb1)
 "I" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/power/terminal{dir = 8},/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating,/area/submap/Rockb1)
-"J" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_state = "toolcloset"; name = "Excavation tools"},/obj/item/weapon/storage/belt/archaeology,/obj/item/weapon/storage/excavation,/obj/item/device/flashlight/lantern,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps/science,/obj/item/device/beacon_locator,/obj/item/borg/sight/meson,/obj/item/device/measuring_tape,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils,/obj/item/weapon/hand_labeler,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"J" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_state = "toolcloset"; name = "Excavation tools"},/obj/item/weapon/storage/belt/archaeology,/obj/item/weapon/storage/excavation,/obj/item/device/flashlight/lantern,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps/science,/obj/item/device/beacon_locator,/obj/item/borg/sight/meson,/obj/item/device/measuring_tape,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils,/obj/item/weapon/hand_labeler,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "K" = (/obj/structure/table/standard,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "L" = (/obj/structure/table/standard,/obj/fiftyspawner/glass,/obj/fiftyspawner/steel,/turf/simulated/floor/tiled,/area/submap/Rockb1)
-"M" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"M" = (/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "N" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "O" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 "P" = (/turf/simulated/floor/plating,/area/submap/Rockb1)
 "Q" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5},/turf/simulated/floor/plating,/area/submap/Rockb1)
 "R" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/plating,/area/submap/Rockb1)
 "S" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"T" = (/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"U" = (/obj/machinery/autolathe,/turf/simulated/floor/tiled,/area/submap/Rockb1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaa
@@ -52,12 +54,12 @@ abcccddddddddddddddccccba
 abccddddddddddddddddcccba
 abcddeeeeeeeeeeeeeedcccca
 abcddefgheijkelmnoedcccca
-abcddepqrestmetumvedcccba
-abcddeeewemtteweeeeecccba
-accddemtxmmtttttxyzycccba
+abcddepqrestMetumvedcccba
+abcddeeewemTteweeeeecccba
+accddemtxmMtttttxyzycccba
 abdddeweeeeeeeweeeeecccba
 abdddeABCDetEmtwFGedcccba
-abdddeHIJKetLMNeeeedcccba
+abdddeHIJKetLUNeeeedcccba
 abcddeeeeeeOeeeeddddcccba
 abccddddddePQRSedddccccba
 abccddddddeeeeeedccccccba

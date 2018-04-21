@@ -1,5 +1,6 @@
 /area/submap/cave
 	name = "Cave Submap Area"
+	flags = RAD_SHIELDED
 	icon_state = "submap"
 
 /area/submap/cave/deadBeacon

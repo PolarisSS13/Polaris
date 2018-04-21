@@ -1,0 +1,92 @@
+"aa" = (/turf/template_noop,/area/template_noop)
+"ab" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/tiled/steel_grid,/area/submap/Rockb1)
+"ac" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/Rockb1)
+"ad" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Rockb1)
+"ae" = (/turf/simulated/wall/r_wall,/area/submap/Rockb1)
+"af" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"ag" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp{on = 0},/turf/simulated/floor/lino,/area/submap/Rockb1)
+"ah" = (/obj/structure/bookcase,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"ai" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aj" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"ak" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"al" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/random/multiple/gun/projectile/handgun,/obj/item/weapon/material/butterfly/switchblade,/obj/random/multiple/gun/projectile/handgun,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"am" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"an" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/shard,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"ao" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"ap" = (/obj/item/weapon/melee/umbrella/random,/obj/structure/table/woodentable,/obj/item/weapon/grenade/spawnergrenade/manhacks,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"aq" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"ar" = (/turf/simulated/floor/lino,/area/submap/Rockb1)
+"as" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"at" = (/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"au" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"av" = (/obj/effect/decal/cleanable/dirt,/obj/item/stack/rods,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aw" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"ax" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"ay" = (/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"az" = (/obj/structure/closet/crate/hydroponics,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aA" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aB" = (/obj/machinery/floodlight,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aC" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"aD" = (/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aE" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aF" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aG" = (/obj/structure/toilet{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"aH" = (/obj/machinery/power/smes/buildable/point_of_interest,/obj/structure/cable/green,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aI" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/steel_grid,/area/submap/Rockb1)
+"aJ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall/r_wall,/area/submap/Rockb1)
+"aK" = (/obj/machinery/door/airlock/mining{name = "Storage"},/turf/simulated/floor/tiled/steel_grid,/area/submap/Rockb1)
+"aL" = (/obj/structure/table/standard,/obj/fiftyspawner/glass,/obj/fiftyspawner/steel,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aM" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aN" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aO" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aP" = (/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aQ" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5},/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aR" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aS" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"aT" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aU" = (/obj/structure/loot_pile/maint/boxfort,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aV" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aW" = (/obj/machinery/door/airlock{name = "Bathroom"},/turf/simulated/floor/tiled/steel_grid,/area/submap/Rockb1)
+"aX" = (/obj/structure/closet/crate/secure/phoron,/obj/item/stack/material/phoron{amount = 25},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"aY" = (/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/lino,/area/submap/Rockb1)
+"aZ" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{pixel_x = -28},/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"ba" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bb" = (/obj/structure/table/steel,/obj/random/soap,/obj/item/weapon/towel{color = "#800080"; name = "purple towel"},/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bc" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; operating = 0; pixel_x = -24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/structure/closet{icon_closed = "toolcloset"; icon_state = "toolcloset"; name = "Excavation tools"},/obj/item/weapon/storage/belt/archaeology,/obj/item/weapon/storage/excavation,/obj/item/device/flashlight/lantern,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps/science,/obj/item/device/beacon_locator,/obj/item/borg/sight/meson,/obj/item/device/measuring_tape,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils,/obj/item/weapon/hand_labeler,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bd" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"be" = (/obj/machinery/door/airlock/mining{name = "Storage"},/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bf" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5; dir = 8},/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bg" = (/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bh" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/machinery/power/terminal{dir = 8},/obj/structure/table/standard,/obj/item/weapon/pickaxe/drill,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"bi" = (/obj/machinery/power/port_gen/pacman,/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/submap/Rockb1)
+"bj" = (/obj/structure/ore_box,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bk" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bl" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 5; pixel_y = -1},/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/hydro,/area/submap/Rockb1)
+"bm" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/plating,/area/submap/Rockb1)
+"bn" = (/obj/effect/decal/cleanable/dirt,/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bo" = (/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bp" = (/obj/random/multiple/minevault,/turf/simulated/floor/tiled,/area/submap/Rockb1)
+"bq" = (/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/plating,/area/submap/Rockb1)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaadadadacacacacacacacacacacacaaaaaaaaaaaaaa
+aaaaaaadadadacacacaeaeabaeaeacacacacacaaaaaaaaaaaa
+aaaaadadaeaeaeaeaeaeafatataeaeaeaeaeaeadaaaaaaaaaa
+aaaaadaeaeagalahapaeayatataeazaAanaoaeaeadaaaaaaaa
+aaaaadaeawaqaYararaeaeabaeaeasatbnavaBaeadaaaaaaaa
+aaacadaeaqaqaqaCaraeaDataFaeauatatataBaeadaaaaaaaa
+aaacadaeaeaeaIaeaeaeasatamaeaJaeaIaeaeaeadaaaaaaaa
+aaacadadaeakatatboatamatatamamboatataeadadaaaaaaaa
+aaacacadaeajamataxamamatatamatatatataeadadaaaaaaaa
+aaaaacadaeaiatataeaeaeaKaeaeaeaeatataeadadaaaaaaaa
+aaaaadadaeaOatataeaTatataEamaUaeatataeadadaaaaaaaa
+aaaaadaeaeaeaKaeaeaVatatboamamaeaeaWaeaeadaaaaaaaa
+aaaaadaeaXatatataebpatataLaMaNaeaZbabbaeadaaaaaaaa
+aaaaadaebcbdboataeaeaebeaeaeaeaebfbgaGaeadaaaaaaaa
+aaaaadaeaeaHbhbiaebjatbqaPaPaPaebkblaeaeadaaaaaaaa
+aaaaadadaeaeaeaeaeaPaQaRaSbmaPaeaeaeaeadadaaaaaaaa
+aaaaaaadadadadadaeaeaeaeaeaeaeaeadadadadaaaaaaaaaa
+aaaaaaaaadadadadadacacacacacacacacacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

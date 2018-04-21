@@ -1,0 +1,56 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/template_noop,/area/submap/CaveTrench)
+"c" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/CaveTrench)
+"d" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"e" = (/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CaveTrench)
+"f" = (/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
+"g" = (/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
+"h" = (/mob/living/simple_animal/fish/trout{faction = "malf_drone"},/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
+"i" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"j" = (/turf/simulated/wall,/area/submap/CaveTrench)
+"k" = (/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"l" = (/obj/effect/decal/cleanable/blood,/obj/structure/loot_pile/maint/technical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"m" = (/turf/simulated/wall/wood,/area/submap/CaveTrench)
+"n" = (/obj/structure/loot_pile/surface/drone,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"o" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/box/shotgunammo,/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
+"p" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"q" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"r" = (/obj/structure/table/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"s" = (/obj/structure/closet/crate/secure/loot,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"t" = (/obj/structure/table/steel,/obj/item/robot_parts/robot_component/actuator,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"u" = (/obj/effect/decal/cleanable/blood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"v" = (/obj/item/weapon/stool/padded,/obj/random/mob/sif,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"w" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp{on = 0},/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"x" = (/obj/structure/table/steel,/obj/item/robot_parts/robot_component/armour,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"y" = (/obj/structure/table/steel,/obj/item/weapon/storage/toolbox,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"z" = (/obj/structure/table/bench/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"A" = (/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"B" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/storage/hooded/wintercoat/miner,/obj/item/clothing/under/rank/miner,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"C" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"D" = (/obj/structure/frame{anchored = 1},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"E" = (/obj/effect/decal/remains/deer,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"G" = (/obj/structure/table/steel,/obj/item/robot_parts/l_leg,/obj/item/robot_parts/head,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"H" = (/obj/effect/decal/cleanable/blood/gibs/robot,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abbcccccccccbbbccccccccccccccccccccccccccccca
+abcccddddccdddddddddddddccccccccddddddeeeeeea
+acccdddddddddddddddddddddddddddddddddeeffffea
+acdddddddddddddddddddddddddddddddddddefffhfea
+aciddddddddjkkjeeeeeeeeeeeeeeeeeeeeeeefffffca
+abddeeeeeeeekkeeffffffffffffffffffffffffffeca
+abeeefffhfffkkfffhffffffffffffffffffhfffffeea
+aeefffffffffkgfffffffffhfffffffffffffffffffea
+aeffffffffffkffffffffffffffffffffffffffffffea
+aeeffffffhffkgfffffffffffffeeeeeeeeffeeeeeeea
+abeeeeeeeeffkkfffeeeeeeeeeeeddddddeeeedddddda
+abbbdddddeeekkeeeddddddddddddddddddddddddddca
+abbcdddddddjkkjddddddddddddddddddddddddddddca
+abcccddddddddddddddnmmmmmmmmddddddddddddidbca
+abbbciddddddddddddddmopskqqmmdddddddddddbbbca
+abbbcccccrrtudddddddgkkkvwkmmdddddddddddbbbba
+abbbbbbccccxyzddAAddmBkkgkgmmdddddddccccbbbba
+abbbbbbbccccGHlCDAAEmmmmmmmmdddddccccccbcbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

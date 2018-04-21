@@ -3,7 +3,7 @@
 "ac" = (/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "ad" = (/obj/effect/spider/stickyweb,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "ae" = (/obj/structure/sign/greencross{desc = "White cross in a green field, you can get medical aid here."; name = "First-Aid"},/turf/simulated/shuttle/wall/no_join,/area/submap/CrashedMedShuttle)
-"af" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
+"af" = (/obj/item/weapon/circuitboard/broken,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "ag" = (/turf/simulated/shuttle/wall,/area/submap/CrashedMedShuttle)
 "ah" = (/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
 "ai" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4; health = 1e+006},/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
@@ -11,9 +11,9 @@
 "ak" = (/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "al" = (/obj/item/weapon/storage/toolbox/mechanical,/obj/machinery/light{dir = 1},/obj/structure/table/standard,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "am" = (/obj/structure/table/standard,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"an" = (/obj/item/weapon/material/shard{icon_state = "medium"},/obj/effect/decal/cleanable/blood/oil,/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
+"an" = (/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "ao" = (/obj/item/weapon/circuitboard/broken,/obj/structure/door_assembly/door_assembly_ext,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
-"ap" = (/obj/structure/door_assembly/door_assembly_ext,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
+"ap" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "aq" = (/obj/effect/decal/cleanable/liquid_fuel,/mob/living/simple_animal/hostile/giant_spider/webslinger{returns_home = 1},/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "ar" = (/obj/structure/closet/crate/medical,/obj/random/medical,/obj/random/medical,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "as" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
@@ -27,7 +27,7 @@
 "aA" = (/obj/item/stack/rods,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
 "aB" = (/obj/item/weapon/material/shard,/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "aC" = (/obj/effect/decal/cleanable/blood/oil,/obj/item/weapon/firstaid_arm_assembly,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"aD" = (/obj/structure/closet/secure_closet/personal/patient,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"aD" = (/turf/simulated/mineral,/area/submap/CrashedMedShuttle)
 "aE" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "aF" = (/obj/structure/reagent_dispensers/fueltank,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "aG" = (/obj/structure/reagent_dispensers/watertank,/obj/effect/decal/cleanable/liquid_fuel,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
@@ -54,7 +54,7 @@
 "bb" = (/obj/effect/spider/cocoon,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
 "bc" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bd" = (/obj/effect/decal/cleanable/blood/oil,/obj/structure/loot_pile/surface/bones,/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
-"be" = (/obj/effect/spider/stickyweb,/obj/structure/girder/displaced,/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks,/area/submap/CrashedMedShuttle)
+"be" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
 "bf" = (/obj/effect/decal/cleanable/blood/gibs/robot,/obj/item/weapon/firstaid_arm_assembly,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bg" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bh" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
@@ -63,10 +63,10 @@
 "bk" = (/obj/item/stack/rods,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bl" = (/obj/effect/spider/stickyweb,/obj/item/weapon/material/shard,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bm" = (/obj/random/medical,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"bn" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/extinguisher_cabinet{pixel_x = -32},/obj/structure/lattice,/obj/item/device/gps/internal/poi,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
+"bn" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/structure/extinguisher_cabinet{pixel_x = -32},/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bo" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/loot_pile/surface/bones,/obj/effect/decal/cleanable/blood/drip,/obj/structure/lattice,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bp" = (/obj/structure{anchored = 1; density = 1; desc = "Once an artificial intelligence; now merely a brick of inert metal and circuits."; icon = 'icons/mob/AI.dmi'; icon_state = "ai-empty"; name = "V.I.T.A"},/turf/simulated/shuttle/floor/yellow,/area/submap/CrashedMedShuttle)
-"bq" = (/obj/effect/decal/cleanable/blood/oil,/obj/structure/loot_pile/mecha/odysseus,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
+"bq" = (/obj/structure/loot_pile/mecha/odysseus,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "br" = (/obj/structure/grille/broken,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "bs" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/spider/stickyweb,/mob/living/simple_animal/hostile/giant_spider/webslinger,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
 "bt" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
@@ -79,8 +79,8 @@
 "bA" = (/obj/structure/girder/displaced,/turf/template_noop,/area/submap/CrashedMedShuttle)
 "bB" = (/obj/structure/shuttle/engine/propulsion{tag = "icon-propulsion_r (WEST)"; icon_state = "propulsion_r"; dir = 8},/turf/simulated/floor/outdoors/rocks,/area/submap/CrashedMedShuttle)
 "bC" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
-"bD" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/adv,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
-"bE" = (/obj/structure/table/standard,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
+"bD" = (/obj/structure/closet/secure_closet/personal/patient,/obj/random/multiple/voidsuit/medical,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"bE" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CrashedMedShuttle)
 "bF" = (/obj/random/medical/pillbottle,/mob/living/simple_animal/hostile/giant_spider/webslinger{returns_home = 1},/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bG" = (/obj/structure/table/standard,/obj/item/device/defib_kit/loaded,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bH" = (/obj/structure/table/standard,/obj/item/bodybag/cryobag,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
@@ -89,22 +89,21 @@
 "bK" = (/obj/structure/table/standard,/obj/item/weapon/surgical/retractor,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bL" = (/obj/item/weapon/material/shard,/obj/structure/grille,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "bM" = (/obj/machinery/light{dir = 8},/obj/structure/table/standard,/obj/structure/loot_pile/maint/technical,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
-"bN" = (/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/spider/cocoon,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"bN" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4; health = 1e+006},/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "bO" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/closet/secure_closet/medical_wall/anesthetics{pixel_x = 32},/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bP" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"bQ" = (/obj/effect/spider/cocoon,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"bQ" = (/obj/structure/table/standard,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
 "bR" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/loot_pile/surface/bones,/obj/item/weapon/surgical/surgicaldrill,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bS" = (/obj/item/weapon/material/shard{icon_state = "medium"},/obj/structure/grille,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "bT" = (/obj/structure/table/standard,/obj/item/device/reagent_scanner/adv,/turf/simulated/shuttle/floor/purple,/area/submap/CrashedMedShuttle)
 "bU" = (/obj/machinery/iv_drip,/obj/item/weapon/reagent_containers/blood/empty,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"bV" = (/mob/living/simple_animal/hostile/giant_spider/carrier,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"bW" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/masks,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"bW" = (/obj/item/weapon/surgical/scalpel,/obj/random/firstaid,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bX" = (/obj/structure/table/standard,/obj/random/firstaid,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bY" = (/obj/structure/table/standard,/obj/item/weapon/storage/backpack/medic,/obj/random/medical/lite,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "bZ" = (/obj/structure/table/standard,/obj/effect/spider/stickyweb,/obj/random/medical,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "ca" = (/obj/structure/girder,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "cb" = (/obj/structure/frame,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
-"cc" = (/obj/structure/table/standard,/obj/structure/sign/periodic{pixel_y = -32},/obj/item/weapon/surgical/bonesetter,/obj/item/weapon/surgical/scalpel,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"cc" = (/obj/structure/table/standard,/obj/item/roller,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "cd" = (/obj/machinery/optable,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/loot_pile/surface/bones,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "ce" = (/obj/structure/table/standard,/obj/item/weapon/surgical/bonegel,/obj/item/weapon/surgical/FixOVein,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 "cf" = (/mob/living/simple_animal/hostile/giant_spider/webslinger{returns_home = 1},/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
@@ -115,23 +114,25 @@
 "ck" = (/obj/effect/decal/remains/tajaran,/obj/item/weapon/surgical/circular_saw,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CrashedMedShuttle)
 "cl" = (/obj/random/mob/spider/nurse,/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
 "cm" = (/obj/machinery/door/airlock/external{icon_state = "door_locked"; locked = 1; name = "Shuttle Hatch"},/turf/simulated/shuttle/plating,/area/submap/CrashedMedShuttle)
+"cn" = (/obj/structure/table/standard,/obj/structure/sign/periodic{pixel_y = -32},/obj/item/weapon/surgical/scalpel,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
+"co" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/shuttle/floor/white,/area/submap/CrashedMedShuttle)
 
 (1,1,1) = {"
-azazazaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaazaz
-azazaaaaaaaaabaaaaabacadaeaiagagagaaaaaaabaz
-azazaaababaaaaahabanadajagakalamagagagaaaaaa
-azaaaaaaaaaaaaabatagaoapagaqakakarasagagaaaa
-aaaaaaaaahaaabaBauagaMakawaxayakakbfakaNabaa
-aaababaaaAabaSaCaDaiakaEagaFaGaHaIaJaKaLabaa
-aaabaaaaaWbcacaOaPawakaQaRagagagagagagagabaa
-aaaaaaaaababbdaTaUaibgbhaXaYafabaZbabbabaaaa
-aaaaaabibkbeagagagagbnababbobraZaVbqababaaaa
-aaaaaaabbjbuakblbmaicfcibpabcjbsbtckabaaaaaa
-aaaaabbvbwbxakakakbyakakagbzbzbAagagagagaaaa
-aAabbBbCbDbEbFakakaiaQakagbGbHbIbJakbKbLabaa
-aaabagagbMbxbNakbOagbPbQbyakakakavbRambSabaa
-aaaaabagagbTbUbVbWagadaoagbXakbYambZcacaaaaa
-azaaaaabagcbcccdceagclajagcgchamagcacaabaaaz
-azazaaabagagagagagaecmcmaeaiagagcaabababazaz
-azaaaaaaababababaaababaaaaaaababaaaaaaazazaz
+azazazaaaDaDaDaaaaaaaaaaaDaDaDaaaaaaaaaaazaz
+azazaaaDaDaaabababaecmcmaeaiagagagaaaaaaabaz
+azazaDaDaDababahabagadajagakalamagagagaaaaaa
+azaDaDaaababaDabatagafanagaqakakarasagagaaaa
+aDaDaDabahaDabaBauagaMakawaxayakakbfakaNabaa
+aaabbqabaAabaSaCbDaiakaEagaFaGaHaIaJaKaLaDaD
+aaabababaWbcacaOaPawakaQaRagagagagagagagaDaD
+aaaDaDabababbdaTaUaibgbhaXaYapabaZbabbaDaDaa
+aaaaabbibkagagagagagbnababbobraZaVbEabaDaDaa
+aaaaaaabbjbuakblbmbNcfcibpabcjbsbtckaDaDaDaa
+aaaaabbvbwbxakakakbyakakagbzbzbAagagagagaDaa
+aAabbBbCbQbebFakbWaLaQakagbGbHbIbJakbKbLabaa
+aaabagagbMbxaPakbOagbPakbyakakakavbRccbSabaa
+aaaaabagagbTbUavceagadaoagbXakbYambZcacaaaaa
+azaaaaabagagcncdcbagclajagcgchcoagcacaabaaaz
+azazaaababagagagagaecmcmaeaiagagcaabababazaz
+azaaaaaaababababaaababaaaDaDababaaaaaaazazaz
 "}

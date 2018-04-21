@@ -16,64 +16,79 @@
 "ap" = (/obj/item/weapon/ore/gold,/obj/item/weapon/ore/gold,/obj/item/weapon/ore/gold,/obj/item/weapon/ore/gold,/obj/item/weapon/ore/gold,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
 "aq" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp{on = 0},/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "ar" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/obj/machinery/light,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
-"as" = (/obj/structure/window/reinforced/full,/turf/simulated/wall,/area/submap/cave/AMine1)
+"as" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "at" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "au" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor,/area/submap/cave/AMine1)
-"av" = (/obj/structure/table/standard,/obj/item/weapon/cell/high,/obj/item/weapon/cell/high,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aw" = (/obj/machinery/power/smes/buildable/point_of_interest,/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor,/area/submap/cave/AMine1)
+"av" = (/obj/structure/window/reinforced/full,/turf/simulated/floor,/area/submap/cave/AMine1)
+"aw" = (/obj/structure/table/standard,/obj/random/powercell,/obj/random/powercell,/turf/simulated/floor,/area/submap/cave/AMine1)
 "ax" = (/turf/simulated/floor,/area/submap/cave/AMine1)
 "ay" = (/obj/structure/loot_pile/maint/trash,/obj/structure/cable/green{d2 = 8; icon_state = "0-8"},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor,/area/submap/cave/AMine1)
-"az" = (/obj/structure/ore_box,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
-"aA" = (/obj/machinery/light/small{dir = 1},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"az" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"aA" = (/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/turf/simulated/floor,/area/submap/cave/AMine1)
 "aB" = (/obj/structure/closet/crate/trashcart,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aC" = (/obj/structure/closet/crate/engineering,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aD" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor,/area/submap/cave/AMine1)
+"aC" = (/obj/structure/closet/crate/secure/loot,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"aD" = (/obj/item/weapon/material/shard,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor,/area/submap/cave/AMine1)
 "aE" = (/obj/machinery/space_heater,/turf/simulated/floor,/area/submap/cave/AMine1)
 "aF" = (/obj/structure/closet/secure_closet/engineering_welding,/turf/simulated/floor,/area/submap/cave/AMine1)
 "aG" = (/obj/structure/table/rack,/obj/item/weapon/pickaxe/drill,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "aH" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "aI" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
-"aJ" = (/obj/machinery/washing_machine,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"aJ" = (/obj/item/weapon/material/shard/shrapnel,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "aK" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
 "aL" = (/obj/machinery/light{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "aM" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "aN" = (/obj/machinery/light/small{brightness_color = "#DA0205"; brightness_power = 1; brightness_range = 5; dir = 8},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
 "aO" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/cave/AMine1)
-"aP" = (/obj/structure/table/standard,/obj/item/pizzabox,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"aP" = (/obj/random/mob/sif/hostile,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
 "aQ" = (/obj/machinery/door/airlock,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aR" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/submap/cave/AMine1)
+"aR" = (/obj/structure/cable/green,/obj/item/frame/apc,/turf/simulated/floor,/area/submap/cave/AMine1)
 "aS" = (/obj/machinery/light/small,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
 "aT" = (/turf/template_noop,/area/submap/cave/AMine1)
-"aU" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/turf/simulated/floor,/area/submap/cave/AMine1)
+"aU" = (/obj/structure/closet/crate/engineering,/obj/item/stack/material/phoron{amount = 25},/turf/simulated/floor,/area/submap/cave/AMine1)
 "aV" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/submap/cave/AMine1)
 "aW" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/submap/cave/AMine1)
-"aX" = (/obj/machinery/power/apc{operating = 0; pixel_x = 31},/obj/structure/cable/green,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aY" = (/obj/machinery/light,/obj/machinery/power/port_gen/pacman,/obj/structure/cable,/turf/simulated/floor,/area/submap/cave/AMine1)
-"aZ" = (/obj/machinery/mining/brace,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
-"ba" = (/obj/machinery/mining/drill,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/AMine1)
+"aX" = (/obj/machinery/light,/obj/structure/cable,/turf/simulated/floor,/area/submap/cave/AMine1)
+"aY" = (/obj/structure/ore_box,/turf/simulated/floor,/area/submap/cave/AMine1)
+"aZ" = (/obj/structure/ore_box,/turf/simulated/floor/tiled/techmaint,/area/submap/cave/AMine1)
+"ba" = (/obj/structure/loot_pile/mecha/ripley,/obj/machinery/mech_recharger,/turf/simulated/floor/tiled/techmaint,/area/submap/cave/AMine1)
+"bb" = (/obj/structure/table/steel_reinforced,/obj/machinery/cell_charger,/turf/simulated/floor/tiled/techmaint,/area/submap/cave/AMine1)
+"bc" = (/obj/item/weapon/material/shard,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bd" = (/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/obj/structure/loot_pile/maint/technical,/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor,/area/submap/cave/AMine1)
+"be" = (/obj/structure/cable/green{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bf" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bg" = (/obj/machinery/light/small{dir = 1},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bh" = (/obj/effect/decal/cleanable/spiderling_remains,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bi" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor,/area/submap/cave/AMine1)
+"bj" = (/obj/structure/door_assembly{anchored = 1},/turf/simulated/floor,/area/submap/cave/AMine1)
+"bk" = (/obj/machinery/space_heater,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"bl" = (/obj/machinery/washing_machine,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"bm" = (/obj/item/clothing/accessory/poncho/roles/cargo,/obj/structure/table,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"bn" = (/obj/structure/table,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"bo" = (/obj/random/mob/sif/hostile,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"bp" = (/obj/structure/girder,/turf/simulated/floor,/area/submap/cave/AMine1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaTaTabababababababababababacacacacacacacacacaTaa
-aaaTababababababababababacadadaeadadadadadaeadadaa
-aaababababababababababababadafafafafafafafafafafaa
-aaabababacacacababababababadafagahafaiajakalaiafaa
-aaabacacacacacababababababadafahahamahahahahahafaa
-aaabacacacacacanaoapabababadafahahafaiaqarajaiafaa
-aaabacacacacacacacacabababadasahatafafafafafafafaa
-aaabacacacacacacacacabababadasahahafauavawayaDafaa
-aaabacacacacacacacacabababadasahahamaxaxaUaxaVafaa
-aaabacacacacacacaZacacabafadasahahafaxaxaWaxaXafaa
-aaabacacacacacacbaacacazaAadasahahafaBaCaYaEaFafaa
-aaababacacacacacacacacacacadafagatafafafafafafafaa
-aaababacacacacacacacacacacadafaGahafagaHaIahaJafaa
-aaabababacacaZacacacacacacaKafaGahafahahahahahafaa
-aaabababacacacacacacacacadadafafahafaLaMaMaMatafaa
-aaabababafaNacacacacacacaOafafafahafahajajaPahafaa
-aaababababacacacacacacacadaQaRaQahaQahaMaMaMahafaa
-aaabababababababacacacacadafafafafafafafafafafafaa
-aaababababababababacacacadadadadadadadadadadababaa
-aaabababababababababacacacacacacacacacacacabababaa
+aaaTababababababababababacadadaeadadadadadaeacacaa
+aaabababababababababababadadafafafafafafafafafacaa
+aaababababacababababababadadafagagafasajakalafafaa
+aaabacabafaNacabababababadafafahahamazahahahahafaa
+aaabacacacacacanaoapababadbpaCahahafaiaqarajaiafaa
+aaabacacacacacacacacabadadaDaJahatafafafafafafafaa
+aaabacacacacaPacacacadadaKbcaGahahafauawbdaybeafaa
+aaabacacacacacacacacaOafafafafahahamaxaxaAbfaVafaa
+aaabacacacacacacacacadavaxbgavahahbpaxbhaWaxaRafaa
+aaabacacacacacacacacadaQaxbibjahatbpaBaUaXaEaFafaa
+aaababacacacacacacacadafaYaxbpahahafafafafafafafaa
+aaababacacacacacacacadafafafafahahafbkaHaIahblafaa
+aaabababacacacacacacadadadavaZahahafahahahahahafaa
+aaabababacacacacacacacadadavbaahatafaLaMaMaMatafaa
+aaababababacacacacacacacadafbbahahafahbmbnbnahafaa
+aaabababafaNacacacacacacadafafahahaxboaMaMaMahafaa
+aaabababababababacacacacadadafahahafahahahahafafaa
+aaababababababababacacacadadafafafafafafafafafabaa
+aaabababababababababacacacadadadadadadadadabababaa
 aaababababababababababacacacacacacaSacabababababaa
 aaabababababababababababacacacacacafabababababaTaa
 aaaTababababababababababacacacacacabababababaTaTaa
