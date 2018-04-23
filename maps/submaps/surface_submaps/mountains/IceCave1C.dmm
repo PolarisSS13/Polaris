@@ -5,8 +5,8 @@
 "e" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 "f" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 "g" = (/obj/machinery/crystal/ice,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
-"h" = (/obj/random/firstaid,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
-"i" = (/obj/random/ammo,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"h" = (/obj/random/multiple/minevault,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"i" = (/obj/structure/closet/crate,/obj/random/projectile/random,/obj/random/firstaid,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaa

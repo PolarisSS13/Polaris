@@ -1,0 +1,35 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/wall/r_wall,/area/submap/cave/prepper1)
+"c" = (/obj/structure/table/steel,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/item/stack/rods,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"d" = (/obj/structure/table/steel,/obj/random/maintenance/security,/obj/item/stack/cable_coil/random,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"e" = (/obj/structure/table/steel,/obj/random/maintenance/engineering,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"f" = (/obj/structure/sign/warning,/turf/simulated/wall/r_wall,/area/submap/cave/prepper1)
+"g" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/glasses,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"h" = (/obj/structure/table/steel,/obj/random/toolbox,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"i" = (/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"j" = (/obj/structure/table/steel,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/item/weapon/tape_roll,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"k" = (/obj/machinery/door/blast/regular{desc = "Old and worn, looks like it won't open easily."; id = "prepper1"},/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"l" = (/mob/living/simple_animal/hostile/viscerator,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"m" = (/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/structure/closet/crate/engineering,/obj/random/tech_supply,/obj/random/tool/powermaint,/obj/random/tool,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"n" = (/obj/structure/closet/crate/freezer/rations,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"o" = (/obj/structure/reagent_dispensers/water_cooler/full,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"p" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"q" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/clothing/mask/gas,/obj/item/clothing/suit/armor/material/makeshift,/obj/item/clothing/head/helmet/bucket,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"r" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"s" = (/obj/structure/table/steel,/obj/item/device/flashlight/lantern,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"t" = (/obj/structure/table/rack,/obj/random/gun/random,/obj/random/gun/random,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"v" = (/obj/random/landmine,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"w" = (/obj/structure/closet/crate/freezer/rations,/obj/item/seeds/bananaseed,/obj/item/seeds/bananaseed,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+
+(1,1,1) = {"
+aaaaaaaaaa
+aabbbbbbaa
+abbcdejbba
+afghllimba
+akviiiipba
+akiiiiiwba
+afoillinba
+abbqrstbba
+aabbbbbbaa
+aaaaaaaaaa
+"}

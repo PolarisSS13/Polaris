@@ -1,0 +1,46 @@
+"a" = (/turf/simulated/mineral,/area/submap/cave/BlastMine1)
+"b" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"c" = (/obj/structure/sign/warning/bomb_range,/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"d" = (/obj/structure/table/rack,/obj/item/weapon/syndie/c4explosive,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"e" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"f" = (/obj/effect/decal/remains/ribcage,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"g" = (/obj/structure/table/rack,/obj/item/clothing/head/bomb_hood,/obj/item/clothing/suit/bomb_suit,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"h" = (/obj/item/device/gps/internal/poi{gps_tag = "Unidentified Signal"},/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"i" = (/mob/living/simple_animal/retaliate/diyaab,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"j" = (/obj/structure/table/reinforced,/obj/item/weapon/flame/lighter/zippo/c4detonator{detonator_mode = 1},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"k" = (/obj/effect/decal/remains/deer,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"l" = (/obj/machinery/floodlight,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"m" = (/turf/simulated/wall/sandstone,/area/submap/cave/BlastMine1)
+"n" = (/obj/structure/girder/displaced,/obj/structure/sign/warning/bomb_range,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"o" = (/obj/structure/boulder,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"p" = (/obj/effect/decal/remains/xeno,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"q" = (/obj/structure/sign/warning/bomb_range,/turf/simulated/wall/sandstone{damage = 20},/area/submap/cave/BlastMine1)
+"r" = (/obj/item/weapon/material/shard/shrapnel,/obj/item/weapon/syndie/c4explosive,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"s" = (/mob/living/simple_animal/hostile/savik{cooperative = 1; returns_home = 1},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"t" = (/obj/item/weapon/material/shard/shrapnel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"u" = (/obj/item/clothing/suit/bomb_suit,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"v" = (/obj/effect/decal/remains/unathi,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"w" = (/obj/effect/decal/remains/posi,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"x" = (/obj/item/clothing/head/bomb_hood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"y" = (/mob/living/simple_animal/hostile/savik{cooperative = 1; returns_home = 1},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"z" = (/obj/effect/decal/remains/mouse,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"A" = (/obj/effect/decal/remains/lizard,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+"B" = (/obj/effect/decal/remains/tajaran,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/BlastMine1)
+
+(1,1,1) = {"
+aaabfbaaaa
+aabkooaaaa
+aacoobbaaa
+aadbbbbopb
+abrbbecoob
+abrbsbtuov
+abhwbbxboa
+aodibbgjaa
+bodyilmaaa
+bodbbbzboa
+banbbbboob
+abAbbbooBb
+aaoobfqbbb
+bbbkbbbbba
+baabbbaaaa
+"}

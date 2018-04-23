@@ -5,41 +5,43 @@
 "e" = (/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CaveTrench)
 "f" = (/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
 "g" = (/mob/living/simple_animal/hostile/malf_drone/lesser,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"h" = (/obj/structure/table/woodentable,/obj/random/projectile/shotgun,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"h" = (/obj/structure/loot_pile/surface/drone{pixel_y = -4},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "i" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "j" = (/turf/simulated/wall,/area/submap/CaveTrench)
 "k" = (/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"l" = (/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"l" = (/obj/structure/table/woodentable,/obj/item/weapon/gun/projectile/shotgun/pump,/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
 "m" = (/turf/simulated/wall/wood,/area/submap/CaveTrench)
 "n" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lantern,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"o" = (/obj/structure/simple_door/wood,/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
 "p" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "q" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "r" = (/obj/structure/table/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "s" = (/obj/structure/table/steel,/obj/item/weapon/paper{info = "Rellek's telling me that we're in deep shit if the townies found out I'm cooking up drones out here. Like I give a fuck, We're minning our asses off only to dig into some bug nest to get our legs chewed. Well I'm not looking a gift horse in the mouth. Those drone dudes out in the wild hooked us up with these machines so long as they get some of the metal we dig up. Win win for us, Guess we're retiring early after all."; name = "Note"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "t" = (/obj/structure/table/steel,/obj/item/robot_parts/robot_component/actuator,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "u" = (/obj/effect/decal/cleanable/blood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"v" = (/obj/structure/simple_door/wood,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"w" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"v" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp{on = 0},/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"w" = (/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
 "x" = (/obj/structure/table/steel,/obj/item/device/robotanalyzer,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "y" = (/obj/structure/table/steel,/obj/item/weapon/storage/toolbox,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "z" = (/obj/structure/table/bench/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "A" = (/obj/effect/decal/remains,/obj/item/clothing/under/rank/miner,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"B" = (/obj/structure/table/steel,/obj/item/stack/cable_coil/random,/obj/item/robot_parts/head,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"B" = (/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
 "C" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/storage/hooded/wintercoat/miner,/obj/item/clothing/suit/storage/hooded/wintercoat/miner,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"D" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"D" = (/obj/item/weapon/storage/box/shotgunammo,/turf/simulated/floor/wood/broken,/area/submap/CaveTrench)
 "E" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"F" = (/obj/item/weapon/storage/box/shotgunammo,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"G" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
-"H" = (/obj/effect/decal/cleanable/blood/gibs/robot,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"I" = (/obj/machinery/drone_fabricator{fabricator_tag = "Unknown"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"F" = (/obj/effect/decal/cleanable/blood/gibs/robot,/obj/random/multiple/minevault,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"G" = (/obj/structure/table/steel,/obj/item/robot_parts/l_leg,/obj/item/robot_parts/head,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"H" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"I" = (/obj/structure/showcase{desc = "Built like a tank, but no longer working after so many years."; icon = 'icons/obj/machines/drone_fab.dmi'; icon_state = "drone_fab_nopower"; name = "Old drone fabricator"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
 "J" = (/mob/living/simple_animal/fish/trout{faction = "malf_drone"},/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
+"K" = (/obj/effect/decal/cleanable/blood,/obj/structure/loot_pile/maint/technical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 abbccccccccccccccccccccccccccccccccccccccccca
 abcccddddccdddddddddddddccccccccddddddeeeeeea
 acccdddddddddddddddddddddddddddddddddeeffffea
-acddddddddddddddddddddgddddddddddddddefffJfea
+acddddddddgdddddddddddgddddddddddddddefffJfea
 aciddddddddjkkjeeeeeeeeeeeeeeeeeeeeeeefffffca
 abddeeeeeeeekkeeffffffffffffffffffffffffffeca
 abeeefffJfffkkfffJffffffffffffffffffJfffffeea
@@ -49,10 +51,10 @@ aeeffffffJffkkfffffffffffffeeeeeeeeffeeeeeeea
 abeeeeeeeeffkkfffeeeeeeeeeeeddddddeeeedddddda
 abbbdddddeeekkeeeddddddddddddddddddddddddddca
 abbcdddddddjkkjddddddddddddddddddddddddddddca
-abcccdddddddddddddddmmmmmmmmddddddddddddidbca
-abbbcidddddddgdddddnmhpkkqkmmdddddddddddbbbca
-abbbcccccrstudddddddvkkkqwqmmdddddddddddbbbba
-abbbbbbccccxyzdAllddmCDEkqFmmdddddddccccbbbba
-abbbbbbbccccBHuGIlldmmmmmmmmdddddccccccbcbbba
+abcccddddddddddddddhmmmmmmmmddddddddddddidbca
+abbbcidddddddgdddddnmlpkkqkmmdddddddddddbbbca
+abbbcccccrstudddddddokkkqvqmmdddddddddddbbbba
+abbbbbbccccxyzdAwwddmCkEBqDmmdddddddccccbbbba
+abbbbbbbccccGFKHIwwdmmmmmmmmdddddccccccbcbbba
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

@@ -4,55 +4,61 @@
 "d" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "e" = (/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/CaveTrench)
 "f" = (/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
-"g" = (/mob/living/simple_animal/hostile/malf_drone/lesser,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"h" = (/obj/structure/table/woodentable,/obj/random/projectile/shotgun,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"i" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"g" = (/obj/effect/decal/remains/mouse,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"h" = (/mob/living/simple_animal/fish/trout{faction = "malf_drone"},/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
+"i" = (/obj/structure/loot_pile/surface/drone{pixel_y = -4},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "j" = (/turf/simulated/wall,/area/submap/CaveTrench)
 "k" = (/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"l" = (/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"l" = (/obj/structure/table/woodentable,/obj/random/projectile/shotgun,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "m" = (/turf/simulated/wall/wood,/area/submap/CaveTrench)
 "n" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lantern,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"o" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
 "p" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "q" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"r" = (/obj/structure/table/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"r" = (/obj/structure/loot_pile/surface/drone{pixel_y = -2},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "s" = (/obj/structure/table/steel,/obj/item/weapon/paper{info = "Rellek's telling me that we're in deep shit if the townies found out I'm cooking up drones out here. Like I give a fuck, We're minning our asses off only to dig into some bug nest to get our legs chewed. Well I'm not looking a gift horse in the mouth. Those drone dudes out in the wild hooked us up with these machines so long as they get some of the metal we dig up. Win win for us, Guess we're retiring early after all."; name = "Note"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "t" = (/obj/structure/table/steel,/obj/item/robot_parts/robot_component/actuator,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "u" = (/obj/effect/decal/cleanable/blood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "v" = (/obj/structure/simple_door/wood,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"w" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/wood,/area/submap/CaveTrench)
+"w" = (/obj/effect/decal/remains/lizard,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "x" = (/obj/structure/table/steel,/obj/item/device/robotanalyzer,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "y" = (/obj/structure/table/steel,/obj/item/weapon/storage/toolbox,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "z" = (/obj/structure/table/bench/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"A" = (/obj/effect/decal/remains,/obj/item/clothing/under/rank/miner,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"B" = (/obj/structure/table/steel,/obj/item/stack/cable_coil/random,/obj/item/robot_parts/head,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"A" = (/obj/structure/table/steel,/obj/random/powercell,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"B" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp{on = 0},/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "C" = (/obj/structure/closet{icon_closed = "cabinet_closed"; icon_opened = "cabinet_open"; icon_state = "cabinet_closed"},/obj/item/clothing/suit/storage/hooded/wintercoat/miner,/obj/item/clothing/suit/storage/hooded/wintercoat/miner,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "D" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "E" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/wood,/area/submap/CaveTrench)
 "F" = (/obj/item/weapon/storage/box/shotgunammo,/turf/simulated/floor/wood,/area/submap/CaveTrench)
-"G" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
-"H" = (/obj/effect/decal/cleanable/blood/gibs/robot,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
-"I" = (/obj/machinery/drone_fabricator{fabricator_tag = "Unknown"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
-"J" = (/mob/living/simple_animal/fish/trout{faction = "malf_drone"},/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
+"G" = (/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/item/frame/apc,/obj/item/weapon/module/power_control,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"H" = (/obj/structure/cable/yellow{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"I" = (/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"J" = (/obj/structure/cable/yellow{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"K" = (/obj/effect/decal/cleanable/blood/gibs/robot,/obj/structure/table/steel,/obj/item/stack/cable_coil/random,/obj/item/robot_parts/head,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"L" = (/obj/machinery/power/smes/batteryrack,/obj/structure/cable/yellow,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"M" = (/obj/machinery/power/terminal{dir = 8},/obj/structure/cable/yellow,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"N" = (/obj/machinery/drone_fabricator{fabricator_tag = "Unknown"},/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
+"O" = (/obj/machinery/power/port_gen/pacman,/obj/structure/cable/yellow,/turf/simulated/floor/plating/external,/area/submap/CaveTrench)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 abbccccccccccccccccccccccccccccccccccccccccca
 abcccddddccdddddddddddddccccccccddddddeeeeeea
 acccdddddddddddddddddddddddddddddddddeeffffea
-acddddddddddddddddddddgddddddddddddddefffJfea
-aciddddddddjkkjeeeeeeeeeeeeeeeeeeeeeeefffffca
+acdddddddddddddddddddddddddddddddddddefffhfea
+acgddddddddjkkjeeeeeeeeeeeeeeeeeeeeeeefffffca
 abddeeeeeeeekkeeffffffffffffffffffffffffffeca
-abeeefffJfffkkfffJffffffffffffffffffJfffffeea
-aeefffffffffkkfffffffffJfffffffffffffffffffea
+abeeefffhfffkkfffhffffffffffffffffffhfffffeea
+aeefffffffffkkfffffffffhfffffffffffffffffffea
 aeffffffffffkkfffffffffffffffffffffffffffffea
-aeeffffffJffkkfffffffffffffeeeeeeeeffeeeeeeea
+aeeffffffhffkkfffffffffffffeeeeeeeeffeeeeeeea
 abeeeeeeeeffkkfffeeeeeeeeeeeddddddeeeedddddda
 abbbdddddeeekkeeeddddddddddddddddddddddddddca
-abbcdddddddjkkjddddddddddddddddddddddddddddca
-abcccdddddddddddddddmmmmmmmmddddddddddddidbca
-abbbcidddddddgdddddnmhpkkqkmmdddddddddddbbbca
-abbbcccccrstudddddddvkkkqwqmmdddddddddddbbbba
-abbbbbbccccxyzdAllddmCDEkqFmmdddddddccccbbbba
-abbbbbbbccccBHuGIlldmmmmmmmmdddddccccccbcbbba
+abbcdddddddjkkjdddddirdddddddddddddddddddddca
+abcccdddddddddddddddmmmmmmmmddddddddddddwdbca
+abbbcgdddddddddddddnmlpkkqkmmdddddddddddbbbca
+abbbcccccAstudddddddvkkkqBqmmdddddddddddbbbba
+abbbbbbccccxzGoHJJoImCDEkqFmmdddddddccccbbbba
+abbbbbbbcccyKjLMNIOImmmmmmmmdddddccccccbcbbba
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
