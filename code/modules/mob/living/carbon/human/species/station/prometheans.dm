@@ -5,7 +5,11 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 	name =             SPECIES_PROMETHEAN
 	name_plural =      "Prometheans"
-	blurb =            "What has Science done?"
+	blurb =            "Prometheans (Macrolimus artificialis) are a species of artificially-created gelatinous humanoids, \
+	chiefly characterized by their primarily liquid bodies and ability to change their bodily shape and color in order to  \
+	mimic many forms of life. Derived from the Aetolian giant slime (Macrolimus vulgaris) inhabiting the warm, tropical planet \
+	of Aetolus, they are a relatively newly lab-created sapient species, and as such many things about them have yet to be comprehensively studied. \
+	What has Science done?"
 	show_ssd =         "totally quiescent"
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
