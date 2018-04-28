@@ -47,17 +47,15 @@
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = MOB_LAYER + 0.1
-			I.plane = MOB_PLANE
 			I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
-		plane = MOB_PLANE
-		layer = MOB_LAYER + 0.1
+		src.layer = FLY_LAYER
 	else
-		reset_plane_and_layer()
+		src.layer = OBJ_LAYER
 
 /obj/structure/bed/chair/set_dir()
 	..()
@@ -207,3 +205,24 @@
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
+
+
+/obj/structure/bed/sofa
+	name = "old ratty sofa"
+	icon = 'icons/obj/sofas.dmi'
+	icon_state = "sofamiddle"
+	anchored = 1
+	buckle_lying = 0
+
+/obj/structure/bed/sofa/update_icon()
+	return
+
+/obj/structure/bed/sofa/New(var/newloc)
+	..(newloc, "carpet")
+
+/obj/structure/bed/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/bed/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/bed/sofa/corner
+	icon_state = "sofacorner"

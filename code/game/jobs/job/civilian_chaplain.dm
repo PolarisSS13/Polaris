@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/civilian/chaplain
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
+	alt_titles = list("Counselor", "Priest", "Preacher")
 
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
 

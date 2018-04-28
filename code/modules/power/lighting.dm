@@ -16,8 +16,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	plane = MOB_PLANE
-	layer = ABOVE_MOB_LAYER
+	layer = 5
 	var/stage = 1
 	var/fixture_type = "tube"
 	var/sheets_refunded = 2
@@ -133,6 +132,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
+	layer = 5
 	stage = 1
 	fixture_type = "bulb"
 	sheets_refunded = 1
@@ -143,7 +143,6 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flamp-construct-stage1"
 	anchored = 0
-	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	stage = 1
 	fixture_type = "flamp"
@@ -157,8 +156,7 @@
 	icon_state = "tube1"
 	desc = "A lighting fixture."
 	anchored = 1
-	plane = MOB_PLANE
-	layer = ABOVE_MOB_LAYER
+	layer = 5  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = 2
 	idle_power_usage = 2
 	active_power_usage = 20
@@ -175,6 +173,120 @@
 								// this is used to calc the probability the light burns out
 
 	var/rigged = 0				// true if rigged to explode
+
+
+// coloured lighting because fabulous
+
+/obj/machinery/light/colored
+	name = "light fixture"
+	icon = 'icons/obj/coloredlights.dmi'
+	base_state = "yellow"		// base description and icon_state
+	icon_state = "yellow1"
+	desc = "A lighting fixture."
+	fitting = "empty"
+	light_color = "#ffff99"
+
+/obj/machinery/light/colored/orange
+	base_state = "orange"		// base description and icon_state
+	icon_state = "orange1"
+	light_color = "#f9b1f1"
+
+/obj/machinery/light/colored/purple
+	base_state = "purple"		// base description and icon_state
+	icon_state = "purple1"
+	light_color = "#f9b1f1"
+
+/obj/machinery/light/colored/red
+	base_state = "red"		// base description and icon_state
+	icon_state = "red1"
+	light_color = "#f9bab1"
+
+/obj/machinery/light/colored/pink
+	base_state = "pink"		// base description and icon_state
+	icon_state = "pink1"
+	light_color = "#f9b1d6"
+
+/obj/machinery/light/colored/blue
+	base_state = "blue"		// base description and icon_state
+	icon_state = "blue1"
+	light_color = "#b1edf9"
+
+/obj/machinery/light/colored/green
+	base_state = "green"		// base description and icon_state
+	icon_state = "green1"
+	light_color = "#d8f9b1"
+
+
+
+//colored bulbs
+
+/obj/item/weapon/light/tube/large/neon/red
+	color = "#ff9999"
+	brightness_color = "#ff9999"
+	light_color = "#ff9999"
+
+/obj/item/weapon/light/tube/large/neon/orange
+	color = "#ffcc66"
+	brightness_color = "#ffcc66"
+	light_color = "#ffcc66"
+
+/obj/item/weapon/light/tube/large/neon/purple
+	color = "#cc66ff"
+	brightness_color = "#cc66ff"
+	light_color = "#cc66ff"
+
+/obj/item/weapon/light/tube/large/neon/pink
+	color = "#ff6699"
+	brightness_color = "#ff6699"
+	light_color = "#ff6699"
+
+/obj/item/weapon/light/tube/large/neon/blue
+	color = "#b6e2fb"
+	brightness_color = "#99ccff"
+	light_color = "#99ccff"
+
+/obj/item/weapon/light/tube/large/neon/green
+	color = "#ccff66"
+	brightness_color = "#ccff66"
+	light_color = "#ccff66"
+
+/obj/item/weapon/light/tube/large/neon/yellow
+	color = "#ffff99"
+	brightness_color = "#ffff99"
+	light_color = "#ffff99"
+
+
+/obj/machinery/light/floor
+	icon_state = "floor1"
+	base_state = "floor"
+	light_type = /obj/item/weapon/light/bulb
+	layer = TURF_LAYER+0.002
+	brightness_range = 4
+	brightness_power = 2
+	brightness_color = "#a0a080"
+
+/obj/machinery/light/overhead_blue
+	icon_state = "inv1"
+	base_state = "inv"
+	brightness_range = 10
+	brightness_power = 1.5
+	brightness_color = "#0080ff"
+
+/obj/machinery/light/street
+	icon = 'icons/obj/street.dmi'
+	icon_state = "streetlamp1"
+	base_state = "streetlamp"
+	desc = "A street lighting fixture."
+	brightness_range = 7
+	brightness_color = "#d2e6f2"
+	layer = MOB_LAYER
+	density = 1
+	light_type = /obj/item/weapon/light/bulb
+
+/obj/machinery/light/invis
+	icon_state = "inv1"
+	base_state = "inv"
+	brightness_range = 8
 
 // the smaller bulb light fixture
 
@@ -194,7 +306,6 @@
 	fitting = "bulb"
 	brightness_range = 5
 	brightness_power = 2
-	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	brightness_color = "#FFF4E5"
 	desc = "A floor lamp."

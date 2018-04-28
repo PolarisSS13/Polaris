@@ -15,6 +15,13 @@
 
 #define ui_entire_screen "WEST,SOUTH to EAST,NORTH"
 
+//Upper left vehicle buttons, displayed when you pick up an item that has this enabled.
+#define ui_vehicle_slot1 "1:6,14:26"
+#define ui_vehicle_slot2 "2:8,14:26"
+#define ui_vehicle_slot3 "3:10,14:26"
+#define ui_vehicle_slot4 "4:12,14:26"
+#define ui_vehicle_slot5 "5:14,14:26"
+
 //Lower left, persistant menu
 #define ui_inventory "WEST:6,SOUTH:5"
 

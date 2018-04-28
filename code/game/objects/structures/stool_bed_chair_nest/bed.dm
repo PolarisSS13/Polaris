@@ -331,3 +331,4 @@
 
 /obj/structure/bed/alien/attackby(obj/item/weapon/W, mob/user)
 	return // No deconning.
+

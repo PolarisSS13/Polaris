@@ -517,3 +517,7 @@
 
 /atom/proc/get_nametag_desc(mob/user)
 	return "" //Desc itself is often too long to use
+
+/atom/proc/set_density(var/new_density)
+	if(density != new_density)
+		density = !!new_density

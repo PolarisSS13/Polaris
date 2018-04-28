@@ -158,6 +158,10 @@
 		*/
 	return
 
+
+/obj/proc/container_resist()
+	return
+
 /obj/proc/see_emote(mob/M as mob, text, var/emote_type)
 	return
 

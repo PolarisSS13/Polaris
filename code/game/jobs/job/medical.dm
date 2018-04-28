@@ -26,7 +26,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 
 /datum/job/doctor
-	title = "Medical Doctor"
+	title = "Doctor"
 	flag = DOCTOR
 	department = "Medical"
 	department_flag = MEDSCI
@@ -67,7 +67,6 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
-/* I'm commenting out Geneticist so you can't actually see it in the job menu, given that you can't play as one - Jon.
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
@@ -76,7 +75,7 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the chief medical officer and research director"
+	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist
 	economic_modifier = 7
@@ -84,7 +83,7 @@
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
-*/
+
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"

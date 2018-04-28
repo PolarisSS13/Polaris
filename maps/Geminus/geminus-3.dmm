@@ -1,0 +1,89 @@
+"a" = (/turf/simulated/sky/moving/north,/area/space)
+"b" = (/obj/effect/step_trigger/teleporter/random{affect_ghosts = 1; name = "escapeshuttle_leave"; teleport_x = 25; teleport_x_offset = 245; teleport_y = 25; teleport_y_offset = 245; teleport_z = 6; teleport_z_offset = 6},/turf/simulated/sky/moving/north,/area/space)
+"c" = (/turf/simulated/shuttle/wall/dark,/area/space)
+"d" = (/turf/simulated/shuttle/wall/dark,/area/shuttle/arrival/pre_game)
+"e" = (/obj/machinery/embedded_controller/radio/simple_docking_controller{frequency = 1380; id_tag = "arrivals_shuttle"; pixel_x = 0; pixel_y = 25; req_one_access = list(13); tag_door = "arrivals_shuttle_hatch"},/turf/simulated/shuttle/floor/darkred,/area/shuttle/arrival/pre_game)
+"f" = (/turf/simulated/shuttle/floor/darkred,/area/shuttle/arrival/pre_game)
+"g" = (/obj/structure/showcase{desc = "So that's how the shuttle moves on its own."; icon = 'icons/mob/AI.dmi'; icon_state = "ai-red"; name = "Arrivals Announcement Computer"},/turf/simulated/shuttle/floor,/area/shuttle/arrival/pre_game)
+"h" = (/obj/structure/window/reinforced,/turf/simulated/shuttle/floor/darkred,/area/shuttle/arrival/pre_game)
+"i" = (/obj/machinery/door/window/southright,/turf/simulated/shuttle/floor/darkred,/area/shuttle/arrival/pre_game)
+"j" = (/turf/simulated/shuttle/floor{tag = "icon-floor_red"; icon_state = "floor_red"},/area/shuttle/arrival/pre_game)
+"k" = (/obj/machinery/computer/shuttle_control/arrivals,/turf/simulated/shuttle/floor{tag = "icon-floor_red"; icon_state = "floor_red"},/area/shuttle/arrival/pre_game)
+"l" = (/obj/structure/bed/chair/shuttle{tag = "icon-shuttle_chair (WEST)"; icon_state = "shuttle_chair"; dir = 8},/obj/machinery/light/colored/blue,/turf/simulated/shuttle/floor{tag = "icon-floor_red"; icon_state = "floor_red"},/area/shuttle/arrival/pre_game)
+"m" = (/obj/structure/bed/chair/shuttle{tag = "icon-shuttle_chair (EAST)"; icon_state = "shuttle_chair"; dir = 4},/obj/machinery/light/colored/blue,/turf/simulated/shuttle/floor/red,/area/shuttle/arrival/pre_game)
+"n" = (/obj/structure/table/steel,/obj/structure/flora/pottedplant{icon_state = "plant-21"; pixel_y = 11; tag = "icon-plant-21"},/turf/simulated/shuttle/floor{tag = "icon-floor_red"; icon_state = "floor_red"},/area/shuttle/arrival/pre_game)
+"o" = (/obj/machinery/door/airlock/silver{icon_state = "door_locked"; locked = 1; name = "Employees Only"; secured_wires = 1},/turf/simulated/shuttle/floor{tag = "icon-floor_red"; icon_state = "floor_red"},/area/shuttle/arrival/pre_game)
+"p" = (/obj/item/device/radio/intercom{dir = 1; icon_state = "intercom"; name = "Station Intercom (General)"; pixel_x = 0; pixel_y = 32; tag = "icon-intercom (NORTH)"},/obj/machinery/light/colored/orange{tag = "icon-orange1 (NORTH)"; icon_state = "orange1"; dir = 1},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"q" = (/obj/machinery/newscaster{pixel_y = 32},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"r" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 4},/obj/machinery/requests_console{department = "Arrival shuttle"; pixel_y = 26},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"s" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"t" = (/obj/effect/floor_decal/industrial/warning/corner{icon_state = "warningcorner"; dir = 1},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"u" = (/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"v" = (/obj/machinery/vending/wallmed1{layer = 3.3; name = "Emergency NanoMed"; pixel_x = 28; pixel_y = 0},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"w" = (/obj/structure/shuttle/window{color = "grey"},/obj/structure/grille,/turf/simulated/shuttle/wall/dark,/area/shuttle/arrival/pre_game)
+"x" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"y" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (WEST)"; icon_state = "purple1"; dir = 8},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"z" = (/obj/structure/table/standard,/obj/structure/flora/pottedplant/fern{pixel_y = 15},/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"A" = (/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"B" = (/obj/structure/table/standard,/obj/item/weapon/newspaper,/obj/structure/window/reinforced{dir = 1; health = 1e+006},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"C" = (/obj/structure/shuttle/window{color = "grey"},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"D" = (/obj/structure/bed/chair/shuttle{tag = "icon-shuttle_chair (EAST)"; icon_state = "shuttle_chair"; dir = 4},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"E" = (/obj/structure/bed/chair/shuttle{tag = "icon-shuttle_chair (WEST)"; icon_state = "shuttle_chair"; dir = 8},/obj/effect/landmark{name = "JoinLate"},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"F" = (/obj/machinery/vending/cola,/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"G" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"H" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"I" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/door/airlock/multi_tile/glass{autoclose = 1; dir = 2; frequency = 1380; icon_state = "door_locked"; id_tag = "arrivals_shuttle_hatch"; locked = 1; name = "Shuttle Hatch"; req_access = list(13)},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"J" = (/obj/effect/floor_decal/industrial/warning{dir = 6},/turf/simulated/shuttle/floor/yellow,/area/shuttle/arrival/pre_game)
+"K" = (/obj/structure/table/standard,/obj/item/weapon/book/codex/lore/vir,/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"L" = (/obj/structure/table/standard,/obj/structure/flora/pottedplant/fern{pixel_y = 15},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"M" = (/obj/item/device/radio/intercom{dir = 8; name = "Station Intercom (General)"; pixel_x = -22},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"N" = (/obj/machinery/vending/coffee,/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"O" = (/obj/structure/table/standard,/obj/structure/flora/pottedplant/fern{pixel_y = 15},/obj/machinery/light/colored/purple{tag = "icon-purple1 (EAST)"; icon_state = "purple1"; dir = 4},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"P" = (/obj/structure/table/standard,/obj/item/weapon/newspaper,/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"Q" = (/obj/machinery/vending/snack,/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"R" = (/obj/structure/flora/pottedplant/fern{pixel_y = 15},/obj/structure/table/standard,/obj/machinery/light/colored/orange{dir = 4},/turf/simulated/shuttle/floor/purple,/area/shuttle/arrival/pre_game)
+"S" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced{dir = 1},/turf/simulated/shuttle/wall/dark/hard_corner,/area/shuttle/arrival/pre_game)
+"T" = (/obj/structure/shuttle/engine/propulsion,/turf/simulated/shuttle/wall/dark/hard_corner,/area/shuttle/arrival/pre_game)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabbbbbbbaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbcdddcbbaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabbcdddddcbbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabccdeffdccbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabcddfgfddcbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabcddhihddcbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabcdjjjjjdcbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabcdkljmndcbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabddddoddddbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabdpqrstuvdbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabwxuuuuuywbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabwzABCzABwbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabwDAECDAEwbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabdAAAAAAFdbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabGHAACDAEdbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabIJAACKALwbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabdMAAAAANwbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabdOAPCQARwbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabdDAECDAEdbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabcddSSSddcbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabbcdTTTdcbbaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabbbbbbbbbaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

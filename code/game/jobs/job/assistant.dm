@@ -1,18 +1,18 @@
 /datum/job/assistant
-	title = "Assistant"
+	title = "Civilian"
 	flag = ASSISTANT
 	department = "Civilian"
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
-	supervisors = "absolutely everyone"
+	supervisors = "the mayor and their deputy"
 	selection_color = "#515151"
 	economic_modifier = 1
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	outfit_type = /decl/hierarchy/outfit/job/assistant
-	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant",
+	alt_titles = list("Tourist","Expat","Asylum Seeker",
 					"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
 					"Resident" = /decl/hierarchy/outfit/job/assistant/resident)
 

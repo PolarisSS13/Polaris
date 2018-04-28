@@ -24,6 +24,10 @@
 	if(src)
 		usr.DblClickOn(src, params)
 
+/mob/proc/changeNext_move(num)
+	next_move = world.time + num
+
+
 /*
 	Standard mob ClickOn()
 	Handles exceptions: Buildmode, middle click, modified clicks, mech actions

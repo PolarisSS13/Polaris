@@ -58,6 +58,7 @@ for reference:
 	icon_state = "barricade"
 	anchored = 1.0
 	density = 1.0
+	parts = /obj/item/stack/material/wood/
 	var/health = 100
 	var/maxhealth = 100
 	var/material/material

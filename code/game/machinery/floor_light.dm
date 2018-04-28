@@ -21,6 +21,32 @@ var/list/floor_light_cache = list()
 
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
+	on = 1
+
+/obj/machinery/floor_light/prebuilt/New()
+	update_brightness()
+
+/obj/machinery/floor_light/prebuilt/red
+	default_light_colour = COLOR_RED
+
+/obj/machinery/floor_light/prebuilt/green
+	default_light_colour = COLOR_GREEN
+
+/obj/machinery/floor_light/prebuilt/yellow
+	default_light_colour = COLOR_YELLOW
+
+/obj/machinery/floor_light/prebuilt/orange
+	default_light_colour = COLOR_ORANGE
+
+/obj/machinery/floor_light/prebuilt/purple
+	default_light_colour = COLOR_PURPLE
+
+/obj/machinery/floor_light/prebuilt/pink
+	default_light_colour = COLOR_PINK
+
+/obj/machinery/floor_light/prebuilt/white
+	default_light_colour = COLOR_WHITE
+
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/screwdriver))

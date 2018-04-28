@@ -7,7 +7,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the Mayor"
 	selection_color = "#7F6E2C"
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
@@ -30,7 +30,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
 /datum/job/engineer
-	title = "Station Engineer"
+	title = "City Engineer"
 	flag = ENGINEER
 	department = "Engineering"
 	department_flag = ENGSEC
@@ -50,7 +50,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
 /datum/job/atmos
-	title = "Atmospheric Technician"
+	title = "Firefighter"
 	flag = ATMOSTECH
 	department = "Engineering"
 	department_flag = ENGSEC

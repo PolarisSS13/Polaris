@@ -160,7 +160,7 @@
 	nitrogen = 0
 	temperature = TCMB
 
-// Step trigger to fall down to planet Sif
-/obj/effect/step_trigger/teleporter/planetary_fall/sif/initialize()
-	planet = planet_sif
+// Step trigger to fall down to planet Pollux
+/obj/effect/step_trigger/teleporter/planetary_fall/pollux/initialize()
+	planet = planet_pollux
 	. = ..()

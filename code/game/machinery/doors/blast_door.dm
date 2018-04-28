@@ -7,9 +7,6 @@
 // as they lack any ID scanning system, they just handle remote control signals. Subtypes have
 // different icons, which are defined by set of variables. Subtypes are on bottom of this file.
 
-// UPDATE 06.04.2018
-// The emag thing wasn't working as intended, manually overwrote it.
-
 /obj/machinery/door/blast
 	name = "Blast Door"
 	desc = "That looks like it doesn't open easily."
@@ -23,6 +20,9 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
+	var/open_sound = 'sound/machines/airlock_heavy.ogg'
+	var/close_sound = 'sound/machines/AirlockClose_heavy.ogg'
+
 	closed_layer = 3.3 // Above airlocks when closed
 	var/id = 1.0
 	dir = 1
@@ -32,8 +32,17 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
+	var/begins_closed = TRUE
+
 /obj/machinery/door/blast/initialize()
-	. = ..()
+	..()
+
+	if(!begins_closed)
+		icon_state = icon_state_open
+		set_density(0)
+		set_opacity(0)
+		layer = open_layer
+
 	implicit_material = get_material_by_name("plasteel")
 
 /obj/machinery/door/blast/get_material()
@@ -59,15 +68,12 @@
 	radiation_repository.resistance_cache.Remove(get_turf(src))
 	return
 
-// Has to be in here, comment at the top is older than the emag_act code on doors proper
-/obj/machinery/door/blast/emag_act()
-	return -1
-
 // Proc: force_open()
 // Parameters: None
 // Description: Opens the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_open()
 	src.operating = 1
+	playsound(src.loc, open_sound, 100, 1)
 	flick(icon_state_opening, src)
 	src.density = 0
 	update_nearby_tiles()
@@ -82,6 +88,7 @@
 // Description: Closes the door. No checks are done inside this proc.
 /obj/machinery/door/blast/proc/force_close()
 	src.operating = 1
+	playsound(src.loc, close_sound, 100, 1)
 	src.layer = closed_layer
 	flick(icon_state_closing, src)
 	src.density = 1
@@ -202,27 +209,6 @@
 		else
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 			return
-	..()
-
-// Proc: attack_generic()
-// Parameters: Attacking simple mob, incoming damage.
-// Description: Checks the power or integrity of the blast door, if either have failed, chekcs the damage to determine if the creature would be able to open the door by force. Otherwise, super.
-/obj/machinery/door/blast/attack_generic(var/mob/user, var/damage)
-	if(stat & (BROKEN|NOPOWER))
-		if(damage >= 10)
-			if(src.density)
-				visible_message("<span class='danger'>\The [user] starts forcing \the [src] open!</span>")
-				if(do_after(user, 5 SECONDS, src))
-					visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
-					force_open(1)
-			else
-				visible_message("<span class='danger'>\The [user] starts forcing \the [src] closed!</span>")
-				if(do_after(user, 2 SECONDS, src))
-					visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
-					force_close(1)
-		else
-			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
-		return
 	..()
 
 // Proc: open()

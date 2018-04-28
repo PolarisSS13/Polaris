@@ -169,6 +169,9 @@ var/list/global_huds = list(
 	var/action_buttons_hidden = 0
 	var/list/slot_info
 
+	var/list/obj/screen/item_action/item_action_list = list()	//Used for the item action ui buttons.
+	var/list/obj/screen/item_action/vehicle_action_list = list()
+
 datum/hud/New(mob/owner)
 	mymob = owner
 	instantiate()

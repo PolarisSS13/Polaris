@@ -1,7 +1,7 @@
 var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 /datum/job/captain
-	title = "Colony Director"
+	title = "Mayor"
 	flag = CAPTAIN
 	department = "Command"
 	head_position = 1
@@ -9,7 +9,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "company officials and Corporate Regulations"
+	supervisors = "government officials and the president"
 	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/gold
 	req_admin_notify = 1
@@ -18,11 +18,11 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_player_age = 14
 	economic_modifier = 20
 
-	minimum_character_age = 25
-	ideal_character_age = 70 // Old geezer captains ftw
+	minimum_character_age = 30
+	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here
 
 	outfit_type = /decl/hierarchy/outfit/job/captain
-	alt_titles = list("Site Manager", "Overseer")
+//	alt_titles = list("Site Manager", "Overseer")
 
 /*
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
@@ -34,7 +34,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	return get_all_station_access()
 
 /datum/job/hop
-	title = "Head of Personnel"
+	title = "Vice Mayor"
 	flag = HOP
 	department = "Command"
 	head_position = 1
@@ -42,7 +42,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the Mayor"
 	selection_color = "#2F2F7F"
 	idtype = /obj/item/weapon/card/id/silver/hop
 	req_admin_notify = 1
@@ -50,7 +50,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 10
 
 	minimum_character_age = 25
-	ideal_character_age = 50
+	ideal_character_age = 40
 
 	outfit_type = /decl/hierarchy/outfit/job/hop
 	alt_titles = list("Crew Resources Officer")
@@ -87,3 +87,4 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_access = list(access_heads, access_keycard_auth)
 
 	outfit_type = /decl/hierarchy/outfit/job/secretary
+	alt_titles = list("Command Liaison", "Bridge Secretary")

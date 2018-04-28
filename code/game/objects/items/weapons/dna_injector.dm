@@ -67,7 +67,6 @@
 	if(istype(M,/mob/living))
 		var/mob/living/L = M
 		L.apply_effect(rand(5,20), IRRADIATE, check_protection = 0)
-		L.apply_damage(max(2,L.getCloneLoss()), CLONE) 
 
 	if (!(NOCLONE in M.mutations)) // prevents drained people from having their DNA changed
 		if (buf.types & DNA2_BUF_UI)
@@ -130,7 +129,10 @@
 	if((buf.types & DNA2_BUF_SE) && (block ? (GetState() && block == MONKEYBLOCK) : GetState(MONKEYBLOCK)))
 		injected_with_monkey = " <span class='danger'>(MONKEY)</span>"
 
-	add_attack_logs(user,M,"[injected_with_monkey] used the [name] on")
+	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.ckey])</font>")
+	log_attack("[user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])")
+	message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with \the [src][injected_with_monkey]")
 
 	// Apply the DNA shit.
 	inject(M, user)
@@ -597,4 +599,39 @@
 	//block = 14
 	New()
 		block = MONKEYBLOCK
+		..()
+
+/obj/item/weapon/dnainjector/dnacorrector
+	name = "\improper DNA injector (Human DNA Corrector)"
+	desc = "For cleaning genetic messes in humans, big and small."
+	datatype = DNA2_BUF_SE
+	value = 0x001
+	//block = ALL
+	New()
+		block = BLINDBLOCK
+		block = DEAFBLOCK
+		block = HULKBLOCK
+		block = TELEBLOCK
+		block = FIREBLOCK
+		block = XRAYBLOCK
+		block = CLUMSYBLOCK
+		block = FAKEBLOCK
+		block = COUGHBLOCK
+		block = GLASSESBLOCK
+		block = EPILEPSYBLOCK
+		block = TWITCHBLOCK
+		block = NERVOUSBLOCK
+		block = MONKEYBLOCK
+		block = HEADACHEBLOCK
+		block = NOBREATHBLOCK
+		block = REMOTEVIEWBLOCK
+		block = REGENERATEBLOCK
+		block = INCREASERUNBLOCK
+		block = REMOTETALKBLOCK
+		block = MORPHBLOCK
+		block = BLENDBLOCK
+		block = HALLUCINATIONBLOCK
+		block = NOPRINTSBLOCK
+		block = SHOCKIMMUNITYBLOCK
+		block = SMALLSIZEBLOCK
 		..()

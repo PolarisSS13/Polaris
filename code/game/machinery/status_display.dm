@@ -234,3 +234,12 @@
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef SCROLL_SPEED
+
+/obj/machinery/status_display/time_display
+	ignore_friendc = 1
+	name = "time display"
+
+/obj/machinery/status_display/time_display/update()
+	message1 = "TIME"
+	message2 = stationtime2text()
+	update_display(message1, message2)

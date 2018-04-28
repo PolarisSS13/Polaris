@@ -6,7 +6,7 @@
 	density = 1
 	anchored = 1
 	climbable = 1
-	layer = TABLE_LAYER
+	layer = 2.8
 	throwpass = 1
 	surgery_odds = 66
 	var/flipped = 0
@@ -173,21 +173,6 @@
 /obj/structure/table/attack_alien(mob/user as mob)
 	visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
 	src.break_to_parts()
-
-/obj/structure/table/attack_generic(mob/user as mob, var/damage)
-	if(damage >= 10)
-		if(reinforced && prob(70))
-			visible_message("<span class='danger'>\The [user] smashes against \the [src]!</span>")
-			take_damage(damage/2)
-			user.do_attack_animation(src)
-			..()
-		else
-			visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
-			src.break_to_parts()
-			user.do_attack_animation(src)
-			return 1
-	visible_message("<span class='notice'>\The [user] scratches at \the [src]!</span>")
-	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
 	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
@@ -480,3 +465,14 @@
 #undef CORNER_COUNTERCLOCKWISE
 #undef CORNER_DIAGONAL
 #undef CORNER_CLOCKWISE
+
+/obj/structure/table/proc/shatter(var/display_message = 1)
+	if (!istype(src, /obj/structure/table/glass)) return
+
+	playsound(src, "shatter", 70, 1)
+	if(display_message)
+		visible_message("[src] shatters!")
+		break_to_parts()
+	qdel(src)
+	return
+

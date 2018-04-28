@@ -14,11 +14,6 @@
 	icon_state = "blucarpet"
 	initial_flooring = /decl/flooring/carpet/blucarpet
 
-/turf/simulated/floor/carpet/tealcarpet
-	name = "teal carpet"
-	icon_state = "tealcarpet"
-	initial_flooring = /decl/flooring/carpet/tealcarpet
-
 // Legacy support for existing paths for blue carpet
 /turf/simulated/floor/carpet/blue
 	name = "blue carpet"
@@ -68,26 +63,6 @@
 	icon_state = "wood"
 	initial_flooring = /decl/flooring/wood
 
-/turf/simulated/floor/wood/broken
-	icon_state = "wood_broken0" // This gets changed when spawned.
-
-/turf/simulated/floor/wood/broken/initialize()
-	break_tile()
-	return ..()
-
-/turf/simulated/floor/wood/sif
-	name = "alien wooden floor"
-	icon = 'icons/turf/flooring/wood.dmi'
-	icon_state = "sifwood"
-	initial_flooring = /decl/flooring/wood/sif
-
-/turf/simulated/floor/wood/sif/broken
-	icon_state = "sifwood_broken0" // This gets changed when spawned.
-
-/turf/simulated/floor/wood/sif/broken/initialize()
-	break_tile()
-	return ..()
-
 /turf/simulated/floor/grass
 	name = "grass patch"
 	icon = 'icons/turf/flooring/grass.dmi'
@@ -99,6 +74,12 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "tiled"
 	initial_flooring = /decl/flooring/tiling
+
+/turf/simulated/floor/decor
+	name = "floor"
+	icon = 'icons/turf/flooring/decorative.dmi'
+	icon_state = "square"
+	initial_flooring = null
 
 /turf/simulated/floor/tiled/techmaint
 	name = "floor"
@@ -244,8 +225,9 @@
 	oxygen = 0
 	nitrogen = 0
 
-/turf/simulated/floor/reinforced/n20/initialize()
-	. = ..()
+/turf/simulated/floor/reinforced/n20/New()
+	..()
+	sleep(-1)
 	if(!air) make_air()
 	air.adjust_gas("sleeping_agent", ATMOSTANK_NITROUSOXIDE)
 
@@ -424,11 +406,11 @@
     . = ..()
 
 /turf/snow/update_icon()
-    cut_overlays()
+    overlays.Cut()
     for(var/d in crossed_dirs)
         var/amt = crossed_dirs[d]
 
         for(var/i in 1 to amt)
-            add_overlay(image(icon, "footprint[i]", text2num(d)))
+            overlays += icon(icon, "footprint[i]", text2num(d))
 
 //**** Here ends snow ****
