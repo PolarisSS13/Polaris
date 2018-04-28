@@ -338,3 +338,16 @@ var/list/flooring_types
 	has_damage_range = 6
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK
 	can_paint = null
+
+/decl/flooring/pavement
+	name = "pavement"
+	desc = "Stone slabs, perfect for any street."
+	icon_base = "monofloor"
+	descriptor = "tiles"
+	build_type = /obj/item/stack/tile/floor
+	can_paint = 1
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/pavement1.ogg',
+		'sound/effects/footstep/pavement2.ogg',
+		'sound/effects/footstep/pavement3.ogg',
+		'sound/effects/footstep/pavement4.ogg'))

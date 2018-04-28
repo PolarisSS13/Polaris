@@ -3,6 +3,7 @@
 	desc = "It's a pavement" //I think I need a better description.
 	icon = 'icons/turf/pavement.dmi'
 	icon_state = "pavement"
+	initial_flooring = /decl/flooring/pavement
 
 /turf/simulated/floor/pavement/empty
 	icon_state = "pave_empty"
