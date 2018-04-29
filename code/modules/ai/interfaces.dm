@@ -7,19 +7,37 @@
 	return FALSE
 
 /mob/living/simple_mob/IAttack(atom/A)
-	return attack_target(A)
+	if(!canClick()) // Still on cooldown from a "click".
+		return FALSE
+	return attack_target(A) // This will set click cooldown.
 
 /mob/living/proc/IRangedAttack(atom/A)
 	return FALSE
 
 /mob/living/simple_mob/IRangedAttack(atom/A)
+	if(!canClick()) // Still on cooldown from a "click".
+		return FALSE
 	return shoot_target(A)
+
+// Test if the AI is allowed to use to attempt a ranged attack.
+/mob/living/proc/ICheckRangedAttack(atom/A)
+	return FALSE
+
+/mob/living/simple_mob/ICheckRangedAttack(atom/A)
+	return projectiletype ? TRUE : FALSE
 
 /mob/living/proc/ISpecialAttack(atom/A)
 	return FALSE
 
 /mob/living/simple_mob/ISpecialAttack(atom/A)
 	return special_attack_target(A)
+
+// Is the AI allowed to attempt to do it?
+/mob/living/proc/ICheckSpecialAttack(atom/A)
+	return FALSE
+
+/mob/living/simple_mob/ICheckSpecialAttack(atom/A)
+	return can_special_attack(A)
 
 /mob/living/proc/ISay(message)
 

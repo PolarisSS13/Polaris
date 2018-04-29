@@ -54,6 +54,9 @@ proc/isdeaf(A)
 /mob/proc/break_cloak()
 	return
 
+/mob/proc/is_cloaked()
+	return FALSE
+
 proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 

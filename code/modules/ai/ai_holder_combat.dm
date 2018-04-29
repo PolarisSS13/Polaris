@@ -4,8 +4,8 @@
 	var/firing_lanes = FALSE				// If ture, tries to refrain from shooting allies or the wall.
 	var/conserve_ammo = FALSE				// If true, the mob will avoid shooting anything that does not have a chance to hit a mob. Requires firing_lanes to be true.
 
-	var/ranged = FALSE						// If true, attempts to shoot at the enemy instead of charging at them wildly.
-	var/shoot_range = 5						// How close the mob needs to be to attempt to shoot at the enemy.
+//	var/ranged = FALSE						// If true, attempts to shoot at the enemy instead of charging at them wildly.
+	var/shoot_range = 5						// How close the mob needs to be to attempt to shoot at the enemy, if the mob is capable of ranged attacks.
 	var/pointblank = FALSE					// If ranged is true, and this is true, people adjacent to the mob will suffer the ranged instead of using a melee attack.
 
 	var/special_attack_prob = 0				// The chance to ATTEMPT a special_attack(). If it fails, it will do a regular attack instead.
@@ -54,7 +54,8 @@
 	request_help() // Call our allies.
 
 	// Do a 'special' attack, if one is allowed.
-	if(prob(special_attack_prob) && (distance >= special_attack_min_range) && (distance <= special_attack_max_range))
+//	if(prob(special_attack_prob) && (distance >= special_attack_min_range) && (distance <= special_attack_max_range))
+	if(holder.ICheckSpecialAttack(target))
 		ai_log("engage_target() : Attempting a special attack.", AI_LOG_TRACE)
 		on_engagement(target)
 		if(special_attack(target)) // If this fails, then we try a regular melee/ranged attack.
@@ -68,7 +69,7 @@
 		melee_attack(target)
 
 	// Shoot them.
-	else if(ranged && (distance <= shoot_range) )
+	else if(holder.ICheckRangedAttack(target) && (distance <= max_range(target)) )
 		on_engagement(target)
 		if(firing_lanes && !test_projectile_safety(target))
 			// Nudge them a bit, maybe they can shoot next time.
@@ -99,7 +100,10 @@
 
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/proc/special_attack(atom/movable/AM)
-	return holder.ISpecialAttack(AM)
+	. = holder.ISpecialAttack(AM)
+	world << "special_attack result is [.]"
+	if(.)
+		post_special_attack(AM)
 
 // Called when within striking/shooting distance, however cooldown is not considered.
 // Override to do things like move in a random step for evasiveness.
@@ -107,10 +111,14 @@
 /datum/ai_holder/proc/on_engagement(atom/A)
 
 // Called after a successful (IE not on cooldown) ranged attack.
+// Note that this is not whether the projectile actually hit, just that one was launched.
 /datum/ai_holder/proc/post_ranged_attack(atom/A)
 
 // Ditto but for melee.
 /datum/ai_holder/proc/post_melee_attack(atom/A)
+
+// And one more for special snowflake attacks.
+/datum/ai_holder/proc/post_special_attack(atom/A)
 
 // Used to make sure projectiles will probably hit the target and not the wall or a friend.
 /datum/ai_holder/proc/test_projectile_safety(atom/movable/AM)
@@ -137,13 +145,17 @@
 	var/distance = get_dist(holder, AM)
 	if(distance <= 1)
 		return TRUE // Can melee.
-	else if(ranged && distance <= shoot_range)
+	else if(holder.ICheckRangedAttack(AM) && distance <= max_range(AM))
 		return TRUE // Can shoot.
 	return FALSE
 
+// Determines how close the AI will move to its target.
+/datum/ai_holder/proc/closest_distance(atom/movable/AM)
+	return max(max_range(AM) - 1, 1) // Max range -1 just because we don't want to constantly get kited
+
 // Can be used to conditionally do a ranged or melee attack.
-/datum/ai_holder/proc/closest_distance()
-	return ranged ? shoot_range - 1 : 1 // Shoot range -1 just because we don't want to constantly get kited
+/datum/ai_holder/proc/max_range(atom/movable/AM)
+	return holder.ICheckRangedAttack(AM) ? 7 : 1
 
 // Goes to the target, to attack them.
 // Called when in STANCE_APPROACH.
@@ -160,17 +172,20 @@
 			ai_log("walk_to_target() : Found new target ([target]).", AI_LOG_INFO)
 
 	// Find out where we're going.
-	var/get_to = closest_distance()
+	var/get_to = closest_distance(target)
 	var/distance = get_dist(holder, target)
 	ai_log("walk_to_target() : get_to is [get_to].", AI_LOG_TRACE)
 
 	// We're here!
-	if(distance <= get_to)
+	// Special case: Our holder has a special attack that is ranged, but normally the holder uses melee.
+	// If that happens, we'll switch to STANCE_FIGHT so they can use it. If the special attack is limited, they'll likely switch back next tick.
+	if(distance <= get_to || holder.ICheckSpecialAttack(target))
 		ai_log("walk_to_target() : Within range.", AI_LOG_INFO)
 		forget_path()
 		set_stance(STANCE_FIGHT)
 		ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
 		return
+
 
 	// Otherwise keep walking.
 	walk_path(target, get_to)

@@ -17,9 +17,8 @@
 				custom_emote(1,"[pick(friendly)] [A]!")
 
 		if(I_HURT)
-			if(prob(special_attack_prob))
-				if(special_attack_min_range <= 1)
-					special_attack_target(A)
+			if(can_special_attack(A) && special_attack_target(A))
+				return
 
 			else if(melee_damage_upper == 0 && istype(A,/mob/living))
 				custom_emote(1,"[pick(friendly)] [A]!")
@@ -37,10 +36,8 @@
 
 /mob/living/simple_mob/RangedAttack(var/atom/A)
 //	setClickCooldown(get_attack_speed())
-	var/distance = get_dist(src, A)
 
-	if(prob(special_attack_prob) && (distance >= special_attack_min_range) && (distance <= special_attack_max_range))
-		special_attack_target()
+	if(can_special_attack(A) && special_attack_target(A))
 		return
 
 	if(projectiletype)

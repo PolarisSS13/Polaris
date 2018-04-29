@@ -95,7 +95,7 @@
 	use_astar = TRUE
 
 /datum/ai_holder/hostile/ranged
-	ranged = TRUE
+//	ranged = TRUE
 	cooperative = TRUE
 	firing_lanes = TRUE
 	conserve_ammo = TRUE

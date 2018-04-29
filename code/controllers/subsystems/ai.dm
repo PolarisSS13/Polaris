@@ -21,6 +21,8 @@ SUBSYSTEM_DEF(ai)
 	//	var/mob/living/L = currentrun[currentrun.len]
 		var/datum/ai_holder/A = currentrun[currentrun.len]
 		--currentrun.len
+		if(!A || QDELETED(A)) // Doesn't exist or won't exist soon.
+			continue
 		if(times_fired % 4 == 0 && A.holder.stat != DEAD)
 			A.handle_strategicals()
 		if(A.holder.stat != DEAD) // The /TG/ version checks stat twice, presumably in-case processing somehow got the mob killed in that instant.

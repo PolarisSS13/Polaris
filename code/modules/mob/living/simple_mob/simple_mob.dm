@@ -83,17 +83,23 @@
 	var/melee_damage_upper = 6		// Upper bound of randomized melee damage
 	var/list/attacktext = list("attacked") // "You are [attacktext] by the mob!"
 	var/list/friendly = list("nuzzles") // "The mob [friendly] the person."
-	var/attack_sound = null			// Sound to play when I attack
-	var/melee_miss_chance = 15		// percent chance to miss a melee attack.
+	var/attack_sound = null				// Sound to play when I attack
+	var/melee_miss_chance = 0			// percent chance to miss a melee attack.
 	var/attack_armor_type = "melee"		// What armor does this check?
 	var/attack_armor_pen = 0			// How much armor pen this attack has.
-	var/attack_sharp = 0				// Is the attack sharp?
-	var/attack_edge = 0					// Does the attack have an edge?
+	var/attack_sharp = FALSE			// Is the attack sharp?
+	var/attack_edge = FALSE				// Does the attack have an edge?
+	var/attack_delay = null				// If set, the mob will do a windup animation and can miss if the target moves out of the way.
 
 	//Special attacks
-	var/special_attack_prob = 0			// Chance of the mob doing a special attack (0 for never)
-	var/special_attack_min_range = 0	// Min range to perform the special attacks from
-	var/special_attack_max_range = 0	// Max range to perform special attacks from
+//	var/special_attack_prob = 0				// The chance to ATTEMPT a special_attack_target(). If it fails, it will do a regular attack instead.
+											// This is commented out to ease the AI attack logic by being (a bit more) determanistic.
+											// You should instead limit special attacks using the below vars instead.
+	var/special_attack_min_range = null		// The minimum distance required for an attempt to be made.
+	var/special_attack_max_range = null		// The maximum for an attempt.
+	var/special_attack_charges = null		// If set, special attacks will work off of a charge system, and won't be usable if all charges are expended. Good for grenades.
+	var/special_attack_cooldown = null		// If set, special attacks will have a cooldown between uses.
+	var/last_special_attack = null			// world.time when a special attack occured last, for cooldown calculations.
 
 	//Damage resistances
 	var/grab_resist = 0				// Chance for a grab attempt to fail. Note that this is not a true resist and is just a prob() of failure.
@@ -151,7 +157,7 @@
 //Client attached
 /mob/living/simple_mob/Login()
 	. = ..()
-	to_chat(src,"<b>You are \the [src]. [player_msg]</b>")
+	to_chat(src,"<b>You are \the [src].</b> [player_msg]")
 
 
 /mob/living/simple_mob/emote(var/act, var/type, var/desc)

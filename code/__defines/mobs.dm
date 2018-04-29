@@ -290,16 +290,19 @@
 
 // More refined version of SA_* ""intelligence"" seperators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
-#define MOB_CLASS_ANIMAL		1	// Simple mobs like saviks and bears.
-#define MOB_CLASS_HUMANOID		2	// Non-robotic humanoids.
-#define MOB_CLASS_CONSTRUCT		4	// Silicons, mechanical simple mobs, and FBPs.
-#define MOB_CLASS_SLIME			8	// Everyone's favorite xenobiology specimen.
-#define MOB_CLASS_ABERRATION	16	// Weird shit.
-#define MOB_CLASS_DEMONIC		32	// Cult stuff.
-#define MOB_CLASS_BOSS			64	// Future megafauna hopefully someday.
-#define MOB_CLASS_ILLUSION		128	// Fake mobs, e.g. Technomancer illusions.
+#define MOB_CLASS_NONE 			0	// Default value, and used to invert for _ALL.
 
-#define MOB_CLASS_ALL (MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID|MOB_CLASS_CONSTRUCT|MOB_CLASS_SLIME|MOB_CLASS_ABERRATION|MOB_CLASS_DEMONIC|MOB_CLASS_BOSS|MOB_CLASS_ILLUSION)
+#define MOB_CLASS_PLANT			1	// Unused at the moment.
+#define MOB_CLASS_ANIMAL		2	// Animals and beasts like spiders, saviks, and bears.
+#define MOB_CLASS_HUMANOID		4	// Non-robotic humanoids, including /simple_mob and /carbon/humans and their alien variants.
+#define MOB_CLASS_SYNTHETIC		8	// Silicons, mechanical simple mobs, FBPs, and anything else that would pass is_synthetic()
+#define MOB_CLASS_SLIME			16	// Everyone's favorite xenobiology specimen (and maybe prometheans?).
+#define MOB_CLASS_ABERRATION	32	// Weird shit.
+#define MOB_CLASS_DEMONIC		64	// Cult stuff.
+#define MOB_CLASS_BOSS			128	// Future megafauna hopefully someday.
+#define MOB_CLASS_ILLUSION		256	// Fake mobs, e.g. Technomancer illusions.
+
+#define MOB_CLASS_ALL (~MOB_CLASS_NONE)
 
 // For slime commanding.  Higher numbers allow for more actions.
 #define SLIME_COMMAND_OBEY		1 // When disciplined.

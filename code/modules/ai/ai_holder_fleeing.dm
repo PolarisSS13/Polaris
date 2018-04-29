@@ -16,6 +16,8 @@
 		return TRUE
 
 	if(can_flee)
+		if(special_flee_check())
+			return TRUE
 		if(!hostile && !retaliate)
 			return TRUE // We're not hostile and someone attacked us first.
 		if(flee_when_dying && (holder.health / holder.getMaxHealth()) <= dying_threshold)
@@ -24,12 +26,17 @@
 			return TRUE // We're fighting something way way stronger then us.
 	return FALSE
 
+// Override for special fleeing conditionally.
+/datum/ai_holder/proc/special_flee_check()
+	return FALSE
+
 /datum/ai_holder/proc/flee_from_target()
 	ai_log("flee_from_target() : Entering.", AI_LOG_DEBUG)
 
-	if(!target || !can_attack(target)) // can_attack() is used since it checks the same things we would need to anyways.
+	if(!target || !should_flee() || !can_attack(target)) // can_attack() is used since it checks the same things we would need to anyways.
 		ai_log("flee_from_target() : Lost target to flee from.", AI_LOG_INFO)
 		lose_target()
+		set_stance(STANCE_IDLE)
 		ai_log("flee_from_target() : Exiting.", AI_LOG_DEBUG)
 		return
 

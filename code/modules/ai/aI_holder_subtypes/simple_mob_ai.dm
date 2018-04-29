@@ -3,7 +3,7 @@
 /datum/ai_holder/simple_mob
 	hostile = TRUE // The majority of simplemobs are hostile.
 	cooperative = TRUE
-	returns_home = TRUE
+	returns_home = FALSE
 	can_flee = FALSE
 	speak_chance = 1 // If the mob's saylist is empty, nothing will happen.
 
@@ -16,7 +16,7 @@
 // Ranged mobs.
 
 /datum/ai_holder/simple_mob/ranged
-	ranged = TRUE
+//	ranged = TRUE
 
 // Tries to not waste ammo.
 /datum/ai_holder/simple_mob/ranged/careful
@@ -37,6 +37,20 @@
 		holder.IMove(get_step_away(holder, A, run_if_this_close))
 		holder.face_atom(A)
 
+// The electric spider's AI.
+/datum/ai_holder/simple_mob/ranged/electric_spider
+
+/datum/ai_holder/simple_mob/ranged/electric_spider/max_range(atom/movable/AM)
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(L.incapacitated(INCAPACITATION_DISABLED) || L.stat == UNCONSCIOUS) // If our target is stunned, go in for the kill.
+			return 1
+	return ..() // Do ranged if possible otherwise.
+
+
+
+
+
 
 // Melee mobs.
 
@@ -54,6 +68,7 @@
 /datum/ai_holder/simple_mob/melee/hooligan
 	hostile = FALSE
 	retaliate = TRUE
+	returns_home = TRUE
 	max_home_distance = 12
 	var/random_follow = TRUE // Turn off if you want to bus with crabs.
 
@@ -101,44 +116,82 @@
 			if(!O.anchored)
 				return TRUE
 
-/*
+// This AI hits something, then runs away for awhile.
+// It will (almost) always flee if they are uncloaked, AND their target is not stunned.
+/datum/ai_holder/simple_mob/melee/hit_and_run
+	can_flee = TRUE
+
+// Used for the 'running' part of hit and run.
+/datum/ai_holder/simple_mob/melee/hit_and_run/special_flee_check()
+	if(!holder.is_cloaked())
+		if(target && isliving(target))
+			var/mob/living/L = target
+			return !L.incapacitated(INCAPACITATION_DISABLED) // Don't flee if our target is stunned in some form, even if uncloaked. This is so the mob keeps attacking a stunned opponent.
+		return TRUE // We're out in the open, uncloaked, and our target isn't stunned, so lets flee.
+	return FALSE
 
 
-
-/datum/ai_holder/simple_mob/melee/nurse_spider/list_targets()
-	var/list/targets = ..()
-
-	if(targets.len) // Do regular targeting if there's actual enemies.
-		world << "Returned early."
-		world << "targets was [english_list(targets)]."
-		return targets
-
-	// Otherwise lets target objects to web them.
-	var/static/webbable_types = typecacheof(list(/obj/machinery, /obj/item/, /obj/structure))
-	for(var/WT in typecache_filter_list(range(vision_range, holder), webbable_types))
-		var/obj/O = WT
-		if(!O.anchored && can_see(holder, O, vision_range))
-			targets += WT
-
-	world << "targets was [english_list(targets)]."
-	return targets
-*/
-/*
-/datum/ai_holder/simple_mob/melee/nurse_spider/can_attack(atom/movable/the_target)
-	. = ..()
-	if(!.) // Parent returned FALSE.
-		if(istype(the_target, /obj))
-			var/obj/O = the_target
-			if(!O.anchored)
-				return TRUE
-*/
+// This AI isolates people it stuns with its 'leap' attack, by dragging them away.
+/datum/ai_holder/simple_mob/melee/hunter_spider
 
 /*
-	. = hearers(vision_range, holder) - src // Remove ourselves to prevent suicidal decisions.
 
-	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha))
+/datum/ai_holder/simple_mob/melee/hunter_spider/post_special_attack(mob/living/L)
+	drag_away(L)
 
-	for(var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
-		if(can_see(holder, HM, vision_range))
-			. += HM
+// Called after a successful leap.
+/datum/ai_holder/simple_mob/melee/hunter_spider/proc/drag_away(mob/living/L)
+	world << "Doing drag_away attack on [L]"
+	if(!istype(L))
+		world << "Invalid type."
+		return FALSE
+
+	// If they didn't get stunned, then don't bother.
+	if(!L.incapacitated(INCAPACITATION_DISABLED))
+		world << "Not incapcitated."
+		return FALSE
+
+	// Grab them.
+	if(!holder.start_pulling(L))
+		world << "Failed to pull."
+		return FALSE
+
+	holder.visible_message(span("danger","\The [holder] starts to drag \the [L] away!"))
+
+	var/list/allies = list()
+	var/list/enemies = list()
+	for(var/mob/living/thing in hearers(vision_range, holder))
+		if(thing == holder || thing == L) // Don't count ourselves or the thing we just started pulling.
+			continue
+		if(holder.IIsAlly(thing))
+			allies += thing
+		else
+			enemies += thing
+
+	// First priority: Move our victim to our friends.
+	if(allies.len)
+		world << "Going to move to ally"
+		give_destination(get_turf(pick(allies)), min_distance = 2, combat = TRUE) // This will switch our stance.
+
+	// Second priority: Move our victim away from their friends.
+	// There's a chance of it derping and pulling towards enemies if there's more than two people.
+	// Preventing that will likely be both a lot of effort for developers and the CPU.
+	else if(enemies.len)
+		world << "Going to move away from enemies"
+		var/mob/living/hostile = pick(enemies)
+		var/turf/move_to = get_turf(hostile)
+		for(var/i = 1 to vision_range) // Move them this many steps away from their friend.
+			move_to = get_step_away(move_to, L, 7)
+		if(move_to)
+			give_destination(move_to, min_distance = 2, combat = TRUE) // This will switch our stance.
+
+	// Third priority: Move our victim SOMEWHERE away from where they were.
+	else
+		world << "Going to move away randomly"
+		var/turf/move_to = get_turf(L)
+		move_to = get_step(move_to, pick(cardinal))
+		for(var/i = 1 to vision_range) // Move them this many steps away from where they were before.
+			move_to = get_step_away(move_to, L, 7)
+		if(move_to)
+			give_destination(move_to, min_distance = 2, combat = TRUE) // This will switch our stance.
 */

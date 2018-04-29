@@ -30,9 +30,11 @@
 	melee_damage_upper = 30
 	attack_sharp = 1
 	attack_edge = 1
+	attack_sound = 'sound/weapons/bite.ogg'
 
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
+	minbodytemp = 175 // So they can all survive Sif without having to be classed under /sif subtype.
 
 	speak_emote = list("chitters")
 
@@ -58,7 +60,4 @@
 	if(prob(poison_chance))
 		to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 		L.reagents.add_reagent(poison_type, poison_per_bite)
-
-// Subtype
-
 

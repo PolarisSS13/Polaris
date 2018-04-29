@@ -17,7 +17,7 @@
 /datum/ai_holder/proc/shoot_near_turf(turf/targeted_turf)
 	if(!ranged)
 		return // Can't shoot.
-	if(get_dist(holder, targeted_turf) > shoot_range)
+	if(get_dist(holder, targeted_turf) > max_range(targeted_turf))
 		return // Too far to shoot.
 
 	var/turf/T = pick(RANGE_TURFS(2, targeted_turf)) // The turf we're actually gonna shoot at.

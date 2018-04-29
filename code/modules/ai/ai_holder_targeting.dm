@@ -5,9 +5,12 @@
 	var/retaliate = FALSE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
 
 	var/atom/movable/target = null			// The thing (mob or object) we're trying to kill.
+	var/atom/movable/preferred_target = null// If set, and if given the chance, we will always prefer to target this over other options.
 	var/turf/target_last_seen_turf = null 	// Where the mob last observed the target being, used if the target disappears but the mob wants to keep fighting.
 
 	var/vision_range = 7					// How far the targeting system will look for things to kill. Note that values higher than 7 are 'offscreen' and might be unsporting.
+	var/respect_alpha = TRUE				// If true, mobs with a sufficently low alpha will be treated as invisible.
+	var/alpha_vision_threshold = 127		// Targets with an alpha less or equal to this will be considered invisible. Requires above var to be true.
 
 	var/lose_target_time = 0				// world.time when a target was lost.
 	var/lose_target_timeout = 5 SECONDS		// How long until a mob 'times out' and stops trying to find the mob that disappeared.
@@ -56,7 +59,12 @@
 //				targets -= A
 	if(!targets.len) // We found nothing.
 		return
-	var/chosen_target = pick(targets)
+
+	var/chosen_target
+	if(preferred_target && preferred_target in targets)
+		chosen_target = preferred_target
+	else
+		chosen_target = pick(targets)
 	return chosen_target
 
 // Step 4, give us our selected target.
@@ -87,7 +95,7 @@
 
 	if(isliving(the_target))
 		var/mob/living/L = the_target
-		if(L.stat)
+		if(L.stat == DEAD)
 			return FALSE
 		if(holder.IIsAlly(L))
 			return FALSE
@@ -138,8 +146,12 @@
 		ai_log("can_see_target() : There is no target. Exiting.", AI_LOG_WARNING)
 		return FALSE
 
-	if(holder.see_invisible < the_target.invisibility) // Invisible, can't see it, oh well.
+	if(holder.see_invisible < the_target.invisibility) // Real invis.
 		ai_log("can_see_target() : Target ([the_target]) was invisible to holder. Exiting.", AI_LOG_TRACE)
+		return FALSE
+
+	if(respect_alpha && the_target.alpha <= alpha_vision_threshold) // Fake invis.
+		ai_log("can_see_target() : Target ([the_target]) was sufficently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
 	if(get_dist(holder, the_target) > view_range) // Too far away.
@@ -195,7 +207,13 @@
 	ai_log("react_to_attack() : Was attacked by [attacker].", AI_LOG_INFO)
 	return give_target(attacker) // Also handles setting the appropiate stance.
 
-/*
-	if(ai_inactive || stat || M == target_mob) return //Not if we're dead or already hitting them
-	if(M in friends || M.faction == faction) return //I'll overlook it THIS time...
-*/
+// Causes targeting to prefer targeting the taunter if possible.
+// This generally occurs if more than one option is within striking distance, including the taunter.
+// Otherwise the default filter will prefer the closest target.
+/datum/ai_holder/proc/receive_taunt(atom/movable/taunter)
+	ai_log("receive_taunt() : Was taunted by [taunter].", AI_LOG_INFO)
+	preferred_target = taunter
+
+/datum/ai_holder/proc/lose_taunt()
+	ai_log("lose_taunt() : Resetting preferred_target.", AI_LOG_INFO)
+	preferred_target = null
