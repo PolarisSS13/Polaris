@@ -10,6 +10,8 @@
 	movement_cost = 4
 	outdoors = TRUE
 	var/depth = 1 // Higher numbers indicates deeper water.
+	initial_flooring = /decl/flooring/water
+
 
 /turf/simulated/floor/water/initialize()
 	. = ..()
@@ -73,6 +75,7 @@
 	desc = "A body of water.  It seems quite deep."
 	icon_state = "seadeep" // So it shows up in the map editor as water.
 	under_state = "abyss"
+	initial_flooring = /decl/flooring/water/deep
 	edge_blending_priority = -2
 	movement_cost = 8
 	depth = 2

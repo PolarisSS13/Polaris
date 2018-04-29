@@ -53,6 +53,24 @@ var/list/flooring_types
 	damage_temperature = T0C+80
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/grass1.ogg',
+		'sound/effects/footstep/grass2.ogg',
+		'sound/effects/footstep/grass3.ogg',
+		'sound/effects/footstep/grass4.ogg'))
+
+/decl/flooring/grass/outdoors
+	name = "grass"
+	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
+	icon = 'icons/turf/outdoors.dmi'
+	has_base_range = 2
+	flags = TURF_CAN_BURN
+	icon_base = "grass"
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/grass1.ogg',
+		'sound/effects/footstep/grass2.ogg',
+		'sound/effects/footstep/grass3.ogg',
+		'sound/effects/footstep/grass4.ogg'))
 
 /decl/flooring/asteroid
 	name = "coarse sand"
@@ -61,6 +79,29 @@ var/list/flooring_types
 	icon_base = "asteroid"
 	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = null
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/concrete1.ogg',
+		'sound/effects/footstep/concrete2.ogg',
+		'sound/effects/footstep/concrete3.ogg',
+		'sound/effects/footstep/concrete4.ogg'))
+
+/decl/flooring/water
+	name = "shallow water"
+	desc = "A body of water.  It seems shallow enough to walk through, if needed."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_base = "seashallow"
+	build_type = null
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/slosh1.ogg',
+		'sound/effects/footstep/slosh2.ogg',
+		'sound/effects/footstep/slosh3.ogg',
+		'sound/effects/footstep/slosh4.ogg'))
+
+/decl/flooring/water/deep
+	name = "deep water"
+	desc = "A body of water.  It seems quite deep."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_base = "seadeep"
 
 /decl/flooring/snow
 	name = "snow"
@@ -73,6 +114,17 @@ var/list/flooring_types
 		'sound/effects/footstep/snow3.ogg',
 		'sound/effects/footstep/snow4.ogg',
 		'sound/effects/footstep/snow5.ogg'))
+
+/decl/flooring/dirt
+	name = "dirt"
+	desc = "Quite dirty!"
+	icon = 'icons/turf/outdoors.dmi'
+	icon_base = "dirt-dark"
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/dirt1.ogg',
+		'sound/effects/footstep/dirt2.ogg',
+		'sound/effects/footstep/dirt3.ogg',
+		'sound/effects/footstep/dirt4.ogg'))
 
 
 /decl/flooring/snow/snow2
@@ -304,6 +356,13 @@ var/list/flooring_types
 	icon_base = "sifwood"
 	build_type = /obj/item/stack/tile/wood/sif
 
+/decl/flooring/wood/pale
+	name = "pale wooden floor"
+	desc = "Old oak wood floor."
+	icon = 'icons/turf/flooring/wood.dmi'
+	icon_base = "palewood"
+	build_type = /obj/item/stack/tile/wood
+
 /decl/flooring/reinforced
 	name = "reinforced floor"
 	desc = "Heavily reinforced with steel rods."
@@ -341,13 +400,39 @@ var/list/flooring_types
 
 /decl/flooring/pavement
 	name = "pavement"
-	desc = "Stone slabs, perfect for any street."
-	icon_base = "monofloor"
-	descriptor = "tiles"
-	build_type = /obj/item/stack/tile/floor
-	can_paint = 1
+	icon = 'icons/turf/pavement.dmi'
+	icon_base = "pavement"
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/pavement1.ogg',
 		'sound/effects/footstep/pavement2.ogg',
 		'sound/effects/footstep/pavement3.ogg',
 		'sound/effects/footstep/pavement4.ogg'))
+
+/decl/flooring/pavement/corner
+	icon_base = "pave_corner"
+
+/decl/flooring/pavement/invert_corner
+	icon_base = "pave_invert_corner"
+
+/decl/flooring/pavement/empty
+	icon_base = "pave_empty"
+
+
+/decl/flooring/road
+	icon = 'icons/turf/roads.dmi'
+	icon_base = "road"
+	build_type = null
+	footstep_sounds = list("human" = list(
+		'sound/effects/footstep/pavement1.ogg',
+		'sound/effects/footstep/pavement2.ogg',
+		'sound/effects/footstep/pavement3.ogg',
+		'sound/effects/footstep/pavement4.ogg'))
+
+/decl/flooring/road/empty
+	icon_base = "road_empty"
+
+/decl/flooring/road/corner
+	icon_base = "road_corner"
+
+/decl/flooring/road/markings
+	icon_base = "road_marking"

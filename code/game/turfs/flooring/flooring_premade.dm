@@ -63,6 +63,13 @@
 	icon_state = "wood"
 	initial_flooring = /decl/flooring/wood
 
+/turf/simulated/floor/wood/pale
+	icon_state = "palewood"
+	initial_flooring = /decl/flooring/wood/pale
+
+/turf/simulated/floor/wood/sif
+	icon_state = "sifwood"
+
 
 /turf/simulated/floor/grass
 	name = "grass patch"
@@ -80,7 +87,7 @@
 	name = "floor"
 	icon = 'icons/turf/flooring/decorative.dmi'
 	icon_state = "square"
-	initial_flooring = /decl/flooring/pavement
+
 
 /turf/simulated/floor/tiled/techmaint
 	name = "floor"
