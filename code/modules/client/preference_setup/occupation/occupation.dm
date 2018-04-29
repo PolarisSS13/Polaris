@@ -82,8 +82,10 @@
 			index = 0
 
 		. += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
+
 		var/rank = job.title
 		lastJob = job
+		. += "<a href='?src=\ref[src];job_info=[rank]'>"
 		if(jobban_isbanned(user, rank))
 			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
 			continue
@@ -165,6 +167,39 @@
 
 	else if(href_list["set_job"])
 		if(SetJob(user, href_list["set_job"])) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
+
+
+	else if(href_list["job_info"])
+		var/rank = href_list["job_info"]
+		var/datum/job/job = job_master.GetJob(rank)
+		var/dat = list()
+
+		dat += "<p style='background-color: [job.selection_color]'><br><br><p>"
+		if(job.alt_titles)
+			dat += "<i><b>Alternate titles:</b> [english_list(job.alt_titles)].</i>"
+		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
+		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
+		if(job.department)
+			dat += "<b>Department:</b> [job.department]."
+			if(job.head_position)
+				dat += "You manage this department."
+
+		dat += "You answer to <b>[job.supervisors]</b> normally."
+
+		dat += "<hr style='clear:left;'>"
+		if(config.wikiurl)
+			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
+
+		var/description = job.get_description_blurb()
+		if(description)
+			dat += html_encode(description)
+		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
+		popup.set_content(jointext(dat,"<br>"))
+		popup.open()
+
+	else if(href_list["job_wiki"])
+		var/rank = href_list["job_wiki"]
+		open_link(user,"[config.wikiurl][rank]")
 
 	return ..()
 

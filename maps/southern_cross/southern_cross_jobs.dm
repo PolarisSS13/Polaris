@@ -82,7 +82,9 @@ var/const/access_explorer = 43
 	economic_modifier = 4
 	access = list(access_pilot, access_cargo, access_mining, access_mining_station)
 	minimal_access = list(access_pilot, access_cargo, access_mining, access_mining_station)
+
 	outfit_type = /decl/hierarchy/outfit/job/pilot
+	job_description = "You fly one of the shuttles that dock in the station hangars."
 
 /datum/job/explorer
 	title = "Explorer"
@@ -98,7 +100,9 @@ var/const/access_explorer = 43
 	economic_modifier = 4
 	access = list(access_explorer)
 	minimal_access = list(access_explorer)
+
 	outfit_type = /decl/hierarchy/outfit/job/explorer2
+
 /*
 	alt_titles = list(
 		"Explorer Technician" = /decl/hierarchy/outfit/job/explorer2/technician,

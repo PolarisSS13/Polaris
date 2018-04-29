@@ -58,9 +58,14 @@
 #define to_world(message) world << message
 #define to_world_log(message) world.log << message
 // TODO - Baystation has this log to crazy places. For now lets just world.log, but maybe look into it later.
-#define log_world(message) world.log << message
-#define to_file(file_entry, source_var) file_entry << source_var
-#define from_file(file_entry, target_var) file_entry >> target_var
+#define log_world(message)										world.log << message
+#define to_file(file_entry, source_var)							file_entry << source_var
+#define from_file(file_entry, target_var)						file_entry >> target_var
+#define show_browser(target, browser_content, browser_name)		target << browse(browser_content, browser_name)
+#define close_browser(target, browser_name)						target << browse(null, browser_name)
+#define show_image(target, image)								target << image
+#define send_rsc(target, rsc_content, rsc_name)					target << browse_rsc(rsc_content, rsc_name)
+#define open_link(target, url)									target << link(url)
 
 
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)

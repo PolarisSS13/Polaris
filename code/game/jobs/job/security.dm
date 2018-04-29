@@ -24,6 +24,10 @@
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
+	job_description = "You manage the Security Department, working to keep your Security Officers in place and able to properly handle threats, criminal or otherwise. \
+						You are also expected to keep your fellow Department Heads, as well as the crew, aware of developing situations. \
+						On top of your management role, you may, if necessary, perform the duties of absent Security roles, such as distributing gear from the Armory. \
+						Remember: No one is above the Law. Not even you."
 	alt_titles = list("Security Commander", "Chief of Security")
 
 /datum/job/warden
@@ -41,7 +45,10 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
+
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
+	job_description = "You watch over the Armory, the Brig, and any prisoners brought in. You may be called upon to take charge of the Security Department, \
+						if no Head of Security is present."
 
 /datum/job/detective
 	title = "Detective"
@@ -58,7 +65,9 @@
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	economic_modifier = 5
 	minimal_player_age = 3
+
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
+	job_description = "You use your forensics training to help determine who has commited crimes that no one witnessed, or no one survived."
 	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic, "Investigator")
 
 /datum/job/officer
@@ -76,5 +85,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
+
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
+	job_description = "Get Baton. Set Intent to Harm."
 	alt_titles = list("Junior Officer")

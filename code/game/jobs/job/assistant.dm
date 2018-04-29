@@ -11,7 +11,9 @@
 	economic_modifier = 1
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
+
 	outfit_type = /decl/hierarchy/outfit/job/assistant
+	job_description = "An Assistant does whatever is requested of them. Though they are part of the crew, they have no real authority."
 	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant",
 					"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
 					"Resident" = /decl/hierarchy/outfit/job/assistant/resident)
