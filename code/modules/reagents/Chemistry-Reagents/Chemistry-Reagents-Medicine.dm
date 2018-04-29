@@ -344,7 +344,7 @@
 		return
 	if(alien == IS_SLIME)
 		if(dose >= 5) //Not effective in small doses, though it causes toxloss at higher ones, it will make the regeneration for brute and burn more 'efficient' at the cost of more nutrition.
-			M.nutrition = (M.nutrition - (removed * 2))
+			M.nutrition -= removed * 2
 			M.adjustBruteLoss(-2 * removed)
 			M.adjustFireLoss(-1 * removed)
 		chem_effective = 0.5

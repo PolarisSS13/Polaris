@@ -8,7 +8,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	blurb =            "Prometheans (Macrolimus artificialis) are a species of artificially-created gelatinous humanoids, \
 	chiefly characterized by their primarily liquid bodies and ability to change their bodily shape and color in order to  \
 	mimic many forms of life. Derived from the Aetolian giant slime (Macrolimus vulgaris) inhabiting the warm, tropical planet \
-	of Aetolus, they are a relatively newly lab-created sapient species, and as such many things about them have yet to be comprehensively studied. \
+	of Aetolus, they are a relatively new lab-created sapient species, and as such many things about them have yet to be comprehensively studied. \
 	What has Science done?"
 	show_ssd =         "totally quiescent"
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
@@ -152,14 +152,12 @@ var/datum/species/shapeshifter/promethean/prometheans
 	var/turf/T = H.loc
 	if(istype(T))
 		var/obj/effect/decal/cleanable/C = locate() in T
-		if(C)
-			if(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)))
-				return
+		if(C && !(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET))))
 			qdel(C)
 			if (istype(T, /turf/simulated))
 				var/turf/simulated/S = T
 				S.dirt = 0
-			H.nutrition = min(400, max(0, rand(15, 30)))
+			H.nutrition = min(500, max(0, H.nutrition + rand(15, 30)))
 
 	// Heal remaining damage.
 	if(H.fire_stacks >= 0)
@@ -167,23 +165,24 @@ var/datum/species/shapeshifter/promethean/prometheans
 			var/nutrition_cost = 0
 			var/nutrition_debt = H.getBruteLoss()
 			var/starve_mod = 1
-			if(H.nutrition <= 4)
+			if(H.nutrition <= 25)
 				starve_mod = 0.75
 			H.adjustBruteLoss(-heal_rate * starve_mod)
-			nutrition_cost = nutrition_debt - H.getBruteLoss()
+			nutrition_cost += nutrition_debt - H.getBruteLoss()
 
 			nutrition_debt = H.getFireLoss()
 			H.adjustFireLoss(-heal_rate * starve_mod)
-			nutrition_cost = nutrition_cost + (nutrition_debt - H.getFireLoss())
+			nutrition_cost += nutrition_debt - H.getFireLoss()
 
 			nutrition_debt = H.getOxyLoss()
 			H.adjustOxyLoss(-heal_rate * starve_mod)
-			nutrition_cost = nutrition_cost + (nutrition_debt - H.getOxyLoss())
+			nutrition_cost += nutrition_debt - H.getOxyLoss()
 
 			nutrition_debt = H.getToxLoss()
 			H.adjustToxLoss(-heal_rate * starve_mod)
-			nutrition_cost = nutrition_cost + (nutrition_debt - H.getToxLoss())
-			H.nutrition = (2 * max(0, H.nutrition - nutrition_cost)) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
+			nutrition_cost += nutrition_debt - H.getToxLoss()
+			H.nutrition -= (2 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
+			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
 	else
 		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
 

@@ -412,8 +412,8 @@
 	if(M.isSynthetic())
 		return
 
-	var/mob/living/carbon/human/H = M
-	if(istype(H))
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
 		if(alien == IS_SLIME && prob(25))
 			var/color_shift = rand(-100, 100)
 			spawn(1)
