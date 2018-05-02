@@ -31,7 +31,15 @@
 		"Hawk",
 		"Haste",
 		"Radiant",
-		"Luminous"
+		"Luminous",
+		"Princess of Sol",
+		"King of the Mountain",
+		"Words and Changes",
+		"Katerina's Silhouette",
+		"Castle of Water",
+		"Jade Leviathan",
+		"Sword of Destiny",
+		"Ishtar's Grace"
 		)
 	var/list/destination_names = list()	//Names of static holdings that the organization's ships visit regularly.
 	var/autogenerate_destination_names = TRUE
@@ -44,7 +52,7 @@
 			"Sol", "Alpha Centauri", "Tau Ceti", "Zhu Que", "Oasis", "Vir", "Gavel", "Ganesha",
 			"Saint Columbia", "Altair", "Sidhe", "New Ohio", "Parvati", "Mahi-Mahi", "Nyx", "New Seoul",
 			"Kess-Gendar", "Raphael", "Phact", "Altair", "El", "Eutopia", "Qerr'valis", "Qerrna-Lakirr", "Rarkajar", "Thoth", "Jahan's Post", "Kauq'xum", "Silk", "New Singapore", "Stove", "Viola", "Love", "Isavau's Gamble" )
-		var/list/destination_types = list("dockyard", "station", "vessel", "waystation", "telecommunications satellite", "spaceport", "distress beacon", "anomaly", "colony", "outpost")
+		var/list/destination_types = list("dockyard", "station", "vessel", "waystation", "telecommunications satellite", "spaceport", "anomaly", "colony", "outpost")
 		while(i)
 			destination_names.Add("a [pick(destination_types)] in [pick(star_names)]")
 			i--
@@ -69,10 +77,10 @@
 	for newly tested posibrains to remain with the company."
 	history = "" // To be written someday.
 	work = "research giant"
-	headquarters = "Luna"
+	headquarters = "Luna, Sol"
 	motto = ""
 
-	ship_prefixes = list("NSV" = "exploration", "NTV" = "hauling", "NDV" = "patrol", "NRV" = "emergency response")
+	ship_prefixes = list("NSV" = "exploration", "NTV" = "hauling", "NDV" = "patrol", "NRV" = "emergency response", "NDV" = "asset protection")
 	//Scientist naming scheme
 	ship_names = list(
 		"Bardeen",
@@ -134,10 +142,10 @@
 	bulk contractors owing to the above factors."
 	history = ""
 	work = "arms manufacturer"
-	headquarters = ""
+	headquarters = "Luna, Sol"
 	motto = ""
 
-	ship_prefixes = list("HTV" = "freight", "HTV" = "munitions resupply")
+	ship_prefixes = list("HTV" = "freight", "HLV" = "munitions resupply", "HDV" = "asset protection", "HDV" = "preemptive deployment")
 	//War God/Soldier Theme
 	ship_names = list(
 		"Ares",
@@ -175,10 +183,10 @@
 	essential to modern cloning."
 	history = ""
 	work = "medical equipment supplier"
-	headquarters = ""
+	headquarters = "Toledo, New Ohio"
 	motto = ""
 
-	ship_prefixes = list("VTV" = "transportation", "VMV" = "medical resupply")
+	ship_prefixes = list("VTV" = "transportation", "VMV" = "medical resupply", "VSV" = "research mission", "VRV" = "emergency medical support")
 	// Diona names
 	ship_names = list(
 		"Wind That Stirs The Waves",
@@ -193,7 +201,13 @@
 		"Star That Fades From View",
 		"Eyes Which Turn Inwards",
 		"Joy Without Which The World Would Come Undone",
-		"A Thousand Thousand Planets Dangling From Branches"
+		"A Thousand Thousand Planets Dangling From Branches",
+		"Light Streaming Through Interminable Branches",
+		"Smoke Brought Up From A Terrible Fire",
+		"Light of Qerr'Valis",
+		"King Xae'uoque",
+		"Memory of Kel'xi",
+		"Xi'Kroo's Herald"
 		)
 	destination_names = list(
 		"a research facility in Samsara",
@@ -213,7 +227,7 @@
 	constant economic speculation."
 	history = ""
 	work = "pharmaceuticals company"
-	headquarters = ""
+	headquarters = "Earth, Sol"
 	motto = ""
 
 	ship_prefixes = list("ZTV" = "transportation", "ZMV" = "medical resupply")
@@ -234,7 +248,7 @@
 	headquarters = ""
 	motto = ""
 
-	ship_prefixes = list("WTV" = "freight")
+	ship_prefixes = list("WFV" = "freight", "WTV" = "transport", "WDV" = "asset protection")
 	ship_names = list(
 		"Comet",
 		"Aurora",
@@ -246,7 +260,16 @@
 		"Pulsar",
 		"Quark",
 		"Void",
-		"Asteroid"
+		"Asteroid",
+		"Wormhole",
+		"Sunspots",
+		"Supercluster",
+		"Moon",
+		"Anomaly",
+		"Drift",
+		"Stream",
+		"Rift",
+		"Curtain"
 		)
 	destination_names = list()
 
@@ -265,8 +288,10 @@
 	headquarters = ""
 	motto = ""
 
-	ship_prefixes = list("BTV" = "transportation")
-	destination_names = list()
+	ship_prefixes = list("ITV" = "transportation", "ISV" = "research exchange") //Bishop can't afford / doesn't care enough to afford its own prefixes
+	destination_names = list(
+	"A medical facility in Angessa's Pearl"
+	)
 
 /datum/lore/organization/tsc/morpheus
 	name = "Morpheus Cyberkinetics"
@@ -279,7 +304,7 @@
 	the good-will of the positronics, and the ire of those who wish to exploit them."
 	history = ""
 	work = "cybernetics manufacturer"
-	headquarters = ""
+	headquarters = "Shelf"
 	motto = ""
 
 	ship_prefixes = list("MTV" = "freight")
@@ -374,7 +399,17 @@
 		"This Ship Is Spiders",
 		"Legitimate Trade Vessel",
 		"Please Don't Explode II",
-		"Get Off the Air"
+		"Get Off the Air",
+		"Definitely Unsinkable",
+		"I Blame The Government",
+		"We Didn't Do It!",
+		"Unrelated To That Other Ship",
+		"Not Reflecting The Opinons Of The Shareholders",
+		"Normal Ship Name",
+		"Define Offensive",
+		"Tiffany",
+		"My Other Ship is A Gestalt",
+		"NTV HTV WTV ITV ZTV"
 		)
 	destination_names = list(
 		"a trade outpost in Shelf"
@@ -392,7 +427,46 @@
 	headquarters = ""
 	motto = ""
 
-	ship_prefixes = list("XTV" = "hauling")
+	ship_prefixes = list("XTV" = "hauling", "XFV" = "bulk transport", "XIV" = "resupply")
+	destination_names = list()
+
+/datum/lore/organization/tsc/xion
+	name = "Xion Manufacturing Group"
+	short_name = "Xion"
+	desc = "Xion, quietly, controls most of the market for industrial equipment. Their portfolio includes mining exosuits, \
+	factory equipment, rugged positronic chassis, and other pieces of equipment vital to the function of the economy. Xion \
+	keeps its control of the market by leasing, not selling, their equipment, and through infamous and bloody patent protection \
+	lawsuits. Xion are noted to be a favorite contractor for SolGov engineers, owing to their low cost and rugged design."
+	history = ""
+	work = "industrial equipment manufacturer"
+	headquarters = ""
+	motto = ""
+
+	ship_prefixes = list("XTV" = "hauling", "XFV" = "bulk transport", "XIV" = "resupply")
+	destination_names = list()
+
+/datum/lore/organization/tsc/mbt
+	name = "Major Bill's Transportation"
+	short_name = "Major Bill's"
+	desc = "The most popular courier service and starliner, Major Bill’s is an unassuming corporation whose greatest asset is their low cost and brand recognition. Major Bill’s is known, perhaps unfavorably, for its mascot, Major Bill, a cartoonish military figure that spouts quotable slogans. Their motto is “With Major Bill's, you won't pay major bills!”, an earworm much of the galaxy longs to forget."
+	history = ""
+	work = "courier and passenger transit"
+	headquarters = "Mars, Sol"
+	motto = ""
+
+	ship_prefixes = list("TTV" = "transport", "TTV" = "luxury transit")
+	destination_names = list()
+
+/datum/lore/organization/tsc/independent
+	name = "Free Traders"
+	short_name = "Free Trader"
+	desc = "Though less common now than they were in the decades before the Sol Economic Organization took power, independent traders remain an important part of the galactic economy, owing in no small part to protective tarrifs established by the Free Trade Union in the late twenty-forth century."
+	history = ""
+	work = "trade and transit"
+	headquarters = "N/A"
+	motto = "N/A"
+
+	ship_prefixes = list("IEV" = "prospecting", "IEC" = "prospecting", "IFV" = "bulk freight", "ITV" = "passenger transport", "ITC" = "just-in-time delivery")
 	destination_names = list()
 
 // Governments
@@ -405,7 +479,7 @@
 	comply with SifGov's legislation and regulations."
 	history = "" // Todo like the rest of them
 	work = "governing body of Sif"
-	headquarters = "New Reykjavik, Sif"
+	headquarters = "New Reykjavik, Sif, Vir"
 	motto = ""
 	autogenerate_destination_names = FALSE
 
@@ -428,7 +502,7 @@
 	defacto represents humanity on the galactic stage."
 	history = "" // Todo
 	work = "governing polity of humanity's Confederation"
-	headquarters = "Luna"
+	headquarters = "Luna, Sol"
 	motto = "Nil Mortalibus Ardui Est" // Latin, because latin.  Says 'Nothing is too steep for mortals'.
 	autogenerate_destination_names = TRUE
 
