@@ -143,7 +143,7 @@
 	desc = "Hephaestus Industries is the largest supplier of arms, ammunition, and small millitary vehicles in Sol space. \
 	Hephaestus products have a reputation for reliability, and the corporation itself has a noted tendency to stay removed \
 	from corporate politics. They enforce their neutrality with the help of a fairly large asset-protection contingent which \
-	prevents any contracting polities from using their own materiel against them. SolGov itself is one of Hephastusâ€™ largest \
+	prevents any contracting polities from using their own materiel against them. SolGov itself is one of Hephastus' largest \
 	bulk contractors owing to the above factors."
 	history = ""
 	work = "arms manufacturer"
