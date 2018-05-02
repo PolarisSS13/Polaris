@@ -178,8 +178,8 @@
 	Despite the suspicion and prejudice leveled at them for their alien origin, Vey-Med has obtained market dominance in \
 	the sale of medical equipment-- from surgical tools to large medical devices to the Oddyseus trauma response mecha \
 	and everything in between. Their equipment tends to be top-of-the-line, most obviously shown by their incredibly \
-	human-like FBP designs. Veyâ€™s rise to stardom came from their introduction of ressurective cloning, although in \
-	recent years theyâ€™ve been forced to diversify as their patents expired and NanoTrasen-made medications became \
+	human-like FBP designs. Vey's rise to stardom came from their introduction of ressurective cloning, although in \
+	recent years they've been forced to diversify as their patents expired and NanoTrasen-made medications became \
 	essential to modern cloning."
 	history = ""
 	work = "medical equipment supplier"
@@ -221,8 +221,8 @@
 	acronym = "ZH"
 	desc = "Zeng-Hu is an old TSC, based in the Sol system. Until the discovery of Phoron, Zeng-Hu maintained a stranglehold \
 	on the market for medications, and many household names are patentted by Zeng-Hu-- Bicaridyne, Dylovene, Tricordrizine, \
-	and Dexalin all came from a Zeng-Hu medical laboratory. Zeng-Huâ€™s fortunes have been in decline as Nanotrasenâ€™s near monopoly \
-	on phoron research cuts into their R&D and Vey-Medâ€™s superior medical equipment effectively decimated their own equipment \
+	and Dexalin all came from a Zeng-Hu medical laboratory. Zeng-Hu's fortunes have been in decline as Nanotrasenâ€™s near monopoly \
+	on phoron research cuts into their R&D and Vey-Med'ssuperior medical equipment effectively decimated their own equipment \
 	interests. The three-way rivalry between these companies for dominance in the medical field is well-known and a matter of \
 	constant economic speculation."
 	history = ""
@@ -241,7 +241,7 @@
 	and even mid-class automobiles a fixture of many households. Less famously, Ward-Takahashi also supplies most \
 	of the AI cores on which vital control systems are mounted, and it is this branch of their industry that has \
 	led to their tertiary interest in the development and sale of high-grade AI systems. Ward-Takahashiâ€™s economies \
-	of scale frequently steal market share from Nanotrasenâ€™s high-price products, leading to a bitter rivalry in the \
+	of scale frequently steal market share from Nanotrasen's high-price products, leading to a bitter rivalry in the \
 	consumer electronics market."
 	history = ""
 	work = "electronics manufacturer"
@@ -277,10 +277,10 @@
 	name = "Bishop Cybernetics"
 	short_name = "Bishop"
 	acronym = "BC"
-	desc = "Bishopâ€™s focus is on high-class, stylish cybernetics. A favorite among transhumanists (and a bÃªte noire for \
+	desc = "Bishop's focus is on high-class, stylish cybernetics. A favorite among transhumanists (and a bÃªte noire for \
 	bioconservatives), Bishop manufactures not only prostheses but also brain augmentation, synthetic organ replacements, \
 	and odds and ends like implanted wrist-watches. Their business model tends towards smaller, boutique operations, giving \
-	it a reputation for high price and luxury, with Bishop cyberware often rivalling Vey-Medâ€™s for cost. Bishopâ€™s reputation \
+	it a reputation for high price and luxury, with Bishop cyberware often rivalling Vey-Med's for cost. Bishop's reputation \
 	for catering towards the interests of human augmentation enthusiasts instead of positronics have earned it ire from the \
 	Positronic Rights Group and puts it in ideological (but not economic) comptetition with Morpheus Cyberkinetics."
 	history = ""
@@ -433,7 +433,7 @@
 /datum/lore/organization/tsc/mbt
 	name = "Major Bill's Transportation"
 	short_name = "Major Bill's"
-	desc = "The most popular courier service and starliner, Major Bill’s is an unassuming corporation whose greatest asset is their low cost and brand recognition. Major Bill’s is known, perhaps unfavorably, for its mascot, Major Bill, a cartoonish military figure that spouts quotable slogans. Their motto is “With Major Bill's, you won't pay major bills!”, an earworm much of the galaxy longs to forget."
+	desc = "The most popular courier service and starliner, Major Bill's is an unassuming corporation whose greatest asset is their low cost and brand recognition. Major Bill’s is known, perhaps unfavorably, for its mascot, Major Bill, a cartoonish military figure that spouts quotable slogans. Their motto is \"With Major Bill's, you won't pay major bills!\", an earworm much of the galaxy longs to forget."
 	history = ""
 	work = "courier and passenger transit"
 	headquarters = "Mars, Sol"
