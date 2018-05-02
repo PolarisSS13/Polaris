@@ -112,7 +112,7 @@
 		"Hubble",
 		"Alcubierre",
 		"Robineau",
-		"Glass",
+		"Glass"
 		)
 	// Note that the current station being used will be pruned from this list upon being instantiated
 	destination_names = list(
