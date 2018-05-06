@@ -239,7 +239,7 @@ var/global/photo_count = 0
 
 	for(var/mob/living/simple_animal/hostile/statue/S in the_turf)
 		if(S)
-		 mob_detail +=	"You can see a [S] on the photo. Its stare makes you feel uneasy." //"That which holds the image of an angel, becomes itself an angel."
+		 mob_detail +=	"You can see \a [S] on the photo. Its stare makes you feel uneasy." //"That which holds the image of an angel, becomes itself an angel."
 
 	return mob_detail
 
@@ -293,7 +293,7 @@ var/global/photo_count = 0
 			var/turf/T = get_turf(p)
 			var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue/(T)
 			S.banishable = 1//At least you can get rid of those bastards
-			T.visible_message("<span class='userdanger'>The photo turns into another statue! Run!</span>")
+			T.visible_message("<span class='userdanger'>The photo turns into \a [S]!</span>")
 			qdel(p)
 
 
@@ -347,7 +347,7 @@ var/global/photo_count = 0
 			T = get_turf(p) //second time, because the photo could've moved
 			var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue/(T)
 			S.banishable = 1//At least you can get rid of those bastards
-			T.visible_message("<span class='userdanger'>The photo turns into another statue! Run!</span>")
+			T.visible_message("<span class='userdanger'>The photo turns into \a [S]!</span>")
 			qdel(p)
 
 	if(copy_id)

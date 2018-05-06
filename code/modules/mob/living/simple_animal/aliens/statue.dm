@@ -26,9 +26,9 @@
 //	investigates = 1
 
 
-	harm_intent_damage = 50
-	melee_damage_lower = 45
-	melee_damage_upper = 65
+	harm_intent_damage = 60
+	melee_damage_lower = 50
+	melee_damage_upper = 70
 	attacktext = "clawed"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
@@ -83,7 +83,7 @@
 	if(istype(O, /obj/item/weapon/nullrod))
 		visible_message("<span class='warning'>[user] tries to banish [src] with [O]!</span>")
 		if(do_after(user, 15, src))
-			if(banishable == 1)
+			if(banishable)
 				visible_message("<span class='warning'>[src] crumbles into dust!</span>")
 				gib()
 			else
@@ -138,9 +138,7 @@
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_blind()
-	for(var/mob/living/L in range(7, src))
-		if(L == src)
-			continue
+	for(var/mob/living/L in oviewers(7, src))
 		if (prob(75))
 			if(istype(L , /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = L
@@ -153,13 +151,13 @@
 /mob/living/simple_animal/hostile/statue/proc/AI_flash()
 	if (prob(60))
 		visible_message("The statue slowly points at the light.")
-	for(var/obj/machinery/light/L in range(12, src))
+	for(var/obj/machinery/light/L in oview(12, src))
 		L.flicker()
 	return
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_mirrorshmash()
-	for(var/obj/structure/mirror/M in range(4, src))
+	for(var/obj/structure/mirror/M in oview(4, src))
 		if ((!M.shattered )||(!M.glass))
 			visible_message("The statue slowly points at the mirror!")
 			sleep(5)
@@ -398,11 +396,11 @@
 			M.show_message("<span class='warning'>[src] fades. Maybe it will spark another time.</span>")
 
 /obj/item/cursed_marble/proc/transfer_personality(var/mob/candidate)
-	announce_ghost_joinleave(candidate, 0, "They are the statue now.")
+	announce_ghost_joinleave(candidate, 0, "They are a statue now.")
 	src.searching = 2
 	var/mob/living/simple_animal/hostile/statue/S = new(get_turf(src))
 	S.client = candidate.client
-	to_chat(S, "<b>You are the statue, brought into existence on [station_name()] by [usr]! Obey all their orders.</b>")
+	to_chat(S, "<b>You are \a [S], brought into existence on [station_name()] by [usr]! Obey all their orders.</b>")
 	S.mind.assigned_role = "The Statue"
 	visible_message("<span class='warning'>The slab suddenly takes the shape of a humanoid!</span>")
 	qdel(src)
