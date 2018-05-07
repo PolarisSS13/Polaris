@@ -209,24 +209,29 @@
 /mob/living/simple_animal/hostile/statue/proc/can_be_seen(turf/destination)
 	if(!cannot_be_seen)
 		return null
-	// Check for darkness
+
 	var/turf/T = get_turf(loc)
-	if(T && destination && T.lighting_overlay)
+/*	if(T && destination && T.lighting_overlay)
 		if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right?
 			return null
 		if(T == destination)
-			destination = null
+			destination = null*/
 
-	// We aren't in darkness, loop for viewers.
+	// loop for viewers.
 	var/list/check_list = list(src)
 	if(destination)
 		check_list += destination
-
+//&& (M.see_in_dark > 5)
 	// This loop will, at most, loop twice.
 	for(var/atom/check in check_list)
 		for(var/mob/living/M in viewers(world.view + 1, check) - src)
-			if(!(M.sdisabilities & BLIND) || !(M.blinded))
-				if(M.has_vision() && !M.isSynthetic())
+			if(!(M.sdisabilities & BLIND) || !(M.blinded)) //if not blinded
+				if(M.has_vision() && !M.isSynthetic()) //is able to see the statue
+					if(T && destination && T.lighting_overlay)	// Check for darkness
+						if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right? WRONG! Damn cats.
+							if(M.see_in_dark > 5)
+								return M
+							return null
 					return M
 		for(var/obj/mecha/M in view(world.view + 1, check)) //assuming if you can see them they can see you
 			if(M.occupant && M.occupant.client)
