@@ -172,7 +172,7 @@
 			to_chat(src, "<span class='warning'>You cannot attack, there are eyes on you!</span>")
 			return
 	else
-		spawn(4)
+		spawn(3) //a small delay
 		..()
 
 
@@ -232,7 +232,7 @@
 			if(M.occupant && M.occupant.client)
 				if(M.occupant.has_vision() && !M.occupant.isSynthetic())
 					return M.occupant
-		for(var/obj/structure/mirror/M in range(3, check)) //Weeping angels hate mirrors. Probably because they're ugly af
+		for(var/obj/structure/mirror/M in view(3, check)) //Weeping angels hate mirrors. Probably because they're ugly af
 			if ((!M.shattered )||(!M.glass))
 				annoyance += 3
 				if (prob(5) && (ai_inactive == 0))
@@ -288,7 +288,7 @@
 	range = 10
 
 /spell/aoe_turf/blindness/cast(list/targets, mob/user = usr)
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L in targets)
 		if(L == user)
 			continue
 		var/turf/T = get_turf(L.loc)
@@ -311,7 +311,7 @@
 
 
 /spell/aoe_turf/shatter/cast(list/targets, mob/user = usr)
-	for(var/obj/structure/mirror/M in range(5, src))
+	for(var/obj/structure/mirror/M in view(5, src))
 		if ((!M.shattered )||(!M.glass))
 			M.shatter()
 	return
@@ -357,7 +357,7 @@
 
 /obj/item/cursed_marble/attack_self(mob/user as mob)
 	if(!searching)
-		user << "<span class='warning'>You rub the slab in hopes a wandering spirit wishes to inhabit it. [src] starts to sparkle!</span>"
+		to_chat(user, "<span class='warning'>You rub the slab in hopes a wandering spirit wishes to inhabit it. [src] starts to sparkle!</span>")
 		icon_state = "sheet-snowbrick"
 		searching = 1
 		request_player()
