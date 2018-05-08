@@ -1,0 +1,6 @@
+author: Lorwp
+
+delete-after: True
+
+changes: 
+  - rscadd: "Adds basic medical access to the detective. they can now actually access the morgue.""
