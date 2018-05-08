@@ -115,7 +115,7 @@
 	if(target_mob) // If we have a target and we're AI controlled
 		var/mob/watching = can_be_seen()
 		// If they're not our target
-		if(watching && watching != target_mob)
+		if(watching && (watching != target_mob))
 			// This one is closer.
 			if(get_dist(watching, src) > get_dist(target_mob, src))
 				LoseTarget()
@@ -140,11 +140,11 @@
 /mob/living/simple_animal/hostile/statue/proc/AI_blind()
 	for(var/mob/living/L in oviewers(7, src))
 		if (prob(75))
-			if(istype(L , /mob/living/carbon/human))
+			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
 				if (H.species == "Diona" || H.species == "Promethean")// can't blink and organic
 					return
-			to_chat(L, "<span class='notice'>Your eyes feel very heavy.</span>")
+			to_chat(L, pick("<span class='notice'>Your eyes feel very heavy.</span>", "<span class='notice'>You blink suddenly!</span>", "<span class='notice'>Your eyes close involuntarily!</span>"))
 			L.Blind(2)
 	return
 
