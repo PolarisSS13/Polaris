@@ -146,9 +146,11 @@
 		var/mob/living/silicon/S = target
 		//20% chance to actually hit the sensors
 		if(prob(effectchance * diode.rating))
-			S.Weaken(rand(1, diode.rating))
-			to_chat(S, "<span class='warning'>Your sensors were overloaded by a laser!</span>")
-			outmsg = "<span class='notice'>You overload [S] by shining [src] at their sensors.</span>"
+			flick("flash", S.flash_eyes(affect_silicon = TRUE))
+			if (prob(3 * diode.rating))
+				S.Weaken(diode.rating)
+			to_chat(S, "<span class='warning'>Your sensors were blinded by a laser!</span>")
+			outmsg = "<span class='notice'>You blind [S] by shining [src] at their sensors.</span>"
 			add_attack_logs(user,S,"Tried disabling using [src]")
 		else
 			outmsg = "<span class='notice'>You shine the [src] at [S], but miss their sensors.</span>"

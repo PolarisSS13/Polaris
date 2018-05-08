@@ -419,7 +419,3 @@
 
 	ghostize(0)
 	qdel(src)
-
-/mob/living/silicon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
-	if(affect_silicon)
-		return ..()
