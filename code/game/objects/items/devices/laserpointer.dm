@@ -104,7 +104,6 @@
 				var/eye_prot = C.eyecheck()
 				if(C.blinded)
 					eye_prot = 4
-				to_chat(user, "<span class='notice'>Eye protection is [eye_prot].</span>")
 				var/severity = (rand(0, 1) + diode.rating - eye_prot)
 				var/mob/living/carbon/human/H = C
 				var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
