@@ -11,6 +11,7 @@
 	icon_living = "human_male"
 	icon_dead = "human_male"
 	intelligence_level = SA_HUMANOID
+	stop_automated_movement = 1
 	var/annoyance = 30 //stop staring you creep
 	var/respond = 1
 	var/banishable = 0
@@ -23,9 +24,13 @@
 	speed = -1
 	maxHealth = 50000
 	health = 50000
+	status_flags = CANPUSH
 //	investigates = 1
-
-
+	a_intent = I_HURT
+	density = 1
+	mob_bump_flag = HEAVY
+	mob_push_flags = ~HEAVY
+	mob_swap_flags = ~HEAVY
 	harm_intent_damage = 60
 	melee_damage_lower = 50
 	melee_damage_upper = 70
@@ -44,7 +49,6 @@
 	maxbodytemp = 9000
 	run_at_them = 0
 
-
 	move_to_delay = 0 // Very fast
 
 	animate_movement = NO_STEPS // Do not animate movement, you jump around as you're a scary statue.
@@ -57,11 +61,10 @@
 
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
-	anchored = 1
 	var/last_hit = 0
 	var/cannot_be_seen = 1
 	var/mob/living/creator = null
-	mob_swap_flags = null
+
 
 // No movement while seen code.
 
@@ -102,6 +105,7 @@
 
 /mob/living/simple_animal/hostile/statue/Life()
 	..()
+	handle_target()
 	handleAnnoyance()
 	if(target_mob)
 		if((annoyance + 4) < 800)
@@ -109,9 +113,7 @@
 	else if ((annoyance - 2) > 0)
 		annoyance -= 2
 
-/mob/living/simple_animal/hostile/statue/handle_stance()
-	if(!..())
-		return
+/mob/living/simple_animal/hostile/statue/proc/handle_target()
 	if(target_mob) // If we have a target and we're AI controlled
 		var/mob/watching = can_be_seen()
 		// If they're not our target
@@ -125,21 +127,21 @@
 /mob/living/simple_animal/hostile/statue/proc/handleAnnoyance()
 	if(respond) //so it won't blind people 24/7
 		respond = 0
-		if (annoyance > 50)
+		if (annoyance > 30)
 			AI_blind()
-			annoyance -= 15
-			if (prob(30))
+			annoyance -= 30
+			if (prob(30) && annoyance > 30)
 				var/turf/T = get_turf(loc)
 				if(T.get_lumcount() * 10 > 1.5)
 					AI_flash()
-					annoyance -= 35
-	spawn(18)
+					annoyance -= 30
+	spawn(20)
 		respond = 1
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_blind()
 	for(var/mob/living/L in oviewers(7, src))
-		if (prob(75))
+		if (prob(70))
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
 				if (H.species == "Diona" || H.species == "Promethean")// can't blink and organic
@@ -307,15 +309,15 @@
 	desc = "That handsome devil has to wait. You have people to make into corpses."
 
 	message = "<span class='notice'>You glare your eyes.</span>"
-	charge_max = 2000
-	silenced = 500
+	charge_max = 300
 	spell_flags = 0
-	range = 10
+	range = 8
 
 
 
 
 /spell/aoe_turf/shatter/cast(list/targets, mob/user = usr)
+	spawn(50)
 	for(var/obj/structure/mirror/M in view(5, src))
 		if ((!M.shattered )||(!M.glass))
 			M.shatter()
