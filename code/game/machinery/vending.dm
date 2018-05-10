@@ -6,7 +6,6 @@
 	desc = "A generic vending machine."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "generic"
-	layer = 2.9
 	anchored = 1
 	density = 1
 
@@ -864,7 +863,7 @@
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin = 4,/obj/item/weapon/reagent_containers/glass/bottle/toxin = 4,
 					/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/syringe = 12,
 					/obj/item/device/healthanalyzer = 5,/obj/item/weapon/reagent_containers/glass/beaker = 4, /obj/item/weapon/reagent_containers/dropper = 2,
-					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2,
+					/obj/item/stack/medical/advanced/bruise_pack = 6, /obj/item/stack/medical/advanced/ointment = 6, /obj/item/stack/medical/splint = 4,
 					/obj/item/weapon/storage/pill_bottle/carbon = 2)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3,/obj/item/weapon/reagent_containers/pill/stox = 4,/obj/item/weapon/reagent_containers/pill/antitox = 6)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -1107,15 +1106,20 @@
 					/obj/item/toy/plushie/therapy/blue = 2,
 					/obj/item/toy/plushie/therapy/yellow = 2,
 					/obj/item/toy/plushie/therapy/orange = 2,
-					/obj/item/toy/plushie/therapy/green = 2)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne = 1
-	/* Handbuzzer to be added later */)
-	premium = list(/obj/item/toy/plushie/nymph = 2,
+					/obj/item/toy/plushie/therapy/green = 2,
+					/obj/item/toy/plushie/nymph = 2,
 					/obj/item/toy/plushie/mouse = 2,
 					/obj/item/toy/plushie/kitten = 2,
 					/obj/item/toy/plushie/lizard = 2,
 					/obj/item/toy/plushie/spider = 2,
 					/obj/item/toy/plushie/farwa = 2,
+					/obj/item/toy/plushie/corgi = 1,
+					/obj/item/toy/plushie/octopus = 1,
+					/obj/item/toy/plushie/face_hugger = 1,
+					/obj/item/toy/plushie/carp = 1,
+					/obj/item/toy/plushie/deer = 1,
+					/obj/item/toy/plushie/tabby_cat = 1)
+	premium = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne = 1,
 					/obj/item/weapon/storage/trinketbox = 2)
 	prices = list(/obj/item/weapon/storage/fancy/heartbox = 15,
 					/obj/item/toy/bouquet = 10,
@@ -1130,4 +1134,16 @@
 					/obj/item/toy/plushie/therapy/blue = 20,
 					/obj/item/toy/plushie/therapy/yellow = 20,
 					/obj/item/toy/plushie/therapy/orange = 20,
-					/obj/item/toy/plushie/therapy/green = 20)
+					/obj/item/toy/plushie/therapy/green = 20,
+					/obj/item/toy/plushie/nymph = 35,
+					/obj/item/toy/plushie/mouse = 35,
+					/obj/item/toy/plushie/kitten = 35,
+					/obj/item/toy/plushie/lizard = 35,
+					/obj/item/toy/plushie/spider = 35,
+					/obj/item/toy/plushie/farwa = 35,
+					/obj/item/toy/plushie/corgi = 50,
+					/obj/item/toy/plushie/octopus = 50,
+					/obj/item/toy/plushie/face_hugger = 50,
+					/obj/item/toy/plushie/carp = 50,
+					/obj/item/toy/plushie/deer = 50,
+					/obj/item/toy/plushie/tabby_cat = 50)

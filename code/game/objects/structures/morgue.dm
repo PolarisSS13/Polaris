@@ -148,7 +148,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morguet"
 	density = 1
-	layer = 2.0
+	plane = TURF_PLANE
 	var/obj/structure/morgue/connected = null
 	anchored = 1
 	throwpass = 1
@@ -195,6 +195,8 @@
 /*
  * Crematorium
  */
+
+GLOBAL_LIST_BOILERPLATE(all_crematoriums, /obj/structure/morgue/crematorium)
 
 /obj/structure/morgue/crematorium
 	name = "crematorium"
@@ -342,7 +344,7 @@
 	if(..())
 		return
 	if(src.allowed(user))
-		for (var/obj/structure/morgue/crematorium/C in world)
+		for (var/obj/structure/morgue/crematorium/C in all_crematoriums)
 			if (C.id == id)
 				if (!C.cremating)
 					C.cremate(user)

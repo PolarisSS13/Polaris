@@ -8,7 +8,7 @@
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/ghost.dmi'
 	icon_state = "ghost"
-	layer = 3.9	//Just below normal mobs
+	layer = BELOW_MOB_LAYER
 	plane = PLANE_GHOSTS
 	alpha = 127
 	stat = DEAD
@@ -103,12 +103,12 @@
 		if (ishuman(body))
 			var/mob/living/carbon/human/H = body
 			icon = H.icon
-			underlays = H.underlays
-			overlays = H.overlays
+			icon_state = H.icon_state
+			add_overlay(H.overlays_standing) //All our equipment sprites
 		else
 			icon = body.icon
 			icon_state = body.icon_state
-			overlays = body.overlays
+			add_overlay(body.overlays)
 
 		gender = body.gender
 		if(body.mind && body.mind.name)
@@ -795,9 +795,12 @@ mob/observer/dead/MayRespawn(var/feedback = 0)
 	set name = "Blank pAI alert"
 	set desc = "Flash an indicator light on available blank pAI devices for a smidgen of hope."
 	if(usr.client.prefs.be_special & BE_PAI)
-		for(var/obj/item/device/paicard/p in world)
+		for(var/obj/item/device/paicard/p in all_pai_cards)
 			var/obj/item/device/paicard/PP = p
 			if(PP.pai == null)
 				PP.overlays += "pai-ghostalert"
 				spawn(54)
 					PP.overlays.Cut()
+
+/mob/observer/dead/speech_bubble_appearance()
+	return "ghost"

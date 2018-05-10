@@ -140,6 +140,42 @@ note dizziness decrements automatically in the mob's Life() proc.
 	//reset the pixel offsets to zero
 	is_floating = 0
 
+/atom/movable/proc/fade_towards(atom/A,var/time = 2)
+	set waitfor = FALSE
+
+	var/pixel_x_diff = 0
+	var/pixel_y_diff = 0
+	var/pixel_z_diff = 0
+	var/direction = get_dir(src, A)
+	if(direction & NORTH)
+		pixel_y_diff = 32
+	else if(direction & SOUTH)
+		pixel_y_diff = -32
+
+	if(direction & EAST)
+		pixel_x_diff = 32
+	else if(direction & WEST)
+		pixel_x_diff = -32
+
+	if(!direction) // On top of?
+		pixel_z_diff = -8
+
+	var/default_pixel_x = initial(pixel_x)
+	var/default_pixel_y = initial(pixel_y)
+	var/default_pixel_z = initial(pixel_z)
+	var/initial_alpha = alpha
+	var/mob/mob = src
+	if(istype(mob))
+		default_pixel_x = mob.default_pixel_x
+		default_pixel_y = mob.default_pixel_y
+
+	animate(src, alpha = 0, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, pixel_z = pixel_z + pixel_z_diff, time = time)
+	sleep(time+1) //So you can wait on this proc to finish if you want to time your next steps
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
+	pixel_z = default_pixel_z
+	alpha = initial_alpha
+
 /atom/movable/proc/do_attack_animation(atom/A)
 
 	var/pixel_x_diff = 0
@@ -165,8 +201,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 	animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff, time = 2)
 	animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
 
-/mob/living/do_attack_animation(atom/A)
+/mob/living/do_attack_animation(atom/A, no_attack_icons = FALSE)
 	..()
+	if(no_attack_icons)
+		return FALSE
+
 	//Check for clients with pref enabled
 	var/list/viewing = list()
 	for(var/m in viewers(A))
@@ -225,6 +264,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 	// And animate the attack!
 	animate(I, alpha = 175, pixel_x = 0, pixel_y = 0, pixel_z = 0, time = 3)
+	update_icon()
 	return TRUE //Found an item, doing item attack animation.
 
 /mob/proc/spin(spintime, speed)

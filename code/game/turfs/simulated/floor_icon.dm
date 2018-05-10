@@ -7,7 +7,7 @@ var/image/no_ceiling_image = null
 	return TRUE
 
 /proc/cache_no_ceiling_image()
-	no_ceiling_image = image(icon = 'icons/turf/open_space.dmi', icon_state = "no_ceiling", layer = OVERTURF_LAYER)
+	no_ceiling_image = image(icon = 'icons/turf/open_space.dmi', icon_state = "no_ceiling")
 	no_ceiling_image.plane = PLANE_MESONS
 
 /turf/simulated/floor/update_icon(var/update_neighbors)
@@ -83,9 +83,6 @@ var/image/no_ceiling_image = null
 			add_overlay(get_flooring_overlay("[flooring.icon_base]-broken-[broken]","[flooring.icon_base]_broken[broken]"))
 		if(!isnull(burnt) && (flooring.flags & TURF_CAN_BURN))
 			add_overlay(get_flooring_overlay("[flooring.icon_base]-burned-[burnt]","[flooring.icon_base]_burned[burnt]"))
-
-	if(weather_overlay)
-		add_overlay(weather_overlay)
 
 	if(update_neighbors)
 		for(var/turf/simulated/floor/F in range(src, 1))

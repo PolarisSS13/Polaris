@@ -12,11 +12,13 @@
 	dir = SOUTH
 	initialize_directions = NORTH|SOUTH|EAST|WEST
 
+	construction_type = /obj/item/pipe/quaternary
+	pipe_state = "manifold4w"
+
 	var/obj/machinery/atmospherics/node3
 	var/obj/machinery/atmospherics/node4
 
 	level = 1
-	layer = 2.4 //under wires with their 2.44
 
 /obj/machinery/atmospherics/pipe/manifold4w/New()
 	..()
@@ -127,29 +129,25 @@
 
 /obj/machinery/atmospherics/pipe/manifold4w/atmos_init()
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,1))
-		if(target.initialize_directions & 2)
-			if (check_connect_types(target,src))
-				node1 = target
-				break
+	for(var/obj/machinery/atmospherics/target in get_step(src, NORTH))
+		if (can_be_node(target, 1))
+			node1 = target
+			break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,2))
-		if(target.initialize_directions & 1)
-			if (check_connect_types(target,src))
-				node2 = target
-				break
+	for(var/obj/machinery/atmospherics/target in get_step(src, SOUTH))
+		if (can_be_node(target, 2))
+			node2 = target
+			break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,4))
-		if(target.initialize_directions & 8)
-			if (check_connect_types(target,src))
-				node3 = target
-				break
+	for(var/obj/machinery/atmospherics/target in get_step(src, EAST))
+		if (can_be_node(target, 3))
+			node3 = target
+			break
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,8))
-		if(target.initialize_directions & 4)
-			if (check_connect_types(target,src))
-				node4 = target
-				break
+	for(var/obj/machinery/atmospherics/target in get_step(src, WEST))
+		if (can_be_node(target, 4))
+			node4 = target
+			break
 
 	if(!node1 && !node2 && !node3 && !node4)
 		qdel(src)
@@ -168,7 +166,8 @@
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map_4way-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
+	piping_layer = PIPING_LAYER_SCRUBBER
+	layer = PIPES_SCRUBBER_LAYER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -177,7 +176,8 @@
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map_4way-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
+	piping_layer = PIPING_LAYER_SUPPLY
+	layer = PIPES_SUPPLY_LAYER
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
@@ -212,7 +212,8 @@
 	desc = "A manifold composed of scrubbers pipes"
 	icon_state = "map_4way-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
+	piping_layer = PIPING_LAYER_SCRUBBER
+	layer = PIPES_SCRUBBER_LAYER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -221,7 +222,8 @@
 	desc = "A manifold composed of supply pipes"
 	icon_state = "map_4way-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
+	piping_layer = PIPING_LAYER_SUPPLY
+	layer = PIPES_SUPPLY_LAYER
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 

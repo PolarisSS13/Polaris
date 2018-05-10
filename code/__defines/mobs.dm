@@ -9,7 +9,7 @@
 #define CANPARALYSE 0x4
 #define CANPUSH     0x8
 #define LEAPING     0x10
-#define HIDING		0x20
+#define HIDING      0x20
 #define PASSEMOTES  0x40    // Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
@@ -293,16 +293,38 @@
 #define VIS_CH_SPECIAL		13
 #define VIS_CH_STATUS_OOC	14
 
-#define VIS_D_COLORBLIND	15
-#define VIS_D_COLORBLINDI	16
+#define VIS_ADMIN1			15
+#define VIS_ADMIN2			16
+#define VIS_ADMIN3			17
 
-#define VIS_ADMIN1			17
-#define VIS_ADMIN2			18
-#define VIS_ADMIN3			19
+#define VIS_MESONS			18
 
-#define VIS_MESONS			20
-
-#define VIS_COUNT			20 //Must be highest number from above.
+#define VIS_COUNT			18 //Must be highest number from above.
 
 //Some mob icon layering defines
 #define BODY_LAYER		-100
+
+// Clothing flags, organized in roughly top-bottom
+#define EXAMINE_SKIPHELMET			0x0001
+#define EXAMINE_SKIPEARS			0x0002
+#define EXAMINE_SKIPEYEWEAR			0x0004
+#define EXAMINE_SKIPMASK			0x0008
+#define EXAMINE_SKIPJUMPSUIT		0x0010
+#define EXAMINE_SKIPTIE				0x0020
+#define EXAMINE_SKIPHOLSTER			0x0040
+#define EXAMINE_SKIPSUITSTORAGE		0x0080
+#define EXAMINE_SKIPBACKPACK		0x0100
+#define EXAMINE_SKIPGLOVES			0x0200
+#define EXAMINE_SKIPBELT			0x0400
+#define EXAMINE_SKIPSHOES			0x0800
+
+// Body flags
+#define EXAMINE_SKIPHEAD			0x0001
+#define EXAMINE_SKIPEYES			0x0002
+#define EXAMINE_SKIPFACE			0x0004
+#define EXAMINE_SKIPBODY			0x0008
+#define EXAMINE_SKIPGROIN			0x0010
+#define EXAMINE_SKIPARMS			0x0020
+#define EXAMINE_SKIPHANDS			0x0040
+#define EXAMINE_SKIPLEGS			0x0080
+#define EXAMINE_SKIPFEET			0x0100

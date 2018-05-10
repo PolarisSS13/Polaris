@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_items, /obj/item)
+
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
@@ -580,7 +582,7 @@ var/list/global/slot_flags_enumeration = list(
 	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 
 	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
-	for(var/obj/item/A in world)
+	for(var/obj/item/A in all_items)
 		if(A.type == type && !A.blood_overlay)
 			A.blood_overlay = image(I)
 
@@ -727,14 +729,16 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return icon_override
 
 	//2: species-specific sprite sheets (skipped for inhands)
-	var/sheet = sprite_sheets[body_type]
-	if(sheet && !inhands)
-		return sheet
+	if(LAZYLEN(sprite_sheets))
+		var/sheet = sprite_sheets[body_type]
+		if(sheet && !inhands)
+			return sheet
 
 	//3: slot-specific sprite sheets
-	sheet = item_icons[slot_name]
-	if(sheet)
-		return sheet
+	if(LAZYLEN(item_icons))
+		var/sheet = item_icons[slot_name]
+		if(sheet)
+			return sheet
 
 	//4: item's default icon
 	if(default_worn_icon)
@@ -751,9 +755,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/get_worn_icon_state(var/slot_name)
 
 	//1: slot-specific sprite sheets
-	var/state = item_state_slots[slot_name]
-	if(state)
-		return state
+	if(LAZYLEN(item_state_slots))
+		var/state = item_state_slots[slot_name]
+		if(state)
+			return state
 
 	//2: item_state variable
 	if(item_state)
