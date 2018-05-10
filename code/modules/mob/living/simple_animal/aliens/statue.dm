@@ -82,7 +82,7 @@
 		return 0
 	return ..()
 
-/mob/living/simple_animal/hostile/statue/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/hostile/statue/attackby(var/obj/item/O as obj, var/mob/user as mob) //banishing the statue is a risky job
 	if(istype(O, /obj/item/weapon/nullrod))
 		visible_message("<span class='warning'>[user] tries to banish [src] with [O]!</span>")
 		if(do_after(user, 15, src))
@@ -107,7 +107,7 @@
 	..()
 	handle_target()
 	handleAnnoyance()
-	if(target_mob)
+	if(target_mob) //if there's a victim, statue will use its powers
 		if((annoyance + 4) < 800)
 			annoyance += 4
 	else if ((annoyance - 2) > 0)
@@ -179,7 +179,7 @@
 
 
 
-/mob/living/simple_animal/hostile/statue/DoPunch(var/atom/A)
+/mob/living/simple_animal/hostile/statue/DoPunch(var/atom/A) //had to redo that, since it's supposed to target only head and upper body
 	if(!Adjacent(A)) // They could've moved in the meantime.
 		return FALSE
 
@@ -354,7 +354,7 @@
 
 
 
-/obj/item/cursed_marble
+/obj/item/cursed_marble //slime cube copypaste
 	name = "marble slab"
 	desc = "A peculiar slab of marble, radiating with dark energy."
 	icon = 'icons/obj/stacks.dmi'
@@ -413,7 +413,7 @@
 	qdel(src)
 
 
-/obj/item/cursed_marble/verb/crush()
+/obj/item/cursed_marble/verb/crush() //if there's no ghosts to respond to your request/you want to use the statue for malicious stuff
 	set name = "Crush the marble slab"
 	set category = "Object"
 	set src in usr
@@ -421,7 +421,7 @@
 
 /obj/item/cursed_marble/proc/summonmob(mob/user as mob)
 	if(searching == 0)
-		var/choice = alert(user, "Are you sure you want to crush the marble? (this will spawn a clientless version of the statue)", "Crush it?", "Yes", "No")
+		var/choice = alert(user, "Are you sure you want to crush the marble? (this will spawn a clientless version of the statue, hostile to everyone, but you)", "Crush it?", "Yes", "No")
 		if(choice)
 			if(choice == "Yes")
 				var/mob/living/simple_animal/hostile/statue/S = new /mob/living/simple_animal/hostile/statue(get_turf(user))
