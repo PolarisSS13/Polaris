@@ -140,11 +140,11 @@
 
 
 /mob/living/simple_animal/hostile/statue/proc/AI_blind()
-	for(var/mob/living/L in oviewers(7, src))
+	for(var/mob/living/L in oviewers(12, src)) //the range is so big, because it tries to keep out of sight and can't reengage if you get too far
 		if (prob(70))
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
-				if (H.species == "Diona" || H.species == "Promethean")// can't blink and organic
+				if (H.species == "Diona" || H.species == "Promethean" || H == creator)// can't blink and organic
 					return
 			to_chat(L, pick("<span class='notice'>Your eyes feel very heavy.</span>", "<span class='notice'>You blink suddenly!</span>", "<span class='notice'>Your eyes close involuntarily!</span>"))
 			L.Blind(2)
@@ -227,16 +227,17 @@
 	// This loop will, at most, loop twice.
 	for(var/atom/check in check_list)
 		for(var/mob/living/M in viewers(world.view + 1, check) - src)
-			if(!(M.sdisabilities & BLIND) || !(M.blinded)) //if not blinded
-				if(M.has_vision() && !M.isSynthetic()) //is able to see the statue
-					if(T && destination && T.lighting_overlay)	// Check for darkness
-						if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right? WRONG! Damn cats.
-							if(M.see_in_dark > 5)
-								return M
-							return null
-					return M
+			if(M != creator)
+				if(!(M.sdisabilities & BLIND) || !(M.blinded)) //if not blinded
+					if(M.has_vision() && !M.isSynthetic()) //is able to see the statue
+						if(T && destination && T.lighting_overlay)	// Check for darkness
+							if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right? WRONG! Damn cats.
+								if(M.see_in_dark > 5)
+									return M
+								return null
+						return M
 		for(var/obj/mecha/M in view(world.view + 1, check)) //assuming if you can see them they can see you
-			if(M.occupant && M.occupant.client)
+			if(M.occupant && M.occupant.client && M.occupant != creator)
 				if(M.occupant.has_vision() && !M.occupant.isSynthetic())
 					return M.occupant
 		for(var/obj/structure/mirror/M in view(3, check)) //Weeping angels hate mirrors. Probably because they're ugly af
@@ -294,9 +295,9 @@
 	spell_flags = 0
 	range = 10
 
-/spell/aoe_turf/blindness/cast(list/targets, mob/user = usr)
+/spell/aoe_turf/blindness/cast(list/targets, mob/living/simple_animal/hostile/statue/user = usr)
 	for(var/mob/living/L in targets)
-		if(L == user)
+		if(L == user || L == user.creator)
 			continue
 		var/turf/T = get_turf(L.loc)
 		if(T && T in targets)
