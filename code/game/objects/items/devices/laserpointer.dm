@@ -52,7 +52,7 @@
 			diode = W
 			to_chat(user, "<span class='notice'>You install a [diode.name] in [src].</span>")
 		else
-			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+			to_chat(user, "<span class='notice'>[src] already has a diode.</span>")
 
 	else if(istype(W, /obj/item/weapon/screwdriver))
 		if(diode)
@@ -148,7 +148,7 @@
 		if(prob(effectchance * diode.rating))
 			flick("flash", S.flash_eyes(affect_silicon = TRUE))
 			if (prob(3 * diode.rating))
-				S.Weaken(diode.rating)
+				S.Weaken(1)
 			to_chat(S, "<span class='warning'>Your sensors were blinded by a laser!</span>")
 			outmsg = "<span class='notice'>You blind [S] by shining [src] at their sensors.</span>"
 			add_attack_logs(user,S,"Tried disabling using [src]")
@@ -166,22 +166,23 @@
 			outmsg = "<span class='info'>You missed the lens of [C] with [src].</span>"
 
 	//cats!
-	for(var/mob/living/simple_animal/cat/C in view(1,targloc))
-		if(prob(50) && !(C.client))
-			C.visible_message("<span class='warning'>[C] pounces on the light!</span>", "<span class='warning'>You pounce on the light!</span>")
-			step_towards(C, targloc)
-			C.lay_down()
-			spawn(10)
+	for(var/mob/living/simple_animal/cat/C in viewers(1,targloc))
+		if (!(C.stat || C.buckled))
+			if(prob(50) && !(C.client))
+				C.visible_message("<span class='warning'>[C] pounces on the light!</span>", "<span class='warning'>You pounce on the light!</span>")
+				step_towards(C, targloc)
 				C.lay_down()
-		else
-			C.set_dir(get_dir(C,targloc))
-			C.visible_message("<span class='notice'>[C] watches the light.</span>", "<span class='notice'>Your attention is drawn to the mysterious glowing dot.</span>")
+				spawn(10)
+					C.lay_down()
+			else
+				C.set_dir(get_dir(C,targloc))
+				C.visible_message("<span class='notice'>[C] watches the light.</span>", "<span class='notice'>Your attention is drawn to the mysterious glowing dot.</span>")
 
 
 	//laser pointer image
 	icon_state = "pointer_[pointer_icon_state]"
 	var/list/showto = list()
-	for(var/mob/M in range(world.view,targloc))
+	for(var/mob/M in viewers(world.view,targloc))
 		if(M.client)
 			showto.Add(M.client)
 	var/image/I = image('icons/obj/projectiles.dmi',targloc,pointer_icon_state,cooldown)
