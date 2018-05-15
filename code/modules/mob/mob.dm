@@ -345,7 +345,7 @@
 		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
 		return
 	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
-		t-_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
+		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
