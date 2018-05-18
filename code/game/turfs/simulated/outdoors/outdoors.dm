@@ -7,8 +7,6 @@ var/list/outdoor_turfs = list()
 	var/edge_blending_priority = 0
 	// Outdoors var determines if the game should consider the turf to be 'outdoors', which controls certain things such as weather effects.
 	var/outdoors = FALSE
-	// This holds the image for the current weather effect.
-	var/image/weather_overlay = null
 
 /turf/simulated/floor/outdoors
 	name = "generic ground"
@@ -32,7 +30,7 @@ var/list/outdoor_turfs = list()
 /turf/simulated/floor/Destroy()
 	if(outdoors)
 		planet_controller.unallocateTurf(src)
-	..()
+	return ..()
 
 /turf/simulated/proc/make_outdoors()
 	outdoors = TRUE
@@ -44,18 +42,14 @@ var/list/outdoor_turfs = list()
 		planet_controller.unallocateTurf(src)
 	else // This is happening during map gen, if there's no planet_controller (hopefully).
 		outdoor_turfs -= src
-	qdel(weather_overlay)
-	update_icon()
 
 /turf/simulated/post_change()
 	..()
 	// If it was outdoors and still is, it will not get added twice when the planet controller gets around to putting it in.
 	if(outdoors)
 		make_outdoors()
-	//	outdoor_turfs += src
 	else
 		make_indoors()
-	//	planet_controller.unallocateTurf(src)
 
 /turf/simulated/proc/update_icon_edge()
 	if(edge_blending_priority)
@@ -67,15 +61,14 @@ var/list/outdoor_turfs = list()
 					var/image/I = image(icon = 'icons/turf/outdoors_edge.dmi', icon_state = "[T.get_edge_icon_state()]-edge", dir = checkdir)
 					I.plane = 0
 					turf_edge_cache[cache_key] = I
-				overlays += turf_edge_cache[cache_key]
+				add_overlay(turf_edge_cache[cache_key])
 
 /turf/simulated/proc/get_edge_icon_state()
 	return icon_state
 
 /turf/simulated/floor/outdoors/update_icon()
-	overlays.Cut()
-	update_icon_edge()
 	..()
+	update_icon_edge()
 
 /turf/simulated/floor/outdoors/mud
 	name = "mud"

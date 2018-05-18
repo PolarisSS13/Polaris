@@ -77,3 +77,15 @@
 
 /area/submap/cave/IceCave1C
 	name = "Ice Cave 1C"
+
+/area/submap/cave/swordcave
+	name = "Cursed Sword Cave"
+
+/area/submap/cave/SupplyDrop1
+	name = "Supply Drop 1"
+
+/area/submap/cave/BlastMine1
+	name = "Blast Mine 1"
+
+/area/submap/crashedcontainmentshuttle
+	name = "Crashed	Containment	Shuttle"

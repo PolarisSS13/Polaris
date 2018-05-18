@@ -220,7 +220,9 @@
 				return
 
 			if (href_list["createpill_multiple"])
-				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as num
+				count = input("Select the number of pills to make.", "Max [max_pill_count]", pillamount) as null|num
+				if(!count) //Covers 0 and cancel
+					return
 				count = Clamp(count, 1, max_pill_count)
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
@@ -229,7 +231,9 @@
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 60) amount_per_pill = 60
 
-			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"), MAX_NAME_LEN)
+			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
+			if(!name) //Blank name (sanitized to nothing, or left empty) or cancel
+				return
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
@@ -281,7 +285,6 @@
 	name = "All-In-One Grinder"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "juicer1"
-	layer = 2.9
 	density = 0
 	anchored = 0
 	use_power = 1

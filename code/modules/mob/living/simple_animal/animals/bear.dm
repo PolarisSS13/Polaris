@@ -1,7 +1,8 @@
 //Space bears!
 /mob/living/simple_animal/hostile/bear
 	name = "space bear"
-	desc = "RawrRawr!!"
+	desc = "A product of Space Russia?"
+	tt_desc = "U Ursinae aetherius" //...bearspace? Maybe.
 	icon_state = "bear"
 	icon_living = "bear"
 	icon_dead = "bear_dead"
@@ -23,6 +24,8 @@
 
 	melee_damage_lower = 20
 	melee_damage_upper = 30
+	attack_sharp = 1
+	attack_edge = 1
 
 	//Space bears aren't affected by atmos.
 	min_oxy = 0

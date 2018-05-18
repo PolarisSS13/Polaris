@@ -49,6 +49,7 @@
 		//Effects
 	var/incendiary = 0 //1 for ignite on hit, 2 for trail of fire. 3 maybe later for burst of fire around the impact point. - Mech
 	var/flammability = 0 //Amount of fire stacks to add for the above.
+	var/combustion = TRUE	//Does this set off flammable objects on fire/hit?
 	var/stun = 0
 	var/weaken = 0
 	var/paralyze = 0
@@ -90,6 +91,10 @@
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
 	impact_effect(effect_transform)		// generate impact effect
+	if(damage && damage_type == BURN)
+		var/turf/T = get_turf(A)
+		if(T)
+			T.hotspot_expose(700, 5)
 	return
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
@@ -131,6 +136,9 @@
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
 		return 1
+
+	if(combustion)
+		curloc.hotspot_expose(700, 5)
 
 	if(targloc == curloc) //Shooting something in the same turf
 		target.bullet_act(src, target_zone)
@@ -200,17 +208,8 @@
 
 	//admin logs
 	if(!no_attack_log)
-		if(istype(firer, /mob))
-
-			var/attacker_message = "shot with \a [src.type]"
-			var/victim_message = "shot with \a [src.type]"
-			var/admin_message = "shot (\a [src.type])"
-
-			admin_attack_log(firer, target_mob, attacker_message, victim_message, admin_message)
-		else
-			if(target_mob) // Sometimes the target_mob gets gibbed or something.
-				target_mob.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[target_mob]/[target_mob.ckey]</b> with <b>\a [src]</b>"
-				msg_admin_attack("UNKNOWN shot [target_mob] ([target_mob.ckey]) with \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target_mob.x];Y=[target_mob.y];Z=[target_mob.z]'>JMP</a>)")
+		if(istype(firer, /mob) && istype(target_mob))
+			add_attack_logs(firer,target_mob,"Shot with \a [src.type] projectile")
 
 	//sometimes bullet_act() will want the projectile to continue flying
 	if (result == PROJECTILE_CONTINUE)
@@ -402,7 +401,7 @@
 				P.activate()
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
-	if(ispath(tracer_type))
+	if(ispath(tracer_type) && location)
 		var/obj/effect/projectile/P = new impact_type(location.loc)
 
 		if(istype(P))

@@ -11,9 +11,11 @@
 	volume = 10000 //in liters, 1 meters by 1 meters by 2 meters ~tweaked it a little to simulate a pressure tank without needing to recode them yet
 	var/start_pressure = 25*ONE_ATMOSPHERE
 
+	layer = ATMOS_LAYER
 	level = 1
 	dir = SOUTH
 	initialize_directions = SOUTH
+	pipe_flags = PIPING_DEFAULT_LAYER_ONLY
 	density = 1
 
 /obj/machinery/atmospherics/pipe/tank/New()
@@ -48,10 +50,9 @@
 	var/connect_direction = dir
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,connect_direction))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node1 = target
-				break
+		if (can_be_node(target, 1))
+			node1 = target
+			break
 
 	update_underlays()
 

@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/savik
 	name = "savik"
 	desc = "A fast, armoured predator accustomed to hiding and ambushing in cold terrain."
+	tt_desc = "S Pistris tellus" //landshark
 	faction = "savik"
 	icon_state = "savik"
 	icon_living = "savik"
@@ -15,7 +16,10 @@
 	move_to_delay = 2
 
 	melee_damage_lower = 15
-	melee_damage_upper = 25
+	melee_damage_upper = 35
+	attack_armor_pen = 15
+	attack_sharp = 1
+	attack_edge = 1
 
 	attacktext = list("mauled")
 	cold_damage_per_tick = 0

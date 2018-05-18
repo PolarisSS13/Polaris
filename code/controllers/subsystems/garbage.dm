@@ -3,7 +3,7 @@
 //
 SUBSYSTEM_DEF(garbage)
 	name = "Garbage"
-	priority = 15
+	priority = FIRE_PRIORITY_GARBAGE
 	wait = 2 SECONDS
 	flags = SS_POST_FIRE_TIMING|SS_BACKGROUND|SS_NO_INIT
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
@@ -81,7 +81,7 @@ SUBSYSTEM_DEF(garbage)
 			dellog += "\tIgnored force: [I.no_respect_force] times"
 		if (I.no_hint)
 			dellog += "\tNo hint: [I.no_hint] times"
-		log_misc(dellog.Join())
+	text2file(dellog.Join(), "[log_path]-qdel.log")
 
 /datum/controller/subsystem/garbage/fire()
 	//the fact that this resets its processing each fire (rather then resume where it left off) is intentional.

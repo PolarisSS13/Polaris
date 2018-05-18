@@ -69,9 +69,11 @@
 	else
 		..()
 
+GLOBAL_LIST_BOILERPLATE(all_tracking_implants, /obj/item/weapon/implant/tracking)
+
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
-	desc = "Track with this."
+	desc = "An implant normally given to dangerous criminals. Allows security to track your location."
 	var/id = 1
 	var/degrade_time = 10 MINUTES	//How long before the implant stops working outside of a living body.
 
@@ -308,6 +310,8 @@ Implant Specifics:<BR>"}
 					part.droplimb(0,DROPLIMB_BLUNT)
 			explosion(get_turf(imp_in), -1, -1, 1, 3)
 			qdel(src)
+
+GLOBAL_LIST_BOILERPLATE(all_chem_implants, /obj/item/weapon/implant/chem)
 
 /obj/item/weapon/implant/chem
 	name = "chemical implant"

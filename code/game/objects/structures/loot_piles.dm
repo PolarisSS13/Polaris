@@ -437,7 +437,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 // Base type for alien piles.
 /obj/structure/loot_pile/surface/alien
 	name = "alien pod"
-	desc = "A pod which looks bigger on the inside. Something quiet shiny might be inside?"
+	desc = "A pod which looks bigger on the inside. Something quite shiny might be inside?"
 	icon_state = "alien_pile1"
 
 /obj/structure/loot_pile/surface/alien
@@ -829,4 +829,43 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion,
 		/obj/item/mecha_parts/mecha_equipment/repair_droid,
 		/obj/item/mecha_parts/mecha_equipment/teleporter
+		)
+
+/obj/structure/loot_pile/surface/drone
+	name = "drone wreckage"
+	desc = "The ruins of some unfortunate drone. Perhaps something is salvageable."
+	icon = 'icons/mob/animal.dmi'
+	icon_state = "drone_dead"
+
+// Since the actual drone loot is a bit stupid in how it is handled, this is a sparse and empty list with items I don't exactly want in it. But until we can get the proper items in . . .
+
+	common_loot = list(
+		/obj/random/tool,
+		/obj/item/stack/cable_coil/random,
+		/obj/random/tank,
+		/obj/random/tech_supply/component,
+		/obj/item/stack/material/steel{amount = 25},
+		/obj/item/stack/material/glass{amount = 10},
+		/obj/item/stack/material/plasteel{amount = 5},
+		/obj/item/weapon/cell,
+		/obj/item/weapon/material/shard
+		)
+
+	uncommon_loot = list(
+		/obj/item/weapon/cell/high,
+		/obj/item/robot_parts/robot_component/actuator,
+		/obj/item/robot_parts/robot_component/armour,
+		/obj/item/robot_parts/robot_component/binary_communication_device,
+		/obj/item/robot_parts/robot_component/camera,
+		/obj/item/robot_parts/robot_component/diagnosis_unit,
+		/obj/item/robot_parts/robot_component/radio
+		)
+
+	rare_loot = list(
+		/obj/item/weapon/cell/super,
+		/obj/item/borg/upgrade/restart,
+		/obj/item/borg/upgrade/jetpack,
+		/obj/item/borg/upgrade/tasercooler,
+		/obj/item/borg/upgrade/syndicate,
+		/obj/item/borg/upgrade/vtec
 		)

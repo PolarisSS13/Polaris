@@ -327,6 +327,27 @@ var/global/datum/controller/occupations/job_master
 		var/datum/job/job = GetJob(rank)
 		var/list/spawn_in_storage = list()
 
+		if(!joined_late)
+			var/obj/S = null
+			for(var/obj/effect/landmark/start/sloc in landmarks_list)
+				if(sloc.name != rank)	continue
+				if(locate(/mob/living) in sloc.loc)	continue
+				S = sloc
+				break
+			if(!S)
+				S = locate("start*[rank]") // use old stype
+			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+				H.forceMove(S.loc)
+			else
+				var/list/spawn_props = LateSpawn(H.client, rank)
+				var/turf/T = spawn_props["turf"]
+				H.forceMove(T)
+
+			// Moving wheelchair if they have one
+			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
+				H.buckled.forceMove(H.loc)
+				H.buckled.set_dir(H.dir)
+
 		if(job)
 
 			//Equip custom gear loadout.
@@ -379,7 +400,8 @@ var/global/datum/controller/occupations/job_master
 			job.equip_backpack(H)
 //			job.equip_survival(H)
 			job.apply_fingerprints(H)
-			H.equip_post_job()
+			if(job.title != "Cyborg" && job.title != "AI")
+				H.equip_post_job()
 
 			//If some custom items could not be equipped before, try again now.
 			for(var/thing in custom_equip_leftovers)
@@ -397,25 +419,6 @@ var/global/datum/controller/occupations/job_master
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
 		H.job = rank
-
-		if(!joined_late)
-			var/obj/S = null
-			for(var/obj/effect/landmark/start/sloc in landmarks_list)
-				if(sloc.name != rank)	continue
-				if(locate(/mob/living) in sloc.loc)	continue
-				S = sloc
-				break
-			if(!S)
-				S = locate("start*[rank]") // use old stype
-			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
-				H.forceMove(S.loc)
-			else
-				LateSpawn(H, rank)
-
-			// Moving wheelchair if they have one
-			if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
-				H.buckled.forceMove(H.loc)
-				H.buckled.set_dir(H.dir)
 
 		// If they're head, give them the account info for their department
 		if(H.mind && job.head_position)
@@ -504,7 +507,8 @@ var/global/datum/controller/occupations/job_master
 
 	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
 		if(!H)	return 0
-		var/obj/item/weapon/card/id/C = null
+		var/obj/item/weapon/card/id/C = H.get_equipped_item(slot_wear_id)
+		if(istype(C))  return 0
 
 		var/datum/job/job = null
 		for(var/datum/job/J in occupations)
@@ -612,7 +616,7 @@ var/global/datum/controller/occupations/job_master
 	var/datum/spawnpoint/spawnpos
 
 	//Spawn them at their preferred one
-	if(C.prefs.spawnpoint)
+	if(C && C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
 			to_chat(C, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
 			spawnpos = null

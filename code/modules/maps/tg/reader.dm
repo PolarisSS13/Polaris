@@ -96,7 +96,7 @@ var/global/use_preloader = FALSE
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
 			var/zexpansion = zcrd > world.maxz
-			if(zexpansion)
+			if(zexpansion && !measureOnly)
 				if(cropMap)
 					continue
 				else
@@ -285,7 +285,7 @@ var/global/use_preloader = FALSE
 		var/atom/instance
 		_preloader.setup(members_attributes[index])//preloader for assigning  set variables on atom creation
 		var/atype = members[index]
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(A.type == atype)
 				instance = A
 				break
@@ -385,6 +385,8 @@ var/global/use_preloader = FALSE
 /dmm_suite/proc/readlist(text as text, delimiter=",", keys_only_string = FALSE)
 
 	var/list/to_return = list()
+	if(text == "")
+		return to_return // Fast bail-out
 
 	var/position
 	var/old_position = 1

@@ -13,6 +13,9 @@
 	return
 
 /turf/simulated/wall/solidrock //for more stylish anti-cheese.
+	name = "solid rock"
+	desc = "This rock seems dense, impossible to drill."
+	description_info = "Probably not going to be able to drill or bomb your way through this, best to try and find a way around."
 	icon_state = "bedrock"
 	var/base_state = "bedrock"
 	block_tele = TRUE
@@ -24,7 +27,7 @@
 			var/place_dir = turn(direction, 180)
 			if(!mining_overlay_cache["rock_side_[place_dir]"])
 				mining_overlay_cache["rock_side_[place_dir]"] = image('icons/turf/walls.dmi', "rock_side", dir = place_dir)
-			T.overlays += mining_overlay_cache["rock_side_[place_dir]"]
+			T.add_overlay(mining_overlay_cache["rock_side_[place_dir]"])
 
 /turf/simulated/wall/solidrock/initialize()
 	icon_state = base_state

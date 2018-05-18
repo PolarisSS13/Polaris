@@ -21,7 +21,10 @@ var/global/list/global_map = null
 
 // Noises made when hit while typing.
 var/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/log_path			= "data/logs/" //See world.dm for the full calculated path
 var/diary				= null
+var/error_log			= null
+var/debug_log			= null
 var/href_logfile		= null
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
@@ -191,3 +194,7 @@ var/list/station_departments = list("Command", "Medical", "Engineering", "Scienc
 //Icons for in-game HUD glasses. Why don't we just share these a little bit?
 var/static/icon/ingame_hud = icon('icons/mob/hud.dmi')
 var/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
+
+//Keyed list for caching icons so you don't need to make them for records, IDs, etc all separately.
+//Could be useful for AI impersonation or something at some point?
+var/static/list/cached_character_icons = list()

@@ -1,5 +1,5 @@
 /datum/species/teshari
-	name = "Teshari"
+	name = SPECIES_TESHARI
 	name_plural = "Tesharii"
 	blurb = "A race of feathered raptors who developed alongside the Skrell, inhabiting \
 	the polar tundral regions outside of Skrell territory. Extremely fragile, they developed \
@@ -10,8 +10,12 @@
 	secondary_langs = list(LANGUAGE_SCHECHI, LANGUAGE_SKRELLIAN)
 	name_language = LANGUAGE_SCHECHI
 	species_language = LANGUAGE_SCHECHI
+
 	min_age = 12
 	max_age = 45
+
+	economic_modifier = 6
+
 	health_hud_intensity = 3
 
 	male_cough_sounds = list('sound/effects/mob_effects/tesharicougha.ogg','sound/effects/mob_effects/tesharicoughb.ogg')
@@ -114,7 +118,7 @@
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/sonar_ping,
-		/mob/living/carbon/human/proc/hide_humanoid
+		/mob/living/proc/hide
 		)
 
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)

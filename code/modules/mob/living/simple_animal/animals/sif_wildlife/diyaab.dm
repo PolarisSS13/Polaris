@@ -1,6 +1,7 @@
 /mob/living/simple_animal/retaliate/diyaab
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
+	tt_desc = "S Choeros hirtus" //diyaab and shantak are technically reletives!
 	faction = "diyaab"
 	icon_state = "diyaab"
 	icon_living = "diyaab"
@@ -15,8 +16,9 @@
 	speed = 1
 	move_to_delay = 1
 
-	melee_damage_lower = 1
-	melee_damage_upper = 8
+	melee_damage_lower = 4
+	melee_damage_upper = 12
+	attack_sharp = 1		//Bleeds, but it shouldn't rip off a limb?
 
 	attacktext = list("gouged")
 	cold_damage_per_tick = 0

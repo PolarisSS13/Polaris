@@ -1,5 +1,7 @@
+GLOBAL_LIST_BOILERPLATE(all_atoms, /atom) // Use with care, its likely barely better than using world.
+
 /atom
-	layer = 2
+	layer = TURF_LAYER //This was here when I got here. Why though?
 	var/level = 2
 	var/flags = 0
 	var/list/fingerprints
@@ -21,6 +23,10 @@
 	//var/chem_is_open_container = 0
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
+
+	// Overlays
+	var/list/our_overlays	//our local copy of (non-priority) overlays without byond magic. Use procs in SSoverlays to manipulate
+	var/list/priority_overlays	//overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
 
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
@@ -498,3 +504,18 @@
 	if(A && A.has_gravity())
 		return TRUE
 	return FALSE
+
+/atom/proc/drop_location()
+	var/atom/L = loc
+	if(!L)
+		return null
+	return L.AllowDrop() ? L : get_turf(L)
+
+/atom/proc/AllowDrop()
+	return FALSE
+
+/atom/proc/get_nametag_name(mob/user)
+	return name
+
+/atom/proc/get_nametag_desc(mob/user)
+	return "" //Desc itself is often too long to use

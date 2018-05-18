@@ -84,7 +84,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 	evac = 1
 	emergency_shuttle_called.Announce(replacetext(using_map.emergency_shuttle_called_message, "%ETA%", "[estimated_time] minute\s"))
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(istype(A, /area/hallway))
 			A.readyalert()
 
@@ -116,7 +116,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	if (evac)
 		emergency_shuttle_recalled.Announce(using_map.emergency_shuttle_recall_message)
 
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		evac = 0
@@ -234,7 +234,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	name = "star"
 	var/speed = 10
 	var/direction = SOUTH
-	layer = 2 // TURF_LAYER
+	layer = TURF_LAYER
+	plane = TURF_PLANE
 
 /obj/effect/bgstar/New()
 	..()

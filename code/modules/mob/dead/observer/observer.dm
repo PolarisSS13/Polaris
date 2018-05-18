@@ -8,7 +8,7 @@
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/ghost.dmi'
 	icon_state = "ghost"
-	layer = 3.9	//Just below normal mobs
+	layer = BELOW_MOB_LAYER
 	plane = PLANE_GHOSTS
 	alpha = 127
 	stat = DEAD
@@ -103,13 +103,12 @@
 		if (ishuman(body))
 			var/mob/living/carbon/human/H = body
 			icon = H.icon
-			LAZYCLEARLIST(H.list_huds)
-			H.update_icons()
-			overlays = H.overlays
+			icon_state = H.icon_state
+			add_overlay(H.overlays_standing) //All our equipment sprites
 		else
 			icon = body.icon
 			icon_state = body.icon_state
-			overlays = body.overlays
+			add_overlay(body.overlays)
 
 		gender = body.gender
 		if(body.mind && body.mind.name)
@@ -748,7 +747,7 @@ mob/observer/dead/MayRespawn(var/feedback = 0)
 			return 0
 		var/msg = sanitize(input(src, "Message:", "Spectral Whisper") as text|null)
 		if(msg)
-			log_say("SpectralWhisper: [key_name(usr)]->[M.key] : [msg]")
+			log_say("(SPECWHISP to [key_name(M)]): [msg]", src)
 			M << "<span class='warning'> You hear a strange, unidentifiable voice in your head... <font color='purple'>[msg]</font></span>"
 			src << "<span class='warning'> You said: '[msg]' to [M].</span>"
 		else
@@ -790,3 +789,18 @@ mob/observer/dead/MayRespawn(var/feedback = 0)
 
 /mob/observer/dead/is_deaf()
 	return FALSE
+
+/mob/observer/dead/verb/paialert()
+	set category = "Ghost"
+	set name = "Blank pAI alert"
+	set desc = "Flash an indicator light on available blank pAI devices for a smidgen of hope."
+	if(usr.client.prefs.be_special & BE_PAI)
+		for(var/obj/item/device/paicard/p in all_pai_cards)
+			var/obj/item/device/paicard/PP = p
+			if(PP.pai == null)
+				PP.overlays += "pai-ghostalert"
+				spawn(54)
+					PP.overlays.Cut()
+
+/mob/observer/dead/speech_bubble_appearance()
+	return "ghost"

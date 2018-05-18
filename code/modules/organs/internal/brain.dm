@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
+
 /obj/item/organ/internal/brain
 	name = "brain"
 	health = 400 //They need to live awhile longer than other organs. Is this even used by organ code anymore?
@@ -136,7 +138,7 @@
 	parent_organ = BP_TORSO
 	clone_source = TRUE
 
-/obj/item/orgam/internal/brain/slime/is_open_container()
+/obj/item/organ/internal/brain/slime/is_open_container()
 	return 1
 
 /obj/item/organ/internal/brain/golem

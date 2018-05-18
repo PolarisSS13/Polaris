@@ -8,7 +8,8 @@
 	w_class = ITEMSIZE_SMALL
 	throw_range = 2
 	throw_speed = 1
-	layer = 4
+	plane = MOB_PLANE
+	layer = MOB_LAYER
 	pressure_resistance = 1
 	attack_verb = list("bapped")
 	var/page = 1    // current page
@@ -164,7 +165,7 @@
 			usr.put_in_hands(W)
 			pages.Remove(pages[page])
 
-			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
+			to_chat(usr, "<span class='notice'>You remove the [W.name] from the bundle.</span>")
 
 			if(pages.len <= 1)
 				var/obj/item/weapon/paper/P = src[1]
@@ -178,11 +179,11 @@
 				page = pages.len
 
 			update_icon()
-	else
-		usr << "<span class='notice'>You need to hold it in hands!</span>"
-	if (src.loc && istype(src.loc, /mob) ||istype(src.loc.loc, /mob))
+
 		src.attack_self(usr)
 		updateUsrDialog()
+	else
+		to_chat(usr, "<span class='notice'>You need to hold it in hands!</span>")
 
 /obj/item/weapon/paper_bundle/verb/rename()
 	set name = "Rename bundle"

@@ -302,12 +302,7 @@
 			else			adverb = " a very lengthy message"
 		message = "<B>[speaker]</B> [verb][adverb]."
 
-	if(src.status_flags & PASSEMOTES)
-		for(var/obj/item/weapon/holder/H in src.contents)
-			H.show_message(message)
-		for(var/mob/living/M in src.contents)
-			M.show_message(message)
-	src.show_message(message)
+	show_message(message, type = 1) // Type 1 is visual message
 
 /mob/proc/hear_sleep(var/message)
 	var/heard = ""

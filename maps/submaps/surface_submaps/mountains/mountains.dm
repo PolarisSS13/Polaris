@@ -27,6 +27,10 @@
 #include "IceCave1A.dmm"
 #include "IceCave1B.dmm"
 #include "IceCave1C.dmm"
+#include "SwordCave.dmm"
+#include "SupplyDrop1.dmm"
+#include "BlastMine1.dmm"
+#include "crashedcontainmentshuttle.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -169,6 +173,23 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/IceCave1C.dmm'
 	cost = 10
 
+/datum/map_template/surface/mountains/normal/SwordCave
+	name = "Cursed Sword Cave"
+	desc = "An underground lake. The sword on the lake's island holds a terrible secret."
+	mappath = 'maps/submaps/surface_submaps/mountains/SwordCave.dmm'
+
+/datum/map_template/surface/mountains/normal/supplydrop1
+	name = "Supply Drop 1"
+	desc = "A drop pod that landed deep within the mountains."
+	mappath = 'maps/submaps/surface_submaps/mountains/SupplyDrop1.dmm'
+	cost = 10
+	allow_duplicates = TRUE
+
+/datum/map_template/surface/mountains/normal/crashedcontainmentshuttle
+	name = "Crashed Cargo Shuttle"
+	desc = "A severely damaged military shuttle, its cargo seems to remain intact."
+	mappath = 'maps/submaps/surface_submaps/mountains/crashedcontainmentshuttle.dmm'
+	cost = 30
 
 
 /**************
@@ -238,3 +259,10 @@
 	desc = "A small xeno vault with potential loot. Also major horrible suprises."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault5.dmm'
 	cost = 25
+
+/datum/map_template/surface/mountains/deep/BlastMine1
+	name = "Blast Mine 1"
+	desc = "An abandoned blast mining site, seems that local wildlife has moved in."
+	mappath = 'maps/submaps/surface_submaps/mountains/BlastMine1.dmm'
+	cost = 20
+

@@ -5,6 +5,7 @@
 
 /mob/living/simple_animal
 	name = "animal"
+	desc = ""
 	icon = 'icons/mob/animal.dmi'
 	health = 20
 	maxHealth = 20
@@ -13,10 +14,14 @@
 	mob_swap_flags = MONKEY|SLIME|HUMAN
 	mob_push_flags = MONKEY|SLIME|HUMAN
 
+	var/tt_desc = "Uncataloged Life Form" //Tooltip description
+
 	//Settings for played mobs
 	var/show_stat_health = 1		// Does the percentage health show in the stat panel for the mob
 	var/ai_inactive = 0 			// Set to 1 to turn off most AI actions
 	var/has_hands = 0				// Set to 1 to enable the use of hands and the hands hud
+	var/humanoid_hands = 0			// Can a player in this mob use things like guns or AI cards?
+	var/hand_form = "hands"			// Used in IsHumanoidToolUser. 'Your X are not fit-'.
 	var/list/hud_gears				// Slots to show on the hud (typically none)
 	var/ui_icons					// Icon file path to use for the HUD, otherwise generic icons are used
 	var/r_hand_sprite				// If they have hands,
@@ -136,6 +141,7 @@
 	var/astar_adjacent_proc = /turf/proc/CardinalTurfsWithAccess // Proc to use when A* pathfinding.  Default makes them bound to cardinals.
 
 	//Damage resistances
+	var/shock_resistance = 0		// Siemens modifier, directly subtracted from 1. Value of 0.4 means 0.6 siemens on shocks.
 	var/resistance = 0				// Damage reduction for all types
 	var/list/armor = list(			// Values for normal getarmor() checks
 				"melee" = 0,
@@ -723,6 +729,7 @@
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!")
 	density = 0 //We don't block even if we did before
 	walk(src, 0) //We stop any background-processing walks
+	resting = 0 //We can rest in peace later.
 
 	if(faction_friends.len)
 		faction_friends -= src
@@ -782,6 +789,9 @@
 	return verb
 
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
+	if(has_hands)
+		put_in_active_hand(W)
+		return 1
 	W.forceMove(get_turf(src))
 	return 1
 
@@ -1190,7 +1200,7 @@
 	if(astarpathing) ForgetPath()
 	ai_log("GoHome()",1)
 	var/close_enough = 2
-	var/look_in = 250
+	var/look_in = 50
 	if(GetPath(home_turf,close_enough,look_in))
 		stop_automated_movement = 1
 		spawn(1)
@@ -1248,8 +1258,7 @@
 		var/mob/living/L = target_mob
 
 		if(prob(melee_miss_chance))
-			src.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [L.name] ([L.ckey])</font>")
-			L.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [src.name] ([src.ckey])</font>")
+			add_attack_logs(src,L,"Animal-attacked (miss)", admin_notify = FALSE)
 			visible_message("<span class='danger'>[src] misses [L]!</span>")
 			do_attack_animation(src)
 			return L
@@ -1263,7 +1272,7 @@
 
 // This is the actual act of 'punching'.  Override for special behaviour.
 /mob/living/simple_animal/proc/DoPunch(var/atom/A)
-	if(!Adjacent(A)) // They could've moved in the meantime.
+	if(!Adjacent(A) && !istype(A, /obj/structure/window) && !istype(A, /obj/machinery/door/window)) // They could've moved in the meantime. But a Window probably wouldn't have. This allows player simple-mobs to attack windows.
 		return FALSE
 
 	var/damage_to_do = rand(melee_damage_lower, melee_damage_upper)
@@ -1498,7 +1507,7 @@
 
 //Touches a wire, etc
 /mob/living/simple_animal/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
-	shock_damage *= siemens_coeff
+	shock_damage *= max(siemens_coeff - shock_resistance, 0)
 	if (shock_damage < 1)
 		return 0
 
@@ -1564,11 +1573,11 @@
 			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	return
-
+/*
 /mob/living/simple_animal/put_in_active_hand(var/obj/item/I)
 	if(!has_hands || !istype(I))
 		return
-
+*/
 //Puts the item into our active hand if possible. returns 1 on success.
 /mob/living/simple_animal/put_in_active_hand(var/obj/item/W)
 	if(!has_hands)
@@ -1677,6 +1686,23 @@
 /mob/living/simple_animal/IsAdvancedToolUser()
 	return has_hands
 
+/mob/living/simple_animal/proc/IsHumanoidToolUser(var/atom/tool)
+	if(!humanoid_hands)
+		var/display_name = null
+		if(tool)
+			display_name = tool
+		else
+			display_name = "object"
+		to_chat(src, "<span class='danger'>Your [hand_form] are not fit for use of \the [display_name].</span>")
+	return humanoid_hands
+
+/mob/living/simple_animal/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+	. = ..(W, target)
+	if(!target)
+		target = src.loc
+	if(.)
+		W.forceMove(src.loc)
+
 //Commands, reactions, etc
 /mob/living/simple_animal/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	..()
@@ -1698,3 +1724,6 @@
 /mob/living/simple_animal/retaliate
 	retaliate = 1
 	destroy_surroundings = 1
+
+/mob/living/simple_animal/get_nametag_desc(mob/user)
+	return "<i>[tt_desc]</i>"

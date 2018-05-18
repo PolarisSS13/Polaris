@@ -13,7 +13,8 @@
 	w_class = ITEMSIZE_TINY
 	throw_range = 1
 	throw_speed = 1
-	layer = 4
+	plane = MOB_PLANE
+	layer = MOB_LAYER
 	pressure_resistance = 1
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
@@ -457,6 +458,10 @@
 
 		update_icon()
 
+/obj/item/weapon/paper/get_worn_icon_state(var/slot_name)
+	if(slot_name == slot_head_str)
+		return "paper" //Gross, but required for now.
+	return ..()
 
 /obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	..()
@@ -495,13 +500,13 @@
 				B.loc = h_user
 				B.hud_layerise()
 				h_user.l_store = B
-				h_user.update_inv_pockets()
+				//h_user.update_inv_pockets() //Doesn't do anything
 			else if (h_user.r_store == src)
 				h_user.drop_from_inventory(src)
 				B.loc = h_user
 				B.hud_layerise()
 				h_user.r_store = B
-				h_user.update_inv_pockets()
+				//h_user.update_inv_pockets() //Doesn't do anything
 			else if (h_user.head == src)
 				h_user.u_equip(src)
 				h_user.put_in_hands(B)

@@ -5,7 +5,7 @@
 	item_state = "card-id"
 
 	sprite_sheets = list(
-		"Teshari" = 'icons/mob/species/seromi/id.dmi'
+		SPECIES_TESHARI = 'icons/mob/species/seromi/id.dmi'
 		)
 
 	var/access = list()
@@ -55,8 +55,9 @@
 	name = "[src.registered_name]'s ID Card ([src.assignment])"
 
 /obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
-	front = getFlatIcon(M, SOUTH, always_use_defdir = 1)
-	side = getFlatIcon(M, WEST, always_use_defdir = 1)
+	var/icon/charicon = cached_character_icon(M)
+	front = icon(charicon,dir = SOUTH)
+	side = icon(charicon,dir = WEST)
 
 /mob/proc/set_id_info(var/obj/item/weapon/card/id/id_card)
 	id_card.age = 0
@@ -112,6 +113,12 @@
 	usr << "The fingerprint hash on the card is [fingerprint_hash]."
 	return
 
+/obj/item/weapon/card/id/get_worn_icon_state(var/slot_name)
+	if(slot_name == slot_wear_id_str)
+		return "id" //Legacy, just how it is. There's only one sprite.
+
+	return ..()
+
 /obj/item/weapon/card/id/initialize()
 	. = ..()
 	var/datum/job/J = job_master.GetJob(rank)
@@ -147,7 +154,7 @@
 	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/gold/captain/spare
-	name = "colony director's spare ID"
+	name = "\improper Colony Director's spare ID"
 	desc = "The spare ID of the High Lord himself."
 	registered_name = "Colony Director"
 	job_access_type = /datum/job/captain

@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/shantak
 	name = "shantak"
 	desc = "A piglike creature with a bright iridiscent mane that sparkles as though lit by an inner light. Don't be fooled by its beauty though."
+	tt_desc = "S Choeros shantak"
 	faction = "shantak"
 	icon_state = "shantak"
 	icon_living = "shantak"
@@ -14,8 +15,11 @@
 	speed = 1
 	move_to_delay = 1
 
-	melee_damage_lower = 3
-	melee_damage_upper = 12
+	melee_damage_lower = 12
+	melee_damage_upper = 28
+	attack_armor_pen = 5
+	attack_sharp = 1
+	attack_edge = 1
 
 	attacktext = list("gouged")
 	cold_damage_per_tick = 0

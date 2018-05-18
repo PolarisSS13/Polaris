@@ -1,6 +1,7 @@
-/mob/living/simple_animal/hostile/goose
-	name = "space goose"
-	desc = "That's no duck. That's a space goose. You have a bad feeling about this."
+/mob/living/simple_animal/hostile/goose //hey are these even in the game
+	name = "goose"
+	desc = "It looks pretty angry!"
+	tt_desc = "E Branta canadensis" //that iconstate is just a regular goose
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"

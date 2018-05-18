@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/syndicate
 	name = "mercenary"
 	desc = "Death to the Company."
+	tt_desc = "E Homo sapiens"
 	icon_state = "syndicate"
 	icon_living = "syndicate"
 	icon_dead = "syndicate_dead"
@@ -73,8 +74,11 @@
 	icon_state = "syndicatemelee"
 	icon_living = "syndicatemelee"
 
-	melee_damage_lower = 20
-	melee_damage_upper = 25
+	melee_damage_lower = 30
+	melee_damage_upper = 30
+	attack_armor_pen = 50
+	attack_sharp = 1
+	attack_edge = 1
 	attacktext = list("slashed")
 
 	status_flags = 0
@@ -177,6 +181,8 @@
 
 	melee_damage_lower = 15
 	melee_damage_upper = 15
+	attack_sharp = 1
+	attack_edge = 1
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	attacktext = list("cut")
 

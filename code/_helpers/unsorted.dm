@@ -503,9 +503,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/simple_animal/M in sortmob)
 		moblist.Add(M)
-//	for(var/mob/living/silicon/hivebot/M in world)
+//	for(var/mob/living/silicon/hivebot/M in sortmob)
 //		mob_list.Add(M)
-//	for(var/mob/living/silicon/hive_mainframe/M in world)
+//	for(var/mob/living/silicon/hive_mainframe/M in sortmob)
 //		mob_list.Add(M)
 	return moblist
 
@@ -672,7 +672,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 //Returns: all the areas in the world
 /proc/return_areas()
 	var/list/area/areas = list()
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		areas += A
 	return areas
 
@@ -690,7 +690,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/areas = new/list()
-	for(var/area/N in world)
+	for(var/area/N in all_areas)
 		if(istype(N, areatype)) areas += N
 	return areas
 
@@ -704,7 +704,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/turfs = new/list()
-	for(var/area/N in world)
+	for(var/area/N in all_areas)
 		if(istype(N, areatype))
 			for(var/turf/T in N) turfs += T
 	return turfs
@@ -719,7 +719,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/atoms = new/list()
-	for(var/area/N in world)
+	for(var/area/N in all_areas)
 		if(istype(N, areatype))
 			for(var/atom/A in N)
 				atoms += A
@@ -800,7 +800,6 @@ proc/GaussRandRound(var/sigma,var/roundto)
 						var/old_dir1 = T.dir
 						var/old_icon_state1 = T.icon_state
 						var/old_icon1 = T.icon
-						var/old_overlays = T.overlays.Copy()
 						var/old_underlays = T.underlays.Copy()
 						var/old_decals = T.decals ? T.decals.Copy() : null
 
@@ -808,11 +807,9 @@ proc/GaussRandRound(var/sigma,var/roundto)
 						X.set_dir(old_dir1)
 						X.icon_state = old_icon_state1
 						X.icon = old_icon1
-						X.overlays = old_overlays
+						X.copy_overlays(T, TRUE)
 						X.underlays = old_underlays
 						X.decals = old_decals
-						if(old_decals)
-							X.apply_decals()
 
 					//Move the air from source to dest
 					var/turf/simulated/ST = T
@@ -838,14 +835,10 @@ proc/GaussRandRound(var/sigma,var/roundto)
 					if(shuttlework)
 						var/turf/simulated/shuttle/SS = T
 						SS.landed_holder.leave_turf()
-
 					else if(turftoleave)
 						T.ChangeTurf(turftoleave)
-						T.apply_decals()
-
 					else
 						T.ChangeTurf(get_base_turf_by_area(T))
-						T.apply_decals()
 
 					refined_src -= T
 					refined_trg -= B
@@ -1230,20 +1223,21 @@ proc/is_hot(obj/item/W as obj)
 
 /*
 Checks if that loc and dir has a item on the wall
+TODO - Fix this ancient list of wall items. Preferably make it dynamically populated. ~Leshana
 */
 var/list/WALLITEMS = list(
-	"/obj/machinery/power/apc", "/obj/machinery/alarm", "/obj/item/device/radio/intercom",
-	"/obj/structure/extinguisher_cabinet", "/obj/structure/reagent_dispensers/peppertank",
-	"/obj/machinery/status_display", "/obj/machinery/requests_console", "/obj/machinery/light_switch", "/obj/effect/sign",
-	"/obj/machinery/newscaster", "/obj/machinery/firealarm", "/obj/structure/noticeboard", "/obj/machinery/door_control",
-	"/obj/machinery/computer/security/telescreen", "/obj/machinery/embedded_controller/radio/simple_vent_controller",
-	"/obj/item/weapon/storage/secure/safe", "/obj/machinery/door_timer", "/obj/machinery/flasher", "/obj/machinery/keycard_auth",
-	"/obj/structure/mirror", "/obj/structure/closet/fireaxecabinet", "/obj/machinery/computer/security/telescreen/entertainment"
+	/obj/machinery/power/apc, /obj/machinery/alarm, /obj/item/device/radio/intercom, /obj/structure/frame,
+	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
+	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
+	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard, /obj/machinery/button/remote,
+	/obj/machinery/computer/security/telescreen, /obj/machinery/embedded_controller/radio,
+	/obj/item/weapon/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
+	/obj/structure/mirror, /obj/structure/closet/fireaxecabinet, /obj/machinery/computer/security/telescreen/entertainment
 	)
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)
 		for(var/item in WALLITEMS)
-			if(istype(O, text2path(item)))
+			if(istype(O, item))
 				//Direction works sometimes
 				if(O.dir == dir)
 					return 1
@@ -1267,7 +1261,7 @@ var/list/WALLITEMS = list(
 	//Some stuff is placed directly on the wallturf (signs)
 	for(var/obj/O in get_step(loc, dir))
 		for(var/item in WALLITEMS)
-			if(istype(O, text2path(item)))
+			if(istype(O, item))
 				if(O.pixel_x == 0 && O.pixel_y == 0)
 					return 1
 	return 0

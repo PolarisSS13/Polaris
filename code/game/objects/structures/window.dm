@@ -5,7 +5,7 @@
 	density = 1
 	w_class = ITEMSIZE_NORMAL
 
-	layer = 3.2//Just above doors
+	layer = WINDOW_LAYER
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
@@ -311,7 +311,7 @@
 				qdel(src)
 	else if(istype(W,/obj/item/frame) && anchored)
 		var/obj/item/frame/F = W
-		F.try_build(src)
+		F.try_build(src, user)
 	else
 		user.setClickCooldown(user.get_attack_speed(W))
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -462,7 +462,7 @@
 
 	if(ratio > 75)
 		return
-	var/image/I = image(icon, "damage[ratio]", layer + 0.1)
+	var/image/I = image(icon, "damage[ratio]", layer = layer + 0.1)
 	overlays += I
 
 	return
