@@ -25,6 +25,8 @@
 #define BE_MUTINEER   0x2000
 #define BE_PAI        0x4000
 #define BE_LOYALIST   0x8000
+#define BE_HACKER     0x1F
+#define BE_SPY        0x2F
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -42,7 +44,9 @@ var/list/be_special_flags = list(
 	"Raider"           = BE_RAIDER,
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
-	"pAI"              = BE_PAI
+	"pAI"              = BE_PAI,
+	"Hacker"           = BE_HACKER,
+	"Spy"              = BE_SPY
 )
 
 #define IS_MODE_COMPILED(MODE) (ispath(text2path("/datum/game_mode/"+(MODE))))
@@ -87,6 +91,7 @@ var/list/be_special_flags = list(
 #define MODE_AUTOTRAITOR "autotraitor"
 #define MODE_INFILTRATOR "infiltrator"
 #define MODE_THUG "thug"
+#define MODE_CLANDESTINE "clandestine"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 120
 
