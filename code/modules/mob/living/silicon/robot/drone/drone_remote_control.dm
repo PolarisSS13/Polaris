@@ -18,6 +18,7 @@
 		return
 
 	user.controlling_drone = src
+	user.teleop = src
 	radio.channels = user.aiRadio.keyslot2.channels
 	controlling_ai = user
 	verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
@@ -55,6 +56,7 @@
 
 	var/mob/living/silicon/robot/drone/new_drone = create_drone()
 	user.controlling_drone = new_drone
+	user.teleop = new_drone
 	new_drone.radio.channels = user.aiRadio.keyslot2.channels
 	new_drone.controlling_ai = user
 	new_drone.verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
@@ -101,6 +103,7 @@
 			controlling_ai.key = key
 		to_chat(controlling_ai, "<span class='notice'>[message]</span>")
 		controlling_ai.controlling_drone = null
+		controlling_ai.teleop = null
 		controlling_ai = null
 
 	radio.channels = module.channels
