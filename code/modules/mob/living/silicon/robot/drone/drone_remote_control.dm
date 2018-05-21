@@ -55,7 +55,7 @@
 
 	var/mob/living/silicon/robot/drone/new_drone = create_drone()
 	user.controlling_drone = new_drone
-	radio.channels = user.aiRadio.keyslot2.channels
+	new_drone.radio.channels = user.aiRadio.keyslot2.channels
 	new_drone.controlling_ai = user
 	new_drone.verbs += /mob/living/silicon/robot/drone/proc/release_ai_control_verb
 	new_drone.local_transmit = FALSE
