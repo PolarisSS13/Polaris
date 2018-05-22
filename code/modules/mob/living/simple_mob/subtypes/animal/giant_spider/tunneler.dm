@@ -14,7 +14,7 @@
 	health = 120
 
 	melee_damage_lower = 10
-	melee_damage_upper = 20
+	melee_damage_upper = 10
 
 	poison_chance = 15
 	poison_per_bite = 3
@@ -22,12 +22,12 @@
 
 //	ai_holder_type = /datum/ai_holder/simple_mob/melee/tunneler
 
-	player_msg = "You <b>can perform a tunneling attack</b> by clicking on someone from a distance while on natural terrain.<br>\
+	player_msg = "You <b>can perform a tunneling attack</b> by clicking on someone from a distance.<br>\
 	There is a noticable travel delay as you tunnel towards the tile the target was at when you started the tunneling attack.<br>\
 	Any entities inbetween you and the targeted tile will be stunned for a brief period of time.<br>\
 	Whatever is on the targeted tile when you arrive will suffer a potent stun.<br>\
 	If nothing is on the targeted tile, you will overshoot and keep going for a few more tiles.<br>\
-	If you hit a wall or other solid structure during that time, you will suffer a lengthy stun."
+	If you hit a wall or other solid structure during that time, you will suffer a lengthy stun and be vulnerable to more harm."
 
 	// Tunneling is a special attack, similar to the hunter's Leap.
 	special_attack_min_range = 2
@@ -43,6 +43,21 @@
 /mob/living/simple_mob/animal/giant_spider/tunneler/fast
 	tunnel_tile_speed = 1
 
+/mob/living/simple_mob/animal/giant_spider/tunneler/should_special_attack(atom/A)
+	// Make sure its possible for the spider to reach the target so it doesn't try to go through a window.
+	var/turf/destination = get_turf(A)
+	var/turf/starting_turf = get_turf(src)
+	var/turf/T = starting_turf
+	for(var/i = 1 to get_dist(starting_turf, destination))
+		if(T == destination)
+			break
+
+		T = get_step(T, get_dir(T, destination))
+		if(T.check_density(ignore_mobs = TRUE))
+			return FALSE
+	return T == destination
+
+
 /mob/living/simple_mob/animal/giant_spider/tunneler/do_special_attack(atom/A)
 	set waitfor = FALSE
 	set_AI_busy(TRUE)
@@ -57,14 +72,17 @@
 
 	// Do the dig!
 	visible_message(span("danger","\The [src] tunnels towards \the [A]!"))
+	submerge()
 
 	if(handle_tunnel(destination) == FALSE)
 		set_AI_busy(FALSE)
+		emerge()
 		return FALSE
 
 	// Did we make it?
 	if(!(src in destination))
 		set_AI_busy(FALSE)
+		emerge()
 		return FALSE
 
 	var/overshoot = TRUE
@@ -75,11 +93,13 @@
 			continue
 
 		visible_message(span("danger","\The [src] erupts from underneath, and hits \the [L]!"))
+		playsound(L, 'sound/weapons/heavysmash.ogg', 75, 1)
 		L.Weaken(3)
 		overshoot = FALSE
 
 	if(!overshoot) // We hit the target, or something, at destination, so we're done.
 		set_AI_busy(FALSE)
+		emerge()
 		return TRUE
 
 	// Otherwise we need to keep going.
@@ -91,9 +111,11 @@
 
 	if(handle_tunnel(destination) == FALSE)
 		set_AI_busy(FALSE)
+		emerge()
 		return FALSE
 
 	set_AI_busy(FALSE)
+	emerge()
 	return FALSE
 
 
@@ -115,94 +137,49 @@
 			to_chat(src, span("critical", "You hit something really solid!"))
 			playsound(src, "punch", 75, 1)
 			Weaken(5)
+			add_modifier(/datum/modifier/tunneler_vulnerable, 10 SECONDS)
 			return FALSE // Hit a wall.
 
 		// Stun anyone in our way.
 		for(var/mob/living/L in T)
+			playsound(L, 'sound/weapons/heavysmash.ogg', 75, 1)
 			L.Weaken(2)
 
 		// Get into the tile.
 		forceMove(T)
 
 		// Visuals and sound.
-		new /obj/item/weapon/ore/glass(T)
+		dig_under_floor(get_turf(src))
 		playsound(src, 'sound/effects/break_stone.ogg', 75, 1)
 		sleep(tunnel_tile_speed)
 
+// For visuals.
+/mob/living/simple_mob/animal/giant_spider/tunneler/proc/submerge()
+	alpha = 0
+	dig_under_floor(get_turf(src))
+	new /obj/effect/temporary_effect/tunneler_hole(get_turf(src))
 
+// Ditto.
+/mob/living/simple_mob/animal/giant_spider/tunneler/proc/emerge()
+	alpha = 255
+	dig_under_floor(get_turf(src))
+	new /obj/effect/temporary_effect/tunneler_hole(get_turf(src))
 
-/*
-// The actual leaping attack.
-/mob/living/simple_mob/animal/giant_spider/hunter/do_special_attack(atom/A)
-	set waitfor = FALSE
-	set_AI_busy(TRUE)
+/mob/living/simple_mob/animal/giant_spider/tunneler/proc/dig_under_floor(turf/T)
+	new /obj/item/weapon/ore/glass(T) // This will be rather weird when on station but the alternative is too much work.
 
-	// Telegraph, since getting stunned suddenly feels bad.
-	do_windup_animation(A, leap_warmup)
-	sleep(leap_warmup) // For the telegraphing.
+/obj/effect/temporary_effect/tunneler_hole
+	name = "hole"
+	desc = "A collapsing tunnel hole."
+	icon_state = "tunnel_hole"
+	time_to_die = 1 MINUTE
 
-	// Do the actual leap.
-	status_flags |= LEAPING // Lets us pass over everything.
-	visible_message(span("danger","\The [src] leaps at \the [A]!"))
-	throw_at(get_step(get_turf(A), get_turf(src)), special_attack_max_range+1, 1, src)
-	playsound(src, 'sound/weapons/spiderlunge.ogg', 75, 1)
+/datum/modifier/tunneler_vulnerable
+	name = "Vulnerable"
+	desc = "You are vulnerable to more harm than usual."
+	on_created_text = "<span class='warning'>You feel vulnerable...</span>"
+	on_expired_text = "<span class='notice'>You feel better.</span>"
+	stacks = MODIFIER_STACK_EXTEND
 
-	sleep(5) // For the throw to complete. It won't hold up the AI ticker due to waitfor being false.
-
-	if(status_flags & LEAPING)
-		status_flags &= ~LEAPING // Revert special passage ability.
-
-	var/turf/T = get_turf(src) // Where we landed. This might be different than A's turf.
-
-	. = FALSE
-
-	// Now for the stun.
-	var/mob/living/victim = null
-	for(var/mob/living/L in T) // So player-controlled spiders only need to click the tile to stun them.
-		if(L == src)
-			continue
-
-		if(ishuman(L))
-			var/mob/living/carbon/human/H = L
-			if(H.check_shields(damage = 0, damage_source = src, attacker = src, def_zone = null, attack_text = "the leap"))
-				continue // We were blocked.
-
-		victim = L
-		break
-
-	if(victim)
-		victim.Weaken(2)
-		victim.visible_message(span("danger","\The [src] knocks down \the [victim]!"))
-		to_chat(victim, span("critical", "\The [src] jumps on you!"))
-		. = TRUE
-
-	set_AI_busy(FALSE)
-*/
-
-/*
-/mob/living/simple_animal/hostile/giant_spider/tunneler
-	desc = "Sandy and brown, it makes you shudder to look at it. This one has glittering yellow eyes."
-	icon_state = "tunneler"
-	icon_living = "tunneler"
-	icon_dead = "tunneler_dead"
-
-	maxHealth = 120
-	health = 120
-	move_to_delay = 4
-
-	melee_damage_lower = 10
-	melee_damage_upper = 20
-
-	poison_chance = 15
-	poison_per_bite = 3
-	poison_type = "serotrotium_v"
-
-/mob/living/simple_animal/hostile/giant_spider/tunneler/death()
-	spawn(1)
-		for(var/I = 1 to rand(3,6))
-			if(src)
-				new/obj/item/weapon/ore/glass(src.loc)
-			else
-				break
-	return ..()
-*/
+	incoming_damage_percent = 2
+	evasion = -100

@@ -116,7 +116,8 @@
 			return FALSE // Turrets won't get hurt if they're still in their cover.
 		return TRUE
 
-	return FALSE
+	return TRUE
+//	return FALSE
 
 // Override this for special targeting criteria.
 // If it returns true, the mob will always select it as the target.
@@ -210,9 +211,11 @@
 // Causes targeting to prefer targeting the taunter if possible.
 // This generally occurs if more than one option is within striking distance, including the taunter.
 // Otherwise the default filter will prefer the closest target.
-/datum/ai_holder/proc/receive_taunt(atom/movable/taunter)
+/datum/ai_holder/proc/receive_taunt(atom/movable/taunter, force_target_switch = FALSE)
 	ai_log("receive_taunt() : Was taunted by [taunter].", AI_LOG_INFO)
 	preferred_target = taunter
+	if(force_target_switch)
+		give_target(taunter)
 
 /datum/ai_holder/proc/lose_taunt()
 	ai_log("lose_taunt() : Resetting preferred_target.", AI_LOG_INFO)

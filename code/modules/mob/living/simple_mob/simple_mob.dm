@@ -122,6 +122,12 @@
 				"bio" = 0,
 				"rad" = 0
 				)
+	// Protection against heat/cold/electric/water effects.
+	// 0 is no protection, 1 is total protection. Negative numbers increase vulnerability.
+	var/heat_resist = 0.0
+	var/cold_resist = 0.0
+	var/shock_resist = 0.0
+	var/water_resist = 1.0
 	var/purge = 0					// Cult stuff.
 	var/supernatural = FALSE		// Ditto.
 
@@ -165,9 +171,10 @@
 		..(act, type, desc)
 
 
-/mob/living/simple_mob/SelfMove()
+/mob/living/simple_mob/SelfMove(turf/n, direct)
+	var/turf/old_turf = get_turf(src)
 	. = ..()
-	if(movement_sound)
+	if(movement_sound && old_turf != get_turf(src))
 		playsound(src, movement_sound, 50, 1)
 
 /mob/living/simple_mob/movement_delay()

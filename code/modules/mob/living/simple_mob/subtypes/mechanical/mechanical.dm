@@ -1,3 +1,4 @@
+// Mechanical mobs don't care about the atmosphere and cannot be hurt by tasers.
 /mob/living/simple_mob/mechanical
 	mob_class = MOB_CLASS_SYNTHETIC
 	min_oxy = 0

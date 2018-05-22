@@ -195,3 +195,8 @@
 		if(move_to)
 			give_destination(move_to, min_distance = 2, combat = TRUE) // This will switch our stance.
 */
+
+/datum/ai_holder/simple_mob/hivebot
+	conserve_ammo = TRUE
+	firing_lanes = TRUE
+	can_flee = FALSE // Fearless dumb machines.

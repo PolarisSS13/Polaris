@@ -1547,13 +1547,13 @@
 		return 0
 	else
 		return armorval
-
+/*
 // Force it to target something
 /mob/living/simple_animal/proc/taunt(var/mob/living/new_target, var/forced = FALSE)
 	if(intelligence_level == SA_HUMANOID && !forced)
 		return
 	set_target(new_target)
-
+*/
 /mob/living/simple_animal/is_sentient()
 	return intelligence_level != SA_PLANT && intelligence_level != SA_ROBOTIC
 

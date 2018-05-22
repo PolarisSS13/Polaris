@@ -113,6 +113,10 @@
 	if(bombdam > maxHealth)
 		gib()
 
+// Cold stuff.
+/mob/living/simple_mob/get_cold_protection()
+	return cold_resist
+
 
 // Fire stuff. Not really exciting at the moment.
 /mob/living/simple_mob/handle_fire()
@@ -124,6 +128,8 @@
 /mob/living/simple_mob/ExtinguishMob()
 	return
 
+/mob/living/simple_mob/get_heat_protection()
+	return heat_resist
 
 // Electricity
 /mob/living/simple_mob/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
@@ -138,6 +144,8 @@
 	s.set_up(5, 1, loc)
 	s.start()
 
+/mob/living/simple_mob/get_shock_protection()
+	return shock_resist
 
 // Shot with taser/stunvolver
 /mob/living/simple_mob/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone, var/used_weapon=null)
@@ -174,6 +182,9 @@
 			adjustFireLoss(min(7, getMaxHealth()*0.0625))
 		//	adjustFireLoss(rand(1, 6))
 
+// Water
+/mob/living/simple_mob/get_water_protection()
+	return water_resist
 
 // Armor
 /mob/living/simple_mob/getarmor(def_zone, attack_flag)

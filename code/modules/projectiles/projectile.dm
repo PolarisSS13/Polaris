@@ -59,6 +59,8 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/reflected = 0 // This should be set to 1 if reflected by any means, to prevent infinite reflections.
+	var/modifier_type_to_apply = null // If set, will apply a modifier to mobs that are hit by this projectile.
+	var/modifier_duration = null // How long the above modifier should last for. Leave null to be permanent.
 
 	embed_chance = 0	//Base chance for a projectile to embed
 
@@ -86,6 +88,8 @@
 //	if(isanimal(target))	return 0
 	var/mob/living/L = target
 	L.apply_effects(stun, weaken, paralyze, irradiate, stutter, eyeblur, drowsy, agony, blocked, incendiary, flammability) // add in AGONY!
+	if(modifier_type_to_apply)
+		L.add_modifier(modifier_type_to_apply, modifier_duration)
 	return 1
 
 //called when the projectile stops flying because it collided with something
@@ -323,6 +327,7 @@
 
 		before_move()
 		Move(location.return_turf())
+		after_move()
 
 		if(!bumped && !isturf(original))
 			if(loc == get_turf(original))
@@ -346,6 +351,9 @@
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()
+	return
+
+/obj/item/projectile/proc/after_move()
 	return
 
 /obj/item/projectile/proc/setup_trajectory(turf/startloc, turf/targloc, var/x_offset = 0, var/y_offset = 0)

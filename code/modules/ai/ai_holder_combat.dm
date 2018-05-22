@@ -20,7 +20,8 @@
 	ai_log("engage_target() : Entering.", AI_LOG_DEBUG)
 
 	// Can we still see them?
-	if(!target || !can_attack(target) || (!(target in list_targets())) )
+//	if(!target || !can_attack(target) || (!(target in list_targets())) )
+	if(!target || !can_attack(target))
 		ai_log("engage_target() : Lost sight of target.", AI_LOG_TRACE)
 		lose_target() // We lost them.
 

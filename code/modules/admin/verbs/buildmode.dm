@@ -127,6 +127,18 @@
 				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset glowing</span>"
 				usr << "<span class='notice'>Right Mouse Button on buildmode button = Change glow properties</span>"
 				usr << "<span class='notice'>***********************************************************</span>"
+			if(9) // Control mobs with ai_holders.
+				usr << "<span class='notice'>***********************************************************</span>"
+				usr << "<span class='notice'>Left Mouse Button on AI mob            = Select/Deselect mob</span>"
+				usr << "<span class='notice'>Left Mouse Button + alt on AI mob      = Toggle hostility on mob</span>"
+				usr << "<span class='notice'>Left Mouse Button + ctrl on AI mob     = Reset target/following/movement</span>"
+				usr << "<span class='notice'>Right Mouse Button on enemy mob        = Command selected mobs to attack mob</span>"
+				usr << "<span class='notice'>Right Mouse Button on allied mob       = Command selected mobs to follow mob</span>"
+				usr << "<span class='notice'>Right Mouse Button + shift on any mob  = Command selected mobs to follow mob regardless of faction</span>"
+				usr << "<span class='notice'>Right Mouse Button on tile             = Command selected mobs to move to tile (will cancel if enemies are seen)</span>"
+				usr << "<span class='notice'>Right Mouse Button + shift on tile     = Command selected mobs to reposition to tile (will not be inturrupted by enemies)</span>"
+				usr << "<span class='notice'>Right Mouse Button + alt on obj/turfs  = Command selected mobs to attack obj/turf</span>"
+				usr << "<span class='notice'>***********************************************************</span>"
 		return 1
 
 /obj/effect/bmode/buildquit
@@ -146,6 +158,7 @@
 	var/obj/effect/bmode/buildmode/buildmode = null
 	var/obj/effect/bmode/buildquit/buildquit = null
 	var/atom/movable/throw_atom = null
+	var/list/selected_mobs = list()
 
 /obj/effect/bmode/buildholder/Destroy()
 	qdel(builddir)
@@ -158,6 +171,7 @@
 	buildquit = null
 	throw_atom = null
 	cl = null
+	selected_mobs.Cut()
 	return ..()
 
 /obj/effect/bmode/buildmode
@@ -210,6 +224,9 @@
 				master.cl.buildmode = 8
 				src.icon_state = "buildmode8"
 			if(8)
+				master.cl.buildmode = 9
+				src.icon_state = "buildmode9"
+			if(9)
 				master.cl.buildmode = 1
 				src.icon_state = "buildmode1"
 
@@ -416,6 +433,74 @@
 			if(pa.Find("right"))
 				if(object)
 					object.set_light(0, 0, "#FFFFFF")
+		if(9) // AI control
+			if(pa.Find("left"))
+				if(isliving(object))
+					var/mob/living/L = object
+					// Reset processes.
+					if(pa.Find("ctrl"))
+						if(!isnull(L.get_AI_stance())) // Null means there's no AI datum or it has one but is player controlled w/o autopilot on.
+							var/datum/ai_holder/AI = L.ai_holder
+							AI.forget_everything()
+							to_chat(user, span("notice", "\The [L]'s AI has forgotten its target/movement destination/leader."))
+						else
+							to_chat(user, span("warning", "\The [L] is not AI controlled."))
+						return
+
+					// Toggle hostility
+					if(pa.Find("alt"))
+						if(!isnull(L.get_AI_stance()))
+							var/datum/ai_holder/AI = L.ai_holder
+							AI.hostile = !AI.hostile
+							to_chat(user, span("notice", "\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
+						else
+							to_chat(user, span("warning", "\The [L] is not AI controlled."))
+						return
+
+					// Select/Deselect
+					if(!isnull(L.get_AI_stance()))
+						if(L in holder.selected_mobs)
+							// Todo: Select graphic only the admin can see?
+							holder.selected_mobs -= L
+							to_chat(user, span("notice", "Deselected \the [L]."))
+						else
+							holder.selected_mobs += L
+							to_chat(user, span("notice", "Selected \the [L]."))
+					else
+						to_chat(user, span("warning", "\The [L] is not AI controlled."))
+
+			if(pa.Find("right"))
+				if(istype(object, /atom/movable)) // Force attack.
+					var/atom/movable/AM = object
+
+					if(pa.Find("alt"))
+						for(var/thing in holder.selected_mobs)
+							var/mob/living/unit = thing
+							var/datum/ai_holder/AI = unit.ai_holder
+							AI.give_target(AM)
+							to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to attack \the [AM]."))
+
+				if(isliving(object)) // Follow or attack.
+					var/mob/living/L = object
+
+					for(var/thing in holder.selected_mobs)
+						var/mob/living/unit = thing
+						var/datum/ai_holder/AI = unit.ai_holder
+						if(L.IIsAlly(unit) || !AI.hostile || pa.Find("shift"))
+							AI.set_follow(L)
+						else
+							AI.give_target(L)
+					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to attack or follow \the [L]."))
+
+				if(isturf(object)) // Move or reposition.
+					var/turf/T = object
+
+					for(var/thing in holder.selected_mobs)
+						var/mob/living/unit = thing
+						var/datum/ai_holder/AI = unit.ai_holder
+						AI.give_destination(T, pa.Find("shift"))
+					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to move to \the [T]."))
+
 
 /obj/effect/bmode/buildmode/proc/get_path_from_partial_text(default_path)
 	var/desired_path = input("Enter full or partial typepath.","Typepath","[default_path]")

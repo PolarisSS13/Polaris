@@ -328,3 +328,8 @@
 	if(client && !ai_holder.autopilot)
 		return null
 	return ai_holder.stance
+
+// 'Taunts' the AI into attacking the taunter.
+/mob/living/proc/taunt(atom/movable/taunter, force_target_switch = FALSE)
+	if(ai_holder)
+		ai_holder.receive_taunt(taunter, force_target_switch)

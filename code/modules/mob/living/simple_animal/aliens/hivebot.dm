@@ -237,3 +237,5 @@
 /obj/item/projectile/bullet/hivebot
 	damage = 10
 	damage_type = BRUTE
+
+#undef LASERS_TO_KILL

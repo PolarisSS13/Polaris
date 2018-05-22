@@ -37,7 +37,7 @@
 	return FALSE
 
 /mob/living/simple_mob/ICheckSpecialAttack(atom/A)
-	return can_special_attack(A)
+	return can_special_attack(A) && should_special_attack(A) // Just because we can doesn't mean we should.
 
 /mob/living/proc/ISay(message)
 

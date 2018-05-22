@@ -128,12 +128,17 @@
 
 	return TRUE
 
+// Should we do one? Used to make the AI not waste their special attacks. Only checked for AI. Players are free to screw up on their own.
+/mob/living/simple_mob/proc/should_special_attack(atom/A)
+	return TRUE
 
 // Special attacks, like grenades or blinding spit or whatever.
 // Don't override this, override do_special_attack() for your blinding spit/etc.
 /mob/living/simple_mob/proc/special_attack_target(atom/A)
 	last_special_attack = world.time
 	if(do_special_attack(A))
+		if(special_attack_charges)
+			special_attack_charges -= 1
 		return TRUE
 	return FALSE
 
