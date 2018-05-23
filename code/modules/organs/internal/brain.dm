@@ -155,6 +155,6 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
-		if(owner && ishuman(owner))
+		if(ishuman(owner))
 			H = owner
 			color = H.species.blood_color

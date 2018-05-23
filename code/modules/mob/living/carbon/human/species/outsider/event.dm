@@ -175,6 +175,12 @@ Variables you may want to make use of are:
 				)
 	return
 
+/datum/species/event1/proc/choose_limbset()
+	var/list/limb_sets = list("Normal" = 1, "Unbreakable" = 2, "Unseverable" = 3, "Indestructible" = 4)
+	var/choice = input("Choose limb set to use for future spawns.", "Limb types.") as null|anything in limb_sets
+	set_limbset(limb_sets[choice])
+	return limb_sets[choice]
+
 /datum/species/event1/proc/toggle_thermal()
 	vision_flags ^= SEE_MOBS
 
