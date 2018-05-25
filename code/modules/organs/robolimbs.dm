@@ -205,8 +205,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	skin_tone = 1
 	blood_color = "#CCCCCC"
 	speech_bubble_appearance = "normal"
-	robo_brute_mod = 1.15
-	robo_burn_mod = 1.15
+	robo_brute_mod = 1.1
+	robo_burn_mod = 1.1
 
 /datum/robolimb/wardtakahashi
 	company = "Ward-Takahashi"
