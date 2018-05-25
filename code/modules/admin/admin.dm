@@ -52,6 +52,11 @@ proc/admin_notice(var/message, var/rights)
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
 
+	if(M.client)
+		body += "<br><b>First connection:</b> [M.client.player_age] days ago"
+		body += "<br><b>BYOND account created:</b> [M.client.account_join_date]"
+		body += "<br><b>BYOND account age (days):</b> [M.client.account_age]"
+
 	body += {"
 		<br><br>\[
 		<a href='?_src_=vars;Vars=\ref[M]'>VV</a> -
@@ -1261,7 +1266,7 @@ proc/admin_notice(var/message, var/rights)
 			usr << "<b>AI [key_name(S, usr)]'s laws:</b>"
 		else if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
-			usr << "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independant)"]: laws:</b>"
+			usr << "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independent)"]: laws:</b>"
 		else if (ispAI(S))
 			usr << "<b>pAI [key_name(S, usr)]'s laws:</b>"
 		else
