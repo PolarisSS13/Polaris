@@ -6,7 +6,7 @@
 
 /mob/living/silicon/robot/drone/attack_ai(var/mob/living/silicon/ai/user)
 
-	if(!istype(user) || controlling_ai || !config.allow_drone_spawn)
+	if(!istype(user) || controlling_ai || !config.allow_drone_spawn || !config.allow_ai_drones)
 		return
 
 	if(client || key)
@@ -35,7 +35,7 @@
 
 /obj/machinery/drone_fabricator/attack_ai(var/mob/living/silicon/ai/user as mob)
 
-	if(!istype(user) || user.controlling_drone || !config.allow_drone_spawn)
+	if(!istype(user) || user.controlling_drone || !config.allow_drone_spawn || !config.allow_ai_drones)
 		return
 
 	if(stat & NOPOWER)

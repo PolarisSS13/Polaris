@@ -230,6 +230,8 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>You attempt to subvert [src], but the sequencer has no effect.</span>")
 		return
 
+	to_chat(user, "<span class='danger'>You swipe the sequencer across [src]'s interface and watch its eyes flicker.</span>")
+
 	if(controlling_ai)
 		to_chat(src, "<span class='danger'>\The [user] loads some kind of subversive software into the remote drone, corrupting its lawset but luckily sparing yours.</span>")
 	else
@@ -298,15 +300,15 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/proc/shut_down()
 
-	if(controlling_ai)
+	if(controlling_ai && mind.special_role)
 		to_chat(src, "<span class='warning'>Someone issues a remote kill order for this unit, but you disregard it.</span>")
 		return
 
 	if(stat != 2)
 		if(emagged)
-			src << "<span class='danger'>You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you.</span>"
+			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drone's" : "your"] tiny brain, but it doesn't seem like a good idea to [controlling_ai ? "it" : "you"].</span>")
 		else
-			src << "<span class='danger'>You feel a system kill order percolate through your tiny brain, and you obediently destroy yourself.</span>"
+			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drone's" : "your"] tiny brain, and [controlling_ai ? "it" : "you"] obediently destroy[controlling_ai ? "s itself" : " yourself"].</span>")
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
