@@ -306,9 +306,9 @@ var/list/mob_hat_cache = list()
 
 	if(stat != 2)
 		if(emagged)
-			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drone's" : "your"] tiny brain, but it doesn't seem like a good idea to [controlling_ai ? "it" : "you"].</span>")
+			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drones" : "your"] tiny brain, but it doesn't seem like a good idea to [controlling_ai ? "it" : "you"].</span>")
 		else
-			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drone's" : "your"] tiny brain, and [controlling_ai ? "it" : "you"] obediently destroy[controlling_ai ? "s itself" : " yourself"].</span>")
+			to_chat(src, "<span class='danger'>You feel a system kill order percolate through [controlling_ai ? "the drones" : "your"] tiny brain, and [controlling_ai ? "it" : "you"] obediently destroy[controlling_ai ? "s itself" : " yourself"].</span>")
 			death()
 
 /mob/living/silicon/robot/drone/proc/full_law_reset()
