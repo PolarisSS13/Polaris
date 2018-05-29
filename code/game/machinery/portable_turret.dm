@@ -105,6 +105,13 @@
 	stat = BROKEN
 	can_salvage = FALSE // So you need to actually kill a turret to get the alien gun.
 
+/obj/machinery/porta_turret/poi	//These are always angry
+	enabled = TRUE
+	lethal = TRUE
+	ailock = TRUE
+	check_all = TRUE
+	can_salvage = FALSE	// So you can't just twoshot a turret and get a fancy gun
+
 /obj/machinery/porta_turret/New()
 	..()
 	req_access.Cut()
@@ -392,6 +399,18 @@ var/list/turret_icons
 					sleep(60)
 					attacked = 0
 		..()
+
+/obj/machinery/porta_turret/attack_generic(mob/user as mob, var/damage)
+	if(isanimal(user))
+		var/mob/living/simple_animal/S = user
+		if(damage >= 10)
+			var/incoming_damage = round(damage - (damage / 5)) //Turrets are slightly armored, assumedly.
+			visible_message("<span class='danger'>\The [S] [pick(S.attacktext)] \the [src]!</span>")
+			take_damage(incoming_damage)
+			S.do_attack_animation(src)
+			return 1
+		visible_message("<span class='notice'>\The [user] bonks \the [src]'s casing!</span>")
+	return ..()
 
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)

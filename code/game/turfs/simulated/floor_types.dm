@@ -105,6 +105,7 @@
 	if(landed_holder && !interior_corner)
 		var/mutable_appearance/landed_on = new(landed_holder)
 		landed_on.layer = FLOAT_LAYER //Not turf
+		landed_on.plane = FLOAT_PLANE //Not turf
 		us.underlays = list(landed_on)
 		appearance = us
 		return
@@ -180,7 +181,7 @@
 /turf/simulated/shuttle/floor/alien
 	icon_state = "alienpod1"
 	light_range = 3
-	light_power = 3
+	light_power = 0.6
 	light_color = "#66ffff" // Bright cyan.
 	block_tele = TRUE
 
