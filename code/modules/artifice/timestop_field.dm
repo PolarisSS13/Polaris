@@ -11,7 +11,7 @@
 	var/mob/living/immune = list() // the one who creates the timestop is immune
 	var/list/stopped_atoms = list()
 	var/freezerange = 2
-	var/duration = 150
+	var/duration = 80
 	alpha = 125
 
 /obj/effect/timestop/New()
@@ -80,13 +80,5 @@
 /obj/effect/timestop/wizard
 	duration = 200
 
-/obj/effect/timestop/wizard/New()
-	..()
-	timestop()
-
-/obj/effect/timestop/stopwatch
-	duration = 80
-
-/obj/effect/timestop/stopwatch/New()
-	..()
-	timestop()
+/obj/effect/timestop/timetodie
+	duration = 150

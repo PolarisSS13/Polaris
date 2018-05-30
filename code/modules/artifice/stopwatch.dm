@@ -7,6 +7,7 @@
 	var/broken = 0
 	var/timer = 0
 	var/activated = 0
+	var/lastbreath = 0
 	var/mob/living/carbon/human/watchowner = null
 	slot_flags = SLOT_ID | SLOT_BELT | SLOT_TIE
 /obj/item/weapon/stopwatch/New()
@@ -34,9 +35,14 @@
 	if (!ishuman(user))
 		to_chat(user, "<font color='blue'>You have no clue what to do with this thing.</font>")
 	if(timer <= 0 && !broken && !activated) //somehow, it skips ticks sometimes
-		timer = 8
 		icon_state = "stopwatch_on"
-		var/obj/effect/timestop/T = new /obj/effect/timestop(user.loc)
+		var/obj/effect/timestop/T
+		if (lastbreath)
+			T = new /obj/effect/timestop/timetodie(user.loc) //more powerful timestop, that is supposed to overlaod the watch
+			timer = 8
+		else
+			T = new /obj/effect/timestop(user.loc)
+			timer = 4
 		T.immune += user
 		T.forceMove(get_turf(user.loc))
 		T.timestop()
@@ -60,6 +66,7 @@
 			watchowner.adjustToxLoss(-15)
 			watchowner.adjustOxyLoss(-50)
 			timer = 0
+			lastbreath = 1
 			attack_self(watchowner)
 			broken = 1
 			icon_state = "stopwatch_cd"
