@@ -28,14 +28,8 @@
 	icon_closed = "poireactor"
 	climbable = 0
 
-/obj/structure/closet/crate/oldreactor/New()
-	..()
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
-	new /obj/item/weapon/fuel_assembly/deuterium(src)
+	starts_with = list(
+		/obj/item/weapon/fuel_assembly/deuterium = 6)
 
 /obj/item/poi/brokenoldreactor
 	icon_state = "poireactor_broken"
@@ -58,21 +52,26 @@
 
 /obj/structure/largecrate/animal/crashedshuttle
 	name = "SCP"
-/obj/structure/largecrate/animal/crashedshuttle/New()
+
+/obj/structure/largecrate/animal/crashedshuttle/initialize()
 	held_type = pick(/mob/living/simple_animal/hostile/statue, /obj/item/cursed_marble, /obj/item/weapon/deadringer)
 	name = pick("Spicy Crust Pizzeria", "Soap and Care Products", "Sally's Computer Parts", "Steve's Chocolate Pastries", "Smith & Christian's Plastics","Standard Containers & Packaging Co.", "Sanitary Chemical Purgation (LTD)")
 	name += " delivery crate"
-	..()
+	return ..()
+
+//Crashed Chariot PoI
 
 /obj/structure/largecrate/animal/cult
 	name = "Mysterious Crate"
 
-/obj/structure/largecrate/animal/cult/New()
+
+/obj/structure/largecrate/animal/cult/initialize()
 	held_type = pick(/mob/living/simple_animal/hostile/statue/cult, /obj/item/weapon/stopwatch)
-	..()
+	return ..()
 
 /obj/structure/largecrate/animal/cultAlt
 
-/obj/structure/largecrate/animal/cultAlt/New()
+
+/obj/structure/largecrate/animal/cultAlt/initialize()
 	held_type = pick(/mob/living/simple_animal/hostile/creature/cult, /obj/item/weapon/melee/cultblade)
-	..()
+	return ..()
