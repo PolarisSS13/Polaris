@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/cultist
-	name = "blood cultist"
+	name = "eerie wraith"
 	desc = "A mysterious hooded figure. They do not look friendly."
 	tt_desc = "Unknown"
 	icon_state = "cultist"
@@ -11,6 +11,7 @@
 	maxHealth = 100
 	health = 100
 	speed = 2
+	alpha = 127
 
 	run_at_them = 0
 	cooperative = 1
@@ -47,26 +48,28 @@
 	speak_chance = 3 //YES ALMOST ALL OF THEM ARE WARCRAFT REFERENCES
 	speak = list("Nar'Sie, bless us.",
 				"All I see is blackness. Oh, my hood's down.",
-				"Stop the voices! They make the lamest puns...",
+				"Stop the voices! Those puns are unbearable...",
 				"I knew I should have joined Ratvar...",
 				"Every man lives. Not every man truly dies.",
 				"Once you head down the dark path, forever will it dominate your destiny. And you get dental.",
 				"You should see the skeletons in my closet.",
-				"This hood doesn't help with the frost.",
-				"We're not a cult so much as a maniacal group of fanatical, blade-wielding zealots")
-	emote_hear = list("sniffs","coughs","prays","casts evil incantations")
+				"We're not a cult so much as a maniacal group of fanatical, blade-wielding zealots",
+				"Embrace the shadow.",
+				"I am but a shadow of my former self.",
+				"I'm having a mid-death crisis",
+				"I see undead people",
+				"Are we the baddies?")
+	emote_hear = list("moans","wails","prays","casts evil incantations")
 	emote_see = list("looks around","swings their sword around")
 	say_understood = list()
 	say_cannot = list()
 	say_maybe_target = list("What's that?","Is someone there?","Is that...?","Are spectres fooling us again?")
-	say_got_target = list("Join us or die! Or both!","For Nar'Sie!","For the Blood Geometer!","Blood will flow!", "Repent!")
+	say_got_target = list("Join us or die! Or both!","For Nar'Sie!","For the Blood Geometer!","Blood will flow!", "Repent!", "Dieeeeeeeeeeeee!" , "Let screams fill the air!")
 	reactions = list("Hail Nar'Sie." = "Hail Nar'Sie!")
 
-	var/corpse = /obj/effect/landmark/corpse/cultist
 
 /mob/living/simple_animal/hostile/cultist/death()
 	..()
-	if(corpse)
-		new corpse (src.loc)
+	audible_emote("lets out a contented sigh as their form unwinds.")
 	qdel(src)
 	return

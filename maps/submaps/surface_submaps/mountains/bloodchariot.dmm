@@ -10,7 +10,7 @@
 "j" = (/obj/item/weapon/material/shard,/turf/template_noop,/area/submap/bloodchariot)
 "k" = (/obj/structure/grille/broken/cult,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/cult,/area/submap/bloodchariot)
 "l" = (/obj/structure/largecrate/animal/cult,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
-"m" = (/obj/item/weapon/material/shard{icon_state = "medium"},/obj/effect/landmark/corpse/cultist,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"m" = (/obj/item/weapon/material/shard{icon_state = "medium"},/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
 "n" = (/obj/structure/grille/cult,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
 "o" = (/mob/living/simple_animal/hostile/faithless/cult,/turf/template_noop,/area/submap/bloodchariot)
 "p" = (/obj/structure/constructshell/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
