@@ -255,11 +255,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									S.use(1)
 									linked_destroy.loaded_item = S
 								else
-									qdel(S)
+									qdel(I)
 									linked_destroy.icon_state = "d_analyzer"
 							else
 								if(I != linked_destroy.circuit && !(I in linked_destroy.component_parts))
-									qdel(I)
+									I.decon_act(usr)
 									linked_destroy.icon_state = "d_analyzer"
 
 						use_power(linked_destroy.active_power_usage)

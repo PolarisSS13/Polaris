@@ -134,6 +134,23 @@
 		wards_in_use -= ward
 		qdel(ward)
 
+// This makes a variety of bad things happen if someone decons the core.
+/obj/item/weapon/technomancer_core/decon_act(var/mob/M)
+	var/turf/T = get_turf(src)	// This should only be used for the coordinates, below. Everything else should use get_turf(src) to stop research borgs from fleeing their own deconstructors
+	log_admin("[key_name(M)] deconstructed a Technomancer Core at [T.x],[T.y],[T.z].", 1)	// Tell the admins who done it
+	var/badtimes = rand(1,2)	// What sort of bad time do we get?
+	switch(badtimes)
+		if(1)
+			loc.visible_message("\The [loc.name] starts to rattle and spark!")
+			spawn(5 SECONDS)
+				new /obj/singularity/energy_ball(get_turf(src), 25)	// Drops a big dumb tesla ball
+				..()
+		if(2)
+			loc.visible_message("\The [loc.name] starts to rumble!")
+			spawn(5 SECONDS)
+				explosion(T, 8, 16, 24)	//And this one's a supermatter
+				..()
+
 // This is what is clicked on to place a spell in the user's hands.
 /obj/spellbutton
 	name = "generic spellbutton"
@@ -165,6 +182,7 @@
 	if(. && istype(back,/obj/item/weapon/technomancer_core))
 		var/obj/item/weapon/technomancer_core/core = back
 		setup_technomancer_stat(core)
+
 
 /mob/living/carbon/human/proc/setup_technomancer_stat(var/obj/item/weapon/technomancer_core/core)
 	if(core && statpanel("Spell Core"))
