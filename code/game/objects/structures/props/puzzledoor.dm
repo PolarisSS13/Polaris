@@ -14,6 +14,8 @@
 	maxhealth = 9999999 //No.
 
 	var/list/locks = list()
+	var/lockID = null
+	var/checkrange_mult = 1
 
 /obj/machinery/door/blast/puzzle/proc/check_locks()
 	for(var/obj/structure/prop/lock/L in locks)
@@ -32,6 +34,20 @@
 /obj/machinery/door/blast/puzzle/initialize()
 	. = ..()
 	implicit_material = get_material_by_name("dungeonium")
+	if(locks.len)
+		return
+	var/check_range = world.view * checkrange_mult
+	for(var/obj/structure/prop/lock/L in orange(src, check_range))
+		if(L.lockID = lockID)
+			L.linked_objects |= src
+			locks |= L
+
+/obj/machinery/door/blast/puzzle/Destroy()
+	if(locks.len)
+		for(var/obj/structure/prop/lock/L in locks)
+			L.linked_objects -= src
+			locks -= L
+	..()
 
 /obj/machinery/door/blast/puzzle/attack_hand(mob/user as mob)
 	if(check_locks())
@@ -45,14 +61,14 @@
 			if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
 				var/obj/item/weapon/material/twohanded/fireaxe/F = C
 				if(!F.wielded)
-					user << "<span class='warning'>You need to be wielding \the [F] to do that.</span>"
+					to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
 					return
 
 			if(check_locks())
 				force_toggle(1, user)
 
 			else
-				usr << "<span class='notice'>[src]'s arcane workings resist your effort.</span>"
+				to_chat(user, "<span class='notice'>[src]'s arcane workings resist your effort.</span>")
 			return
 
 		else if(src.density && (user.a_intent == I_HURT))
