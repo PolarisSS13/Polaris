@@ -185,7 +185,7 @@
 	sort_string = "TPAAC"
 
 /datum/design/item/weapon/phase_cannon
-	id = "phaserifle"
+	id = "phasecannon"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_POWER = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 2000, "silver" = 1000, "diamond" = 750)
 	build_path = /obj/item/weapon/gun/energy/phasegun/cannon
