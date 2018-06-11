@@ -586,9 +586,12 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/aicore
 	sort_string = "XAAAA"
 
+
+/* I have no idea how this was even running before, but it doesn't seem to be necessary.
 ///////////////////////////////////
 /////////Shield Generators/////////
 ///////////////////////////////////
 /datum/design/circuit/shield
 	req_tech = list(TECH_BLUESPACE = 4, TECH_PHORON = 3)
 	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+*/
