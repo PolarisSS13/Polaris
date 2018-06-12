@@ -2,7 +2,7 @@
 
 /obj/item/weapon/gun/energy/phasegun
 	name = "phase carbine"
-	desc = "The NT EW26 Artemis is a downsided energy weapon, specifically designed for use against wildlife."
+	desc = "The NT EW26 Artemis is a downsized energy weapon, specifically designed for use against wildlife."
 	icon_state = "phasecarbine"
 	wielded_item_state = "phasecarbine-wielded"
 	slot_flags = SLOT_BACK|SLOT_BELT

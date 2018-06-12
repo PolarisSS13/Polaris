@@ -36,7 +36,7 @@ CIRCUITS BELOW
 	id = "oriontrail"
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/circuitboard/arcade/orion_trail
-	sort_string = "MAAAA"
+	sort_string = "MAAAZ"		// Duplicate string, really need to redo this whole thing
 
 /datum/design/circuit/jukebox
 	name = "jukebox"
@@ -49,7 +49,7 @@ CIRCUITS BELOW
 	name = "security camera monitor"
 	id = "seccamera"
 	build_path = /obj/item/weapon/circuitboard/security
-	sort_string = "DAAAA"
+	sort_string = "DAAAZ"	// Duplicate string, really need to redo this whole thing
 
 /datum/design/circuit/secdata
 	name = "security records console"
@@ -365,14 +365,14 @@ CIRCUITS BELOW
 	name = "supply ordering console"
 	id = "ordercomp"
 	build_path = /obj/item/weapon/circuitboard/ordercomp
-	sort_string = "KAAAA"
+	sort_string = "KAAAY"	// Duplicate string, really need to redo this whole thing
 
 /datum/design/circuit/supplycomp
 	name = "supply control console"
 	id = "supplycomp"
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/circuitboard/supplycomp
-	sort_string = "KAAAB"
+	sort_string = "KAAAZ"	// Duplicate string, really need to redo this whole thing
 
 /datum/design/circuit/biogenerator
 	name = "biogenerator"
@@ -563,7 +563,7 @@ CIRCUITS BELOW
 	name = "bubble"
 	id = "shield_gen"
 	build_path = /obj/item/weapon/circuitboard/shield_gen
-	sort_string = "VAAAA"
+	sort_string = "VAAAZ"	// Duplicate string, really need to redo this whole thing
 
 /datum/design/circuit/shield/hull
 	name = "hull"
