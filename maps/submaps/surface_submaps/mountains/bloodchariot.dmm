@@ -1,0 +1,43 @@
+"a" = (/turf/template_noop,/area/submap/bloodchariot)
+"b" = (/turf/simulated/floor/cult,/turf/simulated/wall/cult,/area/submap/bloodchariot)
+"c" = (/turf/simulated/wall/cult,/area/submap/bloodchariot)
+"d" = (/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"e" = (/mob/living/simple_animal/hostile/cultist,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"f" = (/obj/structure/girder/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"g" = (/obj/structure/grille/cult,/obj/item/weapon/material/shard,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"h" = (/obj/effect/decal/cleanable/blood,/turf/template_noop,/area/submap/bloodchariot)
+"i" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"j" = (/obj/item/weapon/material/shard,/turf/template_noop,/area/submap/bloodchariot)
+"k" = (/obj/structure/grille/broken/cult,/obj/item/weapon/material/shard{icon_state = "medium"},/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"l" = (/obj/structure/largecrate/animal/cult,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"m" = (/obj/item/weapon/material/shard{icon_state = "medium"},/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"n" = (/obj/structure/grille/cult,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"o" = (/mob/living/simple_animal/hostile/faithless/cult,/turf/template_noop,/area/submap/bloodchariot)
+"p" = (/obj/structure/constructshell/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"q" = (/obj/item/weapon/ectoplasm,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"r" = (/obj/item/weapon/ectoplasm,/turf/template_noop,/area/submap/bloodchariot)
+"s" = (/mob/living/simple_animal/hostile/cultist,/turf/template_noop,/area/submap/bloodchariot)
+"t" = (/obj/structure/bonfire/permanent/sifwood,/turf/template_noop,/area/submap/bloodchariot)
+"u" = (/obj/structure/grille/broken/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"v" = (/obj/structure/grille/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"w" = (/obj/structure/largecrate/animal/cultAlt,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"x" = (/obj/effect/rune{desc = "A strange collection of symbols drawn in blood. They seem to emit weak propulsion."},/turf/simulated/floor/cult,/area/submap/bloodchariot)
+"y" = (/obj/structure/simple_door/cult,/turf/simulated/floor/cult,/area/submap/bloodchariot)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaa
+aaaahaaaaaaaaaa
+aaaaaaaaaaaaaaa
+aaaaaaaaaahaaaa
+aaubbvbbcaaaaaa
+ahxdpdqibbfaaaa
+aaiddiddidgoaaa
+aaxdelwedmnjraa
+aaqdddidddkoaaa
+aaxidddibbcaaaa
+aabvbyuvcaaaaaa
+aaaaaaaaraaaaaa
+aaasthaaaaaaaaa
+ahaasaaaaaaahaa
+aaaaaaaaaaaaaaa
+"}

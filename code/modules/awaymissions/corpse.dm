@@ -24,6 +24,7 @@
 	var/corpseidaccess = null //This is for access. See access.dm for which jobs give what access. Again, put in quotes. Use "Captain" if you want it to be all access.
 	var/corpseidicon = null //For setting it to be a gold, silver, CentCom etc ID
 	var/species = SPECIES_HUMAN
+	var/faction
 	delete_me = TRUE
 
 /obj/effect/landmark/corpse/initialize()
@@ -36,6 +37,8 @@
 	M.set_species(species)
 	M.real_name = src.name
 	M.death(1) //Kills the new mob
+	if(faction)
+		M.faction = faction
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
 	if(src.corpsesuit)
@@ -232,3 +235,15 @@
 	corpseid = 1
 	corpseidjob = "Commander"
 	corpseidaccess = "Captain"
+
+
+/////////////////Cultist//////////////////////
+
+/obj/effect/landmark/corpse/cultist
+	name = "Blood Cultist"
+	faction = "cult"
+	corpseuniform = /obj/item/clothing/under/utility/grey
+	corpsesuit = /obj/item/clothing/suit/cultrobes
+	corpseshoes = /obj/item/clothing/shoes/cult
+	corpsehelmet = /obj/item/clothing/head/culthood
+	corpseback = /obj/item/weapon/storage/backpack/cultpack

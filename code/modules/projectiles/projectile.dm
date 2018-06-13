@@ -299,6 +299,8 @@
 	var/first_step = 1
 
 	spawn while(src && src.loc)
+		while(suspended)
+			sleep(1)
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
