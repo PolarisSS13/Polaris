@@ -279,6 +279,11 @@ var/list/mob_hat_cache = list()
 		return
 	..()
 
+/mob/living/silicon/robot/drone/death(gibbed)
+	if(controlling_ai)
+		release_ai_control("<b>WARNING: remote system failure.</b> Connection timed out.")
+	. = ..(gibbed)
+
 //DRONE MOVEMENT.
 /mob/living/silicon/robot/drone/Process_Spaceslipping(var/prob_slip)
 	return 0
@@ -292,16 +297,16 @@ var/list/mob_hat_cache = list()
 
 	if(stat != 2)
 		if(emagged)
-			src << "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>"
+			to_chat(src, "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>")
 		else
-			src << "<span class='danger'>A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it.</span>"
+			to_chat(src, "<span class='danger'>A reset-to-factory directive packet filters through your data connection, and you obediently modify your programming to suit it.</span>")
 			full_law_reset()
 			show_laws()
 
 /mob/living/silicon/robot/drone/proc/shut_down()
 
 	if(controlling_ai && mind.special_role)
-		to_chat(src, "<span class='warning'>Someone issues a remote kill order for this unit, but you disregard it.</span>")
+		to_chat(src, "<span class='warning'>Someone issued a remote kill order for this unit, but you disregard it.</span>")
 		return
 
 	if(stat != 2)
