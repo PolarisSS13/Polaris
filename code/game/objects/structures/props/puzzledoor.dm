@@ -2,7 +2,7 @@
 
 /obj/machinery/door/blast/puzzle
 	name = "puzzle door"
-	desc = "A large, virtually indestructible door that will not open until some form of requirement(s) is or are met."
+	desc = "A large, virtually indestructible door that will not open unless certain requirements are met."
 	icon_state_open = "pdoor0"
 	icon_state_opening = "pdoorc0"
 	icon_state_closed = "pdoor1"
@@ -38,7 +38,7 @@
 		return
 	var/check_range = world.view * checkrange_mult
 	for(var/obj/structure/prop/lock/L in orange(src, check_range))
-		if(L.lockID = lockID)
+		if(L.lockID == lockID)
 			L.linked_objects |= src
 			locks |= L
 

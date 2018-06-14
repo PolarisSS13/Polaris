@@ -83,8 +83,8 @@
 	playsound(src, interaction_sound, 50, 1)
 	if(two_stage)
 		animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
-		sleep(3)
-		animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
+		spawn(3)
+			animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
 	else
 		animate(src, transform = turn(src.transform, rotate_degrees), time = 6) //Can't update transform because it will reset the angle.
 
@@ -111,8 +111,8 @@
 	playsound(src, interaction_sound, 50, 1)
 	if(two_stage)
 		animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
-		sleep(3)
-		animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
+		spawn(3)
+			animate(src, transform = turn(src.transform, rotate_degrees), time = 3)
 	else
 		animate(src, transform = turn(src.transform, rotate_degrees), time = 6)
 
@@ -135,7 +135,7 @@
 
 /obj/structure/prop/prism/incremental/externalcont
 	external_control_lock = 1
-	description_info = "This device is capable of redirecting any beam projectile, but only locks to specific positions in rotation when rotated by a control dial."
+	description_info = "This device is capable of redirecting any beam projectile, but can only be rotated by a control dial to specific positions."
 
 /obj/structure/prop/prism/externalcont
 	external_control_lock = 1
@@ -170,12 +170,9 @@
 	var/free_rotate = 1
 	var/list/compass_directions = list()
 	for(var/obj/structure/prop/prism/P in my_turrets)
-		if(!P.free_rotate)
+		if(!P.free_rotate) //Doesn't use bearing, it uses compass points.
 			free_rotate = 0
-		else
-			free_rotate = 0
-			compass_directions = P.compass_directions
-			break
+			compass_directions |= P.compass_directions
 
 	var/new_bearing
 	if(free_rotate)
