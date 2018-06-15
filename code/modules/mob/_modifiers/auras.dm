@@ -14,5 +14,5 @@ making it not expire ever, which is likely not what you want.
 	if(istype(A)) // Make sure we're not null.
 		if(get_dist(holder, A) > aura_max_distance)
 			expire()
-	expire() // Source got deleted or something.
-
+	else
+		expire() // Source got deleted or something.

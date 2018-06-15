@@ -66,12 +66,30 @@
 
 /obj/item/projectile/fire
 	name = "ember"
-	icon_state = "fireball"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "explosion_particle"
 	modifier_type_to_apply = /datum/modifier/fire
 	modifier_duration = 6 SECONDS // About 15 damage per stack, as Life() ticks every two seconds.
 	damage = 0
 	nodamage = TRUE
 
+
+// Close to mid-ranged shooter that arcs over other things, ideal if allies are in front of it.
+// Difference from siege hivebots is that siege hivebots have limited charges for their attacks, are very long range, and \
+// the projectiles have an AoE component, where as backline hivebots do not.
+/mob/living/simple_mob/mechanical/hivebot/ranged_damage/backline
+	name = "backline hivebot"
+	desc = "A robot that can fire short-ranged projectiles over their allies."
+	projectiletype = /obj/item/projectile/arc/blue_energy
+	projectilesound = 'sound/weapons/Laser.ogg'
+	player_msg = "Your attacks are short-ranged, but can <b>arc over obstructions</b> such as allies \
+	or barriers."
+
+/obj/item/projectile/arc/blue_energy
+	name = "energy missile"
+	icon_state = "force_missile"
+	damage = 15 // A bit stronger since arcing projectiles are much easier to avoid than traditional ones.
+	damage_type = BURN
 
 // Very long ranged hivebot that rains down hell.
 // Their projectiles arc, meaning they go over everything until it hits the ground.
@@ -93,14 +111,55 @@
 	desc = "A large robot capable of annihilating electronics from a long distance."
 	projectiletype = /obj/item/projectile/arc/emp_blast
 
+/obj/item/projectile/arc/emp_blast
+	name = "emp blast"
+	icon_state = "bluespace"
+
+/obj/item/projectile/arc/emp_blast/on_impact(turf/T)
+	empulse(T, 2, 4, 7, 10) // Normal EMP grenade.
+	return ..()
+
+/obj/item/projectile/arc/emp_blast/weak/on_impact(turf/T)
+	empulse(T, 1, 2, 3, 4) // Sec EMP grenade.
+	return ..()
+
+
 // Fires shots that irradiate the tile hit.
 /mob/living/simple_mob/mechanical/hivebot/ranged_damage/siege/radiation
 	name = "desolator hivebot"
 	desc = "A large robot capable of irradiating a large area from afar."
 	projectiletype = /obj/item/projectile/arc/radioactive
 
+/obj/item/projectile/arc/radioactive
+	name = "radiation blast"
+	icon_state = "green_pellet"
+	icon_scale = 2
+	var/rad_power = 50
+
+/obj/item/projectile/arc/radioactive/on_impact(turf/T)
+	radiation_repository.radiate(T, rad_power)
+
+
 // Essentially a long ranged frag grenade.
 /mob/living/simple_mob/mechanical/hivebot/ranged_damage/siege/fragmentation
 	name = "anti-personnel artillery hivebot"
 	desc = "A large robot capable of delivering fragmentation shells to rip apart their fleshy enemies."
 	projectiletype = /obj/item/projectile/arc/fragmentation
+
+/obj/item/projectile/arc/fragmentation
+	name = "fragmentation shot"
+	icon_state = "shell"
+	var/list/fragment_types = list(
+		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment, \
+		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment/strong
+		)
+	var/fragment_amount = 63 // Same as a grenade.
+	var/spread_range = 7
+
+/obj/item/projectile/arc/fragmentation/on_impact(turf/T)
+	fragmentate(T, fragment_amount, spread_range, fragment_types)
+
+
+
+
+

@@ -18,12 +18,10 @@
 	You are otherwise very weak offensively."
 
 /mob/living/simple_mob/mechanical/hivebot/support/commander/handle_special()
-	world << "Wew"
-	for(var/mob/living/L in range(4))
+	for(var/mob/living/L in range(4, src))
 		if(L == src)
 			continue // Don't buff ourselves.
 		if(L.faction == src.faction && L.isSynthetic()) // Don't buff enemies.
-			world << "Adding modifier."
 			L.add_modifier(/datum/modifier/aura/hivebot_commander_buff, null, src)
 
 // Modifier added to friendly hivebots nearby.
