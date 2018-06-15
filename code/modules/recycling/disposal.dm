@@ -130,7 +130,7 @@
 				for (var/mob/C in viewers(src))
 					C.show_message("<font color='red'>[GM.name] has been placed in the [src] by [user].</font>", 3)
 				qdel(G)
-				
+
 				add_attack_logs(user,GM,"Disposals dunked")
 		return
 
@@ -663,6 +663,7 @@
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
 	var/health = 10 	// health points 0-10
+	plane = PLATING_PLANE
 	layer = DISPOSAL_LAYER	// slightly lower than wires and other pipes
 	var/base_icon_state	// initial icon state on map
 	var/sortType = ""

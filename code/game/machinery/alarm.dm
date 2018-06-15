@@ -36,6 +36,8 @@
 	name = "alarm"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 80
@@ -322,7 +324,7 @@
 			icon_state = "alarm1"
 			new_color = "#DA0205"
 
-	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
+	set_light(l_range = 2, l_power = 0.25, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -803,6 +805,8 @@ FIRE ALARM
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire0"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	var/detecting = 1.0
 	var/working = 1.0
 	var/time = 10.0
@@ -838,14 +842,14 @@ FIRE ALARM
 	else
 		if(!detecting)
 			icon_state = "fire1"
-			set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+			set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
 		else
 			icon_state = "fire0"
 			switch(seclevel)
-				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = "#00ff00")
-				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
-				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
-				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
+				if("green")	set_light(l_range = 2, l_power = 0.25, l_color = "#00ff00")
+				if("blue")	set_light(l_range = 2, l_power = 0.25, l_color = "#1024A9")
+				if("red")	set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
+				if("delta")	set_light(l_range = 4, l_power = 0.9, l_color = "#FF6633")
 		add_overlay("overlay_[seclevel]")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)

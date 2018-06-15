@@ -45,6 +45,11 @@
 	path = /obj/item/weapon/book/codex/corp_regs
 	cost = 0
 
+/datum/gear/utility/robutt
+	display_name = "a buyer's guide to artificial bodies"
+	path = /obj/item/weapon/book/codex/lore/robutt
+	cost = 0
+
 /datum/gear/utility/folder_blue
 	display_name = "folder, blue"
 	path = /obj/item/weapon/folder/blue
@@ -72,6 +77,11 @@
 /datum/gear/utility/securecase
 	display_name = "secure briefcase"
 	path =/obj/item/weapon/storage/secure/briefcase
+	cost = 2
+
+/datum/gear/utility/laserpointer
+	display_name = "laser pointer"
+	path =/obj/item/device/laser_pointer
 	cost = 2
 
 /datum/gear/utility/flashlight

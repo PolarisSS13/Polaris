@@ -419,6 +419,7 @@ var/global/datum/controller/occupations/job_master
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
 		H.job = rank
+		log_game("JOINED [key_name(H)] as \"[rank]\"")
 
 		// If they're head, give them the account info for their department
 		if(H.mind && job.head_position)
@@ -507,7 +508,8 @@ var/global/datum/controller/occupations/job_master
 
 	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
 		if(!H)	return 0
-		var/obj/item/weapon/card/id/C = null
+		var/obj/item/weapon/card/id/C = H.get_equipped_item(slot_wear_id)
+		if(istype(C))  return 0
 
 		var/datum/job/job = null
 		for(var/datum/job/J in occupations)

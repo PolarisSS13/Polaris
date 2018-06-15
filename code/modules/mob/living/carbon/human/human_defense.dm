@@ -173,7 +173,7 @@ emp_act
 	for(var/obj/item/clothing/gear in protective_gear)
 		if(gear.body_parts_covered & def_zone.body_part)
 			protection += gear.armor[type]
-		if(gear.accessories.len)
+		if(LAZYLEN(gear.accessories))
 			for(var/obj/item/clothing/accessory/bling in gear.accessories)
 				if(bling.body_parts_covered & def_zone.body_part)
 					protection += bling.armor[type]
@@ -186,7 +186,7 @@ emp_act
 	for(var/obj/item/clothing/gear in protective_gear)
 		if(gear.body_parts_covered & def_zone.body_part)
 			soaked += gear.armorsoak[type]
-		if(gear.accessories.len)
+		if(LAZYLEN(gear.accessories))
 			for(var/obj/item/clothing/accessory/bling in gear.accessories)
 				if(bling.body_parts_covered & def_zone.body_part)
 					soaked += bling.armorsoak[type]

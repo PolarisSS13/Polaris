@@ -67,6 +67,9 @@
 /mob/living/carbon/human/can_overcome_gravity()
 	return species && species.can_overcome_gravity(src)
 
+/mob/living/simple_animal/construct/can_overcome_gravity()
+	return 1 //They care not for standard physics.
+
 /mob/observer/zMove(direction)
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
 	if(destination)
@@ -95,6 +98,9 @@
 	return ..()
 
 /mob/observer/can_ztravel()
+	return 1
+
+/mob/living/simple_animal/construct/can_ztravel()
 	return 1
 
 /mob/living/carbon/human/can_ztravel()
@@ -207,6 +213,9 @@
 	return FALSE
 
 /mob/living/simple_animal/hostile/carp/can_fall() // So can carp apparently.
+	return FALSE
+
+/mob/living/simple_animal/construct/can_fall() //As do Constructs.
 	return FALSE
 
 // Check if this atom prevents things standing on it from falling. Return TRUE to allow the fall.
@@ -386,7 +395,7 @@
 		if(!silent)
 			if(planetary)
 				visible_message("<span class='danger'><font size='3'>\A [src] falls out of the sky and crashes into \the [landing]!</font></span>", \
-					"<span class='danger'><font size='3'> You fall out of the skiy and crash into \the [landing]!</font></span>", \
+					"<span class='danger'><font size='3'> You fall out of the sky and crash into \the [landing]!</font></span>", \
 					"You hear something slam into \the [landing].")
 				var/turf/T = get_turf(landing)
 				explosion(T, 0, 1, 2)

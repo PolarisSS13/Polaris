@@ -83,9 +83,8 @@
 
 /obj/machinery/camera/emp_act(severity)
 	if(!isEmpProof() && prob(100/severity))
-		if(!affected_by_emp_until || (world.time < affected_by_emp_until))
+		if(!affected_by_emp_until || (world.time > affected_by_emp_until))
 			affected_by_emp_until = max(affected_by_emp_until, world.time + (90 SECONDS / severity))
-		else
 			stat |= EMPED
 			set_light(0)
 			triggerCameraAlarm()
@@ -136,6 +135,18 @@
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		destroy()
+
+/obj/machinery/camera/attack_generic(mob/user as mob)
+	if(isanimal(user))
+		var/mob/living/simple_animal/S = user
+		set_status(0)
+		S.do_attack_animation(src)
+		S.setClickCooldown(user.get_attack_speed())
+		visible_message("<span class='warning'>\The [user] [pick(S.attacktext)] \the [src]!</span>")
+		playsound(src.loc, S.attack_sound, 100, 1)
+		add_hiddenprint(user)
+		destroy()
+	..()
 
 /obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
 	update_coverage()
