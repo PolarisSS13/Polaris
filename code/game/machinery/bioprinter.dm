@@ -27,7 +27,7 @@
 		"Lungs"   = list(/obj/item/organ/internal/lungs,  20),
 		"Kidneys" = list(/obj/item/organ/internal/kidneys,20),
 		"Eyes"    = list(/obj/item/organ/internal/eyes,   20),
-		"Liver"   = list(/obj/item/organ/internal/liver,  15),
+		"Liver"   = list(/obj/item/organ/internal/liver,  20),
 		"Arm, Left"   = list(/obj/item/organ/external/arm,  40),
 		"Arm, Right"   = list(/obj/item/organ/external/arm/right,  40),
 		"Leg, Left"   = list(/obj/item/organ/external/leg,  40),
