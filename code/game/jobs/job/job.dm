@@ -14,7 +14,7 @@
 	var/supervisors = null                // Supervisors, who this person answers to directly
 	var/selection_color = "#ffffff"       // Selection screen color
 	var/idtype = /obj/item/weapon/card/id // The type of the ID the player will have
-	var/list/alt_titles = list()          // List of alternate titles, if any
+	var/list/alt_titles = list()          // List of alternate titles; if a job has alt-titles, it MUST have one for the base job
 	var/req_admin_notify                  // If this is set to 1, a text is printed to the player when jobs are assigned, telling him that he should let admins know that he has to disconnect.
 	var/minimal_player_age = 0            // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/department = null                 // Does this position have a department tag?
@@ -39,7 +39,13 @@
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
 	if(alt_title && alt_titles)
-		. = alt_titles[alt_title]
+		for(var/alt in alt_titles)
+			if(alt_title == alt)
+				var/typepath = alt_titles[alt]
+				var/datum/alt_title/A = new typepath()
+				if(A.title_outfit)
+					. = A.title_outfit
+
 	. = . || outfit_type
 	. = outfit_by_type(.)
 
@@ -122,13 +128,17 @@
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
-/datum/job/proc/get_description_blurb()
-	var/message = ""
-	message += job_description
-/*	if(alt_titles)
-		//DO THING
+/datum/job/proc/get_description_blurb(var/alt_title)
+	var/list/message = list()
+	message |= job_description
 
-*/
+	if(alt_title && alt_titles)
+		for(var/alt in alt_titles)
+			if(alt_title == alt)
+				var/typepath = alt_titles[alt]
+				var/datum/alt_title/A = new typepath()
+				if(A.title_blurb)
+					message |= A.title_blurb
 	return message
 
 /datum/job/proc/get_job_icon()

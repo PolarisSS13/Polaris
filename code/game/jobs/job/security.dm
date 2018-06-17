@@ -1,3 +1,6 @@
+//////////////////////////////////
+//		Head of Security
+//////////////////////////////////
 /datum/job/hos
 	title = "Head of Security"
 	flag = HOS
@@ -24,12 +27,24 @@
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
-	job_description = "You manage the Security Department, working to keep your Security Officers in place and able to properly handle threats, criminal or otherwise. \
-						You are also expected to keep your fellow Department Heads, as well as the crew, aware of developing situations. \
-						On top of your management role, you may, if necessary, perform the duties of absent Security roles, such as distributing gear from the Armory. \
-						Remember: No one is above the Law. Not even you."
-	alt_titles = list("Security Commander", "Chief of Security")
+	job_description = "	The Head of Security manages the Security Department, keeping the station safe and making sure the rules are followed. They are expected to \
+						keep the other Department Heads, and the rest of the crew, aware of developing situations that may be a threat. If necessary, the HoS may \
+						perform the duties of absent Security roles, such as distributing gear from the Armory."
+	alt_titles = list("Head of Security" = /datum/alt_title/hos, "Security Commander" = /datum/alt_title/sec_commander, "Chief of Security" = /datum/alt_title/sec_chief)
 
+// Head of Security Alt Titles
+/datum/alt_title/hos
+	title = "Head of Security"
+
+/datum/alt_title/sec_commander
+	title = "Security Commander"
+
+/datum/alt_title/sec_chief
+	title = "Chief of Security"
+
+//////////////////////////////////
+//			Warden
+//////////////////////////////////
 /datum/job/warden
 	title = "Warden"
 	flag = WARDEN
@@ -47,9 +62,18 @@
 	minimal_player_age = 5
 
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
-	job_description = "You watch over the Armory, the Brig, and any prisoners brought in. You may be called upon to take charge of the Security Department, \
-						if no Head of Security is present."
+	job_description = "The Warden watches over the physical Security Department, making sure the Brig and Armoury are secure and in order at all times. They oversee \
+						prisoners that have been processed and brigged, and are responsible for their well being. The Warden is also in charge of distributing \
+						Armoury gear in a crisis, and retrieving it when the crisis has passed. In an emergency, the Warden may be called upon to direct the \
+						Security Department as a whole."
 
+// Warden Alt Titles
+/datum/alt_title/warden
+	title = "Warden"
+
+//////////////////////////////////
+//			Detective
+//////////////////////////////////
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
@@ -67,9 +91,22 @@
 	minimal_player_age = 3
 
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
-	job_description = "You use your forensics training to help determine who has commited crimes that no one witnessed, or no one survived."
-	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic, "Investigator")
+	job_description = "A Detective works to help Security find criminals who have not properly been identified, through interviews and forensic work. \
+						For crimes only witnessed after the fact, or those with no survivors, they attempt to piece together what they can from pure evidence."
+	alt_titles = list("Detective" = /datum/alt_title/detective, "Forensic Technician" = /datum/alt_title/forensic_tech)
 
+// Detective Alt Titles
+/datum/alt_title/detective
+	title = "Detective"
+
+/datum/alt_title/forensic_tech
+	title = "Forensic Technician"
+	title_blurb = "A Forensic Technician works more with hard evidence and labwork than a Detective, but they share the purpose of solving crimes."
+	title_outfit = /decl/hierarchy/outfit/job/security/detective/forensic
+
+//////////////////////////////////
+//		Security Officer
+//////////////////////////////////
 /datum/job/officer
 	title = "Security Officer"
 	flag = OFFICER
@@ -87,5 +124,17 @@
 	minimal_player_age = 3
 
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
-	job_description = "Get Baton. Set Intent to Harm."
-	alt_titles = list("Junior Officer")
+	job_description = "A Security Officer is concerned with maintaining the safety and security of the station as a whole, dealing with external threats and \
+						apprehending criminals. A Security Officer is responsible for the health, safety, and processing of any prisoner they arrest. \
+						No one is above the Law, not Security or Command."
+	alt_titles = list("Security Officer" = /datum/alt_title/sec_officer, "Junior Officer" = /datum/alt_title/junior_officer)
+
+// Security Officer Alt Titles
+/datum/alt_title/sec_officer
+	title = "Security Officer"
+
+/datum/alt_title/junior_officer
+	title = "Junior Officer"
+	title_blurb = "A Junior Officer is an inexperienced Security Officer. They likely have training, but not experience, and are frequently \
+					paired off with a more senior co-worker. Junior Officers may also be expected to take over the boring duties of other Officers \
+					including patrolling the station or maintaining specific posts."

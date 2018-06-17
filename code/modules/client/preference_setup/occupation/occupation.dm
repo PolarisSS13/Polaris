@@ -113,7 +113,7 @@
 				. += " <font color=55cc55>\[Yes]</font>"
 			else
 				. += " <font color=black>\[No]</font>"
-			if(job.alt_titles) //Blatantly cloned from a few lines down.
+			if(LAZYLEN(job.alt_titles)) //Blatantly cloned from a few lines down.
 				. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
 			. += "</a></td></tr>"
 			continue
@@ -126,7 +126,7 @@
 			. += " <font color=cc5555>\[Low]</font>"
 		else
 			. += " <font color=black>\[NEVER]</font>"
-		if(job.alt_titles)
+		if(LAZYLEN(job.alt_titles))
 			. += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'>&nbsp</td><td><a href='?src=\ref[src];select_alt_title=\ref[job]'>\[[pref.GetPlayerAltTitle(job)]\]</a></td></tr>"
 		. += "</a></td></tr>"
 	. += "</td'></tr></table>"
@@ -190,9 +190,15 @@
 		if(config.wikiurl)
 			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 
-		var/description = job.get_description_blurb()
-		if(description)
-			dat += html_encode(description)
+		var/alt_title = pref.player_alt_titles[job.title]
+		var/list/description = job.get_description_blurb(alt_title)
+		if(LAZYLEN(description))
+			dat += html_encode(description[1])
+			if(description.len > 1)
+				if(!isnull(description[2]))
+					dat += "<br>"
+					dat += html_encode(description[2])
+
 		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
 		popup.set_content(jointext(dat,"<br>"))
 		popup.open()
