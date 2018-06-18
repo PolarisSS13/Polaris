@@ -78,6 +78,11 @@
 		ranged_pre_animation(A)
 		handle_attack_delay(A) // This will sleep this proc for a bit, which is why waitfor is false.
 
+	if(needs_reload)
+		if(reload_count >= reload_max)
+			try_reload()
+			return FALSE
+
 	visible_message("<span class='danger'><b>\The [src]</b> fires at \the [A]!</span>")
 	shoot(A, src.loc, src)
 	if(casingtype)
@@ -99,9 +104,20 @@
 	if(!P)
 		return
 	P.launch(A)
+	if(needs_reload)
+		reload_count ++
 
 //	if(distance >= special_attack_min_range && distance <= special_attack_max_range)
 //		return TRUE
+
+/mob/living/simple_mob/proc/try_reload()
+	if(do_after(src, reload_time))
+		if(reload_sound)
+			playsound(src.loc, reload_sound, 50, 1)
+		reload_count = 0
+		return TRUE
+	else
+		return FALSE
 
 // Can we currently do a special attack?
 /mob/living/simple_mob/proc/can_special_attack(atom/A)

@@ -55,6 +55,23 @@
 	say_stand_down = list("Good.")
 	say_escalate = list("Yarr! The booty is mine!")
 
+// Mercs!
+/datum/say_list/merc
+	speak = list("When are we gonna get out of this chicken-shit outfit?",
+				"Wish I had better equipment...",
+				"I knew I should have been a line chef...",
+				"Fuckin' helmet keeps fogging up.",
+				"Anyone else smell that?")
+	emote_see = list("sniffs", "coughs", "taps his foot", "looks around", "checks his equipment")
+
+	say_understood = list("Understood!", "Affirmative!")
+	say_cannot = list("Negative!")
+	say_maybe_target = list("Who's there?")
+	say_got_target = list("Engaging!")
+	say_threaten = list("Get out of here!", "Hey! Private Property!")
+	say_stand_down = list("Good.")
+	say_escalate = list("Your funeral!", "Bring it!")
+
 /datum/say_list/malf_drone
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")

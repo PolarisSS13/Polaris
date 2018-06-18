@@ -24,6 +24,10 @@
 	return FALSE
 
 /mob/living/simple_mob/ICheckRangedAttack(atom/A)
+	if(needs_reload)
+		if(reload_count >= reload_max)
+			try_reload()
+			return FALSE
 	return projectiletype ? TRUE : FALSE
 
 /mob/living/proc/ISpecialAttack(atom/A)
