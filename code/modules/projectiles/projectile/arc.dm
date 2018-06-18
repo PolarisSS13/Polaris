@@ -78,8 +78,6 @@
 	// Update our shadow.
 	shadow.forceMove(loc)
 
-
-
 /obj/effect/projectile_shadow
 	name = "shadow"
 	desc = "You better avoid the thing coming down!"
@@ -87,7 +85,50 @@
 	icon_state = "arc_shadow"
 	anchored = TRUE
 
+//////////////
+//	Subtypes
+//////////////
 
-// Subtypes
+// Generic, Hivebot related
+/obj/item/projectile/arc/blue_energy
+	name = "energy missile"
+	icon_state = "force_missile"
+	damage = 15
+	damage_type = BURN
 
+// Fragmentation arc shot
+/obj/item/projectile/arc/fragmentation
+	name = "fragmentation shot"
+	icon_state = "shell"
+	var/list/fragment_types = list(
+		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment, \
+		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment/strong
+		)
+	var/fragment_amount = 63 // Same as a grenade.
+	var/spread_range = 7
 
+/obj/item/projectile/arc/fragmentation/on_impact(turf/T)
+	fragmentate(T, fragment_amount, spread_range, fragment_types)
+
+// EMP arc shot
+/obj/item/projectile/arc/emp_blast
+	name = "emp blast"
+	icon_state = "bluespace"
+
+/obj/item/projectile/arc/emp_blast/on_impact(turf/T)
+	empulse(T, 2, 4, 7, 10) // Normal EMP grenade.
+	return ..()
+
+/obj/item/projectile/arc/emp_blast/weak/on_impact(turf/T)
+	empulse(T, 1, 2, 3, 4) // Sec EMP grenade.
+	return ..()
+
+// Radiation arc shot
+/obj/item/projectile/arc/radioactive
+	name = "radiation blast"
+	icon_state = "green_pellet"
+	icon_scale = 2
+	var/rad_power = 50
+
+/obj/item/projectile/arc/radioactive/on_impact(turf/T)
+	radiation_repository.radiate(T, rad_power)
