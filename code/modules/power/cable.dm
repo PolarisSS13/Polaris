@@ -948,7 +948,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 			var/obj/item/stack/cable_coil/CC = new/obj/item/stack/cable_coil(user.loc)
 			CC.amount = N
 			CC.update_icon()
-			user << "<font color='blue'>You take [N] units of wire from the [src].</font>"
+			to_chat(user,"<font color='blue'>You take [N] units of wire from the [src].</font>")
 			if (CC)
 				user.put_in_hands(CC)
 				src.add_fingerprint(user)
