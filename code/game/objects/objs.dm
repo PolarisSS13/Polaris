@@ -1,5 +1,3 @@
-GLOBAL_LIST_BOILERPLATE(all_objs, /obj)
-
 /obj
 	layer = OBJ_LAYER
 	plane = OBJ_PLANE
@@ -164,4 +162,7 @@ GLOBAL_LIST_BOILERPLATE(all_objs, /obj)
 	return
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
+	return
+
+/obj/proc/get_cell()
 	return
