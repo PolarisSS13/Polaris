@@ -130,36 +130,9 @@
 	desc = "A large robot capable of irradiating a large area from afar."
 	projectiletype = /obj/item/projectile/arc/radioactive
 
-/obj/item/projectile/arc/radioactive
-	name = "radiation blast"
-	icon_state = "green_pellet"
-	icon_scale = 2
-	var/rad_power = 50
-
-/obj/item/projectile/arc/radioactive/on_impact(turf/T)
-	radiation_repository.radiate(T, rad_power)
-
 
 // Essentially a long ranged frag grenade.
 /mob/living/simple_mob/mechanical/hivebot/ranged_damage/siege/fragmentation
 	name = "anti-personnel artillery hivebot"
 	desc = "A large robot capable of delivering fragmentation shells to rip apart their fleshy enemies."
 	projectiletype = /obj/item/projectile/arc/fragmentation
-
-/obj/item/projectile/arc/fragmentation
-	name = "fragmentation shot"
-	icon_state = "shell"
-	var/list/fragment_types = list(
-		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment, \
-		/obj/item/projectile/bullet/pellet/fragment, /obj/item/projectile/bullet/pellet/fragment/strong
-		)
-	var/fragment_amount = 63 // Same as a grenade.
-	var/spread_range = 7
-
-/obj/item/projectile/arc/fragmentation/on_impact(turf/T)
-	fragmentate(T, fragment_amount, spread_range, fragment_types)
-
-
-
-
-
