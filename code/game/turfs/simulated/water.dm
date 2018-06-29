@@ -84,6 +84,11 @@
 	name = "pool"
 	desc = "Don't worry, it's not closed."
 	under_state = "pool"
+
+/turf/simulated/floor/water/pool
+	name = "pool"
+	desc = "Don't worry, it's not closed."
+	under_state = "pool"
 	outdoors = FALSE
 
 /turf/simulated/floor/water/deep/pool

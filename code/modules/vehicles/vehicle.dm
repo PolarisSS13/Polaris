@@ -13,7 +13,7 @@
 	animate_movement=1
 //	light_power = 1.5
 //	light_range = 3
-
+	plane = -25
 	can_buckle = 1
 	buckle_movable = 1
 	buckle_lying = 0
@@ -56,13 +56,13 @@
 	var/passenger_offset_x = 0		//pixel_y offset for mob overlay
 	var/default_layer = OBJ_LAYER
 
-	light_power = 1.5 //for headlights
+	light_power = 2.5 //for headlights
 
 	var/spam_flag = 0 //for sound effects
 	var/cooldowntime
 	var/engine_start
 	var/engine_fail
-	var/horn_sound = 'sound/items/bikehorn.ogg'
+	var/horn_sound = 'sound/vehicles/car_horn.ogg'
 
 	var/datum/riding/riding_datum = null
 

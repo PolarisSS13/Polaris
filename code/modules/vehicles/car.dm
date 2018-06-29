@@ -11,6 +11,9 @@
 	charge_use = 0
 	bound_width = 64
 	bound_height = 64
+	max_buckled_mobs = 3
+
+
 
 	var/obj/item/weapon/key/car/key
 	var/trunk_open = 0
@@ -52,6 +55,7 @@
 	return ..()
 
 /obj/vehicle/car/Move(var/turf/destination)
+
 	if(on && cell.charge < charge_use)
 		turn_off()
 		if(load)
@@ -686,7 +690,7 @@
 			if(ismob(passenger))
 				for(var/mob/M in buckled_mobs)
 					if(M == passenger)
-						buckled_mobs[1] = M
+						buckled_mobs[2] = M
 						unbuckle_mob(passenger)
 						buckled_mobs -= M
 						M.update_action_buttons()
@@ -703,12 +707,14 @@
 			if(ismob(trunk))
 				for(var/mob/M in buckled_mobs)
 					if(M == trunk)
-						buckled_mobs[1] = M
+						buckled_mobs[3] = M
 						unbuckle_mob(trunk)
-						buckled_mobs[1] -= M
+						buckled_mobs[3] -= M
 						if(M.client)
 							M.client.eye = M.client.mob
 							M.client.perspective = MOB_PERSPECTIVE
+							M.update_action_buttons()
+
 			trunk = null
 	for(var/obj/screen/vehicle_action/swaptoggle/A in action_buttons) //Update the swap action button
 		if(load && passenger)

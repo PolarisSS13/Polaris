@@ -71,10 +71,10 @@
 	pda_type = /obj/item/device/pda/librarian
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
-	name = OUTFIT_JOB_NAME("Internal affairs agent")
+	name = OUTFIT_JOB_NAME("Lawyer")
 	l_ear = /obj/item/device/radio/headset/ia
-	uniform = /obj/item/clothing/under/rank/internalaffairs
-	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs
+	uniform = /obj/item/clothing/under/lawyer/blue
+	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard

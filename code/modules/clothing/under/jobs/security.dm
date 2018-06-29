@@ -12,16 +12,16 @@
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for more robust protection. It has the word \"Warden\" written on the shoulders."
 	name = "warden's jumpsuit"
 	icon_state = "warden"
-	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+	item_state_slots = list(slot_r_hand_str = "darkblue", slot_l_hand_str = "darkblue")
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/security
-	name = "security officer's jumpsuit"
-	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
-	icon_state = "security"
-	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+	name = "police officer's uniform"
+	desc = "It's made of a slightly sturdier material than standard suits, to allow for robust protection."
+	icon_state = "police"
+	item_state_slots = list(slot_r_hand_str = "darkblue", slot_l_hand_str = "darkblue")
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
@@ -36,10 +36,10 @@
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/rank/security2
-	name = "security officer's uniform"
+	name = "police officer's uniform"
 	desc = "It's made of a slightly sturdier material, to allow for robust protection."
 	icon_state = "redshirt2"
-	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+	item_state_slots = list(slot_r_hand_str = "darkblue", slot_l_hand_str = "darkblue")
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
@@ -123,10 +123,10 @@
  * Head of Security
  */
 /obj/item/clothing/under/rank/head_of_security
-	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
-	name = "head of security's jumpsuit"
-	icon_state = "hos"
-	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+	desc = "It's a jumpsuit worn by those few with the dedication to achieve the position of \"Chief of Police\". It has additional armor to protect the wearer."
+	name = "chief of police's uniform"
+	icon_state = "chiefofpolice"
+	item_state_slots = list(slot_r_hand_str = "darkblue", slot_l_hand_str = "darkblue")
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
@@ -147,7 +147,7 @@
  * Navy uniforms
  */
 /obj/item/clothing/under/rank/security/navyblue
-	name = "security officer's uniform"
+	name = "police officer's uniform"
 	desc = "The latest in fashionable security outfits."
 	icon_state = "officerblueclothes"
 	item_state_slots = list(slot_r_hand_str = "ba_suit", slot_l_hand_str = "ba_suit")
@@ -155,7 +155,7 @@
 
 /obj/item/clothing/under/rank/head_of_security/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
-	name = "head of security's uniform"
+	name = "chief of police's uniform"
 	icon_state = "hosblueclothes"
 	item_state_slots = list(slot_r_hand_str = "ba_suit", slot_l_hand_str = "ba_suit")
 	rolled_sleeves = 0

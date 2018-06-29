@@ -1,6 +1,6 @@
-/obj/vehicle/bike/
-	name = "space-bike"
-	desc = "Space wheelies! Woo! "
+/obj/vehicle/train/cargo/engine/motorcycle/moped
+	name = "electic moped"
+	desc = "For the biker in all of us."
 	icon = 'icons/obj/bike.dmi'
 	icon_state = "bike_off"
 	dir = SOUTH
@@ -14,22 +14,17 @@
 	brute_dam_coeff = 0.5
 	var/protection_percent = 60
 
-	var/land_speed = 10 //if 0 it can't go on turf
-	var/space_speed = 1
-	var/bike_icon = "bike"
 
-	var/datum/effect/effect/system/ion_trail_follow/ion
-	var/kickstand = 1
 
-/obj/vehicle/bike/New()
+
+
+/obj/vehicle/train/cargo/engine/motorcycle/moped/New()
 	..()
-	ion = new /datum/effect/effect/system/ion_trail_follow()
-	ion.set_up(src)
 	turn_off()
 	overlays += image('icons/obj/bike.dmi', "[icon_state]_off_overlay", MOB_LAYER + 1)
 	icon_state = "[bike_icon]_off"
 
-/obj/vehicle/bike/verb/toggle()
+/obj/vehicle/train/cargo/engine/motorcycle/moped/verb/toggle()
 	set name = "Toggle Engine"
 	set category = "Vehicle"
 	set src in view(0)
@@ -43,49 +38,31 @@
 		turn_off()
 		src.visible_message("\The [src] putters before turning off.", "You hear something putter slowly.")
 
-/obj/vehicle/bike/verb/kickstand()
-	set name = "Toggle Kickstand"
-	set category = "Vehicle"
-	set src in view(0)
 
-	if(usr.incapacitated()) return
 
-	if(kickstand)
-		src.visible_message("You put up \the [src]'s kickstand.")
-	else
-		if(istype(src.loc,/turf/space))
-			usr << "<span class='warning'> You don't think kickstands work in space...</span>"
-			return
-		src.visible_message("You put down \the [src]'s kickstand.")
-		if(pulledby)
-			pulledby.stop_pulling()
-
-	kickstand = !kickstand
-	anchored = (kickstand || on)
-
-/obj/vehicle/bike/load(var/atom/movable/C)
+/obj/vehicle/train/cargo/engine/motorcycle/moped/load(var/atom/movable/C)
 	var/mob/living/M = C
 	if(!istype(C)) return 0
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
 	return ..(M)
 
-/obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+/obj/vehicle/train/cargo/engine/motorcycle/moped/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!load(C))
 		user << "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>"
 		return
-
-/obj/vehicle/bike/attack_hand(var/mob/user as mob)
+/*
+/obj/vehicle/train/cargo/engine/motorcycle/moped/attack_hand(var/mob/user as mob)
 	if(user == load)
 		unload(load)
 		user << "You unbuckle yourself from \the [src]"
-
-/obj/vehicle/bike/relaymove(mob/user, direction)
+*/
+/obj/vehicle/train/cargo/engine/motorcycle/moped/relaymove(mob/user, direction)
 	if(user != load || !on)
 		return
 	return Move(get_step(src, direction))
-
-/obj/vehicle/bike/Move(var/turf/destination)
+/*
+/obj/vehicle/train/cargo/engine/motorcycle/moped/Move(var/turf/destination)
 	if(kickstand) return
 
 
@@ -99,9 +76,8 @@
 			return 0
 		move_delay = land_speed
 	return ..()
-
-/obj/vehicle/bike/turn_on()
-	ion.start()
+*/
+/obj/vehicle/train/cargo/engine/motorcycle/moped/turn_on()
 	anchored = 1
 
 	update_icon()
@@ -109,22 +85,22 @@
 	if(pulledby)
 		pulledby.stop_pulling()
 	..()
-/obj/vehicle/bike/turn_off()
-	ion.stop()
+/obj/vehicle/train/cargo/engine/motorcycle/moped/turn_off()
+
 	anchored = kickstand
 
 	update_icon()
 
 	..()
 
-/obj/vehicle/bike/bullet_act(var/obj/item/projectile/Proj)
+/obj/vehicle/train/cargo/engine/motorcycle/moped/bullet_act(var/obj/item/projectile/Proj)
 	if(has_buckled_mobs() && prob(protection_percent))
 		var/mob/living/L = pick(buckled_mobs)
 		L.bullet_act(Proj)
 		return
 	..()
 
-/obj/vehicle/bike/update_icon()
+/obj/vehicle/train/cargo/engine/motorcycle/moped/update_icon()
 	overlays.Cut()
 
 	if(on)
@@ -137,7 +113,3 @@
 	..()
 
 
-/obj/vehicle/bike/Destroy()
-	qdel(ion)
-
-	..()

@@ -1,4 +1,5 @@
-
+/obj/structure/flora
+	layer = 3.3
 
 
 

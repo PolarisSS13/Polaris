@@ -595,8 +595,8 @@ default behaviour is:
 
 /mob/living/proc/revive()
 	rejuvenate()
-	if(buckled)
-		buckled.unbuckle_mob()
+//	if(buckled)
+//		buckled.unbuckle_mob()
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 
@@ -1015,7 +1015,7 @@ default behaviour is:
 	if(lying != lying_prev)
 		lying_prev = lying
 		update_transform()
-		
+
 	return canmove
 
 // Adds overlays for specific modifiers.

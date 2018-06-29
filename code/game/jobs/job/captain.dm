@@ -34,7 +34,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	return get_all_station_access()
 
 /datum/job/hop
-	title = "Vice Mayor"
+	title = "City Supervisor"
 	flag = HOP
 	department = "Command"
 	head_position = 1
@@ -53,7 +53,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	ideal_character_age = 40
 
 	outfit_type = /decl/hierarchy/outfit/job/hop
-	alt_titles = list("Crew Resources Officer")
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
@@ -69,22 +68,22 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
 /datum/job/secretary
-	title = "Command Secretary"
+	title = "City Hall Guard"
 	flag = BRIDGE
-	department = "Command"
-	head_position = 1
-	department_flag = CIVILIAN
+	department = "Security"
+	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "command staff"
+	supervisors = "the mayor and the chief of police"
 	selection_color = "#2F2F7F"
 	idtype = /obj/item/weapon/card/id/silver/secretary
 	minimal_player_age = 5
 	economic_modifier = 7
+	minimum_character_age = 20
 
 	access = list(access_heads, access_keycard_auth)
 	minimal_access = list(access_heads, access_keycard_auth)
 
 	outfit_type = /decl/hierarchy/outfit/job/secretary
-	alt_titles = list("Command Liaison", "Bridge Secretary")
+	alt_titles = list("Mayor Bodyguard", "City Hall Security")

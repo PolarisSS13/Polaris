@@ -3,6 +3,7 @@
 	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
 	layer = SHOWER_OPEN_LAYER
+	plane = ABOVE_PLANE
 	opacity = 1
 	density = 0
 

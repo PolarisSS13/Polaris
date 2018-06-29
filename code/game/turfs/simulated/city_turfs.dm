@@ -1,9 +1,10 @@
 /turf/simulated/floor/pavement
-	name = "Pavement"
-	desc = "It's a pavement" //I think I need a better description.
+	name = "pavement"
+	desc = "I wonder how many people have been curbstomped on this?" //I think I need a better description.
 	icon = 'icons/turf/pavement.dmi'
 	icon_state = "pavement"
 	initial_flooring = /decl/flooring/pavement
+	outdoors = TRUE
 
 /turf/simulated/floor/pavement/empty
 	icon_state = "pave_empty"
@@ -16,6 +17,17 @@
 /turf/simulated/floor/pavement/corner_invert
 	icon_state = "pave_invert_corner"
 	initial_flooring = /decl/flooring/pavement/invert_corner
+
+/turf/simulated/floor/pavement/pave_tiling
+	name = "paving tile"
+	icon_state = "pave_tiling"
+	initial_flooring = /decl/flooring/pavement/pave_tiling
+
+/turf/simulated/floor/pavement/brick_paving
+	name = "brick paving"
+	icon_state = "brick_paving"
+	initial_flooring = /decl/flooring/pavement/brick_paving
+
 
 //| Stairs
 	// - default is South, in terms of being at the top of the stairs looking down.
@@ -52,6 +64,7 @@
 	icon = 'icons/turf/roads.dmi'
 	icon_state = "road"
 	initial_flooring = /decl/flooring/road
+	outdoors = TRUE
 
 /turf/simulated/floor/road/empty
 	icon_state = "road_empty"

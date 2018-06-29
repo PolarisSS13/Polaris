@@ -1,23 +1,24 @@
-var/datum/planet/pollux/planet_pollux = null
+var/datum/planet/sif/planet_sif = null
 
-/datum/planet/pollux
-	name = "pollux"
+/datum/planet/sif
+	name = "Sif"
 
-/datum/planet/pollux
-	name = "Pollux"
-	desc = "Pollux is a terrestrial planet in the Vir system. It is somewhat earth-like, in that it has oceans, a \
+/datum/planet/sif
+	name = "Sif"
+	desc = "Sif is a terrestrial planet in the Vir system. It is somewhat earth-like, in that it has oceans, a \
 	breathable atmosphere, a magnetic field, weather, and similar gravity to Earth. It is currently the capital planet of Vir. \
 	Its center of government is the equatorial city and site of first settlement, New Reykjavik." // Ripped straight from the wiki.
-	current_time = new /datum/time/pollux() // 32 hour clocks are nice.
+	current_time = new /datum/time/sif() // 32 hour clocks are nice.
 //	expected_z_levels = list(1) // To be changed when real map is finished.
 	planetary_wall_type = /turf/unsimulated/wall/planetary/sif
-/datum/planet/pollux/New()
+
+/datum/planet/sif/New()
 	..()
-	planet_pollux = src
-	weather_holder = new /datum/weather_holder/pollux(src) // Cold weather is also nice.
+	planet_sif = src
+	weather_holder = new /datum/weather_holder/sif(src) // Cold weather is also nice.
 
 // This code is horrible.
-/datum/planet/pollux/update_sun()
+/datum/planet/sif/update_sun()
 	..()
 	var/datum/time/time = current_time
 	var/length_of_day = time.seconds_in_day / 10 / 60 / 60 // 32
@@ -96,28 +97,28 @@ var/datum/planet/pollux/planet_pollux = null
 	spawn(1)
 		update_sun_deferred(2, new_brightness, new_color)
 
-// We're gonna pretend there are 32 hours in a pollux day instead of 32.64 for the purposes of not losing sanity.  We lose 38m 24s but the alternative is a path to madness.
-/datum/time/pollux
+// We're gonna pretend there are 32 hours in a Sif day instead of 32.64 for the purposes of not losing sanity.  We lose 38m 24s but the alternative is a path to madness.
+/datum/time/sif
 	seconds_in_day = 60 * 60 * 32 * 10 // 115,200 seconds.  If we did 32.64 hours/day it would be around 117,504 seconds instead.
 
-// Returns the time datum of pollux.
-/proc/get_pollux_time()
-	if(planet_pollux)
-		return planet_pollux.current_time
+// Returns the time datum of Sif.
+/proc/get_sif_time()
+	if(planet_sif)
+		return planet_sif.current_time
 
 //Weather definitions
-/datum/weather_holder/pollux
+/datum/weather_holder/sif
 	temperature = T0C
 	allowed_weather_types = list(
-		WEATHER_CLEAR		= new /datum/weather/pollux/clear(),
-		WEATHER_OVERCAST	= new /datum/weather/pollux/overcast(),
-		WEATHER_LIGHT_SNOW	= new /datum/weather/pollux/light_snow(),
-		WEATHER_SNOW		= new /datum/weather/pollux/snow(),
-		WEATHER_BLIZZARD	= new /datum/weather/pollux/blizzard(),
-		WEATHER_RAIN		= new /datum/weather/pollux/rain(),
-		WEATHER_STORM		= new /datum/weather/pollux/storm(),
-		WEATHER_HAIL		= new /datum/weather/pollux/hail(),
-		WEATHER_BLOOD_MOON	= new /datum/weather/pollux/blood_moon()
+		WEATHER_CLEAR		= new /datum/weather/sif/clear(),
+		WEATHER_OVERCAST	= new /datum/weather/sif/overcast(),
+		WEATHER_LIGHT_SNOW	= new /datum/weather/sif/light_snow(),
+		WEATHER_SNOW		= new /datum/weather/sif/snow(),
+		WEATHER_BLIZZARD	= new /datum/weather/sif/blizzard(),
+		WEATHER_RAIN		= new /datum/weather/sif/rain(),
+		WEATHER_STORM		= new /datum/weather/sif/storm(),
+		WEATHER_HAIL		= new /datum/weather/sif/hail(),
+		WEATHER_BLOOD_MOON	= new /datum/weather/sif/blood_moon()
 		)
 	roundstart_weather_chances = list(
 		WEATHER_CLEAR		= 30,
@@ -130,19 +131,19 @@ var/datum/planet/pollux/planet_pollux = null
 		WEATHER_HAIL		= 2.5
 		)
 
-datum/weather/pollux
-	name = "pollux base"
+datum/weather/sif
+	name = "sif base"
 	temp_high = 283.15	// 10c
 	temp_low = 263.15	// -10c
 
-/datum/weather/pollux/clear
+/datum/weather/sif/clear
 	name = "clear"
 	transition_chances = list(
 		WEATHER_CLEAR = 60,
 		WEATHER_OVERCAST = 40
 		)
 
-/datum/weather/pollux/overcast
+/datum/weather/sif/overcast
 	name = "overcast"
 	light_modifier = 0.8
 	transition_chances = list(
@@ -154,7 +155,7 @@ datum/weather/pollux
 		WEATHER_HAIL = 5
 		)
 
-/datum/weather/pollux/light_snow
+/datum/weather/sif/light_snow
 	name = "light snow"
 	icon_state = "snowfall_light"
 	temp_high = T0C		// 0c
@@ -167,7 +168,7 @@ datum/weather/pollux
 		WEATHER_HAIL = 5
 		)
 
-/datum/weather/pollux/snow
+/datum/weather/sif/snow
 	name = "moderate snow"
 	icon_state = "snowfall_med"
 	temp_high = T0C		// 0c
@@ -182,8 +183,8 @@ datum/weather/pollux
 		WEATHER_OVERCAST = 5
 		)
 
-/datum/weather/pollux/snow/process_effects()
-	for(var/turf/simulated/floor/outdoors/snow/S in outdoor_turfs)
+/datum/weather/sif/snow/process_effects()
+	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
@@ -191,7 +192,7 @@ datum/weather/pollux
 					if(istype(T, /turf/simulated/floor/outdoors) && prob(33))
 						T.chill()
 
-/datum/weather/pollux/blizzard
+/datum/weather/sif/blizzard
 	name = "blizzard"
 	icon_state = "snowfall_heavy"
 	temp_high = 243.15 // -30c
@@ -205,8 +206,8 @@ datum/weather/pollux
 		WEATHER_OVERCAST = 5
 		)
 
-/datum/weather/pollux/blizzard/process_effects()
-	for(var/turf/simulated/floor/outdoors/snow/S in outdoor_turfs)
+/datum/weather/sif/blizzard/process_effects()
+	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
@@ -214,7 +215,7 @@ datum/weather/pollux
 					if(istype(T, /turf/simulated/floor/outdoors) && prob(50))
 						T.chill()
 
-/datum/weather/pollux/rain
+/datum/weather/sif/rain
 	name = "rain"
 	icon_state = "rain"
 	light_modifier = 0.5
@@ -226,17 +227,29 @@ datum/weather/pollux
 		WEATHER_HAIL = 5
 		)
 
-/datum/weather/pollux/rain/process_effects()
+/datum/weather/sif/rain/process_effects()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 
+			// If they have an open umbrella, it'll guard from rain
+			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+				if(U.open)
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					continue
+			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+				if(U.open)
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					continue
+
 			L.water_act(1)
 			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
 
-/datum/weather/pollux/storm
+/datum/weather/sif/storm
 	name = "storm"
 	icon_state = "storm"
 	temp_high = 243.15 // -30c
@@ -250,9 +263,6 @@ datum/weather/pollux
 		WEATHER_OVERCAST = 5
 		)
 
-
-/datum/weather/pollux/rain/process_effects()
-
 /datum/weather/sif/storm/process_effects()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
@@ -260,10 +270,24 @@ datum/weather/pollux
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 
+			// If they have an open umbrella, it'll get stolen by the wind
+			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+				if(U.open)
+					to_chat(L, "<span class='warning'>A gust of wind yanks the umbrella from your hand!</span>")
+					L.drop_from_inventory(U)
+					U.throw_at(get_edge_target_turf(U, pick(alldirs)), 8, 1, L)
+			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+				if(U.open)
+					to_chat(L, "<span class='warning'>A gust of wind yanks the umbrella from your hand!</span>")
+					L.drop_from_inventory(U)
+					U.throw_at(get_edge_target_turf(U, pick(alldirs)), 8, 1, L)
+
 			L.water_act(2)
 			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
 
-/datum/weather/pollux/hail
+/datum/weather/sif/hail
 	name = "hail"
 	icon_state = "hail"
 	temp_high = T0C		// 0c
@@ -272,21 +296,33 @@ datum/weather/pollux
 	flight_failure_modifier = 15
 	transition_chances = list(
 		WEATHER_RAIN = 45,
-		WEATHER_STORM = 10,
-		WEATHER_HAIL = 40,
+		WEATHER_STORM = 40,
+		WEATHER_HAIL = 10,
 		WEATHER_OVERCAST = 5
 		)
 
-/datum/weather/pollux/hail/process_effects()
-	for(var/mob/living/L in living_mob_list)
-		if(L.z in holder.our_planet.expected_z_levels)
-			var/turf/T = get_turf(L)
+/datum/weather/sif/hail/process_effects()
+	for(var/mob/living/carbon/human/H in living_mob_list)
+		if(H.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(H)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to pelt them with ice.
 
+			// If they have an open umbrella, it'll guard from rain
+			if(istype(H.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
+				if(U.open)
+					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					continue
+			else if(istype(H.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = H.get_inactive_hand()
+				if(U.open)
+					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					continue
+
 			var/target_zone = pick(BP_ALL)
-			var/amount_blocked = L.run_armor_check(target_zone, "melee")
-			var/amount_soaked = L.get_armor_soak(target_zone, "melee")
+			var/amount_blocked = H.run_armor_check(target_zone, "melee")
+			var/amount_soaked = H.get_armor_soak(target_zone, "melee")
 
 			if(amount_blocked >= 100)
 				continue // No need to apply damage.
@@ -294,10 +330,10 @@ datum/weather/pollux
 			if(amount_soaked >= 10)
 				continue // No need to apply damage.
 
-			L.apply_damage(rand(5, 10), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
-			to_chat(L, "<span class='warning'>The hail raining down on you [L.can_feel_pain() ? "hurts" : "damages you"]!</span>")
+			H.apply_damage(rand(5, 10), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
+			to_chat(H, "<span class='warning'>The hail smacks into you!</span>")
 
-/datum/weather/pollux/blood_moon
+/datum/weather/sif/blood_moon
 	name = "blood moon"
 	light_modifier = 0.5
 	light_color = "#FF0000"

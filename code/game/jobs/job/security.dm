@@ -41,6 +41,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
+	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
 
 /datum/job/detective
@@ -58,6 +59,7 @@
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	economic_modifier = 5
 	minimal_player_age = 3
+	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
 	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic, "Investigator")
 
@@ -76,5 +78,6 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
+	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
 	alt_titles = list("Junior Officer","Traffic Warden")

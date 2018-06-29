@@ -7,7 +7,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the mayor"
 	selection_color = "#AD6BAD"
 	idtype = /obj/item/weapon/card/id/science/head
 	req_admin_notify = 1
@@ -42,7 +42,7 @@
 	economic_modifier = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-
+	minimum_character_age = 18
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
@@ -62,7 +62,7 @@
 	economic_modifier = 7
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
 	minimal_access = list(access_research, access_xenobiology, access_hydroponics, access_tox_storage)
-
+	minimum_character_age = 18
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
@@ -82,6 +82,7 @@
 	economic_modifier = 5
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	minimum_character_age = 18
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist

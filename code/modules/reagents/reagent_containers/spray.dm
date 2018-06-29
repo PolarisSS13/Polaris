@@ -94,7 +94,7 @@
 
 //space cleaner
 /obj/item/weapon/reagent_containers/spray/cleaner
-	name = "space cleaner"
+	name = "cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 
 /obj/item/weapon/reagent_containers/spray/cleaner/drone

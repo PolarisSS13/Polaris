@@ -13,6 +13,12 @@ var/global/list/stool_cache = list() //haha stool
 	var/material/material
 	var/material/padding_material
 
+/obj/item/weapon/stool/wooden
+
+/obj/item/weapon/stool/wooden/New(var/newloc, var/new_material)
+	..(newloc, "wood")
+
+
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
 

@@ -137,8 +137,8 @@
 	job_access_type = /datum/job/secretary
 
 /obj/item/weapon/card/id/silver/hop
-	assignment = "Head of Personnel"
-	rank = "Head of Personnel"
+	assignment = "City Supervisor"
+	rank = "City Supervisor"
 	job_access_type = /datum/job/hop
 
 /obj/item/weapon/card/id/gold
@@ -149,14 +149,14 @@
 	preserve_item = 1
 
 /obj/item/weapon/card/id/gold/captain
-	assignment = "Colony Director"
-	rank = "Colony Director"
+	assignment = "Mayor"
+	rank = "Mayor"
 	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/gold/captain/spare
-	name = "\improper Colony Director's spare ID"
+	name = "\improper Mayor's spare ID"
 	desc = "The spare ID of the High Lord himself."
-	registered_name = "Colony Director"
+	registered_name = "Mayor"
 	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/synthetic

@@ -12,11 +12,12 @@ var/list/grass_types = list(
 		/turf/simulated/floor/outdoors/dirt
 		)
 	var/grass_chance = 20
-
+	var/tree_chance = 2
 	var/list/grass_types = list(
 		/obj/structure/flora/ausbushes/sparsegrass,
 		/obj/structure/flora/ausbushes/fullgrass
 		)
+
 
 
 /turf/simulated/floor/outdoors/grass/sif
@@ -24,7 +25,7 @@ var/list/grass_types = list(
 	icon_state = "grass_sif"
 	edge_blending_priority = 4
 	grass_chance = 0
-	var/tree_chance = 2
+
 
 	grass_types = list(
 		/obj/structure/flora/sif/eyes
@@ -49,7 +50,7 @@ var/list/grass_types = list(
 	name = "thick grass"
 	icon_state = "grass-dark"
 	grass_chance = 80
-	//tree_chance = 20
+	tree_chance = 20
 	edge_blending_priority = 5
 
 /turf/simulated/floor/outdoors/grass/sif/forest

@@ -1,6 +1,7 @@
 // SUBTYPE: Transparent
 // Not technically a blast door but operates like one. Allows air and light.
 obj/machinery/door/blast/gate
+	name = "thick gate"
 	icon = 'icons/obj/doors/city_shutters.dmi'
 	icon_state_open = "shutter0"
 	icon_state_opening = "shutterc0"
@@ -44,11 +45,25 @@ obj/machinery/door/blast/gate/proc/force_close_transparent()
 	icon_state_closed = "shutter2_1"
 	icon_state_closing = "shutter2_c1"
 	icon_state = "shutter2_1"
-	maxhealth = 300
+	maxhealth = 200
 	opacity = 0
 
 /obj/machinery/door/blast/gate/thin/open
 	begins_closed = FALSE
+
+/obj/machinery/door/blast/gate/bars
+	name = "prison bars"
+	icon_state_open = "bars_0"
+	icon_state_opening = "bars_c0"
+	icon_state_closed = "bars_1"
+	icon_state_closing = "bars_c1"
+	icon_state = "bars_1"
+	maxhealth = 600
+	opacity = 0
+
+/obj/machinery/door/blast/gate/bars/open
+	begins_closed = FALSE
+
 
 /*
 	Blast door remote control
@@ -79,5 +94,4 @@ obj/machinery/door/blast/gate/proc/force_close_transparent()
 				spawn(0)
 					M.close()
 					return
-
 

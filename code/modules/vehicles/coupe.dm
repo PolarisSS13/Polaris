@@ -6,7 +6,7 @@
 	desc = "A very luxurious vehicle."
 	icon = 'icons/vehicles/sportscar.dmi'
 	icon_state = "sportscar"
-
+	plane = -25
 	bound_width = 64
 	bound_height = 64
 
@@ -14,6 +14,7 @@
 	passenger_item_visible = 1
 	load_item_visible = 1
 	load_offset_x = 0
+
 
 		//||pixel_y offset for mob overlay
 	mob_offset_y = 7
@@ -30,6 +31,7 @@
 	update_dir_car_overlays()
 
 /obj/vehicle/car/sportscar/Move()
+	if(usr.incapacitated()) return
 	..()
 	update_dir_car_overlays()
 
@@ -561,7 +563,7 @@
 	src.overlays = null
 	if(src.dir == NORTH||SOUTH||WEST)
 		if(src.dir == NORTH)	//|| place car sprite over mobs
-			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_north", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_north", layer = MOB_LAYER + 0.3)
 			src.overlays += I
 
 			src.mob_offset_x = 2
@@ -575,7 +577,7 @@
 
 		else if(src.dir == SOUTH)
 
-			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_south", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_south", layer = MOB_LAYER + 0.3)
 			overlays += I
 				//||move the driver & passenger back to the original layer
 			if(passenger && load)
@@ -598,15 +600,15 @@
 			src.passenger_offset_x = 34
 			src.passenger_offset_y = 23
 
-			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_west", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_west", layer = MOB_LAYER + 0.3)
 			src.overlays += I
 			if(passenger && !load)
-				var/image/S = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_west_passenger", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_west_passenger", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 		else if(src.dir == EAST)
 
-			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_east_passenger", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_east_passenger", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -620,7 +622,7 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_east", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/sportscar.dmi', icon_state = "sportscar_east", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 	if(ismob(C))
@@ -637,6 +639,7 @@
 	desc = "A vehicle designed for the defenders of the law."
 	icon = 'icons/vehicles/policecar.dmi'
 	icon_state = "policecar"
+	horn_sound = 'sound/vehicles/police_siren.ogg'
 
 /obj/vehicle/car/sportscar/policecar/update_dir_car_overlays()
 	var/atom/movable/C = src.load
@@ -644,7 +647,7 @@
 	src.overlays = null
 	if(src.dir == NORTH||SOUTH||WEST)
 		if(src.dir == NORTH)	//|| place car sprite over mobs
-			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_north", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_north", layer = MOB_LAYER + 0.3)
 			src.overlays += I
 
 			src.mob_offset_x = 2
@@ -658,7 +661,7 @@
 
 		else if(src.dir == SOUTH)
 
-			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_south", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_south", layer = MOB_LAYER + 0.3)
 			overlays += I
 				//||move the driver & passenger back to the original layer
 			if(passenger && load)
@@ -681,15 +684,15 @@
 			src.passenger_offset_x = 34
 			src.passenger_offset_y = 23
 
-			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_west", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_west", layer = MOB_LAYER + 0.3)
 			src.overlays += I
 			if(passenger && !load)
-				var/image/S = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_west_passenger", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_west_passenger", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 		else if(src.dir == EAST)
 
-			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_east_passenger", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_east_passenger", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -703,7 +706,7 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_east", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecar.dmi', icon_state = "policecar_east", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 	if(ismob(C))
@@ -718,7 +721,6 @@
 	desc = "A vehicle designed for the defenders of the law."
 	icon = 'icons/vehicles/policecarrier.dmi'
 	icon_state = "policecar"
-
 	fits_passenger = 3
 	passenger_item_visible = 0
 	load_item_visible = 0
@@ -730,7 +732,7 @@
 	if(src.dir == NORTH||SOUTH||WEST)
 		if(src.dir == NORTH)	//|| place car sprite over mobs
 
-			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_north", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_north", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -744,12 +746,12 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_north", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_north", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 		else if(src.dir == SOUTH)
 
-			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_south", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_south", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -763,12 +765,12 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_south", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_south", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 		else if(src.dir == WEST)
 
-			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_west", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_west", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -782,12 +784,12 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_west", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_west", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 		else if(src.dir == EAST)
 
-			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_east", layer = src.layer + 0.2)
+			var/image/I = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_east", layer = MOB_LAYER + 0.3)
 
 			src.passenger_offset_x = 20
 			src.passenger_offset_y = 10
@@ -801,7 +803,7 @@
 			src.overlays += I
 
 			if(!passenger )
-				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_east", layer = src.layer + 0.2)
+				var/image/S = new(icon = 'icons/vehicles/policecarrier.dmi', icon_state = "policecar_east", layer = MOB_LAYER + 0.3)
 				src.overlays += S
 
 	if(ismob(C))

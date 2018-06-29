@@ -4,6 +4,7 @@
 	anchored = 1
 	density = 1
 	pixel_x = -16
+	plane = 0
 	layer = MOB_LAYER // You know what, let's play it safe.
 	var/base_state = null	// Used for stumps.
 	var/health = 200		// Used for chopping down trees.

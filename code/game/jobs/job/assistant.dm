@@ -6,7 +6,7 @@
 	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
-	supervisors = "the mayor and their deputy"
+	supervisors = "the mayor and the city supervisor"
 	selection_color = "#515151"
 	economic_modifier = 1
 	access = list()			//See /datum/job/assistant/get_access()
@@ -21,3 +21,6 @@
 		return list(access_maint_tunnels)
 	else
 		return list()
+
+
+

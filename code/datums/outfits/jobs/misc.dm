@@ -9,3 +9,5 @@
 /decl/hierarchy/outfit/job/silicon/cyborg
 	name = OUTFIT_JOB_NAME("Cyborg")
 	suit = /obj/item/clothing/suit/cardborg
+
+

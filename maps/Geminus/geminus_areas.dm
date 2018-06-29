@@ -1,18 +1,24 @@
 // Elevator areas.
 /area/turbolift/geminus_top
-	name = "lift (top floor)"
+	name = "lift (geminus city)"
 	lift_floor_label = "Floor 2"
-	lift_floor_name = "Top Floor"
-	lift_announce_str = "Arriving at Top Floor."
+	lift_floor_name = "Geminus City Metro"
+	lift_announce_str = "Lift arriving at Geminus City Metro Station, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_ground
-	name = "lift (ground floor)"
+	name = "lift (sewers)"
 	lift_floor_label = "Floor 1"
-	lift_floor_name = "First Floor"
-	lift_announce_str = "Arriving at First Floor."
-	base_turf = /turf/simulated/floor
+	lift_floor_name = "Geminus Underground Sewers"
+	lift_announce_str = "Lift arriving at Geminus underground sewers, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 //power override
+
+//shuttle areas
+/area/shuttle/arrival/pre_game
+	icon_state = "shuttle2"
+	base_turf = /turf/simulated/sky
 
 //city areas
 
@@ -22,6 +28,7 @@
 	has_gravity = 1
 	power_equip = 1
 	power_light = 1
+	power_environ = 1
 	requires_power = 0
 
 
@@ -38,6 +45,8 @@
 	name = "\improper Geminus Interior"
 	icon_state = "yellow"
 	dynamic_lighting = 1
+	flags = RAD_SHIELDED
+
 
 /area/planets/Geminus/outdoor/north
 	name = "\improper Geminus City - North"

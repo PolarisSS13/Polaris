@@ -216,6 +216,21 @@
 	icon_state = "green1"
 	light_color = "#d8f9b1"
 
+/obj/machinery/light/colored/update_icon()
+
+	switch(status)		// set icon_states
+		if(LIGHT_OK)
+			icon_state = "[base_state][on]"
+		if(LIGHT_EMPTY)
+			icon_state = "empty"
+			on = 0
+		if(LIGHT_BURNED)
+			icon_state = "tube-burned"
+			on = 0
+		if(LIGHT_BROKEN)
+			icon_state = "tube-broken"
+			on = 0
+	return
 
 
 //colored bulbs
@@ -279,7 +294,8 @@
 	desc = "A street lighting fixture."
 	brightness_range = 7
 	brightness_color = "#d2e6f2"
-	layer = MOB_LAYER
+	layer = MOB_LAYER + 1
+	plane = MOB_PLANE
 	density = 1
 	light_type = /obj/item/weapon/light/bulb
 

@@ -35,3 +35,8 @@
 
 /turf/simulated/wall/greysteel/New(var/newloc)
 	..(newloc,"greysteel")
+
+/turf/simulated/wall/riveted //for more stylish anti-cheese.
+	icon_state = "bedrock"
+	var/base_state = "bedrock"
+	block_tele = TRUE

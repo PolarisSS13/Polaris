@@ -417,6 +417,11 @@ var/list/flooring_types
 /decl/flooring/pavement/empty
 	icon_base = "pave_empty"
 
+/decl/flooring/pavement/pave_tiling
+	icon_base = "pave_tiling"
+
+/decl/flooring/pavement/brick_paving
+	icon_base = "brick_paving"
 
 /decl/flooring/road
 	icon = 'icons/turf/roads.dmi'

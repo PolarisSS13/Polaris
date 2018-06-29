@@ -99,3 +99,9 @@
 /obj/effect/wingrille_spawn/reinforced/polarized/handle_window_spawn(var/obj/structure/window/reinforced/polarized/P)
 	if(id)
 		P.id = id
+
+/obj/effect/wingrille_spawn/reinforced/tinted
+	name = "reinforced window grille spawner"
+	icon_state = "r-wingrille"
+	win_path = /obj/structure/window/reinforced/tinted
+

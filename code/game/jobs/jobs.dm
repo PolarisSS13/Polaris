@@ -50,26 +50,25 @@ var/list/assistant_occupations = list(
 
 
 var/list/command_positions = list(
-	"Colony Director",
-	"Head of Personnel",
-	"Head of Security",
+	"Mayor",
+	"City Supervisor",
+	"Chief of Police",
 	"Chief Engineer",
 	"Research Director",
-	"Chief Medical Officer",
-	"Command Secretary"
+	"Chief Medical Officer"
 )
 
 
 var/list/engineering_positions = list(
 	"Chief Engineer",
 	"Station Engineer",
-	"Atmospheric Technician",
+	"Atmospheric Technician"
 )
 
 
 var/list/medical_positions = list(
 	"Chief Medical Officer",
-	"Medical Doctor",
+	"Doctor",
 	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
@@ -87,13 +86,13 @@ var/list/science_positions = list(
 
 //BS12 EDIT
 var/list/cargo_positions = list(
-	"Quartermaster",
-	"Cargo Technician",
-	"Shaft Miner"
+	"Factory Manager",
+	"Factory Worker",
+	"Miner"
 )
 
 var/list/civilian_positions = list(
-	"Head of Personnel",
+	"City Supervisor",
 	"Bartender",
 	"Botanist",
 	"Chef",
@@ -101,15 +100,16 @@ var/list/civilian_positions = list(
 	"Librarian",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
+	"Civilian"
 )
 
 
 var/list/security_positions = list(
-	"Head of Security",
+	"Chief of Police",
 	"Warden",
 	"Detective",
-	"Security Officer"
+	"Security Officer",
+	"City Hall Guard"
 )
 
 

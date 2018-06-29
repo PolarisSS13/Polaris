@@ -43,6 +43,10 @@
 		if (M.id == src.id)
 			LAZYADD(targets,M)
 
+	for(var/obj/machinery/door/blast/gate/Z in machines)
+		if (Z.id == src.id)
+			LAZYADD(targets,Z)
+
 	for(var/obj/machinery/flasher/F in machines)
 		if(F.id == src.id)
 			LAZYADD(targets,F)
@@ -110,6 +114,11 @@
 		spawn(0)
 			door.close()
 
+	for(var/obj/machinery/door/blast/gate/Z in targets)
+		if(Z.density)	continue
+		spawn(0)
+			Z.force_close_transparent()
+
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
 		if(C.broken)	continue
 		if(C.opened && !C.close())	continue
@@ -139,6 +148,10 @@
 
 	return 1
 
+	for(var/obj/machinery/door/blast/gate/Z in targets)
+		if(!Z.density)	continue
+		spawn(0)
+			Z.open()
 
 // Check for releasetime timeleft
 /obj/machinery/door_timer/proc/timeleft()

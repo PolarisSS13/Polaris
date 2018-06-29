@@ -259,9 +259,9 @@
 /obj/structure/fireplace //more like a space heater than a bonfire. A cozier alternative to both.
 	name = "fireplace"
 	desc = "The sound of the crackling hearth reminds you of home."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/fireplace.dmi'
 	icon_state = "fireplace"
-	density = TRUE
+	density = FALSE
 	anchored = TRUE
 	var/burning = FALSE
 	var/next_fuel_consumption = 0
@@ -367,12 +367,16 @@
 	if(burning)
 		var/state
 		switch(get_fuel_amount())
-			if(0 to 3.5)
-				state = "fireplace_warm"
-			if(3.6 to 6.5)
-				state = "fireplace_hot"
+			if(0 to 1.5)
+				state = "fireplace_fire0"
+			if(1.6 to 2.5)
+				state = "fireplace_fire1"
+			if(2.6 to 4.5)
+				state = "fireplace_fire2"
+			if(4.6 to 6.5)
+				state = "fireplace_fire3"
 			if(6.6 to 10)
-				state = "fireplace_intense" //don't need to throw a corpse inside to make it burn hotter.
+				state = "fireplace_fire4" //don't need to throw a corpse inside to make it burn hotter.
 		var/image/I = image(icon, state)
 		I.appearance_flags = RESET_COLOR
 		overlays += I

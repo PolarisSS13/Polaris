@@ -11,7 +11,8 @@
 	density = 1
 	anchored = 1
 	bounds = "64,32"
-	layer = MOB_LAYER + 1
+	plane = ABOVE_PLANE
+	layer = ABOVE_MOB_LAYER
 	pixel_y = 10
 
 /obj/structure/billboard/Destroy()
@@ -20,7 +21,13 @@
 
 /obj/structure/billboard/New()
 	..()
-	icon_state = pick("ssl","ntbuilding","keeptidy")
+	icon_state = pick("ssl",
+							"ntbuilding",
+							"keeptidy",
+							"smoke",
+							"tunguska",
+							"rent",
+							"vets")
 
 /obj/structure/billboard/city
 	name = "city billboard"

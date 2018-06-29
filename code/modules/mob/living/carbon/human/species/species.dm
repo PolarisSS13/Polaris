@@ -353,6 +353,7 @@
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
 
+
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
 
