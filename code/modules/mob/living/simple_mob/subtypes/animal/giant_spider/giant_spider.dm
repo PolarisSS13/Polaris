@@ -38,6 +38,7 @@
 
 	speak_emote = list("chitters")
 
+	meat_amount = 1
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat/spidermeat
 
 	say_list_type = /datum/say_list/spider

@@ -303,6 +303,7 @@
 #define MOB_CLASS_DEMONIC		64	// Cult stuff.
 #define MOB_CLASS_BOSS			128	// Future megafauna hopefully someday.
 #define MOB_CLASS_ILLUSION		256	// Fake mobs, e.g. Technomancer illusions.
+#define MOB_CLASS_PHOTONIC		512	// Holographic mobs like holocarp, similar to _ILLUSION, but that make no attempt to hide their true nature.
 
 #define MOB_CLASS_ALL (~MOB_CLASS_NONE)
 
