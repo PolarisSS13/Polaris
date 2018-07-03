@@ -37,8 +37,6 @@
 	M.set_species(species)
 	M.real_name = src.name
 	M.death(1) //Kills the new mob
-	if(faction)
-		M.faction = faction
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
 	if(src.corpsesuit)
@@ -235,15 +233,3 @@
 	corpseid = 1
 	corpseidjob = "Commander"
 	corpseidaccess = "Captain"
-
-
-/////////////////Cultist//////////////////////
-
-/obj/effect/landmark/corpse/cultist
-	name = "Blood Cultist"
-	faction = "cult"
-	corpseuniform = /obj/item/clothing/under/utility/grey
-	corpsesuit = /obj/item/clothing/suit/cultrobes
-	corpseshoes = /obj/item/clothing/shoes/cult
-	corpsehelmet = /obj/item/clothing/head/culthood
-	corpseback = /obj/item/weapon/storage/backpack/cultpack
