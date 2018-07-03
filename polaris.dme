@@ -1265,8 +1265,6 @@
 #include "code\modules\alarm\motion_alarm.dm"
 #include "code\modules\alarm\power_alarm.dm"
 #include "code\modules\artifice\deadringer.dm"
-#include "code\modules\artifice\stopwatch.dm"
-#include "code\modules\artifice\timestop_field.dm"
 #include "code\modules\assembly\assembly.dm"
 #include "code\modules\assembly\helpers.dm"
 #include "code\modules\assembly\holder.dm"
