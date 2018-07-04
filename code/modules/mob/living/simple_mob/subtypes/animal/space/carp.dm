@@ -55,7 +55,7 @@
 
 	maxHealth = 50
 	health = 50
-	movement_cooldown = 10 // Slower than the younger carp.
+	movement_cooldown = 5 // Slower than the younger carp.
 	mob_size = MOB_LARGE
 
 	pixel_x = -16
@@ -74,6 +74,7 @@
 
 	maxHealth = 230
 	health = 230
+	movement_cooldown = 10
 
 	melee_damage_lower = 15 // About 20 DPS.
 	melee_damage_upper = 25
