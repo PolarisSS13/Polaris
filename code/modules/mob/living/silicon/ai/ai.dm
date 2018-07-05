@@ -112,15 +112,16 @@ var/list/ai_verbs_default = list(
 				possibleNames -= pickedName
 				pickedName = null
 
-	aiPDA = new/obj/item/device/pda/ai(src)
+	if(!is_dummy)
+		aiPDA = new/obj/item/device/pda/ai(src)
 	SetName(pickedName)
 	anchored = 1
 	canmove = 0
 	density = 1
 	loc = loc
-
-	aiCommunicator = new /obj/item/device/communicator/integrated(src)
-
+	
+	if(!is_dummy)
+		aiCommunicator = new /obj/item/device/communicator/integrated(src)
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 
@@ -793,6 +794,9 @@ var/list/ai_verbs_default = list(
 	return TRUE
 
 //Special subtype kept around for global announcements
+/mob/living/silicon/ai/announcer/
+	is_dummy = 1
+	
 /mob/living/silicon/ai/announcer/initialize()
 	. = ..()
 	mob_list -= src
