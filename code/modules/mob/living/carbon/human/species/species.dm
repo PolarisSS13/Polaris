@@ -141,6 +141,7 @@
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE		// High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE			// Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE			// Dangerously low pressure.
+	var/safe_pressure = ONE_ATMOSPHERE
 	var/light_dam											// If set, mob will be damaged in light over this value and heal in light below its negative.
 	var/minimum_breath_pressure = 16						// Minimum required pressure for breath, in kPa
 

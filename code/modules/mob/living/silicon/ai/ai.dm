@@ -119,7 +119,7 @@ var/list/ai_verbs_default = list(
 	canmove = 0
 	density = 1
 	loc = loc
-	
+
 	if(!is_dummy)
 		aiCommunicator = new /obj/item/device/communicator/integrated(src)
 
@@ -161,6 +161,7 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_SIGN, 1)
 	add_language(LANGUAGE_ROOTLOCAL, 1)
 	add_language(LANGUAGE_TERMINUS, 1)
+	add_language(LANGUAGE_ZADDAT, 1)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -796,7 +797,7 @@ var/list/ai_verbs_default = list(
 //Special subtype kept around for global announcements
 /mob/living/silicon/ai/announcer/
 	is_dummy = 1
-	
+
 /mob/living/silicon/ai/announcer/initialize()
 	. = ..()
 	mob_list -= src

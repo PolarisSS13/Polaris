@@ -1,4 +1,19 @@
 // Alien clothing.
+
+/datum/gear/suit/shroud
+	display_name = "Shroud Selection (Zaddat)"
+	path =/obj/item/clothing/suit/space/void/zaddat
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_ZADDAT
+
+/datum/gear/suit/shroud/New()
+	..()
+	var/list/shrouds = list()
+	for(var/thisshroud in (typesof(/obj/item/clothing/suit/space/void/zaddat)))
+		var/obj/item/clothing/suit/space/void/zaddat/shroud_type = thisshroud
+		shrouds[initial(shroud_type.name)] = shroud_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shrouds))
+
 /datum/gear/suit/zhan_furs
 	display_name = "Zhan-Khazan furs (Tajaran)"
 	path = /obj/item/clothing/suit/tajaran/furs

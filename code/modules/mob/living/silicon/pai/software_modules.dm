@@ -480,6 +480,7 @@
 			user.add_language(LANGUAGE_SIIK)
 			user.add_language(LANGUAGE_AKHANI)
 			user.add_language(LANGUAGE_SKRELLIAN)
+			user.add_language(LANGUAGE_ZADDAT)
 			user.add_language(LANGUAGE_SCHECHI)
 		else
 			user.remove_language(LANGUAGE_UNATHI)
