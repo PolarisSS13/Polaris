@@ -31,6 +31,10 @@ var/list/organ_cache = list()
 	var/rejecting                     // Is this organ already being rejected?
 	var/preserved = 0                 // If this is 1, prevents organ decay.
 
+	// Language vars. Putting them here in case we decide to do something crazy with sign-or-other-nonverbal languages.
+	var/list/will_assist_languages = list()
+	var/list/datum/language/assists_languages = list()
+
 /obj/item/organ/Destroy()
 
 	if(owner)           owner = null
@@ -47,6 +51,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/New(var/mob/living/carbon/holder, var/internal)
 	..(holder)
+	amend_organ_data(holder)
 	create_reagents(5)
 	if(!max_damage)
 		max_damage = min_broken_damage * 2
@@ -75,6 +80,9 @@ var/list/organ_cache = list()
 			holder.internal_organs |= src
 	else
 		species = all_species["Human"]
+
+// Used to add datums to an organ, rather than adding multiple organs to do the same thing. Used by voiceboxes.
+/obj/item/organ/proc/amend_organ_data()
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	if(new_dna)
