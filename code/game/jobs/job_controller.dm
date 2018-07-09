@@ -382,11 +382,6 @@ var/global/datum/controller/occupations/job_master
 							I.implant_loadout(H)
 							continue
 
-						if(G.slot == "organ")
-							if(istype(G.path, /obj/item/organ))
-								var/obj/item/organ/O = new G.path(H, 1)
-								H.internal_organs_by_name[O.organ_tag] = O
-
 						if(G.slot && !(G.slot in custom_equip_slots))
 							// This is a miserable way to fix the loadout overwrite bug, but the alternative requires
 							// adding an arg to a bunch of different procs. Will look into it after this merge. ~ Z

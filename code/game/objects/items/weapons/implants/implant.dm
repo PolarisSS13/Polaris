@@ -21,12 +21,6 @@
 /obj/item/weapon/implant/proc/activate()
 	return
 
-	// What does the implant do upon injection?
-	// return 0 if the implant fails (ex. Revhead and loyalty implant.)
-	// return 1 if the implant succeeds (ex. Nonrevhead and loyalty implant.)
-///obj/item/weapon/implant/proc/can_implant(var/mob/source)
-//	return 1
-
 // Moves the implant where it needs to go, and tells it if there's more to be done in post_implant
 /obj/item/weapon/implant/proc/handle_implant(var/mob/source, var/target_zone = BP_TORSO)
 	. = TRUE

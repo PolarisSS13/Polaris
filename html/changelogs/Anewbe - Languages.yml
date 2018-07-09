@@ -33,8 +33,8 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - bugfix: "Siik'Alai has been renamed to Alai, so the game actually adds it properly."
-  - tweak: "Siik'Alai can only be `spoken` by Taj and Teshari."
-  - tweak: "Certain languages now require assistance to speak, but not understand, much like EAL."
-  - tweak: "Replaces the EAL implant with an EAL voicebox organ, which can be repaired, transplanted, etc."
-  - rescadd: "Adds a voicebox for Common Skrellian."
+  - tweak: "Certain languages now require assistance for a species to speak, but not understand, much like EAL."
+  - tweak: "Alai can only be `spoken` by Taj and Teshari."
+  - rscadd: "Adds a voicebox/larynx organ. Its only purpose at the moment is to assist in speaking certain langauges."
+  - tweak: "Language implants, like the EAL implant, now affect the voicebox organ, instead of being a freefloating implant."
+  - rscadd: "Adds a language implant for Common Skrellian."

@@ -240,12 +240,6 @@
 			inherent_verbs = list()
 		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
 
-	// If your species came up with the language you probably don't need an assist
-	if(LAZYLEN(assisted_langs))
-		assisted_langs -= default_language
-		assisted_langs -= language
-		assisted_langs -= species_language
-
 /datum/species/proc/sanitize_name(var/name, var/robot = 0)
 	return sanitizeName(name, MAX_NAME_LEN, robot)
 

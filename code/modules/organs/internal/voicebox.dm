@@ -5,8 +5,8 @@
  */
 
 /obj/item/organ/internal/voicebox
-	name = "vocal chords"
-	icon_state = "layrnx"
+	name = "larynx"
+	icon_state = "larynx"
 	parent_organ = BP_TORSO		// We don't have a neck area
 	organ_tag = O_VOICE
 	will_assist_languages = list(LANGUAGE_GALCOM)
