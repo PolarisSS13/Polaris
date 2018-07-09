@@ -167,14 +167,14 @@ var/list/datum/ai_icon/ai_icons
 	alive_icon = "ai-hades"
 	dead_icon = "ai-hades-crash"
 
-/datum/ai_icon/triumvirate_static
+/datum/ai_icon/triumvirate
 	name = "Triumvirate"
 	alive_icon = "ai-triumvirate"
 	alive_light = "#020B2B"
 
 /datum/ai_icon/triumvirate_static
 	name = "Triumvirate Static"
-	alive_icon = "ai-static"
+	alive_icon = "ai-triumvirate-malf"
 	alive_light = "#020B2B"
 
 //Eros Research Platform Ports
