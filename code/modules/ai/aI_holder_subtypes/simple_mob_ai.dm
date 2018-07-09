@@ -6,11 +6,12 @@
 	returns_home = FALSE
 	can_flee = FALSE
 	speak_chance = 1 // If the mob's saylist is empty, nothing will happen.
+	wander = TRUE
+	base_wander_delay = 4
 
 // For animals.
 /datum/ai_holder/simple_mob/passive
 	hostile = FALSE
-	wander = TRUE
 	can_flee = TRUE
 
 // Ranged mobs.
