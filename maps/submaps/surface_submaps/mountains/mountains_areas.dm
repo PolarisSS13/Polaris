@@ -92,6 +92,3 @@
 
 /area/submap/deadspy
 	name = "Dead Spy"
-
-/area/submap/bloodchariot
-	name = "Crashed Blood Chariot"
