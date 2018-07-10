@@ -17,7 +17,7 @@
 "q" = (/obj/effect/decal/remains/xeno,/obj/item/clothing/mask/gas,/obj/item/clothing/suit/fire/firefighter,/turf/template_noop,/area/submap/deadspy)
 "r" = (/turf/template_noop,/area/submap/deadspy)
 "s" = (/obj/effect/decal/remains/human,/obj/item/weapon/wrench,/obj/item/clothing/head/hardhat,/turf/template_noop,/area/submap/deadspy)
-"t" = (/obj/machinery/porta_turret/ai_defense{active_power_usage = 0; desc = "Looking at this heavy caliber, tripod-mounted, little ol' number makes you want to square-dance."; emagged = 1; name = "sentry turret"; use_power = 0},/turf/template_noop,/area/submap/deadspy)
+"t" = (/obj/machinery/porta_turret/poi{desc = "Looking at this heavy caliber, tripod-mounted, little ol' number makes you want to square-dance."; lethal = 0; name = "sentry turret"},/turf/template_noop,/area/submap/deadspy)
 "u" = (/obj/item/weapon/card/emag_broken,/turf/template_noop,/area/submap/deadspy)
 
 (1,1,1) = {"
