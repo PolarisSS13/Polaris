@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/automatic //This should never be spawned in, it is just here because of code necessities. 
+/obj/item/weapon/gun/projectile/automatic //This should never be spawned in, it is just here because of code necessities.
 	name = "daka SMG"
 	desc = "A small SMG. You really shouldn't be able to get this gun. Uses 9mm rounds."
 	icon_state = "c05r"	//Used because it's not used anywhere else
@@ -24,7 +24,7 @@
 	caliber = "9mm"
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BELT
-	magazine_type = /obj/item/ammo_magazine/m9mmR/saber/ap
+	magazine_type = /obj/item/ammo_magazine/m9mmR/saber
 	allowed_magazines = list(/obj/item/ammo_magazine/m9mmR/saber, /obj/item/ammo_magazine/m9mmR/saber/ap)
 	projectile_type = /obj/item/projectile/bullet/pistol
 	multi_aim = 1
