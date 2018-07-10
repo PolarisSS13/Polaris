@@ -20,6 +20,7 @@
 
 /obj/item/weapon/deadringer/Destroy() //just in case some smartass tries to stay invisible by destroying the watch
 	uncloak()
+	processing_objects -= src
 	..()
 
 
@@ -45,7 +46,7 @@
 			to_chat(H,"<font color='blue'>You press a small button on [src]'s side. It buzzes a little.</font>")
 			return
 	if(activated)
-		to_chat(H,"<font color='blue'>You press a small button on [src]'s side. It stopped humming.</font>")
+		to_chat(H,"<font color='blue'>You press a small button on [src]'s side. It stops humming.</font>")
 		activated = 0
 		return
 
