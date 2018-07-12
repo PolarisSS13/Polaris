@@ -55,7 +55,7 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	to_chat(user, "<span class='notice'>You inject [M] with \the [src].</span>")
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
-	
+
 	playsound(src, 'sound/effects/hypospray.ogg',25)
 
 	if(M.reagents)
@@ -174,3 +174,8 @@
 	name = "bone repair injector"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity. This one excels at treating damage to bones."
 	filled_reagents = list("inaprovaline" = 5, "osteodaxon" = 10)
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/zadsnack
+	name = "\improper Zaddat nutrient hypo"
+	desc = "Zaddat entering a new environment or working among aliens rely on these hypos to stay fed."
+	filled_reagents =list("glucose" = 15)

@@ -584,8 +584,8 @@ var/global/list/robot_modules = list(
 					LANGUAGE_SCHECHI	= 1,
 					LANGUAGE_EAL		= 1,
 					LANGUAGE_TERMINUS	= 1,
-					LANGUAGE_SIGN		= 0
-					LANGUAGE_ZADDAT		= 1)
+					LANGUAGE_SIGN		= 0,
+					LANGUAGE_ZADDAT		= 1,
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/butler

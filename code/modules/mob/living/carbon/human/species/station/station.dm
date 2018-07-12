@@ -370,9 +370,9 @@
 	if(H.wear_mask && !istype(H.wear_mask, /obj/item/clothing/mask/gas/zaddat))
 		H.drop_from_inventory(H.wear_mask)
 
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vanax(H), slot_wear_mask) // mask has to come first or livesuit helmet will get in the way
-	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/vanax/(H), slot_wear_suit)
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vanax(H), slot_wear_mask)
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask) // mask has to come first or livesuit helmet will get in the way
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask)
 
 /datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
 	var/damageable = H.get_damageable_organs()
