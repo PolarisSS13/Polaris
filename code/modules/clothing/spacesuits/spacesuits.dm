@@ -67,6 +67,7 @@
 	species_restricted = list("exclude",SPECIES_DIONA)
 	preserve_item = 1
 	phoronproof = 1
+	valid_accessory_slots = (ACCESSORY_SLOT_OVER | ACCESSORY_SLOT_ARMBAND | ACCESSORY_SLOT_DECOR)
 
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
 

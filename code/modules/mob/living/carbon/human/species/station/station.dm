@@ -365,14 +365,15 @@
 
 /datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
-	if(H.wear_suit && !istype(H.wear_suit, /obj/item/clothing/suit/space/void/zaddat)) //get rid of job labcoats so they don't stop us from equipping the livesuit
+	if(H.wear_suit && !istype(H.wear_suit, /obj/item/clothing/suit/space/void/zaddat)) //get rid of job labcoats so they don't stop us from equipping the Shroud
 		H.drop_from_inventory(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
 	if(H.wear_mask && !istype(H.wear_mask, /obj/item/clothing/mask/gas/zaddat))
 		H.drop_from_inventory(H.wear_mask)
+	if(H.head && !istype(H.head, /obj/item/clothing/head/helmet/space/void/zaddat))
+		H.drop_from_inventory(H.head)
 
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask) // mask has to come first or livesuit helmet will get in the way
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask) // mask has to come first or Shroud helmet will get in the way
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask)
 
 /datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
 	var/damageable = H.get_damageable_organs()
