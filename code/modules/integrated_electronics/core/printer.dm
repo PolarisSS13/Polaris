@@ -171,7 +171,7 @@
 		else
 			var/obj/item/I = build_type
 			cost = initial(I.w_class)
-		if(!(locate(build_type) in recipe_list[current_category])
+		if(!(locate(build_type) in recipe_list[current_category]))
 			return
 
 		if(metal - cost < 0)
