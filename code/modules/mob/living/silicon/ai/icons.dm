@@ -190,7 +190,7 @@ var/list/datum/ai_icon/ai_icons
 	dead_icon = "ai-boxfort_dead"
 
 /datum/ai_icon/ravensdale
-	name = "Ravensdale"
+	name = "Integration"
 	alive_icon = "ai-ravensdale"
 	dead_icon = "ai-ravensdale-crash"
 
@@ -200,7 +200,7 @@ var/list/datum/ai_icon/ai_icons
 	dead_icon = "ai-gentoo_dead"
 
 /datum/ai_icon/serithi
-	name = "Serithi"
+	name = "Mechanicus"
 	alive_icon = "ai-serithi"
 	dead_icon = "ai-serithi-crash"
 
