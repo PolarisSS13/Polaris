@@ -80,14 +80,13 @@
 
 	// Synthetics don't have actual records, so we will pull them from here.
 	for(var/mob/living/silicon/ai/ai in mob_list)
-		bot[ai.name] = "Artificial Intelligence"
+		if(!ai.control_disabled)
+			bot[ai.name] = "Artificial Intelligence"
 
 	for(var/mob/living/silicon/robot/robot in mob_list)
 		// No combat/syndicate cyborgs, no drones.
-		if(robot.module && robot.module.hide_on_manifest)
-			continue
-
-		bot[robot.name] = "[robot.modtype] [robot.braintype]"
+		if(!robot.scrambledcodes && !(robot.module && robot.module.hide_on_manifest))
+			bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
 
 	if(heads.len > 0)
