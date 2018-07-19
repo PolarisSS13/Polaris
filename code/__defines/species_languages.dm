@@ -50,7 +50,7 @@
 #define LANGUAGE_MINBUS "Minbus"
 #define LANGUAGE_EVENT1 "Occursus"
 #define LANGUAGE_AKHANI "Akhani"
-#define LANGUAGE_SIIK_ALAI "Siik'alai"
+#define LANGUAGE_ALAI "Alai"
 #define LANGUAGE_ZADDAT "Vedahq"
 
 // Language flags.
