@@ -317,6 +317,7 @@
 	taste_sensitivity = TASTE_SENSITIVE
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_ZADDAT, LANGUAGE_UNATHI)
+	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX, LANGUAGE_SOL_COMMON, LANGUAGE_AKHANI, LANGUAGE_SIIK, LANGUAGE_GUTTER) //has trouble talking low
 	name_language = LANGUAGE_ZADDAT
 	species_language = LANGUAGE_ZADDAT
 	health_hud_intensity = 2.5
@@ -324,7 +325,7 @@
 	min_age = 16
 	max_age = 90
 
-	blurb = "The Zaddat are an Unathi client race only recently introduced to SolGov space. Having evolved on the high-pressure and post-apocalyptic world of Xohok, Vanax require an environmental suit called a Shroud to survive in usual planetary and station atmospheres. Despite these restrictions, worsening conditions on Xohok and the blessing of the Moghes Hegemony have lead the Vanax to enter human space in search of work and living space."
+	blurb = "The Zaddat are an Unathi client race only recently introduced to SolGov space. Having evolved on the high-pressure and post-apocalyptic world of Xohok, Zaddat require an environmental suit called a Shroud to survive in usual planetary and station atmospheres. Despite these restrictions, worsening conditions on Xohok and the blessing of the Moghes Hegemony have lead the Zaddat to enter human space in search of work and living space."
 
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE + 500  // Dangerously high pressure.
 	warning_high_pressure = WARNING_HIGH_PRESSURE + 500 // High pressure warning.
