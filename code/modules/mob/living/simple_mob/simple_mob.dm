@@ -17,6 +17,8 @@
 	//Settings for played mobs
 	var/show_stat_health = 1		// Does the percentage health show in the stat panel for the mob
 	var/has_hands = 0				// Set to 1 to enable the use of hands and the hands hud
+	var/humanoid_hands = 0			// Can a player in this mob use things like guns or AI cards?
+	var/hand_form = "hands"			// Used in IsHumanoidToolUser. 'Your X are not fit-'.
 	var/list/hud_gears				// Slots to show on the hud (typically none)
 	var/ui_icons					// Icon file path to use for the HUD, otherwise generic icons are used
 	var/r_hand_sprite				// If they have hands,
@@ -84,7 +86,6 @@
 	var/reload_count = 0								// A counter to keep track of how many shots the mob has fired so far. Reloads when it hits reload_max.
 	var/reload_time = 1 SECONDS							// How long it takes for a mob to reload. This is to buy a player a bit of time to run or fight.
 	var/reload_sound = 'sound/weapons/flipblade.ogg'	// What sound gets played when the mob successfully reloads. Defaults to the same sound as reloading guns. Can be null.
-
 
 	//Mob melee settings
 	var/melee_damage_lower = 2		// Lower bound of randomized melee damage
@@ -236,10 +237,6 @@
 /mob/living/simple_mob/get_speech_ending(verb, var/ending)
 	return verb
 
-
-/mob/living/simple_mob/put_in_hands(var/obj/item/W) // No hands.
-	W.forceMove(get_turf(src))
-	return 1
 
 // Harvest an animal's delicious byproducts
 /mob/living/simple_mob/proc/harvest(var/mob/user)

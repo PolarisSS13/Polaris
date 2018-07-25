@@ -10,9 +10,12 @@
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	return
 
-/mob/living/simple_mob/put_in_active_hand(var/obj/item/I)
-	if(!has_hands || !istype(I))
-		return
+/mob/living/simple_mob/put_in_hands(var/obj/item/W) // No hands.
+	if(has_hands)
+		put_in_active_hand(W)
+		return 1
+	W.forceMove(get_turf(src))
+	return 1
 
 //Puts the item into our active hand if possible. returns 1 on success.
 /mob/living/simple_mob/put_in_active_hand(var/obj/item/W)
@@ -121,3 +124,20 @@
 //If they can or cannot use tools/machines/etc
 /mob/living/simple_mob/IsAdvancedToolUser()
 	return has_hands
+
+/mob/living/simple_mob/proc/IsHumanoidToolUser(var/atom/tool)
+	if(!humanoid_hands)
+		var/display_name = null
+		if(tool)
+			display_name = tool
+		else
+			display_name = "object"
+		to_chat(src, "<span class='danger'>Your [hand_form] are not fit for use of \the [display_name].</span>")
+	return humanoid_hands
+
+/mob/living/simple_mob/drop_from_inventory(var/obj/item/W, var/atom/target = null)
+	. = ..(W, target)
+	if(!target)
+		target = src.loc
+	if(.)
+		W.forceMove(src.loc)

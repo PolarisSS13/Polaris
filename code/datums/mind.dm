@@ -535,21 +535,22 @@
 	. = ..()
 	mind.assigned_role = "Corgi"
 
-/mob/living/simple_animal/shade/mind_initialize()
+/mob/living/simple_mob/construct/shade/mind_initialize()
 	. = ..()
 	mind.assigned_role = "Shade"
+	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/builder/mind_initialize()
+/mob/living/simple_mob/construct/artificer/mind_initialize()
 	. = ..()
 	mind.assigned_role = "Artificer"
 	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/wraith/mind_initialize()
+/mob/living/simple_mob/construct/wraith/mind_initialize()
 	. = ..()
 	mind.assigned_role = "Wraith"
 	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/armoured/mind_initialize()
+/mob/living/simple_mob/construct/juggernaut/mind_initialize()
 	. = ..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
