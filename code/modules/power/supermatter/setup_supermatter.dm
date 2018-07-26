@@ -281,7 +281,7 @@ GLOBAL_LIST_BOILERPLATE(all_engine_setup_markers, /obj/effect/engine_setup)
 			break
 
 	if(!found)
-		log_and_message_admins("## WARNING: Unable to locate omni filter at [x] [y] [z]!")
+		log_and_message_admins("## WARNING: Unable to locate button at [x] [y] [z]!")
 		return SETUP_WARNING
 
 	found.trigger()
