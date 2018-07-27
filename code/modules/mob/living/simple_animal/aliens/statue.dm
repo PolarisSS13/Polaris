@@ -429,9 +429,3 @@
 				visible_message("<span class='warning'>The slab suddenly takes the shape of a humanoid!</span>")
 				S.creator = user
 				qdel(src)
-
-
-
-/mob/living/simple_animal/hostile/statue/cult
-	faction = "cult" //that doesn't prevent it from quantum-locking from cultsts, but at least it's not attacking them
-	banishable = 1 //BEGONE
