@@ -18,8 +18,6 @@
 	var/icon_scale = 1 // Used to scale icons up or down in update_transform().
 	var/old_x = 0
 	var/old_y = 0
-	var/suspended = 0 //Timestop toggle
-	var/temporal_delay = 0 //Timestop freeze
 
 /atom/movable/Destroy()
 	. = ..()
@@ -161,8 +159,6 @@
 
 
 		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
-			while(suspended)
-				sleep(1)
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dy)
@@ -193,8 +189,6 @@
 		var/error = dist_y/2 - dist_x
 		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
-			while(suspended)
-				sleep(1)
 			if(error < 0)
 				var/atom/step = get_step(src, dx)
 				if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
