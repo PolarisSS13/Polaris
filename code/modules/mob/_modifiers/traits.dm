@@ -59,6 +59,14 @@
 
 	metabolism_percent = 0.5
 	incoming_healing_percent = 0.6
+	
+/datum/modifier/trait/high_alcohol_tolerance
+	name = "High Alcohol Tolerance"
+	desc = "Alcohol affects you 20% less."
+
+/datum/modifier/trait/low_alcohol_tolerance
+	name = "Low Alcohol Tolerance"
+	desc = "Alcohol affects you 20% more."
 
 /datum/modifier/trait/larger
 	name = "Larger"
