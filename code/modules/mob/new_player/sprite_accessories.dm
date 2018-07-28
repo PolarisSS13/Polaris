@@ -76,6 +76,11 @@
 		icon_state = "hair_twintail"
 		flags = HAIR_TIEABLE
 
+	belenko
+		name = "Belenko"
+		icon_state = "hair_belenko"
+	flags = HAIR_TIEABLE
+
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
