@@ -140,6 +140,8 @@
 		strength_mod = 0
 	if(alien == IS_SLIME)
 		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
+	for(var/datum/modifier/mod in M.modifiers)
+		mod.strength_mod *= mod.alcohol_effect
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 
