@@ -45,6 +45,7 @@
 	var/icon_scale_percent				// Makes the holder's icon get scaled up or down.
 	var/attack_speed_percent			// Makes the holder's 'attack speed' (click delay) shorter or longer.
 	var/pain_immunity					// Makes the holder not care about pain while this is on. Only really useful to human mobs.
+	var/alcohol_effect = 1				// Affects strength of alcohol.
 
 /datum/modifier/New(var/new_holder, var/new_origin)
 	holder = new_holder
@@ -228,6 +229,10 @@
 
 	if(!isnull(attack_speed_percent))
 		effects += "The delay between attacking is [multipler_to_percentage(attack_speed_percent, TRUE)] [disable_duration_percent > 1.0 ? "longer" : "shorter"]."
+
+	if(!isnull(alcohol_effect))
+		effects += "The effect of alcohol on you is [alcohol_effect > 1.0 ? "stronger" : "weaker"], \
+		which causes you to feel the effects of alcohol [multipler_to_percentage(alcohol_effect, TRUE)] [alcohol_effect > 1.0 ? "more" : "less"]."
 
 	return jointext(effects, "<br>")
 

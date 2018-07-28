@@ -245,6 +245,11 @@
 		icon_state = "hair_beehive2"
 		flags = HAIR_TIEABLE
 
+	belenko
+		name = "Belenko"
+		icon_state = "hair_belenko"
+		flags = HAIR_TIEABLE
+
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
