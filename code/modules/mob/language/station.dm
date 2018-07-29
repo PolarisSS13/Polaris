@@ -128,16 +128,15 @@
 	exclaim_verb = "sings"
 	whisper_verb = "hums"
 	colour = "skrellfar"
-@@ -131,10 +131,14 @@
  	key = "p"
  	space_chance = 30
  	flags = WHITELISTED
  	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix", "...", "oo", "q", "nq", "x", "xq", "ll", "...", "...", "...") //should sound like there's holes in it
  
-+/datum/language/skrell/get_random_name(var/gender)
-+    var/list/first_names = file2list('config/names/first_name_skrell.txt')
-+    var/list/last_names = file2list('config/names/last_name_skrell.txt')
-+    return "[pick(first_names)] [pick(last_names)]"
+/datum/language/skrell/get_random_name(var/gender)
+    var/list/first_names = file2list('config/names/first_name_skrell.txt')
+    var/list/last_names = file2list('config/names/last_name_skrell.txt')
+    return "[pick(first_names)] [pick(last_names)]"
  
  /datum/language/human
  	name = LANGUAGE_SOL_COMMON
