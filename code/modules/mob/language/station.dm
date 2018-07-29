@@ -139,8 +139,8 @@
     return "[pick(first_names)] [pick(last_names)]"
  
 /datum/language/human
- 	name = LANGUAGE_SOL_COMMON
- 	desc = "A bastardized hybrid of many languages, including Chinese, English, French, and more; it is the common language of the Sol system."
+	name = LANGUAGE_SOL_COMMON
+	desc = "A bastardized hybrid of many languages, including Chinese, English, French, and more; it is the common language of the Sol system."
  	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
