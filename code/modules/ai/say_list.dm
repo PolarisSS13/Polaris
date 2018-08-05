@@ -111,3 +111,6 @@
 	say_cannot = list("Denied.", "Negative.")
 	say_maybe_target = list("Possible threat detected.  Investigating.", "Motion detected.", "Investigating.")
 	say_got_target = list("Threat detected.", "New task: Remove threat.", "Threat removal engaged.", "Engaging target.")
+
+/datum/say_list/lizard
+	emote_hear = list("hisses")
