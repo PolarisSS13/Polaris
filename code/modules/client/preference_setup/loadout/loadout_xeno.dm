@@ -162,12 +162,16 @@
 		cohesionsuits[initial(cohesion_type.name)] = cohesion_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cohesionsuits))
 
-/datum/gear/uniform/undercoat/ce
+/datum/gear/uniform/dept
+	whitelisted = SPECIES_TESHARI
+	sort_category = "Xenowear"
+	
+/datum/gear/uniform/dept/undercoat/ce
 	display_name = "Teshari Chief Engineer Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/ce
 	allowed_roles = list("Chief Engineer")
 
-/datum/gear/uniform/undercoat/ce_w
+/datum/gear/uniform/dept/undercoat/ce_w
 	display_name = "Teshari Chief Engineer Undercoat (White)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/ce_w
 	allowed_roles = list("Chief Engineer")
@@ -177,92 +181,96 @@
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/rd
 	allowed_roles = list("Research Director")
 */
-/datum/gear/uniform/undercoat/qm
+/datum/gear/uniform/dept/undercoat/qm
 	display_name = "Teshari Quarter Master Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/qm
 	allowed_roles = list("Quartermaster")
 
-/datum/gear/uniform/undercoat/command
+/datum/gear/uniform/dept/undercoat/command
 	display_name = "Teshari Command Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/command
 	allowed_roles = list("Colony Director","Head of Personnel","Head of Security","Chief Engineer","Chief Medical Officer")
 
-/datum/gear/uniform/undercoat/command_g
+/datum/gear/uniform/dept/undercoat/command_g
 	display_name = "Teshari Command Undercoat (gold buttons)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/command_g
 	allowed_roles = list("Colony Director","Head of Personnel","Head of Security","Chief Engineer","Chief Medical Officer")
 
-/datum/gear/uniform/undercoat/cmo
+/datum/gear/uniform/dept/undercoat/cmo
 	display_name = "Teshari Chief Medical Officer Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/cmo
 	allowed_roles = list("Chief Medical Officer")
 
-/datum/gear/uniform/undercoat/cargo
+/datum/gear/uniform/dept/undercoat/cargo
 	display_name = "Teshari Cargo Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/cargo
 	allowed_roles = list("Cargo Technician","Quartermaster","Shaft Miner")
 
-/datum/gear/uniform/undercoat/mining
+/datum/gear/uniform/dept/undercoat/mining
 	display_name = "Teshari Mining Undercoat"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/mining
 	allowed_roles = list("Quartermaster","Shaft Miner")
 
-/datum/gear/uniform/undercoat/security
+/datum/gear/uniform/dept/undercoat/security
 	display_name = "Teshari Security Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/sec
 	allowed_roles = list("Head of Security","Detective","Warden","Security Officer",)
 
-/datum/gear/uniform/undercoat/service
+/datum/gear/uniform/dept/undercoat/service
 	display_name = "Teshari Service Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/service
 	allowed_roles = list("Head of Personnel","Bartender","Botanist","Janitor","Chef","Librarian")
 
-/datum/gear/uniform/undercoat/engineer
+/datum/gear/uniform/dept/undercoat/engineer
 	display_name = "Teshari Engineer Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/engineer
 	allowed_roles = list("Chief Engineer","Station Engineer")
 
-/datum/gear/uniform/undercoat/atmos
+/datum/gear/uniform/dept/undercoat/atmos
 	display_name = "Teshari Atmos Tech Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/atmos
 	allowed_roles = list("Chief Engineer","Atmospheric Technician")
 
-/datum/gear/uniform/undercoat/research
+/datum/gear/uniform/dept/undercoat/research
 	display_name = "Teshari Science Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/sci
 	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
 
-/datum/gear/uniform/undercoat/robo
+/datum/gear/uniform/dept/undercoat/robo
 	display_name = "Teshari Roboticist Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/robo
 	allowed_roles = list("Roboticist")
 
-/datum/gear/uniform/undercoat/medical
+/datum/gear/uniform/dept/undercoat/medical
 	display_name = "Teshari Medical Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/medical
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
 
-/datum/gear/uniform/undercoat/chemistry
+/datum/gear/uniform/dept/undercoat/chemistry
 	display_name = "Teshari Chemistry Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/chemistry
 	allowed_roles = list("Chemist")
 
-/datum/gear/uniform/undercoat/virology
+/datum/gear/uniform/dept/undercoat/virology
 	display_name = "Teshari Medical Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/viro
 	allowed_roles = list("Medical Doctor")
 
-/datum/gear/uniform/undercoat/paramedic
+/datum/gear/uniform/dept/undercoat/paramedic
 	display_name = "Teshari Paramedic Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/para
 	allowed_roles = list("Paramedic")
 
-/datum/gear/uniform/undercoat/iaa
+/datum/gear/uniform/dept/undercoat/iaa
 	display_name = "Teshari IAA Undercoat"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/iaa
 	allowed_roles = list("Internal Affairs Agent")
 
-/datum/gear/suit/cloak/ce
+/datum/gear/suit/dept/cloak/
+	whitelisted = SPECIES_TESHARI
+	sort_category = "Xenowear"
+	
+/datum/gear/suit/cloak/dept/ce
 	display_name = "Teshari Chief Engineer Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/ce
 	allowed_roles = list("Chief Engineer")
@@ -272,82 +280,83 @@
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/rd
 	allowed_roles = list("Research Director")
 */
-/datum/gear/suit/cloak/qm
+
+/datum/gear/suit/dept/cloak/qm
 	display_name = "Teshari Quarter Master Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/qm
 	allowed_roles = list("Quartermaster")
 
-/datum/gear/suit/cloak/command
+/datum/gear/suit/dept/cloak/command
 	display_name = "Teshari Command Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/command
 	allowed_roles = list("Colony Director","Head of Personnel","Head of Security","Chief Engineer","Chief Medical Officer")
 
-/datum/gear/suit/cloak/cmo
+/datum/gear/suit/dept/cloak/cmo
 	display_name = "Teshari Chief Medical Officer Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/cmo
 	allowed_roles = list("Chief Medical Officer")
 
-/datum/gear/suit/cloak/cargo
+/datum/gear/suit/dept/cloak/cargo
 	display_name = "Teshari Cargo Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/cargo
 	allowed_roles = list("Cargo Technician","Quartermaster","Shaft Miner")
 
-/datum/gear/suit/cloak/mining
+/datum/gear/suit/dept/cloak/mining
 	display_name = "Teshari Mining Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/mining
 	allowed_roles = list("Quartermaster","Shaft Miner")
 
-/datum/gear/suit/cloak/security
+/datum/gear/suit/dept/cloak/security
 	display_name = "Teshari Security Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/sec
 	allowed_roles = list("Head of Security","Detective","Warden","Security Officer",)
 
-/datum/gear/suit/cloak/service
+/datum/gear/suit/dept/cloak/service
 	display_name = "Teshari Service Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/service
 	allowed_roles = list("Head of Personnel","Bartender","Botanist","Janitor","Chef","Librarian")
 
-/datum/gear/suit/cloak/engineer
+/datum/gear/suit/dept/cloak/engineer
 	display_name = "Teshari Engineer Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/eningeer
 	allowed_roles = list("Chief Engineer","Station Engineer")
 
-/datum/gear/suit/cloak/atmos
+/datum/gear/suit/dept/cloak/atmos
 	display_name = "Teshari Atmos Tech Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/atmos
 	allowed_roles = list("Chief Engineer","Atmospheric Technician")
 
-/datum/gear/suit/cloak/research
+/datum/gear/suit/dept/cloak/research
 	display_name = "Teshari Science Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/sci
 	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
 
-/datum/gear/suit/cloak/robo
+/datum/gear/suit/dept/cloak/robo
 	display_name = "Teshari Roboticist Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/robo
 	allowed_roles = list("Roboticist")
 
-/datum/gear/suit/cloak/medical
+/datum/gear/suit/dept/cloak/medical
 	display_name = "Teshari Medical Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/medical
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
 
-/datum/gear/suit/cloak/chemistry
+/datum/gear/suit/dept/cloak/chemistry
 	display_name = "Teshari Chemistry Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/chemistry
 	allowed_roles = list("Chemist")
 
-/datum/gear/suit/cloak/virology
+/datum/gear/suit/dept/cloak/virology
 	display_name = "Teshari Medical Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/viro
 	allowed_roles = list("Medical Doctor")
 
-/datum/gear/suit/cloak/paramedic
+/datum/gear/suit/dept/cloak/paramedic
 	display_name = "Teshari Paramedic Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/para
 	allowed_roles = list("Paramedic")
 
-/datum/gear/suit/cloak/paramedic
+/datum/gear/suit/dept/cloak/iaa
 	display_name = "Teshari IAA Cloak"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/iaa
 	allowed_roles = list("Internal Affairs Agent")
