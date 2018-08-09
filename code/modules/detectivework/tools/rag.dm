@@ -189,7 +189,7 @@
 	update_name()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/glass/rag/proc/extinguish()
+/obj/item/weapon/reagent_containers/glass/rag/extinguish()
 	processing_objects -= src
 	set_light(0)
 	on_fire = 0

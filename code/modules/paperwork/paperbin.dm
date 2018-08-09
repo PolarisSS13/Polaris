@@ -9,6 +9,8 @@
 	item_state = "sheet-metal"
 	throwforce = 1
 	w_class = ITEMSIZE_NORMAL
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	throw_speed = 3
 	throw_range = 7
 	pressure_resistance = 10

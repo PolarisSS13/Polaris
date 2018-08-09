@@ -236,6 +236,8 @@ Protectiveness | Armor %
 /obj/item/clothing/head/helmet/bucket/wood
 	name = "wooden bucket"
 	icon_state = "woodbucket"
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 
 /obj/item/clothing/head/helmet/bucket/attackby(var/obj/O, mob/user)
 	if(istype(O, /obj/item/stack/material))

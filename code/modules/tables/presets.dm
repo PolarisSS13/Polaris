@@ -51,6 +51,8 @@
 	..()
 
 /obj/structure/table/woodentable
+	burn_state = 0 //Burnable
+	burntime = MEDIUM_BURN
 	icon_state = "plain_preview"
 	color = "#824B28"
 
@@ -60,6 +62,8 @@
 
 /obj/structure/table/gamblingtable
 	icon_state = "gamble_preview"
+	burn_state = 0 //Burnable
+	burntime = MEDIUM_BURN
 
 /obj/structure/table/gamblingtable/New()
 	material = get_material_by_name("wood")

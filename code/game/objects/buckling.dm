@@ -25,6 +25,13 @@
 			if(user_unbuckle_mob(buckled_mobs[1], user))
 				return TRUE
 
+/obj/buckle_mob(mob/living/M)
+	. = ..()
+	if(.)
+		if(burn_state == 1) //Sets the mob on fire if you buckle them to a burning atom/movableect
+			M.adjust_fire_stacks(1)
+			M.IgniteMob()
+
 /obj/proc/attack_alien(mob/user as mob) //For calling in the event of Xenomorph or other alien checks.
 	return
 

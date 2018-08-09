@@ -1,5 +1,7 @@
 /obj/structure/flora
 	layer = 3.3
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 
 
 

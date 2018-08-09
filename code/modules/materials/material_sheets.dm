@@ -135,6 +135,8 @@
 	icon_state = "sheet-plastic"
 	default_type = "plastic"
 	no_variants = FALSE
+	burn_state = 0 //Burnable
+	burntime = 5
 
 /obj/item/stack/material/gold
 	name = "gold"
@@ -209,6 +211,8 @@
 	name = "wooden plank"
 	icon_state = "sheet-wood"
 	default_type = MAT_WOOD
+	burn_state = 0 //Burnable
+	burntime = MEDIUM_BURN
 
 /obj/item/stack/material/wood/sif
 	name = "alien wooden plank"
@@ -220,6 +224,8 @@
 	icon_state = "sheet-log"
 	default_type = MAT_LOG
 	no_variants = FALSE
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 	color = "#824B28"
 	max_amount = 25
 	w_class = ITEMSIZE_HUGE
@@ -285,6 +291,8 @@
 	icon_state = "sheet-leather"
 	default_type = "leather"
 	no_variants = FALSE
+	burn_state = 0 //Burnable
+	burntime = 5
 
 /obj/item/stack/material/glass
 	name = "glass"

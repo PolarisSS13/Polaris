@@ -4,6 +4,8 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "drawer"
 	density = 1
+	burn_state = 0 //Burnable
+	burntime = MEDIUM_BURN
 
 /obj/structure/undies_wardrobe/attack_hand(var/mob/user)
 	if(!human_who_can_use_underwear(user))

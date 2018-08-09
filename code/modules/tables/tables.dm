@@ -9,6 +9,8 @@
 	layer = 2.8
 	throwpass = 1
 	surgery_odds = 66
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 	var/flipped = 0
 	var/maxhealth = 10
 	var/health = 10

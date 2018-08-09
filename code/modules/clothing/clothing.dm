@@ -3,7 +3,8 @@
 	siemens_coefficient = 0.9
 	var/list/species_restricted = null //Only these species can wear this kit.
 	var/gunshot_residue //Used by forensics.
-
+	burn_state = 0 //Burnable
+	burntime = 8
 	var/list/accessories = list()
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots

@@ -4,6 +4,8 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "densecrate"
 	density = 1
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 
 /obj/structure/largecrate/initialize()
 	. = ..()

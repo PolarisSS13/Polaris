@@ -3,6 +3,8 @@
 	name = "large parcel"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycloset"
+	burn_state = 0 //Burnable
+	burntime = MEDIUM_BURN
 	var/obj/wrapped = null
 	density = 1
 	var/sortTag = null
@@ -111,6 +113,8 @@
 	name = "small parcel"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycrate3"
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	var/obj/item/wrapped = null
 	var/sortTag = null
 	var/examtext = null
@@ -215,6 +219,8 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "deliveryPaper"
 	w_class = ITEMSIZE_NORMAL
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	var/amount = 25.0
 
 

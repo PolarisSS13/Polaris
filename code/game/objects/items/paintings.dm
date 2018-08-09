@@ -40,6 +40,8 @@ var/list/available_paintings = list(
 	icon_state = "item"
 	item_state = "painting"
 	anchored = 1
+	burn_state = 0 //Buuuurn baby burn. Disco inferno!
+	burntime = SHORT_BURN
 //	flags = FPRINT
 //	w_type = RECYK_WOOD
 //	frame_material = /obj/item/stack/sheet/wood
@@ -49,8 +51,7 @@ var/list/available_paintings = list(
 
 /obj/structure/painting/New()
 	..()
-	pixel_x = rand(-6,6) * PIXEL_MULTIPLIER
-	pixel_y = rand(-6,6) * PIXEL_MULTIPLIER
+	pixel_y = 32
 
 	update_painting()
 

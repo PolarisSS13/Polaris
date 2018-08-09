@@ -390,3 +390,6 @@
 	if(isnull(caught) || !istype(caught) || QDELETED(caught))
 		return // Only bother with types we can identify and that don't belong
 	catchException("Type [caught.type] does not belong in process' queue")
+
+/datum/controller/process/proc/getStatName()
+	return name

@@ -7,6 +7,8 @@
 	name = "ore box"
 	desc = "A heavy box used for storing ore."
 	density = 1
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 	var/last_update = 0
 	var/list/stored_ore = list()
 

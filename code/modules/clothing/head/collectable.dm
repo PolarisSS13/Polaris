@@ -36,6 +36,8 @@
 	name = "collectable paper hat"
 	desc = "What looks like an ordinary paper hat, is actually a rare and valuable collector's edition paper hat. Keep away from water, fire and Librarians."
 	icon_state = "paper"
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	body_parts_covered = 0
 
 /obj/item/clothing/head/collectable/tophat

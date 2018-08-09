@@ -88,7 +88,7 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 
-/obj/machinery/computer/engines/proc/burn()
+/obj/machinery/computer/engines/burn()
 	if(engines.len == 0)
 		return 0
 	var/res = 0

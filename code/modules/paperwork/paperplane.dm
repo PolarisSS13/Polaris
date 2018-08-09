@@ -7,6 +7,8 @@
 	throw_range = 7
 	throw_speed = 1
 	throwforce = 0
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	w_class = ITEMSIZE_TINY
 
 	var/obj/item/weapon/paper/internalPaper

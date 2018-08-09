@@ -1,0 +1,4 @@
+#define SHORT_BURN 5
+#define MEDIUM_BURN 15
+#define LONG_BURN 30
+#define PROLONGED_BURN 50

@@ -2,6 +2,8 @@
 	icon_state = "picket"
 	name = "blank picket sign"
 	desc = "It's blank"
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	force = 5
 	w_class = 4
 	attack_verb = list("bashed","smacked")

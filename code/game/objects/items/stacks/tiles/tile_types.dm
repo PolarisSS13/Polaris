@@ -16,6 +16,8 @@
 	desc = "A non-descript floor tile"
 	w_class = ITEMSIZE_NORMAL
 	max_amount = 60
+	burn_state = 0 //Burnable
+	burntime = 5
 
 /obj/item/stack/tile/New()
 	..()

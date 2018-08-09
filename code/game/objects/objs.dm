@@ -14,9 +14,11 @@
 	var/damtype = "brute"
 	var/armor_penetration = 0
 	var/show_messages
+	var/burn_state = -1 // -1=fireproof | 0=will burn in fires | 1=currently on fire
+	var/burntime = 10 //How long it takes to burn to ashes, in seconds
+	var/burn_world_time //What world time the object will burn up completely
 	var/preserve_item = 0 //whether this object is preserved when its owner goes into cryo-storage, gateway, etc
 	var/can_speak = 0 //For MMIs and admin trickery. If an object has a brainmob in its contents, set this to 1 to allow it to speak.
-
 	var/show_examine = TRUE	// Does this pop up on a mob when the mob is examined?
 
 /obj/Destroy()
@@ -167,3 +169,43 @@
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	return
+
+/obj/water_act()
+	if(!burn_state)
+		return
+	else
+		extinguish()
+	return ..()
+
+
+
+/obj/fire_act(global_overlay=1)
+	if(!burn_state)
+		burn_state = 1
+		burning_objects += src
+		burn_world_time = world.time + burntime*rand(10,20)
+		var/obj/effect/effect/smoke/bad/B = new(src.loc)
+		B.time_to_live = 5
+		if(global_overlay)
+			overlays += fire_overlay
+		set_light(2, 1, "#ED9200")
+		return 1
+
+/obj/proc/burn()
+	for(var/obj/item/Item in contents) //Empty out the contents
+		Item.loc = src.loc
+		Item.fire_act() //Set them on fire, too
+	var/obj/effect/decal/cleanable/ash/A = new(src.loc)
+	A.desc = "Looks like this used to be a [name] some time ago."
+	burning_objects -= src
+	qdel(src)
+
+/obj/proc/extinguish()
+	if(burn_state == 1)
+		burn_state = 0
+		set_light(0)
+		overlays -= fire_overlay
+		var/obj/effect/effect/smoke/bad/B = new(src.loc)
+		B.time_to_live = 1
+		burning_objects -= src
+		visible_message("<span class='notice'>The [src]'s flames dissipate.</span>")

@@ -17,6 +17,8 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
+	burn_state = 0 //Buuuurn baby burn. Disco inferno!
+	burntime = MEDIUM_BURN
 	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"

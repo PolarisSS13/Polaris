@@ -155,7 +155,7 @@
 	return TRUE
 
 
-/obj/structure/bonfire/proc/extinguish()
+/obj/structure/bonfire/extinguish()
 	if(burning)
 		burning = FALSE
 		update_icon()
@@ -169,7 +169,7 @@
 		processing_objects += src
 		visible_message("<span class='warning'>\The [src] starts burning!</span>")
 
-/obj/structure/bonfire/proc/burn()
+/obj/structure/bonfire/burn()
 	var/turf/current_location = get_turf(src)
 	current_location.hotspot_expose(1000, 500)
 	for(var/A in current_location)
@@ -338,7 +338,7 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/fireplace/proc/extinguish()
+/obj/structure/fireplace/extinguish()
 	if(burning)
 		burning = FALSE
 		update_icon()
@@ -352,7 +352,7 @@
 		processing_objects += src
 		visible_message("<span class='warning'>\The [src] starts burning!</span>")
 
-/obj/structure/fireplace/proc/burn()
+/obj/structure/fireplace/burn()
 	var/turf/current_location = get_turf(src)
 	current_location.hotspot_expose(1000, 500)
 	for(var/A in current_location)
@@ -396,6 +396,7 @@
 			return
 
 	if(burning)
+		playsound(src, 'sound/effects/comfyfire.ogg',50,0, 0, 1)
 		var/W = get_fuel_amount()
 		if(W >= 5)
 			var/datum/gas_mixture/env = loc.return_air()

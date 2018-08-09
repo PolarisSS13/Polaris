@@ -4,6 +4,8 @@
 	icon_state = "woodcirclet"
 	w_class = ITEMSIZE_SMALL
 	body_parts_covered = 0
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 
 /obj/item/clothing/head/woodcirclet/attackby(obj/item/W as obj, mob/user as mob)
 	var/obj/item/complete

@@ -18,6 +18,8 @@
 	anchored = 1
 	density = 1
 	opacity = 1
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 
 /obj/structure/bookcase/metal
 	icon_state = "metalshelf-0"

@@ -6,6 +6,8 @@
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_folded"
 	w_class = ITEMSIZE_SMALL
+	burn_state = 0 //Burnable
+	burntime = 5
 
 	attack_self(mob/user)
 		var/obj/structure/closet/body_bag/R = new /obj/structure/closet/body_bag(user.loc)

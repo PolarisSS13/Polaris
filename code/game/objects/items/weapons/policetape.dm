@@ -8,6 +8,8 @@
 	var/turf/end
 	var/tape_type = /obj/item/tape
 	var/icon_base = "tape"
+	burn_state = 0 //Burnable
+	burntime = 5
 
 	var/apply_tape = FALSE
 

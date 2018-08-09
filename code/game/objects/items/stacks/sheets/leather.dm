@@ -94,6 +94,8 @@
 	var/wetness = 30 //Reduced when exposed to high temperautres
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 	no_variants = FALSE
+	burn_state = 0 //Burnable
+	burntime = 5
 
 /obj/item/stack/material/wetleather
 	amount = 50

@@ -240,6 +240,8 @@
 	desc = "Soft substance produced by bees. Used to make candles."
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
+	burn_state = 0 //Burnable
+	burntime = 5
 
 /obj/item/stack/wax/New()
 	..()

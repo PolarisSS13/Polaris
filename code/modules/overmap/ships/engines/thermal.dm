@@ -61,7 +61,7 @@
 	..()
 	controller.die()
 
-/obj/machinery/atmospherics/unary/engine/proc/burn()
+/obj/machinery/atmospherics/unary/engine/burn()
 	if (!on)
 		return
 	if(air_contents.temperature > 0)

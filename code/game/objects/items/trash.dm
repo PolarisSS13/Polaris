@@ -6,6 +6,8 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = ITEMSIZE_SMALL
 	desc = "This is rubbish."
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"

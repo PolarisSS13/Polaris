@@ -1,3 +1,5 @@
+var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_state" = "fire")
+
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
@@ -227,6 +229,21 @@
 			return
 	user.put_in_active_hand(src)
 	return
+
+	if(burn_state == 1)
+		var/mob/living/carbon/human/H = user
+		if(istype(H))
+			if(H.gloves && (H.gloves.max_heat_protection_temperature > 360))
+				extinguish()
+				user << "<span class='notice'>You put out the fire on [src].</span>"
+			else
+				user << "<span class='warning'>You burn your hand on [src]!</span>"
+				var/obj/item/organ/external/affecting = H.get_organ("[user.hand ? "l" : "r" ]_arm")
+				affecting.take_damage(0, 5)
+				H.updatehealth()
+				return
+		else
+			extinguish()
 
 /obj/item/attack_ai(mob/user as mob)
 	if (istype(src.loc, /obj/item/weapon/robot_module))

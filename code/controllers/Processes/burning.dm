@@ -10,5 +10,6 @@
 		else
 			burning_objects.Remove(O)
 
-/datum/controller/process/burning/getStatName()
-	return ..()+"([burning_objects.len])"
+
+
+

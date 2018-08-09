@@ -26,6 +26,8 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
+	burn_state = 0 //Burnable
+	burntime = 5
 
 
 /*
@@ -1106,10 +1108,14 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "bouquet"
 	w_class = ITEMSIZE_SMALL
+	burn_state = 0 //Burnable
+	burntime = 2
 
 /obj/item/toy/bouquet/fake
 	name = "plastic bouquet"
 	desc = "A cheap plastic bouquet of flowers. Smells like cheap, toxic plastic."
+	burn_state = 0 //Burnable
+	burntime = 3
 
 /obj/item/toy/stickhorse
 	name = "stick horse"
@@ -1117,6 +1123,8 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "stickhorse"
 	w_class = ITEMSIZE_LARGE
+	burn_state = 0 //Burnable
+	burntime = 3
 
 //////////////////////////////////////////////////////
 //				Magic 8-Ball / Conch				//

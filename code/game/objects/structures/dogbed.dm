@@ -6,3 +6,5 @@
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN

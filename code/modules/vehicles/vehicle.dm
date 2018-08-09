@@ -17,6 +17,8 @@
 	can_buckle = 1
 	buckle_movable = 1
 	buckle_lying = 0
+	burn_state = 0 //Burnable
+	burntime = 10 //(Takes a loooooong time.)
 
 //	var/list/buckled_mobs = list()
 	var/list/action_buttons = list()

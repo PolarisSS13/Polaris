@@ -14,6 +14,8 @@ var/global/list/stool_cache = list() //haha stool
 	var/material/padding_material
 
 /obj/item/weapon/stool/wooden
+	burn_state = 0 //Buuuurn baby burn. Disco inferno!
+	burntime = SHORT_BURN
 
 /obj/item/weapon/stool/wooden/New(var/newloc, var/new_material)
 	..(newloc, "wood")

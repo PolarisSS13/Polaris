@@ -6,6 +6,8 @@
 	item_state = "paper"
 	throwforce = 0
 	w_class = ITEMSIZE_SMALL
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	throw_range = 2
 	throw_speed = 1
 	plane = MOB_PLANE

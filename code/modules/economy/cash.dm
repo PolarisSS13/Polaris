@@ -11,6 +11,8 @@
 	throwforce = 1.0
 	throw_speed = 1
 	throw_range = 2
+	burn_state = 0 //Buuuurn baby burn. Disco inferno!
+	burntime = SHORT_BURN
 	w_class = ITEMSIZE_SMALL
 	var/access = list()
 	access = access_crate_cash

@@ -12,6 +12,8 @@ LINEN BINS
 	slot_flags = SLOT_BACK
 	plane = MOB_PLANE
 	layer = BELOW_MOB_LAYER
+	burn_state = 0 //Buuuurn baby burn. Disco inferno!
+	burntime = SHORT_BURN
 	throwforce = 1
 	throw_speed = 1
 	throw_range = 2
@@ -161,6 +163,8 @@ LINEN BINS
 	name = "linen bin"
 	desc = "A linen bin. It looks rather cosy."
 	icon = 'icons/obj/structures.dmi'
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	icon_state = "linenbin-full"
 	anchored = 1
 	var/amount = 20
