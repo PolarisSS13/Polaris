@@ -34,7 +34,7 @@
 	icon_state = "seromi_rainbow"
 
 /obj/item/clothing/under/seromi/undercoat
-	name = "you shouldnt be seeing this"
+	name = "Undercoat"
 	desc =  "A Teshari traditional garb, with a modern twist! Made of micro and nanofibres to make it light and billowy, perfect for going fast and stylishly!"
 	icon = 'icons/mob/species/seromi/teshari_uniform.dmi'
 	icon_override = 'icons/mob/species/seromi/teshari_uniform.dmi'
