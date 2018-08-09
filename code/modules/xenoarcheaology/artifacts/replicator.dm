@@ -45,7 +45,7 @@
 	/obj/item/weapon/material/knife/butch,
 	/obj/item/weapon/caution,
 	/obj/item/weapon/caution/cone,
-	/obj/item/weapon/crowbar,
+	/obj/item/weapon/tool/crowbar,
 	/obj/item/weapon/clipboard,
 	/obj/item/weapon/cell,
 	/obj/item/weapon/surgical/circular_saw,
@@ -59,9 +59,9 @@
 	/obj/item/weapon/pickaxe,
 	/obj/item/weapon/shovel,
 	/obj/item/weapon/weldingtool,
-	/obj/item/weapon/wirecutters,
-	/obj/item/weapon/wrench,
-	/obj/item/weapon/screwdriver,
+	/obj/item/weapon/tool/wirecutters,
+	/obj/item/weapon/tool/wrench,
+	/obj/item/weapon/tool/screwdriver,
 	/obj/item/weapon/grenade/chem_grenade/cleaner,
 	/obj/item/weapon/grenade/chem_grenade/metalfoam)
 
@@ -125,6 +125,9 @@
 	user << browse(dat, "window=alien_replicator")
 
 /obj/machinery/replicator/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
+	if(!W.canremove || !user.canUnEquip(W)) //No armblades, no grabs. No other-thing-I-didn't-think-of.
+		to_chat(user, "<span class='notice'>You cannot put \the [W] into the machine.</span>")
+		return
 	user.drop_item()
 	W.loc = src
 	stored_materials.Add(W)

@@ -65,7 +65,7 @@
 	reagent_state = LIQUID
 	color = "#404030"
 
-	ingest_met = REM
+	ingest_met = REM * 2
 
 	var/nutriment_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
@@ -94,6 +94,8 @@
 		strength_mod *= 0.75
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 
@@ -136,6 +138,8 @@
 		strength_mod *= 0.75
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 

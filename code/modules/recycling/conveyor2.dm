@@ -100,10 +100,10 @@
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor?", "Multitool-Conveyor interface", id))
 			if(!input)
-				usr << "No input found please hang up and try your call again."
+				to_chat(user, "No input found. Please hang up and try your call again.")
 				return
 			id = input
-			for(var/obj/machinery/conveyor_switch/C in world)
+			for(var/obj/machinery/conveyor_switch/C in machines)
 				if(C.id == id)
 					C.conveyors |= src
 			return
@@ -190,7 +190,7 @@
 
 /obj/machinery/conveyor_switch/LateInitialize()
 	conveyors = list()
-	for(var/obj/machinery/conveyor/C in world)
+	for(var/obj/machinery/conveyor/C in machines)
 		if(C.id == id)
 			conveyors += C
 
@@ -220,7 +220,7 @@
 // attack with hand, switch position
 /obj/machinery/conveyor_switch/attack_hand(mob/user)
 	if(!allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	if(position == 0)
@@ -238,7 +238,7 @@
 	update()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update()
@@ -251,12 +251,12 @@
 		if(panel_open)
 			var/obj/item/weapon/weldingtool/WT = I
 			if(!WT.remove_fuel(0, user))
-				user << "The welding tool must be on to complete this task."
+				to_chat(user, "The welding tool must be on to complete this task.")
 				return
 			playsound(src, WT.usesound, 50, 1)
 			if(do_after(user, 20 * WT.toolspeed))
 				if(!src || !WT.isOn()) return
-				user << "<span class='notice'>You deconstruct the frame.</span>"
+				to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 				new /obj/item/stack/material/steel( src.loc, 2 )
 				qdel(src)
 				return
@@ -265,11 +265,11 @@
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor switch?", "Multitool-Conveyor interface", id))
 			if(!input)
-				usr << "No input found please hang up and try your call again."
+				to_chat(user, "No input found. Please hang up and try your call again.")
 				return
 			id = input
 			conveyors = list() // Clear list so they aren't double added.
-			for(var/obj/machinery/conveyor/C in world)
+			for(var/obj/machinery/conveyor/C in machines)
 				if(C.id == id)
 					conveyors += C
 			return
@@ -289,7 +289,7 @@
 	update()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update()

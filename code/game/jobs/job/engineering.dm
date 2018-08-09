@@ -50,7 +50,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the chief engineer"
+	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/engineering/engineer
 	economic_modifier = 5
@@ -95,7 +95,7 @@
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the chief engineer"
+	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/engineering/atmos
 	economic_modifier = 5

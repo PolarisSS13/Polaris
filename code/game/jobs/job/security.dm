@@ -53,7 +53,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/warden
 	economic_modifier = 5
@@ -82,7 +82,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/detective
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
@@ -115,7 +115,7 @@
 	faction = "Station"
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/officer
 	economic_modifier = 4

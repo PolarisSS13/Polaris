@@ -241,6 +241,46 @@ datum/gear/suit/duster
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/hop
 	allowed_roles = list("Head of Personnel")
 
+/datum/gear/suit/roles/poncho/cloak/cargo
+	display_name = "cloak, cargo"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/cargo
+	allowed_roles = list("Cargo Technician","Quartermaster")
+
+/datum/gear/suit/roles/poncho/cloak/mining
+	display_name = "cloak, mining"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/mining
+	allowed_roles = list("Quartermaster","Shaft Miner")
+
+/datum/gear/suit/roles/poncho/cloak/security
+	display_name = "cloak, security"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/security
+	allowed_roles = list("Head of Security","Detective","Warden","Security Officer")
+
+/datum/gear/suit/roles/poncho/cloak/service
+	display_name = "cloak, service"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/service
+	allowed_roles = list("Head of Personnel","Bartender","Botanist","Janitor","Chef","Librarian")
+
+/datum/gear/suit/roles/poncho/cloak/engineer
+	display_name = "cloak, engineer"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/engineer
+	allowed_roles = list("Chief Engineer","Station Engineer")
+
+/datum/gear/suit/roles/poncho/cloak/atmos
+	display_name = "cloak, atmos"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/atmos
+	allowed_roles = list("Chief Engineer","Atmospheric Technician")
+
+/datum/gear/suit/roles/poncho/cloak/research
+	display_name = "cloak, science"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/research
+	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
+
+/datum/gear/suit/roles/poncho/cloak/medical
+	display_name = "cloak, medical"
+	path = /obj/item/clothing/accessory/poncho/roles/cloak/medical
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
+
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
 	path = /obj/item/clothing/suit/unathi/robe
@@ -440,7 +480,7 @@ datum/gear/suit/duster
 /datum/gear/suit/snowsuit/medical
 	display_name = "snowsuit, medical"
 	path = /obj/item/clothing/suit/storage/snowsuit/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist", "Search and Rescue")
 
 /datum/gear/suit/snowsuit/science
 	display_name = "snowsuit, science"
@@ -455,4 +495,4 @@ datum/gear/suit/duster
 /datum/gear/suit/snowsuit/cargo
 	display_name = "snowsuit, supply"
 	path = /obj/item/clothing/suit/storage/snowsuit/cargo
-	allowed_roles = list("Quartermaster","shaft Miner","Cargo Technician","Head of Personnel")
+	allowed_roles = list("Quartermaster","Shaft Miner","Cargo Technician","Head of Personnel")

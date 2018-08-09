@@ -22,14 +22,13 @@
 		below.update_icon() // To add or remove the 'ceiling-less' overlay.
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0, var/preserve_outdoors = FALSE)
 	if (!N)
 		return
 
-	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
+		if(istype(below) && !istype(below,/turf/space))
 			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
@@ -37,8 +36,8 @@
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
-	var/old_weather_overlay = weather_overlay
 	var/old_corners = corners
+	var/old_outdoors = outdoors
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -55,9 +54,6 @@
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		if(old_fire)
 			fire = old_fire
-
-		if(old_weather_overlay)
-			W.weather_overlay = old_weather_overlay
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
@@ -82,9 +78,6 @@
 
 		if(old_fire)
 			old_fire.RemoveFire()
-
-		if(old_weather_overlay)
-			W.weather_overlay = old_weather_overlay
 
 		if(tell_universe)
 			universe.OnTurfChange(W)
@@ -113,3 +106,6 @@
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
+
+	if(preserve_outdoors)
+		outdoors = old_outdoors

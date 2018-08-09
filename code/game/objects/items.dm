@@ -211,6 +211,8 @@
 		if(!temp)
 			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
+
+	var/old_loc = src.loc
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -223,7 +225,11 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(isturf(old_loc))
+			var/obj/effect/temporary_effect/item_pickup_ghost/ghost = new(old_loc)
+			ghost.assumeform(src)
+			ghost.animate_towards(user)
 	return
 
 /obj/item/attack_ai(mob/user as mob)
@@ -678,6 +684,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/is_hot()
 	return FALSE
 
+// Called when you swap hands away from the item
+/obj/item/proc/in_inactive_hand(mob/user)
+	return
+
 // My best guess as to why this is here would be that it does so little. Still, keep it under all the procs, for sanity's sake.
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
@@ -796,3 +806,27 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/apply_accessories(var/image/standing)
 	return standing
 
+/*
+ *	Assorted tool procs, so any item can emulate any tool, if coded
+*/
+/obj/item/proc/is_screwdriver()
+	return FALSE
+
+/obj/item/proc/is_wrench()
+	return FALSE
+
+/obj/item/proc/is_crowbar()
+	return FALSE
+
+/obj/item/proc/is_wirecutter()
+	return FALSE
+
+// These next three might bug out or runtime, unless someone goes back and finds a way to generalize their specific code
+/obj/item/proc/is_cable_coil()
+	return FALSE
+
+/obj/item/proc/is_multitool()
+	return FALSE
+
+/obj/item/proc/is_welder()
+	return FALSE

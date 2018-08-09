@@ -9,7 +9,7 @@
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
 	spawn_positions = 1
 	selection_color = "#3F823F"
-	supervisors = "your laws"
+	supervisors = "your Laws"
 	req_admin_notify = 1
 	minimal_player_age = 7
 	account_allowed = 0
@@ -54,7 +54,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "your laws and the AI"	//Nodrak
+	supervisors = "your Laws and the AI"	//Nodrak
 	selection_color = "#254C25"
 	minimal_player_age = 1
 	account_allowed = 0

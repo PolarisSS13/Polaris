@@ -50,7 +50,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the research director"
+	supervisors = "the Research Director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/scientist
 	economic_modifier = 7
@@ -97,7 +97,7 @@
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the research director"
+	supervisors = "the Research Director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/xenobiologist
 	economic_modifier = 7
@@ -131,7 +131,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "research director"
+	supervisors = "the Research Director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/roboticist
 	economic_modifier = 5

@@ -7,7 +7,7 @@
 	anchored = 1
 	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
-	layer = UNDER_JUNK_LAYER
+	layer = TABLE_LAYER
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
@@ -94,12 +94,12 @@
 	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
 /obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(iswirecutter(W))
+	if(W.is_wirecutter())
 		if(!shock(user, 100))
 			playsound(src, W.usesound, 100, 1)
 			new /obj/item/stack/rods(get_turf(src), destroyed ? 1 : 2)
 			qdel(src)
-	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
+	else if((W.is_screwdriver()) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(src, W.usesound, 100, 1)
 			anchored = !anchored

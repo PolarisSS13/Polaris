@@ -47,7 +47,7 @@
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/doctor
 	economic_modifier = 7
@@ -69,7 +69,7 @@
 
 /datum/alt_title/surgeon
 	title = "Surgeon"
-	title_blurb = "A surgeon specializes in providing surgical aid to injured patients, up to and including amputation and limb re-attachement. They are expected \
+	title_blurb = "A Surgeon specializes in providing surgical aid to injured patients, up to and including amputation and limb re-attachement. They are expected \
 					to know the ins and outs of anesthesia and surgery."
 	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/surgeon
 
@@ -105,7 +105,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
 	economic_modifier = 5
@@ -138,7 +138,7 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the chief medical officer and research director"
+	supervisors = "the Chief Medical Officer and Research Director"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist
 	economic_modifier = 7
@@ -166,7 +166,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/psychiatrist
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
@@ -197,7 +197,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/paramedic
 	economic_modifier = 4

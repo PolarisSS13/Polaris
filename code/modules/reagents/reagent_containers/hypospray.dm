@@ -49,12 +49,14 @@
 				if(H.a_intent != I_HELP)
 					to_chat(user, "<span class='notice'>[H] is resisting your attempt to inject them with \the [src].</span>")
 					to_chat(H, "<span class='danger'> [user] is trying to inject you with \the [src]!</span>")
-					if(!do_after(user, 30))
+					if(!do_after(user, 30, H))
 						return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	to_chat(user, "<span class='notice'>You inject [M] with \the [src].</span>")
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+	
+	playsound(src, 'sound/effects/hypospray.ogg',25)
 
 	if(M.reagents)
 		var/contained = reagentlist()

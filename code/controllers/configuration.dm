@@ -60,6 +60,7 @@ var/list/gamemode_cache = list()
 	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
 	var/allow_ai = 1					// allow ai job
+	var/allow_ai_drones = 0					// allow ai controlled drones
 	var/hostedby = null
 	var/respawn = 1
 	var/guest_jobban = 1
@@ -97,6 +98,7 @@ var/list/gamemode_cache = list()
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 	var/panic_bunker = 0
+	var/paranoia_logging = 0
 
 	var/serverurl
 	var/server
@@ -398,6 +400,9 @@ var/list/gamemode_cache = list()
 
 				if ("allow_ai")
 					config.allow_ai = 1
+
+				if ("allow_ai_drones")
+					config.allow_ai_drones = 1
 
 //				if ("authentication")
 //					config.enable_authentication = 1
@@ -736,6 +741,12 @@ var/list/gamemode_cache = list()
 
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
+
+				if ("panic_bunker")
+					config.panic_bunker = 1
+
+				if ("paranoia_logging")
+					config.paranoia_logging = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

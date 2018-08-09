@@ -7,7 +7,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chaplain
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
@@ -158,5 +158,7 @@
 		feedback_set_details("religion_book","[new_book_style]")
 	return 1
 
+/* If you uncomment this, every time the mob preview updates it makes a new PDA. It seems to work just fine and display without it, so why this exists, haven't a clue. -Hawk
 /datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
 	return equip(H, alt_title, FALSE)
+*/

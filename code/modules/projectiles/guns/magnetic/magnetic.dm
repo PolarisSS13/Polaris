@@ -36,6 +36,9 @@
 	qdel_null(capacitor)
 	. = ..()
 
+/obj/item/weapon/gun/magnetic/get_cell()
+	return cell
+
 /obj/item/weapon/gun/magnetic/process()
 	if(capacitor)
 		if(cell)
@@ -102,7 +105,7 @@
 			update_icon()
 			return
 
-		if(isscrewdriver(thing))
+		if(thing.is_screwdriver())
 			if(!capacitor)
 				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
 				return

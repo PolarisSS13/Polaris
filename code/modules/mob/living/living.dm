@@ -866,6 +866,15 @@ default behaviour is:
 	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 	update_canmove()
 
+//called when the mob receives a bright flash
+/mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	if(override_blindness_check || !(disabilities & BLIND))
+		overlay_fullscreen("flash", type)
+		spawn(25)
+			if(src)
+				clear_fullscreen("flash", 25)
+		return 1
+
 /mob/living/proc/cannot_use_vents()
 	if(mob_size > MOB_SMALL)
 		return "You can't fit into that vent."
@@ -1015,7 +1024,7 @@ default behaviour is:
 	if(lying != lying_prev)
 		lying_prev = lying
 		update_transform()
-		
+
 	return canmove
 
 // Adds overlays for specific modifiers.
@@ -1065,6 +1074,9 @@ default behaviour is:
 	var/list/colors_to_blend = list()
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.client_color))
+			if(islist(M.client_color)) //It's a color matrix! Forget it. Just use that one.
+				animate(client, color = M.client_color, time = 10)
+				return
 			colors_to_blend += M.client_color
 
 	if(colors_to_blend.len)
@@ -1101,6 +1113,13 @@ default behaviour is:
 		else
 			hud_used.l_hand_hud_object.icon_state = "l_hand_inactive"
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
+
+	// We just swapped hands, so the thing in our inactive hand will notice it's not the focus
+	var/obj/item/I = get_inactive_hand()
+	if(I)
+		if(I.zoom)
+			I.zoom()
+		I.in_inactive_hand(src)	//This'll do specific things, determined by the item
 	return
 
 /mob/living/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
@@ -1195,3 +1214,11 @@ default behaviour is:
 
 /mob/living/proc/make_hud_overlays()
 	return
+
+
+/mob/living/proc/has_vision()
+	return !(eye_blind || (disabilities & BLIND) || stat || blinded)
+
+
+/mob/living/proc/dirties_floor()	// If we ever decide to add fancy conditionals for making dirty floors (floating, etc), here's the proc.
+	return makes_dirt
