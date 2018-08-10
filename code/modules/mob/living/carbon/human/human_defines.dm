@@ -39,6 +39,8 @@
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 	var/synthetic		//If they are a synthetic (aka synthetic torso)
+	var/voice_type = 1 //for determining which sound to play when mob does *scream
+
 
 	var/list/all_underwear = list()
 	var/list/all_underwear_metadata = list()

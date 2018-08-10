@@ -341,3 +341,36 @@ datum/weather/sif
 	transition_chances = list(
 		WEATHER_BLOODMOON = 100
 		)
+
+/datum/weather/sif/acid_rain
+	name = "acid rain"
+	icon_state = "acid_rain"
+	light_modifier = 0.5
+	transition_chances = list(
+		WEATHER_RAIN = 45,
+		WEATHER_STORM = 40,
+		WEATHER_HAIL = 10,
+		WEATHER_OVERCAST = 5
+		)
+
+/datum/weather/sif/acid_rain/process_effects()
+	for(var/mob/living/L in living_mob_list)
+		if(L.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(L)
+			if(!T.outdoors)
+				continue // They're indoors, so no need to rain on them.
+
+			// If they have an open umbrella, it'll guard from rain
+			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+				if(U.open)
+					to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
+					continue
+			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+				if(U.open)
+					to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
+					continue
+
+			L.water_act(1)
+			to_chat(L, "<span class='warning'>Rain falls on you.</span>")

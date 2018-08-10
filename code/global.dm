@@ -8,6 +8,7 @@ var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
 var/global/list/machines                 = list()	// TODO - Move into SSmachines
 var/global/list/processing_objects       = list()
+var/global/list/burning_objects 			  = list()
 var/global/list/processing_power_items   = list()	// TODO - Move into SSmachines
 var/global/list/active_diseases          = list()
 var/global/list/hud_icon_reference       = list()
@@ -38,7 +39,7 @@ var/href_logfile		= null
 // var/const/starsys_name	= "Vir"
 var/const/game_version	= "World Server Redux"
 var/changelog_hash		= ""
-var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 244)
 var/round_progressing = 1
 
 var/master_mode       = "extended" // "extended"
@@ -53,7 +54,7 @@ var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src]
 var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
 var/list/reg_dna       = list()
 
-var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
+var/mouse_respawn_time = 2 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
 var/list/monkeystart     = list()
 var/list/wizardstart     = list()

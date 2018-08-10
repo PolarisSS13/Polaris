@@ -292,7 +292,7 @@
 	icon_state = "streetlamp1"
 	base_state = "streetlamp"
 	desc = "A street lighting fixture."
-	brightness_range = 7
+	brightness_range = 5
 	brightness_color = "#d2e6f2"
 	layer = MOB_LAYER + 1
 	plane = MOB_PLANE
