@@ -80,4 +80,4 @@
 	minimal_player_age = 3
 	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
-	alt_titles = list("Junior Officer","Traffic Warden")
+	alt_titles = list("Junior Officer","Traffic Warden" = /decl/hierarchy/outfit/job/security/traffic)

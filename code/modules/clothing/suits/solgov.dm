@@ -155,8 +155,8 @@
 //Misc
 
 /obj/item/clothing/suit/storage/toggle/marshal_jacket
-	name = "colonial marshal jacket"
-	desc = "A black synthleather jacket. The word 'MARSHAL' is stenciled onto the back in gold lettering."
+	name = "blue synthleather jacket"
+	desc = "A black synthleather jacket. The word 'TRAFFIC POLICE' is stenciled onto the back in gold lettering."
 	icon_state = "marshal_jacket"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
 	body_parts_covered = UPPER_TORSO|ARMS

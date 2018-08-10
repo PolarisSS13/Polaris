@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
 	id_type = /obj/item/weapon/card/id/assistant
+	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/assistant/visitor
 	name = OUTFIT_JOB_NAME("Visitor")
@@ -51,6 +52,7 @@
 	suit = /obj/item/clothing/suit/storage/apron
 	gloves = /obj/item/clothing/gloves/botanic_leather
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
+	l_pocket = /obj/item/device/communicator
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/hyd
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
@@ -60,6 +62,7 @@
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
+	r_pocket = /obj/item/device/communicator
 	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
@@ -67,6 +70,7 @@
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	l_hand = /obj/item/weapon/barcodescanner
+	r_pocket = /obj/item/device/communicator
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
@@ -76,6 +80,7 @@
 	uniform = /obj/item/clothing/under/lawyer/blue
 	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
 	shoes = /obj/item/clothing/shoes/brown
+	r_pocket = /obj/item/device/communicator
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
 	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
@@ -85,6 +90,7 @@
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
 	l_hand = /obj/item/weapon/storage/bible
+	r_pocket = /obj/item/device/communicator
 	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
 
@@ -96,6 +102,7 @@
 	suit = /obj/item/clothing/suit/storage/hooded/explorer
 	gloves = /obj/item/clothing/gloves/black
 	l_ear = /obj/item/device/radio/headset
+	l_pocket = /obj/item/device/communicator
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/civilian
 	pda_slot = slot_belt

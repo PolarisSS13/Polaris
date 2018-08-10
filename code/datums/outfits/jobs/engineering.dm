@@ -8,6 +8,7 @@
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/eng
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/engi
 	pda_slot = slot_l_store
+	r_pocket = /obj/item/device/communicator
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/engineering/chief_engineer
@@ -20,15 +21,16 @@
 	pda_type = /obj/item/device/pda/heads/ce
 
 /decl/hierarchy/outfit/job/engineering/engineer
-	name = OUTFIT_JOB_NAME("Engineer")
+	name = OUTFIT_JOB_NAME("City Engineer")
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/rank/engineer
 	id_type = /obj/item/weapon/card/id/engineering/engineer
 	pda_type = /obj/item/device/pda/engineering
 
 /decl/hierarchy/outfit/job/engineering/atmos
-	name = OUTFIT_JOB_NAME("Atmospheric technician")
+	name = OUTFIT_JOB_NAME("Firefighter")
 	uniform = /obj/item/clothing/under/rank/atmospheric_technician
 	belt = /obj/item/weapon/storage/belt/utility/atmostech
 	id_type = /obj/item/weapon/card/id/engineering/atmos
 	pda_type = /obj/item/device/pda/atmos
+	suit = /obj/item/clothing/suit/fire/firefighter

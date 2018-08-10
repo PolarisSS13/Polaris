@@ -44,6 +44,13 @@
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
 
+/obj/item/clothing/under/rank/security/traffic
+	name = "traffic warden's uniform"
+	desc = "Stitched together by those bankrupted by parking tickets."
+	icon_state = "traffic"
+	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
+	rolled_sleeves = 0
+
 /obj/item/clothing/under/rank/security/corp
 	icon_state = "sec_corporate"
 	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
