@@ -2,7 +2,9 @@
 /*| Neon Signs
    ----------------------------------------------*/
 
-   //| Note: for a more varied range of colors, I chose not to use the pre- #defined colors and instead individually converted the RGB values from each sprite into hex code - Mal
+   //| Note: for a more varied range of colors, I chose not to use the
+   //pre- #defined colors and instead individually converted the RGB
+   //values from each sprite into hex code - Mal
 
 /obj/structure/sign/neon/Destroy()
 	set_light(0)

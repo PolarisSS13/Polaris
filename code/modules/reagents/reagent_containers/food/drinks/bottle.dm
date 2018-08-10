@@ -549,3 +549,4 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/champagne/New()
 	..()
 	reagents.add_reagent("champagne", 100)
+

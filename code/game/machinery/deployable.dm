@@ -58,6 +58,8 @@ for reference:
 	icon_state = "barricade"
 	anchored = 1.0
 	density = 1.0
+	burn_state = 0 //Burnable
+	burntime = LONG_BURN
 	parts = /obj/item/stack/material/wood/
 	var/health = 100
 	var/maxhealth = 100

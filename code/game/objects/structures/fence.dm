@@ -15,7 +15,7 @@
 	desc = "A chain link fence. Not as effective as a wall, but generally it keeps people out."
 	density = TRUE
 	anchored = TRUE
-
+	plane = 1
 	icon = 'icons/obj/fence.dmi'
 	icon_state = "straight"
 

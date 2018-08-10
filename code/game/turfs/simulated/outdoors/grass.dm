@@ -19,7 +19,6 @@ var/list/grass_types = list(
 		)
 
 
-
 /turf/simulated/floor/outdoors/grass/sif
 	name = "growth"
 	icon_state = "grass_sif"
@@ -40,7 +39,8 @@ var/list/grass_types = list(
 	if(prob(50))
 		icon_state = "[initial(icon_state)]2"
 		//edge_blending_priority++
-
+	if(tree_chance && prob(tree_chance))
+		new /obj/structure/flora/tree/jungle(src)
 	if(grass_chance && prob(grass_chance))
 		var/grass_type = pick(grass_types)
 		new grass_type(src)
@@ -52,6 +52,14 @@ var/list/grass_types = list(
 	grass_chance = 80
 	tree_chance = 20
 	edge_blending_priority = 5
+
+/turf/simulated/floor/outdoors/grass/forest/nogrowth
+	grass_chance = 0
+	tree_chance = 0
+
+/turf/simulated/floor/outdoors/grass/nogrowth
+	grass_chance = 0
+	tree_chance = 0
 
 /turf/simulated/floor/outdoors/grass/sif/forest
 	name = "thick growth"

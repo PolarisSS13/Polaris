@@ -176,6 +176,8 @@
 	var/obj/item/gift = null
 	item_state = "gift"
 	w_class = ITEMSIZE_LARGE
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 
 /obj/item/weapon/caution
 	desc = "Caution! Wet Floor!"

@@ -1,3 +1,7 @@
+/obj/machinary/street/
+	plane = -25
+	layer = ABOVE_MOB_LAYER
+
 /obj/machinery/street/traffic
 	name = "traffic light"
 	anchored = 1
