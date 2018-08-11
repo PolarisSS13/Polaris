@@ -29,7 +29,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
 						staff keep the station’s crew healthy and whole. They are primarily interested in making sure that patients are safely found and \
-						transported to Medical for treatment. They are expected to keep the crew informed about threats to their health and saftey, and \
+						transported to Medical for treatment. They are expected to keep the crew informed about threats to their health and safety, and \
 						about the importance of Suit Sensors."
 
 // CMO Alt Titles
@@ -69,7 +69,7 @@
 
 /datum/alt_title/surgeon
 	title = "Surgeon"
-	title_blurb = "A Surgeon specializes in providing surgical aid to injured patients, up to and including amputation and limb re-attachement. They are expected \
+	title_blurb = "A Surgeon specializes in providing surgical aid to injured patients, up to and including amputation and limb reattachement. They are expected \
 					to know the ins and outs of anesthesia and surgery."
 	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/surgeon
 
@@ -173,7 +173,7 @@
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 	job_description = "The Psychologist provides mental health services to crew members in need. They may also be called upon to determine whatever \
-					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs"
+					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
 	alt_titles = list("Psychiatrist" = /datum/alt_title/psychiatrist, "Psychologist" = /datum/alt_title/psychologist)
 
 //Psychiatrist Alt Titles
