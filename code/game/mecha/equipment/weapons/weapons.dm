@@ -204,7 +204,7 @@
 	equip_cooldown = 10
 	projectile = /obj/item/projectile/bullet/pistol/medium
 	fire_sound = 'sound/weapons/machinegun.ogg'
-	projectiles = 300
+	projectiles = 30 //10 bursts, matching the Scattershot's 10. Also, conveniently, doesn't eat your powercell when reloading like 300 bullets does.
 	projectiles_per_shot = 3
 	deviation = 0.3
 	projectile_energy_cost = 20
@@ -257,13 +257,13 @@
 	var/primed = null
 	throwforce = 15
 
-	throw_impact(atom/hit_atom)
-		if(primed)
-			explosion(hit_atom, 0, 1, 2, 4)
-			qdel(src)
-		else
-			..()
-		return
+/obj/item/missile/throw_impact(atom/hit_atom)
+	if(primed)
+		explosion(hit_atom, 0, 1, 2, 4)
+		qdel(src)
+	else
+		..()
+	return
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang
 	name = "\improper SGL-6 grenade launcher"

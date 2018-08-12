@@ -16,7 +16,7 @@
 	var/defence_deflect = 35
 	wreckage = /obj/effect/decal/mecha_wreckage/durand
 
-	max_hull_equip = 3
+	max_hull_equip = 2
 	max_weapon_equip = 1
 	max_utility_equip = 2
 	max_universal_equip = 1

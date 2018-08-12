@@ -109,6 +109,9 @@
 /obj/item/mecha_parts/mecha_equipment/proc/can_attach(obj/mecha/M as obj)
 	//if(M.equipment.len >= M.max_equip)
 	//	return 0
+	for(var/obj/item/mecha_parts/mecha_equipment/ME in M.equipment) //Exact duplicate components aren't allowed.
+		if(ME.type == src.type)
+			return 0
 	if(equip_type == EQUIP_HULL && M.hull_equipment.len < M.max_hull_equip)
 		return 1
 	if(equip_type == EQUIP_WEAPON && M.weapon_equipment.len < M.max_weapon_equip)
