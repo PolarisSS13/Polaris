@@ -201,3 +201,9 @@
 	conserve_ammo = TRUE
 	firing_lanes = TRUE
 	can_flee = FALSE // Fearless dumb machines.
+
+// Simple mobs that retaliate and support others in their faction who get attacked.
+/datum/ai_holder/simple_mob/cooperative_retaliate
+	hostile = FALSE
+	retaliate = TRUE
+	cooperative = TRUE
