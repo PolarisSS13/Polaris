@@ -114,3 +114,6 @@
 
 /datum/say_list/lizard
 	emote_hear = list("hisses")
+
+/datum/say_list/crab
+	emote_hear = list("hisses")
