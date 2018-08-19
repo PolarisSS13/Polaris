@@ -120,7 +120,7 @@
 		return 1
 	if(equip_type == EQUIP_SPECIAL && M.special_equipment.len < M.max_special_equip)
 		return 1
-	if(equip_type != EQUIP_SPECIAL && M.universal_equipment.len < M.max_universal_equip && (equip_type == EQUIP_WEAPON && !istype(M, /obj/mecha/medical))) //Medical exosuits lack any adaptor for full weaponry. Limited to Rigged equipment.
+	if(equip_type != EQUIP_SPECIAL && M.universal_equipment.len < M.max_universal_equip && (equip_type == EQUIP_WEAPON && !istype(M, /obj/mecha/medical/odysseus))) //Medical exosuits lack any adaptor for full weaponry. Limited to Rigged equipment.
 		return 1
 	/*if (ispath(required_type))
 		return istype(M, required_type)
