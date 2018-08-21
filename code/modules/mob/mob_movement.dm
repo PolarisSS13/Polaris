@@ -287,12 +287,6 @@
 				mob.move_delay += config.walk_speed
 		mob.move_delay += mob.movement_delay()
 
-		var/tickcomp = 0 //moved this out here so we can use it for vehicles
-		if(config.Tickcomp)
-			// move_delay -= 1.3 //~added to the tickcomp calculation below
-			tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
-			mob.move_delay = mob.move_delay + tickcomp
-
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
@@ -563,5 +557,21 @@
 	return
 
 /obj/item/weapon/storage/on_loc_moved(atom/oldloc)
-	for(var/obj/O in contents)
-		O.on_loc_moved(oldloc)
+	for(var/obj/O in contents)		O.on_loc_moved(oldloc)
+
+/client/verb/moveup()
+	set name = ".moveup"
+	set instant = 1
+	Move(get_step(mob, NORTH), NORTH)
+/client/verb/movedown()
+	set name = ".movedown"
+	set instant = 1
+	Move(get_step(mob, SOUTH), SOUTH)
+/client/verb/moveright()
+	set name = ".moveright"
+	set instant = 1
+	Move(get_step(mob, EAST), EAST)
+/client/verb/moveleft()
+	set name = ".moveleft"
+	set instant = 1
+	Move(get_step(mob, WEST), WEST)

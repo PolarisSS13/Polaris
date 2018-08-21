@@ -38,11 +38,13 @@
 		projectiles--
 		var/P = new projectile(curloc)
 		Fire(P, target)
+		if(i == 1)
+			set_ready_state(0)
 		if(fire_cooldown)
 			sleep(fire_cooldown)
 	if(auto_rearm)
 		projectiles = projectiles_per_shot
-	set_ready_state(0)
+//	set_ready_state(0)
 	do_after_cooldown()
 	return
 
@@ -270,7 +272,7 @@
 	..()
 	var/obj/item/weapon/grenade/flashbang/F = AM
 	spawn(det_time)
-		F.prime()
+		F.detonate()
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang//Because I am a heartless bastard -Sieve
 	name = "\improper SOP-6 grenade launcher"
