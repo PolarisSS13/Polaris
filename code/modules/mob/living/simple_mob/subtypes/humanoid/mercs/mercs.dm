@@ -248,7 +248,7 @@
 
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 
-/mob/living/simple_animal/hostile/syndicate/ranged/space/Process_Spacemove(var/check_drift = 0)
+/mob/living/simple_mob/humanoid/merc/ranged/space/Process_Spacemove(var/check_drift = 0)
 	return
 
 ////////////////////////////////
@@ -268,7 +268,7 @@
 /mob/living/simple_mob/humanoid/merc/ranged/smg/poi
 	loot_list = list()
 
-/mob/living/simple_mob/humanoid/merc/ranged/laser
+/mob/living/simple_mob/humanoid/merc/ranged/laser/poi
 	loot_list = list()
 
 /mob/living/simple_mob/humanoid/merc/ranged/ionrifle

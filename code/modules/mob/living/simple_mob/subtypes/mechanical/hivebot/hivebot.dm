@@ -1,6 +1,6 @@
 // Hivebots are tuned towards how many default lasers are needed to kill them.
 // As such, if laser damage is ever changed, you should change this define.
-#define LASERS_TO_KILL *30
+#define LASERS_TO_KILL * 40
 
 /mob/living/simple_mob/mechanical/hivebot
 	name = "hivebot"
@@ -19,7 +19,6 @@
 
 	attacktext = list("clawed")
 	projectilesound = 'sound/weapons/Gunshot.ogg'
-	projectiletype = /obj/item/projectile/bullet/hivebot
 
 	ai_holder_type = /datum/ai_holder/simple_mob/hivebot
 	say_list_type = /datum/say_list/hivebot
@@ -40,3 +39,11 @@
 	damage_type = BRUTE
 	sharp = FALSE
 	edge = FALSE
+
+/mob/living/simple_mob/mechanical/hivebot/swarm
+	name = "swarm hivebot"
+	desc = "A robot. It looks fragile and weak"
+	maxHealth = 1 LASERS_TO_KILL
+	health = 1 LASERS_TO_KILL
+	melee_damage_lower = 8
+	melee_damage_upper = 8
