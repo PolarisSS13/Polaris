@@ -42,7 +42,7 @@
 
 /mob/living/simple_mob/mechanical/hivebot/swarm
 	name = "swarm hivebot"
-	desc = "A robot. It looks fragile and weak"
+	desc = "A robot. It looks fragile and weak."
 	maxHealth = 1 LASERS_TO_KILL
 	health = 1 LASERS_TO_KILL
 	melee_damage_lower = 8
