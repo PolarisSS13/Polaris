@@ -186,3 +186,9 @@
 	light_range = 2
 	light_power = -3
 
+// This is still stupid, but whatever.
+/mob/living/simple_mob/animal/giant_spider/nurse/hat
+	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes and a tiny nurse hat."
+	icon_state = "nursemed"
+	icon_living = "nursemed"
+	icon_dead = "nursemed_dead"

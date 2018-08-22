@@ -64,4 +64,4 @@
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes. \
 	You have a distinctly <font face='comic sans ms'>bad</font> feeling about this."
 
-	swarmling_type = /mob/living/simple_animal/hostile/giant_spider/carrier/recursive
+	swarmling_type = /mob/living/simple_mob/animal/giant_spider/carrier/recursive

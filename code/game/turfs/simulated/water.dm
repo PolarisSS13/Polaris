@@ -9,7 +9,11 @@
 	edge_blending_priority = -1
 	movement_cost = 4
 	outdoors = TRUE
+
 	layer = WATER_FLOOR_LAYER
+
+	can_dirty = FALSE	// It's water
+
 	var/depth = 1 // Higher numbers indicates deeper water.
 
 /turf/simulated/floor/water/initialize()
