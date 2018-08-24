@@ -5,14 +5,81 @@
 	name = "electronic assembly"
 	desc = "It's a case, for building small electronics with."
 	w_class = ITEMSIZE_SMALL
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_setups.dmi'
 	icon_state = "setup_small"
 	show_messages = TRUE
 	var/max_components = IC_COMPONENTS_BASE
 	var/max_complexity = IC_COMPLEXITY_BASE
-	var/opened = 0
+	var/opened = FALSE
+	var/can_anchor = FALSE // If true, wrenching it will anchor it.
 	var/obj/item/weapon/cell/device/battery = null // Internal cell which most circuits need to work.
+	var/net_power = 0 // Set every tick, to display how much power is being drawn in total.
+	var/detail_color = COLOR_ASSEMBLY_BLACK
 
+// Small assemblies.
+
+/obj/item/device/electronic_assembly/default
+	name = "type-a electronic assembly"
+
+/obj/item/device/electronic_assembly/calc
+	name = "type-b electronic assembly"
+	icon_state = "setup_small_calc"
+	desc = "It's a case, for building small electronics with. This one resembles a pocket calculator."
+
+/obj/item/device/electronic_assembly/clam
+	name = "type-c electronic assembly"
+	icon_state = "setup_small_clam"
+	desc = "It's a case, for building small electronics with. This one has a clamshell design."
+
+/obj/item/device/electronic_assembly/simple
+	name = "type-d electronic assembly"
+	icon_state = "setup_small_simple"
+	desc = "It's a case, for building small electronics with. This one has a simple design."
+
+/obj/item/device/electronic_assembly/hook
+	name = "type-e electronic assembly"
+	icon_state = "setup_small_hook"
+	desc = "It's a case, for building small electronics with. This one looks like it has a belt clip, but it's purely decorative."
+
+/obj/item/device/electronic_assembly/pda
+	name = "type-f electronic assembly"
+	icon_state = "setup_small_pda"
+	desc = "It's a case, for building small electronics with. This one resembles a PDA."
+
+// Tiny assemblies.
+
+/obj/item/device/electronic_assembly/tiny
+	name = "electronic device"
+	icon_state = "setup_device"
+	desc = "It's a case, for building tiny-sized electronics with."
+	w_class = ITEMSIZE_TINY
+	max_components = IC_COMPONENTS_BASE / 2
+	max_complexity = IC_COMPLEXITY_BASE / 2
+
+/obj/item/device/electronic_assembly/tiny/default
+	name = "type-a electronic device"
+
+/obj/item/device/electronic_assembly/tiny/cylinder
+	name = "type-b electronic device"
+	icon_state = "setup_device_cylinder"
+	desc = "It's a case, for building tiny-sized electronics with. This one has a cylindrical design."
+
+/obj/item/device/electronic_assembly/tiny/scanner
+	name = "type-c electronic device"
+	icon_state = "setup_device_scanner"
+	desc = "It's a case, for building tiny-sized electronics with. This one has a scanner-like design."
+
+/obj/item/device/electronic_assembly/tiny/hook
+	name = "type-d electronic device"
+	icon_state = "setup_device_hook"
+	desc = "It's a case, for building tiny-sized electronics with. This one looks like it has a belt clip, but it's purely decorative."
+
+/obj/item/device/electronic_assembly/tiny/box
+	name = "type-e electronic device"
+	icon_state = "setup_device_box"
+	desc = "It's a case, for building tiny-sized electronics with. This one has a boxy design."
+
+// Medium assemblies.
 
 /obj/item/device/electronic_assembly/medium
 	name = "electronic mechanism"
@@ -22,6 +89,41 @@
 	max_components = IC_COMPONENTS_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
 
+/obj/item/device/electronic_assembly/medium/default
+	name = "type-a electronic mechanism"
+
+/obj/item/device/electronic_assembly/medium/box
+	name = "type-b electronic mechanism"
+	icon_state = "setup_medium_box"
+	desc = "It's a case, for building medium-sized electronics with. This one has a boxy design."
+
+/obj/item/device/electronic_assembly/medium/clam
+	name = "type-c electronic mechanism"
+	icon_state = "setup_medium_clam"
+	desc = "It's a case, for building medium-sized electronics with. This one has a clamshell design."
+
+/obj/item/device/electronic_assembly/medium/medical
+	name = "type-d electronic mechanism"
+	icon_state = "setup_medium_med"
+	desc = "It's a case, for building medium-sized electronics with. This one resembles some type of medical apparatus."
+
+/obj/item/device/electronic_assembly/medium/gun
+	name = "type-e electronic mechanism"
+	icon_state = "setup_medium_gun"
+	item_state = "circuitgun"
+	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, \
+	if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
+//	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+//	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+//	can_fire_equipped = TRUE
+
+/obj/item/device/electronic_assembly/medium/radio
+	name = "type-f electronic mechanism"
+	icon_state = "setup_medium_radio"
+	desc = "It's a case, for building medium-sized electronics with. This one resembles an old radio."
+
+// Large assemblies.
+
 /obj/item/device/electronic_assembly/large
 	name = "electronic machine"
 	icon_state = "setup_large"
@@ -29,6 +131,37 @@
 	w_class = ITEMSIZE_LARGE
 	max_components = IC_COMPONENTS_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
+	can_anchor = TRUE
+
+/obj/item/device/electronic_assembly/large/default
+	name = "type-a electronic machine"
+
+/obj/item/device/electronic_assembly/large/scope
+	name = "type-b electronic machine"
+	icon_state = "setup_large_scope"
+	desc = "It's a case, for building large electronics with. This one resembles an oscilloscope."
+
+/obj/item/device/electronic_assembly/large/terminal
+	name = "type-c electronic machine"
+	icon_state = "setup_large_terminal"
+	desc = "It's a case, for building large electronics with. This one resembles a computer terminal."
+
+/obj/item/device/electronic_assembly/large/arm
+	name = "type-d electronic machine"
+	icon_state = "setup_large_arm"
+	desc = "It's a case, for building large electronics with. This one resembles a robotic arm."
+
+/obj/item/device/electronic_assembly/large/tall
+	name = "type-e electronic machine"
+	icon_state = "setup_large_tall"
+	desc = "It's a case, for building large electronics with. This one has a tall design."
+
+/obj/item/device/electronic_assembly/large/industrial
+	name = "type-f electronic machine"
+	icon_state = "setup_large_industrial"
+	desc = "It's a case, for building large electronics with. This one resembles some kind of industrial machinery."
+
+// Drone assemblies, which can move with the locomotion circuit.
 
 /obj/item/device/electronic_assembly/drone
 	name = "electronic drone"
@@ -37,6 +170,83 @@
 	w_class = ITEMSIZE_NORMAL
 	max_components = IC_COMPONENTS_BASE * 1.5
 	max_complexity = IC_COMPLEXITY_BASE * 1.5
+	can_anchor = FALSE
+
+/obj/item/device/electronic_assembly/drone/can_move()
+	return TRUE
+
+/obj/item/device/electronic_assembly/drone/default
+	name = "type-a electronic drone"
+
+/obj/item/device/electronic_assembly/drone/arms
+	name = "type-b electronic drone"
+	icon_state = "setup_drone_arms"
+	desc = "It's a case, for building mobile electronics with. This one is armed and dangerous."
+
+/obj/item/device/electronic_assembly/drone/secbot
+	name = "type-c electronic drone"
+	icon_state = "setup_drone_secbot"
+	desc = "It's a case, for building mobile electronics with. This one resembles a Securitron."
+
+/obj/item/device/electronic_assembly/drone/medbot
+	name = "type-d electronic drone"
+	icon_state = "setup_drone_medbot"
+	desc = "It's a case, for building mobile electronics with. This one resembles a Medibot."
+
+/obj/item/device/electronic_assembly/drone/genbot
+	name = "type-e electronic drone"
+	icon_state = "setup_drone_genbot"
+	desc = "It's a case, for building mobile electronics with. This one has a generic bot design."
+
+/obj/item/device/electronic_assembly/drone/android
+	name = "type-f electronic drone"
+	icon_state = "setup_drone_android"
+	desc = "It's a case, for building mobile electronics with. This one has a hominoid design."
+
+// Wall mounted assemblies.
+
+/obj/item/device/electronic_assembly/wallmount
+	name = "wall-mounted electronic assembly"
+	icon_state = "setup_wallmount_medium"
+	desc = "It's a case, for building medium-sized electronics with. It has a magnetized \
+	backing to allow it to stick to walls, but you'll still need to wrench the anchoring \
+	bolts in place to keep it on."
+	w_class = ITEMSIZE_NORMAL
+	max_components = IC_COMPONENTS_BASE * 2
+	max_complexity = IC_COMPLEXITY_BASE * 2
+	can_anchor = TRUE
+
+/obj/item/device/electronic_assembly/wallmount/heavy
+	name = "heavy wall-mounted electronic assembly"
+	icon_state = "setup_wallmount_large"
+	desc = "It's a case, for building large electronics with. It has a magnetized backing \
+	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
+	place to keep it on."
+	w_class = ITEMSIZE_LARGE
+	max_components = IC_COMPONENTS_BASE * 4
+	max_complexity = IC_COMPLEXITY_BASE * 4
+
+/obj/item/device/electronic_assembly/wallmount/light
+	name = "light wall-mounted electronic assembly"
+	icon_state = "setup_wallmount_small"
+	desc = "It's a case, for building small electronics with. It has a magnetized backing \
+	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
+	place to keep it on."
+	w_class = ITEMSIZE_SMALL
+	max_components = IC_COMPONENTS_BASE
+	max_complexity = IC_COMPLEXITY_BASE
+
+/obj/item/device/electronic_assembly/wallmount/tiny
+	name = "tiny wall-mounted electronic assembly"
+	icon_state = "setup_wallmount_tiny"
+	desc = "It's a case, for building tiny electronics with. It has a magnetized backing \
+	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
+	place to keep it on."
+	w_class = ITEMSIZE_TINY
+	max_components = IC_COMPONENTS_BASE / 2
+	max_complexity = IC_COMPLEXITY_BASE / 2
+
+
 
 /obj/item/device/electronic_assembly/implant
 	name = "electronic implant"
@@ -47,10 +257,31 @@
 	max_complexity = IC_COMPLEXITY_BASE / 2
 	var/obj/item/weapon/implant/integrated_circuit/implant = null
 
-/obj/item/device/electronic_assembly/New()
+/obj/item/device/electronic_assembly/implant/nano_host()
+	return implant
+
+/obj/item/device/electronic_assembly/implant/resolve_nano_host()
+	return implant
+
+/obj/item/device/electronic_assembly/implant/update_icon()
 	..()
+	implant.icon_state = icon_state
+
+
+
+/obj/item/device/electronic_assembly/clothing
+	name = "electronic clothing"
+	icon_state = "setup_implant" // Doesn't really matter since it won't be seen.
+	desc = "It's a case, for building machines attached to clothing."
+	w_class = ITEMSIZE_SMALL
+	max_components = IC_COMPONENTS_BASE / 2
+	max_complexity = IC_COMPLEXITY_BASE / 2
+	var/obj/item/clothing/clothing = null
+
+/obj/item/device/electronic_assembly/initialize()
 	battery = new(src)
 	processing_objects |= src
+	return ..()
 
 /obj/item/device/electronic_assembly/Destroy()
 	battery = null // It will be qdel'd by ..() if still in our contents
@@ -61,29 +292,23 @@
 	handle_idle_power()
 
 /obj/item/device/electronic_assembly/proc/handle_idle_power()
-	// First we generate power.
-	for(var/obj/item/integrated_circuit/passive/power/P in contents)
-		P.make_energy()
+	net_power = 0 // Reset this. This gets increased/decreased with [give/draw]_power() outside of this loop.
 
-	// Now spend it.
+	// First we handle passive sources. Most of these make power so they go first.
+	for(var/obj/item/integrated_circuit/passive/power/P in contents)
+		P.handle_passive_energy()
+
+	// Now we handle idle power draw.
 	for(var/obj/item/integrated_circuit/IC in contents)
 		if(IC.power_draw_idle)
 			if(!draw_power(IC.power_draw_idle))
 				IC.power_fail()
 
-/obj/item/device/electronic_assembly/implant/update_icon()
-	..()
-	implant.icon_state = icon_state
 
 
-/obj/item/device/electronic_assembly/implant/nano_host()
-	return implant
 
 /obj/item/device/electronic_assembly/proc/resolve_nano_host()
 	return src
-
-/obj/item/device/electronic_assembly/implant/resolve_nano_host()
-	return implant
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	if(!CanInteract(user, physical_state))
@@ -107,7 +332,8 @@
 	HTML += "[total_parts]/[max_components] ([round((total_parts / max_components) * 100, 0.1)]%) space taken up in the assembly.<br>"
 	HTML += "[total_complexity]/[max_complexity] ([round((total_complexity / max_complexity) * 100, 0.1)]%) maximum complexity.<br>"
 	if(battery)
-		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
+		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a><br>"
+		HTML += "Net energy: [format_SI(net_power / CELLRATE, "W")]."
 	else
 		HTML += "<span class='danger'>No powercell detected!</span>"
 	HTML += "<br><br>"
@@ -175,14 +401,18 @@
 /obj/item/device/electronic_assembly/proc/can_move()
 	return FALSE
 
-/obj/item/device/electronic_assembly/drone/can_move()
-	return TRUE
-
 /obj/item/device/electronic_assembly/update_icon()
 	if(opened)
 		icon_state = initial(icon_state) + "-open"
 	else
 		icon_state = initial(icon_state)
+	cut_overlays()
+	if(detail_color == COLOR_ASSEMBLY_BLACK) //Black colored overlay looks almost but not exactly like the base sprite, so just cut the overlay and avoid it looking kinda off.
+		return
+	var/mutable_appearance/detail_overlay = mutable_appearance('icons/obj/integrated_electronics/electronic_setups.dmi', "[icon_state]-color")
+	detail_overlay.color = detail_color
+	add_overlay(detail_overlay)
+
 
 /obj/item/device/electronic_assembly/GetAccess()
 	. = list()
@@ -256,7 +486,16 @@
 			visible_message("<span class='notice'>\The [user] waves \the [src] around [target].</span>")
 
 /obj/item/device/electronic_assembly/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/integrated_circuit))
+	if(can_anchor && I.is_wrench())
+		anchored = !anchored
+		to_chat(user, span("notice", "You've [anchored ? "" : "un"]secured \the [src] to \the [get_turf(src)]."))
+		if(anchored)
+			on_anchored()
+		else
+			on_unanchored()
+		return TRUE
+
+	else if(istype(I, /obj/item/integrated_circuit))
 		if(!user.unEquip(I))
 			return FALSE
 		if(add_circuit(I, user))
@@ -264,18 +503,26 @@
 			playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 			interact(user)
 			return TRUE
+
 	else if(I.is_crowbar())
 		playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "opened" : "closed"] \the [src].</span>")
 		update_icon()
 		return TRUE
+
 	else if(istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger) || I.is_screwdriver())
 		if(opened)
 			interact(user)
 		else
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't fiddle with the internal components.  \
 			Try using a crowbar.</span>")
+
+	else if(istype(I, /obj/item/device/integrated_electronics/detailer))
+		var/obj/item/device/integrated_electronics/detailer/D = I
+		detail_color = D.detail_color
+		update_icon()
+
 	else if(istype(I, /obj/item/weapon/cell/device))
 		if(!opened)
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't put anything inside.  Try using a crowbar.</span>")
@@ -291,6 +538,7 @@
 		to_chat(user, "<span class='notice'>You slot \the [cell] inside \the [src]'s power supplier.</span>")
 		interact(user)
 		return TRUE
+
 	else
 		return ..()
 
@@ -331,13 +579,32 @@
 
 // Returns true if power was successfully drawn.
 /obj/item/device/electronic_assembly/proc/draw_power(amount)
-	if(battery && battery.checked_use(amount * CELLRATE))
+	if(battery)
+		var/lost = battery.checked_use(amount * CELLRATE)
+		net_power -= lost
 		return TRUE
 	return FALSE
 
 // Ditto for giving.
 /obj/item/device/electronic_assembly/proc/give_power(amount)
-	if(battery && battery.give(amount * CELLRATE))
+	if(battery)
+		var/gained = battery.give(amount * CELLRATE)
+		net_power += gained
 		return TRUE
 	return FALSE
 
+/obj/item/device/electronic_assembly/on_loc_moved(oldloc)
+	for(var/obj/O in contents)
+		O.on_loc_moved(oldloc)
+
+/obj/item/device/electronic_assembly/Moved(var/oldloc)
+	for(var/obj/O in contents)
+		O.on_loc_moved(oldloc)
+
+/obj/item/device/electronic_assembly/proc/on_anchored()
+	for(var/obj/item/integrated_circuit/IC in contents)
+		IC.on_anchored()
+
+/obj/item/device/electronic_assembly/proc/on_unanchored()
+	for(var/obj/item/integrated_circuit/IC in contents)
+		IC.on_unanchored()

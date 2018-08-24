@@ -1,7 +1,7 @@
 /obj/item/integrated_circuit/built_in
 	name = "integrated circuit"
 	desc = "It's a tiny chip!  This one doesn't seem to do much, however."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_setups.dmi'
 	icon_state = "template"
 	size = -1
 	w_class = ITEMSIZE_TINY
