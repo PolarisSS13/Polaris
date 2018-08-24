@@ -12,7 +12,7 @@
 	return ..()
 
 /mob/living/Destroy()
-	qdel_null(ai_holder)
+	QDEL_NULL(ai_holder)
 	return ..()
 
 /datum/ai_holder

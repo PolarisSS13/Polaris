@@ -42,8 +42,8 @@
 	return ..()
 
 /mob/living/simple_mob/mechanical/combat_drone/Destroy()
-	qdel_null(ion_trail)
-	qdel_null(shields)
+	QDEL_NULL(ion_trail)
+	QDEL_NULL(shields)
 	return ..()
 
 /mob/living/simple_mob/mechanical/combat_drone/death()

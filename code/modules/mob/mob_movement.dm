@@ -296,8 +296,7 @@
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			mob.move_delay = world.time + tickcomp
-			//drunk driving
+			mob.move_delay = world.time + tickcomp			//drunk driving
 			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
 				direct = turn(direct, pick(90, -90))
 			return mob.buckled.relaymove(mob,direct)
@@ -563,7 +562,8 @@
 	return
 
 /obj/item/weapon/storage/on_loc_moved(atom/oldloc)
-	for(var/obj/O in contents)		O.on_loc_moved(oldloc)
+	for(var/obj/O in contents)
+		O.on_loc_moved(oldloc)
 
 /client/verb/moveup()
 	set name = ".moveup"
