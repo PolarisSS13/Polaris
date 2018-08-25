@@ -1033,20 +1033,14 @@ The _flatIcons list is a cache for generated icon files.
 
 //getFlatIcon but generates an icon that can face ALL four directions. The only four.
 /proc/getCompoundIcon(atom/A)
-	world << "getCompoundIcon([A.name]) called."
-	world << "getCompoundIcon | Getting north icon."
 	var/icon/north = getFlatIcon(A,defdir=NORTH)
-	world << "getCompoundIcon | Getting south icon."
 	var/icon/south = getFlatIcon(A,defdir=SOUTH)
-	world << "getCompoundIcon | Getting east icon."
 	var/icon/east = getFlatIcon(A,defdir=EAST)
-	world << "getCompoundIcon | Getting west icon."
 	var/icon/west = getFlatIcon(A,defdir=WEST)
 
 	//Starts with a blank icon because of byond bugs.
 	var/icon/full = icon('icons/effects/effects.dmi', "icon_state"="nothing")
 
-	world << "getCompoundIcon | Building icon."
 	full.Insert(north,dir=NORTH)
 	full.Insert(south,dir=SOUTH)
 	full.Insert(east,dir=EAST)

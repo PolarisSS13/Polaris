@@ -493,6 +493,7 @@
 			on_anchored()
 		else
 			on_unanchored()
+		playsound(src, I.usesound, 50, 1)
 		return TRUE
 
 	else if(istype(I, /obj/item/integrated_circuit))
@@ -580,7 +581,7 @@
 // Returns true if power was successfully drawn.
 /obj/item/device/electronic_assembly/proc/draw_power(amount)
 	if(battery)
-		var/lost = battery.checked_use(amount * CELLRATE)
+		var/lost = battery.use(amount * CELLRATE)
 		net_power -= lost
 		return TRUE
 	return FALSE

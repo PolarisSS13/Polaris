@@ -171,7 +171,7 @@
 /obj/item/integrated_circuit/passive/power/powernet
 	name = "power network interface"
 	desc = "Gives or takes power from a wire underneath the machine."
-	icon_state = "chemical_cell"
+	icon_state = "powernet"
 	extended_desc = "The assembly must be anchored, with a wrench, and a wire node must be avaiable directly underneath.<br>\
 	The first pin determines if power is moved at all. The second pin, if true, will draw from the powernet to charge the assembly's \
 	cell, otherwise it will give power from the cell to the powernet."
@@ -181,8 +181,9 @@
 		"draw power" = IC_PINTYPE_BOOLEAN
 		)
 	outputs = list(
-		"available power" = IC_PINTYPE_NUMBER,
-		"surplus power" = IC_PINTYPE_NUMBER
+		"power in grid" = IC_PINTYPE_NUMBER,
+		"surplus power" = IC_PINTYPE_NUMBER,
+		"load" = IC_PINTYPE_NUMBER
 		)
 	activators = list()
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
@@ -205,13 +206,16 @@
 	IO.disconnect_from_network()
 
 /obj/item/integrated_circuit/passive/power/powernet/handle_passive_energy()
-	if(assembly && assembly.anchored)
+	if(assembly && assembly.anchored && assembly.battery)
 		var/should_act = get_pin_data(IC_INPUT, 1) // Even if this is false, we still need to update the output pins with powernet information.
 		var/drawing = get_pin_data(IC_INPUT, 2)
 
 		if(should_act) // We're gonna give or take from the net.
 			if(drawing)
-				var/amount = IO.draw_power(throughput)
+				var/to_transfer = min(throughput, assembly.battery.amount_missing() / CELLRATE) // So we don't need to draw 10kW if the cell needs much less.
+				world << "Transferring [to_transfer]."
+				var/amount = IO.draw_power(to_transfer)
+				world << "Giving [amount] to cell."
 				assembly.give_power(amount)
 			else
 				var/amount = assembly.draw_power(throughput)
@@ -219,6 +223,7 @@
 
 		set_pin_data(IC_OUTPUT, 1, IO.avail())
 		set_pin_data(IC_OUTPUT, 2, IO.surplus())
+		set_pin_data(IC_OUTPUT, 3, IO.viewload())
 
 // Internal power machine for interacting with the powernet.
 // It needs a bit of special code since base /machinery/power assumes loc will be a tile.
