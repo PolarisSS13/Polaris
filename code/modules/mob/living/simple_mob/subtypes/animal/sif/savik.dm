@@ -35,8 +35,9 @@
 
 /mob/living/simple_mob/animal/sif/savik/handle_special()
 	if((get_AI_stance() in list(STANCE_APPROACH, STANCE_FIGHT)) && !is_AI_busy() && isturf(loc))
-		if((health / maxHealth) <= 0.5) // At half health, and fighting someone currently.
+		if(health <= (maxHealth * 0.5)) // At half health, and fighting someone currently.
 			berserk()
+
 
 // So players can use it too.
 /mob/living/simple_mob/animal/sif/savik/verb/berserk()

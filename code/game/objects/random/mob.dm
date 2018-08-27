@@ -22,18 +22,18 @@
 				prob(6);/mob/living/simple_mob/animal/sif/diyaab,
 				prob(10);/mob/living/simple_animal/cat/fluff,
 				prob(6);/mob/living/simple_animal/cat/kitten,
-				prob(10);/mob/living/simple_animal/corgi,
-				prob(6);/mob/living/simple_animal/corgi/puppy,
+				prob(10);/mob/living/simple_mob/animal/passive/dog/corgi,
+				prob(6);/mob/living/simple_mob/animal/passive/dog/corgi/puppy,
 				prob(10);/mob/living/simple_mob/animal/passive/crab,
-				prob(10);/mob/living/simple_animal/chicken,
-				prob(6);/mob/living/simple_animal/chick,
-				prob(10);/mob/living/simple_animal/cow,
-				prob(6);/mob/living/simple_animal/retaliate/goat,
+				prob(10);/mob/living/simple_mob/animal/passive/chicken,
+				prob(6);/mob/living/simple_mob/animal/passive/chick,
+				prob(10);/mob/living/simple_mob/animal/passive/cow,
+				prob(6);/mob/living/simple_mob/goat,
 				prob(10);/mob/living/simple_mob/animal/passive/penguin,
-				prob(10);/mob/living/simple_animal/mouse,
+				prob(10);/mob/living/simple_mob/animal/passive/mouse,
 				prob(10);/mob/living/simple_mob/animal/passive/yithian,
 				prob(10);/mob/living/simple_mob/animal/passive/tindalos,
-				prob(10);/mob/living/simple_animal/corgi/tamaskan,
+				prob(10);/mob/living/simple_mob/animal/passive/dog/tamaskan,
 				prob(3);/mob/living/simple_animal/parrot,
 				prob(1);/mob/living/simple_mob/animal/passive/crab)
 
@@ -68,10 +68,10 @@
 	return pick(prob(30);/mob/living/simple_mob/animal/sif/diyaab,
 				prob(15);/mob/living/simple_mob/animal/passive/crab,
 				prob(15);/mob/living/simple_mob/animal/passive/penguin,
-				prob(15);/mob/living/simple_animal/mouse,
-				prob(15);/mob/living/simple_animal/corgi/tamaskan,
+				prob(15);/mob/living/simple_mob/animal/passive/mouse,
+				prob(15);/mob/living/simple_mob/animal/passive/dog/tamaskan,
 				prob(2);/mob/living/simple_mob/animal/giant_spider/frost,
-				prob(1);/mob/living/simple_animal/hostile/goose,
+				prob(1);/mob/living/simple_mob/animal/space/goose,
 				prob(20);/mob/living/simple_mob/animal/passive/crab)
 
 
@@ -87,8 +87,8 @@
 	return pick(prob(30);/mob/living/simple_mob/animal/sif/diyaab,
 				prob(15);/mob/living/simple_mob/animal/passive/crab,
 				prob(15);/mob/living/simple_mob/animal/passive/penguin,
-				prob(15);/mob/living/simple_animal/mouse,
-				prob(15);/mob/living/simple_animal/corgi/tamaskan,
+				prob(15);/mob/living/simple_mob/animal/passive/mouse,
+				prob(15);/mob/living/simple_mob/animal/passive/dog/tamaskan,
 				prob(20);/mob/living/simple_mob/animal/sif/hooligan_crab)
 
 /obj/random/mob/sif/hostile

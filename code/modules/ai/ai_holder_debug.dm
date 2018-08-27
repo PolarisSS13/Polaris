@@ -85,11 +85,6 @@
 	last_turf_display = TRUE
 	debug_ai = AI_LOG_INFO
 
-// Remove this when finished.
-
-/mob/living/simple_animal/corgi
-	ai_holder_type = /datum/ai_holder/test
-
 /datum/ai_holder/test
 	hostile = TRUE
 	use_astar = TRUE

@@ -11,7 +11,7 @@
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
 		/mob/living/simple_animal/slime,
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_mob/animal/passive/mouse,
 		/mob/living/silicon/robot/drone
 		)
 

@@ -13,8 +13,6 @@
 	icon_gib = "syndicate_gib"
 
 	faction = "syndicate"
-	health = 150			// Point of human crit, as of commenting
-	maxHealth = 150
 	movement_cooldown = 4
 
 	status_flags = 0
@@ -51,13 +49,14 @@
 
 // Check if we should bother with the grenade
 /mob/living/simple_mob/humanoid/merc/should_special_attack(atom/A)
-	var/mob_count = 0				// Checks to see if you can
+	var/mob_count = 0				// Are there enough mobs to consider grenading?
 	var/turf/T = get_turf(A)
 	for(var/mob/M in range(T, 2))
 		if(M.faction == faction) 	// Don't grenade our friends
 			return FALSE
 		if(M in oview(src, special_attack_max_range))	// And lets check if we can actually see at least two people before we throw a grenade
-			mob_count ++
+			if(!M.stat)			// Dead things don't warrant a grenade
+				mob_count ++
 	if(mob_count < 2)
 		return FALSE
 	else
@@ -72,6 +71,7 @@
 	if(istype(G))
 		G.throw_at(A, G.throw_range, G.throw_speed, src)
 		G.attack_self(src)
+		special_attack_charges = max(special_attack_charges-1, 0)
 
 	set_AI_busy(FALSE)
 
@@ -121,7 +121,7 @@
 		else
 			..()
 	else
-		usr << "<span class='warning'>This weapon is ineffective, it does no damage.</span>"
+		to_chat(user, "<span class='warning'>This weapon is ineffective, it does no damage.</span>")
 		visible_message("<span class='warning'>\The [user] gently taps [src] with \the [O].</span>")
 
 /mob/living/simple_mob/humanoid/merc/melee/sword/bullet_act(var/obj/item/projectile/Proj)
@@ -184,7 +184,7 @@
 
 	reload_max = 10
 
-// Grenadier
+// Grenadier, Basically a miniboss
 /mob/living/simple_mob/humanoid/merc/ranged/grenadier
 	icon_state = "syndicateranged_shotgun"
 	icon_living = "syndicateranged_shotgun"

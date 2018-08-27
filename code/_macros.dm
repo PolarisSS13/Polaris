@@ -26,7 +26,7 @@
 
 #define isliving(A) istype(A, /mob/living)
 
-#define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
+#define ismouse(A) istype(A, /mob/living/simple_mob/animal/passive/mouse)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 

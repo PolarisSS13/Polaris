@@ -139,7 +139,7 @@
 		return FALSE
 
 	// Charge check.
-	if(!isnull(special_attack_charges) && special_attack_charges <= 0)
+	if(!special_attack_charges)
 		return FALSE
 
 	return TRUE

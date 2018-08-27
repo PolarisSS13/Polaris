@@ -12,6 +12,9 @@
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
 
+	health = 150			// Point of human crit, as of commenting
+	maxHealth = 150
+
 	// Most humans leave a corpse
 	var/corpse = null
 

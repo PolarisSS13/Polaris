@@ -24,7 +24,7 @@
 	health = 200
 	movement_cooldown = 10
 	movement_sound = 'sound/weapons/heavysmash.ogg'
-	taser_kill = 0
+	taser_kill = FALSE
 	armor = list(
 				"melee" = 40,
 				"bullet" = 20,
@@ -54,6 +54,7 @@
 	attack_delay = 1 SECOND
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"

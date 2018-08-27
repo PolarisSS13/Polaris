@@ -26,7 +26,7 @@
 	attacktext = list("gouged")
 
 	say_list_type = /datum/say_list/diyaab
-	ai_holder_type = /datum/ai_holder/simple_mob/cooperative_retaliate
+	ai_holder_type = /datum/ai_holder/simple_mob/retaliate/cooperative
 
 /datum/say_list/diyaab
 	speak = list("Awrr?", "Aowrl!", "Worrl.")
