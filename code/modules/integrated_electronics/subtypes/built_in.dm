@@ -26,3 +26,14 @@
 	if(istype(assembly, /obj/item/device/electronic_assembly/device))
 		var/obj/item/device/electronic_assembly/device/device = assembly
 		device.holder.pulse()
+
+// Triggered when clothing assembly's hud button is clicked (or used inhand).
+/obj/item/integrated_circuit/built_in/action_button
+	name = "external trigger circuit"
+	desc = "A built in chip that outputs a pulse when an external control event occurs."
+	extended_desc = "This outputs a pulse if the assembly's HUD button is clicked while the assembly is closed."
+	complexity = 0
+	activators = list("on activation" = IC_PINTYPE_PULSE_OUT)
+
+/obj/item/integrated_circuit/built_in/action_button/do_work()
+	activate_pin(1)
