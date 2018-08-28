@@ -13,7 +13,7 @@
 "m" = (/obj/structure/curtain/black,/turf/simulated/floor,/area/submap/Drugd)
 "n" = (/obj/random/trash,/turf/simulated/floor/carpet,/area/submap/Drugd)
 "o" = (/turf/simulated/floor/carpet,/area/submap/Drugd)
-"p" = (/mob/living/simple_animal/mouse,/turf/simulated/floor,/area/submap/Drugd)
+"p" = (/obj/effect/decal/remains/mouse,/turf/simulated/floor,/area/submap/Drugd)
 "q" = (/obj/structure/closet/cabinet,/turf/simulated/floor/carpet,/area/submap/Drugd)
 "r" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/pill/methylphenidate{name = "pill"},/turf/simulated/floor/carpet,/area/submap/Drugd)
 "s" = (/obj/structure/bed/chair/comfy/beige{icon_state = "armchair_preview"; dir = 1},/turf/simulated/floor/carpet,/area/submap/Drugd)

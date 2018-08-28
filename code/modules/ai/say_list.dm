@@ -15,7 +15,7 @@
 	return ..()
 
 /mob/living/Destroy()
-	qdel_null(say_list)
+	QDEL_NULL(say_list)
 	return ..()
 
 

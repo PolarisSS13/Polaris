@@ -33,16 +33,12 @@
 
 	var/knockdown_chance = 15
 
-/mob/living/simple_mob/animal/space/carp/Process_Spacemove(var/check_drift = 0)
-	return TRUE //No drifting in space for space carp!	//original comments do not steal	// stolen.
-
 /mob/living/simple_mob/animal/space/carp/apply_melee_effects(var/atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
 		if(prob(knockdown_chance))
 			L.Weaken(3)
 			L.visible_message(span("danger", "\The [src] knocks down \the [L]!"))
-
 
 // Subtypes.
 /mob/living/simple_mob/animal/space/carp/large
