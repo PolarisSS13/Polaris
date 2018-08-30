@@ -9,9 +9,6 @@
 	edge_blending_priority = -1
 	movement_cost = 4
 	outdoors = TRUE
-
-	layer = WATER_FLOOR_LAYER
-
 	can_dirty = FALSE	// It's water
 
 	var/depth = 1 // Higher numbers indicates deeper water.
@@ -22,11 +19,10 @@
 
 /turf/simulated/floor/water/update_icon()
 	..() // To get the edges.
-
-	icon_state = under_state // This isn't set at compile time in order for it to show as water in the map editor.
-	var/image/water_sprite = image(icon = 'icons/turf/outdoors.dmi', icon_state = water_state, layer = WATER_LAYER)
-	add_overlay(water_sprite)
-
+	icon_state = water_state
+	var/image/floorbed_sprite = image(icon = 'icons/turf/outdoors.dmi', icon_state = under_state)
+	underlays.Cut() // To clear the old underlay, so the list doesn't expand infinitely
+	underlays.Add(floorbed_sprite)
 	update_icon_edge()
 
 /turf/simulated/floor/water/get_edge_icon_state()
@@ -119,8 +115,6 @@
 	adjust_fire_stacks(-amount * 5)
 	for(var/atom/movable/AM in contents)
 		AM.water_act(amount)
-	remove_modifiers_of_type(/datum/modifier/fire)
-	inflict_water_damage(20 * amount) // Only things vulnerable to water will actually be harmed (slimes/prommies).
 
 var/list/shoreline_icon_cache = list()
 
@@ -146,9 +140,7 @@ var/list/shoreline_icon_cache = list()
 		var/icon/shoreline_water = icon(src.icon, "shoreline_water", src.dir)
 		var/icon/shoreline_subtract = icon(src.icon, "[initial(icon_state)]_subtract", src.dir)
 		shoreline_water.Blend(shoreline_subtract,ICON_SUBTRACT)
-		var/image/final = image(shoreline_water)
-		final.layer = WATER_LAYER
 
-		shoreline_icon_cache[cache_string] = final
+		shoreline_icon_cache[cache_string] = shoreline_water
 		add_overlay(shoreline_icon_cache[cache_string])
 

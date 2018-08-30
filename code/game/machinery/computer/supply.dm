@@ -169,7 +169,11 @@
 	data["contraband"] = can_order_contraband
 
 	// update the ui if it exists, returns null if no ui is passed/found
+<<<<<<< HEAD
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+=======
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+>>>>>>> 47861ad75954ef1882d90819b1a8b7e62d029353
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
