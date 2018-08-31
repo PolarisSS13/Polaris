@@ -10,7 +10,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	flags = NOREACT
-	var/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000. //VOREStation Edit - Non-global
+	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_on = "smartfridge"
 	var/icon_off = "smartfridge-off"
 	var/icon_panel = "smartfridge-panel"
@@ -208,7 +208,7 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/screwdriver))
+	if(O.is_screwdriver())
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		playsound(src, O.usesound, 50, 1)
@@ -221,13 +221,13 @@
 	if(wrenchable && default_unfasten_wrench(user, O, 20))
 		return
 
-	if(istype(O, /obj/item/device/multitool)||istype(O, /obj/item/weapon/wirecutters))
+	if(istype(O, /obj/item/device/multitool) || O.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return
 
 	if(stat & NOPOWER)
-		user << "<span class='notice'>\The [src] is unpowered and useless.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
 		return
 
 	if(accept_check(O))
@@ -241,33 +241,32 @@
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
 			if(accept_check(G))
-				P.remove_from_storage(G)
 				stock(G)
 				plants_loaded = 1
 		if(plants_loaded)
 			user.visible_message("<span class='notice'>[user] loads \the [src] with \the [P].</span>", "<span class='notice'>You load \the [src] with \the [P].</span>")
 			if(P.contents.len > 0)
-				user << "<span class='notice'>Some items are refused.</span>"
+				to_chat(user, "<span class='notice'>Some items are refused.</span>")
 
 	else if(istype(O, /obj/item/weapon/gripper)) // Grippers. ~Mechoid.
 		var/obj/item/weapon/gripper/B = O	//B, for Borg.
 		if(!B.wrapped)
-			user << "\The [B] is not holding anything."
+			to_chat(user, "\The [B] is not holding anything.")
 			return
 		else
 			var/B_held = B.wrapped
-			user << "You use \the [B] to put \the [B_held] into \the [src]."
+			to_chat(user, "You use \the [B] to put \the [B_held] into \the [src].")
 		return
 
 	else
-		user << "<span class='notice'>\The [src] smartly refuses [O].</span>"
+		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
 		return 1
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		emagged = 1
 		locked = -1
-		user << "You short out the product lock on [src]."
+		to_chat(user, "You short out the product lock on [src].")
 		return 1
 
 /obj/machinery/smartfridge/proc/stock(obj/item/O)
@@ -379,9 +378,10 @@
 *************************/
 
 /obj/machinery/smartfridge/secure/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return 0
+	if(stat & (NOPOWER|BROKEN))
+		return 0
 	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
 		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
-			usr << "<span class='warning'>Access denied.</span>"
+			to_chat(usr, "<span class='warning'>Access denied.</span>")
 			return 0
 	return ..()
