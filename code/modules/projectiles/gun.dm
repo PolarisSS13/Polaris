@@ -91,6 +91,7 @@
 	var/obj/item/dnalockingchip/attached_lock
 
 	var/last_shot = 0			//records the last shot fired
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -376,9 +377,11 @@
 
 		last_shot = world.time
 
-/*	// Commented out for quality control and testing.
+/*
+	// Commented out for quality control and testing.
 	shooting = 0
 */
+
 	// We do this down here, so we don't get the message if we fire an empty gun.
 	if(user.item_is_in_hands(src) && user.hands_are_full())
 		if(one_handed_penalty >= 20)
@@ -478,8 +481,6 @@
 	if(muzzle_flash)
 		set_light(0)
 
-
-
 //obtains the next projectile to fire
 /obj/item/weapon/gun/proc/consume_next_projectile()
 	return null
@@ -551,7 +552,6 @@
 			shake_camera(user, recoil+1, recoil)
 	update_icon()
 
-
 /obj/item/weapon/gun/proc/process_point_blank(obj/projectile, mob/user, atom/target)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
@@ -590,13 +590,7 @@
 	P.accuracy = accuracy + acc_mod
 	P.dispersion = disp_mod
 
-	// Certain statuses make it harder to aim, blindness especially.  Same chances as melee, however guns accuracy uses multiples of 15.
-	if(user.eye_blind)
-		P.accuracy -= 75
-	if(user.eye_blurry)
-		P.accuracy -= 30
-	if(user.confused)
-		P.accuracy -= 45
+	P.accuracy -= user.get_accuracy_penalty()
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
@@ -639,7 +633,6 @@
 		play_fire_sound(user, P)
 
 	return launched
-
 
 /obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
 	var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
