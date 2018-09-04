@@ -193,19 +193,49 @@
 	name = "wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_medium"
 	desc = "It's a case, for building medium-sized electronics with. It has a magnetized \
-	backing to allow it to stick to walls, but you'll still need to wrench the anchoring \
-	bolts in place to keep it on."
+	backing to allow it to stick to walls."
 	w_class = ITEMSIZE_NORMAL
 	max_components = IC_COMPONENTS_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
 	can_anchor = TRUE
 
+/obj/item/device/electronic_assembly/wallmount/proc/mount_assembly(turf/on_wall, mob/user)
+	if(get_dist(on_wall,user) > 1)
+		return
+	var/ndir = get_dir(on_wall, user)
+	if(!(ndir in cardinal))
+		return
+	var/turf/T = get_turf(user)
+	if(!istype(T, /turf/simulated/floor))
+		to_chat(user, "<span class='warning'>You cannot place \the [src] on this spot!</span>")
+		return
+	playsound(src.loc, 'sound/machines/click.ogg', 75, 1)
+	user.visible_message("\The [user] attaches \the [src] to the wall.",
+		"<span class='notice'>You attach \the [src] to the wall.</span>",
+		"<span class='italics'>You hear clicking.</span>")
+	user.drop_item(T)
+	anchored = TRUE
+	on_anchored()
+	switch(ndir)
+		if(NORTH)
+			pixel_y = -31
+		if(SOUTH)
+			pixel_y = 31
+		if(EAST)
+			pixel_x = -31
+		if(WEST)
+			pixel_x = 31
+
+/obj/item/device/electronic_assembly/wallmount/on_unanchored()
+	pixel_x = 0
+	pixel_y = 0
+	..()
+
 /obj/item/device/electronic_assembly/wallmount/heavy
 	name = "heavy wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_large"
 	desc = "It's a case, for building large electronics with. It has a magnetized backing \
-	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
-	place to keep it on."
+	to allow it to stick to walls."
 	w_class = ITEMSIZE_LARGE
 	max_components = IC_COMPONENTS_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
@@ -214,8 +244,7 @@
 	name = "light wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_small"
 	desc = "It's a case, for building small electronics with. It has a magnetized backing \
-	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
-	place to keep it on."
+	to allow it to stick to walls."
 	w_class = ITEMSIZE_SMALL
 	max_components = IC_COMPONENTS_BASE
 	max_complexity = IC_COMPLEXITY_BASE
@@ -224,8 +253,7 @@
 	name = "tiny wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_tiny"
 	desc = "It's a case, for building tiny electronics with. It has a magnetized backing \
-	to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in \
-	place to keep it on."
+	to allow it to stick to walls."
 	w_class = ITEMSIZE_TINY
 	max_components = IC_COMPONENTS_BASE / 2
 	max_complexity = IC_COMPLEXITY_BASE / 2

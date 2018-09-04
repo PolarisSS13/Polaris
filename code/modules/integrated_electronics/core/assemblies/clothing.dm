@@ -1,6 +1,7 @@
 
 // The base subtype for assemblies that can be worn. Certain pieces will have more or less capabilities
 // E.g. Glasses have less room than something worn over the chest.
+// Note that the electronic assembly is INSIDE the object that actually gets worn, in a similar way to implants.
 
 /obj/item/device/electronic_assembly/clothing
 	name = "electronic clothing"
@@ -116,7 +117,7 @@
 /obj/item/clothing/gloves/circuitry
 	name = "electronic gloves"
 	desc = "It's a wearable case for electronics. This one is a pair of black gloves, with wires woven into them. A small \
-	device with a screen is attached to the right glove."
+	device with a screen is attached to the left glove."
 	icon_state = "circuitry"
 	item_state = "circuitry"
 

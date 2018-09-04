@@ -348,7 +348,7 @@
 	The assembly must be able to see the object to make a holographic copy of it.<br>\
 	Scaling is capped between -2 and 2.<br>\
 	The rotation pin uses degrees.<br>\
-	Imitated object cannot be changed while projecting. Position \
+	Imitated object cannot be changed while projecting. Position, \
 	scale, and rotation can be updated without restarting by pulsing the update hologram pin."
 	complexity = 40
 	icon_state = "holo_projector"
@@ -362,7 +362,7 @@
 		"hologram rotation" = IC_PINTYPE_NUMBER
 		)
 	inputs_default = list(
-		"3" = "#FFFFFF",
+		"3" = "#7DB4E1",
 		"4" = 0,
 		"5" = 0,
 		"6" = 1,
