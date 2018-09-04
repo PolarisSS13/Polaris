@@ -77,7 +77,9 @@
 				"Weather" = planet.weather_holder.current_weather.name,
 				"Temperature" = planet.weather_holder.temperature - T0C,
 				"High" = planet.weather_holder.current_weather.temp_high - T0C,
-				"Low" = planet.weather_holder.current_weather.temp_low - T0C)
+				"Low" = planet.weather_holder.current_weather.temp_low - T0C,
+				"Forecast" = english_list(planet.weather_holder.forecast, and_text = "&#8594;", comma_text = "&#8594;", final_comma_text = "&#8594;") // Unicode RIGHTWARDS ARROW.
+				)
 			weather[++weather.len] = W
 
 	injection = "<div>Test</div>"
@@ -112,7 +114,7 @@
 	data["injection"] = injection
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -248,5 +250,5 @@
 		fon = !fon
 		set_light(fon * flum)
 
-	nanomanager.update_uis(src)
+	GLOB.nanomanager.update_uis(src)
 	add_fingerprint(usr)
