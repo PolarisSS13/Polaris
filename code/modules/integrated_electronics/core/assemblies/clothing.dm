@@ -96,7 +96,7 @@
 	if(IC)
 		IC.clothing = null
 		action_circuit = null // Will get deleted by qdel-ing the IC assembly.
-		qdel_null(IC)
+		qdel(IC)
 	return ..()
 
 // Specific subtypes.

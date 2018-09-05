@@ -78,7 +78,25 @@
 	else
 		if(assembly)
 			assembly.set_light(0)
-	power_draw_idle = light_toggled ? light_brightness * 2 : 0
+	power_draw_idle = light_toggled ? light_brightness * light_brightness : 0 // Should be the same draw as regular lights.
+
+/obj/item/integrated_circuit/output/light/power_fail() // Turns off the flashlight if there's no power left.
+	light_toggled = FALSE
+	update_lighting()
+
+/obj/item/integrated_circuit/output/light/advanced
+	name = "advanced light"
+	desc = "This light can turn on and off on command, in any color, and in various brightness levels."
+	extended_desc = "The brightness is limited to values between 1 and 6."
+	icon_state = "light_adv"
+	complexity = 8
+	inputs = list(
+		"color" = IC_PINTYPE_COLOR,
+		"brightness" = IC_PINTYPE_NUMBER
+	)
+	outputs = list()
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3)
 
 /obj/item/integrated_circuit/output/light/advanced/update_lighting()
 	var/new_color = get_pin_data(IC_INPUT, 1)
@@ -91,41 +109,8 @@
 
 	..()
 
-/obj/item/integrated_circuit/output/light/power_fail() // Turns off the flashlight if there's no power left.
-	light_toggled = FALSE
-	update_lighting()
-
-/obj/item/integrated_circuit/output/light/advanced
-	name = "advanced light"
-	desc = "This light can turn on and off on command, in any color, and in various brightness levels."
-	icon_state = "light_adv"
-	complexity = 8
-	inputs = list(
-		"color" = IC_PINTYPE_COLOR,
-		"brightness" = IC_PINTYPE_NUMBER
-	)
-	outputs = list()
-	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
-	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 3)
-
 /obj/item/integrated_circuit/output/light/advanced/on_data_written()
 	update_lighting()
-
-/obj/item/integrated_circuit/output/sound
-	name = "speaker circuit"
-	desc = "A miniature speaker is attached to this component."
-	icon_state = "speaker"
-	complexity = 8
-	cooldown_per_use = 4 SECONDS
-	inputs = list(
-		"sound ID" = IC_PINTYPE_STRING,
-		"volume" = IC_PINTYPE_NUMBER,
-		"frequency" = IC_PINTYPE_BOOLEAN
-	)
-	outputs = list()
-	activators = list("play sound" = IC_PINTYPE_PULSE_IN)
-	power_draw_per_use = 20
-	var/list/sounds = list()
 
 /obj/item/integrated_circuit/output/text_to_speech
 	name = "text-to-speech circuit"
@@ -145,6 +130,22 @@
 	if(!isnull(text))
 		var/obj/O = assembly ? loc : assembly
 		audible_message("\icon[O] \The [O.name] states, \"[text]\"")
+
+/obj/item/integrated_circuit/output/sound
+	name = "speaker circuit"
+	desc = "A miniature speaker is attached to this component."
+	icon_state = "speaker"
+	complexity = 8
+	cooldown_per_use = 4 SECONDS
+	inputs = list(
+		"sound ID" = IC_PINTYPE_STRING,
+		"volume" = IC_PINTYPE_NUMBER,
+		"frequency" = IC_PINTYPE_BOOLEAN
+	)
+	outputs = list()
+	activators = list("play sound" = IC_PINTYPE_PULSE_IN)
+	power_draw_per_use = 20
+	var/list/sounds = list()
 
 /obj/item/integrated_circuit/output/sound/New()
 	..()
@@ -462,7 +463,7 @@
 
 /obj/item/integrated_circuit/output/holographic_projector/proc/destroy_hologram()
 	hologram.forceMove(src)
-	qdel_null(hologram)
+	qdel(hologram)
 
 //	holo_beam.End()
 //	qdel_null(holo_beam)

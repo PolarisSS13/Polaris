@@ -96,10 +96,12 @@
 	icon_state = "setup_medium_gun"
 	item_state = "circuitgun"
 	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, \
-	if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
-//	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
-//	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+	if you're feeling optimistic."
 //	can_fire_equipped = TRUE
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_guns.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_guns.dmi',
+		)
 
 /obj/item/device/electronic_assembly/medium/radio
 	name = "type-f electronic mechanism"
