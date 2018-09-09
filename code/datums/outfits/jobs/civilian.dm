@@ -109,3 +109,10 @@
 	pda_type = /obj/item/device/pda/cargo // Brown looks more rugged
 	r_pocket = /obj/item/device/gps/explorer
 	id_pda_assignment = "Explorer"
+
+/decl/hierarchy/outfit/job/barber
+	name = OUTFIT_JOB_NAME("Barber")
+	id_type = /obj/item/weapon/card/id/assistant
+	r_pocket = /obj/item/device/communicator
+	uniform = /obj/item/clothing/under/rank/barber
+	r_pocket = /obj/item/weapon/scissors/barber

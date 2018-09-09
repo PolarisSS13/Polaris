@@ -7,12 +7,17 @@
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	applies_material_colour = 1
 
 /obj/structure/bed/chair/New()
 	..() //Todo make metal/stone chairs display as thrones
 	spawn(3)	//sorry. i don't think there's a better way to do this.
 		update_layer()
 	return
+
+/obj/structure/bed/chair/general
+	applies_material_colour = 0
+	color = null
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -96,6 +101,7 @@
 /obj/structure/bed/chair/comfy
 	desc = "It's a chair. It looks comfy."
 	icon_state = "comfychair_preview"
+	applies_material_colour = 1
 
 /obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","leather")
@@ -191,6 +197,7 @@
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
 	icon_state = "wooden_chair"
+	applies_material_colour = 1
 
 /obj/structure/bed/chair/wood/update_icon()
 	return
@@ -213,6 +220,7 @@
 	icon_state = "sofamiddle"
 	anchored = 1
 	buckle_lying = 0
+	buckle_dir = SOUTH
 
 /obj/structure/bed/sofa/update_icon()
 	return
@@ -222,7 +230,10 @@
 
 /obj/structure/bed/sofa/left
 	icon_state = "sofaend_left"
+	buckle_dir = WEST
+
 /obj/structure/bed/sofa/right
 	icon_state = "sofaend_right"
+	buckle_dir = EAST
 /obj/structure/bed/sofa/corner
 	icon_state = "sofacorner"

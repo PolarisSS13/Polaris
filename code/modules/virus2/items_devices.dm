@@ -93,6 +93,7 @@
 		user << "\The [src] shatters!"
 		qdel(src)
 
+
 ///////////////GNA DISK///////////////
 
 /obj/item/weapon/diseasedisk

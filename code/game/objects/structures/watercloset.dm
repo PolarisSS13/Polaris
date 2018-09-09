@@ -447,7 +447,7 @@
 	name = "kitchen sink"
 	icon_state = "sink_alt"
 
-/obj/structure/sink/puddle	//splishy splashy ^_^
+/obj/structure/sink/puddle	//splishy splashy
 	name = "puddle"
 	icon_state = "puddle"
 	desc = "A small pool of some liquid, ostensibly water."
@@ -461,3 +461,21 @@
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
+
+/obj/structure/sink/puddle/fountain	//probably should let people throw coins into this
+	name = "water fountain"
+	icon = 'icons/obj/fountain.dmi'
+	icon_state = "fountain"
+	desc = "A large water fountain. Throw a coin in, make a wish."
+	bound_width = 64
+	bound_height = 64
+	light_range = 4
+	light_power = 2
+	light_color = "#ebf7fe"  //white blue
+
+
+/obj/structure/sink/puddle/fountain/attack_hand(mob/M as mob)
+	return
+
+/obj/structure/sink/puddle/fountain/attackby(obj/item/O as obj, mob/user as mob)
+	return

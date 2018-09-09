@@ -524,25 +524,8 @@
 		return
 
 	honk_horn()
-	usr << "<span class='notice'>You honk the horn. Hmm...must be broken.</span>"
+	usr << "<span class='notice'>You press the horn.</span>"
 
-/obj/vehicle/car/sportscar/policecar/proc/siren()
-	set name = "Play Siren"
-	set category = "Vehicle"
-	set src in view(0)
-
-	if(!istype(usr, /mob/living/carbon/human))
-		return
-
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying || (usr == trunk))
-		return
-
-	if(!on)
-		usr << "<span class='warning'>Turn on the engine.</span>"
-		return
-
-	honk_horn()
-	usr << "<span class='notice'>You sound the siren.</span>"
 
 
 //-------------------------------------------

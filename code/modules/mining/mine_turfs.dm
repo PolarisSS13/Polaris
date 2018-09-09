@@ -11,12 +11,12 @@ var/list/mining_overlay_cache = list()
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
-	oxygen = 0
-	nitrogen = 0
+//	oxygen = 0
+//	nitrogen = 0
 	opacity = 1
 	density = 1
 	blocks_air = 1
-	temperature = T0C
+//	temperature = T0C
 
 	var/ore/mineral
 	var/sand_dug

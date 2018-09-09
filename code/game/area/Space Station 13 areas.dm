@@ -1828,15 +1828,15 @@ area/space/atmosalert()
 //Security
 
 /area/security/main
-	name = "\improper Security Office"
+	name = "\improper Police Station Office"
 	icon_state = "security"
 
 /area/security/lobby
-	name = "\improper Security Lobby"
+	name = "\improper Police Station Lobby"
 	icon_state = "security"
 
 /area/security/brig
-	name = "\improper Security - Brig"
+	name = "\improper Police Station - Brig"
 	icon_state = "brig"
 
 /area/security/brig/prison_break()
@@ -1848,7 +1848,7 @@ area/space/atmosalert()
 	..()
 
 /area/security/prison
-	name = "\improper Security - Prison Wing"
+	name = "\improper Police Station - Prison Wing"
 	icon_state = "sec_prison"
 
 /area/security/prison/prison_break()
@@ -1860,68 +1860,68 @@ area/space/atmosalert()
 	..()
 
 /area/security/warden
-	name = "\improper Security - Warden's Office"
+	name = "\improper Police Station - Warden's Office"
 	icon_state = "Warden"
 
 /area/security/armoury
-	name = "\improper Security - Armory"
+	name = "\improper Police Station - Armory"
 	icon_state = "armory"
 
 /area/security/briefing_room
-	name = "\improper Security - Briefing Room"
+	name = "\improper Police Station - Briefing Room"
 	icon_state = "brig"
 
 /area/security/evidence_storage
-	name = "\improper Security - Equipment Storage"
+	name = "\improper Police Station - Equipment Storage"
 	icon_state = "security_equipment_storage"
 
 /area/security/evidence_storage
-	name = "\improper Security - Evidence Storage"
+	name = "\improper Police Station - Evidence Storage"
 	icon_state = "evidence_storage"
 
 /area/security/interrogation
-	name = "\improper Security - Interrogation"
+	name = "\improper Police Station - Interrogation"
 	icon_state = "interrogation"
 
 /area/security/riot_control
-	name = "\improper Security - Riot Control"
+	name = "\improper Police Station - Riot Control"
 	icon_state = "riot_control"
 
 /area/security/detectives_office
-	name = "\improper Security - Forensic Office"
+	name = "\improper Police Station - Forensic Office"
 	icon_state = "detective"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/security/range
-	name = "\improper Security - Firing Range"
+	name = "\improper Police Station - Firing Range"
 	icon_state = "firingrange"
 
 /area/security/security_aid_station
-	name = "\improper Security - Security Aid Station"
+	name = "\improper Police Station - Aid Station"
 	icon_state = "security_aid_station"
 
 /area/security/security_bathroom
-	name = "\improper Security - Restroom"
+	name = "\improper Police Station - Restroom"
 	icon_state = "security_bathroom"
 
 /area/security/security_cell_hallway
-	name = "\improper Security - Cell Hallway"
+	name = "\improper Police Station - Cell Hallway"
 	icon_state = "security_cell_hallway"
 
 /area/security/security_equiptment_storage
-	name = "\improper Security - Equipment Storage"
+	name = "\improper Police Station - Equipment Storage"
 	icon_state = "security_equip_storage"
 
 /area/security/security_lockerroom
-	name = "\improper Security - Locker Room"
+	name = "\improper Police Station - Locker Room"
 	icon_state = "security_lockerroom"
 
 /area/security/security_processing
-	name = "\improper Security - Security Processing"
+	name = "\improper Police Station - Security Processing"
 	icon_state = "security_processing"
 
 /area/security/tactical
-	name = "\improper Security - Tactical Equipment"
+	name = "\improper Police Station - Tactical Equipment"
 	icon_state = "Tactical"
 
 
@@ -1947,27 +1947,27 @@ area/space/atmosalert()
 	icon_state = "nuke_storage"
 
 /area/security/checkpoint
-	name = "\improper Security Checkpoint"
+	name = "\improper Police Station Checkpoint"
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint2
-	name = "\improper Security - Arrival Checkpoint"
+	name = "\improper Police Station - Arrival Checkpoint"
 	icon_state = "security"
 
 /area/security/checkpoint/supply
-	name = "Security Post - Cargo Bay"
+	name = "Police Station Post - Cargo Bay"
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint/engineering
-	name = "Security Post - Engineering"
+	name = "Police Station Post - Engineering"
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint/medical
-	name = "Security Post - Medbay"
+	name = "Police Station Post - Medbay"
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint/science
-	name = "Security Post - Science"
+	name = "Police Station Post - Science"
 	icon_state = "checkpoint1"
 
 /area/security/vacantoffice

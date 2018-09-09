@@ -244,6 +244,10 @@
 #define SPECIES_MONKEY_SKRELL	"Neaera"
 #define SPECIES_MONKEY_UNATHI	"Stok"
 
+// Zombies
+
+#define SPECIES_ZOMBIE			"Zombie"
+
 // Virtual Reality IDs.
 #define SPECIES_VR				"Virtual Reality Avatar"
 #define SPECIES_VR_HUMAN		"Virtual Reality Human"

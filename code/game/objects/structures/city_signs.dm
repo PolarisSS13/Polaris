@@ -141,6 +141,16 @@
 	icon_state = "bar"
 	light_color = "#63C4D6" //light blue
 
+/obj/structure/sign/neon/heath
+	name = "hospital sign"
+	desc = "A neon hospital sign"
+	icon_state = "medical_on"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/heath/red
+	icon_state = "medicalred_on"
+	light_color = "#da0205" //red
+
 /*|	                                             */
 /*| Double Signs
    ----------------------------------------------*/

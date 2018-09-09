@@ -173,3 +173,21 @@
 	if(.)
 		H.implant_loyalty(H)
 */
+
+/datum/job/barber
+	title = "Barber"
+//	flag = BARBER
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the city supervisor"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian
+//	access = list()
+//	minimal_access = list()
+	minimum_character_age = 18
+
+	outfit_type = /decl/hierarchy/outfit/job/barber
+	alt_titles = list("Hairdresser", "Stylist", "Beautician")

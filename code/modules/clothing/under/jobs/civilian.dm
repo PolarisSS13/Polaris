@@ -203,3 +203,9 @@
 	name = "shaft miner's jumpsuit"
 	icon_state = "miner"
 	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/barber
+	desc = "Just looking at this uniform makes you feel like your ears are in danger from a pair of snippers."
+	name = "barber's uniform"
+	icon_state = "barber"
+	rolled_sleeves = 0

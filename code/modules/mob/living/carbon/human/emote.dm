@@ -1,6 +1,6 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
-	
+
 	var/datum/gender/T = gender_datums[get_visible_gender()]
 
 	if (findtext(act, "-", 1, null))
@@ -176,7 +176,7 @@
 		if ("clap")
 			if (!src.restrained())
 				message = "claps."
-				playsound(src.loc, 'sound/misc/clapping.ogg')
+				playsound(src.loc, 'sound/misc/clapping.ogg', 50, 1)
 				m_type = 2
 				if(miming)
 					m_type = 1
@@ -363,8 +363,24 @@
 				m_type = 1
 			else
 				if (!muzzled)
-					message = "cries."
-					m_type = 2
+					var/use_sound
+					if(get_gender() == FEMALE)
+						use_sound = pick(
+						'sound/voice/human/f_cry_1.ogg',
+						'sound/voice/human/f_cry_2.ogg',
+						'sound/voice/human/f_cry_3.ogg',
+						'sound/voice/human/f_cry_4.ogg',
+						'sound/voice/human/f_cry_5.ogg')
+						playsound(src.loc, use_sound, 50)
+					else
+						use_sound = pick(
+						'sound/voice/human/m_cry_1.ogg',
+						'sound/voice/human/m_cry_2.ogg',
+						'sound/voice/human/m_cry_3.ogg',
+						'sound/voice/human/m_cry_4.ogg',
+						'sound/voice/human/m_cry_5.ogg')
+						playsound(src.loc, use_sound, 50, 0)
+						m_type = 2
 				else
 					message = "makes a weak noise. [T.he] [get_visible_gender() == NEUTER ? "frown" : "frowns"]." // no good, non-unwieldy alternative to this ternary at the moment
 					m_type = 2
@@ -658,14 +674,19 @@
 				m_type = 1
 			else
 				if(!muzzled)
+					var/use_sound
 					message = "[species.scream_verb]!"
 					m_type = 2
-					/* Removed, pending the location of some actually good, properly licensed sounds.
 					if(get_gender() == FEMALE)
-						playsound(loc, "[species.female_scream_sound]", 80, 1)
+						use_sound = pick(
+						'sound/voice/human/scream_f1.ogg',
+						'sound/voice/human/scream_f2.ogg')
+						playsound(src.loc, use_sound, 50)
 					else
-						playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
-					*/
+						use_sound = pick(
+						'sound/voice/human/scream_m1.ogg',
+						'sound/voice/human/scream_m2.ogg')
+						playsound(src.loc, use_sound, 50)
 				else
 					message = "makes a very loud noise."
 					m_type = 2
@@ -711,14 +732,28 @@
 		if("whistle" || "whistles")
 			if(!muzzled)
 				message = "whistles a tune."
-				playsound(loc, 'sound/misc/longwhistle.ogg') //praying this doesn't get abused
+				playsound(loc, 'sound/voice/human/longwhistle.ogg', 50, 1) //praying this doesn't get abused
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("qwhistle")
 			if(!muzzled)
 				message = "whistles quietly."
-				playsound(loc, 'sound/misc/shortwhistle.ogg')
+				playsound(loc, 'sound/voice/human/shortwhistle.ogg', 50, 1)
+			else
+				message = "makes a light spitting noise, a poor attempt at a whistle."
+
+		if("wwhistle")
+			if(!muzzled)
+				message = "whistles inappropriately."
+				playsound(loc, 'sound/voice/human/wolfwhistle.ogg', 50, 1)
+			else
+				message = "makes a light spitting noise, a poor attempt at a whistle."
+
+		if("swhistle")
+			if(!muzzled)
+				message = "summon whistles."
+				playsound(loc, 'sound/voice/human/summon_whistle.ogg', 50, 1)
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
@@ -738,7 +773,7 @@
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
-	
+
 	var/datum/gender/T = gender_datums[get_visible_gender()]
 
 	pose =  sanitize(input(usr, "This is [src]. [T.he]...", "Pose", null)  as text)
