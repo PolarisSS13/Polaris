@@ -63,6 +63,15 @@
 	siemens_coefficient = 0.9
 	rolled_sleeves = -1
 
+/obj/item/clothing/under/rank/securitysweater
+	name = "security sweater"
+	desc = "A black sweater for the chilly security officer."
+	icon_state = "securitysweater"
+	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
+	rolled_sleeves = -1
+
 /*
  * Detective
  */
