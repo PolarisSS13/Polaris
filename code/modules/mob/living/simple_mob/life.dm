@@ -19,7 +19,7 @@
 
 //Should we be dead?
 /mob/living/simple_mob/updatehealth()
-	health = getMaxHealth() - getToxLoss() - getFireLoss() - getBruteLoss()
+	health = getMaxHealth() - getFireLoss() - getBruteLoss() - getToxLoss() - getOxyLoss() - getCloneLoss()
 
 	//Alive, becoming dead
 	if((stat < DEAD) && (health <= 0))
@@ -116,12 +116,12 @@
 	//Atmos effect
 	if(bodytemperature < minbodytemp)
 		fire_alert = 2
-		adjustBruteLoss(cold_damage_per_tick)
+		adjustFireLoss(cold_damage_per_tick)
 		if(fire)
 			fire.icon_state = "fire1"
 	else if(bodytemperature > maxbodytemp)
 		fire_alert = 1
-		adjustBruteLoss(heat_damage_per_tick)
+		adjustFireLoss(heat_damage_per_tick)
 		if(fire)
 			fire.icon_state = "fire2"
 	else
@@ -130,12 +130,13 @@
 			fire.icon_state = "fire0"
 
 	if(atmos_unsuitable)
-		adjustBruteLoss(unsuitable_atoms_damage)
+		adjustOxyLoss(unsuitable_atoms_damage)
 		if(oxygen)
 			oxygen.icon_state = "oxy1"
 	else if(oxygen)
 		if(oxygen)
 			oxygen.icon_state = "oxy0"
+		adjustOxyLoss(-unsuitable_atoms_damage)
 
 
 /mob/living/simple_mob/proc/handle_supernatural()

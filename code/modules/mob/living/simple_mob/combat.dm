@@ -45,6 +45,7 @@
 		if(prob(melee_miss_chance))
 			add_attack_logs(src, L, "Animal-attacked (miss)", admin_notify = FALSE)
 			do_attack_animation(src)
+			playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
 			return FALSE // We missed.
 
 		if(ishuman(L))
@@ -52,12 +53,17 @@
 			if(H.check_shields(damage = damage_to_do, damage_source = src, attacker = src, def_zone = null, attack_text = "the attack"))
 				return FALSE // We were blocked.
 
-	if(A.attack_generic(src, damage_to_do, pick(attacktext)))
+	if(apply_attack(A, damage_to_do))
 		apply_melee_effects(A)
 		if(attack_sound)
 			playsound(src, attack_sound, 75, 1)
 
 	return TRUE
+
+// Generally used to do the regular attack.
+// Override for doing special stuff with the direct result of the attack.
+/mob/living/simple_mob/proc/apply_attack(atom/A, damage_to_do)
+	return A.attack_generic(src, damage_to_do, pick(attacktext))
 
 // Override for special effects after a successful attack, like injecting poison or stunning the target.
 /mob/living/simple_mob/proc/apply_melee_effects(atom/A)
@@ -172,7 +178,7 @@
 	var/true_attack_delay = attack_delay
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.attack_speed_percent))
-			attack_delay *= M.attack_speed_percent
+			true_attack_delay *= M.attack_speed_percent
 
 	setClickCooldown(true_attack_delay) // Insurance against a really long attack being longer than default click delay.
 

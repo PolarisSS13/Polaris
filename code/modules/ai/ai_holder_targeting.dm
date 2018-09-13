@@ -93,6 +93,9 @@
 	if(!can_see_target(the_target))
 		return FALSE
 
+	if(istype(the_target, /mob/zshadow))
+		return FALSE // no
+
 	if(isliving(the_target))
 		var/mob/living/L = the_target
 		if(L.stat == DEAD)

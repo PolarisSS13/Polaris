@@ -89,8 +89,6 @@
 		to_chat(user,"<span class='danger'>This weapon is ineffective, it does no damage.</span>")
 		return 2 //???
 
-//	react_to_attack(user)
-
 	. = ..()
 
 

@@ -19,7 +19,7 @@
 		return FALSE
 	return shoot_target(A)
 
-// Test if the AI is allowed to use to attempt a ranged attack.
+// Test if the AI is allowed to attempt a ranged attack.
 /mob/living/proc/ICheckRangedAttack(atom/A)
 	return FALSE
 

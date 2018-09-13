@@ -87,7 +87,7 @@
 			// The actual damage/electrocution is handled by tesla_zap().
 			L.Paralyse(5)
 			L.stuttering += 20
-			L.make_jittery(20)
+			L.make_jittery(150)
 			L.emp_act(1)
 			to_chat(L, span("critical", "You've been struck by lightning!"))
 
@@ -101,6 +101,8 @@
 					SA.visible_message(span("critical", "\The [SA] disintegrates into ash!"))
 					SA.ash()
 					continue // No point deafening something that wont exist.
+
+			if(istype(L, /mob/living/simple
 
 		// Deafen them.
 		if(L.get_ear_protection() < 2)
