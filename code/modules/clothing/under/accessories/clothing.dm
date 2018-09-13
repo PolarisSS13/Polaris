@@ -335,3 +335,18 @@
 	name = "Christmas turtleneck"
 	desc = "A really cheesy holiday sweater, it actually kinda itches."
 	icon_state = "turtleneck_winterred"
+
+/obj/item/clothing/accessory/sweater/uglyxmas
+	name = "ugly Christmas sweater"
+	desc = "A tacky and classical Christmas sweater."
+	icon_state = "uglyxmas"
+
+/obj/item/clothing/accessory/sweater/flowerpink
+	name = "flowery pink sweater"
+	desc = "A cutesy pink and oversized sweater with flowers decorating it."
+	icon_state = "flowerpink"
+
+/obj/item/clothing/accessory/sweater/redneck
+	name = "red turtleneck"
+	desc = "A plain red turtleneck."
+	icon_state = "redneck"

@@ -283,6 +283,11 @@
 	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
+/datum/gear/uniform/securitysweater
+	display_name = "uniform, sweater (Security)"
+	path = /obj/item/clothing/under/rank/securitysweater
+	allowed_roles = list("Security Officer","Head of Security","Warden")
+
 /datum/gear/uniform/corpwarsuit
 	display_name = "uniform, corporate (Warden)"
 	path = /obj/item/clothing/under/rank/warden/corp
