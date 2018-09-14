@@ -1,4 +1,5 @@
 // Handles the subjugation of slimes by force.
+// Mostly a way for things to talk to the AI indirectly.
 
 /mob/living/simple_mob/slime/xenobio/proc/adjust_discipline(amount, silent)
 	if(amount > 0)

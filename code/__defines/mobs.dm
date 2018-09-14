@@ -48,7 +48,7 @@
 #define STANCE_MOVE         7	// Similar to above but for out of combat. If a baddie is seen, they'll cancel and fight them.
 #define STANCE_FOLLOW       8	// Following somone, without trying to murder them.
 #define STANCE_FLEE         9	// Run away from the target because they're too spooky/we're dying/some other reason.
-#define STANCE_STUNNED      10	// Do nothing, because the mob is unable to act in some form. Can be applied by other disabling effects besides stuns.
+#define STANCE_DISABLED     10	// Used when the holder is afflicted with certain status effects, such as stuns or confusion.
 
 #define STANCES_COMBAT      list(STANCE_ALERT, STANCE_APPROACH, STANCE_FIGHT, STANCE_BLINDFIGHT, STANCE_REPOSITION)
 

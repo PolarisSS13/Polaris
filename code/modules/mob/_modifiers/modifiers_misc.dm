@@ -200,9 +200,9 @@ the artifact triggers the rage.
 	holder.adjustFireLoss(damage_per_tick)
 
 
-// Applied when subjected to a cold attack.
+// Applied when near something very cold.
 // Reduces mobility, attack speed.
-/datum/modifier/chilled
+/datum/modifier/aura/chilled
 	name = "chilled"
 	desc = "You feel yourself freezing up. Its hard to move."
 	mob_overlay_state = "chilled"

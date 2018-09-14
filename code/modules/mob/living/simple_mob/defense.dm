@@ -199,3 +199,16 @@
 	else
 		return armorval
 
+// Lightning
+/mob/living/simple_mob/lightning_act()
+	..()
+	// If a non-player simple_mob was struck, inflict huge damage.
+	// If the damage is fatal, it is turned to ash.
+	if(!client)
+		inflict_shock_damage(200) // Mobs that are very beefy or resistant to shock may survive getting struck.
+		updatehealth()
+		if(health <= 0)
+			visible_message(span("critical", "\The [src] disintegrates into ash!"))
+			ash()
+			return // No point deafening something that wont exist.
+

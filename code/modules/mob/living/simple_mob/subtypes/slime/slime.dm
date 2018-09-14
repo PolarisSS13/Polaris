@@ -38,8 +38,9 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 0
-	shock_resist = 1 // Slimes are immune to electricity, and it actually charges them.
+	shock_resist = 0.5 // Slimes are resistant to electricity, and it actually charges them.
 	taser_kill = FALSE
+	water_resist = 0 // Slimes are very weak to water.
 
 	melee_damage_lower = 10
 	melee_damage_upper = 15
@@ -79,6 +80,18 @@
 	if(hat)
 		drop_hat()
 	return ..()
+
+/mob/living/simple_mob/slime/death()
+	// Make dead slimes stop glowing.
+	glow_toggle = FALSE
+	handle_light()
+	..()
+
+/mob/living/simple_mob/slime/revive()
+	// Make revived slimes resume glowing.
+	glow_toggle = initial(glow_toggle)
+	handle_light()
+	..()
 
 /mob/living/simple_mob/slime/update_icon()
 	..() // Do the regular stuff first.
@@ -139,9 +152,6 @@
 	adjustFireLoss(-1)
 	adjustCloneLoss(-1)
 	adjustBruteLoss(-1)
-
-/mob/living/simple_mob/slime/water_act(amount) // This is called if a slime enters a water tile.
-	adjustBruteLoss(40 * amount)
 
 
 // Clicked on by empty hand.

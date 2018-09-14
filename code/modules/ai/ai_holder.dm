@@ -150,9 +150,9 @@
 	if(target && can_see_target(target))
 		track_target_position()
 
-	if(!can_act())
-		ai_log("handle_stance_tactical() : Stunned.", AI_LOG_TRACE)
-		set_stance(STANCE_STUNNED)
+	if(is_disabled()) // Stunned/confused/etc
+		ai_log("handle_stance_tactical() : Disabled.", AI_LOG_TRACE)
+		set_stance(STANCE_DISABLED)
 		return
 
 	if(stance in STANCES_COMBAT)
@@ -217,11 +217,13 @@
 			ai_log("handle_stance_tactical() : STANCE_FLEE, going to flee_from_target().", AI_LOG_TRACE)
 			flee_from_target()
 
-		if(STANCE_STUNNED)
-			ai_log("handle_stance_tactical() : STANCE_STUNNED.", AI_LOG_TRACE)
-			if(can_act())
-				ai_log("handle_stance_tactical() : No longer stunned.", AI_LOG_TRACE)
+		if(STANCE_DISABLED)
+			ai_log("handle_stance_tactical() : STANCE_DISABLED.", AI_LOG_TRACE)
+			if(!is_disabled())
+				ai_log("handle_stance_tactical() : No longer disabled.", AI_LOG_TRACE)
 				set_stance(STANCE_IDLE)
+			else
+				handle_disabled()
 
 	ai_log("handle_stance_tactical() : Exiting.", AI_LOG_TRACE)
 	ai_log("========= Fast Process Ending ==========", AI_LOG_TRACE)
@@ -313,17 +315,6 @@
 			annoyed = 50
 			AttackTarget()
 */
-
-// If our holder is able to do anything.
-/datum/ai_holder/proc/can_act()
-	if(holder.stat) // Dead or unconscious.
-		ai_log("can_act() : Stat was non-zero ([holder.stat]).", AI_LOG_TRACE)
-		return FALSE
-	if(holder.incapacitated(INCAPACITATION_DISABLED)) // Stunned in some form.
-		ai_log("can_act() : Incapacited.", AI_LOG_TRACE)
-		return FALSE
-	return TRUE
-
 
 // Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
 /mob/living/proc/set_AI_busy(value)

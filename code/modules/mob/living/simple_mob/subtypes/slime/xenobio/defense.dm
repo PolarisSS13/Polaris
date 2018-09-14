@@ -52,37 +52,3 @@
 /mob/living/simple_mob/slime/xenobio/slimebatoned(mob/living/user, amount)
 	Weaken(amount)
 	adjust_discipline(round(amount/2))
-
-/*
-
-/mob/living/simple_animal/slime/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
-	..()
-	if(!stat)
-		if(O.force > 0 && discipline && !rabid) // wow, buddy, why am I getting attacked??
-			adjust_discipline(1)
-			return
-		if(O.force >= 3)
-			if(victim || target_mob) // We've been a bad slime.
-				if(is_adult)
-					if(prob(5 + round(O.force / 2)) )
-						if(prob(80) && !client)
-							adjust_discipline(2)
-						if(user)
-							step_away(src, user)
-				else
-					if(prob(10 + O.force * 2))
-						if(prob(80) && !client)
-							adjust_discipline(2)
-						if(user)
-							step_away(src, user)
-			else
-				if(user in friends) // Friend attacking us for no reason.
-					if(prob(25))
-						friends -= user
-						say("[user]... not friend...")
-
-// Shocked grilles don't hurt slimes, and in fact give them charge.
-/mob/living/simple_animal/slime/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null)
-	power_charge = between(0, power_charge + round(shock_damage / 10), 10)
-	to_chat(src, "<span class='notice'>\The [source] shocks you, and it charges you.</span>")
-*/

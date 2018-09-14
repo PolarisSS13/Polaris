@@ -15,6 +15,9 @@
 /datum/ai_holder/simple_mob/xenobio_slime/sapphire
 	always_stun = TRUE // They know that stuns are godly.
 
+/datum/ai_holder/simple_mob/xenobio_slime/light_pink
+	discipline = 5
+	obedience = 5
 
 /datum/ai_holder/simple_mob/xenobio_slime/New()
 	..()
@@ -68,6 +71,13 @@
 
 	discipline = between(0, discipline + amount, 10)
 	my_slime.update_mood()
+
+// This slime always enrages if disciplined.
+/datum/ai_holder/simple_mob/xenobio_slime/red/adjust_discipline(amount, silent)
+	if(amount > 0 && !rabid)
+		holder.say("Grrr...")
+		holder.add_modifier(/datum/modifier/berserk, 30 SECONDS)
+		enrage()
 
 /datum/ai_holder/simple_mob/xenobio_slime/handle_special_strategical()
 	discipline_decay()

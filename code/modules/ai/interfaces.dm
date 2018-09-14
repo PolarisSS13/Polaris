@@ -65,11 +65,15 @@
 		return myid.GetID()
 
 // Respects move cooldowns as if it had a client.
-/mob/living/proc/IMove(newloc)
+// Also tries to avoid being superdumb with moving into certain tiles (unless that's desired).
+/mob/living/proc/IMove(turf/newloc, safety = TRUE)
 	if(check_move_cooldown())
 //		if(!newdir)
 //			newdir = get_dir(get_turf(src), newloc)
-
+		// Check to make sure moving to newloc won't actually kill us. e.g. we're a slime and trying to walk onto water.
+		if(istype(newloc))
+			if(safety && !newloc.is_safe_to_enter(src))
+				return MOVEMENT_FAILED
 		// Move()ing to another tile successfully returns 32 because BYOND. Would rather deal with TRUE/FALSE-esque terms.
 		// Note that moving to the same tile will be 'successful'.
 		var/turf/old_T = get_turf(src)
