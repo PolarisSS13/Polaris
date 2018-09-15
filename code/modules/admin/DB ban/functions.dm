@@ -84,8 +84,9 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 	query_insert.Execute()
 	usr << "<font color='blue'>Ban saved to database.</font>"
 	message_admins("[key_name_admin(usr)] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([duration] minutes)":""] with the reason: \"[reason]\" to the ban database.",1)
-
-
+	var/datum/admin_help/AH = admin_ticket_log(ckey, msg)
+	if(AH)
+		AH.Resolve()
 
 datum/admins/proc/DB_ban_unban(var/ckey, var/bantype, var/job = "")
 

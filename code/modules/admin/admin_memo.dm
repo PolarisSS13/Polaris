@@ -28,6 +28,7 @@
 			return
 		F[ckey] << "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]"
 		message_admins("[key] set an admin memo:<br>[memo]")
+		admin_ticket_log(target_ckey, "[key] set an admin memo:<br>[memo]")
 
 //show all memos
 /client/proc/admin_memo_show()

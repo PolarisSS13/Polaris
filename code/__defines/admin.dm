@@ -45,3 +45,7 @@
 #define SMITE_BLUESPACEARTILLERY	"Bluespace Artillery"
 #define SMITE_SPONTANEOUSCOMBUSTION	"Spontaneous Combustion"
 #define SMITE_LIGHTNINGBOLT			"Lightning Bolt"
+
+#define AHELP_ACTIVE 1
+#define AHELP_CLOSED 2
+#define AHELP_RESOLVED 3

@@ -111,6 +111,8 @@
 	clients += src
 	directory[ckey] = src
 
+	GLOB.ahelp_tickets.ClientLogin(src)
+
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
@@ -173,6 +175,7 @@
 	//DISCONNECT//
 	//////////////
 /client/Del()
+	GLOB.ahelp_tickets.ClientLogout(src)
 	if(holder)
 		holder.owner = null
 		admins -= src
