@@ -2281,7 +2281,7 @@
 	name = "Soda Oil"
 	id = "sodaoil"
 	result = "sodaoil"
-	required_reagents = list("cornoil" = 4, "sodawater" = 1, "tricordrazine" = 1)
+	required_reagents = list("cornoil" = 4, "sodawater" = 1, "carbon" = 1, "tricordrazine" = 1)
 	result_amount = 6
 
 //R-UST Port
