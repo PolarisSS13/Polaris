@@ -71,7 +71,8 @@
 	return 0 // They're really deadly against mobs, but not walls.
 
 /mob/living/simple_mob/slime/feral/dark_blue/handle_special()
-	cold_aura()
+	if(stat != DEAD)
+		cold_aura()
 	..()
 
 /mob/living/simple_mob/slime/feral/dark_blue/proc/cold_aura()
@@ -84,4 +85,7 @@
 	L.inflict_cold_damage(10)
 	if(L.get_cold_protection() < 1)
 		L.add_modifier(/datum/modifier/chilled, 5 SECONDS, src)
+
+	if(L.has_AI()) // Other AIs should react to hostile auras.
+		L.ai_holder.react_to_attack(src)
 
