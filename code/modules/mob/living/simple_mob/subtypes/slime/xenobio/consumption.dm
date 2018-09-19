@@ -102,7 +102,7 @@
 		set_AI_busy(TRUE) // Don't want the AI to interfere with eatting.
 		victim.visible_message(
 			span("danger", "\The [src] latches onto \the [victim]!"),
-			span("critical", "\The [src] latches onto you!</span>")
+			span("critical", "\The [src] latches onto you!")
 			)
 
 /mob/living/simple_mob/slime/xenobio/proc/stop_consumption(mob/living/L)
