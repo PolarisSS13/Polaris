@@ -5,6 +5,9 @@
 	if(!A.Adjacent(src))
 		return FALSE
 	var/turf/their_T = get_turf(A)
+
+	face_atom(A)
+
 	if(attack_delay)
 	//	their_T.color = "#FF0000"
 		melee_pre_animation(A)
@@ -26,6 +29,7 @@
 // A is the thing getting attacked, T is the turf A is/was on when attack_target was called.
 /mob/living/simple_mob/proc/do_attack(atom/A, turf/T)
 //	if(!A.Adjacent(src))
+	face_atom(A)
 	if((!(A in T)) || !T.Adjacent(src)) // Most likely we have a slow attack and they dodged it or we somehow got moved.
 		add_attack_logs(src, A, "Animal-attacked (dodged)", admin_notify = FALSE)
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
@@ -80,6 +84,8 @@
 	set waitfor = FALSE
 	setClickCooldown(get_attack_speed())
 
+	face_atom(A)
+
 	if(attack_delay)
 		ranged_pre_animation(A)
 		handle_attack_delay(A) // This will sleep this proc for a bit, which is why waitfor is false.
@@ -105,13 +111,19 @@
 	if(A == start)
 		return
 
+	face_atom(A)
+
 	var/obj/item/projectile/P = new projectiletype(user.loc)
-	playsound(user, projectilesound, 100, 1)
 	if(!P)
 		return
+
+	// If the projectile has its own sound, use it.
+	// Otherwise default to the mob's firing sound.
+	playsound(user, P.fire_sound ? P.fire_sound : projectilesound, 80, 1)
+
 	P.launch(A)
 	if(needs_reload)
-		reload_count ++
+		reload_count++
 
 //	if(distance >= special_attack_min_range && distance <= special_attack_max_range)
 //		return TRUE
@@ -157,6 +169,7 @@
 // Special attacks, like grenades or blinding spit or whatever.
 // Don't override this, override do_special_attack() for your blinding spit/etc.
 /mob/living/simple_mob/proc/special_attack_target(atom/A)
+	face_atom(A)
 	last_special_attack = world.time
 	if(do_special_attack(A))
 		if(special_attack_charges)

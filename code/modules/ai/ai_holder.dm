@@ -150,7 +150,7 @@
 	if(target && can_see_target(target))
 		track_target_position()
 
-	if(is_disabled()) // Stunned/confused/etc
+	if(stance != STANCE_DISABLED && is_disabled()) // Stunned/confused/etc
 		ai_log("handle_stance_tactical() : Disabled.", AI_LOG_TRACE)
 		set_stance(STANCE_DISABLED)
 		return

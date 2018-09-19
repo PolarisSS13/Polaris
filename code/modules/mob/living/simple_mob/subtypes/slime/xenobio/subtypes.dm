@@ -45,7 +45,7 @@
 	..()
 	if(isliving(A))
 		var/mob/living/L = A
-		L.inflict_heat_damage(is_adult ? 20 : 10)
+		L.inflict_heat_damage(is_adult ? 10 : 5)
 		to_chat(src, span("span", "You burn \the [L]."))
 		to_chat(L, span("danger", "You've been burned by \the [src]!"))
 		L.adjust_fire_stacks(1)
@@ -153,7 +153,7 @@
 	..()
 	if(isliving(A))
 		var/mob/living/L = A
-		L.inflict_shock_damage(is_adult ? 20 : 10)
+		L.inflict_shock_damage(is_adult ? 10 : 5)
 		to_chat(src, span("span", "You shock \the [L]."))
 		to_chat(L, span("danger", "You've been shocked by \the [src]!"))
 
@@ -180,10 +180,10 @@
 	<b>You will erupt into flames if harmed by fire!</b>"
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/purple,
-//			/mob/living/simple_animal/slime/orange,
-//			/mob/living/simple_animal/slime/ruby,
-//			/mob/living/simple_animal/slime/ruby
+			/mob/living/simple_mob/slime/xenobio/purple,
+			/mob/living/simple_mob/slime/xenobio/orange,
+			/mob/living/simple_mob/slime/xenobio/ruby,
+			/mob/living/simple_mob/slime/xenobio/ruby
 		)
 
 /mob/living/simple_mob/slime/xenobio/dark_purple/proc/ignite()
@@ -228,10 +228,9 @@
 	melee_damage_upper = 5
 	cold_resist = 1
 
-
-	description_info = "This slime is immune to the cold, however water will still kill it. Its attacks will \
-	also chill you, causing additional harm. A winter coat or other cold-resistant clothing can protect from the chill."
-	player_msg = "You are <b>immune to the cold</b>, inflict additional cold damage on attack, and cause nearby entities to become colder."
+	description_info = "This slime is immune to the cold, however water will still kill it. Its presense, as well as its attacks, will \
+	also cause you additional harm from the cold. A winter coat or other cold-resistant clothing can protect from this."
+	player_msg = "You are <b>immune to the cold</b>, inflict additional cold damage on attack, and cause nearby entities to suffer from coldness."
 
 	slime_mutation = list(
 			/mob/living/simple_mob/slime/xenobio/purple,
@@ -269,9 +268,9 @@
 
 
 /mob/living/simple_mob/slime/xenobio/dark_blue/proc/chill(mob/living/L)
-	L.inflict_cold_damage(is_adult ? 20 : 10)
-	if(L.get_cold_protection() < 1)
-		L.add_modifier(/datum/modifier/aura/chilled, null, src)
+	L.inflict_cold_damage(is_adult ? 10 : 5)
+	if(L.get_cold_protection() < 1 && L.has_AI()) // Harmful auras will make the AI react to its bearer.
+		L.ai_holder.react_to_attack(src)
 
 
 /mob/living/simple_mob/slime/xenobio/silver
@@ -285,10 +284,10 @@
 	player_msg = "You <b>automatically reflect</b> lasers, beams, and tasers that hit you."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/metal,
-//			/mob/living/simple_animal/slime/blue,
-//			/mob/living/simple_animal/slime/amber,
-//			/mob/living/simple_animal/slime/amber
+			/mob/living/simple_mob/slime/xenobio/metal,
+			/mob/living/simple_mob/slime/xenobio/blue,
+			/mob/living/simple_mob/slime/xenobio/amber,
+			/mob/living/simple_mob/slime/xenobio/amber
 		)
 
 /mob/living/simple_mob/slime/xenobio/silver/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -321,10 +320,10 @@
 	player_msg = "You can <b>teleport at will</b> to a specific tile by clicking on it at range. This has a five second cooldown."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/bluespace,
-//			/mob/living/simple_animal/slime/bluespace,
-//			/mob/living/simple_animal/slime/yellow,
-//			/mob/living/simple_animal/slime/yellow
+			/mob/living/simple_mob/slime/xenobio/bluespace,
+			/mob/living/simple_mob/slime/xenobio/bluespace,
+			/mob/living/simple_mob/slime/xenobio/yellow,
+			/mob/living/simple_mob/slime/xenobio/yellow
 		)
 
 	special_attack_min_range = 3
@@ -491,10 +490,10 @@
 	description_info = "This slime is faster than the others.  Attempting to discipline this slime will always cause it to go rabid and berserk."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/red,
-//			/mob/living/simple_animal/slime/oil,
-//			/mob/living/simple_animal/slime/oil,
-//			/mob/living/simple_animal/slime/orange
+			/mob/living/simple_mob/slime/xenobio/red,
+			/mob/living/simple_mob/slime/xenobio/oil,
+			/mob/living/simple_mob/slime/xenobio/oil,
+			/mob/living/simple_mob/slime/xenobio/orange
 		)
 
 	ai_holder_type = /datum/ai_holder/simple_mob/xenobio_slime/red // Will enrage if disciplined.
@@ -515,10 +514,10 @@
 	You also inject radium on attack."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/purple,
-//			/mob/living/simple_animal/slime/green,
-//			/mob/living/simple_animal/slime/emerald,
-//			/mob/living/simple_animal/slime/emerald
+			/mob/living/simple_mob/slime/xenobio/purple,
+			/mob/living/simple_mob/slime/xenobio/green,
+			/mob/living/simple_mob/slime/xenobio/emerald,
+			/mob/living/simple_mob/slime/xenobio/emerald
 		)
 
 /mob/living/simple_mob/slime/xenobio/green/handle_special()
@@ -542,10 +541,10 @@
 	player_msg = "You <b>passively heal yourself and nearby allies</b>."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/blue,
-//			/mob/living/simple_animal/slime/light_pink,
-//			/mob/living/simple_animal/slime/light_pink,
-//			/mob/living/simple_animal/slime/pink
+			/mob/living/simple_mob/slime/xenobio/blue,
+			/mob/living/simple_mob/slime/xenobio/light_pink,
+			/mob/living/simple_mob/slime/xenobio/light_pink,
+			/mob/living/simple_mob/slime/xenobio/pink
 		)
 
 /mob/living/simple_mob/slime/xenobio/pink/handle_special()
@@ -596,10 +595,10 @@
 	description_info = "This slime is immune to the slimebaton and taser, and will actually charge the slime, however it will still discipline the slime."
 
 	slime_mutation = list(
-//			/mob/living/simple_animal/slime/metal,
-//			/mob/living/simple_animal/slime/gold,
-//			/mob/living/simple_animal/slime/sapphire,
-//			/mob/living/simple_animal/slime/sapphire
+			/mob/living/simple_mob/slime/xenobio/metal,
+			/mob/living/simple_mob/slime/xenobio/gold,
+			/mob/living/simple_mob/slime/xenobio/sapphire,
+			/mob/living/simple_mob/slime/xenobio/sapphire
 		)
 
 /mob/living/simple_mob/slime/xenobio/gold/slimebatoned(mob/living/user, amount)
@@ -623,10 +622,10 @@
 	player_msg = "You <b>will explode if struck by a burning attack</b>, or if you hit an enemy with a melee attack that is not a monkey or another slime."
 
 	slime_mutation = list(
-//		/mob/living/simple_animal/slime/oil,
-//		/mob/living/simple_animal/slime/oil,
-//		/mob/living/simple_animal/slime/red,
-//		/mob/living/simple_animal/slime/red
+		/mob/living/simple_mob/slime/xenobio/oil,
+		/mob/living/simple_mob/slime/xenobio/oil,
+		/mob/living/simple_mob/slime/xenobio/red,
+		/mob/living/simple_mob/slime/xenobio/red
 	)
 
 /mob/living/simple_mob/slime/xenobio/oil/proc/explode()
@@ -691,10 +690,10 @@
 	with one if hostile, and especially dangerous if they outnumber you."
 
 	slime_mutation = list(
-//		/mob/living/simple_animal/slime/sapphire,
-//		/mob/living/simple_animal/slime/sapphire,
-//		/mob/living/simple_animal/slime/gold,
-//		/mob/living/simple_animal/slime/gold
+		/mob/living/simple_mob/slime/xenobio/sapphire,
+		/mob/living/simple_mob/slime/xenobio/sapphire,
+		/mob/living/simple_mob/slime/xenobio/gold,
+		/mob/living/simple_mob/slime/xenobio/gold
 	)
 
 
@@ -742,6 +741,8 @@
 		/mob/living/simple_mob/slime/xenobio/light_pink
 	)
 
+	ai_holder_type = /datum/ai_holder/simple_mob/xenobio_slime/light_pink
+
 // Special
 /mob/living/simple_mob/slime/xenobio/rainbow
 	desc = "This slime changes colors constantly."
@@ -773,7 +774,10 @@
 	name = "Kendrick"
 	desc = "The Research Director's pet slime.  It shifts colors constantly."
 	rainbow_core_candidate = FALSE
+	// Doing pacify() in initialize() won't actually pacify the AI due to the ai_holder not existing due to parent initialize() not being called yet.
+	// Instead lets just give them an ai_holder that does that for us.
+	ai_holder_type = /datum/ai_holder/simple_mob/xenobio_slime/passive
 
-/mob/living/simple_mob/slime/xenobio/rainbow/initialize()
-	pacify()
+/mob/living/simple_mob/slime/xenobio/rainbow/kendrick/initialize()
+	pacify() // So the physical mob also gets made harmless.
 	return ..()

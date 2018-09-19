@@ -105,3 +105,18 @@
 #undef COMM_SAY
 #undef COMM_AUDIBLE_EMOTE
 #undef COMM_VISUAL_EMOTE
+
+// Handles the holder hearing a mob's say()
+// Does nothing by default, override this proc for special behavior.
+/datum/ai_holder/proc/on_hear_say(mob/living/speaker, message)
+	return
+
+// This is to make responses feel a bit more natural and not instant.
+/datum/ai_holder/proc/delayed_say(var/message, var/mob/speak_to)
+	spawn(rand(1 SECOND, 2 SECONDS))
+		if(!src || !holder || !can_act())  // We might've died/got deleted/etc in the meantime.
+			return
+
+		if(speak_to)
+			holder.face_atom(speak_to)
+		holder.say(message)

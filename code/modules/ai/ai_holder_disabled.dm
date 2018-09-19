@@ -37,18 +37,41 @@
 /datum/ai_holder/proc/dangerous_wander()
 	ai_log("dangerous_wander() : Entered.", AI_LOG_DEBUG)
 	if(isturf(holder.loc) && can_act())
+		// Test if we should refrain from falling/attacking allies, if we're smart enough to realize that.
+		if(intelligence_level > AI_NORMAL)
+			var/unsafe = FALSE
+
+			tile_test:
+				for(var/dir_tested in cardinal)
+					var/turf/turf_tested = get_step(holder, dir_tested)
+					// Look for unsafe tiles.
+					if(!turf_tested.is_safe_to_enter(holder))
+						unsafe = TRUE
+						break
+
+					// Look for allies.
+					for(var/mob/living/L in turf_tested)
+						if(holder.IIsAlly(L))
+							unsafe = TRUE
+							break tile_test
+
+
+			if(unsafe)
+				ai_log("dangerous_wander() : Staying still due to risk of harm to self or allies.", AI_LOG_TRACE)
+				return // Just stay still.
+
 		var/moving_to = 0
 		moving_to = pick(cardinal)
 		var/turf/T = get_step(holder, moving_to)
 
-		holder.set_dir(moving_to)
-
 		var/mob/living/L = locate() in T
 		if(L)
 			// Attack whoever's on the tile. Even if it's an ally.
+			ai_log("dangerous_wander() : Going to confuse-attack [L].", AI_LOG_TRACE)
 			melee_attack(L)
 		else
 			// Move to the tile. Even if it's unsafe.
+			ai_log("dangerous_wander() : Going to confuse-walk to [T] ([T.x],[T.y],[T.z]).", AI_LOG_TRACE)
 			holder.IMove(T, safety = FALSE)
 	ai_log("dangerous_wander() : Exited.", AI_LOG_DEBUG)
 

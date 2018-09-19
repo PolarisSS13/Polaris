@@ -127,7 +127,7 @@
 
 // Controls the 'mood' overlay. Overrided in subtypes for specific behaviour.
 /mob/living/simple_mob/slime/proc/update_mood()
-	mood = "angry" // This is to avoid another override in the /feral subtype.
+	mood = "feral" // This is to avoid another override in the /feral subtype.
 
 /mob/living/simple_mob/slime/proc/unify()
 	unity = TRUE
@@ -215,3 +215,6 @@
 /mob/living/simple_mob/slime/speech_bubble_appearance()
 	return "slime"
 
+/mob/living/simple_mob/slime/proc/squish()
+	playsound(src.loc, 'sound/effects/slime_squish.ogg', 50, 0)
+	visible_message("<b>\The [src]</b> squishes!")

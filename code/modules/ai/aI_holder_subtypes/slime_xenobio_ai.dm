@@ -1,5 +1,5 @@
 // Specialized AI for slime simplemobs.
-// Unlike the parent AI code, this will probably break a lot of things if you put it on something that isn't /mob/living/simple_animal/slime/xenobio
+// Unlike the parent AI code, this will probably break a lot of things if you put it on something that isn't /mob/living/simple_mob/slime/xenobio
 
 /datum/ai_holder/simple_mob/xenobio_slime
 	hostile = TRUE
@@ -18,6 +18,10 @@
 /datum/ai_holder/simple_mob/xenobio_slime/light_pink
 	discipline = 5
 	obedience = 5
+
+/datum/ai_holder/simple_mob/xenobio_slime/passive/New() // For Kendrick.
+	..()
+	pacify()
 
 /datum/ai_holder/simple_mob/xenobio_slime/New()
 	..()
@@ -155,35 +159,99 @@
 		if(discipline && !rabid)
 			return FALSE // We're a good slime.
 
-/*
+// Commands, reactions, etc
+/datum/ai_holder/simple_mob/xenobio_slime/on_hear_say(mob/living/speaker, message)
+	ai_log("xenobio_slime/on_hear_say([speaker], [message]) : Entered.", AI_LOG_DEBUG)
+	var/mob/living/simple_mob/slime/xenobio/my_slime = holder
 
-/mob/living/simple_animal/slime/special_target_check(mob/living/L)
-	if(L.faction == faction && !attack_same && !istype(L, /mob/living/simple_animal/slime))
-		if(ishuman(L))
-			var/mob/living/carbon/human/H = L
-			if(istype(H.species, /datum/species/monkey)) // istype() is so they'll eat the alien monkeys too.
-				return TRUE // Monkeys are always food.
-			else
-				return FALSE
-	if(L in friends)
-		return FALSE
+	if((findtext(message, num2text(my_slime.number)) || findtext(message, my_slime.name) || findtext(message, "slimes"))) // Talking to us.
 
-	if(istype(L, /mob/living/simple_animal/slime))
-		var/mob/living/simple_animal/slime/buddy = L
-		if(buddy.slime_color == src.slime_color || discipline || unity || buddy.unity)
-			return FALSE // Don't hurt same colored slimes.
+		// First, make sure it's actually a player saying something and not an AI, or else we risk infinite loops.
+		if(!speaker.client)
+			return
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		if(H.species && H.species.name == "Promethean")
-			return FALSE // Prometheans are always our friends.
-		else if(istype(H.species, /datum/species/monkey)) // istype() is so they'll eat the alien monkeys too.
-			return TRUE // Monkeys are always food.
-		if(discipline && !rabid)
-			return FALSE // We're a good slime.  For now at least
+		// Are all slimes being referred to?
+	//	var/mass_order = FALSE
+	//	if(findtext(message, "slimes"))
+	//		mass_order = TRUE
 
-	if(issilicon(L) || isbot(L) )
-		if(discipline && !rabid)
-			return FALSE // We're a good slime.  For now at least.
-	return ..() // Other colors and nonslimes are jerks however.
-*/
+		// Say hello back.
+		if(findtext(message, "hello") || findtext(message, "hi") || findtext(message, "greetings"))
+			delayed_say(pick("Hello...", "Hi..."), speaker)
+
+		// Follow request.
+		if(findtext(message, "follow") || findtext(message, "come with me"))
+			if(!can_command(speaker))
+				delayed_say(pick("No...", "I won't follow..."), speaker)
+				return
+
+			delayed_say("Yes... I follow \the [speaker]...", speaker)
+			set_follow(speaker)
+
+		// Squish request.
+		if(findtext(message , "squish"))
+			if(!can_command(speaker))
+				delayed_say("No...", speaker)
+				return
+
+			spawn(rand(1 SECOND, 2 SECONDS))
+				if(!src || !holder || !can_act())  // We might've died/got deleted/etc in the meantime.
+					return
+				my_slime.squish()
+
+
+		// Stop request.
+		if(findtext(message, "stop") || findtext(message, "halt") || findtext(message, "cease"))
+			if(my_slime.victim) // We're being asked to stop eatting someone.
+				if(!can_command(speaker) || !is_justified_to_discipline())
+					delayed_say("No...", speaker)
+					return
+				else
+					delayed_say("Fine...", speaker)
+					adjust_discipline(1, TRUE)
+					my_slime.stop_consumption()
+
+			if(target) // We're being asked to stop chasing someone.
+				if(!can_command(speaker) || !is_justified_to_discipline())
+					delayed_say("No...", speaker)
+					return
+				else
+					delayed_say("Fine...", speaker)
+					adjust_discipline(1, TRUE) // This must come before losing the target or it will be unjustified.
+					lost_target()
+
+
+			if(leader) // We're being asked to stop following someone.
+				if(can_command(speaker) == SLIME_COMMAND_FRIEND || leader == speaker)
+					delayed_say("Yes... I'll stop...", speaker)
+					lose_follow()
+				else
+					delayed_say("No... I'll keep following \the [leader]...", speaker)
+
+		/* // Commented out since its mostly useless now due to slimes refusing to attack if it would make them naughty.
+		// Murder request
+		if(findtext(message, "harm") || findtext(message, "attack") || findtext(message, "kill") || findtext(message, "murder") || findtext(message, "eat") || findtext(message, "consume") || findtext(message, "absorb"))
+			if(can_command(speaker) < SLIME_COMMAND_FACTION)
+				delayed_say("No...", speaker)
+				return
+
+			for(var/mob/living/L in view(7, my_slime) - list(my_slime, speaker))
+				if(L == src)
+					continue // Don't target ourselves.
+				var/list/valid_names = splittext(L.name, " ") // Should output list("John", "Doe") as an example.
+				for(var/line in valid_names) // Check each part of someone's name.
+					if(findtext(message, lowertext(line))) // If part of someone's name is in the command, the slime targets them if allowed to.
+						if(!(mass_order && line == "slime"))	//don't think random other slimes are target
+							if(can_attack(L))
+								delayed_say("Okay... I attack \the [L]...", speaker)
+								give_target(L)
+								return
+							else
+								delayed_say("No... I won't attack \the [L].", speaker)
+								return
+
+			// If we're here, it couldn't find anyone with that name.
+			delayed_say("No... I don't know who to attack...", speaker)
+		*/
+	ai_log("xenobio_slime/on_hear_say() : Exited.", AI_LOG_DEBUG)
+

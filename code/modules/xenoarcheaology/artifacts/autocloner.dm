@@ -25,7 +25,8 @@
 		/mob/living/simple_mob/animal/giant_spider/nurse,
 		/mob/living/simple_mob/animal/space/alien,
 		/mob/living/simple_mob/animal/space/bear,
-		/mob/living/simple_mob/creature)
+		/mob/living/simple_mob/creature,
+		/mob/living/simple_mob/slime/xenobio)
 	else
 		spawn_type = pick(\
 		/mob/living/simple_animal/cat,
@@ -34,7 +35,6 @@
 		/mob/living/simple_mob/animal/passive/chicken,
 		/mob/living/simple_mob/animal/passive/cow,
 		/mob/living/simple_animal/parrot,
-		/mob/living/simple_animal/slime,
 		/mob/living/simple_mob/animal/passive/crab,
 		/mob/living/simple_mob/animal/passive/mouse,
 		/mob/living/simple_mob/goat)
