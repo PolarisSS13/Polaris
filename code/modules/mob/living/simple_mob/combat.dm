@@ -5,6 +5,9 @@
 	if(!A.Adjacent(src))
 		return FALSE
 	var/turf/their_T = get_turf(A)
+
+	face_atom(A)
+
 	if(attack_delay)
 	//	their_T.color = "#FF0000"
 		melee_pre_animation(A)
@@ -26,6 +29,7 @@
 // A is the thing getting attacked, T is the turf A is/was on when attack_target was called.
 /mob/living/simple_mob/proc/do_attack(atom/A, turf/T)
 //	if(!A.Adjacent(src))
+	face_atom(A)
 	if((!(A in T)) || !T.Adjacent(src)) // Most likely we have a slow attack and they dodged it or we somehow got moved.
 		add_attack_logs(src, A, "Animal-attacked (dodged)", admin_notify = FALSE)
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
@@ -45,6 +49,7 @@
 		if(prob(melee_miss_chance))
 			add_attack_logs(src, L, "Animal-attacked (miss)", admin_notify = FALSE)
 			do_attack_animation(src)
+			playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
 			return FALSE // We missed.
 
 		if(ishuman(L))
@@ -52,12 +57,17 @@
 			if(H.check_shields(damage = damage_to_do, damage_source = src, attacker = src, def_zone = null, attack_text = "the attack"))
 				return FALSE // We were blocked.
 
-	if(A.attack_generic(src, damage_to_do, pick(attacktext)))
+	if(apply_attack(A, damage_to_do))
 		apply_melee_effects(A)
 		if(attack_sound)
 			playsound(src, attack_sound, 75, 1)
 
 	return TRUE
+
+// Generally used to do the regular attack.
+// Override for doing special stuff with the direct result of the attack.
+/mob/living/simple_mob/proc/apply_attack(atom/A, damage_to_do)
+	return A.attack_generic(src, damage_to_do, pick(attacktext))
 
 // Override for special effects after a successful attack, like injecting poison or stunning the target.
 /mob/living/simple_mob/proc/apply_melee_effects(atom/A)
@@ -73,6 +83,8 @@
 /mob/living/simple_mob/proc/shoot_target(atom/A)
 	set waitfor = FALSE
 	setClickCooldown(get_attack_speed())
+
+	face_atom(A)
 
 	if(attack_delay)
 		ranged_pre_animation(A)
@@ -99,13 +111,19 @@
 	if(A == start)
 		return
 
+	face_atom(A)
+
 	var/obj/item/projectile/P = new projectiletype(user.loc)
-	playsound(user, projectilesound, 100, 1)
 	if(!P)
 		return
+
+	// If the projectile has its own sound, use it.
+	// Otherwise default to the mob's firing sound.
+	playsound(user, P.fire_sound ? P.fire_sound : projectilesound, 80, 1)
+
 	P.launch(A)
 	if(needs_reload)
-		reload_count ++
+		reload_count++
 
 //	if(distance >= special_attack_min_range && distance <= special_attack_max_range)
 //		return TRUE
@@ -139,7 +157,7 @@
 		return FALSE
 
 	// Charge check.
-	if(!special_attack_charges)
+	if(!isnull(special_attack_charges) && special_attack_charges <= 0)
 		return FALSE
 
 	return TRUE
@@ -151,6 +169,7 @@
 // Special attacks, like grenades or blinding spit or whatever.
 // Don't override this, override do_special_attack() for your blinding spit/etc.
 /mob/living/simple_mob/proc/special_attack_target(atom/A)
+	face_atom(A)
 	last_special_attack = world.time
 	if(do_special_attack(A))
 		if(special_attack_charges)
@@ -172,7 +191,7 @@
 	var/true_attack_delay = attack_delay
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.attack_speed_percent))
-			attack_delay *= M.attack_speed_percent
+			true_attack_delay *= M.attack_speed_percent
 
 	setClickCooldown(true_attack_delay) // Insurance against a really long attack being longer than default click delay.
 

@@ -11,6 +11,8 @@
 
 	poison_per_bite = 5
 	poison_type = "cryotoxin"
+	heat_resist = -0.50
+	cold_resist = 0.75
 
 // Sif variant with a somewhat different desc.
 /mob/living/simple_mob/animal/giant_spider/frost/sif

@@ -74,7 +74,7 @@
 			new_color = "#00FFFF" // Cyan
 		if(STANCE_FLEE)
 			new_color = "#666666" // Grey
-		if(STANCE_STUNNED)
+		if(STANCE_DISABLED)
 			new_color = "#000000" // Black
 	holder.color = new_color
 

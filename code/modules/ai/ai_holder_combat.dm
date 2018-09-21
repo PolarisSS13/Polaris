@@ -89,12 +89,14 @@
 
 // We're not entirely sure how holder will do melee attacks since any /mob/living could be holder, but we don't have to care because Interfaces.
 /datum/ai_holder/proc/melee_attack(atom/A)
+	pre_melee_attack(A)
 	. = holder.IAttack(A)
 	if(.)
 		post_melee_attack(A)
 
 // Ditto.
 /datum/ai_holder/proc/ranged_attack(atom/A)
+	pre_ranged_attack(A)
 	. = holder.IRangedAttack(A)
 	if(.)
 		post_ranged_attack(A)
@@ -102,7 +104,6 @@
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/proc/special_attack(atom/movable/AM)
 	. = holder.ISpecialAttack(AM)
-	world << "special_attack result is [.]"
 	if(.)
 		post_special_attack(AM)
 
@@ -110,6 +111,12 @@
 // Override to do things like move in a random step for evasiveness.
 // Note that this is called BEFORE the attack.
 /datum/ai_holder/proc/on_engagement(atom/A)
+
+// Called before a ranged attack is attempted.
+/datum/ai_holder/proc/pre_ranged_attack(atom/A)
+
+// Called before a melee attack is attempted.
+/datum/ai_holder/proc/pre_melee_attack(atom/A)
 
 // Called after a successful (IE not on cooldown) ranged attack.
 // Note that this is not whether the projectile actually hit, just that one was launched.

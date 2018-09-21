@@ -12,6 +12,9 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 25
 
+	heat_resist = 0.75
+	cold_resist = -0.50
+
 	poison_chance = 30
 	poison_per_bite = 1
 	poison_type = "thermite_v"

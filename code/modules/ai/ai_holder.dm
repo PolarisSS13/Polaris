@@ -64,8 +64,17 @@
 /datum/ai_holder/proc/go_wake()
 	if(stance != STANCE_SLEEP)
 		return
+	if(!should_wake())
+		return
 	set_stance(STANCE_IDLE)
 	SSai.processing += src
+
+/datum/ai_holder/proc/should_wake()
+	if(holder.client && !autopilot)
+		return FALSE
+	if(holder.stat >= DEAD)
+		return FALSE
+	return TRUE
 
 // Resets a lot of 'memory' vars.
 /datum/ai_holder/proc/forget_everything()
@@ -79,13 +88,20 @@
 /datum/ai_holder/proc/handle_tactics()
 	if(busy)
 		return
+	handle_special_tactic()
 	handle_stance_tactical()
 
 // 'Strategical' processes that are more expensive on the CPU and so don't get run as often as the above proc, such as A* pathfinding or robust targeting.
 /datum/ai_holder/proc/handle_strategicals()
 	if(busy)
 		return
+	handle_special_strategical()
 	handle_stance_strategical()
+
+// Override these for special things without polluting the main loop.
+/datum/ai_holder/proc/handle_special_tactic()
+
+/datum/ai_holder/proc/handle_special_strategical()
 
 /*
 	//AI Actions
@@ -134,9 +150,9 @@
 	if(target && can_see_target(target))
 		track_target_position()
 
-	if(!can_act())
-		ai_log("handle_stance_tactical() : Stunned.", AI_LOG_TRACE)
-		set_stance(STANCE_STUNNED)
+	if(stance != STANCE_DISABLED && is_disabled()) // Stunned/confused/etc
+		ai_log("handle_stance_tactical() : Disabled.", AI_LOG_TRACE)
+		set_stance(STANCE_DISABLED)
 		return
 
 	if(stance in STANCES_COMBAT)
@@ -201,11 +217,13 @@
 			ai_log("handle_stance_tactical() : STANCE_FLEE, going to flee_from_target().", AI_LOG_TRACE)
 			flee_from_target()
 
-		if(STANCE_STUNNED)
-			ai_log("handle_stance_tactical() : STANCE_STUNNED.", AI_LOG_TRACE)
-			if(can_act())
-				ai_log("handle_stance_tactical() : No longer stunned.", AI_LOG_TRACE)
+		if(STANCE_DISABLED)
+			ai_log("handle_stance_tactical() : STANCE_DISABLED.", AI_LOG_TRACE)
+			if(!is_disabled())
+				ai_log("handle_stance_tactical() : No longer disabled.", AI_LOG_TRACE)
 				set_stance(STANCE_IDLE)
+			else
+				handle_disabled()
 
 	ai_log("handle_stance_tactical() : Exiting.", AI_LOG_TRACE)
 	ai_log("========= Fast Process Ending ==========", AI_LOG_TRACE)
@@ -298,17 +316,6 @@
 			AttackTarget()
 */
 
-// If our holder is able to do anything.
-/datum/ai_holder/proc/can_act()
-	if(holder.stat) // Dead or unconscious.
-		ai_log("can_act() : Stat was non-zero ([holder.stat]).", AI_LOG_TRACE)
-		return FALSE
-	if(holder.incapacitated(INCAPACITATION_DISABLED)) // Stunned in some form.
-		ai_log("can_act() : Incapacited.", AI_LOG_TRACE)
-		return FALSE
-	return TRUE
-
-
 // Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
 /mob/living/proc/set_AI_busy(value)
 	if(ai_holder)
@@ -328,6 +335,10 @@
 	if(client && !ai_holder.autopilot)
 		return null
 	return ai_holder.stance
+
+// Similar to above but only returns 1 or 0.
+/mob/living/proc/has_AI()
+	return get_AI_stance() ? TRUE : FALSE
 
 // 'Taunts' the AI into attacking the taunter.
 /mob/living/proc/taunt(atom/movable/taunter, force_target_switch = FALSE)

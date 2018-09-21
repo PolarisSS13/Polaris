@@ -56,6 +56,8 @@
 	for(var/mob/living/L in faction_friends)
 		if(L == holder) // Lets not call ourselves.
 			continue
+		if(holder.z != L.z) // On seperate z-level.
+			continue
 		if(get_dist(L, holder) > call_distance) // Too far to 'hear' the call for help.
 			continue
 

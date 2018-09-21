@@ -502,7 +502,7 @@
 	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
 
 //slime
-/mob/living/simple_animal/slime/mind_initialize()
+/mob/living/simple_mob/slime/mind_initialize()
 	. = ..()
 	mind.assigned_role = "slime"
 

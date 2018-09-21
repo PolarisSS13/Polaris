@@ -23,6 +23,8 @@
 	poison_per_bite = 3
 	poison_type = "stimm"
 
+	shock_resist = 0.75
+
 	player_msg = "You can fire a taser-like ranged attack by clicking on an enemy or tile at a distance."
 
 	ai_holder_type = /datum/ai_holder/simple_mob/ranged/electric_spider

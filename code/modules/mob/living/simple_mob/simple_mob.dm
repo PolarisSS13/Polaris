@@ -143,7 +143,7 @@
 
 /mob/living/simple_mob/initialize()
 	verbs -= /mob/verb/observe
-	maxHealth = health
+	health = maxHealth
 
 	for(var/L in has_langs)
 		languages |= all_languages[L]

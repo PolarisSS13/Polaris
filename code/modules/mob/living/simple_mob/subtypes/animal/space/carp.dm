@@ -13,7 +13,7 @@
 	maxHealth = 25
 	health = 25
 	movement_cooldown = 0 // Carp go fast
-	hovering = TRUE.
+	hovering = TRUE
 
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"

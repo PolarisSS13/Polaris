@@ -197,5 +197,21 @@ the artifact triggers the rage.
 	var/damage_per_tick = 5
 
 /datum/modifier/fire/tick()
-	holder.adjustFireLoss(damage_per_tick)
+	holder.inflict_heat_damage(damage_per_tick)
 
+
+// Applied when near something very cold.
+// Reduces mobility, attack speed.
+/datum/modifier/chilled
+	name = "chilled"
+	desc = "You feel yourself freezing up. Its hard to move."
+	mob_overlay_state = "chilled"
+
+	on_created_text = "<span class='danger'>You feel like you're going to freeze! It's hard to move.</span>"
+	on_expired_text = "<span class='warning'>You feel somewhat warmer and more mobile now.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+	slowdown = 2
+	evasion = -40
+	attack_speed_percent = 1.4
+	disable_duration_percent = 1.2
