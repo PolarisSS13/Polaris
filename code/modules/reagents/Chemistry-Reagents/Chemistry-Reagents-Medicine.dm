@@ -814,7 +814,7 @@
 	reagent_state = LIQUID
 	color = "#BF80BF"
 	metabolism = 0.01
-	ingest_met = 0.02
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -837,7 +837,7 @@
 	reagent_state = LIQUID
 	color = "#FF80FF"
 	metabolism = 0.01
-	ingest_met = 0.02
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -860,7 +860,7 @@
 	reagent_state = LIQUID
 	color = "#FF80BF"
 	metabolism = 0.01
-	ingest_met = 0.02
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -887,7 +887,7 @@
 	reagent_state = LIQUID
 	color = "#e6efe3"
 	metabolism = 0.01
-	ingest_met = 0.02
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
