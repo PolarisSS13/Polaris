@@ -132,7 +132,7 @@
 		/obj/item/weapon/surgical/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/nanopaste,
-		/obj/item/device/healthanalyzer/advanced
+		/obj/item/device/healthanalyzer/advanced,
 		/obj/item/weapon/autopsy_scanner
 		)
 
@@ -147,7 +147,7 @@
 		/obj/item/weapon/surgical/bonegel,
 		/obj/item/weapon/surgical/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/device/healthanalyzer/advanced
+		/obj/item/device/healthanalyzer/advanced,
 		/obj/item/weapon/autopsy_scanner
 		)
 
