@@ -505,7 +505,7 @@
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
-	var/water_based = 1
+	var/water_based = TRUE
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
@@ -1495,7 +1495,7 @@
 	description = "A viscous, but sweet, ooze."
 	taste_description = "honey"
 	color = "#FDF5E6" // rgb(253,245,230)
-	water_based = 0
+	water_based = FALSE
 
 	glass_name = "Oil Slick"
 	glass_desc = "A concoction that should probably be in an engine, rather than your stomach."
@@ -1507,7 +1507,7 @@
 	description = "A viscous, glowing slurry."
 	taste_description = "sour honey drops"
 	color = "#7FFF00" // rgb(127,255,0)
-	water_based = 0
+	water_based = FALSE
 
 	glass_name = "Nuclear Waste"
 	glass_desc = "Sadly, no super powers."
@@ -1532,7 +1532,7 @@
 	description = "A thick, bubbling soda."
 	taste_description = "chewy water"
 	color = "#F0FFF0" // rgb(245,255,250)
-	water_based = 0
+	water_based = FALSE
 
 	glass_name = "Soda Oil"
 	glass_desc = "A pitiful sludge that looks vaguely like a soda.. if you look at it a certain way."
@@ -3084,7 +3084,7 @@
 			var/adjust_liver = rand(-3, 2)
 			if(prob(L.damage))
 				to_chat(M, "<span class='cult'>You feel woozy...</span>")
-			L.damage = max(L.damage + adjust_liver, 0)
+			L.damage = max(L.damage + (adjust_liver * removed), 0)
 	var/adjust_tox = rand(-4, 2)
 	M.adjustToxLoss(adjust_tox * removed)
 
