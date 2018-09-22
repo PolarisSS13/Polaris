@@ -1266,11 +1266,6 @@
 			to_chat(L, span("warning", "You have other entities attached to yourself. Remove them first."))
 			return
 
-	for(var/mob/living/simple_mob/slime/xenobio/M in range(1,usr))
-		if(M.victim == usr)
-			usr << "<span class='danger'>You're too busy getting your life sucked out of you.</span>"
-			return
-
 	//search for a valid passenger compartment
 	var/feedback = 0 //for nicer user feedback
 	for(var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in src)
