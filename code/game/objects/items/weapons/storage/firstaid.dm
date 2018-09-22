@@ -133,6 +133,7 @@
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/nanopaste,
 		/obj/item/device/healthanalyzer/advanced
+		/obj/item/weapon/autopsy_scanner
 		)
 
 	starts_with = list(
@@ -147,6 +148,7 @@
 		/obj/item/weapon/surgical/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/device/healthanalyzer/advanced
+		/obj/item/weapon/autopsy_scanner
 		)
 
 /obj/item/weapon/storage/firstaid/clotting
