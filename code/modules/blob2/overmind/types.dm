@@ -120,7 +120,7 @@
 	brute_multiplier = 0.25
 	burn_multiplier = 0.6
 	ai_aggressiveness = 50 //Really doesn't like you near it.
-	spore_type = /mob/living/simple_animal/hostile/hivebot/swarm
+	spore_type = /mob/living/simple_mob/mechanical/hivebot/swarm
 
 /datum/blob_type/fabrication_swarm/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
 	if(istype(B, /obj/structure/blob/normal))

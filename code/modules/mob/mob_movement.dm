@@ -285,12 +285,12 @@
 				mob.move_delay += config.run_speed
 			if("walk")
 				mob.move_delay += config.walk_speed
-		move_delay += mob.movement_delay()
+		mob.move_delay += mob.movement_delay()
 
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time
+			mob.move_delay = world.time
 			//drunk driving
 			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
 				direct = turn(direct, pick(90, -90))
@@ -319,14 +319,14 @@
 							if(prob(50))	direct = turn(direct, pick(90, -90))
 						if("walk")
 							if(prob(25))	direct = turn(direct, pick(90, -90))
-				move_delay += 2
+				mob.move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
 		if(locate(/obj/item/weapon/grab, mob))
-			move_delay = max(move_delay, world.time + 7)
+			mob.move_delay = max(mob.move_delay, world.time + 7)
 			var/list/L = mob.ret_grab()
 			if(istype(L, /list))
 				if(L.len == 2)

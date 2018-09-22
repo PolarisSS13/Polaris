@@ -28,11 +28,17 @@
 // This is a seperate proc for the purposes of attack animations.
 // A is the thing getting attacked, T is the turf A is/was on when attack_target was called.
 /mob/living/simple_mob/proc/do_attack(atom/A, turf/T)
-//	if(!A.Adjacent(src))
 	face_atom(A)
-	if((!(A in T)) || !T.Adjacent(src)) // Most likely we have a slow attack and they dodged it or we somehow got moved.
+	var/missed = FALSE
+	if(!isturf(A) && !(A in T) ) // Turfs don't contain themselves so checking contents is pointless if we're targeting a turf.
+		missed = TRUE
+	else if(!T.AdjacentQuick(src))
+		missed = TRUE
+
+	if(missed) // Most likely we have a slow attack and they dodged it or we somehow got moved.
 		add_attack_logs(src, A, "Animal-attacked (dodged)", admin_notify = FALSE)
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
+		visible_message(span("warning", "\The [src] misses their attack."))
 		return FALSE
 
 	var/damage_to_do = rand(melee_damage_lower, melee_damage_upper)

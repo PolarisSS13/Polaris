@@ -14,7 +14,6 @@
 	var/im_list_ui[0]				//List of messages.
 
 	var/weather[0]
-	var/injection = null
 	var/modules_ui[0]				//Home screen info.
 
 	//First we add other 'local' communicators.

@@ -466,6 +466,7 @@
 #include "code\game\gamemodes\cult\narsie.dm"
 #include "code\game\gamemodes\cult\ritual.dm"
 #include "code\game\gamemodes\cult\runes.dm"
+#include "code\game\gamemodes\cult\soulstone.dm"
 #include "code\game\gamemodes\cult\talisman.dm"
 #include "code\game\gamemodes\cult\cultify\mob.dm"
 #include "code\game\gamemodes\cult\cultify\obj.dm"
