@@ -93,7 +93,9 @@
 	src.health -= damage*0.2
 	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
-/obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W))
+		return
 	if(W.is_wirecutter())
 		if(!shock(user, 100))
 			playsound(src, W.usesound, 100, 1)
@@ -107,7 +109,7 @@
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grille from"] the floor.</span>")
 			return
 
-//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
+	//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
 	else if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(!ST.material.created_window)
