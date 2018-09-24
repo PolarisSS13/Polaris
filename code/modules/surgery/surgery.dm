@@ -47,6 +47,9 @@
 			if(IS_WRENCH)
 				if(tool.is_wrench())
 					return allowed_procs[P]
+			if(IS_KNIFE)
+				if(tool.is_knife())
+					return allowed_procs[P]
 	return 0
 
 

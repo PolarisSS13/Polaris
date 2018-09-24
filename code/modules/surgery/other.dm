@@ -62,9 +62,10 @@
 	priority = 2
 	allowed_tools = list(
 		/obj/item/weapon/surgical/scalpel = 100,        \
-		/obj/item/weapon/material/knife = 75,    \
 		/obj/item/weapon/material/shard = 50,         \
 	)
+
+	allowed_procs = list(IS_KNIFE = 75)
 
 	can_infect = 1
 	blood_level = 1

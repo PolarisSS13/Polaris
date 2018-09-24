@@ -8,7 +8,7 @@
 	force_divisor = 0.3 // 18 with hardness 60 (steel)
 	attack_verb = list("jabbed","stabbed","ripped")
 
-/obj/item/weapon/material/knife/machete/hatchet
+/obj/item/weapon/material/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
@@ -20,31 +20,9 @@
 	edge = 1
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
+	can_cleave = TRUE
+	slot_flags = SLOT_BELT
 	applies_material_colour = 0
-
-/obj/item/weapon/material/knife/machete/hatchet/unathiknife
-	name = "duelling knife"
-	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "unathiknife"
-	attack_verb = list("ripped", "torn", "cut")
-	can_cleave = FALSE
-	var hits = 0
-
-/obj/item/weapon/material/knife/machete/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
-	if(hits > 0)
-		return
-	var/obj/item/I = user.get_inactive_hand()
-	if(istype(I, /obj/item/weapon/material/knife/machete/hatchet/unathiknife))
-		hits ++
-		var/obj/item/weapon/W = I
-		W.attack(M, user)
-		W.afterattack(M, user)
-	..()
-
-/obj/item/weapon/material/knife/machete/hatchet/unathiknife/afterattack(mob/M as mob, mob/user as mob)
-	hits = initial(hits)
-	..()
 
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"

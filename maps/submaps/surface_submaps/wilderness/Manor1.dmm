@@ -102,7 +102,7 @@
 "bX" = (/obj/structure/table/woodentable,/obj/structure/bedsheetbin,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "bY" = (/obj/structure/table/rack,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "bZ" = (/obj/structure/closet/crate,/obj/item/stack/cable_coil/random_belt,/obj/random/cash,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
-"ca" = (/obj/structure/table/woodentable,/obj/item/weapon/melee/umbrella/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
+"ca" = (/obj/structure/table/woodentable,/obj/item/weapon/umbrella/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cb" = (/obj/structure/closet/cabinet,/obj/random/gun/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cc" = (/obj/structure/closet/cabinet,/obj/item/weapon/cell/device/weapon,/obj/item/weapon/cell/device/weapon,/obj/random/medical,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cd" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)

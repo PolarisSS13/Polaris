@@ -15,43 +15,6 @@
 		user.visible_message(span("danger", "\The [user] [T.is] strangling [T.himself] with \the [src]! It looks like [T.he] [T.is] trying to commit suicide."), span("danger", "You start to strangle yourself with \the [src]!"), span("danger", "You hear the sound of someone choking!"))
 		return (OXYLOSS)
 
-/obj/item/weapon/melee/umbrella
-	name = "umbrella"
-	desc = "To keep the rain off you. Use with caution on windy days."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "umbrella_closed"
-	addblends = "umbrella_closed_a"
-	flags = CONDUCT
-	slot_flags = SLOT_BELT
-	force = 5
-	throwforce = 5
-	w_class = ITEMSIZE_NORMAL
-	var/open = FALSE
-
-/obj/item/weapon/melee/umbrella/New()
-	..()
-	update_icon()
-
-/obj/item/weapon/melee/umbrella/attack_self()
-	src.toggle_umbrella()
-
-/obj/item/weapon/melee/umbrella/proc/toggle_umbrella()
-	open = !open
-	icon_state = "umbrella_[open ? "open" : "closed"]"
-	addblends = icon_state + "_a"
-	item_state = icon_state
-	update_icon()
-	if(ishuman(src.loc))
-		var/mob/living/carbon/human/H = src.loc
-		H.update_inv_l_hand(0)
-		H.update_inv_r_hand()
-	..()
-
-// Randomizes color
-/obj/item/weapon/melee/umbrella/random/New()
-	color = "#"+get_random_colour()
-	..()
-
 /obj/item/weapon/melee/cursedblade
 	name = "crystal blade"
 	desc = "The red crystal blade's polished surface glints in the light, giving off a faint glow."
@@ -88,3 +51,33 @@
 	new_voice.real_name = "cursed sword"
 	voice_mobs.Add(new_voice)
 	listening_objects |= src
+
+
+/obj/item/weapon/melee/unathiknife
+	name = "duelling knife"
+	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "unathiknife"
+	attack_verb = list("ripped", "torn", "cut")
+	w_class = ITEMSIZE_SMALL
+	force = 12
+	throwforce = 15
+	var/hits = 0
+
+/obj/item/weapon/melee/unathiknife/attack(mob/M as mob, mob/user as mob)
+	if(hits > 0)
+		return
+	var/obj/item/I = user.get_inactive_hand()
+	if(istype(I, /obj/item/weapon/melee/unathiknife))
+		hits ++
+		var/obj/item/weapon/W = I
+		W.attack(M, user)
+		W.afterattack(M, user)
+	..()
+
+/obj/item/weapon/melee/unathiknife/afterattack(mob/M as mob, mob/user as mob)
+	hits = initial(hits)
+	..()
+
+/obj/item/weapon/melee/unathiknife/is_knife()
+	return TRUE

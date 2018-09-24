@@ -23,9 +23,10 @@
 /datum/surgery_step/generic/cut_face
 	allowed_tools = list(
 	/obj/item/weapon/surgical/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
+
+	allowed_procs = list(IS_KNIFE = 75)
 
 	min_duration = 90
 	max_duration = 110

@@ -29,9 +29,11 @@
 /datum/surgery_step/generic/cut_open
 	allowed_tools = list(
 		/obj/item/weapon/surgical/scalpel = 100,		\
-		/obj/item/weapon/material/knife = 75,	\
 		/obj/item/weapon/material/shard = 50, 		\
 	)
+
+	allowed_procs = list(IS_KNIFE = 75)
+
 	req_open = 0
 
 	min_duration = 90
@@ -305,7 +307,7 @@
 /datum/surgery_step/generic/amputate
 	allowed_tools = list(
 		/obj/item/weapon/surgical/circular_saw = 100, \
-		/obj/item/weapon/material/knife/machete/hatchet = 75
+		/obj/item/weapon/material/hatchet = 75
 	)
 	req_open = 0
 

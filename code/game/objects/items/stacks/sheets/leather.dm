@@ -100,10 +100,12 @@
 
 //Step one - dehairing.
 /obj/item/stack/material/animalhide/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(	istype(W, /obj/item/weapon/material/knife) || \
-		istype(W, /obj/item/weapon/material/twohanded/fireaxe) || \
-		istype(W, /obj/item/weapon/material/knife/machete/hatchet) )
-
+	var/can_shave = FALSE
+	if(istype(W, /obj/item/weapon/material/twohanded/fireaxe) || istype(W, /obj/item/weapon/material/hatchet))
+		can_shave = TRUE
+	if(istype(W) && W.is_knife())
+		can_shave = TRUE
+	if(can_shave)
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
 		usr.visible_message("<span class='notice'>\The [usr] starts cutting hair off \the [src]</span>", "<span class='notice'>You start cutting the hair off \the [src]</span>", "You hear the sound of a knife rubbing against flesh")
 		if(do_after(user,50))

@@ -287,3 +287,6 @@ var/global/list/##LIST_NAME = list();\
 #define IS_CROWBAR			"crowbar"
 #define IS_WIRECUTTER		"wirecutter"
 #define IS_WRENCH			"wrench"
+
+// And the knife version
+#define IS_KNIFE			"knife"

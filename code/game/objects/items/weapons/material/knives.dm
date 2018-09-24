@@ -74,6 +74,9 @@
 	                      "<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.hes] trying to commit seppuku.</span>")
 	return (BRUTELOSS)
 
+/obj/item/weapon/material/knife/is_knife()
+	return TRUE	// Duh?
+
 // These no longer inherit from hatchets.
 /obj/item/weapon/material/knife/tacknife
 	name = "tactical knife"
@@ -132,7 +135,7 @@
 	icon_state = "machete"
 	force_divisor = 0.3 // 18 when hardness 60 (steel)
 	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
-	can_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
+	can_cleave = TRUE
 	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/knife/tacknife/survival

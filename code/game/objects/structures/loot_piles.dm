@@ -546,7 +546,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
         /obj/item/weapon/flame/lighter/zippo/black,
         /obj/item/weapon/material/knife/tacknife/survival,
         /obj/item/weapon/material/knife/tacknife/combatknife,
-        /obj/item/weapon/material/knife/machete/hatchet,
+        /obj/item/weapon/material/hatchet,
         /obj/item/weapon/material/knife/butch,
         /obj/item/weapon/storage/wallet/random,
         /obj/item/clothing/accessory/bracelet/material/gold,

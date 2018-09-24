@@ -55,27 +55,27 @@
 		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi'
 		)
 	supporting_limbs = list()
-	var/obj/item/weapon/material/knife/tacknife
+	var/obj/item/weapon/held_knife
 
 /obj/item/clothing/suit/space/rig/attack_hand(var/mob/living/M)
-	if(tacknife)
-		tacknife.loc = get_turf(src)
-		if(M.put_in_active_hand(tacknife))
-			M << "<span class='notice'>You slide \the [tacknife] out of [src].</span>"
+	if(held_knife)
+		held_knife.forceMove(get_turf(src))
+		if(M.put_in_active_hand(held_knife))
+			to_chat(M, "<span class='notice'>You slide \the [held_knife] out of [src].</span>")
 			playsound(M, 'sound/weapons/flipblade.ogg', 40, 1)
-			tacknife = null
+			held_knife = null
 			update_icon()
 		return
 	..()
 
 /obj/item/clothing/suit/space/rig/attackby(var/obj/item/I, var/mob/living/M)
-	if(istype(I, /obj/item/weapon/material/knife/tacknife))
-		if(tacknife)
+	if(istype(I, /obj/item/weapon/material/knife/tacknife) || istype(I, /obj/item/weapon/melee/unathiknife))
+		if(held_knife)
 			return
 		M.drop_item()
-		tacknife = I
-		I.loc = src
-		M << "<span class='notice'>You slide the [I] into [src].</span>"
+		held_knife = I
+		I.forceMove(src)
+		to_chat(M, "<span class='notice'>You slide the [I] into [src].</span>")
 		playsound(M, 'sound/weapons/flipblade.ogg', 40, 1)
 		update_icon()
 	..()

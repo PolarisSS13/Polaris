@@ -10,7 +10,7 @@
 "j" = (/obj/item/stack/material/log/sif{amount = 25},/turf/template_noop,/area/template_noop)
 "k" = (/obj/structure/table/bench/wooden,/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
 "l" = (/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
-"m" = (/obj/item/weapon/material/knife/machete/hatchet,/turf/template_noop,/area/template_noop)
+"m" = (/obj/item/weapon/material/hatchet,/turf/template_noop,/area/template_noop)
 "n" = (/obj/structure/bonfire/sifwood,/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
 "o" = (/obj/item/weapon/flame/lighter,/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
 

@@ -33,7 +33,7 @@
 
 /datum/category_item/autolathe/tools/hatchet
 	name = "hatchet"
-	path =/obj/item/weapon/material/knife/machete/hatchet
+	path =/obj/item/weapon/material/hatchet
 
 /datum/category_item/autolathe/tools/minihoe
 	name = "mini hoe"

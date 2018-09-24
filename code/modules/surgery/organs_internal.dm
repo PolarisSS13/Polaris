@@ -151,9 +151,10 @@
 
 	allowed_tools = list(
 	/obj/item/weapon/surgical/scalpel = 100,		\
-	/obj/item/weapon/material/knife = 75,	\
 	/obj/item/weapon/material/shard = 50, 		\
 	)
+
+	allowed_procs = list(IS_KNIFE = 75)
 
 	min_duration = 90
 	max_duration = 110
@@ -401,9 +402,10 @@
 // /datum/surgery_step/ribcage/heart/cut
 //	allowed_tools = list(
 //	/obj/item/weapon/surgical/scalpel = 100,		\
-//	/obj/item/weapon/material/knife = 75,	\
 //	/obj/item/weapon/material/shard = 50, 		\
 //	)
+
+// allowed_procs = list(IS_KNIFE = 75)
 
 //	min_duration = 30
 //	max_duration = 40

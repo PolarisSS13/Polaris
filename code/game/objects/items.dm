@@ -840,3 +840,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/is_welder()
 	return FALSE
+
+// Things past here should work fine, but it's basically more of the same
+/obj/item/proc/is_knife()
+	return FALSE

@@ -29,10 +29,9 @@
 /datum/surgery_step/robotics/unscrew_hatch
 	allowed_tools = list(
 		/obj/item/weapon/coin = 50,
-		/obj/item/weapon/material/knife = 50
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 100)
+	allowed_procs = list(IS_SCREWDRIVER = 100, IS_KNIFE = 50)
 
 	req_open = 0
 

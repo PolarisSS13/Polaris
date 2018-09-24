@@ -242,13 +242,14 @@
 							return
 					scanner.computer.inventory.Add(src)
 					to_chat(user, "[W]'s screen flashes: 'Book stored in buffer. Title added to general inventory.'")
-	else if(istype(W, /obj/item/weapon/material/knife) || W.is_wirecutter())
-		if(carved)	return
-		to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
-		if(do_after(user, 30))
-			to_chat(user, "<span class='notice'>You carve out the pages from [title]! You didn't want to read it anyway.</span>")
-			carved = 1
-			return
+	else if(istype(W))
+		if(W.is_knife() || W.is_wirecutter())
+			if(carved)	return
+			to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
+			if(do_after(user, 30))
+				to_chat(user, "<span class='notice'>You carve out the pages from [title]! You didn't want to read it anyway.</span>")
+				carved = 1
+				return
 	else
 		..()
 
