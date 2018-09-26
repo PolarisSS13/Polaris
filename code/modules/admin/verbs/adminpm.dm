@@ -32,6 +32,31 @@
 	cmd_admin_pm(targets[target],null)
 	feedback_add_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_ahelp_reply(whom)
+	if(prefs.muted & MUTE_ADMINHELP)
+		to_chat(src, "<font color='red'>Error: Admin-PM: You are unable to use admin PM-s (muted).</font>")
+		return
+	var/client/C
+	if(istext(whom))
+		if(cmptext(copytext(whom,1,2),"@"))
+			whom = findStealthKey(whom)
+		C = GLOB.directory[whom]
+	else if(istype(whom, /client))
+		C = whom
+	if(!C)
+		if(holder)
+			to_chat(src, "<font color='red'>Error: Admin-PM: Client not found.</font>")
+		return
+
+	var/datum/admin_help/AH = C.current_ticket
+
+	if(AH)
+		message_admins("[key_name_admin(src)] has started replying to [key_name(C, 0, 0)]'s admin help.")
+	var/msg = input(src,"Message:", "Private message to [key_name(C, 0, 0)]") as text|null
+	if (!msg)
+		message_admins("[key_name_admin(src)] has cancelled their reply to [key_name(C, 0, 0)]'s admin help.")
+		return
+	cmd_admin_pm(whom, msg)
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
 //Fetching a message if needed. src is the sender and C is the target client
@@ -79,6 +104,8 @@
 	var/recieve_message
 
 	if(holder && !C.holder)
+		if(!C.current_ticket)
+			new /datum/admin_help(msg, recipient, TRUE)
 		recieve_message = "<span class='pm'><span class='howto'><b>-- Click the [recieve_pm_type]'s name to reply --</b></span></span>\n"
 		if(C.adminhelped)
 			C << recieve_message
@@ -105,6 +132,7 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	log_adminpm(msg,src,C)
+
 	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
