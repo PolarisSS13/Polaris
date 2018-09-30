@@ -169,7 +169,10 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			s["players"] = players.len
 			s["playerlist"] = list2params(players)
-			s["admins"] = admins.len
+			var/list/adm = get_admin_counts()
+			var/list/presentmins = adm["present"]
+			var/list/afkmins = adm["afk"]
+			s["admins"] = presentmins.len + afkmins.len //equivalent to the info gotten from adminwho
 			s["adminlist"] = list2params(admins)
 		else
 			var/n = 0

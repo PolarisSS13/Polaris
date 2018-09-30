@@ -212,6 +212,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=icissue'>IC</A>)"
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=close'>CLOSE</A>)"
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=resolve'>RSLVE</A>)"
+	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=resolve'>HANDLE</A>)"
 
 //private
 /datum/admin_help/proc/LinkedReplyName(ref_src)
@@ -319,7 +320,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		initiator << 'sound/effects/adminhelp.ogg'
 
 		to_chat(initiator, "<font color='red' size='4'><b>- AdminHelp Rejected! -</b></font>")
-		to_chat(initiator, "<font color='red'><b>Your admin help was rejected.</b> The adminhelp verb has been returned to you so that you may try again.</font>")
+		to_chat(initiator, "<font color='red'><b>Your admin help was rejected.</b></font>")
 		to_chat(initiator, "Please try to be calm, clear, and descriptive in admin helps, do not assume the admin has seen any related events, and clearly state the names of anybody you are reporting.")
 
 	feedback_inc("ahelp_reject")
@@ -336,7 +337,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 	var/msg = "<font color='red' size='4'><b>- AdminHelp marked as IC issue! -</b></font><br>"
 	msg += "<font color='red'><b>Losing is part of the game!</b></font><br>"
-	msg += "<font color='red'>Your character will frequently die, sometimes without even a possibility of avoiding it. Events will often be out of your control. No matter how good or prepared you are, sometimes you just lose.</font>"
+	msg += "<font color='red'>Your AdminHelp may also be unabled to be answered due to ongoing events.</font>"
 
 	if(initiator)
 		to_chat(initiator, msg)
@@ -347,6 +348,22 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	log_admin(msg)
 	AddInteraction("Marked as IC issue by [key_name]")
 	Resolve(silent = TRUE)
+
+//Resolve ticket with IC Issue message
+/datum/admin_help/proc/HandleIssue(key_name = key_name_admin(usr))
+	if(state != AHELP_ACTIVE)
+		return
+
+	var/msg = "<font color='red'>Your AdminHelp is being handled by [key_name], please be patient.</font>"
+
+	if(initiator)
+		to_chat(initiator, msg)
+
+	feedback_inc("ahelp_icissue")
+	msg = "Ticket [TicketHref("#[id]")] being handled by [key_name]"
+	message_admins(msg)
+	log_admin(msg)
+	AddInteraction("[key_name] is now handling this ticket.")
 
 //Show the ticket panel
 /datum/admin_help/proc/TicketPanel()
@@ -408,6 +425,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			Close()
 		if("resolve")
 			Resolve()
+		if("handleissue")
+			HandleIssue()
 		if("reopen")
 			Reopen()
 
