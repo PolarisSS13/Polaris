@@ -212,7 +212,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=icissue'>IC</A>)"
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=close'>CLOSE</A>)"
 	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=resolve'>RSLVE</A>)"
-	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=resolve'>HANDLE</A>)"
+	. += " (<A HREF='?_src_=holder;ahelp=[ref_src];ahelp_action=handleissue'>HANDLE</A>)"
 
 //private
 /datum/admin_help/proc/LinkedReplyName(ref_src)
@@ -235,7 +235,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	AddInteraction("<font color='red'>[LinkedReplyName(ref_src)]: [msg]</font>")
 	//send this msg to all admins
 
-	for(var/client/X in GLOB.admins)
+	for(var/client/X in admins)
 		if(X.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
 			X << 'sound/effects/adminhelp.ogg'
 		window_flash(X)
@@ -266,6 +266,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		initiator.current_ticket = src
 
 	AddInteraction("<font color='purple'>Reopened by [key_name_admin(usr)]</font>")
+	if(initiator)
+		to_chat(initiator, "<font color='purple'>Ticket [TicketHref("#[id]")] was reopened by [key_name(usr)].</font>")
 	var/msg = "<span class='adminhelp'>Ticket [TicketHref("#[id]")] reopened by [key_name_admin(usr)].</span>"
 	message_admins(msg)
 	log_admin(msg)
@@ -283,31 +285,35 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		initiator.current_ticket = null
 
 //Mark open ticket as closed/meme
-/datum/admin_help/proc/Close(key_name = key_name_admin(usr), silent = FALSE)
+/datum/admin_help/proc/Close(silent = FALSE)
 	if(state != AHELP_ACTIVE)
 		return
 	RemoveActive()
 	state = AHELP_CLOSED
 	GLOB.ahelp_tickets.ListInsert(src)
-	AddInteraction("<font color='red'>Closed by [key_name].</font>")
+	AddInteraction("<font color='red'>Closed by [key_name_admin(usr)].</font>")
+	if(initiator)
+		to_chat(initiator, "<font color='red'>Ticket [TicketHref("#[id]")] was closed by [key_name(usr)].</font>")
 	if(!silent)
 		feedback_inc("ahelp_close")
-		var/msg = "Ticket [TicketHref("#[id]")] closed by [key_name]."
+		var/msg = "Ticket [TicketHref("#[id]")] closed by [key_name_admin(usr)]."
 		message_admins(msg)
 		log_admin(msg)
 
 //Mark open ticket as resolved/legitimate, returns ahelp verb
-/datum/admin_help/proc/Resolve(key_name = key_name_admin(usr), silent = FALSE)
+/datum/admin_help/proc/Resolve(silent = FALSE)
 	if(state != AHELP_ACTIVE)
 		return
 	RemoveActive()
 	state = AHELP_RESOLVED
 	GLOB.ahelp_tickets.ListInsert(src)
 
-	AddInteraction("<font color='green'>Resolved by [key_name].</font>")
+	AddInteraction("<font color='green'>Resolved by [key_name_admin(usr)].</font>")
+	if(initiator)
+		to_chat(initiator, "<font color='green'>Ticket [TicketHref("#[id]")] was marked resolved by [key_name(usr)].</font>")
 	if(!silent)
 		feedback_inc("ahelp_resolve")
-		var/msg = "Ticket [TicketHref("#[id]")] resolved by [key_name]"
+		var/msg = "Ticket [TicketHref("#[id]")] resolved by [key_name_admin(usr)]"
 		message_admins(msg)
 		log_admin(msg)
 
@@ -324,10 +330,10 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		to_chat(initiator, "Please try to be calm, clear, and descriptive in admin helps, do not assume the admin has seen any related events, and clearly state the names of anybody you are reporting.")
 
 	feedback_inc("ahelp_reject")
-	var/msg = "Ticket [TicketHref("#[id]")] rejected by [key_name]"
+	var/msg = "Ticket [TicketHref("#[id]")] rejected by [key_name_admin(usr)]"
 	message_admins(msg)
 	log_admin(msg)
-	AddInteraction("Rejected by [key_name].")
+	AddInteraction("Rejected by [key_name_admin(usr)].")
 	Close(silent = TRUE)
 
 //Resolve ticket with IC Issue message
@@ -343,27 +349,27 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		to_chat(initiator, msg)
 
 	feedback_inc("ahelp_icissue")
-	msg = "Ticket [TicketHref("#[id]")] marked as IC by [key_name]"
+	msg = "Ticket [TicketHref("#[id]")] marked as IC by [key_name_admin(usr)]"
 	message_admins(msg)
 	log_admin(msg)
-	AddInteraction("Marked as IC issue by [key_name]")
+	AddInteraction("Marked as IC issue by [key_name_admin(usr)]")
 	Resolve(silent = TRUE)
 
 //Resolve ticket with IC Issue message
-/datum/admin_help/proc/HandleIssue(key_name = key_name_admin(usr))
+/datum/admin_help/proc/HandleIssue()
 	if(state != AHELP_ACTIVE)
 		return
 
-	var/msg = "<font color='red'>Your AdminHelp is being handled by [key_name], please be patient.</font>"
+	var/msg = "<font color='red'>Your AdminHelp is being handled by [key_name(usr)] please be patient.</font>"
 
 	if(initiator)
 		to_chat(initiator, msg)
 
 	feedback_inc("ahelp_icissue")
-	msg = "Ticket [TicketHref("#[id]")] being handled by [key_name]"
+	msg = "Ticket [TicketHref("#[id]")] being handled by [key_name(usr)]"
 	message_admins(msg)
 	log_admin(msg)
-	AddInteraction("[key_name] is now handling this ticket.")
+	AddInteraction("[key_name_admin(usr)] is now handling this ticket.")
 
 //Show the ticket panel
 /datum/admin_help/proc/TicketPanel()
@@ -542,7 +548,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 /proc/get_admin_counts(requiredflags = R_BAN)
 	. = list("total" = list(), "noflags" = list(), "afk" = list(), "stealth" = list(), "present" = list())
-	for(var/client/X in GLOB.admins)
+	for(var/client/X in admins)
 		.["total"] += X
 		if(requiredflags != 0 && !check_rights(X))
 			.["noflags"] += X
@@ -554,7 +560,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 			.["present"] += X
 
 /proc/send2irc_adminless_only(source, msg, requiredflags = R_BAN)
-	var/list/adm = get_admin_counts(requiredflags)
+	var/list/adm = get_admin_counts()
 	var/list/activemins = adm["present"]
 	. = activemins.len
 	if(. <= 0)
@@ -572,7 +578,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /proc/ircadminwho()
 	var/list/message = list("Admins: ")
 	var/list/admin_keys = list()
-	for(var/adm in GLOB.admins)
+	for(var/adm in admins)
 		var/client/C = adm
 		admin_keys += "[C][C.holder.fakekey ? "(Stealth)" : ""][C.is_afk() ? "(AFK)" : ""]"
 
