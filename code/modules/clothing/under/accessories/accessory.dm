@@ -6,7 +6,7 @@
 	item_state_slots = list(slot_r_hand_str = "", slot_l_hand_str = "")
 	slot_flags = SLOT_TIE
 	w_class = ITEMSIZE_SMALL
-	var/slot = "decor"
+	var/slot = ACCESSORY_SLOT_DECOR
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/image/mob_overlay = null
@@ -14,7 +14,7 @@
 	var/concealed_holster = 0
 	var/mob/living/carbon/human/wearer = null //To check if the wearer changes, so species spritesheets change properly.
 
-	sprite_sheets = list("Teshari" = 'icons/mob/species/seromi/ties.dmi') //Teshari can into webbing, too!
+	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/seromi/ties.dmi') //Teshari can into webbing, too!
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
@@ -26,7 +26,9 @@
 		if(icon_override)
 			if("[tmp_icon_state]_tie" in icon_states(icon_override))
 				tmp_icon_state = "[tmp_icon_state]_tie"
-		inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
+			inv_overlay = image(icon = icon_override, icon_state = tmp_icon_state, dir = SOUTH)
+		else
+			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
 /obj/item/clothing/accessory/proc/get_mob_overlay()
@@ -45,6 +47,16 @@
 			mob_overlay = image("icon" = sprite_sheets[wearer.species.get_bodytype(wearer)], "icon_state" = "[tmp_icon_state]")
 		else
 			mob_overlay = image("icon" = INV_ACCESSORIES_DEF_ICON, "icon_state" = "[tmp_icon_state]")
+		if(addblends)
+			var/icon/base = new/icon("icon" = mob_overlay.icon, "icon_state" = mob_overlay.icon_state)
+			var/addblend_icon = new/icon("icon" = mob_overlay.icon, "icon_state" = src.addblends)
+			if(color)
+				base.Blend(src.color, ICON_MULTIPLY)
+			base.Blend(addblend_icon, ICON_ADD)
+			mob_overlay = image(base)
+		else
+			mob_overlay.color = src.color
+
 	return mob_overlay
 
 //when user attached an accessory to S
@@ -80,51 +92,52 @@
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
-/obj/item/clothing/accessory/blue
+/obj/item/clothing/accessory/tie
 	name = "blue tie"
 	icon_state = "bluetie"
+	slot = ACCESSORY_SLOT_TIE
 
-/obj/item/clothing/accessory/red
+/obj/item/clothing/accessory/tie/red
 	name = "red tie"
 	icon_state = "redtie"
 
-/obj/item/clothing/accessory/blue_clip
+/obj/item/clothing/accessory/tie/blue_clip
 	name = "blue tie with a clip"
 	icon_state = "bluecliptie"
 
-/obj/item/clothing/accessory/blue_long
+/obj/item/clothing/accessory/tie/blue_long
 	name = "blue long tie"
 	icon_state = "bluelongtie"
 
-/obj/item/clothing/accessory/red_clip
+/obj/item/clothing/accessory/tie/red_clip
 	name = "red tie with a clip"
 	icon_state = "redcliptie"
 
-/obj/item/clothing/accessory/red_long
+/obj/item/clothing/accessory/tie/red_long
 	name = "red long tie"
 	icon_state = "redlongtie"
 
-/obj/item/clothing/accessory/black
+/obj/item/clothing/accessory/tie/black
 	name = "black tie"
 	icon_state = "blacktie"
 
-/obj/item/clothing/accessory/darkgreen
+/obj/item/clothing/accessory/tie/darkgreen
 	name = "dark green tie"
 	icon_state = "dgreentie"
 
-/obj/item/clothing/accessory/yellow
+/obj/item/clothing/accessory/tie/yellow
 	name = "yellow tie"
 	icon_state = "yellowtie"
 
-/obj/item/clothing/accessory/navy
+/obj/item/clothing/accessory/tie/navy
 	name = "navy tie"
 	icon_state = "navytie"
 
-/obj/item/clothing/accessory/white
+/obj/item/clothing/accessory/tie/white
 	name = "white tie"
 	icon_state = "whitetie"
 
-/obj/item/clothing/accessory/horrible
+/obj/item/clothing/accessory/tie/horrible
 	name = "horrible tie"
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
@@ -133,6 +146,7 @@
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
+	slot = ACCESSORY_SLOT_TIE
 
 /obj/item/clothing/accessory/stethoscope/do_surgery(mob/living/carbon/human/M, mob/living/user)
 	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
@@ -194,6 +208,7 @@
 	name = "bronze medal"
 	desc = "A bronze medal."
 	icon_state = "bronze"
+	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/conduct
 	name = "distinguished conduct medal"
@@ -234,19 +249,25 @@
 	name = "medal of exceptional heroism"
 	desc = "An extremely rare golden medal awarded only by high ranking officials. To recieve such a medal is the highest honor and as such, very few exist. This medal is almost never awarded to anybody but distinguished veteran staff."
 
+// Base type for 'medals' found in a "dungeon" submap, as a sort of trophy to celebrate the player's conquest.
+/obj/item/clothing/accessory/medal/dungeon
+
+/obj/item/clothing/accessory/medal/dungeon/alien_ufo
+	name = "alien captain's medal"
+	desc = "It vaguely like a star. It looks like something an alien captain might've worn. Probably."
+	icon_state = "alien_medal"
+
 //Scarves
 
 /obj/item/clothing/accessory/scarf
-	name = "scarf"
+	name = "green scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	icon_state = "greenscarf"
+	slot = ACCESSORY_SLOT_DECOR
 
 /obj/item/clothing/accessory/scarf/red
 	name = "red scarf"
 	icon_state = "redscarf"
-
-/obj/item/clothing/accessory/scarf/green
-	name = "green scarf"
-	icon_state = "greenscarf"
 
 /obj/item/clothing/accessory/scarf/darkblue
 	name = "dark blue scarf"
@@ -284,14 +305,93 @@
 	name = "christmas scarf"
 	icon_state = "christmasscarf"
 
-/obj/item/clothing/accessory/stripedredscarf
+/obj/item/clothing/accessory/scarf/stripedred
 	name = "striped red scarf"
 	icon_state = "stripedredscarf"
 
-/obj/item/clothing/accessory/stripedgreenscarf
+/obj/item/clothing/accessory/scarf/stripedgreen
 	name = "striped green scarf"
 	icon_state = "stripedgreenscarf"
 
-/obj/item/clothing/accessory/stripedbluescarf
+/obj/item/clothing/accessory/scarf/stripedblue
 	name = "striped blue scarf"
 	icon_state = "stripedbluescarf"
+
+//bracelets
+
+/obj/item/clothing/accessory/bracelet
+	name = "bracelet"
+	desc = "A simple silver bracelet with a clasp."
+	icon = 'icons/obj/clothing/ties.dmi'
+	icon_state = "bracelet"
+	w_class = ITEMSIZE_TINY
+	slot_flags = SLOT_TIE
+	slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/accessory/bracelet/friendship
+	name = "friendship bracelet"
+	desc = "A beautiful friendship bracelet in all the colors of the rainbow."
+	icon_state = "friendbracelet"
+
+/obj/item/clothing/accessory/bracelet/friendship/verb/dedicate_bracelet()
+	set name = "Dedicate Bracelet"
+	set category = "Object"
+	set desc = "Dedicate your friendship bracelet to a special someone."
+	var/mob/M = usr
+	if(!M.mind)
+		return 0
+
+	var/input = sanitizeSafe(input("Who do you want to dedicate the bracelet to?", ,""), MAX_NAME_LEN)
+
+	if(src && input && !M.stat && in_range(M,src))
+		desc = "A beautiful friendship bracelet in all the colors of the rainbow. It's dedicated to [input]."
+		to_chat(M, "You dedicate the bracelet to [input], remembering the times you've had together.")
+		return 1
+
+
+/obj/item/clothing/accessory/bracelet/material
+	icon_state = "materialbracelet"
+
+/obj/item/clothing/accessory/bracelet/material/New(var/newloc, var/new_material)
+	..(newloc)
+	if(!new_material)
+		new_material = DEFAULT_WALL_MATERIAL
+	material = get_material_by_name(new_material)
+	if(!istype(material))
+		qdel(src)
+		return
+	name = "[material.display_name] bracelet"
+	desc = "A bracelet made from [material.display_name]."
+	color = material.icon_colour
+
+/obj/item/clothing/accessory/bracelet/material/get_material()
+	return material
+
+/obj/item/clothing/accessory/bracelet/material/wood/New(var/newloc)
+	..(newloc, "wood")
+
+/obj/item/clothing/accessory/bracelet/material/plastic/New(var/newloc)
+	..(newloc, "plastic")
+
+/obj/item/clothing/accessory/bracelet/material/iron/New(var/newloc)
+	..(newloc, "iron")
+
+/obj/item/clothing/accessory/bracelet/material/steel/New(var/newloc)
+	..(newloc, "steel")
+
+/obj/item/clothing/accessory/bracelet/material/silver/New(var/newloc)
+	..(newloc, "silver")
+
+/obj/item/clothing/accessory/bracelet/material/gold/New(var/newloc)
+	..(newloc, "gold")
+
+/obj/item/clothing/accessory/bracelet/material/platinum/New(var/newloc)
+	..(newloc, "platinum")
+
+/obj/item/clothing/accessory/bracelet/material/phoron/New(var/newloc)
+	..(newloc, "phoron")
+
+/obj/item/clothing/accessory/bracelet/material/glass/New(var/newloc)
+	..(newloc, "glass")
+
+	..()

@@ -25,8 +25,20 @@
 	var/account_allowed = 1				  // Does this job type come with a station account?
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
 
-/datum/job/proc/equip(var/mob/living/carbon/human/H)
+	var/outfit_type
+
+/datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+	if(!outfit)
+		return FALSE
+	. = outfit.equip(H, title, alt_title)
 	return 1
+
+/datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+	if(alt_title && alt_titles)
+		. = alt_titles[alt_title]
+	. = . || outfit_type
+	. = outfit_by_type(.)
 
 /datum/job/proc/equip_backpack(var/mob/living/carbon/human/H)
 	switch(H.backbag)
@@ -35,26 +47,21 @@
 		if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		if(5) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/messenger(H), slot_back)
 
-/datum/job/proc/equip_survival(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	H.species.equip_survival_gear(H,0)
-	return 1
-
 /datum/job/proc/setup_account(var/mob/living/carbon/human/H)
 	if(!account_allowed || (H.mind && H.mind.initial_account))
 		return
 
-	var/loyalty = 1
+	var/income = 1
 	if(H.client)
-		switch(H.client.prefs.nanotrasen_relation)
-			if(COMPANY_LOYAL)		loyalty = 1.30
-			if(COMPANY_SUPPORTATIVE)loyalty = 1.15
-			if(COMPANY_NEUTRAL)		loyalty = 1
-			if(COMPANY_SKEPTICAL)	loyalty = 0.85
-			if(COMPANY_OPPOSED)		loyalty = 0.70
+		switch(H.client.prefs.economic_status)
+			if(CLASS_UPPER)		income = 1.30
+			if(CLASS_UPMID)		income = 1.15
+			if(CLASS_MIDDLE)	income = 1
+			if(CLASS_LOWMID)	income = 0.75
+			if(CLASS_LOWER)		income = 0.50
 
 	//give them an account in the station database
-	var/money_amount = (rand(5,50) + rand(5, 50)) * loyalty * economic_modifier * (H.species ? economic_species_modifier[H.species.type] : 2)
+	var/money_amount = (rand(5,50) + rand(5, 50)) * income * economic_modifier * (H.species.economic_modifier)
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)
 		var/remembered_info = ""
@@ -71,9 +78,12 @@
 
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
-// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/del()
+// overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
-	. = equip(H, alt_title)
+	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
+	if(!outfit)
+		return FALSE
+	. = outfit.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)

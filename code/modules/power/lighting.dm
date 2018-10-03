@@ -16,7 +16,8 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 	var/stage = 1
 	var/fixture_type = "tube"
 	var/sheets_refunded = 2
@@ -46,7 +47,7 @@
 
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if (istype(W, /obj/item/weapon/wrench))
+	if (W.is_wrench())
 		if (src.stage == 1)
 			playsound(src, W.usesound, 75, 1)
 			usr << "You begin deconstructing [src]."
@@ -65,7 +66,7 @@
 			usr << "You have to unscrew the case first."
 			return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(W.is_wirecutter())
 		if (src.stage != 2) return
 		src.stage = 1
 		switch(fixture_type)
@@ -97,7 +98,7 @@
 				"You add wires to [src].")
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		if (src.stage == 2)
 			switch(fixture_type)
 				if ("tube")
@@ -132,7 +133,6 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
-	layer = 5
 	stage = 1
 	fixture_type = "bulb"
 	sheets_refunded = 1
@@ -143,6 +143,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flamp-construct-stage1"
 	anchored = 0
+	plane = OBJ_PLANE
 	layer = OBJ_LAYER
 	stage = 1
 	fixture_type = "flamp"
@@ -156,15 +157,16 @@
 	icon_state = "tube1"
 	desc = "A lighting fixture."
 	anchored = 1
-	layer = 5  					// They were appearing under mobs which is a little weird - Ostaf
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 	use_power = 2
 	idle_power_usage = 2
-	active_power_usage = 20
+	active_power_usage = 10		// Previously 20.
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
-	var/brightness_range = 6	// luminosity when on, also used in power calculation
-	var/brightness_power = 3
-	var/brightness_color = null
+	var/brightness_range = 8	// luminosity when on, also used in power calculation
+	var/brightness_power = 0.8
+	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/weapon/light/tube		// the type of light item
@@ -181,8 +183,7 @@
 	base_state = "bulb"
 	fitting = "bulb"
 	brightness_range = 4
-	brightness_power = 2
-	brightness_color = "#FFF4E5"
+	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
@@ -191,16 +192,15 @@
 	base_state = "flamp"
 	fitting = "bulb"
 	brightness_range = 5
-	brightness_power = 2
+	plane = OBJ_PLANE
 	layer = OBJ_LAYER
-	brightness_color = "#FFF4E5"
+	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 	desc = "A floor lamp."
 	light_type = /obj/item/weapon/light/bulb
 	var/lamp_shade = 1
 
 /obj/machinery/light/small/emergency
 	brightness_range = 4
-	brightness_power = 2
 	brightness_color = "#da0205"
 
 /obj/machinery/light/spot
@@ -208,7 +208,7 @@
 	fitting = "large tube"
 	light_type = /obj/item/weapon/light/tube/large
 	brightness_range = 12
-	brightness_power = 4
+	brightness_power = 0.9
 
 /obj/machinery/light/built/New()
 	status = LIGHT_EMPTY
@@ -329,6 +329,9 @@
 	broken()
 	return 1
 
+/obj/machinery/light/blob_act()
+	broken()
+
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
 /obj/machinery/light/proc/seton(var/s)
@@ -417,7 +420,7 @@
 
 	// attempt to stick weapon into light socket
 	else if(status == LIGHT_EMPTY)
-		if(istype(W, /obj/item/weapon/screwdriver)) //If it's a screwdriver open it.
+		if(W.is_screwdriver()) //If it's a screwdriver open it.
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
@@ -453,7 +456,7 @@
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
 /obj/machinery/light/flamp/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		anchored = !anchored
 		playsound(src, W.usesound, 50, 1)
 		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
@@ -466,7 +469,7 @@
 			return
 
 	else
-		if(istype(W, /obj/item/weapon/screwdriver))
+		if(W.is_screwdriver())
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] removes [src]'s lamp shade.", \
 				"You remove [src]'s lamp shade.", "You hear a noise.")
@@ -527,7 +530,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			user.setClickCooldown(user.get_attack_speed())
 			for(var/mob/M in viewers(src))
 				M.show_message("<font color='red'>[user.name] smashed the light!</font>", 3, "You hear a tinkle of breaking glass", 2)
 			broken()
@@ -710,8 +713,8 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/brightness_range = 2 //how much light it gives off
-	var/brightness_power = 1
-	var/brightness_color = null
+	var/brightness_power = 0.8
+	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
 /obj/item/weapon/light/tube
 	name = "light tube"
@@ -721,13 +724,12 @@
 	item_state = "c_tube"
 	matter = list("glass" = 100)
 	brightness_range = 8
-	brightness_power = 3
 
 /obj/item/weapon/light/tube/large
 	w_class = ITEMSIZE_SMALL
 	name = "large light tube"
 	brightness_range = 15
-	brightness_power = 4
+	brightness_power = 0.9
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -737,8 +739,7 @@
 	item_state = "contvapour"
 	matter = list("glass" = 100)
 	brightness_range = 5
-	brightness_power = 2
-	brightness_color = "#a0a080"
+	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
@@ -752,7 +753,6 @@
 	item_state = "egg4"
 	matter = list("glass" = 100)
 	brightness_range = 5
-	brightness_power = 2
 
 // update the icon state and description of the light
 

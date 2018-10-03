@@ -31,7 +31,8 @@
 
 /obj/machinery/light_switch/proc/updateicon()
 	if(!overlay)
-		overlay = image(icon, "light1-overlay", LIGHTING_LAYER+0.1)
+		overlay = image(icon, "light1-overlay")
+		overlay.plane = PLANE_LIGHTING_ABOVE
 
 	overlays.Cut()
 	if(stat & NOPOWER)
@@ -45,7 +46,7 @@
 
 /obj/machinery/light_switch/examine(mob/user)
 	if(..(user, 1))
-		user << "A light switch. It is [on? "on" : "off"]."
+		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/attack_hand(mob/user)
 

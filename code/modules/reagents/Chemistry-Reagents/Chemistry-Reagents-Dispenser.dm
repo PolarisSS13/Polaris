@@ -16,7 +16,6 @@
 	reagent_state = SOLID
 	color = "#1C1300"
 	ingest_met = REM * 5
-	mrate_static = TRUE
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -65,6 +64,9 @@
 	taste_description = "pure alcohol"
 	reagent_state = LIQUID
 	color = "#404030"
+
+	ingest_met = REM * 2
+
 	var/nutriment_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
@@ -74,8 +76,6 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
-	mrate_static = TRUE
-
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
 
@@ -83,10 +83,49 @@
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 15)
 
-/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) //This used to do just toxin. That's boring. Let's make this FUN.
 	if(issmall(M)) removed *= 2
-	M.adjustToxLoss(removed * 2 * toxicity)
-	return
+	var/strength_mod = 3 //Alcohol is 3x stronger when injected into the veins.
+	if(alien == IS_SKRELL)
+		strength_mod *= 5
+	if(alien == IS_TAJARA)
+		strength_mod *= 1.25
+	if(alien == IS_UNATHI)
+		strength_mod *= 0.75
+	if(alien == IS_DIONA)
+		strength_mod = 0
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
+
+	M.add_chemical_effect(CE_ALCOHOL, 1)
+	var/effective_dose = dose * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
+
+	if(effective_dose >= strength) // Early warning
+		M.make_dizzy(18) // It is decreased at the speed of 3 per tick
+	if(effective_dose >= strength * 2) // Slurring
+		M.slurring = max(M.slurring, 90)
+	if(effective_dose >= strength * 3) // Confusion - walking in random directions
+		M.Confuse(60)
+	if(effective_dose >= strength * 4) // Blurry vision
+		M.eye_blurry = max(M.eye_blurry, 30)
+	if(effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
+		M.drowsyness = max(M.drowsyness, 60)
+	if(effective_dose >= strength * 6) // Toxic dose
+		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity*3)
+	if(effective_dose >= strength * 7) // Pass out
+		M.paralysis = max(M.paralysis, 60)
+		M.sleeping  = max(M.sleeping, 90)
+
+	if(druggy != 0)
+		M.druggy = max(M.druggy, druggy*3)
+
+	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+	if(adj_temp < 0 && M.bodytemperature > targ_temp)
+		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+	if(halluci)
+		M.hallucination = max(M.hallucination, halluci*3)
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
@@ -100,6 +139,8 @@
 		strength_mod *= 0.75
 	if(alien == IS_DIONA)
 		strength_mod = 0
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 

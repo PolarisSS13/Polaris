@@ -13,6 +13,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
+	QDEL_NULL(plane_holder)
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
@@ -44,11 +45,12 @@
 		dead_mob_list += src
 	else
 		living_mob_list += src
+	update_transform() // Some mobs may start bigger or smaller than normal.
 	..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
-	if(!client)	return
+	if(!client && !teleop)	return
 
 	if (type)
 		if((type & 1) && (is_blind() || paralysis) )//Vision related
@@ -67,9 +69,11 @@
 					return
 	// Added voice muffling for Issue 41.
 	if(stat == UNCONSCIOUS || sleeping > 0)
-		src << "<I>... You can almost hear someone talking ...</I>"
+		to_chat(src,"<I>... You can almost hear someone talking ...</I>")
 	else
-		src << msg
+		to_chat(src,msg)
+		if(teleop)
+			to_chat(teleop, create_text_tag("body", "BODY:", teleop) + "[msg]")
 	return
 
 // Show a message to all mobs and objects in sight of this one
@@ -77,24 +81,24 @@
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-
 /mob/visible_message(var/message, var/self_message, var/blind_message)
-	var/list/see = get_mobs_or_objects_in_view(world.view,src) | viewers(world.view,src)
 
-	for(var/I in see)
-		if(isobj(I))
-			//spawn(0)
-			//if(I) //It's possible that it could be deleted in the meantime.
-			var/obj/O = I
-			O.show_message( message, 1, blind_message, 2)
-		else if(ismob(I))
-			var/mob/M = I
-			if(self_message && M==src)
-				M.show_message( self_message, 1, blind_message, 2)
-			else if(M.see_invisible >= invisibility) // Cannot view the invisible
-				M.show_message( message, 1, blind_message, 2)
-			else if (blind_message)
-				M.show_message(blind_message, 2)
+	var/list/see = get_mobs_and_objs_in_view_fast(get_turf(src),world.view,remote_ghosts = FALSE)
+
+	var/list/seeing_mobs = see["mobs"]
+	var/list/seeing_objs = see["objs"]
+
+	for(var/obj in seeing_objs)
+		var/obj/O = obj
+		O.show_message(message, 1, blind_message, 2)
+	for(var/mob in seeing_mobs)
+		var/mob/M = mob
+		if(self_message && M == src)
+			M.show_message( self_message, 1, blind_message, 2)
+		else if(M.see_invisible >= invisibility && MOB_CAN_SEE_PLANE(M, plane))
+			M.show_message(message, 1, blind_message, 2)
+		else if(blind_message)
+			M.show_message(blind_message, 2)
 
 // Returns an amount of power drawn from the object (-1 if it's not viable).
 // If drain_check is set it will not actually drain power, just return a value.
@@ -111,24 +115,22 @@
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
 /mob/audible_message(var/message, var/deaf_message, var/hearing_distance, var/self_message)
 
-	var/range = world.view
-	if(hearing_distance)
-		range = hearing_distance
-	var/list/hear = get_mobs_or_objects_in_view(range,src)
+	var/range = hearing_distance || world.view
+	var/list/hear = get_mobs_and_objs_in_view_fast(get_turf(src),range,remote_ghosts = FALSE)
 
-	for(var/I in hear)
-		if(isobj(I))
-			spawn(0)
-				if(I) //It's possible that it could be deleted in the meantime.
-					var/obj/O = I
-					O.show_message( message, 2, deaf_message, 1)
-		else if(ismob(I))
-			var/mob/M = I
-			var/msg = message
-			if(self_message && M==src)
-				msg = self_message
-			M.show_message( msg, 2, deaf_message, 1)
+	var/list/hearing_mobs = hear["mobs"]
+	var/list/hearing_objs = hear["objs"]
 
+	for(var/obj in hearing_objs)
+		var/obj/O = obj
+		O.show_message(message, 2, deaf_message, 1)
+
+	for(var/mob in hearing_mobs)
+		var/mob/M = mob
+		var/msg = message
+		if(self_message && M==src)
+			msg = self_message
+		M.show_message(msg, 2, deaf_message, 1)
 
 /mob/proc/findname(msg)
 	for(var/mob/M in mob_list)
@@ -142,7 +144,6 @@
 /mob/proc/Life()
 //	if(organStructure)
 //		organStructure.ProcessOrgans()
-	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
 #define UNBUCKLED 0
@@ -241,6 +242,7 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.invisibility = invisibility
+	P.plane = plane
 	spawn (20)
 		if(P)
 			qdel(P)	// qdel
@@ -337,20 +339,20 @@
 	set category = "OOC"
 
 	if (!( config.abandon_allowed ))
-		usr << "<span class='notice'>Respawn is disabled.</span>"
+		to_chat(usr, "<span class='notice'>Respawn is disabled.</span>")
 		return
 	if ((stat != 2 || !( ticker )))
-		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
+		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
 		return
 	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
-		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
+		to_chat(usr, "<span class='notice'>Respawn is disabled for this roundtype.</span>")
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
 		if(istype(src,/mob/observer/dead))
 			var/mob/observer/dead/G = src
 			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-				usr << "<font color='blue'><B>Upon using the antagHUD you forfeighted the ability to join the round.</B></font>"
+				to_chat(usr, "<font color='blue'><B>By using the antagHUD you forfeit the ability to join the round.</B></font>")
 				return
 		var/deathtimeminutes = round(deathtime / 600)
 		var/pluralcheck = "minute"
@@ -361,17 +363,17 @@
 		else if(deathtimeminutes > 1)
 			pluralcheck = " [deathtimeminutes] minutes and"
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
-		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
+		to_chat(usr, "You have been dead for[pluralcheck] [deathtimeseconds] seconds.")
 
 		if ((deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
-			usr << "You must wait 5 minutes to respawn!"
+			to_chat(usr, "You must wait 5 minutes to respawn!")
 			return
 		else
-			usr << "You can respawn now, enjoy your new life!"
+			to_chat(usr, "You can respawn now, enjoy your new life!")
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	usr << "<font color='blue'><B>Make sure to play a different character, and please roleplay correctly!</B></font>"
+	to_chat(usr, "<font color='blue'><B>Make sure to play a different character, and please roleplay correctly!</B></font>")
 
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -524,16 +526,17 @@
 			for(var/name in H.organs_by_name)
 				var/obj/item/organ/external/e = H.organs_by_name[name]
 				if(e && H.lying)
-					if(((e.status & ORGAN_BROKEN && !(e.splinted)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
+					if((e.status & ORGAN_BROKEN && (!e.splinted || (e.splinted && e.splinted in e.contents && prob(30))) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
-		return 0
+	return 0
 
 /mob/MouseDrop(mob/M as mob)
 	..()
 	if(M != usr) return
 	if(usr == src) return
 	if(!Adjacent(usr)) return
+	if(usr.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT | INCAPACITATION_RESTRAINED)) return //Incapacitated.
 	if(istype(M,/mob/living/silicon/ai)) return
 	show_inv(usr)
 
@@ -641,6 +644,9 @@
 	return client && !!mind
 
 /mob/proc/get_gender()
+	return gender
+
+/mob/proc/get_visible_gender()
 	return gender
 
 /mob/proc/see(message)
@@ -762,16 +768,19 @@
 	if(status_flags & CANSTUN)
 		facing_dir = null
 		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/SetStunned(amount) //if you REALLY need to set stun to a set amount without the whole "can't go below current stunned"
 	if(status_flags & CANSTUN)
 		stunned = max(amount,0)
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/AdjustStunned(amount)
 	if(status_flags & CANSTUN)
 		stunned = max(stunned + amount,0)
+		update_canmove()	//updates lying, canmove and icons
 	return
 
 /mob/proc/Weaken(amount)
@@ -784,7 +793,7 @@
 /mob/proc/SetWeakened(amount)
 	if(status_flags & CANWEAKEN)
 		weakened = max(amount,0)
-		update_canmove()	//updates lying, canmove and icons
+		update_canmove()	//can you guess what this does yet?
 	return
 
 /mob/proc/AdjustWeakened(amount)
@@ -849,15 +858,24 @@
 /mob/proc/Resting(amount)
 	facing_dir = null
 	resting = max(max(resting,amount),0)
+	update_canmove()
 	return
 
 /mob/proc/SetResting(amount)
 	resting = max(amount,0)
+	update_canmove()
 	return
 
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
+	update_canmove()
 	return
+
+/mob/proc/AdjustLosebreath(amount)
+	losebreath = Clamp(0, losebreath + amount, 25)
+
+/mob/proc/SetLosebreath(amount)
+	losebreath = Clamp(0, amount, 25)
 
 /mob/proc/get_species()
 	return ""
@@ -1059,6 +1077,13 @@ mob/proc/yank_out_object()
 /mob/proc/is_muzzled()
 	return 0
 
+//Exploitable Info Update
+
+/mob/proc/amend_exploitable(var/obj/item/I)
+	var/obj/item/exploit_item = new I(src.loc)
+	exploit_addons |= exploit_item
+	var/exploitmsg = html_decode("\n" + "Has " + exploit_item.name + ".")
+	exploit_record += exploitmsg
 
 /client/proc/check_has_body_select()
 	return mob && mob.hud_used && istype(mob.zone_sel, /obj/screen/zone_sel)
@@ -1103,3 +1128,39 @@ mob/proc/yank_out_object()
 		return
 	var/obj/screen/zone_sel/selector = mob.zone_sel
 	selector.set_selected_zone(next_in_list(mob.zone_sel.selecting,zones))
+
+// This handles setting the client's color variable, which makes everything look a specific color.
+// This proc is here so it can be called without needing to check if the client exists, or if the client relogs.
+// This is for inheritence since /mob/living will serve most cases. If you need ghosts to use this you'll have to implement that yourself.
+/mob/proc/update_client_color()
+	if(client && client.color)
+		animate(client, color = null, time = 10)
+	return
+
+/mob/proc/swap_hand()
+	return
+
+//Throwing stuff
+/mob/proc/throw_item(atom/target)
+	return
+
+/mob/proc/will_show_tooltip()
+	if(alpha <= EFFECTIVE_INVIS)
+		return FALSE
+	return TRUE
+
+/mob/MouseEntered(location, control, params)
+	if(usr != src && usr.is_preference_enabled(/datum/client_preference/mob_tooltips) && src.will_show_tooltip())
+		openToolTip(user = usr, tip_src = src, params = params, title = get_nametag_name(usr), content = get_nametag_desc(usr))
+
+	..()
+
+/mob/MouseDown()
+	closeToolTip(usr) //No reason not to, really
+
+	..()
+
+/mob/MouseExited()
+	closeToolTip(usr) //No reason not to, really
+
+	..()

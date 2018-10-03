@@ -7,8 +7,10 @@
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 240 //How much energy is needed to fire.
-	var/cell_type = null
-	var/projectile_type = /obj/item/projectile/beam/practice
+
+	var/cell_type = /obj/item/weapon/cell/device/weapon
+	projectile_type = /obj/item/projectile/beam/practice
+
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
 
@@ -21,31 +23,26 @@
 
 	var/battery_lock = 0	//If set, weapon cannot switch batteries
 
-/obj/item/weapon/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
-	..()
-
-/obj/item/weapon/gun/energy/switch_firemodes(mob/user)
-	if(..())
-		update_icon()
-
-/obj/item/weapon/gun/energy/emp_act(severity)
-	..()
-	update_icon()
-
 /obj/item/weapon/gun/energy/New()
 	..()
-	if(cell_type)
-		power_supply = new cell_type(src)
-	else
-		power_supply = new /obj/item/weapon/cell/device/weapon(src)
 	if(self_recharge)
+		power_supply = new /obj/item/weapon/cell/device/weapon(src)
 		processing_objects.Add(src)
+	else
+		if(cell_type)
+			power_supply = new cell_type(src)
+		else
+			power_supply = null
+
 	update_icon()
 
 /obj/item/weapon/gun/energy/Destroy()
 	if(self_recharge)
 		processing_objects.Remove(src)
 	return ..()
+
+/obj/item/weapon/gun/energy/get_cell()
+	return power_supply
 
 /obj/item/weapon/gun/energy/process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the battery
@@ -69,6 +66,17 @@
 		else
 			charge_tick = 0
 	return 1
+
+/obj/item/weapon/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
+	..()
+
+/obj/item/weapon/gun/energy/switch_firemodes(mob/user)
+	if(..())
+		update_icon()
+
+/obj/item/weapon/gun/energy/emp_act(severity)
+	..()
+	update_icon()
 
 /obj/item/weapon/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
@@ -139,7 +147,7 @@
 	return null
 
 /obj/item/weapon/gun/energy/examine(mob/user)
-	..(user)
+	. = ..()
 	if(power_supply)
 		var/shots_remaining = round(power_supply.charge / charge_cost)
 		user << "Has [shots_remaining] shot\s remaining."

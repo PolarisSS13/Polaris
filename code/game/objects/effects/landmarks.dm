@@ -5,6 +5,7 @@
 	anchored = 1.0
 	unacidable = 1
 	simulated = 0
+	invisibility = 100
 	var/delete_me = 0
 
 /obj/effect/landmark/New()
@@ -83,9 +84,9 @@
 	delete_me = 1
 
 /obj/effect/landmark/initialize()
-	..()
+	. = ..()
 	if(delete_me)
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy(var/force = FALSE)
 	if(delete_me || force)
@@ -104,6 +105,18 @@
 	tag = "start*[name]"
 	invisibility = 101
 
+	return 1
+
+/obj/effect/landmark/virtual_reality
+	name = "virtual_reality"
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x"
+	anchored = 1.0
+
+/obj/effect/landmark/virtual_reality/New()
+	..()
+	tag = "virtual_reality*[name]"
+	invisibility = 101
 	return 1
 
 //Costume spawner landmarks

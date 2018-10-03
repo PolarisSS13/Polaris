@@ -21,7 +21,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	scroll=ipc_scroll;\
 	console=ipc_console;\
 	glider=ipc_gol_glider;\
-	rainnbow=ipc_rainbow;\
+	rainbow=ipc_rainbow;\
 	smiley=ipc_smiley;\
 	database=ipc_database"
 
@@ -40,13 +40,17 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	var/unavailable_at_chargen                           // If set, not available at chargen.
 	var/unavailable_to_build							 // If set, can't be constructed.
 	var/lifelike										 // If set, appears organic.
+	var/skin_tone										 // If set, applies skin tone rather than part color
 	var/blood_color = "#030303"
-	var/list/species_cannot_use = list("Teshari")
+	var/list/species_cannot_use = list(SPECIES_TESHARI)
 	var/list/monitor_styles			 		 			 //If empty, the model of limbs offers a head compatible with monitors.
 	var/parts = BP_ALL						 			 //Defines what parts said brand can replace on a body.
 	var/health_hud_intensity = 1						 // Intensity modifier for the health GUI indicator.
 	var/suggested_species = "Human"						 //If it should make the torso a species
 	var/speech_bubble_appearance = "synthetic"			 // What icon_state to use for speech bubbles when talking.  Check talk.dmi for all the icons.
+
+	var/robo_brute_mod = 1								 // Multiplier for incoming brute damage.
+	var/robo_burn_mod = 1								 // As above for burn.
 
 /datum/robolimb/unbranded_monitor
 	company = "Unbranded Monitor"
@@ -54,6 +58,18 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_monitor.dmi'
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
+	unavailable_to_build = 1
+
+/datum/robolimb/unbranded_alt1
+	company = "Unbranded - Protez"
+	desc = "A simple robotic limb with retro design. Seems rather stiff."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_alt1.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/unbranded_alt2
+	company = "Unbranded - Mantis Prosis"
+	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_alt2.dmi'
 	unavailable_to_build = 1
 
 /datum/robolimb/nanotrasen
@@ -94,12 +110,18 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_main.dmi'
 	unavailable_to_build = 1
 
-/datum/robolimb/cybersolutions_alt1
+/datum/robolimb/cybersolutions_alt2
 	company = "Cyber Solutions - Array"
 	desc = "This limb is simple and functional; array of sensors on a featureless case."
-	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt2.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
+
+/datum/robolimb/cybersolutions_alt1
+	company = "Cyber Solutions - Wight"
+	desc = "This limb has cheap plastic panels mounted on grey metal."
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
+	unavailable_to_build = 1
 
 /datum/robolimb/grayson
 	company = "Grayson"
@@ -192,8 +214,11 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
 	unavailable_to_build = 1
 	lifelike = 1
+	skin_tone = 1
 	blood_color = "#CCCCCC"
 	speech_bubble_appearance = "normal"
+	robo_brute_mod = 1.1
+	robo_burn_mod = 1.1
 
 /datum/robolimb/wardtakahashi
 	company = "Ward-Takahashi"
@@ -213,7 +238,6 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb has white and purple features, with a heavier casing."
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt2.dmi'
 	unavailable_to_build = 1
-
 
 /datum/robolimb/wardtakahashi_monitor
 	company = "Ward-Takahashi Monitor"
@@ -245,6 +269,20 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 		green=xion_green;\
 		rgb=xion_rgb"
 
+/datum/robolimb/xion_alt3
+	company = "Xion - Whiteout"
+	desc = "This limb has a minimalist black and white casing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt3.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/xion_alt4
+	company = "Xion - Breach - Whiteout"
+	desc = "This limb has a minimalist black and white casing. Looks a bit menacing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt4.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+
+
 /datum/robolimb/xion_monitor
 	company = "Xion Monitor"
 	desc = "Xion Mfg.'s unique spin on a popular prosthetic head model. It looks and minimalist and utilitarian."
@@ -258,6 +296,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb has a rubbery fleshtone covering with visible seams."
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_main.dmi'
 	unavailable_to_build = 1
+	skin_tone = 1
 
 /obj/item/weapon/disk/limb
 	name = "Limb Blueprints"

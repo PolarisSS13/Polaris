@@ -1,7 +1,5 @@
 // This is a wall you surround the area of your "planet" with, that makes the atmosphere inside stay within bounds, even if canisters
 // are opened or other strange things occur.
-var/list/planetary_walls = list()
-
 /turf/unsimulated/wall/planetary
 	name = "railroading"
 	desc = "Choo choo!"
@@ -21,10 +19,10 @@ var/list/planetary_walls = list()
 
 /turf/unsimulated/wall/planetary/New()
 	..()
-	planetary_walls.Add(src)
+	SSplanets.addTurf(src)
 
 /turf/unsimulated/wall/planetary/Destroy()
-	planetary_walls.Remove(src)
+	SSplanets.removeTurf(src)
 	..()
 
 /turf/unsimulated/wall/planetary/proc/set_temperature(var/new_temperature)
@@ -54,6 +52,10 @@ var/list/planetary_walls = list()
 	oxygen		= 114.50978 * 0.181
 	nitrogen	= 114.50978 * 0.819
 	temperature	= 243.15 // Roughly -30C / -22F
+
+//High Alt Sif
+/turf/unsimulated/wall/planetary/sif/alt
+	temperature	= 225.15
 
 // Fairly close to Mars in terms of temperature and pressure.
 /turf/unsimulated/wall/planetary/magni

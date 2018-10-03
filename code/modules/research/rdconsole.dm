@@ -110,11 +110,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	files = new /datum/research(src) //Setup the research data holder.
 	if(!id)
 		for(var/obj/machinery/r_n_d/server/centcom/S in machines)
-			S.initialize()
+			S.update_connections()
 			break
 
 /obj/machinery/computer/rdconsole/initialize()
 	SyncRDevices()
+	. = ..()
 
 /obj/machinery/computer/rdconsole/attackby(var/obj/item/weapon/D as obj, var/mob/user as mob)
 	//Loading a disk into it.
@@ -257,7 +258,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									qdel(S)
 									linked_destroy.icon_state = "d_analyzer"
 							else
-								if(!(I in linked_destroy.component_parts))
+								if(I != linked_destroy.circuit && !(I in linked_destroy.component_parts))
 									qdel(I)
 									linked_destroy.icon_state = "d_analyzer"
 
@@ -405,7 +406,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	return
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
-	var/dat
+	var/list/dat = list()
 	dat += "<UL>"
 	for(var/datum/tech/T in files.known_tech)
 		if(T.level < 1)
@@ -416,23 +417,23 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		dat +=  "<LI>Level: [T.level]"
 		dat +=  "<LI>Summary: [T.desc]"
 		dat += "</UL>"
-	return dat
+	return dat.Join()
 
 /obj/machinery/computer/rdconsole/proc/GetResearchListInfo()
-	var/dat
+	var/list/dat = list()
 	dat += "<UL>"
 	for(var/datum/design/D in files.known_designs)
 		if(D.build_path)
 			dat += "<LI><B>[D.name]</B>: [D.desc]"
 	dat += "</UL>"
-	return dat
+	return dat.Join()
 
 /obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
 	if(stat & (BROKEN|NOPOWER))
 		return
 
 	user.set_machine(src)
-	var/dat = ""
+	var/list/dat = list()
 	files.RefreshResearch()
 	switch(screen) //A quick check to make sure you get the right screen when a device is disconnected.
 		if(2 to 2.9)
@@ -774,7 +775,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "List of Researched Technologies and Designs:"
 			dat += GetResearchListInfo()
 
-	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat]", "window=rdconsole;size=850x600")
+	user << browse("<TITLE>Research and Development Console</TITLE><HR>[dat.Join()]", "window=rdconsole;size=850x600")
 	onclose(user, "rdconsole")
 
 /obj/machinery/computer/rdconsole/robotics

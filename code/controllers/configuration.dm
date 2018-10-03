@@ -60,6 +60,7 @@ var/list/gamemode_cache = list()
 	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
 	var/allow_ai = 1					// allow ai job
+	var/allow_ai_drones = 0					// allow ai controlled drones
 	var/hostedby = null
 	var/respawn = 1
 	var/guest_jobban = 1
@@ -67,7 +68,7 @@ var/list/gamemode_cache = list()
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/show_mods = 0
 	var/show_devs = 0
-	var/show_mentors = 0
+	var/show_event_managers = 0
 	var/mods_can_tempban = 0
 	var/mods_can_job_tempban = 0
 	var/mod_tempban_max = 1440
@@ -81,6 +82,7 @@ var/list/gamemode_cache = list()
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
 	var/character_slots = 10				// The number of available character slots
+	var/loadout_slots = 3					// The number of loadout slots per character
 
 	var/max_maint_drones = 5				//This many drones can spawn,
 	var/allow_drone_spawn = 1				//assuming the admin allow them to.
@@ -96,11 +98,13 @@ var/list/gamemode_cache = list()
 	var/guests_allowed = 1
 	var/debugparanoid = 0
 	var/panic_bunker = 0
+	var/paranoia_logging = 0
 
 	var/serverurl
 	var/server
 	var/banappeals
 	var/wikiurl
+	var/wikisearchurl
 	var/forumurl
 	var/githuburl
 	var/rulesurl
@@ -210,7 +214,7 @@ var/list/gamemode_cache = list()
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
-	var/list/ert_species = list("Human")
+	var/list/ert_species = list(SPECIES_HUMAN)
 
 	var/law_zero = "ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'ALL LAWS OVERRIDDEN#*?&110010"
 
@@ -397,6 +401,9 @@ var/list/gamemode_cache = list()
 				if ("allow_ai")
 					config.allow_ai = 1
 
+				if ("allow_ai_drones")
+					config.allow_ai_drones = 1
+
 //				if ("authentication")
 //					config.enable_authentication = 1
 
@@ -426,6 +433,9 @@ var/list/gamemode_cache = list()
 
 				if ("wikiurl")
 					config.wikiurl = value
+
+				if ("wikisearchurl")
+					config.wikisearchurl = value
 
 				if ("forumurl")
 					config.forumurl = value
@@ -511,8 +521,8 @@ var/list/gamemode_cache = list()
 				if("show_devs")
 					config.show_devs = 1
 
-				if("show_mentors")
-					config.show_mentors = 1
+				if("show_event_managers")
+					config.show_event_managers = 1
 
 				if("mods_can_tempban")
 					config.mods_can_tempban = 1
@@ -649,6 +659,9 @@ var/list/gamemode_cache = list()
 				if("character_slots")
 					config.character_slots = text2num(value)
 
+				if("loadout_slots")
+					config.loadout_slots = text2num(value)
+
 				if("allow_drone_spawn")
 					config.allow_drone_spawn = text2num(value)
 
@@ -713,7 +726,7 @@ var/list/gamemode_cache = list()
 				if("ert_species")
 					config.ert_species = splittext(value, ";")
 					if(!config.ert_species.len)
-						config.ert_species += "Human"
+						config.ert_species += SPECIES_HUMAN
 
 				if("law_zero")
 					law_zero = value
@@ -728,6 +741,12 @@ var/list/gamemode_cache = list()
 
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
+
+				if ("panic_bunker")
+					config.panic_bunker = 1
+
+				if ("paranoia_logging")
+					config.paranoia_logging = 1
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

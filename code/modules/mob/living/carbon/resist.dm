@@ -159,12 +159,12 @@
 	return ..()
 
 /mob/living/carbon/escape_buckle()
-	setClickCooldown(100)
 	if(!buckled) return
 
 	if(!restrained())
 		..()
 	else
+		setClickCooldown(100)
 		visible_message(
 			"<span class='danger'>[usr] attempts to unbuckle themself!</span>",
 			"<span class='warning'>You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)</span>"
@@ -175,4 +175,4 @@
 				return
 			visible_message("<span class='danger'>[usr] manages to unbuckle themself!</span>",
 							"<span class='notice'>You successfully unbuckle yourself.</span>")
-			buckled.user_unbuckle_mob(src)
+			buckled.user_unbuckle_mob(src, src)

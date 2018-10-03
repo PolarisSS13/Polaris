@@ -92,6 +92,20 @@
 	question = "An Alien has just been created on the facility.  Would you like to play as them?"
 	be_special_flag = BE_ALIEN
 
+/datum/ghost_query/blob
+	role_name = "Blob"
+	question = "A rapidly expanding Blob has just appeared on the facility.  Would you like to play as it?"
+	be_special_flag = BE_ALIEN
+	cutoff_number = 1
+	wait_time = 10 SECONDS
+
+/datum/ghost_query/syndicate_drone
+	role_name = "Mercenary Drone"
+	question = "A team of dubious mercenaries have purchased a powerful drone, and they are attempting to activate it.  Would you like to play as the drone?"
+	be_special_flag = BE_AI
+	check_bans = list("AI", "Cyborg", "Syndicate")
+	cutoff_number = 1
+
 // Surface stuff.
 /datum/ghost_query/lost_drone
 	role_name = "Lost Drone"
@@ -100,8 +114,27 @@
 	check_bans = list("AI", "Cyborg")
 	cutoff_number = 1
 
+/datum/ghost_query/gravekeeper_drone
+	role_name = "Gravekeeper Drone"
+	question = "A gravekeeper drone is about to reactivate and tend to its gravesite. Would you like to play as the drone?"
+	be_special_flag = BE_AI
+	check_bans = list("AI", "Cyborg")
+	cutoff_number = 1
+
 /datum/ghost_query/lost_passenger
 	role_name = "Lost Passenger"
 	question = "A person suspended in cryosleep has been discovered by a crewmember \
 	and they are attempting to open the cryopod.  Would you like to play as the occupant?"
+	cutoff_number = 1
+
+/datum/ghost_query/corgi_rune
+	role_name = "Dark Creature"
+	question = "A curious explorer has touched a mysterious rune. \
+	Would you like to play as the creature it summons?"
+	cutoff_number = 1
+
+/datum/ghost_query/cursedblade
+	role_name = "Cursed Sword"
+	question = "A cursed blade has been discovered by a curious explorer. \
+	Would you like to play as the soul imprisoned within?"
 	cutoff_number = 1

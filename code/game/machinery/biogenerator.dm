@@ -1,5 +1,5 @@
 /obj/machinery/biogenerator
-	name = "Biogenerator"
+	name = "biogenerator"
 	desc = ""
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
@@ -46,45 +46,47 @@
 		return
 	if(default_part_replacement(user, O))
 		return
+	if(default_unfasten_wrench(user, O, 40))
+		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='notice'>]The [src] is already loaded.</span>"
+			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 		else
 			user.remove_from_mob(O)
 			O.loc = src
 			beaker = O
 			updateUsrDialog()
 	else if(processing)
-		user << "<span class='notice'>\The [src] is currently processing.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "<span class='notice'>\The [src] is already full! Activate it.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 		else
 			for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 				G.loc = src
 				i++
 				if(i >= 10)
-					user << "<span class='notice'>You fill \the [src] to its capacity.</span>"
+					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
 					break
 			if(i < 10)
-				user << "<span class='notice'>You empty \the [O] into \the [src].</span>"
+				to_chat(user, "<span class='notice'>You empty \the [O] into \the [src].</span>")
 
 
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		user << "<span class='notice'>You cannot put this in \the [src].</span>"
+		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
 		if(i >= 10)
-			user << "<span class='notice'>\The [src] is full! Activate it.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is full! Activate it.</span>")
 		else
 			user.remove_from_mob(O)
 			O.loc = src
-			user << "<span class='notice'>You put \the [O] in \the [src]</span>"
+			to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
 	update_icon()
 	return
 
@@ -115,6 +117,7 @@
 					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=blue>([round(300/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=chembag;cost=400'>Chemistry Bag</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=workboots;cost=400'>Workboots</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=leathershoes;cost=400'>Leather Shoes</A> <FONT COLOR=blue>([round(400/build_eff)])</FONT><BR>"
 
@@ -148,7 +151,7 @@
 	if(stat) //NOPOWER etc
 		return
 	if(processing)
-		usr << "<span class='notice'>The biogenerator is in the process of working.</span>"
+		to_chat(usr, "<span class='notice'>The biogenerator is in the process of working.</span>")
 		return
 	var/S = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/I in contents)
@@ -219,6 +222,8 @@
 			new/obj/item/weapon/storage/backpack/satchel(loc)
 		if("cashbag")
 			new/obj/item/weapon/storage/bag/cash(loc)
+		if("chembag")
+			new/obj/item/weapon/storage/bag/chemistry(loc)
 		if("monkey")
 			new/mob/living/carbon/human/monkey(loc)
 		if("workboots")

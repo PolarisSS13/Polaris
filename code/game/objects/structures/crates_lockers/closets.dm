@@ -5,6 +5,7 @@
 	icon_state = "closed"
 	density = 1
 	w_class = ITEMSIZE_HUGE
+	layer = UNDER_JUNK_LAYER
 	var/icon_closed = "closed"
 	var/icon_opened = "open"
 	var/opened = 0
@@ -24,19 +25,18 @@
 	var/open_sound = 'sound/machines/click.ogg'
 	var/close_sound = 'sound/machines/click.ogg'
 
-	var/max_closets = 0		//Number of other closets allowed on tile before it won't close.
-
 	var/store_misc = 1		//Chameleon item check
 	var/store_items = 1		//Will the closet store items?
 	var/store_mobs = 1		//Will the closet store mobs?
-	var/store_closets = 0	//Will the closet store other closets?
+	var/max_closets = 0		//Number of other closets allowed on tile before it won't close.
 
-	var/list/will_contain
+	var/list/starts_with
 
 /obj/structure/closet/initialize()
-	..()
-	if(will_contain)
-		create_objects_in_loc(src, will_contain)
+	. = ..()
+	if(starts_with)
+		create_objects_in_loc(src, starts_with)
+		starts_with = null
 
 	if(!opened)		// if closed, any item at the crate's loc is put in the contents
 		var/obj/item/I
@@ -130,7 +130,7 @@
 		stored_units += store_items(stored_units)
 	if(store_mobs)
 		stored_units += store_mobs(stored_units)
-	if(store_closets)
+	if(max_closets)
 		stored_units += store_closets(stored_units)
 
 	src.icon_state = src.icon_closed
@@ -182,7 +182,7 @@
 			continue
 		if(C.anchored)	//Don't worry about anchored things on the same tile
 			continue
-		if(C.store_closets)	//Prevents recursive storage
+		if(C.max_closets)	//Prevents recursive storage
 			continue
 		if(stored_units + added_units + storage_cost > storage_capacity)
 			break
@@ -216,6 +216,9 @@
 				for(var/atom/movable/A as mob|obj in src)
 					A.forceMove(src.loc)
 				qdel(src)
+
+/obj/structure/closet/blob_act()
+	damage(100)
 
 /obj/structure/closet/proc/damage(var/damage)
 	health -= damage
@@ -291,7 +294,7 @@
 				src.update_icon()
 				for(var/mob/M in viewers(src))
 					M.show_message("<span class='warning'>[src] has been [sealed?"sealed":"unsealed"] by [user.name].</span>", 3)
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		if(sealed)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
@@ -348,6 +351,12 @@
 	if(!src.toggle())
 		to_chat(usr, "<span class='notice'>It won't budge!</span>")
 
+/obj/structure/closet/attack_ghost(mob/ghost)
+	if(ghost.client && ghost.client.inquisitive_ghost)
+		ghost.examinate(src)
+		if (!src.opened)
+			to_chat(ghost, "It contains: [english_list(contents)].")
+
 /obj/structure/closet/verb/verb_toggleopen()
 	set src in oview(1)
 	set category = "Object"
@@ -372,7 +381,7 @@
 		icon_state = icon_opened
 
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
-	if(!damage || !wallbreaker)
+	if(damage < 10 || !wallbreaker)
 		return
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
@@ -441,6 +450,9 @@
 
 /obj/structure/closet/onDropInto(var/atom/movable/AM)
 	return
+
+/obj/structure/closet/AllowDrop()
+	return TRUE
 
 /obj/structure/closet/return_air_for_internal_lifeform(var/mob/living/L)
 	if(src.loc)

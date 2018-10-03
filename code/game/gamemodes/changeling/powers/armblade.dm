@@ -86,7 +86,8 @@
 	..()
 
 /obj/item/weapon/melee/changeling/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is impaling \himself the [src.name]! It looks like \he's trying to commit suicide.</span>"
+	var/datum/gender/T = gender_datums[user.get_visible_gender()]
+	viewers(user) << "<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>"
 	return(BRUTELOSS)
 
 /obj/item/weapon/melee/changeling/process()  //Stolen from ninja swords.
@@ -135,3 +136,4 @@
 	name = "hand greatclaw"
 	force = 20
 	armor_penetration = 20
+	pry = 1

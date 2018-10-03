@@ -9,7 +9,7 @@
 						  /obj/effect/meteor/flaming=3, /obj/effect/meteor/irradiated=3, /obj/effect/meteor/emp=3) //for threatening meteor event
 
 /var/list/meteors_catastrophic = list(/obj/effect/meteor/medium=5, /obj/effect/meteor/big=75, \
-						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
+						  /obj/effect/meteor/flaming=10, /obj/effect/meteor/irradiated=10, /obj/effect/meteor/emp=10) //, /obj/effect/meteor/tunguska = 1) //for catastrophic meteor event
 
 /var/list/meteors_dust = list(/obj/effect/meteor/dust) //for space dust event
 
@@ -19,7 +19,7 @@
 ///////////////////////////////
 
 /proc/pick_meteor_start(var/startSide = pick(cardinal))
-	var/startLevel = pick(using_map.station_levels)
+	var/startLevel = pick(using_map.station_levels - using_map.sealed_levels)
 	var/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 
 	return list(startLevel, pickedstart)
@@ -153,16 +153,17 @@
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
 	//first bust whatever is in the turf
 	for(var/atom/A in T)
-		if(A != src)
-			A.ex_act(hitpwr)
+		if(A == src) // Don't hit ourselves.
+			continue
+		if(isturf(A)) // Don't hit floors. We'll deal with walls later.
+			continue
+		A.ex_act(hitpwr)
 
 	//then, ram the turf if it still exists
 	if(T)
 		if(istype(T, /turf/simulated/wall))
 			var/turf/simulated/wall/W = T
 			W.take_damage(wall_power) // Stronger walls can halt asteroids.
-		else
-			T.ex_act(hitpwr) // Floors and other things lack fancy health.
 
 
 //process getting 'hit' by colliding with a dense object

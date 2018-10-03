@@ -25,7 +25,9 @@
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
+	hovering = TRUE
 
+	armor = list(melee = 25, bullet = 25, laser = 25, energy = 10, bomb = 25, bio = 100, rad = 100)	// Some level of armor plating makes sense
 	//Drones aren't affected by atmos.
 	min_oxy = 0
 	max_oxy = 0
@@ -60,6 +62,9 @@
 
 /mob/living/simple_animal/hostile/malf_drone/Process_Spacemove(var/check_drift = 0)
 	return 1
+
+/mob/living/simple_animal/hostile/malf_drone/isSynthetic()
+	return TRUE
 
 //self repair systems have a chance to bring the drone back to life
 /mob/living/simple_animal/hostile/malf_drone/Life()
@@ -150,6 +155,7 @@
 	disabled = rand(150, 600)
 	hostile = 0
 	walk(src,0)
+	..()
 
 /mob/living/simple_animal/hostile/malf_drone/death()
 	..(null,"suddenly breaks apart.")
@@ -271,3 +277,10 @@
 
 /obj/item/projectile/beam/pulse/drone
 	damage = 10
+
+// A slightly easier drone, for POIs.
+// Difference is that it should not be faster than you.
+/mob/living/simple_animal/hostile/malf_drone/lesser
+	desc = "An automated combat drone with an aged apperance."
+	returns_home = TRUE
+	move_to_delay = 6

@@ -7,7 +7,7 @@
 	taste_mult = 4
 	reagent_state = SOLID
 	metabolism = REM * 4
-	mrate_static = TRUE
+	ingest_met = REM * 4
 	var/nutriment_factor = 30 // Per unit
 	var/injectable = 0
 	color = "#664330"
@@ -34,7 +34,7 @@
 				data -= taste
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!injectable)
+	if(!injectable && alien != IS_SLIME)
 		M.adjustToxLoss(0.1 * removed)
 		return
 	affect_ingest(M, alien, removed)
@@ -94,7 +94,7 @@
 	nutriment_factor = 10
 	color = "#FFFF00"
 
-/datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 
 	var/effective_dose = dose
@@ -253,6 +253,17 @@
 	reagent_state = SOLID
 	color = "#FFFFFF"
 	overdose = REAGENTS_OVERDOSE
+	ingest_met = REM
+
+/datum/reagent/sodiumchloride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		M.adjustFireLoss(removed)
+
+/datum/reagent/sodiumchloride/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	var/pass_mod = rand(3,5)
+	var/passthrough = (removed - (removed/pass_mod)) //Some may be nullified during consumption, between one third and one fifth.
+	affect_blood(M, alien, passthrough)
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -260,6 +271,7 @@
 	description = "A powder ground from peppercorns. *AAAACHOOO*"
 	taste_description = "pepper"
 	reagent_state = SOLID
+	ingest_met = REM
 	color = "#000000"
 
 /datum/reagent/enzyme
@@ -279,6 +291,7 @@
 	taste_description = "mint"
 	taste_mult = 1.5
 	reagent_state = LIQUID
+	ingest_met = REM
 	color = "#B31008"
 
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -306,6 +319,7 @@
 	taste_description = "hot peppers"
 	taste_mult = 1.5
 	reagent_state = LIQUID
+	ingest_met = REM
 	color = "#B31008"
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -339,6 +353,7 @@
 	taste_mult = 10
 	reagent_state = LIQUID
 	touch_met = 50 // Get rid of it quickly
+	ingest_met = REM
 	color = "#B31008"
 
 /datum/reagent/condensedcapsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -349,6 +364,15 @@
 /datum/reagent/condensedcapsaicin/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	var/eyes_covered = 0
 	var/mouth_covered = 0
+
+	var/head_covered = 0
+	var/arms_covered = 0 //These are used for the effects on slime-based species.
+	var/legs_covered = 0
+	var/hands_covered = 0
+	var/feet_covered = 0
+	var/chest_covered = 0
+	var/groin_covered = 0
+
 	var/obj/item/safe_thing = null
 
 	var/effective_strength = 5
@@ -379,27 +403,78 @@
 				eyes_covered = 1
 				if(!safe_thing)
 					safe_thing = H.glasses
+		if(alien == IS_SLIME)
+			for(var/obj/item/clothing/C in H.worn_clothing)
+				if(C.body_parts_covered & HEAD)
+					head_covered = 1
+				if(C.body_parts_covered & UPPER_TORSO)
+					chest_covered = 1
+				if(C.body_parts_covered & LOWER_TORSO)
+					groin_covered = 1
+				if(C.body_parts_covered & LEGS)
+					legs_covered = 1
+				if(C.body_parts_covered & ARMS)
+					arms_covered = 1
+				if(C.body_parts_covered & HANDS)
+					hands_covered = 1
+				if(C.body_parts_covered & FEET)
+					feet_covered = 1
+				if(head_covered && chest_covered && groin_covered && legs_covered && arms_covered && hands_covered && feet_covered)
+					break
 	if(eyes_covered && mouth_covered)
-		M << "<span class='warning'>Your [safe_thing] protects you from the pepperspray!</span>"
-		return
+		to_chat(M, "<span class='warning'>Your [safe_thing] protects you from the pepperspray!</span>")
+		if(alien != IS_SLIME)
+			return
 	else if(eyes_covered)
-		M << "<span class='warning'>Your [safe_thing] protect you from most of the pepperspray!</span>"
+		to_chat(M, "<span class='warning'>Your [safe_thing] protects you from most of the pepperspray!</span>")
 		M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
 		M.Blind(effective_strength)
 		M.Stun(5)
 		M.Weaken(5)
-		return
-	else if (mouth_covered) // Mouth cover is better than eye cover
-		M << "<span class='warning'>Your [safe_thing] protects your face from the pepperspray!</span>"
+		if(alien != IS_SLIME)
+			return
+	else if(mouth_covered) // Mouth cover is better than eye cover
+		to_chat(M, "<span class='warning'>Your [safe_thing] protects your face from the pepperspray!</span>")
 		M.eye_blurry = max(M.eye_blurry, effective_strength)
-		return
-	else // Oh dear :D
-		M << "<span class='warning'>You're sprayed directly in the eyes with pepperspray!</span>"
+		if(alien != IS_SLIME)
+			return
+	else// Oh dear :D
+		to_chat(M, "<span class='warning'>You're sprayed directly in the eyes with pepperspray!</span>")
 		M.eye_blurry = max(M.eye_blurry, effective_strength * 5)
 		M.Blind(effective_strength * 2)
 		M.Stun(5)
 		M.Weaken(5)
-		return
+		if(alien != IS_SLIME)
+			return
+	if(alien == IS_SLIME)
+		if(!head_covered)
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your head burns!</span>")
+			M.apply_effect(5 * effective_strength, AGONY, 0)
+		if(!chest_covered)
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your chest burns!</span>")
+			M.apply_effect(5 * effective_strength, AGONY, 0)
+		if(!groin_covered && prob(75))
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your groin burns!</span>")
+			M.apply_effect(3 * effective_strength, AGONY, 0)
+		if(!arms_covered && prob(45))
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your arms burns!</span>")
+			M.apply_effect(3 * effective_strength, AGONY, 0)
+		if(!legs_covered && prob(45))
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your legs burns!</span>")
+			M.apply_effect(3 * effective_strength, AGONY, 0)
+		if(!hands_covered && prob(20))
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your hands burns!</span>")
+			M.apply_effect(effective_strength / 2, AGONY, 0)
+		if(!feet_covered && prob(20))
+			if(prob(33))
+				to_chat(M, "<span class='warning'>The exposed flesh on your feet burns!</span>")
+			M.apply_effect(effective_strength / 2, AGONY, 0)
 
 /datum/reagent/condensedcapsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
@@ -422,6 +497,7 @@
 	name = "Drink"
 	id = "drink"
 	description = "Uh, some kind of drink."
+	ingest_met = REM
 	reagent_state = LIQUID
 	color = "#E78108"
 	var/nutrition = 0 // Per unit
@@ -429,9 +505,13 @@
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
+	var/water_based = TRUE
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
+	var/strength_mod = 1
+	if(alien == IS_SLIME && water_based)
+		strength_mod = 3
+	M.adjustToxLoss(removed * strength_mod) // Probably not a good idea; not very deadly though
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -443,6 +523,11 @@
 		M.bodytemperature = min(310, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(adj_temp < 0 && M.bodytemperature > 310)
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+	if(alien == IS_SLIME && water_based)
+		M.adjustToxLoss(removed * 2)
+
+/datum/reagent/drink/overdose(var/mob/living/carbon/M, var/alien) //Add special interactions here in the future if desired.
+	..()
 
 // Juices
 
@@ -480,7 +565,7 @@
 	..()
 	M.reagents.add_reagent("imidazoline", removed * 0.2)
 
-/datum/reagent/drink/juice/
+/datum/reagent/drink/juice
 	name = "Grape Juice"
 	id = "grapejuice"
 	description = "It's grrrrrape!"
@@ -490,7 +575,7 @@
 	glass_name = "grape juice"
 	glass_desc = "It's grrrrrape!"
 
-/datum/reagent/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 
 	var/effective_dose = dose/2
@@ -521,6 +606,17 @@
 
 	glass_name = "lemon juice"
 	glass_desc = "Sour..."
+
+/datum/reagent/drink/juice/apple
+	name = "Apple Juice"
+	id = "applejuice"
+	description = "The most basic juice."
+	taste_description = "crispness"
+	taste_mult = 1.1
+	color = "#E2A55F"
+
+	glass_name = "apple juice"
+	glass_desc = "An earth favorite."
 
 /datum/reagent/drink/juice/lime
 	name = "Lime Juice"
@@ -568,7 +664,7 @@
 
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"
-	id = "potato"
+	id = "potatojuice"
 	description = "Juice of the potato. Bleh."
 	taste_description = "potatoes"
 	nutrition = 2
@@ -709,6 +805,24 @@
 	cup_name = "cup of iced tea"
 	cup_desc = "No relation to a certain rap artist/ actor."
 
+/datum/reagent/drink/tea/icetea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/tea/icetea/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
 /datum/reagent/drink/tea/minttea
 	name = "Mint Tea"
 	id = "minttea"
@@ -745,7 +859,7 @@
 	glass_name = "lime tea"
 	glass_desc = "A tasty mixture of lime and tea. It's apparently good for you!"
 
-	cup_name = "cup of berry tea"
+	cup_name = "cup of lime tea"
 	cup_desc = "A tasty mixture of lime and tea. It's apparently good for you!"
 
 /datum/reagent/drink/tea/orangetea
@@ -789,9 +903,9 @@
 
 	cup_icon_state = "cup_coffee"
 	cup_name = "cup of coffee"
-	cup_desc = "Don't drop it, or you'll send scalding liquid and porcelain shards everywhere."
+	cup_desc = "Don't drop it, or you'll send scalding liquid and ceramic shards everywhere."
 
-	glass_name = "cup of coffee"
+	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
 
 
@@ -805,7 +919,7 @@
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
 
-/datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_TAJARA)
 		M.adjustToxLoss(2 * removed)
@@ -830,6 +944,24 @@
 	glass_name = "iced coffee"
 	glass_desc = "A drink to perk you up and refresh you!"
 	glass_special = list(DRINK_ICE)
+
+/datum/reagent/drink/coffee/icecoffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/coffee/icecoffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= 0.5
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += 0.5
+		M.adjustToxLoss(5 * removed)
 
 /datum/reagent/drink/coffee/soy_latte
 	name = "Soy Latte"
@@ -994,6 +1126,46 @@
 		else
 			M.sleeping = max(M.sleeping, 20)
 			M.drowsyness = max(M.drowsyness, 60)
+
+/datum/reagent/drink/milkshake/chocoshake
+	name = "Chocolate Milkshake"
+	id = "chocoshake"
+	description = "A refreshing chocolate milkshake."
+	taste_description = "cold refreshing chocolate and cream"
+	color = "#8e6f44" // rgb(142, 111, 68)
+	adj_temp = -9
+
+	glass_name = "Chocolate Milkshake"
+	glass_desc = "A refreshing chocolate milkshake, just like mom used to make."
+
+/datum/reagent/drink/milkshake/berryshake
+	name = "Berry Milkshake"
+	id = "berryshake"
+	description = "A refreshing berry milkshake."
+	taste_description = "cold refreshing berries and cream"
+	color = "#ffb2b2" // rgb(255, 178, 178)
+	adj_temp = -9
+
+	glass_name = "Berry Milkshake"
+	glass_desc = "A refreshing berry milkshake, just like mom used to make."
+
+/datum/reagent/drink/milkshake/coffeeshake
+	name = "Coffee Milkshake"
+	id = "coffeeshake"
+	description = "A refreshing coffee milkshake."
+	taste_description = "cold energizing coffee and cream"
+	color = "#8e6f44" // rgb(142, 111, 68)
+	adj_temp = -9
+	adj_dizzy = -5
+	adj_drowsy = -3
+	adj_sleepy = -2
+
+
+	glass_name = "Coffee Milkshake"
+	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
+
+/datum/reagent/drink/milkshake/coffeeshake/overdose(var/mob/living/carbon/M, var/alien)
+	M.make_jittery(5)
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
@@ -1249,6 +1421,24 @@
 	glass_desc = "Generally, you're supposed to put something else in there too..."
 	glass_icon = DRINK_ICON_NOISY
 
+/datum/reagent/drink/ice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= rand(1,3)
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += rand(1,3)
+		M.adjustToxLoss(5 * removed)
+
+/datum/reagent/drink/ice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_SLIME)
+		if(M.bodytemperature > T0C)
+			M.bodytemperature -= rand(1,3)
+		if(M.bodytemperature < T0C)
+			M.bodytemperature += rand(1,3)
+		M.adjustToxLoss(5 * removed)
+
 /datum/reagent/drink/nothing
 	name = "Nothing"
 	id = "nothing"
@@ -1257,6 +1447,115 @@
 
 	glass_name = "nothing"
 	glass_desc = "Absolutely nothing."
+
+/datum/reagent/drink/dreamcream
+	name = "Dream Cream"
+	id = "dreamcream"
+	description = "A smoothy, silky mix of honey and dairy."
+	taste_description = "sweet, soothing dairy"
+	color = "#fcfcc9" // rgb(252, 252, 201)
+
+	glass_name = "Dream Cream"
+	glass_desc = "A smoothy, silky mix of honey and dairy."
+
+/datum/reagent/drink/soda/vilelemon
+	name = "Vile Lemon"
+	id = "vilelemon"
+	description = "A fizzy, sour lemonade mix."
+	taste_description = "fizzy, sour lemon"
+	color = "#c6c603" // rgb(198, 198, 3)
+
+	glass_name = "Vile Lemon"
+	glass_desc = "A sour, fizzy drink with lemonade and lemonlime."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/entdraught
+	name = "Ent's Draught"
+	id = "entdraught"
+	description = "A natural, earthy combination of all things peaceful."
+	taste_description = "fresh rain and sweet memories"
+	color = "#3a6617" // rgb(58, 102, 23)
+
+	glass_name = "Ent's Draught"
+	glass_desc = "You can almost smell the tranquility emanating from this."
+
+/datum/reagent/drink/lovepotion
+	name = "Love Potion"
+	id = "lovepotion"
+	description = "Creamy strawberries and sugar, simple and sweet."
+	taste_description = "strawberries and cream"
+	color = "#fc8a8a" // rrgb(252, 138, 138)
+
+	glass_name = "Love Potion"
+	glass_desc = "Love me tender, love me sweet."
+
+/datum/reagent/drink/oilslick
+	name = "Oil Slick"
+	id = "oilslick"
+	description = "A viscous, but sweet, ooze."
+	taste_description = "honey"
+	color = "#FDF5E6" // rgb(253,245,230)
+	water_based = FALSE
+
+	glass_name = "Oil Slick"
+	glass_desc = "A concoction that should probably be in an engine, rather than your stomach."
+	glass_icon = DRINK_ICON_NOISY
+
+/datum/reagent/drink/nuclearwaste
+	name = "Nuclear Waste"
+	id = "nuclearwaste"
+	description = "A viscous, glowing slurry."
+	taste_description = "sour honey drops"
+	color = "#7FFF00" // rgb(127,255,0)
+	water_based = FALSE
+
+	glass_name = "Nuclear Waste"
+	glass_desc = "Sadly, no super powers."
+	glass_icon = DRINK_ICON_NOISY
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/nuclearwaste/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.bloodstr.add_reagent("radium", 0.3)
+
+/datum/reagent/drink/nuclearwaste/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.ingested.add_reagent("radium", 0.25)
+
+/datum/reagent/drink/sodaoil //Mixed with normal drinks to make a 'potable' version for Prometheans if mixed 1-1. Dilution is key.
+	name = "Soda Oil"
+	id = "sodaoil"
+	description = "A thick, bubbling soda."
+	taste_description = "chewy water"
+	color = "#F0FFF0" // rgb(245,255,250)
+	water_based = FALSE
+
+	glass_name = "Soda Oil"
+	glass_desc = "A pitiful sludge that looks vaguely like a soda.. if you look at it a certain way."
+	glass_icon = DRINK_ICON_NOISY
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/sodaoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(M.bloodstr) // If, for some reason, they are injected, dilute them as well.
+		for(var/datum/reagent/R in M.ingested.reagent_list)
+			if(istype(R, /datum/reagent/drink))
+				var/datum/reagent/drink/D = R
+				if(D.water_based)
+					M.adjustToxLoss(removed * -3)
+
+/datum/reagent/drink/sodaoil/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(M.ingested) // Find how many drinks are causing tox, and negate them.
+		for(var/datum/reagent/R in M.ingested.reagent_list)
+			if(istype(R, /datum/reagent/drink))
+				var/datum/reagent/drink/D = R
+				if(D.water_based)
+					M.adjustToxLoss(removed * -2)
 
 /* Alcohol */
 
@@ -1515,6 +1814,28 @@
 
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
+
+/datum/reagent/ethanol/wine/champagne
+	name = "Champagne"
+	id = "champagne"
+	description = "A sparkling wine made with Pinot Noir, Pinot Meunier, and Chardonnay."
+	taste_description = "fizzy bitter sweetness"
+	color = "#D1B166"
+
+	glass_name = "champagne"
+	glass_desc = "An even classier looking drink."
+
+
+/datum/reagent/ethanol/cider
+	name = "Cider"
+	id = "cider"
+	description = "Hard? Soft? No-one knows but it'll get you drunk."
+	taste_description = "tartness"
+	color = "#CE9C00" // rgb: 206, 156, 0
+	strength = 10
+
+	glass_name = "cider"
+	glass_desc = "The second most Irish drink."
 
 // Cocktails
 
@@ -1895,7 +2216,7 @@
 	color = "#FFD300"
 	strength = 50
 	adj_temp = -20
-	targ_temp = 270
+	targ_temp = 280
 
 	glass_name = "iced beer"
 	glass_desc = "A beer so frosty, the air around it freezes."
@@ -2279,6 +2600,19 @@
 	glass_name = "unathi liquor"
 	glass_desc = "This barely qualifies as a drink, and may cause euphoria and numbness. Imbiber beware!"
 
+/datum/reagent/ethanol/unathiliquor/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+
+	var/drug_strength = 10
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+
+	M.druggy = max(M.druggy, drug_strength)
+	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+		step(M, pick(cardinal))
+
 /datum/reagent/ethanol/sakebomb
 	name = "Sake Bomb"
 	id = "sakebomb"
@@ -2384,13 +2718,13 @@
 /datum/reagent/ethanol/euphoria
 	name = "Euphoria"
 	id = "euphoria"
-	description = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existance."
+	description = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existence."
 	taste_description = "impossibly rich alcohol"
 	color = "#614126"
 	strength = 9
 
 	glass_name = "Euphoria"
-	glass_desc = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existance."
+	glass_desc = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existence."
 
 /datum/reagent/ethanol/xanaducannon
 	name = "Xanadu Cannon"
@@ -2447,16 +2781,368 @@
 	glass_name = "Chrysanthemum"
 	glass_desc = "An exotic cocktail from New Kyoto."
 
-/datum/reagent/ethanol/unathiliquor/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/ethanol/bitters
+	name = "Bitters"
+	id = "bitters"
+	description = "A blend of fermented fruits and herbs, commonly used in cocktails."
+	taste_description = "sharp bitterness"
+	color = "#9b6241" // rgb(155, 98, 65)
+	strength = 50
+
+	glass_name = "Bitters"
+	glass_desc = "A blend of fermented fruits and herbs, commonly used in cocktails."
+
+/datum/reagent/ethanol/soemmerfire
+	name = "Soemmer Fire"
+	id = "soemmerfire"
+	description = "A painfully hot mixed drink, for when you absolutely need to hurt right now."
+	taste_description = "pure fire"
+	color = "#d13b21" // rgb(209, 59, 33)
+	strength = 25
+
+	glass_name = "Soemmer Fire"
+	glass_desc = "A painfully hot mixed drink, for when you absolutely need to hurt right now."
+
+/datum/reagent/drink/soemmerfire/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
+	M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
 
-	var/drug_strength = 10
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
+/datum/reagent/ethanol/winebrandy
+	name = "Wine Brandy"
+	id = "winebrandy"
+	description = "A premium spirit made from distilled wine."
+	taste_description = "very sweet dried fruit with many elegant notes"
+	color = "#4C130B" // rgb(76,19,11)
+	strength = 20
 
-	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(cardinal))
+	glass_name = "Wine Brandy"
+	glass_desc = "A very classy looking after-dinner drink."
 
+/datum/reagent/ethanol/morningafter
+	name = "Morning After"
+	id = "morningafter"
+	description = "The finest hair of the dog, coming up!"
+	taste_description = "bitter regrets"
+	color = "#482000" // rgb(72, 32, 0)
+	strength = 60
+
+	glass_name = "Morning After"
+	glass_desc = "The finest hair of the dog, coming up!"
+
+/datum/reagent/ethanol/vesper
+	name = "Vesper"
+	id = "vesper"
+	description = "A dry martini, ice cold and well shaken."
+	taste_description = "lemony class"
+	color = "#cca01c" // rgb(204, 160, 28)
+	strength = 20
+
+	glass_name = "Vesper"
+	glass_desc = "A dry martini, ice cold and well shaken."
+
+/datum/reagent/ethanol/rotgut
+	name = "Rotgut Fever Dream"
+	id = "rotgut"
+	description = "A heinous combination of clashing flavors."
+	taste_description = "plague and coldsweats"
+	color = "#3a6617" // rgb(58, 102, 23)
+	strength = 10
+
+	glass_name = "Rotgut Fever Dream"
+	glass_desc = "Why are you doing this to yourself?"
+
+/datum/reagent/ethanol/voxdelight
+	name = "Vox's Delight"
+	id = "voxdelight"
+	description = "A dangerous combination of all things flammable. Why would you drink this?"
+	taste_description = "corrosive death"
+	color = "#7c003a" // rgb(124, 0, 58)
+	strength = 10
+
+	glass_name = "Vox's Delight"
+	glass_desc = "Not recommended if you enjoy having organs."
+
+/datum/reagent/drink/voxdelight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	if(alien == IS_VOX)
+		M.adjustToxLoss(-0.5 * removed)
+		return
+	M.adjustToxLoss(3 * removed)
+
+/datum/reagent/ethanol/screamingviking
+	name = "Screaming Viking"
+	id = "screamingviking"
+	description = "A boozy, citrus-packed brew."
+	taste_description = "the bartender's frustration"
+	color = "#c6c603" // rgb(198, 198, 3)
+	strength = 9
+
+	glass_name = "Screaming Viking"
+	glass_desc = "A boozy, citrus-packed brew."
+
+/datum/reagent/ethanol/robustin
+	name = "Robustin"
+	id = "robustin"
+	description = "A bootleg brew of all the worst things on station."
+	taste_description = "cough syrup and fire"
+	color = "#6b0145" // rgb(107, 1, 69)
+	strength = 10
+
+	glass_name = "Robustin"
+	glass_desc = "A bootleg brew of all the worst things on station."
+
+/datum/reagent/ethanol/virginsip
+	name = "Virgin Sip"
+	id = "virginsip"
+	description = "A perfect martini, watered down and ruined."
+	taste_description = "emasculation and failure"
+	color = "#2E6671" // rgb(46, 102, 113)
+	strength = 60
+
+	glass_name = "Virgin Sip"
+	glass_desc = "A perfect martini, watered down and ruined."
+
+/datum/reagent/ethanol/jellyshot
+	name = "Jelly Shot"
+	id = "jellyshot"
+	description = "A thick and vibrant alcoholic gel, perfect for the night life."
+	taste_description = "thick, alcoholic cherry gel"
+	color = "#e00b0b" // rgb(224, 11, 11)
+	strength = 10
+
+	glass_name = "Jelly Shot"
+	glass_desc = "A thick and vibrant alcoholic gel, perfect for the night life."
+
+/datum/reagent/ethanol/slimeshot
+	name = "Named Bullet"
+	id = "slimeshot"
+	description = "A thick and toxic slime jelly shot."
+	taste_description = "liquified organs"
+	color = "#6fa300" // rgb(111, 163, 0)
+	strength = 10
+
+	glass_name = "Named Bullet"
+	glass_desc = "A thick slime jelly shot. You can feel your death approaching."
+
+/datum/reagent/drink/slimeshot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.reagents.add_reagent("slimejelly", 0.25)
+
+/datum/reagent/ethanol/cloverclub
+	name = "Clover Club"
+	id = "cloverclub"
+	description = "A light and refreshing rasberry cocktail."
+	taste_description = "sweet raspberry"
+	color = "#dd00a6" // rgb(221, 0, 166)
+	strength = 30
+
+	glass_name = "Clover Club"
+	glass_desc = "A light and refreshing rasberry cocktail."
+
+/datum/reagent/ethanol/negroni
+	name = "Negroni"
+	id = "negroni"
+	description = "A dark, complicated mix of gin and campari... classy."
+	taste_description = "summer nights and wood smoke"
+	color = "#77000d" // rgb(119, 0, 13)
+	strength = 25
+
+	glass_name = "Negroni"
+	glass_desc = "A dark, complicated blend, perfect for relaxing nights by the fire."
+
+/datum/reagent/ethanol/whiskeysour
+	name = "Whiskey Sour"
+	id = "whiskeysour"
+	description = "A smokey, refreshing lemoned whiskey."
+	taste_description = "smoke and citrus"
+	color = "#a0692e" // rgb(160, 105, 46)
+	strength = 20
+
+	glass_name = "Whiskey Sour"
+	glass_desc = "A smokey, refreshing lemoned whiskey."
+
+/datum/reagent/ethanol/oldfashioned
+	name = "Old Fashioned"
+	id = "oldfashioned"
+	description = "A classic mix of whiskey and sugar... simple and direct."
+	taste_description = "smokey, divine whiskey"
+	color = "#774410" // rgb(119, 68, 16)
+	strength = 15
+
+	glass_name = "Old Fashioned"
+	glass_desc = "A classic mix of whiskey and sugar... simple and direct."
+
+/datum/reagent/ethanol/daiquiri
+	name = "Daiquiri"
+	id = "daiquiri"
+	description = "Refeshing rum and citrus. Time for a tropical get away."
+	taste_description = "refreshing citrus and rum"
+	color = "#d1ff49" // rgb(209, 255, 73
+	strength = 25
+
+	glass_name = "Daiquiri"
+	glass_desc = "Refeshing rum and citrus. Time for a tropical get away."
+
+/datum/reagent/ethanol/mojito
+	name = "Mojito"
+	id = "mojito"
+	description = "Minty rum and citrus, made for sailing."
+	taste_description = "minty rum and lime"
+	color = "#d1ff49" // rgb(209, 255, 73
+	strength = 30
+
+	glass_name = "Mojito"
+	glass_desc = "Minty rum and citrus, made for sailing."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/ethanol/paloma
+	name = "Paloma"
+	id = "paloma"
+	description = "Tequila and citrus, iced just right..."
+	taste_description = "grapefruit and cold fire"
+	color = "#ffb070" // rgb(255, 176, 112)
+	strength = 20
+
+	glass_name = "Paloma"
+	glass_desc = "Tequila and citrus, iced just right..."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/ethanol/piscosour
+	name = "Pisco Sour"
+	id = "piscosour"
+	description = "Wine Brandy, Lemon, and a dream. A South American classic"
+	taste_description = "light sweetness"
+	color = "#f9f96b" // rgb(249, 249, 107)
+	strength = 30
+
+	glass_name = "Pisco Sour"
+	glass_desc = "South American bliss, served ice cold."
+
+/datum/reagent/ethanol/coldfront
+	name = "Cold Front"
+	id = "coldfront"
+	description = "Minty, rich, and painfully cold. It's a blizzard in a cup."
+	taste_description = "biting cold"
+	color = "#ffe8c4" // rgb(255, 232, 196)
+	strength = 30
+	adj_temp = -20
+	targ_temp = 220 //Dangerous to certain races. Drink in moderation.
+
+	glass_name = "Cold Front"
+	glass_desc = "Minty, rich, and painfully cold. It's a blizzard in a cup."
+
+/datum/reagent/ethanol/mintjulep
+	name = "Mint Julep"
+	id = "mintjulep"
+	description = "Minty and refreshing, perfect for a hot day."
+	taste_description = "refreshing mint"
+	color = "#bbfc8a" // rgb(187, 252, 138)
+	strength = 25
+	adj_temp = -5
+
+	glass_name = "Mint Julep"
+	glass_desc = "Minty and refreshing, perfect for a hot day."
+
+/datum/reagent/ethanol/godsake
+	name = "Gods Sake"
+	id = "godsake"
+	description = "Anime's favorite drink."
+	taste_description = "the power of god and anime"
+	color = "#DDDDDD"
+	strength = 25
+
+	glass_name = "God's Sake"
+	glass_desc = "A glass of sake."
+
+/datum/reagent/ethanol/godka
+	name = "Godka"
+	id = "godka"
+	description = "Number one drink AND fueling choice for Russians multiverse-wide."
+	taste_description = "russian steel and a hint of grain"
+	color = "#0064C8"
+	strength = 50
+
+	glass_name = "Godka"
+	glass_desc = "The glass is barely able to contain the wodka. Xynta."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/ethanol/godka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.apply_effect(max(M.radiation - 5 * removed, 0), IRRADIATE, check_protection = 0)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.has_organ[O_LIVER])
+			var/obj/item/organ/L = H.internal_organs_by_name[O_LIVER]
+			if(!L)
+				return
+			var/adjust_liver = rand(-3, 2)
+			if(prob(L.damage))
+				to_chat(M, "<span class='cult'>You feel woozy...</span>")
+			L.damage = max(L.damage + (adjust_liver * removed), 0)
+	var/adjust_tox = rand(-4, 2)
+	M.adjustToxLoss(adjust_tox * removed)
+
+/datum/reagent/ethanol/holywine
+	name = "Angel Ichor"
+	id = "holywine"
+	description = "A premium alchoholic beverage made from distilled angel blood."
+	taste_description = "wings in a glass, and a hint of grape"
+	color = "#C4921E"
+	strength = 20
+
+	glass_name = "Angel Ichor"
+	glass_desc = "A very pious looking drink."
+	glass_icon = DRINK_ICON_NOISY
+
+/datum/reagent/ethanol/holy_mary
+	name = "Holy Mary"
+	id = "holymary"
+	description = "A strange yet pleasurable mixture made of vodka, angel's ichor and lime juice. Or at least you THINK the yellow stuff is angel's ichor."
+	taste_description = "grapes with a hint of lime"
+	color = "#DCAE12"
+	strength = 20
+
+	glass_name = "Holy Mary"
+	glass_desc = "Angel's Ichor, mixed with Vodka and a lil' bit of lime. Tastes like liquid ascension."
+
+/datum/reagent/ethanol/angelswrath
+	name = "Angels Wrath"
+	id = "angelswrath"
+	description = "This thing makes the hair on the back of your neck stand up."
+	taste_description = "sweet victory and sour iron"
+	taste_mult = 1.5
+	color = "#F3C906"
+	strength = 30
+
+	glass_name = "Angels' Wrath"
+	glass_desc = "Just looking at this thing makes you sweat."
+	glass_icon = DRINK_ICON_NOISY
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/ethanol/angelskiss
+	name = "Angels Kiss"
+	id = "angelskiss"
+	description = "Miracle time!"
+	taste_description = "sweet forgiveness and bitter iron"
+	color = "#AD772B"
+	strength = 25
+
+	glass_name = "Angel's Kiss"
+	glass_desc = "Miracle time!"
+
+/datum/reagent/ethanol/ichor_mead
+	name = "Ichor Mead"
+	id = "ichor_mead"
+	description = "A trip to Valhalla."
+	taste_description = "valhalla"
+	color = "#955B37"
+	strength = 30
+
+	glass_name = "Ichor Mead"
+	glass_desc = "A trip to Valhalla."

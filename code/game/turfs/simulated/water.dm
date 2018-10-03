@@ -9,20 +9,19 @@
 	edge_blending_priority = -1
 	movement_cost = 4
 	outdoors = TRUE
+	can_dirty = FALSE	// It's water
+
 	var/depth = 1 // Higher numbers indicates deeper water.
 
-/turf/simulated/floor/water/New()
-	update_icon()
-	..()
-
 /turf/simulated/floor/water/initialize()
+	. = ..()
 	update_icon()
 
 /turf/simulated/floor/water/update_icon()
-	..() // To get the edges.  This also gets rid of other overlays so it needs to go first.
-	overlays.Cut()
+	..() // To get the edges.
 	icon_state = water_state
 	var/image/floorbed_sprite = image(icon = 'icons/turf/outdoors.dmi', icon_state = under_state)
+	underlays.Cut() // To clear the old underlay, so the list doesn't expand infinitely
 	underlays.Add(floorbed_sprite)
 	update_icon_edge()
 
@@ -55,6 +54,8 @@
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
 		L.update_water()
+		if(L.check_submerged() <= 0)
+			return
 		if(!istype(oldloc, /turf/simulated/floor/water))
 			to_chat(L, "<span class='warning'>You get drenched in water from entering \the [src]!</span>")
 	AM.water_act(5)
@@ -64,6 +65,8 @@
 	if(istype(AM, /mob/living))
 		var/mob/living/L = AM
 		L.update_water()
+		if(L.check_submerged() <= 0)
+			return
 		if(!istype(newloc, /turf/simulated/floor/water))
 			to_chat(L, "<span class='warning'>You climb out of \the [src].</span>")
 	..()
@@ -97,6 +100,8 @@
 	return ..()
 
 /mob/living/proc/check_submerged()
+	if(buckled)
+		return 0
 	var/turf/simulated/floor/water/T = loc
 	if(istype(T))
 		return T.depth
@@ -126,16 +131,16 @@ var/list/shoreline_icon_cache = list()
 // Water sprites are really annoying, so let BYOND sort it out.
 /turf/simulated/floor/water/shoreline/update_icon()
 	underlays.Cut()
-	overlays.Cut()
+	cut_overlays()
 	..() // Get the underlay first.
 	var/cache_string = "[initial(icon_state)]_[water_state]_[dir]"
 	if(cache_string in shoreline_icon_cache) // Check to see if an icon already exists.
-		overlays += shoreline_icon_cache[cache_string]
+		add_overlay(shoreline_icon_cache[cache_string])
 	else // If not, make one, but only once.
 		var/icon/shoreline_water = icon(src.icon, "shoreline_water", src.dir)
 		var/icon/shoreline_subtract = icon(src.icon, "[initial(icon_state)]_subtract", src.dir)
 		shoreline_water.Blend(shoreline_subtract,ICON_SUBTRACT)
 
 		shoreline_icon_cache[cache_string] = shoreline_water
-		overlays += shoreline_icon_cache[cache_string]
+		add_overlay(shoreline_icon_cache[cache_string])
 

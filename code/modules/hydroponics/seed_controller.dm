@@ -81,7 +81,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 
 	// Make sure any seed packets that were mapped in are updated
 	// correctly (since the seed datums did not exist a tick ago).
-	for(var/obj/item/seeds/S in world)
+	for(var/obj/item/seeds/S in all_seed_packs)
 		S.update_seed()
 
 	//Might as well mask the gene types while we're at it.
@@ -90,10 +90,10 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 	var/list/plant_traits = ALL_GENES
 	while(plant_traits && plant_traits.len)
 		var/gene_tag = pick(plant_traits)
-		var/gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+		var/gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		while(gene_mask in used_masks)
-			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+			gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		var/decl/plantgene/G
 

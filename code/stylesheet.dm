@@ -24,6 +24,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
 .ooc .admin				{color: #b82e00;}
+.ooc .event_manager		{color: #660033;}
 .ooc .aooc				{color: #960018;}
 
 /* Admin: Private Messages */
@@ -36,7 +37,7 @@ em						{font-style: normal;font-weight: bold;}
 .mod_channel			{color: #735638;	font-weight: bold;}
 .mod_channel .admin		{color: #b82e00;	font-weight: bold;}
 .admin_channel			{color: #9611D4;	font-weight: bold;}
-.event_channel			{color: #009933;	font-weight: bold;}
+.event_channel			{color: #cc3399;	font-weight: bold;}
 
 /* Radio: Misc */
 .deadsay				{color: #530FAD;}
@@ -57,6 +58,7 @@ em						{font-style: normal;font-weight: bold;}
 .sciradio				{color: #993399;}
 .supradio				{color: #5F4519;}
 .srvradio				{color: #6eaa2c;}
+.expradio				{color: #555555;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
@@ -73,6 +75,7 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
+.critical				{color: #ff0000; font-weight: bold; font-size: 150%;}
 .danger					{color: #ff0000; font-weight: bold;}
 .warning				{color: #ff0000; font-style: italic;}
 .rose					{color: #ff5050;}
@@ -88,14 +91,16 @@ h1.alert, h2.alert		{color: #000000;}
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}
+.akhani					{color: #AC398C;}
 .skrell					{color: #00B0B3;}
+.skrellfar				{color: #70FCFF;}
 .soghun					{color: #228B22;}
 .solcom					{color: #22228B;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
-
+.terminus				{font-family: "Times New Roman", Times, serif, sans-serif}
 .interface				{color: #330033;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}

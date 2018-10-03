@@ -1,6 +1,6 @@
 /datum/power/changeling/transform
 	name = "Transform"
-	desc = "We take on the apperance and voice of one we have absorbed."
+	desc = "We take on the appearance and voice of one we have absorbed."
 	ability_icon_state = "ling_transform"
 	genomecost = 0
 	verbpath = /mob/proc/changeling_transform
@@ -48,6 +48,13 @@
 	src.UpdateAppearance()
 	domutcheck(src, null)
 	changeling_update_languages(changeling.absorbed_languages)
+	if(chosen_dna.genMods)
+		var/mob/living/carbon/human/self = src
+		for(var/datum/modifier/mod in self.modifiers)
+			self.modifiers.Remove(mod.type)
+
+		for(var/datum/modifier/mod in chosen_dna.genMods)
+			self.modifiers.Add(mod.type)
 
 	src.verbs -= /mob/proc/changeling_transform
 	spawn(10)

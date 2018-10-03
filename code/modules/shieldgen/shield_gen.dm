@@ -1,11 +1,11 @@
 /obj/machinery/shield_gen
 	name = "bubble shield generator"
-	desc = "Machine that generates an impenetrable field of energy when activated."
+	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	var/active = 0
 	var/field_radius = 3
-	var/max_field_radius = 100
+	var/max_field_radius = 150
 	var/list/field = list()
 	density = 1
 	var/locked = 0
@@ -20,25 +20,29 @@
 	var/target_field_strength = 10
 	var/max_field_strength = 10
 	var/time_since_fail = 100
-	var/energy_conversion_rate = 0.0002	//how many renwicks per watt?
+	var/energy_conversion_rate = 0.0006	//how many renwicks per watt?  Higher numbers equals more effiency.
 	var/z_range = 0 // How far 'up and or down' to extend the shield to, in z-levels.  Only works on MultiZ supported z-levels.
 	use_power = 0	//doesn't use APC power
 
-/obj/machinery/shield_gen/New()
-	spawn(1 SECOND)
-		if(anchored)
-			for(var/obj/machinery/shield_capacitor/cap in range(1, src))
-				if(!cap.anchored)
-					continue
-				if(cap.owned_gen)
-					continue
-				if(get_dir(cap, src) == cap.dir)
-					capacitors |= cap
-					cap.owned_gen = src
-	..()
+/obj/machinery/shield_gen/advanced
+	name = "advanced bubble shield generator"
+	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficent shield matrix."
+	energy_conversion_rate = 0.0012
+
+/obj/machinery/shield_gen/initialize()
+	if(anchored)
+		for(var/obj/machinery/shield_capacitor/cap in range(1, src))
+			if(!cap.anchored)
+				continue
+			if(cap.owned_gen)
+				continue
+			if(get_dir(cap, src) == cap.dir)
+				capacitors |= cap
+				cap.owned_gen = src
+	return ..()
 
 /obj/machinery/shield_gen/Destroy()
-	qdel_null_list(field)
+	QDEL_NULL_LIST(field)
 	return ..()
 
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
@@ -60,7 +64,7 @@
 			updateDialog()
 		else
 			user << "<font color='red'>Access denied.</font>"
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		src.anchored = !src.anchored
 		playsound(src, W.usesound, 75, 1)
 		src.visible_message("<font color='blue'>\icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].</font>")
@@ -259,11 +263,14 @@
 /obj/machinery/shield_gen/update_icon()
 	if(stat & BROKEN)
 		icon_state = "broke"
+		set_light(0)
 	else
 		if (src.active)
 			icon_state = "generator1"
+			set_light(4, 2, "#00CCFF")
 		else
 			icon_state = "generator0"
+			set_light(0)
 
 //grab the border tiles in a circle around this machine
 /obj/machinery/shield_gen/proc/get_shielded_turfs()

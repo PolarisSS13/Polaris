@@ -44,11 +44,12 @@
 	if(istype(L, /mob/living/carbon) && L.getCloneLoss() >= L.getMaxHealth() * 1.5 || istype(L, /mob/living/simple_animal) && L.stat == DEAD)
 		to_chat(src, "This subject does not have an edible life energy...")
 		return FALSE
-	if(L.buckled_mob)
-		if(istype(L.buckled_mob, /mob/living/simple_animal/slime))
-			if(L.buckled_mob != src)
-				to_chat(src, "\The [L.buckled_mob] is already feeding on this subject...")
-				return FALSE
+	if(L.has_buckled_mobs())
+		for(var/A in L.buckled_mobs)
+			if(istype(A, /mob/living/simple_animal/slime))
+				if(A != src)
+					to_chat(src, "\The [A] is already feeding on this subject...")
+					return FALSE
 	return TRUE
 
 /mob/living/simple_animal/slime/proc/start_consuming(var/mob/living/L)
@@ -179,7 +180,7 @@
 				var/damage_to_do = rand(melee_damage_lower, melee_damage_upper)
 				var/armor_modifier = abs((L.getarmor(null, "bio") / 100) - 1)
 
-				L.attack_generic(src, damage_to_do, attacktext)
+				L.attack_generic(src, damage_to_do, pick(attacktext))
 				playsound(src, 'sound/weapons/bite.ogg', 75, 1)
 
 				// Give the slime some nutrition, if applicable.
@@ -198,7 +199,7 @@
 
 	if(istype(L,/obj/mecha))
 		var/obj/mecha/M = L
-		M.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
+		M.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), pick(attacktext))
 
 /mob/living/simple_animal/slime/proc/post_attack(var/mob/living/L, var/intent = I_HURT)
 	if(intent != I_HELP)
@@ -213,7 +214,7 @@
 	// Otherwise they're probably fighting the slime.
 	if(prob(25))
 		visible_message("<span class='danger'>\The [user]'s [W] passes right through [src]!</span>")
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(W))
 		return
 	..()
 

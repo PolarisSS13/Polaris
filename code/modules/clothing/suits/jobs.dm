@@ -39,6 +39,15 @@
 	hoodtype = /obj/item/clothing/head/chaplain_hood
 	allowed = list (/obj/item/weapon/storage/bible)
 
+//Chaplain but spookier
+/obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whiteout
+	name = "white robe"
+	desc = "A long, flowing white robe. It looks comfortable, but not very warm."
+	icon_state = "whiteout_robe"
+	item_state_slots = list(slot_r_hand_str = "suit_white", slot_l_hand_str = "suit_white")
+	flags_inv = HIDETIE|HIDEHOLSTER
+	hoodtype = /obj/item/clothing/head/chaplain_hood/whiteout
+
 //Chaplain
 /obj/item/clothing/suit/nun
 	name = "nun robe"
@@ -151,7 +160,7 @@
 	icon_state = "hazard"
 	blood_overlay_type = "armor"
 	allowed = list (/obj/item/device/analyzer, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner,
-	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency/oxygen,
+	/obj/item/weapon/tool/crowbar, /obj/item/weapon/tool/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/tool/wirecutters, /obj/item/weapon/tool/wrench, /obj/item/weapon/tank/emergency/oxygen,
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
 	body_parts_covered = UPPER_TORSO
 

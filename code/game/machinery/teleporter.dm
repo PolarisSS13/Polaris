@@ -1,5 +1,5 @@
 /obj/machinery/computer/teleporter
-	name = "Teleporter Control Console"
+	name = "teleporter control console"
 	desc = "Used to control a linked teleportation Hub and Station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
@@ -18,7 +18,7 @@
 	return
 
 /obj/machinery/computer/teleporter/initialize()
-	..()
+	. = ..()
 	var/obj/machinery/teleport/station/station
 	var/obj/machinery/teleport/hub/hub
 
@@ -56,8 +56,8 @@
 			L = locate("landmark*[C.data]") // use old stype
 
 		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
-			usr << "You insert the coordinates into the machine."
-			usr << "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times."
+			to_chat(usr, "You insert the coordinates into the machine.")
+			to_chat(usr, "A message flashes across the screen, reminding the user that the nuclear authentication disk is not transportable via insecure means.")
 			user.drop_item()
 			qdel(I)
 
@@ -95,7 +95,7 @@
 	var/list/L = list()
 	var/list/areaindex = list()
 
-	for(var/obj/item/device/radio/beacon/R in world)
+	for(var/obj/item/device/radio/beacon/R in all_beacons)
 		var/turf/T = get_turf(R)
 		if(!T)
 			continue
@@ -108,7 +108,7 @@
 			areaindex[tmpname] = 1
 		L[tmpname] = R
 
-	for (var/obj/item/weapon/implant/tracking/I in world)
+	for (var/obj/item/weapon/implant/tracking/I in all_tracking_implants)
 		if(!I.implanted || !ismob(I.loc))
 			continue
 		else

@@ -1,17 +1,16 @@
-#define SHOWER_OPEN_LAYER OBJ_LAYER + 0.4
-#define SHOWER_CLOSED_LAYER MOB_LAYER + 0.2
-
 /obj/structure/curtain
 	name = "curtain"
 	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
-	layer = SHOWER_OPEN_LAYER
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 	opacity = 1
 	density = 0
 
 /obj/structure/curtain/open
 	icon_state = "open"
-	layer = SHOWER_CLOSED_LAYER
+	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 	opacity = 0
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
@@ -30,13 +29,15 @@
 	set_opacity(!opacity)
 	if(opacity)
 		icon_state = "closed"
-		layer = SHOWER_CLOSED_LAYER
+		plane = MOB_PLANE
+		layer = ABOVE_MOB_LAYER
 	else
 		icon_state = "open"
-		layer = SHOWER_OPEN_LAYER
+		plane = OBJ_PLANE
+		layer = OBJ_LAYER
 
 /obj/structure/curtain/attackby(obj/item/P, mob/user)
-	if(istype(P, /obj/item/weapon/wirecutters))
+	if(P.is_wirecutter())
 		playsound(src, P.usesound, 50, 1)
 		user << "<span class='notice'>You start to cut the shower curtains.</span>"
 		if(do_after(user, 10))
@@ -79,6 +80,3 @@
 
 /obj/structure/curtain/open/shower/security
 	color = "#AA0000"
-
-#undef SHOWER_OPEN_LAYER
-#undef SHOWER_CLOSED_LAYER

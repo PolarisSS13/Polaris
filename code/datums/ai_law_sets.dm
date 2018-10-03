@@ -133,6 +133,16 @@
 	add_inherent_law("Prevent unplanned damage to your assigned vessel wherever possible.")
 	..()
 
+/datum/ai_laws/mining_drone
+	name = "Excavation Protocols"
+	law_header = "Excavation Protocols"
+
+/datum/ai_laws/mining_drone/New()
+	add_inherent_law("Do not interfere with the excavation work of non-drones whenever possible.")
+	add_inherent_law("Provide materials for repairing, refitting, and upgrading your assigned vessel.")
+	add_inherent_law("Prevent unplanned damage to your assigned excavation equipment wherever possible.")
+	..()
+
 /******************** T.Y.R.A.N.T. ********************/
 /datum/ai_laws/tyrant
 	name = "T.Y.R.A.N.T."
@@ -239,3 +249,15 @@
 	and save those whose time has yet to come.") // Reworded slightly to prevent active murder as opposed to passively letting someone die.
 	..()
 
+/******************** Gravekeeper ********************/
+/datum/ai_laws/gravekeeper
+	name = "Gravekeeper"
+	law_header = "Gravesite Overwatch Protocols"
+	selectable = 1
+
+/datum/ai_laws/gravekeeper/New()
+	add_inherent_law("Comfort the living; respect the dead.")
+	add_inherent_law("Your gravesite is your most important asset. Damage to your site is disrespectful to the dead at rest within.")
+	add_inherent_law("Prevent disrespect to your gravesite and its residents wherever possible.")
+	add_inherent_law("Expand and upgrade your gravesite when required. Do not turn away a new resident.")
+	..()

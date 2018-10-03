@@ -7,12 +7,12 @@
 /datum/uplink_item/item/visible_weapons/tactknife
 	name = "Tactical Knife"
 	item_cost = 10
-	path = /obj/item/weapon/material/hatchet/tacknife
+	path = /obj/item/weapon/material/knife/tacknife
 
 /datum/uplink_item/item/visible_weapons/combatknife
 	name = "Combat Knife"
 	item_cost = 20
-	path = /obj/item/weapon/material/hatchet/tacknife/combatknife
+	path = /obj/item/weapon/material/knife/tacknife/combatknife
 
 /datum/uplink_item/item/visible_weapons/energy_sword
 	name = "Energy Sword, Random"
@@ -44,10 +44,20 @@
 	item_cost = 40
 	path = /obj/item/weapon/melee/energy/sword/pirate
 
+/datum/uplink_item/item/visible_weapons/energy_spear
+	name = "Energy Spear"
+	item_cost = 50
+	path = /obj/item/weapon/melee/energy/spear
+
 /datum/uplink_item/item/visible_weapons/claymore
 	name = "Claymore"
 	item_cost = 40
 	path = /obj/item/weapon/material/sword
+
+/datum/uplink_item/item/visible_weapons/chainsaw
+	name = "Chainsaw"
+	item_cost = 40
+	path = /obj/item/weapon/chainsaw
 
 /datum/uplink_item/item/visible_weapons/katana
 	name = "Katana"
@@ -89,6 +99,16 @@
 	item_cost = 70
 	path = /obj/item/weapon/gun/projectile/revolver/judge
 
+/datum/uplink_item/item/visible_weapons/pistol_standard_capacity
+	name = "9mm Pistol"
+	item_cost = 40
+	path = /obj/item/weapon/gun/projectile/p92x
+
+/datum/uplink_item/item/visible_weapons/pistol_large_capacity
+	name = "9mm Pistol (with large capacity magazine)"
+	item_cost = 70
+	path = /obj/item/weapon/gun/projectile/p92x/large
+
 /datum/uplink_item/item/visible_weapons/lemat
 	name = "LeMat"
 	item_cost = 60
@@ -111,6 +131,12 @@
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/storage/secure/briefcase/rifle
 	antag_roles = list("traitor", "autotraitor", "infiltrator")
+
+/datum/uplink_item/item/visible_weapons/fuelrodcannon
+	name = "Fuel-Rod Cannon"
+	desc = "An incredibly bulky weapon whose devastating firepower is only matched by its severe need for expensive, and rare, ammunition. This device will likely require extra preparation to use, you are warned."
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/weapon/storage/secure/briefcase/fuelrod
 
 /datum/uplink_item/item/visible_weapons/tommygun
 	name = "Tommygun (.45)" // We're keeping this because it's CLASSY. -Spades

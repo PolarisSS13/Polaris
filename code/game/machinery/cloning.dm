@@ -23,7 +23,7 @@
 			break
 	return selected
 
-#define CLONE_BIOMASS 150
+#define CLONE_BIOMASS 60
 
 /obj/machinery/clonepod
 	name = "cloning pod"
@@ -33,17 +33,18 @@
 	circuit = /obj/item/weapon/circuitboard/clonepod
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "pod_0"
-	req_access = list(access_genetics) //For premature unlocking.
+	req_access = list(access_genetics) // For premature unlocking.
 	var/mob/living/occupant
-	var/heal_level = 20 //The clone is released once its health reaches this level.
+	var/heal_level = 20				// The clone is released once its health reaches this level.
 	var/heal_rate = 1
-	var/notoxin = 0
 	var/locked = 0
 	var/obj/machinery/computer/cloning/connected = null //So we remember the connected clone machine.
-	var/mess = 0 //Need to clean out it if it's full of exploded clone.
-	var/attempting = 0 //One clone attempt at a time thanks
-	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
-	var/biomass = CLONE_BIOMASS * 3
+	var/mess = 0					// Need to clean out it if it's full of exploded clone.
+	var/attempting = 0				// One clone attempt at a time thanks
+	var/eject_wait = 0				// Don't eject them as soon as they are created fuckkk
+
+	var/list/containers = list()	// Beakers for our liquid biomass
+	var/container_limit = 3			// How many beakers can the machine hold?
 
 /obj/machinery/clonepod/New()
 	..()
@@ -68,10 +69,8 @@
 		return
 	if((!isnull(occupant)) && (occupant.stat != 2))
 		var/completion = (100 * ((occupant.health + 50) / (heal_level + 100))) // Clones start at -150 health
-		user << "Current clone cycle is [round(completion)]% complete."
+		to_chat(user, "Current clone cycle is [round(completion)]% complete.")
 	return
-
-//Clonepod
 
 //Start growing a human clone in the pod!
 /obj/machinery/clonepod/proc/growclone(var/datum/dna2/record/R)
@@ -93,6 +92,13 @@
 					break
 				else
 					return 0
+
+	for(var/modifier_type in R.genetic_modifiers)	//Can't be cloned, even if they had a previous scan
+		if(istype(modifier_type, /datum/modifier/no_clone))
+			return 0
+
+	// Remove biomass when the cloning is started, rather than when the guy pops out
+	remove_biomass(CLONE_BIOMASS)
 
 	attempting = 1 //One at a time!!
 	locked = 1
@@ -149,7 +155,7 @@
 	modifier_lower_bound = round(modifier_lower_bound * clone_sickness_length, 1)
 	modifier_upper_bound = round(modifier_upper_bound * clone_sickness_length, 1)
 
-	H.add_modifier(/datum/modifier/recently_cloned, rand(modifier_lower_bound, modifier_upper_bound))
+	H.add_modifier(H.species.cloning_modifier, rand(modifier_lower_bound, modifier_upper_bound))
 
 	// Modifier that doesn't do anything.
 	H.add_modifier(/datum/modifier/cloned)
@@ -160,6 +166,7 @@
 
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
+
 	H.flavor_texts = R.flavor.Copy()
 	H.suiciding = 0
 	attempting = 0
@@ -167,7 +174,6 @@
 
 //Grow clones to maturity then kick them out.  FREELOADERS
 /obj/machinery/clonepod/process()
-
 	if(stat & NOPOWER) //Autoeject if power is lost
 		if(occupant)
 			locked = 0
@@ -200,7 +206,7 @@
 			use_power(7500) //This might need tweaking.
 			return
 
-		else if((occupant.health >= heal_level || occupant.health == occupant.maxHealth) && (!eject_wait))
+		else if((occupant.health >= heal_level || occupant.health == occupant.getMaxHealth()) && (!eject_wait))
 			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 			audible_message("\The [src] signals that the cloning process is complete.")
 			connected_message("Cloning Process Complete.")
@@ -227,25 +233,28 @@
 			return
 	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
 		if(!check_access(W))
-			user << "<span class='warning'>Access Denied.</span>"
+			to_chat(user, "<span class='warning'>Access Denied.</span>")
 			return
 		if((!locked) || (isnull(occupant)))
 			return
 		if((occupant.health < -20) && (occupant.stat != 2))
-			user << "<span class='warning'>Access Refused.</span>"
+			to_chat(user, "<span class='warning'>Access Refused.</span>")
 			return
 		else
 			locked = 0
-			user << "System unlocked."
-	else if(istype(W, /obj/item/weapon/reagent_containers/food/snacks/meat))
-		user << "<span class='notice'>\The [src] processes \the [W].</span>"
-		biomass += 50
-		user.drop_item()
-		qdel(W)
+			to_chat(user, "System unlocked.")
+	else if(istype(W,/obj/item/weapon/reagent_containers/glass))
+		if(LAZYLEN(containers) >= container_limit)
+			to_chat(user, "<span class='warning'>\The [src] has too many containers loaded!</span>")
+		else if(do_after(user, 1 SECOND))
+			user.visible_message("[user] has loaded \the [W] into \the [src].", "You load \the [W] into \the [src].")
+			containers += W
+			user.drop_item()
+			W.forceMove(src)
 		return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		if(locked && (anchored || occupant))
-			user << "<span class='warning'>Can not do that while [src] is in use.</span>"
+			to_chat(user, "<span class='warning'>Can not do that while [src] is in use.</span>")
 		else
 			if(anchored)
 				anchored = 0
@@ -261,7 +270,7 @@
 	else if(istype(W, /obj/item/device/multitool))
 		var/obj/item/device/multitool/M = W
 		M.connecting = src
-		user << "<span class='notice'>You load connection data from [src] to [M].</span>"
+		to_chat(user, "<span class='notice'>You load connection data from [src] to [M].</span>")
 		M.update_icon()
 		return
 	else
@@ -270,7 +279,7 @@
 /obj/machinery/clonepod/emag_act(var/remaining_charges, var/mob/user)
 	if(isnull(occupant))
 		return
-	user << "You force an emergency ejection."
+	to_chat(user, "You force an emergency ejection.")
 	locked = 0
 	go_out()
 	return 1
@@ -295,10 +304,6 @@
 
 	heal_level = rating * 10 - 20
 	heal_rate = round(rating / 4)
-	if(rating >= 8)
-		notoxin = 1
-	else
-		notoxin = 0
 
 /obj/machinery/clonepod/verb/eject()
 	set name = "Eject Cloner"
@@ -329,12 +334,71 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = src.loc
 	eject_wait = 0 //If it's still set somehow.
-	domutcheck(occupant) //Waiting until they're out before possible transforming.
+	if(ishuman(occupant)) //Need to be safe.
+		var/mob/living/carbon/human/patient = occupant
+		if(!(patient.species.flags & NO_SCAN)) //If, for some reason, someone makes a genetically-unalterable clone, let's not make them permanently disabled.
+			domutcheck(occupant) //Waiting until they're out before possible transforming.
 	occupant = null
 
-	biomass -= CLONE_BIOMASS
 	update_icon()
 	return
+
+// Returns the total amount of biomass reagent in all of the pod's stored containers
+/obj/machinery/clonepod/proc/get_biomass()
+	var/biomass_count = 0
+	if(LAZYLEN(containers))
+		for(var/obj/item/weapon/reagent_containers/glass/G in containers)
+			for(var/datum/reagent/R in G.reagents.reagent_list)
+				if(R.id == "biomass")
+					biomass_count += R.volume
+
+	return biomass_count
+
+// Removes [amount] biomass, spread across all containers. Doesn't have any check that you actually HAVE enough biomass, though.
+/obj/machinery/clonepod/proc/remove_biomass(var/amount = CLONE_BIOMASS)		//Just in case it doesn't get passed a new amount, assume one clone
+	var/to_remove = 0	// Tracks how much biomass has been found so far
+	if(LAZYLEN(containers))
+		for(var/obj/item/weapon/reagent_containers/glass/G in containers)
+			if(to_remove < amount)	//If we have what we need, we can stop. Checked every time we switch beakers
+				for(var/datum/reagent/R in G.reagents.reagent_list)
+					if(R.id == "biomass")		// Finds Biomass
+						var/need_remove = max(0, amount - to_remove)	//Figures out how much biomass is in this container
+						if(R.volume >= need_remove)						//If we have more than enough in this beaker, only take what we need
+							R.remove_self(need_remove)
+							to_remove = amount
+						else											//Otherwise, take everything and move on
+							to_remove += R.volume
+							R.remove_self(R.volume)
+					else
+						continue
+			else
+				return 1
+	return 0
+
+// Empties all of the beakers from the cloning pod, used to refill it
+/obj/machinery/clonepod/verb/empty_beakers()
+	set name = "Eject Beakers"
+	set category = "Object"
+	set src in oview(1)
+
+	if(usr.stat != 0)
+		return
+
+	add_fingerprint(usr)
+	drop_beakers()
+	return
+
+// Actually does all of the beaker dropping
+// Returns 1 if it succeeds, 0 if it fails. Added in case someone wants to add messages to the user.
+/obj/machinery/clonepod/proc/drop_beakers()
+	if(LAZYLEN(containers))
+		var/turf/T = get_turf(src)
+		if(T)
+			for(var/obj/item/weapon/reagent_containers/glass/G in containers)
+				G.forceMove(T)
+				containers -= G
+		return	1
+	return 0
 
 /obj/machinery/clonepod/proc/malfunction()
 	if(occupant)
@@ -389,6 +453,12 @@
 		icon_state = "pod_1"
 	else if(mess)
 		icon_state = "pod_g"
+
+
+/obj/machinery/clonepod/full/New()
+	..()
+	for(var/i = 1 to container_limit)
+		containers += new /obj/item/weapon/reagent_containers/glass/bottle/biomass(src)
 
 //Health Tracker Implant
 
@@ -459,11 +529,11 @@
 
 /obj/item/weapon/disk/data/attack_self(mob/user as mob)
 	read_only = !read_only
-	user << "You flip the write-protect tab to [read_only ? "protected" : "unprotected"]."
+	to_chat(user, "You flip the write-protect tab to [read_only ? "protected" : "unprotected"].")
 
 /obj/item/weapon/disk/data/examine(mob/user)
 	..(user)
-	user << text("The write-protect tab is set to [read_only ? "protected" : "unprotected"].")
+	to_chat(user, text("The write-protect tab is set to [read_only ? "protected" : "unprotected"]."))
 	return
 
 /*
@@ -517,31 +587,3 @@
 		if(istype(A, /obj/machinery/clonepod))
 			A:malfunction()
 */
-
-/*
- *	Modifier applied to newly cloned people.
- */
-
-// Gives rather nasty downsides for awhile, making them less robust.
-/datum/modifier/recently_cloned
-	name = "recently cloned"
-	desc = "You feel rather weak, having been cloned awhile ago."
-
-	on_created_text = "<span class='warning'><font size='3'>You feel really weak.</font></span>"
-	on_expired_text = "<span class='notice'><font size='3'>You feel your strength returning to you.</font></span>"
-
-	max_health_percent = 0.6				// -40% max health.
-	incoming_damage_percent = 1.1			// 10% more incoming damage.
-	outgoing_melee_damage_percent = 0.7		// 30% less melee damage.
-	disable_duration_percent = 1.25			// Stuns last 25% longer.
-	slowdown = 1							// Slower.
-	evasion = -1							// 15% easier to hit.
-
-// Does nothing.
-/datum/modifier/cloned
-	name = "cloned"
-	desc = "You died and were cloned, and you can never forget that."
-
-	flags = MODIFIER_GENETIC			// So it gets copied if they die and get cloned again.
-	stacks = MODIFIER_STACK_ALLOWED		// Two deaths means two instances of this.
-

@@ -104,7 +104,7 @@
 	if(C.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
 		C << 'sound/effects/adminhelp.ogg'
 
-	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
+	log_adminpm(msg,src,C)
 	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
 
 	//we don't use message_admins here because the sender/receiver might get it too
@@ -112,7 +112,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
+		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_EVENT))
 			X << "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[key_name(C, X, 0)]</span>: <span class='message'>[msg]</span></span></span>"
 
 /client/proc/cmd_admin_irc_pm(sender)

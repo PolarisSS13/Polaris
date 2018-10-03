@@ -11,6 +11,7 @@
 	slot_flags = SLOT_BACK
 	force = 5
 	throwforce = 6
+	preserve_item = 1
 	w_class = ITEMSIZE_LARGE
 	origin_tech = list(TECH_BIO = 4, TECH_POWER = 2)
 	action_button_name = "Remove/Replace Paddles"
@@ -31,11 +32,11 @@
 
 /obj/item/device/defib_kit/Destroy()
 	. = ..()
-	qdel_null(paddles)
-	qdel_null(bcell)
+	QDEL_NULL(paddles)
+	QDEL_NULL(bcell)
 
-/obj/item/device/defib_kit/loaded //starts with highcap cell
-	bcell = /obj/item/weapon/cell/high
+/obj/item/device/defib_kit/loaded //starts with a cell
+	bcell = /obj/item/weapon/cell/apc
 
 
 /obj/item/device/defib_kit/update_icon()
@@ -43,7 +44,7 @@
 
 	if(paddles && paddles.loc == src) //in case paddles got destroyed somehow.
 		new_overlays += "[initial(icon_state)]-paddles"
-	if(bcell)
+	if(bcell && paddles)
 		if(bcell.check_charge(paddles.chargecost))
 			if(paddles.combat)
 				new_overlays += "[initial(icon_state)]-combat"
@@ -93,7 +94,7 @@
 			to_chat(user, "<span class='notice'>You install a cell in \the [src].</span>")
 			update_icon()
 
-	else if(isscrewdriver(W))
+	else if(W.is_screwdriver())
 		if(bcell)
 			bcell.update_icon()
 			bcell.forceMove(get_turf(src.loc))
@@ -208,7 +209,7 @@
 	var/combat = 0 //If it can be used to revive people wearing thick clothing (e.g. spacesuits)
 	var/cooldowntime = (6 SECONDS) // How long in deciseconds until the defib is ready again after use.
 	var/chargetime = (2 SECONDS)
-	var/chargecost = 1000 //units of charge
+	var/chargecost = 1250 //units of charge per zap	//With the default APC level cell, this allows 4 shocks
 	var/burn_damage_amt = 5
 	var/use_on_synthetic = 0 //If 1, this is only useful on FBPs, if 0, this is only useful on fleshies
 
@@ -283,7 +284,12 @@
 		return "buzzes, \"Resuscitation failed - Excessive neural degeneration. Further attempts futile.\""
 
 	H.updatehealth()
-	if(H.health + H.getOxyLoss() <= config.health_threshold_dead || (HUSK in H.mutations))
+
+	if(H.isSynthetic())
+		if(H.health + H.getOxyLoss() + H.getToxLoss() <= config.health_threshold_dead)
+			return "buzzes, \"Resuscitation failed - Severe damage detected. Begin manual repair before further attempts futile.\""
+
+	else if(H.health + H.getOxyLoss() <= config.health_threshold_dead || (HUSK in H.mutations) || !H.can_defib)
 		return "buzzes, \"Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile.\""
 
 	var/bad_vital_organ = check_vital_organs(H)
@@ -373,7 +379,10 @@
 // This proc is used so that we can return out of the revive process while ensuring that busy and update_icon() are handled
 /obj/item/weapon/shockpaddles/proc/do_revive(mob/living/carbon/human/H, mob/user)
 	if(!H.client && !H.teleop)
-		to_chat(find_dead_player(H.ckey, 1), "Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!")
+		for(var/mob/observer/dead/ghost in player_list)
+			if(ghost.mind == H.mind)
+				to_chat(ghost, "<b><font color = #330033><font size = 3>Someone is attempting to resuscitate you. Re-enter your body if you want to be revived!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>")
+				break
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
 	user.visible_message("<span class='warning'>\The [user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
@@ -419,6 +428,9 @@
 	var/adjust_health = barely_in_crit - H.health //need to increase health by this much
 	H.adjustOxyLoss(-adjust_health)
 
+	if(H.isSynthetic())
+		H.adjustToxLoss(-H.getToxLoss())
+
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
 
@@ -463,7 +475,7 @@
 	if(burn_damage > 15 && H.can_feel_pain())
 		H.emote("scream")
 
-	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
+	add_attack_logs(user,H,"Shocked using [name]")
 
 /obj/item/weapon/shockpaddles/proc/make_alive(mob/living/carbon/human/M) //This revives the mob
 	var/deadtime = world.time - M.timeofdeath
@@ -475,7 +487,6 @@
 
 	M.timeofdeath = 0
 	M.stat = UNCONSCIOUS //Life() can bring them back to consciousness if it needs to.
-	M.regenerate_icons()
 	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	M.reload_fullscreen()
 
@@ -541,6 +552,13 @@
 	if(isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		return (R.cell && R.cell.checked_use(charge_amt))
+
+/obj/item/weapon/shockpaddles/robot/combat
+	name = "combat defibrillator paddles"
+	desc = "A pair of advanced shockpaddles powered by a robot's internal power cell, able to penetrate thick clothing.  This version \
+	appears to be optimized for combat situations, foregoing the safety inhabitors in favor of a faster charging time."
+	safety = 0
+	chargetime = (1 SECONDS)
 
 /*
 	Shockpaddles that are linked to a base unit
@@ -634,7 +652,8 @@
 	name = "jumper cable kit"
 	desc = "A device that delivers powerful shocks to detachable jumper cables that are capable of reviving full body prosthetics."
 	icon_state = "jumperunit"
-	item_state = "jumperunit"
+	item_state = "defibunit"
+//	item_state = "jumperunit"
 	paddles = /obj/item/weapon/shockpaddles/linked/jumper
 
 /obj/item/device/defib_kit/jumper_kit/loaded

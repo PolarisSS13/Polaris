@@ -7,6 +7,9 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/seromi/back.dmi'
+		)
 
 	var/gauge_icon = "indicator_tank"
 	var/last_gauge_pressure
@@ -67,10 +70,10 @@ var/list/global/tank_gauge_cache = list()
 	return
 
 /obj/item/weapon/tank/Destroy()
-	qdel(air_contents)
+	QDEL_NULL(air_contents)
 
 	processing_objects.Remove(src)
-	qdel(src.proxyassembly)
+	QDEL_NULL(src.proxyassembly)
 
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
@@ -127,7 +130,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
 			src.add_bomb_overlay()
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(W.is_wirecutter())
 		if(wired && src.proxyassembly.assembly)
 
 			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
@@ -261,7 +264,7 @@ var/list/global/tank_gauge_cache = list()
 					data["maskConnected"] = 1
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -609,6 +612,10 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
+/obj/item/device/tankassemblyproxy/Destroy()
+	. = ..()
+	tank = null
+	assembly = null
 
 /obj/item/weapon/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
 	var/obj/item/device/assembly_holder/S = W
@@ -667,32 +674,3 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(src.assembly)
 		src.assembly.HasProximity(AM)
-
-
-/obj/item/projectile/bullet/pellet/fragment/tank
-	name = "metal fragment"
-	damage = 9  //Big chunks flying off.
-	range_step = 2 //controls damage falloff with distance. projectiles lose a "pellet" each time they travel this distance. Can be a non-integer.
-
-	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
-	spread_step = 20
-
-	armor_penetration = 20
-
-	silenced = 1
-	no_attack_log = 1
-	muzzle_type = null
-	pellets = 3
-
-/obj/item/projectile/bullet/pellet/fragment/tank/small
-	name = "small metal fragment"
-	damage = 6
-	armor_penetration = 5
-	pellets = 5
-
-/obj/item/projectile/bullet/pellet/fragment/tank/big
-	name = "large metal fragment"
-	damage = 17
-	armor_penetration = 10
-	range_step = 5 //controls damage falloff with distance. projectiles lose a "pellet" each time they travel this distance. Can be a non-integer.
-	pellets = 1

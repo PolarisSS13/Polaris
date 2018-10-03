@@ -15,6 +15,11 @@
 /proc/mob_size_difference(var/mob_size_A, var/mob_size_B)
 	return round(log(2, mob_size_A/mob_size_B), 1)
 
+/mob/proc/can_wield_item(obj/item/W)
+	if(W.w_class >= ITEMSIZE_LARGE && issmall(src))
+		return FALSE //M is too small to wield this
+	return TRUE
+
 /proc/istiny(A)
 	if(A && istype(A, /mob/living))
 		var/mob/living/L = A
@@ -323,7 +328,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	set name = "a-intent"
 	set hidden = 1
 
-	if(ishuman(src) || isbrain(src) || isslime(src))
+	if(isliving(src) && !isrobot(src))
 		switch(input)
 			if(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = input
@@ -354,19 +359,6 @@ proc/is_blind(A)
 		if(C.sdisabilities & BLIND || C.blinded)
 			return 1
 	return 0
-
-/proc/broadcast_security_hud_message(var/message, var/broadcast_source)
-	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
-
-/proc/broadcast_medical_hud_message(var/message, var/broadcast_source)
-	broadcast_hud_message(message, broadcast_source, med_hud_users, /obj/item/clothing/glasses/hud/health)
-
-/proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
-	var/turf/sourceturf = get_turf(broadcast_source)
-	for(var/mob/M in targets)
-		var/turf/targetturf = get_turf(M)
-		if((targetturf.z == sourceturf.z))
-			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
 
 /proc/mobs_in_area(var/area/A)
 	var/list/mobs = new
@@ -400,7 +392,7 @@ proc/is_blind(A)
 		return // Can't talk in deadchat if you can't see it.
 
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
 			if(M.forbid_seeing_deadchat && !M.client.holder)
@@ -525,7 +517,7 @@ proc/is_blind(A)
 		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(species.name != "Human")
+		if(species.name != SPECIES_HUMAN)
 			threatcount += 2
 
 	if(check_records || check_arrest)
@@ -616,3 +608,51 @@ var/list/global/organ_rel_size = list(
 
 /mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	return
+
+//Recalculates what planes this mob can see using their plane_holder, for humans this is checking slots, for others, could be whatever.
+/mob/proc/recalculate_vis()
+	return
+
+//General HUD updates done regularly (health puppet things, etc)
+/mob/proc/handle_regular_hud_updates()
+	return
+
+//Icon is used to occlude things like huds from the faulty byond context menu.
+//   http://www.byond.com/forum/?post=2336679
+var/global/image/backplane
+/hook/startup/proc/generate_backplane()
+	backplane = image('icons/misc/win32.dmi')
+	backplane.alpha = 0
+	backplane.plane = -100
+	backplane.layer = MOB_LAYER-0.1
+	backplane.mouse_opacity = 0
+
+	return TRUE
+
+/mob/proc/get_sound_env(var/pressure_factor)
+	if (pressure_factor < 0.5)
+		return SPACE
+	else
+		var/area/A = get_area(src)
+		return A.sound_env
+
+/mob/proc/position_hud_item(var/obj/item/item, var/slot)
+	if(!istype(hud_used) || !slot || !LAZYLEN(hud_used.slot_info))
+		return
+
+	//They may have hidden their entire hud but the hands
+	if(!hud_used.hud_shown && slot > slot_r_hand)
+		item.screen_loc = null
+		return
+
+	//They may have hidden the icons in the bottom left with the hide button
+	if(!hud_used.inventory_shown && slot > slot_r_store)
+		item.screen_loc = null
+		return
+
+	var/screen_place = hud_used.slot_info["[slot]"]
+	if(!screen_place)
+		item.screen_loc = null
+		return
+
+	item.screen_loc = screen_place

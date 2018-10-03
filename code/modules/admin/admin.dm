@@ -6,13 +6,13 @@ var/global/floorIsLava = 0
 ////////////////////////////////
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
-	log_adminwarn(msg)
+	//log_adminwarn(msg) //log_and_message_admins is for this
+
 	for(var/client/C in admins)
 		if((R_ADMIN|R_MOD) & C.holder.rights)
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	log_attack(text)
 	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
 		if((R_ADMIN|R_MOD) & C.holder.rights)
@@ -51,6 +51,11 @@ proc/admin_notice(var/message, var/rights)
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
+
+	if(M.client)
+		body += "<br><b>First connection:</b> [M.client.player_age] days ago"
+		body += "<br><b>BYOND account created:</b> [M.client.account_join_date]"
+		body += "<br><b>BYOND account age (days):</b> [M.client.account_age]"
 
 	body += {"
 		<br><br>\[
@@ -380,7 +385,7 @@ proc/admin_notice(var/message, var/rights)
 		if(3)
 			dat+={"
 				Creating new Feed Message...
-				<HR><B><A href='?src=\ref[src];ac_set_channel_receiving=1'>Receiving Channel</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>" //MARK
+				<HR><B><A href='?src=\ref[src];ac_set_channel_receiving=1'>Receiving Channel</A>:</B> [src.admincaster_feed_channel.channel_name]<BR>
 				<B>Message Author:</B> <FONT COLOR='green'>[src.admincaster_signature]</FONT><BR>
 				<B><A href='?src=\ref[src];ac_set_new_message=1'>Message Body</A>:</B> [src.admincaster_feed_message.body] <BR>
 				<BR><A href='?src=\ref[src];ac_submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A><BR>
@@ -674,10 +679,7 @@ proc/admin_notice(var/message, var/rights)
 	set desc = "Send an intercom message, like an arrivals announcement."
 	if(!check_rights(0))	return
 
-	//This is basically how death alarms do it
-	var/obj/item/device/radio/headset/a = new /obj/item/device/radio/headset/omni(null)
-
-	var/channel = input("Channel for message:","Channel", null) as null|anything in (list("Common") + a.keyslot2.channels) // + a.keyslot1.channels
+	var/channel = input("Channel for message:","Channel", null) as null|anything in radiochannels
 
 	if(channel) //They picked a channel
 		var/sender = input("Name of sender (max 75):", "Announcement", "Announcement Computer") as null|text
@@ -688,10 +690,93 @@ proc/admin_notice(var/message, var/rights)
 
 			if(message) //They put a message
 				message = sanitize(message, 500, extra = 0)
-				a.autosay("[message]", "[sender]", "[channel == "Common" ? null : channel]") //Common is a weird case, as it's not a "channel", it's just talking into a radio without a channel set.
+				global_announcer.autosay("[message]", "[sender]", "[channel == "Common" ? null : channel]") //Common is a weird case, as it's not a "channel", it's just talking into a radio without a channel set.
 				log_admin("Intercom: [key_name(usr)] : [sender]:[message]")
-	qdel(a)
+
 	feedback_add_details("admin_verb","IN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/datum/admins/proc/intercom_convo()
+	set category = "Fun"
+	set name = "Intercom Convo"
+	set desc = "Send an intercom conversation, like several uses of the Intercom Msg verb."
+	set waitfor = FALSE //Why bother? We have some sleeps. You can leave tho!
+	if(!check_rights(0))	return
+
+	var/channel = input("Channel for message:","Channel", null) as null|anything in radiochannels
+
+	if(!channel) //They picked a channel
+		return
+
+	to_chat(usr,"<span class='notice'><B>Intercom Convo Directions</B><br>Start the conversation with the sender, a pipe (|), and then the message on one line. Then hit enter to \
+		add another line, and type a (whole) number of seconds to pause between that message, and the next message, then repeat the message syntax up to 20 times. For example:<br>\
+		--- --- ---<br>\
+		Some Guy|Hello guys, what's up?<br>\
+		5<br>\
+		Other Guy|Hey, good to see you.<br>\
+		5<br>\
+		Some Guy|Yeah, you too.<br>\
+		--- --- ---<br>\
+		The above will result in those messages playing, with a 5 second gap between each. Maximum of 20 messages allowed.</span>")
+
+	var/list/decomposed
+	var/message = input(usr,"See your chat box for instructions. Keep a copy elsewhere in case it is rejected when you click OK.", "Input Conversation", "") as null|message
+
+	if(!message)
+		return
+
+	//Split on pipe or \n
+	decomposed = splittext(message,regex("\\||$","m"))
+	decomposed += "0" //Tack on a final 0 sleep to make 3-per-message evenly
+	
+	//Time to find how they screwed up.
+	//Wasn't the right length
+	if((decomposed.len) % 3) //+1 to accomidate the lack of a wait time for the last message
+		to_chat(usr,"<span class='warning'>You passed [decomposed.len] segments (senders+messages+pauses). You must pass a multiple of 3, minus 1 (no pause after the last message). That means a sender and message on every other line (starting on the first), separated by a pipe character (|), and a number every other line that is a pause in seconds.</span>")
+		return
+	
+	//Too long a conversation
+	if((decomposed.len / 3) > 20)
+		to_chat(usr,"<span class='warning'>This conversation is too long! 20 messages maximum, please.</span>")
+		return
+	
+	//Missed some sleeps, or sanitized to nothing.
+	for(var/i = 1; i < decomposed.len; i++)
+		
+		//Sanitize sender
+		var/clean_sender = sanitize(decomposed[i])
+		if(!clean_sender)
+			to_chat(usr,"<span class='warning'>One part of your conversation was not able to be sanitized. It was the sender of the [(i+2)/3]\th message.</span>")
+			return
+		decomposed[i] = clean_sender
+		
+		//Sanitize message
+		var/clean_message = sanitize(decomposed[++i])
+		if(!clean_message)
+			to_chat(usr,"<span class='warning'>One part of your conversation was not able to be sanitized. It was the body of the [(i+2)/3]\th message.</span>")
+			return
+		decomposed[i] = clean_message
+
+		//Sanitize wait time
+		var/clean_time = text2num(decomposed[++i])
+		if(!isnum(clean_time))
+			to_chat(usr,"<span class='warning'>One part of your conversation was not able to be sanitized. It was the wait time after the [(i+2)/3]\th message.</span>")
+			return
+		if(clean_time > 60)
+			to_chat(usr,"<span class='warning'>Max 60 second wait time between messages for sanity's sake please.</span>")
+			return
+		decomposed[i] = clean_time
+
+	log_admin("Intercom convo started by: [key_name(usr)] : [sanitize(message)]")
+	feedback_add_details("admin_verb","IN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+	//Sanitized AND we still have a chance to send it? Wow!
+	if(LAZYLEN(decomposed))
+		for(var/i = 1; i < decomposed.len; i++)
+			var/this_sender = decomposed[i]
+			var/this_message = decomposed[++i]
+			var/this_wait = decomposed[++i]
+			global_announcer.autosay("[this_message]", "[this_sender]", "[channel == "Common" ? null : channel]") //Common is a weird case, as it's not a "channel", it's just talking into a radio without a channel set.
+			sleep(this_wait SECONDS)
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
@@ -860,7 +945,7 @@ proc/admin_notice(var/message, var/rights)
 	set desc="Delay the game start/end"
 	set name="Delay"
 
-	if(!check_rights(R_SERVER))	return
+	if(!check_rights(R_SERVER|R_EVENT))	return
 	if (!ticker || ticker.current_state != GAME_STATE_PREGAME)
 		ticker.delay_end = !ticker.delay_end
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -1181,7 +1266,7 @@ proc/admin_notice(var/message, var/rights)
 			usr << "<b>AI [key_name(S, usr)]'s laws:</b>"
 		else if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
-			usr << "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independant)"]: laws:</b>"
+			usr << "<b>CYBORG [key_name(S, usr)] [R.connected_ai?"(Slaved to: [R.connected_ai])":"(Independent)"]: laws:</b>"
 		else if (ispAI(S))
 			usr << "<b>pAI [key_name(S, usr)]'s laws:</b>"
 		else
@@ -1223,21 +1308,6 @@ proc/admin_notice(var/message, var/rights)
 	if(istype(H))
 		H.regenerate_icons()
 
-
-/*
-	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
-*/
-/proc/is_mentor(client/C)
-
-	if(!istype(C))
-		return 0
-	if(!C.holder)
-		return 0
-
-	if(C.holder.rights == R_MENTOR)
-		return 1
-	return 0
-
 /proc/get_options_bar(whom, detail = 2, name = 0, link = 1, highlight_special = 1)
 	if(!whom)
 		return "<b>(*null*)</b>"
@@ -1266,7 +1336,7 @@ proc/admin_notice(var/message, var/rights)
 			var/ref_mob = "\ref[M]"
 			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[M]'>TAKE</A>)</b>"
 
-		if(4)	//Mentors
+		if(4)	//Event Managers
 			var/ref_mob = "\ref[M]"
 			return "<b>[key_name(C, link, name, highlight_special)] (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;take_question=\ref[M]'>TAKE</A>)</b>"
 
@@ -1482,7 +1552,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 
 
-	if(destination.recievefax(P))
+	if(destination.receivefax(P))
 		src.owner << "<span class='notice'>Message reply to transmitted successfully.</span>"
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")

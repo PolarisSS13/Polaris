@@ -10,9 +10,18 @@
 	name = ".357 Speedloader"
 	path = /obj/item/ammo_magazine/s357
 
+/datum/uplink_item/item/ammo/mc9mm_compact
+	name = "Compact Pistol Magazine (9mm)"
+	path = /obj/item/ammo_magazine/m9mm/compact
+
 /datum/uplink_item/item/ammo/mc9mm
 	name = "Pistol Magazine (9mm)"
 	path = /obj/item/ammo_magazine/m9mm
+
+/datum/uplink_item/item/ammo/mc9mm_large
+	name = "Large Capacity Pistol Magazine (9mm)"
+	path = /obj/item/ammo_magazine/m9mm/large
+	item_cost = 40
 
 /datum/uplink_item/item/ammo/c45m
 	name = "Pistol Magazine (.45)"
@@ -21,6 +30,14 @@
 /datum/uplink_item/item/ammo/c45map
 	name = "Pistol Magazine (.45 AP)"
 	path = /obj/item/ammo_magazine/m45/ap
+
+/datum/uplink_item/item/ammo/s45m
+	name = "Speedloader (.45)"
+	path = /obj/item/ammo_magazine/s45
+
+/datum/uplink_item/item/ammo/s45map
+	name = "Speedloader  (.45 AP)"
+	path = /obj/item/ammo_magazine/s45/ap
 
 /datum/uplink_item/item/ammo/tommymag
 	name = "Tommygun Magazine (.45)"

@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/tree
 	name = "pine tree"
 	desc = "A pissed off tree-like alien. It seems annoyed with the festivities..."
+	tt_desc = "X Festivus tyrannus"
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
 	icon_living = "pine_1"
@@ -22,7 +23,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12
-	attacktext = "bitten"
+	attacktext = list("bitten")
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	min_oxy = 0

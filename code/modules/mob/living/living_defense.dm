@@ -162,6 +162,43 @@
 		O.emp_act(severity)
 	..()
 
+/mob/living/blob_act(var/obj/structure/blob/B)
+	if(stat == DEAD || faction == "blob")
+		return
+
+	var/damage = rand(30, 40)
+	var/armor_pen = 0
+	var/armor_check = "melee"
+	var/damage_type = BRUTE
+	var/attack_message = "The blob attacks you!"
+	var/attack_verb = "attacks"
+	var/def_zone = pick(BP_HEAD, BP_TORSO, BP_GROIN, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
+
+	if(B && B.overmind)
+		var/datum/blob_type/blob = B.overmind.blob_type
+
+		damage = rand(blob.damage_lower, blob.damage_upper)
+		armor_check = blob.armor_check
+		armor_pen = blob.armor_pen
+		damage_type = blob.damage_type
+
+		attack_message = "[blob.attack_message][isSynthetic() ? "[blob.attack_message_synth]":"[blob.attack_message_living]"]"
+		attack_verb = blob.attack_verb
+		B.overmind.blob_type.on_attack(B, src, def_zone)
+
+	if( (damage_type == TOX || damage_type == OXY) && isSynthetic()) // Borgs and FBPs don't really handle tox/oxy damage the same way other mobs do.
+		damage_type = BRUTE
+		damage *= 0.66 // Take 2/3s as much damage.
+
+	visible_message("<span class='danger'>\The [B] [attack_verb] \the [src]!</span>", "<span class='danger'>[attack_message]!</span>")
+	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+
+	//Armor
+	var/soaked = get_armor_soak(def_zone, armor_check, armor_pen)
+	var/absorb = run_armor_check(def_zone, armor_check, armor_pen)
+
+	apply_damage(damage, damage_type, def_zone, absorb, soaked)
+
 /mob/living/proc/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 	return target_zone
 
@@ -184,11 +221,6 @@
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/soaked, var/hit_zone)
 	if(!effective_force || blocked >= 100)
 		return 0
-
-	//Hulk modifier
-	if(HULK in user.mutations)
-		effective_force *= 2
-
 	//Apply weapon damage
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
@@ -234,10 +266,7 @@
 			var/mob/M = O.thrower
 			var/client/assailant = M.client
 			if(assailant)
-				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a [O], thrown by [M.name] ([assailant.ckey])</font>")
-				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
-				if(!istype(src,/mob/living/simple_animal/mouse))
-					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+				add_attack_logs(M,src,"Hit by thrown [O.name]")
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
@@ -300,8 +329,7 @@
 		return
 
 	adjustBruteLoss(damage)
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-	src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [user.name] ([user.ckey])</font>")
+	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_animal attacks
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
@@ -347,8 +375,13 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
-/mob/living/fire_act()
-	adjust_fire_stacks(2)
+//altered this to cap at the temperature of the fire causing it, using the same 1:1500 value as /mob/living/carbon/human/handle_fire() in human/life.dm
+/mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if(exposed_temperature)
+		if(fire_stacks < exposed_temperature/1500) // Subject to balance
+			adjust_fire_stacks(2)
+	else
+		adjust_fire_stacks(2)
 	IgniteMob()
 
 //Share fire evenly between the two mobs
@@ -469,3 +502,15 @@
 		if(!isnull(M.evasion))
 			result += M.evasion
 	return result
+
+/mob/living/proc/get_accuracy_penalty()
+	// Certain statuses make it harder to score a hit.
+	var/accuracy_penalty = 0
+	if(eye_blind)
+		accuracy_penalty += 75
+	if(eye_blurry)
+		accuracy_penalty += 30
+	if(confused)
+		accuracy_penalty += 45
+
+	return accuracy_penalty

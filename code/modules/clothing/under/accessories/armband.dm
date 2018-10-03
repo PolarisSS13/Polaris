@@ -2,7 +2,7 @@
 	name = "red armband"
 	desc = "A fancy red armband!"
 	icon_state = "red"
-	slot = "armband"
+	slot = ACCESSORY_SLOT_ARMBAND
 
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"
@@ -37,6 +37,7 @@
 /obj/item/clothing/accessory/armband/med/color
 	name = "armband"
 	desc = "A fancy armband."
+	addblends = "med_a"
 
 /obj/item/clothing/accessory/armband/medblue
 	name = "EMT armband"

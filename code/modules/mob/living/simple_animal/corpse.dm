@@ -78,6 +78,7 @@
 			W.assignment = corpseidjob
 		W.registered_name = M.real_name
 		M.equip_to_slot_or_del(W, slot_wear_id)
+	delete_me = 1
 	qdel(src)
 
 
@@ -85,7 +86,7 @@
 //List of different corpse types
 
 /obj/effect/landmark/mobcorpse/syndicatesoldier
-	name = "Syndicate Operative"
+	name = "Mercenary"
 	corpseuniform = /obj/item/clothing/under/syndicate
 	corpsesuit = /obj/item/clothing/suit/armor/vest
 	corpseshoes = /obj/item/clothing/shoes/boots/swat

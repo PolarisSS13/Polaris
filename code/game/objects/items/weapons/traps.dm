@@ -13,7 +13,8 @@
 	var/deployed = 0
 
 /obj/item/weapon/beartrap/suicide_act(mob/user)
-	viewers(user) << "<span class='danger'>[user] is putting the [src.name] on \his head! It looks like \he's trying to commit suicide.</span>"
+	var/datum/gender/T = gender_datums[user.get_visible_gender()]
+	viewers(user) << "<span class='danger'>[user] is putting the [src.name] on [T.his] head! It looks like [T.hes] trying to commit suicide.</span>"
 	return (BRUTELOSS)
 
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
@@ -34,6 +35,7 @@
 				"<span class='danger'>You have deployed \the [src]!</span>",
 				"You hear a latch click loudly."
 				)
+			playsound(src.loc, 'sound/machines/click.ogg',70, 1)
 
 			deployed = 1
 			user.drop_from_inventory(src)
@@ -41,14 +43,16 @@
 			anchored = 1
 
 /obj/item/weapon/beartrap/attack_hand(mob/user as mob)
-	if(buckled_mob && can_use(user))
+	if(has_buckled_mobs() && can_use(user))
+		var/victim = english_list(buckled_mobs)
 		user.visible_message(
-			"<span class='notice'>[user] begins freeing [buckled_mob] from \the [src].</span>",
-			"<span class='notice'>You carefully begin to free [buckled_mob] from \the [src].</span>",
+			"<span class='notice'>[user] begins freeing [victim] from \the [src].</span>",
+			"<span class='notice'>You carefully begin to free [victim] from \the [src].</span>",
 			)
 		if(do_after(user, 60))
-			user.visible_message("<span class='notice'>[buckled_mob] has been freed from \the [src] by [user].</span>")
-			unbuckle_mob()
+			user.visible_message("<span class='notice'>[victim] has been freed from \the [src] by [user].</span>")
+			for(var/A in buckled_mobs)
+				unbuckle_mob(A)
 			anchored = 0
 	else if(deployed && can_use(user))
 		user.visible_message(
@@ -56,6 +60,8 @@
 			"<span class='notice'>You begin disarming \the [src]!</span>",
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+
 		if(do_after(user, 60))
 			user.visible_message(
 				"<span class='danger'>[user] has disarmed \the [src].</span>",
@@ -106,7 +112,7 @@
 				"<b>You hear a loud metallic snap!</b>"
 				)
 			attack_mob(L)
-			if(!buckled_mob)
+			if(!has_buckled_mobs())
 				anchored = 0
 			deployed = 0
 			update_icon()

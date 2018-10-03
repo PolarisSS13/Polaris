@@ -9,11 +9,11 @@
 	desc = "It's a small wiring tool, with a wire roll, electric soldering iron, wire cutter, and more in one package. \
 	The wires used are generally useful for small electronics, such as circuitboards and breadboards, as opposed to larger wires \
 	used for power or data transmission."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
 	icon_state = "wirer-wire"
 	item_state = "wirer"
 	flags = CONDUCT
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
 
@@ -108,7 +108,7 @@
 	name = "circuit debugger"
 	desc = "This small tool allows one working with custom machinery to directly set data to a specific pin, useful for writing \
 	settings to specific circuits, or for debugging purposes.  It can also pulse activation pins."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
 	icon_state = "debugger"
 	flags = CONDUCT
 	w_class = 2
@@ -125,6 +125,7 @@
 		if("string")
 			accepting_refs = 0
 			new_data = input("Now type in a string.","[src] string writing") as null|text
+			new_data = sanitizeSafe(new_data, MAX_MESSAGE_LEN, 0, 0)
 			if(istext(new_data) && CanInteract(user, physical_state))
 				data_to_write = new_data
 				to_chat(user, "<span class='notice'>You set \the [src]'s memory to \"[new_data]\".</span>")
@@ -251,7 +252,7 @@
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_misc.dmi'
 	icon_state = "circuit_kit"
 	w_class = 3
 	display_contents_with_number = 0
@@ -260,10 +261,11 @@
 		/obj/item/weapon/storage/bag/circuits/mini,
 		/obj/item/device/electronic_assembly,
 		/obj/item/device/integrated_electronics,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/tool/crowbar,
+		/obj/item/weapon/tool/screwdriver,
 		/obj/item/device/multitool
 		)
+	cant_hold = list(/obj/item/weapon/tool/screwdriver/power)
 
 /obj/item/weapon/storage/bag/circuits/basic/New()
 	..()
@@ -288,8 +290,8 @@
 		new /obj/item/device/assembly/electronic_assembly(src)
 		new /obj/item/device/assembly/electronic_assembly(src)
 		new /obj/item/device/multitool(src)
-		new /obj/item/weapon/screwdriver(src)
-		new /obj/item/weapon/crowbar(src)
+		new /obj/item/weapon/tool/screwdriver(src)
+		new /obj/item/weapon/tool/crowbar(src)
 		make_exact_fit()
 
 /obj/item/weapon/storage/bag/circuits/all/New()
@@ -315,7 +317,7 @@
 		new /obj/item/device/electronic_assembly/drone(src)
 		new /obj/item/device/integrated_electronics/wirer(src)
 		new /obj/item/device/integrated_electronics/debugger(src)
-		new /obj/item/weapon/crowbar(src)
+		new /obj/item/weapon/tool/crowbar(src)
 		make_exact_fit()
 
 /obj/item/weapon/storage/bag/circuits/mini/

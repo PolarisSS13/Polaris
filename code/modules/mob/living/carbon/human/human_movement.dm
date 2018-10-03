@@ -35,7 +35,7 @@
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
-			else if(E.splinted)
+			else if(E.splinted && E.splinted.loc != E)
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
@@ -47,7 +47,7 @@
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
-			else if(E.splinted)
+			else if(E.splinted && E.splinted.loc != E)
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
@@ -67,6 +67,27 @@
 	if(mRun in mutations)
 		tally = 0
 
+	// Turf related slowdown
+	var/turf/T = get_turf(src)
+	if(T && T.movement_cost)
+		var/turf_move_cost = T.movement_cost
+		if(istype(T, /turf/simulated/floor/water))
+			if(species.water_movement)
+				turf_move_cost = Clamp(-3, turf_move_cost + species.water_movement, 15)
+			if(shoes)
+				var/obj/item/clothing/shoes/feet = shoes
+				if(feet.water_speed)
+					turf_move_cost = Clamp(-3, turf_move_cost + feet.water_speed, 15)
+			tally += turf_move_cost
+		if(istype(T, /turf/simulated/floor/outdoors/snow))
+			if(species.snow_movement)
+				turf_move_cost = Clamp(-3, turf_move_cost + species.snow_movement, 15)
+			if(shoes)
+				var/obj/item/clothing/shoes/feet = shoes
+				if(feet.water_speed)
+					turf_move_cost = Clamp(-3, turf_move_cost + feet.snow_speed, 15)
+			tally += turf_move_cost
+
 	// Loop through some slots, and add up their slowdowns.  Shoes are handled below, unfortunately.
 	// Includes slots which can provide armor, the back slot, and suit storage.
 	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store))
@@ -82,20 +103,21 @@
 		var/obj/item/pulled = pulling
 		item_tally += max(pulled.slowdown, 0)
 
-	var/turf/T = get_turf(src)
-	if(T && T.movement_cost)
-		tally += T.movement_cost
-
 	item_tally *= species.item_slowdown_mod
 
 	tally += item_tally
 
+	if(CE_SLOWDOWN in chem_effects)
+		if (tally >= 0 )
+			tally = (tally + tally/4) //Add a quarter of penalties on top.
+		tally += chem_effects[CE_SLOWDOWN]
+
 	if(CE_SPEEDBOOST in chem_effects)
 		if (tally >= 0)	// cut any penalties in half
 			tally = tally/2
-		tally -= 1	// give 'em a buff on top.
+		tally -= chem_effects[CE_SPEEDBOOST]	// give 'em a buff on top.
 
-	return (tally+config.human_delay)
+	return max(-3, tally+config.human_delay)	// Minimum return should be the same as force_max_speed
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
 	//Can we act?
@@ -157,14 +179,23 @@
 	var/S = pick(footstep_sounds)
 	if(!S) return
 
-	// Only play every other step while running
-	if(m_intent == "run" && step_count++ % 2 == 0)
+	// Play every 20 steps while walking, for the sneak
+	if(m_intent == "walk" && step_count++ % 20 != 0)
+		return
+
+	// Play every other step while running
+	if(m_intent == "run" && step_count++ % 2 != 0)
 		return
 
 	var/volume = config.footstep_volume
+
 	// Reduce volume while walking or barefoot
-	if(!shoes || m_intent != "run")
+	if(!shoes || m_intent == "walk")
 		volume *= 0.5
+	else if(shoes)
+		var/obj/item/clothing/shoes/feet = shoes
+		if(istype(feet))
+			volume *= feet.step_volume_mod
 
 	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
 		return // no feet = no footsteps

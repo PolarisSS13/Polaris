@@ -7,6 +7,7 @@
 	organ_tag = O_EYES
 	parent_organ = BP_HEAD
 	var/list/eye_colour = list(0,0,0)
+	var/innate_flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/organ/internal/eyes/robotize()
 	..()
@@ -19,6 +20,17 @@
 /obj/item/organ/internal/eyes/robot/New()
 	..()
 	robotize()
+
+/obj/item/organ/internal/eyes/grey
+	icon_state = "eyes_grey"
+
+/obj/item/organ/internal/eyes/grey/colormatch/New()
+	..()
+	var/mob/living/carbon/human/H = null
+	spawn(15)
+		if(ishuman(owner))
+			H = owner
+			color = H.species.blood_color
 
 /obj/item/organ/internal/eyes/proc/change_eye_color()
 	set name = "Change Eye Color"
@@ -38,7 +50,7 @@
 		// Now sync the organ's eye_colour list.
 		update_colour()
 		// Finally, update the eye icon on the mob.
-		owner.update_eyes()
+		owner.regenerate_icons()
 
 /obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
 
@@ -86,3 +98,14 @@
 		if(prob(1))
 			owner.custom_pain("Your eyes are watering, making it harder to see clearly for a moment.",1)
 			owner.eye_blurry += 10
+
+/obj/item/organ/internal/eyes/proc/get_total_protection(var/flash_protection = FLASH_PROTECTION_NONE)
+	return (flash_protection + innate_flash_protection)
+
+/obj/item/organ/internal/eyes/proc/additional_flash_effects(var/intensity)
+	return -1
+
+/obj/item/organ/internal/eyes/emp_act(severity)
+	..()
+	if(robotic >= ORGAN_ASSISTED)
+		owner.eye_blurry += (4/severity)

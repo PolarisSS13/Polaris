@@ -68,6 +68,9 @@
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
 
+	//used to store what traits the player had picked out in their preferences before joining, in text form.
+	var/list/traits = list()
+
 /datum/mind/New(var/key)
 	src.key = key
 
@@ -82,7 +85,7 @@
 			current.verbs -= /datum/changeling/proc/EvolutionMenu
 		current.mind = null
 
-		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
+		GLOB.nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
@@ -500,53 +503,53 @@
 
 //slime
 /mob/living/simple_animal/slime/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "slime"
 
 /mob/living/carbon/alien/larva/mind_initialize()
-	..()
+	. = ..()
 	mind.special_role = "Larva"
 
 //AI
 /mob/living/silicon/ai/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "AI"
 
 //BORG
 /mob/living/silicon/robot/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Cyborg"
 
 //PAI
 /mob/living/silicon/pai/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "pAI"
 	mind.special_role = ""
 
 //Animals
 /mob/living/simple_animal/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Animal"
 
 /mob/living/simple_animal/corgi/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Corgi"
 
 /mob/living/simple_animal/shade/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Shade"
 
 /mob/living/simple_animal/construct/builder/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Artificer"
 	mind.special_role = "Cultist"
 
 /mob/living/simple_animal/construct/wraith/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Wraith"
 	mind.special_role = "Cultist"
 
 /mob/living/simple_animal/construct/armoured/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"

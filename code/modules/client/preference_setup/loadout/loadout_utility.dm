@@ -8,14 +8,46 @@
 	display_name = "clipboard"
 	path = /obj/item/weapon/clipboard
 
+/datum/gear/utility/tts_device
+	display_name = "text to speech device"
+	path = /obj/item/device/text_to_speech
+	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
+
 /datum/gear/utility/communicator
-	display_name = "personal communicator"
+	display_name = "communicator selection"
 	path = /obj/item/device/communicator
 	cost = 0
 
+/datum/gear/utility/communicator/New()
+	..()
+	var/list/communicators = list()
+	for(var/communicator in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated))
+		var/obj/item/device/communicator_type = communicator
+		communicators[initial(communicator_type.name)] = communicator_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
+
+/datum/gear/utility/camera
+	display_name = "camera"
+	path = /obj/item/device/camera
+
 /datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
-	path = /obj/item/weapon/book/codex
+	path = /obj/item/weapon/book/codex/lore/vir
+	cost = 0
+
+/datum/gear/utility/news
+	display_name = "daedalus pocket newscaster"
+	path = /obj/item/weapon/book/codex/lore/news
+	cost = 0
+
+/datum/gear/utility/corp_regs
+	display_name = "corporate regulations and legal code"
+	path = /obj/item/weapon/book/codex/corp_regs
+	cost = 0
+
+/datum/gear/utility/robutt
+	display_name = "a buyer's guide to artificial bodies"
+	path = /obj/item/weapon/book/codex/lore/robutt
 	cost = 0
 
 /datum/gear/utility/folder_blue
@@ -47,6 +79,11 @@
 	path =/obj/item/weapon/storage/secure/briefcase
 	cost = 2
 
+/datum/gear/utility/laserpointer
+	display_name = "laser pointer"
+	path =/obj/item/device/laser_pointer
+	cost = 2
+
 /datum/gear/utility/flashlight
 	display_name = "flashlight"
 	path = /obj/item/device/flashlight
@@ -76,17 +113,28 @@
 	display_name = "cell, device"
 	path = /obj/item/weapon/cell/device
 
-/datum/gear/utility/implant //This does nothing if you don't actually know EAL.
-	display_name = "implant, language, EAL"
-	path = /obj/item/weapon/implant/language/eal
-	cost = 2
+/datum/gear/utility/implant
 	slot = "implant"
-	var/implant_type = "EAL"
+	exploitable = 1
 
-/datum/gear/utility/translator
-	display_name = "universal translator"
-	path = /obj/item/device/universal_translator
-	cost = 8
+/datum/gear/utility/implant/tracking
+	display_name = "implant, tracking"
+	path = /obj/item/weapon/implant/tracking/weak
+	cost = 10
+
+/datum/gear/utility/implant/language
+	cost = 2
+	exploitable = 0
+
+/datum/gear/utility/implant/language/eal
+	display_name = "vocal synthesizer, EAL"
+	description = "A surgically implanted vocal synthesizer which allows the owner to speak EAL, if they know it."
+	path = /obj/item/weapon/implant/language/eal
+
+/datum/gear/utility/implant/language/skrellian
+	display_name = "vocal synthesizer, Skrellian"
+	description = "A surgically implanted vocal synthesizer which allows the owner to speak Common Skrellian, if they know it."
+	path = /obj/item/weapon/implant/language/skrellian
 
 /datum/gear/utility/pen
 	display_name = "Fountain Pen"
@@ -98,5 +146,14 @@
 	cost = 4
 
 /datum/gear/utility/wheelchair/color/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/utility/umbrella
+	display_name = "Umbrella"
+	path = /obj/item/weapon/melee/umbrella
+	cost = 3
+
+/datum/gear/utility/umbrella/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)

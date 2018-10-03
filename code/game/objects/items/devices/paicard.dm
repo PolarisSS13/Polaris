@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_pai_cards, /obj/item/device/paicard)
+
 /obj/item/device/paicard
 	name = "personal AI device"
 	icon = 'icons/obj/pda.dmi'
@@ -7,6 +9,7 @@
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_DATA = 2)
 	show_messages = 0
+	preserve_item = 1
 
 	var/obj/item/device/radio/radio
 	var/looking_for_personality = 0
@@ -27,7 +30,7 @@
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)
-	qdel_null(radio)
+	QDEL_NULL(radio)
 	return ..()
 
 /obj/item/device/paicard/attack_self(mob/user)

@@ -95,6 +95,10 @@ var/list/slot_equipment_priority = list( \
 //Returns the thing in our inactive hand
 /mob/proc/get_inactive_hand()
 
+// Override for your specific mob's hands or lack thereof.
+/mob/proc/is_holding_item_of_type(typepath)
+	return FALSE
+
 //Puts the item into your l_hand if possible and calls all necessary triggers/updates. returns 1 on success.
 /mob/proc/put_in_l_hand(var/obj/item/W)
 	if(lying || !istype(W))
@@ -122,7 +126,7 @@ var/list/slot_equipment_priority = list( \
 	if(!W)
 		return 0
 	W.forceMove(get_turf(src))
-	W.layer = initial(W.layer)
+	W.reset_plane_and_layer()
 	W.dropped()
 	return 0
 
@@ -134,7 +138,6 @@ var/list/slot_equipment_priority = list( \
 		remove_from_mob(W, target)
 		if(!(W && W.loc))
 			return 1 // self destroying objects (tk, grabs)
-		update_icons()
 		return 1
 	return 0
 
@@ -176,7 +179,7 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/get_inventory_slot(obj/item/I)
 	var/slot = 0
-	for(var/s in slot_back to slot_tie) //kind of worries me
+	for(var/s in 1 to SLOT_TOTAL)
 		if(get_equipped_item(s) == I)
 			slot = s
 			break
@@ -198,14 +201,14 @@ var/list/slot_equipment_priority = list( \
 	src.u_equip(O)
 	if (src.client)
 		src.client.screen -= O
-	O.layer = initial(O.layer)
+	O.reset_plane_and_layer()
 	O.screen_loc = null
 	if(istype(O, /obj/item))
 		var/obj/item/I = O
 		if(target)
 			I.forceMove(target)
 		else
-			I.dropInto(loc)
+			I.dropInto(drop_location())
 		I.dropped(src)
 	return 1
 

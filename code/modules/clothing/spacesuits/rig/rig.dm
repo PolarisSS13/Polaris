@@ -24,6 +24,9 @@
 	siemens_coefficient = 0.2
 	permeability_coefficient = 0.1
 	unacidable = 1
+	preserve_item = 1
+
+	var/suit_state //The string used for the suit's icon_state.
 
 	var/interface_path = "hardsuit.tmpl"
 	var/ai_interface_path = "hardsuit.tmpl"
@@ -109,6 +112,7 @@
 /obj/item/weapon/rig/New()
 	..()
 
+	suit_state = icon_state
 	item_state = icon_state
 	wires = new(src)
 
@@ -153,7 +157,7 @@
 		piece.canremove = 0
 		piece.name = "[suit_type] [initial(piece.name)]"
 		piece.desc = "It seems to be part of a [src.name]."
-		piece.icon_state = "[initial(icon_state)]"
+		piece.icon_state = "[suit_state]"
 		piece.min_cold_protection_temperature = min_cold_protection_temperature
 		piece.max_heat_protection_temperature = max_heat_protection_temperature
 		if(piece.siemens_coefficient > siemens_coefficient) //So that insulated gloves keep their insulation.
@@ -178,6 +182,15 @@
 	spark_system = null
 	return ..()
 
+/obj/item/weapon/rig/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+	if(!inhands && slot_name == slot_back_str)
+		if(icon_override)
+			return icon_override
+		else if(mob_icon)
+			return mob_icon
+
+	return ..()
+
 /obj/item/weapon/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || wearer.back != src)
 		return 0
@@ -196,7 +209,7 @@
 	canremove = 1
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(!piece) continue
-		piece.icon_state = "[initial(icon_state)]"
+		piece.icon_state = "[suit_state]"
 		if(airtight)
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 	update_icon(1)
@@ -213,6 +226,17 @@
 	var/seal_target = !canremove
 	var/failed_to_seal
 
+	var/obj/screen/rig_booting/booting_L = new
+	var/obj/screen/rig_booting/booting_R = new
+
+	if(!seal_target)
+		booting_L.icon_state = "boot_left"
+		booting_R.icon_state = "boot_load"
+		animate(booting_L, alpha=230, time=30, easing=SINE_EASING)
+		animate(booting_R, alpha=200, time=20, easing=SINE_EASING)
+		M.client.screen += booting_L
+		M.client.screen += booting_R
+
 	canremove = 0 // No removing the suit while unsealing.
 	sealing = 1
 
@@ -227,7 +251,6 @@
 			if(seal_delay && !do_after(M,seal_delay))
 				if(M) M << "<span class='warning'>You must remain still while the suit is adjusting the components.</span>"
 				failed_to_seal = 1
-
 		if(!M)
 			failed_to_seal = 1
 		else
@@ -251,7 +274,7 @@
 					if(seal_delay && !instant && !do_after(M,seal_delay,needhand=0))
 						failed_to_seal = 1
 
-					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
+					piece.icon_state = "[suit_state][!seal_target ? "_sealed" : ""]"
 					switch(msg_type)
 						if("boots")
 							M << "<font color='blue'>\The [piece] [!seal_target ? "seal around your feet" : "relax their grip on your legs"].</font>"
@@ -283,9 +306,13 @@
 	sealing = null
 
 	if(failed_to_seal)
+		M.client.screen -= booting_L
+		M.client.screen -= booting_R
+		qdel(booting_L)
+		qdel(booting_R)
 		for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 			if(!piece) continue
-			piece.icon_state = "[initial(icon_state)][!seal_target ? "" : "_sealed"]"
+			piece.icon_state = "[suit_state][!seal_target ? "" : "_sealed"]"
 		canremove = !seal_target
 		if(airtight)
 			update_component_sealed()
@@ -295,6 +322,12 @@
 	// Success!
 	canremove = seal_target
 	M << "<font color='blue'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></font>"
+	M.client.screen -= booting_L
+	qdel(booting_L)
+	booting_R.icon_state = "boot_done"
+	spawn(40)
+		M.client.screen -= booting_R
+		qdel(booting_R)
 
 	if(canremove)
 		for(var/obj/item/rig_module/module in installed_modules)
@@ -309,7 +342,6 @@
 			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
 		else
 			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
-	update_icon(1)
 
 /obj/item/weapon/rig/ui_action_click()
 	toggle_cooling(usr)
@@ -560,7 +592,7 @@
 	if(module_list.len)
 		data["modules"] = module_list
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550, state = nano_state)
 		ui.set_initial_data(data)
@@ -577,7 +609,7 @@
 		// update_inv_wear_suit(), handle species checks here.
 		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype(wearer)])
 			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
-		mob_icon = image("icon" = species_icon, "icon_state" = "[icon_state]")
+		mob_icon = icon(icon = species_icon, icon_state = "[icon_state]")
 
 	if(installed_modules.len)
 		for(var/obj/item/rig_module/module in installed_modules)
@@ -958,15 +990,10 @@
 	// AIs are a bit slower than regular and ignore move intent.
 	wearer_move_delay = world.time + ai_controlled_move_delay
 
-	var/tickcomp = 0
-	if(config.Tickcomp)
-		tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
-		wearer_move_delay += tickcomp
-
 	if(istype(wearer.buckled, /obj/vehicle))
 		//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 		//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-		wearer_move_delay = world.time + tickcomp
+		wearer_move_delay = world.time
 		return wearer.buckled.relaymove(wearer, direction)
 
 	if(istype(wearer.machine, /obj/machinery))
@@ -1001,6 +1028,16 @@
 
 /mob/living/carbon/human/get_rig()
 	return back
+
+//Boot animation screen objects
+/obj/screen/rig_booting
+	screen_loc = "1,1"
+	icon = 'icons/obj/rig_boot.dmi'
+	icon_state = ""
+	layer = SCREEN_LAYER
+	plane = PLANE_FULLSCREEN
+	mouse_opacity = 0
+	alpha = 20 //Animated up when loading
 
 #undef ONLY_DEPLOY
 #undef ONLY_RETRACT

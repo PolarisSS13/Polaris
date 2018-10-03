@@ -101,7 +101,7 @@
 	icon_state = "greensuit"
 	item_state_slots = list(slot_r_hand_str = "centcom", slot_l_hand_str = "centcom")
 	rolled_sleeves = 0
-	starting_accessories = list(/obj/item/clothing/accessory/darkgreen)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/darkgreen)
 
 /obj/item/clothing/under/gov/skirt
 	name = "Green formal skirt uniform"
@@ -161,7 +161,7 @@
 	icon_state = "gentlesuit"
 	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
 	rolled_sleeves = 0
-	starting_accessories = list(/obj/item/clothing/accessory/white, /obj/item/clothing/accessory/wcoat/gentleman)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/white, /obj/item/clothing/accessory/wcoat/gentleman)
 
 /obj/item/clothing/under/gentlesuit/skirt
 	name = "lady's suit"
@@ -320,13 +320,13 @@
 	desc = "Maid in China."
 	icon_state = "maid"
 
-/obj/item/clothing/under/dress/janimaid
+/obj/item/clothing/under/dress/maid/janitor
 	name = "maid uniform"
 	desc = "A simple maid uniform for housekeeping."
 	icon_state = "janimaid"
 
-/obj/item/clothing/under/dress/sexymaid
-	name = "sexy maid uniform"
+/obj/item/clothing/under/dress/maid/sexy
+	name = "sexy maid costume"
 	desc = "You must be a bit risque teasing all of them in a maid uniform!"
 	icon_state = "sexymaid"
 
@@ -363,13 +363,13 @@
 
 /obj/item/clothing/under/dress/dress_cap
 	name = "colony director's dress uniform"
-	desc = "Feminine fashion for the style concious Colony Director."
+	desc = "Feminine fashion for the style conscious Colony Director."
 	icon_state = "dress_cap"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personnel dress uniform"
-	desc = "Feminine fashion for the style concious HoP."
+	desc = "Feminine fashion for the style conscious HoP."
 	icon_state = "dress_hop"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
@@ -393,6 +393,16 @@
 	name = "red swept dress"
 	desc = "A red dress that sweeps to the side."
 	icon_state = "red_swept_dress"
+
+/obj/item/clothing/under/dress/flamenco
+	name = "flamenco dress"
+	desc = "A Mexican flamenco dress."
+	icon_state = "flamenco"
+
+/obj/item/clothing/under/dress/westernbustle
+	name = "western bustle"
+	desc = "A western bustle dress from Earth's late 1800's."
+	icon_state = "westernbustle"
 
 /*
  * wedding stuff
@@ -472,7 +482,7 @@
 	desc = "A charcoal suit and red tie. Very professional."
 	icon_state = "charcoal_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
-	starting_accessories = list(/obj/item/clothing/accessory/navy, /obj/item/clothing/accessory/charcoal_jacket)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/navy, /obj/item/clothing/accessory/jacket/charcoal)
 
 /obj/item/clothing/under/suit_jacket/charcoal/skirt
 	name = "charcoal skirt"
@@ -483,7 +493,7 @@
 	desc = "A navy suit and red tie, intended for the station's finest."
 	icon_state = "navy_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_blue", slot_l_hand_str = "lawyer_blue")
-	starting_accessories = list(/obj/item/clothing/accessory/red, /obj/item/clothing/accessory/navy_jacket)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/red, /obj/item/clothing/accessory/jacket/navy)
 
 /obj/item/clothing/under/suit_jacket/navy/skirt
 	name = "navy skirt"
@@ -494,7 +504,7 @@
 	desc = "A burgundy suit and black tie. Somewhat formal."
 	icon_state = "burgundy_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_red", slot_l_hand_str = "lawyer_red")
-	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/burgundy_jacket)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/black, /obj/item/clothing/accessory/jacket/burgundy)
 
 /obj/item/clothing/under/suit_jacket/burgundy/skirt
 	name = "burgundy skirt"
@@ -505,7 +515,7 @@
 	desc = "That's a very nice suit you have there. Shame if something were to happen to it, eh?"
 	icon_state = "checkered_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
-	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/checkered_jacket)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/black, /obj/item/clothing/accessory/jacket/checkered)
 
 /obj/item/clothing/under/suit_jacket/checkered/skirt
 	name = "checkered skirt"
@@ -516,7 +526,7 @@
 	desc = "A tan suit. Smart, but casual."
 	icon_state = "tan_suit"
 	item_state_slots = list(slot_r_hand_str = "tan_suit", slot_l_hand_str = "tan_suit")
-	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/tan_jacket)
+	starting_accessories = list(/obj/item/clothing/accessory/tie/yellow, /obj/item/clothing/accessory/jacket)
 
 /obj/item/clothing/under/suit_jacket/tan/skirt
 	name = "tan skirt"
@@ -627,17 +637,20 @@
 	name = "long dress"
 	desc = "A long dress."
 	icon_state = "whitedress2"
+	addblends = "whitedress2_a"
 	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/dress/white3
 	name = "short dress"
 	desc = "A short, plain dress."
 	icon_state = "whitedress3"
+	addblends = "whitedress3_a"
 
 /obj/item/clothing/under/dress/white4
 	name = "long flared dress"
 	desc = "A long white dress that flares out at the bottom."
 	icon_state = "whitedress4"
+	addblends = "whitedress4_a"
 	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/dress/darkred
@@ -809,3 +822,34 @@
 	desc = "A fluffy robe to keep you from showing off to the world."
 	icon_state = "bathrobe"
 	worn_state = "bathrobe"
+
+/obj/item/clothing/under/explorer
+	desc = "A green uniform for operating in hazardous environments."
+	name = "explorer's jumpsuit"
+	icon_state = "explorer"
+
+/obj/item/clothing/under/cohesion
+	name = "black cohesion suit"
+	desc = "A plain black cohesion suit intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
+	icon_state = "cohesionsuit"
+	rolled_sleeves = -1 // defeats the purpose!!!
+
+/obj/item/clothing/under/cohesion/striped
+	name = "red striped cohesion suit"
+	desc = "A black cohesion suit with red stripes intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
+	icon_state = "cohesionsuit_striped"
+
+/obj/item/clothing/under/cohesion/decal
+	name = "purple decaled cohesion suit"
+	desc = "A white cohesion suit with purple decals intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
+	icon_state = "cohesionsuit_decal"
+
+/obj/item/clothing/under/cohesion/pattern
+	name = "blue patterned cohesion suit"
+	desc = "A white cohesion suit with blue patterns intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
+	icon_state = "cohesionsuit_pattern"
+
+/obj/item/clothing/under/cohesion/hazard
+	name = "hazard cohesion suit"
+	desc = "An orange cohesion suit with yellow hazard stripes intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
+	icon_state = "cohesionsuit_hazard"

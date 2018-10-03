@@ -27,11 +27,11 @@
 
 	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has docked with the station at docks one and two. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	shuttle_called_message = "A crew transfer to %Dock_name% has been scheduled. The shuttle has been called. Those leaving should procede to docks one and two in approximately %ETA%"
+	shuttle_called_message = "A crew transfer to %Dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to docks one and two in approximately %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
 	emergency_shuttle_docked_message = "The Emergency Shuttle has docked with the station at docks one and two. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%"
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
 	station_networks = list(
@@ -104,3 +104,47 @@
 	name = "Empty"
 	flags = MAP_LEVEL_PLAYER
 	transit_chance = 60
+
+
+//Unit test stuff.
+
+/datum/unit_test/zas_area_test/supply_centcomm
+	name = "ZAS: Supply Shuttle (CentCom)"
+	area_path = /area/supply/dock
+
+/datum/unit_test/zas_area_test/emergency_shuttle
+	name = "ZAS: Emergency Shuttle"
+	area_path = /area/shuttle/escape/centcom
+
+/datum/unit_test/zas_area_test/ai_chamber
+	name = "ZAS: AI Chamber"
+	area_path = /area/ai
+
+/datum/unit_test/zas_area_test/mining_shuttle_at_station
+	name = "ZAS: Mining Shuttle (Station)"
+	area_path = /area/shuttle/mining/station
+
+/datum/unit_test/zas_area_test/cargo_maint
+	name = "ZAS: Cargo Maintenance"
+	area_path = /area/maintenance/cargo
+
+/datum/unit_test/zas_area_test/eng_shuttle
+	name = "ZAS: Construction Site Shuttle (Station)"
+	area_path = /area/shuttle/constructionsite/station
+
+/datum/unit_test/zas_area_test/virology
+	name = "ZAS: Virology"
+	area_path = /area/medical/virology
+
+/datum/unit_test/zas_area_test/xenobio
+	name = "ZAS: Xenobiology"
+	area_path = /area/rnd/xenobiology
+
+/datum/unit_test/zas_area_test/mining_area
+	name = "ZAS: Mining Area (Vacuum)"
+	area_path = /area/mine/explored
+	expectation = UT_VACUUM
+
+/datum/unit_test/zas_area_test/cargo_bay
+	name = "ZAS: Cargo Bay"
+	area_path = /area/quartermaster/storage

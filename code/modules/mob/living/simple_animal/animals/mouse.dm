@@ -2,6 +2,7 @@
 	name = "mouse"
 	real_name = "mouse"
 	desc = "It's a small rodent."
+	tt_desc = "E Mus musculus"
 	icon_state = "mouse_gray"
 	item_state = "mouse_gray"
 	icon_living = "mouse_gray"
@@ -79,7 +80,7 @@
 	icon_living = "mouse_[body_color]"
 	icon_dead = "mouse_[body_color]_dead"
 	icon_rest = "mouse_[body_color]_sleep"
-	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+	desc = "A small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0
@@ -95,13 +96,13 @@
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
-			M << "<font color='blue'>\icon[src] Squeek!</font>"
+			M.visible_message("<font color='blue'>\icon[src] Squeek!</font>")
 			M << 'sound/effects/mouse_squeak.ogg'
 	..()
 
 /mob/living/simple_animal/mouse/death()
 	layer = MOB_LAYER
-	playsound(src, 'sound/effects/mouse_squeak_loud.ogg', 50, 1)
+	playsound(src, 'sound/effects/mouse_squeak_loud.ogg', 35, 1)
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()

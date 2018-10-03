@@ -59,7 +59,7 @@
 			if(prob(25))
 				new_item = new /obj/item/weapon/material/kitchen/utensil/fork(src.loc)
 			else if(prob(50))
-				new_item = new /obj/item/weapon/material/kitchen/utensil/knife(src.loc)
+				new_item = new /obj/item/weapon/material/knife(src.loc)
 			else
 				new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(src.loc)
 			additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
@@ -146,11 +146,11 @@
 		if(13)
 			item_type = "tool"
 			if(prob(25))
-				new_item = new /obj/item/weapon/wrench(src.loc)
+				new_item = new /obj/item/weapon/tool/wrench(src.loc)
 			else if(prob(25))
-				new_item = new /obj/item/weapon/crowbar(src.loc)
+				new_item = new /obj/item/weapon/tool/crowbar(src.loc)
 			else
-				new_item = new /obj/item/weapon/screwdriver(src.loc)
+				new_item = new /obj/item/weapon/tool/screwdriver(src.loc)
 			additional_desc = "[pick("It doesn't look safe.",\
 			"You wonder what it was used for",\
 			"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains on it")]."
@@ -409,6 +409,37 @@
 				new_item = new /obj/item/clothing/mask/gas/poltergeist(src.loc)
 			else
 				new_item = new /obj/item/clothing/mask/gas(src.loc)
+		if(36)
+			// Alien stuff.
+			apply_prefix = FALSE
+			apply_material_decorations = FALSE
+
+			var/list/alien_stuff = list(
+				/obj/item/device/multitool/alien,
+				/obj/item/stack/cable_coil/alien,
+				/obj/item/weapon/tool/crowbar/alien,
+				/obj/item/weapon/tool/screwdriver/alien,
+				/obj/item/weapon/weldingtool/alien,
+				/obj/item/weapon/tool/wirecutters/alien,
+				/obj/item/weapon/tool/wrench/alien,
+				/obj/item/weapon/surgical/FixOVein/alien,
+				/obj/item/weapon/surgical/bone_clamp/alien,
+				/obj/item/weapon/surgical/cautery/alien,
+				/obj/item/weapon/surgical/circular_saw/alien,
+				/obj/item/weapon/surgical/hemostat/alien,
+				/obj/item/weapon/surgical/retractor/alien,
+				/obj/item/weapon/surgical/scalpel/alien,
+				/obj/item/weapon/surgical/surgicaldrill/alien,
+				/obj/item/weapon/cell/device/weapon/recharge/alien,
+				/obj/item/clothing/suit/armor/alien,
+				/obj/item/clothing/head/helmet/alien,
+				/obj/item/clothing/head/psy_crown/wrath
+			)
+
+			var/new_type = pick(alien_stuff)
+			new_item = new new_type(src.loc)
+			item_type = new_item.name
+
 	var/decorations = ""
 	if(apply_material_decorations)
 		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")

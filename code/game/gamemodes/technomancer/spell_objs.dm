@@ -19,6 +19,7 @@
 #define ASPECT_EMP			"emp"		//Unused now.
 #define ASPECT_UNSTABLE		"unstable"	//Heavily RNG-based, causes instability to the victim.
 #define ASPECT_CHROMATIC	"chromatic"	//Used to combine with other spells.
+#define ASPECT_UNHOLY		"unholy"	//Involves the dead, blood, and most things against divine beings.
 
 /obj/item/weapon/spell
 	name = "glowing particles"
@@ -31,6 +32,7 @@
 		)
 	throwforce = 0
 	force = 0
+	show_examine = FALSE
 //	var/mob/living/carbon/human/owner = null
 	var/mob/living/owner = null
 	var/obj/item/weapon/technomancer_core/core = null
@@ -149,9 +151,16 @@
 // Parameters: 0
 // Description: Nulls object references so it can qdel() cleanly.
 /obj/item/weapon/spell/Destroy()
+	owner.unref_spell(src)
 	owner = null
 	core = null
 	return ..()
+
+// Proc: unref_spells()
+// Parameters: 0
+// Description: Nulls object references on specific mobs so it can qdel() cleanly.
+/mob/proc/unref_spell(var/obj/item/weapon/spell/the_spell)
+	return
 
 // Proc: update_icon()
 // Parameters: 0

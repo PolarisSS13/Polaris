@@ -42,7 +42,7 @@
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
 
-/obj/structure/closet/body_bag/attackby(W as obj, mob/user as mob)
+/obj/structure/closet/body_bag/attackby(var/obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)
@@ -58,8 +58,8 @@
 			src.name = "body bag"
 	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
 		return
-	else if(istype(W, /obj/item/weapon/wirecutters))
-		user << "You cut the tag off the bodybag"
+	else if(W.is_wirecutter())
+		to_chat(user, "You cut the tag off the bodybag")
 		src.name = "body bag"
 		src.overlays.Cut()
 		return
@@ -145,12 +145,12 @@
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
 /obj/structure/closet/body_bag/cryobag/New()
-	tank = new /obj/item/weapon/tank/emergency/oxygen(null) //It's in nullspace to prevent ejection when the bag is opened.
+	tank = new /obj/item/weapon/tank/emergency/oxygen/double(null) //It's in nullspace to prevent ejection when the bag is opened.
 	..()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
-	qdel_null(syringe)
-	qdel_null(tank)
+	QDEL_NULL(syringe)
+	QDEL_NULL(tank)
 	return ..()
 
 /obj/structure/closet/body_bag/cryobag/open()
@@ -160,7 +160,7 @@
 		O.name = "used stasis bag"
 		O.icon = src.icon
 		O.icon_state = "bodybag_used"
-		O.desc = "Pretty useless now.."
+		O.desc = "Pretty useless now..."
 		qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/MouseDrop(over_object, src_location, over_location)
@@ -211,9 +211,9 @@
 /obj/structure/closet/body_bag/cryobag/examine(mob/user)
 	..()
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		user << "<span class='info'>You peer into \the [src].</span>"
+		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		if(syringe)
-			user << "<span class='info'>It has a syringe added to it.</span>"
+			to_chat(user, "<span class='info'>It has a syringe added to it.</span>")
 		for(var/mob/living/L in contents)
 			L.examine(user)
 
@@ -239,7 +239,7 @@
 					inject_occupant(H)
 					break
 
-		else if(istype(W,/obj/item/weapon/screwdriver))
+		else if(W.is_screwdriver())
 			if(syringe)
 				if(used)
 					to_chat(user,"<span class='warning'>The injector cannot be removed now that the stasis bag has been used!</span>")

@@ -2,7 +2,7 @@
 	name = "microbattery"
 	desc = "A small, powerful cell for use in fully prosthetic bodies."
 	icon_state = "scell"
-	organ_tag = "cell"
+	organ_tag = O_CELL
 	parent_organ = BP_TORSO
 	vital = 1
 
@@ -17,11 +17,14 @@
 		owner.stat = 0
 		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
 
+/obj/item/organ/internal/cell/emp_act(severity)
+	..()
+	owner.nutrition = max(0, owner.nutrition - rand(10/severity, 50/severity))
 
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder
 	name = "brain interface"
-	organ_tag = "brain"
+	organ_tag = O_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
 	var/brain_type = /obj/item/device/mmi
@@ -82,6 +85,10 @@
 	if(istype(holder_mob))
 		holder_mob.drop_from_inventory(src)
 	qdel(src)
+
+/obj/item/organ/internal/mmi_holder/emp_act(severity)
+	..()
+	owner.adjustToxLoss(rand(6/severity, 12/severity))
 
 /obj/item/organ/internal/mmi_holder/posibrain
 	name = "positronic brain interface"

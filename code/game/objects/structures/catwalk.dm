@@ -1,22 +1,24 @@
 // Based on catwalk.dm from https://github.com/Endless-Horizon/CEV-Eris
 /obj/structure/catwalk
-	layer = TURF_LAYER + 0.5
-	icon = 'icons/turf/catwalks.dmi'
-	icon_state = "catwalk"
 	name = "catwalk"
 	desc = "Cats really don't like these things."
+	plane = DECAL_PLANE
+	layer = ABOVE_UTILITY
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "catwalk"
 	density = 0
 	var/health = 100
 	var/maxhealth = 100
 	anchored = 1.0
 
 /obj/structure/catwalk/initialize()
+	. = ..()
 	for(var/obj/structure/catwalk/O in range(1))
 		O.update_icon()
 	for(var/obj/structure/catwalk/C in get_turf(src))
 		if(C != src)
 			warning("Duplicate [type] in [loc] ([x], [y], [z])")
-			qdel(C)
+			return INITIALIZE_HINT_QDEL
 	update_icon()
 
 /obj/structure/catwalk/Destroy()
@@ -65,7 +67,7 @@
 	return
 
 /obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/weapon/weldingtool))
+	if(istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = C
 		if(WT.isOn())
 			if(WT.remove_fuel(0, user))
@@ -74,14 +76,14 @@
 				new /obj/item/stack/rods(src.loc)
 				new /obj/structure/lattice(src.loc)
 				qdel(src)
-	if(istype(C, /obj/item/weapon/screwdriver))
+	if(C.is_screwdriver())
 		if(health < maxhealth)
 			to_chat(user, "<span class='notice'>You begin repairing \the [src.name] with \the [C.name].</span>")
 			if(do_after(user, 20, src))
 				health = maxhealth
 	else
 		take_damage(C.force)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(C))
 	return ..()
 
 /obj/structure/catwalk/Crossed()

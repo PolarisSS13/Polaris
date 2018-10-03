@@ -7,7 +7,7 @@
 	var/list/stating_laws = list()// Channels laws are currently being stated on
 	var/obj/item/device/radio/common_radio
 
-	var/list/hud_list[10]
+	has_huds = TRUE
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
 
 	//Used in say.dm.
@@ -18,8 +18,6 @@
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
-	var/sensor_mode = 0 //Determines the current HUD.
-
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
 
@@ -27,13 +25,13 @@
 	var/obj/item/weapon/card/id/idcard
 	var/idcard_type = /obj/item/weapon/card/id/synthetic
 
-	#define SEC_HUD 1 //Security HUD mode
-	#define MED_HUD 2 //Medical HUD mode
+	var/hudmode = null
 
 /mob/living/silicon/New()
 	silicon_mob_list |= src
 	..()
-	add_language("Galactic Common")
+	add_language(LANGUAGE_GALCOM)
+	set_default_language(all_languages[LANGUAGE_GALCOM])
 	init_id()
 	init_subsystems()
 
@@ -238,17 +236,51 @@
 	return
 
 /mob/living/silicon/proc/toggle_sensor_mode()
-	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security","Medical","Disable")
 	switch(sensor_type)
 		if ("Security")
-			sensor_mode = SEC_HUD
-			src << "<span class='notice'>Security records overlay enabled.</span>"
+			if(plane_holder)
+				//Enable Security planes
+				plane_holder.set_vis(VIS_CH_ID,TRUE)
+				plane_holder.set_vis(VIS_CH_WANTED,TRUE)
+				plane_holder.set_vis(VIS_CH_IMPLOYAL,TRUE)
+				plane_holder.set_vis(VIS_CH_IMPTRACK,TRUE)
+				plane_holder.set_vis(VIS_CH_IMPCHEM,TRUE)
+
+				//Disable Medical planes
+				plane_holder.set_vis(VIS_CH_STATUS,FALSE)
+				plane_holder.set_vis(VIS_CH_HEALTH,FALSE)
+
+			to_chat(src,"<span class='notice'>Security records overlay enabled.</span>")
 		if ("Medical")
-			sensor_mode = MED_HUD
-			src << "<span class='notice'>Life signs monitor overlay enabled.</span>"
+			if(plane_holder)
+				//Disable Security planes
+				plane_holder.set_vis(VIS_CH_ID,FALSE)
+				plane_holder.set_vis(VIS_CH_WANTED,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPLOYAL,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPTRACK,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPCHEM,FALSE)
+
+				//Enable Medical planes
+				plane_holder.set_vis(VIS_CH_STATUS,TRUE)
+				plane_holder.set_vis(VIS_CH_HEALTH,TRUE)
+
+			to_chat(src,"<span class='notice'>Life signs monitor overlay enabled.</span>")
 		if ("Disable")
-			sensor_mode = 0
-			src << "Sensor augmentations disabled."
+			if(plane_holder)
+				//Disable Security planes
+				plane_holder.set_vis(VIS_CH_ID,FALSE)
+				plane_holder.set_vis(VIS_CH_WANTED,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPLOYAL,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPTRACK,FALSE)
+				plane_holder.set_vis(VIS_CH_IMPCHEM,FALSE)
+
+				//Disable Medical planes
+				plane_holder.set_vis(VIS_CH_STATUS,FALSE)
+				plane_holder.set_vis(VIS_CH_HEALTH,FALSE)
+			to_chat(src,"Sensor augmentations disabled.")
+
+	hudmode = sensor_type //This is checked in examine.dm on humans, so they can see medical/security records depending on mode
 
 /mob/living/silicon/verb/pose()
 	set name = "Set Pose"
@@ -291,6 +323,8 @@
 /mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
 	if(!next_alarm_notice)
 		next_alarm_notice = world.time + SecondsToTicks(10)
+	if(alarm.hidden)
+		return
 
 	var/list/alarms = queued_alarms[alarm_handler]
 	if(was_raised)
@@ -385,3 +419,6 @@
 
 	ghostize(0)
 	qdel(src)
+
+/mob/living/silicon/has_vision()
+	return 0 //NOT REAL EYES

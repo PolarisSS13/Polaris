@@ -43,8 +43,8 @@
 		/mob/living/simple_animal/hostile/malf_drone,
 		/mob/living/simple_animal/hostile/giant_spider,
 		/mob/living/simple_animal/hostile/hivebot,
-		/mob/living/simple_animal/hostile/diyaab, //Doubt these will get used but might as well,
-		/mob/living/simple_animal/hostile/samak,
+		/mob/living/simple_animal/retaliate/diyaab, //Doubt these will get used but might as well,
+		/mob/living/simple_animal/hostile/savik,
 		/mob/living/simple_animal/hostile/shantak
 		)
 
@@ -109,7 +109,7 @@
 	for(var/mob/living/simple_animal/hostile/SM in controlled_mobs)
 		deselect(SM)
 	controlled_mobs = list()
-	..()
+	return ..()
 
 /obj/item/weapon/spell/control/on_use_cast(mob/living/user)
 	if(controlled_mobs.len != 0)

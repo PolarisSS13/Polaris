@@ -6,6 +6,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "mmi_empty"
 	w_class = ITEMSIZE_NORMAL
+	can_speak = 1
 	origin_tech = list(TECH_BIO = 3)
 
 	req_access = list(access_robotics)
@@ -51,6 +52,11 @@
 		else if(!B.brainmob)
 			user << "<span class='warning'>You aren't sure where this brain came from, but you're pretty sure it's useless.</span>"
 			return
+
+		for(var/modifier_type in B.brainmob.modifiers)	//Can't be shoved in an MMI.
+			if(istype(modifier_type, /datum/modifier/no_borg))
+				to_chat(user, "<span class='warning'>\The [src] appears to reject this brain.  It is incompatable.</span>")
+				return
 
 		user.visible_message("<span class='notice'>\The [user] sticks \a [O] into \the [src].</span>")
 
@@ -118,6 +124,11 @@
 	brainmob.dna = H.dna
 	brainmob.container = src
 
+	// Copy modifiers.
+	for(var/datum/modifier/M in H.modifiers)
+		if(M.flags & MODIFIER_GENETIC)
+			brainmob.add_modifier(M.type)
+
 	name = "Man-Machine Interface: [brainmob.real_name]"
 	icon_state = "mmi_full"
 	locked = 1
@@ -128,14 +139,15 @@
 		return
 	var/obj/item/weapon/rig/rig = src.get_rig()
 	if(rig)
-		rig.forced_move(direction, user)
+		if(istype(rig,/obj/item/weapon/rig))
+			rig.forced_move(direction, user)
 
 /obj/item/device/mmi/Destroy()
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		borg.mmi = null
-	qdel_null(radio)
-	qdel_null(brainmob)
+	QDEL_NULL(radio)
+	QDEL_NULL(brainmob)
 	return ..()
 
 /obj/item/device/mmi/radio_enabled

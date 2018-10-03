@@ -37,9 +37,6 @@
 	flags = 0
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
-
-/obj/item/stack/tile/grass/fifty
-	amount = 50
 /*
  * Wood
  */
@@ -55,8 +52,11 @@
 	flags = 0
 	no_variants = FALSE
 
-/obj/item/stack/tile/wood/fifty
-	amount = 50
+/obj/item/stack/tile/wood/sif
+	name = "alien wood tile"
+	singular_name = "alien wood tile"
+	desc = "An easy to fit wooden floor tile. It's blue!"
+	icon_state = "tile-sifwood"
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -81,11 +81,11 @@
 	flags = 0
 	no_variants = FALSE
 
-/obj/item/stack/tile/carpet/blue
-	name = "blue carpet"
-	singular_name = "blue carpet"
-	desc = "A piece of blue carpet. It is the same size as a normal floor tile!"
-	icon_state = "tile-bluecarpet"
+/obj/item/stack/tile/carpet/teal
+	name = "teal carpet"
+	singular_name = "teal carpet"
+	desc = "A piece of teal carpet. It is the same size as a normal floor tile!"
+	icon_state = "tile-tealcarpet"
 	no_variants = FALSE
 
 // TODO - Add descriptions to these
@@ -107,7 +107,7 @@
 /obj/item/stack/tile/floor
 	name = "floor tile"
 	singular_name = "floor tile"
-	desc = "Those could work as a pretty decent throwing weapon" //why?
+	desc = "A metal tile fit for covering a section of floor."
 	icon_state = "tile"
 	force = 6.0
 	matter = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 4)
@@ -124,7 +124,6 @@
 	icon_state = "tile_white"
 	no_variants = FALSE
 
-// VOREStation Edit
 /obj/item/stack/tile/floor/techgrey
 	name = "grey techfloor tile"
 	singular_name = "grey techfloor tile"
@@ -143,7 +142,6 @@
 	icon_state = "tile_steel"
 	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
 	no_variants = FALSE
-// VOREStation Edit End
 
 /obj/item/stack/tile/floor/steel
 	name = "steel floor tile"
@@ -201,3 +199,9 @@
 	throw_range = 20
 	flags = 0
 	no_variants = FALSE
+
+/obj/item/stack/tile/roofing
+	name = "roofing"
+	singular_name = "roofing"
+	desc = "A section of roofing material. You can use it to repair the ceiling, or expand it."
+	icon_state = "techtile_grid"

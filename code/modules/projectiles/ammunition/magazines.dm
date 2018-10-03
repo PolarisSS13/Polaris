@@ -50,7 +50,8 @@
 
 /obj/item/ammo_magazine/s38/rubber
 	name = "speedloader (.38 rubber)"
-	ammo_type = /obj/item/ammo_casing/a38r
+	icon_state = "T38"
+	ammo_type = /obj/item/ammo_casing/a38/rubber
 
 /obj/item/ammo_magazine/s38/emp
 	name = "speedloader (.38 haywire)"
@@ -73,19 +74,19 @@
 
 /obj/item/ammo_magazine/m45/rubber
 	name = "magazine (.45 rubber)"
-	ammo_type = /obj/item/ammo_casing/a45r
+	ammo_type = /obj/item/ammo_casing/a45/rubber
 
 /obj/item/ammo_magazine/m45/practice
 	name = "magazine (.45 practice)"
-	ammo_type = /obj/item/ammo_casing/a45p
+	ammo_type = /obj/item/ammo_casing/a45/practice
 
 /obj/item/ammo_magazine/m45/flash
 	name = "magazine (.45 flash)"
-	ammo_type = /obj/item/ammo_casing/a45f
+	ammo_type = /obj/item/ammo_casing/a45/flash
 
 /obj/item/ammo_magazine/m45/ap
 	name = "magazine (.45 AP)"
-	ammo_type = /obj/item/ammo_casing/a45ap
+	ammo_type = /obj/item/ammo_casing/a45/ap
 
 /obj/item/ammo_magazine/box/emp/b45
 	name = "ammunition box (.45 haywire)"
@@ -115,7 +116,7 @@
 
 /obj/item/ammo_magazine/m45tommy/ap
 	name = "tommygun magazine (.45 AP)"
-	ammo_type = /obj/item/ammo_casing/a45ap
+	ammo_type = /obj/item/ammo_casing/a45/ap
 
 /obj/item/ammo_magazine/m45tommy/empty
 	initial_ammo = 0
@@ -132,7 +133,7 @@
 
 /obj/item/ammo_magazine/m45tommydrum/ap
 	name = "tommygun drum magazine (.45 AP)"
-	ammo_type = /obj/item/ammo_casing/a45ap
+	ammo_type = /obj/item/ammo_casing/a45/ap
 
 /obj/item/ammo_magazine/m45tommydrum/empty
 	initial_ammo = 0
@@ -149,20 +150,84 @@
 
 /obj/item/ammo_magazine/clip/c45/rubber
 	name = "ammo clip (.45 rubber)"
-	ammo_type = /obj/item/ammo_casing/a45r
+	ammo_type = /obj/item/ammo_casing/a45/rubber
 
 /obj/item/ammo_magazine/clip/c45/practice
 	name = "ammo clip (.45 practice)"
-	ammo_type = /obj/item/ammo_casing/a45p
+	ammo_type = /obj/item/ammo_casing/a45/practice
 
 /obj/item/ammo_magazine/clip/c45/flash
 	name = "ammo clip (.45 flash)"
-	ammo_type = /obj/item/ammo_casing/a45f
+	ammo_type = /obj/item/ammo_casing/a45/flash
+
+/obj/item/ammo_magazine/s45
+	name = "speedloader (.45)"
+	icon_state = "45s"
+	ammo_type = /obj/item/ammo_casing/a45
+	matter = list(DEFAULT_WALL_MATERIAL = 525) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	caliber = ".45"
+	max_ammo = 7
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/s45/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/s45/rubber
+	name = "speedloader (.45 rubber)"
+	ammo_type = /obj/item/ammo_casing/a45/rubber
+
+/obj/item/ammo_magazine/s45/practice
+	name = "speedloader (.45 practice)"
+	ammo_type = /obj/item/ammo_casing/a45/practice
+
+/obj/item/ammo_magazine/s45/flash
+	name = "speedloader (.45 flash)"
+	ammo_type = /obj/item/ammo_casing/a45/flash
+
+/obj/item/ammo_magazine/s45/ap
+	name = "speedloader (.45 AP)"
+	ammo_type = /obj/item/ammo_casing/a45/ap
 
 ///////// 9mm /////////
 
 /obj/item/ammo_magazine/m9mm
 	name = "magazine (9mm)"
+	icon_state = "9x19p_fullsize"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	matter = list(DEFAULT_WALL_MATERIAL = 600)
+	caliber = "9mm"
+	ammo_type = /obj/item/ammo_casing/a9mm
+	max_ammo = 10
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m9mm/large
+	desc = "\"FOR LAW ENFORCEMENT/MILITARY USE ONLY\" is clearly etched on the magazine. This is probably illegal for you to have." // Remember, Security is not Law Enforcement, so it's illegal for Security to use as well.
+	icon_state = "9x19p_highcap"
+	max_ammo = 17
+	origin_tech = list(TECH_COMBAT = 2, TECH_ILLEGAL = 1)
+
+/obj/item/ammo_magazine/m9mm/large/preban // Sold by traders.
+	desc = "A large capacity magazine that was built before the SolGov Assault Weapons Ban, so it's legal to own."
+
+/obj/item/ammo_magazine/m9mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/m9mm/flash
+	name = "magazine (9mm flash)"
+	ammo_type = /obj/item/ammo_casing/a9mm/flash
+
+/obj/item/ammo_magazine/m9mm/rubber
+	name = "magazine (9mm rubber)"
+	ammo_type = /obj/item/ammo_casing/a9mm/rubber
+
+/obj/item/ammo_magazine/m9mm/practice
+	name = "magazine (9mm practice)"
+	ammo_type = /obj/item/ammo_casing/a9mm/practice
+
+// Compact
+/obj/item/ammo_magazine/m9mm/compact
+	name = "compact magazine (9mm)"
 	icon_state = "9x19p"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
@@ -172,20 +237,22 @@
 	max_ammo = 8
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m9mm/empty
+/obj/item/ammo_magazine/m9mm/compact/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m9mm/flash
-	ammo_type = /obj/item/ammo_casing/a9mmf
+/obj/item/ammo_magazine/m9mm/compact/flash
+	name = "compact magazine (9mm flash)"
+	ammo_type = /obj/item/ammo_casing/a9mm/flash
 
-/obj/item/ammo_magazine/m9mm/rubber
-	name = "magazine (9mm rubber)"
-	ammo_type = /obj/item/ammo_casing/a9mmr
+/obj/item/ammo_magazine/m9mm/compact/rubber
+	name = "compact magazine (9mm rubber)"
+	ammo_type = /obj/item/ammo_casing/a9mm/rubber
 
-/obj/item/ammo_magazine/m9mm/practice
-	name = "magazine (9mm practice)"
-	ammo_type = /obj/item/ammo_casing/a9mmp
+/obj/item/ammo_magazine/m9mm/compact/practice
+	name = "compact magazine (9mm practice)"
+	ammo_type = /obj/item/ammo_casing/a9mm/practice
 
+// SMG
 /obj/item/ammo_magazine/m9mmt
 	name = "top mounted magazine (9mm)"
 	icon_state = "9mmt"
@@ -201,18 +268,18 @@
 
 /obj/item/ammo_magazine/m9mmt/rubber
 	name = "top mounted magazine (9mm rubber)"
-	ammo_type = /obj/item/ammo_casing/a9mmr
+	ammo_type = /obj/item/ammo_casing/a9mm/rubber
 
 /obj/item/ammo_magazine/m9mmt/flash
 	name = "top mounted magazine (9mm flash)"
-	ammo_type = /obj/item/ammo_casing/a9mmf
+	ammo_type = /obj/item/ammo_casing/a9mm/flash
 
 /obj/item/ammo_magazine/m9mmt/practice
 	name = "top mounted magazine (9mm practice)"
-	ammo_type = /obj/item/ammo_casing/a9mmp
+	ammo_type = /obj/item/ammo_casing/a9mm/practice
 
 /obj/item/ammo_magazine/m9mmp90
-	name = "high capacity top mounted magazine (9mm armor-piercing)"
+	name = "large capacity top mounted magazine (9mm armor-piercing)"
 	icon_state = "p90"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a9mm/ap
@@ -236,15 +303,15 @@
 
 /obj/item/ammo_magazine/clip/c9mm/rubber
 	name = "ammo clip (.45 rubber)"
-	ammo_type = /obj/item/ammo_casing/a9mmr
+	ammo_type = /obj/item/ammo_casing/a9mm/rubber
 
 /obj/item/ammo_magazine/clip/c9mm/practice
 	name = "ammo clip (.45 practice)"
-	ammo_type = /obj/item/ammo_casing/a9mmp
+	ammo_type = /obj/item/ammo_casing/a9mm/practice
 
 /obj/item/ammo_magazine/clip/c9mm/flash
 	name = "ammo clip (.45 flash)"
-	ammo_type = /obj/item/ammo_casing/a9mmf
+	ammo_type = /obj/item/ammo_casing/a9mm/flash
 
 /obj/item/ammo_magazine/box/c9mm // Made by RnD for Prototype SMG and should probably be removed because why does it require DIAMONDS to make bullets?
 	name = "ammunition Box (9mm)"
@@ -256,6 +323,31 @@
 	max_ammo = 30
 
 /obj/item/ammo_magazine/box/c9mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/m9mmR/saber
+	desc = "A very high capacity double stack magazine made specially for the SABER SMG. Filled with 22 9mm bullets."
+	icon_state = "S9mm-22"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/a9mm
+	matter = list(DEFAULT_WALL_MATERIAL = 1200)
+	caliber = "9mm"
+	max_ammo = 22
+	origin_tech = list(TECH_COMBAT = 2, TECH_ILLEGAL = 1)
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m9mmR/saber/ap
+	desc = "A high capacity double stack magazine made specially for the SABER SMG. Filled with 22 9mm armor piercing bullets."
+	icon_state = "S9mm-22"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/a9mm/ap
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	caliber = "9mm"
+	max_ammo = 22
+	origin_tech = list(TECH_COMBAT = 2, TECH_ILLEGAL = 1)
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m9mmR/saber/empty
 	initial_ammo = 0
 
 ///////// 10mm /////////
@@ -314,7 +406,7 @@
 
 /obj/item/ammo_magazine/m545/practice
 	name = "magazine (5.45mm practice)"
-	ammo_type = /obj/item/ammo_casing/a545p
+	ammo_type = /obj/item/ammo_casing/a545/practice
 
 /obj/item/ammo_magazine/m545/practice/ext
 	name = "extended magazine (5.45mm practice)"
@@ -328,6 +420,14 @@
 	name = "extended magazine (5.45mm armor-piercing)"
 	max_ammo = 30
 
+/obj/item/ammo_magazine/m545/hunter
+	name = "magazine (5.45mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a545/hunter
+
+/obj/item/ammo_magazine/m545/hunter/ext
+	name = "extended magazine (5.45mm hunting)"
+	max_ammo = 30
+
 /obj/item/ammo_magazine/m545/small
 	name = "reduced magazine (5.45mm)"
 	icon_state = "m545-small"
@@ -339,11 +439,15 @@
 
 /obj/item/ammo_magazine/m545/small/practice
 	name = "magazine (5.45mm practice)"
-	ammo_type = /obj/item/ammo_casing/a545p
+	ammo_type = /obj/item/ammo_casing/a545/practice
 
 /obj/item/ammo_magazine/m545/small/ap
 	name = "magazine (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
+
+/obj/item/ammo_magazine/m545/small/hunter
+	name = "magazine (5.45mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a545/hunter
 
 /obj/item/ammo_magazine/clip/c545
 	name = "ammo clip (5.45mm)"
@@ -357,6 +461,10 @@
 /obj/item/ammo_magazine/clip/c545/ap
 	name = "rifle clip (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
+
+/obj/item/ammo_magazine/clip/c545/hunter
+	name = "rifle clip (5.45mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a545/hunter
 
 /obj/item/ammo_magazine/clip/c545/practice
 	name = "rifle clip (5.45mm practice)"
@@ -378,6 +486,10 @@
 	name = "magazine box (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
 
+/obj/item/ammo_magazine/m545saw/hunter
+	name = "magazine box (5.45mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a545/hunter
+
 /obj/item/ammo_magazine/m545saw/empty
 	initial_ammo = 0
 
@@ -385,7 +497,7 @@
 
 /obj/item/ammo_magazine/m44
 	name = "magazine (.44)"
-	icon_state = "44"
+	icon_state = "m44"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = ".44"
@@ -406,6 +518,23 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 1620) // metal costs are very roughly based around one .50 casing = 180 metal
 	max_ammo = 9
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/s44
+	name = "speedloader (.44)"
+	icon_state = "44"
+	ammo_type = /obj/item/ammo_casing/a44
+	matter = list(DEFAULT_WALL_MATERIAL = 1260) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	caliber = ".44"
+	max_ammo = 6
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/s44/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/s44/rubber
+	name = "speedloader (.44 rubber)"
+	icon_state = "R44"
+	ammo_type = /obj/item/ammo_casing/a44/rubber
 
 ///////// 7.62mm /////////
 
@@ -475,7 +604,11 @@
 
 /obj/item/ammo_magazine/clip/c762/practice
 	name = "rifle clip (7.62mm practice)"
-	ammo_type = /obj/item/ammo_casing/a762p
+	ammo_type = /obj/item/ammo_casing/a762/practice
+
+/obj/item/ammo_magazine/clip/c762/hunter
+	name = "rifle clip (7.62mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a762/hunter
 
 /obj/item/ammo_magazine/m762svd
 	name = "\improper SVD magazine (7.62mm)"
@@ -523,12 +656,12 @@
 
 /obj/item/ammo_magazine/clip/c12g
 	name = "ammo clip (12g slug)"
-	icon_state = "12gclipslug" //largely a codersprite, looks good enough. feel free to make a better one.
+	icon_state = "12gclipslug" // Still a placeholder sprite. Feel free to make a better one.
 	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with slugs."
 	caliber = "12g"
 	ammo_type = /obj/item/ammo_casing/a12g
-	matter = list(DEFAULT_WALL_MATERIAL = 1790) // slugs shells x4 + 350 metal for the clip itself.
-	max_ammo = 4
+	matter = list(DEFAULT_WALL_MATERIAL = 1070) // slugs shells x2 + 350 metal for the clip itself.
+	max_ammo = 2
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/clip/c12g/pellet
@@ -536,14 +669,14 @@
 	icon_state = "12gclipshell"
 	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with buckshot."
 	ammo_type = /obj/item/ammo_casing/a12g/pellet
-	matter = list(DEFAULT_WALL_MATERIAL = 1790) // buckshot and slugs cost the same
+	matter = list(DEFAULT_WALL_MATERIAL = 1070) // buckshot and slugs cost the same
 
 /obj/item/ammo_magazine/clip/c12g/beanbag
 	name = "ammo clip (12g beanbag)"
 	icon_state = "12gclipbean"
 	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with beanbags."
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
-	matter = list(DEFAULT_WALL_MATERIAL = 1070) //beanbags x4 + 350 metal
+	matter = list(DEFAULT_WALL_MATERIAL = 710) //beanbags x2 + 350 metal
 
 ///////// .75 Gyrojet /////////
 

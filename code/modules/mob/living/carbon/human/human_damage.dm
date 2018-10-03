@@ -108,7 +108,8 @@
 		amount += O.burn_dam
 	return amount
 
-/mob/living/carbon/human/adjustBruteLoss(var/amount)
+//'include_robo' only applies to healing, for legacy purposes, as all damage typically hurts both types of organs
+/mob/living/carbon/human/adjustBruteLoss(var/amount,var/include_robo)
 	amount = amount*species.brute_mod
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
@@ -121,10 +122,11 @@
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_healing_percent))
 				amount *= M.incoming_healing_percent
-		heal_overall_damage(-amount, 0)
+		heal_overall_damage(-amount, 0, include_robo)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
-/mob/living/carbon/human/adjustFireLoss(var/amount)
+//'include_robo' only applies to healing, for legacy purposes, as all damage typically hurts both types of organs
+/mob/living/carbon/human/adjustFireLoss(var/amount,var/include_robo)
 	amount = amount*species.burn_mod
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
@@ -137,7 +139,7 @@
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_healing_percent))
 				amount *= M.incoming_healing_percent
-		heal_overall_damage(0, -amount)
+		heal_overall_damage(0, -amount, include_robo)
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 /mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
@@ -283,19 +285,19 @@
 		..()
 
 /mob/living/carbon/human/getToxLoss()
-	if((species.flags & NO_POISON) || isSynthetic())
+	if(species.flags & NO_POISON)
 		toxloss = 0
 	return ..()
 
 /mob/living/carbon/human/adjustToxLoss(var/amount)
-	if((species.flags & NO_POISON) || isSynthetic())
+	if(species.flags & NO_POISON)
 		toxloss = 0
 	else
 		amount = amount*species.toxins_mod
 		..(amount)
 
 /mob/living/carbon/human/setToxLoss(var/amount)
-	if((species.flags & NO_POISON) || isSynthetic())
+	if(species.flags & NO_POISON)
 		toxloss = 0
 	else
 		..()
@@ -348,7 +350,8 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 
 
 //Heal MANY external organs, in random order
-/mob/living/carbon/human/heal_overall_damage(var/brute, var/burn)
+//'include_robo' only applies to healing, for legacy purposes, as all damage typically hurts both types of organs
+/mob/living/carbon/human/heal_overall_damage(var/brute, var/burn, var/include_robo)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
 
 	var/update = 0
@@ -358,7 +361,7 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 		var/brute_was = picked.brute_dam
 		var/burn_was = picked.burn_dam
 
-		update |= picked.heal_damage(brute,burn)
+		update |= picked.heal_damage(brute,burn,robo_repair = include_robo)
 
 		brute -= (brute_was-picked.brute_dam)
 		burn -= (burn_was-picked.burn_dam)
@@ -425,9 +428,9 @@ This function restores all organs.
 		zone = BP_HEAD
 	return organs_by_name[zone]
 
-/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
+/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/soaked = 0, var/sharp = 0, var/edge = 0, var/obj/used_weapon = null)
 	if(Debug2)
-		world.log << "## DEBUG: human/apply_damage() was called on [src], with [damage] damage, and an armor value of [blocked]."
+		world.log << "## DEBUG: human/apply_damage() was called on [src], with [damage] damage, an armor value of [blocked], and a soak value of [soaked]."
 
 	var/obj/item/organ/external/organ = null
 	if(isorgan(def_zone))
@@ -442,7 +445,7 @@ This function restores all organs.
 			if((damage > 25 && prob(20)) || (damage > 50 && prob(60)))
 				if(organ && organ.organ_can_feel_pain())
 					emote("scream")
-		..(damage, damagetype, def_zone, blocked)
+		..(damage, damagetype, def_zone, blocked, soaked)
 		return 1
 
 	//Handle BRUTE and BURN damage
@@ -451,12 +454,18 @@ This function restores all organs.
 	if(blocked >= 100)
 		return 0
 
+	if(soaked >= damage)
+		return 0
 
 	if(!organ)	return 0
 
 	if(blocked)
 		blocked = (100-blocked)/100
 		damage = (damage * blocked)
+
+	if(soaked)
+		damage -= soaked
+
 	if(Debug2)
 		world.log << "## DEBUG: [src] was hit for [damage]."
 

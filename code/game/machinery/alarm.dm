@@ -36,6 +36,8 @@
 	name = "alarm"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 80
@@ -81,12 +83,17 @@
 
 	var/report_danger_level = 1
 
+	var/alarms_hidden = FALSE //If the alarms from this machine are visible on consoles
+
 /obj/machinery/alarm/nobreach
 	breach_detection = 0
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
 	breach_detection = 0
+
+/obj/machinery/alarm/alarms_hidden
+	alarms_hidden = TRUE
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -103,6 +110,9 @@
 	unregister_radio(src, frequency)
 	qdel(wires)
 	wires = null
+	if(alarm_area && alarm_area.master_air_alarm == src)
+		alarm_area.master_air_alarm = null
+		elect_master(exclude_self = TRUE)
 	return ..()
 
 /obj/machinery/alarm/New()
@@ -128,6 +138,7 @@
 
 
 /obj/machinery/alarm/initialize()
+	. = ..()
 	set_frequency(frequency)
 	if(!master_is_operating())
 		elect_master()
@@ -180,15 +191,17 @@
 		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
 			update_use_power(2)
 			regulating_temperature = 1
-			visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+			audible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click and a faint electronic hum.")
+			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 	else
 		//check for when we should stop adjusting temperature
 		if(get_danger_level(target_temperature, TLV["temperature"]) || abs(environment.temperature - target_temperature) <= 0.5)
 			update_use_power(1)
 			regulating_temperature = 0
-			visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+			audible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click as a faint electronic humming stops.")
+			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
 	if(regulating_temperature)
 		if(target_temperature > T0C + MAX_TEMPERATURE)
@@ -269,8 +282,10 @@
 /obj/machinery/alarm/proc/master_is_operating()
 	return alarm_area && alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER | BROKEN))
 
-/obj/machinery/alarm/proc/elect_master()
+/obj/machinery/alarm/proc/elect_master(exclude_self = FALSE)
 	for(var/obj/machinery/alarm/AA in alarm_area)
+		if(exclude_self && AA == src)
+			continue
 		if(!(AA.stat & (NOPOWER|BROKEN)))
 			alarm_area.master_air_alarm = AA
 			return 1
@@ -309,7 +324,7 @@
 			icon_state = "alarm1"
 			new_color = "#DA0205"
 
-	set_light(l_range = 2, l_power = 0.5, l_color = new_color)
+	set_light(l_range = 2, l_power = 0.25, l_color = new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
@@ -481,7 +496,7 @@
 	if(!(locked && !remote_connection) || remote_access || issilicon(user))
 		populate_controls(data)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "air_alarm.tmpl", name, 325, 625, master_ui = master_ui, state = state)
 		ui.set_initial_data(data)
@@ -790,6 +805,8 @@ FIRE ALARM
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire0"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	var/detecting = 1.0
 	var/working = 1.0
 	var/time = 10.0
@@ -804,9 +821,13 @@ FIRE ALARM
 	panel_open = 0
 	var/seclevel
 	circuit = /obj/item/weapon/circuitboard/firealarm
+	var/alarms_hidden = FALSE //If the alarms from this machine are visible on consoles
+
+/obj/machinery/firealarm/alarms_hidden
+	alarms_hidden = TRUE
 
 /obj/machinery/firealarm/update_icon()
-	overlays.Cut()
+	cut_overlays()
 
 	if(panel_open)
 		set_light(0)
@@ -821,16 +842,15 @@ FIRE ALARM
 	else
 		if(!detecting)
 			icon_state = "fire1"
-			set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
+			set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
 		else
 			icon_state = "fire0"
 			switch(seclevel)
-				if("green")	set_light(l_range = 2, l_power = 0.5, l_color = "#00ff00")
-				if("blue")	set_light(l_range = 2, l_power = 0.5, l_color = "#1024A9")
-				if("red")	set_light(l_range = 4, l_power = 2, l_color = "#ff0000")
-				if("delta")	set_light(l_range = 4, l_power = 2, l_color = "#FF6633")
-
-		overlays += image('icons/obj/monitors.dmi', "overlay_[seclevel]")
+				if("green")	set_light(l_range = 2, l_power = 0.25, l_color = "#00ff00")
+				if("blue")	set_light(l_range = 2, l_power = 0.25, l_color = "#1024A9")
+				if("red")	set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
+				if("delta")	set_light(l_range = 4, l_power = 0.9, l_color = "#FF6633")
+		add_overlay("overlay_[seclevel]")
 
 /obj/machinery/firealarm/fire_act(datum/gas_mixture/air, temperature, volume)
 	if(detecting)
@@ -972,7 +992,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.triggerAlarm(loc, FA, duration)
+		fire_alarm.triggerAlarm(loc, FA, duration, hidden = alarms_hidden)
 	update_icon()
 	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
@@ -983,6 +1003,7 @@ FIRE ALARM
 		update_icon()
 
 /obj/machinery/firealarm/initialize()
+	. = ..()
 	if(z in using_map.contact_levels)
 		set_security_level(security_level? get_security_level() : "green")
 

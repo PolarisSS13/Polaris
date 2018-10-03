@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/russian
 	name = "russian"
 	desc = "For the Motherland!"
+	tt_desc = "E Homo sapiens"
 	icon_state = "russianmelee"
 	icon_living = "russianmelee"
 	icon_dead = "russianmelee_dead"
@@ -30,7 +31,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	attacktext = "punched"
+	attacktext = list("punched")
 
 	min_oxy = 5
 	max_oxy = 0

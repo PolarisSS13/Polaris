@@ -16,7 +16,17 @@
 			stone
 			metal
 			solid
-			cult
+			ONLY WALLS
+				cult
+				hull
+				curvy
+				jaggy
+				brick
+				REINFORCEMENT
+					reinf_over
+					reinf_mesh
+					reinf_cult
+					reinf_metal
 		DOORS
 			stone
 			metal
@@ -99,6 +109,7 @@ var/list/name_to_material
 	var/conductivity = null      // How conductive the material is. Iron acts as the baseline, at 10.
 	var/list/composite_material  // If set, object matter var will be a list containing these values.
 	var/luminescence
+	var/radiation_resistance = 0 // Radiation resistance, which is added on top of a material's weight for blocking radiation. Needed to make lead special without superrobust weapons.
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
@@ -192,11 +203,16 @@ var/list/name_to_material
 	name = "placeholder"
 
 // Places a girder object when a wall is dismantled, also applies reinforced material.
-/material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material)
+/material/proc/place_dismantled_girder(var/turf/target, var/material/reinf_material, var/material/girder_material)
 	var/obj/structure/girder/G = new(target)
 	if(reinf_material)
 		G.reinf_material = reinf_material
 		G.reinforce_girder()
+	if(girder_material)
+		if(istype(girder_material, /material))
+			girder_material = girder_material.name
+		G.set_material(girder_material)
+
 
 // General wall debris product placement.
 // Not particularly necessary aside from snowflakey cult girders.
@@ -341,6 +357,7 @@ var/list/name_to_material
 	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
 	stack_type = /obj/item/stack/material/marble
 
+
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
@@ -350,6 +367,18 @@ var/list/name_to_material
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
+
+/material/steel/hull
+	name = MAT_STEELHULL
+	stack_type = /obj/item/stack/material/steel/hull
+	integrity = 250
+	explosion_resistance = 10
+	icon_base = "hull"
+	icon_reinf = "reinf_mesh"
+	icon_colour = "#666677"
+
+/material/steel/hull/place_sheet(var/turf/target) //Deconstructed into normal steel sheets.
+	new /obj/item/stack/material/steel(target)
 
 /material/diona
 	name = "biomass"
@@ -387,6 +416,18 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 2)
 	composite_material = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT, "platinum" = SHEET_MATERIAL_AMOUNT) //todo
 
+/material/plasteel/hull
+	name = MAT_PLASTEELHULL
+	stack_type = /obj/item/stack/material/plasteel/hull
+	integrity = 600
+	icon_base = "hull"
+	icon_reinf = "reinf_mesh"
+	icon_colour = "#777788"
+	explosion_resistance = 40
+
+/material/plasteel/hull/place_sheet(var/turf/target) //Deconstructed into normal plasteel sheets.
+	new /obj/item/stack/material/plasteel(target)
+
 // Very rare alloy that is reflective, should be used sparingly.
 /material/durasteel
 	name = "durasteel"
@@ -404,6 +445,14 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 8)
 	composite_material = list("plasteel" = SHEET_MATERIAL_AMOUNT, "diamond" = SHEET_MATERIAL_AMOUNT) //shrug
 
+/material/durasteel/hull //The 'Hardball' of starship hulls.
+	name = MAT_DURASTEELHULL
+	icon_base = "hull"
+	icon_reinf = "reinf_mesh"
+	icon_colour = "#45829a"
+	explosion_resistance = 90
+	reflectivity = 0.9
+
 /material/plasteel/titanium
 	name = "titanium"
 	stack_type = null
@@ -412,6 +461,12 @@ var/list/name_to_material
 	door_icon_base = "metal"
 	icon_colour = "#D1E6E3"
 	icon_reinf = "reinf_metal"
+
+/material/plasteel/titanium/hull
+	name = MAT_TITANIUMHULL
+	stack_type = null
+	icon_base = "hull"
+	icon_reinf = "reinf_mesh"
 
 /material/glass
 	name = "glass"
@@ -623,6 +678,16 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 
+/material/lead
+	name = "lead"
+	stack_type = /obj/item/stack/material/lead
+	icon_colour = "#273956"
+	weight = 23 // Lead is a bit more dense than silver IRL, and silver has 22 ingame.
+	conductivity = 10
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	radiation_resistance = 25 // Lead is Special and so gets to block more radiation than it normally would with just weight, totalling in 48 protection.
+
 // Adminspawn only, do not let anyone get this.
 /material/alienalloy
 	name = "alienalloy"
@@ -642,6 +707,25 @@ var/list/name_to_material
 	display_name = "elevator panelling"
 	icon_colour = "#666666"
 
+// Ditto.
+/material/alienalloy/dungeonium
+	name = "dungeonium"
+	display_name = "ultra-durable"
+	icon_base = "dungeon"
+	icon_colour = "#FFFFFF"
+
+/material/alienalloy/bedrock
+	name = "bedrock"
+	display_name = "impassable rock"
+	icon_base = "rock"
+	icon_colour = "#FFFFFF"
+
+/material/alienalloy/alium
+	name = "alium"
+	display_name = "alien"
+	icon_base = "alien"
+	icon_colour = "#FFFFFF"
+
 /material/resin
 	name = "resin"
 	icon_colour = "#35343a"
@@ -659,9 +743,9 @@ var/list/name_to_material
 
 
 /material/wood
-	name = "wood"
+	name = MAT_WOOD
 	stack_type = /obj/item/stack/material/wood
-	icon_colour = "#824B28"
+	icon_colour = "#9c5930"
 	integrity = 50
 	icon_base = "wood"
 	explosion_resistance = 2
@@ -680,6 +764,19 @@ var/list/name_to_material
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
 
+/material/wood/log
+	name = MAT_LOG
+	icon_base = "log"
+	stack_type = /obj/item/stack/material/log
+	sheet_singular_name = null
+	sheet_plural_name = "pile"
+
+/material/wood/log/sif
+	name = MAT_SIFLOG
+	icon_colour = "#0099cc" // Cyan-ish
+	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
+	stack_type = /obj/item/stack/material/log/sif
+
 /material/wood/holographic
 	name = "holowood"
 	display_name = "wood"
@@ -687,7 +784,7 @@ var/list/name_to_material
 	shard_type = SHARD_NONE
 
 /material/wood/sif
-	name = "alien wood"
+	name = MAT_SIFWOOD
 //	stack_type = /obj/item/stack/material/wood/sif
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2) // Alien wood would presumably be more interesting to the analyzer.
@@ -708,9 +805,10 @@ var/list/name_to_material
 	stack_origin_tech = list(TECH_MATERIAL = 1)
 	door_icon_base = "wood"
 	destruction_desc = "crumples"
+	radiation_resistance = 1
 
 /material/snow
-	name = "snow"
+	name = MAT_SNOW
 	stack_type = /obj/item/stack/material/snow
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
@@ -724,7 +822,26 @@ var/list/name_to_material
 	melting_point = T0C+1
 	destruction_desc = "crumples"
 	sheet_singular_name = "pile"
-	sheet_plural_name = "piles"
+	sheet_plural_name = "pile" //Just a bigger pile
+	radiation_resistance = 1
+
+/material/snowbrick //only slightly stronger than snow, used to make igloos mostly
+	name = "packed snow"
+	flags = MATERIAL_BRITTLE
+	stack_type = /obj/item/stack/material/snowbrick
+	icon_base = "stone"
+	icon_reinf = "reinf_stone"
+	icon_colour = "#D8FDFF"
+	integrity = 50
+	weight = 2
+	hardness = 2
+	protectiveness = 0 // 0%
+	stack_origin_tech = list(TECH_MATERIAL = 1)
+	melting_point = T0C+1
+	destruction_desc = "crumbles"
+	sheet_singular_name = "brick"
+	sheet_plural_name = "bricks"
+	radiation_resistance = 1
 
 /material/cloth //todo
 	name = "cloth"
@@ -746,7 +863,7 @@ var/list/name_to_material
 	sheet_plural_name = "bricks"
 
 /material/cult/place_dismantled_girder(var/turf/target)
-	new /obj/structure/girder/cult(target)
+	new /obj/structure/girder/cult(target, "cult")
 
 /material/cult/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/cleanable/blood(target)

@@ -33,7 +33,7 @@
 		.= res
 
 /proc/get_area_name(N) //get area by its name
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(A.name == N)
 			return A
 	return 0
@@ -264,7 +264,7 @@
 // then adds additional mobs or objects if they are in range 'smartly',
 // based on their presence in lists of players or registered objects
 // Type: 1-audio, 2-visual, 0-neither
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/type = 1)
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/type = 1, var/remote_ghosts = TRUE)
 	var/list/mobs = list()
 	var/list/objs = list()
 
@@ -274,10 +274,10 @@
 	for(var/thing in hear)
 		if(istype(thing,/obj))
 			objs += thing
-			hearturfs += get_turf(thing)
+			hearturfs |= get_turf(thing)
 		else if(istype(thing,/mob))
 			mobs += thing
-			hearturfs += get_turf(thing)
+			hearturfs |= get_turf(thing)
 
 	//A list of every mob with a client
 	for(var/mob in player_list)
@@ -289,7 +289,7 @@
 			continue
 
 		var/mob/M = mob
-		if(M && M.stat == DEAD && !M.forbid_seeing_deadchat)
+		if(M && M.stat == DEAD && remote_ghosts && !M.forbid_seeing_deadchat)
 			switch(type)
 				if(1) //Audio messages use ghost_ears
 					if(M.is_preference_enabled(/datum/client_preference/ghost_ears))
@@ -338,6 +338,23 @@ proc
 					return 0
 		return 1
 #undef SIGN
+
+/proc/flick_overlay(image/I, list/show_to, duration, gc_after)
+	for(var/client/C in show_to)
+		C.images += I
+	spawn(duration)
+		if(gc_after)
+			qdel(I)
+		for(var/client/C in show_to)
+			C.images -= I
+
+/proc/flick_overlay_view(image/I, atom/target, duration, gc_after) //wrapper for the above, flicks to everyone who can see the target atom
+	var/list/viewing = list()
+	for(var/m in viewers(target))
+		var/mob/M = m
+		if(M.client)
+			viewing += M.client
+	flick_overlay(I, viewing, duration, gc_after)
 
 proc/isInSight(var/atom/A, var/atom/B)
 	var/turf/Aturf = get_turf(A)
@@ -526,7 +543,7 @@ datum/projectile_data
 /proc/getOPressureDifferential(var/turf/loc)
 	var/minp=16777216;
 	var/maxp=0;
-	for(var/dir in cardinal)
+	for(var/dir in GLOB.cardinal)
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
@@ -547,7 +564,7 @@ datum/projectile_data
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)
-	for(var/dir in cardinal)
+	for(var/dir in GLOB.cardinal)
 		var/direction
 		switch(dir)
 			if(NORTH)

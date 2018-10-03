@@ -59,7 +59,7 @@
 	if(!..())
 		return 0
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	setClickCooldown(get_attack_speed())
 	A.attack_generic(src,rand(5,6),"bitten")
 
 /*
@@ -73,30 +73,43 @@
 	Animals
 */
 /mob/living/simple_animal/UnarmedAttack(var/atom/A, var/proximity)
-	if(!..())
+	if(!(. = ..()))
 		return
 
-	if(prob(spattack_prob))
-		if(spattack_min_range <= 1)
-			target_mob = A
-			SpecialAtkTarget()
-			target_mob = null
-			return
+	setClickCooldown(get_attack_speed())
 
-	if(melee_damage_upper == 0 && istype(A,/mob/living))
-		custom_emote(1,"[friendly] [A]!")
-		return
+	if(has_hands && istype(A,/obj) && a_intent != I_HURT)
+		var/obj/O = A
+		return O.attack_hand(src)
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(isliving(A))
-		target_mob = A
-		PunchTarget()
-		target_mob = null
-	else
-		A.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)
+	switch(a_intent)
+		if(I_HELP)
+			if(isliving(A))
+				custom_emote(1,"[pick(friendly)] [A]!")
+
+		if(I_HURT)
+			if(prob(spattack_prob))
+				if(spattack_min_range <= 1)
+					SpecialAtkTarget()
+
+
+			else if(melee_damage_upper == 0 && istype(A,/mob/living))
+				custom_emote(1,"[pick(friendly)] [A]!")
+
+
+			else
+				DoPunch(A)
+
+		if(I_GRAB)
+			if(has_hands)
+				A.attack_hand(src)
+
+		if(I_DISARM)
+			if(has_hands)
+				A.attack_hand(src)
 
 /mob/living/simple_animal/RangedAttack(var/atom/A)
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	setClickCooldown(get_attack_speed())
 	var/distance = get_dist(src, A)
 
 	if(prob(spattack_prob) && (distance >= spattack_min_range) && (distance <= spattack_max_range))

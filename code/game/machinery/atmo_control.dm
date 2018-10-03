@@ -56,7 +56,7 @@
 				signal.data["nitrogen"] = 0
 				signal.data["carbon_dioxide"] = 0
 		signal.data["sigtype"]="status"
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 /obj/machinery/air_sensor/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -64,12 +64,14 @@
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/air_sensor/initialize()
-	set_frequency(frequency)
+	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 
 obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
-	..()
+	. = ..()
 
 /obj/machinery/computer/general_air_control
 	icon_keyboard = "atmos_key"
@@ -115,7 +117,7 @@ obj/machinery/computer/general_air_control/Destroy()
 
 	data["sensors"] = sensors_ui
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmo_control.tmpl", name, 525, 600)
 		ui.set_initial_data(data)
@@ -128,7 +130,9 @@ obj/machinery/computer/general_air_control/Destroy()
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/computer/general_air_control/initialize()
-	set_frequency(frequency)
+	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 
 /obj/machinery/computer/general_air_control/large_tank_control
 	icon = 'icons/obj/computer.dmi'
@@ -170,7 +174,7 @@ obj/machinery/computer/general_air_control/Destroy()
 	data["input_flow_setting"] = round(input_flow_setting, 0.1)
 	data["pressure_setting"] = pressure_setting
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmo_control.tmpl", name, 660, 500)
 		ui.set_initial_data(data)
@@ -239,7 +243,7 @@ obj/machinery/computer/general_air_control/Destroy()
 		. = 1
 
 	signal.data["sigtype"]="command"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 /obj/machinery/computer/general_air_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
@@ -280,7 +284,7 @@ obj/machinery/computer/general_air_control/Destroy()
 	data["input_flow_setting"] = round(input_flow_setting, 0.1)
 	data["pressure_setting"] = pressure_setting
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmo_control.tmpl", name, 650, 500)
 		ui.set_initial_data(data)
@@ -349,7 +353,7 @@ obj/machinery/computer/general_air_control/Destroy()
 		. = 1
 
 	signal.data["sigtype"]="command"
-	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 /obj/machinery/computer/general_air_control/fuel_injection
 	icon = 'icons/obj/computer.dmi'
@@ -386,7 +390,7 @@ obj/machinery/computer/general_air_control/Destroy()
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	..()
 
@@ -412,7 +416,7 @@ obj/machinery/computer/general_air_control/Destroy()
 	else
 		data["device_info"] = null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmo_control.tmpl", name, 650, 500)
 		ui.set_initial_data(data)
@@ -446,7 +450,7 @@ obj/machinery/computer/general_air_control/Destroy()
 			"status" = 1,
 			"sigtype"="command"
 		)
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	if(href_list["toggle_automation"])
 		automation = !automation
@@ -465,7 +469,7 @@ obj/machinery/computer/general_air_control/Destroy()
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	if(href_list["injection"])
 		if(!radio_connection)
@@ -480,4 +484,4 @@ obj/machinery/computer/general_air_control/Destroy()
 			"sigtype"="command"
 		)
 
-		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
+		radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)

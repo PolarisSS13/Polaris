@@ -12,6 +12,9 @@ var/datum/planet/sif/planet_sif = null
 //	expected_z_levels = list(1) // To be changed when real map is finished.
 	planetary_wall_type = /turf/unsimulated/wall/planetary/sif
 
+	sun_name = "Vir"
+	moon_name = "Thor"
+
 /datum/planet/sif/New()
 	..()
 	planet_sif = src
@@ -131,7 +134,7 @@ var/datum/planet/sif/planet_sif = null
 		WEATHER_HAIL		= 2.5
 		)
 
-datum/weather/sif
+/datum/weather/sif
 	name = "sif base"
 	temp_high = 283.15	// 10c
 	temp_low = 263.15	// -10c
@@ -142,6 +145,13 @@ datum/weather/sif
 		WEATHER_CLEAR = 60,
 		WEATHER_OVERCAST = 40
 		)
+	transition_messages = list(
+		"The sky clears up.",
+		"The sky is visible.",
+		"The weather is calm."
+		)
+	sky_visible = TRUE
+	observed_message = "The sky is clear."
 
 /datum/weather/sif/overcast
 	name = "overcast"
@@ -153,6 +163,12 @@ datum/weather/sif
 		WEATHER_SNOW = 5,
 		WEATHER_RAIN = 5,
 		WEATHER_HAIL = 5
+		)
+	observed_message = "It is overcast, all you can see are clouds."
+	transition_messages = list(
+		"All you can see above are clouds.",
+		"Clouds cut off your view of the sky.",
+		"It's very cloudy."
 		)
 
 /datum/weather/sif/light_snow
@@ -167,6 +183,11 @@ datum/weather/sif
 		WEATHER_SNOW = 25,
 		WEATHER_HAIL = 5
 		)
+	observed_message = "It is snowing lightly."
+	transition_messages = list(
+		"Small snowflakes begin to fall from above.",
+		"It begins to snow lightly.",
+		)
 
 /datum/weather/sif/snow
 	name = "moderate snow"
@@ -174,6 +195,7 @@ datum/weather/sif
 	temp_high = T0C		// 0c
 	temp_low = 243.15	// -30c
 	light_modifier = 0.5
+	flight_failure_modifier = 5
 	transition_chances = list(
 		WEATHER_LIGHT_SNOW = 20,
 		WEATHER_SNOW = 50,
@@ -181,9 +203,15 @@ datum/weather/sif
 		WEATHER_HAIL = 5,
 		WEATHER_OVERCAST = 5
 		)
+	observed_message = "It is snowing."
+	transition_messages = list(
+		"It's starting to snow.",
+		"The air feels much colder as snowflakes fall from above."
+	)
 
 /datum/weather/sif/snow/process_effects()
-	for(var/turf/simulated/floor/outdoors/snow/S in outdoor_turfs)
+	..()
+	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
@@ -194,18 +222,25 @@ datum/weather/sif
 /datum/weather/sif/blizzard
 	name = "blizzard"
 	icon_state = "snowfall_heavy"
-	temp_high = 233.15 // -40c
-	temp_low = 213.15  // -60c
+	temp_high = 243.15 // -30c
+	temp_low = 233.15  // -40c
 	light_modifier = 0.3
+	flight_failure_modifier = 10
 	transition_chances = list(
 		WEATHER_SNOW = 45,
 		WEATHER_BLIZZARD = 40,
 		WEATHER_HAIL = 10,
 		WEATHER_OVERCAST = 5
 		)
+	observed_message = "A blizzard blows snow everywhere."
+	transition_messages = list(
+		"Strong winds howl around you as a blizzard appears.",
+		"It starts snowing heavily, and it feels extremly cold now."
+	)
 
 /datum/weather/sif/blizzard/process_effects()
-	for(var/turf/simulated/floor/outdoors/snow/S in outdoor_turfs)
+	..()
+	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
@@ -217,6 +252,8 @@ datum/weather/sif
 	name = "rain"
 	icon_state = "rain"
 	light_modifier = 0.5
+	effect_message = "<span class='warning'>Rain falls on you.</span>"
+
 	transition_chances = list(
 		WEATHER_OVERCAST = 25,
 		WEATHER_LIGHT_SNOW = 10,
@@ -224,23 +261,57 @@ datum/weather/sif
 		WEATHER_STORM = 10,
 		WEATHER_HAIL = 5
 		)
+	observed_message = "It is raining."
+	transition_messages = list(
+		"The sky is dark, and rain falls down upon you."
+	)
 
 /datum/weather/sif/rain/process_effects()
+	..()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
-				return // They're indoors, so no need to rain on them.
+				continue // They're indoors, so no need to rain on them.
 
-			L.adjust_fire_stacks(-5)
-			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
+			// If they have an open umbrella, it'll guard from rain
+			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
+					continue
+			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
+					continue
+
+			L.water_act(1)
+			if(show_message)
+				to_chat(L, effect_message)
 
 /datum/weather/sif/storm
 	name = "storm"
 	icon_state = "storm"
 	temp_high = 243.15 // -30c
-	temp_low = 233.15  // -50c
+	temp_low = 233.15  // -40c
 	light_modifier = 0.3
+	flight_failure_modifier = 10
+	effect_message = "<span class='warning'>Rain falls on you, drenching you in water.</span>"
+
+	var/next_lightning_strike = 0 // world.time when lightning will strike.
+	var/min_lightning_cooldown = 5 SECONDS
+	var/max_lightning_cooldown = 1 MINUTE
+	observed_message = "An intense storm pours down over the region."
+	transition_messages = list(
+		"You feel intense winds hit you as the weather takes a turn for the worst.",
+		"Loud thunder is heard in the distance.",
+		"A bright flash heralds the approach of a storm."
+	)
+
+
 	transition_chances = list(
 		WEATHER_RAIN = 45,
 		WEATHER_STORM = 40,
@@ -248,15 +319,60 @@ datum/weather/sif
 		WEATHER_OVERCAST = 5
 		)
 
-/datum/weather/sif/rain/process_effects()
+/datum/weather/sif/storm/process_effects()
+	..()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
-				return // They're indoors, so no need to rain on them.
+				continue // They're indoors, so no need to rain on them.
 
-			L.adjust_fire_stacks(-10)
-			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
+			// Lazy wind code
+			if(prob(10))
+				if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+					var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+					if(U.open)
+						to_chat(L, "<span class='danger'>You struggle to keep hold of your umbrella!</span>")
+						L.Stun(20)	// This is not nearly as long as it seems
+						playsound(L, 'sound/effects/rustle1.ogg', 100, 1)	// Closest sound I've got to "Umbrella in the wind"
+				else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+					var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+					if(U.open)
+						to_chat(L, "<span class='danger'>A gust of wind yanks the umbrella from your hand!</span>")
+						playsound(L, 'sound/effects/rustle1.ogg', 100, 1)
+						L.drop_from_inventory(U)
+						U.toggle_umbrella()
+						U.throw_at(get_edge_target_turf(U, pick(alldirs)), 8, 1, L)
+
+			// If they have an open umbrella, it'll guard from rain
+			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(L, "<span class='notice'>Rain showers loudly onto your umbrella!</span>")
+					continue
+			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(L, "<span class='notice'>Rain showers loudly onto your umbrella!</span>")
+					continue
+
+
+			L.water_act(2)
+			if(show_message)
+				to_chat(L, effect_message)
+
+	handle_lightning()
+
+// This gets called to do lightning periodically.
+// There is a seperate function to do the actual lightning strike, so that badmins can play with it.
+/datum/weather/sif/storm/proc/handle_lightning()
+	if(world.time < next_lightning_strike)
+		return // It's too soon to strike again.
+	next_lightning_strike = world.time + rand(min_lightning_cooldown, max_lightning_cooldown)
+	var/turf/T = pick(holder.our_planet.planet_floors) // This has the chance to 'strike' the sky, but that might be a good thing, to scare reckless pilots.
+	lightning_strike(T)
 
 /datum/weather/sif/hail
 	name = "hail"
@@ -264,37 +380,70 @@ datum/weather/sif
 	temp_high = T0C		// 0c
 	temp_low = 243.15	// -30c
 	light_modifier = 0.3
+	flight_failure_modifier = 15
+	timer_low_bound = 2
+	timer_high_bound = 5
+	effect_message = "<span class='warning'>The hail smacks into you!</span>"
+
 	transition_chances = list(
 		WEATHER_RAIN = 45,
-		WEATHER_STORM = 10,
-		WEATHER_HAIL = 40,
+		WEATHER_STORM = 40,
+		WEATHER_HAIL = 10,
 		WEATHER_OVERCAST = 5
 		)
+	observed_message = "Ice is falling from the sky."
+	transition_messages = list(
+		"Ice begins to fall from the sky.",
+		"It begins to hail.",
+		"An intense chill is felt, and chunks of ice start to fall from the sky, towards you."
+	)
 
 /datum/weather/sif/hail/process_effects()
-	for(var/mob/living/L in living_mob_list)
-		if(L.z in holder.our_planet.expected_z_levels)
-			var/turf/T = get_turf(L)
+	..()
+	for(var/mob/living/carbon/human/H in living_mob_list)
+		if(H.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(H)
 			if(!T.outdoors)
-				return // They're indoors, so no need to pelt them with ice.
+				continue // They're indoors, so no need to pelt them with ice.
+
+			// If they have an open umbrella, it'll guard from rain
+			// Message plays every time the umbrella gets stolen, just so they're especially aware of what's happening
+			if(istype(H.get_active_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					continue
+			else if(istype(H.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+				var/obj/item/weapon/melee/umbrella/U = H.get_inactive_hand()
+				if(U.open)
+					if(show_message)
+						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					continue
 
 			var/target_zone = pick(BP_ALL)
-			var/amount_blocked = L.run_armor_check(target_zone, "melee")
-			var/amount_soaked = L.get_armor_soak(target_zone, "melee")
+			var/amount_blocked = H.run_armor_check(target_zone, "melee")
+			var/amount_soaked = H.get_armor_soak(target_zone, "melee")
 
 			if(amount_blocked >= 100)
-				return // No need to apply damage.
+				continue // No need to apply damage.
 
 			if(amount_soaked >= 10)
-				return // No need to apply damage.
+				continue // No need to apply damage.
 
-			L.apply_damage(rand(5, 10), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
-			to_chat(L, "<span class='warning'>The hail raining down on you [L.can_feel_pain() ? "hurts" : "damages you"]!</span>")
+			H.apply_damage(rand(1, 3), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
+			if(show_message)
+				to_chat(H, effect_message)
 
 /datum/weather/sif/blood_moon
 	name = "blood moon"
 	light_modifier = 0.5
 	light_color = "#FF0000"
+	flight_failure_modifier = 25
 	transition_chances = list(
 		WEATHER_BLOODMOON = 100
 		)
+	observed_message = "Everything is red. Something really wrong is going on."
+	transition_messages = list(
+		"The sky turns blood red!"
+	)

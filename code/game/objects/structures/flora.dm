@@ -1,78 +1,6 @@
-//trees
-/obj/structure/flora/tree
-	name = "tree"
-	anchored = 1
-	density = 1
-	pixel_x = -16
-	layer = MOB_LAYER // You know what, let's play it safe.
-
-/obj/structure/flora/tree/pine
-	name = "pine tree"
-	icon = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_1"
-
-/obj/structure/flora/tree/pine/New()
-	..()
-	icon_state = "pine_[rand(1, 3)]"
-
-/obj/structure/flora/tree/pine/xmas
-	name = "xmas tree"
-	icon = 'icons/obj/flora/pinetrees.dmi'
-	icon_state = "pine_c"
-
-/obj/structure/flora/tree/pine/xmas/New()
-	..()
-	icon_state = "pine_c"
-
-/obj/structure/flora/tree/dead
-	icon = 'icons/obj/flora/deadtrees.dmi'
-	icon_state = "tree_1"
-
-/obj/structure/flora/tree/dead/New()
-	..()
-	icon_state = "tree_[rand(1, 6)]"
-
-/obj/structure/flora/tree/sif
-	name = "glowing tree"
-	desc = "It's a tree, except this one seems quite alien.  It glows a deep blue."
-	icon = 'icons/obj/flora/deadtrees.dmi'
-	icon_state = "tree_sif"
-
-/obj/structure/flora/tree/sif/New()
-	update_icon()
-
-/obj/structure/flora/tree/sif/update_icon()
-	set_light(5, 1, "#33ccff")
-	overlays.Cut()
-	overlays.Add(image(icon = 'icons/obj/flora/deadtrees.dmi', icon_state = "[icon_state]_glow", layer = LIGHTING_LAYER + 0.1))
-
-//grass
-/obj/structure/flora/grass
-	name = "grass"
-	icon = 'icons/obj/flora/snowflora.dmi'
-	anchored = 1
-
-/obj/structure/flora/grass/brown
-	icon_state = "snowgrass1bb"
-
-/obj/structure/flora/grass/brown/New()
-	..()
-	icon_state = "snowgrass[rand(1, 3)]bb"
 
 
-/obj/structure/flora/grass/green
-	icon_state = "snowgrass1gb"
 
-/obj/structure/flora/grass/green/New()
-	..()
-	icon_state = "snowgrass[rand(1, 3)]gb"
-
-/obj/structure/flora/grass/both
-	icon_state = "snowgrassall1"
-
-/obj/structure/flora/grass/both/New()
-	..()
-	icon_state = "snowgrassall[rand(1, 3)]"
 
 
 //bushes
@@ -212,7 +140,7 @@
 
 /obj/structure/flora/skeleton
 	name = "hanging skeleton model"
-	icon = 'icons/obj/plants.dmi'
+	icon = 'icons/obj/plants.dmi' //what an interesting plant
 	icon_state = "hangskele"
 	desc = "It's an anatomical model of a human skeletal system made of plaster."
 
@@ -268,11 +196,13 @@
 	name = "unusual potted plant"
 	desc = "This is an unusual plant. It's bulbous ends emit a soft blue light."
 	icon_state = "plant-09"
-	set_light(l_range = 1, l_power = 0.5, l_color = "#0000FF")
+	light_range = 2
+	light_power = 0.6
+	light_color = "#33CCFF"
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
-	desc = "This is a rather oriental style tree. It's flowers are bright pink."
+	desc = "This is a rather oriental style tree. Its flowers are bright pink."
 	icon_state = "plant-10"
 
 /obj/structure/flora/pottedplant/smallcactus
@@ -286,7 +216,7 @@
 	icon_state = "plant-12"
 
 /obj/structure/flora/pottedplant/sticky
-	name = "styicky potted plant"
+	name = "sticky potted plant"
 	desc = "This is an odd plant. Its sticky leaves trap insects."
 	icon_state = "plant-13"
 
@@ -324,7 +254,9 @@
 	name = "subterranean potted plant"
 	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
 	icon_state = "plant-20"
-	set_light(l_range = 1, l_power = 0.5, l_color = "#FF6633")
+	light_range = 2
+	light_power = 0.6
+	light_color = "#FF6633"
 
 /obj/structure/flora/pottedplant/minitree
 	name = "potted tree"
@@ -360,3 +292,27 @@
 	name = "small christmas tree"
 	desc = "This is a tiny well lit decorative christmas tree."
 	icon_state = "plant-xmas"
+
+/obj/structure/flora/sif
+	icon = 'icons/obj/flora/sifflora.dmi'
+
+/obj/structure/flora/sif/subterranean
+	name = "subterranean plant"
+	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
+	icon_state = "glowplant"
+	light_range = 2
+	light_power = 0.6
+	light_color = "#FF6633"
+
+/obj/structure/flora/sif/subterranean/initialize()
+	icon_state = "[initial(icon_state)][rand(1,2)]"
+	. = ..()
+
+/obj/structure/flora/sif/eyes
+	name = "mysterious bulbs"
+	desc = "This is a mysterious looking plant. They kind of look like eyeballs. Creepy."
+	icon_state = "eyeplant"
+
+/obj/structure/flora/sif/eyes/initialize()
+	icon_state = "[initial(icon_state)][rand(1,3)]"
+	. = ..()

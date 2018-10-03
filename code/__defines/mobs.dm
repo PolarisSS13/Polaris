@@ -9,7 +9,8 @@
 #define CANPARALYSE 0x4
 #define CANPUSH     0x8
 #define LEAPING     0x10
-#define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define HIDING      0x20
+#define PASSEMOTES  0x40    // Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define DISFIGURED  0x4000  // Set but never checked. Remove this sometime and replace occurences with the appropriate organ code
@@ -34,8 +35,9 @@
 #define STANCE_FOLLOW    6	// Following somone
 #define STANCE_BUSY      7	// Do nothing on life ticks (Other code is running)
 
-#define LEFT  1
-#define RIGHT 2
+#define LEFT  0x1
+#define RIGHT 0x2
+#define UNDER 0x4
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0 // So !M.pulse checks would be possible.
@@ -97,18 +99,27 @@
 #define INV_R_HAND_DEF_ICON 'icons/mob/items/righthand.dmi'
 #define INV_W_UNIFORM_DEF_ICON 'icons/mob/uniform.dmi'
 #define INV_ACCESSORIES_DEF_ICON 'icons/mob/ties.dmi'
-#define INV_SUIT_DEF_ICON 'icons/mob/ties.dmi'
+#define INV_TIE_DEF_ICON 'icons/mob/ties.dmi'
 #define INV_SUIT_DEF_ICON 'icons/mob/suit.dmi'
-#define MAX_SUPPLIED_LAW_NUMBER 50
+#define INV_SPACESUIT_DEF_ICON 'icons/mob/spacesuit.dmi'
+#define INV_WEAR_ID_DEF_ICON 'icons/mob/mob.dmi'
+#define INV_GLOVES_DEF_ICON 'icons/mob/hands.dmi'
+#define INV_EYES_DEF_ICON 'icons/mob/eyes.dmi'
+#define INV_EARS_DEF_ICON 'icons/mob/ears.dmi'
+#define INV_FEET_DEF_ICON 'icons/mob/feet.dmi'
+#define INV_BELT_DEF_ICON 'icons/mob/belt.dmi'
+#define INV_MASK_DEF_ICON 'icons/mob/mask.dmi'
+#define INV_HCUFF_DEF_ICON 'icons/mob/mob.dmi'
+#define INV_LCUFF_DEF_ICON 'icons/mob/mob.dmi'
 
-// NT's alignment towards the character
-#define COMPANY_LOYAL 			"Loyal"
-#define COMPANY_SUPPORTATIVE	"Supportive"
-#define COMPANY_NEUTRAL 		"Neutral"
-#define COMPANY_SKEPTICAL		"Skeptical"
-#define COMPANY_OPPOSED			"Opposed"
+// Character's economic class
+#define CLASS_UPPER 		"Wealthy"
+#define CLASS_UPMID			"Well-off"
+#define CLASS_MIDDLE 		"Average"
+#define CLASS_LOWMID		"Underpaid"
+#define CLASS_LOWER			"Poor"
 
-#define COMPANY_ALIGNMENTS		list(COMPANY_LOYAL,COMPANY_SUPPORTATIVE,COMPANY_NEUTRAL,COMPANY_SKEPTICAL,COMPANY_OPPOSED)
+#define ECONOMIC_CLASS		list(CLASS_UPPER,CLASS_UPMID,CLASS_MIDDLE,CLASS_LOWMID,CLASS_LOWER)
 
 
 // Defines mob sizes, used by lockers and to determine what is considered a small sized mob, etc.
@@ -124,10 +135,12 @@
 #define TINT_HEAVY 2
 #define TINT_BLIND 3
 
+#define FLASH_PROTECTION_VULNERABLE -2
 #define FLASH_PROTECTION_REDUCED -1
 #define FLASH_PROTECTION_NONE 0
 #define FLASH_PROTECTION_MODERATE 1
 #define FLASH_PROTECTION_MAJOR 2
+
 #define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
 
@@ -155,7 +168,6 @@
 #define MODIFIER_GENETIC	1	// Modifiers with this flag will be copied to mobs who get cloned.
 
 // Bodyparts and organs.
-#define O_MOUTH    "mouth"
 #define O_EYES     "eyes"
 #define O_HEART    "heart"
 #define O_LUNGS    "lungs"
@@ -163,6 +175,12 @@
 #define O_LIVER    "liver"
 #define O_KIDNEYS  "kidneys"
 #define O_APPENDIX "appendix"
+#define O_VOICE    "voicebox"
+#define O_STANDARD list(O_EYES, O_HEART, O_LUNGS, O_BRAIN, O_LIVER, O_KIDNEYS, O_APPENDIX, O_VOICE)
+
+// Non-Standard organs
+#define O_MOUTH    "mouth"
+#define O_CELL     "cell"
 #define O_PLASMA   "plasma vessel"
 #define O_HIVE     "hive node"
 #define O_NUTRIENT "nutrient vessel"
@@ -174,7 +192,9 @@
 #define O_ACID     "acid gland"
 #define O_EGG      "egg sac"
 #define O_RESIN    "resin spinner"
+#define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_ACID, O_EGG, O_RESIN)
 
+// External organs, aka limbs
 #define BP_L_FOOT "l_foot"
 #define BP_R_FOOT "r_foot"
 #define BP_L_LEG  "l_leg"
@@ -214,6 +234,45 @@
 #define FBP_POSI	"Positronic"
 #define FBP_DRONE	"Drone"
 
+// 'Regular' species.
+#define SPECIES_HUMAN			"Human"
+#define SPECIES_HUMAN_VATBORN	"Vatborn"
+#define SPECIES_UNATHI			"Unathi"
+#define SPECIES_SKRELL			"Skrell"
+#define SPECIES_TESHARI			"Teshari"
+#define SPECIES_TAJ				"Tajara"
+#define SPECIES_PROMETHEAN		"Promethean"
+#define SPECIES_DIONA			"Diona"
+#define SPECIES_VOX				"Vox"
+
+// Monkey and alien monkeys.
+#define SPECIES_MONKEY			"Monkey"
+#define SPECIES_MONKEY_TAJ		"Farwa"
+#define SPECIES_MONKEY_SKRELL	"Neaera"
+#define SPECIES_MONKEY_UNATHI	"Stok"
+
+// Virtual Reality IDs.
+#define SPECIES_VR				"Virtual Reality Avatar"
+#define SPECIES_VR_HUMAN		"Virtual Reality Human"
+#define SPECIES_VR_UNATHI		"Virtual Reality Unathi"
+#define SPECIES_VR_TAJ			"Virtual Reality Tajara" // NO CHANGING.
+#define SPECIES_VR_SKRELL		"Virtual Reality Skrell"
+#define SPECIES_VR_TESHARI		"Virtual Reality Teshari"
+#define SPECIES_VR_DIONA		"Virtual Reality Diona"
+
+// Ayyy IDs.
+#define SPECIES_XENO			"Xenomorph"
+#define SPECIES_XENO_DRONE		"Xenomorph Drone"
+#define SPECIES_XENO_HUNTER		"Xenomorph Hunter"
+#define SPECIES_XENO_SENTINEL	"Xenomorph Sentinel"
+#define SPECIES_XENO_QUEEN		"Xenomorph Queen"
+
+// Misc species. Mostly unused but might as well be complete.
+#define SPECIES_SHADOW			"Shadow"
+#define SPECIES_SKELETON		"Skeleton"
+#define SPECIES_GOLEM			"Golem"
+#define SPECIES_EVENT1			"X Occursus"
+
 // Used to seperate simple animals by ""intelligence"".
 #define SA_PLANT	1
 #define SA_ANIMAL	2
@@ -224,3 +283,60 @@
 #define SLIME_COMMAND_OBEY		1 // When disciplined.
 #define SLIME_COMMAND_FACTION	2 // When in the same 'faction'.
 #define SLIME_COMMAND_FRIEND	3 // When befriended with a slime friendship agent.
+
+//Vision flags, for dealing with plane visibility
+#define VIS_FULLBRIGHT		1
+#define VIS_LIGHTING		2
+#define VIS_GHOSTS			3
+#define VIS_AI_EYE			4
+
+#define VIS_CH_STATUS		5
+#define VIS_CH_HEALTH		6
+#define VIS_CH_LIFE			7
+#define VIS_CH_ID			8
+#define VIS_CH_WANTED		9
+#define VIS_CH_IMPLOYAL		10
+#define VIS_CH_IMPTRACK		11
+#define VIS_CH_IMPCHEM		12
+#define VIS_CH_SPECIAL		13
+#define VIS_CH_STATUS_OOC	14
+
+#define VIS_ADMIN1			15
+#define VIS_ADMIN2			16
+#define VIS_ADMIN3			17
+
+#define VIS_MESONS			18
+
+#define VIS_TURFS			19
+#define VIS_OBJS			20
+#define VIS_MOBS			21
+
+#define VIS_COUNT			21 //Must be highest number from above.
+
+//Some mob icon layering defines
+#define BODY_LAYER		-100
+
+// Clothing flags, organized in roughly top-bottom
+#define EXAMINE_SKIPHELMET			0x0001
+#define EXAMINE_SKIPEARS			0x0002
+#define EXAMINE_SKIPEYEWEAR			0x0004
+#define EXAMINE_SKIPMASK			0x0008
+#define EXAMINE_SKIPJUMPSUIT		0x0010
+#define EXAMINE_SKIPTIE				0x0020
+#define EXAMINE_SKIPHOLSTER			0x0040
+#define EXAMINE_SKIPSUITSTORAGE		0x0080
+#define EXAMINE_SKIPBACKPACK		0x0100
+#define EXAMINE_SKIPGLOVES			0x0200
+#define EXAMINE_SKIPBELT			0x0400
+#define EXAMINE_SKIPSHOES			0x0800
+
+// Body flags
+#define EXAMINE_SKIPHEAD			0x0001
+#define EXAMINE_SKIPEYES			0x0002
+#define EXAMINE_SKIPFACE			0x0004
+#define EXAMINE_SKIPBODY			0x0008
+#define EXAMINE_SKIPGROIN			0x0010
+#define EXAMINE_SKIPARMS			0x0020
+#define EXAMINE_SKIPHANDS			0x0040
+#define EXAMINE_SKIPLEGS			0x0080
+#define EXAMINE_SKIPFEET			0x0100

@@ -4,11 +4,24 @@
 	icon_state = "workboots"
 	force = 3
 	can_hold_knife = 1
+	step_volume_mod = 1.2
 
 /obj/item/clothing/shoes/boots/cowboy
 	name = "cowboy boots"
 	desc = "Lacking a durasteel horse to ride."
 	icon_state = "cowboy"
+
+/obj/item/clothing/shoes/boots/cowboy/classic
+	name = "classic cowboy boots"
+	desc = "A classic looking pair of durable cowboy boots."
+	icon_state = "cowboy_classic"
+	item_state_slots = list(slot_r_hand_str = "leather", slot_l_hand_str = "leather")
+
+/obj/item/clothing/shoes/boots/cowboy/snakeskin
+	name = "snakeskin cowboy boots"
+	desc = "A pair of cowboy boots made from python skin."
+	icon_state = "cowboy_snakeskin"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
 
 /obj/item/clothing/shoes/boots/jackboots
 	name = "jackboots"
@@ -42,10 +55,12 @@
 	name = "winter boots"
 	desc = "Boots lined with 'synthetic' animal fur."
 	icon_state = "winterboots"
-	cold_protection = FEET|LEGS
+	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET|LEGS
+	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	snow_speed = -1
+	step_volume_mod = 0.8
 
 /obj/item/clothing/shoes/boots/winter/security
 	name = "security winter boots"
@@ -92,6 +107,12 @@
 	name = "hydroponics winter boots"
 	desc = "A pair of winter boots. These ones are lined with brown fur, and their trim is ambrosia green"
 	icon_state = "winterboots_hydro"
+
+/obj/item/clothing/shoes/boots/winter/explorer
+	name = "explorer winter boots"
+	desc = "Steel-toed winter boots for mining or exploration in hazardous environments. Very good at keeping toes warm and uncrushed."
+	icon_state = "explorer"
+	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 
 /obj/item/clothing/shoes/boots/tactical
 	name = "tactical boots"

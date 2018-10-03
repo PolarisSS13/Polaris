@@ -4,7 +4,7 @@
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
-// Invisibility constants.
+// Invisibility constants. These should only be used for TRUE invisibility, AKA nothing living players touch
 #define INVISIBILITY_LIGHTING             20
 #define INVISIBILITY_LEVEL_ONE            35
 #define INVISIBILITY_LEVEL_TWO            45
@@ -20,6 +20,12 @@
 
 #define SEE_INVISIBLE_MINIMUM 5
 #define INVISIBILITY_MAXIMUM 100
+
+// Pseudo-Invis, like Ninja, Ling, Etc.
+#define EFFECTIVE_INVIS					  50		// Below this, can't be examined, may as well be invisible to the game
+
+// For the client FPS pref and anywhere else
+#define MAX_CLIENT_FPS	200
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
@@ -121,14 +127,6 @@
 //Area flags, possibly more to come
 #define RAD_SHIELDED 1 //shielded from radiation, clearly
 
-// Custom layer definitions, supplementing the default TURF_LAYER, MOB_LAYER, etc.
-#define DOOR_OPEN_LAYER 2.7		//Under all objects if opened. 2.7 due to tables being at 2.6
-#define DOOR_CLOSED_LAYER 3.1	//Above most items if closed
-#define LIGHTING_LAYER 11
-#define HUD_LAYER 20			//Above lighting, but below obfuscation. For in-game HUD effects (whereas SCREEN_LAYER is for abstract/OOC things like inventory slots)
-#define OBFUSCATION_LAYER 21	//Where images covering the view for eyes are put
-#define SCREEN_LAYER 22			//Mob HUD/effects layer
-
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
 #ifndef CUSTOM_ITEM_OBJ
@@ -154,6 +152,17 @@
 #define MAT_TITANIUM		"titanium"
 #define MAT_PHORON			"phoron"
 #define MAT_DIAMOND			"diamond"
+#define MAT_SNOW			"snow"
+#define MAT_WOOD			"wood"
+#define MAT_LOG				"log"
+#define MAT_SIFWOOD			"alien wood"
+#define MAT_SIFLOG			"alien log"
+#define MAT_STEELHULL		"steel hull"
+#define MAT_PLASTEEL		"plasteel"
+#define MAT_PLASTEELHULL	"plasteel hull"
+#define MAT_DURASTEEL		"durasteel"
+#define MAT_DURASTEELHULL	"durasteel hull"
+#define MAT_TITANIUMHULL	"titanium hull"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
@@ -222,3 +231,59 @@
 #define MAP_MAXX 4
 #define MAP_MAXY 5
 #define MAP_MAXZ 6
+
+// /atom/proc/use_check flags
+#define USE_ALLOW_NONLIVING 1
+#define USE_ALLOW_NON_ADV_TOOL_USR 2
+#define USE_ALLOW_DEAD 4
+#define USE_ALLOW_INCAPACITATED 8
+#define USE_ALLOW_NON_ADJACENT 16
+#define USE_FORCE_SRC_IN_USER 32
+#define USE_DISALLOW_SILICONS 64
+
+#define USE_SUCCESS 0
+#define USE_FAIL_NON_ADJACENT 1
+#define USE_FAIL_NONLIVING 2
+#define USE_FAIL_NON_ADV_TOOL_USR 3
+#define USE_FAIL_DEAD 4
+#define USE_FAIL_INCAPACITATED 5
+#define USE_FAIL_NOT_IN_USER 6
+#define USE_FAIL_IS_SILICON 7
+
+// This creates a consistant definition for creating global lists, automatically inserting objects into it when they are created, and removing them when deleted.
+// It is very good for removing the 'in world' junk that exists in the codebase painlessly.
+// First argument is the list name/path desired, e.g. 'all_candles' would be 'var/list/all_candles = list()'.
+// Second argument is the path the list is expected to contain. Note that children will also get added to the global list.
+// If the GLOB system is ever ported, you can change this macro in one place and have less work to do than you otherwise would.
+#define GLOBAL_LIST_BOILERPLATE(LIST_NAME, PATH)\
+var/global/list/##LIST_NAME = list();\
+##PATH/initialize(mapload, ...)\
+	{\
+	##LIST_NAME += src;\
+	return ..();\
+	}\
+##PATH/Destroy(force, ...)\
+	{\
+	##LIST_NAME -= src;\
+	return ..();\
+	}\
+
+//'Normal'ness						 v								 v								 v
+//Various types of colorblindness	R2R		R2G		R2B		G2R		G2G		G2B		B2R		B2G		B2B
+#define MATRIX_Monochromia 		list(0.33,	0.33,	0.33,	0.59,	0.59,	0.59,	0.11,	0.11,	0.11)
+#define MATRIX_Protanopia 		list(0.57,	0.43, 	0,		0.56, 	0.44, 	0, 		0, 		0.24,	0.76)
+#define MATRIX_Protanomaly 		list(0.82,	0.18, 	0,		0.33,	0.67, 	0, 		0, 		0.13,	0.88)
+#define MATRIX_Deuteranopia 	list(0.63,	0.38, 	0,		0.70, 	0.30, 	0, 		0, 		0.30, 	0.70)
+#define MATRIX_Deuteranomaly 	list(0.80, 	0.20, 	0,		0.26,	0.74,	0, 		0, 		0.14,	0.86)
+#define MATRIX_Tritanopia 		list(0.95, 	0.05, 	0,		0,		0.43, 	0.57,	0, 		0.48, 	0.53)
+#define MATRIX_Tritanomaly 		list(0.97,	0.03, 	0,		0,		0.73, 	0.27,	0, 		0.18,	0.82)
+#define MATRIX_Achromatopsia 	list(0.30,	0.59, 	0.11, 	0.30, 	0.59, 	0.11, 	0.30, 	0.59, 	0.11)
+#define MATRIX_Achromatomaly 	list(0.62,	0.32, 	0.06, 	0.16, 	0.78, 	0.06, 	0.16, 	0.32, 	0.52)
+#define MATRIX_Vulp_Colorblind 	list(0.50,	0.40,	0.10,	0.50,	0.40,	0.10,	0,		0.20,	0.80)
+#define MATRIX_Taj_Colorblind 	list(0.40,	0.20,	0.40,	0.40,	0.60,	0,		0.20,	0.20,	0.60)
+
+// Tool substitution defines
+#define IS_SCREWDRIVER		"screwdriver"
+#define IS_CROWBAR			"crowbar"
+#define IS_WIRECUTTER		"wirecutter"
+#define IS_WRENCH			"wrench"

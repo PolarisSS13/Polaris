@@ -165,16 +165,19 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
-/obj/machinery/portable_atmospherics/hydroponics/New()
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/initialize()
+	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	create_reagents(200)
 	if(mechanical)
 		connect()
 	update_icon()
+	return INITIALIZE_HINT_LATELOAD
 
-/obj/machinery/portable_atmospherics/hydroponics/initialize()
+// Give the seeds time to initialize itself
+/obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
+	. = ..()
 	var/obj/item/seeds/S = locate() in loc
 	if(S)
 		plant_seeds(S)
@@ -450,7 +453,7 @@
 	if(O.is_open_container())
 		return 0
 
-	if(istype(O, /obj/item/weapon/wirecutters) || istype(O, /obj/item/weapon/surgical/scalpel))
+	if(O.is_wirecutter() || istype(O, /obj/item/weapon/surgical/scalpel))
 
 		if(!seed)
 			user << "There is nothing to take a sample from in \the [src]."
@@ -545,7 +548,7 @@
 		qdel(O)
 		check_health()
 
-	else if(mechanical && istype(O, /obj/item/weapon/wrench))
+	else if(mechanical && O.is_wrench())
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
@@ -568,7 +571,7 @@
 		return
 
 	else if(O.force && seed)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(O))
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)
 			health -= O.force

@@ -9,7 +9,6 @@
 	display_name = "headphones"
 	path = /obj/item/clothing/ears/earmuffs/headphones
 
-/datum/gear/ears/translator
-	display_name = "universal translator, ear"
-	path = /obj/item/device/universal_translator/ear
-	cost = 8
+/datum/gear/ears/circuitry
+	display_name = "earwear, circuitry (empty)"
+	path = /obj/item/clothing/ears/circuitry

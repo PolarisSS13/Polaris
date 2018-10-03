@@ -24,6 +24,7 @@
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
 	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
+	var/check_all = 0		//If active, will shoot at anything.
 	var/ailock = 0 	//Silicons cannot use this
 
 	req_access = list(access_ai_upload)
@@ -47,8 +48,10 @@
 /obj/machinery/turretid/initialize()
 	if(!control_area)
 		control_area = get_area(src)
+	else if(ispath(control_area))
+		control_area = locate(control_area)
 	else if(istext(control_area))
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(A.name && A.name==control_area)
 				control_area = A
 				break
@@ -61,7 +64,7 @@
 			control_area = null
 
 	power_change() //Checks power and initial settings
-	return
+	. = ..()
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
 	if(ailock && issilicon(user))
@@ -130,9 +133,11 @@
 		settings[++settings.len] = list("category" = "Check Arrest Status", "setting" = "check_arrest", "value" = check_arrest)
 		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
+		settings[++settings.len] = list("category" = "Neutralize All Entities", "setting" = "check_all", "value" = check_all)
+
 		data["settings"] = settings
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "turret_control.tmpl", "Turret Controls", 500, 300)
 		ui.set_initial_data(data)
@@ -161,6 +166,8 @@
 			check_access = value
 		else if(href_list["command"] == "check_anomalies")
 			check_anomalies = value
+		else if(href_list["command"] == "check_all")
+			check_all = value
 
 		updateTurrets()
 		return 1
@@ -175,6 +182,7 @@
 	TC.check_arrest = check_arrest
 	TC.check_weapons = check_weapons
 	TC.check_anomalies = check_anomalies
+	TC.check_all = check_all
 	TC.ailock = ailock
 
 	if(istype(control_area))

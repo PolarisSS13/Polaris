@@ -17,7 +17,7 @@
 
 
 /obj/machinery/computer/cloning/initialize()
-	..()
+	. = ..()
 	updatemodules()
 
 /obj/machinery/computer/cloning/Destroy()
@@ -67,7 +67,7 @@
 			user.drop_item()
 			W.loc = src
 			diskette = W
-			user << "You insert [W]."
+			to_chat(user, "You insert [W].")
 			updateUsrDialog()
 			return
 	else if(istype(W, /obj/item/device/multitool))
@@ -77,7 +77,7 @@
 			pods += P
 			P.connected = src
 			P.name = "[initial(P.name)] #[pods.len]"
-			user << "<span class='notice'>You connect [P] to [src].</span>"
+			to_chat(user, "<span class='notice'>You connect [P] to [src].</span>")
 
 	else if (menu == 4 && (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda)))
 		if(check_access(W))
@@ -116,7 +116,7 @@
 
 	var/pods_list_ui[0]
 	for(var/obj/machinery/clonepod/pod in pods)
-		pods_list_ui[++pods_list_ui.len] = list("pod" = pod, "biomass" = pod.biomass)
+		pods_list_ui[++pods_list_ui.len] = list("pod" = pod, "biomass" = pod.get_biomass())
 
 	if(pods)
 		data["pods"] = pods_list_ui
@@ -146,7 +146,7 @@
 	data["diskette"] = diskette
 	data["temp"] = temp
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "cloning.tmpl", src.name, 400, 450)
 		ui.set_initial_data(data)
@@ -244,7 +244,7 @@
 		//Look for that player! They better be dead!
 		if(istype(C))
 			//Can't clone without someone to clone.  Or a pod.  Or if the pod is busy. Or full of gibs.
-			if(!pods.len)
+			if(!LAZYLEN(pods))
 				temp = "Error: No clone pods detected."
 			else
 				var/obj/machinery/clonepod/pod = pods[1]
@@ -252,13 +252,12 @@
 					pod = input(usr,"Select a cloning pod to use", "Pod selection") as anything in pods
 				if(pod.occupant)
 					temp = "Error: Clonepod is currently occupied."
-				else if(pod.biomass < CLONE_BIOMASS)
+				else if(pod.get_biomass() < CLONE_BIOMASS)
 					temp = "Error: Not enough biomass."
 				else if(pod.mess)
 					temp = "Error: Clonepod malfunction."
 				else if(!config.revival_cloning)
 					temp = "Error: Unable to initiate cloning cycle."
-
 				else if(pod.growclone(C))
 					temp = "Initiating cloning cycle..."
 					records.Remove(C)
@@ -285,14 +284,17 @@
 		temp = ""
 		scantemp = ""
 
-	nanomanager.update_uis(src)
+	GLOB.nanomanager.update_uis(src)
 	add_fingerprint(usr)
 
 /obj/machinery/computer/cloning/proc/scan_mob(mob/living/carbon/human/subject as mob)
-	if ((isnull(subject)) || (!(ishuman(subject))) || (!subject.dna))
+	var/brain_skip = 0
+	if (istype(subject, /mob/living/carbon/brain)) //Brain scans.
+		brain_skip = 1
+	if ((isnull(subject)) || (!(ishuman(subject)) && !brain_skip) || (!subject.dna))
 		scantemp = "Error: Unable to locate valid genetic data."
 		return
-	if (!subject.has_brain())
+	if (!subject.has_brain() && !brain_skip)
 		if(istype(subject, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = subject
 			if(H.should_have_organ("brain"))
@@ -313,9 +315,13 @@
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Mental interface failure."
 		return
-	if (subject.species && subject.species.flags & NO_SCAN)
+	if (subject.species && subject.species.flags & NO_SCAN && !brain_skip)
 		scantemp = "Error: Mental interface failure."
 		return
+	for(var/modifier_type in subject.modifiers)	//Can't be cloned, even if they had a previous scan
+		if(istype(modifier_type, /datum/modifier/no_clone))
+			scantemp = "Error: Mental interface failure."
+			return
 	if (!isnull(find_record(subject.ckey)))
 		scantemp = "Subject already in database."
 		return
@@ -329,7 +335,10 @@
 	R.name = R.dna.real_name
 	R.types = DNA2_BUF_UI|DNA2_BUF_UE|DNA2_BUF_SE
 	R.languages = subject.languages
-	R.flavor = subject.flavor_texts.Copy()
+	if(!brain_skip) //Brains don't have flavor text.
+		R.flavor = subject.flavor_texts.Copy()
+	else
+		R.flavor = list()
 	for(var/datum/modifier/mod in subject.modifiers)
 		if(mod.flags & MODIFIER_GENETIC)
 			R.genetic_modifiers.Add(mod.type)

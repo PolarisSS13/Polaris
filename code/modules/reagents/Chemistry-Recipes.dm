@@ -417,6 +417,14 @@
 	required_reagents = list("cryptobiolin" = 1, "inaprovaline" = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/corophizine
+	name = "Corophizine"
+	id = "corophizine"
+	result = "corophizine"
+	required_reagents = list("spaceacillin" = 1, "carbon" = 1, "phoron" = 0.1)
+	catalysts = list("phoron" = 5)
+	result_amount = 2
+
 /datum/chemical_reaction/imidazoline
 	name = "imidazoline"
 	id = "imidazoline"
@@ -493,6 +501,7 @@
 	id = "ammonia"
 	result = "ammonia"
 	required_reagents = list("hydrogen" = 3, "nitrogen" = 1)
+	inhibitors = list("phoron" = 1) // Messes with lexorin
 	result_amount = 3
 
 /datum/chemical_reaction/diethylamine
@@ -868,7 +877,7 @@
 	name = "Red paint"
 	id = "red_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_red" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_red" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/red_paint/send_data()
@@ -878,7 +887,7 @@
 	name = "Orange paint"
 	id = "orange_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_orange" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_orange" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/orange_paint/send_data()
@@ -888,7 +897,7 @@
 	name = "Yellow paint"
 	id = "yellow_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_yellow" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_yellow" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/yellow_paint/send_data()
@@ -898,7 +907,7 @@
 	name = "Green paint"
 	id = "green_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_green" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_green" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/green_paint/send_data()
@@ -908,7 +917,7 @@
 	name = "Blue paint"
 	id = "blue_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_blue" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_blue" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/blue_paint/send_data()
@@ -918,7 +927,7 @@
 	name = "Purple paint"
 	id = "purple_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_purple" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_purple" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/purple_paint/send_data()
@@ -928,7 +937,7 @@
 	name = "Grey paint"
 	id = "grey_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_grey" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_grey" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/grey_paint/send_data()
@@ -938,7 +947,7 @@
 	name = "Brown paint"
 	id = "brown_paint"
 	result = "paint"
-	required_reagents = list("plasticide" = 1, "water" = 3, "crayon_dust_brown" = 1)
+	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_brown" = 1)
 	result_amount = 5
 
 /datum/chemical_reaction/brown_paint/send_data()
@@ -1204,7 +1213,7 @@
 	name = "Syntiflesh"
 	id = "syntiflesh"
 	result = null
-	required_reagents = list("blood" = 5, "clonexadone" = 1)
+	required_reagents = list("blood" = 5, "clonexadone" = 5)
 	result_amount = 1
 
 /datum/chemical_reaction/food/syntiflesh/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1331,9 +1340,18 @@
 	name = "Vodka"
 	id = "vodka"
 	result = "vodka"
-	required_reagents = list("potato" = 10)
+	required_reagents = list("potatojuice" = 10)
 	catalysts = list("enzyme" = 5)
 	result_amount = 10
+
+/datum/chemical_reaction/drinks/cider
+	name = "Cider"
+	id = "cider"
+	result = "cider"
+	required_reagents = list("applejuice" = 10)
+	catalysts = list("enzyme" = 5)
+	result_amount = 10
+
 
 /datum/chemical_reaction/drinks/sake
 	name = "Sake"
@@ -1863,7 +1881,7 @@
 	required_reagents = list("tea" = 5, "limejuice" = 1)
 	result_amount = 6
 
-/datum/chemical_reaction/drinks/limetea
+/datum/chemical_reaction/drinks/orangetea
 	name = "Orange Tea"
 	id = "orangetea"
 	result = "orangetea"
@@ -1982,6 +2000,290 @@
 	required_reagents = list("sake" = 1, "melonliquor" = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/bitters
+	name = "Bitters"
+	id = "bitters"
+	result = "bitters"
+	required_reagents = list("mint" = 5)
+	catalysts = list("enzyme" = 5)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/soemmerfire
+	name = "Soemmer Fire"
+	id = "soemmerfire"
+	result = "soemmerfire"
+	required_reagents = list("manhattan" = 2, "condensedcapsaicin" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/winebrandy
+    name = "Wine brandy"
+    id = "winebrandy"
+    result = "winebrandy"
+    required_reagents = list("wine" = 10)
+    catalysts = list("enzyme" = 10) //10u enzyme so it requires more than is usually added. Stops overlap with wine recipe
+    result_amount = 5
+
+/datum/chemical_reaction/drinks/lovepotion
+	name = "Love Potion"
+	id = "lovepotion"
+	result = "lovepotion"
+	required_reagents = list("cream" = 1, "berryjuice" = 1, "sugar" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/morningafter
+	name = "Morning After"
+	id = "morningafter"
+	result = "morningafter"
+	required_reagents = list("sbiten" = 1, "coffee" = 5)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/vesper
+	name = "Vesper"
+	id = "vesper"
+	result = "vesper"
+	required_reagents = list("gin" = 3, "vodka" = 1, "wine" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/rotgut
+	name = "Rotgut Fever Dream"
+	id = "rotgut"
+	result = "rotgut"
+	required_reagents = list("vodka" = 3, "rum" = 1, "whiskey" = 1, "cola" = 3)
+	result_amount = 8
+
+/datum/chemical_reaction/drinks/entdraught
+	name = "Ent's Draught"
+	id = "entdraught"
+	result = "entdraught"
+	required_reagents = list("tonic" = 1, "holywater" = 1, "honey" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/voxdelight
+	name = "Vox's Delight"
+	id = "voxdelight"
+	result = "voxdelight"
+	required_reagents = list("phoron" = 3, "fuel" = 1, "water" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/screamingviking
+	name = "Screaming Viking"
+	id = "screamingviking"
+	result = "screamingviking"
+	required_reagents = list("vodka" = 1, "vermouth" = 1, "limejuice" = 1, "rum" = 1, "gin" = 1, "tonic" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/vilelemon
+	name = "Vile Lemon"
+	id = "vilelemon"
+	result = "vilelemon"
+	required_reagents = list("lemonade" = 5, "spacemountainwind" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/dreamcream
+	name = "Dream Cream"
+	id = "dreamcream"
+	result = "dreamcream"
+	required_reagents = list("milk" = 2, "cream" = 1, "honey" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/robustin
+	name = "Robustin"
+	id = "robustin"
+	result = "robustin"
+	required_reagents = list("antifreeze" = 1, "phoron" = 1, "fuel" = 1, "vodka" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/virginsip
+	name = "Virgin Sip"
+	id = "virginsip"
+	result = "virginsip"
+	required_reagents = list("driestmartini" = 1, "water" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/chocoshake
+	name = "Chocolate Milkshake"
+	id = "chocoshake"
+	result = "chocoshake"
+	required_reagents = list("milkshake" = 1, "coco" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/berryshake
+	name = "Berry Milkshake"
+	id = "berryshake"
+	result = "berryshake"
+	required_reagents = list("milkshake" = 1, "berryjuice" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/coffeeshake
+	name = "Coffee Milkshake"
+	id = "coffeeshake"
+	result = "coffeeshake"
+	required_reagents = list("milkshake" = 1, "coffee" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/jellyshot
+	name = "Jelly Shot"
+	id = "jellyshot"
+	result = "jellyshot"
+	required_reagents = list("cherryjelly" = 4, "vodka" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/slimeshot
+	name = "Named Bullet"
+	id = "slimeshot"
+	result = "slimeshot"
+	required_reagents = list("slimejelly" = 4, "vodka" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/negroni
+	name = "Negroni"
+	id = "negroni"
+	result = "negroni"
+	required_reagents = list("gin" = 1, "bitters" = 1, "vermouth" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/cloverclub
+	name = "Clover Club"
+	id = "cloverclub"
+	result = "cloverclub"
+	required_reagents = list("berryjuice" = 1, "lemonjuice" = 1, "gin" = 3)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/oldfashioned
+	name = "Old Fashioned"
+	id = "oldfashioned"
+	result = "oldfashioned"
+	required_reagents = list("whiskey" = 3, "bitters" = 1, "sugar" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/whiskeysour
+	name = "Whiskey Sour"
+	id = "whiskeysour"
+	result = "whiskeysour"
+	required_reagents = list("whiskey" = 2, "lemonjuice" = 1, "sugar" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/daiquiri
+	name = "Daiquiri"
+	id = "daiquiri"
+	result = "daiquiri"
+	required_reagents = list("rum" = 3, "limejuice" = 2, "sugar" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/mintjulep
+	name = "Mint Julep"
+	id = "mintjulep"
+	result = "mintjulep"
+	required_reagents = list("whiskey" = 2, "water" = 1, "mint" = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/drinks/paloma
+	name = "Paloma"
+	id = "paloma"
+	result = "paloma"
+	required_reagents = list("orangejuice" = 1, "sodawater" = 1, "tequilla" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/mojito
+	name = "Mojito"
+	id = "mojito"
+	result = "mojito"
+	required_reagents = list("rum" = 3, "limejuice" = 1, "mint" = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/drinks/piscosour
+	name = "Pisco Sour"
+	id = "piscosour"
+	result = "piscosour"
+	required_reagents = list("winebrandy" = 1, "lemonjuice" = 1, "sugar" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/coldfront
+	name = "Cold Front"
+	id = "coldfront"
+	result = "coldfront"
+	required_reagents = list("icecoffee" = 1, "whiskey" = 1, "mint" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/godsake
+	name = "Gods Sake"
+	id = "godsake"
+	result = "godsake"
+	required_reagents = list("sake" = 2, "holywater" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/godka //Why you would put this in your body, I don't know.
+	name = "Godka"
+	id = "godka"
+	result = "godka"
+	required_reagents = list("vodka" = 1, "holywater" = 1, "ethanol" = 1, "carthatoline" = 1)
+	catalysts = list("enzyme" = 5, "holywater" = 5)
+	result_amount = 1
+
+/datum/chemical_reaction/drinks/holywine
+	name = "Angel Ichor"
+	id = "holywine"
+	result = "holywine"
+	required_reagents = list("grapejuice" = 5, "gold" = 5)
+	catalysts = list("holywater" = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/drinks/holy_mary
+	name = "Holy Mary"
+	id = "holymary"
+	result = "holymary"
+	required_reagents = list("vodka" = 2, "holywine" = 3, "limejuice" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/angelskiss
+	name = "Angels Kiss"
+	id = "angelskiss"
+	result = "angelskiss"
+	required_reagents = list("holywine" = 1, "kahlua" = 1, "rum" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/angelswrath
+	name = "Angels Wrath"
+	id = "angelswrath"
+	result = "angelswrath"
+	required_reagents = list("rum" = 3, "spacemountainwind" = 1, "holywine" = 1, "dr_gibb" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/ichor_mead
+	name = "Ichor Mead"
+	id = "ichor_mead"
+	result = "ichor_mead"
+	required_reagents = list("holywine" = 1, "mead" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/oilslick
+	name = "Oil Slick"
+	id = "oilslick"
+	result = "oilslick"
+	required_reagents = list("cornoil" = 2, "honey" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/nuclearwaste_radium
+	name = "Nuclear Waste"
+	id = "nuclearwasterad"
+	result = "nuclearwaste"
+	required_reagents = list("oilslick" = 1, "radium" = 1, "limejuice" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/nuclearwaste_uranium
+	name = "Nuclear Waste"
+	id = "nuclearwasteuran"
+	result = "nuclearwaste"
+	required_reagents = list("oilslick" = 2, "uranium" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/sodaoil
+	name = "Soda Oil"
+	id = "sodaoil"
+	result = "sodaoil"
+	required_reagents = list("cornoil" = 4, "sodawater" = 1, "carbon" = 1, "tricordrazine" = 1)
+	result_amount = 6
+
 //R-UST Port
 /datum/chemical_reaction/hyrdophoron
 	name = "Hydrophoron"
@@ -1995,9 +2297,8 @@
 	name = "Deuterium"
 	id = "deuterium"
 	result = null
-	required_reagents = list("water" = 10)
-	catalysts = list("hydrophoron" = 5)
-	result_amount = 1
+	required_reagents = list("hydrophoron" = 5, "water" = 10)
+	result_amount = 15
 
 /datum/chemical_reaction/deuterium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/T = get_turf(holder.my_atom)
@@ -2018,3 +2319,11 @@
 	result = "qerr_quem"
 	required_reagents = list("nicotine" = 1, "carbon" = 1, "sugar" = 2)
 	result_amount = 4
+
+// Biomass, for cloning and bioprinters
+/datum/chemical_reaction/biomass
+	name = "Biomass"
+	id = "biomass"
+	result = "biomass"
+	required_reagents = list("protein" = 1, "sugar" = 1, "phoron" = 1)
+	result_amount = 1	// Roughly 20u per phoron sheet

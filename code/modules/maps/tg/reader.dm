@@ -35,7 +35,7 @@ var/global/use_preloader = FALSE
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num)
+/dmm_suite/load_map(dmm_file as file, x_offset as num, y_offset as num, z_offset as num, cropMap as num, measureOnly as num, no_changeturf as num, orientation as num)
 	//How I wish for RAII
 	if(!measureOnly)
 		Master.StartLoadingMap()
@@ -43,7 +43,7 @@ var/global/use_preloader = FALSE
 	#ifdef TESTING
 	turfsSkipped = 0
 	#endif
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf)
+	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, orientation)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
@@ -51,7 +51,7 @@ var/global/use_preloader = FALSE
 	if(!measureOnly)
 		Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, orientation)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = file2text(tfile)
@@ -62,6 +62,10 @@ var/global/use_preloader = FALSE
 		y_offset = 1
 	if(!z_offset)
 		z_offset = world.maxz + 1
+
+	// If it's not a single dir, default to north (Default orientation)
+	if(!orientation in cardinal)
+		orientation = SOUTH
 
 	var/list/bounds = list(1.#INF, 1.#INF, 1.#INF, -1.#INF, -1.#INF, -1.#INF)
 	var/list/grid_models = list()
@@ -96,7 +100,7 @@ var/global/use_preloader = FALSE
 			var/zcrd = text2num(dmmRegex.group[5]) + z_offset - 1
 
 			var/zexpansion = zcrd > world.maxz
-			if(zexpansion)
+			if(zexpansion && !measureOnly)
 				if(cropMap)
 					continue
 				else
@@ -132,14 +136,71 @@ var/global/use_preloader = FALSE
 				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], min(ycrd, world.maxy))
 
 			var/maxx = xcrdStart
+
+			// Assemble the grid of keys
+			var/list/key_list = list()
+			for(var/line in gridLines)
+				var/list/line_keys = list()
+				xcrd = 1
+				for(var/tpos = 1 to length(line) - key_len + 1 step key_len)
+					if(xcrd > world.maxx)
+						if(cropMap)
+							break
+						else
+							world.maxx = xcrd
+
+					if(xcrd >= 1)
+						var/model_key = copytext(line, tpos, tpos + key_len)
+						line_keys[++line_keys.len] = model_key
+						#ifdef TESTING
+						else
+							++turfsSkipped
+						#endif
+						CHECK_TICK
+					maxx = max(maxx, ++xcrd)
+				key_list[++key_list.len] = line_keys
+
+			// Rotate the list according to orientation
+			if(orientation != SOUTH)
+				var/num_cols = key_list[1].len
+				var/num_rows = key_list.len
+				var/list/new_key_list = list()
+				// If it's rotated 180 degrees, the dimensions are the same
+				if(orientation == NORTH)
+					new_key_list.len = num_rows
+					for(var/i = 1 to new_key_list.len)
+						new_key_list[i] = list()
+						new_key_list[i].len = num_cols
+				// Else, the dimensions are swapped
+				else
+					new_key_list.len = num_cols
+					for(var/i = 1 to new_key_list.len)
+						new_key_list[i] = list()
+						new_key_list[i].len = num_rows
+
+				num_rows++ // Buffering against the base index of 1
+				num_cols++
+				// Populate the new list
+				for(var/i = 1 to new_key_list.len)
+					for(var/j = 1 to new_key_list[i].len)
+						switch(orientation)
+							if(NORTH)
+								new_key_list[i][j] = key_list[num_rows - i][num_cols - j]
+							if(EAST)
+								new_key_list[i][j] = key_list[num_rows - j][i]
+							if(WEST)
+								new_key_list[i][j] = key_list[j][num_cols - i]
+
+				key_list = new_key_list
+
 			if(measureOnly)
-				for(var/line in gridLines)
-					maxx = max(maxx, xcrdStart + length(line) / key_len - 1)
+				for(var/list/line in key_list)
+					maxx = max(maxx, line.len)
 			else
-				for(var/line in gridLines)
+				for(var/i = 1 to key_list.len)
 					if(ycrd <= world.maxy && ycrd >= 1)
 						xcrd = xcrdStart
-						for(var/tpos = 1 to length(line) - key_len + 1 step key_len)
+						for(var/j = 1 to key_list[1].len)
 							if(xcrd > world.maxx)
 								if(cropMap)
 									break
@@ -147,12 +208,11 @@ var/global/use_preloader = FALSE
 									world.maxx = xcrd
 
 							if(xcrd >= 1)
-								var/model_key = copytext(line, tpos, tpos + key_len)
 								var/no_afterchange = no_changeturf || zexpansion
-								if(!no_afterchange || (model_key != space_key))
-									if(!grid_models[model_key])
-										throw EXCEPTION("Undefined model key in DMM.")
-									parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion)
+								if(!no_afterchange || (key_list[i][j] != space_key))
+									if(!grid_models[key_list[i][j]])
+										throw EXCEPTION("Undefined model key in DMM: [dmm_file], [key_list[i][j]]")
+									parse_grid(grid_models[key_list[i][j]], key_list[i][j], xcrd, ycrd, zcrd, no_afterchange, orientation)
 								#ifdef TESTING
 								else
 									++turfsSkipped
@@ -194,7 +254,7 @@ var/global/use_preloader = FALSE
  * 4) Instanciates the atom with its variables
  *
  */
-/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num)
+/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, orientation as num)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -239,7 +299,7 @@ var/global/use_preloader = FALSE
 
 			if(variables_start)//if there's any variable
 				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
-				fields = readlist(full_def, ";")
+				fields = readlist(full_def, ";", TRUE)
 				if(fields.len)
 					if(!trim(fields[fields.len]))
 						--fields.len
@@ -247,6 +307,12 @@ var/global/use_preloader = FALSE
 						var/value = fields[I]
 						if(istext(value))
 							fields[I] = apply_text_macros(value)
+
+			// Rotate dir if orientation isn't south (default)
+			if(fields["dir"])
+				fields["dir"] = turn(fields["dir"], dir2angle(orientation) + 180)
+			else
+				fields["dir"] = turn(SOUTH, dir2angle(orientation) + 180)
 
 			//then fill the members_attributes list with the corresponding variables
 			members_attributes.len++
@@ -285,7 +351,7 @@ var/global/use_preloader = FALSE
 		var/atom/instance
 		_preloader.setup(members_attributes[index])//preloader for assigning  set variables on atom creation
 		var/atype = members[index]
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(A.type == atype)
 				instance = A
 				break
@@ -304,7 +370,7 @@ var/global/use_preloader = FALSE
 		first_turf_index++
 
 	//turn off base new Initialization until the whole thing is loaded
-	SScreation.StartLoadingMap()
+	SSatoms.map_loader_begin()
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
@@ -323,7 +389,7 @@ var/global/use_preloader = FALSE
 	for(index in 1 to first_turf_index-1)
 		instance_atom(members[index],members_attributes[index],crds,no_changeturf)
 	//Restore initialization to the previous value
-	SScreation.StopLoadingMap()
+	SSatoms.map_loader_stop()
 
 ////////////////
 //Helpers procs
@@ -344,9 +410,9 @@ var/global/use_preloader = FALSE
 
 	//custom CHECK_TICK here because we don't want things created while we're sleeping to not initialize
 	if(TICK_CHECK)
-		SScreation.StopLoadingMap()
+		SSatoms.map_loader_stop()
 		stoplag()
-		SScreation.StartLoadingMap()
+		SSatoms.map_loader_begin()
 
 /dmm_suite/proc/create_atom(path, crds)
 	set waitfor = FALSE
@@ -377,10 +443,16 @@ var/global/use_preloader = FALSE
 
 
 //build a list from variables in text form (e.g {var1="derp"; var2; var3=7} => list(var1="derp", var2, var3=7))
+// text - variables in text form.  Not including surrounding {} or list()
+// delimiter - Delimiter between list entries
+// keys_only_string - If true, text that looks like an associative list has its keys treated as var names,
+//                    otherwise they are parsed as valid associative list keys.
 //return the filled list
-/dmm_suite/proc/readlist(text as text, delimiter=",")
+/dmm_suite/proc/readlist(text as text, delimiter=",", keys_only_string = FALSE)
 
 	var/list/to_return = list()
+	if(text == "")
+		return to_return // Fast bail-out
 
 	var/position
 	var/old_position = 1
@@ -392,40 +464,46 @@ var/global/use_preloader = FALSE
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
 		var/equal_position = findtext(text,"=",old_position, position)
 
-		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
+		// part to the left of = (the key/var name), or the entire value. If treating it as a var name, strip quotes at the same time.
+		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)), keys_only_string)
 		old_position = position + 1
 
+		var/trim_right = trim_left
 		if(equal_position)//associative var, so do the association
-			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
+			trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
+			if(!keys_only_string) // We also need to evaluate the key for the types it is permitted to be
+				if(findtext(trim_left,"\"",1,2)) //Check for string
+					trim_left = copytext(trim_left,2,findtext(trim_left,"\"",3,0))
+				else if(isnum(text2num(trim_left))) //Check for number
+					trim_left = text2num(trim_left)
+				else if(ispath(text2path(trim_left))) //Check for path
+					trim_left = text2path(trim_left)
 
-			//Check for string
-			if(findtext(trim_right,"\"",1,2))
-				trim_right = copytext(trim_right,2,findtext(trim_right,"\"",3,0))
+		// Parse the value in trim_right
+		//Check for string
+		if(findtext(trim_right,"\"",1,2))
+			trim_right = copytext(trim_right,2,findtext(trim_right,"\"",3,0))
+		//Check for number
+		else if(isnum(text2num(trim_right)))
+			trim_right = text2num(trim_right)
+		//Check for null
+		else if(trim_right == "null")
+			trim_right = null
+		//Check for list
+		else if(copytext(trim_right,1,5) == "list")
+			trim_right = readlist(copytext(trim_right,6,length(trim_right)))
+		//Check for file
+		else if(copytext(trim_right,1,2) == "'")
+			trim_right = file(copytext(trim_right,2,length(trim_right)))
+		//Check for path
+		else if(ispath(text2path(trim_right)))
+			trim_right = text2path(trim_right)
 
-			//Check for number
-			else if(isnum(text2num(trim_right)))
-				trim_right = text2num(trim_right)
-
-			//Check for null
-			else if(trim_right == "null")
-				trim_right = null
-
-			//Check for list
-			else if(copytext(trim_right,1,5) == "list")
-				trim_right = readlist(copytext(trim_right,6,length(trim_right)))
-
-			//Check for file
-			else if(copytext(trim_right,1,2) == "'")
-				trim_right = file(copytext(trim_right,2,length(trim_right)))
-
-			//Check for path
-			else if(ispath(text2path(trim_right)))
-				trim_right = text2path(trim_right)
-
+		// Now put the trim_right into the result.  Method by which we do so varies on if its assoc or not
+		if(equal_position)
 			to_return[trim_left] = trim_right
-
-		else//simple var
-			to_return[trim_left] = null
+		else
+			to_return += trim_right
 
 	while(position != 0)
 

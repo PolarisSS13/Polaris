@@ -31,7 +31,7 @@
 		qdel(src)
 
 /obj/structure/bed/chair/attack_tk(mob/user as mob)
-	if(buckled_mob)
+	if(has_buckled_mobs())
 		..()
 	else
 		rotate()
@@ -42,26 +42,30 @@
 
 /obj/structure/bed/chair/update_icon()
 	..()
-	if(buckled_mob && padding_material)
+	if(has_buckled_mobs() && padding_material)
 		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
 			I.layer = MOB_LAYER + 0.1
+			I.plane = MOB_PLANE
 			I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
 		overlays |= stool_cache[cache_key]
 
 /obj/structure/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
-		src.layer = FLY_LAYER
+		plane = MOB_PLANE
+		layer = MOB_LAYER + 0.1
 	else
-		src.layer = OBJ_LAYER
+		reset_plane_and_layer()
 
 /obj/structure/bed/chair/set_dir()
 	..()
 	update_layer()
-	if(buckled_mob)
-		buckled_mob.set_dir(dir)
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			L.set_dir(dir)
 
 /obj/structure/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
@@ -81,6 +85,14 @@
 
 		src.set_dir(turn(src.dir, 90))
 		return
+
+/obj/structure/bed/chair/shuttle
+	name = "chair"
+	desc = "You sit in this. Either by will or force."
+	icon_state = "shuttle_chair"
+	color = null
+	base_icon = "shuttle_chair"
+	applies_material_colour = 0
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -122,51 +134,53 @@
 	return
 
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 
 /obj/structure/bed/chair/office/Move()
 	..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle_mob()
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/occupant = A
+			occupant.buckled = null
+			occupant.Move(src.loc)
+			occupant.buckled = src
+			if (occupant && (src.loc != occupant.loc))
+				if (propelled)
+					for (var/mob/O in src.loc)
+						if (O != occupant)
+							Bump(O)
+				else
+					unbuckle_mob()
 
 /obj/structure/bed/chair/office/Bump(atom/A)
 	..()
-	if(!buckled_mob)	return
+	if(!has_buckled_mobs())	return
 
 	if(propelled)
-		var/mob/living/occupant = unbuckle_mob()
+		for(var/a in buckled_mobs)
+			var/mob/living/occupant = unbuckle_mob(a)
 
-		var/def_zone = ran_zone()
-		var/blocked = occupant.run_armor_check(def_zone, "melee")
-		var/soaked = occupant.get_armor_soak(def_zone, "melee")
-		occupant.throw_at(A, 3, propelled)
-		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked)
-		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone, blocked, soaked)
-		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-		if(istype(A, /mob/living))
-			var/mob/living/victim = A
-			def_zone = ran_zone()
-			blocked = victim.run_armor_check(def_zone, "melee")
-			soaked = victim.get_armor_soak(def_zone, "melee")
-			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)
-			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone, blocked, soaked)
-		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
+			var/def_zone = ran_zone()
+			var/blocked = occupant.run_armor_check(def_zone, "melee")
+			var/soaked = occupant.get_armor_soak(def_zone, "melee")
+			occupant.throw_at(A, 3, propelled)
+			occupant.apply_effect(6, STUN, blocked)
+			occupant.apply_effect(6, WEAKEN, blocked)
+			occupant.apply_effect(6, STUTTER, blocked)
+			occupant.apply_damage(10, BRUTE, def_zone, blocked, soaked)
+			playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+			if(istype(A, /mob/living))
+				var/mob/living/victim = A
+				def_zone = ran_zone()
+				blocked = victim.run_armor_check(def_zone, "melee")
+				soaked = victim.get_armor_soak(def_zone, "melee")
+				victim.apply_effect(6, STUN, blocked)
+				victim.apply_effect(6, WEAKEN, blocked)
+				victim.apply_effect(6, STUTTER, blocked)
+				victim.apply_damage(10, BRUTE, def_zone, blocked, soaked)
+			occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
 	icon_state = "officechair_white"
@@ -184,7 +198,7 @@
 	return
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 

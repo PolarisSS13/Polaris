@@ -1,6 +1,7 @@
 /mob/living/simple_animal/slime
-	name = "baby slime"
+	name = "slime"
 	desc = "The most basic of slimes.  The grey slime has no remarkable qualities, however it remains one of the most useful colors for scientists."
+	tt_desc = "A Macrolimbus vulgaris"
 	icon = 'icons/mob/slime2.dmi'
 	icon_state = "grey baby slime"
 	intelligence_level = SA_ANIMAL
@@ -9,6 +10,8 @@
 	var/glows = FALSE // If true, will glow in the same color as the color var.
 	var/icon_state_override = null // Used for special slime appearances like the rainbow slime.
 	pass_flags = PASSTABLE
+
+	makes_dirt = FALSE	// Goop
 
 	speak_emote = list("chirps")
 
@@ -84,9 +87,12 @@
 		/mob/living/simple_animal/slime/blue,
 		/mob/living/simple_animal/slime/purple
 	)
+	var/type_on_death = null // Set this if you want dying slimes to split into a specific type and not their type.
+	var/rainbow_core_candidate = TRUE // If false, rainbow cores cannot make this type randomly.
 
 	var/reagent_injected = null // Some slimes inject reagents on attack.  This tells the game what reagent to use.
 	var/injection_amount = 5 // This determines how much.
+
 
 	can_enter_vent_with = list(
 	/obj/item/clothing/head,
@@ -123,7 +129,7 @@
 /mob/living/simple_animal/slime/proc/update_name()
 	if(docile) // Docile slimes are generally named, so we shouldn't mess with it.
 		return
-	name = "[slime_color] [is_adult ? "adult" : "baby"] slime ([number])"
+	name = "[slime_color] [is_adult ? "adult" : "baby"] [initial(name)] ([number])"
 	real_name = name
 
 /mob/living/simple_animal/slime/update_icon()
@@ -338,8 +344,10 @@
 		to_chat(src, "<span class='notice'>I am not old enough to reproduce yet...</span>")
 
 // Used for reproducing and dying.
-/mob/living/simple_animal/slime/proc/make_new_slime()
+/mob/living/simple_animal/slime/proc/make_new_slime(var/desired_type)
 	var/t = src.type
+	if(desired_type)
+		t = desired_type
 	if(prob(mutation_chance / 10))
 		t = /mob/living/simple_animal/slime/rainbow
 
@@ -351,10 +359,13 @@
 	baby.mutation_chance = mutation_chance
 	baby.power_charge = round(power_charge / 4)
 	baby.resentment = max(resentment - 1, 0)
-	baby.discipline = max(discipline - 1, 0)
-	baby.obedience = max(obedience - 1, 0)
-	baby.unity = unity
+	if(!istype(baby, /mob/living/simple_animal/slime/light_pink))
+		baby.discipline = max(discipline - 1, 0)
+		baby.obedience = max(obedience - 1, 0)
+	if(!istype(baby, /mob/living/simple_animal/slime/rainbow))
+		baby.unity = unity
 	baby.faction = faction
+	baby.attack_same = attack_same
 	baby.friends = friends.Copy()
 	if(rabid)
 		baby.enrage()

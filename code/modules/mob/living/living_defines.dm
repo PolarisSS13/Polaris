@@ -16,7 +16,6 @@
 	var/brainloss = 0	//'Retardation' damage caused by someone hitting you in the head with a bible or being infected with brainrot.
 	var/halloss = 0		//Hallucination damage. 'Fake' damage obtained through hallucinating or the holodeck. Sleeping should cause it to wear off.
 
-
 	var/hallucination = 0 //Directly affects how long a mob will hallucinate for
 	var/list/atom/hallucinations = list() //A list of hallucinated people that try to attack the mob. See /obj/effect/fake_attacker in hallucinations.dm
 
@@ -45,5 +44,21 @@
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
 	var/lastpuke = 0
 
-	var/evasion = 0 // Makes attacks harder to land.  Each number equals 15% more likely to miss.  Negative numbers increase hit chance.
+	var/evasion = 0 // Makes attacks harder to land. Negative numbers increase hit chance.
 	var/force_max_speed = 0 // If 1, the mob runs extremely fast and cannot be slowed.
+
+	var/image/dsoverlay = null //Overlay used for darksight eye adjustments
+
+	var/glow_toggle = 0					// If they're glowing!
+	var/glow_range = 2
+	var/glow_intensity = null
+	var/glow_color = "#FFFFFF"			// The color they're glowing!
+
+	var/see_invisible_default = SEE_INVISIBLE_LIVING
+
+	var/nest				//Not specific, because a Nest may be the prop nest, or blob factory in this case.
+
+	var/list/hud_list		//Holder for health hud, status hud, wanted hud, etc (not like inventory slots)
+	var/has_huds = FALSE	//Whether or not we should bother initializing the above list
+
+	var/makes_dirt = TRUE	//FALSE if the mob shouldn't be making dirt on the ground when it walks

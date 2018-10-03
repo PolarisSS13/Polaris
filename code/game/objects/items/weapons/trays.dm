@@ -17,7 +17,7 @@
 	var/max_carry = 10
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(src))
 	// Drop all the things. All of them.
 	overlays.Cut()
 	for(var/obj/item/I in carrying)
@@ -52,9 +52,7 @@
 			if (istype(location, /turf/simulated))
 				location.add_blood(H)     ///Plik plik, the sound of blood
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		add_attack_logs(user,M,"Hit with [src]")
 
 		if(prob(15))
 			M.Weaken(3)
@@ -190,7 +188,7 @@
 			carrying.Add(I)
 			Img.icon = I.icon
 			Img.icon_state = I.icon_state
-			Img.layer = 30 + I.layer
+			Img.layer = layer + I.layer*0.01
 			if(istype(I, /obj/item/weapon/material))
 				var/obj/item/weapon/material/O = I
 				if(O.applies_material_colour)

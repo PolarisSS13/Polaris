@@ -73,10 +73,6 @@
 	display_name = "shoes, yellow"
 	path = /obj/item/clothing/shoes/yellow
 
-/datum/gear/shoes/flats
-	display_name = "flats, black"
-	path = /obj/item/clothing/shoes/flats
-
 /datum/gear/shoes/hitops/
 	display_name = "high-top, white"
 	path = /obj/item/clothing/shoes/hitops/
@@ -109,30 +105,6 @@
 	display_name = "high-top, yellow"
 	path = /obj/item/clothing/shoes/hitops/yellow
 
-/datum/gear/shoes/flats/blue
-	display_name = "flats, blue"
-	path = /obj/item/clothing/shoes/flats/blue
-
-/datum/gear/shoes/flats/brown
-	display_name = "flats, brown"
-	path = /obj/item/clothing/shoes/flats/brown
-
-/datum/gear/shoes/flats/orange
-	display_name = "flats, orange"
-	path = /obj/item/clothing/shoes/flats/orange
-
-/datum/gear/shoes/flats/purple
-	display_name = "flats, purple"
-	path = /obj/item/clothing/shoes/flats/purple
-
-/datum/gear/shoes/flats/red
-	display_name = "flats, red"
-	path = /obj/item/clothing/shoes/flats/red
-
-/datum/gear/shoes/flats/white
-	display_name = "flats, white"
-	path = /obj/item/clothing/shoes/flats/white
-
 /datum/gear/shoes/flipflops
 	display_name = "flip flops"
 	path = /obj/item/clothing/shoes/flipflop
@@ -157,17 +129,25 @@
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
-/datum/gear/shoes/flats/color
+/datum/gear/shoes/flats
 	display_name = "flats"
 	path = /obj/item/clothing/shoes/flats/white/color
 
-/datum/gear/shoes/flats/color/New()
+/datum/gear/shoes/flats/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
 /datum/gear/shoes/cowboy
 	display_name = "cowboy boots"
 	path = /obj/item/clothing/shoes/boots/cowboy
+
+/datum/gear/shoes/cowboy/classic
+	display_name = "classic cowboy boots"
+	path = /obj/item/clothing/shoes/boots/cowboy/classic
+
+/datum/gear/shoes/cowboy/snakeskin
+	display_name = "snakeskin cowboy boots"
+	path = /obj/item/clothing/shoes/boots/cowboy/snakeskin
 
 /datum/gear/shoes/jungle
 	display_name = "jungle boots"
@@ -194,6 +174,10 @@
 /datum/gear/shoes/heels/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/shoes/slippers
+	display_name = "bunny slippers"
+	path = /obj/item/clothing/shoes/slippers
 
 /datum/gear/shoes/boots/winter
 	display_name = "winter boots"
@@ -227,7 +211,7 @@
 /datum/gear/shoes/boots/winter/medical
 	display_name = "medical winter boots"
 	path = /obj/item/clothing/shoes/boots/winter/medical
-	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist")
+	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
 
 /datum/gear/shoes/boots/winter/mining
 	display_name = "mining winter boots"
@@ -243,3 +227,7 @@
 	display_name = "hydroponics winter boots"
 	path = /obj/item/clothing/shoes/boots/winter/hydro
 	allowed_roles = list("Botanist", "Xenobiologist")
+
+/datum/gear/shoes/circuitry
+	display_name = "boots, circuitry (empty)"
+	path = /obj/item/clothing/shoes/circuitry

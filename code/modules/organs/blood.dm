@@ -17,6 +17,9 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 	if(vessel)
 		return
 
+	if(species.flags & NO_BLOOD)
+		return
+
 	vessel = new/datum/reagents(species.blood_volume)
 	vessel.my_atom = src
 
@@ -24,8 +27,6 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		return
 
 	vessel.add_reagent("blood",species.blood_volume)
-	spawn(1)
-		fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
@@ -90,11 +91,11 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		if(blood_volume >= BLOOD_VOLUME_SAFE)
 			if(pale)
 				pale = 0
-				update_body()
+				update_icons_body()
 		else if(blood_volume >= BLOOD_VOLUME_OKAY)
 			if(!pale)
 				pale = 1
-				update_body()
+				update_icons_body()
 				var/word = pick("dizzy","woosey","faint")
 				src << "<font color='red'>You feel [word]</font>"
 			if(prob(1))
@@ -105,7 +106,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		else if(blood_volume >= BLOOD_VOLUME_BAD)
 			if(!pale)
 				pale = 1
-				update_body()
+				update_icons_body()
 			eye_blurry = max(eye_blurry,6)
 			if(getOxyLoss() < 50 * threshold_coef)
 				adjustOxyLoss(10 * dmg_coef)
@@ -123,7 +124,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 		else //Not enough blood to survive (usually)
 			if(!pale)
 				pale = 1
-				update_body()
+				update_icons_body()
 			eye_blurry = max(eye_blurry,6)
 			Paralyse(3)
 			adjustToxLoss(3 * dmg_coef)
@@ -138,7 +139,20 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 
 		//Bleeding out
 		var/blood_max = 0
-		var/blood_loss_divisor = 30	//lower factor = more blood loss
+		var/blood_loss_divisor = 30.01	//lower factor = more blood loss
+
+		// Some species bleed out differently
+		blood_loss_divisor /= species.bloodloss_rate
+
+		// Some modifiers can make bleeding better or worse.  Higher multiplers = more bleeding.
+		var/blood_loss_modifier_multiplier = 1.0
+		for(var/datum/modifier/M in modifiers)
+			if(!isnull(M.bleeding_rate_percent))
+				blood_loss_modifier_multiplier += (M.bleeding_rate_percent - 1.0)
+
+		blood_loss_divisor /= blood_loss_modifier_multiplier
+
+
 		//This 30 is the "baseline" of a cut in the "vital" regions (head and torso).
 		for(var/obj/item/organ/external/temp in bad_external_organs)
 			if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))
@@ -146,17 +160,17 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 			for(var/datum/wound/W in temp.wounds)
 				if(W.bleeding())
 					if(W.damage_type == PIERCE) //gunshots and spear stabs bleed more
-						blood_loss_divisor -= 5
+						blood_loss_divisor = max(blood_loss_divisor - 5, 1)
 					else if(W.damage_type == BRUISE) //bruises bleed less
-						blood_loss_divisor += 5
+						blood_loss_divisor = max(blood_loss_divisor + 5, 1)
 					//the farther you get from those vital regions, the less you bleed
 					//depending on how dangerous bleeding turns out to be, it might be better to only apply the reduction to hands and feet
 					if((temp.organ_tag == BP_L_ARM) || (temp.organ_tag == BP_R_ARM) || (temp.organ_tag == BP_L_LEG) || (temp.organ_tag == BP_R_LEG))
-						blood_loss_divisor += 5
+						blood_loss_divisor = max(blood_loss_divisor + 5, 1)
 					else if((temp.organ_tag == BP_L_HAND) || (temp.organ_tag == BP_R_HAND) || (temp.organ_tag == BP_L_FOOT) || (temp.organ_tag == BP_R_FOOT))
-						blood_loss_divisor += 10
+						blood_loss_divisor = max(blood_loss_divisor + 10, 1)
 					if(CE_STABLE in chem_effects)	//Inaprov slows bloodloss
-						blood_loss_divisor += 10
+						blood_loss_divisor = max(blood_loss_divisor + 10, 1)
 					if(temp.applied_pressure)
 						if(ishuman(temp.applied_pressure))
 							var/mob/living/carbon/human/H = temp.applied_pressure
@@ -184,6 +198,9 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 	if(!amt)
 		return 0
 
+	if(amt > vessel.get_reagent_amount("blood"))
+		amt = vessel.get_reagent_amount("blood") - 1	// Bit of a safety net; it's impossible to add blood if there's not blood already in the vessel.
+
 	return vessel.remove_reagent("blood",amt * (src.mob_size/MOB_MEDIUM))
 
 /****************************************************
@@ -194,7 +211,8 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
 
 	var/datum/reagent/B = get_blood(container.reagents)
-	if(!B) B = new /datum/reagent/blood
+	if(!B)
+		B = new /datum/reagent/blood
 	B.holder = container
 	B.volume += amount
 

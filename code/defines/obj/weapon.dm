@@ -31,6 +31,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
 	w_class = ITEMSIZE_SMALL
+	slot_flags = SLOT_HOLSTER
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -58,6 +59,7 @@
 	item_state = "bike_horn"
 	throwforce = 3
 	w_class = ITEMSIZE_SMALL
+	slot_flags = SLOT_HOLSTER
 	throw_speed = 3
 	throw_range = 15
 	attack_verb = list("HONKED")
@@ -76,7 +78,7 @@
 
 /obj/item/weapon/cane
 	name = "cane"
-	desc = "A cane used by a true gentlemen. Or a clown."
+	desc = "A cane used by a true gentleman."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
 	item_icons = list(
@@ -86,7 +88,7 @@
 	flags = CONDUCT
 	force = 5.0
 	throwforce = 7.0
-	w_class = ITEMSIZE_SMALL
+	w_class = ITEMSIZE_NORMAL
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
@@ -100,8 +102,9 @@
 	temp_blade.attack_self()
 
 /obj/item/weapon/cane/concealed/attack_self(var/mob/user)
+	var/datum/gender/T = gender_datums[user.get_visible_gender()]
 	if(concealed_blade)
-		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from \his [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
+		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from [T.his] [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		user.drop_from_inventory(src)
@@ -115,7 +118,8 @@
 
 /obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/butterfly/W, var/mob/user)
 	if(!src.concealed_blade && istype(W))
-		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into \his [src]!</span>", "You sheathe \the [W] into \the [src].")
+		var/datum/gender/T = gender_datums[user.get_visible_gender()]
+		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [T.his] [src]!</span>", "You sheathe \the [W] into \the [src].")
 		user.drop_from_inventory(W)
 		W.loc = src
 		src.concealed_blade = W
@@ -216,7 +220,7 @@
 
 /obj/item/weapon/SWF_uplink
 	name = "station-bounced radio"
-	desc = "used to comunicate it appears."
+	desc = "Used to communicate, it appears."
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "radio"
 	var/temp = null
@@ -425,6 +429,24 @@
 	origin_tech = list(TECH_POWER = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
 
+	var/charge = 0
+	var/max_charge = 1000
+
+/obj/item/weapon/stock_parts/capacitor/New()
+	. = ..()
+	max_charge *= rating
+
+/obj/item/weapon/stock_parts/capacitor/proc/charge(var/amount)
+	charge += amount
+	if(charge > max_charge)
+		charge = max_charge
+
+/obj/item/weapon/stock_parts/capacitor/proc/use(var/amount)
+	if(charge)
+		charge -= amount
+		if(charge < 0)
+			charge = 0
+
 /obj/item/weapon/stock_parts/scanning_module
 	name = "scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
@@ -458,6 +480,7 @@
 /obj/item/weapon/stock_parts/capacitor/adv
 	name = "advanced capacitor"
 	desc = "An advanced capacitor used in the construction of a variety of devices."
+	icon_state = "capacitor_adv"
 	origin_tech = list(TECH_POWER = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
@@ -465,7 +488,7 @@
 /obj/item/weapon/stock_parts/scanning_module/adv
 	name = "advanced scanning module"
 	desc = "A compact, high resolution scanning module used in the construction of certain devices."
-	icon_state = "scan_module"
+	icon_state = "scan_module_adv"
 	origin_tech = list(TECH_MAGNET = 3)
 	rating = 2
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
@@ -499,6 +522,7 @@
 /obj/item/weapon/stock_parts/capacitor/super
 	name = "super capacitor"
 	desc = "A super-high capacity capacitor used in the construction of a variety of devices."
+	icon_state = "capacitor_super"
 	origin_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 50)
@@ -506,6 +530,7 @@
 /obj/item/weapon/stock_parts/scanning_module/phasic
 	name = "phasic scanning module"
 	desc = "A compact, high resolution phasic scanning module used in the construction of certain devices."
+	icon_state = "scan_module_phasic"
 	origin_tech = list(TECH_MAGNET = 5)
 	rating = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 50,"glass" = 20)
@@ -543,7 +568,7 @@
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 5 ,TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
-/obj/item/weapon/stock_parts/subspace/filter
+/obj/item/weapon/stock_parts/subspace/sub_filter
 	name = "hyperwave filter"
 	icon_state = "hyperwave_filter"
 	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
@@ -587,7 +612,7 @@
 
 /obj/item/weapon/ectoplasm
 	name = "ectoplasm"
-	desc = "spooky"
+	desc = "Spooky!"
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"

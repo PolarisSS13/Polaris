@@ -25,20 +25,20 @@
 	power_draw_per_use = 50 // The targeting mechanism uses this.  The actual gun uses its own cell for firing if it's an energy weapon.
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/Destroy()
-	qdel(installed_gun)
-	..()
+	installed_gun = null // It will be qdel'd by ..() if still in our contents
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
 	if(istype(O, /obj/item/weapon/gun))
 		var/obj/item/weapon/gun/gun = O
 		if(installed_gun)
-			user << "<span class='warning'>There's already a weapon installed.</span>"
+			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
 		user.drop_from_inventory(gun)
 		installed_gun = gun
 		size += gun.w_class
 		gun.forceMove(src)
-		user << "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>"
+		to_chat(user, "<span class='notice'>You slide \the [gun] into the firing mechanism.</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 	else
 		..()
@@ -46,12 +46,12 @@
 /obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(var/mob/user)
 	if(installed_gun)
 		installed_gun.forceMove(get_turf(src))
-		user << "<span class='notice'>You slide \the [installed_gun] out of the firing mechanism.</span>"
+		to_chat(user, "<span class='notice'>You slide \the [installed_gun] out of the firing mechanism.</span>")
 		size = initial(size)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 		installed_gun = null
 	else
-		user << "<span class='notice'>There's no weapon to remove from the mechanism.</span>"
+		to_chat(user, "<span class='notice'>There's no weapon to remove from the mechanism.</span>")
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/do_work()
 	if(!installed_gun)

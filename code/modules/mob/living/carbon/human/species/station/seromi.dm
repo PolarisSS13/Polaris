@@ -1,5 +1,5 @@
 /datum/species/teshari
-	name = "Teshari"
+	name = SPECIES_TESHARI
 	name_plural = "Tesharii"
 	blurb = "A race of feathered raptors who developed alongside the Skrell, inhabiting \
 	the polar tundral regions outside of Skrell territory. Extremely fragile, they developed \
@@ -9,10 +9,14 @@
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_SCHECHI, LANGUAGE_SKRELLIAN)
 	name_language = LANGUAGE_SCHECHI
+	species_language = LANGUAGE_SCHECHI
+
 	min_age = 12
 	max_age = 45
-	health_hud_intensity = 3
 
+	economic_modifier = 6
+
+	health_hud_intensity = 3
 
 	male_cough_sounds = list('sound/effects/mob_effects/tesharicougha.ogg','sound/effects/mob_effects/tesharicoughb.ogg')
 	female_cough_sounds = list('sound/effects/mob_effects/tesharicougha.ogg','sound/effects/mob_effects/tesharicoughb.ogg')
@@ -26,15 +30,20 @@
 	tail_hair = "feathers"
 	reagent_tag = IS_TESHARI
 
+	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
+
 	icobase = 'icons/mob/human_races/r_seromi.dmi'
 	deform = 'icons/mob/human_races/r_seromi.dmi'
 	damage_overlays = 'icons/mob/human_races/masks/dam_seromi.dmi'
 	damage_mask = 'icons/mob/human_races/masks/dam_mask_seromi.dmi'
 	blood_mask = 'icons/mob/human_races/masks/blood_seromi.dmi'
+	suit_storage_icon = 'icons/mob/species/seromi/belt_mirror.dmi'
 
 	fire_icon_state = "generic" // Humanoid is too big for them and spriting a new one is really annoying.
 
 	slowdown = -1
+	snow_movement = -2	// Ignores light snow
+	item_slowdown_mod = 2	// Tiny birds don't like heavy things
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
@@ -54,12 +63,22 @@
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags = MONKEY|SLIME|SIMPLE_ANIMAL|ALIEN
 
-	cold_level_1 = 180
-	cold_level_2 = 130
-	cold_level_3 = 70
-	heat_level_1 = 320
-	heat_level_2 = 370
-	heat_level_3 = 600
+	cold_level_1 = 180	//Default 260
+	cold_level_2 = 130	//Default 200
+	cold_level_3 = 70	//Default 120
+
+	breath_cold_level_1 = 180	//Default 240 - Lower is better
+	breath_cold_level_2 = 100	//Default 180
+	breath_cold_level_3 = 60	//Default 100
+
+	heat_level_1 = 320	//Default 360
+	heat_level_2 = 370	//Default 400
+	heat_level_3 = 600	//Default 1000
+
+	breath_heat_level_1 = 350	//Default 380 - Higher is better
+	breath_heat_level_2 = 400	//Default 450
+	breath_heat_level_3 = 800	//Default 1250
+
 	heat_discomfort_level = 295
 	heat_discomfort_strings = list(
 		"Your feathers prickle in the heat.",
@@ -86,6 +105,7 @@
 	has_organ = list(
 		O_HEART =    /obj/item/organ/internal/heart,
 		O_LUNGS =    /obj/item/organ/internal/lungs,
+		O_VOICE = 	/obj/item/organ/internal/voicebox,
 		O_LIVER =    /obj/item/organ/internal/liver,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
@@ -101,6 +121,11 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/sonar_ping,
 		/mob/living/proc/hide
+		)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = -3,
+		/datum/mob_descriptor/build = -3
 		)
 
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)

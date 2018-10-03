@@ -134,7 +134,7 @@
 	return 1
 
 /obj/item/borg/upgrade/jetpack
-	name = "mining robot jetpack"
+	name = "robot jetpack"
 	desc = "A carbon dioxide jetpack suitable for low-gravity operations."
 	icon_state = "cyborg_upgrade3"
 	item_state = "cyborg_upgrade"
@@ -149,9 +149,32 @@
 	if(!T)
 		T = locate() in R.module.modules
 	if(!T)
-		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide
+		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide(R.module)
 		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.modules)
 			R.internals = src
+		return 1
+	if(T)
+		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
+		to_chat(usr, "There's no mounting point for the module!")
+		return 0
+
+/obj/item/borg/upgrade/advhealth
+	name = "advanced health analyzer module"
+	desc = "A carbon dioxide jetpack suitable for low-gravity operations."
+	icon_state = "cyborg_upgrade3"
+	item_state = "cyborg_upgrade"
+	require_module = 1
+
+/obj/item/borg/upgrade/advhealth/action(var/mob/living/silicon/robot/R)
+	if(..()) return 0
+
+	var/obj/item/device/healthanalyzer/advanced/T = locate() in R.module
+	if(!T)
+		T = locate() in R.module.contents
+	if(!T)
+		T = locate() in R.module.modules
+	if(!T)
+		R.module.modules += new/obj/item/device/healthanalyzer/advanced(R.module)
 		return 1
 	if(T)
 		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
@@ -172,4 +195,27 @@
 		return 0
 
 	R.emag_items = 1
+	return 1
+
+/obj/item/borg/upgrade/language
+	name = "language module"
+	desc = "Used to let cyborgs other than clerical or service speak a variety of languages."
+	icon_state = "cyborg_upgrade3"
+	item_state = "cyborg_upgrade"
+
+/obj/item/borg/upgrade/language/action(var/mob/living/silicon/robot/R)
+	if(..()) return 0
+
+	R.add_language(LANGUAGE_SOL_COMMON, 1)
+	R.add_language(LANGUAGE_TRADEBAND, 1)
+	R.add_language(LANGUAGE_UNATHI, 1)
+	R.add_language(LANGUAGE_SIIK, 1)
+	R.add_language(LANGUAGE_AKHANI, 1)
+	R.add_language(LANGUAGE_SKRELLIAN, 1)
+	R.add_language(LANGUAGE_SKRELLIANFAR, 0)
+	R.add_language(LANGUAGE_GUTTER, 1)
+	R.add_language(LANGUAGE_SCHECHI, 1)
+	R.add_language(LANGUAGE_ROOTLOCAL, 1)
+	R.add_language(LANGUAGE_TERMINUS, 1)
+
 	return 1

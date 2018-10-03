@@ -192,10 +192,20 @@
 	..(newloc, "diamond")
 
 /obj/structure/simple_door/wood/New(var/newloc,var/material_name)
-	..(newloc, "wood")
+	..(newloc, MAT_WOOD)
 
 /obj/structure/simple_door/sifwood/New(var/newloc,var/material_name)
-	..(newloc, "alien wood")
+	..(newloc, MAT_SIFWOOD)
 
 /obj/structure/simple_door/resin/New(var/newloc,var/material_name)
 	..(newloc, "resin")
+
+/obj/structure/simple_door/cult/New(var/newloc,var/material_name)
+	..(newloc, "cult")
+
+/obj/structure/simple_door/cult/TryToSwitchState(atom/user)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(!iscultist(L) && !istype(L, /mob/living/simple_animal/construct))
+			return
+	..()

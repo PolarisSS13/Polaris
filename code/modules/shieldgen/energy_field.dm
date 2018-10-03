@@ -15,7 +15,8 @@
 	icon_state = "shield"
 	alpha = 100
 	anchored = 1
-	layer = 4.1		//just above mobs
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 	density = 0
 	var/obj/machinery/shield_gen/my_gen = null
 	var/strength = 0 // in Renwicks
@@ -49,7 +50,7 @@
 	if(W.force)
 		adjust_strength(-W.force / 20)
 		user.do_attack_animation(src)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(W))
 	..()
 
 /obj/effect/energy_field/attack_hand(var/mob/living/user)

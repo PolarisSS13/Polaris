@@ -42,13 +42,13 @@
 	return 1
 
 /obj/machinery/power/emitter/initialize()
-	..()
+	. = ..()
 	if(state == 2 && anchored)
 		connect_to_network()
 
 /obj/machinery/power/emitter/Destroy()
 	message_admins("Emitter deleted at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-	log_game("Emitter deleted at ([x],[y],[z])")
+	log_game("EMITTER([x],[y],[z]) Destroyed/deleted.")
 	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
 	..()
 
@@ -65,28 +65,28 @@
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
 	if(state == 2)
 		if(!powernet)
-			user << "\The [src] isn't connected to a wire."
+			to_chat(user, "\The [src] isn't connected to a wire.")
 			return 1
 		if(!src.locked)
 			if(src.active==1)
 				src.active = 0
-				user << "You turn off [src]."
+				to_chat(user, "You turn off [src].")
 				message_admins("Emitter turned off by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-				log_game("Emitter turned off by [user.ckey]([user]) in ([x],[y],[z])")
+				log_game("EMITTER([x],[y],[z]) OFF by [key_name(user)]")
 				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
 			else
 				src.active = 1
-				user << "You turn on [src]."
+				to_chat(user, "You turn on [src].")
 				src.shot_number = 0
 				src.fire_delay = get_initial_fire_delay()
 				message_admins("Emitter turned on by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-				log_game("Emitter turned on by [user.ckey]([user]) in ([x],[y],[z])")
+				log_game("EMITTER([x],[y],[z]) ON by [key_name(user)]")
 				investigate_log("turned <font color='green'>on</font> by [user.key]","singulo")
 			update_icon()
 		else
-			user << "<span class='warning'>The controls are locked!</span>"
+			to_chat(user, "<span class='warning'>The controls are locked!</span>")
 	else
-		user << "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>"
+		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
 		return 1
 
 
@@ -112,11 +112,13 @@
 			if(!powered)
 				powered = 1
 				update_icon()
+				log_game("EMITTER([x],[y],[z]) Regained power and is ON.")
 				investigate_log("regained power and turned <font color='green'>on</font>","singulo")
 		else
 			if(powered)
 				powered = 0
 				update_icon()
+				log_game("EMITTER([x],[y],[z]) Lost power and was ON.")
 				investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 			return
 
@@ -144,9 +146,9 @@
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		if(active)
-			user << "Turn off [src] first."
+			to_chat(user, "Turn off [src] first.")
 			return
 		switch(state)
 			if(0)
@@ -163,18 +165,19 @@
 					"You undo the external reinforcing bolts.", \
 					"You hear a ratchet.")
 				src.anchored = 0
+				disconnect_from_network()
 			if(2)
-				user << "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>"
+				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(active)
-			user << "Turn off [src] first."
+			to_chat(user, "Turn off [src] first.")
 			return
 		switch(state)
 			if(0)
-				user << "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>"
+				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
 				if (WT.remove_fuel(0,user))
 					playsound(loc, WT.usesound, 50, 1)
@@ -184,10 +187,10 @@
 					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 2
-						user << "You weld [src] to the floor."
+						to_chat(user, "You weld [src] to the floor.")
 						connect_to_network()
 				else
-					user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
+					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			if(2)
 				if (WT.remove_fuel(0,user))
 					playsound(loc, WT.usesound, 50, 1)
@@ -197,44 +200,40 @@
 					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 1
-						user << "You cut [src] free from the floor."
+						to_chat(user, "You cut [src] free from the floor.")
 						disconnect_from_network()
 				else
-					user << "<span class='warning'>You need more welding fuel to complete this task.</span>"
+					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 		return
 
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == DEFAULT_WALL_MATERIAL)
 		var/amt = Ceiling(( initial(integrity) - integrity)/10)
 		if(!amt)
-			user << "<span class='notice'>\The [src] is already fully repaired.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is already fully repaired.</span>")
 			return
 		var/obj/item/stack/P = W
 		if(P.amount < amt)
-			user << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 			return
-		user << "<span class='notice'>You begin repairing \the [src]...</span>"
+		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
 		if(do_after(user, 30))
 			if(P.use(amt))
-				user << "<span class='notice'>You have repaired \the [src].</span>"
+				to_chat(user, "<span class='notice'>You have repaired \the [src].</span>")
 				integrity = initial(integrity)
 				return
 			else
-				user << "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>"
+				to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
 				return
 
 	if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))
 		if(emagged)
-			user << "<span class='warning'>The lock seems to be broken.</span>"
+			to_chat(user, "<span class='warning'>The lock seems to be broken.</span>")
 			return
 		if(src.allowed(user))
-			if(active)
-				src.locked = !src.locked
-				user << "The controls are now [src.locked ? "locked." : "unlocked."]"
-			else
-				src.locked = 0 //just in case it somehow gets locked
-				user << "<span class='warning'>The controls can only be locked when [src] is online.</span>"
+			src.locked = !src.locked
+			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 		else
-			user << "<span class='warning'>Access denied.</span>"
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	..()
 	return
@@ -250,25 +249,32 @@
 	if(!P || !P.damage || P.get_structure_damage() <= 0 )
 		return
 
-	integrity = integrity - P.damage
-	if(integrity <= 0)
+	adjust_integrity(-P.get_structure_damage())
+
+/obj/machinery/power/emitter/blob_act()
+	adjust_integrity(-1000) // This kills the emitter.
+
+/obj/machinery/power/emitter/proc/adjust_integrity(amount)
+	integrity = between(0, integrity + amount, initial(integrity))
+	if(integrity == 0)
 		if(powernet && avail(active_power_usage)) // If it's powered, it goes boom if killed.
 			visible_message(src, "<span class='danger'>\The [src] explodes violently!</span>", "<span class='danger'>You hear an explosion!</span>")
 			explosion(get_turf(src), 1, 2, 4)
 		else
 			src.visible_message("<span class='danger'>\The [src] crumples apart!</span>", "<span class='warning'>You hear metal collapsing.</span>")
-		qdel(src)
+		if(src)
+			qdel(src)
 
 /obj/machinery/power/emitter/examine(mob/user)
 	..()
 	var/integrity_percentage = round((integrity / initial(integrity)) * 100)
 	switch(integrity_percentage)
 		if(0 to 30)
-			user << "<span class='danger'>\The [src] is close to falling apart!</span>"
+			to_chat(user, "<span class='danger'>\The [src] is close to falling apart!</span>")
 		if(31 to 70)
-			user << "<span class='danger'>\The [src] is damaged.</span>"
+			to_chat(user, "<span class='danger'>\The [src] is damaged.</span>")
 		if(77 to 99)
-			user << "<span class='warning'>\The [src] is slightly damaged.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is slightly damaged.</span>")
 
 //R-UST port
 /obj/machinery/power/emitter/proc/get_initial_fire_delay()

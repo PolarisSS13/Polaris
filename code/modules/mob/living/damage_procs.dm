@@ -34,6 +34,8 @@
 			adjustCloneLoss(damage * blocked)
 		if(HALLOSS)
 			adjustHalLoss(damage * blocked)
+		if(ELECTROCUTE)
+			electrocute_act(damage, used_weapon, 1.0, def_zone)
 	flash_weak_pain()
 	updatehealth()
 	return 1
@@ -87,7 +89,7 @@
 	return 1
 
 
-/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
+/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0, var/ignite = 0, var/flammable = 0)
 	if(blocked >= 100)
 		return 0
 	if(stun)		apply_effect(stun, STUN, blocked)
@@ -98,4 +100,6 @@
 	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
 	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(flammable)	adjust_fire_stacks(flammable)
+	if(ignite)		IgniteMob()
 	return 1

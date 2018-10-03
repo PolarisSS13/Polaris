@@ -1,6 +1,7 @@
 /mob/living/simple_animal/spiderbot
 	name = "spider-bot"
 	desc = "A skittering robotic friend!"
+	tt_desc = "Maintenance Robot"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
@@ -21,7 +22,7 @@
 
 	melee_damage_lower = 1
 	melee_damage_upper = 3
-	attacktext = "shocked"
+	attacktext = list("shocked")
 
 	min_oxy = 0
 	max_tox = 0
@@ -239,7 +240,7 @@
 			"You hear a skittering noise and a thump!")
 		var/obj/item/weapon/grenade/G = held_item
 		G.forceMove(src.loc)
-		G.prime()
+		G.detonate()
 		held_item = null
 		return 1
 

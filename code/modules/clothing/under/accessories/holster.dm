@@ -2,7 +2,7 @@
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon_state = "holster"
-	slot = "utility"
+	slot = ACCESSORY_SLOT_TORSO //Legacy/balance purposes
 	concealed_holster = 1
 	var/obj/item/holstered = null
 
@@ -52,7 +52,7 @@
 		clear_holster()
 
 /obj/item/clothing/accessory/holster/attack_hand(mob/user as mob)
-	if (has_suit)	//if we are part of a suit
+	if (has_suit && (slot & ACCESSORY_SLOT_UTILITY))	//if we are part of a suit
 		if (holstered)
 			unholster(user)
 		return
@@ -98,7 +98,7 @@
 		H = src
 	else if (istype(src, /obj/item/clothing/under))
 		var/obj/item/clothing/under/S = src
-		if (S.accessories.len)
+		if (LAZYLEN(S.accessories))
 			H = locate() in S.accessories
 
 	if (!H)
@@ -134,6 +134,6 @@
 /obj/item/clothing/accessory/holster/leg
 	name = "leg holster"
 	desc = "A tacticool handgun holster. Worn on the upper leg."
-	icon_state = "holster_hip"
+	icon_state = "holster_leg"
 	overlay_state = "holster_leg"
 	concealed_holster = 0

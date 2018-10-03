@@ -127,6 +127,36 @@
 	icon = 'icons/obj/doors/Doormaint.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_mai
 
+/obj/machinery/door/airlock/maintenance/cargo
+	icon = 'icons/obj/doors/Doormaint_cargo.dmi'
+	req_one_access = list(access_cargo)
+
+/obj/machinery/door/airlock/maintenance/command
+	icon = 'icons/obj/doors/Doormaint_command.dmi'
+	req_one_access = list(access_heads)
+
+/obj/machinery/door/airlock/maintenance/common
+	icon = 'icons/obj/doors/Doormaint_common.dmi'
+
+/obj/machinery/door/airlock/maintenance/engi
+	icon = 'icons/obj/doors/Doormaint_engi.dmi'
+	req_one_access = list(access_engine)
+
+/obj/machinery/door/airlock/maintenance/int
+	icon = 'icons/obj/doors/Doormaint_int.dmi'
+
+/obj/machinery/door/airlock/maintenance/medical
+	icon = 'icons/obj/doors/Doormaint_med.dmi'
+	req_one_access = list(access_medical)
+
+/obj/machinery/door/airlock/maintenance/rnd
+	icon = 'icons/obj/doors/Doormaint_rnd.dmi'
+	req_one_access = list(access_research)
+
+/obj/machinery/door/airlock/maintenance/sec
+	icon = 'icons/obj/doors/Doormaint_sec.dmi'
+	req_one_access = list(access_security)
+
 /obj/machinery/door/airlock/external
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
@@ -152,7 +182,13 @@
 /obj/machinery/door/airlock/centcom
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorele.dmi'
+	opacity = 1
+
+/obj/machinery/door/airlock/glass_centcom
+	name = "Airlock"
+	icon = 'icons/obj/doors/Dooreleglass.dmi'
 	opacity = 0
+	glass = 1
 
 /obj/machinery/door/airlock/vault
 	name = "Vault"
@@ -379,12 +415,32 @@
 	desc = "It's an extra resilient airlock intended for spacefaring vessels."
 	icon = 'icons/obj/doors/shuttledoors.dmi'
 	explosion_resistance = 20
+	opacity = 0
+	glass = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_voidcraft
 
 // Airlock opens from top-bottom instead of left-right.
 /obj/machinery/door/airlock/voidcraft/vertical
 	icon = 'icons/obj/doors/shuttledoors_vertical.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_voidcraft/vertical
+
+/obj/machinery/door/airlock/alien
+	name = "alien airlock"
+	desc = "You're fairly sure this is a door."
+	icon = 'icons/obj/doors/Dooralien.dmi'
+	explosion_resistance = 20
+	secured_wires = TRUE
+	hackProof = TRUE
+	assembly_type = /obj/structure/door_assembly/door_assembly_alien
+	req_one_access = list(access_alien)
+
+/obj/machinery/door/airlock/alien/locked
+	icon_state = "door_locked"
+	locked = TRUE
+
+/obj/machinery/door/airlock/alien/public // Entry to UFO.
+	req_one_access = list()
+	normalspeed = FALSE // So it closes faster and hopefully keeps the warm air inside.
 
 /*
 About the new airlock wires panel:
@@ -511,7 +567,7 @@ About the new airlock wires panel:
 	else if(duration)	//electrify door for the given duration seconds
 		if(usr)
 			shockedby += text("\[[time_stamp()]\] - [usr](ckey:[usr.ckey])")
-			usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+			add_attack_logs(usr,name,"Electrified a door")
 		else
 			shockedby += text("\[[time_stamp()]\] - EMP)")
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
@@ -640,7 +696,7 @@ About the new airlock wires panel:
 
 	data["commands"] = commands
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "door_control.tmpl", "Door Controls", 450, 350, state = state)
 		ui.set_initial_data(data)
@@ -814,7 +870,7 @@ About the new airlock wires panel:
 	if(istype(C, /mob/living))
 		..()
 		return
-	if(!repairing && (istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+	if(!repairing && istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density)
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
 			if(!src.welded)
@@ -826,7 +882,7 @@ About the new airlock wires panel:
 			return
 		else
 			return
-	else if(istype(C, /obj/item/weapon/screwdriver))
+	else if(C.is_screwdriver())
 		if (src.p_open)
 			if (stat & BROKEN)
 				to_chat(usr,"<span class='warning'>The panel is broken and cannot be closed.</span>")
@@ -837,7 +893,7 @@ About the new airlock wires panel:
 			src.p_open = 1
 			playsound(src, C.usesound, 50, 1)
 		src.update_icon()
-	else if(istype(C, /obj/item/weapon/wirecutters))
+	else if(C.is_wirecutter())
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/device/multitool))
 		return src.attack_hand(user)
@@ -846,7 +902,7 @@ About the new airlock wires panel:
 	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 		var/obj/item/weapon/pai_cable/cable = C
 		cable.plugin(src, user)
-	else if(!repairing && istype(C, /obj/item/weapon/crowbar))
+	else if(!repairing && C.is_crowbar())
 		if(can_remove_electronics())
 			playsound(src, C.usesound, 75, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
@@ -1119,10 +1175,11 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/initialize()
 	if(src.closeOtherId != null)
-		for (var/obj/machinery/door/airlock/A in world)
+		for (var/obj/machinery/door/airlock/A in machines)
 			if(A.closeOtherId == src.closeOtherId && A != src)
 				src.closeOther = A
 				break
+	. = ..()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)

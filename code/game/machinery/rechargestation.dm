@@ -103,28 +103,30 @@
 			R.adjustFireLoss(-wire_rate)
 	else if(ishuman(occupant))
 		var/mob/living/carbon/human/H = occupant
-		if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
-			H.nutrition = min(H.nutrition+10, 450)
-			cell.use(7000/450*10)
-
-	else if(istype(occupant, /mob/living/carbon/human))
-
-		var/mob/living/carbon/human/H = occupant
 
 		// In case they somehow end up with positive values for otherwise unobtainable damage...
-		if(H.getToxLoss()>0)   H.adjustToxLoss(-(rand(1,3)))
-		if(H.getOxyLoss()>0)   H.adjustOxyLoss(-(rand(1,3)))
-		if(H.getCloneLoss()>0) H.adjustCloneLoss(-(rand(1,3)))
-		if(H.getBrainLoss()>0) H.adjustBrainLoss(-(rand(1,3)))
+		if(H.getToxLoss() > 0)
+			H.adjustToxLoss(-(rand(1,3)))
+		if(H.getOxyLoss() > 0)
+			H.adjustOxyLoss(-(rand(1,3)))
+		if(H.getCloneLoss() > 0)
+			H.adjustCloneLoss(-(rand(1,3)))
+		if(H.getBrainLoss() > 0)
+			H.adjustBrainLoss(-(rand(1,3)))
 
 		// Also recharge their internal battery.
-		if(!isnull(H.internal_organs_by_name["cell"]) && H.nutrition < 450)
+		if(H.isSynthetic() && H.nutrition < 450)
 			H.nutrition = min(H.nutrition+10, 450)
 			cell.use(7000/450*10)
+
+		// And clear up radiation
+		if(H.radiation > 0)
+			H.radiation = max(H.radiation - rand(5, 15), 0)
+
 
 /obj/machinery/recharge_station/examine(mob/user)
 	..(user)
-	user << "The charge meter reads: [round(chargepercentage())]%"
+	to_chat(user, "The charge meter reads: [round(chargepercentage())]%")
 
 /obj/machinery/recharge_station/proc/chargepercentage()
 	if(!cell)
@@ -153,8 +155,20 @@
 			return
 		if(default_part_replacement(user, O))
 			return
+		if (istype(O, /obj/item/weapon/grab) && get_dist(src,user)<2)
+			var/obj/item/weapon/grab/G = O
+			if(istype(G.affecting,/mob/living))
+				var/mob/living/M = G.affecting
+				qdel(O)
+				go_in(M)
 
 	..()
+
+/obj/machinery/recharge_station/MouseDrop_T(var/mob/target, var/mob/user)
+	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user))
+		return
+
+	go_in(target)
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
@@ -214,15 +228,16 @@
 	if(icon_update_tick == 0)
 		build_overlays()
 
-/obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
-	go_in(R)
+/obj/machinery/recharge_station/Bumped(var/mob/living/L)
+	go_in(L)
 
-/obj/machinery/recharge_station/proc/go_in(var/mob/living/silicon/robot/R)
+/obj/machinery/recharge_station/proc/go_in(var/mob/living/L)
 
 	if(occupant)
 		return
 
-	if(istype(R, /mob/living/silicon/robot))
+	if(istype(L, /mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = L
 
 		if(R.incapacitated())
 			return
@@ -237,9 +252,9 @@
 		update_icon()
 		return 1
 
-	else if(istype(R,  /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = R
-		if(!isnull(H.internal_organs_by_name["cell"]))
+	else if(istype(L,  /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = L
+		if(H.isSynthetic())
 			add_fingerprint(H)
 			H.reset_view(src)
 			H.forceMove(src)
@@ -248,17 +263,6 @@
 			return 1
 	else
 		return
-
-/obj/machinery/recharge_station/proc/hascell(var/mob/M)
-	if(isrobot(M))
-		var/mob/living/silicon/robot/R = M
-		if(R.cell)
-			return 1
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(!isnull(H.internal_organs_by_name["cell"]))
-			return 1
-	return 0
 
 /obj/machinery/recharge_station/proc/go_out()
 	if(!occupant)
@@ -274,7 +278,7 @@
 	set name = "Eject Recharger"
 	set src in oview(1)
 
-	if(usr.incapacitated())
+	if(usr.incapacitated() || !isliving(usr))
 		return
 
 	go_out()
@@ -286,6 +290,31 @@
 	set name = "Enter Recharger"
 	set src in oview(1)
 
-	if(!usr.incapacitated())
+	if(usr.incapacitated() || !isliving(usr))
 		return
+
 	go_in(usr)
+
+/obj/machinery/recharge_station/ghost_pod_recharger
+	name = "drone pod"
+	desc = "This is a pod which used to contain a drone... Or maybe it still does?"
+	icon = 'icons/obj/structures.dmi'
+
+/obj/machinery/recharge_station/ghost_pod_recharger/update_icon()
+	..()
+	if(stat & BROKEN)
+		icon_state = "borg_pod_closed"
+		desc = "It appears broken..."
+		return
+
+	if(occupant)
+		if((stat & NOPOWER) && !has_cell_power())
+			icon_state = "borg_pod_closed"
+			desc = "It appears to be unpowered..."
+		else
+			icon_state = "borg_pod_closed"
+	else
+		icon_state = "borg_pod_opened"
+
+	if(icon_update_tick == 0)
+		build_overlays()

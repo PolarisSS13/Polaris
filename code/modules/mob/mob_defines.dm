@@ -1,6 +1,7 @@
 /mob
 	density = 1
-	layer = 4.0
+	layer = MOB_LAYER
+	plane = MOB_PLANE
 	animate_movement = 2
 	flags = PROXMOVE
 	var/datum/mind/mind
@@ -33,6 +34,10 @@
 	var/obj/screen/ling/chems/ling_chem_display = null
 	var/obj/screen/wizard/energy/wiz_energy_display = null
 	var/obj/screen/wizard/instability/wiz_instability_display = null
+
+	var/datum/plane_holder/plane_holder = null
+	var/list/vis_enabled = null		// List of vision planes that should be graphically visible (list of their VIS_ indexes).
+	var/list/planes_visible = null	// List of atom planes that are logically visible/interactable (list of actual plane numbers).
 
 	//spells hud icons - this interacts with add_spell and remove_spell
 	var/list/obj/screen/movable/spell_master/spell_masters = null
@@ -67,11 +72,13 @@
 	var/stuttering = null	//Carbon
 	var/slurring = null		//Carbon
 	var/real_name = null
+	var/nickname = null
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
+	var/exploit_addons = list()		//Assorted things that show up at the end of the exploit_record list
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
@@ -102,8 +109,6 @@
 	var/cpr_time = 1.0//Carbon
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/old_x = 0
-	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
@@ -212,3 +217,16 @@
 	var/forbid_seeing_deadchat = FALSE // Used for lings to not see deadchat, and to have ghosting behave as if they were not really dead.
 
 	var/seedarkness = 1	//Determines mob's ability to see shadows. 1 = Normal vision, 0 = darkvision
+
+	var/get_rig_stats = 0 //Moved from computer.dm
+
+	var/typing
+	var/obj/effect/decal/typing_indicator
+
+	var/low_priority = FALSE //Skip processing life() if there's just no players on this Z-level
+
+	var/default_pixel_x = 0 //For offsetting mobs
+	var/default_pixel_y = 0
+
+	var/attack_icon //Icon to use when attacking w/o anything in-hand
+	var/attack_icon_state //State for above

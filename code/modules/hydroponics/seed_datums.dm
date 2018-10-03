@@ -245,7 +245,7 @@
 	seed_name = "apple"
 	display_name = "apple tree"
 	mutants = list("poisonapple","goldapple")
-	chems = list("nutriment" = list(1,10))
+	chems = list("nutriment" = list(1,10),"applejuice" = list(10,20))
 	kitchen_tag = "apple"
 
 /datum/seed/apple/New()
@@ -691,7 +691,7 @@
 	name = "potato"
 	seed_name = "potato"
 	display_name = "potatoes"
-	chems = list("nutriment" = list(1,10), "potato" = list(10,10))
+	chems = list("nutriment" = list(1,10), "potatojuice" = list(10,10))
 	kitchen_tag = "potato"
 
 /datum/seed/potato/New()
@@ -705,6 +705,24 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#D4CAB4")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/onion
+    name = "onion"
+    seed_name = "onion"
+    display_name = "onions"
+    chems = list("nutriment" = list(1,10))
+    kitchen_tag = "onion"
+
+/datum/seed/onion/New()
+    ..()
+    set_trait(TRAIT_MATURATION,10)
+    set_trait(TRAIT_PRODUCTION,1)
+    set_trait(TRAIT_YIELD,4)
+    set_trait(TRAIT_POTENCY,10)
+    set_trait(TRAIT_PRODUCT_ICON,"onion")
+    set_trait(TRAIT_PRODUCT_COLOUR,"#E0C367")
+    set_trait(TRAIT_PLANT_ICON,"carrot")
+    set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/soybean
 	name = "soybean"
@@ -842,6 +860,7 @@
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
 	chems = list("nutriment" = list(1,6), "watermelonjuice" = list(10,6))
+	kitchen_tag = "watermelon"
 
 /datum/seed/watermelon/New()
 	..()
@@ -852,7 +871,7 @@
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,1)
 	set_trait(TRAIT_PRODUCT_ICON,"vine")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#326B30")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3D8C3A")
 	set_trait(TRAIT_PLANT_COLOUR,"#257522")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_FLESH_COLOUR,"#F22C2C")
@@ -874,9 +893,9 @@
 	set_trait(TRAIT_PRODUCTION,6)
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,10)
-	set_trait(TRAIT_PRODUCT_ICON,"vine")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#B4D4B9")
-	set_trait(TRAIT_PLANT_COLOUR,"#BAE8C1")
+	set_trait(TRAIT_PRODUCT_ICON,"vine2")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#DBAC02")
+	set_trait(TRAIT_PLANT_COLOUR,"#21661E")
 	set_trait(TRAIT_PLANT_ICON,"vine2")
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
@@ -910,6 +929,7 @@
 /datum/seed/citrus/lemon/New()
 	..()
 	set_trait(TRAIT_PRODUCES_POWER,1)
+	set_trait(TRAIT_PRODUCT_ICON,"lemon")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#F0E226")
 	set_trait(TRAIT_FLESH_COLOUR,"#F0E226")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)

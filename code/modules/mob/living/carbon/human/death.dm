@@ -1,5 +1,15 @@
 /mob/living/carbon/human/gib()
 
+	if(vr_holder)
+		exit_vr()
+		// Delete the link, because this mob won't be around much longer
+		vr_holder.vr_link = null
+
+	if(vr_link)
+		vr_link.exit_vr()
+		vr_link.vr_holder = null
+		vr_link = null
+
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(istype(loc,/turf))
@@ -14,7 +24,7 @@
 		drop_from_inventory(I)
 		I.throw_at(get_edge_target_turf(src,pick(alldirs)), rand(1,3), round(30/I.w_class))
 
-	..(species.gibbed_anim)
+	..(species.gibbed_anim) // uses the default mob.dmi file for these, so we only need to specify the first argument
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
 /mob/living/carbon/human/dust()
@@ -80,6 +90,20 @@
 	if(wearing_rig)
 		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
 
+	// If the body is in VR, move the mind back to the real world
+	if(vr_holder)
+		src.exit_vr()
+		src.vr_holder.vr_link = null
+		for(var/obj/item/W in src)
+			src.drop_from_inventory(W)
+
+	// If our mind is in VR, bring it back to the real world so it can die with its body
+	if(vr_link)
+		vr_link.exit_vr()
+		vr_link.vr_holder = null
+		vr_link = null
+		to_chat(src, "<span class='danger'>Everything abruptly stops.</span>")
+
 	return ..(gibbed,species.get_death_message(src))
 
 /mob/living/carbon/human/proc/ChangeToHusk()
@@ -93,7 +117,7 @@
 
 	mutations.Add(HUSK)
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
-	update_body(1)
+	update_icons_body()
 	return
 
 /mob/living/carbon/human/proc/Drain()
@@ -112,5 +136,5 @@
 
 	mutations.Add(SKELETON)
 	status_flags |= DISFIGURED
-	update_body(0)
+	update_icons_body()
 	return

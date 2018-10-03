@@ -4,7 +4,7 @@
 
 /obj/machinery/shield_capacitor
 	name = "shield capacitor"
-	desc = "Machine that charges a shield generator."
+	desc = "A machine that charges a shield generator."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "capacitor"
 	var/active = 0
@@ -18,6 +18,12 @@
 	use_power = 0 //doesn't use APC power
 	var/charge_rate = 100000	//100 kW
 	var/obj/machinery/shield_gen/owned_gen
+
+/obj/machinery/shield_capacitor/advanced
+	name = "advanced shield capacitor"
+	desc = "A machine that charges a shield generator.  This version can store, input, and output more electricity."
+	max_charge = 12e6
+	max_charge_rate = 600000
 
 /obj/machinery/shield_capacitor/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
@@ -39,7 +45,7 @@
 			updateDialog()
 		else
 			user << "<font color='red'>Access denied.</font>"
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		src.anchored = !src.anchored
 		playsound(src, W.usesound, 75, 1)
 		src.visible_message("<font color='blue'>\icon[src] [src] has been [anchored ? "bolted to the floor" : "unbolted from the floor"] by [user].</font>")
@@ -98,7 +104,7 @@
 
 	//see if we can connect to a power net.
 	var/datum/powernet/PN
-	var/turf/T = src.loc
+	var/turf/T = get_turf(src)
 	var/obj/structure/cable/C = T.get_cable_node()
 	if (C)
 		PN = C.powernet

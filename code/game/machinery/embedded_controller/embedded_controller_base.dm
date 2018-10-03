@@ -58,6 +58,7 @@ obj/machinery/embedded_controller/radio/Destroy()
 	unacidable = 1
 
 /obj/machinery/embedded_controller/radio/initialize()
+	. = ..()
 	set_frequency(frequency)
 
 /obj/machinery/embedded_controller/radio/update_icon()
@@ -69,11 +70,11 @@ obj/machinery/embedded_controller/radio/Destroy()
 	else
 		icon_state = "airlock_control_off"
 
-/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/filter = null)
+/obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/radio_filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
 		//use_power(radio_power_use)	//neat idea, but causes way too much lag.
-		return radio_connection.post_signal(src, signal, filter)
+		return radio_connection.post_signal(src, signal, radio_filter)
 	else
 		qdel(signal)
 

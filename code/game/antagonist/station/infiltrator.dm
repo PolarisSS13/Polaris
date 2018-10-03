@@ -1,4 +1,4 @@
-// Infiltrator is a varient of Traitor, except that the traitors are in a team and can communicate with a special headset.
+// Infiltrator is a variant of Traitor, except that the traitors are in a team and can communicate with a special headset.
 
 var/datum/antagonist/traitor/infiltrator/infiltrators
 
@@ -13,6 +13,7 @@ var/datum/antagonist/traitor/infiltrator/infiltrators
 	welcome_text = "To speak on your team's private channel, use :t."
 	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Colony Director")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
+	can_speak_aooc = TRUE
 
 /datum/antagonist/traitor/infiltrator/New()
 	..()

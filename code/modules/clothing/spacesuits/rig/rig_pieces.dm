@@ -11,10 +11,10 @@
 	cold_protection =    HEAD|FACE|EYES
 	brightness_on = 4
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
-		"Skrell" = 'icons/mob/species/skrell/helmet.dmi',
-		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
-		"Vox" = 'icons/mob/species/vox/head.dmi'
+		SPECIES_TAJ = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi'
 		)
 	species_restricted = null
 
@@ -50,12 +50,12 @@
 	resilience = 0.2
 	can_breach = 1
 	sprite_sheets = list(
-		"Tajara" = 'icons/mob/species/tajaran/suit.dmi',
-		"Unathi" = 'icons/mob/species/unathi/suit.dmi',
-		"Vox" = 'icons/mob/species/vox/suit.dmi'
+		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi'
 		)
 	supporting_limbs = list()
-	var/obj/item/weapon/material/hatchet/tacknife
+	var/obj/item/weapon/material/knife/tacknife
 
 /obj/item/clothing/suit/space/rig/attack_hand(var/mob/living/M)
 	if(tacknife)
@@ -69,7 +69,7 @@
 	..()
 
 /obj/item/clothing/suit/space/rig/attackby(var/obj/item/I, var/mob/living/M)
-	if(istype(I, /obj/item/weapon/material/hatchet/tacknife))
+	if(istype(I, /obj/item/weapon/material/knife/tacknife))
 		if(tacknife)
 			return
 		M.drop_item()

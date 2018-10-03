@@ -36,7 +36,7 @@
 		return
 	if(!istype(user))
 		return
-	if(isscrewdriver(O) && emag)
+	if(O.is_screwdriver() && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		user << "<span class='warning'>It is too hot to mess with!</span>"
 		return
@@ -76,7 +76,7 @@
 	if(!linkedServer)
 		if(message_servers && message_servers.len > 0)
 			linkedServer = message_servers[1]
-	return
+	return ..()
 
 /obj/machinery/computer/message_monitor/attack_hand(var/mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))

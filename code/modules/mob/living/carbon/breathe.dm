@@ -13,10 +13,10 @@
 
 	//First, check if we can breathe at all
 	if(health < config.health_threshold_crit && !(CE_STABLE in chem_effects)) //crit aka circulatory shock
-		losebreath++
+		AdjustLosebreath(1)
 
 	if(losebreath>0) //Suffocating so do not take a breath
-		losebreath--
+		AdjustLosebreath(-1)
 		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
 			spawn emote("gasp")
 	else
@@ -63,8 +63,8 @@
 		//handle mask filtering
 		if(istype(wear_mask, /obj/item/clothing/mask) && breath)
 			var/obj/item/clothing/mask/M = wear_mask
-			var/datum/gas_mixture/filtered = M.filter_air(breath)
-			loc.assume_air(filtered)
+			var/datum/gas_mixture/gas_filtered = M.filter_air(breath)
+			loc.assume_air(gas_filtered)
 		return breath
 	return null
 

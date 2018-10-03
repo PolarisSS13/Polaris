@@ -93,7 +93,7 @@ SHOW_DEVS
 SHOW_MODS
 
 ##Show mentors on staffwho
-SHOW_MENTORS
+SHOW_EVENT
 
 ## Chooses whether mods have the ability to tempban or not
 MODS_CAN_TEMPBAN
@@ -217,6 +217,11 @@ GUEST_BAN
 ## Wiki address
 # WIKIURL http://example.com
 
+## Wiki search path
+## Set this to whatever path your wiki uses to search for articles
+## Use %s to mark where the search query should be inserted
+# WIKISEARCHURL http://example.com/index.php?title=Special%3ASearch&search=%s
+
 ## GitHub address
 # GITHUBURL https://github.com/example-user/example-repository
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
@@ -238,8 +243,8 @@ GUEST_BAN
 
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
-##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.9
+##Defines the ticklag for the world.  0.6 is the normal one, 0.5 is smoother
+TICKLAG 0.6
 
 ## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
 TICKCOMP 0
@@ -305,6 +310,9 @@ REQ_CULT_GHOSTWRITER 6
 
 ## Sets the number of available character slots
 CHARACTER_SLOTS 10
+
+## Sets the number of loadout slots per character
+LOADOUT_SLOTS 3
 
 ## Uncomment to use overmap system for zlevel travel
 #USE_OVERMAP
@@ -394,3 +402,9 @@ STARLIGHT 0
 
 ## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
 # DEFAULT_LANGUAGE_PREFIXES , # -
+
+## Uncomment to enable the Panic Bunker by default. This will prevent all unseen-before players from connecting. Requires SQL.
+# PANIC_BUNKER
+
+## Uncomment to enable Paranoia Logging. This will notify admins and write to a file any time a new player (byond or your server) connects.
+# PARANOIA_LOGGING

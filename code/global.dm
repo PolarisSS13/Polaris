@@ -6,12 +6,11 @@
 // Items that ask to be called every cycle.
 var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
-var/global/list/machines                 = list()
+var/global/list/machines                 = list()	// ALL Machines, wether processing or not.
+var/global/list/processing_machines      = list()	// TODO - Move into SSmachines
 var/global/list/processing_objects       = list()
-var/global/list/processing_power_items   = list()
+var/global/list/processing_power_items   = list()	// TODO - Move into SSmachines
 var/global/list/active_diseases          = list()
-var/global/list/med_hud_users            = list() // List of all entities using a medical HUD.
-var/global/list/sec_hud_users            = list() // List of all entities using a security HUD.
 var/global/list/hud_icon_reference       = list()
 
 
@@ -23,7 +22,10 @@ var/global/list/global_map = null
 
 // Noises made when hit while typing.
 var/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/log_path			= "data/logs/" //See world.dm for the full calculated path
 var/diary				= null
+var/error_log			= null
+var/debug_log			= null
 var/href_logfile		= null
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
@@ -40,17 +42,6 @@ var/changelog_hash		= ""
 var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/round_progressing = 1
 
-	//On some maps, it does not make sense for space turf to appear when something blows up (e.g. on an asteroid colony, or planetside)
-	//The turf listed here is what is created after ex_act() and other tile-destroying procs are called on a turf that
-	//is not already in a blacklisted area.
-	//Set to 1 to enable it.
-var/destroy_floor_override = 1
-	//Below is the path of turf used in place of space tiles.
-var/destroy_floor_override_path = /turf/simulated/mineral/floor
-	//A list of z-levels to apply the override to.  This is so z-levels like tcomms work as they did before.
-var/list/destroy_floor_override_z_levels = list(1,4,5)
-	//Some areas you may want to not turn into the override path you made above, like space or the solars.
-var/list/destroy_floor_override_ignore_areas = list(/area/space,/area/solar,/area/shuttle)
 var/master_mode       = "extended" // "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
@@ -107,7 +98,7 @@ var/list/IClog     = list()
 var/list/OOClog    = list()
 var/list/adminlog  = list()
 
-var/list/powernets = list()
+var/list/powernets = list()	// TODO - Move into SSmachines
 
 var/Debug2 = 0
 var/datum/debug/debugobj
@@ -118,25 +109,11 @@ var/gravity_is_on = 1
 
 var/join_motd = null
 
-var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
 var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
 var/datum/game_master/game_master = new() // Game Master, an AI for choosing events.
 var/datum/metric/metric = new() // Metric datum, used to keep track of the round.
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
-
-// MySQL configuration
-var/sqladdress = "localhost"
-var/sqlport    = "3306"
-var/sqldb      = "tgstation"
-var/sqllogin   = "root"
-var/sqlpass    = ""
-
-// Feedback gathering sql connection
-var/sqlfdbkdb    = "test"
-var/sqlfdbklogin = "root"
-var/sqlfdbkpass  = ""
-var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
@@ -197,6 +174,14 @@ var/static/list/scarySounds = list(
 var/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
-var/global/obj/item/device/radio/intercom/global_announcer = new /obj/item/device/radio/intercom{channels=list("Engineering")}(null)
+var/global/obj/item/device/radio/intercom/omni/global_announcer = new /obj/item/device/radio/intercom/omni(null)
 
 var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+
+//Icons for in-game HUD glasses. Why don't we just share these a little bit?
+var/static/icon/ingame_hud = icon('icons/mob/hud.dmi')
+var/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
+
+//Keyed list for caching icons so you don't need to make them for records, IDs, etc all separately.
+//Could be useful for AI impersonation or something at some point?
+var/static/list/cached_character_icons = list()

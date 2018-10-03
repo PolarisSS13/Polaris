@@ -13,6 +13,9 @@ obj/machinery/atmospherics/pipe/zpipe
 		dir = SOUTH
 		initialize_directions = SOUTH
 
+		construction_type = /obj/item/pipe/directional
+		pipe_state = "cap"
+
 		// node1 is the connection on the same Z
 		// node2 is the connection on the other Z
 
@@ -26,8 +29,11 @@ obj/machinery/atmospherics/pipe/zpipe
 
 		level = 1
 
-obj/machinery/atmospherics/pipe/zpipe/New()
+/obj/machinery/atmospherics/pipe/zpipe/New()
 	..()
+	init_dir()
+
+/obj/machinery/atmospherics/pipe/zpipe/init_dir()
 	switch(dir)
 		if(SOUTH)
 			initialize_directions = SOUTH
@@ -91,7 +97,7 @@ obj/machinery/atmospherics/pipe/zpipe/Destroy()
 		node1.disconnect(src)
 	if(node2)
 		node2.disconnect(src)
-	..()
+	. = ..()
 
 obj/machinery/atmospherics/pipe/zpipe/pipeline_expansion()
 	return list(node1, node2)
@@ -122,7 +128,7 @@ obj/machinery/atmospherics/pipe/zpipe/up
 		name = "upwards pipe"
 		desc = "A pipe segment to connect upwards."
 
-obj/machinery/atmospherics/pipe/zpipe/up/initialize()
+obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
 	normalize_dir()
 	var/node1_dir
 
@@ -132,16 +138,15 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 				node1_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node1 = target
-				break
+		if(can_be_node(target, 1))
+			node1 = target
+			break
 
 	var/turf/above = GetAbove(src)
 	if(above)
 		for(var/obj/machinery/atmospherics/target in above)
-			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
-				if (check_connect_types(target,src))
+			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
+				if (check_connectable(target) && target.check_connectable(src))
 					node2 = target
 					break
 
@@ -160,7 +165,7 @@ obj/machinery/atmospherics/pipe/zpipe/down
 		name = "downwards pipe"
 		desc = "A pipe segment to connect downwards."
 
-obj/machinery/atmospherics/pipe/zpipe/down/initialize()
+obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
 	normalize_dir()
 	var/node1_dir
 
@@ -170,16 +175,15 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 				node1_dir = direction
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node1 = target
-				break
+		if(can_be_node(target, 1))
+			node1 = target
+			break
 
 	var/turf/below = GetBelow(src)
 	if(below)
 		for(var/obj/machinery/atmospherics/target in below)
-			if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
-				if (check_connect_types(target,src))
+			if(istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
+				if (check_connectable(target) && target.check_connectable(src))
 					node2 = target
 					break
 
@@ -196,7 +200,8 @@ obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
 	name = "upwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect upwards."
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
+	piping_layer = PIPING_LAYER_SCRUBBER
+	layer = PIPES_SCRUBBER_LAYER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -205,7 +210,8 @@ obj/machinery/atmospherics/pipe/zpipe/up/supply
 	name = "upwards supply pipe"
 	desc = "A supply pipe segment to connect upwards."
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
+	piping_layer = PIPING_LAYER_SUPPLY
+	layer = PIPES_SUPPLY_LAYER
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE
 
@@ -214,7 +220,8 @@ obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 	name = "downwards scrubbers pipe"
 	desc = "A scrubbers pipe segment to connect downwards."
 	connect_types = CONNECT_TYPE_SCRUBBER
-	layer = 2.38
+	piping_layer = PIPING_LAYER_SCRUBBER
+	layer = PIPES_SCRUBBER_LAYER
 	icon_connect_type = "-scrubbers"
 	color = PIPE_COLOR_RED
 
@@ -223,6 +230,7 @@ obj/machinery/atmospherics/pipe/zpipe/down/supply
 	name = "downwards supply pipe"
 	desc = "A supply pipe segment to connect downwards."
 	connect_types = CONNECT_TYPE_SUPPLY
-	layer = 2.39
+	piping_layer = PIPING_LAYER_SUPPLY
+	layer = PIPES_SUPPLY_LAYER
 	icon_connect_type = "-supply"
 	color = PIPE_COLOR_BLUE

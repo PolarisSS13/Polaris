@@ -1,10 +1,10 @@
-/mob/living/simple_animal/hostile/goose
-	name = "space goose"
-	desc = "That's no duck. That's a space goose. You have a bad feeling about this."
+/mob/living/simple_animal/hostile/goose //hey are these even in the game
+	name = "goose"
+	desc = "It looks pretty angry!"
+	tt_desc = "E Branta canadensis" //that iconstate is just a regular goose
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"
-	icon_gib = "generic_gib"
 
 	faction = "geese"
 	intelligence_level = SA_ANIMAL
@@ -22,7 +22,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 5 //they're meant to be annoying, not threatening.
 	melee_damage_upper = 5 //unless there's like a dozen of them, then you're screwed.
-	attacktext = "pecked"
+	attacktext = list("pecked")
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	//SPACE geese aren't affected by atmos.

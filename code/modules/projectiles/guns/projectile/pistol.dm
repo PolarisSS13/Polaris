@@ -4,10 +4,10 @@
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	icon_state = "colt"
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/colt/update_icon()
@@ -23,7 +23,7 @@
 			icon_state = "[initial(icon_state)]-e"
 
 /obj/item/weapon/gun/projectile/colt/detective
-	desc = "A Martian recreation of an old Terran pistol. Uses .45 rounds."
+	desc = "A Martian recreation of an old pistol. Uses .45 rounds."
 	magazine_type = /obj/item/ammo_magazine/m45/rubber
 
 /obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
@@ -60,21 +60,31 @@
 	options["H&K VP"] = "VP78"
 	options["P08 Luger"] = "p08"
 	options["P08 Luger, Brown"] = "p08b"
-	var/choice = input(M,"What do you want the gun's sprite to be?","Resprite Gun") in options
+	options["Glock 37"] = "enforcer_black"
+	var/choice = input(M,"Choose your sprite!","Resprite Gun") in options
 	if(src && choice && !M.stat && in_range(M,src))
 		icon_state = options[choice]
 		unique_reskin = options[choice]
 		M << "Your gun is now sprited as [choice]. Say hello to your new friend."
 		return 1
 
+/*//apart of reskins that have two sprites, touching may result in frustration and breaks
+/obj/item/weapon/gun/projectile/colt/detective/attack_hand(var/mob/living/user)
+	if(!unique_reskin && loc == user)
+		reskin_gun(user)
+		return
+	..()
+*/
+
 /obj/item/weapon/gun/projectile/sec
 	name = ".45 pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are. Uses .45 rounds."
 	icon_state = "secguncomp"
 	magazine_type = /obj/item/ammo_magazine/m45/rubber
+	allowed_magazines = list(/obj/item/ammo_magazine/m45)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
 
 /obj/item/weapon/gun/projectile/sec/update_icon()
@@ -113,6 +123,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m45
 	allowed_magazines = list(/obj/item/ammo_magazine/m45)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
@@ -146,7 +157,7 @@
 /*
 /obj/item/weapon/gun/projectile/fiveseven
 	name = "\improper WT-AP57"
-	desc = "This tacticool pistol made by Ward-Takahashi trades stopping power for armor piercing and a high capacity. Uses 5mm rounds."
+	desc = "This tacticool pistol made by Ward-Takahashi trades stopping power for armor piercing and a large capacity. Uses 5mm rounds."
 	icon_state = "fnseven"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "5mm"
@@ -186,22 +197,22 @@
 		icon_state = "gyropistol"
 
 /obj/item/weapon/gun/projectile/pistol
-	name = "holdout pistol"
-	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun. Uses 9mm rounds."
+	name = "compact pistol"
+	desc = "The Lumoco Arms P3 Whisper. A compact, easily concealable gun, though it's only compatible with compact magazines. Uses 9mm rounds."
 	icon_state = "pistol"
 	item_state = null
 	w_class = ITEMSIZE_SMALL
 	caliber = "9mm"
 	silenced = 0
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
-	fire_sound = 'sound/weapons/gunshot3.ogg'
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/m9mm
-	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
+	magazine_type = /obj/item/ammo_magazine/m9mm/compact
+	allowed_magazines = list(/obj/item/ammo_magazine/m9mm/compact)
+	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/weapon/gun/projectile/pistol/flash
-	name = "holdout signal pistol"
-	magazine_type = /obj/item/ammo_magazine/m9mm/flash
+	name = "compact signal pistol"
+	magazine_type = /obj/item/ammo_magazine/m9mm/compact/flash
 
 /obj/item/weapon/gun/projectile/pistol/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -256,8 +267,8 @@
 
 	var/global/list/ammo_types = list(
 		/obj/item/ammo_casing/a357              = ".357",
-		/obj/item/ammo_casing/a9mmf             = "9mm",
-		/obj/item/ammo_casing/a45f              = ".45",
+		/obj/item/ammo_casing/a9mm		        = "9mm",
+		/obj/item/ammo_casing/a45				= ".45",
 		/obj/item/ammo_casing/a10mm             = "10mm",
 		/obj/item/ammo_casing/a12g              = "12g",
 		/obj/item/ammo_casing/a12g              = "12g",
@@ -290,17 +301,18 @@
 	load_method = SINGLE_CASING
 	max_shells = 2
 	ammo_type = /obj/item/ammo_casing/a357
+	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
 /obj/item/weapon/gun/projectile/luger
 	name = "\improper P08 Luger"
-	desc = "Not some cheap Scheisse .45 caliber Martian knockoff! This Luger is an authentic reproduction by RauMauser. Accuracy, easy handling, and its signature appearance make it popular among historic gun collectors. Uses 9mm rounds."
+	desc = "Not some cheap scheisse Martian knockoff! This Luger is an authentic reproduction by RauMauser. Accuracy, easy handling, and its signature appearance make it popular among historic gun collectors. Uses 9mm rounds."
 	icon_state = "p08"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	caliber = "9mm"
 	load_method = MAGAZINE
-	fire_sound = 'sound/weapons/gunshot3.ogg'
-	magazine_type = /obj/item/ammo_magazine/m9mm
-	allowed_magazines = list(/obj/item/ammo_magazine/m9mm)
+	magazine_type = /obj/item/ammo_magazine/m9mm/compact
+	allowed_magazines = list(/obj/item/ammo_magazine/m9mm/compact)
+	projectile_type = /obj/item/projectile/bullet/pistol
 
 /obj/item/weapon/gun/projectile/luger/update_icon()
 	..()
@@ -311,3 +323,27 @@
 
 /obj/item/weapon/gun/projectile/luger/brown
 	icon_state = "p08b"
+
+/obj/item/weapon/gun/projectile/p92x
+	name = "9mm pistol"
+	desc = "A widespread sidearm called the P92X which is used by military, police, and security forces across the galaxy. Uses 9mm rounds."
+	icon_state = "p92x"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	caliber = "9mm"
+	load_method = MAGAZINE
+	fire_sound = 'sound/weapons/gunshot3.ogg'
+	magazine_type = /obj/item/ammo_magazine/m9mm
+	allowed_magazines = list(/obj/item/ammo_magazine/m9mm) // Can accept illegal large capacity magazines, or compact magazines.
+
+/obj/item/weapon/gun/projectile/p92x/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "[initial(icon_state)]"
+	else
+		icon_state = "[initial(icon_state)]-e"
+
+/obj/item/weapon/gun/projectile/p92x/brown
+	icon_state = "p92x-brown"
+
+/obj/item/weapon/gun/projectile/p92x/large
+	magazine_type = /obj/item/ammo_magazine/m9mm/large // Spawns with illegal magazines.

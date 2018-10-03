@@ -1,5 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
+GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
+
 /obj/singularity/
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
@@ -7,7 +9,7 @@
 	icon_state = "singularity_s1"
 	anchored = 1
 	density = 1
-	layer = 6
+	plane = ABOVE_PLANE
 	light_range = 6
 	unacidable = 1 //Don't comment this out.
 
@@ -29,14 +31,10 @@
 
 	var/chained = 0//Adminbus chain-grab
 
-/obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+/obj/singularity/New(loc, var/starting_energy = 50)
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
-
-	if (temp)
-		spawn (temp)
-			qdel(src)
 
 	..()
 	processing_objects += src
@@ -47,7 +45,7 @@
 
 /obj/singularity/Destroy()
 	processing_objects -= src
-	..()
+	return ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
 	consume(user)
@@ -169,7 +167,7 @@
 				pixel_y = -64
 				grav_pull = 8
 				consume_range = 2
-				dissipate_delay = 10
+				dissipate_delay = 4
 				dissipate_track = 0
 				dissipate_strength = 20
 				overlays = 0
@@ -267,19 +265,15 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
+	for(var/T in orange(grav_pull, src))
+		var/atom/X = T
+		if(!X.simulated)
+			continue
 		var/dist = get_dist(X, src)
-		var/obj/singularity/S = src
-		if(!istype(src))
-			return
 		if(dist > consume_range)
-			X.singularity_pull(S, current_size)
-		else if(dist <= consume_range)
+			X.singularity_pull(src, current_size)
+		else
 			consume(X)
-
-	//for (var/turf/T in trange(grav_pull, src)) //TODO: Create a similar trange for orange to prevent snowflake of self check.
-	//	consume(T)
-
 	return
 
 /obj/singularity/proc/consume(const/atom/A)

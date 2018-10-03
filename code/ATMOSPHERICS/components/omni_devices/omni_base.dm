@@ -7,6 +7,7 @@
 	icon_state = "base"
 	use_power = 1
 	initialize_directions = 0
+	construction_type = /obj/item/pipe/quaternary
 	level = 1
 
 	var/configuring = 0
@@ -79,22 +80,21 @@
 		update_icon()
 
 /obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!istype(W, /obj/item/weapon/wrench))
+	if(!W.is_wrench())
 		return ..()
 
 	if(!can_unwrench())
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	playsound(src, W.usesound, 50, 1)
 	if(do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
+		deconstruct()
 
 /obj/machinery/atmospherics/omni/can_unwrench()
 	var/int_pressure = 0
@@ -120,7 +120,7 @@
 	var/core_icon = null
 	if(istype(src, /obj/machinery/atmospherics/omni/mixer))
 		core_icon = "mixer"
-	else if(istype(src, /obj/machinery/atmospherics/omni/filter))
+	else if(istype(src, /obj/machinery/atmospherics/omni/atmos_filter))
 		core_icon = "filter"
 	else
 		return
@@ -222,6 +222,11 @@
 
 
 // Housekeeping and pipe network stuff below
+/obj/machinery/atmospherics/omni/get_neighbor_nodes_for_init()
+	var/list/neighbor_nodes = list()
+	for(var/datum/omni_port/P in ports)
+		neighbor_nodes += P.node
+	return neighbor_nodes
 
 /obj/machinery/atmospherics/omni/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	for(var/datum/omni_port/P in ports)
@@ -244,19 +249,17 @@
 			P.node.disconnect(src)
 			qdel(P.network)
 			P.node = null
+	ports = null
+	. = ..()
 
-	..()
-
-/obj/machinery/atmospherics/omni/initialize()
+/obj/machinery/atmospherics/omni/atmos_init()
 	for(var/datum/omni_port/P in ports)
 		if(P.node || P.mode == 0)
 			continue
 		for(var/obj/machinery/atmospherics/target in get_step(src, P.dir))
-			target.init_dir()
-			if(target.initialize_directions & get_dir(target,src))
-				if (check_connect_types(target,src))
-					P.node = target
-					break
+			if(can_be_node(target, 1))
+				P.node = target
+				break
 
 	for(var/datum/omni_port/P in ports)
 		P.update = 1

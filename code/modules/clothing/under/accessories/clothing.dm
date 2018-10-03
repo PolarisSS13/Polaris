@@ -2,28 +2,30 @@
 	name = "black vest"
 	desc = "Slick black suit vest."
 	icon_state = "det_vest"
+	slot = ACCESSORY_SLOT_OVER
 
-/obj/item/clothing/accessory/tan_jacket
+/obj/item/clothing/accessory/jacket
 	name = "tan suit jacket"
 	desc = "Cozy suit jacket."
 	icon_state = "tan_jacket"
+	slot = ACCESSORY_SLOT_OVER
 
-/obj/item/clothing/accessory/charcoal_jacket
+/obj/item/clothing/accessory/jacket/charcoal
 	name = "charcoal suit jacket"
 	desc = "Strict suit jacket."
 	icon_state = "charcoal_jacket"
 
-/obj/item/clothing/accessory/navy_jacket
+/obj/item/clothing/accessory/jacket/navy
 	name = "navy suit jacket"
 	desc = "Official suit jacket."
 	icon_state = "navy_jacket"
 
-/obj/item/clothing/accessory/burgundy_jacket
+/obj/item/clothing/accessory/jacket/burgundy
 	name = "burgundy suit jacket"
 	desc = "Expensive suit jacket."
 	icon_state = "burgundy_jacket"
 
-/obj/item/clothing/accessory/checkered_jacket
+/obj/item/clothing/accessory/jacket/checkered
 	name = "checkered suit jacket"
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
@@ -55,7 +57,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
-	slot = "over"
+	slot = ACCESSORY_SLOT_OVER
 
 	sprite_sheets = list(
 		"Teshari" = 'icons/mob/species/seromi/suit.dmi'
@@ -115,6 +117,106 @@
 	icon_state = "cargoponcho"
 	item_state = "cargoponcho"
 
+/*
+ * Cloak
+ */
+/obj/item/clothing/accessory/poncho/roles/cloak
+	name = "quartermaster's cloak"
+	desc = "An elaborate brown and gold cloak."
+	icon_state = "qmcloak"
+	item_state = "qmcloak"
+	body_parts_covered = null
+
+/obj/item/clothing/accessory/poncho/roles/cloak/ce
+	name = "chief engineer's cloak"
+	desc = "An elaborate cloak worn by the chief engineer."
+	icon_state = "cecloak"
+	item_state = "cecloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/cmo
+	name = "chief medical officer's cloak"
+	desc = "An elaborate cloak meant to be worn by the chief medical officer."
+	icon_state = "cmocloak"
+	item_state = "cmocloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/hop
+	name = "head of personnel's cloak"
+	desc = "An elaborate cloak meant to be worn by the head of personnel."
+	icon_state = "hopcloak"
+	item_state = "hopcloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/rd
+	name = "research director's cloak"
+	desc = "An elaborate cloak meant to be worn by the research director."
+	icon_state = "rdcloak"
+	item_state = "rdcloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/qm
+	name = "quartermaster's cloak"
+	desc = "An elaborate cloak meant to be worn by the quartermaster."
+	icon_state = "qmcloak"
+	item_state = "qmcloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/hos
+	name = "head of security's cloak"
+	desc = "An elaborate cloak meant to be worn by the head of security."
+	icon_state = "hoscloak"
+	item_state = "hoscloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/captain
+	name = "colony director's cloak"
+	desc = "An elaborate cloak meant to be worn by the colony director."
+	icon_state = "capcloak"
+	item_state = "capcloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/cargo
+	name = "brown cloak"
+	desc = "A simple brown and black cloak."
+	icon_state = "cargocloak"
+	item_state = "cargocloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/mining
+	name = "trimmed purple cloak"
+	desc = "A trimmed purple and brown cloak."
+	icon_state = "miningcloak"
+	item_state = "miningcloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/security
+	name = "red cloak"
+	desc = "A simple red and black cloak."
+	icon_state = "seccloak"
+	item_state = "seccloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/service
+	name = "green cloak"
+	desc = "A simple green and blue cloak."
+	icon_state = "servicecloak"
+	item_state = "servicecloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/engineer
+	name = "gold cloak"
+	desc = "A simple gold and brown cloak."
+	icon_state = "engicloak"
+	item_state = "engicloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/atmos
+	name = "yellow cloak"
+	desc = "A trimmed yellow and blue cloak."
+	icon_state = "atmoscloak"
+	item_state = "atmoscloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/research
+	name = "purple cloak"
+	desc = "A simple purple and white cloak."
+	icon_state = "scicloak"
+	item_state = "scicloak"
+
+/obj/item/clothing/accessory/poncho/roles/cloak/medical
+	name = "blue cloak"
+	desc = "A simple blue and white cloak."
+	icon_state = "medcloak"
+	item_state = "medcloak"
+
 /obj/item/clothing/accessory/hawaii
 	name = "flower-pattern shirt"
 	desc = "You probably need some welder googles to look at this."
@@ -124,6 +226,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
+	slot = ACCESSORY_SLOT_OVER
 
 /obj/item/clothing/accessory/hawaii/red
 	icon_state = "hawaii2"
@@ -149,6 +252,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
+	slot = ACCESSORY_SLOT_OVER
 
 /obj/item/clothing/accessory/wcoat/red
 	name = "red waistcoat"
@@ -190,6 +294,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
+	slot = ACCESSORY_SLOT_OVER
 
 /obj/item/clothing/accessory/sweater/pink
 	name = "pink sweater"

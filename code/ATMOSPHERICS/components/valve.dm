@@ -1,6 +1,8 @@
 /obj/machinery/atmospherics/valve
 	icon = 'icons/atmos/valve.dmi'
 	icon_state = "map_valve0"
+	construction_type = /obj/item/pipe/binary
+	pipe_state = "mvalve"
 
 	name = "manual valve"
 	desc = "A pipe valve"
@@ -44,6 +46,9 @@
 			initialize_directions = NORTH|SOUTH
 		if(EAST || WEST)
 			initialize_directions = EAST|WEST
+
+/obj/machinery/atmospherics/valve/get_neighbor_nodes_for_init()
+	return list(node1, node2)
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -140,8 +145,7 @@
 
 	return
 
-/obj/machinery/atmospherics/valve/initialize()
-	init_dir()
+/obj/machinery/atmospherics/valve/atmos_init()
 	normalize_dir()
 
 	var/node1_dir
@@ -154,18 +158,8 @@
 			else if (!node2_dir)
 				node2_dir = direction
 
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
-		target.init_dir()
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node1 = target
-				break
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
-		target.init_dir()
-		if(target.initialize_directions & get_dir(target,src))
-			if (check_connect_types(target,src))
-				node2 = target
-				break
+	STANDARD_ATMOS_CHOOSE_NODE(1, node1_dir)
+	STANDARD_ATMOS_CHOOSE_NODE(2, node2_dir)
 
 	build_network()
 
@@ -227,10 +221,15 @@
 	name = "digital valve"
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_valve.dmi'
+	pipe_state = "dvalve"
 
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
+
+/obj/machinery/atmospherics/valve/digital/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
 
 /obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -239,7 +238,7 @@
 	if(!powered())
 		return
 	if(!src.allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	..()
 
@@ -265,7 +264,7 @@
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/atmospherics/valve/digital/initialize()
-	..()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 
@@ -289,24 +288,23 @@
 				open()
 
 /obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+	if (!W.is_wrench())
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/valve/digital) && !src.allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return 1
 	if(!can_unwrench())
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
 	playsound(src, W.usesound, 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 	if (do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
+		deconstruct()
 
 /obj/machinery/atmospherics/valve/examine(mob/user)
 	..()

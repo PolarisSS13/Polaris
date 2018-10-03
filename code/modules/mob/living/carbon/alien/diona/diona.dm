@@ -23,7 +23,7 @@
 /mob/living/carbon/alien/diona/New()
 
 	..()
-	species = all_species["Diona"]
+	species = all_species[SPECIES_DIONA]
 	add_language(LANGUAGE_ROOTGLOBAL)
 	add_language(LANGUAGE_GALCOM)
 	verbs += /mob/living/carbon/alien/diona/proc/merge
@@ -38,3 +38,11 @@
 	hat = new_hat
 	new_hat.loc = src
 	update_icons()
+
+/mob/living/carbon/alien/diona/proc/handle_npc(var/mob/living/carbon/alien/diona/D)
+	if(D.stat != CONSCIOUS)
+		return
+	if(prob(33) && D.canmove && isturf(D.loc) && !D.pulledby) //won't move if being pulled
+		step(D, pick(cardinal))
+	if(prob(1))
+		D.emote(pick("scratch","jump","chirp","roll"))

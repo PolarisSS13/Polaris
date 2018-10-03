@@ -69,7 +69,7 @@
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
-		"Tajara" = 'icons/cat/are/bad'
+		SPECIES_TAJ = 'icons/cat/are/bad'
 		)
 	If index term exists and icon_override is not set, this sprite sheet will be used.
 	*/
@@ -80,6 +80,12 @@
 	var/list/sprite_sheets_obj = list()
 
 	var/toolspeed = 1.0 // This is a multipler on how 'fast' a tool works.  e.g. setting this to 0.5 will make the tool work twice as fast.
+	var/attackspeed = DEFAULT_ATTACK_COOLDOWN // How long click delay will be when using this, in 1/10ths of a second. Checked in the user's get_attack_speed().
+	var/reach = 1 // Length of tiles it can reach, 1 is adjacent.
+	var/addblends // Icon overlay for ADD highlights when applicable.
+
+	var/icon/default_worn_icon	//Default on-mob icon
+	var/worn_layer				//Default on-mob layer
 
 /obj/item/New()
 	..()
@@ -105,8 +111,34 @@
 		src.loc = null
 	return ..()
 
-/obj/item/device
-	icon = 'icons/obj/device.dmi'
+// Check if target is reasonable for us to operate on.
+/obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)
+	if(((src in target) && !target_self) || ((!istype(target.loc, /turf)) && (!istype(target, /turf)) && (not_inside)))
+		return FALSE
+	else
+		return TRUE
+
+/obj/item/proc/update_twohanding()
+	update_held_icon()
+
+/obj/item/proc/is_held_twohanded(mob/living/M)
+	var/check_hand
+	if(M.l_hand == src && !M.r_hand)
+		check_hand = BP_R_HAND //item in left hand, check right hand
+	else if(M.r_hand == src && !M.l_hand)
+		check_hand = BP_L_HAND //item in right hand, check left hand
+	else
+		return FALSE
+
+	//would check is_broken() and is_malfunctioning() here too but is_malfunctioning()
+	//is probabilistic so we can't do that and it would be unfair to just check one.
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/external/hand = H.organs_by_name[check_hand]
+		if(istype(hand) && hand.is_usable())
+			return TRUE
+	return FALSE
+
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_held_icon()
@@ -175,6 +207,9 @@
 
 /obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return
+	if(anchored)
+		to_chat(user, span("notice", "\The [src] won't budge, you can't pick it up!"))
+		return
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
@@ -186,6 +221,8 @@
 		if(!temp)
 			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
+
+	var/old_loc = src.loc
 	src.pickup(user)
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -198,7 +235,11 @@
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(isturf(old_loc))
+			var/obj/effect/temporary_effect/item_pickup_ghost/ghost = new(old_loc)
+			ghost.assumeform(src)
+			ghost.animate_towards(user)
 	return
 
 /obj/item/attack_ai(mob/user as mob)
@@ -231,7 +272,9 @@
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	..()
-	if(zoom) zoom() //binoculars, scope, etc
+	if(zoom)
+		zoom() //binoculars, scope, etc
+	appearance_flags &= ~NO_CLIENT_COLOR
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -255,7 +298,8 @@
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(var/mob/user, var/slot)
-	layer = 20
+	hud_layerise()
+	user.position_hud_item(src,slot)
 	if(user.client)	user.client.screen |= src
 	if(user.pulling == src) user.stop_pulling()
 	return
@@ -358,14 +402,14 @@ var/list/global/slot_flags_enumeration = list(
 			if(!allow)
 				return 0
 		if(slot_tie)
-			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+			var/allow = 0
+			for(var/obj/item/clothing/C in H.worn_clothing)	//Runs through everything you're wearing, returns if you can't attach the thing
+				if(C.can_attach_accessory(src))
+					allow = 1
+					break
+			if(!allow)
 				if(!disable_warning)
-					H << "<span class='warning'>You need a jumpsuit before you can attach this [name].</span>"
-				return 0
-			var/obj/item/clothing/under/uniform = H.w_uniform
-			if(uniform.accessories.len && !uniform.can_attach_accessory(src))
-				if (!disable_warning)
-					H << "<span class='warning'>You already have an accessory of this type attached to your [uniform].</span>"
+					H << "<span class='warning'>You're not wearing anything you can attach this [name] to.</span>"
 				return 0
 	return 1
 
@@ -452,11 +496,9 @@ var/list/global/slot_flags_enumeration = list(
 			visible_message("<font color='red'><B>[U] attempts to stab [M] in the eyes, but misses!</B></font>")
 			return
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)") //BS12 EDIT ALG
+	add_attack_logs(user,M,"Attack eyes with [name]")
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	user.do_attack_animation(M)
 
 	src.add_fingerprint(user)
@@ -639,3 +681,162 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/pwr_drain()
 	return 0 // Process Kill
 
+// Used for non-adjacent melee attacks with specific weapons capable of reaching more than one tile.
+// This uses changeling range string A* but for this purpose its also applicable.
+/obj/item/proc/attack_can_reach(var/atom/us, var/atom/them, var/range)
+	if(us.Adjacent(them))
+		return TRUE // Already adjacent.
+	if(AStar(get_turf(us), get_turf(them), /turf/proc/AdjacentTurfsRangedSting, /turf/proc/Distance, max_nodes=25, max_node_depth=range))
+		return TRUE
+	return FALSE
+
+// Check if an object should ignite others, like a lit lighter or candle.
+/obj/item/proc/is_hot()
+	return FALSE
+
+// Called when you swap hands away from the item
+/obj/item/proc/in_inactive_hand(mob/user)
+	return
+
+// My best guess as to why this is here would be that it does so little. Still, keep it under all the procs, for sanity's sake.
+/obj/item/device
+	icon = 'icons/obj/device.dmi'
+
+//Worn icon generation for on-mob sprites
+/obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer)
+	//Get the required information about the base icon
+	var/icon/icon2use = get_worn_icon_file(body_type = body_type, slot_name = slot_name, default_icon = default_icon, inhands = inhands)
+	var/state2use = get_worn_icon_state(slot_name = slot_name)
+	var/layer2use = get_worn_layer(default_layer = default_layer)
+
+	//Snowflakey inhand icons in a specific slot
+	if(inhands && icon2use == icon_override)
+		switch(slot_name)
+			if(slot_r_hand_str)
+				state2use += "_r"
+			if(slot_l_hand_str)
+				state2use += "_l"
+
+	// testing("[src] (\ref[src]) - Slot: [slot_name], Inhands: [inhands], Worn Icon:[icon2use], Worn State:[state2use], Worn Layer:[layer2use]")
+
+	//Generate the base onmob icon
+	var/icon/standing_icon = icon(icon = icon2use, icon_state = state2use)
+
+	if(!inhands)
+		apply_custom(standing_icon)		//Pre-image overridable proc to customize the thing
+		apply_addblends(icon2use,standing_icon)		//Some items have ICON_ADD blend shaders
+
+	var/image/standing = image(standing_icon)
+	standing.alpha = alpha
+	standing.color = color
+	standing.layer = layer2use
+
+	//Apply any special features
+	if(!inhands)
+		apply_blood(standing)			//Some items show blood when bloodied
+		apply_accessories(standing)		//Some items sport accessories like webbing
+
+	//Return our icon
+	return standing
+
+//Returns the icon object that should be used for the worn icon
+/obj/item/proc/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+
+	//1: icon_override var
+	if(icon_override)
+		return icon_override
+
+	//2: species-specific sprite sheets (skipped for inhands)
+	if(LAZYLEN(sprite_sheets))
+		var/sheet = sprite_sheets[body_type]
+		if(sheet && !inhands)
+			return sheet
+
+	//3: slot-specific sprite sheets
+	if(LAZYLEN(item_icons))
+		var/sheet = item_icons[slot_name]
+		if(sheet)
+			return sheet
+
+	//4: item's default icon
+	if(default_worn_icon)
+		return default_worn_icon
+
+	//5: provided default_icon
+	if(default_icon)
+		return default_icon
+
+	//6: give up
+	return
+
+//Returns the state that should be used for the worn icon
+/obj/item/proc/get_worn_icon_state(var/slot_name)
+
+	//1: slot-specific sprite sheets
+	if(LAZYLEN(item_state_slots))
+		var/state = item_state_slots[slot_name]
+		if(state)
+			return state
+
+	//2: item_state variable
+	if(item_state)
+		return item_state
+
+	//3: icon_state variable
+	if(icon_state)
+		return icon_state
+
+//Returns the layer that should be used for the worn icon (as a FLOAT_LAYER layer, so negative)
+/obj/item/proc/get_worn_layer(var/default_layer = 0)
+
+	//1: worn_layer variable
+	if(!isnull(worn_layer)) //Can be zero, so...
+		return BODY_LAYER+worn_layer
+
+	//2: your default
+	return BODY_LAYER+default_layer
+
+//Apply the addblend blends onto the icon
+/obj/item/proc/apply_addblends(var/source_icon, var/icon/standing_icon)
+
+	//If we have addblends, blend them onto the provided icon
+	if(addblends && standing_icon && source_icon)
+		var/addblend_icon = icon("icon" = source_icon, "icon_state" = addblends)
+		standing_icon.Blend(addblend_icon, ICON_ADD)
+
+//STUB
+/obj/item/proc/apply_custom(var/icon/standing_icon)
+	return standing_icon
+
+//STUB
+/obj/item/proc/apply_blood(var/image/standing)
+	return standing
+
+//STUB
+/obj/item/proc/apply_accessories(var/image/standing)
+	return standing
+
+/*
+ *	Assorted tool procs, so any item can emulate any tool, if coded
+*/
+/obj/item/proc/is_screwdriver()
+	return FALSE
+
+/obj/item/proc/is_wrench()
+	return FALSE
+
+/obj/item/proc/is_crowbar()
+	return FALSE
+
+/obj/item/proc/is_wirecutter()
+	return FALSE
+
+// These next three might bug out or runtime, unless someone goes back and finds a way to generalize their specific code
+/obj/item/proc/is_cable_coil()
+	return FALSE
+
+/obj/item/proc/is_multitool()
+	return FALSE
+
+/obj/item/proc/is_welder()
+	return FALSE

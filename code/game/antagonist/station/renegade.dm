@@ -17,6 +17,7 @@ var/datum/antagonist/renegade/renegades
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
+	can_speak_aooc = FALSE	// They aren't 'true' antags, but they still need to hear blanket antag instructions
 
 	hard_cap = 8
 	hard_cap_round = 12
@@ -45,10 +46,11 @@ var/datum/antagonist/renegade/renegades
 		/obj/item/weapon/gun/projectile/sec/wood,
 		/obj/item/weapon/gun/projectile/silenced,
 		/obj/item/weapon/gun/projectile/pistol,
+		/obj/item/weapon/gun/projectile/p92x,
 		/obj/item/weapon/gun/projectile/revolver,
 		/obj/item/weapon/gun/projectile/derringer,
 		/obj/item/weapon/gun/projectile/shotgun/pump,
-		/obj/item/weapon/gun/projectile/shotgun/pump/rifle/mosin,
+		/obj/item/weapon/gun/projectile/shotgun/pump/rifle,
 		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
 		/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
 		/obj/item/weapon/gun/projectile/revolver/judge,
@@ -58,8 +60,6 @@ var/datum/antagonist/renegade/renegades
 		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard),
 		list(/obj/item/weapon/gun/projectile/luger,/obj/item/weapon/gun/projectile/luger/brown)
 		)
-
-	can_use_aooc = FALSE // They aren't 'true' antags.
 
 /datum/antagonist/renegade/New()
 	..()

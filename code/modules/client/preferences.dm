@@ -21,10 +21,13 @@ datum/preferences
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/tooltipstyle = "Midnight"		//Style for popup tooltips
+	var/client_fps = 0
 
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
+	var/nickname						//our character's nickname
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
@@ -45,11 +48,19 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
-	var/species = "Human"               //Species datum to use.
+	var/species = SPECIES_HUMAN         //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
 	var/list/language_prefixes = list() //Kanguage prefix keys
-	var/list/gear						//Custom/fluff item loadout.
+	var/list/gear						//Left in for Legacy reasons, will no longer save.
+	var/list/gear_list = list()			//Custom/fluff item loadouts.
+	var/gear_slot = 1					//The current gear save slot
+	var/list/traits						//Traits which modifier characters for better or worse (mostly worse).
+	var/synth_color	= 0					//Lets normally uncolorable synth parts be colorable.
+	var/r_synth							//Used with synth_color to color synth parts that normaly can't be colored.
+	var/g_synth							//Same as above
+	var/b_synth							//Same as above
+	var/synth_markings = 0				//Enable/disable markings on synth parts.
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -93,13 +104,15 @@ datum/preferences
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
 
+	var/list/body_descriptors = list()
+
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
 	var/disabilities = 0
 
-	var/nanotrasen_relation = "Neutral"
+	var/economic_status = "Average"
 
 	var/uplinklocation = "PDA"
 
@@ -125,6 +138,8 @@ datum/preferences
 	b_type = RANDOM_BLOOD_TYPE
 
 	gear = list()
+	gear_list = list()
+	gear_slot = 1
 
 	if(istype(C))
 		client = C
@@ -262,7 +277,7 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 
@@ -277,11 +292,14 @@ datum/preferences
 
 	if(icon_updates)
 		character.force_update_limbs()
-		character.update_mutations(0)
-		character.update_body(0)
-		character.update_underwear(0)
-		character.update_hair(0)
-		character.update_icons()
+		character.update_icons_body()
+		character.update_mutations()
+		character.update_underwear()
+		character.update_hair()
+
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat = "<body>"

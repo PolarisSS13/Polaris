@@ -1,6 +1,6 @@
 /obj/machinery/mecha_part_fabricator
 	icon = 'icons/obj/robotics.dmi'
-	icon_state = "fab-idle"
+	icon_state = "mechfab-idle"
 	name = "Exosuit Fabricator"
 	desc = "A machine used for construction of mechas."
 	density = 1
@@ -13,7 +13,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0)
+	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "plastic" = 0, "gold" = 0, "silver" = 0, "osmium" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -40,6 +40,7 @@
 
 /obj/machinery/mecha_part_fabricator/initialize()
 	update_categories()
+	. = ..()
 
 /obj/machinery/mecha_part_fabricator/process()
 	..()
@@ -56,11 +57,11 @@
 /obj/machinery/mecha_part_fabricator/update_icon()
 	overlays.Cut()
 	if(panel_open)
-		icon_state = "fab-o"
+		icon_state = "mechfab-o"
 	else
-		icon_state = "fab-idle"
+		icon_state = "mechfab-idle"
 	if(busy)
-		overlays += "fab-active"
+		overlays += "mechfab-active"
 
 /obj/machinery/mecha_part_fabricator/dismantle()
 	for(var/f in materials)
@@ -102,7 +103,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
 		ui.set_initial_data(data)
@@ -155,9 +156,9 @@
 		if(materials[S.material.name] + amnt <= res_max_amount)
 			if(S && S.amount >= 1)
 				var/count = 0
-				overlays += "fab-load-metal"
+				overlays += "mechfab-load-metal"
 				spawn(10)
-					overlays -= "fab-load-metal"
+					overlays -= "mechfab-load-metal"
 				while(materials[S.material.name] + amnt <= res_max_amount && S.amount >= 1)
 					materials[S.material.name] += amnt
 					S.use(1)
@@ -212,7 +213,7 @@
 
 /obj/machinery/mecha_part_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] < (D.materials[M] * mat_efficiency))
 			return 0
 	return 1
 

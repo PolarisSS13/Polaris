@@ -4,7 +4,7 @@
 	icon_state = "coffin"
 	icon_closed = "coffin"
 	icon_opened = "coffin_open"
-	seal_tool = /obj/item/weapon/screwdriver
+	seal_tool = /obj/item/weapon/tool/screwdriver
 	breakout_sound = 'sound/weapons/tablehit1.ogg'
 
 /obj/structure/closet/coffin/update_icon()
@@ -16,14 +16,13 @@
 /* Graves */
 /obj/structure/closet/grave
 	name = "grave"
-/*	desc = ""
-	icon_state = "coffin"
-	icon_closed = "coffin"
-	icon_opened = "coffin_open"	*/
+	desc = "Dirt."
+	icon_state = "grave"
+	icon_closed = "grave"
+	icon_opened = "grave_open"
 	seal_tool = null
 	breakout_sound = 'sound/weapons/thudswoosh.ogg'
 	anchored = 1
-	store_closets = 1
 	max_closets = 1
 	opened = 1
 
@@ -109,14 +108,17 @@
 			W.forceMove(src.loc)
 	else
 		if(istype(W, /obj/item/weapon/shovel))
-			if(contents.len == 0 && user.a_intent == I_HURT)
+			if(user.a_intent == I_HURT)	// Hurt intent means you're trying to kill someone, or just get rid of the grave
 				user.visible_message("<span class='notice'>[user] begins to smoothe out the dirt of \the [src.name].</span>", \
 									 "<span class='notice'>You start to smoothe out the dirt of \the [src.name].</span>", \
 									 "<span class='notice'>You hear dirt being moved.</span>")
 				if(do_after(user, 40 * W.toolspeed))
 					user.visible_message("<span class='notice'>[user] finishes smoothing out \the [src.name].</span>", \
 										 "<span class='notice'>You finish smoothing out \the [src.name].</span>")
-					qdel(src)
+					if(LAZYLEN(contents))
+						alpha = 40	// If we've got stuff inside, like maybe a person, just make it hard to see us
+					else
+						qdel(src)	// Else, go away
 					return
 				else
 					user.visible_message("<span class='notice'>[user] stops concealing \the [src.name].</span>", \
@@ -140,7 +142,14 @@
 /obj/structure/closet/grave/close()
 	..()
 	if(!opened)
-		sealed = 1
+		sealed = TRUE
+
+/obj/structure/closet/grave/open()
+	.=..()
+	alpha = 255	// Needed because of grave hiding
+
+/obj/structure/closet/grave/bullet_act(var/obj/item/projectile/P)
+	return PROJECTILE_CONTINUE	// It's a hole in the ground, doesn't usually stop or even care about bullets
 
 /obj/structure/closet/grave/return_air_for_internal_lifeform(var/mob/living/L)
 	var/gasid = "carbon_dioxide"
@@ -151,5 +160,5 @@
 	var/datum/gas_mixture/grave_breath = new()
 	var/datum/gas_mixture/above_air = return_air()
 	grave_breath.adjust_gas(gasid, BREATH_MOLES)
-	grave_breath.temperature = (above_air.temperature) - 20	//Underground
+	grave_breath.temperature = (above_air.temperature) - 30	//Underground
 	return grave_breath
