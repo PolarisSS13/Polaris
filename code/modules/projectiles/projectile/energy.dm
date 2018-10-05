@@ -209,7 +209,7 @@
 	light_color = "#0000FF"
 
 	embed_chance = 0
-	muzzle_type = /obj/effect/projectile/pulse/muzzle
+	muzzle_type = /obj/effect/projectile/muzzle/pulse
 
 /obj/item/projectile/energy/phase
 	name = "phase wave"

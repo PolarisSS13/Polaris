@@ -597,9 +597,9 @@ proc/findNullRod(var/atom/target)
 	light_power = -2
 	light_color = "#FFFFFF"
 
-	muzzle_type = /obj/effect/projectile/inversion/muzzle
-	tracer_type = /obj/effect/projectile/inversion/tracer
-	impact_type = /obj/effect/projectile/inversion/impact
+	muzzle_type = /obj/effect/projectile/muzzle/inversion
+	tracer_type = /obj/effect/projectile/tracer/inversion
+	impact_type = /obj/effect/projectile/impact/inversion
 
 //Harvester Pain Orb
 

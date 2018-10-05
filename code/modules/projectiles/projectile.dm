@@ -40,9 +40,9 @@
 	var/list/beam_segments	//assoc list of datum/point or datum/point/vector, start = end. Used for hitscan effect generation.
 	var/datum/point/beam_index
 	var/turf/hitscan_last	//last turf touched during hitscanning.
-	var/_tracer_type
-	var/_muzzle_type
-	var/_impact_type
+	var/tracer_type
+	var/muzzle_type
+	var/impact_type
 
 	//Fancy hitscan lighting effects!
 	var/hitscan_light_intensity = 1.5

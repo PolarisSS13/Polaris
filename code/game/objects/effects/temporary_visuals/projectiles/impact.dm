@@ -2,37 +2,74 @@
 	name = "beam impact"
 	icon = 'icons/obj/projectiles_impact.dmi'
 
-/obj/effect/projectile/impact/laser
-	name = "laser impact"
-	icon_state = "impact_laser"
+/obj/effect/projectile/impact/laser_pulse
+	icon_state = "impact_u_laser"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#0066FF"
 
-/obj/effect/projectile/impact/laser/blue
-	name = "laser impact"
-	icon_state = "impact_blue"
-
-/obj/effect/projectile/impact/disabler
-	name = "disabler impact"
-	icon_state = "impact_omni"
+/obj/effect/projectile/impact/laser_heavy
+	icon_state = "impact_beam_heavy"
+	light_range = 3
+	light_power = 1
+	light_color = "#FF0D00"
 
 /obj/effect/projectile/impact/xray
-	name = "\improper X-ray impact"
 	icon_state = "impact_xray"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00CC33"
 
-/obj/effect/projectile/impact/pulse
-	name = "pulse impact"
-	icon_state = "impact_u_laser"
+/obj/effect/projectile/impact/laser_omni
+	icon_state = "impact_omni"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00C6FF"
 
-/obj/effect/projectile/impact/plasma_cutter
-	name = "plasma impact"
-	icon_state = "impact_plasmacutter"
+/obj/effect/projectile/impact/laser
+	icon_state = "impact_laser"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#FF0D00"
+
+/obj/effect/projectile/impact/laser_blue
+	icon_state = "impact_blue"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#0066FF"
+
+/obj/effect/projectile/impact/emitter
+	icon_state = "impact_emitter"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00CC33"
 
 /obj/effect/projectile/impact/stun
-	name = "stun impact"
 	icon_state = "impact_stun"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#FFFFFF"
 
-/obj/effect/projectile/impact/heavy_laser
-	name = "heavy laser impact"
-	icon_state = "impact_beam_heavy"
+/obj/effect/projectile/impact/lightning
+	icon_state = "impact_lightning"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#00C6FF"
 
-/obj/effect/projectile/impact/wormhole
-	icon_state = "wormhole_g"
+/obj/effect/projectile/impact/darkmatterstun
+	icon_state = "impact_darkt"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#8837A3"
+
+/obj/effect/projectile/impact/inversion
+	icon_state = "impact_invert"
+	light_range = 2
+	light_power = -2
+	light_color = "#FFFFFF"
+
+/obj/effect/projectile/impact/darkmatter
+	icon_state = "impact_darkb"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#8837A3"
