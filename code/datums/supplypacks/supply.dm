@@ -58,7 +58,7 @@
 				/obj/item/weapon/wrapping_paper = 2,
 				/obj/item/device/destTagger,
 				/obj/item/weapon/hand_labeler,
-				/obj/item/weapon/wirecutters,
+				/obj/item/weapon/tool/wirecutters,
 				/obj/item/weapon/tape_roll = 2)
 	cost = 10
 	containertype = "/obj/structure/closet/crate"
@@ -124,14 +124,14 @@
 
 /datum/supply_pack/supply/cargotrain
 	name = "Cargo Train Tug"
-	contains = list(/obj/vehicle/train/cargo/engine)
+	contains = list(/obj/vehicle/train/engine)
 	cost = 35
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Tug Crate"
 
 /datum/supply_pack/supply/cargotrailer
 	name = "Cargo Train Trolley"
-	contains = list(/obj/vehicle/train/cargo/trolley)
+	contains = list(/obj/vehicle/train/trolley)
 	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Trolley Crate"

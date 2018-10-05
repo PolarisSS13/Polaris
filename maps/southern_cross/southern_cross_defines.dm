@@ -37,11 +37,11 @@
 
 	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has docked with the station at docks one and two. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	shuttle_called_message = "A crew transfer to %Dock_name% has been scheduled. The shuttle has been called. Those leaving should procede to docks one and two in approximately %ETA%"
+	shuttle_called_message = "A crew transfer to %Dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to docks one and two in approximately %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
 	emergency_shuttle_docked_message = "The Emergency Shuttle has docked with the station at docks one and two. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%"
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
 	// Networks that will show up as options in the camera monitor program
@@ -261,3 +261,16 @@
 		Z_LEVEL_SURFACE_WILD,
 		Z_LEVEL_TRANSIT
 	)
+
+//Suit Storage Units
+
+/obj/machinery/suit_cycler/exploration
+	name = "Explorer suit cycler"
+	model_text = "Exploration"
+	req_one_access = list(access_pilot,access_explorer)
+
+/obj/machinery/suit_cycler/pilot
+	name = "Pilot suit cycler"
+	model_text = "Pilot"
+	req_access = null
+	req_one_access = list(access_pilot,access_explorer)
