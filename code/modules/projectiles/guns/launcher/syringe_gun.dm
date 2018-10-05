@@ -64,7 +64,7 @@
 
 /obj/item/weapon/gun/launcher/syringe
 	name = "syringe gun"
-	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
+	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance. Does not fit standard medical grade syringes."
 	icon_state = "syringegun"
 	item_state = "syringegun"
 	w_class = ITEMSIZE_NORMAL
@@ -134,7 +134,7 @@
 
 /obj/item/weapon/gun/launcher/syringe/rapid
 	name = "syringe gun revolver"
-	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots."
+	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to five syringes. The spring still needs to be drawn between shots. Does not fit standard medical grade syringes."
 	icon_state = "rapidsyringegun"
 	item_state = "rapidsyringegun"
 	max_darts = 5
