@@ -16,3 +16,8 @@
 #define FLOOR(x, y) ( round((x) / (y)) * (y) )
 // Check if a BYOND dir var is a cardinal direction (power of two)
 #define IS_CARDINAL(x) ((x & (x - 1)) == 0)
+
+// Real modulus that handles decimals
+#define MODULUS(x, y) ( (x) - (y) * round((x) / (y)) )
+
+#define CLAMP(CLVALUE,CLMIN,CLMAX) ( max( (CLMIN), min((CLVALUE), (CLMAX)) ) )

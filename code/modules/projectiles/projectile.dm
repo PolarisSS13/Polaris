@@ -293,7 +293,7 @@
 	var/turf/starting = get_turf(src)
 	if(isnull(Angle))	//Try to resolve through offsets if there's no angle set.
 		if(isnull(xo) || isnull(yo))
-			stack_trace("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
+			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
 			qdel(src)
 			return
 		var/turf/target = locate(CLAMP(starting + xo, 1, world.maxx), CLAMP(starting + yo, 1, world.maxy), starting.z)
@@ -315,7 +315,7 @@
 	fired = TRUE
 	if(hitscan)
 		process_hitscan()
-	if(!(datum_flags & DF_ISPROCESSING))
+	if(!is_processing)
 		START_PROCESSING(SSprojectiles, src)
 	pixel_move(1, FALSE)	//move it now!
 
@@ -360,7 +360,7 @@
 		xo = targloc.x - curloc.x
 		setAngle(Get_Angle(src, targloc) + spread)
 	else
-		stack_trace("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
+		crash_with("WARNING: Projectile [type] fired without either mouse parameters, or a target atom to aim at!")
 		qdel(src)
 
 /proc/calculate_projectile_angle_and_pixel_offsets(mob/user, params)
@@ -614,69 +614,6 @@
 
 	return TRUE
 
-//ABOVE UNIFIED BELOW POLARIS
-
-
-//called to launch a projectile
-/obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
-	var/turf/curloc = get_turf(src)
-	var/turf/targloc = get_turf(target)
-	if (!istype(targloc) || !istype(curloc))
-		return 1
-
-	if(combustion)
-		curloc.hotspot_expose(700, 5)
-
-	if(targloc == curloc) //Shooting something in the same turf
-		target.bullet_act(src, target_zone)
-		on_impact(target)
-		qdel(src)
-		return 0
-
-	original = target
-	def_zone = target_zone
-
-	spawn()
-		setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
-		process()
-
-	return 0
-
-//called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
-	if(user == target) //Shooting yourself
-		user.bullet_act(src, target_zone)
-		on_impact(user)
-		qdel(src)
-		return 0
-
-	loc = get_turf(user) //move the projectile out into the world
-
-	firer = user
-	shot_from = launcher.name
-	silenced = launcher.silenced
-
-	return launch(target, target_zone, x_offset, y_offset)
-
-//Used to change the direction of the projectile in flight.
-/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
-	var/turf/new_target = locate(new_x, new_y, src.z)
-
-	original = new_target
-	if(new_firer)
-		firer = src
-
-	setup_trajectory(starting_loc, new_target)
-
-
-//ABOVE POLARIS
-
-
-
-//BELOW AURORA
-
-
-
 
 /obj/item/projectile/proc/launch_projectile(atom/target, target_zone, mob/user, params, angle_override, forced_spread = 0)
 	original = target
@@ -690,10 +627,9 @@
 	return fire(angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
+/obj/item/projectile/proc/_launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
 
 	shot_from = launcher.name
 	silenced = launcher.silenced
 
 	return launch_projectile(target, target_zone, user, params, angle_override, forced_spread)
-
