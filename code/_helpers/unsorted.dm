@@ -1402,10 +1402,7 @@ var/mob/dview/dview_mob = new
 		list_or_datum[var_name] = var_value
 		return
 	var/datum/D = list_or_datum
-	if(IsAdminAdvancedProcCall())
-		D.vv_edit_var(var_name, var_value)	//same result generally, unless badmemes
-	else
-		D.vars[var_name] = var_value
+	D.vars[var_name] = var_value
 
 // Returns direction-string, rounded to multiples of 22.5, from the first parameter to the second
 // N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW

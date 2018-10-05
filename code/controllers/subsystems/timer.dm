@@ -475,9 +475,9 @@ SUBSYSTEM_DEF(timer)
 	if (flags & TIMER_UNIQUE)
 		var/list/hashlist
 		if(flags & TIMER_NO_HASH_WAIT)
-			hashlist = list(callback.object, "([REF(callback.object)])", callback.delegate, flags & TIMER_CLIENT_TIME)
+			hashlist = list(callback.object, "(\ref[callback.object])", callback.delegate, flags & TIMER_CLIENT_TIME)
 		else
-			hashlist = list(callback.object, "([REF(callback.object)])", callback.delegate, wait, flags & TIMER_CLIENT_TIME)
+			hashlist = list(callback.object, "(\ref[callback.object])", callback.delegate, wait, flags & TIMER_CLIENT_TIME)
 		hashlist += callback.arguments
 		hash = hashlist.Join("|||||||")
 

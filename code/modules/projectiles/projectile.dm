@@ -428,7 +428,7 @@
 	if(!length(beam_segments))
 		return
 	if(tracer_type)
-		var/tempref = REF(src)
+		var/tempref = "\ref[src]"
 		for(var/datum/point/p in beam_segments)
 			generate_tracer_between_points(p, beam_segments[p], tracer_type, color, duration, hitscan_light_range, hitscan_light_color_override, hitscan_light_intensity, tempref)
 	if(muzzle_type && duration > 0)

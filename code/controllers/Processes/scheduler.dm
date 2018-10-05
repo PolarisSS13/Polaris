@@ -114,7 +114,7 @@
 /datum/scheduled_task/proc/pre_process()
 	task_triggered_event.raise_event(list(src))
 
-/datum/scheduled_task/proc/process()
+/datum/scheduled_task/process()
 	if(procedure)
 		call(procedure)(arglist(arguments))
 
