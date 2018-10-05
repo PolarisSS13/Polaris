@@ -129,7 +129,9 @@
 		C.loc = src
 		darts += C //add to the end
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
-	else
+	else if(istype(A, /obj/item/weapon/reagent_containers/syringe))
+		var/obj/item/weapon/reagent_containers/syringe/B = A
+		user << "<span class='warning'>[B] is too long and fragile to work with [src]! You'll need special darts for this device!</span>"
 		..()
 
 /obj/item/weapon/gun/launcher/syringe/rapid
