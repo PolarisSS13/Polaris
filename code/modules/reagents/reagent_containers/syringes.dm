@@ -253,6 +253,7 @@
 		overlays += filling
 
 /obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
+	sharp = 1 //Sanity check(i think)
 	if(istype(target, /mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = target
@@ -289,7 +290,7 @@
 		target.take_organ_damage(3)// 7 is the same as crowbar punch
 
 
-
+	sharp = initial(sharp) //Just in case.
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 	var/contained = reagents.get_reagents()
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
