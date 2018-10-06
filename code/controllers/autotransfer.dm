@@ -10,7 +10,7 @@ datum/controller/transfer_controller/New()
 datum/controller/transfer_controller/Destroy()
 	processing_objects -= src
 
-datum/controller/transfer_controller/proc/process()
+datum/controller/transfer_controller/process()
 	currenttick = currenttick + 1
 	if (round_duration_in_ticks >= timerbuffer - 1 MINUTE)
 		vote.autotransfer()

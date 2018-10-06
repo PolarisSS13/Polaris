@@ -32,7 +32,7 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 	// Tell qdel() to Del() this object.
 	return QDEL_HINT_HARDDEL_NOW
 
-/datum/controller/vote/proc/process()	//called by master_controller
+/datum/controller/vote/process()	//called by master_controller
 	if(mode)
 		// No more change mode votes after the game has started.
 		if(mode == VOTE_GAMEMODE && ticker.current_state >= GAME_STATE_SETTING_UP)
