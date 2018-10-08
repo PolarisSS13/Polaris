@@ -511,7 +511,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	body_parts_covered = UPPER_TORSO
 	item_state_slots = list(slot_r_hand_str = "denim_jacket", slot_l_hand_str = "denim_jacket")
 
-/obj/item/clothing/suit/storage/toggle/hoodie
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie
 	name = "grey hoodie"
 	desc = "A warm, grey sweatshirt."
 	icon_state = "grey_hoodie"
@@ -519,72 +519,84 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
+	hoodtype = /obj/item/clothing/head/hoodie_hood
 
-/obj/item/clothing/suit/storage/toggle/hoodie/black
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."
 	icon_state = "black_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/black
 
-/obj/item/clothing/suit/storage/toggle/hoodie/red
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/red
 	name = "red hoodie"
 	desc = "A warm, red sweatshirt."
 	icon_state = "red_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_red", slot_l_hand_str = "suit_red")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/red
 
-/obj/item/clothing/suit/storage/toggle/hoodie/blue
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/blue
 	name = "blue hoodie"
 	desc = "A warm, blue sweatshirt."
 	icon_state = "blue_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_blue", slot_l_hand_str = "suit_blue")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/blue
 
-/obj/item/clothing/suit/storage/toggle/hoodie/green
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/green
 	name = "green hoodie"
 	desc = "A warm, green sweatshirt."
 	icon_state = "green_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/green
 
-/obj/item/clothing/suit/storage/toggle/hoodie/orange
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/orange
 	name = "orange hoodie"
 	desc = "A warm, orange sweatshirt."
 	icon_state = "orange_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_orange", slot_l_hand_str = "suit_orange")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/orange
 
-/obj/item/clothing/suit/storage/toggle/hoodie/yellow
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/yellow
 	name = "yellow hoodie"
 	desc = "A warm, yellow sweatshirt."
 	icon_state = "yellow_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_yellow", slot_l_hand_str = "suit_yellow")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/yellow
 
-/obj/item/clothing/suit/storage/toggle/hoodie/cti
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/cti
 	name = "CTI hoodie"
 	desc = "A warm, black sweatshirt.  It bears the letters CTI on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
 	icon_state = "cti_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/black
 
-/obj/item/clothing/suit/storage/toggle/hoodie/mu
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/mu
 	name = "mojave university hoodie"
 	desc = "A warm, gray sweatshirt.  It bears the letters MU on the front, a lettering to the well-known public college, Mojave University."
 	icon_state = "mu_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_grey", slot_l_hand_str = "suit_grey")
+	hoodtype = /obj/item/clothing/head/hoodie_hood
 
-/obj/item/clothing/suit/storage/toggle/hoodie/nt
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/nt
 	name = "NT hoodie"
 	desc = "A warm, blue sweatshirt.  It proudly bears the silver NanoTrasen insignia lettering on the back.  The edges are trimmed with silver."
 	icon_state = "nt_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_blue", slot_l_hand_str = "suit_blue")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/blue
 
-/obj/item/clothing/suit/storage/toggle/hoodie/smw
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/smw
 	name = "Space Mountain Wind hoodie"
 	desc = "A warm, black sweatshirt.  It has the logo for the popular softdrink Space Mountain Wind on both the front and the back."
 	icon_state = "smw_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
+	hoodtype = /obj/item/clothing/head/hoodie_hood/black
 
-/obj/item/clothing/suit/storage/toggle/hoodie/nrti
+/obj/item/clothing/suit/storage/hooded/toggle/hoodie/nrti
 	name = "New Reykjavik Technical Institute hoodie"
 	desc = "A warm, gray sweatshirt. It bears the letters NRT on the back, in reference to Sif's premiere technical institute."
 	icon_state = "nrti_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_grey", slot_l_hand_str = "suit_grey")
+	hoodtype = /obj/item/clothing/head/hoodie_hood
 
 /obj/item/clothing/suit/whitedress
 	name = "white dress"
@@ -791,7 +803,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
 
-/obj/item/clothing/suit/storage/snowsuit
+/obj/item/clothing/suit/storage/hooded/snowsuit
 	name = "snowsuit"
 	desc = "A suit made to keep you nice and toasty on cold winter days. Or at least alive."
 	icon_state = "snowsuit"
@@ -802,27 +814,34 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit
 
-/obj/item/clothing/suit/storage/snowsuit/command
+/obj/item/clothing/suit/storage/hooded/snowsuit/command
 	name = "command snowsuit"
 	icon_state = "snowsuit_command"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/command
 
-/obj/item/clothing/suit/storage/snowsuit/security
+/obj/item/clothing/suit/storage/hooded/snowsuit/security
 	name = "security snowsuit"
 	icon_state = "snowsuit_security"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/security
 
-/obj/item/clothing/suit/storage/snowsuit/medical
+/obj/item/clothing/suit/storage/hooded/snowsuit/medical
 	name = "medical snowsuit"
 	icon_state = "snowsuit_medical"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/medical
 
-/obj/item/clothing/suit/storage/snowsuit/engineering
+/obj/item/clothing/suit/storage/hooded/snowsuit/engineering
 	name = "engineering snowsuit"
 	icon_state = "snowsuit_engineering"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/engineering
 
-/obj/item/clothing/suit/storage/snowsuit/cargo
+/obj/item/clothing/suit/storage/hooded/snowsuit/cargo
 	name = "cargo snowsuit"
 	icon_state = "snowsuit_cargo"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/cargo
 
-/obj/item/clothing/suit/storage/snowsuit/science
+/obj/item/clothing/suit/storage/hooded/snowsuit/science
 	name = "science snowsuit"
 	icon_state = "snowsuit_science"
+	hoodtype = /obj/item/clothing/head/hood/winter/snowsuit/science

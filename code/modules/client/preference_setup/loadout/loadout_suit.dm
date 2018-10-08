@@ -112,13 +112,13 @@ datum/gear/suit/duster
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie selection"
-	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	path = /obj/item/clothing/suit/storage/hooded/toggle/hoodie
 
 /datum/gear/suit/hoodie/New()
 	..()
 	var/list/hoodies = list()
-	for(var/hoodie_style in typesof(/obj/item/clothing/suit/storage/toggle/hoodie))
-		var/obj/item/clothing/suit/storage/toggle/hoodie/hoodie = hoodie_style
+	for(var/hoodie_style in typesof(/obj/item/clothing/suit/storage/hooded/toggle/hoodie))
+		var/obj/item/clothing/suit/storage/hooded/toggle/hoodie/hoodie = hoodie_style
 		hoodies[initial(hoodie.name)] = hoodie
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(hoodies))
 
@@ -465,34 +465,34 @@ datum/gear/suit/duster
 
 /datum/gear/suit/snowsuit
 	display_name = "snowsuit"
-	path = /obj/item/clothing/suit/storage/snowsuit
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit
 
 /datum/gear/suit/snowsuit/command
 	display_name = "snowsuit, command"
-	path = /obj/item/clothing/suit/storage/snowsuit/command
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/command
 	allowed_roles = list("Colony Director","Research Director","Head of Personnel","Head of Security","Chief Engineer","Command Secretary")
 
 /datum/gear/suit/snowsuit/security
 	display_name = "snowsuit, security"
-	path = /obj/item/clothing/suit/storage/snowsuit/security
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/security
 	allowed_roles = list("Security Officer", "Head of Security", "Warden", "Detective")
 
 /datum/gear/suit/snowsuit/medical
 	display_name = "snowsuit, medical"
-	path = /obj/item/clothing/suit/storage/snowsuit/medical
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/medical
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist", "Search and Rescue")
 
 /datum/gear/suit/snowsuit/science
 	display_name = "snowsuit, science"
-	path = /obj/item/clothing/suit/storage/snowsuit/science
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/science
 	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist")
 
 /datum/gear/suit/snowsuit/engineering
 	display_name = "snowsuit, engineering"
-	path = /obj/item/clothing/suit/storage/snowsuit/engineering
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/engineering
 	allowed_roles = list("Chief Engineer","Atmospheric Technician", "Station Engineer")
 
 /datum/gear/suit/snowsuit/cargo
 	display_name = "snowsuit, supply"
-	path = /obj/item/clothing/suit/storage/snowsuit/cargo
+	path = /obj/item/clothing/suit/storage/hooded/snowsuit/cargo
 	allowed_roles = list("Quartermaster","Shaft Miner","Cargo Technician","Head of Personnel")
