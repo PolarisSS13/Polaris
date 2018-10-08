@@ -41,6 +41,10 @@
 	var/lights_power = 6
 	var/force = 0
 
+	var/nano_mech = 0 //This is for sounds. Nano mechs use nano sounds (mostly). Same for syndi mech var.
+	var/syndi_mech = 0
+
+
 	//inner atmos
 	var/use_internal_tank = 0
 	var/internal_tank_valve = ONE_ATMOSPHERE
@@ -500,7 +504,7 @@
 	internal_damage |= int_dam_flag
 	pr_internal_damage.start()
 	log_append_to_last("Internal damage of type [int_dam_flag].",1)
-	occupant << sound('sound/machines/warning-buzzer.ogg',wait=0)
+	occupant << sound('sound/mecha/internaldmgalarm.ogg',volume=50) //Better sounding.
 	return
 
 /obj/mecha/proc/clearInternalDamage(int_dam_flag)
@@ -1078,6 +1082,7 @@
 	else		set_light(light_range - lights_power)
 	src.occupant_message("Toggled lights [lights?"on":"off"].")
 	log_message("Toggled lights [lights?"on":"off"].")
+	playsound(src, 'sound/mecha/heavylightswitch.ogg', 50, 1)
 	return
 
 

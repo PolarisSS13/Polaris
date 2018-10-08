@@ -20,10 +20,13 @@
 	var/required_type = /obj/mecha //may be either a type or a list of allowed types
 	var/equip_type = null //mechaequip2
 	var/allow_duplicate = FALSE
+	var/ready_sound = 'sound/mecha/mech_reload_default.ogg' //Sound to play once the fire delay passed.
 
 /obj/item/mecha_parts/mecha_equipment/proc/do_after_cooldown(target=1)
 	sleep(equip_cooldown)
 	set_ready_state(1)
+	if(ready_sound) //Kind of like the kinetic accelerator.
+		playsound(loc, ready_sound, 50, 1, -1)
 	if(target && chassis)
 		return 1
 	return 0
@@ -70,9 +73,19 @@
 		chassis.occupant_message("<font color='red'>The [src] is destroyed!</font>")
 		chassis.log_append_to_last("[src] is destroyed.",1)
 		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))
-			chassis.occupant << sound('sound/mecha/weapdestr.ogg',volume=50)
+			if(chassis.nanotrasen_mech)
+				src.chassis.occupant << sound('sound/mecha/weapdestrnano.ogg',volume=50)
+			if(chassis.syndi_mech)
+				src.chassis.occupant  << sound('sound/mecha/weapdestrsyndi.ogg',volume=50)
+			else
+				src.chassis.occupant  << sound('sound/mecha/weapdestr.ogg',volume=50)
 		else
-			chassis.occupant << sound('sound/mecha/critdestr.ogg',volume=50)
+			if(chassis.nanotrasen_mech)
+				src.chassis.occupant  << sound('sound/mecha/critdestrnano.ogg',volume=50)
+			if(chassis.syndi_mech)
+				src.chassis.occupant  << sound('sound/mecha/critdestrsyndi.ogg',volume=50)
+			else
+				src.chassis.occupant  << sound('sound/mecha/critdestr.ogg',volume=50)
 	spawn
 		qdel(src)
 	return
