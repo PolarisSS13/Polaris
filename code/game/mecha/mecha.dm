@@ -1012,6 +1012,7 @@
 	if(network && !(internal_tank.return_air() in network.gases))
 		network.gases += internal_tank.return_air()
 		network.update = 1
+	playsound(src, 'sound/mecha/gasconnected.ogg', 50, 1)
 	log_message("Connected to gas port.")
 	return 1
 
@@ -1025,6 +1026,7 @@
 
 	connected_port.connected_device = null
 	connected_port = null
+	playsound(src, 'sound/mecha/gasdisconnected.ogg', 50, 1)
 	src.log_message("Disconnected from gas port.")
 	return 1
 
