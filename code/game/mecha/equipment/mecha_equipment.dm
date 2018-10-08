@@ -73,14 +73,14 @@
 		chassis.occupant_message("<font color='red'>The [src] is destroyed!</font>")
 		chassis.log_append_to_last("[src] is destroyed.",1)
 		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))
-			if(chassis.nanotrasen_mech)
+			if(chassis.nano_mech)
 				src.chassis.occupant << sound('sound/mecha/weapdestrnano.ogg',volume=50)
 			if(chassis.syndi_mech)
 				src.chassis.occupant  << sound('sound/mecha/weapdestrsyndi.ogg',volume=50)
 			else
 				src.chassis.occupant  << sound('sound/mecha/weapdestr.ogg',volume=50)
 		else
-			if(chassis.nanotrasen_mech)
+			if(chassis.nano_mech)
 				src.chassis.occupant  << sound('sound/mecha/critdestrnano.ogg',volume=50)
 			if(chassis.syndi_mech)
 				src.chassis.occupant  << sound('sound/mecha/critdestrsyndi.ogg',volume=50)
