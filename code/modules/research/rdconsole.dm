@@ -155,7 +155,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	add_fingerprint(usr)
 
 	usr.set_machine(src)
-	if((href_list["lock"] || screen < 1 || (screen == 1.6 && href_list["menu"] != "1.0")) && !allowed(usr)) //Stops people from HREF exploiting out of the lock screen, but allow it if they have the access.
+	if((screen < 1 || (screen == 1.6 && href_list["menu"] != "1.0")) && (!allowed(usr) && !emagged)) //Stops people from HREF exploiting out of the lock screen, but allow it if they have the access.
 		usr << "Unauthorized Access"
 		return
 
