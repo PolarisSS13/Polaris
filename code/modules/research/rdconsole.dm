@@ -155,6 +155,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	add_fingerprint(usr)
 
 	usr.set_machine(src)
+	if((href_list["lock"] || screen < 1 || (screen == 1.6 && href_list["menu"] != "1.0")) && !allowed(usr)) //Stops people from HREF exploiting out of the lock screen, but allow it if they have the access.
+		usr << "Unauthorized Access"
+		return
+
 	if(href_list["menu"]) //Switches menu screens. Converts a sent text string into a number. Saves a LOT of code.
 		var/temp_screen = text2num(href_list["menu"])
 		if(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged) //Unless you are making something, you need access.
