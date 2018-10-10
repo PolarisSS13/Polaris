@@ -519,84 +519,84 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
-	hoodtype = /obj/item/clothing/head/hoodie_hood
+	hoodtype = /obj/item/clothing/head/hood/hoodie
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/black
 	name = "black hoodie"
 	desc = "A warm, black sweatshirt."
 	icon_state = "black_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/black
+	hoodtype = /obj/item/clothing/head/hood/hoodie/black
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/red
 	name = "red hoodie"
 	desc = "A warm, red sweatshirt."
 	icon_state = "red_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_red", slot_l_hand_str = "suit_red")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/red
+	hoodtype = /obj/item/clothing/head/hood/hoodie/red
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/blue
 	name = "blue hoodie"
 	desc = "A warm, blue sweatshirt."
 	icon_state = "blue_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_blue", slot_l_hand_str = "suit_blue")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/blue
+	hoodtype = /obj/item/clothing/head/hood/hoodie/blue
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/green
 	name = "green hoodie"
 	desc = "A warm, green sweatshirt."
 	icon_state = "green_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_olive", slot_l_hand_str = "suit_olive")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/green
+	hoodtype = /obj/item/clothing/head/hood/hoodie/green
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/orange
 	name = "orange hoodie"
 	desc = "A warm, orange sweatshirt."
 	icon_state = "orange_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_orange", slot_l_hand_str = "suit_orange")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/orange
+	hoodtype = /obj/item/clothing/head/hood/hoodie/orange
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/yellow
 	name = "yellow hoodie"
 	desc = "A warm, yellow sweatshirt."
 	icon_state = "yellow_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_yellow", slot_l_hand_str = "suit_yellow")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/yellow
+	hoodtype = /obj/item/clothing/head/hood/hoodie/yellow
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/cti
 	name = "CTI hoodie"
 	desc = "A warm, black sweatshirt.  It bears the letters CTI on the back, a lettering to the prestigious university in Tau Ceti, Ceti Technical Institute.  There is a blue supernova embroidered on the front, the emblem of CTI."
 	icon_state = "cti_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/black
+	hoodtype = /obj/item/clothing/head/hood/hoodie/black
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/mu
 	name = "mojave university hoodie"
 	desc = "A warm, gray sweatshirt.  It bears the letters MU on the front, a lettering to the well-known public college, Mojave University."
 	icon_state = "mu_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_grey", slot_l_hand_str = "suit_grey")
-	hoodtype = /obj/item/clothing/head/hoodie_hood
+	hoodtype = /obj/item/clothing/head/hood/hoodie
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/nt
 	name = "NT hoodie"
 	desc = "A warm, blue sweatshirt.  It proudly bears the silver NanoTrasen insignia lettering on the back.  The edges are trimmed with silver."
 	icon_state = "nt_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_blue", slot_l_hand_str = "suit_blue")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/blue
+	hoodtype = /obj/item/clothing/head/hood/hoodie/blue
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/smw
 	name = "Space Mountain Wind hoodie"
 	desc = "A warm, black sweatshirt.  It has the logo for the popular softdrink Space Mountain Wind on both the front and the back."
 	icon_state = "smw_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
-	hoodtype = /obj/item/clothing/head/hoodie_hood/black
+	hoodtype = /obj/item/clothing/head/hood/hoodie/black
 
 /obj/item/clothing/suit/storage/hooded/toggle/hoodie/nrti
 	name = "New Reykjavik Technical Institute hoodie"
 	desc = "A warm, gray sweatshirt. It bears the letters NRT on the back, in reference to Sif's premiere technical institute."
 	icon_state = "nrti_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_grey", slot_l_hand_str = "suit_grey")
-	hoodtype = /obj/item/clothing/head/hoodie_hood
+	hoodtype = /obj/item/clothing/head/hood/hoodie
 
 /obj/item/clothing/suit/whitedress
 	name = "white dress"

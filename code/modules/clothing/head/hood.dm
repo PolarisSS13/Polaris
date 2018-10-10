@@ -71,7 +71,7 @@
 	item_state_slots = list(slot_r_hand_str = "ian", slot_l_hand_str = "ian") //Does not exist -S2-
 
 // Hoodies
-/obj/item/clothing/head/hoodie_hood
+/obj/item/clothing/head/hood/hoodie
 	name = "hoodie hood"
 	desc = "A hood attached to a hoodie."
 	icon_state = "grey_hoodie_hood"
@@ -80,22 +80,22 @@
 	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = HEAD
 
-/obj/item/clothing/head/hoodie_hood/black
+/obj/item/clothing/head/hood/hoodie/black
 	icon_state = "black_hoodie_hood"
 
-/obj/item/clothing/head/hoodie_hood/red
+/obj/item/clothing/head/hood/hoodie/red
 	icon_state = "red_hoodie_hood"
 
-/obj/item/clothing/head/hoodie_hood/blue
+/obj/item/clothing/head/hood/hoodie/blue
 	icon_state = "blue_hoodie_hood"
 
-/obj/item/clothing/head/hoodie_hood/green
+/obj/item/clothing/head/hood/hoodie/green
 	icon_state = "green_hoodie_hood"
 
-/obj/item/clothing/head/hoodie_hood/yellow
+/obj/item/clothing/head/hood/hoodie/yellow
 	icon_state = "yellow_hoodie_hood"
 
-/obj/item/clothing/head/hoodie_hood/orange
+/obj/item/clothing/head/hood/hoodie/orange
 	icon_state = "orange_hoodie_hood"
 
 // Snowsuits
