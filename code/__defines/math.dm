@@ -53,11 +53,11 @@
 #define ATAN2(x, y) ( !(x) && !(y) ? 0 : (y) >= 0 ? arccos((x) / sqrt((x)*(x) + (y)*(y))) : -arccos((x) / sqrt((x)*(x) + (y)*(y))) )
 
 // Greatest Common Divisor - Euclid's algorithm
-/proc/Gcd(a, b)
-	return b ? Gcd(b, (a) % (b)) : a
+/proc/GCD(a, b)
+	return b ? GCD(b, (a) % (b)) : a
 
 // Least Common Multiple
-#define Lcm(a, b) (abs(a) / Gcd(a, b) * abs(b))
+#define LCM(a, b) (abs(a) / GCD(a, b) * abs(b))
 
 #define INVERSE(x) ( 1/(x) )
 
@@ -88,6 +88,12 @@
 // Returns the nth root of x.
 #define ROOT(n, x) ((x) ** (1 / (n)))
 
+/proc/Mean(...)
+	var/sum = 0
+	for(var/val in args)
+		sum += val
+	return sum / args.len
+
 // The quadratic formula. Returns a list with the solutions, or an empty list
 // if they are imaginary.
 /proc/SolveQuadratic(a, b, c)
@@ -95,16 +101,20 @@
 	. = list()
 	var/d		= b*b - 4 * a * c
 	var/bottom  = 2 * a
+	// Return if the roots are imaginary.
 	if(d < 0)
 		return
 	var/root = sqrt(d)
 	. += (-b + root) / bottom
+	// If discriminant == 0, there would be two roots at the same position.
 	if(!d)
 		return
 	. += (-b - root) / bottom
 
+	// 180 / Pi ~ 57.2957795
 #define TODEGREES(radians) ((radians) * 57.2957795)
 
+	// Pi / 180 ~ 0.0174532925
 #define TORADIANS(degrees) ((degrees) * 0.0174532925)
 
 // Will filter out extra rotations and negative rotations
@@ -202,3 +212,15 @@
 	return list(region_x1 & region_x2, region_y1 & region_y2)
 
 // )
+
+#define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
+
+#define SQUARE(x) (x*x)
+
+//Vector Algebra
+#define SQUAREDNORM(x, y) (x*x+y*y)
+#define NORM(x, y) (sqrt(SQUAREDNORM(x,y)))
+#define ISPOWEROFTWO(x) ((x & (x - 1)) == 0)
+#define ROUNDUPTOPOWEROFTWO(x) (2 ** -round(-log(2,val)))
+
+#define DEFAULT(a, b) (a? a : b)
