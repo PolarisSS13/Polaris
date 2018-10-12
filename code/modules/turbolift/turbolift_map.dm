@@ -58,7 +58,7 @@
 
 		if(NORTH)
 
-			int_panel_x = ux + Floor(lift_size_x/2)
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = uy + 1
 			ext_panel_x = ux
 			ext_panel_y = ey + 2
@@ -75,7 +75,7 @@
 
 		if(SOUTH)
 
-			int_panel_x = ux + Floor(lift_size_x/2)
+			int_panel_x = ux + FLOOR(lift_size_x/2)
 			int_panel_y = ey - 1
 			ext_panel_x = ex
 			ext_panel_y = uy - 2
@@ -93,7 +93,7 @@
 		if(EAST)
 
 			int_panel_x = ux+1
-			int_panel_y = uy + Floor(lift_size_y/2)
+			int_panel_y = uy + FLOOR(lift_size_y/2)
 			ext_panel_x = ex+2
 			ext_panel_y = ey
 
@@ -110,7 +110,7 @@
 		if(WEST)
 
 			int_panel_x = ex-1
-			int_panel_y = uy + Floor(lift_size_y/2)
+			int_panel_y = uy + FLOOR(lift_size_y/2)
 			ext_panel_x = ux-2
 			ext_panel_y = uy
 

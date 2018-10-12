@@ -1,4 +1,4 @@
-/mob/living/carbon/slime/proc/Wrap(var/mob/living/M) // This is a proc for the clicks
+/mob/living/carbon/slime/proc/WRAP(var/mob/living/M) // This is a proc for the clicks
 	if (Victim == M || src == M)
 		Feedstop()
 		return
