@@ -318,8 +318,8 @@
 
 /obj/effect/fusion_em_field/proc/Radiate()
 	if(istype(loc, /turf))
-		var/empsev = max(1, min(3, CEILING(size/2)))
-		for(var/atom/movable/AM in range(max(1,FLOOR(size/2)), loc))
+		var/empsev = max(1, min(3, CEILING(size/2, 1)))
+		for(var/atom/movable/AM in range(max(1,FLOOR(size/2, 1)), loc))
 
 			if(AM == src || AM == owned_core || !AM.simulated)
 				continue
@@ -574,7 +574,7 @@
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(15, 15, "#CCCCFF")
-	empulse(get_turf(src), CEILING(plasma_temperature/1000), CEILING(plasma_temperature/300))
+	empulse(get_turf(src), CEILING(plasma_temperature/1000, 1), CEILING(plasma_temperature/300, 1))
 	global_announcer.autosay("WARNING: FIELD RUPTURE IMMINENT!", "Containment Monitor")
 	RadiateAll()
 	var/list/things_in_range = range(10, owned_core)
@@ -584,7 +584,7 @@
 		turfs_in_range.Add(T)
 
 	explosion(pick(things_in_range), -1, 5, 5, 5)
-	empulse(pick(things_in_range), CEILING(plasma_temperature/1000), CEILING(plasma_temperature/300))
+	empulse(pick(things_in_range), CEILING(plasma_temperature/1000, 1), CEILING(plasma_temperature/300, 1))
 	spawn(25)
 		explosion(pick(things_in_range), -1, 5, 5, 5)
 		spawn(25)
@@ -655,7 +655,7 @@
 /obj/effect/fusion_em_field/proc/BluespaceQuenchEvent() //!!FUN!! causes a number of explosions in an area around the core. Will likely destory or heavily damage the reactor.
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(15, 15, "#CCCCFF")
-	empulse(get_turf(src), CEILING(plasma_temperature/1000), CEILING(plasma_temperature/300))
+	empulse(get_turf(src), CEILING(plasma_temperature/1000, 1), CEILING(plasma_temperature/300, 1))
 	global_announcer.autosay("WARNING: FIELD RUPTURE IMMINENT!", "Containment Monitor")
 	RadiateAll()
 	var/list/things_in_range = range(10, owned_core)
@@ -665,7 +665,7 @@
 		turfs_in_range.Add(T)
 	for(var/loopcount = 1 to 10)
 		explosion(pick(things_in_range), -1, 5, 5, 5)
-		empulse(pick(things_in_range), CEILING(plasma_temperature/1000), CEILING(plasma_temperature/300))
+		empulse(pick(things_in_range), CEILING(plasma_temperature/1000, 1), CEILING(plasma_temperature/300, 1))
 	Destroy()
 	owned_core.Shutdown()
 	return

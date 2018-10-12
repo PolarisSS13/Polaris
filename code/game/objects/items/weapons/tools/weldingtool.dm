@@ -215,7 +215,7 @@
 	// Fuel counter overlay.
 	if(change_icons && get_max_fuel())
 		var/ratio = get_fuel() / get_max_fuel()
-		ratio = CEILING(ratio*4) * 25
+		ratio = CEILING(ratio*4, 1) * 25
 		var/image/I = image(icon, src, "[icon_state][ratio]")
 		overlays.Add(I)
 
