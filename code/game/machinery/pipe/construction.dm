@@ -134,9 +134,9 @@ Buildable meters
 
 // Don't let pulling a pipe straighten it out.
 /obj/item/pipe/binary/bendable/Move()
-	var/old_bent = !IS_CARDINAL(dir)
+	var/old_bent = !ISCARDINAL(dir)
 	. = ..()
-	if(old_bent && IS_CARDINAL(dir))
+	if(old_bent && ISCARDINAL(dir))
 		set_dir(turn(src.dir, -45))
 
 //Helper to clean up dir

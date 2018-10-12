@@ -171,8 +171,8 @@
 		use_power = light_max_power
 	else
 		var/temp_mod = ((plasma_temperature-5000)/20000)
-		use_range = light_min_range + CEILING((light_max_range-light_min_range)*temp_mod)
-		use_power = light_min_power + CEILING((light_max_power-light_min_power)*temp_mod)
+		use_range = light_min_range + CEILING((light_max_range-light_min_range)*temp_mod, 1)
+		use_power = light_min_power + CEILING((light_max_power-light_min_power)*temp_mod, 1)
 
 	if(last_range != use_range || last_power != use_power)
 		set_light(use_range,use_power)
@@ -386,7 +386,7 @@
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
 		for(var/reactant in react_pool)
-			react_pool[reactant] = rand(FLOOR(react_pool[reactant]/2),react_pool[reactant])
+			react_pool[reactant] = rand(FLOOR(react_pool[reactant]/2, 1),react_pool[reactant])
 			dormant_reactant_quantities[reactant] -= react_pool[reactant]
 			if(!react_pool[reactant])
 				react_pool -= reactant

@@ -137,7 +137,7 @@ var/round_start_time = 0
 	. = 0
 	var/i = DS2TICKS(initial_delay)
 	do
-		. += CEILING(i*DELTA_CALC, 1, 1)
+		. += CEILING(i*DELTA_CALC, 1)
 		sleep(i*world.tick_lag*DELTA_CALC)
 		i *= 2
 	while (TICK_USAGE > min(TICK_LIMIT_TO_RUN, GLOB.CURRENT_TICKLIMIT))
@@ -158,7 +158,7 @@ var/round_start_time = 0
 	if(!second)
 		return "0 seconds"
 	if(second >= 60)
-		minute = FLOOR(second/60, 1, 1)
+		minute = FLOOR(second/60, 1)
 		second = round(second - (minute*60), 0.1)
 		second_rounded = TRUE
 	if(second)	//check if we still have seconds remaining to format, or if everything went into minute.
@@ -189,7 +189,7 @@ var/round_start_time = 0
 	if(!minute)
 		return "[second]"
 	if(minute >= 60)
-		hour = FLOOR(minute/60, 1, 1)
+		hour = FLOOR(minute/60, 1)
 		minute = (minute - (hour*60))
 	if(minute) //alot simpler from here since you don't have to worry about fractions
 		if(minute != 1)
@@ -212,7 +212,7 @@ var/round_start_time = 0
 	if(!hour)
 		return "[minute][second]"
 	if(hour >= 24)
-		day = FLOOR(hour/24, 1, 1)
+		day = FLOOR(hour/24, 1)
 		hour = (hour - (day*24))
 	if(hour)
 		if(hour != 1)

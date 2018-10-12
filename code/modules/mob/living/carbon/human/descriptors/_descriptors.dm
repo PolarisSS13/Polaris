@@ -34,7 +34,7 @@
 		chargen_value_descriptors = list()
 		for(var/i = 1 to LAZYLEN(standalone_value_descriptors))
 			chargen_value_descriptors[standalone_value_descriptors[i]] = i
-	default_value = CEILING(LAZYLEN(standalone_value_descriptors) * 0.5)
+	default_value = CEILING(LAZYLEN(standalone_value_descriptors) * 0.5, 1)
 	..()
 
 /datum/mob_descriptor/proc/get_third_person_message_start(var/datum/gender/my_gender)
