@@ -13,7 +13,7 @@
 //percent_of_tick_used * (ticklag * 100(to convert to ms)) / 100(percent ratio)
 //collapsed to percent_of_tick_used * tick_lag
 #define TICK_DELTA_TO_MS(percent_of_tick_used) ((percent_of_tick_used) * world.tick_lag)
-#define TICK_USAGE_TO_MS(starting_tickusage) (TICK_DELTA_TO_MS(TICK_USAGE_REAL - starting_tickusage))
+#define TICK_USAGE_TO_MS(starting_tickusage) (TICK_DELTA_TO_MS(world.tick_usage - starting_tickusage))
 
 #define PERCENT(val) (round((val)*100, 0.1))
 #define CLAMP01(x) (CLAMP(x, 0, 1))
@@ -58,6 +58,8 @@
 
 // Least Common Multiple
 #define LCM(a, b) (abs(a) / GCD(a, b) * abs(b))
+
+#define IS_CARDINAL(x) ((x & (x - 1)) == 0)
 
 #define INVERSE(x) ( 1/(x) )
 
@@ -221,6 +223,6 @@
 #define SQUAREDNORM(x, y) (x*x+y*y)
 #define NORM(x, y) (sqrt(SQUAREDNORM(x,y)))
 #define ISPOWEROFTWO(x) ((x & (x - 1)) == 0)
-#define ROUNDUPTOPOWEROFTWO(x) (2 ** -round(-log(2,val)))
+#define ROUNDUPTOPOWEROFTWO(x) (2 ** -round(-log(2,x)))
 
 #define DEFAULT(a, b) (a? a : b)

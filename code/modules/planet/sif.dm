@@ -75,7 +75,7 @@ var/datum/planet/sif/planet_sif = null
 	if(weather_holder && weather_holder.current_weather)
 		weather_light_modifier = weather_holder.current_weather.light_modifier
 
-	var/new_brightness = (LERP(low_brightness, high_brightness, weight = interpolate_weight) ) * weather_light_modifier
+	var/new_brightness = (LERP(low_brightness, high_brightness, interpolate_weight) ) * weather_light_modifier
 
 	var/new_color = null
 	if(weather_holder && weather_holder.current_weather && weather_holder.current_weather.light_color)
@@ -91,9 +91,9 @@ var/datum/planet/sif/planet_sif = null
 		var/high_g = high_color_list[2]
 		var/high_b = high_color_list[3]
 
-		var/new_r = LERP(low_r, high_r, weight = interpolate_weight)
-		var/new_g = LERP(low_g, high_g, weight = interpolate_weight)
-		var/new_b = LERP(low_b, high_b, weight = interpolate_weight)
+		var/new_r = LERP(low_r, high_r, interpolate_weight)
+		var/new_g = LERP(low_g, high_g, interpolate_weight)
+		var/new_b = LERP(low_b, high_b, interpolate_weight)
 
 		new_color = rgb(new_r, new_g, new_b)
 

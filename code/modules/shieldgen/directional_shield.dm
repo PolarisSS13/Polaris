@@ -164,9 +164,9 @@
 	var/high_g = high_color_list[2]
 	var/high_b = high_color_list[3]
 
-	var/new_r = LERP(low_r, high_r, weight = interpolate_weight)
-	var/new_g = LERP(low_g, high_g, weight = interpolate_weight)
-	var/new_b = LERP(low_b, high_b, weight = interpolate_weight)
+	var/new_r = LERP(low_r, high_r, interpolate_weight)
+	var/new_g = LERP(low_g, high_g, interpolate_weight)
+	var/new_b = LERP(low_b, high_b, interpolate_weight)
 
 	var/new_color = rgb(new_r, new_g, new_b)
 
