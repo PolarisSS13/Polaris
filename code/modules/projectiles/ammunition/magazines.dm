@@ -339,16 +339,12 @@
 /obj/item/ammo_magazine/m9mmR/saber/ap
 	desc = "A high capacity double stack magazine made specially for the SABER SMG. Filled with 22 9mm armor piercing bullets."
 	icon_state = "S9mm-22"
-	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a9mm/ap
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	caliber = "9mm"
-	max_ammo = 22
-	origin_tech = list(TECH_COMBAT = 2, TECH_ILLEGAL = 1)
-	multiple_sprites = 1
 
 /obj/item/ammo_magazine/m9mmR/saber/empty
 	initial_ammo = 0
+	icon_state = "S9mm-0"
 
 ///////// 10mm /////////
 
