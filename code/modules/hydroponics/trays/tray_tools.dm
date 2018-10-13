@@ -4,6 +4,13 @@
 	name = "plant clippers"
 	desc = "A tool used to take samples from plants."
 
+/obj/item/weapon/tool/wirecutters/clippers/trimmer
+	name = "hedgetrimmers"
+	desc = "An old pair of trimmers with a pretty dull blade. You probably would have a hard time cutting anything but plants with it."
+	icon_state = "hedget"
+	item_state = "hedget"
+	force = 7 //One point extra than standard wire cutters.
+
 /obj/item/device/analyzer/plant_analyzer
 	name = "plant analyzer"
 	icon = 'icons/obj/device.dmi'
