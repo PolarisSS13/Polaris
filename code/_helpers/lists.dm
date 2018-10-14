@@ -742,3 +742,37 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/i = 1 to l.len)
 		if(islist(.[i]))
 			.[i] = .(.[i])
+
+#define listequal(A, B) (A.len == B.len && !length(A^B))
+
+/proc/filter_list(var/list/L, var/type)
+	. = list()
+	for(var/entry in L)
+		if(istype(entry, type))
+			. += entry
+
+/proc/group_by(var/list/group_list, var/key, var/value)
+	var/values = group_list[key]
+	if(!values)
+		values = list()
+		group_list[key] = values
+
+	values += value
+
+/proc/duplicates(var/list/L)
+	. = list()
+	var/list/checked = list()
+	for(var/value in L)
+		if(value in checked)
+			. |= value
+		else
+			checked += value
+
+/proc/assoc_by_proc(var/list/plain_list, var/get_initial_value)
+	. = list()
+	for(var/entry in plain_list)
+		.[call(get_initial_value)(entry)] = entry
+
+/proc/get_initial_name(var/atom/atom_type)
+	var/atom/A = atom_type
+	return initial(A.name)

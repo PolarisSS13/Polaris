@@ -33,7 +33,7 @@
 /datum/relation/rival
 	name = "Rival"
 	desc = "You are engaged in a constant struggle to show who's number one."
-
+	incompatible = list("Department Buddy")
 /datum/relation/rival/get_desc_string()
 	return "[holder] and [other.holder] are fiercely competitive towards one another."
 
@@ -53,6 +53,14 @@
 	else if (good.len)
 		return good
 	return rest
+
+/datum/relation/rival/deptbuddies
+	name = "Department Buddy"
+	desc = "You both have been working together for a while and have each other's backs."
+	incompatible = list("Rival")
+/datum/relation/rival/deptbuddies/get_desc_string()
+	return "[holder] and [other.holder] work well at work together."
+
 
 /datum/relation/ex
 	name = "Ex"
