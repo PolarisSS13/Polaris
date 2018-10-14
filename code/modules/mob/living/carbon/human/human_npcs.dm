@@ -288,3 +288,38 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	h_style = random_hair_style(gender, "Human Child")
 	f_style = random_facial_hair_style(gender, "Human Adolescent")
 	set_species("Human Adolescent")
+
+/mob/living/carbon/human/random/moving/
+	var/turns_per_move = 1
+	var/turns_since_move = 0
+	var/moving_to = 0
+	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
+	var/wander = 1	// Does the mob wander around when idle?
+	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
+
+
+/mob/living/carbon/human/random/moving/Life()
+	//Movement
+	if(!client && !stop_automated_movement && wander && !anchored)
+		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+			turns_since_move++
+			if(turns_since_move >= turns_per_move)
+				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
+					moving_to = pick(cardinal)
+					dir = moving_to			//How about we turn them the direction they are moving, yay.
+					Move(get_step(src,moving_to))
+					turns_since_move = 0
+
+/mob/living/carbon/human/random/moving/child/New()
+	..()
+	age = rand(8,12)
+	set_species("Human Child")
+	h_style = random_hair_style(gender, "Human Child")
+
+
+/mob/living/carbon/human/random/moving/teen/New()
+	..()
+	age = rand(13,17)
+	h_style = random_hair_style(gender, "Human Child")
+	f_style = random_facial_hair_style(gender, "Human Adolescent")
+	set_species("Human Adolescent")
