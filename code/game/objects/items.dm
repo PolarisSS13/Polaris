@@ -215,7 +215,10 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 		if(!temp)
 			user << "<span class='notice'>You try to use your hand, but realize it is no longer attached!</span>"
 			return
+
+	var/old_loc = src.loc
 	src.pickup(user)
+
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
@@ -227,7 +230,11 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	else
 		if(isliving(src.loc))
 			return
-	user.put_in_active_hand(src)
+	if(user.put_in_active_hand(src))
+		if(isturf(old_loc))
+			var/obj/effect/temporary_effect/item_pickup_ghost/ghost = new(old_loc)
+			ghost.assumeform(src)
+			ghost.animate_towards(user)
 	return
 
 	if(burn_state == 1)
