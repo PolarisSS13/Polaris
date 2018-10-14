@@ -17,7 +17,7 @@
 #define TICKS *world.tick_lag
 
 #define DS2TICKS(DS) (DS/world.tick_lag)	// Convert deciseconds to ticks
-#define TICKS2DS(T) (T TICKS) 				// Convert ticks to deciseconds
+#define TICKS2DS(T) ((T) TICKS) 				// Convert ticks to deciseconds
 
 /proc/get_game_time()
 	var/global/time_offset = 0

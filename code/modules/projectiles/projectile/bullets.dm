@@ -246,12 +246,12 @@
 	incendiary = 2
 	flammability = 4
 	agony = 30
-	kill_count = 4
+	range = 4
 	vacuum_traversal = 0
 
 /obj/item/projectile/bullet/incendiary/flamethrower/large
 	damage = 15
-	kill_count = 6
+	range = 6
 
 /obj/item/projectile/bullet/blank
 	invisibility = 101

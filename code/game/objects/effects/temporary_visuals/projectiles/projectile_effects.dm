@@ -4,7 +4,7 @@
 	icon_state = "nothing"
 	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = 0
 	appearance_flags = 0
 
 /obj/effect/projectile/singularity_pull()
@@ -54,7 +54,7 @@
 /obj/effect/projectile_lighting
 	var/owner
 
-/obj/effect/projectile_lighting/Initialize(mapload, color, range, intensity, owner_key)
+/obj/effect/projectile_lighting/New(loc, color, range, intensity, owner_key)
 	. = ..()
 	set_light(range, intensity, color)
 	owner = owner_key

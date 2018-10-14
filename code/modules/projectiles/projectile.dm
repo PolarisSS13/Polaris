@@ -7,9 +7,9 @@
 	icon_state = "bullet"
 	density = FALSE
 	anchored = TRUE
-	unacidable = TRUEs
+	unacidable = TRUE
 	pass_flags = PASSTABLE
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	mouse_opacity = 0
 
 	////TG PROJECTILE SYTSEM
 	//Projectile stuff
@@ -205,7 +205,7 @@
 
 /obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
 	..()
-	if(isliving(AM) && (AM.density || AM == original) && !(src.pass_flags & PASSMOB))
+	if(isliving(AM) && (AM.density || AM == original))
 		Bump(AM)
 
 /obj/item/projectile/proc/process_homing()			//may need speeding up in the future performance wise.
@@ -281,13 +281,10 @@
 
 /obj/item/projectile/proc/fire(angle, atom/direct_target)
 	//If no angle needs to resolve it from xo/yo!
-	if(!log_override && firer && original)
-		log_combat(firer, original, "fired at", src, "from [get_area_name(src, TRUE)]")
 	if(direct_target)
-		if(prehit(direct_target))
-			direct_target.bullet_act(src, def_zone)
-			qdel(src)
-			return
+		direct_target.bullet_act(src, def_zone)
+		qdel(src)
+		return
 	if(isnum(angle))
 		setAngle(angle)
 	var/turf/starting = get_turf(src)
@@ -322,7 +319,6 @@
 /obj/item/projectile/proc/after_z_change(atom/olcloc, atom/newloc)
 
 /obj/item/projectile/proc/before_z_change(atom/oldloc, atom/newloc)
-
 
 /obj/item/projectile/proc/before_move()
 	return
@@ -385,7 +381,7 @@
 		var/y = text2num(screen_loc_Y[1]) * 32 + text2num(screen_loc_Y[2]) - 32
 
 		//Calculate the "resolution" of screen based on client's view and world's icon size. This will work if the user can view more tiles than average.
-		var/list/screenview = getviewsize(user.client.view)
+		var/list/screenview = user.client? getviewsize(user.client.view) : world.view
 		var/screenviewX = screenview[1] * world.icon_size
 		var/screenviewY = screenview[2] * world.icon_size
 
@@ -394,9 +390,14 @@
 		angle = ATAN2(y - oy, x - ox)
 	return list(angle, p_x, p_y)
 
+/obj/item/projectile/proc/redirect(x, y, starting, source)
+	old_style_target(locate(x, y, z), starting? get_turf(starting) : get_turf(source))
+
 /obj/item/projectile/proc/old_style_target(atom/target, atom/source)
 	if(!source)
 		source = get_turf(src)
+	starting = source
+	original = target
 	setAngle(Get_Angle(source, target))
 
 /obj/item/projectile/Destroy()
@@ -456,37 +457,19 @@
 
 //Returns true if the target atom is on our current turf and above the right layer
 /obj/item/projectile/proc/can_hit_target(atom/target, var/list/passthrough)
-	return (target && ((target.layer >= PROJECTILE_HIT_THRESHHOLD_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
+	return (target && ((target.layer >= TABLE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
 /obj/item/projectile/Bump(atom/A)
-	var/datum/point/pcache = trajectory.copy_to()
 	if(A in permutated)
 		return FALSE
-	if(check_ricochet(A) && check_ricochet_flag(A) && ricochets < ricochets_max)
-		ricochets++
-		if(A.handle_ricochet(src))
-			on_ricochet(A)
-			ignore_source_check = TRUE
-			range = initial(range)
-			if(hitscan)
-				store_hitscan_collision(pcache)
-			return TRUE
-	if(firer && !ignore_source_check)
-		if(A == firer || (A == firer.loc && ismecha(A))) //cannot shoot yourself or your mech
+	if(firer && !reflected)
+		if(A == firer || (A == firer.loc && istype(A, /obj/mecha))) //cannot shoot yourself or your mech
 			trajectory_ignore_forcemove = TRUE
 			forceMove(get_turf(A))
 			trajectory_ignore_forcemove = FALSE
 			return FALSE
 
-	var/distance = get_dist(get_turf(A), starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
-	def_zone = ran_zone(def_zone, max(100-(7*distance), 5)) //Lower accurancy/longer range tradeoff. 7 is a balanced number to use.
-
-	if(isturf(A) && hitsound_wall)
-		var/volume = CLAMP(vol_by_damage() + 20, 0, 100)
-		if(suppressed)
-			volume = 5
-		playsound(loc, hitsound_wall, volume, 1, -1)
-
+	var/distance = get_dist(starting, get_turf(src))
 	var/turf/target_turf = get_turf(A)
 	var/passthrough = FALSE
 
@@ -520,7 +503,6 @@
 			for(var/mob/living/M in A)
 				attack_mob(M, distance)
 
-
 	//penetrating projectiles can pass through things that otherwise would not let them
 	if(!passthrough && penetrating > 0)
 		if(check_penetrate(A))
@@ -550,7 +532,6 @@
 
 //called when the projectile stops flying because it Bump'd with something
 /obj/item/projectile/proc/on_impact(atom/A)
-	impact_effect(effect_transform)		// generate impact effect
 	if(damage && damage_type == BURN)
 		var/turf/T = get_turf(A)
 		if(T)
@@ -627,7 +608,7 @@
 	return fire(angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/_launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
+/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
 
 	shot_from = launcher.name
 	silenced = launcher.silenced

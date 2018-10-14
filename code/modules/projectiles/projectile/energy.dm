@@ -12,7 +12,7 @@
 	icon_state = "bullet"
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
 	damage = 5
-	kill_count = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
+	range = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	var/flash_range = 0
 	var/brightness = 7
 	var/light_colour = "#ffffff"
@@ -162,7 +162,7 @@
 	icon_state = "plasma_stun"
 	fire_sound = 'sound/weapons/blaster.ogg'
 	armor_penetration = 10
-	kill_count = 4
+	range = 4
 	damage = 5
 	agony = 55
 	damage_type = BURN
@@ -214,20 +214,20 @@
 /obj/item/projectile/energy/phase
 	name = "phase wave"
 	icon_state = "phase"
-	kill_count = 6
+	range = 6
 	damage = 5
 	SA_bonus_damage = 45	// 50 total on animals
 	SA_vulnerability = SA_ANIMAL
 
 /obj/item/projectile/energy/phase/light
-	kill_count = 4
+	range = 4
 	SA_bonus_damage = 35	// 40 total on animals
 
 /obj/item/projectile/energy/phase/heavy
-	kill_count = 8
+	range = 8
 	SA_bonus_damage = 55	// 60 total on animals
 
 /obj/item/projectile/energy/phase/heavy/cannon
-	kill_count = 10
+	range = 10
 	damage = 15
 	SA_bonus_damage = 60	// 75 total on animals

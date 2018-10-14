@@ -9,7 +9,7 @@
 /obj/item/projectile/arc
 	name = "arcing shot"
 	icon_state = "fireball" // WIP
-	step_delay = 2 // Travel a bit slower, to really sell the arc visuals.
+	speed = 2 // Travel a bit slower, to really sell the arc visuals.
 	plane = ABOVE_PLANE // Since projectiles are 'in the air', they might visually overlap mobs while in flight, so the projectile needs to be above their plane.
 	var/target_distance = null	// How many tiles the impact site is.
 	var/fired_dir = null		// Which direction was the projectile fired towards. Needed to invert the projectile turning based on if facing left or right.
@@ -36,17 +36,16 @@
 	new /obj/effect/explosion(T)
 	return ..()
 
-/obj/item/projectile/arc/launch(atom/target, target_zone, x_offset=0, y_offset=0, angle_offset=0)
+/obj/item/projectile/arc/old_style_target(target, source)
 	var/expected_distance = get_dist(target, loc)
-	kill_count = expected_distance // So the projectile "hits the ground."
+	range = expected_distance // So the projectile "hits the ground."
 	target_distance = expected_distance
 	fired_dir = get_dir(loc, target)
-	..() // Does the regular launching stuff.
+	..()
 	if(fired_dir & EAST)
 		transform = turn(transform, -45)
 	else if(fired_dir & WEST)
 		transform = turn(transform, 45)
-
 
 // Visuals.
 /obj/item/projectile/arc/after_move()
@@ -73,7 +72,7 @@
 	var/projectile_position = arc_progress / target_distance
 	var/sine_position = projectile_position * 180
 	var/pixel_z_position = arc_max_height * sin(sine_position)
-	animate(src, pixel_z = pixel_z_position, time = step_delay)
+	animate(src, pixel_z = pixel_z_position, time = speed)
 
 	// Update our shadow.
 	shadow.forceMove(loc)
