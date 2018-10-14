@@ -5,7 +5,8 @@
 	var/threatening = FALSE				// If the mob actually gave the warning, checked so it doesn't constantly yell every tick.
 	var/threaten_delay = 3 SECONDS		// How long a 'threat' lasts, until actual fighting starts. If null, the mob never starts the fight but still does the threat.
 	var/threaten_timeout = 1 MINUTE		// If the mob threatens someone, they leave, and then come back before this timeout period, the mob escalates to fighting immediately.
-	var/last_conflict_time = null		// Last occurance of threatening or fighting being used, in world.time.
+	var/last_conflict_time = null		// Last occurance of fighting being used, in world.time.
+	var/last_threaten_time = null		// Ditto but only for threats.
 
 	var/speak_chance = 0				// Probability that the mob talks (this is 'X in 200' chance since even 1/100 is pretty noisy)
 	var/reacts = 0						// Reacts to some things being said.
@@ -14,11 +15,13 @@
 /datum/ai_holder/proc/should_threaten()
 	if(!threaten)
 		return FALSE // We don't negotiate.
+	if(target in attackers)
+		return FALSE // They (or someone like them) attacked us before, escalate immediately.
 	if(!will_threaten(target))
 		return FALSE // Pointless to threaten an animal, a mindless drone, or an object.
 	if(stance in STANCES_COMBAT)
 		return FALSE // We're probably already fighting or recently fought if not in these stances.
-	if(last_conflict_time && threaten_delay && last_conflict_time + threaten_timeout > world.time)
+	if(last_threaten_time && threaten_delay && last_conflict_time + threaten_timeout > world.time)
 		return FALSE // We threatened someone recently, so lets show them we mean business.
 	return TRUE // Lets give them a chance to choose wisely and walk away.
 
@@ -27,7 +30,7 @@
 
 	if(!threatening) // First tick.
 		threatening = TRUE
-		last_conflict_time = world.time
+		last_threaten_time = world.time
 
 		if(holder.say_list)
 			holder.say(safepick(holder.say_list.say_threaten))
@@ -35,8 +38,14 @@
 			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
+			var/should_escalate = FALSE
 
-			if(threaten_delay && last_conflict_time + threaten_delay < world.time) // Waited too long.
+			if(threaten_delay && last_threaten_time + threaten_delay < world.time) // Waited too long.
+				should_escalate = TRUE
+			else if(last_conflict_time + threaten_timeout > world.time) // We got attacked while threatening them.
+				should_escalate = TRUE
+
+			if(should_escalate)
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)

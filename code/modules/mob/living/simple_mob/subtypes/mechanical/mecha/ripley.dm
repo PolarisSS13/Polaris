@@ -5,7 +5,7 @@
 	name = "\improper APLU ripley"
 	desc = "Autonomous Power Loader Unit. The workhorse of the exosuit world. This one has big drill."
 	icon_state = "ripley"
-	wreckage = /obj/effect/decal/mecha_wreckage/ripley
+	wreckage = /obj/structure/loot_pile/mecha/ripley
 
 	maxHealth = 200
 
@@ -32,7 +32,7 @@
 	name = "\improper APLU firefighter"
 	desc = "A standard APLU chassis, refitted with additional thermal protection and cistern. This one has a big drill."
 	icon_state = "firefighter"
-	wreckage = /obj/effect/decal/mecha_wreckage/ripley/firefighter
+	wreckage = /obj/structure/loot_pile/mecha/ripley/firefighter
 
 	maxHealth = 250
 	heat_resist = 1
@@ -54,7 +54,7 @@
 	name = "\improper DEATH-RIPLEY"
 	desc = "OH SHIT RUN!!! IT HAS A KILL CLAMP!"
 	icon_state = "deathripley"
-	wreckage = /obj/effect/decal/mecha_wreckage/ripley/deathripley
+	wreckage = /obj/structure/loot_pile/mecha/deathripley
 
 	melee_damage_lower = 0
 	melee_damage_upper = 0

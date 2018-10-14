@@ -6,7 +6,7 @@
 	name = "odysseus"
 	desc = "These exosuits are developed and produced by Vey-Med. This one has a syringe gun."
 	icon_state = "odysseus"
-	wreckage = /obj/effect/decal/mecha_wreckage/odysseus
+	wreckage = /obj/structure/loot_pile/mecha/odysseus
 
 	maxHealth = 120
 	movement_cooldown = 0
@@ -28,7 +28,7 @@
 // Resprite of the regular one, perhaps for merc PoIs.
 /mob/living/simple_mob/mechanical/mecha/odysseus/murdysseus
 	icon_state = "murdysseus"
-	wreckage = /obj/effect/decal/mecha_wreckage/odysseus/murdysseus
+	wreckage = /obj/structure/loot_pile/mecha/odysseus/murdysseus
 
 /mob/living/simple_mob/mechanical/mecha/odysseus/murdysseus/manned
 	pilot_type = /mob/living/simple_mob/humanoid/merc/ranged

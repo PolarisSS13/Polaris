@@ -7,6 +7,9 @@
 
 	add_overlay(modifier_overlay)
 
+	if(!icon_living) // Prevent the mob from turning invisible if icon_living is null.
+		icon_living = initial(icon_state)
+
 	//Awake and normal
 	if((stat == CONSCIOUS) && (!icon_rest || !resting || !incapacitated(INCAPACITATION_DISABLED) ))
 		icon_state = icon_living
@@ -30,7 +33,10 @@
 			add_overlay(l_hand_sprite)
 
 	if(has_eye_glow)
-		add_eyes()
+		if(icon_state != icon_living)
+			remove_eyes()
+		else
+			add_eyes()
 
 //	appearance = ma
 

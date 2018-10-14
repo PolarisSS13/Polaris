@@ -5,7 +5,7 @@
 	name = "gygax"
 	desc = "A lightweight, security exosuit. Popular among private and corporate security."
 	icon_state = "gygax"
-	movement_cooldown = 5
+	movement_cooldown = 0
 	wreckage = /obj/structure/loot_pile/mecha/gygax
 
 	maxHealth = 300
@@ -37,6 +37,7 @@
 
 	maxHealth = 400
 	deflect_chance = 25
+	has_repair_droid = TRUE
 	armor = list(
 				"melee"		= 40,
 				"bullet"	= 40,
@@ -47,32 +48,10 @@
 				"rad"		= 100
 				)
 
-
-
-
-
 /mob/living/simple_mob/mechanical/mecha/combat/gygax/medgax
 	name = "medgax"
 	desc = "An unorthodox fusion of the Gygax and Odysseus exosuits, this one is fast, sturdy, and carries a wide array of \
 	potent chemicals and delivery mechanisms. The doctor is in!"
 	icon_state = "medgax"
-	wreckage = /obj/effect/decal/mecha_wreckage/gygax/medgax
+	wreckage = /obj/structure/loot_pile/mecha/gygax/medgax
 
-
-/*
-	desc = "A lightweight, security exosuit. Popular among private and corporate security."
-	name = "Gygax"
-	icon_state = "gygax"
-	initial_icon = "gygax"
-	step_in = 3
-	dir_in = 1 //Facing North.
-	health = 300
-	maxhealth = 300
-	deflect_chance = 15
-	damage_absorption = list("brute"=0.75,"fire"=1,"bullet"=0.8,"laser"=0.7,"energy"=0.85,"bomb"=1)
-	max_temperature = 25000
-	infra_luminosity = 6
-	var/overload = 0
-	var/overload_coeff = 2
-	wreckage = /obj/effect/decal/mecha_wreckage/gygax
-*/

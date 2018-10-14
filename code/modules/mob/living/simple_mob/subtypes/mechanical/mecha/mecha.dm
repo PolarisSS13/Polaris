@@ -9,7 +9,7 @@
 
 	faction = "syndicate"
 	movement_cooldown = 5
-	movement_sound = 'sound/mecha/mechstep.ogg'
+	movement_sound = "mechstep" // This gets fed into playsound(), which can also take strings as a 'group' of sound files.
 	turn_sound = 'sound/mecha/mechturn.ogg'
 	maxHealth = 300
 	mob_size = MOB_LARGE
@@ -37,17 +37,22 @@
 	var/wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
 	var/pilot_type = null // Set to spawn a pilot when destroyed. Setting this also makes the mecha vulnerable to things that affect sentient minds.
 	var/deflect_chance = 10 // Chance to outright stop an attack, just like a normal exosuit.
+	var/has_repair_droid = FALSE // If true, heals 2 damage every tick and gets a repair droid overlay.
 
 
 /mob/living/simple_mob/mechanical/mecha/initialize()
 	sparks = new (src)
 	sparks.set_up(3, 1, src)
+	sparks.attach(src)
 
 	if(!pilot_type)
-		name = "autonomous [initial(name)] drone"
+		name = "autonomous [initial(name)]"
 		desc = "[initial(desc)] It appears to be piloted by a drone intelligence."
 	else
 		say_list_type = /datum/say_list/merc
+
+	if(has_repair_droid)
+		update_icon()
 
 	return ..()
 
@@ -70,6 +75,20 @@
 	new wreckage(loc) // Leave some wreckage.
 
 	qdel(src) // Then delete us since we don't actually have a body.
+
+/mob/living/simple_mob/mechanical/mecha/handle_special()
+	if(has_repair_droid)
+		adjustBruteLoss(-2)
+		adjustFireLoss(-2)
+		adjustToxLoss(-2)
+		adjustOxyLoss(-2)
+		adjustCloneLoss(-2)
+	..()
+
+/mob/living/simple_mob/mechanical/mecha/update_icon()
+	..() // Cuts everything else, so do that first.
+	if(has_repair_droid)
+		add_overlay(image(icon = 'icons/mecha/mecha_equipment.dmi', icon_state = "repair_droid"))
 
 /mob/living/simple_mob/mechanical/mecha/bullet_act()
 	. = ..()

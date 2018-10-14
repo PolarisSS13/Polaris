@@ -1,7 +1,8 @@
 // Stronger than a regular Dark Gygax, this one has three special attacks, based on intents.
 // First special attack launches three arcing rockets at the current target.
-// Second special attack fires a side weapon that rapidly pumps out blue energy blasts at nearby enemies for a few seconds.
-// Third special attack TBD.
+// Second special attack fires a projectile that creates a short-lived microsingularity that pulls in everything nearby. Magboots can protect from this.
+// Third special attack creates a dangerous electric field that causes escalating electric damage, before emitting a tesla shock and blinding anyone looking at the mecha.
+// The AI will choose one every ten seconds.
 /mob/living/simple_mob/mechanical/mecha/combat/gygax/dark/advanced
 	name = "advanced dark gygax"
 	desc = "An experimental exosuit that utilizes advanced materials to allow for greater protection while still being lightweight and fast. \
@@ -13,6 +14,7 @@
 
 	maxHealth = 450
 	deflect_chance = 25
+	has_repair_droid = TRUE
 	armor = list(
 				"melee"		= 50,
 				"bullet"	= 50,
@@ -26,6 +28,7 @@
 	special_attack_min_range = 1
 	special_attack_max_range = 7
 	special_attack_cooldown = 10 SECONDS
+	projectiletype = /obj/item/projectile/force_missile
 	var/obj/effect/overlay/energy_ball/energy_ball = null
 
 /mob/living/simple_mob/mechanical/mecha/combat/gygax/dark/advanced/Destroy()
@@ -47,6 +50,7 @@
 #define ELECTRIC_ZAP_POWER 20000
 
 // Charges a tesla shot, while emitting a dangerous electric field. The exosuit is immune to electric damage while this is ongoing.
+// It also briefly blinds anyone looking directly at the mech without flash protection.
 /mob/living/simple_mob/mechanical/mecha/combat/gygax/dark/advanced/proc/electric_defense(atom/target)
 	set waitfor = FALSE
 

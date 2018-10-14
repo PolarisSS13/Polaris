@@ -4,7 +4,7 @@
 	desc = "Stubby and round, this space-capable craft is an ancient favorite. It has a jury-rigged welder-laser."
 	icon_state = "engineering_pod"
 	movement_sound = 'sound/machines/hiss.ogg'
-	wreckage = /obj/effect/decal/mecha_wreckage/hoverpod
+	wreckage = /obj/structure/loot_pile/mecha/hoverpod
 
 	maxHealth = 150
 	hovering = TRUE // Can fly.

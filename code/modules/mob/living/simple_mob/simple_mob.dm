@@ -159,8 +159,6 @@
 
 	if(has_eye_glow)
 		add_eyes()
-	if(!icon_living)
-		icon_living = icon_state
 	return ..()
 
 
@@ -176,6 +174,10 @@
 	if(has_eye_glow)
 		remove_eyes()
 	return ..()
+
+/mob/living/simple_mob/death()
+	update_icon()
+	..()
 
 
 //Client attached
