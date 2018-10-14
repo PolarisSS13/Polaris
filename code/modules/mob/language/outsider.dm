@@ -130,3 +130,18 @@
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")
+
+
+/datum/language/zombie
+	name = "Zombie Hivemind"
+	colour = "alien"
+	desc = "Only zombies and hippies on lsd can understand this."
+	speech_verb = "growls"
+	ask_verb = "growls"
+	exclaim_verb = "growls"
+	colour = "alien"
+	key = "z"
+	machine_understands = 0
+	flags = RESTRICTED | NO_STUTTER| NONVERBAL | HIVEMIND
+
+

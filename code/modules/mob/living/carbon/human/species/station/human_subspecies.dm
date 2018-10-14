@@ -60,3 +60,34 @@
 	blurb = "Ook ook."
 	icobase = 'icons/mob/human_races/subspecies/r_upliftedchimp.dmi'
 */
+
+/datum/species/human/teen
+	name = "Human Adolescent"
+	name_plural = "Humans Adolescents"
+	name = SPECIES_HUMAN_TEEN
+	blurb = "A young human which is currently too young to participate in civil powers such as voting or official positions but can legally work in many fields on a reduced wage."
+	metabolic_rate = 1.15 // You know, puberty. Hormones. Growing.
+	blood_volume = 480
+	slowdown = -0.3
+	min_age = 13
+	max_age = 17
+	total_health = 85
+	economic_modifier = 1
+	icon_scale = 0.9
+
+
+/datum/species/human/child
+	name = "Human Child"
+	name_plural = "Human Children"
+	name = SPECIES_HUMAN_CHILD
+	metabolic_rate = 1.10
+	blurb = "A younger version of a human. Much weaker and smaller - cannot participate in paid job roles, but faster and more agile."
+	mob_size = MOB_SMALL
+	has_fine_manipulation = 0
+	blood_volume = 300
+	slowdown = -0.5
+	min_age = 8
+	max_age = 12
+	total_health = 50
+	economic_modifier = 0.2
+	icon_scale = 0.75

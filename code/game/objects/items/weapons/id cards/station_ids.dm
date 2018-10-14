@@ -132,8 +132,8 @@
 	item_state = "silver_id"
 
 /obj/item/weapon/card/id/silver/secretary
-	assignment = "Command Secretary"
-	rank = "Command Secretary"
+	assignment = "City Hall Guard"
+	rank = "City Hall Guard"
 	job_access_type = /datum/job/secretary
 
 /obj/item/weapon/card/id/silver/hop
@@ -203,8 +203,8 @@
 	secondary_color = rgb(223,255,255)
 
 /obj/item/weapon/card/id/medical/doctor
-	assignment = "Medical Doctor"
-	rank = "Medical Doctor"
+	assignment = "Doctor"
+	rank = "Doctor"
 	job_access_type = /datum/job/doctor
 
 /obj/item/weapon/card/id/medical/chemist
@@ -245,8 +245,8 @@
 	secondary_color = rgb(223,127,95)
 
 /obj/item/weapon/card/id/security/officer
-	assignment = "Security Officer"
-	rank = "Security Officer"
+	assignment = "Police Officer"
+	rank = "Police Officer"
 	job_access_type = /datum/job/officer
 
 /obj/item/weapon/card/id/security/detective
@@ -255,8 +255,8 @@
 	job_access_type = /datum/job/detective
 
 /obj/item/weapon/card/id/security/warden
-	assignment = "Warden"
-	rank = "Warden"
+	assignment = "Prison Warden"
+	rank = "Prison Warden"
 	job_access_type = /datum/job/warden
 
 /obj/item/weapon/card/id/security/head
@@ -265,8 +265,8 @@
 	icon_state = "secGold"
 	primary_color = rgb(189,47,0)
 	secondary_color = rgb(255,223,127)
-	assignment = "Head of Security"
-	rank = "Head of Security"
+	assignment = "Chief of Police"
+	rank = "Chief of Police"
 	job_access_type = /datum/job/hos
 
 /obj/item/weapon/card/id/engineering
@@ -277,13 +277,13 @@
 	secondary_color = rgb(223,159,95)
 
 /obj/item/weapon/card/id/engineering/engineer
-	assignment = "Station Engineer"
-	rank = "Station Engineer"
+	assignment = "City Engineer"
+	rank = "City Engineer"
 	job_access_type = /datum/job/engineer
 
 /obj/item/weapon/card/id/engineering/atmos
-	assignment = "Atmospheric Technician"
-	rank = "Atmospheric Technician"
+	assignment = "Firefighter"
+	rank = "Firefighter"
 	job_access_type = /datum/job/atmos
 
 /obj/item/weapon/card/id/engineering/head
@@ -336,13 +336,13 @@
 	secondary_color = rgb(191,159,95)
 
 /obj/item/weapon/card/id/cargo/cargo_tech
-	assignment = "Cargo Technician"
-	rank = "Cargo Technician"
+	assignment = "Factory Worker"
+	rank = "Factory Worker"
 	job_access_type = /datum/job/cargo_tech
 
 /obj/item/weapon/card/id/cargo/mining
-	assignment = "Shaft Miner"
-	rank = "Shaft Miner"
+	assignment = "Miner"
+	rank = "Miner"
 	job_access_type = /datum/job/mining
 
 /obj/item/weapon/card/id/cargo/head
@@ -356,8 +356,8 @@
 	job_access_type = /datum/job/qm
 
 /obj/item/weapon/card/id/assistant
-	assignment = "Assistant"
-	rank = "Assistant"
+	assignment = "Civilian"
+	rank = "Civilian"
 	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/civilian
@@ -367,7 +367,7 @@
 	primary_color = rgb(0,94,142)
 	secondary_color = rgb(95,159,191)
 	assignment = "Civilian"
-	rank = "Assistant"
+	rank = "Civilian"
 	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/civilian/bartender
@@ -391,8 +391,8 @@
 	job_access_type = /datum/job/chef
 
 /obj/item/weapon/card/id/civilian/internal_affairs_agent
-	assignment = "Internal Affairs Agent"
-	rank = "Internal Affairs Agent"
+	assignment = "Lawyer"
+	rank = "Lawyer"
 	job_access_type = /datum/job/lawyer
 
 /obj/item/weapon/card/id/civilian/janitor

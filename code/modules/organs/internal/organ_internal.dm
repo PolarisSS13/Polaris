@@ -4,7 +4,7 @@
 				INTERNAL ORGANS DEFINES
 ****************************************************/
 /obj/item/organ/internal
-	var/dead_icon // Icon to use when the organ has died.
+
 
 /obj/item/organ/internal/die()
 	..()

@@ -307,3 +307,126 @@ Proc for attack log creation, because really why not
 		viewX = text2num(viewrangelist[1])
 		viewY = text2num(viewrangelist[2])
 	return list(viewX, viewY)
+
+proc/random_hair_color(var/mob/living/carbon/human/M)
+	//Hair colour
+	var/r_hair = 0
+	var/g_hair = 0
+	var/b_hair = 0
+	var/hair_color = list(0,0,0)
+
+	var/red
+	var/green
+	var/blue
+
+	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "punk")
+	if(M.age > 70)
+		red = rand (100, 255)
+		green = red
+		blue = red
+	else
+		switch(col)
+			if("blonde")
+				red = 255
+				green = 255
+				blue = 0
+			if("black")
+				red = 0
+				green = 0
+				blue = 0
+			if("chestnut")
+				red = 153
+				green = 102
+				blue = 51
+			if("copper")
+				red = 255
+				green = 153
+				blue = 0
+			if("brown")
+				red = 102
+				green = 51
+				blue = 0
+			if("wheat")
+				red = 255
+				green = 255
+				blue = 153
+			if("punk")
+				red = rand (0, 255)
+				green = rand (0, 255)
+				blue = rand (0, 255)
+
+	red = max(min(red + rand (-25, 25), 255), 0)
+	green = max(min(green + rand (-25, 25), 255), 0)
+	blue = max(min(blue + rand (-25, 25), 255), 0)
+
+	r_hair = red
+	g_hair = green
+	b_hair = blue
+	hair_color = list(
+		r_hair ? r_hair : 0,
+		g_hair ? g_hair : 0,
+		b_hair ? b_hair : 0
+		)
+
+	return hair_color
+
+proc/random_eye_color()
+	var/red
+	var/green
+	var/blue
+	var/eye_color = list(0,0,0)
+	//Eye colour
+	var/r_eyes = 0
+	var/g_eyes = 0
+	var/b_eyes = 0
+
+	var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
+	switch(col)
+		if("black")
+			red = 0
+			green = 0
+			blue = 0
+		if("grey")
+			red = rand (100, 200)
+			green = red
+			blue = red
+		if("brown")
+			red = 102
+			green = 51
+			blue = 0
+		if("chestnut")
+			red = 153
+			green = 102
+			blue = 0
+		if("blue")
+			red = 51
+			green = 102
+			blue = 204
+		if("lightblue")
+			red = 102
+			green = 204
+			blue = 255
+		if("green")
+			red = 0
+			green = 102
+			blue = 0
+		if("albino")
+			red = rand (200, 255)
+			green = rand (0, 150)
+			blue = rand (0, 150)
+
+	red = max(min(red + rand (-25, 25), 255), 0)
+	green = max(min(green + rand (-25, 25), 255), 0)
+	blue = max(min(blue + rand (-25, 25), 255), 0)
+
+	r_eyes = red
+	g_eyes = green
+	b_eyes = blue
+
+	eye_color = list(
+		r_eyes ? r_eyes : 0,
+		g_eyes ? g_eyes : 0,
+		b_eyes ? b_eyes : 0
+		)
+
+	return eye_color

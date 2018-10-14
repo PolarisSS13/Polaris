@@ -70,7 +70,7 @@ area/space/atmosalert()
 	requires_power = 0
 	flags = RAD_SHIELDED
 	sound_env = SMALL_ENCLOSED
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"

@@ -21,3 +21,6 @@
 		var/grass_type = pick(grass_types)
 		new grass_type(src)
 	. = ..()
+
+/turf/simulated/floor/outdoors/dirt/indoors
+	outdoors = 0

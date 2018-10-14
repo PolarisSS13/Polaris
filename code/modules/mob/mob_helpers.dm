@@ -656,3 +656,12 @@ var/global/image/backplane
 		return
 
 	item.screen_loc = screen_place
+
+/proc/isundead(A)
+	if(istype(A, /mob/living/carbon/human))
+		switch(A:get_species())
+			if ("Skeleton")
+				return 1
+			if ("Zombie")
+				return 1
+	return 0

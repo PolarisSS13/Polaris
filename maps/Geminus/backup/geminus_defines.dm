@@ -32,6 +32,15 @@
 #define Z_LEVEL_SECOND_GEMINUS					2
 #define Z_LEVEL_SKY_GEMINUS						3
 
+/datum/map/geminus/perform_map_generation()
+	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_FIRST_GEMINUS	, world.maxx, world.maxy) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_FIRST_GEMINUS	, 64, 64)         // Create the mining ore distribution map.
+
+	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_SECOND_GEMINUS, world.maxx, world.maxy) // Create the mining Z-level.
+	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_SECOND_GEMINUS, 64, 64)         // Create the mining ore distribution map.
+
+	return 1
+
 /datum/map_z_level/geminus/first
 	z = Z_LEVEL_FIRST_GEMINUS
 	name = "Underground Sewers"

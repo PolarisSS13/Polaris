@@ -13,6 +13,7 @@
 /obj/structure/sign/neon
 	desc = "A glowing sign."
 	icon = 'icons/obj/signs.dmi'
+	plane = -25
 	light_range = 4
 	light_power = 2
 
@@ -158,6 +159,7 @@
 /obj/structure/sign/double/city/
 	desc = "A sign."
 	pixel_y = 32
+	plane = -25
 	icon = 'icons/obj/signs.dmi'
 
 /obj/structure/sign/double/city/gamecenter/

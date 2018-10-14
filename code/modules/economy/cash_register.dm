@@ -121,6 +121,7 @@
 				item_list += t_purpose
 				var/t_amount = round(input("Enter price", "New price") as num)
 				if (!t_amount || !Adjacent(usr)) return
+				if(t_amount < 0) return
 				transaction_amount += t_amount
 				price_list += t_amount
 				playsound(src, 'sound/machines/twobeep.ogg', 25)

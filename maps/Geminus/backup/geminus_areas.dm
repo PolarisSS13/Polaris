@@ -30,6 +30,7 @@
 	power_light = 1
 	power_environ = 1
 	requires_power = 0
+	base_turf = /turf/simulated/floor/outdoors/dirt
 
 /area/planets
 	name = "\improper Planet"
@@ -195,6 +196,33 @@
 	icon_state = "blue"
 	sound_env = AUDITORIUM
 
+/area/planets/Geminus/indoor/sewer
+	name = "\improper Underground Sewers"
+	icon_state = "blue"
+	requires_power = 0
+	dynamic_lighting = 0
+	luminosity = 0
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
+
+/area/planets/Geminus/indoor/sewer/north
+	name = "\improper Underground Sewers - North"
+	icon_state = "blue"
+
+/area/planets/Geminus/indoor/sewer/central
+	name = "\improper Underground Sewers - Central"
+	icon_state = "red"
+
+/area/planets/Geminus/indoor/sewer/east
+	name = "\improper Underground Sewers - East"
+	icon_state = "green"
+
+/area/planets/Geminus/indoor/sewer/west
+	name = "\improper Underground Sewers - West"
+	icon_state = "blue"
+
+/area/planets/Geminus/indoor/sewer/south
+	name = "\improper Underground Sewers - South"
+	icon_state = "yellow"
 
 /area/planets/Geminus/indoor/science
 	name = "\improper Research and Development Labs"
@@ -231,6 +259,11 @@
 /area/planets/Geminus/indoor/armory
 	name = "\improper City Police Armory"
 	icon_state = "yellow"
+
+/area/planets/Geminus/indoor/panicbunker
+	name = "\improper Unknown Area"
+	icon_state = "yellow"
+//This is the head of city staff's safe room. Panic bunker, etc.
 
 /area/planets/Geminus/indoor/hospital
 	name = "\improper City Hospital"

@@ -76,7 +76,7 @@
 	icon = 'icons/turf/shuttle_white.dmi'
 	thermal_conductivity = 0.05
 	heat_capacity = 0
-
+	outdoors = 0
 	var/obj/landed_holder/landed_holder
 	var/interior_corner = 0
 	var/takes_underlays = 0

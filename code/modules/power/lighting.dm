@@ -294,8 +294,8 @@
 	desc = "A street lighting fixture."
 	brightness_range = 5
 	brightness_color = "#d2e6f2"
-	layer = MOB_LAYER + 1
-	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
+	plane = -25
 	density = 1
 	light_type = /obj/item/weapon/light/bulb
 

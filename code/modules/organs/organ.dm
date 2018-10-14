@@ -4,7 +4,7 @@ var/list/organ_cache = list()
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	germ_level = 0
-
+	var/dead_icon // Icon to use when the organ has died.
 	// Strings.
 	var/organ_tag = "organ"           // Unique identifier.
 	var/parent_organ = BP_TORSO       // Organ holding this object.
@@ -87,6 +87,8 @@ var/list/organ_cache = list()
 		status |= ORGAN_DEAD
 	damage = max_damage
 	processing_objects -= src
+	if(dead_icon)
+		icon_state = dead_icon
 	if(owner && vital)
 		owner.death()
 		owner.can_defib = 0

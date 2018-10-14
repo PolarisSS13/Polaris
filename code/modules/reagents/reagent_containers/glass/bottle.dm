@@ -71,6 +71,13 @@
 	icon_state = "bottle-3"
 	prefill = list("toxin" = 60)
 
+/obj/item/weapon/reagent_containers/glass/bottle/trioxin
+	name = "Trioxin bottle"
+	desc = "A small bottle of trioxin. Don't fuck with this shit.."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+	prefill = list("trioxin" = 60)
+
 
 /obj/item/weapon/reagent_containers/glass/bottle/cyanide
 	name = "cyanide bottle"

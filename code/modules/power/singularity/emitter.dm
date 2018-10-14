@@ -26,9 +26,11 @@
 
 	var/burst_delay = 2
 	var/initial_fire_delay = 100
-
+	var/wireless = 0
 	var/integrity = 80
 
+/obj/machinery/power/emitter/wireless
+	wireless = 1
 
 /obj/machinery/power/emitter/verb/rotate()
 	set name = "Rotate"
@@ -64,7 +66,7 @@
 
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
 	if(state == 2)
-		if(!powernet)
+		if(!powernet && !wireless)
 			user << "\The [src] isn't connected to a wire."
 			return 1
 		if(!src.locked)

@@ -1,8 +1,8 @@
 //BILLBOARDS
 
 /obj/structure/billboard
-	name = "billboard"
-	desc = "A billboard"
+	name = "billboard ad"
+	desc = "Goodness, what are they selling us this time?"
 	icon = 'icons/obj/billboards.dmi'
 	icon_state = "billboard"
 	light_range = 4
@@ -44,3 +44,13 @@
 /obj/structure/billboard/city/New()
 	..()
 	icon_state = "welcome"
+
+/obj/structure/billboard/sign
+	name = "city billboard"
+	icon_state = "welcome"
+	light_color = "#bbfcb6"  //watered lime
+	var/sign_type = "welcome"
+
+/obj/structure/billboard/sign/New()
+	..()
+	icon_state = "[sign_type]"

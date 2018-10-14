@@ -383,6 +383,9 @@ macro "macro"
 		name = "F8"
 		command = "Invisimin"
 	elem 
+		name = "F9"
+		command = ".spawn"
+	elem 
 		name = "F12"
 		command = "F12"
 
@@ -617,7 +620,7 @@ macro "hotkeymode"
 		command = "Invisimin"
 	elem "spawn"
 		name = "F9"
-		command = "spawn"
+		command = ".spawn"
 	elem 
 		name = "F12"
 		command = "F12"
@@ -1089,34 +1092,111 @@ window "chemdispenser_reagents"
 		image = 'icons\\reagentname_bg.png'
 		image-mode = stretch
 
+window "infowindow"
+	elem "infowindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #4b1f48
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Info"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "info"
+		type = INFO
+		pos = 0,0
+		size = 636x451
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #ddabde
+		background-color = #823384
+		is-default = true
+		saved-params = ""
+		highlight-color = #c510b7
+		tab-text-color = #e2d318
+		tab-background-color = #562257
+		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
+		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+
 window "mainwindow"
 	elem "mainwindow"
 		type = MAIN
 		pos = 281,0
-		size = 640x440
+		size = 678x462
 		anchor1 = none
 		anchor2 = none
+		background-color = #682b64
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Space Station 13"
-		is-maximized = true
 		icon = 'icons\\ss13_64.png'
 		macro = "macro"
 		menu = "menu"
+	elem "nonebutton"
+		type = BUTTON
+		pos = 174,441
+		size = 54x19
+		anchor1 = 0,100
+		anchor2 = none
+		text-color = #8a378c
+		background-color = #dadada
+		border = line
+		saved-params = "is-checked"
+		text = "None"
+		command = ".winset \"nonebutton.is-checked=true?input.command=\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
+	elem "mebutton"
+		type = BUTTON
+		pos = 117,441
+		size = 53x19
+		anchor1 = 0,100
+		anchor2 = none
+		text-color = #8a378c
+		background-color = #d9ca17
+		border = line
+		saved-params = "is-checked"
+		text = "Me"
+		command = ".winset \"mebutton.is-checked=true?input.command=\"!me \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
+	elem "oocbutton"
+		type = BUTTON
+		pos = 59,440
+		size = 54x21
+		anchor1 = 0,100
+		anchor2 = none
+		text-color = #f2eab7
+		background-color = #a70c10
+		border = line
+		saved-params = "is-checked"
+		text = "OOC"
+		command = ".winset \"oocbutton.is-checked=true?input.command=\"!ooc \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
 	elem "hotkey_toggle"
 		type = BUTTON
-		pos = 560,420
-		size = 80x20
+		pos = 552,441
+		size = 120x20
 		anchor1 = 100,100
 		anchor2 = none
+		text-color = #ddabde
+		background-color = #562257
 		saved-params = ""
-		text = "Hotkey Toggle"
+		text = "Hotkey Mode"
 		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
-		button-type = pushbox
+		is-flat = true
+		button-type = checkbox
 	elem "mainvsplit"
 		type = CHILD
-		pos = 3,0
-		size = 634x416
+		pos = 4,0
+		size = 672x417
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
@@ -1124,30 +1204,36 @@ window "mainwindow"
 		is-vert = true
 	elem "input"
 		type = INPUT
-		pos = 3,420
-		size = 517x20
+		pos = 0,417
+		size = 672x20
 		anchor1 = 0,100
 		anchor2 = 100,100
-		background-color = #d3b5b5
+		text-color = #dcaadd
+		background-color = #4b1f48
 		is-default = true
 		border = sunken
 		saved-params = "command"
 	elem "saybutton"
 		type = BUTTON
-		pos = 520,420
-		size = 40x20
-		anchor1 = 100,100
+		pos = 3,441
+		size = 53x19
+		anchor1 = 0,100
 		anchor2 = none
+		text-color = #fffffd
+		background-color = #5454a7
+		border = line
 		saved-params = "is-checked"
 		text = "Chat"
 		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
+		group = "chat_options"
+		button-type = radio
 	elem "tooltip"
 		type = BROWSER
 		pos = 0,0
-		size = 999x999
-		anchor1 = none
-		anchor2 = none
+		size = 672x417
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #562257
 		is-visible = false
 		saved-params = ""
 
@@ -1173,7 +1259,6 @@ window "mapwindow"
 		anchor2 = 100,100
 		font-family = "Arial Rounded MT Bold,Arial Black,Arial,sans-serif"
 		font-size = 7
-		text-color = none
 		is-default = true
 		saved-params = "icon-size"
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
@@ -1186,7 +1271,6 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1200,7 +1284,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
+		background-color = #e5e5e5
 		is-default = true
 		saved-params = "max-lines"
 		style = ".system {color:#ff0000;}"
@@ -1210,76 +1294,98 @@ window "rpane"
 	elem "rpane"
 		type = MAIN
 		pos = 281,0
-		size = 640x480
+		size = 599x474
 		anchor1 = none
 		anchor2 = none
+		background-color = #4b1f48
+		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
 		is-pane = true
+		transparent-color = #000000
 	elem "rpanewindow"
 		type = CHILD
-		pos = 0,-3
-		size = 640x499
+		pos = 1,0
+		size = 599x473
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = #682b64
+		border = line
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
 	elem "github"
 		type = BUTTON
-		pos = 392,0
-		size = 60x16
+		pos = 307,0
+		size = 56x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		saved-params = "is-checked"
 		text = "GitHub"
 		command = "github"
 		group = "rpanemode"
 	elem "mapb"
 		type = BUTTON
-		pos = 332,0
-		size = 60x16
+		pos = 249,0
+		size = 56x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #00aa00
 		saved-params = "is-checked"
 		text = "Map"
 		command = "map"
 		group = "rpanemode"
 	elem "rulesb"
 		type = BUTTON
-		pos = 272,0
-		size = 60x16
+		pos = 190,0
+		size = 57x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #00aa00
 		saved-params = "is-checked"
 		text = "Rules"
 		command = "rules"
 		group = "rpanemode"
 	elem "changelog"
 		type = BUTTON
-		pos = 488,0
-		size = 67x16
+		pos = 365,0
+		size = 64x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
 		group = "rpanemode"
 	elem "forumb"
 		type = BUTTON
-		pos = 212,0
-		size = 60x16
+		pos = 132,0
+		size = 56x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		saved-params = "is-checked"
 		text = "Forum"
 		command = "forum"
 		group = "rpanemode"
 	elem "wikib"
 		type = BUTTON
-		pos = 152,0
-		size = 60x16
+		pos = 440,0
+		size = 45x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #c510b7
+		background-color = #f2eab7
 		saved-params = "is-checked"
 		text = "Wiki"
 		command = "wiki"
@@ -1287,9 +1393,11 @@ window "rpane"
 	elem "textb"
 		type = BUTTON
 		pos = 0,0
-		size = 60x16
+		size = 37x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Text"
@@ -1299,10 +1407,12 @@ window "rpane"
 		button-type = pushbox
 	elem "browseb"
 		type = BUTTON
-		pos = 560,0
-		size = 60x16
+		pos = 394,0
+		size = 56x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Browser"
@@ -1311,10 +1421,12 @@ window "rpane"
 		button-type = pushbox
 	elem "infob"
 		type = BUTTON
-		pos = 64,0
-		size = 60x16
+		pos = 40,0
+		size = 33x16
 		anchor1 = none
 		anchor2 = none
+		text-color = #f2eab7
+		background-color = #c510b7
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Info"
@@ -1343,26 +1455,4 @@ window "browserwindow"
 		saved-params = ""
 		on-show = ".winset\"rpane.infob.is-visible=true?rpane.infob.pos=130,0;rpane.textb.is-visible=true;rpane.browseb.is-visible=true;rpane.browseb.is-checked=true;rpane.rpanewindow.pos=0,30;rpane.rpanewindow.size=0x0;rpane.rpanewindow.left=browserwindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=true?rpane.infob.is-checked=true rpane.infob.pos=65,0 rpane.rpanewindow.left=infowindow:rpane.rpanewindow.left=textwindow rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0\""
-
-window "infowindow"
-	elem "infowindow"
-		type = MAIN
-		pos = 281,0
-		size = 640x480
-		anchor1 = none
-		anchor2 = none
-		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "Info"
-		is-pane = true
-	elem "info"
-		type = INFO
-		pos = 0,0
-		size = 638x477
-		anchor1 = 0,0
-		anchor2 = 100,100
-		is-default = true
-		saved-params = ""
-		highlight-color = #00aa00
-		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
-		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
 

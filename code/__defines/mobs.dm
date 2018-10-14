@@ -229,6 +229,8 @@
 
 // 'Regular' species.
 #define SPECIES_HUMAN			"Human"
+#define SPECIES_HUMAN_CHILD	"Human Child"
+#define SPECIES_HUMAN_TEEN		"Human Adolescent"
 #define SPECIES_HUMAN_VATBORN	"Vatborn"
 #define SPECIES_UNATHI			"Unathi"
 #define SPECIES_SKRELL			"Skrell"

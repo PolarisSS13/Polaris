@@ -9,7 +9,7 @@
 	mob_offset_y = 5
 	health = 100
 	maxhealth = 100
-
+	bike_icon = "bike"
 	fire_dam_coeff = 0.6
 	brute_dam_coeff = 0.5
 	var/protection_percent = 60

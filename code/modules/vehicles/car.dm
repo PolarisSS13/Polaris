@@ -23,18 +23,22 @@
 	engine_start = 'sound/vehicles/ignition.ogg'
 	engine_fail = 'sound/vehicles/wontstart.ogg'
 
-/obj/item/weapon/key/train
+/obj/item/weapon/key
 	name = "key"
-	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\". DON'T ASK."
+	desc = "A basic key"
 	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "car_keys"
+
+
+/obj/item/weapon/key/train
+	name = "train key"
+	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\". DON'T ASK."
 	icon_state = "train_keys"
 
 /obj/item/weapon/key/car
 	name = "key"
 	desc = "A keyring with an electronic remote activator for electronic locks."
-	icon = 'icons/obj/vehicles.dmi'
-	icon_state = "car_keys"
-
+//to-do: add an inbuilt-signaller key-type
 
 //-------------------------------------------
 // Standard procs

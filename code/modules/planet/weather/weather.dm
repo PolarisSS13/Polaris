@@ -71,7 +71,7 @@
 
 	var/effect_message = null		// Should be a string, this is what is shown to a mob caught in the weather
 	var/last_message = 0			// Keeps track of when the weather last tells EVERY player it's hitting them
-	var/message_delay = 10 SECONDS	// Delay in between weather hit messages
+	var/message_delay = 120 SECONDS	// Delay in between weather hit messages
 	var/show_message = FALSE		// Is set to TRUE and plays the messsage every [message_delay]
 
 /datum/weather/proc/process_effects()

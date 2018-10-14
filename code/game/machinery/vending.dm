@@ -1253,7 +1253,12 @@
 						/obj/item/clothing/under/shorts/jeans/mustang = 10,
 						/obj/item/clothing/under/shorts/jeans/mustang/female = 10,
 						/obj/item/clothing/under/shorts/jeans/youngfolks = 10,
-						/obj/item/clothing/under/shorts/jeans/youngfolks/female = 10)
+						/obj/item/clothing/under/shorts/jeans/youngfolks/female = 10,
+						/obj/item/clothing/under/croptop = 10,
+						/obj/item/clothing/under/croptop/grey = 10,
+						/obj/item/clothing/under/croptop/red = 10,
+						/obj/item/clothing/under/cuttop = 10,
+						/obj/item/clothing/under/cuttop/red = 10)
 
 	prices = list(
 						/obj/item/clothing/under/pants = 10,
@@ -1342,7 +1347,12 @@
 						/obj/item/clothing/under/shorts/jeans/mustang = 10,
 						/obj/item/clothing/under/shorts/jeans/mustang/female = 10,
 						/obj/item/clothing/under/shorts/jeans/youngfolks = 10,
-						/obj/item/clothing/under/shorts/jeans/youngfolks/female = 10)
+						/obj/item/clothing/under/shorts/jeans/youngfolks/female = 10,
+						/obj/item/clothing/under/croptop = 10,
+						/obj/item/clothing/under/croptop/grey = 10,
+						/obj/item/clothing/under/croptop/red = 10,
+						/obj/item/clothing/under/cuttop = 10,
+						/obj/item/clothing/under/cuttop/red = 10)
 
 /obj/machinery/vending/suitdispenser
 	name = "\improper Suitlord 9000"
@@ -1527,7 +1537,6 @@
 						/obj/item/clothing/shoes/leather = 10,
 						/obj/item/clothing/shoes/dress = 10,
 						/obj/item/clothing/shoes/dress/white = 10,
-						/obj/item/clothing/shoes/boots/winter = 10,
 						/obj/item/clothing/shoes/boots/winter = 10,
 						/obj/item/clothing/shoes/skater =10,
 						/obj/item/clothing/shoes/laceup = 10,

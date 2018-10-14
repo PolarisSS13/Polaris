@@ -3,6 +3,8 @@
 	desc = "A very luxurious vehicle."
 	icon = 'icons/vehicles/mayorcar.dmi'
 	icon_state = "mayorcar"
+	bound_width = 96
+	bound_height = 96
 
 /obj/vehicle/car/sportscar/mayorcar/update_dir_car_overlays()
 	var/atom/movable/C = src.load

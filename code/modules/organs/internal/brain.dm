@@ -128,6 +128,12 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "chitin"
 
+/obj/item/organ/internal/brain/zombie
+	name = "zombie brain"
+	desc = "One wonders if zombies think of eating their own brains..."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "zombie_brain"
+
 /obj/item/organ/internal/brain/slime
 	name = "slime core"
 	desc = "A complex, organic knot of jelly and crystalline particles."

@@ -2,7 +2,7 @@
 	name = "motorcycle"
 	desc = "A fast and highly maneuverable vehicle."
 	icon = 'icons/vehicles/motorcycle.dmi'
-	icon_state = "motorcycle_4dir"
+	icon_state = "motorcycle_off"
 	emagged = 0
 	mob_offset_y = 6
 	load_offset_x = 0
@@ -14,8 +14,26 @@
 
 	var/land_speed = 1 //if 0 it can't go on turf
 	var/space_speed = 0
-	var/bike_icon = "bike"
+	var/bike_icon = "motorcycle"
 	var/kickstand = 1
+
+/obj/vehicle/train/cargo/engine/motorcycle/moped/New()
+	..()
+	turn_off()
+	overlays += image('icons/vehicles/motorcycle.dmi', "[icon_state]_off_overlay", MOB_LAYER + 1)
+	icon_state = "[bike_icon]_off"
+
+/obj/vehicle/train/cargo/engine/motorcycle/moped/update_icon()
+	overlays.Cut()
+
+	if(on)
+		overlays += image('icons/vehicles/motorcycle.dmi', "[bike_icon]_on_overlay", MOB_LAYER + 1)
+		icon_state = "[bike_icon]_on"
+	else
+		overlays += image('icons/vehicles/motorcycle.dmi', "[bike_icon]_off_overlay", MOB_LAYER + 1)
+		icon_state = "[bike_icon]_off"
+
+	..()
 
 /obj/vehicle/train/cargo/engine/motorcycle/verb/kickstand()
 	set name = "Toggle Kickstand"
@@ -94,7 +112,8 @@
 		..()
 
 /obj/vehicle/train/cargo/engine/motorcycle/proc/update_dir_motorcycle_overlays()
-	overlays = null
+	update_icon()
+/*	overlays = null
 	if(src.dir == NORTH||SOUTH)
 		if(src.dir == NORTH)
 			var/image/I = new(icon = 'icons/vehicles/motorcycle.dmi', icon_state = "motorcycle_overlay_n", layer = src.layer + 0.2) //over mobs
@@ -105,6 +124,8 @@
 	else
 		var/image/I = new(icon = 'icons/vehicles/motorcycle.dmi', icon_state = "motorcycle_overlay_side", layer = src.layer + 0.2) //over mobs
 		overlays += I
+*/
+	..()
 
 /obj/vehicle/train/cargo/engine/motorcycle/New()
 	..()
@@ -136,3 +157,4 @@
 	verbs -= /obj/vehicle/train/cargo/engine/motorcycle/stop_engine
 	verbs -= /obj/vehicle/train/cargo/engine/motorcycle/start_engine
 	verbs -= /obj/vehicle/train/verb/unlatch_v
+

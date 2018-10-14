@@ -115,6 +115,7 @@ var/datum/planet/sif/planet_sif = null
 		WEATHER_LIGHT_SNOW	= new /datum/weather/sif/light_snow(),
 		WEATHER_SNOW		= new /datum/weather/sif/snow(),
 		WEATHER_BLIZZARD	= new /datum/weather/sif/blizzard(),
+		WEATHER_ACID_RAIN = new /datum/weather/sif/acid_rain(),
 		WEATHER_RAIN		= new /datum/weather/sif/rain(),
 		WEATHER_STORM		= new /datum/weather/sif/storm(),
 		WEATHER_HAIL		= new /datum/weather/sif/hail(),
@@ -152,7 +153,7 @@ datum/weather/sif
 		WEATHER_LIGHT_SNOW = 10,
 		WEATHER_SNOW = 5,
 		WEATHER_RAIN = 5,
-		WEATHER_HAIL = 5
+		WEATHER_ACID_RAIN = 5
 		)
 
 /datum/weather/sif/light_snow
@@ -224,7 +225,7 @@ datum/weather/sif
 		WEATHER_LIGHT_SNOW = 10,
 		WEATHER_RAIN = 50,
 		WEATHER_STORM = 10,
-		WEATHER_HAIL = 5
+		WEATHER_ACID_RAIN = 5
 		)
 
 /datum/weather/sif/rain/process_effects()
@@ -320,18 +321,8 @@ datum/weather/sif
 					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
 					continue
 
-			var/target_zone = pick(BP_ALL)
-			var/amount_blocked = H.run_armor_check(target_zone, "melee")
-			var/amount_soaked = H.get_armor_soak(target_zone, "melee")
-
-			if(amount_blocked >= 100)
-				continue // No need to apply damage.
-
-			if(amount_soaked >= 10)
-				continue // No need to apply damage.
-
-			H.apply_damage(rand(5, 10), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
 			to_chat(H, "<span class='warning'>The hail smacks into you!</span>")
+			H.water_act(1)
 
 /datum/weather/sif/blood_moon
 	name = "blood moon"

@@ -54,3 +54,10 @@
 
 /mob/living/carbon/human/zombie/New(var/new_loc)
 	..(new_loc, SPECIES_ZOMBIE)
+
+
+/mob/living/carbon/human/child/New(var/new_loc)
+	..(new_loc, SPECIES_HUMAN_CHILD)
+
+/mob/living/carbon/human/teen/New(var/new_loc)
+	..(new_loc, SPECIES_HUMAN_TEEN)
