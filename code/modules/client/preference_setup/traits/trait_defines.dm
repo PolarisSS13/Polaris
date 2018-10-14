@@ -194,6 +194,30 @@
 	desc = "Syringes and needles make you very distressed. You really don't want to get sick..."
 	modifier_type = /datum/modifier/trait/phobia/trypanophobe
 
+/datum/trait/modifier/physical/colorblind_protanopia
+	name = "Protanopia"
+	desc = "You have a form of red-green colorblindness. You cannot see reds, and have trouble distinguishing them from yellows and greens."
+	modifier_type = /datum/modifier/trait/colorblind_protanopia
+	mutually_exclusive = list(/datum/trait/modifier/physical/colorblind_deuteranopia, /datum/trait/modifier/physical/colorblind_tritanopia, /datum/trait/modifier/physical/colorblind_monochrome)
+
+/datum/trait/modifier/physical/colorblind_deuteranopia
+	name = "Deuteranopia"
+	desc = "You have a form of red-green colorblindness. You cannot see greens, and have trouble distinguishing them from yellows and reds."
+	modifier_type = /datum/modifier/trait/colorblind_deuteranopia
+	mutually_exclusive = list(/datum/trait/modifier/physical/colorblind_protanopia, /datum/trait/modifier/physical/colorblind_tritanopia, /datum/trait/modifier/physical/colorblind_monochrome)
+
+/datum/trait/modifier/physical/colorblind_tritanopia
+	name = "Tritanopia"
+	desc = "You have a form of blue-yellow colorblindness. You have trouble distinguishing between blues, greens, and yellows, and see blues and violets as dim."
+	modifier_type = /datum/modifier/trait/colorblind_tritanopia
+	mutually_exclusive = list(/datum/trait/modifier/physical/colorblind_protanopia, /datum/trait/modifier/physical/colorblind_deuteranopia, /datum/trait/modifier/physical/colorblind_monochrome)
+
+/datum/trait/modifier/physical/colorblind_monochrome
+	name = "Monochromacy"
+	desc = "You are fully colorblind. Your condition is rare, but you can see no colors at all."
+	modifier_type = /datum/modifier/trait/colorblind_monochrome
+	mutually_exclusive = list(/datum/trait/modifier/physical/colorblind_protanopia, /datum/trait/modifier/physical/colorblind_deuteranopia, /datum/trait/modifier/physical/colorblind_tritanopia)
+
 /*
 // Uncomment this when/if these get finished.
 /datum/trait/modifier/mental/synthphobe
