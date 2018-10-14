@@ -1409,7 +1409,7 @@
 "aBe" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/pavement/pave_tiling,/area/chapel/chapel_morgue)
 "aBf" = (/obj/effect/floor_decal/corner/red{dir = 9},/obj/machinery/vending/fitness,/turf/simulated/floor/tiled/steel,/area/security/range)
 "aBg" = (/obj/machinery/librarypubliccomp,/turf/simulated/floor/wood/pale,/area/library)
-"aBh" = (/obj/machinery/light_switch{dir = 2; name = "light switch "; pixel_x = -26; pixel_y = -4},/obj/structure/sign/double/city/gamecenter/left,/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aBh" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/camera/autoname{dir = 1},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
 "aBi" = (/obj/item/weapon/contraband/poster,/turf/simulated/floor/tiled/techfloor,/area/planets/Geminus/outdoor/metro/abandoned)
 "aBj" = (/obj/item/stack/tile/wood,/turf/simulated/floor,/area/planets/Geminus/outdoor/metro/abandoned)
 "aBk" = (/obj/structure/table/reinforced,/obj/item/stack/tile/wood,/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/metro/abandoned)
@@ -1448,9 +1448,9 @@
 "aBR" = (/turf/simulated/floor,/area/planets/Geminus/outdoor/metro/abandoned)
 "aBS" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/wood,/area/planets/Geminus/outdoor/metro/abandoned)
 "aBT" = (/obj/structure/filingcabinet/security,/obj/effect/floor_decal/corner/red/diagonal,/turf/simulated/floor/tiled/dark,/area/security/lobby)
-"aBU" = (/obj/random/obstruction,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"aBV" = (/obj/structure/sign/double/city/gamecenter/right,/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"aBW" = (/obj/machinery/camera/autoname{dir = 8},/obj/machinery/atm{name = "ATM"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aBU" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/pavement/pave_tiling,/area/planets/Geminus/outdoor/central)
+"aBV" = (/obj/structure/sign/neon/exit,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/backroom)
+"aBW" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/shoppingarea)
 "aBX" = (/obj/machinery/portable_atmospherics/powered/pump/filled,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aBY" = (/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/planets/Geminus/outdoor/west)
 "aBZ" = (/obj/machinery/camera/autoname{dir = 8},/obj/item/weapon/storage/secure/safe{pixel_x = 38},/turf/simulated/floor/wood,/area/planets/Geminus/indoor/mayor)
@@ -1474,7 +1474,7 @@
 "aCr" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled/white,/area/security/lobby)
 "aCs" = (/obj/machinery/camera/autoname{dir = 1},/obj/machinery/light/colored/red,/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled/white,/area/security/lobby)
 "aCt" = (/turf/simulated/wall/greysteel,/area/security/lobby)
-"aCu" = (/obj/machinery/computer/HolodeckControl,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aCu" = (/obj/machinery/computer/arcade,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aCv" = (/obj/structure/mirror{pixel_y = -32},/obj/structure/bed/chair/comfy/red,/obj/effect/floor_decal/corner/pink/diagonal,/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/barber)
 "aCw" = (/obj/machinery/camera/autoname{dir = 1},/turf/simulated/floor/tiled/steel,/area/security/range)
 "aCx" = (/obj/machinery/telecomms/bus/preset_three,/turf/simulated/floor/greengrid,/area/tcommsat/lounge)
@@ -1492,12 +1492,12 @@
 "aCJ" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/window/framed,/turf/simulated/floor/tiled/white,/area/security/lobby)
 "aCK" = (/obj/item/device/flashlight/lamp/green,/obj/structure/table/woodentable,/turf/simulated/floor/carpet/sblucarpet,/area/planets/Geminus/indoor/mayor)
 "aCL" = (/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
-"aCM" = (/obj/machinery/camera/autoname{dir = 8},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
+"aCM" = (/obj/structure/sign/double/city/gamecenter/left,/obj/machinery/computer/arcade,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aCN" = (/obj/item/weapon/material/gravemarker,/obj/item/weapon/material/gravemarker,/obj/item/weapon/material/gravemarker,/obj/structure/table/woodentable,/turf/simulated/floor/outdoors/grass/nogrowth,/area/chapel/chapel_morgue)
 "aCO" = (/obj/structure/ladder,/turf/simulated/floor/tiled/steel_ridged,/area/planets/Geminus/indoor/mayor_car_park)
 "aCP" = (/obj/structure/table/gamblingtable,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/backroom)
 "aCQ" = (/obj/structure/catwalk,/turf/simulated/floor/tiled/steel,/area/planets/Geminus/indoor/mayor_car_park)
-"aCR" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (WEST)"; icon_state = "purple1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aCR" = (/obj/structure/sign/double/city/gamecenter/right,/obj/machinery/computer/slot_machine,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aCS" = (/obj/item/weapon/storage/pill_bottle/tramadol,/obj/structure/window/reinforced,/obj/structure/table/woodentable,/obj/item/device/megaphone,/turf/simulated/floor/carpet/purcarpet,/area/planets/Geminus/indoor/courtroom)
 "aCT" = (/obj/machinery/camera/autoname{dir = 4},/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/planets/Geminus/indoor/courtroom)
 "aCU" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/greengrid,/area/tcommsat/entrance)
@@ -1509,6 +1509,9 @@
 "aDa" = (/obj/structure/table/woodentable,/obj/machinery/door/window/southright{name = "Captain's Desk Door"; req_access = list(20)},/turf/simulated/floor/carpet/sblucarpet,/area/planets/Geminus/indoor/mayor)
 "aDb" = (/obj/structure/window/reinforced,/obj/item/weapon/phone,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/structure/table/woodentable,/turf/simulated/floor/carpet/sblucarpet,/area/planets/Geminus/indoor/mayor)
 "aDc" = (/obj/structure/cryofeed{dir = 4},/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
+"aDd" = (/obj/machinery/computer/slot_machine,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
+"aDe" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"aDf" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (WEST)"; icon_state = "purple1"; dir = 8},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aDg" = (/obj/machinery/cryopod,/obj/machinery/ai_status_display{pixel_x = 0; pixel_y = 32},/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
 "aDh" = (/obj/structure/cryofeed,/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
 "aDi" = (/obj/item/weapon/folder/blue,/obj/structure/window/reinforced,/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/carpet/sblucarpet,/area/planets/Geminus/indoor/courtroom)
@@ -1544,6 +1547,7 @@
 "aDM" = (/obj/structure/grille/smallfence,/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/planets/Geminus/outdoor/east)
 "aDN" = (/obj/machinery/door/airlock/command{id_tag = "captaindoor"; name = "Mayor's Office"; req_access = list(20)},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/mayor)
 "aDO" = (/obj/machinery/door/airlock/command{id_tag = "captaindoor"; name = "Mayor's Car Park"; req_access = list(20)},/turf/simulated/floor/tiled/steel,/area/planets/Geminus/indoor/mayor_car_park)
+"aDP" = (/obj/machinery/light/small{dir = 8},/obj/structure/disposalpipe/segment,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
 "aDQ" = (/obj/machinery/cryopod{dir = 4},/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
 "aDR" = (/obj/machinery/cryopod,/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
 "aDS" = (/obj/structure/cryofeed,/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
@@ -1586,14 +1590,14 @@
 "aED" = (/obj/structure/table/reinforced,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/museum)
 "aEE" = (/obj/machinery/door/airlock/medical{autoclose = 0; frequency = 1379; icon_state = "door_locked"; id_tag = "virology_airlock_interior"; locked = 1; name = "Virology Interior Airlock"; req_access = list(39)},/turf/simulated/floor/tiled,/area/medical/virology)
 "aEF" = (/obj/machinery/light/colored,/turf/simulated/floor/tiled/techfloor,/area/planets/Geminus)
-"aEG" = (/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aEG" = (/obj/machinery/camera/autoname{dir = 8},/obj/machinery/atm{name = "ATM"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aEH" = (/obj/structure/table/standard,/obj/item/device/t_scanner,/obj/item/weapon/storage/box/lights/mixed,/obj/item/weapon/storage/box/lights/mixed,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aEI" = (/obj/structure/railing{tag = "icon-railing0 (EAST)"; icon_state = "railing0"; dir = 4},/turf/simulated/floor/outdoors/grass/forest/nogrowth,/area/mine/unexplored)
 "aEJ" = (/obj/effect/landmark{name = "xeno_spawn"; pixel_x = -1},/turf/simulated/floor/tiled/techfloor,/area/planets/Geminus/outdoor/nuclear)
 "aEK" = (/obj/machinery/telecomms/server/presets/command,/turf/simulated/floor/greengrid,/area/tcommsat/lounge)
 "aEL" = (/obj/machinery/telecomms/server/presets/security,/turf/simulated/floor/greengrid,/area/tcommsat/lounge)
-"aEM" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (EAST)"; icon_state = "purple1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"aEN" = (/obj/machinery/light/colored/blue{dir = 1},/obj/machinery/computer/arcade,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aEM" = (/obj/structure/undies_wardrobe,/obj/structure/disposalpipe/segment,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"aEN" = (/obj/machinery/light/colored/purple{tag = "icon-purple1 (EAST)"; icon_state = "purple1"; dir = 4},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aEO" = (/obj/machinery/space_heater,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aEP" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/techfloor,/area/tcommsat/entrance)
 "aEQ" = (/obj/effect/floor_decal/corner/pink{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/yellow,/area/planets/Geminus/indoor/shoppingarea)
@@ -1621,12 +1625,14 @@
 "aFm" = (/obj/structure/window/framed,/obj/machinery/door/blast/shutters{dir = 2; id = "courtlawyer1"; name = "Prosecution Shutters"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/courtroom)
 "aFn" = (/turf/simulated/floor/tiled/steel,/area/security/main)
 "aFo" = (/obj/structure/flora/ausbushes/reedbush,/turf/simulated/floor/outdoors/dirt,/area/mine/unexplored)
-"aFp" = (/obj/structure/table/standard,/obj/item/weapon/paper{desc = ""; info = "Brusies sustained in the holodeck can be healed simply by sleeping."; name = "Holodeck Disclaimer"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aFp" = (/obj/machinery/light/colored/blue{dir = 1},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aFq" = (/obj/machinery/door/airlock{name = "Emergency Storage"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
 "aFr" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/east)
 "aFs" = (/obj/effect/floor_decal/corner/blue/border{icon_state = "bordercolor"; dir = 5},/turf/simulated/floor/tiled/techmaint{name = "landing floor"; outdoors = 1},/area/planets/Geminus/indoor/arrivalbus)
 "aFt" = (/obj/effect/floor_decal/corner/blue/border{tag = "icon-bordercolor (WEST)"; icon_state = "bordercolor"; dir = 8},/turf/simulated/floor/tiled/techmaint{name = "landing floor"; outdoors = 1},/area/planets/Geminus/indoor/arrivalbus)
 "aFu" = (/obj/machinery/computer3/wall_comp/telescreen/entertainment{pixel_y = 23},/obj/structure/dogbed,/mob/living/simple_animal/corgi/Ian,/turf/simulated/floor/decor{tag = "icon-tiled4"; icon_state = "tiled4"},/area/planets/Geminus/indoor/city_hall)
+"aFv" = (/obj/structure/closet/cabinet,/obj/structure/disposalpipe/segment,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"aFw" = (/obj/machinery/light_switch{dir = 2; name = "light switch "; pixel_x = -26; pixel_y = -4},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aFx" = (/obj/machinery/camera/autoname{dir = 8},/obj/machinery/cryopod/robot,/turf/simulated/floor/tiled/red,/area/planets/Geminus/indoor/hotel)
 "aFy" = (/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled/steel,/area/security/main)
 "aFz" = (/obj/structure/flora/tree/jungle,/obj/structure/flora/ausbushes/stalkybush,/turf/simulated/floor/outdoors/dirt,/area/mine/unexplored)
@@ -1725,9 +1731,9 @@
 "aHo" = (/obj/structure/flora/pottedplant{icon_state = "plant-06"; pixel_y = 10; tag = "icon-plant-06"},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/planets/Geminus/indoor/shoppingarea)
 "aHp" = (/obj/structure/table/rack{icon = 'icons/obj/coatrack.dmi'; icon_state = "coatrack0"; name = "wooden coat rack"},/obj/item/clothing/under/suit_jacket/female,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/planets/Geminus/indoor/shoppingarea)
 "aHq" = (/obj/effect/floor_decal/corner/pink{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/shoppingarea)
-"aHr" = (/obj/machinery/light/colored/blue{dir = 8},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
+"aHr" = (/obj/machinery/computer/HolodeckControl,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aHs" = (/obj/structure/flora/rock,/turf/simulated/floor/outdoors/dirt,/area/mine/unexplored)
-"aHt" = (/obj/machinery/camera/autoname{dir = 8},/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
+"aHt" = (/obj/structure/table/standard,/obj/item/weapon/paper{desc = ""; info = "Brusies sustained in the holodeck can be healed simply by sleeping."; name = "Holodeck Disclaimer"},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "aHu" = (/obj/structure/bookcase{name = "bookcase (Adult)"},/turf/simulated/floor/wood/pale,/area/library)
 "aHv" = (/obj/structure/barricade,/turf/simulated/floor/tiled/techfloor,/area/planets/Geminus/outdoor/metro/abandoned)
 "aHw" = (/obj/machinery/light/floor,/turf/simulated/floor/tiled{color = ""; name = "exterior tiles"; outdoors = 1},/area/planets/Geminus/outdoor/west)
@@ -2356,7 +2362,7 @@
 "aTv" = (/obj/machinery/door/airlock/multi_tile/metal,/obj/effect/floor_decal/corner/purple{dir = 9},/turf/simulated/floor/tiled/white,/area/planets/Geminus)
 "aTw" = (/obj/effect/floor_decal/steeldecal/steel_decals5{dir = 8},/turf/simulated/floor/tiled{color = ""; name = "exterior tiles"; outdoors = 1},/area/planets/Geminus/outdoor/west)
 "aTx" = (/obj/structure/bed/sofa/right,/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/crew_quarters/cafeteria)
-"aTy" = (/obj/structure/sign/neon/exit,/obj/structure/disposalpipe/segment,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/backroom)
+"aTy" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "aTz" = (/obj/effect/landmark/start{name = "Cargo Technician"},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/planets/Geminus)
 "aTA" = (/obj/machinery/vending/snack,/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/crew_quarters/cafeteria)
 "aTB" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/decor{tag = "icon-tiledwood2"; icon_state = "tiledwood2"},/area/crew_quarters/cafeteria)
@@ -3165,7 +3171,7 @@
 "biY" = (/obj/effect/decal/cleanable/graffiti,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/backroom)
 "biZ" = (/obj/effect/decal/cleanable/graffiti,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/hotel)
 "bja" = (/obj/effect/decal/cleanable/graffiti,/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/courtroom)
-"bjb" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"bjb" = (/obj/machinery/light/colored/blue{dir = 8},/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "bjc" = (/obj/machinery/light/colored/green{tag = "icon-green1 (NORTH)"; icon_state = "green1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
 "bjd" = (/obj/effect/floor_decal/corner/orange{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/obj/machinery/floodlight,/turf/simulated/floor/tiled,/area/planets/Geminus)
 "bje" = (/obj/structure/bed/chair/general{icon_state = "chair_preview"; dir = 4},/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital)
@@ -3202,10 +3208,10 @@
 "bjJ" = (/obj/structure/window/framed,/obj/structure/curtain/open/bed,/turf/simulated/floor/lino,/area/security/detectives_office)
 "bjK" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/device/taperecorder,/obj/structure/sign/double/city/defense/left,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/courtroom)
 "bjL" = (/obj/machinery/light/small{dir = 1; step_y = 0},/obj/structure/sign/double/city/defense/right,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/courtroom)
-"bjM" = (/obj/structure/undies_wardrobe,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"bjM" = (/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "bjN" = (/obj/structure/curtain/open,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
 "bjO" = (/obj/structure/table/standard,/obj/item/weapon/storage/laundry_basket,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
-"bjP" = (/obj/structure/closet/cabinet,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
+"bjP" = (/obj/machinery/camera/autoname{dir = 8},/obj/machinery/light/small{dir = 4; pixel_y = 0},/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "bjQ" = (/obj/machinery/light/colored/pink{tag = "icon-pink1 (EAST)"; icon_state = "pink1"; dir = 4},/turf/simulated/floor/wood/pale,/area/planets/Geminus/indoor/shoppingarea)
 "bjR" = (/obj/structure/table/standard,/obj/item/weapon/coin/silver,/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
 "bjS" = (/obj/structure/table/standard,/obj/item/clothing/head/soft/grey{pixel_x = -2; pixel_y = 3},/turf/simulated/floor/carpet,/area/planets/Geminus/indoor/shoppingarea)
@@ -3294,11 +3300,15 @@
 "blx" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/wall/greysteel,/area/mine/unexplored)
 "bly" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/pavement/empty,/area/mine/unexplored)
 "blz" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/road/empty,/area/planets/Geminus/outdoor/north)
+"blA" = (/obj/machinery/media/jukebox,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "blB" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled,/area/mine/unexplored)
 "blC" = (/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor/tiled,/area/mine/unexplored)
+"blD" = (/obj/structure/bed/chair/general,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "blE" = (/obj/structure/extinguisher_cabinet{pixel_x = 25; pixel_y = 0},/obj/structure/janitorialcart,/turf/simulated/floor/tiled,/area/mine/unexplored)
+"blF" = (/obj/structure/table/reinforced,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "blG" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/door/window/northleft{name = "Janitorial Delivery"; req_access = list(26)},/turf/simulated/floor/tiled,/area/mine/unexplored)
 "blH" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/tiled,/area/mine/unexplored)
+"blI" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "blJ" = (/obj/structure/mopbucket,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/obj/machinery/firealarm{dir = 1; pixel_x = 0; pixel_y = -26},/turf/simulated/floor/tiled,/area/mine/unexplored)
 "blL" = (/obj/structure/janitorialcart,/turf/simulated/floor/tiled,/area/mine/unexplored)
 "blN" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/road/empty,/area/planets/Geminus/outdoor/north)
@@ -3315,15 +3325,7 @@
 "bma" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/planets/Geminus/outdoor/central)
 "bmb" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
 "bmd" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/crew_quarters/bar)
-"bme" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"bmf" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"bmg" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
-"bmh" = (/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/backroom)
 "bmi" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/wall/greysteel,/area/planets/Geminus/indoor/disco)
-"bmj" = (/obj/machinery/media/jukebox,/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
-"bmk" = (/obj/structure/bed/chair/general,/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
-"bml" = (/obj/structure/table/reinforced,/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
-"bmm" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "bmn" = (/obj/structure/disposalpipe/junction{dir = 8; icon_state = "pipe-j2"},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "bmp" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/disco)
 "bmC" = (/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor/pavement/empty,/area/planets/Geminus/outdoor/central)
@@ -3424,17 +3426,17 @@ akXakXaajaajaajaajaajaajaajaajaajaajaajaajaajaajaxkaxkaxkaakaakaFBaFBaFBaFBaGRaG
 akXakXaajaajaajaajaajaajaajaajaajaajaajaajaajaajaxkaxkaxkaakaFBaFBaGRaGRaGRaGRaIyaGRaGRaFBaFBaakaxkaxkaxkaxkaxkaxkaEIaymauTauTayoaypaypaypaypaypawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOblWawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOawOawOawOawOawOawOawpawpawpawpawpawpawpawpawpawpawpawqayJayJbeAayKaxuaxiayJaCqayJayJaaiaaeaadaaeaaaaaa
 akXakXaajaajaajaajaajaajaajaajaajaajaajaajaxkaFlaxkaxkaxkaakaFBaGRaGRaIyaIyaIyaIyaIyaGRaGRaFBaakaakaakaxkaxkaxkaxkaEIaymauTauTayoaypaypayIaypaypawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOblWawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOawOawOawOawOawOayfayfawOawOawOawOawOawOawOawOawOawOawOawOawOawOawpawpawpawpawpawpawpawpayqawpawpawqayJaxuaxuaxuaxuaxuayKayKayAayJaaeaaeaadaaeaaaaaa
 akXakXaajaajaajaajaajaajaajaajaajaajaajaajaxkaxkaxkaxkaakaakaFBaGRaIyaIyaIyaIyaIyaIyaIyaGRaFBaakaakaakaxkaxkaxkaxkaEIaymauTauTayOaypaypayIaypaypayPayQayQayQayQayRayQayQayQaySayQayQayQayRayQayQayQayQayQaySayQayRayQayQaySaytawmawmawmawmayTayVayQayQayQayWayQayXaySayQayQayWayQayQaySayQayQaTuaTuayQaySayQayQayRayQayZawOblWaxQawOawOayPayQayQayQayRayQayQayQayQaTuaTuayQayQayQayQaySayQayQayRayQayQayQaySayQaTuaTuayQayQayQayQaySayQayQayRayQayQayQayQayQayQazaawpawpawpawpawpayyayyayyayyayyayzayJaxuayKayKaxuayKaxuaxuazbayJaaeaaeaadaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaxkaxkaxkaxkaakaakaFBaFBaGRaIyaGRaGRaGRaIyaIyaIyaGRaFBaFBaakaakaakaakaxkaxkaEIaymauTauTayoaypaypaypaypaypawZawFawFawFazfawFawFawFawFawFawFawFawFawFawFawFawFazfawFawFawFawFawFawFawFaxcawmawmawmawmaAhayraFmaFmaFmayrayraFWaFWaFWayrayraGgaGgaGgayraxraERaERaxrayhbhtbhtbhtayhaxcawOblXblYblZblZbmabmbbmbbmbbmbbmbbmbbmbbmCaERaERawFawFawFawFawFawFawFawFawFawFawFawFawFaERaERawFawFawFawFawFawFawFawFawFawFawFawFawFawFawoawpawpazlawpawpawpawpawpawpawpawqayJaxuazmaxuaxuayAaznaygaxtayJaaeaaeaadaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaHsaFBaFBaGRaGRaIyaGRaFoaIzaGRaIyaIyaGRaFRaIAaakaakaakaakaxkaxkaEIaymauTauTazraypaypaypaypaypawEawFazJazJazJazJazJazJazJazJazJazJazJazJaMaaMaaMlaMlaMlaMaaMaaAxaAxaAxaAxaAxaMBaMBaMBaMBaAxayrasWaHiasYayranPatbatcatdateayrasYaHiatfayrawFaERaERawFayhbhubhvbhwayhaxcawOawOawOawOawOawZaCMaAgaAgaAgaAgaAgaAgaTyaBNaBNaAgaAgaAgaAgbiYaAgaAgaAgbiYaLwaLwaLwaLwaHUaLVaLwaLwbiTayhayhayhayhayhayhayhayhayhayhawFawoawpawpazlawpawpawpawpayqawpawpawqayJayJayJaxuayJayJayJayJayJayJayJayJaMQaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaakaFBaGRaGRaIyaIyaGRaFzaFeaGRaIyaIyaGRaGRaFBaFBaFRaFBaakaxkaxkaEIaymauTauTaynazNazNazNazNazNaBuaymazJazQaFAazSazJazTazUataazWaDvaBvazJaMSaNcaNeaFCaABaNhaNiaAxaBzaCiaBzaAxaBCaBBaBBaBCaDsayraGwatpatqayraHcatqatqatqatsayraHgatBatDayrawFaERaERaERaERaERaERbhwayhaxcawOawOawOawOawOaAgaAgaAgaBhaBVaEGaEGaAgbmeaAsaAsaDtaAgaAraDtaDtbkCaBUaBXaAgaMdaMkaLwaQpaYZaYZbaCaYZbiNaAuaAzaACaGCaEeaOpaHDaUJaAyaAuawrawoawpawpawpawpawpaADaAEaAEaAEaAEaAFayJaAGaAHaxuaAIayJaAJaAKaALaAMaOqaAKaMQaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaakaFBaGRaIyaIyaIyaGRaOraGRaGRaIyaIyaIyaGRaFBaFBaakaFeaakaxkaxkaEIaymauTauTaynazNazNazNazNazNaBuaymazJaAQaAQaAQaARaAQaAQaAQaAQaAQaBZazJaOsaOuaOuaOvaOuaOuaOwaAxaBzaCOaBzaAxaBBaBBaBBaBBaDLaAxatgaAYaAZayratEaAWaBcaAWatJayraBHaBIatDayrawFaERaERawFayhbhxbhvbhwayhaxcawOawOawOawOawOaAgaDtaDtaDtaDtaDtaCRaAgbmeaAsaAsaDtaAgaCcaCdaDtaChaBUaDEaAgbjbaMdaLwaYZaYZaYZaYZaMdbjiaAuaAyaAyaAyaAyaAyaAyaAyaAyaAuawrawoawpawpawpawpawpaxhawrawrawrawrawrayJaFZaxuaBiaAGayJaBjaAKaAKaBkaOxaOyaMQaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaGAaakaFBaGRaGRaIyaIyaIyaIyaIyaIyaOAaIyaIyaGRaGRaFBaFoaakaOBaxkaxkaEIaymauTauTazraypaypaypaypaypaBraBsazJaCAaCBaCBazJaCBaCBbkVaAQaAQaBwazJaOuaPgaPgaPsaPgaPgaOuaAxaBzaBzaBzaAxaBBaBBaBBaBBaDsaAxatKaBEaBFayratQaBJaBLaCSatRayraDiaDzatSayraxfaERaERaxrayhbhtbhtbhtayhaxcawOawOaxQawOawOaAgaDtaDXaCPaCPaNzaBWaAgaTYaBNaBNaAgaAgaAgaAgaAgaDtaDtaEHaAgbjMaMdbjNaYZaYZaYZaYZaMdbjOaAuaJCaAyaAyaAyaAyaAyaAyaAyaAuawraBPawpawpawpawpawpaxhawraGHaINaJhaGHayJayJayJazbayJayJaBRaAKaAKaBSaBSaBSaMQaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaGAaakaFBaFBaGRaGRaIyaIyaIyaIyaIyaIyaIyaIyaIyaGRaFRaPyaPSaakaxkaxkaEIaymauTauTayoaypaypaypaypaypaBYaymazJaCBaCBaCEazJaCFaCGaCCaAQaAQaAQazJaPYaPZbkWbkWbkWaQEaQFaAxaAxaBzaAxaAxaBBaBBaBBaBBaEzaAxatWaBbaBbayraCTaAWaAWaAWaDwayraDJaDJaupayrawFaERaERawFawFawFawFawFawFaCoawOawOaxQawOawOaAgaEMaDXaCPaCPaNzaDtaDtbmeaDtaDtaDtaENaEGaDtaAgaDtaDtaEOaAgbjPaMdaLwbjQaYZaYZaYZaMdbjRaAuaAyaAyaCvaCvaCvaCvaAyaAAaAuawrawoawpawpazlawpawpawqawraGHaJJaJKaKibeBbeCbeCaxuaxuaHvaBRaBRaBRaBRaBRaBRaMQaaeaaaaaa
-akXakXaajaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaFoaakaFBaFBaGRaGRaIyaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaymauTauTayoaypaypaypaypaypaBYaymazJaCKaCXaCYazJaCZaDaaDbazJazJaARazJaQGaPZbkWaQHbkWaQEaQIaAxbiHaCQaCQaNfaHEaBBaBBaBBbhpaAxauoauoauoayraDwaDwaDwaDwaDwayrauoauoauoayraCLaERaERawFawFawHaxbawKawKaxNawOawOawOawOawOaAgaDtaDtaDtaDtaDtaDtaDtbmfbmgbmgbmgbmgbmhaDtaFqaDtaDtaFOaAgaAgaAgaAgaAgaAgaAgaYZaMdbjSaAuaAuaUKaAuaAuaAuaAuaUKaAuaAuawrawoawpawpazlawpawpawqawraGHaKBaKCaKibeCbeCbeCaxuaxuayJaCVaBRaCWaBRaBRaBRayJaaiaaaaaa
-akXakXaajaGAaGAaGAaGAaGAaGAaajaajaajaGAaGAaGAaGAaGAaGAaakaakaFBaFBaGRaGRaaiaGEaGQaGSaHzaaiaJmaJmaDcaDjaDkaKzaDgaDhaJmaymauTauTayOaypaypaypaypaypaDlaDmazJazJazJazJazJaDnaDnaDnaDnaDoaDnazJaOuaPgbkWbkWbkWaPgaRlaAxaCQaCQaCQaVLaBBaBBaBBaBBaEzaAxauqauoauDayraDyaDYaDwaDYaDwayrauDauoauqayrawFaERaERawFawFaxcawOawOawOawOawOawOawOawOawOaAgaDtaDtaDtaDtaCuaFpaDtaDtaDtaDtaDtaDtbmeaDtaKZaKZaKZaKZaKZaEAaKZaFYaAgaMebiYaYZaYZbiNaLwaKeaKfbjTaDHaDIaAyaAyaAyaAuawrawoawpawpawpawpawpawqawraGHaLMaKCaGHayhayhayhayhaxiaxiayhayhayhayhayhayhaLlaxiaxxaxx
-akXakXaajaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaakaakaFBaFBaFBaJmaGPaGPaIraIraOlaJmaJmaDcaDQaDkaDkaDRaDSaJmaymauTauTayoaypaypayIaypaypaypaypaDTaDTaDTaDTazJaDnaDnaDnaDnaDnaDnazJaOuaPgaPgaPgaPgaPgaOuaAxaDUaDUaDUaUuaBBaBBaBBaBBaDsaAxayraDVayrayrayrayraEBayrayrayrayraDVayrayrawFaERaERawFawFaCoawOaDWawOawOawOawOawOawOawOaAgayhaHkaAgaGxaGxaGxaGxaAgaAgaAgaAgaDtbmeaHraKZaFhaEAaEAaEAaHtaKZaHCbiYaHCaAgaAgbjVaYZaLwaFXaEcaEdaULaEfaAyaAyaEgaAuawrawoawpawpawpawpawpawqawraGHaKiaLMaGHayiaykaEiaEiaykaEiaEiaykaEjaEiaykaEiaEiaykaxxaxx
-akXakXaGAaGAaGAaGAaGAaGAaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaakaakaakaakaJmaGPaGPaGPaGPbgRaJmaPfaDcaDQaDkaDkaDRaDhaJmaymauTauTayoaypaypayIaypaypaypaypaEpaypaypaMxazJaEqaDnaDnaDnaEraEsazJaRxaRVaOuaOuaRWaRXaQbaAxaExaDUaExaVLaBCaBBaBBaBCaEzaAxaFFaFGaFGaJvaJNaGJaFGaHdbjKbjLaFGaFGaHjayrawFaERaERawFawFaxcayfayfayfayfawOawOaxQawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaAgaDtbmfbmgbmibmjbmkbmlbmmbmnbmiaIGaKXaIIaJFaAgaYZaYZbjWaEcaFXaEQaAuaAuaAuaAuaAuaAuawrawoawpawpawpawpawpawqawraGHaKiaKiaGHaEkaESaETaEUaEVaEUaEVaEUaEVaEUaEVaEUaEVaFsaxxaxx
-akXakXaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaakaJmaUtaGPaGPaGPaGPaJmaFbaFaaFaaFaaFaaFaaEZaJmaymauTauTayoaypaypaypaypaypaypaypaFcaFcaFcaMyazJazJazJaDNazJazJazJazJaMlaMlaMlaRZaMlaMlaMlaAxaAxaDOaAxaAxaAxaAxaAxaAxaAxaAxaFFaFGaNkaNkaNkaIwaIFaIZaNkaNkaNkaFGaHjayrawFaERaERawFawFaxcawOawOawOawOawOawOaxQawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaAgaDtaDtaDtaKZaKaaKraTcaEAbmpaKZaHXaRfaIIaLxaAgbjXbjXaLwbjYaEcaEdaIgaIhaMqaIiaMjaAuaFrawoawpawpazlawpawpawqawraGHaKiaKiaGHayiaESaFtaFLaFLaGcaGcaGcaGcaGcaFLaFLaFLaGbaxxaxx
+akXakXaajaajaajaajaajaajaajaajaajaajaajaxkaxkaxkaxkaakaakaFBaFBaGRaIyaGRaGRaGRaIyaIyaIyaGRaFBaFBaakaakaakaakaxkaxkaEIaymauTauTayoaypaypaypaypaypawZawFawFawFazfawFawFawFawFawFawFawFawFawFawFawFawFazfawFawFawFawFawFawFawFaxcawmawmawmawmaAhayraFmaFmaFmayrayraFWaFWaFWayrayraGgaGgaGgayraxraERaERaxrayhbhtbhtbhtayhaxcawOblXblYblZblZbmabmbaBhbmbbmbbmbbmbbmbbmbaBUaBUbmbbmbbmbbmbbmbbmbbmbbmbbmbbmCawFawFawFaERaERawFawFawFawFawFawFawFawFawFawFawFawFawFawFawoawpawpazlawpawpawpawpawpawpawpawqayJaxuazmaxuaxuayAaznaygaxtayJaaeaaeaadaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaHsaFBaFBaGRaGRaIyaGRaFoaIzaGRaIyaIyaGRaFRaIAaakaakaakaakaxkaxkaEIaymauTauTazraypaypaypaypaypawEawFazJazJazJazJazJazJazJazJazJazJazJazJaMaaMaaMlaMlaMlaMaaMaaAxaAxaAxaAxaAxaMBaMBaMBaMBaAxayrasWaHiasYayranPatbatcatdateayrasYaHiatfayrawFaERaERawFayhbhubhvbhwayhaxcawOawOawOawOawOayhayhaAgaAgaAgaAgaAgaAgaBVaBNaBNaAgaAgaAgaAgbiYaAgaAgaAgbiYaBWaLwaLwaLwaHUaLVaLwaLwbiTayhayhayhayhayhayhayhayhayhayhawFawoawpawpazlawpawpawpawpayqawpawpawqayJayJayJaxuayJayJayJayJayJayJayJayJaMQaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaakaFBaGRaGRaIyaIyaGRaFzaFeaGRaIyaIyaGRaGRaFBaFBaFRaFBaakaxkaxkaEIaymauTauTaynazNazNazNazNazNaBuaymazJazQaFAazSazJazTazUataazWaDvaBvazJaMSaNcaNeaFCaABaNhaNiaAxaBzaCiaBzaAxaBCaBBaBBaBCaDsayraGwatpatqayraHcatqatqatqatsayraHgatBatDayrawFaERaERaERaERaERaERbhwayhaxcawOawOawOawOawOaAgaCuaCuaCMaCRaDdaDdaAgaAsaDtaDtaAsaAgaAraDtaChbkCaChaBXaAgaDeaMkaLwaQpaYZaYZbaCaYZbiNaAuaAzaACaGCaEeaOpaHDaUJaAyaAuawrawoawpawpawpawpawpaADaAEaAEaAEaAEaAFayJaAGaAHaxuaAIayJaAJaAKaALaAMaOqaAKaMQaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaxkaxkaxkaakaFBaGRaIyaIyaIyaGRaOraGRaGRaIyaIyaIyaGRaFBaFBaakaFeaakaxkaxkaEIaymauTauTaynazNazNazNazNazNaBuaymazJaAQaAQaAQaARaAQaAQaAQaAQaAQaBZazJaOsaOuaOuaOvaOuaOuaOwaAxaBzaCOaBzaAxaBBaBBaBBaBBaDLaAxatgaAYaAZayratEaAWaBcaAWatJayraBHaBIatDayrawFaERaERawFayhbhxbhvbhwayhaxcawOawOawOawOawOaAgaAsaAsaAsaAsaAsaDfaAgaAsaDtaDtaAsaAgaCcaCdaDtaDtaDtaDEaAgaDPaMdaLwaYZaYZaYZaYZaMdbjiaAuaAyaAyaAyaAyaAyaAyaAyaAyaAuawrawoawpawpawpawpawpaxhawrawrawrawrawrayJaFZaxuaBiaAGayJaBjaAKaAKaBkaOxaOyaMQaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaGAaakaFBaGRaGRaIyaIyaIyaIyaIyaIyaOAaIyaIyaGRaGRaFBaFoaakaOBaxkaxkaEIaymauTauTazraypaypaypaypaypaBraBsazJaCAaCBaCBazJaCBaCBbkVaAQaAQaBwazJaOuaPgaPgaPsaPgaPgaOuaAxaBzaBzaBzaAxaBBaBBaBBaBBaDsaAxatKaBEaBFayratQaBJaBLaCSatRayraDiaDzatSayraxfaERaERaxrayhbhtbhtbhtayhaxcawOawOaxQawOawOaAgaAsaDXaCPaCPaNzaEGaAgaAgaBNaBNaAgaAgaAgaAgaAgaDtaDtaEHaAgaEMaMdbjNaYZaYZaYZaYZaMdbjOaAuaJCaAyaAyaAyaAyaAyaAyaAyaAuawraBPawpawpawpawpawpaxhawraGHaINaJhaGHayJayJayJazbayJayJaBRaAKaAKaBSaBSaBSaMQaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaGAaakaFBaFBaGRaGRaIyaIyaIyaIyaIyaIyaIyaIyaIyaGRaFRaPyaPSaakaxkaxkaEIaymauTauTayoaypaypaypaypaypaBYaymazJaCBaCBaCEazJaCFaCGaCCaAQaAQaAQazJaPYaPZbkWbkWbkWaQEaQFaAxaAxaBzaAxaAxaBBaBBaBBaBBaEzaAxatWaBbaBbayraCTaAWaAWaAWaDwayraDJaDJaupayrawFaERaERawFawFawFawFawFawFaCoawOawOaxQawOawOaAgaENaDXaCPaCPaNzaAsaAsaAsaDtaDtaAsaFpaAsaAsaAgaDtaDtaEOaAgaFvaMdaLwbjQaYZaYZaYZaMdbjRaAuaAyaAyaCvaCvaCvaCvaAyaAAaAuawrawoawpawpazlawpawpawqawraGHaJJaJKaKibeBbeCbeCaxuaxuaHvaBRaBRaBRaBRaBRaBRaMQaaeaaaaaa
+akXakXaajaajaajaajaajaajaajaajaajaajaajaajaGAaGAaGAaFoaakaFBaFBaGRaGRaIyaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaaiaymauTauTayoaypaypaypaypaypaBYaymazJaCKaCXaCYazJaCZaDaaDbazJazJaARazJaQGaPZbkWaQHbkWaQEaQIaAxbiHaCQaCQaNfaHEaBBaBBaBBbhpaAxauoauoauoayraDwaDwaDwaDwaDwayrauoauoauoayraCLaERaERawFawFawHaxbawKawKaxNawOawOawOawOawOaAgaFwaDXaCPaCPaNzaAsaAsaAsaDtaDtaDtaDtaDtaAsaFqaDtaDtaFOaAgaTYaAgaAgaAgaAgaAgaYZaMdbjSaAuaAuaUKaAuaAuaAuaAuaUKaAuaAuawrawoawpawpazlawpawpawqawraGHaKBaKCaKibeCbeCbeCaxuaxuayJaCVaBRaCWaBRaBRaBRayJaaiaaaaaa
+akXakXaajaGAaGAaGAaGAaGAaGAaajaajaajaGAaGAaGAaGAaGAaGAaakaakaFBaFBaGRaGRaaiaGEaGQaGSaHzaaiaJmaJmaDcaDjaDkaKzaDgaDhaJmaymauTauTayOaypaypaypaypaypaDlaDmazJazJazJazJazJaDnaDnaDnaDnaDoaDnazJaOuaPgbkWbkWbkWaPgaRlaAxaCQaCQaCQaVLaBBaBBaBBaBBaEzaAxauqauoauDayraDyaDYaDwaDYaDwayrauDauoauqayrawFaERaERawFawFaxcawOawOawOawOawOawOawOawOawOaAgaAsaAsaAsaAsaAsaAsaHraHtaAsaAsaAsaAsaDtaAsaKZaKZaKZaKZaKZaTyaKZaFYaAgaMebiYaYZaYZbiNaLwaKeaKfbjTaDHaDIaAyaAyaAyaAuawrawoawpawpawpawpawpawqawraGHaLMaKCaGHayhayhayhayhaxiaxiayhayhayhayhayhayhaLlaxiaxxaxx
+akXakXaajaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAaakaakaFBaFBaFBaJmaGPaGPaIraIraOlaJmaJmaDcaDQaDkaDkaDRaDSaJmaymauTauTayoaypaypayIaypaypaypaypaDTaDTaDTaDTazJaDnaDnaDnaDnaDnaDnazJaOuaPgaPgaPgaPgaPgaOuaAxaDUaDUaDUaUuaBBaBBaBBaBBaDsaAxayraDVayrayrayrayraEBayrayrayrayraDVayrayrawFaERaERawFawFaCoawOaDWawOawOawOawOawOawOawOaAgayhaHkaAgaGxaGxaGxaGxaAgaAgaAgaAgaAsaDtbjbaKZaFhaEAaEAbjMbjPaKZaHCbiYaHCaAgaAgbjVaYZaLwaFXaEcaEdaULaEfaAyaAyaEgaAuawrawoawpawpawpawpawpawqawraGHaKiaLMaGHayiaykaEiaEiaykaEiaEiaykaEjaEiaykaEiaEiaykaxxaxx
+akXakXaGAaGAaGAaGAaGAaGAaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaakaakaakaakaJmaGPaGPaGPaGPbgRaJmaPfaDcaDQaDkaDkaDRaDhaJmaymauTauTayoaypaypayIaypaypaypaypaEpaypaypaMxazJaEqaDnaDnaDnaEraEsazJaRxaRVaOuaOuaRWaRXaQbaAxaExaDUaExaVLaBCaBBaBBaBCaEzaAxaFFaFGaFGaJvaJNaGJaFGaHdbjKbjLaFGaFGaHjayrawFaERaERawFawFaxcayfayfayfayfawOawOaxQawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaAgaAsaDtaAsaKZblAblDblFblIbmnbmiaIGaKXaIIaJFaAgaYZaYZbjWaEcaFXaEQaAuaAuaAuaAuaAuaAuawrawoawpawpawpawpawpawqawraGHaKiaKiaGHaEkaESaETaEUaEVaEUaEVaEUaEVaEUaEVaEUaEVaFsaxxaxx
+akXakXaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaGAaGAbjUaGAaGAaGAaGAaGAaGAaGAaGAaakaJmaUtaGPaGPaGPaGPaJmaFbaFaaFaaFaaFaaFaaEZaJmaymauTauTayoaypaypaypaypaypaypaypaFcaFcaFcaMyazJazJazJaDNazJazJazJazJaMlaMlaMlaRZaMlaMlaMlaAxaAxaDOaAxaAxaAxaAxaAxaAxaAxaAxaFFaFGaNkaNkaNkaIwaIFaIZaNkaNkaNkaFGaHjayrawFaERaERawFawFaxcawOawOawOawOawOawOaxQawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaAgaAsaDtaAsaKZaKaaKraTcaEAbmpaKZaHXaRfaIIaLxaAgbjXbjXaLwbjYaEcaEdaIgaIhaMqaIiaMjaAuaFrawoawpawpazlawpawpawqawraGHaKiaKiaGHayiaESaFtaFLaFLaGcaGcaGcaGcaGcaFLaFLaFLaGbaxxaxx
 akXaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdaGdacKacKacKaGjaGjaJmaInaGPaGPaIoaIpaJmaFaaFaaFaaFaaFaaFaaFxaJmaymauTauTayoaypaypaypaypaypaypaypaypaypaypaMxazPaEXaEXaEXaScaSsaEXaStaEWaEXaEXaQWaEYaFdaEXaHKaSuaEXaEXaMPaAxaulaumaunaulayraFFaFGaJaaJbaJaaJcaJyaJzaJaaJbaJaaFGaHjayraFMaERaERawFawFaxcawOaDWawOawOawOawOawOawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaKZaKZaKvaKZaKZaMOaMOaKZaOEaKZaKZaIIaVmaAgaAgaAgaLwaLwaLwbkaaFXaEQaAuaUraIhaUUaVjaAuaGaaBPawpawpazlawpawpaxhawraGHaKiaLMaGHayiaykaGKaFLaGcaGcaGcaGcaGcaGcaGcaFLaFLaGLaxxaxx
 akXaGMaGNaHwaGNaGNaHwaGNaGNaHwaGNaGNaHwaGNaGNaHwaGNaGNaHxaaiaGEaGQaGSaHzaJmaJmaJmaIOaJmaJmaJmaGiaFaaJmaDxaDxaDxaJmaJmaymauTauTayoaypaypaypaypaypaypaypaEpaypaypaMxazPaEXaEXaEXaFQaEXaEXaEXaEXaEXaFQaEXaEXaEXaEXaEXaFQaEXaEXaEXazPaurausautauuayraFFaFGauvauBatqaJWaJXaKqatqauGauHaFGaLpayrawFaERaERawFawFaxcayfayfayfayfawOawOawOawOawOaAgaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaKZaFTaFTaFTaHlaFUaFUaFVaFTaFTaKZaVaaAgaAgaGBabPaMRaFSaEcaGGaEcaEdaAuaAuaAuaAuaAuaAuawrawoawpawpawpawpawpawqawraGHaSebagaGHayiaESaFtaGcaGcaGcaGcaGcaGcaGcaGcaGcaFLaGbaxxaxx
 akXaHyaHBaIjaIkaIjaIlaImaIlaImaIlaImaIlaIkaIjaIkaIjaLCaLFaJmaGPaGPaIraIraOlaJmaOKaOUaOUaOUaGVaGWaGWaGXaGUaGUaGUaWBaLmaymauTauTayoaypaypayIaypaypaypaypaFcaFcaFcaMyazPaEXaEXaEXazPazPazPazPaGZazPazPazPazPazPazPazPazPaEXaEXaEXazPaurauNauOauPayraMvaFGauQauSatqaJWaMNaKqatqauWavmaFGaNlayrawFaERaERawFawFaCoawOawOawOawOawOawOawOawOawOaGxaHVaHVaHVaHVaHVaHVaHVaHVaHVaHVaMOaFTaFTaFUaGyaGzaGyaFUaFTaFTaKZaAsaAsaAgaHoaHpaVKaVOaIfaIeaWoaJpaLwaWwaWCaxlaWCaWCaxTaxSawpawpawpawpawpawqawraGHaLMbdIbelayiaESaGKaGcaGcaGcaGcaGcaGcaGcaGcaGcaFLaGLaxxaxx
