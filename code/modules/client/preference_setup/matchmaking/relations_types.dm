@@ -75,3 +75,26 @@
 
 /datum/relation/spessnam/get_desc_string()
 	return "[holder] and [other.holder] served in military together at some point in the past."
+
+/datum/relation/kid_friend
+	name = "Childhood Friend"
+	desc = "You have known them since you were both young."
+
+/datum/relation/kid_friend/get_desc_string()
+	return "[holder] and [other.holder] knew each other when they were both young."
+
+/datum/relation/kid_friend/get_candidates()
+	var/list/creche = ..()
+	var/mob/living/carbon/human/holdermob = holder.current
+
+	if(istype(holdermob))
+		for(var/datum/relation/kid in creche)
+			var/mob/living/carbon/human/kidmob = kid.holder.current
+			if(!istype(kidmob))
+				continue
+			if(abs(holdermob.age - kidmob.age) > 3)
+				creche -= kid		//No creepers please, it's okay if the pool is small.
+				continue
+			if(holdermob.home_system && kidmob.home_system && (holdermob.home_system != kidmob.home_system))
+				creche -= kid		//No trans-galactic shennanigans either.
+	return creche
