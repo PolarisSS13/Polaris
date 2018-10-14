@@ -115,7 +115,7 @@
 
 		if(alert(src,"Are you sure you wish to observe? You will have to wait 5 minutes before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
-			
+
 			//Make a new mannequin quickly, and allow the observer to take the appearance
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
@@ -385,7 +385,7 @@
 		AnnounceArrival(character, rank, join_message)
 	else
 		AnnounceCyborg(character, rank, join_message)
-
+		matchmaker.do_matchmaking()
 	qdel(src)
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
@@ -407,9 +407,9 @@
 			dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
 		if(emergency_shuttle.online())
 			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
-				dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
+				dat += "<font color='red'>The city is currently undergoing evacuation procedures.</font><br>"
 			else						// Crew transfer initiated
-				dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
+				dat += "<font color='red'>The city is currently undergoing civilian transfer procedures.</font><br>"
 
 	dat += "Choose from the following open/valid positions:<br>"
 	for(var/datum/job/job in job_master.occupations)

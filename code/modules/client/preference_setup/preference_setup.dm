@@ -28,10 +28,10 @@
 	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
-/datum/category_group/player_setup_category/loadout_preferences
-	name = "Loadout"
+/datum/category_group/player_setup_category/relations_preferences
+	name = "Matchmaking"
 	sort_order = 5
-	category_item_type = /datum/category_item/player_setup_item/loadout
+	category_item_type = /datum/category_item/player_setup_item/relations
 
 /datum/category_group/player_setup_category/trait_preferences
 	name = "Traits"
