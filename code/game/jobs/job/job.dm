@@ -54,11 +54,9 @@
 	var/income = 1
 	if(H.client)
 		switch(H.client.prefs.economic_status)
-			if(CLASS_UPPER)		income = 1.30
-			if(CLASS_UPMID)		income = 1.15
+			if(CLASS_UPPER)		income = 2.30
 			if(CLASS_MIDDLE)	income = 1
-			if(CLASS_LOWMID)	income = 0.75
-			if(CLASS_LOWER)		income = 0.50
+			if(CLASS_WORKING)		income = 0.50
 
 	//give them an account in the station database
 	var/money_amount = (rand(5,50) + rand(5, 50)) * income * economic_modifier * (H.species.economic_modifier)

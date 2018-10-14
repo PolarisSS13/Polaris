@@ -29,10 +29,10 @@ datum/preferences
 	var/nickname						//our character's nickname
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
-	var/b_type = "A+"					//blood type (not-chooseable)
-	var/backbag = 2						//backpack type
+	var/b_type = "O+"					//blood type (not-chooseable)
+	var/backbag = 2					//backpack type
 	var/pdachoice = 1					//PDA type
-	var/h_style = "Bald"				//Hair type
+	var/h_style = "Short Hair"		//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
 	var/b_hair = 0						//Hair color
@@ -61,9 +61,9 @@ datum/preferences
 	var/b_synth							//Same as above
 
 		//Some faction information.
-	var/home_system = "Unset"           //System of birth.
-	var/citizenship = "None"            //Current home system.
-	var/faction = "None"                //General associated faction.
+	var/home_system = "Vetra"           //System of birth.
+	var/citizenship = "Blue Colony"     //Current home system.
+	var/faction = "NanoTrasen Colony Civilian"                //General associated faction.
 	var/religion = "None"               //Religious association.
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
@@ -108,8 +108,7 @@ datum/preferences
 	var/exploit_record = ""
 	var/disabilities = 0
 
-	var/economic_status = "Average"
-
+	var/economic_status = "Working Class"
 	var/uplinklocation = "PDA"
 
 	// OOC Metadata:
@@ -120,7 +119,7 @@ datum/preferences
 	var/client_ckey = null
 
 	// Communicator identity data
-	var/communicator_visibility = 0
+	var/communicator_visibility = 1
 
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
