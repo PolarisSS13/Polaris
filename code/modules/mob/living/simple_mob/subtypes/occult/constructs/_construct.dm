@@ -42,6 +42,7 @@
 	minbodytemp = 0
 
 	shock_resist = 0.1 //Electricity isn't very effective on stone, especially that from hell.
+	poison_resist = 1.0
 
 	armor = list(
 				"melee" = 10,

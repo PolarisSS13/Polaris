@@ -759,6 +759,15 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 		)
 
+/obj/structure/loot_pile/mecha/gygax/dark
+	icon_state = "darkgygax-broken"
+
+// Todo: Better loot.
+/obj/structure/loot_pile/mecha/gygax/dark/adv
+	icon_state = "darkgygax_adv-broken"
+	icon_scale = 1.5
+	pixel_y = 8
+
 /obj/structure/loot_pile/mecha/durand
 	name = "durand wreckage"
 	desc = "The ruins of some unfortunate durand. Perhaps something is salvageable."

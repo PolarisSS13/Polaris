@@ -19,7 +19,7 @@
 	attack_armor_pen = 15
 	attack_sharp = TRUE
 	attack_edge = TRUE
-	attack_delay = 1 SECOND
+	melee_attack_delay = 1 SECOND
 	attacktext = list("mauled")
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat

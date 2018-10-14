@@ -11,6 +11,7 @@
 	faction = "plants"
 	maxHealth = 15
 	health = 15
+	poison_resist = 1.0
 
 	response_help  = "prods"
 	response_disarm = "pushes aside"

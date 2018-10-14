@@ -72,8 +72,9 @@
 /mob/living/simple_mob/slime/initialize()
 	verbs += /mob/living/proc/ventcrawl
 	update_mood()
-	update_icon()
 	glow_color = color
+	handle_light()
+	update_icon()
 	return ..()
 
 /mob/living/simple_mob/slime/Destroy()

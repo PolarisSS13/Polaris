@@ -390,7 +390,7 @@
 	player_msg = "Your <b>attacks knock back the target</b> a fair distance.<br>\
 	You also hit harder, take less damage, and stuns affect you for less time."
 
-	attack_delay = 1 SECOND
+	melee_attack_delay = 1 SECOND
 
 	slime_mutation = list(
 		/mob/living/simple_mob/slime/xenobio/dark_purple,

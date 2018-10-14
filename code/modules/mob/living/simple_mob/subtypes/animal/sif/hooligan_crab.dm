@@ -51,7 +51,7 @@
 	attack_armor_pen = 35
 	attack_sharp = 1
 	attack_edge = 1
-	attack_delay = 1 SECOND
+	melee_attack_delay = 1 SECOND
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 

@@ -43,6 +43,8 @@
 	//Movement things.
 	var/movement_cooldown = 5			// Lower is faster.
 	var/movement_sound = null			// If set, will play this sound when it moves on its own will.
+	var/turn_sound = null				// If set, plays the sound when the mob's dir changes in most cases.
+	var/movement_shake_radius = 0		// If set, moving will shake the camera of all living mobs within this radius slightly.
 
 	//Mob interaction
 	var/response_help   = "tries to help"	// If clicked on help intent
@@ -98,7 +100,10 @@
 	var/attack_armor_pen = 0			// How much armor pen this attack has.
 	var/attack_sharp = FALSE			// Is the attack sharp?
 	var/attack_edge = FALSE				// Does the attack have an edge?
-	var/attack_delay = null				// If set, the mob will do a windup animation and can miss if the target moves out of the way.
+
+	var/melee_attack_delay = null			// If set, the mob will do a windup animation and can miss if the target moves out of the way.
+	var/ranged_attack_delay = null
+	var/special_attack_delay = null
 
 	//Special attacks
 //	var/special_attack_prob = 0				// The chance to ATTEMPT a special_attack_target(). If it fails, it will do a regular attack instead.
@@ -137,6 +142,8 @@
 	var/cold_resist = 0.0
 	var/shock_resist = 0.0
 	var/water_resist = 1.0
+	var/poison_resist = 0.0
+	var/thick_armor = FALSE // Stops injections and "injections".
 	var/purge = 0					// Cult stuff.
 	var/supernatural = FALSE		// Ditto.
 
@@ -152,6 +159,8 @@
 
 	if(has_eye_glow)
 		add_eyes()
+	if(!icon_living)
+		icon_living = icon_state
 	return ..()
 
 
@@ -182,10 +191,21 @@
 
 /mob/living/simple_mob/SelfMove(turf/n, direct)
 	var/turf/old_turf = get_turf(src)
+	var/old_dir = dir
 	. = ..()
-	if(movement_sound && old_turf != get_turf(src))
+	if(. && movement_shake_radius)
+		for(var/mob/living/L in range(movement_shake_radius, src))
+			shake_camera(L, 1, 1)
+	if(turn_sound && dir != old_dir)
+		playsound(src, turn_sound, 50, 1)
+	else if(movement_sound && old_turf != get_turf(src)) // Playing both sounds at the same time generally sounds bad.
 		playsound(src, movement_sound, 50, 1)
-
+/*
+/mob/living/simple_mob/set_dir(new_dir)
+	if(dir != new_dir)
+		playsound(src, turn_sound, 50, 1)
+	return ..()
+*/
 /mob/living/simple_mob/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later
 
@@ -255,16 +275,7 @@
 
 
 /mob/living/simple_mob/is_sentient()
-	return mob_class & MOB_CLASS_HUMANOID|MOB_CLASS_ANIMAL // Update this if needed.
-//	return intelligence_level != SA_PLANT && intelligence_level != SA_ROBOTIC
-
-//Just some subpaths for easy searching
-/mob/living/simple_mob/hostile
-	faction = "not yours"
-//	ai_holder_type = /datum/ai_holder/regular/hostile
-
-/mob/living/simple_mob/retaliate
-//	ai_holder_type = /datum/ai_holder/regular/retaliate
+	return mob_class & MOB_CLASS_HUMANOID|MOB_CLASS_ANIMAL|MOB_CLASS_SLIME // Update this if needed.
 
 /mob/living/simple_mob/get_nametag_desc(mob/user)
 	return "<i>[tt_desc]</i>"

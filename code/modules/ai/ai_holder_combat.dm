@@ -4,15 +4,11 @@
 	var/firing_lanes = FALSE				// If ture, tries to refrain from shooting allies or the wall.
 	var/conserve_ammo = FALSE				// If true, the mob will avoid shooting anything that does not have a chance to hit a mob. Requires firing_lanes to be true.
 
-//	var/ranged = FALSE						// If true, attempts to shoot at the enemy instead of charging at them wildly.
 	var/shoot_range = 5						// How close the mob needs to be to attempt to shoot at the enemy, if the mob is capable of ranged attacks.
 	var/pointblank = FALSE					// If ranged is true, and this is true, people adjacent to the mob will suffer the ranged instead of using a melee attack.
 
-	var/special_attack_prob = 0				// The chance to ATTEMPT a special_attack(). If it fails, it will do a regular attack instead.
-	var/special_attack_min_range = 2		// The minimum distance required for an attempt to be made.
-	var/special_attack_max_range = 7		// The maximum for an attempt.
-
 	var/can_breakthrough = TRUE				// If false, the AI will not try to break things like windows or other structures in the way.
+	var/stand_ground = FALSE				// If true, the AI won't try to get closer to an enemy if out of range.
 
 
 // This does the actual attacking.
@@ -83,7 +79,7 @@
 		ranged_attack(target)
 
 	// Run after them.
-	else
+	else if(!stand_ground)
 		ai_log("engage_target() : Target ([target]) too far away. Exiting.", AI_LOG_DEBUG)
 		set_stance(STANCE_APPROACH)
 
@@ -103,6 +99,7 @@
 
 // Most mobs probably won't have this defined but we don't care.
 /datum/ai_holder/proc/special_attack(atom/movable/AM)
+	pre_special_attack(AM)
 	. = holder.ISpecialAttack(AM)
 	if(.)
 		post_special_attack(AM)
@@ -117,6 +114,9 @@
 
 // Called before a melee attack is attempted.
 /datum/ai_holder/proc/pre_melee_attack(atom/A)
+
+// Called before a 'special' attack is attempted.
+/datum/ai_holder/proc/pre_special_attack(atom/A)
 
 // Called after a successful (IE not on cooldown) ranged attack.
 // Note that this is not whether the projectile actually hit, just that one was launched.

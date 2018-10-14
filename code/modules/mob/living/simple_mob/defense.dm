@@ -184,6 +184,10 @@
 /mob/living/simple_mob/get_water_protection()
 	return water_resist
 
+// "Poison" (aka what reagents would do if we wanted to deal with those).
+/mob/living/simple_mob/get_poison_protection()
+	return poison_resist
+
 // Armor
 /mob/living/simple_mob/getarmor(def_zone, attack_flag)
 	var/armorval = armor[attack_flag]
@@ -211,4 +215,10 @@
 			visible_message(span("critical", "\The [src] disintegrates into ash!"))
 			ash()
 			return // No point deafening something that wont exist.
+
+// Injections.
+/mob/living/simple_mob/can_inject(mob/user, error_msg, target_zone, ignore_thickness)
+	if(ignore_thickness)
+		return TRUE
+	return !thick_armor
 
