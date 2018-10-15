@@ -416,12 +416,15 @@ SUBSYSTEM_DEF(timer)
 	prev = next = null
 
 /datum/timedevent/proc/bucketJoin()
+	to_chat(world, "JOINING BUCKET")
 	var/list/L
 
 	if (flags & TIMER_CLIENT_TIME)
 		L = SStimer.clienttime_timers
+		to_chat(world, "DEBUG: inserting into clienttime timers")
 	else if (timeToRun >= TIMER_MAX)
 		L = SStimer.second_queue
+		to_chat(world, "DEBUG: Inserting into second queue")
 
 	if(L)
 		BINARY_INSERT(src, L, datum/timedevent, timeToRun)
@@ -430,19 +433,24 @@ SUBSYSTEM_DEF(timer)
 	//get the list of buckets
 	var/list/bucket_list = SStimer.bucket_list
 
+	to_chat(world, "DEBUG: bucket list len [bucket_list.len]")
+
 	//calculate our place in the bucket list
 	var/bucket_pos = BUCKET_POS(src)
 
 	//get the bucket for our tick
 	var/datum/timedevent/bucket_head = bucket_list[bucket_pos]
 	SStimer.bucket_count++
+	to_chat(world, "DEBUG: bucket pos [bucket_pos]")
 	//empty bucket, we will just add ourselves
 	if (!bucket_head)
 		bucket_list[bucket_pos] = src
+		to_chat(world, "DEBUG: src is bucket head")
 		return
 	//other wise, lets do a simplified linked list add.
 	if (!bucket_head.prev)
 		bucket_head.prev = bucket_head
+		to_chat(world, "DEBUG: src is not bucket head")
 	next = bucket_head
 	prev = bucket_head.prev
 	next.prev = src

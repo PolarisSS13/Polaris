@@ -353,3 +353,6 @@
 		to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 		new /obj/effect/decal/remains/human(get_turf(src))
 		dismantle()
+
+/proc/timertest(atom/A, time = 10)
+	QDEL_IN(A, time)
