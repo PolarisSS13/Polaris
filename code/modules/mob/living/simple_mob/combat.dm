@@ -8,17 +8,17 @@
 
 	face_atom(A)
 
-	if(attack_delay)
+	if(melee_attack_delay)
 	//	their_T.color = "#FF0000"
 		melee_pre_animation(A)
-		handle_attack_delay(A) // This will sleep this proc for a bit, which is why waitfor is false.
+		handle_attack_delay(A, melee_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
 
 	// Cooldown testing is done at click code (for players) and interface code (for AI).
 	setClickCooldown(get_attack_speed())
 
 	. = do_attack(A, their_T)
 
-	if(attack_delay)
+	if(melee_attack_delay)
 		melee_post_animation(A)
 	//	their_T.color = "#FFFFFF"
 
@@ -92,9 +92,9 @@
 
 	face_atom(A)
 
-	if(attack_delay)
+	if(ranged_attack_delay)
 		ranged_pre_animation(A)
-		handle_attack_delay(A) // This will sleep this proc for a bit, which is why waitfor is false.
+		handle_attack_delay(A, ranged_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
 
 	if(needs_reload)
 		if(reload_count >= reload_max)
@@ -104,9 +104,9 @@
 	visible_message("<span class='danger'><b>\The [src]</b> fires at \the [A]!</span>")
 	shoot(A, src.loc, src)
 	if(casingtype)
-		new casingtype
+		new casingtype(loc)
 
-	if(attack_delay)
+	if(ranged_attack_delay)
 		ranged_post_animation(A)
 
 	return TRUE
@@ -135,13 +135,17 @@
 //		return TRUE
 
 /mob/living/simple_mob/proc/try_reload()
+	set waitfor = FALSE
+	set_AI_busy(TRUE)
+
 	if(do_after(src, reload_time))
 		if(reload_sound)
 			playsound(src.loc, reload_sound, 50, 1)
 		reload_count = 0
-		return TRUE
+		. = TRUE
 	else
-		return FALSE
+		. = FALSE
+	set_AI_busy(FALSE)
 
 // Can we currently do a special attack?
 /mob/living/simple_mob/proc/can_special_attack(atom/A)
@@ -176,12 +180,21 @@
 // Don't override this, override do_special_attack() for your blinding spit/etc.
 /mob/living/simple_mob/proc/special_attack_target(atom/A)
 	face_atom(A)
+
+	if(special_attack_delay)
+		special_pre_animation(A)
+		handle_attack_delay(A, special_attack_delay) // This will sleep this proc for a bit, which is why waitfor is false.
+
 	last_special_attack = world.time
 	if(do_special_attack(A))
 		if(special_attack_charges)
 			special_attack_charges -= 1
-		return TRUE
-	return FALSE
+		. = TRUE
+	else
+		. = FALSE
+
+	if(special_attack_delay)
+		special_post_animation(A)
 
 // Override this for the actual special attack.
 /mob/living/simple_mob/proc/do_special_attack(atom/A)
@@ -189,12 +202,12 @@
 
 // Sleeps the proc that called it for the correct amount of time.
 // Also makes sure the AI doesn't do anything stupid in the middle of the delay.
-/mob/living/simple_mob/proc/handle_attack_delay(atom/A)
+/mob/living/simple_mob/proc/handle_attack_delay(atom/A, delay_amount)
 	set_AI_busy(TRUE)
 
 	// Click delay modifiers also affect telegraphing time.
 	// This means berserked enemies will leave less time to dodge.
-	var/true_attack_delay = attack_delay
+	var/true_attack_delay = delay_amount
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.attack_speed_percent))
 			true_attack_delay *= M.attack_speed_percent
@@ -208,11 +221,16 @@
 
 // Override these four for special custom animations (like the GOLEM).
 /mob/living/simple_mob/proc/melee_pre_animation(atom/A)
-	do_windup_animation(A, attack_delay)
+	do_windup_animation(A, melee_attack_delay)
 
 /mob/living/simple_mob/proc/melee_post_animation(atom/A)
 
 /mob/living/simple_mob/proc/ranged_pre_animation(atom/A)
-	do_windup_animation(A, attack_delay) // Semi-placeholder.
+	do_windup_animation(A, ranged_attack_delay) // Semi-placeholder.
 
 /mob/living/simple_mob/proc/ranged_post_animation(atom/A)
+
+/mob/living/simple_mob/proc/special_pre_animation(atom/A)
+	do_windup_animation(A, special_attack_delay) // Semi-placeholder.
+
+/mob/living/simple_mob/proc/special_post_animation(atom/A)

@@ -31,7 +31,7 @@
 		"SPIDER"		=	/mob/living/simple_mob/animal/giant_spider,
 		"SPIDER HUNTER"	=	/mob/living/simple_mob/animal/giant_spider/hunter,
 		"SPIDER NURSE"	=	/mob/living/simple_mob/animal/giant_spider/nurse,
-		"CARP"			=	/mob/living/simple_mob/space/carp,
+		"CARP"			=	/mob/living/simple_mob/animal/space/carp,
 		"BEAR"			=	/mob/living/simple_mob/animal/space/bear
 		)
 	cooldown = 30

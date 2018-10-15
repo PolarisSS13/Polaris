@@ -34,3 +34,18 @@
 /mob/living/simple_mob/mechanical/viscerator/death()
 	..(null,"is smashed into pieces!")
 	qdel(src)
+
+// Variant that is always loyal to mercenary antagonists.
+// Used for a special grenade, to ensure they don't attack the wrong thing.
+/mob/living/simple_mob/mechanical/viscerator/mercenary/IIsAlly(mob/living/L)
+	. = ..()
+	if(!.) // Not friendly, see if they're a baddie first.
+		if(L.mind && mercs.is_antagonist(L.mind))
+			return TRUE
+
+// Similar to above but for raiders.
+/mob/living/simple_mob/mechanical/viscerator/raider/IIsAlly(mob/living/L)
+	. = ..()
+	if(!.) // Not friendly, see if they're a baddie first.
+		if(L.mind && raiders.is_antagonist(L.mind))
+			return TRUE

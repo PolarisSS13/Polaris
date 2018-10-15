@@ -19,6 +19,7 @@
 	health = 200
 	pass_flags = PASSTABLE
 	movement_cooldown = 10
+	poison_resist = 0.5
 
 	see_in_dark = 10
 

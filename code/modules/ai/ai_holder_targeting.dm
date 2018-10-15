@@ -15,6 +15,9 @@
 	var/lose_target_time = 0				// world.time when a target was lost.
 	var/lose_target_timeout = 5 SECONDS		// How long until a mob 'times out' and stops trying to find the mob that disappeared.
 
+	var/list/attackers = list()			// List of strings of names of people who attacked us before in our life.
+										// This uses strings and not refs to allow for disguises, and to avoid needing to use weakrefs.
+
 // A lot of this is based off of /TG/'s AI code.
 
 // Step 1, find out what we can see.
@@ -202,6 +205,7 @@
 		return FALSE
 	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
 		ai_log("react_to_attack() : Was attacked by [attacker], but we already have a target.", AI_LOG_TRACE)
+		on_attacked(attacker) // So we attack immediately and not threaten.
 		return FALSE
 
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
@@ -209,7 +213,15 @@
 		go_wake()
 
 	ai_log("react_to_attack() : Was attacked by [attacker].", AI_LOG_INFO)
+	on_attacked(attacker) // So we attack immediately and not threaten.
 	return give_target(attacker) // Also handles setting the appropiate stance.
+
+// Sets a few vars so mobs that threaten will react faster to an attacker or someone who attacked them before.
+/datum/ai_holder/proc/on_attacked(atom/movable/AM)
+	last_conflict_time = world.time
+	if(isliving(AM))
+		var/mob/living/L = AM
+		attackers |= L.name
 
 // Causes targeting to prefer targeting the taunter if possible.
 // This generally occurs if more than one option is within striking distance, including the taunter.

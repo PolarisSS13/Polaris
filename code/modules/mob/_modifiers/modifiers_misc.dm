@@ -215,3 +215,35 @@ the artifact triggers the rage.
 	evasion = -40
 	attack_speed_percent = 1.4
 	disable_duration_percent = 1.2
+
+
+// Similar to being on fire, except poison tends to be more long term.
+// Antitoxins will remove stacks over time.
+// Synthetics can't receive this.
+/datum/modifier/poisoned
+	name = "poisoned"
+	desc = "You have poison inside of you. It will cause harm over a long span of time if not cured."
+	mob_overlay_state = "poisoned"
+
+	on_created_text = "<span class='warning'>You feel sick...</span>"
+	on_expired_text = "<span class='notice'>You feel a bit better.</span>"
+	stacks = MODIFIER_STACK_ALLOWED // Multiple instances will hurt a lot.
+	var/damage_per_tick = 1
+
+/datum/modifier/poisoned/weak
+	damage_per_tick = 0.5
+
+/datum/modifier/poisoned/strong
+	damage_per_tick = 2
+
+/datum/modifier/poisoned/tick()
+	if(holder.stat == DEAD)
+		expire(silent = TRUE)
+	holder.inflict_poison_damage(damage_per_tick)
+
+/datum/modifier/poisoned/can_apply(mob/living/L)
+	if(L.isSynthetic())
+		return FALSE
+	if(L.get_poison_protection() >= 1)
+		return FALSE
+	return TRUE

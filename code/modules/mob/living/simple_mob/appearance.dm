@@ -1,45 +1,52 @@
 /mob/living/simple_mob/update_icon()
 	. = ..()
-	var/mutable_appearance/ma = new(src)
-	ma.layer = layer
-	ma.plane = plane
+	cut_overlays()
+//	var/mutable_appearance/ma = new(src)
+//	ma.layer = layer
+//	ma.plane = plane
 
-	ma.overlays = list(modifier_overlay)
+	add_overlay(modifier_overlay)
+
+	if(!icon_living) // Prevent the mob from turning invisible if icon_living is null.
+		icon_living = initial(icon_state)
 
 	//Awake and normal
 	if((stat == CONSCIOUS) && (!icon_rest || !resting || !incapacitated(INCAPACITATION_DISABLED) ))
-		ma.icon_state = icon_living
+		icon_state = icon_living
 
 	//Dead
 	else if(stat >= DEAD)
-		ma.icon_state = icon_dead
+		icon_state = icon_dead
 
 	//Resting or KO'd
 	else if(((stat == UNCONSCIOUS) || resting || incapacitated(INCAPACITATION_DISABLED) ) && icon_rest)
-		ma.icon_state = icon_rest
+		icon_state = icon_rest
 
 	//Backup
 	else
-		ma.icon_state = initial(icon_state)
+		icon_state = initial(icon_state)
 
 	if(has_hands)
 		if(r_hand_sprite)
-			ma.overlays += r_hand_sprite
+			add_overlay(r_hand_sprite)
 		if(l_hand_sprite)
-			ma.overlays += l_hand_sprite
+			add_overlay(l_hand_sprite)
 
 	if(has_eye_glow)
-		add_eyes()
+		if(icon_state != icon_living)
+			remove_eyes()
+		else
+			add_eyes()
 
-	appearance = ma
+//	appearance = ma
 
 
 // If your simple mob's update_icon() call calls overlays.Cut(), this needs to be called after this, or manually apply modifier_overly to overlays.
 /mob/living/simple_mob/update_modifier_visuals()
 	var/image/effects = null
 	if(modifier_overlay)
-		overlays -= modifier_overlay
-		modifier_overlay.overlays.Cut()
+		cut_overlay(modifier_overlay)
+		modifier_overlay.cut_overlays()
 		effects = modifier_overlay
 	else
 		effects = new()
@@ -48,10 +55,10 @@
 		if(M.mob_overlay_state)
 			var/image/I = image("icon" = 'icons/mob/modifier_effects.dmi', "icon_state" = M.mob_overlay_state)
 			I.appearance_flags = RESET_COLOR // So colored mobs don't affect the overlay.
-			effects.overlays += I
+			effects.add_overlay(I)
 
 	modifier_overlay = effects
-	overlays += modifier_overlay
+	add_overlay(modifier_overlay)
 
 
 /mob/living/simple_mob/proc/add_eyes()
@@ -59,10 +66,10 @@
 		eye_layer = image(icon, "[icon_state]-eyes")
 		eye_layer.plane = PLANE_LIGHTING_ABOVE
 
-	overlays += eye_layer
+	add_overlay(eye_layer)
 
 /mob/living/simple_mob/proc/remove_eyes()
-	overlays -= eye_layer
+	cut_overlay(eye_layer)
 
 
 /mob/living/simple_mob/gib()

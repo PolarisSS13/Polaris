@@ -336,7 +336,6 @@
 // End BS12 momentum-transfer code.
 
 /mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
-
 	if(!damage)
 		return
 
@@ -431,6 +430,9 @@
 
 /mob/living/proc/get_water_protection()
 	return 1 // Water won't hurt most things.
+
+/mob/living/proc/get_poison_protection()
+	return 0
 
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()

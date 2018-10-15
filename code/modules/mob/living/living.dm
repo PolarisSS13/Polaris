@@ -526,11 +526,19 @@ default behaviour is:
 
 // and one for electricity because why not
 /mob/living/proc/inflict_shock_damage(amount)
-	electrocute_act(amount, null, get_shock_protection())
+	electrocute_act(amount, null, 1 - get_shock_protection())
 
 // also one for water (most things resist it entirely, except for slimes)
 /mob/living/proc/inflict_water_damage(amount)
 	amount *= 1 - get_water_protection()
+	if(amount > 0)
+		adjustToxLoss(amount)
+
+// one for abstracted away ""poison"" (mostly because simplemobs shouldn't handle reagents)
+/mob/living/proc/inflict_poison_damage(amount)
+	if(isSynthetic())
+		return
+	amount *= 1 - get_poison_protection()
 	if(amount > 0)
 		adjustToxLoss(amount)
 

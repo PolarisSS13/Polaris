@@ -20,7 +20,7 @@
 
 	maxHealth = 300
 	movement_cooldown = 10
-	attack_delay = 5
+	melee_attack_delay = 0.5 SECONDS
 
 
 // Slimebatoning/xenotasing it just makes it mad at you (which can be good if you're heavily armored and your friends aren't).
