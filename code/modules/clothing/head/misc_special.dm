@@ -113,7 +113,7 @@
 
 /obj/item/clothing/head/cakehat/process()
 	if(!onfire)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		return
 
 	var/turf/location = src.loc
@@ -242,7 +242,7 @@
 
 /obj/item/clothing/head/psy_crown/dropped(var/mob/living/carbon/human/H)
 	..()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	if(H.is_sentient())
 		if(loc == H) // Still inhand.
 			to_chat(H, flavor_unequip)
@@ -250,7 +250,7 @@
 			to_chat(H, flavor_drop)
 
 /obj/item/clothing/head/psy_crown/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/clothing/head/psy_crown/process()

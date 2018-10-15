@@ -38,7 +38,7 @@
 
 /obj/item/weapon/cell/Destroy()
 	if(self_recharge)
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/cell/get_cell()

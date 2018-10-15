@@ -29,7 +29,7 @@
 	else
 		on = 0
 		if(first)	qdel(first)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 	update_icon()
 	return secured
 

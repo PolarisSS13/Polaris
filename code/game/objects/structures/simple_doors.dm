@@ -40,7 +40,7 @@
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/structure/simple_door/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	update_nearby_tiles()
 	return ..()
 

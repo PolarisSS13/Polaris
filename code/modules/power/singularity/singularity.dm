@@ -44,7 +44,7 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 			break
 
 /obj/singularity/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/singularity/attack_hand(mob/user as mob)

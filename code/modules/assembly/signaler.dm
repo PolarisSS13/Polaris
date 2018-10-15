@@ -156,13 +156,13 @@ Code:
 
 /obj/item/device/assembly/signaler/process()
 	if(!deadman)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 	var/mob/M = src.loc
 	if(!M || !ismob(M))
 		if(prob(5))
 			signal()
 		deadman = 0
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 	else if(prob(5))
 		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
 	return
