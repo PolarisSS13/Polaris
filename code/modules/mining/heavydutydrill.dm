@@ -59,7 +59,7 @@
 			edge = 1
 			sharp = 1
 			on = 1
-			digspeed = 15
+			digspeed = 30
 			update_icon()
 		else
 			to_chat(user, "You fumble with the string.")
