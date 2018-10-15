@@ -43,10 +43,10 @@ var/global/datum/controller/gameticker/ticker
 	'sound/music/title2.ogg',\
 	'sound/music/clouds.s3m',\
 	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
-	
+
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
-	
-	do	
+
+	do
 		pregame_timeleft = 180
 		to_chat(world, "<B><FONT color='blue'>Welcome to the pregame lobby!</FONT></B>")
 		to_chat(world, "Please set up your character and select ready. The round will start in [pregame_timeleft] seconds.")
@@ -90,7 +90,7 @@ var/global/datum/controller/gameticker/ticker
 			src.mode = gamemode_cache[pickweight(weighted_modes)]
 	else
 		src.mode = config.pick_mode(master_mode)
- 
+
 	if(!src.mode)
 		current_state = GAME_STATE_PREGAME
 		Master.SetRunLevel(RUNLEVEL_LOBBY)
@@ -309,7 +309,7 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(M, "Colony Directorship not forced on anyone.")
 
 
-	proc/process()
+	process()
 		if(current_state != GAME_STATE_PLAYING)
 			return 0
 
