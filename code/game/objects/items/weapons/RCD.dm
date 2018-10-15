@@ -113,7 +113,7 @@
 	var/datum/beam/rcd_beam = null
 	if(ranged)
 		var/atom/movable/beam_origin = user // This is needed because mecha pilots are inside an object and the beam won't be made if it tries to attach to them..
-		if(!isturf(beam_origin))
+		if(!isturf(beam_origin.loc))
 			beam_origin = user.loc
 		rcd_beam = beam_origin.Beam(A, icon_state = "rped_upgrade", time = max(true_delay, 5))
 	busy = TRUE
