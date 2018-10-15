@@ -131,7 +131,7 @@
 		force = 3
 		damtype = "fire"
 		icon_state = "cake1"
-		processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 	else
 		force = null
 		damtype = "brute"
@@ -237,7 +237,7 @@
 /obj/item/clothing/head/psy_crown/equipped(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H) && H.head == src && H.is_sentient())
-		processing_objects += src
+		START_PROCESSING(SSobj, src)
 		to_chat(H, flavor_equip)
 
 /obj/item/clothing/head/psy_crown/dropped(var/mob/living/carbon/human/H)

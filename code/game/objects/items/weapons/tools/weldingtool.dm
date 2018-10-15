@@ -48,12 +48,12 @@
 	R.add_reagent("fuel", max_fuel)
 	update_icon()
 	if(always_process)
-		processing_objects |= src
+		START_PROCESSING(SSobj, src)
 	..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding || always_process)
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
@@ -284,7 +284,7 @@
 			welding = 1
 			update_icon()
 			if(!always_process)
-				processing_objects |= src
+				START_PROCESSING(SSobj, src)
 		else
 			if(M)
 				var/msg = max_fuel ? "welding fuel" : "charge"
@@ -293,7 +293,7 @@
 	//Otherwise
 	else if(!set_welding && welding)
 		if(!always_process)
-			processing_objects -= src
+			STOP_PROCESSING(SSobj, src)
 		if(M)
 			to_chat(M, "<span class='notice'>You switch \the [src] off.</span>")
 		else if(T)

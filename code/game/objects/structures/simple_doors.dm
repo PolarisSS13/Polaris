@@ -36,7 +36,7 @@
 	else
 		set_opacity(1)
 	if(material.products_need_process())
-		processing_objects |= src
+		START_PROCESSING(SSobj, src)
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/structure/simple_door/Destroy()

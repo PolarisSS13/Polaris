@@ -27,7 +27,7 @@
 	..()
 	if(self_recharge)
 		power_supply = new /obj/item/weapon/cell/device/weapon(src)
-		processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 	else
 		if(cell_type)
 			power_supply = new cell_type(src)
@@ -181,7 +181,7 @@
 	if(power_supply == null)
 		power_supply = new /obj/item/weapon/cell/device/weapon(src)
 	self_recharge = 1
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	update_icon()
 
 /obj/item/weapon/gun/energy/get_description_interaction()

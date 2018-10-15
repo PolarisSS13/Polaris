@@ -229,10 +229,10 @@
 
 /obj/item/device/beacon_locator/New()
 	..()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/device/beacon_locator/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	..()
 
 /obj/item/device/beacon_locator/process()

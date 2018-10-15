@@ -20,7 +20,7 @@
 	var/show_examine = TRUE	// Does this pop up on a mob when the mob is examined?
 
 /obj/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)

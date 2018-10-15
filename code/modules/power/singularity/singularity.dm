@@ -37,7 +37,7 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 	energy = starting_energy
 
 	..()
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
