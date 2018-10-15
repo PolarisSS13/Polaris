@@ -1719,6 +1719,7 @@
 #include "code\modules\mining\alloys.dm"
 #include "code\modules\mining\coins.dm"
 #include "code\modules\mining\fulton.dm"
+#include "code\modules\mining\heavydutydrill.dm"
 #include "code\modules\mining\machine_input_output_plates.dm"
 #include "code\modules\mining\machine_processing.dm"
 #include "code\modules\mining\machine_stacking.dm"
