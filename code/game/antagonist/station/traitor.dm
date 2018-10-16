@@ -1,4 +1,4 @@
-var/datum/antagonist/traitor/traitors
+GLOBAL_DATUM(traitors, /datum/antagonist/traitor)
 
 // Inherits most of its vars from the base datum.
 /datum/antagonist/traitor

@@ -1,6 +1,6 @@
 // Infiltrator is a variant of Traitor, except that the traitors are in a team and can communicate with a special headset.
 
-var/datum/antagonist/traitor/infiltrator/infiltrators
+GLOBAL_DATUM(infiltrators, /datum/antagonist/traitor/infiltrator)
 
 // Inherits most of its vars from the base datum.
 /datum/antagonist/traitor/infiltrator

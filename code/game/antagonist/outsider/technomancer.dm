@@ -1,4 +1,4 @@
-var/datum/antagonist/technomancer/technomancers
+GLOBAL_DATUM(technomancers, /datum/antagonist/technomancer)
 
 /datum/antagonist/technomancer
 	id = MODE_TECHNOMANCER

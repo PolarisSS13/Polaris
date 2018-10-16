@@ -1,4 +1,4 @@
-var/datum/category_collection/autolathe/autolathe_recipes
+GLOBAL_DATUM(autolathe_recipes, /datum/category_collection/autolathe)
 
 /datum/category_item/autolathe/New()
 	..()

@@ -101,7 +101,7 @@ GLOBAL_LIST_EMPTY(adminlog)
 GLOBAL_LIST_EMPTY(powernets)	// TODO - Move into SSmachines
 
 var/Debug2 = 0
-var/datum/debug/debugobj
+GLOBAL_DATUM(debugobj, /datum/debug)
 
 var/datum/moduletypes/mods = new()
 

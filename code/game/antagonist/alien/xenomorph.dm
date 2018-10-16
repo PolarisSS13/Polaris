@@ -1,4 +1,4 @@
-var/datum/antagonist/xenos/xenomorphs
+GLOBAL_DATUM(xenomorphs, /datum/antagonist/xenos)
 
 /datum/antagonist/xenos
 	id = MODE_XENOMORPH

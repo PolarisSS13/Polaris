@@ -1,4 +1,4 @@
-var/datum/antagonist/cultist/cult
+GLOBAL_DATUM(cult, /datum/antagonist/cultist)
 
 /proc/iscultist(var/mob/player)
 	if(!cult || !player.mind)

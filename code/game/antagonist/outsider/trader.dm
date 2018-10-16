@@ -1,4 +1,4 @@
-var/datum/antagonist/trader/traders
+GLOBAL_DATUM(traders, /datum/antagonist/trader)
 
 /datum/antagonist/trader
 	id = MODE_TRADE

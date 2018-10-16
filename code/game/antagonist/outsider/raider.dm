@@ -1,4 +1,4 @@
-var/datum/antagonist/raider/raiders
+GLOBAL_DATUM(raiders, /datum/antagonist/raider)
 
 /datum/antagonist/raider
 	id = MODE_RAIDER

@@ -1,7 +1,7 @@
 GLOBAL_LIST_EMPTY(all_robolimbs)
 GLOBAL_LIST_EMPTY(robolimb_data)
 GLOBAL_LIST_EMPTY(chargen_robolimbs)
-var/datum/robolimb/basic_robolimb
+GLOBAL_DATUM(basic_robolimb, /datum/robolimb)
 #define STANDARD_MONITOR_STYLES		"BLANK=ipc_blank;\
 	pink=ipc_pink;\
 	green=ipc_green,\

@@ -24,7 +24,7 @@ datum/report_topic_handler
 		else if(href_list["action"] == "edit")
 			C.edit_report(text2num(href_list["ID"]))
 
-var/datum/report_topic_handler/report_topic_handler
+GLOBAL_DATUM(report_topic_handler, /datum/report_topic_handler)
 
 world/New()
 	..()

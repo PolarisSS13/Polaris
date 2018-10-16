@@ -1,4 +1,4 @@
-var/datum/controller/subsystem/air/air_master
+GLOBAL_DATUM(air_master, /datum/controller/subsystem/air)
 
 var/tick_multiplier = 2
 

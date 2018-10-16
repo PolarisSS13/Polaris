@@ -1,4 +1,4 @@
-var/datum/antagonist/mutineer/loyalist/loyalists
+GLOBAL_DATUM(loyalists, /datum/antagonist/mutineer/loyalist)
 
 /datum/antagonist/mutineer/loyalist
 	role_text = "Loyalist"

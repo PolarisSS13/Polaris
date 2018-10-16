@@ -1,4 +1,4 @@
-var/datum/antagonist/mutineer/mutineers
+GLOBAL_DATUM(mutineers, /datum/antagonist/mutineer)
 
 /datum/antagonist/mutineer
 	role_type = BE_MUTINEER

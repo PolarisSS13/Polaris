@@ -1,4 +1,4 @@
-var/datum/species/shapeshifter/promethean/prometheans
+GLOBAL_DATUM(prometheans, /datum/species/shapeshifter/promethean)
 
 // Species definition follows.
 /datum/species/shapeshifter/promethean

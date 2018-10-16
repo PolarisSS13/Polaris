@@ -1,4 +1,4 @@
-var/datum/controller/process/chemistry/chemistryProcess
+GLOBAL_DATUM(chemistryProcess, /datum/controller/process/chemistry)
 
 /datum/controller/process/chemistry
 	var/list/active_holders
