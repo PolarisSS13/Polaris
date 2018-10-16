@@ -1,4 +1,4 @@
-var/list/global/map_templates = list()
+GLOBAL_LIST_EMPTY(global/map_templates)
 
 // Called when the world starts, in world.dm
 /proc/load_map_templates()

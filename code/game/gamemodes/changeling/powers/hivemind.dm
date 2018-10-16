@@ -18,7 +18,7 @@
 
 // HIVE MIND UPLOAD/DOWNLOAD DNA
 
-var/list/datum/dna/hivemind_bank = list()
+GLOBAL_LIST_EMPTY(datum/dna/hivemind_bank)
 
 /mob/proc/changeling_hiveupload()
 	set category = "Changeling"

@@ -2,7 +2,7 @@
 #define TANK_DEFAULT_RELEASE_PRESSURE 24
 #define TANK_IDEAL_PRESSURE 1015 //Arbitrary.
 
-var/list/global/tank_gauge_cache = list()
+GLOBAL_LIST_EMPTY(global/tank_gauge_cache)
 
 /obj/item/weapon/tank
 	name = "tank"

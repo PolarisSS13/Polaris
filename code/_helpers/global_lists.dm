@@ -41,7 +41,7 @@ var/list/mannequins_
 GLOBAL_LIST_EMPTY(poster_designs)
 
 // Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
+GLOBAL_LIST_EMPTY(obj/item/device/uplink/world_uplinks)
 
 //Preferences stuff
 	//Hairstyles
@@ -62,7 +62,7 @@ GLOBAL_LIST_INIT(pdachoicelist, list("Default", "Slim", "Old", "Rugged"))
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
+GLOBAL_LIST_EMPTY(datum/visualnet/visual_nets)
 var/datum/visualnet/camera/cameranet = new()
 var/datum/visualnet/cult/cultnet = new()
 

@@ -1,4 +1,4 @@
-var/global/list/turf/processing_turfs = list()
+GLOBAL_LIST_EMPTY(turf/processing_turfs)
 
 /datum/controller/process/turf/setup()
 	name = "turf"

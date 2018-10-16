@@ -2,7 +2,7 @@
 VOX HEIST ROUNDTYPE
 */
 
-var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective. Clumsy, rewrite sometime.
+GLOBAL_LIST_EMPTY(obj/cortical_stacks) //Stacks for 'leave nobody behind' objective. Clumsy, rewrite sometime.
 
 /datum/game_mode/heist
 	name = "Heist"

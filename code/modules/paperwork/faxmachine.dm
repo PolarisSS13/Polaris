@@ -1,4 +1,4 @@
-var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
+GLOBAL_LIST_EMPTY(obj/machinery/photocopier/faxmachine/allfaxes)
 var/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
 GLOBAL_LIST_EMPTY(alldepartments)
 

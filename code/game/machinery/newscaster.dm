@@ -118,7 +118,7 @@
 
 var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
 
-var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
+GLOBAL_LIST_EMPTY(obj/machinery/newscaster/allCasters) //Global list that will contain reference to all newscasters in existence.
 
 /obj/machinery/newscaster
 	name = "newscaster"

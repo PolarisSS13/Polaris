@@ -20,7 +20,7 @@
 GLOBAL_LIST_EMPTY(req_console_assistance)
 GLOBAL_LIST_EMPTY(req_console_supplies)
 GLOBAL_LIST_EMPTY(req_console_information)
-var/list/obj/machinery/requests_console/allConsoles = list()
+GLOBAL_LIST_EMPTY(obj/machinery/requests_console/allConsoles)
 
 /obj/machinery/requests_console
 	name = "requests console"

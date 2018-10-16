@@ -1,7 +1,7 @@
 #define MESSAGE_SERVER_SPAM_REJECT 1
 #define MESSAGE_SERVER_DEFAULT_SPAM_LIMIT 10
 
-var/global/list/obj/machinery/message_server/message_servers = list()
+GLOBAL_LIST_EMPTY(obj/machinery/message_server/message_servers)
 
 /datum/data_pda_msg
 	var/recipient = "Unspecified" //name of the person
