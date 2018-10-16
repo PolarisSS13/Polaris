@@ -2,9 +2,9 @@
 // Variables to not even show in the list.
 // step_* and bound_* are here because they literally break the game and do nothing else.
 // parent_type is here because it's pointless to show in VV.
-/var/list/view_variables_hide_vars = list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size")
+GLOBAL_LIST_INIT(view_variables_hide_vars, list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "parent_type", "step_x", "step_y", "step_size"))
 // Variables not to expand the lists of. Vars is pointless to expand, and overlays/underlays cannot be expanded.
-/var/list/view_variables_dont_expand = list("overlays", "underlays", "vars")
+GLOBAL_LIST_INIT(view_variables_dont_expand, list("overlays", "underlays", "vars"))
 
 /client/proc/debug_variables(datum/D in world)
 	set category = "Debug"

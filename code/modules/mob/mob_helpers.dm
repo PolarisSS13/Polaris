@@ -308,7 +308,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 //converts intent-strings into numbers and back
-var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
+GLOBAL_LIST_INIT(intents, list(I_HELP,I_DISARM,I_GRAB,I_HURT))
 /proc/intent_numeric(argument)
 	if(istext(argument))
 		switch(argument)

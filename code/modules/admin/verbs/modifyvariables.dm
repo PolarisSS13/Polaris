@@ -4,9 +4,9 @@ var/list/forbidden_varedit_object_types = list(
 										/datum/feedback_variable			//Prevents people messing with feedback gathering,
 									)
 
-var/list/VVlocked = list("vars", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "bound_x", "bound_y", "step_x", "step_y", "force_ending", "queued_priority")
-var/list/VVicon_edit_lock = list("icon", "icon_state", "overlays", "underlays")
-var/list/VVckey_edit = list("key", "ckey")
+GLOBAL_LIST_INIT(VVlocked, list("vars", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "bound_x", "bound_y", "step_x", "step_y", "force_ending", "queued_priority"))
+GLOBAL_LIST_INIT(VVicon_edit_lock, list("icon", "icon_state", "overlays", "underlays"))
+GLOBAL_LIST_INIT(VVckey_edit, list("key", "ckey"))
 
 /*
 /client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)
