@@ -229,16 +229,18 @@
 			else
 				to_chat(usr, "\The [src] does not have anything installed.")
 			return
+
+	if(istype(W, /obj/item/weapon/reagent_containers))
+		visible_message(usr,"<span class='notice'>You fill the tank on \the [src].</span>","[usr] fills the tank on \the [src].")
+		W.reagents.trans_to_obj(src, max_fuel)
+
 	else
 		to_chat(usr, "\The [src] maintenance panel is not open. Dummy.")
 		return
 
-	if(istype(W, /obj/item/weapon/reagent_containers)
-		visible_message(usr,"<span class='notice'>You fill the tank on \the [src].</span>","[usr] fills the tank on \the [src].")
-		W.reagents.trans_to_obj(src, max_fuel)
+
 
 /obj/item/weapon/pickaxe/heavydutydrill/proc/update_stats() //This is supposed to update the values after you put things in and out.
-	..()
 	for(var/obj/item/drillparts/X in drill_bit)
 		active_digspeed = X.dullness
 	for(var/obj/item/drillparts/X in engine)
