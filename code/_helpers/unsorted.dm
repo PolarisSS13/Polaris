@@ -519,6 +519,14 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		return "[round((powerused * 0.000001),0.001)] MW"
 	return "[round((powerused * 0.000000001),0.0001)] GW"
 
+/proc/get_mob_by_ckey(key)
+	if(!key)
+		return
+	var/list/mobs = sortmobs()
+	for(var/mob/M in mobs)
+		if(M.ckey == key)
+			return M
+
 //Forces a variable to be posative
 /proc/modulus(var/M)
 	if(M >= 0)
@@ -1066,6 +1074,45 @@ var/global/list/common_tools = list(
 		return 1
 	return 0
 
+/proc/iswrench(O)
+	if(istype(O, /obj/item/weapon/wrench))
+		return 1
+	return 0
+
+/proc/iswelder(O)
+	if(istype(O, /obj/item/weapon/weldingtool))
+		return 1
+	return 0
+
+/proc/iscoil(O)
+	if(istype(O, /obj/item/stack/cable_coil))
+		return 1
+	return 0
+
+/proc/iswirecutter(O)
+	if(istype(O, /obj/item/weapon/wirecutters))
+		return 1
+	return 0
+
+/proc/isscrewdriver(O)
+	if(istype(O, /obj/item/weapon/screwdriver))
+		return 1
+	return 0
+
+/proc/ismultitool(O)
+	if(istype(O, /obj/item/device/multitool))
+		return 1
+	return 0
+
+/proc/iscrowbar(O)
+	if(istype(O, /obj/item/weapon/crowbar))
+		return 1
+	return 0
+
+/proc/iswire(O)
+	if(istype(O, /obj/item/stack/cable_coil))
+		return 1
+	return 0
 
 /proc/is_wire_tool(obj/item/I)
 	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())

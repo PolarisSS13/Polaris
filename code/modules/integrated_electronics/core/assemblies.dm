@@ -52,7 +52,6 @@
 /obj/item/device/electronic_assembly/proc/resolve_nano_host()
 	return src
 
-
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	if(!CanInteract(user, physical_state))
 		return 0
