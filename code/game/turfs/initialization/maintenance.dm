@@ -22,7 +22,7 @@
 	if(prob(25))	// Keep in mind that only "corners" get any sort of web
 		attempt_web(T, cardinal_turfs)
 
-var/global/list/random_junk
+GLOBAL_LIST(random_junk)
 /datum/turf_initializer/maintenance/proc/junk()
 	if(prob(25))
 		return /obj/effect/decal/cleanable/generic

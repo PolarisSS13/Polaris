@@ -1,5 +1,5 @@
-var/datum/ai_icon/default_ai_icon = new/datum/ai_icon/blue()
-var/list/datum/ai_icon/ai_icons
+GLOBAL_DATUM_INIT(default_ai_icon, /datum/ai_icon/blue, new)
+GLOBAL_LIST(datum/ai_icon/ai_icons)
 
 /datum/ai_icon
 	var/name

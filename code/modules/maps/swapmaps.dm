@@ -494,19 +494,19 @@ atom
 //     'monster.dmi'="monster",\
 //     ...
 //     'item.dmi'="item")
-var/list/swapmaps_iconcache
+GLOBAL_LIST(swapmaps_iconcache)
 
 // preferred mode; sav or text
 var/const/SWAPMAPS_SAV=0
 var/const/SWAPMAPS_TEXT=1
 var/swapmaps_mode=SWAPMAPS_SAV
 
-var/swapmaps_compiled_maxx
-var/swapmaps_compiled_maxy
-var/swapmaps_compiled_maxz
-var/swapmaps_initialized
-var/swapmaps_loaded
-var/swapmaps_byname
+var/swapmaps_compiled_maxx)
+var/swapmaps_compiled_maxy)
+var/swapmaps_compiled_maxz)
+var/swapmaps_initialized)
+var/swapmaps_loaded)
+GLOBAL_VAR(swapmaps_byname)
 
 proc/InitializeSwapMaps()
 	if(swapmaps_initialized) return

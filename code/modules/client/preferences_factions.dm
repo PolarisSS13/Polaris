@@ -13,7 +13,7 @@ GLOBAL_LIST_EMPTY(seen_religions)
 		seen_religions    |= M.client.prefs.religion*/
 	return
 
-var/global/list/citizenship_choices = list(
+GLOBAL_LIST_INIT(citizenship_choices, list(
 	"Earth",
 	"Mars",
 	"Sif",
@@ -21,9 +21,9 @@ var/global/list/citizenship_choices = list(
 	"Moghes",
 	"Meralar",
 	"Qerr'balak"
-	)
+	))
 
-var/global/list/home_system_choices = list(
+GLOBAL_LIST_INIT(home_system_choices, list(
 	"Sol",
 	"Vir",
 	"Nyx",
@@ -31,9 +31,9 @@ var/global/list/home_system_choices = list(
 	"Qerr'valis",
 	"Epsilon Ursae Minoris",
 	"Rarkajar"
-	)
+	))
 
-var/global/list/faction_choices = list(
+GLOBAL_LIST_INIT(faction_choices, list(
 	"Sol Central",
 	"Vey Med",
 	"Einstein Engines",
@@ -47,7 +47,7 @@ var/global/list/faction_choices = list(
 	"Hephaestus Industries",
 	"Morpheus Cyberkinetics",
 	"Xion Manufacturing Group"
-	)
+	))
 
 GLOBAL_LIST_EMPTY(antag_faction_choices)	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
 
