@@ -168,7 +168,7 @@ var/list/rune_animation = list(
 		list(0.125, 1),
 	)
 
-/var/list/rune_cache = list()
+GLOBAL_LIST_EMPTY(rune_cache)
 
 /proc/get_rune(rune_bits, animated = 0)
 	var/lookup = "[rune_bits]-[animated]"

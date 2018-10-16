@@ -1,4 +1,4 @@
-var/list/flooring_cache = list()
+GLOBAL_LIST_EMPTY(flooring_cache)
 
 var/image/no_ceiling_image = null
 

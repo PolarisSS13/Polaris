@@ -1,4 +1,4 @@
-var/list/overminds = list()
+GLOBAL_LIST_EMPTY(overminds)
 
 /mob/observer/blob
 	name = "Blob Overmind"

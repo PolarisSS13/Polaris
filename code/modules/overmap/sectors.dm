@@ -2,7 +2,7 @@
 //===================================================================================
 //Hook for building overmap
 //===================================================================================
-var/global/list/map_sectors = list()
+GLOBAL_LIST_EMPTY(map_sectors)
 
 /hook/startup/proc/build_map()
 	if(!config.use_overmap)

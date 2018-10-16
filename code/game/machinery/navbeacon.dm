@@ -1,7 +1,7 @@
 // Navigation beacon for AI robots
 // Functions as a transponder: looks for incoming signal matching
 
-var/global/list/navbeacons = list()	// no I don't like putting this in, but it will do for now
+GLOBAL_LIST_EMPTY(navbeacons)	// no I don't like putting this in, but it will do for now
 
 /obj/machinery/navbeacon
 	icon = 'icons/obj/objects.dmi'

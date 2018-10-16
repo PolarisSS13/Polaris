@@ -13,9 +13,9 @@
 
 // Globals
 /var/lighting_overlays_initialised = FALSE
-/var/list/lighting_update_lights    = list()    // List of lighting sources  queued for update.
-/var/list/lighting_update_corners   = list()    // List of lighting corners  queued for update.
-/var/list/lighting_update_overlays  = list()    // List of lighting overlays queued for update.
+GLOBAL_LIST_EMPTY(lighting_update_lights)    // List of lighting sources  queued for update.
+GLOBAL_LIST_EMPTY(lighting_update_corners)    // List of lighting corners  queued for update.
+GLOBAL_LIST_EMPTY(lighting_update_overlays)    // List of lighting overlays queued for update.
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"

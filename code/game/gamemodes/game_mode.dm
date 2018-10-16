@@ -1,5 +1,5 @@
 var/global/antag_add_failed // Used in antag type voting.
-var/global/list/additional_antag_types = list()
+GLOBAL_LIST_EMPTY(additional_antag_types)
 
 /datum/game_mode
 	var/name = "invalid"

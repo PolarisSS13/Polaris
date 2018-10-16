@@ -2,7 +2,7 @@
 	TODO README
 */
 
-var/list/fusion_cores = list()
+GLOBAL_LIST_EMPTY(fusion_cores)
 
 #define MAX_FIELD_STR 1000
 #define MIN_FIELD_STR 1

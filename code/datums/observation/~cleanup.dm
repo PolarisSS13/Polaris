@@ -1,6 +1,6 @@
-var/list/global_listen_count = list()
-var/list/event_sources_count = list()
-var/list/event_listen_count = list()
+GLOBAL_LIST_EMPTY(global_listen_count)
+GLOBAL_LIST_EMPTY(event_sources_count)
+GLOBAL_LIST_EMPTY(event_listen_count)
 
 /decl/observ/destroyed/raise_event()
 	. = ..()

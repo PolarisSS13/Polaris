@@ -1,7 +1,7 @@
 // These are objects that destroy themselves and add themselves to the
 // decal list of the floor under them. Use them rather than distinct icon_states
 // when mapping in interesting floor designs.
-var/list/floor_decals = list()
+GLOBAL_LIST_EMPTY(floor_decals)
 
 /obj/effect/floor_decal
 	name = "floor decal"

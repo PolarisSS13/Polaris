@@ -1,4 +1,4 @@
-var/global/list/total_extraction_beacons = list()
+GLOBAL_LIST_EMPTY(total_extraction_beacons)
 
 /obj/item/extraction_pack
 	name = "fulton extraction pack"

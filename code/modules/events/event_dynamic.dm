@@ -20,7 +20,7 @@
 			sleep(2400)
 			*/
 
-var/list/event_last_fired = list()
+GLOBAL_LIST_EMPTY(event_last_fired)
 
 //Always triggers an event when called, dynamically chooses events based on job population
 /proc/spawn_dynamic_event()

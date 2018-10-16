@@ -28,9 +28,9 @@
 #define ANTAG_SET_APPEARANCE   1024 // Causes antagonists to use an appearance modifier on spawn.
 
 // Globals.
-var/global/list/all_antag_types = list()
-var/global/list/all_antag_spawnpoints = list()
-var/global/list/antag_names_to_ids = list()
+GLOBAL_LIST_EMPTY(all_antag_types)
+GLOBAL_LIST_EMPTY(all_antag_spawnpoints)
+GLOBAL_LIST_EMPTY(antag_names_to_ids)
 
 // Global procs.
 /proc/get_antag_data(var/antag_type)

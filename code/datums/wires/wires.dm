@@ -5,7 +5,7 @@
 
 #define MAX_FLAG 65535
 
-var/list/same_wires = list()
+GLOBAL_LIST_EMPTY(same_wires)
 // 14 colours, if you're adding more than 14 wires then add more colours here
 var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink", "black", "yellow")
 

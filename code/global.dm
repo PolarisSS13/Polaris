@@ -5,16 +5,16 @@
 
 // Items that ask to be called every cycle.
 var/global/datum/datacore/data_core = null
-var/global/list/all_areas                = list()
-var/global/list/machines                 = list()	// ALL Machines, wether processing or not.
-var/global/list/processing_machines      = list()	// TODO - Move into SSmachines
-var/global/list/processing_objects       = list()
-var/global/list/processing_power_items   = list()	// TODO - Move into SSmachines
-var/global/list/active_diseases          = list()
-var/global/list/hud_icon_reference       = list()
+GLOBAL_LIST_EMPTY(all_areas)
+GLOBAL_LIST_EMPTY(machines)	// ALL Machines, wether processing or not.
+GLOBAL_LIST_EMPTY(processing_machines)	// TODO - Move into SSmachines
+GLOBAL_LIST_EMPTY(processing_objects)
+GLOBAL_LIST_EMPTY(processing_power_items)	// TODO - Move into SSmachines
+GLOBAL_LIST_EMPTY(active_diseases)
+GLOBAL_LIST_EMPTY(hud_icon_reference)
 
 
-var/global/list/global_mutations  = list() // List of hidden mutation things.
+GLOBAL_LIST_EMPTY(global_mutations) // List of hidden mutation things.
 
 var/global/datum/universal_state/universe = new
 
@@ -47,37 +47,37 @@ var/secret_force_mode = "secret"   // if this is anything but "secret", the secr
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
-var/list/jobMax        = list()
-var/list/bombers       = list()
-var/list/admin_log     = list()
-var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
-var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
-var/list/reg_dna       = list()
+GLOBAL_LIST_EMPTY(jobMax)
+GLOBAL_LIST_EMPTY(bombers)
+GLOBAL_LIST_EMPTY(admin_log)
+GLOBAL_LIST_EMPTY(lastsignalers) // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
+GLOBAL_LIST_EMPTY(lawchanges) // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
+GLOBAL_LIST_EMPTY(reg_dna)
 
 var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
-var/list/monkeystart     = list()
-var/list/wizardstart     = list()
-var/list/newplayer_start = list()
+GLOBAL_LIST_EMPTY(monkeystart)
+GLOBAL_LIST_EMPTY(wizardstart)
+GLOBAL_LIST_EMPTY(newplayer_start)
 
 //Spawnpoints.
-var/list/latejoin          = list()
-var/list/latejoin_gateway  = list()
-var/list/latejoin_elevator = list()
-var/list/latejoin_cryo     = list()
-var/list/latejoin_cyborg   = list()
+GLOBAL_LIST_EMPTY(latejoin)
+GLOBAL_LIST_EMPTY(latejoin_gateway)
+GLOBAL_LIST_EMPTY(latejoin_elevator)
+GLOBAL_LIST_EMPTY(latejoin_cryo)
+GLOBAL_LIST_EMPTY(latejoin_cyborg)
 
-var/list/prisonwarp         = list() // Prisoners go to these
-var/list/holdingfacility    = list() // Captured people go here
-var/list/xeno_spawn         = list() // Aliens spawn at at these.
-var/list/tdome1             = list()
-var/list/tdome2             = list()
-var/list/tdomeobserve       = list()
-var/list/tdomeadmin         = list()
-var/list/prisonsecuritywarp = list() // Prison security goes to these.
-var/list/prisonwarped       = list() // List of players already warped.
-var/list/blobstart          = list()
-var/list/ninjastart         = list()
+GLOBAL_LIST_EMPTY(prisonwarp) // Prisoners go to these
+GLOBAL_LIST_EMPTY(holdingfacility) // Captured people go here
+GLOBAL_LIST_EMPTY(xeno_spawn) // Aliens spawn at at these.
+GLOBAL_LIST_EMPTY(tdome1)
+GLOBAL_LIST_EMPTY(tdome2)
+GLOBAL_LIST_EMPTY(tdomeobserve)
+GLOBAL_LIST_EMPTY(tdomeadmin)
+GLOBAL_LIST_EMPTY(prisonsecuritywarp) // Prison security goes to these.
+GLOBAL_LIST_EMPTY(prisonwarped) // List of players already warped.
+GLOBAL_LIST_EMPTY(blobstart)
+GLOBAL_LIST_EMPTY(ninjastart)
 
 var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
 var/list/cardinalz   = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
@@ -93,12 +93,12 @@ var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 var/datum/configuration/config      = null
 var/datum/sun/sun                   = null
 
-var/list/combatlog = list()
-var/list/IClog     = list()
-var/list/OOClog    = list()
-var/list/adminlog  = list()
+GLOBAL_LIST_EMPTY(combatlog)
+GLOBAL_LIST_EMPTY(IClog)
+GLOBAL_LIST_EMPTY(OOClog)
+GLOBAL_LIST_EMPTY(adminlog)
 
-var/list/powernets = list()	// TODO - Move into SSmachines
+GLOBAL_LIST_EMPTY(powernets)	// TODO - Move into SSmachines
 
 var/Debug2 = 0
 var/datum/debug/debugobj
@@ -113,7 +113,7 @@ var/datum/event_manager/event_manager	= new() // Event Manager, the manager for 
 var/datum/game_master/game_master = new() // Game Master, an AI for choosing events.
 var/datum/metric/metric = new() // Metric datum, used to keep track of the round.
 
-var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
+GLOBAL_LIST_EMPTY(awaydestinations) // Away missions. A list of landmarks that the warpgate can take you to.
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
@@ -136,7 +136,7 @@ var/DBConnection/dbcon     = new() // Feedback    database (New database)
 var/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see the files in the SQL folder for information on what goes where.
 
 // Reference list for disposal sort junctions. Filled up by sorting junction's New()
-/var/list/tagger_locations = list()
+GLOBAL_LIST_EMPTY(tagger_locations)
 
 // Added for Xenoarchaeology, might be useful for other stuff.
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
@@ -184,4 +184,4 @@ var/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
 
 //Keyed list for caching icons so you don't need to make them for records, IDs, etc all separately.
 //Could be useful for AI impersonation or something at some point?
-var/static/list/cached_character_icons = list()
+GLOBAL_LIST_EMPTY(cached_character_icons)

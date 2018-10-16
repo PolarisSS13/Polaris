@@ -1,4 +1,4 @@
-var/global/list/active_radio_jammers = list()
+GLOBAL_LIST_EMPTY(active_radio_jammers)
 
 /proc/is_jammed(var/obj/radio)
 	var/turf/Tr = get_turf(radio)

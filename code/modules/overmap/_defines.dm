@@ -4,7 +4,7 @@
 #define OVERMAP_EDGE 7
 
 //list used to track which zlevels are being 'moved' by the proc below
-var/list/moving_levels = list()
+GLOBAL_LIST_EMPTY(moving_levels)
 //Proc to 'move' stars in spess
 //yes it looks ugly, but it should only fire when state actually change.
 //null direction stops movement
@@ -36,7 +36,7 @@ proc/toggle_move_stars(zlevel, direction)
 
 
 //list used to cache empty zlevels to avoid nedless map bloat
-var/list/cached_space = list()
+GLOBAL_LIST_EMPTY(cached_space)
 
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	var/obj/effect/map/M = map_sectors["[T.z]"]

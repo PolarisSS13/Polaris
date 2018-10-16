@@ -1,4 +1,4 @@
-var/list/floor_light_cache = list()
+GLOBAL_LIST_EMPTY(floor_light_cache)
 
 /obj/machinery/floor_light
 	name = "floor light"

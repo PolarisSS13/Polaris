@@ -1,5 +1,5 @@
 
-/var/list/gender_datums = list()
+GLOBAL_LIST_EMPTY(gender_datums)
 
 /hook/startup/proc/populate_gender_datum_list()
 	for(var/type in typesof(/datum/gender))

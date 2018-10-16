@@ -1,4 +1,4 @@
-var/list/blob_nodes = list()
+GLOBAL_LIST_EMPTY(blob_nodes)
 
 /obj/structure/blob/node
 	name = "blob node"

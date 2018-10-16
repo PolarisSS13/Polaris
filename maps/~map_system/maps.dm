@@ -1,6 +1,6 @@
 
 var/datum/map/using_map = new USING_MAP_DATUM
-var/list/all_maps = list()
+GLOBAL_LIST_EMPTY(all_maps)
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)

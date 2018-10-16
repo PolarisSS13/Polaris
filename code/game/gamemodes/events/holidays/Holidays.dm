@@ -1,5 +1,5 @@
 //Uncommenting ALLOW_HOLIDAYS in config.txt will enable Holidays
-var/global/list/Holiday = list() //Holidays are lists now, so we can have more than one holiday at the same time (hey, you never know).
+GLOBAL_LIST_EMPTY(Holiday) //Holidays are lists now, so we can have more than one holiday at the same time (hey, you never know).
 
 //Just thinking ahead! Here's the foundations to a more robust Holiday event system.
 //It's easy as hell to add stuff. Just set Holiday to something using the switch (or something else)

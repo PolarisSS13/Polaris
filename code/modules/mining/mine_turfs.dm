@@ -1,4 +1,4 @@
-var/list/mining_overlay_cache = list()
+GLOBAL_LIST_EMPTY(mining_overlay_cache)
 
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral

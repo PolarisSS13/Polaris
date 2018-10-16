@@ -1,6 +1,6 @@
 var/datum/controller/vote/vote = new()
 
-var/global/list/round_voters = list() // Keeps track of the individuals voting for a given round, for use in forcedrafting.
+GLOBAL_LIST_EMPTY(round_voters) // Keeps track of the individuals voting for a given round, for use in forcedrafting.
 
 #define VOTE_RESTART "restart"
 #define VOTE_GAMEMODE "gamemode"

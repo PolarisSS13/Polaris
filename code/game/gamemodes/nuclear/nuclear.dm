@@ -2,7 +2,7 @@
 	MERCENARY ROUNDTYPE
 */
 
-var/list/nuke_disks = list()
+GLOBAL_LIST_EMPTY(nuke_disks)
 
 /datum/game_mode/nuclear
 	name = "Mercenary"

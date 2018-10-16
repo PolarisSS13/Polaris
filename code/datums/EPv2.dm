@@ -30,7 +30,7 @@ The receiving atom will receive the origin atom (the atom that sent the message)
 It's suggested to start with an if or switch statement for the message, to determine what to do.
 */
 
-var/global/list/all_exonet_connections = list()
+GLOBAL_LIST_EMPTY(all_exonet_connections)
 
 /datum/exonet_protocol
 	var/address = "" //Resembles IPv6, but with only five 'groups', e.g. XXXX:XXXX:XXXX:XXXX:XXXX

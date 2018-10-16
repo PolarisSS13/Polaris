@@ -3,11 +3,11 @@
 	(2012)
  */
 
-var/list/config_stream = list()
-var/list/servers = list()
-var/list/servernames = list()
-var/list/adminfiles = list()
-var/list/adminkeys = list()
+GLOBAL_LIST_EMPTY(config_stream)
+GLOBAL_LIST_EMPTY(servers)
+GLOBAL_LIST_EMPTY(servernames)
+GLOBAL_LIST_EMPTY(adminfiles)
+GLOBAL_LIST_EMPTY(adminkeys)
 
 proc/gen_configs()
 

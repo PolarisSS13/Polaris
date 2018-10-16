@@ -116,7 +116,7 @@
 	for(var/atom/movable/AM in contents)
 		AM.water_act(amount)
 
-var/list/shoreline_icon_cache = list()
+GLOBAL_LIST_EMPTY(shoreline_icon_cache)
 
 /turf/simulated/floor/water/shoreline
 	name = "shoreline"

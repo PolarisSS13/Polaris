@@ -1,4 +1,4 @@
-var/list/gyrotrons = list()
+GLOBAL_LIST_EMPTY(gyrotrons)
 
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"

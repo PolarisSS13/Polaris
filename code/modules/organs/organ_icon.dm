@@ -1,4 +1,4 @@
-var/global/list/limb_icon_cache = list()
+GLOBAL_LIST_EMPTY(limb_icon_cache)
 
 /obj/item/organ/external/set_dir()
 	return

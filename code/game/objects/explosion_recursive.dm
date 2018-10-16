@@ -8,7 +8,7 @@
 
 
 
-var/list/explosion_turfs = list()
+GLOBAL_LIST_EMPTY(explosion_turfs)
 
 var/explosion_in_progress = 0
 

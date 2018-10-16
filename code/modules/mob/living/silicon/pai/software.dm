@@ -17,8 +17,8 @@ var/list/pai_emotions = list(
 	)
 
 
-var/global/list/pai_software_by_key = list()
-var/global/list/default_pai_software = list()
+GLOBAL_LIST_EMPTY(pai_software_by_key)
+GLOBAL_LIST_EMPTY(default_pai_software)
 /hook/startup/proc/populate_pai_software_list()
 	var/r = 1 // I would use ., but it'd sacrifice runtime detection
 	for(var/type in typesof(/datum/pai_software) - /datum/pai_software)

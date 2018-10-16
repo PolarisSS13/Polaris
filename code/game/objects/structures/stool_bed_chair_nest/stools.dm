@@ -1,5 +1,5 @@
 //Todo: add leather and cloth for arbitrary coloured stools.
-var/global/list/stool_cache = list() //haha stool
+GLOBAL_LIST_EMPTY(stool_cache) //haha stool
 
 /obj/item/weapon/stool
 	name = "stool"

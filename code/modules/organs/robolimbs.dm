@@ -1,6 +1,6 @@
-var/list/all_robolimbs = list()
-var/list/robolimb_data = list()
-var/list/chargen_robolimbs = list()
+GLOBAL_LIST_EMPTY(all_robolimbs)
+GLOBAL_LIST_EMPTY(robolimb_data)
+GLOBAL_LIST_EMPTY(chargen_robolimbs)
 var/datum/robolimb/basic_robolimb
 var/const/standard_monitor_styles = "blank=ipc_blank;\
 	pink=ipc_pink;\

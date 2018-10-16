@@ -1,6 +1,6 @@
 #define WHITELISTFILE "data/whitelist.txt"
 
-var/list/whitelist = list()
+GLOBAL_LIST_EMPTY(whitelist)
 
 /hook/startup/proc/loadWhitelist()
 	if(config.usewhitelist)
@@ -16,7 +16,7 @@ var/list/whitelist = list()
 		return 0
 	return ("[M.ckey]" in whitelist)
 
-/var/list/alien_whitelist = list()
+GLOBAL_LIST_EMPTY(alien_whitelist)
 
 /hook/startup/proc/loadAlienWhitelist()
 	if(config.usealienwhitelist)

@@ -1,6 +1,6 @@
 #define SAVE_RESET -1
 
-var/list/preferences_datums = list()
+GLOBAL_LIST_EMPTY(preferences_datums)
 
 datum/preferences
 	//doohickeys for savefiles

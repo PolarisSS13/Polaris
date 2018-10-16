@@ -1,29 +1,29 @@
-var/list/clients = list()							//list of all clients
-var/list/admins = list()							//list of all clients whom are admins
-var/list/directory = list()							//list of all ckeys with associated client
+GLOBAL_LIST_EMPTY(clients)							//list of all clients
+GLOBAL_LIST_EMPTY(admins)							//list of all clients whom are admins
+GLOBAL_LIST_EMPTY(directory)							//list of all ckeys with associated client
 
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
 
-var/global/list/player_list = list()				//List of all mobs **with clients attached**. Excludes /mob/new_player
-var/global/list/mob_list = list()					//List of all mobs, including clientless
-var/global/list/human_mob_list = list()				//List of all human mobs and sub-types, including clientless
-var/global/list/silicon_mob_list = list()			//List of all silicon mobs, including clientless
-var/global/list/ai_list = list()					//List of all AIs, including clientless
-var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
-var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
-var/global/list/listening_objects = list()			//List of all objects which care about receiving messages (communicators, radios, etc)
+GLOBAL_LIST_EMPTY(player_list)				//List of all mobs **with clients attached**. Excludes /mob/new_player
+GLOBAL_LIST_EMPTY(mob_list)					//List of all mobs, including clientless
+GLOBAL_LIST_EMPTY(human_mob_list)				//List of all human mobs and sub-types, including clientless
+GLOBAL_LIST_EMPTY(silicon_mob_list)			//List of all silicon mobs, including clientless
+GLOBAL_LIST_EMPTY(ai_list)					//List of all AIs, including clientless
+GLOBAL_LIST_EMPTY(living_mob_list)			//List of all alive mobs, including clientless. Excludes /mob/new_player
+GLOBAL_LIST_EMPTY(dead_mob_list)				//List of all dead mobs, including clientless. Excludes /mob/new_player
+GLOBAL_LIST_EMPTY(listening_objects)			//List of all objects which care about receiving messages (communicators, radios, etc)
 
-var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
+GLOBAL_LIST_EMPTY(cable_list)					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
 var/global/list/chemical_reagents_list				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
-var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
-var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
+GLOBAL_LIST_EMPTY(landmarks_list)				//list of all landmarks created
+GLOBAL_LIST_EMPTY(surgery_steps)				//list of all surgery steps  |BS12
+GLOBAL_LIST_EMPTY(side_effects)				//list of all medical sideeffects types by thier names |BS12
+GLOBAL_LIST_EMPTY(mechas_list)				//list of all mechs. Used by hostile mobs target tracking.
+GLOBAL_LIST_EMPTY(joblist)					//list of all jobstypes, minus borg and AI
 
-var/global/list/turfs = list()						//list of all turfs
+GLOBAL_LIST_EMPTY(turfs)						//list of all turfs
 
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
@@ -38,21 +38,21 @@ var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playa
 var/list/mannequins_
 
 // Posters
-var/global/list/poster_designs = list()
+GLOBAL_LIST_EMPTY(poster_designs)
 
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
 
 //Preferences stuff
 	//Hairstyles
-var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
-var/global/list/hair_styles_male_list = list()
-var/global/list/hair_styles_female_list = list()
-var/global/list/facial_hair_styles_list = list()	//stores /datum/sprite_accessory/facial_hair indexed by name
-var/global/list/facial_hair_styles_male_list = list()
-var/global/list/facial_hair_styles_female_list = list()
-var/global/list/skin_styles_female_list = list()		//unused
-var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
+GLOBAL_LIST_EMPTY(hair_styles_list)			//stores /datum/sprite_accessory/hair indexed by name
+GLOBAL_LIST_EMPTY(hair_styles_male_list)
+GLOBAL_LIST_EMPTY(hair_styles_female_list)
+GLOBAL_LIST_EMPTY(facial_hair_styles_list)	//stores /datum/sprite_accessory/facial_hair indexed by name
+GLOBAL_LIST_EMPTY(facial_hair_styles_male_list)
+GLOBAL_LIST_EMPTY(facial_hair_styles_female_list)
+GLOBAL_LIST_EMPTY(skin_styles_female_list)		//unused
+GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
@@ -68,9 +68,9 @@ var/datum/visualnet/cult/cultnet = new()
 
 // Runes
 var/global/list/rune_list = new()
-var/global/list/escape_list = list()
-var/global/list/endgame_exits = list()
-var/global/list/endgame_safespawns = list()
+GLOBAL_LIST_EMPTY(escape_list)
+GLOBAL_LIST_EMPTY(endgame_exits)
+GLOBAL_LIST_EMPTY(endgame_safespawns)
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 

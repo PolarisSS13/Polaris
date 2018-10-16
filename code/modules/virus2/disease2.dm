@@ -201,7 +201,7 @@
 	return res
 
 
-var/global/list/virusDB = list()
+GLOBAL_LIST_EMPTY(virusDB)
 
 /datum/disease2/disease/proc/name()
 	.= "stamm #[add_zero("[uniqueID]", 4)]"

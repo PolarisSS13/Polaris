@@ -27,7 +27,7 @@
 
 
 var/list/image/hazard_overlays
-var/list/tape_roll_applications = list()
+GLOBAL_LIST_EMPTY(tape_roll_applications)
 
 /obj/item/tape
 	name = "tape"

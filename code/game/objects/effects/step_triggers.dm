@@ -140,7 +140,7 @@
 		A.forceMove(get_turf(the_landmark))
 
 
-var/global/list/tele_landmarks = list() // Terrible, but the alternative is looping through world.
+GLOBAL_LIST_EMPTY(tele_landmarks) // Terrible, but the alternative is looping through world.
 
 /obj/effect/landmark/teleport_mark
 	var/landmark_id = null

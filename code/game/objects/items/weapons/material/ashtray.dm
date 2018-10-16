@@ -1,4 +1,4 @@
-var/global/list/ashtray_cache = list()
+GLOBAL_LIST_EMPTY(ashtray_cache)
 
 /obj/item/weapon/material/ashtray
 	name = "ashtray"

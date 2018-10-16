@@ -71,8 +71,8 @@ var/global/datum/money_account/station_account
 var/global/list/datum/money_account/department_accounts = list()
 var/global/num_financial_terminals = 1
 var/global/next_account_number = 0
-var/global/list/all_money_accounts = list()
-var/global/list/transaction_devices = list()
+GLOBAL_LIST_EMPTY(all_money_accounts)
+GLOBAL_LIST_EMPTY(transaction_devices)
 var/global/economy_init = 0
 
 /proc/setup_economy()
