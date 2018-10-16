@@ -2,7 +2,7 @@
 // Recipies for Pipe Dispenser and (someday) the RPD
 //
 
-var/global/list/atmos_pipe_recipes = null
+GLOBAL_LIST_EMPTY(atmos_pipe_recipes)
 
 /hook/startup/proc/init_pipe_recipes()
 	global.atmos_pipe_recipes = list(

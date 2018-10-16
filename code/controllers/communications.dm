@@ -125,7 +125,7 @@ var/const/EXP_FREQ = 1361
 var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
-var/list/radiochannels = list(
+GLOBAL_LIST_INIT(radiochannels, list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
 	"Command"		= COMM_FREQ,
@@ -143,7 +143,7 @@ var/list/radiochannels = list(
 	"Entertainment" = ENT_FREQ,
 	"Medical(I)"	= MED_I_FREQ,
 	"Security(I)"	= SEC_I_FREQ
-)
+))
 
 // central command channels, i.e deathsquid & response teams
 GLOBAL_LIST_INIT(CENT_FREQS, list(ERT_FREQ, DTH_FREQ))

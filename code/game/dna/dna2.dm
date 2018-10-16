@@ -44,12 +44,11 @@
 //  This is to make some of the more OP superpowers a larger PITA to activate,
 //  and to tell our new DNA datum which values to set in order to turn something
 //  on or off.
-var/global/list/dna_activity_bounds[DNA_SE_LENGTH]
+GLOBAL_LIST_INIT(dna_activity_bounds, list();dna_activity_bounds.len=DNA_SE_LENGTH)
 
 // Used to determine what each block means (admin hax and species stuff on /vg/, mostly)
-var/global/list/assigned_blocks[DNA_SE_LENGTH]
-
-var/global/list/datum/dna/gene/dna_genes[0]
+GLOBAL_LIST_INIT(assigned_blocks, list();assigned_blocks.len=DNA_SE_LENGTH)
+GLOBAL_LIST_EMPTY(datum/dna/gene/dna_genes)
 
 /////////////////
 // GENE DEFINES

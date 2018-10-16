@@ -26,7 +26,7 @@
 		return INITIALIZE_HINT_QDEL
 
 
-var/list/image/hazard_overlays
+GLOBAL_LIST_EMPTY(image/hazard_overlays)
 GLOBAL_LIST_EMPTY(tape_roll_applications)
 
 /obj/item/tape

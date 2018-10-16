@@ -6,7 +6,7 @@
 	overlay = over
 	ckey = key
 
-var/list/ai_status_emotions = list(
+GLOBAL_LIST_INIT(ai_status_emotions, list(
 	"Very Happy" 				= new /datum/ai_emotion("ai_veryhappy"),
 	"Happy" 					= new /datum/ai_emotion("ai_happy"),
 	"Neutral" 					= new /datum/ai_emotion("ai_neutral"),
@@ -28,7 +28,7 @@ var/list/ai_status_emotions = list(
 	"Heart" 					= new /datum/ai_emotion("ai_heart"),
 	"Tribunal" 					= new /datum/ai_emotion("ai_tribunal", "serithi"),
 	"Tribunal Malfunctioning"	= new /datum/ai_emotion("ai_tribunal_malf", "serithi")
-	)
+	))
 
 /proc/get_ai_emotions(var/ckey)
 	var/list/emotions = new
