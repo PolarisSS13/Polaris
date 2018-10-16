@@ -2,7 +2,7 @@
 //list(ckey = real_name,)
 //Since the ckey is used as the icon_state, the current system will only permit a single custom robot sprite per ckey.
 //While it might be possible for a ckey to use that custom sprite for several real_names, it seems rather pointless to support it. ~Mech: We found it wasn't pointless.
-var/list/robot_custom_icons
+GLOBAL_LIST(robot_custom_icons)
 
 /hook/startup/proc/load_robot_custom_sprites()
 	var/config_file = file2text("config/custom_sprites.txt")

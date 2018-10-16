@@ -1,4 +1,4 @@
-var/list/flooring_types
+GLOBAL_LIST(flooring_types)
 
 /proc/populate_flooring_types()
 	flooring_types = list()

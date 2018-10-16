@@ -257,7 +257,7 @@
 			used_environ += amount
 
 
-var/list/mob/living/forced_ambiance_list = new
+GLOBAL_LIST_EMPTY(mob/living/forced_ambiance_list)
 
 /area/Entered(A)
 	if(!istype(A,/mob/living))	return

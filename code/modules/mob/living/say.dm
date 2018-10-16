@@ -51,7 +51,7 @@ var/list/department_radio_keys = list(
 )
 
 
-var/list/channel_to_radio_key = new
+GLOBAL_LIST_EMPTY(channel_to_radio_key)
 proc/get_radio_key_from_channel(var/channel)
 	var/key = channel_to_radio_key[channel]
 	if(!key)

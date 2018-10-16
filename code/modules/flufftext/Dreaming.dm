@@ -1,5 +1,5 @@
 
-var/list/dreams = list(
+GLOBAL_LIST_INIT(dreams, list(
 	"an ID card","a bottle","a familiar face","a crewmember","a toolbox","a Security Officer","the Colony Director",
 	"voices from all around","deep space","a doctor","the engine","a traitor","an ally","darkness",
 	"light","a scientist","a monkey","a catastrophe","a loved one","a gun","warmth","freezing","the sun",
@@ -16,7 +16,7 @@ var/list/dreams = list(
 	"a Dionaea gestalt","the chapel","a distant scream","endless chittering noises","glowing eyes in the shadows","an empty glass",
 	"a disoriented Promethean","towers of plastic","a Gygax","a synthetic","a Man-Machine Interface","maintenance drones", 
 	"unintelligible writings","a Fleet ship",
-	)
+	))
 
 mob/living/carbon/proc/dream()
 	dreaming = 1

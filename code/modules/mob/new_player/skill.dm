@@ -1,8 +1,7 @@
-var/global/const
-	SKILL_NONE = 0
-	SKILL_BASIC = 1
-	SKILL_ADEPT = 2
-	SKILL_EXPERT = 3
+#define SKILL_NONE 0
+#define SKILL_BASIC 1
+#define SKILL_ADEPT 2
+#define SKILL_EXPERT 3
 
 /datum/skill/var
 	ID = "none" // ID of the skill, used in code
@@ -11,7 +10,7 @@ var/global/const
 	field = "Misc" // the field under which the skill will be listed
 	secondary = 0 // secondary skills only have two levels and cost significantly less
 
-var/global/list/SKILLS = null
+GLOBAL_LIST(SKILLS)
 GLOBAL_LIST_INIT(SKILL_ENGINEER, list("field" = "Engineering", "EVA" = SKILL_BASIC, "construction" = SKILL_ADEPT, "electrical" = SKILL_BASIC, "engines" = SKILL_ADEPT))
 GLOBAL_LIST_INIT(SKILL_ORGAN_ROBOTICIST, list("field" = "Science", "devices" = SKILL_ADEPT, "electrical" = SKILL_BASIC, "computer" = SKILL_ADEPT, "anatomy" = SKILL_BASIC))
 GLOBAL_LIST_INIT(SKILL_SECURITY_OFFICER, list("field" = "Security", "combat" = SKILL_BASIC, "weapons" = SKILL_ADEPT, "law" = SKILL_ADEPT, "forensics" = SKILL_BASIC))

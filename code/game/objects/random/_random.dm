@@ -29,8 +29,8 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
-var/list/random_junk_
-var/list/random_useful_
+GLOBAL_LIST(random_junk_)
+GLOBAL_LIST(random_useful_)
 /proc/get_random_useful_type()
 	if(!random_useful_)
 		random_useful_ = subtypesof(/obj/item/weapon/pen/crayon)
@@ -89,7 +89,7 @@ var/list/random_useful_
 //	Multi Point Spawn
 //	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
 */
-var/list/multi_point_spawns
+GLOBAL_LIST(multi_point_spawns)
 
 /obj/random_multi
 	name = "random object spawn point"

@@ -31,11 +31,11 @@ GLOBAL_LIST_INIT(research_cartridges, list(
 	/obj/item/weapon/cartridge/rd
 	))
 
-var/list/cargo_cartridges = list(
+GLOBAL_LIST_INIT(cargo_cartridges, list(
 	/obj/item/weapon/cartridge/quartermaster, // This also covers cargo-techs, apparently,
 	/obj/item/weapon/cartridge/miner,
 	/obj/item/weapon/cartridge/hop
-	)
+	))
 
 GLOBAL_LIST_INIT(civilian_cartridges, list(
 	/obj/item/weapon/cartridge/janitor,

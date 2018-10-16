@@ -1,10 +1,10 @@
-var/list/forbidden_varedit_object_types = list(
+GLOBAL_LIST_INIT(forbidden_varedit_object_types, list(
 										/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea,
 										/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering,
 										/datum/feedback_variable			//Prevents people messing with feedback gathering,
-									)
+									))
 
-GLOBAL_LIST_INIT(VVlocked, list("vars", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "bound_x", "bound_y", "step_x", "step_y", "force_ending", "queued_priority"))
+GLOBAL_LIST_INIT(VVlocked, list("forbidden_varedit_object_types", "VVlocked", "VVicon_edit_lock", "VVckey_edit", "vars", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "bound_x", "bound_y", "step_x", "step_y", "force_ending", "queued_priority"))
 GLOBAL_LIST_INIT(VVicon_edit_lock, list("icon", "icon_state", "overlays", "underlays"))
 GLOBAL_LIST_INIT(VVckey_edit, list("key", "ckey"))
 

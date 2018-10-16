@@ -29,13 +29,13 @@ GLOBAL_LIST_EMPTY(turfs)						//list of all turfs
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
 //Languages/species/whitelist.
-var/global/list/all_species[0]
-var/global/list/all_languages[0]
-var/global/list/language_keys[0]					// Table of say codes for all languages
+GLOBAL_LIST_EMPTY(all_species)
+GLOBAL_LIST_EMPTY(all_languages)
+GLOBAL_LIST_EMPTY(language_keys)					// Table of say codes for all languages
 GLOBAL_LIST_INIT(whitelisted_species, list(SPECIES_HUMAN)) // Species that require a whitelist check.
 GLOBAL_LIST_INIT(playable_species, list(SPECIES_HUMAN))    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-var/list/mannequins_
+GLOBAL_LIST_EMPTY(mannequins_)
 
 // Posters
 GLOBAL_LIST_EMPTY(poster_designs)
