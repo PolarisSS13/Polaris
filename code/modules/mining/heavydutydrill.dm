@@ -17,7 +17,7 @@
 
 	var/enginefailed = 0	//Is the engine currently stuck. If 1, it needs to be cleared.
 	var/fuel_consumed = 0	//placeholder. This is used for fuel consumption calculations.
-	var/missing_part = 0	//Ugly placeholder. 
+	var/missing_part = 0	//Ugly placeholder.
 
 	var/drill_bit = null	//The actual drill in contact with the surface.
 	var/engine = null		//This is the engine that powers the drill. Better engines are faster.
@@ -208,7 +208,7 @@
 		if(open && istype(W, /obj/item/weapon/tool/crowbar))
 			if(drill_bit || airfilter || engine)
 				var/choice = input("What component would you like to remove?") as null|anything in list(drill_bit,airfilter,engine)
-				if(!choice) 
+				if(!choice)
 					return
 				if(choice == drill_bit)
 					to_chat(usr, "You pop \the [drill_bit] out of \the [src]'s storage compartment.")
