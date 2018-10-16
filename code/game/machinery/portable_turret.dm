@@ -204,7 +204,7 @@
 			iconholder = 1
 			icon_color = "green"
 
-var/list/turret_icons
+GLOBAL_LIST(turret_icons)
 
 /obj/machinery/porta_turret/update_icon()
 	if(!turret_icons)

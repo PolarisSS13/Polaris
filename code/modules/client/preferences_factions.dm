@@ -51,13 +51,13 @@ var/global/list/faction_choices = list(
 
 GLOBAL_LIST_EMPTY(antag_faction_choices)	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
 
-var/global/list/antag_visiblity_choices = list(
+GLOBAL_LIST_INIT(antag_visiblity_choices, list(
 	"Hidden",
 	"Shared",
 	"Known"
-	)
+	))
 
-var/global/list/religion_choices = list(
+GLOBAL_LIST_INIT(religion_choices, list(
 	"Unitarianism",
 	"Hinduism",
 	"Buddhist",
@@ -65,4 +65,4 @@ var/global/list/religion_choices = list(
 	"Christianity",
 	"Agnosticism",
 	"Deism"
-	)
+	))

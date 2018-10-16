@@ -7,7 +7,7 @@
 //NOTE NOTE: Hidden var is now deprecated, whoever removed support for it should've removed the var altogether
 
 GLOBAL_LIST_INIT(all_supply_groups, list("Operations","Security","Hospitality","Engineering","Atmospherics","Medical","Reagents","Reagent Cartridges","Science","Hydroponics", "Supply", "Miscellaneous"))
-var/list/all_supply_groups = list("Atmospherics",
+GLOBAL_LIST_INIT(all_supply_groups, list("Atmospherics",
 								  "Costumes",
 								  "Engineering",
 								  "Hospitality",
@@ -23,7 +23,7 @@ var/list/all_supply_groups = list("Atmospherics",
 								  "Science",
 								  "Security",
 								  "Supplies",
-								  "Voidsuits")
+								  "Voidsuits"))
 
 /datum/supply_pack
 	var/name = null

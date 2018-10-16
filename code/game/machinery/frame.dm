@@ -1,5 +1,5 @@
-/var/global/list/construction_frame_wall
-/var/global/list/construction_frame_floor
+GLOBAL_LIST(construction_frame_wall)
+GLOBAL_LIST(construction_frame_floor)
 
 /proc/populate_frame_types()
 	//Create global frame type list if it hasn't been made already.

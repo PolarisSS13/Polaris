@@ -3,7 +3,7 @@
 	Uses the same visual objects for all players.
 */
 var/datum/global_hud/global_hud = new()
-var/list/global_huds = list(
+GLOBAL_LIST_INIT(global_huds, list(
 		global_hud.druggy,
 		global_hud.blurry,
 		global_hud.whitense,
@@ -16,7 +16,7 @@ var/list/global_huds = list(
 		global_hud.science,
 		global_hud.material,
 		global_hud.holomap
-		)
+		))
 
 /datum/hud/var/obj/screen/grab_intent
 /datum/hud/var/obj/screen/hurt_intent

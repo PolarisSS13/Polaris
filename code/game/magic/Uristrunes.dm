@@ -1,5 +1,5 @@
 
-var/list/word_to_uristrune_table = null
+GLOBAL_LIST(word_to_uristrune_table)
 
 /proc/word_to_uristrune_bit(word)
 	if(word_to_uristrune_table == null)

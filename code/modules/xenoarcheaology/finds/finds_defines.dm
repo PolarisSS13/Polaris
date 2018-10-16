@@ -1,4 +1,4 @@
-var/global/list/responsive_carriers = list(
+GLOBAL_LIST_INIT(responsive_carriers, list(
 	"carbon",
 	"potassium",
 	"hydrogen",
@@ -7,7 +7,7 @@ var/global/list/responsive_carriers = list(
 	"iron",
 	"chlorine",
 	"phosphorus",
-	"phoron")
+	"phoron"))
 
 var/global/list/finds_as_strings = list(
 	"Trace organic cells",

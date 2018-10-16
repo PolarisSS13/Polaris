@@ -1,8 +1,8 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-var/global/list/ALL_ANTIGENS = list(
+GLOBAL_LIST_INIT(ALL_ANTIGENS, list(
 		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-	)
+	))
 
 /hook/startup/proc/randomise_antigens_order()
 	ALL_ANTIGENS = shuffle(ALL_ANTIGENS)

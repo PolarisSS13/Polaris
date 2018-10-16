@@ -45,11 +45,11 @@ var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
 
 
-var/list/assistant_occupations = list(
-)
+GLOBAL_LIST_INIT(assistant_occupations, list(
+))
 
 
-var/list/command_positions = list(
+GLOBAL_LIST_INIT(command_positions, list(
 	"Colony Director",
 	"Head of Personnel",
 	"Head of Security",
@@ -57,24 +57,24 @@ var/list/command_positions = list(
 	"Research Director",
 	"Chief Medical Officer",
 	"Command Secretary"
-)
+))
 
 
-var/list/engineering_positions = list(
+GLOBAL_LIST_INIT(engineering_positions, list(
 	"Chief Engineer",
 	"Station Engineer",
 	"Atmospheric Technician",
-)
+))
 
 
-var/list/medical_positions = list(
+GLOBAL_LIST_INIT(medical_positions, list(
 	"Chief Medical Officer",
 	"Medical Doctor",
 	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
 	"Paramedic"
-)
+))
 
 
 var/list/science_positions = list(
@@ -86,13 +86,13 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
-var/list/cargo_positions = list(
+GLOBAL_LIST_INIT(cargo_positions, list(
 	"Quartermaster",
 	"Cargo Technician",
 	"Shaft Miner"
-)
+))
 
-var/list/civilian_positions = list(
+GLOBAL_LIST_INIT(civilian_positions, list(
 	"Head of Personnel",
 	"Bartender",
 	"Botanist",
@@ -102,29 +102,29 @@ var/list/civilian_positions = list(
 	"Lawyer",
 	"Chaplain",
 	"Assistant"
-)
+))
 
 
-var/list/security_positions = list(
+GLOBAL_LIST_INIT(security_positions, list(
 	"Head of Security",
 	"Warden",
 	"Detective",
 	"Security Officer"
-)
+))
 
 
-var/list/planet_positions = list(
+GLOBAL_LIST_INIT(planet_positions, list(
 	"Explorer",
 	"Pilot",
 	"Search and Rescue"
-)
+))
 
 
-var/list/nonhuman_positions = list(
+GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"AI",
 	"Cyborg",
 	"pAI"
-)
+))
 
 
 /proc/guest_jobbans(var/job)

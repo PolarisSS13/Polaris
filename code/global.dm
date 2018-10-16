@@ -143,11 +143,11 @@ GLOBAL_LIST_INIT(alphabet_uppercase, list("A","B","C","D","E","F","G","H","I","J
 
 
 // Used by robots and robot preferences.
-var/list/robot_module_types = list(
+GLOBAL_LIST_INIT(robot_module_types, list(
 	"Standard", "Engineering", "Surgeon",  "Crisis",
 	"Miner",    "Janitor",     "Service",      "Clerical", "Security",
 	"Research"
-)
+))
 
 // Some scary sounds.
 var/static/list/scarySounds = list(

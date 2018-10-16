@@ -1,6 +1,6 @@
-var/list/grass_types = list(
+GLOBAL_LIST_INIT(grass_types, list(
 
-)
+))
 
 /turf/simulated/floor/outdoors/grass
 	name = "grass"

@@ -66,7 +66,7 @@
 		if("Supreme Commander")
 			return get_all_centcom_access()
 
-/var/list/datum/access/priv_all_access_datums
+GLOBAL_LIST(datum/access/priv_all_access_datums)
 /proc/get_all_access_datums()
 	if(!priv_all_access_datums)
 		priv_all_access_datums = init_subtypes(/datum/access)
@@ -74,7 +74,7 @@
 
 	return priv_all_access_datums
 
-/var/list/datum/access/priv_all_access_datums_id
+GLOBAL_LIST(datum/access/priv_all_access_datums_id)
 /proc/get_all_access_datums_by_id()
 	if(!priv_all_access_datums_id)
 		priv_all_access_datums_id = list()
@@ -83,7 +83,7 @@
 
 	return priv_all_access_datums_id
 
-/var/list/datum/access/priv_all_access_datums_region
+GLOBAL_LIST(datum/access/priv_all_access_datums_region)
 /proc/get_all_access_datums_by_region()
 	if(!priv_all_access_datums_region)
 		priv_all_access_datums_region = list()
@@ -101,42 +101,42 @@
 			L += A.id
 	return L
 
-/var/list/priv_all_access
+GLOBAL_LIST(priv_all_access)
 /proc/get_all_accesses()
 	if(!priv_all_access)
 		priv_all_access = get_access_ids()
 
 	return priv_all_access
 
-/var/list/priv_station_access
+GLOBAL_LIST(priv_station_access)
 /proc/get_all_station_access()
 	if(!priv_station_access)
 		priv_station_access = get_access_ids(ACCESS_TYPE_STATION)
 
 	return priv_station_access
 
-/var/list/priv_centcom_access
+GLOBAL_LIST(priv_centcom_access)
 /proc/get_all_centcom_access()
 	if(!priv_centcom_access)
 		priv_centcom_access = get_access_ids(ACCESS_TYPE_CENTCOM)
 
 	return priv_centcom_access
 
-/var/list/priv_syndicate_access
+GLOBAL_LIST(priv_syndicate_access)
 /proc/get_all_syndicate_access()
 	if(!priv_syndicate_access)
 		priv_syndicate_access = get_access_ids(ACCESS_TYPE_SYNDICATE)
 
 	return priv_syndicate_access
 
-/var/list/priv_private_access
+GLOBAL_LIST(priv_private_access)
 /proc/get_all_private_access()
 	if(!priv_private_access)
 		priv_private_access = get_access_ids(ACCESS_TYPE_PRIVATE)
 
 	return priv_syndicate_access
 
-/var/list/priv_region_access
+GLOBAL_LIST(priv_region_access)
 /proc/get_region_accesses(var/code)
 	if(code == ACCESS_REGION_ALL)
 		return get_all_station_access()
