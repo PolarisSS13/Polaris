@@ -1,4 +1,4 @@
-var/list/command_cartridges = list(
+GLOBAL_LIST_INIT(command_cartridges, list(
 	/obj/item/weapon/cartridge/captain,
 	/obj/item/weapon/cartridge/hop,
 	/obj/item/weapon/cartridge/hos,
@@ -6,30 +6,30 @@ var/list/command_cartridges = list(
 	/obj/item/weapon/cartridge/rd,
 	/obj/item/weapon/cartridge/head,
 	/obj/item/weapon/cartridge/lawyer // Internal Affaris,
-	)
+	))
 
-var/list/security_cartridges = list(
+GLOBAL_LIST_INIT(security_cartridges, list(
 	/obj/item/weapon/cartridge/security,
 	/obj/item/weapon/cartridge/detective,
 	/obj/item/weapon/cartridge/hos
-	)
+	))
 
-var/list/engineering_cartridges = list(
+GLOBAL_LIST_INIT(engineering_cartridges, list(
 	/obj/item/weapon/cartridge/engineering,
 	/obj/item/weapon/cartridge/atmos,
 	/obj/item/weapon/cartridge/ce
-	)
+	))
 
-var/list/medical_cartridges = list(
+GLOBAL_LIST_INIT(medical_cartridges, list(
 	/obj/item/weapon/cartridge/medical,
 	/obj/item/weapon/cartridge/chemistry,
 	/obj/item/weapon/cartridge/cmo
-	)
+	))
 
-var/list/research_cartridges = list(
+GLOBAL_LIST_INIT(research_cartridges, list(
 	/obj/item/weapon/cartridge/signal/science,
 	/obj/item/weapon/cartridge/rd
-	)
+	))
 
 var/list/cargo_cartridges = list(
 	/obj/item/weapon/cartridge/quartermaster, // This also covers cargo-techs, apparently,
@@ -37,11 +37,11 @@ var/list/cargo_cartridges = list(
 	/obj/item/weapon/cartridge/hop
 	)
 
-var/list/civilian_cartridges = list(
+GLOBAL_LIST_INIT(civilian_cartridges, list(
 	/obj/item/weapon/cartridge/janitor,
 	/obj/item/weapon/cartridge/service,
 	/obj/item/weapon/cartridge/hop
-	)
+	))
 
 /obj/item/weapon/cartridge
 	name = "generic cartridge"

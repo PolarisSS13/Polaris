@@ -59,7 +59,7 @@ var/datum/category_collection/underwear/global_underwear = new()
 	//Backpacks
 GLOBAL_LIST_INIT(backbaglist, list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag"))
 GLOBAL_LIST_INIT(pdachoicelist, list("Default", "Slim", "Old", "Rugged"))
-var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
+GLOBAL_LIST_INIT(exclude_jobs, list(/datum/job/ai,/datum/job/cyborg))
 
 // Visual nets
 GLOBAL_LIST_EMPTY(datum/visualnet/visual_nets)

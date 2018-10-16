@@ -234,10 +234,10 @@ var/list/admin_verbs_paranoid_debug = list(
 	/client/proc/debug_controller
 	)
 
-var/list/admin_verbs_possess = list(
+GLOBAL_LIST_INIT(admin_verbs_possess, list(
 	/proc/possess,
 	/proc/release
-	)
+	))
 var/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)

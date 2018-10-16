@@ -9,7 +9,7 @@ GLOBAL_LIST_INIT(responsive_carriers, list(
 	"phosphorus",
 	"phoron"))
 
-var/global/list/finds_as_strings = list(
+GLOBAL_LIST_INIT(finds_as_strings, list(
 	"Trace organic cells",
 	"Long exposure particles",
 	"Trace water particles",
@@ -18,7 +18,7 @@ var/global/list/finds_as_strings = list(
 	"Metallic composite",
 	"Metamorphic/igneous rock composite",
 	"Metamorphic/sedimentary rock composite",
-	"Anomalous material")
+	"Anomalous material"))
 
 /proc/get_responsive_reagent(var/find_type)
 	switch(find_type)

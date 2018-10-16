@@ -1,4 +1,4 @@
-var/list/pai_emotions = list(
+GLOBAL_LIST_INIT(pai_emotions, list(
 		"Happy" = 1,
 		"Cat" = 2,
 		"Extremely Happy" = 3,
@@ -14,7 +14,7 @@ var/list/pai_emotions = list(
 		"Smirk" = 13,
 		"Exclamation Points" = 14,
 		"Question Mark" = 15
-	)
+	))
 
 
 GLOBAL_LIST_EMPTY(pai_software_by_key)

@@ -77,13 +77,13 @@ GLOBAL_LIST_INIT(medical_positions, list(
 ))
 
 
-var/list/science_positions = list(
+GLOBAL_LIST_INIT(science_positions, list(
 	"Research Director",
 	"Scientist",
 	"Geneticist",	//Part of both medical and science
 	"Roboticist",
 	"Xenobiologist"
-)
+))
 
 //BS12 EDIT
 GLOBAL_LIST_INIT(cargo_positions, list(
