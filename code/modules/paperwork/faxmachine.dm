@@ -1,5 +1,5 @@
 GLOBAL_LIST_EMPTY(obj/machinery/photocopier/faxmachine/allfaxes)
-var/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
+GLOBAL_LIST_INIT(admin_departments, ("[using_map.boss_name]", "Sif Governmental Authority", "Supply"))
 GLOBAL_LIST_EMPTY(alldepartments)
 
 GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins

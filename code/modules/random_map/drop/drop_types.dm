@@ -1,4 +1,4 @@
-var/global/list/datum/supply_drop_loot/supply_drop
+GLOBAL_LIST(datum/supply_drop_loot/supply_drop)
 
 /proc/supply_drop_random_loot_types()
 	if(!supply_drop)

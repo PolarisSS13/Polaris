@@ -15,8 +15,8 @@ GLOBAL_LIST_EMPTY(dead_mob_list)				//List of all dead mobs, including clientles
 GLOBAL_LIST_EMPTY(listening_objects)			//List of all objects which care about receiving messages (communicators, radios, etc)
 
 GLOBAL_LIST_EMPTY(cable_list)					//Index for all cables, so that powernets don't have to look through the entire world all the time
-var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
-var/global/list/chemical_reagents_list				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
+GLOBAL_LIST(chemical_reactions_list)
+GLOBAL_LIST(chemical_reagents_list)
 GLOBAL_LIST_EMPTY(landmarks_list)				//list of all landmarks created
 GLOBAL_LIST_EMPTY(surgery_steps)				//list of all surgery steps  |BS12
 GLOBAL_LIST_EMPTY(side_effects)				//list of all medical sideeffects types by thier names |BS12
@@ -63,11 +63,11 @@ GLOBAL_LIST_INIT(exclude_jobs, list(/datum/job/ai,/datum/job/cyborg))
 
 // Visual nets
 GLOBAL_LIST_EMPTY(datum/visualnet/visual_nets)
-var/datum/visualnet/camera/cameranet = new()
-var/datum/visualnet/cult/cultnet = new()
+GLOBAL_DATUM_INIT(cameranet, /datum/visualnet/camera, new)
+GLOBAL_DATUM_INIT(cultnet, /datum/visualnet/cult, new)
 
 // Runes
-var/global/list/rune_list = new()
+GLOBAL_LIST_EMPTY(rune_list)
 GLOBAL_LIST_EMPTY(escape_list)
 GLOBAL_LIST_EMPTY(endgame_exits)
 GLOBAL_LIST_EMPTY(endgame_safespawns)

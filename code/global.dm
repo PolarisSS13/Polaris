@@ -150,7 +150,7 @@ GLOBAL_LIST_INIT(robot_module_types, list(
 ))
 
 // Some scary sounds.
-var/static/list/scarySounds = list(
+GLOBAL_LIST_INIT(scarySounds, list(
 	'sound/weapons/thudswoosh.ogg',
 	'sound/weapons/Taser.ogg',
 	'sound/weapons/armbomb.ogg',
@@ -168,7 +168,7 @@ var/static/list/scarySounds = list(
 	'sound/machines/airlock.ogg',
 	'sound/effects/clownstep1.ogg',
 	'sound/effects/clownstep2.ogg'
-)
+))
 
 // Bomb cap!
 var/max_explosion_range = 14

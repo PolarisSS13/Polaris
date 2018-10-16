@@ -1,4 +1,4 @@
-var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
+GLOBAL_LIST_INIT(valid_bloodtypes, list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"))
 
 /datum/preferences
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL

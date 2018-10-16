@@ -1,4 +1,4 @@
-var/global/list/special_roles = list( //keep synced with the defines BE_* in setup.dm --rastaf
+GLOBAL_LIST_INIT(special_roles, list( //keep synced with the defines BE_* in setup.dm --rastaf
 //some autodetection here.
 // TODO: Update to new antagonist system.
 	"traitor" = IS_MODE_COMPILED("traitor"),             // 0
@@ -16,7 +16,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"diona" = 1,                                         // 12
 	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
-)
+))
 
 /datum/category_item/player_setup_item/antagonism/candidacy
 	name = "Candidacy"

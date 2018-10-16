@@ -143,7 +143,7 @@
 
 	return base
 
-var/list/rune_animation = list(
+GLOBAL_LIST_INIT(rune_animation, list(
 		list(0.000, 5),
 		list(0.020, 1),
 		list(0.050, 1),
@@ -166,7 +166,7 @@ var/list/rune_animation = list(
 		list(0.375, 1),
 		list(0.250, 1),
 		list(0.125, 1),
-	)
+	))
 
 GLOBAL_LIST_EMPTY(rune_cache)
 
