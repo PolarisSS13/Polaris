@@ -233,6 +233,9 @@
 		to_chat(usr, "\The [src] maintenance panel is not open. Dummy.")
 		return
 
+	if(istype(W, /obj/item/weapon/reagent_containers)
+		visible_message(usr,"<span class='notice'>You fill the tank on \the [src].</span>","[usr] fills the tank on \the [src].")
+		W.reagents.trans_to_obj(src, max_fuel)
 
 /obj/item/weapon/pickaxe/heavydutydrill/proc/update_stats() //This is supposed to update the values after you put things in and out.
 	..()
