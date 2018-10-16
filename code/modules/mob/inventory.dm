@@ -1,5 +1,5 @@
 //The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
-var/list/slot_equipment_priority = list( \
+GLOBAL_LIST_INIT(slot_equipment_priority, list( \
 		slot_back,\
 		slot_wear_id,\
 		slot_w_uniform,\
@@ -16,7 +16,7 @@ var/list/slot_equipment_priority = list( \
 		slot_tie,\
 		slot_l_store,\
 		slot_r_store\
-	)
+	))
 
 /mob
 	var/obj/item/weapon/storage/s_active = null // Even ghosts can/should be able to peek into boxes on the ground

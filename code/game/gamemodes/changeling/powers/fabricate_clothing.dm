@@ -1,4 +1,4 @@
-var/global/list/changeling_fabricated_clothing = list(
+GLOBAL_LIST_INIT(changeling_fabricated_clothing, list(
 	"w_uniform" = /obj/item/clothing/under/chameleon/changeling,
 	"head" = /obj/item/clothing/head/chameleon/changeling,
 	"wear_suit" = /obj/item/clothing/suit/chameleon/changeling,
@@ -9,7 +9,7 @@ var/global/list/changeling_fabricated_clothing = list(
 	"back" = /obj/item/weapon/storage/backpack/chameleon/changeling,
 	"belt" = /obj/item/weapon/storage/belt/chameleon/changeling,
 	"wear_id" = /obj/item/weapon/card/id/syndicate/changeling
-	)
+	))
 
 /datum/power/changeling/fabricate_clothing
 	name = "Fabricate Clothing"

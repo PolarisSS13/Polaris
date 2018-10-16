@@ -1,5 +1,5 @@
 /*****************Marker Beacons**************************/
-var/list/marker_beacon_colors = list(
+GLOBAL_LIST_INIT(marker_beacon_colors, list(
 "Random" = FALSE, //not a true color, will pick a random color
 "Burgundy" = LIGHT_COLOR_FLARE,
 "Bronze" = LIGHT_COLOR_ORANGE,
@@ -13,7 +13,7 @@ var/list/marker_beacon_colors = list(
 "Purple" = LIGHT_COLOR_PURPLE,
 "Violet" = LIGHT_COLOR_LAVENDER,
 "Fuchsia" = LIGHT_COLOR_PINK
-)
+))
 
 /obj/item/stack/marker_beacon
 	name = "marker beacons"

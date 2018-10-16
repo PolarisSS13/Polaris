@@ -105,18 +105,18 @@ var/list/admin_verbs_admin = list(
 	/client/proc/despawn_player
 	)
 
-var/list/admin_verbs_ban = list(
+GLOBAL_LIST_INIT(admin_verbs_ban, list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans
-	)
+	))
 
-var/list/admin_verbs_sounds = list(
+GLOBAL_LIST_INIT(admin_verbs_sounds, list(
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/play_server_sound
-	)
+	))
 
-var/list/admin_verbs_fun = list(
+GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/object_talk,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
@@ -135,9 +135,9 @@ var/list/admin_verbs_fun = list(
 	/datum/admins/proc/call_drop_pod,
 	/client/proc/smite,
 	/client/proc/admin_lightning_strike
-	)
+	))
 
-var/list/admin_verbs_spawn = list(
+GLOBAL_LIST_INIT(admin_verbs_spawn, list(
 	/datum/admins/proc/spawn_fruit,
 	/datum/admins/proc/spawn_custom_item,
 	/datum/admins/proc/check_custom_items,
@@ -149,9 +149,9 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/map_template_load,
 	/client/proc/map_template_upload,
 	/client/proc/map_template_load_on_new_z
-	)
+	))
 
-var/list/admin_verbs_server = list(
+GLOBAL_LIST_INIT(admin_verbs_server, list(
 	/datum/admins/proc/capture_map,
 	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
@@ -178,9 +178,9 @@ var/list/admin_verbs_server = list(
 	/client/proc/recipe_dump,
 	/client/proc/panicbunker,
 	/client/proc/paranoia_logging
-	)
+	))
 
-var/list/admin_verbs_debug = list(
+GLOBAL_LIST_INIT(admin_verbs_debug, list(
 	/client/proc/getruntimelog,                     //allows us to access runtime logs to somebody,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
@@ -226,27 +226,27 @@ var/list/admin_verbs_debug = list(
 	/datum/admins/proc/change_time,
 	/client/proc/admin_give_modifier,
 	/client/proc/simple_DPS
-	)
+	))
 
-var/list/admin_verbs_paranoid_debug = list(
+GLOBAL_LIST_INIT(admin_verbs_paranoid_debug, list(
 	/client/proc/callproc,
 	/client/proc/callproc_target,
 	/client/proc/debug_controller
-	)
+	))
 
 GLOBAL_LIST_INIT(admin_verbs_possess, list(
 	/proc/possess,
 	/proc/release
 	))
-var/list/admin_verbs_permissions = list(
+GLOBAL_LIST_INIT(admin_verbs_permissions, list(
 	/client/proc/edit_admin_permissions
-	)
-var/list/admin_verbs_rejuv = list(
+	))
+GLOBAL_LIST_INIT(admin_verbs_rejuv, list(
 	/client/proc/respawn_character
-	)
+	))
 
 //verbs which can be hidden - needs work
-var/list/admin_verbs_hideable = list(
+GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/deadmin_self,
 //	/client/proc/deadchat,
 	/datum/admins/proc/show_traitor_panel,
@@ -318,7 +318,7 @@ var/list/admin_verbs_hideable = list(
 	/proc/possess,
 	/proc/release,
 	/datum/admins/proc/set_tcrystals
-	)
+	))
 var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	//right-click adminPM interface,
 	/client/proc/cmd_admin_pm_panel,	//admin-pm list,
@@ -346,7 +346,7 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/view_atk_log		//shows the server combat-log, doesn't do anything presently,
 )
 
-var/list/admin_verbs_event_manager = list(
+GLOBAL_LIST_INIT(admin_verbs_event_manager, list(
 	/client/proc/cmd_event_say,
 	/client/proc/cmd_admin_pm_context,
 	/client/proc/cmd_admin_pm_panel,
@@ -391,7 +391,7 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/roll_dices,
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod
-)
+))
 
 /client/proc/add_admin_verbs()
 	if(holder)

@@ -1,4 +1,4 @@
-var/list/lunchables_lunches_ = list(/obj/item/weapon/reagent_containers/food/snacks/sandwich,
+GLOBAL_LIST_INIT(lunchables_lunches_, list(/obj/item/weapon/reagent_containers/food/snacks/sandwich,
                                   /obj/item/weapon/reagent_containers/food/snacks/slice/meatbread/filled,
                                   /obj/item/weapon/reagent_containers/food/snacks/slice/tofubread/filled,
                                   /obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread/filled,
@@ -9,9 +9,9 @@ var/list/lunchables_lunches_ = list(/obj/item/weapon/reagent_containers/food/sna
                                   /obj/item/weapon/reagent_containers/food/snacks/tastybread,
                                   /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
                                   /obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry,
-                                  /obj/item/weapon/reagent_containers/food/snacks/tossedsalad)
+                                  /obj/item/weapon/reagent_containers/food/snacks/tossedsalad))
 
-var/list/lunchables_snacks_ = list(/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
+GLOBAL_LIST_INIT(lunchables_snacks_, list(/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
                                    /obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
                                    /obj/item/weapon/reagent_containers/food/snacks/muffin,
                                    /obj/item/weapon/reagent_containers/food/snacks/popcorn,
@@ -38,9 +38,9 @@ var/list/lunchables_snacks_ = list(/obj/item/weapon/reagent_containers/food/snac
                                    /obj/item/weapon/reagent_containers/food/snacks/watermelonslice,
                                    /obj/item/weapon/reagent_containers/food/snacks/slice/applecake/filled,
                                    /obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie/filled,
-                                   /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks)
+                                   /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks))
 
-var/list/lunchables_drinks_ = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola,
+GLOBAL_LIST_INIT(lunchables_drinks_, list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb,
@@ -50,19 +50,19 @@ var/list/lunchables_drinks_ = list(/obj/item/weapon/reagent_containers/food/drin
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice,
                                    /obj/item/weapon/reagent_containers/food/drinks/cans/tonic,
-                                   /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater)
+                                   /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater))
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_drink_reagents_ = list(/datum/reagent/drink/nothing,
+GLOBAL_LIST_INIT(lunchables_drink_reagents_, list(/datum/reagent/drink/nothing,
                                            /datum/reagent/drink/doctor_delight,
                                            /datum/reagent/drink/dry_ramen,
                                            /datum/reagent/drink/hell_ramen,
                                            /datum/reagent/drink/hot_ramen,
-                                           /datum/reagent/drink/soda/nuka_cola)
+                                           /datum/reagent/drink/soda/nuka_cola))
 
 
 // This default list is a bit different, it contains items we don't want
-var/list/lunchables_ethanol_reagents_ = list(/datum/reagent/ethanol/acid_spit,
+GLOBAL_LIST_INIT(lunchables_ethanol_reagents_, list(/datum/reagent/ethanol/acid_spit,
                                              /datum/reagent/ethanol/atomicbomb,
                                              /datum/reagent/ethanol/beepsky_smash,
                                              /datum/reagent/ethanol/coffee,
@@ -76,7 +76,7 @@ var/list/lunchables_ethanol_reagents_ = list(/datum/reagent/ethanol/acid_spit,
                                              /datum/reagent/ethanol/toxins_special,
 											 /datum/reagent/ethanol/voxdelight,
 											 /datum/reagent/ethanol/soemmerfire,
-											 /datum/reagent/ethanol/slimeshot)
+											 /datum/reagent/ethanol/slimeshot))
 
 /proc/lunchables_lunches()
 	if(!(lunchables_lunches_[lunchables_lunches_[1]]))

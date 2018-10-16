@@ -576,7 +576,7 @@ proc/is_blind(A)
 //TODO: Integrate defence zones and targeting body parts with the actual organ system, move these into organ definitions.
 
 //The base miss chance for the different defence zones
-var/list/global/base_miss_chance = list(
+GLOBAL_LIST_INIT(global/base_miss_chance, list(
 	"head" = 40,
 	"chest" = 10,
 	"groin" = 20,
@@ -588,11 +588,11 @@ var/list/global/base_miss_chance = list(
 	"r_hand" = 50,
 	"l_foot" = 50,
 	"r_foot" = 50,
-)
+))
 
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
 //Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
-var/list/global/organ_rel_size = list(
+GLOBAL_LIST_INIT(global/organ_rel_size, list(
 	"head" = 25,
 	"chest" = 70,
 	"groin" = 30,
@@ -604,7 +604,7 @@ var/list/global/organ_rel_size = list(
 	"r_hand" = 10,
 	"l_foot" = 10,
 	"r_foot" = 10,
-)
+))
 
 /mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	return

@@ -1,7 +1,7 @@
-var/list/ventcrawl_machinery = list(
+GLOBAL_LIST_INIT(ventcrawl_machinery, list(
 	/obj/machinery/atmospherics/unary/vent_pump,
 	/obj/machinery/atmospherics/unary/vent_scrubber
-	)
+	))
 
 // Vent crawling whitelisted items, whoo
 /mob/living/var/list/can_enter_vent_with = list(

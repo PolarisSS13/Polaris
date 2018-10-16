@@ -1,4 +1,4 @@
-var/global/list/robot_modules = list(
+GLOBAL_LIST_INIT(robot_modules, list(
 	"Standard"		= /obj/item/weapon/robot_module/robot/standard,
 	"Service" 		= /obj/item/weapon/robot_module/robot/clerical/butler,
 	"Clerical" 		= /obj/item/weapon/robot_module/robot/clerical/general,
@@ -11,7 +11,7 @@ var/global/list/robot_modules = list(
 	"Engineering"	= /obj/item/weapon/robot_module/robot/engineering/general,
 //	"Construction"	= /obj/item/weapon/robot_module/robot/engineering/construction,
 	"Janitor" 		= /obj/item/weapon/robot_module/robot/janitor
-	)
+	))
 
 /obj/item/weapon/robot_module
 	name = "robot module"
