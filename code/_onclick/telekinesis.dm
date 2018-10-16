@@ -3,7 +3,7 @@
 
 	This needs more thinking out, but I might as well.
 */
-var/const/tk_maxrange = 15
+#define TK_MAXRANGE		15
 
 /*
 	Telekinetic attack:

@@ -1,8 +1,8 @@
-var/const/NETWORK_THIRD_DECK   = "Third Deck"
-var/const/NETWORK_SECOND_DECK  = "Second Deck"
-var/const/NETWORK_FIRST_DECK   = "First Deck"
-var/const/NETWORK_SUPPLY       = "Supply"
-var/const/NETWORK_MAIN_OUTPOST = "Main Outpost"
+#define NETWORK_THIRD_DECK		"THIRD Deck"
+#define NETWORK_SECOND_DECK		"SECOND Deck"
+#define NETWORK_FIRST_DECK		"FIRST Deck"
+#define NETWORK_SUPPLY		"SUPPLY"
+#define NETWORK_MAIN_OUTPOST		"MAIN Outpost"
 
 //
 // Cameras

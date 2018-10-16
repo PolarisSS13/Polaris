@@ -497,8 +497,8 @@ atom
 GLOBAL_LIST(swapmaps_iconcache)
 
 // preferred mode; sav or text
-var/const/SWAPMAPS_SAV=0
-var/const/SWAPMAPS_TEXT=1
+#define SWAPMAPS_SAV		0
+#define SWAPMAPS_TEXT		1
 var/swapmaps_mode=SWAPMAPS_SAV
 
 var/swapmaps_compiled_maxx)

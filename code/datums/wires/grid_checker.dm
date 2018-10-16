@@ -2,14 +2,14 @@
 	holder_type = /obj/machinery/power/grid_checker
 	wire_count = 8
 
-var/const/GRID_CHECKER_WIRE_REBOOT	= 1			// This wire causes the grid-check to end, if pulsed.
-var/const/GRID_CHECKER_WIRE_LOCKOUT	= 2			// If cut or pulsed, locks the user out for half a minute.
-var/const/GRID_CHECKER_WIRE_ALLOW_MANUAL_1 = 4	// Needs to be cut for REBOOT to be possible.
-var/const/GRID_CHECKER_WIRE_ALLOW_MANUAL_2 = 8	// Needs to be cut for REBOOT to be possible.
-var/const/GRID_CHECKER_WIRE_ALLOW_MANUAL_3 = 16	// Needs to be cut for REBOOT to be possible.
-var/const/GRID_CHECKER_WIRE_SHOCK = 32			// Shocks the user if not wearing gloves.
-var/const/GRID_CHECKER_WIRE_NOTHING_1 = 64		// Does nothing, but makes it a bit harder.
-var/const/GRID_CHECKER_WIRE_NOTHING_2 = 128		// Does nothing, but makes it a bit harder.
+#define GRID_CHECKER_WIRE_REBOOT		1			// This wire causes the grid-check to end, if pulsed.
+#define GRID_CHECKER_WIRE_LOCKOUT		2			// If cut or pulsed, locks the user out for half a minute.
+#define GRID_CHECKER_WIRE_ALLOW_MANUAL_1		4	// Needs to be cut for REBOOT to be possible.
+#define GRID_CHECKER_WIRE_ALLOW_MANUAL_2		8	// Needs to be cut for REBOOT to be possible.
+#define GRID_CHECKER_WIRE_ALLOW_MANUAL_3		16	// Needs to be cut for REBOOT to be possible.
+#define GRID_CHECKER_WIRE_SHOCK		32			// Shocks the user if not wearing gloves.
+#define GRID_CHECKER_WIRE_NOTHING_1		64		// Does nothing, but makes it a bit harder.
+#define GRID_CHECKER_WIRE_NOTHING_2		128		// Does nothing, but makes it a bit harder.
 
 
 /datum/wires/grid_checker/CanUse(var/mob/living/L)

@@ -2,9 +2,9 @@
 	holder_type = /obj/machinery/suit_cycler
 	wire_count = 3
 
-var/const/SUIT_STORAGE_WIRE_ELECTRIFY	= 1
-var/const/SUIT_STORAGE_WIRE_SAFETY		= 2
-var/const/SUIT_STORAGE_WIRE_LOCKED		= 4
+#define SUIT_STORAGE_WIRE_ELECTRIFY		1
+#define SUIT_STORAGE_WIRE_SAFETY		2
+#define SUIT_STORAGE_WIRE_LOCKED		4
 
 /datum/wires/suit_storage_unit/CanUse(var/mob/living/L)
 	var/obj/machinery/suit_cycler/S = holder

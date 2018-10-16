@@ -3,17 +3,17 @@
 	holder_type = /obj/machinery/media/jukebox
 	wire_count = 11
 
-var/const/WIRE_POWER = 1
-var/const/WIRE_HACK = 2
-var/const/WIRE_SPEEDUP = 4
-var/const/WIRE_SPEEDDOWN = 8
-var/const/WIRE_REVERSE = 16
-var/const/WIRE_NOTHING1 = 32
-var/const/WIRE_NOTHING2 = 64
-var/const/WIRE_START = 128
-var/const/WIRE_STOP = 256
-var/const/WIRE_PREV = 512
-var/const/WIRE_NEXT = 1024
+#define WIRE_POWER		1
+#define WIRE_HACK		2
+#define WIRE_SPEEDUP		4
+#define WIRE_SPEEDDOWN		8
+#define WIRE_REVERSE		16
+#define WIRE_NOTHING1		32
+#define WIRE_NOTHING2		64
+#define WIRE_START		128
+#define WIRE_STOP		256
+#define WIRE_PREV		512
+#define WIRE_NEXT		1024
 
 /datum/wires/jukebox/CanUse(var/mob/living/L)
 	var/obj/machinery/media/jukebox/A = holder

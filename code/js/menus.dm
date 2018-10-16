@@ -1,4 +1,4 @@
-var/const/js_dropdowns = {"
+#define JS_DROPDOWNS		{"
 function dropdowns() {
     var divs = document.getElementsByTagName('div');
     var headers = new Array();

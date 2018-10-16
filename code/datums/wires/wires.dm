@@ -176,10 +176,10 @@ GLOBAL_LIST_INIT(wireColours, list("red", "blue", "green", "darkred", "orange", 
 // Example of use:
 /*
 
-var/const/BOLTED= 1
-var/const/SHOCKED = 2
-var/const/SAFETY = 4
-var/const/POWER = 8
+#define BOLTED		1
+#define SHOCKED		2
+#define SAFETY		4
+#define POWER		8
 
 /datum/wires/door/UpdateCut(var/index, var/mended)
 	var/obj/machinery/door/airlock/A = holder

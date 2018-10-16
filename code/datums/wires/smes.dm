@@ -2,11 +2,11 @@
 	holder_type = /obj/machinery/power/smes/buildable
 	wire_count = 5
 
-var/const/SMES_WIRE_RCON = 1		// Remote control (AI and consoles), cut to disable
-var/const/SMES_WIRE_INPUT = 2		// Input wire, cut to disable input, pulse to disable for 60s
-var/const/SMES_WIRE_OUTPUT = 4		// Output wire, cut to disable output, pulse to disable for 60s
-var/const/SMES_WIRE_GROUNDING = 8	// Cut to quickly discharge causing sparks, pulse to only create few sparks
-var/const/SMES_WIRE_FAILSAFES = 16	// Cut to disable failsafes, mend to reenable
+#define SMES_WIRE_RCON		1		// Remote control (AI and consoles), cut to disable
+#define SMES_WIRE_INPUT		2		// Input wire, cut to disable input, pulse to disable for 60s
+#define SMES_WIRE_OUTPUT		4		// Output wire, cut to disable output, pulse to disable for 60s
+#define SMES_WIRE_GROUNDING		8	// Cut to quickly discharge causing sparks, pulse to only create few sparks
+#define SMES_WIRE_FAILSAFES		16	// Cut to disable failsafes, mend to reenable
 
 
 /datum/wires/smes/CanUse(var/mob/living/L)

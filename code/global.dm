@@ -37,7 +37,7 @@ var/href_logfile		= null
 // var/const/company_short	= "NT"
 // var/const/star_name		= "Vir"
 // var/const/starsys_name	= "Vir"
-var/const/game_version	= "Polaris"
+#define GAME_VERSION		"POLARIS"
 var/changelog_hash		= ""
 var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/round_progressing = 1

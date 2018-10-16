@@ -97,33 +97,33 @@ On the map:
 1455 for AI access
 */
 
-var/const/RADIO_LOW_FREQ	= 1200
-var/const/PUBLIC_LOW_FREQ	= 1441
-var/const/PUBLIC_HIGH_FREQ	= 1489
-var/const/RADIO_HIGH_FREQ	= 1600
+#define RADIO_LOW_FREQ		1200
+#define PUBLIC_LOW_FREQ		1441
+#define PUBLIC_HIGH_FREQ		1489
+#define RADIO_HIGH_FREQ		1600
 
-var/const/BOT_FREQ	= 1447
-var/const/COMM_FREQ = 1353
-var/const/ERT_FREQ	= 1345
-var/const/AI_FREQ	= 1343
-var/const/DTH_FREQ	= 1341
-var/const/SYND_FREQ = 1213
-var/const/RAID_FREQ	= 1277
-var/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+#define BOT_FREQ		1447
+#define COMM_FREQ		1353
+#define ERT_FREQ		1345
+#define AI_FREQ		1343
+#define DTH_FREQ		1341
+#define SYND_FREQ		1213
+#define RAID_FREQ		1277
+#define ENT_FREQ		1461 //entertainment frequency. This is not a diona exclusive frequency.
 
 // department channels
-var/const/PUB_FREQ = 1459
-var/const/SEC_FREQ = 1359
-var/const/ENG_FREQ = 1357
-var/const/MED_FREQ = 1355
-var/const/SCI_FREQ = 1351
-var/const/SRV_FREQ = 1349
-var/const/SUP_FREQ = 1347
-var/const/EXP_FREQ = 1361
+#define PUB_FREQ		1459
+#define SEC_FREQ		1359
+#define ENG_FREQ		1357
+#define MED_FREQ		1355
+#define SCI_FREQ		1351
+#define SRV_FREQ		1349
+#define SUP_FREQ		1347
+#define EXP_FREQ		1361
 
 // internal department channels
-var/const/MED_I_FREQ = 1485
-var/const/SEC_I_FREQ = 1475
+#define MED_I_FREQ		1485
+#define SEC_I_FREQ		1475
 
 GLOBAL_LIST_INIT(radiochannels, list(
 	"Common"		= PUB_FREQ,
@@ -198,17 +198,17 @@ GLOBAL_LIST_INIT(DEPT_FREQS, list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FR
 //This is done for performance, so we don't send signals to lots of machines unnecessarily.
 
 //This filter is special because devices belonging to default also recieve signals sent to any other filter.
-var/const/RADIO_DEFAULT = "radio_default"
+#define RADIO_DEFAULT		"RADIO_DEFAULT"
 
-var/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
-var/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
-var/const/RADIO_CHAT = "radio_telecoms"
-var/const/RADIO_ATMOSIA = "radio_atmos"
-var/const/RADIO_NAVBEACONS = "radio_navbeacon"
-var/const/RADIO_AIRLOCK = "radio_airlock"
-var/const/RADIO_SECBOT = "radio_secbot"
-var/const/RADIO_MULEBOT = "radio_mulebot"
-var/const/RADIO_MAGNETS = "radio_magnet"
+#define RADIO_TO_AIRALARM		"RADIO_AIRALARM" //air alarms
+#define RADIO_FROM_AIRALARM		"RADIO_AIRALARM_RCVR" //devices interested in recieving signals from air alarms
+#define RADIO_CHAT		"RADIO_TELECOMS"
+#define RADIO_ATMOSIA		"RADIO_ATMOS"
+#define RADIO_NAVBEACONS		"RADIO_NAVBEACON"
+#define RADIO_AIRLOCK		"RADIO_AIRLOCK"
+#define RADIO_SECBOT		"RADIO_SECBOT"
+#define RADIO_MULEBOT		"RADIO_MULEBOT"
+#define RADIO_MAGNETS		"RADIO_MAGNET"
 
 var/global/datum/controller/radio/radio_controller
 

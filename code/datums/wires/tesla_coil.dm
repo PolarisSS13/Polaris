@@ -2,7 +2,7 @@
 	wire_count = 1
 	holder_type = /obj/machinery/power/tesla_coil
 
-var/const/WIRE_ZAP = 1
+#define WIRE_ZAP		1
 
 /datum/wires/tesla_coil/CanUse(mob/living/L)
 	var/obj/machinery/power/tesla_coil/T = holder

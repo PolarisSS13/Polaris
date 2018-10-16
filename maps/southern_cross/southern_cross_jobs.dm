@@ -1,11 +1,11 @@
 // Pilots
 
-var/const/SAR 				=(1<<11)
-var/const/PILOT 			=(1<<13)
-var/const/EXPLORER 			=(1<<14)
+#define SAR		(1<<11)
+#define PILOT		(1<<13)
+#define EXPLORER		(1<<14)
 
-var/const/access_pilot = 67
-var/const/access_explorer = 43
+#define ACCESS_PILOT		67
+#define ACCESS_EXPLORER		43
 
 /datum/access/pilot
 	id = access_pilot
