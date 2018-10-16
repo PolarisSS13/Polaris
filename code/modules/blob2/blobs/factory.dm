@@ -39,10 +39,8 @@
 			S.overmind = overmind
 			overmind.blob_mobs.Add(S)
 			if(overmind.blob_type.ranged_spores)
-				S.ranged = TRUE
 				S.projectiletype = overmind.blob_type.spore_projectile
 				S.projectilesound = overmind.blob_type.spore_firesound
-				S.shoot_range = overmind.blob_type.spore_range
 		else //Other mobs don't add themselves in New. Ew.
 			S.nest = src
 			spores += S
