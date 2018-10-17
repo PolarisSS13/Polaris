@@ -1,4 +1,4 @@
-var/datum/controller/vote/vote = new()
+GLOBAL_DATUM_INIT(vote, datum/controller/vote, new ))
 
 GLOBAL_LIST_EMPTY(round_voters) // Keeps track of the individuals voting for a given round, for use in forcedrafting.
 

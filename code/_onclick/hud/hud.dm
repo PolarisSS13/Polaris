@@ -2,7 +2,7 @@
 	The global hud:
 	Uses the same visual objects for all players.
 */
-var/datum/global_hud/global_hud = new()
+GLOBAL_DATUM_INIT(global_hud, datum/global_hud, new ))
 GLOBAL_LIST_INIT(global_huds, list(
 		global_hud.druggy,
 		global_hud.blurry,

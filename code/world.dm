@@ -9,7 +9,7 @@
 	5. The gameticker is created.
 
 */
-var/global/datum/global_init/init = new ()
+GLOBAL_DATUM_INIT(init, datum/global_init, new ))
 
 /*
 	Pre-map initialization stuff should go here.

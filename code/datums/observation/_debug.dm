@@ -1,7 +1,7 @@
 /****************
 * Debug Support *
 ****************/
-var/datum/all_observable_events/all_observable_events = new()
+GLOBAL_DATUM_INIT(all_observable_events, datum/all_observable_events, new ))
 
 /datum/all_observable_events
 	var/list/events

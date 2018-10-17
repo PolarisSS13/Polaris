@@ -1,5 +1,5 @@
 
-var/datum/map/using_map = new USING_MAP_DATUM
+GLOBAL_DATUM_INIT(using_map, datum/map, new USING_MAP_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
 /hook/startup/proc/initialise_map_list()

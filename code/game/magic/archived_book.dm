@@ -5,7 +5,7 @@
 #define BOOK_PATH			"data/books/"
 #define BOOKS_USE_SQL		0				// no guarentee for this branch to work right with sql
 
-var/global/datum/book_manager/book_mgr = new()
+GLOBAL_DATUM_INIT(book_mgr, datum/book_manager, new ))
 
 datum/book_manager/proc/path(id)
 	if(isnum(id)) // kill any path exploits

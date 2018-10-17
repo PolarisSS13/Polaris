@@ -1,4 +1,4 @@
-var/global/datum/getrev/revdata = new()
+GLOBAL_DATUM_INIT(revdata, datum/getrev, new ))
 
 /datum/getrev
 	var/branch

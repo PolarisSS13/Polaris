@@ -8,7 +8,7 @@
 	if(creator)
 		parent = creator
 
-var/global/datum/locations/milky_way/all_locations = new()
+GLOBAL_DATUM_INIT(all_locations, datum/locations/milky_way, new ))
 
 //Galaxy
 

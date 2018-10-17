@@ -1,1 +1,1 @@
-var/datum/gear_tweak/color/gear_tweak_free_color_choice = new()
+GLOBAL_DATUM_INIT(gear_tweak_free_color_choice, datum/gear_tweak/color, new ))

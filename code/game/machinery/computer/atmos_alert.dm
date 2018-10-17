@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY(minor_air_alarms)
 		return 1
 
 
-var/datum/topic_state/air_alarm_topic/air_alarm_topic = new()
+GLOBAL_DATUM_INIT(air_alarm_topic, datum/topic_state/air_alarm_topic, new ))
 
 /datum/topic_state/air_alarm_topic/href_list(var/mob/user)
 	var/list/extra_href = list()

@@ -54,7 +54,7 @@ GLOBAL_LIST_EMPTY(facial_hair_styles_female_list)
 GLOBAL_LIST_EMPTY(skin_styles_female_list)		//unused
 GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
 	//Underwear
-var/datum/category_collection/underwear/global_underwear = new()
+GLOBAL_DATUM_INIT(global_underwear, datum/category_collection/underwear, new ))
 
 	//Backpacks
 GLOBAL_LIST_INIT(backbaglist, list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag"))

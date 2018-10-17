@@ -1,4 +1,4 @@
-var/global/datum/repository/cameras/camera_repository = new()
+GLOBAL_DATUM_INIT(camera_repository, datum/repository/cameras, new ))
 
 /proc/invalidateCameraCache()
 	camera_repository.networks.Cut()

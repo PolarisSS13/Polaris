@@ -1,4 +1,4 @@
-var/datum/admin_secrets/admin_secrets = new()
+GLOBAL_DATUM_INIT(admin_secrets, datum/admin_secrets, new ))
 
 /datum/admin_secrets
 	var/list/datum/admin_secret_category/categories

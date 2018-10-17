@@ -16,9 +16,7 @@ GLOBAL_LIST_EMPTY(hud_icon_reference)
 
 GLOBAL_LIST_EMPTY(global_mutations) // List of hidden mutation things.
 
-var/global/datum/universal_state/universe = new
-
-GLOBAL_LIST(global_map)
+GLOBAL_DATUM_INIT(universe, datum/universal_state, new GLOBAL_LIST(global_map))
 
 // Noises made when hit while typing.
 GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
@@ -103,15 +101,15 @@ GLOBAL_LIST_EMPTY(powernets)	// TODO - Move into SSmachines
 var/Debug2 = 0
 GLOBAL_DATUM(debugobj, /datum/debug)
 
-var/datum/moduletypes/mods = new()
+GLOBAL_DATUM_INIT(mods, datum/moduletypes, new ))
 
 var/gravity_is_on = 1
 
 var/join_motd = null
 
-var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
-var/datum/game_master/game_master = new() // Game Master, an AI for choosing events.
-var/datum/metric/metric = new() // Metric datum, used to keep track of the round.
+GLOBAL_DATUM_INIT(event_manager, datum/event_manager, new )) // Event Manager, the manager for events.
+GLOBAL_DATUM_INIT(game_master, datum/game_master, new )) // Game Master, an AI for choosing events.
+GLOBAL_DATUM_INIT(metric, datum/metric, new )) // Metric datum, used to keep track of the round.
 
 GLOBAL_LIST_EMPTY(awaydestinations) // Away missions. A list of landmarks that the warpgate can take you to.
 

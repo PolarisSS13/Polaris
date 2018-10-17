@@ -25,7 +25,7 @@
 	var/value
 	var/list/contents
 
-var/datum/controller/supply/supply_controller = new()
+GLOBAL_DATUM_INIT(supply_controller, datum/controller/supply, new ))
 
 /datum/controller/supply
 	//supply points
