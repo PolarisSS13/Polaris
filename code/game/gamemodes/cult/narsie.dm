@@ -1,5 +1,5 @@
 var/global/narsie_behaviour = "CultStation13"
-var/global/narsie_cometh = 0
+GLOBAL_VAR_INIT(narsie_cometh, 0)
 GLOBAL_LIST_EMPTY(narsie_list)
 /obj/singularity/narsie //Moving narsie to its own file for the sake of being clearer
 	name = "Nar-Sie"

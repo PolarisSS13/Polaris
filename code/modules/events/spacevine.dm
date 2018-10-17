@@ -1,5 +1,4 @@
-/var/global/spacevines_spawned = 0
-
+GLOBAL_VAR_INIT(spacevines_spawned, 0)
 /datum/event/spacevine
 	announceWhen	= 60
 

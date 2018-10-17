@@ -1,5 +1,4 @@
-var/maze_cell_count = 0
-
+GLOBAL_VAR_INIT(maze_cell_count, 0)
 /datum/maze_cell
 	var/name
 	var/uid

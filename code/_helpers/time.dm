@@ -81,10 +81,9 @@ proc/isDay(var/month, var/day)
 		//else
 			//return 1
 
-var/next_duration_update = 0
-var/last_round_duration = 0
-var/round_start_time = 0
-
+GLOBAL_VAR_INIT(next_duration_update, 0)
+GLOBAL_VAR_INIT(last_round_duration, 0)
+GLOBAL_VAR_INIT(round_start_time, 0)
 /hook/roundstart/proc/start_timer()
 	round_start_time = world.time
 	return 1
@@ -116,8 +115,8 @@ var/round_start_time = 0
 	roundstart_hour = pick(2,7,12,17)
 	return 1
 
-/var/midnight_rollovers = 0
-/var/rollovercheck_last_timeofday = 0
+GLOBAL_VAR_INIT(midnight_rollovers, 0)
+GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/update_midnight_rollover()
 	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
 		return midnight_rollovers++

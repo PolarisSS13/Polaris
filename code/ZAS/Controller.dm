@@ -1,7 +1,6 @@
 GLOBAL_DATUM(air_master, /datum/controller/subsystem/air)
 
-var/tick_multiplier = 2
-
+GLOBAL_VAR_INIT(tick_multiplier, 2)
 /*
 
 Overview:

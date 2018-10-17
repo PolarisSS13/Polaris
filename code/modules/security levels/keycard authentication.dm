@@ -184,8 +184,7 @@
 	if(config.ert_admin_call_only) return 1
 	return ticker.mode && ticker.mode.ert_disabled
 
-var/global/maint_all_access = 0
-
+GLOBAL_VAR_INIT(maint_all_access, 0)
 /proc/make_maint_all_access()
 	maint_all_access = 1
 	world << "<font size=4 color='red'>Attention!</font>"

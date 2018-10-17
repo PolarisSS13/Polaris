@@ -570,9 +570,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		src.status = s
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
-var/failed_db_connections = 0
-var/failed_old_db_connections = 0
-
+GLOBAL_VAR_INIT(failed_db_connections, 0)
+GLOBAL_VAR_INIT(failed_old_db_connections, 0)
 /hook/startup/proc/connectDB()
 	if(!config.sql_enabled)
 		world.log << "SQL connection disabled in config."

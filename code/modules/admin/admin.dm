@@ -1,8 +1,6 @@
 
-var/global/BSACooldown = 0
-var/global/floorIsLava = 0
-
-
+GLOBAL_VAR_INIT(BSACooldown, 0)
+GLOBAL_VAR_INIT(floorIsLava, 0)
 ////////////////////////////////
 /proc/message_admins(var/msg)
 	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"

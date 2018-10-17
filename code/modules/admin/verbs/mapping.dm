@@ -19,9 +19,8 @@
 //- Identify how hard it is to break into the area and where the weak points are
 //- Check if the area has too much empty space. If so, make it smaller and replace the rest with maintenance tunnels.
 
-var/camera_range_display_status = 0
-var/intercom_range_display_status = 0
-
+GLOBAL_VAR_INIT(camera_range_display_status, 0)
+GLOBAL_VAR_INIT(intercom_range_display_status, 0)
 GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 
 /obj/effect/debugging/camera_range
@@ -349,8 +348,7 @@ GLOBAL_LIST_INIT(debug_verbs, list (
 	feedback_add_details("admin_verb","mOBJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
-var/global/prevent_airgroup_regroup = 0
-
+GLOBAL_VAR_INIT(prevent_airgroup_regroup, 0)
 /client/proc/break_all_air_groups()
 	set category = "Mapping"
 	set name = "Break All Airgroups"
@@ -396,7 +394,7 @@ var/global/prevent_airgroup_regroup = 0
 		message_admins("[src.ckey] used 'kill air processing', restoring all air processing.")*/
 
 //This proc is intended to detect lag problems relating to communication procs
-var/global/say_disabled = 0
+GLOBAL_VAR_INIT(say_disabled, 0)
 /client/proc/disable_communication()
 	set category = "Mapping"
 	set name = "Disable all communication verbs"
@@ -410,7 +408,7 @@ var/global/say_disabled = 0
 		message_admins("[src.ckey] used 'Disable all communication verbs', restoring all communication methods.")*/
 
 //This proc is intended to detect lag problems relating to movement
-var/global/movement_disabled = 0
+GLOBAL_VAR_INIT(movement_disabled, 0)
 var/global/movement_disabled_exception //This is the client that calls the proc, so he can continue to run around to gauge any change to lag.
 /client/proc/disable_movement()
 	set category = "Mapping"

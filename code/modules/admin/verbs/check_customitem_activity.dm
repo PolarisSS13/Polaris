@@ -1,4 +1,4 @@
-var/checked_for_inactives = 0
+GLOBAL_VAR_INIT(checked_for_inactives, 0)
 var/inactive_keys = "None<br>"
 
 /client/proc/check_customitem_activity()

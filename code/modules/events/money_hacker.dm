@@ -1,5 +1,4 @@
-/var/global/account_hack_attempted = 0
-
+GLOBAL_VAR_INIT(account_hack_attempted, 0)
 /datum/event/money_hacker
 	var/datum/money_account/affected_account
 	endWhen = 100

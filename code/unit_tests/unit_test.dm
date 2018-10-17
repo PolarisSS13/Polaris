@@ -1,7 +1,6 @@
-var/all_unit_tests_passed = 1
-var/failed_unit_tests = 0
-var/total_unit_tests = 0
-
+GLOBAL_VAR_INIT(all_unit_tests_passed, 1)
+GLOBAL_VAR_INIT(failed_unit_tests, 0)
+GLOBAL_VAR_INIT(total_unit_tests, 0)
 /datum/unit_test
 	var/name = "template"
 	var/disabled = ""

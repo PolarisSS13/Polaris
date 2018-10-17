@@ -99,8 +99,7 @@
 			communications_blackout()
 */
 var/eventchance = 10 // Percent chance per 5 minutes.
-var/hadevent    = 0
-
+GLOBAL_VAR_INIT(hadevent, 0)
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in shuffle(living_mob_list))
 		if(H.client && H.appendicitis())

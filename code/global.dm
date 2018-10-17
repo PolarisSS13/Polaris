@@ -38,8 +38,7 @@ var/href_logfile		= null
 #define GAME_VERSION		"POLARIS"
 var/changelog_hash		= ""
 var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
-var/round_progressing = 1
-
+GLOBAL_VAR_INIT(round_progressing, 1)
 var/master_mode       = "extended" // "extended"
 var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
@@ -98,13 +97,12 @@ GLOBAL_LIST_EMPTY(adminlog)
 
 GLOBAL_LIST_EMPTY(powernets)	// TODO - Move into SSmachines
 
-var/Debug2 = 0
+GLOBAL_VAR_INIT(Debug2, 0)
 GLOBAL_DATUM(debugobj, /datum/debug)
 
 GLOBAL_DATUM_INIT(mods, datum/moduletypes, new ))
 
-var/gravity_is_on = 1
-
+GLOBAL_VAR_INIT(gravity_is_on, 1)
 var/join_motd = null
 
 GLOBAL_DATUM_INIT(event_manager, datum/event_manager, new )) // Event Manager, the manager for events.
@@ -125,7 +123,7 @@ var/forum_authenticated_group = "10"
 
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.
-var/fileaccess_timer = 0
+GLOBAL_VAR_INIT(fileaccess_timer, 0)
 var/custom_event_msg = null
 
 // Database connections. A connection is established on world creation.
@@ -169,8 +167,7 @@ GLOBAL_LIST_INIT(scarySounds, list(
 ))
 
 // Bomb cap!
-var/max_explosion_range = 14
-
+GLOBAL_VAR_INIT(max_explosion_range, 14)
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
 var/global/obj/item/device/radio/intercom/omni/global_announcer = new /obj/item/device/radio/intercom/omni(null)
 
