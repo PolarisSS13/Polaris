@@ -1,5 +1,5 @@
 // Singleton instance of game_controller_new, setup in world.New()
-var/global/datum/controller/processScheduler/processScheduler
+GLOBAL_DATUM(processScheduler, datum/controller/processScheduler)
 
 /datum/controller/processScheduler
 	// Processes known by the scheduler

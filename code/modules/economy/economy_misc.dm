@@ -66,8 +66,8 @@
 
 var/global/current_date_string
 
-var/global/datum/money_account/vendor_account
-var/global/datum/money_account/station_account
+GLOBAL_DATUM(vendor_account, datum/money_account)
+GLOBAL_DATUM(station_account, datum/money_account)
 GLOBAL_LIST_EMPTY(datum/money_account/department_accounts)
 var/global/num_financial_terminals = 1
 var/global/next_account_number = 0

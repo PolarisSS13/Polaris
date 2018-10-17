@@ -4,7 +4,7 @@
 #endif
 
 // Items that ask to be called every cycle.
-var/global/datum/datacore/data_core = null
+GLOBAL_DATUM(data_core, datum/datacore)
 GLOBAL_LIST_EMPTY(all_areas)
 GLOBAL_LIST_EMPTY(machines)	// ALL Machines, wether processing or not.
 GLOBAL_LIST_EMPTY(processing_machines)	// TODO - Move into SSmachines
@@ -88,8 +88,8 @@ GLOBAL_LIST_INIT(reverse_dir, list( // reverse_dir[dir] = reverse of dir
 	23, 28, 30, 29, 31, 48, 50, 49, 51, 56, 58, 57, 59, 52, 54, 53, 55, 60, 62, 61, 63
 )(
 
-var/datum/configuration/config      = null
-var/datum/sun/sun                   = null
+GLOBAL_DATUM(config, datum/configuration)
+GLOBAL_DATUM(sun, datum/sun)
 
 GLOBAL_LIST_EMPTY(combatlog)
 GLOBAL_LIST_EMPTY(IClog)

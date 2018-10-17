@@ -1,4 +1,4 @@
-var/global/datum/controller/process/ticker/tickerProcess
+GLOBAL_DATUM(tickerProcess, datum/controller/process/ticker)
 
 /datum/controller/process/ticker
 	var/lastTickerTimeDuration

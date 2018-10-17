@@ -2,7 +2,7 @@
 
 // Controls the emergency shuttle
 
-var/global/datum/emergency_shuttle_controller/emergency_shuttle
+GLOBAL_DATUM(emergency_shuttle, datum/emergency_shuttle_controller)
 
 /datum/emergency_shuttle_controller
 	var/datum/shuttle/ferry/emergency/shuttle

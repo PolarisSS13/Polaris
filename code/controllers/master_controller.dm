@@ -6,7 +6,7 @@
 // TODO - This will be completely replaced by master.dm in time.
 //
 
-var/global/datum/controller/game_controller/master_controller //Set in world.New()
+GLOBAL_DATUM(master_controller, datum/controller/game_controller) //Set in world.New()
 
 var/global/controller_iteration = 0
 var/global/last_tick_duration = 0

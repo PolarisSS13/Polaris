@@ -19,7 +19,7 @@
 	for(var/mask in plant_controller.gene_tag_masks)
 		to_chat(usr, "[mask]: [plant_controller.gene_tag_masks[mask]]")
 
-var/global/datum/controller/plants/plant_controller // Set in New().
+GLOBAL_DATUM(plant_controller, datum/controller/plants) // Set in New().
 
 /datum/controller/plants
 

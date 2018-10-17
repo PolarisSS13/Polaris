@@ -1,4 +1,4 @@
-/var/datum/controller/process/scheduler/scheduler
+GLOBAL_DATUM(scheduler, datum/controller/process/scheduler)
 
 /************
 * Scheduler *

@@ -2,7 +2,7 @@
 
 // Recruiting observers to play as pAIs
 
-var/datum/paiController/paiController			// Global handler for pAI candidates
+GLOBAL_DATUM(paiController, datum/paiController)			// Global handler for pAI candidates
 
 /datum/paiCandidate
 	var/name

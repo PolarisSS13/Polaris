@@ -3,7 +3,7 @@
 //
 
 // This global variable exists for legacy support so we don't have to rename every shuttle_controller to SSshuttles yet.
-var/global/datum/controller/subsystem/shuttles/shuttle_controller
+GLOBAL_DATUM(shuttle_controller, datum/controller/subsystem/shuttles)
 
 SUBSYSTEM_DEF(shuttles)
 	name = "Shuttles"

@@ -210,7 +210,7 @@ GLOBAL_LIST_INIT(DEPT_FREQS, list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FR
 #define RADIO_MULEBOT		"RADIO_MULEBOT"
 #define RADIO_MAGNETS		"RADIO_MAGNET"
 
-var/global/datum/controller/radio/radio_controller
+GLOBAL_DATUM(radio_controller, datum/controller/radio)
 
 /hook/startup/proc/createRadioController()
 	radio_controller = new /datum/controller/radio()

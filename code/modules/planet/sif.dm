@@ -1,4 +1,4 @@
-var/datum/planet/sif/planet_sif = null
+GLOBAL_DATUM(planet_sif, datum/planet/sif)
 
 /datum/planet/sif
 	name = "Sif"

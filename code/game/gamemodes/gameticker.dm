@@ -1,4 +1,4 @@
-var/global/datum/controller/gameticker/ticker
+GLOBAL_DATUM(ticker, datum/controller/gameticker)
 
 /datum/controller/gameticker
 	var/const/restart_timeout = 3 MINUTES //One minute is 600.

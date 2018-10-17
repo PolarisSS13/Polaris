@@ -3,7 +3,7 @@
 //
 
 /var/global/open_space_initialised = FALSE
-/var/global/datum/controller/process/open_space/OS_controller = null
+GLOBAL_DATUM(OS_controller, datum/controller/process/open_space)
 /var/global/image/over_OS_darkness = image('icons/turf/open_space.dmi', "black_open")
 
 /datum/controller/process/open_space
