@@ -69,3 +69,56 @@
 	desc = "A hood that looks just like a corgi's head, it won't guarantee dog biscuits."
 	icon_state = "ian"
 	item_state_slots = list(slot_r_hand_str = "ian", slot_l_hand_str = "ian") //Does not exist -S2-
+
+// Hoodies
+/obj/item/clothing/head/hood/hoodie
+	name = "hoodie hood"
+	desc = "A hood attached to a hoodie."
+	icon_state = "grey_hoodie_hood"
+	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
+	min_cold_protection_temperature = T0C - 20
+	flags_inv = BLOCKHEADHAIR
+	body_parts_covered = HEAD
+
+/obj/item/clothing/head/hood/hoodie/black
+	icon_state = "black_hoodie_hood"
+
+/obj/item/clothing/head/hood/hoodie/red
+	icon_state = "red_hoodie_hood"
+
+/obj/item/clothing/head/hood/hoodie/blue
+	icon_state = "blue_hoodie_hood"
+
+/obj/item/clothing/head/hood/hoodie/green
+	icon_state = "green_hoodie_hood"
+
+/obj/item/clothing/head/hood/hoodie/yellow
+	icon_state = "yellow_hoodie_hood"
+
+/obj/item/clothing/head/hood/hoodie/orange
+	icon_state = "orange_hoodie_hood"
+
+// Snowsuits
+/obj/item/clothing/head/hood/winter/snowsuit
+	name = "snowsuit hood"
+	desc = "A hood attached to a snowsuit."
+	icon_state = "snowsuit_hood"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 5, rad = 0)
+
+/obj/item/clothing/head/hood/winter/snowsuit/command
+	name = "command snowsuit hood"
+
+/obj/item/clothing/head/hood/winter/snowsuit/science
+	name = "science snowsuit hood"
+
+/obj/item/clothing/head/hood/winter/snowsuit/security
+	name = "security snowsuit hood"
+
+/obj/item/clothing/head/hood/winter/snowsuit/engineering
+	name = "engineering snowsuit hood"
+
+/obj/item/clothing/head/hood/winter/snowsuit/medical
+	name = "medical snowsuit hood"
+
+/obj/item/clothing/head/hood/winter/snowsuit/cargo
+	name = "cargo snowsuit hood"
