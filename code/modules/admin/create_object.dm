@@ -1,5 +1,4 @@
-/var/create_object_html = null
-
+GLOBAL_VAR(create_object_html)
 /datum/admins/proc/create_object(var/mob/user)
 	if (!create_object_html)
 		var/objectjs = null

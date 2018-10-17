@@ -501,11 +501,11 @@ GLOBAL_LIST(swapmaps_iconcache)
 #define SWAPMAPS_TEXT		1
 var/swapmaps_mode=SWAPMAPS_SAV
 
-var/swapmaps_compiled_maxx)
-var/swapmaps_compiled_maxy)
-var/swapmaps_compiled_maxz)
-var/swapmaps_initialized)
-var/swapmaps_loaded)
+GLOBAL_VAR(swapmaps_compiled_maxx)
+GLOBAL_VAR(swapmaps_compiled_maxy)
+GLOBAL_VAR(swapmaps_compiled_maxz)
+GLOBAL_VAR(swapmaps_initialized)
+GLOBAL_VAR(swapmaps_loaded)
 GLOBAL_VAR(swapmaps_byname)
 
 proc/InitializeSwapMaps()

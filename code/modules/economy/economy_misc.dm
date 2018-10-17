@@ -64,8 +64,7 @@
 //Destroyers are medium sized vessels, often used for escorting larger ships but able to go toe-to-toe with them if need be.
 //Frigates are medium sized vessels, often used for escorting larger ships. They will rapidly find themselves outclassed if forced to face heavy warships head on.
 
-var/global/current_date_string
-
+GLOBAL_VAR(current_date_string)
 GLOBAL_DATUM(vendor_account, datum/money_account)
 GLOBAL_DATUM(station_account, datum/money_account)
 GLOBAL_LIST_EMPTY(datum/money_account/department_accounts)

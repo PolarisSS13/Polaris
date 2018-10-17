@@ -21,10 +21,10 @@ GLOBAL_DATUM_INIT(universe, datum/universal_state, new GLOBAL_LIST(global_map))
 // Noises made when hit while typing.
 GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
 var/log_path			= "data/logs/" //See world.dm for the full calculated path
-var/diary				= null
-var/error_log			= null
-var/debug_log			= null
-var/href_logfile		= null
+GLOBAL_VAR(diary)
+GLOBAL_VAR(error_log)
+GLOBAL_VAR(debug_log)
+GLOBAL_VAR(href_logfile)
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
 // var/const/station_short	= "Northern Star"
@@ -103,8 +103,7 @@ GLOBAL_DATUM(debugobj, /datum/debug)
 GLOBAL_DATUM_INIT(mods, datum/moduletypes, new ))
 
 GLOBAL_VAR_INIT(gravity_is_on, 1)
-var/join_motd = null
-
+GLOBAL_VAR(join_motd)
 GLOBAL_DATUM_INIT(event_manager, datum/event_manager, new )) // Event Manager, the manager for events.
 GLOBAL_DATUM_INIT(game_master, datum/game_master, new )) // Game Master, an AI for choosing events.
 GLOBAL_DATUM_INIT(metric, datum/metric, new )) // Metric datum, used to keep track of the round.
@@ -124,8 +123,7 @@ var/forum_authenticated_group = "10"
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.
 GLOBAL_VAR_INIT(fileaccess_timer, 0)
-var/custom_event_msg = null
-
+GLOBAL_VAR(custom_event_msg)
 // Database connections. A connection is established on world creation.
 // Ideally, the connection dies when the server restarts (After feedback logging.).
 var/DBConnection/dbcon     = new() // Feedback    database (New database)

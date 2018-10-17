@@ -35,7 +35,7 @@
 
 	return wtime + (time_offset + wusage) * world.tick_lag
 
-var/roundstart_hour
+GLOBAL_VAR(roundstart_hour)
 var/station_date = ""
 var/next_station_date_change = 1 DAY
 

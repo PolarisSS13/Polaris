@@ -1,4 +1,4 @@
-/var/create_turf_html = null
+GLOBAL_VAR(create_turf_html)
 /datum/admins/proc/create_turf(var/mob/user)
 	if (!create_turf_html)
 		var/turfjs = null

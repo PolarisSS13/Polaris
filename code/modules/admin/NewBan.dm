@@ -1,4 +1,4 @@
-var/CMinutes = null
+GLOBAL_VAR(CMinutes)
 var/savefile/Banlist
 
 

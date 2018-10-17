@@ -1,5 +1,4 @@
-var/bomb_set
-
+GLOBAL_VAR(bomb_set)
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
 	desc = "Uh oh. RUN!!!!"
