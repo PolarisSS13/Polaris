@@ -25,7 +25,7 @@
 
 	var/fuel_efficiency = 1	//This is the var which determines how much you consume fuel.
 	var/jam_chance = 2		//This is determined by the engine level.
-	var/active_digspeed = 1 //Determined by the drill bit
+	var/active_digspeed = 30 //Determined by the drill bit
 
 /obj/item/weapon/pickaxe/heavydutydrill/New()
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
@@ -165,7 +165,7 @@
 	if(istype(W, /obj/item/weapon/tool/screwdriver))
 		open = !open
 		playsound(src, 'sound/items/Screwdriver.ogg',40,1)
-		user << "<span class='notice'>The maintenance panel of the [src] is now [open ? "closed" : "open"].</span>"
+		user << "<span class='notice'>The maintenance panel of the [src] is now [open ? "open" : "closed"].</span>"
 		return
 
 	if(open)
@@ -241,12 +241,17 @@
 
 
 /obj/item/weapon/pickaxe/heavydutydrill/proc/update_stats() //This is supposed to update the values after you put things in and out.
+	..()
 	for(var/obj/item/drillparts/X in drill_bit)
-		active_digspeed = X.dullness
+		//active_digspeed = X.dullness
+		active_digspeed = min(active_digspeed, X.dullness)
+		to_chat(usr, "Drillbitdebug")
 	for(var/obj/item/drillparts/X in engine)
 		jam_chance = X.reliability
+		to_chat(usr, "Drillbitdebug2")
 	for(var/obj/item/drillparts/X in airfilter)
 		fuel_efficiency = X.aspiration
+		to_chat(usr, "Drillbitdebug3")
 
 /obj/item/weapon/pickaxe/heavydutydrill/proc/enginefail()//This is the process for a jammed engine. You need to activate it in hand to solve the issue.
 	force = inactive_force
