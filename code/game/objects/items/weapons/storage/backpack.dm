@@ -86,7 +86,7 @@
 	icon_state = "medicalpack"
 
 /obj/item/weapon/storage/backpack/security
-	name = "security backpack"
+	name = "police backpack"
 	desc = "It's a very robust backpack."
 	icon_state = "securitypack"
 
@@ -168,8 +168,8 @@
 	icon_state = "duffle_emt"
 
 /obj/item/weapon/storage/backpack/dufflebag/sec
-	name = "security dufflebag"
-	desc = "A large dufflebag for holding extra security supplies and ammunition."
+	name = "police dufflebag"
+	desc = "A large dufflebag for holding extra police supplies and ammunition."
 	icon_state = "duffle_sec"
 
 /obj/item/weapon/storage/backpack/dufflebag/eng
@@ -237,8 +237,8 @@
 	item_state_slots = list(slot_r_hand_str = "toxpack", slot_l_hand_str = "toxpack")
 
 /obj/item/weapon/storage/backpack/satchel/sec
-	name = "security satchel"
-	desc = "A robust satchel for security related needs."
+	name = "police satchel"
+	desc = "A robust satchel for police related needs."
 	icon_state = "satchel-sec"
 	item_state_slots = list(slot_r_hand_str = "securitypack", slot_l_hand_str = "securitypack")
 

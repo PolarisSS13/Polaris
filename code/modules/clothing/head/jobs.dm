@@ -87,19 +87,19 @@
 
 /obj/item/clothing/head/beret/sec/corporate/officer
 	name = "officer beret"
-	desc = "A corporate black beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
+	desc = "A black police beret with an officer's rank emblem. For officers that are more inclined towards style than safety."
 	icon_state = "beret_corporate_officer"
 	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
 
 /obj/item/clothing/head/beret/sec/corporate/hos
-	name = "Head of Security beret"
-	desc = "A corporate black beret with a Head of Security's rank emblem. For officers that are more inclined towards style than safety."
+	name = "Chief of Police beret"
+	desc = "A black police beret with a Chief of Police's rank emblem. For officers that are more inclined towards style than safety."
 	icon_state = "beret_corporate_hos"
 	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
 
 /obj/item/clothing/head/beret/sec/corporate/warden
 	name = "warden beret"
-	desc = "A corporate black beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
+	desc = "A black police beret with a warden's rank emblem. For officers that are more inclined towards style than safety."
 	icon_state = "beret_corporate_warden"
 	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
 
@@ -109,17 +109,17 @@
 
 /obj/item/clothing/head/helmet/warden/hat
 	name = "warden's hat"
-	desc = "It's a special hat issued to the Warden of a securiy force."
+	desc = "It's a special hat issued to the Warden of a police force."
 	icon_state = "policehelm"
 	valid_accessory_slots = null
 
 /obj/item/clothing/head/helmet/HoS
-	name = "Head of Security helmet"
-	desc = "Standard Head of Security gear. Protects the head from impacts."
+	name = "Chief of Police helmet"
+	desc = "Standard Chief of Police gear. Protects the head from impacts."
 
 /obj/item/clothing/head/helmet/HoS/hat
-	name = "Head of Security Hat"
-	desc = "The hat of the Head of Security. For showing the officers who's in charge."
+	name = "Chief of Police Hat"
+	desc = "The hat of the Chief of Police. For showing the officers who's in charge."
 	icon_state = "hoscap"
 	valid_accessory_slots = null
 

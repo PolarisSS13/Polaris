@@ -144,8 +144,8 @@
 	icon_state = "ems"
 
 /obj/item/weapon/storage/belt/security
-	name = "security belt"
-	desc = "Can hold security gear like handcuffs and flashes."
+	name = "duty belt"
+	desc = "Can hold police gear like handcuffs and flashes."
 	icon_state = "security"
 	max_w_class = ITEMSIZE_NORMAL
 	can_hold = list(

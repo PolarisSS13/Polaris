@@ -6,12 +6,12 @@
 
 /obj/item/clothing/accessory/badge
 	name = "detective's badge"
-	desc = "Security Department detective's badge, made from gold."
+	desc = "Police detective's badge, made from gold."
 	icon_state = "badge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 
 	var/stored_name
-	var/badge_string = "Corporate Security"
+	var/badge_string = "Geminus City Police Department"
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -118,13 +118,13 @@
 
 /obj/item/clothing/accessory/badge/holo/warden
 	name = "warden's holobadge"
-	desc = "A silver corporate security badge. Stamped with the words 'Warden.'"
+	desc = "A silver police badge. Stamped with the words 'Warden.'"
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
 /obj/item/clothing/accessory/badge/holo/hos
-	name = "head of security's holobadge"
-	desc = "An immaculately polished gold security badge. Labeled 'Head of Security.'"
+	name = "chief of police's holobadge"
+	desc = "An immaculately polished gold police badge. Labeled 'Chief of Police.'"
 	icon_state = "goldbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
