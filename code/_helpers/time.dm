@@ -36,7 +36,7 @@
 	return wtime + (time_offset + wusage) * world.tick_lag
 
 GLOBAL_VAR(roundstart_hour)
-var/station_date = ""
+GLOBAL_VAR_INIT(station_date, "")
 var/next_station_date_change = 1 DAY
 
 #define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")

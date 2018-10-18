@@ -1,6 +1,6 @@
 
-var/jsonpath = "/home/bay12/public_html"
-var/dmepath = "/home/bay12/git/baystation12.dme"
+GLOBAL_VAR_INIT(jsonpath, "/home/bay12/public_html")
+GLOBAL_VAR_INIT(dmepath, "/home/bay12/git/baystation12.dme")
 var/makejson = 1 //temp
 proc/makejson()
 

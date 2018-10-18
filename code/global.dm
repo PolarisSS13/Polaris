@@ -20,7 +20,7 @@ GLOBAL_DATUM_INIT(universe, datum/universal_state, new GLOBAL_LIST(global_map))
 
 // Noises made when hit while typing.
 GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
-var/log_path			= "data/logs/" //See world.dm for the full calculated path
+GLOBAL_VAR_INIT(log_path, "data/logs/") //See world.dm for the full calculated path
 GLOBAL_VAR(diary)
 GLOBAL_VAR(error_log)
 GLOBAL_VAR(debug_log)
@@ -36,11 +36,11 @@ GLOBAL_VAR(href_logfile)
 // var/const/star_name		= "Vir"
 // var/const/starsys_name	= "Vir"
 #define GAME_VERSION		"POLARIS"
-var/changelog_hash		= ""
+GLOBAL_VAR_INIT(changelog_hash, "")
 var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
 GLOBAL_VAR_INIT(round_progressing, 1)
-var/master_mode       = "extended" // "extended"
-var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
+GLOBAL_VAR_INIT(master_mode, "extended") // "extended"
+GLOBAL_VAR_INIT(secret_force_mode, "secret")   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
 var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
@@ -112,13 +112,13 @@ GLOBAL_LIST_EMPTY(awaydestinations) // Away missions. A list of landmarks that t
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
-var/forumsqladdress = "localhost"
-var/forumsqlport    = "3306"
-var/forumsqldb      = "tgstation"
-var/forumsqllogin   = "root"
-var/forumsqlpass    = ""
-var/forum_activated_group     = "2"
-var/forum_authenticated_group = "10"
+GLOBAL_VAR_INIT(forumsqladdress, "localhost")
+GLOBAL_VAR_INIT(forumsqlport, "3306")
+GLOBAL_VAR_INIT(forumsqldb, "tgstation")
+GLOBAL_VAR_INIT(forumsqllogin, "root")
+GLOBAL_VAR_INIT(forumsqlpass, "")
+GLOBAL_VAR_INIT(forum_activated_group, "2")
+GLOBAL_VAR_INIT(forum_authenticated_group, "10")
 
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.

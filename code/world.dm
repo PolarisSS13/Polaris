@@ -121,7 +121,7 @@ GLOBAL_DATUM_INIT(init, datum/global_init, new ))
 
 	return
 
-var/world_topic_spam_protect_ip = "0.0.0.0"
+GLOBAL_VAR_INIT(world_topic_spam_protect_ip, "0.0.0.0")
 var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
