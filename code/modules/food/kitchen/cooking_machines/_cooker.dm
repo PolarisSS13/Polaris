@@ -130,6 +130,7 @@
 	if(istype(cooking_obj, /obj/item/weapon/holder))
 		for(var/mob/living/M in cooking_obj.contents)
 			M.death()
+			M.Destroy()
 
 	// Cook the food.
 	var/cook_path
