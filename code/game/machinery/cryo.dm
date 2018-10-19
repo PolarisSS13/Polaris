@@ -206,11 +206,7 @@
 		var/mob/M = grab.affecting
 		qdel(grab)
 		put_mob(M)
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to put people into cryo without external assistance

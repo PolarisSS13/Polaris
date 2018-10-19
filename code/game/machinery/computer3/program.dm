@@ -228,10 +228,10 @@ Programs are a file that can be executed
 	//
 	if("eject_card" in href_list)
 		if(computer.cardslot)
-			if(istype(computer.cardslot, /obj/item/part/computer/cardslot/dual) && href_list["eject_card"] == "writer")
-				computer.cardslot.remove(usr)
+			if(computer.cardslot.dualslot && href_list["eject_card"] == "writer")
+				computer.cardslot.remove(computer.cardslot.writer)
 			else
-				computer.cardslot.remove(usr)
+				computer.cardslot.remove(computer.cardslot.reader)
 		return 1
 	//
 	// usage: runfile=\ref[file]

@@ -3,12 +3,8 @@
 	anchored = 1
 	opacity = 0
 	density = 0
-<<<<<<< HEAD
 	plane = -45
 	layer = ABOVE_JUNK_LAYER
-=======
-	layer = UNDER_JUNK_LAYER
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	w_class = ITEMSIZE_NORMAL
 
 /obj/structure/sign/ex_act(severity)

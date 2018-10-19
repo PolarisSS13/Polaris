@@ -378,8 +378,7 @@ var/global/datum/controller/occupations/job_master
 							H.amend_exploitable(G.path)
 
 						if(G.slot == "implant")
-							var/obj/item/weapon/implant/I = G.spawn_item(H)
-							I.implant_loadout(H)
+							H.implant_loadout(G)
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
@@ -420,7 +419,6 @@ var/global/datum/controller/occupations/job_master
 			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
 
 		H.job = rank
-		log_game("JOINED [key_name(H)] as \"[rank]\"")
 
 		// If they're head, give them the account info for their department
 		if(H.mind && job.head_position)

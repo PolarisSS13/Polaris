@@ -22,8 +22,6 @@
 var/camera_range_display_status = 0
 var/intercom_range_display_status = 0
 
-GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
-
 /obj/effect/debugging/camera_range
 	icon = 'icons/480x480.dmi'
 	icon_state = "25percent"
@@ -56,7 +54,7 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 
 
 
-	for(var/obj/effect/debugging/camera_range/C in all_debugging_effects)
+	for(var/obj/effect/debugging/camera_range/C in world)
 		qdel(C)
 
 	if(camera_range_display_status)
@@ -115,11 +113,11 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 	else
 		intercom_range_display_status = 1
 
-	for(var/obj/effect/debugging/marker/M in all_debugging_effects)
+	for(var/obj/effect/debugging/marker/M in world)
 		qdel(M)
 
 	if(intercom_range_display_status)
-		for(var/obj/item/device/radio/intercom/I in machines)
+		for(var/obj/item/device/radio/intercom/I in world)
 			for(var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in view(7,I.loc)))

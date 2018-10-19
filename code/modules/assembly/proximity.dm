@@ -39,7 +39,7 @@
 		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
 		return
 	if (istype(AM, /obj/effect/beam))	return
-	if (!isobserver(AM) && AM.move_speed < 12)	sense()
+	if (AM.move_speed < 12)	sense()
 	return
 
 

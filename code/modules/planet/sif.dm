@@ -185,10 +185,6 @@ datum/weather/sif
 		)
 
 /datum/weather/sif/snow/process_effects()
-<<<<<<< HEAD
-=======
-	..()
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
@@ -212,10 +208,6 @@ datum/weather/sif
 		)
 
 /datum/weather/sif/blizzard/process_effects()
-<<<<<<< HEAD
-=======
-	..()
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
@@ -228,8 +220,6 @@ datum/weather/sif
 	name = "rain"
 	icon_state = "rain"
 	light_modifier = 0.5
-	effect_message = "<span class='warning'>Rain falls on you.</span>"
-
 	transition_chances = list(
 		WEATHER_OVERCAST = 25,
 		WEATHER_LIGHT_SNOW = 10,
@@ -239,7 +229,6 @@ datum/weather/sif
 		)
 
 /datum/weather/sif/rain/process_effects()
-	..()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
@@ -250,19 +239,16 @@ datum/weather/sif
 			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
 				if(U.open)
-					if(show_message)
-						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
 					continue
 			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
 				if(U.open)
-					if(show_message)
-						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
 					continue
 
 			L.water_act(1)
-			if(show_message)
-				to_chat(L, effect_message)
+			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
 
 /datum/weather/sif/storm
 	name = "storm"
@@ -271,8 +257,6 @@ datum/weather/sif
 	temp_low = 233.15  // -40c
 	light_modifier = 0.3
 	flight_failure_modifier = 10
-
-
 	transition_chances = list(
 		WEATHER_RAIN = 45,
 		WEATHER_STORM = 40,
@@ -281,7 +265,6 @@ datum/weather/sif
 		)
 
 /datum/weather/sif/storm/process_effects()
-	..()
 	for(var/mob/living/L in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
@@ -312,10 +295,6 @@ datum/weather/sif
 	temp_low = 243.15	// -30c
 	light_modifier = 0.3
 	flight_failure_modifier = 15
-	timer_low_bound = 2
-	timer_high_bound = 5
-	effect_message = "<span class='warning'>The hail smacks into you!</span>"
-
 	transition_chances = list(
 		WEATHER_RAIN = 45,
 		WEATHER_STORM = 40,
@@ -324,7 +303,6 @@ datum/weather/sif
 		)
 
 /datum/weather/sif/hail/process_effects()
-	..()
 	for(var/mob/living/carbon/human/H in living_mob_list)
 		if(H.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(H)
@@ -332,38 +310,19 @@ datum/weather/sif
 				continue // They're indoors, so no need to pelt them with ice.
 
 			// If they have an open umbrella, it'll guard from rain
-			// Message plays every time the umbrella gets stolen, just so they're especially aware of what's happening
 			if(istype(H.get_active_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
 				if(U.open)
-					if(show_message)
-						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
 					continue
 			else if(istype(H.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = H.get_inactive_hand()
 				if(U.open)
-					if(show_message)
-						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
 					continue
 
-<<<<<<< HEAD
 			to_chat(H, "<span class='warning'>The hail smacks into you!</span>")
 			H.water_act(1)
-=======
-			var/target_zone = pick(BP_ALL)
-			var/amount_blocked = H.run_armor_check(target_zone, "melee")
-			var/amount_soaked = H.get_armor_soak(target_zone, "melee")
-
-			if(amount_blocked >= 100)
-				continue // No need to apply damage.
-
-			if(amount_soaked >= 10)
-				continue // No need to apply damage.
-
-			H.apply_damage(rand(1, 3), BRUTE, target_zone, amount_blocked, amount_soaked, used_weapon = "hail")
-			if(show_message)
-				to_chat(H, effect_message)
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 
 /datum/weather/sif/blood_moon
 	name = "blood moon"

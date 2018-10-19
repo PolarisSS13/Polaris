@@ -24,7 +24,6 @@
 	var/brute_dam = 0                  // Actual current brute damage.
 	var/burn_dam = 0                   // Actual current burn damage.
 	var/last_dam = -1                  // used in healing/processing calculations.
-	var/spread_dam = 0
 
 	// Appearance vars.
 	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.
@@ -72,8 +71,6 @@
 	var/open = 0
 	var/stage = 0
 	var/cavity = 0
-	var/burn_stage = 0		//Surgical repair stage for burn.
-	var/brute_stage = 0		//Surgical repair stage for brute.
 
 	// HUD element variable, see organ_icon.dm get_damage_hud_image()
 	var/image/hud_damage_image
@@ -256,7 +253,7 @@
 	//Continued damage to vital organs can kill you, and robot organs don't count towards total damage so no need to cap them.
 	return (vital || (robotic >= ORGAN_ROBOT) || brute_dam + burn_dam + additional_damage < max_damage)
 
-/obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list(), permutation = 0)
+/obj/item/organ/external/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	brute = round(brute * brute_mod, 0.1)
 	burn = round(burn * burn_mod, 0.1)
 
@@ -283,8 +280,6 @@
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
 	// Non-vital organs are limited to max_damage. You can't kill someone by bludeonging their arm all the way to 200 -- you can
 	// push them faster into paincrit though, as the additional damage is converted into shock.
-	var/brute_overflow = 0
-	var/burn_overflow = 0
 	if(is_damageable(brute + burn) || !config.limbs_can_break)
 		if(brute)
 			if(can_cut)
@@ -311,22 +306,20 @@
 						createwound( CUT, min(brute,can_inflict) )
 				else
 					createwound( BRUISE, min(brute,can_inflict) )
-				//How much more damage can we inflict
-				brute_overflow = max(0, brute - can_inflict)
+				var/temp = can_inflict
+				//How much mroe damage can we inflict
+				can_inflict = max(0, can_inflict - brute)
 				//How much brute damage is left to inflict
-				spillover += max(0, brute - can_inflict)
-
-			can_inflict = max_damage * config.organ_health_multiplier - (brute_dam + burn_dam) //Refresh the can_inflict var, so burn doesn't overload the limb if it is set to take both.
+				spillover += max(0, brute - temp)
 
 			if (burn > 0 && can_inflict)
 				//Inflict all burn damage we can
 				createwound(BURN, min(burn,can_inflict))
 				//How much burn damage is left to inflict
-				burn_overflow = max(0, burn - can_inflict)
-				spillover += burn_overflow
+				spillover += max(0, burn - can_inflict)
 
-		//If there is pain to dispense.
-		if(spillover)
+		//If there are still hurties to dispense
+		if (spillover)
 			owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
 
 	// sync the organ's damage with its wounds
@@ -355,19 +348,12 @@
 
 			if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
 				droplimb(0, DROPLIMB_EDGE)
-			else if((burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY) || (nonsolid && burn >= 5 && (burn_dam + burn >= max_damage)) && prob(burn/3))
+			else if(burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(burn/3))
 				droplimb(0, DROPLIMB_BURN)
-			else if((brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute)) || (nonsolid && brute >= 5 && (brute_dam + brute >= max_damage) && prob(brute/2)))
+			else if(brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute))
 				droplimb(0, DROPLIMB_BLUNT)
 			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
 				droplimb(0, DROPLIMB_EDGE)
-			else if(spread_dam && owner && parent && (brute_overflow || burn_overflow) && (brute_overflow >= 5 || burn_overflow >= 5) && !permutation) //No infinite damage loops.
-				if(children && children.len)
-					spawn()
-						for(var/obj/item/organ/external/C in children)
-							if(!C.is_stump())
-								C.take_damage(brute_overflow / children.len / 3, burn_overflow / children.len / 3, 0, 0, null, forbidden_limbs, 1) //Splits the damage to each individual 'child', incase multiple exist.
-				parent.take_damage(brute_overflow / 3, burn_overflow / 3, 0, 0, null, forbidden_limbs, 1)
 
 	return update_icon()
 
@@ -1048,8 +1034,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/obj/item/clothing/suit/space/suit = owner.wear_suit
 		suit.handle_fracture(owner, src)
 
-	return 1
-
 /obj/item/organ/external/proc/mend_fracture()
 	if(robotic >= ORGAN_ROBOT)
 		return 0	//ORGAN_BROKEN doesn't have the same meaning for robot limbs
@@ -1091,8 +1075,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 			R = basic_robolimb
 		if(R)
 			force_icon = R.icon
-			brute_mod *= R.robo_brute_mod
-			burn_mod *= R.robo_burn_mod
 			if(R.lifelike)
 				robotic = ORGAN_LIFELIKE
 				name = "[initial(name)]"
@@ -1330,18 +1312,3 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(6 to INFINITY)
 					flavor_text += "a ton of [wound]\s"
 		return english_list(flavor_text)
-
-// Returns a list of the clothing (not glasses) that are covering this part
-/obj/item/organ/external/proc/get_covering_clothing()
-	var/list/covering_clothing = list()
-	if(owner)
-		var/list/protective_gear = list(owner.head, owner.wear_mask, owner.wear_suit, owner.w_uniform, owner.gloves, owner.shoes)
-		for(var/obj/item/clothing/gear in protective_gear)
-			if(gear.body_parts_covered & src.body_part)
-				covering_clothing |= gear
-			if(LAZYLEN(gear.accessories))
-				for(var/obj/item/clothing/accessory/bling in gear.accessories)
-					if(bling.body_parts_covered & src.body_part)
-						covering_clothing |= bling
-
-	return covering_clothing

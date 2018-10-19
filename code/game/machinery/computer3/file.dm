@@ -17,49 +17,49 @@
 	var/drm	= 0			// Copy protection, called by copy() and move()
 	var/readonly = 0	// Edit protection, called by edit(), which is just a failcheck proc
 
-/datum/file/proc/execute(var/datum/file/source)
-	return
+	proc/execute(var/datum/file/source)
+		return
 
-//
-// Copy file to device.
-// If you overwrite this function, use the return value to make sure it succeeded
-//
-/datum/file/proc/copy(var/obj/item/part/computer/storage/dest)
-	if(!computer) return null
-	if(drm)
-		if(!computer.emagged)
+	//
+	// Copy file to device.
+	// If you overwrite this function, use the return value to make sure it succeeded
+	//
+	proc/copy(var/obj/item/part/computer/storage/dest)
+		if(!computer) return null
+		if(drm)
+			if(!computer.emagged)
+				return null
+		var/datum/file/F = new type()
+		if(!dest.addfile(F))
+			return null // todo: arf here even though the player can't do a damn thing due to concurrency
+		return F
+
+	//
+	// Move file to device
+	// Returns null on failure even though the existing file doesn't go away
+	//
+	proc/move(var/obj/item/part/computer/storage/dest)
+		if(!computer) return null
+		if(drm)
+			if(!computer.emagged)
+				return null
+		var/obj/item/part/computer/storage/current = device
+		if(!dest.addfile(src))
 			return null
-	var/datum/file/F = new type()
-	if(!dest.addfile(F))
-		return null // todo: arf here even though the player can't do a damn thing due to concurrency
-	return F
+		current.removefile(src)
+		return src
 
-//
-// Move file to device
-// Returns null on failure even though the existing file doesn't go away
-//
-/datum/file/proc/move(var/obj/item/part/computer/storage/dest)
-	if(!computer) return null
-	if(drm)
-		if(!computer.emagged)
-			return null
-	var/obj/item/part/computer/storage/current = device
-	if(!dest.addfile(src))
-		return null
-	current.removefile(src)
-	return src
+	//
+	// Determines if the file is editable.  This does not use the DRM flag,
+	// but instead the readonly flag.
+	//
 
-//
-// Determines if the file is editable.  This does not use the DRM flag,
-// but instead the readonly flag.
-//
-
-/datum/file/proc/edit()
-	if(!computer)
-		return 0
-	if(readonly && !computer.emagged)
-		return 0
-	return 1
+	proc/edit()
+		if(!computer)
+			return 0
+		if(readonly && !computer.emagged)
+			return 0 //
+		return 1
 
 /*
 	CentCom root authorization certificate
@@ -84,23 +84,23 @@
 	var/file_increment	= 1
 	var/binary			= 0 // determines if the file can't be opened by editor
 
-/datum/file/data/New()
-	if(content)
+	// Set the content to a specific amount, increase filesize appropriately.
+	proc/set_content(var/text)
+		content = text
 		if(file_increment > 1)
-			volume = round(file_increment * length(content))
-	..()
+			volume = round(file_increment * length(text))
 
-// Set the content to a specific amount, increase filesize appropriately.
-/datum/file/data/proc/set_content(var/text)
-	content = text
-	if(file_increment > 1)
-		volume = round(file_increment * length(text))
+	copy(var/obj/O)
+		var/datum/file/data/D = ..(O)
+		if(D)
+			D.content = content
+			D.readonly = readonly
 
-/datum/file/data/copy(var/obj/O)
-	var/datum/file/data/D = ..(O)
-	if(D)
-		D.content = content
-		D.readonly = readonly
+	New()
+		if(content)
+			if(file_increment > 1)
+				volume = round(file_increment * length(content))
+		..()
 
 /*
 	A generic file that contains text

@@ -12,7 +12,6 @@
 	nitrogen = MOLES_N2STANDARD
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
-	var/can_dirty = TRUE	// If false, tile never gets dirty
 	var/dirt = 0
 
 // This is not great.
@@ -66,13 +65,12 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
-	if(can_dirty)
-		dirt = min(dirt+1, 101)
-		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-		if (dirt > 50)
-			if (!dirtoverlay)
-				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-			dirtoverlay.alpha = min((dirt - 50) * 5, 255)
+	dirt = min(dirt+1, 101)
+	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
+	if (dirt > 50)
+		if (!dirtoverlay)
+			dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
+		dirtoverlay.alpha = min((dirt - 50) * 5, 255)
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
@@ -84,9 +82,8 @@
 		if(M.lying)
 			return ..()
 
-		if(M.dirties_floor())
-			// Dirt overlays.
-			update_dirt()
+		// Dirt overlays.
+		update_dirt()
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M

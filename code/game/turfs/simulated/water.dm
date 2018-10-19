@@ -21,7 +21,6 @@
 	..() // To get the edges.
 	icon_state = water_state
 	var/image/floorbed_sprite = image(icon = 'icons/turf/outdoors.dmi', icon_state = under_state)
-	underlays.Cut() // To clear the old underlay, so the list doesn't expand infinitely
 	underlays.Add(floorbed_sprite)
 	update_icon_edge()
 

@@ -11,8 +11,6 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 	siemens_coefficient = 0
 
-	assisted_langs = list()
-
 	breath_type = null
 	poison_type = null
 

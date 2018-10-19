@@ -4,15 +4,10 @@
 	anchored = 1
 	density = 1
 	pixel_x = -16
-<<<<<<< HEAD
 	plane = 0
 	layer = MOB_LAYER // You know what, let's play it safe.
 	burn_state = 0 //Burnable
 	burntime = PROLONGED_BURN
-=======
-	plane = MOB_LAYER // You know what, let's play it safe.
-	layer = ABOVE_MOB_LAYER
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	var/base_state = null	// Used for stumps.
 	var/health = 200		// Used for chopping down trees.
 	var/max_health = 200

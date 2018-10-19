@@ -7,11 +7,7 @@
 	anchored = 1
 	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
-<<<<<<< HEAD
 	layer = 2.9
-=======
-	layer = TABLE_LAYER
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0

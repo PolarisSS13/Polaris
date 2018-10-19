@@ -132,7 +132,7 @@
 
 /obj/machinery/keycard_auth/proc/broadcast_request()
 	icon_state = "auth_on"
-	for(var/obj/machinery/keycard_auth/KA in machines)
+	for(var/obj/machinery/keycard_auth/KA in world)
 		if(KA == src) continue
 		KA.reset()
 		spawn()

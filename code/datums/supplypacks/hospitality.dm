@@ -4,10 +4,10 @@
 */
 
 
-/datum/supply_pack/hospitality
+/datum/supply_packs/hospitality
 	group = "Hospitality"
 
-/datum/supply_pack/hospitality/party
+/datum/supply_packs/hospitality/party
 	name = "Party equipment"
 	contains = list(
 			/obj/item/weapon/storage/box/mixedglasses = 2,
@@ -26,7 +26,7 @@
 	containertype = /obj/structure/closet/crate
 	containername = "Party equipment"
 
-/datum/supply_pack/hospitality/barsupplies
+/datum/supply_packs/hospitality/barsupplies
 	name = "Bar supplies"
 	contains = list(
 			/obj/item/weapon/storage/box/glasses/cocktail,
@@ -46,10 +46,10 @@
 	containertype = /obj/structure/closet/crate
 	containername = "crate of bar supplies"
 
-/datum/supply_pack/randomised/hospitality/
+/datum/supply_packs/randomised/hospitality/
 	group = "Hospitality"
 
-/datum/supply_pack/randomised/hospitality/pizza
+/datum/supply_packs/randomised/hospitality/pizza
 	num_contained = 5
 	contains = list(
 			/obj/item/pizzabox/margherita,
@@ -62,7 +62,7 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Pizza crate"
 
-/datum/supply_pack/hospitality/gifts
+/datum/supply_packs/hospitality/gifts
 	name = "Gift crate"
 	contains = list(
 		/obj/item/toy/bouquet = 3,

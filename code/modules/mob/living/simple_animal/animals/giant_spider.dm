@@ -8,7 +8,7 @@
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
 	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
-	tt_desc = "X Brachypelma phorus"
+	tt_desc = "Atrax robustus gigantus"
 	icon_state = "guard"
 	icon_living = "guard"
 	icon_dead = "guard_dead"
@@ -66,7 +66,6 @@ Nurse Family
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."
-	tt_desc = "X Brachypelma phorus laetus"
 	icon_state = "nurse"
 	icon_living = "nurse"
 	icon_dead = "nurse_dead"
@@ -83,18 +82,8 @@ Nurse Family
 	var/atom/cocoon_target
 	var/egg_inject_chance = 5
 
-/mob/living/simple_animal/hostile/giant_spider/nurse/hat
-	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes and a tiny nurse hat"
-	icon_state = "nursemed"
-	icon_living = "nursemed"
-	icon_dead = "nursemed_dead"
-
-	maxHealth = 50
-	health = 50
-
 /mob/living/simple_animal/hostile/giant_spider/nurse/queen
 	desc = "Absolutely gigantic, this creature is horror itself."
-	tt_desc = "X Brachypelma phorus tyrannus"
 	icon = 'icons/mob/64x64.dmi'
 	icon_state = "spider_queen"
 	icon_living = "spider_queen"
@@ -117,7 +106,6 @@ Nurse Family
 
 /mob/living/simple_animal/hostile/giant_spider/webslinger
 	desc = "Furry and green, it makes you shudder to look at it. This one has brilliant green eyes, and a cloak of web."
-	tt_desc = "X Brachypelma phorus balisticus"
 	icon_state = "webslinger"
 	icon_living = "webslinger"
 	icon_dead = "webslinger_dead"
@@ -158,7 +146,6 @@ Nurse Family
 
 /mob/living/simple_animal/hostile/giant_spider/carrier
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes."
-	tt_desc = "X Brachypelma phorus gerulus"
 	icon_state = "carrier"
 	icon_living = "carrier"
 	icon_dead = "carrier_dead"
@@ -218,7 +205,6 @@ Hunter Family
 
 /mob/living/simple_animal/hostile/giant_spider/hunter
 	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes."
-	tt_desc = "X Brachypelma phorus venandi"
 	icon_state = "hunter"
 	icon_living = "hunter"
 	icon_dead = "hunter_dead"
@@ -231,7 +217,6 @@ Hunter Family
 
 /mob/living/simple_animal/hostile/giant_spider/lurker
 	desc = "Translucent and white, it makes you shudder to look at it. This one has incandescent red eyes."
-	tt_desc = "X Brachypelma phorus insidator"
 	icon_state = "lurker"
 	icon_living = "lurker"
 	icon_dead = "lurker_dead"
@@ -255,7 +240,6 @@ Hunter Family
 
 /mob/living/simple_animal/hostile/giant_spider/tunneler
 	desc = "Sandy and brown, it makes you shudder to look at it. This one has glittering yellow eyes."
-	tt_desc = "X Brachypelma phorus cannalis"
 	icon_state = "tunneler"
 	icon_living = "tunneler"
 	icon_dead = "tunneler_dead"
@@ -286,7 +270,6 @@ Guard Family
 
 /mob/living/simple_animal/hostile/giant_spider/pepper
 	desc = "Red and brown, it makes you shudder to look at it. This one has glinting red eyes."
-	tt_desc = "X Brachypelma phorus ignis"
 	icon_state = "pepper"
 	icon_living = "pepper"
 	icon_dead = "pepper_dead"
@@ -307,7 +290,6 @@ Guard Family
 
 /mob/living/simple_animal/hostile/giant_spider/thermic
 	desc = "Mirage-cloaked and orange, it makes you shudder to look at it. This one has simmering orange eyes."
-	tt_desc = "X Brachypelma phorus incaendium"
 	icon_state = "pit"
 	icon_living = "pit"
 	icon_dead = "pit_dead"
@@ -324,7 +306,6 @@ Guard Family
 
 /mob/living/simple_animal/hostile/giant_spider/electric
 	desc = "Spined and yellow, it makes you shudder to look at it. This one has flickering gold eyes."
-	tt_desc = "X Brachypelma phorus aromatitis"
 	icon_state = "spark"
 	icon_living = "spark"
 	icon_dead = "spark_dead"
@@ -348,7 +329,6 @@ Guard Family
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic
 	desc = "Crystalline and purple, it makes you shudder to look at it. This one has haunting purple eyes."
-	tt_desc = "X Brachypelma phorus phorus"
 	icon_state = "phoron"
 	icon_living = "phoron"
 	icon_dead = "phoron_dead"
@@ -382,7 +362,6 @@ Guard Family
 
 /mob/living/simple_animal/hostile/giant_spider/frost
 	desc = "Icy and blue, it makes you shudder to look at it. This one has brilliant blue eyes."
-	tt_desc = "X Brachypelma phorus pruinae"
 	icon_state = "frost"
 	icon_living = "frost"
 	icon_dead = "frost_dead"

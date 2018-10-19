@@ -287,18 +287,42 @@
 	icon_opened = "engi_crateopen"
 	icon_closed = "engi_crate"
 
-	starts_with = list(
-		/obj/item/weapon/rcd_ammo = 3,
-		/obj/item/weapon/rcd)
+/obj/structure/closet/crate/rcd/New()
+	..()
+	new /obj/item/weapon/rcd_ammo(src)
+	new /obj/item/weapon/rcd_ammo(src)
+	new /obj/item/weapon/rcd_ammo(src)
+	new /obj/item/weapon/rcd(src)
 
 /obj/structure/closet/crate/solar
 	name = "solar pack crate"
 
-	starts_with = list(
-		/obj/item/solar_assembly = 21,
-		/obj/item/weapon/circuitboard/solar_control,
-		/obj/item/weapon/tracker_electronics,
-		/obj/item/weapon/paper/solar)
+/obj/structure/closet/crate/solar/New()
+	..()
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/weapon/circuitboard/solar_control(src)
+	new /obj/item/weapon/tracker_electronics(src)
+	new /obj/item/weapon/paper/solar(src)
 
 /obj/structure/closet/crate/freezer
 	name = "freezer"
@@ -342,9 +366,13 @@
 	name = "emergency rations"
 	desc = "A crate of emergency rations."
 
-	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 4)
 
+/obj/structure/closet/crate/freezer/rations/New()
+	..()
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"
@@ -353,7 +381,6 @@
 	icon_opened = "largebinopen"
 	icon_closed = "largebin"
 
-
 /obj/structure/closet/crate/radiation
 	name = "radioactive gear crate"
 	desc = "A crate with a radiation sign on it."
@@ -361,10 +388,16 @@
 	icon_opened = "radiationopen"
 	icon_closed = "radiation"
 
-	starts_with = list(
-		/obj/item/clothing/suit/radiation = 4,
-		/obj/item/clothing/head/radiation = 4)
-
+/obj/structure/closet/crate/radiation/New()
+	..()
+	new /obj/item/clothing/suit/radiation(src)
+	new /obj/item/clothing/head/radiation(src)
+	new /obj/item/clothing/suit/radiation(src)
+	new /obj/item/clothing/head/radiation(src)
+	new /obj/item/clothing/suit/radiation(src)
+	new /obj/item/clothing/head/radiation(src)
+	new /obj/item/clothing/suit/radiation(src)
+	new /obj/item/clothing/head/radiation(src)
 
 /obj/structure/closet/crate/secure/weapon
 	name = "weapons crate"
@@ -373,14 +406,12 @@
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
-
 /obj/structure/closet/crate/secure/phoron
 	name = "phoron crate"
 	desc = "A secure phoron crate."
 	icon_state = "phoroncrate"
 	icon_opened = "phoroncrateopen"
 	icon_closed = "phoroncrate"
-
 
 /obj/structure/closet/crate/secure/gear
 	name = "gear crate"
@@ -389,14 +420,12 @@
 	icon_opened = "secgearcrateopen"
 	icon_closed = "secgearcrate"
 
-
 /obj/structure/closet/crate/secure/hydrosec
 	name = "secure hydroponics crate"
 	desc = "A crate with a lock on it, painted in the scheme of the station's botanists."
 	icon_state = "hydrosecurecrate"
 	icon_opened = "hydrosecurecrateopen"
 	icon_closed = "hydrosecurecrate"
-
 
 /obj/structure/closet/crate/secure/engineering
 	desc = "A crate with a lock on it, painted in the scheme of the station's engineers."
@@ -405,14 +434,12 @@
 	icon_opened = "engi_secure_crateopen"
 	icon_closed = "engi_secure_crate"
 
-
 /obj/structure/closet/crate/secure/science
 	name = "secure science crate"
 	desc = "A crate with a lock on it, painted in the scheme of the station's scientists."
 	icon_state = "scisecurecrate"
 	icon_opened = "scisecurecrateopen"
 	icon_closed = "scisecurecrate"
-
 
 /obj/structure/closet/crate/secure/bin
 	name = "secure bin"
@@ -425,7 +452,6 @@
 	sparks = "largebinsparks"
 	emag = "largebinemag"
 
-
 /obj/structure/closet/crate/large
 	name = "large crate"
 	desc = "A hefty metal crate."
@@ -433,7 +459,6 @@
 	icon_state = "largemetal"
 	icon_opened = "largemetalopen"
 	icon_closed = "largemetal"
-
 
 /obj/structure/closet/crate/large/close()
 	. = ..()
@@ -453,7 +478,6 @@
 					break
 	return
 
-
 /obj/structure/closet/crate/secure/large
 	name = "large crate"
 	desc = "A hefty metal crate with an electronic locking system."
@@ -463,7 +487,6 @@
 	icon_closed = "largemetal"
 	redlight = "largemetalr"
 	greenlight = "largemetalg"
-
 
 /obj/structure/closet/crate/secure/large/close()
 	. = ..()
@@ -482,7 +505,6 @@
 					M.forceMove(src)
 					break
 	return
-
 
 //fluff variant
 /obj/structure/closet/crate/secure/large/reinforced
@@ -515,8 +537,16 @@
 	icon_opened = "hydrocrateopen"
 	icon_closed = "hydrocrate"
 
-
 /obj/structure/closet/crate/hydroponics/prespawned
-	starts_with = list(
-		/obj/item/weapon/reagent_containers/spray/plantbgone = 2,
-		/obj/item/weapon/material/minihoe)
+	//This exists so the prespawned hydro crates spawn with their contents.
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
+		new /obj/item/weapon/reagent_containers/spray/plantbgone(src)
+		new /obj/item/weapon/material/minihoe(src)
+//		new /obj/item/weapon/weedspray(src)
+//		new /obj/item/weapon/weedspray(src)
+//		new /obj/item/weapon/pestspray(src)
+//		new /obj/item/weapon/pestspray(src)
+//		new /obj/item/weapon/pestspray(src)

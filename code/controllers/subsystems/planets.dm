@@ -56,21 +56,13 @@ SUBSYSTEM_DEF(planets)
 			P.planet_floors -= T
 		else
 			P.planet_walls -= T
-<<<<<<< HEAD
-=======
-		T.vis_contents -= P.weather_holder.visuals
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 
 /datum/controller/subsystem/planets/proc/allocateTurfs(var/initial = FALSE)
 	var/list/currentlist = new_outdoor_turfs
 	while(currentlist.len)
 		var/turf/simulated/OT = currentlist[currentlist.len]
 		currentlist.len--
-<<<<<<< HEAD
 		if(istype(OT) && z_to_planet[OT.z])
-=======
-		if(istype(OT) && OT.outdoors && z_to_planet.len >= OT.z && z_to_planet[OT.z])
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 			var/datum/planet/P = z_to_planet[OT.z]
 			P.planet_floors |= OT
 			OT.vis_contents |= P.weather_holder.visuals
@@ -81,11 +73,7 @@ SUBSYSTEM_DEF(planets)
 	while(currentlist.len)
 		var/turf/unsimulated/wall/planetary/PW = currentlist[currentlist.len]
 		currentlist.len--
-<<<<<<< HEAD
 		if(istype(PW) && z_to_planet[PW.z])
-=======
-		if(istype(PW) && z_to_planet.len >= PW.z && z_to_planet[PW.z])
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 			var/datum/planet/P = z_to_planet[PW.z]
 			P.planet_walls |= PW
 		if(!initial && MC_TICK_CHECK)
@@ -192,8 +180,4 @@ SUBSYSTEM_DEF(planets)
 			var/datum/planet/P = planet
 			if(P.weather_holder)
 				P.weather_holder.change_weather(pick(P.weather_holder.allowed_weather_types))
-<<<<<<< HEAD
 		sleep(3)
-=======
-		sleep(3)
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2

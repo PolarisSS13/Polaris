@@ -54,13 +54,8 @@ var/list/turf_edge_cache = list()
 			if(istype(T) && T.edge_blending_priority && edge_blending_priority < T.edge_blending_priority && icon_state != T.icon_state)
 				var/cache_key = "[T.get_edge_icon_state()]-[checkdir]"
 				if(!turf_edge_cache[cache_key])
-<<<<<<< HEAD
 					var/image/I = image(icon = 'icons/turf/outdoors_edge.dmi', icon_state = "[T.get_edge_icon_state()]-edge", dir = checkdir)
 					I.plane = -45 //fixed glitch that shows plane edges above mob
-=======
-					var/image/I = image(icon = 'icons/turf/outdoors_edge.dmi', icon_state = "[T.get_edge_icon_state()]-edge", dir = checkdir, layer = ABOVE_TURF_LAYER)
-					I.plane = TURF_PLANE
->>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 					turf_edge_cache[cache_key] = I
 				add_overlay(turf_edge_cache[cache_key])
 

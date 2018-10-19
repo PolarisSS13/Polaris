@@ -162,17 +162,12 @@
 			return 1
 
 		var/cost = 1
-		
-		if(isnull(current_category))
-			current_category = recipe_list[1]
 		if(ispath(build_type, /obj/item/device/electronic_assembly))
 			var/obj/item/device/electronic_assembly/E = build_type
 			cost = round( (initial(E.max_complexity) + initial(E.max_components) ) / 4)
-		else
-			var/obj/item/I = build_type
-			cost = initial(I.w_class)
-		if(!(locate(build_type) in recipe_list[current_category]))
-			return
+		else if(ispath(build_type, /obj/item/integrated_circuit))
+			var/obj/item/integrated_circuit/IC = build_type
+			cost = initial(IC.w_class)
 
 		if(metal - cost < 0)
 			to_chat(usr, "<span class='warning'>You need [cost] metal to build that!.</span>")

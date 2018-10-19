@@ -31,8 +31,6 @@
 	attacktext = list("slashed")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 
-	armor = list(melee = 40, bullet = 40, laser = 50, energy = 45, bomb = 20, bio = 100, rad = 100)	// As close to the actual Dark Gygax as possible
-
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0
@@ -45,7 +43,7 @@
 
 	ranged = 1
 	rapid = 1
-	projectiletype = /obj/item/projectile/beam/midlaser
+	projectiletype = /obj/item/projectile/beam
 	projectilesound = 'sound/weapons/laser.ogg'
 
 	speak_chance = 1

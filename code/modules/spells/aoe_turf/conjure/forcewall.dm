@@ -33,7 +33,6 @@
 	opacity = 0
 	density = 1
 	unacidable = 1
-	invisibility = 101
 
 /obj/effect/forcefield/bullet_act(var/obj/item/projectile/Proj, var/def_zone)
 	var/turf/T = get_turf(src.loc)

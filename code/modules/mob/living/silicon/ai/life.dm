@@ -8,8 +8,6 @@
 		if (src.stat!=CONSCIOUS)
 			src.cameraFollow = null
 			src.reset_view(null)
-			if(controlling_drone)
-				controlling_drone.release_ai_control("<b>WARNING: Primary control loop failure.</b> Session terminated.")
 
 		src.updatehealth()
 

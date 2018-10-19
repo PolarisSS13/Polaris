@@ -194,19 +194,11 @@
 	default_type = DEFAULT_WALL_MATERIAL
 	no_variants = FALSE
 
-/obj/item/stack/material/steel/hull
-	name = MAT_STEELHULL
-	default_type = MAT_STEELHULL
-
 /obj/item/stack/material/plasteel
 	name = "plasteel"
 	icon_state = "sheet-plasteel"
 	default_type = "plasteel"
 	no_variants = FALSE
-
-/obj/item/stack/material/plasteel/hull
-	name = MAT_PLASTEELHULL
-	default_type = MAT_PLASTEELHULL
 
 /obj/item/stack/material/durasteel
 	name = "durasteel"
@@ -214,9 +206,6 @@
 	item_state = "sheet-metal"
 	default_type = "durasteel"
 	no_variants = FALSE
-
-/obj/item/stack/material/durasteel/hull
-	name = "MAT_DURASTEELHULL"
 
 /obj/item/stack/material/wood
 	name = "wooden plank"

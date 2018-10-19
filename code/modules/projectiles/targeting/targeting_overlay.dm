@@ -6,7 +6,7 @@
 	anchored = 1
 	density = 0
 	opacity = 0
-	plane = ABOVE_PLANE
+	layer = FLY_LAYER
 	simulated = 0
 	mouse_opacity = 0
 

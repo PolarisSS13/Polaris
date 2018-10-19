@@ -302,7 +302,7 @@
 			else			adverb = " a very lengthy message"
 		message = "<B>[speaker]</B> [verb][adverb]."
 
-	show_message(message, type = 1) // Type 1 is visual message
+	src.show_message(message)
 
 /mob/proc/hear_sleep(var/message)
 	var/heard = ""

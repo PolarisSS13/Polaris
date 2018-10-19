@@ -27,9 +27,6 @@ SUBSYSTEM_DEF(air)
 	// Updating zone tiles requires temporary storage location of self-zone-blocked turfs across resumes. Used only by process_tiles_to_update.
 	var/list/selfblock_deferred = null
 
-	// This is used to tell Travis WHERE the edges are.
-	var/list/startup_active_edge_log = list()
-
 /datum/controller/subsystem/air/PreInit()
 	air_master = src
 
@@ -38,7 +35,7 @@ SUBSYSTEM_DEF(air)
 
 	current_cycle = 0
 	var/simulated_turf_count = 0
-	for(var/turf/simulated/S in turfs)
+	for(var/turf/simulated/S in world)
 		simulated_turf_count++
 		S.update_air_properties()
 		CHECK_TICK
@@ -59,9 +56,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		for(var/connection_edge/E in active_edges)
 			edge_log += "Active Edge [E] ([E.type])"
 			for(var/turf/T in E.connecting_turfs)
-				edge_log += "+--- Connecting Turf [T] ([T.type]) @ [T.x], [T.y], [T.z] ([T.loc])"
+				edge_log += "+--- Connecting Turf [T] @ [T.x], [T.y], [T.z]"
 		log_debug("Active Edges on ZAS Startup\n" + edge_log.Join("\n"))
-		startup_active_edge_log = edge_log.Copy()
 
 	..()
 
