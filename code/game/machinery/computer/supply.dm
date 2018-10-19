@@ -22,7 +22,7 @@
 	icon_screen = "supply"
 	light_color = "#b88b2e"
 	req_access = list(access_cargo)
-	circuit = /obj/item/weapon/circuitboard/supplycomp
+	circuit = /obj/item/weapon/circuitboard/supplycomp/control
 	authorization = SUP_SEND_SHUTTLE | SUP_ACCEPT_ORDERS
 
 /obj/machinery/computer/supplycomp/attack_ai(var/mob/user as mob)
@@ -166,7 +166,7 @@
 	data["supply_packs"] = pack_list
 	data["orders"] = orders
 	data["receipts"] = receipts
-	data["contraband"] = can_order_contraband
+	data["contraband"] = can_order_contraband || (authorization & SUP_CONTRABAND)
 
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -398,7 +398,6 @@
 		if("send_to_station")
 			shuttle.launch(src)
 			to_chat(usr, "<span class='notice'>The supply shuttle has been called and will arrive in approximately [round(supply_controller.movetime/600,1)] minutes.</span>")
-			post_signal("supply")
 
 		if("cancel_shuttle")
 			shuttle.cancel_launch(src)
