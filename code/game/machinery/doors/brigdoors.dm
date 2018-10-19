@@ -51,7 +51,7 @@
 		if(F.id == src.id)
 			LAZYADD(targets,F)
 
-	for(var/obj/structure/closet/secure_closet/brig/C in world)
+	for(var/obj/structure/closet/secure_closet/brig/C in all_brig_closets)
 		if(C.id == src.id)
 			LAZYADD(targets,C)
 

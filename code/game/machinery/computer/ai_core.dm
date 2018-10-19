@@ -181,6 +181,8 @@
 				feedback_inc("cyborg_ais_created",1)
 				qdel(src)
 
+GLOBAL_LIST_BOILERPLATE(all_deactivated_AI_cores, /obj/structure/AIcore/deactivated)
+
 /obj/structure/AIcore/deactivated
 	name = "inactive AI"
 	icon = 'icons/mob/AI.dmi'
@@ -198,14 +200,16 @@
 	if(!istype(transfer) || locate(/mob/living/silicon/ai) in src)
 		return
 
+	if(transfer.controlling_drone)
+		transfer.controlling_drone.release_ai_control("Unit control lost. Core transfer completed.")
 	transfer.aiRestorePowerRoutine = 0
 	transfer.control_disabled = 0
 	transfer.aiRadio.disabledAi = 0
 	transfer.loc = get_turf(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
-	user << "<span class='notice'>Transfer successful:</span> [transfer.name] placed within stationary core."
-	transfer << "You have been transferred into a stationary core. Remote device connection restored."
+	to_chat(user, "<span class='notice'>Transfer successful:</span> [transfer.name] placed within stationary core.")
+	to_chat(transfer, "You have been transferred into a stationary core. Remote device connection restored.")
 
 	if(card)
 		card.clear()
@@ -255,7 +259,7 @@
 	set category = "Admin"
 
 	var/list/cores = list()
-	for(var/obj/structure/AIcore/deactivated/D in world)
+	for(var/obj/structure/AIcore/deactivated/D in all_deactivated_AI_cores)
 		cores["[D] ([D.loc.loc])"] = D
 
 	var/id = input("Which core?", "Toggle AI Core Latejoin", null) as null|anything in cores

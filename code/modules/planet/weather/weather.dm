@@ -71,7 +71,11 @@
 
 	var/effect_message = null		// Should be a string, this is what is shown to a mob caught in the weather
 	var/last_message = 0			// Keeps track of when the weather last tells EVERY player it's hitting them
+<<<<<<< HEAD:code/modules/planet/weather/weather.dm
 	var/message_delay = 120 SECONDS	// Delay in between weather hit messages
+=======
+	var/message_delay = 10 SECONDS	// Delay in between weather hit messages
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2:code/modules/planet/weather.dm
 	var/show_message = FALSE		// Is set to TRUE and plays the messsage every [message_delay]
 
 /datum/weather/proc/process_effects()
@@ -86,4 +90,8 @@
 /atom/movable/weather_visuals
 	icon = 'icons/effects/weather.dmi'
 	mouse_opacity = 0
+<<<<<<< HEAD:code/modules/planet/weather/weather.dm
 	plane = PLANE_PLANETLIGHTING
+=======
+	plane = PLANE_PLANETLIGHTING
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2:code/modules/planet/weather.dm

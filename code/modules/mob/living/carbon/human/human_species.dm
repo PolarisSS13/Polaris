@@ -52,6 +52,7 @@
 /mob/living/carbon/human/stok/New(var/new_loc)
 	..(new_loc, SPECIES_MONKEY_UNATHI)
 
+<<<<<<< HEAD
 /mob/living/carbon/human/zombie/New(var/new_loc)
 	..(new_loc, SPECIES_ZOMBIE)
 
@@ -61,3 +62,7 @@
 
 /mob/living/carbon/human/teen/New(var/new_loc)
 	..(new_loc, SPECIES_HUMAN_TEEN)
+=======
+/mob/living/carbon/human/event1/New(var/new_loc)
+	..(new_loc, SPECIES_EVENT1)
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2

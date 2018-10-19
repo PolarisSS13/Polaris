@@ -2,14 +2,20 @@
 	name = "curtain"
 	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
+<<<<<<< HEAD
 	layer = SHOWER_OPEN_LAYER
 	plane = ABOVE_PLANE
+=======
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	opacity = 1
 	density = 0
 
 /obj/structure/curtain/open
 	icon_state = "open"
-	layer = SHOWER_CLOSED_LAYER
+	plane = OBJ_PLANE
+	layer = OBJ_LAYER
 	opacity = 0
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
@@ -28,10 +34,12 @@
 	set_opacity(!opacity)
 	if(opacity)
 		icon_state = "closed"
-		layer = SHOWER_CLOSED_LAYER
+		plane = MOB_PLANE
+		layer = ABOVE_MOB_LAYER
 	else
 		icon_state = "open"
-		layer = SHOWER_OPEN_LAYER
+		plane = OBJ_PLANE
+		layer = OBJ_LAYER
 
 /obj/structure/curtain/attackby(obj/item/P, mob/user)
 	if(istype(P, /obj/item/weapon/wirecutters))
@@ -77,6 +85,3 @@
 
 /obj/structure/curtain/open/shower/security
 	color = "#AA0000"
-
-#undef SHOWER_OPEN_LAYER
-#undef SHOWER_CLOSED_LAYER

@@ -86,3 +86,9 @@
 
 /area/submap/cave/BlastMine1
 	name = "Blast Mine 1"
+
+/area/submap/crashedcontainmentshuttle
+	name = "Crashed	Containment	Shuttle"
+
+/area/submap/deadspy
+	name = "Dead Spy"

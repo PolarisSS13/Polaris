@@ -170,6 +170,7 @@
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	return
 
+<<<<<<< HEAD
 /obj/water_act()
 	if(!burn_state)
 		return
@@ -209,3 +210,7 @@
 		B.time_to_live = 1
 		burning_objects -= src
 		visible_message("<span class='notice'>The [src]'s flames dissipate.</span>")
+=======
+/obj/proc/get_cell()
+	return
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2

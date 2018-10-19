@@ -133,8 +133,11 @@
 		if("Vote")
 			debug_variables(vote)
 			feedback_add_details("admin_verb", "DVote")
+<<<<<<< HEAD
 		if("Planets")
 			debug_variables(SSplanets)
 			feedback_add_details("admin_verb", "DPlanets")
+=======
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

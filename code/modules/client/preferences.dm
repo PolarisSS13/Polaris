@@ -22,6 +22,7 @@ datum/preferences
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 	var/tooltipstyle = "Midnight"		//Style for popup tooltips
+	var/client_fps = 0
 
 	//character preferences
 	var/real_name						//our character's name
@@ -59,6 +60,7 @@ datum/preferences
 	var/r_synth							//Used with synth_color to color synth parts that normaly can't be colored.
 	var/g_synth							//Same as above
 	var/b_synth							//Same as above
+	var/synth_markings = 0				//Enable/disable markings on synth parts.
 
 		//Some faction information.
 	var/home_system = "Vetra"           //System of birth.

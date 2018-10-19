@@ -1,6 +1,9 @@
 // This is a wall you surround the area of your "planet" with, that makes the atmosphere inside stay within bounds, even if canisters
 // are opened or other strange things occur.
+<<<<<<< HEAD
 
+=======
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2
 /turf/unsimulated/wall/planetary
 	name = "railroading"
 	desc = "Choo choo!"

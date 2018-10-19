@@ -1,6 +1,7 @@
 /mob/living/simple_animal/hostile/syndicate
 	name = "mercenary"
 	desc = "Death to the Company."
+	tt_desc = "E Homo sapiens"
 	icon_state = "syndicate"
 	icon_living = "syndicate"
 	icon_dead = "syndicate_dead"
@@ -28,10 +29,14 @@
 	response_harm = "hits"
 
 	harm_intent_damage = 5
-	melee_damage_lower = 10
+	melee_damage_lower = 15		//Tac Knife damage
 	melee_damage_upper = 15
 	environment_smash = 1
-	attacktext = list("punched")
+	attack_sharp = 1
+	attack_edge = 1
+	attacktext = list("slashed", "stabbed")
+
+	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 100, rad = 100)	// Same armor values as the vest they drop, plus simple mob immunities
 
 	min_oxy = 5
 	max_oxy = 0
@@ -61,9 +66,13 @@
 	var/corpse = /obj/effect/landmark/mobcorpse/syndicatesoldier
 
 /mob/living/simple_animal/hostile/syndicate/death()
-	..()
 	if(corpse)
+		..()
 		new corpse (src.loc)
+	else
+		..(0,"explodes!")
+		new /obj/effect/gibspawner/human(src.loc)
+		explosion(get_turf(src), -1, 0, 1, 3)
 	qdel(src)
 	return
 
@@ -114,6 +123,8 @@
 
 	speed = 0
 
+	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 100)	// Same armor as their voidsuit
+
 	min_oxy = 0
 	max_oxy = 0
 	min_tox = 0
@@ -141,6 +152,24 @@
 
 	loot_list = list(/obj/item/weapon/gun/projectile/automatic/c20r = 100)
 
+/mob/living/simple_animal/hostile/syndicate/ranged/laser
+	icon_state = "syndicateranged_laser"
+	icon_living = "syndicateranged_laser"
+	rapid = 0
+	projectiletype = /obj/item/projectile/beam/midlaser
+	projectilesound = 'sound/weapons/Laser.ogg'
+
+	loot_list = list(/obj/item/weapon/gun/energy/laser = 100)
+
+/mob/living/simple_animal/hostile/syndicate/ranged/ionrifle
+	icon_state = "syndicateranged_ionrifle"
+	icon_living = "syndicateranged_ionrifle"
+	rapid = 0
+	projectiletype = /obj/item/projectile/ion
+	projectilesound = 'sound/weapons/Laser.ogg'
+
+	loot_list = list(/obj/item/weapon/gun/energy/ionrifle = 100)
+
 /mob/living/simple_animal/hostile/syndicate/ranged/space
 	name = "syndicate sommando"
 	icon_state = "syndicaterangedpsace"
@@ -162,6 +191,42 @@
 
 /mob/living/simple_animal/hostile/syndicate/ranged/space/Process_Spacemove(var/check_drift = 0)
 	return
+
+///////////////////////////////////////////////
+//	POI Mobs
+//	Don't leave corpses, to help balance loot.
+///////////////////////////////////////////////
+
+/mob/living/simple_animal/hostile/syndicate/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/melee/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/melee/space/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/ranged/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/ranged/laser/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/ranged/ionrifle/poi
+	loot_list = list()
+	corpse = null
+
+/mob/living/simple_animal/hostile/syndicate/ranged/space/poi
+	loot_list = list()
+	corpse = null
+
+
+//Viscerators
 
 /mob/living/simple_animal/hostile/viscerator
 	name = "viscerator"

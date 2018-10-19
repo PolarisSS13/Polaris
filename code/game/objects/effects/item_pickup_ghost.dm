@@ -16,4 +16,8 @@
 /obj/effect/temporary_effect/item_pickup_ghost/proc/animate_towards(var/atom/target)
 	var/new_pixel_x = pixel_x + (target.x - src.x) * 32
 	var/new_pixel_y = pixel_y + (target.y - src.y) * 32
+<<<<<<< HEAD
 	animate(src, pixel_x = new_pixel_x, pixel_y = new_pixel_y, transform = matrix()*0, time = lifetime)
+=======
+	animate(src, pixel_x = new_pixel_x, pixel_y = new_pixel_y, transform = matrix()*0, time = lifetime)
+>>>>>>> cc4240f29025920a67eaaa99032402dd392afee2

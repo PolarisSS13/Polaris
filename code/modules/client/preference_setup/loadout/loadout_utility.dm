@@ -79,6 +79,11 @@
 	path =/obj/item/weapon/storage/secure/briefcase
 	cost = 2
 
+/datum/gear/utility/laserpointer
+	display_name = "laser pointer"
+	path =/obj/item/device/laser_pointer
+	cost = 2
+
 /datum/gear/utility/flashlight
 	display_name = "flashlight"
 	path = /obj/item/device/flashlight
@@ -109,12 +114,6 @@
 	path = /obj/item/weapon/cell/device
 
 /datum/gear/utility/implant
-	exploitable = 1
-
-/datum/gear/utility/implant/eal //This does nothing if you don't actually know EAL.
-	display_name = "implant, language, EAL"
-	path = /obj/item/weapon/implant/language/eal
-	cost = 2
 	slot = "implant"
 	exploitable = 1
 
@@ -122,8 +121,20 @@
 	display_name = "implant, tracking"
 	path = /obj/item/weapon/implant/tracking/weak
 	cost = 10
-	slot = "implant"
-	exploitable = 1
+
+/datum/gear/utility/implant/language
+	cost = 2
+	exploitable = 0
+
+/datum/gear/utility/implant/language/eal
+	display_name = "vocal synthesizer, EAL"
+	description = "A surgically implanted vocal synthesizer which allows the owner to speak EAL, if they know it."
+	path = /obj/item/weapon/implant/language/eal
+
+/datum/gear/utility/implant/language/skrellian
+	display_name = "vocal synthesizer, Skrellian"
+	description = "A surgically implanted vocal synthesizer which allows the owner to speak Common Skrellian, if they know it."
+	path = /obj/item/weapon/implant/language/skrellian
 
 /datum/gear/utility/pen
 	display_name = "Fountain Pen"
