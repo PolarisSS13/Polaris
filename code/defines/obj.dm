@@ -146,7 +146,7 @@ var/global/list/PDA_Manifest = list()
 		// No combat/syndicate cyborgs, no drones.
 		if(robot.scrambledcodes || (robot.module && robot.module.hide_on_manifest))
 			continue
-			
+
 		bot[++bot.len] = list("name" = robot.real_name, "rank" = "[robot.modtype] [robot.braintype]", "active" = "Active")
 
 
