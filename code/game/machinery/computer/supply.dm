@@ -43,6 +43,8 @@
 		return 1
 
 
+
+
 /obj/machinery/computer/supplycomp/ui_interact(mob/user, ui_key = "supply_records", var/datum/nanoui/ui = null, var/force_open = 1, var/key_state = null)
 	var/data[0]
 	var/shuttle_status[0]	// Supply shuttle status
@@ -178,6 +180,8 @@
 		ui.open()
 		// auto update every 20 Master Controller tick
 		ui.set_auto_update(20) // Longer term to reduce the rate of data collection and processing
+
+
 
 
 /obj/machinery/computer/supplycomp/Topic(href, href_list)

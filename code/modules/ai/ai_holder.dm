@@ -164,7 +164,7 @@
 		else if(istype(holder.loc, /obj/structure/closet))
 			var/obj/structure/closet/C = holder.loc
 			ai_log("handle_stance_tactical() : Inside a closet. Going to attempt escape.", AI_LOG_TRACE)
-			if(C.welded)
+			if(C.sealed)
 				holder.resist()
 			else
 				C.open()

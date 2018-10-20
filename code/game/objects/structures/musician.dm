@@ -98,7 +98,6 @@
 
 		for(var/line in lines)
 			for(var/beat in splittext(lowertext(line), ","))
-				//world << "beat: [beat]"
 				var/list/notes = splittext(beat, "/")
 				for(var/note in splittext(notes[1], "-"))
 					if(!playing || shouldStopPlaying(user))//If the instrument is playing, or special case
@@ -106,7 +105,6 @@
 						return
 					if(lentext(note) == 0)
 						continue
-					//world << "Parse: [copytext(note,1,2)]"
 					var/cur_note = text2ascii(note) - 96
 					if(cur_note < 1 || cur_note > 7)
 						continue
