@@ -409,7 +409,7 @@ GLOBAL_VAR_INIT(say_disabled, 0)
 
 //This proc is intended to detect lag problems relating to movement
 GLOBAL_VAR_INIT(movement_disabled, 0)
-var/global/movement_disabled_exception //This is the client that calls the proc, so he can continue to run around to gauge any change to lag.
+GLOBAL_VAR(movement_disabled_exception) //This is the client that calls the proc, so he can continue to run around to gauge any change to lag.
 /client/proc/disable_movement()
 	set category = "Mapping"
 	set name = "Disable all movement"

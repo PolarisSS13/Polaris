@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-var/jobban_runonce			// Updates legacy bans with new info
+GLOBAL_VAR(jobban_runonce)			// Updates legacy bans with new info
 var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_fullban(mob/M, rank, reason)

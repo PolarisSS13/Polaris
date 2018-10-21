@@ -143,8 +143,8 @@ GLOBAL_VAR(syndicate_name)
 
 
 //Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase//Code phrase for traitors.
-var/syndicate_code_response//Code response for traitors.
+GLOBAL_VAR(syndicate_code_phrase)//Code phrase for traitors.
+GLOBAL_VAR(syndicate_code_response)//Code response for traitors.
 
 	/*
 	Should be expanded.

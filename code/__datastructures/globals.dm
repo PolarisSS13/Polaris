@@ -52,3 +52,21 @@
 
 //Create an typed null global
 #define GLOBAL_DATUM(X, Typepath) GLOBAL_RAW(Typepath/##X); GLOBAL_UNMANAGED(X)
+
+/*
+Global replacement regexes (Not comprehensive!)
+//THESE ARE ORDERED TOP TO BOTTOM! GO IN THAT ORDER.
+//Does not include replace strings - Sorry.
+
+//Regex out lists first! I forgot to record regexes for them.
+-------------
+^/*var/(global/|static/)*(datum/[/A-Za-z_]*)/([A-Za-z_]*)[\s]*=[\s]*new[\s]*[(]*([A-Za-z_0-9\-\"\'\\/()]*)[)]*			//Initialized datums
+^/*var/(global/|static/)*(datum/[/A-Za-z_]*)/([A-Za-z_]*)([\s]*=[\s]*null)*												//Null datums
+^/*var/(global/|static/)*([A-Za-z0-9_]*)([\s]*=[\s]*)([0-9]*)[\s]*(\\\\|$)												//Numbers
+^/*var/(global/|static/)*([A-Za-z0-9_]*)([\s]*=[\s]*null)*([\s]*)(//|$)													//Generic nulls
+^/*var/([A-Za-z_0-9]*)[\s]*=[\s]*("(([(\[])*[A-Za-z\.,0-9_\-\\/][)\]]*)*")												//Strings
+
+
+
+
+*/

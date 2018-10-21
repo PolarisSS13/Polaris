@@ -1,15 +1,14 @@
 /*
 File: Options
 */
-var/const  //Ascii values of characters
-	ascii_A  =65
-	ascii_Z  =90
-	ascii_a  =97
-	ascii_z  =122
-	ascii_DOLLAR = 36 // $
-	ascii_ZERO=48
-	ascii_NINE=57
-	ascii_UNDERSCORE=95	// _
+#define	ascii_A  =65
+#define	ascii_Z  =90
+#define	ascii_a  =97
+#define	ascii_z  =122
+#define	ascii_DOLLAR = 36 // $
+#define	ascii_ZERO=48
+#define	ascii_NINE=57
+#define	ascii_UNDERSCORE=95	// _
 
 /*
 	Class: n_scriptOptions

@@ -1,4 +1,4 @@
-var/global/antag_add_failed // Used in antag type voting.
+GLOBAL_VAR(antag_add_failed) // Used in antag type voting.
 GLOBAL_LIST_EMPTY(additional_antag_types)
 
 /datum/game_mode

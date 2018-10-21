@@ -42,7 +42,7 @@ GLOBAL_VAR_INIT(round_progressing, 1)
 GLOBAL_VAR_INIT(master_mode, "extended") // "extended"
 GLOBAL_VAR_INIT(secret_force_mode, "secret")   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
-var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
+GLOBAL_VAR(host) //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
 GLOBAL_LIST_EMPTY(jobMax)
 GLOBAL_LIST_EMPTY(bombers)

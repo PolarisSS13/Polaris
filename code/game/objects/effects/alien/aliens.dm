@@ -318,7 +318,7 @@ Alien plants should do something if theres a lot of poison
 /*
  * Egg
  */
-/var/const //for the status var
+GLOBAL_VAR(const) //for the status var
 	BURST = 0
 	BURSTING = 1
 	GROWING = 2
