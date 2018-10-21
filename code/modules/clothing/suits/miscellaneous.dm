@@ -706,7 +706,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	armor = list(melee = 20, bullet = 15, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/security
-	name = "security winter coat"
+	name = "police winter coat"
 	icon_state = "coatsecurity"
 	item_state_slots = list(slot_r_hand_str = "coatsecurity", slot_l_hand_str = "coatsecurity")
 	armor = list(melee = 25, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)

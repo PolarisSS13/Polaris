@@ -219,8 +219,8 @@
 	icon_state = "virologyf"
 
 /obj/item/clothing/under/rank/security/skirt
-	name = "security officer's jumpskirt"
-	desc = "Standard feminine fashion for Security Officers.  It's made of sturdier material than the standard jumpskirts."
+	name = "police officer's jumpskirt"
+	desc = "Standard feminine fashion for Police Officers.  It's made of sturdier material than the standard jumpskirts."
 	icon_state = "securityf"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
@@ -231,6 +231,6 @@
 	icon_state = "wardenf"
 
 /obj/item/clothing/under/rank/head_of_security/skirt
-	desc = "It's a fashionable jumpskirt worn by those few with the dedication to achieve the position of \"Head of Security\". It has additional armor to protect the wearer."
-	name = "head of security's jumpskirt"
+	desc = "It's a fashionable jumpskirt worn by those few with the dedication to achieve the position of \"Chief of Police\". It has additional armor to protect the wearer."
+	name = "chief of police's jumpskirt"
 	icon_state = "hosf"

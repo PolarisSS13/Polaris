@@ -77,14 +77,14 @@
 	item_state_slots = list(slot_r_hand_str = "rainbowsoft", slot_l_hand_str = "rainbowsoft")
 
 /obj/item/clothing/head/soft/sec
-	name = "security cap"
+	name = "police cap"
 	desc = "It's a field cap in tasteful red color."
 	icon_state = "secsoft"
 	item_state_slots = list(slot_r_hand_str = "secsoft", slot_l_hand_str = "secsoft")
 
 /obj/item/clothing/head/soft/sec/corp
-	name = "corporate security cap"
-	desc = "It's field cap in corporate colors."
+	name = "police cap"
+	desc = "It's field cap in Geminus City Police Department colors."
 	icon_state = "corpsoft"
 	item_state_slots = list(slot_r_hand_str = "corpsoft", slot_l_hand_str = "corpsoft")
 

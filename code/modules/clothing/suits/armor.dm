@@ -291,7 +291,7 @@
 
 /obj/item/clothing/suit/storage/vest/officer
 	name = "officer armor vest"
-	desc = "A simple kevlar plate carrier. This one has a security holobadge clipped to the chest."
+	desc = "A simple kevlar plate carrier. This one has a police holobadge clipped to the chest."
 	icon_state = "officervest_nobadge"
 	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
 	icon_badge = "officervest_badge"
@@ -319,7 +319,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 /obj/item/clothing/suit/storage/vest/hos
-	name = "head of security armor vest"
+	name = "chief of police armor vest"
 	desc = "A simple kevlar plate carrier. This one has a gold badge clipped to the chest."
 	icon_state = "hosvest_nobadge"
 	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
