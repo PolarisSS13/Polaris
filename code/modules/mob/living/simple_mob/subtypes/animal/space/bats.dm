@@ -48,5 +48,5 @@
 	faction = "cult"
 	supernatural = TRUE
 
-/mob/living/simple_animal/hostile/scarybat/cult/cultify()
+/mob/living/simple_mob/animal/space/bats/cult/cultify()
 	return

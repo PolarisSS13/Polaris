@@ -2123,7 +2123,7 @@
 "OQ" = (/obj/machinery/computer/shuttle_control/web/syndicate{dir = 8},/turf/simulated/shuttle/floor/voidcraft,/area/syndicate_station/start)
 "OR" = (/obj/structure/bed/chair/comfy/red{icon_state = "comfychair_preview"; dir = 8},/turf/simulated/shuttle/floor/voidcraft/light,/area/syndicate_station/start)
 "OS" = (/obj/machinery/door/airlock/voidcraft/vertical{req_access = list(150)},/turf/simulated/shuttle/floor/voidcraft/light,/area/syndicate_station/start)
-"OT" = (/mob/living/simple_mob/animal/passive/cat/kitten{name = "Enola"},/turf/simulated/shuttle/floor/voidcraft/light,/area/syndicate_station/start)
+"OT" = (/mob/living/simple_animal/cat/kitten{name = "Enola"},/turf/simulated/shuttle/floor/voidcraft/light,/area/syndicate_station/start)
 "OU" = (/obj/machinery/door/airlock/voidcraft/vertical{req_access = list(150)},/turf/simulated/shuttle/floor/voidcraft/dark,/area/syndicate_station/start)
 "OV" = (/obj/machinery/telecomms/allinone{intercept = 1},/turf/simulated/shuttle/floor/voidcraft/dark,/area/syndicate_station/start)
 "OW" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/blast/regular{id = "skipjackshutters"; name = "Skipjack Blast Shielding"},/obj/structure/window/reinforced/full,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
@@ -2499,3 +2499,4 @@ aaaaRfababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

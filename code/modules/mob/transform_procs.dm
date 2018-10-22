@@ -303,7 +303,7 @@
 */
 
 //Good mobs!
-	if(ispath(MP, /mob/living/simple_animal/cat))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/cat))
 		return 1
 	if(ispath(MP, /mob/living/simple_mob/animal/passive/dog))
 		return 1

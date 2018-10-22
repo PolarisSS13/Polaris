@@ -29,7 +29,7 @@
 		/mob/living/simple_mob/slime/xenobio)
 	else
 		spawn_type = pick(\
-		/mob/living/simple_animal/cat,
+		/mob/living/simple_mob/animal/passive/cat,
 		/mob/living/simple_mob/animal/passive/dog/corgi,
 		/mob/living/simple_mob/animal/passive/dog/corgi/puppy,
 		/mob/living/simple_mob/animal/passive/chicken,

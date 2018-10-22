@@ -20,8 +20,8 @@
 /obj/random/mob/item_to_spawn()
 	return pick(prob(10);/mob/living/simple_mob/animal/passive/lizard,
 				prob(6);/mob/living/simple_mob/animal/sif/diyaab,
-				prob(10);/mob/living/simple_animal/cat/fluff,
-				prob(6);/mob/living/simple_animal/cat/kitten,
+				prob(10);/mob/living/simple_mob/animal/passive/cat,
+				prob(6);/mob/living/simple_mob/animal/passive/cat,
 				prob(10);/mob/living/simple_mob/animal/passive/dog/corgi,
 				prob(6);/mob/living/simple_mob/animal/passive/dog/corgi/puppy,
 				prob(10);/mob/living/simple_mob/animal/passive/crab,

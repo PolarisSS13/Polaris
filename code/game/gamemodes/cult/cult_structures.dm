@@ -117,7 +117,7 @@
 	light_range=5
 	light_color="#ff0000"
 	spawnable=list(
-		/mob/living/simple_animal/hostile/scarybat/cult,
+		/mob/living/simple_mob/animal/space/bats/cult,
 		/mob/living/simple_mob/creature/cult,
 		/mob/living/simple_mob/faithless/cult
 	)

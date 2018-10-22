@@ -102,10 +102,10 @@
 
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
-	starts_with = list(/mob/living/simple_animal/cat)
+	starts_with = list(/mob/living/simple_mob/animal/passive/cat)
 
 /obj/structure/largecrate/animal/cat/bones
-	starts_with = list(/mob/living/simple_animal/cat/fluff/bones)
+	starts_with = list(/mob/living/simple_mob/animal/passive/cat/bones)
 
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"

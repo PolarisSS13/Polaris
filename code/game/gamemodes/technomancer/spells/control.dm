@@ -23,7 +23,7 @@
 	var/list/controlled_mobs = list()
 	var/list/allowed_mobs = list(
 		/mob/living/bot,
-		/mob/living/simple_animal/cat,
+		/mob/living/simple_mob/animal/passive/cat,
 		/mob/living/simple_mob/animal/passive/chick,
 		/mob/living/simple_mob/animal/passive/chicken,
 		/mob/living/simple_mob/animal/passive/dog/corgi,
