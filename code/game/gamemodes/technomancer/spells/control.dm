@@ -26,7 +26,7 @@
 		/mob/living/simple_animal/cat,
 		/mob/living/simple_mob/animal/passive/chick,
 		/mob/living/simple_mob/animal/passive/chicken,
-		/mob/living/simple_animal/corgi,
+		/mob/living/simple_mob/animal/passive/dog/corgi,
 		/mob/living/simple_mob/animal/passive/cow,
 		/mob/living/simple_mob/animal/passive/crab,
 		/mob/living/simple_mob/animal/passive/lizard,

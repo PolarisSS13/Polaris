@@ -29,8 +29,8 @@
 			else
 				visible_message("<span class='notice'>\The [L] vanishes!</span>")
 				qdel(L)
-		else if(istype(L, /mob/living/simple_animal/construct))
-			var/mob/living/simple_animal/construct/evil = L
+		else if(istype(L, /mob/living/simple_mob/construct))
+			var/mob/living/simple_mob/construct/evil = L
 			evil << "<span class='danger'>\The [user]'s abjuration purges your form!</span>"
 			evil.purge = 3
 		adjust_instability(5)
