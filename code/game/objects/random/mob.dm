@@ -28,7 +28,7 @@
 				prob(10);/mob/living/simple_mob/animal/passive/chicken,
 				prob(6);/mob/living/simple_mob/animal/passive/chick,
 				prob(10);/mob/living/simple_mob/animal/passive/cow,
-				prob(6);/mob/living/simple_mob/goat,
+				prob(6);/mob/living/simple_mob/animal/goat,
 				prob(10);/mob/living/simple_mob/animal/passive/penguin,
 				prob(10);/mob/living/simple_mob/animal/passive/mouse,
 				prob(10);/mob/living/simple_mob/animal/passive/yithian,
@@ -163,7 +163,8 @@
 /obj/random/mob/robotic/item_to_spawn() //Hivebots have a total number of 'lots' equal to the lesser drone, at 60.
 	return pick(prob(60);/mob/living/simple_mob/mechanical/combat_drone/lesser,
 				prob(50);/mob/living/simple_mob/mechanical/combat_drone,
-				prob(15);/mob/living/simple_animal/hostile/mecha/malf_drone,
+				prob(15);/mob/living/simple_mob/mechanical/mecha/ripley,
+				prob(15);/mob/living/simple_mob/mechanical/mecha/odysseus,
 				prob(10);/mob/living/simple_mob/mechanical/hivebot,
 				prob(15);/mob/living/simple_mob/mechanical/hivebot/swarm,
 				prob(10);/mob/living/simple_mob/mechanical/hivebot/ranged_damage,

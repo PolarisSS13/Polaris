@@ -1978,7 +1978,6 @@
 #include "code\modules\mob\living\simple_animal\animals\cat.dm"
 #include "code\modules\mob\living\simple_animal\animals\parrot.dm"
 #include "code\modules\mob\living\simple_animal\animals\spiderbot.dm"
-#include "code\modules\mob\living\simple_animal\humanoids\mechamobs.dm"
 #include "code\modules\mob\living\simple_mob\appearance.dm"
 #include "code\modules\mob\living\simple_mob\combat.dm"
 #include "code\modules\mob\living\simple_mob\defense.dm"

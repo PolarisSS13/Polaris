@@ -98,7 +98,7 @@
 
 /obj/structure/largecrate/animal/goat
 	name = "goat crate"
-	starts_with = list(/mob/living/simple_mob/goat)
+	starts_with = list(/mob/living/simple_mob/animal/goat)
 
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
