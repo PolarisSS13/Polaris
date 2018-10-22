@@ -101,11 +101,12 @@
 	attack_verb = list("slapped", "humiliated", "hit", "rubbed")
 	hitsound = 'sound/effects/snap.ogg'
 	var/list/produces = null //The fish meat and tooth or stuff
+	var/products = 0
 
 
 /obj/item/fish/attackby(var/obj/item/O, var/mob/user as mob)
-	//if(!produces.len)
-		//return
+	if(!products)
+		return
 	if(is_sharp(O))
 		to_chat(user, "You carefully clean and gut \the [src].")
 		for(var/P in produces)
@@ -136,13 +137,13 @@
 	force = 3
 
 /obj/item/fish/shark/attackby(var/obj/item/O, var/mob/user as mob)
-	...()
 	if(istype(O, /obj/item/weapon/tool/wirecutters))
 		to_chat(user, "You rip out the teeth of \the [src.name]!")
 		new /obj/item/fish/toothless_shark(get_turf(src))
 		new /obj/item/shard/shark_teeth(get_turf(src))
 		qdel(src)
 		return
+	..()
 
 
 /obj/item/fish/toothless_shark
@@ -168,6 +169,7 @@
 	desc = "Apparently, catfish don't purr like you might have expected them to. Such a confusing name!"
 	icon_state = "catfish"
 	produces = list(/obj/item/weapon/reagent_containers/food/snacks/catfishmeat, /obj/item/weapon/reagent_containers/food/snacks/catfishmeat)
+	products = 1
 
 /obj/item/fish/goldfish
 	name = "goldfish"
@@ -179,6 +181,7 @@
 	desc = "The second-favorite food of Space Bears, right behind crew members."
 	icon_state = "salmon"
 	produces = list(/obj/item/weapon/reagent_containers/food/snacks/salmonmeat, /obj/item/weapon/reagent_containers/food/snacks/salmonmeat)
+	products = 1
 
 /obj/item/fish/babycarp
 	name = "baby space carp"
@@ -187,6 +190,7 @@
 	hitsound = 'sound/weapons/bite.ogg'
 	force = 3
 	produces = list(/obj/item/weapon/reagent_containers/food/snacks/carpmeat)
+	products = 1
 
 /obj/item/grown/bananapeel/clownfish
 	name = "clown fish"
