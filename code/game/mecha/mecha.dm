@@ -7,6 +7,11 @@
 #define MELEE 1
 #define RANGED 2
 
+
+#define MECH_FACTION_NT "nano"
+#define MECH_FACTION_SYNDI "syndi"
+#define MECH_FACTION_NONE "none"
+
 /obj/mecha
 	name = "Mecha"
 	desc = "Exosuit"
@@ -41,8 +46,8 @@
 	var/lights_power = 6
 	var/force = 0
 
-	var/nano_mech = 0 //This is for sounds. Nano mechs use nano sounds (mostly). Same for syndi mech var.
-	var/syndi_mech = 0
+	var/mech_faction = null
+	var/firstactivation = 0 //It's simple. If it's 0, no one entered it yet. Otherwise someone entered it at least once.
 
 
 	//inner atmos
@@ -1183,8 +1188,22 @@
 		src.icon_state = src.reset_icon()
 		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-		if(!hasInternalDamage())
-			src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
+		if(!hasInternalDamage()) //Otherwise it's not nominal!
+			switch(mech_faction)
+				if(MECH_FACTION_NT)//The good guys category
+					if(firstactivation)//First time = long activation sound
+						firstactivation = 1
+						src.occupant << sound('sound/mecha/LongNanoActivation.ogg',volume=50)
+					else
+						src.occupant << sound('sound/mecha/nominalnano.ogg',volume=50)
+				if(MECH_FACTION_SYNDI)//Bad guys
+					if(firstactivation)
+						firstactivation = 1
+						src.occupant << sound('sound/mecha/LongSyndiActivation.ogg',volume=50)
+					else
+						src.occupant << sound('sound/mecha/nominalsyndi.ogg',volume=50)
+				else//Everyone else gets the normal noise
+					src.occupant << sound('sound/mecha/nominal.ogg',volume=50)
 		return 1
 	else
 		return 0

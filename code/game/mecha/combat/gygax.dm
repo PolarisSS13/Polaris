@@ -37,7 +37,7 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
 	max_equip = 4
 	step_energy_drain = 5
-	syndi_mech = 1
+	mech_faction = MECH_FACTION_SYNDI
 
 	max_hull_equip = 1
 	max_weapon_equip = 2

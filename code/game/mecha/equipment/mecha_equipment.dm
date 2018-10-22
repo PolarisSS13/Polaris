@@ -72,20 +72,22 @@
 		src.update_chassis_page()
 		chassis.occupant_message("<font color='red'>The [src] is destroyed!</font>")
 		chassis.log_append_to_last("[src] is destroyed.",1)
-		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))
-			if(chassis.nano_mech)
-				src.chassis.occupant << sound('sound/mecha/weapdestrnano.ogg',volume=50)
-			if(chassis.syndi_mech)
-				src.chassis.occupant  << sound('sound/mecha/weapdestrsyndi.ogg',volume=50)
-			else
-				src.chassis.occupant  << sound('sound/mecha/weapdestr.ogg',volume=50)
-		else
-			if(chassis.nano_mech)
-				src.chassis.occupant  << sound('sound/mecha/critdestrnano.ogg',volume=50)
-			if(chassis.syndi_mech)
-				src.chassis.occupant  << sound('sound/mecha/critdestrsyndi.ogg',volume=50)
-			else
-				src.chassis.occupant  << sound('sound/mecha/critdestr.ogg',volume=50)
+		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))//Gun
+			switch(chassis.mech_faction)
+				if(MECH_FACTION_NT)
+					src.chassis.occupant << sound('sound/mecha/weapdestrnano.ogg',volume=70)
+				if(MECH_FACTION_SYNDI)
+					src.chassis.occupant  << sound('sound/mecha/weapdestrsyndi.ogg',volume=60)
+				else
+					src.chassis.occupant  << sound('sound/mecha/weapdestr.ogg',volume=50)
+		else //Not a gun
+			switch(chassis.mech_faction)
+				if(MECH_FACTION_NT)
+					src.chassis.occupant  << sound('sound/mecha/critdestrnano.ogg',volume=70)
+				if(MECH_FACTION_SYNDI)
+					src.chassis.occupant  << sound('sound/mecha/critdestrsyndi.ogg',volume=70)
+				else
+					src.chassis.occupant  << sound('sound/mecha/critdestr.ogg',volume=50)
 	spawn
 		qdel(src)
 	return
