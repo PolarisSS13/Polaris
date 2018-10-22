@@ -634,13 +634,6 @@ I said no!
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/dough)
 	result = /obj/item/weapon/reagent_containers/food/snacks/croissant
 
-/datum/recipe/fishandchips
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/fries,
-		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/fishandchips
-
 /datum/recipe/bread
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/dough,
@@ -863,14 +856,6 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/cutlet,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sausage
-
-/datum/recipe/fishfingers
-	reagents = list("flour" = 10)
-	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/egg,
-		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
-	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/fishfingers
 
 /datum/recipe/mysterysoup
 	reagents = list("water" = 10)
@@ -1211,3 +1196,112 @@ I said no!
 /datum/recipe/cake/brain
 	items = list(/obj/item/organ/internal/brain)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
+
+///////FISH
+/datum/recipe/boiled_shrimp
+	reagents = list("water" = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/shrimp
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/boiled_shrimp
+
+/datum/recipe/fishburger
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/bun,
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/fishburger
+
+/datum/recipe/fishandchips
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/fries,
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/fishandchips
+
+/datum/recipe/fishfingers
+	reagents = list("flour" = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/fishfingers
+
+/*//No compatible eggs.
+/datum/recipe/sashimi
+	reagents = list("soysauce" = 5)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/spidereggs,
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sashimi
+*/
+
+/datum/recipe/sushi_Ebi
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/boiled_shrimp = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Ebi
+
+/datum/recipe/sushi_Ikura
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/fish_eggs/salmon = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Ikura
+
+/datum/recipe/sushi_Inari
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/tofu = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Inari
+
+/datum/recipe/sushi_Sake
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/salmonmeat = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Sake
+
+
+/datum/recipe/sushi_SmokedSalmon
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/salmonsteak = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_SmokedSalmon
+
+
+/datum/recipe/sushi_Masago
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/fish_eggs/goldfish = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Masago
+
+
+/datum/recipe/sushi_Tobiko
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/fish_eggs/shark = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Tobiko
+
+
+/datum/recipe/sushi_TobikoEgg
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sushi_Tobiko = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/egg = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_TobikoEgg
+
+
+/datum/recipe/sushi_Tai
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/boiledrice = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/catfishmeat = 1,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sushi_Tai
+
