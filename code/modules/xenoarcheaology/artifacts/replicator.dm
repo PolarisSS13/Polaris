@@ -26,7 +26,6 @@
 	/obj/item/roller,
 	/obj/structure/closet/crate,
 	/obj/structure/closet/acloset,
-	/mob/living/simple_animal/hostile/mimic,
 	/mob/living/simple_mob/mechanical/viscerator,
 	/mob/living/simple_mob/mechanical/hivebot,
 	/obj/item/device/analyzer,
