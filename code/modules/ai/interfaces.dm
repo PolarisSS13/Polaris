@@ -44,6 +44,7 @@
 	return can_special_attack(A) && should_special_attack(A) // Just because we can doesn't mean we should.
 
 /mob/living/proc/ISay(message)
+	return say(message)
 
 /mob/living/proc/IIsAlly(mob/living/L)
 	return src.faction == L.faction

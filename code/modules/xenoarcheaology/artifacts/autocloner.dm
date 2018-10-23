@@ -34,7 +34,7 @@
 		/mob/living/simple_mob/animal/passive/dog/corgi/puppy,
 		/mob/living/simple_mob/animal/passive/chicken,
 		/mob/living/simple_mob/animal/passive/cow,
-		/mob/living/simple_animal/parrot,
+		/mob/living/simple_mob/animal/passive/bird/parrot,
 		/mob/living/simple_mob/animal/passive/crab,
 		/mob/living/simple_mob/animal/passive/mouse,
 		/mob/living/simple_mob/animal/goat)

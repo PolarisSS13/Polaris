@@ -69,11 +69,6 @@ var/list/ventcrawl_machinery = list(
 		return 1
 	return ..()
 
-/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item == held_item)
-		return 1
-	return ..()
-
 /mob/living/proc/ventcrawl_carry()
 	for(var/atom/A in contents)
 		if(!is_allowed_vent_crawl_item(A))

@@ -21,7 +21,7 @@
 		"Chicken"		=	/mob/living/simple_mob/animal/passive/chicken,
 		"Chick"			=	/mob/living/simple_mob/animal/passive/chick,
 		"Crab"			=	/mob/living/simple_mob/animal/passive/crab,
-		"Parrot"		=	/mob/living/simple_animal/parrot,
+		"Parrot"		=	/mob/living/simple_mob/animal/passive/bird/parrot,
 		"Goat"			=	/mob/living/simple_mob/animal/goat,
 		"Cat"			=	/mob/living/simple_mob/animal/passive/cat,
 		"Kitten"		=	/mob/living/simple_mob/animal/passive/cat/kitten,

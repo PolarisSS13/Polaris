@@ -34,7 +34,7 @@
 				prob(10);/mob/living/simple_mob/animal/passive/yithian,
 				prob(10);/mob/living/simple_mob/animal/passive/tindalos,
 				prob(10);/mob/living/simple_mob/animal/passive/dog/tamaskan,
-				prob(3);/mob/living/simple_animal/parrot,
+				prob(3);/mob/living/simple_mob/animal/passive/bird/parrot,
 				prob(1);/mob/living/simple_mob/animal/passive/crab)
 
 /obj/random/mob/spawn_item() //These should only ever have simple mobs.

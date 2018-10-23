@@ -31,7 +31,7 @@
 		/mob/living/simple_mob/animal/passive/crab,
 		/mob/living/simple_mob/animal/passive/lizard,
 		/mob/living/simple_mob/animal/passive/mouse,
-		/mob/living/simple_animal/parrot,
+		/mob/living/simple_mob/animal/passive/bird/parrot,
 		/mob/living/simple_mob/slime,
 		/mob/living/simple_mob/animal/passive/tindalos,
 		/mob/living/simple_mob/animal/passive/yithian,

@@ -14,6 +14,17 @@
 	hostile = FALSE
 	can_flee = TRUE
 
+// For parrots like Poly.
+// They modify their say_list datum based on what their mob hears.
+/datum/ai_holder/simple_mob/passive/parrot
+	speak_chance = 2
+	base_wander_delay = 8
+
+/datum/ai_holder/simple_mob/passive/parrot/on_hear_say(mob/living/speaker, message)
+	if(holder.stat || !holder.say_list || !message)
+		return
+	var/datum/say_list/S = holder.say_list
+	S.speak += message
 
 // Doesn't really act until told to by something on the outside.
 /datum/ai_holder/simple_mob/inert
