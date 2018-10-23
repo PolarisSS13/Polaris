@@ -140,6 +140,55 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			sleep(2)
 			O.update_transform()
 
+
+var/const/enterloopsanity = 100
+/turf/Entered(atom/atom as mob|obj)
+
+	if(movement_disabled)
+		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
+		return
+	..()
+
+	if(!istype(atom, /atom/movable))
+		return
+
+	var/atom/movable/A = atom
+
+	if(ismob(A))
+		var/mob/M = A
+		if(!M.lastarea)
+			M.lastarea = get_area(M.loc)
+		if(M.lastarea.has_gravity == 0)
+			inertial_drift(M)
+		else if(!is_space())
+			M.inertia_dir = 0
+			M.make_floating(0)
+		if(isliving(M))
+			var/mob/living/L = M
+			L.handle_footstep(src)
+	..()
+	var/objects = 0
+	if(A && (A.flags & PROXMOVE))
+		for(var/atom/movable/thing in range(1))
+			if(objects > enterloopsanity) break
+			objects++
+			spawn(0)
+				if(A) //Runtime prevention
+					A.HasProximity(thing, 1)
+					if ((thing && A) && (thing.flags & PROXMOVE))
+						thing.HasProximity(A, 1)
+	return
+
+
+
+
+
+
+
+
+
+/*
+
 /turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
 		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
@@ -183,44 +232,57 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				mover.Bump(obstacle, 1)
 				return 0
 	return 1 //Nothing found to block so return success!
+*/
 
-var/const/enterloopsanity = 100
-/turf/Entered(atom/atom as mob|obj)
 
-	if(movement_disabled)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
-	..()
 
-	if(!istype(atom, /atom/movable))
-		return
+/turf/Enter(atom/movable/mover, atom/oldloc)
+	// Do not call ..()
+	// Byond's default turf/Enter() doesn't have the behaviour we want with Bump()
+	// By default byond will call Bump() on the first dense object in contents
+	// Here's hoping it doesn't stay like this for years before we finish conversion to step_
+	var/atom/firstbump
+	if(!CanPass(mover, src))
+		firstbump = src
+	else
+		for(var/i in contents)
+			if(i == mover || i == mover.loc) // Multi tile objects and moving out of other objects
+				continue
+			var/atom/movable/thing = i
+			if(thing.Cross(mover))
+				continue
+			if(!firstbump || ((thing.layer > firstbump.layer || thing.flags & ON_BORDER) && !(firstbump.flags & ON_BORDER)))
+				firstbump = thing
+	if(firstbump)
+		mover.Bump(firstbump)
+		return FALSE
+	return TRUE
 
-	var/atom/movable/A = atom
+/turf/Exit(atom/movable/mover, atom/newloc)
+	. = ..()
+	if(!.)
+		return FALSE
+	for(var/i in contents)
+		if(i == mover)
+			continue
+		var/atom/movable/thing = i
+		if(!thing.Uncross(mover, newloc))
+			if(thing.flags & ON_BORDER)
+				mover.Bump(thing)
+			return FALSE
 
-	if(ismob(A))
-		var/mob/M = A
-		if(!M.lastarea)
-			M.lastarea = get_area(M.loc)
-		if(M.lastarea.has_gravity == 0)
-			inertial_drift(M)
-		else if(!is_space())
-			M.inertia_dir = 0
-			M.make_floating(0)
-		if(isliving(M))
-			var/mob/living/L = M
-			L.handle_footstep(src)
-	..()
-	var/objects = 0
-	if(A && (A.flags & PROXMOVE))
-		for(var/atom/movable/thing in range(1))
-			if(objects > enterloopsanity) break
-			objects++
-			spawn(0)
-				if(A) //Runtime prevention
-					A.HasProximity(thing, 1)
-					if ((thing && A) && (thing.flags & PROXMOVE))
-						thing.HasProximity(A, 1)
-	return
+
+
+
+
+
+
+
+
+
+
+
+
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
 	return

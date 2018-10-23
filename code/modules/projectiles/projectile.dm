@@ -460,6 +460,7 @@
 	return (target && ((target.layer >= TABLE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
 /obj/item/projectile/Bump(atom/A)
+	to_chat(world, "DEBUG: Bump([A]) [__LINE__] [__FILE__]")
 	if(A in permutated)
 		return FALSE
 	if(firer && !reflected)
