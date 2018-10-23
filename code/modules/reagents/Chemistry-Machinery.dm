@@ -233,12 +233,12 @@
 
 			if(condi)//For the condimaster
 				var/name = sanitizeSafe(input(usr,"Name:","Name your cube!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
-				if(!name) //Repeated because i suck
-					return
 			else
 				var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
-				if(!name) //Blank name (sanitized to nothing, or left empty) or cancel
-					return
+
+			if(!name) //Blank name (sanitized to nothing, or left empty) or cancel
+				return
+
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
