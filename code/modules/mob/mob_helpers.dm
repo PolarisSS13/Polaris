@@ -542,10 +542,8 @@ proc/is_blind(A)
 	if(. == SAFE_PERP)
 		return SAFE_PERP
 
-	if(!istype(src, /mob/living/simple_mob/animal/goat))
-		if(hostile)
-			if(faction != "neutral") // Otherwise Runtime gets killed.
-				threatcount += 4
+	if(has_AI() && ai_holder.hostile && faction != "neutral") // Otherwise Runtime gets killed.
+		threatcount += 4
 	return threatcount
 
 // Beepsky will (try to) only beat 'bad' slimes.

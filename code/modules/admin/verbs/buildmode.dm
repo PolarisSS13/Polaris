@@ -498,7 +498,7 @@
 					for(var/thing in holder.selected_mobs)
 						var/mob/living/unit = thing
 						var/datum/ai_holder/AI = unit.ai_holder
-						AI.give_destination(T, pa.Find("shift"))
+						AI.give_destination(T, 1, pa.Find("shift"))
 					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to move to \the [T]."))
 
 

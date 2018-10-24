@@ -16,12 +16,12 @@
 /obj/item/weapon/spell/abjuration/on_ranged_cast(atom/hit_atom, mob/user)
 	if(istype(hit_atom, /mob/living) && pay_energy(500) && within_range(hit_atom))
 		var/mob/living/L = hit_atom
-		var/mob/living/simple_animal/SA = null
+		var/mob/living/simple_mob/SM = null
 
 		//Bit of a roundabout typecheck, in order to test for two variables from two different mob types in one line.
-		if(istype(L, /mob/living/simple_animal))
-			SA = L
-		if(L.summoned || (SA && SA.supernatural) )
+		if(istype(L, /mob/living/simple_mob))
+			SM = L
+		if(L.summoned || (SM && SM.supernatural) )
 			if(L.client) // Player-controlled mobs are immune to being killed by this.
 				user << "<span class='warning'>\The [L] resists your attempt to banish it!</span>"
 				L << "<span class='warning'>\The [user] tried to teleport you far away, but failed.</span>"

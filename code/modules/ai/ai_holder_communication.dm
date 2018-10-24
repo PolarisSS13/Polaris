@@ -65,11 +65,15 @@
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)
 	if(!isliving(the_target))
 		return FALSE // Turrets don't give a fuck so neither will we.
-	if(istype(the_target, /mob/living/simple_animal) && istype(holder, /mob/living/simple_animal))
-		var/mob/living/simple_animal/us = holder
-		var/mob/living/simple_animal/them = target
+	/*
+	// Find a nice way of doing this later.
+	if(istype(the_target, /mob/living/simple_mob) && istype(holder, /mob/living/simple_mob))
+		var/mob/living/simple_mob/us = holder
+		var/mob/living/simple_mob/them = target
+
 		if(them.intelligence_level < us.intelligence_level) // Todo: Bitflag these.
 			return FALSE // Humanoids don't care about drones/animals/etc. Drones don't care about animals, and so on.
+		*/
 	return TRUE
 
 // Temp defines to make the below code a bit more readable.

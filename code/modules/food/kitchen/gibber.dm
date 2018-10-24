@@ -187,8 +187,8 @@
 	var/slab_nutrition = src.occupant.nutrition / 15
 
 	// Some mobs have specific meat item types.
-	if(istype(src.occupant,/mob/living/simple_animal))
-		var/mob/living/simple_animal/critter = src.occupant
+	if(istype(src.occupant,/mob/living/simple_mob))
+		var/mob/living/simple_mob/critter = src.occupant
 		if(critter.meat_amount)
 			slab_count = critter.meat_amount
 		if(critter.meat_type)
