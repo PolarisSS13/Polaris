@@ -31,7 +31,7 @@
 				return 0
 			user << "<span class='notice'>You stab \the [L] with a hidden integrated hypo, attempting to bring them back...</span>"
 			if(istype(L, /mob/living/simple_mob))
-				var/mob/living/simple_animal/SM = L
+				var/mob/living/simple_mob/SM = L
 				SM.health = SM.getMaxHealth() / 3
 				SM.stat = CONSCIOUS
 				dead_mob_list -= SM

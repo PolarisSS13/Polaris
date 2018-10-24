@@ -340,7 +340,7 @@
 		return
 
 	adjustBruteLoss(damage)
-	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_animal attacks
+	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_mob attacks
 	if(ai_holder)
 		ai_holder.react_to_attack(user)
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")

@@ -409,7 +409,7 @@ var/list/turret_icons
 /obj/machinery/porta_turret/attack_generic(mob/living/L, damage)
 	if(isanimal(L))
 		var/mob/living/simple_mob/S = L
-		if(damage >= 10)
+		if(damage >= 5)
 			var/incoming_damage = round(damage - (damage / 5)) //Turrets are slightly armored, assumedly.
 			visible_message("<span class='danger'>\The [S] [pick(S.attacktext)] \the [src]!</span>")
 			take_damage(incoming_damage)

@@ -120,7 +120,7 @@
 		user << "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>"
 		return
 
-	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
+	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_mob)) )
 		user << "<span class='danger'>This is not suitable for the gibber!</span>"
 		return
 

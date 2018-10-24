@@ -40,7 +40,7 @@
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(isanimal(user))
 		var/mob/living/simple_mob/S = user
-		if(damage >= 10)
+		if(damage >= 5)
 			visible_message("<span class='danger'>\The [user] smashes into the [src]!</span>")
 			playsound(src, S.attack_sound, 75, 1)
 			take_damage(damage)

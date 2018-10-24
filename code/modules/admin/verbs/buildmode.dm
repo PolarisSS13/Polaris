@@ -462,9 +462,11 @@
 						if(L in holder.selected_mobs)
 							// Todo: Select graphic only the admin can see?
 							holder.selected_mobs -= L
+							user.client.images -= L.selected_image
 							to_chat(user, span("notice", "Deselected \the [L]."))
 						else
 							holder.selected_mobs += L
+							user.client.images += L.selected_image
 							to_chat(user, span("notice", "Selected \the [L]."))
 					else
 						to_chat(user, span("warning", "\The [L] is not AI controlled."))
