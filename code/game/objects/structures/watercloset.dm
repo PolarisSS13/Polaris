@@ -65,14 +65,14 @@
 	if(istype(I, /obj/item/weapon/reagent_containers))
 		if(cistern)
 			if(I.reagents.total_volume < 1)
-				user << "\The [I] is empty."
+				to_chat(user, "\The [I] is empty.")
 				return
 			else
 				to_chat(user, "<span class='notice'>You empty 20 units out of \the [I.name] into \the [src].</span>")
 				I.reagents.trans_to_obj(src, 20)
 				return
 		else
-			user << "\The [src] cistern is closed."
+			to_chat(user, "\The [src] cistern is closed.")
 
 	if(istype(I, /obj/item/weapon/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
