@@ -12,8 +12,12 @@
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
 
+	var/water_supply = 1
+
 /obj/structure/toilet/New()
 	open = round(rand(0, 1))
+	create_reagents(300)
+	reagents.add_reagent("water", 100)
 	update_icon()
 
 /obj/structure/toilet/attack_hand(mob/living/user as mob)
@@ -47,11 +51,28 @@
 	if(I.is_crowbar())
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
-		if(do_after(user, 30))
+		if(do_after(user, 15))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
 			return
+
+	if(I.is_wrench())
+		water_supply = !water_supply
+		to_chat(user, "You [water_supply ? "close" : "open"] \the [src] water supply. It won't refill after being flushed now.")
+		return //So you don't put the wrench insides
+
+	if(istype(I, /obj/item/weapon/reagent_containers))
+		if(cistern)
+			if(I.reagents.total_volume < 1)
+				user << "\The [I] is empty."
+				return
+			else
+				to_chat(user, "<span class='notice'>You empty 20 units out of \the [I.name] into \the [src].</span>")
+				I.reagents.trans_to_obj(src, 20)
+				return
+		else
+			user << "\The [src] cistern is closed."
 
 	if(istype(I, /obj/item/weapon/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
@@ -71,6 +92,8 @@
 						user.visible_message("<span class='danger'>[user] gives [GM.name] a swirlie!</span>", "<span class='notice'>You give [GM.name] a swirlie!</span>", "You hear a toilet flushing.")
 						if(!GM.internal)
 							GM.adjustOxyLoss(5)
+						src.reagents.splash(GM, reagents.total_volume)
+						flush(user)
 					swirlie = null
 				else
 					user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
@@ -91,7 +114,31 @@
 		to_chat(user, "You carefully place \the [I] into the cistern.")
 		return
 
+/obj/structure/toilet/proc/flush(var/mob/user) //Mostly here to clear and maybe refill reagents.
+	if(src.reagents.total_volume > 1)
+		playsound(loc, 'sound/effects/slosh.ogg', 40, 1)
+	to_chat(user, "You flush \the [src] bowl and cistern.")
+	src.reagents.clear_reagents() // Just in case
+	if(water_supply) // In case no water comes in, don't add new stuff.
+		src.reagents.add_reagent("water", 100)
+		spawn(15)
+			to_chat(user, "\The [src] refills itself.")
+			update_icon() //Likely does nothing.
 
+/obj/structure/toilet/AltClick(var/mob/user)
+	if(Adjacent(user))
+		flush(user)
+
+/obj/structure/toilet/verb/fush()
+	set category = "Object"
+	set name = "Flush"
+	set src in oview(1)
+
+	if (usr.stat != 0)
+		return
+	src.flush()
+	add_fingerprint(usr)
+	return
 
 /obj/structure/urinal
 	name = "urinal"
