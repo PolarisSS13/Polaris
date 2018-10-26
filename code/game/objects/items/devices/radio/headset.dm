@@ -101,14 +101,14 @@
 	ks1type = /obj/item/device/encryptionkey/binary
 
 /obj/item/device/radio/headset/headset_sec
-	name = "security radio headset"
-	desc = "This is used by your elite security force."
+	name = "police radio headset"
+	desc = "This is used by your elite police force."
 	icon_state = "sec_headset"
 	ks2type = /obj/item/device/encryptionkey/headset_sec
 
 /obj/item/device/radio/headset/headset_sec/alt
-	name = "security bowman headset"
-	desc = "This is used by your elite security force."
+	name = "police bowman headset"
+	desc = "This is used by your elite police force."
 	icon_state = "sec_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_sec
 
@@ -213,13 +213,13 @@
 	ks2type = /obj/item/device/encryptionkey/heads/rd
 
 /obj/item/device/radio/headset/heads/hos
-	name = "head of security's headset"
+	name = "chief of police's headset"
 	desc = "The headset of the man who protects your worthless lifes."
 	icon_state = "com_headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 
 /obj/item/device/radio/headset/heads/hos/alt
-	name = "head of security's bowman headset"
+	name = "chief of police's bowman headset"
 	desc = "The headset of the man who protects your worthless lifes."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/hos

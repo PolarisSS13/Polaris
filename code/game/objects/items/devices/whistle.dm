@@ -7,7 +7,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_EARS
 
-	var/use_message = "Halt! Security!"
+	var/use_message = "GCPD! Stay where you are!"
 	var/spamcheck = 0
 	var/insults
 
