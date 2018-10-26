@@ -1,5 +1,5 @@
-obj/machinery/street/
-	plane = -25
+/obj/machinery/street/
+	plane = -10
 	layer = ABOVE_MOB_LAYER
 	light_range = 4
 	light_power = 2
@@ -10,7 +10,7 @@ obj/machinery/street/
 	anchored = 1
 	density = 1
 	luminosity = 3
-	plane = -25
+
 	icon = 'icons/obj/traffic.dmi'
 	icon_state = "streetlight-ani"
 
@@ -20,6 +20,5 @@ obj/machinery/street/
 	anchored = 1
 	density = 1
 	luminosity = 3
-	plane = -25
 	icon = 'icons/obj/pedestrian.dmi'
 	icon_state = "pede-ani"

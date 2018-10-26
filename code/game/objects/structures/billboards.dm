@@ -54,3 +54,6 @@
 /obj/structure/billboard/sign/New()
 	..()
 	icon_state = "[sign_type]"
+
+/obj/structure/billboard/sign/lisa
+	sign_type = "lisa"

@@ -276,11 +276,11 @@
 
 
 /obj/structure/grille/fence/east_west
-	//width=80
-	//height=42
+//	bound_width=80
+//	bound_height=42
 	icon='icons/obj/fences.dmi'
 
 /obj/structure/grille/fence/north_south
-	//width=80
-	//height=42
+//	bound_width=80
+//	bound_height=42
 	icon='icons/obj/fences2.dmi'

@@ -295,7 +295,7 @@
 	brightness_range = 5
 	brightness_color = "#d2e6f2"
 	layer = ABOVE_MOB_LAYER
-	plane = -25
+	plane = -10
 	density = 1
 	light_type = /obj/item/weapon/light/bulb
 

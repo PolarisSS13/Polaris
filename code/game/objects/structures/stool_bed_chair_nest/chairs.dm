@@ -231,10 +231,10 @@
 
 /obj/structure/bed/sofa/left
 	icon_state = "sofaend_left"
-	buckle_dir = WEST
+
 
 /obj/structure/bed/sofa/right
 	icon_state = "sofaend_right"
-	buckle_dir = EAST
+
 /obj/structure/bed/sofa/corner
 	icon_state = "sofacorner"
