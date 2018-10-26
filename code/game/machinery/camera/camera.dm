@@ -8,6 +8,7 @@
 	active_power_usage = 10
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
+	clicksound = "button"
 
 	var/list/network = list(NETWORK_DEFAULT)
 	var/c_tag = null

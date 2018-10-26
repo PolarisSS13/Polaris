@@ -7,6 +7,7 @@
 	use_power = 1
 	idle_power_usage = 40
 	var/dye_color = "#FFFFFF"
+	clicksound = "button"
 
 /obj/machinery/dye_generator/initialize()
 	power_change()

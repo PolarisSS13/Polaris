@@ -8,7 +8,7 @@
 	anchored = 1.0
 	layer = UNDER_JUNK_LAYER
 	interact_offline = 1
-
+	clicksound = "button"
 	var/on = 0
 	use_power = 1
 	idle_power_usage = 20

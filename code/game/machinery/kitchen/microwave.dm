@@ -16,6 +16,7 @@
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
+	clicksound = "button"
 
 
 // see code/modules/food/recipes_microwave.dm for recipes

@@ -279,6 +279,7 @@
 
 			playsound(user.loc, 'sound/weapons/gunshot4.ogg', 50, 1)
 			add_fingerprint(user)
+			return
 		else
 			user.set_machine(src)
 

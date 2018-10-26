@@ -114,6 +114,9 @@ Class Procs:
 	var/global/gl_uid = 1
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/obj/item/weapon/circuitboard/circuit = null
+	var/clicksound			// sound played on succesful interface. Just put it in the list of vars at the start.
+	var/clickvol = 40		// volume
+
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -241,6 +244,8 @@ Class Procs:
 		else if(prob(H.getBrainLoss()))
 			user << "<span class='warning'>You momentarily forget how to use [src].</span>"
 			return 1
+	if(clicksound && istype(user, /mob/living/carbon))
+		playsound(src, clicksound, clickvol)
 
 	add_fingerprint(user)
 
@@ -327,7 +332,7 @@ Class Procs:
 		return FALSE
 	if(panel_open)
 		return FALSE // Close panel first!
-	playsound(loc, W.usesound, 50, 1)	
+	playsound(loc, W.usesound, 50, 1)
 	var/actual_time = W.toolspeed * time
 	if(actual_time != 0)
 		user.visible_message( \

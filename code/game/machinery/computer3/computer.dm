@@ -11,6 +11,7 @@
 	var/allow_disassemble	= 1
 	var/legacy_icon			= 0 // if 1, use old style icons
 	var/show_keyboard		= 1
+	clicksound = "keyboard"
 
 	// These is all you should need to change when creating a new computer.
 	// If there is no default program, the OS will run instead.
