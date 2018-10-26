@@ -246,7 +246,6 @@ datum/weather/sif
 				if(U.open)
 					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
 					continue
-
 			L.water_act(1)
 			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
 
@@ -335,7 +334,7 @@ datum/weather/sif
 
 /datum/weather/sif/acid_rain
 	name = "acid rain"
-	icon_state = "acid_rain"
+	icon_state = "rain"
 	light_modifier = 0.5
 	transition_chances = list(
 		WEATHER_RAIN = 45,

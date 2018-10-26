@@ -30,6 +30,7 @@
 	power_light = 1
 	power_environ = 1
 	requires_power = 0
+	flags = RAD_SHIELDED
 	base_turf = /turf/simulated/floor/outdoors/dirt
 
 /area/planets
@@ -50,12 +51,12 @@
 	name = "\improper Geminus City Area"
 	dynamic_lighting = 1
 	sound_env = CITY
+	flags = null
 
 /area/planets/Geminus/indoor
 	name = "\improper Geminus Interior"
 	icon_state = "yellow"
 	dynamic_lighting = 1
-	flags = RAD_SHIELDED
 
 
 /area/planets/Geminus/outdoor/north

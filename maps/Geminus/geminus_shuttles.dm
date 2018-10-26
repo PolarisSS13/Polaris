@@ -11,7 +11,6 @@
 	transit_direction = NORTH
 	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
-
 // Mercenary
 /datum/shuttle/multi_shuttle/mercenary
 	name = "Mercenary"

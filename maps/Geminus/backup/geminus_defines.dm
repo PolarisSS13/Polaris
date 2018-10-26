@@ -28,6 +28,25 @@
 
 	allowed_spawns = list("Arrivals Shuttle")
 
+	station_networks = list(
+							NETWORK_CARGO,
+							NETWORK_CIVILIAN,
+							NETWORK_COMMAND,
+							NETWORK_ENGINE,
+							NETWORK_ENGINEERING,
+							NETWORK_ENGINEERING_OUTPOST,
+							NETWORK_DEFAULT,
+							NETWORK_MEDICAL,
+							NETWORK_MINE,
+							NETWORK_NORTHERN_STAR,
+							NETWORK_RESEARCH,
+							NETWORK_RESEARCH_OUTPOST,
+							NETWORK_ROBOTS,
+							NETWORK_PRISON,
+							NETWORK_SECURITY,
+							NETWORK_INTERROGATION
+							)
+
 #define Z_LEVEL_FIRST_GEMINUS						1
 #define Z_LEVEL_SECOND_GEMINUS					2
 #define Z_LEVEL_SKY_GEMINUS						3
@@ -58,7 +77,7 @@
 /datum/map_z_level/geminus/sky
 	z = Z_LEVEL_SKY_GEMINUS
 	name = "Sky"
-	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER
+	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT
 	transit_chance = 50
 	base_turf = /turf/simulated/sky/moving
 
