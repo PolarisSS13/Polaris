@@ -18,8 +18,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/set_tcrystals,
 	/datum/admins/proc/add_tcrystals,
 	/client/proc/invisimin,				//allows our mob to go invisible/visible,
-//	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind -Removed due to rare practical use. Moved to debug verbs ~Errorage,
-	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
+	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind.,	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
 	/datum/admins/proc/force_mode_latespawn, //Force the mode to try a latespawn proc,
 	/datum/admins/proc/force_antag_latespawn, //Force a specific template to try a latespawn proc,
 	/datum/admins/proc/toggleenter,		//toggles whether people can join the current game,
@@ -83,6 +82,9 @@ var/list/admin_verbs_admin = list(
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
+	/client/proc/erp,
+	/client/proc/controlmob,
+	/client/proc/global_erp,
 	/client/proc/response_team, // Response Teams admin verb,
 	/client/proc/trader_ship, // Trader ship admin verb,
 	/client/proc/toggle_antagHUD_use,
@@ -1058,3 +1060,48 @@ var/list/admin_verbs_event_manager = list(
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
 	message_admins("<font color='blue'>[key_name_admin(usr)] gave [key_name(T)] the spell [S].</font>", 1)
+
+
+/client/proc/controlmob(mob/living/M as mob in mob_list)
+	set category = "Fun"
+	set name = "Control Mob"
+	set desc = "Quickly takes control of an existing mob."
+
+	if(!check_rights(R_DEBUG|R_ADMIN))	return
+	if(M.ckey)
+		if(alert("This mob is being controlled by [M.ckey]. Are you sure you wish to assume control of it? [M.ckey] will be made a ghost.",,"Yes","No") != "Yes")
+			return
+		else
+			var/mob/observer/dead/ghost = new/mob/observer/dead(M,1)
+			ghost.ckey = M.ckey
+	message_admins("<font color='blue'>[key_name_admin(usr)] assumed direct control of [M].</font>", 1)
+	log_admin("[key_name(usr)] assumed direct control of [M].")
+	var/mob/adminmob = src.mob
+	M.ckey = src.ckey
+	if( isobserver(adminmob) )
+		qdel(adminmob)
+
+/client/proc/global_erp()
+	set category = "Fun"
+	set name = "ERP Detected Global"
+	set desc = "Alerts everyone that ERP has been detected, and that spiders /will/ be deployed."
+
+	for (var/mob/T as mob in mob_list)
+		T << "<br><center><span class='notice'><b><font size=4>ERP DETECTED.<br> Purge of the source of erotic roleplay will commence shortly.</font></b><br></span></center><br>"
+		T << 'sound/effects/erpdetected.wav'
+
+	log_admin("[key_name(usr)] told everyone that ERP has been detected, and that jesus will be on their way.")
+	message_admins("\blue [key_name_admin(usr)] told everyone that ERP has been detected, and that jesus will be on their way.", 1)
+
+/client/proc/erp(mob/T as mob in mob_list)
+	set category = "Fun"
+	set name = "ERP Detected"
+	set desc = "Alerts someone that ERP has been detected, and that spiders /will/ be deployed."
+
+	T << "<span class='danger'><b><font size=3>ERP DETECTED.</font></b></span>"
+	T << "<span class='danger'>Jesus will be visiting shortly...</span>"
+	T << 'sound/effects/erpdetected.wav'
+
+
+	log_admin("[key_name(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.")
+	message_admins("\blue [key_name_admin(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.", 1)
