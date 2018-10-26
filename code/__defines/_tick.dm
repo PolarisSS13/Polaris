@@ -7,3 +7,4 @@
 #define CHECK_TICK if TICK_CHECK stoplag()
 
 #define TICK_USAGE world.tick_usage
+#define TICK_USAGE_REAL world.tick_usage    //to be used where the result isn't checked
