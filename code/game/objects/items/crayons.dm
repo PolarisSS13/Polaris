@@ -303,16 +303,16 @@
 	if(is_type_in_list(target,validSurfaces))
 		playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
 		user << "You start drawing graffiti on the [target.name]."
-	if(instant || do_after(user, 50))
-		new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
-		playsound(loc, 'sound/effects/spray.ogg', 5, 1, 5)
-		user << "You finish drawing."
-		target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
-		if(uses)
-			uses--
-			if(!uses)
-				to_chat(user, "<span class='warning'>Your spraycan runs empty!</span>")
-				qdel(src)
+		if(instant || do_after(user, 50))
+			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
+			playsound(loc, 'sound/effects/spray.ogg', 5, 1, 5)
+			user << "You finish drawing."
+			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
+			if(uses)
+				uses--
+				if(!uses)
+					to_chat(user, "<span class='warning'>Your spraycan runs empty!</span>")
+					qdel(src)
 
 	return
 
