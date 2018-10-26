@@ -39,7 +39,7 @@
 /mob/living/simple_mob/animal/passive/cat/apply_melee_effects(var/atom/A)
 	if(ismouse(A))
 		var/mob/living/simple_mob/animal/passive/mouse/mouse = A
-		if(mouse.getMaxHealth() > 20) // In case a badmin makes giant mice or something.
+		if(mouse.getMaxHealth() < 20) // In case a badmin makes giant mice or something.
 			mouse.splat()
 			visible_emote(pick("bites \the [mouse]!", "toys with \the [mouse].", "chomps on \the [mouse]!"))
 	else
