@@ -111,34 +111,6 @@
 			return active_spell.on_ranged_cast(A, src)
 	return ..()
 
-
-/*
-// Used to cast spells.
-/mob/living/simple_animal/technomancer_golem/RangedAttack(var/atom/A, var/params)
-	if(active_spell)
-		spellcast_pre_animation()
-		if(active_spell.cast_methods & CAST_RANGED)
-			active_spell.on_ranged_cast(A, src)
-		spellcast_post_animation()
-
-/mob/living/simple_animal/technomancer_golem/UnarmedAttack(var/atom/A, var/proximity)
-	if(proximity)
-		if(active_spell)
-			spellcast_pre_animation()
-			if(!Adjacent(A)) // Need to check again since they might've moved while 'warming up'.
-				spellcast_post_animation()
-				return
-			var/effective_cooldown = round(active_spell.cooldown * core.cooldown_modifier, 5)
-			if(active_spell.cast_methods & CAST_MELEE)
-				active_spell.on_melee_cast(A, src)
-			else if(active_spell.cast_methods & CAST_RANGED)
-				active_spell.on_ranged_cast(A, src)
-			spellcast_post_animation()
-			src.setClickCooldown(effective_cooldown)
-		else
-			..()
-*/
-
 /mob/living/simple_mob/mechanical/technomancer_golem/melee_pre_animation(atom/A)
 	if(active_spell && active_spell.cast_methods & CAST_MELEE|CAST_RANGED) // If they're trying to melee-cast a spell, use the special animation instead.
 		special_pre_animation(A)

@@ -44,14 +44,10 @@
 	return can_special_attack(A) && should_special_attack(A) // Just because we can doesn't mean we should.
 
 /mob/living/proc/ISay(message)
+	return say(message)
 
 /mob/living/proc/IIsAlly(mob/living/L)
 	return src.faction == L.faction
-
-/mob/living/simple_animal/IIsAlly(mob/living/L)
-	. = ..()
-	if(!.) // Outside the faction, try to see if they're friends.
-		return L in friends
 
 /mob/living/simple_mob/IIsAlly(mob/living/L)
 	. = ..()
@@ -60,7 +56,7 @@
 
 /mob/living/proc/IGetID()
 
-/mob/living/simple_animal/IGetID()
+/mob/living/simple_mob/IGetID()
 	if(myid)
 		return myid.GetID()
 

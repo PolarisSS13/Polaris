@@ -9,7 +9,7 @@ var/list/ventcrawl_machinery = list(
 	/obj/item/device/radio/borg,
 	/obj/item/weapon/holder,
 	/obj/machinery/camera,
-	/mob/living/simple_animal/borer,
+	/mob/living/simple_mob/animal/borer,
 	/obj/screen
 	)
 
@@ -66,11 +66,6 @@ var/list/ventcrawl_machinery = list(
 
 /mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item in organs)
-		return 1
-	return ..()
-
-/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item == held_item)
 		return 1
 	return ..()
 

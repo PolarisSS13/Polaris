@@ -139,6 +139,7 @@
 "cI" = (/obj/structure/girder,/turf/simulated/floor,/area/submap/Rockybase)
 "cJ" = (/obj/structure/closet/secure_closet/medical1,/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "cK" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/hydro,/area/submap/Rockybase)
+"cL" = (/mob/living/simple_mob/mechanical/mecha/combat/gygax/dark/advanced{faction = "malf_drone"},/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "cM" = (/obj/machinery/drone_fabricator{fabricator_tag = "Unknown"},/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "cN" = (/obj/machinery/mecha_part_fabricator,/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "cO" = (/obj/machinery/pros_fabricator,/turf/simulated/floor/tiled,/area/submap/Rockybase)
@@ -154,7 +155,6 @@
 "cY" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/Rockybase)
 "cZ" = (/obj/item/mecha_parts/part/gygax_armour,/turf/simulated/floor,/area/submap/Rockybase)
 "da" = (/obj/item/mecha_parts/chassis/gygax,/turf/simulated/floor/tiled,/area/submap/Rockybase)
-"db" = (/mob/living/simple_animal/hostile/mecha/malf_drone{name = "Autonomous Mechanized Drone"},/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "dc" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "dd" = (/obj/machinery/vending/robotics,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/submap/Rockybase)
 "de" = (/obj/machinery/power/apc{cell_type = /obj/item/weapon/cell/super; dir = 8; name = "Unknown APC"; pixel_x = -24},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled,/area/submap/Rockybase)
@@ -212,7 +212,7 @@ aaaaaaaaafaiatatbXaybYatatatatatatatatatatatalalatatatatbZatatatatcaatatatatatat
 aaaaaaaaafaiatatcbcbayatcccdcecfcgchcicjckclalcmcnatcocpaNcqcratcscaaNctcucvbLaNaNaNcwatbibyatataiaiaiafaaaaaaaa
 aaaaaaaaafaiatatcxbOcyataNaNaNaNaNaNaNaNaNcacaalczataNaNcAcBcCatcDaNbLbLcEcFcGcHcIaNcJatbibBatataiaiaiagaaaaaaaa
 aaaaaaaaafaiatatcbcbcKataNcMaNaNcMaNaNcNaNcOcaalcPatcQbLcRcScTatcUaNbLcVcWcXcYcWcZalaNatbibyatataiaiafafaaaaaaaa
-aaaaaaaaafaiatatcxbOayatcQaNaNdaaNdbaNdcbLdccacaddatdedfdgdfdhataNaNbLdicYcYcWcHalcmaNatbidjatataiaiafafaaaaaaaa
+aaaaaaaaafaiatatcxbOayatcQaNaNdaaNcLaNdcbLdccacaddatdedfdgdfdhataNaNbLdicYcYcWcHalcmaNatbidjatataiaiafafaaaaaaaa
 aaaaabaaafaiatatcbcbdkataNcMaNaNalalbLbLbLbLaNaNdlataNaNdmcSdnatdoaNaNdpcWcGcGcGcGalbLatbidqatataiakafafaaaadraa
 aaaaaaaaafaiatatcxbOayataNaNaNaNaNaNdsdtaNdtaNaNcpatdudvdwaNdxatdyaNdzaNaNdAcIdAbLbLdBatdCdDatataiaiafafaaaabCaa
 aaaaaaaaafaiaiatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatatataiaiafafafaaaaaaaa

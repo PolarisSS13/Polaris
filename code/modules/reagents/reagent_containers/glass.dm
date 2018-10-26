@@ -38,7 +38,7 @@
 		/obj/machinery/disease2/incubator,
 		/obj/machinery/disposal,
 		/mob/living/simple_mob/animal/passive/cow,
-		/mob/living/simple_mob/goat,
+		/mob/living/simple_mob/animal/goat,
 		/obj/machinery/computer/centrifuge,
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,

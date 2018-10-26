@@ -24,3 +24,4 @@
 /mob/living/simple_mob/animal/passive/penguin/tux
 	name = "Tux"
 	desc = "A penguin that has been known to associate with gnus."
+	speak_emote = list("interjects")

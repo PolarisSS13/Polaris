@@ -1,4 +1,4 @@
-/mob/living/simple_mob/goat
+/mob/living/simple_mob/animal/goat
 	name = "goat"
 	desc = "Not known for their pleasant disposition."
 	tt_desc = "E Oreamnos americanus"
@@ -27,12 +27,12 @@
 
 	var/datum/reagents/udder = null
 
-/mob/living/simple_mob/goat/New()
+/mob/living/simple_mob/animal/goat/New()
 	udder = new(50)
 	udder.my_atom = src
 	..()
 
-/mob/living/simple_mob/goat/Life()
+/mob/living/simple_mob/animal/goat/Life()
 	. = ..()
 	if(.)
 		if(stat == CONSCIOUS)
@@ -54,13 +54,13 @@
 				var/step = get_step_to(src, food, 0)
 				Move(step)
 
-/mob/living/simple_mob/goat/Move()
+/mob/living/simple_mob/animal/goat/Move()
 	..()
 	if(!stat)
 		for(var/obj/effect/plant/SV in loc)
 			SV.die_off(1)
 
-/mob/living/simple_mob/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_mob/animal/goat/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/weapon/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")

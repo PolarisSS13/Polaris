@@ -8,7 +8,7 @@
 "h" = (/mob/living/simple_mob/faithless/cult,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 "i" = (/obj/item/device/gps/explorer,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 "j" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
-"k" = (/mob/living/simple_animal/hostile/scarybat/cult,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
+"k" = (/mob/living/simple_mob/animal/space/bats,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 
 (1,1,1) = {"
 aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaa

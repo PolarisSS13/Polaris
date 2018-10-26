@@ -32,8 +32,8 @@
 	var/usable = 0
 	if(user.Adjacent(T) && user.get_active_hand() == src && !user.stat && !user.restrained())
 		usable = 1
-	if(!user.IsAdvancedToolUser() && istype(user, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = user
+	if(!user.IsAdvancedToolUser() && istype(user, /mob/living/simple_mob))
+		var/mob/living/simple_mob/S = user
 		if(!S.IsHumanoidToolUser(src))
 			usable = 0
 	return usable

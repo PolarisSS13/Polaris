@@ -462,9 +462,11 @@
 						if(L in holder.selected_mobs)
 							// Todo: Select graphic only the admin can see?
 							holder.selected_mobs -= L
+							user.client.images -= L.selected_image
 							to_chat(user, span("notice", "Deselected \the [L]."))
 						else
 							holder.selected_mobs += L
+							user.client.images += L.selected_image
 							to_chat(user, span("notice", "Selected \the [L]."))
 					else
 						to_chat(user, span("warning", "\The [L] is not AI controlled."))
@@ -498,7 +500,7 @@
 					for(var/thing in holder.selected_mobs)
 						var/mob/living/unit = thing
 						var/datum/ai_holder/AI = unit.ai_holder
-						AI.give_destination(T, pa.Find("shift"))
+						AI.give_destination(T, 1, pa.Find("shift"))
 					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to move to \the [T]."))
 
 

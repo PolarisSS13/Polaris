@@ -107,11 +107,6 @@
 	last_turf_display = TRUE
 	debug_ai = AI_LOG_INFO
 
-/mob/living/simple_animal/hostile/pirate
-	hostile = FALSE
-	ai_inactive = TRUE
-	ai_holder_type = /datum/ai_holder/hostile/ranged/debug
-
 /datum/ai_holder/hostile/ranged/robust/on_engagement(atom/movable/AM)
 	step_rand(holder)
 	holder.face_atom(AM)

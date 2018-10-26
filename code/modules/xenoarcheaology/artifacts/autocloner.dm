@@ -29,15 +29,15 @@
 		/mob/living/simple_mob/slime/xenobio)
 	else
 		spawn_type = pick(\
-		/mob/living/simple_animal/cat,
+		/mob/living/simple_mob/animal/passive/cat,
 		/mob/living/simple_mob/animal/passive/dog/corgi,
 		/mob/living/simple_mob/animal/passive/dog/corgi/puppy,
 		/mob/living/simple_mob/animal/passive/chicken,
 		/mob/living/simple_mob/animal/passive/cow,
-		/mob/living/simple_animal/parrot,
+		/mob/living/simple_mob/animal/passive/bird/parrot,
 		/mob/living/simple_mob/animal/passive/crab,
 		/mob/living/simple_mob/animal/passive/mouse,
-		/mob/living/simple_mob/goat)
+		/mob/living/simple_mob/animal/goat)
 
 //todo: how the hell is the asteroid permanently powered?
 /obj/machinery/auto_cloner/process()

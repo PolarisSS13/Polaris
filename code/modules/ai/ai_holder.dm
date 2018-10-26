@@ -259,62 +259,6 @@
 	ai_log("handle_stance_strategical() : Exiting.", AI_LOG_TRACE)
 	ai_log("++++++++++ Slow Process Ending ++++++++++", AI_LOG_TRACE)
 
-/*
-			//Yes I'm breaking this into two if()'s for ease of reading
-			//If we ARE ALLOWED TO
-			if(returns_home && home_turf && !astarpathing && (world.time - stance_changed) > 10 SECONDS)
-				if(get_dist(src,home_turf) > wander_distance)
-					move_to_delay = initial(move_to_delay)*2 //Walk back.
-					GoHome()
-				else
-					stop_automated_movement = 0
-*/
-
-/*
-// For proccessing the current stance, or setting and processing a new one
-/mob/living/simple_animal/proc/handle_stance(var/new_stance)
-	if(ai_inactive)
-		stance = STANCE_IDLE
-		return
-
-	if(new_stance)
-		set_stance(new_stance)
-
-	switch(stance)
-		if(STANCE_IDLE)
-			target_mob = null
-			a_intent = I_HELP
-			annoyed = max(0,annoyed--)
-
-			//Yes I'm breaking this into two if()'s for ease of reading
-			//If we ARE ALLOWED TO
-			if(returns_home && home_turf && !astarpathing && (world.time - stance_changed) > 10 SECONDS)
-				if(get_dist(src,home_turf) > wander_distance)
-					move_to_delay = initial(move_to_delay)*2 //Walk back.
-					GoHome()
-				else
-					stop_automated_movement = 0
-
-			//Search for targets while idle
-			if(hostile)
-				FindTarget()
-		if(STANCE_FOLLOW)
-			annoyed = 15
-			FollowTarget()
-			if(follow_until_time && world.time > follow_until_time)
-				LoseFollow()
-				return
-			if(hostile)
-				FindTarget()
-		if(STANCE_APPROACH)
-			annoyed = 50
-			a_intent = I_HURT
-			RequestHelp()
-			MoveToTarget()
-		if(STANCE_FIGHT)
-			annoyed = 50
-			AttackTarget()
-*/
 
 // Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
 /mob/living/proc/set_AI_busy(value)

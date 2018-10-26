@@ -33,7 +33,7 @@
 		last_threaten_time = world.time
 
 		if(holder.say_list)
-			holder.say(safepick(holder.say_list.say_threaten))
+			holder.ISay(safepick(holder.say_list.say_threaten))
 			playsound(holder.loc, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 			playsound(target.loc, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
@@ -49,7 +49,7 @@
 				threatening = FALSE
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)
-					holder.say(safepick(holder.say_list.say_escalate))
+					holder.ISay(safepick(holder.say_list.say_escalate))
 			else
 				return // Wait a bit.
 
@@ -57,7 +57,7 @@
 			threatening = FALSE
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
-				holder.say(safepick(holder.say_list.say_stand_down))
+				holder.ISay(safepick(holder.say_list.say_stand_down))
 				playsound(holder.loc, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
 				playsound(target.loc, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
 
@@ -65,11 +65,15 @@
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)
 	if(!isliving(the_target))
 		return FALSE // Turrets don't give a fuck so neither will we.
-	if(istype(the_target, /mob/living/simple_animal) && istype(holder, /mob/living/simple_animal))
-		var/mob/living/simple_animal/us = holder
-		var/mob/living/simple_animal/them = target
+	/*
+	// Find a nice way of doing this later.
+	if(istype(the_target, /mob/living/simple_mob) && istype(holder, /mob/living/simple_mob))
+		var/mob/living/simple_mob/us = holder
+		var/mob/living/simple_mob/them = target
+
 		if(them.intelligence_level < us.intelligence_level) // Todo: Bitflag these.
 			return FALSE // Humanoids don't care about drones/animals/etc. Drones don't care about animals, and so on.
+		*/
 	return TRUE
 
 // Temp defines to make the below code a bit more readable.
@@ -105,7 +109,7 @@
 
 		switch(pick(comm_types))
 			if(COMM_SAY)
-				holder.say(safepick(holder.say_list.speak))
+				holder.ISay(safepick(holder.say_list.speak))
 			if(COMM_AUDIBLE_EMOTE)
 				holder.audible_emote(safepick(holder.say_list.emote_hear))
 			if(COMM_VISUAL_EMOTE)
@@ -128,4 +132,4 @@
 
 		if(speak_to)
 			holder.face_atom(speak_to)
-		holder.say(message)
+		holder.ISay(message)
