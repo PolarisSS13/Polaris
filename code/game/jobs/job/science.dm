@@ -86,4 +86,4 @@
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
-	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer","Car Engineer")
