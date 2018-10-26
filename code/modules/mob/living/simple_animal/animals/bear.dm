@@ -1,6 +1,6 @@
 //Space bears!
 /mob/living/simple_animal/hostile/bear
-	name = "space bear"
+	name = "bear"
 	desc = "RawrRawr!!"
 	tt_desc = "Ursinae aetherius" //...bearspace? Maybe.
 	icon_state = "bear"

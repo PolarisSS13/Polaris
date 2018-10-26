@@ -3,6 +3,7 @@
 	name = "fish"
 	desc = "Its a fishy.  No touchy fishy."
 	icon = 'icons/mob/fish.dmi'
+	icon_state = "trout-dead"
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	intelligence_level = SA_ANIMAL
 

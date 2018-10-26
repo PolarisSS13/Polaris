@@ -1,5 +1,5 @@
 /mob/living/simple_animal/penguin
-	name = "space penguin"
+	name = "penguin"
 	desc = "An ungainly, waddling, cute, and VERY well-dressed bird."
 	tt_desc = "Aptenodytes forsteri"
 	icon_state = "penguin"

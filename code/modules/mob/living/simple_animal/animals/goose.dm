@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/goose
-	name = "space goose"
+	name = "goose"
 	desc = "That's no duck. That's a space goose. You have a bad feeling about this."
 	tt_desc = "Anser aetherius" //Goose space?!
 	icon_state = "goose"
