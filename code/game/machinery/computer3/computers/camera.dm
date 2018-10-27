@@ -1,7 +1,7 @@
 /*
 	Camera monitoring computers
 
-	NOTE: If we actually split the station camera network into regions that will help with sorting through the
+	NOTE: If we actually split the city camera network into regions that will help with sorting through the
 	tediously large list of cameras.  The new camnet_key architecture lets you switch between keys easily,
 	so you don't lose the capability of seeing everything, you just switch to a subnet.
 */
@@ -15,7 +15,7 @@
 
 /obj/machinery/computer3/security/wooden_tv
 	name				= "security cameras"
-	desc				= "An old TV hooked into the stations camera network."
+	desc				= "An old TV hooked into the city's camera network."
 	icon				= 'icons/obj/computer.dmi'
 	icon_state			= "security_det"
 
@@ -55,7 +55,7 @@
 /datum/file/camnet_key
 	name = "Security Camera Network Main Key"
 	var/title = "Station"
-	var/desc = "Connects to station security cameras."
+	var/desc = "Connects to city security cameras."
 	var/networks = list("ALL") // A little workaround as it is not possible to place station_networks here
 	var/screen = "cameras"
 
@@ -187,7 +187,7 @@
 
 /datum/file/program/security
 	name			= "camera monitor"
-	desc			= "Connects to the station camera network."
+	desc			= "Connects to the city camera network."
 	image			= 'icons/ntos/camera.png'
 	active_state	= "camera-static"
 

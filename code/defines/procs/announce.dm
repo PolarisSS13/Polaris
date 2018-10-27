@@ -7,7 +7,7 @@
 	var/log = 0
 	var/sound
 	var/newscast = 0
-	var/channel_name = "Station Announcements"
+	var/channel_name = "City Announcements"
 	var/announcement_type = "Announcement"
 
 /datum/announcement/New(var/do_log = 0, var/new_sound = null, var/do_newscast = 0)
@@ -119,10 +119,10 @@ datum/announcement/proc/Log(message as text, message_title as text)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 
 /proc/level_seven_announcement()
-	command_announcement.Announce("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
+	command_announcement.Announce("Confirmed outbreak of level 7 biohazard on [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", new_sound = 'sound/AI/outbreak7.ogg')
 
 /proc/ion_storm_announcement()
-	command_announcement.Announce("It has come to our attention that the station passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
+	command_announcement.Announce("It has come to our attention that an ion storm is approaching the city.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
 
 /proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 	if (ticker.current_state == GAME_STATE_PLAYING)
@@ -130,5 +130,5 @@ datum/announcement/proc/Log(message as text, message_title as text)
 			rank = character.mind.role_alt_title
 		AnnounceArrivalSimple(character.real_name, rank, join_message)
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "will arrive to the station shortly by shuttle")
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "will arrive to the city shortly by shuttle")
 	global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")

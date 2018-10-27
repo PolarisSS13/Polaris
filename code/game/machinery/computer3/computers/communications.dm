@@ -60,7 +60,7 @@
 		if(!interactable() || !computer.radio || ..(href,href_list) )
 			return
 		if (computer.z > 1)
-			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+			usr << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the city!"
 			return
 
 		if("main" in href_list)
@@ -115,7 +115,7 @@
 				if(message_cooldown)
 					usr << "Please allow at least one minute to pass between announcements"
 					return
-				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
+				var/input = input(usr, "Please write a message to announce to the city.", "Priority Announcement")
 				if(!input || !interactable())
 					return
 				crew_announcement.Announce(input)

@@ -3,7 +3,7 @@
 // The communications computer
 /obj/machinery/computer/communications
 	name = "command and communications console"
-	desc = "Used to command and control the station. Can relay long-range communications."
+	desc = "Used to command and control the city. Can relay long-range communications."
 	icon_keyboard = "tech_key"
 	icon_screen = "comm"
 	light_color = "#0099ff"
@@ -53,7 +53,7 @@
 	if(..())
 		return 1
 	if (using_map && !(src.z in using_map.contact_levels))
-		usr << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the station!</font>"
+		usr << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the city!</font>"
 		return
 	usr.set_machine(src)
 
@@ -103,7 +103,7 @@
 				if(message_cooldown)
 					usr << "Please allow at least one minute to pass between announcements"
 					return
-				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement")
+				var/input = input(usr, "Please write a message to announce to the city.", "Priority Announcement")
 				if(!input || !(usr in view(1,src)))
 					return
 				crew_announcement.Announce(input)
@@ -275,7 +275,7 @@
 	if(..())
 		return
 	if (using_map && !(src.z in using_map.contact_levels))
-		user << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the station!</font>"
+		user << "<font color='red'><b>Unable to establish a connection:</b></font> <font color='black'>You're too far away from the city!</font>"
 		return
 
 	user.set_machine(src)
