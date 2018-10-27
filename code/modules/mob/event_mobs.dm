@@ -6,7 +6,7 @@
 	does_not_breathe = 1
 	g_hair = 102
 	r_hair = 153
-	status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH
+	status_flags = null
 
 /mob/living/carbon/human/jesus/New()
 	..()

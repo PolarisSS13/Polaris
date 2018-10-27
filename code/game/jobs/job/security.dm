@@ -81,3 +81,23 @@
 	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
 	alt_titles = list("Junior Officer","Traffic Warden" = /decl/hierarchy/outfit/job/security/traffic)
+
+/datum/job/prosecutor
+	title = "District Prosecutor"
+	flag = PROSECUTOR
+	department = "Security"
+	department_flag = ENGSEC
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the chief of police and city supervisor"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	economic_modifier = 7
+	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	minimal_player_age = 7
+	minimum_character_age = 20
+	alt_titles = list("Defense Attorney","Barrister")
+
+	outfit_type = /decl/hierarchy/outfit/job/defense
