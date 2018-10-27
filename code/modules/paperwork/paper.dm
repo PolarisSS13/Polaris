@@ -583,7 +583,7 @@
  */
 /obj/item/weapon/paper/Court
 	name = "Judgement"
-	info = "For crimes against the station, the offender is sentenced to:<BR>\n<BR>\n"
+	info = "Due to violation of the law, the offender is sentenced to:<BR>\n<BR>\n"
 
 /obj/item/weapon/paper/Toxin
 	name = "Chemical Information"
