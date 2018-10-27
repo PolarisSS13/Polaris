@@ -163,9 +163,12 @@
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 7
 	minimum_character_age = 20
-	alt_titles = list("Defense Attorney", "Prosecutor","Barrister")
+	alt_titles = list("Defense Attorney","Barrister")
 
-	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
+	outfit_type = /decl/hierarchy/outfit/job/defense
+
+
+
 
 /*
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)

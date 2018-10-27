@@ -74,18 +74,6 @@
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
-/decl/hierarchy/outfit/job/internal_affairs_agent
-	name = OUTFIT_JOB_NAME("Lawyer")
-	l_ear = /obj/item/device/radio/headset/ia
-	uniform = /obj/item/clothing/under/lawyer/blue
-	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	shoes = /obj/item/clothing/shoes/brown
-	r_pocket = /obj/item/device/communicator
-	glasses = /obj/item/clothing/glasses/sunglasses/big
-	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
-	pda_type = /obj/item/device/pda/lawyer
-
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
@@ -116,3 +104,39 @@
 	r_pocket = /obj/item/device/communicator
 	uniform = /obj/item/clothing/under/rank/barber
 	r_pocket = /obj/item/weapon/scissors/barber
+
+
+/decl/hierarchy/outfit/job/judge
+	name = OUTFIT_JOB_NAME("Judge")
+	l_ear = /obj/item/device/radio/headset/ia
+	uniform = /obj/item/clothing/under/suit_jacket/charcoal
+	suit = /obj/item/clothing/suit/judgerobe
+	shoes = /obj/item/clothing/shoes/brown
+	r_pocket = /obj/item/device/communicator
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	pda_type = /obj/item/device/pda/lawyer
+
+/decl/hierarchy/outfit/job/defense
+	name = OUTFIT_JOB_NAME("Defense Attorney")
+	l_ear = /obj/item/device/radio/headset/ia
+	uniform = /obj/item/clothing/under/lawyer/blue
+	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	shoes = /obj/item/clothing/shoes/brown
+	r_pocket = /obj/item/device/communicator
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	pda_type = /obj/item/device/pda/lawyer
+
+/decl/hierarchy/outfit/job/prosecution
+	name = OUTFIT_JOB_NAME("District Prosecutor")
+	l_ear = /obj/item/device/radio/headset/ia
+	uniform = /obj/item/clothing/under/lawyer/blue
+	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	shoes = /obj/item/clothing/shoes/brown
+	r_pocket = /obj/item/device/communicator
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	pda_type = /obj/item/device/pda/lawyer
