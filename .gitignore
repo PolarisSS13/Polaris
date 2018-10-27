@@ -10,3 +10,4 @@ data/
 cfg/
 
 maps/Geminus/backup/geminus-2.dmm
+.vscode/tasks.json
