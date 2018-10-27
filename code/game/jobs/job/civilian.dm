@@ -147,8 +147,8 @@
 	alt_titles = list("Journalist", "Professor", "Historian", "Writer")
 
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
-/datum/job/lawyer
-	title = "Lawyer"
+/datum/job/defense
+	title = "Defense Attorney"
 	flag = LAWYER
 	department = "Civilian"
 	department_flag = CIVILIAN
@@ -157,17 +157,35 @@
 	spawn_positions = 2
 	supervisors = "the city supervisor"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	idtype = /obj/item/weapon/card/id/civilian/defense
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 	minimal_player_age = 7
 	minimum_character_age = 20
-	alt_titles = list("Defense Attorney","Barrister")
+	alt_titles = list("Defense Lawyer","Defense Attorney","Barrister")
 
 	outfit_type = /decl/hierarchy/outfit/job/defense
 
+/datum/job/judge
+	title = "Judge"
+	flag = JUDGE
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the city supervisor"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian/judge
+	economic_modifier = 13
+	access = list(access_judge, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_judge, access_sec_doors, access_heads)
+	minimal_player_age = 7
+	minimum_character_age = 25
+	alt_titles = list("Magistrate")
 
+	outfit_type = /decl/hierarchy/outfit/job/judge
 
 
 /*
@@ -179,7 +197,7 @@
 
 /datum/job/barber
 	title = "Barber"
-//	flag = BARBER
+	flag = BARBER
 	department = "Civilian"
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -187,10 +205,9 @@
 	spawn_positions = 2
 	supervisors = "the city supervisor"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
-//	access = list()
-//	minimal_access = list()
+	idtype = /obj/item/weapon/card/id/civilian/barber
 	minimum_character_age = 18
-
+	access = list(access_barber, access_maint_tunnels)
+	minimal_access = list(access_barber)
 	outfit_type = /decl/hierarchy/outfit/job/barber
 	alt_titles = list("Hairdresser", "Stylist", "Beautician")

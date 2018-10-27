@@ -29,6 +29,8 @@ var/const/PARAMEDIC			=(1<<10)
 
 
 var/const/CIVILIAN			=(1<<2)
+var/const/BARBER				=(1<<2)
+
 
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)
@@ -40,6 +42,8 @@ var/const/QUARTERMASTER		=(1<<6)
 var/const/CARGOTECH			=(1<<7)
 var/const/MINER				=(1<<8)
 var/const/LAWYER			=(1<<9)
+var/const/PROSECUTOR				=(1<<9)
+var/const/JUDGE				=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
@@ -98,9 +102,11 @@ var/list/civilian_positions = list(
 	"Chef",
 	"Janitor",
 	"Librarian",
-	"Lawyer",
+	"Defense Attorney",
+	"Judge",
 	"Chaplain",
-	"Civilian"
+	"Civilian",
+	"Barber"
 )
 
 
@@ -109,7 +115,8 @@ var/list/security_positions = list(
 	"Prison Warden",
 	"Detective",
 	"Security Officer",
-	"City Hall Guard"
+	"City Hall Guard",
+	"District Prosecutor"
 )
 
 

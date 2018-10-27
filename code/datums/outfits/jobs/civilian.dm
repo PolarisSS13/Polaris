@@ -100,7 +100,7 @@
 
 /decl/hierarchy/outfit/job/barber
 	name = OUTFIT_JOB_NAME("Barber")
-	id_type = /obj/item/weapon/card/id/assistant
+	id_type = /obj/item/weapon/card/id/civilian/barber
 	r_pocket = /obj/item/device/communicator
 	uniform = /obj/item/clothing/under/rank/barber
 	r_pocket = /obj/item/weapon/scissors/barber
@@ -110,11 +110,12 @@
 	name = OUTFIT_JOB_NAME("Judge")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
+	head = /obj/item/clothing/head/powdered_wig
 	suit = /obj/item/clothing/suit/judgerobe
-	shoes = /obj/item/clothing/shoes/brown
+	shoes = /obj/item/clothing/shoes/laceup
 	r_pocket = /obj/item/device/communicator
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	id_type = /obj/item/weapon/card/id/civilian/judge
 	pda_type = /obj/item/device/pda/lawyer
 
 /decl/hierarchy/outfit/job/defense
@@ -122,21 +123,21 @@
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/lawyer/blue
 	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	shoes = /obj/item/clothing/shoes/brown
+	shoes = /obj/item/clothing/shoes/black
 	r_pocket = /obj/item/device/communicator
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	id_type = /obj/item/weapon/card/id/civilian/defense
 	pda_type = /obj/item/device/pda/lawyer
 
 /decl/hierarchy/outfit/job/prosecution
 	name = OUTFIT_JOB_NAME("District Prosecutor")
 	l_ear = /obj/item/device/radio/headset/ia
-	uniform = /obj/item/clothing/under/lawyer/blue
-	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	uniform = /obj/item/clothing/under/lawyer/purpsuit
+	suit = /obj/item/clothing/suit/storage/toggle/lawyer/purpjacket
 	shoes = /obj/item/clothing/shoes/brown
 	r_pocket = /obj/item/device/communicator
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	id_type = /obj/item/weapon/card/id/security/prosecutor
 	pda_type = /obj/item/device/pda/lawyer

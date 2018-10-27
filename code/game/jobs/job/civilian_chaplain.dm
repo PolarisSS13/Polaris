@@ -7,6 +7,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	minimum_character_age = 18
 	supervisors = "the head of personnel"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chaplain

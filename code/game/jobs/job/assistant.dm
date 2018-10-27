@@ -8,6 +8,7 @@
 	spawn_positions = -1
 	supervisors = "the mayor and the city supervisor"
 	selection_color = "#515151"
+	minimum_character_age = 1
 	economic_modifier = 1
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()

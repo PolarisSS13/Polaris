@@ -37,6 +37,7 @@
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/doctor
 	economic_modifier = 7
+	minimum_character_age = 18
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
@@ -55,6 +56,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
+	minimum_character_age = 18
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
