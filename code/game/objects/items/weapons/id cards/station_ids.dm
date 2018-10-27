@@ -390,10 +390,25 @@
 	rank = "Chef"
 	job_access_type = /datum/job/chef
 
-/obj/item/weapon/card/id/civilian/internal_affairs_agent
-	assignment = "Lawyer"
-	rank = "Lawyer"
-	job_access_type = /datum/job/lawyer
+/obj/item/weapon/card/id/civilian/judge
+	assignment = "Judge"
+	rank = "Judge"
+	job_access_type = /datum/job/judge
+
+/obj/item/weapon/card/id/security/prosecutor
+	assignment = "District Prosecutor"
+	rank = "District Prosecutor"
+	job_access_type = /datum/job/prosecutor
+
+/obj/item/weapon/card/id/civilian/defense
+	assignment = "Defense Attorney"
+	rank = "Defense Attorney"
+	job_access_type = /datum/job/defense
+
+/obj/item/weapon/card/id/civilian/barber
+	assignment = "Barber"
+	rank = "Barber"
+	job_access_type = /datum/job/barber
 
 /obj/item/weapon/card/id/civilian/janitor
 	assignment = "Janitor"

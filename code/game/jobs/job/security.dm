@@ -92,12 +92,12 @@
 	spawn_positions = 1
 	supervisors = "the chief of police and city supervisor"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	idtype = /obj/item/weapon/card/id/security/prosecutor
 	economic_modifier = 7
-	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
-	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	access = list(access_prosecutor, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_prosecutor, access_sec_doors, access_heads)
 	minimal_player_age = 7
 	minimum_character_age = 20
-	alt_titles = list("Defense Attorney","Barrister")
+	alt_titles = list("Prosecution Officer","District Attorney")
 
-	outfit_type = /decl/hierarchy/outfit/job/defense
+	outfit_type = /decl/hierarchy/outfit/job/prosecution

@@ -235,7 +235,7 @@
 /var/const/access_lawyer = 38
 /datum/access/lawyer
 	id = access_lawyer
-	desc = "Internal Affairs"
+	desc = "Defense Attorney"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_virology = 39
@@ -256,9 +256,23 @@
 	desc = "Quartermaster"
 	region = ACCESS_REGION_SUPPLY
 
-// /var/const/free_access_id = 43
-// /var/const/free_access_id = 43
-// /var/const/free_access_id = 44
+/var/const/access_judge = 42
+/datum/access/judge
+	id = access_judge
+	desc = "Judge"
+	region = ACCESS_REGION_COMMAND
+
+/var/const/access_prosecutor = 43
+/datum/access/prosecutor
+	id = access_judge
+	desc = "Prosecutor"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_barber = 44
+/datum/access/barber
+	id = access_barber
+	desc = "Barber"
+	region = ACCESS_REGION_ALL
 
 /var/const/access_surgery = 45
 /datum/access/surgery
@@ -293,6 +307,7 @@
 	region = ACCESS_REGION_SUPPLY
 
 // /var/const/free_access_id = 51
+
 // /var/const/free_access_id = 52
 
 /var/const/access_heads_vault = 53
