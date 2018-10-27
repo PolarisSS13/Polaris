@@ -101,6 +101,7 @@
 /mob/living/simple_animal/cat/fluff
 	var/mob/living/carbon/human/friend
 	var/befriend_job = null
+	var/friend_name = null
 
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
@@ -136,7 +137,7 @@
 
 	if(!friend)
 		var/mob/living/carbon/human/H = usr
-		if(istype(H) && (!befriend_job || H.job == befriend_job))
+		if(istype(H) && (!befriend_job || H.job == befriend_job) && (!friend_name || H.real_name == friend_name))
 			friend = usr
 			. = 1
 	else if(usr == friend)
@@ -191,7 +192,7 @@
 	icon_dead = "cat3_dead"
 	icon_rest = "cat3_rest"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
-	var/friend_name = "Erstatz Vryroxes"
+	friend_name = "Erstatz Vryroxes"
 
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
