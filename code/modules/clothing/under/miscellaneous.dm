@@ -196,24 +196,24 @@
 
 /obj/item/clothing/under/suit_jacket/really_black
 	name = "executive suit"
-	desc = "A formal black suit and red tie, intended for the station's finest."
+	desc = "A formal black suit and red tie, intended for the city's finest."
 	icon_state = "really_black_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
 
 /obj/item/clothing/under/suit_jacket/really_black/skirt
 	name = "executive skirt suit"
-	desc = "A formal black suit and red necktie, intended for the station's finest."
+	desc = "A formal black suit and red necktie, intended for the city's finest."
 	icon_state = "really_black_suit_skirt"
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "female executive suit"
-	desc = "A formal trouser suit for women, intended for the station's finest."
+	desc = "A formal trouser suit for women, intended for the city's finest."
 	icon_state = "black_suit_fem"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
 
 /obj/item/clothing/under/suit_jacket/female/skirt
 	name = "executive skirt"
-	desc = "A formal suit skirt  for women, intended for the station's finest."
+	desc = "A formal suit skirt  for women, intended for the city's finest."
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	icon_state = "black_suit_fem"
 	item_state = "black_formal_skirt"
@@ -490,7 +490,7 @@
 
 /obj/item/clothing/under/suit_jacket/navy
 	name = "navy suit"
-	desc = "A navy suit and red tie, intended for the station's finest."
+	desc = "A navy suit and red tie, intended for the city's finest."
 	icon_state = "navy_suit"
 	item_state_slots = list(slot_r_hand_str = "lawyer_blue", slot_l_hand_str = "lawyer_blue")
 	starting_accessories = list(/obj/item/clothing/accessory/tie/red, /obj/item/clothing/accessory/jacket/navy)

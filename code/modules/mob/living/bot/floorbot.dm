@@ -32,7 +32,7 @@
 /mob/living/bot/floorbot/attack_hand(var/mob/user)
 	user.set_machine(src)
 	var/list/dat = list()
-	dat += "<TT><B>Automatic Station Floor Repairer v1.0</B></TT><BR><BR>"
+	dat += "<TT><B>Automatic City Floor Repairer v1.0</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];operation=start'>[src.on ? "On" : "Off"]</A><BR>"
 	dat += "Maintenance panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Tiles left: [amount]<BR>"

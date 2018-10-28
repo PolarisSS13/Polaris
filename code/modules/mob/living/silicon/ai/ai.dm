@@ -78,7 +78,7 @@ var/list/ai_verbs_default = list(
 	var/hack_fails = 0							// This increments with each failed hack, and determines the warning message text.
 	var/errored = 0								// Set to 1 if runtime error occurs. Only way of this happening i can think of is admin fucking up with varedit.
 	var/bombing_core = 0						// Set to 1 if core auto-destruct is activated
-	var/bombing_station = 0						// Set to 1 if station nuke auto-destruct is activated
+	var/bombing_station = 0						// Set to 1 if city nuke auto-destruct is activated
 	var/override_CPUStorage = 0					// Bonus/Penalty CPU Storage. For use by admins/testers.
 	var/override_CPURate = 0					// Bonus/Penalty CPU generation rate. For use by admins/testers.
 
@@ -180,8 +180,8 @@ var/list/ai_verbs_default = list(
 	return
 
 /mob/living/silicon/ai/proc/on_mob_init()
-	src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
-	src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
+	src << "<B>You are playing the city's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
+	src << "<B>To look at other parts of the city, click on yourself to get a camera menu.</B>"
 	src << "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>"
 	src << "To use something, simply click on it."
 	src << "Use <B>say #b</B> to speak to your cyborgs through binary. Use say :h to speak from an active holopad."
@@ -266,7 +266,7 @@ var/list/ai_verbs_default = list(
 */
 /obj/machinery/ai_powersupply
 	name="Power Supply"
-	active_power_usage=50000 // Station AIs use significant amounts of power. This, when combined with charged SMES should mean AI lasts for 1hr without external power.
+	active_power_usage=50000 // city AIs use significant amounts of power. This, when combined with charged SMES should mean AI lasts for 1hr without external power.
 	use_power = 2
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null
@@ -312,7 +312,7 @@ var/list/ai_verbs_default = list(
 		if(new_sprite) selected_sprite = new_sprite
 	updateicon()
 
-// this verb lets the ai see the stations manifest
+// this verb lets the ai see the citys manifest
 /mob/living/silicon/ai/proc/ai_roster()
 	set category = "AI Commands"
 	set name = "Show Crew Manifest"
@@ -321,14 +321,14 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
 	set category = "AI Commands"
-	set name = "Make Station Announcement"
+	set name = "Make City Announcement"
 	if(check_unable(AI_CHECK_WIRELESS | AI_CHECK_RADIO))
 		return
 
 	if(message_cooldown)
 		src << "Please allow one minute to pass between announcements."
 		return
-	var/input = input(usr, "Please write a message to announce to the station crew.", "A.I. Announcement")
+	var/input = input(usr, "Please write a message to announce to the citizens.", "A.I. Announcement")
 	if(!input)
 		return
 
