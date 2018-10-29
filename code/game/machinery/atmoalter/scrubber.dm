@@ -1,5 +1,6 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "Portable Air Scrubber"
+	desc = "A machine that can store the most robust of gases. Turn on to syphon toxins rapidly from a room. Does not scrub normal atmosphere."
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"

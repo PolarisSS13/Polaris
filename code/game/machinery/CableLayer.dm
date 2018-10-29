@@ -1,5 +1,6 @@
 /obj/machinery/cablelayer
 	name = "automatic cable layer"
+	desc = "A tool used to quickly lay cable on the ground. Useful for any engineer or budding artist."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1

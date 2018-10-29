@@ -1,5 +1,6 @@
 /obj/machinery/microwave
 	name = "microwave"
+	desc = "It has a 'nuke' button. Wonder what that does?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	density = 1

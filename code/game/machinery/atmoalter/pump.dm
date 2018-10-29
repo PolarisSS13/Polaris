@@ -1,5 +1,6 @@
 /obj/machinery/portable_atmospherics/powered/pump
 	name = "portable air pump"
+	desc = "A large machine capable of moving gas in and out of it's internal tank. Can be slotted with handheld tanks to empty or refill."
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "psiphon:0"

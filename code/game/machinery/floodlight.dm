@@ -1,5 +1,6 @@
 /obj/machinery/floodlight
 	name = "Emergency Floodlight"
+	desc = "A bright portable light to use in emergencies."
 	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "flood00"
 	density = 1

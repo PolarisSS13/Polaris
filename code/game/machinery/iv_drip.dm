@@ -1,5 +1,6 @@
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
+	desc = "Mostly used to put blood in people. mostly.."
 	icon = 'icons/obj/iv_drip.dmi'
 	anchored = 0
 	density = 0

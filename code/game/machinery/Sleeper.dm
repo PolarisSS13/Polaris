@@ -1,5 +1,6 @@
 /obj/machinery/sleep_console
 	name = "sleeper console"
+	desc = "Allows you to control the drugs going into the sleeper"
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeperconsole"
 	var/obj/machinery/sleeper/sleeper

@@ -8,6 +8,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/
 	name = "space jukebox"
+	desc = "Play the funky fresh beats."
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
 	var/state_base = "jukebox2"
