@@ -264,7 +264,7 @@
 
 /var/const/access_prosecutor = 43
 /datum/access/prosecutor
-	id = access_judge
+	id = access_prosecutor
 	desc = "Prosecutor"
 	region = ACCESS_REGION_SECURITY
 
