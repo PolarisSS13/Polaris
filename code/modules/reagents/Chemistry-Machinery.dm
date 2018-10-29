@@ -231,10 +231,13 @@
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 60) amount_per_pill = 60
 
+			var/pill_cube = "pill"
 			if(condi)//For the condimaster
-				var/name = sanitizeSafe(input(usr,"Name:","Name your cube!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
+				pill_cube = "cube"
 			else
-				var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
+				pill_cube = "pill"
+
+			var/name = sanitizeSafe(input(usr,"Name:","Name your [pill_cube]!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
 
 			if(!name) //Blank name (sanitized to nothing, or left empty) or cancel
 				return
