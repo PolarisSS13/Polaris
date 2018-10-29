@@ -255,6 +255,7 @@
 					P.icon_state = "pill"+pillsprite
 				else //If condi is on
 					P.icon_state = "bouilloncube"//Reskinned monkey cube
+					P.desc = "A dissolvable cube."
 				reagents.trans_to_obj(P,amount_per_pill)
 				if(src.loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.max_storage_space)
