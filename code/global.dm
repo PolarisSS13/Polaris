@@ -185,3 +185,17 @@ var/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
 //Keyed list for caching icons so you don't need to make them for records, IDs, etc all separately.
 //Could be useful for AI impersonation or something at some point?
 var/static/list/cached_character_icons = list()
+
+var/cans_opened_temp = 0
+var/lights_switched_on_temp = 0
+var/trash_piles_searched_temp = 0
+var/rare_trash_found_temp = 0
+var/turbo_lift_floors_moved_temp = 0
+var/lost_limbs_shift_temp = 0
+var/mouse_spawned_shift_temp = 0
+var/seed_planted_shift_temp = 0
+var/step_taken_shift_temp = 0
+var/number_people_walked_over_temp = 0
+var/destroyed_research_items_temp = 0
+var/items_sold_shift_temp = 0
+var/disposals_flush_shift_temp = 0

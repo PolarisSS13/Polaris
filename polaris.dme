@@ -16,6 +16,7 @@
 #include "code\global.dm"
 #include "code\hub.dm"
 #include "code\names.dm"
+#include "code\roundstats.dm"
 #include "code\stylesheet.dm"
 #include "code\world.dm"
 #include "code\__datastructures\globals.dm"
