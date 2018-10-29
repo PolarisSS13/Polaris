@@ -182,8 +182,12 @@ var/datum/species/shapeshifter/promethean/prometheans
 			nutrition_debt = H.getToxLoss()
 			H.adjustToxLoss(-heal_rate * starve_mod)
 			nutrition_cost += nutrition_debt - H.getToxLoss()
-			H.nutrition -= (2 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
+			H.nutrition -= (3 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
 			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
+
+			var/agony_to_apply = ((1 / starve_mod) * nutrition_cost) //Regenerating damage causes minor pain over time. Small injures will be no issue, large ones will cause problems.
+			H.apply_damage(agony_to_apply, HALLOSS)
+
 	else
 		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
 
