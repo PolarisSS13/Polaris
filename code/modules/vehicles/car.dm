@@ -20,7 +20,7 @@
 	paint_color = "#ffffff"
 	var/engine_start = 'sound/vehicles/ignition.ogg'
 	var/engine_fail = 'sound/vehicles/wontstart.ogg'
-	var/land_speed = 0.1
+	var/land_speed = 0.5
 	var/space_speed = 0 //if 0 it can't go in space
 
 /obj/vehicle/car/New()
