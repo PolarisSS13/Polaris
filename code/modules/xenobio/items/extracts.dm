@@ -824,7 +824,7 @@
 	name = "ruby slime extract"
 	icon_state = "ruby slime extract"
 	description_info = "This extract will cause all entities close to the extract to become stronger for ten minutes, when injected with phoron.  \
-	When injected with blood, makes a slime loyalty agent which will make the slime fight other dangerous entities but not station crew."
+	When injected with blood, makes a slime loyalty agent which will make the slime fight other dangerous entities but not regular citizens."
 
 /datum/chemical_reaction/slime/ruby_swole
 	name = "Slime Strength"
@@ -982,6 +982,3 @@
 /datum/chemical_reaction/slime/rainbow_unity/on_reaction(var/datum/reagents/holder)
 	new /obj/item/slimepotion/unity(get_turf(holder.my_atom))
 	..()
-
-
-

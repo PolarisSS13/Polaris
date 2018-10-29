@@ -65,8 +65,8 @@
 	else ..()
 
 /obj/structure/sign/double/map
-	name = "station map"
-	desc = "A framed picture of the station."
+	name = "city map"
+	desc = "A framed picture of the city."
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"

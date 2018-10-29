@@ -1047,13 +1047,13 @@
 	adj_dizzy = -5
 	adj_drowsy = -3
 	adj_sleepy = -2
-	
+
 
 	glass_name = "Coffee Milkshake"
 	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
 
 /datum/reagent/drink/milkshake/coffeeshake/overdose(var/mob/living/carbon/M, var/alien)
-	M.make_jittery(5) 
+	M.make_jittery(5)
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
@@ -1961,7 +1961,7 @@
 	druggy = 15
 
 	glass_name = "Pan-Galactic Gargle Blaster"
-	glass_desc = "Does... does this mean that Arthur and Ford are on the station? Oh joy."
+	glass_desc = "Does... does this mean that Arthur and Ford are in the city? Oh joy."
 
 /datum/reagent/ethanol/gintonic
 	name = "Gin and Tonic"
@@ -2083,14 +2083,14 @@
 /datum/reagent/ethanol/manhattan_proj
 	name = "Manhattan Project"
 	id = "manhattan_proj"
-	description = "A scientist's drink of choice, for pondering ways to blow up the station."
+	description = "A scientist's drink of choice, for pondering ways to blow up the city."
 	taste_description = "death, the destroyer of worlds"
 	color = "#C15D00"
 	strength = 10
 	druggy = 30
 
 	glass_name = "Manhattan Project"
-	glass_desc = "A scientist's drink of choice, for thinking how to blow up the station."
+	glass_desc = "A scientist's drink of choice, for thinking how to blow up the city."
 
 /datum/reagent/ethanol/manly_dorf
 	name = "The Manly Dorf"
@@ -2384,13 +2384,13 @@
 /datum/reagent/ethanol/specialwhiskey // I have no idea what this is and where it comes from
 	name = "Special Blend Whiskey"
 	id = "specialwhiskey"
-	description = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything. The smell of it singes your nostrils."
+	description = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything. The smell of it singes your nostrils."
 	taste_description = "unspeakable whiskey bliss"
 	color = "#523600"
 	strength = 7
 
 	glass_name = "special blend whiskey"
-	glass_desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
+	glass_desc = "Just when you thought regular whiskey was good... This silky, amber goodness has to come along and ruin everything."
 
 /datum/reagent/ethanol/unathiliquor
 	name = "Redeemer's Brew"
@@ -2690,13 +2690,13 @@
 /datum/reagent/ethanol/robustin
 	name = "Robustin"
 	id = "robustin"
-	description = "A bootleg brew of all the worst things on station."
+	description = "A bootleg brew of all the worst things in the city."
 	taste_description = "cough syrup and fire"
 	color = "#6b0145" // rgb(107, 1, 69)
 	strength = 10
 
 	glass_name = "Robustin"
-	glass_desc = "A bootleg brew of all the worst things on station."
+	glass_desc = "A bootleg brew of all the worst things in the city."
 
 /datum/reagent/ethanol/virginsip
 	name = "Virgin Sip"

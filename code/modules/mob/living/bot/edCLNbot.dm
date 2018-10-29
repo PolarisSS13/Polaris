@@ -76,13 +76,13 @@
 	usr.set_machine(src)
 	add_fingerprint(usr)
 
-	dat += "<TT><B>Automatic Station Cleaner v2.0</B></TT><BR><BR>"
+	dat += "<TT><B>Automatic City Cleaner v2.0</B></TT><BR><BR>"
 	dat += "Status: <A href='?src=\ref[src];operation=start'>[on ? "On" : "Off"]</A><BR>"
 	dat += "Behaviour controls are [locked ? "locked" : "unlocked"]<BR>"
 	dat += "Maintenance panel is [open ? "opened" : "closed"]"
 	if(!locked || issilicon(user))
 		dat += "<BR>Cleans Blood: <A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A><BR>"
-		dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
+		dat += "<BR>Patrol city: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
 	if(open && !locked)
 		dat += "<BR>Red Switch: <A href='?src=\ref[src];operation=red_switch'>[red_switch ? "On" : "Off"]</A><BR>"
 		dat += "<BR>Green Switch: <A href='?src=\ref[src];operation=green_switch'>[green_switch ? "On" : "Off"]</A><BR>"

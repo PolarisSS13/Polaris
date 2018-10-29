@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/security
 	name = "security camera monitor"
-	desc = "Used to access the various cameras on the station."
+	desc = "Used to access the various cameras in the city."
 	icon_keyboard = "security_key"
 	icon_screen = "cameras"
 	light_color = "#a91515"
@@ -92,7 +92,7 @@
 
 /obj/machinery/computer/security/attack_hand(var/mob/user as mob)
 	if (using_map && !(src.z in using_map.contact_levels))
-		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the city!"
 		return
 	if(stat & (NOPOWER|BROKEN))	return
 
@@ -242,7 +242,7 @@
 
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
-	desc = "An old TV hooked into the stations camera network."
+	desc = "An old TV hooked into the city's camera network."
 	icon_state = "television"
 	icon_keyboard = null
 	icon_screen = "detective_tv"

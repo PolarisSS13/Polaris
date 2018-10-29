@@ -8,12 +8,12 @@ var/datum/antagonist/ert/ert
 	role_text_plural = "Emergency Responders"
 	welcome_text = "As member of the Emergency Response Team, you answer only to your leader and company officials."
 	antag_text = "You are an <b>anti</b> antagonist! Within the rules, \
-		try to save the station and its inhabitants from the ongoing crisis. \
+		try to save the city and its inhabitants from the ongoing crisis. \
 		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to the ERT.</b>"
-	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to the Company, and have authority to override the Colony Director where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the Colony Director where possible, however."
+	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to the President, and have authority to override the orders of local officials where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the Colony Director where possible, however."
 	landmark_id = "Response Team"
 	id_type = /obj/item/weapon/card/id/centcom/ERT
 

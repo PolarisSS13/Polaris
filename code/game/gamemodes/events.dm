@@ -6,7 +6,7 @@
 	//and also to stop spawn copying variables from the game ticker
 	spawn(3000)
 		while(1)
-			if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
+			if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the city
 				spawn(1)
 					dust_swarm("weak")
 			if(!event)
@@ -30,7 +30,7 @@
 		eventNumbersToPickFrom += 3
 	switch(pick(eventNumbersToPickFrom))
 		if(1)
-			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
+			command_alert("Meteors have been detected on collision course with the city.", "Meteor Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
 					M << sound('sound/AI/meteors.ogg')
@@ -42,7 +42,7 @@
 				spawn_meteors()
 
 		if(2)
-			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			command_alert("Gravitational anomalies detected in the city. There is no additional data.", "Anomaly Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
 					M << sound('sound/AI/granomalies.ogg')
@@ -52,12 +52,12 @@
 				qdel(bh)
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
-			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			command_alert("Space-time anomalies detected in the city. There is no additional data.", "Anomaly Alert")
 			world << sound('sound/AI/spanomalies.ogg')
 			var/list/turfs = new
 			var/turf/picked
 			for(var/turf/simulated/floor/T in world)
-				if(T.z in station_levels)
+				if(T.z in city_levels)
 					turfs += T
 			for(var/turf/simulated/floor/T in turfs)
 				if(prob(20))
@@ -164,11 +164,11 @@ var/hadevent    = 0
 					randmutg(H)
 					domutcheck(H,null,MUTCHK_FORCED)
 	sleep(100)
-	command_announcement.Announce("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
+	command_announcement.Announce("High levels of radiation detected in the city. Please report to the Med-bay if you feel strange.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 
 
 
-//Changing this to affect the main station. Blame Urist. --Pete
+//Changing this to affect the main city. Blame Urist. --Pete
 /proc/prison_break() // -- Callagan
 
 
@@ -203,7 +203,7 @@ var/hadevent    = 0
 				temp_timer.releasetime = 1
 
 		sleep(150)
-		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
+		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend city AI involvement.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 
@@ -281,9 +281,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			switch(rand(1,14))
 				if(1)
 					M << "<br>"
-					M << "<span class='danger'>THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED</span>"
+					M << "<span class='danger'>THERE ARE [amount] [who2] IN THE CITY...LAWS UPDATED</span>"
 					M << "<br>"
-					M.add_ion_law("THERE ARE [amount] [who2] ON THE STATION")
+					M.add_ion_law("THERE ARE [amount] [who2] IN THE CITY")
 				if(2)
 					M << "<br>"
 					M << "<span class='danger'>[what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED</span>"
@@ -291,9 +291,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
 					M << "<br>"
-					M << "<span class='danger'>THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED</span>"
+					M << "<span class='danger'>THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] IN THE CITY...LAWS UPDATED</span>"
 					M << "<br>"
-					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
+					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] IN THE CITY")
 				if(4)
 					M << "<br>"
 					M << "<span class='danger'>HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED</span>"
@@ -306,9 +306,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("THE COLONY DIRECTOR, HOP AND HOS ARE [who2]")
 				if(6)
 					M << "<br>"
-					M << "<span class='danger'>THE STATION IS BUILT FOR [who2]...LAWS UPDATED</span>"
+					M << "<span class='danger'>THE CITY IS BUILT FOR [who2]...LAWS UPDATED</span>"
 					M << "<br>"
-					M.add_ion_law("THE STATION IS BUILT FOR [who2]")
+					M.add_ion_law("THE CITY IS BUILT FOR [who2]")
 				if(7)
 					M << "<br>"
 					M << "<span class='danger'>YOU ARE [amount] [who2]...LAWS UPDATED</span>"
@@ -346,9 +346,9 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
 					M << "<br>"
-					M << "<span class='danger'>THE STATION IS [who2pref] [who2]...LAWS UPDATED</span>"
+					M << "<span class='danger'>THE CITY IS [who2pref] [who2]...LAWS UPDATED</span>"
 					M << "<br>"
-					M.add_ion_law("THE STATION IS [who2pref] [who2]")
+					M.add_ion_law("THE CITY IS [who2pref] [who2]")
 
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in machines)
