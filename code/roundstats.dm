@@ -1,21 +1,38 @@
 
 //This is for the round end stats system.
 
+//Bazinga is used for easy finding of the variables, if you ever want to delete all of this
+var/cans_opened_bazinga = 0
+var/lights_switched_on_bazinga = 0
+var/trash_piles_searched_bazinga = 0
+var/rare_trash_found_bazinga = 0
+var/turbo_lift_floors_moved_bazinga = 0
+var/lost_limbs_shift_bazinga = 0
+var/mouse_spawned_shift_bazinga = 0
+var/seed_planted_shift_bazinga = 0
+var/step_taken_shift_bazinga = 0
+var/number_people_walked_over_bazinga = 0
+var/destroyed_research_items_bazinga = 0
+var/items_sold_shift_bazinga = 0
+var/disposals_flush_shift_bazinga = 0
+var/rocks_drilled_bazinga = 0
+
 /hook/roundend/proc/RoundEnd()
 
-	var/cans_opened = cans_opened_temp
-	var/lights_switched_on = lights_switched_on_temp
-	/*var/trash_piles_searched = trash_piles_searched_temp //Those two are only relevant to :b:irgo
-	var/rare_trash_found = rare_trash_found_temp*/
-	var/turbo_lift_floors_moved = turbo_lift_floors_moved_temp
-	var/lost_limbs_shift = lost_limbs_shift_temp
-	//var/mouse_spawned_shift = mouse_spawned_shift_temp //Virgo
-	var/seed_planted_shift = seed_planted_shift_temp
-	var/step_taken_shift = step_taken_shift_temp
-	//var/number_people_walked_over = number_people_walked_over_temp //Also virgo
-	var/destroyed_research_items = destroyed_research_items_temp
-	var/items_sold_shift = items_sold_shift_temp
-	var/disposals_flush_shift = disposals_flush_shift_temp
+	var/cans_opened = cans_opened_bazinga
+	var/lights_switched_on = lights_switched_on_bazinga
+	/*var/trash_piles_searched = trash_piles_searched_bazinga //Those two are only relevant to :b:irgo
+	var/rare_trash_found = rare_trash_found_bazinga*/
+	var/turbo_lift_floors_moved = turbo_lift_floors_moved_bazinga
+	var/lost_limbs_shift = lost_limbs_shift_bazinga
+	//var/mouse_spawned_shift = mouse_spawned_shift_bazinga //Virgo
+	var/seed_planted_shift = seed_planted_shift_bazinga
+	var/step_taken_shift = step_taken_shift_bazinga
+	//var/number_people_walked_over = number_people_walked_over_bazinga //Also virgo
+	var/destroyed_research_items = destroyed_research_items_bazinga
+	var/items_sold_shift = items_sold_shift_bazinga
+	var/disposals_flush_shift = disposals_flush_shift_bazinga
+	var/rocks_drilled = rocks_drilled_bazinga
 
 	world << "<B>Shift facts!</B>"
 	if(cans_opened > 0)
@@ -44,3 +61,5 @@
 		world << "The vending machines sold [items_sold_shift] items today."
 	if(disposals_flush_shift > 0)
 		world << "The disposal system flushed a whole [disposals_flush_shift] times for this shift. We should really invest in waste treatement."
+	if(rocks_drilled > 0)
+		world << "Our strong miners pulverized a whole [rocks_drilled] piles of pathetic rubble."

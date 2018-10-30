@@ -511,7 +511,7 @@
 				visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
 
 		playsound(src, 'sound/items/vending.ogg', 50, 1, 1)
-		items_sold_shift_temp++
+		items_sold_shift_bazinga++
 
 		status_message = ""
 		status_error = 0

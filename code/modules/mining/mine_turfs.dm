@@ -505,6 +505,8 @@ var/list/mining_overlay_cache = list()
 		for (var/i = 1 to mineral.result_amount - mined_ore)
 			DropMineral()
 
+	rocks_drilled_temp++
+
 	//destroyed artifacts have weird, unpleasant effects
 	//make sure to destroy them before changing the turf though
 	if(artifact_find && artifact_fail)

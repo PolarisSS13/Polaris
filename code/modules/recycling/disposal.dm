@@ -425,7 +425,7 @@
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 		last_sound = world.time
 	sleep(5) // wait for animation to finish
-	disposals_flush_shift_temp++
+	disposals_flush_shift_bazinga++
 
 
 	H.init(src, air_contents)	// copy the contents of disposer to holder

@@ -60,7 +60,7 @@
 		L.updateicon()
 
 	area.power_change()
-	lights_switched_on_temp++
+	lights_switched_on_bazinga++
 
 /obj/machinery/light_switch/power_change()
 

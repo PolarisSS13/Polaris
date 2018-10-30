@@ -66,6 +66,8 @@
 
 	doors_closing = 0 // The doors weren't open, so they are done closing
 
+	turbo_lift_floors_moved_bazinga++
+
 	var/area/turbolift/origin = locate(current_floor.area_ref)
 
 	if(target_floor == current_floor)
