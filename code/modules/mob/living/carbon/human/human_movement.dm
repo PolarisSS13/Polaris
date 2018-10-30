@@ -177,7 +177,7 @@
 		return
 
 	var/S = pick(footstep_sounds)
-	step_taken_shift_temp++
+	step_taken_shift_bazinga++
 	if(!S) return
 
 	// Play every 20 steps while walking, for the sneak
