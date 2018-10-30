@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 obj/machinery/recharger
 	name = "recharger"
-	desc = "Allows you to rechage batteries."
+	desc = "Allows you to recharge batteries."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
 	anchored = 1
