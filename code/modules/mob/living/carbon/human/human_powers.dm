@@ -307,7 +307,7 @@
 				organ_data["descriptor"] = O.name
 				to_chat(src, "<span class='notice'>You feel a slithering sensation as your [O.name] reform.</span>")
 
-				var/agony_to_apply = round(0.66 * O.max_damage) // 60% of the limb's health is converted into pain
+				var/agony_to_apply = round(0.66 * O.max_damage) // 60% of the limb's health is converted into pain.
 				src.apply_damage(agony_to_apply, HALLOSS)
 
 		update_icons_body()
