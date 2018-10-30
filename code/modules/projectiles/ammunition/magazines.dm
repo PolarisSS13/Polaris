@@ -53,11 +53,6 @@
 	icon_state = "T38"
 	ammo_type = /obj/item/ammo_casing/a38r
 
-/obj/item/ammo_magazine/s38/practice
-	name = "speedloader (.38 practice)"
-	icon_state = "T38"
-	ammo_type = /obj/item/ammo_casing/a38p
-
 /obj/item/ammo_magazine/s38/emp
 	name = "speedloader (.38 haywire)"
 	ammo_type = /obj/item/ammo_casing/a38/emp
