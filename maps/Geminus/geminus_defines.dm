@@ -11,7 +11,7 @@
 	station_name  = "Geminus City"
 	station_short = "Geminus"
 	dock_name     = "Geminus City Spaceport"
-	boss_name     = "United Polluxian Government"
+	boss_name     = "Central Polluxian Government"
 	boss_short    = "Pollux Gov"
 	company_name  = "Nanotrasen"
 	company_short = "NT"

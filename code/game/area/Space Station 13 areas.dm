@@ -167,6 +167,8 @@ area/space/atmosalert()
 /area/shuttle/escape_pod6
 	name = "\improper Escape Pod Six"
 	music = "music/escape.ogg"
+	dynamic_lighting = 0
+	luminosity = 0
 
 /area/shuttle/escape_pod6/station
 	icon_state = "shuttle2"
@@ -502,6 +504,8 @@ area/space/atmosalert()
 	requires_power = 0
 	flags = RAD_SHIELDED
 	base_turf = /turf/space
+	dynamic_lighting = 0
+	luminosity = 0
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -561,7 +565,9 @@ area/space/atmosalert()
 	name = "\improper Skipjack"
 	icon_state = "yellow"
 	requires_power = 0
-	base_turf = /turf/space
+	dynamic_lighting = 0
+	luminosity = 0
+	base_turf = /turf/simulated/floor/water
 
 /area/skipjack_station/start
 	name = "\improper Skipjack"
@@ -1101,6 +1107,18 @@ area/space/atmosalert()
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
+	icon_state = "courtroom"
+
+/area/crew_quarters/courtroom/judge
+	name = "\improper Courtroom - Judge's Quarters"
+	icon_state = "courtroom"
+
+/area/crew_quarters/courtroom/defense
+	name = "\improper Courtroom - Defense Attorney Office"
+	icon_state = "courtroom"
+
+/area/crew_quarters/courtroom/prosecution
+	name = "\improper Courtroom - Prosecutor's Office"
 	icon_state = "courtroom"
 
 /area/mint

@@ -275,7 +275,7 @@
 	if(!istype(user, /mob/living/silicon))
 		if(user.a_intent == I_HURT)
 			hit_animation()
-			visible_message("<span class='danger'>You kick the [src] in frustration!</span>", "<span class='danger'>[usr] aggressively kicks the [src] in pure frustration!")
+			visible_message("<span class='danger'>[usr] aggressively kicks the [src] in pure frustration!</span>")
 
 			playsound(user.loc, 'sound/weapons/gunshot4.ogg', 50, 1)
 			add_fingerprint(user)

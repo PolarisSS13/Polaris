@@ -330,6 +330,7 @@
 		..()
 
 	attack_hand(var/mob/user as mob)
+		playsound(src, clicksound, 100, 1, 0)
 		if(stat)
 			Reset()
 			return
@@ -385,6 +386,7 @@
 		user << "\The [src] won't boot!"
 
 	interact()
+		playsound(src, clicksound, 100, 1, 0)
 		if(stat)
 			Reset()
 			return

@@ -273,3 +273,8 @@
 /area/planets/Geminus/indoor/cmo
 	name = "\improper Chief Medical Officer Office"
 	icon_state = "cmo"
+
+/area/planets/Geminus/outdoor/park
+	name = "\improper Geminus City - Park"
+	icon_state = "yellow"
+
