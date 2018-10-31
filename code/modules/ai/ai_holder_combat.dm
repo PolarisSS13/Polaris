@@ -7,7 +7,8 @@
 	var/shoot_range = 5						// How close the mob needs to be to attempt to shoot at the enemy, if the mob is capable of ranged attacks.
 	var/pointblank = FALSE					// If ranged is true, and this is true, people adjacent to the mob will suffer the ranged instead of using a melee attack.
 
-	var/can_breakthrough = TRUE				// If false, the AI will not try to break things like windows or other structures in the way.
+	var/can_breakthrough = TRUE				// If false, the AI will not try to open a path to its goal, like opening doors.
+	var/violent_breakthrough = TRUE			// If false, the AI is not allowed to destroy things like windows or other structures in the way. Requires above var to be true.
 	var/stand_ground = FALSE				// If true, the AI won't try to get closer to an enemy if out of range.
 
 
@@ -196,7 +197,8 @@
 
 
 	// Otherwise keep walking.
-	walk_path(target, get_to)
+	if(!stand_ground)
+		walk_path(target, get_to)
 
 	ai_log("walk_to_target() : Exiting.", AI_LOG_DEBUG)
 
@@ -206,53 +208,102 @@
 	holder.resist()
 
 // Used to break through windows and barriers to a target on the other side.
+// This does two passes, so that if its just a public access door, the windows nearby don't need to be smashed.
 /datum/ai_holder/proc/breakthrough(atom/target_atom)
+	ai_log("breakthrough() : Entering", AI_LOG_TRACE)
+
 	if(!can_breakthrough)
+		ai_log("breakthrough() : Not allowed to breakthrough. Exiting.", AI_LOG_TRACE)
 		return FALSE
+
+	if(!isturf(holder.loc))
+		ai_log("breakthrough() : Trapped inside \the [holder.loc]. Exiting.", AI_LOG_TRACE)
+		return FALSE
+
 	var/dir_to_target = get_dir(holder, target_atom)
 	holder.face_atom(target_atom)
+	ai_log("breakthrough() : Exiting", AI_LOG_DEBUG)
 
-	// First, try to break things directly in front of us.
-	var/result = destroy_surroundings(dir_to_target)
+	// Sometimes the mob will try to hit something diagonally, and generally this fails.
+	// So instead we will try two more times with some adjustments if the attack fails.
+	var/list/directions_to_try = list(
+		dir_to_target,
+		turn(dir_to_target, 45),
+		turn(dir_to_target, -45)
+		)
 
-	// If that doesn't work, we might be trying to attack something diagonally.
-	// If so, we can try again with some adjustments to avoid invalid diagonal directions.
-	if(!result)
-		result = destroy_surroundings(turn(dir_to_target, 45))
+	ai_log("breakthrough() : Starting peaceful pass.", AI_LOG_DEBUG)
 
-	// One last time, going the other way.
-	if(!result)
-		result = destroy_surroundings(turn(dir_to_target, -45))
+	var/result = FALSE
 
-	// Welp.
+	// First, we will try to peacefully make a path, I.E opening a door we have access to.
+	for(var/direction in directions_to_try)
+		result = destroy_surroundings(direction, violent = FALSE)
+		if(result)
+			break
+
+	// Alright, lets smash some shit instead, if it didn't work and we're allowed to be violent.
+	if(!result && can_violently_breakthrough())
+		ai_log("breakthrough() : Starting violent pass.", AI_LOG_DEBUG)
+		for(var/direction in directions_to_try)
+			result = destroy_surroundings(direction, violent = TRUE)
+			if(result)
+				break
+
+	ai_log("breakthrough() : Exiting with [result].", AI_LOG_TRACE)
 	return result
 
-/datum/ai_holder/proc/destroy_surroundings(direction)
+// Despite the name, this can also be used to help clear a path without any destruction.
+/datum/ai_holder/proc/destroy_surroundings(direction, violent = TRUE)
+	ai_log("destroy_surroundings() : Entering.", AI_LOG_TRACE)
 	if(!direction)
 		direction = pick(cardinal) // FLAIL WILDLY
+		ai_log("destroy_surroundings() : No direction given, picked [direction] randomly.", AI_LOG_DEBUG)
 
 	var/turf/problem_turf = get_step(holder, direction)
 
-	// First, kill windows in the way.
-	for(var/obj/structure/window/W in problem_turf)
-		if(W.dir == reverse_dir[holder.dir]) // So that windows get smashed in the right order
-			ai_log("destroy_surroundings() : Attacking diagonal window.", AI_LOG_INFO)
-			return holder.IAttack(W)
+	// First, give peace a chance.
+	if(!violent)
+		ai_log("destroy_surroundings() : Going to try to peacefully clear [problem_turf].", AI_LOG_DEBUG)
+		for(var/obj/machinery/door/D in problem_turf)
+			if(D.density && holder.Adjacent(D) && D.allowed(holder) && D.operable())
+				// First, try to open the door if possible without smashing it. We might have access.
+				ai_log("destroy_surroundings() : Opening closed door.", AI_LOG_INFO)
+				return D.open()
 
-		else if(W.is_fulltile())
-			ai_log("destroy_surroundings() : Attacking full tile window.", AI_LOG_INFO)
-			return holder.IAttack(W)
+	// Peace has failed us, can we just smash the things in the way?
+	else
+		ai_log("destroy_surroundings() : Going to try to violently clear [problem_turf].", AI_LOG_DEBUG)
+		// First, kill windows in the way.
+		for(var/obj/structure/window/W in problem_turf)
+			if(W.dir == reverse_dir[holder.dir]) // So that windows get smashed in the right order
+				ai_log("destroy_surroundings() : Attacking side window.", AI_LOG_INFO)
+				return holder.IAttack(W)
 
-	var/obj/structure/obstacle = locate(/obj/structure, problem_turf)
-	if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
-		ai_log("destroy_surroundings() : Attacking generic structure.", AI_LOG_INFO)
-		return holder.IAttack(obstacle)
+			else if(W.is_fulltile())
+				ai_log("destroy_surroundings() : Attacking full tile window.", AI_LOG_INFO)
+				return holder.IAttack(W)
 
-	for(var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
-		if(D.density)
-			ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
-			return holder.IAttack(D)
+		// Kill hull shields in the way.
+		for(var/obj/effect/energy_field/shield in problem_turf)
+			if(shield.density) // Don't attack shields that are already down.
+				ai_log("destroy_surroundings() : Attacking hull shield.", AI_LOG_INFO)
+				return holder.IAttack(shield)
 
+		// Kill common obstacle in the way like tables.
+		var/obj/structure/obstacle = locate(/obj/structure, problem_turf)
+		if(istype(obstacle, /obj/structure/window) || istype(obstacle, /obj/structure/closet) || istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/grille))
+			ai_log("destroy_surroundings() : Attacking generic structure.", AI_LOG_INFO)
+			return holder.IAttack(obstacle)
+
+		for(var/obj/machinery/door/D in problem_turf) // Required since firelocks take up the same turf.
+			if(D.density)
+				ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
+				return holder.IAttack(D)
+
+	ai_log("destroy_surroundings() : Exiting due to nothing to attack.", AI_LOG_INFO)
 	return FALSE // Nothing to attack.
 
-
+// Override for special behaviour.
+/datum/ai_holder/proc/can_violently_breakthrough()
+	return violent_breakthrough

@@ -12,6 +12,8 @@
 	health = 120
 
 	poison_per_bite = 5
+	melee_damage_lower = 9
+	melee_damage_upper = 15
 
 	movement_cooldown = 0 // Hunters are FAST.
 
@@ -19,7 +21,8 @@
 
 	player_msg = "You are very fast, and <b>can perform a leaping attack</b> by clicking on someone from a short distance away.<br>\
 	If the leap succeeds, the target will be knocked down briefly and you will be on top of them.<br>\
-	Note that there is a short delay before you leap!"
+	Note that there is a short delay before you leap!<br>\
+	In addition, you will do more damage to incapacitated opponents."
 
 	// Leaping is a special attack, so these values determine when leap can happen.
 	// Leaping won't occur if its on cooldown.
@@ -28,6 +31,16 @@
 	special_attack_cooldown = 10 SECONDS
 
 	var/leap_warmup = 1 SECOND // How long the leap telegraphing is.
+	var/leap_sound = 'sound/weapons/spiderlunge.ogg'
+
+// Multiplies damage if the victim is stunned in some form, including a successful leap.
+/mob/living/simple_mob/animal/giant_spider/hunter/apply_bonus_melee_damage(atom/A, damage_amount)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.incapacitated(INCAPACITATION_DISABLED))
+			return damage_amount * 1.5
+	return ..()
+
 
 // The actual leaping attack.
 /mob/living/simple_mob/animal/giant_spider/hunter/do_special_attack(atom/A)
@@ -42,7 +55,7 @@
 	status_flags |= LEAPING // Lets us pass over everything.
 	visible_message(span("danger","\The [src] leaps at \the [A]!"))
 	throw_at(get_step(get_turf(A), get_turf(src)), special_attack_max_range+1, 1, src)
-	playsound(src, 'sound/weapons/spiderlunge.ogg', 75, 1)
+	playsound(src, leap_sound, 75, 1)
 
 	sleep(5) // For the throw to complete. It won't hold up the AI ticker due to waitfor being false.
 

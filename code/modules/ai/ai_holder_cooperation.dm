@@ -92,6 +92,9 @@
 	if(!holder.IIsAlly(friend)) // Extra sanity.
 		ai_log("help_requested() : Help requested by [friend] but we hate them.", AI_LOG_INFO)
 		return
+	if(friend.ai_holder && friend.ai_holder.target && !can_attack(friend.ai_holder.target))
+		ai_log("help_requested() : Help requested by [friend] but we don't want to fight their target.", AI_LOG_INFO)
+		return
 	if(get_dist(holder, friend) <= follow_distance)
 		ai_log("help_requested() : Help requested by [friend] but we're already here.", AI_LOG_INFO)
 		return

@@ -69,3 +69,9 @@
 /mob/living/simple_mob/mechanical/combat_drone/lesser
 	desc = "An automated combat drone with an aged apperance."
 	movement_cooldown = 10
+
+
+// This one is the type spawned by the random event.
+// It won't wander away from its spawn point
+/mob/living/simple_mob/mechanical/combat_drone/event
+	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting/threatening/event

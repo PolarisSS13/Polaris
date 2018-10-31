@@ -7,12 +7,12 @@
 	var/follow_until_time = 0			// world.time when the mob will stop following leader. 0 means it won't time out.
 
 /datum/ai_holder/proc/walk_to_leader()
-	ai_log("walk_to_leader() : Entering.",AI_LOG_DEBUG)
+	ai_log("walk_to_leader() : Entering.",AI_LOG_TRACE)
 	if(!leader)
 		ai_log("walk_to_leader() : No leader.", AI_LOG_WARNING)
 		forget_path()
 		set_stance(STANCE_IDLE)
-		ai_log("walk_to_leader() : Exiting.", AI_LOG_DEBUG)
+		ai_log("walk_to_leader() : Exiting.", AI_LOG_TRACE)
 		return
 
 	// Did we time out?
@@ -20,7 +20,7 @@
 		ai_log("walk_to_leader() : Follow timed out, losing leader.", AI_LOG_INFO)
 		lose_follow()
 		set_stance(STANCE_IDLE)
-		ai_log("walk_to_leader() : Exiting.", AI_LOG_DEBUG)
+		ai_log("walk_to_leader() : Exiting.", AI_LOG_TRACE)
 		return
 
 	var/get_to = follow_distance

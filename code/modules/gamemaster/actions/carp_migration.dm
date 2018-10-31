@@ -52,7 +52,7 @@
 	while (i <= carp_amount)
 		var/group_size = rand(group_size_min, group_size_max)
 		for (var/j = 1, j <= group_size, j++)
-			spawned_carp.Add(new /mob/living/simple_mob/animal/space/carp(spawn_locations[i]))
+			spawned_carp.Add(new /mob/living/simple_mob/animal/space/carp/event(spawn_locations[i]))
 		i++
 	message_admins("[spawned_carp.len] carp spawned by event.")
 

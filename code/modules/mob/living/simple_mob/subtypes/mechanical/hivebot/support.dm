@@ -1,6 +1,8 @@
 // These hivebots help their team in various ways, and can be very powerful with allies, but are otherwise very weak when alone.
 
 /mob/living/simple_mob/mechanical/hivebot/support
+	icon_state = "white"
+	icon_living = "white"
 	attacktext = list("prodded")
 	movement_cooldown = 5
 	melee_damage_lower = 2

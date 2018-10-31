@@ -32,6 +32,9 @@
 /mob/living/simple_mob/mechanical/hivebot/ranged_damage/ion
 	name = "ionic hivebot"
 	desc = "A robot with an electromagnetic pulse projector."
+	icon_state = "yellow"
+	icon_living = "yellow"
+
 	projectiletype = /obj/item/projectile/ion
 	projectilesound = 'sound/weapons/Laser.ogg'
 	player_msg = "You have a <b>ranged ion attack</b>, which is very strong against other synthetics.<br>\
@@ -58,6 +61,9 @@
 /mob/living/simple_mob/mechanical/hivebot/ranged_damage/dot
 	name = "ember hivebot"
 	desc = "A robot that appears to utilize fire to cook their enemies."
+	icon_state = "red"
+	icon_living = "red"
+
 	projectiletype = /obj/item/projectile/fire
 	heat_resist = 1
 	player_msg = "Your attacks inflict a <b>damage over time</b> effect, that will \
@@ -100,6 +106,9 @@
 	desc = "A large robot capable of delivering long range bombardment."
 	projectiletype = /obj/item/projectile/arc/test
 	icon_scale = 2
+	icon_state = "red"
+	icon_living = "red"
+
 	player_msg = "You are capable of firing <b>very long range bombardment attacks</b>.<br>\
 	To use, click on a tile or enemy at a long range. Note that the projectile arcs in the air, \
 	so it will fly over everything inbetween you and the target.<br>\

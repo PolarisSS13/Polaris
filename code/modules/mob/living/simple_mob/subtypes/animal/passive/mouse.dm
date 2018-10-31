@@ -11,7 +11,7 @@
 	maxHealth = 5
 	health = 5
 
-	mob_size = MOB_SMALL
+	mob_size = MOB_MINISCULE
 	pass_flags = PASSTABLE
 //	can_pull_size = ITEMSIZE_TINY
 //	can_pull_mobs = MOB_PULL_NONE

@@ -2,7 +2,7 @@
 /mob/living/simple_mob/animal/passive/bird/parrot
 	name = "parrot"
 	description_info = "You can give it a headset by clicking on it with a headset. \
-	To remove it, click-drag the bird to you while adjacent to them."
+	To remove it, click the bird while on grab intent."
 	has_langs = list("Galactic Common", "Bird")
 
 	ai_holder_type = /datum/ai_holder/simple_mob/passive/parrot
@@ -25,7 +25,7 @@
 		"Meteors have been detected on a collision course with the station!"
 		)
 
-// Let's the AI use headsets.
+// Lets the AI use headsets.
 // Player-controlled parrots will need to do it manually.
 /mob/living/simple_mob/animal/passive/bird/parrot/ISay(message)
 	if(my_headset && prob(50))

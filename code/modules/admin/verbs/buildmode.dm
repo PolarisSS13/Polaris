@@ -170,9 +170,20 @@
 	qdel(buildquit)
 	buildquit = null
 	throw_atom = null
-	cl = null
+	for(var/mob/living/unit in selected_mobs)
+		deselect_AI_mob(cl, unit)
 	selected_mobs.Cut()
+	cl = null
 	return ..()
+
+/obj/effect/bmode/buildholder/proc/select_AI_mob(client/C, mob/living/unit)
+	selected_mobs += unit
+	C.images += unit.selected_image
+
+/obj/effect/bmode/buildholder/proc/deselect_AI_mob(client/C, mob/living/unit)
+	selected_mobs -= unit
+	C.images -= unit.selected_image
+
 
 /obj/effect/bmode/buildmode
 	icon_state = "buildmode1"
@@ -460,48 +471,58 @@
 					// Select/Deselect
 					if(!isnull(L.get_AI_stance()))
 						if(L in holder.selected_mobs)
-							// Todo: Select graphic only the admin can see?
-							holder.selected_mobs -= L
-							user.client.images -= L.selected_image
+							holder.deselect_AI_mob(user.client, L)
 							to_chat(user, span("notice", "Deselected \the [L]."))
 						else
-							holder.selected_mobs += L
-							user.client.images += L.selected_image
+							holder.select_AI_mob(user.client, L)
 							to_chat(user, span("notice", "Selected \the [L]."))
 					else
 						to_chat(user, span("warning", "\The [L] is not AI controlled."))
 
 			if(pa.Find("right"))
-				if(istype(object, /atom/movable)) // Force attack.
-					var/atom/movable/AM = object
+				if(istype(object, /atom)) // Force attack.
+					var/atom/A = object
 
 					if(pa.Find("alt"))
-						for(var/thing in holder.selected_mobs)
-							var/mob/living/unit = thing
+						var/i = 0
+						for(var/mob/living/unit in holder.selected_mobs)
 							var/datum/ai_holder/AI = unit.ai_holder
-							AI.give_target(AM)
-							to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to attack \the [AM]."))
+							AI.give_target(A)
+							i++
+						to_chat(user, span("notice", "Commanded [i] mob\s to attack \the [A]."))
+						return
 
 				if(isliving(object)) // Follow or attack.
 					var/mob/living/L = object
-
-					for(var/thing in holder.selected_mobs)
-						var/mob/living/unit = thing
+					var/i = 0 // Attacking mobs.
+					var/j = 0 // Following mobs.
+					for(var/mob/living/unit in holder.selected_mobs)
 						var/datum/ai_holder/AI = unit.ai_holder
 						if(L.IIsAlly(unit) || !AI.hostile || pa.Find("shift"))
 							AI.set_follow(L)
+							j++
 						else
 							AI.give_target(L)
-					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to attack or follow \the [L]."))
+							i++
+					var/message = "Commanded "
+					if(i)
+						message += "[i] mob\s to attack \the [L]"
+						if(j)
+							message += ", and "
+						else
+							message += "."
+					if(j)
+						message += "[j] mob\s to follow \the [L]."
+					to_chat(user, span("notice", message))
 
 				if(isturf(object)) // Move or reposition.
 					var/turf/T = object
-
-					for(var/thing in holder.selected_mobs)
-						var/mob/living/unit = thing
+					var/i = 0
+					for(var/mob/living/unit in holder.selected_mobs)
 						var/datum/ai_holder/AI = unit.ai_holder
-						AI.give_destination(T, 1, pa.Find("shift"))
-					to_chat(user, span("notice", "Commanded [holder.selected_mobs.len] mob\s to move to \the [T]."))
+						AI.give_destination(T, 1, pa.Find("shift")) // If shift is held, the mobs will not stop moving to attack a visible enemy.
+						i++
+					to_chat(user, span("notice", "Commanded [i] mob\s to move to \the [T]."))
 
 
 /obj/effect/bmode/buildmode/proc/get_path_from_partial_text(default_path)

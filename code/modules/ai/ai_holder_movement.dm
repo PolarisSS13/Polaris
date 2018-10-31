@@ -4,7 +4,7 @@
 	var/min_distance_to_destination = 1	// Holds how close the mob should go to destination until they're done.
 
 	// Home.
-	var/turf/home_turf = null			// The mob's 'home' turf. It will try to stay near it if told to do so.
+	var/turf/home_turf = null			// The mob's 'home' turf. It will try to stay near it if told to do so. This is the turf the AI was initialized on by default.
 	var/returns_home = FALSE			// If true, makes the mob go to its 'home' if it strays too far.
 	var/home_low_priority = FALSE		// If true, the mob will not go home unless it has nothing better to do, e.g. its following someone.
 	var/max_home_distance = 3			// How far the mob can go away from its home before being told to go_home().
@@ -18,12 +18,12 @@
 
 
 /datum/ai_holder/proc/walk_to_destination()
-	ai_log("walk_to_destination() : Entering.",AI_LOG_DEBUG)
+	ai_log("walk_to_destination() : Entering.",AI_LOG_TRACE)
 	if(!destination)
 		ai_log("walk_to_destination() : No destination.", AI_LOG_WARNING)
 		forget_path()
 		set_stance(stance == STANCE_REPOSITION ? STANCE_APPROACH : STANCE_IDLE)
-		ai_log("walk_to_destination() : Exiting.", AI_LOG_DEBUG)
+		ai_log("walk_to_destination() : Exiting.", AI_LOG_TRACE)
 		return
 
 	var/get_to = min_distance_to_destination
@@ -39,7 +39,7 @@
 
 	ai_log("walk_to_destination() : Walking.", AI_LOG_TRACE)
 	walk_path(destination, get_to)
-	ai_log("walk_to_destination() : Exiting.",AI_LOG_DEBUG)
+	ai_log("walk_to_destination() : Exiting.",AI_LOG_TRACE)
 
 /datum/ai_holder/proc/should_go_home()
 	if(!returns_home || !home_turf)
@@ -67,7 +67,7 @@
 	min_distance_to_destination = min_distance
 
 	if(new_destination != null)
-		ai_log("give_destination() : Going to new destination.", AI_LOG_TRACE)
+		ai_log("give_destination() : Going to new destination.", AI_LOG_INFO)
 		set_stance(combat ? STANCE_REPOSITION : STANCE_MOVE)
 		return TRUE
 	else
@@ -78,18 +78,18 @@
 
 // Walk towards whatever.
 /datum/ai_holder/proc/walk_path(atom/A, get_to = 1)
-	ai_log("walk_path() : Entered.", AI_LOG_DEBUG)
+	ai_log("walk_path() : Entered.", AI_LOG_TRACE)
 
 	if(use_astar)
 		if(!path.len) // If we're missing a path, make a new one.
-			ai_log("walk_path() : No path. Attempting to calculate path.", AI_LOG_TRACE)
+			ai_log("walk_path() : No path. Attempting to calculate path.", AI_LOG_DEBUG)
 			calculate_path(A, get_to)
 
 		if(!path.len) // If we still don't have one, then the target's probably somewhere inaccessible to us. Get as close as we can.
 			ai_log("walk_path() : Failed to obtain path to target. Using get_step_to() instead.", AI_LOG_INFO)
 		//	step_to(holder, A)
 			if(holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED)
-				ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_TRACE)
+				ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
 				breakthrough(A) // We failed to move, time to smash things.
 			return
 
@@ -97,7 +97,7 @@
 			ai_log("walk_path() : Failed to step.", AI_LOG_TRACE)
 			++failed_steps
 			if(failed_steps > 3) // We're probably stuck.
-				ai_log("walk_path() : Too many failed_steps.", AI_LOG_INFO)
+				ai_log("walk_path() : Too many failed_steps.", AI_LOG_DEBUG)
 				forget_path() // So lets try again with a new path.
 				failed_steps = 0
 
@@ -105,15 +105,15 @@
 	//	step_to(holder, A)
 		ai_log("walk_path() : Going to IMove().", AI_LOG_TRACE)
 		if(holder.IMove(get_step_to(holder, A)) == MOVEMENT_FAILED )
-			ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_TRACE)
+			ai_log("walk_path() : Failed to move, attempting breakthrough.", AI_LOG_INFO)
 			breakthrough(A) // We failed to move, time to smash things.
 
-	ai_log("walk_path() : Exited.", AI_LOG_DEBUG)
+	ai_log("walk_path() : Exited.", AI_LOG_TRACE)
 
 
 //Take one step along a path
 /datum/ai_holder/proc/move_once()
-	ai_log("move_once() : Entered.", AI_LOG_DEBUG)
+	ai_log("move_once() : Entered.", AI_LOG_TRACE)
 	if(!path.len)
 		return
 
@@ -138,7 +138,7 @@
 
 // Wanders randomly in cardinal directions.
 /datum/ai_holder/proc/handle_wander_movement()
-	ai_log("handle_wander_movement() : Entered.", AI_LOG_DEBUG)
+	ai_log("handle_wander_movement() : Entered.", AI_LOG_TRACE)
 	if(isturf(holder.loc) && can_act())
 		wander_delay--
 		if(wander_delay <= 0)
@@ -151,4 +151,4 @@
 			holder.set_dir(moving_to)
 			holder.IMove(get_step(holder,moving_to))
 			wander_delay = base_wander_delay
-	ai_log("handle_wander_movement() : Exited.", AI_LOG_DEBUG)
+	ai_log("handle_wander_movement() : Exited.", AI_LOG_TRACE)

@@ -7,6 +7,7 @@
 /mob/living/simple_mob/mechanical/ward/monitor
 	desc = "It's a little flying drone. This one seems to be watching you..."
 	icon_state = "ward"
+	glow_color = "#00FF00"
 	see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
 	has_eye_glow = TRUE

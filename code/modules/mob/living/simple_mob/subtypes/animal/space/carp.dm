@@ -41,6 +41,12 @@
 			L.visible_message(span("danger", "\The [src] knocks down \the [L]!"))
 
 // Subtypes.
+
+// Won't wander away.
+/mob/living/simple_mob/animal/space/carp/event
+	ai_holder_type = /datum/ai_holder/simple_mob/event
+
+
 /mob/living/simple_mob/animal/space/carp/large
 	name = "elder carp"
 	desc = "An older, more matured carp. Few survive to this age due to their aggressiveness."
@@ -55,7 +61,7 @@
 	mob_size = MOB_LARGE
 
 	pixel_x = -16
-	old_x = -16
+	default_pixel_x = -16
 
 	meat_amount = 3
 
@@ -75,8 +81,8 @@
 	melee_damage_lower = 15 // About 20 DPS.
 	melee_damage_upper = 25
 
-	old_y = -16
 	pixel_y = -16
+	default_pixel_x = -16
 
 	meat_amount = 10
 
