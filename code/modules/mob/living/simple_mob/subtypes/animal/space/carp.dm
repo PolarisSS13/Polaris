@@ -82,7 +82,7 @@
 	melee_damage_upper = 25
 
 	pixel_y = -16
-	default_pixel_x = -16
+	default_pixel_y = -16
 
 	meat_amount = 10
 
