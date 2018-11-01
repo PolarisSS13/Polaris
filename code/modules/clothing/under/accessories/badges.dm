@@ -12,6 +12,7 @@
 
 	var/stored_name
 	var/badge_string = "Geminus City Police Department"
+	var/name_reset = ""
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -65,6 +66,18 @@
 	icon_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
 
+/obj/item/clothing/accessory/badge/holo/verb/Reset(mob/user as mob)
+	if(access_security in user.GetIdCard().access)
+		if(!stored_name)
+			user << "There is no information stored on the badge."
+		else
+			user << "You reset the holobadge."
+			stored_name = FALSE
+			name = name_reset
+	else
+		user << "[name] rejects your insufficient access rights."
+	return
+
 /obj/item/clothing/accessory/badge/holo/cord
 	icon_state = "holobadge-cord"
 	slot_flags = SLOT_MASK | SLOT_TIE | SLOT_BELT
@@ -97,6 +110,8 @@
 
 		if(access_security in id_card.access || emagged)
 			user << "You imprint your ID details onto the badge."
+			if (!name_reset)
+				name_reset = name
 			set_name(user.real_name)
 		else
 			user << "[src] rejects your insufficient access rights."
