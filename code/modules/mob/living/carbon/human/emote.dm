@@ -286,6 +286,7 @@
 				if (!muzzled)
 					message = "gasps!"
 					m_type = 2
+					playsound(src.loc, 'sound/voice/human/gasp.ogg', 50, 1)
 				else
 					message = "makes a weak noise."
 					m_type = 2
@@ -363,6 +364,7 @@
 				m_type = 1
 			else
 				if (!muzzled)
+					message = "cries."
 					var/use_sound
 					if(get_gender() == FEMALE)
 						use_sound = pick(
@@ -376,9 +378,7 @@
 						use_sound = pick(
 						'sound/voice/human/m_cry_1.ogg',
 						'sound/voice/human/m_cry_2.ogg',
-						'sound/voice/human/m_cry_3.ogg',
-						'sound/voice/human/m_cry_4.ogg',
-						'sound/voice/human/m_cry_5.ogg')
+						'sound/voice/human/m_cry_3.ogg')
 						playsound(src.loc, use_sound, 50, 0)
 						m_type = 2
 				else
@@ -535,9 +535,9 @@
 					if(!robotic)
 						message = "sneezes."
 						if(get_gender() == FEMALE)
-							playsound(src, species.female_sneeze_sound, 70)
+							playsound(src.loc, species.female_sneeze_sound, 70)
 						else
-							playsound(src, species.male_sneeze_sound, 70)
+							playsound(src.loc, species.male_sneeze_sound, 70)
 						m_type = 2
 					else
 						message = "emits a robotic sneeze"
@@ -564,6 +564,7 @@
 			else
 				if (!muzzled)
 					message = "snores."
+					playsound(src.loc, 'sound/voice/human/snore.ogg', 50, 1)
 					m_type = 2
 				else
 					message = "makes a noise."
@@ -665,8 +666,8 @@
 						if(istype(H.wear_mask,/obj/item/clothing/mask/smokable))
 							H.drop_from_inventory(H.wear_mask)
 				else
-					message = "<span class='danger'>slaps [T.himself]!</span>"
-					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+					message = "<span class='danger'>slaps [T.himself] across the face!</span>"
+					playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 
 		if("scream", "screams")
 			if(miming)
@@ -674,19 +675,12 @@
 				m_type = 1
 			else
 				if(!muzzled)
-					var/use_sound
 					message = "[species.scream_verb]!"
 					m_type = 2
 					if(get_gender() == FEMALE)
-						use_sound = pick(
-						'sound/voice/human/scream_f1.ogg',
-						'sound/voice/human/scream_f2.ogg')
-						playsound(src.loc, use_sound, 50)
+						playsound(src, pick(species.female_scream_sound), 50)
 					else
-						use_sound = pick(
-						'sound/voice/human/scream_m1.ogg',
-						'sound/voice/human/scream_m2.ogg')
-						playsound(src.loc, use_sound, 50)
+						playsound(src, pick(species.male_scream_sound), 50)
 				else
 					message = "makes a very loud noise."
 					m_type = 2
@@ -708,7 +702,7 @@
 				return
 
 			message = "snaps [T.his] fingers."
-			playsound(loc, 'sound/effects/fingersnap.ogg', 50, 1, -3)
+			playsound(src.loc, 'sound/effects/fingersnap.ogg', 50, 1, -3)
 
 		if("swish")
 			src.animate_tail_once()
@@ -731,29 +725,29 @@
 
 		if("whistle" || "whistles")
 			if(!muzzled)
-				message = "whistles a tune."
-				playsound(loc, 'sound/voice/human/longwhistle.ogg', 50, 1) //praying this doesn't get abused
+				message = "whistles a tune." //melodic whistle
+				playsound(src.loc, 'sound/voice/human/longwhistle.ogg', 50, 1) //praying this doesn't get abused
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("qwhistle")
 			if(!muzzled)
-				message = "whistles quietly."
-				playsound(loc, 'sound/voice/human/shortwhistle.ogg', 50, 1)
+				message = "whistles quietly." //small short whistle
+				playsound(src.loc, 'sound/voice/human/shortwhistle.ogg', 50, 1)
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("wwhistle")
 			if(!muzzled)
-				message = "whistles inappropriately."
-				playsound(loc, 'sound/voice/human/wolfwhistle.ogg', 50, 1)
+				message = "whistles inappropriately." //wolf whistle
+				playsound(src.loc, 'sound/voice/human/wolfwhistle.ogg', 50, 1)
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("swhistle")
 			if(!muzzled)
-				message = "summon whistles."
-				playsound(loc, 'sound/voice/human/summon_whistle.ogg', 50, 1)
+				message = "summon whistles." //dog whistle
+				playsound(src.loc, 'sound/voice/human/summon_whistle.ogg', 50, 1)
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
@@ -761,7 +755,7 @@
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, deathgasp, drool, eyebrow, fastsway/qwag, \
 					frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, \
 					raise, salute, scream, sneeze, shake, shiver, shrug, sigh, signal-#1-10, slap-(none)/mob, smile, sneeze, sniff, snore, stare-(none)/mob, stopsway/swag, sway/wag, swish, tremble, twitch, \
-					twitch_v, vomit, whimper, wink, yawn. Synthetics: beep, buzz, yes, no, rcough, rsneeze, ping"
+					twitch_v, vomit, whimper, whistle, wwhistle, qwhistle, swhistle, wink, yawn. Synthetics: beep, buzz, yes, no, rcough, rsneeze, ping"
 
 		else
 			src << "<font color='blue'>Unusable emote '[act]'. Say *help for a list.</font>"

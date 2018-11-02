@@ -1066,12 +1066,12 @@ area/space/atmosalert()
 //Command
 
 /area/bridge
-	name = "\improper Bridge"
+	name = "\improper City Hall"
 	icon_state = "bridge"
 	music = "signal"
 
 /area/bridge_hallway
-	name = "\improper Bridge Hallway"
+	name = "\improper City Hall Hallway"
 	icon_state = "bridge"
 
 /area/bridge/meeting_room
@@ -1081,12 +1081,12 @@ area/space/atmosalert()
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/captain
-	name = "\improper Command - Colony Director's Office"
+	name = "\improper Command - Mayor's Office"
 	icon_state = "captain"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/hop
-	name = "\improper Command - HoP's Office"
+	name = "\improper Command - City Supervisor's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor
@@ -1098,11 +1098,11 @@ area/space/atmosalert()
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hos
-	name = "\improper Security - HoS' Office"
+	name = "\improper Security - Chief of Police' Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/cmo
-	name = "\improper Medbay - CMO's Office"
+	name = "\improper City Hospital - CMO's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/courtroom
@@ -1136,12 +1136,12 @@ area/space/atmosalert()
 //Crew
 
 /area/crew_quarters
-	name = "\improper Dormitories"
+	name = "\improper City Hotel"
 	icon_state = "Sleep"
 	flags = RAD_SHIELDED
 
 /area/crew_quarters/toilet
-	name = "\improper Dormitory Toilets"
+	name = "\improper City Hotel Toilets"
 	icon_state = "toilet"
 	sound_env = SMALL_ENCLOSED
 
@@ -1377,7 +1377,7 @@ area/space/atmosalert()
 	sound_env = LARGE_SOFTFLOOR
 
 /area/crew_quarters/visitor_lodging
- 	name = "\improper Visitor Lodging"
+ 	name = "\improper City Hotel - Rooms"
  	icon_state = "visitor_lodging"
 
 /area/crew_quarters/visitor_dining
@@ -1507,17 +1507,17 @@ area/space/atmosalert()
 	ambience = list('sound/ambience/ambisin1.ogg','sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg','sound/ambience/ambisin4.ogg')
 
 /area/engineering/atmos
- 	name = "\improper Atmospherics"
+ 	name = "\improper Fire Station"
  	icon_state = "atmos"
  	sound_env = LARGE_ENCLOSED
 
 /area/engineering/atmos/monitoring
-	name = "\improper Atmospherics Monitoring Room"
+	name = "\improper Fire Station Monitoring Room"
 	icon_state = "atmos_monitoring"
 	sound_env = STANDARD_STATION
 
 /area/engineering/atmos/storage
-	name = "\improper Atmospherics Storage"
+	name = "\improper Fire Station Storage"
 	icon_state = "atmos_storage"
 	sound_env = SMALL_ENCLOSED
 
@@ -1675,26 +1675,26 @@ area/space/atmosalert()
 	music = "signal"
 	ambience = list('sound/ambience/ambimalf.ogg')
 
-//MedBay
+//City Hospital
 
 /area/medical/medbay
-	name = "\improper Medbay Hallway - Port"
+	name = "\improper City Hospital Hallway - Port"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 
 //Medbay is a large area, these additional areas help level out APC load.
 /area/medical/medbay2
-	name = "\improper Medbay Hallway - Starboard"
+	name = "\improper City Hospital Hallway"
 	icon_state = "medbay2"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay3
-	name = "\improper Medbay Hallway - Fore"
+	name = "\improper City Hospital Hallway - Fore"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay4
-	name = "\improper Medbay Hallway - Aft"
+	name = "\improper City Hospital Hallway - Aft"
 	icon_state = "medbay4"
 	music = 'sound/ambience/signal.ogg'
 
@@ -1704,7 +1704,7 @@ area/space/atmosalert()
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/reception
-	name = "\improper Medbay Reception"
+	name = "\improper City Hospital Reception"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 
@@ -1714,7 +1714,7 @@ area/space/atmosalert()
 	music = 'sound/ambience/signal.ogg'
 
 /area/medical/medbay_primary_storage
-	name = "\improper Medbay Primary Storage"
+	name = "\improper City Hospital Primary Storage"
 	icon_state = "medbay_primary_storage"
 	music = 'sound/ambience/signal.ogg'
 
@@ -1729,7 +1729,7 @@ area/space/atmosalert()
 	music = 'sound/ambience/signal.ogg'
 
 /area/crew_quarters/medical_restroom
-	name = "\improper Medbay Restroom"
+	name = "\improper City Hospital Restroom"
 	icon_state = "medbay_restroom"
 
 /area/medical/patients_rooms
@@ -1981,7 +1981,7 @@ area/space/atmosalert()
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint/medical
-	name = "Police Station Post - Medbay"
+	name = "Police Station Post - City Hospital"
 	icon_state = "checkpoint1"
 
 /area/security/checkpoint/science

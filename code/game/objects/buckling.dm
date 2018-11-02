@@ -135,6 +135,7 @@
 	//		step_towards(M, src)
 
 	. = buckle_mob(M, forced)
+	playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
 	if(.)
 		if(!silent)
 			if(M == user)
@@ -150,6 +151,7 @@
 
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	var/mob/living/M = unbuckle_mob(buckled_mob)
+	playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
 	if(M)
 		if(M != user)
 			M.visible_message(\
