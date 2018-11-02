@@ -29,6 +29,7 @@
 	special_attack_max_range = 7
 	special_attack_cooldown = 10 SECONDS
 	projectiletype = /obj/item/projectile/force_missile
+	projectilesound = 'sound/weapons/wave.ogg'
 	var/obj/effect/overlay/energy_ball/energy_ball = null
 
 /mob/living/simple_mob/mechanical/mecha/combat/gygax/dark/advanced/Destroy()
@@ -71,14 +72,23 @@
 	for(var/i = 1 to 10)
 		energy_ball.adjust_scale(0.5 + (i/10))
 		energy_ball.set_light(i/2, i/2, "#0000FF")
-		for(var/mob/living/L in range(3, src))
-			if(L == src)
-				continue
-			if(L.stat)
-				continue // Otherwise it can get pretty laggy if there's loads of corpses around.
-			L.inflict_shock_damage(i * 2)
-			if(L && L.has_AI()) // Some mobs delete themselves when dying.
-				L.ai_holder.react_to_attack(src)
+		for(var/thing in range(3, src))
+			// This is stupid because mechs are stupid and not mobs.
+			if(isliving(thing))
+				var/mob/living/L = thing
+
+				if(L == src)
+					continue
+				if(L.stat)
+					continue // Otherwise it can get pretty laggy if there's loads of corpses around.
+				L.inflict_shock_damage(i * 2)
+				if(L && L.has_AI()) // Some mobs delete themselves when dying.
+					L.ai_holder.react_to_attack(src)
+
+			else if(istype(thing, /obj/mecha))
+				var/obj/mecha/M = thing
+				M.take_damage(i * 2, "energy") // Mechs don't have a concept for siemens so energy armor check is the best alternative.
+
 		sleep(1 SECOND)
 
 	// Shoot a tesla bolt, and flashes people who are looking at the mecha without sufficent eye protection.
@@ -107,7 +117,7 @@
 	set waitfor = FALSE
 
 	// Telegraph our next move.
-	Beam(target, icon_state = "sat_beam", time = 3.5 SECONDS)
+	Beam(target, icon_state = "sat_beam", time = 3.5 SECONDS, maxdistance = INFINITY)
 	visible_message(span("warning", "\The [src] deploys a missile rack!"))
 	playsound(src, 'sound/effects/turret/move1.wav', 50, 1)
 	sleep(0.5 SECONDS)

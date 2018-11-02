@@ -133,7 +133,7 @@
 	shock_resist = 1
 
 	projectiletype = /obj/item/projectile/beam/lightning/slime
-	projectilesound = 'sound/weapons/gauss_shoot.ogg' // Closest thing to a 'thunderstrike' sound we have.
+	projectilesound = 'sound/effects/lightningbolt.ogg'
 	glow_toggle = TRUE
 
 	description_info = "In addition to being immune to electrical shocks, this slime will fire ranged lightning attacks at \
@@ -165,6 +165,7 @@
 
 /obj/item/projectile/beam/lightning/slime
 	power = 10
+	fire_sound = 'sound/effects/lightningbolt.ogg'
 
 
 /mob/living/simple_mob/slime/xenobio/dark_purple

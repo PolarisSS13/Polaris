@@ -13,6 +13,7 @@
 /datum/ai_holder/simple_mob/passive
 	hostile = FALSE
 	can_flee = TRUE
+	violent_breakthrough = FALSE
 
 // For parrots like Poly.
 // They modify their say_list datum based on what their mob hears.
@@ -21,10 +22,14 @@
 	base_wander_delay = 8
 
 /datum/ai_holder/simple_mob/passive/parrot/on_hear_say(mob/living/speaker, message)
-	if(holder.stat || !holder.say_list || !message)
+	if(holder.stat || !holder.say_list || !message || speaker == holder)
 		return
 	var/datum/say_list/S = holder.say_list
-	S.speak += message
+	S.speak |= message
+
+// Won't wander away, ideal for event-spawned mobs like carp or drones.
+/datum/ai_holder/simple_mob/event
+	wander = FALSE
 
 // Doesn't really act until told to by something on the outside.
 /datum/ai_holder/simple_mob/inert
@@ -34,6 +39,7 @@
 	wander = FALSE
 	speak_chance = 0
 	cooperative = FALSE
+	violent_breakthrough = FALSE // So it can open doors but not attack windows and shatter the literal illusion.
 
 // Used for technomancer illusions, to resemble player movement better.
 /datum/ai_holder/simple_mob/inert/astar
@@ -63,6 +69,9 @@
 /datum/ai_holder/simple_mob/ranged/careful
 	conserve_ammo = TRUE
 
+/datum/ai_holder/simple_mob/ranged/pointblank
+	pointblank = TRUE
+
 // Runs away from its target if within a certain distance.
 /datum/ai_holder/simple_mob/ranged/kiting
 	pointblank = TRUE // So we don't need to copypaste post_melee_attack().
@@ -73,6 +82,11 @@
 	threaten = TRUE
 	threaten_delay = 1 SECOND // Less of a threat and more of pre-attack notice.
 	threaten_timeout = 30 SECONDS
+	conserve_ammo = TRUE
+
+// For event-spawned malf drones.
+/datum/ai_holder/simple_mob/ranged/kiting/threatening/event
+	wander = FALSE
 
 /datum/ai_holder/simple_mob/ranged/kiting/no_moonwalk
 	moonwalk = FALSE
@@ -151,12 +165,11 @@
 
 		// If we're surrounded, Electric Defense will quickly fix that.
 		var/tally = 0
-		for(var/mob/living/L in hearers(electric_defense_radius, holder))
-			if(holder == L)
+		var/list/potential_targets = list_targets() // Returns list of mobs and certain objects like mechs and turrets.
+		for(var/atom/movable/AM in potential_targets)
+			if(get_dist(holder, AM) > electric_defense_radius)
 				continue
-			if(L.IIsAlly(holder))
-				continue
-			if(L.stat)
+			if(!can_attack(AM))
 				continue
 			tally++
 
@@ -168,14 +181,15 @@
 		// Otherwise they're a fair distance away and we're not getting mobbed up close.
 		// See if we should use missiles or microsingulo.
 		tally = 0 // Let's recycle the var.
-		for(var/mob/living/L in hearers(microsingulo_radius, target))
-			if(holder == L)
+		for(var/atom/movable/AM in potential_targets)
+			if(get_dist(target, AM) > microsingulo_radius) // Deliberately tests distance between target and nearby targets and not the holder.
 				continue
-			if(L.IIsAlly(holder))
+			if(!can_attack(AM))
 				continue
-			if(L.stat)
-				continue
-			tally++
+			if(AM.anchored) // Microsingulo doesn't do anything to anchored things.
+				tally--
+			else
+				tally++
 
 		// Lots of people means minisingulo would be more useful.
 		if(tally >= microsingulo_threshold)
@@ -187,6 +201,10 @@
 		holder.a_intent = I_HURT // Fire rockets if it's an obj/turf.
 
 
+// These try to avoid collateral damage.
+/datum/ai_holder/simple_mob/restrained
+	violent_breakthrough = FALSE
+	conserve_ammo = TRUE
 
 // Melee mobs.
 
@@ -222,6 +240,7 @@
 /datum/ai_holder/simple_mob/melee/nurse_spider
 	wander = TRUE
 	base_wander_delay = 8
+	cooperative = FALSE // So we don't ask our spider friends to attack things we're webbing. This might also make them stay at the base if their friends find tasty explorers.
 
 // Get us unachored objects as an option as well.
 /datum/ai_holder/simple_mob/melee/nurse_spider/list_targets()
@@ -333,6 +352,7 @@
 */
 
 /datum/ai_holder/simple_mob/hivebot
+	pointblank = TRUE
 	conserve_ammo = TRUE
 	firing_lanes = TRUE
 	can_flee = FALSE // Fearless dumb machines.

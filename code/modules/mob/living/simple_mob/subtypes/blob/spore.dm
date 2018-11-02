@@ -139,8 +139,8 @@
 			continue
 		if(!IIsAlly(S)) // Only friendly spores make us stronger.
 			continue
-		// Friendly spores contribute half of their averaged attack power to our attack.
-		damage_to_do += ((S.melee_damage_lower + S.melee_damage_upper) / 2) / 2
+		// Friendly spores contribute 1/4th of their averaged attack power to our attack.
+		damage_to_do += ((S.melee_damage_lower + S.melee_damage_upper) / 2) / 4
 		helpers++
 
 	if(helpers)

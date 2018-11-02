@@ -11,6 +11,7 @@
 	poison_resist = 1
 
 	movement_cooldown = 0
+	mob_bump_flag = 0 // If the illusion can't be swapped it will be obvious.
 
 	response_help   = "pushes a hand through"
 	response_disarm = "tried to disarm"
@@ -31,6 +32,7 @@
 		return FALSE
 	appearance = thing_to_copy.appearance
 	copying = thing_to_copy
+	density = thing_to_copy.density // So you can't bump into objects that aren't supposed to be dense.
 	return TRUE
 
 // Because we can't perfectly duplicate some examine() output, we directly examine the AM it is copying.  It's messy but

@@ -20,9 +20,7 @@
 	movement_cooldown = 0
 	hovering = TRUE
 
-	pass_flags = PASSTABLE
-	mob_swap_flags = 0
-	mob_push_flags = 0
+	mob_bump_flag = 0
 
 	melee_damage_lower = 0
 	melee_damage_upper = 0

@@ -24,6 +24,8 @@
 	health = 200
 	movement_cooldown = 10
 	movement_sound = 'sound/weapons/heavysmash.ogg'
+	movement_shake_radius = 5
+
 	taser_kill = FALSE
 	armor = list(
 				"melee" = 40,
@@ -49,8 +51,8 @@
 	melee_damage_lower = 22
 	melee_damage_upper = 35
 	attack_armor_pen = 35
-	attack_sharp = 1
-	attack_edge = 1
+	attack_sharp = TRUE
+	attack_edge = TRUE
 	melee_attack_delay = 1 SECOND
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat

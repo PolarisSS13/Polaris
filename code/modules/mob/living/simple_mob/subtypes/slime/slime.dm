@@ -97,24 +97,22 @@
 /mob/living/simple_mob/slime/update_icon()
 	..() // Do the regular stuff first.
 
-	var/mutable_appearance/MA = new(src)
-
 	if(stat != DEAD)
 		// General slime shine.
 		var/image/I = image(icon, src, "slime light")
 		I.appearance_flags = RESET_COLOR
-		MA.overlays += I
+		add_overlay(I)
 
 		// 'Shiny' overlay, for gemstone-slimes.
 		if(shiny)
 			I = image(icon, src, "slime shiny")
 			I.appearance_flags = RESET_COLOR
-			MA.overlays += I
+			add_overlay(I)
 
 		// Mood overlay.
 		I = image(icon, src, "aslime-[mood]")
 		I.appearance_flags = RESET_COLOR
-		MA.overlays += I
+		add_overlay(I)
 
 	// Hat simulator.
 	if(hat)
@@ -122,9 +120,7 @@
 		var/image/I = image('icons/mob/head.dmi', src, hat_state)
 		I.pixel_y = -7 // Slimes are small.
 		I.appearance_flags = RESET_COLOR
-		MA.overlays += I
-
-	appearance = MA
+		add_overlay(I)
 
 // Controls the 'mood' overlay. Overrided in subtypes for specific behaviour.
 /mob/living/simple_mob/slime/proc/update_mood()

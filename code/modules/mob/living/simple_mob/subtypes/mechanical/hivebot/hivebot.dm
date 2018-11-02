@@ -8,7 +8,6 @@
 	icon = 'icons/mob/hivebot.dmi'
 	icon_state = "basic"
 	icon_living = "basic"
-	icon_dead = "basic"
 
 	faction = "hivebot"
 

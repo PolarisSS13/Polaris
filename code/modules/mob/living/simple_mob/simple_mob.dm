@@ -8,9 +8,11 @@
 	health = 20
 	maxHealth = 20
 
-	mob_bump_flag = SIMPLE_ANIMAL
-	mob_swap_flags = MONKEY|SLIME|HUMAN
-	mob_push_flags = MONKEY|SLIME|HUMAN
+	// Generally we don't want simple_mobs to get displaced when bumped into due to it trivializing combat with windup attacks.
+	// Some subtypes allow displacement, like passive animals.
+	mob_bump_flag = HEAVY
+	mob_swap_flags = ~HEAVY
+	mob_push_flags = ~HEAVY
 
 	var/tt_desc = "Uncataloged Life Form" //Tooltip description
 
@@ -221,6 +223,11 @@
 			return -3
 		if(!isnull(M.slowdown))
 			tally += M.slowdown
+
+	// Turf related slowdown
+	var/turf/T = get_turf(src)
+	if(T && T.movement_cost && !hovering) // Flying mobs ignore turf-based slowdown.
+		tally += T.movement_cost
 
 	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
 		if(tally <= 0)

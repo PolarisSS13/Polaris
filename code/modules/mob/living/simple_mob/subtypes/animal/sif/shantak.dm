@@ -63,3 +63,8 @@
 /mob/living/simple_mob/animal/sif/shantak/leader/autofollow/initialize()
 	rally_pack()
 	return ..()
+
+
+// These ones only retaliate. Used for a PoI.
+/mob/living/simple_mob/animal/sif/shantak/retaliate
+	ai_holder_type = /datum/ai_holder/simple_mob/retaliate

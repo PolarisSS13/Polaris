@@ -16,7 +16,7 @@
 	else
 		num = rand(2,6)
 	for(var/i=0, i<num, i++)
-		var/mob/living/simple_mob/mechanical/combat_drone/D = new(get_turf(pick(possible_spawns)))
+		var/mob/living/simple_mob/mechanical/combat_drone/event/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(D)
 
 /datum/event/rogue_drone/announce()

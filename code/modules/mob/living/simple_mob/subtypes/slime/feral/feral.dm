@@ -22,6 +22,8 @@
 	movement_cooldown = 10
 	melee_attack_delay = 0.5 SECONDS
 
+	ai_holder_type = /datum/ai_holder/simple_mob/ranged/pointblank
+
 
 // Slimebatoning/xenotasing it just makes it mad at you (which can be good if you're heavily armored and your friends aren't).
 /mob/living/simple_mob/slime/feral/slimebatoned(mob/living/user, amount)
@@ -46,9 +48,10 @@
 	cold_damage_per_tick = 0
 
 	projectiletype = /obj/item/projectile/icicle
-	base_attack_cooldown = 3 SECONDS
+	base_attack_cooldown = 2 SECONDS
+	ranged_attack_delay = 1 SECOND
 
-	player_msg = "You can fire an icicle projectile every three seconds. It hits hard, and armor has a hard time resisting it.<br>\
+	player_msg = "You can fire an icicle projectile every two seconds. It hits hard, and armor has a hard time resisting it.<br>\
 	You are also immune to the cold, and you cause enemies around you to suffer periodic harm from the cold, if unprotected.<br>\
 	Unprotected enemies are also Chilled, making them slower, less evasive, and to suffer disabling effects for longer."
 
@@ -68,7 +71,7 @@
 	return ..()
 
 /obj/item/projectile/icicle/get_structure_damage()
-	return 0 // They're really deadly against mobs, but not walls.
+	return damage / 2 // They're really deadly against mobs, but less effective against solid things.
 
 /mob/living/simple_mob/slime/feral/dark_blue/handle_special()
 	if(stat != DEAD)
