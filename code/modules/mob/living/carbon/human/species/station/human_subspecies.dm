@@ -74,7 +74,8 @@
 	total_health = 85
 	economic_modifier = 1
 	icon_scale = 0.9
-
+	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
+	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
 
 /datum/species/human/child
 	name = "Human Child"
@@ -91,3 +92,5 @@
 	total_health = 50
 	economic_modifier = 0.2
 	icon_scale = 0.75
+	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
+	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
