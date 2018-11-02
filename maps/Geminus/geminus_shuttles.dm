@@ -61,29 +61,14 @@
 	departure_message = "Attention.  Unidentified object exiting local space.  Unidentified object expected to escape Kara gravity well with current velocity."
 	..()
 
-
-/datum/shuttle/ferry/escape_pod/escape_pod_five
-	name = "Escape Pod 5"
+/datum/shuttle/ferry/multidock/specops/ert
+	name = "Special Operations"
 	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod5/station
-	area_offsite = /area/shuttle/escape_pod5/centcom
-	area_transition = /area/shuttle/escape_pod5/transit
-	docking_controller_tag = "escape_pod_5"
-	dock_target_station = "escape_pod_5_berth"
-	dock_target_offsite = "escape_pod_5_recovery"
-	transit_direction = NORTH //should this be WEST? I have no idea.
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
-
-/datum/shuttle/ferry/escape_pod/escape_pod_six
-	name = "Escape Pod 6"
-	location = 0
-	warmup_time = 0
-	area_station = /area/shuttle/escape_pod6/station
-	area_offsite = /area/shuttle/escape_pod6/centcom
-	area_transition = /area/shuttle/escape_pod6/transit
-	docking_controller_tag = "escape_pod_6"
-	dock_target_station = "escape_pod_6_berth"
-	dock_target_offsite = "escape_pod_6_recovery"
-	transit_direction = NORTH //should this be WEST? I have no idea.
-	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
+	warmup_time = 10
+	area_offsite = /area/shuttle/specops/station	//centcom is the home station, the Exodus is offsite
+	area_station = /area/shuttle/specops/centcom
+	docking_controller_tag = "specops_shuttle_port"
+	docking_controller_tag_station = "specops_shuttle_port"
+	docking_controller_tag_offsite = "specops_shuttle_fore"
+	dock_target_station = "specops_centcom_dock"
+	dock_target_offsite = "specops_dock_airlock"
