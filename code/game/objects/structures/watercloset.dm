@@ -59,7 +59,10 @@
 
 	if(I.is_wrench())
 		water_supply = !water_supply
-		to_chat(user, "You [water_supply ? "open \the [src] water supply valve." : "close \the [src] water supply valve. It won't refill after being flushed now."]")
+		if(water_supply)
+			to_chat(user, "You open \the water supply valve. It can flush again now.")
+		else
+			to_chat(user, "You close \the [src] water supply valve. It won't refill after being flushed now.")
 		return //So you don't put the wrench insides
 
 	if(istype(I, /obj/item/weapon/reagent_containers))
