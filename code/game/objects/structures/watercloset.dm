@@ -63,16 +63,17 @@
 		return //So you don't put the wrench insides
 
 	if(istype(I, /obj/item/weapon/reagent_containers))
-		if(cistern)
-			if(I.reagents.total_volume < 1)
-				to_chat(user, "\The [I] is empty.")
-				return
-			else
-				to_chat(user, "<span class='notice'>You empty 20 units out of \the [I.name] into \the [src].</span>")
-				I.reagents.trans_to_obj(src, 20)
-				return
+		if(cistern)//If 1, it is open.
+			if(I.is_open_container())//Can you actually pour things out.
+				if(I.reagents.total_volume < 1)
+					to_chat(user, "\The [I] is empty.")
+				else
+					to_chat(user, "<span class='notice'>You empty 20 units out of \the [I.name] into \the [src].</span>")
+					I.reagents.trans_to_obj(src, 20)
+					return
 		else
 			to_chat(user, "\The [src] cistern is closed.")
+			return
 
 	if(istype(I, /obj/item/weapon/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
