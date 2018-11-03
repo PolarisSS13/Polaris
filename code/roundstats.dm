@@ -1,65 +1,76 @@
 
 //This is for the round end stats system.
 
-//Bazinga is used for easy finding of the variables, if you ever want to delete all of this
-var/cans_opened_bazinga = 0
-var/lights_switched_on_bazinga = 0
-var/trash_piles_searched_bazinga = 0
-var/rare_trash_found_bazinga = 0
-var/turbo_lift_floors_moved_bazinga = 0
-var/lost_limbs_shift_bazinga = 0
-var/mouse_spawned_shift_bazinga = 0
-var/seed_planted_shift_bazinga = 0
-var/step_taken_shift_bazinga = 0
-var/number_people_walked_over_bazinga = 0
-var/destroyed_research_items_bazinga = 0
-var/items_sold_shift_bazinga = 0
-var/disposals_flush_shift_bazinga = 0
-var/rocks_drilled_bazinga = 0
+//Bazinga is used for easy finding of the variables, if you ever want to delete all of this,
+//just search bazinga and you'll find everywhere this thing reaches into.
+
+GLOBAL_VAR_INIT(LIGHTS_SWITCHED_ON_BAZINGA, 0)
+GLOBAL_VAR_INIT(CANS_OPENED_BAZINGA, 0)
+GLOBAL_VAR_INIT(TURBO_LIFT_FLOORS_MOVED_BAZINGA, 0)
+GLOBAL_VAR_INIT(LOST_LIMBS_SHIFT_BAZINGA, 0)
+GLOBAL_VAR_INIT(SEED_PLANTED_SHIFT_BAZINGA, 0)
+GLOBAL_VAR_INIT(STEP_TAKEN_SHIFT_BAZINGA, 0)
+GLOBAL_VAR_INIT(DESTROYED_RESEARCH_ITEMS_BAZINGA, 0)
+GLOBAL_VAR_INIT(ITEMS_SOLD_SHIFT_BAZINGA, 0)
+GLOBAL_VAR_INIT(DISPOSALS_FLUSH_SHIFT_BAZINGA, 0)
+GLOBAL_VAR_INIT(ROCKS_DRILLED_BAZINGA, 0)
+
+//Virgo specific
+//GLOBAL_VAR_INIT(mouse_spawned_shift_bazinga, 0)
+//GLOBAL_VAR_INIT(number_people_walked_over_bazinga, 0)
+//GLOBAL_VAR_INIT(trash_piles_searched_bazinga, 0)
+//GLOBAL_VAR_INIT(rare_trash_found_bazinga, 0)
+
 
 /hook/roundend/proc/RoundEnd()
 
-	var/cans_opened = cans_opened_bazinga
-	var/lights_switched_on = lights_switched_on_bazinga
-	/*var/trash_piles_searched = trash_piles_searched_bazinga //Those two are only relevant to :b:irgo
-	var/rare_trash_found = rare_trash_found_bazinga*/
-	var/turbo_lift_floors_moved = turbo_lift_floors_moved_bazinga
-	var/lost_limbs_shift = lost_limbs_shift_bazinga
-	//var/mouse_spawned_shift = mouse_spawned_shift_bazinga //Virgo
-	var/seed_planted_shift = seed_planted_shift_bazinga
-	var/step_taken_shift = step_taken_shift_bazinga
-	//var/number_people_walked_over = number_people_walked_over_bazinga //Also virgo
-	var/destroyed_research_items = destroyed_research_items_bazinga
-	var/items_sold_shift = items_sold_shift_bazinga
-	var/disposals_flush_shift = disposals_flush_shift_bazinga
-	var/rocks_drilled = rocks_drilled_bazinga
+	var/cans_opened = GLOB.cans_opened_bazinga
+	var/lights_switched_on = GLOB.lights_switched_on_bazinga
+	var/turbo_lift_floors_moved = GLOB.turbo_lift_floors_moved_bazinga
+	var/lost_limbs_shift = GLOB.lost_limbs_shift_bazinga
+	var/seed_planted_shift = GLOB.seed_planted_shift_bazinga
+	var/step_taken_shift = GLOB.step_taken_shift_bazinga
+	var/destroyed_research_items = GLOB.destroyed_research_items_bazinga
+	var/items_sold_shift = GLOB.items_sold_shift_bazinga
+	var/disposals_flush_shift = GLOB.disposals_flush_shift_bazinga
+	var/rocks_drilled = GLOB.rocks_drilled_bazinga
 
-	world << "<B>Shift facts!</B>"
+	//virgo specific too
+	//var/mouse_spawned_shift = GLOB.mouse_spawned_shift_bazinga //Virgo
+	//var/number_people_walked_over = GLOB.number_people_walked_over_bazinga //Also virgo
+	//var/trash_piles_searched = GLOB.trash_piles_searched_bazinga //Those two are only relevant to :b:irgo
+	//var/rare_trash_found = GLOB.rare_trash_found_bazinga
+
+	to_world("<B>Shift facts!</B>")
 	if(cans_opened > 0)
-		world << "[cans_opened] cans were drank today!"
+		to_world("[cans_opened] cans were drank today!")
 	if(lights_switched_on > 0)
-		world << "[lights_switched_on] light switches were flipped today!"
-/*	if(trash_piles_searched > 0)
-		world << "People rummaged through [trash_piles_searched] trash piles today. Ech."
-	if(rare_trash_found > 0)
-		world << "[rare_trash_found] rare objects were found in the bowels of the station today."*/
+		to_world("[lights_switched_on] light switches were flipped today!")
 	if(turbo_lift_floors_moved > 0)
-		world << "The elevator moved up [turbo_lift_floors_moved] floors today!"
+		to_world("The elevator moved up [turbo_lift_floors_moved] floors today!")
 	if(lost_limbs_shift > 0)
-		world << "[lost_limbs_shift] limbs left their owners bodies this shift, oh no!"
-	/*if(mouse_spawned_shift > 0)
-		world << "The mice population grew by [mouse_spawned_shift] according to our sensors. How unhygienic!"*/
+		to_world("[lost_limbs_shift] limbs left their owners bodies this shift, oh no!")
 	if(seed_planted_shift > 0)
-		world << "[seed_planted_shift] were planted according to our sensors this shift."
+		to_world("[seed_planted_shift] were planted according to our sensors this shift.")
 	if(step_taken_shift > 0)
-		world << "The employees walked a total of [step_taken_shift] steps for this shift! It should put them on the road to fitness!"
-	/*if(number_people_walked_over > 0)
-		world << "About [number_people_walked_over] people were trodden upon, look both ways!"*/
+		to_world("The employees walked a total of [step_taken_shift] steps for this shift! It should put them on the road to fitness!")
 	if(destroyed_research_items > 0)
-		world << "[destroyed_research_items] objects were destroyed in the name of Science! Keep it up!"
+		to_world("[destroyed_research_items] objects were destroyed in the name of Science! Keep it up!")
 	if(items_sold_shift > 0)
-		world << "The vending machines sold [items_sold_shift] items today."
+		to_world("The vending machines sold [items_sold_shift] items today.")
 	if(disposals_flush_shift > 0)
-		world << "The disposal system flushed a whole [disposals_flush_shift] times for this shift. We should really invest in waste treatement."
+		to_world("The disposal system flushed a whole [disposals_flush_shift] times for this shift. We should really invest in waste treatement.")
 	if(rocks_drilled > 0)
-		world << "Our strong miners pulverized a whole [rocks_drilled] piles of pathetic rubble."
+		to_world("Our strong miners pulverized a whole [rocks_drilled] piles of pathetic rubble.")
+
+	//virgo specific aswell
+	/*
+	if(number_people_walked_over > 0)
+		to_world("About [number_people_walked_over] people were trodden upon, look both ways!")
+	if(mouse_spawned_shift > 0)
+		to_world("The mice population grew by [mouse_spawned_shift] according to our sensors. How unhygienic!")
+		if(trash_piles_searched > 0)
+		to_world("People rummaged through [trash_piles_searched] trash piles today. Ech.")
+	if(rare_trash_found > 0)
+		to_world("[rare_trash_found] rare objects were found in the bowels of the station today.")
+	*/
