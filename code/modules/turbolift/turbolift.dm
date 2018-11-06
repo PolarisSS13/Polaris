@@ -66,7 +66,7 @@
 
 	doors_closing = 0 // The doors weren't open, so they are done closing
 
-	GLOB.turbo_lift_floors_moved_bazinga++
+	GLOB.turbo_lift_floors_moved_roundstat++
 
 	var/area/turbolift/origin = locate(current_floor.area_ref)
 

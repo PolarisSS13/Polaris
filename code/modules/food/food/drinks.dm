@@ -25,7 +25,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,"canopen", rand(10,50), 1)
-	GLOB.cans_opened_bazinga++
+	GLOB.cans_opened_roundstat++
 	user << "<span class='notice'>You open [src] with an audible pop!</span>"
 	flags |= OPENCONTAINER
 

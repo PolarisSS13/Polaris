@@ -293,7 +293,7 @@
 	if(seed.get_trait(TRAIT_SPREAD) > 0)
 		user << "<span class='notice'>You plant the [src.name].</span>"
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)
-		GLOB.seed_planted_shift_bazinga++
+		GLOB.seed_planted_shift_roundstat++
 		qdel(src)
 		return
 
