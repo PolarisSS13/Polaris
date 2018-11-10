@@ -404,7 +404,7 @@
 
 	if(emergency_shuttle) //In case NanoTrasen decides reposess CentCom's shuttles.
 		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to CentCom, not recalled
-			dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
+			dat += "<font color='red'><b>The city has been evacuated.</b></font><br>"
 		if(emergency_shuttle.online())
 			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
 				dat += "<font color='red'>The city is currently undergoing evacuation procedures.</font><br>"

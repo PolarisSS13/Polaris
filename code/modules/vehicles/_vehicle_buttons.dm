@@ -7,7 +7,7 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying )
+	if(usr.stat || usr.stunned || usr.lying )
 		return
 
 	honk_horn()
