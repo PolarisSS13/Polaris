@@ -82,8 +82,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 7
 	minimum_character_age = 20
 
-	access = list(access_heads, access_keycard_auth, access_brig, access_security, access_sec_doors, access_forensics_lockers)
-	minimal_access = list(access_heads, access_keycard_auth, access_brig, access_security, access_sec_doors, access_forensics_lockers)
+	access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
+	minimal_access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
 
 	outfit_type = /decl/hierarchy/outfit/job/secretary
 	alt_titles = list("Mayor's Bodyguard", "City Hall Security")
