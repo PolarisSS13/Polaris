@@ -299,6 +299,7 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 
 
 /mob/living/carbon/human/random/moving/Life()
+	..()
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
 		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.

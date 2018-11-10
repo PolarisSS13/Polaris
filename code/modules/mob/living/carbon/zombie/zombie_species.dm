@@ -3,10 +3,11 @@
 /mob/living/carbon/human/zombie
 	name = "Zombie"
 	desc = "A shambling abomination of a once-human. As you look at this thing you realise dinner can go both ways."
+	a_intent = I_HURT
 
 #define STANDARD_EVOLUTION 1
 #define EXPULSOR_EVOLUTION 2
-#define BOMBER_EVOLUTION 3
+#define TANKER_EVOLUTION 3
 #define SHAMBLER_EVOLUTION 4
 #define CHASER_EVOLUTION 5
 
@@ -33,7 +34,7 @@
 	metabolic_rate = 0
 
 	taste_sensitivity = TASTE_DULL
-	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT | NO_BLOOD | UNDEAD | NO_HALLUCINATION
+	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT | UNDEAD | NO_HALLUCINATION
 	appearance_flags = HAS_UNDERWEAR | HAS_EYE_COLOR | HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS
 	vision_flags = SEE_SELF|SEE_MOBS
 	spawn_flags = SPECIES_IS_RESTRICTED
@@ -43,6 +44,7 @@
 	burn_mod = 2
 	speech_chance  = 80
 	speech_sounds = list('sound/voice/zombie_groan.ogg')
+	death_sound = 'sound/voice/zombie_groan.ogg'
 	gluttonous = 1
 	breath_type = null
 	poison_type = null
@@ -59,7 +61,6 @@
 		"brain" =    /obj/item/organ/internal/brain/zombie
 		)
 
-	has_glowing_eyes = 1
 	has_fine_manipulation = FALSE
 	ambiguous_genders = TRUE
 	has_organ = list()
@@ -77,10 +78,21 @@
 	if(H.mind)
 		H.mind.assigned_role = "Zombie"
 		H.mind.special_role = "Zombie"
-	H.real_name = "zombie ([rand(1, 1000)])"
+	H.real_name = "[src] ([rand(1, 1000)])"
 	H.name = H.real_name
 	H.mutations.Add(CLUMSY)
 	..()
+
+
+/datum/species/zombie/handle_npc(var/mob/living/carbon/human/H)
+//Zombies just drool and make funny noises if left alone, not much
+//different from anyone else.
+	if(H.stat != CONSCIOUS)
+		return
+	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled
+		step(H, pick(cardinal))
+	if(prob(1))
+		H.emote(pick("growl","scream","drool","blink"))
 
 /datum/species/zombie/handle_environment_special(var/mob/living/carbon/human/H)
 
@@ -104,7 +116,15 @@
 
 /datum/unarmed_attack/bite/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
 	..()
-	if(prob(50))
+	if(target && target.stat == DEAD)
+		return
+	if(target.internal_organs_by_name["zombie"])
+		to_chat(user, "<span class='danger'>You feel that \the [target] has been already infected!</span>")
+
+	var/infection_chance = 80
+	var/armor = target.run_armor_check(zone,"melee")
+	infection_chance -= armor
+	if(prob(infection_chance))
 		if(target.reagents)
 			target.reagents.add_reagent("trioxin", 10)
 
@@ -116,15 +136,38 @@
 	color = "#E7E146"
 	strength = 1
 	metabolism = REM
+	affects_dead = TRUE
 
 /datum/reagent/toxin/trioxin/affect_blood(var/mob/living/carbon/M, var/removed)
 	..()
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(M.reagents.has_reagent("spaceacillin", 15))
-			return
-		if(!H.internal_organs_by_name["zombie"] && prob(15))
-			var/obj/item/organ/external/affected = H.get_organ("chest")
-			var/obj/item/organ/parasite/zombie/infest = new()
-			infest.replaced(H, affected)
 
+		if(H.reagents.has_reagent("spaceacillin", 15))
+			return
+
+		if(H.internal_organs_by_name[O_ZOMBIE])
+			return
+
+		if(!isemptylist(H.search_contents_for(/obj/item/organ/parasite/zombie)))
+			return
+		else
+			if(!H.internal_organs_by_name[O_ZOMBIE])
+				var/obj/item/organ/external/chest/affected = H.get_organ(BP_TORSO)
+				var/obj/item/organ/parasite/zombie/infest = new(affected)
+				infest.replaced(H,affected)
+
+		if(ishuman(H))
+			if(!H.internal_organs_by_name[O_ZOMBIE])	//destroying the brain stops trioxin from bringing the dead back to life
+				return
+
+			if(H && H.stat != DEAD)
+				return
+
+			for(var/datum/language/L in H.languages)
+				H.remove_language(L.name)
+			H.set_species("Zombie")
+			H.revive()
+			infected.add_antagonist(H.mind)
+			playsound(H.loc, 'sound/hallucinations/far_noise.ogg', 50, 1)
+			to_chat(H,"<font size='3'><span class='cult'>You return back to life as the undead, all that is left is the hunger to consume the living and the will to spread the infection.</font></span>")

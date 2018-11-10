@@ -25,6 +25,7 @@
 #define BE_MUTINEER   0x2000
 #define BE_PAI        0x4000
 #define BE_LOYALIST   0x8000
+#define BE_ZOMBIE		 0x16000
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -42,6 +43,7 @@ var/list/be_special_flags = list(
 	"Raider"           = BE_RAIDER,
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
+	"Zombie	"         = BE_ZOMBIE,
 	"pAI"              = BE_PAI
 )
 
@@ -87,6 +89,8 @@ var/list/be_special_flags = list(
 #define MODE_AUTOTRAITOR "autotraitor"
 #define MODE_INFILTRATOR "infiltrator"
 #define MODE_THUG "thug"
+#define MODE_ZOMBIE "zombie"
+
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 120
 
