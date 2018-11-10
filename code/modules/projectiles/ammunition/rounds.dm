@@ -92,6 +92,11 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/ap
 	matter = list(DEFAULT_WALL_MATERIAL = 80)
 
+/obj/item/ammo_casing/a9mm/hp
+	desc = "A 9mm hollow-point bullet casing."
+	projectile_type = /obj/item/projectile/bullet/pistol/hp
+
+
 /obj/item/ammo_casing/a9mm/flash
 	desc = "A 9mm flash shell casing."
 	icon_state = "r-casing"
@@ -150,10 +155,6 @@
 /obj/item/ammo_casing/a45/hp
 	desc = "A .45 hollow-point bullet casing."
 	projectile_type = /obj/item/projectile/bullet/pistol/medium/hp
-
-/obj/item/ammo_casing/a9mm/hp
-	desc = "A 9mm hollow-point bullet casing."
-	projectile_type = /obj/item/projectile/bullet/pistol/hp
 
 /*
  * 10mm
