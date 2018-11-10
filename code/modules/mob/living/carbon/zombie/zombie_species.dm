@@ -57,7 +57,7 @@
 	slowdown = 1 //zombies are slow as fuck
 
 	has_organ = list(
-		"zombie" =    /obj/item/organ/parasite/zombie,
+		"zombie" =    /obj/item/organ/internal/parasite/zombie,
 		"brain" =    /obj/item/organ/internal/brain/zombie
 		)
 
@@ -149,12 +149,12 @@
 		if(H.internal_organs_by_name[O_ZOMBIE])
 			return
 
-		if(!isemptylist(H.search_contents_for(/obj/item/organ/parasite/zombie)))
+		if(!isemptylist(H.search_contents_for(/obj/item/organ/internal/parasite/zombie)))
 			return
 		else
 			if(!H.internal_organs_by_name[O_ZOMBIE])
 				var/obj/item/organ/external/chest/affected = H.get_organ(BP_TORSO)
-				var/obj/item/organ/parasite/zombie/infest = new(affected)
+				var/obj/item/organ/internal/parasite/zombie/infest = new(affected)
 				infest.replaced(H,affected)
 
 		if(ishuman(H))

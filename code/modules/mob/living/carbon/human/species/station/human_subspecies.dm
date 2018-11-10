@@ -1,4 +1,4 @@
-/*
+
 /datum/species/human/gravworlder
 	name = "grav-adapted Human"
 	name_plural = "grav-adapted Humans"
@@ -14,9 +14,9 @@
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
-*/
 
-/*
+
+
 /datum/species/human/spacer
 	name = "space-adapted Human"
 	name_plural = "space-adapted Humans"
@@ -30,7 +30,7 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
-*/
+
 
 /datum/species/human/vatgrown
 	name = SPECIES_HUMAN_VATBORN
