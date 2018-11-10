@@ -26,9 +26,9 @@
 
 //license is generated via "[license code] - [license number]"
 	var/license_code = "GEM"
-	var/license_number = 001
+	var/license_number = 100
 	var/license_plate_no
-	var/has_license
+	var/has_license = 1
 
 
 
@@ -46,10 +46,11 @@
 		license_plate_no = "[license_code] - [license_number]"
 
 /obj/vehicle/car/examine(mob/user)
-	user << "The license plate reads [license_plate_no ] in bold black letters."
+	if(has_license)
+		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
+		return
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
-
 
 /obj/vehicle/car/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen/crayon/spraycan))
