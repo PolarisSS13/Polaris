@@ -22,7 +22,7 @@
 
 	var/new_message = input(usr, "Please enter new message (leave blank to reset).") as text
 	if(!new_message || new_message == "")
-		use_message = "Halt! Security!"
+		use_message = "GCPD! Stay where you are!"
 	else
 		use_message = capitalize(copytext(sanitize(new_message), 1, MAX_MESSAGE_LEN))
 
@@ -33,7 +33,7 @@ obj/item/device/hailer/attack_self(mob/living/carbon/user as mob)
 		return
 
 	if(isnull(insults))
-		playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0)
+		playsound(get_turf(src), 'sound/voice/hail.ogg', 100, 1, vary = 0)
 		user.audible_message("<span class='warning'>[user]'s [name] rasps, \"[use_message]\"</span>", "<span class='warning'>\The [user] holds up \the [name].</span>")
 	else
 		if(insults > 0)
