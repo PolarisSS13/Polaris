@@ -378,7 +378,7 @@
 		msg += "[T.He] [T.is] repulsively uncanny!<br>"
 
 	if(hasHUD(user,"security"))
-		var/perpname = get_visible_name(user)
+		var/perpname = get_visible_name()
 		var/criminal = "None"
 
 		for (var/datum/data/record/R in data_core.security)
