@@ -66,16 +66,16 @@
 	icon_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
 
-/obj/item/clothing/accessory/badge/holo/verb/Reset(mob/user as mob)
-	if(access_security in user.GetIdCard().access)
+/obj/item/clothing/accessory/badge/holo/verb/Reset()
+	if(access_security in usr.GetIdCard().access || emagged)
 		if(!stored_name)
-			user << "There is no information stored on the badge."
+			usr << "There is no information stored on the badge."
 		else
-			user << "You reset the holobadge."
+			usr << "You reset the holobadge."
 			stored_name = FALSE
 			name = name_reset
 	else
-		user << "[name] rejects your insufficient access rights."
+		usr << "[name] rejects your insufficient access rights."
 	return
 
 /obj/item/clothing/accessory/badge/holo/cord
