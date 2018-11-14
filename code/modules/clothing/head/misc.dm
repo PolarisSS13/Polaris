@@ -298,6 +298,20 @@
 	desc = "Because justice isn't going to dispense itself."
 	icon_state = "cowboy_wide"
 
+/obj/item/clothing/head/cowboy_hat/bud
+	name = "wide-brimmed cowbud hat"
+	desc = "A wide-brimmed cowboy hat with a small microphone in the outer collar."
+	icon_state = "cowbud_wide"
+
+/obj/item/clothing/head/cowboy_hat/bud/verb/bud_speak()
+	set name = "That's Pagan bud"
+	set category = "Object"
+	set src in usr
+
+	for(var/mob/M in hearers())
+		M << sound('./sound/effects/pagan.ogg')
+
+
 /obj/item/clothing/head/cowboy_hat/small
 	name = "small cowboy hat"
 	desc = "For the tiniest of cowboys."
