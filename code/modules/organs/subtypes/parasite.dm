@@ -42,8 +42,6 @@
 	stage_interval = 70
 
 /obj/item/organ/internal/parasite/zombie/process()
-	..()
-
 	if (!owner)
 		visible_message("<span class='warning'>[src] sizzles and pops open, revealing a gooey green mass!</span>")
 		die()
@@ -78,7 +76,7 @@
 					owner.nutrition = -1
 
 		if(stage >= 4)
-			if(!isundead(owner))
+			if(prob(90))
 				if(ishuman(owner))
 					for(var/datum/language/L in owner.languages)
 						owner.remove_language(L.name)
@@ -92,3 +90,5 @@
 					owner.adjustToxLoss(50)
 	else
 		return
+
+	..()

@@ -71,6 +71,9 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tackle,
 		/mob/living/carbon/human/proc/gut,
+		/mob/living/carbon/human/proc/revive_undead,
+		/mob/living/carbon/human/proc/fermented_goo
+
 		)
 
 

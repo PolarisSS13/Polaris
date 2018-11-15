@@ -1,7 +1,64 @@
-/mob/living/carbon/human/proc/corrosive_acid(O as obj|turf in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
-	set name = "Corrosive Acid (200)"
-	set desc = "Drench an object in acid, destroying it over time."
-	set category = "Abilities"
+/mob/living/carbon/human/proc/revive_undead()
+	set name = "Rise from Death"
+	set desc = "Allows you to come back once you've died. This won't work without a brain however."
+	set category = "Zombie"
+
+
+	var/mob/living/carbon/C = src
+	if(src.stat == DEAD)
+		dead_mob_list -= src
+		living_mob_list += src
+
+		if(!isundead(C))
+			return 0
+		C << "<span class='notice'>The parasitic entity inside you begins knitting your decomposing form back together. This will take <b>three and a half minutes</b>.</span>"
+		do_after(C, 210)
+
+
+		C.tod = null
+		C.setToxLoss(0)
+		C.setOxyLoss(0)
+		C.setCloneLoss(0)
+		C.SetParalysis(0)
+		C.SetStunned(0)
+		C.SetWeakened(0)
+		C.radiation = 0
+		C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
+		C.reagents.clear_reagents()
+		if(ishuman(C))
+			var/mob/living/carbon/human/H = src
+			H.species.create_organs(H)
+			H.restore_all_organs(ignore_prosthetic_prefs=1) //Covers things like fractures and other things not covered by the above.
+			H.restore_blood()
+			H.mutations.Remove(HUSK)
+			H.status_flags &= ~DISFIGURED
+			H.update_icons_body()
+			for(var/limb in H.organs_by_name)
+				var/obj/item/organ/external/current_limb = H.organs_by_name[limb]
+				if(current_limb)
+					current_limb.relocate()
+					current_limb.open = 0
+
+			BITSET(H.hud_updateflag, HEALTH_HUD)
+			BITSET(H.hud_updateflag, STATUS_HUD)
+			BITSET(H.hud_updateflag, LIFE_HUD)
+
+		C.halloss = 0
+		C.shock_stage = 0 //Pain
+		C << "<span class='notice'>You rise from the dead.</span>"
+		C.update_canmove()
+		C.stat = CONSCIOUS
+		C.forbid_seeing_deadchat = FALSE
+		C.timeofdeath = null
+		return 1
+	else
+		C << "<span class='alium'>You can only use this while dead.</span>"
+		return
+
+/mob/living/carbon/human/proc/fermented_goo(O as obj|turf in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
+	set name = "Fermented Goo"
+	set desc = "Drench an object in a foul goo, destroying it over time."
+	set category = "Zombie"
 
 	if(!O in oview(1))
 		src << "<span class='alium'>[O] is too far away.</span>"
@@ -27,9 +84,8 @@
 	if(cannot_melt)
 		src << "<span class='alium'>You cannot dissolve this object.</span>"
 		return
-
-	if(check_alien_ability(200,0,O_ACID))
+	else
 		new /obj/effect/alien/acid(get_turf(O), O)
-		visible_message("<span class='alium'><B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B></span>")
+		visible_message("<span class='alium'><B>[src] spits out a foul smelling goo on [O]. It seems to be corrosive!</B></span>")
 
 	return
