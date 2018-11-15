@@ -308,8 +308,7 @@
 	set category = "Object"
 	set src in usr
 
-	for(var/mob/M in hearers())
-		M << sound('./sound/effects/pagan.ogg')
+	playsound(src, 'sound/effects/pagan.ogg', 50, 0)
 
 
 /obj/item/clothing/head/cowboy_hat/small
