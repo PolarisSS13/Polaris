@@ -11,7 +11,7 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/material/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
-	
+
 	if(default_parry_check(user, attacker, damage_source) && prob(50))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 		playsound(user.loc, 'sound/weapons/punchmiss.ogg', 50, 1)
@@ -33,3 +33,22 @@
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 	visible_message(span("danger", "[user] is slitting [TU.his] stomach open with \the [src.name]! It looks like [TU.hes] trying to commit seppuku."), span("danger", "You slit your stomach open with \the [src.name]!"), span("danger", "You hear the sound of flesh tearing open.")) // gory, but it gets the point across
 	return(BRUTELOSS)
+
+//godsword needs sprite currently work in progress
+
+/*
+/obj/item/weapon/material/sword/godsword
+	name = "Holy Sword"
+	desc = "A sword forged in spudmonium, a rare and powerful metal used to instantly slay faggots."
+	icon_state = "godsword1"
+	slot_flags = SLOT_BACK
+	throwforce = 80
+	w_class = ITEMSIZE_HUGE
+	force = 500
+	sharp = 1
+	edge = 1
+	attack_verb = list("MURDERFUCKED", "ASSRAPED", "SHITTERSLAPPED", "BASICALLY OWNED")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+*/
+
