@@ -41,28 +41,29 @@
 
 /obj/vehicle/car/proc/generate_license()
 
-	if(has_license)
-		license_number = rand(100, 999)
-		license_plate_no = "[license_code] - [license_number]"
+	license_number = rand(100, 999)
+	license_plate_no = "[license_code]-[license_number]"
 
 /obj/vehicle/car/examine(mob/user)
 	if(has_license)
 		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
-		return
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 
-/obj/vehicle/car/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/car/attackby(obj/item/weapon/pen/crayon/spraycan/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen/crayon/spraycan))
-		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
-		if(new_paint)
-			user << "You start painting the [src]."
-			playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
-			do_after(user, 50)
-			add_fingerprint(user)
-			paint_color = new_paint
-			update_icon()
-			return
+		if(W.capped)
+			user << "The spraycan is still capped! Uncap it first."
+		else
+			var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
+			if(new_paint)
+				user << "You start painting the [src]."
+				playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
+				do_after(user, 50)
+				add_fingerprint(user)
+				paint_color = new_paint
+				update_icon()
+				return
 	..()
 
 /obj/vehicle/car/random/New()
@@ -124,6 +125,9 @@
 		turn_off()
 		visible_message("<span class='warning'>\The [src] whines, before its engines wind down.</span>")
 		return 0
+
+	if(!on)
+		return
 
 /*
 	if(istype(destination,/turf/space) || istype(destination, /turf/simulated/floor/water) || pulledby)
