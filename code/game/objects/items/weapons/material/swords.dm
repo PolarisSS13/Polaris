@@ -34,21 +34,6 @@
 	visible_message(span("danger", "[user] is slitting [TU.his] stomach open with \the [src.name]! It looks like [TU.hes] trying to commit seppuku."), span("danger", "You slit your stomach open with \the [src.name]!"), span("danger", "You hear the sound of flesh tearing open.")) // gory, but it gets the point across
 	return(BRUTELOSS)
 
-//godsword needs sprite currently work in progress
 
-/*
-/obj/item/weapon/material/sword/godsword
-	name = "Holy Sword"
-	desc = "A sword forged in spudmonium, a rare and powerful metal used to instantly slay faggots."
-	icon_state = "godsword1"
-	slot_flags = SLOT_BACK
-	throwforce = 80
-	w_class = ITEMSIZE_HUGE
-	force = 500
-	sharp = 1
-	edge = 1
-	attack_verb = list("MURDERFUCKED", "ASSRAPED", "SHITTERSLAPPED", "BASICALLY OWNED")
-	hitsound = 'sound/weapons/bladeslice.ogg'
 
-*/
 

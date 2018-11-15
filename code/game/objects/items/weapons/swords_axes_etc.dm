@@ -96,3 +96,18 @@
 			return
 	else
 		return ..()
+
+//Godsword
+/obj/item/weapon/melee/godsword
+	name = "Unholy Sword"
+	desc = "A sword forged in spudmonium, a rare and powerful metal used to instantly slay faggots."
+	icon_state = "godsword"
+	slot_flags = SLOT_BACK
+	throwforce = 80
+	w_class = ITEMSIZE_HUGE
+	force = 500
+	sharp = 1
+	edge = 1
+	can_cleave = TRUE
+	attack_verb = list("MURDERFUCKED", "ASSRAPED", "SHITTERSLAPPED", "BASICALLY OWNED")
+	hitsound = 'sound/weapons/bladeslice.ogg'
