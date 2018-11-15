@@ -52,7 +52,7 @@
 		"research" = 			list("open" = "secureresopen", "closed" = "secureres", "locked" = "secureres1", "broken" = "secureresbroken", "off" = "secureresoff"),
 		"RD" = 					list("open" = "rdsecureopen", "closed" = "rdsecure", "locked" = "rdsecure1", "broken" = "rdsecurebroken", "off" = "rdsecureoff"),
 		"security" = 			list("open" = "secopen", "closed" = "sec", "locked" = "sec1", "broken" = "secbroken", "off" = "secoff"),
-		"warden" = 				list("open" = "wardensecureopen", "closed" = "wardensecure", "locked" = "wardensecure1", "broken" = "wardensecurebroken", "off" = "wardensecureoff"),
+		"Prison Warden" = 				list("open" = "wardensecureopen", "closed" = "wardensecure", "locked" = "wardensecure1", "broken" = "wardensecurebroken", "off" = "wardensecureoff"),
 		"HoS" = 				list("open" = "hossecureopen", "closed" = "hossecure", "locked" = "hossecure1", "broken" = "hossecurebroken", "off" = "hossecureoff"),
 		"HoP" = 				list("open" = "hopsecureopen", "closed" = "hopsecure", "locked" = "hopsecure1", "broken" = "hopsecurebroken", "off" = "hopsecureoff"),
 		"Administrator" = 			list("open" = "capsecureopen", "closed" = "capsecure", "locked" = "capsecure1", "broken" = "capsecurebroken", "off" = "capsecureoff")

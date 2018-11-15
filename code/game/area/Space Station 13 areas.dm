@@ -1879,7 +1879,7 @@ area/space/atmosalert()
 
 /area/security/warden
 	name = "\improper Police Station - Warden's Office"
-	icon_state = "Warden"
+	icon_state = "Prison Warden"
 
 /area/security/armoury
 	name = "\improper Police Station - Armory"

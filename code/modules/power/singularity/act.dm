@@ -19,7 +19,7 @@
 	if(mind)
 		if((mind.assigned_role == "Station Engineer") || (mind.assigned_role == "Chief Engineer"))
 			gain = 100
-		if(mind.assigned_role == "Assistant")
+		if(mind.assigned_role == "Civilian")
 			gain = rand(0, 300)
 	investigate_log(I_SINGULO,"has been consumed by a singularity", I_SINGULO)
 	gib()

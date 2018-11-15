@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/assistant
-	name = OUTFIT_JOB_NAME("Assistant")
+	name = OUTFIT_JOB_NAME("Civilian")
 	id_type = /obj/item/weapon/card/id/assistant
 	r_pocket = /obj/item/device/communicator
 

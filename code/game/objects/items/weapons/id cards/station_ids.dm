@@ -351,8 +351,8 @@
 	icon_state = "cargoGold"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(255,223,127)
-	assignment = "Quartermaster"
-	rank = "Quartermaster"
+	assignment = "Factory Manager"
+	rank = "Factory Manager"
 	job_access_type = /datum/job/qm
 
 /obj/item/weapon/card/id/assistant

@@ -145,8 +145,8 @@
 	corpsepocket1 = /obj/item/device/flashlight/pen
 	corpseshoes = /obj/item/clothing/shoes/black
 	corpseid = 1
-	corpseidjob = "Medical Doctor"
-	corpseidaccess = "Medical Doctor"
+	corpseidjob = "Doctor"
+	corpseidaccess = "Doctor"
 
 /obj/effect/landmark/corpse/engineer
 	name = "Engineer"

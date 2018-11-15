@@ -11,7 +11,7 @@ var/datum/antagonist/traitor/infiltrator/infiltrators
 	role_text = "Infiltrator"
 	role_text_plural = "Infiltrators"
 	welcome_text = "To speak on your team's private channel, use :t."
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Colony Director")
+	protected_jobs = list("Police Officer", "Prison Warden", "Detective", "Judge", "Chief of Police", "Mayor")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 
 /datum/antagonist/traitor/infiltrator/New()
