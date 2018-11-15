@@ -25,7 +25,7 @@ macro "borghotkeymode"
 		command = "westface"
 	elem 
 		name = "WEST+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+NORTH"
 		command = "northfaceperm"
@@ -34,7 +34,7 @@ macro "borghotkeymode"
 		command = "northface"
 	elem 
 		name = "NORTH+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+EAST"
 		command = "eastfaceperm"
@@ -43,7 +43,7 @@ macro "borghotkeymode"
 		command = "eastface"
 	elem 
 		name = "EAST+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+SOUTH"
 		command = "southfaceperm"
@@ -52,7 +52,7 @@ macro "borghotkeymode"
 		command = "southface"
 	elem 
 		name = "SOUTH+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -88,16 +88,16 @@ macro "borghotkeymode"
 		command = ".me"
 	elem 
 		name = "A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "F"
 		command = "a-intent left"
@@ -130,19 +130,19 @@ macro "borghotkeymode"
 		command = ".southwest"
 	elem "s_key"
 		name = "S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "T"
 		command = ".say"
 	elem "w_key"
 		name = "W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "X"
 		command = ".northeast"
@@ -246,7 +246,7 @@ macro "macro"
 		command = "westface"
 	elem 
 		name = "West+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+North"
 		command = "northfaceperm"
@@ -255,7 +255,7 @@ macro "macro"
 		command = "northface"
 	elem 
 		name = "North+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+East"
 		command = "eastfaceperm"
@@ -264,7 +264,7 @@ macro "macro"
 		command = "eastface"
 	elem 
 		name = "East+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+South"
 		command = "southfaceperm"
@@ -273,7 +273,7 @@ macro "macro"
 		command = "southface"
 	elem 
 		name = "South+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
@@ -294,10 +294,10 @@ macro "macro"
 		command = "a-intent harm"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+E"
 		command = "quick-equip"
@@ -315,10 +315,10 @@ macro "macro"
 		command = ".southwest"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+X"
 		command = ".northeast"
@@ -416,7 +416,7 @@ macro "hotkeymode"
 		command = "westface"
 	elem 
 		name = "West+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+North"
 		command = "northfaceperm"
@@ -425,7 +425,7 @@ macro "hotkeymode"
 		command = "northface"
 	elem 
 		name = "North+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+East"
 		command = "eastfaceperm"
@@ -434,7 +434,7 @@ macro "hotkeymode"
 		command = "eastface"
 	elem 
 		name = "East+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+South"
 		command = "southfaceperm"
@@ -443,7 +443,7 @@ macro "hotkeymode"
 		command = "southface"
 	elem 
 		name = "South+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
@@ -479,16 +479,16 @@ macro "hotkeymode"
 		command = ".me"
 	elem 
 		name = "A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "E"
 		command = "quick-equip"
@@ -533,19 +533,19 @@ macro "hotkeymode"
 		command = ".southwest"
 	elem "s_key"
 		name = "S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "T"
 		command = ".say"
 	elem "w_key"
 		name = "W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "X"
 		command = ".northeast"
@@ -620,7 +620,7 @@ macro "hotkeymode"
 		command = "Invisimin"
 	elem "spawn"
 		name = "F9"
-		command = ".spawn"
+		command = "spawn"
 	elem 
 		name = "F12"
 		command = "F12"
@@ -652,7 +652,7 @@ macro "borgmacro"
 		command = "westface"
 	elem 
 		name = "WEST+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+NORTH"
 		command = "northfaceperm"
@@ -661,7 +661,7 @@ macro "borgmacro"
 		command = "northface"
 	elem 
 		name = "NORTH+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+EAST"
 		command = "eastfaceperm"
@@ -670,7 +670,7 @@ macro "borgmacro"
 		command = "eastface"
 	elem 
 		name = "EAST+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+SOUTH"
 		command = "southfaceperm"
@@ -679,7 +679,7 @@ macro "borgmacro"
 		command = "southface"
 	elem 
 		name = "SOUTH+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -700,10 +700,10 @@ macro "borgmacro"
 		command = "a-intent left"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+F"
 		command = "a-intent left"
@@ -718,10 +718,10 @@ macro "borgmacro"
 		command = ".southwest"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+X"
 		command = ".northeast"
