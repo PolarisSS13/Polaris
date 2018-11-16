@@ -32,7 +32,7 @@
 
 /obj/item/clothing/head/helmet/space/anomalyC
 	name = "Hood of Pwnage"
-	desc = "A pressure resistant excavation hood partially capable of insulating against exotic alien energies."
+	desc = "An ominous headpeice looking lightly like a bio hood, red glass and veins are wrapped around the hood."
 	icon_state = "cespace_helmetC"
 	item_state = "cespace_helmetC"
-	armor = list(melee = 30, bullet = 35, laser = 20,energy = 38, bomb = 5, bio = 100, rad = 100)
+	armor = list(melee = 90, bullet = 90, laser = 90,energy = 40, bomb = 5, bio = 100, rad = 100)
