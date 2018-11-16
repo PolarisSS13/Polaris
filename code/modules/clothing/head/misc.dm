@@ -308,7 +308,7 @@
 	set category = "Object"
 	set src in usr
 
-	playsound(src, 'sound/effects/pagan.ogg', 50, 0)
+	playsound(src.loc, 'sound/effects/pagan.ogg', 50, 0)
 
 
 /obj/item/clothing/head/cowboy_hat/small
