@@ -42,7 +42,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 							list("module" = "Note", "icon" = "note64", "number" = 5),
 							list("module" = "Weather", "icon" = "sun64", "number" = 6),
 							list("module" = "Settings", "icon" = "gear64", "number" = 7),
-							list("module" = "911", "icon" = "phone64", "number" = 8)
+							list("module" = "Emergency Hotline", "icon" = "service64", "number" = 8)
 							)	//list("module" = "Name of Module", "icon" = "icon name64", "number" = "what tab is the module")
 
 	var/selected_tab = 1

@@ -93,7 +93,6 @@ var/list/outfits_decls_by_type_
 	if(W)
 		rank = W.rank
 		assignment = W.assignment
-	equip_pda(H, rank, assignment)
 
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]

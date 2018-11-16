@@ -402,8 +402,14 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 	
 	<HR>
 	<div class="itemContent" style="width: 100%;">{{:helper.link('Home', 'home', {'switch_tab' : 1})}}</div><BR>
-
-
+	
+	<div class="homeContainer">
+		<div class="homeScreen">
+			{{:helper.link('Police', 'police64', {'em_option' : 1}, null, 'emMenu')}}
+			{{:helper.link('Ambulance', 'medical64', {'em_option' : 2}, null, 'emMenu')}}
+			{{:helper.link('Damage Control', 'engineering64', {'em_option' : 3}, null, 'emMenu')}}
+		</div>
+	</div>
 /*<!-- Eighth Tab, External Device -->
 
 {{else data.currentTab == 8}}

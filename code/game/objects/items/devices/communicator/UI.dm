@@ -246,5 +246,25 @@
 		fon = !fon
 		set_light(fon * flum)
 
+	if(href_list["em_option"])
+		if(!get_connection_to_tcomms())
+			usr << "<span class='danger'>Error: Cannot connect to Exonet node.</span>"
+			return
+		var/service = href_list["em_option"]
+		var/service_name
+		var/text = sanitizeSafe(input(usr,"Enter a message to add to your emergency call.","Text Message"))
+		if(text)
+			if (service == "1")
+				service_name = "police department"
+				global_announcer.autosay ("<FONT size=3>Emergency message from the caller <B>[exonet.address]</B>: [text] </FONT>", "Emergency Hotline", "Security")
+			if (service == "2")
+				service_name = "paramedics"
+				global_announcer.autosay ("<FONT size=3>Emergency message from the caller <B>[exonet.address]</B>: [text] </FONT>", "Emergency Hotline", "Medical")
+			if (service == "3")
+				service_name = "damage control"
+				global_announcer.autosay ("<FONT size=3>Emergency message from the caller <B>[exonet.address]</B>: [text] </FONT>", "Emergency Hotline", "Engineering")
+			log_pda("(COMM: [src]) sent \"[text]\" to [service_name]", usr)
+
+
 	nanomanager.update_uis(src)
 	add_fingerprint(usr)

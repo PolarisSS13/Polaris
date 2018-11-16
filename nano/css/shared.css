@@ -710,6 +710,22 @@ div.homeScreen {
 	border-radius: 10px;
 }
 
+.emMenu {
+	float: left;
+    min-width: 15px;
+	max-width: 68px;
+    height: 64px;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(64, 98, 138, 0.6);
+    border: 1px solid #161616;
+    padding: 0 0 4px 0;
+	margin: 10px 0 30px 10.5%;
+    cursor: default;
+	border-radius: 10px;
+}
+
 .link64:hover {
 	font-size: 13px;
 }
