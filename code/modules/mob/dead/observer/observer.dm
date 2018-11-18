@@ -310,6 +310,21 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!target) return
 	ManualFollow(target)
 
+/mob/observer/dead/verb/follow_human(input in gethumans())
+	set category = "Ghost"
+	set name = "Follow Human" // "Haunt"
+	set desc = "Follow a living Human."
+
+	var/list/mobs = gethumans()
+	input = input("Please select a living Human:", "Haunt", null, null) as null|anything in mobs
+
+	if(mobs.len == 0)
+		usr << "\red There aren't any living Humans."
+		return
+
+	var/mob/target = mobs[input]
+	ManualFollow(target)
+
 // This is the ghost's follow verb with an argument
 /mob/observer/dead/proc/ManualFollow(var/atom/movable/target)
 	if(!target)
