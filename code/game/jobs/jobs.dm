@@ -50,7 +50,7 @@ var/list/assistant_occupations = list(
 
 
 var/list/command_positions = list(
-	"Head of Faggotry",
+	"Colony Director",
 	"Head of Personnel",
 	"Head of Security",
 	"Chief Engineer",
@@ -101,7 +101,7 @@ var/list/civilian_positions = list(
 	"Librarian",
 	"Lawyer",
 	"Chaplain",
-	"Huge Retard"
+	"Assistant"
 )
 
 
