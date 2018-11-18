@@ -15,8 +15,8 @@
 /obj/structure/attack_hand(mob/user)
 	if(breakable)
 		if(HULK in user.mutations)
-			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-			attack_generic(user,1,"smashes")
+			user.say(pick(";RAAAAAAAARGH!", ";HULK HOGAN GUNNA SMASH YA FAG!", ";IM FUCKIN' JUCY BRAH!", "NIGGER I SMASH!", ";WARRRG FUCK YOU BITCH!!!" ))
+			attack_generic(user,1,"BODYSLAMS")
 		else if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
 			if(H.species.can_shred(user))
