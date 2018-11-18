@@ -33,6 +33,30 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/captain/get_access()
 	return get_all_station_access()
 
+/*
+/datum/job/president
+	title = "President"
+	flag = CAPTAIN
+	department = "Command"
+	head_position = 1
+	department_flag = ENGSEC
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "NanoTrasen"
+	selection_color = "#1D1D4F"
+	idtype = /obj/item/weapon/card/id/centcom
+	req_admin_notify = 1
+	access = list() 			//See get_access()
+	minimal_access = list() 	//See get_access()
+	minimal_player_age = 14
+	economic_modifier = 20
+
+	minimum_character_age = 30
+	ideal_character_age = 50
+	outfit_type = /decl/hierarchy/outfit/job/captain
+
+*/
 /datum/job/hop
 	title = "City Supervisor"
 	flag = HOP
