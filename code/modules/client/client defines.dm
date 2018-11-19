@@ -54,8 +54,3 @@
 
 	var/global/obj/screen/click_catcher/void
 
-	var/lastping = 0
-	var/avgping = 0
-	var/connection_time //world.time they connected
-	var/connection_realtime //world.realtime they connected
-	var/connection_timeofday //world.timeofday they connected
