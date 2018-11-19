@@ -16,6 +16,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"diona" = 1,                                         // 12
 	"loyalist" = IS_MODE_COMPILED("revolution"),         // 13
 	"pAI candidate" = 1, // -- TLE                       // 14
+	"zombie" = IS_MODE_COMPILED("zombie"),      		     // 15
 )
 
 /datum/category_item/player_setup_item/antagonism/candidacy
