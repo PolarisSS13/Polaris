@@ -158,7 +158,7 @@
 		new /obj/item/clothing/accessory/badge/holo/warden(src)
 		new /obj/item/clothing/accessory/badge/holo/detective(src)
 		new /obj/item/clothing/accessory/badge/holo/detective(src)
-		new /obj/item/clothing/accessory/badge/holo/hos(src)
+		new /obj/item/clothing/accessory/badge/holo/cord(src)
 		new /obj/item/clothing/accessory/badge/holo/cord(src)
 		..()
 		return

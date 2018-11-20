@@ -140,6 +140,12 @@
 	item_state_slots = list(slot_r_hand_str = "syringe_kit", slot_l_hand_str = "syringe_kit")
 	starts_with = list(/obj/item/ammo_casing/a12g = 8)
 
+/obj/item/weapon/storage/box/shotgunammo/contraband
+	name = "Box"
+	desc = "It's just an ordinary box."
+	icon_state = "box"
+	item_state = "syringe_kit"
+
 /obj/item/weapon/storage/box/shotgunammo/large
 	starts_with = list(/obj/item/ammo_casing/a12g = 16)
 
