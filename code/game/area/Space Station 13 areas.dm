@@ -503,7 +503,7 @@ area/space/atmosalert()
 	icon_state = "yellow"
 	requires_power = 0
 	flags = RAD_SHIELDED
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 	dynamic_lighting = 0
 	luminosity = 0
 
@@ -979,17 +979,17 @@ area/space/atmosalert()
 /area/hallway/secondary/entry/D1
 	name = "\improper Shuttle Dock Hallway - Dock One"
 	icon_state = "entry_D1"
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/hallway/secondary/entry/D2
 	name = "\improper Shuttle Dock Hallway - Dock Two"
 	icon_state = "entry_D2"
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/hallway/secondary/entry/D3
 	name = "\improper Shuttle Dock Hallway - Dock Three"
 	icon_state = "entry_D3"
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/hallway/secondary/entry/D4
 	name = "\improper Shuttle Dock Hallway - Dock Four"
