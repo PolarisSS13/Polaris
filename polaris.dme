@@ -1179,7 +1179,6 @@
 #include "code\game\verbs\advanced_who.dm"
 #include "code\game\verbs\ignore.dm"
 #include "code\game\verbs\ooc.dm"
-#include "code\game\verbs\ping.dm"
 #include "code\game\verbs\suicide.dm"
 #include "code\game\verbs\who.dm"
 #include "code\js\byjax.dm"
