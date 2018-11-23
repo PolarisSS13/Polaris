@@ -316,13 +316,10 @@
 //repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
 	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
-		return get_id_name("Unknown")
+		return ("Unknown")
 	if( head && (head.flags_inv&HIDEFACE) )
-		return get_id_name("Unknown")		//Likewise for hats
+		return ("Unknown")		//Likewise for hats
 	var/face_name = get_face_name()
-	var/id_name = get_id_name("")
-	if((face_name == "Unknown") && id_name && (id_name != face_name))
-		return "[face_name] (as [id_name])"
 	return face_name
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
@@ -392,20 +389,14 @@
 		if(hasHUD(usr,"security"))
 
 			var/modified = 0
-			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
-
+			var/perpname = get_visible_name()
 			if(perpname)
 				for (var/datum/data/record/E in data_core.general)
 					if (E.fields["name"] == perpname)
 						for (var/datum/data/record/R in data_core.security)
 							if (R.fields["id"] == E.fields["id"])
 
-								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
+								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
 
 								if(hasHUD(usr, "security"))
 									if(setcriminal != "Cancel")
@@ -426,14 +417,9 @@
 
 	if (href_list["secrecord"])
 		if(hasHUD(usr,"security"))
-			var/perpname = "wot"
+			var/perpname = get_visible_name()
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.security)
@@ -453,14 +439,9 @@
 
 	if (href_list["secrecordComment"])
 		if(hasHUD(usr,"security"))
-			var/perpname = "wot"
+			var/perpname = get_visible_name()
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.security)
@@ -480,12 +461,7 @@
 
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
-			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
+			var/perpname = get_visible_name()
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.security)
@@ -506,14 +482,8 @@
 
 	if (href_list["medical"])
 		if(hasHUD(usr,"medical"))
-			var/perpname = "wot"
+			var/perpname = get_visible_name()
 			var/modified = 0
-
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
 
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
@@ -542,14 +512,9 @@
 
 	if (href_list["medrecord"])
 		if(hasHUD(usr,"medical"))
-			var/perpname = "wot"
+			var/perpname = get_visible_name()
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.medical)
@@ -570,14 +535,9 @@
 
 	if (href_list["medrecordComment"])
 		if(hasHUD(usr,"medical"))
-			var/perpname = "wot"
+			var/perpname = get_visible_name()
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.medical)
@@ -597,12 +557,8 @@
 
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
-			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
-			if(I)
-				perpname = I.registered_name
-			else
-				perpname = name
+			var/perpname = get_visible_name()
+
 			for (var/datum/data/record/E in data_core.general)
 				if (E.fields["name"] == perpname)
 					for (var/datum/data/record/R in data_core.medical)
