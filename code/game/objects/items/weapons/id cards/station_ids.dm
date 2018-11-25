@@ -1,6 +1,6 @@
 /obj/item/weapon/card/id
 	name = "identification card"
-	desc = "A card used to provide ID and determine access across the station."
+	desc = "A card used to provide ID and determine access across the city."
 	icon_state = "id"
 	item_state = "card-id"
 
@@ -197,7 +197,7 @@
 // Department-flavor IDs
 /obj/item/weapon/card/id/medical
 	name = "identification card"
-	desc = "A card issued to station medical staff."
+	desc = "A card issued to city medical staff."
 	icon_state = "med"
 	primary_color = rgb(189,237,237)
 	secondary_color = rgb(223,255,255)
@@ -239,7 +239,7 @@
 
 /obj/item/weapon/card/id/security
 	name = "identification card"
-	desc = "A card issued to station security staff."
+	desc = "A card issued to city security staff."
 	icon_state = "sec"
 	primary_color = rgb(189,47,0)
 	secondary_color = rgb(223,127,95)
@@ -271,7 +271,7 @@
 
 /obj/item/weapon/card/id/engineering
 	name = "identification card"
-	desc = "A card issued to station engineering staff."
+	desc = "A card issued to city engineering staff."
 	icon_state = "eng"
 	primary_color = rgb(189,94,0)
 	secondary_color = rgb(223,159,95)
@@ -298,7 +298,7 @@
 
 /obj/item/weapon/card/id/science
 	name = "identification card"
-	desc = "A card issued to station science staff."
+	desc = "A card issued to city science staff."
 	icon_state = "sci"
 	primary_color = rgb(142,47,142)
 	secondary_color = rgb(191,127,191)
@@ -330,7 +330,7 @@
 
 /obj/item/weapon/card/id/cargo
 	name = "identification card"
-	desc = "A card issued to station cargo staff."
+	desc = "A card issued to city cargo staff."
 	icon_state = "cargo"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(191,159,95)
@@ -351,8 +351,8 @@
 	icon_state = "cargoGold"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(255,223,127)
-	assignment = "Quartermaster"
-	rank = "Quartermaster"
+	assignment = "Factory Manager"
+	rank = "Factory Manager"
 	job_access_type = /datum/job/qm
 
 /obj/item/weapon/card/id/assistant
@@ -362,7 +362,7 @@
 
 /obj/item/weapon/card/id/civilian
 	name = "identification card"
-	desc = "A card issued to station civilian staff."
+	desc = "A card issued to city civilian staff."
 	icon_state = "civ"
 	primary_color = rgb(0,94,142)
 	secondary_color = rgb(95,159,191)

@@ -44,7 +44,7 @@
 			)
 		var/message = pick(message_options)
 		say(message)
-		playsound(loc, message_options[message], 50, 0)
+		playsound(src.loc, message_options[message], 50, 0)
 
 /mob/living/bot/medbot/handleAdjacentTarget()
 	UnarmedAttack(target)
@@ -107,7 +107,7 @@
 				)
 			var/message = pick(death_messages)
 			say(message)
-			playsound(loc, death_messages[message], 50, 0)
+			playsound(src.loc, death_messages[message], 50, 0)
 
 	// This is down here for the same reason as above.
 	else
@@ -122,7 +122,7 @@
 					)
 				var/message = pick(possible_messages)
 				say(message)
-				playsound(loc, possible_messages[message], 50, 0)
+				playsound(src.loc, possible_messages[message], 50, 0)
 
 	busy = 0
 	update_icons()
@@ -267,7 +267,7 @@
 		reagent_glass = null
 
 	if(emagged && prob(25))
-		playsound(loc, 'sound/voice/medbot/minsult.ogg', 50, 0)
+		playsound(src.loc, 'sound/voice/medbot/minsult.ogg', 50, 0)
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)

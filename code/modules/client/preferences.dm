@@ -66,7 +66,7 @@ datum/preferences
 	var/faction = "NanoTrasen Colony Civilian"                //General associated faction.
 	var/religion = "None"               //Religious association.
 	var/antag_faction = "None"			//Antag associated faction.
-	var/antag_vis = "Hidden"			//How visible antag association is to others.
+	var/antag_vis = "Shared"			//How visible antag association is to others.
 
 		//Mob preview
 	var/icon/preview_icon = null
@@ -95,7 +95,7 @@ datum/preferences
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
 	var/list/rlimb_data = list()
-	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
+	var/list/player_alt_titles = new()		// the default name of a job like "Doctor"
 
 	var/list/body_markings = list() // "name" = "#rgbcolor"
 

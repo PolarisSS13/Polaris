@@ -533,7 +533,7 @@
 /obj/item/toy/figure/assistant
 	name = "Assistant action figure"
 	desc = "A \"Space Life\" brand Assistant action figure."
-	icon_state = "assistant"
+	icon_state = "Civilian"
 	toysay = "Grey tide station wide!"
 
 /obj/item/toy/figure/atmos
@@ -737,7 +737,7 @@
 /obj/item/toy/figure/warden
 	name = "Warden action figure"
 	desc = "A \"Space Life\" brand Warden action figure."
-	icon_state = "warden"
+	icon_state = "Prison Warden"
 	toysay = "Execute him for breaking in!"
 
 /obj/item/toy/figure/psychologist

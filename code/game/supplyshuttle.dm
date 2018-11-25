@@ -31,13 +31,11 @@ var/list/mechtoys = list(
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
-	base_turf = /turf/space
 
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
-	base_turf = /turf/space
 
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
 	name = "\improper plastic flaps"
@@ -251,13 +249,13 @@ var/list/mechtoys = list(
 
 //Buyin
 /datum/controller/supply/proc/buy()
-	if(!shoppinglist.len) 
+	if(!shoppinglist.len)
 		return
 
 	var/orderedamount = shoppinglist.len
 
 	var/area/area_shuttle = shuttle.get_location_area()
-	if(!area_shuttle)   
+	if(!area_shuttle)
 		return
 
 	var/list/clear_turfs = list()

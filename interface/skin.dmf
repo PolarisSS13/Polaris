@@ -1,63 +1,63 @@
 macro "borghotkeymode"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=borgmacro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
-		command = ".west"
+		name = "West+REP"
+		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
-		command = ".north"
+		name = "North+REP"
+		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
-		command = ".east"
+		name = "East+REP"
+		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
-		command = ".south"
+		name = "South+REP"
+		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "1"
@@ -88,16 +88,16 @@ macro "borghotkeymode"
 		command = ".me"
 	elem 
 		name = "A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "F"
 		command = "a-intent left"
@@ -130,19 +130,19 @@ macro "borghotkeymode"
 		command = ".southwest"
 	elem "s_key"
 		name = "S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "T"
 		command = ".say"
 	elem "w_key"
 		name = "W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "X"
 		command = ".northeast"
@@ -162,25 +162,25 @@ macro "borghotkeymode"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
-		name = "NUMPAD1"
+		name = "Numpad1"
 		command = "body-r-leg"
 	elem 
-		name = "NUMPAD2"
+		name = "Numpad2"
 		command = "body-groin"
 	elem 
-		name = "NUMPAD3"
+		name = "Numpad3"
 		command = "body-l-leg"
 	elem 
-		name = "NUMPAD4"
+		name = "Numpad4"
 		command = "body-r-arm"
 	elem 
-		name = "NUMPAD5"
+		name = "Numpad5"
 		command = "body-chest"
 	elem 
-		name = "NUMPAD6"
+		name = "Numpad6"
 		command = "body-l-arm"
 	elem 
-		name = "NUMPAD8"
+		name = "Numpad8"
 		command = "body-toggle-head"
 	elem 
 		name = "F1"
@@ -216,6 +216,9 @@ macro "borghotkeymode"
 		name = "F8"
 		command = "Invisimin"
 	elem 
+		name = "F9"
+		command = "spawn"
+	elem 
 		name = "F12"
 		command = "F12"
 
@@ -246,7 +249,7 @@ macro "macro"
 		command = "westface"
 	elem 
 		name = "West+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+North"
 		command = "northfaceperm"
@@ -255,7 +258,7 @@ macro "macro"
 		command = "northface"
 	elem 
 		name = "North+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+East"
 		command = "eastfaceperm"
@@ -264,7 +267,7 @@ macro "macro"
 		command = "eastface"
 	elem 
 		name = "East+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+South"
 		command = "southfaceperm"
@@ -273,7 +276,7 @@ macro "macro"
 		command = "southface"
 	elem 
 		name = "South+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
@@ -294,10 +297,10 @@ macro "macro"
 		command = "a-intent harm"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+E"
 		command = "quick-equip"
@@ -315,10 +318,10 @@ macro "macro"
 		command = ".southwest"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+X"
 		command = ".northeast"
@@ -384,7 +387,7 @@ macro "macro"
 		command = "Invisimin"
 	elem 
 		name = "F9"
-		command = ".spawn"
+		command = "spawn"
 	elem 
 		name = "F12"
 		command = "F12"
@@ -416,7 +419,7 @@ macro "hotkeymode"
 		command = "westface"
 	elem 
 		name = "West+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "ALT+North"
 		command = "northfaceperm"
@@ -425,7 +428,7 @@ macro "hotkeymode"
 		command = "northface"
 	elem 
 		name = "North+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "ALT+East"
 		command = "eastfaceperm"
@@ -434,7 +437,7 @@ macro "hotkeymode"
 		command = "eastface"
 	elem 
 		name = "East+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "ALT+South"
 		command = "southfaceperm"
@@ -443,7 +446,7 @@ macro "hotkeymode"
 		command = "southface"
 	elem 
 		name = "South+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "Insert"
 		command = "a-intent right"
@@ -479,16 +482,16 @@ macro "hotkeymode"
 		command = ".me"
 	elem 
 		name = "A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "E"
 		command = "quick-equip"
@@ -533,19 +536,19 @@ macro "hotkeymode"
 		command = ".southwest"
 	elem "s_key"
 		name = "S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "T"
 		command = ".say"
 	elem "w_key"
 		name = "W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "X"
 		command = ".northeast"
@@ -620,71 +623,71 @@ macro "hotkeymode"
 		command = "Invisimin"
 	elem "spawn"
 		name = "F9"
-		command = ".spawn"
+		command = "spawn"
 	elem 
 		name = "F12"
 		command = "F12"
 
 macro "borgmacro"
 	elem 
-		name = "TAB"
+		name = "Tab"
 		command = ".winset \"mainwindow.macro=borghotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#F0F0F0\""
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST"
+		name = "Northeast"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST"
+		name = "Southeast"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST"
+		name = "Southwest"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST"
+		name = "Northwest"
 		command = ".northwest"
 	elem 
-		name = "ALT+WEST"
+		name = "ALT+West"
 		command = "westfaceperm"
 	elem 
-		name = "CTRL+WEST"
+		name = "CTRL+West"
 		command = "westface"
 	elem 
-		name = "WEST+REP"
-		command = ".west"
+		name = "West+REP"
+		command = ".moveleft"
 	elem 
-		name = "ALT+NORTH"
+		name = "ALT+North"
 		command = "northfaceperm"
 	elem 
-		name = "CTRL+NORTH"
+		name = "CTRL+North"
 		command = "northface"
 	elem 
-		name = "NORTH+REP"
-		command = ".north"
+		name = "North+REP"
+		command = ".moveup"
 	elem 
-		name = "ALT+EAST"
+		name = "ALT+East"
 		command = "eastfaceperm"
 	elem 
-		name = "CTRL+EAST"
+		name = "CTRL+East"
 		command = "eastface"
 	elem 
-		name = "EAST+REP"
-		command = ".east"
+		name = "East+REP"
+		command = ".moveright"
 	elem 
-		name = "ALT+SOUTH"
+		name = "ALT+South"
 		command = "southfaceperm"
 	elem 
-		name = "CTRL+SOUTH"
+		name = "CTRL+South"
 		command = "southface"
 	elem 
-		name = "SOUTH+REP"
-		command = ".south"
+		name = "South+REP"
+		command = ".movedown"
 	elem 
-		name = "INSERT"
+		name = "Insert"
 		command = "a-intent right"
 	elem 
-		name = "DELETE"
+		name = "Delete"
 		command = "delete-key-pressed"
 	elem 
 		name = "CTRL+1"
@@ -700,10 +703,10 @@ macro "borgmacro"
 		command = "a-intent left"
 	elem 
 		name = "CTRL+A+REP"
-		command = ".west"
+		command = ".moveleft"
 	elem 
 		name = "CTRL+D+REP"
-		command = ".east"
+		command = ".moveright"
 	elem 
 		name = "CTRL+F"
 		command = "a-intent left"
@@ -718,10 +721,10 @@ macro "borgmacro"
 		command = ".southwest"
 	elem 
 		name = "CTRL+S+REP"
-		command = ".south"
+		command = ".movedown"
 	elem 
 		name = "CTRL+W+REP"
-		command = ".north"
+		command = ".moveup"
 	elem 
 		name = "CTRL+X"
 		command = ".northeast"
@@ -732,25 +735,25 @@ macro "borgmacro"
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
 	elem 
-		name = "CTRL+NUMPAD1"
+		name = "CTRL+Numpad1"
 		command = "body-r-leg"
 	elem 
-		name = "CTRL+NUMPAD2"
+		name = "CTRL+Numpad2"
 		command = "body-groin"
 	elem 
-		name = "CTRL+NUMPAD3"
+		name = "CTRL+Numpad3"
 		command = "body-l-leg"
 	elem 
-		name = "CTRL+NUMPAD4"
+		name = "CTRL+Numpad4"
 		command = "body-r-arm"
 	elem 
-		name = "CTRL+NUMPAD5"
+		name = "CTRL+Numpad5"
 		command = "body-chest"
 	elem 
-		name = "CTRL+NUMPAD6"
+		name = "CTRL+Numpad6"
 		command = "body-l-arm"
 	elem 
-		name = "CTRL+NUMPAD8"
+		name = "CTRL+Numpad8"
 		command = "body-toggle-head"
 	elem 
 		name = "F1"
@@ -785,6 +788,9 @@ macro "borgmacro"
 	elem 
 		name = "F8"
 		command = "Invisimin"
+	elem 
+		name = "F9"
+		command = "spawn"
 	elem 
 		name = "F12"
 		command = "F12"
@@ -908,6 +914,7 @@ window "Telecomms IDE"
 		size = 70x20
 		anchor1 = 37,80
 		anchor2 = 49,83
+		background-color = none
 		saved-params = "is-checked"
 		text = "Clear Memory"
 		command = "tcsclearmem"
@@ -917,6 +924,7 @@ window "Telecomms IDE"
 		size = 52x20
 		anchor1 = 28,80
 		anchor2 = 37,83
+		background-color = none
 		saved-params = "is-checked"
 		text = "Revert"
 		command = "tcsrevert"
@@ -926,6 +934,7 @@ window "Telecomms IDE"
 		size = 52x20
 		anchor1 = 18,80
 		anchor2 = 28,83
+		background-color = none
 		saved-params = "is-checked"
 		text = "Execute"
 		command = "tcsrun"
@@ -944,6 +953,7 @@ window "Telecomms IDE"
 		size = 52x20
 		anchor1 = 9,80
 		anchor2 = 18,83
+		background-color = none
 		saved-params = "is-checked"
 		text = "Compile"
 		command = "tcscompile"
@@ -953,6 +963,7 @@ window "Telecomms IDE"
 		size = 53x20
 		anchor1 = 0,80
 		anchor2 = 9,83
+		background-color = none
 		saved-params = "is-checked"
 		text = "Apply"
 		command = "tcssave"
@@ -1099,7 +1110,7 @@ window "infowindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = #4b1f48
+		background-color = #311843
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		titlebar = false
@@ -1111,16 +1122,16 @@ window "infowindow"
 	elem "info"
 		type = INFO
 		pos = 0,0
-		size = 636x451
+		size = 632x451
 		anchor1 = 0,0
 		anchor2 = 100,100
 		text-color = #ddabde
-		background-color = #823384
+		background-color = #221e21
 		is-default = true
 		saved-params = ""
 		highlight-color = #c510b7
 		tab-text-color = #e2d318
-		tab-background-color = #562257
+		tab-background-color = #2c173e
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
 
@@ -1131,16 +1142,30 @@ window "mainwindow"
 		size = 678x462
 		anchor1 = none
 		anchor2 = none
-		background-color = #682b64
+		background-color = #2d1d34
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Space Station 13"
 		icon = 'icons\\ss13_64.png'
 		macro = "macro"
 		menu = "menu"
+	elem "loocbutton"
+		type = BUTTON
+		pos = 117,440
+		size = 54x21
+		anchor1 = 0,100
+		anchor2 = none
+		text-color = #f2eab7
+		background-color = #008040
+		border = line
+		saved-params = "is-checked"
+		text = "LOOC"
+		command = ".winset \"loocbutton.is-checked=true?input.command=\"!looc \\\"\" macrobutton.is-checked=false:input.command=\""
+		group = "chat_options"
+		button-type = radio
 	elem "nonebutton"
 		type = BUTTON
-		pos = 174,441
+		pos = 230,441
 		size = 54x19
 		anchor1 = 0,100
 		anchor2 = none
@@ -1154,7 +1179,7 @@ window "mainwindow"
 		button-type = radio
 	elem "mebutton"
 		type = BUTTON
-		pos = 117,441
+		pos = 174,441
 		size = 53x19
 		anchor1 = 0,100
 		anchor2 = none
@@ -1187,7 +1212,7 @@ window "mainwindow"
 		anchor1 = 100,100
 		anchor2 = none
 		text-color = #ddabde
-		background-color = #562257
+		background-color = #402158
 		saved-params = ""
 		text = "Hotkey Mode"
 		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
@@ -1199,6 +1224,7 @@ window "mainwindow"
 		size = 672x417
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
@@ -1208,8 +1234,8 @@ window "mainwindow"
 		size = 672x20
 		anchor1 = 0,100
 		anchor2 = 100,100
-		text-color = #dcaadd
-		background-color = #4b1f48
+		text-color = #e2d318
+		background-color = #65467d
 		is-default = true
 		border = sunken
 		saved-params = "command"
@@ -1271,6 +1297,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1297,7 +1324,7 @@ window "rpane"
 		size = 599x474
 		anchor1 = none
 		anchor2 = none
-		background-color = #4b1f48
+		background-color = #402158
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1313,7 +1340,7 @@ window "rpane"
 		size = 599x473
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #682b64
+		background-color = #2d1d34
 		border = line
 		saved-params = "splitter"
 		right = "outputwindow"
@@ -1325,7 +1352,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #65467d
 		saved-params = "is-checked"
 		text = "GitHub"
 		command = "github"
@@ -1361,7 +1388,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #65467d
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
@@ -1373,7 +1400,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #65467d
 		saved-params = "is-checked"
 		text = "Forum"
 		command = "forum"
@@ -1397,7 +1424,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #795395
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Text"
@@ -1412,7 +1439,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #65467d
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Browser"
@@ -1426,7 +1453,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #c510b7
+		background-color = #65467d
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Info"
@@ -1441,6 +1468,7 @@ window "browserwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Browser"
 		is-pane = true

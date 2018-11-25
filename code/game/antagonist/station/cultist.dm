@@ -12,12 +12,12 @@ var/datum/antagonist/cultist/cult
 	role_text_plural = "Cultists"
 	bantype = "cultist"
 	restricted_jobs = list("Chaplain","AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Colony Director")
-	roundstart_restricted = list("Internal Affairs Agent", "Head of Security", "Colony Director")
+	protected_jobs = list("Police Officer", "Prison Warden", "Detective", "Judge", "Chief of Police", "Mayor")
+	roundstart_restricted = list("Judge", "Chief of Police", "Mayor")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
-	welcome_text = "You have a talisman in your possession; one that will help you start the cult on this station. Use it well and remember - there are others."
+	welcome_text = "You have a talisman in your possession; one that will help you start the cult in this city. Use it well and remember - there are others."
 	victory_text = "The cult wins! It has succeeded in serving its dark masters!"
 	loss_text = "The staff managed to stop the cult!"
 	victory_feedback_tag = "win - cult win"

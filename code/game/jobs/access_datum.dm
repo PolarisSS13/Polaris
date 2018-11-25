@@ -253,7 +253,7 @@
 /var/const/access_qm = 41
 /datum/access/qm
 	id = access_qm
-	desc = "Quartermaster"
+	desc = "Factory Manager"
 	region = ACCESS_REGION_SUPPLY
 
 /var/const/access_judge = 42
@@ -264,7 +264,7 @@
 
 /var/const/access_prosecutor = 43
 /datum/access/prosecutor
-	id = access_judge
+	id = access_prosecutor
 	desc = "Prosecutor"
 	region = ACCESS_REGION_SECURITY
 
@@ -337,13 +337,13 @@
 /var/const/access_hop = 57
 /datum/access/hop
 	id = access_hop
-	desc = "Head of Personnel"
+	desc = "City Supervisor"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_hos = 58
 /datum/access/hos
 	id = access_hos
-	desc = "Head of Security"
+	desc = "Chief of Police"
 	region = ACCESS_REGION_SECURITY
 
 /var/const/access_RC_announce = 59 //Request console announcements

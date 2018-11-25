@@ -1,15 +1,15 @@
 client/script = {"<style>
-body					{font-family: Verdana, sans-serif;}
+body					{font-family: "Helvetica", sans-serif; color: #650085;}
 
-h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: Georgia, Verdana, sans-serif;}
+h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: "Arial Black", sans-serif;}
 
 em						{font-style: normal;font-weight: bold;}
 
-.motd					{color: #638500;font-family: Verdana, sans-serif;}
+.motd					{color: #650085;font-family: "Helvetica", sans-serif;}
 .motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6
-						{color: #638500;text-decoration: underline;}
+						{color: #650085;}
 .motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover
-						{color: #638500;}
+						{color: #650085;}
 
 .prefix					{font-weight: bold;}
 .log_message			{color: #386AFF;	font-weight: bold;}
@@ -77,11 +77,11 @@ h1.alert, h2.alert		{color: #000000;}
 
 .critical				{color: #ff0000; font-weight: bold; font-size: 150%;}
 .danger					{color: #ff0000; font-weight: bold;}
-.warning				{color: #ff0000; font-style: italic;}
+.warning				{color: #ff0000; font-style: italic; font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
-.alium					{color: #00ff00;}
+.alium					{color: #00ff00; font-weight: bold; }
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
 
 .reflex_shoot			{color: #000099; font-style: italic;}

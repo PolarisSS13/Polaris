@@ -1169,9 +1169,12 @@
 		if(hud_used)
 			qdel(hud_used)
 		hud_used = new /datum/hud(src)
+	//This is a hack to fix the client bug issue. Eh.
+		Login()
 
 	//A slew of bits that may be affected by our species change
 	regenerate_icons()
+
 
 	if(species)
 		if(mind)

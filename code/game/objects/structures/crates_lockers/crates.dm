@@ -422,13 +422,13 @@
 
 /obj/structure/closet/crate/secure/hydrosec
 	name = "secure hydroponics crate"
-	desc = "A crate with a lock on it, painted in the scheme of the station's botanists."
+	desc = "A crate with a lock on it, painted in the scheme of the city's botanists."
 	icon_state = "hydrosecurecrate"
 	icon_opened = "hydrosecurecrateopen"
 	icon_closed = "hydrosecurecrate"
 
 /obj/structure/closet/crate/secure/engineering
-	desc = "A crate with a lock on it, painted in the scheme of the station's engineers."
+	desc = "A crate with a lock on it, painted in the scheme of the city's engineers."
 	name = "secure engineering crate"
 	icon_state = "engi_secure_crate"
 	icon_opened = "engi_secure_crateopen"
@@ -436,7 +436,7 @@
 
 /obj/structure/closet/crate/secure/science
 	name = "secure science crate"
-	desc = "A crate with a lock on it, painted in the scheme of the station's scientists."
+	desc = "A crate with a lock on it, painted in the scheme of the city's scientists."
 	icon_state = "scisecurecrate"
 	icon_opened = "scisecurecrateopen"
 	icon_closed = "scisecurecrate"

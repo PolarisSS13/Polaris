@@ -189,7 +189,7 @@
 
 
 /obj/structure/closet/secure_closet/security
-	name = "security officer's locker"
+	name = "police officer's locker"
 	req_access = list(access_brig)
 	icon_state = "sec1"
 	icon_closed = "sec"
@@ -206,6 +206,10 @@
 			new /obj/item/weapon/storage/backpack/satchel/sec(src)
 		if(prob(50))
 			new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
+		if(prob(50))
+			new /obj/item/clothing/accessory/badge/holo(src)
+		else
+			new /obj/item/clothing/accessory/badge/holo/cord(src)
 		new /obj/item/clothing/suit/storage/vest/officer(src)
 		new /obj/item/clothing/head/helmet(src)
 		new /obj/item/weapon/cartridge/security(src)
@@ -223,6 +227,8 @@
 		new /obj/item/clothing/accessory/storage/black_vest(src)
 		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
+		new /obj/item/weapon/gun/projectile/sec(src)
+		new /obj/item/ammo_magazine/m45/rubber(src)
 		new /obj/item/ammo_magazine/m45/rubber(src)
 		new /obj/item/weapon/gun/energy/taser(src)
 		new /obj/item/weapon/cell/device/weapon(src)

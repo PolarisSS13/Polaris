@@ -153,7 +153,7 @@ datum/objective/anti_revolution/demote
 
 			if(!istype(I)) return 1
 
-			if(I.assignment == "Assistant")
+			if(I.assignment == "Civilian")
 				return 1
 			else
 				return 0
@@ -263,7 +263,7 @@ datum/objective/block
 		return 1
 
 datum/objective/silence
-	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
+	explanation_text = "Do not allow anyone to escape the city.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
 
 	check_completion()
 		if(!emergency_shuttle.returned())
@@ -418,7 +418,7 @@ datum/objective/harm
 
 
 datum/objective/nuclear
-	explanation_text = "Destroy the station with a nuclear device."
+	explanation_text = "Destroy the city with a nuclear device."
 
 
 
@@ -434,7 +434,7 @@ datum/objective/steal
 		"a colony director's jumpsuit" = /obj/item/clothing/under/rank/captain,
 		"a functional AI" = /obj/item/device/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
-		"the station blueprints" = /obj/item/blueprints,
+		"the city blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
 		"28 moles of phoron (full tank)" = /obj/item/weapon/tank,
 		"a sample of slime extract" = /obj/item/slime_extract,
@@ -764,7 +764,7 @@ datum/objective/heist/salvage
 				target = "diamond"
 				target_amount = 20
 
-		explanation_text = "Ransack the station and escape with [target_amount] [target]."
+		explanation_text = "Ransack the city and escape with [target_amount] [target]."
 
 	check_completion()
 
@@ -838,7 +838,7 @@ datum/objective/heist/salvage
 
 /datum/objective/cult/survive/New()
 	..()
-	explanation_text = "Our knowledge must live on. Make sure at least [target_amount] acolytes escape on the shuttle to spread their work on an another station."
+	explanation_text = "Our knowledge must live on. Make sure at least [target_amount] acolytes escape on the shuttle to spread their work on an another city."
 
 /datum/objective/cult/survive/check_completion()
 	var/acolytes_survived = 0
@@ -905,7 +905,7 @@ datum/objective/heist/salvage
 		if(target in revs.current_antagonists)
 			return 1
 		var/turf/T = get_turf(H)
-		if(T && isNotStationLevel(T.z))			//If they leave the station they count as dead for this
+		if(T && isNotStationLevel(T.z))			//If they leave the city they count as dead for this
 			rval = 2
 		return 0
 	return rval

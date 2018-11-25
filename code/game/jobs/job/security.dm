@@ -69,8 +69,8 @@
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 10
+	spawn_positions = 16
 	supervisors = "the chief of police"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/officer
@@ -91,7 +91,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief of police and city supervisor"
-	selection_color = "#515151"
+	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/prosecutor
 	economic_modifier = 7
 	access = list(access_prosecutor, access_sec_doors, access_maint_tunnels, access_heads)

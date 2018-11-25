@@ -263,6 +263,10 @@
 .uiIcon16.icon-close64 		{ background-image: url(uiIcons64.png); background-position: -128px -64px; width: 64px; height: 64px; }
 .uiIcon16.icon-sun64 		{ background-image: url(uiIcons64.png); background-position: -192px -64px; width: 64px; height: 64px; }
 .uiIcon16.icon-external64 	{ background-image: url(uiIcons64.png); background-position: -256px -64px; width: 64px; height: 64px; }
+.uiIcon16.icon-service64 {background-image: url(uiIcons64.png); background-position: 0 -128px; width: 64px; height: 64px; }
+.uiIcon16.icon-police64 {background-image: url(uiIcons64.png); background-position: -128px -128px; width: 64px; height: 64px; }
+.uiIcon16.icon-medical64 {background-image: url(uiIcons64.png); background-position: -64px -128px; width: 64px; height: 64px; }
+.uiIcon16.icon-engineering64 {background-image: url(uiIcons64.png); background-position: -320px -64px; width: 64px; height: 64px; }
 
 .uiIcon16.icon-pill 		{ background-image: url(pills32.png); width: 32px; height: 32px;}
 .uiIcon16.icon-pill.pill1   { background-position: 0 0; }

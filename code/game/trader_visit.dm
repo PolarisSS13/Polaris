@@ -23,7 +23,7 @@ var/can_call_traders = 1
 	if(alert("Do you want to dispatch the Beruang trade ship?",,"Yes","No") != "Yes")
 		return
 	if(get_security_level() == "red") // Allow admins to reconsider if the alert level is Red
-		switch(alert("The station is in red alert. Do you still want to send traders?",,"Yes","No"))
+		switch(alert("The city is in red alert. Do you still want to send traders?",,"Yes","No"))
 			if("No")
 				return
 	if(send_beruang)
@@ -45,7 +45,7 @@ client/verb/JoinTraders()
 
 	if(istype(usr,/mob/observer/dead) || istype(usr,/mob/new_player))
 		if(!send_beruang)
-			usr << "The Beruang is not currently heading to the station."
+			usr << "The Beruang is not currently heading to the city."
 			return
 		if(traders.current_antagonists.len >= traders.hard_cap)
 			usr << "The number of trader slots is already full!"

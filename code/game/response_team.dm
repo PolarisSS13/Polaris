@@ -10,7 +10,7 @@ var/silent_ert = 0
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
 	set category = "Special Verbs"
-	set desc = "Send an emergency response team to the station"
+	set desc = "Send an emergency response team to the city"
 
 	if(!holder)
 		usr << "<span class='danger'>Only administrators may use this command.</span>"
@@ -29,7 +29,7 @@ var/silent_ert = 0
 	if(alert("Do you want this Response Team to be announced?",,"Yes","No") != "Yes")
 		silent_ert = 1
 	if(get_security_level() != "red") // Allow admins to reconsider if the alert level isn't Red
-		switch(alert("The station is not in red alert. Do you still want to dispatch a response team?",,"Yes","No"))
+		switch(alert("The city is not in red alert. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
 	if(send_emergency_team)
@@ -53,7 +53,7 @@ client/verb/JoinResponseTeam()
 		if(!send_emergency_team)
 			usr << "No emergency response team is currently being sent."
 			return
-		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
+		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Police Officer"))
 			usr << "<span class='danger'>You are jobbanned from the emergency reponse team!</span>"
 			return
 		if(ert.current_antagonists.len >= ert.hard_cap)

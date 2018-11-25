@@ -19,32 +19,32 @@
 /datum/gear/head/beret/bsec
 	display_name = "beret, navy (officer)"
 	path = /obj/item/clothing/head/beret/sec/navy/officer
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Police Officer","Chief of Police","Prison Warden")
 
 /datum/gear/head/beret/bsec_warden
 	display_name = "beret, navy (warden)"
 	path = /obj/item/clothing/head/beret/sec/navy/warden
-	allowed_roles = list("Head of Security","Warden")
+	allowed_roles = list("Chief of Police","Prison Warden")
 
 /datum/gear/head/beret/bsec_hos
 	display_name = "beret, navy (hos)"
 	path = /obj/item/clothing/head/beret/sec/navy/hos
-	allowed_roles = list("Head of Security")
+	allowed_roles = list("Chief of Police")
 
 /datum/gear/head/beret/csec
 	display_name = "beret, corporate (officer)"
 	path = /obj/item/clothing/head/beret/sec/corporate/officer
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Police Officer","Chief of Police","Prison Warden")
 
 /datum/gear/head/beret/csec_warden
 	display_name = "beret, corporate (warden)"
 	path = /obj/item/clothing/head/beret/sec/corporate/warden
-	allowed_roles = list("Head of Security","Warden")
+	allowed_roles = list("Chief of Police","Prison Warden")
 
 /datum/gear/head/beret/csec_hos
 	display_name = "beret, corporate (hos)"
 	path = /obj/item/clothing/head/beret/sec/corporate/hos
-	allowed_roles = list("Head of Security")
+	allowed_roles = list("Chief of Police")
 
 /datum/gear/head/beret/eng
 	display_name = "beret, engie-orange"
@@ -57,7 +57,7 @@
 /datum/gear/head/beret/sec
 	display_name = "beret, red (security)"
 	path = /obj/item/clothing/head/beret/sec
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Police Officer","Chief of Police","Prison Warden")
 
 /datum/gear/head/cap
 	display_name = "cap, black"
@@ -78,7 +78,7 @@
 /datum/gear/head/cap/corp
 	display_name = "cap, corporate (Security)"
 	path = /obj/item/clothing/head/soft/sec/corp
-	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
+	allowed_roles = list("Police Officer","Chief of Police","Prison Warden", "Detective")
 
 /datum/gear/head/cap/green
 	display_name = "cap, green"
@@ -107,7 +107,7 @@
 /datum/gear/head/cap/sec
 	display_name = "cap, security (Security)"
 	path = /obj/item/clothing/head/soft/sec
-	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
+	allowed_roles = list("Police Officer","Chief of Police","Prison Warden", "Detective")
 
 /datum/gear/head/cap/yellow
 	display_name = "cap, yellow"
@@ -262,7 +262,7 @@
 /datum/gear/head/taqiyah/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
-
+/*
 /datum/gear/head/kitty
 	display_name = "kitty ears"
 	path = /obj/item/clothing/head/kitty
@@ -270,7 +270,7 @@
 /datum/gear/head/rabbit
 	display_name = "rabbit ears"
 	path = /obj/item/clothing/head/rabbitears
-
+*/
 /datum/gear/head/beanie
 	display_name = "beanie"
 	path = /obj/item/clothing/head/beanie
@@ -319,27 +319,27 @@
 	display_name = "welding, normal (engineering/robotics)"
 	path = /obj/item/clothing/head/welding
 	cost = 2
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Firefighter","Research Director","Roboticist")
 
 /datum/gear/head/welding/demon
 	display_name = "welding, demon (engineering/robotics)"
 	path = /obj/item/clothing/head/welding/demon
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Firefighter","Research Director","Roboticist")
 
 /datum/gear/head/welding/knight
 	display_name = "welding, knight (engineering/robotics)"
 	path = /obj/item/clothing/head/welding/knight
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Firefighter","Research Director","Roboticist")
 
 /datum/gear/head/welding/fancy
 	display_name = "welding, fancy (engineering/robotics)"
 	path = /obj/item/clothing/head/welding/fancy
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Firefighter","Research Director","Roboticist")
 
 /datum/gear/head/welding/engie
 	display_name = "welding, engie (engineering/robotics)"
 	path = /obj/item/clothing/head/welding/engie
-	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+	allowed_roles = list("Chief Engineer","Station Engineer","Firefighter","Research Director","Roboticist")
 
 /datum/gear/head/beret/sol
 	display_name = "beret sol, selection"

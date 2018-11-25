@@ -1,4 +1,4 @@
-/*
+
 /datum/species/human/gravworlder
 	name = "grav-adapted Human"
 	name_plural = "grav-adapted Humans"
@@ -14,9 +14,9 @@
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
-*/
 
-/*
+
+
 /datum/species/human/spacer
 	name = "space-adapted Human"
 	name_plural = "space-adapted Humans"
@@ -30,7 +30,7 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
-*/
+
 
 /datum/species/human/vatgrown
 	name = SPECIES_HUMAN_VATBORN
@@ -74,7 +74,8 @@
 	total_health = 85
 	economic_modifier = 1
 	icon_scale = 0.9
-
+	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
+	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
 
 /datum/species/human/child
 	name = "Human Child"
@@ -91,3 +92,5 @@
 	total_health = 50
 	economic_modifier = 0.2
 	icon_scale = 0.75
+	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
+	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'

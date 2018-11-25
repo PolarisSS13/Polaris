@@ -77,15 +77,20 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.incapacitated()) return
+	var/mob/user = usr
+	if(!istype(user))
+		to_chat(usr, "You can't do this!")
+		return
+
+	if(user.incapacitated()) return
 
 	if(kickstand)
-		src.visible_message("You put up \the [src]'s kickstand.")
+		user.visible_message("[user] puts up [src]'s kickstand.", "You put up [src]'s kickstand")
 	else
 		if(istype(src.loc,/turf/space) || istype(src.loc, /turf/simulated/floor/water))
-			to_chat(usr, "<span class='warning'> You don't think kickstands work here...</span>")
+			to_chat(user, "<span class='warning'> You don't think kickstands work here...</span>")
 			return
-		src.visible_message("You put down \the [src]'s kickstand.")
+		user.visible_message("[user] puts down [src]'s kickstand.", "You put down [src]'s kickstand.")
 		if(pulledby)
 			pulledby.stop_pulling()
 

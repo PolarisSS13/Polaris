@@ -4,7 +4,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "sheater0"
 	name = "space heater"
-	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set the station on fire."
+	desc = "Made by Space Amish using traditional space techniques, this heater is guaranteed not to set the city on fire."
 	var/obj/item/weapon/cell/cell
 	var/cell_type = /obj/item/weapon/cell/high
 	var/on = 0

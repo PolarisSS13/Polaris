@@ -1,5 +1,5 @@
 /obj/vehicle/car //vroom vroom.
-	name = "electric all terrain vehicle"
+	name = "motor car"
 	desc = "A ridable electric ATV designed for all terrain. Except space."
 	icon = 'icons/vehicles/car.dmi'
 	icon_state = "sportscar"
@@ -8,38 +8,62 @@
 	locked = 0
 	var/key_type = /obj/item/weapon/key/quadbike
 	var/obj/item/weapon/key/key
-	pixel_x = -16
 	var/riding_datum_type = /datum/riding/car
+	pixel_x = -16
 	move_delay = 0
+	move_speed = 0.1
+	max_buckled_mobs = 2
+	paint_color = "#ffffff"
 	var/frame_state = "sportscar" //Custom-item proofing!
 	var/custom_frame = FALSE
 	var/cooldowntime
 	var/spam_flag = 0
 	var/horn_sound = 'sound/vehicles/car_horn.ogg'
-	max_buckled_mobs = 2
-	paint_color = "#ffffff"
 	var/engine_start = 'sound/vehicles/ignition.ogg'
 	var/engine_fail = 'sound/vehicles/wontstart.ogg'
 	var/land_speed = 0.5
 	var/space_speed = 0 //if 0 it can't go in space
+
+//license is generated via "[license code] - [license number]"
+	var/license_code = "GEM"
+	var/license_number = 100
+	var/license_plate_no
+	var/has_license = 1
+
+
 
 /obj/vehicle/car/New()
 	riding_datum = new riding_datum_type(src)
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new key_type(src)
 	turn_off()
+	generate_license()
 
-/obj/vehicle/car/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/car/proc/generate_license()
+
+	license_number = rand(100, 999)
+	license_plate_no = "[license_code]-[license_number]"
+
+/obj/vehicle/car/examine(mob/user)
+	if(has_license)
+		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
+	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
+	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
+
+/obj/vehicle/car/attackby(obj/item/weapon/pen/crayon/spraycan/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen/crayon/spraycan))
-		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
-		if(new_paint)
-			user << "You start painting the [src]."
-			playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
-			do_after(user, 50)
-			add_fingerprint(user)
-			paint_color = new_paint
-			update_icon()
-			return
+		if(W.capped)
+			user << "The spraycan is still capped! Uncap it first."
+		else
+			var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
+			if(new_paint)
+				user << "You start painting the [src]."
+				playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
+				do_after(user, 50)
+				add_fingerprint(user)
+				paint_color = new_paint
+				update_icon()
+				return
 	..()
 
 /obj/vehicle/car/random/New()
@@ -95,15 +119,17 @@
 
 
 /obj/vehicle/car/Move(var/turf/destination)
+	..() //Move it move it, so we can test it test it.
+
 	if(on && (!cell || cell.charge < charge_use))
 		turn_off()
 		visible_message("<span class='warning'>\The [src] whines, before its engines wind down.</span>")
 		return 0
 
-	//these things like space, not turf. Dragging shouldn't weigh you down.
-	if(on && cell)
-		cell.use(charge_use)
+	if(!on)
+		return
 
+/*
 	if(istype(destination,/turf/space) || istype(destination, /turf/simulated/floor/water) || pulledby)
 		if(!space_speed)
 			return 0
@@ -112,8 +138,8 @@
 		if(!land_speed)
 			return 0
 		move_delay = land_speed
-	return ..()
-
+	return
+*/
 
 //Load the object "inside" the trolley and add an overlay of it.
 //This prevents the object from being interacted with until it has
@@ -171,7 +197,5 @@
 		return TRUE
 
 /obj/vehicle/car/proc/honk_horn()
-	if(on)
-		playsound(src, horn_sound,40,1)
-	else
-		return
+
+	playsound(src, horn_sound,40,1)

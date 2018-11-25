@@ -264,7 +264,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "Frame [target.current.real_name], the [target.assigned_role] for a crime and make sure they are arrested and brought back to the CentCom station alive.  We'll handle the rest from there."
+				explanation_text = "Frame [target.current.real_name], the [target.assigned_role] for a crime and make sure they are arrested."
 
 			check_completion()
 				if(!emergency_shuttle.returned())
@@ -310,7 +310,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] mercenary [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the station safely, while minimizing intervention."
+				explanation_text = "[target.current.real_name], the [target.assigned_role] is a [pick("relative of a","friend of a","") + pick("high ranking","important","well-liked")] mercenary [pick("Leader","Officer","Agent","sympathiser")].  Make sure they get off the city safely, while minimizing intervention."
 
 			check_completion()
 				if(!emergency_shuttle.returned())
@@ -750,7 +750,7 @@ datum
 
 			blueprints
 				steal_target = /obj/item/blueprints
-				explanation_text = "Steal the station's blueprints."
+				explanation_text = "Steal the city's blueprints."
 				weight = 20
 
 				get_points(var/job)
@@ -797,7 +797,7 @@ datum
 
 			nuke_disk
 				steal_target = /obj/item/weapon/disk/nuclear
-				explanation_text = "Steal the station's nuclear authentication disk."
+				explanation_text = "Steal the city's nuclear authentication disk."
 				weight = 20
 
 				get_points(var/job)
@@ -1220,7 +1220,7 @@ datum
 
 
 		nuclear
-			explanation_text = "Destroy the station with a nuclear device."
+			explanation_text = "Destroy the city with a nuclear device."
 
 
 		block
@@ -1408,7 +1408,7 @@ datum
 					var/turf/T = get_turf(target.current)
 					if(target.current.stat == 2)
 						return 1
-					else if((T) && (isNotStationLevel(T.z)))//If they leave the station they count as dead for this
+					else if((T) && (isNotStationLevel(T.z)))//If they leave the city they count as dead for this
 						return 2
 					else
 						return 0
@@ -1454,7 +1454,7 @@ datum
 				return 1
 
 datum/objective/silence
-	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
+	explanation_text = "Do not allow anyone to escape the city.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
 
 	check_completion()
 		if(!emergency_shuttle.returned())
