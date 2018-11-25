@@ -10,6 +10,7 @@
 	active_power_usage = 5
 	surgery_odds = 100
 	throwpass = 1
+	unacidable = 1 //No more melting tables when operating on a zombie
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
