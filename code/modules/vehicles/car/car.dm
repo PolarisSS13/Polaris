@@ -38,6 +38,22 @@
 	key = new key_type(src)
 	turn_off()
 	generate_license()
+	update_icon()
+
+/obj/vehicle/car/turn_on()
+	if(!mechanical || stat)
+		return FALSE
+	if(powered && cell.charge < charge_use)
+		return FALSE
+	on = 1
+	set_light(initial(light_range))
+	return TRUE
+
+/obj/vehicle/car/turn_off()
+	if(!mechanical)
+		return FALSE
+	on = 0
+	set_light(0)
 
 /obj/vehicle/car/proc/generate_license()
 
@@ -55,15 +71,16 @@
 		if(W.capped)
 			user << "The spraycan is still capped! Uncap it first."
 		else
-			var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
-			if(new_paint)
-				user << "You start painting the [src]."
-				playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
-				do_after(user, 50)
-				add_fingerprint(user)
-				paint_color = new_paint
-				update_icon()
-				return
+			var/car_color = W.colour
+			user << "You start painting the [src]."
+			playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
+			do_after(user, 50)
+			add_fingerprint(user)
+			paint_color = car_color
+			if(W.uses)
+				W.uses--
+			update_icon()
+			return
 	..()
 
 /obj/vehicle/car/random/New()
@@ -113,33 +130,6 @@
 	if(!istype(L)) // Only mobs on boats.
 		return FALSE
 	..(L, user)
-
-
-
-
-
-/obj/vehicle/car/Move(var/turf/destination)
-	..() //Move it move it, so we can test it test it.
-
-	if(on && (!cell || cell.charge < charge_use))
-		turn_off()
-		visible_message("<span class='warning'>\The [src] whines, before its engines wind down.</span>")
-		return 0
-
-	if(!on)
-		return
-
-/*
-	if(istype(destination,/turf/space) || istype(destination, /turf/simulated/floor/water) || pulledby)
-		if(!space_speed)
-			return 0
-		move_delay = space_speed
-	else
-		if(!land_speed)
-			return 0
-		move_delay = land_speed
-	return
-*/
 
 //Load the object "inside" the trolley and add an overlay of it.
 //This prevents the object from being interacted with until it has
