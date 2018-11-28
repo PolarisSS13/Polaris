@@ -42,7 +42,7 @@
 // So players can toggle it too.
 /mob/living/simple_mob/mechanical/mecha/combat/durand/verb/toggle_defense_mode()
 	set name = "Toggle Defense Mode"
-	set desc = "Toggles a special mode which makes you unable to move but become more resilient."
+	set desc = "Toggles a special mode which makes you immobile and much more resilient."
 	set category = "Abilities"
 
 	set_defense_mode(!defense_mode)

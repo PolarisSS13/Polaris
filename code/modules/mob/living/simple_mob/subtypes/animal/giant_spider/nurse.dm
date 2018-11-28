@@ -192,3 +192,39 @@
 	icon_state = "nursemed"
 	icon_living = "nursemed"
 	icon_dead = "nursemed_dead"
+
+
+// The AI for nurse spiders. Wraps things in webs by 'attacking' them.
+/datum/ai_holder/simple_mob/melee/nurse_spider
+	wander = TRUE
+	base_wander_delay = 8
+	cooperative = FALSE // So we don't ask our spider friends to attack things we're webbing. This might also make them stay at the base if their friends find tasty explorers.
+
+// Get us unachored objects as an option as well.
+/datum/ai_holder/simple_mob/melee/nurse_spider/list_targets()
+	. = ..()
+
+	var/static/alternative_targets = typecacheof(list(/obj/item, /obj/structure))
+
+	for(var/AT in typecache_filter_list(range(vision_range, holder), alternative_targets))
+		var/obj/O = AT
+		if(can_see(holder, O, vision_range) && !O.anchored)
+			. += O
+
+// Select an obj if no mobs are around.
+/datum/ai_holder/melee/nurse_spider/pick_target(list/targets)
+	var/mobs_only = locate(/mob/living) in targets // If a mob is in the list of targets, then ignore objects.
+	if(mobs_only)
+		for(var/A in targets)
+			if(!isliving(A))
+				targets -= A
+
+	return ..(targets)
+
+/datum/ai_holder/simple_mob/melee/nurse_spider/can_attack(atom/movable/the_target)
+	. = ..()
+	if(!.) // Parent returned FALSE.
+		if(istype(the_target, /obj))
+			var/obj/O = the_target
+			if(!O.anchored)
+				return TRUE

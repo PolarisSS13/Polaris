@@ -83,3 +83,20 @@
 			visible_message(span("danger", "\The [src] hurls \the [L] away!"))
 		else
 			visible_message(span("danger", "\The [src] crushes \the [L]!"))
+
+// The AI for hooligan crabs. Follows people for awhile.
+/datum/ai_holder/simple_mob/melee/hooligan
+	hostile = FALSE
+	retaliate = TRUE
+	returns_home = TRUE
+	max_home_distance = 12
+	var/random_follow = TRUE // Turn off if you want to bus with crabs.
+
+/datum/ai_holder/simple_mob/melee/hooligan/handle_stance_strategical()
+	..()
+	if(random_follow && stance == STANCE_IDLE && !leader)
+		if(prob(10))
+			for(var/mob/living/L in hearers(holder))
+				if(!istype(L, holder)) // Don't follow other hooligan crabs.
+					holder.visible_message("<span class='notice'>\The [holder] starts to follow \the [L].</span>")
+					set_follow(L, rand(20 SECONDS, 40 SECONDS))

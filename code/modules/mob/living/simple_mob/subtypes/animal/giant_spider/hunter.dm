@@ -98,3 +98,68 @@
 //		visible_message("<span class='warning'>\The [src] seizes \the [victim] aggressively!</span>")
 //		do_attack_animation(victim)
 
+
+// This AI would've isolated people it stuns with its 'leap' attack, by dragging them away.
+/datum/ai_holder/simple_mob/melee/hunter_spider
+
+/*
+
+/datum/ai_holder/simple_mob/melee/hunter_spider/post_special_attack(mob/living/L)
+	drag_away(L)
+
+// Called after a successful leap.
+/datum/ai_holder/simple_mob/melee/hunter_spider/proc/drag_away(mob/living/L)
+	world << "Doing drag_away attack on [L]"
+	if(!istype(L))
+		world << "Invalid type."
+		return FALSE
+
+	// If they didn't get stunned, then don't bother.
+	if(!L.incapacitated(INCAPACITATION_DISABLED))
+		world << "Not incapcitated."
+		return FALSE
+
+	// Grab them.
+	if(!holder.start_pulling(L))
+		world << "Failed to pull."
+		return FALSE
+
+	holder.visible_message(span("danger","\The [holder] starts to drag \the [L] away!"))
+
+	var/list/allies = list()
+	var/list/enemies = list()
+	for(var/mob/living/thing in hearers(vision_range, holder))
+		if(thing == holder || thing == L) // Don't count ourselves or the thing we just started pulling.
+			continue
+		if(holder.IIsAlly(thing))
+			allies += thing
+		else
+			enemies += thing
+
+	// First priority: Move our victim to our friends.
+	if(allies.len)
+		world << "Going to move to ally"
+		give_destination(get_turf(pick(allies)), min_distance = 2, combat = TRUE) // This will switch our stance.
+
+	// Second priority: Move our victim away from their friends.
+	// There's a chance of it derping and pulling towards enemies if there's more than two people.
+	// Preventing that will likely be both a lot of effort for developers and the CPU.
+	else if(enemies.len)
+		world << "Going to move away from enemies"
+		var/mob/living/hostile = pick(enemies)
+		var/turf/move_to = get_turf(hostile)
+		for(var/i = 1 to vision_range) // Move them this many steps away from their friend.
+			move_to = get_step_away(move_to, L, 7)
+		if(move_to)
+			give_destination(move_to, min_distance = 2, combat = TRUE) // This will switch our stance.
+
+	// Third priority: Move our victim SOMEWHERE away from where they were.
+	else
+		world << "Going to move away randomly"
+		var/turf/move_to = get_turf(L)
+		move_to = get_step(move_to, pick(cardinal))
+		for(var/i = 1 to vision_range) // Move them this many steps away from where they were before.
+			move_to = get_step_away(move_to, L, 7)
+		if(move_to)
+			give_destination(move_to, min_distance = 2, combat = TRUE) // This will switch our stance.
+*/

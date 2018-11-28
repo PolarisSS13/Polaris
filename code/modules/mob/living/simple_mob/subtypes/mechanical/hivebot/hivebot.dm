@@ -46,3 +46,9 @@
 	health = 1 LASERS_TO_KILL
 	melee_damage_lower = 8
 	melee_damage_upper = 8
+
+/datum/ai_holder/simple_mob/hivebot
+	pointblank = TRUE
+	conserve_ammo = TRUE
+	firing_lanes = TRUE
+	can_flee = FALSE // Fearless dumb machines.

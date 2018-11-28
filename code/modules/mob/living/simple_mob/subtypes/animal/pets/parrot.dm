@@ -11,6 +11,7 @@
 	// If set to a type, on initialize it will be instantiated into that type.
 	var/obj/item/device/radio/headset/my_headset = null
 
+// Say list
 /datum/say_list/bird/poly
 	speak = list(
 		"Poly wanna cracker!",
@@ -237,3 +238,15 @@
 	icon_rest = "mtoo-held"
 	icon_dead = "mtoo-dead"
 	tt_desc = "E Lophochroa leadbeateri"
+
+
+// AI
+/datum/ai_holder/simple_mob/passive/parrot
+	speak_chance = 2
+	base_wander_delay = 8
+
+/datum/ai_holder/simple_mob/passive/parrot/on_hear_say(mob/living/speaker, message)
+	if(holder.stat || !holder.say_list || !message || speaker == holder)
+		return
+	var/datum/say_list/S = holder.say_list
+	S.speak |= message

@@ -53,7 +53,7 @@
 
 	player_msg = "You can fire an icicle projectile every two seconds. It hits hard, and armor has a hard time resisting it.<br>\
 	You are also immune to the cold, and you cause enemies around you to suffer periodic harm from the cold, if unprotected.<br>\
-	Unprotected enemies are also Chilled, making them slower, less evasive, and to suffer disabling effects for longer."
+	Unprotected enemies are also Chilled, making them slower and less evasive, and disabling effects last longer."
 
 /obj/item/projectile/icicle
 	name = "icicle"

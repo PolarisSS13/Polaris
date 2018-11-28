@@ -50,25 +50,17 @@
 
 /mob/living/simple_mob/mechanical/ward/monitor/proc/detect_mobs()
 	var/last_seen_mobs_len = seen_mobs.len
-	var/list/things_in_sight = view(view_range, src)
+	var/list/mobs_nearby = hearers(view_range, src)
 	var/list/newly_seen_mobs = list()
-	for(var/mob/living/L in things_in_sight)
+	for(var/mob/living/L in mobs_nearby)
 		if(L == src) // Don't detect ourselves.
 			continue
 
 		if(L.stat) // Dead mobs aren't concerning.
 			continue
 
-		if(owner)
-			if(L == owner) // Don't yell at our owner for seeing them.
-				continue
-
-			if(L.IIsAlly(owner)) // Don't yell if they're friendly to our owner.
-				continue
-
-		else
-			if(src.IIsAlly(L))
-				continue
+		if(src.IIsAlly(L))
+			continue
 
 		// Decloak them .
 		if(L.is_cloaked())
@@ -84,15 +76,31 @@
 		if(!(L in seen_mobs))
 			seen_mobs += L
 			newly_seen_mobs += L
-			if(owner)
-				to_chat(owner, span("notice", "Your [src.name] at [get_area(src)] detected [english_list(newly_seen_mobs)]."))
+
+	if(newly_seen_mobs.len && owner) // Yell at our owner if someone new shows up.
+		to_chat(owner, span("notice", "Your [src.name] at [get_area(src)] detected [english_list(newly_seen_mobs)]."))
 
 	// Now get rid of old mobs that left vision.
 	for(var/thing in seen_mobs)
-		if(!(thing in things_in_sight))
+		if(!(thing in mobs_nearby))
 			seen_mobs -= thing
 
 	// Check if we need to update icon.
 	if(seen_mobs.len != last_seen_mobs_len)
 		update_icon()
-	last_seen_mobs_len = seen_mobs.len
+
+
+// Can't attack but calls for help. Used by the monitor and spotter wards.
+// Special attacks are not blocked since they might be used for things besides attacking, and can be conditional.
+/datum/ai_holder/simple_mob/monitor
+	hostile = TRUE // Required to call for help.
+	cooperative = TRUE
+	stand_ground = TRUE // So it doesn't run up to the thing it sees.
+	wander = FALSE
+	can_flee = FALSE
+
+/datum/ai_holder/simple_mob/monitor/melee_attack(atom/A)
+	return FALSE
+
+/datum/ai_holder/simple_mob/monitor/ranged_attack(atom/A)
+	return FALSE

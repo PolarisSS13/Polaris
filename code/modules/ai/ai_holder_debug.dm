@@ -14,14 +14,6 @@
 
 	var/debug_ai = AI_LOG_OFF						// The level of debugging information to display to people who can see log_debug().
 
-/*
-#define AI_LOG_OFF		0 // Don't show anything.
-#define AI_LOG_ERROR	1 // Show logs of things likely causing the mob to not be functioning correctly.
-#define AI_LOG_WARNING	2 // Show less serious but still helpful to know issues that might be causing things to work incorrectly.
-#define AI_LOG_INFO		3 // Important regular events, like selecting a target or switching stances.
-#define AI_LOG_DEBUG	4 // More detailed information about the flow of execution.
-#define AI_LOG_TRACE	5 // Even more detailed than the last.
-*/
 /datum/ai_holder/New()
 	..()
 	path_overlay = new(path_icon,path_icon_state)
@@ -85,19 +77,7 @@
 	last_turf_display = TRUE
 	debug_ai = AI_LOG_INFO
 
-/datum/ai_holder/test
-	hostile = TRUE
-	use_astar = TRUE
-
-/datum/ai_holder/hostile/ranged
-//	ranged = TRUE
-	cooperative = TRUE
-	firing_lanes = TRUE
-	conserve_ammo = TRUE
-	threaten = TRUE
-	wander = TRUE
-
-/datum/ai_holder/hostile/ranged/debug
+/datum/ai_holder/hostile/debug
 	wander = FALSE
 	conserve_ammo = FALSE
 	intelligence_level = AI_SMART
@@ -107,6 +87,3 @@
 	last_turf_display = TRUE
 	debug_ai = AI_LOG_INFO
 
-/datum/ai_holder/hostile/ranged/robust/on_engagement(atom/movable/AM)
-	step_rand(holder)
-	holder.face_atom(AM)

@@ -178,3 +178,84 @@
 /obj/effect/temporary_effect/pulse/microsingulo/on_pulse()
 	for(var/atom/A in range(pull_radius, src))
 		A.singularity_pull(src, pull_strength)
+
+
+// The Advanced Dark Gygax's AI.
+// The mob has three special attacks, based on the current intent.
+// This AI choose the appropiate intent for the situation, and tries to ensure it doesn't kill itself by firing missiles at its feet.
+/datum/ai_holder/simple_mob/intentional/adv_dark_gygax
+	conserve_ammo = TRUE					// Might help avoid 'I shoot the wall forever' cheese.
+	var/closest_desired_distance = 1		// Otherwise run up to them to be able to potentially shock or punch them.
+
+	var/electric_defense_radius = 3			// How big to assume electric defense's area is.
+	var/microsingulo_radius = 3				// Same but for microsingulo pull.
+	var/rocket_explosive_radius = 2			// Explosion radius for the rockets.
+
+	var/electric_defense_threshold = 2		// How many non-targeted people are needed in close proximity before electric defense is viable.
+	var/microsingulo_threshold = 2			// Similar to above, but uses an area around the target.
+
+// Used to control the mob's positioning based on which special attack it has done.
+// Note that the intent will not change again until the next special attack is about to happen.
+/datum/ai_holder/simple_mob/intentional/adv_dark_gygax/on_engagement(atom/A)
+	// Make the AI backpeddle if using an AoE special attack.
+	var/list/risky_intents = list(I_GRAB, I_HURT) // Mini-singulo and missiles.
+	if(holder.a_intent in risky_intents)
+		var/closest_distance = 1
+		switch(holder.a_intent) // Plus one just in case.
+			if(I_HURT)
+				closest_distance = rocket_explosive_radius + 1
+			if(I_GRAB)
+				closest_distance = microsingulo_radius + 1
+
+		if(get_dist(holder, A) <= closest_distance)
+			holder.IMove(get_step_away(holder, A, closest_distance))
+
+	// Otherwise get up close and personal.
+	else if(get_dist(holder, A) > closest_desired_distance)
+		holder.IMove(get_step_towards(holder, A))
+
+// Changes the mob's intent, which controls which special attack is used.
+// I_DISARM causes Electric Defense, I_GRAB causes Micro-Singularity, and I_HURT causes Missile Barrage.
+/datum/ai_holder/simple_mob/intentional/adv_dark_gygax/pre_special_attack(atom/A)
+	if(isliving(A))
+		var/mob/living/target = A
+
+		// If we're surrounded, Electric Defense will quickly fix that.
+		var/tally = 0
+		var/list/potential_targets = list_targets() // Returns list of mobs and certain objects like mechs and turrets.
+		for(var/atom/movable/AM in potential_targets)
+			if(get_dist(holder, AM) > electric_defense_radius)
+				continue
+			if(!can_attack(AM))
+				continue
+			tally++
+
+		// Should we shock them?
+		if(tally >= electric_defense_threshold || get_dist(target, holder) <= electric_defense_radius)
+			holder.a_intent = I_DISARM
+			return
+
+		// Otherwise they're a fair distance away and we're not getting mobbed up close.
+		// See if we should use missiles or microsingulo.
+		tally = 0 // Let's recycle the var.
+		for(var/atom/movable/AM in potential_targets)
+			if(get_dist(target, AM) > microsingulo_radius) // Deliberately tests distance between target and nearby targets and not the holder.
+				continue
+			if(!can_attack(AM))
+				continue
+			if(AM.anchored) // Microsingulo doesn't do anything to anchored things.
+				tally--
+			else
+				tally++
+
+		// Lots of people means minisingulo would be more useful.
+		if(tally >= microsingulo_threshold)
+			holder.a_intent = I_GRAB
+		else // Otherwise use rockets.
+			holder.a_intent = I_HURT
+
+	else
+		if(get_dist(holder, A) >= rocket_explosive_radius + 1)
+			holder.a_intent = I_HURT // Fire rockets if it's an obj/turf.
+		else
+			holder.a_intent = I_DISARM // Electricity might not work but it's safe up close.

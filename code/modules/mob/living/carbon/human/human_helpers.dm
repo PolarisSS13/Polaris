@@ -43,15 +43,14 @@
 				cloaker.deactivate()
 
 /mob/living/carbon/human/is_cloaked()
-	if(mind && mind.changeling) // Ling camo.
-		return mind.changeling.cloaked
+	if(mind && mind.changeling && mind.changeling.cloaked) // Ling camo.
+		return TRUE
 	else if(istype(back, /obj/item/weapon/rig)) //Ninja cloak
 		var/obj/item/weapon/rig/suit = back
 		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
 			if(cloaker.active)
 				return TRUE
-	else
-		return ..()
+	return ..()
 
 /mob/living/carbon/human/get_ear_protection()
 	var/sum = 0

@@ -9,7 +9,6 @@
 	var/last_threaten_time = null		// Ditto but only for threats.
 
 	var/speak_chance = 0				// Probability that the mob talks (this is 'X in 200' chance since even 1/100 is pretty noisy)
-	var/reacts = 0						// Reacts to some things being said.
 
 
 /datum/ai_holder/proc/should_threaten()
