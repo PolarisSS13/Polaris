@@ -22,7 +22,8 @@
 	cost = 10
 
 /datum/gear/contraband/ammo/zipgun
-	display_name = "Box filled with 12g shells"
+	display_name = "12g shells"
 	description = "Home-made pellets of death and destruction in an incospicuous box"
 	path = /obj/item/weapon/storage/box/shotgunammo/contraband
+	sort_category = "Contraband"
 	cost = 8
