@@ -751,6 +751,53 @@
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
+		if("flip")
+			m_type = 1
+			if (!src.restrained())
+				message = "performs an amazing, gravity-defying backflip before landing skillfully back to the ground."
+				playsound(src.loc, 'sound/effects/bodyfall4.ogg', 50, 1)
+				src.SpinAnimation(7,1)
+			else
+				to_chat(usr, "You can't quite do something as difficult as a backflip while so... restricted.")
+
+		if("spin")
+			m_type = 1
+			if (!src.restrained())
+				message = "spins in a dance smoothly on their feet. Wow!"
+				src.spin(20, 1)
+			else
+				to_chat(usr, "You can't quite do something as difficult as a spin while so... restricted.")
+
+		if("floorspin")
+			m_type = 1
+			if (!src.restrained())
+				message = "gets down on the floor and spins their entire body around!"
+				spawn(0)
+					for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+						set_dir(i)
+						sleep(1)
+				src.SpinAnimation(20,1)
+			else
+				to_chat(usr, "You can't quite do something as difficult as a spin while so... restricted.")
+
+		if("sidestep")
+			m_type = 1
+			if (!src.restrained())
+				message = "steps rhymatically and conservatively as they move side to side."
+				playsound(src.loc, 'sound/effects/bodyfall4.ogg', 50, 1)
+				var/default_pixel_x = initial(pixel_x)
+				var/default_pixel_y = initial(pixel_y)
+				default_pixel_x = src.default_pixel_x
+				default_pixel_y = src.default_pixel_y
+
+				animate(src, pixel_x = 5, time = 20)
+				sleep(3)
+				animate(src, pixel_x = -5, time = 20)
+				animate(pixel_x = default_pixel_x, pixel_y = default_pixel_y, time = 2)
+			else
+				to_chat(usr, "Sidestepping sure seems unachieveable when you're this restricted.")
+
+
 		if ("help")
 			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, deathgasp, drool, eyebrow, fastsway/qwag, \
 					frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, \

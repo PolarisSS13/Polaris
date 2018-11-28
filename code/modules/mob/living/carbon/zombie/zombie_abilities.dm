@@ -12,7 +12,7 @@
 		if(!isundead(C))
 			return 0
 		C << "<span class='notice'>The parasitic entity inside you begins knitting your decomposing form back together. This will take <b>three and a half minutes</b>.</span>"
-		do_after(C, 210)
+		do_after(C, 2100)
 
 
 		C.tod = null

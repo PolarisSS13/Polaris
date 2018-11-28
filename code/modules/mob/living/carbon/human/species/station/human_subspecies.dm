@@ -68,7 +68,7 @@
 	blurb = "A young human which is currently too young to participate in civil powers such as voting or official positions but can legally work in many fields on a reduced wage."
 	metabolic_rate = 1.15 // You know, puberty. Hormones. Growing.
 	blood_volume = 480
-	slowdown = -0.3
+	slowdown = -0.1
 	min_age = 13
 	max_age = 17
 	total_health = 85
@@ -86,7 +86,7 @@
 	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	blood_volume = 300
-	slowdown = -0.5
+	slowdown = -0.3
 	min_age = 8
 	max_age = 12
 	total_health = 50

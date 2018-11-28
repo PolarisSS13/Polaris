@@ -113,7 +113,7 @@
 /datum/unarmed_attack/bite/zombie
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
+	shredding = 1
 	sharp = 1
 	edge = 1
 
