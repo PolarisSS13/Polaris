@@ -1198,3 +1198,6 @@ default behaviour is:
 
 /mob/living/proc/make_hud_overlays()
 	return
+
+/mob/living/proc/has_vision()
+	return !(eye_blind || (disabilities & BLIND) || stat || blinded)

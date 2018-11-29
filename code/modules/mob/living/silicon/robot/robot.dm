@@ -653,6 +653,8 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			attack_generic(H, rand(30,50), "slashed")
+			playsound(user.loc, 'sound/effects/sparks6.ogg', 50, 1)
+			src.spark_system.start()
 			return
 
 	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
