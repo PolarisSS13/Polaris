@@ -299,12 +299,13 @@
 	R.fields["id"] = id
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
-	R.fields["mi_crim"]		= "None"
-	R.fields["mi_crim_d"]	= "No minor crime convictions."
-	R.fields["ma_crim"]		= "None"
-	R.fields["ma_crim_d"]	= "No major crime convictions."
+	R.fields["pre_con"]		= "None"
+	R.fields["pre_con_d"]	= "No previous crime convictions."
+	R.fields["warn"]		= "None"
+	R.fields["warn_d"]	= "No warnings."
+	R.fields["injunc"]	= "None."
+	R.fields["injunc_d"]	= "No injunctions."
 	R.fields["notes"]		= "No notes."
-	R.fields["notes"] = "No notes."
 	data_core.security += R
 
 	return R

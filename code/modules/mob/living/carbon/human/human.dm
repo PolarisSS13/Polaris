@@ -405,7 +405,7 @@
 						for (var/datum/data/record/R in data_core.security)
 							if (R.fields["id"] == E.fields["id"])
 
-								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
+								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "*Search*", "On Official Watch", "Incarcerated", "Parolled", "Cancel")
 
 								if(hasHUD(usr, "security"))
 									if(setcriminal != "Cancel")
@@ -440,10 +440,12 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
-								usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
-								usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
-								usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
+								usr << "<b>Previous Convictions:</b> [R.fields["pre_con"]]"
+								usr << "<b>Details:</b> [R.fields["pre_con_d"]]"
+								usr << "<b>Warnings:</b> [R.fields["warn"]]"
+								usr << "<b>Details:</b> [R.fields["warn_d"]]"
+								usr << "<b>Injunctions:</b> [R.fields["injunc"]]"
+								usr << "<b>Details:</b> [R.fields["injunc_d"]]"
 								usr << "<b>Notes:</b> [R.fields["notes"]]"
 								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1

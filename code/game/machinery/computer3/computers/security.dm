@@ -101,17 +101,19 @@
 							var/background
 							switch(crimstat)
 								if("*Arrest*")
-									background = "'background-color:#DC143C;'"
+									background = "'background-color:#C51616;'"
+								if ("*Search*")
+									background = "'background-color:#C8BB24;'"
+								if ("On Official Watch")
+									background = "'background-color:#061EA5;'"
 								if("Incarcerated")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#C65E16;'"
 								if("Parolled")
-									background = "'background-color:#CD853F;'"
-								if("Released")
-									background = "'background-color:#3BB9FF;'"
+									background = "'background-color:#4B08BF;'"
 								if("None")
-									background = "'background-color:#00FF00;'"
+									background = "'background-color:#1C8001;'"
 								if("")
-									background = "'background-color:#00FF7F;'"
+									background = "'background-color:#1C8001;'"
 									crimstat = "No Record."
 							dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 							dat += text("<td>[]</td>", R.fields["id"])
@@ -135,9 +137,11 @@
 							Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
 							ID: <A href='?src=\ref[src];choice=Edit Field;field=id'>[active1.fields["id"]]</A><BR>\n	\
 							Entity Classification: <A href='?src=\ref[src];field=brain_type'>[active1.fields["brain_type"]]</A><BR>\n	\
+							Citizenship: <A href='?src=\ref[src];field=citizenship'>[active1.fields["citizenship"]]</A><BR>\n	\
+							Home System: <A href='?src=\ref[src];field=home_system'>[active1.fields["home_system"]]</A><BR>\n	\
 							Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
 							Age: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
-							Rank: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
+							Occupation: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
 							Fingerprint: <A href='?src=\ref[src];choice=Edit Field;field=fingerprint'>[active1.fields["fingerprint"]]</A><BR>\n	\
 							Physical Status: [active1.fields["p_stat"]]<BR>\n	\
 							Mental Status: [active1.fields["m_stat"]]<BR></td>	\
@@ -146,7 +150,16 @@
 					else
 						dat += "<B>General Record Lost!</B><BR>"
 					if(istype(active2, /datum/data/record) && data_core.security.Find(active2))
-						dat += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: <A href='?src=\ref[];choice=Edit Field;field=criminal'>[]</A><BR>\n<BR>\nMinor Crimes: <A href='?src=\ref[];choice=Edit Field;field=mi_crim'>[]</A><BR>\nDetails: <A href='?src=\ref[];choice=Edit Field;field=mi_crim_d'>[]</A><BR>\n<BR>\nMajor Crimes: <A href='?src=\ref[];choice=Edit Field;field=ma_crim'>[]</A><BR>\nDetails: <A href='?src=\ref[];choice=Edit Field;field=ma_crim_d'>[]</A><BR>\n<BR>\nImportant Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[]</A><BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", src, active2.fields["criminal"], src, active2.fields["mi_crim"], src, active2.fields["mi_crim_d"], src, active2.fields["ma_crim"], src, active2.fields["ma_crim_d"], src, decode(active2.fields["notes"]))
+						dat += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\n	\
+						Criminal Status: <A href='?src=\ref[];choice=Edit Field;field=criminal'>[]</A><BR>\n<BR>\n	\
+						Previous Convictions: <A href='?src=\ref[];choice=Edit Field;field=pre_con'>[]</A><BR>\n	\
+						Details: <A href='?src=\ref[];choice=Edit Field;field=pre_con_d'>[]</A><BR>\n<BR>\n	\
+						Official Warnings: <A href='?src=\ref[];choice=Edit Field;field=warn'>[]</A><BR>\n	\
+						Details: <A href='?src=\ref[];choice=Edit Field;field=warn_d'>[]</A><BR>\n<BR>\n	\
+						Injunctions: <A href='?src=\ref[];choice=Edit Field;field=injunc'>[]</A><BR>\n	\
+						Details: <A href='?src=\ref[];choice=Edit Field;field=injunc_d'>[]</A><BR>\n<BR>\n	\
+						Important Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[]</A><BR>\n<BR>\n<CENTER><B>	\
+						Comments/Log</B></CENTER><BR>", src, active2.fields["criminal"], src, active2.fields["pre_con"], src, active2.fields["pre_con_d"], src, active2.fields["warn"], src, active2.fields["warn_d"], src, active2.fields["injunc"], src, active2.fields["injunc_d"], src, decode(active2.fields["notes"]))
 						var/counter = 1
 						while(active2.fields[text("com_[]", counter)])
 							dat += text("[]<BR><A href='?src=\ref[];choice=Delete Entry;del_c=[]'>Delete Entry</A><BR><BR>", active2.fields[text("com_[]", counter)], src, counter)
@@ -185,17 +198,19 @@
 							var/background
 							switch(crimstat)
 								if("*Arrest*")
-									background = "'background-color:#DC143C;'"
+									background = "'background-color:#C51616;'"
+								if ("*Search*")
+									background = "'background-color:#C8BB24;'"
+								if ("On Official Watch")
+									background = "'background-color:#061EA5;'"
 								if("Incarcerated")
-									background = "'background-color:#CD853F;'"
+									background = "'background-color:#C65E16;'"
 								if("Parolled")
-									background = "'background-color:#CD853F;'"
-								if("Released")
-									background = "'background-color:#3BB9FF;'"
+									background = "'background-color:#4B08BF;'"
 								if("None")
-									background = "'background-color:#00FF7F;'"
+									background = "'background-color:#1C8001;'"
 								if("")
-									background = "'background-color:#FFFFFF;'"
+									background = "'background-color:#1C8001;'"
 									crimstat = "No Record."
 							dat += text("<tr style=[]><td><A href='?src=\ref[];choice=Browse Record;d_rec=\ref[]'>[]</a></td>", background, src, R, R.fields["name"])
 							dat += text("<td>[]</td>", R.fields["id"])
@@ -302,7 +317,7 @@ What a mess.*/
 					screen = 1
 		//RECORD FUNCTIONS
 		if("Search Records")
-			var/t1 = input("Search String: (Partial Name or ID or Fingerprints or Rank)", "Secure. records", null, null)  as text
+			var/t1 = input("Search String: (Partial Name or ID or Fingerprints or Occupation)", "Secure. records", null, null)  as text
 			if(!t1 || usr.stat || !authenticated || usr.restrained() || !interactable())
 				return
 			Perp = new/list()
@@ -374,13 +389,23 @@ What a mess.*/
 				var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( computer.loc )
 				P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
 				if(record1)
-					P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
+					P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nCitizenship: []<BR>\nHome System: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["citizenship"], record1.fields["home_system"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
 					P.name = text("Security Record ([])", record1.fields["name"])
 				else
 					P.info += "<B>General Record Lost!</B><BR>"
 					P.name = "Security Record"
 				if(record2)
-					P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: []<BR>\n<BR>\nMinor Crimes: []<BR>\nDetails: []<BR>\n<BR>\nMajor Crimes: []<BR>\nDetails: []<BR>\n<BR>\nImportant Notes:<BR>\n\t[]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", record2.fields["criminal"], record2.fields["mi_crim"], record2.fields["mi_crim_d"], record2.fields["ma_crim"], record2.fields["ma_crim_d"], decode(record2.fields["notes"]))
+					P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: []<BR>\n<BR>\n	\
+					Previous Convictions: []<BR>\n	\
+					Details: []<BR>\n<BR>\n	\
+					Warnings: []<BR>\n	\
+					Details: []<BR>\n<BR>\n	\
+					Injunctions: []<BR>\n	\
+					Details: []<BR>\n<BR>\n	\
+					Important Notes:<BR>\n	\
+					\t[]<BR>\n	\
+					<BR>\n	\
+					<CENTER><B>Comments/Log</B></CENTER><BR>", record2.fields["criminal"], record2.fields["pre_con"], record2.fields["pre_con_d"], record2.fields["warn"], record2.fields["warn_d"], record2.fields["injunc"], record2.fields["injunc_d"], decode(record2.fields["notes"]))
 					var/counter = 1
 					while(record2.fields[text("com_[]", counter)])
 						P.info += text("[]<BR>", record2.fields[text("com_[]", counter)])
@@ -474,30 +499,42 @@ What a mess.*/
 						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active1 != a1)
 							return
 						active1.fields["age"] = t1
-				if("mi_crim")
+				if("pre_con")
 					if(istype(active2, /datum/data/record))
-						var/t1 = sanitize(input("Please input minor disabilities list:", "Secure. records", active2.fields["mi_crim"], null)  as text)
+						var/t1 = sanitize(input("Please input previous convictions:", "Secure. records", active2.fields["pre_con"], null)  as text)
 						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
 							return
-						active2.fields["mi_crim"] = t1
-				if("mi_crim_d")
+						active2.fields["pre_con"] = t1
+				if("pre_con_d")
 					if(istype(active2, /datum/data/record))
-						var/t1 = sanitize(input("Please summarize minor dis.:", "Secure. records", active2.fields["mi_crim_d"], null)  as message)
+						var/t1 = sanitize(input("Please summarize previous convictions:", "Secure. records", active2.fields["pre_con_d"], null)  as message)
 						if (!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
 							return
-						active2.fields["mi_crim_d"] = t1
-				if("ma_crim")
+						active2.fields["pre_con_d"] = t1
+				if("warn")
 					if(istype(active2, /datum/data/record))
-						var/t1 = sanitize(input("Please input major diabilities list:", "Secure. records", active2.fields["ma_crim"], null)  as text)
+						var/t1 = sanitize(input("Please input official warnings:", "Secure. records", active2.fields["warn"], null)  as text)
 						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
 							return
-						active2.fields["ma_crim"] = t1
-				if("ma_crim_d")
+						active2.fields["warn"] = t1
+				if("warn_d")
 					if(istype(active2, /datum/data/record))
-						var/t1 = sanitize(input("Please summarize major dis.:", "Secure. records", active2.fields["ma_crim_d"], null)  as message)
+						var/t1 = sanitize(input("Please summarize official warnings:", "Secure. records", active2.fields["warn_d"], null)  as message)
 						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
 							return
-						active2.fields["ma_crim_d"] = t1
+						active2.fields["warn_d"] = t1
+				if("injunc")
+					if(istype(active2, /datum/data/record))
+						var/t1 = sanitize(input("Please input injunctions:", "Secure. records", active2.fields["injunc"], null)  as message)
+						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
+							return
+						active2.fields["injunc"] = t1
+				if("injunc_d")
+					if(istype(active2, /datum/data/record))
+						var/t1 = sanitize(input("Please summarize injunctions:", "Secure. records", active2.fields["injunc_d"], null)  as message)
+						if(!t1 || !authenticated || usr.stat || usr.restrained() || (!interactable() && !issilicon(usr)) || active2 != a2)
+							return
+						active2.fields["injunc_d"] = t1
 				if("notes")
 					if(istype(active2, /datum/data/record))
 						var/t1 = sanitize(input("Please summarize notes:", "Secure. records", html_decode(active2.fields["notes"]), null)  as message, extra = 0)
@@ -510,9 +547,10 @@ What a mess.*/
 						temp += "<ul>"
 						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=none'>None</a></li>"
 						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=arrest'>*Arrest*</a></li>"
+						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=search'>*Search*</a></li>"
+						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=watch'>On Official Watch</a></li>"
 						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=incarcerated'>Incarcerated</a></li>"
 						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
-						temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
 						temp += "</ul>"
 				if("rank")
 					var/list/L = list( "Head of Personnel", "Colony Director", "AI" )
@@ -555,8 +593,11 @@ What a mess.*/
 								active2.fields["criminal"] = "Incarcerated"
 							if("parolled")
 								active2.fields["criminal"] = "Parolled"
-							if("released")
-								active2.fields["criminal"] = "Released"
+							if("search")
+								active2.fields["criminal"] = "*Search*"
+							if("watch")
+								active2.fields["criminal"] = "On Official Watch"
+
 
 				if("Delete Record (Security) Execute")
 					if(active2)
@@ -593,7 +634,7 @@ What a mess.*/
 				if(3)
 					R.fields["age"] = rand(5, 85)
 				if(4)
-					R.fields["criminal"] = pick("None", "*Arrest*", "Incarcerated", "Parolled", "Released")
+					R.fields["criminal"] = pick("None", "*Arrest*", "*Search*", "On Official Watch", "Incarcerated", "Parolled", "Released")
 				if(5)
 					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
 					if(PDA_Manifest.len)
