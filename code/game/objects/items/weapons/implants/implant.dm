@@ -69,6 +69,12 @@
 	else
 		..()
 
+//////////////////////////////
+//	Tracking Implant
+//////////////////////////////
+
+GLOBAL_LIST_BOILERPLATE(all_tracking_implants, /obj/item/weapon/implant/tracking)
+
 /obj/item/weapon/implant/tracking
 	name = "tracking implant"
 	desc = "An implant normally given to dangerous criminals. Allows security to track your location."
@@ -308,6 +314,13 @@ Implant Specifics:<BR>"}
 					part.droplimb(0,DROPLIMB_BLUNT)
 			explosion(get_turf(imp_in), -1, -1, 1, 3)
 			qdel(src)
+
+//////////////////////////////
+//	Chemical Implant
+//////////////////////////////
+
+GLOBAL_LIST_BOILERPLATE(all_chem_implants, /obj/item/weapon/implant/chem)
+
 
 /obj/item/weapon/implant/chem
 	name = "chemical implant"
