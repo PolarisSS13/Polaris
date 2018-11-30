@@ -43,6 +43,7 @@
 	minimal_player_age = 5
 	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
+	alt_titles = list("Correctional Officer")
 
 /datum/job/detective
 	title = "Detective"
