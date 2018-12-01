@@ -63,8 +63,8 @@
 	handle_flee_target()
 
 /mob/living/simple_animal/cat/PunchTarget()
-	if(istype(target_mob,/mob/living/simple_animal/mouse))
-		var/mob/living/simple_animal/mouse/mouse = target_mob
+	if(ismouse(target_mob))
+		var/mob/living/simple_mob/animal/passive/mouse/mouse = target_mob
 		mouse.splat()
 		visible_emote(pick("bites \the [mouse]!","toys with \the [mouse].","chomps on \the [mouse]!"))
 		return mouse
@@ -72,7 +72,7 @@
 		..()
 
 /mob/living/simple_animal/cat/Found(var/atom/found_atom)
-	if(istype(found_atom,/mob/living/simple_animal/mouse) && SA_attackable(found_atom))
+	if(ismouse(found_atom) && SA_attackable(found_atom))
 		return found_atom
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()

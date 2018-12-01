@@ -1,5 +1,9 @@
 /mob/living/death()
 	clear_fullscreens()
+
+	if(ai_holder)
+		ai_holder.go_sleep()
+
 	if(nest) //Ew.
 		if(istype(nest, /obj/structure/prop/nest))
 			var/obj/structure/prop/nest/N = nest
