@@ -52,18 +52,15 @@
 	return ..()
 
 /obj/item/device/multitool/proc/mode_switch(mob/living/user)
-	if(mode_index >= modes.len)
-		mode_index = 1
+	if(++mode_index > modes.len) mode_index = 1
+
 	else
 		mode_index++
 
 	toolmode = modes[mode_index]
 	to_chat(user,"<span class='notice'>\The [src] is now set to [toolmode].</span>")
 
-	if(toolmode != MULTITOOL_MODE_INTCIRCUITS)
-		accepting_refs = 0
-	else
-		accepting_refs = 1
+	accepting_refs = (toolmode == MULTITOOL_MODE_INTCIRCUITS)
 
 	return
 
