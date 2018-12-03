@@ -206,7 +206,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
 
 			var/agony_to_apply = ((1 / starve_mod) * nutrition_cost) //Regenerating damage causes minor pain over time. Small injures will be no issue, large ones will cause problems.
-			H.apply_damage(agony_to_apply, HALLOSS)
+			if((H.getHalLoss() + agony_to_apply) <= 70) // Don't permalock, but make it far easier to knock them down.
+				H.apply_damage(agony_to_apply, HALLOSS)
 
 	else
 		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
