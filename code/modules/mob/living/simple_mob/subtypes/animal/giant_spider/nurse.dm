@@ -171,9 +171,12 @@
 	if(E)
 		return FALSE // Spamclick protection.
 
+	if(fed < 0)
+		return FALSE
+	else
+		fed--
 	set_AI_busy(FALSE)
 	new egg_type(T)
-	fed--
 	return TRUE
 
 
