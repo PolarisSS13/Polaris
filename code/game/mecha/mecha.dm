@@ -174,6 +174,8 @@
 	cell = null
 	internal_tank = null
 
+	mech_destroyed_roundstat++ //This is for the roundtrivia system
+
 	QDEL_NULL(pr_int_temp_processor)
 	QDEL_NULL(pr_inertial_movement)
 	QDEL_NULL(pr_give_air)
