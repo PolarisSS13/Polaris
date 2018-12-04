@@ -16,13 +16,6 @@ GLOBAL_VAR_INIT(items_sold_shift_roundstat, 0)
 GLOBAL_VAR_INIT(disposals_flush_shift_roundstat, 0)
 GLOBAL_VAR_INIT(rocks_drilled_roundstat, 0)
 
-//Virgo specific
-//GLOBAL_VAR_INIT(mouse_spawned_shift_roundstat, 0)
-//GLOBAL_VAR_INIT(number_people_walked_over_roundstat, 0)
-//GLOBAL_VAR_INIT(trash_piles_searched_roundstat, 0)
-//GLOBAL_VAR_INIT(rare_trash_found_roundstat, 0)
-
-
 /hook/roundend/proc/RoundEnd()
 
 	var/lights_switched_on = GLOB.lights_switched_on_roundstat
@@ -35,12 +28,6 @@ GLOBAL_VAR_INIT(rocks_drilled_roundstat, 0)
 	var/items_sold_shift = GLOB.items_sold_shift_roundstat
 	var/disposals_flush_shift = GLOB.disposals_flush_shift_roundstat
 	var/rocks_drilled = GLOB.rocks_drilled_roundstat
-
-	//virgo specific too
-	//var/mouse_spawned_shift = GLOB.mouse_spawned_shift_roundstat //Virgo
-	//var/number_people_walked_over = GLOB.number_people_walked_over_roundstat //Also virgo
-	//var/trash_piles_searched = GLOB.trash_piles_searched_roundstat //Those two are only relevant to :b:irgo
-	//var/rare_trash_found = GLOB.rare_trash_found_roundstat
 
 	to_world("<B>Shift facts!</B>")
 
@@ -64,15 +51,3 @@ GLOBAL_VAR_INIT(rocks_drilled_roundstat, 0)
 		to_world("The disposal system flushed a whole [disposals_flush_shift] times for this shift. We should really invest in waste treatement.")
 	if(rocks_drilled > 0)
 		to_world("Our strong miners pulverized a whole [rocks_drilled] piles of pathetic rubble.")
-
-	//virgo specific aswell
-	/*
-	if(number_people_walked_over > 0)
-		to_world("About [number_people_walked_over] people were trodden upon, look both ways!")
-	if(mouse_spawned_shift > 0)
-		to_world("The mice population grew by [mouse_spawned_shift] according to our sensors. How unhygienic!")
-	if(trash_piles_searched > 0)
-		to_world("People rummaged through [trash_piles_searched] trash piles today. Ech.")
-	if(rare_trash_found > 0)
-		to_world("[rare_trash_found] rare objects were found in the bowels of the station today.")
-	*/
