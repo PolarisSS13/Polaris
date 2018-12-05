@@ -13,7 +13,7 @@
 	if(mind && mind.current == src)
 		spellremove(src)
 	ghostize()
-	qdel_null(plane_holder)
+	QDEL_NULL(plane_holder)
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
@@ -695,7 +695,10 @@
 					stat(null)
 					for(var/datum/controller/subsystem/SS in Master.subsystems)
 						SS.stat_entry()
-
+						
+			if(statpanel("Tickets"))
+				GLOB.ahelp_tickets.stat_entry()
+				
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
 				listed_turf = null
@@ -730,13 +733,12 @@
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface() || (client && (client.moving || (world.time < client.move_delay))))
+	if(!canface() || (client && (client.moving || (world.time < move_delay))))
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
-	if(client)
-		client.move_delay += movement_delay()
+	move_delay += movement_delay()
 	return 1
 
 
@@ -989,7 +991,7 @@ mob/proc/yank_out_object()
 /mob/proc/has_brain_worms()
 
 	for(var/I in contents)
-		if(istype(I,/mob/living/simple_animal/borer))
+		if(istype(I,/mob/living/simple_mob/animal/borer))
 			return I
 
 	return 0
@@ -1144,8 +1146,13 @@ mob/proc/yank_out_object()
 /mob/proc/throw_item(atom/target)
 	return
 
+/mob/proc/will_show_tooltip()
+	if(alpha <= EFFECTIVE_INVIS)
+		return FALSE
+	return TRUE
+
 /mob/MouseEntered(location, control, params)
-	if(usr != src && usr.is_preference_enabled(/datum/client_preference/mob_tooltips))
+	if(usr != src && usr.is_preference_enabled(/datum/client_preference/mob_tooltips) && src.will_show_tooltip())
 		openToolTip(user = usr, tip_src = src, params = params, title = get_nametag_name(usr), content = get_nametag_desc(usr))
 
 	..()

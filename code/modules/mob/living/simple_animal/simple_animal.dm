@@ -380,7 +380,7 @@
 		//Resisting out of closets
 		if(istype(loc,/obj/structure/closet))
 			var/obj/structure/closet/C = loc
-			if(C.welded)
+			if(C.sealed)
 				handle_resist()
 			else
 				C.open()
@@ -565,12 +565,6 @@
 	if(act)
 		..(act, type, desc)
 
-/mob/living/simple_animal/proc/visible_emote(var/act_desc)
-	custom_emote(1, act_desc)
-
-/mob/living/simple_animal/proc/audible_emote(var/act_desc)
-	custom_emote(2, act_desc)
-
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	ai_log("bullet_act() I was shot by: [Proj.firer]",2)
 
@@ -659,7 +653,6 @@
 	return ..()
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
-	effective_force = O.force
 
 	//Animals can't be stunned(?)
 	if(O.damtype == HALLOSS)
@@ -684,9 +677,9 @@
 
 //SA vs SA basically
 /mob/living/simple_animal/attack_generic(var/mob/attacker)
-	..()
 	if(attacker)
 		react_to_attack(attacker)
+	return ..()
 
 /mob/living/simple_animal/movement_delay()
 	var/tally = 0 //Incase I need to add stuff other than "speed" later
@@ -768,8 +761,6 @@
 	if (isliving(target_mob))
 		var/mob/living/L = target_mob
 		if(L.stat != DEAD)
-			return 1
-		if(L.invisibility < INVISIBILITY_LEVEL_ONE)
 			return 1
 	if (istype(target_mob,/obj/mecha))
 		var/obj/mecha/M = target_mob
@@ -890,7 +881,7 @@
 				continue
 			else if(L in friends)
 				continue
-			else if(L.invisibility >= INVISIBILITY_LEVEL_ONE)
+			else if(L.alpha <= EFFECTIVE_INVIS)
 				continue
 			else if(!SA_attackable(L))
 				continue
@@ -1219,7 +1210,7 @@
 		ai_log("AttackTarget() Bailing because we're disabled",2)
 		LoseTarget()
 		return 0
-	if(!target_mob || !SA_attackable(target_mob) || (target_mob.invisibility >= INVISIBILITY_LEVEL_ONE)) //if the target went invisible, you can't follow it
+	if(!target_mob || !SA_attackable(target_mob) || (target_mob.alpha <= EFFECTIVE_INVIS)) //if the target went invisible, you can't follow it
 		LoseTarget()
 		return 0
 	if(!(target_mob in ListTargets(view_range)))
@@ -1256,8 +1247,11 @@
 /mob/living/simple_animal/proc/PunchTarget()
 	if(!Adjacent(target_mob))
 		return
-	if(!client)
-		sleep(rand(melee_attack_minDelay, melee_attack_maxDelay))
+	if(!canClick())
+		return
+	setClickCooldown(get_attack_speed())
+//	if(!client)
+//		sleep(rand(melee_attack_minDelay, melee_attack_maxDelay))
 	if(isliving(target_mob))
 		var/mob/living/L = target_mob
 
@@ -1298,13 +1292,18 @@
 
 //The actual top-level ranged attack proc
 /mob/living/simple_animal/proc/ShootTarget()
+	if(!canClick())
+		return FALSE
+
+	setClickCooldown(get_attack_speed())
+
 	var/target = target_mob
 	var/tturf = get_turf(target)
 
 	if((firing_lines && !client) && !CheckFiringLine(tturf))
 		step_rand(src)
 		face_atom(tturf)
-		return 0
+		return FALSE
 
 	visible_message("<span class='danger'><b>[src]</b> fires at [target]!</span>")
 	if(rapid)
@@ -1325,7 +1324,7 @@
 		if(casingtype)
 			new casingtype
 
-	return 1
+	return TRUE
 
 //Check firing lines for faction_friends (if we're not cooperative, we don't care)
 /mob/living/simple_animal/proc/CheckFiringLine(var/turf/tturf)
@@ -1364,6 +1363,8 @@
 //	if (!istype(target, /turf))
 //		qdel(A)
 //		return
+
+	A.firer = src
 	A.launch(target)
 	return
 
@@ -1556,13 +1557,13 @@
 		return 0
 	else
 		return armorval
-
+/*
 // Force it to target something
 /mob/living/simple_animal/proc/taunt(var/mob/living/new_target, var/forced = FALSE)
 	if(intelligence_level == SA_HUMANOID && !forced)
 		return
 	set_target(new_target)
-
+*/
 /mob/living/simple_animal/is_sentient()
 	return intelligence_level != SA_PLANT && intelligence_level != SA_ROBOTIC
 

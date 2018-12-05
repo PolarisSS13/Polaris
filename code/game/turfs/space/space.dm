@@ -6,6 +6,7 @@
 
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	can_build_into_floor = TRUE
 	var/keep_sprite = FALSE
 //	heat_capacity = 700000 No.
 
@@ -213,5 +214,5 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
-	return ..(N, tell_universe, 1)
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe, var/force_lighting_update, var/preserve_outdoors)
+	return ..(N, tell_universe, 1, preserve_outdoors)

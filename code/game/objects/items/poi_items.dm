@@ -47,14 +47,3 @@
 	processing_objects -= src
 	return ..()
 
-
-//Crashed Cargo Shuttle PoI
-
-/obj/structure/largecrate/animal/crashedshuttle
-	name = "SCP"
-
-/obj/structure/largecrate/animal/crashedshuttle/initialize()
-	starts_with  = pick(/mob/living/simple_animal/hostile/statue, /obj/item/cursed_marble, /obj/item/weapon/deadringer)
-	name = pick("Spicy Crust Pizzeria", "Soap and Care Products", "Sally's Computer Parts", "Steve's Chocolate Pastries", "Smith & Christian's Plastics","Standard Containers & Packaging Co.", "Sanitary Chemical Purgation (LTD)")
-	name += " delivery crate"
-	return ..()

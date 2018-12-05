@@ -159,17 +159,17 @@
 	say("Down on the floor, [suspect_name]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 	playsound(src.loc, pick(preparing_arrest_sounds), 50)
 	// Register to be told when the target moves
-	moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
+	GLOB.moved_event.register(target, src, /mob/living/bot/secbot/proc/target_moved)
 
 // Callback invoked if the registered target moves
 /mob/living/bot/secbot/proc/target_moved(atom/movable/moving_instance, atom/old_loc, atom/new_loc)
 	if(get_dist(get_turf(src), get_turf(target)) >= 1)
 		awaiting_surrender = INFINITY	// Done waiting!
-		moved_event.unregister(moving_instance, src)
+		GLOB.moved_event.unregister(moving_instance, src)
 
 /mob/living/bot/secbot/resetTarget()
 	..()
-	moved_event.unregister(target, src)
+	GLOB.moved_event.unregister(target, src)
 	awaiting_surrender = -1
 	walk_to(src, 0)
 
@@ -206,7 +206,7 @@
 	else
 		if(declare_arrests)
 			var/action = arrest_type ? "detaining" : "arresting"
-			if(istype(target, /mob/living/simple_animal))
+			if(istype(target, /mob/living/simple_mob))
 				action = "fighting"
 			global_announcer.autosay("[src] is [action] a level [threat] [action != "fighting" ? "suspect" : "threat"] <b>[target_name(target)]</b> in <b>[get_area(src)]</b>.", "[src]", "Security")
 		UnarmedAttack(target)
@@ -260,8 +260,8 @@
 					C.handcuffed = new /obj/item/weapon/handcuffs(C)
 					C.update_inv_handcuffed()
 			busy = 0
-	else if(istype(M, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = M
+	else if(istype(M, /mob/living/simple_mob))
+		var/mob/living/simple_mob/S = M
 		S.Weaken(xeno_stun_strength)
 		S.adjustBruteLoss(xeno_harm_strength)
 		do_attack_animation(M)
@@ -277,8 +277,8 @@
 /mob/living/bot/secbot/slime/UnarmedAttack(var/mob/living/L, var/proximity)
 	..()
 
-	if(istype(L, /mob/living/simple_animal/slime))
-		var/mob/living/simple_animal/slime/S = L
+	if(istype(L, /mob/living/simple_mob/slime/xenobio))
+		var/mob/living/simple_mob/slime/xenobio/S = L
 		S.adjust_discipline(2)
 
 

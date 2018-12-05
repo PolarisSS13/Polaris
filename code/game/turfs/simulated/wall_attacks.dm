@@ -60,9 +60,9 @@
 	var/damage_lower = 25
 	var/damage_upper = 75
 	if(isanimal(user))
-		var/mob/living/simple_animal/S = user
+		var/mob/living/simple_mob/S = user
 		playsound(src, S.attack_sound, 75, 1)
-		if(!(S.melee_damage_upper >= 10))
+		if(!(S.melee_damage_upper >= STRUCTURE_MIN_DAMAGE_THRESHOLD * 2))
 			to_chat(user, "<span class='notice'>You bounce against the wall.</span>")
 			return FALSE
 		damage_lower = S.melee_damage_lower
@@ -75,7 +75,7 @@
 	to_chat(user, "<span class='danger'>You smash through the wall!</span>")
 	user.do_attack_animation(src)
 	if(isanimal(user))
-		var/mob/living/simple_animal/S = user
+		var/mob/living/simple_mob/S = user
 		playsound(src, S.attack_sound, 75, 1)
 	spawn(1)
 		dismantle_wall(1)
@@ -115,12 +115,12 @@
 
 	try_touch(user, rotting)
 
-/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
+/turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message)
 
 	radiate()
 	user.setClickCooldown(user.get_attack_speed())
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if(!damage || !wallbreaker)
+	if(damage < STRUCTURE_MIN_DAMAGE_THRESHOLD * 2)
 		try_touch(user, rotting)
 		return
 
@@ -128,7 +128,7 @@
 		return success_smash(user)
 
 	if(reinf_material)
-		if((wallbreaker == 2) || (damage >= max(material.hardness,reinf_material.hardness)))
+		if(damage >= max(material.hardness, reinf_material.hardness) )
 			return success_smash(user)
 	else if(damage >= material.hardness)
 		return success_smash(user)
@@ -150,6 +150,11 @@
 		if(is_hot(W))
 			burn(is_hot(W))
 
+	if(istype(W, /obj/item/device/electronic_assembly/wallmount))
+		var/obj/item/device/electronic_assembly/wallmount/IC = W
+		IC.mount_assembly(src, user)
+		return
+
 	if(istype(W, /obj/item/stack/tile/roofing))
 		var/expended_tile = FALSE // To track the case. If a ceiling is built in a multiz zlevel, it also necessarily roofs it against weather
 		var/turf/T = GetAbove(src)
@@ -160,7 +165,7 @@
 			if(istype(T, /turf/simulated/open) || istype(T, /turf/space))
 				if(R.use(1)) // Cost of roofing tiles is 1:1 with cost to place lattice and plating
 					T.ReplaceWithLattice()
-					T.ChangeTurf(/turf/simulated/floor)
+					T.ChangeTurf(/turf/simulated/floor, preserve_outdoors = TRUE)
 					playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 					user.visible_message("<span class='notice'>[user] patches a hole in the ceiling.</span>", "<span class='notice'>You patch a hole in the ceiling.</span>")
 					expended_tile = TRUE
@@ -284,7 +289,7 @@
 	else
 		switch(construction_stage)
 			if(6)
-				if (istype(W, /obj/item/weapon/wirecutters))
+				if (W.is_wirecutter())
 					playsound(src, W.usesound, 100, 1)
 					construction_stage = 5
 					user.update_examine_panel(src)
@@ -292,7 +297,7 @@
 					update_icon()
 					return
 			if(5)
-				if (istype(W, /obj/item/weapon/screwdriver))
+				if (W.is_screwdriver())
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
@@ -302,7 +307,7 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You unscrew the support lines.</span>")
 					return
-				else if (istype(W, /obj/item/weapon/wirecutters))
+				else if (W.is_wirecutter())
 					construction_stage = 6
 					user.update_examine_panel(src)
 					to_chat(user, "<span class='notice'>You mend the outer grille.</span>")
@@ -332,7 +337,7 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
-				else if (istype(W, /obj/item/weapon/screwdriver))
+				else if (W.is_screwdriver())
 					to_chat(user, "<span class='notice'>You begin screwing down the support lines.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
@@ -343,7 +348,7 @@
 					to_chat(user, "<span class='notice'>You screw down the support lines.</span>")
 					return
 			if(3)
-				if (istype(W, /obj/item/weapon/crowbar))
+				if (W.is_crowbar())
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,100 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
@@ -354,7 +359,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if (istype(W, /obj/item/weapon/wrench))
+				if (W.is_wrench())
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
@@ -386,7 +391,7 @@
 					to_chat(user, "<span class='notice'>The slice through the support rods.</span>")
 					return
 			if(0)
-				if(istype(W, /obj/item/weapon/crowbar))
+				if(W.is_crowbar())
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,100 * W.toolspeed) || !istype(src, /turf/simulated/wall) || !user || !W || !T )
