@@ -248,34 +248,7 @@
 
 	step_away(baby, src)
 	return baby
-/*
-/mob/living/simple_mob/slime/xenobio/proc/pass_on_data(mob/living/simple_mob/slime/xenobio/baby)
-	// This is superdumb but the AI datum won't exist until the new slime's initialize() finishes.
-	var/new_discipline = 0
-	var/new_obedience = 0
-	var/new_resentment = 0
-	var/new_rabid = FALSE
 
-	// First, get this slime's AI values since they are likely to be deleted in a moment.
-	if(src && src.has_AI())
-		var/datum/ai_holder/simple_mob/xenobio_slime/our_AI = ai_holder
-		new_discipline = max(our_AI.discipline - 1, 0)
-		new_obedience = max(our_AI.obedience - 1, 0)
-		new_resentment = max(our_AI.resentment - 1, 0)
-		new_rabid = our_AI.rabid
-
-		spawn(2) // Race conditions are fun, but with the first two letters capitalized.
-			if(istype(baby) && baby.has_AI())
-				var/datum/ai_holder/simple_mob/xenobio_slime/their_AI = baby.ai_holder
-
-				if(!istype(baby, /mob/living/simple_mob/slime/xenobio/light_pink))
-					their_AI.discipline = new_discipline
-					their_AI.obedience = new_obedience
-
-				their_AI.resentment = new_resentment
-
-				their_AI.rabid = new_rabid
-*/
 /mob/living/simple_mob/slime/xenobio/get_description_interaction()
 	var/list/results = list()
 
