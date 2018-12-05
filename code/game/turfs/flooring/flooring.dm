@@ -441,3 +441,6 @@ var/list/flooring_types
 
 /decl/flooring/road/markings
 	icon_base = "road_marking"
+
+/decl/flooring/road/garage
+	icon_base = "garage"

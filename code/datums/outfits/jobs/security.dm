@@ -26,6 +26,11 @@
 	id_type = /obj/item/weapon/card/id/security/warden
 	pda_type = /obj/item/device/pda/warden
 
+/decl/hierarchy/outfit/job/security/warden/pre_equip(mob/living/carbon/human/H)
+	..()
+	if(H.gender == FEMALE)
+		uniform = /obj/item/clothing/under/rank/warden/skirt
+
 /decl/hierarchy/outfit/job/security/detective
 	name = OUTFIT_JOB_NAME("Detective")
 	head = /obj/item/clothing/head/det
