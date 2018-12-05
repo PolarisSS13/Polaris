@@ -737,7 +737,7 @@
 /obj/item/toy/figure/warden
 	name = "Warden action figure"
 	desc = "A \"Space Life\" brand Warden action figure."
-	icon_state = "Prison Warden"
+	icon_state = "warden"
 	toysay = "Execute him for breaking in!"
 
 /obj/item/toy/figure/psychologist
