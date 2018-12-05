@@ -22,6 +22,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/nurse_spider
 
 	var/fed = 0 // Counter for how many egg laying 'charges' the spider has.
+	var/birthing = FALSE // Checks whether or not eggs are being laid
 	var/egg_inject_chance = 25 // One in four chance to get eggs.
 	var/egg_type = /obj/effect/spider/eggcluster/small
 	var/web_type = /obj/effect/spider/stickyweb/dark
@@ -148,10 +149,18 @@
 
 
 /mob/living/simple_mob/animal/giant_spider/nurse/proc/lay_eggs(turf/T)
+	if(birthing)
+		to_chat(src, span("warning", "You are already laying a cluster of eggs!"))
+		return FALSE
+
 	if(!istype(T))
 		return FALSE
 
 	if(!fed)
+		return FALSE
+
+	if(fed < 0)
+		fed = 0
 		return FALSE
 
 	var/obj/effect/spider/eggcluster/E = locate() in T
@@ -159,24 +168,26 @@
 		return FALSE // Already got eggs here.
 
 	visible_message(span("notice", "\The [src] begins to lay a cluster of eggs.") )
+	birthing = TRUE
+
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 
 	if(!do_mob(src, T, 5 SECONDS))
 		set_AI_busy(FALSE)
 		to_chat(src, span("warning", "You need to stay still to lay eggs on \the [T]."))
+		birthing = FALSE
 		return FALSE
 
 	E = locate() in T
 	if(E)
+		birthing = FALSE
 		return FALSE // Spamclick protection.
 
-	if(fed < 0)
-		return FALSE
-	else
-		fed--
+	fed--
 	set_AI_busy(FALSE)
 	new egg_type(T)
+	birthing = FALSE
 	return TRUE
 
 
