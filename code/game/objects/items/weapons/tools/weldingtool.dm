@@ -1,4 +1,3 @@
-
 #define WELDER_FUEL_BURN_INTERVAL 13
 /*
  * Welding Tool
@@ -61,7 +60,7 @@
 		if(max_fuel)
 			to_chat(user, text("\icon[] The [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
 
-/obj/item/weapon/weldingtool/attack(var/atom/A, var/mob/living/user, var/def_zone)
+/obj/item/weapon/weldingtool/attack(atom/A, mob/living/user, def_zone)
 	if(ishuman(A) && user.a_intent == I_HELP)
 		var/mob/living/carbon/human/H = A
 		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
@@ -116,14 +115,11 @@
 	..()
 	return
 
-
 /obj/item/weapon/weldingtool/process()
 	if(welding)
 		++burned_fuel_for
 		if(burned_fuel_for >= WELDER_FUEL_BURN_INTERVAL)
 			remove_fuel(1)
-
-
 
 		if(get_fuel() < 1)
 			setWelding(0)
@@ -137,7 +133,6 @@
 			location = get_turf(M)
 	if (istype(location, /turf))
 		location.hotspot_expose(700, 5)
-
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
