@@ -628,13 +628,13 @@ proc/ColorTone(rgb, tone)
 	else return BlendRGB(tone, "#ffffff", (gray-tone_gray)/((255-tone_gray) || 1))
 
 
-/proc/getFlatIcon()
-	var/a = getFlatIcon_new(arglist(args))
-	var/b = getFlatIcon_old(arglist(args))
+/proc/getFlatIcon(image/A, defdir, deficon, defstate, defblend, start = TRUE, no_anim = FALSE)
+	var/a = getFlatIcon_new(A, defdir, deficon, defstate, defblend, start, no_anim)
+	var/b = getFlatIcon_old(A, defdir, deficon, defstate, defblend, start, no_anim)
 	return prob(50)? a : b
 
 /proc/getFlatIconTest(a)
-	for(var/i in 1 to 1000)
+	for(var/i in 1 to 100)
 		getFlatIcon(a)
 
 // Ported from /tg/station
