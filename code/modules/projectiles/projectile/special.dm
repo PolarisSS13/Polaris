@@ -298,7 +298,6 @@
 
 			else if(target_armor >= 45)
 				H.apply_damage(15, BURN, def_zone)
-				/obj/item/organ/external
 				if(target_limb)
 					armor_special = 1
 					target_limb.dislocate()

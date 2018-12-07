@@ -176,6 +176,13 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
+
+	else if(power_supply)
+		if(modifystate)
+			icon_state = "[modifystate]"
+		else
+			icon_state = "[initial(icon_state)]"
+
 	if(!ignore_inhands) update_held_icon()
 
 /obj/item/weapon/gun/energy/proc/start_recharge()
