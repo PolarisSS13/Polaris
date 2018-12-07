@@ -629,9 +629,13 @@ proc/ColorTone(rgb, tone)
 
 
 /proc/getFlatIcon()
-	var/a = getFlatIcon_new(argslist(args))
-	var/b = getFlatIcon_old(argslist(args))
+	var/a = getFlatIcon_new(arglist(args))
+	var/b = getFlatIcon_old(arglist(args))
 	return prob(50)? a : b
+
+/proc/getFlatIconTest(a)
+	for(var/i in 1 to 1000)
+		getFlatIcon(a)
 
 // Ported from /tg/station
 // Creates a single icon from a given /atom or /image.  Only the first argument is required.
