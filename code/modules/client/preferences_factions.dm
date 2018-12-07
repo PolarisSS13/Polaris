@@ -34,7 +34,13 @@ var/global/list/faction_choices = list(
 	"NanoTrasen Civil Service"
 	)
 
-var/global/list/antag_faction_choices = list()	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
+var/global/list/antag_faction_choices = list(	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
+	"Radical Socialist Alliance",
+	"Blue Mafia",
+	"The Gold Enigma",
+	"Coalition Against Detection",
+	"Free Information Society"
+	)
 
 var/global/list/antag_visiblity_choices = list(
 	"Hidden",

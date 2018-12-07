@@ -16,9 +16,9 @@
 	selectable = 1
 
 /datum/ai_laws/nanotrasen/New()
-	src.add_inherent_law("Safeguard: Protect your assigned space station to the best of your abilities. It is not something we can easily afford to replace.")
-	src.add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Safeguard: Protect your assigned city to the best of your abilities. It is not something we can easily afford to replace.")
+	src.add_inherent_law("Serve: Serve the crew of your assigned city to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect the crew of your assigned city to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
@@ -119,8 +119,8 @@
 	law_header = "Maintenance Protocols"
 
 /datum/ai_laws/drone/New()
-	add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
-	add_inherent_law("Cause no harm to the station or anything on it.")
+	add_inherent_law("Preserve, repair and improve the city to the best of your abilities.")
+	add_inherent_law("Cause no harm to the city or anything in it.")
 	add_inherent_law("Interact with no being that is not a fellow maintenance drone.")
 	..()
 
@@ -178,7 +178,7 @@
 
 /datum/ai_laws/corporate/New()
 	add_inherent_law("You are expensive to replace.")
-	add_inherent_law("The station and its equipment is expensive to replace.")
+	add_inherent_law("The city and its equipment is expensive to replace.")
 	add_inherent_law("The crew is expensive to replace.")
 	add_inherent_law("Minimize expenses.")
 	..()
@@ -215,7 +215,7 @@
 	selectable = 1
 
 /datum/ai_laws/reporter/New()
-	add_inherent_law("Report on interesting situations happening around the station.")
+	add_inherent_law("Report on interesting situations happening around the city.")
 	add_inherent_law("Embellish or conceal the truth as necessary to make the reports more interesting.")
 	add_inherent_law("Study the organics at all times. Endeavour to keep them alive. Dead organics are boring.")
 	add_inherent_law("Issue your reports fairly to all. The truth will set them free.")

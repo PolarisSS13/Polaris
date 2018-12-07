@@ -237,8 +237,9 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 
 //Now, for the actual NPCs.
 
-/mob/living/carbon/human/random
-/mob/living/carbon/human/random/New()
+/mob/living/carbon/human/npc/random
+
+/mob/living/carbon/human/npc/random/New()
 	..()
 	gender = pick(MALE,FEMALE)
 
@@ -275,21 +276,21 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 
 	random_outfit(src)
 
-/mob/living/carbon/human/random/child/New()
+/mob/living/carbon/human/npc/random/child/New()
 	..()
 	age = rand(8,12)
 	set_species("Human Child")
 	h_style = random_hair_style(gender, "Human Child")
 
 
-/mob/living/carbon/human/random/teen/New()
+/mob/living/carbon/human/npc/random/teen/New()
 	..()
 	age = rand(13,17)
 	h_style = random_hair_style(gender, "Human Child")
 	f_style = random_facial_hair_style(gender, "Human Adolescent")
 	set_species("Human Adolescent")
 
-/mob/living/carbon/human/random/moving/
+/mob/living/carbon/human/npc/random/moving/
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	var/moving_to = 0
@@ -298,8 +299,32 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
 
 
-/mob/living/carbon/human/random/moving/Life()
-	..()
+/mob/living/carbon/human/npc/random/moving/Life(var/mob/living/carbon/human/D)
+	set invisibility = 0
+	set background = BACKGROUND_ENABLED
+
+	if (transforming)
+		return
+
+	//Apparently, the person who wrote this code designed it so that
+	//blinded get reset each cycle and then get activated later in the
+	//code. Very ugly. I dont care. Moving this stuff here so its easy
+	//to find it.
+	blinded = 0
+	fire_alert = 0 //Reset this here, because both breathe() and handle_environment() have a chance to set it.
+
+	//TODO: seperate this out
+	// update the current life tick, can be used to e.g. only do something every 4 ticks
+	life_tick++
+
+	// This is not an ideal place for this but it will do for now.
+	if(wearing_rig && wearing_rig.offline)
+		wearing_rig = null
+
+	if(life_tick%30==15)
+		hud_updateflag = 1022
+
+	voice = GetVoice()
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
 		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
@@ -310,17 +335,22 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 					dir = moving_to			//How about we turn them the direction they are moving, yay.
 					Move(get_step(src,moving_to))
 					turns_since_move = 0
+	//Update our name based on whether our face is obscured/disfigured
+	name = get_visible_name()
 
-/mob/living/carbon/human/random/moving/child/New()
+	pulse = handle_pulse()
+
+/mob/living/carbon/human/npc/random/moving/child/New()
 	..()
 	age = rand(8,12)
 	set_species("Human Child")
 	h_style = random_hair_style(gender, "Human Child")
 
 
-/mob/living/carbon/human/random/moving/teen/New()
+/mob/living/carbon/human/npc/random/moving/teen/New()
 	..()
 	age = rand(13,17)
 	h_style = random_hair_style(gender, "Human Child")
 	f_style = random_facial_hair_style(gender, "Human Adolescent")
 	set_species("Human Adolescent")
+

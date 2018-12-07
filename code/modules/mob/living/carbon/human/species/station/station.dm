@@ -14,8 +14,8 @@
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 
 	min_age = 18
-	max_age = 99
-	slowdown = -0.8
+	max_age = 120
+	slowdown = 0
 	economic_modifier = 10
 
 	health_hud_intensity = 1.5

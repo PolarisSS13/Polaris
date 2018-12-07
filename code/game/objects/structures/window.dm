@@ -563,7 +563,8 @@
 	name = "framed window"
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "framewindow"
-	dir = 5
+	plane = MOB_PLANE + 10 //I think?
+	dir = 2
 	shardtype = /obj/structure/grille/frame
 
 /obj/structure/window/framed/update_icon()

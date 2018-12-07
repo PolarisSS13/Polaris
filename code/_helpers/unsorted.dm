@@ -477,6 +477,39 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return creatures
 
+/proc/gethumans()
+	var/list/mobs = sorthumans()
+	var/list/names = list()
+	var/list/creatures = list()
+	var/list/namecounts = list()
+	for(var/mob/M in mobs)
+		if(isundead(M))	continue
+		var/name = M.name
+		if (name in names)
+			namecounts[name]++
+			name = "[name] ([namecounts[name]])"
+		else
+			names.Add(name)
+			namecounts[name] = 1
+		if (M.real_name && M.real_name != M.name)
+			name += " \[[M.real_name]\]"
+		if (M.stat == 2)
+			if(istype(M, /mob/observer/dead/))
+				name += " \[ghost\]"
+			else
+				name += " \[dead\]"
+		creatures[name] = M
+
+	return creatures
+
+
+/proc/sorthumans()
+	var/list/humanlist = list()
+	var/list/sortmob = sortAtom(mob_list)
+	for(var/mob/living/carbon/human/M in sortmob)
+		humanlist.Add(M)
+	return humanlist
+
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
