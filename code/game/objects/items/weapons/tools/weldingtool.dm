@@ -120,10 +120,8 @@
 		++burned_fuel_for
 		if(burned_fuel_for >= WELDER_FUEL_BURN_INTERVAL)
 			remove_fuel(1)
-
 		if(get_fuel() < 1)
 			setWelding(0)
-
 	//I'm not sure what this does. I assume it has to do with starting fires...
 	//...but it doesnt check to see if the welder is on or not.
 	var/turf/location = src.loc
@@ -160,12 +158,8 @@
 			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
-	return
-
-
-/obj/item/weapon/weldingtool/attack_self(mob/user as mob)
-	setWelding(!welding, usr)
-	return
+/obj/item/weapon/weldingtool/attack_self(mob/user)
+	setWelding(!welding, user)
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
@@ -194,7 +188,7 @@
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
-	return src.welding
+	return welding
 
 /obj/item/weapon/weldingtool/update_icon()
 	..()
@@ -210,7 +204,7 @@
 	// Fuel counter overlay.
 	if(change_icons && get_max_fuel())
 		var/ratio = get_fuel() / get_max_fuel()
-		ratio = Ceiling(ratio*4) * 25
+		ratio = CEILING(ratio * 4, 1) * 25
 		var/image/I = image(icon, src, "[icon_state][ratio]")
 		overlays.Add(I)
 
