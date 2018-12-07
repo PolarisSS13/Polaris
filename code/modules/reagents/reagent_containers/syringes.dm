@@ -357,8 +357,8 @@
 	update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/drugs
-	name = "Syringe (drugs)"
-	desc = "Contains aggressive drugs meant for torture."
+	name = "Syringe"
+	desc = "A syringe filled with a weird-colored substance"
 
 /obj/item/weapon/reagent_containers/syringe/drugs/New()
 	..()
