@@ -185,7 +185,7 @@
 	light_color = "#66ffff" // Bright cyan.
 	block_tele = TRUE
 
-/turf/simulated/shuttle/floor/alien/initialize()
+/turf/simulated/shuttle/floor/alien/Initialize()
 	. = ..()
 	icon_state = "alienpod[rand(1, 9)]"
 
