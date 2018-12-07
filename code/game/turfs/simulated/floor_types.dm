@@ -213,8 +213,9 @@
 	takes_underlays = 1
 	blocks_air = 1 //I'd make these unsimulated but it just fucks with so much stuff so many other places.
 
-	initialize()
-		icon_state = "carry_ingame"
+/turf/simulated/shuttle/plating/carry/Initialize()
+	. = ..()
+	icon_state = "carry_ingame"
 
 /turf/simulated/shuttle/plating/airless/carry
 	name = "airless carry turf"
@@ -223,8 +224,9 @@
 	takes_underlays = 1
 	blocks_air = 1
 
-	initialize()
-		icon_state = "carry_ingame"
+/turf/simulated/shuttle/plating/airless/carry/Initialize()
+	. = ..()
+	icon_state = "carry_ingame"
 
 /turf/simulated/shuttle/plating/skipjack //Skipjack plating
 	oxygen = 0
