@@ -314,6 +314,7 @@
 		'icons/pda_icons/pda_blank.png',
 		'icons/pda_icons/pda_boom.png',
 		'icons/pda_icons/pda_bucket.png',
+		'html/images/no_image32.png',
 		'icons/pda_icons/pda_crate.png',
 		'icons/pda_icons/pda_cuffs.png',
 		'icons/pda_icons/pda_eject.png',
