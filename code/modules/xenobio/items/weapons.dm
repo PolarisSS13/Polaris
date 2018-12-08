@@ -29,7 +29,7 @@
 
 	..()
 
-/obj/item/weapon/melee/baton/slime/loaded/initialize()
+/obj/item/weapon/melee/baton/slime/loaded/Initialize()
 	bcell = new/obj/item/weapon/cell/device(src)
 	update_icon()
 	return ..()
