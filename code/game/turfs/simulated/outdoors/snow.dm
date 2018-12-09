@@ -12,7 +12,7 @@
 
 
 /turf/simulated/floor/outdoors/snow/Entered(atom/A)
-	if(isliving(A))
+	if(ishuman(A)) //enough butterflies, animals and basically everything making HUGE ASS MAN FEET on snow
 		var/mdir = "[A.dir]"
 		crossed_dirs[mdir] = 1
 		update_icon()
