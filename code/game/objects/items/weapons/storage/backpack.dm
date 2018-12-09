@@ -63,6 +63,7 @@
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
+	icon = 'icons/obj/storage.dmi'
 	icon_state = "giftbag0"
 	item_state_slots = list(slot_r_hand_str = "giftbag", slot_l_hand_str = "giftbag")
 	w_class = ITEMSIZE_LARGE
