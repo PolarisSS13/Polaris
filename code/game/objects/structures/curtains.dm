@@ -78,5 +78,67 @@
 /obj/structure/curtain/open/shower/security
 	color = "#AA0000"
 
+//COLORS. We're freaky like that.
+
+/obj/structure/curtain/color/beige
+	color = COLOR_BEIGE
+/obj/structure/curtain/open/color/beige
+	color = COLOR_BEIGE
+
+/obj/structure/curtain/color/red
+	color = COLOR_RED_GRAY
+/obj/structure/curtain/open/color/red
+	color = COLOR_RED_GRAY
+
+/obj/structure/curtain/color/pale_blue
+	color = COLOR_PALE_BLUE_GRAY
+/obj/structure/curtain/open/color/pale_blue
+	color = COLOR_PALE_BLUE_GRAY
+
+/obj/structure/curtain/color/green
+	color = COLOR_GREEN_GRAY
+/obj/structure/curtain/open/color/green
+	color = COLOR_GREEN_GRAY
+
+/obj/structure/curtain/color/lime
+	color = COLOR_PALE_GREEN_GRAY
+/obj/structure/curtain/open/color/lime
+	color = COLOR_PALE_GREEN_GRAY
+
+/obj/structure/curtain/color/pink
+	color = COLOR_PALE_RED_GRAY
+/obj/structure/curtain/open/color/pink
+	color = COLOR_PALE_RED_GRAY
+
+/obj/structure/curtain/color/purple
+	color = COLOR_PURPLE_GRAY
+/obj/structure/curtain/open/color/purple
+	color = COLOR_PURPLE_GRAY
+
+/obj/structure/curtain/color/orange
+	color = COLOR_DARK_ORANGE
+/obj/structure/curtain/open/color/orange
+	color = COLOR_DARK_ORANGE
+
+/obj/structure/curtain/color/yellow
+	color = COLOR_BROWN
+/obj/structure/curtain/open/color/yellow
+	color = COLOR_BROWN
+
+/obj/structure/curtain/color/brown
+	color = COLOR_DARK_BROWN
+/obj/structure/curtain/open/color/brown
+	color = COLOR_DARK_BROWN
+
+/obj/structure/curtain/color/burgandy
+	color = "#4C0000"
+/obj/structure/curtain/open/color/burgandy
+	color = "#4C0000"
+
+/obj/structure/curtain/color/forest
+	color = "#204f13"
+/obj/structure/curtain/open/color/forest
+	color = "#204f13"
+
 #undef SHOWER_OPEN_LAYER
 #undef SHOWER_CLOSED_LAYER
