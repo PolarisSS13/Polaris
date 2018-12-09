@@ -122,7 +122,7 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 /obj/item/weapon/gun/projectile/revolver/deckard
 	name = "\improper Deckard .38"
 	desc = "A custom-built revolver, based off the semi-popular Detective Special model. Uses .38-Special rounds."
-	icon_state = "deckard-empty"
+	icon_state = "deckard-loaded"
 	caliber = ".38"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	fire_sound = 'sound/weapons/gunshot3.ogg'

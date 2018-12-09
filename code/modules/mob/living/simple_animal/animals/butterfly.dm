@@ -17,6 +17,9 @@
 	pass_flags = PASSTABLE
 	mob_size = MOB_SMALL
 
+	hovering = TRUE
+	softfall = TRUE
+	parachuting = TRUE
 
 /mob/living/simple_animal/butterfly/New()
 	..()

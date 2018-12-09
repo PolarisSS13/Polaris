@@ -177,7 +177,8 @@
 		extinguish()
 	return ..()
 
-
+/obj/proc/get_cell()
+	return
 
 /obj/fire_act(global_overlay=1)
 	if(!burn_state)
