@@ -832,6 +832,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 // Contains loads of different types of boxes, which may have items inside!
+
+/obj/structure/loot_pile/xmas_tree
 	name = "christmas tree"
 	desc = "Someone's left you a gift, you've never been so happy!"
 	density = TRUE
