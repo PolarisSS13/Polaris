@@ -53,7 +53,7 @@
 
 /obj/item/device/radio/intercom/omni
 	name = "global announcer"
-/obj/item/device/radio/intercom/omni/initialize()
+/obj/item/device/radio/intercom/omni/Initialize()
 	channels = radiochannels.Copy()
 	return ..()
 

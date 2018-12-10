@@ -54,7 +54,7 @@
 			expired = 1
 	return ..()
 
-/obj/item/weapon/card/id/guest/initialize()
+/obj/item/weapon/card/id/guest/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	update_icon()
