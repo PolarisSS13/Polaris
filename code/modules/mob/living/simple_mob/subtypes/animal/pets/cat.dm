@@ -103,7 +103,7 @@
 	icon_dead = "kitten_dead"
 	gender = NEUTER
 
-/mob/living/simple_mob/animal/passive/cat/kitten/initialize()
+/mob/living/simple_mob/animal/passive/cat/kitten/Initialize()
 	if(gender == NEUTER)
 		gender = pick(MALE, FEMALE)
 	return ..()
