@@ -9,7 +9,7 @@
 	icon_opened = "base"
 	req_one_access = list(access_armory)
 
-/obj/structure/closet/secure_closet/guncabinet/initialize()
+/obj/structure/closet/secure_closet/guncabinet/Initialize()
 	. = ..()
 	update_icon()
 
@@ -43,8 +43,8 @@
 
 		overlays += icon(src.icon, "door")
 
-		if(welded)
-			overlays += icon(src.icon,"welded")
+		if(sealed)
+			overlays += icon(src.icon,"sealed")
 
 		if(broken)
 			overlays += icon(src.icon,"broken")

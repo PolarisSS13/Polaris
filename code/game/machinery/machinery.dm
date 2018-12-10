@@ -112,8 +112,12 @@ Class Procs:
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
+	var/clicksound			// sound played on succesful interface. Just put it in the list of vars at the start.
+	var/clickvol = 40		// volume
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/obj/item/weapon/circuitboard/circuit = null
+
+	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
 /obj/machinery/New(l, d=0)
 	..(l)
@@ -122,13 +126,19 @@ Class Procs:
 	if(circuit)
 		circuit = new circuit(src)
 
-/obj/machinery/initialize()
+/obj/machinery/Initialize()
 	. = ..()
 	global.machines += src
-	START_MACHINE_PROCESSING(src)
+	if(!speed_process)
+		START_MACHINE_PROCESSING(src)
+	else
+		START_PROCESSING(SSfastprocess, src)
 
 /obj/machinery/Destroy()
-	STOP_MACHINE_PROCESSING(src)
+	if(!speed_process)
+		STOP_MACHINE_PROCESSING(src)
+	else
+		STOP_PROCESSING(SSfastprocess, src)
 	global.machines -= src
 	if(component_parts)
 		for(var/atom/A in component_parts)
@@ -150,8 +160,6 @@ Class Procs:
 /obj/machinery/process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
-
-	return
 
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
@@ -228,6 +236,7 @@ Class Procs:
 		return attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
+
 	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
@@ -243,6 +252,9 @@ Class Procs:
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use [src].</span>")
 			return 1
+
+	if(clicksound && istype(user, /mob/living/carbon))
+		playsound(src, clicksound, clickvol)
 
 	add_fingerprint(user)
 

@@ -34,11 +34,11 @@
 	charge = maxcharge
 	update_icon()
 	if(self_recharge)
-		processing_objects |= src
+		START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/cell/Destroy()
 	if(self_recharge)
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/cell/get_cell()
@@ -105,6 +105,10 @@
 // checks if the power cell is able to provide the specified amount of charge
 /obj/item/weapon/cell/proc/check_charge(var/amount)
 	return (charge >= amount)
+
+// Returns how much charge is missing from the cell, useful to make sure not overdraw from the grid when recharging.
+/obj/item/weapon/cell/proc/amount_missing()
+	return max(maxcharge - charge, 0)
 
 // use power from a cell, returns the amount actually used
 /obj/item/weapon/cell/proc/use(var/amount)

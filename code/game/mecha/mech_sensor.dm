@@ -45,8 +45,8 @@
 		var/obj/mecha/R = O
 		if(R && R.occupant)
 			R.occupant << block_message
-	else if(istype(O, /obj/vehicle/train/cargo/engine))
-		var/obj/vehicle/train/cargo/engine/E = O
+	else if(istype(O, /obj/vehicle/train/engine))
+		var/obj/vehicle/train/engine/E = O
 		if(E && E.load && E.is_train_head())
 			E.load << block_message
 
@@ -69,7 +69,7 @@
 	else
 		icon_state = "airlock_sensor_off"
 
-/obj/machinery/mech_sensor/initialize()
+/obj/machinery/mech_sensor/Initialize()
 	. = ..()
 	set_frequency(frequency)
 

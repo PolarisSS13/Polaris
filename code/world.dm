@@ -62,6 +62,8 @@ var/global/datum/global_init/init = new ()
 	if(config && config.log_runtime)
 		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
 
+	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
+
 	callHook("startup")
 	//Emergency Fix
 	load_mods()
@@ -167,7 +169,10 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			s["players"] = players.len
 			s["playerlist"] = list2params(players)
-			s["admins"] = admins.len
+			var/list/adm = get_admin_counts()
+			var/list/presentmins = adm["present"]
+			var/list/afkmins = adm["afk"]
+			s["admins"] = presentmins.len + afkmins.len //equivalent to the info gotten from adminwho
 			s["adminlist"] = list2params(admins)
 		else
 			var/n = 0
@@ -414,19 +419,27 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Database connection failed or not set up"
 
 
-/world/Reboot(var/reason)
+/world/Reboot(reason = 0, fast_track = FALSE)
 	/*spawn(0)
 		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
 		*/
+	if (reason || fast_track) //special reboot, do none of the normal stuff
+		if (usr)
+			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
+			message_admins("[key_name_admin(usr)] Has requested an immediate world restart via client side debugging tools")
+			world << "<span class='boldannounce'>[key_name_admin(usr)] has requested an immediate world restart via client side debugging tools</span>"
+			
+		else
+			world << "<span class='boldannounce'>Rebooting world immediately due to host request</span>"
+	else
+		processScheduler.stop()
+		Master.Shutdown()	//run SS shutdowns
+		for(var/client/C in clients)
+			if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
+				C << link("byond://[config.server]")
 
-	processScheduler.stop()
-	Master.Shutdown()	//run SS shutdowns
-
-	for(var/client/C in clients)
-		if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-			C << link("byond://[config.server]")
-
-	..(reason)
+	log_world("World rebooted at [time_stamp()]")
+	..()
 
 /hook/startup/proc/loadMode()
 	world.load_mode()

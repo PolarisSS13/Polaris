@@ -106,6 +106,8 @@
 		M.drowsyness = max(0, M.drowsyness - 6 * removed * chem_effective)
 		M.hallucination = max(0, M.hallucination - 9 * removed * chem_effective)
 		M.adjustToxLoss(-4 * removed * chem_effective)
+		if(prob(10))
+			M.remove_a_modifier_of_type(/datum/modifier/poisoned)
 
 /datum/reagent/carthatoline
 	name = "Carthatoline"
@@ -121,6 +123,8 @@
 	if(M.getToxLoss() && prob(10))
 		M.vomit(1)
 	M.adjustToxLoss(-8 * removed)
+	if(prob(30))
+		M.remove_a_modifier_of_type(/datum/modifier/poisoned)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/liver/L = H.internal_organs_by_name[O_LIVER]
@@ -814,6 +818,7 @@
 	reagent_state = LIQUID
 	color = "#BF80BF"
 	metabolism = 0.01
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -836,6 +841,7 @@
 	reagent_state = LIQUID
 	color = "#FF80FF"
 	metabolism = 0.01
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -858,6 +864,7 @@
 	reagent_state = LIQUID
 	color = "#FF80BF"
 	metabolism = 0.01
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 
@@ -884,6 +891,7 @@
 	reagent_state = LIQUID
 	color = "#e6efe3"
 	metabolism = 0.01
+	ingest_met = 0.25
 	mrate_static = TRUE
 	data = 0
 

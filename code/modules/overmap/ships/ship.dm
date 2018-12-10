@@ -14,7 +14,7 @@
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/computer/engines/eng_control
 
-/obj/effect/map/ship/initialize()
+/obj/effect/map/ship/Initialize()
 	. = ..()
 	for(var/obj/machinery/computer/engines/E in machines)
 		if (E.z == map_z)
@@ -24,7 +24,7 @@
 		if (H.z == map_z)
 			nav_control = H
 			break
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/map/ship/relaymove(mob/user, direction)
 	accelerate(direction)

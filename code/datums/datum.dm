@@ -5,8 +5,8 @@
 
 /datum
 	var/gc_destroyed //Time when this object was destroyed.
-	var/weakref/weakref // Holder of weakref instance pointing to this datum
 	var/list/active_timers  //for SStimer
+	var/weakref/weakref // Holder of weakref instance pointing to this datum
 	var/is_processing = FALSE // If this datum is in an MC processing list, this will be set to its name.
 
 #ifdef TESTING
@@ -18,6 +18,16 @@
 // This should be overridden to remove all references pointing to the object being destroyed.
 // Return the appropriate QDEL_HINT; in most cases this is QDEL_HINT_QUEUE.
 /datum/proc/Destroy(force=FALSE)
+
+	//clear timers
+	var/list/timers = active_timers
+	active_timers = null
+	for(var/thing in timers)
+		var/datum/timedevent/timer = thing
+		if (timer.spent)
+			continue
+		qdel(timer)
+
 	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
 
 	var/list/timers = active_timers

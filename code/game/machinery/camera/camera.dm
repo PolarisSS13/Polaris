@@ -91,7 +91,7 @@
 			kick_viewers()
 			update_icon()
 			update_coverage()
-			processing_objects |= src
+			START_PROCESSING(SSobj, src)
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
@@ -138,7 +138,7 @@
 
 /obj/machinery/camera/attack_generic(mob/user as mob)
 	if(isanimal(user))
-		var/mob/living/simple_animal/S = user
+		var/mob/living/simple_mob/S = user
 		set_status(0)
 		S.do_attack_animation(src)
 		S.setClickCooldown(user.get_attack_speed())
@@ -390,7 +390,7 @@
 		return 0
 
 	// Do after stuff here
-	user << "<span class='notice'>You start to weld the [src]..</span>"
+	user << "<span class='notice'>You start to weld [src]..</span>"
 	playsound(src.loc, WT.usesound, 50, 1)
 	WT.eyecheck(user)
 	busy = 1

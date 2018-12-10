@@ -12,12 +12,13 @@
 
 	var/last_message	= "" //Contains the last message sent by this client - used to protect against copy-paste spamming.
 	var/last_message_count = 0 //contins a number of how many times a message identical to last_message was sent.
+	var/ircreplyamount = 0
 
 		/////////
 		//OTHER//
 		/////////
 	var/datum/preferences/prefs = null
-	var/move_delay		= 1
+	//var/move_delay		= 1
 	var/moving			= null
 	var/adminobs		= null
 	var/area			= null

@@ -14,7 +14,7 @@ var/global/list/ashtray_cache = list()
 	if(!material)
 		qdel(src)
 		return
-	max_butts = round(material.hardness/10) //This is arbitrary but whatever.
+	max_butts = round(material.hardness/5) //This is arbitrary but whatever.
 	src.pixel_y = rand(-5, 5)
 	src.pixel_x = rand(-6, 6)
 	update_icon()
@@ -57,7 +57,7 @@ var/global/list/ashtray_cache = list()
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
 				src.visible_message("[user] crushes [cig] in \the [src], putting it out.")
-				processing_objects.Remove(cig)
+				STOP_PROCESSING(SSobj, cig)
 				var/obj/item/butt = new cig.type_butt(src)
 				cig.transfer_fingerprints_to(butt)
 				qdel(cig)

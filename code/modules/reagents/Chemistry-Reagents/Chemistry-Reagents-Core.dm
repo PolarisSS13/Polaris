@@ -42,6 +42,13 @@
 	var/effective_dose = dose
 	if(issmall(M)) effective_dose *= 2
 
+	if(alien == IS_SLIME)	// Treat it like nutriment for the jello, but not equivalent.
+		M.heal_organ_damage(0.2 * removed * volume_mod, 0)	// More 'effective' blood means more usable material.
+		M.nutrition += 20 * removed * volume_mod
+		M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+		M.adjustToxLoss(removed / 2)	// Still has some water in the form of plasma.
+		return
+
 	if(effective_dose > 5)
 		M.adjustToxLoss(removed)
 	if(effective_dose > 15)
@@ -59,6 +66,9 @@
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
+	if(alien == IS_SLIME)
+		affect_ingest(M, alien, removed)
+		return
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -70,6 +80,9 @@
 		M.antibodies |= data["antibodies"]
 
 /datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_SLIME)	//They don't have blood, so it seems weird that they would instantly 'process' the chemical like another species does.
+		affect_ingest(M, alien, removed)
+		return
 	M.inject_blood(src, volume * volume_mod)
 	remove_self(volume)
 
@@ -148,8 +161,8 @@
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		// First, kill slimes.
-		if(istype(L, /mob/living/simple_animal/slime))
-			var/mob/living/simple_animal/slime/S = L
+		if(istype(L, /mob/living/simple_mob/slime))
+			var/mob/living/simple_mob/slime/S = L
 			S.adjustToxLoss(15 * amount)
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 

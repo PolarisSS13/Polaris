@@ -1,4 +1,8 @@
 /*
+				DO NOT USE THIS. THIS IS BEING DEPRECATED BY PROCESSING SUBSYSTEMS (controllers/subsystems/processing) AND TIMERS.
+*/
+
+/*
 README:
 
 The global_iterator datum is supposed to provide a simple and robust way to
