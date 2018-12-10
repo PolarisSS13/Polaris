@@ -305,7 +305,7 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(M, "Colony Directorship not forced on anyone.")
 
 
-	proc/process()
+	process()
 		if(current_state != GAME_STATE_PLAYING)
 			return 0
 
