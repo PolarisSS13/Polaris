@@ -155,7 +155,6 @@
 
 /datum/reagent/toxin/mold/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.adjustToxLoss(strength * removed)
 	if(prob(5))
 		M.vomit()
 
@@ -169,7 +168,6 @@
 
 /datum/reagent/toxin/expired_medicine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.adjustToxLoss(strength * removed)
 	if(prob(5))
 		M.vomit()
 
