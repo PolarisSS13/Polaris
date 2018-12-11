@@ -333,7 +333,7 @@ datum/weather/sif
 
 /datum/weather/sif/acid_rain
 	name = "acid rain"
-	icon_state = "rain"
+	icon_state = "acid_rain"
 	light_modifier = 0.5
 	transition_chances = list(
 		WEATHER_RAIN = 45,

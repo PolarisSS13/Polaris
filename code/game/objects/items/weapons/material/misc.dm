@@ -97,13 +97,13 @@
 		visible_message("[user] has smashed the snowball in their hand!", "You smash the snowball in your hand.")
 		var/atom/S = new /obj/item/stack/material/snow(user.loc)
 		del(src)
-		user.put_in_hands(S)
+		user.put_in_active_hand(S, TRUE)
 	else
 		visible_message("[user] starts compacting the snowball.", "You start compacting the snowball.")
 		if(do_after(user, 2 SECONDS))
 			var/atom/S = new /obj/item/weapon/material/snow/snowball/reinforced(user.loc)
 			del(src)
-			user.put_in_hands(S)
+			user.put_in_active_hand(S, TRUE)
 
 /obj/item/weapon/material/snow/snowball/reinforced
 	name = "snowball"
@@ -111,3 +111,13 @@
 	//icon_state = "reinf-snowball"
 	force_divisor = 0.20
 	thrown_force_divisor = 0.25
+
+/obj/item/weapon/material/snow/snowball/throw_impact(atom/hit_atom)
+	..()
+	var/datum/effect/effect/system/steam_spread/s = new /datum/effect/effect/system/steam_spread
+	s.set_up(3, 1, src.loc)
+	s.start()
+	new /obj/item/stack/material/snow(src.loc)
+	src.visible_message("<span class='warning'>The [src.name] crumbles from the impact!</span>","<span class='warning'>You hear a soft thud!</span>")
+	playsound(src, 'sound/effects/footstep/snow3.ogg', 50, 1)
+	qdel(src)

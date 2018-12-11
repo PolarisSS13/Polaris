@@ -32,29 +32,6 @@
 	var/temperature_alert = 0
 	var/in_stasis = 0
 	var/heartbeat = 0
-/*
-/mob/living/carbon/human/proc/adjustagetraits()
-	switch(age)
-		if(age == 5 to 12)
-			f_style = "Shaved"
-			add_modifier(/datum/trait/modifier/physical/smaller, 0)
-			add_modifier(/datum/trait/modifier/physical/frail, 0)
-			add_modifier(/datum/trait/modifier/physical/wimpy, 0)
-			add_modifier(/datum/trait/modifier/physical/inaccurate, 0)
-			add_modifier(/datum/trait/modifier/physical/haemophilia, 0)
-			//You will find that uh, kids are pretty vulnerable.
-			add_modifier(/datum/trait/modifier/physical/no_borg, 0)
-			//Kids are too young. Ha.
-			add_modifier(/datum/trait/modifier/physical/high_metabolism, 0)
-			//	Kids need plenty of veggies, for growing, or whatever.
-
-		if(age == 13 to 17)
-			add_modifier(/datum/trait/modifier/physical/small, 0)
-			add_modifier(/datum/trait/modifier/physical/flimsy, 0)
-			add_modifier(/datum/trait/modifier/physical/weak, 0)
-		else
-	return
-*/
 
 
 /mob/living/carbon/human/Life()

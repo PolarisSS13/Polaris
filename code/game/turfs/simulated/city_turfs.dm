@@ -82,5 +82,6 @@
 	name = "garage floor"
 	icon_state = "garage"
 	initial_flooring = /decl/flooring/road/garage
+	outdoors = FALSE
 
 
