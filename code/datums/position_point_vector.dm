@@ -64,7 +64,7 @@
 	return sqrt(((b.x - a.x) ** 2) + ((b.y - a.y) ** 2))
 
 /proc/angle_between_points(datum/point/a, datum/point/b)
-	return Atan2((b.y - a.y), (b.x - a.x))
+	return ATAN2((b.y - a.y), (b.x - a.x))
 
 /datum/point		//A precise point on the map in absolute pixel locations based on world.icon_size. Pixels are FROM THE EDGE OF THE MAP!
 	var/x = 0
@@ -115,10 +115,10 @@
 	AM.pixel_y = return_py()
 
 /datum/point/proc/return_turf()
-	return locate(Ceiling(x / world.icon_size, 1), Ceiling(y / world.icon_size, 1), z)
+	return locate(CEILING(x / world.icon_size, 1), CEILING(y / world.icon_size, 1), z)
 
 /datum/point/proc/return_coordinates()		//[turf_x, turf_y, z]
-	return list(Ceiling(x / world.icon_size, 1), Ceiling(y / world.icon_size, 1), z)
+	return list(CEILING(x / world.icon_size, 1), CEILING(y / world.icon_size, 1), z)
 
 /datum/point/proc/return_position()
 	return new /datum/position(src)

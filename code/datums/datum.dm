@@ -30,14 +30,6 @@
 
 	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
 
-	var/list/timers = active_timers
-	active_timers = null
-	for(var/thing in timers)
-		var/datum/timedevent/timer = thing
-		if (timer.spent)
-			continue
-		qdel(timer)
-
 	tag = null
 	GLOB.nanomanager.close_uis(src)
 	return QDEL_HINT_QUEUE

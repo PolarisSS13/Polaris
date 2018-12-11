@@ -1,5 +1,6 @@
 //temporary visual effects
 /obj/effect/temp_visual
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "nothing"
 	anchored = TRUE
 	layer = ABOVE_MOB_LAYER
