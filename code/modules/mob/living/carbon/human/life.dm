@@ -103,15 +103,27 @@
 	if(!inStasisNow())
 		..()
 
-// Calculate how vulnerable the human is to under- and overpressure.
-// Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
+// Calculate how vulnerable the human is to the current pressure.
+// Returns 0 (equals 0 %) if sealed in an undamaged suit that's rated for the pressure, 1 if unprotected (equals 100%).
 // Suitdamage can modifiy this in 10% steps.
-/mob/living/carbon/human/proc/get_pressure_weakness()
+// Protection scales down from 100% at the boundary to 0% at 10% in excess of the boundary
+/mob/living/carbon/human/proc/get_pressure_weakness(pressure)
+	if(pressure == null)
+		return 1 // No protection if someone forgot to give a pressure
 
 	var/pressure_adjustment_coefficient = 1 // Assume no protection at first.
 
-	if(wear_suit && (wear_suit.item_flags & STOPPRESSUREDAMAGE) && head && (head.item_flags & STOPPRESSUREDAMAGE)) // Complete set of pressure-proof suit worn, assume fully sealed.
+	// Check suit
+	if(wear_suit && wear_suit.max_pressure_protection != null && wear_suit.min_pressure_protection != null)
 		pressure_adjustment_coefficient = 0
+		// Pressure is too high
+		if(wear_suit.max_pressure_protection < pressure)
+			// Protection scales down from 100% at the boundary to 0% at 10% in excess of the boundary
+			pressure_adjustment_coefficient += round((pressure - wear_suit.max_pressure_protection) / (wear_suit.max_pressure_protection/10))
+
+		// Pressure is too low
+		if(wear_suit.min_pressure_protection > pressure)
+			pressure_adjustment_coefficient += round((wear_suit.min_pressure_protection - pressure) / (wear_suit.min_pressure_protection/10))
 
 		// Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure protection.
 		if(istype(wear_suit,/obj/item/clothing/suit/space))
@@ -119,8 +131,27 @@
 			if(S.can_breach && S.damage)
 				pressure_adjustment_coefficient += S.damage * 0.1
 
-	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) // So it isn't less than 0 or larger than 1.
+	else
+		// Missing key protection
+		pressure_adjustment_coefficient = 1
 
+	// Check hat
+	if(head && head.max_pressure_protection != null && head.min_pressure_protection != null)
+		// Pressure is too high
+		if(head.max_pressure_protection < pressure)
+			// Protection scales down from 100% at the boundary to 0% at 10% in excess of the boundary
+			pressure_adjustment_coefficient += round((pressure - head.max_pressure_protection) / (head.max_pressure_protection/10))
+
+		// Pressure is too low
+		if(head.min_pressure_protection > pressure)
+			pressure_adjustment_coefficient += round((head.min_pressure_protection - pressure) / (head.min_pressure_protection/10))
+
+	else
+		// Missing key protection
+		pressure_adjustment_coefficient = 1
+
+	pressure_adjustment_coefficient = min(pressure_adjustment_coefficient, 1)
+	world << "pressure coefficient at pressure [pressure] kPa -- [pressure_adjustment_coefficient]"
 	return pressure_adjustment_coefficient
 
 // Calculate how much of the enviroment pressure-difference affects the human.
@@ -140,7 +171,9 @@
 	else
 		// Otherwise calculate how much of that absolute pressure difference affects us, can be 0 to 1 (equals 0% to 100%).
 		// This is our relative difference.
-		pressure_difference *= get_pressure_weakness()
+		pressure_difference *= get_pressure_weakness(pressure)
+
+	world << "pressure_difference at [pressure]kPa: [pressure_difference]"
 
 	// The difference is always positive to avoid extra calculations.
 	// Apply the relative difference on a standard atmosphere to get the final result.
@@ -674,7 +707,8 @@
 
 	// Account for massive pressure differences.  Done by Polymorph
 	// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
-	if(status_flags & GODMODE)	return 1	//godmode
+	if(status_flags & GODMODE)
+		return 1	//godmode
 
 	if(adjusted_pressure >= species.hazard_high_pressure)
 		var/pressure_damage = min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE)

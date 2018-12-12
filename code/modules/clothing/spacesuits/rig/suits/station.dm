@@ -155,6 +155,7 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 	siemens_coefficient= 0.75
+	rigsuit_max_pressure = 100 * ONE_ATMOSPHERE // Comparable to atmos suit
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/gauntlets/rig/ce
