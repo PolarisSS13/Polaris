@@ -151,7 +151,6 @@
 		pressure_adjustment_coefficient = 1
 
 	pressure_adjustment_coefficient = min(pressure_adjustment_coefficient, 1)
-	world << "pressure coefficient at pressure [pressure] kPa -- [pressure_adjustment_coefficient]"
 	return pressure_adjustment_coefficient
 
 // Calculate how much of the enviroment pressure-difference affects the human.
@@ -172,8 +171,6 @@
 		// Otherwise calculate how much of that absolute pressure difference affects us, can be 0 to 1 (equals 0% to 100%).
 		// This is our relative difference.
 		pressure_difference *= get_pressure_weakness(pressure)
-
-	world << "pressure_difference at [pressure]kPa: [pressure_difference]"
 
 	// The difference is always positive to avoid extra calculations.
 	// Apply the relative difference on a standard atmosphere to get the final result.
