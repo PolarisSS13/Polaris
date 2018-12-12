@@ -15,12 +15,16 @@
 	w_class = ITEMSIZE_SMALL
 	var/scanning = 0
 	var/radiation_count = 0
+	var/datum/looping_sound/generator/soundloop
 
-/obj/item/device/geiger/New()
+/obj/item/device/geiger/Initialize()
 	START_PROCESSING(SSobj, src)
+	soundloop = new(list(src), FALSE)
+	return ..()
 
 /obj/item/device/geiger/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(soundloop)
 	return ..()
 
 /obj/item/device/geiger/process()
@@ -44,14 +48,19 @@
 	if(amount > radiation_count)
 		radiation_count = amount
 
-	var/sound = "geiger"
-	if(amount < 5)
-		sound = "geiger_weak"
-	playsound(src, sound, between(10, 10 + (radiation_count * 4), 100), 0)
-	if(sound == "geiger_weak") // A weak geiger sound every two seconds sounds too infrequent.
-		spawn(1 SECOND)
-			playsound(src, sound, between(10, 10 + (radiation_count * 4), 100), 0)
+	update_sound()
 	update_icon()
+
+/obj/item/device/geiger/proc/update_sound()
+	var/datum/looping_sound/geiger/loop = soundloop
+	if(!scanning)
+		loop.stop()
+		return
+	if(!radiation_count)
+		loop.stop()
+		return
+	loop.last_radiation = radiation_count
+	loop.start()
 
 /obj/item/device/geiger/attack_self(var/mob/user)
 	scanning = !scanning
