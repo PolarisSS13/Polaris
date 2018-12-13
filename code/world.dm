@@ -84,13 +84,6 @@ var/global/datum/global_init/init = new ()
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
 
-	// Loads all the pre-made submap templates.
-	load_map_templates()
-
-	if(config.generate_map)
-		if(using_map.perform_map_generation())
-			using_map.refresh_mining_turfs()
-
 	// Create frame types.
 	populate_frame_types()
 
@@ -428,7 +421,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
 			message_admins("[key_name_admin(usr)] Has requested an immediate world restart via client side debugging tools")
 			world << "<span class='boldannounce'>[key_name_admin(usr)] has requested an immediate world restart via client side debugging tools</span>"
-			
+
 		else
 			world << "<span class='boldannounce'>Rebooting world immediately due to host request</span>"
 	else
