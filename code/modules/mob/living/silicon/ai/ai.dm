@@ -48,6 +48,7 @@ var/list/ai_verbs_default = list(
 	density = 1
 	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	shouldnt_see = list(/obj/effect/rune)
+	sight = 65535 // I don't know how this fixes AI sight or why it broke. But it does.
 	var/list/network = list(NETWORK_DEFAULT)
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
@@ -622,7 +623,7 @@ var/list/ai_verbs_default = list(
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holounam"))
 					if("female unathi")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holounaf"))
-					if("male tajaran")
+/*					if("male tajaran")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajm"))
 					if("female tajaran")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajf"))
@@ -634,7 +635,7 @@ var/list/ai_verbs_default = list(
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrm"))
 					if("female skrell")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrf"))
-
+*/
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
 	set name = "Toggle Camera Light"

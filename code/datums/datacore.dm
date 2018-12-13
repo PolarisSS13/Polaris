@@ -264,6 +264,10 @@
 		var/icon/charicon = cached_character_icon(H)
 		front = icon(charicon, dir = SOUTH)
 		side = icon(charicon, dir = WEST)
+	else // Sending null things through browse_rsc() makes a runtime and breaks the console trying to view the record.
+		front = icon('html/images/no_image32.png')
+		side = icon('html/images/no_image32.png')
+
 
 	if(!id)
 		id = text("[]", add_zero(num2hex(rand(1, 65536)), 4))
@@ -271,8 +275,8 @@
 	G.name = "Employee Record #[id]"
 	G.fields["name"] = "New Record"
 	G.fields["id"] = id
-	G.fields["rank"] = "Unassigned"
-	G.fields["real_rank"] = "Unassigned"
+	G.fields["rank"] = "Unspecified"
+	G.fields["real_rank"] = "Unspecified"
 	G.fields["sex"] = "Unknown"
 	G.fields["age"] = "Unknown"
 	G.fields["brain_type"] = "Unknown"
@@ -299,12 +303,13 @@
 	R.fields["id"] = id
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
-	R.fields["mi_crim"]		= "None"
-	R.fields["mi_crim_d"]	= "No minor crime convictions."
-	R.fields["ma_crim"]		= "None"
-	R.fields["ma_crim_d"]	= "No major crime convictions."
+	R.fields["pre_con"]		= "None"
+	R.fields["pre_con_d"]	= "No previous crime convictions."
+	R.fields["warn"]		= "None"
+	R.fields["warn_d"]	= "No warnings."
+	R.fields["injunc"]	= "None."
+	R.fields["injunc_d"]	= "No injunctions."
 	R.fields["notes"]		= "No notes."
-	R.fields["notes"] = "No notes."
 	data_core.security += R
 
 	return R

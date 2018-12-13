@@ -11,6 +11,7 @@
  * 		Wirecutters
  * 		Welding Tool
  * 		Crowbar
+ *		Airlock Override Pack
  */
 
 /*
@@ -205,6 +206,23 @@
 	user.put_in_active_hand(counterpart)
 	to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")
 
+
+/*
+ *	Airlock Override Pack
+ */
+ /obj/item/device/AOP
+ 	name = "AOP"
+ 	desc = "For when there's no other way but through"
+ 	icon_state = "powersink0"
+ 	w_class = ITEMSIZE_HUGE
+	force = 10
+	throwforce = 8
+	throw_speed = 1
+	throw_range = 3
+	usesound = 'sound/items/ratchet.ogg'
+	matter = list(DEFAULT_WALL_MATERIAL = 75)
+	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
+	toolspeed = 1
 /*
  * Wirecutters
  */

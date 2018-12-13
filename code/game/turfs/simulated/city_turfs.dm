@@ -78,4 +78,10 @@
 	icon_state = "road_marking"
 	initial_flooring = /decl/flooring/road/markings
 
+/turf/simulated/floor/road/garage
+	name = "garage floor"
+	icon_state = "garage"
+	initial_flooring = /decl/flooring/road/garage
+	outdoors = FALSE
+
 

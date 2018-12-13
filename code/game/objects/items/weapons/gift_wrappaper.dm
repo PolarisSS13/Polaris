@@ -46,7 +46,7 @@
 /obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
-	if (!istype(W, /obj/item/weapon/wirecutters))
+	if (!istype(W, /obj/item/weapon/scissors))
 		user << "<span class='warning'>I need wirecutters for that.</span>"
 		return
 
@@ -62,48 +62,48 @@
 
 /obj/item/weapon/a_gift/attack_self(mob/M as mob)
 	var/gift_type = pick(
-		/obj/item/weapon/storage/wallet,
-		/obj/item/weapon/storage/photo_album,
-		/obj/item/weapon/storage/box/snappops,
-		/obj/item/weapon/storage/fancy/crayons,
-		/obj/item/weapon/storage/backpack/holding,
-		/obj/item/weapon/storage/belt/champion,
-		/obj/item/weapon/soap/deluxe,
-		/obj/item/weapon/pickaxe/silver,
-		/obj/item/weapon/pen/invisible,
+		/obj/item/weapon/ore/coal, //for the very bad kids.
+		/obj/item/toy/bouquet,
+		/obj/item/toy/stickhorse,
+		/obj/item/toy/eight_ball,
+		/obj/item/toy/eight_ball/conch,
+		/obj/item/toy/griffin,
+		/obj/item/toy/snappop,
+		/obj/item/weapon/spacecash/c200,
+		/obj/item/weapon/spacecash/c100,
+		/obj/item/weapon/spacecash/c10,
+		/obj/item/weapon/spacecash/c500,
+		/obj/item/weapon/dice,
 		/obj/item/weapon/lipstick/random,
-		/obj/item/weapon/grenade/smokebomb,
-		/obj/item/weapon/corncob,
-		/obj/item/weapon/contraband/poster,
-		/obj/item/weapon/book/manual/barman_recipes,
-		/obj/item/weapon/book/manual/chef_recipes,
-		/obj/item/weapon/bikehorn,
-		/obj/item/weapon/beach_ball,
-		/obj/item/weapon/beach_ball/holoball,
+		/obj/item/device/camera,
+		/obj/item/device/binoculars,
+		/obj/item/weapon/bikehorn/rubberducky,
+		/obj/item/weapon/deck/tarot,
+		/obj/item/weapon/flame/lighter/random,
+		/obj/item/weapon/flame/lighter/zippo/ironic,
+		/obj/item/weapon/flame/lighter/zippo/gold,
+		/obj/item/weapon/pen/fountain,
+		/obj/item/device/laptop,
+		/obj/item/toy/plushie/corgi,
+		/obj/item/clothing/accessory/bracelet/friendship,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,
+		/obj/item/weapon/haircomb,
+		/obj/item/weapon/inflatable_duck,
 		/obj/item/toy/balloon,
-		/obj/item/toy/blink,
-		/obj/item/toy/crossbow,
-		/obj/item/weapon/gun/projectile/revolver/capgun,
-		/obj/item/toy/katana,
-		/obj/item/toy/prize/deathripley,
-		/obj/item/toy/prize/durand,
-		/obj/item/toy/prize/fireripley,
-		/obj/item/toy/prize/gygax,
-		/obj/item/toy/prize/honk,
-		/obj/item/toy/prize/marauder,
-		/obj/item/toy/prize/mauler,
-		/obj/item/toy/prize/odysseus,
-		/obj/item/toy/prize/phazon,
-		/obj/item/toy/prize/ripley,
-		/obj/item/toy/prize/seraph,
-		/obj/item/toy/spinningtoy,
-		/obj/item/toy/sword,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/device/paicard,
-		/obj/item/device/violin,
-		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/clothing/accessory/tie/horrible)
+		/obj/item/weapon/beach_ball/holoball,
+		/obj/item/weapon/soap/deluxe,
+		/obj/item/weapon/toy/xmas_cracker,
+		/obj/item/toy/waterflower,
+		/obj/item/weapon/melee/umbrella/random,
+		/obj/item/weapon/paper/card/smile,
+		/obj/item/weapon/storage/fancy/heartbox,
+		/obj/item/clothing/accessory/locket,
+		/obj/item/clothing/suit/xenos,
+		/obj/item/stack/material/diamond,
+		/obj/item/clothing/gloves/ring/material/silver,
+		/obj/item/clothing/gloves/ring/material/gold,
+		/obj/random/soap,
+		/obj/random/drinkbottle)
 
 	if(!ispath(gift_type,/obj/item))	return
 
@@ -129,7 +129,7 @@
 	if (!( locate(/obj/structure/table, src.loc) ))
 		user << "<span class='warning'>You MUST put the paper on a table!</span>"
 	if (W.w_class < ITEMSIZE_LARGE)
-		if (user.get_type_in_hands(/obj/item/weapon/wirecutters))
+		if (user.get_type_in_hands(/obj/item/weapon/scissors))
 			var/a_used = 2 ** (src.w_class - 1)
 			if (src.amount < a_used)
 				user << "<span class='warning'>You need more paper!</span>"

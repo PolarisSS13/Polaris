@@ -109,6 +109,23 @@
 	else
 		icon_state = "secgundark-e"
 
+/obj/item/weapon/gun/projectile/police
+	name = ".45 handgun"
+	desc = "The SO Enforcer is a simple yet efficent firearm favored by law enforcement agencies on Pollux. Uses .45 rounds."
+	icon_state = "enforcer_black"
+	magazine_type = /obj/item/ammo_magazine/m45
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	caliber = ".45"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+	load_method = MAGAZINE
+
+/obj/item/weapon/gun/projectile/police/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "enforcer_black"
+	else
+		icon_state = "enforcer_black-e"
+
 /obj/item/weapon/gun/projectile/silenced
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
@@ -288,6 +305,10 @@
 	var/obj/item/ammo_casing/ammo = ammo_type
 	caliber = initial(ammo.caliber)
 	..()
+
+/obj/item/weapon/gun/projectile/pirate/thug
+	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in Pollux underworld. Uses 12g rounds"
+	ammo_type = /obj/item/ammo_casing/a12g
 
 /obj/item/weapon/gun/projectile/derringer
 	name = "derringer"

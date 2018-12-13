@@ -90,7 +90,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 			if(loot)
 				searched_by |= user.ckey
-				loot.forceMove(get_turf(src))
+				loot.forceMove(get_turf(user))
 				to_chat(L, "<span class='[span]'>You found \a [loot]!</span>")
 				if(loot_depletion)
 					loot_left--
@@ -830,3 +830,70 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/repair_droid,
 		/obj/item/mecha_parts/mecha_equipment/teleporter
 		)
+
+// Contains loads of different types of boxes, which may have items inside!
+
+/obj/structure/loot_pile/xmas_tree
+	name = "christmas tree"
+	desc = "Someone's left you a gift, you've never been so happy!"
+	density = TRUE
+	icon = 'icons/obj/flora/pinetrees.dmi'
+	icon_state = "pine_d"
+	loot_depletion = FALSE
+	pixel_x = -16
+	plane = 0
+	layer = MOB_LAYER // You know what, let's play it safe.
+	burn_state = 0 //Burnable
+	burntime = PROLONGED_BURN
+
+	common_loot = list(
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift
+	)
+
+	uncommon_loot = list(
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+
+	)
+
+	rare_loot = list(
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/a_gift,
+		/obj/item/weapon/gift
+	)
+
+//before you judge me for this, basically giftboxes prechoose their loot?
+//So even if you go to different trees you'll keep getting the same loot otherwise.
+//I guess this makes it more likely for different types of loot to be discovered per tree
+//for different trees. Eurgh, we'll get a better method, promise.
+
+/obj/structure/loot_pile/xmas_tree/initialize()
+
+	icon = 'icons/obj/flora/pinetrees.dmi'
+	icon_state = "pine_d"
+	. = ..()

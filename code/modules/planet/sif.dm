@@ -1,13 +1,12 @@
 var/datum/planet/sif/planet_sif = null
 
 /datum/planet/sif
-	name = "Sif"
+	name = "Pollux"
 
 /datum/planet/sif
-	name = "Sif"
-	desc = "Sif is a terrestrial planet in the Vir system. It is somewhat earth-like, in that it has oceans, a \
-	breathable atmosphere, a magnetic field, weather, and similar gravity to Earth. It is currently the capital planet of Vir. \
-	Its center of government is the equatorial city and site of first settlement, New Reykjavik." // Ripped straight from the wiki.
+	name = "Pollux"
+	desc = "Pollux is a terrestrial planet in the Vetra system. It is somewhat earth-like, in that it has oceans, a \
+	breathable atmosphere, a magnetic field, weather, and similar gravity to Earth." // Ripped straight from the wiki.
 	current_time = new /datum/time/sif() // 32 hour clocks are nice.
 //	expected_z_levels = list(1) // To be changed when real map is finished.
 	planetary_wall_type = /turf/unsimulated/wall/planetary/sif
@@ -334,7 +333,7 @@ datum/weather/sif
 
 /datum/weather/sif/acid_rain
 	name = "acid rain"
-	icon_state = "rain"
+	icon_state = "acid_rain"
 	light_modifier = 0.5
 	transition_chances = list(
 		WEATHER_RAIN = 45,
