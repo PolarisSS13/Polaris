@@ -174,7 +174,7 @@
 		else
 			potential_submaps += MT
 
-//	CHECK_TICK
+	CHECK_TICK
 
 	var/list/loaded_submap_names = list()
 	var/list/template_groups_used = list() // Used to avoid spawning three seperate versions of the same PoI.
@@ -194,7 +194,7 @@
 			admin_notice("Submap loader had no submaps to pick from with [budget] left to spend.", R_DEBUG)
 			break
 
-//		CHECK_TICK
+		CHECK_TICK
 
 		// Can we afford it?
 		if(chosen_template.cost > budget)
@@ -232,9 +232,9 @@
 					valid = FALSE // Probably overlapping something important.
 			//		world << "Invalid due to overlapping with area [new_area.type] at ([check.x], [check.y], [check.z]), when attempting to place at ([T.x], [T.y], [T.z])."
 					break
-//				CHECK_TICK
+				CHECK_TICK
 
-//			CHECK_TICK
+			CHECK_TICK
 
 			if(!valid)
 				continue
@@ -244,7 +244,7 @@
 			// Do loading here.
 			chosen_template.load(T, centered = TRUE, orientation=orientation) // This is run before the main map's initialization routine, so that can initilize our submaps for us instead.
 
-//			CHECK_TICK
+			CHECK_TICK
 
 			// For pretty maploading statistics.
 			if(loaded_submap_names[chosen_template.name])
