@@ -185,7 +185,7 @@
 	volume = 15
 	origin_tech = list(TECH_BIO = 4)
 	filled_reagents = list("inaprovaline" = 15)
-	flags = null // Removed OPENCONTAINER so you can't extract things to cheese the identification system in unidentified versions.
+	flags = 0 // Removed OPENCONTAINER so you can't extract things to cheese the identification system in unidentified versions.
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/brute
 	name = "trauma hypo"
@@ -224,7 +224,7 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/organ
 	name = "organ hypo"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity.  Organ damage is resolved by this variant."
-	filled_reagents = list("alkysine" = 1, "imidazoline" = 1, "peridaxon" = 13)
+	filled_reagents = list("alkysine" = 3, "imidazoline" = 2, "peridaxon" = 10)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/combat
 	name = "combat hypo"
@@ -270,7 +270,7 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/serotrotium
 	name = "serotrotium injector"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity. \
-	This one is filled with sertrotium, which causes concentrated production of the serotonin neurotransmitter in humans."
+	This one is filled with serotrotium, which causes concentrated production of the serotonin neurotransmitter in humans."
 	filled_reagents = list("serotrotium" = 15)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/space_drugs
@@ -302,7 +302,7 @@
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/psilocybin
 	name = "psilocybin injector"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity. \
-	This has psilocybin inside, which is a strong psycotropic derived from certain species of mushroom. \
+	This has psilocybin inside, which is a strong psychotropic derived from certain species of mushroom. \
 	This autoinjector likely was made by criminal elements to avoid detection from casual inspection."
 	filled_reagents = list("psilocybin" = 15)
 

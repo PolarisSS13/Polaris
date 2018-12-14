@@ -93,7 +93,7 @@
 
 // Makes a name for an object that is not identified. It picks one string out of each list inside naming_list.
 /datum/identification/proc/generate_unidentified_name()
-	if(!naming_lists.len)
+	if(!LAZYLEN(naming_lists))
 		return "unidentified object"
 
 	var/list/new_name = list()
