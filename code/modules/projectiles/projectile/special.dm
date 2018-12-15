@@ -287,9 +287,7 @@
 			var/armor_special = 0
 
 			if(target_armor >= 60)
-				var/list/throw_dirs = list(1, 2, 4, 8, 5, 6, 9, 10)
-				throw_dirs -= src.dir
-				var/turf/T = get_step(H, pick(throw_dirs))
+				var/turf/T = get_step(H, pick(alldirs - src.dir))
 				H.throw_at(T, 1, 1, src)
 				H.apply_damage(20, BURN, def_zone)
 				if(target_limb)
@@ -332,7 +330,7 @@
 				explosion(blastloc, -1, -1, 2, 3)
 	..()
 
-/obj/item/projectile/beam/tungsten/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/beam/tungsten/Bump(atom/A, forced=0)
 	if(istype(A, /obj/structure/window)) //It does not pass through windows. It pulverizes them.
 		var/obj/structure/window/W = A
 		W.shatter()
