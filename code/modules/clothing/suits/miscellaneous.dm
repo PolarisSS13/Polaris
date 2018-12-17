@@ -860,8 +860,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	name = "\the President's Jacket"
 	desc = "A formal jacket designed to be worn exclusively by the President."
 	icon_state = "PresidentJacket"
-	item_state = "PresidentJacket_item"
-	item_state_slots = list(slot_r_hand_str = "PresidentJacket_righthand", slot_l_hand_str = "PresidentJacket_righthand")
+	item_state_slots = list(slot_r_hand_str = "PresidentJacket", slot_l_hand_str = "PresidentJacket")
 	flags_inv = HIDEHOLSTER
 	open = 0
 

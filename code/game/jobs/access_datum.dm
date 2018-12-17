@@ -394,6 +394,8 @@
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
 
+
+
 /******************
 * Central Command *
 ******************/
@@ -450,6 +452,12 @@
 	id = access_cent_captain
 	desc = "Central Command Administration"
 	access_type = ACCESS_TYPE_CENTCOM
+
+/var/const/access_president = 110
+/datum/access/captain
+	id = access_president
+	desc = "President"
+	region = ACCESS_TYPE_CENTCOM
 
 /***************
 * Antag access *
