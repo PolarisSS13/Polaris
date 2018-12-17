@@ -98,7 +98,6 @@
 
 /obj/item/clothing/accessory/tie/president
 	name = "\the President's Tie"
-	icon = 'icons/obj/clothing/presidential_clothing.dmi'
 	icon_state = "PresidentTie"
 	item_state = "PresidentTie_item"
 
