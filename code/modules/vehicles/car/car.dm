@@ -40,7 +40,7 @@
 	generate_license()
 	update_icon()
 
-/obj/vehicle/car/Initialize() // Time for some science!
+/obj/vehicle/car/initialize() // Time for some science!
 	..()
 	move_speed = 0.1
 	move_delay = 0
