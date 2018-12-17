@@ -10,8 +10,8 @@
 	var/obj/item/weapon/key/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = 0
-	move_speed = 0.1
+	move_delay = ""
+	move_speed = ""
 	max_buckled_mobs = 2
 	paint_color = "#ffffff"
 	var/frame_state = "sportscar" //Custom-item proofing!
@@ -21,7 +21,7 @@
 	var/horn_sound = 'sound/vehicles/car_horn.ogg'
 	var/engine_start = 'sound/vehicles/ignition.ogg'
 	var/engine_fail = 'sound/vehicles/wontstart.ogg'
-	var/land_speed = 0.5
+	var/land_speed = ""
 	var/space_speed = 0 //if 0 it can't go in space
 
 //license is generated via "[license code] - [license number]"
@@ -39,6 +39,12 @@
 	turn_off()
 	generate_license()
 	update_icon()
+
+/obj/vehicle/car/Initialize() // Time for some science!
+	..()
+	move_speed = 0.1
+	move_delay = 0
+	land_speed = 0.5
 
 /obj/vehicle/car/turn_on()
 	if(!mechanical || stat)

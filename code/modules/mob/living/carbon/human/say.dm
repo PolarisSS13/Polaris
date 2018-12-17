@@ -1,7 +1,5 @@
 /mob/living/carbon/human/say(var/message,var/whispering=0)
 	var/alt_name = ""
-	if(name != GetVoice())
-		alt_name = "(as [get_id_name("Unknown")])"
 
 	message = sanitize(message)
 	..(message, alt_name = alt_name, whispering = whispering)

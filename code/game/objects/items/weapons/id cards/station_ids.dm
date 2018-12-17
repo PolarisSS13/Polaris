@@ -185,6 +185,10 @@
 	. = ..()
 	access |= get_all_station_access()
 
+/obj/item/weapon/card/id/centcom/station/president
+	name = "\improper President's ID"
+	desc = "An ID that has both centcom and full city access."
+
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
