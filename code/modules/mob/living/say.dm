@@ -182,6 +182,14 @@ proc/get_radio_key_from_channel(var/channel)
 		speaking.broadcast(src,trim(message))
 		return 1
 
+	//If it looks like accidental IC-OOK/emoting
+	if((copytext(message, 1, 2) in list("say","me")) || (findtext(lowertext(copytext(message, 1, 5)), "ooc")))
+		if(alert("Your message \"[message]\" looks like it was meant for OOC instead of IC, say it in IC still?", "Confirm if meant for IC?", "No", "Yes") != "Yes")
+			return
+
+	if((copytext(message, 1, 2) in list("say")) || (findtext(lowertext(copytext(message, 1, 5)), "me")))
+		if(alert("Your message \"[message]\" begins with me so it may be an emote, was it? Say it in IC speech still?", "Confirm if meant for IC?", "No", "Yes") != "Yes")
+			return
 	//Self explanatory.
 	if(is_muzzled() && !(speaking && (speaking.flags & SIGNLANG)))
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
