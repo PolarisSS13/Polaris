@@ -1464,6 +1464,7 @@
 #include "code\modules\clothing\under\jobs\civilian.dm"
 #include "code\modules\clothing\under\jobs\engineering.dm"
 #include "code\modules\clothing\under\jobs\medsci.dm"
+#include "code\modules\clothing\under\jobs\president_under.dm"
 #include "code\modules\clothing\under\jobs\security.dm"
 #include "code\modules\clothing\under\xenos\seromi.dm"
 #include "code\modules\clothing\under\xenos\vox.dm"
