@@ -122,6 +122,7 @@
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
 	name = "lawyer suit"
+	icon_state = "lawyer_blue"
 
 /obj/item/clothing/under/lawyer/black
 	name = "black lawyer suit"
