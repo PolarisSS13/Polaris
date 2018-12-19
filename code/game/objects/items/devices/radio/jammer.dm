@@ -35,7 +35,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/Destroy()
 	if(on)
 		turn_off()
-	qdel_null(power_source)
+	QDEL_NULL(power_source)
 	return ..()
 
 /obj/item/device/radio_jammer/get_cell()
@@ -44,7 +44,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/proc/turn_off(mob/user)
 	if(user)
 		to_chat(user,"<span class='warning'>\The [src] deactivates.</span>")
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	active_radio_jammers -= src
 	on = FALSE
 	update_icon()
@@ -52,7 +52,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/proc/turn_on(mob/user)
 	if(user)
 		to_chat(user,"<span class='notice'>\The [src] is now active.</span>")
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	active_radio_jammers += src
 	on = TRUE
 	update_icon()

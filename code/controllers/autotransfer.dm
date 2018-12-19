@@ -5,13 +5,13 @@ datum/controller/transfer_controller
 	var/currenttick = 0
 datum/controller/transfer_controller/New()
 	timerbuffer = config.vote_autotransfer_initial
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 
 datum/controller/transfer_controller/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 
-datum/controller/transfer_controller/proc/process()
+datum/controller/transfer_controller/process()
 	currenttick = currenttick + 1
 	if (round_duration_in_ticks >= timerbuffer - 1 MINUTE)
-		vote.autotransfer()
+		SSvote.autotransfer()
 		timerbuffer = timerbuffer + config.vote_autotransfer_interval

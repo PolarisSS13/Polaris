@@ -165,7 +165,7 @@
 			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
 		return
 
-/obj/machinery/portable_atmospherics/hydroponics/initialize()
+/obj/machinery/portable_atmospherics/hydroponics/Initialize()
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
@@ -453,7 +453,7 @@
 	if(O.is_open_container())
 		return 0
 
-	if(istype(O, /obj/item/weapon/wirecutters) || istype(O, /obj/item/weapon/surgical/scalpel))
+	if(O.is_wirecutter() || istype(O, /obj/item/weapon/surgical/scalpel))
 
 		if(!seed)
 			user << "There is nothing to take a sample from in \the [src]."
@@ -548,7 +548,7 @@
 		qdel(O)
 		check_health()
 
-	else if(mechanical && istype(O, /obj/item/weapon/wrench))
+	else if(mechanical && O.is_wrench())
 
 		//If there's a connector here, the portable_atmospherics setup can handle it.
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)

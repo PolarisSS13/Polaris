@@ -21,6 +21,7 @@
 	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
+	var/fulltile = FALSE // Set to true on full-tile variants.
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
@@ -128,16 +129,10 @@
 /obj/structure/window/blob_act()
 	take_damage(50)
 
-//TODO: Make full windows a separate type of window.
-//Once a full window, it will always be a full window, so there's no point
-//having the same type for both.
-/obj/structure/window/proc/is_full_window()
-	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
-
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return 1
-	if(is_full_window())
+	if(is_fulltile())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
 		return !density
@@ -206,7 +201,7 @@
 	user.setClickCooldown(user.get_attack_speed())
 	if(!damage)
 		return
-	if(damage >= 10)
+	if(damage >= STRUCTURE_MIN_DAMAGE_THRESHOLD)
 		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 		if(reinf)
 			damage = damage / 2
@@ -262,7 +257,7 @@
 
 	if(W.flags & NOBLUDGEON) return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		if(reinf && state >= 1)
 			state = 3 - state
 			update_nearby_icons()
@@ -280,11 +275,11 @@
 			update_verbs()
 			playsound(src, W.usesound, 75, 1)
 			user << (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>")
-	else if(istype(W, /obj/item/weapon/crowbar) && reinf && state <= 1)
+	else if(W.is_crowbar() && reinf && state <= 1)
 		state = 1 - state
 		playsound(src, W.usesound, 75, 1)
 		user << (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>")
-	else if(istype(W, /obj/item/weapon/wrench) && !anchored && (!state || !reinf))
+	else if(W.is_wrench() && !anchored && (!state || !reinf))
 		if(!glasstype)
 			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
 		else
@@ -294,7 +289,7 @@
 			if(is_fulltile())
 				mats.amount = 4
 			qdel(src)
-	else if(iscoil(W) && reinf && state == 0 && !istype(src, /obj/structure/window/reinforced/polarized))
+	else if(istype(W, /obj/item/stack/cable_coil) && reinf && state == 0 && !istype(src, /obj/structure/window/reinforced/polarized))
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
@@ -388,8 +383,6 @@
 		anchored = 0
 		state = 0
 		update_verbs()
-		if(is_fulltile())
-			maxhealth *= 2
 
 	health = maxhealth
 
@@ -416,9 +409,7 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
-	if(dir & (dir - 1))
-		return 1
-	return 0
+	return fulltile
 
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
@@ -458,7 +449,7 @@
 
 	// Damage overlays.
 	var/ratio = health / maxhealth
-	ratio = Ceiling(ratio * 4) * 25
+	ratio = CEILING(ratio * 4, 1) * 25
 
 	if(ratio > 75)
 		return
@@ -484,6 +475,10 @@
 	maxhealth = 12.0
 	force_threshold = 3
 
+/obj/structure/window/basic/full
+	maxhealth = 24
+	fulltile = TRUE
+
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	desc = "A borosilicate alloy window. It seems to be quite strong."
@@ -497,8 +492,8 @@
 	force_threshold = 5
 
 /obj/structure/window/phoronbasic/full
-	dir = SOUTHWEST
 	maxhealth = 80
+	fulltile = TRUE
 
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
@@ -514,8 +509,8 @@
 	force_threshold = 10
 
 /obj/structure/window/phoronreinforced/full
-	dir = SOUTHWEST
 	maxhealth = 160
+	fulltile = TRUE
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
@@ -530,9 +525,9 @@
 	force_threshold = 6
 
 /obj/structure/window/reinforced/full
-	dir = SOUTHWEST
 	icon_state = "fwindow"
 	maxhealth = 80
+	fulltile = TRUE
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
@@ -567,12 +562,12 @@
 	var/id
 
 /obj/structure/window/reinforced/polarized/full
-	dir = SOUTHWEST
 	icon_state = "fwindow"
 	maxhealth = 80
+	fulltile = TRUE
 
 /obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
-	if(ismultitool(W) && !anchored) // Only allow programming if unanchored!
+	if(istype(W, /obj/item/device/multitool) && !anchored) // Only allow programming if unanchored!
 		var/obj/item/device/multitool/MT = W
 		// First check if they have a windowtint button buffered
 		if(istype(MT.connectable, /obj/machinery/button/windowtint))
@@ -632,7 +627,7 @@
 	icon_state = "light[active]"
 
 /obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
-	if(ismultitool(W))
+	if(istype(W, /obj/item/device/multitool))
 		var/obj/item/device/multitool/MT = W
 		if(!id)
 			// If no ID is set yet (newly built button?) let them select an ID for first-time use!
@@ -647,3 +642,20 @@
 			MT.update_icon()
 		return TRUE
 	. = ..()
+
+/obj/structure/window/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_DECONSTRUCT)
+			return list(
+				RCD_VALUE_MODE = RCD_DECONSTRUCT,
+				RCD_VALUE_DELAY = 5 SECONDS,
+				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 5
+			)
+
+/obj/structure/window/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_DECONSTRUCT)
+			to_chat(user, span("notice", "You deconstruct \the [src]."))
+			qdel(src)
+			return TRUE
+	return FALSE

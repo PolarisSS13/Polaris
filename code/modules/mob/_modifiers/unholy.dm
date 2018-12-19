@@ -71,7 +71,7 @@
 
 /datum/modifier/repair_aura/tick()
 	spawn()
-		for(var/mob/living/simple_animal/construct/T in view(4,holder))
+		for(var/mob/living/simple_mob/construct/T in view(4,holder))
 			T.adjustBruteLoss(rand(-10,-15))
 			T.adjustFireLoss(rand(-10,-15))
 
@@ -110,7 +110,7 @@
 	spawn()
 		if(isliving(holder))
 			var/mob/living/L = holder
-			if(istype(L, /mob/living/simple_animal/construct))
+			if(istype(L, /mob/living/simple_mob/construct))
 				L.adjustBruteLoss(rand(-5,-10))
 				L.adjustFireLoss(rand(-5,-10))
 			else
@@ -140,7 +140,8 @@
 							affected.update_damages()
 
 				H.restore_blood()
-				H.apply_effect(15, AGONY)
+				if(!iscultist(H))
+					H.apply_effect(2, AGONY)
 				if(prob(10))
 					to_chat(H, "<span class='danger'>It feels as though your body is being torn apart!</span>")
 			L.updatehealth()

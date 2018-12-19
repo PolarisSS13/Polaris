@@ -17,7 +17,7 @@
 
 	var/const/climb_time = 2 SECONDS
 
-/obj/structure/ladder/initialize()
+/obj/structure/ladder/Initialize()
 	. = ..()
 	// the upper will connect to the lower
 	if(allowed_directions & DOWN) //we only want to do the top one, as it will initialize the ones before it.
@@ -131,7 +131,7 @@
 	opacity = 0
 	anchored = 1
 
-/obj/structure/stairs/initialize()
+/obj/structure/stairs/Initialize()
 	. = ..()
 	for(var/turf/turf in locs)
 		var/turf/simulated/open/above = GetAbove(turf)
@@ -141,20 +141,23 @@
 		if(!istype(above))
 			above.ChangeTurf(/turf/simulated/open)
 
-/obj/structure/stairs/Uncross(atom/movable/A)
-	if(A.dir == dir)
-		// This is hackish but whatever.
-		var/turf/target = get_step(GetAbove(A), dir)
-		var/turf/source = A.loc
-		if(target.Enter(A, source))
-			A.loc = target
-			target.Entered(A, source)
-			if(isliving(A))
-				var/mob/living/L = A
-				if(L.pulling)
-					L.pulling.forceMove(target)
-		return 0
-	return 1
+/obj/structure/stairs/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+	if(get_dir(loc, target) == dir && upperStep(mover.loc))
+		return FALSE
+	. = ..()
+
+/obj/structure/stairs/Bumped(atom/movable/A)
+	// This is hackish but whatever.
+	var/turf/target = get_step(GetAbove(A), dir)
+	if(target.Enter(A, src)) // Pass src to be ignored to avoid infinate loop
+		A.forceMove(target)
+		if(isliving(A))
+			var/mob/living/L = A
+			if(L.pulling)
+				L.pulling.forceMove(target)
+
+/obj/structure/stairs/proc/upperStep(var/turf/T)
+	return (T == loc)
 
 /obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
 	return airflow || !density

@@ -1,4 +1,13 @@
-/obj/mecha/medical/initialize()
+/obj/mecha/medical
+	max_hull_equip = 1
+	max_weapon_equip = 0
+	max_utility_equip = 2
+	max_universal_equip = 1
+	max_special_equip = 1
+
+	cargo_capacity = 1
+
+/obj/mecha/medical/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
 	if(isPlayerLevel(T.z))

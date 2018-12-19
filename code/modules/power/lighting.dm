@@ -47,7 +47,7 @@
 
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if (istype(W, /obj/item/weapon/wrench))
+	if (W.is_wrench())
 		if (src.stage == 1)
 			playsound(src, W.usesound, 75, 1)
 			usr << "You begin deconstructing [src]."
@@ -66,7 +66,7 @@
 			usr << "You have to unscrew the case first."
 			return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(W.is_wirecutter())
 		if (src.stage != 2) return
 		src.stage = 1
 		switch(fixture_type)
@@ -98,7 +98,7 @@
 				"You add wires to [src].")
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		if (src.stage == 2)
 			switch(fixture_type)
 				if ("tube")
@@ -176,6 +176,11 @@
 
 	var/rigged = 0				// true if rigged to explode
 
+	var/auto_flicker = FALSE // If true, will constantly flicker, so long as someone is around to see it (otherwise its a waste of CPU).
+
+/obj/machinery/light/flicker
+	auto_flicker = TRUE
+
 // the smaller bulb light fixture
 
 /obj/machinery/light/small
@@ -186,6 +191,9 @@
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
+
+/obj/machinery/light/small/flicker
+	auto_flicker = TRUE
 
 /obj/machinery/light/flamp
 	icon_state = "flamp1"
@@ -199,9 +207,17 @@
 	light_type = /obj/item/weapon/light/bulb
 	var/lamp_shade = 1
 
+/obj/machinery/light/flamp/flicker
+	auto_flicker = TRUE
+
+
 /obj/machinery/light/small/emergency
 	brightness_range = 4
 	brightness_color = "#da0205"
+
+/obj/machinery/light/small/emergency/flicker
+	auto_flicker = TRUE
+
 
 /obj/machinery/light/spot
 	name = "spotlight"
@@ -209,6 +225,10 @@
 	light_type = /obj/item/weapon/light/tube/large
 	brightness_range = 12
 	brightness_power = 0.9
+
+/obj/machinery/light/spot/flicker
+	auto_flicker = TRUE
+
 
 /obj/machinery/light/built/New()
 	status = LIGHT_EMPTY
@@ -292,7 +312,8 @@
 	update_icon()
 	if(on)
 		if(light_range != brightness_range || light_power != brightness_power || light_color != brightness_color)
-			switchcount++
+			if(!auto_flicker)
+				switchcount++
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
 
@@ -420,7 +441,7 @@
 
 	// attempt to stick weapon into light socket
 	else if(status == LIGHT_EMPTY)
-		if(istype(W, /obj/item/weapon/screwdriver)) //If it's a screwdriver open it.
+		if(W.is_screwdriver()) //If it's a screwdriver open it.
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
@@ -456,7 +477,7 @@
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
 /obj/machinery/light/flamp/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		anchored = !anchored
 		playsound(src, W.usesound, 50, 1)
 		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
@@ -469,7 +490,7 @@
 			return
 
 	else
-		if(istype(W, /obj/item/weapon/screwdriver))
+		if(W.is_screwdriver())
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] removes [src]'s lamp shade.", \
 				"You remove [src]'s lamp shade.", "You hear a noise.")
@@ -674,6 +695,13 @@
 /obj/machinery/light/process()
 	if(on)
 		use_power(light_range * LIGHTING_POWER_FACTOR, LIGHT)
+
+	if(auto_flicker && !flickering)
+		if(check_for_player_proximity(src, radius = 12, ignore_ghosts = FALSE, ignore_afk = TRUE))
+			seton(TRUE) // Lights must be on to flicker.
+			flicker(5)
+		else
+			seton(FALSE) // Otherwise keep it dark and spooky for when someone shows up.
 
 
 // called when area power state changes

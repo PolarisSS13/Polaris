@@ -36,7 +36,7 @@
 		return
 	if(!istype(user))
 		return
-	if(isscrewdriver(O) && emag)
+	if(O.is_screwdriver() && emag)
 		//Stops people from just unscrewing the monitor and putting it back to get the console working again.
 		user << "<span class='warning'>It is too hot to mess with!</span>"
 		return
@@ -71,7 +71,7 @@
 		icon_screen = initial(icon_screen)
 	..()
 
-/obj/machinery/computer/message_monitor/initialize()
+/obj/machinery/computer/message_monitor/Initialize()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
 	if(!linkedServer)
 		if(message_servers && message_servers.len > 0)

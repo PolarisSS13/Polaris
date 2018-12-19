@@ -20,7 +20,7 @@ var/list/gyrotrons = list()
 	anchored = 1
 	state = 2
 
-/obj/machinery/power/emitter/gyrotron/initialize()
+/obj/machinery/power/emitter/gyrotron/Initialize()
 	gyrotrons += src
 	active_power_usage = mega_energy * 50000
 	default_apply_parts()
@@ -52,7 +52,7 @@ var/list/gyrotrons = list()
 		icon_state = "emitter-off"
 
 /obj/machinery/power/emitter/gyrotron/attackby(var/obj/item/W, var/mob/user)
-	if(ismultitool(W))
+	if(istype(W, /obj/item/device/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Gyrotron", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

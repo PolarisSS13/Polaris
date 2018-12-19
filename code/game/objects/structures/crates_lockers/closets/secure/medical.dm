@@ -60,7 +60,7 @@
 		/obj/item/clothing/head/nursehat,
 		/obj/item/weapon/storage/box/freezer = 3)
 
-/obj/structure/closet/secure_closet/medical3/initialize()
+/obj/structure/closet/secure_closet/medical3/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/medic
 	else
@@ -132,7 +132,7 @@
 		/obj/item/device/healthanalyzer,
 		/obj/item/device/radio/off,
 		/obj/random/medical,
-		/obj/item/weapon/crowbar,
+		/obj/item/weapon/tool/crowbar,
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/storage/box/freezer,
 		/obj/item/clothing/accessory/storage/white_vest,
@@ -169,7 +169,7 @@
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/white)
 
-/obj/structure/closet/secure_closet/CMO/initialize()
+/obj/structure/closet/secure_closet/CMO/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/medic
 	else

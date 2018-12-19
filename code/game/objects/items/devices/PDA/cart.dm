@@ -79,7 +79,7 @@ var/list/civilian_cartridges = list(
 	var/list/stored_data = list()
 
 /obj/item/weapon/cartridge/Destroy()
-	qdel_null(radio)
+	QDEL_NULL(radio)
 	return ..()
 
 /obj/item/weapon/cartridge/engineering
@@ -108,7 +108,7 @@ var/list/civilian_cartridges = list(
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/initialize()
+/obj/item/weapon/cartridge/security/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
 	. = ..()
 
@@ -164,7 +164,7 @@ var/list/civilian_cartridges = list(
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/initialize()
+/obj/item/weapon/cartridge/signal/Initialize()
     radio = new /obj/item/radio/integrated/signal(src)
     . = ..()
 
@@ -198,7 +198,7 @@ var/list/civilian_cartridges = list(
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/initialize()
+/obj/item/weapon/cartridge/hos/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
 	. = ..()
 
@@ -223,7 +223,7 @@ var/list/civilian_cartridges = list(
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/initialize()
+/obj/item/weapon/cartridge/rd/Initialize()
 	radio = new /obj/item/radio/integrated/signal(src)
 	. = ..()
 
@@ -434,7 +434,7 @@ var/list/civilian_cartridges = list(
 		for(var/S in supply_controller.shoppinglist)
 			var/datum/supply_order/SO = S
 
-			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.ordered_by, "Comment" = html_encode(SO.comment))
 		if(!supplyOrderData.len)
 			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
 
@@ -443,10 +443,13 @@ var/list/civilian_cartridges = list(
 
 		var/requestCount = 0
 		var/requestData[0]
-		for(var/S in supply_controller.requestlist)
+		for(var/S in supply_controller.order_history)
 			var/datum/supply_order/SO = S
+			if(SO.status != SUP_ORDER_REQUESTED)
+				continue
+
 			requestCount++
-			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.ordered_by, "Comment" = html_encode(SO.comment))
 		if(!requestData.len)
 			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
 

@@ -37,7 +37,7 @@
 		supply_controller.shuttle = null
 	. = ..()
 
-/datum/shuttle/proc/process()
+/datum/shuttle/process()
 	return
 
 /datum/shuttle/proc/init_docking_controllers()
@@ -211,7 +211,7 @@
 	for(var/mob/living/carbon/bug in destination)
 		bug.gib()
 
-	for(var/mob/living/simple_animal/pest in destination)
+	for(var/mob/living/simple_mob/pest in destination)
 		pest.gib()
 
 	origin.move_contents_to(destination, direction=direction)

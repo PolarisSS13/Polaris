@@ -4,6 +4,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"
 	power_channel = ENVIRON
+	layer = ABOVE_WINDOW_LAYER
 	var/desiredstate = 0
 	var/exposedwires = 0
 	var/wires = 3
@@ -21,7 +22,7 @@
 	if(wires & 2)
 		return attack_hand(user)
 	else
-		user << "Error, no route to host."
+		to_chat(user, "Error, no route to host.")
 
 /obj/machinery/button/remote/attackby(obj/item/weapon/W, mob/user as mob)
 	return attack_hand(user)
@@ -42,7 +43,7 @@
 		return
 
 	if(!allowed(user) && (wires & 1))
-		user << "<span class='warning'>Access Denied</span>"
+		to_chat(user, "<span class='warning'>Access Denied</span>")
 		flick("doorctrl-denied",src)
 		return
 

@@ -29,7 +29,7 @@
 	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficent shield matrix."
 	energy_conversion_rate = 0.0012
 
-/obj/machinery/shield_gen/initialize()
+/obj/machinery/shield_gen/Initialize()
 	if(anchored)
 		for(var/obj/machinery/shield_capacitor/cap in range(1, src))
 			if(!cap.anchored)
@@ -42,7 +42,7 @@
 	return ..()
 
 /obj/machinery/shield_gen/Destroy()
-	qdel_null_list(field)
+	QDEL_LIST_NULL(field)
 	return ..()
 
 /obj/machinery/shield_gen/emag_act(var/remaining_charges, var/mob/user)
@@ -64,7 +64,7 @@
 			updateDialog()
 		else
 			user << "<font color='red'>Access denied.</font>"
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		src.anchored = !src.anchored
 		playsound(src, W.usesound, 75, 1)
 		src.visible_message("<font color='blue'>\icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].</font>")

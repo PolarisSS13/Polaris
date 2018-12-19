@@ -12,6 +12,9 @@
 /turf/simulated/wall/dungeon/ex_act()
 	return
 
+/turf/simulated/wall/dungeon/take_damage()	//These things are suppose to be unbreakable
+	return
+
 /turf/simulated/wall/solidrock //for more stylish anti-cheese.
 	name = "solid rock"
 	desc = "This rock seems dense, impossible to drill."
@@ -29,7 +32,7 @@
 				mining_overlay_cache["rock_side_[place_dir]"] = image('icons/turf/walls.dmi', "rock_side", dir = place_dir)
 			T.add_overlay(mining_overlay_cache["rock_side_[place_dir]"])
 
-/turf/simulated/wall/solidrock/initialize()
+/turf/simulated/wall/solidrock/Initialize()
 	icon_state = base_state
 	update_icon(1)
 
@@ -37,4 +40,7 @@
 	return
 
 /turf/simulated/wall/solidrock/ex_act()
+	return
+
+/turf/simulated/wall/solidrock/take_damage()	//These things are suppose to be unbreakable
 	return

@@ -25,18 +25,18 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/device/powersink/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	STOP_PROCESSING_POWER_OBJECT(src)
 	..()
 
 /obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(I.is_screwdriver())
 		if(mode == 0)
 			var/turf/T = loc
 			if(isturf(T) && !!T.is_plating())
 				attached = locate() in T
 				if(!attached)
-					user << "No exposed cable here to attach to."
+					to_chat(user, "No exposed cable here to attach to.")
 					return
 				else
 					anchored = 1
@@ -45,11 +45,11 @@
 					playsound(src, I.usesound, 50, 1)
 					return
 			else
-				user << "Device must be placed over an exposed cable to attach to it."
+				to_chat(user, "Device must be placed over an exposed cable to attach to it.")
 				return
 		else
 			if (mode == 2)
-				processing_objects.Remove(src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
+				STOP_PROCESSING(SSobj, src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
 				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = 0
 			mode = 0
@@ -73,14 +73,14 @@
 			src.visible_message("<span class='notice'>[user] activates [src]!</span>")
 			mode = 2
 			icon_state = "powersink1"
-			processing_objects.Add(src)
+			START_PROCESSING(SSobj, src)
 			START_PROCESSING_POWER_OBJECT(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
-			processing_objects.Remove(src)
+			STOP_PROCESSING(SSobj, src)
 			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/device/powersink/pwr_drain()

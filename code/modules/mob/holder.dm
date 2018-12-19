@@ -23,10 +23,10 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/weapon/holder/New()
 	..()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/holder/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/holder/process()
@@ -94,6 +94,9 @@ var/list/holder_mob_icon_cache = list()
 
 /obj/item/weapon/holder/drone
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 5)
+
+/obj/item/weapon/holder/pai
+	origin_tech = list(TECH_DATA = 2)
 
 /obj/item/weapon/holder/mouse
 	w_class = ITEMSIZE_TINY

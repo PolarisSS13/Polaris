@@ -14,7 +14,7 @@
 		/obj/item/clothing/under/syndicate,
 		/obj/item/clothing/head/helmet/space/void/merc,
 		/obj/item/clothing/suit/space/void/merc,
-		/obj/item/weapon/crowbar/red,
+		/obj/item/weapon/tool/crowbar/red,
 		/obj/item/weapon/cell/high,
 		/obj/item/weapon/card/id/syndicate,
 		/obj/item/device/multitool,
@@ -24,7 +24,7 @@
 
 /obj/structure/closet/syndicate/suit
 	desc = "It's a storage unit for voidsuits."
-	
+
 	starts_with = list(
 		/obj/item/weapon/tank/jetpack/oxygen,
 		/obj/item/clothing/shoes/magboots,
@@ -48,7 +48,7 @@
 /obj/structure/closet/syndicate/resources
 	desc = "An old, dusty locker."
 
-/obj/structure/closet/syndicate/resources/initialize()
+/obj/structure/closet/syndicate/resources/Initialize()
 	. = ..()
 	if(!contents.len)
 		var/common_min = 30 //Minimum amount of minerals in the stack for common minerals
@@ -103,7 +103,7 @@
 /obj/structure/closet/syndicate/resources/everything
 	desc = "It's an emergency storage closet for repairs."
 
-/obj/structure/closet/syndicate/resources/everything/initialize()
+/obj/structure/closet/syndicate/resources/everything/Initialize()
 	var/list/resources = list(
 		/obj/item/stack/material/steel,
 		/obj/item/stack/material/glass,

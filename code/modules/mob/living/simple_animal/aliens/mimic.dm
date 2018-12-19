@@ -48,8 +48,9 @@
 	..()
 	qdel(src)
 
-/mob/living/simple_animal/hostile/mimic/MouseEntered(location, control, params)
-	return // Do not call parent: Mimics shouldn't have tooltips!
+/mob/living/simple_animal/hostile/mimic/will_show_tooltip()
+	return FALSE
+
 
 //
 // Crate Mimic
@@ -65,7 +66,7 @@
 	var/attempt_open = 0
 
 // Pickup loot
-/mob/living/simple_animal/hostile/mimic/crate/initialize()
+/mob/living/simple_animal/hostile/mimic/crate/Initialize()
 	. = ..()
 	for(var/obj/item/I in loc)
 		I.forceMove(src)

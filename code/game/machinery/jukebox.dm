@@ -37,7 +37,7 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
-		new/datum/track("Stellar Transit", 'sound/ambience/serspaceamb1.ogg'),
+		new/datum/track("Stellar Transit", 'sound/ambience/space/space_serithi.ogg'),
 	)
 
 	// Only visible if hacked
@@ -76,11 +76,11 @@ datum/track/New(var/title_name, var/audio)
 		return
 	if(default_deconstruction_crowbar(user, W))
 		return
-	if(istype(W, /obj/item/weapon/wirecutters))
+	if(W.is_wirecutter())
 		return wires.Interact(user)
 	if(istype(W, /obj/item/device/multitool))
 		return wires.Interact(user)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		if(playing)
 			StopPlaying()
 		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
@@ -123,11 +123,11 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	if(!anchored)
-		usr << "<span class='warning'>You must secure \the [src] first.</span>"
+		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	if(href_list["change_track"])
@@ -156,7 +156,7 @@ datum/track/New(var/title_name, var/audio)
 			spawn(15)
 				explode()
 		else if(current_track == null)
-			usr << "No track selected."
+			to_chat(usr, "No track selected.")
 		else
 			StartPlaying()
 
@@ -164,7 +164,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	ui_interact(user)
@@ -184,7 +184,7 @@ datum/track/New(var/title_name, var/audio)
 		data["tracks"] = nano_tracks
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -220,7 +220,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 	if(default_deconstruction_crowbar(user, W))
 		return
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		if(playing)
 			StopPlaying()
 		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")

@@ -194,7 +194,7 @@
 			occupant.adjustCloneLoss(-2 * heal_rate)
 
 			//Premature clones may have brain damage.
-			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
+			occupant.adjustBrainLoss(-(CEILING(0.5*heal_rate, 1)))
 
 			//So clones don't die of oxyloss in a running pod.
 			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
@@ -252,7 +252,7 @@
 			user.drop_item()
 			W.forceMove(src)
 		return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		if(locked && (anchored || occupant))
 			to_chat(user, "<span class='warning'>Can not do that while [src] is in use.</span>")
 		else

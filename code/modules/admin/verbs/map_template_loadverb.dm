@@ -5,18 +5,22 @@
 	var/datum/map_template/template
 
 
-	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in map_templates
+	var/map = input(usr, "Choose a Map Template to place at your CURRENT LOCATION","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
 		return
-	template = map_templates[map]
+	template = SSmapping.map_templates[map]
+
+	var/orientation = text2dir(input(usr, "Choose an orientation for this Map Template.", "Orientation") as null|anything in list("North", "South", "East", "West"))
+	if(!orientation)
+		return
 
 	var/turf/T = get_turf(mob)
 	if(!T)
 		return
 
 	var/list/preview = list()
-	template.preload_size(template.mappath)
-	for(var/S in template.get_affected_turfs(T,centered = TRUE))
+	template.preload_size(template.mappath, orientation)
+	for(var/S in template.get_affected_turfs(T,centered = TRUE, orientation=orientation))
 		preview += image('icons/misc/debug_group.dmi',S ,"red")
 	usr.client.images += preview
 	if(alert(usr,"Confirm location.", "Template Confirm","No","Yes") == "Yes")
@@ -25,7 +29,7 @@
 			usr.client.images -= preview
 			return
 
-		if(template.load(T, centered = TRUE))
+		if(template.load(T, centered = TRUE, orientation=orientation))
 			message_admins("<span class='adminnotice'>[key_name_admin(usr)] has placed a map template ([template.name]).</span>")
 		else
 			to_chat(usr, "Failed to place map")
@@ -37,18 +41,22 @@
 
 	var/datum/map_template/template
 
-	var/map = input(usr, "Choose a Map Template to place on a new Z-level.","Place Map Template") as null|anything in map_templates
+	var/map = input(usr, "Choose a Map Template to place on a new Z-level.","Place Map Template") as null|anything in SSmapping.map_templates
 	if(!map)
 		return
-	template = map_templates[map]
-	
-	if(template.width > world.maxx || template.height > world.maxy)		
+	template = SSmapping.map_templates[map]
+
+	var/orientation = text2dir(input(usr, "Choose an orientation for this Map Template.", "Orientation") as null|anything in list("North", "South", "East", "West"))
+	if(!orientation)
+		return
+
+	if(((orientation & (NORTH|SOUTH) && template.width > world.maxx || template.height > world.maxy) || ((orientation & (EAST|WEST)) && template.width > world.maxy || template.height > world.maxx)))
 		if(alert(usr,"This template is larger than the existing z-levels. It will EXPAND ALL Z-LEVELS to match the size of the template. This may cause chaos. Are you sure you want to do this?","DANGER!!!","Cancel","Yes") == "Cancel")
 			to_chat(usr,"Template placement aborted.")
 			return
-	
+
 	if(alert(usr,"Confirm map load.", "Template Confirm","No","Yes") == "Yes")
-		if(template.load_new_z())
+		if(template.load_new_z(orientation=orientation))
 			message_admins("<span class='adminnotice'>[key_name_admin(usr)] has placed a map template ([template.name]) on Z level [world.maxz].</span>")
 		else
 			to_chat(usr, "Failed to place map")
@@ -68,7 +76,7 @@
 	var/datum/map_template/M = new(map, "[map]")
 	if(M.preload_size(map))
 		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
-		map_templates[M.name] = M
+		SSmapping.map_templates[M.name] = M
 		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")
 	else
 		to_chat(usr, "Map template '[map]' failed to load properly")

@@ -18,6 +18,8 @@ var/list/mining_overlay_cache = list()
 	blocks_air = 1
 	temperature = T0C
 
+	can_dirty = FALSE
+
 	var/ore/mineral
 	var/sand_dug
 	var/mined_ore = 0
@@ -60,6 +62,7 @@ var/list/mining_overlay_cache = list()
 	density = 0
 	opacity = 0
 	blocks_air = 0
+	can_build_into_floor = TRUE
 
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
@@ -70,6 +73,7 @@ var/list/mining_overlay_cache = list()
 	density = 0
 	opacity = 0
 	blocks_air = 0
+	can_build_into_floor = TRUE
 	update_general()
 
 /turf/simulated/mineral/proc/make_wall()
@@ -78,6 +82,7 @@ var/list/mining_overlay_cache = list()
 	density = 1
 	opacity = 1
 	blocks_air = 1
+	can_build_into_floor = FALSE
 	update_general()
 
 /turf/simulated/mineral/proc/update_general()
@@ -116,7 +121,7 @@ var/list/mining_overlay_cache = list()
 	//Cache hit
 	return mining_overlay_cache["[cache_id]_[direction]"]
 
-/turf/simulated/mineral/initialize()
+/turf/simulated/mineral/Initialize()
 	. = ..()
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
@@ -168,6 +173,12 @@ var/list/mining_overlay_cache = list()
 			if(istype(get_step(src, direction), /turf/space) && !istype(get_step(src, direction), /turf/space/cracked_asteroid))
 				add_overlay(get_cached_border("asteroid_edge",direction,icon,"asteroid_edges", 0))
 
+			//Or any time
+			else
+				var/turf/T = get_step(src, direction)
+				if(istype(T) && T.density)
+					add_overlay(get_cached_border("rock_side",direction,'icons/turf/walls.dmi',"rock_side"))
+
 		if(overlay_detail)
 			add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
 
@@ -191,7 +202,7 @@ var/list/mining_overlay_cache = list()
 	if(severity <= 2) // Now to expose the ore lying under the sand.
 		spawn(1) // Otherwise most of the ore is lost to the explosion, which makes this rather moot.
 			for(var/ore in resources)
-				var/amount_to_give = rand(Ceiling(resources[ore]/2), resources[ore])  // Should result in at least one piece of ore.
+				var/amount_to_give = rand(CEILING(resources[ore]/2, 1), resources[ore])  // Should result in at least one piece of ore.
 				for(var/i=1, i <= amount_to_give, i++)
 					var/oretype = ore_types[ore]
 					new oretype(src)
@@ -200,7 +211,7 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
 
 	// Emitter blasts
-	if(istype(Proj, /obj/item/projectile/beam/emitter))
+	if(istype(Proj, /obj/item/projectile/beam/emitter) || istype(Proj, /obj/item/projectile/beam/heavylaser/fakeemitter))
 		emitter_blasts_taken++
 		if(emitter_blasts_taken > 2) // 3 blasts per tile
 			mined_ore = 1
@@ -444,6 +455,8 @@ var/list/mining_overlay_cache = list()
 				//update overlays displaying excavation level
 				if( !(excav_overlay && excavation_level > 0) || update_excav_overlay )
 					var/excav_quadrant = round(excavation_level / 25) + 1
+					if(excav_quadrant > 5)
+						excav_quadrant = 5
 					cut_overlay(excav_overlay)
 					excav_overlay = "overlay_excv[excav_quadrant]_[rand(1,3)]"
 					add_overlay(excav_overlay)

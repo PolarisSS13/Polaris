@@ -102,7 +102,7 @@
 		if((!A.secured) && (!secured))
 			attach_assembly(A,user)
 			return
-	if(isscrewdriver(W))
+	if(W.is_screwdriver())
 		if(toggle_secure())
 			to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 		else
@@ -113,7 +113,7 @@
 
 
 /obj/item/device/assembly/process()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return
 
 

@@ -92,6 +92,13 @@
 /mob/living/proc/getsoak(var/def_zone, var/type)
 	return 0
 
+// Clicking with an empty hand
+/mob/living/attack_hand(mob/living/L)
+	..()
+	if(istype(L) && L.a_intent != I_HELP)
+		if(ai_holder) // Using disarm, grab, or harm intent is considered a hostile action to the mob's AI.
+			ai_holder.react_to_attack(L)
+
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	//Being hit while using a deadman switch
@@ -101,6 +108,9 @@
 			log_and_message_admins("has triggered a signaler deadman's switch")
 			src.visible_message("<font color='red'>[src] triggers their deadman's switch!</font>")
 			signaler.signal()
+
+	if(ai_holder && P.firer)
+		ai_holder.react_to_attack(P.firer)
 
 	//Armor
 	var/soaked = get_armor_soak(def_zone, P.check_armour, P.armor_penetration)
@@ -163,7 +173,7 @@
 	..()
 
 /mob/living/blob_act(var/obj/structure/blob/B)
-	if(stat == DEAD)
+	if(stat == DEAD || faction == "blob")
 		return
 
 	var/damage = rand(30, 40)
@@ -221,11 +231,6 @@
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/soaked, var/hit_zone)
 	if(!effective_force || blocked >= 100)
 		return 0
-
-	//Hulk modifier
-	if(HULK in user.mutations)
-		effective_force *= 2
-
 	//Apply weapon damage
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
@@ -272,6 +277,8 @@
 			var/client/assailant = M.client
 			if(assailant)
 				add_attack_logs(M,src,"Hit by thrown [O.name]")
+			if(ai_holder)
+				ai_holder.react_to_attack(O.thrower)
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
@@ -329,12 +336,13 @@
 // End BS12 momentum-transfer code.
 
 /mob/living/attack_generic(var/mob/user, var/damage, var/attack_message)
-
 	if(!damage)
 		return
 
 	adjustBruteLoss(damage)
-	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_animal attacks
+	add_attack_logs(user,src,"Generic attack (probably animal)", admin_notify = FALSE) //Usually due to simple_mob attacks
+	if(ai_holder)
+		ai_holder.react_to_attack(user)
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
@@ -380,8 +388,13 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
-/mob/living/fire_act()
-	adjust_fire_stacks(2)
+//altered this to cap at the temperature of the fire causing it, using the same 1:1500 value as /mob/living/carbon/human/handle_fire() in human/life.dm
+/mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	if(exposed_temperature)
+		if(fire_stacks < exposed_temperature/1500) // Subject to balance
+			adjust_fire_stacks(2)
+	else
+		adjust_fire_stacks(2)
 	IgniteMob()
 
 //Share fire evenly between the two mobs
@@ -412,6 +425,15 @@
 /mob/living/proc/get_heat_protection()
 	return 0
 
+/mob/living/proc/get_shock_protection()
+	return 0
+
+/mob/living/proc/get_water_protection()
+	return 1 // Water won't hurt most things.
+
+/mob/living/proc/get_poison_protection()
+	return 0
+
 //Finds the effective temperature that the mob is burning at.
 /mob/living/proc/fire_burn_temperature()
 	if (fire_stacks <= 0)
@@ -420,6 +442,15 @@
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
 	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame.
 	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
+
+// Called when struck by lightning.
+/mob/living/proc/lightning_act()
+	// The actual damage/electrocution is handled by the tesla_zap() that accompanies this.
+	Paralyse(5)
+	stuttering += 20
+	make_jittery(150)
+	emp_act(1)
+	to_chat(src, span("critical", "You've been struck by lightning!"))
 
 /mob/living/proc/reagent_permeability()
 	return 1
@@ -502,3 +533,15 @@
 		if(!isnull(M.evasion))
 			result += M.evasion
 	return result
+
+/mob/living/proc/get_accuracy_penalty()
+	// Certain statuses make it harder to score a hit.
+	var/accuracy_penalty = 0
+	if(eye_blind)
+		accuracy_penalty += 75
+	if(eye_blurry)
+		accuracy_penalty += 30
+	if(confused)
+		accuracy_penalty += 45
+
+	return accuracy_penalty

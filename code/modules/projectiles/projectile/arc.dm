@@ -15,12 +15,12 @@
 	var/fired_dir = null		// Which direction was the projectile fired towards. Needed to invert the projectile turning based on if facing left or right.
 	var/obj/effect/projectile_shadow/shadow = null // Visual indicator for the projectile's 'true' position. Needed due to being bound to two dimensions in reality.
 
-/obj/item/projectile/arc/initialize()
+/obj/item/projectile/arc/Initialize()
 	shadow = new(get_turf(src))
 	return ..()
 
 /obj/item/projectile/arc/Destroy()
-	qdel_null(shadow)
+	QDEL_NULL(shadow)
 	return ..()
 
 /obj/item/projectile/arc/Bump(atom/A, forced=0)
@@ -109,6 +109,11 @@
 
 /obj/item/projectile/arc/fragmentation/on_impact(turf/T)
 	fragmentate(T, fragment_amount, spread_range, fragment_types)
+
+/obj/item/projectile/arc/fragmentation/mortar
+	icon_state = "mortar"
+	fragment_amount = 10
+	spread_range = 3
 
 // EMP arc shot
 /obj/item/projectile/arc/emp_blast

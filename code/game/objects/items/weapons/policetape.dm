@@ -4,6 +4,9 @@
 	icon = 'icons/policetape.dmi'
 	icon_state = "tape"
 	w_class = ITEMSIZE_SMALL
+
+	toolspeed = 3 //You can use it in surgery. It's stupid, but you can.
+
 	var/turf/start
 	var/turf/end
 	var/tape_type = /obj/item/tape
@@ -11,7 +14,7 @@
 
 	var/apply_tape = FALSE
 
-/obj/item/taperoll/initialize()
+/obj/item/taperoll/Initialize()
 	. = ..()
 	if(apply_tape)
 		var/turf/T = get_turf(src)
@@ -289,7 +292,7 @@ var/list/tape_roll_applications = list()
 		add_fingerprint(M)
 		if (!allowed(M))	//only select few learn art of not crumpling the tape
 			M << "<span class='warning'>You are not supposed to go past [src]...</span>"
-			if(M.a_intent == I_HELP && !(istype(M, /mob/living/simple_animal)))
+			if(M.a_intent == I_HELP && !(istype(M, /mob/living/simple_mob)))
 				return 0
 			crumple()
 	return ..(mover)

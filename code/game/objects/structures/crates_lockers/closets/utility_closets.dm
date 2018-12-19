@@ -19,7 +19,7 @@
 	icon_closed = "emergency"
 	icon_opened = "emergencyopen"
 
-/obj/structure/closet/emcloset/initialize()
+/obj/structure/closet/emcloset/Initialize()
 	switch (pickweight(list("small" = 55, "aid" = 25, "tank" = 10, "both" = 10)))
 		if ("small")
 			starts_with = list(
@@ -106,22 +106,22 @@
 	icon_closed = "toolcloset"
 	icon_opened = "toolclosetopen"
 
-/obj/structure/closet/toolcloset/initialize()
+/obj/structure/closet/toolcloset/Initialize()
 	starts_with = list()
 	if(prob(40))
 		starts_with += /obj/item/clothing/suit/storage/hazardvest
 	if(prob(70))
 		starts_with += /obj/item/device/flashlight
 	if(prob(70))
-		starts_with += /obj/item/weapon/screwdriver
+		starts_with += /obj/item/weapon/tool/screwdriver
 	if(prob(70))
-		starts_with += /obj/item/weapon/wrench
+		starts_with += /obj/item/weapon/tool/wrench
 	if(prob(70))
 		starts_with += /obj/item/weapon/weldingtool
 	if(prob(70))
-		starts_with += /obj/item/weapon/crowbar
+		starts_with += /obj/item/weapon/tool/crowbar
 	if(prob(70))
-		starts_with += /obj/item/weapon/wirecutters
+		starts_with += /obj/item/weapon/tool/wirecutters
 	if(prob(70))
 		starts_with += /obj/item/device/t_scanner
 	if(prob(20))
@@ -202,7 +202,7 @@
 	icon_closed = "hydrant"
 	icon_opened = "hydrant_open"
 	plane = TURF_PLANE
-	layer = ABOVE_TURF_LAYER	
+	layer = ABOVE_TURF_LAYER
 	anchored = 1
 	density = 0
 	wall_mounted = 1

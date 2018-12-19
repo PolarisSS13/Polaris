@@ -20,7 +20,7 @@
 	var/show_examine = TRUE	// Does this pop up on a mob when the mob is examined?
 
 /obj/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
@@ -39,7 +39,7 @@
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
 	if(user.CanUseObjTopic(src))
 		return ..()
-	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)
@@ -57,10 +57,6 @@
 	// Nada
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
-
-/obj/proc/process()
-	processing_objects.Remove(src)
-	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)

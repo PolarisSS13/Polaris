@@ -46,7 +46,7 @@
 	/obj/item/device/radio/borg,
 	/obj/item/weapon/holder,
 	/obj/machinery/camera,
-	/mob/living/simple_animal/borer,
+	/mob/living/simple_mob/animal/borer,
 	/obj/item/device/mmi,
 	)
 
@@ -240,7 +240,7 @@
 			"You hear a skittering noise and a thump!")
 		var/obj/item/weapon/grenade/G = held_item
 		G.forceMove(src.loc)
-		G.prime()
+		G.detonate()
 		held_item = null
 		return 1
 

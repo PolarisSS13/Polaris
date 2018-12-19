@@ -27,12 +27,12 @@ var/list/fusion_cores = list()
 /obj/machinery/power/fusion_core/mapped
 	anchored = 1
 
-/obj/machinery/power/fusion_core/initialize()
+/obj/machinery/power/fusion_core/Initialize()
 	. = ..()
 	fusion_cores += src
 	default_apply_parts()
 
-/obj/machinery/power/fusion_core/mapped/initialize()
+/obj/machinery/power/fusion_core/mapped/Initialize()
 	. = ..()
 	connect_to_network()
 
@@ -120,7 +120,7 @@ var/list/fusion_cores = list()
 	if(default_part_replacement(user, W))
 		return
 
-	if(ismultitool(W))
+	if(istype(W, /obj/item/device/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Fusion Core", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

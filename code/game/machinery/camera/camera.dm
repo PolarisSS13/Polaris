@@ -91,7 +91,7 @@
 			kick_viewers()
 			update_icon()
 			update_coverage()
-			processing_objects |= src
+			START_PROCESSING(SSobj, src)
 
 /obj/machinery/camera/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.get_structure_damage())
@@ -138,7 +138,7 @@
 
 /obj/machinery/camera/attack_generic(mob/user as mob)
 	if(isanimal(user))
-		var/mob/living/simple_animal/S = user
+		var/mob/living/simple_mob/S = user
 		set_status(0)
 		S.do_attack_animation(src)
 		S.setClickCooldown(user.get_attack_speed())
@@ -151,7 +151,7 @@
 /obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
 	update_coverage()
 	// DECONSTRUCTION
-	if(isscrewdriver(W))
+	if(W.is_screwdriver())
 		//user << "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>"
 		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
@@ -159,10 +159,10 @@
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src.loc, W.usesound, 50, 1)
 
-	else if((iswirecutter(W) || ismultitool(W)) && panel_open)
+	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
 		interact(user)
 
-	else if(iswelder(W) && (wires.CanDeconstruct() || (stat & BROKEN)))
+	else if(istype(W, /obj/item/weapon/weldingtool) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
@@ -390,7 +390,7 @@
 		return 0
 
 	// Do after stuff here
-	user << "<span class='notice'>You start to weld the [src]..</span>"
+	user << "<span class='notice'>You start to weld [src]..</span>"
 	playsound(src.loc, WT.usesound, 50, 1)
 	WT.eyecheck(user)
 	busy = 1
