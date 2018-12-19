@@ -375,7 +375,6 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	"whiskey",
 	"beer",
 	"ale",
-	"champagne",
 	"rum",
 	"vermouth",
 	"vodka",
@@ -432,8 +431,11 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 			"What do you think of the newcomers to the city?",
 			"Man, I think I drank too fast.",
 			"I've been thinking that settling down would be great for me.",
+			"You think I should go after that person I'm pining after?",
+			"I wonder if there's anything else to do in this horrible city.",
+			"You seem genuine. Wouldn't mind being friends with you.",
 			"I try not to get too much into politics, gets me depressed.",
-			"I should really be here, should be paying the bills with this money.",
+			"I shouldn't really be here, should be paying the bills with this money.",
 			"How long have you been here?",
 			"I like your style, by the way.")
 			src.say("[banter]")
