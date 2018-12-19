@@ -94,7 +94,7 @@
 		. = pickweight(.)
 
 /datum/looping_sound/proc/on_start()
-	var/start_wait = 0
+	var/start_wait = 1 // On TG this is 0, however it needs to be 1 to work around an issue.
 	if(start_sound)
 		play(start_sound)
 		start_wait = start_length

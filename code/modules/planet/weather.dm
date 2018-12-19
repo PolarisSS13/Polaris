@@ -13,6 +13,8 @@
 	var/atom/movable/weather_visuals/visuals = null
 	var/atom/movable/weather_visuals/special/special_visuals = null
 
+	var/list/clients_in_zlevels = list()
+
 /datum/weather_holder/New(var/source)
 	..()
 	our_planet = source
@@ -25,13 +27,16 @@
 
 /datum/weather_holder/proc/change_weather(var/new_weather)
 	var/old_light_modifier = null
-	var/old_weather = null
+	var/datum/weather/old_weather = null
 	if(current_weather)
 		old_light_modifier = current_weather.light_modifier // We store the old one, so we can determine if recalculating the sun is needed.
 		old_weather = current_weather
 	current_weather = allowed_weather_types[new_weather]
 	next_weather_shift = world.time + rand(current_weather.timer_low_bound, current_weather.timer_high_bound) MINUTES
 	if(new_weather != old_weather)
+		if(istype(old_weather)) // At roundstart this is null.
+			old_weather.stop_sounds()
+		current_weather.start_sounds()
 		show_transition_message()
 
 	update_icon_effects()
@@ -48,7 +53,7 @@
 			advance_forecast()
 	else
 		current_weather.process_effects()
-
+		current_weather.process_sounds()
 
 
 // Should only have to be called once.
@@ -140,6 +145,18 @@
 	var/list/transition_messages = list()// List of messages shown to all outdoor mobs when this weather is transitioned to, for flavor. Not shown if already this weather.
 	var/observed_message = null // What is shown to a player 'examining' the weather.
 
+	// Looping sound datums for weather sounds, both inside and outside.
+	var/datum/looping_sound/outdoor_sounds = null
+	var/datum/looping_sound/indoor_sounds = null
+	var/outdoor_sounds_type = null
+	var/indoor_sounds_type = null
+
+/datum/weather/New()
+	if(outdoor_sounds_type)
+		outdoor_sounds = new outdoor_sounds_type(list(), FALSE, TRUE)
+	if(indoor_sounds_type)
+		indoor_sounds = new indoor_sounds_type(list(), FALSE, TRUE)
+
 /datum/weather/proc/process_effects()
 	show_message = FALSE	// Need to reset the show_message var, just in case
 	if(effect_message)	// Only bother with the code below if we actually need to display something
@@ -147,6 +164,35 @@
 			last_message = world.time	// Reset the timer
 			show_message = TRUE			// Tell the rest of the process that we need to make a message
 	return
+
+/datum/weather/proc/process_sounds()
+	for(var/i in holder.clients_in_zlevels)
+		var/client/C = i
+		var/mob/M = C.mob
+		var/turf/T = get_turf(M)
+		if(T.outdoors)
+			if(outdoor_sounds)
+				outdoor_sounds.output_atoms |= C
+			if(indoor_sounds)
+				indoor_sounds.output_atoms -= C
+
+		else
+			if(outdoor_sounds)
+				outdoor_sounds.output_atoms -= C
+			if(indoor_sounds)
+				indoor_sounds.output_atoms |= C
+
+/datum/weather/proc/start_sounds()
+	if(outdoor_sounds)
+		outdoor_sounds.start()
+	if(indoor_sounds)
+		indoor_sounds.start()
+
+/datum/weather/proc/stop_sounds()
+	if(outdoor_sounds)
+		outdoor_sounds.stop()
+	if(indoor_sounds)
+		indoor_sounds.stop()
 
 // All this does is hold the weather icon.
 /atom/movable/weather_visuals

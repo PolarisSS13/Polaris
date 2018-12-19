@@ -208,6 +208,8 @@ var/datum/planet/sif/planet_sif = null
 		"It's starting to snow.",
 		"The air feels much colder as snowflakes fall from above."
 	)
+	outdoor_sounds_type = /datum/looping_sound/outside_snow
+	indoor_sounds_type = /datum/looping_sound/inside_snow
 
 /datum/weather/sif/snow/process_effects()
 	..()
@@ -237,6 +239,8 @@ var/datum/planet/sif/planet_sif = null
 		"Strong winds howl around you as a blizzard appears.",
 		"It starts snowing heavily, and it feels extremly cold now."
 	)
+	outdoor_sounds_type = /datum/looping_sound/outside_blizzard
+	indoor_sounds_type = /datum/looping_sound/inside_blizzard
 
 /datum/weather/sif/blizzard/process_effects()
 	..()
@@ -417,7 +421,7 @@ var/datum/planet/sif/planet_sif = null
 				if(show_message)
 					to_chat(H, "<span class='notice'>Hail patters onto your umbrella.</span>")
 				continue
-		
+
 			var/target_zone = pick(BP_ALL)
 			var/amount_blocked = H.run_armor_check(target_zone, "melee")
 			var/amount_soaked = H.get_armor_soak(target_zone, "melee")

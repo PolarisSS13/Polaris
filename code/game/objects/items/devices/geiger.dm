@@ -1,8 +1,3 @@
-#define RAD_LEVEL_LOW 0.01 // Around the level at which radiation starts to become harmful
-#define RAD_LEVEL_MODERATE 10
-#define RAD_LEVEL_HIGH 25
-#define RAD_LEVEL_VERY_HIGH 50
-
 //Geiger counter
 //Rewritten version of TG's geiger counter
 //I opted to show exact radiation levels
@@ -15,7 +10,7 @@
 	w_class = ITEMSIZE_SMALL
 	var/scanning = 0
 	var/radiation_count = 0
-	var/datum/looping_sound/generator/soundloop
+	var/datum/looping_sound/geiger/soundloop
 
 /obj/item/device/geiger/Initialize()
 	START_PROCESSING(SSobj, src)
@@ -35,6 +30,7 @@
 		return
 	radiation_count = radiation_repository.get_rads_at_turf(get_turf(src))
 	update_icon()
+	update_sound()
 
 /obj/item/device/geiger/examine(mob/user)
 	..(user)
@@ -48,8 +44,8 @@
 	if(amount > radiation_count)
 		radiation_count = amount
 
-	update_sound()
 	update_icon()
+	update_sound()
 
 /obj/item/device/geiger/proc/update_sound()
 	var/datum/looping_sound/geiger/loop = soundloop
@@ -65,6 +61,7 @@
 /obj/item/device/geiger/attack_self(var/mob/user)
 	scanning = !scanning
 	update_icon()
+	update_sound()
 	to_chat(user, "<span class='notice'>\icon[src] You switch [scanning ? "on" : "off"] \the [src].</span>")
 
 /obj/item/device/geiger/update_icon()
@@ -85,8 +82,3 @@
 			icon_state = "geiger_on_4"
 		if(RAD_LEVEL_VERY_HIGH to INFINITY)
 			icon_state = "geiger_on_5"
-
-#undef RAD_LEVEL_LOW
-#undef RAD_LEVEL_MODERATE
-#undef RAD_LEVEL_HIGH
-#undef RAD_LEVEL_VERY_HIGH
