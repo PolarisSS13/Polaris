@@ -462,8 +462,7 @@
 
 
 /obj/item/integrated_circuit/output/holographic_projector/proc/destroy_hologram()
-	hologram = null
-	qdel(hologram)
+	QDEL_NULL(hologram)
 
 //	holo_beam.End()
 //	qdel_null(holo_beam)
