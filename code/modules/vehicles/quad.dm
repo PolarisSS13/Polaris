@@ -145,7 +145,7 @@
 				to_chat(D, "<span class='danger'>You hit [M]!</span>")
 				add_attack_logs(D,M,"Ran over with [src.name]")
 		else
-			src.visible_message("<span class='danger'>Your vehicle's safeties quickly activate to stop the [src] in time to avoid hitting [A]!</span>")
+			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate to avoid hitting [A]!</span>")
 			turn_off()
 
 /obj/vehicle/train/engine/quadbike/RunOver(var/mob/living/carbon/human/H)
