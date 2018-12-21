@@ -74,18 +74,6 @@ var/list/flooring_types
 		'sound/effects/footstep/snow4.ogg',
 		'sound/effects/footstep/snow5.ogg'))
 
-/decl/flooring/snow
-	name = "water"
-	desc = "A layer of many tiny bits of frozen water. It's hard to tell how deep it is."
-	icon = 'icons/turf/snow_new.dmi'
-	icon_base = "snow"
-	footstep_sounds = list("human" = list(
-		'sound/effects/footstep/snow1.ogg',
-		'sound/effects/footstep/snow2.ogg',
-		'sound/effects/footstep/snow3.ogg',
-		'sound/effects/footstep/snow4.ogg',
-		'sound/effects/footstep/snow5.ogg'))
-
 /decl/flooring/snow/snow2
 	name = "snow"
 	desc = "A layer of many tiny bits of frozen water. It's hard to tell how deep it is."
