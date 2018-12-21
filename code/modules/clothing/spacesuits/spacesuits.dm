@@ -15,7 +15,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	min_pressure_protection = 0 * ONE_ATMOSPHERE
-	max_pressure_protection = 20* ONE_ATMOSPHERE
+	max_pressure_protection = 2 * ONE_ATMOSPHERE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude",SPECIES_DIONA)
 	preserve_item = 1
@@ -67,7 +67,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	min_pressure_protection = 0 * ONE_ATMOSPHERE
-	max_pressure_protection = 20* ONE_ATMOSPHERE
+	max_pressure_protection = 2 * ONE_ATMOSPHERE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude",SPECIES_DIONA)
 	preserve_item = 1

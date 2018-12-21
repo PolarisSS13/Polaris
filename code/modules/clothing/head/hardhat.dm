@@ -20,8 +20,8 @@
 	name = "firefighter helmet"
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	min_pressure_protection = 0.8* ONE_ATMOSPHERE
-	max_pressure_protection = 50 * ONE_ATMOSPHERE
+	min_pressure_protection = 0.2* ONE_ATMOSPHERE
+	max_pressure_protection = 20 * ONE_ATMOSPHERE
 
 
 /obj/item/clothing/head/hardhat/white
@@ -29,8 +29,8 @@
 	name = "sleek hard hat"
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	min_pressure_protection = 0.8* ONE_ATMOSPHERE
-	max_pressure_protection = 50 * ONE_ATMOSPHERE
+	min_pressure_protection = 0.2* ONE_ATMOSPHERE
+	max_pressure_protection = 20 * ONE_ATMOSPHERE
 
 /obj/item/clothing/head/hardhat/dblue
 	name = "blue hard hat"

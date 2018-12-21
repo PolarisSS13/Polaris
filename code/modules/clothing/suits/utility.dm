@@ -24,8 +24,8 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_pressure_protection = 0.8 * ONE_ATMOSPHERE
-	max_pressure_protection = 50  * ONE_ATMOSPHERE
+	min_pressure_protection = 0.2 * ONE_ATMOSPHERE
+	max_pressure_protection = 20  * ONE_ATMOSPHERE
 
 
 /obj/item/clothing/suit/fire/firefighter
