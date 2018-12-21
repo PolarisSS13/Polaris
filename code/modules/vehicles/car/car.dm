@@ -175,7 +175,7 @@
 //
 
 
-/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+/obj/vehicle/car/emag_act(var/remaining_charges, mob/user as mob)
 	if(!mechanical)
 		return FALSE
 
@@ -187,5 +187,4 @@
 		return TRUE
 
 /obj/vehicle/car/proc/honk_horn()
-
 	playsound(src, horn_sound,40,1)
