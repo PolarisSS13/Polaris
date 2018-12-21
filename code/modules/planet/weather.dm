@@ -13,8 +13,6 @@
 	var/atom/movable/weather_visuals/visuals = null
 	var/atom/movable/weather_visuals/special/special_visuals = null
 
-	var/list/clients_in_zlevels = list()
-
 /datum/weather_holder/New(var/source)
 	..()
 	our_planet = source
@@ -35,7 +33,10 @@
 	next_weather_shift = world.time + rand(current_weather.timer_low_bound, current_weather.timer_high_bound) MINUTES
 	if(new_weather != old_weather)
 		if(istype(old_weather)) // At roundstart this is null.
+			old_weather.process_sounds() // Ensure that people who should hear the ending sound will hear it.
 			old_weather.stop_sounds()
+
+		current_weather.process_sounds() // Same story, make sure the starting sound is heard.
 		current_weather.start_sounds()
 		show_transition_message()
 
@@ -166,21 +167,33 @@
 	return
 
 /datum/weather/proc/process_sounds()
-	for(var/i in holder.clients_in_zlevels)
-		var/client/C = i
-		var/mob/M = C.mob
-		var/turf/T = get_turf(M)
-		if(T.outdoors)
-			if(outdoor_sounds)
-				outdoor_sounds.output_atoms |= C
-			if(indoor_sounds)
-				indoor_sounds.output_atoms -= C
+	if(!outdoor_sounds && !indoor_sounds) // No point bothering if we have no sounds.
+		return
 
-		else
-			if(outdoor_sounds)
-				outdoor_sounds.output_atoms -= C
-			if(indoor_sounds)
-				indoor_sounds.output_atoms |= C
+	for(var/z_level in 1 to world.maxz)
+		for(var/a in GLOB.players_by_zlevel[z_level])
+			var/mob/M = a
+
+			// Check if the mob left the z-levels we control. If so, make the sounds stop for them.
+			if(!(z_level in holder.our_planet.expected_z_levels))
+				hear_indoor_sounds(M, FALSE)
+				hear_outdoor_sounds(M, FALSE)
+				continue
+
+			// Otherwise they should hear some sounds, depending on if they're inside or not.
+			var/turf/T = get_turf(M)
+			if(istype(T))
+				if(T.outdoors) // Mob is currently outdoors.
+					hear_outdoor_sounds(M, TRUE)
+					hear_indoor_sounds(M, FALSE)
+
+				else // Mob is currently indoors.
+					hear_outdoor_sounds(M, FALSE)
+					hear_indoor_sounds(M, TRUE)
+
+			else
+				hear_indoor_sounds(M, FALSE)
+				hear_outdoor_sounds(M, FALSE)
 
 /datum/weather/proc/start_sounds()
 	if(outdoor_sounds)
@@ -193,6 +206,30 @@
 		outdoor_sounds.stop()
 	if(indoor_sounds)
 		indoor_sounds.stop()
+
+	// Stop everything just in case.
+	for(var/z_level in 1 to world.maxz)
+		for(var/a in GLOB.players_by_zlevel[z_level])
+			hear_indoor_sounds(a, FALSE)
+			hear_outdoor_sounds(a, FALSE)
+
+// Adds or removes someone from the outdoor list.
+/datum/weather/proc/hear_outdoor_sounds(mob/M, adding)
+	if(!outdoor_sounds)
+		return
+	if(adding)
+		outdoor_sounds.output_atoms |= M
+		return
+	outdoor_sounds.output_atoms -= M
+
+// Ditto, for indoors.
+/datum/weather/proc/hear_indoor_sounds(mob/M, adding)
+	if(!indoor_sounds)
+		return
+	if(adding)
+		indoor_sounds.output_atoms |= M
+		return
+	indoor_sounds.output_atoms -= M
 
 // All this does is hold the weather icon.
 /atom/movable/weather_visuals

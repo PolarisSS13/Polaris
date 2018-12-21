@@ -121,7 +121,10 @@ var/datum/planet/sif/planet_sif = null
 		WEATHER_RAIN		= new /datum/weather/sif/rain(),
 		WEATHER_STORM		= new /datum/weather/sif/storm(),
 		WEATHER_HAIL		= new /datum/weather/sif/hail(),
-		WEATHER_BLOOD_MOON	= new /datum/weather/sif/blood_moon()
+		WEATHER_BLOOD_MOON	= new /datum/weather/sif/blood_moon(),
+		WEATHER_EMBERFALL	= new /datum/weather/sif/emberfall(),
+		WEATHER_ASH_STORM	= new /datum/weather/sif/ash_storm(),
+		WEATHER_FALLOUT		= new /datum/weather/sif/fallout()
 		)
 	roundstart_weather_chances = list(
 		WEATHER_CLEAR		= 30,
@@ -269,6 +272,8 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"The sky is dark, and rain falls down upon you."
 	)
+//	outdoor_sounds_type = /datum/looping_sound/rain
+//	indoor_sounds_type = /datum/looping_sound/rain/indoors
 
 /datum/weather/sif/rain/process_effects()
 	..()
@@ -314,6 +319,8 @@ var/datum/planet/sif/planet_sif = null
 		"Loud thunder is heard in the distance.",
 		"A bright flash heralds the approach of a storm."
 	)
+//	outdoor_sounds_type = /datum/looping_sound/rain
+//	indoor_sounds_type = /datum/looping_sound/rain/indoors
 
 
 	transition_chances = list(
@@ -439,6 +446,10 @@ var/datum/planet/sif/planet_sif = null
 			if(show_message)
 				to_chat(H, effect_message)
 
+
+// These never happen naturally, and are for adminbuse.
+
+// A culty weather.
 /datum/weather/sif/blood_moon
 	name = "blood moon"
 	light_modifier = 0.5
@@ -451,3 +462,103 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"The sky turns blood red!"
 	)
+	outdoor_sounds_type = /datum/looping_sound/wind
+	indoor_sounds_type = /datum/looping_sound/wind/indoors
+
+// Ash and embers fall forever, such as from a volcano or something.
+/datum/weather/sif/emberfall
+	name = "emberfall"
+	icon_state = "ashfall_light"
+	light_modifier = 0.7
+	light_color = "#880000"
+	temp_high = 293.15	// 20c
+	temp_low = 283.15	// 10c
+	flight_failure_modifier = 20
+	transition_chances = list(
+		WEATHER_EMBERFALL = 100
+		)
+	observed_message = "Soot, ash, and embers float down from above."
+	transition_messages = list(
+		"Gentle embers waft down around you like grotesque snow."
+	)
+	outdoor_sounds_type = /datum/looping_sound/wind
+	indoor_sounds_type = /datum/looping_sound/wind/indoors
+
+// Like the above but a lot more harmful.
+/datum/weather/sif/ash_storm
+	name = "ash storm"
+	icon_state = "ashfall_heavy"
+	light_modifier = 0.1
+	light_color = "#FF0000"
+	temp_high = 323.15	// 50c
+	temp_low = 313.15	// 40c
+	flight_failure_modifier = 50
+	transition_chances = list(
+		WEATHER_ASH_STORM = 100
+		)
+	observed_message = "All that can be seen is black smoldering ash."
+	transition_messages = list(
+		"Smoldering clouds of scorching ash billow down around you!"
+	)
+	// Lets recycle.
+	outdoor_sounds_type = /datum/looping_sound/outside_blizzard
+	indoor_sounds_type = /datum/looping_sound/inside_blizzard
+
+/datum/weather/sif/ash_storm/process_effects()
+	..()
+	for(var/thing in living_mob_list)
+		var/mob/living/L = thing
+		if(L.z in holder.our_planet.expected_z_levels)
+			var/turf/T = get_turf(L)
+			if(!T.outdoors)
+				continue // They're indoors, so no need to burn them with ash.
+
+			L.inflict_heat_damage(rand(1, 3))
+
+
+// Totally radical.
+/datum/weather/sif/fallout
+	name = "fallout"
+	icon_state = "fallout"
+	light_modifier = 0.7
+	light_color = "#008800"
+	flight_failure_modifier = 30
+	transition_chances = list(
+		WEATHER_FALLOUT = 100
+		)
+	observed_message = "Radioactive soot and ash rains down from the heavens."
+	transition_messages = list(
+		"Radioactive soot and ash start to float down around you, contaminating whatever they touch."
+	)
+	outdoor_sounds_type = /datum/looping_sound/wind
+	indoor_sounds_type = /datum/looping_sound/wind/indoors
+
+	var/direct_rad_low = RAD_LEVEL_LOW
+	var/direct_rad_high = RAD_LEVEL_MODERATE
+
+	var/fallout_rad_low = RAD_LEVEL_HIGH
+	var/fallout_rad_high = RAD_LEVEL_VERY_HIGH
+
+/datum/weather/sif/fallout/process_effects()
+	..()
+	for(var/thing in living_mob_list)
+		var/mob/living/L = thing
+		if(L.z in holder.our_planet.expected_z_levels)
+			irradiate_nearby_turf(L)
+			var/turf/T = get_turf(L)
+			if(!T.outdoors)
+				continue // They're indoors, so no need to irradiate them with fallout.
+
+			L.rad_act(rand(direct_rad_low, direct_rad_high))
+
+// This makes random tiles near people radioactive for awhile.
+// Tiles far away from people are left alone, for performance.
+/datum/weather/sif/fallout/proc/irradiate_nearby_turf(mob/living/L)
+	if(!istype(L))
+		return
+	var/list/turfs = RANGE_TURFS(world.view, L)
+	var/turf/T = pick(turfs) // We get one try per tick.
+	if(!istype(T))
+		return
+	if(T.outdoors)
+		radiation_repository.radiate(T, rand(fallout_rad_low, fallout_rad_high))
