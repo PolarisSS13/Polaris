@@ -2,6 +2,29 @@
 "b" = (/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
 "c" = (/obj/effect/landmark/start,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
 "d" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"e" = (/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"f" = (/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"g" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"h" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"i" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"j" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"k" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"l" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"m" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"n" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"o" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"p" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"q" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 9},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"r" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"s" = (/obj/structure/cliff/automatic/ramp{icon_state = "cliffbuilder-ramp"; dir = 9},/obj/structure/cliff/automatic/ramp,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"L" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"M" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"O" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"P" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"Q" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"R" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"S" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"U" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -18,24 +41,24 @@ abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbeeeghhhhhieeebbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeeeeeejbbbbbkieebbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeeeeeglbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeeghhlbbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbPLLLQbmeeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbMfffUbkieebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbMfffUbbmeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeenopbbSOOORbbmeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeeeenpbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbeeeeejbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbeenpbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbeeejbbbbqooreebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbeenoosoreeeeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeebbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
