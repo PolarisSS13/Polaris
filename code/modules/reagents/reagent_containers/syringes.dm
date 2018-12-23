@@ -362,7 +362,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/drugs/New()
 	..()
-	reagents.add_reagent("space_drugs",  5)
+	reagents.add_reagent("ecstasy",  5)
 	reagents.add_reagent("mindbreaker",  5)
 	reagents.add_reagent("cryptobiolin", 5)
 	mode = SYRINGE_INJECT
