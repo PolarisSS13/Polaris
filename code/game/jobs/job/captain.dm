@@ -57,7 +57,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	outfit_type = /decl/hierarchy/outfit/job/president
 
 /datum/job/president/get_access()
-	return get_all_station_access()
+	get_all_station_access()
+	get_all_centcom_access()
+	return
 
 /datum/job/hop
 	title = "City Supervisor"

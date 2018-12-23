@@ -454,7 +454,7 @@
 	access_type = ACCESS_TYPE_CENTCOM
 
 /var/const/access_president = 110
-/datum/access/captain
+/datum/access/president
 	id = access_president
 	desc = "President"
 	region = ACCESS_TYPE_CENTCOM
