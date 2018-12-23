@@ -38,7 +38,7 @@
 	icon_state = "vessel"
 	dead_icon = "vessel_burst"
 	organ_tag = "zombie"
-	parent_organ = "chest"
+	parent_organ = "head"
 	stage_interval = 70
 
 /obj/item/organ/internal/parasite/zombie/process()
@@ -82,9 +82,7 @@
 						owner.remove_language(L.name)
 					owner << "<span class='warning'>You feel life leaving your husk, but death rejects you...</span>"
 					playsound(loc, 'sound/hallucinations/far_noise.ogg', 50, 1)
-					owner.set_species("Zombie")
-					owner.revive()
-					infected.add_antagonist(owner.mind)
+					owner.zombify()
 
 				else
 					owner.adjustToxLoss(50)
