@@ -210,11 +210,11 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/goldappleseed
 	seed_type = "goldapple"
 
-/obj/item/seeds/ambrosiavulgarisseed
-	seed_type = "ambrosia"
+/obj/item/seeds/cannabisseed
+	seed_type = "cannabis"
 
-/obj/item/seeds/ambrosiadeusseed
-	seed_type = "ambrosiadeus"
+/obj/item/seeds/cannabisdeusseed
+	seed_type = "cannabis"
 
 /obj/item/seeds/whitebeetseed
 	seed_type = "whitebeet"
