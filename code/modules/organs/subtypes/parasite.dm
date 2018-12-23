@@ -64,7 +64,6 @@
 				if(!isundead(owner))
 					owner << "<span class='warning'>You feel sick.</span>"
 					owner.adjustToxLoss(5)
-					owner.vomit()
 
 		if(stage >= 3)
 			if(prob(10))
