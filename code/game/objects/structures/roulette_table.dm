@@ -26,8 +26,6 @@
 	var/win_color
 	var/list/possible_win_colors = list("black", "red")
 	var/spinning = 0
-	var/list/current_bets = list()
-	var/list/current_betters = list()
 	var/can_bet = 1
 	var/win
 
@@ -57,26 +55,6 @@
 		to_chat(user, "The [src] is still spinning!")
 		return
 
-	if(istype(I,/obj/item/weapon/roulette/chip))
-		if(!can_bet)
-			to_chat(user, "<span class='notice'>[src] can't be betted on right now.</span>")
-			return
-		else
-			var/BET = input("What number would you place to place bets with on the [I]? Your [I] is worth [I.chip_worth] and will earn you twice the amount if it win by matching the same color and number.", "Place Bets", 1) as num|null
-			if(BET)
-				if(spinning)
-					to_chat(user, "The [src] is spinning too fast for you to place bets on it!")
-					return
-				else
-					user.visible_message("[user] places bets the <b>number [BET]</b> on the [src] with the <b>[I]</b>.", "You place a bets on <b>[BET]</b> on the \the <b>[src]</b> with the [I].")
-					current_bets += BET
-					qdel(I)
-
-
-	else
-		to_chat(user, "You need a roulette chip to play.")
-		return
-
 
 /obj/structure/roulette/verb/spin(mob/user as mob)
 	set name = "Spin Roulette Table"
@@ -84,7 +62,8 @@
 	set src in oview(1)
 
 	if(spinning)
-		to_chat(user, "The [src] is already spinning!")
+		to_chat(user,"The [src] is already spinning!")
+		return
 	else
 		playsound(src, 'sound/effects/fingersnap.ogg', 50, 1)
 		spinning = 1
