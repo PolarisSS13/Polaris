@@ -14,6 +14,8 @@
 	move_speed = ""
 	max_buckled_mobs = 2
 	paint_color = "#ffffff"
+	maxhealth = 300
+	health = 300
 	var/frame_state = "sportscar" //Custom-item proofing!
 	var/custom_frame = FALSE
 	var/cooldowntime
