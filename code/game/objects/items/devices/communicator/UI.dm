@@ -168,6 +168,7 @@
 			return
 		var/their_address = href_list["dial"]
 		exonet.send_message(their_address, "voice")
+		usr.visible_message("\icon[src] [usr] types something on [src]'s screen.") //snitches get stitches
 
 	if(href_list["decline"])
 		var/ref_to_remove = href_list["decline"]
@@ -182,6 +183,7 @@
 		var/their_address = href_list["message"]
 		var/text = sanitizeSafe(input(usr,"Enter your message.","Text Message"))
 		if(text)
+			usr.visible_message("\icon[src] [usr] types something on [src]'s screen.") //snitches get stitches
 			exonet.send_message(their_address, "text", text)
 			im_list += list(list("address" = exonet.address, "to_address" = their_address, "im" = text))
 			log_pda("(COMM: [src]) sent \"[text]\" to [exonet.get_atom_from_address(their_address)]", usr)
@@ -263,6 +265,10 @@
 			if (service == "3")
 				service_name = "damage control"
 				global_announcer.autosay ("<FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Engineering")
+
+			usr << "<span class='danger'>You sent over the message \"[text]\" over to the [service_name] hotline.</span>"
+			usr.visible_message("\icon[src] [usr] types something on [src]'s screen.") //snitches get stitches
+
 			log_pda("(COMM: [src]) sent \"[text]\" to [service_name]", usr)
 
 
