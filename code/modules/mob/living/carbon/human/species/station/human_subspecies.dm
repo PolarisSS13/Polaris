@@ -1,4 +1,6 @@
 
+
+/*
 /datum/species/human/gravworlder
 	name = "grav-adapted Human"
 	name_plural = "grav-adapted Humans"
@@ -30,7 +32,7 @@
 	flash_mod = 1.2
 	brute_mod = 1.1
 	burn_mod =  1.1
-
+*/
 
 /datum/species/human/vatgrown
 	name = SPECIES_HUMAN_VATBORN
@@ -94,3 +96,4 @@
 	icon_scale = 0.75
 	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
 	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
+	can_drive = 0
