@@ -14,6 +14,8 @@
 	move_speed = ""
 	max_buckled_mobs = 2
 	paint_color = "#ffffff"
+	maxhealth = 300
+	health = 300
 	var/frame_state = "sportscar" //Custom-item proofing!
 	var/custom_frame = FALSE
 	var/cooldowntime
@@ -181,7 +183,7 @@
 //
 
 
-/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+/obj/vehicle/car/emag_act(var/remaining_charges, mob/user as mob)
 	if(!mechanical)
 		return FALSE
 
@@ -193,5 +195,4 @@
 		return TRUE
 
 /obj/vehicle/car/proc/honk_horn()
-
 	playsound(src, horn_sound,40,1)

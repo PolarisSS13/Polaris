@@ -12,7 +12,7 @@
 	display_name = "text to speech device"
 	path = /obj/item/device/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
-
+/*
 /datum/gear/utility/communicator
 	display_name = "communicator selection"
 	path = /obj/item/device/communicator
@@ -25,7 +25,7 @@
 		var/obj/item/device/communicator_type = communicator
 		communicators[initial(communicator_type.name)] = communicator_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
-
+*/
 /datum/gear/utility/camera
 	display_name = "camera"
 	path = /obj/item/device/camera

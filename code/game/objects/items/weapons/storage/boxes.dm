@@ -471,12 +471,12 @@
 			organ.preserved = 0
 	..()
 
-/obj/item/weapon/storage/box/ambrosia
-	name = "ambrosia seeds box"
+/obj/item/weapon/storage/box/cannabis
+	name = "cannabis seeds box"
 	desc = "Contains the seeds you need to get a little high."
-	starts_with = list(/obj/item/seeds/ambrosiavulgarisseed = 7)
+	starts_with = list(/obj/item/seeds/cannabisseed = 7)
 
-/obj/item/weapon/storage/box/ambrosiadeus
-	name = "ambrosia deus seeds box"
+/obj/item/weapon/storage/box/cannabisdeus
+	name = "cannabis deus seeds box"
 	desc = "Contains the seeds you need to get a proper healthy high."
-	starts_with = list(/obj/item/seeds/ambrosiadeusseed = 7)
+	starts_with = list(/obj/item/seeds/cannabisdeusseed = 7)
