@@ -92,7 +92,7 @@
 	if(only_one_driver && ridden.buckled_mobs.len)
 		var/mob/living/carbon/human/driver = ridden.buckled_mobs[1]
 		if(!driver.species.can_drive())
-			to_chat(user, "<span class='warning'>You don't seem to be able to ride the [ridden]...</span>")
+			to_chat(user, "<span class='warning'>You don't seem to be able to ride [ridden]...</span>")
 			return
 
 	if(only_one_driver && ridden.buckled_mobs.len)
