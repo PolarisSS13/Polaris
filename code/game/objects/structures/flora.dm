@@ -296,6 +296,7 @@
 	desc = "This is a tiny well lit decorative christmas tree."
 	icon_state = "plant-xmas"
 	density = 1
+	anchored = 1
 	light_range = 2
 	light_power = 1
 
