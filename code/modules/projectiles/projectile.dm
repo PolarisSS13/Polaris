@@ -166,10 +166,6 @@
 	if(!loc || !trajectory)
 		return
 	last_projectile_move = world.time
-	if(!nondirectional_sprite && !hitscanning)
-		var/matrix/M = new
-		M.Turn(Angle)
-		transform = M
 	if(homing)
 		process_homing()
 	var/forcemoved = FALSE
@@ -301,10 +297,6 @@
 	if(dispersion)
 		setAngle(Angle + rand(-dispersion, dispersion))
 	original_angle = Angle
-	if(!nondirectional_sprite)
-		var/matrix/M = new
-		M.Turn(Angle)
-		transform = M
 	trajectory_ignore_forcemove = TRUE
 	forceMove(starting)
 	trajectory_ignore_forcemove = FALSE
@@ -463,7 +455,6 @@
 	return (target && ((target.layer >= TABLE_LAYER) || ismob(target)) && (loc == get_turf(target)) && (!(target in passthrough)))
 
 /obj/item/projectile/Bump(atom/A)
-	to_chat(world, "DEBUG: Bump([A]) [__LINE__] [__FILE__]")
 	if(A in permutated)
 		return FALSE
 	if(firer && !reflected)

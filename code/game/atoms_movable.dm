@@ -41,73 +41,6 @@
 			pulledby.pulling = null
 		pulledby = null
 
-
-
-
-
-
-
-
-
-/*
-
-
-//This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
-/atom/movable/Move(newloc, direct)
-	if (direct & (direct - 1))
-		if (direct & 1)
-			if (direct & 4)
-				if (step(src, NORTH))
-					step(src, EAST)
-				else
-					if (step(src, EAST))
-						step(src, NORTH)
-			else
-				if (direct & 8)
-					if (step(src, NORTH))
-						step(src, WEST)
-					else
-						if (step(src, WEST))
-							step(src, NORTH)
-		else
-			if (direct & 2)
-				if (direct & 4)
-					if (step(src, SOUTH))
-						step(src, EAST)
-					else
-						if (step(src, EAST))
-							step(src, SOUTH)
-				else
-					if (direct & 8)
-						if (step(src, SOUTH))
-							step(src, WEST)
-						else
-							if (step(src, WEST))
-								step(src, SOUTH)
-	else
-		var/atom/A = src.loc
-
-		var/olddir = dir //we can't override this without sacrificing the rest of movable/New()
-		. = ..()
-		if(direct != olddir)
-			dir = olddir
-			set_dir(direct)
-
-		src.move_speed = world.time - src.l_move_time
-		src.l_move_time = world.time
-		src.m_flag = 1
-		if ((A != src.loc && A && A.z == src.z))
-			src.last_move = get_dir(A, src.loc)
-		if(.)
-			Moved(A, direct)
-
-
-
-*/
-
-
-
-
 ////////////////////////////////////////
 // Here's where we rewrite how byond handles movement except slightly different
 // To be removed on step_ conversion
@@ -156,17 +89,6 @@
 ////////////////////////////////////////
 
 /atom/movable/Move(atom/newloc, direct)
-	/*
-	var/atom/movable/pullee = pulling
-	var/turf/T = loc
-	if(pulling)
-		if(pullee && get_dist(src, pullee) > 1)
-			stop_pulling()
-
-		if(pullee && pullee.loc != loc && !isturf(pullee.loc) ) //to be removed once all code that changes an object's loc uses forceMove().
-			log_game("DEBUG:[src]'s pull on [pullee] wasn't broken despite [pullee] being in [pullee.loc]. Pull stopped manually.")
-			stop_pulling()
-	*/
 	if(!loc || !newloc)
 		return FALSE
 	var/atom/oldloc = loc
@@ -235,21 +157,11 @@
 	if(.)
 		Moved(oldloc, direct)
 
-	/*
-	if(. && pulling && pulling == pullee) //we were pulling a thing and didn't lose it during our move.
-		if(pulling.anchored)
-			stop_pulling()
-		else
-			var/pull_dir = get_dir(src, pulling)
-			//puller and pullee more than one tile away or in diagonal position
-			if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir)))
-				pulling.Move(T, get_dir(pulling, T)) //the pullee tries to reach our previous position
-				if(pulling && get_dist(src, pulling) > 1) //the pullee couldn't keep up
-					stop_pulling()
-			if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1)//separated from our puller and not in the middle of a diagonal move.
-				pulledby.stop_pulling()
-	*/
-
+	//Polaris stuff
+	move_speed = world.time - l_move_time
+	l_move_time = world.time
+	m_flag = 1
+	//End
 
 	last_move = direct
 	set_dir(direct)

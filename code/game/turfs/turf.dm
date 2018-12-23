@@ -171,73 +171,21 @@ var/const/enterloopsanity = 100
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
 		for(var/atom/movable/thing in range(1))
-			if(objects > enterloopsanity) break
-			objects++
+			if(objects++ > enterloopsanity) break
 			spawn(0)
 				if(A) //Runtime prevention
 					A.HasProximity(thing, 1)
 					if ((thing && A) && (thing.flags & PROXMOVE))
 						thing.HasProximity(A, 1)
-	return
 
 
-
-
-
-
-
-
-
-/*
-
-/turf/Enter(atom/movable/mover as mob|obj, atom/forget as mob|obj|turf|area)
-	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
-		return
-
-	..()
-
-	if (!mover || !isturf(mover.loc))
-		return 1
-
-	//First, check objects to block exit that are not on the border
-	for(var/obj/obstacle in mover.loc)
-		if(!(obstacle.flags & ON_BORDER) && (mover != obstacle) && (forget != obstacle))
-			if(!obstacle.CheckExit(mover, src))
-				mover.Bump(obstacle, 1)
-				return 0
-
-	//Now, check objects to block exit that are on the border
-	for(var/obj/border_obstacle in mover.loc)
-		if((border_obstacle.flags & ON_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
-			if(!border_obstacle.CheckExit(mover, src))
-				mover.Bump(border_obstacle, 1)
-				return 0
-
-	//Next, check objects to block entry that are on the border
-	for(var/obj/border_obstacle in src)
-		if(border_obstacle.flags & ON_BORDER)
-			if(!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
-				mover.Bump(border_obstacle, 1)
-				return 0
-
-	//Then, check the turf itself
-	if (!src.CanPass(mover, src))
-		mover.Bump(src, 1)
-		return 0
-
-	//Finally, check objects/mobs to block entry that are not on the border
-	for(var/atom/movable/obstacle in src)
-		if(!(obstacle.flags & ON_BORDER))
-			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
-				mover.Bump(obstacle, 1)
-				return 0
-	return 1 //Nothing found to block so return success!
-*/
 
 
 
 /turf/Enter(atom/movable/mover, atom/oldloc)
+	if(movement_disabled && usr.ckey != movement_disabled_exception)
+		usr << "<span class='warning'>Movement is admin-disabled.</span>" //This is to identify lag problems
+		return
 	// Do not call ..()
 	// Byond's default turf/Enter() doesn't have the behaviour we want with Bump()
 	// By default byond will call Bump() on the first dense object in contents
@@ -271,18 +219,6 @@ var/const/enterloopsanity = 100
 			if(thing.flags & ON_BORDER)
 				mover.Bump(thing)
 			return FALSE
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
