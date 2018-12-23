@@ -73,3 +73,9 @@
 	light_range = 2
 	light_power = 0.5
 	light_color = "#8837A3"
+
+/obj/effect/projectile/tungsten/impact
+	icon_state = "impact_mhd_laser"
+	light_range = 4
+	light_power = 3
+	light_color = "#3300ff"

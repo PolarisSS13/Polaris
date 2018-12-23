@@ -101,3 +101,9 @@
 	light_range = 2
 	light_power = 0.5
 	light_color = "#0066FF"
+
+/obj/effect/projectile/tungsten/tracer
+	icon_state = "mhd_laser"
+	light_range = 4
+	light_power = 3
+	light_color = "#3300ff"
