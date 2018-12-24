@@ -1,4 +1,4 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()//This makes sure that mobs withGLOB.clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
@@ -687,6 +687,10 @@
 				stat("World Time:", world.time)
 				stat("Real time of day:", REALTIMEOFDAY)
 				stat(null)
+				if(GLOB)
+					GLOB.stat_entry()
+				else
+					stat("Globals:", "ERROR")
 				if(Master)
 					Master.stat_entry()
 				else

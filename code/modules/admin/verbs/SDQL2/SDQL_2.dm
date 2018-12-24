@@ -391,7 +391,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	stat("[id]		", delete_click.update("DELETE QUERY | STATE : [text_state()] | ALL/ELIG/FIN \
 	[islist(obj_count_all)? length(obj_count_all) : (isnull(obj_count_all)? "0" : obj_count_all)]/\
 	[islist(obj_count_eligible)? length(obj_count_eligible) : (isnull(obj_count_eligible)? "0" : obj_count_eligible)]/\
-	[islist(obj_count_finished)? length(obj_count_finished) : (isnull(obj_count_finished)? "0" : obj_count_finished)]"))
+	[islist(obj_count_finished)? length(obj_count_finished) : (isnull(obj_count_finished)? "0" : obj_count_finished)] - [get_query_text()]"))
 	stat("			", action_click.update("[SDQL2_IS_RUNNING? "HALT" : "RUN"]"))
 
 /datum/SDQL2_query/proc/delete_click()
@@ -417,8 +417,8 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	var/msg = "[key_name(user)] has (re)started query #[id]"
 	message_admins(msg)
 	log_admin(msg)
-	ARun()
 	show_next_to_key = user.ckey
+	ARun()
 
 /datum/SDQL2_query/proc/admin_del(user = usr)
 	var/msg = "[key_name(user)] has stopped + deleted query #[id]"
@@ -479,8 +479,9 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	finished = TRUE
 	. = TRUE
 	if(show_next_to_key)
-		var/mob/showmob = GLOB.directory[show_next_to_key]
-		if(showmob)
+		var/client/C = GLOB.directory[show_next_to_key]
+		if(C)
+			var/mob/showmob = C.mob
 			to_chat(showmob, "<span class='admin'>SDQL query results: [get_query_text()]<br>\
 			SDQL query completed: [islist(obj_count_all)? length(obj_count_all) : obj_count_all] objects selected by path, and \
 			[where_switched? "[islist(obj_count_eligible)? length(obj_count_eligible) : obj_count_eligible] objects executed on after WHERE keyword selection." : ""]<br>\
@@ -489,6 +490,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 				var/text = islist(select_text)? select_text.Join() : select_text
 				var/static/result_offset = 0
 				showmob << browse(text, "window=SDQL-result-[result_offset++]")
+		show_next_to_key = null
 	if(qdel_on_finish)
 		qdel(src)
 
@@ -652,7 +654,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 				select_refs["\ref[i]"] = TRUE
 				SDQL2_TICK_CHECK
 				SDQL2_HALT_CHECK
-			select_text = text_list.Join()
+			select_text = text_list
 
 		if("update")
 			if("set" in query_tree)
@@ -1046,7 +1048,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 		else if(char == "'")
 			if(word != "")
-				to_chat(usr, "\red SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.")
+				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</font>")
 				return null
 
 			word = "'"
@@ -1066,7 +1068,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 					word += char
 
 			if(i > len)
-				to_chat(usr, "\red SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.")
+				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</font>")
 				return null
 
 			query_list += "[word]'"
@@ -1074,7 +1076,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 		else if(char == "\"")
 			if(word != "")
-				to_chat(usr, "\red SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.")
+				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</font>")
 				return null
 
 			word = "\""
@@ -1094,7 +1096,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 					word += char
 
 			if(i > len)
-				to_chat(usr, "\red SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.")
+				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</font>")
 				return null
 
 			query_list += "[word]\""
