@@ -201,6 +201,7 @@
 			return C
 	return null
 
+
 /datum/proc/GetComponents(c_type)
 	var/list/dc = datum_components
 	if(!dc)
