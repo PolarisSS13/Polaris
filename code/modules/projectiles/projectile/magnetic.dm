@@ -127,7 +127,7 @@
 	penetrating = 0
 	check_armour = "melee"
 	irradiate = 20
-	kill_count = 6
+	range = 6
 
 /obj/item/projectile/bullet/magnetic/bore/Bump(atom/A, forced=0)
 	if(istype(A, /turf/simulated/mineral))
