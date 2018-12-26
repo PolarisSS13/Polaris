@@ -55,8 +55,11 @@ var/list/assistant_occupations = list(
 )
 
 
+var/list/gov_positions = list(
+	"President"
+)
+
 var/list/command_positions = list(
-	"President",
 	"Mayor",
 	"City Supervisor",
 	"Chief of Police",
@@ -138,7 +141,8 @@ var/list/nonhuman_positions = list(
 
 
 /proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))
+	return (job in gov_positions)/*((job in command_positions) || (job in nonhuman_positions) || (job in security_positions)) ||*/
+
 
 /proc/get_job_datums()
 	var/list/occupations = list()
