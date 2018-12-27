@@ -7,7 +7,7 @@
 	"You're on top of the world!")
 	taste_description = "something weird"
 	var/high_message_chance = 10
-	color = "f2f2f2"
+	color = "#f2f2f2"
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 
