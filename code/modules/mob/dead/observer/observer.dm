@@ -316,8 +316,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Follow a living Human."
 
 	var/list/mobs = gethumans()
-	input = input("Please select a living Human:", "Haunt", null, null) as null|anything in mobs
-
 	if(mobs.len == 0)
 		usr << "\red There aren't any living Humans."
 		return
