@@ -253,7 +253,7 @@
 	if(r_ear && !(skip_gear & EXAMINE_SKIPEARS) && r_ear.show_examine)
 		msg += "[T.He] [T.has] \icon[r_ear] \a [r_ear] on [T.his] right ear.<br>"
 
-	//ID
+/*	//ID
 	if(wear_id && wear_id.show_examine)
 		/*var/id
 		if(istype(wear_id, /obj/item/device/pda))
@@ -266,7 +266,7 @@
 			msg += "<span class='warning'>[T.He] [T.is] wearing \icon[wear_id] \a [wear_id] yet something doesn't seem right...</span><br>"
 		else*/
 		msg += "[T.He] [T.is] wearing \icon[wear_id] \a [wear_id].<br>"
-
+*/
 	//Jitters
 	if(is_jittery)
 		if(jitteriness >= 300)
@@ -378,16 +378,9 @@
 		msg += "[T.He] [T.is] repulsively uncanny!<br>"
 
 	if(hasHUD(user,"security"))
-		var/perpname = name
+		var/perpname = get_visible_name()
 		var/criminal = "None"
 
-		if(wear_id)
-			if(istype(wear_id, /obj/item/weapon/card/id))
-				var/obj/item/weapon/card/id/I = wear_id
-				perpname = I.registered_name
-			else if(istype(wear_id, /obj/item/device/pda))
-				var/obj/item/device/pda/P = wear_id
-				perpname = P.owner
 
 		for (var/datum/data/record/R in data_core.security)
 			if(R.fields["name"] == perpname)
