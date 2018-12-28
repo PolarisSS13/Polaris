@@ -4,9 +4,11 @@ GLOBAL_LIST_EMPTY(cliff_icon_cache)
 Cliffs give a visual illusion of depth by seperating two places while presenting a 'top' and 'bottom' side.
 
 Mobs moving into a cliff from the bottom side will simply bump into it and be denied moving into the tile,
-where as mobs moving into a cliff from the top side will 'fall' off the cliff, forcing them to the bottom, causing damage and stunning them.
+where as mobs moving into a cliff from the top side will 'fall' off the cliff, forcing them to the bottom, causing significant damage and stunning them.
 
 Mobs can climb this while wearing climbing equipment by clickdragging themselves onto a cliff, as if it were a table.
+
+Flying mobs can pass over all cliffs with no risk of falling.
 
 Projectiles and thrown objects can pass, however if moving upwards, there is a chance for it to be stopped by the cliff.
 This makes fighting something that is on top of a cliff more challenging.
@@ -20,8 +22,11 @@ two tiles on initialization, and which way a cliff is facing may change during m
 /obj/structure/cliff
 	name = "cliff"
 	desc = "A steep rock ledge. You might be able to climb it if you feel bold enough."
+	description_info = "Walking off the edge of a cliff while on top will cause you to fall off, causing severe injury.<br>\
+	You can climb this cliff if wearing special climbing equipment, by click-dragging yourself onto the cliff.<br>\
+	Projectiles traveling up a cliff may hit the cliff instead, making it more difficult to fight something \
+	on top."
 	icon = 'icons/obj/flora/rocks.dmi'
-//	icon_state = "dogbed"
 
 	anchored = TRUE
 	density = TRUE
@@ -29,11 +34,12 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	climbable = TRUE
 	climb_delay = 10 SECONDS
 	block_turf_edges = TRUE // Don't want turf edges popping up from the cliff edge.
+	register_as_dangerous_object = TRUE
 
 	var/icon_variant = null // Used to make cliffs less repeative by having a selection of sprites to display.
 	var/corner = FALSE // Used for icon things.
 	var/ramp = FALSE // Ditto.
-	var/bottom = FALSE // Used for 'bottom' typed cliffs, to avoid infinite cliffs.
+	var/bottom = FALSE // Used for 'bottom' typed cliffs, to avoid infinite cliffs, and for icons.
 
 	var/is_double_cliff = FALSE // Set to true when making the two-tile cliffs, used for projectile checks.
 	var/uphill_penalty = 30 // Odds of a projectile not making it up the cliff.
@@ -48,13 +54,12 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	dir = NORTHEAST
 	corner = TRUE
 
+// Tiny part that doesn't block, used for making 'ramps'.
 /obj/structure/cliff/automatic/ramp
 	icon_state = "cliffbuilder-ramp"
 	dir = NORTHEAST
-
-// Tiny part that doesn't block, used for making 'ramps'.
-/obj/structure/cliff/ramp
 	density = FALSE
+	ramp = TRUE
 
 // Made automatically as needed by automatic cliffs.
 /obj/structure/cliff/bottom
@@ -105,36 +110,18 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	if(T && subtraction_icon_state in icon_states(icon))
 		cut_overlays()
 		// If we've made the same icon before, just recycle it.
-	//	if(cache_string in GLOB.cliff_icon_cache)
-	//		add_overlay(GLOB.cliff_icon_cache[cache_string])
-	//	else // Otherwise make a new one, but only once.
-		world << "Going to blend [icon_state] with [subtraction_icon_state]."
-		var/icon/underlying_ground = icon(T.icon, T.icon_state, T.dir)
-		var/icon/subtract = icon(icon, subtraction_icon_state)
-		underlying_ground.Blend(subtract, ICON_SUBTRACT)
-		var/image/final = image(underlying_ground)
-		final.layer = src.layer - 0.2
-//		GLOB.cliff_icon_cache[cache_string] = final
-		add_overlay(final)
+		if(cache_string in GLOB.cliff_icon_cache)
+			add_overlay(GLOB.cliff_icon_cache[cache_string])
 
-/*
-/turf/simulated/floor/water/shoreline/update_icon()
-	underlays.Cut()
-	cut_overlays()
-	..() // Get the underlay first.
-	var/cache_string = "[initial(icon_state)]_[water_state]_[dir]"
-	if(cache_string in shoreline_icon_cache) // Check to see if an icon already exists.
-		add_overlay(shoreline_icon_cache[cache_string])
-	else // If not, make one, but only once.
-		var/icon/shoreline_water = icon(src.icon, "shoreline_water", src.dir)
-		var/icon/shoreline_subtract = icon(src.icon, "[initial(icon_state)]_subtract", src.dir)
-		shoreline_water.Blend(shoreline_subtract,ICON_SUBTRACT)
-		var/image/final = image(shoreline_water)
-		final.layer = WATER_LAYER
+		else // Otherwise make a new one, but only once.
+			var/icon/underlying_ground = icon(T.icon, T.icon_state, T.dir)
+			var/icon/subtract = icon(icon, subtraction_icon_state)
+			underlying_ground.Blend(subtract, ICON_SUBTRACT)
+			var/image/final = image(underlying_ground)
+			final.layer = src.layer - 0.2
+			GLOB.cliff_icon_cache[cache_string] = final
+			add_overlay(final)
 
-		shoreline_icon_cache[cache_string] = final
-		add_overlay(shoreline_icon_cache[cache_string])
-*/
 
 // Movement-related code.
 
@@ -156,135 +143,90 @@ two tiles on initialization, and which way a cliff is facing may change during m
 				return FALSE
 		return TRUE
 
-/*
-/obj/effect/directional_shield/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0))
+/obj/structure/cliff/Bumped(atom/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(should_fall(L))
+			fall_off_cliff(L)
+			return
+	..()
+
+/obj/structure/cliff/proc/should_fall(mob/living/L)
+	if(L.hovering)
+		return FALSE
+
+	var/turf/T = get_turf(L)
+	if(T && get_dir(T, loc) & reverse_dir[dir]) // dir points 'up' the cliff, e.g. cliff pointing NORTH will cause someone to fall if moving SOUTH into it.
 		return TRUE
-	else if(istype(mover, /obj/item/projectile))
-		var/obj/item/projectile/P = mover
-		if(istype(P, /obj/item/projectile/test)) // Turrets need to try to kill the shield and so their test bullet needs to penetrate.
-			return TRUE
+	return FALSE
 
-		var/bad_arc = reverse_direction(dir) // Arc of directions from which we cannot block.
-		if(check_shield_arc(src, bad_arc, P)) // This is actually for mobs but it will work for our purposes as well.
-			return FALSE
-		else
-			return TRUE
-	return TRUE
-*/
+/obj/structure/cliff/proc/fall_off_cliff(mob/living/L)
+	if(!istype(L))
+		return FALSE
+	var/turf/T = get_step(src, reverse_dir[dir])
+	var/displaced = FALSE
 
+	if(dir in list(EAST, WEST)) // Apply an offset if flying sideways, to help maintain the illusion of depth.
+		for(var/i = 1 to 2)
+			var/turf/new_T = locate(T.x, T.y - i, T.z)
+			if(!new_T || locate(/obj/structure/cliff) in new_T)
+				break
+			T = new_T
+			displaced = TRUE
 
-// These are hopefully temporary.
-/obj/structure/cliff/cliff1
-	icon_state = "1"
+	if(istype(T))
+		visible_message(span("danger", "\The [L] falls off \the [src]!"))
+		L.forceMove(T)
 
-/obj/structure/cliff/cliff2
-	icon_state = "2"
+		// Do the actual hurting. Double cliffs do halved damage due to them most likely hitting twice.
+		var/harm = !is_double_cliff ? 1 : 0.5
+		if(istype(L.buckled, /obj/vehicle)) // People falling off in vehicles will take less damage, but will damage the vehicle severely.
+			var/obj/vehicle/vehicle = L.buckled
+			vehicle.adjust_health(40 * harm)
+			to_chat(L, span("warning", "\The [vehicle] absorbs some of the impact, damaging it."))
+			harm /= 2
 
-/obj/structure/cliff/cliff3
-	icon_state = "3"
+		playsound(L, 'sound/effects/break_stone.ogg', 70, 1)
+		L.Weaken(5 * harm)
+		var/fall_time = 3
+		if(displaced) // Make the fall look more natural when falling sideways.
+			L.pixel_z = 32 * 2
+			animate(L, pixel_z = 0, time = fall_time)
+		sleep(fall_time) // A brief delay inbetween the two sounds helps sell the 'ouch' effect.
+		playsound(L, "punch", 70, 1)
+		shake_camera(L, 1, 1)
+		visible_message(span("danger", "\The [L] hits the ground!"))
 
-/obj/structure/cliff/cliff4
-	icon_state = "4"
+		// The bigger they are, the harder they fall.
+		// They will take at least 20 damage at the minimum, and tries to scale up to 40% of their max health.
+		// This scaling is capped at 100 total damage, which occurs if the thing that fell has more than 250 health.
+		var/damage = between(20, L.getMaxHealth() * 0.4, 100)
+		var/target_zone = ran_zone()
+		var/blocked = L.run_armor_check(target_zone, "melee") * harm
+		var/soaked = L.get_armor_soak(target_zone, "melee") * harm
 
-/obj/structure/cliff/cliff5
-	icon_state = "5"
+		L.apply_damage(damage * harm, BRUTE, target_zone, blocked, soaked, used_weapon=src)
 
-/obj/structure/cliff/cliff6
-	icon_state = "6"
+		// Now fall off more cliffs below this one if they exist.
+		var/obj/structure/cliff/bottom_cliff = locate() in T
+		if(bottom_cliff)
+			visible_message(span("danger", "\The [L] rolls down towards \the [bottom_cliff]!"))
+			sleep(5)
+			bottom_cliff.fall_off_cliff(L)
 
-/obj/structure/cliff/cliff7
-	icon_state = "7"
+/obj/structure/cliff/can_climb(mob/living/user, post_climb_check = FALSE)
+	// Cliff climbing requires climbing gear.
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/obj/item/clothing/shoes/shoes = H.shoes
+		if(shoes && shoes.rock_climbing)
+			return ..() // Do the other checks too.
 
-/obj/structure/cliff/cliff8
-	icon_state = "8"
+	to_chat(user, span("warning", "\The [src] is too steep to climb unassisted."))
+	return FALSE
 
-/obj/structure/cliff/cliff9
-	icon_state = "9"
-
-
-/obj/structure/cliff/cliff10
-	icon_state = "10"
-
-/obj/structure/cliff/cliff11
-	icon_state = "11"
-
-/obj/structure/cliff/cliff12
-	icon_state = "12"
-
-/obj/structure/cliff/cliff13
-	icon_state = "13"
-
-/obj/structure/cliff/cliff14
-	icon_state = "14"
-
-/obj/structure/cliff/cliff15
-	icon_state = "15"
-
-/obj/structure/cliff/cliff16
-	icon_state = "16"
-
-/obj/structure/cliff/cliff17
-	icon_state = "17"
-
-/obj/structure/cliff/cliff18
-	icon_state = "18"
-
-/obj/structure/cliff/cliff19
-	icon_state = "19"
-
-
-/obj/structure/cliff/cliff20
-	icon_state = "20"
-
-/obj/structure/cliff/cliff21
-	icon_state = "21"
-
-/obj/structure/cliff/cliff22
-	icon_state = "22"
-
-/obj/structure/cliff/cliff23
-	icon_state = "23"
-
-/obj/structure/cliff/cliff24
-	icon_state = "24"
-
-/obj/structure/cliff/cliff25
-	icon_state = "25"
-
-/obj/structure/cliff/cliff26
-	icon_state = "26"
-
-/obj/structure/cliff/cliff27
-	icon_state = "27"
-
-/obj/structure/cliff/cliff28
-	icon_state = "28"
-
-/obj/structure/cliff/cliff29
-	icon_state = "29"
-
-
-/obj/structure/cliff/cliff30
-	icon_state = "30"
-
-/obj/structure/cliff/cliff31
-	icon_state = "31"
-
-/obj/structure/cliff/cliff32
-	icon_state = "32"
-
-/obj/structure/cliff/cliff33
-	icon_state = "33"
-
-/obj/structure/cliff/cliff34
-	icon_state = "34"
-
-/obj/structure/cliff/cliff35
-	icon_state = "35"
-
-/obj/structure/cliff/cliff36
-	icon_state = "36"
-
-/obj/structure/cliff/cliff37
-	icon_state = "37"
+// This tells AI mobs to not be dumb and step off cliffs willingly.
+/obj/structure/cliff/is_safe_to_step(mob/living/L)
+	if(should_fall(L))
+		return FALSE
+	return ..()

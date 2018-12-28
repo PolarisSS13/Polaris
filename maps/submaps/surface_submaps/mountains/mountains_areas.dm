@@ -121,3 +121,7 @@
 /area/submap/deadspy
 	name = "Dead Spy"
 	ambience = AMBIENCE_FOREBODING
+
+/area/submap/lava_trench
+	name = "Lava Trench"
+	ambience = AMBIENCE_LAVA

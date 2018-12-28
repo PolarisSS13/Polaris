@@ -1,94 +1,140 @@
-"a" = (/turf/unsimulated/wall/planetary/sif,/area/plane_ground)
-"b" = (/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"c" = (/obj/effect/landmark/start,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"d" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"e" = (/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"f" = (/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
-"g" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"h" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"i" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"j" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"k" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"l" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"m" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"n" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"o" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"p" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"q" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 9},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"r" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"s" = (/obj/structure/cliff/automatic/ramp{icon_state = "cliffbuilder-ramp"; dir = 9},/obj/structure/cliff/automatic/ramp,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
-"L" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"M" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"O" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"P" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"Q" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"R" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"S" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
-"U" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aa" = (/turf/unsimulated/wall/planetary/sif,/area/plane_ground)
+"ab" = (/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"ac" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"ad" = (/obj/effect/landmark/start,/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"ae" = (/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"af" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"ag" = (/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"ah" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"ai" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"aj" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"ak" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"al" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"am" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"an" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"ao" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"ap" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aq" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"ar" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"as" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"at" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 6},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"au" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"av" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 9},/turf/simulated/floor/outdoors/snow,/area/plane_ground)
+"aw" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"ax" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"ay" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"az" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 9},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aA" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aB" = (/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aC" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aD" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"aE" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/floor/outdoors/grass/sif,/area/plane_ground)
+"aF" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aG" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aH" = (/obj/structure/fence/corner{icon_state = "corner"; dir = 8},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aI" = (/obj/structure/fence/post{icon_state = "post"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aJ" = (/obj/structure/fence/corner{icon_state = "corner"; dir = 5},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aK" = (/obj/structure/fence/post,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aL" = (/obj/structure/fence/corner{icon_state = "corner"; dir = 10},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aM" = (/obj/structure/fence/door,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aN" = (/obj/structure/fence/corner,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aO" = (/obj/structure/fence{icon_state = "straight"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aP" = (/obj/structure/fence/door{icon_state = "door_closed"; dir = 1},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aQ" = (/obj/structure/fence,/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aR" = (/obj/structure/fence/door{icon_state = "door_closed"; dir = 8},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aS" = (/obj/structure/fence/door{icon_state = "door_closed"; dir = 4},/turf/simulated/floor/outdoors/dirt,/area/plane_ground)
+"aT" = (/obj/structure/cliff/automatic/ramp{icon_state = "cliffbuilder-ramp"; dir = 9},/obj/structure/cliff/automatic/ramp,/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aU" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 10},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aV" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aW" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aX" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aY" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"aZ" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"ba" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 9},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"bb" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"bc" = (/obj/structure/cliff/automatic/corner{icon_state = "cliffbuilder-corner"; dir = 9},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"bd" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/outdoors/rocks,/area/plane_ground)
+"be" = (/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bg" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bh" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bi" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 10},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bj" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 2},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bk" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 6},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bl" = (/obj/structure/railing,/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bm" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/obj/structure/railing,/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bn" = (/obj/structure/railing,/obj/structure/railing{icon_state = "railing0"; dir = 4},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bo" = (/obj/structure/catwalk,/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bp" = (/obj/structure/railing{icon_state = "railing0"; dir = 8},/obj/structure/railing,/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bq" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/obj/structure/railing,/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"br" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/obj/structure/railing{icon_state = "railing0"; dir = 1},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bs" = (/obj/structure/railing{icon_state = "railing0"; dir = 1},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bt" = (/obj/structure/railing{icon_state = "railing0"; dir = 1},/obj/structure/railing{icon_state = "railing0"; dir = 4},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bu" = (/obj/structure/railing{icon_state = "railing0"; dir = 8},/obj/structure/railing{icon_state = "railing0"; dir = 1},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
+"bv" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 4},/obj/structure/railing{icon_state = "railing0"; dir = 1},/turf/simulated/floor/lava/outdoors,/area/plane_ground)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbeeeghhhhhieeebbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeeeeeejbbbbbkieebbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeeeeeglbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeeghhlbbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbPLLLQbmeeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbMfffUbkieebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeejbbbbMfffUbbmeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeenopbbSOOORbbmeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeeeenpbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbeeeeejbbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbeenpbbbbbbbmeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbeeejbbbbqooreebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbeenoosoreeeeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbeeeeeeebbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaabababababababababababababababababababababababacaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAaAafabababababababababababababababababababababaa
+aaabababababababababababababababababababacaAaAaAaFabaBababababababababababababababapabababababababababababababababababababababaa
+aaababababababababababababababababacaAaAaFaBababaBababababaBababababaBababababababaGafababababababababababababababababababababaa
+aaabababababababababababababababacaFaBaBababababababababaBababaBababababababababababapababababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaBababaBatawawaAaAaAaAaAaAaAaAaAaAafababababapababababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaBaBatawbdagagaBagagagagaBagaBagagaralabababaGafabababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaBatbdagagaBagagagagaBaBaBaBaBagagagaoababababapabababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBatbdagagagagagahaiaiawawaUagaBagagaBaraiafababapabababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaVagagagahaiaiakagagagagaWaBaBaBaBaBagagapababaGafababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaVagagagaqagagagagagagagaXawaUagaBagaBaBapabababapababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaVagagagaqagagagagagagagagagaXawaUaBaBagapabababapababababababababababababababababababaa
+aaabababababababababababababababamaBaBaBaVagagagaqagagagagagagagagagagagaWaWaBaBapabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeajaBaBaBaVagagagasauagavauagagagagagagagaWaWaBaBapabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeajaBaBaBaYauagagagagagagaqagagagagagagagaWaWaBaBapabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaqagagagagagagaqagagagagagbabbbcaWaBaBapabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaqagagagagagagasbbbbbbaTbbbcaBaBaWaBaBapabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeanaEaBaBaBaYbbbbaZagagagagaBaBaBaBaBaBaBbabcaBazaxabababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBaBaVagagagagbabbbbaTbbbbbbbcaBaBapababababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBaBaYbbbbbbbbbcaBaBaBaBaBaBaBaBazaxababababapababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeanaEaBaBaBaBaBaBaBaBaBaBaBayayayaBazaCaTaCaxababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBaBaBaBaBadaBayayayaBapabaBababababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBaBaBaBaBaBaBayayayaBapababababababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeanaDaEaBaBaBaBaBaBaBaBaBaBaBaBaBapababababababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBaBaBaBaBazaCaCaCaxababababababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeajaBaBaBaBaBazaCaCaCaxababababababababababababababababababababababababababababababababaa
+aaabababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeanaDaCaCaCaCaxababababababababababaHaIaOaIaPaIaOaIaJabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaKabababababababaKabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaQabababababababaQabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaKabababababababaKabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaRabababababababaSabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaKabababababababaKabababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababaQabababababababaQabababababababababababababababababaa
+aaababababababababababababababababaBaBaBaBaBaBaBaBaBaBaBaBaBabababababababaKabababababababaKabababababababababababababababababaa
+aaababababababababababababababababaBaBaBaBaBaBaBaBaBaBaBaBaBabababababababaLaIaOaIaMaIaOaIaNabababababababababababababababababaa
+aaababababababababababababababababaBaBbabbbbbbbbbbbbbbaZaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbgbebebebebebebebhaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbgbebeblblblbebebhaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbmblbnbobobobpblbqaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBboboboboboboboboboaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbrbsbtbobobobubsbvaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbgbebebsbsbsbebebhaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBbibjbjbjbjbjbjbjbkaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBaBaBaBaBaBaBaBaBaBaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababaBaBaBaBaBaBaBaBaBaBaBaBaBabababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
