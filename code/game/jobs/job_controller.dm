@@ -426,9 +426,9 @@ var/global/datum/controller/occupations/job_master
 			var/datum/money_account/department_account = department_accounts[job.department]
 
 			if(department_account)
-				remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
-				remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-				remembered_info += "<b>Your department's account funds are:</b> $[department_account.money]<br>"
+				remembered_info += "<b>Your sector's account number is:</b> #[department_account.account_number]<br>"
+				remembered_info += "<b>Your sector's account pin is:</b> [department_account.remote_access_pin]<br>"
+				remembered_info += "<b>Your sector's account funds are:</b> $[department_account.money]<br>"
 
 			H.mind.store_memory(remembered_info)
 
@@ -445,6 +445,9 @@ var/global/datum/controller/occupations/job_master
 				if("Mayor")
 					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/boatswain.ogg', volume=20)
 					captain_announcement.Announce("The [alt_title ? alt_title : "Mayor"] [H.real_name] has arrived to the city.", new_sound=announce_sound)
+				if("President")
+					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/fanfare_prez.ogg', volume=20)
+					captain_announcement.Announce("[alt_title ? alt_title : "Mayor"] [H.real_name] is visiting the city!", new_sound=announce_sound)
 
 			//Deferred item spawning.
 			if(spawn_in_storage && spawn_in_storage.len)
