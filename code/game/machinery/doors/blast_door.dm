@@ -23,7 +23,7 @@
 	var/icon_state_closed = null
 	var/icon_state_closing = null
 
-	closed_layer = 3.3 // Above airlocks when closed
+	closed_layer = ON_WINDOW_LAYER // Above airlocks when closed
 	var/id = 1.0
 	dir = 1
 	explosion_resistance = 25
@@ -32,7 +32,7 @@
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
-/obj/machinery/door/blast/initialize()
+/obj/machinery/door/blast/Initialize()
 	. = ..()
 	implicit_material = get_material_by_name("plasteel")
 

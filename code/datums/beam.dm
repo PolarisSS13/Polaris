@@ -144,12 +144,12 @@
 // 'Reactive' beam parts do something when touched or stood in.
 /obj/effect/ebeam/reactive
 
-/obj/effect/ebeam/reactive/initialize()
-	processing_objects += src
+/obj/effect/ebeam/reactive/Initialize()
+	START_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/effect/ebeam/reactive/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/effect/ebeam/reactive/on_drawn()
