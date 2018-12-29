@@ -276,6 +276,7 @@
 
 /datum/map_template/surface/mountains/deep/lava_trench
 	name = "lava trench"
-	desc = "A long stretch of lava underground, almost river-like."
+	desc = "A long stretch of lava underground, almost river-like, with a small crystal research outpost on the side."
 	mappath = 'maps/submaps/surface_submaps/mountains/lava_trench.dmm'
 	cost = 20
+	fixed_orientation = TRUE

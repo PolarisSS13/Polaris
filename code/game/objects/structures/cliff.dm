@@ -100,11 +100,18 @@ two tiles on initialization, and which way a cliff is facing may change during m
 	bottom.density = density
 	bottom.update_icon()
 
+/obj/structure/cliff/set_dir(new_dir)
+	..()
+	update_icon()
+
 /obj/structure/cliff/update_icon()
 	icon_state = "cliff-[dir][icon_variant][bottom ? "-bottom" : ""][corner ? "-corner" : ""][ramp ? "-ramp" : ""]"
 
 	// Now for making the top-side look like a different turf.
 	var/turf/T = get_step(src, dir)
+	if(!istype(T))
+		return
+
 	var/subtraction_icon_state = "[icon_state]-subtract"
 	var/cache_string = "[icon_state]_[T.icon]_[T.icon_state]"
 	if(T && subtraction_icon_state in icon_states(icon))
