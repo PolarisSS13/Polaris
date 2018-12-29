@@ -15,6 +15,7 @@
 	max_loops		(num)					The max amount of loops to run for.
 	direct			(bool)					If true plays directly to provided atoms instead of from them
 	opacity_check	(bool)					If true, things behind walls/opaque things won't hear the sounds.
+	pref_check		(type)					If set to a /datum/client_preference type, will check if the hearer has that preference active before playing it to them.
 */
 /datum/looping_sound
 	var/list/atom/output_atoms
@@ -28,6 +29,7 @@
 	var/max_loops
 	var/direct
 	var/opacity_check
+	var/pref_check
 
 	var/timerid
 
@@ -81,9 +83,13 @@
 	for(var/i in 1 to atoms_cache.len)
 		var/atom/thing = atoms_cache[i]
 		if(direct)
+			if(ismob(thing))
+				var/mob/M = thing
+				if(!M.is_preference_enabled(pref_check))
+					continue
 			SEND_SOUND(thing, S)
 		else
-			playsound(thing, S, volume, ignore_walls = !opacity_check)
+			playsound(thing, S, volume, ignore_walls = !opacity_check, preference = pref_check)
 
 /datum/looping_sound/proc/get_sound(starttime, _mid_sounds)
 	if(!_mid_sounds)

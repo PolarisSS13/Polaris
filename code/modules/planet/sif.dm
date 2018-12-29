@@ -211,8 +211,8 @@ var/datum/planet/sif/planet_sif = null
 		"It's starting to snow.",
 		"The air feels much colder as snowflakes fall from above."
 	)
-	outdoor_sounds_type = /datum/looping_sound/outside_snow
-	indoor_sounds_type = /datum/looping_sound/inside_snow
+	outdoor_sounds_type = /datum/looping_sound/weather/outside_snow
+	indoor_sounds_type = /datum/looping_sound/weather/inside_snow
 
 /datum/weather/sif/snow/process_effects()
 	..()
@@ -242,8 +242,8 @@ var/datum/planet/sif/planet_sif = null
 		"Strong winds howl around you as a blizzard appears.",
 		"It starts snowing heavily, and it feels extremly cold now."
 	)
-	outdoor_sounds_type = /datum/looping_sound/outside_blizzard
-	indoor_sounds_type = /datum/looping_sound/inside_blizzard
+	outdoor_sounds_type = /datum/looping_sound/weather/outside_blizzard
+	indoor_sounds_type = /datum/looping_sound/weather/inside_blizzard
 
 /datum/weather/sif/blizzard/process_effects()
 	..()
@@ -272,8 +272,8 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"The sky is dark, and rain falls down upon you."
 	)
-//	outdoor_sounds_type = /datum/looping_sound/rain
-//	indoor_sounds_type = /datum/looping_sound/rain/indoors
+//	outdoor_sounds_type = /datum/looping_sound/weather/rain
+//	indoor_sounds_type = /datum/looping_sound/weather/rain/indoors
 
 /datum/weather/sif/rain/process_effects()
 	..()
@@ -319,8 +319,8 @@ var/datum/planet/sif/planet_sif = null
 		"Loud thunder is heard in the distance.",
 		"A bright flash heralds the approach of a storm."
 	)
-//	outdoor_sounds_type = /datum/looping_sound/rain
-//	indoor_sounds_type = /datum/looping_sound/rain/indoors
+//	outdoor_sounds_type = /datum/looping_sound/weather/rain
+//	indoor_sounds_type = /datum/looping_sound/weather/rain/indoors
 
 
 	transition_chances = list(
@@ -462,8 +462,8 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"The sky turns blood red!"
 	)
-	outdoor_sounds_type = /datum/looping_sound/wind
-	indoor_sounds_type = /datum/looping_sound/wind/indoors
+	outdoor_sounds_type = /datum/looping_sound/weather/wind
+	indoor_sounds_type = /datum/looping_sound/weather/wind/indoors
 
 // Ash and embers fall forever, such as from a volcano or something.
 /datum/weather/sif/emberfall
@@ -481,8 +481,8 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"Gentle embers waft down around you like grotesque snow."
 	)
-	outdoor_sounds_type = /datum/looping_sound/wind
-	indoor_sounds_type = /datum/looping_sound/wind/indoors
+	outdoor_sounds_type = /datum/looping_sound/weather/wind
+	indoor_sounds_type = /datum/looping_sound/weather/wind/indoors
 
 // Like the above but a lot more harmful.
 /datum/weather/sif/ash_storm
@@ -501,8 +501,8 @@ var/datum/planet/sif/planet_sif = null
 		"Smoldering clouds of scorching ash billow down around you!"
 	)
 	// Lets recycle.
-	outdoor_sounds_type = /datum/looping_sound/outside_blizzard
-	indoor_sounds_type = /datum/looping_sound/inside_blizzard
+	outdoor_sounds_type = /datum/looping_sound/weather/outside_blizzard
+	indoor_sounds_type = /datum/looping_sound/weather/inside_blizzard
 
 /datum/weather/sif/ash_storm/process_effects()
 	..()
@@ -521,7 +521,7 @@ var/datum/planet/sif/planet_sif = null
 	name = "fallout"
 	icon_state = "fallout"
 	light_modifier = 0.7
-	light_color = "#008800"
+	light_color = "#CCFFCC"
 	flight_failure_modifier = 30
 	transition_chances = list(
 		WEATHER_FALLOUT = 100
@@ -530,12 +530,14 @@ var/datum/planet/sif/planet_sif = null
 	transition_messages = list(
 		"Radioactive soot and ash start to float down around you, contaminating whatever they touch."
 	)
-	outdoor_sounds_type = /datum/looping_sound/wind
-	indoor_sounds_type = /datum/looping_sound/wind/indoors
+	outdoor_sounds_type = /datum/looping_sound/weather/wind
+	indoor_sounds_type = /datum/looping_sound/weather/wind/indoors
 
+	// How much radiation a mob gets while on an outside tile.
 	var/direct_rad_low = RAD_LEVEL_LOW
 	var/direct_rad_high = RAD_LEVEL_MODERATE
 
+	// How much radiation is bursted onto a random tile near a mob.
 	var/fallout_rad_low = RAD_LEVEL_HIGH
 	var/fallout_rad_high = RAD_LEVEL_VERY_HIGH
 

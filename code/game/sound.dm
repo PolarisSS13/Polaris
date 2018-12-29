@@ -23,7 +23,7 @@
 
 		if(distance <= maxdistance)
 			if(T && T.z == turf_source.z)
-				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, channel, pressure_affected, S)
+				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, channel, pressure_affected, S, preference)
 
 /mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, channel = 0, pressure_affected = TRUE, sound/S, preference)
 	if(!client || ear_deaf > 0)
