@@ -315,9 +315,9 @@
 	deform = 'icons/mob/human_races/r_zaddat.dmi'
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
 	brute_mod = 1.15
-	burn_mod =  0.85
+	burn_mod =  1.15
 	toxins_mod = 1.5
-	metabolic_rate = 1.5 //hungry bugs
+	metabolic_rate = 0.7 //did u know if your ancestors starved ur body will actually start in starvation mode?
 	gluttonous = 1
 	taste_sensitivity = TASTE_SENSITIVE
 	num_alternate_languages = 3
@@ -375,14 +375,14 @@
 
 /datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
-	if(H.wear_suit && !istype(H.wear_suit, /obj/item/clothing/suit/space/void/zaddat)) //get rid of job labcoats so they don't stop us from equipping the Shroud
-		H.drop_from_inventory(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
-	if(H.wear_mask && !istype(H.wear_mask, /obj/item/clothing/mask/gas/zaddat))
-		H.drop_from_inventory(H.wear_mask)
-	if(H.head && !istype(H.head, /obj/item/clothing/head/helmet/space/void/zaddat))
-		H.drop_from_inventory(H.head)
+	if(H.wear_suit) //get rid of job labcoats so they don't stop us from equipping the Shroud
+		qdel(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
+	if(H.wear_mask)
+		qdel(H.wear_mask)
+	if(H.head)
+		qdel(H.head)
 
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat(H), slot_wear_mask) // mask has to come first or Shroud helmet will get in the way
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat/(H), slot_wear_mask) // mask has to come first or Shroud helmet will get in the way
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
 
 /datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
