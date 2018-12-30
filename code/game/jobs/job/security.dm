@@ -68,8 +68,8 @@
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 10
-	spawn_positions = 16
+	total_positions = 8
+	spawn_positions = 8
 	supervisors = "the chief of police"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/officer
