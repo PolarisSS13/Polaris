@@ -240,15 +240,6 @@ proc/listclearnulls(list/list)
 	for(var/i in L)
 		. |= i
 
-/proc/uniqueList_inplace(list/L)
-	var/temp = L.Copy()
-	L.len = 0
-	for(var/key in temp)
-		if (isnum(key))
-			L |= key
-		else
-			L[key] = temp[key]
-
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortKey(var/list/client/L, var/order = 1)
 	if(isnull(L) || L.len < 2)
