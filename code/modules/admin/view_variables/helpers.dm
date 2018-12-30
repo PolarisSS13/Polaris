@@ -84,6 +84,3 @@
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
-
-/datum/proc/VV_hidden()
-	return list()

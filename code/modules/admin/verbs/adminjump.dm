@@ -109,10 +109,8 @@
 	if(!check_rights(R_ADMIN|R_MOD|R_DEBUG))
 		return
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] jumped to [key_name(M)]")
-		var/msg = "[key_name_admin(usr)] jumped to [key_name_admin(M)]"
-		message_admins(msg)
-		admin_ticket_log(M, msg)
+		log_admin("[key_name(usr)] teleported [key_name(M)]")
+		message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)]", 1)
 		M.on_mob_jump()
 		M.loc = get_turf(usr)
 		feedback_add_details("admin_verb","GM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -139,9 +137,7 @@
 		if(!M)
 			return
 		log_admin("[key_name(usr)] teleported [key_name(M)]")
-		var/msg = "[key_name_admin(usr)] teleported [ADMIN_LOOKUPFLW(M)]"
-		message_admins(msg)
-		admin_ticket_log(M, msg)
+		message_admins("[key_name_admin(usr)] teleported [key_name(M)]", 1)
 		if(M)
 			M.on_mob_jump()
 			M.loc = get_turf(usr)
@@ -161,10 +157,7 @@
 			M.loc = pick(get_area_turfs(A))
 			feedback_add_details("admin_verb","SMOB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-			log_admin("[key_name(usr)] teleported [key_name(M)]")
-			var/msg = "[key_name_admin(usr)] teleported [ADMIN_LOOKUPFLW(M)]"
-			message_admins(msg)
-			admin_ticket_log(M, msg)
-			
+			log_admin("[key_name(usr)] teleported [key_name(M)] to [A]")
+			message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)] to [A]", 1)
 		else
 			alert("Admin jumping disabled")
