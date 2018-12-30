@@ -7,5 +7,6 @@
 	required_players = 1
 	required_players_secret = 1
 	required_enemies = 1
-	end_on_antag_death = 0
+	end_on_antag_death = 1
 	restricted_jobs = list("AI", "Cyborg","Chief Medical Officer", "Doctor", "Virologist")
+	votable = 0 //Until this mode is fixed.

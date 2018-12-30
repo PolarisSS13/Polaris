@@ -8,6 +8,7 @@
 
 
 /datum/riding/car/handle_ride(mob/user, direction)
+
 	var/turf/next = get_step(ridden, direction)
 	var/turf/current = get_turf(ridden)
 
