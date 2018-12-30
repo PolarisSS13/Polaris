@@ -4,6 +4,7 @@
 	icon_state =  "policecar"
 	frame_state =  "policecar"
 	horn_sound = 'sound/vehicles/police_siren.ogg'
+	cell_type = /obj/item/weapon/cell/car/advanced
 
 /obj/vehicle/car/truck
 	name = "truck"

@@ -5,7 +5,7 @@
 	maxcharge = 30000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
 
-/obj/item/weapon/cell/car/New()
+/obj/item/weapon/cell/car/empty/New()
 	..()
 	charge = 0
 
