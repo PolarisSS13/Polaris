@@ -48,15 +48,10 @@
 	var/id = src.GetIdCard()
 	return O.check_access(id)
 
-/mob/proc/CanUseObjTopic()
-	return 1
 
-/obj/proc/CouldUseTopic(var/mob/user)
+/obj/CouldUseTopic(var/mob/user)
 	var/atom/host = nano_host()
 	host.add_hiddenprint(user)
-
-/obj/proc/CouldNotUseTopic(var/mob/user)
-	// Nada
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 

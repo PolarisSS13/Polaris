@@ -15,6 +15,12 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 		src << "<font color='red'>Error: Admin-PM: You cannot send adminhelps (Muted).</font>"
 		return
 
+	var/datum/client_lite/client_lite = client_repository.get_lite_client(src)
+	var/datum/ticket/existing_ticket = get_open_ticket_by_client(client_lite)
+	if(!isnull(existing_ticket))
+		to_chat(src, "<span class='notice'>You already have an open ticket! Either click a responding admin's name to reply, or <a href='?src=\ref[usr];close_ticket=\ref[existing_ticket]'>close your ticket</a> to start a new one.</span>")
+		return
+
 	adminhelped = 1 //Determines if they get the message to reply by clicking the name.
 
 	if(msg)
@@ -91,7 +97,12 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			//Options bar:  mob, details ( admin = 2, dev = 3, event manager = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 			//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	msg = "<b><font color=red>Request for Help: </font></b><font color='blue'><b>[get_options_bar(mob, 2, 1, 1)][ai_cl]</b> [msg]</font>"
+	// create ticket
+	var/datum/ticket/ticket = new /datum/ticket(client_lite)
+	ticket.msgs += new /datum/ticket_msg(src.ckey, null, original_msg)
+
+	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
+	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)][ai_cl] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
@@ -102,9 +113,10 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 			X << msg
 			if(X.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
 				X << 'sound/effects/adminhelp.ogg'
-
+			if(X.holder.rights == R_EVENT)
+				to_chat(X, mentor_msg)// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
 	//show it to the person adminhelping too
-	src << "<font color='blue'>PM to-<b>Staff </b>: [original_msg]</font>"
+	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
 
 	var/admin_number_present = admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
@@ -115,3 +127,62 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
+/proc/generate_ahelp_key_words(var/mob/mob, var/msg)
+	var/list/surnames = list()
+	var/list/forenames = list()
+	var/list/ckeys = list()
+
+	//explode the input msg into a list
+	var/list/msglist = splittext(msg, " ")
+
+	for(var/mob/M in mob_list)
+		var/list/indexing = list(M.real_name, M.name)
+		if(M.mind)	indexing += M.mind.name
+
+		for(var/string in indexing)
+			var/list/L = splittext(string, " ")
+			var/surname_found = 0
+			//surnames
+			for(var/i=L.len, i>=1, i--)
+				var/word = ckey(L[i])
+				if(word)
+					surnames[word] = M
+					surname_found = i
+					break
+			//forenames
+			for(var/i=1, i<surname_found, i++)
+				var/word = ckey(L[i])
+				if(word)
+					forenames[word] = M
+			//ckeys
+			ckeys[M.ckey] = M
+
+	var/ai_found = 0
+	msg = ""
+	var/list/mobs_found = list()
+	for(var/original_word in msglist)
+		var/word = ckey(original_word)
+		if(word)
+			if(!(word in adminhelp_ignored_words))
+				if(word == "ai" && !ai_found)
+					ai_found = 1
+					msg += "<b>[original_word] <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A></b> "
+					continue
+				else
+					var/mob/found = ckeys[word]
+					if(!found)
+						found = surnames[word]
+						if(!found)
+							found = forenames[word]
+					if(found)
+						if(!(found in mobs_found))
+							mobs_found += found
+							msg += "<b>[original_word] <A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>(?)</A>"
+							if(!ai_found && isAI(found))
+								ai_found = 1
+								msg += " <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
+							msg += "</b> "
+							continue
+		msg += "[original_word] "
+
+	return msg
