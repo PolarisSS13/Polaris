@@ -102,7 +102,7 @@ var/list/_client_preferences_by_type
 	description ="Mob tooltips"
 	key = "MOB_TOOLTIPS"
 	enabled_description = "Show"
-	disabled_description = "Hide"	
+	disabled_description = "Hide"
 
 /datum/client_preference/attack_icons
 	description ="Attack icons"
@@ -162,6 +162,18 @@ var/list/_client_preferences_by_type
 	key = "SAFE_FIRING"
 	enabled_description = "Safe"
 	disabled_description = "Dangerous"
+
+/datum/client_preference/tgui_style
+	description ="tgui Style"
+	key = "TGUI_FANCY"
+	enabled_description = "Fancy"
+	disabled_description = "Plain"
+
+/datum/client_preference/tgui_monitor
+	description ="tgui Monitor"
+	key = "TGUI_MONITOR"
+	enabled_description = "Primary"
+	disabled_description = "All"
 
 /datum/client_preference/browser_style
 	description = "Fake NanoUI Browser Style"
