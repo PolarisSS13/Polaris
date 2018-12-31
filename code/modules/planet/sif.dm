@@ -238,15 +238,15 @@ datum/weather/sif
 			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
 				if(U.open)
-					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					//to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
 					continue
 			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
 				if(U.open)
-					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
+					//to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella</span>")
 					continue
 			L.water_act(1)
-			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
+			//to_chat(L, "<span class='warning'>Rain falls on you.</span>")
 
 /datum/weather/sif/storm
 	name = "storm"
@@ -284,7 +284,7 @@ datum/weather/sif
 					U.throw_at(get_edge_target_turf(U, pick(alldirs)), 8, 1, L)
 
 			L.water_act(2)
-			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
+			//to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
 
 /datum/weather/sif/hail
 	name = "hail"
@@ -353,13 +353,13 @@ datum/weather/sif
 			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
 				if(U.open)
-					to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
+					//to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
 					continue
 			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
 				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
 				if(U.open)
-					to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
+					//to_chat(L, "<span class='notice'>Acid rain patters softly onto your umbrella</span>")
 					continue
 
 			L.water_act(1)
-			to_chat(L, "<span class='warning'>Rain falls on you.</span>")
+			//to_chat(L, "<span class='warning'>Rain falls on you.</span>")
