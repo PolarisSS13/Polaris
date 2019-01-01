@@ -5,7 +5,7 @@
 	desc = "A reproduction of an almost ancient weapon design from the early 20th century. It's still popular among hunters and collectors due to its reliability. Uses 7.62mm rounds."
 	item_state = "boltaction"
 	icon_state = "boltaction"
-	fire_sound = 'sound/weapons/rifleshot.ogg'
+	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg'
 	max_shells = 5
 	caliber = "7.62mm"
 	origin_tech = list(TECH_COMBAT = 1)// Old as shit rifle doesn't have very good tech.

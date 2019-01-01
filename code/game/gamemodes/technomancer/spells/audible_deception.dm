@@ -38,7 +38,7 @@
 		"AT Rifle Firing"		=	'sound/weapons/Gunshot_sniper.ogg',
 		"Shotgun Firing"		=	'sound/weapons/Gunshot_shotgun.ogg',
 		"Handgun Firing"		=	'sound/weapons/Gunshot2.ogg',
-		"Machinegun Firing"		=	'sound/weapons/machinegun.ogg',
+		"Machinegun Firing"		=	'sound/weapons/Gunshot_machinegun.ogg',
 		"Rocket Launcher Firing"=	'sound/weapons/rpg.ogg',
 		"Taser Firing"			=	'sound/weapons/Taser.ogg',
 		"Laser Gun Firing"		=	'sound/weapons/laser.ogg',

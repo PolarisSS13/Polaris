@@ -1,7 +1,7 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
-	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
+	fire_sound = 'sound/weapons/Gunshot4.ogg'
 	damage = 60
 	damage_type = BRUTE
 	nodamage = 0
