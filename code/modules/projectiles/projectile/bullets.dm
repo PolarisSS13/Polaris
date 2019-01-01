@@ -107,13 +107,13 @@
 	embed_chance = 0
 	sharp = 0
 	check_armour = "melee"
-	fire_sound ='sound/weapons/gunshot/gunshot_pathetic.ogg' // Rubber shots have less powder in the casing.
+	fire_sound ='sound/weapons/Gunshot_pathetic.ogg' // Rubber shots have less powder in the casing.
 
 /* shotgun projectiles */
 
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
-	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	damage = 50
 	armor_penetration = 15
 
@@ -129,7 +129,7 @@
 //Overall less damage than slugs in exchange for more damage at very close range and more embedding
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
-	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	damage = 13
 	pellets = 6
 	range_step = 1
@@ -161,16 +161,16 @@
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle
-	fire_sound = 'sound/weapons/gunshot/rifleshot.ogg'
+	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg'
 	armor_penetration = 15
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a762
-	fire_sound = 'sound/weapons/gunshot/Gunshot_heavy.ogg'
+	fire_sound = 'sound/weapons/Gunshot_heavy.ogg'
 	damage = 35
 
 /obj/item/projectile/bullet/rifle/a762/sniper // Hitscan specifically for sniper ammo; to be implimented at a later date, probably for the SVD. -Ace
-	fire_sound = 'sound/weapons/gunshot/Gunshot_sniper.ogg'
+	fire_sound = 'sound/weapons/Gunshot_sniper.ogg'
 	hitscan = 1 //so the ammo isn't useless as a sniper weapon
 
 /obj/item/projectile/bullet/rifle/a762/ap
@@ -188,7 +188,7 @@
 	SA_vulnerability = SA_ANIMAL
 
 /obj/item/projectile/bullet/rifle/a545
-	fire_sound = 'sound/weapons/gunshot/Gunshot_light.ogg'
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 25
 
 /obj/item/projectile/bullet/rifle/a545/ap
@@ -206,7 +206,7 @@
 	SA_vulnerability = SA_ANIMAL
 
 /obj/item/projectile/bullet/rifle/a145 // 14.5×114mm is bigger than a .50 BMG round.
-	fire_sound = 'sound/weapons/gunshot/Gunshot_cannon.ogg' // This is literally an anti-tank rifle caliber. It better sound like a fucking cannon.
+	fire_sound = 'sound/weapons/Gunshot_cannon.ogg' // This is literally an anti-tank rifle caliber. It better sound like a fucking cannon.
 	damage = 80
 	stun = 3
 	weaken = 3
@@ -287,7 +287,7 @@
 /obj/item/projectile/bullet/blank
 	name = "blank"
 	damage_type = HALLOSS
-	fire_sound = 'sound/weapons/gunshot/Gunshot_generic_rifle.ogg' // Blanks still make loud noises.
+	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg' // Blanks still make loud noises.
 	damage = 0
 	nodamage = 1
 	embed_chance = 0
