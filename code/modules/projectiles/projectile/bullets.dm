@@ -188,7 +188,7 @@
 	SA_vulnerability = SA_ANIMAL
 
 /obj/item/projectile/bullet/rifle/a545
- 	fire_sound = 'sound/weapons/gunshot/Gunshot_light.ogg'
+	fire_sound = 'sound/weapons/gunshot/Gunshot_light.ogg'
 	damage = 25
 
 /obj/item/projectile/bullet/rifle/a545/ap
