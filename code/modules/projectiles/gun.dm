@@ -645,8 +645,6 @@
 				playsound(user, shot_sound, 10, 1)
 			else
 				playsound(user, shot_sound, 50, 1)
-		else
-			DEBUG SHIT GOES HERE
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
