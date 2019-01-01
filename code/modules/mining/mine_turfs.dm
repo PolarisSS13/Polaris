@@ -38,7 +38,8 @@ var/list/mining_overlay_cache = list()
 
 	var/ore_types = list(
 		"hematite" = /obj/item/weapon/ore/iron,
-		"uranium" = /obj/item/weapon/ore/uranium,
+//		"uranium" = /obj/item/weapon/ore/uranium,
+// Removing uranium until we find a way for it to not irradiate the entire city.
 		"gold" = /obj/item/weapon/ore/gold,
 		"silver" = /obj/item/weapon/ore/silver,
 		"diamond" = /obj/item/weapon/ore/diamond,
