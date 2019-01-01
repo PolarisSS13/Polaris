@@ -261,7 +261,7 @@
 /obj/item/projectile/beam/tungsten
 	name = "core of molten tungsten"
 	icon_state = "energy"
-	fire_sound = 'sound/weapons/emitter2.ogg'
+	fire_sound = 'sound/weapons/railgun.ogg' // A railgun would fire this, so...
 	pass_flags = PASSTABLE | PASSGRILLE
 	damage = 70
 	damage_type = BURN

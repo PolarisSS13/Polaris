@@ -72,7 +72,7 @@
 	var/tracer_type
 	var/impact_type
 
-	var/fire_sound
+	var/fire_sound // Can be overriden in gun.dm's fire_sound var.
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
