@@ -180,7 +180,7 @@
 		burn_state = 1
 		burning_objects += src
 		burn_world_time = world.time + burntime*rand(10,20)
-		var/obj/effect/effect/smoke/bad/B = new(src.loc)
+		var/obj/effect/effect/smoke/bad/short/B = new(src.loc)
 		B.time_to_live = 5
 		if(global_overlay)
 			overlays += fire_overlay

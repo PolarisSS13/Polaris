@@ -132,6 +132,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return "asks"
 	return verb
 
+
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
 	//If you're muted for IC chat
 	if(client)
@@ -197,6 +198,12 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//Autohiss handles auto-rolling tajaran R's and unathi S's/Z's
 	message = handle_autohiss(message, speaking)
+
+	//If there's no punctuation, add punctuation.
+	var/p_ending = copytext(message, length(message))
+	var/p_message = "[message]."
+	if(!(p_ending in list(".","?","!")))
+		message = p_message
 
 	//Whisper vars
 	var/w_scramble_range = 5	//The range at which you get ***as*th**wi****
