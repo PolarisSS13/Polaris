@@ -202,7 +202,7 @@ proc/get_radio_key_from_channel(var/channel)
 	//If there's no punctuation, add punctuation.
 	var/p_ending = copytext(message, length(message))
 	var/p_message = "[message]."
-	if(p_ending != "!" || p_ending != "?" || p_ending != ".")
+	if(!(p_ending in list(".","?","!")))
 		message = p_message
 
 	//Whisper vars
