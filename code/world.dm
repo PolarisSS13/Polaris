@@ -538,8 +538,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server - Redux!</b> (Med/Heavy Roleplay) - <b>[station_name()]</b>";
-	s += " - Like SS13, but <i>spaceless</i>. <b>Calling all roleplayers!</b> ("
+	s += "<b>The World Server!</b> (Heavy Roleplay) - <b>[station_name()]</b>";
+	s += " - That planet server you've heard about. ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
