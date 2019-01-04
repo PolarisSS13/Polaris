@@ -639,12 +639,11 @@
 		else
 			playsound(user, fire_sound, 50, 1)
 	else // If it has no special sound, default to the sound that the projectile uses.
-		var/shot_sound = (istype(P) && P.fire_sound)? P.fire_sound : fire_sound
-		if(shot_sound) // Catches possible runtime where fire_sound is null for some reason.
+		if(P.fire_sound) // Catches possible runtime where fire_sound is null for some reason.
 			if(silenced)
-				playsound(user, shot_sound, 10, 1)
+				playsound(user, P.fire_sound, 10, 1)
 			else
-				playsound(user, shot_sound, 50, 1)
+				playsound(user, P.fire_sound, 50, 1)
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
