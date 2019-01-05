@@ -11,6 +11,7 @@
 	anchored = 1.0
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	var/win_path = /obj/structure/window/basic
+	var/grille_path = /obj/structure/grille
 	var/activated
 
 /obj/effect/wingrille_spawn/attack_hand()
@@ -29,13 +30,15 @@
 	. = ..()
 	if(!win_path)
 		return
+	if(!grille_path)
+		return
 	if(ticker && ticker.current_state < GAME_STATE_PLAYING)
 		activate()
 
 /obj/effect/wingrille_spawn/proc/activate()
 	if(activated) return
 	if (!locate(/obj/structure/grille) in get_turf(src))
-		var/obj/structure/grille/G = new /obj/structure/grille(src.loc)
+		var/obj/structure/grille/G = new grille_path(src.loc)
 		handle_grille_spawn(G)
 	var/list/neighbours = list()
 	for (var/dir in cardinal)
@@ -70,6 +73,12 @@
 	name = "reinforced window grille spawner"
 	icon_state = "r-wingrille"
 	win_path = /obj/structure/window/reinforced
+
+/obj/effect/wingrille_spawn/reinforced/electric
+	name = "reinforced electrified window grille spawner"
+	icon_state = "r-wingrille"
+	win_path = /obj/structure/window/reinforced
+	grille_path = /obj/structure/grille/electric
 
 /obj/effect/wingrille_spawn/reinforced/crescent
 	name = "Crescent window grille spawner"
