@@ -71,8 +71,8 @@
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
 	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
-	var/start_charge = 90				// initial cell charge %
-	var/cell_type = /obj/item/weapon/cell/apc
+	var/start_charge = 100				// initial cell charge %
+	var/cell_type = /obj/item/weapon/cell/apc/infinite
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
 	var/shorted = 0
 	var/grid_check = FALSE
@@ -80,7 +80,7 @@
 	var/equipment = POWERCHAN_ON_AUTO
 	var/environ = POWERCHAN_ON_AUTO
 	var/operating = 1
-	var/charging = 0
+	var/charging = 1
 	var/chargemode = 1
 	var/chargecount = 0
 	var/locked = 1
