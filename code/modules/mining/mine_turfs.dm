@@ -38,8 +38,7 @@ var/list/mining_overlay_cache = list()
 
 	var/ore_types = list(
 		"hematite" = /obj/item/weapon/ore/iron,
-//		"uranium" = /obj/item/weapon/ore/uranium,
-// Removing uranium until we find a way for it to not irradiate the entire city.
+		"uranium" = /obj/item/weapon/ore/uranium,
 		"gold" = /obj/item/weapon/ore/gold,
 		"silver" = /obj/item/weapon/ore/silver,
 		"diamond" = /obj/item/weapon/ore/diamond,
@@ -501,7 +500,7 @@ var/list/mining_overlay_cache = list()
 				M.flash_eyes()
 				if(prob(50))
 					M.Stun(5)
-			radiation_repository.flat_radiate(src, 25, 100)
+//			radiation_repository.flat_radiate(src, 25, 100)
 			if(prob(25))
 				excavate_find(prob(5), finds[1])
 	else if(rand(1,500) == 1)
