@@ -635,9 +635,9 @@
 /obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
 	var/shot_sound = fire_sound
 
-	if(!shot_sound && istype(P) && P.fire_sound) // If the gun didn't have a fire_sound, but the projectile does...
+	if(!shot_sound && istype(P) && P.fire_sound) // If the gun didn't have a fire_sound, but the projectile exists, and has a sound...
 		shot_sound = P.fire_sound
-	else
+	if(!shot_sound) // If there's still no sound...
 		return
 
 	if(silenced)
