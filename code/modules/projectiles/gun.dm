@@ -633,17 +633,17 @@
 	return launched
 
 /obj/item/weapon/gun/proc/play_fire_sound(var/mob/user, var/obj/item/projectile/P)
-	if(fire_sound) // If the gun has its own fire-sound, use that.
-		if(silenced)
-			playsound(user, fire_sound, 10, 1)
-		else
-			playsound(user, fire_sound, 50, 1)
-	else // If it has no special sound, default to the sound that the projectile uses.
-		if(P.fire_sound) // Catches possible runtime where fire_sound is null for some reason.
-			if(silenced)
-				playsound(user, P.fire_sound, 10, 1)
-			else
-				playsound(user, P.fire_sound, 50, 1)
+	var/shot_sound = fire_sound
+
+	if(!shot_sound && istype(P) && P.fire_sound) // If the gun didn't have a fire_sound, but the projectile does...
+		shot_sound = P.fire_sound
+	else
+		return
+
+	if(silenced)
+		playsound(user, shot_sound, 10, 1)
+	else
+		playsound(user, shot_sound, 50, 1)
 
 //Suicide handling.
 /obj/item/weapon/gun/var/mouthshoot = 0 //To stop people from suiciding twice... >.>
