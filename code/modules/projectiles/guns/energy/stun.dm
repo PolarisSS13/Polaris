@@ -5,6 +5,13 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	projectile_type = /obj/item/projectile/beam/stun
 
+/obj/item/weapon/gun/energy/taser/carbine
+	name = "taser carbine"
+	desc = "The NTEPD Carbine is a weapon produced by NanoTrasen that fires overcharged beams of electricity to quickly make a non-lethal takedown. The weapon is rarely used due to burns caused by the electric shock."
+	icon_state = "tasercarbine"
+	item_state = null	//so the human update icon uses the icon_state instead.
+	projectile_type = /obj/item/projectile/beam/stun/high
+
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
 	self_recharge = 1
