@@ -293,3 +293,10 @@
 // Called when touching a lava tile.
 /atom/movable/proc/lava_act()
 	fire_act(null, 10000, 1000)
+
+// Called when something changes z-levels.
+/atom/movable/proc/on_z_change(old_z, new_z)
+	GLOB.z_moved_event.raise_event(src, old_z, new_z)
+	for(var/item in src) // Notify contents of Z-transition. This can be overriden IF we know the items contents do not care.
+		var/atom/movable/AM = item
+		AM.on_z_change(old_z, new_z)

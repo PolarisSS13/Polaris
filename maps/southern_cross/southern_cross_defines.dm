@@ -257,6 +257,13 @@
 	teleport_z = src.z
 	return ..()
 
+/datum/planet/sif
+	expected_z_levels = list(
+		Z_LEVEL_SURFACE,
+		Z_LEVEL_SURFACE_MINE,
+		Z_LEVEL_SURFACE_WILD
+	)
+
 //Suit Storage Units
 
 /obj/machinery/suit_cycler/exploration
