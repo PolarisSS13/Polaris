@@ -258,15 +258,15 @@
 		if(text)
 			if (service == "1")
 				service_name = "police department"
-				global_announcer.autosay ("<FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Security")
+				global_announcer.autosay ("\icon[src] <FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Security")
 			if (service == "2")
 				service_name = "paramedics"
-				global_announcer.autosay ("<FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Medical")
+				global_announcer.autosay ("\icon[src] <FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Medical")
 			if (service == "3")
 				service_name = "damage control"
-				global_announcer.autosay ("<FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Engineering")
+				global_announcer.autosay ("\icon[src] <FONT size=3>Emergency message from <B>[src]</B> <FONT size=2>([exonet.address])</FONT>: [text] </FONT>", "Emergency Hotline", "Engineering")
 
-			usr << "<span class='danger'>You sent over the message \"[text]\" over to the [service_name] hotline.</span>"
+			usr << "<span class='danger'>\icon[src] You sent over the message \"[text]\" over to the [service_name] hotline.</span>"
 			usr.visible_message("\icon[src] [usr] types something on [src]'s screen.") //snitches get stitches
 
 			log_pda("(COMM: [src]) sent \"[text]\" to [service_name]", usr)
