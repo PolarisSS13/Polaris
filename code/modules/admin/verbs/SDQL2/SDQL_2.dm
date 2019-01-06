@@ -747,8 +747,8 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 		new_args[++new_args.len] = SDQL_expression(source, arg)
 	if(object == GLOB) // Global proc.
 		procname = "/proc/[procname]"
-		return call(procname)(new_args)
-	return call(object, procname)(new_args)
+		return call(procname)(arglist(new_args))
+	return call(object, procname)(arglist(new_args))
 
 /datum/SDQL2_query/proc/SDQL_function_async(datum/object, procname, list/arguments, source)
 	set waitfor = FALSE
