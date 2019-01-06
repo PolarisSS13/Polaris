@@ -10,6 +10,7 @@
 	move_delay = 3 // Rather slow, but still faster than swimming, and won't get you wet.
 	max_buckled_mobs = 2
 	anchored = FALSE
+	plane = -25
 	var/material/material = null
 	var/riding_datum_type = /datum/riding/boat/small
 
