@@ -21,6 +21,7 @@
 	var/old_x = 0
 	var/old_y = 0
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
+	var/movement_type = NONE
 
 /atom/movable/Destroy()
 	. = ..()

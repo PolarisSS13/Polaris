@@ -80,10 +80,8 @@ default behaviour is:
 			return 1
 		return 0
 
-/mob/living/proc/PushAM(atom/movable/AM)
-
 /mob/living/Bump(atom/movable/AM)
-	if(now_pushing) || !loc)
+	if(now_pushing || !loc)
 		return
 	now_pushing = 1
 	if (istype(AM, /mob/living))

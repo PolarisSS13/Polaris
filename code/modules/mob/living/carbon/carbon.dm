@@ -352,7 +352,7 @@
 		return
 	..()
 	if(istype(A, /mob/living/carbon) && prob(10))
-		spread_disease_to(AM, "Contact")
+		spread_disease_to(A, "Contact")
 
 /mob/living/carbon/cannot_use_vents()
 	return

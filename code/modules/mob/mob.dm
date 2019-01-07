@@ -1185,6 +1185,6 @@ mob/proc/yank_out_object()
 		else
 			registered_z = null
 
-/mob/on_z_change(old_z, new_z)
+/mob/onTransitZ(old_z, new_z)
 	..()
 	update_client_z(new_z)
