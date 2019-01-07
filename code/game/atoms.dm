@@ -102,7 +102,7 @@
 	return
 
 /atom/proc/Bumped(AM as mob|obj)
-	return
+	set waitfor = FALSE
 
 // Convenience proc to see if a container is open for chemistry handling
 // returns true if open
@@ -493,7 +493,7 @@
 		if(!istype(drop_destination) || drop_destination == destination)
 			return forceMove(destination)
 		destination = drop_destination
-	return forceMove(null)
+	return moveToNullspace()
 
 /atom/proc/onDropInto(var/atom/movable/AM)
 	return // If onDropInto returns null, then dropInto will forceMove AM into us.
