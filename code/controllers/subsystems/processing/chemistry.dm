@@ -4,11 +4,11 @@ PROCESSING_SUBSYSTEM_DEF(chemistry)
 	var/list/chemical_reactions = list()
 	var/list/chemical_reagents = list()
 
-/datum/controller/subsystem/chemistry/Recover()
+/datum/controller/subsystem/processing/chemistry/Recover()
 	chemical_reactions = SSchemistry.chemical_reactions
 	chemical_reagents = SSchemistry.chemical_reagents
 
-/datum/controller/subsystem/chemistry/Initialize()
+/datum/controller/subsystem/processing/chemistry/Initialize()
 	initialize_chemical_reactions()
 	initialize_chemical_reagents()
 
@@ -18,24 +18,24 @@ PROCESSING_SUBSYSTEM_DEF(chemistry)
 // chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
 // Note that entries in the list are NOT duplicated. So if a reaction pertains to
 // more than one chemical it will still only appear in only one of the sublists.
-/datum/controller/subsystem/chemistry/proc/initialize_chemical_reactions()
+/datum/controller/subsystem/processing/chemistry/proc/initialize_chemical_reactions()
 	var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
-	chemical_reactions_list = list()
+	SSchemistry.chemical_reactions = list()
 
 	for(var/path in paths)
 		var/datum/chemical_reaction/D = new path()
 		if(D.required_reagents && D.required_reagents.len)
 			var/reagent_id = D.required_reagents[1]
-			if(!chemical_reactions_list[reagent_id])
-				chemical_reactions_list[reagent_id] = list()
-			chemical_reactions_list[reagent_id] += D
+			if(!chemical_reactions[reagent_id])
+				chemical_reactions[reagent_id] = list()
+			chemical_reactions[reagent_id] += D
 
 //Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-/datum/controller/subsystem/chemistry/proc/initialize_chemical_reagents()
+/datum/controller/subsystem/processing/chemistry/proc/initialize_chemical_reagents()
 	var/paths = typesof(/datum/reagent) - /datum/reagent
-	chemical_reagents_list = list()
+	chemical_reagents = list()
 	for(var/path in paths)
 		var/datum/reagent/D = new path()
 		if(!D.name)
 			continue
-		chemical_reagents_list[D.id] = D
+		chemical_reagents[D.id] = D

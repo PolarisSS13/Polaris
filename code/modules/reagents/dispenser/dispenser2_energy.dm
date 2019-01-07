@@ -13,7 +13,7 @@
 		process_tick = 15
 		. = 0
 		for(var/id in dispense_reagents)
-			var/datum/reagent/R = SSchemistry.chemical_reagents_list[id]
+			var/datum/reagent/R = SSchemistry.chemical_reagents[id]
 			if(!R)
 				crash_with("[src] at [x],[y],[z] failed to find reagent '[id]'!")
 				dispense_reagents -= id

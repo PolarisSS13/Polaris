@@ -57,7 +57,7 @@
 			T.ChangeTurf(type)
 
 	if((spawned & (NORTH|SOUTH|EAST|WEST)) == (NORTH|SOUTH|EAST|WEST))
-		STOP_PROCESSING(SSturfs, srC)
+		STOP_PROCESSING(SSturfs, src)
 		return
 
 /turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
