@@ -1,6 +1,7 @@
 PROCESSING_SUBSYSTEM_DEF(chemistry)
 	name = "Chemistry"
 	wait = 20
+	flags = SS_BACKGROUND|SS_POST_FIRE_TIMING
 	var/list/chemical_reactions = list()
 	var/list/chemical_reagents = list()
 
