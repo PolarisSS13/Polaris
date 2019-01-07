@@ -157,8 +157,6 @@
 		Moved(oldloc, direct)
 
 	//Polaris stuff
-	if(oldloc && (oldloc.z != z)) // If we changed z-levels, tell the AM that.
-		on_z_change(oldloc.z, z)
 	move_speed = world.time - l_move_time
 	l_move_time = world.time
 	m_flag = 1
@@ -266,7 +264,8 @@
 		loc = null
 
 /atom/movable/proc/onTransitZ(old_z,new_z)
-	for (var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
+	GLOB.z_moved_event.raise_event(src, old_z, new_z)
+	for(var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
 		var/atom/movable/AM = item
 		AM.onTransitZ(old_z,new_z)
 /////////////////////////////////////////////////////////////////
@@ -474,10 +473,3 @@
 /atom/movable/proc/adjust_rotation(new_rotation)
 	icon_rotation = new_rotation
 	update_transform()
-
-// Called when something changes z-levels.
-/atom/movable/proc/on_z_change(old_z, new_z)
-	GLOB.z_moved_event.raise_event(src, old_z, new_z)
-	for(var/item in src) // Notify contents of Z-transition. This can be overriden IF we know the items contents do not care.
-		var/atom/movable/AM = item
-		AM.on_z_change(old_z, new_z)
