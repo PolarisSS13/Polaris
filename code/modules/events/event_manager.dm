@@ -126,10 +126,9 @@
 
 	return html
 
-/datum/event_manager/Topic(href, href_list)
+/datum/controller/subsystem/events/Topic(href, href_list)
 	if(..())
 		return
-
 
 	if(href_list["toggle_report"])
 		report_at_round_end = !report_at_round_end
@@ -223,7 +222,7 @@
 
 	Interact(usr)
 
-/client/proc/forceEvent(var/type in event_manager.allEvents)
+/client/proc/forceEvent(var/type in SSevents.allEvents)
 	set name = "Trigger Event (Debug Only)"
 	set category = "Debug"
 
@@ -237,6 +236,5 @@
 /client/proc/event_manager_panel()
 	set name = "Event Manager Panel"
 	set category = "Admin"
-	if(event_manager)
-		event_manager.Interact(usr)
+	SSevents.Interact(usr)
 	feedback_add_details("admin_verb","EMP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

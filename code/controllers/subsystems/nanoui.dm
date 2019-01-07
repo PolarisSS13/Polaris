@@ -39,8 +39,4 @@ SUBSYSTEM_DEF(nanoui)
 /datum/controller/subsystem/nanoui/fire(resumed)
 	for(var/thing in processing_uis)
 		var/datum/nanoui/UI = thing
-		if(istype(UI) && !QDELETED(UI))
-			UI.process()
-		else
-			catchBadType(UI)
-			processing_uis -= UI
+		UI.process()
