@@ -119,13 +119,13 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
-var/sqldb      = "tgstation"
+var/sqldb      = "worldserver"
 var/sqllogin   = "root"
 var/sqlpass    = ""
 
 // Feedback gathering sql connection
-var/sqlfdbkdb    = "test"
-var/sqlfdbklogin = "root"
+var/sqlfdbkdb    = "worldserver_feedback"
+var/sqlfdbklogin = "admin"
 var/sqlfdbkpass  = ""
 var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 
@@ -134,7 +134,7 @@ var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 var/forumsqladdress = "localhost"
 var/forumsqlport    = "3306"
 var/forumsqldb      = "tgstation"
-var/forumsqllogin   = "root"
+var/forumsqllogin   = "admin"
 var/forumsqlpass    = ""
 var/forum_activated_group     = "2"
 var/forum_authenticated_group = "10"
