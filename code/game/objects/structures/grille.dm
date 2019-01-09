@@ -43,8 +43,7 @@
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
-	var/shock_dmg = rand(5,70)
-	if(shock(user, shock_dmg))
+	if(shock(user, 50))
 		return
 
 	if(HULK in user.mutations)

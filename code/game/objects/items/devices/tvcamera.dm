@@ -69,7 +69,7 @@
 			global_announcer.autosay("\icon[src] <FONT size=3><b>[channel]</b> is streaming, please tune into your televisions to witness!</FONT>", "Television Broadcasting Network")
 			to_chat(usr,"<span class='notice'>Video streaming activated. Broadcasting on channel '[channel]'</span>")
 		else
-			global_announcer.autosay("\icon[src] [channel] has ended. Tune in next time!","Jackpot Announcement - [src]")
+			global_announcer.autosay("\icon[src] [channel] has ended. Tune in next time!","Television Broadcasting Network")
 			to_chat(usr,"<span class='notice'>Video streaming deactivated.</span>")
 		update_icon()
 	if(href_list["sound"])

@@ -240,6 +240,15 @@ var/list/mining_overlay_cache = list()
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 
+/turf/simulated/mineral/impassable
+	name = "impassable rock"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "rock-dark"
+	density = 1
+
+/turf/simulated/mineral/impassable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return
+
 //Not even going to touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
 

@@ -614,3 +614,10 @@ What a mess.*/
 
 /obj/machinery/computer/secure_data/detective_computer
 	icon_state = "messyfiles"
+
+/obj/machinery/computer/secure_data/laptop
+	name = "Records Database Laptop"
+	desc = "Allows you to look up all the naughty things people do."
+	icon_state = "laptop"
+	icon_keyboard = "laptop_key"
+	icon_screen = "medlaptop"
