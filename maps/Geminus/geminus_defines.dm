@@ -17,13 +17,13 @@
 	company_short = "NT"
 	starsys_name  = "Vetra"
 
-	shuttle_docked_message = "The scheduled air shuttle to the %dock_name% has arrived far east of the city. It will depart in approximately %ETD%."
+	shuttle_docked_message = "The scheduled air shuttle to the %dock_name% has arrived far west of the city. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Civilian Transfer shuttle has left. Estimate %ETA% until the airbus docks at %dock_name%."
-	shuttle_called_message = "A civilian transfer to %Dock_name% has been scheduled. The airbus has been called. Those leaving should procede to the far east side of the city by %ETA%"
+	shuttle_called_message = "A civilian transfer to %Dock_name% has been scheduled. The airbus has been called. Those leaving should procede to the far west side of the city by %ETA%"
 	shuttle_recall_message = "The scheduled civilian transfer has been cancelled."
-	emergency_shuttle_docked_message = "The Emergency Evacuation Shuttle has arrived at the far east side of the city. You have approximately %ETD% to board the Emergency Shuttle."
+	emergency_shuttle_docked_message = "The Emergency Evacuation Shuttle has arrived at the far west side of the city. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the city. Estimate %ETA% until the shuttle docks at %dock_name%."
-	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at the east side of the city in approximately %ETA%"
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at the west side of the city in approximately %ETA%"
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
 	allowed_spawns = list("Arrivals Shuttle")
