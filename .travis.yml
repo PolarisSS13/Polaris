@@ -25,6 +25,7 @@ addons:
 
 before_script:
   - chmod +x ./install-byond.sh
+  - chmod +x ./tools/travis/dmm_verify.sh
   - ./install-byond.sh
 
 install:
