@@ -1452,3 +1452,5 @@ var/mob/dview/dview_mob = new
 
 /proc/pass()
 	return
+
+#define NAMEOF(datum, X) (#X || ##datum.##X)
