@@ -8,4 +8,7 @@ Thumbs.db
 *.backup
 data/
 cfg/
-
+#mapmerge before files
+*.before
+#python compile
+*.pyc
