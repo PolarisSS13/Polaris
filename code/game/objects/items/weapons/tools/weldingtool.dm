@@ -39,7 +39,8 @@
 	var/always_process = FALSE // If true, keeps the welder on the process list even if it's off.  Used for when it needs to regenerate fuel.
 	toolspeed = 1
 
-/obj/item/weapon/weldingtool/New()
+/obj/item/weapon/weldingtool/Initialize()
+	. = ..()
 //	var/random_fuel = min(rand(10,20),max_fuel)
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
@@ -48,7 +49,6 @@
 	update_icon()
 	if(always_process)
 		START_PROCESSING(SSobj, src)
-	..()
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding || always_process)
