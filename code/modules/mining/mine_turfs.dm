@@ -34,7 +34,11 @@ var/list/mining_overlay_cache = list()
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
-	var/ignore_mapgen
+	var/ignore_mapgen = 1
+
+	var/ore_chance = 10
+	var/ore_rarity
+
 
 	var/ore_types = list(
 		"hematite" = /obj/item/weapon/ore/iron,
@@ -98,15 +102,21 @@ var/list/mining_overlay_cache = list()
 				attackby(O, R)
 				return
 
+
 /turf/simulated/mineral/initialize()
 	. = ..()
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 	update_icon(1)
+	if(density)
+		if(prob(ore_chance))
+			var/ore_rarity_chance = rand(1,2)
+			make_ore(ore_rarity_chance)
 	if(density && mineral)
 		. = INITIALIZE_HINT_LATELOAD
 
 /turf/simulated/mineral/LateInitialize()
+
 	if(density && mineral)
 		MineralSpread()
 
@@ -244,9 +254,11 @@ var/list/mining_overlay_cache = list()
 	name = "impassable rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
+	ore_chance = 0
 	density = 1
 
 /turf/simulated/mineral/impassable/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	to_chat(user, "<span class='warning'>The rock here seems a bit too hard to break...</span>")
 	return
 
 //Not even going to touch this pile of spaghetti
