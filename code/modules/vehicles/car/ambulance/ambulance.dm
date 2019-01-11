@@ -1,7 +1,8 @@
 /obj/vehicle/ambulance
 	name = "ambulance"
 	desc = "what the paramedic uses to run over people to take to the hospital"
-	icon_state = "docwagon2"
+	icon = 'icons/vehicles/ambulance.dmi'
+	icon_state = "ambulance"
 	var/key
 	var/key_type = /obj/item/key/ambulance
 	var/obj/structure/bed/amb_trolley/bed

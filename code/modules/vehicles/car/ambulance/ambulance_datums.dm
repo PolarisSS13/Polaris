@@ -18,17 +18,4 @@
 		to_chat(user, "<span class='warning'>The ambulance safety controls keep you on the road!</span>")
 		return FALSE
 
-/datum/riding/ambulance // 'Small' boats can hold up to two people.
-
-/datum/riding/ambulance/get_offsets(pass_index) // list(dir = x, y, layer)
-	switch(pass_index)
-		if(1) // Person in front.
-			return list(
-				"[NORTH]" = list( 0, 4, MOB_LAYER),
-				"[SOUTH]" = list( 0, 7,   ABOVE_MOB_LAYER),
-				"[EAST]"  = list( -13, 7,   MOB_LAYER),
-				"[WEST]"  = list(	13, 7,   MOB_LAYER + 0.4)
-				)
-		else
-			return null // This will runtime, but we want that since this is out of bounds.
 
