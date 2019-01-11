@@ -289,6 +289,24 @@
 	desc = "A warning sign which reads 'CHEMISTRY'."
 	icon_state = "chemistry1"
 
+/obj/structure/sign/rent
+	name = "for rent sign"
+	icon = 'icons/obj/signs.dmi'
+	desc = "A sign that reads 'For Rent'."
+	icon_state = "rent"
+
+/obj/structure/sign/fine
+	name = "'Pay Your Fine' Sign"
+	icon = 'icons/obj/signs.dmi'
+	desc = "A sign reminding both police officers and prisoners alike that fines are the first offered penalty for crimes."
+	icon_state = "fine"
+
+/obj/structure/sign/vote
+	name = "vote sign"
+	icon = 'icons/obj/signs.dmi'
+	desc = "A sign that encourages you to vote and stresses the importance of democracy."
+	icon_state = "vote"
+
 /obj/structure/sign/botany
 	name = "\improper HYDROPONICS"
 	desc = "A warning sign which reads 'HYDROPONICS'."
