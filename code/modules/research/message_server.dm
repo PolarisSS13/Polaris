@@ -326,7 +326,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 
 /obj/machinery/blackbox_recorder/vv_edit_var()
 	var/obj/O = /obj		//hacky as fuck kill me
-	if(var_name in (vars - initial(O.vars))
+	if(var_name in (vars - initial(O.vars)))
 		return FALSE
 	return ..()
 
