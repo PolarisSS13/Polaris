@@ -14,6 +14,7 @@
 #include "code\_map_tests.dm"
 #include "code\_unit_tests.dm"
 #include "code\global.dm"
+#include "code\global_init.dm"
 #include "code\hub.dm"
 #include "code\names.dm"
 #include "code\stylesheet.dm"

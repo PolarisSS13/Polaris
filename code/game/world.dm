@@ -9,24 +9,6 @@
 	5. The gameticker is created.
 
 */
-var/global/datum/global_init/init = new ()
-
-/*
-	Pre-map initialization stuff should go here.
-*/
-/datum/global_init/New()
-
-	makeDatumRefLists()
-	load_configuration()
-
-	initialize_integrated_circuits_list()
-
-	qdel(src) //we're done
-
-/datum/global_init/Destroy()
-	global.init = null
-	return 2 // QDEL_HINT_IWILLGC
-
 #define RECOMMENDED_VERSION 501
 /world/New()
 	world.log << "Map Loading Complete"
