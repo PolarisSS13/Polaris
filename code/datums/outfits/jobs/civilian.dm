@@ -2,6 +2,7 @@
 	name = OUTFIT_JOB_NAME("Civilian")
 	id_type = /obj/item/weapon/card/id/assistant
 	r_pocket = /obj/item/device/communicator
+	uniform = /obj/item/clothing/under/rank/orderly
 
 /decl/hierarchy/outfit/job/assistant/visitor
 	name = OUTFIT_JOB_NAME("Visitor")
@@ -11,11 +12,12 @@
 /decl/hierarchy/outfit/job/assistant/resident
 	name = OUTFIT_JOB_NAME("Resident")
 	id_pda_assignment = "Resident"
-	uniform = /obj/item/clothing/under/color/white
+	uniform = /obj/item/clothing/under/scratch
 
 /decl/hierarchy/outfit/job/service
 	l_ear = /obj/item/device/radio/headset/headset_service
 	hierarchy_type = /decl/hierarchy/outfit/job/service
+	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")
@@ -51,7 +53,6 @@
 	uniform = /obj/item/clothing/under/rank/hydroponics
 	suit = /obj/item/clothing/suit/storage/apron
 	gloves = /obj/item/clothing/gloves/botanic_leather
-	r_pocket = /obj/item/device/analyzer/plant_analyzer
 	l_pocket = /obj/item/device/communicator
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/hyd
@@ -62,7 +63,6 @@
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
-	r_pocket = /obj/item/device/communicator
 	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
@@ -70,7 +70,6 @@
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	l_hand = /obj/item/weapon/barcodescanner
-	r_pocket = /obj/item/device/communicator
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
