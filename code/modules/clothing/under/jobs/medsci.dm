@@ -89,8 +89,8 @@
 	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/orderly
-	desc = "A white suit to be worn by medical attendants."
-	name = "orderly's uniform"
+	desc = "An ordinary shirt and tie."
+	name = "white shirt"
 	icon_state = "orderly"
 	item_state_slots = list(slot_r_hand_str = "nursesuit", slot_l_hand_str = "nursesuit")
 	permeability_coefficient = 0.50
