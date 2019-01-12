@@ -16,7 +16,7 @@
 		return
 
 	var/title = ""
-	var/refid = REF(D)
+	var/refid = "\ref[D]"
 	var/icon/sprite
 	var/hash
 
@@ -34,7 +34,7 @@
 			hash = md5(hash + AT.icon_state)
 			src << browse_rsc(sprite, "vv[hash].png")
 
-	title = "[D] ([REF(D)]) = [type]"
+	title = "[D] (\ref[D]) = [type]"
 	var/formatted_type = replacetext("[type]", "/", "<wbr>/")
 
 	var/sprite_text
@@ -336,4 +336,4 @@ datumrefresh=[refid]'>Refresh</a>
 	src << browse(html, "window=variables[refid];size=475x650")
 
 /client/proc/vv_update_display(datum/D, span, content)
-	src << output("[span]:[content]", "variables[REF(D)].browser:replace_span")
+	src << output("[span]:[content]", "variables\ref[D].browser:replace_span")

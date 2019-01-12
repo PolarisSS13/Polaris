@@ -324,9 +324,13 @@ var/obj/machinery/blackbox_recorder/blackbox
 
 	feedback_set_details("round_end","[time2text(world.realtime)]") //This one MUST be the last one that gets set.
 
-/obj/machinery/blackbox_recorder/vv_edit_var()
-	var/obj/O = /obj		//hacky as fuck kill me
-	if(var_name in (vars - initial(O.vars)))
+/obj/machinery/blackbox_recorder/vv_edit_var(var_name, var_value)
+	var/static/list/blocked_vars		//hacky as fuck kill me
+	if(!blocked_vars)
+		var/obj/machinery/M = new
+		var/list/parent_vars = M.vars.Copy()
+		blocked_vars = vars.Copy() - parent_vars
+	if(var_name in blocked_vars)
 		return FALSE
 	return ..()
 

@@ -97,9 +97,6 @@
 		return 0
 	return -1
 
-/atom/proc/on_reagent_change()
-	return
-
 /atom/proc/Bumped(AM as mob|obj)
 	return
 
@@ -538,15 +535,15 @@
 	IF_VV_OPTION(VV_HK_ATOM_EXPLODE)
 		if(!check_rights(R_DEBUG|R_FUN))
 			return
-		usr.cmd_admin_explosion(src)
+		usr.client.cmd_admin_explosion(src)
 		href_list["datumrefresh"] = "\ref[src]"
 	IF_VV_OPTION(VV_HK_ATOM_EMP)
 		if(!check_rights(R_DEBUG|R_FUN))
 			return
-		usr.cmd_admin_emp(src)
+		usr.client.cmd_admin_emp(src)
 		href_list["datumrefresh"] = "\ref[src]"
 
-/atom/get_view_variables_header()
+/atom/vv_get_header()
 	. = ..()
 	. += {"
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>

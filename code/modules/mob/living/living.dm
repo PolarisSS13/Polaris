@@ -1275,7 +1275,7 @@ default behaviour is:
 /mob/living/proc/needs_to_breathe()
 	return !isSynthetic()
 
-/mob/living/get_view_variables_header()
+/mob/living/vv_get_header()
 	. = ..()
 	. += {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>

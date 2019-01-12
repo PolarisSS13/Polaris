@@ -12,7 +12,7 @@
 		method = vv_subtype_prompt(A.type)
 
 	src.massmodify_variables(A, var_name, method)
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Mass Edit Variables") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	feedback_add_details("admin_verb","MVV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/massmodify_variables(datum/O, var_name = "", method = 0)
 	if(!check_rights(R_VAREDIT))
@@ -205,19 +205,19 @@
 		typecache = typecacheof(typecache)
 	. = list()
 	if (ispath(T, /mob))
-		for(var/mob/thing in GLOB.mob_list)
+		for(var/mob/thing in mob_list)
 			if (typecache[thing.type])
 				. += thing
 			CHECK_TICK
 
 	else if (ispath(T, /obj/machinery/door))
-		for(var/obj/machinery/door/thing in GLOB.airlocks)
+		for(var/obj/machinery/door/thing in world)
 			if (typecache[thing.type])
 				. += thing
 			CHECK_TICK
 
 	else if (ispath(T, /obj/machinery))
-		for(var/obj/machinery/thing in GLOB.machines)
+		for(var/obj/machinery/thing in machines)
 			if (typecache[thing.type])
 				. += thing
 			CHECK_TICK
