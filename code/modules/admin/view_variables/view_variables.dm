@@ -24,8 +24,6 @@
 	if (!islist)
 		type = D.type
 
-
-
 	if(istype(D, /atom))
 		var/atom/AT = D
 		if(AT.icon && AT.icon_state)
@@ -40,7 +38,7 @@
 	var/sprite_text
 	if(sprite)
 		sprite_text = "<img src='vv[hash].png'></td><td>"
-	var/list/header = D.vv_get_header()
+	var/list/header = islist(D)? "<b>/list</b>" : D.vv_get_header()
 
 	var/marked
 	if(holder && holder.marked_datum && holder.marked_datum == D)

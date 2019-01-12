@@ -545,8 +545,11 @@
 
 /atom/vv_get_header()
 	. = ..()
+	var/custom_edit_name
+	if(!isliving(src))
+		custom_edit_name = "<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>"
 	. += {"
-		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
+		[custom_edit_name]
 		<br><font size='1'>
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
