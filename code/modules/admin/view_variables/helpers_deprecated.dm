@@ -31,8 +31,6 @@
 		<option value='?_src_=vars;remverb=\ref[src]'>Remove Verb</option>
 		<option>---</option>
 		<option value='?_src_=vars;gib=\ref[src]'>Gib</option>
-		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
-		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
