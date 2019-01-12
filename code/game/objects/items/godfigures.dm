@@ -115,3 +115,17 @@
 
 
 
+/obj/item/godfig/verb/rename_fig()
+	set name = "Name Figure"
+	set category = "Object"
+	set desc = "Rename your icon."
+
+	var/mob/M = usr
+	if(!M.mind)	return 0
+
+	var/input = sanitizeSafe(input("What do you want to name the icon?", ,""), MAX_NAME_LEN)
+
+	if(src && input && !M.stat && in_range(M,src))
+		name = "icon of " + input
+		M << "You name the figure. Glory to [input]!."
+		return 1

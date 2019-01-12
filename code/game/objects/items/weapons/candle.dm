@@ -85,7 +85,7 @@
 
 /obj/item/weapon/flame/candle/black
 	name = "black candle"
-	desc = "a white pillar candle. Ominous."
+	desc = "a black pillar candle. Ominous."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "blackcandle"
 	w_class = ITEMSIZE_SMALL
