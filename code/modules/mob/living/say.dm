@@ -205,6 +205,9 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!(p_ending in list(".","?","!")))
 		message = p_message
 
+	//Allow them use to markup, if used.
+	message = process_chat_markup(message, list("~", "_"))
+
 	//Whisper vars
 	var/w_scramble_range = 5	//The range at which you get ***as*th**wi****
 	var/w_adverb				//An adverb prepended to the verb in whispers
