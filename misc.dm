@@ -64,6 +64,22 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "Plushies Crate"
+	
+/datum/supply_packs/randomised/misc/dnd
+	num_contained = 4
+	contains = list(
+			/obj/item/toy/character/alien,
+			/obj/item/toy/character/warrior,
+			/obj/item/toy/character/cleric,
+			/obj/item/toy/character/thief,
+			/obj/item/toy/character/wizard,
+			/obj/item/toy/character/voidone,
+			/obj/item/toy/character/lich
+			)
+	name = "Miniatures Crate"
+	cost = 200
+	containertype = /obj/structure/closet/crate
+	containername = "Miniature Crate"
 
 /datum/supply_packs/misc/eftpos
 	contains = list(/obj/item/device/eftpos)
