@@ -82,6 +82,8 @@
 			else
 				var/obj/item/clothing/G = H.gloves
 				G.gunshot_residue = chambered.caliber
+	if(chambered.caseless)
+				qdel(chambered)
 
 	switch(handle_casings)
 		if(EJECT_CASINGS) //eject casing onto ground.

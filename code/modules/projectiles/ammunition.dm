@@ -26,8 +26,6 @@
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
-	if(caseless)
-		qdel()
 	set_dir(pick(cardinal)) //spin spent casings
 	update_icon()
 
