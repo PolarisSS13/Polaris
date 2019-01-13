@@ -26,6 +26,8 @@
 /obj/item/ammo_casing/proc/expend()
 	. = BB
 	BB = null
+	if(caseless)
+		qdel()
 	set_dir(pick(cardinal)) //spin spent casings
 	update_icon()
 
@@ -47,11 +49,7 @@
 			BB.name = "[initial(BB.name)] (\"[label_text]\")"
 
 /obj/item/ammo_casing/update_icon()
-/*	if(spent_icon && !BB)
-		icon_state = spent_icon*/
-	if(!BB) // This is really just a much better way of doing this.
-		if(caseless)
-			qdel(src)
+	if(!BB)
 		icon_state = "[initial(icon_state)]-spent"
 
 /obj/item/ammo_casing/examine(mob/user)
