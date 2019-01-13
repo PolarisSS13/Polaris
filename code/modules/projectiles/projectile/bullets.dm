@@ -160,53 +160,58 @@
 
 /* "Rifle" rounds */
 
-/obj/item/projectile/bullet/rifle
+/obj/item/projectile/bullet/rifle // .30-06 Springfield, 8mm Mauser, .45-70, and other stuff that you would want to hunt moose with.
 	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg'
 	armor_penetration = 15
+	//damage = 60 because it inherits its damage from /bullet
 	penetrating = 1
 
-/obj/item/projectile/bullet/rifle/a762
+/obj/item/projectile/bullet/rifle/large // .308, .303 British, 7.62x54mmR, and other stuff that you would want to hunt deer with.
 	fire_sound = 'sound/weapons/Gunshot_heavy.ogg'
 	damage = 35
 
-/obj/item/projectile/bullet/rifle/a762/sniper // Hitscan specifically for sniper ammo; to be implimented at a later date, probably for the SVD. -Ace
+/obj/item/projectile/bullet/rifle/large/sniper
 	fire_sound = 'sound/weapons/Gunshot_sniper.ogg'
 	hitscan = 1 //so the ammo isn't useless as a sniper weapon
 
-/obj/item/projectile/bullet/rifle/a762/ap
+/obj/item/projectile/bullet/rifle/large/ap
 	damage = 30
 	armor_penetration = 50 // At 30 or more armor, this will do more damage than standard rounds.
 
-/obj/item/projectile/bullet/rifle/a762/hp
+/obj/item/projectile/bullet/rifle/large/hp
 	damage = 40
 	armor_penetration = -50
 	penetrating = 0
 
-/obj/item/projectile/bullet/rifle/a762/hunter // Optimized for killing simple animals and not people, because Balance(tm)
-	damage = 20
+/obj/item/projectile/bullet/rifle/large/hunter
+	damage = 20 // Optimized for killing animals and not people, because Balance(tm)
 	SA_bonus_damage = 50 // 70 total on animals.
 	SA_vulnerability = SA_ANIMAL
 
-/obj/item/projectile/bullet/rifle/a545
+/obj/item/projectile/bullet/rifle/intermediate // .223, 5.56x45, 7.62x39, and other stuff that you would want to hunt coyotes with. Or people.
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 25
 
-/obj/item/projectile/bullet/rifle/a545/ap
+/obj/item/projectile/bullet/rifle/intermediate/ap
 	damage = 20
 	armor_penetration = 50 // At 40 or more armor, this will do more damage than standard rounds.
 
-/obj/item/projectile/bullet/rifle/a545/hp
+/obj/item/projectile/bullet/rifle/intermediate/hp
 	damage = 35
 	armor_penetration = -50
 	penetrating = 0
 
-/obj/item/projectile/bullet/rifle/a545/hunter
+/obj/item/projectile/bullet/rifle/intermediate/hunter
 	damage = 15
 	SA_bonus_damage = 35 // 50 total on animals.
 	SA_vulnerability = SA_ANIMAL
 
-/obj/item/projectile/bullet/rifle/a145 // 14.5×114mm is bigger than a .50 BMG round.
-	fire_sound = 'sound/weapons/Gunshot_cannon.ogg' // This is literally an anti-tank rifle caliber. It better sound like a fucking cannon.
+/obj/item/projectile/bullet/rifle/small // .22LR, .17HMR, and other stuff that you would want to hunt rodents with.
+	fire_sound = 'sound/weapons/Gunshot_pathetic.ogg'
+	damage = 10
+
+/obj/item/projectile/bullet/rifle/antitank // 14.5×114mm, .50 BMG, and other stuff that you would want to hunt armored vehicles with.
+	fire_sound = 'sound/weapons/Gunshot_cannon.ogg'
 	damage = 80
 	stun = 3
 	weaken = 3
@@ -214,9 +219,16 @@
 	armor_penetration = 80
 	hitscan = 1 //so the PTR isn't useless as a sniper weapon
 
+/obj/item/projectile/bullet/rifle/antitank/incendiary // Just in case you want to also set shit on fire!
+	damage = 60
+	damage_type = BURN
+	incendiary = 1
+	flammability = 4
+	hitscan = 0 // No longer good for a sniper, though. Balance, I guess.
+
 /* Miscellaneous */
 
-/obj/item/projectile/bullet/suffocationbullet//How does this even work?
+/obj/item/projectile/bullet/suffocationbullet //How does this even work?
 	name = "co bullet"
 	damage = 20
 	damage_type = OXY
@@ -237,6 +249,13 @@
 	if(isturf(target))
 		explosion(target, -1, 0, 2)
 	..()
+
+/obj/item/projectile/bullet/ratshot // Give this to the janitor. I dare you.
+	name = "ratshot"
+	damage = 1 // Almost harmless to people.
+	embed_chance = 0
+	SA_bonus_damage = 9 // 10 total on animals, because fuck player mice who think they're too quick to get caught.
+	SA_vulnerability = SA_ANIMAL
 
 /* Incendiary */
 

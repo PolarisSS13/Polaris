@@ -245,11 +245,11 @@
 	load_method = SINGLE_CASING
 	max_shells = 1 //literally just a barrel
 
-	var/global/list/ammo_types = list(
+	var/global/list/ammo_types = list( // Stick to common calibers.
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/a9mm		        = "9mm",
 		/obj/item/ammo_casing/a45				= ".45",
-		/obj/item/ammo_casing/a10mm             = "10mm",
+		/obj/item/ammo_casing/a10mm             = "10mm Auto",
 		/obj/item/ammo_casing/a12g              = "12g",
 		/obj/item/ammo_casing/a12g              = "12g",
 		/obj/item/ammo_casing/a12g/pellet       = "12g",
@@ -258,8 +258,8 @@
 		/obj/item/ammo_casing/a12g/beanbag      = "12g",
 		/obj/item/ammo_casing/a12g/stunshell    = "12g",
 		/obj/item/ammo_casing/a12g/flash        = "12g",
-		/obj/item/ammo_casing/a762              = "7.62mm",
-		/obj/item/ammo_casing/a545              = "5.45mm"
+		/obj/item/ammo_casing/a308              = ".308",
+		/obj/item/ammo_casing/a223              = ".223"
 		)
 
 /obj/item/weapon/gun/projectile/pirate/New()

@@ -247,10 +247,10 @@
 			prob(2);list(
 				/obj/item/clothing/suit/armor/vest,
 				/obj/item/clothing/suit/armor/vest,
-				/obj/item/weapon/gun/projectile/garand,
-				/obj/item/weapon/gun/projectile/garand,
-				/obj/item/ammo_magazine/m762garand,
-				/obj/item/ammo_magazine/m762garand,
+				/obj/item/weapon/gun/projectile/semiauto/garand,
+				/obj/item/weapon/gun/projectile/semiauto/garand,
+				/obj/item/ammo_magazine/e30_06,
+				/obj/item/ammo_magazine/e30_06,
 				/obj/structure/closet/crate/plastic
 			),
 			prob(2);list(

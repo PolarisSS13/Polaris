@@ -75,7 +75,7 @@
 	path = /obj/item/weapon/gun/energy/crossbow
 
 /datum/uplink_item/item/visible_weapons/silenced_45
-	name = "Silenced .45"
+	name = "Silenced Pistol (.45)"
 	item_cost = 40
 	path = /obj/item/weapon/gun/projectile/silenced
 
@@ -85,17 +85,17 @@
 	path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser
 
 /datum/uplink_item/item/visible_weapons/revolver
-	name = "Revolver"
+	name = "Revolver (.357)"
 	item_cost = 70
 	path = /obj/item/weapon/gun/projectile/revolver
 
 /datum/uplink_item/item/visible_weapons/mateba
-	name = "Mateba"
+	name = "Mateba Revolver (.357)"
 	item_cost = 70
 	path = /obj/item/weapon/gun/projectile/revolver/mateba
 
 /datum/uplink_item/item/visible_weapons/judge
-	name = "Judge"
+	name = "Judge Revolver (12g)"
 	item_cost = 70
 	path = /obj/item/weapon/gun/projectile/revolver/judge
 
@@ -110,12 +110,12 @@
 	path = /obj/item/weapon/gun/projectile/p92x/large
 
 /datum/uplink_item/item/visible_weapons/lemat
-	name = "LeMat"
+	name = "LeMat Revolver (.38-Special / 12g)"
 	item_cost = 60
 	path = /obj/item/weapon/gun/projectile/revolver/lemat
 
 /datum/uplink_item/item/visible_weapons/Derringer
-	name = ".357 Derringer Pistol"
+	name = "Derringer Pistol (.357)"
 	item_cost = 40
 	path = /obj/item/weapon/gun/projectile/derringer
 
@@ -139,28 +139,28 @@
 	path = /obj/item/weapon/storage/secure/briefcase/fuelrod
 
 /datum/uplink_item/item/visible_weapons/tommygun
-	name = "Tommygun (.45)" // We're keeping this because it's CLASSY. -Spades
+	name = "Tommy Gun (.45)" // We're keeping this because it's CLASSY. -Spades
 	item_cost = 60
 	path = /obj/item/weapon/gun/projectile/automatic/tommygun
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/submachinegun
-	name = "Submachine Gun (10mm)"
+	name = "Submachine Gun (10mm Auto)"
 	item_cost = 60
 	path = /obj/item/weapon/gun/projectile/automatic/c20r
 
 /datum/uplink_item/item/visible_weapons/assaultrifle
-	name = "Assault Rifle (5.45mm)"
+	name = "Assault Rifle (.223)"
 	item_cost = 75
 	path = /obj/item/weapon/gun/projectile/automatic/sts35
 
 /datum/uplink_item/item/visible_weapons/combatshotgun
-	name = "Combat Shotgun"
+	name = "Combat Shotgun (12g)" // Consistency
 	item_cost = 75
 	path = /obj/item/weapon/gun/projectile/shotgun/pump/combat
 
 /datum/uplink_item/item/visible_weapons/leveraction
-	name = "Lever Action Rifle"
+	name = "Lever Action Rifle (.308)"
 	item_cost = 50
 	path = /obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever
 

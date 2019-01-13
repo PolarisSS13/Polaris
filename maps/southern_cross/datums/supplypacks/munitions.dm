@@ -7,7 +7,7 @@
  	name = "Weapons - Surplus Hunting Rifles"
  	contains = list(
  			/obj/item/weapon/gun/projectile/shotgun/pump/rifle = 2,
- 			/obj/item/ammo_magazine/clip/c762/hunter = 6
+ 			/obj/item/ammo_magazine/clip/c308/hunter = 6
  			)
  	cost = 50
  	containertype = /obj/structure/closet/crate/secure/weapon

@@ -10,7 +10,8 @@
 	w_class = ITEMSIZE_NORMAL
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
-	projectile_type = /obj/item/projectile/bullet/pistol/strong	//Only used for Cham Guns
+	projectile_type = /obj/item/projectile/bullet/pistol/strong	//Only used for Chameleon Guns.
+	// ToDo: Some code to extrapolate what a projectile_type is based on what the gun is loaded with when spawned. Probably should do that in New(). It would get rid of some stupid redundancy.
 
 	var/caliber = ".357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled

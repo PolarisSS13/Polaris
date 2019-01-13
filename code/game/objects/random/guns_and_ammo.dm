@@ -166,7 +166,7 @@
 	name = "random smg projectile gun"
 	desc = "Loot for PoIs."
 	icon = 'icons/obj/gun.dmi'
-	icon_state = "saber"
+	icon_state = "advanced_smg"
 
 /obj/random/multiple/gun/projectile/smg/item_to_spawn()
 	return pick(
@@ -208,33 +208,33 @@
 	return pick(
 			prob(2);list(
 				/obj/item/weapon/gun/projectile/automatic/sts35,
-				/obj/item/ammo_magazine/m545,
-				/obj/item/ammo_magazine/m545
+				/obj/item/ammo_magazine/m223,
+				/obj/item/ammo_magazine/m223
 			),
 			prob(2);list(
 				/obj/item/weapon/gun/projectile/automatic/z8,
-				/obj/item/ammo_magazine/m762,
-				/obj/item/ammo_magazine/m762
+				/obj/item/ammo_magazine/m308,
+				/obj/item/ammo_magazine/m308
 			),
 			prob(4);list(
 				/obj/item/weapon/gun/projectile/shotgun/pump/rifle,
-				/obj/item/ammo_magazine/clip/c762,
-				/obj/item/ammo_magazine/clip/c762
+				/obj/item/ammo_magazine/clip/c308,
+				/obj/item/ammo_magazine/clip/c308
 			),
 			prob(3);list(
 				/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever,
-				/obj/item/ammo_magazine/clip/c762,
-				/obj/item/ammo_magazine/clip/c762
+				/obj/item/ammo_magazine/clip/c308,
+				/obj/item/ammo_magazine/clip/c308
 			),
 			prob(1);list(
-				/obj/item/weapon/gun/projectile/garand,
-				/obj/item/ammo_magazine/m762garand,
-				/obj/item/ammo_magazine/m762garand
+				/obj/item/weapon/gun/projectile/semiauto/garand,
+				/obj/item/ammo_magazine/e30_06,
+				/obj/item/ammo_magazine/e30_06
 			),
 			prob(1);list(
 				/obj/item/weapon/gun/projectile/automatic/bullpup,
-				/obj/item/ammo_magazine/m762,
-				/obj/item/ammo_magazine/m762
+				/obj/item/ammo_magazine/m308,
+				/obj/item/ammo_magazine/m308
 			)
 		)
 

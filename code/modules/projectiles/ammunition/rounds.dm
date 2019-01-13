@@ -52,7 +52,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 130, "uranium" = 100)
 
 /*
- * .50 Action Express
+ * .44
  */
 
 /obj/item/ammo_casing/a44
@@ -157,17 +157,17 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/medium/hp
 
 /*
- * 10mm
+ * 10mm Auto
  */
 
 /obj/item/ammo_casing/a10mm
-	desc = "A 10mm bullet casing."
-	caliber = "10mm"
+	desc = "A 10mm Auto bullet casing."
+	caliber = "10mm Auto"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
 
 /obj/item/ammo_casing/a10mm/emp
-	name = "10mm haywire round"
+	name = "10mm Haywire round"
 	desc = "A 10mm bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	icon_state = "empcasing"
@@ -242,39 +242,66 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 360, "uranium" = 240)
 
 /*
- * 7.62mm
+ * .308
  */
 
-/obj/item/ammo_casing/a762
-	desc = "A 7.62mm bullet casing."
-	caliber = "7.62mm"
+/obj/item/ammo_casing/a308
+	desc = "A .308 bullet casing."
+	caliber = ".308"
 	icon_state = "rifle-casing"
-	projectile_type = /obj/item/projectile/bullet/rifle/a762
+	projectile_type = /obj/item/projectile/bullet/rifle/large
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
 
-/obj/item/ammo_casing/a762/ap
-	desc = "A 7.62mm armor-piercing bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/ap
+/obj/item/ammo_casing/a308/ap
+	desc = "A .308 armor-piercing bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large/ap
 	matter = list(DEFAULT_WALL_MATERIAL = 300)
 
-/obj/item/ammo_casing/a762/practice
-	desc = "A 7.62mm practice bullet casing."
+/obj/item/ammo_casing/a308/sniper
+	desc = "A high velocity .308 bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large/sniper
+	matter = list(DEFAULT_WALL_MATERIAL = 300)
+
+/obj/item/ammo_casing/a308/practice
+	desc = "A .308 practice bullet casing."
 	icon_state = "rifle-casing" // Need to make an icon for these
 	projectile_type = /obj/item/projectile/bullet/practice
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a762/blank
-	desc = "A blank 7.62mm bullet casing."
+/obj/item/ammo_casing/a308/blank
+	desc = "A blank .308 bullet casing."
 	projectile_type = /obj/item/projectile/bullet/blank
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a762/hp
-	desc = "A 7.62mm hollow-point bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/hp
+/obj/item/ammo_casing/a308/hp
+	desc = "A .308 hollow-point bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large/hp
 
-/obj/item/ammo_casing/a762/hunter
-	desc = "A 7.62mm hunting bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/hunter
+/obj/item/ammo_casing/a308/hunter
+	desc = "A .308 hunting bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large/hunter
+
+/*
+ * .30-06 (for the Garand)
+ */
+
+/obj/item/ammo_casing/a30_06
+	desc = "A .30-06 bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle
+
+/*
+ * 7.62x54mmR (for the SVD)
+ */
+
+/obj/item/ammo_casing/a762r
+	desc = "A 7.62x54mmR bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large
+	matter = list(DEFAULT_WALL_MATERIAL = 200)
+
+/obj/item/ammo_casing/a762r/sniper
+	desc = "A high velocity 7.62x54mmR bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/large/sniper
+	matter = list(DEFAULT_WALL_MATERIAL = 300)
 
 /*
  * 14.5mm (anti-materiel rifle round)
@@ -284,43 +311,59 @@
 	desc = "A 14.5mm shell."
 	icon_state = "lcasing"
 	caliber = "14.5mm"
-	projectile_type = /obj/item/projectile/bullet/rifle/a145
+	projectile_type = /obj/item/projectile/bullet/rifle/antitank
 	matter = list(DEFAULT_WALL_MATERIAL = 1250)
 
 /*
- * 5.45mm
+ * .223
  */
 
-/obj/item/ammo_casing/a545
-	desc = "A 5.45mm bullet casing."
-	caliber = "5.45mm"
+/obj/item/ammo_casing/a223
+	desc = "A .223 bullet casing."
+	caliber = ".223"
 	icon_state = "rifle-casing"
-	projectile_type = /obj/item/projectile/bullet/rifle/a545
+	projectile_type = /obj/item/projectile/bullet/rifle/intermediate
 	matter = list(DEFAULT_WALL_MATERIAL = 180)
 
-/obj/item/ammo_casing/a545/ap
-	desc = "A 5.45mm armor-piercing bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a545/ap
+/obj/item/ammo_casing/a223/ap
+	desc = "A .223 armor-piercing bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/intermediate/ap
 	matter = list(DEFAULT_WALL_MATERIAL = 270)
 
-/obj/item/ammo_casing/a545/practice
-	desc = "A 5.45mm practice bullet casing."
+/obj/item/ammo_casing/a223/practice
+	desc = "A .223 practice bullet casing."
 	icon_state = "rifle-casing" // Need to make an icon for these
 	projectile_type = /obj/item/projectile/bullet/practice
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a545/blank
-	desc = "A blank 5.45mm bullet casing."
+/obj/item/ammo_casing/a223/blank
+	desc = "A blank .223 bullet casing."
 	projectile_type = /obj/item/projectile/bullet/blank
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a545/hp
-	desc = "A 5.45mm hollow-point bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a545/hp
+/obj/item/ammo_casing/a223/hp
+	desc = "A .223 hollow-point bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/intermediate/hp
 
-/obj/item/ammo_casing/a545/hunter
-	desc = "A 5.45mm hunting bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a545/hunter
+/obj/item/ammo_casing/a223/hunter
+	desc = "A .223 hunting bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/intermediate/hunter
+
+/*
+ * 5mm Caseless
+ */
+
+/obj/item/ammo_casing/a5mmcaseless
+	desc = "A 5mm solid phoron caseless round."
+	caliber = "5mm caseless"
+	icon_state = "casing" // Placeholder. Should probably be purple.
+	projectile_type = /obj/item/projectile/bullet/pistol // Close enough to be comparable.
+	matter = list(DEFAULT_WALL_MATERIAL = 180)
+	caseless = 1
+
+/obj/item/ammo_casing/a5mmcaseless/stun
+	desc = "A 5mm solid phoron caseless stun round."
+	projectile_type = /obj/item/projectile/energy/electrode/weak
 
 /*
  * Misc

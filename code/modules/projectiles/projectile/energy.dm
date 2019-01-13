@@ -76,6 +76,9 @@
 /obj/item/projectile/energy/electrode/strong
 	agony = 55
 
+/obj/item/projectile/energy/electrode/weak
+	agony = 30
+
 /obj/item/projectile/energy/electrode/stunshot
 	name = "stunshot"
 	damage = 5

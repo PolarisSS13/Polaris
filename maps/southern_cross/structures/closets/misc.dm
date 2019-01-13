@@ -13,7 +13,7 @@
 	req_one_access = list(access_explorer,access_brig)
 
 	starts_with = list(
-		/obj/item/ammo_magazine/clip/c762/hunter = 9,
+		/obj/item/ammo_magazine/clip/c308/hunter = 9,
 		/obj/item/weapon/gun/projectile/shotgun/pump/rifle = 2)
 
 /obj/structure/closet/secure_closet/guncabinet/rifle/Initialize()

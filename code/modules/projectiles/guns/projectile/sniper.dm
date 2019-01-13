@@ -2,9 +2,9 @@
 
 /obj/item/weapon/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
-	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
+	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Uses armor-piercing 14.5mm shells."
 	icon_state = "heavysniper"
-	item_state_slots = list(slot_r_hand_str = "l6closed-empty", slot_l_hand_str = "l6closed-empty") // placeholder
+	item_state_slots = list(slot_r_hand_str = "l6closed-empty", slot_l_hand_str = "l6closed-empty") // STILL A PLACEHOLDER :I
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	force = 10
 	slot_flags = SLOT_BACK
@@ -15,7 +15,6 @@
 	load_method = SINGLE_CASING
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145
-	projectile_type = /obj/item/projectile/bullet/rifle/a145
 	accuracy = -75
 	scoped_accuracy = 75
 //	one_handed_penalty = 90
@@ -71,22 +70,22 @@
 
 /obj/item/weapon/gun/projectile/SVD
 	name = "\improper Dragunov"
-	desc = "The SVD, also known as the Dragunov, is mass produced with an Optical Sniper Sight so simple that even Ivan can use it. Too bad for you that the inscriptions are written in Russian. Uses 7.62mm rounds."
+	desc = "The SVD, also known as the Dragunov, is a mass produced sniper with an optic so simple that even Ivan can use it. Too bad for you that the inscriptions are written in Russian. Uses high velocity 7.62x54mmR rounds."
 	icon_state = "SVD"
 	item_state = "SVD"
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	force = 10
-	slot_flags = SLOT_BACK // Needs a sprite.
+	slot_flags = null // SLOT_BACK // Needs a sprite.
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
-	caliber = "7.62mm"
+	caliber = "7.62x54mmR"
 	load_method = MAGAZINE
 	accuracy = -45 //shooting at the hip
 	scoped_accuracy = 0
 //	requires_two_hands = 1
 //	one_handed_penalty = 60 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	fire_sound = 'sound/weapons/Gunshot_SVD.ogg' // Has a very unique sound.
-	magazine_type = /obj/item/ammo_magazine/m762svd
-	allowed_magazines = list(/obj/item/ammo_magazine/m762svd)
+	magazine_type = /obj/item/ammo_magazine/m762r/sniper
+	allowed_magazines = list(/obj/item/ammo_magazine/m762r)
 
 /obj/item/weapon/gun/projectile/SVD/update_icon()
 	..()
