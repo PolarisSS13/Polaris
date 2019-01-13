@@ -46,6 +46,10 @@
 
 /mob/living/carbon/human/proc/zombify()
 	set_species("Zombie")
+
+	for(var/obj/item/W in src)
+		src.drop_from_inventory(W)
+
 	revive()
 
 	infected.add_antagonist(mind)
