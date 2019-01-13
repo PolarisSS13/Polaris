@@ -219,6 +219,10 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	var/old_loc = src.loc
 	src.pickup(user)
 
+	//If it's a certain type of object, log it for admins, quite useful in some situations.
+	if(istype(src, /obj/item/weapon))
+		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up [src] from [src.loc.loc].</font>"
+
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
@@ -465,6 +469,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		usr << "<span class='warning'>You can't pick that up!</span>"
 		return
+
 	//All checks are done, time to pick it up!
 	usr.UnarmedAttack(src)
 	return
