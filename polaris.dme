@@ -862,6 +862,7 @@
 #include "code\game\objects\items\contraband.dm"
 #include "code\game\objects\items\crayons.dm"
 #include "code\game\objects\items\glassjar.dm"
+#include "code\game\objects\items\godfigures.dm"
 #include "code\game\objects\items\gunbox.dm"
 #include "code\game\objects\items\latexballoon.dm"
 #include "code\game\objects\items\paintkit.dm"
