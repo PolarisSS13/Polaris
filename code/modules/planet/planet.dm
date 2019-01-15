@@ -14,20 +14,35 @@
 	var/sun_position = 0 // 0 means midnight, 1 means noon.
 	var/list/sun = list("range","brightness","color","lum_r","lum_g","lum_b")
 	var/list/datum/lighting_corner/sunlit_corners = list()
-	var/expected_z_levels = list()
+	var/list/expected_z_levels = list()
 
 	var/turf/unsimulated/wall/planetary/planetary_wall_type = /turf/unsimulated/wall/planetary
 
 	var/list/turf/simulated/floor/planet_floors = list()
 	var/list/turf/unsimulated/wall/planetary/planet_walls = list()
 
-
 	var/needs_work = 0 // Bitflags to signal to the planet controller these need (properly deferrable) work. Flags defined in controller.
+
+	var/sun_name = "the sun" // For flavor.
+
+	var/moon_name = null // Purely for flavor. Null means no moon exists.
+	var/moon_phase = null // Set if above is defined.
 
 /datum/planet/New()
 	..()
 	weather_holder = new(src)
 	current_time = current_time.make_random_time()
+	if(moon_name)
+		moon_phase = pick(list(
+			MOON_PHASE_NEW_MOON,
+			MOON_PHASE_WAXING_CRESCENT,
+			MOON_PHASE_FIRST_QUARTER,
+			MOON_PHASE_WAXING_GIBBOUS,
+			MOON_PHASE_FULL_MOON,
+			MOON_PHASE_WANING_GIBBOUS,
+			MOON_PHASE_LAST_QUARTER,
+			MOON_PHASE_WANING_CRESCENT
+			))
 	update_sun()
 
 /datum/planet/proc/process(last_fire)
