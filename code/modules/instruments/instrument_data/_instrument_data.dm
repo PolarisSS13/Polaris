@@ -5,11 +5,32 @@
 	var/abstract_type = /datum/instrument
 	var/list/real_samples					// Write here however many samples, follow this syntax: "%note num%"='%sample file%' eg. "27"='synthesizer/e2.ogg'. Key must never be lower than 0 and higher than 127
 	var/list/samples						// assoc list key = /datum/instrument_key. do not fill this yourself!
+	var/instrument_flags = NONE
+	var/legacy_instrument_path
+	var/legacy_instrument_ext
+	var/list/datum/song/songs_using = list()	//gc purposes
 
 /datum/instrument/proc/Initialize()
 	calculate_samples()
 
+/datum/instrument/proc/ready()
+	if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_LEGACY))
+		return legacy_instrument_path && legacy_instrument_ext
+	else if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_DO_NOT_AUTOFILL))
+		return samples.len
+	return samples.len == 127
+
+/datum/instrument/Destroy()
+	SSinstruments.instrument_data -= id
+	for(var/i in songs_using)
+		var/datum/song/S = i
+		S.stop_playing()
+		S.using_instrument = null
+	return ..()
+
 /datum/instrument/proc/calculate_samples()
+	if(CHECK_BITFIELD(instrument_flags, (INSTRUMENT_DO_NOT_AUTOSAMPLE | INSTRUMENT_LEGACY))
+		return
 	if(!islist(real_samples) || !real_samples.len)
 		CRASH("No real_samples defined in instrument [id] ([type]) or real_samples was not a list!")
 	var/list/num_keys = list()

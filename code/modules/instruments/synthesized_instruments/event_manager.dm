@@ -13,7 +13,6 @@ datum/musical_event
 	src.new_volume = volume
 
 
-
 /datum/musical_event/Destroy()
 	source = null
 	token = null
