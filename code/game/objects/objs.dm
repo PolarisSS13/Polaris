@@ -205,3 +205,9 @@
 		B.time_to_live = 1
 		burning_objects -= src
 		visible_message("<span class='notice'>The [src]'s flames dissipate.</span>")
+
+/obj/attack_hand(var/mob/user)
+	if(isundead(user))
+		user << "<span class='notice'>This looks incredibly alien to you, and doesn't have brains.</span>"
+		return
+	..()

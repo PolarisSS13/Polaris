@@ -21,7 +21,7 @@ var/datum/antagonist/zombie/infected
 	initial_spawn_req = 2
 	initial_spawn_target = 4
 
-	spawn_announcement = "A deadly and contagious outbreak of the cordyceps parasite has taken over a quarantined neighbouring city. This parasite can be prevented or slowed down with inaprovaline but once symptoms manifest it is incurable. Civilians are advised to report strange flu-like symptoms to their local hospital."
+	spawn_announcement = "A deadly and contagious outbreak of the cordyceps parasite has taken over a quarantined neighbouring city. This parasite can be prevented or slowed down with inaprovaline but once symptoms manifest it is incurable, those afflicted with the late stages of infection must be cremated in order to contain the outbreak. Civilians are advised to report strange flu-like symptoms to their local hospital."
 	spawn_announcement_title = "Pathogen Alert"
 	spawn_announcement_delay = 5000
 
