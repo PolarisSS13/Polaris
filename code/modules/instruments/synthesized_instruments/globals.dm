@@ -1,8 +1,6 @@
 GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 
 /datum/musical_config
-	var/highest_octave = 9
-	var/lowest_octave = 0
 
 	var/highest_transposition = 4
 	var/lowest_transposition = -4

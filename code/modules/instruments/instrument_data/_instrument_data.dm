@@ -16,7 +16,7 @@
 /datum/instrument/proc/ready()
 	if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_LEGACY))
 		return legacy_instrument_path && legacy_instrument_ext
-	else if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_DO_NOT_AUTOFILL))
+	else if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_DO_NOT_AUTOSAMPLE))
 		return samples.len
 	return samples.len == 127
 
@@ -29,7 +29,7 @@
 	return ..()
 
 /datum/instrument/proc/calculate_samples()
-	if(CHECK_BITFIELD(instrument_flags, (INSTRUMENT_DO_NOT_AUTOSAMPLE | INSTRUMENT_LEGACY))
+	if(CHECK_BITFIELD(instrument_flags, INSTRUMENT_DO_NOT_AUTOSAMPLE | INSTRUMENT_LEGACY))
 		return
 	if(!islist(real_samples) || !real_samples.len)
 		CRASH("No real_samples defined in instrument [id] ([type]) or real_samples was not a list!")

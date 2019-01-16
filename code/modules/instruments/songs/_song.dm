@@ -1,6 +1,11 @@
 /datum/song
 	var/name = "Untitled"
+
+	var/debug_mode = FALSE
+
 	var/list/lines = list()
+	var/list/compiled_chords 	//non assoc list of lists : index = list(key1, key2, key3... , tempo_divisor). tempo divisor always exists, key1 doesn't have to if it's a rest.
+
 	var/tempo_ds = 5			//delay between notes in deciseconds
 	var/repeat_current = 0		//current repeats left
 	var/max_repeats = 10		//max repeats
@@ -11,7 +16,7 @@
 	var/datum/instrument/using_instrument
 	var/legacy_mode = FALSE
 
-	var/obj/parent			//The object in the world we're attached to.
+	var/obj/parent			//The object in the world we're attached to. Can theoretically support datums in the future, but this should probably stay as an atom at the least.
 	var/last_hearcheck = 0		//last world.time we checked for hearing mobs.
 	var/list/hearing_mobs		//list of mobs that can hear us
 
@@ -41,6 +46,7 @@
 	allowed_instrument_ids = null
 	hearing_mobs = null
 	cached_samples = null
+	compiled_chords = null
 	return ..()
 
 /datum/song/proc/set_bpm(bpm)
@@ -67,6 +73,9 @@
 		cached_legacy_dir = null
 		return TRUE
 	return FALSE
+
+/datum/song/proc/sanitize_tempo(new_tempo)
+	return max(round(abs(new_tempo), world.tick_lag), world.tick_lag)
 
 /datum/song/proc/stop_playing()
 	hearing_mobs.Cut()
@@ -96,27 +105,157 @@
 		CRASH("WARNING: datum/song attempted to play_lines while it was already now_playing!")
 		return FALSE
 	now_playing = TRUE
-
-
+	legacy? do_play_lines_legacy() : do_play_lines_synth()
 	now_playing = FALSE
+	updateDialog()
 	return TRUE
 
 /datum/song/proc/should_stop_playing()
-	return playing && using_instrument
+	return !playing || !using_instrument || QDELETED(parent)
+
+/datum/song/proc/do_play_lines_synth()
+	compile_lines()
+	var/terminate = FALSE
+	while(repeats)
+		for(var/_chord in compiled_chords)
+			var/list/chord = _chord
+			var/tempodiv = chord[chord.len]
+			for(var/i in 1 to chord.len - 1)
+				var/key = chord[i]
+				playkey_synth(key)
+			if(should_stop_playing())
+				terminate = TRUE
+				break
+			sleep(sanitize_tempo_ds(tempo_ds / tempodiv))
+		if(should_stop_playing())
+			terminate = TRUE
+		if(terminate)
+			break
+		updateUsrDialog()
+	if(!debug_mode)
+		compiled_chords = null
+
+/datum/song/proc/compile_lines()
+	compiled_chords = list()
+	var/list/octaves = list()
+	var/list/accents = list()
+	for(var/i in 1 to 7)
+		octaves += 3
+		accents += "n"
+	for(var/line in lines)
+		var/list/beats = splittext(lowertext(line), ",")
+		for(var/beat in beats)
+			var/list/contents = splittext(beat, "/")
+			var/tempo_divisor = 1
+			var/contents_length = length(contents)
+			var/list/newchord = list()
+			if(contents_length)
+				if(contents_length >= 2)
+					var/newdiv = text2num(contents[2])
+					if(isnum(newdiv))
+						tempo_divisor = newdiv
+				for(var/note in contents[1])
+					var/key = note_to_key(note, octaves, accents, TRUE)
+					if(key)
+						newchord += key
+			newchord += tempo_divisor
+			compiled_chords += newchord
+		CHECK_TICK
+
+/datum/song/proc/note_to_key(notestring, list/octaves, list/accents, change_lists = FALSE)
+	//For the sake of performance, we're not going to check for octaves/accents existing.
+	if(!length(notestring))
+		return
+	var/cur_note = text2ascii(note, 1) - 96
+	if(cur_note < 1 || cur_note > 7)
+		return
+	if(
+
+
+
+
+for(var/beat in splittext(lowertext(line), ","))
+	var/list/notes = splittext(beat, "/")
+	for(var/note in splittext(notes[1], "-"))
+		if(shouldStopPlaying())//If the instrument is playing, or special case
+			playing = 0
+			return
+		if(lentext(note) == 0)
+			continue
+		var/cur_note = text2ascii(note) - 96
+		if(cur_note < 1 || cur_note > 7)
+			continue
+		for(var/i=2 to lentext(note))
+			var/ni = copytext(note,i,i+1)
+			if(!text2num(ni))
+				if(ni == "#" || ni == "b" || ni == "n")
+					cur_acc[cur_note] = ni
+				else if(ni == "s")
+					cur_acc[cur_note] = "#" // so shift is never required
+			else
+				cur_oct[cur_note] = text2num(ni)
+		playnote(cur_note, cur_acc[cur_note], cur_oct[cur_note])
+	if(notes.len >= 2 && text2num(notes[2]))
+		sleep(sanitize_tempo(tempo / text2num(notes[2])))
+	else
+		sleep(tempo)
+repeat--
+playing = 0
+repeat = 0
+updateDialog(user)
 
 
 
 
 
+//Playing legacy instruments
 
+/datum/song/proc/do_play_lines_legacy()
+	var/terminate = FALSE
+	while(repeat >= 0)
+		var/cur_oct[7]
+		var/cur_acc[7]
+		for(var/i = 1 to 7)
+			cur_oct[i] = 3
+			cur_acc[i] = "n"
 
-
-
+		for(var/line in lines)
+			for(var/beat in splittext(lowertext(line), ","))
+				var/list/notes = splittext(beat, "/")
+				for(var/note in splittext(notes[1], "-"))
+					if(should_stop_playing())
+						terminate = TRUE
+						break
+					if(lentext(note) == 0)
+						continue
+					var/cur_note = text2ascii(note) - 96
+					if(cur_note < 1 || cur_note > 7)
+						continue
+					for(var/i=2 to lentext(note))
+						var/ni = copytext(note,i,i+1)
+						if(!text2num(ni))
+							if(ni == "#" || ni == "b" || ni == "n")
+								cur_acc[cur_note] = ni
+							else if(ni == "s")
+								cur_acc[cur_note] = "#" // so shift is never required
+						else
+							cur_oct[cur_note] = text2num(ni)
+					playnote_legacy(cur_note, cur_acc[cur_note], cur_oct[cur_note])
+				if(notes.len >= 2 && text2num(notes[2]))
+					sleep(sanitize_tempo_ds(tempo_ds / text2num(notes[2])))
+				else
+					sleep(tempo)
+		repeat--
+		if(should_stop_playing())
+			terminate = TRUE
+		if(terminate)
+			break
+		updateUsrDialog()
 
 // note is a number from 1-7 for A-G
 // acc is either "b", "n", or "#"
 // oct is 1-8 (or 9 for C)
-/datum/song/proc/playnote(note, acc as text, oct)
+/datum/song/proc/playnote_legacy(note, acc as text, oct)
 	// handle accidental -> B<>C of E<>F
 	if(acc == "b" && (note == 3 || note == 6)) // C or F
 		if(note == 3)
@@ -140,68 +279,30 @@
 		return
 
 	// now generate name
-	var/soundfile = "sound/instruments/[instrumentDir]/[ascii2text(note+64)][acc][oct].[instrumentExt]"
+	var/soundfile = "sound/instruments/[cached_legacy_dir]/[ascii2text(note+64)][acc][oct].[cached_legacy_ext]"
 	soundfile = file(soundfile)
 	// make sure the note exists
 	if(!fexists(soundfile))
 		return
 	// and play
-	var/turf/source = get_turf(instrumentObj)
-	if((world.time - MUSICIAN_HEARCHECK_MINDELAY) > last_hearcheck)
-		LAZYCLEARLIST(hearing_mobs)
-		for(var/mob/M in hearers(15, source))
-			if(!M.client || !(M.is_preference_enabled(/datum/client_preference/instrument_toggle)))
-				continue
-			LAZYSET(hearing_mobs, M, TRUE)
-		last_hearcheck = world.time
+	var/turf/source = get_turf(parentj)
+	do_hearcheck()
 	var/sound/music_played = sound(soundfile)
 	for(var/i in hearing_mobs)
 		var/mob/M = i
 		M.playsound_local(source, null, 100, falloff = 5, S = music_played)
 
+///////////////////
+
+
+
+
+
+
 /datum/song/proc/updateDialog(mob/user)
-	instrumentObj.updateDialog()		// assumes it's an object in world, override if otherwise
+	parent?.updateDialog()		// assumes it's an object in world, override if otherwise
 
 
-
-/datum/song/proc/playsong(mob/user)
-	while(repeat >= 0)
-		var/cur_oct[7]
-		var/cur_acc[7]
-		for(var/i = 1 to 7)
-			cur_oct[i] = 3
-			cur_acc[i] = "n"
-
-		for(var/line in lines)
-			for(var/beat in splittext(lowertext(line), ","))
-				var/list/notes = splittext(beat, "/")
-				for(var/note in splittext(notes[1], "-"))
-					if(!playing || shouldStopPlaying(user))//If the instrument is playing, or special case
-						playing = 0
-						return
-					if(lentext(note) == 0)
-						continue
-					var/cur_note = text2ascii(note) - 96
-					if(cur_note < 1 || cur_note > 7)
-						continue
-					for(var/i=2 to lentext(note))
-						var/ni = copytext(note,i,i+1)
-						if(!text2num(ni))
-							if(ni == "#" || ni == "b" || ni == "n")
-								cur_acc[cur_note] = ni
-							else if(ni == "s")
-								cur_acc[cur_note] = "#" // so shift is never required
-						else
-							cur_oct[cur_note] = text2num(ni)
-					playnote(cur_note, cur_acc[cur_note], cur_oct[cur_note])
-				if(notes.len >= 2 && text2num(notes[2]))
-					sleep(sanitize_tempo(tempo / text2num(notes[2])))
-				else
-					sleep(tempo)
-		repeat--
-	playing = 0
-	repeat = 0
-	updateDialog(user)
 
 /datum/song/proc/interact(mob/user)
 	var/dat = ""
@@ -251,7 +352,7 @@
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
-	var/datum/browser/popup = new(user, "instrument", instrumentObj.name, 700, 500)
+	var/datum/browser/popup = new(user, "instrument", parent? parent.name : "Song Display" , 700, 500)
 	popup.set_content(dat)
 	popup.set_title_image(user.browse_rsc_icon(instrumentObj.icon, instrumentObj.icon_state))
 	popup.open()
@@ -342,10 +443,6 @@
 		playing = 0
 	updateDialog(usr)
 	return
-
-/datum/song/proc/sanitize_tempo(new_tempo)
-	new_tempo = abs(new_tempo)
-	return max(round(new_tempo, world.tick_lag), world.tick_lag)
 
 
 

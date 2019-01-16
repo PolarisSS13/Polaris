@@ -3,8 +3,13 @@ SUBSYSTEM_DEF(SSinstruments)
 	wait = 0.5
 	priority = FIRE_PRIORITY_INSTRUMENTS
 	flags = SS_NO_TICK_CHECK
-	var/list/datum/instrument/instrument_data = list()		//id = datum
-	var/list/datum/song/songs = list()
+	var/static/list/datum/instrument/instrument_data = list()		//id = datum
+	var/static/list/datum/song/songs = list()
+
+	var/highest_octave = 9
+	var/lowest_octave = 0
+
+
 
 /datum/controller/subsystem/instruments/Initialize()
 	initialize_instrument_data()
@@ -20,7 +25,10 @@ SUBSYSTEM_DEF(SSinstruments)
 		var/datum/instrument/I = path
 		if(initial(I.abstract_type) == path)
 			continue
-		if(istext(initial(I.id)))
+		if(!istext(initial(I.id)))
+			continue
+		if(instrument_data[initial(I.id)])
+			crash_with("Skipping duplicate instrument ID [initial(I.id)]")
 			continue
 		I = new
 		instrument_data[I.id] = I
