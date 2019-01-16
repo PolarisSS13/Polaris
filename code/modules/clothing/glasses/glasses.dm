@@ -236,7 +236,6 @@ BLIND     // can't see anything
 	name = "prescription rimless glasses"
 	desc = "Sleek modern glasses with a single sculpted lens."
 	icon_state = "glasses_rimless"
-	prescription = 1
 
 /obj/item/clothing/glasses/rimless
 	name = "rimless glasses"
