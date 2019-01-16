@@ -9,11 +9,10 @@
 	var/randomdir = TRUE
 	var/timerid
 
-/obj/effect/temp_visual/New()
+/obj/effect/temp_visual/Initialize()
 	. = ..()
 	if(randomdir)
 		dir = pick(list(NORTH, SOUTH, EAST, WEST))
-
 	timerid = QDEL_IN(src, duration)
 
 /obj/effect/temp_visual/Destroy()
@@ -32,7 +31,7 @@
 /obj/effect/temp_visual/dir_setting
 	randomdir = FALSE
 
-/obj/effect/temp_visual/dir_setting/New(loc, set_dir)
+/obj/effect/temp_visual/dir_setting/Initialize(loc, set_dir)
 	if(set_dir)
 		dir = set_dir
 	. = ..()
