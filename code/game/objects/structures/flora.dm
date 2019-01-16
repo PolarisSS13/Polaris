@@ -308,10 +308,20 @@
 	icon_state = "[initial(icon_state)][rand(1,2)]"
 	. = ..()
 
+
+/datum/category_item/catalogue/flora/eyebulbs
+	name = "Eyebulbs"
+	desc = "A plant native to Sif. On the end of its stems are bulbs which visually resemble \
+	eyes. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
+	These plants have no known use."
+	value = 5
+
 /obj/structure/flora/sif/eyes
 	name = "mysterious bulbs"
 	desc = "This is a mysterious looking plant. They kind of look like eyeballs. Creepy."
 	icon_state = "eyeplant"
+	catalogue_data = list(/datum/category_item/catalogue/flora/eyebulbs)
+	catalogue_delay = 2 SECONDS
 
 /obj/structure/flora/sif/eyes/Initialize()
 	icon_state = "[initial(icon_state)][rand(1,3)]"

@@ -1,7 +1,24 @@
 // Carriers are not too dangerous on their own, but they create more spiders when dying.
 
+/datum/category_item/catalogue/fauna/carrier_spider
+	name = "Carrier Spider"
+	desc = "This specific spider has been catalogued as 'Carrier', \
+	and it belongs to the 'Nurse' caste. \
+	<br><br>\
+	The spider has a beige and red appearnce, with bright green eyes. \
+	Inside the spider are a large number of younger spiders and spiderlings, hence \
+	the Carrier classification. \
+	If the host dies, they will be able to exit the body and survive independantly, \
+	unless the host dies catastrophically."
+	value = 40
+
 /mob/living/simple_mob/animal/giant_spider/carrier
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes."
+	catalogue_data = list(
+		/datum/category_item/catalogue/fauna/giant_spiders,
+		/datum/category_item/catalogue/fauna/carrier_spider
+		)
+
 	icon_state = "carrier"
 	icon_living = "carrier"
 	icon_dead = "carrier_dead"
@@ -60,8 +77,18 @@
 			new_body.key = src.key
 	return ..()
 
+
+/datum/category_item/catalogue/fauna/recursive_carrier_spider
+	name = "Recursive Carrier Spider"
+	desc = "<font face='comic sans ms'>It's Carriers all the way down.</font>"
+	value = 40
+
 /mob/living/simple_mob/animal/giant_spider/carrier/recursive
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes. \
 	You have a distinctly <font face='comic sans ms'>bad</font> feeling about this."
+	catalogue_data = list(
+		/datum/category_item/catalogue/fauna/giant_spiders,
+		/datum/category_item/catalogue/fauna/recursive_carrier_spider
+		)
 
 	swarmling_type = /mob/living/simple_mob/animal/giant_spider/carrier/recursive

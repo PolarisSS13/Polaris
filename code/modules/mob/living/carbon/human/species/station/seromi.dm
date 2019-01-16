@@ -15,6 +15,7 @@
 	max_age = 45
 
 	economic_modifier = 6
+	catalogue_value = 10
 
 	health_hud_intensity = 3
 

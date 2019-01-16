@@ -1,7 +1,23 @@
 // Pepper spiders inject condensed capsaicin into their victims.
 
+/datum/category_item/catalogue/fauna/pepper_spider
+	name = "Pepper Spider"
+	desc = "This specific spider has been catalogued as 'Pepper', \
+	and it belongs to the 'Guard' caste. \
+	Red makes up a majority of the spider's appearance, including its eyes, with some brown on its body as well. \
+	<br><br>\
+	Pepper spiders are named due to producing capsaicin, and using it as a venom to incapacitate their prey, in an \
+	incredibly painful way. Their raw strength is considerably less than some of the other spiders, however \
+	they share a similar level of endurance with the other spiders in their caste, making them difficult to put down."
+	value = 40
+
 /mob/living/simple_mob/animal/giant_spider/pepper
 	desc = "Red and brown, it makes you shudder to look at it. This one has glinting red eyes."
+	catalogue_data = list(
+		/datum/category_item/catalogue/fauna/giant_spiders,
+		/datum/category_item/catalogue/fauna/pepper_spider
+		)
+
 	icon_state = "pepper"
 	icon_living = "pepper"
 	icon_dead = "pepper_dead"

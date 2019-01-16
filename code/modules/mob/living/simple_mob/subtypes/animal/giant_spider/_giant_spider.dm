@@ -4,11 +4,47 @@
 	Thick material will prevent injections, similar to other means of injections.
 */
 
+// Obtained by scanning any giant spider.
+/datum/category_item/catalogue/fauna/giant_spiders
+	name = "Giant Spiders"
+	desc = "Giant Spiders are massive arachnids genetically descended from conventional Earth spiders, \
+	however what caused ordinary arachnids to evolve into these are disputed. \
+	Different initial species of spider have co-evolved and interbred to produce a robust biological caste system \
+	capable of producing many varieties of giant spider. They are considered by most people to be a dangerous \
+	invasive species, due to their hostility, venom, and high rate of reproduction. A strong resistance to \
+	various poisons and toxins has been found, making it difficult to indirectly control their population.\
+	<br><br>\
+	Giant Spiders have three known castes, 'Guard', 'Hunter', and 'Nurse'. \
+	Spiders in the Guard caste are generally the physically stronger, resilient types. \
+	The ones in the Hunter caste are usually faster, or have some from of ability to \
+	close the distance between them and their prey rapidly. \
+	Finally, those in the Nurse caste generally act in a supporting role to the other two \
+	castes, spinning webs and ensuring their nest grows larger and more terrifying."
+	value = 10
+
+// Specific to guard spiders.
+/datum/category_item/catalogue/fauna/guard_spider
+	name = "Guard Spider"
+	desc = "This specific spider has been catalogued as 'Guard', \
+	and belongs to the 'Guard' caste. It has a brown coloration, with \
+	red glowing eyes.\
+	<br><br>\
+	This spider, like the others in its caste, is bulky, strong, and resilient. It \
+	relies on its raw strength to kill prey, due to having less potent venom compared \
+	to other spiders."
+	value = 20
+
 // The base spider, in the 'walking tank' family.
 /mob/living/simple_mob/animal/giant_spider
 	name = "giant spider"
 	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
-	tt_desc = "Atrax robustus gigantus"
+	tt_desc = "X Atrax robustus gigantus"
+	catalogue_data = list(
+		/datum/category_item/catalogue/fauna/giant_spiders,
+		/datum/category_item/catalogue/fauna/guard_spider
+		)
+	catalogue_delay = 10 SECONDS
+
 	icon_state = "guard"
 	icon_living = "guard"
 	icon_dead = "guard_dead"
@@ -61,4 +97,3 @@
 	if(prob(poison_chance))
 		to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
 		L.reagents.add_reagent(poison_type, poison_per_bite)
-

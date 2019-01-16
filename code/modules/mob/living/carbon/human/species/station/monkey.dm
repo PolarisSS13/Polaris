@@ -68,6 +68,7 @@
 /datum/species/monkey/tajaran
 	name = SPECIES_MONKEY_TAJ
 	name_plural = "Farwa"
+	catalogue_value = 10
 
 	icobase = 'icons/mob/human_races/monkeys/r_farwa.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_farwa.dmi'
@@ -81,6 +82,7 @@
 /datum/species/monkey/skrell
 	name = SPECIES_MONKEY_SKRELL
 	name_plural = "Neaera"
+	catalogue_value = 10
 
 	icobase = 'icons/mob/human_races/monkeys/r_neaera.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_neaera.dmi'
@@ -95,6 +97,7 @@
 /datum/species/monkey/unathi
 	name = SPECIES_MONKEY_UNATHI
 	name_plural = "Stok"
+	catalogue_value = 10
 
 	icobase = 'icons/mob/human_races/monkeys/r_stok.dmi'
 	deform = 'icons/mob/human_races/monkeys/r_stok.dmi'

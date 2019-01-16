@@ -2,10 +2,21 @@
 // They cooperate with other diyaabs, in order to swarm whoever decides to pick on the little fluffy critter.
 // A cleaving weapon like an axe will make short work of the pack.
 
+/datum/category_item/catalogue/fauna/diyaab
+	name = "Diyaab (S Choeros hirtus)"
+	desc = "Small, social omnivores with dense seasonal wool fur valued by Sivian colonists for its cold resistance and softness. \
+	The Diyaab lives in packs of anywhere from three to ten individuals, usually comprised of a family unit. Primarily herbivorous browsers, \
+	supplementing their diet with organisms living in tree bark, \
+	Diyaab packs have been observed to hunt prey several times their size during the less plentiful winter months. \
+	Despite their unassuming appearance, the Diyaab possesses remarkably sharp anterior teeth."
+	value = 20
+
 /mob/living/simple_mob/animal/sif/diyaab
 	name = "diyaab"
 	desc = "A small pack animal. Although omnivorous, it will hunt meat on occasion."
 	tt_desc = "S Choeros hirtus" //diyaab and shantak are technically reletives!
+	catalogue_data = list(/datum/category_item/catalogue/fauna/diyaab)
+	catalogue_delay = 5 SECONDS
 
 	faction = "diyaab"
 
