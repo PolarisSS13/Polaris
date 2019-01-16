@@ -40,7 +40,6 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	var/tab = 4 // Info tab, so new players can read it before doing anything.
 	var/spell_tab = ALL_SPELLS
 	var/show_scepter_text = 0
-	var/refund_z = 8
 
 /obj/item/weapon/technomancer_catalog/apprentice
 	name = "apprentice's catalog"
@@ -332,7 +331,8 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 
 
 		if(href_list["refund_functions"])
-			if(H.z != refund_z)
+			var/turf/T = get_turf(H)
+			if(T.z in using_map.player_levels)
 				H << "<span class='danger'>You can only refund at your base, it's too late now!</span>"
 				return
 			var/obj/item/weapon/technomancer_core/core = null
@@ -348,7 +348,8 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 		attack_self(H)
 
 /obj/item/weapon/technomancer_catalog/attackby(var/atom/movable/AM, var/mob/user)
-	if(user.z != refund_z)
+	var/turf/T = get_turf(user)
+	if(T.z in using_map.player_levels)
 		to_chat(user, "<span class='danger'>You can only refund at your base, it's too late now!</span>")
 		return
 	for(var/datum/technomancer/equipment/E in equipment_instances + assistance_instances)
