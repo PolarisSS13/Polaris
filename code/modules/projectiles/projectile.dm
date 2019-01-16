@@ -309,8 +309,7 @@
 	fired = TRUE
 	if(hitscan)
 		process_hitscan()
-	if(!is_processing)
-		START_PROCESSING(SSprojectiles, src)
+	START_PROCESSING(SSprojectiles, src)
 	pixel_move(1, FALSE)	//move it now!
 
 /obj/item/projectile/proc/after_z_change(atom/olcloc, atom/newloc)
@@ -412,7 +411,7 @@
 
 /obj/item/projectile/proc/vol_by_damage()
 	if(damage)
-		return Clamp((damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
+		return CLAMP((damage) * 0.67, 30, 100)// Multiply projectile damage by 0.67, then CLAMP the value between 30 and 100
 	else
 		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume.
 
