@@ -19,6 +19,8 @@
 		updateUsrDialog()
 	if(!debug_mode)
 		compiled_chords = null
+	terminate_sound_all()
+	SSsounds.release_channel_datum(src)
 
 /datum/song/proc/compile_lines()
 	compiled_chords = list()
@@ -82,66 +84,63 @@
 	octave = octave || octaves[cur_note]
 	return ((octave * 12) + (accent_lookup[accent]) + (note_offset_lookup[cur_note]))
 
-/datum/song/proc/playkey_synth(key, duration, atom/where = parent)
+/datum/song/proc/playkey_synth(key)
 	var/datum/sample_pair/S = using_instrument.samples["[key]"]			//See how fucking easy it is to make a number text? You don't need a complicated 9 line proc!
-	events += new /datum/musical
 	//Should probably add channel limiters here at some point but I don't care right now.
-
-
-
-
-
-
-
-
-/datum/synthesized_song/proc/play(what, duration, frequency, which, where, which_one)
-	if(available_channels <= 0) //Ignore requests for new channels if we go over limit
+	var/channel = key_channel_reserve(key)
+	if(!channel)
 		return
-	available_channels -= 1
-	src.sound_id = "[type]_[sequential_id(type)]"
+	keys_playing["[key]"] = volume
+	for(var/i in hearing_mobs)
+		var/mob/M = i
+		M.playsound_local(get_turf(parent), S.sample, volume, FALSE, S.frequency, 0, FALSE, channel)			WIP_TAG - ENVIRONMENT AND ECHO
 
+/datum/song/proc/terminate_sound_all(clear_channels = TRUE)
+	for(var/i in hearing_mobs)
+		terminate_sound_mob(i)
+	if(clear_channels)
+		SSsounds.release_channel_datum(src)
+		channels_reserved.Cut()
+		keys_playing.Cut()
 
-	var/sound/sound_copy = sound(what)
-	sound_copy.wait = 0
-	sound_copy.repeat = 0
-	sound_copy.frequency = frequency
+/datum/song/proc/terminate_sound_mob(var/mob/M)
+	for(var/i in channels_reserved)
+		var/channel = channels_reserved[i]
+		M.stop_sound_channel(channel)
 
-	player.apply_modifications(sound_copy, which, where, which_one)
-	//Environment, anything other than -1 means override
-	var/use_env = 0
+/datum/song/proc/key_channel_lookup(key)
+	return channels_reserved["[key]"]
 
-	if(isnum(sound_copy.environment) && sound_copy.environment <= -1)
-		sound_copy.environment = 0 // set it to 0 and just not set use env
-	else
-		use_env = 1
+/datum/song/proc/key_channel_reserve(key)
+	if(channels_reserved["[key]"])
+		return channels_reserved["[key]"]
+	var/channel = SSsound.reserve_sound_channel(src)
+	if(channel)
+		channels_reserved["[key]"] = channel
+	return channel
 
-	var/current_volume = Clamp(sound_copy.volume, 0, 100)
-	sound_copy.volume = current_volume //Sanitize volume
-	var/datum/sound_token/token = new /datum/sound_token/instrument(src.player.actual_instrument, src.sound_id, sound_copy, src.player.range, FALSE, use_env, player)
-	#if DM_VERSION < 511
-	sound_copy.frequency = 1
-	#endif
-	var/delta_volume = player.volume / src.sustain_timer
-
-	var/tick = duration
-	while ((current_volume > 0) && token)
-		var/new_volume = current_volume
-		tick += world.tick_lag
-		if (delta_volume <= 0)
-			CRASH("Delta Volume somehow was non-positive: [delta_volume]")
-		if (src.soft_coeff <= 1)
-			CRASH("Soft Coeff somehow was <=1: [src.soft_coeff]")
-		if (src.linear_decay)
-			new_volume = new_volume - delta_volume
-		else
-			new_volume = new_volume / src.soft_coeff
-
-		var/sanitized_volume = max(round(new_volume), 0)
-		if (sanitized_volume == current_volume)
-			current_volume = new_volume
+/datum/song/proc/process_decay(wait_ds)
+	var/linear_delta = (volume / sustain_linear) * wait_ds
+	var/exponential_multiplier = sustain_exponential ** wait_ds
+	for(var/key in keys_playing)
+		var/amount_left = keys_playing[key]
+		switch(sustain_mode)
+			if(SUSTAIN_LINEAR)
+				amount_left -= linear_delta
+			if(SUSTAIN_EXPONENTIAL)
+				amount_left /= exponential_multiplier
+		keys_playing[key] = amount_left
+		var/dead = amount_left <= SUSTAIN_DROP
+		if(dead)
+			keys_playing -= key
+		var/channel = key_channel_lookup(key)
+		if(!channel)
 			continue
-		current_volume = sanitized_volume
-		src.player.event_manager.push_event(src.player, token, tick, current_volume)
-		if (current_volume <= 0)
-			break
-
+		if(dead)
+			for(var/i in hearing_mobs)
+				var/mob/M = i
+				M.stop_sound_channel(channel)
+		else
+			for(var/i in hearing_mobs)
+				var/mob/M = i
+				M.set_sound_channel_volume(channel, amount_left)
