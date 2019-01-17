@@ -84,28 +84,14 @@
 
 /datum/song/proc/playkey_synth(key, duration, atom/where = parent)
 	var/datum/sample_pair/S = using_instrument.samples["[key]"]			//See how fucking easy it is to make a number text? You don't need a complicated 9 line proc!
-
+	events += new /datum/musical
 	//Should probably add channel limiters here at some point but I don't care right now.
 
 
-/datum/synthesized_song/proc/play_synthesized_note(note, acc, oct, duration, where, which_one)
-	if (oct < GLOB.musical_config.lowest_octave || oct > GLOB.musical_config.highest_octave)	return
-	if (oct < src.octave_range_min || oct > src.octave_range_max)	return
 
-	var/delta1 = acc == "b" ? -1 : acc == "#" ? 1 : acc == "s" ? 1 : acc == "n" ? 0 : 0
-	var/delta2 = 12 * oct
 
-	var/note_num = delta1+delta2+GLOB.musical_config.nn2no[note]
-	if (note_num < 0 || note_num > 127)
-		CRASH("play_synthesized note failed because of 0..127 condition, [note], [acc], [oct]")
-		return
 
-	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
-	#define Q 0.083 // 1/12
-	var/freq = 2**(Q*pair.deviation)
-	#undef Q
 
-	src.play(pair.sample, duration, freq, note_num, where, which_one)
 
 
 /datum/synthesized_song/proc/play(what, duration, frequency, which, where, which_one)

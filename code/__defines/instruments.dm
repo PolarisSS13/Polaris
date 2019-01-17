@@ -1,7 +1,3 @@
-GLOBAL_VAR_INIT(musician_maxlines, 600)
-GLOBAL_VAR_INIT(musician_maxlinechars, 100)
-GLOBAL_VAR_INIT(musician_hearcheck_mindelay, 5)
-
 #define INSTRUMENT_MIN_OCTAVE 1
 #define INSTRUMENT_MAX_OCTAVE 9
 

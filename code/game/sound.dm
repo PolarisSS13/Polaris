@@ -35,7 +35,7 @@
 		S = sound(get_sfx(soundin))
 
 	S.wait = 0 //No queue
-	S.channel = channel || open_sound_channel()
+	S.channel = channel || SSsounds.get_available_channel()
 	S.volume = vol
 
 	if(vary)
@@ -46,7 +46,6 @@
 
 	if(isturf(turf_source))
 		var/turf/T = get_turf(src)
-
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -95,12 +94,6 @@
 		if(ismob(M) && !isnewplayer(M))
 			var/mob/MO = M
 			MO.playsound_local(get_turf(MO), sound, volume, vary, pressure_affected = FALSE)
-
-/proc/open_sound_channel()
-	var/static/next_channel = 1	//loop through the available 1024 - (the ones we reserve) channels and pray that its not still being used
-	. = ++next_channel
-	if(next_channel > CHANNEL_HIGHEST_AVAILABLE)
-		next_channel = 1
 
 /mob/proc/stop_sound_channel(chan)
 	src << sound(null, repeat = 0, wait = 0, channel = chan)

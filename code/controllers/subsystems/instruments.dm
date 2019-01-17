@@ -5,8 +5,9 @@ SUBSYSTEM_DEF(SSinstruments)
 	flags = SS_NO_TICK_CHECK
 	var/static/list/datum/instrument/instrument_data = list()		//id = datum
 	var/static/list/datum/song/songs = list()
-
-
+	var/static/musician_maxlines = 600
+	var/static/musician_maxlinechars = 200
+	var/static/musician_hearcheck_mindelay = 5
 
 /datum/controller/subsystem/instruments/Initialize()
 	initialize_instrument_data()

@@ -10,8 +10,6 @@ GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 	var/steepest_drop = 10.0
 
 	var/channels_per_instrument = 128
-	var/max_lines = 1000
-	var/max_line_length = 50
 	var/max_events = 2400
 	var/song_editor_lines_per_page = 20
 

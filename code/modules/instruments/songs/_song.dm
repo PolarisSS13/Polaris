@@ -3,24 +3,22 @@
 
 	var/debug_mode = FALSE
 
+	var/interface_help = FALSE		//help is open
+	var/interface_edit = TRUE		//editing mode
 	var/list/lines = list()
-	var/list/compiled_chords 	//non assoc list of lists : index = list(key1, key2, key3... , tempo_divisor). tempo divisor always exists, key1 doesn't have to if it's a rest.
-
+	var/volume = 100
+	var/octave_shift = 0
 	var/tempo_ds = 5			//delay between notes in deciseconds
 	var/repeat_current = 0		//current repeats left
-	var/max_repeats = 10		//max repeats
-
-	var/octave_min = INSTRUMENTS_MIN_OCTAVE
-	var/octave_max = INSTRUMENTS_MAX_OCTAVE
-
 	var/playing = FALSE			//whether we should be playing. Setting this to FALSE will halt the playing proc ASAP.
-	var/now_playing = FALSE		//Whether we actually are playing.
-
-	var/list/allowed_instrument_ids = list("r3grand")		//Ones the built in switcher is allowed to use.
-	var/datum/instrument/using_instrument
-	var/legacy_mode = FALSE
 
 	var/obj/parent			//The object in the world we're attached to. Can theoretically support datums in the future, but this should probably stay as an atom at the least.
+
+	var/max_repeats = 10		//max repeats
+	var/list/allowed_instrument_ids = list("r3grand")		//Ones the built in switcher is allowed to use.
+	var/datum/instrument/using_instrument
+
+	var/now_playing = FALSE		//Whether we actually are playing.
 	var/last_hearcheck = 0		//last world.time we checked for hearing mobs.
 	var/list/hearing_mobs		//list of mobs that can hear us
 
@@ -28,14 +26,16 @@
 	var/cached_legacy_ext
 	var/cached_legacy_dir
 	var/list/cached_samples
+	var/legacy_mode = FALSE
+	var/list/compiled_chords 	//non assoc list of lists : index = list(key1, key2, key3... , tempo_divisor). tempo divisor always exists, key1 doesn't have to if it's a rest.
 	////////////////////////
 
-	var/interface_help = FALSE		//help is open
-	var/interface_edit = TRUE		//editing mode
-
-	///////////////////////
+	//Don't touch this.
+	var/octave_min = INSTRUMENTS_MIN_OCTAVE
+	var/octave_max = INSTRUMENTS_MAX_OCTAVE
 	var/static/list/note_offset_lookup = list(9, 11, 0, 2, 4, 5, 7)
 	var/static/list/accent_lookup = list("b" = -1, "s" = 1, "#" = 1, "n" = 0)
+	///////////////////////
 
 /datum/song/New(datum/instrument/instrument_or_id)
 	SSinstruments.on_song_new(src)
