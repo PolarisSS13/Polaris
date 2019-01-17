@@ -39,7 +39,7 @@ var/list/organ_cache = list()
 
 /obj/item/organ/Destroy()
 
-	handle_organ_mod_special(1)
+	handle_organ_mod_special(TRUE)
 	if(owner)           owner = null
 	if(transplant_data) transplant_data.Cut()
 	if(autopsy_data)    autopsy_data.Cut()
@@ -97,7 +97,7 @@ var/list/organ_cache = list()
 		status |= ORGAN_DEAD
 	damage = max_damage
 	STOP_PROCESSING(SSobj, src)
-	handle_organ_mod_special(1)
+	handle_organ_mod_special(TRUE)
 	if(owner && vital)
 		owner.death()
 		owner.can_defib = 0
@@ -346,7 +346,7 @@ var/list/organ_cache = list()
 		owner.death()
 		owner.can_defib = 0
 
-	handle_organ_mod_special(1)
+	handle_organ_mod_special(TRUE)
 
 	owner = null
 
@@ -416,9 +416,22 @@ var/list/organ_cache = list()
 		return 0
 	return 1
 
-/obj/item/organ/proc/handle_organ_mod_special(var/removed = 0)	// Called when created, transplanted, and removed.
+/obj/item/organ/proc/handle_organ_mod_special(var/removed = FALSE)	// Called when created, transplanted, and removed.
 	if(!istype(owner))
 		return
+
+	var/list/save_verbs = list()
+
+	if(removed && organ_verbs)	// Do we share verbs with any other organs? Are they functioning?
+		var/list/all_organs = list()
+		all_organs |= owner.organs
+		all_organs |= owner.internal_organs
+
+		for(var/obj/item/organ/O in all_organs)
+			if(O.status & ORGAN_DEAD && O.organ_verbs)
+				for(var/verb_type in O.organ_verbs)
+					if(verb_type in organ_verbs)
+						save_verbs |= verb_type
 
 	if(!removed && organ_verbs)
 		for(var/verb_path in organ_verbs)

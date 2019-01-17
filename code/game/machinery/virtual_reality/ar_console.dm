@@ -11,7 +11,6 @@
 	base_state = "alienpod_"
 
 	eject_dead = FALSE
-	var/mirror_first_occupant = TRUE	// Do we force the newly produced body to look like the occupant?
 
 	var/produce_species = SPECIES_REPLICANT	// The default species produced. Will be overridden if randomize_species is true.
 	var/randomize_species = FALSE
@@ -46,15 +45,15 @@
 	if(usr.incapacitated())
 		return
 
-	var/forced
+	var/forced = FALSE
 
 	if(stat & (BROKEN) || (eject_dead && occupant && occupant.stat == DEAD))
-		forced = 1
+		forced = TRUE
 
 	go_out(forced)
 	add_fingerprint(usr)
 
-/obj/machinery/vr_sleeper/alien/go_out(var/forced = 1)
+/obj/machinery/vr_sleeper/alien/go_out(var/forced = TRUE)
 	if(!occupant)
 		return
 

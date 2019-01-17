@@ -16,6 +16,8 @@
 
 	var/eject_dead = TRUE
 
+	var/mirror_first_occupant = TRUE	// Do we force the newly produced body to look like the occupant?
+
 	use_power = 1
 	idle_power_usage = 15
 	active_power_usage = 200
@@ -106,7 +108,7 @@
 	if(occupant)
 		// This will eject the user from VR
 		// ### Fry the brain? Yes. Maybe.
-		if(prob(severity * 15) && occupant.species.has_organ[O_BRAIN] && occupant.internal_organs_by_name[O_BRAIN])
+		if(prob(15 / ( severity / 4 )) && occupant.species.has_organ[O_BRAIN] && occupant.internal_organs_by_name[O_BRAIN])
 			var/obj/item/organ/O = occupant.internal_organs_by_name[O_BRAIN]
 			O.take_damage(severity * 2)
 			visible_message("<span class='danger'>\The [src]'s internal lighting flashes rapidly, before the hatch swings open with a cloud of smoke.</span>")
@@ -124,10 +126,10 @@
 	if(usr.incapacitated())
 		return
 
-	var/forced
+	var/forced = FALSE
 
 	if(stat & (BROKEN|NOPOWER) || occupant && occupant.stat == DEAD)
-		forced = 1
+		forced = TRUE
 
 	go_out(forced)
 	add_fingerprint(usr)
@@ -180,7 +182,7 @@
 		enter_vr()
 	return
 
-/obj/machinery/vr_sleeper/proc/go_out(var/forced = 1)
+/obj/machinery/vr_sleeper/proc/go_out(var/forced = TRUE)
 	if(!occupant)
 		return
 
@@ -243,7 +245,7 @@
 
 		avatar = new(S, "Virtual Reality Avatar")
 		// If the user has a non-default (Human) bodyshape, make it match theirs.
-		if(occupant.species.name != "Promethean" && occupant.species.name != "Human")
+		if(occupant.species.name != "Promethean" && occupant.species.name != "Human" && mirror_first_occupant)
 			avatar.shapeshifter_change_shape(occupant.species.name)
 		avatar.forceMove(get_turf(S))			// Put the mob on the landmark, instead of inside it
 		avatar.Sleeping(1)
