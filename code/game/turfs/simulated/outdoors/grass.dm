@@ -38,7 +38,7 @@ var/list/grass_types = list(
 	catalogue_delay = 2 SECONDS
 
 /turf/simulated/floor/outdoors/grass/sif/Initialize()
-	if(tree_chance && prob(tree_chance))
+	if(tree_chance && prob(tree_chance) && !check_density())
 		new /obj/structure/flora/tree/sif(src)
 	. = ..()
 
@@ -47,7 +47,7 @@ var/list/grass_types = list(
 		icon_state = "[initial(icon_state)]2"
 		//edge_blending_priority++
 
-	if(grass_chance && prob(grass_chance))
+	if(grass_chance && prob(grass_chance) && !check_density())
 		var/grass_type = pick(grass_types)
 		new grass_type(src)
 	. = ..()

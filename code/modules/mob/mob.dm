@@ -1,4 +1,4 @@
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+/mob/Destroy()//This makes sure that mobs withGLOB.clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
@@ -687,6 +687,10 @@
 				stat("World Time:", world.time)
 				stat("Real time of day:", REALTIMEOFDAY)
 				stat(null)
+				if(GLOB)
+					GLOB.stat_entry()
+				else
+					stat("Globals:", "ERROR")
 				if(Master)
 					Master.stat_entry()
 				else
@@ -702,6 +706,13 @@
 
 			if(statpanel("Tickets"))
 				GLOB.ahelp_tickets.stat_entry()
+
+			if(length(GLOB.sdql2_queries))
+				if(statpanel("SDQL2"))
+					stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)
+					for(var/i in GLOB.sdql2_queries)
+						var/datum/SDQL2_query/Q = i
+						Q.generate_stat()
 
 		if(listed_turf && client)
 			if(!TurfAdjacent(listed_turf))
@@ -878,10 +889,10 @@
 	return
 
 /mob/proc/AdjustLosebreath(amount)
-	losebreath = Clamp(0, losebreath + amount, 25)
+	losebreath = CLAMP(0, losebreath + amount, 25)
 
 /mob/proc/SetLosebreath(amount)
-	losebreath = Clamp(0, amount, 25)
+	losebreath = CLAMP(0, amount, 25)
 
 /mob/proc/get_species()
 	return ""

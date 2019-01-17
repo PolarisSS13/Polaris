@@ -61,7 +61,7 @@ SUBSYSTEM_DEF(vote)
 			greatest_votes = votes
 
 	if(!config.vote_no_default && choices.len) // Default-vote for everyone who didn't vote
-		var/non_voters = (clients.len - total_votes)
+		var/non_voters = (GLOB.clients.len - total_votes)
 		if(non_voters > 0)
 			if(mode == VOTE_RESTART)
 				choices["Continue Playing"] += non_voters

@@ -249,7 +249,7 @@
 		if (!wzhzhzh(10))
 			abort()
 			return
-		stop()
+		abort()
 		return
 
 	var/datum/recipe/recipe = select_recipe(available_recipes,src)
@@ -278,7 +278,7 @@
 			if (!wzhzhzh(10))
 				abort()
 				return
-			stop()
+			abort()
 			cooked = fail()
 			cooked.loc = src.loc
 			return
@@ -293,7 +293,7 @@
 			cooked.loc = src.loc
 			return
 		cooked = recipe.make_food(src)
-		stop()
+		abort()
 		if(cooked)
 			cooked.loc = src.loc
 		return
@@ -328,9 +328,6 @@
 	updateUsrDialog()
 	soundloop.stop()
 
-/obj/machinery/microwave/proc/stop()
-	abort()
-
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in ((contents-component_parts)-circuit))
 		O.loc = src.loc
@@ -345,13 +342,14 @@
 	src.icon_state = "mwbloody1" // Make it look dirty!!
 
 /obj/machinery/microwave/proc/muck_finish()
-	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	src.visible_message("<span class='warning'>The microwave gets covered in muck!</span>")
 	src.dirty = 100 // Make it dirty so it can't be used util cleaned
 	src.flags = null //So you can't add condiments
 	src.icon_state = "mwbloody" // Make it look dirty too
 	src.operating = 0 // Turn it off again aferwards
 	src.updateUsrDialog()
+	soundloop.stop()
+
 
 /obj/machinery/microwave/proc/broke()
 	var/datum/effect/effect/system/spark_spread/s = new
@@ -363,6 +361,7 @@
 	src.flags = null //So you can't add condiments
 	src.operating = 0 // Turn it off again aferwards
 	src.updateUsrDialog()
+	soundloop.stop()
 
 /obj/machinery/microwave/proc/fail()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
