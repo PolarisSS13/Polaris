@@ -278,3 +278,54 @@
 
 
 
+
+/obj/item/device/synthesized_instrument/guitar
+	name = "guitar"
+	desc = "A wooden musical instrument with six strings. This one looks like it may actually work."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "guitar"
+	sound_player = /datum/sound_player/synthesizer
+	path = /datum/instrument/guitar/clean_crisis
+
+
+/obj/item/device/synthesized_instrument/guitar/multi
+	name = "Polyguitar"
+	desc = "An instrument for a more ass-kicking era."
+	icon = 'icons/obj/musician.dmi'
+	icon_state = "eguitar"
+	sound_player = /datum/sound_player/synthesizer
+	path = /datum/instrument/guitar
+
+//in-hand version
+/obj/item/device/synthesized_instrument/synthesizer
+	name = "Synthesizer Mini"
+	desc = "The power of an entire orchestra in a handy midi keyboard format."
+	icon_state = "h_synthesizer"
+	path = /datum/instrument
+	sound_player = /datum/sound_player/synthesizer
+
+/obj/item/device/synthesized_instrument/trumpet
+	name = "Omnitrumpet"
+	desc = "The Omnitrumptet series 400 with more than 30 sound samples and fully customizable high fidelity output provides the ultimate means to toot your own horn"
+	icon_state = "trumpet"
+	sound_player = /datum/sound_player/synthesizer
+	path = /datum/instrument/brass
+
+
+
+
+
+
+	/datum/sound_player/violin
+	volume = 25
+	range = 10 //Kinda don't want this horrible thing to be heard from far away
+
+/obj/item/device/synthesized_instrument/violin
+	name = "violin"
+	desc = "A wooden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\"."
+	icon_state = "violin"
+	sound_player = /datum/sound_player/violin
+	path = /datum/instrument/obsolete/violin
+
+/obj/structure/synthesized_instrument/synthesizer/shouldStopPlaying(mob/user)
+	return !(src && in_range(src, user))
