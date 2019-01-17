@@ -343,8 +343,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		return
 
 	var/msg = "<font color='red' size='4'><b>- AdminHelp marked as IC issue! -</b></font><br>"
-	msg += "<font color='red'><b>Losing is part of the game!</b></font><br>"
-	msg += "<font color='red'>Your AdminHelp may also be unabled to be answered due to ongoing events.</font>"
+	msg += "<font color='red'><b>This is something that can be solved ICly, and does not currently require staff intervention.</b></font><br>"
+	msg += "<font color='red'>Your AdminHelp may also be unanswerable due to ongoing events.</font>"
 
 	if(initiator)
 		to_chat(initiator, msg)
