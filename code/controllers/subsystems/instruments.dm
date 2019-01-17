@@ -6,9 +6,6 @@ SUBSYSTEM_DEF(SSinstruments)
 	var/static/list/datum/instrument/instrument_data = list()		//id = datum
 	var/static/list/datum/song/songs = list()
 
-	var/highest_octave = 9
-	var/lowest_octave = 0
-
 
 
 /datum/controller/subsystem/instruments/Initialize()

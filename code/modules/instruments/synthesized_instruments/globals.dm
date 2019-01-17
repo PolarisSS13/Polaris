@@ -195,7 +195,6 @@ Bit flags that modify the behavior of above properties
 			•4 - Automatic setting of 'RoomHF' due to distance from listener"})
 
 	var/list/n2t_int = list() // Instead of num2text it is used for faster access in n2t
-	var/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
 
 /datum/musical_config/proc/environment_to_id(environment)
 	if (environment in src.all_environments)
