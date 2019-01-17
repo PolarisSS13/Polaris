@@ -5,7 +5,6 @@ GLOBAL_DATUM_INIT(musical_config, /datum/musical_config, new)
 	var/highest_transposition = 4
 	var/lowest_transposition = -4
 
-	var/longest_sustain_timer = 50
 	var/gentlest_drop = 1.07
 	var/steepest_drop = 10.0
 
