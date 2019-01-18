@@ -1,3 +1,17 @@
+/proc/path_to_instrument_ids(path)
+	if(!ispath(path))
+		path = text2path(path)
+		if(!ispath(path))
+			return
+	if(!ispath(path, /datum/instrument))
+		return
+	. = list()
+	for(var/i in typesof(path))
+		var/datum/instrument/I = i
+		var/init_id = initial(I.id)
+		if(init_id)
+			. |= init_id
+
 /datum/instrument
 	var/name = "Generic instrument" 		// Name of the instrument
 	var/id			 						// Used everywhere to distinguish between categories and actual data and to identify instruments

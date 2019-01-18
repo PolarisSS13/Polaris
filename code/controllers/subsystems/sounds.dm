@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(sounds)
 	sound_channels -= channel
 	if(sound_channels_by_datum[using])
 		sound_channels_by_datum[using] -= channel
-		if(!length(sound_channels_by_datum[using])
+		if(!length(sound_channels_by_datum[using]))
 			sound_channels_by_datum -= using
 	channel_stack.Push(channel)
 

@@ -42,7 +42,8 @@
 	var/static/list/accent_lookup = list("b" = -1, "s" = 1, "#" = 1, "n" = 0)
 	///////////////////////
 
-/datum/song/New(datum/instrument/instrument_or_id)
+/datum/song/New(atom/parent, datum/instrument/instrument_or_id)
+	src.parent = parent
 	SSinstruments.on_song_new(src)
 	set_instrument(instrument_or_id || ((islist(allowed_instrument_ids) && length(allowed_instrument_ids))? allowed_instrument_ids[1] : allowed_instrument_ids))
 	channels_reserved = list()

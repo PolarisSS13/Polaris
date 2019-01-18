@@ -753,3 +753,8 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/i = 1 to l.len)
 		if(islist(.[i]))
 			.[i] = .(.[i])
+
+/proc/strip_assoc_list(list/L)
+	. = list()
+	for(var/i in L)
+		. += i

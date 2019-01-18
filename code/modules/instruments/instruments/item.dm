@@ -8,12 +8,13 @@
 	lefthand_file = 'icons/mob/inhands/equipment/instruments_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/instruments_righthand.dmi'
 	var/datum/song/handheld/song
-	var/instrumentId = "generic"
-	var/instrumentExt = "mid"
+	var/list/allowed_instrument_ids
 
 /obj/item/instrument/Initialize()
 	. = ..()
-	song = new(instrumentId, src, instrumentExt)
+	var/instrument_path = length(allowed_instruments)? allowed_instruments[1] : null
+	song = new(src, instrument_path)
+	song.allowed_instruments = islist(allowed_instrument_ids)? allowed_instrument_ids : list(allowed_instrument_ids)
 
 /obj/item/instrument/Destroy()
 	QDEL_NULL(song)
@@ -50,38 +51,33 @@
 	icon_state = "violin"
 	item_state = "violin"
 	hitsound = "swing_hit"
-	instrumentId = "violin"
+	allowed_instrument_ids = "violin"
 
 /obj/item/instrument/violin/golden
 	name = "golden violin"
 	desc = "A golden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\""
 	icon_state = "golden_violin"
 	item_state = "golden_violin"
-	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
 /obj/item/instrument/piano_synth
 	name = "synthesizer"
 	desc = "An advanced electronic synthesizer that can be used as various instruments."
 	icon_state = "synth"
 	item_state = "synth"
-	instrumentId = "piano"
-	instrumentExt = "ogg"
-	var/static/list/insTypes = list("accordion" = "mid", "bikehorn" = "ogg", "glockenspiel" = "mid", "guitar" = "ogg", "harmonica" = "mid", "piano" = "ogg", "recorder" = "mid", "saxophone" = "mid", "trombone" = "mid", "violin" = "mid", "xylophone" = "mid")	//No eguitar you ear-rapey fuckers.
-	actions_types = list(/datum/action/item_action/synthswitch)
+	allowed_instrument_ids = "piano"
 
-/obj/item/instrument/piano_synth/proc/changeInstrument(name = "piano")
-	song.instrumentDir = name
-	song.instrumentExt = insTypes[name]
+/obj/item/instrument/piano_synth/Initialize()
+	. = ..()
+	song.allowed_instrument_ids = strip_assoc_list(SSinstruments.instrument_data)
 
 /obj/item/instrument/guitar
 	name = "guitar"
 	desc = "It's made of wood and has bronze strings."
 	icon_state = "guitar"
 	item_state = "guitar"
-	instrumentExt = "ogg"
 	attack_verb = list("played metal on", "serenaded", "crashed", "smashed")
 	hitsound = 'sound/weapons/stringsmash.ogg'
-	instrumentId = "guitar"
+	allowed_instrument_ids = "guitar"
 
 /obj/item/instrument/eguitar
 	name = "electric guitar"
@@ -91,29 +87,28 @@
 	force = 12
 	attack_verb = list("played metal on", "shredded", "crashed", "smashed")
 	hitsound = 'sound/weapons/stringsmash.ogg'
-	instrumentId = "eguitar"
-	instrumentExt = "ogg"
+	allowed_instrument_ids = "eguitar"
 
 /obj/item/instrument/glockenspiel
 	name = "glockenspiel"
 	desc = "Smooth metal bars perfect for any marching band."
 	icon_state = "glockenspiel"
 	item_state = "glockenspiel"
-	instrumentId = "glockenspiel"
+	allowed_instrument_ids = "glockenspiel"
 
 /obj/item/instrument/accordion
 	name = "accordion"
 	desc = "Pun-Pun not included."
 	icon_state = "accordion"
 	item_state = "accordion"
-	instrumentId = "accordion"
+	allowed_instrument_ids = "accordion"
 
 /obj/item/instrument/trumpet
 	name = "trumpet"
 	desc = "To announce the arrival of the king!"
 	icon_state = "trumpet"
 	item_state = "trombone"
-	instrumentId = "trombone"
+	allowed_instrument_ids = "trombone"
 
 /obj/item/instrument/trumpet/spectral
 	name = "spectral trumpet"
@@ -121,12 +116,7 @@
 	icon_state = "trumpet"
 	item_state = "trombone"
 	force = 0
-	instrumentId = "trombone"
 	attack_verb = list("played","jazzed","trumpeted","mourned","dooted","spooked")
-
-/obj/item/instrument/trumpet/spectral/Initialize()
-	. = ..()
-	AddComponent(/datum/component/spooky)
 
 /obj/item/instrument/trumpet/spectral/attack(mob/living/carbon/C, mob/user)
 	playsound (loc, 'sound/instruments/trombone/En4.mid', 100,1,-1)
@@ -137,14 +127,13 @@
 	desc = "This soothing sound will be sure to leave your audience in tears."
 	icon_state = "saxophone"
 	item_state = "saxophone"
-	instrumentId = "saxophone"
+	allowed_instrument_ids = "saxophone"
 
 /obj/item/instrument/saxophone/spectral
 	name = "spectral saxophone"
 	desc = "This spooky sound will be sure to leave mortals in bones."
 	icon_state = "saxophone"
 	item_state = "saxophone"
-	instrumentId = "saxophone"
 	force = 0
 	attack_verb = list("played","jazzed","saxxed","mourned","dooted","spooked")
 
@@ -161,20 +150,15 @@
 	desc = "How can any pool table ever hope to compete?"
 	icon_state = "trombone"
 	item_state = "trombone"
-	instrumentId = "trombone"
+	allowed_instrument_ids = "trombone"
 
 /obj/item/instrument/trombone/spectral
 	name = "spectral trombone"
 	desc = "A skeleton's favorite instrument. Apply directly on the mortals."
-	instrumentId = "trombone"
 	icon_state = "trombone"
 	item_state = "trombone"
 	force = 0
 	attack_verb = list("played","jazzed","tromboned","mourned","dooted","spooked")
-
-/obj/item/instrument/trombone/spectral/Initialize()
-	. = ..()
-	AddComponent(/datum/component/spooky)
 
 /obj/item/instrument/trombone/spectral/attack(mob/living/carbon/C, mob/user)
 	playsound (loc, 'sound/instruments/trombone/Cn4.mid', 100,1,-1)
@@ -186,24 +170,18 @@
 	force = 5
 	icon_state = "recorder"
 	item_state = "recorder"
-	instrumentId = "recorder"
+	allowed_instrument_ids = "recorder"
 
 /obj/item/instrument/harmonica
 	name = "harmonica"
 	desc = "For when you get a bad case of the space blues."
 	icon_state = "harmonica"
 	item_state = "harmonica"
-	instrumentId = "harmonica"
+	allowed_instrument_ids = "harmonica"
 	slot_flags = ITEM_SLOT_MASK
 	force = 5
 	w_class = WEIGHT_CLASS_SMALL
 	actions_types = list(/datum/action/item_action/instrument)
-
-/obj/item/instrument/harmonica/speechModification(message)
-	if(song.playing && ismob(loc))
-		to_chat(loc, "<span class='warning'>You stop playing the harmonica to talk...</span>")
-		song.playing = FALSE
-	return message
 
 /obj/item/instrument/bikehorn
 	name = "gilded bike horn"
@@ -213,119 +191,51 @@
 	lefthand_file = 'icons/mob/inhands/equipment/horns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/horns_righthand.dmi'
 	attack_verb = list("beautifully honks")
-	instrumentId = "bikehorn"
-	instrumentExt = "ogg"
+	allowed_instrument_ids = "bikehorn"
 	w_class = WEIGHT_CLASS_TINY
 	force = 0
 	throw_speed = 3
 	throw_range = 15
 	hitsound = 'sound/items/bikehorn.ogg'
 
-///
-
-/obj/item/choice_beacon/music
-	name = "instrument delivery beacon"
-	desc = "Summon your tool of art."
-	icon_state = "gangtool-red"
-
-/obj/item/choice_beacon/music/generate_display_names()
-	var/static/list/instruments
-	if(!instruments)
-		instruments = list()
-		var/list/templist = list(/obj/item/instrument/violin,
-							/obj/item/instrument/piano_synth,
-							/obj/item/instrument/guitar,
-							/obj/item/instrument/eguitar,
-							/obj/item/instrument/glockenspiel,
-							/obj/item/instrument/accordion,
-							/obj/item/instrument/trumpet,
-							/obj/item/instrument/saxophone,
-							/obj/item/instrument/trombone,
-							/obj/item/instrument/recorder,
-							/obj/item/instrument/harmonica
-							)
-		for(var/V in templist)
-			var/atom/A = V
-			instruments[initial(A.name)] = A
-	return instruments
-
-
-
-
-
-
-
-
-
 // subclass for handheld instruments, like violin
 /datum/song/handheld
 
 /datum/song/handheld/updateDialog(mob/user)
-	instrumentObj.interact(user)
+	parent.interact(user)
 
 /datum/song/handheld/shouldStopPlaying()
-	if(instrumentObj)
-		return !isliving(instrumentObj.loc)
+	if(parent)
+		return !isliving(parent.loc)
 	else
-		return 1
+		return TRUE
 
+/obj/item/instrument/synthesized
+	name = "synthesized instrument"
+	var/allowed_subtypes = /datum/instrument
 
-
-
-
-
-
-
-
-
-
-/obj/item/device/synthesized_instrument/guitar
+/obj/item/instrument/synthesized/guitar
 	name = "guitar"
 	desc = "A wooden musical instrument with six strings. This one looks like it may actually work."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "guitar"
-	sound_player = /datum/sound_player/synthesizer
-	path = /datum/instrument/guitar/clean_crisis
+	allowed_subtypes = /datum/instrument/guitar/clean_crisis
 
-
-/obj/item/device/synthesized_instrument/guitar/multi
+/obj/item/instrument/synthesized/guitar/multi
 	name = "Polyguitar"
 	desc = "An instrument for a more ass-kicking era."
 	icon = 'icons/obj/musician.dmi'
 	icon_state = "eguitar"
-	sound_player = /datum/sound_player/synthesizer
-	path = /datum/instrument/guitar
+	allowed_subtypes = /datum/instrument/guitar
 
 //in-hand version
-/obj/item/device/synthesized_instrument/synthesizer
+/obj/item/instrument/synthesized/synthesizer
 	name = "Synthesizer Mini"
 	desc = "The power of an entire orchestra in a handy midi keyboard format."
 	icon_state = "h_synthesizer"
-	path = /datum/instrument
-	sound_player = /datum/sound_player/synthesizer
 
-/obj/item/device/synthesized_instrument/trumpet
+/obj/item/instrument/synthesized/trumpet
 	name = "Omnitrumpet"
 	desc = "The Omnitrumptet series 400 with more than 30 sound samples and fully customizable high fidelity output provides the ultimate means to toot your own horn"
 	icon_state = "trumpet"
-	sound_player = /datum/sound_player/synthesizer
-	path = /datum/instrument/brass
-
-
-
-
-
-
-	/datum/sound_player/violin
-	volume = 25
-	range = 10 //Kinda don't want this horrible thing to be heard from far away
-
-/obj/item/device/synthesized_instrument/violin
-	name = "violin"
-	desc = "A wooden musical instrument with four strings and a bow. \"The devil went down to space, he was looking for an assistant to grief.\"."
-	icon_state = "violin"
-	sound_player = /datum/sound_player/violin
-	path = /datum/instrument/obsolete/violin
-
-/obj/structure/synthesized_instrument/synthesizer/shouldStopPlaying(mob/user)
-	return !(src && in_range(src, user))
+	allowed_subtypes = /datum/instrument/brass
