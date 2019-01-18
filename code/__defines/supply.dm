@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 // Supply shuttle status defines
 #define SUP_SHUTTLE_ERROR -1	// Error state
 #define SUP_SHUTTLE_DOCKED 0

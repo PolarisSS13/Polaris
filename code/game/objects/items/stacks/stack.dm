@@ -24,14 +24,13 @@
 	var/list/datum/matter_synth/synths = null
 	var/no_variants = TRUE // Determines whether the item should update it's sprites based on amount.
 
-/obj/item/stack/New(var/loc, var/amount=null)
-	..()
+/obj/item/stack/Initialize(mapload, amount)
+	. = ..()
 	if (!stacktype)
 		stacktype = type
 	if (amount)
 		src.amount = amount
 	update_icon()
-	return
 
 /obj/item/stack/Destroy()
 	if(uses_charge)

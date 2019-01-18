@@ -1,44 +1,24 @@
-/obj/item/weapon/spacecash
-	name = "0 Thaler"
-	desc = "It's worth 0 Thalers."
-	gender = PLURAL
+/obj/item/stack/cash
+	origin_tech = null
 	icon = 'icons/obj/items.dmi'
 	icon_state = "spacecash1"
-	opacity = 0
-	density = 0
-	anchored = 0.0
-	force = 1.0
-	throwforce = 1.0
+	force = 0
+	throwforce = 0
 	throw_speed = 1
 	throw_range = 2
 	w_class = ITEMSIZE_SMALL
-	var/access = list()
-	access = access_crate_cash
-	var/worth = 0
+	max_amount = 10000
+	stacktype = /obj/item/stack/cash
 
-/obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/spacecash))
-		if(istype(W, /obj/item/weapon/spacecash/ewallet)) return 0
-
-		var/obj/item/weapon/spacecash/SC = W
-
-		SC.adjust_worth(src.worth)
-		if(istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/h_user = user
-
-			h_user.drop_from_inventory(src)
-			h_user.drop_from_inventory(SC)
-			h_user.put_in_hands(SC)
-		user << "<span class='notice'>You combine the Thalers to a bundle of [SC.worth] Thalers.</span>"
-		qdel(src)
-
-/obj/item/weapon/spacecash/update_icon()
-	overlays.Cut()
-	name = "[worth] Thaler\s"
+/obj/item/stack/cash/update_icon()
+	cut_overlays()
+	name = "[amount] [amount > 1? GALACTIC_CURRENCY : GALACTIC_CURRENCY_SINGULAR]"
 	if(worth in list(1000,500,200,100,50,20,10,1))
 		icon_state = "spacecash[worth]"
-		desc = "It's worth [worth] Thalers."
+		desc = "It's worth [CASH_AMOUNT_TEXT(amount)]."
 		return
+	desc = "They are worth [CASH_AMOUNT_TEXT(amount)]."
+
 	var/sum = src.worth
 	var/num = 0
 	for(var/i in list(1000,500,200,100,50,20,10,1))
@@ -50,43 +30,14 @@
 			M.Translate(rand(-6, 6), rand(-4, 8))
 			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
-			src.overlays += banknote
+			add_overlay(banknote)
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
 		var/image/banknote = image('icons/obj/items.dmi', "spacecash1")
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 		banknote.transform = M
-		src.overlays += banknote
-	src.desc = "They are worth [worth] Thalers."
-
-/obj/item/weapon/spacecash/proc/adjust_worth(var/adjust_worth = 0, var/update = 1)
-	worth += adjust_worth
-	if(worth > 0)
-		if(update)
-			update_icon()
-		return worth
-	else
-		qdel(src)
-		return 0
-
-/obj/item/weapon/spacecash/proc/set_worth(var/new_worth = 0, var/update = 1)
-	worth = max(0, new_worth)
-	if(update)
-		update_icon()
-	return worth
-
-/obj/item/weapon/spacecash/attack_self()
-	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num
-	amount = round(CLAMP(amount, 0, src.worth))
-
-	if(!amount)
-		return
-
-	adjust_worth(-amount)
-	var/obj/item/weapon/spacecash/SC = new (usr.loc)
-	SC.set_worth(amount)
-	usr.put_in_hands(SC)
+		add_overlay(banknote)
 
 /obj/item/weapon/spacecash/c1
 	name = "1 Thaler"

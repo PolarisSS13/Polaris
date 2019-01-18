@@ -1,3 +1,12 @@
+//Yes, this can be instanced.
+/datum/supply_controller
+	var/name = "Cargo Department"
+	var/credits = 5000
+
+	var/credit_passive_generation_ds = 5
+
+
+
 //Config stuff
 #define SUPPLY_DOCKZ 2				//Z-level of the Dock.
 #define SUPPLY_STATIONZ 1			//Z-level of the Station.
