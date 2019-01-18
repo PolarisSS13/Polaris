@@ -238,7 +238,7 @@
 /datum/ai_holder/proc/on_attacked(atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(!(L in attackers))
+		if(!(L.name in attackers))
 			attackers |= L.name
 			last_conflict_time = world.time
 
