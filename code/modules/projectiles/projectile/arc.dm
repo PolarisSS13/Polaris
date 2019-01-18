@@ -10,10 +10,14 @@
 	name = "arcing shot"
 	icon_state = "fireball" // WIP
 	speed = 2 // Travel a bit slower, to really sell the arc visuals.
+	movement_type = UNSTOPPABLE
 	plane = ABOVE_PLANE // Since projectiles are 'in the air', they might visually overlap mobs while in flight, so the projectile needs to be above their plane.
 	var/target_distance = null	// How many tiles the impact site is.
 	var/fired_dir = null		// Which direction was the projectile fired towards. Needed to invert the projectile turning based on if facing left or right.
 	var/obj/effect/projectile_shadow/shadow = null // Visual indicator for the projectile's 'true' position. Needed due to being bound to two dimensions in reality.
+
+/obj/item/projectile/arc/Bump()
+	return
 
 /obj/item/projectile/arc/Initialize()
 	shadow = new(get_turf(src))
@@ -23,13 +27,6 @@
 	QDEL_NULL(shadow)
 	return ..()
 
-/obj/item/projectile/arc/Bump(atom/A, forced=0)
-	return 0
-//	if(get_turf(src) != original)
-//		return 0
-//	else
-//		return ..()
-
 // This is a test projectile in the sense that its testing the code to make sure it works,
 // as opposed to a 'can I hit this thing' projectile.
 /obj/item/projectile/arc/test/on_impact(turf/T)
@@ -37,18 +34,25 @@
 	return ..()
 
 /obj/item/projectile/arc/old_style_target(target, source)
-	var/expected_distance = get_dist(target, loc)
+	var/source_loc = get_turf(source) || get_turf(src)
+	var/expected_distance = get_dist(target, source_loc)
 	range = expected_distance // So the projectile "hits the ground."
 	target_distance = expected_distance
-	fired_dir = get_dir(loc, target)
+	fired_dir = get_dir(source_loc, target)
 	..()
 	if(fired_dir & EAST)
 		transform = turn(transform, -45)
 	else if(fired_dir & WEST)
 		transform = turn(transform, 45)
 
+/obj/item/projectile/arc/on_range()
+	on_impact(loc)
+	return ..()
+
 // Visuals.
 /obj/item/projectile/arc/after_move()
+	if(QDELETED(src))
+		return
 	// Handle projectile turning in flight.
 	// This won't turn if fired north/south, as it looks weird.
 	var/turn_per_step = 90 / target_distance
