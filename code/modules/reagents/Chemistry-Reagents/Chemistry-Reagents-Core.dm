@@ -172,6 +172,23 @@
 	else
 		..()
 
+/datum/reagent/water/fishwater
+	name = "Fish Water"
+	id = "fishwater"
+	description = "Smelly water from a fish tank. Gross!"
+	reagent_state = LIQUID
+	color = "#757547"
+	taste_description = "puke"
+
+
+/datum/reagent/water/fishwater/toiletwater
+	name = "Toilet Water"
+	id = "toiletwater"
+	description = "Filthy water scoured from a nasty toilet bowl. Absolutely disgusting."
+	reagent_state = LIQUID
+	color = "#757547"
+	taste_description = "fecal matter"
+
 /datum/reagent/fuel
 	name = "Welding fuel"
 	id = "fuel"
