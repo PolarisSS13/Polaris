@@ -25,7 +25,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 /obj/machinery/power/solar/drain_power()
 	return -1
 
-/obj/machinery/power/solar/initialize(mapload, obj/item/solar_assembly/S)
+/obj/machinery/power/solar/Initialize(mapload, obj/item/solar_assembly/S)
 	. = ..()
 	Make(S)
 	connect_to_network()
@@ -347,7 +347,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 	updateDialog()
 
 
-/obj/machinery/power/solar_control/initialize()
+/obj/machinery/power/solar_control/Initialize()
 	. = ..()
 	if(!powernet) return
 	set_panels(cdir)

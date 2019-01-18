@@ -74,6 +74,18 @@ var/list/_client_preferences_by_type
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 1)
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 2)
 
+/datum/client_preference/weather_sounds
+	description ="Weather sounds"
+	key = "SOUND_WEATHER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+/datum/client_preference/supermatter_hum
+	description ="Supermatter hum"
+	key = "SOUND_SUPERMATTER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"

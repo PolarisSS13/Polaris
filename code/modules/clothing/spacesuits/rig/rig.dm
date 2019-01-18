@@ -83,7 +83,9 @@
 	var/offline_slowdown = 3                                  // If the suit is deployed and unpowered, it sets slowdown to this.
 	var/vision_restriction
 	var/offline_vision_restriction = 1                        // 0 - none, 1 - welder vision, 2 - blind. Maybe move this to helmets.
-	var/airtight = 1 //If set, will adjust AIRTIGHT and STOPPRESSUREDAMAGE flags on components. Otherwise it should leave them untouched.
+	var/airtight = 1 //If set, will adjust AIRTIGHT flag and pressure protections on components. Otherwise it should leave them untouched.
+	var/rigsuit_max_pressure = 10 * ONE_ATMOSPHERE			  // Max pressure the rig protects against when sealed
+	var/rigsuit_min_pressure = 0							  // Min pressure the rig protects against when sealed
 
 	var/emp_protection = 0
 
@@ -123,7 +125,7 @@
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-	processing_objects |= src
+	START_PROCESSING(SSobj, src)
 
 	if(initial_modules && initial_modules.len)
 		for(var/path in initial_modules)
@@ -175,7 +177,7 @@
 		if(istype(M))
 			M.drop_from_inventory(piece)
 		qdel(piece)
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	qdel(wires)
 	wires = null
 	qdel(spark_system)
@@ -204,6 +206,21 @@
 		return 0
 	return 1
 
+// Updates pressure protection
+// Seal = 1 sets protection
+// Seal = 0 unsets protection
+/obj/item/weapon/rig/proc/update_airtight(var/obj/item/piece, var/seal = 0)
+	if(seal == 1)
+		min_pressure_protection = rigsuit_min_pressure
+		max_pressure_protection = rigsuit_max_pressure
+		piece.item_flags &= ~AIRTIGHT
+	else
+		min_pressure_protection = null
+		max_pressure_protection = null
+		piece.item_flags |= AIRTIGHT
+	return
+
+
 /obj/item/weapon/rig/proc/reset()
 	offline = 2
 	canremove = 1
@@ -211,7 +228,7 @@
 		if(!piece) continue
 		piece.icon_state = "[suit_state]"
 		if(airtight)
-			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
+			update_airtight(piece, 0) // Unseal
 	update_icon(1)
 
 /obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
@@ -339,9 +356,9 @@
 /obj/item/weapon/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
-			piece.item_flags &= ~(STOPPRESSUREDAMAGE|AIRTIGHT)
+			update_airtight(piece, 0) // Unseal
 		else
-			piece.item_flags |=  (STOPPRESSUREDAMAGE|AIRTIGHT)
+			update_airtight(piece, 1) // Seal
 
 /obj/item/weapon/rig/ui_action_click()
 	toggle_cooling(usr)
@@ -545,7 +562,7 @@
 
 	data["charge"] =       cell ? round(cell.charge,1) : 0
 	data["maxcharge"] =    cell ? cell.maxcharge : 0
-	data["chargestatus"] = cell ? Floor((cell.charge/cell.maxcharge)*50) : 0
+	data["chargestatus"] = cell ? FLOOR((cell.charge/cell.maxcharge)*50, 1) : 0
 
 	data["emagged"] =       subverted
 	data["coverlock"] =     locked
@@ -592,7 +609,7 @@
 	if(module_list.len)
 		data["modules"] = module_list
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, ((src.loc != user) ? ai_interface_path : interface_path), interface_title, 480, 550, state = nano_state)
 		ui.set_initial_data(data)

@@ -91,13 +91,13 @@ var/list/organ_cache = list()
 	if(robotic < ORGAN_ROBOT)
 		status |= ORGAN_DEAD
 	damage = max_damage
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	if(owner && vital)
 		owner.death()
 		owner.can_defib = 0
 
 /obj/item/organ/proc/adjust_germ_level(var/amount)		// Unless you're setting germ level directly to 0, use this proc instead
-	germ_level = Clamp(germ_level + amount, 0, INFECTION_LEVEL_MAX)
+	germ_level = CLAMP(germ_level + amount, 0, INFECTION_LEVEL_MAX)
 
 /obj/item/organ/process()
 
@@ -324,7 +324,7 @@ var/list/organ_cache = list()
 	if(affected) affected.internal_organs -= src
 
 	loc = get_turf(owner)
-	processing_objects |= src
+	START_PROCESSING(SSobj, src)
 	rejecting = null
 	var/datum/reagent/blood/organ_blood = locate(/datum/reagent/blood) in reagents.reagent_list
 	if(!organ_blood || !organ_blood.data["blood_DNA"])
@@ -355,7 +355,7 @@ var/list/organ_cache = list()
 
 	owner = target
 	loc = owner
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	target.internal_organs |= src
 	affected.internal_organs |= src
 	target.internal_organs_by_name[organ_tag] = src

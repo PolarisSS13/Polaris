@@ -7,7 +7,7 @@
 	var/datum/codex_tree/tree = null
 	var/root_type = /datum/lore/codex/category/main_vir_lore	//Runtimes on codex_tree.dm, line 18 with a null here
 
-/obj/item/weapon/book/codex/initialize()
+/obj/item/weapon/book/codex/Initialize()
 	tree = new(src, root_type)
 	. = ..()
 

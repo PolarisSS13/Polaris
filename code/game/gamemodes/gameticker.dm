@@ -305,7 +305,7 @@ var/global/datum/controller/gameticker/ticker
 					to_chat(M, "Colony Directorship not forced on anyone.")
 
 
-	proc/process()
+	process()
 		if(current_state != GAME_STATE_PLAYING)
 			return 0
 
@@ -437,7 +437,7 @@ var/global/datum/controller/gameticker/ticker
 	mode.declare_completion()//To declare normal completion.
 
 	//Ask the event manager to print round end information
-	event_manager.RoundEnd()
+	SSevents.RoundEnd()
 
 	//Print a list of antagonists to the server log
 	var/list/total_antagonists = list()
