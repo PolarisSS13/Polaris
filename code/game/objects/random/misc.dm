@@ -256,11 +256,11 @@
 
 /obj/random/cash/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(12);/obj/item/weapon/spacecash/c1,
-				prob(8);/obj/item/weapon/spacecash/c10,
-				prob(4);/obj/item/weapon/spacecash/c20,
-				prob(1);/obj/item/weapon/spacecash/c50,
-				prob(1);/obj/item/weapon/spacecash/c100)
+				prob(12);/obj/item/stack/cash/c1,
+				prob(8);/obj/item/stack/cash/c10,
+				prob(4);/obj/item/stack/cash/c20,
+				prob(1);/obj/item/stack/cash/c50,
+				prob(1);/obj/item/stack/cash/c100)
 
 /obj/random/soap
 	name = "Random Soap"

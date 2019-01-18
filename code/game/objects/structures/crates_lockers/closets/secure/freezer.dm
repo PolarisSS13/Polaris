@@ -64,6 +64,6 @@
 
 
 	starts_with = list(
-		/obj/item/weapon/spacecash/c1000 = 3,
-		/obj/item/weapon/spacecash/c500 = 4,
-		/obj/item/weapon/spacecash/c200 = 5)
+		/obj/item/stack/cash/c1000 = 3,
+		/obj/item/stack/cash/c500 = 4,
+		/obj/item/stack/cash/c200 = 5)

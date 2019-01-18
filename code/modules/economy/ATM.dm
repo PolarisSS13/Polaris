@@ -55,8 +55,8 @@ log transactions
 		if(ticks_left_locked_down <= 0)
 			number_incorrect_tries = 0
 
-	for(var/obj/item/weapon/spacecash/S in src)
-		S.loc = src.loc
+	for(var/obj/item/stack/cash/S in src)
+		S.forceMove(src)
 		if(prob(50))
 			playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 		else
@@ -99,9 +99,11 @@ log transactions
 			if(authenticated_account && held_card.associated_account_number != authenticated_account.account_number)
 				authenticated_account = null
 	else if(authenticated_account)
-		if(istype(I,/obj/item/weapon/spacecash))
+		if(istype(I,/obj/item/stack/cash))
+			var/obj/item/stack/cash/C = I
 			//consume the money
-			authenticated_account.money += I:worth
+			authenticated_account.money += I.amount
+			qdel(I)
 			if(prob(50))
 				playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 			else
@@ -117,9 +119,8 @@ log transactions
 			T.time = stationtime2text()
 			authenticated_account.transaction_log.Add(T)
 
-			user << "<span class='info'>You insert [I] into [src].</span>"
-			src.attack_hand(user)
-			qdel(I)
+			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
+			attack_hand(user)
 	else
 		..()
 
@@ -488,7 +489,7 @@ log transactions
 
 
 /obj/machinery/atm/proc/spawn_ewallet(var/sum, loc, mob/living/carbon/human/human_user as mob)
-	var/obj/item/weapon/spacecash/ewallet/E = new /obj/item/weapon/spacecash/ewallet(loc)
+	var/obj/item/stack/cash/ewallet/E = new /obj/item/stack/cash/ewallet(loc)
 	if(ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(E)
 	E.worth = sum

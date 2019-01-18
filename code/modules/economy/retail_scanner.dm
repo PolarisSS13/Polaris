@@ -156,18 +156,16 @@
 				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
 	updateDialog()
 
-
-
-/obj/item/device/retail_scanner/attackby(obj/O as obj, user as mob)
+/obj/item/device/retail_scanner/attackby(obj/O, mob/user)
 	// Check for a method of paying (ID, PDA, e-wallet, cash, ect.)
 	var/obj/item/weapon/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
-		var/obj/item/weapon/spacecash/ewallet/E = O
-		scan_wallet(E)
-	else if (istype(O, /obj/item/weapon/spacecash))
-		usr << "<span class='warning'>This device does not accept cash.</span>"
+	else if (istype(O, /obj/item/stack/cash/ewallet))
+		var/obj/item/stack/cash/ewallet/E = O
+		scan_wallet(E, user)
+	else if (istype(O, /obj/item/stack/cash))
+		to_chat(user, "<span class='warning'>This device does not accept cash.</span>")
 
 	else if(istype(O, /obj/item/weapon/card/emag))
 		return ..()
@@ -251,7 +249,7 @@
 					transaction_complete()
 
 
-/obj/item/device/retail_scanner/proc/scan_wallet(var/obj/item/weapon/spacecash/ewallet/E)
+/obj/item/device/retail_scanner/proc/scan_wallet(obj/item/stack/cash/ewallet/E, mob/user)
 	if (!transaction_amount)
 		return
 
@@ -260,11 +258,8 @@
 
 	// Access account for transaction
 	if(check_account())
-		if(transaction_amount > E.worth)
-			src.visible_message("\icon[src]<span class='warning'>Not enough funds.</span>")
-		else
+		if(E.use(transaction_amount))
 			// Transfer the money
-			E.worth -= transaction_amount
 			linked_account.money += transaction_amount
 
 			// Create log entry in owner's account
@@ -282,7 +277,8 @@
 
 			// Confirm and reset
 			transaction_complete()
-
+		else
+			visible_message("\icon[src]<span class='warning'>Not enough funds.</span>")
 
 /obj/item/device/retail_scanner/proc/scan_item_price(var/obj/O)
 	if(!istype(O))	return

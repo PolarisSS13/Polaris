@@ -6,7 +6,7 @@
 	icon_state = "wallet-orange"
 	w_class = ITEMSIZE_SMALL
 	can_hold = list(
-		/obj/item/weapon/spacecash,
+		/obj/item/stack/cash,
 		/obj/item/weapon/card,
 		/obj/item/clothing/mask/smokable/cigarette/,
 		/obj/item/device/flashlight/pen,
@@ -81,8 +81,7 @@
 /obj/item/weapon/storage/wallet/random/New()
 	..()
 	var/amount = rand(50, 100) + rand(50, 100) // Triangular distribution from 100 to 200
-	var/obj/item/weapon/spacecash/SC = null
-	SC = new(src)
+	var/obj/item/stack/cash/SC = new(src)
 	for(var/i in list(100, 50, 20, 10, 5, 1))
 		if(amount < i)
 			continue

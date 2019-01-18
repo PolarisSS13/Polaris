@@ -110,7 +110,7 @@
 	else
 		user << browse(null,"window=eftpos")
 
-/obj/item/device/eftpos/attackby(obj/item/O as obj, user as mob)
+/obj/item/device/eftpos/attackby(obj/item/O, mob/user)
 
 	var/obj/item/weapon/card/id/I = O.GetID()
 
@@ -119,18 +119,17 @@
 			scan_card(I, O)
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
-	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
-		var/obj/item/weapon/spacecash/ewallet/E = O
+	else if (istype(O, /obj/item/stack/cash/ewallet))
+		var/obj/item/stack/cash/ewallet/E = O
 		if (linked_account)
 			if(!linked_account.suspended)
 				if(transaction_locked && !transaction_paid)
-					if(transaction_amount <= E.worth)
+					if(E.use(transaction_amount))
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("\icon[src] \The [src] chimes.")
+						visible_message("\icon[src] \The [src] chimes.")
 						transaction_paid = 1
 
 						//transfer the money
-						E.worth -= transaction_amount
 						linked_account.money += transaction_amount
 
 						//create entry in the EFTPOS linked account transaction log
@@ -143,14 +142,14 @@
 						T.time = stationtime2text()
 						linked_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>"
+						to_chat(user, "\icon[src]<span class='warning'>\The [O] doesn't have that much money!</span>")
 			else
-				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
+				to_chat(user, "\icon[src]<span class='warning'>Connected account has been suspended.</span>")
 		else
-			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+			to_chat(user, "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>")
 
 	else
-		..()
+		. = ..()
 
 /obj/item/device/eftpos/Topic(var/href, var/href_list)
 	if(href_list["choice"])

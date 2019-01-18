@@ -150,20 +150,20 @@
 	var/obj/item/weapon/card/id/I = W.GetID()
 
 	if(currently_vending && vendor_account && !vendor_account.suspended)
-		var/paid = 0
-		var/handled = 0
+		var/paid = FALSE
+		var/handled = FALSE
 
 		if(I) //for IDs and PDAs and wallets with IDs
 			paid = pay_with_card(I,W)
-			handled = 1
-		else if(istype(W, /obj/item/weapon/spacecash/ewallet))
-			var/obj/item/weapon/spacecash/ewallet/C = W
-			paid = pay_with_ewallet(C)
-			handled = 1
-		else if(istype(W, /obj/item/weapon/spacecash))
-			var/obj/item/weapon/spacecash/C = W
+			handled = TRUE
+		else if(istype(W, /obj/item/stack/cash/ewallet))
+			var/obj/item/stack/cash/ewallet/C = W
+			paid = pay_with_ewallet(C, user)
+			handled = TRUE
+		else if(istype(W, /obj/item/stack/cash))
+			var/obj/item/stack/cash/C = W
 			paid = pay_with_cash(C, user)
-			handled = 1
+			handled = TRUE
 
 		if(paid)
 			vend(currently_vending, usr)
@@ -172,7 +172,7 @@
 			SSnanoui.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
-	if(I || istype(W, /obj/item/weapon/spacecash))
+	if(I || istype(W, /obj/item/stack/cash))
 		attack_hand(user)
 		return
 	else if(W.is_screwdriver())
@@ -222,28 +222,16 @@
  *
  *  usr is the mob who gets the change.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
-	if(currently_vending.price > cashmoney.worth)
-
-		// This is not a status display message, since it's something the character
-		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
-		return 0
-
-	if(istype(cashmoney, /obj/item/weapon/spacecash))
-
-		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-		cashmoney.worth -= currently_vending.price
-
-		if(cashmoney.worth <= 0)
-			usr.drop_from_inventory(cashmoney)
-			qdel(cashmoney)
+/obj/machinery/vending/proc/pay_with_cash(obj/item/stack/cash/cashmoney, mob/user)
+	if(istype(cashmoney, /obj/item/stack/cash))
+		if(cashmoney.use(currently_vending.price))
+			visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
 		else
-			cashmoney.update_icon()
-
+			to_chat(user, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
+			return FALSE
 	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
-	return 1
+	return TRUE
 
 /**
  * Scan a chargecard and deduct payment from it.
@@ -251,16 +239,15 @@
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
-/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
-	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
-	if(currently_vending.price > wallet.worth)
+/obj/machinery/vending/proc/pay_with_ewallet(obj/item/stack/cash/ewallet/wallet, mob/user)
+	visible_message("<span class='info'>[user] swipes [wallet] through [src].</span>")
+	if(!wallet.use(currently_vending.pric)
 		status_message = "Insufficient funds on chargecard."
 		status_error = 1
-		return 0
+		return FALSE
 	else
-		wallet.worth -= currently_vending.price
 		credit_purchase("[wallet.owner_name] (chargecard)")
-		return 1
+		return TRUE
 
 /**
  * Scan a card and attempt to transfer payment from associated account.

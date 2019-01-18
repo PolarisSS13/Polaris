@@ -8,6 +8,7 @@
 	throw_range = 2
 	w_class = ITEMSIZE_SMALL
 	max_amount = 10000
+	singular_name = GALACTIC_CURRENCY_SINGULAR
 	stacktype = /obj/item/stack/cash
 
 /obj/item/stack/cash/update_icon()
@@ -87,24 +88,24 @@
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
 
-proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
-	var/obj/item/stack/cash/SC = new (spawnloc)
-
-	SC.set_worth(sum)
-	if (ishuman(human_user) && !human_user.get_active_hand())
+/proc/spawn_money(amount, atom/loc, mob/living/carbon/human/H)
+	var/obj/item/stack/cash/C = new(loc, amount)
+	if(istype(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(SC)
-	return
 
 /obj/item/stack/cash/ewallet
 	name = "charge card"
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
+	stacktype = null
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
-	attack_self() return  //Don't act
-	attackby()    return  //like actual
-	update_icon() return  //space cash
+	allow_user_split = FALSE
+	no_variants = TRUE
 
 /obj/item/stack/cash/ewallet/examine(mob/user)
-	..(user)
-	if (!(user in view(2)) && user!=src.loc) return
-	user << "<font color='blue'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</font>"
+	. = ..(user)
+	if(get_dist(user, src) <= 2)
+		to_chat(user, "Charge card's owner: [owner_name].")
+
+/obj/item/stack/cash/ewallet/zero_check()
+	return amount <= 0			//Do not auto qdel.

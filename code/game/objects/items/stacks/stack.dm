@@ -23,6 +23,7 @@
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
 	var/no_variants = TRUE // Determines whether the item should update it's sprites based on amount.
+	var/allow_user_split = TRUE
 
 /obj/item/stack/Initialize(mapload, amount)
 	. = ..()
@@ -54,9 +55,9 @@
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
 		if(!uses_charge)
-			user << "There are [src.amount] [src.singular_name]\s in the stack."
+			to_chat(user, "There [amount > 1? "are" : "is"] [amount] [singular_name]\s in the stack.")
 		else
-			user << "There is enough charge for [get_amount()]."
+			to_chat(user, "There is enough charge for [get_amount()].")
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -189,45 +190,53 @@
 
 //Return 1 if an immediate subsequent call to use() would succeed.
 //Ensures that code dealing with stacks uses the same logic
-/obj/item/stack/proc/can_use(var/used)
+/obj/item/stack/proc/can_use(used)
 	if (get_amount() < used)
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
-/obj/item/stack/proc/use(var/used)
+/obj/item/stack/proc/zero_check()
+	. = amount <= 0
+	if(uses_charge)
+		return
+	if(empty)
+		var/mob/M = loc
+		if(istype(M))
+			M.remove_from_mob(src)
+		qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer.
+
+/obj/item/stack/proc/use(used)
 	if (!can_use(used))
-		return 0
+		return FALSE
 	if(!uses_charge)
 		amount -= used
-		if (amount <= 0)
-			if(usr)
-				usr.remove_from_mob(src)
-			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+		zero_check()
 		update_icon()
-		return 1
+		return TRUE
 	else
 		if(get_amount() < used)
-			return 0
-		for(var/i = 1 to uses_charge)
+			return FALSE
+		for(var/i in 1 to uses_charge)
 			var/datum/matter_synth/S = synths[i]
 			S.use_charge(charge_costs[i] * used) // Doesn't need to be deleted
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /obj/item/stack/proc/add(var/extra)
 	if(!uses_charge)
 		if(amount + extra > get_max_amount())
-			return 0
+			return FALSE
 		else
 			amount += extra
 		update_icon()
-		return 1
+		return TRUE
 	else if(!synths || synths.len < uses_charge)
-		return 0
+		return FALSE
 	else
-		for(var/i = 1 to uses_charge)
+		for(var/i in 1 to uses_charge)
 			var/datum/matter_synth/S = synths[i]
 			S.add_charge(charge_costs[i] * extra)
+		return TRUE
 
 /*
 	The transfer and split procs work differently than use() and add().
@@ -312,21 +321,30 @@
 		if(!amount)
 			break
 
-/obj/item/stack/attack_hand(mob/user as mob)
+/obj/item/stack/attack_hand(mob/user)
 	if (user.get_inactive_hand() == src)
-		var/N = input("How many stacks of [src] would you like to split off?  There are currently [amount].", "Split stacks", 1) as num|null
-		if(N)
-			var/obj/item/stack/F = src.split(N)
-			if (F)
-				user.put_in_hands(F)
-				src.add_fingerprint(user)
-				F.add_fingerprint(user)
-				spawn(0)
-					if (src && usr.machine==src)
-						src.interact(usr)
+		user_split(user)
 	else
 		..()
-	return
+
+/obj/item/stack/AltClick(mob/user)
+	user_split(user)
+
+/obj/item/stack/proc/user_split(mob/user)
+	if(!allow_user_split || !user.CanReach(src))
+		return
+	var/N = input(user, "How much of [src] would you like to split off?  There are currently [amount].", "Split stacks", 1) as num|null
+	if(N)
+		if(!user.CanReach(src))
+			return
+		var/obj/item/stack/F = split(N)
+		if(F)
+			user.put_in_hands(F)
+			src.add_fingerprint(user)
+			F.add_fingerprint(user)
+			spawn(0)
+				if(src && usr.machine == src)
+					interact(usr)
 
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack))

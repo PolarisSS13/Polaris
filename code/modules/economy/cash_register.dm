@@ -166,19 +166,19 @@
 
 
 
-/obj/machinery/cash_register/attackby(obj/item/O as obj, user as mob)
+/obj/machinery/cash_register/attackby(obj/item/O, mob/user)
 	// Check for a method of paying (ID, PDA, e-wallet, cash, ect.)
 	var/obj/item/weapon/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
-		var/obj/item/weapon/spacecash/ewallet/E = O
-		scan_wallet(E)
-	else if (istype(O, /obj/item/weapon/spacecash))
-		var/obj/item/weapon/spacecash/SC = O
+	else if (istype(O, /obj/item/stack/cash/ewallet))
+		var/obj/item/stack/cash/ewallet/E = O
+		scan_wallet(E, user)
+	else if (istype(O, /obj/item/stack/cash))
+		var/obj/item/stack/cash/SC = O
 		if(cash_open)
 			user << "You neatly sort the cash into the box."
-			cash_stored += SC.worth
+			cash_stored += SC.amount
 			overlays |= "register_cash"
 			if(ishuman(user))
 				var/mob/living/carbon/human/H = user
@@ -276,7 +276,7 @@
 					transaction_complete()
 
 
-/obj/machinery/cash_register/proc/scan_wallet(obj/item/weapon/spacecash/ewallet/E)
+/obj/machinery/cash_register/proc/scan_wallet(obj/item/stack/cash/ewallet/E)
 	if (!transaction_amount)
 		return
 
@@ -290,11 +290,8 @@
 
 	// Access account for transaction
 	if(check_account())
-		if(transaction_amount > E.worth)
-			src.visible_message("\icon[src]<span class='warning'>Not enough funds.</span>")
-		else
+		if(E.use(transaction_amount))
 			// Transfer the money
-			E.worth -= transaction_amount
 			linked_account.money += transaction_amount
 
 			// Create log entry in owner's account
@@ -312,9 +309,11 @@
 
 			// Confirm and reset
 			transaction_complete()
+		else
+			visible_message("\icon[src]<span class='warning'>Not enough funds.</span>")
 
 
-/obj/machinery/cash_register/proc/scan_cash(obj/item/weapon/spacecash/SC)
+/obj/machinery/cash_register/proc/scan_cash(obj/item/stack/cash/SC)
 	if (!transaction_amount)
 		return
 
@@ -326,17 +325,9 @@
 	if((item_list.len > 1 || item_list[item_list[1]] > 1) && !confirm(SC))
 		return
 
-	if(transaction_amount > SC.worth)
-		src.visible_message("\icon[src]<span class='warning'>Not enough money.</span>")
-	else
+	if(SC.use(transaction_amount))
 		// Insert cash into magical slot
 		SC.worth -= transaction_amount
-		SC.update_icon()
-		if(!SC.worth)
-			if(ishuman(SC.loc))
-				var/mob/living/carbon/human/H = SC.loc
-				H.drop_from_inventory(SC)
-			qdel(SC)
 		cash_stored += transaction_amount
 
 		// Save log
@@ -344,7 +335,8 @@
 
 		// Confirm and reset
 		transaction_complete()
-
+	else
+		visible_message("\icon[src]<span class='warning'>Not enough money.</span>")
 
 /obj/machinery/cash_register/proc/scan_item_price(obj/O)
 	if(!istype(O))	return

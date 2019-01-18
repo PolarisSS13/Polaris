@@ -65,15 +65,15 @@
 			return
 
 /obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/spacecash))
+	if(istype(W, /obj/item/stack/cash))
 		if(contains == 0)
 			contains = 1
 		if(contains != 1)
 			return
-		var/obj/item/weapon/spacecash/S = W
+		var/obj/item/stack/cash/S = W
 		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? "thalers" : "thaler"] into \the [src].</span>")
 		user.drop_from_inventory(S)
-		S.loc = src
+		S.forceMove(src)
 		update_icon()
 
 /obj/item/glass_jar/update_icon() // Also updates name and desc
@@ -86,7 +86,7 @@
 		if(1)
 			name = "tip jar"
 			desc = "A small jar with money inside."
-			for(var/obj/item/weapon/spacecash/S in src)
+			for(var/obj/item/stack/cash/S in src)
 				var/image/money = image(S.icon, S.icon_state)
 				money.pixel_x = rand(-2, 3)
 				money.pixel_y = rand(-6, 6)
