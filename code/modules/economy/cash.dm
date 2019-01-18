@@ -39,63 +39,63 @@
 		banknote.transform = M
 		add_overlay(banknote)
 
-/obj/item/weapon/spacecash/c1
+/obj/item/stack/cash/c1
 	name = "1 Thaler"
 	icon_state = "spacecash1"
 	desc = "It's worth 1 credit."
 	worth = 1
 
-/obj/item/weapon/spacecash/c10
+/obj/item/stack/cash/c10
 	name = "10 Thaler"
 	icon_state = "spacecash10"
 	desc = "It's worth 10 Thalers."
 	worth = 10
 
-/obj/item/weapon/spacecash/c20
+/obj/item/stack/cash/c20
 	name = "20 Thaler"
 	icon_state = "spacecash20"
 	desc = "It's worth 20 Thalers."
 	worth = 20
 
-/obj/item/weapon/spacecash/c50
+/obj/item/stack/cash/c50
 	name = "50 Thaler"
 	icon_state = "spacecash50"
 	desc = "It's worth 50 Thalers."
 	worth = 50
 
-/obj/item/weapon/spacecash/c100
+/obj/item/stack/cash/c100
 	name = "100 Thaler"
 	icon_state = "spacecash100"
 	desc = "It's worth 100 Thalers."
 	worth = 100
 
-/obj/item/weapon/spacecash/c200
+/obj/item/stack/cash/c200
 	name = "200 Thaler"
 	icon_state = "spacecash200"
 	desc = "It's worth 200 Thalers."
 	worth = 200
 
-/obj/item/weapon/spacecash/c500
+/obj/item/stack/cash/c500
 	name = "500 Thaler"
 	icon_state = "spacecash500"
 	desc = "It's worth 500 Thalers."
 	worth = 500
 
-/obj/item/weapon/spacecash/c1000
+/obj/item/stack/cash/c1000
 	name = "1000 Thaler"
 	icon_state = "spacecash1000"
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
 
 proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
-	var/obj/item/weapon/spacecash/SC = new (spawnloc)
+	var/obj/item/stack/cash/SC = new (spawnloc)
 
 	SC.set_worth(sum)
 	if (ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(SC)
 	return
 
-/obj/item/weapon/spacecash/ewallet
+/obj/item/stack/cash/ewallet
 	name = "charge card"
 	icon_state = "efundcard"
 	desc = "A card that holds an amount of money."
@@ -104,7 +104,7 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	attackby()    return  //like actual
 	update_icon() return  //space cash
 
-/obj/item/weapon/spacecash/ewallet/examine(mob/user)
+/obj/item/stack/cash/ewallet/examine(mob/user)
 	..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 	user << "<font color='blue'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</font>"
