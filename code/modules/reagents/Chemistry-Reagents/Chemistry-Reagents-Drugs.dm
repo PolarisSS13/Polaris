@@ -188,7 +188,6 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	overdose = 15
 	reagent_state = LIQUID
 	color = "#FFFFFF" //white
-	high_msg_enabled = 1
 	high_msg_list = list ("You feel euphoric!",
 	"You feel like you can take on the world!",
 	"You sniffle compulsively...",
