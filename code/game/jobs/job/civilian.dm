@@ -1,8 +1,8 @@
 //Food
 /datum/job/civilian // stop being garbage with copypasta and your hierarchies I swear to fuck
-department = "Civilian"
-department_flag = CIVILIAN
-faction = "Station"
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
 
 /datum/job/civilian/bartender
 	title = "Bartender"

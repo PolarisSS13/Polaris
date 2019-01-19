@@ -407,7 +407,7 @@
 /obj/item/weapon/card/id/civilian/defense
 	assignment = "Defense Attorney"
 	rank = "Defense Attorney"
-	job_access_type = /datum/job/civilain/defense
+	job_access_type = /datum/job/civilian/defense
 
 /obj/item/weapon/card/id/civilian/barber
 	assignment = "Barber"
