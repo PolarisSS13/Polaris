@@ -1,10 +1,12 @@
 //Food
-/datum/job/bartender
+/datum/job/civilian // stop being garbage with copypasta and your hierarchies I swear to fuck
+department = "Civilian"
+department_flag = CIVILIAN
+faction = "Station"
+
+/datum/job/civilian/bartender
 	title = "Bartender"
 	flag = BARTENDER
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city supervisor"
@@ -18,12 +20,9 @@
 	alt_titles = list("Waiting Staff","Barkeep","Mixologist","Barista" = /decl/hierarchy/outfit/job/service/bartender/barista)
 
 
-/datum/job/chef
+/datum/job/civilian/chef
 	title = "Chef"
 	flag = CHEF
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city supervisor"
@@ -36,12 +35,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
 	alt_titles = list("Cook","Restaurant Host")
 
-/datum/job/hydro
+/datum/job/civilian/hydro
 	title = "Botanist"
 	flag = BOTANIST
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the city supervisor"
@@ -54,13 +50,11 @@
 	alt_titles = list("Hydroponicist", "Gardener","Farmer")
 
 //Cargo
-/datum/job/qm
+/datum/job/civilian/qm
 	title = "Factory Manager"
 	flag = QUARTERMASTER
 	department = "Cargo"
 	head_position = 1
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the city supervisor"
@@ -71,16 +65,13 @@
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimum_character_age = 20
 	ideal_character_age = 35
-
 	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
 	alt_titles = list("Supply Chief")
 
-/datum/job/cargo_tech
+/datum/job/civilian/cargo_tech
 	title = "Factory Worker"
 	flag = CARGOTECH
 	department = "Cargo"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the factory manager and city supervisor"
@@ -92,12 +83,10 @@
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
 	alt_titles = list("Delivery Assistant")
 
-/datum/job/mining
+/datum/job/civilian/mining
 	title = "Miner"
 	flag = MINER
 	department = "Cargo"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the factory manager and city supervisor"
@@ -111,12 +100,9 @@
 	alt_titles = list("Drill Technician","Prospector")
 
 //Service
-/datum/job/janitor
+/datum/job/civilian/janitor
 	title = "Janitor"
 	flag = JANITOR
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city supervisor"
@@ -129,12 +115,9 @@
 	alt_titles = list("Custodian", "Sanitation Technician")
 
 //More or less assistants
-/datum/job/librarian
+/datum/job/civilian/librarian
 	title = "Librarian"
 	flag = LIBRARIAN
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the city supervisor"
@@ -143,16 +126,12 @@
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 
-	outfit_type = /decl/hierarchy/outfit/job/librarian
+	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
 	alt_titles = list("Journalist", "Professor", "Historian", "Writer")
 
-//var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
-/datum/job/defense
+/datum/job/civilian/defense
 	title = "Defense Attorney"
 	flag = LAWYER
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the city supervisor"
@@ -165,42 +144,11 @@
 	minimum_character_age = 20
 	alt_titles = list("Defense Lawyer","Defense Attorney","Barrister")
 
-	outfit_type = /decl/hierarchy/outfit/job/defense
+	outfit_type = /decl/hierarchy/outfit/job/civilian/defense
 
-/datum/job/judge
-	title = "Judge"
-	flag = JUDGE
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the city supervisor"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/judge
-	economic_modifier = 13
-	access = list(access_judge, access_sec_doors, access_maint_tunnels, access_heads)
-	minimal_access = list(access_judge, access_sec_doors, access_heads)
-	minimal_player_age = 7
-	minimum_character_age = 25
-	alt_titles = list("Magistrate")
-
-	outfit_type = /decl/hierarchy/outfit/job/judge
-
-
-/*
-/datum/job/lawyer/equip(var/mob/living/carbon/human/H)
-	. = ..()
-	if(.)
-		H.implant_loyalty(H)
-*/
-
-/datum/job/barber
+/datum/job/civilian/barber
 	title = "Barber"
 	flag = BARBER
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city supervisor"
@@ -209,5 +157,5 @@
 	minimum_character_age = 18
 	access = list(access_barber, access_maint_tunnels)
 	minimal_access = list(access_barber)
-	outfit_type = /decl/hierarchy/outfit/job/barber
+	outfit_type = /decl/hierarchy/outfit/job/civilian/barber
 	alt_titles = list("Hairdresser", "Stylist", "Beautician")

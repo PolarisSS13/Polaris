@@ -134,12 +134,12 @@
 /obj/item/weapon/card/id/silver/secretary
 	assignment = "City Hall Guard"
 	rank = "City Hall Guard"
-	job_access_type = /datum/job/secretary
+	job_access_type = /datum/job/heads/secretary
 
 /obj/item/weapon/card/id/silver/hop
 	assignment = "City Supervisor"
 	rank = "City Supervisor"
-	job_access_type = /datum/job/hop
+	job_access_type = /datum/job/heads/hop
 
 /obj/item/weapon/card/id/gold
 	name = "identification card"
@@ -151,13 +151,13 @@
 /obj/item/weapon/card/id/gold/captain
 	assignment = "Mayor"
 	rank = "Mayor"
-	job_access_type = /datum/job/captain
+	job_access_type = /datum/job/heads/captain
 
 /obj/item/weapon/card/id/gold/captain/spare
 	name = "\improper Mayor's spare ID"
 	desc = "The spare ID of the High Lord himself."
 	registered_name = "Mayor"
-	job_access_type = /datum/job/captain
+	job_access_type = /datum/job/heads/captain
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -209,27 +209,27 @@
 /obj/item/weapon/card/id/medical/doctor
 	assignment = "Doctor"
 	rank = "Doctor"
-	job_access_type = /datum/job/doctor
+	job_access_type = /datum/job/medical/doctor
 
 /obj/item/weapon/card/id/medical/chemist
 	assignment = "Chemist"
 	rank = "Chemist"
-	job_access_type = /datum/job/chemist
+	job_access_type = /datum/job/medical/chemist
 
 /obj/item/weapon/card/id/medical/geneticist
 	assignment = "Geneticist"
 	rank = "Geneticist"
-	job_access_type = /datum/job/doctor	//geneticist
+	job_access_type = /datum/job/medical/doctor	//geneticist
 
 /obj/item/weapon/card/id/medical/psychiatrist
 	assignment = "Psychiatrist"
 	rank = "Psychiatrist"
-	job_access_type = /datum/job/psychiatrist
+	job_access_type = /datum/job/medical/psychiatrist
 
 /obj/item/weapon/card/id/medical/paramedic
 	assignment = "Paramedic"
 	rank = "Paramedic"
-	job_access_type = /datum/job/paramedic
+	job_access_type = /datum/job/medical/paramedic
 
 /obj/item/weapon/card/id/medical/head
 	name = "identification card"
@@ -239,7 +239,7 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Chief Medical Officer"
 	rank = "Chief Medical Officer"
-	job_access_type = /datum/job/cmo
+	job_access_type = /datum/job/medical/cmo
 
 /obj/item/weapon/card/id/security
 	name = "identification card"
@@ -251,17 +251,17 @@
 /obj/item/weapon/card/id/security/officer
 	assignment = "Police Officer"
 	rank = "Police Officer"
-	job_access_type = /datum/job/officer
+	job_access_type = /datum/job/security/officer
 
 /obj/item/weapon/card/id/security/detective
 	assignment = "Detective"
 	rank = "Detective"
-	job_access_type = /datum/job/detective
+	job_access_type = /datum/job/security/detective
 
 /obj/item/weapon/card/id/security/warden
 	assignment = "Prison Warden"
 	rank = "Prison Warden"
-	job_access_type = /datum/job/warden
+	job_access_type = /datum/job/security/warden
 
 /obj/item/weapon/card/id/security/head
 	name = "identification card"
@@ -271,7 +271,7 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Chief of Police"
 	rank = "Chief of Police"
-	job_access_type = /datum/job/hos
+	job_access_type = /datum/job/security/hos
 
 /obj/item/weapon/card/id/engineering
 	name = "identification card"
@@ -283,12 +283,12 @@
 /obj/item/weapon/card/id/engineering/engineer
 	assignment = "City Engineer"
 	rank = "City Engineer"
-	job_access_type = /datum/job/engineer
+	job_access_type = /datum/job/engineering/engineer
 
 /obj/item/weapon/card/id/engineering/atmos
 	assignment = "Firefighter"
 	rank = "Firefighter"
-	job_access_type = /datum/job/atmos
+	job_access_type = /datum/job/engineering/atmos
 
 /obj/item/weapon/card/id/engineering/head
 	name = "identification card"
@@ -298,7 +298,7 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Chief Engineer"
 	rank = "Chief Engineer"
-	job_access_type = /datum/job/chief_engineer
+	job_access_type = /datum/job/engineering/chief_engineer
 
 /obj/item/weapon/card/id/science
 	name = "identification card"
@@ -310,17 +310,17 @@
 /obj/item/weapon/card/id/science/scientist
 	assignment = "Scientist"
 	rank = "Scientist"
-	job_access_type = /datum/job/scientist
+	job_access_type = /datum/job/science/scientist
 
 /obj/item/weapon/card/id/science/xenobiologist
 	assignment = "Xenobiologist"
 	rank = "Xenobiologist"
-	job_access_type = /datum/job/xenobiologist
+	job_access_type = /datum/job/science/xenobiologist
 
 /obj/item/weapon/card/id/science/roboticist
 	assignment = "Roboticist"
 	rank = "Roboticist"
-	job_access_type = /datum/job/roboticist
+	job_access_type = /datum/job/science/roboticist
 
 /obj/item/weapon/card/id/science/head
 	name = "identification card"
@@ -330,7 +330,7 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Research Director"
 	rank = "Research Director"
-	job_access_type = /datum/job/rd
+	job_access_type = /datum/job/science/rd
 
 /obj/item/weapon/card/id/cargo
 	name = "identification card"
@@ -342,12 +342,12 @@
 /obj/item/weapon/card/id/cargo/cargo_tech
 	assignment = "Factory Worker"
 	rank = "Factory Worker"
-	job_access_type = /datum/job/cargo_tech
+	job_access_type = /datum/job/civilian/cargo_tech
 
 /obj/item/weapon/card/id/cargo/mining
 	assignment = "Miner"
 	rank = "Miner"
-	job_access_type = /datum/job/mining
+	job_access_type = /datum/job/civilian/mining
 
 /obj/item/weapon/card/id/cargo/head
 	name = "identification card"
@@ -357,7 +357,7 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Factory Manager"
 	rank = "Factory Manager"
-	job_access_type = /datum/job/qm
+	job_access_type = /datum/job/civilian/qm
 
 /obj/item/weapon/card/id/assistant
 	assignment = "Civilian"
@@ -377,52 +377,52 @@
 /obj/item/weapon/card/id/civilian/bartender
 	assignment = "Bartender"
 	rank = "Bartender"
-	job_access_type = /datum/job/bartender
+	job_access_type = /datum/job/civilian/bartender
 
 /obj/item/weapon/card/id/civilian/botanist
 	assignment = "Botanist"
 	rank = "Botanist"
-	job_access_type = /datum/job/hydro
+	job_access_type = /datum/job/civilian/hydro
 
 /obj/item/weapon/card/id/civilian/chaplain
 	assignment = "Chaplain"
 	rank = "Chaplain"
-	job_access_type = /datum/job/chaplain
+	job_access_type = /datum/job/civilian/chaplain
 
 /obj/item/weapon/card/id/civilian/chef
 	assignment = "Chef"
 	rank = "Chef"
-	job_access_type = /datum/job/chef
+	job_access_type = /datum/job/civilian/chef
 
-/obj/item/weapon/card/id/civilian/judge
+/obj/item/weapon/card/id/heads/judge
 	assignment = "Judge"
 	rank = "Judge"
-	job_access_type = /datum/job/judge
+	job_access_type = /datum/job/heads/judge
 
 /obj/item/weapon/card/id/security/prosecutor
 	assignment = "District Prosecutor"
 	rank = "District Prosecutor"
-	job_access_type = /datum/job/prosecutor
+	job_access_type = /datum/job/security/prosecutor
 
 /obj/item/weapon/card/id/civilian/defense
 	assignment = "Defense Attorney"
 	rank = "Defense Attorney"
-	job_access_type = /datum/job/defense
+	job_access_type = /datum/job/civilain/defense
 
 /obj/item/weapon/card/id/civilian/barber
 	assignment = "Barber"
 	rank = "Barber"
-	job_access_type = /datum/job/barber
+	job_access_type = /datum/job/civilian/barber
 
 /obj/item/weapon/card/id/civilian/janitor
 	assignment = "Janitor"
 	rank = "Janitor"
-	job_access_type = /datum/job/janitor
+	job_access_type = /datum/job/civilian/janitor
 
 /obj/item/weapon/card/id/civilian/librarian
 	assignment = "Librarian"
 	rank = "Librarian"
-	job_access_type = /datum/job/librarian
+	job_access_type = /datum/job/civilian/librarian
 
 /obj/item/weapon/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
 	name = "identification card"
