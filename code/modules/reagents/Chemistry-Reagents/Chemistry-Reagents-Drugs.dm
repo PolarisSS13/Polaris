@@ -179,3 +179,31 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	M.drowsyness = max(M.drowsyness, 10)
 	M.adjustBrainLoss(pick(0.5, 0.6, 0.7, 0.8, 0.9, 1))
 	..()
+
+/datum/reagent/drug/cocaine
+	name = "Cocaine"
+	id = "cocaine"
+	description = "Cocaine, an illegal stimulant often consumed nasally in a powdered form."
+	taste_description = "metallic and bitter."
+	overdose = 15
+	reagent_state = LIQUID
+	color = "#FFFFFF" //white
+	high_msg_enabled = 1
+	high_msg_list = list ("You feel euphoric!",
+	"You feel like you can take on the world!",
+	"You sniffle compulsively...",
+	"You feel terrible.")
+
+/datum/reagent/drug/cocaine/affect_blood(var/mob/living/carbon/M)
+	M.add_chemical_effect(CE_PAINKILLER,10)
+	M.adjustBrainLoss(0.25)
+	if(prob(15))
+		M.emote(pick("shiver", "sniff"))
+		..()
+
+/datum/reagent/drug/cocaine/overdose(var/mob/living/M as mob)
+	if(prob(50))
+		M.vomit()
+		M.adjustToxLoss(10)
+		M.adjustBrainLoss(5)
+		..()
