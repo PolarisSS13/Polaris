@@ -243,8 +243,8 @@
 	filled_reagents = list("inaprovaline" = 5, "osteodaxon" = 10)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/zadsnack
-	name = "\improper Zaddat nutrient hypo"
-	desc = "Zaddat entering a new environment or working among aliens rely on these hypos to stay fed."
+	name = "glucose hypo"
+	desc = "A hypoinjector filled with glucose, used for critically malnourished patients and hungry Zaddat."
 	filled_reagents = list("glucose" = 15)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/stimm

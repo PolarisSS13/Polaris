@@ -91,7 +91,7 @@
 	item_state = "zaddat_mask"
 	//body_parts_covered = 0
 	species_restricted = list(SPECIES_ZADDAT)
-	flags_inv = HIDEEARS //transparent
+	flags_inv = HIDEEARS //semi-transparent
 	filtered_gases = list("phoron", "nitrogen", "sleeping_agent")
 
 /obj/item/clothing/mask/gas/syndicate
