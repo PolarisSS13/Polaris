@@ -134,7 +134,7 @@
  	contains = list(
  			/obj/item/device/assembly/timer,
  			/obj/item/weapon/gun/projectile/shotgun/pump/rifle/practice = 2,
- 			/obj/item/ammo_magazine/clip/c762/practice = 4,
+ 			/obj/item/ammo_magazine/clip/c308/practice = 4,
  			/obj/item/target = 2,
  			/obj/item/target/alien = 2,
  			/obj/item/target/syndicate = 2
@@ -180,8 +180,8 @@
 	access = access_security
 
 /datum/supply_pack/munitions/brifleammo
-	name = "Ammunition - 7.62mm lethal"
-	contains = list(/obj/item/ammo_magazine/m762 = 6)
+	name = "Ammunition - .308 lethal"
+	contains = list(/obj/item/ammo_magazine/m308 = 6)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Ballistic ammunition crate"

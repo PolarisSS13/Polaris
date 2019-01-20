@@ -242,39 +242,39 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 360, "uranium" = 240)
 
 /*
- * 7.62mm
+ * .308
  */
 
-/obj/item/ammo_casing/a762
-	desc = "A 7.62mm bullet casing."
-	caliber = "7.62mm"
+/obj/item/ammo_casing/a308
+	desc = "A .308 bullet casing."
+	caliber = ".308"
 	icon_state = "rifle-casing"
-	projectile_type = /obj/item/projectile/bullet/rifle/a762
+	projectile_type = /obj/item/projectile/bullet/rifle/a308
 	matter = list(DEFAULT_WALL_MATERIAL = 200)
 
-/obj/item/ammo_casing/a762/ap
-	desc = "A 7.62mm armor-piercing bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/ap
+/obj/item/ammo_casing/a308/ap
+	desc = "A .308 armor-piercing bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/a308/ap
 	matter = list(DEFAULT_WALL_MATERIAL = 300)
 
-/obj/item/ammo_casing/a762/practice
-	desc = "A 7.62mm practice bullet casing."
+/obj/item/ammo_casing/a308/practice
+	desc = "A .308 practice bullet casing."
 	icon_state = "rifle-casing" // Need to make an icon for these
 	projectile_type = /obj/item/projectile/bullet/practice
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a762/blank
-	desc = "A blank 7.62mm bullet casing."
+/obj/item/ammo_casing/a308/blank
+	desc = "A blank .308 bullet casing."
 	projectile_type = /obj/item/projectile/bullet/blank
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 
-/obj/item/ammo_casing/a762/hp
-	desc = "A 7.62mm hollow-point bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/hp
+/obj/item/ammo_casing/a308/hp
+	desc = "A .308 hollow-point bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/a308/hp
 
-/obj/item/ammo_casing/a762/hunter
-	desc = "A 7.62mm hunting bullet casing."
-	projectile_type = /obj/item/projectile/bullet/rifle/a762/hunter
+/obj/item/ammo_casing/a308/hunter
+	desc = "A .308 hunting bullet casing."
+	projectile_type = /obj/item/projectile/bullet/rifle/a308/hunter
 
 /*
  * 14.5mm (anti-materiel rifle round)

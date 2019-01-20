@@ -71,22 +71,22 @@
 
 /obj/item/weapon/gun/projectile/SVD
 	name = "\improper Dragunov"
-	desc = "The SVD, also known as the Dragunov, is mass produced with an Optical Sniper Sight so simple that even Ivan can use it. Too bad for you that the inscriptions are written in Russian. Uses 7.62mm rounds."
+	desc = "The SVD, also known as the Dragunov, is mass produced with an Optical Sniper Sight so simple that even Ivan can use it. Too bad for you that the inscriptions are written in Russian. Uses .308 rounds."
 	icon_state = "SVD"
 	item_state = "SVD"
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	force = 10
 	slot_flags = SLOT_BACK // Needs a sprite.
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
-	caliber = "7.62mm"
+	caliber = ".308"
 	load_method = MAGAZINE
 	accuracy = -45 //shooting at the hip
 	scoped_accuracy = 0
 //	requires_two_hands = 1
 //	one_handed_penalty = 60 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 	fire_sound = 'sound/weapons/Gunshot_SVD.ogg' // Has a very unique sound.
-	magazine_type = /obj/item/ammo_magazine/m762svd
-	allowed_magazines = list(/obj/item/ammo_magazine/m762svd)
+	magazine_type = /obj/item/ammo_magazine/m308svd
+	allowed_magazines = list(/obj/item/ammo_magazine/m308svd)
 
 /obj/item/weapon/gun/projectile/SVD/update_icon()
 	..()

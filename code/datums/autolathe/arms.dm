@@ -175,15 +175,15 @@
 
 /////// 7.62
 
-/datum/category_item/autolathe/arms/rifle_762
-	name = "rifle magazine (7.62mm)"
-	path =/obj/item/ammo_magazine/m762
+/datum/category_item/autolathe/arms/rifle_308
+	name = "rifle magazine (.308)"
+	path =/obj/item/ammo_magazine/m308
 	hidden = 1
 
 /*
-/datum/category_item/autolathe/arms/rifle_small_762
-	name = "rifle magazine (7.62mm)"
-	path =/obj/item/ammo_magazine/s762
+/datum/category_item/autolathe/arms/rifle_small_308
+	name = "rifle magazine (.308)"
+	path =/obj/item/ammo_magazine/s308
 	hidden = 1
 */
 
@@ -279,20 +279,20 @@
 	hidden = 1
 
 /datum/category_item/autolathe/arms/rifle_SVD
-	name = "10rnd rifle magazine (7.62mm)"
-	path =/obj/item/ammo_magazine/m762svd/empty
+	name = "10rnd rifle magazine (.308)"
+	path =/obj/item/ammo_magazine/m308svd/empty
 	category = "Arms and Ammunition"
 	hidden = 1
 
-/datum/category_item/autolathe/arms/rifle_762
-	name = "20rnd rifle magazine (7.62mm)"
-	path =/obj/item/ammo_magazine/m762/empty
+/datum/category_item/autolathe/arms/rifle_308
+	name = "20rnd rifle magazine (.308)"
+	path =/obj/item/ammo_magazine/m308/empty
 	category = "Arms and Ammunition"
 	hidden = 1
 
-/datum/category_item/autolathe/arms/machinegun_762
+/datum/category_item/autolathe/arms/machinegun_308
 	name = "machinegun box magazine (7.62)"
-	path =/obj/item/ammo_magazine/a762/empty
+	path =/obj/item/ammo_magazine/a308/empty
 	category = "Arms and Ammunition"
 	hidden = 1
 
@@ -401,18 +401,18 @@
 	path =/obj/item/ammo_magazine/clip/c545/practice
 	category = "Arms and Ammunition"
 
-/datum/category_item/autolathe/arms/rifle_clip_762
-	name = "ammo clip (7.62mm)"
-	path =/obj/item/ammo_magazine/clip/c762
+/datum/category_item/autolathe/arms/rifle_clip_308
+	name = "ammo clip (.308)"
+	path =/obj/item/ammo_magazine/clip/c308
 	hidden = 1
 
-/datum/category_item/autolathe/arms/rifle_clip_762_hunter
-	name = "ammo clip (7.62mm hunting)"
-	path =/obj/item/ammo_magazine/clip/c762/hunter
+/datum/category_item/autolathe/arms/rifle_clip_308_hunter
+	name = "ammo clip (.308 hunting)"
+	path =/obj/item/ammo_magazine/clip/c308/hunter
 
-/datum/category_item/autolathe/arms/rifle_clip_762_practice
-	name = "ammo clip (7.62mm practice)"
-	path =/obj/item/ammo_magazine/clip/c762/practice
+/datum/category_item/autolathe/arms/rifle_clip_308_practice
+	name = "ammo clip (.308 practice)"
+	path =/obj/item/ammo_magazine/clip/c308/practice
 
 /datum/category_item/autolathe/arms/knuckledusters
 	name = "knuckle dusters"

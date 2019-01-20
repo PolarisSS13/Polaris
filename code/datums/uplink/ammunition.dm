@@ -81,13 +81,13 @@
 	name = "Rifle Magazine (5.45mm AP Extended)"
 	path = /obj/item/ammo_magazine/m545/ap/ext
 
-/datum/uplink_item/item/ammo/c762
-	name = "Rifle Magazine (7.62mm)"
-	path = /obj/item/ammo_magazine/m762
+/datum/uplink_item/item/ammo/c308
+	name = "Rifle Magazine (.308)"
+	path = /obj/item/ammo_magazine/m308
 
-/datum/uplink_item/item/ammo/c762/ap
-	name = "Rifle Magazine (7.62mm AP)"
-	path = /obj/item/ammo_magazine/m762/ap
+/datum/uplink_item/item/ammo/c308/ap
+	name = "Rifle Magazine (.308 AP)"
+	path = /obj/item/ammo_magazine/m308/ap
 
 /datum/uplink_item/item/ammo/a10mm
 	name = "SMG Magazine (10mm)"

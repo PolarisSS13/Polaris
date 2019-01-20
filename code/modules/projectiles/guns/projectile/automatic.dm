@@ -121,19 +121,19 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "designated marksman rifle"
-	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses 7.62mm rounds and has an under barrel grenade launcher."
+	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like a space marine when you hold it, even though it can only hold 10 round magazines. Uses .308 rounds and has an under barrel grenade launcher."
 	icon_state = "carbine" // This isn't a carbine. :T
 	item_state = "z8carbine"
 	wielded_item_state = "z8carbine-wielded"
 	w_class = ITEMSIZE_LARGE
 	force = 10
-	caliber = "7.62mm"
+	caliber = ".308"
 	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 3)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/m762
-	allowed_magazines = list(/obj/item/ammo_magazine/m762)
-	projectile_type = /obj/item/projectile/bullet/rifle/a762
+	magazine_type = /obj/item/ammo_magazine/m308
+	allowed_magazines = list(/obj/item/ammo_magazine/m308)
+	projectile_type = /obj/item/projectile/bullet/rifle/a308
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
@@ -250,7 +250,7 @@
 		return ..() //once open, behave like normal
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/update_icon()
-	if(istype(ammo_magazine,/obj/item/ammo_magazine/m762))
+	if(istype(ammo_magazine,/obj/item/ammo_magazine/m308))
 		icon_state = "l6[cover_open ? "open" : "closed"]mag"
 		item_state = icon_state
 	else
@@ -369,18 +369,18 @@
 
 /obj/item/weapon/gun/projectile/automatic/bullpup // Admin abuse assault rifle. ToDo: Make this less shit. Maybe remove its autofire, and make it spawn with only 10 rounds at start.
 	name = "bullpup rifle"
-	desc = "The bullpup configured GP3000 is a battle rifle produced by Gurov Projectile Weapons LLC. It is sold almost exclusively to standing armies. Uses 7.62mm rounds."
+	desc = "The bullpup configured GP3000 is a battle rifle produced by Gurov Projectile Weapons LLC. It is sold almost exclusively to standing armies. Uses .308 rounds."
 	icon_state = "bullpup-small"
 	item_state = "bullpup"
 	w_class = ITEMSIZE_LARGE
 	force = 10
-	caliber = "7.62mm"
+	caliber = ".308"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 1, TECH_ILLEGAL = 4)
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/m762
-	allowed_magazines = list(/obj/item/ammo_magazine/m762, /obj/item/ammo_magazine/m762m)
-	projectile_type = /obj/item/projectile/bullet/rifle/a762
+	magazine_type = /obj/item/ammo_magazine/m308
+	allowed_magazines = list(/obj/item/ammo_magazine/m308, /obj/item/ammo_magazine/m308m)
+	projectile_type = /obj/item/projectile/bullet/rifle/a308
 
 //	one_handed_penalty = 45
 
@@ -391,9 +391,9 @@
 
 /obj/item/weapon/gun/projectile/automatic/bullpup/update_icon(var/ignore_inhands)
 	..()
-	if(istype(ammo_magazine,/obj/item/ammo_magazine/m762))
+	if(istype(ammo_magazine,/obj/item/ammo_magazine/m308))
 		icon_state = "bullpup-small"
-	else if(istype(ammo_magazine,/obj/item/ammo_magazine/m762m))
+	else if(istype(ammo_magazine,/obj/item/ammo_magazine/m308m))
 		icon_state = "bullpup"
 	else
 		item_state = "bullpup-empty"

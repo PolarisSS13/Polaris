@@ -531,95 +531,95 @@
 	icon_state = "R44"
 	ammo_type = /obj/item/ammo_casing/a44/rubber
 
-///////// 7.62mm /////////
+///////// .308 /////////
 
-/obj/item/ammo_magazine/m762
-	name = "magazine (7.62mm)"
-	icon_state = "m762-small"
+/obj/item/ammo_magazine/m308
+	name = "magazine (.308)"
+	icon_state = "m308-small"
 	mag_type = MAGAZINE
-	caliber = "7.62mm"
+	caliber = ".308"
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a308
 	max_ammo = 10
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m762/ap
-	name = "magazine (7.62mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a762/ap
+/obj/item/ammo_magazine/m308/ap
+	name = "magazine (.308 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a308/ap
 
-/obj/item/ammo_magazine/m762/empty
+/obj/item/ammo_magazine/m308/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m762m // Intentionally not a subtype of m762 because it's supposed to be incompatible with the Z8 Bulldog rifle.
-	name = "magazine (7.62mm)"
-	icon_state = "m762"
+/obj/item/ammo_magazine/m308m // Intentionally not a subtype of m308 because it's supposed to be incompatible with the Z8 Bulldog rifle.
+	name = "magazine (.308)"
+	icon_state = "m308"
 	mag_type = MAGAZINE
-	caliber = "7.62mm"
+	caliber = ".308"
 	matter = list(DEFAULT_WALL_MATERIAL = 4000)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a308
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m762m/ap
-	name = "magazine (7.62mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a762/ap
+/obj/item/ammo_magazine/m308m/ap
+	name = "magazine (.308 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a308/ap
 
-/obj/item/ammo_magazine/m762m/empty
+/obj/item/ammo_magazine/m308m/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m762garand
-	name = "garand clip (7.62mm)" // The clip goes into the magazine, hence the name. I'm very sure this is correct.
+/obj/item/ammo_magazine/m308garand
+	name = "garand clip (.308)" // The clip goes into the magazine, hence the name. I'm very sure this is correct.
 	icon_state = "gclip"
 	mag_type = MAGAZINE
-	caliber = "7.62mm"
+	caliber = ".308"
 	matter = list(DEFAULT_WALL_MATERIAL = 1600)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a308
 	max_ammo = 8
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m762garand/ap
-	name = "garand clip (7.62mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a762/ap
+/obj/item/ammo_magazine/m308garand/ap
+	name = "garand clip (.308 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a308/ap
 
-/obj/item/ammo_magazine/m762/empty
+/obj/item/ammo_magazine/m308/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/clip/c762
-	name = "ammo clip (7.62mm)"
+/obj/item/ammo_magazine/clip/c308
+	name = "ammo clip (.308)"
 	icon_state = "clip_rifle"
-	caliber = "7.62mm"
-	ammo_type = /obj/item/ammo_casing/a762
+	caliber = ".308"
+	ammo_type = /obj/item/ammo_casing/a308
 	matter = list(DEFAULT_WALL_MATERIAL = 1000) // metal costs are very roughly based around one 7.62 casing = 200 metal
 	max_ammo = 5
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/clip/c762/ap
-	name = "rifle clip (7.62mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a762/ap
+/obj/item/ammo_magazine/clip/c308/ap
+	name = "rifle clip (.308 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a308/ap
 
-/obj/item/ammo_magazine/clip/c762/practice
-	name = "rifle clip (7.62mm practice)"
-	ammo_type = /obj/item/ammo_casing/a762/practice
+/obj/item/ammo_magazine/clip/c308/practice
+	name = "rifle clip (.308 practice)"
+	ammo_type = /obj/item/ammo_casing/a308/practice
 
-/obj/item/ammo_magazine/clip/c762/hunter
-	name = "rifle clip (7.62mm hunting)"
-	ammo_type = /obj/item/ammo_casing/a762/hunter
+/obj/item/ammo_magazine/clip/c308/hunter
+	name = "rifle clip (.308 hunting)"
+	ammo_type = /obj/item/ammo_casing/a308/hunter
 
-/obj/item/ammo_magazine/m762svd
-	name = "\improper SVD magazine (7.62mm)"
+/obj/item/ammo_magazine/m308svd
+	name = "\improper SVD magazine (.308)"
 	icon_state = "SVD"
 	mag_type = MAGAZINE
-	caliber = "7.62mm"
+	caliber = ".308"
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	ammo_type = /obj/item/ammo_casing/a762
+	ammo_type = /obj/item/ammo_casing/a308
 	max_ammo = 10
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m762svd/ap
-	name = "\improper SVD magazine (7.62mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a762/ap
+/obj/item/ammo_magazine/m308svd/ap
+	name = "\improper SVD magazine (.308 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a308/ap
 
-/obj/item/ammo_magazine/m762svd/empty
+/obj/item/ammo_magazine/m308svd/empty
 	initial_ammo = 0
 
 ///////// 12g /////////

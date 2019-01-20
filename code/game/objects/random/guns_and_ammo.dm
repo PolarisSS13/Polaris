@@ -213,28 +213,28 @@
 			),
 			prob(2);list(
 				/obj/item/weapon/gun/projectile/automatic/z8,
-				/obj/item/ammo_magazine/m762,
-				/obj/item/ammo_magazine/m762
+				/obj/item/ammo_magazine/m308,
+				/obj/item/ammo_magazine/m308
 			),
 			prob(4);list(
 				/obj/item/weapon/gun/projectile/shotgun/pump/rifle,
-				/obj/item/ammo_magazine/clip/c762,
-				/obj/item/ammo_magazine/clip/c762
+				/obj/item/ammo_magazine/clip/c308,
+				/obj/item/ammo_magazine/clip/c308
 			),
 			prob(3);list(
 				/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever,
-				/obj/item/ammo_magazine/clip/c762,
-				/obj/item/ammo_magazine/clip/c762
+				/obj/item/ammo_magazine/clip/c308,
+				/obj/item/ammo_magazine/clip/c308
 			),
 			prob(1);list(
 				/obj/item/weapon/gun/projectile/garand,
-				/obj/item/ammo_magazine/m762garand,
-				/obj/item/ammo_magazine/m762garand
+				/obj/item/ammo_magazine/m308garand,
+				/obj/item/ammo_magazine/m308garand
 			),
 			prob(1);list(
 				/obj/item/weapon/gun/projectile/automatic/bullpup,
-				/obj/item/ammo_magazine/m762,
-				/obj/item/ammo_magazine/m762
+				/obj/item/ammo_magazine/m308,
+				/obj/item/ammo_magazine/m308
 			)
 		)
 

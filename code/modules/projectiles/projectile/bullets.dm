@@ -165,24 +165,24 @@
 	armor_penetration = 15
 	penetrating = 1
 
-/obj/item/projectile/bullet/rifle/a762
+/obj/item/projectile/bullet/rifle/a308
 	fire_sound = 'sound/weapons/Gunshot_heavy.ogg'
 	damage = 35
 
-/obj/item/projectile/bullet/rifle/a762/sniper // Hitscan specifically for sniper ammo; to be implimented at a later date, probably for the SVD. -Ace
+/obj/item/projectile/bullet/rifle/a308/sniper // Hitscan specifically for sniper ammo; to be implimented at a later date, probably for the SVD. -Ace
 	fire_sound = 'sound/weapons/Gunshot_sniper.ogg'
 	hitscan = 1 //so the ammo isn't useless as a sniper weapon
 
-/obj/item/projectile/bullet/rifle/a762/ap
+/obj/item/projectile/bullet/rifle/a308/ap
 	damage = 30
 	armor_penetration = 50 // At 30 or more armor, this will do more damage than standard rounds.
 
-/obj/item/projectile/bullet/rifle/a762/hp
+/obj/item/projectile/bullet/rifle/a308/hp
 	damage = 40
 	armor_penetration = -50
 	penetrating = 0
 
-/obj/item/projectile/bullet/rifle/a762/hunter // Optimized for killing simple animals and not people, because Balance(tm)
+/obj/item/projectile/bullet/rifle/a308/hunter // Optimized for killing simple animals and not people, because Balance(tm)
 	damage = 20
 	SA_bonus_damage = 50 // 70 total on animals.
 	SA_vulnerability = SA_ANIMAL

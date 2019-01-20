@@ -1,16 +1,16 @@
 /obj/item/weapon/gun/projectile/garand
 	name = "\improper M1 Garand"
-	desc = "This is the vintage semi-automatic rifle that famously helped win the second World War. What the hell it's doing aboard a space station in the 26th century, you can only imagine. Uses 7.62mm rounds."
+	desc = "This is the vintage semi-automatic rifle that famously helped win the second World War. What the hell it's doing aboard a space station in the 26th century, you can only imagine. Uses .308 rounds."
 	icon_state = "garand"
 	item_state = "boltaction"
 	w_class = ITEMSIZE_LARGE
-	caliber = "7.62mm"
+	caliber = ".308"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	slot_flags = SLOT_BACK
 	//fire_sound = 'sound/weapons/rifleshot.ogg'
 	load_method = MAGAZINE // ToDo: Make it so MAGAZINE, SPEEDLOADER and SINGLE_CASING can all be used on the same gun.
-	magazine_type = /obj/item/ammo_magazine/m762garand
-	allowed_magazines = list(/obj/item/ammo_magazine/m762garand)
+	magazine_type = /obj/item/ammo_magazine/m308garand
+	allowed_magazines = list(/obj/item/ammo_magazine/m308garand)
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/garand_ping.ogg'
 
