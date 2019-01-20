@@ -157,18 +157,18 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/medium/hp
 
 /*
- * 10mm
+ * 10mm Auto
  */
 
 /obj/item/ammo_casing/a10mm
-	desc = "A 10mm bullet casing."
+	desc = "A 10mm Auto bullet casing."
 	caliber = "10mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
 
 /obj/item/ammo_casing/a10mm/emp
-	name = "10mm haywire round"
-	desc = "A 10mm bullet casing fitted with a single-use ion pulse generator."
+	name = "10mm Haywire round"
+	desc = "A 10mm Auto bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	icon_state = "empcasing"
 	matter = list(DEFAULT_WALL_MATERIAL = 130, "uranium" = 100)

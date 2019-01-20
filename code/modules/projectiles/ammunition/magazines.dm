@@ -345,14 +345,14 @@
 /obj/item/ammo_magazine/m9mmR/saber/empty
 	initial_ammo = 0
 
-///////// 10mm /////////
+///////// 10mm Auto /////////
 
 /obj/item/ammo_magazine/m10mm
 	name = "magazine (10mm)"
 	icon_state = "10mm"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "10mm"
+	caliber = "10mm Auto"
 	matter = list(DEFAULT_WALL_MATERIAL = 1500)
 	ammo_type = /obj/item/ammo_casing/a10mm
 	max_ammo = 20
@@ -362,17 +362,17 @@
 	initial_ammo = 0
 
 /obj/item/ammo_magazine/clip/c10mm
-	name = "ammo clip (10mm)"
+	name = "ammo clip (10mm Auto)"
 	icon_state = "clip_pistol"
 	desc = "A stripper clip for reloading 5mm rounds into magazines."
-	caliber = "10mm"
+	caliber = "10mm Auto"
 	ammo_type = /obj/item/ammo_casing/a10mm
 	matter = list(DEFAULT_WALL_MATERIAL = 675) // metal costs are very roughly based around one 10mm casing = 75 metal
 	max_ammo = 9
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/box/emp/b10
-	name = "ammunition box (10mm haywire)"
+	name = "ammunition box (10mm Haywire)"
 	ammo_type = /obj/item/ammo_casing/a10mm/emp
 
 ///////// 5.45mm /////////

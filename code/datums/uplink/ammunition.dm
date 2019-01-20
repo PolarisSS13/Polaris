@@ -90,7 +90,7 @@
 	path = /obj/item/ammo_magazine/m762/ap
 
 /datum/uplink_item/item/ammo/a10mm
-	name = "SMG Magazine (10mm)"
+	name = "SMG Magazine (10mm Auto)"
 	path = /obj/item/ammo_magazine/m10mm
 
 /datum/uplink_item/item/ammo/a545

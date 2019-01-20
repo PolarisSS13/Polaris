@@ -138,9 +138,9 @@
 	name = "top-mounted SMG magazine (9mm flash)"
 	path =/obj/item/ammo_magazine/m9mmt/flash
 
-/////// 10mm
+/////// 10mm Auto
 /datum/category_item/autolathe/arms/smg_10mm
-	name = "SMG magazine (10mm)"
+	name = "SMG magazine (10mm Auto Auto)"
 	path =/obj/item/ammo_magazine/m10mm
 	hidden = 1
 
@@ -256,7 +256,7 @@
 	category = "Arms and Ammunition"
 
 /datum/category_item/autolathe/arms/smg_10mm
-	name = "SMG magazine (10mm)"
+	name = "SMG magazine (10mm Auto)"
 	path =/obj/item/ammo_magazine/m10mm/empty
 	category = "Arms and Ammunition"
 	hidden = 1
@@ -379,7 +379,7 @@
 	hidden = 1
 
 /datum/category_item/autolathe/arms/pistol_clip_10mm
-	name = "ammo clip (10mm)"
+	name = "ammo clip (10mm Auto)"
 	path =/obj/item/ammo_magazine/clip/c10mm
 	category = "Arms and Ammunition"
 	hidden = 1

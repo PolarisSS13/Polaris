@@ -249,7 +249,7 @@
 		/obj/item/ammo_casing/a357              = ".357",
 		/obj/item/ammo_casing/a9mm		        = "9mm",
 		/obj/item/ammo_casing/a45				= ".45",
-		/obj/item/ammo_casing/a10mm             = "10mm",
+		/obj/item/ammo_casing/a10mm             = "10mm Auto",
 		/obj/item/ammo_casing/a12g              = "12g",
 		/obj/item/ammo_casing/a12g              = "12g",
 		/obj/item/ammo_casing/a12g/pellet       = "12g",

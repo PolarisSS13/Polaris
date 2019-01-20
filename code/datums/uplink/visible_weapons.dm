@@ -145,7 +145,7 @@
 
 //These are for traitors (or other antags, perhaps) to have the option of purchasing some merc gear.
 /datum/uplink_item/item/visible_weapons/submachinegun
-	name = "Submachine Gun (10mm)"
+	name = "Submachine Gun (10mm Auto)"
 	item_cost = 60
 	path = /obj/item/weapon/gun/projectile/automatic/c20r
 
