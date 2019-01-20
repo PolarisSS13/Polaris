@@ -205,3 +205,29 @@
 	singular_name = "roofing"
 	desc = "A section of roofing material. You can use it to repair the ceiling, or expand it."
 	icon_state = "techtile_grid"
+
+/obj/item/stack/tile/road
+	name = "road tile"
+	singular_name = "road tile"
+	desc = "A section of road. You can use it to repair or expand roads."
+	icon_state = "tile-road"
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0
+	origin_tech = list(TECH_BIO = 1)
+	no_variants = FALSE
+
+/obj/item/stack/tile/pavement
+	name = "pavement tile"
+	singular_name = "pavement tile"
+	desc = "A section of pavement. It is the same size as a normal floor tile!"
+	icon_state = "tile-pavement"
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = 0
+	origin_tech = list(TECH_BIO = 1)
+	no_variants = FALSE

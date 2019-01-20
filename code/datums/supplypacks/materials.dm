@@ -59,3 +59,17 @@
 	containername = "Linoleum crate"
 	cost = 15
 	contains = list(/obj/fiftyspawner/linoleum)
+
+/datum/supply_packs/materials/road50
+	name = "50 road tiles"
+	contains = list(/obj/fiftyspawner/road)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "Road tiles crate"
+
+/datum/supply_packs/materials/pavement50
+	name = "50 pavement tiles"
+	contains = list(/obj/fiftyspawner/pavement)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "Pavement tiles crate"
