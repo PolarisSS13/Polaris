@@ -1764,7 +1764,7 @@
 "HV" = (/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership/elite_squad)
 "HW" = (/obj/mecha/combat/marauder/mauler,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership/elite_squad)
 "HX" = (/obj/machinery/mech_recharger,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership/elite_squad)
-"HY" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/automatic/sts35,/obj/item/weapon/gun/projectile/automatic/sts35,/obj/item/ammo_magazine/m545,/obj/item/ammo_magazine/m545,/obj/item/ammo_magazine/m545,/obj/item/ammo_magazine/m545,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_station)
+"HY" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/automatic/sts35,/obj/item/weapon/gun/projectile/automatic/sts35,/obj/item/ammo_magazine/m223,/obj/item/ammo_magazine/m223,/obj/item/ammo_magazine/m223,/obj/item/ammo_magazine/m223,/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_station)
 "HZ" = (/turf/simulated/shuttle/wall/dark,/area/shuttle/syndicate_elite/mothership)
 "Ia" = (/turf/space,/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion_r"; dir = 1},/turf/simulated/shuttle/plating/airless/carry,/area/shuttle/syndicate_elite/mothership)
 "Ib" = (/turf/space,/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion"; dir = 1},/turf/simulated/shuttle/plating/airless/carry,/area/shuttle/syndicate_elite/mothership)
