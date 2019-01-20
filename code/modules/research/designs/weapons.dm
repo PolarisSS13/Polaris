@@ -45,9 +45,9 @@
 	build_path = /obj/item/weapon/gun/energy/decloner
 	sort_string = "TAAAE"
 
-/datum/design/item/weapon/smg
+/datum/design/item/weapon/advanced_smg
 	id = "smg"
-	desc = "An compact reliable SMG firing armor piercing ammo."
+	desc = "An advanced 9mm SMG with a reflective laser optic."
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "silver" = 2000, "diamond" = 1000)
 	build_path = /obj/item/weapon/gun/projectile/automatic/advanced_smg
@@ -55,6 +55,7 @@
 
 /datum/design/item/weapon/ammo_9mmAdvanced
 	id = "ammo_9mm"
+	desc = "A 21 round magazine for an advanced 9mm SMG."
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 3750, "silver" = 100) // Requires silver for proprietary magazines! Or something.
 	build_path = /obj/item/ammo_magazine/m9mmAdvanced
