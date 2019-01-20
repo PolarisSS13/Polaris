@@ -1086,7 +1086,7 @@ area/space/atmosalert()
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/hop
-	name = "\improper Command - City Supervisor's Office"
+	name = "\improper Command - City Clerk's Office"
 	icon_state = "head_quarters"
 
 /area/crew_quarters/heads/hor

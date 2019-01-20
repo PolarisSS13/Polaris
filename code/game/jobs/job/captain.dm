@@ -61,7 +61,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	return
 
 /datum/job/hop
-	title = "City Supervisor"
+	title = "City Clerk"
 	flag = HOP
 	department = "Command"
 	head_position = 1

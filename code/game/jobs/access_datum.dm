@@ -337,7 +337,7 @@
 /var/const/access_hop = 57
 /datum/access/hop
 	id = access_hop
-	desc = "City Supervisor"
+	desc = "City Clerk"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_hos = 58

@@ -89,7 +89,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the chief of police and city supervisor"
+	supervisors = "the chief of police and city clerk"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/prosecutor
 	economic_modifier = 7
