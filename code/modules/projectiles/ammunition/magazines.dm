@@ -375,117 +375,117 @@
 	name = "ammunition box (10mm haywire)"
 	ammo_type = /obj/item/ammo_casing/a10mm/emp
 
-///////// 5.45mm /////////
+///////// .223 /////////
 
-/obj/item/ammo_magazine/m545
-	name = "magazine (5.45mm)"
-	icon_state = "m545"
+/obj/item/ammo_magazine/m223
+	name = "magazine (.223)"
+	icon_state = "m223"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "5.45mm"
+	caliber = ".223"
 	matter = list(DEFAULT_WALL_MATERIAL = 1800)
-	ammo_type = /obj/item/ammo_casing/a545
+	ammo_type = /obj/item/ammo_casing/a223
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m545/ext
-	name = "extended magazine (5.45mm)"
+/obj/item/ammo_magazine/m223/ext
+	name = "extended magazine (.223)"
 	matter = list(DEFAULT_WALL_MATERIAL = 2700)
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m545/empty
+/obj/item/ammo_magazine/m223/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m545/ext/empty
+/obj/item/ammo_magazine/m223/ext/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m545/practice
-	name = "magazine (5.45mm practice)"
-	ammo_type = /obj/item/ammo_casing/a545/practice
+/obj/item/ammo_magazine/m223/practice
+	name = "magazine (.223 practice)"
+	ammo_type = /obj/item/ammo_casing/a223/practice
 
-/obj/item/ammo_magazine/m545/practice/ext
-	name = "extended magazine (5.45mm practice)"
+/obj/item/ammo_magazine/m223/practice/ext
+	name = "extended magazine (.223 practice)"
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m545/ap
-	name = "magazine (5.45mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a545/ap
+/obj/item/ammo_magazine/m223/ap
+	name = "magazine (.223 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a223/ap
 
-/obj/item/ammo_magazine/m545/ap/ext
-	name = "extended magazine (5.45mm armor-piercing)"
+/obj/item/ammo_magazine/m223/ap/ext
+	name = "extended magazine (.223 armor-piercing)"
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m545/hunter
-	name = "magazine (5.45mm hunting)"
-	ammo_type = /obj/item/ammo_casing/a545/hunter
+/obj/item/ammo_magazine/m223/hunter
+	name = "magazine (.223 hunting)"
+	ammo_type = /obj/item/ammo_casing/a223/hunter
 
-/obj/item/ammo_magazine/m545/hunter/ext
-	name = "extended magazine (5.45mm hunting)"
+/obj/item/ammo_magazine/m223/hunter/ext
+	name = "extended magazine (.223 hunting)"
 	max_ammo = 30
 
-/obj/item/ammo_magazine/m545/small
-	name = "reduced magazine (5.45mm)"
-	icon_state = "m545-small"
+/obj/item/ammo_magazine/m223/small
+	name = "reduced magazine (.223)"
+	icon_state = "m223-small"
 	matter = list(DEFAULT_WALL_MATERIAL = 900)
 	max_ammo = 10
 
-/obj/item/ammo_magazine/m545/small/empty
+/obj/item/ammo_magazine/m223/small/empty
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/m545/small/practice
-	name = "magazine (5.45mm practice)"
-	ammo_type = /obj/item/ammo_casing/a545/practice
+/obj/item/ammo_magazine/m223/small/practice
+	name = "magazine (.223 practice)"
+	ammo_type = /obj/item/ammo_casing/a223/practice
 
-/obj/item/ammo_magazine/m545/small/ap
-	name = "magazine (5.45mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a545/ap
+/obj/item/ammo_magazine/m223/small/ap
+	name = "magazine (.223 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a223/ap
 
-/obj/item/ammo_magazine/m545/small/hunter
-	name = "magazine (5.45mm hunting)"
-	ammo_type = /obj/item/ammo_casing/a545/hunter
+/obj/item/ammo_magazine/m223/small/hunter
+	name = "magazine (.223 hunting)"
+	ammo_type = /obj/item/ammo_casing/a223/hunter
 
-/obj/item/ammo_magazine/clip/c545
-	name = "ammo clip (5.45mm)"
+/obj/item/ammo_magazine/clip/c223
+	name = "ammo clip (.223)"
 	icon_state = "clip_rifle"
-	caliber = "5.45mm"
-	ammo_type = /obj/item/ammo_casing/a545
+	caliber = ".223"
+	ammo_type = /obj/item/ammo_casing/a223
 	matter = list(DEFAULT_WALL_MATERIAL = 450) // metal costs are very roughly based around one 10mm casing = 180 metal
 	max_ammo = 5
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/clip/c545/ap
-	name = "rifle clip (5.45mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a545/ap
+/obj/item/ammo_magazine/clip/c223/ap
+	name = "rifle clip (.223 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a223/ap
 
-/obj/item/ammo_magazine/clip/c545/hunter
-	name = "rifle clip (5.45mm hunting)"
-	ammo_type = /obj/item/ammo_casing/a545/hunter
+/obj/item/ammo_magazine/clip/c223/hunter
+	name = "rifle clip (.223 hunting)"
+	ammo_type = /obj/item/ammo_casing/a223/hunter
 
-/obj/item/ammo_magazine/clip/c545/practice
-	name = "rifle clip (5.45mm practice)"
-	ammo_type = /obj/item/ammo_casing/a545
+/obj/item/ammo_magazine/clip/c223/practice
+	name = "rifle clip (.223 practice)"
+	ammo_type = /obj/item/ammo_casing/a223
 
-/obj/item/ammo_magazine/m545saw
-	name = "magazine box (5.45mm)"
-	icon_state = "a545"
+/obj/item/ammo_magazine/m223saw
+	name = "magazine box (.223)"
+	icon_state = "a223"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
-	caliber = "5.45mm"
+	caliber = ".223"
 	matter = list(DEFAULT_WALL_MATERIAL = 10000)
-	ammo_type = /obj/item/ammo_casing/a545
+	ammo_type = /obj/item/ammo_casing/a223
 	w_class = ITEMSIZE_NORMAL // This should NOT fit in your pocket!!
 	max_ammo = 50
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m545saw/ap
-	name = "magazine box (5.45mm armor-piercing)"
-	ammo_type = /obj/item/ammo_casing/a545/ap
+/obj/item/ammo_magazine/m223saw/ap
+	name = "magazine box (.223 armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a223/ap
 
-/obj/item/ammo_magazine/m545saw/hunter
-	name = "magazine box (5.45mm hunting)"
-	ammo_type = /obj/item/ammo_casing/a545/hunter
+/obj/item/ammo_magazine/m223saw/hunter
+	name = "magazine box (.223 hunting)"
+	ammo_type = /obj/item/ammo_casing/a223/hunter
 
-/obj/item/ammo_magazine/m545saw/empty
+/obj/item/ammo_magazine/m223saw/empty
 	initial_ammo = 0
 
 ///////// .44 Magnum /////////

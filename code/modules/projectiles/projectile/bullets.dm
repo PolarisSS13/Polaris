@@ -187,20 +187,20 @@
 	SA_bonus_damage = 50 // 70 total on animals.
 	SA_vulnerability = SA_ANIMAL
 
-/obj/item/projectile/bullet/rifle/a545
+/obj/item/projectile/bullet/rifle/a223
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	damage = 25
 
-/obj/item/projectile/bullet/rifle/a545/ap
+/obj/item/projectile/bullet/rifle/a223/ap
 	damage = 20
 	armor_penetration = 50 // At 40 or more armor, this will do more damage than standard rounds.
 
-/obj/item/projectile/bullet/rifle/a545/hp
+/obj/item/projectile/bullet/rifle/a223/hp
 	damage = 35
 	armor_penetration = -50
 	penetrating = 0
 
-/obj/item/projectile/bullet/rifle/a545/hunter
+/obj/item/projectile/bullet/rifle/a223/hunter
 	damage = 15
 	SA_bonus_damage = 35 // 50 total on animals.
 	SA_vulnerability = SA_ANIMAL

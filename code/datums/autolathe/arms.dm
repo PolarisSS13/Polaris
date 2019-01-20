@@ -149,28 +149,28 @@
 	path =/obj/item/ammo_magazine/m44
 	hidden = 1
 
-/////// 5.45mm
-/datum/category_item/autolathe/arms/rifle_545
-	name = "rifle magazine (5.45mm)"
-	path =/obj/item/ammo_magazine/m545
+/////// .223
+/datum/category_item/autolathe/arms/rifle_223
+	name = "rifle magazine (.223)"
+	path =/obj/item/ammo_magazine/m223
 	hidden = 1
 
-/datum/category_item/autolathe/arms/rifle_545p
-	name = "rifle magazine (5.45mm practice)"
-	path =/obj/item/ammo_magazine/m545/practice
+/datum/category_item/autolathe/arms/rifle_223p
+	name = "rifle magazine (.223 practice)"
+	path =/obj/item/ammo_magazine/m223/practice
 
-/datum/category_item/autolathe/arms/rifle_545_hunter
-	name = "rifle magazine (5.45mm hunting)"
-	path =/obj/item/ammo_magazine/m545/hunter
+/datum/category_item/autolathe/arms/rifle_223_hunter
+	name = "rifle magazine (.223 hunting)"
+	path =/obj/item/ammo_magazine/m223/hunter
 
-/datum/category_item/autolathe/arms/machinegun_545
+/datum/category_item/autolathe/arms/machinegun_223
 	name = "machinegun box magazine (5.45)"
-	path =/obj/item/ammo_magazine/m545saw
+	path =/obj/item/ammo_magazine/m223saw
 	hidden = 1
 
-/datum/category_item/autolathe/arms/machinegun_545_hunter
+/datum/category_item/autolathe/arms/machinegun_223_hunter
 	name = "machinegun box magazine (5.45 hunting)"
-	path =/obj/item/ammo_magazine/m545saw/hunter
+	path =/obj/item/ammo_magazine/m223saw/hunter
 	hidden = 1
 
 /////// 7.62
@@ -267,14 +267,14 @@
 	category = "Arms and Ammunition"
 	hidden = 1
 
-/datum/category_item/autolathe/arms/rifle_545
-	name = "10rnd rifle magazine (5.45mm)"
-	path =/obj/item/ammo_magazine/m545saw/empty
+/datum/category_item/autolathe/arms/rifle_223
+	name = "10rnd rifle magazine (.223)"
+	path =/obj/item/ammo_magazine/m223saw/empty
 	category = "Arms and Ammunition"
 
-/datum/category_item/autolathe/arms/rifle_545m
-	name = "20rnd rifle magazine (5.45mm)"
-	path =/obj/item/ammo_magazine/m545sawm/empty
+/datum/category_item/autolathe/arms/rifle_223m
+	name = "20rnd rifle magazine (.223)"
+	path =/obj/item/ammo_magazine/m223sawm/empty
 	category = "Arms and Ammunition"
 	hidden = 1
 
@@ -390,15 +390,15 @@
 	category = "Arms and Ammunition"
 	hidden = 1
 */
-/datum/category_item/autolathe/arms/rifle_clip_545
-	name = "ammo clip (5.45mm)"
-	path =/obj/item/ammo_magazine/clip/c545
+/datum/category_item/autolathe/arms/rifle_clip_223
+	name = "ammo clip (.223)"
+	path =/obj/item/ammo_magazine/clip/c223
 	category = "Arms and Ammunition"
 	hidden = 1
 
-/datum/category_item/autolathe/arms/rifle_clip_545_practice
-	name = "ammo clip (5.45mm practice)"
-	path =/obj/item/ammo_magazine/clip/c545/practice
+/datum/category_item/autolathe/arms/rifle_clip_223_practice
+	name = "ammo clip (.223 practice)"
+	path =/obj/item/ammo_magazine/clip/c223/practice
 	category = "Arms and Ammunition"
 
 /datum/category_item/autolathe/arms/rifle_clip_762

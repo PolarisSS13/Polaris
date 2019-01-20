@@ -65,21 +65,21 @@
 	name = "Anti-Materiel Rifle ammo box (14.5mm)"
 	path = /obj/item/weapon/storage/box/sniperammo
 
-/datum/uplink_item/item/ammo/c545
-	name = "Rifle Magazine (5.45mm)"
-	path = /obj/item/ammo_magazine/m545
+/datum/uplink_item/item/ammo/c223
+	name = "Rifle Magazine (.223)"
+	path = /obj/item/ammo_magazine/m223
 
-/datum/uplink_item/item/ammo/c545/ext
-	name = "Rifle Magazine (5.45mm Extended)"
-	path = /obj/item/ammo_magazine/m545/ext
+/datum/uplink_item/item/ammo/c223/ext
+	name = "Rifle Magazine (.223 Extended)"
+	path = /obj/item/ammo_magazine/m223/ext
 
-/datum/uplink_item/item/ammo/c545/ap
-	name = "Rifle Magazine (5.45mm AP)"
-	path = /obj/item/ammo_magazine/m545/ap
+/datum/uplink_item/item/ammo/c223/ap
+	name = "Rifle Magazine (.223 AP)"
+	path = /obj/item/ammo_magazine/m223/ap
 
-/datum/uplink_item/item/ammo/c545/ap/ext
-	name = "Rifle Magazine (5.45mm AP Extended)"
-	path = /obj/item/ammo_magazine/m545/ap/ext
+/datum/uplink_item/item/ammo/c223/ap/ext
+	name = "Rifle Magazine (.223 AP Extended)"
+	path = /obj/item/ammo_magazine/m223/ap/ext
 
 /datum/uplink_item/item/ammo/c762
 	name = "Rifle Magazine (7.62mm)"
@@ -93,13 +93,13 @@
 	name = "SMG Magazine (10mm)"
 	path = /obj/item/ammo_magazine/m10mm
 
-/datum/uplink_item/item/ammo/a545
-	name = "Machinegun Magazine (5.45mm)"
-	path = /obj/item/ammo_magazine/m545saw
+/datum/uplink_item/item/ammo/a223
+	name = "Machinegun Magazine (.223)"
+	path = /obj/item/ammo_magazine/m223saw
 
-/datum/uplink_item/item/ammo/a545/ap
-	name = "Machinegun Magazine (5.45mm AP)"
-	path = /obj/item/ammo_magazine/m545saw/ap
+/datum/uplink_item/item/ammo/a223/ap
+	name = "Machinegun Magazine (.223 AP)"
+	path = /obj/item/ammo_magazine/m223saw/ap
 
 /datum/uplink_item/item/ammo/g12
 	name = "12g Shotgun Ammo Box (Slug)"

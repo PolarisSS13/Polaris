@@ -208,8 +208,8 @@
 	return pick(
 			prob(2);list(
 				/obj/item/weapon/gun/projectile/automatic/sts35,
-				/obj/item/ammo_magazine/m545,
-				/obj/item/ammo_magazine/m545
+				/obj/item/ammo_magazine/m223,
+				/obj/item/ammo_magazine/m223
 			),
 			prob(2);list(
 				/obj/item/weapon/gun/projectile/automatic/z8,
