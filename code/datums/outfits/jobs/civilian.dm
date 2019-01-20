@@ -66,14 +66,14 @@
 	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
-/decl/hierarchy/outfit/job/librarian
+/decl/hierarchy/outfit/job/civilian/librarian
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	l_hand = /obj/item/weapon/barcodescanner
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
-/decl/hierarchy/outfit/job/chaplain
+/decl/hierarchy/outfit/job/civilian/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
 	l_hand = /obj/item/weapon/storage/bible
@@ -97,7 +97,7 @@
 	r_pocket = /obj/item/device/gps/explorer
 	id_pda_assignment = "Explorer"
 
-/decl/hierarchy/outfit/job/barber
+/decl/hierarchy/outfit/job/civilian/barber
 	name = OUTFIT_JOB_NAME("Barber")
 	id_type = /obj/item/weapon/card/id/civilian/barber
 	r_pocket = /obj/item/device/communicator
@@ -105,7 +105,7 @@
 	r_pocket = /obj/item/weapon/scissors/barber
 
 
-/decl/hierarchy/outfit/job/judge
+/decl/hierarchy/outfit/job/heads/judge
 	name = OUTFIT_JOB_NAME("Judge")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
@@ -114,10 +114,10 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	r_pocket = /obj/item/device/communicator
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/judge
+	id_type = /obj/item/weapon/card/id/heads/judge
 	pda_type = /obj/item/device/pda/lawyer
 
-/decl/hierarchy/outfit/job/defense
+/decl/hierarchy/outfit/job/civilian/defense/defense
 	name = OUTFIT_JOB_NAME("Defense Attorney")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/lawyer/blue

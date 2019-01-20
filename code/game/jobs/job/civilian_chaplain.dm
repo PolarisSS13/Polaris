@@ -1,10 +1,7 @@
 //Due to how large this one is it gets its own file
-/datum/job/chaplain
+/datum/job/civilian/chaplain
 	title = "Chaplain"
 	flag = CHAPLAIN
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	minimum_character_age = 18
@@ -15,9 +12,9 @@
 	minimal_access = list(access_chapel_office, access_crematorium)
 	alt_titles = list("Counselor", "Priest", "Preacher")
 
-	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	outfit_type = /decl/hierarchy/outfit/job/civilian/chaplain
 
-/datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
+/datum/job/civilian/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
 	. = ..()
 	if(!.)
 		return
@@ -150,5 +147,5 @@
 		feedback_set_details("religion_book","[new_book_style]")
 	return 1
 
-/datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/civilian/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
 	return equip(H, alt_title, FALSE)

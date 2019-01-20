@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/captain
+/decl/hierarchy/outfit/job/heads/captain
 	name = OUTFIT_JOB_NAME("Mayor")
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/rank/captain
@@ -11,12 +11,12 @@
 	pda_type = /obj/item/device/pda/captain
 	r_pocket = /obj/item/device/communicator
 
-/decl/hierarchy/outfit/job/captain/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/heads/captain/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/rank/captain/skirt
 
-/decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/heads/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this
@@ -29,7 +29,7 @@
 			else
 				qdel(medal)
 
-/decl/hierarchy/outfit/job/hop
+/decl/hierarchy/outfit/job/heads/hop
 	name = OUTFIT_JOB_NAME("City Supervisor")
 	uniform = /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	l_ear = /obj/item/device/radio/headset/heads/hop
@@ -37,7 +37,7 @@
 	id_type = /obj/item/weapon/card/id/silver/hop
 	pda_type = /obj/item/device/pda/heads/hop
 
-/decl/hierarchy/outfit/job/secretary
+/decl/hierarchy/outfit/job/heads/secretary
 	name = OUTFIT_JOB_NAME("City Hall Guard")
 	l_ear = /obj/item/device/radio/headset/headset_com
 	shoes = /obj/item/clothing/shoes/brown
@@ -45,14 +45,14 @@
 	pda_type = /obj/item/device/pda/heads/hop
 	r_hand = /obj/item/weapon/clipboard
 
-/decl/hierarchy/outfit/job/secretary/pre_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/heads/secretary/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/suit_jacket/female/skirt
 	else
 		uniform = /obj/item/clothing/under/suit_jacket/charcoal
 
-/decl/hierarchy/outfit/job/president
+/decl/hierarchy/outfit/job/heads/president
 	name = OUTFIT_JOB_NAME("President")
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/rank/president
@@ -66,7 +66,7 @@
 	pda_type = /obj/item/device/pda/captain
 	r_pocket = /obj/item/device/communicator
 
-/decl/hierarchy/outfit/job/president/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/heads/president/post_equip(var/mob/living/carbon/human/H)
 	..()
 	var/obj/item/clothing/uniform = H.w_uniform
 	if(uniform)

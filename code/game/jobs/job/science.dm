@@ -1,10 +1,12 @@
-/datum/job/rd
-	title = "Research Director"
-	flag = RD
-	head_position = 1
+/datum/job/science
 	department = "Science"
 	department_flag = MEDSCI
 	faction = "Station"
+
+/datum/job/science/rd
+	title = "Research Director"
+	flag = RD
+	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the mayor"
@@ -28,12 +30,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 	alt_titles = list("Research Supervisor")
 
-/datum/job/scientist
+/datum/job/science/scientist
 	title = "Scientist"
 	flag = SCIENTIST
-	department = "Science"
-	department_flag = MEDSCI
-	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
@@ -48,12 +47,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
 	alt_titles = list("Xenoarchaeologist", "Anomalist", "Phoron Researcher")
 
-/datum/job/xenobiologist
+/datum/job/science/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
-	department = "Science"
-	department_flag = MEDSCI
-	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the research director"
@@ -68,12 +64,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
 	alt_titles = list("Xenobotanist")
 
-/datum/job/roboticist
+/datum/job/science/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
-	department = "Science"
-	department_flag = MEDSCI
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "research director"

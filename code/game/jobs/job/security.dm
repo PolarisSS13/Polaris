@@ -1,10 +1,12 @@
-/datum/job/hos
-	title = "Chief of Police"
-	flag = HOS
-	head_position = 1
+/datum/job/security
 	department = "Security"
 	department_flag = ENGSEC
 	faction = "Station"
+
+/datum/job/security/hos
+	title = "Chief of Police"
+	flag = HOS
+	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -24,12 +26,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 	alt_titles = list("Security Commander", "Chief of Security")
 
-/datum/job/warden
+/datum/job/security/warden
 	title = "Prison Warden"
 	flag = WARDEN
-	department = "Security"
-	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief of police"
@@ -43,12 +42,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
 	alt_titles = list("Correctional Officer")
 
-/datum/job/detective
+/datum/job/security/detective
 	title = "Detective"
 	flag = DETECTIVE
-	department = "Security"
-	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief of police"
@@ -62,12 +58,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
 	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic, "Investigator")
 
-/datum/job/officer
+/datum/job/security/officer
 	title = "Police Officer"
 	flag = OFFICER
-	department = "Security"
-	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 8
 	spawn_positions = 8
 	supervisors = "the chief of police"
@@ -81,12 +74,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
 	alt_titles = list("Junior Officer","Traffic Warden" = /decl/hierarchy/outfit/job/security/traffic)
 
-/datum/job/prosecutor
+/datum/job/security/prosecutor
 	title = "District Prosecutor"
 	flag = PROSECUTOR
-	department = "Security"
-	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief of police and city supervisor"
