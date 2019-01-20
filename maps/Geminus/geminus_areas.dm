@@ -70,6 +70,7 @@
 	name = "\improper Geminus Interior"
 	icon_state = "yellow"
 	dynamic_lighting = 1
+	flags = RAD_SHIELDED
 
 
 /area/planets/Geminus/outdoor/north
