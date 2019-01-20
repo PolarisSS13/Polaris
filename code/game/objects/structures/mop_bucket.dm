@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_mopbuckets, /obj/structure/mopbucket)
+
 /obj/structure/mopbucket
 	name = "mop bucket"
 	desc = "Fill it with water, but don't forget a mop!"
