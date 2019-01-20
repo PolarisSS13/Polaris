@@ -17,7 +17,7 @@
 "q" = (/obj/structure/table/rack,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/weapon/tank/emergency/oxygen/engi,/obj/item/clothing/mask/gas,/obj/item/clothing/suit/armor/material/makeshift,/obj/item/clothing/head/helmet/bucket,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 "r" = (/obj/structure/bed,/obj/item/weapon/bedsheet,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 "s" = (/obj/structure/table/steel,/obj/item/device/flashlight/lantern,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
-"t" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever,/obj/item/ammo_magazine/clip/c762,/obj/item/ammo_magazine/clip/c762,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"t" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever,/obj/item/ammo_magazine/clip/c308,/obj/item/ammo_magazine/clip/c308,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 
 (1,1,1) = {"
 aaaaaaaaaa
