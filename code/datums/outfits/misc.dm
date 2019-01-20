@@ -54,7 +54,7 @@
 	uniform = /obj/item/clothing/under/vox/vox_robes
 	suit = /obj/item/clothing/suit/armor/vox_scrap
 
-/decl/hierarchy/outfit/vanax
+/decl/hierarchy/outfit/zaddat
 	name = "Zaddat Suit"
 	suit = /obj/item/clothing/suit/space/void/zaddat/
 	mask = /obj/item/clothing/mask/gas/zaddat

@@ -136,10 +136,10 @@
 	containertype = /obj/structure/closet/crate
 	containername = "Holoplant crate"
 
-/datum/supply_pack/misc/zaddat_hypos
+/datum/supply_pack/misc/glucose_hypos
 	name = "Glucose Hypoinjectors"
 	contains = list(
-			/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/zadsnack = 5
+			/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/glucose = 5
 			)
 	cost = 25
 	containertype = "obj/structure/closet/crate"

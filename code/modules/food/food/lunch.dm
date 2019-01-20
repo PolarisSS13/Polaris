@@ -10,7 +10,7 @@ var/list/lunchables_lunches_ = list(/obj/item/weapon/reagent_containers/food/sna
                                   /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
                                   /obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry,
                                   /obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
-                                  /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/zadsnack)
+                                  /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/glucose)
 
 var/list/lunchables_snacks_ = list(/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
                                    /obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,

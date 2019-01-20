@@ -327,6 +327,10 @@
 	species_language = LANGUAGE_ZADDAT
 	health_hud_intensity = 2.5
 
+	minimum_breath_pressure = 20 //have fun with underpressures. any higher than this and they'll be even less suitible for life on the station
+
+	economic_modifier = 3
+
 	min_age = 16
 	max_age = 90
 
@@ -334,7 +338,7 @@
 
 	hazard_high_pressure = HAZARD_HIGH_PRESSURE + 500  // Dangerously high pressure.
 	warning_high_pressure = WARNING_HIGH_PRESSURE + 500 // High pressure warning.
-	warning_low_pressure = 300   // Low pressure warning. Placeholder
+	warning_low_pressure = 300   // Low pressure warning.
 	hazard_low_pressure = 220     // Dangerously low pressure.
 	safe_pressure = 400
 	poison_type = "nitrogen"      // technically it's a partial pressure thing but IDK if we can emulate that
@@ -343,7 +347,7 @@
 
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_UNDERWEAR | HAS_SKIN_COLOR
+	appearance_flags = HAS_SKIN_COLOR
 
 	flesh_color = "#AFA59E"
 	base_color = "#000000"
@@ -386,16 +390,16 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
 
 /datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
-	var/damageable = H.get_damageable_organs()
-	var/covered = H.get_coverage()
-
 	if(H.inStasisNow())
 		return
+
+	var/damageable = H.get_damageable_organs()
+	var/covered = H.get_coverage()
 
 	var/light_amount = 0 //how much light there is in the place, affects damage
 	if(isturf(H.loc)) //else, there's considered to be no light
 		var/turf/T = H.loc
-		light_amount = T.get_lumcount() * 10
+		light_amount = T.get_lumcount() * 5
 
 	for(var/K in damageable)
 		if(!(K in covered))

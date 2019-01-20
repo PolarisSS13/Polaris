@@ -60,7 +60,7 @@
 				helmet.item_state = "zaddat_spacer"
 		if("Knight")
 			name = "\improper Knight's Shroud"
-			desc = "This distinctive steel-plated Shroud was popularized by the Breeder's Guild."
+			desc = "This distinctive steel-plated Shroud was popularized by the Noble Guild."
 			icon_state = "zaddat_knight"
 			item_state = "zaddat_knight"
 			if(helmet)
