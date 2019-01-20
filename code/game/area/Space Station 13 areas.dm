@@ -2029,6 +2029,18 @@ area/space/atmosalert()
 	name = "\improper Cargo Mining Dock"
 	icon_state = "mining"
 
+/area/supply/station
+	name = "Supply Shuttle"
+	icon_state = "shuttle3"
+	requires_power = 0
+	base_turf = /turf/space
+
+/area/supply/dock
+	name = "Supply Shuttle"
+	icon_state = "shuttle3"
+	requires_power = 0
+	base_turf = /turf/space
+
 /area/janitor/
 	name = "\improper Custodial Closet"
 	icon_state = "janitor"
