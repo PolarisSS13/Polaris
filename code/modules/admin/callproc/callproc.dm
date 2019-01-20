@@ -56,13 +56,13 @@
 			return
 		var/msg = "[key_name(src)] called [target]'s [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"]."
 		log_admin(msg)
-		message_admins(msg)
+		//message_admins(msg)				//Proccall announce removed.
 		admin_ticket_log(target, msg)
 		returnval = WrapAdminProcCall(target, procname, lst) // Pass the lst as an argument list to the proc
 	else
 		//this currently has no hascall protection. wasn't able to get it working.
 		log_admin("[key_name(src)] called [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
-		message_admins("[key_name(src)] called [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
+		//message_admins("[key_name(src)] called [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")			//Proccall announce removed.
 		returnval = WrapAdminProcCall(GLOBAL_PROC, procname, lst) // Pass the lst as an argument list to the proc
 	. = get_callproc_returnval(returnval, procname)
 	if(.)
@@ -163,21 +163,28 @@ GLOBAL_PROTECT(AdminProcCallSpamPrevention)
 /client/proc/get_callproc_args()
 	var/argnum = input("Number of arguments","Number:",0) as num|null
 	if(isnull(argnum))
-		return
+		return null					//Cancel
 
 	. = list()
-	var/list/named_args = list()
+	//var/list/named_args = list()			//Named arguments are removed, due to them making proccalling take too long.
 	while(argnum--)
+		/*						//Named arguments are removed, due to them making proccalling take too long.
 		var/named_arg = input("Leave blank for positional argument. Positional arguments will be considered as if they were added first.", "Named argument") as text|null
+		if(isnull(named_arg))
+			return null				//Cancel
+		*/
 		var/value = vv_get_value(restricted_classes = list(VV_RESTORE_DEFAULT))
 		if (!value["class"])
-			return
+			return null				//Cancel
+		/*						//Named arguments are removed, due to them making proccalling take too long.
 		if(named_arg)
 			named_args[named_arg] = value["value"]
 		else
 			. += value["value"]
 	if(LAZYLEN(named_args))
 		. += named_args
+		*/
+		. += value["value"]
 
 /client/proc/get_callproc_returnval(returnval,procname)
 	. = ""
