@@ -348,7 +348,7 @@
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "\improper Tommy Gun"
 	desc = "This weapon was made famous by gangsters in the 20th century. Cybersun Industries is currently reproducing these for a target market of historic gun collectors and classy criminals. Uses .45 rounds."
-	icon_state = "Tommy Gun"
+	icon_state = "tommygun"
 	w_class = ITEMSIZE_NORMAL
 	caliber = ".45"
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
@@ -364,7 +364,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/tommygun/update_icon()
 	..()
-	icon_state = (ammo_magazine)? "Tommy Gun" : "Tommy Gun-empty"
+	icon_state = (ammo_magazine)? "tommygun" : "tommygun-empty"
 //	update_held_icon()
 
 /obj/item/weapon/gun/projectile/automatic/bullpup // Admin abuse assault rifle. ToDo: Make this less shit. Maybe remove its autofire, and make it spawn with only 10 rounds at start.
