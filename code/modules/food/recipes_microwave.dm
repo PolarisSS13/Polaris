@@ -1211,3 +1211,9 @@ I said no!
 /datum/recipe/cake/brain
 	items = list(/obj/item/organ/internal/brain)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
+
+//World Server Foods!
+
+/datum/recipe/potbrownie
+	reagents = list("coco" = 5, "cannabis" = 5)
+	result = /obj/item/weapon/reagent_containers/food/snacks/potbrownie

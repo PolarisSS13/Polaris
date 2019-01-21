@@ -13,6 +13,19 @@
 	lift_announce_str = "Lift arriving at Geminus underground sewers, please stand by."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
+/area/turbolift/geminus_top_mining
+	name = "lift (geminus city)"
+	lift_floor_label = "Floor 2"
+	lift_floor_name = "Geminus City - Mining Office"
+	lift_announce_str = "Lift arriving at Geminus City Mining Office, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
+
+/area/turbolift/geminus_ground_mining
+	name = "lift (mines)"
+	lift_floor_label = "Floor 1"
+	lift_floor_name = "Geminus City - Mines"
+	lift_announce_str = "Lift arriving at Geminus Mines, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 //power override
 
 //shuttle areas
@@ -57,6 +70,7 @@
 	name = "\improper Geminus Interior"
 	icon_state = "yellow"
 	dynamic_lighting = 1
+	flags = RAD_SHIELDED
 
 
 /area/planets/Geminus/outdoor/north
@@ -273,3 +287,8 @@
 /area/planets/Geminus/indoor/cmo
 	name = "\improper Chief Medical Officer Office"
 	icon_state = "cmo"
+
+/area/planets/Geminus/outdoor/park
+	name = "\improper Geminus City - Park"
+	icon_state = "yellow"
+
