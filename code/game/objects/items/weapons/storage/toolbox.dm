@@ -188,7 +188,7 @@
 	name = "delivery box"
 	icon_state = "delivery_box"
 	item_state_slots = list(slot_r_hand_str = "toolbox_blue", slot_l_hand_str = "toolbox_blue")
-	desc = "A delivery box, it seems it can fit quite a lot of food in it, except of the big letters!"
+	desc = "A delivery box, it seems it can fit quite a lot of food in it, except for the big letters!"
 
 /obj/item/weapon/storage/toolbox/lunchbox/delbox/filled
 	filled = TRUE 
