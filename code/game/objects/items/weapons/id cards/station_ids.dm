@@ -137,8 +137,8 @@
 	job_access_type = /datum/job/heads/secretary
 
 /obj/item/weapon/card/id/silver/hop
-	assignment = "City Supervisor"
-	rank = "City Supervisor"
+	assignment = "City Clerk"
+	rank = "City Clerk"
 	job_access_type = /datum/job/heads/hop
 
 /obj/item/weapon/card/id/gold

@@ -30,7 +30,7 @@
 				qdel(medal)
 
 /decl/hierarchy/outfit/job/heads/hop
-	name = OUTFIT_JOB_NAME("City Supervisor")
+	name = OUTFIT_JOB_NAME("City Clerk")
 	uniform = /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	l_ear = /obj/item/device/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/brown

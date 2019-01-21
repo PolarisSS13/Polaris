@@ -61,7 +61,7 @@ var/list/gov_positions = list(
 
 var/list/command_positions = list(
 	"Mayor",
-	"City Supervisor",
+	"City Clerk",
 	"Chief of Police",
 	"Chief Engineer",
 	"Research Director",
@@ -102,7 +102,7 @@ var/list/cargo_positions = list(
 )
 
 var/list/civilian_positions = list(
-	"City Supervisor",
+	"City Clerk",
 	"Bartender",
 	"Botanist",
 	"Chef",

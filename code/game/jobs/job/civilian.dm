@@ -9,7 +9,7 @@
 	flag = BARTENDER
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/bartender
 	access = list(access_hydroponics, access_bar, access_kitchen)
@@ -25,7 +25,7 @@
 	flag = CHEF
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chef
 	access = list(access_hydroponics, access_bar, access_kitchen)
@@ -40,7 +40,7 @@
 	flag = BOTANIST
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/botanist
 	access = list(access_hydroponics, access_bar, access_kitchen)
@@ -57,7 +57,7 @@
 	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#7a4f33"
 	idtype = /obj/item/weapon/card/id/cargo/head
 	economic_modifier = 5
@@ -74,7 +74,7 @@
 	department = "Cargo"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the factory manager and city supervisor"
+	supervisors = "the factory manager and city clerk"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/cargo_tech
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
@@ -89,7 +89,7 @@
 	department = "Cargo"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the factory manager and city supervisor"
+	supervisors = "the factory manager and city clerk"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/mining
 	economic_modifier = 5
@@ -105,7 +105,7 @@
 	flag = JANITOR
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/janitor
 	access = list(access_janitor, access_maint_tunnels)
@@ -120,7 +120,7 @@
 	flag = LIBRARIAN
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/librarian
 	access = list(access_library, access_maint_tunnels)
@@ -134,7 +134,7 @@
 	flag = LAWYER
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
 	economic_modifier = 7
@@ -151,7 +151,7 @@
 	flag = BARBER
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/barber
 	minimum_character_age = 18

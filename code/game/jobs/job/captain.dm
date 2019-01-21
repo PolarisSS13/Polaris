@@ -62,8 +62,9 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	get_all_centcom_access()
 	return
 
+
 /datum/job/heads/hop
-	title = "City Supervisor"
+	title = "City Clerk"
 	flag = HOP
 	department = "Command"
 	head_position = 1
