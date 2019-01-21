@@ -12,6 +12,20 @@
 	display_name = "text to speech device"
 	path = /obj/item/device/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
+
+/datum/gear/utility/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	sort_category = "utility"
+	cost = 3
+
+/datum/gear/utility/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	sort_category = "utility"
+	cost = 4
+
+
 /*
 /datum/gear/utility/communicator
 	display_name = "communicator selection"
