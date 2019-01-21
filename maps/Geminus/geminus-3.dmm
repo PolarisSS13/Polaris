@@ -561,7 +561,7 @@
 "kO" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets{pixel_x = 3; pixel_y = 3},/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "kP" = (/obj/structure/sink/kitchen{pixel_y = 28},/turf/unsimulated/floor{icon_state = "dark"},/area/syndicate_mothership)
 "kQ" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/captain,/turf/simulated/shuttle/floor/black,/area/shuttle/trade/centcom)
-"kR" = (/obj/structure/table/glass,/obj/machinery/computer3/wall_comp/telescreen/entertainment{pixel_y = -35},/turf/simulated/shuttle/floor/black,/area/shuttle/trade/centcom)
+"kR" = (/obj/structure/table/glass,/turf/simulated/shuttle/floor/black,/area/shuttle/trade/centcom)
 "kS" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/shuttle/floor/black,/area/shuttle/trade/centcom)
 "kT" = (/obj/machinery/light,/turf/simulated/floor/carpet,/area/shuttle/trade/centcom)
 "kU" = (/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/carpet,/area/shuttle/trade/centcom)

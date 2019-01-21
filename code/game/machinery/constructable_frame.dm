@@ -8,7 +8,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	var/obj/item/weapon/circuitboard/circuit = null
+	circuit = null
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -42,7 +42,7 @@
 							icon_state = "box_1"
 				else
 					if(istype(P, /obj/item/weapon/wrench))
-						playsound(src, W.usesound, 75, 1)
+						playsound(src, P.usesound, 75, 1)
 						user << "<span class='notice'>You dismantle the frame</span>"
 						new /obj/item/stack/material/steel(src.loc, 5)
 						qdel(src)
