@@ -196,12 +196,14 @@
 	icon_state = "G11mag"
 	caliber = "5mm caseless"
 	mag_type = MAGAZINE
-	max_ammo = 30
+	max_ammo = 15
 	multiple_sprites = 1
 
+/*
 /obj/item/ammo_magazine/m5mmcaseless/stun
 	icon_state = "G11stunmag"
 	ammo_type = /obj/item/ammo_casing/a5mmcaseless/stun
+*/
 
 ///////// 9mm /////////
 
