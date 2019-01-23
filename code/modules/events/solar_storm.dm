@@ -9,7 +9,7 @@
 	endWhen = startWhen + rand(30,90) + rand(30,90) //2-6 minute duration
 
 /datum/event/solar_storm/announce()
-	command_announcement.Announce("A solar storm has been detected approaching the city. Please halt all EVA activites immediately and return to the interior of the city.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
+	command_announcement.Announce("A solar storm has been detected approaching your city. Please stay indoors.", "Anomaly Alert", new_sound = 'sound/AI/radiation.ogg')
 	adjust_solar_output(1.5)
 
 /datum/event/solar_storm/proc/adjust_solar_output(var/mult = 1)
@@ -18,7 +18,7 @@
 
 
 /datum/event/solar_storm/start()
-	command_announcement.Announce("The solar storm has reached the city. Please refain from EVA and remain inside the city until it has passed.", "Anomaly Alert")
+	command_announcement.Announce("The solar storm has reached the city. Please remain in a sheltered area until the storm has passed.", "Anomaly Alert")
 	adjust_solar_output(5)
 
 
@@ -40,7 +40,7 @@
 		L.rad_act(rand(15, 30))
 
 /datum/event/solar_storm/end()
-	command_announcement.Announce("The solar storm has passed the city. It is now safe to resume EVA activities. Please report to medbay if you experience any unusual symptoms. ", "Anomaly Alert")
+	command_announcement.Announce("The solar storm has cleared the city. It is now safe to leave any sheltered area. Please report to medbay if you experience any unusual symptoms. ", "Anomaly Alert")
 	adjust_solar_output()
 
 
