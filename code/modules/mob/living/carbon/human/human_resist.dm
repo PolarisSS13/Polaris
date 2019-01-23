@@ -26,6 +26,10 @@
 	else
 		..()
 
+#define RESIST_ATTACK_DEFAULT	0
+#define RESIST_ATTACK_CLAWS		1
+#define RESIST_ATTACK_BITE		2
+
 /mob/living/carbon/human/proc/escape_straight_jacket()
 	setClickCooldown(100)
 
@@ -38,7 +42,7 @@
 
 	var/breakouttime = SJ.resist_time	// Configurable per-jacket!
 
-	var/attack_type = 0
+	var/attack_type = RESIST_ATTACK_DEFAULT
 
 	if(H.gloves && istype(H.gloves,/obj/item/clothing/gloves/gauntlets/rig))
 		breakouttime /= 2	// Pneumatic force goes a long way.
@@ -46,25 +50,25 @@
 		for(var/datum/unarmed_attack/U in H.species.unarmed_types)
 			if(istype(U, /datum/unarmed_attack/claws))
 				breakouttime /= 1.5
-				attack_type = 1
+				attack_type = RESIST_ATTACK_CLAWS
 				break
 			else if(istype(U, /datum/unarmed_attack/bite/sharp))
 				breakouttime /= 1.25
-				attack_type = 2
+				attack_type = RESIST_ATTACK_BITE
 				break
 
 	switch(attack_type)
-		if(0)
+		if(RESIST_ATTACK_DEFAULT)
 			visible_message(
 			"<span class='danger'>\The [src] struggles to remove \the [SJ]!</span>",
 			"<span class='warning'>You struggle to remove \the [SJ]. (This will take around [round(breakouttime / 600)] minutes and you need to stand still.)</span>"
 			)
-		if(1)
+		if(RESIST_ATTACK_CLAWS)
 			visible_message(
 			"<span class='danger'>\The [src] starts clawing at \the [SJ]!</span>",
 			"<span class='warning'>You claw at \the [SJ]. (This will take around [round(breakouttime / 600)] minutes and you need to stand still.)</span>"
 			)
-		if(2)
+		if(RESIST_ATTACK_BITE)
 			visible_message(
 			"<span class='danger'>\The [src] starts gnawing on \the [SJ]!</span>",
 			"<span class='warning'>You gnaw on \the [SJ]. (This will take around [round(breakouttime / 600)] minutes and you need to stand still.)</span>"
@@ -78,6 +82,10 @@
 			"<span class='notice'>You successfully remove \the [wear_suit].</span>"
 			)
 		drop_from_inventory(wear_suit)
+
+#undef RESIST_ATTACK_DEFAULT
+#undef RESIST_ATTACK_CLAWS
+#undef RESIST_ATTACK_BITE
 
 /mob/living/carbon/human/proc/can_break_straight_jacket()
 	if((HULK in mutations) || species.can_shred(src,1))
