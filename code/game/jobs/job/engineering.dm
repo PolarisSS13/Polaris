@@ -1,6 +1,6 @@
 /datum/job/engineering
 	department = "Engineering"
-	faction = "Station"
+	faction = "City"
 // I should probably do something creative like making the /heads/ hierarchy completely dynamic so I can shove it wherever, but moving on.
 
 /datum/job/engineering/chief_engineer

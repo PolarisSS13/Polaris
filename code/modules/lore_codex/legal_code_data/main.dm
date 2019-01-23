@@ -1,4 +1,4 @@
-/datum/lore/codex/category/main_corp_regs // The top-level categories for SOP/Regs/Law/etc
+/*/datum/lore/codex/category/main_corp_regs // The top-level categories for SOP/Regs/Law/etc
 	name = "Index"
 	data = "This book is meant to act as a reference for both NanoTrasen regulations, Standard Operating Procedure, and important laws of both \
 	the Sif Governmental Authority and the Solar Confederate Government. The legal interactions between Nanotrasen corporate policy and SGA/SolGov \
@@ -96,4 +96,4 @@
 		HTML += "</div>"
 
 		data = data + HTML
-		..()
+		..()*/

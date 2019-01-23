@@ -122,7 +122,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 /obj/machinery/newscaster
 	name = "newscaster"
-	desc = "A standard newsfeed handler for use on commercial space stations. All the news you absolutely have no use for, in one place!"
+	desc = "A standard newsfeed handler now used in most Pollux cities. All the news you absolutely have no use for, in one place!"
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
 	var/isbroken = 0  //1 if someone banged it with something heavy
