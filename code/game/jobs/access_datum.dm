@@ -280,7 +280,11 @@
 	desc = "Surgery"
 	region = ACCESS_REGION_MEDBAY
 
-// /var/const/free_access_id = 46
+/var/const/access_network = 46
+/datum/access/network
+	id = access_network
+	desc = "Station Network"
+	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_research = 47
 /datum/access/research

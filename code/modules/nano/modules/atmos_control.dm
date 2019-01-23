@@ -32,29 +32,20 @@
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = default_state)
 	var/data[0]
 	var/alarms[0]
-	var/turf/T = get_turf(nano_host())
+
+	if(program)
+		data = program.get_header_data()
 
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : machines))
-		if(!monitored_alarms.len && alarm.alarms_hidden)
-			continue
-		alarms[++alarms.len] = list(
-			"name" = sanitize(alarm.name),
-			"ref"= "\ref[alarm]",
-			"danger" = max(alarm.danger_level, alarm.alarm_area.atmosalm),
-			"x" = alarm.x,
-			"y" = alarm.y,
-			"z" = alarm.z)
+		alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = max(alarm.danger_level, alarm.alarm_area.atmosalm))
 	data["alarms"] = alarms
-	data["map_levels"] = using_map.get_map_levels(T.z)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmos_control.tmpl", src.name, 625, 625, state = state)
-		// adding a template with the key "mapContent" enables the map ui functionality
-		ui.add_template("mapContent", "atmos_control_map_content.tmpl")
-		// adding a template with the key "mapHeader" replaces the map header content
-		ui.add_template("mapHeader", "atmos_control_map_header.tmpl")
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
