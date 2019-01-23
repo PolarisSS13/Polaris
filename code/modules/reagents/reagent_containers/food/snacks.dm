@@ -3860,3 +3860,16 @@
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/potbrownie/
+	name = "Pot Brownie"
+	desc = "A brownie laced with cannabis."
+	icon_state = "potbrownie"
+	nutriment_amt = 8
+	nutriment_desc = list("sweetness" = 5, "chocolate" = 10)
+
+/obj/item/weapon/reagent_containers/food/snacks/potbrownie/New()
+	..()
+	reagents.add_reagent("cannabis", 10)
+	reagents.add_reagent("coco", 5)
+	bitesize = 5

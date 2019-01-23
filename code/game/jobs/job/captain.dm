@@ -1,6 +1,8 @@
 var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
-/datum/job/captain
+/datum/job/heads/ // this is just for grabbing all of them at once
+
+/datum/job/heads/captain
 	title = "Mayor"
 	flag = CAPTAIN
 	department = "Command"
@@ -21,19 +23,19 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimum_character_age = 30
 	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here
 
-	outfit_type = /decl/hierarchy/outfit/job/captain
+	outfit_type = /decl/hierarchy/outfit/job/heads/captain
 //	alt_titles = list("Site Manager", "Overseer")
 
 /*
-/datum/job/captain/equip(var/mob/living/carbon/human/H)
+/datum/job/heads/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
 	if(.)
 		H.implant_loyalty(src)
 */
-/datum/job/captain/get_access()
+/datum/job/heads/captain/get_access()
 	return get_all_station_access()
 
-/datum/job/president
+/datum/job/heads/president
 	title = "President"
 	flag = PRESIDENT
 	department = "Command"
@@ -53,15 +55,16 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	minimum_character_age = 30
 	ideal_character_age = 50
-	outfit_type = /decl/hierarchy/outfit/job/president
+	outfit_type = /decl/hierarchy/outfit/job/heads/president
 
-/datum/job/president/get_access()
+/datum/job/heads/president/get_access()
 	get_all_station_access()
 	get_all_centcom_access()
 	return
 
-/datum/job/hop
-	title = "City Supervisor"
+
+/datum/job/heads/hop
+	title = "City Clerk"
 	flag = HOP
 	department = "Command"
 	head_position = 1
@@ -79,7 +82,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimum_character_age = 25
 	ideal_character_age = 40
 
-	outfit_type = /decl/hierarchy/outfit/job/hop
+	outfit_type = /decl/hierarchy/outfit/job/heads/hop
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
@@ -94,7 +97,25 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
-/datum/job/secretary
+/datum/job/heads/judge
+	title = "Judge"
+	flag = JUDGE
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the city supervisor"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/heads/judge
+	economic_modifier = 13
+	access = list(access_judge, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_judge, access_sec_doors, access_heads)
+	minimal_player_age = 7
+	minimum_character_age = 25
+	alt_titles = list("Magistrate")
+
+	outfit_type = /decl/hierarchy/outfit/job/heads/judge
+
+
+/datum/job/heads/secretary
 	title = "City Hall Guard"
 	flag = BRIDGE
 	department = "Security"
@@ -112,5 +133,5 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
 	minimal_access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
 
-	outfit_type = /decl/hierarchy/outfit/job/secretary
+	outfit_type = /decl/hierarchy/outfit/job/heads/secretary
 	alt_titles = list("Public Bodyguard", "City Hall Security", "Bailiff")

@@ -311,3 +311,13 @@
 /obj/item/weapon/reagent_containers/pill/diet/New()
 	..()
 	reagents.add_reagent("lipozine", 2)
+
+
+/obj/item/weapon/reagent_containers/pill/cocaine
+	name = "cocaine chunk"
+	desc = "A small chunk of cocaine, you should cut this with a knife."
+	icon_state = "pill9"
+
+/obj/item/weapon/reagent_containers/pill/cocaine/New()
+	..()
+	reagents.add_reagent("cocaine" = 5)

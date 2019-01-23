@@ -10,6 +10,8 @@
 /datum/nano_module/rcon/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1, var/datum/topic_state/state = default_state)
 	FindDevices() // Update our devices list
 	var/data[0]
+	if(program)
+		data = program.get_header_data()
 
 	// SMES DATA (simplified view)
 	var/list/smeslist[0]
@@ -17,10 +19,10 @@
 		smeslist.Add(list(list(
 		"charge" = round(SMES.Percentage()),
 		"input_set" = SMES.input_attempt,
-		"input_val" = round(SMES.input_level/1000, 0.1),
+		"input_val" = round(SMES.input_level),
 		"output_set" = SMES.output_attempt,
-		"output_val" = round(SMES.output_level/1000, 0.1),
-		"output_load" = round(SMES.output_used/1000, 0.1),
+		"output_val" = round(SMES.output_level),
+		"output_load" = round(SMES.output_used),
 		"RCON_tag" = SMES.RCon_tag
 		)))
 
@@ -41,6 +43,8 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "rcon.tmpl", "RCON Console", 600, 400, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -63,12 +67,12 @@
 	if(href_list["smes_in_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_in_set"])
 		if(SMES)
-			var/inputset = (input(usr, "Enter new input level (0-[SMES.input_level_max/1000] kW)", "SMES Input Power Control", SMES.input_level/1000) as num) * 1000
+			var/inputset = input(usr, "Enter new input level (0-[SMES.input_level_max])", "SMES Input Power Control") as num
 			SMES.set_input(inputset)
 	if(href_list["smes_out_set"])
 		var/obj/machinery/power/smes/buildable/SMES = GetSMESByTag(href_list["smes_out_set"])
 		if(SMES)
-			var/outputset = (input(usr, "Enter new output level (0-[SMES.output_level_max/1000] kW)", "SMES Input Power Control", SMES.output_level/1000) as num) * 1000
+			var/outputset = input(usr, "Enter new output level (0-[SMES.output_level_max])", "SMES Input Power Control") as num
 			SMES.set_output(outputset)
 
 	if(href_list["toggle_breaker"])

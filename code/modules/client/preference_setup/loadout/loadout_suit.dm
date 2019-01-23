@@ -239,7 +239,7 @@ datum/gear/suit/duster
 /datum/gear/suit/roles/poncho/cloak/hop
 	display_name = "cloak, head of personnel"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/hop
-	allowed_roles = list("City Supervisor")
+	allowed_roles = list("City Clerk")
 
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
@@ -430,7 +430,7 @@ datum/gear/suit/duster
 /datum/gear/suit/snowsuit/command
 	display_name = "snowsuit, command"
 	path = /obj/item/clothing/suit/storage/snowsuit/command
-	allowed_roles = list("Mayor","Research Director","City Supervisor","Chief of Police","Chief Engineer","City Hall Guard")
+	allowed_roles = list("Mayor","Research Director","City Clerk","Chief of Police","Chief Engineer","City Hall Guard")
 
 /datum/gear/suit/snowsuit/security
 	display_name = "snowsuit, security"
@@ -455,4 +455,4 @@ datum/gear/suit/duster
 /datum/gear/suit/snowsuit/cargo
 	display_name = "snowsuit, supply"
 	path = /obj/item/clothing/suit/storage/snowsuit/cargo
-	allowed_roles = list("Factory Manager","shaft Miner","Factory Worker","City Supervisor")
+	allowed_roles = list("Factory Manager","shaft Miner","Factory Worker","City Clerk")

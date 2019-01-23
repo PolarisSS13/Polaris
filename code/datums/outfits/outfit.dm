@@ -93,7 +93,7 @@ var/list/outfits_decls_by_type_
 	if(W)
 		rank = W.rank
 		assignment = W.assignment
-	equip_pda(H,rank,assignment)
+	equip_communicator(H,rank)
 
 	for(var/path in backpack_contents)
 		var/number = backpack_contents[path]
@@ -161,16 +161,17 @@ var/list/outfits_decls_by_type_
 	if(H.equip_to_slot_or_del(W, id_slot))
 		return W
 
-/decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
-	if(!pda_slot || !pda_type)
+/decl/hierarchy/outfit/proc/equip_communicator(mob/living/carbon/human/H, rank)
+//	if(!pda_slot || !pda_type)
+//		return
+	if(!pda_slot)
 		return
-	var/obj/item/device/pda/pda = new pda_type(H)
-	if(H.equip_to_slot_or_del(pda, pda_slot))
-		pda.owner = H.real_name
-		pda.ownjob = assignment
-		pda.ownrank = rank
-		pda.name = "PDA-[H.real_name] ([assignment])"
-		return pda
+	var/obj/item/device/communicator/phone = new
+	if(H.equip_to_slot_or_del(phone, pda_slot))
+		phone.owner = H.real_name
+		phone.occupation = rank
+		phone.name = "[H.real_name]'s communicator"
+		return phone
 
 /decl/hierarchy/outfit/dd_SortValue()
 	return name

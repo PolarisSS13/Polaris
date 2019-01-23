@@ -79,14 +79,14 @@
 	rolled_sleeves = -1
 
 /obj/item/clothing/under/rank/head_of_personnel
-	desc = "It's a suit worn by someone who works in the position of \"City Supervisor\"."
-	name = "city supervisor's casual suit"
+	desc = "It's a suit worn by someone who works in the position of \"City Clerk\"."
+	name = "city clerk's casual suit"
 	icon_state = "hop"
 	rolled_sleeves = 0
 
 /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
-	name = "city supervisor's suit"
+	name = "city clerk's suit"
 	icon_state = "hopwhimsy"
 	item_state_slots = list(slot_r_hand_str = "hop", slot_l_hand_str = "hop")
 	rolled_sleeves = -1

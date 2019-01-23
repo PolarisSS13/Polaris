@@ -366,21 +366,32 @@
 				if (!muzzled)
 					message = "cries."
 					var/use_sound
-					if(get_gender() == FEMALE)
-						use_sound = pick(
-						'sound/voice/human/f_cry_1.ogg',
-						'sound/voice/human/f_cry_2.ogg',
-						'sound/voice/human/f_cry_3.ogg',
-						'sound/voice/human/f_cry_4.ogg',
-						'sound/voice/human/f_cry_5.ogg')
-						playsound(src.loc, use_sound, 50)
+					if(get_species() == SPECIES_HUMAN_CHILD || get_species() == SPECIES_HUMAN_TEEN)
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/f_kid_cry.ogg')
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/m_kid_cry.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
 					else
-						use_sound = pick(
-						'sound/voice/human/m_cry_1.ogg',
-						'sound/voice/human/m_cry_2.ogg',
-						'sound/voice/human/m_cry_3.ogg')
-						playsound(src.loc, use_sound, 50, 0)
-						m_type = 2
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/f_cry_1.ogg',
+							'sound/voice/human/f_cry_2.ogg',
+							'sound/voice/human/f_cry_3.ogg',
+							'sound/voice/human/f_cry_4.ogg',
+							'sound/voice/human/f_cry_5.ogg')
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/m_cry_1.ogg',
+							'sound/voice/human/m_cry_2.ogg',
+							'sound/voice/human/m_cry_3.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
 				else
 					message = "makes a weak noise. [T.he] [get_visible_gender() == NEUTER ? "frown" : "frowns"]." // no good, non-unwieldy alternative to this ternary at the moment
 					m_type = 2

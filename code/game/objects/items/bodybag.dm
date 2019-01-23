@@ -142,6 +142,7 @@
 	store_misc = 0
 	store_items = 0
 	var/used = 0
+	var/reusable = 0
 	var/obj/item/weapon/tank/tank = null
 	var/stasis_level = 3 //Every 'this' life ticks are applied to the mob (when life_ticks%stasis_level == 1)
 	var/obj/item/weapon/reagent_containers/syringe/syringe
@@ -157,7 +158,7 @@
 
 /obj/structure/closet/body_bag/cryobag/open()
 	. = ..()
-	if(used)
+	if(used && !reusable)
 		var/obj/item/O = new/obj/item(src.loc)
 		O.name = "used stasis bag"
 		O.icon = src.icon
@@ -243,7 +244,7 @@
 
 		else if(istype(W,/obj/item/weapon/screwdriver))
 			if(syringe)
-				if(used)
+				if(used && !reusable)
 					to_chat(user,"<span class='warning'>The injector cannot be removed now that the stasis bag has been used!</span>")
 				else
 					syringe.forceMove(src.loc)

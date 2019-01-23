@@ -133,7 +133,7 @@ var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
 var/forumsqladdress = "localhost"
 var/forumsqlport    = "3306"
-var/forumsqldb      = "tgstation"
+var/forumsqldb      = "worldserver"
 var/forumsqllogin   = "admin"
 var/forumsqlpass    = ""
 var/forum_activated_group     = "2"
