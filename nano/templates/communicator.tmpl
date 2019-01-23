@@ -4,7 +4,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
  -->
 
 {{if data.currentTab == 1}}
-	
+
 	<div class='homeContainer'>
 		<div class='homeScreen'>
 			{{for data.homeScreen}}
@@ -19,7 +19,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 
 	<h3>Manual Dial</h3>
 	<HR>
-	
+
 	<div class="item">
 		<div class="itemLabelWide">
 			Target EPv2 Address:
@@ -65,11 +65,11 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	</div>
-	
+
 	<HR>
 	<h3>Connection Management</h3>
 	<HR>
-	
+
 	<h3>External Connections</h3>
 	{{for data.voice_mobs}}
 		<div class='item'>
@@ -81,7 +81,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	{{/for}}
-	
+
 	<h3>Internal Connections</h3>
 	{{for data.communicating}}
 		<div class='item'>
@@ -98,7 +98,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	{{/for}}
-	
+
 	<h3>Requests Received</h3>
 	{{for data.requestsReceived}}
 		<div class='item'>
@@ -130,16 +130,16 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 
 	<h3>Known Devices</h3>
 	<HR>
-	
+
 	{{for data.knownDevices}}
 		<div class='item'>
 			<div class="itemLabel">
 			{{:value.name}}
 			</div>
 			<div class="itemContent">
-				<div style="float: left; width: 100%;">{{:value.address}}</div> 
-				{{:helper.link('Copy', 'pencil', {'copy' : value.address, 'switch_tab' : 2})}} 
-				{{:helper.link('Call', 'phone', {'dial' : value.address, 'copy' : value.address, 'switch_tab' : 2})}} 
+				<div style="float: left; width: 100%;">{{:value.address}}</div>
+				{{:helper.link('Copy', 'pencil', {'copy' : value.address, 'switch_tab' : 2})}}
+				{{:helper.link('Call', 'phone', {'dial' : value.address, 'copy' : value.address, 'switch_tab' : 2})}}
 				{{:helper.link('Msg', 'mail-closed', {'copy' : value.address, 'copy_name' : value.name, 'switch_tab' : 40})}}
 			</div>
 		</div>
@@ -151,7 +151,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 
 	<h3>Messaging</h3>
 	<HR>
-	
+
 	{{for data.imContacts}}
 		<div class='item' style="margin-top: 5px;">
 			<div class="itemGroup" style="float: left;">
@@ -161,14 +161,14 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	{{/for}}
-	
+
 <!-- Fourth Tab Special, Opened Thread from Tab Four -->
 
 {{else data.currentTab == 40}}
 
 	<h3>Conversation With: {{:data.targetAddressName}}</h3>
 	<HR>
-	
+
 	<div class='statusDisplay' style='overflow: auto; float: left; width: 95%;'>
 		<div class='item' style='width: 100%;'>
 			<div class='itemLabel' style='width: 100%;'>
@@ -188,14 +188,14 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
-<!-- Fifth tab, News -->	
+<!-- Fifth tab, News -->
 
 {{else data.currentTab == 5}}
 
 	<h3>News</h3>
 	<HR>
-	
-	{{if data.feeds.length}}	
+
+	{{if data.feeds.length}}
 		<!--Most recent three posts -->
 		<h4>Recent News</h4>
 		<div class="statusDisplay" style="height: 250px; overflow: auto;">
@@ -212,7 +212,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 		<HR>
 
-		<!--List all newsfeeds -->		
+		<!--List all newsfeeds -->
 		<h4>News Feeds</h4>
 		<div>
 		{{for data.feeds}}
@@ -232,7 +232,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	{{/if}}
-	
+
 <!-- Sixth tab, Notekeeper -->
 
 {{else data.currentTab == 6}}
@@ -263,7 +263,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 {{else data.currentTab == 7}}
 	<h3>Weather</h3>
 	<HR>
-	
+
 	<h4>Current Conditions:</h4>
 <div class="item">
     {{if data.aircontents.reading == 1}}
@@ -292,7 +292,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		<div class = "itemContent">
 			{{:helper.string('<span class="{0}">{1}%</span>', data.aircontents.nitrogen > 82 ? 'bad' : data.aircontents.nitrogen > 80 ? 'average' : 'good' , data.aircontents.nitrogen)}}
 		</div>
-		{{if data.aircontents.carbon_dioxide > 0}}				
+		{{if data.aircontents.carbon_dioxide > 0}}
 		<div class="itemLabel">
 			Carbon Dioxide:
 		</div>
@@ -350,7 +350,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 <!-- Eighth Tab, Crew Manifest -->
 
 {{else data.currentTab == 8}}
-	
+
 
 <h3>Citizen's Manifest</h3>
 
@@ -372,7 +372,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		{{/for}}
 	</tbody></table></center>
 </div>
-	
+
 <!-- Ninth Tab, Settings -->
 
 {{else data.currentTab == 9}}
@@ -391,7 +391,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			{{:helper.link('Rename', 'pencil', {'rename' : 1})}}
 		</div>
 	</div>
-	
+
 	<div class="item">
 		<div class="itemLabel">
 			Occupation:
@@ -432,7 +432,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="item">
 		<div class="itemLabel">
 			Ringer:
@@ -445,34 +445,35 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
+
 <!-- Tenth Tab, External Device -->
 
 {{else data.currentTab == 10}}
 
-	<h3>External Plugin</h3>
+<h3>External Plugin</h3>
+<HR>
+
+{{for data.cart_templates}}
+	<div class="itemContent">
+		{{:helper.link(value.name, 'gear', {'switch_template' : value.template, 'switch_tab' : 0})}}
+	</div>
+{{empty}}
+{{/for}}
+{{if data.cart_devices}}
 	<HR>
-	
-	{{for data.cart_templates}}
-		<div class="itemContent">
-			{{:helper.link(value.name, 'gear', {'switch_template' : value.template, 'switch_tab' : 0})}}
-		</div>
-	{{empty}}
-	{{/for}}
-	{{if data.cart_devices}}
-		<HR>
-		<h4>Internal Devices</h3>
-		{{for data.cart_devices}}
-			<div class="item">
-				<div class="itemLabel">
-					{{:value.name}}
-				</div>
-				<div class="itemContent">
-					<div style="float: left; width: 180px;">{{:helper.link('On', 'power', {'toggle_device' : value.index}, value.active ? 'selected' : null)}}
-					{{:helper.link('Off', 'stop', {'toggle_device' : value.index}, value.active ? null : 'selected')}}</div>
-				</div>
+	<h4>Internal Devices</h3>
+	{{for data.cart_devices}}
+		<div class="item">
+			<div class="itemLabel">
+				{{:value.name}}
 			</div>
-		{{/for}}
-	{{/if}}
+			<div class="itemContent">
+				<div style="float: left; width: 180px;">{{:helper.link('On', 'power', {'toggle_device' : value.index}, value.active ? 'selected' : null)}}
+				{{:helper.link('Off', 'stop', {'toggle_device' : value.index}, value.active ? null : 'selected')}}</div>
+			</div>
+		</div>
+	{{/for}}
+{{/if}}
 
 <!-- Eleventh Tab, Hotline System -->
 
@@ -492,5 +493,3 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 	</div>
 
 {{/if}}
-
-

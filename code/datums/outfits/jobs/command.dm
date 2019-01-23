@@ -9,7 +9,6 @@
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/gold/captain
 	pda_type = /obj/item/device/pda/captain
-	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/heads/captain/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -64,7 +63,6 @@
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/centcom/station/president
 	pda_type = /obj/item/device/pda/captain
-	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/heads/president/post_equip(var/mob/living/carbon/human/H)
 	..()
