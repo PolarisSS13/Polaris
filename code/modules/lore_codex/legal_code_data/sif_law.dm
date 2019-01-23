@@ -1,4 +1,4 @@
-/datum/lore/codex/category/sif_law
+/*/datum/lore/codex/category/sif_law
 	name = "Sif Law"
 	data = "This section contains the abbreviated Sif Govermental Authority legal code's potential charges for crimes that are relevant to \
 	the reader."
@@ -282,4 +282,4 @@
 	notes = "This includes the use of mass bombings, mass murder, releasing harmful biological agents, nuclear weapons, \
 	radiological weapons, and chemical weapons."
 	mandated = TRUE
-	..()
+	..()*/

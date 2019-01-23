@@ -73,7 +73,7 @@
 			<I>An arcane staff capable of shooting bolts of eldritch energy which cause inanimate objects to come to life. This magic doesn't affect machines.</I><BR>
 			<HR>
 			<A href='byond://?src=\ref[src];spell_choice=scrying'>Scrying Orb</A><BR>
-			<I>An incandescent orb of crackling energy, using it will allow you to ghost while alive, allowing you to spy upon the station with ease. In addition, buying it will permanently grant you x-ray vision.</I><BR>
+			<I>An incandescent orb of crackling energy, using it will allow you to ghost while alive, allowing you to spy upon the city with ease. In addition, buying it will permanently grant you x-ray vision.</I><BR>
 			<HR>"}
 		// END AUTOFIX
 		if(op)

@@ -1,7 +1,7 @@
 /datum/job/security
 	department = "Security"
 	department_flag = ENGSEC
-	faction = "Station"
+	faction = "City"
 
 /datum/job/security/hos
 	title = "Chief of Police"

@@ -1,4 +1,4 @@
-/datum/lore/codex/category/corporate_regulations
+/*/datum/lore/codex/category/corporate_regulations
 	name = "Corporate Regulations"
 	data = "Corporate Regulations are rules set by us, NanoTrasen, that all visitors and employees must follow while working at \
 	or otherwise on-board a NanoTrasen installation, which if you are reading this, you likely are at one.  Corporate Regulations, \
@@ -310,4 +310,4 @@
 	definition = "To take and use equipment confiscated as evidence or contraband, generally as a member of Security or Command."
 	suggested_punishments = "Demotion of the user.  Termination at discretion of Station Director.  Return confiscated equipment to evidence storage."
 	notes = "Security shouldn't be using evidence for anything but evidence, and should never use contraband.  This is meant for people misusing evidence for personal use.  Evidence stolen \
-	in order to cover up a crime would fall under Theft or Tampering with Evidence."
+	in order to cover up a crime would fall under Theft or Tampering with Evidence."*/

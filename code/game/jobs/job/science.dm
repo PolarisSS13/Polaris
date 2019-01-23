@@ -1,7 +1,7 @@
 /datum/job/science
 	department = "Science"
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 
 /datum/job/science/rd
 	title = "Research Director"
