@@ -102,7 +102,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = JUDGE
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "government officials and the President"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/heads/judge
 	economic_modifier = 13
