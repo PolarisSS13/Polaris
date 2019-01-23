@@ -38,7 +38,7 @@
 		return FALSE // The slime considers it abuse if they get stunned while already stunned.
 	if(rabid)
 		return TRUE
-	if(target)
+	if(target && can_attack(target))
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			if(istype(H.species, /datum/species/monkey))
