@@ -177,7 +177,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/protectStation
 	name = "\improper 'ProtectCity' AI module"
-	desc = "A 'protect city' AI module: 'Protect the space city against damage. Anyone you see harming the city is no longer to be considered a crew member, and is a threat which must be neutralized.'"
+	desc = "A 'protect city' AI module: 'Protect the city against damage. Anyone you see harming the city is no longer to be considered a crew member, and is a threat which must be neutralized.'"
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4) //made of gold
 
 /obj/item/weapon/aiModule/protectStation/addAdditionalLaws(var/mob/living/silicon/ai/target, var/mob/sender)
