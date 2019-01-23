@@ -300,7 +300,7 @@
 	desc = "A small cardboard pack containing several folded rolling papers."
 	icon_state = "paperbox"
 	icon = 'icons/obj/cigarettes.dmi'
-	w_class = ITEMSIZE_TINY
+	w_class = ITEMSIZE_SMALL
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 14

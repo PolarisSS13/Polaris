@@ -473,6 +473,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "rolling paper"
 	desc = "A small, thin piece of easily flammable paper, commonly used for rolling and smoking various dried plants."
 	icon = 'icons/obj/cigarettes.dmi'
+	w_class = ITEMSIZE_TINY
 	icon_state = "cig paper"
 
 /obj/item/weapon/rollingpaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
