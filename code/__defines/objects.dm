@@ -29,3 +29,12 @@
 // unidentified object due to a typo or some other unique difference in message output.
 #define ROGUELIKE_MESSAGE_NOTHING "Nothing happens."
 #define ROGUELIKE_MESSAGE_UNKNOWN "Something happened, but you're not sure what."
+
+// Cataloguer defines.
+
+// Defines about the reward point scaling. Adjust these if you want points to be more or less common.
+#define CATALOGUER_REWARD_BASE		5
+#define CATALOGUER_REWARD_SCALE		4
+#define CATALOGUER_REWARD_CALC(X) ((CATALOGUER_REWARD_BASE * CATALOGUER_REWARD_SCALE)*X)
+
+#define CATALOGUER_REWARD_TRIVIAL

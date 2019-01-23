@@ -2,7 +2,7 @@
 // The leaping attack is somewhat telegraphed and can be dodged if one is paying attention.
 // The AI would've followed up after a successful leap with dragging the downed victim away, but the dragging code was too janky.
 
-/datum/category_item/catalogue/fauna/hunter_spider
+/datum/category_item/catalogue/fauna/giant_spider/hunter_spider
 	name = "Hunter Spider"
 	desc = "This specific spider has been catalogued as 'Hunter', \
 	and it belongs to the 'Hunter' caste. \
@@ -17,10 +17,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/hunter
 	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/hunter_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/hunter_spider)
 
 	icon_state = "hunter"
 	icon_living = "hunter"

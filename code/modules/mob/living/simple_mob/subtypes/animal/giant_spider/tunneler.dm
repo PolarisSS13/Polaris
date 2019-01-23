@@ -4,7 +4,7 @@
 // If the target moves fast enough, the tunneler can miss, causing it to overshoot.
 // If the tunneler hits a solid wall, the tunneler will suffer a stun.
 
-/datum/category_item/catalogue/fauna/tunneler_spider
+/datum/category_item/catalogue/fauna/giant_spider/tunneler_spider
 	name = "Tunneler Spider"
 	desc = "This specific spider has been catalogued as 'Tunneler', \
 	and it belongs to the 'Hunter' caste. \
@@ -26,10 +26,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/tunneler
 	desc = "Sandy and brown, it makes you shudder to look at it. This one has glittering yellow eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/thermic_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/tunneler_spider)
 
 	icon_state = "tunneler"
 	icon_living = "tunneler"

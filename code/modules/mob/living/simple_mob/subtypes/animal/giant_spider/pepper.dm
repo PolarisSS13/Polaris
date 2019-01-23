@@ -1,6 +1,6 @@
 // Pepper spiders inject condensed capsaicin into their victims.
 
-/datum/category_item/catalogue/fauna/pepper_spider
+/datum/category_item/catalogue/fauna/giant_spider/pepper_spider
 	name = "Pepper Spider"
 	desc = "This specific spider has been catalogued as 'Pepper', \
 	and it belongs to the 'Guard' caste. \
@@ -13,10 +13,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/pepper
 	desc = "Red and brown, it makes you shudder to look at it. This one has glinting red eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/pepper_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/pepper_spider)
 
 	icon_state = "pepper"
 	icon_living = "pepper"

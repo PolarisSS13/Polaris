@@ -1,6 +1,6 @@
 // Webslingers do what their name implies, shoot web at enemies to slow them down.
 
-/datum/category_item/catalogue/fauna/webslinger_spider
+/datum/category_item/catalogue/fauna/giant_spider/webslinger_spider
 	name = "Webslinger Spider"
 	desc = "This specific spider has been catalogued as 'Webslinger', \
 	and it belongs to the 'Nurse' caste. \
@@ -17,10 +17,7 @@
 /mob/living/simple_mob/animal/giant_spider/webslinger
 	desc = "Furry and green, it makes you shudder to look at it. This one has brilliant green eyes, and a cloak of web."
 	tt_desc = "X Brachypelma phorus balisticus"
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/thermic_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/webslinger_spider)
 
 	icon_state = "webslinger"
 	icon_living = "webslinger"

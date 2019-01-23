@@ -17,6 +17,13 @@ var/list/grass_types = list(
 		/obj/structure/flora/ausbushes/fullgrass
 		)
 
+/datum/category_item/catalogue/flora/sif_grass
+	name = "Sivian Moss"
+	desc = "A natural moss that has adapted to the sheer cold climate of Sif. \
+	The moss came to rely partially on bioluminescent bacteria provided by the local tree populations. \
+	As such, the moss often grows in large clusters in the denser forests of Sif. \
+	The moss has evolved into it's distinctive blue hue thanks to it's reliance on bacteria that has a similar color."
+	value = 5
 
 /turf/simulated/floor/outdoors/grass/sif
 	name = "growth"
@@ -29,12 +36,7 @@ var/list/grass_types = list(
 		/obj/structure/flora/sif/eyes
 		)
 
-	catalogue_name = "moss"
-	catalogue_desc = "A natural moss that has adapted to the sheer cold climate of Sif. \
-	The moss came to rely partially on bioluminescent bacteria provided by the local tree populations. \
-	As such, the moss often grows in large clusters in the denser forests of Sif. \
-	The moss has evolved into it's distinctive blue hue thanks to it's reliance on bacteria that has a similar color."
-	catalogue_value = 5
+	catalogue_data = list(/datum/category_item/catalogue/flora/sif_grass)
 	catalogue_delay = 2 SECONDS
 
 /turf/simulated/floor/outdoors/grass/sif/Initialize()

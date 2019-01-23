@@ -1,9 +1,9 @@
 // Phorogenic spiders explode when they die.
 // You really shouldn't melee them.
 
-/datum/category_item/catalogue/fauna/phorogenic_spider
-	name = "Phorongenic Spider"
-	desc = "This specific spider has been catalogued as 'Phorongenic', \
+/datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider
+	name = "Phorogenic Spider"
+	desc = "This specific spider has been catalogued as 'Phorogenic', \
 	and it belongs to the 'Guard' caste. \
 	The spider has a purple, crystalline appearance, with their eyes also purple.\
 	<br><br>\
@@ -21,14 +21,11 @@
 	Should one die, it will create a large explosion. This appears to be an automatic response \
 	caused from internal rupturing, as opposed to an intentional act of revenge by the spider, however \
 	the result is the same, oftening ending a fight with both sides dead."
-	value = 80
+	value = 80 // Fairly rare, and presumably NT cares a lot about phoron-related findings.
 
 /mob/living/simple_mob/animal/giant_spider/phorogenic
 	desc = "Crystalline and purple, it makes you shudder to look at it. This one has haunting purple eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/phorogenic_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider)
 
 	icon_state = "phoron"
 	icon_living = "phoron"

@@ -1,7 +1,7 @@
 // Shantaks are essentially sif wolves.
 
 /datum/category_item/catalogue/fauna/shantak
-	name = "Shantak (S Pistris tellus)"
+	name = "Shantak (S Choeros shantak)"
 	desc = "The Shantak is easily recognized by its iridescent, crystaline mane. \
 	The creature's specially adapted hairs are hardened by a natural hard mineral coating, \
 	thickest in the mane but present across the whole body. \

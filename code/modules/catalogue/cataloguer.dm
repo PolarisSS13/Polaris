@@ -23,8 +23,9 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 	force = 0
 	var/scan_range = 3
 	var/credit_sharing_range = 14 // If another person is within this radius, they will also be credited with a successful scan.
-	var/datum/catalogue_data/displayed_data = null // Used for viewing a piece of data in the UI.
+	var/datum/category_item/catalogue/displayed_data = null // Used for viewing a piece of data in the UI.
 	var/busy = FALSE // Set to true when scanning, to stop multiple scans.
+	var/debug = FALSE // If true, can view all catalogue data defined, regardless of unlock status.
 
 /obj/item/device/cataloguer/advanced
 	name = "advanced cataloguer"
@@ -33,8 +34,11 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 	scan_range = 4
 	toolspeed = 0.8
 
+// Able to see all defined catalogue data regardless of if it was unlocked, intended for testing.
 /obj/item/device/cataloguer/debug
-	toolspeed = 0.5
+	toolspeed = 0.1
+	scan_range = 7
+	debug = TRUE
 
 /obj/item/device/cataloguer/Initialize()
 	GLOB.all_cataloguers += src
@@ -65,16 +69,11 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 		to_chat(user, span("warning", "You are too far away from \the [target] to catalogue it. Get closer."))
 		return
 
-	if(is_duplicate_data(target.get_catalogue_name()))
-		to_chat(user, span("warning", "\The [target] has already been catalogued."))
-		playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50)
-		return
-
 	// Get the atom's scanning information, like the delay.
 	var/scan_delay = target.get_catalogue_delay() * toolspeed
 
 	// Start the special effects.
-	var/datum/beam/scan_beam = user.Beam(target, icon_state = "rped_upgrade", time = scan_delay)
+	var/datum/beam/scan_beam = user.Beam(target, icon_state = "holo_beam", time = scan_delay)
 	var/filter = filter(type = "outline", size = 1, color = "#FFFFFF")
 	target.filters += filter
 	var/list/box_segments = list()
@@ -150,41 +149,45 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 /obj/item/device/cataloguer/proc/add_catalogue_data(atom/target, mob/living/user)
 
 
-// Used to see if something has already been scanned.
-// Can take strings or instances of catalogue_data datums.
-/obj/item/device/cataloguer/proc/is_duplicate_data(name_to_test)
-	if(istype(name_to_test, /datum/catalogue_data))
-		var/datum/catalogue_data/data = name_to_test
-		name_to_test = data.name
-
-	for(var/d in GLOB.all_cataloguer_discoveries)
-		var/datum/catalogue_data/D = d
-		if(D.name == name_to_test)
-			return TRUE
-	return FALSE
-
 /obj/item/device/cataloguer/attack_self(mob/living/user)
 	interact(user)
 
 /obj/item/device/cataloguer/interact(mob/user)
 	var/list/dat = list()
+	var/title = "Cataloguer Data Display"
 
 	// If displayed_data exists, we show that, otherwise we show a list of all data in the mysterious global list.
 	if(displayed_data)
+		title = uppertext(displayed_data.name)
 		dat += "<h1>[uppertext(displayed_data.name)]</h1>"
 		dat += "<i>[displayed_data.desc]</i>"
-		dat += "Cataloguers : <b>[english_list(displayed_data.cataloguers)]</b>."
+		if(LAZYLEN(displayed_data.cataloguers))
+			dat += "Cataloguers : <b>[english_list(displayed_data.cataloguers)]</b>."
+		else
+			dat += "Catalogued by nobody."
 		dat += "Worth <b>[displayed_data.value]</b> exploration points."
+		if(debug && !displayed_data.visible)
+			dat += "<br><a href='?src=\ref[src];debug_unlock=\ref[displayed_data]'>\[(DEBUG) Force Discovery\]</a>"
 		dat += "<br><a href='?src=\ref[src];show_data=null'>\[Back to List\]</a>"
 
 	else
-		dat += "<h1>Catalogue Data</h1>"
-		for(var/d in GLOB.all_cataloguer_discoveries)
-			var/datum/catalogue_data/D = d
-			dat += "<a href='?src=\ref[src];show_data=\ref[D]'>[uppertext(D.name)]</a>"
+		for(var/G in GLOB.catalogue_data.categories)
+			var/datum/category_group/group = G
+			var/list/group_dat = list()
+			var/show_group = FALSE
+
+			group_dat += "<b>[group.name]</b>"
+			for(var/I in group.items)
+				var/datum/category_item/catalogue/item = I
+				if(item.visible || debug)
+					group_dat += "\t<a href='?src=\ref[src];show_data=\ref[item]'>[item.name]</a>"
+					show_group = TRUE
+
+			if(show_group || debug) // Avoid showing 'empty' groups on regular cataloguers.
+				dat += group_dat
 
 	dat += "<a href='?src=\ref[src];refresh=1'>\[Refresh\]</a> <a href='?src=\ref[src];close=1'>\[Close\]</a>"
-	var/datum/browser/popup = new(user, "cataloguer_display", "Cataloguer Data Display", 500, 400, src)
+	var/datum/browser/popup = new(user, "cataloguer_display", title, 500, 400, src)
 	popup.set_content(dat.Join("<br>"))
 	popup.open()
 	add_fingerprint(user)
@@ -201,6 +204,10 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 
 	if(href_list["show_data"])
 		displayed_data = locate(href_list["show_data"])
+
+	if(href_list["debug_unlock"] && debug)
+		var/datum/category_item/catalogue/item = locate(href_list["debug_unlock"])
+		item.discover(usr, list("Debugger"))
 
 	interact(usr) // So it refreshes the window.
 	return 1

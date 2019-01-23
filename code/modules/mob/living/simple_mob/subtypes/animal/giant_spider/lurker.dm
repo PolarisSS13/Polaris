@@ -3,7 +3,7 @@
 // They keep attacking until the stun ends, then retreat to cloak again and repeat the cycle.
 // Hitting the spider before it does its ambush attack will break the cloak and make the spider flee.
 
-/datum/category_item/catalogue/fauna/lurker_spider
+/datum/category_item/catalogue/fauna/giant_spider/lurker_spider
 	name = "Lurker Spider"
 	desc = "This specific spider has been catalogued as 'Lurker', \
 	and it belongs to the 'Hunter' caste. \
@@ -22,10 +22,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/lurker
 	desc = "Translucent and white, it makes you shudder to look at it. This one has incandescent red eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/lurker_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/lurker_spider)
 
 	icon_state = "lurker"
 	icon_living = "lurker"

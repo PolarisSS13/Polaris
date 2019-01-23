@@ -1,6 +1,6 @@
 // Frost spiders inject cryotoxin, slowing people down (which is very bad if trying to run from spiders).
 
-/datum/category_item/catalogue/fauna/frost_spider
+/datum/category_item/catalogue/fauna/giant_spider/frost_spider
 	name = "Frost Spider"
 	desc = "This specific spider has been catalogued as 'Frost', \
 	and it belongs to the 'Guard' caste. \
@@ -17,10 +17,7 @@
 
 /mob/living/simple_mob/animal/giant_spider/frost
 	desc = "Icy and blue, it makes you shudder to look at it. This one has brilliant blue eyes."
-	catalogue_data = list(
-		/datum/category_item/catalogue/fauna/giant_spiders,
-		/datum/category_item/catalogue/fauna/frost_spider
-		)
+	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/frost_spider)
 
 	icon_state = "frost"
 	icon_living = "frost"
