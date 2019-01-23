@@ -22,7 +22,7 @@ var/const/access_explorer = 43
 /obj/item/weapon/card/id/medical/sar
 	assignment = "Search and Rescue"
 	rank = "Search and Rescue"
-	job_access_type = /datum/job/sar
+	job_access_type = /datum/job/medical/sar
 
 /obj/item/weapon/card/id/civilian/pilot
 	assignment = "Pilot"
@@ -40,13 +40,13 @@ var/const/access_explorer = 43
 
 //Will see about getting working later.
 
-/datum/job/captain
+/datum/job/heads/captain
 	title = "Station Director"
 	flag = CAPTAIN
 	department = "Command"
 	head_position = 1
 	department_flag = ENGSEC
-	faction = "Station"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
@@ -61,10 +61,10 @@ var/const/access_explorer = 43
 	minimum_character_age = 25
 	ideal_character_age = 50 // Because 70 is a tad on the old side
 
-	outfit_type = /decl/hierarchy/outfit/job/captain
+	outfit_type = /decl/hierarchy/outfit/job/heads/captain
 	alt_titles = list("Site Manager", "Overseer")
 
-/datum/job/captain/get_access()
+/datum/job/heads/captain/get_access()
 	return get_all_station_access()
 */
 
@@ -73,7 +73,7 @@ var/const/access_explorer = 43
 	flag = PILOT
 	department = "Civilian"
 	department_flag = CIVILIAN
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
@@ -89,7 +89,7 @@ var/const/access_explorer = 43
 	flag = EXPLORER
 	department = "Civilian"
 	department_flag = CIVILIAN
-	faction = "Station"
+	faction = "City"
 	total_positions = 4
 	spawn_positions = 4
 	supervisors = "the explorer leader and the head of personnel"
@@ -105,12 +105,11 @@ var/const/access_explorer = 43
 		"Explorer Medic" = /decl/hierarchy/outfit/job/explorer2/medic)
 */
 
-/datum/job/sar
+/datum/job/medical/sar
 	title = "Search and Rescue"
 	flag = SAR
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"

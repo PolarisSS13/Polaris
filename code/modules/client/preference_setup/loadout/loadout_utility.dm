@@ -12,6 +12,20 @@
 	display_name = "text to speech device"
 	path = /obj/item/device/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
+
+/datum/gear/utility/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	sort_category = "utility"
+	cost = 3
+
+/datum/gear/utility/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	sort_category = "utility"
+	cost = 4
+
+
 /*
 /datum/gear/utility/communicator
 	display_name = "communicator selection"
@@ -30,20 +44,20 @@
 	display_name = "camera"
 	path = /obj/item/device/camera
 
-/datum/gear/utility/codex
+/*/datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
 	path = /obj/item/weapon/book/codex/lore/vir
-	cost = 0
+	cost = 0*/
 
-/datum/gear/utility/news
+/*/datum/gear/utility/news
 	display_name = "daedalus pocket newscaster"
 	path = /obj/item/weapon/book/codex/lore/news
-	cost = 0
+	cost = 0*/
 
-/datum/gear/utility/corp_regs
+/*/datum/gear/utility/corp_regs
 	display_name = "corporate regulations and legal code"
 	path = /obj/item/weapon/book/codex/corp_regs
-	cost = 0
+	cost = 0*/
 
 /datum/gear/utility/robutt
 	display_name = "a buyer's guide to artificial bodies"

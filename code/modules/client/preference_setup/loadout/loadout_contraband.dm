@@ -80,3 +80,17 @@
 	path = /obj/item/weapon/storage/pill_bottle/ecstasy
 	sort_category = "Contraband"
 	cost = 13
+
+/datum/gear/contraband/pot_brownie
+	display_name = "Pot Brownie"
+	description = "A chocolate brownie laced with cannabis."
+	path = /obj/item/weapon/reagent_containers/food/snacks/potbrownie/
+	sort_category = "Contraband"
+	cost = 5
+
+/datum/gear/contraband/cocaine
+	display_name = "Cocaine"
+	description = "A small chunk of cocaine."
+	path =  /obj/item/weapon/reagent_containers/pill/cocaine
+	sort_category = "Contraband"
+	cost = 12

@@ -110,3 +110,7 @@
 		detonator_mode = !detonator_mode
 		playsound(src, W.usesound, 50, 1)
 		user << "<span class='notice'>You unscrew the top panel of \the [src] revealing a button.</span>"
+
+/obj/item/weapon/paper/c4_instructions
+	 name = "Note"
+	 info = "The lighter contains an hidden button. Unscrew the top panel to access it."

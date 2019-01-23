@@ -30,8 +30,8 @@ var/datum/antagonist/revolutionary/revs
 	faction_invisible = 1
 
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Police Officer", "Prison Warden", "Detective", "Judge", "Mayor", "City Supervisor", "Chief of Police", "Chief Engineer", "Research Director", "Chief Medical Officer")
-	roundstart_restricted = list("Judge", "Mayor", "City Supervisor", "Chief of Police", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	protected_jobs = list("Police Officer", "Prison Warden", "Detective", "Judge", "Mayor", "City Clerk", "Chief of Police", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	roundstart_restricted = list("Judge", "Mayor", "City Clerk", "Chief of Police", "Chief Engineer", "Research Director", "Chief Medical Officer")
 
 /datum/antagonist/revolutionary/New()
 	..()

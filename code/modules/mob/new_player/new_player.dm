@@ -176,7 +176,7 @@
 
 		var/datum/species/S = all_species[client.prefs.species]
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
-			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+			src << alert("Your current species, [client.prefs.species], is not available for play in the city.")
 			return 0
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)

@@ -1,10 +1,13 @@
-/datum/job/chief_engineer
+/datum/job/engineering
+	department = "Engineering"
+	faction = "City"
+// I should probably do something creative like making the /heads/ hierarchy completely dynamic so I can shove it wherever, but moving on.
+
+/datum/job/engineering/chief_engineer
 	title = "Chief Engineer"
 	flag = CHIEF
 	head_position = 1
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -29,12 +32,10 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
-/datum/job/engineer
+/datum/job/engineering/engineer
 	title = "City Engineer"
 	flag = ENGINEER
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
@@ -49,12 +50,10 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
-/datum/job/atmos
+/datum/job/engineering/atmos
 	title = "Firefighter"
 	flag = ATMOSTECH
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
