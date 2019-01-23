@@ -49,6 +49,7 @@
 		if(!newname)
 			return
 		filedesc = newname
+	return 1
 
 /datum/computer_file/program/revelation/clone()
 	var/datum/computer_file/program/revelation/temp = ..()
@@ -75,4 +76,3 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-

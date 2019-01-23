@@ -400,13 +400,13 @@ CIRCUITS BELOW
 	id = "comconsole"
 	build_path = /obj/item/weapon/circuitboard/communications
 	sort_string = "LAAAA"
-
+/*
 /datum/design/circuit/idcardconsole
 	name = "ID card modification console"
 	id = "idcardconsole"
 	build_path = /obj/item/weapon/circuitboard/card
 	sort_string = "LAAAB"
-
+*/
 /datum/design/circuit/emp_data
 	name = "employment records console"
 	id = "emp_data"

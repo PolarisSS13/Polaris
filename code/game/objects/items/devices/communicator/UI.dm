@@ -132,8 +132,8 @@
 		data["currentTab"] = 1 // Reset the current tab, because we're going to home page
 		ui = new(user, src, ui_key, "communicator_header.tmpl", "Communicator", 475, 700, state = key_state)
 		// add templates for screens in common with communicator.
-//		ui.add_template("atmosphericScan", "atmospheric_scan.tmpl")
-//		ui.add_template("crewManifest", "crew_manifest.tmpl")
+		//ui.add_template("atmosphericScan", "atmospheric_scan.tmpl")
+		//ui.add_template("crewManifest", "crew_manifest.tmpl")
 		ui.add_template("Body", "communicator.tmpl") // Main body
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
