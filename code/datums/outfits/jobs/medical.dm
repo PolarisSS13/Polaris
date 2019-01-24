@@ -7,7 +7,6 @@
 	backpack = /obj/item/weapon/storage/backpack/medic
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/med
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/med
-	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer")
@@ -19,7 +18,6 @@
 	r_pocket = /obj/item/device/healthanalyzer
 	id_type = /obj/item/weapon/card/id/medical/head
 	pda_type = /obj/item/device/pda/heads/cmo
-	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = OUTFIT_JOB_NAME("Doctor")
@@ -28,7 +26,6 @@
 	l_hand = /obj/item/weapon/storage/firstaid/regular
 	r_pocket = /obj/item/device/flashlight/pen
 	id_type = /obj/item/weapon/card/id/medical/doctor
-	l_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/medical/doctor/emergency_physician
 	name = OUTFIT_JOB_NAME("Emergency Physician")
@@ -77,7 +74,6 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
 	backpack = /obj/item/weapon/storage/backpack/genetics
 	r_pocket = /obj/item/device/flashlight/pen
-	l_pocket = /obj/item/device/communicator
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/gen
 	id_type = /obj/item/weapon/card/id/medical/geneticist
 	pda_type = /obj/item/device/pda/geneticist

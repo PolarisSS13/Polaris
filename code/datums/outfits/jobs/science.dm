@@ -5,7 +5,6 @@
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/device/pda/science
 	backpack = /obj/item/weapon/storage/backpack/toxins
-	r_pocket = /obj/item/device/communicator
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/tox
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/tox
 
@@ -17,20 +16,17 @@
 	l_hand = /obj/item/weapon/clipboard
 	id_type = /obj/item/weapon/card/id/science/head
 	pda_type = /obj/item/device/pda/heads/rd
-	r_pocket = /obj/item/device/communicator
 
 /decl/hierarchy/outfit/job/science/scientist
 	name = OUTFIT_JOB_NAME("Scientist")
 	uniform = /obj/item/clothing/under/rank/scientist
 	id_type = /obj/item/weapon/card/id/science/scientist
-	r_pocket = /obj/item/device/communicator
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 
 /decl/hierarchy/outfit/job/science/xenobiologist
 	name = OUTFIT_JOB_NAME("Xenobiologist")
 	uniform = /obj/item/clothing/under/rank/scientist
 	id_type = /obj/item/weapon/card/id/science/xenobiologist
-	r_pocket = /obj/item/device/communicator
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 
 /decl/hierarchy/outfit/job/science/roboticist
@@ -41,6 +37,5 @@
 	id_type = /obj/item/weapon/card/id/science/roboticist
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/roboticist
-	r_pocket = /obj/item/device/communicator
 	backpack = /obj/item/weapon/storage/backpack
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/norm

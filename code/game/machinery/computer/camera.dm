@@ -250,6 +250,11 @@
 	light_color = "#3848B3"
 	light_power_on = 0.5
 
+/obj/machinery/computer/security/wooden_tv/entertainment
+	name = "tv entertainment monitor"
+	network = list(NETWORK_THUNDER)
+//until we get a modular computer for this.
+
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
 	desc = "Used to access the various cameras on the outpost."

@@ -3,10 +3,10 @@
 	flag = ASSISTANT
 	department = "Civilian"
 	department_flag = CIVILIAN
-	faction = "Station"
+	faction = "City"
 	total_positions = -1
 	spawn_positions = -1
-	supervisors = "the mayor and the city supervisor"
+	supervisors = "the mayor and the city clerk"
 	selection_color = "#515151"
 	minimum_character_age = 1
 	economic_modifier = 1
