@@ -85,6 +85,7 @@
 			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/device/powersink/pwr_drain()
+	world << "pwr_drain called"
 	if(!attached)
 		return 0
 
@@ -96,10 +97,13 @@
 
 	if(!PN)
 		return 1
+	world << "draining"
+
 	set_light(12)
 	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it
 	drained = PN.draw_power(drain_rate)
+	world << "drained [drained]"
 	// if tried to drain more than available on powernet
 	// now look for APCs and drain their cells
 	if(drained < drain_rate)
