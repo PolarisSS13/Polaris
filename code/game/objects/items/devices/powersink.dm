@@ -74,6 +74,7 @@
 			mode = 2
 			icon_state = "powersink1"
 			START_PROCESSING(SSobj, src)
+			datum_flags &= ~DF_ISPROCESSING // Have to reset this flag so that PROCESSING_POWER_OBJECT can re-add it. It fails if the flag is already present. - Ater
 			START_PROCESSING_POWER_OBJECT(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
@@ -84,6 +85,7 @@
 			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/device/powersink/pwr_drain()
+	world << "pwr_drain called"
 	if(!attached)
 		return 0
 
@@ -96,10 +98,13 @@
 	if(!PN)
 		return 1
 
+	world << "draining"
+
 	set_light(12)
 	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it
 	drained = PN.draw_power(drain_rate)
+	world << "drained [drained]"
 	// if tried to drain more than available on powernet
 	// now look for APCs and drain their cells
 	if(drained < drain_rate)
