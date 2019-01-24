@@ -155,8 +155,6 @@ SUBSYSTEM_DEF(machines)
 		src.current_run = global.processing_power_items.Copy()
 
 	var/list/current_run = src.current_run
-	world << "Processing power objects: [english_list(current_run)]"
-	world << "Actual power objects: [english_list(global.processing_power_items)]"
 	while(current_run.len)
 		var/obj/item/I = current_run[current_run.len]
 		current_run.len--
