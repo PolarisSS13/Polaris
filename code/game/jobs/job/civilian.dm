@@ -2,7 +2,7 @@
 /datum/job/civilian // stop being garbage with copypasta and your hierarchies I swear to fuck
 	department = "Civilian"
 	department_flag = CIVILIAN
-	faction = "Station"
+	faction = "City"
 
 /datum/job/civilian/bartender
 	title = "Bartender"
@@ -101,7 +101,7 @@
 
 //Service
 /datum/job/civilian/janitor
-	title = "Janitor"
+	title = "Sanitation Technician"
 	flag = JANITOR
 	total_positions = 2
 	spawn_positions = 2
@@ -112,7 +112,7 @@
 	minimal_access = list(access_janitor, access_maint_tunnels)
 	minimum_character_age = 18
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
-	alt_titles = list("Custodian", "Sanitation Technician")
+	alt_titles = list("Recycling Technician", "Sanitation Engineer")
 
 //More or less assistants
 /datum/job/civilian/librarian

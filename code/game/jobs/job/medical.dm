@@ -7,7 +7,7 @@
 	flag = CMO
 	head_position = 1
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Colony Director"
@@ -34,7 +34,7 @@
 	title = "Doctor"
 	flag = DOCTOR
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
@@ -56,7 +56,7 @@
 	title = "Chemist"
 	flag = CHEMIST
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	minimum_character_age = 18
@@ -76,7 +76,7 @@
 	title = "Geneticist"
 	flag = GENETICIST
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the chief medical officer"
@@ -93,7 +93,7 @@
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
@@ -109,7 +109,7 @@
 	title = "Paramedic"
 	flag = PARAMEDIC
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
