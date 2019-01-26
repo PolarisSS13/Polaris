@@ -53,9 +53,10 @@ obj/machinery/recharger
 			if(E.self_recharge)
 				to_chat(user, "<span class='notice'>Your gun has no recharge port.</span>")
 				return
-		if(!G.get_cell())
-			to_chat(user, "This device does not have a battery installed.")
-			return
+		if(!istype(G, /obj/item/modular_computer))
+			if(!G.get_cell())
+				to_chat(user, "This device does not have a battery installed.")
+				return
 
 		user.drop_item()
 		G.loc = src
