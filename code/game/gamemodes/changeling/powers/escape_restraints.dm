@@ -37,25 +37,23 @@
 		C.update_inv_handcuffed()
 		if (C.client)
 			C.client.screen -= W
+		W.forceMove(C.loc)
+		W.dropped(C)
 		if(W)
-			W.loc = C.loc
-			W.dropped(C)
-			if(W)
-				W.layer = initial(W.layer)
+			W.layer = initial(W.layer)
 	if(C.legcuffed)
 		var/obj/item/weapon/W = C.legcuffed
 		C.legcuffed = null
 		C.update_inv_legcuffed()
 		if(C.client)
 			C.client.screen -= W
+		W.forceMove(C.loc)
+		W.dropped(C)
 		if(W)
-			W.loc = C.loc
-			W.dropped(C)
-			if(W)
-				W.layer = initial(W.layer)
-	if(C.wear_suit && istype(C.wear_suit, /obj/item/clothing/suit/straight_jacket))
+			W.layer = initial(W.layer)
+	if(istype(C.wear_suit, /obj/item/clothing/suit/straight_jacket))
 		var/obj/item/clothing/suit/straight_jacket/SJ = C.wear_suit
-		SJ.loc = C.loc
+		SJ.forceMove(C.loc)
 		SJ.dropped(C)
 		C.wear_suit = null
 		escape_cooldown *= 1.5	// Straight jackets are tedious compared to cuffs.

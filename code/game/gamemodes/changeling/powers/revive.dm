@@ -53,25 +53,23 @@
 			H.update_inv_handcuffed()
 			if (H.client)
 				H.client.screen -= W
+			W.forceMove(H.loc)
+			W.dropped(H)
 			if(W)
-				W.loc = H.loc
-				W.dropped(H)
-				if(W)
-					W.layer = initial(W.layer)
+				W.layer = initial(W.layer)
 		if(H.legcuffed)
 			var/obj/item/weapon/W = H.legcuffed
 			H.legcuffed = null
 			H.update_inv_legcuffed()
 			if(H.client)
 				H.client.screen -= W
+			W.forceMove(H.loc)
+			W.dropped(H)
 			if(W)
-				W.loc = H.loc
-				W.dropped(H)
-				if(W)
-					W.layer = initial(W.layer)
-		if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket))
+				W.layer = initial(W.layer)
+		if(istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket))
 			var/obj/item/clothing/suit/straight_jacket/SJ = H.wear_suit
-			SJ.loc = H.loc
+			SJ.forceMove(H.loc)
 			SJ.dropped(H)
 			H.wear_suit = null
 
