@@ -111,3 +111,5 @@ var/global/list/active_radio_jammers = list()
 		overlays += I
 		last_overlay_percent = overlay_percent
 
+/obj/item/device/radio_jammer/get_cell()
+	return power_source

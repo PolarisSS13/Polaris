@@ -47,3 +47,6 @@
 	. = ..()
 	to_chat(usr, "The charge meter reads [cell ? cell.percent() : 0]%")
 	to_chat(usr, "It is [enabled ? "enabled" : "disabled"].")
+
+/obj/item/weapon/shield_diffuser/get_cell()
+	return cell

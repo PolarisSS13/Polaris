@@ -256,3 +256,6 @@
 	cell = new /obj/item/weapon/cell/high
 	capacitor = new /obj/item/weapon/stock_parts/capacitor
 	. = ..()
+
+/obj/item/weapon/gun/magnetic/get_cell()
+	return cell

@@ -2,6 +2,9 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew
 	var/list/cache_data
+	var/list/cache_data_alert
+	var/list/modifier_queues
+	var/list/modifier_queues_by_type
 
 /datum/repository/crew/New()
 	cache_data = list()
@@ -69,3 +72,10 @@ var/global/datum/repository/crew/crew_repository = new()
 			if (C.has_sensor)
 				tracked |= C
 	return tracked
+
+/datum/repository/crew/proc/has_health_alert(var/z_level)
+	. = FALSE
+	if(!z_level)
+		return
+	health_data(z_level) // Make sure cache doesn't get stale
+	. = cache_data_alert[num2text(z_level)]

@@ -491,3 +491,7 @@
 	if(battery_module)
 		all_components.Add(battery_module)
 	return all_components
+
+/obj/item/modular_computer/get_cell()
+	if(battery_module)
+		return battery_module.get_cell()
