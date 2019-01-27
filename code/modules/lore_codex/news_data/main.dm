@@ -354,6 +354,8 @@
 	<br><br>\
 	Others have criticized the speech's seemingly communist tone, with Arielsson expressing approval for the socialist Free Relan Federation and the anarchist Casini's Reach despite opposing their secessionist ideals. Still others claim that the speech offered 'nothing but empty feelings' and that it lacked specific, actionable resolutions on the growing secessionist movement in VirGov. Some have even framed the Address as a form of political maneuvering by the venerable politician, claiming that he voiced unpopular sentiments specifically to hamper the Shadow Coalition's re-election bid after well-publicized disagreements with SC party bosses.\
 	<br><br>\
+	The actions of Arielsson and Vir's proximity to the border have lead to increased focus on the upcoming Gubernatorial  election on a nationwide level, with the Icarus Front alone projected to spend upwards of a billion thalers on publicity. Minor party candidates like the former MLM member Luisa Hannirsdottir and the Mercurial Phaedrus already have strong support in the polls, promising a fierce election that could ultimately tip power in the system in any direction.\
+	<br><br>\
 	A full excerpt is available below."
 	children = list(
 		/datum/lore/codex/page/bjornretirement
