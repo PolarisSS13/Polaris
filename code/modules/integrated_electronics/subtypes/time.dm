@@ -8,8 +8,8 @@
 
 /obj/item/integrated_circuit/time/delay
 	name = "delay circuit"
-	desc = "This sends a pulse signal out after a delay defined in tenths of a second, critical for ensuring proper control \
-	flow in a complex machine. This circuit's delay can be customized, between 1/10th of a second to one hour. \
+	desc = "This sends a pulse signal out after a delay defined in tenths of a second, critical for ensuring proper \
+	control flow in a complex machine. This circuit's delay can be customized, between 1/10th of a second to one hour. \
 	The delay is updated upon receiving a pulse."
 	extended_desc = "The delay is defined in tenths of a second. For instance, 4 will be a delay of 0.4 seconds, or 15 for 1.5 seconds."
 	icon_state = "delay"
