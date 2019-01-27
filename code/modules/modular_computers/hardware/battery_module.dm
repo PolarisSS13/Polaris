@@ -57,3 +57,14 @@
 	battery.maxcharge = battery_rating
 	battery.charge = battery_rating
 	..()
+
+/obj/item/weapon/computer_hardware/battery_module/Destroy()
+	qdel(battery)
+	return ..()
+
+/obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()
+	if(battery)
+		battery.charge = battery.maxcharge
+
+/obj/item/weapon/computer_hardware/battery_module/get_cell()
+	return battery
