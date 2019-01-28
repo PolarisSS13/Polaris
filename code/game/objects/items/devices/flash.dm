@@ -18,7 +18,7 @@
 	var/break_mod = 3 // The percent to break increased by every use on the flash.
 
 	var/can_break = TRUE // Can the flash break?
-	var/can_repair = TRUE // Can you repair the flash?
+	var/can_repair = FALSE // Can you repair the flash?
 	var/repairing = FALSE // Are we repairing right now?
 
 	var/charge_only = FALSE // Does the flash run purely on charge?
