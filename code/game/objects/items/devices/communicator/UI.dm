@@ -269,6 +269,9 @@
 		fon = !fon
 		set_light(fon * flum)
 
+	if(href_list["apps"])
+		computer.enable_computer(usr)
+
 	if(href_list["toggle_device"])
 		var/obj/O = cartridge.internal_devices[text2num(href_list["toggle_device"])]
 		cartridge.active_devices ^= list(O) // Exclusive or, will toggle its presence
