@@ -19,6 +19,8 @@
 
 	var/can_break = TRUE // Can the flash break?
 	var/can_repair = TRUE // Can you repair the flash?
+	var/repairing = FALSE // Are we repairing right now?
+
 	var/charge_only = FALSE // Does the flash run purely on charge?
 
 	var/base_icon = "flash"
@@ -35,13 +37,20 @@
 
 /obj/item/device/flash/attackby(var/obj/item/W, var/mob/user)
 	if(W.is_screwdriver() && broken)
+		if(repairing)
+			to_chat(user, "<span class='notice'>\The [src] is already being repaired!</span>")
+			return
 		user.visible_message("<span class='notice'>\The [user] starts trying to repair \the [src]'s bulb.</span>")
+		repairing = TRUE
 		if(do_after(user, (40 SECONDS + rand(0, 20 SECONDS)) * W.toolspeed) && can_repair)
 			if(prob(30))
 				user.visible_message("<span class='notice'>\The [user] successfully repairs \the [src]!</span>")
 				broken = FALSE
 				update_icon()
 			playsound(src.loc, W.usesound, 50, 1)
+		else
+			user.visible_message("<span class='notice'>\The [user] fails to repair \the [src].</span>")
+		repairing = FALSE
 	else
 		..()
 
