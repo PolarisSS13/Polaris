@@ -6,21 +6,23 @@
 	heat_protection = HEAD
 	body_parts_covered = HEAD|FACE|EYES
 	slowdown = 0.5
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 0) //realistically would have some armor but balance.
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 70) //realistically would have some armor but balance.
+	siemens_coefficient = 1
 
-	species_restricted = list(SPECIES_ZADDAT)
+	species_restricted = list(SPECIES_ZADDAT, SPECIES_PROMETHEAN) //on request from maintainer
 
 /obj/item/clothing/suit/space/void/zaddat
 	name = "\improper Hegemony Shroud"
 	desc = "A Hegemony environment suit, still favored by the Spacer Zaddat because of its durability and ease of manufacture."
 	slowdown = 1
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 70)
+	siemens_coefficient = 1
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank)
 	icon_state = "zaddat_hegemony"
 	helmet = new/obj/item/clothing/head/helmet/space/void/zaddat //shrouds come with helmets built-in
 	var/has_been_customized = FALSE
 
-	species_restricted = list(SPECIES_ZADDAT)
+	species_restricted = list(SPECIES_ZADDAT, SPECIES_PROMETHEAN)
 
 	breach_threshold = 12
 
@@ -93,10 +95,3 @@
 	has_been_customized = TRUE
 	M.regenerate_icons()
 	return 1
-/*
-
-/datum/zaddathelm/bishop
-
-/datum/zaddatsuit/bishop
-
-*/

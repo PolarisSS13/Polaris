@@ -317,6 +317,8 @@
 	brute_mod = 1.15
 	burn_mod =  1.15
 	toxins_mod = 1.5
+	flash_mod = 2
+	flash_burn = 15 //flashing a zaddat probably counts as police brutality
 	metabolic_rate = 0.7 //did u know if your ancestors starved ur body will actually start in starvation mode?
 	gluttonous = 1
 	taste_sensitivity = TASTE_SENSITIVE
@@ -346,12 +348,11 @@
 	genders = list(FEMALE, NEUTER)
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_HAIR_COLOR
+	appearance_flags = null
 
 	flesh_color = "#AFA59E"
 	base_color = "#e2e4a6"
 	blood_color = "#FFCC00" //a gross sort of orange color
-	tail_hair = "pustule"
 
 	reagent_tag = IS_ZADDAT
 
@@ -394,6 +395,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
 
 /datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
+
 	if(H.inStasisNow())
 		return
 
@@ -404,6 +406,7 @@
 	if(isturf(H.loc)) //else, there's considered to be no light
 		var/turf/T = H.loc
 		light_amount = T.get_lumcount() * 5
+
 
 	for(var/K in damageable)
 		if(!(K in covered))
