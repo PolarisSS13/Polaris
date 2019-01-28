@@ -106,7 +106,7 @@ var/list/civilian_positions = list(
 	"Bartender",
 	"Botanist",
 	"Chef",
-	"Janitor",
+	"Sanitation Technician",
 	"Librarian",
 	"Defense Attorney",
 	"Judge",

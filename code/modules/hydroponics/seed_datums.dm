@@ -285,10 +285,10 @@
 //cannabis/varieties.
 /datum/seed/cannabis
 	name = "cannabis"
-	seed_name = "cannabis vulgaris"
+	seed_name = "cannabis"
 	display_name = "marijuana"
 	mutants = list("cannabisdeus")
-	chems = list("nutriment" = list(1), "cannabis" = list(1,8))
+	chems = list("nutriment" = list(1), "cannabis" = list(3,8))
 	kitchen_tag = "cannabis"
 
 /datum/seed/cannabis/New()
@@ -308,7 +308,7 @@
 	seed_name = "cannabis deus"
 	display_name = "OG Purple Haze"
 	mutants = null
-	chems = list("nutriment" = list(1), "cannabis" = list(1,8), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "ecstasy" = list(1,10))
+	chems = list("nutriment" = list(1), "cannabis" = list(11,18), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "ecstasy" = list(1,10))
 	kitchen_tag = "cannabisdeus"
 
 /datum/seed/cannabis/deus/New()

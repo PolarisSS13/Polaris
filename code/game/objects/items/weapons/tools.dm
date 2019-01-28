@@ -786,6 +786,11 @@
 		mounted_pack.return_nozzle()
 		to_chat(user, "<span class='notice'>\The [src] retracts to its fueltank.</span>")
 
+/obj/item/weapon/weldingtool/electric/unloaded/New()
+	cell_type = null
+
+/obj/item/weapon/weldingtool/electric/get_cell()
+	return power_supply
 /*
  * Electric/Arc Welder
  */

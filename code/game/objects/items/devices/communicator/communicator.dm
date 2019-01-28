@@ -49,6 +49,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/flum = 2 // Brightness
 
 	var/obj/item/weapon/card/id/id = null //add the ID slot
+	var/obj/item/modular_computer/communicator_internal/computer	//the integrated modular computer.
 
 	var/list/modules = list(
 							list("module" = "Phone", "icon" = "phone64", "number" = PHONTAB),
@@ -92,6 +93,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	camera.name = "[src] #[rand(100,999)]"
 	camera.c_tag = camera.name
 	new /obj/item/weapon/pen(src)
+	computer = new(src)
 	//This is a pretty terrible way of doing this.
 	spawn(5 SECONDS) //Wait for our mob to finish spawning.
 		if(ismob(loc))
@@ -348,6 +350,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	listening_objects.Remove(src)
 	qdel(camera)
 	qdel(exonet)
+	qdel(computer)
 
 	return ..()
 
@@ -546,3 +549,11 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			to_chat(usr, "<span class='notice'>This communicator does not have a pen in it.</span>")
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
+
+
+/obj/item/device/communicator/initial_data()		//This may be called by the attached computer.
+	return computer.initial_data()
+
+/obj/item/device/communicator/get_cell()
+	if(computer)
+		return computer.battery_module.get_cell()

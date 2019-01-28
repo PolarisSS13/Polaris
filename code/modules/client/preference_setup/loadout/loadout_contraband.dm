@@ -33,6 +33,20 @@
 	sort_category = "Contraband"
 	cost = 4
 
+/datum/gear/contraband/syringe
+	display_name = "syringe "
+	description = "You actually hope this is clean."
+	path = /obj/item/weapon/reagent_containers/syringe
+	sort_category = "Contraband"
+	cost = 2
+
+/datum/gear/contraband/grinder
+	display_name = "herb grinder"
+	description = "For various, totally legal purposes!"
+	path = /obj/item/weapon/grinder
+	sort_category = "Contraband"
+	cost = 3
+
 /datum/gear/contraband/zipgun
 	display_name = "zipgun"
 	description = "A small handgun, for self defense (usually)."

@@ -82,3 +82,5 @@
 		return 0
 	return 1
 
+/obj/item/device/electronic_assembly/get_cell()
+	return battery
