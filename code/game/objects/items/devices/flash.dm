@@ -21,6 +21,8 @@
 	var/can_repair = FALSE // Can you repair the flash?
 	var/repairing = FALSE // Are we repairing right now?
 
+	var/safe_flashes = 2 // How many flashes are kept in 1% breakchance?
+
 	var/charge_only = FALSE // Does the flash run purely on charge?
 
 	var/base_icon = "flash"
@@ -123,7 +125,7 @@
 
 	if(times_used <= max_flashes && battery && battery.checked_use(charge_cost))
 		last_used = world.time
-		if(prob( times_used * 3 ) && can_break)	//if you use it 10 times in a minute it has a 30% chance to break.
+		if(prob( max(0, times_used - safe_flashes) * 2 + (times_used >= 1) ) && can_break)	//if you use it 10 times in a minute it has a 30% chance to break.
 			broken = TRUE
 			if(user)
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
