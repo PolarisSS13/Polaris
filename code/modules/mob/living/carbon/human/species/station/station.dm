@@ -345,13 +345,13 @@
 
 	genders = list(FEMALE, NEUTER)
 
-
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_SKIN_COLOR
+	appearance_flags = HAS_HAIR_COLOR
 
 	flesh_color = "#AFA59E"
-	base_color = "#000000"
+	base_color = "#e2e4a6"
 	blood_color = "#FFCC00" //a gross sort of orange color
+	tail_hair = "pustule"
 
 	reagent_tag = IS_ZADDAT
 
@@ -377,6 +377,10 @@
 	O_EYES =     /obj/item/organ/internal/eyes
 	)
 
+	descriptors = list(
+		/datum/mob_descriptor/height = 0,
+		/datum/mob_descriptor/build = -1
+		)
 /datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	if(H.wear_suit) //get rid of job labcoats so they don't stop us from equipping the Shroud
