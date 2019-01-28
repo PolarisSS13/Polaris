@@ -692,6 +692,7 @@
 #include "code\game\gamemodes\technomancer\spells\summon\summon.dm"
 #include "code\game\gamemodes\technomancer\spells\summon\summon_creature.dm"
 #include "code\game\gamemodes\technomancer\spells\summon\summon_ward.dm"
+#include "code\game\gamemodes\thug\thug.dm"
 #include "code\game\gamemodes\traitor\traitor.dm"
 #include "code\game\gamemodes\wizard\wizard.dm"
 #include "code\game\gamemodes\zombie\zombie.dm"
