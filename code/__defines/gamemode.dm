@@ -25,7 +25,7 @@
 #define BE_MUTINEER   0x2000
 #define BE_PAI        0x4000
 #define BE_LOYALIST   0x8000
-#define BE_ZOMBIE		 0x16000
+#define BE_ZOMBIE	0x16000
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -38,12 +38,12 @@ var/list/be_special_flags = list(
 	"Xenomorph"        = BE_ALIEN,
 	"Positronic Brain" = BE_AI,
 	"Cultist"          = BE_CULTIST,
-	"Renegade"         = BE_RENEGADE,
+	"Thug"         = BE_RENEGADE,
 	"Ninja"            = BE_NINJA,
 	"Raider"           = BE_RAIDER,
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
-	"Zombie	"         = BE_ZOMBIE,
+	"Zombie"         = BE_ZOMBIE,
 	"pAI"              = BE_PAI
 )
 
