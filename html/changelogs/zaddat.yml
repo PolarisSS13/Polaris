@@ -36,4 +36,6 @@ changes:
   - rscadd: "Added the Zaddat species, voidsuit-clad fragile bug people. Whitelist applications will be available at a later date."
   - rscadd: "Added glucose hypos to the SWEATMAX vendors and a few other places thoughout the station."
   - rscadd: "Zaddat equipment is now available through cargo."
+  - rscadd: "Some new, very very chuuni accessories to play with; the half cape, the full cape, and the sash"
+  - tweak: "Most accessories can now fit on suits."
   - rscdel: "Dionaea and vox can no longer use station rigs."
