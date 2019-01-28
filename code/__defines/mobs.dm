@@ -212,7 +212,7 @@
 #define O_AREJECT  "immune hub"
 #define O_VENTC    "morphoplastic node"
 #define O_VRLINK   "virtual node"
-#define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_ACID, O_EGG, O_RESIN, O_AREJECT, O_VENTC)
+#define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_ACID, O_EGG, O_RESIN, O_AREJECT, O_VENTC, O_VRLINK)
 
 // External organs, aka limbs
 #define BP_L_FOOT "l_foot"
