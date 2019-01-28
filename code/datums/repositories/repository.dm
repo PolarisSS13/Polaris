@@ -17,3 +17,4 @@
 
 /datum/cache_entry/valid_until/is_valid()
 	return world.time < timestamp
+

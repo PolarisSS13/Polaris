@@ -320,4 +320,4 @@
 
 /obj/item/weapon/reagent_containers/pill/cocaine/New()
 	..()
-	reagents.add_reagent("cocaine" = 5)
+	reagents.add_reagent("cocaine", 5)

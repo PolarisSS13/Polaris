@@ -87,7 +87,7 @@ var/global/list/SKILL_PRE = list("Engineer" = SKILL_ENGINEER, "Roboticist" = SKI
 /datum/skill/engines
 	ID = "engines"
 	name = "Engines"
-	desc = "Describes your knowledge of the various engine types common on space stations, such as the singularity or anti-matter engine."
+	desc = "Describes your knowledge of the various power-generation machines used in modern cities."
 	field = "Engineering"
 	secondary = 1
 

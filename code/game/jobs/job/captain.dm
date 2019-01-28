@@ -8,7 +8,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	department = "Command"
 	head_position = 1
 	department_flag = ENGSEC
-	faction = "Station"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "government officials and the president"
@@ -41,7 +41,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	department = "Command"
 	head_position = 1
 	department_flag = ENGSEC
-	faction = "Station"
+	faction = "City"
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "NanoTrasen"
@@ -69,7 +69,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	department = "Command"
 	head_position = 1
 	department_flag = CIVILIAN
-	faction = "Station"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -102,7 +102,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = JUDGE
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the city supervisor"
+	supervisors = "government officials and the President"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/heads/judge
 	economic_modifier = 13
@@ -120,7 +120,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = BRIDGE
 	department = "Security"
 	department_flag = ENGSEC
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the mayor or the judge"

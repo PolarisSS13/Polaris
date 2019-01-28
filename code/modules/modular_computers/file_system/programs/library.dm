@@ -24,7 +24,9 @@ The answer was five and a half years -ZeroBits
 	var/sort_by = "id"
 
 /datum/nano_module/library/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = host.initial_data()
+	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
 
 	if(error_message)
 		data["error"] = error_message

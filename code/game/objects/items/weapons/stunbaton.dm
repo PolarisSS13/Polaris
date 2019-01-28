@@ -19,6 +19,9 @@
 	var/obj/item/weapon/cell/bcell = null
 	var/hitcost = 240
 
+/obj/item/weapon/melee/baton/get_cell()
+	return bcell
+
 /obj/item/weapon/melee/baton/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in [TU.his] mouth! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
