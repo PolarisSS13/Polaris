@@ -111,6 +111,7 @@
 	desc = "This is used by your elite police force."
 	icon_state = "sec_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_sec
+	ear_protection = 2
 
 /obj/item/device/radio/headset/headset_eng
 	name = "engineering radio headset"
@@ -123,6 +124,7 @@
 	desc = "When the engineers wish to chat like girls."
 	icon_state = "eng_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_eng
+	ear_protection = 2
 
 /obj/item/device/radio/headset/headset_rob
 	name = "robotics radio headset"
@@ -141,6 +143,7 @@
 	desc = "A headset for the trained staff of the medbay."
 	icon_state = "med_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_med
+	ear_protection = 2
 
 /obj/item/device/radio/headset/headset_sci
 	name = "science radio headset"
@@ -165,7 +168,7 @@
 	desc = "A headset with a commanding channel."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_com
-
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/captain
 	name = "colony director's headset"
@@ -178,6 +181,7 @@
 	desc = "The headset of the boss."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/captain
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/captain/sfr
 	name = "SFR headset"
@@ -211,6 +215,7 @@
 	desc = "Headset of the researching God."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/rd
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/hos
 	name = "chief of police's headset"
@@ -223,6 +228,7 @@
 	desc = "The headset of the man who protects your worthless lifes."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/ce
 	name = "chief engineer's headset"
@@ -235,6 +241,7 @@
 	desc = "The headset of the guy who is in charge of morons"
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/ce
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/cmo
 	name = "chief medical officer's headset"
@@ -247,6 +254,7 @@
 	desc = "The headset of the highly trained medical chief."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/cmo
+	ear_protection = 2
 
 /obj/item/device/radio/headset/heads/hop
 	name = "head of personnel's headset"
@@ -259,6 +267,7 @@
 	desc = "The headset of the guy who will one day be Colony Director."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/hop
+	ear_protection = 2
 
 /obj/item/device/radio/headset/headset_mine
 	name = "mining radio headset"
@@ -278,6 +287,7 @@
 	desc = "A bowman headset used by the QM and his slaves."
 	icon_state = "cargo_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/headset_cargo
+	ear_protection = 2
 
 /obj/item/device/radio/headset/headset_service
 	name = "service radio headset"
@@ -299,6 +309,7 @@
 	icon_state = "com_headset_alt"
 //	freerange = 1
 	ks2type = /obj/item/device/encryptionkey/ert
+	ear_protection = 2
 
 /obj/item/device/radio/headset/omni		//Only for the admin intercoms
 	ks2type = /obj/item/device/encryptionkey/omni
