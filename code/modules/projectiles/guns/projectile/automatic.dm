@@ -296,9 +296,9 @@
 /obj/item/weapon/gun/projectile/automatic/as24/update_icon()
 	..()
 	if(ammo_magazine)
-		icon_state = "ashot-[round(ammo_magazine.stored_ammo.len,12)]"
-	else
 		icon_state = "ashot"
+	else
+		icon_state = "ashot-empty"
 	return
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
@@ -346,7 +346,7 @@
 	icon_state = "p90smg-[ammo_magazine ? round(ammo_magazine.stored_ammo.len, 6) : "empty"]"
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
-	name = "\improper Tommygun"
+	name = "\improper Tommy Gun"
 	desc = "This weapon was made famous by gangsters in the 20th century. Cybersun Industries is currently reproducing these for a target market of historic gun collectors and classy criminals. Uses .45 rounds."
 	icon_state = "tommygun"
 	w_class = ITEMSIZE_NORMAL

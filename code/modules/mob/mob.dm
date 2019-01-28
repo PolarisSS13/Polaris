@@ -39,14 +39,14 @@
 	spell_masters = null
 	zone_sel = null
 
-/mob/New()
+/mob/Initialize()
 	mob_list += src
 	if(stat == DEAD)
 		dead_mob_list += src
 	else
 		living_mob_list += src
 	update_transform() // Some mobs may start bigger or smaller than normal.
-	..()
+	return ..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
@@ -664,10 +664,12 @@
 	. = (is_client_active(10 MINUTES))
 
 	if(.)
-		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
-			stat("Station Time", stationtime2text())
-			stat("Station Date", stationdate2text())
-			stat("Round Duration", roundduration2text())
+		if(statpanel("Status"))
+			stat(null, "Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
+			if(ticker && ticker.current_state != GAME_STATE_PREGAME)
+				stat("Station Time", stationtime2text())
+				stat("Station Date", stationdate2text())
+				stat("Round Duration", roundduration2text())
 
 		if(client.holder)
 			if(statpanel("Status"))
@@ -1194,6 +1196,6 @@ mob/proc/yank_out_object()
 		else
 			registered_z = null
 
-/mob/on_z_change(old_z, new_z)
+/mob/onTransitZ(old_z, new_z)
 	..()
 	update_client_z(new_z)
