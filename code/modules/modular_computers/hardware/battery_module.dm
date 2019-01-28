@@ -41,6 +41,7 @@
 	desc = "A tiny power cell, commonly seen in low-end portable microcomputers. It's rating is 300."
 	icon_state = "battery_nano"
 	battery_rating = 300
+	hardware_size = 1
 
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/weapon/computer_hardware/battery_module/lambda
@@ -49,8 +50,6 @@
 	icon_state = "battery_lambda"
 	hardware_size = 1
 	battery_rating = 1000000
-
-
 
 /obj/item/weapon/computer_hardware/battery_module/New()
 	battery = new/obj/item/weapon/cell(src)

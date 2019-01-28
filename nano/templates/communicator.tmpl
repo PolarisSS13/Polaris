@@ -10,6 +10,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			{{for data.homeScreen}}
 				{{:helper.link(value.module, value.icon, {'switch_tab' : value.number}, null, 'link64')}}
 			{{/for}}
+			{{:helper.link('NT Apps', 'external64', {'apps' : 1}, null, 'link64')}}
 		</div>
 	</div>
 
@@ -445,6 +446,15 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 		</div>
 	</div>
 
+	<div class="item">
+		<div class="itemLabel">
+			Flashlight:
+		</div>
+		<div class = "itemContent">
+			<div style="float: left; width: 180px;">{{:helper.link(data.flashlight==1 ? 'Disable Flashlight' : 'Enable Flashlight', 'lightbulb', {'Light' : 1}, null,'fixedLeftWide')}}</div>
+		</div>
+	</div>
+
 
 <!-- Tenth Tab, External Device -->
 
@@ -491,5 +501,7 @@ Used In File(s): code\game\objects\items\devices\communicator\communicator.dm
 			{{:helper.link('Damage Control', 'engineering64', {'em_option' : 3}, null, 'emMenu')}}
 		</div>
 	</div>
+
+	
 
 {{/if}}
