@@ -17,3 +17,4 @@ var/datum/antagonist/thug/thugs
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	can_use_aooc = TRUE
 	antaghud_indicator = "thug"
+	antag_indicator = "thug"
