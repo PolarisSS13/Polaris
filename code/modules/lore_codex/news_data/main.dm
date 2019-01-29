@@ -354,7 +354,7 @@
 	<br><br>\
 	Others have criticized the speech's seemingly communist tone, with Arielsson expressing approval for the socialist Free Relan Federation and the anarchist Casini's Reach despite opposing their secessionist ideals. Still others claim that the speech offered 'nothing but empty feelings' and that it lacked specific, actionable resolutions on the growing secessionist movement in VirGov. Some have even framed the Address as a form of political maneuvering by the venerable politician, claiming that he voiced unpopular sentiments specifically to hamper the Shadow Coalition's re-election bid after well-publicized disagreements with SC party bosses.\
 	<br><br>\
-	The actions of Arielsson and Vir's proximity to the border have lead to increased focus on the upcoming Gubernatorial  election on a nationwide level, with the Icarus Front alone projected to spend upwards of a billion thalers on publicity. Minor party candidates like the former MLM member Luisa Hannirsdottir and the Mercurial Phaedrus already have strong support in the polls, promising a fierce election that could ultimately tip power in the system in any direction.\
+	The actions of Arielsson and Vir's proximity to the border have lead to increased focus on the upcoming Gubernatorial election on a nationwide level, with the Icarus Front alone projected to spend upwards of a billion thalers on publicity. Minor party candidates like the former MLM member Luisa Hannirsdottir and the Mercurial Phaedrus already have strong support in the polls, promising a fierce election that could ultimately tip power in the system in any direction.\
 	<br><br>\
 	A full excerpt is available below."
 	children = list(
@@ -362,7 +362,7 @@
 		)
 
 /datum/lore/codex/page/bjornretirement
-	name = "Bjorn Aielsson Farewall Address"
+	name = "Bjorn Arielsson Farewell Address"
 	data = "This is, as you know, my last term in office. After this, I mean to retire-- really retire, I have a cabin in the mountains waiting for me along with a thick stack of old Bowler novels. Because this is my last term, I have the chance to do something pretty rare for a politician. I get to speak my mind.\
 	<br><br>\
 	I hear talk from some people-- mostly young people, people who have lived their whole adult life with me in the capital-- I hear them talking about seccession. Now, let's make it clear; I'm not going to belittle you, the way some of my colleagues would. Complaining about the government, especially one as big and as old as the Confederacy, is our gods-given right. It's never going to be perfect, and it's not half of what it could be. I have nothing against talking about it, I have nothing against turning that talk into action and actually seceding, with just cause. I've worked closely with Representative Hannirsdottir for ten years now, and while we don't agree on the issue of secession it's certainly never stopped us from cooperating.\
@@ -389,14 +389,14 @@
 	name = "01/25/63 - Moravec Nephew Announces Vir Governor Candidacy"
 	data = "The Sol Economic Organization has announced that Calvert Moravec, nephew of NanoTrasen CEO Albary Moravec will be running under their ticket in the upcoming Vir gubernatorial elections. Calvert has stated that he will run on a pro-business platform, and has chosen Vir to do so due to the 'Unique beauty and economic prospects of an interstellar crossroads such as Vir'.\
 	<br><br>\
-	Despite being a lifelong resident of Alpha Centauri, Moravec was recently approved for Sif citizenship, making him eligible for local candidacy and has reportedly moved into a luxurious New Reykjavik penthouse. Perhaps best known for his soaring stock market investment success over the previous few years, Calvert's first foray into politics is not wholly unexpected as the Moravec family has long leveraged their wealth in international affairs, though successful election would mark their first sitting member of the Colonial Assembly. Fellow SEO candidate Councillor Hal Wekstrom has expressed his full support for Moravec.\
+	Despite being a lifelong resident of Alpha Centauri, Moravec was recently approved for Vir citizenship, making him eligible for local candidacy and has reportedly moved into a luxurious New Reykjavik penthouse. Perhaps best known for his soaring stock market investment success over the previous few years, Calvert's first foray into politics is not wholly unexpected as the Moravec family has long leveraged their wealth in international affairs, though successful election would mark their first sitting member of the Colonial Assembly. Fellow SEO candidate Councillor Hal Wekstrom has expressed his full support for Moravec.\
 	<br><br>\
 	Three candidates will be elected as representatives to the Colonial Assembly later this year, with the most popular also attaining the position of system governor."
 
 /datum/lore/codex/page/article33
 	name = "01/27/63 - Vani Jee Orbital Tour Cut Short"
 	data = "Icarus Front Representative Candidate Vani Jee has delayed the remainder of her campaign tour of orbital colonies and outposts around the Vir system after an alleged altercation with NanoTrasen security.\
-	Candidate Jee had been visiting the NLS Southern Cross, a NanoTrasen station in Sif orbit to recieve a corporate tour and meet with voters, when her concluding question and answer session was interrupted by hecklers, leading to the event being cut short. Jee alleges that footage of the event was seized by NanoTrasen corporate security and has accused the trans-stellar corporation of the intentional intimidation of Icarus Front and Sol Economic Organization candidates in what she describes as 'a clear display of corruption in favour of company-favourite Calvert Moravec', though she has praised the individual employees of the Cross for their hospitality and thought-provoking questions.\
+	Candidate Jee had been visiting the NLS Southern Cross, a NanoTrasen station in Sif orbit to receive a corporate tour and meet with voters, when her concluding question and answer session was interrupted by hecklers, leading to the event being cut short. Jee alleges that footage of the event was seized by NanoTrasen corporate security and has accused the trans-stellar corporation of the intentional intimidation of Icarus Front and Shadow Coalition candidates in what she describes as 'a clear display of corruption in favour of company-favourite Calvert Moravec', though she has praised the individual employees of the Cross for their hospitality and thought-provoking questions.\
 	<br><br>\
 	Vani Jee is running on a platform of free access to education, Sivian self-determination, and isolationist foreign policy. She has refused to make any strong statements regarding hot-button issues such as the Five Points.\
 	<br><br>\
