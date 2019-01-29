@@ -46,7 +46,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	var/obj/item/weapon/commcard/cartridge = null //current cartridge
 	var/fon = 0 // Internal light
-	var/flum = 2 // Brightness
+	var/flum = 4 // Brightness
 
 	var/obj/item/weapon/card/id/id = null //add the ID slot
 	var/obj/item/modular_computer/communicator_internal/computer	//the integrated modular computer.
