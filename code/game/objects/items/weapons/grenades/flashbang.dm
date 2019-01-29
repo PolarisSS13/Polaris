@@ -103,7 +103,7 @@
 
 
 /obj/item/weapon/grenade/flashbang/clusterbang/prime()
-	var/numspawned = rand(min_segments,max_segments)
+	var/numspawned = rand(min_segments, max_segments)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
