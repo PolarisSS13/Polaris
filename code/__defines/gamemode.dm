@@ -26,6 +26,7 @@
 #define BE_PAI        0x4000
 #define BE_LOYALIST   0x8000
 #define BE_ZOMBIE	0x16000
+#define BE_FACTION	0x32000
 
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
@@ -44,6 +45,7 @@ var/list/be_special_flags = list(
 	"Diona"            = BE_PLANT,
 	"Mutineer"         = BE_MUTINEER,
 	"Zombie"         = BE_ZOMBIE,
+	"Factionist Gang"  = BE_FACTION,
 	"pAI"              = BE_PAI
 )
 
@@ -90,6 +92,11 @@ var/list/be_special_flags = list(
 #define MODE_INFILTRATOR "infiltrator"
 #define MODE_THUG "thug"
 #define MODE_ZOMBIE "zombie"
+#define MODE_FACTIONS "union factionist"
+#define MODE_FACTIONS_TF "trust fund factionist"
+#define MODE_FACTIONS_FI "libre oracle factionist"
+#define MODE_FACTIONS_BC "blue moon cartel factionist"
+#define MODE_FACTIONS_CD "coalition against detection factionist"
 
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 120

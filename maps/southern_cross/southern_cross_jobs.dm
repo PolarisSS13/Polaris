@@ -22,7 +22,7 @@ var/const/access_explorer = 43
 /obj/item/weapon/card/id/medical/sar
 	assignment = "Search and Rescue"
 	rank = "Search and Rescue"
-	job_access_type = /datum/job/medical/sar
+	job_access_type = /datum/job/sar
 
 /obj/item/weapon/card/id/civilian/pilot
 	assignment = "Pilot"
@@ -105,7 +105,7 @@ var/const/access_explorer = 43
 		"Explorer Medic" = /decl/hierarchy/outfit/job/explorer2/medic)
 */
 
-/datum/job/medical/sar
+/datum/job/sar
 	title = "Search and Rescue"
 	flag = SAR
 	department_flag = MEDSCI

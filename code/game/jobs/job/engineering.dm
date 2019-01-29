@@ -1,13 +1,10 @@
-/datum/job/engineering
-	department = "Engineering"
-	faction = "City"
-// I should probably do something creative like making the /heads/ hierarchy completely dynamic so I can shove it wherever, but moving on.
-
-/datum/job/engineering/chief_engineer
+/datum/job/chief_engineer
 	title = "Chief Engineer"
 	flag = CHIEF
+	faction = "City"
 	head_position = 1
 	department_flag = ENGSEC
+	department = "Engineering"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -32,10 +29,11 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
-/datum/job/engineering/engineer
+/datum/job/engineer
 	title = "City Engineer"
 	flag = ENGINEER
 	department_flag = ENGSEC
+	department = "Engineering"
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
@@ -44,16 +42,16 @@
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
+	alt_titles = list("Construction Worker","Engine Technician","Electrician")
 	minimum_character_age = 18
 	minimal_player_age = 3
-
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
-/datum/job/engineering/atmos
+/datum/job/atmos
 	title = "Firefighter"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
+	department = "Engineering"
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
@@ -65,4 +63,5 @@
 
 	minimal_player_age = 3
 	minimum_character_age = 18
+
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

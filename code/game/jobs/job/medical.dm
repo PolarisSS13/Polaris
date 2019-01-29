@@ -1,12 +1,9 @@
-/datum/job/medical // technically the access should all be merged up here too and cleaned up but w/e
-	department = "Medical"
-	department_flag = MEDSCI
-
-/datum/job/medical/cmo
+/datum/job/cmo
 	title = "Chief Medical Officer"
 	flag = CMO
 	head_position = 1
 	department_flag = MEDSCI
+	department = "Medical"
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
@@ -30,10 +27,11 @@
 	alt_titles = list(
 		"Chief of Medicine")
 
-/datum/job/medical/doctor
+/datum/job/doctor
 	title = "Doctor"
 	flag = DOCTOR
 	department_flag = MEDSCI
+	department = "Medical"
 	faction = "City"
 	total_positions = 5
 	spawn_positions = 3
@@ -52,9 +50,10 @@
 		"Virologist" = /decl/hierarchy/outfit/job/medical/doctor/virologist)
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
-/datum/job/medical/chemist
+/datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
+	department = "Medical"
 	department_flag = MEDSCI
 	faction = "City"
 	total_positions = 2
@@ -72,7 +71,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
-/datum/job/medical/geneticist
+/*/datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
 	department_flag = MEDSCI
@@ -86,13 +85,14 @@
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
-	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
+	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist */
 
 
-/datum/job/medical/psychiatrist
+/datum/job/psychiatrist
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
+	department = "Medical"
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
@@ -105,10 +105,11 @@
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 	alt_titles = list("Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
 
-/datum/job/medical/paramedic
+/datum/job/paramedic
 	title = "Paramedic"
 	flag = PARAMEDIC
 	department_flag = MEDSCI
+	department = "Medical"
 	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
