@@ -290,7 +290,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/New()
 	..()
-	reagents.add_reagent("sugar", 3)
+	reagents.add_reagent("sugar", 1)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
@@ -340,7 +340,7 @@
 	trash = /obj/item/trash/chips
 	filling_color = "#E8C31E"
 	center_of_mass = list("x"=15, "y"=15)
-	nutriment_amt = 3
+	nutriment_amt = 1
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/chips/New()
@@ -1302,7 +1302,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky/New()
 		..()
-		reagents.add_reagent("protein", 4)
+		reagents.add_reagent("protein", 2)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin
@@ -1312,12 +1312,12 @@
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
 	center_of_mass = list("x"=15, "y"=4)
-	nutriment_amt = 6
+	nutriment_amt = 3
 	nutriment_desc = list("dried raisins" = 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin/New()
 	..()
-	reagents.add_reagent("nutriment", 6)
+	reagents.add_reagent("nutriment", 3)
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
 	name = "Space Twinkie"
@@ -1328,7 +1328,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/New()
 	..()
-	reagents.add_reagent("sugar", 4)
+	reagents.add_reagent("sugar", 3)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
@@ -1338,8 +1338,8 @@
 	trash = /obj/item/trash/cheesie
 	filling_color = "#FFA305"
 	center_of_mass = list("x"=15, "y"=9)
-	nutriment_amt = 4
-	nutriment_desc = list("cheese" = 5, "chips" = 2)
+	nutriment_amt = 2
+	nutriment_desc = list("cheese" = 2, "chips" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers/New()
 	..()
@@ -3567,8 +3567,8 @@
 	trash = /obj/item/trash/tastybread
 	filling_color = "#A66829"
 	center_of_mass = list("x"=17, "y"=16)
-	nutriment_amt = 6
-	nutriment_desc = list("bread" = 2, "sweetness" = 3)
+	nutriment_amt = 3
+	nutriment_desc = list("bread" = 4, "sweetness" = 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/tastybread/New()
 	..()
@@ -3580,12 +3580,12 @@
 	icon_state = "skrellsnacks"
 	filling_color = "#A66829"
 	center_of_mass = list("x"=15, "y"=12)
-	nutriment_amt = 10
-	nutriment_desc = list("mushroom" = 5, "salt" = 5)
+	nutriment_amt = 8
+	nutriment_desc = list("mushroom" = 3, "salt" = 10)
 
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/New()
 	..()
-	bitesize = 3
+	bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/unajerky
 	name = "Moghes Imported Sissalik Jerky"
@@ -3860,3 +3860,16 @@
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/potbrownie/
+	name = "Pot Brownie"
+	desc = "A brownie laced with cannabis."
+	icon_state = "potbrownie"
+	nutriment_amt = 8
+	nutriment_desc = list("sweetness" = 5, "chocolate" = 10)
+
+/obj/item/weapon/reagent_containers/food/snacks/potbrownie/New()
+	..()
+	reagents.add_reagent("cannabis", 10)
+	reagents.add_reagent("coco", 5)
+	bitesize = 5

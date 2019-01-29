@@ -6,7 +6,7 @@
 	icon_keyboard = "security_key"
 	icon_screen = "security"
 	light_color = "#a91515"
-	req_one_access = list(access_security, access_forensics_lockers, access_lawyer)
+	req_one_access = list(access_security, access_forensics_lockers, access_judge, access_prosecutor,)
 	circuit = /obj/item/weapon/circuitboard/secure_data
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
@@ -497,7 +497,7 @@ What a mess.*/
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
 							temp += "</ul>"
 					if("rank")
-						var/list/L = list( "City Supervisor", "Mayor", "AI" )
+						var/list/L = list( "City Clerk", "Mayor", "AI" )
 						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
 						if ((istype(active1, /datum/data/record) && L.Find(rank)))
 							temp = "<h5>Rank:</h5>"
@@ -614,3 +614,10 @@ What a mess.*/
 
 /obj/machinery/computer/secure_data/detective_computer
 	icon_state = "messyfiles"
+
+/obj/machinery/computer/secure_data/laptop
+	name = "Records Database Laptop"
+	desc = "Allows you to look up all the naughty things people do."
+	icon_state = "laptop"
+	icon_keyboard = "laptop_key"
+	icon_screen = "medlaptop"

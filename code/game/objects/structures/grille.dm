@@ -11,7 +11,12 @@
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
+	var/electric = 0 //required if we have no engine.
 
+/obj/structure/grille/electric
+	name = "electrified grille"
+	desc = "An electrified grille, quite dangerous."
+	electric = 1
 
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
@@ -23,7 +28,7 @@
 		icon_state = initial(icon_state)
 
 /obj/structure/grille/Bumped(atom/user)
-	if(ismob(user)) shock(user, 70)
+	if(ishuman(user)) shock(user, 70)
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 
@@ -38,8 +43,7 @@
 		if(H.species.can_shred(H))
 			attack_message = "mangles"
 			damage_dealt = 5
-
-	if(shock(user, 70))
+	if(shock(user, 50))
 		return
 
 	if(HULK in user.mutations)
@@ -179,18 +183,29 @@
 				return
 	return
 
+
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 
-/obj/structure/grille/proc/shock(mob/user as mob, prb)
+/obj/structure/grille/proc/shock(var/mob/living/carbon/human/user as mob)
+	if(!anchored || destroyed) // anchored/destroyed grilles are never connected
+		return 0
+	if(!in_range(src, user)) //To prevent TK and mech users from getting shocked
+		return 0
 
-	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
-		return 0
-	if(!prob(prb))
-		return 0
-	if(!in_range(src, user))//To prevent TK and mech users from getting shocked
-		return 0
-	var/turf/T = get_turf(src)
+	if(electric)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+		if(istype(user, /mob/living/carbon/human))
+			user.electrify(user, 120)
+		if(user.stunned)
+			return 1
+		else
+			return 0
+
+//Lack of engine makes the following redundant. Commenting out.
+/*	var/turf/T = get_turf(src)
 	var/obj/structure/cable/C = T.get_cable_node()
 	if(C)
 		if(electrocute_mob(user, C, src))
@@ -204,6 +219,7 @@
 		else
 			return 0
 	return 0
+*/
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!destroyed)
@@ -219,7 +235,7 @@
 	spawn(1) healthcheck()
 	return 1
 
-// Used in mapping to avoid
+// Used in mapping
 /obj/structure/grille/broken
 	destroyed = 1
 	icon_state = "grille-b"

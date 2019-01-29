@@ -295,12 +295,12 @@
 
 /datum/modifier/trait/phobia/claustrophobe
 	name = "claustrophobia"
-	desc = "Small spaces and tight quarters makes you feel distressed.  Unfortunately both are rather common when living in space."
+	desc = "Small spaces and tight quarters makes you feel distressed.  Unfortunately both are rather common when living in Geminus."
 	fear_decay_rate = 2
 
 	var/open_tiles_needed = 15 // Tends to be just right, as maint triggers this but hallways don't.
 
-	on_created_text = "<span class='warning'>You are terrified of tight spaces.  Why did you come to space?</span>"
+	on_created_text = "<span class='warning'>You are terrified of tight spaces.  Why did you come to such a crampt city?</span>"
 	on_expired_text = "<span class='notice'>Small rooms aren't so bad now.</span>"
 
 	zero_fear_up = list(

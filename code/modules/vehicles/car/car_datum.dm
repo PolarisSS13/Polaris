@@ -8,14 +8,24 @@
 
 
 /datum/riding/car/handle_ride(mob/user, direction)
+
 	var/turf/next = get_step(ridden, direction)
 	var/turf/current = get_turf(ridden)
 
-	if(istype(next, /turf/simulated/floor/road) || istype(current, /turf/simulated/floor/road)) //We can move from land to water, or water to land, but not from land to land
-		..()
-	else
+	if(!(istype(next, /turf/simulated/floor/road) || istype(current, /turf/simulated/floor/road))) //We can move from land to water, or water to land, but not from land to land
 		to_chat(user, "<span class='warning'>The car safety controls keep you on the road!</span>")
 		return FALSE
+
+	var/mob/living/carbon/human/H = user
+	var/obj/item/organ/external/hand/r_hand = H.get_organ(BP_R_HAND)
+	var/obj/item/organ/external/hand/l_hand = H.get_organ(BP_L_HAND)
+
+	if((!l_hand) && (!r_hand))
+		user << "<span class='warning'>You can't drive like this!</span>"
+		return FALSE
+
+// If all checks are passed. Move along!
+	..()
 
 /datum/riding/car // 'Small' boats can hold up to two people.
 
@@ -37,4 +47,3 @@
 				)
 		else
 			return null // This will runtime, but we want that since this is out of bounds.
-

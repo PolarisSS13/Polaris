@@ -219,7 +219,7 @@ var/list/gamemode_cache = list()
 	var/aggressive_changelog = 0
 
 	var/list/language_prefixes = list(",","#","-")//Default language prefixes
-
+	var/allow_chat_markup = 0 // Mark-up enabling
 	var/show_human_death_message = 1
 
 	var/radiation_decay_rate = 1 //How much radiation is reduced by each tick
@@ -625,6 +625,9 @@ var/list/gamemode_cache = list()
 
 				if("uneducated_mice")
 					config.uneducated_mice = 1
+
+				if("allow_chat_markup")
+					config.allow_chat_markup = 1
 
 				if("comms_password")
 					config.comms_password = value

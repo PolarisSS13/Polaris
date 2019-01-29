@@ -228,6 +228,10 @@ steam.start() -- spawns the effect
 	for(var/mob/living/carbon/M in get_turf(src))
 		affect(M)
 
+/obj/effect/effect/smoke/bad/short
+	time_to_live = 20
+
+
 /obj/effect/effect/smoke/bad/affect(var/mob/living/carbon/M)
 	if (!..())
 		return 0

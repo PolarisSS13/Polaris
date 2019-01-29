@@ -7,10 +7,10 @@
 
 
 /obj/item/weapon/book/manual/engineering_construction
-	name = "Station Repairs and Construction"
+	name = "City Repairs and Construction"
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
-	title = "Station Repairs and Construction"
+	title = "City Repairs and Construction"
 
 /obj/item/weapon/book/manual/engineering_construction/New()
 	..()
@@ -815,11 +815,11 @@
 
 
 /obj/item/weapon/book/manual/security_space_law
-	name = "Corporate Regulations"
-	desc = "A set of corporate guidelines for keeping law and order on privately-owned space stations."
+	name = "Pollux Law Book"
+	desc = "A official law book designed to keep law and order within the colony."
 	icon_state = "bookSpaceLaw"
-	author = "The Company"
-	title = "Corporate Regulations"
+	author = "NanoTrasen"
+	title = "Pollux Law"
 
 /obj/item/weapon/book/manual/security_space_law/New()
 	..()
@@ -829,7 +829,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]index.php?title=Pollux_Law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>

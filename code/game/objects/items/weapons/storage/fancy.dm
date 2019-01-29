@@ -300,7 +300,7 @@
 	desc = "A small cardboard pack containing several folded rolling papers."
 	icon_state = "paperbox"
 	icon = 'icons/obj/cigarettes.dmi'
-	w_class = ITEMSIZE_TINY
+	w_class = ITEMSIZE_SMALL
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 14
@@ -384,3 +384,22 @@
 /obj/item/weapon/storage/fancy/heartbox/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
 		icon_state = "heartbox_empty"
+
+///Aquatic Starter Kit
+
+/obj/item/weapon/storage/firstaid/aquatic_kit
+	name = "aquatic starter kit"
+	desc = "It's a starter kit box for an aquarium."
+	icon_state = "inf_box"
+	throw_speed = 2
+	throw_range = 8
+
+/obj/item/weapon/storage/firstaid/aquatic_kit/full
+	desc = "It's a starter kit for an acquarium; includes 1 tank brush, 1 egg scoop, 1 fish net, and 1 container of fish food."
+
+/obj/item/weapon/storage/firstaid/aquatic_kit/full/New()
+	..()
+	new /obj/item/egg_scoop(src)
+	new /obj/item/fish_net(src)
+	new /obj/item/tank_brush(src)
+	new /obj/item/fishfood(src)

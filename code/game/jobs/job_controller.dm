@@ -13,7 +13,7 @@ var/global/datum/controller/occupations/job_master
 	var/list/job_debug = list()
 
 
-	proc/SetupOccupations(var/faction = "Station")
+	proc/SetupOccupations(var/faction = "City")
 		occupations = list()
 		//var/list/all_jobs = typesof(/datum/job)
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
@@ -447,7 +447,7 @@ var/global/datum/controller/occupations/job_master
 					captain_announcement.Announce("The [alt_title ? alt_title : "Mayor"] [H.real_name] has arrived to the city.", new_sound=announce_sound)
 				if("President")
 					var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP)? null : sound('sound/misc/fanfare_prez.ogg', volume=20)
-					captain_announcement.Announce("[alt_title ? alt_title : "Mayor"] [H.real_name] is visiting the city!", new_sound=announce_sound)
+					captain_announcement.Announce("[alt_title ? alt_title : "President"] [H.real_name] is visiting the city!", new_sound=announce_sound)
 
 			//Deferred item spawning.
 			if(spawn_in_storage && spawn_in_storage.len)

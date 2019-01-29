@@ -1,4 +1,4 @@
-/datum/lore/codex/category/standard_operating_procedures
+/*/datum/lore/codex/category/standard_operating_procedures
 	name = "Standard Operating Procedures"
 	data = "This section details the various Standard Operating Procedures (often shortened to 'SOP') one may find onboard a NanoTrasen facility."
 	children = list(
@@ -345,4 +345,4 @@
 	<h3>Crew</h3>\
 	Suit sensors with tracking beacon active are mandatory.  Employees and guests are required to comply with all requests from Security or Command.  \
 	Employees are advised to remain within their departments if it is safe to do so.  An Emergency Response Team may be authorized.  If one is called, \
-	all crew and visitors are to comply with their direction.  Privacy policy is the same as Blue alert.  Command can demand that only Galactic Common is spoken on the radio."
+	all crew and visitors are to comply with their direction.  Privacy policy is the same as Blue alert.  Command can demand that only Galactic Common is spoken on the radio."*/

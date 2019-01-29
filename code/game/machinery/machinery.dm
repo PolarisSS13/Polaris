@@ -233,6 +233,9 @@ Class Procs:
 		return 1
 	if(user.lying || user.stat)
 		return 1
+	if(isundead(usr))
+		user << "<span class='notice'>This looks incredibly alien to you, and doesn't have brains.</span>"
+		return 1
 	if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/living/silicon)))
 		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return 1

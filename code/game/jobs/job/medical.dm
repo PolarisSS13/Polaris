@@ -2,9 +2,9 @@
 	title = "Chief Medical Officer"
 	flag = CMO
 	head_position = 1
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	department = "Medical"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Colony Director"
@@ -30,9 +30,9 @@
 /datum/job/doctor
 	title = "Doctor"
 	flag = DOCTOR
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	department = "Medical"
+	faction = "City"
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the chief medical officer"
@@ -49,13 +49,13 @@
 		"Nurse" = /decl/hierarchy/outfit/job/medical/doctor/nurse,
 		"Virologist" = /decl/hierarchy/outfit/job/medical/doctor/virologist)
 
-//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
+//Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
 /datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
 	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	minimum_character_age = 18
@@ -71,12 +71,11 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
-/datum/job/geneticist
+/*/datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	faction = "City"
 	total_positions = 0
 	spawn_positions = 0
 	supervisors = "the chief medical officer"
@@ -86,15 +85,15 @@
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
-	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
+	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist */
 
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	department = "Medical"
+	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
@@ -109,9 +108,9 @@
 /datum/job/paramedic
 	title = "Paramedic"
 	flag = PARAMEDIC
-	department = "Medical"
 	department_flag = MEDSCI
-	faction = "Station"
+	department = "Medical"
+	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"

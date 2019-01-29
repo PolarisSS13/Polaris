@@ -85,6 +85,15 @@
 	..()
 	reagents.add_reagent("water", 4000)
 
+/obj/structure/reagent_dispensers/cleanertank
+	name = "high-capacity cleaner tank"
+	desc = "A highly-pressurized tank made to hold vast amounts of cleaner."
+	icon_state = "watertank_high"
+
+/obj/structure/reagent_dispensers/cleanertank/New()
+	..()
+	reagents.add_reagent("cleaner", 5000)
+
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
 	desc = "A fueltank."

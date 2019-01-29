@@ -2,20 +2,19 @@
 /datum/job/chaplain
 	title = "Chaplain"
 	flag = CHAPLAIN
+	faction = "City"
 	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	minimum_character_age = 18
-	supervisors = "the city supervisor"
+	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chaplain
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_chapel_office, access_crematorium)
 	alt_titles = list("Counselor", "Priest", "Preacher")
 
-	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	outfit_type = /decl/hierarchy/outfit/job/civilian/chaplain
 
 /datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
 	. = ..()

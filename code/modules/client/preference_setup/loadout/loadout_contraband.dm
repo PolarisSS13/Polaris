@@ -33,6 +33,20 @@
 	sort_category = "Contraband"
 	cost = 4
 
+/datum/gear/contraband/syringe
+	display_name = "syringe "
+	description = "You actually hope this is clean."
+	path = /obj/item/weapon/reagent_containers/syringe
+	sort_category = "Contraband"
+	cost = 2
+
+/datum/gear/contraband/grinder
+	display_name = "herb grinder"
+	description = "For various, totally legal purposes!"
+	path = /obj/item/weapon/grinder
+	sort_category = "Contraband"
+	cost = 3
+
 /datum/gear/contraband/zipgun
 	display_name = "zipgun"
 	description = "A small handgun, for self defense (usually)."
@@ -80,3 +94,17 @@
 	path = /obj/item/weapon/storage/pill_bottle/ecstasy
 	sort_category = "Contraband"
 	cost = 13
+
+/datum/gear/contraband/pot_brownie
+	display_name = "Pot Brownie"
+	description = "A chocolate brownie laced with cannabis."
+	path = /obj/item/weapon/reagent_containers/food/snacks/potbrownie/
+	sort_category = "Contraband"
+	cost = 5
+
+/datum/gear/contraband/cocaine
+	display_name = "Cocaine"
+	description = "A small chunk of cocaine."
+	path =  /obj/item/weapon/reagent_containers/pill/cocaine
+	sort_category = "Contraband"
+	cost = 12

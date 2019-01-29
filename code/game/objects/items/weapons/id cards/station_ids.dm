@@ -52,7 +52,7 @@
 	return
 
 /obj/item/weapon/card/id/proc/update_name()
-	name = "ID Card"
+	name = "[src.registered_name]'s ID Card ([src.assignment])"
 
 /obj/item/weapon/card/id/proc/set_id_photo(var/mob/M)
 	var/icon/charicon = cached_character_icon(M)
@@ -80,7 +80,7 @@
 	dat += text("Name: []</A><BR>", registered_name)
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
-	dat += text("Occupation: []</A><BR>\n", assignment)
+	dat += text("Rank: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
 	dat += text("Blood Type: []<BR>\n", blood_type)
 	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
@@ -90,7 +90,7 @@
 	return dat
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: \icon[src] An [src.name]. The assignment on the card: [src.assignment]",\
+	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
 		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)
@@ -134,11 +134,11 @@
 /obj/item/weapon/card/id/silver/secretary
 	assignment = "City Hall Guard"
 	rank = "City Hall Guard"
-	job_access_type = /datum/job/secretary
+	job_access_type = /datum/job/bguard
 
 /obj/item/weapon/card/id/silver/hop
-	assignment = "City Supervisor"
-	rank = "City Supervisor"
+	assignment = "City Clerk"
+	rank = "City Clerk"
 	job_access_type = /datum/job/hop
 
 /obj/item/weapon/card/id/gold
@@ -394,7 +394,7 @@
 	rank = "Chef"
 	job_access_type = /datum/job/chef
 
-/obj/item/weapon/card/id/civilian/judge
+/obj/item/weapon/card/id/heads/judge
 	assignment = "Judge"
 	rank = "Judge"
 	job_access_type = /datum/job/judge

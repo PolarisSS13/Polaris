@@ -204,6 +204,12 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 /obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return
+
+	//if you're not supposed to be able to pick things up, don't pick 'em up.
+	if(isundead(usr))
+		user << "<span class='notice'>You're not sure what to do with this.</span>"
+		return
+
 	if (hasorgans(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
@@ -218,6 +224,20 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 	var/old_loc = src.loc
 	src.pickup(user)
+
+	//If it's a certain type of object, log it for admins, quite useful in some situations.
+	if(istype(src, /obj/item/weapon/melee))
+		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the melee object <b>[src]</b> from [src.loc.loc].</font>"
+
+	if(istype(src, /obj/item/weapon/gun))
+		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the gun object <b>[src]</b> from [src.loc.loc].</font>"
+
+	if(istype(src, /obj/item/weapon/reagent_containers))
+		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the reagent container <b>[src]</b> from [src.loc.loc].</font>"
+
+	if(istype(src, /obj/item/weapon/disk/nuclear))
+		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the <b>[src]</b> from [src.loc.loc].</font>"
+
 
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -465,6 +485,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(!istype(src.loc, /turf)) //Object is on a turf
 		usr << "<span class='warning'>You can't pick that up!</span>"
 		return
+
 	//All checks are done, time to pick it up!
 	usr.UnarmedAttack(src)
 	return

@@ -121,3 +121,16 @@
 		user.Paralyse(2)
 		return
 	return ..()
+
+/*
+ * Sushi Mat
+ */
+/obj/item/kitchen/sushimat
+	name = "Sushi Mat"
+	desc = "A wooden mat used for efficient sushi crafting."
+	icon_state = "sushi_mat"
+	force = 5
+	throwforce = 5
+	throw_speed = 3
+	throw_range = 3
+	attack_verb = list("rolled", "cracked", "battered", "thrashed")

@@ -2,7 +2,7 @@
 	descriptor = "ore distribution map"
 	var/deep_val = 0.8              // Threshold for deep metals, set in new as percentage of cell_range.
 	var/rare_val = 0.7              // Threshold for rare metal, set in new as percentage of cell_range.
-	var/chunk_size = 4              // Size each cell represents on map
+	var/chunk_size = 7              // Size each cell represents on map
 
 /datum/random_map/noise/ore/New()
 	rare_val = cell_range * rare_val

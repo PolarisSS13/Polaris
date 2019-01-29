@@ -193,3 +193,6 @@
 	results += ..()
 
 	return results
+
+/obj/item/weapon/gun/energy/get_cell()
+	return power_supply

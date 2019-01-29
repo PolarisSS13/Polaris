@@ -67,15 +67,16 @@
 	name = "Human Adolescent"
 	name_plural = "Humans Adolescents"
 	name = SPECIES_HUMAN_TEEN
+//	spawn_flags = SPECIES_IS_WHITELISTED
 	blurb = "A young human which is currently too young to participate in civil powers such as voting or official positions but can legally work in many fields on a reduced wage."
 	metabolic_rate = 1.15 // You know, puberty. Hormones. Growing.
 	blood_volume = 480
-	slowdown = -0.1
 	min_age = 13
 	max_age = 17
 	total_health = 85
 	economic_modifier = 1
 	icon_scale = 0.9
+	brute_mod = 0.5
 	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
 	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
 
@@ -83,15 +84,16 @@
 	name = "Human Child"
 	name_plural = "Human Children"
 	name = SPECIES_HUMAN_CHILD
+//	spawn_flags = SPECIES_IS_WHITELISTED
 	metabolic_rate = 1.10
 	blurb = "A younger version of a human. Much weaker and smaller - cannot participate in paid job roles, but faster and more agile."
 	mob_size = MOB_SMALL
 	has_fine_manipulation = 0
 	blood_volume = 300
-	slowdown = -0.3
 	min_age = 8
 	max_age = 12
 	total_health = 50
+	brute_mod = 0.2
 	economic_modifier = 0.2
 	icon_scale = 0.75
 	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
