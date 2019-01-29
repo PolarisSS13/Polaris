@@ -1,8 +1,6 @@
 var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
-/datum/job/heads/ // this is just for grabbing all of them at once
-
-/datum/job/heads/captain
+/datum/job/captain
 	title = "Mayor"
 	flag = CAPTAIN
 	department = "Command"
@@ -32,10 +30,10 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	if(.)
 		H.implant_loyalty(src)
 */
-/datum/job/heads/captain/get_access()
+/datum/job/captain/get_access()
 	return get_all_station_access()
 
-/datum/job/heads/president
+/datum/job/president
 	title = "President"
 	flag = PRESIDENT
 	department = "Command"
@@ -57,13 +55,13 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/heads/president
 
-/datum/job/heads/president/get_access()
+/datum/job/president/get_access()
 	get_all_station_access()
 	get_all_centcom_access()
 	return
 
 
-/datum/job/heads/hop
+/datum/job/hop
 	title = "City Clerk"
 	flag = HOP
 	department = "Command"
@@ -73,11 +71,12 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
-	selection_color = "#2F2F7F"
+	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/silver/hop
 	req_admin_notify = 1
 	minimal_player_age = 10
 	economic_modifier = 10
+
 
 	minimum_character_age = 25
 	ideal_character_age = 40
@@ -97,13 +96,16 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
-/datum/job/heads/judge
+/datum/job/judge
 	title = "Judge"
 	flag = JUDGE
+	head_position = 1
+	faction = "City"
+	department = "Command"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "government officials and the President"
-	selection_color = "#515151"
+	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/heads/judge
 	economic_modifier = 13
 	access = list(access_judge, access_sec_doors, access_maint_tunnels, access_heads)
@@ -113,25 +115,3 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	alt_titles = list("Magistrate")
 
 	outfit_type = /decl/hierarchy/outfit/job/heads/judge
-
-
-/datum/job/heads/secretary
-	title = "City Hall Guard"
-	flag = BRIDGE
-	department = "Security"
-	department_flag = ENGSEC
-	faction = "City"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the mayor or the judge"
-	selection_color = "#2F2F7F"
-	idtype = /obj/item/weapon/card/id/silver/secretary
-	minimal_player_age = 5
-	economic_modifier = 7
-	minimum_character_age = 20
-
-	access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
-	minimal_access = list(access_heads, access_keycard_auth, access_security, access_sec_doors)
-
-	outfit_type = /decl/hierarchy/outfit/job/heads/secretary
-	alt_titles = list("Public Bodyguard", "City Hall Security", "Bailiff")

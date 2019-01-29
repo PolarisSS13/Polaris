@@ -1,4 +1,5 @@
 /datum/job/assistant
+	var/hide_on_manifest = 1
 	title = "Civilian"
 	flag = ASSISTANT
 	department = "Civilian"
@@ -9,6 +10,7 @@
 	supervisors = "the mayor and the city clerk"
 	selection_color = "#515151"
 	minimum_character_age = 1
+	hide_on_manifest = 0
 	economic_modifier = 1
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
