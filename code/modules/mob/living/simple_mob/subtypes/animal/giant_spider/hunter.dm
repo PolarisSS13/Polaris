@@ -13,7 +13,7 @@
 	will often cause the victim to fall over, making this their main hunting tactic. \
 	<br><br>\
 	The venom inside these spiders has no special properties beyond being toxic."
-	value = 20
+	value = CATALOGUER_REWARD_COMMON
 
 /mob/living/simple_mob/animal/giant_spider/hunter
 	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes."

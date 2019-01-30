@@ -113,14 +113,19 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 
 	var/points_gained = 0
 
+	// Discover each datum available.
 	if(LAZYLEN(target.catalogue_data))
 		for(var/data_type in target.catalogue_data)
 			var/datum/category_item/catalogue/I = GLOB.catalogue_data.resolve_item(data_type)
-			if(istype(I) && I.discover(user, contributers))
-				points_gained += I.value
+			if(istype(I))
+				var/list/discoveries = I.discover(user, contributers)
+				if(LAZYLEN(discoveries))
+					for(var/D in discoveries)
+						var/datum/category_item/catalogue/data = D
+						points_gained += data.value
 
 	if(points_gained)
-		to_chat(user, span("notice", "Gained [points_gained] points in total."))
+		to_chat(user, span("notice", "Gained [points_gained] points from this scan."))
 
 	/*
 	// OLD SHIT
@@ -159,7 +164,7 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 	// If displayed_data exists, we show that, otherwise we show a list of all data in the mysterious global list.
 	if(displayed_data)
 		title = uppertext(displayed_data.name)
-		dat += "<h1>[uppertext(displayed_data.name)]</h1>"
+	//	dat += "<h1>[uppertext(displayed_data.name)]</h1>"
 		dat += "<i>[displayed_data.desc]</i>"
 		if(LAZYLEN(displayed_data.cataloguers))
 			dat += "Cataloguers : <b>[english_list(displayed_data.cataloguers)]</b>."
@@ -180,7 +185,7 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 			for(var/I in group.items)
 				var/datum/category_item/catalogue/item = I
 				if(item.visible || debug)
-					group_dat += "\t<a href='?src=\ref[src];show_data=\ref[item]'>[item.name]</a>"
+					group_dat += "<a href='?src=\ref[src];show_data=\ref[item]'>[item.name]</a>"
 					show_group = TRUE
 
 			if(show_group || debug) // Avoid showing 'empty' groups on regular cataloguers.

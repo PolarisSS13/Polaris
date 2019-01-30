@@ -23,7 +23,7 @@ var/list/grass_types = list(
 	The moss came to rely partially on bioluminescent bacteria provided by the local tree populations. \
 	As such, the moss often grows in large clusters in the denser forests of Sif. \
 	The moss has evolved into it's distinctive blue hue thanks to it's reliance on bacteria that has a similar color."
-	value = 5
+	value = CATALOGUER_REWARD_TRIVIAL
 
 /turf/simulated/floor/outdoors/grass/sif
 	name = "growth"

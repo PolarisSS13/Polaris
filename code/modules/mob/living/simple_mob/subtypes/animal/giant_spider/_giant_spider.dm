@@ -20,14 +20,14 @@
 	close the distance between them and their prey rapidly. \
 	Finally, those in the Nurse caste generally act in a supporting role to the other two \
 	castes, spinning webs and ensuring their nest grows larger and more terrifying."
-	value = 10
+	value = CATALOGUER_REWARD_TRIVIAL
 	unlocked_by_any = list(/datum/category_item/catalogue/fauna/giant_spider)
 
 // Obtained by scanning all spider types.
 /datum/category_item/catalogue/fauna/all_giant_spiders
 	name = "All Giant Spiders Scanned" // WIP
 	desc = "You did the thing!"
-	value = 80
+	value = CATALOGUER_REWARD_RARE
 	unlocked_by_all = list(
 		/datum/category_item/catalogue/fauna/giant_spider/guard_spider,
 		/datum/category_item/catalogue/fauna/giant_spider/carrier_spider,
@@ -53,7 +53,7 @@
 	This spider, like the others in its caste, is bulky, strong, and resilient. It \
 	relies on its raw strength to kill prey, due to having less potent venom compared \
 	to other spiders."
-	value = 20
+	value = CATALOGUER_REWARD_COMMON
 
 // The base spider, in the 'walking tank' family.
 /mob/living/simple_mob/animal/giant_spider

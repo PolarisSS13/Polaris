@@ -61,7 +61,6 @@
 	max_age = 260
 
 	economic_modifier = 7
-	catalogue_value = 10
 
 	blurb = "A heavily reptillian species, Unathi hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, inhospitable \
@@ -173,7 +172,6 @@
 	max_age = 80
 
 	economic_modifier = 7
-	catalogue_value = 10
 
 	blurb = "The Tajaran are a mammalian species resembling roughly felines, hailing from Meralar in the Rarkajar system. \
 	While reaching to the stars independently from outside influences, the humans engaged them in peaceful trade contact \
@@ -259,7 +257,6 @@
 	max_age = 130
 
 	economic_modifier = 12
-	catalogue_value = 10
 
 	darksight = 4
 	flash_mod = 1.2
@@ -338,7 +335,6 @@
 	max_age = 300
 
 	economic_modifier = 4
-	catalogue_value = 20
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \

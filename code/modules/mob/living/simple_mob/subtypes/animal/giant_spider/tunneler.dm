@@ -22,7 +22,7 @@
 	Tunneler venom is also dangerous, as it is known to both promotes concentrated production of the \
 	serotonin neurotransmitter, as well as causing brain damage. The feeling of happiness a bite causes \
 	afterwards can delay seeking medical treatment, making it extra dangerous."
-	value = 40
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/tunneler
 	desc = "Sandy and brown, it makes you shudder to look at it. This one has glittering yellow eyes."

@@ -21,7 +21,7 @@
 	Should one die, it will create a large explosion. This appears to be an automatic response \
 	caused from internal rupturing, as opposed to an intentional act of revenge by the spider, however \
 	the result is the same, oftening ending a fight with both sides dead."
-	value = 80 // Fairly rare, and presumably NT cares a lot about phoron-related findings.
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/phorogenic
 	desc = "Crystalline and purple, it makes you shudder to look at it. This one has haunting purple eyes."

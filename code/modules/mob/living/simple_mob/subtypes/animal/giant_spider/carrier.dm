@@ -10,7 +10,7 @@
 	the Carrier classification. \
 	If the host dies, they will be able to exit the body and survive independantly, \
 	unless the host dies catastrophically."
-	value = 40
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/carrier
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes."

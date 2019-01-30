@@ -186,6 +186,7 @@
 	name = "mysterious potted bulbs"
 	desc = "This is a mysterious looking plant. Touching the bulbs cause them to shrink."
 	icon_state = "plant-07"
+	catalogue_data = list(/datum/category_item/catalogue/flora/eyebulbs)
 
 /obj/structure/flora/pottedplant/smalltree
 	name = "small potted tree"
@@ -199,6 +200,7 @@
 	light_range = 2
 	light_power = 0.6
 	light_color = "#33CCFF"
+	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
 
 /obj/structure/flora/pottedplant/orientaltree
 	name = "potted oriental tree"
@@ -312,9 +314,9 @@
 /datum/category_item/catalogue/flora/eyebulbs
 	name = "Eyebulbs"
 	desc = "A plant native to Sif. On the end of its stems are bulbs which visually resemble \
-	eyes. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
+	eyes, which shrink when touched. One theory is that the bulbs are a result of mimicry, appearing as eyeballs to protect from predators.<br><br>\
 	These plants have no known use."
-	value = 5
+	value = CATALOGUER_REWARD_TRIVIAL
 
 /obj/structure/flora/sif/eyes
 	name = "mysterious bulbs"

@@ -15,7 +15,7 @@
 	uncontrollable movement, and organ failure, which is accelerated when the bitten prey tries to use their \
 	newfound speed to flee. It is not uncommon for prey to collapse and die shortly after appearing to have \
 	'escaped' the spider, enabling a form of persistance hunting for the Electric Spider."
-	value = 40
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/electric
 	desc = "Spined and yellow, it makes you shudder to look at it. This one has flickering gold eyes."

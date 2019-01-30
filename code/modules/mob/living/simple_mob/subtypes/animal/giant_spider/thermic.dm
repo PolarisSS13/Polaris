@@ -13,7 +13,7 @@
 	The venom Thermic spiders use is very dangerous and unconventional, as it injects a liquid that combusts very \
 	easily, even when inside of another living organism. The result is a gruesome death from literally burning from \
 	the inside out."
-	value = 40
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/thermic
 	desc = "Mirage-cloaked and orange, it makes you shudder to look at it. This one has simmering orange eyes."

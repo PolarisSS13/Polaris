@@ -22,22 +22,35 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 // Groups act as sections for the different data.
 /datum/category_group/catalogue
 
+// Plants.
 /datum/category_group/catalogue/flora
 	name = "Flora"
 	category_item_type = /datum/category_item/catalogue/flora
 
+// Animals
 /datum/category_group/catalogue/fauna
 	name = "Fauna"
 	category_item_type = /datum/category_item/catalogue/fauna
 
+// Gadgets and tech.
 /datum/category_group/catalogue/technology
 	name = "Technology"
 	category_item_type = /datum/category_item/catalogue/technology
 
+// Abstract information.
+/datum/category_group/catalogue/information
+	name = "Information"
+	category_item_type = /datum/category_item/catalogue/information
+
+// Weird stuff.
 /datum/category_group/catalogue/anomalous
 	name = "Anomalous"
 	category_item_type = /datum/category_item/catalogue/anomalous
 
+// Physical material things like crystals.
+/datum/category_group/catalogue/material
+	name = "Material"
+	category_item_type = /datum/category_item/catalogue/material
 
 
 // Items act as individual data for each object.
@@ -49,18 +62,22 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 	var/list/unlocked_by_any = null // List of types that, if they are discovered, it will also make this datum discovered.
 	var/list/unlocked_by_all = null // Similar to above, but all types on the list must be discovered for this to be discovered.
 
+// Discovers a specific datum, and any datums associated with this datum by unlocked_by_[any|all].
+// Returns null if nothing was found, otherwise returns a list of datum instances that was discovered, usually for the cataloguer to use.
 /datum/category_item/catalogue/proc/discover(mob/user, list/new_cataloguers)
 	if(visible) // Already found.
-		return FALSE
+		return
 
+	. = list(src)
 	visible = TRUE
 	cataloguers = new_cataloguers
 	display_in_chatlog(user)
-	attempt_chain_discoveries(user, new_cataloguers, type)
-	return TRUE
+	. += attempt_chain_discoveries(user, new_cataloguers, type)
 
-// Calls discover() on other datums if they include the type that was just discovered is inside unlocked_by_[any|all]().
+// Calls discover() on other datums if they include the type that was just discovered is inside unlocked_by_[any|all].
+// Returns discovered datums.
 /datum/category_item/catalogue/proc/attempt_chain_discoveries(mob/user, list/new_cataloguers, type_to_test)
+	. = list()
 	for(var/G in category.collection.categories) // I heard you like loops.
 		var/datum/category_group/catalogue/group = G
 		for(var/I in group.items)
@@ -68,8 +85,8 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 			// First, look for datums unlocked with the 'any' list.
 			if(LAZYLEN(item.unlocked_by_any))
 				for(var/T in item.unlocked_by_any)
-					if(ispath(type_to_test, T))
-						item.discover(user, new_cataloguers)
+					if(ispath(type_to_test, T) && item.discover(user, new_cataloguers))
+						. += item
 
 			// Now for the more complicated 'all' list.
 			if(LAZYLEN(item.unlocked_by_all))
@@ -82,8 +99,8 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 							if(!thing.visible)
 								should_discover = FALSE
 								break
-					if(should_discover)
-						item.discover(user, new_cataloguers)
+					if(should_discover && item.discover(user, new_cataloguers))
+						. += item
 
 /datum/category_item/catalogue/proc/display_in_chatlog(mob/user)
 	to_chat(user, "<br>")
@@ -98,4 +115,8 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 
 /datum/category_item/catalogue/technology
 
+/datum/category_item/catalogue/information
+
 /datum/category_item/catalogue/anomalous
+
+/datum/category_item/catalogue/material

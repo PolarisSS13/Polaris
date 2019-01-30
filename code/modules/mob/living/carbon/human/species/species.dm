@@ -182,7 +182,6 @@
 
 	var/rarity_value = 1									// Relative rarity/collector value for this species.
 	var/economic_modifier = 2								// How much money this species makes
-	var/catalogue_value = 5									// How many points someone gets for scanning this species with a cataloguer.
 
 	// Determines the organs that the species spawns with and
 	var/list/has_organ = list(								// which required-organ checks are conducted.

@@ -9,7 +9,6 @@
 	unarmed_types = list(/datum/unarmed_attack/claws/strong/xeno, /datum/unarmed_attack/bite/strong/xeno)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
-	catalogue_value = 40
 
 	has_fine_manipulation = 0
 	siemens_coefficient = 0
@@ -271,7 +270,6 @@
 	slowdown = 4
 	tail = "xenos_queen_tail"
 	rarity_value = 10
-	catalogue_value = 160
 
 	icobase = 'icons/mob/human_races/xenos/r_xenos_queen.dmi'
 	deform =  'icons/mob/human_races/xenos/r_xenos_queen.dmi'

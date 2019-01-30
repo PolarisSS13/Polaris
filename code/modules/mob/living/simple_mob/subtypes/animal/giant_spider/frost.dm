@@ -13,7 +13,7 @@
 	hypothermia. It also slows down the victim, making it more difficult to escape by fleeing. \
 	The danger is amplified by the fact that humans that receive the venom are often wearing \
 	thermal insulating clothing, making it more difficult to warm up."
-	value = 40
+	value = CATALOGUER_REWARD_UNCOMMON
 
 /mob/living/simple_mob/animal/giant_spider/frost
 	desc = "Icy and blue, it makes you shudder to look at it. This one has brilliant blue eyes."

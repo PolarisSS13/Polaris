@@ -33,8 +33,11 @@
 // Cataloguer defines.
 
 // Defines about the reward point scaling. Adjust these if you want points to be more or less common.
-#define CATALOGUER_REWARD_BASE		5
-#define CATALOGUER_REWARD_SCALE		4
-#define CATALOGUER_REWARD_CALC(X) ((CATALOGUER_REWARD_BASE * CATALOGUER_REWARD_SCALE)*X)
+#define CATALOGUER_REWARD_TRIVIAL	10
+#define CATALOGUER_REWARD_COMMON	40
+#define CATALOGUER_REWARD_UNCOMMON	160
+#define CATALOGUER_REWARD_RARE		640
+#define CATALOGUER_REWARD_VERYRARE	2560
 
-#define CATALOGUER_REWARD_TRIVIAL
+// 5	10	20	40	80	160
+// 10	40	160	640	2560

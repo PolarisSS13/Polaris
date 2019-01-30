@@ -69,7 +69,6 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 	siemens_coefficient =   0.4
 	rarity_value =          5
-	catalogue_value = 10
 
 	genders = list(MALE, FEMALE, NEUTER, PLURAL)
 

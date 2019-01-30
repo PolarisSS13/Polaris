@@ -21,7 +21,7 @@
 	shrug off nearby attacks from both predators and reckless humans. It pairs its excellent defense with slow, but \
 	powerful offensive, utilizing its weight and size to crush and throw threats. As such, predators generally avoid \
 	Hooligan shorelines."
-	value = 20
+	value = CATALOGUER_REWARD_COMMON
 
 /mob/living/simple_mob/animal/sif/hooligan_crab
 	name = "hooligan crab"

@@ -237,7 +237,7 @@
 	unison, having formed a symbiotic relationship over countless years of evolution.\
 	<br><br>\
 	Wood-like material can be obtained from this by cutting it down with a bladed tool."
-	value = 5
+	value = CATALOGUER_REWARD_TRIVIAL
 
 /obj/structure/flora/tree/sif
 	name = "glowing tree"
