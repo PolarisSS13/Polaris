@@ -47,9 +47,9 @@ var/datum/antagonist/faction/factionists
 	antaghud_indicator = "faction_tf"
 	antag_indicator = "faction_tf"
 
-/datum/antagonist/faction/libreoracle
-	role_text = "Libre Oracle"
-	role_text_plural = "Libre Oracles"
+/datum/antagonist/faction/quercuscoalition
+	role_text = "Quercus Coalition"
+	role_text_plural = "Quercus Coalitionists"
 	role_desc = "A group of hackers who are into that 4chan shit when it comes to  \
 	hacking and trying to get NT's secrets."
 	id =  MODE_FACTIONS_FI
