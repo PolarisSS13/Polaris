@@ -6,23 +6,30 @@
 	on = 1
 	powered = 1
 	locked = 0
-	var/key_type = /obj/item/weapon/key/quadbike
-	var/obj/item/weapon/key/key
+	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = 0
-	move_speed = 0.1
+	move_delay = ""
+	move_speed = ""
 	max_buckled_mobs = 2
-	paint_color = "#ffffff"
-	var/frame_state = "sportscar" //Custom-item proofing!
-	var/custom_frame = FALSE
+	mechanical = 1
+	maxhealth = 300
+	health = 300
+
 	var/cooldowntime
 	var/spam_flag = 0
 	var/horn_sound = 'sound/vehicles/car_horn.ogg'
 	var/engine_start = 'sound/vehicles/ignition.ogg'
 	var/engine_fail = 'sound/vehicles/wontstart.ogg'
-	var/land_speed = 0.5
+	var/land_speed = ""
 	var/space_speed = 0 //if 0 it can't go in space
+
+//For customization (Custom whitelisting, you get me?)
+	var/custom_frame = FALSE
+	var/frame_state = "sportscar" //Custom-item proofing!
+	var/key_type = /obj/item/weapon/key/car
+	var/cell_type = /obj/item/weapon/cell/car
+	paint_color = "#ffffff"
 
 //license is generated via "[license code] - [license number]"
 	var/license_code = "GEM"
@@ -34,11 +41,17 @@
 
 /obj/vehicle/car/New()
 	riding_datum = new riding_datum_type(src)
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new cell_type(src)
 	key = new key_type(src)
 	turn_off()
 	generate_license()
 	update_icon()
+
+/obj/vehicle/car/initialize() // Time for some science!
+	..()
+	move_speed = 0.1
+	move_delay = 0
+	land_speed = 0.5
 
 /obj/vehicle/car/turn_on()
 	if(!mechanical || stat)
@@ -65,6 +78,7 @@
 		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
+	user << "Car integrity is [health]/[maxhealth]."
 
 /obj/vehicle/car/attackby(obj/item/weapon/pen/crayon/spraycan/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/pen/crayon/spraycan))
@@ -170,12 +184,33 @@
 		overlays.Cut()
 	..()
 
+
+/obj/vehicle/car/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, key_type))
+		if(!key)
+			user.drop_item()
+			W.forceMove(src)
+			key = W
+			verbs += /obj/vehicle/car/verb/remove_key
+		return
+	..()
+
+/obj/vehicle/car/proc/has_key()
+	if(key)
+		return 1
+	else
+		return 0
+
+
+
+
+
 /////
 //EMAG FUN
 //
 
 
-/obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
+/obj/vehicle/car/emag_act(var/remaining_charges, mob/user as mob)
 	if(!mechanical)
 		return FALSE
 
@@ -187,5 +222,5 @@
 		return TRUE
 
 /obj/vehicle/car/proc/honk_horn()
-
 	playsound(src, horn_sound,40,1)
+

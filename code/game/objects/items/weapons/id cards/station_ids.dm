@@ -134,11 +134,11 @@
 /obj/item/weapon/card/id/silver/secretary
 	assignment = "City Hall Guard"
 	rank = "City Hall Guard"
-	job_access_type = /datum/job/secretary
+	job_access_type = /datum/job/bguard
 
 /obj/item/weapon/card/id/silver/hop
-	assignment = "City Supervisor"
-	rank = "City Supervisor"
+	assignment = "City Clerk"
+	rank = "City Clerk"
 	job_access_type = /datum/job/hop
 
 /obj/item/weapon/card/id/gold
@@ -184,6 +184,10 @@
 /obj/item/weapon/card/id/centcom/station/initialize()
 	. = ..()
 	access |= get_all_station_access()
+
+/obj/item/weapon/card/id/centcom/station/president
+	name = "\improper President's ID"
+	desc = "An ID that has both centcom and full city access."
 
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
@@ -390,7 +394,7 @@
 	rank = "Chef"
 	job_access_type = /datum/job/chef
 
-/obj/item/weapon/card/id/civilian/judge
+/obj/item/weapon/card/id/heads/judge
 	assignment = "Judge"
 	rank = "Judge"
 	job_access_type = /datum/job/judge

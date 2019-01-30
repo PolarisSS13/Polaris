@@ -25,6 +25,13 @@
 	maxcharge = 5000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
 
+
+/obj/item/weapon/cell/apc/infinite/check_charge()
+	return 1
+
+/obj/item/weapon/cell/apc/infinite/use()
+	return 1
+
 /obj/item/weapon/cell/high
 	name = "high-capacity power cell"
 	origin_tech = list(TECH_POWER = 2)

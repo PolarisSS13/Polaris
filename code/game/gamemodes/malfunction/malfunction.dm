@@ -10,4 +10,4 @@
 	auto_recall_shuttle = 0
 	antag_tags = list(MODE_MALFUNCTION)
 	disabled_jobs = list("AI")
-	votable = 0
+	votable = 1

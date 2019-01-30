@@ -35,7 +35,8 @@
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/stamp,
 		/obj/item/clothing/accessory/permit,
-		/obj/item/clothing/accessory/badge
+		/obj/item/clothing/accessory/badge,
+		/obj/item/device/communicator
 		)
 	slot_flags = SLOT_ID
 

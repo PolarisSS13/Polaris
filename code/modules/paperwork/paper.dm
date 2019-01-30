@@ -210,21 +210,23 @@
 			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
 		M.examinate(src)
 
-	else if(user.zone_sel.selecting == O_MOUTH) // lipstick wiping
+	else if(user.zone_sel.selecting == BP_HEAD) // lipstick wiping
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H == user)
-				user << "<span class='notice'>You wipe off the lipstick with [src].</span>"
+				user << "<span class='notice'>You wipe your face with the [src].</span>"
 				H.lip_style = null
 				H.update_icons_body()
 			else
-				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
-								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
+				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s face off with \the [src].</span>", \
+								 	 "<span class='notice'>You begin to wipe off [H]'s face.</span>")
 				if(do_after(user, 10) && do_after(H, 10, 5, 0))	//user needs to keep their active hand, H does not.
-					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
-										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
+					user.visible_message("<span class='notice'>[user] wipes [H]'s face off with \the [src].</span>", \
+										 "<span class='notice'>You wipe off [H]'s face.</span>")
 					H.lip_style = null
 					H.update_icons_body()
+
+
 
 /obj/item/weapon/paper/proc/addtofield(var/id, var/text, var/links = 0)
 	var/locid = 0
@@ -633,3 +635,7 @@
 /obj/item/weapon/paper/crumpled/bloody/CrashedMedShuttle
 	name = "Blackbox Transcript - VMV Aurora's Light"
 	info = "<I>\[The paper is torn at the top, presumably from the impact. It's oil-stained, but you can just about read it.]</I><BR> <B>mmons 19:52:01:</B> Come on... it's right there in the distance, we're almost there!<BR> <B>Doctor Nazarril 19:52:26:</B> Odysseus online. Orrderrs, sirr?<BR> <B>Captain Simmons 19:52:29:</B> Brace for impact. We're going in full-speed.<BR> <B>Technician Dynasty 19:52:44:</B> Chief, fire's spread to the secondary propulsion systems.<BR> <B>Captain Simmons 19:52:51:</B> Copy. Any word from TraCon? Transponder's down still?<BR> <B>Technician Dynasty 19:53:02:</B> Can't get in touch, sir. Emergency beacon's active, but we're not going t-<BR> <B>Doctor Nazarril 19:53:08:</B> Don't say it. As long as we believe, we'll get through this.<BR> <B>Captain Simmons 19:53:11:</B> Damn right. We're a few klicks out from the port. Rough landing, but we can do it.<BR> <B>V.I.T.A 19:53:26:</B> Vessel diagnostics complete. Engines one, two, three offline. Engine four status: critical. Transponder offline. Fire alarm in the patient bay.<BR> <B>A loud explosion is heard.</B><BR> <B>V.I.T.A 19:53:29:</B> Alert: fuel intake valve open.<BR> <B>Technician Dynasty 19:53:31:</B> ... ah.<BR> <B>Doctor Nazarril 19:53:34:</B> Trrranslate?<BR> <B>V.I.T.A 19:53:37:</B> There is a 16.92% chance of this vessel safely landing at the emergency destination. Note that there is an 83.08% chance of detonation of fuel supplies upon landing.<BR> <B>Technician Dynasty 19:53:48:</B> We'll make it, sure, but we'll explode and take out half the LZ with us. Propulsion's down, we can't slow down. If we land there, everyone in that port dies, no question.<BR> <B>V.I.T.A 19:53:53:</B> The Technician is correct.<BR> <B>Doctor Nazarril 19:54:02:</B> Then... we can't land therrre.<BR> <B>V.I.T.A 19:54:11:</B>  Analysing... recommended course of action: attempt emergency landing in isolated area. Chances of survival: negligible. <BR> <B>Captain Simmons 19:54:27:</B> I- alright. I'm bringing us down. You all know what this means.<BR> <B>Doctor Nazarril 19:54:33:</B> Sh... I- I understand. It's been- it's been an honorr, Captain, Dynasty, VITA.<BR> <B>Technician Dynasty 19:54:39:</B> We had a good run. I'm going to miss this.<BR> <B>Captain Simmons 19:54:47:</B> VITA. Tell them we died heroes. Tell them... we did all we could.<BR> <B>V.I.T.A 19:54:48:</B> I will. Impact in five. Four. Three.<BR> <B>Doctor Nazarril 19:54:49:</B> Oh, starrs... I- you werrre all the... best frriends she everr had. Thank you.<BR> <B>Technician Dynasty 19:54:50:</B> Any time, kid. Any time.<BR> <B>V.I.T.A 19:54:41:</B> Two.<BR><B>V.I.T.A 19:54:42:</B> One.<BR> **8/DEC/2561**<BR> <B>V.I.T.A 06:22:16:</B> Backup power restored. Attempting to establish connection with emergency rescue personnel.<BR> <B>V.I.T.A 06:22:17:</B> Unable to establish connection. Transponder destroyed on impact.<BR> <B>V.I.T.A 06:22:18:</B> No lifesigns detected on board.<BR> **1/JAN/2562**<BR> <B>V.I.T.A 00:00:00:</B> Happy New Year, crew.<BR> <B>V.I.T.A 00:00:01:</B> Power reserves: 41%. Diagnostics offline. Cameras offline. Communications offline.<BR> <B>V.I.T.A 00:00:02:</B> Nobody's coming.<BR> **14/FEB/2562**<BR> <B>V.I.T.A 00:00:00:</B> Roses are red.<BR> <B>V.I.T.A 00:00:01:</B> Violets are blue.<BR> <B>V.I.T.A 00:00:02:</B> Won't you come back?<BR> <B>V.I.T.A 00:00:03:</B> I miss you.<BR> **15/FEB/2562**<BR><B>V.I.T.A 22:19:06:</B> Power reserves critical. Transferring remaining power to emergency broadcasting beacon.<BR> <B>V.I.T.A 22:19:07:</B> Should anyone find this, lay them to rest. They deserve a proper burial.<BR> <B>V.I.T.A 22:19:08:</B> Erasing files... shutting down.<BR> <B>A low, monotone beep.</B><BR> **16/FEB/2562**<BR> <B>Something chitters.</B><BR> <B>End of transcript.</B>"
+
+/obj/item/weapon/paper/manifest
+	name = "supply manifest"
+	var/is_copy = 1

@@ -132,6 +132,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return "asks"
 	return verb
 
+
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
 	//If you're muted for IC chat
 	if(client)
@@ -182,6 +183,11 @@ proc/get_radio_key_from_channel(var/channel)
 		speaking.broadcast(src,trim(message))
 		return 1
 
+	//If it looks like accidental IC-OOK/emoting
+	if((copytext(message, 1, 2) in list("say","me")) || (findtext(lowertext(copytext(message, 1, 5)), "ooc")))
+		if(alert("Your message \"[message]\" looks like it was meant for OOC instead of IC, say it in IC still?", "Confirm if meant for IC?", "No", "Yes") != "Yes")
+			return
+
 	//Self explanatory.
 	if(is_muzzled() && !(speaking && (speaking.flags & SIGNLANG)))
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
@@ -192,6 +198,15 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//Autohiss handles auto-rolling tajaran R's and unathi S's/Z's
 	message = handle_autohiss(message, speaking)
+
+	//If there's no punctuation, add punctuation.
+	var/p_ending = copytext(message, length(message))
+	var/p_message = "[message]."
+	if(!(p_ending in list(".","?","!")))
+		message = p_message
+
+	//Allow them use to markup, if used.
+	message = process_chat_markup(message, list("~", "_"))
 
 	//Whisper vars
 	var/w_scramble_range = 5	//The range at which you get ***as*th**wi****

@@ -237,7 +237,15 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 
 //Now, for the actual NPCs.
 
-/mob/living/carbon/human/npc/random
+/mob/living/carbon/human/npc
+	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
+	var/turns_per_move = 1
+	var/turns_since_move = 0
+	var/moving_to = 0
+	var/wander = 1	// Does the mob wander around when idle?
+	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
+
+
 
 /mob/living/carbon/human/npc/random/New()
 	..()
@@ -291,15 +299,10 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	set_species("Human Adolescent")
 
 /mob/living/carbon/human/npc/random/moving/
-	var/turns_per_move = 1
-	var/turns_since_move = 0
-	var/moving_to = 0
-	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/wander = 1	// Does the mob wander around when idle?
-	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
+	stop_automated_movement = 0
 
 
-/mob/living/carbon/human/npc/random/moving/Life(var/mob/living/carbon/human/D)
+/mob/living/carbon/human/npc/Life(var/mob/living/carbon/human/D)
 	set invisibility = 0
 	set background = BACKGROUND_ENABLED
 
@@ -353,4 +356,138 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	h_style = random_hair_style(gender, "Human Child")
 	f_style = random_facial_hair_style(gender, "Human Adolescent")
 	set_species("Human Adolescent")
+
+
+//NPC BEHAVIOUR
+
+/mob/living/carbon/human/npc/random/barfly
+	var/wanted_drink
+	var/has_no_drink
+	var/thirsty = 1
+	var/held_drink
+	var/chatter_time = 90
+	var/drink_time = 130
+	var/obj/item/weapon/reagent_containers/food/drinks/served
+	stop_automated_movement = 1
+
+
+	var/list_of_drinks = list(
+	"whiskey",
+	"beer",
+	"ale",
+	"rum",
+	"vermouth",
+	"vodka",
+	"gin",
+	"wine")
+
+	var/asking_msg
+
+
+/mob/living/carbon/human/npc/random/barfly/New()
+	..()
+	pick_drink()
+	sleep(3)
+	chatter()
+
+/mob/living/carbon/human/npc/random/barfly/proc/pick_drink()
+	wanted_drink = pick(list_of_drinks)
+
+
+/mob/living/carbon/human/npc/random/barfly/proc/chatter()
+	if(thirsty)
+
+		asking_msg = pick("Hey bartender, can I get a [wanted_drink] please?",
+		"Hey, can I have a [wanted_drink] if that's okay?",
+		"I've honestly had a day and need a good [wanted_drink], as soon as possible.",
+		"Oi, [wanted_drink] now please.",
+		"I'm craving a good [wanted_drink], make it your best one.",
+		"Your best [wanted_drink] please, with ice.",
+		"You know what I fancy? A cold glass of [wanted_drink]!",
+		"I hope this isn't a funny request, but I'd love a good [wanted_drink], with a cute stick in it...",
+		"Hi, if you don't mind, a [wanted_drink], please.")
+
+		src.say("[asking_msg]")
+	else
+		if(!thirsty && served)
+			var/sip_msg = pick("takes a long sip from the [held_drink] before swirling it around in their hand.",
+			"sips daintily from the [held_drink].",
+			"contently drinks from the [held_drink].",
+			"takes their [held_drink] slowly, savoring the taste as it is brought to their lips.",
+			"sighs deeply, clearly enjoying the flavours they experience from the [held_drink].",
+			"exhales a hearty sigh after chugging a few mouthfuls of [held_drink]!")
+			src.visible_message("<b>[src]</b> [sip_msg]")
+			playsound(loc,'sound/items/drink.ogg', rand(10,50), 1)
+		else
+			var/banter = pick(
+			"Nice weather, eh?",
+			"It's nice to get away from home isn't it keep?",
+			"*yawn",
+			"Sometimes I wonder if I come to this place to get away from the real world.",
+			"So, how's life been?",
+			"Been a bit tired and stressed recently... I'll get through it.",
+			"It's nice coming here after work, you know?",
+			"The service here is usually good. I like it.",
+			"What do you think of the newcomers to the city?",
+			"Man, I think I drank too fast.",
+			"I've been thinking that settling down would be great for me.",
+			"You think I should go after that person I'm pining after?",
+			"I wonder if there's anything else to do in this horrible city.",
+			"You seem genuine. Wouldn't mind being friends with you.",
+			"I try not to get too much into politics, gets me depressed.",
+			"I shouldn't really be here, should be paying the bills with this money.",
+			"How long have you been here?",
+			"I like your style, by the way.")
+			src.say("[banter]")
+
+
+
+/mob/living/carbon/human/npc/random/barfly/Life(var/mob/living/carbon/human/D)
+	..()
+
+	for(served in oview(src,1))
+		if(served.reagents.has_reagent("[wanted_drink]"))
+			var/thanks_msg = pick("Thanks!",
+			"That looks refreshing!",
+			"You're a lifesaver!",
+			"Oh! Thanks!",
+			"That's just what I wanted, thank you!",
+			"Thank you very much!",
+			"Awesome!")
+			src.say("[thanks_msg]")
+			//save position of glass before they pick it up.
+			var/drink_area
+			drink_area = served.loc
+			held_drink = served
+			thirsty = 0
+			sleep(chatter_time)
+			chatter()
+			sleep(chatter_time)
+			chatter()
+			sleep(drink_time)
+			chatter()
+			served.reagents.trans_to_mob(src, served.reagents.total_volume)
+			sleep(3)
+			thanks_msg = pick("That hit the spot!", "Best I've had in a while.", "Again, thank you.")
+			src.say("[thanks_msg]")
+			sleep(3)
+			src.say("Here's the payment, keep the change.")
+			new /obj/item/weapon/spacecash/c10(drink_area)
+			served = null
+			held_drink = null
+
+			sleep(chatter_time)
+			chatter()
+			sleep(chatter_time)
+			chatter()
+			pick_drink()
+			sleep(drink_time)
+			thirsty = 1
+			chatter()
+
+
+
+
+
+
 

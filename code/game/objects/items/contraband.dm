@@ -1,19 +1,19 @@
 //Let's get some REAL contraband stuff in here. Because come on, getting brigged for LIPSTICK is no fun.
 
 //Illicit drugs~
-/obj/item/weapon/storage/pill_bottle/happy
-	name = "bottle of Happy pills"
+/obj/item/weapon/storage/pill_bottle/ecstasy
+	name = "bottle of Ecstasy pills"
 	desc = "Highly illegal drug. When you want to see the rainbow."
 
-/obj/item/weapon/storage/pill_bottle/happy/New()
+/obj/item/weapon/storage/pill_bottle/ecstasy/New()
 	..()
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
-	new /obj/item/weapon/reagent_containers/pill/happy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
+	new /obj/item/weapon/reagent_containers/pill/ecstasy( src )
 
 /obj/item/weapon/storage/pill_bottle/zoom
 	name = "bottle of Zoom pills"
@@ -35,7 +35,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list("mindbreaker" = 10, "space_drugs" = 20)	= 3,
+		list("mindbreaker" = 10, "ecstasy" = 20)	= 3,
 		list("carpotoxin" = 15)							= 2,
 		list("impedrezene" = 15)						= 2,
 		list("zombiepowder" = 10)						= 1)

@@ -51,3 +51,11 @@
 /obj/fiftyspawner/linoleum
 	name = "stack of linoleum tiles"
 	type_to_spawn = /obj/item/stack/tile/linoleum
+
+/obj/fiftyspawner/road
+	name = "stack of road tiles"
+	type_to_spawn = /obj/item/stack/tile/road
+
+/obj/fiftyspawner/pavement
+	name = "stack of pavement tiles"
+	type_to_spawn = /obj/item/stack/tile/pavement

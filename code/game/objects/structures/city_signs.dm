@@ -187,6 +187,14 @@
 
 //Making area mapping simpler since 2240//
 
+/obj/structure/sign/neon/drivethru
+	name = "drivethru sign"
+	icon_state = "drivethru1"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/drivethru/right
+	icon_state = "drivethru2"
+
 /obj/structure/sign/double/city/teleporter/left
 	name = "teleporter"
 	icon_state = "teleporter1"

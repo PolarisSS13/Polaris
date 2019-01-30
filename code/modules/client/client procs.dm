@@ -44,10 +44,11 @@
 	//Admin PM
 	if(href_list["priv_msg"])
 		var/client/C = locate(href_list["priv_msg"])
+		var/datum/ticket/ticket = locate(href_list["ticket"])
 		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
-		cmd_admin_pm(C,null)
+		cmd_admin_pm(C, null, ticket)
 		return
 
 	if(href_list["irc_msg"])
@@ -60,7 +61,13 @@
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
 
+	if(href_list["close_ticket"])
+		var/datum/ticket/ticket = locate(href_list["close_ticket"])
 
+		if(isnull(ticket))
+			return
+
+		ticket.close(client_repository.get_lite_client(usr.client))
 
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)

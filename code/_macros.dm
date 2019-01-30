@@ -6,6 +6,12 @@
 
 #define get_turf(A) get_step(A,0)
 
+#define get_x(A) (get_step(A, 0)?.x || 0)
+
+#define get_y(A) (get_step(A, 0)?.y || 0)
+
+#define get_z(A) (get_step(A, 0)?.z || 0)
+
 #define isAI(A) istype(A, /mob/living/silicon/ai)
 
 #define isalien(A) istype(A, /mob/living/carbon/alien)
@@ -52,7 +58,13 @@
 
 #define isweakref(A) istype(A, /weakref)
 
+#define MAP_IMAGE_PATH "nano/images/[using_map.path]/"
+
+#define map_image_file_name(z_level) "[using_map.path]-[z_level].png"
+
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
+
+#define isclient(A) istype(A, /client)
 
 #define to_chat(target, message) target << message
 #define to_world(message) world << message
@@ -102,3 +114,9 @@
 #define show_browser(target, browser_content, browser_name) target << browse(browser_content, browser_name)
 #define show_image(target, image)                           target << image
 #define send_rsc(target, rsc_content, rsc_name)             target << browse_rsc(rsc_content, rsc_name)
+
+#define any2ref(x) "\ref[x]"
+
+//Currently used in SDQL2 stuff
+#define send_output(target, msg, control) target << output(msg, control)
+#define send_link(target, url) target << link(url)

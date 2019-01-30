@@ -14,16 +14,16 @@
 /datum/species/zombie
 	name= "Zombie"
 	name_plural = "Zombies"
-	slowdown = 1
 	blood_color = "#257a03" //dark green
 	flesh_color = "#282846"
 	name_language = null // Use the first-name last-name generator rather than a language scrambler
 	blurb = "Looks like just another night-shift worker, nothing to be worried about. Right?"
 	unarmed_types = list(/datum/unarmed_attack/bite/zombie)
-
+	has_glowing_eyes = 0
 	genders = list(NEUTER)
 	icobase = 'icons/mob/human_races/r_zombie.dmi'
 	deform = 'icons/mob/human_races/r_zombie.dmi'
+
 	death_message = "screeches and growls as it becomes completely motionless... is it dead?"
 	default_language = "Zombie Hivemind"
 	language = "Zombie Hivemind"
@@ -55,17 +55,16 @@
 	cold_level_3 = -1
 //	hud_type = /datum/hud_data/zombie
 	slowdown = 1 //zombies are slow as fuck
-
-	has_organ = list(
-		"zombie" =    /obj/item/organ/internal/parasite/zombie,
-		"brain" =    /obj/item/organ/internal/brain/zombie
-		)
+	can_drive = 0
 
 	has_fine_manipulation = FALSE
 	ambiguous_genders = TRUE
-	has_organ = list()
 	var/evolution = STANDARD_EVOLUTION
-	var/heal_rate = 0.5 // Temp. Regen per tick.
+	var/heal_rate = 1 // Temp. Regen per tick.
+
+	has_organ = list(
+		O_BRAIN =    /obj/item/organ/internal/brain/zombie
+		)
 
 
 	inherent_verbs = list(
@@ -84,6 +83,7 @@
 	H.real_name = "[src] ([rand(1, 1000)])"
 	H.name = H.real_name
 	H.mutations.Add(CLUMSY)
+
 	..()
 
 
@@ -98,7 +98,6 @@
 		H.emote(pick("growl","scream","drool","blink"))
 
 /datum/species/zombie/handle_environment_special(var/mob/living/carbon/human/H)
-
 	// Heal remaining damage.
 	if(H.fire_stacks >= 0)
 		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
@@ -106,6 +105,7 @@
 			H.adjustFireLoss(-heal_rate)
 			H.adjustOxyLoss(-heal_rate)
 			H.adjustToxLoss(-heal_rate)
+			H.SetStunned(0)
 	else
 		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
 
@@ -124,53 +124,10 @@
 	if(target.internal_organs_by_name["zombie"])
 		to_chat(user, "<span class='danger'>You feel that \the [target] has been already infected!</span>")
 
-	var/infection_chance = 80
+	var/infection_chance = 25
 	var/armor = target.run_armor_check(zone,"melee")
 	infection_chance -= armor
 	if(prob(infection_chance))
 		if(target.reagents)
 			target.reagents.add_reagent("trioxin", 10)
 
-/datum/reagent/toxin/trioxin
-	name = "Trioxin"
-	id = "trioxin"
-	description = "A synthetic compound of unknown origins, designated originally as a performance enhancing substance."
-	reagent_state = LIQUID
-	color = "#E7E146"
-	strength = 1
-	metabolism = REM
-	affects_dead = TRUE
-
-/datum/reagent/toxin/trioxin/affect_blood(var/mob/living/carbon/M, var/removed)
-	..()
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-
-		if(H.reagents.has_reagent("spaceacillin", 15))
-			return
-
-		if(H.internal_organs_by_name[O_ZOMBIE])
-			return
-
-		if(!isemptylist(H.search_contents_for(/obj/item/organ/internal/parasite/zombie)))
-			return
-		else
-			if(!H.internal_organs_by_name[O_ZOMBIE])
-				var/obj/item/organ/external/chest/affected = H.get_organ(BP_TORSO)
-				var/obj/item/organ/internal/parasite/zombie/infest = new(affected)
-				infest.replaced(H,affected)
-
-		if(ishuman(H))
-			if(!H.internal_organs_by_name[O_ZOMBIE])	//destroying the brain stops trioxin from bringing the dead back to life
-				return
-
-			if(H && H.stat != DEAD)
-				return
-
-			for(var/datum/language/L in H.languages)
-				H.remove_language(L.name)
-			H.set_species("Zombie")
-			H.revive()
-			infected.add_antagonist(H.mind)
-			playsound(H.loc, 'sound/hallucinations/far_noise.ogg', 50, 1)
-			to_chat(H,"<font size='3'><span class='cult'>You return back to life as the undead, all that is left is the hunger to consume the living and the will to spread the infection.</font></span>")

@@ -177,6 +177,8 @@
 
 	var/rarity_value = 1									// Relative rarity/collector value for this species.
 	var/economic_modifier = 2								// How much money this species makes
+	var/can_drive = 1
+//	var/can_use_machinery = 1 //TODO
 
 	// Determines the organs that the species spawns with and
 	var/list/has_organ = list(								// which required-organ checks are conducted.
@@ -394,6 +396,13 @@
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
+
+// Called in life() when the mob has no client.
+/datum/species/proc/can_drive()
+	if(!can_drive)
+		return 0
+	else
+		return 1
 
 // Called when lying down on a water tile.
 /datum/species/proc/can_breathe_water()

@@ -43,8 +43,20 @@
 	spawn_files 		= list(/datum/file/camnet_key)
 
 /obj/machinery/computer3/wall_comp/telescreen/entertainment
-	desc = "Damn, they better have /tg/thechannel on these things."
+	desc = "Damn, they better have the news channel on these things."
 	spawn_files 		= list(/datum/file/camnet_key/entertainment)
+
+/obj/machinery/computer3/wall_comp/telescreen/entertainment/tv
+	name = "television"
+	desc = "An old TV hooked into the city's entertainment network."
+	density = 1
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "television"
+	circuit = null
+	light_color = "#3848B3"
+	legacy_icon			= 1
+	allow_disassemble	= 0
+
 
 
 /*

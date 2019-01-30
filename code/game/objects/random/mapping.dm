@@ -101,7 +101,7 @@
 				/obj/item/clothing/mask/smokable/pipe,
 				/obj/item/weapon/reagent_containers/food/drinks/bottle/rum,
 				/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,
-				/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
+				/obj/item/weapon/reagent_containers/food/snacks/grown/cannabisdeus,
 				/obj/item/weapon/flame/lighter/zippo,
 				/obj/structure/closet/crate/hydroponics
 			),

@@ -223,19 +223,22 @@
 /obj/item/weapon/storage/box/syndie_kit/demolitions
 	starts_with = list(
 		/obj/item/weapon/syndie/c4explosive,
-		/obj/item/weapon/screwdriver
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/paper/c4_instructions
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/demolitions_heavy
 	starts_with = list(
 		/obj/item/weapon/syndie/c4explosive/heavy,
-		/obj/item/weapon/screwdriver
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/paper/c4_instructions
 	)
 
 /obj/item/weapon/storage/box/syndie_kit/demolitions_super_heavy
 	starts_with = list(
 		/obj/item/weapon/syndie/c4explosive/heavy/super_heavy,
-		/obj/item/weapon/screwdriver
+		/obj/item/weapon/screwdriver,
+		/obj/item/weapon/paper/c4_instructions
 	)
 
 /obj/item/weapon/storage/secure/briefcase/rifle

@@ -48,7 +48,7 @@
 
 /proc/log_access_in(client/new_client)
 	if (config.log_access)
-		var/message = "[key_name(new_client)] - IP:[new_client.address] - CID:[new_client.computer_id] - BYOND v[new_client.byond_version]"			
+		var/message = "[key_name(new_client)] - IP:[new_client.address] - CID:[new_client.computer_id] - BYOND v[new_client.byond_version]"
 		diary << "\[[time_stamp()]]ACCESS IN: [message][log_end]"
 
 /proc/log_access_out(mob/last_mob)
@@ -145,7 +145,7 @@
 
 //more or less a logging utility
 //Always return "Something/(Something)", even if it's an error message.
-/proc/key_name(var/whom, var/include_link = FALSE, var/include_name = TRUE, var/highlight_special_characters = TRUE)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/datum/ticket/ticket = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -178,7 +178,7 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C]'>"
+			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
 
 		if(C && C.holder && C.holder.fakekey)
 			. += "Administrator"
@@ -201,7 +201,7 @@
 
 			if(include_link && is_special_character(M) && highlight_special_characters)
 				name = "<font color='#FFA500'>[name]</font>" //Orange
-		
+
 		. += "/([name])"
 
 	return .

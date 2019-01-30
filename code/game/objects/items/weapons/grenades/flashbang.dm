@@ -98,9 +98,12 @@
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
+	var/min_segments = 4
+	var/max_segments = 8
+
 
 /obj/item/weapon/grenade/flashbang/clusterbang/prime()
-	var/numspawned = rand(4,8)
+	var/numspawned = rand(min_segments, max_segments)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
@@ -162,3 +165,12 @@
 		spawn(dettime)
 		prime()
 	..()
+
+
+/obj/item/weapon/grenade/flashbang/clusterbang/geminus
+	desc = "The pinnacle of non-lethal grenade weaponry, the Corusco model grenade is designed to deploy 6 additional flashbangs upon detonation."
+	name = "corusco grenade"
+	icon = 'icons/obj/grenade.dmi'
+	icon_state = "clusterbang"
+	min_segments = 6
+	max_segments = 6

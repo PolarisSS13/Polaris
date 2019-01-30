@@ -1,10 +1,10 @@
 /datum/job/chief_engineer
 	title = "Chief Engineer"
 	flag = CHIEF
+	faction = "City"
 	head_position = 1
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
+	department = "Engineering"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -32,9 +32,8 @@
 /datum/job/engineer
 	title = "City Engineer"
 	flag = ENGINEER
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
+	department = "Engineering"
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the chief engineer"
@@ -43,18 +42,16 @@
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
+	alt_titles = list("Construction Worker","Engine Technician","Electrician")
 	minimum_character_age = 18
 	minimal_player_age = 3
-
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
 
 /datum/job/atmos
 	title = "Firefighter"
 	flag = ATMOSTECH
-	department = "Engineering"
 	department_flag = ENGSEC
-	faction = "Station"
+	department = "Engineering"
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
@@ -66,4 +63,5 @@
 
 	minimal_player_age = 3
 	minimum_character_age = 18
+
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

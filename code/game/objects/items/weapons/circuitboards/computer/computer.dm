@@ -30,7 +30,7 @@
 	name = T_BOARD("command and communications console")
 	build_path = /obj/machinery/computer/communications
 	origin_tech = list(TECH_DATA = 2, TECH_MAGNET = 2)
-
+/*
 /obj/item/weapon/circuitboard/card
 	name = T_BOARD("ID card modification console")
 	build_path = /obj/machinery/computer/card
@@ -38,7 +38,7 @@
 /obj/item/weapon/circuitboard/card/centcom
 	name = T_BOARD("CentCom ID card modification console")
 	build_path = /obj/machinery/computer/card/centcom
-
+*/
 /obj/item/weapon/circuitboard/teleporter
 	name = T_BOARD("teleporter control console")
 	build_path = /obj/machinery/computer/teleporter
@@ -152,12 +152,12 @@
 /obj/item/weapon/circuitboard/splicer
 	name = T_BOARD("disease splicer")
 	build_path = /obj/machinery/computer/diseasesplicer
-
+/*
 /obj/item/weapon/circuitboard/ordercomp
 	name = T_BOARD("supply ordering console")
 	build_path = /obj/machinery/computer/ordercomp
 	origin_tech = list(TECH_DATA = 2)
-
+*/
 /obj/item/weapon/circuitboard/mining_shuttle
 	name = T_BOARD("mining shuttle console")
 	build_path = /obj/machinery/computer/shuttle_control/mining

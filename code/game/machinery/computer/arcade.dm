@@ -91,7 +91,7 @@
 	icon_state = "arcade"
 	circuit = /obj/item/weapon/circuitboard/arcade/battle
 	var/enemy_name = "Space Villian"
-	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
+	var/temp = "Winners don't use ecstasy." //Temporary message, for attack messages, etc
 	var/enemy_action = ""
 	var/player_hp = 30 //Player health/attack points
 	var/player_mp = 10
@@ -272,7 +272,7 @@
 /obj/machinery/computer/arcade/battle/emag_act(var/charges, var/mob/user)
 	if(!emagged)
 		to_chat(user, span("notice","You override the cheat code menu and skip to Cheat #[rand(1, 50)]: Hyper-Lethal Mode."))
-		
+
 		temp = "If you die in the game, you die for real!"
 		player_hp = 30
 		player_mp = 10
@@ -407,7 +407,7 @@
 				if(emagged)
 					var/mob/living/M = user
 					M.adjust_fire_stacks(5)
-					M.IgniteMob() //flew into a star, so you're on fire	
+					M.IgniteMob() //flew into a star, so you're on fire
 					to_chat(user,span("danger", "<font size=3>You feel an immense wave of heat emanate from \the [src]. Your skin bursts into flames.</font>"))
 		dat += "<br><P ALIGN=Right><a href='byond://?src=\ref[src];menu=1'>OK...</a></P>"
 

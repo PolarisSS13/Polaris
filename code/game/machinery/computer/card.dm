@@ -153,7 +153,7 @@
 		if ("modify")
 			if (modify)
 				data_core.manifest_modify(modify.registered_name, modify.assignment)
-				modify.name = text("[modify.registered_name]'s ID Card ([modify.assignment])")
+				modify.name = text("ID Card")
 				if(ishuman(usr))
 					modify.forceMove(get_turf(src))
 					if(!usr.get_active_hand())

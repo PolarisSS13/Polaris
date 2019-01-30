@@ -5,17 +5,23 @@
 	slot_flags = SLOT_HEAD | SLOT_BELT | SLOT_OCLOTHING
 	force = 3.0
 	w_class = ITEMSIZE_NORMAL
+	force = 0
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
 /obj/item/weapon/towel/attack_self(mob/living/user as mob)
+	var/mob/living/carbon/human/H = user
 	user.visible_message(text("<span class='notice'>[] uses [] to towel themselves off.</span>", user, src))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
+	H.lip_style = null
+	H.update_icons_body()
 	if(user.fire_stacks > 0)
 		user.fire_stacks = (max(0, user.fire_stacks - 1.5))
 	else if(user.fire_stacks < 0)
 		user.fire_stacks = (min(0, user.fire_stacks + 1.5))
+
+
 
 /obj/item/weapon/towel/random/New()
 	..()

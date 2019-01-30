@@ -282,15 +282,14 @@
 	reagents.add_reagent("iron", 15)
 
 //Not-quite-medicine
-/obj/item/weapon/reagent_containers/pill/happy
-	name = "Happy pill"
+/obj/item/weapon/reagent_containers/pill/ecstasy
+	name = "Ectasy pill"
 	desc = "Happy happy joy joy!" //we're not giving quantities for shady maint drugs
 	icon_state = "pill18"
 
-/obj/item/weapon/reagent_containers/pill/happy/New()
+/obj/item/weapon/reagent_containers/pill/ecstasy/New()
 	..()
-	reagents.add_reagent("space_drugs", 15)
-	reagents.add_reagent("sugar", 15)
+	reagents.add_reagent("ecstasy", 15)
 
 
 /obj/item/weapon/reagent_containers/pill/zoom
@@ -312,3 +311,13 @@
 /obj/item/weapon/reagent_containers/pill/diet/New()
 	..()
 	reagents.add_reagent("lipozine", 2)
+
+
+/obj/item/weapon/reagent_containers/pill/cocaine
+	name = "cocaine chunk"
+	desc = "A small chunk of cocaine, you should cut this with a knife."
+	icon_state = "pill9"
+
+/obj/item/weapon/reagent_containers/pill/cocaine/New()
+	..()
+	reagents.add_reagent("cocaine", 5)

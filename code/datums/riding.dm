@@ -90,6 +90,12 @@
 		return
 
 	if(only_one_driver && ridden.buckled_mobs.len)
+		var/mob/living/carbon/human/driver = ridden.buckled_mobs[1]
+		if(!driver.species.can_drive())
+			to_chat(user, "<span class='warning'>You don't seem to be able to ride [ridden]...</span>")
+			return
+
+	if(only_one_driver && ridden.buckled_mobs.len)
 		var/mob/living/driver = ridden.buckled_mobs[1]
 		if(driver != user)
 			to_chat(user, "<span class='warning'>\The [ridden] can only be controlled by one person at a time, and is currently being controlled by \the [driver].</span>")
@@ -98,6 +104,7 @@
 	if(world.time < next_vehicle_move)
 		return
 	next_vehicle_move = world.time + vehicle_move_delay
+
 	if(keycheck(user))
 		if(!Process_Spacemove(direction) || !isturf(ridden.loc))
 			return

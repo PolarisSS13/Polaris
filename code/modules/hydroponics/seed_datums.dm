@@ -282,16 +282,16 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#FFDD00")
 	set_trait(TRAIT_PLANT_COLOUR,"#D6B44D")
 
-//Ambrosia/varieties.
-/datum/seed/ambrosia
-	name = "ambrosia"
-	seed_name = "ambrosia vulgaris"
-	display_name = "ambrosia vulgaris"
-	mutants = list("ambrosiadeus")
-	chems = list("nutriment" = list(1), "space_drugs" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1), "toxin" = list(1,10))
-	kitchen_tag = "ambrosia"
+//cannabis/varieties.
+/datum/seed/cannabis
+	name = "cannabis"
+	seed_name = "cannabis"
+	display_name = "marijuana"
+	mutants = list("cannabisdeus")
+	chems = list("nutriment" = list(1), "cannabis" = list(3,8))
+	kitchen_tag = "cannabis"
 
-/datum/seed/ambrosia/New()
+/datum/seed/cannabis/New()
 	..()
 	set_trait(TRAIT_HARVEST_REPEAT,1)
 	set_trait(TRAIT_MATURATION,6)
@@ -303,15 +303,15 @@
 	set_trait(TRAIT_PLANT_ICON,"ambrosia")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 
-/datum/seed/ambrosia/deus
-	name = "ambrosiadeus"
-	seed_name = "ambrosia deus"
-	display_name = "ambrosia deus"
+/datum/seed/cannabis/deus
+	name = "cannabisdeus"
+	seed_name = "cannabis deus"
+	display_name = "OG Purple Haze"
 	mutants = null
-	chems = list("nutriment" = list(1), "bicaridine" = list(1,8), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "space_drugs" = list(1,10))
-	kitchen_tag = "ambrosiadeus"
+	chems = list("nutriment" = list(1), "cannabis" = list(11,18), "synaptizine" = list(1,8,1), "hyperzine" = list(1,10,1), "ecstasy" = list(1,10))
+	kitchen_tag = "cannabisdeus"
 
-/datum/seed/ambrosia/deus/New()
+/datum/seed/cannabis/deus/New()
 	..()
 	set_trait(TRAIT_PRODUCT_COLOUR,"#A3F0AD")
 	set_trait(TRAIT_PLANT_COLOUR,"#2A9C61")
@@ -398,7 +398,7 @@
 	seed_name = "liberty cap"
 	display_name = "liberty cap mushrooms"
 	mutants = null
-	chems = list("nutriment" = list(1), "stoxin" = list(3,3), "space_drugs" = list(1,25))
+	chems = list("nutriment" = list(1), "stoxin" = list(3,3), "ecstasy" = list(1,25))
 
 /datum/seed/mushroom/hallucinogenic/strong/New()
 	..()

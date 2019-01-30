@@ -377,4 +377,3 @@
 
 	visible_message(.)
 	update_icon()
-

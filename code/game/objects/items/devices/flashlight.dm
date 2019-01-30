@@ -155,7 +155,7 @@
 					user << "<span class='notice'>There's visible lag between left and right pupils' reactions.</span>"
 
 				var/list/pinpoint = list("oxycodone"=1,"tramadol"=5)
-				var/list/dilating = list("space_drugs"=5,"mindbreaker"=1)
+				var/list/dilating = list("ecstasy"=5,"mindbreaker"=1)
 				if(M.reagents.has_any_reagent(pinpoint) || H.ingested.has_any_reagent(pinpoint))
 					user << "<span class='notice'>\The [M]'s pupils are already pinpoint and cannot narrow any more.</span>"
 				else if(M.reagents.has_any_reagent(dilating) || H.ingested.has_any_reagent(dilating))
@@ -469,3 +469,6 @@
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)
 	return //Bio-luminescence does not toggle.
+
+/obj/item/device/flashlight/get_cell()
+	return cell

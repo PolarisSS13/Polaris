@@ -6,6 +6,10 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
+	if(!has_key())
+		usr << "<span class='warning'>There's no keys in the ignition.</span>"
+		return
+
 	if(on)
 		usr << "<span class='warning'>The engine is already running.</span>"
 		return
@@ -63,4 +67,26 @@
 		usr << "<span class='notice'>You press the horn.</span>"
 	else
 		usr << "<span class='notice'>Nothing happens, the engine is off.</span>"
+
+/obj/vehicle/car/verb/remove_key()
+	set name = "Remove key"
+	set category = "Vehicle"
+	set src in view(0)
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+
+	if(!key)
+		return
+
+	if(on)
+		turn_off()
+
+	key.loc = usr.loc
+	if(!usr.get_active_hand())
+		usr.put_in_hands(key)
+	key = null
+
+	verbs -= /obj/vehicle/train/engine/verb/remove_key
+
 

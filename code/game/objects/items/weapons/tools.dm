@@ -33,6 +33,9 @@
 	usesound = 'sound/items/ratchet.ogg'
 	toolspeed = 1
 
+/obj/item/weapon/wrench/is_wrench()
+	return TRUE
+
 /obj/item/weapon/wrench/cyborg
 	name = "automatic wrench"
 	desc = "An advanced robotic wrench. Can be found in industrial synthetic shells."
@@ -150,6 +153,10 @@
 		M = user
 	return eyestab(M,user)
 
+/obj/item/weapon/screwdriver/is_screwdriver()
+	return TRUE
+
+
 /obj/item/weapon/screwdriver/alien
 	name = "alien screwdriver"
 	desc = "An ultrasonic screwdriver."
@@ -246,6 +253,10 @@
 	edge = 1
 	toolspeed = 1
 	var/random_color = TRUE
+
+/obj/item/weapon/wirecutters/is_wirecutter()
+	return TRUE
+
 
 /obj/item/weapon/wirecutters/New()
 	if(random_color && prob(50))
@@ -775,6 +786,11 @@
 		mounted_pack.return_nozzle()
 		to_chat(user, "<span class='notice'>\The [src] retracts to its fueltank.</span>")
 
+/obj/item/weapon/weldingtool/electric/unloaded/New()
+	cell_type = null
+
+/obj/item/weapon/weldingtool/electric/get_cell()
+	return power_supply
 /*
  * Electric/Arc Welder
  */
@@ -923,6 +939,9 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	usesound = 'sound/items/crowbar.ogg'
 	toolspeed = 1
+
+/obj/item/weapon/crowbar/is_crowbar()
+	return TRUE
 
 /obj/item/weapon/crowbar/red
 	icon = 'icons/obj/tools.dmi'

@@ -9,3 +9,4 @@
 	required_enemies = 1
 	end_on_antag_death = 1
 	restricted_jobs = list("AI", "Cyborg","Chief Medical Officer", "Doctor", "Virologist")
+	votable = 0 //Until this mode is fixed.

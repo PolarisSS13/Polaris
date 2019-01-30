@@ -280,7 +280,11 @@
 	desc = "Surgery"
 	region = ACCESS_REGION_MEDBAY
 
-// /var/const/free_access_id = 46
+/var/const/access_network = 46
+/datum/access/network
+	id = access_network
+	desc = "Station Network"
+	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_research = 47
 /datum/access/research
@@ -337,7 +341,7 @@
 /var/const/access_hop = 57
 /datum/access/hop
 	id = access_hop
-	desc = "City Supervisor"
+	desc = "City Clerk"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_hos = 58
@@ -393,6 +397,8 @@
 	id = access_medical_equip
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
+
+
 
 /******************
 * Central Command *
@@ -450,6 +456,12 @@
 	id = access_cent_captain
 	desc = "Central Command Administration"
 	access_type = ACCESS_TYPE_CENTCOM
+
+/var/const/access_president = 110
+/datum/access/president
+	id = access_president
+	desc = "President"
+	region = ACCESS_TYPE_CENTCOM
 
 /***************
 * Antag access *

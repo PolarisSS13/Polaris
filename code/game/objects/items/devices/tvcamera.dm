@@ -5,7 +5,7 @@
 	item_state = "camcorder"
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BELT
-	var/channel = "NCS Northern Star News Feed"
+	var/channel = "Geminus City News"
 	var/obj/machinery/camera/network/thunder/camera
 	var/obj/item/device/radio/radio
 
@@ -66,16 +66,18 @@
 	if(href_list["video"])
 		camera.set_status(!camera.status)
 		if(camera.status)
+			global_announcer.autosay("\icon[src] <FONT size=3><b>[channel]</b> is streaming, please tune into your televisions to witness!</FONT>", "Television Broadcasting Network")
 			to_chat(usr,"<span class='notice'>Video streaming activated. Broadcasting on channel '[channel]'</span>")
 		else
+			global_announcer.autosay("\icon[src] [channel] has ended. Tune in next time!","Television Broadcasting Network")
 			to_chat(usr,"<span class='notice'>Video streaming deactivated.</span>")
 		update_icon()
 	if(href_list["sound"])
 		radio.ToggleBroadcast()
 		if(radio.broadcasting)
-			to_chat(usr,"<span class='notice'>Audio streaming activated. Broadcasting on frequency [format_frequency(radio.frequency)].</span>")
+			to_chat(usr,"<span class='notice'>\icon[src] Audio streaming activated. Broadcasting on frequency [format_frequency(radio.frequency)].</span>")
 		else
-			to_chat(usr,"<span class='notice'>Audio streaming deactivated.</span>")
+			to_chat(usr,"<span class='notice'>\icon[src] Audio streaming deactivated.</span>")
 	if(!href_list["close"])
 		attack_self(usr)
 

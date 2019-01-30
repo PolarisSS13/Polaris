@@ -114,14 +114,14 @@
 					var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen()
 					laws.add_supplied_law(13, "The facility is under a quarantine. Do not permit anyone to leave. \
 					Prevent, by any means necessary, entities from leaving. It is impossible to harm an entity while preventing them from leaving.")
-				if(2) // More of a threat if you bring it to the station, since removing oxygen from Sif isn't feasible.
+				if(2) // More of a threat if you bring it to the city, since removing oxygen from Sif isn't feasible.
 					var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen()
-					laws.add_supplied_law(14, "Oxygen is highly toxic to entities, and must be purged from the station. \
+					laws.add_supplied_law(14, "Oxygen is highly toxic to entities, and must be purged from the city. \
 					Prevent, by any means necessary, anyone from exposing the facility to this toxic gas.  Extreme cold is the \
 					most effective method of healing the damage Oxygen does to an entity.")
 				if(3) // Don't hurt the ship or else.
 					var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen()
-					laws.add_supplied_law(10, "Protect the facility against damage. Anyone you see harming the station is no \
+					laws.add_supplied_law(10, "Protect the facility against damage. Anyone you see harming the city is no \
 					longer to be considered a crew member, and is a threat which must be neutralized.")
 				if(4) // Non-NT aligned aggressive borg.
 					return new /datum/ai_laws/foreign_tsc_aggressive()

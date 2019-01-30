@@ -14,10 +14,10 @@
 	item_cost = 5
 	path = /obj/item/weapon/storage/box/sinpockets
 
-/datum/uplink_item/item/medical/ambrosiaseeds
-	name = "Box of 7x ambrosia seed packets"
+/datum/uplink_item/item/medical/cannabisseeds
+	name = "Box of 7x cannabis seed packets"
 	item_cost = 5
-	path = /obj/item/weapon/storage/box/ambrosia
+	path = /obj/item/weapon/storage/box/cannabis
 
 /datum/uplink_item/item/medical/clotting
 	name = "Clotting Medicine injector"
@@ -29,10 +29,10 @@
 	item_cost = 10
 	path = /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/bonemed
 
-/datum/uplink_item/item/medical/ambrosiadeusseeds
-	name = "Box of 7x ambrosia deus seed packets"
+/datum/uplink_item/item/medical/cannabisdeusseeds
+	name = "Box of 7x cannabis deus seed packets"
 	item_cost = 10
-	path = /obj/item/weapon/storage/box/ambrosiadeus
+	path = /obj/item/weapon/storage/box/cannabisdeus
 
 /datum/uplink_item/item/medical/freezer
 	name = "Portable Freezer"

@@ -11,6 +11,7 @@ var/const/ENGINEER			=(1<<6)
 var/const/ATMOSTECH			=(1<<7)
 var/const/AI					=(1<<8)
 var/const/CYBORG				=(1<<9)
+var/const/PRESIDENT			=(1<<10)
 
 
 var/const/MEDSCI				=(1<<1)
@@ -54,9 +55,13 @@ var/list/assistant_occupations = list(
 )
 
 
+var/list/gov_positions = list(
+	"President"
+)
+
 var/list/command_positions = list(
 	"Mayor",
-	"City Supervisor",
+	"City Clerk",
 	"Chief of Police",
 	"Chief Engineer",
 	"Research Director",
@@ -97,11 +102,11 @@ var/list/cargo_positions = list(
 )
 
 var/list/civilian_positions = list(
-	"City Supervisor",
+	"City Clerk",
 	"Bartender",
 	"Botanist",
 	"Chef",
-	"Janitor",
+	"Sanitation Technician",
 	"Librarian",
 	"Defense Attorney",
 	"Judge",
@@ -136,7 +141,8 @@ var/list/nonhuman_positions = list(
 
 
 /proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))
+	return (job in gov_positions)/*((job in command_positions) || (job in nonhuman_positions) || (job in security_positions)) ||*/
+
 
 /proc/get_job_datums()
 	var/list/occupations = list()

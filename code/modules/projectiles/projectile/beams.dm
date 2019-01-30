@@ -211,3 +211,11 @@
 	name = "stun beam"
 	icon_state = "stun"
 	agony = 35
+
+/obj/item/projectile/beam/stun/high
+	name = "overcharged stun beam"
+	icon_state = "stun"
+	agony = 75
+	damage = 5
+	nodamage = 0
+	damage_type = BURN

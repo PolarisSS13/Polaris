@@ -538,35 +538,6 @@
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
-/* Drugs */
-
-/datum/reagent/space_drugs
-	name = "Space drugs"
-	id = "space_drugs"
-	description = "An illegal chemical compound used as drug."
-	taste_description = "bitterness"
-	taste_mult = 0.4
-	reagent_state = LIQUID
-	color = "#60A584"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-
-/datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	var/drug_strength = 15
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-
-	if(alien == IS_SLIME)
-		drug_strength = drug_strength * 1.2
-
-	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
 
 /datum/reagent/serotrotium
 	name = "Serotrotium"
@@ -712,13 +683,7 @@
 		if(prob(15))
 			M.emote(pick("twitch", "giggle"))
 
-/datum/reagent/nicotine
-	name = "Nicotine"
-	id = "nicotine"
-	description = "A highly addictive stimulant extracted from the tobacco plant."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#181818"
+
 
 /datum/reagent/talum_quem
 	name = "Talum-quem"

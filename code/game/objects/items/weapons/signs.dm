@@ -14,8 +14,10 @@
 
 /obj/item/weapon/picket_sign/attackby(obj/item/weapon/W, mob/user, params)
 	if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/weapon/pen/crayon))
-		var/txt = sanitize(input(user, "What would you like to write on the sign?", "Sign Label", null , 30)  as text)
-		if(txt)
+		var/txt = sanitize(copytext(input(user, "Enter your picket message.", "Picket Message", null)  as text,1,40))
+		if(!txt)
+			return
+		else
 			label = txt
 			src.name = "[label] sign"
 			desc =	"It reads: [label]"

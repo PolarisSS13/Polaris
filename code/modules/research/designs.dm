@@ -81,6 +81,8 @@ other types of metals and chemistry for reagents).
 	build_path = /obj/item/weapon/disk/tech_disk
 	sort_string = "GAAAB"
 
+	sort_string = "GAAAB"
+
 /datum/design/item/stock_part
 	build_type = PROTOLATHE
 
@@ -1267,13 +1269,13 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 3)
 	build_path = /obj/item/weapon/airlock_electronics/secure
 	sort_string = "JDAAA"
-
+/*
 /datum/design/circuit/ordercomp
 	name = "supply ordering console"
 	id = "ordercomp"
 	build_path = /obj/item/weapon/circuitboard/ordercomp
 	sort_string = "KAAAA"
-
+*/
 /datum/design/circuit/supplycomp
 	name = "supply control console"
 	id = "supplycomp"
@@ -1307,13 +1309,13 @@ CIRCUITS BELOW
 	id = "comconsole"
 	build_path = /obj/item/weapon/circuitboard/communications
 	sort_string = "LAAAA"
-
+/*
 /datum/design/circuit/idcardconsole
 	name = "ID card modification console"
 	id = "idcardconsole"
 	build_path = /obj/item/weapon/circuitboard/card
 	sort_string = "LAAAB"
-
+*/
 /datum/design/circuit/emp_data
 	name = "employment records console"
 	id = "emp_data"
@@ -1823,7 +1825,6 @@ CIRCUITS BELOW
 	name = "general alert console"
 	id = "general_alert"
 	build_path = /obj/item/weapon/circuitboard/general_alert
-
 // Removal of loyalty implants. Can't think of a way to add this to the config option.
 /datum/design/item/implant/loyalty
 	name = "loyalty"
@@ -1831,7 +1832,6 @@ CIRCUITS BELOW
 	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 7000, "glass" = 7000)
 	build_path = /obj/item/weapon/implantcase/loyalty"
-
 /datum/design/rust_core_control
 	name = "Circuit Design (RUST core controller)"
 	desc = "Allows for the construction of circuit boards used to build a core control console for the RUST fusion engine."
@@ -1840,7 +1840,6 @@ CIRCUITS BELOW
 	build_type = IMPRINTER
 	materials = list("glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_core_control"
-
 datum/design/rust_fuel_control
 	name = "Circuit Design (RUST fuel controller)"
 	desc = "Allows for the construction of circuit boards used to build a fuel injector control console for the RUST fusion engine."
@@ -1849,7 +1848,6 @@ datum/design/rust_fuel_control
 	build_type = IMPRINTER
 	materials = list("glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_fuel_control"
-
 datum/design/rust_fuel_port
 	name = "Internal circuitry (RUST fuel port)"
 	desc = "Allows for the construction of circuit boards used to build a fuel injection port for the RUST fusion engine."
@@ -1858,7 +1856,6 @@ datum/design/rust_fuel_port
 	build_type = IMPRINTER
 	materials = list("glass" = 2000, "sacid" = 20, "uranium" = 3000)
 	build_path = "/obj/item/weapon/module/rust_fuel_port"
-
 datum/design/rust_fuel_compressor
 	name = "Circuit Design (RUST fuel compressor)"
 	desc = "Allows for the construction of circuit boards used to build a fuel compressor of the RUST fusion engine."
@@ -1867,7 +1864,6 @@ datum/design/rust_fuel_compressor
 	build_type = IMPRINTER
 	materials = list("glass" = 2000, "sacid" = 20, "phoron" = 3000, "diamond" = 1000)
 	build_path = "/obj/item/weapon/module/rust_fuel_compressor"
-
 datum/design/rust_core
 	name = "Internal circuitry (RUST tokamak core)"
 	desc = "The circuit board that for a RUST-pattern tokamak fusion core."
@@ -1876,7 +1872,6 @@ datum/design/rust_core
 	build_type = IMPRINTER
 	materials = list("glass" = 2000, "sacid" = 20, "phoron" = 3000, "diamond" = 2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"
-
 datum/design/rust_injector
 	name = "Internal circuitry (RUST tokamak core)"
 	desc = "The circuit board that for a RUST-pattern particle accelerator."

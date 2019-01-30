@@ -243,16 +243,13 @@
 	var/mob/living/carbon/human/H = user
 	if(capped)
 		user.visible_message("<span class='suicide'>[user] shakes up the [src] with a rattle and lifts it to their mouth, but nothing happens! Maybe they should have uncapped it first! Nonetheless--</span>")
-		user.say("MEDIOCRE!!")
 	else
 		user.visible_message("<span class='suicide'>[user] shakes up the [src] with a rattle and lifts it to their mouth, spraying silver paint across their teeth!</span>")
-		user.say("WITNESS ME!!")
+
 		playsound(loc, 'sound/effects/spray.ogg', 5, 1, 5)
-		colour = "#C0C0C0"
 		update_icon()
 		H.lip_style = "spray_face"
-		H.lip_style = colour
-		H.update_icons_body()
+
 		uses = max(0, uses - 10)
 	return (OXYLOSS)
 /obj/item/weapon/pen/crayon/spraycan/New()
@@ -285,9 +282,9 @@
 		return
 	else
 		if(iscarbon(target))
+			var/mob/living/carbon/human/C = target
 			if(uses)
 				playsound(user.loc, 'sound/effects/spray.ogg', 5, 1, 5)
-				var/mob/living/carbon/human/C = target
 				user.visible_message("<span class='danger'>[user] sprays [src] into the face of [target]!</span>")
 				target << "<span class='userdanger'>[user] sprays [src] into your face!</span>"
 				if(C.client)
@@ -297,7 +294,6 @@
 						C.confused = max(C.confused, 3)
 						C.Weaken(3)
 				C.lip_style = "spray_face"
-				C.lip_style = colour
 				C.update_icons_body()
 				uses = max(0,uses-10)
 	if(is_type_in_list(target,validSurfaces))

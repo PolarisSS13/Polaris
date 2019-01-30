@@ -1,5 +1,5 @@
 client/script = {"<style>
-body					{font-family: "Helvetica", sans-serif; color: #650085;}
+body					{font-family: "Helvetica", sans-serif; color: #2b0038;}
 
 h1, h2, h3, h4, h5, h6	{color: #0000ff;font-family: "Arial Black", sans-serif;}
 

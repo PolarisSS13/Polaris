@@ -104,7 +104,7 @@
 /datum/gear/uniform/job_skirt/eng
 	display_name = "skirt, engineer"
 	path = /obj/item/clothing/under/rank/engineer/skirt
-	allowed_roles = list("Chief Engineer","Station Engineer")
+	allowed_roles = list("Chief Engineer","City Engineer")
 
 /datum/gear/uniform/job_skirt/roboticist
 	display_name = "skirt, roboticist"
@@ -296,13 +296,13 @@
 /datum/gear/uniform/uniform_hop
 	display_name = "uniform, HoP's dress"
 	path = /obj/item/clothing/under/dress/dress_hop
-	allowed_roles = list("City Supervisor")
+	allowed_roles = list("City Clerk")
 
 /datum/gear/uniform/uniform_hr
 	display_name = "uniform, HR director (HoP)"
 	path = /obj/item/clothing/under/dress/dress_hr
 
-	allowed_roles = list("City Supervisor")
+	allowed_roles = list("City Clerk")
 
 /datum/gear/uniform/navysecsuit
 	display_name = "uniform, navy blue (Security)"
