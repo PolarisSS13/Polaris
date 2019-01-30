@@ -10,7 +10,7 @@
 	sharp = 1
 	var/mob_passthrough_check = 0
 
-	muzzle_type = /obj/effect/projectile/muzzle/bullet
+	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -257,12 +257,12 @@
 	incendiary = 2
 	flammability = 4
 	agony = 30
-	range = 4
+	kill_count = 4
 	vacuum_traversal = 0
 
 /obj/item/projectile/bullet/incendiary/flamethrower/large
 	damage = 15
-	range = 6
+	kill_count = 6
 
 /* Practice rounds and blanks */
 

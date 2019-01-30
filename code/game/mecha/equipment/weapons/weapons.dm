@@ -19,7 +19,7 @@
 		return 0
 	return ..()
 
-/obj/item/mecha_parts/mecha_equipment/weapon/action(atom/target, params)
+/obj/item/mecha_parts/mecha_equipment/weapon/action(atom/target)
 	if(!action_checks(target))
 		return
 	var/turf/curloc = chassis.loc
@@ -39,7 +39,7 @@
 		playsound(chassis, fire_sound, fire_volume, 1)
 		projectiles--
 		var/P = new projectile(curloc)
-		Fire(P, target, params)
+		Fire(P, target)
 		if(i == 1)
 			set_ready_state(0)
 		if(fire_cooldown)
@@ -60,12 +60,11 @@
 
 	return
 
-/obj/item/mecha_parts/mecha_equipment/weapon/proc/Fire(atom/A, atom/target, params)
+/obj/item/mecha_parts/mecha_equipment/weapon/proc/Fire(atom/A, atom/target)
 	var/obj/item/projectile/P = A
 	P.dispersion = deviation
 	process_accuracy(P, chassis.occupant, target)
-	P.preparePixelProjectile(target, chassis.occupant, params)
-	P.fire()
+	P.launch(target)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/proc/process_accuracy(obj/projectile, mob/living/user, atom/target)
 	var/obj/item/projectile/P = projectile

@@ -532,8 +532,7 @@ proc/findNullRod(var/atom/target)
 /obj/item/weapon/spell/construct/projectile/on_ranged_cast(atom/hit_atom, mob/living/user)
 	if(set_up(hit_atom, user))
 		var/obj/item/projectile/new_projectile = make_projectile(spell_projectile, user)
-		new_projectile.old_style_target(hit_atom)
-		new_projectile.fire()
+		new_projectile.launch(hit_atom)
 		log_and_message_admins("has casted [src] at \the [hit_atom].")
 		if(fire_sound)
 			playsound(get_turf(src), fire_sound, 75, 1)
@@ -598,9 +597,9 @@ proc/findNullRod(var/atom/target)
 	light_power = -2
 	light_color = "#FFFFFF"
 
-	muzzle_type = /obj/effect/projectile/muzzle/inversion
-	tracer_type = /obj/effect/projectile/tracer/inversion
-	impact_type = /obj/effect/projectile/impact/inversion
+	muzzle_type = /obj/effect/projectile/inversion/muzzle
+	tracer_type = /obj/effect/projectile/inversion/tracer
+	impact_type = /obj/effect/projectile/inversion/impact
 
 //Harvester Pain Orb
 

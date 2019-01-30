@@ -1352,19 +1352,21 @@
 	return 0
 
 //Shoot a bullet at someone
-/mob/living/simple_animal/proc/Shoot(atom/target, atom/start, mob/user, var/bullet = 0)
+/mob/living/simple_animal/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	if(target == start)
 		return
 
-	var/obj/item/projectile/A = new projectiletype(user.loc)
+	var/obj/item/projectile/A = new projectiletype(user:loc)
 	playsound(user, projectilesound, 100, 1)
 	if(!A)	return
 
 //	if (!istype(target, /turf))
 //		qdel(A)
 //		return
-	A.old_style_target(target)
-	A.fire()
+
+	A.firer = src
+	A.launch(target)
+	return
 
 //We can't see the target
 /mob/living/simple_animal/proc/LoseTarget()

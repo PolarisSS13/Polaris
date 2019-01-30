@@ -17,6 +17,9 @@
 /datum/computer/file/embedded_program/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
 	return
 
+/datum/computer/file/embedded_program/process()
+	return
+
 /datum/computer/file/embedded_program/proc/post_signal(datum/signal/signal, comm_line)
 	if(master)
 		master.post_signal(signal, comm_line)

@@ -722,10 +722,7 @@ var/list/turret_icons
 		def_zone = pick(BP_TORSO, BP_GROIN)
 
 	//Shooting Code:
-	A.firer = src
-	A.old_style_target(target)
-	A.def_zone = def_zone
-	A.fire()
+	A.launch(target, def_zone)
 
 	// Reset the time needed to go back down, since we just tried to shoot at someone.
 	timeout = 10

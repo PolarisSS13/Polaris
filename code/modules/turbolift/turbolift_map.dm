@@ -32,7 +32,7 @@
 	var/uy = y
 	var/uz = z
 	var/udir = dir
-	moveToNullspace()
+	forceMove(null)
 
 	// These modifiers are used in relation to the origin
 	// to place the system control panels and doors.

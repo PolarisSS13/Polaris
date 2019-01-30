@@ -29,7 +29,6 @@
 		qdel(timer)
 
 	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
-
 	tag = null
 	SSnanoui.close_uis(src)
 	return QDEL_HINT_QUEUE

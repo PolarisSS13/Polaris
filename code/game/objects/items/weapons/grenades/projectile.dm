@@ -61,8 +61,7 @@
 		var/obj/item/projectile/P = new shot_type(T)
 		P.shot_from = src.name
 
-		P.old_style_target(O)
-		P.fire()
+		P.launch(O)
 
 		//Make sure to hit any mobs in the source turf
 		for(var/mob/living/M in T)

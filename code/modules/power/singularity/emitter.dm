@@ -142,8 +142,7 @@
 
 		var/obj/item/projectile/beam/emitter/A = get_emitter_beam()
 		A.damage = round(power_per_shot/EMITTER_DAMAGE_POWER_TRANSFER)
-		A.firer = src
-		A.fire(dir2angle(dir))
+		A.launch( get_step(src.loc, src.dir) )
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 

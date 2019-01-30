@@ -68,9 +68,8 @@
 	playsound(loc, emagged ? 'sound/weapons/Laser.ogg' : 'sound/weapons/Taser.ogg', 50, 1)
 	var/obj/item/projectile/P = new projectile(loc)
 
-	P.firer = src
-	P.old_style_target(A)
-	P.fire()
+	P.launch(A)
+	return
 
 // Assembly
 

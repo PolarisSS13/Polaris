@@ -68,26 +68,33 @@
 		if(istype(bot))
 			if(density && src.check_access(bot.botcard))
 				open()
-				addtimer(CALLBACK(src, .proc/close), 50)
+				sleep(50)
+				close()
 		else if(istype(AM, /obj/mecha))
 			var/obj/mecha/mecha = AM
 			if(density)
 				if(mecha.occupant && src.allowed(mecha.occupant))
 					open()
-					addtimer(CALLBACK(src, .proc/close), 50)
+					sleep(50)
+					close()
 		return
 	if (!( ticker ))
 		return
 	if (src.operating)
 		return
-	if (density && allowed(AM))
+	if (src.density && src.allowed(AM))
 		open()
-		addtimer(CALLBACK(src, .proc/close), check_access(null)? 50 : 20)
+		if(src.check_access(null))
+			sleep(50)
+		else //secure doors close faster
+			sleep(20)
+		close()
+	return
 
-/obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height, air_group)
+/obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return 1
-	if(get_dir(mover, loc) == turn(dir, 180)) //Make sure looking at appropriate border
+	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
 		if(air_group) return 0
 		return !density
 	else
@@ -102,7 +109,7 @@
 		return 1
 
 /obj/machinery/door/window/open()
-	if (operating == 1 || !density) //doors can still open when emag-disabled
+	if (operating == 1) //doors can still open when emag-disabled
 		return 0
 	if (!ticker)
 		return 0
@@ -122,20 +129,20 @@
 	return 1
 
 /obj/machinery/door/window/close()
-	if(operating || density)
-		return FALSE
-	operating = TRUE
+	if (operating)
+		return 0
+	src.operating = 1
 	flick(text("[]closing", src.base_state), src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 
-	density = TRUE
+	density = 1
 	update_icon()
 	explosion_resistance = initial(explosion_resistance)
 	update_nearby_tiles()
 
 	sleep(10)
-	operating = FALSE
-	return TRUE
+	operating = 0
+	return 1
 
 /obj/machinery/door/window/take_damage(var/damage)
 	src.health = max(0, src.health - damage)

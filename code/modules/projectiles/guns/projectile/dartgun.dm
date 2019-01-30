@@ -3,7 +3,7 @@
 	icon_state = "dart"
 	damage = 5
 	var/reagent_amount = 15
-	range = 15 //shorter range
+	kill_count = 15 //shorter range
 
 	muzzle_type = null
 

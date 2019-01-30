@@ -75,10 +75,9 @@
 		H.update_action_buttons()
 	..()
 
-/obj/item/clothing/suit/armor/tesla/proc/shoot_lightning(mob/target, power)
-	var/obj/item/projectile/beam/lightning/lightning = new(get_turf(src))
+/obj/item/clothing/suit/armor/tesla/proc/shoot_lightning(var/mob/target, var/power)
+	var/obj/item/projectile/beam/lightning/lightning = new(src)
 	lightning.power = power
-	lightning.old_style_target(target)
-	lightning.fire()
+	lightning.launch(target)
 	visible_message("<span class='danger'>\The [src] strikes \the [target] with lightning!</span>")
 	playsound(get_turf(src), 'sound/weapons/gauss_shoot.ogg', 75, 1)

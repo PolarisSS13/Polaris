@@ -435,8 +435,7 @@
 			P.shot_from = src.name
 			P.silenced = silenced
 
-			P.old_style_target(target)
-			P.fire()
+			P.launch(target)
 
 			last_shot = world.time
 
@@ -611,17 +610,24 @@
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
 	var/obj/item/projectile/P = projectile
 	if(!istype(P))
-		return FALSE //default behaviour only applies to true projectiles
+		return 0 //default behaviour only applies to true projectiles
+
+	if(params)
+		P.set_clickpoint(params)
 
 	//shooting while in shock
-	var/forcespread
+	var/x_offset = 0
+	var/y_offset = 0
 	if(istype(user, /mob/living/carbon))
 		var/mob/living/carbon/mob = user
 		if(mob.shock_stage > 120)
-			forcespread = rand(50, 50)
+			y_offset = rand(-2,2)
+			x_offset = rand(-2,2)
 		else if(mob.shock_stage > 70)
-			forcespread = rand(-25, 25)
-	var/launched = !P.launch_from_gun(target, target_zone, user, params, null, forcespread, src)
+			y_offset = rand(-1,1)
+			x_offset = rand(-1,1)
+
+	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
 
 	if(launched)
 		play_fire_sound(user, P)

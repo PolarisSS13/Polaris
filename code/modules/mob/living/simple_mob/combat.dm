@@ -128,8 +128,7 @@
 	playsound(src, P.fire_sound ? P.fire_sound : projectilesound, 80, 1)
 
 	P.firer = src // So we can't shoot ourselves.
-	P.old_style_target(A, src)
-	P.fire()
+	P.launch(A)
 	if(needs_reload)
 		reload_count++
 

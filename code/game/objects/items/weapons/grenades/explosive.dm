@@ -50,10 +50,9 @@
 		var/fragment_type = pickweight(fragtypes)
 		var/obj/item/projectile/bullet/pellet/fragment/P = new fragment_type(T)
 		P.pellets = fragments_per_projectile
-		P.shot_from = name
+		P.shot_from = src.name
 
-		P.old_style_target(O)
-		P.fire()
+		P.launch(O)
 
 		//Make sure to hit any mobs in the source turf
 		for(var/mob/living/M in T)
