@@ -39,6 +39,5 @@ after_failure:
   - ./send-to-discord.sh failure $WEBHOOK_URL
 
 script:
-  - (! grep 'step_[xy]' maps/**/*.dmm)
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - DreamMaker polaris.dme
