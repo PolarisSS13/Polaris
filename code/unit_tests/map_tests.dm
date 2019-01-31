@@ -1,7 +1,7 @@
+/* //Not necessary
 /datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents Z level 1"
 
-/* //Not necessary
 /datum/unit_test/apc_area_test/start_test()
 	var/list/bad_areas = list()
 	var/area_test_count = 0
