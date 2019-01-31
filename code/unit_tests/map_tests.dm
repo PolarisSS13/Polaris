@@ -1,6 +1,7 @@
 /datum/unit_test/apc_area_test
 	name = "MAP: Area Test APC / Scrubbers / Vents Z level 1"
 
+/* //Not necessary
 /datum/unit_test/apc_area_test/start_test()
 	var/list/bad_areas = list()
 	var/area_test_count = 0
@@ -69,6 +70,7 @@
 		pass("All \[[area_test_count]\] areas contained APCs, Air scrubbers, and Air vents.")
 
 	return 1
+*/
 
 /datum/unit_test/wire_test
 	name = "MAP: Cable Test Z level 1"
@@ -106,6 +108,7 @@
 
 	return 1
 
+/* //Not necessary
 /datum/unit_test/active_edges
 	name = "MAP: Active edges (all maps)"
 
@@ -125,3 +128,4 @@
 		pass("No active edges.")
 
 	return 1
+*/
