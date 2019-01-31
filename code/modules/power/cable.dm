@@ -154,6 +154,10 @@ var/list/possible_cable_coil_colours = list(
 // General procedures
 ///////////////////////////////////
 
+//Finally implements is_cable_coil():
+/obj/item/stack/cable_coil/is_cable_coil()
+	return TRUE
+
 //If underfloor, hide the cable
 /obj/structure/cable/hide(var/i)
 	if(istype(loc, /turf))
