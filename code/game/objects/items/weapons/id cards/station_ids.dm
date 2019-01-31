@@ -415,8 +415,8 @@
 	job_access_type = /datum/job/barber
 
 /obj/item/weapon/card/id/civilian/janitor
-	assignment = "Janitor"
-	rank = "Janitor"
+	assignment = "Sanitation Technician"
+	rank = "Sanitation Technician"
 	job_access_type = /datum/job/janitor
 
 /obj/item/weapon/card/id/civilian/librarian
