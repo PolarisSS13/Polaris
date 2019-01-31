@@ -1,19 +1,19 @@
 language: generic
 sudo: false
 
-# notifications:
-#   webhooks:
-#     urls:
+ notifications:
+   webhooks:
+     urls:
        - https://discordapp.com/api/webhooks/540642508309397518/W7knmAzVwldawMfJZ9n44JieP2v7nZUA9o9On1kik1qQYrj5AyZNVvCiqudejDmBryov
-#     on_success: always  # options: [always|never|change] default: always
-#     on_failure: always  # options: [always|never|change] default: always
-#     on_start: never     # options: [always|never|change] default: always
+     on_success: always  # options: [always|never|change] default: always
+     on_failure: always  # options: [always|never|change] default: always
+     on_start: never     # options: [always|never|change] default: always
 
 env:
     global:
     - BYOND_MAJOR="512"
     - BYOND_MINOR="1452"
-    - DM_BUILDFILE="baystation12.dme"
+    - DM_BUILDFILE="polaris.dme"
 
 cache:
   directories:
