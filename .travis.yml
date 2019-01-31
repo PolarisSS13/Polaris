@@ -4,7 +4,7 @@ sudo: false
 # notifications:
 #   webhooks:
 #     urls:
-#       - https://discordapp.com/api/webhooks/475124635164213248/HnIVHWdsJqGjNZdyKynaFy1oDEoxoMb50gGDubBsffiHmkMp_mjQXFyrYL0wUgdxOErY
+       - https://discordapp.com/api/webhooks/540642508309397518/W7knmAzVwldawMfJZ9n44JieP2v7nZUA9o9On1kik1qQYrj5AyZNVvCiqudejDmBryov
 #     on_success: always  # options: [always|never|change] default: always
 #     on_failure: always  # options: [always|never|change] default: always
 #     on_start: never     # options: [always|never|change] default: always
