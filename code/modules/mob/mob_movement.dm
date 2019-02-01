@@ -1,34 +1,3 @@
-/mob/CanPass(atom/movable/mover, turf/target, height, air_group)
-	if(air_group || !height)
-		return TRUE
-
-	if(ismob(mover))
-		var/mob/moving_mob = mover
-		if ((other_mobs && moving_mob.other_mobs))
-			return 1
-		return (!mover.density || !density || lying)
-	else
-		return (!mover.density || !density || lying)
-
-/*
-/mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
-	if((mover.pass_flags & PASSMOB))
-		return TRUE
-	if(istype(mover, /obj/item/projectile) || mover.throwing)
-		return (!density || !(mobility_flags & MOBILITY_STAND))
-	if(buckled == mover)
-		return TRUE
-	if(ismob(mover))
-		var/mob/moving_mob = mover
-		if ((other_mobs && moving_mob.other_mobs))
-			return TRUE
-		if (mover in buckled_mobs)
-			return TRUE
-	return (!mover.density || !density || !(mobility_flags & MOBILITY_STAND))
-*/
-
 /mob/proc/setMoveCooldown(var/timeout)
 	move_delay = max(world.time + timeout, move_delay)
 
