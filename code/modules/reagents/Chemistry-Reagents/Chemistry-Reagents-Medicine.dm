@@ -533,7 +533,7 @@
 			if(H.losebreath >= 15 && prob(H.losebreath))
 				H.Stun(2)
 			else
-				H.losebreath = Clamp(H.losebreath + 3, 0, 20)
+				H.losebreath = CLAMP(H.losebreath + 3, 0, 20)
 
 /datum/reagent/gastirodaxon
 	name = "Gastirodaxon"
@@ -616,7 +616,7 @@
 				I.damage = max(I.damage - 2 * removed * repair_strength, 0)
 				H.Confuse(2)
 		if(M.reagents.has_reagent("respirodaxon") || M.reagents.has_reagent("peridaxon"))
-			H.losebreath = Clamp(H.losebreath + 1, 0, 10)
+			H.losebreath = CLAMP(H.losebreath + 1, 0, 10)
 
 /datum/reagent/immunosuprizine
 	name = "Immunosuprizine"
