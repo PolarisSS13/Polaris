@@ -31,23 +31,12 @@
 	desc = "An unfinished scooter which can only barely be called a skateboard. It's still rideable, but probably unsafe. Looks like you'll need to add a few rods to make handlebars."
 	icon_state = "skateboard"
 	riding_datum_type = /datum/riding/scooter/skateboard
-	density = FALSE
+	density = 0
 	var/adjusted_speed = TRUE
 
 /obj/vehicle/scooter/skateboard/New()
 	. = ..()
 	riding_datum = new riding_datum_type(src)
-
-
-/obj/vehicle/scooter/skateboard/post_buckle_mob(mob/living/M)//allows skateboards to be non-dense but still allows 2 skateboarders to collide with each other
-	density = TRUE
-	return ..()
-
-/obj/vehicle/scooter/skateboard/unbuckle_mob(mob/living/M)
-	if(!has_buckled_mobs())
-		density = FALSE
-	return ..()
-
 
 /obj/vehicle/scooter/skateboard/Bump(atom/A)
 	..()
