@@ -3,6 +3,7 @@
 	flag = HOS
 	faction = "City"
 	department = "Security"
+	department_flag = ENGSEC
 	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
@@ -28,6 +29,7 @@
 	flag = WARDEN
 	faction = "City"
 	department = "Security"
+	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief of police"
@@ -47,6 +49,7 @@
 	flag = DETECTIVE
 	faction = "City"
 	department = "Security"
+	department_flag = ENGSEC
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief of police"
@@ -66,6 +69,7 @@
 	flag = OFFICER
 	faction = "City"
 	department = "Security"
+	department_flag = ENGSEC
 	total_positions = 8
 	spawn_positions = 8
 	supervisors = "the chief of police"
@@ -85,6 +89,7 @@
 	flag = PROSECUTOR
 	faction = "City"
 	department = "Security"
+	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the chief of police and city clerk"

@@ -84,7 +84,7 @@
 	name = "Human Child"
 	name_plural = "Human Children"
 	name = SPECIES_HUMAN_CHILD
-//	spawn_flags = SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_CAN_JOIN
 	metabolic_rate = 1.10
 	blurb = "A younger version of a human. Much weaker and smaller - cannot participate in paid job roles, but faster and more agile."
 	mob_size = MOB_SMALL

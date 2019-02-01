@@ -4,6 +4,7 @@
 	flag = BARTENDER
 	faction = "City"
 	department = "Civilian"
+	department_flag = CIVILIAN
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city clerk"
@@ -22,6 +23,7 @@
 	flag = CHEF
 	faction = "City"
 	department = "Civilian"
+	department_flag = CIVILIAN
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the city clerk"
@@ -38,6 +40,7 @@
 	title = "Botanist"
 	flag = BOTANIST
 	faction = "City"
+	department_flag = CIVILIAN
 	department = "Civilian"
 	total_positions = 2
 	spawn_positions = 1
@@ -56,6 +59,7 @@
 	title = "Sanitation Technician"
 	flag = JANITOR
 	faction = "City"
+	department_flag = CIVILIAN
 	department = "Civilian"
 	total_positions = 2
 	spawn_positions = 2
@@ -74,6 +78,7 @@
 	title = "Librarian"
 	flag = LIBRARIAN
 	faction = "City"
+	department_flag = CIVILIAN
 	department = "Civilian"
 	total_positions = 1
 	spawn_positions = 1
@@ -90,6 +95,7 @@
 	title = "Defense Attorney"
 	flag = LAWYER
 	faction = "City"
+	department_flag = CIVILIAN
 	department = "Civilian"
 	total_positions = 1
 	spawn_positions = 1
@@ -110,6 +116,7 @@
 	title = "Barber"
 	flag = BARBER
 	faction = "City"
+	department_flag = CIVILIAN
 	department = "Civilian"
 	total_positions = 2
 	spawn_positions = 2
@@ -150,6 +157,7 @@
 	flag = CARGOTECH
 	faction = "City"
 	department = "Cargo"
+	department_flag = CIVILIAN
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the factory manager"
@@ -167,6 +175,7 @@
 	flag = MINER
 	faction = "City"
 	department = "Cargo"
+	department_flag = CIVILIAN
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the factory manager"

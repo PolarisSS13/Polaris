@@ -3,6 +3,7 @@
 	flag = RD
 	faction = "City"
 	department = "Science"
+	department_flag = MEDSCI
 	head_position = 1
 	total_positions = 1
 	spawn_positions = 1
@@ -32,6 +33,7 @@
 	flag = SCIENTIST
 	faction = "City"
 	department = "Science"
+	department_flag = MEDSCI
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
@@ -51,6 +53,7 @@
 	flag = XENOBIOLOGIST
 	faction = "City"
 	department = "Science"
+	department_flag = MEDSCI
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the research director"
@@ -70,6 +73,7 @@
 	flag = ROBOTICIST
 	faction = "City"
 	department = "Science"
+	department_flag = MEDSCI
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "research director"
