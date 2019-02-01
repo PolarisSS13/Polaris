@@ -481,7 +481,7 @@
 	if(target.density)		//This thing blocks projectiles, hit it regardless of layer/mob stuns/etc.
 		return TRUE
 	if(!isliving(target))
-		if(target.layer < PROJECTILE_HIT_THRESHHOLD_LAYER)
+		if(target.layer < PROJECTILE_HIT_THRESHOLD_LAYER)
 			return FALSE
 	else
 		var/mob/living/L = target
