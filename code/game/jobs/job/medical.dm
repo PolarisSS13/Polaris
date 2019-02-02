@@ -19,7 +19,7 @@
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
 
-	minimum_character_age = 25
+	minimum_character_age = 30
 	minimal_player_age = 10
 	ideal_character_age = 50
 
@@ -39,7 +39,7 @@
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/doctor
 	economic_modifier = 7
-	minimum_character_age = 18
+	minimum_character_age = 25
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
@@ -58,7 +58,7 @@
 	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
-	minimum_character_age = 18
+	minimum_character_age = 23
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
@@ -97,6 +97,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
+	minimum_character_age = 20
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/psychiatrist
