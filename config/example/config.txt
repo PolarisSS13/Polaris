@@ -400,8 +400,8 @@ STARLIGHT 0
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
 
-## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
-# DEFAULT_LANGUAGE_PREFIXES , # -
+## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , and # 
+# DEFAULT_LANGUAGE_PREFIXES , #
 
 ## Uncomment to enable the Panic Bunker by default. This will prevent all unseen-before players from connecting. Requires SQL.
 # PANIC_BUNKER
