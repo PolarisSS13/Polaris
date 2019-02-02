@@ -4,7 +4,6 @@ sudo: false
 notifications:
   webhooks:
     urls:
-      - https://discordapp.com/api/webhooks/540642508309397518/W7knmAzVwldawMfJZ9n44JieP2v7nZUA9o9On1kik1qQYrj5AyZNVvCiqudejDmBryov
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: never     # options: [always|never|change] default: always
@@ -39,5 +38,6 @@ after_failure:
   - ./send-to-discord.sh failure $WEBHOOK_URL
 
 script:
+  - (! grep 'step_[xy]' maps/**/*.dmm)
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
   - DreamMaker polaris.dme
