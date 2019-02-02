@@ -477,6 +477,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
+	join_tos = file2text("config/tos.txt")
 
 
 /proc/load_configuration()
@@ -539,7 +540,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s += "<b>[config.server_name]</b> &#8212; "
 
 	s += "<b>The World Server!</b> (Heavy Roleplay) - <b>[station_name()]</b>";
-	s += " - ''They turned SS13 into a spaceless city?'' - a confused player. ("
+	s += " - City life isn't what you thought it was. ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
