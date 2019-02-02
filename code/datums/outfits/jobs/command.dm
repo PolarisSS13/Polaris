@@ -9,6 +9,7 @@
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/gold/captain
 	pda_type = /obj/item/device/pda/captain
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
 
 /decl/hierarchy/outfit/job/heads/captain/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -17,6 +18,8 @@
 
 /decl/hierarchy/outfit/job/heads/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
+	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+		permit.set_name(H.real_name)
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this
 		// point, check if we can actually attach the medal
@@ -43,6 +46,7 @@
 	id_type = /obj/item/weapon/card/id/silver/secretary
 	pda_type = /obj/item/device/pda/heads/hop
 	r_hand = /obj/item/weapon/clipboard
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
 
 /decl/hierarchy/outfit/job/heads/secretary/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -50,6 +54,11 @@
 		uniform = /obj/item/clothing/under/suit_jacket/female/skirt
 	else
 		uniform = /obj/item/clothing/under/suit_jacket/charcoal
+
+/decl/hierarchy/outfit/job/heads/secretary/post_equip(mob/living/carbon/human/H)
+	..()
+	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+		permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/heads/president
 	name = OUTFIT_JOB_NAME("President")

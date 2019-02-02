@@ -47,6 +47,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/gun/projectile/sec/flash(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/weapon/storage/box/gun_permits(src)
 		return
 
 /obj/structure/closet/secure_closet/hop2
