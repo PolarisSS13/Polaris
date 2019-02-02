@@ -7,7 +7,7 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	universal_speak = 1
-
+	var/tos_consent = FALSE
 	invisibility = 101
 
 	density = 0
@@ -21,7 +21,39 @@
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
-	new_player_panel_proc()
+
+	if(handle_tos_consent())
+		new_player_panel_proc()
+
+/mob/new_player/proc/handle_tos_consent()
+	if(!join_tos)
+		return TRUE
+
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		tos_consent = TRUE
+		return TRUE
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_privacy WHERE ckey='[src.ckey]' AND consent=1")
+	query.Execute()
+	while(query.NextRow())
+		tos_consent = TRUE
+		return TRUE
+
+	privacy_consent()
+	return FALSE
+
+/mob/new_player/proc/privacy_consent()
+	src << browse(null, "window=playersetup")
+	var/output = join_tos
+	output += "<p><A href='?src=\ref[src];consent_signed=SIGNED'>I agree to the rules</A>"
+	output += "<p><A href='?src=\ref[src];consent_rejected=NOTSIGNED'>I DO NOT agree to the rules</A>"
+	src << browse(output,"window=privacy_consent;size=500x300")
+	var/datum/browser/popup = new(src, "privacy_consent", "<div align='center'>The Rules</div>", 500, 400)
+	popup.set_window_options("can_close=0")
+	popup.set_content(output)
+	popup.open(0)
+	return
 
 
 /mob/new_player/proc/new_player_panel_proc()
@@ -40,6 +72,9 @@
 		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
 
 	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
+
+	if(join_tos)
+		output += "<p><a href='byond://?src=\ref[src];tos=1'>Rules</A></p>"
 
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
@@ -96,15 +131,31 @@
 /mob/new_player/Topic(href, href_list[])
 	if(!client)	return 0
 
+	if(href_list["consent_signed"])
+		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
+		var/DBQuery/query = dbcon.NewQuery("REPLACE INTO erro_privacy (ckey, datetime, consent) VALUES ('[ckey]', '[sqltime]', 1)")
+		query.Execute()
+		src << browse(null, "window=privacy_consent")
+		tos_consent = 1
+		new_player_panel_proc()
+	if(href_list["consent_rejected"])
+		tos_consent = 0
+		to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
+		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
+		var/DBQuery/query = dbcon.NewQuery("REPLACE INTO erro_privacy (ckey, datetime, consent) VALUES ('[ckey]', '[sqltime]', 0)")
+		query.Execute()
+
+
 	if(href_list["show_preferences"])
 		client.prefs.ShowChoices(src)
 		return 1
 
 	if(href_list["ready"])
-		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
-		else
-			ready = 0
+		if(!tos_consent)
+			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
+			return 0
+		ready = !ready
+		new_player_panel_proc()
 
 	if(href_list["refresh"])
 		//src << browse(null, "window=playersetup") //closes the player setup window
@@ -112,6 +163,9 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
+		if(!tos_consent)
+			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
+			return 0
 
 		if(alert(src,"Are you sure you wish to observe? You will have to wait 5 minutes before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
@@ -150,8 +204,14 @@
 
 			return 1
 
-	if(href_list["late_join"])
+	if(href_list["tos"])
+		privacy_consent()
+		return 0
 
+	if(href_list["late_join"])
+		if(!tos_consent)
+			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
+			return 0
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "<font color='red'>The round is either not ready, or has already finished...</font>"
 			return
@@ -176,7 +236,7 @@
 
 		var/datum/species/S = all_species[client.prefs.species]
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
-			src << alert("Your current species, [client.prefs.species], is not available for play in the city.")
+			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
 			return 0
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
