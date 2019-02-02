@@ -34,7 +34,7 @@
 	minimum_character_age = 18
 
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
-	alt_titles = list("Cook","Restaurant Host")
+	alt_titles = list("Restaurant Cashier","Cook","Restaurant Host")
 
 /datum/job/hydro
 	title = "Botanist"
@@ -89,7 +89,7 @@
 	minimal_access = list(access_library)
 
 	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
-	alt_titles = list("Journalist", "Professor", "Historian", "Writer")
+	alt_titles = list("TV Host", "Radio Host", "Journalist", "Professor", "Historian", "Writer")
 
 /datum/job/defense
 	title = "Defense Attorney"
