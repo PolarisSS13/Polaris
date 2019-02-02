@@ -44,6 +44,8 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		computerid = bancid
 		ip = banip
 
+//The most badmin thing I've commented out in my life..
+/*
 	var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_player WHERE ckey = '[ckey]'")
 	query.Execute()
 	var/validckey = 0
@@ -53,7 +55,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		if(!banned_mob || (banned_mob && !IsGuestKey(banned_mob.key)))
 			message_admins("<font color='red'>[key_name_admin(usr)] attempted to ban [ckey], but [ckey] has not been seen yet. Please only ban actual players.</font>",1)
 			return
-
+*/
 	var/a_ckey
 	var/a_computerid
 	var/a_ip
