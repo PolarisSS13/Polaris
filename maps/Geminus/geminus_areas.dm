@@ -26,6 +26,20 @@
 	lift_floor_name = "Geminus City - Mines"
 	lift_announce_str = "Lift arriving at Geminus Mines, please stand by."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
+
+/area/turbolift/geminus_top_science
+	name = "lift (geminus city)"
+	lift_floor_label = "Floor 2"
+	lift_floor_name = "Geminus City - Upper Science"
+	lift_announce_str = "Lift arriving at Geminus City - Science Upper, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
+
+/area/turbolift/geminus_ground_science
+	name = "lift (science)"
+	lift_floor_label = "Floor 1"
+	lift_floor_name = "Geminus City - Science"
+	lift_announce_str = "Lift arriving at Geminus City - Science Underground, please stand by."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 //power override
 
 //shuttle areas
@@ -215,8 +229,8 @@
 	name = "\improper Underground Sewers"
 	icon_state = "blue"
 	requires_power = 0
-	dynamic_lighting = 0
-	luminosity = 0
+	dynamic_lighting = 1
+//	luminosity = 0
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/planets/Geminus/indoor/sewer/north
