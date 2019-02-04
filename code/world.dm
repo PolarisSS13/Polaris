@@ -35,6 +35,7 @@ var/global/datum/global_init/init = new ()
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 7
+	fps = 20
 
 
 
