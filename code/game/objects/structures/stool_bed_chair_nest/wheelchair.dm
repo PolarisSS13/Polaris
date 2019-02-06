@@ -34,7 +34,7 @@
 	var/calculated_move_delay
 	calculated_move_delay += 2 //TheFurryFeline: nerfs speed so you don't go like Sonic. >W>
 
- 	if(world.time < move_delay)
+	if(world.time < move_delay)
 		return
 
 	if(user.stat || user.stunned || user.weakened || user.paralysis || user.lying || user.restrained())
