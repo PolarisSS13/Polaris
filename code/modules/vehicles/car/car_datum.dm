@@ -16,6 +16,9 @@
 		to_chat(user, "<span class='warning'>The car safety controls keep you on the road!</span>")
 		return FALSE
 
+	if(user.stat || user.stunned || user.lying)
+		return FALSE
+
 	var/mob/living/carbon/human/H = user
 	var/obj/item/organ/external/hand/r_hand = H.get_organ(BP_R_HAND)
 	var/obj/item/organ/external/hand/l_hand = H.get_organ(BP_L_HAND)
