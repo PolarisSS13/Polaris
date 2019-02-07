@@ -487,6 +487,7 @@
 			user.remove_language(LANGUAGE_SIIK)
 			user.remove_language(LANGUAGE_AKHANI)
 			user.remove_language(LANGUAGE_SKRELLIAN)
+			user.remove_language(LANGUAGE_ZADDAT)
 			user.remove_language(LANGUAGE_SCHECHI)
 
 	is_active(mob/living/silicon/pai/user)

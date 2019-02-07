@@ -324,7 +324,7 @@
 	taste_sensitivity = TASTE_SENSITIVE
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_ZADDAT, LANGUAGE_UNATHI)
-	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX, LANGUAGE_SOL_COMMON, LANGUAGE_AKHANI, LANGUAGE_SIIK, LANGUAGE_GUTTER) //has trouble talking low
+	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX, LANGUAGE_SOL_COMMON, LANGUAGE_AKHANI, LANGUAGE_SIIK, LANGUAGE_GUTTER) //limited vocal range; can talk Unathi and magical Galcom but not much else
 	name_language = LANGUAGE_ZADDAT
 	species_language = LANGUAGE_ZADDAT
 	health_hud_intensity = 2.5
@@ -345,7 +345,7 @@
 	safe_pressure = 400
 	poison_type = "nitrogen"      // technically it's a partial pressure thing but IDK if we can emulate that
 
-	genders = list(FEMALE, NEUTER)
+	genders = list(FEMALE, PLURAL) //females are polyp-producing, infertile females and males are nigh-identical
 
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = null
