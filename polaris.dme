@@ -1483,6 +1483,7 @@
 #include "code\modules\clothing\spacesuits\void\station.dm"
 #include "code\modules\clothing\spacesuits\void\void.dm"
 #include "code\modules\clothing\spacesuits\void\wizard.dm"
+#include "code\modules\clothing\spacesuits\void\zaddat.dm"
 #include "code\modules\clothing\suits\armor.dm"
 #include "code\modules\clothing\suits\bio.dm"
 #include "code\modules\clothing\suits\hooded.dm"
