@@ -94,7 +94,7 @@
 	department_flag = MEDSCI
 	department = "Medical"
 	faction = "City"
-	total_positions = 1
+	total_positions = 4
 	spawn_positions = 1
 	economic_modifier = 5
 	minimum_character_age = 20
@@ -104,7 +104,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
-	alt_titles = list("Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
+	alt_titles = list("Daycare Worker", "Therapist", "Social Worker", "Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
 
 /datum/job/paramedic
 	title = "Paramedic"
