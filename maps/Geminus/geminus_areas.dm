@@ -27,20 +27,22 @@
 	lift_announce_str = "Lift arriving at Geminus Mines, please stand by."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
-/area/turbolift/geminus_top_science
-	name = "lift (geminus city)"
+/area/turbolift/geminus_top_hospital
+	name = "lift (city hospital)"
 	lift_floor_label = "Floor 2"
-	lift_floor_name = "Geminus City - Upper Science"
-	lift_announce_str = "Lift arriving at Geminus City - Science Upper, please stand by."
+	lift_floor_name = "Geminus City - Upper Hospital"
+	lift_announce_str = "Lift arriving at Geminus City - Hospital Upper, please stand by."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
-/area/turbolift/geminus_ground_science
-	name = "lift (science)"
+/area/turbolift/geminus_ground_hospital
+	name = "lift (hospital underground)"
 	lift_floor_label = "Floor 1"
-	lift_floor_name = "Geminus City - Science"
-	lift_announce_str = "Lift arriving at Geminus City - Science Underground, please stand by."
+	lift_floor_name = "Geminus City - Underground Hospital"
+	lift_announce_str = "Lift arriving at Geminus City - Hospital Underground, please stand by."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
-//power override
+
+
+
 
 //shuttle areas
 /area/shuttle/arrival/pre_game
