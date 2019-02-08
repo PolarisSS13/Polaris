@@ -24,6 +24,15 @@ var/list/available_paintings = list(
 	"jmwt2",
 	"jmwt3",
 	"jmwt4",
+	"starry",
+	"desert",
+	"still",
+	"snowy",
+	"wave",
+	"dogpoker",
+	"persistance",
+	"sonman",
+	"thescream",
 
 	)
 	//The following paintings either appear under certain conditions or have to be varedited by admins
@@ -147,6 +156,35 @@ var/list/available_paintings = list(
 		if("carp")
 			name = "\improper 'Singing' Mounted Carp"
 			desc = "Too unrobust to beat a carp to death with your bare hands and mount it on a plank of wood? Then this professionally taxidermied trophy is just for you! Note: Does not actually sing."
+		if("starry")
+			name = "\improper beautiful landscape painting"
+			desc = "A beautiful painting with swirling stars and a twisting skyline."
+		if("desert")
+			name = "\improper desert painting"
+			desc = "A painting of what appears to be bones cast out in the desert, it looks quite melancholy and haunting..."
+		if("still")
+			name = "\improper still-life painting"
+			desc = "A painting that shows what appears to be fruit on a table in great detail."
+		if("snowy")
+			name = "\improper snowy painting"
+			desc = "A calming picture of a cabin surronded by velvety snow."
+		if("wave")
+			name = "\improper tidal wave painting"
+			desc = "A painting of a huge wave, written in an old ancient language you cannot seem to understand."
+		if("dogpoker")
+			name = "\improper Dogs Playing Poker"
+			desc = "A painting of some dogs playing poker... is that Ian?"
+		if("persistance")
+			name = "\improper surreal painting"
+			desc = "A surreal painting focusing on clocks melting into the landscape, almost trippy to look at."
+		if("sonman")
+			name = "\improper surreal potrait"
+			desc = "A strange surreal painting of a man with an apple for a face. Sounds like something Botany would do."
+		if("thescream")
+			name = "\improper eerie painting"
+			desc = "An odd picture showing a figure with his hands clasped over his face, screaming in a cacophony of agony, disturbing"
+
+
 
 		else
 			name = "painting"
