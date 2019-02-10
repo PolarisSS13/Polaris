@@ -123,7 +123,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
 	alt_titles = list("Emergency Medical Technician" = /decl/hierarchy/outfit/job/medical/paramedic/emt)
 
-/datum/job/medintern
+/datum/job/medicalintern
 	title = "Medical Intern"
 	flag = MEDICALINTERN
 	department_flag = MEDSCI

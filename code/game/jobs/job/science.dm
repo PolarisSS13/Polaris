@@ -88,7 +88,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer","Car Engineer")
 
-/datum/job/sciintern
+/datum/job/scienceintern
 	title = "Research Assistant"
 	flag = SCIENCEINTERN
 	faction = "City"

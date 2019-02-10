@@ -151,7 +151,7 @@
 
 	alt_titles = list("Junior Clerk", "Assistant Notary")
 
-	outfit_type = /decl/hierarchy/outfit/job/heads/secretary
+	outfit_type = /decl/hierarchy/outfit/job/civilian/secretary
 
 //Cargo
 /datum/job/qm
