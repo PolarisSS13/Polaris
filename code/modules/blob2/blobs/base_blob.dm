@@ -47,20 +47,27 @@ var/list/blobs = list()
 		set_light(0)
 
 /obj/structure/blob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	world << "/obj/structure/blob/CanPass(mover=[mover], target=[target], height=[height], air_group=[air_group]) called on [src]."
 	if(air_group || (height==0))
+		world << "Returned true due to being air group or having height=0"
 		return TRUE
 	if(istype(mover) && mover.checkpass(PASSBLOB))
+		world << "Returned true due to having PASSBLOB."
 		return TRUE
 	else if(istype(mover, /mob/living))
 		var/mob/living/L = mover
 		if(L.faction == "blob")
+			world << "Returned true due to being in blob faction."
 			return TRUE
 	else if(istype(mover, /obj/item/projectile))
 		var/obj/item/projectile/P = mover
 		if(P.firer && P.firer.faction == "blob")
+			world << "Returned true due to being a projectile fired by someone in blob faction."
 			return TRUE
+		world << "Returned false due to being a projectile, with firer not in faction."
 		return FALSE
 	else
+		world << "Returned false."
 		return FALSE
 //	return ..()
 
