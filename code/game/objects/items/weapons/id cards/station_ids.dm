@@ -327,6 +327,11 @@
 	rank = "Roboticist"
 	job_access_type = /datum/job/roboticist
 
+/obj/item/weapon/card/id/science/intern
+	assignment = "Research Assistant"
+	rank = "Research Assistant"
+	job_access_type = /datum/job/sciintern
+
 /obj/item/weapon/card/id/science/head
 	name = "identification card"
 	desc = "A card which represents knowledge and reasoning."
