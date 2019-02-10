@@ -231,6 +231,11 @@
 	rank = "Paramedic"
 	job_access_type = /datum/job/paramedic
 
+/obj/item/weapon/card/id/medical/intern
+	assignment = "Medical Intern"
+	rank = "Medical Intern"
+	job_access_type = /datum/job/medintern
+
 /obj/item/weapon/card/id/medical/head
 	name = "identification card"
 	desc = "A card which represents care and compassion."
