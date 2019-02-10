@@ -10,3 +10,4 @@
 	end_on_antag_death = 1
 	antag_tags = list(MODE_REVOLUTIONARY, MODE_LOYALIST)
 	require_all_templates = 1
+	votable = 1
