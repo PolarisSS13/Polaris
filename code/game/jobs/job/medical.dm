@@ -125,7 +125,7 @@
 
 /datum/job/medintern
 	title = "Medical Intern"
-	flag = MEDINTERN
+	flag = MEDICALINTERN
 	department_flag = MEDSCI
 	department = "Medical"
 	faction = "City"

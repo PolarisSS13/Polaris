@@ -90,7 +90,7 @@
 
 /datum/job/sciintern
 	title = "Research Assistant"
-	flag = SCIINTERN
+	flag = SCIENCEINTERN
 	faction = "City"
 	department = "Science"
 	department_flag = MEDSCI
