@@ -50,6 +50,7 @@ var/const/BRIDGE				=(1<<12)
 var/const/PROSECUTOR			=(1<<13)
 var/const/JUDGE				=(1<<14)
 var/const/BARBER				=(1<<15)
+var/const/SECRETARY				=(1<<16)
 
 
 var/list/assistant_occupations = list(
@@ -118,7 +119,8 @@ var/list/civilian_positions = list(
 	"Defense Attorney",
 	"Chaplain",
 	"Civilian",
-	"Barber"
+	"Barber",
+	"City Hall Secretary"
 )
 
 

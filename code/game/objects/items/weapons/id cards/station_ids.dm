@@ -419,6 +419,11 @@
 	rank = "Defense Attorney"
 	job_access_type = /datum/job/defense
 
+/obj/item/weapon/card/id/civilian/secretary
+	assignment = "City Hall Secretary"
+	rank = "City Hall Secretary"
+	job_access_type = /datum/job/secretary
+
 /obj/item/weapon/card/id/civilian/barber
 	assignment = "Barber"
 	rank = "Barber"

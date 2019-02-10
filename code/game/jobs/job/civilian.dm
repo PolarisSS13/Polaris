@@ -131,6 +131,28 @@
 	outfit_type = /decl/hierarchy/outfit/job/civilian/barber
 	alt_titles = list("Hairdresser", "Stylist", "Beautician")
 
+/datum/job/secretary //Paperwork monkey
+	title = "City Hall Secretary"
+	flag = SECRETARY
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "City"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Mayor and the City Clerk"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian/secretary
+	economic_modifier = 1
+	access = list(access_heads, access_hop, access_maint_tunnels)
+	minimal_access = list(access_heads, access_hop, access_maint_tunnels)
+
+	minimum_character_age = 16
+	ideal_character_age = 20 //Really anyone can be this job, not just teens
+
+	alt_titles = list("Junior Clerk", "Assistant Notary")
+
+	outfit_type = /decl/hierarchy/outfit/job/heads/secretary
+
 //Cargo
 /datum/job/qm
 	title = "Factory Manager"
