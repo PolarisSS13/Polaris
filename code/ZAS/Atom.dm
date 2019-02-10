@@ -3,63 +3,32 @@
 /atom/var/pressure_resistance = ONE_ATMOSPHERE
 /atom/var/can_atmos_pass = ATMOS_PASS_YES
 
-// Used to determine if airflow/zones can pass this atom.
+// Purpose: Determines if the object can pass this atom.
+// Called by: Movement.
+// Inputs: The moving atom, target turf.
+// Outputs: Boolean if can pass.
+// Airflow and ZAS zones now uses CanZASPass() instead of this proc.
+/atom/proc/CanPass(atom/movable/mover, turf/target)
+	return !density
+
+// Purpose: Determines if airflow is allowed between T and loc.
+// Called by: Airflow.
+// Inputs: The turf the airflow is from, which may not be the same as loc. is_zone is for conditionally disallowing merging.
+// Outputs: Boolean if airflow can pass.
 /atom/proc/CanZASPass(turf/T, is_zone)
 	switch(can_atmos_pass)
-		if(ATMOS_PASS_PROC)
-			return ATMOS_PASS_YES
 		if(ATMOS_PASS_DENSITY)
 			return !density
 		else
 			return can_atmos_pass
-//	return (!density || is_zone)
-
-/*
-/atom/proc/CanAtmosPass(turf/T)
-	switch (CanAtmosPass)
-		if (ATMOS_PASS_PROC)
-			return ATMOS_PASS_YES
-		if (ATMOS_PASS_DENSITY)
-			return !density
-		else
-			return CanAtmosPass
-
-/atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	//Purpose: Determines if the object (or airflow) can pass this atom.
-	//Called by: Movement, airflow.
-	//Inputs: The moving atom (optional), target turf, "height" and air group
-	//Outputs: Boolean if can pass.
-
-	return (!density || !height || air_group)
-*/
-// Used to see if objects can freely move past this atom.
-// Airflow and ZAS zones now uses CanZASPass() instead.
-/atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	return !density
 
 /turf/can_atmos_pass = ATMOS_PASS_NO
 
-/turf/CanPass(atom/movable/mover, turf/target, height=1.5,air_group=0)
+/turf/CanPass(atom/movable/mover, turf/target)
 	if(!target) return FALSE
 
 	if(istype(mover)) // turf/Enter(...) will perform more advanced checks
 		return !density
-
-	/*
-	else // Now, doing more detailed checks for air movement and air group formation
-		if(target.blocks_air||blocks_air)
-			return 0
-
-		for(var/obj/obstacle in src)
-			if(!obstacle.CanPass(mover, target, height, air_group))
-				return 0
-		if(target != src)
-			for(var/obj/obstacle in target)
-				if(!obstacle.CanPass(mover, src, height, air_group))
-					return 0
-
-		return 1
-	*/
 
 /turf/CanZASPass(turf/T, is_zone)
 	if(T.blocks_air || src.blocks_air)
@@ -89,13 +58,6 @@
 // AIR_BLOCKED - Blocked
 // ZONE_BLOCKED - Not blocked, but zone boundaries will not cross.
 // BLOCKED - Blocked, zone boundaries will not cross even if opened.
-/*
-atom/proc/c_airblock(turf/other)
-	#ifdef ZASDBG
-	ASSERT(isturf(other))
-	#endif
-	return (AIR_BLOCKED*!CanPass(null, other, 0, 0))|(ZONE_BLOCKED*!CanPass(null, other, 1.5, 1))
-*/
 atom/proc/c_airblock(turf/other)
 	#ifdef ZASDBG
 	ASSERT(isturf(other))

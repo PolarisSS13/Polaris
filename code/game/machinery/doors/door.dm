@@ -140,12 +140,12 @@
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return !opacity
 	return !density
-/*
+
 /obj/machinery/door/CanZASPass(turf/T, is_zone)
 	if(is_zone)
-		return !block_air_zones
+		return block_air_zones ? ATMOS_PASS_NO : ATMOS_PASS_YES
 	return ..()
-*/
+
 /obj/machinery/door/proc/bumpopen(mob/user as mob)
 	if(operating)	return
 	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
