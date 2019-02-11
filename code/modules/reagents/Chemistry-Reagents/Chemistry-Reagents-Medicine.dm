@@ -566,6 +566,8 @@
 				H.vomit(1)
 			else if(H.nutrition > 30)
 				H.nutrition = max(0, H.nutrition - round(30 * removed))
+		else
+			H.adjustToxLoss(-10 * removed) // Carthatoline based, considering cost.
 
 /datum/reagent/hepanephrodaxon
 	name = "Hepanephrodaxon"
@@ -597,6 +599,8 @@
 				to_chat(H,"<span class='danger'>Something churns inside you.</span>")
 				H.adjustToxLoss(10 * removed)
 				H.vomit(0, 1)
+		else
+			H.adjustToxLoss(-12 * removed) // Carthatoline based, considering cost.
 
 /datum/reagent/cordradaxon
 	name = "Cordradaxon"
@@ -623,6 +627,8 @@
 				H.Confuse(2)
 		if(M.reagents.has_reagent("respirodaxon") || M.reagents.has_reagent("peridaxon"))
 			H.losebreath = CLAMP(H.losebreath + 1, 0, 10)
+		else
+			H.adjustOxyLoss(-30 * removed) // Deals with blood oxygenation.
 
 /datum/reagent/immunosuprizine
 	name = "Immunosuprizine"
