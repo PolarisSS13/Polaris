@@ -1,6 +1,6 @@
 /obj/vehicle/car //vroom vroom.
 	name = "motor car"
-	desc = "A ridable electric ATV designed for all terrain. Except space."
+	desc = "A motor car that runs off sustainable electricity. This is a generic model that can be spraypainted onto with a spraycan."
 	icon = 'icons/vehicles/car.dmi'
 	icon_state = "sportscar"
 	on = 1
@@ -15,6 +15,7 @@
 	mechanical = 1
 	maxhealth = 300
 	health = 300
+	var/datum/effect/effect/system/spark_spread/spark_system
 
 	var/cooldowntime
 	var/spam_flag = 0
@@ -45,6 +46,9 @@
 	key = new key_type(src)
 	turn_off()
 	generate_license()
+	src.spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system.set_up(5, 0, src)
+	spark_system.attach(src)
 	update_icon()
 
 /obj/vehicle/car/initialize() // Time for some science!
@@ -74,6 +78,7 @@
 	license_plate_no = "[license_code]-[license_number]"
 
 /obj/vehicle/car/examine(mob/user)
+	..()
 	if(has_license)
 		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
@@ -138,7 +143,6 @@
 		user_buckle_mob(C, user)
 	else
 		..(C, user)
-
 
 /obj/vehicle/car/load(mob/living/L, mob/living/user)
 	if(!istype(L)) // Only mobs on boats.
@@ -220,7 +224,20 @@
 			locked = 0
 			to_chat(user, "<span class='warning'>You swipe the [src]'s controls, deactivating [src]'s safety mechanisms.</span>")
 		return TRUE
+// ////
+//Damage related
+
+/obj/vehicle/car/bullet_act(var/obj/item/projectile/Proj)
+	..()
+	visible_message("<span class='danger'>[src] is hit by the [Proj]!</span>")
+	src.spark_system.start()
+	playsound(src, 'sound/effects/bang.ogg', 50, 1)
+
+
+/obj/vehicle/car/Destroy()
+	qdel(spark_system)
+	spark_system = null
+	return ..()
 
 /obj/vehicle/car/proc/honk_horn()
 	playsound(src, horn_sound,40,1)
-
