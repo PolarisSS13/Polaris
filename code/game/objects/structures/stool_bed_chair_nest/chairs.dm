@@ -222,6 +222,7 @@
 	anchored = 1
 	buckle_lying = 0
 	buckle_dir = SOUTH
+	plane = -25
 
 /obj/structure/bed/sofa/update_icon()
 	return
@@ -232,6 +233,23 @@
 /obj/structure/bed/sofa/left
 	icon_state = "sofaend_left"
 
+/obj/structure/bed/sofa/New()
+	..()
+	if(dir == 1)
+		buckle_dir = NORTH
+		plane = -15
+	if(dir == 2)
+		buckle_dir = SOUTH
+	if(dir == 4)
+		buckle_dir = EAST
+	if(dir == 8)
+		buckle_dir = WEST
+
+
+/obj/structure/bed/sofa/corner/New()
+	..()
+	buckle_dir = SOUTH
+	plane = -25
 
 /obj/structure/bed/sofa/right
 	icon_state = "sofaend_right"
