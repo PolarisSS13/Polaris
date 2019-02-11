@@ -836,6 +836,28 @@
 
 		"}
 
+/obj/item/weapon/book/manual/sop
+	name = "Policing: Standard Operating Procedure"
+	desc = "A official SOP book to inform of the police force's SOP."
+	icon_state = "bookSOPSec"
+	author = "NanoTrasen"
+	title = "Policing: Standard Operating Procedure"
+
+/obj/item/weapon/book/manual/sop/New()
+	..()
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<iframe width='100%' height='97%' src="[config.wikiurl]index.php?title=Guide_to_Policing&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+
+		</html>
+
+		"}
+
 
 
 /obj/item/weapon/book/manual/medical_diagnostics_manual
