@@ -4,6 +4,7 @@
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/black
 	shoes = /obj/item/clothing/shoes/boots/jackboots
+	l_hand = /obj/item/weapon/book/manual/sop
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/sec
 	backpack_contents = list(/obj/item/weapon/handcuffs = 1)

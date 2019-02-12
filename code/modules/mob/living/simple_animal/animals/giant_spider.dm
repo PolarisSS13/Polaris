@@ -15,8 +15,8 @@
 
 	faction = "spiders"
 	intelligence_level = SA_ANIMAL
-	maxHealth = 200
-	health = 200
+	maxHealth = 100
+	health = 100
 	pass_flags = PASSTABLE
 	move_to_delay = 6
 	speed = 3
@@ -110,8 +110,8 @@ Nurse Family
 	icon_living = "webslinger"
 	icon_dead = "webslinger_dead"
 
-	maxHealth = 90
-	health = 90
+	maxHealth = 70
+	health = 70
 
 	projectilesound = 'sound/weapons/thudswoosh.ogg'
 	projectiletype = /obj/item/projectile/bola
@@ -244,8 +244,8 @@ Hunter Family
 	icon_living = "tunneler"
 	icon_dead = "tunneler_dead"
 
-	maxHealth = 120
-	health = 120
+	maxHealth = 90
+	health = 90
 	move_to_delay = 4
 
 	melee_damage_lower = 10
@@ -274,8 +274,8 @@ Guard Family
 	icon_living = "pepper"
 	icon_dead = "pepper_dead"
 
-	maxHealth = 210
-	health = 210
+	maxHealth = 175
+	health = 175
 
 	melee_damage_lower = 8
 	melee_damage_upper = 15
@@ -310,8 +310,8 @@ Guard Family
 	icon_living = "spark"
 	icon_dead = "spark_dead"
 
-	maxHealth = 210
-	health = 210
+	maxHealth = 175
+	health = 175
 	taser_kill = 0 //It -is- the taser.
 
 	melee_damage_lower = 10
