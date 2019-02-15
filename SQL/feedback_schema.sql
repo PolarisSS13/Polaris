@@ -116,5 +116,6 @@ CREATE TABLE `erro_privacy` (
   `datetime` datetime NOT NULL,
   `ckey` varchar(32) NOT NULL,
   `option` varchar(128) NOT NULL,
+  `consent` int(1) NOT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;

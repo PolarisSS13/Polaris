@@ -13,90 +13,93 @@
 	..()
 	. += "It's currently [src.on ? "on" : "off"]."
 
-/obj/item/device/microphone/attack_self(mob/user as mob)
+/obj/item/device/microphone/verb/toggle_microphone()
+	set name = "Toggle Microphone"
+	set category = "Object"
+
 	src.on = !(src.on)
-	user << "You switch [src] [src.on ? "on" : "off"]."
-	if (src.on && prob(5))
-		if (locate(/obj/loudspeaker) in range(2, user))
-			for (var/obj/loudspeaker/S in range(7, user))
+	usr << "You switch [src] [src.on ? "on" : "off"]."
+	if (src.on && prob(50))
+		if (locate(/obj/loudspeaker) in range(2, usr))
+			for (var/obj/loudspeaker/S in range(7, usr))
 				S.visible_message("<span style=\"color:red\">[S] lets out a horrible [pick("shriek", "squeal", "noise", "squawk", "screech", "whine", "squeak")]!</span>")
 				playsound(S.loc, 'sound/items/mic_feedback.ogg', 30, 1)
 
-/obj/item/device/microphone/hear_talk(mob/M as mob, msg, real_name, lang_id)
+/obj/item/device/microphone/attack_self(mob/M as mob, msg)
 	if (!src.on)
+		return
+	if (usr.client)
+		if(usr.client.prefs.muted & MUTE_IC)
+			src << "<span class='warning'>You cannot speak in IC (muted).</span>"
+			return
+	if(!ishuman(usr))
+		usr << "<span class='warning'>You don't know how to use this!</span>"
 		return
 	var/turf/T = get_turf(src)
 	if (M in range(1, T))
-		src.talk_into(M, msg, null, real_name, lang_id)
+		msg = sanitize(input(usr, "What is your message?", "Microphone", null)  as text)
+		if(!msg)
+			return
+		msg = capitalize(msg)
 
-/obj/item/device/microphone/talk_into(mob/M as mob, messages, param, real_name, lang_id)
-	if (!src.on)
-		return
 	var/speakers = 0
-	var/turf/T = get_turf(src)
 	for (var/obj/loudspeaker/S in range(7, T))
 		speakers ++
 	if (!speakers)
+		usr << "<span class='warning'>You realise that there's no loudspeaker nearby for this to project to.</span>"
 		return
-	speakers += font_amp // 2 ain't huge so let's give ourselves a little boost
-//	var/stuff = M.say_quote(messages[1])
-//	var/stuff_b = M.say_quote(messages[2])
-	var/list/mobs_messaged = list()
-	for (var/obj/loudspeaker/S in range(7, T))
-		for (var/mob/H in hearers(S, null))
-			if (H in mobs_messaged)
-				continue
-//			var/U = H.say_understands(M, lang_id)
-			H.visible_message("<span style=\"color:[font_color]\"><font size=[min(src.max_font, max(0, speakers - round(get_dist(H, S) / 2), 1))]><b>[M]</b> broadcasts, ''[messages]''</font></span>")
-			mobs_messaged += H
+
+	M.visible_message("<font size=3><b>[M]</b> says, <span style=\"color:[font_color]\">''[msg]''</font></span>")
+
 	if (prob(10) && locate(/obj/loudspeaker) in range(2, T))
 		for (var/obj/loudspeaker/S in range(7, T))
 			S.visible_message("<span style=\"color:red\">[S] lets out a horrible [pick("shriek", "squeal", "noise", "squawk", "screech", "whine", "squeak")]!</span>")
 			playsound(S.loc, 'sound/items/mic_feedback.ogg', 30, 1)
 
-/obj/mic_stand
+
+/obj/item/device/mic_stand
 	name = "microphone stand"
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "micstand"
 	desc = "A stand that typically holds a mic in it."
 //	mats = 10
 	var/obj/item/device/microphone/myMic = null
+	var/mic_type = /obj/item/device/microphone
 
-/obj/mic_stand/New()
+/obj/item/device/mic_stand/New()
 	spawn(1)
 		if (!myMic)
-			myMic = new(src)
+			myMic = new mic_type(src)
 	return ..()
 
-/obj/mic_stand/attack_hand(mob/user as mob)
-	if (!myMic)
-		return ..()
-	user.put_in_hands(myMic)
-	myMic = null
-	src.update_icon()
-	return ..()
-
-/obj/mic_stand/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/mic_stand/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/device/microphone))
 		if (myMic)
-			user << "/red There's already a microphone on [src]!"
+			user << "<span class='warning'>There's already a microphone on [src]!</span>"
 			return
-		user << "/blue You place the [W] on [src]."
+		user << "You place the [W] on [src]."
 		myMic = W
-//		user.u_equip(W)
+		user.drop_from_inventory(W, src)
 		W.forceMove(src)
+//		user.update_inv_l_hand(0)
+//		user.update_inv_r_hand()
 		src.update_icon()
 	else
 		return ..()
 
-/obj/mic_stand/hear_talk(mob/M as mob, msg, real_name)
-	if (!myMic || !myMic.on)
-		return
-	var/turf/T = get_turf(src)
-	if (M in range(1, T))
-		myMic.talk_into(M, msg)
+/obj/item/device/mic_stand/attack_hand(mob/living/user)
+	if (!myMic)
+		user << "<span class='warning'>There's no microphone on [src]!</span>"
+		return ..()
+	playsound(loc, 'sound/items/mic_feedback.ogg', 30, 1)
 
-/obj/mic_stand/update_icon()
+	user.put_in_hands(myMic)
+	myMic = null
+	update_icon()
+
+	return ..()
+
+/obj/item/device/mic_stand/update_icon()
 	if (myMic)
 		src.icon_state = "micstand"
 	else
@@ -123,20 +126,13 @@
 	name = "judge's mic"
 	font_color = "purple"
 
-/obj/mic_stand/prosecutor/New()
-	spawn(1)
-		if (!myMic)
-			myMic = /obj/item/device/microphone/prosecutor(src)
-	return ..()
+/obj/item/device/mic_stand/prosecutor
+	mic_type = /obj/item/device/microphone/prosecutor
 
-/obj/mic_stand/defense/New()
-	spawn(1)
-		if (!myMic)
-			myMic = /obj/item/device/microphone/defense(src)
-	return ..()
 
-/obj/mic_stand/judge/New()
-	spawn(1)
-		if (!myMic)
-			myMic = /obj/item/device/microphone/judge(src)
-	return ..()
+/obj/item/device/mic_stand/defense
+	mic_type = /obj/item/device/microphone/defense
+
+
+/obj/item/device/mic_stand/judge
+	mic_type = /obj/item/device/microphone/judge
