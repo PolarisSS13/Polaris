@@ -87,3 +87,22 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer","Car Engineer")
+
+/datum/job/scienceintern
+	title = "Research Assistant"
+	flag = SCIENCEINTERN
+	faction = "City"
+	department = "Science"
+	department_flag = MEDSCI
+	total_positions = 5
+	spawn_positions = 3
+	supervisors = "the research director"
+	selection_color = "#633D63"
+	idtype = /obj/item/weapon/card/id/science/intern
+	economic_modifier = 1
+	access = list(access_research, access_maint_tunnels)
+	minimal_access = list(access_research, access_maint_tunnels)
+	minimum_character_age = 13
+	minimal_player_age = 0
+
+	outfit_type = /decl/hierarchy/outfit/job/science/intern

@@ -19,7 +19,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 20
 
 	minimum_character_age = 30
-	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here
+	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here //OwO What's this?
 
 	outfit_type = /decl/hierarchy/outfit/job/heads/captain
 //	alt_titles = list("Site Manager", "Overseer")

@@ -39,3 +39,8 @@
 	pda_type = /obj/item/device/pda/roboticist
 	backpack = /obj/item/weapon/storage/backpack
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/norm
+
+/decl/hierarchy/outfit/job/science/intern
+	name = OUTFIT_JOB_NAME("Science Intern")
+	id_type = /obj/item/weapon/card/id/science/intern
+	uniform = /obj/item/clothing/under/rank/orderly

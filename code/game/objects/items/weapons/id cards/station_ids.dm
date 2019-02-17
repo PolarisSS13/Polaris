@@ -231,6 +231,11 @@
 	rank = "Paramedic"
 	job_access_type = /datum/job/paramedic
 
+/obj/item/weapon/card/id/medical/intern
+	assignment = "Medical Intern"
+	rank = "Medical Intern"
+	job_access_type = /datum/job/medicalintern
+
 /obj/item/weapon/card/id/medical/head
 	name = "identification card"
 	desc = "A card which represents care and compassion."
@@ -322,6 +327,11 @@
 	rank = "Roboticist"
 	job_access_type = /datum/job/roboticist
 
+/obj/item/weapon/card/id/science/intern
+	assignment = "Research Assistant"
+	rank = "Research Assistant"
+	job_access_type = /datum/job/scienceintern
+
 /obj/item/weapon/card/id/science/head
 	name = "identification card"
 	desc = "A card which represents knowledge and reasoning."
@@ -408,6 +418,11 @@
 	assignment = "Defense Attorney"
 	rank = "Defense Attorney"
 	job_access_type = /datum/job/defense
+
+/obj/item/weapon/card/id/civilian/secretary
+	assignment = "City Hall Secretary"
+	rank = "City Hall Secretary"
+	job_access_type = /datum/job/secretary
 
 /obj/item/weapon/card/id/civilian/barber
 	assignment = "Barber"
