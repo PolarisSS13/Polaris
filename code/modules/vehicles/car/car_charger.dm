@@ -14,6 +14,7 @@
 	/obj/item/weapon/car_charger/full = 600)
 
 /obj/vehicle/car/attackby(obj/item/weapon/car_charger/W as obj, mob/user as mob)
+	..()
 	var/obj/item/weapon/cell/ch_cell = get_cell() //get the current cell
 	if(ch_cell)
 		if(istype(W, /obj/item/weapon/car_charger))

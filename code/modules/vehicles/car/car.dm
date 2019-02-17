@@ -51,11 +51,10 @@
 	spark_system.attach(src)
 	update_icon()
 
-/obj/vehicle/car/initialize() // Time for some science!
-	..()
-	move_speed = 0.1
-	move_delay = 0
-	land_speed = 0.5
+
+/obj/vehicle/car/remove_cell(var/mob/living/carbon/human/H)
+	to_chat(H, "You try to remove [cell] but it appears to be welded firmly inside.")
+
 
 /obj/vehicle/car/turn_on()
 	if(!mechanical || stat)
