@@ -19,7 +19,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 20
 
 	minimum_character_age = 30
-	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here
+	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here //OwO What's this?
 
 	outfit_type = /decl/hierarchy/outfit/job/heads/captain
 //	alt_titles = list("Site Manager", "Overseer")
@@ -109,8 +109,8 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/heads/judge
 	economic_modifier = 13
-	access = list(access_judge, access_sec_doors, access_maint_tunnels, access_heads)
-	minimal_access = list(access_judge, access_sec_doors, access_heads)
+	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
 	minimal_player_age = 7
 	minimum_character_age = 25
 	alt_titles = list("Magistrate")
