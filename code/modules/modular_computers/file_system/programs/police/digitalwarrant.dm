@@ -15,7 +15,7 @@ var/warrant_uid = 0
 	size = 8
 	requires_ntnet = 1
 	available_on_ntnet = 1
-	required_access = access_security
+	required_access = access_warrant
 	usage_flags = PROGRAM_ALL
 	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 
@@ -24,7 +24,9 @@ var/warrant_uid = 0
 	var/datum/data/record/warrant/activewarrant
 
 /datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = host.initial_data()
+	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
 
 	if(activewarrant)
 		data["warrantname"] = activewarrant.fields["namewarrant"]
