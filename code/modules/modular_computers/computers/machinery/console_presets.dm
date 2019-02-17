@@ -30,6 +30,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/alarm_monitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/rcon_console())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 
 // ===== MEDICAL CONSOLE =====
@@ -39,6 +40,7 @@
 
 /obj/machinery/modular_computer/console/preset/medical/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 
 // ===== RESEARCH CONSOLE =====
@@ -50,6 +52,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 
 // ===== COMMAND CONSOLE =====
@@ -61,6 +64,7 @@
 /obj/machinery/modular_computer/console/preset/command/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 
 
 // ===== SECURITY CONSOLE =====
@@ -80,3 +84,4 @@
 /obj/machinery/modular_computer/console/preset/civilian/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())

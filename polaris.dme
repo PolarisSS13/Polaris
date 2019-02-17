@@ -2114,6 +2114,7 @@
 #include "code\modules\modular_computers\file_system\programs\antagonist\dos.dm"
 #include "code\modules\modular_computers\file_system\programs\antagonist\revelation.dm"
 #include "code\modules\modular_computers\file_system\programs\generic\game.dm"
+#include "code\modules\modular_computers\file_system\programs\generic\wordprocessor.dm"
 #include "code\modules\modular_computers\file_system\programs\medical\suit_sensors.dm"
 #include "code\modules\modular_computers\hardware\battery_module.dm"
 #include "code\modules\modular_computers\hardware\card_slot.dm"
