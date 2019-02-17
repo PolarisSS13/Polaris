@@ -238,6 +238,7 @@
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/security(src)
 		new /obj/item/clothing/shoes/boots/winter/security(src)
 		new /obj/item/device/flashlight/maglight(src)
+		new /obj/item/device/holowarrant(src)
 		return
 
 
