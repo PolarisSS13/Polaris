@@ -5,7 +5,7 @@
 	program_icon_state = "word"
 	size = 4
 	requires_ntnet = 0
-	available_on_ntnet = 0
+	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_wordprocessor/
 	var/browsing
 	var/open_file
@@ -13,7 +13,7 @@
 	var/error
 	var/is_edited
 
-/datum/computer_file/program/wordprocessor/proc/get_file(var/filename)
+/datum/computer_file/program/wordprocessor/get_file(var/filename)
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
 	if(!HDD)
 		return
@@ -47,7 +47,7 @@
 	is_edited = 0
 	return 1
 
-/datum/computer_file/program/wordprocessor/proc/create_file(var/newname, var/data = "")
+/datum/computer_file/program/wordprocessor/create_file(var/newname, var/data = "")
 	if(!newname)
 		return
 	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
@@ -184,8 +184,11 @@
 /datum/nano_module/program/computer_wordprocessor
 	name = "Word Processor"
 
-/datum/nano_module/program/computer_wordprocessor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	var/list/data = host.initial_data()
+/datum/nano_module/program/computer_wordprocessor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
+
 	var/datum/computer_file/program/wordprocessor/PRG
 	PRG = program
 
@@ -226,7 +229,7 @@
 		data["filedata"] = pencode2html(PRG.loaded_data)
 		data["filename"] = "UNNAMED"
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "word_processor.tmpl", "Word Processor", 575, 700, state = state)
 		ui.auto_update_layout = 1
