@@ -97,7 +97,7 @@ var/activetype = null //Is this a search or arrest warrtant?
 		</br>
 		<b>Warrant issued by: </b> [activeauth]</br>
 		</br>
-		Vessel or habitat: _<u>NSS Exodus</u>____</br>
+		Vessel or habitat: _<u>Geminus City</u>____</br>
 		</BODY></HTML>
 		"}
 		show_browser(user, output, "window=Search warrant for [activename]")
