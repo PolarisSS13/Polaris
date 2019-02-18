@@ -47,6 +47,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/gun/projectile/sec/flash(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/weapon/storage/box/gun_permits(src)
 		return
 
 /obj/structure/closet/secure_closet/hop2
@@ -237,6 +238,7 @@
 		new /obj/item/clothing/suit/storage/hooded/wintercoat/security(src)
 		new /obj/item/clothing/shoes/boots/winter/security(src)
 		new /obj/item/device/flashlight/maglight(src)
+		new /obj/item/device/holowarrant(src)
 		return
 
 

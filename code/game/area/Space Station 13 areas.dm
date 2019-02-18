@@ -29,7 +29,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_equip = 0
 	power_environ = 0
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg','sound/ambience/serspaceamb1.ogg')
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/outdoors/dirt
 
 area/space/atmosalert()
 	return
@@ -90,14 +90,17 @@ area/space/atmosalert()
 	name = "\improper Emergency Shuttle Station"
 	icon_state = "shuttle2"
 	dynamic_lighting = 0
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/shuttle/escape/centcom
 	name = "\improper Emergency Shuttle CentCom"
 	icon_state = "shuttle"
+	base_turf = /turf/simulated/sky
 
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
+	base_turf = /turf/simulated/sky
 
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
@@ -2033,13 +2036,13 @@ area/space/atmosalert()
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/techmaint
 
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
-	base_turf = /turf/space
+	base_turf = /turf/simulated/floor/tiled/techmaint
 
 /area/janitor/
 	name = "\improper Custodial Closet"

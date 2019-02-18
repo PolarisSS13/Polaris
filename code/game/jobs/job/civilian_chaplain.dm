@@ -4,6 +4,7 @@
 	flag = CHAPLAIN
 	faction = "City"
 	department = "Civilian"
+	department_flag = CIVILIAN
 	total_positions = 1
 	spawn_positions = 1
 	minimum_character_age = 18

@@ -4,6 +4,8 @@
 	nanomodule_path = /datum/nano_module/crew_monitor
 	ui_header = "crew_green.gif"
 	program_icon_state = "crew"
+//	program_key_state = "med_key"
+//	program_menu_icon = "heart"
 	extended_desc = "This program connects to life signs monitoring system to provide basic information on crew health."
 	required_access = access_medical
 	requires_ntnet = 1
@@ -69,4 +71,3 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
-

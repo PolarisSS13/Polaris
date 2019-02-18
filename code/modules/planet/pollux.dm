@@ -122,7 +122,8 @@ var/datum/planet/sif/planet_sif = null
 		WEATHER_STORM		= new /datum/weather/sif/storm(),
 		WEATHER_HAIL		= new /datum/weather/sif/hail(),
 		WEATHER_BLOOD_MOON	= new /datum/weather/sif/blood_moon(),
-		WEATHER_ACID_RAIN = new /datum/weather/sif/acid_rain()
+		WEATHER_ACID_RAIN	= new /datum/weather/sif/acid_rain(),
+		WEATHER_RADSTORM	= new /datum/weather/sif/rad_storm()
 		)
 	roundstart_weather_chances = list(
 		WEATHER_CLEAR		= 30,
@@ -418,7 +419,6 @@ var/datum/planet/sif/planet_sif = null
 	name = "acid rain"
 	icon_state = "acid_rain"
 	light_modifier = 0.5
-	effect_message = "<span class='warning'>The hail smacks into you!</span>"
 
 	transition_chances = list(
 		WEATHER_RAIN = 45,
@@ -459,3 +459,20 @@ var/datum/planet/sif/planet_sif = null
 			L.water_act(1)
 			if(show_message)
 				to_chat(L, effect_message)
+
+/datum/weather/sif/rad_storm
+	name = "radiation storm"
+	icon_state = "rad_storm"
+	light_modifier = 0.3
+	flight_failure_modifier = 10
+
+	transition_chances = list(
+		WEATHER_RADSTORM = 100,
+		)
+
+	observed_message = "A cloud of intense radiation passes through the area, it drapes the air."
+	transition_messages = list(
+		"You feel waves of heat wash over you! Find shelter!",
+		"The air begins to grow warm in a strange, inconsistent way.",
+		"The clouds begin to turn green, something seems terribly wrong."
+	)

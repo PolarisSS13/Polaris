@@ -26,7 +26,7 @@ body {
 }
 
 hr {
-    background-color: #40628a;
+    background-color: #7e3f8a;
     height: 1px;
 }
 
@@ -37,7 +37,7 @@ hr {
     text-align: center;
     color: #ffffff;
     text-decoration: none;
-    background: #40628a;
+    background: #7e3f8a;
     border: 1px solid #161616;
     padding: 0px 4px 4px 4px;
     margin: 0 2px 2px 0;
@@ -52,7 +52,7 @@ hr {
     height: 31px;
     text-align: center;
 	text-decoration: none;
-	background: #40628a;
+	background: #7e3f8a;
     border: 1px solid #161616;
 	margin: 0 2px 2px 0;
     cursor: default;
@@ -72,7 +72,7 @@ a:hover, .zoomLink:hover, .linkActive:hover {
 }
 
 a.white, a.white:link, a.white:visited, a.white:active {
-    color: #40628a;
+    color: #7e3f8a;
     text-decoration: none;
     background: #ffffff;
     border: 1px solid #161616;
@@ -83,7 +83,7 @@ a.white, a.white:link, a.white:visited, a.white:active {
 
 a.white:hover {
     color: #ffffff;
-    background: #40628a;
+    background: #7e3f8a;
 }
 
 .hidden {
@@ -318,7 +318,7 @@ div.notice {
 .statusDisplay {
     background: #000000;
     color: #ffffff;
-    border: 1px solid #40628a;
+    border: 1px solid #7e3f8a;
     padding: 4px;
     margin: 3px 0;
 	overflow: hidden;
@@ -327,7 +327,7 @@ div.notice {
 .statusDisplayRecords {
     background: #000000;
     color: #ffffff;
-    border: 1px solid #40628a;
+    border: 1px solid #7e3f8a;
     padding: 4px;
     margin: 3px 0;
     overflow-x: hidden;
@@ -342,7 +342,7 @@ div.notice {
 	border-top: 0 none;
 	border-left: 0 none;
 	border-right: 0 none;
-	border-bottom: 2px inset #40628a;
+	border-bottom: 2px inset #7e3f8a;
     margin: 3px 0;
 	overflow: hidden;
 }
@@ -361,7 +361,7 @@ div.notice {
 .block {
     padding: 8px;
     margin: 10px 4px 4px 4px;
-    border: 1px solid #40628a;
+    border: 1px solid #7e3f8a;
     background-color: #202020;
 }
 
@@ -393,7 +393,7 @@ div.notice {
 .displayBarFill {
     width: 0%;
     height: 100%;
-    background: #40628a;
+    background: #7e3f8a;
     overflow: hidden;
     float: left;
 }
@@ -406,7 +406,7 @@ div.notice {
     float: left;
     margin: 0 5px 0 0;
     overflow: hidden;
-	background: #40628a;
+	background: #7e3f8a;
 }
 
 .displayBarVerticalFill {
@@ -429,7 +429,7 @@ div.notice {
     float: left;
     margin: 0 5px 0 0;
     overflow: hidden;
-	background: #40628a;
+	background: #7e3f8a;
 }
 
 .displayBarBeakerFill {
@@ -781,9 +781,9 @@ div.homeScreen {
 	height: 18px;
     background: rgba(64, 98, 138, 0.15);
 	color: #ffffff;
-	border-left: 1px inset #40628a;
-	border-top: 1px inset #40628a;
-	border-bottom: 1px inset #40628a;
+	border-left: 1px inset #7e3f8a;
+	border-top: 1px inset #7e3f8a;
+	border-bottom: 1px inset #7e3f8a;
 
 }
 
@@ -797,9 +797,9 @@ div.homeScreen {
 	height: 18px;
     background: rgba(64, 98, 138, 0.15);
 	color: #ffffff;
-	border-right: 1px inset #40628a;
-	border-top: 1px inset #40628a;
-	border-bottom: 1px inset #40628a;
+	border-right: 1px inset #7e3f8a;
+	border-top: 1px inset #7e3f8a;
+	border-bottom: 1px inset #7e3f8a;
 }
 
 .dialPadClear:hover{

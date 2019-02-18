@@ -9,4 +9,4 @@
 	end_on_antag_death = 0
 	antag_tags = list(MODE_TECHNOMANCER, MODE_NINJA)
 	require_all_templates = 1
-	votable = 1
+	votable = 0

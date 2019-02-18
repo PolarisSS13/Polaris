@@ -42,3 +42,11 @@
 	name = "drone identification card"
 	desc = "A card issued by the EIO, indicating that the owner is a Drone Intelligence. Drones are mandated to carry this card within SolGov space, by law."
 	icon_state = "permit_drone"
+
+//Some spare gun permits in a box
+/obj/item/weapon/storage/box/gun_permits
+	name = "box of spare gun permits"
+	desc = "A box of spare gun permits."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "permit"
+	starts_with = list(	/obj/item/clothing/accessory/permit/gun = 8)

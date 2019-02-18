@@ -1,3 +1,4 @@
+/* //Does not take commented code into account, not necessary anyways
 /datum/unit_test/research_designs_shall_be_unique
 	name = "RESEARCH: Designs Shall Be Unique"
 
@@ -40,6 +41,7 @@
 			issues++
 
 	return issues
+*/
 
 /datum/unit_test/research_designs_have_valid_materials
 	name = "RESEARCH: Designs Shall Have Valid Materials and Chemicals"

@@ -4,10 +4,19 @@
 	l_ear = /obj/item/device/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/black
 	shoes = /obj/item/clothing/shoes/boots/jackboots
+	l_hand = /obj/item/weapon/book/manual/sop
 	backpack = /obj/item/weapon/storage/backpack/security
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/sec
-	backpack_contents = list(/obj/item/weapon/handcuffs = 1)
+	backpack_contents = list(/obj/item/weapon/handcuffs = 1,
+	/obj/item/clothing/accessory/permit/gun = 1,
+	/obj/item/device/holowarrant = 1)
+
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/sec
+
+/decl/hierarchy/outfit/job/security/post_equip(mob/living/carbon/human/H)
+	..()
+	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+		permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/security/hos
 	name = OUTFIT_JOB_NAME("Chief of Police")

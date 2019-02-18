@@ -21,3 +21,15 @@
 		/area/turbolift/geminus_ground_mining,
 		/area/turbolift/geminus_top_mining
 		)
+
+/obj/turbolift_map_holder/geminushospital
+	name = "City Hospital Elevator"
+	depth = 2
+	lift_size_x = 3
+	lift_size_y = 3
+	icon = 'icons/obj/turbolift_preview_3x3.dmi'
+
+	areas_to_use = list(
+		/area/turbolift/geminus_ground_hospital,
+		/area/turbolift/geminus_top_hospital
+		)

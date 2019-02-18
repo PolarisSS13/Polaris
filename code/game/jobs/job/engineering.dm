@@ -33,6 +33,7 @@
 	title = "City Engineer"
 	flag = ENGINEER
 	department_flag = ENGSEC
+	faction = "City"
 	department = "Engineering"
 	total_positions = 5
 	spawn_positions = 5
@@ -51,6 +52,8 @@
 	title = "Firefighter"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
+//Actually let's disable firefighters until we get new OP fire systems in.
+//	faction = "City"
 	department = "Engineering"
 	total_positions = 3
 	spawn_positions = 2

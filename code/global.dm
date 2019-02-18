@@ -108,6 +108,7 @@ var/datum/moduletypes/mods = new()
 var/gravity_is_on = 1
 
 var/join_motd = null
+var/join_tos = null
 
 var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
 var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.

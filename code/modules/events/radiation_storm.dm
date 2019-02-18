@@ -17,6 +17,8 @@
 /datum/event/radiation_storm/tick()
 	if(activeFor == enterBelt)
 		command_announcement.Announce("The radiation storm has arrived. Please remain in a sheltered area until the storm has passed.", "Anomaly Alert")
+		for(var/datum/planet/planet in SSplanets.planets)
+			planet.weather_holder.change_weather(WEATHER_RADSTORM)
 		radiate()
 
 	if(activeFor >= enterBelt && activeFor <= leaveBelt)
@@ -28,6 +30,9 @@
 
 	else if(activeFor == leaveBelt)
 		command_announcement.Announce("The radiation storm has cleared the city. Please allow for up to one minute while radiation levels dissipate, and report to the hospital if you experience any unusual symptoms.", "Anomaly Alert")
+		for(var/datum/planet/planet in SSplanets.planets)
+			planet.weather_holder.change_weather(WEATHER_ACID_RAIN)
+
 /datum/event/radiation_storm/proc/radiate()
 	var/radiation_level = rand(15, 35)
 	for(var/z in using_map.station_levels)

@@ -1,16 +1,18 @@
-#pretending we're C because otherwise ruby will initialize, even with "language: dm".
 language: c
 sudo: false
 
+notifications:
+  webhooks:
+    urls:
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: never     # options: [always|never|change] default: always
+
 env:
-  global:
+    global:
     - BYOND_MAJOR="512"
-    - BYOND_MINOR="1414"
-    - MACRO_COUNT=4
-  matrix:
-    - TEST_DEFINE="MAP_TEST" TEST_FILE="code/_map_tests.dm" RUN="0"
-    - TEST_DEFINE="AWAY_MISSION_TEST" TEST_FILE="code/_away_mission_tests.dm" RUN="0"
-    - TEST_DEFINE="UNIT_TEST" TEST_FILE="code/_unit_tests.dm" RUN="1"
+    - BYOND_MINOR="1452"
+    - DM_BUILDFILE="polaris.dme"
 
 cache:
   directories:
@@ -27,25 +29,15 @@ before_script:
   - chmod +x ./install-byond.sh
   - ./install-byond.sh
 
-install:
-  - pip install --user PyYaml -q
-  - pip install --user beautifulsoup4 -q
+after_success:
+  - chmod +x ./send-to-discord.sh
+  - ./send-to-discord.sh success $WEBHOOK_URL
+
+after_failure:
+  - chmod +x ./send-to-discord.sh
+  - ./send-to-discord.sh failure $WEBHOOK_URL
 
 script:
-  - shopt -s globstar
   - (! grep 'step_[xy]' maps/**/*.dmm)
-  - (! grep -Pn '( |\t|;|{)tag( ?)=' maps/**/*.dmm)
-  - (! find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano)
-  - (! grep -En "<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>" **/*.dm)
-  - awk -f tools/indentation.awk **/*.dm
-  - md5sum -c - <<< "88490b460c26947f5ec1ab1bb9fa9f17 *html/changelogs/example.yml"
-  - (num=`grep -E '\\\\(red|blue|green|black|b|i[^mc])' **/*.dm | wc -l`; echo "$num escapes (expecting ${MACRO_COUNT} or less)"; [ $num -le ${MACRO_COUNT} ])
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
-  - python tools/TagMatcher/tag-matcher.py ../..
-  # Run our test
-  - cp config/example/* config/
-  - echo "#define ${TEST_DEFINE} 1" > ${TEST_FILE}
   - DreamMaker polaris.dme
-  - if [ $RUN -eq 1 ]; then DreamDaemon polaris.dmb -invisible -trusted -core 2>&1 | tee log.txt; fi
-  - if [ $RUN -eq 1 ]; then grep "All Unit Tests Passed" log.txt; fi
-
