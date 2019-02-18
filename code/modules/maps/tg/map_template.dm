@@ -27,7 +27,7 @@
 /datum/map_template/proc/preload_size(path, orientation = 0)
 	var/bounds = SSmapping.maploader.load_map(file(path), 1, 1, 1, cropMap=FALSE, measureOnly=TRUE, orientation=orientation)
 	if(bounds)
-		if(orientation & (EAST | WEST))
+		if(orientation & (90 | 270))
 			width = bounds[MAP_MAXY]
 			height = bounds[MAP_MAXX]
 		else
