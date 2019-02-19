@@ -10,3 +10,11 @@
 	required_players_secret = 5
 	required_enemies = 3
 	end_on_antag_death = 0
+
+
+/datum/game_mode/thug/post_setup()
+	for (var/mob/living/carbon/human/C in mob_list)
+		if(C.mind.special_role == "Thug")
+			for(var/datum/antagonist/thug/W)
+				W.get_gang(C)
+	..()

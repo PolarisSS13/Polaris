@@ -35,7 +35,7 @@
 	..(user)
 	if(cash_open)
 		if(cash_stored)
-			user << "It holds [cash_stored] Thaler\s of money."
+			user << "It holds [cash_stored] credit\s of money."
 		else
 			user << "It's completely empty."
 
@@ -125,7 +125,7 @@
 				transaction_amount += t_amount
 				price_list += t_amount
 				playsound(src, 'sound/machines/twobeep.ogg', 25)
-				src.visible_message("\icon[src][transaction_purpose]: [t_amount] Thaler\s.")
+				src.visible_message("\icon[src][transaction_purpose]: [t_amount] credit\s.")
 			if("set_amount")
 				var/item_name = locate(href_list["item"])
 				var/n_amount = round(input("Enter amount", "New amount") as num)
@@ -207,7 +207,7 @@
 		return 1
 	else
 		confirm_item = I
-		src.visible_message("\icon[src]<b>Total price:</b> [transaction_amount] Thaler\s. Swipe again to confirm.")
+		src.visible_message("\icon[src]<b>Total price:</b> [transaction_amount] credit\s. Swipe again to confirm.")
 		playsound(src, 'sound/machines/twobeep.ogg', 25)
 		return 0
 
@@ -363,11 +363,11 @@
 		src.visible_message("\icon[src]<span class='warning'>Unable to find item in database.</span>")
 		return
 	// Call out item cost
-	src.visible_message("\icon[src]\A [O]: [price ? "[price] Thaler\s" : "free of charge"].")
+	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"].")
 	// Note the transaction purpose for later use
 	if(transaction_purpose)
 		transaction_purpose += "<br>"
-	transaction_purpose += "[O]: [price] Thaler\s"
+	transaction_purpose += "[O]: [price] credit\s"
 	transaction_amount += price
 	for(var/previously_scanned in item_list)
 		if(price == price_list[previously_scanned] && O.name == previously_scanned)
