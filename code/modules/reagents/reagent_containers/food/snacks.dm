@@ -3704,7 +3704,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/eggroll
 	name = "egg roll"
-	desc = "Free with orders over 10 thalers."
+	desc = "Free with orders over 10 credits."
 	icon_state = "eggroll"
 	filling_color = "#799ACE"
 	center_of_mass = list("x"=17, "y"=4)
