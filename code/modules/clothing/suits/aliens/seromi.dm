@@ -134,6 +134,7 @@
 	item_state = "tesh_cloak_brg"
 
 /obj/item/clothing/suit/storage/seromi/cloak/jobs
+	icon = 'icons/mob/species/seromi/deptcloak.dmi'
 	icon_override = 'icons/mob/species/seromi/deptcloak.dmi'
 
 /obj/item/clothing/suit/storage/seromi/cloak/jobs/cargo
@@ -229,11 +230,11 @@
 /obj/item/clothing/suit/storage/seromi/cloak/jobs/service
 	name = "Service cloak"
 	desc =  "A soft Teshari cloak made for the Service department"
-	icon_state = "tesh_uniform_serv"
-	item_state = "tesh_uniform_serv"
+	icon_state = "tesh_cloak_serv"
+	item_state = "tesh_cloak_serv"
 
 /obj/item/clothing/suit/storage/seromi/cloak/jobs/iaa
 	name = "Iaa cloak"
 	desc =  "A soft Teshari cloak made for the Internal Affairs Agent"
-	icon_state = "tesh_uniform_iaa"
-	item_state = "tesh_uniform_iaa"
+	icon_state = "tesh_cloak_iaa"
+	item_state = "tesh_cloak_iaa"
