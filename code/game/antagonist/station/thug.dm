@@ -18,8 +18,8 @@ var/datum/antagonist/thug/thugs
 	can_use_aooc = TRUE
 	antaghud_indicator = "thug"
 	antag_indicator = "thug"
-	initial_spawn_req = 3
-	initial_spawn_target = 6
+	initial_spawn_req = 2
+	initial_spawn_target = 4
 
 	//Thugs get their own universal outfit, each round.
 	var/gang_gimmick = "biker_gang"
@@ -43,7 +43,7 @@ var/datum/antagonist/thug/thugs
 	msg += "<b>Your gang:</b><br>"
 	for (var/mob/living/carbon/human/C in mob_list)
 		if(C.mind.special_role == "Thug")
-			msg += "[nick] <b>[C.name]</b>, the [C.job]."
+			msg += "[nick] <b>[C.name]</b>, the [C.job]. <br>"
 
 	gang_mob << "[msg]"
 
@@ -90,7 +90,6 @@ var/datum/antagonist/thug/thugs
 		return
 
 	player << "<span class='danger'>You remember that you brought your uniform and weapons in a box with you - as discussed from a meeting with your gang...</span>"
-	get_gang(player)
 
 	var/obj/item/weapon/storage/box/kit = new(get_turf(player))
 	kit.max_storage_space = 35
