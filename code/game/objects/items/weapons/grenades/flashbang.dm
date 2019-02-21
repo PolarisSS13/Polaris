@@ -98,12 +98,10 @@
 	name = "clusterbang"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
-	var/min_segments = 4
-	var/max_segments = 8
 
 
 /obj/item/weapon/grenade/flashbang/clusterbang/prime()
-	var/numspawned = rand(min_segments, max_segments)
+	var/numspawned = rand(6, 6)
 	var/again = 0
 	for(var/more = numspawned,more > 0,more--)
 		if(prob(35))
@@ -172,5 +170,3 @@
 	name = "corusco grenade"
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
-	min_segments = 6
-	max_segments = 6
