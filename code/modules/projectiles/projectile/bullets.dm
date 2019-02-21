@@ -133,7 +133,7 @@
 	armor_penetration = 30
 
 /obj/item/projectile/bullet/pistol/medium
-	damage = 25
+	damage = 27.5
 
 /obj/item/projectile/bullet/pistol/medium/ap
 	damage = 20
