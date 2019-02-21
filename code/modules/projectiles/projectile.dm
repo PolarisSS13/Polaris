@@ -406,7 +406,7 @@
 /obj/item/projectile/proc/old_style_target(atom/target, atom/source)
 	if(!source)
 		source = get_turf(src)
-	starting = source
+	starting = get_turf(source)
 	original = target
 	setAngle(Get_Angle(source, target))
 
@@ -435,7 +435,7 @@
 		beam_segments[beam_index] = pcache
 	generate_hitscan_tracers(null, null, impacting)
 
-/obj/item/projectile/proc/generate_hitscan_tracers(cleanup = TRUE, duration = 3, impacting = TRUE)
+/obj/item/projectile/proc/generate_hitscan_tracers(cleanup = TRUE, duration = 5, impacting = TRUE)
 	if(!length(beam_segments))
 		return
 	if(tracer_type)
