@@ -13,6 +13,7 @@
 		return
 
 	msg = sanitize(msg)
+	msg = emoji_parse(msg)
 	if(!msg)	return
 
 	var/raw_msg = msg
@@ -92,6 +93,7 @@
 		return
 
 	msg = sanitize(msg)
+	msg = emoji_parse(msg)
 	if(!msg)
 		return
 
