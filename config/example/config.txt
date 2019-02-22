@@ -402,3 +402,7 @@ STARLIGHT 0
 
 ## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
 # DEFAULT_LANGUAGE_PREFIXES , # -
+
+### EMOJI ###
+#Comment this out if you want to disable emojis
+EMOJIS
