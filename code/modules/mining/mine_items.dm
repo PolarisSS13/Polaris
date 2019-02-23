@@ -29,7 +29,7 @@
 	sharp = 1
 
 	var/excavation_amount = 200
-	var/destroy_artefacts = FALSE // some mining tools will just trash artefacts completely. At least you won't get assblasted by rads.
+	var/destroy_artefacts = FALSE // some mining tools will destroy artefacts completely while avoiding side-effects.
 
 /obj/item/weapon/pickaxe/silver
 	name = "silver pickaxe"
