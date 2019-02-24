@@ -1,10 +1,14 @@
 /mob/observer/dead/say(var/message)
 	message = sanitize(message)
+	//Allow them use to markup, if used.
+	message = process_chat_markup(message, list("~", "_"))
+	message = emoji_parse(message)
 
 	if (!message)
 		return
 
 	log_ghostsay(message, src)
+	round_text_log += "<font size=1><span style=\"color:#7e668c\"><b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>DEADSAY:</u> - [message]</span></font>"
 
 	if (src.client)
 		if(message)
@@ -26,6 +30,7 @@
 		return
 
 	log_ghostemote(message, src)
+	round_text_log += "<font size=1><span style=\"color:#7e668c\"><b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>DEADEMOTE:</u> - [message]</span></font>"
 
 	if(src.client)
 		if(message)

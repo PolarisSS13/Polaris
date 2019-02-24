@@ -19,7 +19,7 @@
 	var/raw_msg = msg
 
 
-	if((copytext(msg, 1, 2) in list(".",";",":","#","say")) || (findtext(lowertext(copytext(msg, 1, 5)), "say")))
+	if((copytext(msg, 1, 2) in list(".",";","#","say")) || (findtext(lowertext(copytext(msg, 1, 5)), "say")))
 		if(alert("Your message \"[raw_msg]\" looks like it was meant for in game communication, say it in OOC?", "Meant for OOC?", "No", "Yes") != "Yes")
 			return
 
@@ -44,6 +44,7 @@
 			return
 
 	log_ooc(msg, src)
+	round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>OOC:</u> - <span style=\"color:blue\"><b>[msg]</b></span>"
 
 	if(msg)
 		handle_spam_prevention(MUTE_OOC)
@@ -118,6 +119,7 @@
 			return
 
 	log_looc(msg,src)
+	round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>LOOC:</u> - <span style=\"color:orange\"><b>[msg]</b></span>"
 
 	if(msg)
 		handle_spam_prevention(MUTE_OOC)

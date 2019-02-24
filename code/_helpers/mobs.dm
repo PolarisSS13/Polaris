@@ -169,8 +169,15 @@ Proc for attack log creation, because really why not
 	if(ismob(target))
 		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Attacked by [user_str]: [what_done]</font>")
 	log_attack(user_str,target_str,what_done)
+
+
+	//Log the message to file
+	if(ishuman(user))
+		round_text_log += "<b>([time_stamp()])</b>  <span style=\"color:red\"><u><b>ATTACK LOG:</b></u> (<b>[user]/[user.client]</b>) vs [target_str]: [what_done]</span>"
+
 	if(admin_notify)
 		msg_admin_attack("[key_name_admin(user)] vs [target_str]: [what_done]")
+
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(var/obj/item/thing)
