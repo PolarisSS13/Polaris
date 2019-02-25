@@ -48,7 +48,7 @@ Frequency:
 	if (usr.stat || usr.restrained())
 		return
 	var/turf/current_location = get_turf(usr)//What turf is the user on?
-	if(!current_location||!usr.z in using_map.admin_levels)//If turf was not found or they're on centcom
+	if(!current_location|| usr.z in using_map.admin_levels)//If turf was not found or they're on centcom
 		usr << "The [src] is malfunctioning."
 		return
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
