@@ -32,7 +32,7 @@
 	update_icon()
 	..()
 
-/obj/item/weapon/bodycam/proc/toggle_camera()
+/obj/item/weapon/bodycam/verb/toggle_camera()
 	set name = "Toggle Body Camera"
 	set category = "Object"
 	set src in usr
@@ -56,7 +56,7 @@
 		playsound(usr, 'sound/effects/pop.ogg', 30, 1)
 		update_icon()
 
-/obj/item/clothing/head/helmet/space/examine(var/mob/user)
+/obj/item/weapon/bodycam/examine(var/mob/user)
 	. = ..()
 	if(camera)
 		to_chat(user, "The mounted camera is [!ispath(camera) && camera.status ? "" : "in"]active.")
