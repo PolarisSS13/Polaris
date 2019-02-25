@@ -148,6 +148,7 @@ Frequency:
 	for(var/turf/T in orange(10))
 		if(T.x>world.maxx-8 || T.x<8)	continue	//putting them at the edge is dumb
 		if(T.y>world.maxy-8 || T.y<8)	continue
+		if(T.z in using_map.admin_levels) continue
 		if(T.block_tele) continue
 		turfs += T
 	if(turfs.len)
