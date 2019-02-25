@@ -798,7 +798,6 @@
 			m_type = 1
 			if (!src.restrained())
 				message = "steps rhymatically and conservatively as they move side to side."
-				playsound(src.loc, 'sound/effects/bodyfall4.ogg', 50, 1)
 				var/default_pixel_x = initial(pixel_x)
 				var/default_pixel_y = initial(pixel_y)
 				default_pixel_x = src.default_pixel_x
@@ -822,7 +821,17 @@
 			src << "<font color='blue'>Unusable emote '[act]'. Say *help for a list.</font>"
 
 	if (message)
+
+	// Handles spam prevention. Take that!
+	//If you're muted for IC chat
+		client.handle_spam_prevention(MUTE_IC)
 		custom_emote(m_type,message)
+		if((client.prefs.muted & MUTE_IC) || say_disabled)
+			src << "<span class='warning'>You cannot speak in IC (Muted).</span>"
+			return
+
+			dialogue_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
+			round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
