@@ -9,8 +9,8 @@
 	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = ""
-	move_speed = ""
+	move_delay = 0
+	move_speed = 0.1
 	max_buckled_mobs = 2
 	mechanical = 1
 	maxhealth = 300
@@ -40,6 +40,7 @@
 
 
 /obj/vehicle/car/New()
+	. = ..()
 	riding_datum = new riding_datum_type(src)
 	cell = new cell_type(src)
 	key = new key_type(src)
