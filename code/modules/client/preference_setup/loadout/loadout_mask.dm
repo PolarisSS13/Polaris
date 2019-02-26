@@ -35,5 +35,5 @@
 	path = /obj/item/clothing/mask/nock_demon
 
 /datum/gear/mask/nockornate
-	display_name = "nock mask (red, ornate)
+	display_name = "nock mask (red, ornate)"
 	path = /obj/item/clothing/mask/nock_ornate

@@ -494,7 +494,7 @@
 
 /datum/gear/uniform/blackgoldrobe
 	display_name = "Robe, black-gold"
-	path = /obj/item/clothing/under/goldrobe
+	path = /obj/item/clothing/under/blackgoldrobe
 
 /datum/gear/uniform/whitegoldrobe
 	display_name = "Robe, white-gold"

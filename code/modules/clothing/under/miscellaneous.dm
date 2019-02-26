@@ -301,7 +301,7 @@
 	icon_state = "ascetic"
 	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
 
-/obj/item/clothing/under/robe
+/obj/item/clothing/under/blackrobe
 	name = "black robe"
 	desc = "A black robe. Nothing sinister going on here."
 	icon_state = "robe"
@@ -311,7 +311,7 @@
 	desc = "A white robe. Nothing sinister going on here."
 	icon_state = "whiterobe"
 
-/obj/item/clothing/under/goldrobe
+/obj/item/clothing/under/blackgoldrobe
 	name = "black gold-lined robe"
 	desc = "A gold-lined black robe. Fancy, yet intimidating."
 	icon_state = "goldrobe"

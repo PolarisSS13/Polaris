@@ -387,4 +387,3 @@
 /datum/gear/head/cowlwhite
 	display_name = "cowl, white"
 	path = /obj/item/clothing/head/cowlw
-
