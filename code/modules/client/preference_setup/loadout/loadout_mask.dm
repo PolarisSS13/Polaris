@@ -21,3 +21,19 @@
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
+
+/datum/gear/mask/nockscarab
+	display_name = "nock mask (blue, scarab)"
+	path = /obj/item/clothing/mask/nock_scarab
+
+/datum/gear/mask/nocklife
+	display_name = "nock mask (green, life)"
+	path = /obj/item/clothing/mask/nock_life
+
+/datum/gear/mask/nockdemon
+	display_name = "nock mask (purple, demon)"
+	path = /obj/item/clothing/mask/nock_demon
+
+/datum/gear/mask/nockornate
+	display_name = "nock mask (red, ornate)
+	path = /obj/item/clothing/mask/nock_ornate

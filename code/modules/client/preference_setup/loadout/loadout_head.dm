@@ -380,3 +380,11 @@
 	display_name = "jingasa"
 	path = /obj/item/clothing/head/jingasa
 
+/datum/gear/head/cowlblack
+	display_name = "cowl, black"
+	path = /obj/item/clothing/head/cowlb
+
+/datum/gear/head/cowlwhite
+	display_name = "cowl, white"
+	path = /obj/item/clothing/head/cowlw
+
