@@ -48,7 +48,7 @@ Frequency:
 	if (usr.stat || usr.restrained())
 		return
 	var/turf/current_location = get_turf(usr)//What turf is the user on?
-	if(!current_location||current_location.z==2)//If turf was not found or they're on z level 2.
+	if(!current_location|| usr.z in using_map.admin_levels)//If turf was not found or they're on centcom
 		usr << "The [src] is malfunctioning."
 		return
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
@@ -139,8 +139,8 @@ Frequency:
 	var/list/L = list(  )
 	for(var/obj/machinery/teleport/hub/R in world)
 		var/obj/machinery/computer/teleporter/com = locate(/obj/machinery/computer/teleporter, locate(R.x - 2, R.y, R.z))
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use)
-			if(R.icon_state == "tele1")
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && !R.z in using_map.admin_levels)
+			if(R.icon_state == "tele1") //I hate this code
 				L["[com.id] (Active)"] = com.locked
 			else
 				L["[com.id] (Inactive)"] = com.locked
@@ -148,6 +148,7 @@ Frequency:
 	for(var/turf/T in orange(10))
 		if(T.x>world.maxx-8 || T.x<8)	continue	//putting them at the edge is dumb
 		if(T.y>world.maxy-8 || T.y<8)	continue
+		if(T.z in using_map.admin_levels) continue
 		if(T.block_tele) continue
 		turfs += T
 	if(turfs.len)
