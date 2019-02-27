@@ -9,8 +9,8 @@
 	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = ""
-	move_speed = ""
+	move_delay = "0.5"
+	move_speed = "0.1"
 	max_buckled_mobs = 2
 	mechanical = 1
 	maxhealth = 300
@@ -39,18 +39,20 @@
 	var/has_license = 1
 
 
-
 /obj/vehicle/car/New()
+	. = ..()
 	riding_datum = new riding_datum_type(src)
 	cell = new cell_type(src)
 	key = new key_type(src)
 	turn_off()
 	generate_license()
-	src.spark_system = new /datum/effect/effect/system/spark_spread
-	spark_system.set_up(5, 0, src)
-	spark_system.attach(src)
 	update_icon()
 
+/obj/vehicle/car/initialize() // Time for some science!
+	..()
+	move_speed = 0.1
+	move_delay = 0
+	land_speed = 0.5
 
 /obj/vehicle/car/remove_cell(var/mob/living/carbon/human/H)
 	to_chat(H, "You try to remove [cell] but it appears to be welded firmly inside.")
