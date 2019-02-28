@@ -66,8 +66,8 @@
 #define SKIN_THREAT 1
 #define SKIN_CLOAK  2
 
-#define VOICE_HIGH //An annoying high pitched voice
-#define VOICE_NORMAL //A normal, average voice
-#define VOICE_DEEP //A deep manly-ass voice
-#define VOICE_CROAKY //A croaky smoker's voice.
-#define VOICE_INHUMAN //The kind of voice we all have in the morning/aliums.
+#define VOICE_NORMAL 0 //A normal, average voice
+#define VOICE_HIGH 1 //An annoying high pitched voice
+#define VOICE_DEEP 2 //A deep manly-ass voice
+#define VOICE_CROAKY 3 //A croaky smoker's voice.
+#define VOICE_INHUMAN 4 //The kind of voice we all have in the morning/aliums.
