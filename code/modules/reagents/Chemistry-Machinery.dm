@@ -602,6 +602,12 @@
 					continue
 				to_chat(user, span("notice", "Contains [R.volume]u of <b>[R.name]</b>.<br>[R.description]<br>"))
 
+
+		// Last, unseal it if it's an autoinjector.
+		if(istype(I,/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector) && I.flags == 0)
+			I.flags ^= OPENCONTAINER
+			to_chat(user, span("notice", "Sample container unsealed.<br>"))
+
 		to_chat(user, span("notice", "Scanning of \the [I] complete."))
 		analyzing = FALSE
 		update_icon()

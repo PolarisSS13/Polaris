@@ -41,6 +41,14 @@
 	build_path = /obj/item/device/reagent_scanner/adv
 	sort_string = "MACBB"
 
+/datum/design/item/medical/ultra_reagent_scanner
+	desc = "A device for identifying chemicals and their proportions even through sealed containers."
+	id = "ultra_reagent_scanner"
+	req_tech = list(TECH_BIO = 4, TECH_MAGNET = 6, TECH_BLUESPACE = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, "silver" = 500, "uranium" = 200)
+	build_path = /obj/item/device/reagent_scanner/ultra
+	sort_string = "MACBC"
+
 /datum/design/item/beaker/AssembleDesignName()
 	name = "Beaker prototype ([item_name])"
 

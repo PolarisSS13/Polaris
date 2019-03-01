@@ -409,6 +409,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
 	var/recent_fail = 0
+	var/piercescan = 0
 
 /obj/item/device/reagent_scanner/afterattack(obj/O, mob/living/user, proximity)
 	if(!proximity || user.stat || !istype(O))
@@ -417,7 +418,7 @@ HALOGEN COUNTER	- Radcount on mobs
 		return
 
 	if(!isnull(O.reagents))
-		if(!(O.flags & OPENCONTAINER)) // The idea is that the scanner has to touch the reagents somehow. This is done to prevent cheesing unidentified autoinjectors.
+		if(!(O.flags & OPENCONTAINER) && piercescan == 0) // The idea is that the scanner has to touch the reagents somehow. This is done to prevent cheesing unidentified autoinjectors.
 			to_chat(user, span("warning", "\The [O] is sealed, and cannot be scanned by \the [src] until unsealed."))
 			return
 
@@ -437,9 +438,18 @@ HALOGEN COUNTER	- Radcount on mobs
 
 /obj/item/device/reagent_scanner/adv
 	name = "advanced reagent scanner"
+	desc = "An advanced hand-held reagent scanner which identifies chemical agents and their relative ratios."
 	icon_state = "adv_spectrometer"
 	details = 1
 	origin_tech = list(TECH_MAGNET = 4, TECH_BIO = 2)
+
+/obj/item/device/reagent_scanner/ultra
+	name = "ultra-advanced reagent scanner"
+	desc = "An ultra-advanced hand-held reagent scanner capable of measuring the relative quantities of chemical agents in a container. It uses bluespace technology to identify chemical agents in sealed containers."
+	icon_state = "ultra_spectrometer"
+	details = 1
+	piercescan = 1
+	origin_tech = list(TECH_MAGNET = 6, TECH_BIO = 4, TECH_BLUESPACE = 5)
 
 /obj/item/device/slime_scanner
 	name = "slime scanner"
