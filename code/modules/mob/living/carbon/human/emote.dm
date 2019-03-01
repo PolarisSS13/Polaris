@@ -824,7 +824,8 @@
 
 	// Handles spam prevention. Take that!
 	//If you're muted for IC chat
-		client.handle_spam_prevention(MUTE_IC)
+		if(client)
+			client.handle_spam_prevention(MUTE_IC)
 		custom_emote(m_type,message)
 		if((client.prefs.muted & MUTE_IC) || say_disabled)
 			src << "<span class='warning'>You cannot speak in IC (Muted).</span>"
