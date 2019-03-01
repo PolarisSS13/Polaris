@@ -604,8 +604,8 @@
 
 
 		// Last, unseal it if it's an autoinjector.
-		if(istype(I,/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector) && I.flags == 0)
-			I.flags ^= OPENCONTAINER
+		if(istype(I,/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector) && !(I.flags & OPENCONTAINER))
+			I.flags |= OPENCONTAINER
 			to_chat(user, span("notice", "Sample container unsealed.<br>"))
 
 		to_chat(user, span("notice", "Scanning of \the [I] complete."))
