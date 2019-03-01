@@ -1,19 +1,19 @@
 //Space bears!
 /mob/living/simple_animal/hostile/bear
 	name = "bear"
-	desc = "RawrRawr!!"
-	tt_desc = "Ursinae aetherius" //...bearspace? Maybe.
-	icon_state = "bear"
-	icon_living = "bear"
-	icon_dead = "bear_dead"
-	icon_gib = "bear_gib"
+	desc = "Oh, one of these."
+	tt_desc = "Brown bear." //...bearspace? Maybe.
+	icon_state = "brownbear"
+	icon_living = "brownbear"
+	icon_dead = "brownbear_dead"
+	icon_gib = "brownbear_gib"
 
 	faction = "russian"
 	intelligence_level = SA_ANIMAL
 	cooperative = 1
 
-	maxHealth = 120
-	health = 120
+	maxHealth = 220
+	health = 220
 	turns_per_move = 5
 	see_in_dark = 6
 	stop_when_pulled = 0

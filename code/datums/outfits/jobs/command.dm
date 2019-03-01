@@ -38,6 +38,12 @@
 	shoes = /obj/item/clothing/shoes/brown
 	id_type = /obj/item/weapon/card/id/silver/hop
 	pda_type = /obj/item/device/pda/heads/hop
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
+
+/decl/hierarchy/outfit/job/heads/hop/post_equip(mob/living/carbon/human/H)
+	..()
+	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+		permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/heads/secretary
 	name = OUTFIT_JOB_NAME("City Hall Guard")

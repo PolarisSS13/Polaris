@@ -104,3 +104,8 @@
 	name = OUTFIT_JOB_NAME("Emergency Medical Technician")
 	uniform = /obj/item/clothing/under/rank/medical/paramedic
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/emt
+
+/decl/hierarchy/outfit/job/medical/intern
+	name = OUTFIT_JOB_NAME("Medical Intern")
+	id_type = /obj/item/weapon/card/id/medical/intern
+	uniform = /obj/item/clothing/under/rank/orderly

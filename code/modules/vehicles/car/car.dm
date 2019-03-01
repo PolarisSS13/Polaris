@@ -9,8 +9,9 @@
 	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = "0.5"
-	move_speed = "0.1"
+	move_delay = 0
+	move_speed = 0.1
+
 	max_buckled_mobs = 2
 	mechanical = 1
 	maxhealth = 300
