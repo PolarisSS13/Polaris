@@ -15,7 +15,7 @@
 
 	min_age = 18
 	max_age = 120
-	slowdown = 0
+	slowdown = 2
 	economic_modifier = 10
 
 	health_hud_intensity = 1.5

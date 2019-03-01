@@ -4,8 +4,10 @@
 /datum/riding/car
 	nonhuman_key_exemption = TRUE // Borgs can't hold oars.
 	only_one_driver = TRUE // Would be pretty crazy if five people try to move at the same time.
-	vehicle_move_delay = -5
+	vehicle_move_delay = 0.55
 
+/datum/riding/car/police
+	vehicle_move_delay = 0.65
 
 /datum/riding/car/handle_ride(mob/user, direction)
 
@@ -46,6 +48,25 @@
 				"[NORTH]" = list( 24, 25,   ABOVE_MOB_LAYER),
 				"[SOUTH]" = list( 5, 31, MOB_LAYER),
 				"[EAST]"  = list( 7, 10,   MOB_LAYER + 0.4),
+				"[WEST]"  = list( 15, 21,   MOB_LAYER)
+				)
+		else
+			return null // This will runtime, but we want that since this is out of bounds.
+
+/datum/riding/car/truck/get_offsets(pass_index) // list(dir = x, y, layer)
+	switch(pass_index)
+		if(1) // Person in front.
+			return list(
+				"[NORTH]" = list( 15, 25, MOB_LAYER),
+				"[SOUTH]" = list( 21, 31,   ABOVE_MOB_LAYER),
+				"[EAST]"  = list( 35, 21,   MOB_LAYER),
+				"[WEST]"  = list(	15, 10,   MOB_LAYER + 0.4)
+				)
+		if(2) // Person in back.
+			return list(
+				"[NORTH]" = list( 24, 25,   ABOVE_MOB_LAYER),
+				"[SOUTH]" = list( 21, 31, MOB_LAYER),
+				"[EAST]"  = list(35, 10,   MOB_LAYER + 0.4),
 				"[WEST]"  = list( 15, 21,   MOB_LAYER)
 				)
 		else

@@ -3,6 +3,7 @@
 	desc = "A fun way to get around."
 	icon_state = "scooter"
 	var/riding_datum_type = /datum/riding/scooter
+	move_delay = 0
 
 
 /obj/vehicle/scooter/attackby(obj/item/I, mob/user, params)
@@ -171,8 +172,11 @@
 	return list("[NORTH]" = list(0), "[SOUTH]" = list(-2), "[EAST]" = list(0), "[WEST]" = list( 2))
 
 
+/datum/riding/scooter
+	vehicle_move_delay = -3//fast
+
 /datum/riding/scooter/skateboard
-	vehicle_move_delay = 0//fast
+	vehicle_move_delay = -5//very fast
 
 /datum/riding/scooter/skateboard/get_offsets(pass_index) // list(dir = x, y, layer)
 	return list("[NORTH]" = list(0), "[SOUTH]" = list(-2), "[EAST]" = list(0), "[WEST]" = list( 2))
