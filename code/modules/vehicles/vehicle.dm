@@ -16,7 +16,7 @@
 	can_buckle = 1
 	buckle_movable = 1
 	buckle_lying = 0
-
+	var/datum/effect/effect/system/spark_spread/spark_system
 	var/mechanical = TRUE // If false, doesn't care for things like cells, engines, EMP, keys, etc.
 	var/attack_log = null
 	var/on = 0
@@ -45,11 +45,18 @@
 	var/datum/riding/riding_datum = null
 
 	var/default_layer = OBJ_LAYER
+
+	buckle_delay = 5
+	unbuckle_delay = 5
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/New()
 	..()
+	if(mechanical)
+		src.spark_system = new /datum/effect/effect/system/spark_spread
+		spark_system.set_up(5, 0, src)
+		spark_system.attach(src)
 	//spawn the cell you want in each vehicle
 
 /obj/vehicle/Destroy()
@@ -71,6 +78,9 @@
 	if(riding_datum)
 		riding_datum.restore_position(buckled_mob)
 		riding_datum.handle_vehicle_offsets() // So the person in back goes to the front.
+	else
+		buckled_mob.pixel_y = 0
+		buckled_mob.pixel_x = 0
 
 /obj/vehicle/set_dir(newdir)
 	..(newdir)
@@ -160,9 +170,14 @@
 		..()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
+	visible_message("<span class='danger'>[src] is hit by the [Proj]!</span>")
+	if(mechanical && spark_system)
+		src.spark_system.start()
+	playsound(src, 'sound/effects/bang.ogg', 50, 1)
 	health -= Proj.get_structure_damage()
-	..()
 	healthcheck()
+	..()
+	return
 
 /obj/vehicle/ex_act(severity)
 	switch(severity)
@@ -404,6 +419,9 @@
 
 	return 1
 
+
+/obj/vehicle/get_cell()
+	return cell
 
 //-------------------------------------------------------
 // Stat update procs

@@ -1,6 +1,6 @@
 /obj/vehicle/car //vroom vroom.
 	name = "motor car"
-	desc = "A ridable electric ATV designed for all terrain. Except space."
+	desc = "A motor car that runs off sustainable electricity. This is a generic model that can be spraypainted onto with a spraycan."
 	icon = 'icons/vehicles/car.dmi'
 	icon_state = "sportscar"
 	on = 1
@@ -9,12 +9,14 @@
 	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = 0
+	move_delay = 0.2
 	move_speed = 0.1
+
 	max_buckled_mobs = 2
 	mechanical = 1
-	maxhealth = 300
-	health = 300
+	maxhealth = 200
+	health = 200
+
 
 	var/cooldowntime
 	var/spam_flag = 0
@@ -38,7 +40,6 @@
 	var/has_license = 1
 
 
-
 /obj/vehicle/car/New()
 	. = ..()
 	riding_datum = new riding_datum_type(src)
@@ -50,9 +51,11 @@
 
 /obj/vehicle/car/initialize() // Time for some science!
 	..()
-	move_speed = 0.1
-	move_delay = 0
 	land_speed = 0.5
+
+/obj/vehicle/car/remove_cell(var/mob/living/carbon/human/H)
+	to_chat(H, "You try to remove [cell] but it appears to be welded firmly inside.")
+
 
 /obj/vehicle/car/turn_on()
 	if(!mechanical || stat)
@@ -75,6 +78,7 @@
 	license_plate_no = "[license_code]-[license_number]"
 
 /obj/vehicle/car/examine(mob/user)
+	..()
 	if(has_license)
 		user << "The license plate reads <b>[license_plate_no]</b> in bold black letters."
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
@@ -139,7 +143,6 @@
 		user_buckle_mob(C, user)
 	else
 		..(C, user)
-
 
 /obj/vehicle/car/load(mob/living/L, mob/living/user)
 	if(!istype(L)) // Only mobs on boats.
@@ -221,7 +224,13 @@
 			locked = 0
 			to_chat(user, "<span class='warning'>You swipe the [src]'s controls, deactivating [src]'s safety mechanisms.</span>")
 		return TRUE
+// ////
+//Damage related
+
+/obj/vehicle/car/Destroy()
+	qdel(spark_system)
+	spark_system = null
+	return ..()
 
 /obj/vehicle/car/proc/honk_horn()
 	playsound(src, horn_sound,40,1)
-

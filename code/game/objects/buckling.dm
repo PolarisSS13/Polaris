@@ -11,6 +11,11 @@
 	var/max_buckled_mobs = 1
 
 
+	// Delay in seconds for buckling/unbuckling. If buckle delays are set to 0, no delay will occur.
+	var/buckle_delay = 0
+	var/unbuckle_delay = 0
+
+
 /atom/movable/attack_hand(mob/living/user)
 	. = ..()
 //	if(can_buckle && buckled_mob)
@@ -19,9 +24,17 @@
 	if(can_buckle && has_buckled_mobs())
 		if(buckled_mobs.len > 1)
 			var/unbuckled = input(user, "Who do you wish to unbuckle?","Unbuckle Who?") as null|mob in buckled_mobs
+			if(unbuckle_delay)
+				if(do_after(user, unbuckle_delay, unbuckled)) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
+					if(user_unbuckle_mob(unbuckled, user))
+						return TRUE
 			if(user_unbuckle_mob(unbuckled, user))
 				return TRUE
 		else
+			if(unbuckle_delay)
+				if(do_after(user, unbuckle_delay, buckled_mobs[1])) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
+					if(user_unbuckle_mob(buckled_mobs[1], user))
+						return TRUE
 			if(user_unbuckle_mob(buckled_mobs[1], user))
 				return TRUE
 
@@ -125,29 +138,31 @@
 		to_chat(user, "<span class='warning'>\The [M] is already buckled to \the [src].</span>")
 		return FALSE
 
-	add_fingerprint(user)
-//	unbuckle_mob()
+	if(do_after(user, buckle_delay, M)) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
 
-	//can't buckle unless you share locs so try to move M to the obj.
-	if(M.loc != src.loc)
-		if(M.Adjacent(src) && user.Adjacent(src))
-			M.forceMove(get_turf(src))
-	//		step_towards(M, src)
+		add_fingerprint(user)
+	//	unbuckle_mob()
 
-	. = buckle_mob(M, forced)
-	playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
-	if(.)
-		if(!silent)
-			if(M == user)
-				M.visible_message(\
-					"<span class='notice'>[M.name] buckles themselves to [src].</span>",\
-					"<span class='notice'>You buckle yourself to [src].</span>",\
-					"<span class='notice'>You hear metal clanking.</span>")
-			else
-				M.visible_message(\
-					"<span class='danger'>[M.name] is buckled to [src] by [user.name]!</span>",\
-					"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
-					"<span class='notice'>You hear metal clanking.</span>")
+		//can't buckle unless you share locs so try to move M to the obj.
+		if(M.loc != src.loc)
+			if(M.Adjacent(src) && user.Adjacent(src))
+				M.forceMove(get_turf(src))
+		//		step_towards(M, src)
+
+		. = buckle_mob(M, forced)
+		playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
+		if(.)
+			if(!silent)
+				if(M == user)
+					M.visible_message(\
+						"<span class='notice'>[M.name] buckles themselves to [src].</span>",\
+						"<span class='notice'>You buckle yourself to [src].</span>",\
+						"<span class='notice'>You hear metal clanking.</span>")
+				else
+					M.visible_message(\
+						"<span class='danger'>[M.name] is buckled to [src] by [user.name]!</span>",\
+						"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
+						"<span class='notice'>You hear metal clanking.</span>")
 
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	var/mob/living/M = unbuckle_mob(buckled_mob)

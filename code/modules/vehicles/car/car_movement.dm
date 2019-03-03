@@ -47,21 +47,33 @@
 		playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
 		M.apply_effects(2, 2)				// Knock people down for a short moment
 		M.apply_damages(1 / move_delay)		// Smaller amount of damage than a tug, since this will always be possible because Quads don't have safeties.
+		if(ishuman(M))
+			M.emote("scream")
 		var/list/throw_dirs = list(1, 2, 4, 8, 5, 6, 9, 10)
 		if(!emagged)						// By the power of Bumpers TM, it won't throw them ahead of the quad's path unless it's emagged or the person turns.
 			health -= round(M.mob_size / 2)
 			throw_dirs -= dir
 			throw_dirs -= get_dir(M, src) //Don't throw it AT the quad either.
+			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate upon hitting [A]!</span>")
+			if(istype(buckled_mobs[1], /mob/living/carbon/human))
+				var/mob/living/D = buckled_mobs[1]
+				add_attack_logs(D,M,"Ran over with [M] with [src] driving as ([D]/[D.ckey]) in [src.loc] (un-emagged)")
+			stop_short()
+			turn_off()
+			healthcheck()
+			return
+
 		else
 			health -= round(M.mob_size / 4) // Less damage if they actually put the point in to emag it.
 			var/turf/T2 = get_step(A, pick(throw_dirs))
 			M.throw_at(T2, 1, 1, src)
 			playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
-			if(istype(load, /mob/living/carbon/human))
-				var/mob/living/D = load
+			if(istype(buckled_mobs[1], /mob/living/carbon/human))
+				var/mob/living/D = buckled_mobs[1]
 				to_chat(D, "<span class='danger'>You hit [M]!</span>")
-				add_attack_logs(D,M,"Ran over with [src.name]")
-
+				add_attack_logs(D,M,"Ran over [M] with [src] driving as ([D]/[D.ckey]) in [src.loc] (emagged)")
+			healthcheck()
+			return
 	/*
 	//Eh, i'll figure this out. - Cass
 		if(istype(A, /obj/structure))
@@ -102,12 +114,54 @@
 			else
 				return
 	*/
-
+	..()
 
 /obj/vehicle/car/RunOver(var/mob/living/carbon/human/H)
 	..()
+	visible_message("<span class='danger'>[src] run over [H]!</span>")
+	playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
 	var/list/throw_dirs = list(1, 2, 4, 8, 5, 6, 9, 10)
-	if(!emagged)
-		throw_dirs -= dir
+	throw_dirs -= dir
 	var/turf/T = get_step(H, pick(throw_dirs))
 	H.throw_at(T, 1, 1, src)
+	health -= round(H.mob_size / 2)
+	healthcheck()
+	if(!emagged)						// By the power of Bumpers TM, it won't throw them ahead of the quad's path unless it's emagged or the person turns.
+		if(istype(buckled_mobs[1], /mob/living/carbon/human))
+			var/mob/living/D = buckled_mobs[1]
+			add_attack_logs(D,H,"Ran over [H] with [src] driving as ([D]/[D.ckey]) in [src.loc] (un-emagged)")
+			turn_off()
+			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate upon hitting [H]!</span>")
+	else
+		if(istype(buckled_mobs[1], /mob/living/carbon/human))
+			var/mob/living/D = buckled_mobs[1]
+			visible_message("<span class='danger'>[src] runs over [H]!</span>")
+			H.apply_damages(1 / move_delay)		// Smaller amount of damage than a tug, since this will always be possible because Quads don't have safeties.
+			if(ishuman(H))
+				H.emote("scream")
+			add_attack_logs(D,H,"Ran over [H] with [src] driving as ([D]/[D.ckey]) in [src.loc] (emagged)")
+
+/obj/vehicle/car/proc/stop_short() //whiplash!
+	var/pixel_x_diff
+	var/pixel_y_diff
+	switch(dir)
+		if(NORTH)
+			pixel_y_diff = 3
+			pixel_x_diff = pick(-1,1)
+		if(SOUTH)
+			pixel_y_diff = -3
+			pixel_x_diff = pick(-1,1)
+		if(EAST)
+			pixel_x_diff = 3
+			pixel_y_diff = pick(-1,1)
+		if(WEST)
+			pixel_x_diff = -3
+			pixel_y_diff = pick(-1,1)
+	if(buckled_mobs)
+		for (var/mob/living/carbon/human/C in buckled_mobs)
+			animate(C, pixel_x = C.pixel_x + pixel_x_diff, pixel_y = C.pixel_y + pixel_y_diff, time = 5, loop = 1, easing = ELASTIC_EASING)
+			if(riding_datum) // Eh, just in case.
+				riding_datum.restore_position(C)
+			C.adjustBruteLossByPart(3,"head")
+			C << "<span class='userdanger'>Your head bangs against the dashboard!</span>"
+			shake_camera(C, 3, 1)
