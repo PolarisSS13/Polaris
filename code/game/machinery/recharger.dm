@@ -17,7 +17,8 @@ obj/machinery/recharger
 	/obj/item/device/flashlight,
 	/obj/item/device/electronic_assembly,
 	/obj/item/weapon/weldingtool/electric,
-	/obj/item/device/communicator)
+	/obj/item/device/communicator,
+	/obj/item/device/defib_kit)
 
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
