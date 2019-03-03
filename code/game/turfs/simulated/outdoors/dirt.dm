@@ -5,6 +5,7 @@
 	edge_blending_priority = 2
 	turf_layers = list(/turf/simulated/floor/outdoors/rocks)
 	initial_flooring = /decl/flooring/dirt
+	can_build_onto = 1
 	var/grass_chance = 20
 	var/tree_chance = 2
 	var/list/grass_types = list(

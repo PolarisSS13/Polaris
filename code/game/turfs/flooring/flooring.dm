@@ -402,6 +402,7 @@ var/list/flooring_types
 	name = "pavement"
 	icon = 'icons/turf/pavement.dmi'
 	icon_base = "pavement"
+	build_type = null
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/pavement1.ogg',
 		'sound/effects/footstep/pavement2.ogg',
@@ -416,17 +417,20 @@ var/list/flooring_types
 
 /decl/flooring/pavement/empty
 	icon_base = "pave_empty"
+	build_type = /obj/item/stack/tile/pavement
 
 /decl/flooring/pavement/pave_tiling
 	icon_base = "pave_tiling"
+	build_type = /obj/item/stack/tile/pave_tiling
 
 /decl/flooring/pavement/brick_paving
 	icon_base = "brick_paving"
+	build_type = /obj/item/stack/tile/brick_paving
 
 /decl/flooring/road
 	icon = 'icons/turf/roads.dmi'
 	icon_base = "road"
-	build_type = null
+	build_type = /obj/item/stack/tile/road
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/pavement1.ogg',
 		'sound/effects/footstep/pavement2.ogg',
