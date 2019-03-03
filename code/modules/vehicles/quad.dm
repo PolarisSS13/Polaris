@@ -150,13 +150,28 @@
 
 /obj/vehicle/train/engine/quadbike/RunOver(var/mob/living/carbon/human/H)
 	..()
+	visible_message("<span class='danger'>[src] run over [H]!</span>")
+	playsound(src.loc, 'sound/vehicles/car_hit.ogg', 80, 0, 10)
 	var/list/throw_dirs = list(1, 2, 4, 8, 5, 6, 9, 10)
-	if(!emagged)
-		throw_dirs -= dir
-		if(tow)
-			throw_dirs -= get_dir(H, tow) //Don't throw it at the trailer either.
+	throw_dirs -= dir
 	var/turf/T = get_step(H, pick(throw_dirs))
 	H.throw_at(T, 1, 1, src)
+	health -= round(H.mob_size / 2)
+	healthcheck()
+	if(!emagged)						// By the power of Bumpers TM, it won't throw them ahead of the quad's path unless it's emagged or the person turns.
+		if(istype(buckled_mobs[1], /mob/living/carbon/human))
+			var/mob/living/D = buckled_mobs[1]
+			add_attack_logs(D,H,"Ran over [H] with [src] driving as ([D]/[D.ckey]) in [src.loc] (un-emagged)")
+			turn_off()
+			src.visible_message("<span class='danger'>The [src]'s safeties quickly activate upon hitting [H]!</span>")
+	else
+		if(istype(buckled_mobs[1], /mob/living/carbon/human))
+			var/mob/living/D = buckled_mobs[1]
+			visible_message("<span class='danger'>[src] runs over [H]!</span>")
+			H.apply_damages(1 / move_delay)		// Smaller amount of damage than a tug, since this will always be possible because Quads don't have safeties.
+			if(ishuman(H))
+				H.emote("scream")
+			add_attack_logs(D,H,"Ran over [H] with [src] driving as ([D]/[D.ckey]) in [src.loc] (emagged)")
 
 /*
  * Trailer bits and bobs.
