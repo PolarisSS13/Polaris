@@ -9,14 +9,14 @@
 	var/obj/item/weapon/key/car/key
 	var/riding_datum_type = /datum/riding/car
 	pixel_x = -16
-	move_delay = 0
+	move_delay = 0.2
 	move_speed = 0.1
 
 	max_buckled_mobs = 2
 	mechanical = 1
-	maxhealth = 300
-	health = 300
-	var/datum/effect/effect/system/spark_spread/spark_system
+	maxhealth = 200
+	health = 200
+
 
 	var/cooldowntime
 	var/spam_flag = 0
@@ -51,8 +51,6 @@
 
 /obj/vehicle/car/initialize() // Time for some science!
 	..()
-	move_speed = 0.1
-	move_delay = 0
 	land_speed = 0.5
 
 /obj/vehicle/car/remove_cell(var/mob/living/carbon/human/H)
@@ -228,13 +226,6 @@
 		return TRUE
 // ////
 //Damage related
-
-/obj/vehicle/car/bullet_act(var/obj/item/projectile/Proj)
-	..()
-	visible_message("<span class='danger'>[src] is hit by the [Proj]!</span>")
-	src.spark_system.start()
-	playsound(src, 'sound/effects/bang.ogg', 50, 1)
-
 
 /obj/vehicle/car/Destroy()
 	qdel(spark_system)

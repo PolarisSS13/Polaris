@@ -2558,6 +2558,7 @@
 #include "code\modules\vehicles\car\car.dm"
 #include "code\modules\vehicles\car\car_actions.dm"
 #include "code\modules\vehicles\car\car_buttons.dm"
+#include "code\modules\vehicles\car\car_charger.dm"
 #include "code\modules\vehicles\car\car_datum.dm"
 #include "code\modules\vehicles\car\car_movement.dm"
 #include "code\modules\vehicles\car\car_objs.dm"
