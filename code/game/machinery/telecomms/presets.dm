@@ -166,6 +166,12 @@
 	freq_listening = list(SRV_FREQ)
 	autolinkers = list("service")
 
+/obj/machinery/telecomms/server/presets/legal
+	id = "Legal Server"
+	freq_listening = list(LEG_FREQ)
+	autolinkers = list("legal")
+
+
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
 	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ) // AI Private and Common

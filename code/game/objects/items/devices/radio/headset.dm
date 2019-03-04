@@ -285,6 +285,18 @@
 	icon_state = "srv_headset"
 	ks2type = /obj/item/device/encryptionkey/headset_service
 
+/obj/item/device/radio/headset/headset_legal
+	name = "legal radio headset"
+	desc = "Headset owned by the lawyer, designed to keep contact with their clients."
+	icon_state = "srv_headset"
+	ks2type = /obj/item/device/encryptionkey/headset_legal
+
+/obj/item/device/radio/headset/headset_judge
+	name = "judge radio headset"
+	desc = "Headset owned by the judge, making sure court cases and warrants run smoothly.."
+	icon_state = "srv_headset"
+	ks2type = /obj/item/device/encryptionkey/headset_judge
+
 /obj/item/device/radio/headset/ert
 	name = "emergency response team radio headset"
 	desc = "The headset of the boss's boss."

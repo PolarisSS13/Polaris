@@ -120,6 +120,7 @@ var/const/SCI_FREQ = 1351
 var/const/SRV_FREQ = 1349
 var/const/SUP_FREQ = 1347
 var/const/EXP_FREQ = 1361
+var/const/LEG_FREQ = 1367
 
 // internal department channels
 var/const/MED_I_FREQ = 1485
@@ -128,6 +129,7 @@ var/const/SEC_I_FREQ = 1475
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
+	"Legal"		= LEG_FREQ,
 	"Command"		= COMM_FREQ,
 	"Medical"		= MED_FREQ,
 	"Engineering"	= ENG_FREQ,
@@ -152,7 +154,7 @@ var/list/CENT_FREQS = list(ERT_FREQ, DTH_FREQ)
 var/list/ANTAG_FREQS = list(SYND_FREQ, RAID_FREQ)
 
 //Department channels, arranged lexically
-var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC_FREQ, SCI_FREQ, SRV_FREQ, SUP_FREQ)
+var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC_FREQ, SCI_FREQ, SRV_FREQ, SUP_FREQ, LEG_FREQ)
 
 #define TRANSMISSION_WIRE	0
 #define TRANSMISSION_RADIO	1
@@ -175,6 +177,8 @@ var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC
 		return "secradio"
 	if (frequency == ENG_FREQ)
 		return "engradio"
+	if (frequency == LEG_FREQ)
+		return "legradio"
 	if(frequency == SCI_FREQ)
 		return "sciradio"
 	if(frequency == MED_FREQ)
