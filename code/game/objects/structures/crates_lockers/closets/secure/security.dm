@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/captains
-	name = "colony director's locker"
+	name = "mayor's locker"
 	req_access = list(access_captain)
 	icon_state = "capsecure1"
 	icon_closed = "capsecure"
@@ -26,7 +26,7 @@
 
 
 /obj/structure/closet/secure_closet/hop
-	name = "head of personnel's locker"
+	name = "city clerk's locker"
 	req_access = list(access_hop)
 	icon_state = "hopsecure1"
 	icon_closed = "hopsecure"
@@ -51,7 +51,7 @@
 		return
 
 /obj/structure/closet/secure_closet/hop2
-	name = "head of personnel's attire"
+	name = "city clerk's attire"
 	req_access = list(access_hop)
 	icon_state = "hopsecure1"
 	icon_closed = "hopsecure"
@@ -85,7 +85,7 @@
 
 
 /obj/structure/closet/secure_closet/hos
-	name = "head of security's locker"
+	name = "chief of police's locker"
 	req_access = list(access_hos)
 	icon_state = "hossecure1"
 	icon_closed = "hossecure"
@@ -138,7 +138,7 @@
 
 
 /obj/structure/closet/secure_closet/warden
-	name = "warden's locker"
+	name = "prison warden's locker"
 	req_access = list(access_armory)
 	icon_state = "wardensecure1"
 	icon_closed = "wardensecure"
