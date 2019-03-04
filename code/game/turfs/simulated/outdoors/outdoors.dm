@@ -16,6 +16,7 @@ var/list/turf_edge_cache = list()
 	outdoors = TRUE					// This variable is used for weather effects.
 	// When a turf gets demoted or promoted, this list gets adjusted.  The top-most layer is the layer on the bottom of the list, due to how pop() works.
 	var/list/turf_layers = list(/turf/simulated/floor/outdoors/rocks)
+	var/can_build_onto = 0
 
 /turf/simulated/floor/outdoors/initialize()
 	update_icon()
@@ -62,6 +63,21 @@ var/list/turf_edge_cache = list()
 /turf/simulated/proc/get_edge_icon_state()
 	return icon_state
 
+
+/turf/simulated/floor/outdoors/attackby(obj/item/C as obj, mob/user as mob)
+	if(can_build_onto)
+		if(istype(C, /obj/item/stack/material/steel))
+			var/obj/item/stack/material/steel/S = C
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			src.ChangeTurf(/turf/simulated/floor/plating)
+			S.amount =- 1
+		else
+			return ..()
+	else
+		return ..()
+
+
+
 /turf/simulated/floor/outdoors/update_icon()
 	..()
 	update_icon_edge()
@@ -70,6 +86,7 @@ var/list/turf_edge_cache = list()
 	name = "mud"
 	icon_state = "mud_dark"
 	edge_blending_priority = 3
+	can_build_onto = 1
 
 
 /turf/simulated/floor/outdoors/rocks
@@ -77,6 +94,7 @@ var/list/turf_edge_cache = list()
 	desc = "Hard as a rock."
 	icon_state = "rock"
 	edge_blending_priority = 1
+	can_build_onto = 1
 
 
 // This proc adds a 'layer' on top of the turf.
