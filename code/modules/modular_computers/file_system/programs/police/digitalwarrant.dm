@@ -74,8 +74,8 @@ var/warrant_uid = 0
 	if(!istype(user))
 		return
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	if(!istype(I) || !I.registered_name || !(access_security in I.access))
-		to_chat(user, "Authentication error: Unable to locate ID with apropriate access to allow this operation.")
+	if(!istype(I) || !I.registered_name || !(access_warrant in I.access))
+		to_chat(user, "Authentication error: Unable to locate ID with appropriate access to allow this operation.")
 		return
 
 	if(href_list["addwarrant"])
