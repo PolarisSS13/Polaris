@@ -47,7 +47,6 @@
 	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
-	destroy_artefacts = TRUE
 
 /obj/item/weapon/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -99,7 +98,6 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
-	destroy_artefacts = TRUE
 
 /obj/item/weapon/pickaxe/borgdrill
 	name = "enhanced sonic jackhammer"
@@ -108,7 +106,6 @@
 	digspeed = 15
 	desc = "Cracks rocks with sonic blasts. This one seems like an improved design."
 	drill_verb = "hammering"
-	destroy_artefacts = TRUE
 
 /*****************************Shovel********************************/
 
