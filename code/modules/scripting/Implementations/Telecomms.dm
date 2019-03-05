@@ -70,6 +70,7 @@
 		interpreter.SetVar("$security",	SEC_FREQ)
 		interpreter.SetVar("$supply",	SUP_FREQ)
 		interpreter.SetVar("$explorer", EXP_FREQ)
+		interpreter.SetVar("$legal", LEG_FREQ)		
 
 		// Signal data
 
