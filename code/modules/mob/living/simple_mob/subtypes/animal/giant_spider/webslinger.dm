@@ -12,7 +12,7 @@
 	This makes them more dangerous when paired with others, as fleeing may stop being an option once webbed. \
 	<br><br>\
 	Their venom is known to make bitten prey hallucinate, greatly compromising their combat ability."
-	value = CATALOGUER_REWARD_UNCOMMON
+	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/animal/giant_spider/webslinger
 	desc = "Furry and green, it makes you shudder to look at it. This one has brilliant green eyes, and a cloak of web."

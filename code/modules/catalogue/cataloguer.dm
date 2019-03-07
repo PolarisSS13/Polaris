@@ -1,5 +1,4 @@
 GLOBAL_LIST_EMPTY(all_cataloguers)
-GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 
 /*
 	This is a special scanner which exists to give explorers something to do besides shoot things.
@@ -21,6 +20,7 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 3, TECH_MAGNET = 3)
 	force = 0
+	var/points_stored = 0 // Amount of 'exploration points' this device holds.
 	var/scan_range = 3
 	var/credit_sharing_range = 14 // If another person is within this radius, they will also be credited with a successful scan.
 	var/datum/category_item/catalogue/displayed_data = null // Used for viewing a piece of data in the UI.
@@ -46,6 +46,7 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 
 /obj/item/device/cataloguer/Destroy()
 	GLOB.all_cataloguers -= src
+	displayed_data = null
 	return ..()
 
 /obj/item/device/cataloguer/afterattack(atom/target, mob/user, proximity_flag)
@@ -106,10 +107,14 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 /obj/item/device/cataloguer/proc/catalogue_object(atom/target, mob/living/user)
 	// Figure out who may have helped out.
 	var/list/contributers = list()
+	var/list/contributer_names = list()
 	for(var/thing in player_list)
 		var/mob/M = thing
+		if(M == user)
+			continue
 		if(get_dist(M, user) <= credit_sharing_range)
-			contributers += M.name
+			contributers += M
+			contributer_names += M.name
 
 	var/points_gained = 0
 
@@ -118,41 +123,31 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 		for(var/data_type in target.catalogue_data)
 			var/datum/category_item/catalogue/I = GLOB.catalogue_data.resolve_item(data_type)
 			if(istype(I))
-				var/list/discoveries = I.discover(user, contributers)
+				var/list/discoveries = I.discover(user, list(user.name) + contributer_names) // If one discovery leads to another, the list returned will have all of them.
 				if(LAZYLEN(discoveries))
 					for(var/D in discoveries)
 						var/datum/category_item/catalogue/data = D
 						points_gained += data.value
 
+	// Give out points.
 	if(points_gained)
+		// First, to us.
 		to_chat(user, span("notice", "Gained [points_gained] points from this scan."))
+		adjust_points(points_gained)
 
-	/*
-	// OLD SHIT
-	var/value_gained = 0
+		// Now to our friends, if any.
+		if(contributers.len)
+			for(var/mob/M in contributers)
+				var/list/things = M.GetAllContents(3) // Depth of two should reach into bags but just in case lets make it three.
+				var/obj/item/device/cataloguer/other_cataloguer = locate() in things // If someone has two or more scanners this only adds points to one.
+				if(other_cataloguer)
+					to_chat(M, span("notice", "Gained [points_gained] points from \the [user]'s scan."))
+					other_cataloguer.adjust_points(points_gained)
 
-	// Now insert it into the mysterious magical global information holder.
-	var/datum/catalogue_data/data = new(target.get_catalogue_name(), target.get_catalogue_desc(), target.get_catalogue_value(), contributers)
-	if(!is_duplicate_data(data))
-		GLOB.all_cataloguer_discoveries += data
-		data.display_in_chatlog(user)
-		value_gained += data.value
 
-	// See if target had any bonus stuff.
-	if(LAZYLEN(target.catalogue_bonus_data))
-		for(var/data_type in target.catalogue_bonus_data)
-			var/datum/catalogue_data/extra_data = new data_type(new_cataloguers = contributers)
-			if(!is_duplicate_data(extra_data))
-				GLOB.all_cataloguer_discoveries += extra_data
-				to_chat(user, span("notice", "Additional data found from scanning \the [target]."))
-				extra_data.display_in_chatlog(user)
-				value_gained += data.value
-	*/
-
-		// Increment points.
-
-/obj/item/device/cataloguer/proc/add_catalogue_data(atom/target, mob/living/user)
-
+// Negative points are bad.
+/obj/item/device/cataloguer/proc/adjust_points(amount)
+	points_stored = max(0, points_stored += amount)
 
 /obj/item/device/cataloguer/attack_self(mob/living/user)
 	interact(user)
@@ -164,7 +159,6 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 	// If displayed_data exists, we show that, otherwise we show a list of all data in the mysterious global list.
 	if(displayed_data)
 		title = uppertext(displayed_data.name)
-	//	dat += "<h1>[uppertext(displayed_data.name)]</h1>"
 		dat += "<i>[displayed_data.desc]</i>"
 		if(LAZYLEN(displayed_data.cataloguers))
 			dat += "Cataloguers : <b>[english_list(displayed_data.cataloguers)]</b>."
@@ -176,6 +170,9 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 		dat += "<br><a href='?src=\ref[src];show_data=null'>\[Back to List\]</a>"
 
 	else
+		// Placing this here so its at the top.
+		dat += "Contains <b>[points_stored]</b> Exploration Points."
+
 		for(var/G in GLOB.catalogue_data.categories)
 			var/datum/category_group/group = G
 			var/list/group_dat = list()
@@ -200,11 +197,9 @@ GLOBAL_LIST_EMPTY(all_cataloguer_discoveries)
 /obj/item/device/cataloguer/Topic(href, href_list)
 	if(..())
 		usr << browse(null, "window=cataloguer_display")
-	//	usr.unset_machine()
 		return 0
 	if(href_list["close"] )
 		usr << browse(null, "window=cataloguer_display")
-	//	usr.unset_machine()
 		return 0
 
 	if(href_list["show_data"])

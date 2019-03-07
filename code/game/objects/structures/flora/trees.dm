@@ -246,9 +246,7 @@
 	icon_state = "tree_sif"
 	base_state = "tree_sif"
 	product = /obj/item/stack/material/log/sif
-
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
-	catalogue_delay = 2 SECONDS
 
 /obj/structure/flora/tree/sif/Initialize()
 	update_icon()

@@ -18,7 +18,7 @@
 	from observant prey, or if their prey is still alive after their initial ambush. \
 	<br><br>\
 	The venom from this spider can cause confusion to those afflicted."
-	value = CATALOGUER_REWARD_UNCOMMON
+	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/animal/giant_spider/lurker
 	desc = "Translucent and white, it makes you shudder to look at it. This one has incandescent red eyes."

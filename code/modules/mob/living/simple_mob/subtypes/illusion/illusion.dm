@@ -33,6 +33,8 @@
 	appearance = thing_to_copy.appearance
 	copying = thing_to_copy
 	density = thing_to_copy.density // So you can't bump into objects that aren't supposed to be dense.
+	catalogue_data = thing_to_copy.catalogue_data.Copy()
+	catalogue_delay = thing_to_copy.catalogue_delay
 	return TRUE
 
 // Because we can't perfectly duplicate some examine() output, we directly examine the AM it is copying.  It's messy but

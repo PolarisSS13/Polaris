@@ -20,7 +20,7 @@
 	<br><br>\
 	Nurse venom causes fatigue and tiredness. They are also able to directly inject spider eggs into \
 	those it bites, which can later hatch spiderlings, causing considerably physical and psychological trauma."
-	value = CATALOGUER_REWARD_COMMON
+	value = CATALOGUER_REWARD_EASY
 
 /mob/living/simple_mob/animal/giant_spider/nurse
 	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."

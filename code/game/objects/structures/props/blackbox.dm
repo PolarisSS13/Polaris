@@ -15,12 +15,9 @@
 /obj/structure/prop/blackbox/quarantined_shuttle
 	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/quarantined_shuttle)
 
-/obj/structure/prop/blackbox/crashed_med_shuttle
-	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/crashed_med_shuttle)
-
 // The actual 'data' on the black box. Obtainable with a Cataloguer.
 /datum/category_item/catalogue/information/blackbox
-	value = CATALOGUER_REWARD_UNCOMMON
+	value = CATALOGUER_REWARD_MEDIUM
 
 /datum/category_item/catalogue/information/blackbox/quarantined_shuttle
 	name = "Black Box Data - MBT-540"
@@ -53,6 +50,8 @@
 		<B>Captain Adisu 17:23:58:09:</B> I don't think they're opening those doors Ted. I don't think they're coming.
 	"}
 
+/obj/structure/prop/blackbox/crashed_med_shuttle
+	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/crashed_med_shuttle)
 
 /datum/category_item/catalogue/information/blackbox/crashed_med_shuttle
 	name = "Black Box Data - TBD"

@@ -1,1 +1,0 @@
-// This is a physical object that holds and displays the accumulated explorer-points for a particular person.

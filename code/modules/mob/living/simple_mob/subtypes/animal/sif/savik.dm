@@ -13,7 +13,7 @@
 	the Savik will hunt its prey with absolute perseverence, as failure to catch a suitable meal is likely to \
 	spell death for the animal due to the high energy expenditure of its initial strike. \
 	The Savik has no known predators, and should be avoided at all costs."
-	value = CATALOGUER_REWARD_UNCOMMON
+	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/animal/sif/savik
 	name = "savik"

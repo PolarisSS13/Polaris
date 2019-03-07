@@ -14,8 +14,8 @@
 	for a very long time.\
 	<br><br>\
 	Unfortunately, no useful purpose has been found so far for the crystals, beyond being visually pleasing \
-	to observe. They would likely be valued by jewellers, if it wasn't very difficult to work with the crystal."
-	value = CATALOGUER_REWARD_UNCOMMON
+	to observe. They would likely be valued by jewelers, if it wasn't very difficult to work with the crystal."
+	value = CATALOGUER_REWARD_MEDIUM
 	unlocked_by_all = list(
 		/datum/category_item/catalogue/material/regular_crystal,
 		/datum/category_item/catalogue/material/ice_crystal,
@@ -27,7 +27,7 @@
 	name = "Subterranean Crystal"
 	desc = "This is a luminescent crystalline mass, colored green or purple, and is sometimes found \
 	in average subterranean environments. It does not appear to be able to serve any useful purpose."
-	value = CATALOGUER_REWARD_COMMON
+	value = CATALOGUER_REWARD_EASY
 
 //legacy crystal
 /obj/machinery/crystal
@@ -55,7 +55,7 @@
 	name = "Ice Crystal"
 	desc = "This is a luminescent crystalline mass with a blue, icy appearance, and is sometimes found \
 	in very cold, subterranean environments. It does not appear to be able to serve any useful purpose."
-	value = CATALOGUER_REWARD_COMMON
+	value = CATALOGUER_REWARD_EASY
 
 /obj/machinery/crystal/ice //slightly more thematic crystals
 	name = "ice crystal"
@@ -74,7 +74,7 @@
 	desc = "This is a luminescent crystalline mass, colored orange and red, and is sometimes found \
 	in very hot, subterranean environments. It does not appear to be able to serve any useful purpose, \
 	beyond heralding dangerous magma."
-	value = CATALOGUER_REWARD_COMMON
+	value = CATALOGUER_REWARD_EASY
 
 /obj/machinery/crystal/lava
 	name = "magma crystal"

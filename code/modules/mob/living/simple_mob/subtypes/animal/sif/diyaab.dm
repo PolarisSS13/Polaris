@@ -9,7 +9,7 @@
 	supplementing their diet with organisms living in tree bark, \
 	Diyaab packs have been observed to hunt prey several times their size during the less plentiful winter months. \
 	Despite their unassuming appearance, the Diyaab possesses remarkably sharp anterior teeth."
-	value = CATALOGUER_REWARD_COMMON
+	value = CATALOGUER_REWARD_EASY
 
 /mob/living/simple_mob/animal/sif/diyaab
 	name = "diyaab"
