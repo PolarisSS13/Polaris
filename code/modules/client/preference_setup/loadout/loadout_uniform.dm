@@ -166,7 +166,7 @@
 /datum/gear/uniform/job_turtle/science
 	display_name = "turtleneck, science"
 	path = /obj/item/clothing/under/rank/scientist/turtleneck
-	allowed_roles = list("Research Director", "Scientist", "Roboticist")
+	allowed_roles = list("Research Director", "Scientist", "Roboticist", "Xenobiologist")
 
 /datum/gear/uniform/job_turtle/security
 	display_name = "turtleneck, security"
