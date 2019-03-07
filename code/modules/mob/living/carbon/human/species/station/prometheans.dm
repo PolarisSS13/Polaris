@@ -58,17 +58,16 @@ var/datum/species/shapeshifter/promethean/prometheans
 	cloning_modifier = /datum/modifier/cloning_sickness/promethean
 
 	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 220 //Default 200
+	cold_level_2 = 240 //Default 200
 	cold_level_3 = 130 //Default 120
 
 	heat_level_1 = 320 //Default 360
 	heat_level_2 = 370 //Default 400
 	heat_level_3 = 600 //Default 1000
 
-	body_temperature =      310.15
+	body_temperature = T20C	// Room temperature
 
-	siemens_coefficient =   0.4
-	rarity_value =          5
+	rarity_value = 5
 
 	genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
@@ -150,12 +149,13 @@ var/datum/species/shapeshifter/promethean/prometheans
 			H.gib()
 
 /datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
-	var/regen_brute = 1
-	var/regen_burn = 1
-	var/regen_tox = 1
-	var/regen_oxy = 1
+	var/healing = TRUE	// Switches to FALSE if the environment's bad
 
-	var/turf/T = H.loc
+	if(H.fire_stacks < 0)	// If you're soaked, you're melting
+		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
+		healing = FALSE
+
+	var/turf/T = get_turf(H)
 	if(istype(T))
 		var/obj/effect/decal/cleanable/C = locate() in T
 		if(C && !(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET))))
@@ -165,79 +165,53 @@ var/datum/species/shapeshifter/promethean/prometheans
 				S.dirt = 0
 			H.nutrition = min(500, max(0, H.nutrition + rand(15, 30)))
 
-	T = get_turf(H) // Swap over to an actual turf, because we need to get the pressure.
-	if(istype(T)) // Make sure it exists, and is a turf again.
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = environment.return_pressure()
 		var/affecting_pressure = H.calculate_affecting_pressure(pressure)
-		if(affecting_pressure <= hazard_low_pressure) // Dangerous low pressure stops the regeneration of physical wounds. Body is focusing on keeping them intact rather than sealing.
-			regen_brute = 0
-			regen_burn = 0
+		if(affecting_pressure <= hazard_low_pressure)	// If you're in a vacuum, you don't heal
+			healing = FALSE
+
+	if(H.bodytemperature > heat_level_1 || H.bodytemperature < cold_level_1)	// If you're too hot or cold, you don't heal
+		healing = FALSE
+
+	if(H.nutrition < 50)	// If you're starving, you don't heal
+		healing = FALSE
 
 	// Heal remaining damage.
-	if(H.fire_stacks >= 0)
+	if(healing)
 		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
-			var/nutrition_cost = 0
-			var/nutrition_debt = 0
-			var/starve_mod = 1
-			if(H.nutrition <= 25)
+
+			var/nutrition_cost = 0		// The total amount of nutrition drained every tick, when healing
+			var/starve_mod = 1			// Lowers healing, increases agony
+
+			if(H.nutrition <= 150)	// This is when the icon goes red
 				starve_mod = 0.75
+			heal_rate *= starve_mod
 
-			if(regen_brute)
-				nutrition_debt = H.getBruteLoss()
-				H.adjustBruteLoss(-heal_rate * starve_mod)
-				nutrition_cost += nutrition_debt - H.getBruteLoss()
-
-			if(regen_burn)
-				nutrition_debt = H.getFireLoss()
-				H.adjustFireLoss(-heal_rate * starve_mod)
-				nutrition_cost += nutrition_debt - H.getFireLoss()
-
-			if(regen_oxy)
-				nutrition_debt = H.getOxyLoss()
-				H.adjustOxyLoss(-heal_rate * starve_mod)
-				nutrition_cost += nutrition_debt - H.getOxyLoss()
-
-			if(regen_tox)
-				nutrition_debt = H.getToxLoss()
-				H.adjustToxLoss(-heal_rate * starve_mod)
-				nutrition_cost += nutrition_debt - H.getToxLoss()
+			if(H.getBruteLoss())
+				H.adjustBruteLoss(-heal_rate)
+				nutrition_cost += heal_rate
+			if(H.getFireLoss())
+				H.adjustFireLoss(-heal_rate)
+				nutrition_cost += heal_rate
+			if(H.getOxyLoss())
+				H.adjustOxyLoss(-heal_rate)
+				nutrition_cost += heal_rate
+			if(H.getToxLoss())
+				H.adjustToxLoss(-heal_rate)
+				nutrition_cost += heal_rate
 
 			H.nutrition -= (3 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
 			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
 
 			var/agony_to_apply = ((1 / starve_mod) * nutrition_cost) //Regenerating damage causes minor pain over time. Small injures will be no issue, large ones will cause problems.
+
 			if((H.getHalLoss() + agony_to_apply) <= 70) // Don't permalock, but make it far easier to knock them down.
 				H.apply_damage(agony_to_apply, HALLOSS)
 
-	else
-		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
 
 /datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/carbon/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
 
 /datum/species/shapeshifter/promethean/get_flesh_colour(var/mob/living/carbon/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
-
-/datum/species/shapeshifter/promethean/get_additional_examine_text(var/mob/living/carbon/human/H)
-
-	if(!stored_shock_by_ref["\ref[H]"])
-		return
-
-	var/t_she = "She is"
-	if(H.identifying_gender == MALE)
-		t_she = "He is"
-	else if(H.identifying_gender == PLURAL)
-		t_she = "They are"
-	else if(H.identifying_gender == NEUTER)
-		t_she = "It is"
-
-	switch(stored_shock_by_ref["\ref[H]"])
-		if(1 to 10)
-			return "[t_she] flickering gently with a little electrical activity."
-		if(11 to 20)
-			return "[t_she] glowing gently with moderate levels of electrical activity.\n"
-		if(21 to 35)
-			return "<span class='warning'>[t_she] glowing brightly with high levels of electrical activity.</span>"
-		if(35 to INFINITY)
-			return "<span class='danger'>[t_she] radiating massive levels of electrical activity!</span>"
