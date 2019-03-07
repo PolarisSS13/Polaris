@@ -57,6 +57,7 @@
 /obj/structure/closet/secure_closet/guncabinet/bodyguard
 	name = "bodyguard's gun cabinet"
 	req_access = list(access_bodyguard)
+	req_one_access = list(access_bodyguard)
 
 	New()
 		..()
