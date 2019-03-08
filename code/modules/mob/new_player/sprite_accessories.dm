@@ -43,43 +43,57 @@
 ////////////////////////////
 */
 
+#define HAIR_BALD 0 //*rubs head*
+#define HAIR_SHORT 1
+#define HAIR_MEDIUM 2
+#define HAIR_LONG 3
+
 /datum/sprite_accessory/hair
 
 	icon = 'icons/mob/Human_face_m.dmi'	  // default icon for all hairs
 	var/icon_add = 'icons/mob/human_face.dmi'
+	var/hair_type = HAIR_SHORT // Default is short
 
 	bald
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
+		hair_type = HAIR_BALD
 		species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_CHILD,SPECIES_HUMAN_TEEN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX)
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
+		hair_type = HAIR_SHORT
 		icon_state = "hair_a" // you do not need to define _s or _l sub-states, game automatically does this for you
 
 	short2
 		name = "Short Hair 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthair3"
 
 	short3
 		name = "Short Hair 3"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthair4"
 
 	twintail
 		name = "Twintail"
+		hair_type = HAIR_LONG
 		icon_state = "hair_twintail"
 
 	cut
 		name = "Cut Hair"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_c"
 
 	flair
 		name = "Flaired Hair"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_flair"
 
 	long
 		name = "Shoulder-length Hair"
+		hair_type = HAIR_LONG
 		icon_state = "hair_b"
 
 	/*longish
@@ -88,339 +102,422 @@
 
 	longer
 		name = "Long Hair"
+		hair_type = HAIR_LONG
 		icon_state = "hair_vlong"
 
 	longest
 		name = "Very Long Hair"
+		hair_type = HAIR_LONG
 		icon_state = "hair_longest"
 
 	longfringe
 		name = "Long Fringe"
+		hair_type = HAIR_LONG
 		icon_state = "hair_longfringe"
 
 	longestalt
 		name = "Longer Fringe"
+		hair_type = HAIR_LONG
 		icon_state = "hair_vlongfringe"
 
 	halfbang
 		name = "Half-banged Hair"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_halfbang"
 
 	halfbangalt
 		name = "Half-banged Hair Alt"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_halfbang_alt"
 
 	ponytail1
 		name = "Ponytail 1"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail"
 
 	ponytail2
 		name = "Ponytail 2"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_pa"
 
 	ponytail3
 		name = "Ponytail 3"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail3"
 
 	ponytail4
 		name = "Ponytail 4"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail4"
 
 	ponytail5
 		name = "Ponytail 5"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail5"
 
 	ponytail6
 		name = "Ponytail 6"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytail6"
 
 	fringetail
 		name = "Fringetail"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_fringetail"
 
 	sideponytail
 		name = "Side Ponytail"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_stail"
 
 	sideponytail4 //Not happy about this... but it's for the save files.
 		name = "Side Ponytail 2"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ponytailf"
 
 	sideponytail2
 		name = "One Shoulder"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_oneshoulder"
 
 	sideponytail3
 		name = "Tress Shoulder"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_tressshoulder"
 
 	spikyponytail
 		name = "Spiky Ponytail"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_spikyponytail"
 
 	zieglertail
 		name = "Zieglertail"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ziegler"
 	wisp
 		name = "Wisp"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_wisp"
 
 	parted
 		name = "Parted"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_parted"
 
 	pompadour
 		name = "Pompadour"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_pompadour"
 
 	sleeze
 		name = "Sleeze"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_sleeze"
 
 	quiff
 		name = "Quiff"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_quiff"
 
 	bedhead
 		name = "Bedhead"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bedhead"
 
 	bedhead2
 		name = "Bedhead 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bedheadv2"
 
 	bedhead3
 		name = "Bedhead 3"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bedheadv3"
 
 	bedheadlong
 		name = "Bedhead Long"
+		hair_type = HAIR_LONG
 		icon_state = "hair_long_bedhead"
 
 	beehive
 		name = "Beehive"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_beehive"
 
 	beehive2
 		name = "Beehive 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_beehive2"
 
 	bobcurl
 		name = "Bobcurl"
 		icon_state = "hair_bobcurl"
+		hair_type = HAIR_SHORT
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
 
 	bob
 		name = "Bob"
 		icon_state = "hair_bobcut"
+		hair_type = HAIR_SHORT
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
 
 	bobcutalt
 		name = "Chin Length Bob"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bobcutalt"
 
 	bun
 		name = "Bun"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bun"
 
 	bun2
 		name = "Bun 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bun2"
 
 	bun3
 		name = "Bun 3"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bun3"
 
 	bowl
 		name = "Bowl"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_bowlcut"
 
 	buzz
 		name = "Buzzcut"
+		hair_type = HAIR_BALD
 		icon_state = "hair_buzzcut"
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
 
 	shavehair
 		name = "Shaved Hair"
+		hair_type = HAIR_BALD
 		icon_state = "hair_shaved"
 
 	crew
 		name = "Crewcut"
+		hair_type = HAIR_BALD
 		icon_state = "hair_crewcut"
 
 	combover
 		name = "Combover"
+		hair_type = HAIR_BALD
 		icon_state = "hair_combover"
 
 	father
 		name = "Father"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_father"
 
 	reversemohawk
 		name = "Reverse Mohawk"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_reversemohawk"
 
 	devillock
 		name = "Devil Lock"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_devilock"
 
 	dreadlocks
 		name = "Dreadlocks"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_dreads"
 
 	curls
 		name = "Curls"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_curls"
 
 	afro
 		name = "Afro"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_afro"
 
 	afro2
 		name = "Afro 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_afro2"
 
 	afro_large
 		name = "Big Afro"
+		hair_type = HAIR_LONG
 		icon_state = "hair_bigafro"
 
 	rows
 		name = "Rows"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_rows1"
 
 	rows2
 		name = "Rows 2"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_rows2"
 
 	sargeant
 		name = "Flat Top"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_sargeant"
 
 	emo
 		name = "Emo"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_emo"
 
 	emo2
 		name = "Emo Alt"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_emo2"
 
 	longemo
 		name = "Long Emo"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_emolong"
 
 	fringeemo
 		name = "Emo Fringe"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_emofringe"
 
 	veryshortovereyealternate
 		name = "Overeye Very Short, Alternate"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_veryshortovereyealternate"
 
 	veryshortovereye
 		name = "Overeye Very Short"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_veryshortovereye"
 
 	shortovereye
 		name = "Overeye Short"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_shortovereye"
 
 	longovereye
 		name = "Overeye Long"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_longovereye"
 
 	flowhair
 		name = "Flow Hair"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_f"
 
 	feather
 		name = "Feather"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_feather"
 
 	hitop
 		name = "Hitop"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_hitop"
 
 	mohawk
 		name = "Mohawk"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_d"
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
 
 	jensen
 		name = "Adam Jensen Hair"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_jensen"
 
 	gelled
 		name = "Gelled Back"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_gelled"
 
 	gentle
 		name = "Gentle"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_gentle"
 
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
+		hair_type = HAIR_SHORT
 		species_allowed = list(SPECIES_HUMAN,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI)
 
 	kusangi
 		name = "Kusanagi Hair"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_kusanagi"
 
 	kagami
 		name = "Pigtails"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_kagami"
 
 	himecut
 		name = "Hime Cut"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_himecut"
 
 	shorthime
 		name = "Short Hime Cut"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_shorthime"
 
 	grandebraid
 		name = "Grande Braid"
+		hair_type = HAIR_LONG
 		icon_state = "hair_grande"
 
 	mbraid
 		name = "Medium Braid"
 		icon_state = "hair_shortbraid"
+		hair_type = HAIR_MEDIUM
 
 	braid2
 		name = "Long Braid"
 		icon_state = "hair_hbraid"
+		hair_type = HAIR_LONG
 
 	braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
+		hair_type = HAIR_LONG
 
 	odango
 		name = "Odango"
+		hair_type = HAIR_LONG
 		icon_state = "hair_odango"
 
 	ombre
 		name = "Ombre"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_ombre"
 
 	updo
 		name = "Updo"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_updo"
 
 	skinhead
 		name = "Skinhead"
+		hair_type = HAIR_BALD
 		icon_state = "hair_skinhead"
 
 	balding
 		name = "Balding Hair"
 		icon_state = "hair_e"
+		hair_type = HAIR_BALD
 		gender = MALE
 
 	familyman
 		name = "The Family Man"
+		hair_type = HAIR_MEDIUM
 		icon_state = "hair_thefamilyman"
 
 	mahdrills
 		name = "Drillruru"
+		hair_type = HAIR_SHORT
 		icon_state = "hair_drillruru"
 
 	fringetail
@@ -484,10 +581,12 @@
 
 	modern
 		name = "Modern"
+		hair_type = HAIR_LONG
 		icon_state = "hair_modern"
 
 	bald
 		name = "Bald"
+		hair_type = HAIR_BALD
 		icon_state = "bald"
 
 	longeralt2
@@ -628,18 +727,22 @@
 
 	shy
 		name = "Shy"
+		hair_type = HAIR_LONG
 		icon_state = "hair_shy"
 
 	jade
 		name = "Jade"
+		hair_type = HAIR_LONG
 		icon_state = "hair_jade"
 
 	country
 		name = "Country"
+		hair_type = HAIR_LONG
 		icon_state = "hair_country"
 
 	rosa
 		name = "Rosa"
+		hair_type = HAIR_LONG
 		icon_state = "hair_rosa"
 
 	dave
