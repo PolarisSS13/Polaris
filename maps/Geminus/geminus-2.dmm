@@ -4124,7 +4124,7 @@
 "bBp" = (/obj/structure/reagent_dispensers/cleanertank,/turf/simulated/floor/tiled/white,/area/medical/medbay_primary_storage)
 "bBq" = (/obj/machinery/gibber,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/kitchen)
 "bBr" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/tiled/freezer,/area/crew_quarters/kitchen)
-"bBs" = (/obj/machinery/light/colored/orange,/turf/simulated/floor/tiled/techfloor,/area/tcommsat/lounge)
+"bBs" = (/obj/machinery/light/colored/orange,/obj/machinery/telecomms/server/presets/legal,/turf/simulated/floor/tiled/techfloor,/area/tcommsat/lounge)
 "bBt" = (/obj/machinery/light/colored/green,/turf/simulated/floor/tiled/techfloor,/area/tcommsat/lounge)
 "bBu" = (/obj/structure/table/standard,/obj/item/weapon/dice/d10,/obj/item/weapon/dice/d100,/obj/item/weapon/dice/d12,/obj/item/weapon/dice/d20,/obj/item/weapon/dice/d4,/obj/item/weapon/dice/d8,/obj/item/weapon/storage/dicecup/loaded,/turf/simulated/floor/decor{tag = "icon-tiles1"; icon_state = "tiles1"},/area/planets/Geminus/indoor/backroom)
 "bBv" = (/obj/machinery/honey_extractor,/obj/effect/floor_decal/corner/lime{dir = 9},/turf/simulated/floor/tiled,/area/hydroponics/garden)
