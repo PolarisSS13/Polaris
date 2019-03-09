@@ -13,7 +13,7 @@ var/datum/antagonist/faction/factionists
 
 	antaghud_indicator = "faction_wu"
 	antag_indicator = "faction_wu"
-
+	disallowed_classes = list("Upper Class")
 	hard_cap = 5
 	hard_cap_round = 6
 	initial_spawn_req = 3
@@ -22,7 +22,26 @@ var/datum/antagonist/faction/factionists
 	flags = ANTAG_IMPLANT_IMMUNE | ANTAG_VOTABLE
 	can_use_aooc = TRUE
 
-	restricted_jobs = list()
+	restricted_jobs = list("AI",\
+	"Cyborg",\
+	"City Hall Guard",\
+	"City Hall Secretary",\
+	"Defense Attorney",\
+	"City Clerk",\
+	"Judge",\
+	"Mayor",
+	"Chief Engineer",\
+	"Chief Medical Officer",\
+	"Reseach Director",\
+	"Chief of Police",\
+	"Detective",\
+	"Police Officer",\
+	"Prison Warden",\
+	"District Prosecutor",\
+	"Scientist",\
+	"Xenobiologist",\
+	"Roboticist"
+	)
 	var/starting_funds = 3000
 	var/deepweb_website = list()
 
@@ -42,7 +61,19 @@ var/datum/antagonist/faction/factionists
 	role_desc = "Rich assholes."
 	starting_funds = 10000
 	id =  MODE_FACTIONS_TF
-	disallowed_classes = list("Working Class")
+	disallowed_classes = list("Working Class", "Middle Class")
+	restricted_jobs = list("AI",\
+	"Cyborg",\
+	"AI",\
+	"Sanitation Technician",\
+	"Librarian",\
+	"Botanist",\
+	"Factory Worker",\
+	"Factory Manager",\
+	"Bartender",\
+	"Chef",\
+	"Police Officer",\
+	"City Engineer")
 
 	antaghud_indicator = "faction_tf"
 	antag_indicator = "faction_tf"
@@ -54,16 +85,23 @@ var/datum/antagonist/faction/factionists
 	hacking and trying to get NT's secrets."
 	id =  MODE_FACTIONS_FI
 	starting_funds = 5000
+	disallowed_classes = list("Upper Class")
+	restricted_jobs = list("AI",\
+	"Cyborg",\
+	"AI",\
+	"Chief of Police",\
+	"Mayor",\
+	"City Clerk")
 	antaghud_indicator = "faction_lo"
 	antag_indicator = "faction_lo"
 
 /datum/antagonist/faction/cartel
 	role_text = "Blue Moon Cartelist"
 	role_text_plural = "Blue Moon Cartelists"
-	role_desc = "'An underground organization built through deals with the police and double-agents within the government. Sells firearms, influences politicians, controls crime lords."
+	role_desc = "An apolitical underground organization built through deals with the police and double-agents within the government. Sells firearms, influences politicians, controls crime lords."
 	id =  MODE_FACTIONS_BC
 	starting_funds = 8000
-
+	disallowed_classes = list("Upper Class")
 	antaghud_indicator = "faction_bc"
 	antag_indicator = "faction_bc"
 
