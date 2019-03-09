@@ -65,6 +65,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	heat_level_2 = 370 //Default 400
 	heat_level_3 = 600 //Default 1000
 
+	siemens_coefficient = 0.8
 	body_temperature = T20C	// Room temperature
 
 	rarity_value = 5
@@ -149,10 +150,14 @@ var/datum/species/shapeshifter/promethean/prometheans
 			H.gib()
 
 /datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
-	var/healing = TRUE	// Switches to FALSE if the environment's bad
+	var/healing = TRUE	// Switches to FALSE if healing is not possible at all.
+	var/regen_brute = TRUE
+	var/regen_burn = TRUE
+	var/regen_tox = TRUE
+	var/regen_oxy = TRUE
 
-	if(H.fire_stacks < 0)	// If you're soaked, you're melting
-		H.adjustToxLoss(2*heal_rate)	// Doubled because 0.5 is miniscule, and fire_stacks are capped in both directions
+	if(H.fire_stacks < 0)	// If you're soaked, you're melting.
+		H.adjustToxLoss(3 * heal_rate)	// Tripled because 0.5 is miniscule, and fire_stacks are capped in both directions
 		healing = FALSE
 
 	var/turf/T = get_turf(H)
@@ -168,47 +173,52 @@ var/datum/species/shapeshifter/promethean/prometheans
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = environment.return_pressure()
 		var/affecting_pressure = H.calculate_affecting_pressure(pressure)
-		if(affecting_pressure <= hazard_low_pressure)	// If you're in a vacuum, you don't heal
-			healing = FALSE
+		if(affecting_pressure <= hazard_low_pressure)	// If you're in a vacuum, you don't heal physical wounds.
+			regen_brute = FALSE
+			regen_burn = FALSE
 
-	if(H.bodytemperature > heat_level_1 || H.bodytemperature < cold_level_1)	// If you're too hot or cold, you don't heal
-		healing = FALSE
-
-	if(H.nutrition < 50)	// If you're starving, you don't heal
+	if(H.bodytemperature > heat_level_1 || H.bodytemperature < cold_level_1)	// If you're too hot or cold, you can't heal.
 		healing = FALSE
 
 	// Heal remaining damage.
 	if(healing)
 		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
-
 			var/nutrition_cost = 0		// The total amount of nutrition drained every tick, when healing
-			var/starve_mod = 1			// Lowers healing, increases agony
+			var/nutrition_debt = 0
+			var/starve_mod = 1			// Lowering this lowers healing and increases agony multiplicatively.
 
 			if(H.nutrition <= 150)	// This is when the icon goes red
 				starve_mod = 0.75
-			heal_rate *= starve_mod
+				if(H.nutrition <= 50)	// Severe starvation. Damage repaired beyond this point will cause a stunlock if untreated.
+					starve_mod = 0.5
 
-			if(H.getBruteLoss())
-				H.adjustBruteLoss(-heal_rate)
-				nutrition_cost += heal_rate
-			if(H.getFireLoss())
-				H.adjustFireLoss(-heal_rate)
-				nutrition_cost += heal_rate
-			if(H.getOxyLoss())
-				H.adjustOxyLoss(-heal_rate)
-				nutrition_cost += heal_rate
-			if(H.getToxLoss())
-				H.adjustToxLoss(-heal_rate)
-				nutrition_cost += heal_rate
+			if(regen_brute)
+				nutrition_debt = H.getBruteLoss()
+				H.adjustBruteLoss(-heal_rate * starve_mod)
+				nutrition_cost += nutrition_debt - H.getBruteLoss()
+
+			if(regen_burn)
+				nutrition_debt = H.getFireLoss()
+				H.adjustFireLoss(-heal_rate * starve_mod)
+				nutrition_cost += nutrition_debt - H.getFireLoss()
+
+			if(regen_oxy)
+				nutrition_debt = H.getOxyLoss()
+				H.adjustOxyLoss(-heal_rate * starve_mod)
+				nutrition_cost += nutrition_debt - H.getOxyLoss()
+
+			if(regen_tox)
+				nutrition_debt = H.getToxLoss()
+				H.adjustToxLoss(-heal_rate * starve_mod)
+				nutrition_cost += nutrition_debt - H.getToxLoss()
 
 			H.nutrition -= (3 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
 			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
 
 			var/agony_to_apply = ((1 / starve_mod) * nutrition_cost) //Regenerating damage causes minor pain over time. Small injures will be no issue, large ones will cause problems.
 
-			if((H.getHalLoss() + agony_to_apply) <= 70) // Don't permalock, but make it far easier to knock them down.
+			if((starve_mod <= 0.5 && (H.getHalLoss() + agony_to_apply) <= 90) || ((H.getHalLoss() + agony_to_apply) <= 70))	// Will max out at applying halloss at 70, unless they are starving; starvation regeneration will bring them up to a maximum of 120, the same amount of agony a human receives from three taser hits.
 				H.apply_damage(agony_to_apply, HALLOSS)
-
 
 /datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/carbon/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
