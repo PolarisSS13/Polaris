@@ -179,7 +179,7 @@
 	if(!can_become_antag(player) || player.assigned_role in roundstart_restricted)
 		log_debug("[player.key] was selected for [role_text] by lottery, but is not allowed to be that role.")
 		return 0
-	if(player.client.prefs.economic_status in disallowed_classes)
+	if(player.current.client.prefs.economic_status in disallowed_classes)
 		log_debug("[player.key] was selected for [role_text] by lottery, but is not allowed to be that role due to social class.")
 		return 0
 	if(player.special_role)
