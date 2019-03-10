@@ -422,7 +422,7 @@
 	path = /obj/item/clothing/under/focal
 
 /datum/gear/uniform/mbill
-	display_name = "outfit, major bill's (Cargo)"
+	display_name = "outfit, major bill's"
 	path = /obj/item/clothing/under/mbill
 
 /datum/gear/uniform/pcrc
