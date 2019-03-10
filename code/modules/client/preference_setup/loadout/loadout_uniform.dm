@@ -424,12 +424,10 @@
 /datum/gear/uniform/mbill
 	display_name = "outfit, major bill's (Cargo)"
 	path = /obj/item/clothing/under/mbill
-	allowed_roles = list("Quartermaster","Cargo Technician")
 
 /datum/gear/uniform/pcrc
 	display_name = "uniform, PCRC (Security)"
 	path = /obj/item/clothing/under/pcrc
-	cost = 2
 	allowed_roles = list("Security Officer","Head of Security","Warden")
 
 /datum/gear/uniform/brandsuit/grayson
