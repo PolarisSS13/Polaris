@@ -239,7 +239,7 @@
 	id = "Phazon_torso"
 	build_path = /obj/item/mecha_parts/part/phazon_torso
 	time = 60
-	materials = list(DEFAULT_WALL_MATERIAL = 130000, "glass" = 50000, "gold" = 50000, "silver" = 50000, "uranium" = 40000, "diamond" = 60000)
+	materials = list(DEFAULT_WALL_MATERIAL = 130000, "glass" = 100000, "gold" = 100000, "silver" = 100000, "uranium" = 40000, "diamond" = 60000)
 
 /datum/design/item/mechfab/phazon/head
 	name = "Phazon Head"
@@ -253,28 +253,28 @@
 	id = "Phazon_left_arm"
 	build_path = /obj/item/mecha_parts/part/phazon_left_arm
 	time = 40
-	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 25000, "silver" = 25000, "uranium" = 5000, "diamond" = 5000)
 
 /datum/design/item/mechfab/phazon/right_arm
 	name = "Phazon Right Arm"
 	id = "Phazon_right_arm"
 	build_path = /obj/item/mecha_parts/part/phazon_right_arm
 	time = 40
-	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 25000, "silver" = 25000, "uranium" = 5000, "diamond" = 5000)
 
 /datum/design/item/mechfab/phazon/left_leg
 	name = "Phazon Left Leg"
 	id = "Phazon_left_leg"
 	build_path = /obj/item/mecha_parts/part/phazon_left_leg
 	time = 40
-	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 25000, "silver" = 25000, "uranium" = 5000, "diamond" = 5000)
 
 /datum/design/item/mechfab/phazon/right_leg
 	name = "Phazon Right Leg"
 	id = "Phazon_right_leg"
 	build_path = /obj/item/mecha_parts/part/phazon_right_leg
 	time = 40
-	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 25000, "silver" = 25000, "uranium" = 5000, "diamond" = 5000)
 
 /datum/design/item/mecha
 	build_type = MECHFAB
