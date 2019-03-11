@@ -223,6 +223,59 @@
 	time = 60
 	materials = list(DEFAULT_WALL_MATERIAL = 37500, "uranium" = 7500)
 
+/datum/design/item/mechfab/phazon
+	category = "Phazon" //Prohibitively expensive and hard to make, but worth the effort.
+	req_tech = list(TECH_MATERIAL = 7, TECH_ENGINEERING = 7, TECH_PHORON = 5, TECH_POWER = 7, TECH_BLUESPACE = 5, TECH_BIO = 7, TECH_COMBAT = 7, TECH_MAGNET = 7, TECH_DATA = 6, TECH_ILLEGAL = 6)
+
+/datum/design/item/mechfab/phazon/chassis
+	name = "Phazon Chassis"
+	id = "phazon_chassis"
+	build_path = /obj/item/mecha_parts/chassis/phazon
+	time = 20
+	materials = list(DEFAULT_WALL_MATERIAL = 50000)
+
+/datum/design/item/mechfab/phazon/torso
+	name = "Phazon Torso"
+	id = "Phazon_torso"
+	build_path = /obj/item/mecha_parts/part/phazon_torso
+	time = 60
+	materials = list(DEFAULT_WALL_MATERIAL = 130000, "glass" = 50000, "gold" = 50000, "silver" = 50000, "uranium" = 40000, "diamond" = 60000)
+
+/datum/design/item/mechfab/phazon/head
+	name = "Phazon Head"
+	id = "Phazon_head"
+	build_path = /obj/item/mecha_parts/part/phazon_head
+	time = 40
+	materials = list(DEFAULT_WALL_MATERIAL = 70000, "glass" = 30000, "osmium" = 20000, "diamond" = 10000, "phoron" = 20000, "uranium" = 40000)
+
+/datum/design/item/mechfab/phazon/left_arm
+	name = "Phazon Left Arm"
+	id = "Phazon_left_arm"
+	build_path = /obj/item/mecha_parts/part/phazon_left_arm
+	time = 40
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+
+/datum/design/item/mechfab/phazon/right_arm
+	name = "Phazon Right Arm"
+	id = "Phazon_right_arm"
+	build_path = /obj/item/mecha_parts/part/phazon_right_arm
+	time = 40
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+
+/datum/design/item/mechfab/phazon/left_leg
+	name = "Phazon Left Leg"
+	id = "Phazon_left_leg"
+	build_path = /obj/item/mecha_parts/part/phazon_left_leg
+	time = 40
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+
+/datum/design/item/mechfab/phazon/right_leg
+	name = "Phazon Right Leg"
+	id = "Phazon_right_leg"
+	build_path = /obj/item/mecha_parts/part/phazon_right_leg
+	time = 40
+	materials = list(DEFAULT_WALL_MATERIAL = 100000, "phoron" = 20000, "gold" = 14000, "silver" = 14000, "uranium" = 5000, "diamond" = 5000)
+
 /datum/design/item/mecha
 	build_type = MECHFAB
 	category = "Exosuit Equipment"

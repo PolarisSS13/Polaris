@@ -139,6 +139,20 @@
 	containername = "\"Odysseus\" Circuit Crate"
 	access = access_robotics
 
+/datum/supply_pack/robotics/phazon
+	name = "Circuit Crate (\"Phazon\")"
+	contains = list(
+			/obj/item/weapon/circuitboard/mecha/phazon/peripherals,
+			/obj/item/weapon/circuitboard/mecha/phazon/targeting,
+			/obj/item/weapon/circuitboard/mecha/phazon/main,
+			/obj/item/toy/prize/phazon
+			)
+	cost = 200
+	containertype = /obj/structure/closet/crate/secure/science
+	containername = "\"Phazon\" circuit crate"
+	access = access_rd
+
+
 /datum/supply_pack/randomised/robotics/exosuit_mod
 	num_contained = 1
 	contains = list(

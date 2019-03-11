@@ -1,5 +1,5 @@
 /obj/mecha/combat/phazon
-	desc = "An exosuit which can only be described as 'WTF?'."
+	desc = "A miracle of scientific progress, the Phazon is a mech capable of creating a localised bluespace field around it to pass through any solid obstacle. It's also a violation of several interstellar weapons treaties. Was it worth it?"
 	name = "Phazon"
 	icon_state = "phazon"
 	initial_icon = "phazon"
@@ -9,7 +9,7 @@
 	health = 200
 	maxhealth = 200
 	deflect_chance = 30
-	damage_absorption = list("brute"=0.7,"fire"=0.7,"bullet"=0.7,"laser"=0.7,"energy"=0.7,"bomb"=0.7)
+	damage_absorption = list("brute"=0.9,"fire"=0.9,"bullet"=0.9,"laser"=0.9,"energy"=0.9,"bomb"=0.9)
 	max_temperature = 25000
 	infra_luminosity = 3
 	wreckage = /obj/effect/decal/mecha_wreckage/phazon
@@ -27,7 +27,7 @@
 	max_universal_equip = 3
 	max_special_equip = 4
 
-/obj/mecha/combat/phazon/New()
+/obj/mecha/combat/phazon/loaded/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/tool/rcd
 	ME.attach(src)

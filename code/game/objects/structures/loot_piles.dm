@@ -869,6 +869,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		)
 
 	rare_loot = list(
+		/obj/item/weapon/hand_tele,
 		/obj/item/mecha_parts/mecha_equipment/tesla_energy_relay,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/ion,
 		/obj/item/mecha_parts/mecha_equipment/repair_droid,
