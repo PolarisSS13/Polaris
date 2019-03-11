@@ -147,7 +147,7 @@
 			/obj/item/weapon/circuitboard/mecha/phazon/main,
 			/obj/item/toy/prize/phazon
 			)
-	cost = 200
+	cost = 500
 	containertype = /obj/structure/closet/crate/secure/science
 	containername = "\"Phazon\" circuit crate"
 	access = access_rd
