@@ -14,6 +14,7 @@ var/list/department_radio_keys = list(
 	  ":x" = "Raider",		".x" = "Raider",
 	  ":u" = "Supply",		".u" = "Supply",
 	  ":v" = "Service",		".v" = "Service",
+	  ":o" = "Legal",		".o" = "Legal",
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":y" = "Explorer",	".y" = "Explorer",
 
@@ -31,6 +32,7 @@ var/list/department_radio_keys = list(
 	  ":X" = "Raider",		".X" = "Raider",
 	  ":U" = "Supply",		".U" = "Supply",
 	  ":V" = "Service",		".V" = "Service",
+	  ":O" = "Legal",		".O" = "Legal",
 	  ":P" = "AI Private",	".P" = "AI Private",
 	  ":Y" = "Explorer",	".Y" = "Explorer",
 
