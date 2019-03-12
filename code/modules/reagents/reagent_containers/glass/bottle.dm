@@ -78,6 +78,19 @@
 	icon_state = "bottle-3"
 	prefill = list("trioxin" = 60)
 
+/obj/item/weapon/reagent_containers/glass/bottle/peridaxon
+	name = "peridaxon bottle"
+	desc = "A small bottle of peridaxon."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+	prefill = list("peridaxon" = 60)
+
+/obj/item/weapon/reagent_containers/glass/bottle/alkysine
+	name = "alkysine bottle"
+	desc = "A small bottle of alkysine."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-3"
+	prefill = list("alkysine" = 60)
 
 /obj/item/weapon/reagent_containers/glass/bottle/cyanide
 	name = "cyanide bottle"

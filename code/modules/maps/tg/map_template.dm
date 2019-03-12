@@ -7,7 +7,21 @@ var/list/global/map_templates = list()
 		if(!(initial(template.mappath))) // If it's missing the actual path its probably a base type or being used for inheritence.
 			continue
 		template = new T()
-		map_templates[template.name] = template
+		// some faction base business.
+		if(template.faction_type)
+			switch(template.faction_type)
+				if("Blue Moon Cartel")
+					blue_moon_cartel_bases[template.name] = template
+				if("Trust Fund")
+					trust_fund_bases[template.name] = template
+				if("Quercus Coalition")
+					quercus_coalition_bases[template.name] = template
+				if("Worker's Union")
+					workers_union_bases[template.name] = template
+				if("Generic")
+					generic_bases[template.name] = template
+		else
+			map_templates[template.name] = template
 	return TRUE
 
 /datum/map_template
@@ -27,6 +41,7 @@ var/list/global/map_templates = list()
 	var/discard_prob = 0 // If non-zero, there is a chance that the map seeding algorithm will skip this template when selecting potential templates to use.
 
 	var/static/dmm_suite/maploader = new
+	var/faction_type //Use "Generic" if it can be spawned by all factions.
 
 /datum/map_template/New(path = null, rename = null)
 	if(path)

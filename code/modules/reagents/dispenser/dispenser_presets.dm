@@ -21,6 +21,9 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ethanol,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sugar,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sacid,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/peridaxon,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cryoxadone,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/inaprov,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tungsten
 		)
 
