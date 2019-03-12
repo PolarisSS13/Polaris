@@ -68,7 +68,7 @@
 /obj/item/device/encryptionkey/heads/captain
 	name = "colony director's encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0, "Service" = 0)
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0, "Service" = 0, "Legal" = 1)
 
 /obj/item/device/encryptionkey/heads/ai_integrated
 	name = "ai integrated encryption key"
@@ -99,7 +99,7 @@
 /obj/item/device/encryptionkey/heads/hop
 	name = "head of personnel's encryption key"
 	icon_state = "hop_cypherkey"
-	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0)
+	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0, "Legal" = 1)
 /*
 /obj/item/device/encryptionkey/headset_mine
 	name = "mining radio encryption key"
@@ -120,6 +120,16 @@
 	name = "service radio encryption key"
 	icon_state = "srv_cypherkey"
 	channels = list("Service" = 1)
+
+/obj/item/device/encryptionkey/headset_legal
+	name = "legal radio encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Legal" = 1)
+
+/obj/item/device/encryptionkey/headset_judge
+	name = "judge radio encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Legal" = 1, "Command" = 1, "Security" = 1)
 
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"
