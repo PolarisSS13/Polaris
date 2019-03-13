@@ -2333,6 +2333,7 @@
 #include "code\modules\projectiles\projectile\energy.dm"
 #include "code\modules\projectiles\projectile\force.dm"
 #include "code\modules\projectiles\projectile\magnetic.dm"
+#include "code\modules\projectiles\projectile\non-lethal.dm"
 #include "code\modules\projectiles\projectile\special.dm"
 #include "code\modules\projectiles\targeting\targeting_client.dm"
 #include "code\modules\projectiles\targeting\targeting_gun.dm"
