@@ -129,7 +129,7 @@
 
 			H.do_attack_animation(src)
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[src] has grabbed [M][(zone_selected == "l_arm" || zone_selected == "r_arm")? " by their hands!":" passively!"]</span>")
+			visible_message("<span class='warning'>[src] has grabbed [M][(zone_sel.selecting == "l_arm" || zone_sel.selecting == "r_arm")? " by their hands!":" passively!"]</span>")
 			return 1
 
 		if(I_HURT)
