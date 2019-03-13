@@ -184,7 +184,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	if(healing)
 		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
 			var/nutrition_cost = 0		// The total amount of nutrition drained every tick, when healing
-			var/nutrition_debt = 0
+			var/nutrition_debt = 0		// Holder variable used to store previous damage values prior to healing for use in the nutrition_cost equation.
 			var/starve_mod = 1			// Lowering this lowers healing and increases agony multiplicatively.
 
 			if(H.nutrition <= 150)	// This is when the icon goes red
