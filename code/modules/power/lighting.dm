@@ -328,6 +328,9 @@
 	light_type = /obj/item/weapon/light/bulb
 	var/lamp_shade = 1
 
+/obj/machinery/light/flamp/shadeless // for mapping
+	lamp_shade = 0
+
 /obj/machinery/light/small/emergency
 	brightness_range = 4
 	brightness_power = 2
