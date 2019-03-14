@@ -1,8 +1,7 @@
 /obj/item/projectile/nonlethal
 	name = "taser electrode"
-	icon_state = "energy"
-	fire_sound = 'sound/weapons/laser2.ogg'
-	damage = 0
+	icon_state = "spark"
+	fire_sound = 'sound/weapons/Taser.ogg'
 	nodamage = 1
 	light_range = 2
 	light_power = 0.5
@@ -10,7 +9,13 @@
 	embed_chance = 0
 	stun = 8
 	weaken = 8
+	stutter = 8
+	accuracy = 95
+	agony = 5
 	combustion = FALSE
 
-/obj/item/weapon/gun/energy/stunrevolver/taser
-	projectile_type = /obj/item/projectile/nonlethal
+/obj/item/projectile/nonlethal/on_hit(var/atom/target, var/blocked = 0)
+	if(ishuman(target))
+		var/mob/living/carbon/human/M = target
+		M.emote("scream")
+	..()

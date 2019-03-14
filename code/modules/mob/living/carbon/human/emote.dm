@@ -689,7 +689,14 @@
 				m_type = 1
 			else
 				if(!muzzled)
-					message = "[species.scream_verb]!"
+					//message = "[species.scream_verb]!"
+					var/scream_sound = pick("Aaaaaargh!","Aaaaah!","Aaaaahhhh!","AHHHHHH!","Aaarrgh!")
+					var/scream_desc = pick("lets out a bloodcurdling scream",
+					"screams loudly",
+					"yells out in a scream",
+					"yowls",
+					"screams")
+					message = "[scream_desc], \"[scream_sound]\""
 					m_type = 2
 					if(get_gender() == FEMALE)
 						playsound(src, pick(species.female_scream_sound), 50)
@@ -826,14 +833,14 @@
 	//If you're muted for IC chat
 		if(client)
 			client.handle_spam_prevention(MUTE_IC)
+
+			if((client.prefs.muted & MUTE_IC) || say_disabled)
+				src << "<span class='warning'>You cannot speak in IC (Muted).</span>"
+				return
+
+				dialogue_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
+				round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
 		custom_emote(m_type,message)
-		if((client.prefs.muted & MUTE_IC) || say_disabled)
-			src << "<span class='warning'>You cannot speak in IC (Muted).</span>"
-			return
-
-			dialogue_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
-			round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
-
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."

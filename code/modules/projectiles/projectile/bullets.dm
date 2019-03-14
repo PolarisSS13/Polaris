@@ -126,26 +126,26 @@
 
 /obj/item/projectile/bullet/pistol
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	damage = 20
+	damage = 15
 
 /obj/item/projectile/bullet/pistol/ap
-	damage = 15
+	damage = 10
 	armor_penetration = 30
 
 /obj/item/projectile/bullet/pistol/medium
-	damage = 27.5
+	damage = 20.5
 
 /obj/item/projectile/bullet/pistol/medium/ap
-	damage = 20
+	damage = 15
 	armor_penetration = 15
 
 /obj/item/projectile/bullet/pistol/medium/hollow
-	damage = 30
+	damage = 20
 	armor_penetration = -50
 
 /obj/item/projectile/bullet/pistol/strong //revolvers and matebas
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 60
+	damage = 50
 
 /obj/item/projectile/bullet/pistol/rubber/strong //"rubber" bullets for revolvers and matebas
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
@@ -168,7 +168,7 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 50
+	damage = 40
 	armor_penetration = 15
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets

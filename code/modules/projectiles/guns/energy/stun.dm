@@ -3,14 +3,14 @@
 	desc = "The NT Mk30 NL is a small gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	projectile_type = /obj/item/projectile/beam/stun
+	projectile_type = /obj/item/projectile/nonlethal
 
 /obj/item/weapon/gun/energy/taser/carbine
 	name = "taser carbine"
 	desc = "The NTEPD Carbine is a weapon produced by NanoTrasen that fires overcharged beams of electricity to quickly make a non-lethal takedown. The weapon is rarely used due to burns caused by the electric shock."
 	icon_state = "tasercarbine"
 	item_state = null	//so the human update icon uses the icon_state instead.
-	projectile_type = /obj/item/projectile/beam/stun/high
+	projectile_type = /obj/item/projectile/nonlethal
 
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
@@ -29,7 +29,7 @@
 	icon_state = "stunrevolver"
 	item_state = "stunrevolver"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
-	projectile_type = /obj/item/projectile/energy/electrode/strong
+	projectile_type = /obj/item/projectile/nonlethal
 	charge_cost = 300
 
 
