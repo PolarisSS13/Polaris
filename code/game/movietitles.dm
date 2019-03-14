@@ -11,8 +11,8 @@
 	var/list/cast = list()
 	var/list/chunk = list()
 	var/chunksize = 0
-	titles += "<center><h1>EPISODE [rand(1,1000)] - THE [pick("DOWNFALL OF","RISE OF","TROUBLE WITH","FINAL STAND OF","DARK SIDE OF")] [pick("CITY FOLK","HUMANITY","THE CLASS WAR","COLONY LIFE","THE WAGE SLAVES","THE POLLUXIANS","[uppertext(using_map.station_name)]")]</h1></center>"
-	for(var/mob/living/carbon/human/H in world)
+	titles += "<center><h1>EPISODE [rand(1,1000)] - THE [pick("DOWNFALL OF","RISE OF","TROUBLE WITH","FINAL STAND OF","DARK SIDE OF")] [pick("CITY FOLK","THE CORRUPT METROPOLIS","THE CLASS WAR","COLONY LIFE","THE WAGE SLAVES","THE POLLUXIANS","[uppertext(using_map.station_name)]")]</h1></center>"
+	for(var/mob/living/carbon/human/H in mob_list)
 		if(!cast.len && !chunksize)
 			chunk += "CAST:"
 		chunk += "[H.species.get_random_name(H.gender)]\t\t\tas\t\t\t[uppertext(H.real_name)]"
@@ -33,6 +33,7 @@
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
 	var/list/staff = list("PRODUCTION STAFF:")
+	var/list/staffjobs = list("Coffe Fetcher", "Cameraman", "Angry Yeller", "Chair Operator", "Choreographer", "Historical Consultant", "Costume Designer", "Chief Editor", "Executive Assistant")
 	var/list/goodboys = list()
 	for(var/client/C in admins)
 		if((C.holder.rights & R_MOD) && !(C.holder.rights & R_DEBUG|R_ADMIN))
@@ -40,13 +41,16 @@
 		else
 			var/datum/species/S = all_species[pick(all_species)]
 			var/g = prob(50) ? MALE : FEMALE
-			staff += "[S.get_random_name(g)] a.k.a. '[C.key]'"
+			staff += "[uppertext(pick(staffjobs))] - [S.get_random_name(g)] a.k.a. '[C.key]'"
+
 	titles += "<center>[jointext(staff,"<br>")]</center>"
 	if(goodboys.len)
 		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center>"
 
 
-	titles += "<center>Sponsored by [using_map.company_name].<br>All rights reserved. Use for parody prohibited. Prohibited.</center>"
+	var/disclaimer = "Sponsored by [using_map.company_name].<br>All rights reserved.<br>"
+	disclaimer += pick("Use for parody prohibited. Prohibited.", "All stunts were performed by underpaid interns. Do NOT try at home.", "[using_map.company_name] does not endorse behaviour depicted. Attempt at your own risk.")
+	titles += "<center>[disclaimer]</center>"
 
 	for(var/part in titles)
 		Show2Group4Delay(ScreenText(null, titles[part] ? titles[part] : part,"1,CENTER"), null, 60)
