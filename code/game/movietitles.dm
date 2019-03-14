@@ -6,12 +6,12 @@
 			C.mob.overlay_fullscreen("scanlines",/obj/screen/fullscreen/scanline)
 			C.mob.overlay_fullscreen("whitenoise",/obj/screen/fullscreen/noise)
 
-	to_world('sound/music/THUNDERDOME.ogg')
+	to_world('sound/music/smthingaboutus.ogg')
 	var/list/titles = list()
 	var/list/cast = list()
 	var/list/chunk = list()
 	var/chunksize = 0
-	titles += "<center><h1>EPISODE [rand(1,1000)] - THE [pick("DOWNFALL OF","RISE OF","TROUBLE WITH","FINAL STAND OF","DARK SIDE OF")] [pick("SPACEMEN","HUMANITY","DIGNITY","SANITY","THE CHIMPANZEES","THE VENDOMAT PRICES","[uppertext(GLOB.using_map.station_name)]")]</h1></center>"
+	titles += "<center><h1>EPISODE [rand(1,1000)] - THE [pick("DOWNFALL OF","RISE OF","TROUBLE WITH","FINAL STAND OF","DARK SIDE OF")] [pick("CITY FOLK","HUMANITY","THE CLASS WAR","COLONY LIFE","THE WAGE SLAVES","THE POLLUXIANS","[uppertext(using_map.station_name)]")]</h1></center>"
 	for(var/mob/living/carbon/human/H in world)
 		if(!cast.len && !chunksize)
 			chunk += "CAST:"
@@ -25,15 +25,16 @@
 		cast += "<center>[jointext(chunk,"<br>")]</center>"
 	titles += cast
 	var/list/corpses = list()
-	for(var/mob/living/carbon/human/H in GLOB.dead_mob_list_)
-		if(H.real_name)
-			corpses += H.real_name
+	for(var/mob/living/carbon/human/H in mob_list)
+		if(H.stat == 2)
+			if(H.real_name)
+				corpses += H.real_name
 	if(corpses.len)
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"
 
 	var/list/staff = list("PRODUCTION STAFF:")
 	var/list/goodboys = list()
-	for(var/client/C in GLOB.admins)
+	for(var/client/C in admins)
 		if((C.holder.rights & R_MOD) && !(C.holder.rights & R_DEBUG|R_ADMIN))
 			goodboys += "[C.ckey]"
 		else
@@ -45,7 +46,7 @@
 		titles += "<center>STAFF'S GOOD BOYS:<br>[english_list(goodboys)]</center>"
 
 
-	titles += "<center>Sponsored by [GLOB.using_map.company_name].<br>All rights reserved. Use for parody prohibited. Prohibited.</center>"
+	titles += "<center>Sponsored by [using_map.company_name].<br>All rights reserved. Use for parody prohibited. Prohibited.</center>"
 
 	for(var/part in titles)
 		Show2Group4Delay(ScreenText(null, titles[part] ? titles[part] : part,"1,CENTER"), null, 60)
