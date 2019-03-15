@@ -78,9 +78,9 @@
 
 /obj/item/clothing/head/soft/sec
 	name = "police cap"
-	desc = "It's a field cap in tasteful red color."
-	icon_state = "secsoft"
-	item_state_slots = list(slot_r_hand_str = "secsoft", slot_l_hand_str = "secsoft")
+	desc = "It's a field cap in tasteful navy color."
+	icon_state = "policecap"
+	item_state_slots = list(slot_r_hand_str = "bluesoft", slot_l_hand_str = "bluesoft")
 
 /obj/item/clothing/head/soft/sec/corp
 	name = "police cap"

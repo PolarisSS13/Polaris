@@ -229,6 +229,7 @@
 		new /obj/item/weapon/bodycam(src)
 		new /obj/item/device/flashlight/flare(src)
 		new /obj/item/clothing/accessory/storage/black_vest(src)
+		new /obj/item/clothing/head/soft/sec(src)
 		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
 //		new /obj/item/weapon/gun/projectile/police(src) //added to armory instead.
