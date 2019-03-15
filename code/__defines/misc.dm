@@ -164,6 +164,9 @@
 #define MAT_DURASTEEL		"durasteel"
 #define MAT_DURASTEELHULL	"durasteel hull"
 #define MAT_TITANIUMHULL	"titanium hull"
+#define MAT_VERDANTIUM		"verdantium"
+#define MAT_MORPHIUM		"morphium"
+#define MAT_MORPHIUMHULL	"morphium hull"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"

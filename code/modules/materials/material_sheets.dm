@@ -214,7 +214,39 @@
 	no_variants = FALSE
 
 /obj/item/stack/material/durasteel/hull
-	name = "MAT_DURASTEELHULL"
+	name = MAT_DURASTEELHULL
+
+/obj/item/stack/material/titanium
+	name = MAT_TITANIUM
+	icon_state = "sheet-silver"
+	item_state = "sheet-silver"
+	default_type = MAT_TITANIUM
+	no_variants = FALSE
+
+/obj/item/stack/material/titanium/hull
+	name = MAT_TITANIUMHULL
+	default_type = MAT_TITANIUMHULL
+
+// Particle Smasher and Exotic material.
+/obj/item/stack/material/verdantium
+	name = MAT_VERDANTIUM
+	icon_state = "sheet-mythril"
+	item_state = "mhydrogen"
+	default_type = MAT_VERDANTIUM
+	no_variants = FALSE
+	apply_colour = TRUE
+
+/obj/item/stack/material/morphium
+	name = MAT_MORPHIUM
+	icon_state = "sheet-mythril"
+	item_state = "mhydrogen"
+	default_type = MAT_MORPHIUM
+	no_variants = FALSE
+	apply_colour = TRUE
+
+/obj/item/stack/material/morphium/hull
+	name = MAT_MORPHIUMHULL
+	default_type = MAT_MORPHIUMHULL
 
 /obj/item/stack/material/wood
 	name = "wooden plank"

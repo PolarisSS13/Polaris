@@ -431,7 +431,7 @@ var/list/name_to_material
 
 // Very rare alloy that is reflective, should be used sparingly.
 /material/durasteel
-	name = "durasteel"
+	name = MAT_DURASTEEL
 	stack_type = /obj/item/stack/material/durasteel
 	integrity = 600
 	melting_point = 7000
@@ -455,8 +455,8 @@ var/list/name_to_material
 	reflectivity = 0.9
 
 /material/plasteel/titanium
-	name = "titanium"
-	stack_type = null
+	name = MAT_TITANIUM
+	stack_type = /obj/item/stack/material/titanium
 	conductivity = 2.38
 	icon_base = "metal"
 	door_icon_base = "metal"
@@ -465,7 +465,7 @@ var/list/name_to_material
 
 /material/plasteel/titanium/hull
 	name = MAT_TITANIUMHULL
-	stack_type = null
+	stack_type = /obj/item/stack/material/titanium/hull
 	icon_base = "hull"
 	icon_reinf = "reinf_mesh"
 
@@ -694,6 +694,41 @@ var/list/name_to_material
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
 	radiation_resistance = 25 // Lead is Special and so gets to block more radiation than it normally would with just weight, totalling in 48 protection.
+
+// Particle Smasher and other exotic materials.
+
+/material/verdantium
+	name = MAT_VERDANTIUM
+	stack_type = /obj/item/stack/material/gold
+	icon_colour = "4FE95A"
+	weight = 15
+	hardness = 30
+	conductivity = 60
+	stack_origin_tech = list(TECH_MATERIAL = 4)
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+
+/material/morphium
+	name = MAT_MORPHIUM
+	stack_type = /obj/item/stack/material/morphium
+	icon_base = "metal"
+	door_icon_base = "metal"
+	icon_colour = "#37115A"
+	icon_reinf = "reinf_metal"
+	conductivity = 1.5
+	hardness = 90
+	shard_type = SHARD_SHARD
+	weight = 30
+	explosion_resistance = 85
+	reflectivity = 0.8
+	radiation_resistance = 10
+	stack_origin_tech = list(TECH_MATERIAL = 9, TECH_ILLEGAL = 1, TECH_PHORON = 4, TECH_BLUESPACE = 4)
+
+/material/morphium/hull
+	name = MAT_MORPHIUMHULL
+	stack_type = null
+	icon_base = "hull"
+	icon_reinf = "reinf_mesh"
 
 // Adminspawn only, do not let anyone get this.
 /material/alienalloy
