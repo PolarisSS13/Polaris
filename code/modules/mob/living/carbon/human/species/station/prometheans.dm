@@ -177,6 +177,9 @@ var/datum/species/shapeshifter/promethean/prometheans
 			regen_brute = FALSE
 			regen_burn = FALSE
 
+	if(world.time < H.l_move_time + 1 MINUTE)	// Need to stay still for a minute, before passive healing will activate.
+		healing = FALSE
+
 	if(H.bodytemperature > heat_level_1 || H.bodytemperature < cold_level_1)	// If you're too hot or cold, you can't heal.
 		healing = FALSE
 
