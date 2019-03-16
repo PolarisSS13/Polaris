@@ -306,6 +306,33 @@
 				if (!muzzled)
 					message = "giggles."
 					m_type = 2
+					var/use_sound
+					if(get_species() == SPECIES_HUMAN_CHILD || get_species() == SPECIES_HUMAN_TEEN)
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/girllaugh.ogg',
+							'sound/voice/human/teengirlgiggle1.ogg',
+							'sound/voice/human/teengirlgiggle2.ogg')
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/childlaugh1.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
+					else
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/womanlaugh1.ogg',
+							'sound/voice/human/womanlaugh2.ogg',
+							'sound/voice/human/womanlaugh3.ogg')
+
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/mangiggle1.ogg',
+							'sound/voice/human/mangiggle2.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
 				else
 					message = "makes a noise."
 					m_type = 2
@@ -419,6 +446,32 @@
 				if (!muzzled)
 					message = "laughs."
 					m_type = 2
+					var/use_sound
+					if(get_species() == SPECIES_HUMAN_CHILD || get_species() == SPECIES_HUMAN_TEEN)
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/girllaugh.ogg')
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/childlaugh1.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
+					else
+						if(get_gender() == FEMALE)
+							use_sound = pick(
+							'sound/voice/human/womanlaugh1.ogg',
+							'sound/voice/human/womanlaugh2.ogg',
+							'sound/voice/human/womanlaugh2.ogg')
+
+							playsound(src.loc, use_sound, 50)
+						else
+							use_sound = pick(
+							'sound/voice/human/manlaugh1.ogg',
+							'sound/voice/human/manlaugh2.ogg')
+							playsound(src.loc, use_sound, 50, 0)
+							m_type = 2
+
 				else
 					message = "makes a noise."
 					m_type = 2
