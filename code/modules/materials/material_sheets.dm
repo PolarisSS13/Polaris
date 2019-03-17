@@ -230,7 +230,7 @@
 // Particle Smasher and Exotic material.
 /obj/item/stack/material/verdantium
 	name = MAT_VERDANTIUM
-	icon_state = "sheet-mythril"
+	icon_state = "sheet-wavy"
 	item_state = "mhydrogen"
 	default_type = MAT_VERDANTIUM
 	no_variants = FALSE
@@ -238,7 +238,7 @@
 
 /obj/item/stack/material/morphium
 	name = MAT_MORPHIUM
-	icon_state = "sheet-mythril"
+	icon_state = "sheet-wavy"
 	item_state = "mhydrogen"
 	default_type = MAT_MORPHIUM
 	no_variants = FALSE
@@ -247,6 +247,14 @@
 /obj/item/stack/material/morphium/hull
 	name = MAT_MORPHIUMHULL
 	default_type = MAT_MORPHIUMHULL
+
+/obj/item/stack/material/valhollide
+	name = MAT_VALHOLLIDE
+	icon_state = "sheet-gem"
+	item_state = "diamond"
+	default_type = MAT_VALHOLLIDE
+	no_variants = FALSE
+	apply_colour = TRUE
 
 /obj/item/stack/material/wood
 	name = "wooden plank"

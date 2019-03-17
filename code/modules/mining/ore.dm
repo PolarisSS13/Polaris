@@ -24,6 +24,12 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	material = "carbon"
 
+/obj/item/weapon/ore/marble
+	name = "impure marble"
+	icon_state = "ore_marble"
+	origin_tech = list(TECH_MATERIAL = 1)
+	material = "carbon"
+
 /obj/item/weapon/ore/glass
 	name = "sand"
 	icon_state = "ore_glass"
@@ -76,6 +82,18 @@
 	name = "raw hydrogen"
 	icon_state = "ore_hydrogen"
 	material = "mhydrogen"
+
+/obj/item/weapon/ore/verdantium
+	name = "verdantite dust"
+	icon_state = "ore_verdantium"
+	material = MAT_VERDANTIUM
+	origin_tech = list(TECH_MATERIAL = 7)
+
+/obj/item/weapon/ore/lead
+	name = "lead glance"
+	icon_state = "ore_lead"
+	material = MAT_LEAD
+	origin_tech = list(TECH_MATERIAL = 3)
 
 /obj/item/weapon/ore/slag
 	name = "Slag"

@@ -145,6 +145,8 @@
 #define DEFAULT_TABLE_MATERIAL "plastic"
 #define DEFAULT_WALL_MATERIAL "steel"
 
+#define MAT_IRON			"iron"
+#define MAT_MARBLE			"marble"
 #define MAT_STEEL			"steel"
 #define MAT_GLASS			"glass"
 #define MAT_SILVER			"silver"
@@ -167,6 +169,8 @@
 #define MAT_VERDANTIUM		"verdantium"
 #define MAT_MORPHIUM		"morphium"
 #define MAT_MORPHIUMHULL	"morphium hull"
+#define MAT_VALHOLLIDE		"valhollide"
+#define MAT_LEAD			"lead"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"

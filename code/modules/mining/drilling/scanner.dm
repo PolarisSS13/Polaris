@@ -18,7 +18,8 @@
 		"surface minerals" = 0,
 		"precious metals" = 0,
 		"nuclear fuel" = 0,
-		"exotic matter" = 0
+		"exotic matter" = 0,
+		"anomalous matter" = 0
 		)
 
 	for(var/turf/simulated/T in range(2, get_turf(user)))
@@ -34,6 +35,7 @@
 				if("gold", "silver", "diamond")					ore_type = "precious metals"
 				if("uranium")									ore_type = "nuclear fuel"
 				if("phoron", "osmium", "hydrogen")				ore_type = "exotic matter"
+				if("verdantium")				ore_type = "anomalous matter"
 
 			if(ore_type) metals[ore_type] += T.resources[metal]
 

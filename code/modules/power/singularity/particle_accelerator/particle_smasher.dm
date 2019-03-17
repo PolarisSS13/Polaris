@@ -127,7 +127,7 @@
 
 /obj/machinery/particle_smasher/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))
-		if(Proj.damage >= 80 && prob(33))
+		if(Proj.damage >= 50)
 			TryCraft()
 	return 0
 
@@ -146,12 +146,15 @@
 	return
 
 /obj/machinery/particle_smasher/proc/TryCraft()
+	world << "Smasher is trying to craft."
 	if(!target)	// You are just blasting an empty machine.
+		world << "Smasher is empty."
 		visible_message("<span class='notice'>\The [src] shudders.</span>")
 		update_icon()
 		return
 
 	if(successful_craft)
+		world << "Already Crafted."
 		visible_message("<span class='warning'>\The [src] fizzles.</span>")
 		if(prob(33))	// Why are you blasting it after it's already done!
 			radiation_repository.radiate(src, 10 + round(src.energy / 60, 1))
@@ -160,48 +163,71 @@
 		return
 
 	var/list/possible_recipes = list()
+	var/list/recipes = typesof(/datum/recipe/particle_smasher)
 	var/max_prob = 0
-	for(var/datum/recipe/particle_smasher/R in typesof(/datum/recipe/particle_smasher))	// Only things for the smasher. Don't get things like the chef's cake recipes.
+	for(var/datum/recipe/particle_smasher/R in recipes)	// Only things for the smasher. Don't get things like the chef's cake recipes.
+		world << "Loop Check"
 		if(R.probability)	// It's actually a recipe you're supposed to be able to make.
+			world << "Prob check"
 			if(istype(target, R.required_material))
+				world << "Req Material Check"
 				if(energy >= R.required_energy_min && energy <= R.required_energy_max)	// The machine has enough Vaguely Defined 'Energy'.
+					world << "Req Energy Check [energy]"
 					var/turf/T = get_turf(src)
 					var/datum/gas_mixture/environment = T.return_air()
+					world << environment
 					if(environment.temperature >= R.required_atmos_temp_min && environment.temperature <= R.required_atmos_temp_max)	// Too hot, or too cold.
+						world << "Temp Check [environment.temperature]"
 						if(R.reagents && R.reagents.len)
+							world << "Has Reagent Check"
 							if(!reagent_container || R.check_reagents(reagent_container.reagents) == -1)	// It doesn't have a reagent storage when it needs it, or it's lacking what is needed.
+								world << "Reagent Fail"
 								continue
 						if(R.items && R.items.len)
+							world << "Has Items Check"
 							if(!(storage && storage.len) || R.check_items(src) == -1)	// It's empty, or it doesn't contain what is needed.
+								world << "Item Fail"
 								continue
+						world << "Add [R] to possible recipes."
 						possible_recipes += R
 						max_prob += R.probability
+						world << "Max Probability = [max_prob]"
 
 	if(possible_recipes.len)
+		world << "Possible Recipes List: [possible_recipes.len]"
 		var/local_prob = rand(0, max_prob - 1)%max_prob
+		world << "Local Probability = [local_prob]"
 		var/cumulative = 0
 		for(var/datum/recipe/particle_smasher/R in possible_recipes)
 			cumulative += R.probability
+			world << "Cumulative: [cumulative]"
 			if(local_prob < cumulative)
+				world << "Trying to Craft"
 				successful_craft = TRUE
 				DoCraft(R)
 				break
 	update_icon()
 
 /obj/machinery/particle_smasher/proc/DoCraft(var/datum/recipe/particle_smasher/recipe)
-	if(!successful_craft)
+	world << "DoCraft called."
+	if(!successful_craft || !recipe)
 		return
 
 	qdel(target)
 	target = null
 
+	world << "Confirm Deletion: [target]"
+
 	if(reagent_container)
+		world << "Reagent Container Purge."
 		reagent_container.reagents.clear_reagents()
 
 	if(recipe.items)
+		world << "Recipe has items."
 		for(var/obj/item/I in storage)
 			for(var/item_type in recipe.items)
 				if(istype(I, item_type))
+					world << "[I] Matches Recipe Item"
 					storage -= I
 					qdel(I)
 					break
@@ -209,6 +235,7 @@
 	var/result = recipe.result
 	var/obj/item/stack/material/M = new result(src)
 	target = M
+	world << "Returning New Sheet: [target]"
 	update_icon()
 
 /obj/machinery/particle_smasher/verb/eject_contents()
@@ -294,7 +321,7 @@
 	items = list(/obj/item/prop/alien/junk)
 
 	result = /obj/item/stack/material/morphium
-	required_material = /material/plasteel
+	required_material = /obj/item/stack/material/plasteel
 
 	required_energy_min = 100
 	required_energy_max = 300
@@ -312,3 +339,16 @@
 	required_atmos_temp_min = 800
 	required_atmos_temp_max = 900
 	probability = 50
+
+/datum/recipe/particle_smasher/phoron_valhollide
+	reagents = list("phoron" = 10, "pacid" = 10)
+
+	result = /obj/item/stack/material/valhollide
+	required_material = /obj/item/stack/material/phoron
+
+	required_energy_min = 300
+	required_energy_max = 500
+
+	required_atmos_temp_min = 1
+	required_atmos_temp_max = 100
+	probability = 10

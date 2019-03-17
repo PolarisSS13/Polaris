@@ -36,8 +36,10 @@
 			item_type = "bowl"
 			if(prob(33))
 				new_item = new /obj/item/weapon/reagent_containers/glass/replenishing(src.loc)
+				new_item.origin_tech[TECH_ARCANE] = rand(0, 1)
 			else
 				new_item = new /obj/item/weapon/reagent_containers/glass/beaker(src.loc)
+				new_item.origin_tech[TECH_ARCANE] = pick(0, 0, 0, 1)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "bowl"
 			apply_image_decorations = 1
@@ -47,8 +49,10 @@
 			item_type = "urn"
 			if(prob(33))
 				new_item = new /obj/item/weapon/reagent_containers/glass/replenishing(src.loc)
+				new_item.origin_tech[TECH_ARCANE] = rand(0, 1)
 			else
 				new_item = new /obj/item/weapon/reagent_containers/glass/beaker(src.loc)
+				new_item.origin_tech[TECH_ARCANE] = pick(0, 0, 0, 1)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "urn"
 			apply_image_decorations = 1
@@ -75,6 +79,7 @@
 			[pick("performing unspeakable acts","posing heroically","in a fetal position","cheering","sobbing","making a plaintive gesture","making a rude gesture")]."
 			if(prob(25))
 				new_item = new /obj/item/weapon/vampiric(src.loc)
+				new_item.origin_tech[TECH_ARCANE] = rand(0, 1)
 		if(5)
 			name = "instrument"
 			icon = 'icons/obj/xenoarchaeology.dmi'
@@ -440,9 +445,31 @@
 			new_item = new new_type(src.loc)
 			item_type = new_item.name
 
+	if(istype(new_item, /obj/item/weapon/material))
+		var/new_item_mat = pickweight(
+			DEFAULT_WALL_MATERIAL = 30,
+			MAT_URANIUM = 7,
+			MAT_MARBLE = 8,
+			MAT_GOLD = 10,
+			MAT_SILVER = 12,
+			MAT_PLASTEEL = 5,
+			MAT_TITANIUM = 3,
+			MAT_IRON = 15,
+			MAT_PHORON = 2,
+			MAT_VERDANTIUM = 1,
+			MAT_DIAMOND = 2,
+			MAT_DURASTEEL = 1,
+			MAT_MORPHIUM = 1
+			)
+		var/obj/item/weapon/material/MW = new_item
+		MW.set_material(new_item_mat)
+
 	var/decorations = ""
 	if(apply_material_decorations)
 		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+		if(istype(new_item, /obj/item/weapon/material))
+			var/obj/item/weapon/material/MW = new_item
+			source_material = MW.material.display_name
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
