@@ -98,8 +98,8 @@
 			"It looks wickedly jagged",\
 			"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains along the edges")]."
 		if(7)
-			//assuming there are 10 types of coins
-			var/chance = 10
+			//assuming there are 12 types of coins
+			var/chance = 8
 			for(var/type in typesof(/obj/item/weapon/coin))
 				if(prob(chance))
 					new_item = new type(src.loc)

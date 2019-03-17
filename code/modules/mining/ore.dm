@@ -25,7 +25,7 @@
 	material = "carbon"
 
 /obj/item/weapon/ore/marble
-	name = "impure marble"
+	name = "recrystallized carbonate"
 	icon_state = "ore_marble"
 	origin_tech = list(TECH_MATERIAL = 1)
 	material = "carbon"
@@ -88,6 +88,17 @@
 	icon_state = "ore_verdantium"
 	material = MAT_VERDANTIUM
 	origin_tech = list(TECH_MATERIAL = 7)
+
+// POCKET ... Crystal dust.
+/obj/item/weapon/ore/verdantium/throw_impact(atom/hit_atom)
+	..()
+	var/mob/living/carbon/human/H = hit_atom
+	if(istype(H) && H.has_eyes() && prob(85))
+		H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
+		H.Blind(10)
+		H.eye_blurry += 15
+		spawn(1)
+			if(istype(loc, /turf/)) qdel(src)
 
 /obj/item/weapon/ore/lead
 	name = "lead glance"

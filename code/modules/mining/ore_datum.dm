@@ -147,7 +147,7 @@ var/global/list/ore_data = list()
 
 /ore/marble
 	name = MAT_MARBLE
-	display_name = "raw carbon"
+	display_name = "recrystallized carbonate"
 	compresses_to = "marble"
 	result_amount = 1
 	spread_chance = 10

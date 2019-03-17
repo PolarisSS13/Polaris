@@ -28,7 +28,8 @@
 	..()
 	storage = list()
 	update_icon()
-	recipes = typesof(/datum/recipe/particle_smasher)
+	spawn(3)
+		recipes = typesof(/datum/recipe/particle_smasher)
 
 /obj/machinery/particle_smasher/examine(mob/user)
 	..()
@@ -149,6 +150,11 @@
 
 /obj/machinery/particle_smasher/proc/TryCraft()
 	world << "Smasher is trying to craft."
+
+	if(!recipes || !recipes.len)
+		world << "Recipe Assignment Failure"
+		recipes = typesof(/datum/recipe/particle_smasher)
+
 	if(!target)	// You are just blasting an empty machine.
 		world << "Smasher is empty."
 		visible_message("<span class='notice'>\The [src] shudders.</span>")
@@ -164,9 +170,18 @@
 		update_icon()
 		return
 
+	var/list/possible_recipes = list()
 	var/max_prob = 0
-	for(var/datum/recipe/particle_smasher/R in recipes)	// Only things for the smasher. Don't get things like the chef's cake recipes.
+	for(var/D in recipes)	// Only things for the smasher. Don't get things like the chef's cake recipes.
 		world << "Loop Check"
+		var/datum/recipe/particle_smasher/R
+		if(istype(D, /datum/recipe/particle_smasher))
+			R = D
+
+		if(!istype(R))
+			world << "Recipes contains non-recipe-datum variable."
+			continue
+
 		if(R.probability)	// It's actually a recipe you're supposed to be able to make.
 			world << "Prob check"
 			if(istype(target, R.required_material))
@@ -222,7 +237,7 @@
 		world << "Reagent Container Purge."
 		reagent_container.reagents.clear_reagents()
 
-	if(recipe.items)
+	if(recipe.items && recipe.items.len)
 		world << "Recipe has items."
 		for(var/obj/item/I in storage)
 			for(var/item_type in recipe.items)
@@ -263,8 +278,8 @@
  */
 
 /datum/recipe/particle_smasher
-	reagents		// example: = list("pacid" = 5)
-	items			// example: = list(/obj/item/weapon/tool/crowbar, /obj/item/weapon/welder) Place /foo/bar before /foo. Do not include fruit. Maximum of 3 items.
+	//reagents	//Commented out due to inheritance. Still a list, used as ex:	// example: = list("pacid" = 5)
+	//items		//Commented out due to inheritance. Still a list, used as ex:	// example: = list(/obj/item/weapon/tool/crowbar, /obj/item/weapon/welder) Place /foo/bar before /foo. Do not include fruit. Maximum of 3 items.
 
 	result = /obj/item/stack/material/iron		// The sheet this will produce.
 	var/required_material = /obj/item/stack/material/iron	// The required material sheet.
