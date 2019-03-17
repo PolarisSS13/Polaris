@@ -22,11 +22,13 @@
 	var/beaker_type = /obj/item/weapon/reagent_containers/glass/beaker
 	var/list/storage		// Holds references to items allowed to be used in the fabrication phase.
 	var/max_storage = 3	// How many items can be jammed into it?
+	var/list/recipes	// The list containing the Particle Smasher's recipes.
 
 /obj/machinery/particle_smasher/Initialize()
 	..()
 	storage = list()
 	update_icon()
+	recipes = typesof(/datum/recipe/particle_smasher)
 
 /obj/machinery/particle_smasher/examine(mob/user)
 	..()
@@ -162,8 +164,6 @@
 		update_icon()
 		return
 
-	var/list/possible_recipes = list()
-	var/list/recipes = typesof(/datum/recipe/particle_smasher)
 	var/max_prob = 0
 	for(var/datum/recipe/particle_smasher/R in recipes)	// Only things for the smasher. Don't get things like the chef's cake recipes.
 		world << "Loop Check"
