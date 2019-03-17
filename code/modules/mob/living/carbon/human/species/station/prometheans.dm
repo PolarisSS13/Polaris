@@ -173,8 +173,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 		var/pressure = environment.return_pressure()
 		var/affecting_pressure = H.calculate_affecting_pressure(pressure)
 		if(affecting_pressure <= hazard_low_pressure) // Dangerous low pressure stops the regeneration of physical wounds. Body is focusing on keeping them intact rather than sealing.
-			regen_brute = 0
-			regen_burn = 0
+			regen_brute = FALSE
+			regen_burn = FALSE
 
 	if(world.time < H.l_move_time + 1 MINUTE)	// Need to stay still for a minute, before passive healing will activate.
 		healing = FALSE
