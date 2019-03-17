@@ -58,17 +58,17 @@ var/datum/species/shapeshifter/promethean/prometheans
 	cloning_modifier = /datum/modifier/cloning_sickness/promethean
 
 	cold_level_1 = 280 //Default 260 - Lower is better
-	cold_level_2 = 240 //Default 200
+	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120
 
 	heat_level_1 = 320 //Default 360
 	heat_level_2 = 370 //Default 400
 	heat_level_3 = 600 //Default 1000
 
-	siemens_coefficient = 0.8
 	body_temperature = T20C	// Room temperature
 
 	rarity_value = 5
+	siemens_coefficient = 0.8
 
 	genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
@@ -155,7 +155,6 @@ var/datum/species/shapeshifter/promethean/prometheans
 	var/regen_burn = TRUE
 	var/regen_tox = TRUE
 	var/regen_oxy = TRUE
-
 	if(H.fire_stacks < 0)	// If you're soaked, you're melting.
 		H.adjustToxLoss(3 * heal_rate)	// Tripled because 0.5 is miniscule, and fire_stacks are capped in both directions
 		healing = FALSE
@@ -173,9 +172,9 @@ var/datum/species/shapeshifter/promethean/prometheans
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = environment.return_pressure()
 		var/affecting_pressure = H.calculate_affecting_pressure(pressure)
-		if(affecting_pressure <= hazard_low_pressure)	// If you're in a vacuum, you don't heal physical wounds.
-			regen_brute = FALSE
-			regen_burn = FALSE
+		if(affecting_pressure <= hazard_low_pressure) // Dangerous low pressure stops the regeneration of physical wounds. Body is focusing on keeping them intact rather than sealing.
+			regen_brute = 0
+			regen_burn = 0
 
 	if(world.time < H.l_move_time + 1 MINUTE)	// Need to stay still for a minute, before passive healing will activate.
 		healing = FALSE
@@ -184,12 +183,10 @@ var/datum/species/shapeshifter/promethean/prometheans
 		healing = FALSE
 
 	// Heal remaining damage.
-	if(healing)
-		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
+	if(healing)		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
 			var/nutrition_cost = 0		// The total amount of nutrition drained every tick, when healing
 			var/nutrition_debt = 0		// Holder variable used to store previous damage values prior to healing for use in the nutrition_cost equation.
 			var/starve_mod = 1			// Lowering this lowers healing and increases agony multiplicatively.
-
 			if(H.nutrition <= 150)	// This is when the icon goes red
 				starve_mod = 0.75
 				if(H.nutrition <= 50)	// Severe starvation. Damage repaired beyond this point will cause a stunlock if untreated.
@@ -228,3 +225,26 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 /datum/species/shapeshifter/promethean/get_flesh_colour(var/mob/living/carbon/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
+
+/datum/species/shapeshifter/promethean/get_additional_examine_text(var/mob/living/carbon/human/H)
+
+	if(!stored_shock_by_ref["\ref[H]"])
+		return
+
+	var/t_she = "She is"
+	if(H.identifying_gender == MALE)
+		t_she = "He is"
+	else if(H.identifying_gender == PLURAL)
+		t_she = "They are"
+	else if(H.identifying_gender == NEUTER)
+		t_she = "It is"
+
+	switch(stored_shock_by_ref["\ref[H]"])
+		if(1 to 10)
+			return "[t_she] flickering gently with a little electrical activity."
+		if(11 to 20)
+			return "[t_she] glowing gently with moderate levels of electrical activity.\n"
+		if(21 to 35)
+			return "<span class='warning'>[t_she] glowing brightly with high levels of electrical activity.</span>"
+		if(35 to INFINITY)
+			return "<span class='danger'>[t_she] radiating massive levels of electrical activity!</span>"
