@@ -7,6 +7,7 @@
 	force = 5
 	w_class = 4
 	attack_verb = list("bashed","smacked")
+	item_state_slots = list(slot_r_hand_str = "picket", slot_l_hand_str = "picket")
 
 
 	var/label = ""
