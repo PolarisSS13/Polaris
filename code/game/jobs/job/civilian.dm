@@ -100,13 +100,14 @@
 	department = "Civilian"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "yourself"
+	supervisors = "the Judge"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
 	economic_modifier = 7
+	req_admin_notify = 1
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
-	minimal_player_age = 7
+//	minimal_player_age = 7 (More lawyers please.)
 	minimum_character_age = 20
 	alt_titles = list("Defense Lawyer","Defense Attorney","Barrister")
 
@@ -139,7 +140,7 @@
 	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the Mayor and the City Clerk"
+	supervisors = "the Mayor and the City Council"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/secretary
 	economic_modifier = 1

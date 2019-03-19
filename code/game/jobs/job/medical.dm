@@ -58,7 +58,7 @@
 	faction = "City"
 	total_positions = 2
 	spawn_positions = 2
-	minimum_character_age = 23
+	minimum_character_age = 25
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
@@ -97,7 +97,7 @@
 	total_positions = 4
 	spawn_positions = 1
 	economic_modifier = 5
-	minimum_character_age = 20
+	minimum_character_age = 25
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/psychiatrist
@@ -135,7 +135,7 @@
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/intern
 	economic_modifier = 1
-	minimum_character_age = 13
+	minimum_character_age = 18 //Excuse me electric, what.
 	access = list(access_medical)
 	minimal_access = list(access_medical, access_maint_tunnels)
 	outfit_type = /decl/hierarchy/outfit/job/medical/intern
