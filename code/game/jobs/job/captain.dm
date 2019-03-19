@@ -105,13 +105,14 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	department_flag = CIVILIAN
+	req_admin_notify = 1
 	supervisors = "government officials and the President"
 	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/heads/judge
 	economic_modifier = 13
 	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
-	minimal_player_age = 7
+//	minimal_player_age = 7 (need more judges)
 	minimum_character_age = 25
 	alt_titles = list("Magistrate")
 

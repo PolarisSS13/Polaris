@@ -92,13 +92,14 @@
 	department_flag = ENGSEC
 	total_positions = 1
 	spawn_positions = 1
+	req_admin_notify = 1
 	supervisors = "the chief of police and city clerk"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/prosecutor
 	economic_modifier = 7
 	access = list(access_prosecutor, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_prosecutor, access_sec_doors, access_heads)
-	minimal_player_age = 7
+//	minimal_player_age = 7 (need more prostitut-- prosecutors.)
 	minimum_character_age = 21
 	alt_titles = list("Prosecutor","Prosecuting Attorney","Prosecution Officer","Prosecuting Lawyer")
 
