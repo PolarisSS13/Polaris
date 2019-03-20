@@ -295,8 +295,9 @@ var/list/name_to_material
 /material/supermatter
 	name = "supermatter"
 	icon_colour = "#FFFF00"
+	stack_type = /obj/item/stack/material/supermatter
+	shard_type = SHARD_SHARD
 	radioactivity = 20
-	stack_type = null
 	luminescence = 3
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
 	icon_base = "stone"
@@ -306,6 +307,7 @@ var/list/name_to_material
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
+	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_PHORON = 5, TECH_BLUESPACE = 4)
 
 /material/phoron
 	name = "phoron"
@@ -714,7 +716,7 @@ var/list/name_to_material
 	conductivity = 60
 	reflectivity = 0.3
 	radiation_resistance = 5
-	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_BIO = 4)
+	stack_origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 5, TECH_BIO = 4)
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"
 
@@ -735,7 +737,7 @@ var/list/name_to_material
 	explosion_resistance = 85
 	reflectivity = 0.2
 	radiation_resistance = 10
-	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_ILLEGAL = 1, TECH_PHORON = 4, TECH_BLUESPACE = 4)
+	stack_origin_tech = list(TECH_MATERIAL = 8, TECH_ILLEGAL = 1, TECH_PHORON = 4, TECH_BLUESPACE = 4, TECH_ARCANE = 1)
 
 /material/morphium/hull
 	name = MAT_MORPHIUMHULL

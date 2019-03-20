@@ -142,7 +142,8 @@ var/global/list/ore_data = list()
 	spread_chance = 5
 	scan_icon = "mineral_rare"
 	xarch_ages = list(
-		"thousand" = 10
+		"billion" = 13,
+		"billion_lower" = 10
 		)
 
 /ore/marble

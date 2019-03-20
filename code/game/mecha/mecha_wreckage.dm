@@ -206,6 +206,11 @@
 				parts -= part
 		return
 
+/obj/effect/decal/mecha_wreckage/janus
+	name = "Janus wreckage"
+	icon_state = "janus-broken"
+	description_info = "Due to the incredibly intricate design of this exosuit, it is impossible to salvage components from it."
+
 /obj/effect/decal/mecha_wreckage/odysseus/murdysseus
 	icon_state = "murdysseus-broken"
 

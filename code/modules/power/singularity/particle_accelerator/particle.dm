@@ -44,11 +44,8 @@
 	if (A)
 		if(ismob(A))
 			toxmob(A)
-		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/)))
+		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/))||(istype(A, /obj/machinery/particle_smasher)))
 			A:energy += energy
-		else if(istype(A, /obj/machinery/particle_smasher))
-			var/obj/machinery/particle_smasher/PS = A
-			PS.energy += energy
 		//R-UST port
 		else if(istype(A,/obj/machinery/power/fusion_core))
 			var/obj/machinery/power/fusion_core/collided_core = A

@@ -39,6 +39,8 @@
 
 	// Found with an advanced laser. exotic_drilling >= 1
 	var/list/ore_types_uncommon = list(
+		MAT_MARBLE = /obj/item/weapon/ore/marble,
+		MAT_LEAD = /obj/item/weapon/ore/lead
 		)
 
 	// Found with an ultra laser. exotic_drilling >= 2
@@ -240,7 +242,7 @@
 		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
 			capacity = 200 * P.rating
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			charge_use -= 10 * P.rating
+			charge_use -= 10 * (P.rating - 1)
 	cell = locate(/obj/item/weapon/cell) in component_parts
 
 /obj/machinery/mining/drill/proc/check_supports()

@@ -170,6 +170,7 @@
 	..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
@@ -179,7 +180,45 @@
 	component_parts += new /obj/item/weapon/reagent_containers/syringe(src)
 	component_parts += new /obj/item/stack/material/glass/reinforced(src, 2)
 
-	RefreshParts()
+	RefreshParts(0)
+
+/obj/machinery/sleeper/RefreshParts(var/limited = 1)
+	var/man_rating = 0
+	var/cap_rating = 0
+
+	available_chemicals = initial(available_chemicals)
+	idle_power_usage = initial(idle_power_usage)
+	active_power_usage = initial(active_power_usage)
+
+	for(var/obj/item/weapon/stock_parts/P in component_parts)
+		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
+			cap_rating += P.rating
+
+	cap_rating = max(1, round(cap_rating / 2))
+
+	idle_power_usage /= cap_rating
+	active_power_usage /= cap_rating
+
+	if(!limited)
+		for(var/obj/item/weapon/stock_parts/P in component_parts)
+			if(istype(P, /obj/item/weapon/stock_parts/manipulator))
+				man_rating += P.rating - 1
+
+		var/new_chemicals = list()
+
+		if(man_rating >= 4) // Alien tech.
+			new_chemicals["healing_nanites"] = "Restorative Nanites"
+		if(man_rating >= 3) // Anomalous tech.
+			new_chemicals["immunosuprizine"] = "Immunosuprizine"
+		if(man_rating >= 2) // Tier 3.
+			new_chemicals["spaceacillin"] = "Spaceacillin"
+		if(man_rating >= 1) // Tier 2.
+			new_chemicals["ethylredoxrazine"] = "Ethylredoxrazine"
+
+		available_chemicals += new_chemicals
+		return
+
+
 
 /obj/machinery/sleeper/Initialize()
 	. = ..()
@@ -351,3 +390,7 @@
 	desc = "A limited functionality sleeper, all it can do is put patients into stasis. It lacks the medication and configuration of the larger units."
 	icon_state = "sleeper"
 	stasis_level = 100 //Just one setting
+
+/obj/machinery/sleeper/survival_pod/New()
+	..()
+	RefreshParts()
