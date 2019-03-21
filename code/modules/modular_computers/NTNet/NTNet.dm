@@ -9,6 +9,8 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/available_antag_software = list()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
+	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
+
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -32,7 +34,13 @@ var/global/datum/ntnet/ntnet_global = new()
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
+	build_emails_list()
 	add_log("NTNet logging system activated.")
+	
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+	if(intrusion_detection_enabled)
+		add_log(log_string, source)
+
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
 /datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
@@ -51,6 +59,11 @@ var/global/datum/ntnet/ntnet_global = new()
 				logs.Remove(L)
 			else
 				break
+
+// Generates service email list. Currently only used by broadcaster service
+/datum/ntnet/proc/build_emails_list()
+	for(var/F in subtypesof(/datum/computer_file/data/email_account/service))
+		new F()
 
 // Checks whether NTNet operates. If parameter is passed checks whether specific function is enabled.
 /datum/ntnet/proc/check_function(var/specific_action = 0)
@@ -101,6 +114,13 @@ var/global/datum/ntnet/ntnet_global = new()
 	for(var/datum/computer_file/program/P in available_antag_software)
 		if(filename == P.filename)
 			return P
+
+/datum/ntnet/proc/does_email_exist(var/login)
+	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)
+		if(A.login == login)
+			return 1
+	return 0
+
 
 // Resets the IDS alarm
 /datum/ntnet/proc/resetIDS()
