@@ -134,6 +134,7 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
+	post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is requested", "message"="PlayerPM to **[key_name(C)]** from **[key_name(src)]**: ```[html_decode(msg)]```"))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	//we don't use message_admins here because the sender/receiver might get it too
@@ -141,7 +142,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_EVENT))
+		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_CBIA))
 			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>TAKE</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
 
 /client/proc/cmd_admin_irc_pm(sender)

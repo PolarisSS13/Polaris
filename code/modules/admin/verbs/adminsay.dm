@@ -46,7 +46,7 @@
 	set name = "Esay"
 	set hidden = 1
 
-	if(!check_rights(R_ADMIN|R_MOD|R_EVENT|R_SERVER|R_EVENT))
+	if(!check_rights(R_ADMIN|R_MOD|R_CBIA|R_SERVER|R_CBIA))
 		return
 
 	msg = sanitize(msg)
