@@ -77,7 +77,7 @@
 	var/num_event_managers_online = 0
 	if(holder)
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_EVENT & C.holder.rights))	//Used to determine who shows up in admin rows
+			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_CBIA & C.holder.rights))	//Used to determine who shows up in admin rows
 
 				if(C.holder.fakekey && (!R_ADMIN & holder.rights && !R_MOD & holder.rights))		//Event Managerss can't see stealthmins
 					continue
@@ -137,7 +137,7 @@
 				devmsg += "\n"
 				num_devs_online++
 
-			else if(R_EVENT & C.holder.rights)
+			else if(R_CBIA & C.holder.rights)
 				eventMmsg += "\t[C] is a [C.holder.rank]"
 				if(isobserver(C.mob))
 					eventMmsg += " - Observing"
@@ -156,7 +156,7 @@
 
 	else
 		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_EVENT & C.holder.rights))
+			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_CBIA & C.holder.rights))
 				if(!C.holder.fakekey)
 					msg += "\t[C] is a [C.holder.rank]\n"
 					num_admins_online++
@@ -166,7 +166,7 @@
 			else if (R_SERVER & C.holder.rights)
 				devmsg += "\t[C] is a [C.holder.rank]\n"
 				num_devs_online++
-			else if (R_EVENT & C.holder.rights)
+			else if (R_CBIA & C.holder.rights)
 				eventMmsg += "\t[C] is a [C.holder.rank]\n"
 				num_event_managers_online++
 

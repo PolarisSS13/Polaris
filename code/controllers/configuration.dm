@@ -190,6 +190,8 @@ var/list/gamemode_cache = list()
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
 
+	var/use_discord_pins = 1
+
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -630,6 +632,9 @@ var/list/gamemode_cache = list()
 
 				if("uneducated_mice")
 					config.uneducated_mice = 1
+
+				if("use_discord_pins")
+					config.use_discord_pins = 1
 
 				if("allow_chat_markup")
 					config.allow_chat_markup = 1
