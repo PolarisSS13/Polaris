@@ -9,6 +9,8 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/available_antag_software = list()
 	var/list/chat_channels = list()
 	var/list/fileservers = list()
+	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
+
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -32,7 +34,13 @@ var/global/datum/ntnet/ntnet_global = new()
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
+	build_emails_list()
 	add_log("NTNet logging system activated.")
+
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+	if(intrusion_detection_enabled)
+		add_log(log_string, source)
+
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
 /datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
@@ -51,6 +59,11 @@ var/global/datum/ntnet/ntnet_global = new()
 				logs.Remove(L)
 			else
 				break
+
+// Generates service email list. Currently only used by broadcaster service
+/datum/ntnet/proc/build_emails_list()
+	for(var/F in subtypesof(/datum/computer_file/data/email_account/service))
+		new F()
 
 // Checks whether NTNet operates. If parameter is passed checks whether specific function is enabled.
 /datum/ntnet/proc/check_function(var/specific_action = 0)
@@ -102,6 +115,13 @@ var/global/datum/ntnet/ntnet_global = new()
 		if(filename == P.filename)
 			return P
 
+/datum/ntnet/proc/does_email_exist(var/login)
+	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)
+		if(A.login == login)
+			return 1
+	return 0
+
+
 // Resets the IDS alarm
 /datum/ntnet/proc/resetIDS()
 	intrusion_detection_alarm = 0
@@ -143,6 +163,69 @@ var/global/datum/ntnet/ntnet_global = new()
 			add_log("Configuration Updated. Wireless network firewall now [setting_systemcontrol ? "allows" : "disallows"] remote control of station's systems.")
 
 
+/datum/ntnet/proc/find_email_by_name(var/login)
+	for(var/datum/computer_file/data/email_account/A in ntnet_global.email_accounts)
+		if(A.login == login)
+			return A
+	return 0
 
+// Assigning emails to mobs
+
+/datum/ntnet/proc/rename_email(mob/user, old_login, desired_name, domain)
+	var/datum/computer_file/data/email_account/account = find_email_by_name(old_login)
+	var/new_login = sanitize_for_email(desired_name)
+	new_login += "@[domain]"
+	if(new_login == old_login)
+		return	//If we aren't going to be changing the login, we quit silently.
+	if(find_email_by_name(new_login))
+		to_chat(user, "Your email could not be updated: the new username is invalid.")
+		return
+	account.login = new_login
+	to_chat(user, "Your email account address has been changed to <b>[new_login]</b>. This information has also been placed into your notes.")
+	add_log("Email address changed for [user]: [old_login] changed to [new_login]")
+	if(user.mind)
+		user.mind.initial_email_login["login"] = new_login
+		user.mind.store_memory("Your email account address has been changed to [new_login].")
+/*	if(issilicon(user))
+		var/mob/living/silicon/S = user
+		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+		if(my_client)
+			my_client.stored_login = new_login
+*/
+//Used for initial email generation.
+/datum/ntnet/proc/create_email(mob/user, desired_name, domain)
+	desired_name = sanitize_for_email(desired_name)
+	var/login = "[desired_name]@[domain]"
+	// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+	// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+	if(find_email_by_name(login))
+		login = "[desired_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+	if(find_email_by_name(login))
+		to_chat(user, "You were not assigned an email address.")
+		user.mind.store_memory("You were not assigned an email address.")
+	else
+		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+		EA.password = GenerateKey()
+		EA.login = login
+		if(user.mind)
+			user.mind.initial_email_login["login"] = EA.login
+			user.mind.initial_email_login["password"] = EA.password
+			user.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+/*		if(issilicon(user))
+			var/mob/living/silicon/S = user
+			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+			if(my_client)
+				my_client.stored_login = EA.login
+				my_client.stored_password = EA.password
+*/
+/mob/proc/create_or_rename_email(newname, domain)
+	if(!mind)
+		return
+	var/old_email = mind.initial_email_login["login"]
+	if(!old_email)
+		ntnet_global.create_email(src, newname, domain)
+	else
+		ntnet_global.rename_email(src, old_email, newname, domain)
 
 

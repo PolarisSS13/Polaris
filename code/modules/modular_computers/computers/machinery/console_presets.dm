@@ -31,6 +31,15 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/rcon_console())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+
+// Administrator
+
+/obj/machinery/modular_computer/console/preset/sysadmin/install_programs()
+	..()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 
 // ===== MEDICAL CONSOLE =====
@@ -41,6 +50,7 @@
 /obj/machinery/modular_computer/console/preset/medical/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 
 // ===== RESEARCH CONSOLE =====
@@ -53,6 +63,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 
 // ===== COMMAND CONSOLE =====
@@ -66,6 +77,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 
 
@@ -79,6 +91,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 
 // ===== CIVILIAN CONSOLE =====
 /obj/machinery/modular_computer/console/preset/civilian
@@ -89,3 +102,4 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())

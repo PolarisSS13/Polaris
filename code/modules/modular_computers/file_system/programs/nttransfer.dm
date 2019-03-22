@@ -56,17 +56,6 @@ var/global/nttransfer_uid = 0
 	..(forced)
 
 
-
-/datum/computer_file/program/nttransfer/proc/update_netspeed()
-	download_netspeed = 0
-	switch(ntnet_status)
-		if(1)
-			download_netspeed = NTNETSPEED_LOWSIGNAL
-		if(2)
-			download_netspeed = NTNETSPEED_HIGHSIGNAL
-		if(3)
-			download_netspeed = NTNETSPEED_ETHERNET
-
 // Finishes download and attempts to store the file on HDD
 /datum/computer_file/program/nttransfer/proc/finish_download()
 	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))

@@ -86,6 +86,7 @@ var/list/all_maps = list()
 	var/list/unit_test_exempt_from_apc = list()
 	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
+	var/list/usable_email_tlds = list("freemail.net")
 /datum/map/New()
 	..()
 	if(zlevel_datum_type)

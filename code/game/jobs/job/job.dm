@@ -26,6 +26,9 @@
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
 
 	var/outfit_type
+	
+	// Email addresses will be created under this domain name. Mostly for the looks.
+	var/email_domain = "freemail.nt"
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
