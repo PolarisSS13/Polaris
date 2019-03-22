@@ -112,7 +112,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 13
 	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
-//	minimal_player_age = 7 (need more judges)
+	minimal_player_age = 1
 	minimum_character_age = 25
 	alt_titles = list("Magistrate")
 

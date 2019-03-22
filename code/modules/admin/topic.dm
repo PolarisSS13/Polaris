@@ -237,7 +237,7 @@
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])
-		if(!check_rights(R_SERVER|R_EVENT))	return
+		if(!check_rights(R_SERVER|R_CBIA))	return
 
 		ticker.delay_end = !ticker.delay_end
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -1191,7 +1191,7 @@
 		show_player_panel(M)
 
 	else if(href_list["adminplayerobservejump"])
-		if(!check_rights(R_EVENT|R_MOD|R_ADMIN|R_SERVER|R_EVENT))	return
+		if(!check_rights(R_CBIA|R_MOD|R_ADMIN|R_SERVER|R_CBIA))	return
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
 
@@ -1201,7 +1201,7 @@
 		C.jumptomob(M)
 
 	else if(href_list["adminplayerobservefollow"])
-		if(!check_rights(R_EVENT|R_MOD|R_ADMIN|R_SERVER|R_EVENT))
+		if(!check_rights(R_CBIA|R_MOD|R_ADMIN|R_SERVER|R_CBIA))
 			return
 
 		var/mob/M = locate(href_list["adminplayerobservefollow"])
@@ -1222,8 +1222,9 @@
 		if(ismob(M))
 			var/take_msg = "<span class='notice'><b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> message.</span>"
 			for(var/client/X in admins)
-				if((R_ADMIN|R_MOD|R_EVENT|R_SERVER) & X.holder.rights)
+				if((R_ADMIN|R_MOD|R_CBIA|R_SERVER) & X.holder.rights)
 					to_chat(X, take_msg)
+			post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is nolonger needed", "message"="Request for Help from **[key_name(M)]** is being tended to by **[key_name(usr)]**."))
 			to_chat(M, "<span class='notice'><b>Your adminhelp is being attended to by [usr.client]. Thanks for your patience!</b></span>")
 		else
 			to_chat(usr, "<span class='warning'>Unable to locate mob.</span>")
@@ -1238,7 +1239,7 @@
 
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN|R_SERVER|R_MOD|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_SERVER|R_MOD|R_CBIA))	return
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -1850,7 +1851,7 @@
 				vsc.SetDefault(usr)
 
 	else if(href_list["toglang"])
-		if(check_rights(R_SPAWN|R_EVENT))
+		if(check_rights(R_SPAWN|R_CBIA))
 			var/mob/M = locate(href_list["toglang"])
 			if(!istype(M))
 				usr << "[M] is illegal type, must be /mob!"

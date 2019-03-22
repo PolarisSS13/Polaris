@@ -22,6 +22,9 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	var/department = "Unknown" // our department
 	var/destination = null // the department we're sending to
 
+	var/cciaa_present = 0
+	var/cciaa_afk = 0
+
 /obj/machinery/photocopier/faxmachine/New()
 	allfaxes += src
 	if(!destination) destination = "[using_map.boss_name]"
@@ -182,8 +185,8 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	//message badmins that a fax has arrived
 	if (destination == using_map.boss_name)
 		message_admins(sender, "[uppertext(using_map.boss_short)] FAX", rcvdcopy, "CentComFaxReply", "#006100")
-	else if ("Sif Governmental Authority")
-		message_admins(sender, "SIF GOVERNMENT FAX", rcvdcopy, "CentComFaxReply", "#1F66A0")
+	else if ("Polluxian Governmental Authority")
+		message_admins(sender, "POLLUX GOVERNMENT FAX", rcvdcopy, "CentComFaxReply", "#1F66A0")
 	else if ("Supply")
 		message_admins(sender, "[uppertext(using_map.boss_short)] SUPPLY FAX", rcvdcopy, "CentComFaxReply", "#5F4519")
 	else
@@ -193,14 +196,31 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	sendcooldown = 1800
 	sleep(50)
 	visible_message("[src] beeps, \"Message transmitted successfully.\"")
+	post_webhook_event(WEBHOOK_CBIA_EMERGENCY_MESSAGE, list("message"=rcvdcopy, "sender"="[sender]", "cciaa_present"=cciaa_present, "cciaa_afk"=cciaa_afk))
 
 
 /obj/machinery/photocopier/faxmachine/proc/message_admins(var/mob/sender, var/faxname, var/obj/item/sent, var/reply_type, font_colour="#006100")
-	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
-	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
-	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
+	var/msg = "<span class='notice'> <b><font color='[font_colour]'>[faxname]: </font>[key_name(sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;[reply_type]=\ref[src];faxMachine=\ref[src]'>REPLY</a>)</b>: Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
+
 
 	for(var/client/C in admins)
-		if(check_rights((R_ADMIN|R_MOD),0,C))
-			C << msg
-			C << 'sound/effects/printer.ogg'
+		var/flags = C.holder.rights & (R_ADMIN|R_CBIA)
+		if(flags)
+			to_chat(C, msg)
+		if (flags == R_CBIA) // Admins sometimes get R_CCIAA, but CCIAA never get R_ADMIN
+			cciaa_present++
+			if (C.is_afk())
+				cciaa_afk++
+
+	var/discord_msg = "New fax arrived! [faxname]: \"[sent.name]\" by [sender]. ([cciaa_present] agents online"
+	if (cciaa_present)
+		if ((cciaa_present - cciaa_afk) <= 0)
+			discord_msg += ", **all AFK!**)"
+		else
+			discord_msg += ", [cciaa_afk] AFK.)"
+	else
+		discord_msg += ".)"
+
+	discord_msg += " Gamemode: [ticker.mode]"
+
+	discord_bot.send_to_cciaa(discord_msg)

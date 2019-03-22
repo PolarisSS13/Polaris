@@ -15,7 +15,7 @@ var/global/datum/global_init/init = new ()
 	Pre-map initialization stuff should go here.
 */
 /datum/global_init/New()
-
+	generate_gameid()
 	makeDatumRefLists()
 	load_configuration()
 
@@ -35,7 +35,28 @@ var/global/datum/global_init/init = new ()
 	area = /area/space
 	view = "15x15"
 	cache_lifespan = 7
-	fps = 20
+
+	fps = 30
+
+/var/diary_date_string
+/var/game_id = null
+/proc/generate_gameid()
+	if(game_id != null)
+		return
+	game_id = ""
+
+	var/list/c = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+	var/l = c.len
+
+	var/t = world.timeofday
+	for(var/_ = 1 to 4)
+		game_id = "[c[(t % l) + 1]][game_id]"
+		t = round(t / l)
+	game_id = "-[game_id]"
+	t = round(world.realtime / (10 * 60 * 60 * 24))
+	for(var/_ = 1 to 3)
+		game_id = "[c[(t % l) + 1]][game_id]"
+		t = round(t / l)
 
 
 
@@ -43,8 +64,10 @@ var/global/datum/global_init/init = new ()
 /world/New()
 	world.log << "Map Loading Complete"
 	//logs
-	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/round-hh-mm-ss")
+//	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/round-hh-mm-ss")
 	diary = file("[log_path].log")
+	diary_date_string = time2text(world.realtime, "YYYY/MM/DD")
+//	diary = "data/logs/[diary_date_string]_[game_id].log"
 	href_logfile = file("[log_path]-hrefs.htm")
 	error_log = file("[log_path]-error.log")
 	debug_log = file("[log_path]-debug.log")

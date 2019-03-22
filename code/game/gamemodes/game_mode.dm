@@ -37,6 +37,7 @@ var/global/list/additional_antag_types = list()
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
+	var/antag_text = ""
 
 /datum/game_mode/New()
 	..()
@@ -281,7 +282,8 @@ var/global/list/additional_antag_types = list()
 	return
 
 /datum/game_mode/proc/declare_completion()
-
+	var/antag_text = ""
+	var/discord_text = "A round of **[name]** has ended! \[Game ID: [game_id]\]\n\n"
 	var/is_antag_mode = (antag_templates && antag_templates.len)
 	check_victory()
 	if(is_antag_mode)
@@ -290,8 +292,18 @@ var/global/list/additional_antag_types = list()
 			sleep(10)
 			antag.check_victory()
 			antag.print_player_summary()
+
+			// Avoid the longest loop if we aren't actively using the bot.
+			if (discord_bot.active)
+				antag_text += antag.print_player_summary_discord()
+
+
 		sleep(10)
 		print_ownerless_uplinks()
+
+	discord_text += antag_text
+	discord_bot.send_to_announce(discord_text, 1)
+	discord_text = ""
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -342,6 +354,10 @@ var/global/list/additional_antag_types = list()
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 	world << text
+
+	discord_bot.send_to_announce(discord_text)
+	post_webhook_event(WEBHOOK_ROUNDEND, list("survivours"=surviving_total, "escaped"=escaped_total, "ghosts"=ghosts, "gamemode"=name, "gameid"=game_id, "antags"=antag_text))
+
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
