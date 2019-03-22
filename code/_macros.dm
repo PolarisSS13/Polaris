@@ -56,6 +56,10 @@
 
 #define isopenspace(A) istype(A, /turf/simulated/open)
 
+#define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
+
+#define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
+
 #define isweakref(A) istype(A, /weakref)
 
 #define MAP_IMAGE_PATH "nano/images/[using_map.path]/"

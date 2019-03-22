@@ -28,6 +28,8 @@
 
 	allowed_spawns = list("Arrivals Shuttle")
 
+	usable_email_tlds = list("freemail.net", "ntmail.nt", "interpollux.org")
+
 	station_networks = list(
 							NETWORK_CARGO,
 							NETWORK_CIVILIAN,

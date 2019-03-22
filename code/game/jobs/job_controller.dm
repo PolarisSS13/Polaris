@@ -498,8 +498,8 @@ var/global/datum/controller/occupations/job_master
 
 		// EMAIL GENERATION
 		var/domain
-		if(H.char_branch && H.char_branch.email_domain)
-			domain = H.job.email_domain
+		if(job && job.email_domain)
+			domain = job.email_domain
 		else
 			domain = "freemail.nt"
 		var/complete_login = "[replacetext(lowertext(H.real_name), " ", ".")]@[domain]"

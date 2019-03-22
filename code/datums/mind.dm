@@ -63,6 +63,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
+	var/list/initial_email_login = list("login" = "", "password" = "")
+
 	//used for antag tcrystal trading, more info in code\game\objects\items\telecrystals.dm
 	var/accept_tcrystals = 0
 

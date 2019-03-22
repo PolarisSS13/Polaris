@@ -86,7 +86,7 @@
 /datum/computer_file/program/proc/process_tick()
 	update_netspeed()
 	return 1
-	
+
 /datum/computer_file/program/proc/update_netspeed()
 	ntnet_speed = 0
 	switch(ntnet_status)
@@ -170,4 +170,13 @@
 	if(computer)
 		computer.Topic(href, href_list)
 	..()
+
+/obj/machinery/modular_computer/update_layout()
+	return TRUE
+
+/obj/item/modular_computer/initial_data()
+	return get_header_data()
+
+/obj/item/modular_computer/update_layout()
+	return TRUE
 

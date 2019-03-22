@@ -120,7 +120,9 @@
 	read_message_count = 0
 
 /datum/nano_module/email_client/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = host.initial_data()
+	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
 
 	// Password has been changed by other client connected to this email account
 	if(current_account)
@@ -204,7 +206,7 @@
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "email_client.tmpl", "Email Client", 600, 450, state = state)
-		if(host.update_layout())
+		if(program.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
@@ -237,7 +239,7 @@
 	download_progress = min(download_progress + netspeed, downloading.size)
 	if(download_progress >= downloading.size)
 		var/obj/item/modular_computer/MC = nano_host()
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
+		if(!istype(MC) || !MC.hard_drive)
 			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
 			downloading = null
 			download_progress = 0
@@ -416,7 +418,7 @@
 		// Fully dependant on modular computers here.
 		var/obj/item/modular_computer/MC = nano_host()
 
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
+		if(!istype(MC) || !MC.hard_drive)
 			error = "Error exporting file. Are you using a functional and NTOS-compliant device?"
 			return 1
 
@@ -439,7 +441,7 @@
 		var/obj/item/modular_computer/MC = nano_host()
 		msg_attachment = null
 
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
+		if(!istype(MC) || !MC.hard_drive)
 			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
 			return 1
 
@@ -453,7 +455,7 @@
 		if(!picked_file)
 			return 1
 
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
+		if(!istype(MC) || !MC.hard_drive)
 			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
 			return 1
 
@@ -479,7 +481,7 @@
 		if(!current_account || !current_message || !current_message.attachment)
 			return 1
 		var/obj/item/modular_computer/MC = nano_host()
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
+		if(!istype(MC) || !MC.hard_drive)
 			error = "Error downloading file. Are you using a functional and NTOSv2-compliant device?"
 			return 1
 

@@ -35,7 +35,7 @@
 
 // Administrator
 
-/obj/item/modular_computer/console/preset/sysadmin/install_programs()
+/obj/machinery/modular_computer/console/preset/sysadmin/install_programs()
 	..()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())

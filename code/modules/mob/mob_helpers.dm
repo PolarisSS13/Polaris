@@ -665,3 +665,11 @@ var/global/image/backplane
 			if ("Zombie")
 				return 1
 	return 0
+
+//Tries to find the mob's email.
+/proc/find_email(real_name)
+	for(var/mob/mob in mob_list)
+		if(mob.real_name == real_name)
+			if(!mob.mind)
+				return
+			return mob.mind.initial_email_login["login"]
