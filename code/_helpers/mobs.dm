@@ -261,7 +261,7 @@ Proc for attack log creation, because really why not
 			. = FALSE
 			break
 
-		if(target_loc != target.loc && !ignore_movement)
+		if(target && target_loc != target.loc && !ignore_movement)
 			. = FALSE
 			break
 
@@ -270,7 +270,7 @@ Proc for attack log creation, because really why not
 				. = FALSE
 				break
 
-		if(max_distance && get_dist(user, target) > max_distance)
+		if(max_distance && target && get_dist(user, target) > max_distance)
 			. = FALSE
 			break
 
