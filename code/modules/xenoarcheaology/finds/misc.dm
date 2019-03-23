@@ -2,7 +2,7 @@
 // Phoron shards have been moved to code/game/objects/items/weapons/shards.dm
 
 /datum/category_item/catalogue/material/crystals
-	name = "Sivian Crystals"
+	name = "Collection - Crystals"
 	desc = "Occasionally found deep underground are clusters of luminescent crystals, which emit \
 	a fair amount of light. The type of crystal appears to match the environment they are \
 	found at, such as regions with very low temperatures having blue, icy crystals.\
@@ -24,7 +24,7 @@
 
 
 /datum/category_item/catalogue/material/regular_crystal
-	name = "Subterranean Crystal"
+	name = "Crystal - Subterranean"
 	desc = "This is a luminescent crystalline mass, colored green or purple, and is sometimes found \
 	in average subterranean environments. It does not appear to be able to serve any useful purpose."
 	value = CATALOGUER_REWARD_EASY
@@ -52,7 +52,7 @@
 
 // Icy crystals.
 /datum/category_item/catalogue/material/ice_crystal
-	name = "Ice Crystal"
+	name = "Crystal - Ice"
 	desc = "This is a luminescent crystalline mass with a blue, icy appearance, and is sometimes found \
 	in very cold, subterranean environments. It does not appear to be able to serve any useful purpose."
 	value = CATALOGUER_REWARD_EASY
@@ -70,7 +70,7 @@
 
 // Magma crystals.
 /datum/category_item/catalogue/material/magma_crystal
-	name = "Magma Crystal"
+	name = "Crystal - Magma"
 	desc = "This is a luminescent crystalline mass, colored orange and red, and is sometimes found \
 	in very hot, subterranean environments. It does not appear to be able to serve any useful purpose, \
 	beyond heralding dangerous magma."

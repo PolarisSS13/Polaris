@@ -482,9 +482,14 @@
 /datum/lore/organization/gov/virgov
 	name = "Vir Governmental Authority"
 	short_name = "VirGov"
-	desc = "VirGov is the sole governing administration for the Vir system, based in New Reykjavik, Sif.  It is a representative \
-	democratic government, and a fully recognized member of the Solar Confederate Government.  Anyone operating inside of Vir must \
-	comply with VirGov's legislation and regulations."
+	desc = "The aptly named Vir Governmental Authority is the sole governing administration for the Vir system, based \
+	out of New Reykjavik on Sif. It is a representative democratic government, and a fully recognised member of the \
+	Confederation.\
+	<br><br>\
+	Corporate entities such as Nanotrasen which operate on Sif, in Vir space, or on other bodies in the Vir system must \
+	all comply with legislation as determined by the VGA and SolGov. As a result, any serious criminal offences, \
+	industrial accidents, or concerning events should be forwarded to the VGA in the event that assistance or \
+	communication is required from the Vir Police, Vir Defence Force, Vir Interior Ministry, or other important groups."
 	history = "" // Todo like the rest of them
 	work = "governing body of Vir"
 	headquarters = "New Reykjavik, Sif, Vir"
@@ -504,10 +509,18 @@
 	name = "Solar Confederate Government"
 	short_name = "SolGov"
 	acronym = "SCG"
-	desc = "SolGov is a decentralized confederation of human governmental entities based on Luna, Sol, which defines top-level law for their member states.  \
-	Member states receive various benefits such as defensive pacts, trade agreements, social support and funding, and being able to participate \
-	in the Colonial Assembly.  The majority, but not all human territories are members of SolGov.  As such, SolGov is a major power and \
-	defacto represents humanity on the galactic stage."
+	desc = "The Solar Confederate Government, or SolGov, is a mostly-human governmental entity based on Luna and \
+	extending throughout most of the local bubble.\
+	<br><br>\
+	SolGov defines top-level law (such as sapient rights and transgressive \
+	technology) and acts as an intermediary council for problems involving member states, but leaves most other law for \
+	states to define themselves. The member states of SolGov obey these laws, pay confederate taxes, and provide each \
+	other with military aid, in exchange for membership in the largest free trade, customs, and military union in the \
+	known galaxy. Each state appoints two representatives to the Colonial Assembly where issues are voted upon. \
+	The vast majority of human states are members of SolGov.\
+	<br><br>\
+	Sol's military forces are divided between central confederate forces and local defense forces, although it reserves \
+	the right to nationalize the defense forces in the event of a major crisis, such as the SolGov-Hegemony War."
 	history = "" // Todo
 	work = "governing polity of humanity's Confederation"
 	headquarters = "Luna, Sol"

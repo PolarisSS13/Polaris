@@ -25,8 +25,10 @@
 
 // Obtained by scanning all spider types.
 /datum/category_item/catalogue/fauna/all_giant_spiders
-	name = "All Giant Spiders Scanned" // WIP
-	desc = "You did the thing!"
+	name = "Collection - Giant Spiders"
+	desc = "You have scanned a large array of different types of giant spiders, \
+	and therefore you have been granted a large sum of points, through this \
+	entry."
 	value = CATALOGUER_REWARD_HARD
 	unlocked_by_all = list(
 		/datum/category_item/catalogue/fauna/giant_spider/guard_spider,
@@ -45,7 +47,7 @@
 
 // Specific to guard spiders.
 /datum/category_item/catalogue/fauna/giant_spider/guard_spider
-	name = "Guard Spider"
+	name = "Giant Spider - Guard"
 	desc = "This specific spider has been catalogued as 'Guard', \
 	and belongs to the 'Guard' caste. It has a brown coloration, with \
 	red glowing eyes.\
@@ -61,7 +63,6 @@
 	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
 	tt_desc = "X Atrax robustus gigantus"
 	catalogue_data = list(/datum/category_item/catalogue/fauna/giant_spider/guard_spider)
-	catalogue_delay = 10 SECONDS
 
 	icon_state = "guard"
 	icon_living = "guard"

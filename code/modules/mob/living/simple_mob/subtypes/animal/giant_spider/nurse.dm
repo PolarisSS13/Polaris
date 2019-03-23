@@ -2,7 +2,7 @@
 // They're fragile but their attacks can cause horrifying consequences.
 
 /datum/category_item/catalogue/fauna/giant_spider/nurse_spider
-	name = "Nurse Spider"
+	name = "Giant Spider - Nurse"
 	desc = "This specific spider has been catalogued as 'Nurse', \
 	and it belongs to the 'Nurse' caste. \
 	The spider has a beige coloration, with green eyes. \

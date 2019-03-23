@@ -5,7 +5,7 @@
 // If the tunneler hits a solid wall, the tunneler will suffer a stun.
 
 /datum/category_item/catalogue/fauna/giant_spider/tunneler_spider
-	name = "Tunneler Spider"
+	name = "Giant Spider - Tunneler"
 	desc = "This specific spider has been catalogued as 'Tunneler', \
 	and it belongs to the 'Hunter' caste. \
 	The spider has a brown appearance, perhaps as camouflage. It also often has pieces of dirt, sand, or rock lying on it. \

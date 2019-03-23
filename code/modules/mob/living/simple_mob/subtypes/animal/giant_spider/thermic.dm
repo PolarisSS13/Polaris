@@ -1,7 +1,7 @@
 // Thermic spiders inject a special variant of thermite that burns someone from the inside.
 
 /datum/category_item/catalogue/fauna/giant_spider/thermic_spider
-	name = "Thermic Spider"
+	name = "Giant Spider - Thermic"
 	desc = "This specific spider has been catalogued as 'Thermic', \
 	and it belongs to the 'Guard' caste. \
 	The spider is colored orange, both body and eyes.\

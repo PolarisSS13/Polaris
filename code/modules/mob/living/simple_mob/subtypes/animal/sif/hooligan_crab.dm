@@ -10,7 +10,7 @@
 */
 
 /datum/category_item/catalogue/fauna/hooligan_crab
-	name = "Hooligan Crab"
+	name = "Sivian Fauna - Hooligan Crab"
 	desc = "A very large, grey crustacean-like creature. They display remarkable curiosity, \
 	often following people around, and occasionally stealing man-made objects, hence their name. \
 	They generally reside at the shoreline in small groups, situated between two sources of food for it, \
@@ -28,7 +28,6 @@
 	desc = "A large, hard-shelled crustacean. This one is mostly grey. \
 	You probably shouldn't mess with it."
 	catalogue_data = list(/datum/category_item/catalogue/fauna/hooligan_crab)
-	catalogue_delay = 5 SECONDS
 
 	icon_state = "sif_crab"
 	icon_living = "sif_crab"

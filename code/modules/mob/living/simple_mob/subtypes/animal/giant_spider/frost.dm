@@ -1,7 +1,7 @@
 // Frost spiders inject cryotoxin, slowing people down (which is very bad if trying to run from spiders).
 
 /datum/category_item/catalogue/fauna/giant_spider/frost_spider
-	name = "Frost Spider"
+	name = "Giant Spider - Frost"
 	desc = "This specific spider has been catalogued as 'Frost', \
 	and it belongs to the 'Guard' caste. \
 	The spider is blue, and often has ice hanging off of it. It is also said to have an icy gaze, with its blue eyes. \

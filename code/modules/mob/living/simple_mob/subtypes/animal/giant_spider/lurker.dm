@@ -4,7 +4,7 @@
 // Hitting the spider before it does its ambush attack will break the cloak and make the spider flee.
 
 /datum/category_item/catalogue/fauna/giant_spider/lurker_spider
-	name = "Lurker Spider"
+	name = "Giant Spider - Lurker"
 	desc = "This specific spider has been catalogued as 'Lurker', \
 	and it belongs to the 'Hunter' caste. \
 	The spider is colored white, however it is more often seen being translucent. It has red eyes. \

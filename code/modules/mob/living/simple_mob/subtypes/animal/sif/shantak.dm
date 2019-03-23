@@ -1,8 +1,10 @@
 // Shantaks are essentially sif wolves.
 
 /datum/category_item/catalogue/fauna/shantak
-	name = "Shantak (S Choeros shantak)"
-	desc = "The Shantak is easily recognized by its iridescent, crystaline mane. \
+	name = "Sivian Fauna - Shantak"
+	desc = "Classification: S Choeros shantak\
+	<br><br>\
+	The Shantak is easily recognized by its iridescent, crystaline mane. \
 	The creature's specially adapted hairs are hardened by a natural hard mineral coating, \
 	thickest in the mane but present across the whole body. \
 	As well as giving the Shantak a coat nigh-inpenetrable to all but the most specialized predator, \
@@ -22,7 +24,6 @@
 	Don't be fooled by its beauty though."
 	tt_desc = "S Choeros shantak"
 	catalogue_data = list(/datum/category_item/catalogue/fauna/shantak)
-	catalogue_delay = 10 SECONDS
 
 	faction = "shantak"
 

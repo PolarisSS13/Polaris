@@ -4,8 +4,8 @@
 	A weapon that can cleave is very effective against them.
 */
 
-/datum/category_item/catalogue/technology/viscerator
-	name = "Viscerator"
+/datum/category_item/catalogue/technology/drone/viscerator
+	name = "Drone - Viscerator"
 	desc = "Viscerators are fairly simple machines that use very sharp blades as propellers, \
 	which it uses both to fly and to attack enemy targets. Their simple construction generally \
 	means that if one is found, a swarm of others are not too far away.\
@@ -20,7 +20,7 @@
 /mob/living/simple_mob/mechanical/viscerator
 	name = "viscerator"
 	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
-	catalogue_data = list(/datum/category_item/catalogue/technology/viscerator)
+	catalogue_data = list(/datum/category_item/catalogue/technology/drone/viscerator)
 
 	icon = 'icons/mob/critter.dmi'
 	icon_state = "viscerator_attack"

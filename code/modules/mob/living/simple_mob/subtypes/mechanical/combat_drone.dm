@@ -4,8 +4,8 @@
 	A solid hit with an EMP grenade will kill the shield instantly.
 */
 
-/datum/category_item/catalogue/technology/combat_drone
-	name = "Combat Drone"
+/datum/category_item/catalogue/technology/drone/combat_drone
+	name = "Drone - Combat Drone"
 	desc = "Deadly to anyone it perceives as an enemy, this drone model tries to capture the ideal balance \
 	between effectiveness, versatility, and expendability. It possesses sophisticated technology that allows it \
 	to both be dangerous, and be less costly to build compared to alternatives such as exosuits. It was designed \
@@ -32,8 +32,7 @@
 /mob/living/simple_mob/mechanical/combat_drone
 	name = "combat drone"
 	desc = "An automated combat drone armed with state of the art weaponry and shielding."
-	catalogue_data = list(/datum/category_item/catalogue/technology/combat_drone)
-	catalogue_delay = 10 SECONDS
+	catalogue_data = list(/datum/category_item/catalogue/technology/drone/combat_drone)
 
 	icon_state = "drone"
 	icon_living = "drone"

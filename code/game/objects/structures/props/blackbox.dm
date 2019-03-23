@@ -54,7 +54,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/information/blackbox/crashed_med_shuttle)
 
 /datum/category_item/catalogue/information/blackbox/crashed_med_shuttle
-	name = "Black Box Data - TBD"
+	name = "Black Box Data - VMV Aurora's Light" // This might be incorrect.
 	desc = {"
 		\[Unable to recover data before this point.\]<BR>
 		<B>Captain Simmons 19:52:01:</B> Come on... it's right there in the distance, we're almost there!<BR>

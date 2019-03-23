@@ -96,7 +96,7 @@
 	special_attack_min_range = 1
 	special_attack_max_range = 7
 	special_attack_cooldown = 10 SECONDS
-	projectiletype = /obj/item/projectile/energy/homing_bolt
+	projectiletype = /obj/item/projectile/energy/homing_bolt // We're now a bullet hell game.
 	projectilesound = 'sound/weapons/wave.ogg'
 	ai_holder_type = /datum/ai_holder/simple_mob/intentional/adv_dark_gygax
 	var/obj/effect/overlay/energy_ball/energy_ball = null
@@ -120,17 +120,18 @@
 /obj/item/projectile/energy/homing_bolt
 	name = "homing bolt"
 	icon_state = "force_missile"
-	damage = 25
-	damage_type = BRUTE
-	check_armour = "melee"
+	damage = 20
+	damage_type = BURN
+	check_armour = "laser"
+
+/obj/item/projectile/energy/homing_bolt/launch_projectile(atom/target, target_zone, mob/user, params, angle_override, forced_spread = 0)
+	..()
+	if(target)
+		set_homing_target(target)
 
 /obj/item/projectile/energy/homing_bolt/fire(angle, atom/direct_target)
 	..()
 	set_pixel_speed(0.5)
-	if(target)
-		set_homing_target(target)
-		world << "Homing towards [target] hopefully."
-
 
 #define ELECTRIC_ZAP_POWER 20000
 

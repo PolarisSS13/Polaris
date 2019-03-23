@@ -1,7 +1,7 @@
 // Carriers are not too dangerous on their own, but they create more spiders when dying.
 
 /datum/category_item/catalogue/fauna/giant_spider/carrier_spider
-	name = "Carrier Spider"
+	name = "Giant Spider - Carrier"
 	desc = "This specific spider has been catalogued as 'Carrier', \
 	and it belongs to the 'Nurse' caste. \
 	<br><br>\
@@ -74,11 +74,11 @@
 			new_body.key = src.key
 	return ..()
 
-
+// Note that this isn't required for the 'scan all spiders' entry since its essentially a meme.
 /datum/category_item/catalogue/fauna/giant_spider/recursive_carrier_spider
-	name = "Recursive Carrier Spider"
+	name = "Giant Spider - Recursive Carrier"
 	desc = "<font face='comic sans ms'>It's Carriers all the way down.</font>"
-	value = 40
+	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/animal/giant_spider/carrier/recursive
 	desc = "Furry, beige, and red, it makes you shudder to look at it. This one has luminous green eyes. \

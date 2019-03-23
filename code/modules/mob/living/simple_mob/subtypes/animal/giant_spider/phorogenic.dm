@@ -2,7 +2,7 @@
 // You really shouldn't melee them.
 
 /datum/category_item/catalogue/fauna/giant_spider/phorogenic_spider
-	name = "Phorogenic Spider"
+	name = "Giant Spider - Phorogenic"
 	desc = "This specific spider has been catalogued as 'Phorogenic', \
 	and it belongs to the 'Guard' caste. \
 	The spider has a purple, crystalline appearance, with their eyes also purple.\

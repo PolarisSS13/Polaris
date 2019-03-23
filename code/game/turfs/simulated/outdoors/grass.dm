@@ -18,7 +18,7 @@ var/list/grass_types = list(
 		)
 
 /datum/category_item/catalogue/flora/sif_grass
-	name = "Sivian Moss"
+	name = "Sivian Flora - Moss"
 	desc = "A natural moss that has adapted to the sheer cold climate of Sif. \
 	The moss came to rely partially on bioluminescent bacteria provided by the local tree populations. \
 	As such, the moss often grows in large clusters in the denser forests of Sif. \

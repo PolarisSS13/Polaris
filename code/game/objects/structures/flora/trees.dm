@@ -230,7 +230,7 @@
 // Sif trees
 
 /datum/category_item/catalogue/flora/sif_tree
-	name = "Sivian Tree"
+	name = "Sivian Flora - Tree"
 	desc = "The damp, shaded environment of Sif's most common variety of tree provides an ideal environment for a wide \
 	variety of bioluminescent bacteria. The soft glow of the microscopic organisms in turn attracts several native microphagous \
 	animals which act as an effective dispersal method. By this mechanism, new trees and bacterial colonies often sprout in \

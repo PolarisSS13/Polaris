@@ -1,7 +1,7 @@
 // Webslingers do what their name implies, shoot web at enemies to slow them down.
 
 /datum/category_item/catalogue/fauna/giant_spider/webslinger_spider
-	name = "Webslinger Spider"
+	name = "Giant Spider - Webslinger"
 	desc = "This specific spider has been catalogued as 'Webslinger', \
 	and it belongs to the 'Nurse' caste. \
 	The spider is green, with a 'cloak' of webs attached to it. It's eyes are also green. \

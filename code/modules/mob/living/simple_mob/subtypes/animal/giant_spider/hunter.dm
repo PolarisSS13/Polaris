@@ -3,7 +3,7 @@
 // The AI would've followed up after a successful leap with dragging the downed victim away, but the dragging code was too janky.
 
 /datum/category_item/catalogue/fauna/giant_spider/hunter_spider
-	name = "Hunter Spider"
+	name = "Giant Spider - Hunter"
 	desc = "This specific spider has been catalogued as 'Hunter', \
 	and it belongs to the 'Hunter' caste. \
 	The spider is entirely black in color, with purple eyes. \

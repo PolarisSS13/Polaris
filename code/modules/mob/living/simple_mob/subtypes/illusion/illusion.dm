@@ -101,3 +101,16 @@
 /mob/living/simple_mob/illusion/get_nametag_desc(mob/user)
 	if(copying)
 		return copying.get_nametag_desc(user)
+
+// Cataloguer stuff. I don't think this will actually come up but better safe than sorry.
+/mob/living/simple_mob/illusion/get_catalogue_data()
+	if(copying)
+		return copying.get_catalogue_data()
+
+/mob/living/simple_mob/illusion/can_catalogue()
+	if(copying)
+		return copying.can_catalogue()
+
+/mob/living/simple_mob/illusion/get_catalogue_delay()
+	if(copying)
+		return copying.get_catalogue_delay()

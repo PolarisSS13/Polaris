@@ -1,7 +1,7 @@
 // Electric spiders fire taser-like beams at their enemies.
 
 /datum/category_item/catalogue/fauna/giant_spider/electric_spider
-	name = "Electric Spider"
+	name = "Giant Spider - Electric"
 	desc = "This specific spider has been catalogued as 'Electric', \
 	and it belongs to the 'Guard' caste. \
 	<br><br>\

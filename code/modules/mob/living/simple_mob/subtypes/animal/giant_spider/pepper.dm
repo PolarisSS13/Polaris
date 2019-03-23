@@ -1,7 +1,7 @@
 // Pepper spiders inject condensed capsaicin into their victims.
 
 /datum/category_item/catalogue/fauna/giant_spider/pepper_spider
-	name = "Pepper Spider"
+	name = "Giant Spider - Pepper"
 	desc = "This specific spider has been catalogued as 'Pepper', \
 	and it belongs to the 'Guard' caste. \
 	Red makes up a majority of the spider's appearance, including its eyes, with some brown on its body as well. \

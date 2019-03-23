@@ -1,8 +1,10 @@
 // Saviks are dangerous, angry creatures that hit hard, and will berserk if losing a fight.
 
 /datum/category_item/catalogue/fauna/savik
-	name = "Savik (S Pistris tellus)"
-	desc = "A predatory warm-blooded reptillian species covered in a layer of insulating down feathers. \
+	name = "Sivian Fauna - Savik"
+	desc = "Classification: S Pistris tellus\
+	<br><br>\
+	A predatory warm-blooded reptillian species covered in a layer of insulating down feathers. \
 	The Savik's preferred method of hunting is to burrow under deep snow drifts, and lie in ambush for prey. \
 	The Savik has been known to lie in wait for days at a time, generating heat by vibrating its shoulder plates \
 	at a nigh inperceptable frequency while most of its body enters a state of sopor in order to conserve energy. \
@@ -19,8 +21,6 @@
 	name = "savik"
 	tt_desc = "S Pistris tellus" //landshark
 	catalogue_data = list(/datum/category_item/catalogue/fauna/savik)
-	catalogue_delay = 10 SECONDS
-
 	faction = "savik"
 
 	icon_state = "savik"
