@@ -1,0 +1,25 @@
+"a" = (/turf/template_noop,/area/template_noop)
+"b" = (/turf/simulated/wall/log_sif,/area/submap/ButcherShack)
+"c" = (/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
+"d" = (/obj/structure/kitchenspike,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
+"e" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
+"f" = (/obj/structure/closet/crate/freezer,/obj/effect/decal/cleanable/blood/gibs,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/obj/random/meat,/turf/simulated/floor/wood/sif/broken,/area/submap/ButcherShack)
+"g" = (/obj/machinery/gibber/autogibber,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
+"h" = (/turf/simulated/floor/wood/sif/broken,/area/submap/ButcherShack)
+"i" = (/obj/effect/wingrille_spawn,/turf/simulated/floor/plating,/area/submap/ButcherShack)
+"j" = (/turf/template_noop,/area/submap/ButcherShack)
+"k" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
+"l" = (/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/ButcherShack)
+
+(1,1,1) = {"
+aaaaaaaaaa
+abbbbbbbba
+abcddefgba
+abhcccccba
+abcchcccba
+abcccchcba
+abbhbiibba
+ajbkblllja
+ajllllljja
+aaaaaaaaaa
+"}
