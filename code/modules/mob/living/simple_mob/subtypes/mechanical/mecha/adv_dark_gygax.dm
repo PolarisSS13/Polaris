@@ -49,7 +49,7 @@
 	of light and arcs of lightning fly out from the exosuit towards its surroundings.\
 	<br><br>\
 	<b>Microsingularity Projector</b><br>\
-	Finally, the third supplementary weapon utilizes gravitation as a weapon, by firing an blue energetic orb \
+	Finally, the third supplementary weapon utilizes gravitation as a weapon, by firing a blue energetic orb \
 	that, upon hitting the ground, collapses and causes a 'microsingularity' to emerge briefly, pulling in \
 	anything unsecured, such as personnel or weapons. The microsingularity lacks the means to gain any energy, meaning it \
 	will dissipate in a few seconds, and so it is <u>probably</u> safe to use on a planetary body.\
