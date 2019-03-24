@@ -563,8 +563,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server!</b> (Heavy Roleplay) - <b>[station_name()]</b>";
-	s += " - City life isn't what you thought it was. ("
+	s += "<b>The World Server! | Civilian-based RP | Fast Server</b> (MRP/HRP) - <b>[station_name()]</b>";
+	s += " - They did <b>what</b> to space? | Unique Setting | New roleplayer friendly ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
@@ -603,6 +603,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	if (config && config.hostedby)
 		features += "hosted by <b>[config.hostedby]</b>"
+
+	s += "<img src=\"https://i.imgur.com/RGXrBHu.gif\">" //Banner image
 
 	if (features)
 		s += ": [jointext(features, ", ")]"
