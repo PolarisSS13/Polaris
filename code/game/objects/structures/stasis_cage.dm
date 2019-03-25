@@ -2,7 +2,7 @@
 	name = "stasis cage"
 	desc = "A high-tech animal cage, designed to keep contained fauna docile and safe."
 	icon = 'icons/obj/storage.dmi'
-	icon_state = "critter"
+	icon_state = "critteropen"
 	density = 1
 
 	var/mob/living/simple_mob/contained
@@ -28,6 +28,9 @@
 	contained = animal
 	animal.forceMove(src)
 	animal.in_stasis = 1
+	if(animal.buckled && istype(animal.buckled, /obj/effect/energy_net))
+		animal.buckled.forceMove(animal.loc)
+	icon_state = "critter"
 	desc = initial(desc) + " \The [contained] is kept inside."
 
 /obj/structure/stasis_cage/proc/release()
@@ -35,8 +38,11 @@
 		return
 
 	contained.dropInto(src)
+	if(contained.buckled && istype(contained.buckled, /obj/effect/energy_net))
+		contained.buckled.dropInto(src)
 	contained.in_stasis = 0
 	contained = null
+	icon_state = "critteropen"
 	underlays.Cut()
 	desc = initial(desc)
 
