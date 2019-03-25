@@ -49,7 +49,6 @@ var/list/ai_verbs_default = list(
 	shouldnt_see = list(/obj/effect/rune)
 	var/list/network = list(NETWORK_DEFAULT)
 	var/obj/machinery/camera/camera = null
-	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.

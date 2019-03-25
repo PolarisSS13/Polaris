@@ -24,9 +24,11 @@ var/list/robot_custom_icons
 	return 1
 
 /mob/living/silicon/robot/proc/set_custom_sprite()
-	var/sprite_owner = robot_custom_icons[real_name]
+	if(!sprite_name)
+		return
+	var/sprite_owner = robot_custom_icons[sprite_name]
 	if(sprite_owner && sprite_owner == ckey)
 		custom_sprite = 1
 		icon = CUSTOM_ITEM_SYNTH
 		if(icon_state == "robot")
-			icon_state = "[ckey]-[name]-Standard" //Compliant with robot.dm line 236 ~Mech
+			icon_state = "[ckey]-[sprite_name]-Standard" //Compliant with robot.dm line 236 ~Mech

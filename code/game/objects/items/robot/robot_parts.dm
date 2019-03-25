@@ -197,6 +197,7 @@
 			user.drop_item()
 
 			O.mmi = W
+			O.post_mmi_setup()
 			O.invisibility = 0
 			O.custom_name = created_name
 			O.updatename("Default")

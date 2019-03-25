@@ -17,6 +17,7 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
+	var/sprite_name = null // The name of the borg, for the purposes of custom icon sprite indexing.
 	var/crisis //Admin-settable for combat module use.
 	var/crisis_override = 0
 	var/integrated_light_power = 6
@@ -173,6 +174,8 @@
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
+
+
 /mob/living/silicon/robot/SetName(pickedName as text)
 	custom_name = pickedName
 	updatename()
@@ -242,7 +245,7 @@
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
 		if (custom_sprite == 1)
-			module_sprites["Custom"] = "[ckey]-[name]-[modtype]" //Made compliant with custom_sprites.dm line 32. (src.) was apparently redundant as it's implied. ~Mech
+			module_sprites["Custom"] = "[ckey]-[sprite_name]-[modtype]" //Made compliant with custom_sprites.dm line 32. (src.) was apparently redundant as it's implied. ~Mech
 			icontype = "Custom"
 		else
 			icontype = module_sprites[1]
@@ -281,6 +284,8 @@
 		braintype = "Robot"
 	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
 		braintype = "Drone"
+	else if(istype(mmi, /obj/item/device/mmi/ai_remote))
+		braintype = "AI Shell"
 	else
 		braintype = "Cyborg"
 
@@ -326,6 +331,7 @@
 		newname = sanitizeSafe(input(src,"You are a robot. Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
 		if (newname)
 			custom_name = newname
+			sprite_name = newname
 
 		updatename()
 		updateicon()
@@ -708,10 +714,11 @@
 /mob/living/silicon/robot/updateicon()
 	cut_overlays()
 	if(stat == CONSCIOUS)
-		add_overlay("eyes-[module_sprites[icontype]]")
+		if(!shell || deployed) // Shell borgs that are not deployed will have no eyes.
+			add_overlay("eyes-[module_sprites[icontype]]")
 
 	if(opened)
-		var/panelprefix = custom_sprite ? "[src.ckey]-[src.name]" : "ov"
+		var/panelprefix = custom_sprite ? "[src.ckey]-[src.sprite_name]" : "ov"
 		if(wiresexposed)
 			add_overlay("[panelprefix]-openpanel +w")
 		else if(cell)
