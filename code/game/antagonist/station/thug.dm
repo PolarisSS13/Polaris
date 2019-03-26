@@ -15,7 +15,8 @@ var/datum/antagonist/thug/thugs
 		<br>This is a <b>teamwork role</b>, roleplay with your fellow gang members \
 		and brainstorm what you will do. <b>AOOC</b> may be used."
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	can_use_aooc = TRUE
+	can_speak_aooc = TRUE
+	can_hear_aooc = TRUE
 	antaghud_indicator = "thug"
 	antag_indicator = "thug"
 	initial_spawn_req = 2

@@ -385,6 +385,11 @@ proc/get_radio_key_from_channel(var/channel)
 		dialogue_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>SAY:</u> - <span style=\"color:green\">[message]</span>"
 		round_text_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>SAY:</u> - <span style=\"color:green\">[message]</span>"
 
+	if(issilicon(src))
+		dialogue_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>ROBOT SAY:</u> - <span style=\"color:green\">[message]</span>"
+		round_text_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>ROBOT SAY:</u> - <span style=\"color:green\">[message]</span>"
+
+
 	if(whispering)
 		log_whisper(message,src)
 	else

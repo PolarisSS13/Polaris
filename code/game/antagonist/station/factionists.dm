@@ -20,7 +20,8 @@ var/datum/antagonist/faction/factionists
 	initial_spawn_target = 6
 
 	flags = ANTAG_IMPLANT_IMMUNE | ANTAG_VOTABLE
-	can_use_aooc = TRUE
+	can_speak_aooc = TRUE
+	can_hear_aooc = TRUE
 
 	restricted_jobs = list("AI",\
 	"Cyborg",\
