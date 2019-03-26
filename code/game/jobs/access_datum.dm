@@ -479,7 +479,7 @@
 /datum/access/cbia
 	id = access_cbia
 	desc = "CBIA"
-	region = ACCESS_TYPE_CBIA
+	region = ACCESS_TYPE_CENTCOM
 
 /***************
 * Antag access *
