@@ -5,7 +5,7 @@ var/datum/antagonist/traitor/traitors
 	id = MODE_TRAITOR
 	protected_jobs = list("Police Officer", "Prison Warden", "Detective", "Judge", "Chief of Police", "Mayor")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	can_use_aooc = FALSE
+	can_speak_aooc = TRUE
 
 /datum/antagonist/traitor/auto
 	id = MODE_AUTOTRAITOR
