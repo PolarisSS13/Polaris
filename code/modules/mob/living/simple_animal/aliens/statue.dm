@@ -241,7 +241,7 @@
 		if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right?
 			return null
 		if(T == destination)
-			destination = null*/
+			destination = null
 
 	// loop for viewers.
 	var/list/check_list = list(src)
