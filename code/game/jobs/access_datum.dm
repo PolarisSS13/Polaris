@@ -478,7 +478,7 @@
 /var/const/access_cbia = 111
 /datum/access/cbia
 	id = access_cbia
-	desc = "CBIA"
+	desc = "CBIA Agent"
 	region = ACCESS_TYPE_CENTCOM
 
 /***************
