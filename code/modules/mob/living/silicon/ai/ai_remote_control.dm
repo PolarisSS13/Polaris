@@ -1,12 +1,18 @@
 /mob/living/silicon/ai
-	var/list/connected_robots = list()
 	var/mob/living/silicon/robot/deployed_shell = null //For shell control
 
+/mob/living/silicon/ai/Initialize()
+	if(config.allow_ai_shells)
+		verbs += /mob/living/silicon/ai/proc/deploy_to_shell_act
+	return ..()
+
 /mob/living/silicon/ai/proc/deploy_to_shell(var/mob/living/silicon/robot/target)
-	set category = "AI Commands"
-	set name = "Deploy to Shell"
+	if(!config.allow_ai_shells)
+		to_chat(src, span("warning", "AI Shells are not allowed on this server. You shouldn't have this verb because of it, so consider making a bug report."))
+		return
 
 	if(incapacitated())
+		to_chat(src, span("warning", "You are incapacitated!"))
 		return
 
 	if(control_disabled)
@@ -27,56 +33,25 @@
 		target = input(src, "Which body to control?") as null|anything in possible
 
 	if(!target || target.stat == DEAD || target.deployed || !(!target.connected_ai || (target.connected_ai == src) ) )
+		if(target)
+			to_chat(src, span("warning", "It is no longer possible to deploy to \the [target]."))
+		else
+			to_chat(src, span("notice", "Deployment aborted."))
 		return
 
 	else if(mind)
-	//	soullink(/datum/soullink/sharedbody, src, target)
+		soul_link(/datum/soul_link/shared_body, src, target)
 		deployed_shell = target
 		target.deploy_init(src)
 		mind.transfer_to(target)
+		teleop = target // So the AI 'hears' messages near its core.
 
-/mob/living/silicon/ai/verb/deploy_to_shell_act()
+/mob/living/silicon/ai/proc/deploy_to_shell_act()
 	set category = "AI Commands"
 	set name = "Deploy to Shell"
-
 	deploy_to_shell() // This is so the AI is not prompted with a list of all mobs when using the 'real' proc.
-/*
-/mob/living/silicon/ai/verb/deploy_to_shell(var/mob/living/silicon/robot/target)
-	set category = "AI Commands"
-	set name = "Deploy to Shell"
 
-	if(incapacitated())
-		return
-	if(control_disabled)
-		to_chat(src, "<span class='warning'>Wireless networking module is offline.</span>")
-		return
-
-	var/list/possible = list()
-
-	for(var/borgie in GLOB.available_ai_shells)
-		var/mob/living/silicon/robot/R = borgie
-		if(R.shell && !R.deployed && (R.stat != DEAD) && (!R.connected_ai ||(R.connected_ai == src)))
-			possible += R
-
-	if(!LAZYLEN(possible))
-		to_chat(src, "No usable AI shell beacons detected.")
-
-	if(!target || !(target in possible)) //If the AI is looking for a new shell, or its pre-selected shell is no longer valid
-		target = input(src, "Which body to control?") as null|anything in possible
-
-	if (!target || target.stat == DEAD || target.deployed || !(!target.connected_ai ||(target.connected_ai == src)))
-		return
-
-	else if(mind)
-		soullink(/datum/soullink/sharedbody, src, target)
-		deployed_shell = target
-		target.deploy_init(src)
-		mind.transfer_to(target)
-	diag_hud_set_deployed()
-
-/mob/living/silicon/ai/proc/disconnect_shell()
-	if(deployed_shell) //Forcibly call back AI in event of things such as damage, EMP or power loss.
-		to_chat(src, "<span class='danger'>Your remote connection has been reset!</span>")
-		deployed_shell.undeploy()
-	diag_hud_set_deployed()
-*/
+/mob/living/silicon/ai/proc/disconnect_shell(message = "Your remote connection has been reset!")
+	if(deployed_shell) // Forcibly call back AI in event of things such as damage, EMP or power loss.
+		message = span("danger", message)
+		deployed_shell.undeploy(message)
