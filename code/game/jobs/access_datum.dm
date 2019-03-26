@@ -474,6 +474,12 @@
 	id = access_president
 	desc = "President"
 	region = ACCESS_TYPE_CENTCOM
+	
+/var/const/access_cbia = 111
+/datum/access/cbia
+	id = access_cbia
+	desc = "CBIA"
+	region = ACCESS_TYPE_CBIA
 
 /***************
 * Antag access *
