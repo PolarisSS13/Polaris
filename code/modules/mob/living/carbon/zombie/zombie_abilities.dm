@@ -19,44 +19,48 @@
 			C.visible_message("<span class='warning'>\The [C]'s entire form seems to twitch in a very unsettling way.</span>")
 
 
-			do_after(C, 2100)
+			if(do_after(C, 2100))
 
-			C.tod = null
-			C.setToxLoss(0)
-			C.setOxyLoss(0)
-			C.setCloneLoss(0)
-			C.SetParalysis(0)
-			C.SetStunned(0)
-			C.SetWeakened(0)
-			C.radiation = 0
-			C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
-			C.reagents.clear_reagents()
-			if(ishuman(C))
-				var/mob/living/carbon/human/H = src
-				H.species.create_organs(H)
-				H.restore_all_organs(ignore_prosthetic_prefs=1) //Covers things like fractures and other things not covered by the above.
-				H.restore_blood()
-				H.mutations.Remove(HUSK)
-				H.status_flags &= ~DISFIGURED
-				H.update_icons_body()
-				for(var/limb in H.organs_by_name)
-					var/obj/item/organ/external/current_limb = H.organs_by_name[limb]
-					if(current_limb)
-						current_limb.relocate()
-						current_limb.open = 0
+				C.tod = null
+				C.setToxLoss(0)
+				C.setOxyLoss(0)
+				C.setCloneLoss(0)
+				C.SetParalysis(0)
+				C.SetStunned(0)
+				C.SetWeakened(0)
+				C.radiation = 0
+				C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
+				C.reagents.clear_reagents()
+				if(ishuman(C))
+					var/mob/living/carbon/human/H = src
+					H.species.create_organs(H)
+					H.restore_all_organs(ignore_prosthetic_prefs=1) //Covers things like fractures and other things not covered by the above.
+					H.restore_blood()
+					H.mutations.Remove(HUSK)
+					H.status_flags &= ~DISFIGURED
+					H.update_icons_body()
+					for(var/limb in H.organs_by_name)
+						var/obj/item/organ/external/current_limb = H.organs_by_name[limb]
+						if(current_limb)
+							current_limb.relocate()
+							current_limb.open = 0
 
-				BITSET(H.hud_updateflag, HEALTH_HUD)
-				BITSET(H.hud_updateflag, STATUS_HUD)
-				BITSET(H.hud_updateflag, LIFE_HUD)
+					BITSET(H.hud_updateflag, HEALTH_HUD)
+					BITSET(H.hud_updateflag, STATUS_HUD)
+					BITSET(H.hud_updateflag, LIFE_HUD)
 
-			C.halloss = 0
-			C.shock_stage = 0 //Pain
-			C << "<span class='notice'>You rise from the dead.</span>"
-			C.update_canmove()
-			C.stat = CONSCIOUS
-			C.forbid_seeing_deadchat = FALSE
-			C.timeofdeath = null
-			return 1
+
+					C.halloss = 0
+					C.shock_stage = 0 //Pain
+					C << "<span class='notice'>You rise from the dead.</span>"
+					C.update_canmove()
+					C.stat = CONSCIOUS
+					C.forbid_seeing_deadchat = FALSE
+					C.timeofdeath = null
+					return 1
+			else
+				C << "<span class='notice'>Your vessel is interrupted.</span>"
+
 	else
 		C << "<span class='alium'>You can only use this while dead.</span>"
 		return
