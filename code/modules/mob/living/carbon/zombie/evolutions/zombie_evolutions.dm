@@ -14,7 +14,7 @@
 	evolution = TANKER_EVOLUTION
 	mob_size = MOB_LARGE
 	death_message = "Makes a loud whistling sound as it emits a foul odourous gas into the air..."
-	slowdown = 1.2 //A bit slower than a regular zombie...
+	slowdown = 2.2 //A bit slower than a regular zombie...
 	total_health = 300 //thicc
 	brute_mod = 0.30 //Have you ever hit a huge bag of pudding and watched it jiggle? Yeah that.
 	icobase = 'icons/mob/human_races/r_zombie_tanker.dmi'

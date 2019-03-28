@@ -40,7 +40,7 @@
 	spawn_flags = SPECIES_IS_RESTRICTED
 	show_ssd = null
 	virus_immune = 1
-	brute_mod = 0.25
+	brute_mod = 2
 	burn_mod = 2
 	speech_chance  = 80
 	speech_sounds = list('sound/voice/zombie_groan.ogg')
@@ -54,7 +54,7 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 //	hud_type = /datum/hud_data/zombie
-	slowdown = 1 //zombies are slow as fuck
+	slowdown = 1.5 //zombies are slow as fuck
 	can_drive = 0
 
 	has_fine_manipulation = FALSE
@@ -68,8 +68,8 @@
 
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/tackle,
-		/mob/living/carbon/human/proc/gut,
+//		/mob/living/carbon/human/proc/tackle,
+//		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/revive_undead,
 		/mob/living/carbon/human/proc/fermented_goo
 

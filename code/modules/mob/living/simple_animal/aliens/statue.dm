@@ -22,8 +22,8 @@
 	environment_smash = 2
 	can_be_antagged = 1
 	speed = -1
-	maxHealth = 3000
-	health = 3000
+	maxHealth = 300
+	health = 300
 	status_flags = CANPUSH
 //	investigates = 1
 	a_intent = I_HURT
@@ -31,9 +31,9 @@
 	mob_bump_flag = HEAVY
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
-	harm_intent_damage = 60
-	melee_damage_lower = 50
-	melee_damage_upper = 70
+	harm_intent_damage = 40
+	melee_damage_lower = 20
+	melee_damage_upper = 30
 	attacktext = "clawed"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
@@ -59,9 +59,9 @@
 	melee_miss_chance = 0
 
 	armor = list(
-				"melee" = 30,
-				"bullet" = 60,
-				"laser" = 80,
+				"melee" = 10,
+				"bullet" = 30,
+				"laser" = 40,
 				"energy" = 30,
 				"bomb" = 30,
 				"bio" = 100,
@@ -237,11 +237,11 @@
 		return null
 
 	var/turf/T = get_turf(loc)
-/*	if(T && destination && T.lighting_overlay)
+	if(T && destination && T.lighting_overlay)
 		if(T.get_lumcount() * 10 < 0.9 && destination.get_lumcount() * 10 < 0.9) // No one can see us in the darkness, right?
 			return null
 		if(T == destination)
-			destination = null*/
+			destination = null
 
 	// loop for viewers.
 	var/list/check_list = list(src)
