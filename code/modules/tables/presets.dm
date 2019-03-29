@@ -205,3 +205,27 @@
 	material = get_material_by_name("holowood")
 	..()
 */
+
+
+
+/obj/structure/table/woodentable_reinforced/walnut/New()
+	icon_state = "reinf_preview"
+	color = WOOD_COLOR_CHOCOLATE
+	get_material_by_name(MATERIAL_WALNUT)
+	reinforced = MATERIAL_WALNUT
+
+/obj/structure/table/woodentable/mahogany/New()
+	color = WOOD_COLOR_RICH
+	get_material_by_name(MATERIAL_MAHOGANY)
+
+/obj/structure/table/woodentable/maple/New()
+	color = WOOD_COLOR_PALE
+	get_material_by_name(MATERIAL_MAPLE)
+
+/obj/structure/table/woodentable/ebony/New()
+	color = WOOD_COLOR_BLACK
+	get_material_by_name(MATERIAL_EBONY)
+
+/obj/structure/table/woodentable/walnut/New()
+	color = WOOD_COLOR_CHOCOLATE
+	get_material_by_name(MATERIAL_WALNUT)

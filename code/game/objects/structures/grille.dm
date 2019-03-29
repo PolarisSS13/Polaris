@@ -287,7 +287,7 @@
 
 /obj/structure/grille/broken/cult
 	icon_state = "grillecult-b"
-
+/*
 /obj/structure/grille/rustic
 	name = "rustic grille"
 	desc = "A lattice of metal, arranged in an old, rustic fashion."
@@ -295,18 +295,7 @@
 
 /obj/structure/grille/broken/rustic
 	icon_state = "grillerustic-b"
-
-/obj/structure/grille/smallfence/
-	blend_objects = 0
-	name = "small fence"
-	icon_state = "fence"
-	health = 10
-
-/obj/structure/grille/frame
-	blend_objects = 0
-	name = "frame"
-	icon_state = "frame"
-	health = 10
+*/
 
 /obj/structure/grille/fence/
 	blend_objects = 0

@@ -356,7 +356,7 @@ var/list/name_to_material
 	protectiveness = 10 // 33%
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
-	icon_colour = "#666666"
+	icon_colour = "#515151"
 
 /material/diona
 	name = "biomass"
@@ -698,7 +698,7 @@ var/list/name_to_material
 /material/wood
 	name = MAT_WOOD
 	stack_type = /obj/item/stack/material/wood
-	icon_colour = "#9c5930"
+	icon_colour = "#664c15"
 	integrity = 50
 	icon_base = "wood"
 	explosion_resistance = 2

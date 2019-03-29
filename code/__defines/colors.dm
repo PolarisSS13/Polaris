@@ -162,4 +162,13 @@
 #define COLOR_LIGHTING_CREW_SOFT                        "#fef9e7"
 #define COLOR_LIGHTING_SCI_BRIGHT                        "#6a6c71"
 #define COLOR_LIGHTING_SCI_DARK                            "#4f535f"
+
+#define WOOD_COLOR_GENERIC     "#d5a66e"
+#define WOOD_COLOR_RICH        "#994715"
+#define WOOD_COLOR_PALE        "#d2bc9d"
+#define WOOD_COLOR_PALE2       "#e6d2ba"
+#define WOOD_COLOR_BLACK       "#332521"
+#define WOOD_COLOR_CHOCOLATE   "#78523b"
+
+
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

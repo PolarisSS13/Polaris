@@ -148,8 +148,9 @@
 				break
 
 		if(success)
-			wall_dirs += get_dir( src, T )
-			other_dirs += get_dir( src, T )
+			wall_dirs += get_dir(src, T)
+			if(get_dir(src, T) in cardinal)
+				other_dirs += get_dir(src, T)
 
 	wall_connections = dirs_to_corner_states(wall_dirs)
 	other_connections = dirs_to_corner_states(other_dirs)

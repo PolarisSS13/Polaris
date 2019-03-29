@@ -201,7 +201,6 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass_external
 	name = "External Airlock"
-	icon = 'icons/obj/doors/Doorextglass.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 	opacity = 0
 	glass = 1
@@ -273,7 +272,6 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass_engineeringatmos
 	name = "Maintenance Hatch"
-	icon = 'icons/obj/doors/Doorengatmoglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
 	maxhealth = 300
 	explosion_resistance = 5
@@ -393,7 +391,6 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/glass_science
 	name = "Glass Airlocks"
-	icon = 'icons/obj/doors/Doorsciglass.dmi'
 	opacity = 0
 
 	glass = 1
@@ -422,8 +419,8 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/alien
 	name = "alien airlock"
 	desc = "You're fairly sure this is a door."
-	icon = 'icons/obj/doors/Dooralien.dmi'
 	explosion_resistance = 20
+	door_color = COLOR_PURPLE
 	secured_wires = TRUE
 	hackProof = TRUE
 

@@ -13,8 +13,8 @@
 	return
 
 /turf/simulated/wall/solidrock //for more stylish anti-cheese.
-	icon_state = "bedrock"
-	var/base_state = "bedrock"
+	icon_state = "brick"
+	var/base_state = "brick"
 	block_tele = TRUE
 
 /turf/simulated/wall/solidrock/update_icon()

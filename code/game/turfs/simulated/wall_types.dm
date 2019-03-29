@@ -42,6 +42,7 @@
 /turf/simulated/wall/phoron/New(var/newloc)
 	..(newloc,"phoron")
 /turf/simulated/wall/sandstone/New(var/newloc)
+	icon_state = "brick"
 	..(newloc,"sandstone")
 /turf/simulated/wall/ironphoron/New(var/newloc)
 	..(newloc,"iron","phoron")
@@ -51,7 +52,12 @@
 	..(newloc,"silver","gold")
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
 	..(newloc,"sandstone","diamond")
+/turf/simulated/wall/plastic/New(var/newloc)
+	..(newloc,"plastic")
+/turf/simulated/wall/marble/New(var/newloc)
+	..(newloc,"marble")
 /turf/simulated/wall/snowbrick/New(var/newloc)
+	icon_state = "brick"
 	..(newloc,"packed snow")
 
 // Kind of wondering if this is going to bite me in the butt.
@@ -65,8 +71,38 @@
 /turf/simulated/wall/durasteel/New(var/newloc)
 	..(newloc,"durasteel", "durasteel")
 
+/turf/simulated/wall/wood
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 /turf/simulated/wall/wood/New(var/newloc)
-	..(newloc, MAT_WOOD)
+	..(newloc,MATERIAL_WOOD)
+
+/turf/simulated/wall/mahogany
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/mahogany/New(var/newloc)
+	..(newloc,MATERIAL_MAHOGANY)
+
+/turf/simulated/wall/maple
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/maple/New(var/newloc)
+	..(newloc,MATERIAL_MAPLE)
+
+/turf/simulated/wall/ebony
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/ebony/New(var/newloc)
+	..(newloc,MATERIAL_EBONY)
+
+/turf/simulated/wall/walnut
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 
 /turf/simulated/wall/sifwood/New(var/newloc)
 	..(newloc, MAT_SIFWOOD)
@@ -76,6 +112,12 @@
 
 /turf/simulated/wall/log_sif/New(var/newloc)
 	..(newloc, MAT_SIFLOG)
+
+/turf/simulated/wall/plastic/hospital
+	stripe_color = COLOR_BLUE_GRAY
+
+/turf/simulated/wall/plastic/viro
+	stripe_color = COLOR_PALE_GREEN_GRAY
 
 // Shuttle Walls
 /turf/simulated/shuttle/wall

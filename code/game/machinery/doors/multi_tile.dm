@@ -9,6 +9,13 @@
 	stripe_file = 'icons/obj/doors/double/stripe.dmi'
 	stripe_fill_file = 'icons/obj/doors/double/fill_stripe.dmi'
 	glass_file = 'icons/obj/doors/double/fill_glass.dmi'
+
+	bolts_file = 'icons/obj/doors/double/lights_bolts.dmi'
+	deny_file = 'icons/obj/doors/double/lights_deny.dmi'
+	lights_file = 'icons/obj/doors/double/lights_green.dmi'
+	panel_file = 'icons/obj/doors/double/panel.dmi'
+	welded_file = 'icons/obj/doors/double/welded.dmi'
+	emag_file = 'icons/obj/doors/double/emag.dmi'
 	width = 2
 	appearance_flags = 0
 	var/obj/machinery/filler_object/filler1
