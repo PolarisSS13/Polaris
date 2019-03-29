@@ -216,22 +216,6 @@
 	icon_state = "green1"
 	light_color = "#d8f9b1"
 
-/obj/machinery/light/colored/update_icon()
-
-	switch(status)		// set icon_states
-		if(LIGHT_OK)
-			icon_state = "[base_state][on]"
-		if(LIGHT_EMPTY)
-			icon_state = "empty"
-			on = 0
-		if(LIGHT_BURNED)
-			icon_state = "tube-burned"
-			on = 0
-		if(LIGHT_BROKEN)
-			icon_state = "tube-broken"
-			on = 0
-	return
-
 
 //colored bulbs
 
@@ -384,7 +368,16 @@
 	return ..()
 
 /obj/machinery/light/update_icon()
-
+	pixel_y = 0
+	pixel_x = 0
+	var/turf/T = get_step(get_turf(src), src.dir)
+	if(istype(T, /turf/simulated/wall))
+		if(src.dir == NORTH)
+			pixel_y = 21
+		else if(src.dir == EAST)
+			pixel_x = 10
+		else if(src.dir == WEST)
+			pixel_x = -10
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
 			icon_state = "[base_state][on]"

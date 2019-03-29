@@ -184,7 +184,7 @@
 "adB" = (/obj/structure/table/standard,/obj/item/weapon/coin/silver{pixel_x = -3; pixel_y = 3},/obj/item/weapon/coin/silver,/turf/simulated/floor/carpet/oracarpet,/area/quartermaster/qm)
 "adC" = (/obj/structure/ore_box,/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 8},/turf/simulated/floor/tiled/asteroid_steel,/area/mine/explored)
 "adD" = (/obj/effect/floor_decal/chapel{tag = "icon-chapel (WEST)"; icon_state = "chapel"; dir = 8},/obj/structure/holostool,/turf/simulated/floor/tiled/dark,/area/chapel/main)
-"adE" = (/obj/structure/door_assembly/door_assembly_med,/obj/item/tape/engineering{icon_state = "police_h_0"},/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/north)
+"adE" = (/obj/item/tape/engineering{icon_state = "police_h_0"},/turf/simulated/floor/plating,/area/planets/Geminus/outdoor/north)
 "adF" = (/obj/effect/floor_decal/chapel,/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/obj/structure/holostool,/turf/simulated/floor/tiled/dark,/area/chapel/main)
 "adG" = (/obj/machinery/conveyor{dir = 4; id = "QMLoad2"},/turf/simulated/floor,/area/quartermaster/delivery)
 "adH" = (/obj/effect/floor_decal/industrial/loading{dir = 4},/obj/structure/disposalpipe/segment,/turf/simulated/floor/tiled,/area/quartermaster/delivery)

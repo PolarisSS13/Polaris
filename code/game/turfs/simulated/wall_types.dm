@@ -5,13 +5,25 @@
 
 /turf/simulated/wall/cult
 	icon_state = "cult"
+	blend_turfs = list(/turf/simulated/wall)
 /turf/simulated/wall/cult/New(var/newloc)
 	..(newloc,"cult","cult2")
+
+
+/turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
+	if(material && W.material && material.icon_base == W.material.icon_base)
+		return 1
+	else if(istype(W, /turf/simulated/wall))
+		return 1
+	return 0
+
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "cult"
+
+
 
 /turf/simulated/wall/iron/New(var/newloc)
 	..(newloc,"iron")
