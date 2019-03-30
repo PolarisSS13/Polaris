@@ -282,12 +282,6 @@ var/global/list/##LIST_NAME = list();\
 #define MATRIX_Vulp_Colorblind 	list(0.50,	0.40,	0.10,	0.50,	0.40,	0.10,	0,		0.20,	0.80)
 #define MATRIX_Taj_Colorblind 	list(0.40,	0.20,	0.40,	0.40,	0.60,	0,		0.20,	0.20,	0.60)
 
-// Tool substitution defines
-#define IS_SCREWDRIVER		"screwdriver"
-#define IS_CROWBAR			"crowbar"
-#define IS_WIRECUTTER		"wirecutter"
-#define IS_WRENCH			"wrench"
-
 #define NTNET_SOFTWAREDOWNLOAD 1 	// Downloads of software from NTNet
 #define NTNET_PEERTOPEER 2			// P2P transfers of files between devices
 #define NTNET_COMMUNICATION 3		// Communication (messaging)

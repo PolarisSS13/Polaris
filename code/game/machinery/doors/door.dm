@@ -31,8 +31,10 @@
 	var/close_door_at = 0 //When to automatically close the door, if possible
 
 	//Multi-tile doors
-	dir = EAST
+	dir = SOUTH
 	var/width = 1
+	var/list/connections = list("0", "0", "0", "0")
+	var/list/blend_objects = list(/obj/structure/wall_frame, /obj/structure/window, /obj/structure/grille) // Objects which to blend with
 
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
@@ -68,6 +70,7 @@
 			bound_height = width * world.icon_size
 
 	health = maxhealth
+	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
@@ -150,8 +153,10 @@
 		return
 	src.add_fingerprint(user)
 	if(density)
-		if(allowed(user))	open()
-		else				do_animate("deny")
+		if(allowed(user))
+			open()
+		else
+			do_animate("deny")
 	return
 
 /obj/machinery/door/bullet_act(var/obj/item/projectile/Proj)
@@ -292,7 +297,7 @@
 
 /obj/machinery/door/emag_act(var/remaining_charges)
 	if(density && operable())
-		do_animate("spark")
+		do_animate("emag")
 		sleep(6)
 		open()
 		operating = -1
@@ -368,6 +373,13 @@
 			take_damage(100)
 
 /obj/machinery/door/update_icon()
+	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if(connections in list(WEST, EAST, EAST|WEST))
+			set_dir(SOUTH)
+		else
+			set_dir(EAST)
+	else
+		set_dir(SOUTH)
 	if(density)
 		icon_state = "door1"
 	else
@@ -488,3 +500,34 @@
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
+
+/obj/machinery/door/proc/update_connections(var/propagate = 0)
+	var/dirs = 0
+
+	for(var/direction in cardinal)
+		var/turf/T = get_step(src, direction)
+		var/success = 0
+
+		if( istype(T, /turf/simulated/wall))
+			success = 1
+			if(propagate)
+				var/turf/simulated/wall/W = T
+				W.update_connections()
+				W.update_icon()
+
+		else if( istype(T, /turf/simulated/shuttle/wall))
+			success = 1
+		else
+			for(var/obj/O in T)
+				for(var/b_type in blend_objects)
+					if( istype(O, b_type))
+						success = 1
+
+					if(success)
+						break
+				if(success)
+					break
+
+		if(success)
+			dirs |= direction
+	connections = dirs

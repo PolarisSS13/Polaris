@@ -5,13 +5,25 @@
 
 /turf/simulated/wall/cult
 	icon_state = "cult"
+	blend_turfs = list(/turf/simulated/wall)
 /turf/simulated/wall/cult/New(var/newloc)
 	..(newloc,"cult","cult2")
+
+
+/turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
+	if(material && W.material && material.icon_base == W.material.icon_base)
+		return 1
+	else if(istype(W, /turf/simulated/wall))
+		return 1
+	return 0
+
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "cult"
+
+
 
 /turf/simulated/wall/iron/New(var/newloc)
 	..(newloc,"iron")
@@ -30,6 +42,7 @@
 /turf/simulated/wall/phoron/New(var/newloc)
 	..(newloc,"phoron")
 /turf/simulated/wall/sandstone/New(var/newloc)
+	icon_state = "brick"
 	..(newloc,"sandstone")
 /turf/simulated/wall/ironphoron/New(var/newloc)
 	..(newloc,"iron","phoron")
@@ -39,7 +52,12 @@
 	..(newloc,"silver","gold")
 /turf/simulated/wall/sandstonediamond/New(var/newloc)
 	..(newloc,"sandstone","diamond")
+/turf/simulated/wall/plastic/New(var/newloc)
+	..(newloc,"plastic")
+/turf/simulated/wall/marble/New(var/newloc)
+	..(newloc,"marble")
 /turf/simulated/wall/snowbrick/New(var/newloc)
+	icon_state = "brick"
 	..(newloc,"packed snow")
 
 // Kind of wondering if this is going to bite me in the butt.
@@ -53,8 +71,38 @@
 /turf/simulated/wall/durasteel/New(var/newloc)
 	..(newloc,"durasteel", "durasteel")
 
+/turf/simulated/wall/wood
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 /turf/simulated/wall/wood/New(var/newloc)
-	..(newloc, MAT_WOOD)
+	..(newloc,MATERIAL_WOOD)
+
+/turf/simulated/wall/mahogany
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/mahogany/New(var/newloc)
+	..(newloc,MATERIAL_MAHOGANY)
+
+/turf/simulated/wall/maple
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/maple/New(var/newloc)
+	..(newloc,MATERIAL_MAPLE)
+
+/turf/simulated/wall/ebony
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
+/turf/simulated/wall/ebony/New(var/newloc)
+	..(newloc,MATERIAL_EBONY)
+
+/turf/simulated/wall/walnut
+	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
+	icon_state = "woodneric"
+
 
 /turf/simulated/wall/sifwood/New(var/newloc)
 	..(newloc, MAT_SIFWOOD)

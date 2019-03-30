@@ -521,3 +521,8 @@
 /atom/proc/set_density(var/new_density)
 	if(density != new_density)
 		density = !!new_density
+
+// Called when hitting the atom with a grab.
+// Will skip attackby() and afterattack() if returning TRUE.
+/atom/proc/grab_attack(var/obj/item/grab/G)
+	return FALSE
