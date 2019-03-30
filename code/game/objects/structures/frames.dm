@@ -4,9 +4,8 @@
 	name = "small fence"
 	icon_state = "fence"
 	health = 10
+	no_states = 1
 
-/obj/structure/grille/smallfence/update_icon()
-	return
 
 /obj/structure/grille/frame
 	blend_objects = 0
@@ -14,6 +13,4 @@
 	name = "frame"
 	icon_state = "frame"
 	health = 10
-
-/obj/structure/grille/frame/update_icon()
-	return
+	no_states = 1

@@ -6,6 +6,7 @@
 	anchored = 1.0
 	var/win_path = /obj/structure/window/basic/full
 	var/frame_path = /obj/structure/wall_frame
+	var/grille_path = /obj/structure/grille
 	var/activated = FALSE
 	var/fulltile = TRUE
 
@@ -45,7 +46,7 @@
 	if(locate(/obj/structure/grille) in loc)
 		warning("Frame Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
-		var/obj/structure/grille/G = new /obj/structure/grille(loc)
+		var/obj/structure/grille/G = new grille_path(loc)
 		handle_grille_spawn(G)
 
 	var/list/neighbours = list()
@@ -92,6 +93,16 @@
 	name = "reinforced wall frame window spawner"
 	icon_state = "r-wingrille"
 	win_path = /obj/structure/window/reinforced/full
+
+/obj/effect/wallframe_spawn/reinforced/electric
+	name = "reinforced wall frame window spawner"
+	icon_state = "r-wingrille"
+	grille_path = /obj/structure/grille/electric
+
+/obj/effect/wallframe_spawn/electric
+	name = "reinforced wall frame window spawner"
+	icon_state = "r-wingrille"
+	grille_path = /obj/structure/grille/electric
 
 /obj/effect/wallframe_spawn/reinforced/titanium
 	name = "reinforced titanium wall frame window spawner"

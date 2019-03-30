@@ -15,6 +15,7 @@
 	blend_objects = list(/obj/machinery/door) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 	var/electric = 0 //required if we have no engine.
+	var/no_states = 0
 
 /obj/structure/grille/New()
 	. = ..()
@@ -33,28 +34,29 @@
 	update_onframe()
 
 	overlays.Cut()
-	if(destroyed)
-		if(on_frame)
-			icon_state = "broke_onframe"
+	if(!no_states)
+		if(destroyed)
+			if(on_frame)
+				icon_state = "broke_onframe"
+			else
+				icon_state = "broken"
 		else
-			icon_state = "broken"
-	else
-		var/image/I
-		icon_state = ""
-		if(on_frame)
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "grille_other_onframe[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "grille_onframe[connections[i]]", dir = 1<<(i-1))
-				overlays += I
-		else
-			for(var/i = 1 to 4)
-				if(other_connections[i] != "0")
-					I = image(icon, "grille_other[connections[i]]", dir = 1<<(i-1))
-				else
-					I = image(icon, "grille[connections[i]]", dir = 1<<(i-1))
-				overlays += I
+			var/image/I
+			icon_state = ""
+			if(on_frame)
+				for(var/i = 1 to 4)
+					if(other_connections[i] != "0")
+						I = image(icon, "grille_other_onframe[connections[i]]", dir = 1<<(i-1))
+					else
+						I = image(icon, "grille_onframe[connections[i]]", dir = 1<<(i-1))
+					overlays += I
+			else
+				for(var/i = 1 to 4)
+					if(other_connections[i] != "0")
+						I = image(icon, "grille_other[connections[i]]", dir = 1<<(i-1))
+					else
+						I = image(icon, "grille[connections[i]]", dir = 1<<(i-1))
+					overlays += I
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ishuman(user)) shock(user, 70)
