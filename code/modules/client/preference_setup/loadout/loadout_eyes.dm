@@ -81,12 +81,12 @@
 	path = /obj/item/clothing/glasses/meson/prescription
 
 /datum/gear/eyes/material
-	display_name = "Optical Material Scanners (Engineering, Science, Mining)"
+	display_name = "Optical Material Scanners (Mining)"
 	path = /obj/item/clothing/glasses/material
-	allowed_roles = list("Station Engineer","Chief Engineer","Atmospheric Technician", "Scientist", "Research Director", "Shaft Miner")
+	allowed_roles = list("Shaft Miner")
 
 /datum/gear/eyes/material/prescription
-	display_name = "Prescription Optical Material Scanners (Engineering, Science, Mining)"
+	display_name = "Prescription Optical Material Scanners (Mining)"
 	path = /obj/item/clothing/glasses/material/prescription
 
 /datum/gear/eyes/meson/aviator
