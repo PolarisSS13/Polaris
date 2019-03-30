@@ -752,7 +752,7 @@ var/list/name_to_material
 	door_icon_base = "stone"
 	icon_reinf = "reinf_mesh"
 	icon_colour = "##FFF3B2"
-	protectiveness = 50
+	protectiveness = 30
 	integrity = 240
 	weight = 30
 	hardness = 45
