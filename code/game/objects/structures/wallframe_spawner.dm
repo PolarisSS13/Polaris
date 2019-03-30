@@ -4,7 +4,7 @@
 	icon_state = "wingrille"
 	density = 1
 	anchored = 1.0
-	var/win_path = /obj/structure/window/basic
+	var/win_path = /obj/structure/window/basic/full
 	var/frame_path = /obj/structure/wall_frame
 	var/activated = FALSE
 	var/fulltile = TRUE

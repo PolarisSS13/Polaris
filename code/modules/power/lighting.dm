@@ -173,7 +173,7 @@
 								// this is used to calc the probability the light burns out
 
 	var/rigged = 0				// true if rigged to explode
-
+	var/on_wall = 1
 
 // coloured lighting because fabulous
 
@@ -184,6 +184,8 @@
 	icon_state = "yellow1"
 	desc = "A lighting fixture."
 	fitting = "empty"
+	brightness_range = 6
+	brightness_power = 4
 	light_color = "#ffff99"
 
 /obj/machinery/light/colored/orange
@@ -260,9 +262,10 @@
 	base_state = "floor"
 	light_type = /obj/item/weapon/light/bulb
 	layer = TURF_LAYER+0.002
-	brightness_range = 4
-	brightness_power = 2
-	brightness_color = "#a0a080"
+	brightness_range = 2
+	brightness_power = 10
+	brightness_color = "#f7f1b9"
+	on_wall = 0
 
 /obj/machinery/light/overhead_blue
 	icon_state = "inv1"
@@ -276,12 +279,13 @@
 	icon_state = "streetlamp1"
 	base_state = "streetlamp"
 	desc = "A street lighting fixture."
-	brightness_range = 5
-	brightness_color = "#d2e6f2"
+	brightness_color = "#2c5370"
+	brightness_range = 3
 	layer = ABOVE_MOB_LAYER
 	plane = -10
 	density = 1
 	light_type = /obj/item/weapon/light/bulb
+	on_wall = 0
 
 /obj/machinery/light/invis
 	icon_state = "inv1"
@@ -294,9 +298,9 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness_range = 4
-	brightness_power = 2
-	brightness_color = "#FFF4E5"
+	brightness_range = 3
+	brightness_power = 10
+	brightness_color = "#f7f1b9"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
@@ -368,16 +372,17 @@
 	return ..()
 
 /obj/machinery/light/update_icon()
-	pixel_y = 0
-	pixel_x = 0
-	var/turf/T = get_step(get_turf(src), src.dir)
-	if(istype(T, /turf/simulated/wall))
-		if(src.dir == NORTH)
-			pixel_y = 21
-		else if(src.dir == EAST)
-			pixel_x = 10
-		else if(src.dir == WEST)
-			pixel_x = -10
+	if(on_wall)
+		pixel_y = 0
+		pixel_x = 0
+		var/turf/T = get_step(get_turf(src), src.dir)
+		if(istype(T, /turf/simulated/wall))
+			if(src.dir == NORTH)
+				pixel_y = 21
+			else if(src.dir == EAST)
+				pixel_x = 10
+			else if(src.dir == WEST)
+				pixel_x = -10
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
 			icon_state = "[base_state][on]"

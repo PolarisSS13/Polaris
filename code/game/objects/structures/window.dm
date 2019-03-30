@@ -483,6 +483,11 @@
 	maxhealth = 12.0
 	force_threshold = 3
 
+/obj/structure/window/basic/full
+	dir = SOUTHWEST
+	icon_state = "rwindow_full"
+	maxhealth = 80
+
 /obj/structure/window/phoronbasic
 	name = "phoron window"
 	desc = "A borosilicate alloy window. It seems to be quite strong."
@@ -585,6 +590,7 @@
 
 /obj/structure/window/framed
 	name = "framed window"
+	alpha = 255
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "framewindow"

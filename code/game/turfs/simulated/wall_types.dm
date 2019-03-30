@@ -113,12 +113,6 @@
 /turf/simulated/wall/log_sif/New(var/newloc)
 	..(newloc, MAT_SIFLOG)
 
-/turf/simulated/wall/plastic/hospital
-	stripe_color = COLOR_BLUE_GRAY
-
-/turf/simulated/wall/plastic/viro
-	stripe_color = COLOR_PALE_GREEN_GRAY
-
 // Shuttle Walls
 /turf/simulated/shuttle/wall
 	name = "autojoin wall"
