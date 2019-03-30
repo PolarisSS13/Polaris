@@ -278,11 +278,11 @@
 		modtype = prefix
 
 	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
-		braintype = "Robot"
+		braintype = BORG_BRAINTYPE_POSI
 	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
-		braintype = "Drone"
+		braintype = BORG_BRAINTYPE_DRONE
 	else
-		braintype = "Cyborg"
+		braintype = BORG_BRAINTYPE_CYBORG
 
 
 	var/changed_name = ""
@@ -1099,7 +1099,7 @@
 		return
 
 /mob/living/silicon/robot/is_sentient()
-	return braintype != "Drone"
+	return braintype != BORG_BRAINTYPE_DRONE
 
 
 /mob/living/silicon/robot/drop_item()
