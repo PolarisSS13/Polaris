@@ -148,6 +148,7 @@
 #define MAT_IRON			"iron"
 #define MAT_MARBLE			"marble"
 #define MAT_STEEL			"steel"
+#define MAT_PLASTIC			"plastic"
 #define MAT_GLASS			"glass"
 #define MAT_SILVER			"silver"
 #define MAT_GOLD			"gold"
