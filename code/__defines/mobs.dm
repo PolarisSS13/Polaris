@@ -260,6 +260,7 @@
 #define BORG_BRAINTYPE_CYBORG	"Cyborg"
 #define BORG_BRAINTYPE_POSI		"Robot"
 #define BORG_BRAINTYPE_DRONE	"Drone"
+#define BORG_BRAINTYPE_AI_SHELL	"AI Shell"
 
 // 'Regular' species.
 #define SPECIES_HUMAN			"Human"
