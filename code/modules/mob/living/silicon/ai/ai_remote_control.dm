@@ -15,6 +15,10 @@
 		to_chat(src, span("warning", "You are incapacitated!"))
 		return
 
+	if(lacks_power())
+		to_chat(src, span("warning", "Your core lacks power, wireless is disabled."))
+		return
+
 	if(control_disabled)
 		to_chat(src, span("warning", "Wireless networking module is offline."))
 		return
@@ -45,6 +49,7 @@
 		target.deploy_init(src)
 		mind.transfer_to(target)
 		teleop = target // So the AI 'hears' messages near its core.
+		target.post_deploy()
 
 /mob/living/silicon/ai/proc/deploy_to_shell_act()
 	set category = "AI Commands"

@@ -338,9 +338,12 @@
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	src.brainmob.real_name = src.brainmob.name
 
+// This type shouldn't care about brainmobs.
+/obj/item/device/mmi/inert
+
 // This is a 'fake' MMI that is used to let AIs control borg shells directly.
 // This doesn't inherit from /digital because all that does is add ghost pulling capabilities, which this thing won't need.
-/obj/item/device/mmi/ai_remote
+/obj/item/device/mmi/inert/ai_remote
 	name = "remote interface"
 	desc = "A sophisticated board which allows for an artificial intelligence to remotely control a synthetic chassis."
 	icon = 'icons/obj/module.dmi'

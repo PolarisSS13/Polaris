@@ -9,14 +9,17 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 
 // Premade AI shell, for roundstart shells.
 /mob/living/silicon/robot/ai_shell/Initialize()
-	mmi = new /obj/item/device/mmi/ai_remote(src)
+	mmi = new /obj/item/device/mmi/inert/ai_remote(src)
 	post_mmi_setup()
 	return ..()
 
 // Call after inserting or instantiating an MMI.
 /mob/living/silicon/robot/proc/post_mmi_setup()
-	if(istype(mmi, /obj/item/device/mmi/ai_remote))
+	if(istype(mmi, /obj/item/device/mmi/inert/ai_remote))
 		make_shell()
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+	else
+		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 	return
 
 /mob/living/silicon/robot/proc/make_shell()
@@ -71,6 +74,11 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 //			radio.make_syndie()
 		radio.subspace_transmission = TRUE
 		radio.channels = AI.aiRadio.channels
+
+// Called after the AI transfers over.
+/mob/living/silicon/robot/proc/post_deploy()
+	if(!custom_sprite) // Check for custom sprite.
+		set_custom_sprite()
 
 /mob/living/silicon/robot/proc/undeploy(message)
 	if(!deployed || !mind || !mainframe)

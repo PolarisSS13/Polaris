@@ -172,8 +172,6 @@
 	else
 		lawupdate = 0
 
-	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
-
 
 
 /mob/living/silicon/robot/SetName(pickedName as text)
@@ -229,13 +227,17 @@
 				mmi.brainmob.languages = languages
 			mmi.brainmob.remove_language("Robot Talk")
 			mind.transfer_to(mmi.brainmob)
-		else
+		else if(!shell) // Shells don't have brainmbos in their MMIs.
 			to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
 			ghostize()
 			//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 		mmi = null
 	if(connected_ai)
 		connected_ai.connected_robots -= src
+	if(shell)
+		if(deployed)
+			undeploy()
+		revert_shell() // To get it out of the GLOB list.
 	qdel(wires)
 	wires = null
 	return ..()
@@ -284,7 +286,7 @@
 		braintype = "Robot"
 	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
 		braintype = "Drone"
-	else if(istype(mmi, /obj/item/device/mmi/ai_remote))
+	else if(istype(mmi, /obj/item/device/mmi/inert/ai_remote))
 		braintype = "AI Shell"
 	else
 		braintype = "Cyborg"
@@ -980,6 +982,11 @@
 			icontype = module_sprites[1]
 	else
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot Icon", icontype, null) in module_sprites
+
+	if(icontype == "Custom")
+		icon = CUSTOM_ITEM_SYNTH
+	else // This is to fix an issue where someone with a custom borg sprite chooses a non-custom sprite and turns invisible.
+		icon = 'icons/mob/robots.dmi'
 	icon_state = module_sprites[icontype]
 	updateicon()
 
@@ -1057,7 +1064,7 @@
 		connected_ai = null
 
 /mob/living/silicon/robot/proc/connect_to_ai(var/mob/living/silicon/ai/AI)
-	if(AI && AI != connected_ai)
+	if(AI && AI != connected_ai && !shell)
 		disconnect_from_ai()
 		connected_ai = AI
 		connected_ai.connected_robots |= src
