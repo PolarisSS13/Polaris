@@ -157,7 +157,6 @@
 	blade_color = "white"
 	lcolor = "#FFFFFF"
 
-
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
@@ -165,7 +164,6 @@
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	icon_state = "[active_state][blade_color]"
-
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)
@@ -315,7 +313,6 @@
 /obj/item/weapon/melee/energy/sword/charge/loaded/New()
 	..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
-
 
 /*
  *Energy Blade
