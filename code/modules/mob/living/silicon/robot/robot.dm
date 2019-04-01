@@ -1082,7 +1082,7 @@
 				to_chat(src, "Hack attempt detected.")
 
 			if(shell) // A warning to Traitors who may not know that emagging AI shells does not slave them.
-				to_chat(user, span("warning", "[src] seems to be controlled remotely! Emagging the interface may not work as expected.</span>"))
+				to_chat(user, span("warning", "[src] seems to be controlled remotely! Emagging the interface may not work as expected."))
 			return 1
 		else
 			to_chat(user, "The cover is already unlocked.")
