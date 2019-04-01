@@ -219,7 +219,7 @@
 		if(man_rating >= 2) // Tier 3.
 			new_chemicals["spaceacillin"] = "Spaceacillin"
 		if(man_rating >= 1) // Tier 2.
-			new_chemicals["ethylredoxrazine"] = "Ethylredoxrazine"
+			new_chemicals["leporazine"] = "Leporazine"
 
 		available_chemicals += new_chemicals
 		return
