@@ -33,22 +33,22 @@
 /obj/item/device/encryptionkey/headset_sec
 	name = "security radio encryption key"
 	icon_state = "sec_cypherkey"
-	channels = list("Security" = 1)
+	channels = list("Police" = 1)
 
 /obj/item/device/encryptionkey/headset_eng
 	name = "engineering radio encryption key"
 	icon_state = "eng_cypherkey"
-	channels = list("Engineering" = 1)
+	channels = list("Fire" = 1, "Hospital" = 1)
 
 /obj/item/device/encryptionkey/headset_rob
 	name = "robotics radio encryption key"
 	icon_state = "rob_cypherkey"
-	channels = list("Engineering" = 1, "Science" = 1)
+	channels = list("Fire" = 1, "Science" = 1)
 
 /obj/item/device/encryptionkey/headset_med
 	name = "medical radio encryption key"
 	icon_state = "med_cypherkey"
-	channels = list("Medical" = 1)
+	channels = list("Hospital" = 1)
 
 /obj/item/device/encryptionkey/headset_sci
 	name = "science radio encryption key"
@@ -58,7 +58,7 @@
 /obj/item/device/encryptionkey/headset_medsci
 	name = "medical research radio encryption key"
 	icon_state = "medsci_cypherkey"
-	channels = list("Medical" = 1, "Science" = 1)
+	channels = list("Hospital" = 1, "Science" = 1)
 
 /obj/item/device/encryptionkey/headset_com
 	name = "command radio encryption key"
@@ -68,13 +68,13 @@
 /obj/item/device/encryptionkey/heads/captain
 	name = "colony director's encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0, "Service" = 0, "Legal" = 1)
+	channels = list("Command" = 1, "Police" = 1, "Fire" = 0, "Science" = 0, "Hospital" = 0, "Supply" = 0, "Service" = 0, "Legal" = 1)
 
 /obj/item/device/encryptionkey/heads/ai_integrated
 	name = "ai integrated encryption key"
 	desc = "Integrated encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "AI Private" = 1)
+	channels = list("Command" = 1, "Police" = 1, "Fire" = 1, "Science" = 1, "Hospital" = 1, "Supply" = 1, "Service" = 1, "AI Private" = 1)
 
 /obj/item/device/encryptionkey/heads/rd
 	name = "research director's encryption key"
@@ -84,22 +84,22 @@
 /obj/item/device/encryptionkey/heads/hos
 	name = "head of security's encryption key"
 	icon_state = "hos_cypherkey"
-	channels = list("Security" = 1, "Command" = 1)
+	channels = list("Police" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/heads/ce
 	name = "chief engineer's encryption key"
 	icon_state = "ce_cypherkey"
-	channels = list("Engineering" = 1, "Command" = 1)
+	channels = list("Fire" = 1, "Command" = 1, "Hospital" = 1)
 
 /obj/item/device/encryptionkey/heads/cmo
 	name = "chief medical officer's encryption key"
 	icon_state = "cmo_cypherkey"
-	channels = list("Medical" = 1, "Command" = 1)
+	channels = list("Hospital" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/heads/hop
 	name = "head of personnel's encryption key"
 	icon_state = "hop_cypherkey"
-	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Security" = 0, "Legal" = 1)
+	channels = list("Supply" = 1, "Service" = 1, "Command" = 1, "Police" = 0, "Legal" = 1)
 /*
 /obj/item/device/encryptionkey/headset_mine
 	name = "mining radio encryption key"
@@ -129,12 +129,12 @@
 /obj/item/device/encryptionkey/headset_judge
 	name = "judge radio encryption key"
 	icon_state = "srv_cypherkey"
-	channels = list("Legal" = 1, "Command" = 1, "Security" = 1)
+	channels = list("Legal" = 1, "Command" = 1, "Police" = 1)
 
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"
 	icon_state = "cent_cypherkey"
-	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1)
+	channels = list("Military" = 1, "Science" = 1, "Command" = 1, "Hospital" = 1, "Fire" = 1, "Police" = 1, "Supply" = 1, "Service" = 1)
 
 /obj/item/device/encryptionkey/omni		//Literally only for the admin intercoms
-	channels = list("Mercenary" = 1, "Raider" = 1, "Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1)
+	channels = list("Mercenary" = 1, "Raider" = 1, "Military" = 1, "Science" = 1, "Command" = 1, "Hospital" = 1, "Fire" = 1, "Police" = 1, "Supply" = 1, "Service" = 1)
