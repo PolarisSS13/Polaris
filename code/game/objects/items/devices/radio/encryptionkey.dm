@@ -38,7 +38,7 @@
 /obj/item/device/encryptionkey/headset_eng
 	name = "engineering radio encryption key"
 	icon_state = "eng_cypherkey"
-	channels = list("Engineering" = 1, "Medical" = 1)
+	channels = list("Engineering" = 1)
 
 /obj/item/device/encryptionkey/headset_rob
 	name = "robotics radio encryption key"
@@ -89,7 +89,7 @@
 /obj/item/device/encryptionkey/heads/ce
 	name = "chief engineer's encryption key"
 	icon_state = "ce_cypherkey"
-	channels = list("Engineering" = 1, "Command" = 1, "Medical" = 1)
+	channels = list("Engineering" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/heads/cmo
 	name = "chief medical officer's encryption key"

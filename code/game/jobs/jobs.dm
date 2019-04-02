@@ -66,7 +66,7 @@ var/list/command_positions = list(
 	"Mayor",
 	"City Clerk",
 	"Chief of Police",
-	"Fire Chief",
+	"Chief Engineer",
 	"Judge",
 	"Factory Manager",
 	"Research Director",
@@ -75,9 +75,9 @@ var/list/command_positions = list(
 
 
 var/list/engineering_positions = list(
-	"Fire Chief",
-	"Firefighter",
-	"Paramedic"
+	"Chief Engineer",
+	"Station Engineer",
+	"Firefighter"
 )
 
 
@@ -87,6 +87,7 @@ var/list/medical_positions = list(
 	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
+	"Paramedic",
 	"Medical Intern"
 )
 
