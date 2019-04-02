@@ -7,7 +7,7 @@
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the Mayor"
 	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
@@ -25,7 +25,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	alt_titles = list(
-		"Chief of Medicine")
+		"Chief of Medicine", "Medical Director")
 
 /datum/job/doctor
 	title = "Doctor"
@@ -86,7 +86,7 @@
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist */
-
+//Lol, this thing is still in here. ~Death
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
@@ -105,23 +105,7 @@
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 	alt_titles = list("Daycare Worker", "Therapist", "Social Worker", "Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
-
-/datum/job/paramedic
-	title = "Paramedic"
-	flag = PARAMEDIC
-	department_flag = MEDSCI
-	department = "Medical"
-	faction = "City"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the chief medical officer"
-	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/paramedic
-	economic_modifier = 4
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
-	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
-	alt_titles = list("Emergency Medical Technician" = /decl/hierarchy/outfit/job/medical/paramedic/emt)
+//Snip Snip Paramedic
 
 /datum/job/medicalintern
 	title = "Medical Intern"

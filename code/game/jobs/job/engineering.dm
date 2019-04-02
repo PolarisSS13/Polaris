@@ -1,10 +1,10 @@
 /datum/job/chief_engineer
-	title = "Chief Engineer"
+	title = "Fire Chief"
 	flag = CHIEF
 	faction = "City"
 	head_position = 1
 	department_flag = ENGSEC
-	department = "Engineering"
+	department = "Fire Department"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"
@@ -25,25 +25,26 @@
 			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
 			            access_heads, access_construction, access_sec_doors,
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	alt_titles = list("Batallion Chief","Fire Commissioner")
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
 /datum/job/engineer
-	title = "City Engineer"
+	title = "Firefighter"
 	flag = ENGINEER
 	department_flag = ENGSEC
 	faction = "City"
-	department = "Engineering"
+	department = "Fire Department"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the chief engineer"
+	supervisors = "the fire chief"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/engineering/engineer
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
-	alt_titles = list("Construction Worker","Engine Technician","Electrician")
+	alt_titles = list("Firefighter/EMT")
 	minimum_character_age = 18
 	minimal_player_age = 3
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
@@ -54,7 +55,7 @@
 	department_flag = ENGSEC
 //Actually let's disable firefighters until we get new OP fire systems in.
 //	faction = "City"
-	department = "Engineering"
+	department = "Fire Department"
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the chief engineer"
@@ -68,3 +69,20 @@
 	minimum_character_age = 18
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
+
+/datum/job/paramedic
+	title = "Paramedic"
+	flag = PARAMEDIC
+	department_flag = MEDSCI
+	department = "Fire Department"
+	faction = "City"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the fire chief"
+	selection_color = "#5B4D20"
+	idtype = /obj/item/weapon/card/id/medical/paramedic
+	economic_modifier = 4
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
+	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
+	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
+	alt_titles = list("Firefighter/Medic" = /decl/hierarchy/outfit/job/engineering/atmos)
