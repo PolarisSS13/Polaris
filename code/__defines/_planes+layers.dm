@@ -79,7 +79,9 @@ What is the naming convention for planes or layers?
 	#define SHOWER_CLOSED_LAYER 	4.2	// Should be converted to plane swaps
 
 // Mob planes
-#define MOB_PLANE				-25
+	#define ABOVE_MOB_PLANE			-15
+	#define MOB_PLANE				-25
+	#define UNDER_MOB_PLANE			-35
 	#define BELOW_MOB_LAYER			3.9 // Should be converted to plane swaps
 	#define ABOVE_MOB_LAYER			4.1	// Should be converted to plane swaps
 
