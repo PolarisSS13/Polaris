@@ -232,7 +232,7 @@
 /obj/structure/bed/chair/wood/wings
 	name = "winged chair"
 	base_icon = "wooden_chair_wings"
-	icon_state = "wooden_chair_wings_preview"
+	icon_state = "wooden_chair_wings"
 
 /obj/structure/bed/chair/wood/wings/mahogany
 	color = WOOD_COLOR_RICH
