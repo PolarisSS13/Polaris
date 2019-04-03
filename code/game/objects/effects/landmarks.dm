@@ -157,14 +157,14 @@
 	new /obj/item/clothing/under/schoolgirl(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
 	delete_me = 1
-*/
+
 /obj/effect/landmark/costume/maid/New()
 	new /obj/item/clothing/under/skirt(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
 	delete_me = 1
-
+*/
 /obj/effect/landmark/costume/butler/New()
 	new /obj/item/clothing/accessory/wcoat(src.loc)
 	new /obj/item/clothing/under/suit_jacket(src.loc)
