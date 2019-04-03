@@ -98,8 +98,8 @@
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Judge"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
@@ -150,7 +150,7 @@
 	minimum_character_age = 16
 	ideal_character_age = 20 //Really anyone can be this job, not just teens
 
-	alt_titles = list("Junior Clerk", "Assistant Notary")
+	alt_titles = list("Junior Clerk", "Assistant Notary", "Paralegal")
 
 	outfit_type = /decl/hierarchy/outfit/job/civilian/secretary
 

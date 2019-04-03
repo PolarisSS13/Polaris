@@ -70,6 +70,21 @@
 /turf/simulated/floor/wood/sif
 	icon_state = "sifwood"
 
+/turf/simulated/floor/wood/mahogany
+	icon_state = "mahogany"
+	initial_flooring = /decl/flooring/wood/mahogany
+
+/turf/simulated/floor/wood/maple
+	icon_state = "maple"
+	initial_flooring = /decl/flooring/wood/maple
+
+/turf/simulated/floor/wood/ebony
+	icon_state = "ebony"
+	initial_flooring = /decl/flooring/wood/ebony
+
+/turf/simulated/floor/wood/walnut
+	icon_state = "walnut"
+	initial_flooring = /decl/flooring/wood/walnut
 
 /turf/simulated/floor/grass
 	name = "grass patch"
@@ -94,6 +109,9 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "techmaint"
 	initial_flooring = /decl/flooring/tiling/new_tile/techmaint
+
+/turf/simulated/floor/tiled/techmaint/outdoors
+	outdoors = 1
 
 /turf/simulated/floor/tiled/monofloor
 	name = "floor"

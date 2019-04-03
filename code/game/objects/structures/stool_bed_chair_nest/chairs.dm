@@ -8,7 +8,7 @@
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
-	applies_material_colour = 1
+	applies_material_colour = 1 // applies material color if set to 1
 
 /obj/structure/bed/chair/New()
 	..() //Todo make metal/stone chairs display as thrones
@@ -16,9 +16,9 @@
 		update_layer()
 	return
 
-/obj/structure/bed/chair/general
+/obj/structure/bed/chair/general/New()
 	applies_material_colour = 0
-	color = null
+	color = COLOR_WHITE
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -131,6 +131,9 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -195,13 +198,12 @@
 
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
+	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
+	base_icon = "wooden_chair"
 	icon_state = "wooden_chair"
-	applies_material_colour = 1
-
-/obj/structure/bed/chair/wood/update_icon()
-	return
+	color = WOOD_COLOR_GENERIC
+	var/chair_material = MATERIAL_WOOD
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -209,10 +211,44 @@
 	..()
 
 /obj/structure/bed/chair/wood/New(var/newloc)
-	..(newloc, "wood")
+	..(newloc, chair_material)
+
+/obj/structure/bed/chair/wood/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/wood/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
 
 /obj/structure/bed/chair/wood/wings
+	name = "winged chair"
+	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings"
+
+/obj/structure/bed/chair/wood/wings/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/wood/wings/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/wings/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/wings/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
 
 
 /obj/structure/bed/sofa
@@ -224,16 +260,16 @@
 	buckle_dir = SOUTH
 	plane = -25
 
-/obj/structure/bed/sofa/update_icon()
+/obj/structure/bed/chair/sofa/update_icon()
 	return
 
-/obj/structure/bed/sofa/New(var/newloc)
+/obj/structure/bed/chair/sofa/New(var/newloc)
 	..(newloc, "carpet")
 
-/obj/structure/bed/sofa/left
+/obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"
 
-/obj/structure/bed/sofa/New()
+/obj/structure/bed/chair/sofa/New()
 	..()
 	if(dir == 1)
 		buckle_dir = NORTH
@@ -246,13 +282,14 @@
 		buckle_dir = WEST
 
 
-/obj/structure/bed/sofa/corner/New()
+/obj/structure/bed/chair/sofa/corner/New()
 	..()
 	buckle_dir = SOUTH
 	plane = -25
 
-/obj/structure/bed/sofa/right
+/obj/structure/bed/chair/sofa/right
 	icon_state = "sofaend_right"
 
-/obj/structure/bed/sofa/corner
+/obj/structure/bed/chair/sofa/corner
 	icon_state = "sofacorner"
+

@@ -363,6 +363,23 @@ var/list/flooring_types
 	icon_base = "palewood"
 	build_type = /obj/item/stack/tile/wood
 
+/decl/flooring/wood/mahogany
+	icon_base = "mahogany"
+	build_type = /obj/item/stack/tile/mahogany
+
+/decl/flooring/wood/maple
+	icon_base = "maple"
+	build_type = /obj/item/stack/tile/maple
+
+/decl/flooring/wood/ebony
+	icon_base = "ebony"
+	build_type = /obj/item/stack/tile/ebony
+
+/decl/flooring/wood/walnut
+	icon_base = "walnut"
+	build_type = /obj/item/stack/tile/walnut
+
+
 /decl/flooring/reinforced
 	name = "reinforced floor"
 	desc = "Heavily reinforced with steel rods."

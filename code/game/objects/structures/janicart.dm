@@ -181,7 +181,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 
 /obj/structure/bed/chair/janicart/New()
 	create_reagents(300)
-	update_layer()
+	update_icon()
 
 
 /obj/structure/bed/chair/janicart/examine(mob/user)
@@ -243,7 +243,8 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	return ..()
 
 
-/obj/structure/bed/chair/janicart/update_layer()
+/obj/structure/bed/chair/janicart/update_icon()
+	..()
 	if(dir == SOUTH)
 		layer = FLY_LAYER
 	else
@@ -260,7 +261,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 
 /obj/structure/bed/chair/janicart/set_dir()
 	..()
-	update_layer()
+	update_icon()
 	if(has_buckled_mobs())
 		for(var/A in buckled_mobs)
 			var/mob/living/L = A
