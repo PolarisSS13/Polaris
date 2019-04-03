@@ -150,7 +150,7 @@
 	minimum_character_age = 16
 	ideal_character_age = 20 //Really anyone can be this job, not just teens
 
-	alt_titles = list("Junior Clerk", "Assistant Notary")
+	alt_titles = list("Junior Clerk", "Assistant Notary", "Paralegal")
 
 	outfit_type = /decl/hierarchy/outfit/job/civilian/secretary
 
