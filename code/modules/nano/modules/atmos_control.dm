@@ -34,6 +34,9 @@
 	var/alarms[0]
 	var/turf/T = get_turf(nano_host())
 
+	if(program)
+		data = program.get_header_data()
+
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : machines))
 		if(!monitored_alarms.len && alarm.alarms_hidden)
@@ -51,6 +54,8 @@
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "atmos_control.tmpl", src.name, 625, 625, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		// adding a template with the key "mapContent" enables the map ui functionality
 		ui.add_template("mapContent", "atmos_control_map_content.tmpl")
 		// adding a template with the key "mapHeader" replaces the map header content

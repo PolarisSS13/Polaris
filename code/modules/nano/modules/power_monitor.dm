@@ -7,8 +7,13 @@
 	..()
 	refresh_sensors()
 
+// If PC is not null header template is loaded. Use PC.get_header_data() to get relevant nanoui data from it. All data entries begin with "PC_...."
+// In future it may be expanded to other modular computer devices.
 /datum/nano_module/power_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
+
 	var/list/sensors = list()
 	// Focus: If it remains null if no sensor is selected and UI will display sensor list, otherwise it will display sensor reading.
 	var/obj/machinery/power/sensor/focus = null
@@ -31,6 +36,8 @@
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "power_monitor.tmpl", "Power Monitoring Console", 800, 500, state = state)
+		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+			ui.auto_update_layout = 1
 		// adding a template with the key "mapContent" enables the map ui functionality
 		ui.add_template("mapContent", "power_monitor_map_content.tmpl")
 		// adding a template with the key "mapHeader" replaces the map header content
@@ -44,6 +51,8 @@
 	grid_sensors = list()
 	var/turf/T = get_turf(nano_host())
 	var/list/levels = list()
+	if(!T) // Safety check
+		return
 	if(T)
 		levels += using_map.get_map_levels(T.z, FALSE)
 	for(var/obj/machinery/power/sensor/S in machines)

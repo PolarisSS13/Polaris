@@ -8,7 +8,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 40000	//40 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/device/laptop, /obj/item/weapon/cell, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/modular_computer, /obj/item/weapon/cell, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -43,6 +43,16 @@ obj/machinery/recharger
 			var/obj/item/weapon/gun/energy/E = G
 			if(E.self_recharge)
 				to_chat(user, "<span class='notice'>Your gun has no recharge port.</span>")
+				return
+		if(istype(G, /obj/item/laptop))
+			var/obj/item/laptop/L = G
+			if(!L.stored_computer.cpu.battery_module)
+				to_chat(user, "There's no battery in it!")
+				return
+		if(istype(G, /obj/item/modular_computer))
+			var/obj/item/modular_computer/C = G
+			if(!C.battery_module)
+				to_chat(user, "This device does not have a battery installed.")
 				return
 		if(!G.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
@@ -86,6 +96,30 @@ obj/machinery/recharger
 		update_use_power(1)
 		icon_state = icon_state_idle
 	else
+
+		if(istype(charging, /obj/item/laptop))
+			var/obj/item/laptop/L = charging
+			if(!L.stored_computer.cpu.battery_module.battery.fully_charged())
+				icon_state = icon_state_charging
+				L.stored_computer.cpu.battery_module.battery.give(active_power_usage*CELLRATE)
+				update_use_power(2)
+			else
+				icon_state = icon_state_charged
+				update_use_power(1)
+			return
+
+		if(istype(charging, /obj/item/modular_computer))
+			var/obj/item/modular_computer/C = charging
+			if(!C.battery_module.battery.fully_charged())
+				icon_state = icon_state_charging
+				L.stored_computer.battery.give(active_power_usage*CELLRATE)
+				C.battery_module.battery.give(active_power_usage*CELLRATE)
+				update_use_power(2)
+			else
+				icon_state = icon_state_charged
+				update_use_power(1)
+			return
+
 		var/obj/item/weapon/cell/C = charging.get_cell()
 		if(istype(C))
 			if(!C.fully_charged())
