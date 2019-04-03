@@ -157,3 +157,15 @@
 /datum/gear/utility/umbrella/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/cheaptablet
+	display_name = "cheap tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
+	sort_category = "utility"
+	cost = 3
+
+/datum/gear/normaltablet
+	display_name = "tablet computer"
+	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
+	sort_category = "utility"
+	cost = 4

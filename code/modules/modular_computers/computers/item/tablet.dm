@@ -5,4 +5,5 @@
 	icon_state_unpowered = "tablet"
 	icon_state_menu = "menu"
 	hardware_flag = PROGRAM_TABLET
-	max_hardware_size = 1 
+	max_hardware_size = 1
+	w_class = 2 

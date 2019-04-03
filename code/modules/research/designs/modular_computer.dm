@@ -5,7 +5,7 @@
 	id = "hdd_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list("metal" = 2000, "glass" = 100)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/
 	sort_string = "VBAAA"
 
@@ -14,7 +14,7 @@
 	id = "hdd_advanced"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 4000, "glass" = 200)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/advanced
 	sort_string = "VBAAB"
 
@@ -23,7 +23,7 @@
 	id = "hdd_super"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
-	materials = list("metal" = 8000, "glass" = 400)
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 400)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/super
 	sort_string = "VBAAC"
 
@@ -32,7 +32,7 @@
 	id = "hdd_cluster"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
-	materials = list("metal" = 16000, "glass" = 800)
+	materials = list(DEFAULT_WALL_MATERIAL = 16000, "glass" = 800)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/cluster
 	sort_string = "VBAAD"
 
@@ -41,7 +41,7 @@
 	id = "hdd_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 4000, "glass" = 200)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/small
 	sort_string = "VBAAE"
 
@@ -50,7 +50,7 @@
 	id = "hdd_micro"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list("metal" = 2000, "glass" = 100)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/micro
 	sort_string = "VBAAF"
 
@@ -60,7 +60,7 @@
 	id = "netcard_basic"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
 	build_type = IMPRINTER
-	materials = list("metal" = 500, "glass" = 100)
+	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 100)
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card
 	sort_string = "VBAAG"
@@ -70,7 +70,7 @@
 	id = "netcard_advanced"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
-	materials = list("metal" = 1000, "glass" = 200)
+	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200)
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card/advanced
 	sort_string = "VBAAH"
@@ -80,7 +80,7 @@
 	id = "netcard_wired"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
-	materials = list("metal" = 5000, "glass" = 400)
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 400)
 	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card/wired
 	sort_string = "VBAAI"
@@ -122,7 +122,7 @@
 	id = "cardslot"
 	req_tech = list(TECH_DATA = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 3000)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	build_path = /obj/item/weapon/computer_hardware/card_slot
 	sort_string = "VBAAM"
 
@@ -132,7 +132,7 @@
 	id = "nanoprinter"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 3000)
+	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	build_path = /obj/item/weapon/computer_hardware/nano_printer
 	sort_string = "VBAAN"
 
@@ -142,7 +142,7 @@
 	id = "teslalink"
 	req_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 10000)
+	materials = list(DEFAULT_WALL_MATERIAL = 10000)
 	build_path = /obj/item/weapon/computer_hardware/tesla_link
 	sort_string = "VBAAO"
 
@@ -152,7 +152,7 @@
 	id = "bat_normal"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list("metal" = 2000)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module
 	sort_string = "VBAAP"
 
@@ -161,7 +161,7 @@
 	id = "bat_advanced"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 4000)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/advanced
 	sort_string = "VBAAQ"
 
@@ -170,7 +170,7 @@
 	id = "bat_super"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
 	build_type = PROTOLATHE
-	materials = list("metal" = 8000)
+	materials = list(DEFAULT_WALL_MATERIAL = 8000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/super
 	sort_string = "VBAAR"
 
@@ -179,7 +179,7 @@
 	id = "bat_ultra"
 	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
 	build_type = PROTOLATHE
-	materials = list("metal" = 16000)
+	materials = list(DEFAULT_WALL_MATERIAL = 16000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/ultra
 	sort_string = "VBAAS"
 
@@ -188,7 +188,7 @@
 	id = "bat_nano"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_type = PROTOLATHE
-	materials = list("metal" = 2000)
+	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/nano
 	sort_string = "VBAAT"
 
@@ -197,6 +197,6 @@
 	id = "bat_micro"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
 	build_type = PROTOLATHE
-	materials = list("metal" = 4000)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VBAAU"
