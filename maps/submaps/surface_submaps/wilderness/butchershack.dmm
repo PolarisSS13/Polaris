@@ -9,7 +9,7 @@
 "i" = (/obj/structure/window/basic,/obj/structure/curtain,/turf/simulated/floor/wood/sif/broken,/area/submap/ButcherShack)
 "j" = (/turf/template_noop,/area/submap/ButcherShack)
 "k" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
-"l" = (/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/ButcherShack)
+"l" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/dirt,/area/submap/ButcherShack)
 "m" = (/obj/structure/kitchenspike,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
 "n" = (/obj/structure/kitchenspike,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
 "o" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
@@ -19,7 +19,7 @@
 "s" = (/obj/structure/coatrack,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
 "t" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
 "u" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/wood/sif/broken,/area/submap/ButcherShack)
-"v" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/dirt/sif/planetuse,/area/submap/ButcherShack)
+"v" = (/turf/simulated/floor/outdoors/dirt,/area/submap/ButcherShack)
 "w" = (/obj/structure/window/basic,/obj/structure/curtain,/turf/simulated/floor/wood/sif,/area/submap/ButcherShack)
 
 (1,1,1) = {"
@@ -30,7 +30,7 @@ abhcccocba
 abcpqrccba
 absocchtba
 abbubiwbba
-ajbkbvvlja
-ajllllljja
+ajbkbllvja
+ajvvvvvjja
 aaaaaaaaaa
 "}
