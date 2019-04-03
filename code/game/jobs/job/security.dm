@@ -22,7 +22,7 @@
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
-	alt_titles = list("Head of Police", "Police Commander", "Chief of Security")
+	alt_titles = list("Head of Police", "Police Commander", "Police Commissioner")
 
 /datum/job/warden
 	title = "Prison Warden"
@@ -90,8 +90,8 @@
 	faction = "City"
 	department = "Security"
 	department_flag = ENGSEC
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	req_admin_notify = 1
 	supervisors = "the chief of police and city clerk"
 	selection_color = "#601C1C"

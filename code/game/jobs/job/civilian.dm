@@ -98,8 +98,8 @@
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the Judge"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
