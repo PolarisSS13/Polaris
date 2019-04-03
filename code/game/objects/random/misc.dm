@@ -300,17 +300,15 @@
 	icon_state = "meat"
 
 /obj/random/meat/item_to_spawn()
-	return pick(prob(50);/obj/item/weapon/reagent_containers/food/snacks/meat,
-				prob(5);/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
-				prob(1);/obj/item/weapon/reagent_containers/food/snacks/meat/human,
-				prob(3);/obj/item/weapon/reagent_containers/food/snacks/meat/monkey,
-				prob(3);/obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
-				prob(10);/obj/item/weapon/reagent_containers/food/snacks/bearmeat,
-				prob(1);/obj/item/weapon/reagent_containers/food/snacks/xenomeat,
+	return pick(prob(60);/obj/item/weapon/reagent_containers/food/snacks/meat,
 				prob(20);/obj/item/weapon/reagent_containers/food/snacks/xenomeat/spidermeat,
-				prob(7);/obj/item/weapon/reagent_containers/food/snacks/carpmeat)
-
-
+				prob(10);/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
+				prob(5);/obj/item/weapon/reagent_containers/food/snacks/bearmeat,
+				prob(1);/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+				prob(1);/obj/item/weapon/reagent_containers/food/snacks/meat/human,
+				prob(1);/obj/item/weapon/reagent_containers/food/snacks/meat/monkey,
+				prob(1);/obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
+				prob(1);/obj/item/weapon/reagent_containers/food/snacks/xenomeat)
 
 /obj/random/material //Random materials for building stuff
 	name = "random material"
