@@ -83,8 +83,8 @@
 		if(cpu)
 			cpu.shutdown_computer(0)
 		battery_powered = 0
-		update_icon()
 	stat |= NOPOWER
+	update_icon()
 
 // Called by cpu item's process() automatically, handles our power interaction.
 /obj/machinery/modular_computer/proc/handle_power()
@@ -133,6 +133,7 @@
 		return
 	else
 		..()
+		update_icon()
 
 /obj/machinery/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(cpu)

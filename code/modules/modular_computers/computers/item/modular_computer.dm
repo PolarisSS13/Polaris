@@ -10,6 +10,9 @@
 	var/datum/computer_file/program/active_program = null	// A currently active program running on the computer.
 	var/hardware_flag = 0									// A flag that describes this device type
 	var/last_power_usage = 0
+	var/last_battery_percent = 0							// Used for deciding if battery percentage has chandged
+	var/last_world_time = "00:00"
+	var/list/last_header_icons
 	var/computer_emagged = 0								// Whether the computer is emagged.
 
 	var/base_active_power_usage = 50						// Power usage when the computer is open (screen is active) and can be interacted with. Remember hardware can use power too.
@@ -46,7 +49,7 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
+	if(usr.incapacitated() || !istype(usr, /mob/living))
 		usr << "<span class='warning'>You can't do that.</span>"
 		return
 
@@ -70,7 +73,14 @@
 
 	card_slot.stored_card.forceMove(get_turf(src))
 	card_slot.stored_card = null
+	update_uis()
 	user << "You remove the card from \the [src]"
+
+	if(active_program)
+		active_program.event_idremoved(0)
+
+	for(var/datum/computer_file/program/P in idle_threads)
+		P.event_idremoved(1)
 
 /obj/item/modular_computer/attack_ghost(var/mob/observer/dead/user)
 	if(enabled)
@@ -92,7 +102,7 @@
 /obj/item/modular_computer/New()
 	START_PROCESSING(SSobj, src)
 	update_icon()
-	..()
+	return ..()
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
@@ -188,26 +198,30 @@
 		return 0
 
 	if(active_program && active_program.requires_ntnet && !get_ntnet_status(active_program.requires_ntnet_feature)) // Active program requires NTNet to run but we've just lost connection. Crash.
-		kill_program(1)
-		visible_message("<span class='danger'>\The [src]'s screen briefly freezes and then shows \"NETWORK ERROR - NTNet connection lost. Please retry. If problem persists contact your system administrator.\" error.</span>")
+		active_program.event_networkfailure(0)
 
 	for(var/datum/computer_file/program/P in idle_threads)
 		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
-			P.kill_program(1)
-			idle_threads.Remove(P)
-			visible_message("<span class='danger'>\The [src] screen displays an \"Process [P.filename].[P.filetype] (PID [rand(100,999)]) terminated - Network Error\" error</span>")
+			P.event_networkfailure(1)
 
 	if(active_program)
-		active_program.process_tick()
-		active_program.ntnet_status = get_ntnet_status()
-		active_program.computer_emagged = computer_emagged
+		if(active_program.program_state != PROGRAM_STATE_KILLED)
+			active_program.process_tick()
+			active_program.ntnet_status = get_ntnet_status()
+			active_program.computer_emagged = computer_emagged
+		else
+			active_program = null
 
 	for(var/datum/computer_file/program/P in idle_threads)
-		P.process_tick()
-		P.ntnet_status = get_ntnet_status()
-		P.computer_emagged = computer_emagged
+		if(P.program_state != PROGRAM_STATE_KILLED)
+			P.process_tick()
+			P.ntnet_status = get_ntnet_status()
+			P.computer_emagged = computer_emagged
+		else
+			idle_threads.Remove(P)
 
 	handle_power() // Handles all computer power interaction
+	check_update_ui_need()
 
 // Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /obj/item/modular_computer/proc/get_header_data()
@@ -299,20 +313,20 @@
 		return 1
 	if( href_list["PC_exit"] )
 		kill_program()
-		return
+		return 1
 	if( href_list["PC_enable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
-		return
+		return 1
 	if( href_list["PC_disable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
-		return
+		return 1
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
-		return
+		return 1
 	if( href_list["PC_minimize"] )
 		var/mob/user = usr
 		if(!active_program || !processor_unit)
@@ -323,7 +337,7 @@
 			return
 
 		idle_threads.Add(active_program)
-		active_program.running = 0 // Should close any existing UIs
+		active_program.program_state = PROGRAM_STATE_BACKGROUND // Should close any existing UIs
 		SSnanoui.close_uis(active_program.NM ? active_program.NM : active_program)
 		active_program = null
 		update_icon()
@@ -347,7 +361,7 @@
 
 		// The program is already running. Resume it.
 		if(P in idle_threads)
-			P.running = 1
+			P.program_state = PROGRAM_STATE_ACTIVE
 			active_program = P
 			idle_threads.Remove(P)
 			update_icon()
@@ -359,12 +373,16 @@
 		if(P.run_program(user))
 			active_program = P
 			update_icon()
-		return
+		return 1
 
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure()
 	if(enabled) // Shut down the computer
 		visible_message("<span class='danger'>\The [src]'s screen flickers \"BATTERY CRITICAL\" warning as it shuts down unexpectedly.</span>")
+		if(active_program)
+			active_program.event_powerfailure(0)
+		for(var/datum/computer_file/program/PRG in idle_threads)
+			PRG.event_powerfailure(1)
 		shutdown_computer(0)
 
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
@@ -380,6 +398,7 @@
 
 	if(battery_module)
 		battery_module.battery.use(power_usage * CELLRATE)
+
 	last_power_usage = power_usage
 
 /obj/item/modular_computer/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -395,6 +414,7 @@
 		user.drop_from_inventory(I)
 		card_slot.stored_card = I
 		I.forceMove(src)
+		update_uis()
 		user << "You insert \the [I] into \the [src]."
 		return
 	if(istype(W, /obj/item/weapon/paper))
@@ -574,3 +594,45 @@
 	if(processor_unit)
 		all_components.Add(processor_unit)
 	return all_components
+
+/obj/item/modular_computer/proc/update_uis()
+	if(active_program) //Should we update program ui or computer ui?
+		SSnanoui.update_uis(active_program)
+		if(active_program.NM)
+			SSnanoui.update_uis(active_program.NM)
+	else
+		SSnanoui.update_uis(src)
+
+/obj/item/modular_computer/proc/check_update_ui_need()
+	var/ui_updated_needed = 0
+	if(battery_module)
+		var/batery_percent = battery_module.battery.percent()
+		if(last_battery_percent != batery_percent) //Let's update UI on percent chandge
+			ui_updated_needed = 1
+			last_battery_percent = batery_percent
+
+	if(stationtime2text() != last_world_time)
+		last_world_time = stationtime2text()
+		ui_updated_needed = 1
+
+	if(idle_threads.len)
+		var/list/current_header_icons = list()
+		for(var/datum/computer_file/program/P in idle_threads)
+			if(!P.ui_header)
+				continue
+			current_header_icons[P.type] = P.ui_header
+		if(!last_header_icons)
+			last_header_icons = current_header_icons
+
+		else if(!listequal(last_header_icons, current_header_icons))
+			last_header_icons = current_header_icons
+			ui_updated_needed = 1
+		else
+			for(var/x in last_header_icons|current_header_icons)
+				if(last_header_icons[x]!=current_header_icons[x])
+					last_header_icons = current_header_icons
+					ui_updated_needed = 1
+					break
+
+	if(ui_updated_needed)
+		update_uis()
