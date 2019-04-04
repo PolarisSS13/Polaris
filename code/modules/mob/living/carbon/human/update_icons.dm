@@ -210,8 +210,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			if(bandage_level)
 				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
 		overlays_standing[DAMAGE_LAYER]	= standing_image
-		apply_layer(DAMAGE_LAYER)
-		
+
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_icons_body()
 	if(QDESTROYING(src))
