@@ -17,7 +17,7 @@
 	max_age = 120
 	slowdown = 1.2
 	economic_modifier = 10
-
+	bandages_icon = 'icons/mob/bandage.dmi'
 	health_hud_intensity = 1.5
 
 	spawn_flags = SPECIES_CAN_JOIN

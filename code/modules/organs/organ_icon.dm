@@ -204,6 +204,20 @@ var/global/list/limb_icon_cache = list()
 
 	return applying
 
+/obj/item/organ/external/proc/bandage_level()
+	if(damage_state_text() == "00") 
+		return 0
+	if(!is_bandaged())
+		return 0
+	if(burn_dam + brute_dam == 0)
+		. = 0
+	else if (burn_dam + brute_dam < (max_damage * 0.25 / 2))
+		. = 1
+	else if (burn_dam + brute_dam < (max_damage * 0.75 / 2))
+		. = 2
+	else
+		. = 3	
+	
 /obj/item/organ/external/var/icon_cache_key
 
 // new damage icon system
