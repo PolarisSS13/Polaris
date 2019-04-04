@@ -130,12 +130,12 @@ var/const/SEC_I_FREQ = 1475
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
-	"Legal"		= LEG_FREQ,
+	"Legal"			= LEG_FREQ,
 	"Command"		= COMM_FREQ,
-	"Medical"		= MED_FREQ,
-	"Engineering"	= ENG_FREQ,
-	"Security" 		= SEC_FREQ,
-	"Response Team" = ERT_FREQ,
+	"Hospital"		= MED_FREQ,
+	"Fire"			= ENG_FREQ,
+	"Police" 		= SEC_FREQ,
+	"Military" 		= ERT_FREQ,
 	"Special Ops" 	= DTH_FREQ,
 	"Mercenary" 	= SYND_FREQ,
 	"Raider"		= RAID_FREQ,
@@ -144,8 +144,8 @@ var/list/radiochannels = list(
 	"Explorer"		= EXP_FREQ,
 	"AI Private"	= AI_FREQ,
 	"Entertainment" = ENT_FREQ,
-	"Medical(I)"	= MED_I_FREQ,
-	"Security(I)"	= SEC_I_FREQ
+	"Hospital(I)"	= MED_I_FREQ,
+	"Police(I)"	= SEC_I_FREQ
 )
 
 // central command channels, i.e deathsquid & response teams
