@@ -128,7 +128,6 @@
 	return has_modifier_of_type(/datum/modifier/ace)
 
 /mob/living/simple_mob/animal/sif/kururak/do_special_attack(atom/A)
-	world << "Doing special attack. <span class='alien'>[a_intent]</span>"
 	. = TRUE
 	switch(a_intent)
 		if(I_DISARM) // Ranged mob flash, will also confuse borgs rather than stun.
@@ -397,10 +396,10 @@
 
 	max_health_flat = 25
 	max_health_percent = 1.2
-	disable_duration_percent
+	disable_duration_percent = 0.8
 	incoming_damage_percent = 0.7
 	incoming_healing_percent = 1.5
 	outgoing_melee_damage_percent = 1.5
-	evasion = 5
+	evasion = 20
 	bleeding_rate_percent = 0.7
 	attack_speed_percent = 0.8
