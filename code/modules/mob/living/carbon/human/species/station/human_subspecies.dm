@@ -73,6 +73,7 @@
 	blood_volume = 480
 	min_age = 13
 	max_age = 17
+	bandages_icon = 'icons/mob/bandage.dmi'
 	total_health = 85
 	economic_modifier = 1
 	icon_scale = 0.9
@@ -92,6 +93,7 @@
 	blood_volume = 300
 	min_age = 8
 	max_age = 12
+	bandages_icon = 'icons/mob/bandage.dmi'
 	total_health = 50
 	brute_mod = 0.2
 	economic_modifier = 0.2

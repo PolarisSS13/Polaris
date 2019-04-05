@@ -194,7 +194,22 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		standing_image.overlays += DI
 
 	overlays_standing[DAMAGE_LAYER]	= standing_image
+	update_bandages()
 	apply_layer(DAMAGE_LAYER)
+
+/mob/living/carbon/human/proc/update_bandages()
+	var/bandage_icon = species.bandages_icon
+	if(!bandage_icon)		//checks if race is bandage compatible
+		return
+	var/image/standing_image = overlays_standing[DAMAGE_LAYER]
+	if(standing_image)
+		for(var/obj/item/organ/external/O in organs)
+			if(O.is_stump())
+				continue
+			var/bandage_level = O.bandage_level()
+			if(bandage_level)
+				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
+		overlays_standing[DAMAGE_LAYER]	= standing_image
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_icons_body()
