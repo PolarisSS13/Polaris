@@ -78,6 +78,7 @@
 
 /datum/reagents/proc/handle_reactions()
 	START_PROCESSING(SSchemistry, src)
+	process()
 
 //returns 1 if the holder should continue reactiong, 0 otherwise.
 /datum/reagents/process()
