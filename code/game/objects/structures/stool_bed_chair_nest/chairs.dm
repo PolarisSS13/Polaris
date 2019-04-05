@@ -16,9 +16,15 @@
 		update_layer()
 	return
 
-/obj/structure/bed/chair/general/New()
+/obj/structure/bed/chair/general
 	applies_material_colour = 0
 	color = COLOR_WHITE
+
+/obj/structure/bed/chair/proc/update_layer()
+	if(src.dir == NORTH)
+		src.layer = FLY_LAYER
+	else
+		src.layer = OBJ_LAYER
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -46,22 +52,6 @@
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
 
-/obj/structure/bed/chair/update_icon()
-	..()
-	if(has_buckled_mobs() && padding_material)
-		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
-		if(isnull(stool_cache[cache_key]))
-			var/image/I = image(icon, "[base_icon]_armrest")
-			I.layer = MOB_LAYER + 0.1
-			I.color = padding_material.icon_colour
-			stool_cache[cache_key] = I
-		overlays |= stool_cache[cache_key]
-
-/obj/structure/bed/chair/proc/update_layer()
-	if(src.dir == NORTH)
-		src.layer = FLY_LAYER
-	else
-		src.layer = OBJ_LAYER
 
 /obj/structure/bed/chair/set_dir()
 	..()
@@ -251,7 +241,7 @@
 	chair_material = MATERIAL_WALNUT
 
 
-/obj/structure/bed/sofa
+/obj/structure/bed/chair/sofa
 	name = "old ratty sofa"
 	icon = 'icons/obj/sofas.dmi'
 	icon_state = "sofamiddle"
@@ -261,7 +251,19 @@
 	plane = -25
 
 /obj/structure/bed/chair/sofa/update_icon()
-	return
+	// Prep icon.
+
+	if(applies_material_colour) //VOREStation Add - Goes with added var
+		color = material.icon_colour
+
+
+	desc = initial(desc)
+	if(padding_material)
+		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
+		desc += " It's made of [material.use_name] and covered with [padding_material.use_name]."
+	else
+		name = "[material.display_name] [initial(name)]"
+		desc += " It's made of [material.use_name]."
 
 /obj/structure/bed/chair/sofa/New(var/newloc)
 	..(newloc, "carpet")
