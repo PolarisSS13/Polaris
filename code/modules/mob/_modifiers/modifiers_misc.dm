@@ -268,3 +268,17 @@ the artifact triggers the rage.
 	if(L.get_poison_protection() >= 1)
 		return FALSE
 	return TRUE
+
+/datum/modifier/poisoned/paralysis
+	desc = "You have poison inside of you. It will cause harm over a long span of time if not cured, and may cause temporary paralysis."
+	on_created_text = "<span class='warning'>You feel incredibly weak...</span>"
+	damage_per_tick = 0.75
+
+/datum/modifier/poisoned/paralysis/tick()
+	..()
+	if(prob(5))
+		holder.Paralyse(3)
+
+/datum/modifier/poisoned/paralysis/on_applied()
+	..()
+	holder.Paralyse(4)
