@@ -1292,7 +1292,7 @@ proc/admin_notice(var/message, var/rights)
 	var/mob/living/carbon/human/M = input("Select mob.", "Select mob.") as null|anything in human_mob_list
 	if(!M) return
 
-	show_skill_window(usr, M)
+//	show_skill_window(usr, M)
 
 	return
 
