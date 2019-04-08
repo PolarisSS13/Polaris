@@ -140,16 +140,17 @@
 			. += turf_move_cost
 
 	// Wind makes it easier or harder to move, depending on if you're with or against the wind.
-	var/datum/planet/P = SSplanets.z_to_planet[z]
-	if(P)
-		var/datum/weather_holder/WH = P.weather_holder
-		if(WH && WH.wind_speed) // Is there any wind?
-			// With the wind.
-			if(direct & WH.wind_dir)
-				. = max(. - WH.wind_speed, -1) // Wind speedup is capped at roughly taj speed.
-			// Against it.
-			else if(direct & reverse_dir[WH.wind_dir])
-				. += WH.wind_speed
+	if(T.outdoors)
+		var/datum/planet/P = SSplanets.z_to_planet[z]
+		if(P)
+			var/datum/weather_holder/WH = P.weather_holder
+			if(WH && WH.wind_speed) // Is there any wind?
+				// With the wind.
+				if(direct & WH.wind_dir)
+					. = max(. - WH.wind_speed, -1) // Wind speedup is capped at roughly taj speed.
+				// Against it.
+				else if(direct & reverse_dir[WH.wind_dir])
+					. += WH.wind_speed
 
 #undef HUMAN_LOWEST_SLOWDOWN
 
