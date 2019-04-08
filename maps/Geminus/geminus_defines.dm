@@ -29,6 +29,7 @@
 	allowed_spawns = list("Arrivals Shuttle")
 
 	usable_email_tlds = list("freemail.net", "ntmail.nt", "interpollux.org")
+	default_law_type = /datum/ai_laws/pollux
 
 	station_networks = list(
 							NETWORK_CARGO,
