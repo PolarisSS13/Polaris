@@ -248,7 +248,7 @@
 
 			var/obj/item/weapon/weldingtool/welder = I
 			if(welder.remove_fuel(0,user))
-				to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
+				to_chat(user, "<span class='notice'>You start to fix dents and weld \the [get_material_name()] into place.</span>")
 				playsound(src, welder.usesound, 50, 1)
 				if(do_after(user, (5 * repairing) * welder.toolspeed) && welder && welder.isOn())
 					to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
