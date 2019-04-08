@@ -3,42 +3,42 @@
 	name = "lift (geminus city)"
 	lift_floor_label = "Floor 2"
 	lift_floor_name = "Geminus City Metro"
-	lift_announce_str = "Lift arriving at Geminus City Metro Station, please stand by."
+	lift_announce_str = "Lift arriving at Geminus City Metro Station, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_ground
 	name = "lift (sewers)"
 	lift_floor_label = "Floor 1"
 	lift_floor_name = "Geminus Underground Sewers"
-	lift_announce_str = "Lift arriving at Geminus underground sewers, please stand by."
+	lift_announce_str = "Lift arriving at Geminus underground sewers, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_top_mining
 	name = "lift (geminus city)"
 	lift_floor_label = "Floor 2"
 	lift_floor_name = "Geminus City - Mining Office"
-	lift_announce_str = "Lift arriving at Geminus City Mining Office, please stand by."
+	lift_announce_str = "Lift arriving at Geminus City Mining Office, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_ground_mining
 	name = "lift (mines)"
 	lift_floor_label = "Floor 1"
 	lift_floor_name = "Geminus City - Mines"
-	lift_announce_str = "Lift arriving at Geminus Mines, please stand by."
+	lift_announce_str = "Lift arriving at Geminus Mines, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_top_hospital
 	name = "lift (city hospital)"
 	lift_floor_label = "Floor 2"
 	lift_floor_name = "Geminus City - Upper Hospital"
-	lift_announce_str = "Lift arriving at Geminus City - Hospital Upper, please stand by."
+	lift_announce_str = "Lift arriving at Geminus City - Hospital Upper, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/turbolift/geminus_ground_hospital
 	name = "lift (hospital underground)"
 	lift_floor_label = "Floor 1"
 	lift_floor_name = "Geminus City - Underground Hospital"
-	lift_announce_str = "Lift arriving at Geminus City - Hospital Underground, please stand by."
+	lift_announce_str = "Lift arriving at Geminus City - Hospital Underground, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 
