@@ -7,7 +7,7 @@
 	requires_ntnet = 0
 	available_on_ntnet = 0
 	available_on_syndinet = 1
-	nanomodule_path = /datum/nano_module/revelation/
+	nanomodule_path = /datum/nano_module/program/revelation/
 	var/armed = 0
 
 /datum/computer_file/program/revelation/run_program(var/mob/living/user)
@@ -49,16 +49,17 @@
 		if(!newname)
 			return
 		filedesc = newname
+	return 1
 
 /datum/computer_file/program/revelation/clone()
 	var/datum/computer_file/program/revelation/temp = ..()
 	temp.armed = armed
 	return temp
 
-/datum/nano_module/revelation
+/datum/nano_module/program/revelation
 	name = "Revelation Virus"
 
-/datum/nano_module/revelation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/revelation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
 	var/datum/computer_file/program/revelation/PRG = program
 	if(!istype(PRG))
@@ -75,3 +76,4 @@
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
+

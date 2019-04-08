@@ -20,7 +20,6 @@
 	var/computer_emagged = 0				// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null					// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
 
-
 /datum/computer_file/program/New(var/obj/item/modular_computer/comp = null)
 	..()
 	if(comp && istype(comp))
@@ -54,6 +53,11 @@
 			user << "<span class='danger'>\The [computer] flashes an \"Hardware Error - Incompatible software\" warning.</span>"
 		return 0
 	return 1
+
+/datum/computer_file/program/proc/get_signal(var/specific_action = 0)
+	if(computer)
+		return computer.get_ntnet_status(specific_action)
+	return 0
 
 // Called by Process() on device that runs us, once every tick.
 /datum/computer_file/program/proc/process_tick()
@@ -92,8 +96,7 @@
 /datum/computer_file/program/proc/run_program(var/mob/living/user)
 	if(can_run(user, 1))
 		if(nanomodule_path)
-			NM = new nanomodule_path(computer)	// Computer is passed here as it's (probably!) physical object. Some UI's perform get_turf() and passing program datum wouldn't go well with this.
-			NM.program = src					// Set the program reference to separate variable, instead.
+			NM = new nanomodule_path(computer, src)	// Computer is passed here as it's (probably!) physical object. Some UI's perform get_turf() and passing program datum wouldn't go well with this.
 		if(requires_ntnet && network_destination)
 			generate_network_log("Connection opened to [network_destination].")
 		program_state = PROGRAM_STATE_ACTIVE

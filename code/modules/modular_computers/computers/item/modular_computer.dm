@@ -71,16 +71,16 @@
 		user << "There is no card in \the [src]"
 		return
 
-	card_slot.stored_card.forceMove(get_turf(src))
-	card_slot.stored_card = null
-	update_uis()
-	user << "You remove the card from \the [src]"
-
 	if(active_program)
 		active_program.event_idremoved(0)
 
 	for(var/datum/computer_file/program/P in idle_threads)
 		P.event_idremoved(1)
+
+	card_slot.stored_card.forceMove(get_turf(src))
+	card_slot.stored_card = null
+	update_uis()
+	user << "You remove the card from \the [src]"
 
 /obj/item/modular_computer/attack_ghost(var/mob/observer/dead/user)
 	if(enabled)
@@ -102,14 +102,14 @@
 /obj/item/modular_computer/New()
 	START_PROCESSING(SSobj, src)
 	update_icon()
-	return ..()
+	..()
 
 /obj/item/modular_computer/Destroy()
 	kill_program(1)
 	STOP_PROCESSING(SSobj, src)
 	for(var/obj/item/weapon/computer_hardware/CH in src.get_all_components())
 		qdel(CH)
-	..()
+	return ..()
 
 /obj/item/modular_computer/update_icon()
 	icon_state = icon_state_unpowered
@@ -318,12 +318,12 @@
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_enable_component"])
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
-		return 1
+		. = 1
 	if( href_list["PC_disable_component"] )
 		var/obj/item/weapon/computer_hardware/H = find_hardware_by_name(href_list["PC_disable_component"])
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
-		return 1
+		. = 1
 	if( href_list["PC_shutdown"] )
 		shutdown_computer()
 		return 1
@@ -374,6 +374,8 @@
 			active_program = P
 			update_icon()
 		return 1
+	if(.)
+		update_uis()
 
 // Used in following function to reduce copypaste
 /obj/item/modular_computer/proc/power_failure()
@@ -392,6 +394,7 @@
 		return 0
 
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
+
 	for(var/obj/item/weapon/computer_hardware/H in get_all_components())
 		if(H.enabled)
 			power_usage += H.power_usage

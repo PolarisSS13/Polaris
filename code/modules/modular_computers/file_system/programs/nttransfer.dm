@@ -10,7 +10,7 @@ var/global/nttransfer_uid = 0
 	requires_ntnet_feature = NTNET_PEERTOPEER
 	network_destination = "other device via P2P tunnel"
 	available_on_ntnet = 1
-	nanomodule_path = /datum/nano_module/computer_nttransfer/
+	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
 
 	var/error = ""										// Error screen
 	var/server_password = ""							// Optional password to download the file.
@@ -87,13 +87,10 @@ var/global/nttransfer_uid = 0
 	download_completion = 0
 
 
-
-
-
-/datum/nano_module/computer_nttransfer
+/datum/nano_module/program/computer_nttransfer
 	name = "NTNet P2P Transfer Client"
 
-/datum/nano_module/computer_nttransfer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_nttransfer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(!program)
 		return
 	var/datum/computer_file/program/nttransfer/PRG = program
@@ -161,7 +158,7 @@ var/global/nttransfer_uid = 0
 				return
 		downloaded_file = remote.provided_file.clone()
 		remote.connected_clients.Add(src)
-		return
+		return 1
 	if(href_list["PRG_reset"])
 		error = ""
 		upload_menu = 0
@@ -171,7 +168,7 @@ var/global/nttransfer_uid = 0
 		for(var/datum/computer_file/program/nttransfer/T in connected_clients)
 			T.crash_download("Remote server has forcibly closed the connection")
 		provided_file = null
-		return
+		return 1
 	if(href_list["PRG_setpassword"])
 		var/pass = sanitize(input(usr, "Enter new server password. Leave blank to cancel, input 'none' to disable password.", "Server security", "none"))
 		if(!pass)
@@ -180,7 +177,7 @@ var/global/nttransfer_uid = 0
 			server_password = ""
 			return
 		server_password = pass
-		return
+		return 1
 	if(href_list["PRG_uploadfile"])
 		for(var/datum/computer_file/F in computer.hard_drive.stored_files)
 			if("[F.uid]" == href_list["PRG_uploadfile"])
@@ -191,7 +188,7 @@ var/global/nttransfer_uid = 0
 				ntnet_global.fileservers.Add(src)
 				return
 		error = "I/O Error: Unable to locate file on hard drive."
-		return
+		return 1
 	if(href_list["PRG_uploadmenu"])
 		upload_menu = 1
 	return 0

@@ -64,10 +64,7 @@
 		return 1
 
 /datum/nano_module/alarm_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/data[0]
-
-	if(program)
-		data = program.get_header_data()
+	var/list/data = host.initial_data()
 
 	var/categories[0]
 	for(var/datum/alarm_handler/AH in alarm_handlers)
@@ -94,7 +91,7 @@
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "alarm_monitor.tmpl", "Alarm Monitoring Console", 800, 800, state = state)
-		if(program) // This is necessary to ensure the status bar remains updated along with rest of the UI.
+		if(host.update_layout()) // This is necessary to ensure the status bar remains updated along with rest of the UI.
 			ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()

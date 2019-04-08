@@ -1,23 +1,21 @@
 /datum/computer_file/program/card_mod
 	filename = "cardmod"
 	filedesc = "ID card modification program"
-	nanomodule_path = /datum/nano_module/card_mod
+	nanomodule_path = /datum/nano_module/program/card_mod
 	program_icon_state = "id"
 	extended_desc = "Program for programming employee ID cards to access parts of the station."
 	required_access = access_hop
 	requires_ntnet = 0
 	size = 8
 
-/datum/nano_module/card_mod
+/datum/nano_module/program/card_mod
 	name = "ID card modification program"
 	var/mod_mode = 1
 	var/is_centcom = 0
 	var/show_assignments = 0
 
-/datum/nano_module/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = list()
-	if(program)
-		data = program.get_header_data()
+/datum/nano_module/program/card_mod/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+	var/list/data = host.initial_data()
 
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
@@ -84,13 +82,12 @@
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "identification_computer_lap.tmpl", name, 600, 700, state = state)
+		ui = new(user, src, ui_key, "mod_identification_computer.tmpl", name, 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
-		ui.set_auto_update(0)
 
-/datum/nano_module/card_mod/proc/format_jobs(list/jobs)
+/datum/nano_module/program/card_mod/proc/format_jobs(list/jobs)
 	var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
 	var/list/formatted = list()
 	for(var/job in jobs)
@@ -101,16 +98,18 @@
 
 	return formatted
 
-/datum/nano_module/card_mod/proc/get_accesses(var/is_centcom = 0)
-
+/datum/nano_module/program/card_mod/proc/get_accesses(var/is_centcom = 0)
 	return null
 
 
 /datum/computer_file/program/card_mod/Topic(href, href_list)
-	var/mob/living/user = usr
+	if(..())
+		return 1
+
+	var/mob/user = usr
 	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
 	var/obj/item/weapon/card/id/id_card = computer.card_slot.stored_card
-	var/datum/nano_module/card_mod/module = NM
+	var/datum/nano_module/program/card_mod/module = NM
 	switch(href_list["action"])
 		if("switchm")
 			if(href_list["target"] == "mod")
@@ -135,14 +134,17 @@
 									<u>Blood Type:</u> [id_card.blood_type]<br><br>
 									<u>Access:</u><br>
 								"}
+
+						var/known_access_rights = get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
 						for(var/A in id_card.access)
-							contents += "  [get_access_desc(A)]"
+							if(A in known_access_rights)
+								contents += "  [get_access_desc(A)]"
 
 						if(!computer.nano_printer.print_text(contents,"access report"))
 							usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 							return
 						else
-							computer.visible_message("<span class='notice'>[computer] prints out paper.</span>")
+							computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 				else
 					var/contents = {"<h4>Crew Manifest</h4>
 									<br>
@@ -152,14 +154,16 @@
 						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
 						return
 					else
-						computer.visible_message("<span class='notice'>[computer] prints out paper.</span>")
+						computer.visible_message("<span class='notice'>\The [computer] prints out paper.</span>")
 		if("eject")
 			if(computer && computer.card_slot)
+				if(id_card)
+					data_core.manifest_modify(id_card.registered_name, id_card.assignment)
 				computer.proc_eject_id(user)
 		if("terminate")
 			if(computer && can_run(user, 1))
 				id_card.assignment = "Terminated"
-				id_card.access = list()
+				remove_nt_access(id_card)
 				callHook("terminate_employee", list(id_card))
 		if("edit")
 			if(computer && can_run(user, 1))
@@ -197,7 +201,8 @@
 
 						access = jobdatum.get_access()
 
-					id_card.access = access
+					remove_nt_access(id_card)
+					apply_access(id_card, access)
 					id_card.assignment = t1
 					id_card.rank = t1
 
@@ -206,7 +211,7 @@
 			if(href_list["allowed"] && computer && can_run(user, 1))
 				var/access_type = text2num(href_list["access_target"])
 				var/access_allowed = text2num(href_list["allowed"])
-				if(access_type in (get_all_centcom_access() + get_all_station_access()))
+				if(access_type in get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM))
 					id_card.access -= access_type
 					if(!access_allowed)
 						id_card.access += access_type
@@ -214,5 +219,10 @@
 		id_card.name = text("[id_card.registered_name]'s ID Card ([id_card.assignment])")
 
 	SSnanoui.update_uis(NM)
-	..(href, href_list)
 	return 1
+
+/datum/computer_file/program/card_mod/proc/remove_nt_access(var/obj/item/weapon/card/id/id_card)
+	id_card.access -= get_access_ids(ACCESS_TYPE_STATION|ACCESS_TYPE_CENTCOM)
+
+/datum/computer_file/program/card_mod/proc/apply_access(var/obj/item/weapon/card/id/id_card, var/list/accesses)
+	id_card.access |= accesses

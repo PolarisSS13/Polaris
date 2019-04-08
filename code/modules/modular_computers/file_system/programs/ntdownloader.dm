@@ -9,7 +9,7 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
 	available_on_ntnet = 0
-	nanomodule_path = /datum/nano_module/computer_ntnetdownload/
+	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
 	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = 0
@@ -89,22 +89,21 @@
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
 			begin_file_download(href_list["PRG_downloadfile"])
-		return
+		return 1
 	if(href_list["PRG_reseterror"])
 		if(downloaderror)
 			download_completion = 0
 			download_netspeed = 0
 			downloaded_file = null
 			downloaderror = ""
-		return
+		return 1
 	return 0
 
-
-/datum/nano_module/computer_ntnetdownload
+/datum/nano_module/program/computer_ntnetdownload
 	name = "Network Downloader"
 	var/obj/item/modular_computer/my_computer = null
 
-/datum/nano_module/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	if(program)
 		my_computer = program.computer
 
