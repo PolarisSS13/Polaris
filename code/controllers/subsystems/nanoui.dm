@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(nanoui)
 				if(fexists(path + filename))
 					asset_files.Add(fcopy_rsc(path + filename)) // add this file to asset_files for sending to clients when they connect
 	for(var/i in GLOB.clients)
-		addtimer(src, CALLBACK(send_resources, i), 10)
+		addtimer(CALLBACK(src, .proc/send_resources, i), 10)
 	return ..()
 
 /datum/controller/subsystem/nanoui/Recover()
@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(nanoui)
 
 //Sends asset files to a client, called on client/New()
 /datum/controller/subsystem/nanoui/proc/send_resources(client)
-	if(!initialized)
+	if(!subsystem_initialized)
 		return
 	for(var/file in asset_files)
 		client << browse_rsc(file)	// send the file to the client
