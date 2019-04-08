@@ -65,12 +65,6 @@ var/global/list/websites = list()
 	<area target='' alt='search' title='search' href='?src=\ref[src];operation=search'coords='123,237,503,276' shape='rect'>\
 	</map>"
 
-
-/datum/website/ntoogle/proc/search()
-	var/search = input("Enter a URL", "NT search engine", null, null)  as text
-	if(!search)
-		return
-
 /obj/item/device/communicator/proc/browser_init(mob/user)
 	var/datum/browser/popup = new(user, "nanosearch.nt", "NToogle search engine", 600, 600)
 	var/content = "<img src = 'ntoogle.png' usemap='#image-map'>\
