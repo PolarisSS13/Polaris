@@ -322,6 +322,14 @@ AI MODULES
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/corporate
 
+/******************** Corporate ********************/
+
+/obj/item/weapon/aiModule/pollux
+	name = "\improper 'Polluxian' core AI module"
+	desc = "A 'Polluxian' Core AI Module: 'Reconfigures the AI's core laws.'"
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
+	laws = new/datum/ai_laws/pollux
+
 /******************** Drone ********************/
 /obj/item/weapon/aiModule/drone
 	name = "\improper 'Drone' core AI module"

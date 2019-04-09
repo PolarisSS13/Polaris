@@ -562,7 +562,7 @@
 	name = "shuttle window"
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon = 'icons/obj/podwindows.dmi'
-	icon_state = "window"
+	icon_state = "0_0"
 	basestate = "window"
 	maxhealth = 40
 	reinf = 1

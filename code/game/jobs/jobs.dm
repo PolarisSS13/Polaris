@@ -12,6 +12,7 @@ var/const/ATMOSTECH				=(1<<7)
 var/const/AI					=(1<<8)
 var/const/CYBORG				=(1<<9)
 var/const/PRESIDENT				=(1<<10)
+var/const/PARAMEDIC				=(1<<11)
 
 
 var/const/MEDSCI				=(1<<1)
@@ -26,9 +27,8 @@ var/const/VIROLOGIST			=(1<<6)
 var/const/PSYCHIATRIST			=(1<<7)
 var/const/ROBOTICIST			=(1<<8)
 var/const/XENOBIOLOGIST			=(1<<9)
-var/const/PARAMEDIC				=(1<<10)
-var/const/MEDICALINTERN			=(1<<11)
-var/const/SCIENCEINTERN			=(1<<12)
+var/const/MEDICALINTERN			=(1<<10)
+var/const/SCIENCEINTERN			=(1<<11)
 
 var/const/CIVILIAN				=(1<<2)
 
@@ -66,7 +66,7 @@ var/list/command_positions = list(
 	"Mayor",
 	"City Clerk",
 	"Chief of Police",
-	"Chief Engineer",
+	"Fire Chief",
 	"Judge",
 	"Factory Manager",
 	"Research Director",
@@ -75,9 +75,9 @@ var/list/command_positions = list(
 
 
 var/list/engineering_positions = list(
-	"Chief Engineer",
-	"Station Engineer",
-	"Firefighter"
+	"Fire Chief",
+	"Firefighter",
+	"Paramedic"
 )
 
 
@@ -87,7 +87,6 @@ var/list/medical_positions = list(
 	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
-	"Paramedic",
 	"Medical Intern"
 )
 
