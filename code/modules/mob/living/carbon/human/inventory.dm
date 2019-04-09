@@ -286,9 +286,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(istype(W,/obj/item/clothing/head/kitty))
 				W.update_icon(src)
 */
-				W.equipped(src, slot)
-				worn_clothing += head
-				update_inv_head()
+			W.equipped(src, slot)
+			worn_clothing += head
+			update_inv_head()
 		if(slot_shoes)
 			src.shoes = W
 			W.equipped(src, slot)
