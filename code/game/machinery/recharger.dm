@@ -101,24 +101,31 @@ obj/machinery/recharger
 			if(!L.stored_computer.cpu.battery_module.battery.fully_charged())
 				icon_state = icon_state_charging
 				L.stored_computer.cpu.battery_module.battery.give(active_power_usage*CELLRATE)
-				update_use_power(1)
+				update_use_power(2)
 			else
 				icon_state = icon_state_charged
-				update_use_power(0)
+				update_use_power(1)
 			return
 		else if(istype(charging, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = charging
 			if(!C.battery_module.battery.fully_charged())
 				icon_state = icon_state_charging
 				C.battery_module.battery.give(active_power_usage*CELLRATE)
-				update_use_power(1)
+				update_use_power(2)
 			else
 				icon_state = icon_state_charged
-				update_use_power(0)
+				update_use_power(1)
 			return
 		else if(istype(charging, /obj/item/weapon/computer_hardware/battery_module))
 			var/obj/item/weapon/computer_hardware/battery_module/BM = charging
-			cell = BM.battery
+			if(!BM.battery.fully_charged())
+				icon_state = icon_state_charging
+				BM.battery.give(active_power_usage*CELLRATE)
+				update_use_power(2)
+			else
+				icon_state = icon_state_charged
+				update_use_power(1)
+			return
 
 		var/obj/item/weapon/cell/C = charging.get_cell()
 		if(istype(C))
