@@ -20,7 +20,7 @@
 	name = "synthmorph bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
 	especially useful if short on time or in a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/robobag.dmi'
 	item_path = /obj/item/bodybag/cryobag/robobag
 	tank_type = /obj/item/weapon/tank/stasis/nitro_cryo
 	stasis_level = 2	// Lower than the normal cryobag, because it's not made for meat that dies. It's made for robots and is freezing.
@@ -95,6 +95,7 @@
 				user.unEquip(corptag)
 				corptag.loc = null
 				to_chat(user, "<span class='notice'>You attach \the [corptag] to \the [src].</span>")
+			update_icon()
 
 		else
 			..()
