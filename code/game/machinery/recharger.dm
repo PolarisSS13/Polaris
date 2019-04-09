@@ -8,7 +8,7 @@ obj/machinery/recharger
 	idle_power_usage = 4
 	active_power_usage = 40000	//40 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/modular_computer, /obj/item/weapon/cell, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/laptop, /obj/item/modular_computer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/cell, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -96,7 +96,6 @@ obj/machinery/recharger
 		update_use_power(1)
 		icon_state = icon_state_idle
 	else
-
 		if(istype(charging, /obj/item/laptop))
 			var/obj/item/laptop/L = charging
 			if(!L.stored_computer.cpu.battery_module.battery.fully_charged())
@@ -107,8 +106,7 @@ obj/machinery/recharger
 				icon_state = icon_state_charged
 				update_use_power(0)
 			return
-
-		if(istype(charging, /obj/item/modular_computer))
+		else if(istype(charging, /obj/item/modular_computer))
 			var/obj/item/modular_computer/C = charging
 			if(!C.battery_module.battery.fully_charged())
 				icon_state = icon_state_charging
@@ -118,6 +116,9 @@ obj/machinery/recharger
 				icon_state = icon_state_charged
 				update_use_power(0)
 			return
+		else if(istype(charging, /obj/item/weapon/computer_hardware/battery_module))
+			var/obj/item/weapon/computer_hardware/battery_module/BM = charging
+			cell = BM.battery
 
 		var/obj/item/weapon/cell/C = charging.get_cell()
 		if(istype(C))

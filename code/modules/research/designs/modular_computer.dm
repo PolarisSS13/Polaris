@@ -61,7 +61,6 @@
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 100)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card
 	sort_string = "VBAAG"
 
@@ -71,7 +70,6 @@
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card/advanced
 	sort_string = "VBAAH"
 
@@ -81,7 +79,6 @@
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 400)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/network_card/wired
 	sort_string = "VBAAI"
 
@@ -92,7 +89,6 @@
 	req_tech = list(TECH_DATA = 1)
 	build_type = IMPRINTER
 	materials = list("glass" = 8000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable
 	sort_string = "VBAAJ"
 
@@ -102,7 +98,6 @@
 	req_tech = list(TECH_DATA = 2)
 	build_type = IMPRINTER
 	materials = list("glass" = 16000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
 	sort_string = "VBAAK"
 
@@ -112,7 +107,6 @@
 	req_tech = list(TECH_DATA = 4)
 	build_type = IMPRINTER
 	materials = list("glass" = 32000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/super
 	sort_string = "VBAAL"
 
@@ -136,7 +130,7 @@
 	build_path = /obj/item/weapon/computer_hardware/nano_printer
 	sort_string = "VBAAN"
 
-// Card slot
+// Tesla Link
 /datum/design/item/modularcomponent/teslalink
 	name = "tesla link"
 	id = "teslalink"
@@ -201,13 +195,13 @@
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VBAAU"
 
+// Processor unit
 /datum/design/item/modularcomponent/cpu/
 	name = "computer processor unit"
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 8000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit
 	sort_string = "VBAAV"
 
@@ -217,7 +211,6 @@
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/small
 	sort_string = "VBAAW"
 
@@ -227,7 +220,6 @@
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 32000, glass = 8000)
-	chemicals = list("sacid" = 40)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic
 	sort_string = "VBAAX"
 
@@ -237,6 +229,5 @@
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
 	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 16000, glass = 4000)
-	chemicals = list("sacid" = 20)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VBAAY"
