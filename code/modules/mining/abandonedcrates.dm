@@ -68,7 +68,7 @@
 			new/obj/item/weapon/rig(src)
 		if(61 to 62)
 			for(var/i = 0, i < 12, ++i)
-				new/obj/item/clothing/head/kitty(src)
+				new/obj/item/clothing/head/collectable/wizard(src)
 		if(63 to 64)
 			var/t = rand(4,7)
 			for(var/i = 0, i < t, ++i)

@@ -2258,7 +2258,7 @@
 "aRv" = (/obj/effect/floor_decal/corner/blue{dir = 6},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/mayor_car_park)
 "aRw" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/crew_quarters/courtroom/judge)
 "aRx" = (/obj/effect/floor_decal/corner/yellow{dir = 5},/obj/structure/bed/chair/general{icon_state = "chair_preview"; dir = 1},/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/mayor)
-"aRy" = (/obj/effect/landmark/costume/butler,/obj/effect/landmark/costume/maid,/obj/effect/landmark/costume/waiter,/obj/structure/closet/cabinet,/obj/item/clothing/under/sl_suit,/obj/item/clothing/under/waiter,/turf/simulated/floor/wood,/area/planets/Geminus/indoor/bar)
+"aRy" = (/obj/effect/landmark/costume/butler,/obj/effect/landmark/costume/waiter,/obj/structure/closet/cabinet,/obj/item/clothing/under/sl_suit,/obj/item/clothing/under/waiter,/turf/simulated/floor/wood,/area/planets/Geminus/indoor/bar)
 "aRz" = (/obj/structure/disposalpipe/segment,/turf/simulated/wall,/area/planets/Geminus/indoor/disco)
 "aRA" = (/obj/effect/floor_decal/industrial/warning{dir = 10},/turf/simulated/floor/tiled/techmaint{name = "landing floor"; outdoors = 1},/area/planets/Geminus/indoor/arrivalbus)
 "aRB" = (/obj/effect/floor_decal/industrial/warning/corner,/obj/machinery/ai_status_display{pixel_x = -32; pixel_y = 0},/obj/machinery/light/colored,/turf/simulated/floor/tiled/techfloor,/area/planets/Geminus/outdoor/east)

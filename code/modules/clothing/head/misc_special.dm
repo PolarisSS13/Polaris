@@ -4,7 +4,7 @@
  *		Cakehat
  *		Ushanka
  *		Pumpkin head
- *		Kitty ears
+ *		Kitty ears (NOT ANY MORE)
  *		Holiday hats
  		Crown of Wrath
  */
@@ -172,6 +172,7 @@
 /*
  * Kitty ears
  */
+ /*
 /obj/item/clothing/head/kitty
 	name = "kitty ears"
 	desc = "A pair of kitty ears. Meow!"
@@ -187,7 +188,7 @@
 
 		var/icon/earbit = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner")
 		ears.Blend(earbit, ICON_OVERLAY)
-
+*/
 /obj/item/clothing/head/richard
 	name = "chicken mask"
 	desc = "You can hear the distant sounds of rhythmic electronica."

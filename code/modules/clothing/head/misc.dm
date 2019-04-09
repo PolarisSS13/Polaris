@@ -181,13 +181,13 @@
 
 /obj/item/clothing/head/justice/pink
 	icon_state = "justicepink"
-
+/*
 /obj/item/clothing/head/rabbitears
 	name = "rabbit ears"
 	desc = "Wearing these makes you looks useless, and only good for your sex appeal."
 	icon_state = "bunny"
 	body_parts_covered = 0
-
+*/
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
 	desc = "A working man's cap."
