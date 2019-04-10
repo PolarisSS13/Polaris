@@ -29,6 +29,7 @@
 
 /datum/job/doctor
 	title = "Doctor"
+	email_domain = "med.cityworks.gov.nt"
 	flag = DOCTOR
 	department_flag = MEDSCI
 	department = "Medical"
@@ -51,6 +52,7 @@
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
 /datum/job/chemist
+	email_domain = "med.cityworks.gov.nt"
 	title = "Chemist"
 	flag = CHEMIST
 	department = "Medical"
@@ -90,6 +92,7 @@
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
+	email_domain = "psych.cityworks.gov.nt"
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
 	department = "Medical"
