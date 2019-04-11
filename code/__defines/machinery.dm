@@ -56,6 +56,9 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_TELECOM "Tcomms"
 #define NETWORK_THUNDER "Thunderdome"
 #define NETWORK_COMMUNICATORS "Communicators"
+#define NETWORK_ALARM_ATMOS "Atmosphere Alarms"
+#define NETWORK_ALARM_POWER "Power Alarms"
+#define NETWORK_ALARM_FIRE "Fire Alarms"
 
 // Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
 var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret", NETWORK_COMMUNICATORS)

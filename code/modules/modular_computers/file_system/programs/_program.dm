@@ -28,4 +28,4 @@
 // Calls forwarded to PROGRAM itself should begin with "PRG_"
 // Calls forwarded to COMPUTER running the program should begin with "PC_"
 /datum/topic_manager/program/Topic(href, href_list)
-	return program && program.Topic(href, href_list)
+	return program && program.Topic(href, href_list) 

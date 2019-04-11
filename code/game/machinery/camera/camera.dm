@@ -88,7 +88,6 @@
 			stat |= EMPED
 			set_light(0)
 			triggerCameraAlarm()
-			kick_viewers()
 			update_icon()
 			update_coverage()
 			START_PROCESSING(SSobj, src)
@@ -241,26 +240,25 @@
 		user = null
 
 	if(choice != 1)
-		//legacy support, if choice is != 1 then just kick viewers without changing status
-		kick_viewers()
-	else
-		set_status(!src.status)
-		if (!(src.status))
-			if(user)
-				visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
-			else
-				visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
-			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			icon_state = "[initial(icon_state)]1"
-			add_hiddenprint(user)
+		return
+
+	set_status(!src.status)
+	if (!(src.status))
+		if(user)
+			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
 		else
-			if(user)
-				visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
-			else
-				visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
-			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			icon_state = initial(icon_state)
-			add_hiddenprint(user)
+			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		icon_state = "[initial(icon_state)]1"
+		add_hiddenprint(user)
+	else
+		if(user)
+			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+		else
+			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		icon_state = initial(icon_state)
+		add_hiddenprint(user)
 
 /obj/machinery/camera/proc/take_damage(var/force, var/message)
 	//prob(25) gives an average of 3-4 hits
@@ -272,7 +270,6 @@
 	stat |= BROKEN
 	wires.RandomCutAll()
 
-	kick_viewers()
 	triggerCameraAlarm()
 	update_icon()
 	update_coverage()
@@ -287,25 +284,11 @@
 	if (status != newstatus)
 		status = newstatus
 		update_coverage()
-		// now disconnect anyone using the camera
-		//Apparently, this will disconnect anyone even if the camera was re-activated.
-		//I guess that doesn't matter since they couldn't use it anyway?
-		kick_viewers()
 
 /obj/machinery/camera/check_eye(mob/user)
 	if(!can_use()) return -1
 	if(isXRay()) return SEE_TURFS|SEE_MOBS|SEE_OBJS
 	return 0
-
-//This might be redundant, because of check_eye()
-/obj/machinery/camera/proc/kick_viewers()
-	for(var/mob/O in player_list)
-		if (istype(O.machine, /obj/machinery/computer/security))
-			var/obj/machinery/computer/security/S = O.machine
-			if (S.current_camera == src)
-				O.unset_machine()
-				O.reset_view(null)
-				O << "The screen bursts into static."
 
 /obj/machinery/camera/update_icon()
 	if (!status || (stat & BROKEN))

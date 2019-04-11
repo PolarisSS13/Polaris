@@ -190,4 +190,7 @@
 	if(cpu)
 		cpu.bullet_act(Proj)
 
-
+/obj/machinery/modular_computer/check_eye(var/mob/user)
+	if(cpu)
+		return cpu.check_eye(user)
+	return -1
