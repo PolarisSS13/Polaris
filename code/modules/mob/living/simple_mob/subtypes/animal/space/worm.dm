@@ -404,20 +404,20 @@
 /obj/item/weapon/reagent_containers/food/snacks/meat/worm/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/material/knife))
 		var/to_spawn = pickweight(
-			/obj/random/junk = 30,
-			/obj/random/trash = 30,
-			/obj/random/maintenance/clean = 15,
-			/obj/random/tool = 15,
-			/obj/random/medical = 3,
-			/obj/random/bomb_supply = 7,
-			/obj/random/contraband = 3,
-			/obj/random/unidentified_medicine/old_medicine = 7,
-			/obj/item/weapon/ore/strangerock = 3,
-			/obj/item/weapon/ore/phoron = 7,
-			/obj/random/handgun = 1,
-			/obj/random/toolbox = 4,
-			/obj/random/drinkbottle = 5
-			)
+		/obj/random/junk = 30,
+		/obj/random/trash = 30,
+		/obj/random/maintenance/clean = 15,
+		/obj/random/tool = 15,
+		/obj/random/medical = 3,
+		/obj/random/bomb_supply = 7,
+		/obj/random/contraband = 3,
+		/obj/random/unidentified_medicine/old_medicine = 7,
+		/obj/item/weapon/ore/strangerock = 3,
+		/obj/item/weapon/ore/phoron = 7,
+		/obj/random/handgun = 1,
+		/obj/random/toolbox = 4,
+		/obj/random/drinkbottle = 5
+		)
 
 		new to_spawn(get_turf(src))
 
