@@ -19,7 +19,7 @@
 			C.visible_message("<span class='warning'>\The [C]'s entire form seems to twitch in a very unsettling way.</span>")
 
 
-			if(do_after(C, 2100))
+			if(do_after(user = C, delay = 2100, needhand = 0, incapacitation_flags = null))
 
 				C.tod = null
 				C.setToxLoss(0)
