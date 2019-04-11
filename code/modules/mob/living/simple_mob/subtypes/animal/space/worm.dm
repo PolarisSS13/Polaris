@@ -403,8 +403,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/worm/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/material/knife))
-		var/to_spawn = pickweight(
-		/obj/random/junk = 30,
+		var/to_spawn = pickweight(/obj/random/junk = 30,
 		/obj/random/trash = 30,
 		/obj/random/maintenance/clean = 15,
 		/obj/random/tool = 15,
