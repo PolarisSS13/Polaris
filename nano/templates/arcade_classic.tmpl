@@ -1,0 +1,44 @@
+{{if data.gameover}}
+	centerh2Game Over!h2
+	h3{{data.information}}h3
+	{{helper.link('New Game', null, { new_game  1 })}}center
+{{else}}
+	{{if data.information}}
+		centeri{{data.information}}icenter
+	{{if}}
+centerh3Playerh3center
+	div class='item'
+		div class='itemLabel'
+			Health
+		div
+		div class='itemContent'
+			{{data.player_health}}
+		div
+		div class='itemLabel'
+			Mana
+		div
+		div class='itemContent'
+			{{data.player_mana}}
+		div
+	div
+centerh3Enemy {{data.enemy_name}}h3center
+	div class='item'
+		div class='itemLabel'
+			Health
+		div
+		div class='itemContent'
+			{{data.enemy_health}}
+		div
+		div class='itemLabel'
+			Mana
+		div
+		div class='itemContent'
+			{{data.enemy_mana}}
+		div
+	div
+centerh3Actionsh3center
+	{{helper.link('Attack', null, { attack  1 })}}
+	{{helper.link('Heal', null, { heal  1 })}}
+	{{helper.link('Regain Mana', null, { regain_mana  1 })}}
+	{{helper.link('New Game', null, { new_game  1 })}}
+{{if}} 

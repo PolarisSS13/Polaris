@@ -1,3 +1,5 @@
+#define MAX_TEXTFILE_LENGTH 128000		// 512GQ file
+
 /datum/computer_file/program/filemanager
 	filename = "filemanager"
 	filedesc = "NTOS File Manager"
