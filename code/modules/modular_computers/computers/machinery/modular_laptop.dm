@@ -15,22 +15,22 @@
 	set src in view(1)
 
 	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-		usr << "<span class='warning'>You can't do that.</span>"
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
 	if(!Adjacent(usr))
-		usr << "You can't reach it."
+		to_chat(usr, "You can't reach it.")
 		return
 
 	if(!istype(loc,/turf))
-		usr << "[src] is too bulky!  You'll have to set it down."
+		to_chat(usr, "[src] is too bulky!  You'll have to set it down.")
 		return
 
 	if(!stored_computer)
 		if(contents.len)
 			for(var/obj/O in contents)
 				O.forceMove(src.loc)
-		usr << "\The [src] crumbles to pieces."
+		to_chat(usr, "\The [src] crumbles to pieces.")
 		spawn(5)
 			qdel(src)
 		return
@@ -41,7 +41,7 @@
 	if(stored_computer.cpu)
 		stored_computer.cpu.screen_on = 1
 	loc = stored_computer
-	usr << "You open \the [src]."
+	to_chat(usr, "You open \the [src].")
 
 
 /obj/item/laptop/AltClick()
@@ -51,7 +51,7 @@
 // The actual laptop
 /obj/machinery/modular_computer/laptop
 	name = "laptop computer"
-	desc = "A portable computer"
+	desc = "A portable computer."
 	var/obj/item/laptop/portable = null						// Portable version of this computer, dropped on alt-click to allow transport. Used by laptops.
 	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"					// Icon state when the computer is turned off
@@ -78,11 +78,11 @@
 	set src in view(1)
 
 	if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
-		usr << "<span class='warning'>You can't do that.</span>"
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
 	if(!Adjacent(usr))
-		usr << "<span class='warning'>You can't reach it.</span>"
+		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
 		return
 
 	close_laptop(usr)
@@ -101,10 +101,10 @@
 	src.forceMove(portable)
 	stat |= MAINT
 	if(user)
-		user << "You close \the [src]."
+		to_chat(user, "You close \the [src].")
 	if(cpu)
 		cpu.screen_on = 0
 
 /obj/machinery/modular_computer/laptop/AltClick()
 	if(Adjacent(usr))
-		close_laptop() 
+		close_laptop()

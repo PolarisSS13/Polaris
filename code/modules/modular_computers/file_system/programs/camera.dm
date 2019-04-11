@@ -36,7 +36,7 @@
 	var/obj/machinery/camera/current_camera = null
 	var/current_network = null
 
-/datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
+/datum/nano_module/camera_monitor/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = default_state)
 	var/list/data = host.initial_data()
 
 	data["current_camera"] = current_camera ? current_camera.nano_structure() : null
@@ -92,14 +92,11 @@
 		return 1
 
 	else if(href_list["switch_network"])
-		if(!(href_list["switch_network"] in using_map.station_networks))
-			return
-
 		// Either security access, or access to the specific camera network's department is required in order to access the network.
 		if(can_access_network(usr, get_camera_access(href_list["switch_network"])))
 			current_network = href_list["switch_network"]
 		else
-			usr << "\The [nano_host()] shows an \"Network Access Denied\" error message."
+			to_chat(usr, "\The [nano_host()] shows an \"Network Access Denied\" error message.")
 		return 1
 
 	else if(href_list["reset"])
@@ -164,9 +161,10 @@
 
 /datum/nano_module/camera_monitor/ert
 	name = "Advanced Camera Monitoring Program"
+	//available_to_ai = FALSE
 
 // The ERT variant has access to ERT and crescent cams, but still checks for accesses. ERT members should be able to use it.
-/datum/nano_module/camera_monitor/hacked/modify_networks_list(var/list/networks)
+/datum/nano_module/camera_monitor/ert/modify_networks_list(var/list/networks)
 	..()
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))

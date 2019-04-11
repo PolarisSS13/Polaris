@@ -8,7 +8,7 @@
 	filedesc = "Command and communications program."
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
-	extended_desc = "Used to command and control the station. Can relay long-range communications."
+	extended_desc = "Used to command and control the station. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_heads
 	requires_ntnet = 1
 	size = 12
@@ -24,6 +24,7 @@
 
 /datum/nano_module/program/comm
 	name = "Command and communications program"
+	//available_to_ai = TRUE
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
 	var/msg_line2 = ""
@@ -104,13 +105,15 @@
 	if(..())
 		return 1
 	var/mob/user = usr
-	var/ntn_comm = !!program.get_signal(NTNET_COMMUNICATION)
-	var/ntn_cont = !!program.get_signal(NTNET_SYSTEMCONTROL)
+	var/ntn_comm = program ? !!program.get_signal(NTNET_COMMUNICATION) : 1
+	var/ntn_cont = program ? !!program.get_signal(NTNET_SYSTEMCONTROL) : 1
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")
+			. = 1
 			current_status = text2num(href_list["target"])
 		if("announce")
+			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
 					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
@@ -118,31 +121,29 @@
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
-					usr << "Please allow at least one minute to pass between announcements"
-					SSnanoui.update_uis(src)
-					return
+					to_chat(usr, "Please allow at least one minute to pass between announcements")
+					return TRUE
 				var/input = input(usr, "Please write a message to announce to the station crew.", "Priority Announcement") as null|text
 				if(!input || !can_still_topic())
-					SSnanoui.update_uis(src)
-					return
+					return 1
 				crew_announcement.Announce(input)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
 		if("message")
+			. = 1
 			if(href_list["target"] == "emagged")
 				if(program)
 					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
-							usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							SSnanoui.update_uis(src)
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
-							SSnanoui.update_uis(src)
-							return
+							return 1
 						Syndicate_announce(input, usr)
-						usr << "<span class='notice'>Message transmitted.</span>"
+						to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 						log_say("[key_name(usr)] has made an illegal announcement: [input]")
 						centcomm_message_cooldown = 1
 						spawn(300)//30 second cooldown
@@ -150,34 +151,35 @@
 			else if(href_list["target"] == "regular")
 				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
-						usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
+						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 						SSnanoui.update_uis(src)
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
-						usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
-						SSnanoui.update_uis(src)
-						return
+						to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
+						return 1
 					var/input = sanitize(input("Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
-						SSnanoui.update_uis(src)
-						return
+						return 1
 					CentCom_announce(input, usr)
-					usr << "<span class='notice'>Message transmitted.</span>"
+					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 					log_say("[key_name(usr)] has made an IA Centcomm announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
 		if("shuttle")
+			. = 1
 			if(is_autenthicated(user) && ntn_cont)
 				if(href_list["target"] == "call")
 					var/confirm = alert("Are you sure you want to call the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
 						call_shuttle_proc(usr)
+
 				if(href_list["target"] == "cancel" && !issilicon(usr))
 					var/confirm = alert("Are you sure you want to cancel the shuttle?", name, "No", "Yes")
 					if(confirm == "Yes" && can_still_topic())
 						cancel_call_proc(usr)
 		if("setstatus")
+			. = 1
 			if(is_autenthicated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
@@ -194,8 +196,8 @@
 						post_status("alert", href_list["alert"])
 					else
 						post_status(href_list["target"])
-
 		if("setalert")
+			. = 1
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/current_level = text2num(href_list["target"])
 				var/confirm = alert("Are you sure you want to change alert level to [num2seclevel(current_level)]?", name, "No", "Yes")
@@ -214,9 +216,11 @@
 							if(SEC_LEVEL_BLUE)
 								feedback_inc("alert_comms_blue",1)
 			else
-				usr << "You press button, but red light flashes and nothing happens." //This should never happen
+				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
+
 			current_status = STATE_DEFAULT
 		if("viewmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
@@ -224,18 +228,19 @@
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
+			. = 1
 			if(is_autenthicated(user) && ntn_comm)
 				if(program && program.computer && program.computer.nano_printer)
 					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
-						usr << "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>"
+						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
 					else
 						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
 
-	SSnanoui.update_uis(src)
 
 /datum/nano_module/program/comm/proc/post_status(var/command, var/data1, var/data2)
 

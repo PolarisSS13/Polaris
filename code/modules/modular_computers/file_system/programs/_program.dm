@@ -7,7 +7,7 @@
 /obj/item/modular_computer/initial_data()
 	return get_header_data()
 
-/obj/item/modular_computer/update_layout()
+/obj/machinery/modular_computer/update_layout()
 	return TRUE
 
 /datum/nano_module/program

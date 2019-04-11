@@ -38,4 +38,4 @@
 	hardware_size = 1
 	power_usage = 75
 	max_idle_programs = 2
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3) 
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)

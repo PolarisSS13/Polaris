@@ -51,14 +51,18 @@
 // This is not intended to be obtainable in-game. Intended for adminbus and debugging purposes.
 /obj/item/weapon/computer_hardware/battery_module/lambda
 	name = "lambda coil"
-	desc = "A very complex device that creates it's own bluespace dimension. This dimension may be used to store massive amounts of energy."
+	desc = "A very complex power source compatible with various computers. It is capable of providing power for nearly unlimited duration."
 	icon_state = "battery_lambda"
 	hardware_size = 1
-	battery_rating = 1000000
+	battery_rating = 30000
+
+/obj/item/weapon/computer_hardware/battery_module/lambda/New()
+	..()
+	battery = new/obj/item/weapon/cell/infinite(src)
 
 /obj/item/weapon/computer_hardware/battery_module/diagnostics(var/mob/user)
 	..()
-	user << "Internal battery charge: [battery.charge]/[battery.maxcharge] CU"
+	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
 
 /obj/item/weapon/computer_hardware/battery_module/New()
 	battery = new/obj/item/weapon/cell(src)
@@ -68,4 +72,4 @@
 
 /obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()
 	if(battery)
-		battery.charge = battery.maxcharge 
+		battery.charge = battery.maxcharge
