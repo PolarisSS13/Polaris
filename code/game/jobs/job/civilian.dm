@@ -7,6 +7,7 @@
 	department_flag = CIVILIAN
 	total_positions = 2
 	spawn_positions = 2
+	email_domain = "foodstuffs.nt"
 	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/bartender
@@ -26,6 +27,7 @@
 	department_flag = CIVILIAN
 	total_positions = 2
 	spawn_positions = 2
+	email_domain = "foodstuffs.nt"
 	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chef
@@ -45,6 +47,7 @@
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the city clerk"
+	email_domain = "foodstuffs.nt"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/botanist
 	access = list(access_hydroponics, access_bar, access_kitchen)
@@ -65,6 +68,7 @@
 	spawn_positions = 2
 	supervisors = "the city clerk"
 	selection_color = "#515151"
+	email_domain = "sanitation.gminus.plux.gov.nt"
 	idtype = /obj/item/weapon/card/id/civilian/janitor
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
@@ -104,6 +108,7 @@
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
 	economic_modifier = 7
+	email_domain = "defender.nt"
 	req_admin_notify = 1
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
@@ -146,6 +151,7 @@
 	economic_modifier = 1
 	access = list(access_heads, access_hop, access_maint_tunnels)
 	minimal_access = list(access_heads, access_hop, access_maint_tunnels)
+	email_domain = "gminus.plux.gov.nt"
 
 	minimum_character_age = 16
 	ideal_character_age = 20 //Really anyone can be this job, not just teens
@@ -165,6 +171,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the mayor"
+	//email_domain = "aoki.nt" <-- needs updated when lore is updated
 	selection_color = "#7a4f33"
 	idtype = /obj/item/weapon/card/id/cargo/head
 	economic_modifier = 5
@@ -183,6 +190,7 @@
 	department = "Cargo"
 	department_flag = CIVILIAN
 	total_positions = 4
+	//email_domain = "aoki.nt" <-- SOON
 	spawn_positions = 4
 	supervisors = "the factory manager"
 	selection_color = "#9b633e"
@@ -203,6 +211,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the factory manager"
+	//email_domain = "aoki.nt" <-- SOON
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/mining
 	economic_modifier = 5

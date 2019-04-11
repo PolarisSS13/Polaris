@@ -11,6 +11,7 @@
 	selection_color = "#7F6E2C"
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
+	email_domain = "fire.cityworks.gov.nt"
 	economic_modifier = 10
 
 	minimum_character_age = 30
@@ -32,6 +33,7 @@
 
 /datum/job/engineer
 	title = "Firefighter"
+	email_domain = "fire.cityworks.gov.nt"
 	flag = ENGINEER
 	department_flag = ENGSEC
 	faction = "City"
@@ -51,10 +53,12 @@
 
 /datum/job/atmos
 	title = "Firefighter"
+	email_domain = "fire.cityworks.gov.nt"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
 //Actually let's disable firefighters until we get new OP fire systems in.
 //	faction = "City"
+	email_domain = "fire.cityworks.gov.nt"
 	department = "Engineering"
 	total_positions = 3
 	spawn_positions = 2
@@ -74,6 +78,7 @@
 
 /datum/job/paramedic
 	title = "Paramedic"
+	email_domain = "emt.cityworks.gov.nt"
 	flag = PARAMEDIC
 	department_flag = ENGSEC
 	department = "Engineering"
