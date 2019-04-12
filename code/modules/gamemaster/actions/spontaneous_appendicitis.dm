@@ -1,5 +1,5 @@
 /datum/gm_action/spontaneous_appendicitis
-	name = "grid check"
+	name = "appendicitis"
 	departments = list(ROLE_MEDICAL, ROLE_EVERYONE)
 	chaotic = 1
 
