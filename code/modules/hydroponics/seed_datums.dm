@@ -1212,8 +1212,8 @@
 
 /datum/seed/coca
 	name = "coca"
-	seed_name = "coca leaf"
-	display_name = "coca leaves"
+	seed_name = "coca"
+	display_name = "coca"
 	chems = list("coca" = list(3,5))
 
 /datum/seed/coca/New()
@@ -1230,8 +1230,8 @@
 
 /datum/seed/tobacco
 	name = "tobacco"
-	seed_name = "tobacco leaf"
-	display_name = "tobacco leaves"
+	seed_name = "tobacco"
+	display_name = "tobacco"
 	chems = list("nicotine" = list(3,5))
 
 /datum/seed/tobacco/New()
