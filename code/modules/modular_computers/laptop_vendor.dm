@@ -23,7 +23,7 @@
 	var/dev_battery = 1						// 1: Default, 2: Upgraded, 3: Advanced
 	var/dev_disk = 1						// 1: Default, 2: Upgraded, 3: Advanced
 	var/dev_netcard = 0						// 0: None, 1: Basic, 2: Long-Range
-	var/dev_tesla = 0						// 0: None, 1: Standard (LAPTOP ONLY)
+	var/dev_tesla = 0						// 0: None, 1: Standard
 	var/dev_nanoprint = 0					// 0: None, 1: Standard
 	var/dev_card = 0						// 0: None, 1: Standard
 
@@ -96,7 +96,7 @@
 		if(dev_tesla)
 			total_price += 399
 			if(fabricate)
-				fabricated_laptop.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_laptop)
+				fabricated_laptop.cpu.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_laptop.cpu)
 		if(dev_nanoprint)
 			total_price += 99
 			if(fabricate)
@@ -153,6 +153,10 @@
 			total_price += 199
 			if(fabricate)
 				fabricated_tablet.card_slot = new/obj/item/weapon/computer_hardware/card_slot(fabricated_tablet)
+		if(dev_tesla)
+			total_price += 399
+			if(fabricate)
+				fabricated_tablet.tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(fabricated_tablet)
 		return total_price
 	return 0
 

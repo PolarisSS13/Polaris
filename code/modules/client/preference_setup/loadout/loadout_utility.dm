@@ -158,14 +158,23 @@
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
-/datum/gear/cheaptablet
+/datum/gear/utility/cheaptablet
 	display_name = "cheap tablet computer"
+	display_name = "tablet computer: cheap"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
-	sort_category = "utility"
 	cost = 3
 
-/datum/gear/normaltablet
+/datum/gear/utility/normaltablet
 	display_name = "tablet computer"
+	display_name = "tablet computer: advanced"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
-	sort_category = "utility"
 	cost = 4
+
+/datum/gear/utility/customtablet
+	display_name = "tablet computer: custom"
+	path = /obj/item/modular_computer/tablet
+	cost = 4
+
+/datum/gear/utility/customtablet/New()
+	..()
+	gear_tweaks += new /datum/gear_tweak/tablet()
