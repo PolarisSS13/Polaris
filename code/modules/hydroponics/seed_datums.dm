@@ -519,7 +519,7 @@
 	name = "poppies"
 	seed_name = "poppy"
 	display_name = "poppies"
-	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10))
+	chems = list("nutriment" = list(1,20), "bicaridine" = list(1,10), "poppyresin" = list(1,40))
 	kitchen_tag = "poppy"
 
 /datum/seed/flower/poppy/New()
@@ -1209,3 +1209,39 @@
 	set_trait(TRAIT_YIELD,-1)
 	set_trait(TRAIT_SPREAD,2)
 	set_trait(TRAIT_POTENCY,50)
+
+/datum/seed/coca
+	name = "coca"
+	seed_name = "A plant that grows coca leaves, often used in cocaine."
+	display_name = "coca leaves"
+	chems = list("coca" = list(3,5))
+
+/datum/seed/coca/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"nettles")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#cdea4b")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/tobacco
+	name = "tobacco"
+	seed_name = "Grows tobacco leaves, used in cigarette and cigar production."
+	display_name = "tobacco leaves"
+	chems = list("nicotine" = list(3,5))
+
+/datum/seed/tobacco/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"nettles")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#685511")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
