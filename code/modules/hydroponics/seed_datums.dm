@@ -1212,7 +1212,7 @@
 
 /datum/seed/coca
 	name = "coca"
-	seed_name = "A plant that grows coca leaves, often used in cocaine."
+	seed_name = "coca leaf"
 	display_name = "coca leaves"
 	chems = list("coca" = list(3,5))
 
@@ -1230,7 +1230,7 @@
 
 /datum/seed/tobacco
 	name = "tobacco"
-	seed_name = "Grows tobacco leaves, used in cigarette and cigar production."
+	seed_name = "tobacco leaf"
 	display_name = "tobacco leaves"
 	chems = list("nicotine" = list(3,5))
 
@@ -1242,6 +1242,6 @@
 	set_trait(TRAIT_YIELD,6)
 	set_trait(TRAIT_POTENCY,10)
 	set_trait(TRAIT_PRODUCT_ICON,"nettles")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#685511")
+	set_trait(TRAIT_PRODUCT_COLOUR, "#a89854")
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
