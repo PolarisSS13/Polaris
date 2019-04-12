@@ -1665,6 +1665,7 @@
 #include "code\modules\gamemaster\actions\comms_blackout.dm"
 #include "code\modules\gamemaster\actions\dust.dm"
 #include "code\modules\gamemaster\actions\electrical_storm.dm"
+#include "code\modules\gamemaster\actions\electrified_door.dm"
 #include "code\modules\gamemaster\actions\gravity.dm"
 #include "code\modules\gamemaster\actions\grid_check.dm"
 #include "code\modules\gamemaster\actions\ion_storm.dm"
