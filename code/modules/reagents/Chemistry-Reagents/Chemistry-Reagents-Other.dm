@@ -482,3 +482,19 @@
 
 /datum/reagent/luminol/touch_mob(var/mob/living/L)
 	L.reveal_blood()
+
+/datum/reagent/poppy
+	name = "Poppy Resin"
+	id = "poppyresin"
+	description = "Extracted from poppies."
+	taste_description = "a bitter gooey substance"
+	reagent_state = LIQUID
+	color = "#755202"
+
+/datum/reagent/coca
+	name = "coca extract"
+	id = "coca"
+	description = "Extracted from the coca plant."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#755202"

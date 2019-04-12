@@ -373,13 +373,15 @@
 	required_reagents = list("bicaridine" = 1, "iron" = 2, "spidertoxin" = 1)
 	result_amount = 2
 
+//Removed due to aboose.
+/*
 /datum/chemical_reaction/hyperzine
 	name = "Hyperzine"
 	id = "hyperzine"
 	result = "hyperzine"
 	required_reagents = list("sugar" = 1, "phosphorus" = 1, "sulfur" = 1)
 	result_amount = 3
-
+*/
 /datum/chemical_reaction/stimm
 	name = "Stimm"
 	id = "stimm"
@@ -2240,3 +2242,35 @@
 	result = "qerr_quem"
 	required_reagents = list("nicotine" = 1, "carbon" = 1, "sugar" = 2)
 	result_amount = 4
+
+
+
+///// DRUG RECIPES //////
+
+/datum/chemical_reaction/cocaine
+	name = "cocaine"
+	id = "cocaine"
+	result = "cocaine"
+	required_reagents = list("coca" = 1, "fuel" = 1, "sulfur" = 1)
+	result_amount = 0.5
+
+/datum/chemical_reaction/crack
+	name = "crack"
+	id = "crack"
+	result = "crack"
+	required_reagents = list("cocaine" = 1, "water" = 1, "enzyme" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/heroin
+	name = "heroin"
+	id = "heroin"
+	result = "heroin"
+	required_reagents = list("poppyresin" = 1, "enzyme" = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/meth
+	name = "meth"
+	id = "methamphetamine"
+	result = "methamphetamine"
+	required_reagents = list("methylphenidate" = 1, "fuel" = 1, "sulfur" = 1)
+	result_amount = 1
