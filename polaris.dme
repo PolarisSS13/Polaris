@@ -1688,6 +1688,7 @@
 #include "code\modules\gamemaster\actions\wallrot.dm"
 #include "code\modules\gamemaster\actions\waste_disposal.dm"
 #include "code\modules\gamemaster\actions\window_break.dm"
+#include "code\modules\gamemaster\actions\wormholes.dm"
 #include "code\modules\games\cah.dm"
 #include "code\modules\games\cah_black_cards.dm"
 #include "code\modules\games\cah_white_cards.dm"
