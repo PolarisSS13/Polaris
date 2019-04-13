@@ -30,7 +30,7 @@
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
-
+/*
 /datum/job/engineer
 	title = "Firefighter"
 	email_domain = "fire.cityworks.gov.nt"
@@ -50,14 +50,13 @@
 	minimum_character_age = 18
 	minimal_player_age = 3
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
-
+*/
 /datum/job/atmos
 	title = "Firefighter"
 	email_domain = "fire.cityworks.gov.nt"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
-//Actually let's disable firefighters until we get new OP fire systems in.
-//	faction = "City"
+	faction = "City"
 	email_domain = "fire.cityworks.gov.nt"
 	department = "Engineering"
 	total_positions = 3
