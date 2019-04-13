@@ -310,6 +310,7 @@
 #include "code\datums\repositories\decls.dm"
 #include "code\datums\repositories\radiation.dm"
 #include "code\datums\repositories\repository.dm"
+#include "code\datums\repositories\unique.dm"
 #include "code\datums\supplypacks\atmospherics.dm"
 #include "code\datums\supplypacks\contraband.dm"
 #include "code\datums\supplypacks\costumes.dm"
