@@ -225,13 +225,6 @@
 	required_reagents = list("aluminum" = 1, "iron" = 1, "oxygen" = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/ecstasy
-	name = "Space Drugs"
-	id = "ecstasy"
-	result = "ecstasy"
-	required_reagents = list("mercury" = 1, "sugar" = 1, "lithium" = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/lube
 	name = "Space Lube"
 	id = "lube"
@@ -2262,9 +2255,9 @@
 	result_amount = 2
 
 /datum/chemical_reaction/heroin
-	name = "heroin"
-	id = "heroin"
-	result = "heroin"
+	name = "Heroin"
+	id = "diamorphine"
+	id = "diamorphine"
 	required_reagents = list("poppyresin" = 1, "enzyme" = 1)
 	result_amount = 1
 
@@ -2274,3 +2267,10 @@
 	result = "methamphetamine"
 	required_reagents = list("methylphenidate" = 1, "fuel" = 1, "sulfur" = 1)
 	result_amount = 1
+
+/datum/chemical_reaction/ecstasy
+	name = "Ecstasy"
+	id = "ecstasy"
+	result = "ecstasy"
+	required_reagents = list("mercury" = 1, "sugar" = 1, "lithium" = 1)
+	result_amount = 3
