@@ -122,7 +122,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 
 
 /datum/reagent/drug/cannabis
-	name = "cannabis"
+	name = "Cannabis"
 	id = "cannabis"
 	description = "A painkilling and toxin healing drug. THC is found in this, and is extracted from the cannabis plant."
 	taste_description = "a strong-tasting plant"
