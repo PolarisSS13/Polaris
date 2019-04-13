@@ -70,6 +70,10 @@
 	battery.charge = 0
 	..()
 
+/obj/item/weapon/computer_hardware/battery_module/Destroy()
+	qdel_null(battery)
+	return ..()
+
 /obj/item/weapon/computer_hardware/battery_module/proc/charge_to_full()
 	if(battery)
 		battery.charge = battery.maxcharge

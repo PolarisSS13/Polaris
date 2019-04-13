@@ -13,6 +13,7 @@ SUBSYSTEM_DEF(nanoui)
 		"nano/css/",\
 		"nano/images/",\
 		"nano/images/status_icons/",\
+		"nano/images/modular_computers/",
 		"nano/js/",\
 		"nano/templates/"\
 	)
