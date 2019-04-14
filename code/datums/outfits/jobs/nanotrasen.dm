@@ -1,5 +1,5 @@
-/decl/hierarchy/outfit/nanotrasen
-	hierarchy_type = /decl/hierarchy/outfit/nanotrasen
+/decl/hierarchy/outfit/job/nanotrasen
+	hierarchy_type = /decl/hierarchy/outfit/job/nanotrasen
 	uniform = /obj/item/clothing/under/rank/centcom
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/white
@@ -11,12 +11,12 @@
 	pda_type = /obj/item/device/pda/heads
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
 
-/decl/hierarchy/outfit/nanotrasen/post_equip(mob/living/carbon/human/H)
+/decl/hierarchy/outfit/job/nanotrasen/post_equip(mob/living/carbon/human/H)
 	..()
 	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
 		permit.set_name(H.real_name)
 
-/decl/hierarchy/outfit/nanotrasen/representative
+/decl/hierarchy/outfit/job/nanotrasen/representative
 	name = "Nanotrasen Representative"
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
 	belt = /obj/item/weapon/gun/projectile/pistol
@@ -24,7 +24,7 @@
 	r_hand = /obj/item/weapon/clipboard
 	id_pda_assignment = "Nanotrasen Representative"
 
-/decl/hierarchy/outfit/nanotrasen/guard //Deployed to keep NT officials safe, like the city hall guard -- not death squad
+/decl/hierarchy/outfit/job/nanotrasen/guard //Deployed to keep NT officials safe, like the city hall guard -- not death squad
 	name = "Nanotrasen Security" //Name also subject to lore nerds, Nanotrasen Guard just seemed wimpy
 	uniform = /obj/item/clothing/under/utility/sifguard
 	suit = /obj/item/clothing/suit/armor/pcarrier/medium/nt
@@ -41,7 +41,7 @@
 							 /obj/item/weapon/gun/projectile/p92x/large = 1)
 	id_pda_assignment = "Nanotrasen Security"
 
-/decl/hierarchy/outfit/nanotrasen/officer
+/decl/hierarchy/outfit/job/nanotrasen/officer
 	name = "Nanotrasen Officer"
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
 	suit = /obj/item/clothing/suit/dress/expedition
@@ -49,7 +49,7 @@
 	belt = /obj/item/weapon/gun/energy
 	id_pda_assignment = "Nanotrasen Officer"
 
-/decl/hierarchy/outfit/nanotrasen/captain
+/decl/hierarchy/outfit/job/nanotrasen/captain
 	name = "Nanotrasen Regional Commander" //Name subject to change depending on what lore nerds think fits
 	uniform = /obj/item/clothing/under/suit_jacket/really_black
 	suit = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
@@ -57,7 +57,7 @@
 	belt = /obj/item/weapon/gun/energy/toxgun //Fancy gun for bosses that like melting the insides of people
 	id_pda_assignment = "Nanotrasen Regional Commander"
 
-/decl/hierarchy/outfit/nanotrasen/cbia
+/decl/hierarchy/outfit/job/nanotrasen/cbia
 	name = "Nanotrasen CBIA Agent"
 	head = /obj/item/clothing/head/beret/centcom/officer
 	uniform = /obj/item/clothing/under/rank/centcom
