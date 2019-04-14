@@ -621,7 +621,7 @@
 		else
 			to_chat(user, "Unable to locate a radio.")
 
-	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda)||istype(W, /obj/item/weapon/card/robot))			// trying to unlock the interface with an ID card
+	else if (W.GetID())			// trying to unlock the interface with an ID card
 		if(emagged)//still allow them to open the cover
 			to_chat(user, "The interface seems slightly damaged")
 		if(opened)
@@ -714,17 +714,18 @@
 			return 1
 	return 0
 
-/mob/living/silicon/robot/proc/check_access(obj/item/weapon/card/id/I)
+/mob/living/silicon/robot/proc/check_access(obj/item/I)
 	if(!istype(req_access, /list)) //something's very wrong
 		return 1
 
 	var/list/L = req_access
 	if(!L.len) //no requirements
 		return 1
-	if(!I || !istype(I, /obj/item/weapon/card/id) || !I.access) //not ID or no access
+	if(!I) //nothing to check with..?
 		return 0
+	var/access_found = I.GetAccess()
 	for(var/req in req_access)
-		if(req in I.access) //have one of the required accesses
+		if(req in access_found) //have one of the required accesses
 			return 1
 	return 0
 
