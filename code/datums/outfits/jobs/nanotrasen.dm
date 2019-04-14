@@ -34,7 +34,7 @@
 	gloves = /obj/item/clothing/gloves/swat
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud/tactical
 	back = /obj/item/weapon/storage/backpack/messenger/black
-	backpack_contents = list(/obj/item/weapon/handcuffs = 1,
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1, /obj/item/weapon/handcuffs = 1,
 							 /obj/item/clothing/accessory/holster/leg = 1,
 							 /obj/item/clothing/accessory/armband/med/color = 1,
 							 /obj/item/weapon/gun/energy/stunrevolver = 1,
