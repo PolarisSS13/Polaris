@@ -60,7 +60,7 @@ em						{font-style: normal;font-weight: bold;}
 .srvradio				{color: #6eaa2c;}
 .expradio				{color: #555555;}
 .legradio				{color: #871b68;}
-.govradio				{color: #FF69B4;}
+.govradio				{color: #cc1287;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
