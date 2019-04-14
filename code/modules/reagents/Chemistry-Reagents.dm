@@ -12,6 +12,7 @@
 	var/list/data = null
 	var/volume = 0
 	var/metabolism = REM // This would be 0.2 normally
+	var/list/filtered_organs = list()	// Organs that will slow the processing of this chemical.
 	var/mrate_static = FALSE	//If the reagent should always process at the same speed, regardless of species, make this TRUE
 	var/ingest_met = 0
 	var/touch_met = 0
@@ -79,6 +80,11 @@
 					removed *= 0.8
 				else	// Otherwise, chemicals process as per percentage of your current pulse, or, if you have no pulse but are alive, by a miniscule amount.
 					removed *= max(0.1, H.pulse / Pump.standard_pulse_level)
+			if(filtered_organs && filtered_organs.len)
+				for(var/organ_tag in filtered_organs)
+					var/obj/item/organ/internal/O = H.internal_organs_by_name[organ_tag]
+					if(O && !O.is_broken() && prob(max(0, O.max_damage - O.damage)))
+						removed *= 0.8
 
 	if(ingest_met && (active_metab.metabolism_class == CHEM_INGEST))
 		removed = ingest_met
