@@ -11,6 +11,7 @@ var/const/ENGINEER				=(1<<6)
 var/const/ATMOSTECH				=(1<<7)
 var/const/AI					=(1<<8)
 var/const/CYBORG				=(1<<9)
+
 var/const/PRESIDENT				=(1<<10)
 var/const/PARAMEDIC				=(1<<11)
 var/const/NANOTRASEN			=(1<<12)
