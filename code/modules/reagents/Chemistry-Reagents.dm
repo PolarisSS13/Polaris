@@ -76,7 +76,7 @@
 				var/obj/item/organ/internal/heart/Pump = H.internal_organs_by_name[O_HEART]
 				if(!Pump)
 					removed *= 0.1
-				else if(Pump.standard_pulse_level == PULSE_NONE)	// No pulse means chemicals process a little bit slower than normal.
+				else if(Pump.standard_pulse_level == PULSE_NONE)	// No pulse normally means chemicals process a little bit slower than normal.
 					removed *= 0.8
 				else	// Otherwise, chemicals process as per percentage of your current pulse, or, if you have no pulse but are alive, by a miniscule amount.
 					removed *= max(0.1, H.pulse / Pump.standard_pulse_level)
