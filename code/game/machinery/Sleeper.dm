@@ -395,6 +395,6 @@
 	icon_state = "sleeper"
 	stasis_level = 100 //Just one setting
 
-/obj/machinery/sleeper/survival_pod/New()
+/obj/machinery/sleeper/survival_pod/Initialize()
 	..()
 	RefreshParts()
