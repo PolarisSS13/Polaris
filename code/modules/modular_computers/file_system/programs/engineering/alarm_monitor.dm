@@ -4,6 +4,8 @@
 	nanomodule_path = /datum/nano_module/alarm_monitor/engineering
 	ui_header = "alarm_green.gif"
 	program_icon_state = "alert-green"
+	program_key_state = "atmos_key"
+	program_menu_icon = "alert"
 	extended_desc = "This program provides visual interface for the alarm system."
 	requires_ntnet = 1
 	network_destination = "alarm monitoring network"
@@ -43,7 +45,7 @@
 
 /datum/nano_module/alarm_monitor/engineering/New()
 	..()
-	alarm_handlers = list(atmosphere_alarm, fire_alarm, power_alarm)
+	alarm_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, power_alarm)
 
 /datum/nano_module/alarm_monitor/security/New()
 	..()
