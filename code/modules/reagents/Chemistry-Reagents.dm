@@ -69,6 +69,17 @@
 		// Metabolism
 		removed *= active_metab.metabolism_speed
 
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			if(H.species.has_organ[O_HEART])
+				var/obj/item/organ/internal/heart/Pump = H.internal_organs_by_name[O_HEART]
+				if(!Pump)
+					removed *= 0.1
+				else if(Pump.standard_pulse_level == PULSE_NONE)	// No pulse means chemicals process a little bit slower than normal.
+					removed *= 0.8
+				else	// Otherwise, chemicals process as per percentage of your current pulse, or, if you have no pulse but are alive, by a miniscule amount.
+					removed *= max(0.1, H.pulse / Pump.standard_pulse_level)
+
 	if(ingest_met && (active_metab.metabolism_class == CHEM_INGEST))
 		removed = ingest_met
 	if(touch_met && (active_metab.metabolism_class == CHEM_TOUCH))
