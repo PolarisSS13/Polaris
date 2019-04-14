@@ -18,7 +18,8 @@
 			high_msg = pick(high_msg_list)
 			M << "<span class='notice'>[high_msg]</span>"
 	..()
-//Space Drugs will be renamed to Ecstasy.
+
+//Space Drugs has been renamed to Ecstasy.
 /datum/reagent/drug/ecstasy
 	name = "Ecstasy"
 	id = "ecstasy"
@@ -98,7 +99,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	M.AdjustParalysis(-2)
 	M.AdjustStunned(-2)
 	M.AdjustWeakened(-2)
-
+	M.add_chemical_effect(CE_PAINKILLER, 20)
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	if(prob(5))
 		M.emote(pick("twitch", "shiver"))
@@ -121,7 +122,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 
 
 /datum/reagent/drug/cannabis
-	name = "cannabis"
+	name = "Cannabis"
 	id = "cannabis"
 	description = "A painkilling and toxin healing drug. THC is found in this, and is extracted from the cannabis plant."
 	taste_description = "a strong-tasting plant"
@@ -134,12 +135,15 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel lightheaded and giggly.",
 	"Everything seems so hilarious.",
 	"You really could go for some takeout right now.",
+	"You momentarily forget where you are.",
 	"You have a mild urge to look over your shoulder.")
 
 /datum/reagent/drug/cannabis/affect_blood(var/mob/living/carbon/M)
 	M.adjustToxLoss(-2)
 	M.druggy = max(M.druggy, 3)
-	M.add_chemical_effect(CE_PAINKILLER, 20)
+	M.heal_organ_damage(6)
+	M.adjustToxLoss(-1.5)
+	M.adjustOxyLoss(-3)
 	M.AdjustStunned(-1)
 	if(prob(7))
 		M.emote(pick("giggle"))
@@ -184,7 +188,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	name = "Cocaine"
 	id = "cocaine"
 	description = "Cocaine, an illegal stimulant often consumed nasally in a powdered form."
-	taste_description = "metallic and bitter."
+	taste_description = "metallic and bitter"
 	overdose = 15
 	reagent_state = LIQUID
 	color = "#FFFFFF" //white
@@ -194,7 +198,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel terrible.")
 
 /datum/reagent/drug/cocaine/affect_blood(var/mob/living/carbon/M)
-	M.add_chemical_effect(CE_PAINKILLER,10)
+	M.add_chemical_effect(CE_PAINKILLER,3)
 	M.adjustBrainLoss(0.25)
 	if(prob(15))
 		M.emote(pick("shiver", "sniff"))
@@ -205,4 +209,35 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 		M.vomit()
 		M.adjustToxLoss(10)
 		M.adjustBrainLoss(5)
+		..()
+
+
+/datum/reagent/drug/crack
+	name = "Crack"
+	id = "crack"
+	description = "Crack is a cheaper, less pure version of cocaine, still having simiar properties. It also has more negative OD effects."
+	taste_description = "like car fuel"
+	overdose = 15
+	reagent_state = LIQUID
+	color = "#FFFFFF" //white
+	high_msg_list = list ("You sniffle a bit.",
+	"You have a mild... headache",
+	"You feel a bit sick...",
+	"You feel hyper and confident",
+	"You feel terrible.")
+
+/datum/reagent/drug/crack/affect_blood(var/mob/living/carbon/M)
+	M.add_chemical_effect(CE_PAINKILLER,1)
+	M.adjustBrainLoss(0.30)
+	if(prob(15))
+		M.emote(pick("shiver", "sniff"))
+		..()
+
+/datum/reagent/drug/crack/overdose(var/mob/living/M as mob)
+	M.adjustToxLoss(1)
+	M.drowsyness = max(M.drowsyness, 10)
+	if(prob(50))
+		M.vomit()
+		M.adjustToxLoss(30)
+		M.adjustBrainLoss(25)
 		..()

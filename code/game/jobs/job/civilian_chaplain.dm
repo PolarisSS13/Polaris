@@ -8,6 +8,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	minimum_character_age = 18
+	email_domain = "churches.nt"
 	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/chaplain
@@ -30,7 +31,7 @@
 
 	spawn(0)
 		var/religion_name = "Unitarianism"
-		var/new_religion = sanitize(input(H, "You are the crew services officer. Would you like to change your religion? Default is Unitarianism", "Name change", religion_name), MAX_NAME_LEN)
+		var/new_religion = sanitize(input(H, "You are the city's priest. Would you like to change your religion? Default is Unitarianism", "Name change", religion_name), MAX_NAME_LEN)
 
 		if (!new_religion)
 			new_religion = religion_name

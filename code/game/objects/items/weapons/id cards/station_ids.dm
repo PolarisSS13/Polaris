@@ -284,12 +284,12 @@
 	icon_state = "eng"
 	primary_color = rgb(189,94,0)
 	secondary_color = rgb(223,159,95)
-
+/*
 /obj/item/weapon/card/id/engineering/engineer
 	assignment = "City Engineer"
 	rank = "City Engineer"
 	job_access_type = /datum/job/engineer
-
+*/
 /obj/item/weapon/card/id/engineering/atmos
 	assignment = "Firefighter"
 	rank = "Firefighter"
@@ -301,8 +301,8 @@
 	icon_state = "engGold"
 	primary_color = rgb(189,94,0)
 	secondary_color = rgb(255,223,127)
-	assignment = "Chief Engineer"
-	rank = "Chief Engineer"
+	assignment = "Fire Chief"
+	rank = "Fire Chief"
 	job_access_type = /datum/job/chief_engineer
 
 /obj/item/weapon/card/id/science

@@ -1,5 +1,6 @@
 /datum/job/hos
 	title = "Chief of Police"
+	email_domain = "secure.plux.gov.nt"
 	flag = HOS
 	faction = "City"
 	department = "Security"
@@ -26,6 +27,7 @@
 
 /datum/job/warden
 	title = "Prison Warden"
+	email_domain = "secure.plux.gov.nt"
 	flag = WARDEN
 	faction = "City"
 	department = "Security"
@@ -46,6 +48,7 @@
 
 /datum/job/detective
 	title = "Detective"
+	email_domain = "secure.plux.gov.nt"
 	flag = DETECTIVE
 	faction = "City"
 	department = "Security"
@@ -66,6 +69,7 @@
 
 /datum/job/officer
 	title = "Police Officer"
+	email_domain = "secure.plux.gov.nt"
 	flag = OFFICER
 	faction = "City"
 	department = "Security"
@@ -86,6 +90,7 @@
 
 /datum/job/prosecutor
 	title = "District Prosecutor"
+	email_domain = "prosecute.nt"
 	flag = PROSECUTOR
 	faction = "City"
 	department = "Security"
@@ -107,6 +112,7 @@
 
 /datum/job/bguard
 	title = "City Hall Guard"
+	email_domain = "secure.plux.gov.nt"
 	flag = BRIDGE
 	department = "Security"
 	department_flag = ENGSEC

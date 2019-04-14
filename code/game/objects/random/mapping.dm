@@ -206,10 +206,10 @@
 				/obj/structure/closet/crate/engineering
 			),
 			prob(2);list(
-				/obj/item/clothing/head/kitty,
-				/obj/item/clothing/head/kitty,
-				/obj/item/clothing/head/kitty,
-				/obj/item/clothing/head/kitty,
+				/obj/item/clothing/head/cakehat,
+				/obj/item/clothing/head/cakehat,
+				/obj/item/clothing/head/cakehat,
+				/obj/item/clothing/head/cakehat,
 				/obj/structure/closet/crate
 			),
 			prob(2);list(
