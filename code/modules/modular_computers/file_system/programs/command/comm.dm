@@ -66,6 +66,9 @@
 	data["current_security_level_title"] = num2seclevel(security_level)
 
 	data["def_SEC_LEVEL_DELTA"] = SEC_LEVEL_DELTA
+	data["def_SEC_LEVEL_YELLOW"] = SEC_LEVEL_YELLOW
+	data["def_SEC_LEVEL_ORANGE"] = SEC_LEVEL_ORANGE
+	data["def_SEC_LEVEL_VIOLET"] = SEC_LEVEL_VIOLET
 	data["def_SEC_LEVEL_BLUE"] = SEC_LEVEL_BLUE
 	data["def_SEC_LEVEL_GREEN"] = SEC_LEVEL_GREEN
 
@@ -215,6 +218,12 @@
 						switch(security_level)
 							if(SEC_LEVEL_GREEN)
 								feedback_inc("alert_comms_green",1)
+							if(SEC_LEVEL_YELLOW)
+								feedback_inc("alert_comms_yellow",1)
+							if(SEC_LEVEL_ORANGE)
+								feedback_inc("alert_comms_orange",1)
+							if(SEC_LEVEL_VIOLET)
+								feedback_inc("alert_comms_violet",1)
 							if(SEC_LEVEL_BLUE)
 								feedback_inc("alert_comms_blue",1)
 			else
