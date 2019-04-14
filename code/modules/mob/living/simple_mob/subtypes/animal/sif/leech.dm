@@ -60,7 +60,8 @@
 
 	holder_type = /obj/item/weapon/holder/leech
 
-	movement_cooldown = -1
+	movement_cooldown = 0
+	aquatic_movement = -2
 
 	melee_damage_lower = 1
 	melee_damage_upper = 5
@@ -128,35 +129,6 @@
 			if(eta_status)
 				stat(null, eta_status)
 		stat("Chemicals", chemicals)
-
-/mob/living/simple_mob/animal/sif/leech/movement_delay()
-	var/tally = 0
-
-	tally = movement_cooldown
-
-	if(force_max_speed)
-		return -3
-
-	for(var/datum/modifier/M in modifiers)
-		if(!isnull(M.haste) && M.haste == TRUE)
-			return -3
-		if(!isnull(M.slowdown))
-			tally += M.slowdown
-
-	var/turf/T = get_turf(src)
-	if(!istype(T, /turf/simulated/floor/water))
-		if(T && T.movement_cost && !hovering)
-			tally += T.movement_cost
-
-	if(purge)
-		if(tally <= 0)
-			tally = 1
-		tally *= purge
-
-	if(m_intent == "walk")
-		tally *= 1.5
-
-	return tally+config.animal_delay
 
 /mob/living/simple_mob/animal/sif/leech/do_special_attack(atom/A)
 	. = TRUE
