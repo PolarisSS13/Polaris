@@ -246,6 +246,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/msg_cargo = list()
 	var/list/msg_service = list()
 	var/list/msg_legal = list()
+	var/list/msg_government = list()
 	var/list/msg_explorer = list()
 
 	var/list/datum/feedback_variable/feedback = new()
@@ -273,6 +274,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 		BR.msg_cargo = msg_cargo
 		BR.msg_service = msg_service
 		BR.msg_legal = msg_legal
+		BR.msg_government = msg_government
 		BR.feedback = feedback
 		BR.messages = messages
 		BR.messages_admin = messages_admin
@@ -314,6 +316,7 @@ var/obj/machinery/blackbox_recorder/blackbox
 	feedback_add_details("radio_usage","SYN-[msg_syndicate.len]")
 	feedback_add_details("radio_usage","CAR-[msg_cargo.len]")
 	feedback_add_details("radio_usage","SRV-[msg_service.len]")
+	feedback_add_details("radio_usage","GOV-[msg_government.len]")
 	feedback_add_details("radio_usage","LEG-[msg_legal.len]")
 	feedback_add_details("radio_usage","OTH-[messages.len]")
 	feedback_add_details("radio_usage","PDA-[pda_msg_amt]")

@@ -13,6 +13,8 @@ var/const/AI					=(1<<8)
 var/const/CYBORG				=(1<<9)
 var/const/PRESIDENT				=(1<<10)
 var/const/PARAMEDIC				=(1<<11)
+var/const/NANOTRASEN			=(1<<12)
+var/const/CBIA					=(1<<13)
 
 
 var/const/MEDSCI				=(1<<1)
@@ -59,6 +61,8 @@ var/list/assistant_occupations = list(
 
 
 var/list/gov_positions = list(
+	"Nanotrasen Representative",
+	"CBIA Agent",
 	"President"
 )
 

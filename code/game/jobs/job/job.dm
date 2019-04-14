@@ -21,14 +21,14 @@
 	var/head_position = 0                 // Is this position Command?
 	var/minimum_character_age = 18
 	var/ideal_character_age = 30
-
 	var/account_allowed = 1				  // Does this job type come with a station account?
 	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
-
 	var/outfit_type
-	
+
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.nt"
+
+	var/hard_whitelisted = 0 // jobs that are hard whitelisted need players to be added to hardjobwhitelist.txt with the format [ckey] - [job] in order to work.
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)

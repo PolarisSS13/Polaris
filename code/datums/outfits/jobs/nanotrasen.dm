@@ -3,19 +3,23 @@
 	uniform = /obj/item/clothing/under/rank/centcom
 	shoes = /obj/item/clothing/shoes/laceup
 	gloves = /obj/item/clothing/gloves/white
-	l_ear = /obj/item/device/radio/headset/heads/hop
-	//glasses = /obj/item/clothing/glasses/sunglasses
-
+	l_ear = /obj/item/device/radio/headset/government
+	glasses = /obj/item/clothing/glasses/sunglasses
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/centcom	//station
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/heads
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
+
+/decl/hierarchy/outfit/nanotrasen/post_equip(mob/living/carbon/human/H)
+	..()
+	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+		permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/nanotrasen/representative
 	name = "Nanotrasen Representative"
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
 	belt = /obj/item/weapon/gun/projectile/pistol
-	l_ear = /obj/item/device/radio/headset/nt
 	l_hand = /obj/item/weapon/paper
 	r_hand = /obj/item/weapon/clipboard
 	id_pda_assignment = "Nanotrasen Representative"
@@ -29,9 +33,8 @@
 	belt = /obj/item/weapon/storage/belt/security
 	gloves = /obj/item/clothing/gloves/swat
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud/tactical
-	l_ear = /obj/item/device/radio/headset/nt
 	back = /obj/item/weapon/storage/backpack/messenger/black
-	backpack_contents = list(/obj/item/weapon/handcuffs = 1,
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1, /obj/item/weapon/handcuffs = 1,
 							 /obj/item/clothing/accessory/holster/leg = 1,
 							 /obj/item/clothing/accessory/armband/med/color = 1,
 							 /obj/item/weapon/gun/energy/stunrevolver = 1,
@@ -43,7 +46,6 @@
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
 	suit = /obj/item/clothing/suit/dress/expedition
 	head = /obj/item/clothing/head/dress/expedition
-	l_ear = /obj/item/device/radio/headset/nt
 	belt = /obj/item/weapon/gun/energy
 	id_pda_assignment = "Nanotrasen Officer"
 
@@ -51,7 +53,16 @@
 	name = "Nanotrasen Regional Commander" //Name subject to change depending on what lore nerds think fits
 	uniform = /obj/item/clothing/under/suit_jacket/really_black
 	suit = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
-	l_ear = /obj/item/device/radio/headset/nt
 	head = /obj/item/clothing/head/beret/centcom/captain
 	belt = /obj/item/weapon/gun/energy/toxgun //Fancy gun for bosses that like melting the insides of people
 	id_pda_assignment = "Nanotrasen Regional Commander"
+
+/decl/hierarchy/outfit/nanotrasen/cbia
+	name = "Nanotrasen CBIA Agent"
+	head = /obj/item/clothing/head/beret/centcom/officer
+	uniform = /obj/item/clothing/under/rank/centcom
+	shoes = /obj/item/clothing/shoes/laceup
+	gloves = /obj/item/clothing/gloves/white
+	glasses = /obj/item/clothing/glasses/sunglasses
+	belt = /obj/item/weapon/gun/energy
+	id_pda_assignment = "Nanotrasen CBIA Agent"

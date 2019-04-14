@@ -375,6 +375,7 @@
 	if(!job)	return 0
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
+	if(!is_hard_whitelisted(src, job)) return 0
 	if(!job.player_old_enough(src.client))	return 0
 	return 1
 
@@ -441,7 +442,7 @@
 		character.buckled.set_dir(character.dir)
 
 	ticker.mode.latespawn(character)
-	matchmaker.do_matchmaking()
+	matchmaker.do_matchmaking(character)
 
 	if(character.mind.assigned_role != "Cyborg")
 		data_core.manifest_inject(character)
@@ -452,7 +453,7 @@
 		AnnounceArrival(character, rank, join_message)
 	else
 		AnnounceCyborg(character, rank, join_message)
-		
+
 	qdel(src)
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)

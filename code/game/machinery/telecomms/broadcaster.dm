@@ -386,6 +386,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_service += blackbox_msg
 				if(LEG_FREQ)
 					blackbox.msg_legal += blackbox_msg
+				if(GOV_FREQ)
+					blackbox.msg_government += blackbox_msg
 				if(EXP_FREQ)
 					blackbox.msg_explorer += blackbox_msg
 				else
@@ -572,6 +574,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_service += blackbox_msg
 				if(LEG_FREQ)
 					blackbox.msg_legal += blackbox_msg
+				if(GOV_FREQ)
+					blackbox.msg_government += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
