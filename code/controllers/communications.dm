@@ -69,6 +69,7 @@ Radio:
 1459 - standard radio chat
 1351 - Science
 1281 - Legal
+1295 - Government
 1353 - Command
 1355 - Medical
 1357 - Engineering
@@ -127,6 +128,9 @@ var/const/LEG_FREQ = 1281
 var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
+// nanotrasen & gov channels
+var/const/GOV_FREQ = 1295
+
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
 	"Science"		= SCI_FREQ,
@@ -136,6 +140,7 @@ var/list/radiochannels = list(
 	"Fire"			= ENG_FREQ,
 	"Police" 		= SEC_FREQ,
 	"Military" 		= ERT_FREQ,
+	"Government"	= GOV_FREQ,
 	"Special Ops" 	= DTH_FREQ,
 	"Mercenary" 	= SYND_FREQ,
 	"Raider"		= RAID_FREQ,
@@ -192,6 +197,8 @@ var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC
 		return "expradio"
 	if(frequency == ENT_FREQ) // entertainment
 		return "entradio"
+	if(frequency == GOV_FREQ) // entertainment
+		return "govradio"
 	if(frequency in DEPT_FREQS)
 		return "deptradio"
 

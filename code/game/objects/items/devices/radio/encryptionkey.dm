@@ -126,10 +126,15 @@
 	icon_state = "srv_cypherkey"
 	channels = list("Legal" = 1)
 
-/obj/item/device/encryptionkey/headset_judge
+/obj/item/device/encryptionkey/heads/headset_judge
 	name = "judge radio encryption key"
 	icon_state = "srv_cypherkey"
 	channels = list("Legal" = 1, "Command" = 1, "Police" = 1)
+
+/obj/item/device/encryptionkey/heads/headset_government
+	name = "government encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Government" = 1, "Military" = 1, "Science" = 1, "Command" = 1, "Hospital" = 1, "Fire" = 1, "Police" = 1, "Supply" = 1, "Service" = 1)
 
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"

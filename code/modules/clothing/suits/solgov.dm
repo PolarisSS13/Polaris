@@ -128,7 +128,7 @@
 	name = "clasped dress jacket"
 	desc = "A uniform dress jacket with gold toggles."
 	icon_state = "whitedress"
-	item_state = "labcoat"
+	item_state = "whitedress"
 	blood_overlay_type = "coat"
 
 /obj/item/clothing/suit/storage/toggle/dress/fleet
@@ -139,7 +139,7 @@
 	name = "fleet command dress jacket"
 	desc = "A crisp white SCG Fleet dress jacket dripping with gold accents. So bright it's blinding."
 	icon_state = "whitedress_com"
-	item_state = "labcoat"
+	item_state = "whitedress_com"
 	blood_overlay_type = "coat"
 
 /obj/item/clothing/suit/dress/marine
