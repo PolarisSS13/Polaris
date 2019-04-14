@@ -13,11 +13,11 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 
-	outfit_type = /decl/hierarchy/outfit/nanotrasen/representative
+	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/representative
 
-	alt_titles = list("Nanotrasen Security" = /decl/hierarchy/outfit/nanotrasen/guard,
-                      "Nanotrasen Officer" = /decl/hierarchy/outfit/nanotrasen/officer,
-					  "Nanotrasen Regional Commander" = /decl/hierarchy/outfit/nanotrasen/captain)
+	alt_titles = list("Nanotrasen Security" = /decl/hierarchy/outfit/job/nanotrasen/guard,
+                      "Nanotrasen Officer" = /decl/hierarchy/outfit/job/nanotrasen/officer,
+					  "Nanotrasen Regional Commander" = /decl/hierarchy/outfit/job/nanotrasen/captain)
 	email_domain = "gov.nt"
 	economic_modifier = 40
 	minimum_character_age = 20 // Pushing it I guess, but possible
@@ -41,7 +41,7 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	email_domain = "cbia.gov.nt"
-	outfit_type = /decl/hierarchy/outfit/nanotrasen/cbia
+	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/cbia
 
 	economic_modifier = 40
 	minimum_character_age = 20 // Pushing it I guess, but possible
