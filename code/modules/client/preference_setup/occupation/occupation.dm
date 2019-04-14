@@ -18,6 +18,9 @@
 	S["job_engsec_high"]	>> pref.job_engsec_high
 	S["job_engsec_med"]		>> pref.job_engsec_med
 	S["job_engsec_low"]		>> pref.job_engsec_low
+	S["job_govlaw_high"]	>> pref.job_govlaw_high
+	S["job_govlaw_med"]		>> pref.job_govlaw_med
+	S["job_govlaw_low"]		>> pref.job_govlaw_low
 	S["player_alt_titles"]	>> pref.player_alt_titles
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
@@ -31,6 +34,9 @@
 	S["job_engsec_high"]	<< pref.job_engsec_high
 	S["job_engsec_med"]		<< pref.job_engsec_med
 	S["job_engsec_low"]		<< pref.job_engsec_low
+	S["job_govlaw_high"]	<< pref.job_govlaw_high
+	S["job_govlaw_med"]		<< pref.job_govlaw_med
+	S["job_govlaw_low"]		<< pref.job_govlaw_low
 	S["player_alt_titles"]	<< pref.player_alt_titles
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
@@ -44,6 +50,10 @@
 	pref.job_engsec_high	= sanitize_integer(pref.job_engsec_high, 0, 65535, initial(pref.job_engsec_high))
 	pref.job_engsec_med 	= sanitize_integer(pref.job_engsec_med, 0, 65535, initial(pref.job_engsec_med))
 	pref.job_engsec_low 	= sanitize_integer(pref.job_engsec_low, 0, 65535, initial(pref.job_engsec_low))
+	pref.job_govlaw_high	= sanitize_integer(pref.job_govlaw_high, 0, 65535, initial(pref.job_govlaw_high))
+	pref.job_govlaw_med 	= sanitize_integer(pref.job_govlaw_med, 0, 65535, initial(pref.job_govlaw_med))
+	pref.job_govlaw_low 	= sanitize_integer(pref.job_govlaw_low, 0, 65535, initial(pref.job_govlaw_low))
+
 	if(!(pref.player_alt_titles)) pref.player_alt_titles = new()
 
 	if(!job_master)
@@ -208,14 +218,17 @@
 			pref.job_civilian_high = 0
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
+			pref.job_govlaw_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
 			pref.job_civilian_med |= pref.job_civilian_high
 			pref.job_medsci_med |= pref.job_medsci_high
 			pref.job_engsec_med |= pref.job_engsec_high
+			pref.job_govlaw_med |= pref.job_govlaw_high
 			pref.job_civilian_high = 0
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
+			pref.job_govlaw_high = 0
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -248,6 +261,17 @@
 					pref.job_engsec_low &= ~job.flag
 				else
 					pref.job_engsec_low |= job.flag
+
+		if(GOVLAW)
+			switch(level)
+				if(2)
+					pref.job_govlaw_high = job.flag
+					pref.job_govlaw_med &= ~job.flag
+				if(3)
+					pref.job_govlaw_med |= job.flag
+					pref.job_govlaw_low &= ~job.flag
+				else
+					pref.job_govlaw_low |= job.flag
 	return 1
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
@@ -262,6 +286,10 @@
 	pref.job_engsec_high = 0
 	pref.job_engsec_med = 0
 	pref.job_engsec_low = 0
+
+	pref.job_govlaw_high = 0
+	pref.job_govlaw_med = 0
+	pref.job_govlaw_low = 0
 
 	pref.player_alt_titles.Cut()
 
@@ -295,4 +323,13 @@
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+
+		if(GOVLAW)
+			switch(level)
+				if(1)
+					return job_govlaw_high
+				if(2)
+					return job_govlaw_med
+				if(3)
+					return job_govlaw_low
 	return 0

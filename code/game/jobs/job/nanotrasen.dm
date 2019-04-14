@@ -3,7 +3,7 @@
 	flag = NANOTRASEN
 	department = "Command"
 	head_position = 0
-	department_flag = ENGSEC
+	department_flag = GOVLAW
 	faction = "City"
 	total_positions = -1
 	spawn_positions = -1
@@ -31,7 +31,7 @@
 	flag = CBIA
 	department = "Command"
 	head_position = 0
-	department_flag = ENGSEC
+	department_flag = GOVLAW
 	faction = "City"
 	total_positions = -1
 	spawn_positions = -1
@@ -54,3 +54,32 @@
 	get_all_station_access()
 	get_all_centcom_access()
 	return
+
+/datum/job/president
+	title = "President"
+	flag = PRESIDENT
+	department = "Command"
+	head_position = 1
+	department_flag = GOVLAW
+	faction = "City"
+	total_positions = 0
+	spawn_positions = 0
+	supervisors = "NanoTrasen"
+	selection_color = "#1D1D4F"
+	idtype = /obj/item/weapon/card/id/centcom/station/president
+	req_admin_notify = 1
+	access = list() 			//See get_access()
+	minimal_access = list() 	//See get_access()
+	minimal_player_age = 14
+	email_domain = "president.gov.nt"
+	economic_modifier = 40
+
+	minimum_character_age = 30
+	ideal_character_age = 50
+	outfit_type = /decl/hierarchy/outfit/job/heads/president
+
+/datum/job/president/get_access()
+	get_all_station_access()
+	get_all_centcom_access()
+	return
+
