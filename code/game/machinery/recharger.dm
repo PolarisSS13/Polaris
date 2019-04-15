@@ -49,7 +49,7 @@ obj/machinery/recharger
 			if(!C.battery_module)
 				to_chat(user, "This device does not have a battery installed.")
 				return
-		if(!G.get_cell())
+		else if(!G.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
 			return
 
