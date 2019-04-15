@@ -59,7 +59,7 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(!is_hard_whitelisted(player, rank))
+			if(!is_hard_whitelisted(player, job))
 				return 0
 
 			var/position_limit = job.total_positions
