@@ -311,19 +311,8 @@ GLOBAL_LIST_EMPTY(solars_list)
 
 /obj/machinery/power/solar_control/Initialize()
 	. = ..()
-	if(!powernet)
-		return
-	set_panels(cdir)
 	connect_to_network()
-
-	// Automatically sets the solars, if allowed.
-	if(auto_start == SOLAR_AUTO_START_YES || (auto_start == SOLAR_AUTO_START_CONFIG && config.autostart_solars))
-		track = 2 // Auto tracking mode.
-		search_for_connected()
-		if(connected_tracker)
-			connected_tracker.set_angle(SSsun.sun.angle)
-		set_panels(cdir)
-
+	set_panels(cdir)
 
 /obj/machinery/power/solar_control/Destroy()
 	for(var/obj/machinery/power/solar/M in connected_panels)
@@ -331,6 +320,22 @@ GLOBAL_LIST_EMPTY(solars_list)
 	if(connected_tracker)
 		connected_tracker.unset_control()
 	return ..()
+
+/obj/machinery/power/solar_control/proc/auto_start(forced = FALSE)
+	// Automatically sets the solars, if allowed.
+	if(forced || auto_start == SOLAR_AUTO_START_YES || (auto_start == SOLAR_AUTO_START_CONFIG && config.autostart_solars) )
+		track = 2 // Auto tracking mode.
+		search_for_connected()
+		if(connected_tracker)
+			connected_tracker.set_angle(SSsun.sun.angle)
+		set_panels(cdir)
+
+// This would use LateInitialize(), however the powernet does not appear to exist during that time.
+/hook/roundstart/proc/auto_start_solars()
+	for(var/a in GLOB.solars_list)
+		var/obj/machinery/power/solar_control/SC = a
+		SC.auto_start()
+	return TRUE
 
 /obj/machinery/power/solar_control/drain_power()
 	return -1
