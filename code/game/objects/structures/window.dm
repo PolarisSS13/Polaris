@@ -484,6 +484,7 @@
 	force_threshold = 3
 
 /obj/structure/window/basic/full
+	icon_state = "window-full"
 	maxhealth = 24
 	fulltile = TRUE
 
@@ -500,6 +501,7 @@
 	force_threshold = 5
 
 /obj/structure/window/phoronbasic/full
+	icon_state = "phoronwindow-full"
 	maxhealth = 80
 	fulltile = TRUE
 
@@ -517,6 +519,7 @@
 	force_threshold = 10
 
 /obj/structure/window/phoronreinforced/full
+	icon_state = "phoronrwindow-full"
 	maxhealth = 160
 	fulltile = TRUE
 
@@ -533,7 +536,7 @@
 	force_threshold = 6
 
 /obj/structure/window/reinforced/full
-	icon_state = "fwindow"
+	icon_state = "rwindow-full"
 	maxhealth = 80
 	fulltile = TRUE
 
@@ -570,7 +573,7 @@
 	var/id
 
 /obj/structure/window/reinforced/polarized/full
-	icon_state = "fwindow"
+	icon_state = "rwindow-full"
 	maxhealth = 80
 	fulltile = TRUE
 
