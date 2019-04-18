@@ -157,14 +157,14 @@ var/list/tape_roll_applications = list()
 			for(var/dir in cardinal)
 				T = get_step(start, dir)
 				if(T && T.density)
-					possible_dirs += dir
+					possible_dirs |= dir
 				else
 					for(var/obj/structure/window/W in T)
 						if(W.is_fulltile() || W.dir == reverse_dir[dir])
-							possible_dirs += dir
+							possible_dirs |= dir
 			for(var/obj/structure/window/window in start)
 				if(istype(window) && !window.is_fulltile())
-					possible_dirs += window.dir
+					possible_dirs |= window.dir
 			if(!possible_dirs)
 				start = null
 				update_icon()
