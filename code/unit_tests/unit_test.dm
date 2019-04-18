@@ -37,10 +37,10 @@ var/total_unit_tests = 0
 	while(!Master.current_runlevel)	// Make sure the initial startup is complete.
 		if(!said_msg)
 			said_msg = 1
-			log_unit_test("Waiting for subystems initilization to finish.")
+			log_unit_test("Waiting for subsystems initilization to finish.")
 		stoplag(10)
 
-	world.save_mode("extended")
+	world.save_mode("testing")
 
 	sleep(1)
 
