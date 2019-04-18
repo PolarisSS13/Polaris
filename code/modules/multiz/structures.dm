@@ -68,7 +68,7 @@
 	if(target_ladder)
 		M.forceMove(get_turf(target_ladder))
 
-/obj/machinery/power/supermatter/attack_robot(var/mob/M)
+/obj/structure/ladder/attack_robot(var/mob/M)
 	attack_hand(M)
 	return
 
