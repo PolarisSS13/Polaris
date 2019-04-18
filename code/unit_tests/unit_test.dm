@@ -40,7 +40,7 @@ var/total_unit_tests = 0
 			log_unit_test("Waiting for subsystems initilization to finish.")
 		stoplag(10)
 
-	world.save_mode("testing")
+	master_mode = "testing"
 
 	sleep(1)
 
