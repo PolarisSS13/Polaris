@@ -2,40 +2,63 @@
  * Fishing! Contains normal fishing rods and nets.
  */
 
-#define FISHING_RARE     "rare"
-#define FISHING_UNCOMMON "uncommon"
-#define FISHING_COMMON   "common"
-#define FISHING_JUNK     "junk"
-#define FISHING_NOTHING  "nothing"
-
-/turf/simulated/floor/water
-	var/has_fish = TRUE //If the water has fish or not.
-
-	var/list/rare_fish_list = list(
+GLOBAL_LIST_INIT(generic_fishing_rare_list, list(
 		/mob/living/simple_mob/animal/passive/fish/solarfish = 1,
 		/mob/living/simple_mob/animal/passive/fish/icebass = 5,
 		/mob/living/simple_mob/animal/passive/fish/koi = 3
-		)
+		))
 
-	var/list/uncommon_fish_list = list(
+GLOBAL_LIST_INIT(generic_fishing_uncommon_list, list(
 		/mob/living/simple_mob/animal/passive/fish/salmon = 6,
 		/mob/living/simple_mob/animal/passive/fish/pike = 10,
 		/mob/living/simple_mob/animal/passive/fish/javelin = 3,
 		/mob/living/simple_mob/animal/passive/crab/sif = 1
-		)
+		))
 
-	var/list/common_fish_list = list(
+GLOBAL_LIST_INIT(generic_fishing_common_list, list(
 		/mob/living/simple_mob/animal/passive/fish/bass = 10,
 		/mob/living/simple_mob/animal/passive/fish/trout = 8,
 		/mob/living/simple_mob/animal/passive/fish/perch = 6,
 		/mob/living/simple_mob/animal/passive/fish/murkin = 8,
 		/mob/living/simple_mob/animal/passive/fish/rockfish = 5,
 		/mob/living/simple_mob/animal/passive/crab = 1
-		)
+		))
 
-	var/list/junk_list = list(/obj/item/clothing/shoes/boots/cowboy, /obj/random/fishing_junk)	// 50-50 boots or junk.
+GLOBAL_LIST_INIT(generic_fishing_junk_list, list(
+		/obj/item/clothing/shoes/boots/cowboy = 1,
+		/obj/random/fishing_junk = 10
+		))
 
-	var/list/fishing_loot = list(FISHING_RARE = 5, FISHING_UNCOMMON = 15, FISHING_COMMON = 30, FISHING_JUNK = 30, FISHING_NOTHING = 40)
+GLOBAL_LIST_INIT(generic_fishing_pool_list, list(
+		/obj/item/weapon/bikehorn/rubberducky = 5,
+		/obj/item/toy/plushie/carp = 20,
+		/obj/random/junk = 80,
+		/obj/random/trash = 80,
+		/obj/item/weapon/spacecash/c1 = 10,
+		/obj/item/weapon/spacecash/c10 = 5,
+		/obj/item/weapon/spacecash/c100 = 1
+		))
+
+#define FISHING_RARE     "rare"
+#define FISHING_UNCOMMON "uncommon"
+#define FISHING_COMMON   "common"
+#define FISHING_JUNK     "junk"
+#define FISHING_NOTHING  "nothing"
+
+GLOBAL_LIST_INIT(generic_fishing_chance_list, list(FISHING_RARE = 5, FISHING_UNCOMMON = 15, FISHING_COMMON = 30, FISHING_JUNK = 30, FISHING_NOTHING = 40))
+
+/turf/simulated/floor/water
+	var/has_fish = TRUE //If the water has fish or not.
+
+	var/list/rare_fish_list	// Rare list.
+
+	var/list/uncommon_fish_list	// Uncommon list.
+
+	var/list/common_fish_list	// Common list.
+
+	var/list/junk_list	// Junk item list.
+
+	var/list/fishing_loot	// Chance list.
 
 	var/fishing_cooldown = 30 SECONDS
 	var/last_fished = 0
@@ -46,11 +69,27 @@
 
 	var/being_fished = FALSE
 
+/turf/simulated/floor/water/proc/handle_fish()	// Subtypes should over-ride this, and supply their own GLOB lists for maximum Mix and Match power.
+	if(has_fish)
+		rare_fish_list = GLOB.generic_fishing_rare_list
+		uncommon_fish_list = GLOB.generic_fishing_uncommon_list
+		common_fish_list = GLOB.generic_fishing_common_list
+		junk_list = GLOB.generic_fishing_junk_list
+		fishing_loot = GLOB.generic_fishing_chance_list
+
 /turf/simulated/floor/water/pool
 	has_fish = FALSE
 
 /turf/simulated/floor/water/deep/pool
-	has_fish = FALSE
+	has_fish = TRUE
+
+/turf/simulated/floor/water/deep/pool/handle_fish()
+	if(has_fish)
+		rare_fish_list = GLOB.generic_fishing_pool_list
+		uncommon_fish_list = GLOB.generic_fishing_pool_list
+		common_fish_list = GLOB.generic_fishing_pool_list
+		junk_list = GLOB.generic_fishing_pool_list
+		fishing_loot = GLOB.generic_fishing_chance_list
 
 /turf/simulated/floor/water/ex_act(severity)	// Explosive fishing.
 	if(prob(5 * severity))
@@ -73,7 +112,7 @@
 		else if(table == FISHING_COMMON && common_fish_list.len)
 			fish_type = pickweight(common_fish_list)
 		else if(table == FISHING_JUNK && junk_list.len)
-			fish_type = pickweight(junk_list.len)
+			fish_type = pickweight(junk_list)
 		else
 			fish_type = null
 	else
