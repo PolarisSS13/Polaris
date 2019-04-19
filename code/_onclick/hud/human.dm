@@ -286,12 +286,19 @@
 		hud_elements |= mymob.bodytemp
 
 	if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen()
+		mymob.nutrition_icon = new /obj/screen/food()
 		mymob.nutrition_icon.icon = ui_style
 		mymob.nutrition_icon.icon_state = "nutrition0"
 		mymob.nutrition_icon.name = "nutrition"
 		mymob.nutrition_icon.screen_loc = ui_nutrition
 		hud_elements |= mymob.nutrition_icon
+
+		mymob.hydration_icon = new /obj/screen/drink()
+		mymob.hydration_icon.icon = ui_style
+		mymob.hydration_icon.icon_state = "thirst1"
+		mymob.hydration_icon.name = "thirst"
+		mymob.hydration_icon.screen_loc = ui_hydration
+		hud_elements |= mymob.hydration_icon
 
 	mymob.ling_chem_display = new /obj/screen/ling/chems()
 	mymob.ling_chem_display.screen_loc = ui_ling_chemical_display
@@ -389,3 +396,36 @@
 /obj/screen/wizard/energy
 	name = "energy"
 	icon_state = "wiz_energy"
+
+// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating
+// a bunch of fairly blobby logic for every click override on these objects.
+
+/obj/screen/food/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.nutrition_icon == src)
+		switch(icon_state)
+			if("nutrition0")
+				to_chat(usr, "<span class='danger'>You are completely stuffed.</span>")
+			if("nutrition1")
+				to_chat(usr, "<span class='danger'>You are not hungry.</span>")
+			if("nutrition2")
+				to_chat(usr, "<span class='danger'>You are a bit peckish.</span>")
+			if("nutrition3")
+				to_chat(usr, "<span class='danger'>You are quite hungry.</span>")
+			if("nutrition4")
+				to_chat(usr, "<span class='danger'>You are starving!</span>")
+
+/obj/screen/drink/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.hydration_icon == src)
+		switch(icon_state)
+			if("thirst0")
+				to_chat(usr,"<span class='danger'>You are overhydrated.</span>")
+			if("thirst1")
+				to_chat(usr, "<span class='danger'>You are not thirsty.</span>")
+			if("thirst2")
+				to_chat(usr, "<span class='danger'>You are a bit thirsty.</span>")
+			if("thirst3")
+				to_chat(usr, "<span class='danger'>You are quite thirsty.</span>")
+			if("thirst4")
+				to_chat(usr,"<span class='danger'>You beyond thirsty.</span>")
+			if("thirst5")
+				to_chat(usr,"<span class='danger'>You are dying of thirst!</span>")

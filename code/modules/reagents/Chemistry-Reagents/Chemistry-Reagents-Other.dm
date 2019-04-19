@@ -268,6 +268,7 @@
 	taste_description = "water"
 	color = "#E0E8EF"
 	mrate_static = TRUE
+	hydration_factor = 10
 
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
