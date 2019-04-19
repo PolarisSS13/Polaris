@@ -24,6 +24,7 @@
 	var/obj/screen/healths = null
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
+	var/obj/screen/hydration_icon = null
 	var/obj/screen/pressure = null
 	var/obj/screen/pain = null
 	var/obj/screen/gun/item/item_use_icon = null
@@ -111,7 +112,8 @@
 	var/bodytemperature = 310.055	//98.7 F
 	var/drowsyness = 0.0//Carbon
 	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/nutrition = 400//Carbon
+	var/hydration = 400
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
