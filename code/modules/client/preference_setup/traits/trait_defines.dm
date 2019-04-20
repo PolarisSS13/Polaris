@@ -97,20 +97,40 @@
 	modifier_type = /datum/modifier/trait/thin
 	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thinner)
 
+/datum/trait/modifier/physical/thin/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
+
 /datum/trait/modifier/physical/thinner
 	name = "Thinner"
 	modifier_type = /datum/modifier/trait/thinner
 	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thin)
+
+/datum/trait/modifier/physical/thinner/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
 
 /datum/trait/modifier/physical/fat
 	name = "Fat"
 	modifier_type = /datum/modifier/trait/fat
 	mutually_exclusive = list(/datum/trait/modifier/physical/thin, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thinner)
 
+/datum/trait/modifier/physical/fat/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
+
 /datum/trait/modifier/physical/obese
 	name = "Obese"
 	modifier_type = /datum/modifier/trait/obese
 	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/thinner, /datum/trait/modifier/physical/thin)
+
+/datum/trait/modifier/physical/obese/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
 
 // These two traits might be borderline, feel free to remove if they get abused.
 /datum/trait/modifier/physical/high_metabolism
