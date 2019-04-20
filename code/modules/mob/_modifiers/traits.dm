@@ -92,6 +92,7 @@
 	icon_width_percent = 1.1
 	icon_scale_percent = 1
 	slowdown = 1.1
+	max_health_percent = 1.05
 
 /datum/modifier/trait/obese
 	name = "Obese"
@@ -100,6 +101,7 @@
 	icon_width_percent = 1.18
 	icon_scale_percent = 1
 	slowdown = 1.2
+	max_health_percent = 1.10
 
 /datum/modifier/trait/thin
 	name = "Thin"
@@ -107,7 +109,7 @@
 	metabolism_percent = 0.8
 	icon_width_percent = 0.9
 	icon_scale_percent = 1
-	max_health_percent = 0.05
+	max_health_percent = 0.95
 	outgoing_melee_damage_percent = 0.95
 
 /datum/modifier/trait/thinner
@@ -116,7 +118,7 @@
 	metabolism_percent = 0.6
 	icon_width_percent = 0.84
 	icon_scale_percent = 1
-	max_health_percent = 0.05
+	max_health_percent = 0.90
 	outgoing_melee_damage_percent = 0.9
 
 /datum/modifier/trait/colorblind_protanopia
