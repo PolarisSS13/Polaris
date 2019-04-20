@@ -86,7 +86,7 @@
 
 /datum/modifier/trait/fat
 	name = "Overweight"
-	desc = "You are heavier than average."
+	desc = "You are chubbier than average."
 
 	metabolism_percent = 1.2
 	icon_width_percent = 1.1
@@ -112,7 +112,7 @@
 
 /datum/modifier/trait/thinner
 	name = "Thinner"
-	desc = "You are much skinner than average."
+	desc = "You are much skinnier than average."
 	metabolism_percent = 0.6
 	icon_width_percent = 0.84
 	icon_scale_percent = 1
