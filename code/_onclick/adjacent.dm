@@ -83,7 +83,7 @@ Quick adjacency (to turf):
 	if(!isturf(loc)) return 0
 	for(var/turf/T in locs)
 		if(isnull(T)) continue
-		if(T.Adjacent(neighbor,src)) return 1
+		if(T.Adjacent(neighbor,T)) return 1
 	return 0
 
 // This is necessary for storage items not on your person.

@@ -65,41 +65,52 @@
 
 	if(!newloc.Enter(src, src.loc))
 		return
+
+	if(!check_multi_tile_move_density_dir(direct, locs))	// We're big, and we can't move that way.
+		return
+
 	// Past this is the point of no return
-	var/atom/oldloc = loc
-	var/area/oldarea = get_area(oldloc)
-	var/area/newarea = get_area(newloc)
-	loc = newloc
-	. = TRUE
-	oldloc.Exited(src, newloc)
-	if(oldarea != newarea)
-		oldarea.Exited(src, newloc)
+	if(!locs || locs.len <= 1)	// We're not a multi-tile object.
+		var/atom/oldloc = loc
+		var/area/oldarea = get_area(oldloc)
+		var/area/newarea = get_area(newloc)
+		loc = newloc
+		. = TRUE
+		oldloc.Exited(src, newloc)
+		if(oldarea != newarea)
+			oldarea.Exited(src, newloc)
 
-	for(var/i in oldloc)
-		if(i == src) // Multi tile objects
-			continue
-		var/atom/movable/thing = i
-		thing.Uncrossed(src)
+		for(var/i in oldloc)
+			if(i == src) // Multi tile objects
+				continue
+			var/atom/movable/thing = i
+			thing.Uncrossed(src)
 
-	newloc.Entered(src, oldloc)
-	if(oldarea != newarea)
-		newarea.Entered(src, oldloc)
+		newloc.Entered(src, oldloc)
+		if(oldarea != newarea)
+			newarea.Entered(src, oldloc)
 
-	for(var/i in loc)
-		if(i == src) // Multi tile objects
-			continue
-		var/atom/movable/thing = i
-		thing.Crossed(src)
+		for(var/i in loc)
+			if(i == src) // Multi tile objects
+				continue
+			var/atom/movable/thing = i
+			thing.Crossed(src)
+
+	else if(newloc)	// We're a multi-tile object.
+		. = doMove(newloc)
+
 //
 ////////////////////////////////////////
 
-/atom/movable/Move(atom/newloc, direct)
+/atom/movable/Move(atom/newloc, direct = 0)
 	if(!loc || !newloc)
 		return FALSE
 	var/atom/oldloc = loc
 
 	if(loc != newloc)
-		if (!(direct & (direct - 1))) //Cardinal move
+		if(!direct)
+			direct = get_dir(oldloc, newloc)
+		if (direct in list(NORTH, SOUTH, EAST, WEST, UP, DOWN)) //Cardinal move
 			. = ..()
 		else //Diagonal move, split it into cardinal moves
 			moving_diagonally = FIRST_DIAG_STEP
