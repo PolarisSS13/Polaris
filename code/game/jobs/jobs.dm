@@ -56,7 +56,7 @@ var/const/GOVLAW				=(1<<3)
 var/const/PRESIDENT				=(1<<0)
 var/const/NANOTRASEN			=(1<<1)
 var/const/CBIA					=(1<<2)
-var/const/JUDGE				=(1<<3)
+var/const/JUDGE				=(1<<16)
 
 var/list/assistant_occupations = list(
 	"Civilian"
