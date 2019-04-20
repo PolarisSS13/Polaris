@@ -60,29 +60,64 @@
 	metabolism_percent = 0.5
 	incoming_healing_percent = 0.6
 
-/datum/modifier/trait/larger
-	name = "Larger"
-	desc = "Your body is larger than average."
-
+/datum/modifier/trait/taller
+	name = "Taller"
+	desc = "Your body is taller than average."
+	icon_width_percent = 1
 	icon_scale_percent = 1.1
 
-/datum/modifier/trait/large
-	name = "Large"
-	desc = "Your body is a bit larger than average."
-
+/datum/modifier/trait/tall
+	name = "Tall"
+	desc = "Your body is a bit taller than average."
+	icon_width_percent = 1
 	icon_scale_percent = 1.05
 
-/datum/modifier/trait/small
-	name = "Small"
-	desc = "Your body is a bit smaller than average."
-
+/datum/modifier/trait/short
+	name = "Short"
+	desc = "Your body is a bit shorter than average."
+	icon_width_percent = 1
 	icon_scale_percent = 0.95
 
-/datum/modifier/trait/smaller
-	name = "Smaller"
-	desc = "Your body is smaller than average."
-
+/datum/modifier/trait/shorter
+	name = "Shorter"
+	desc = "You are shorter than average."
+	icon_width_percent = 1
 	icon_scale_percent = 0.9
+
+/datum/modifier/trait/fat
+	name = "Overweight"
+	desc = "You are heavier than average."
+
+	metabolism_percent = 1.2
+	icon_width_percent = 1.1
+	icon_scale_percent = 1
+	slowdown = 1.1
+
+/datum/modifier/trait/obese
+	name = "Obese"
+	desc = "You are much heavier than average."
+	metabolism_percent = 1.4
+	icon_width_percent = 1.18
+	icon_scale_percent = 1
+	slowdown = 1.2
+
+/datum/modifier/trait/thin
+	name = "Thin"
+	desc = "You are skinnier than average."
+	metabolism_percent = 0.8
+	icon_width_percent = 0.9
+	icon_scale_percent = 1
+	max_health_percent = 0.05
+	outgoing_melee_damage_percent = 0.95
+
+/datum/modifier/trait/thinner
+	name = "Thinner"
+	desc = "You are much skinner than average."
+	metabolism_percent = 0.6
+	icon_width_percent = 0.84
+	icon_scale_percent = 1
+	max_health_percent = 0.05
+	outgoing_melee_damage_percent = 0.9
 
 /datum/modifier/trait/colorblind_protanopia
 	name = "Protanopia"
