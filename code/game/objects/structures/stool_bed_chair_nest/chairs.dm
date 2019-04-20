@@ -8,7 +8,7 @@
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
-	applies_material_colour = 1
+	applies_material_colour = 1 // applies material color if set to 1
 
 /obj/structure/bed/chair/New()
 	..() //Todo make metal/stone chairs display as thrones
@@ -18,7 +18,13 @@
 
 /obj/structure/bed/chair/general
 	applies_material_colour = 0
-	color = null
+	color = COLOR_WHITE
+
+/obj/structure/bed/chair/proc/update_layer()
+	if(src.dir == NORTH)
+		src.layer = FLY_LAYER
+	else
+		src.layer = OBJ_LAYER
 
 /obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -46,22 +52,6 @@
 /obj/structure/bed/chair/post_buckle_mob()
 	update_icon()
 
-/obj/structure/bed/chair/update_icon()
-	..()
-	if(has_buckled_mobs() && padding_material)
-		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
-		if(isnull(stool_cache[cache_key]))
-			var/image/I = image(icon, "[base_icon]_armrest")
-			I.layer = MOB_LAYER + 0.1
-			I.color = padding_material.icon_colour
-			stool_cache[cache_key] = I
-		overlays |= stool_cache[cache_key]
-
-/obj/structure/bed/chair/proc/update_layer()
-	if(src.dir == NORTH)
-		src.layer = FLY_LAYER
-	else
-		src.layer = OBJ_LAYER
 
 /obj/structure/bed/chair/set_dir()
 	..()
@@ -131,6 +121,9 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -195,13 +188,12 @@
 
 // Chair types
 /obj/structure/bed/chair/wood
-	name = "wooden chair"
+	name = "classic chair"
 	desc = "Old is never too old to not be in fashion."
+	base_icon = "wooden_chair"
 	icon_state = "wooden_chair"
-	applies_material_colour = 1
-
-/obj/structure/bed/chair/wood/update_icon()
-	return
+	color = WOOD_COLOR_GENERIC
+	var/chair_material = MATERIAL_WOOD
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -209,13 +201,47 @@
 	..()
 
 /obj/structure/bed/chair/wood/New(var/newloc)
-	..(newloc, "wood")
+	..(newloc, chair_material)
+
+/obj/structure/bed/chair/wood/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/wood/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
 
 /obj/structure/bed/chair/wood/wings
+	name = "winged chair"
+	base_icon = "wooden_chair_wings"
 	icon_state = "wooden_chair_wings"
 
+/obj/structure/bed/chair/wood/wings/mahogany
+	color = WOOD_COLOR_RICH
+	chair_material = MATERIAL_MAHOGANY
 
-/obj/structure/bed/sofa
+/obj/structure/bed/chair/wood/wings/maple
+	color = WOOD_COLOR_PALE
+	chair_material = MATERIAL_MAPLE
+
+/obj/structure/bed/chair/wood/wings/ebony
+	color = WOOD_COLOR_BLACK
+	chair_material = MATERIAL_EBONY
+
+/obj/structure/bed/chair/wood/wings/walnut
+	color = WOOD_COLOR_CHOCOLATE
+	chair_material = MATERIAL_WALNUT
+
+
+/obj/structure/bed/chair/sofa
 	name = "old ratty sofa"
 	icon = 'icons/obj/sofas.dmi'
 	icon_state = "sofamiddle"
@@ -224,16 +250,28 @@
 	buckle_dir = SOUTH
 	plane = -25
 
-/obj/structure/bed/sofa/update_icon()
-	return
+/obj/structure/bed/chair/sofa/update_icon()
+	// Prep icon.
 
-/obj/structure/bed/sofa/New(var/newloc)
+	if(applies_material_colour) //VOREStation Add - Goes with added var
+		color = material.icon_colour
+
+
+	desc = initial(desc)
+	if(padding_material)
+		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
+		desc += " It's made of [material.use_name] and covered with [padding_material.use_name]."
+	else
+		name = "[material.display_name] [initial(name)]"
+		desc += " It's made of [material.use_name]."
+
+/obj/structure/bed/chair/sofa/New(var/newloc)
 	..(newloc, "carpet")
 
-/obj/structure/bed/sofa/left
+/obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"
 
-/obj/structure/bed/sofa/New()
+/obj/structure/bed/chair/sofa/New()
 	..()
 	if(dir == 1)
 		buckle_dir = NORTH
@@ -246,13 +284,14 @@
 		buckle_dir = WEST
 
 
-/obj/structure/bed/sofa/corner/New()
+/obj/structure/bed/chair/sofa/corner/New()
 	..()
 	buckle_dir = SOUTH
 	plane = -25
 
-/obj/structure/bed/sofa/right
+/obj/structure/bed/chair/sofa/right
 	icon_state = "sofaend_right"
 
-/obj/structure/bed/sofa/corner
+/obj/structure/bed/chair/sofa/corner
 	icon_state = "sofacorner"
+

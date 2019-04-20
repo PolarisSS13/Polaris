@@ -2,7 +2,7 @@
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
 	icon = 'icons/turf/wall_masks.dmi'
-	icon_state = "generic"
+	icon_state = "metal"
 	opacity = 1
 	density = 1
 	blocks_air = 1
@@ -21,6 +21,14 @@
 	var/construction_stage
 
 	var/list/wall_connections = list("0", "0", "0", "0")
+	var/list/other_connections = list("0", "0", "0", "0")
+	var/paint_color
+	var/stripe_color
+	var/global/list/wall_stripe_cache = list()
+	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
+	var/list/blend_objects = list(/obj/structure/window/framed, /obj/machinery/door, /obj/machinery/door/airlock/multi_tile, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
+	var/list/noblend_objects = list(/obj/machinery/door/window, /obj/structure/grille/smallfence) //Objects to avoid blending with (such as children of listed blend objects.
+
 
 // Walls always hide the stuff below them.
 /turf/simulated/wall/levelupdate()

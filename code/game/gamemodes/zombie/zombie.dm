@@ -9,4 +9,4 @@
 	required_enemies = 1
 	end_on_antag_death = 1
 	restricted_jobs = list("AI", "Cyborg","Chief Medical Officer", "Doctor", "Virologist", "Chief of Police", "Police Officer")
-	votable = 0 // Maaaaybe see how the nerfs go first.
+	votable = 1 // Hot take on social experiment!

@@ -1,7 +1,7 @@
 /obj/structure/grille
 	name = "grille"
 	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/grille.dmi'
 	icon_state = "grille"
 	density = 1
 	anchored = 1
@@ -11,7 +11,16 @@
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
+	var/on_frame = FALSE
+	blend_objects = list(/obj/machinery/door) // Objects which to blend with
+	noblend_objects = list(/obj/machinery/door/window)
 	var/electric = 0 //required if we have no engine.
+	var/no_states = 0
+
+/obj/structure/grille/New()
+	. = ..()
+	update_connections(1)
+	update_icon()
 
 /obj/structure/grille/electric
 	name = "electrified grille"
@@ -22,10 +31,32 @@
 	qdel(src)
 
 /obj/structure/grille/update_icon()
-	if(destroyed)
-		icon_state = "[initial(icon_state)]-b"
-	else
-		icon_state = initial(icon_state)
+	update_onframe()
+
+	overlays.Cut()
+	if(!no_states)
+		if(destroyed)
+			if(on_frame)
+				icon_state = "broke_onframe"
+			else
+				icon_state = "broken"
+		else
+			var/image/I
+			icon_state = ""
+			if(on_frame)
+				for(var/i = 1 to 4)
+					if(other_connections[i] != "0")
+						I = image(icon, "grille_other_onframe[connections[i]]", dir = 1<<(i-1))
+					else
+						I = image(icon, "grille_onframe[connections[i]]", dir = 1<<(i-1))
+					overlays += I
+			else
+				for(var/i = 1 to 4)
+					if(other_connections[i] != "0")
+						I = image(icon, "grille_other[connections[i]]", dir = 1<<(i-1))
+					else
+						I = image(icon, "grille[connections[i]]", dir = 1<<(i-1))
+					overlays += I
 
 /obj/structure/grille/Bumped(atom/user)
 	if(ishuman(user)) shock(user, 70)
@@ -238,7 +269,7 @@
 // Used in mapping
 /obj/structure/grille/broken
 	destroyed = 1
-	icon_state = "grille-b"
+	icon_state = "broken"
 	density = 0
 	New()
 		..()
@@ -248,7 +279,7 @@
 /obj/structure/grille/cult
 	name = "cult grille"
 	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
-	icon_state = "grillecult"
+	icon = 'icons/obj/grille_cult.dmi'
 	health = 40 //Make it strong enough to avoid people breaking in too easily
 
 /obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
@@ -258,7 +289,7 @@
 
 /obj/structure/grille/broken/cult
 	icon_state = "grillecult-b"
-
+/*
 /obj/structure/grille/rustic
 	name = "rustic grille"
 	desc = "A lattice of metal, arranged in an old, rustic fashion."
@@ -266,18 +297,10 @@
 
 /obj/structure/grille/broken/rustic
 	icon_state = "grillerustic-b"
-
-/obj/structure/grille/smallfence/
-	name = "small fence"
-	icon_state = "fence"
-	health = 10
-
-/obj/structure/grille/frame
-	name = "frame"
-	icon_state = "frame"
-	health = 10
+*/
 
 /obj/structure/grille/fence/
+	blend_objects = 0
 	var/width = 3
 	health = 50
 
@@ -300,3 +323,11 @@
 //	bound_width=80
 //	bound_height=42
 	icon='icons/obj/fences2.dmi'
+
+/obj/structure/grille/proc/update_onframe()
+	on_frame = FALSE
+	var/turf/T = get_turf(src)
+	for(var/obj/O in T)
+		if(istype(O, /obj/structure/wall_frame))
+			on_frame = TRUE
+			break

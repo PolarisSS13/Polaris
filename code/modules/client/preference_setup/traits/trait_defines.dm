@@ -72,25 +72,65 @@
 	Regardless, you find it quite difficult to land shots where you wanted them to go."
 	modifier_type = /datum/modifier/trait/inaccurate
 
-/datum/trait/modifier/physical/smaller
-	name = "Smaller"
-	modifier_type = /datum/modifier/trait/smaller
-	mutually_exclusive = list(/datum/trait/modifier/physical/small, /datum/trait/modifier/physical/large, /datum/trait/modifier/physical/larger)
+/datum/trait/modifier/physical/shorter
+	name = "Shorter"
+	modifier_type = /datum/modifier/trait/shorter
+	mutually_exclusive = list(/datum/trait/modifier/physical/short, /datum/trait/modifier/physical/tall, /datum/trait/modifier/physical/taller)
 
-/datum/trait/modifier/physical/small
-	name = "Small"
-	modifier_type = /datum/modifier/trait/small
-	mutually_exclusive = list(/datum/trait/modifier/physical/smaller, /datum/trait/modifier/physical/large, /datum/trait/modifier/physical/larger)
+/datum/trait/modifier/physical/short
+	name = "Short"
+	modifier_type = /datum/modifier/trait/short
+	mutually_exclusive = list(/datum/trait/modifier/physical/shorter, /datum/trait/modifier/physical/tall, /datum/trait/modifier/physical/taller)
 
-/datum/trait/modifier/physical/large
-	name = "Large"
-	modifier_type = /datum/modifier/trait/large
-	mutually_exclusive = list(/datum/trait/modifier/physical/smaller, /datum/trait/modifier/physical/small, /datum/trait/modifier/physical/larger)
+/datum/trait/modifier/physical/tall
+	name = "Tall"
+	modifier_type = /datum/modifier/trait/tall
+	mutually_exclusive = list(/datum/trait/modifier/physical/shorter, /datum/trait/modifier/physical/short, /datum/trait/modifier/physical/taller)
 
-/datum/trait/modifier/physical/larger
-	name = "Larger"
-	modifier_type = /datum/modifier/trait/larger
-	mutually_exclusive = list(/datum/trait/modifier/physical/smaller, /datum/trait/modifier/physical/small, /datum/trait/modifier/physical/large)
+/datum/trait/modifier/physical/taller
+	name = "Taller"
+	modifier_type = /datum/modifier/trait/taller
+	mutually_exclusive = list(/datum/trait/modifier/physical/shorter, /datum/trait/modifier/physical/short, /datum/trait/modifier/physical/tall)
+
+/datum/trait/modifier/physical/thin
+	name = "Thin"
+	modifier_type = /datum/modifier/trait/thin
+	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thinner)
+
+/datum/trait/modifier/physical/thin/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
+
+/datum/trait/modifier/physical/thinner
+	name = "Thinner"
+	modifier_type = /datum/modifier/trait/thinner
+	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thin)
+
+/datum/trait/modifier/physical/thinner/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
+
+/datum/trait/modifier/physical/fat
+	name = "Fat"
+	modifier_type = /datum/modifier/trait/fat
+	mutually_exclusive = list(/datum/trait/modifier/physical/thin, /datum/trait/modifier/physical/obese, /datum/trait/modifier/physical/thinner)
+
+/datum/trait/modifier/physical/fat/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
+
+/datum/trait/modifier/physical/obese
+	name = "Obese"
+	modifier_type = /datum/modifier/trait/obese
+	mutually_exclusive = list(/datum/trait/modifier/physical/fat, /datum/trait/modifier/physical/thinner, /datum/trait/modifier/physical/thin)
+
+/datum/trait/modifier/physical/obese/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
+	if(setup.is_FBP())
+		return "Full Body Prosthetics cannot gain or lose weight."
+	return ..()
 
 // These two traits might be borderline, feel free to remove if they get abused.
 /datum/trait/modifier/physical/high_metabolism

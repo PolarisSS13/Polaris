@@ -1,5 +1,6 @@
 /datum/job/rd
 	title = "Research Director"
+	email_domain = "sciworks.nt"
 	flag = RD
 	faction = "City"
 	department = "Science"
@@ -30,6 +31,7 @@
 
 /datum/job/scientist
 	title = "Scientist"
+	email_domain = "sciworks.nt"
 	flag = SCIENTIST
 	faction = "City"
 	department = "Science"
@@ -50,6 +52,7 @@
 
 /datum/job/xenobiologist
 	title = "Xenobiologist"
+	email_domain = "sciworks.nt"
 	flag = XENOBIOLOGIST
 	faction = "City"
 	department = "Science"
@@ -70,6 +73,7 @@
 
 /datum/job/roboticist
 	title = "Roboticist"
+	email_domain = "sciworks.nt"
 	flag = ROBOTICIST
 	faction = "City"
 	department = "Science"

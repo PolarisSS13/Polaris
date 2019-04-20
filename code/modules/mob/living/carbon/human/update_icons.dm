@@ -122,12 +122,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 /mob/living/carbon/human/update_transform()
 	// First, get the correct size.
 	var/desired_scale = icon_scale
+	var/desired_width = icon_scale
 
 	desired_scale *= species.icon_scale
+	desired_width *= species.icon_width
 
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.icon_scale_percent))
 			desired_scale *= M.icon_scale_percent
+
+		if(!isnull(M.icon_width_percent))
+			desired_width *= M.icon_width_percent
 
 	// Regular stuff again.
 	var/matrix/M = matrix()
@@ -139,11 +144,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)
-		M.Scale(desired_scale)
+		M.Scale(desired_width, desired_scale)
 		M.Translate(1,-6)
 		layer = MOB_LAYER -0.01 // Fix for a byond bug where turf entry order no longer matters
 	else
-		M.Scale(desired_scale)
+		M.Scale(desired_width, desired_scale)
 		M.Translate(0, 16*(desired_scale-1))
 		layer = MOB_LAYER // Fix for a byond bug where turf entry order no longer matters
 
@@ -194,7 +199,22 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		standing_image.overlays += DI
 
 	overlays_standing[DAMAGE_LAYER]	= standing_image
+	update_bandages()
 	apply_layer(DAMAGE_LAYER)
+
+/mob/living/carbon/human/proc/update_bandages()
+	var/bandage_icon = species.bandages_icon
+	if(!bandage_icon)		//checks if race is bandage compatible
+		return
+	var/image/standing_image = overlays_standing[DAMAGE_LAYER]
+	if(standing_image)
+		for(var/obj/item/organ/external/O in organs)
+			if(O.is_stump())
+				continue
+			var/bandage_level = O.bandage_level()
+			if(bandage_level)
+				standing_image.overlays += image(bandage_icon, "[O.icon_name][bandage_level]")
+		overlays_standing[DAMAGE_LAYER]	= standing_image
 
 //BASE MOB SPRITE
 /mob/living/carbon/human/update_icons_body()

@@ -268,6 +268,7 @@
 	taste_description = "water"
 	color = "#E0E8EF"
 	mrate_static = TRUE
+	hydration_factor = 10
 
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
@@ -482,3 +483,19 @@
 
 /datum/reagent/luminol/touch_mob(var/mob/living/L)
 	L.reveal_blood()
+
+/datum/reagent/poppy
+	name = "Poppy Resin"
+	id = "poppyresin"
+	description = "Extracted from poppies."
+	taste_description = "a bitter gooey substance"
+	reagent_state = LIQUID
+	color = "#755202"
+
+/datum/reagent/coca
+	name = "coca extract"
+	id = "coca"
+	description = "Extracted from the coca plant."
+	taste_description = "bitterness"
+	reagent_state = LIQUID
+	color = "#755202"

@@ -1283,6 +1283,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/popcorn/New()
 	..()
+	reagents.add_reagent("sodiumchloride", 2)
 	unpopped = rand(1,10)
 	bitesize = 0.1 //this snack is supposed to be eating during looooong time. And this it not dinner food! --rastaf0
 
@@ -1299,10 +1300,12 @@
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
 	center_of_mass = list("x"=15, "y"=9)
+	nutriment_desc = list("salty beef" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky/New()
 		..()
-		reagents.add_reagent("protein", 2)
+		reagents.add_reagent("protein", 1)
+		reagents.add_reagent("sodiumchloride", 3)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin
@@ -1329,6 +1332,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/New()
 	..()
 	reagents.add_reagent("sugar", 3)
+	reagents.add_reagent("sodiumchloride", 1)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
@@ -1341,8 +1345,10 @@
 	nutriment_amt = 2
 	nutriment_desc = list("cheese" = 2, "chips" = 2)
 
+
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers/New()
 	..()
+	reagents.add_reagent("sodiumchloride", 3)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/syndicake
@@ -1520,6 +1526,7 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#7A3D11"
 	center_of_mass = list("x"=16, "y"=13)
+	nutriment_desc = list("spiced tender meat" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/meatsteak/New()
 	..()
@@ -1580,6 +1587,7 @@
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#785210"
 	center_of_mass = list("x"=16, "y"=8)
+	nutriment_desc = list("meat" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/meatballsoup/New()
 	..()
@@ -1605,6 +1613,7 @@
 	icon_state = "tomatosoup"
 	filling_color = "#FF0000"
 	center_of_mass = list("x"=16, "y"=7)
+	nutriment_desc = list("iron tasting fluid" = 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/bloodsoup/New()
 	..()
@@ -1987,6 +1996,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/tomatosoup/New()
 	..()
 	reagents.add_reagent("tomatojuice", 10)
+	reagents.add_reagent("sodiumchloride", 1)
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/onionsoup
@@ -2015,6 +2025,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/onionrings/New()
 	..()
+	reagents.add_reagent("sodiumchloride", 2)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
@@ -2047,6 +2058,7 @@
 	reagents.add_reagent("tomatojuice", 5)
 	reagents.add_reagent("imidazoline", 5)
 	reagents.add_reagent("water", 5)
+	reagents.add_reagent("sodiumchloride", 2)
 	bitesize = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/jelliedtoast
@@ -2094,7 +2106,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/milosoup
 	name = "Milosoup"
-	desc = "The universes best soup! Yum!!!"
+	desc = "The universe's best soup! Yum!"
 	icon_state = "milosoup"
 	trash = /obj/item/trash/snack_bowl
 	center_of_mass = list("x"=16, "y"=7)
@@ -2193,7 +2205,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/spesslaw
 	name = "Spesslaw"
-	desc = "A lawyers favourite"
+	desc = "A lawyer's favourite."
 	icon_state = "spesslaw"
 	filling_color = "#DE4545"
 	center_of_mass = list("x"=16, "y"=10)

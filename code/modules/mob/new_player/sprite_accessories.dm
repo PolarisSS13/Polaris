@@ -479,10 +479,10 @@
 		icon_state = "hair_hbraid"
 		hair_type = HAIR_LONG
 
-	braid
+	/*braid
 		name = "Floorlength Braid"
 		icon_state = "hair_braid"
-		hair_type = HAIR_LONG
+		hair_type = HAIR_LONG*/
 
 	odango
 		name = "Odango"
@@ -725,10 +725,10 @@
 		name = "Manbun"
 		icon_state = "hair_manbun"
 
-	shy
+	/*shy
 		name = "Shy"
 		hair_type = HAIR_LONG
-		icon_state = "hair_shy"
+		icon_state = "hair_shy"*/
 
 	jade
 		name = "Jade"

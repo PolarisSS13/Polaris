@@ -1,4 +1,4 @@
-"aa" = (/turf/simulated/wall/greysteel,/area/submap/factions/bluemooncartel/cartel_aqua)
+"aa" = (/turf/simulated/wall,/area/submap/factions/bluemooncartel/cartel_aqua)
 "ab" = (/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "ac" = (/obj/machinery/computer/security/wooden_tv/entertainment,/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "ad" = (/obj/structure/closet/cabinet,/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
@@ -16,8 +16,8 @@
 "ap" = (/turf/simulated/floor/carpet/sblucarpet,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aq" = (/obj/structure/table/glass,/obj/machinery/door/window/northleft,/obj/machinery/door/window/southright,/obj/structure/window/reinforced{dir = 8; health = 1e+006},/obj/structure/window/reinforced{dir = 4; health = 1e+006},/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "ar" = (/obj/structure/table/glass,/obj/machinery/door/window/northleft,/obj/machinery/door/window/southright,/obj/structure/window/reinforced{dir = 4; health = 1e+006},/obj/structure/window/reinforced{dir = 8; health = 1e+006},/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
-"as" = (/obj/machinery/door/airlock/multi_tile/metal/mait{icon_state = "door_closed"; dir = 2},/turf/simulated/floor/carpet/sblucarpet,/area/submap/factions/bluemooncartel/cartel_aqua)
-"at" = (/obj/machinery/door/airlock/multi_tile/glass{icon_state = "door_closed"; dir = 2},/turf/simulated/floor/carpet/sblucarpet,/area/submap/factions/bluemooncartel/cartel_aqua)
+"as" = (/obj/machinery/door/airlock/multi_tile{icon_state = "closed"; dir = 8},/turf/simulated/floor/carpet/sblucarpet,/area/submap/factions/bluemooncartel/cartel_aqua)
+"at" = (/obj/structure/coatrack,/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "au" = (/obj/structure/table/bench/padded,/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "av" = (/obj/structure/bed/chair/comfy/blue{icon_state = "comfychair_preview"; dir = 4},/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aw" = (/obj/structure/table/woodentable,/obj/structure/flora/pottedplant/thinbush{pixel_y = 11},/obj/machinery/light/colored/blue{dir = 8},/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
@@ -37,6 +37,7 @@
 "aK" = (/turf/simulated/floor/water/deep,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aL" = (/mob/living/simple_animal/fish/trout,/turf/simulated/floor/water/deep,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aM" = (/obj/structure/curtain/color/pale_blue,/turf/simulated/floor/carpet/sblucarpet,/area/submap/factions/bluemooncartel/cartel_aqua)
+"aN" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/outdoors/dirt/indoors,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aO" = (/obj/machinery/light/colored/blue{dir = 8},/turf/simulated/floor/water/deep,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aP" = (/obj/structure/flora/pottedplant/aquatic{pixel_y = 11},/turf/simulated/floor/wood/pale,/area/submap/factions/bluemooncartel/cartel_aqua)
 "aQ" = (/turf/simulated/floor/wood/pale,/area/submap/factions/bluemooncartel/cartel_aqua)
@@ -56,24 +57,25 @@
 "be" = (/obj/structure/sink/puddle/fountain,/turf/simulated/floor/water/deep,/area/submap/factions/bluemooncartel/cartel_aqua)
 "bf" = (/obj/structure/bed/chair/comfy/blue{icon_state = "comfychair_preview"; dir = 1},/turf/simulated/floor/wood/pale,/area/submap/factions/bluemooncartel/cartel_aqua)
 "bg" = (/obj/machinery/light/small,/turf/simulated/floor/wood/pale,/area/submap/factions/bluemooncartel/cartel_aqua)
+"bh" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled,/area/submap/factions/bluemooncartel/cartel_aqua)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaabacadaeafagagahaaaiabajakakabalaa
 aaaiabababamanabaoaaabapapapapapabaa
 apapapapapapapapapapapapaqararapabaa
-asapapapapapapapapatapapabababapabaa
+asapapapapapapapapasapapabababapabaa
 aaabapapababauauabaaabapaqararapabaa
 aaavapapabauamamawaaaaapapapapapaxaa
 aaayapapabauamapapazaaaiaAaBaBabaCaa
 aaaDapapabauaEapapaFaaaGaGaGaGaGaGaa
-aaabapapababaHapapaIaaaKaLaKaKaKaKaa
-aaaaaMaMaaaaaaaJaaaaaaaKaKaKaKaKaOaa
-aaaPaQaQaQaRaQaQaQaGaKaKaKaSaKaKaKaa
-aaaTaQaUaUaUaQaQaVaGaKaKaSaWaKaKaKaa
-aaaXaYaZaZaZbaaQbbaGaKaKaKaKaKbcaKaa
-aaaQaYaZaZaZbaaQbdaGaKaKbeaKbcaKaKaa
-aaaTaQbfbfbfaQaQaQaGaKaLaKaKaKbcaOaa
-aaaQaQaQaQaQbgaQaQaGaKaKaKaKaKaKaKaa
+aaatapapababaHapapaIaaaKaLaKaKaKaKaa
+aaaaaMaMaaaaaaaJaaaaaaaSaKaKaKaKaOaa
+aaaPaQaQaQaRaQaQaQaGaSaSaSaSaKaKaKaa
+aaaTaQaUaUaUaQaQaVaGaSaSaNaWaKaKaKaa
+aaaXaYaZaZaZbaaQbbaGaSaSaKaKaKbcaKaa
+aaaQaYaZaZaZbaaQbdaGaSaSbeaKbcaKaKaa
+aaaTaQbfbfbfaQaQaQbhaSaLaKaKaKbcaOaa
+aaaQaQaQaQaQbgaQaQaGaSaKaKaKaKaKaKaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

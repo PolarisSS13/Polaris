@@ -158,7 +158,7 @@
 
 /obj/structure/sign/double/city/
 	desc = "A sign."
-	pixel_y = 32
+	pixel_y = 25
 	plane = -25
 	icon = 'icons/obj/signs.dmi'
 

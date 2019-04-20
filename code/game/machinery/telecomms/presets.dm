@@ -56,7 +56,7 @@
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, LEG_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ, ENT_FREQ)
+	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, LEG_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ, ENT_FREQ, GOV_FREQ)
 
 	//Common and other radio frequencies for people to freely use
 	New()
@@ -171,6 +171,10 @@
 	freq_listening = list(LEG_FREQ)
 	autolinkers = list("legal")
 
+/obj/machinery/telecomms/server/presets/government
+	id = "Government Server"
+	freq_listening = list(LEG_FREQ)
+	autolinkers = list("government")
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"

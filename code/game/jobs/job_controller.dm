@@ -59,6 +59,8 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
+			if(!is_hard_whitelisted(player, job))
+				return 0
 
 			var/position_limit = job.total_positions
 			if(!latejoin)
@@ -87,6 +89,9 @@ var/global/datum/controller/occupations/job_master
 			if(jobban_isbanned(player, job.title))
 				Debug("FOC isbanned failed, Player: [player]")
 				continue
+			if(!is_hard_whitelisted(player, job))
+				Debug("FOC not hard whitelisted failed, Player: [player]")
+				continue
 			if(!job.player_old_enough(player.client))
 				Debug("FOC player not old enough, Player: [player]")
 				continue
@@ -99,6 +104,7 @@ var/global/datum/controller/occupations/job_master
 			if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
 				Debug("FOC pass, Player: [player], Level:[level]")
 				candidates += player
+
 		return candidates
 
 	proc/GiveRandomJob(var/mob/new_player/player)
@@ -121,9 +127,11 @@ var/global/datum/controller/occupations/job_master
 				continue
 
 			if(!job.player_old_enough(player.client))
-				Debug("GRJ player not old enough, Player: [player]")
+				Debug("GRJ player not old enough, Player: [player], Job: [job.title]")
 				continue
-
+			if(!is_hard_whitelisted(player, job))
+				Debug("GRJ not hard whitelisted failed, Player: [player]")
+				continue
 			if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 				Debug("GRJ Random job given, Player: [player], Job: [job]")
 				AssignRole(player, job.title)
@@ -268,7 +276,9 @@ var/global/datum/controller/occupations/job_master
 					if(!job.player_old_enough(player.client))
 						Debug("DO player not old enough, Player: [player], Job:[job.title]")
 						continue
-
+					if(!is_hard_whitelisted(player, job))
+						Debug("DO not hard whitelisted failed, Player: [player], Job:[job.title]")
+						continue
 					// If the player wants that job on this level, then try give it to him.
 					if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
 
@@ -625,6 +635,9 @@ var/global/datum/controller/occupations/job_master
 				if(!(player.ready && player.mind && !player.mind.assigned_role))
 					continue //This player is not ready
 				if(jobban_isbanned(player, job.title))
+					level5++
+					continue
+				if(!is_hard_whitelisted(player, job))
 					level5++
 					continue
 				if(!job.player_old_enough(player.client))

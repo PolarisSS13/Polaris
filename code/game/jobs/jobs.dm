@@ -11,8 +11,8 @@ var/const/ENGINEER				=(1<<6)
 var/const/ATMOSTECH				=(1<<7)
 var/const/AI					=(1<<8)
 var/const/CYBORG				=(1<<9)
-var/const/PRESIDENT				=(1<<10)
 
+var/const/PARAMEDIC				=(1<<10)
 
 var/const/MEDSCI				=(1<<1)
 
@@ -26,9 +26,8 @@ var/const/VIROLOGIST			=(1<<6)
 var/const/PSYCHIATRIST			=(1<<7)
 var/const/ROBOTICIST			=(1<<8)
 var/const/XENOBIOLOGIST			=(1<<9)
-var/const/PARAMEDIC				=(1<<10)
-var/const/MEDICALINTERN			=(1<<11)
-var/const/SCIENCEINTERN			=(1<<12)
+var/const/MEDICALINTERN			=(1<<10)
+var/const/SCIENCEINTERN			=(1<<11)
 
 var/const/CIVILIAN				=(1<<2)
 
@@ -48,10 +47,16 @@ var/const/CHAPLAIN				=(1<<10)
 var/const/ASSISTANT				=(1<<11)
 var/const/BRIDGE				=(1<<12)
 var/const/PROSECUTOR			=(1<<13)
-var/const/JUDGE				=(1<<14)
-var/const/BARBER				=(1<<15)
-var/const/SECRETARY				=(1<<16)
+var/const/BARBER				=(1<<14)
+var/const/SECRETARY				=(1<<15)
 
+
+var/const/GOVLAW				=(1<<3)
+
+var/const/PRESIDENT				=(1<<0)
+var/const/NANOTRASEN			=(1<<1)
+var/const/CBIA					=(1<<2)
+var/const/JUDGE				=(1<<3)
 
 var/list/assistant_occupations = list(
 	"Civilian"
@@ -59,6 +64,8 @@ var/list/assistant_occupations = list(
 
 
 var/list/gov_positions = list(
+	"Nanotrasen Representative",
+	"CBIA Agent",
 	"President"
 )
 
@@ -66,7 +73,7 @@ var/list/command_positions = list(
 	"Mayor",
 	"City Clerk",
 	"Chief of Police",
-	"Chief Engineer",
+	"Fire Chief",
 	"Judge",
 	"Factory Manager",
 	"Research Director",
@@ -75,9 +82,9 @@ var/list/command_positions = list(
 
 
 var/list/engineering_positions = list(
-	"Chief Engineer",
-	"Station Engineer",
-	"Firefighter"
+	"Fire Chief",
+	"Firefighter",
+	"Paramedic"
 )
 
 
@@ -87,7 +94,6 @@ var/list/medical_positions = list(
 	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
-	"Paramedic",
 	"Medical Intern"
 )
 

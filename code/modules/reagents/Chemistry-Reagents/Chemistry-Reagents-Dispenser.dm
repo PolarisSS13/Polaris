@@ -126,7 +126,8 @@
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
-	M.nutrition += nutriment_factor * removed
+	M.adjust_nutrition(nutriment_factor * removed)
+	M.adjust_hydration(hydration_factor * removed)
 	var/strength_mod = 1
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
@@ -434,7 +435,7 @@
 	glass_icon = DRINK_ICON_NOISY
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += removed * 3
+	M.adjust_nutrition(removed * 3)
 
 	var/effective_dose = dose
 	if(issmall(M))

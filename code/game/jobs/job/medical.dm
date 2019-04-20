@@ -7,7 +7,7 @@
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Colony Director"
+	supervisors = "the Mayor"
 	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
@@ -25,10 +25,11 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	alt_titles = list(
-		"Chief of Medicine")
+		"Chief of Medicine", "Medical Director")
 
 /datum/job/doctor
 	title = "Doctor"
+	email_domain = "med.cityworks.gov.nt"
 	flag = DOCTOR
 	department_flag = MEDSCI
 	department = "Medical"
@@ -51,6 +52,7 @@
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
 /datum/job/chemist
+	email_domain = "med.cityworks.gov.nt"
 	title = "Chemist"
 	flag = CHEMIST
 	department = "Medical"
@@ -90,6 +92,7 @@
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
+	email_domain = "psych.cityworks.gov.nt"
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
 	department = "Medical"
@@ -106,22 +109,6 @@
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
 	alt_titles = list("Daycare Worker", "Therapist", "Social Worker", "Psychologist" = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist)
 
-/datum/job/paramedic
-	title = "Paramedic"
-	flag = PARAMEDIC
-	department_flag = MEDSCI
-	department = "Medical"
-	faction = "City"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the chief medical officer"
-	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/paramedic
-	economic_modifier = 4
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
-	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
-	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
-	alt_titles = list("Emergency Medical Technician" = /decl/hierarchy/outfit/job/medical/paramedic/emt)
 
 /datum/job/medicalintern
 	title = "Medical Intern"
