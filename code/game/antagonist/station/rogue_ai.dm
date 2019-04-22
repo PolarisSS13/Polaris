@@ -20,8 +20,6 @@ var/datum/antagonist/rogue_ai/malf
 /datum/antagonist/rogue_ai/New()
 	..()
 	malf = src
-	job_master.AssignRole(src, "AI", 0)
-
 
 
 /datum/antagonist/rogue_ai/get_candidates()
