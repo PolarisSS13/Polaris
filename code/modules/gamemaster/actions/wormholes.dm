@@ -1,12 +1,20 @@
 /datum/gm_action/wormholes
 	name = "space-time anomalies"
 	chaotic = 70
-	length = 6 MINUTES	// 5 minutes to spawn all the wormholes, up to 6 minutes for the last one to dissipate.
+	length = 12 MINUTES
 	departments = list(ROLE_EVERYONE)
+	var/severity = 1
+
+/datum/gm_action/wormholes/set_up()	// 1 out of 5 will be full-duration wormholes, meaning up to a minute long.
+	severity = pickweight(list(
+		3 = 5,
+		2 = 7,
+		1 = 13
+		))
 
 /datum/gm_action/wormholes/start()
 	..()
-	wormhole_event()
+	wormhole_event(length / 2, (severity / 3))
 
 /datum/gm_action/wormholes/get_weight()
 	return 10 + max(0, -30 + (metric.count_people_in_department(ROLE_EVERYONE) * 5) + (metric.count_people_in_department(ROLE_ENGINEERING) + 10) + (metric.count_people_in_department(ROLE_MEDICAL) * 20))
