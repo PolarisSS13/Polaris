@@ -45,6 +45,12 @@
 /mob/living/carbon/proc/adjust_hydration(var/amt)
 	set_hydration(hydration + amt)
 
+/mob/living/carbon/proc/set_calories(var/amt)
+	calories = Clamp(amt, species.min_calories, species.max_calories)
+
+/mob/living/carbon/proc/adjust_calories(var/amt)
+	set_calories(calories + amt)
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(!.)

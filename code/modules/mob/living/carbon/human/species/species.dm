@@ -149,6 +149,17 @@
 
 	var/metabolic_rate = 1
 
+	var/uses_calories = TRUE
+
+	var/max_calories = WEIGHT_MAX // Above this, heart attacks will happen
+	var/min_calories = WEIGHT_MIN //Below this, this species will die
+
+	var/normal_calories =  WEIGHT_NORMAL
+	var/thinner_calories = WEIGHT_THINNER
+	var/thin_calories = WEIGHT_THIN
+	var/fat_calories = WEIGHT_FAT
+	var/obese_calories = WEIGHT_OBESE
+
 	// HUD data vars.
 	var/datum/hud_data/hud
 	var/hud_type

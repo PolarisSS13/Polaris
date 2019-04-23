@@ -47,7 +47,7 @@
 	accuracy_dispersion = 1
 
 /datum/modifier/trait/high_metabolism
-	name = "High Metabolsim"
+	name = "High Metabolism"
 	desc = "Your body's metabolism is faster than average."
 
 	metabolism_percent = 2.0
