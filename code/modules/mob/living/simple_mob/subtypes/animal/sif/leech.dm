@@ -171,7 +171,7 @@
 				chemicals += 5
 
 		else if(docile)
-			var/message = "We shake off your lethargy as the pluripotent cell count declines in our host's blood."
+			var/message = "We shake off our lethargy as the pluripotent cell count declines in our host's blood."
 			to_chat(src, span("notice", message))
 			docile = FALSE
 

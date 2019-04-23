@@ -108,11 +108,11 @@
 			var/mob/living/carbon/human/H = L
 			if(H.get_active_hand())
 				var/obj/item/I = H.get_active_hand()
-				if(I.force >= 2 * melee_damage_upper)
+				if(I.force >= 1.20 * melee_damage_upper)
 					return TRUE
 		else if(istype(L, /mob/living/simple_mob))
 			var/mob/living/simple_mob/S = L
-			if(S.melee_damage_upper > 2 * melee_damage_upper)
+			if(S.melee_damage_upper > 1.20 * melee_damage_upper)
 				return TRUE
 
 /mob/living/simple_mob/animal/sif/kururak/handle_special()
@@ -363,18 +363,17 @@
 	holder.a_intent = I_HURT
 	if(isliving(A))
 		var/mob/living/L = A
-		if(iscarbon(L) || issilicon(L))
-			if(holder.Adjacent(L))
-				holder.a_intent = I_GRAB
+		if(holder.Adjacent(L))
+			holder.a_intent = I_GRAB
 
-			if(iscarbon(L))
-				var/mob/living/carbon/C = L
-				if(!C.eyecheck())
-					if(holder.a_intent != I_GRAB)
-						holder.a_intent = I_DISARM
+		if(iscarbon(L))
+			var/mob/living/carbon/C = L
+			if(!C.eyecheck())
+				if(holder.a_intent != I_GRAB)
+					holder.a_intent = I_DISARM
 
-			if(issilicon(L) && holder.a_intent != I_GRAB)
-				holder.a_intent = I_DISARM
+		if(issilicon(L) && holder.a_intent != I_GRAB)
+			holder.a_intent = I_DISARM
 
 	else if(istype(A, /obj/mecha))
 		holder.a_intent = I_GRAB
