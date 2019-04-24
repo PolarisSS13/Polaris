@@ -3585,7 +3585,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/tastybread/New()
 	..()
 	bitesize = 2
-
+/*
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
 	name = "\improper SkrellSnax"
 	desc = "Cured fungus shipped all the way from Qerr'balak, almost like jerky! Almost."
@@ -3612,7 +3612,7 @@
 		reagents.add_reagent("protein", 8)
 		reagents.add_reagent("capsaicin", 2)
 		bitesize = 2
-
+*/
 /obj/item/weapon/reagent_containers/food/snacks/croissant
 	name = "croissant"
 	desc = "True French cuisine."
