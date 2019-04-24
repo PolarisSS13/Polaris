@@ -70,7 +70,7 @@ var/list/turf_edge_cache = list()
 			var/obj/item/stack/material/steel/S = C
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			src.ChangeTurf(/turf/simulated/floor/plating)
-			S.amount =- 1
+			S.use(1)
 		else
 			return ..()
 	else
