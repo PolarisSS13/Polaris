@@ -145,27 +145,6 @@
 	if(prob(5))
 		M.vomit()
 
-/datum/reagent/toxin/stimm	//Homemade Hyperzine
-	name = "Stimm"
-	id = "stimm"
-	description = "A homemade stimulant with some serious side-effects."
-	taste_description = "sweetness"
-	taste_mult = 1.8
-	color = "#d0583a"
-	metabolism = REM * 3
-	overdose = 10
-	strength = 3
-
-/datum/reagent/toxin/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_TAJARA)
-		removed *= 1.25
-	..()
-	if(prob(15))
-		M.emote(pick("twitch", "blink_r", "shiver"))
-	if(prob(15))
-		M.visible_message("[M] shudders violently.", "You shudder uncontrollably, it hurts.")
-		M.take_organ_damage(6 * removed, 0)
-	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 
 /datum/reagent/toxin/potassium_chloride
 	name = "Potassium Chloride"

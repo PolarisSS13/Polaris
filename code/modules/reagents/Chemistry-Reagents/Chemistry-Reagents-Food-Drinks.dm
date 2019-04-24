@@ -9,6 +9,7 @@
 	metabolism = REM * 4
 	ingest_met = REM * 4
 	var/nutriment_factor = 30 // Per unit
+
 	var/injectable = 0
 	color = "#664330"
 
@@ -45,7 +46,9 @@
 		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	var/nut_removed = removed
+	if(nutriment_factor)
+		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 /datum/reagent/nutriment/glucose
@@ -63,6 +66,7 @@
 	color = "#440000"
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjust_nutrition(nutriment_factor * removed) // For hunger and fatness
 	switch(alien)
 		if(IS_SKRELL)
 			M.adjustToxLoss(0.5 * removed)
@@ -147,6 +151,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 2
 	color = "#792300"
+	hydration_factor = -5
 
 /datum/reagent/nutriment/ketchup
 	name = "Ketchup"
@@ -238,7 +243,7 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition - 10 * removed, 0)
+	M.adjust_nutrition(10 * removed)
 	M.overeatduration = 0
 	if(M.nutrition < 0)
 		M.nutrition = 0
@@ -254,6 +259,7 @@
 	color = "#FFFFFF"
 	overdose = REAGENTS_OVERDOSE
 	ingest_met = REM
+	hydration_factor = -5
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -431,6 +437,7 @@
 	reagent_state = LIQUID
 	color = "#E78108"
 	var/nutrition = 0 // Per unit
+	var/hydration = 6 // Per unit
 	var/adj_dizzy = 0 // Per tick
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
@@ -441,7 +448,10 @@
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutrition * removed
+	if(nutrition)
+		M.adjust_nutrition(nutrition * removed)
+	if(hydration)
+		M.adjust_hydration(hydration * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
@@ -1308,6 +1318,7 @@
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."
 	glass_icon = DRINK_ICON_NOISY
+	hydration = 10
 
 /datum/reagent/drink/nothing
 	name = "Nothing"
@@ -2851,3 +2862,16 @@
 
 	glass_name = "Mint Julep"
 	glass_desc = "Minty and refreshing, perfect for a hot day."
+
+
+/datum/reagent/ethanol/cider
+	name = "Cider"
+	id = "cider"
+	description = "A sparkling alcoholic beverage derived from apples, quite refreshing."
+	taste_description = "farmyard apples"
+	color = "#EAB300"
+	strength = 9
+	glass_special = list(DRINK_FIZZ)
+
+	glass_name = "Cider"
+	glass_desc = "A sparkling alcoholic beverage derived from apples, quite refreshing."

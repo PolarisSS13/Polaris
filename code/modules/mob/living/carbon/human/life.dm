@@ -84,6 +84,8 @@
 
 		handle_heartbeat()
 
+		handle_nourishment()
+
 		if(!client)
 			species.handle_npc(src)
 
@@ -862,14 +864,17 @@
 			heal_overall_damage(1,1)
 
 	// nutrition decrease
-	if (nutrition > 0 && stat != DEAD)
-		var/nutrition_reduction = species.hunger_factor
+	var/nutrition_reduction = species.hunger_factor
+	if(nutrition > 0 && stat != DEAD)
+		adjust_nutrition(-species.hunger_factor)
 
 		for(var/datum/modifier/mod in modifiers)
 			if(!isnull(mod.metabolism_percent))
 				nutrition_reduction *= mod.metabolism_percent
 
 		nutrition = max (0, nutrition - nutrition_reduction)
+	if(hydration > 0 && stat != DEAD)
+		adjust_hydration(-species.thirst_factor)
 
 	if (nutrition > 450)
 		if(overeatduration < 600) //capped so people don't take forever to unfat
@@ -1223,8 +1228,16 @@
 				if(350 to 450)					nutrition_icon.icon_state = "nutrition1"
 				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
 				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
-				else							nutrition_icon.icon_state = "nutrition4"
-
+				if(50 to 150)					nutrition_icon.icon_state = "nutrition4"
+				else							nutrition_icon.icon_state = "nutrition5"
+		if(hydration_icon)
+			switch(hydration)
+				if(450 to INFINITY)				hydration_icon.icon_state = "thirst0"
+				if(350 to 450)					hydration_icon.icon_state = "thirst1"
+				if(250 to 350)					hydration_icon.icon_state = "thirst2"
+				if(150 to 250)					hydration_icon.icon_state = "thirst3"
+				if(50 to 150)					hydration_icon.icon_state = "thirst4"
+				else							hydration_icon.icon_state = "thirst5"
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 
@@ -1394,7 +1407,7 @@
 				if(air_master.current_cycle%3==1)
 					if(!(M.status_flags & GODMODE))
 						M.adjustBruteLoss(5)
-					nutrition += 10
+					adjust_nutrition(10)
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)
@@ -1440,6 +1453,7 @@
 	else
 		if(mind && hud_used)
 			ling_chem_display.invisibility = 101
+
 
 /mob/living/carbon/human/handle_shock()
 	..()
@@ -1527,6 +1541,20 @@
 				temp = PULSE_NONE
 
 	return temp
+
+
+/mob/living/carbon/human/proc/handle_nourishment()
+	if (nutrition <= 0)
+		if (prob(1.5))
+			src << span("warning", "Your hunger pangs are excruciating as the stomach acid sears in your stomach... you feel weak.")
+		return
+
+	if (hydration <= 0)
+		if (prob(1.5))
+			src << span("warning", "You feel dizzy and disorientated as your lack of hydration becomes impossible to ignore.")
+		return
+
+
 
 /mob/living/carbon/human/proc/handle_heartbeat()
 	if(pulse == PULSE_NONE)

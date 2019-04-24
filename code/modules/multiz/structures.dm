@@ -130,7 +130,8 @@
 	density = 0
 	opacity = 0
 	anchored = 1
-
+	flags = ON_BORDER
+	
 /obj/structure/stairs/initialize()
 	. = ..()
 	for(var/turf/turf in locs)

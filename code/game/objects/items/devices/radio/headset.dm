@@ -295,7 +295,7 @@
 	name = "judge radio headset"
 	desc = "Headset owned by the judge, making sure court cases and warrants run smoothly.."
 	icon_state = "srv_headset"
-	ks2type = /obj/item/device/encryptionkey/headset_judge
+	ks2type = /obj/item/device/encryptionkey/heads/headset_judge
 
 /obj/item/device/radio/headset/ert
 	name = "emergency response team radio headset"
@@ -320,6 +320,12 @@
 	desc = "The headset of your worst enemy."
 	icon_state = "com_headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
+
+/obj/item/device/radio/headset/government
+	name = "government official's headset"
+	desc = "Oooh. So upper crust and important huh?"
+	icon_state = "com_headset"
+	ks2type = /obj/item/device/encryptionkey/heads/headset_government
 
 /obj/item/device/radio/headset/mmi_radio
 	name = "brain-integrated radio"

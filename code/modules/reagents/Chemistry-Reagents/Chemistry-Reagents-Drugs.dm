@@ -101,16 +101,20 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	M.AdjustWeakened(-2)
 	M.add_chemical_effect(CE_PAINKILLER, 20)
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+	if(prob(10))
+		M.adjust_nutrition(-8)
 	if(prob(5))
 		M.emote(pick("twitch", "shiver"))
 	..()
 
-/datum/reagent/drug/meth/overdose(var/mob/living/M as mob)
+/datum/reagent/drug/meth/overdose(var/mob/living/carbon/human/M as mob)
 	if(M.canmove && !istype(M.loc, /atom/movable))
 		for(var/i = 0, i < 4, i++)
 			step(M, pick(cardinal))
 	if(prob(20))
 		M.emote("laugh")
+	if(prob(20))
+		M.adjust_nutrition(-20)
 	if(prob(33))
 		M.visible_message("<span class = 'danger'>[M]'s hands flip out and flail everywhere!</span>")
 		var/obj/item/I = M.get_active_hand()
@@ -149,7 +153,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 		M.emote(pick("giggle"))
 	..()
 	if(prob(10))
-		M.nutrition -= 10
+		M.adjust_nutrition(-10)
 
 /datum/reagent/drug/cannabis/overdose(var/mob/living/M as mob)
 	if(prob(2))
@@ -195,11 +199,13 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	high_msg_list = list ("You feel euphoric!",
 	"You feel like you can take on the world!",
 	"You sniffle compulsively...",
-	"You feel terrible.")
+	"You feel terrible.",
+	"Your tongue feels very dry.",
+	"Your eyes feel dry.")
 
 /datum/reagent/drug/cocaine/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER,3)
-	M.adjustBrainLoss(0.25)
+	M.adjust_hydration(-15)
 	if(prob(15))
 		M.emote(pick("shiver", "sniff"))
 		..()
@@ -241,3 +247,27 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 		M.adjustToxLoss(30)
 		M.adjustBrainLoss(25)
 		..()
+
+
+/datum/reagent/drug/stimm	//Homemade Hyperzine
+	name = "Stimm"
+	id = "stimm"
+	description = "A homemade stimulant with some serious side-effects."
+	taste_description = "sweetness"
+	taste_mult = 1.8
+	color = "#d0583a"
+	metabolism = REM * 3
+	overdose = 10
+	high_msg_list = list ("You feel your heart pounding in your chest.",
+	"You shudder so violently that it hurts",
+	"You blink rapidly to wet your drying eyes")
+
+/datum/reagent/drug/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_TAJARA)
+		removed *= 1.25
+	..()
+	if(prob(15))
+		M.emote(pick("twitch", "blink_r", "shiver"))
+	if(prob(15))
+		M.take_organ_damage(6 * removed, 0)
+	M.add_chemical_effect(CE_SPEEDBOOST, 1)

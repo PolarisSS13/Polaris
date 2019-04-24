@@ -17,7 +17,7 @@
 	var/fire_icon_state = "humanoid"						// The icon_state used inside OnFire.dmi for when on fire.
 	var/suit_storage_icon = 'icons/mob/belt_mirror.dmi'		// Icons used for worn items in suit storage slot.
 	var/bandages_icon
-	
+
 	// Damage overlay and masks.
 	var/damage_overlays = 'icons/mob/human_races/masks/dam_human.dmi'
 	var/damage_mask = 'icons/mob/human_races/masks/dam_mask_human.dmi'
@@ -32,7 +32,8 @@
 	var/tail_animation										// If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
-	var/icon_scale = 1										// Makes the icon larger/smaller.
+	var/icon_scale = 1										// Makes the icon larger/smaller. (taller)
+	var/icon_width = 1										// Makes the icon larger/smaller. (wider)
 
 	var/race_key = 0										// Used for mob icon cache string.
 	var/icon/icon_template									// Used for mob icon generation for non-32x32 species.
@@ -42,7 +43,8 @@
 	var/short_sighted										// Permanent weldervision.
 	var/blood_volume = 560									// Initial blood volume.
 	var/bloodloss_rate = 1									// Multiplier for how fast a species bleeds out. Higher = Faster
-	var/hunger_factor = 0.05								// Multiplier for hunger.
+	var/hunger_factor = DEFAULT_HUNGER_FACTOR 				// Multiplier for hunger.
+	var/thirst_factor = DEFAULT_THIRST_FACTOR 				// Multiplier for thirst.
 	var/active_regen_mult = 1								// Multiplier for 'Regenerate' power speed, in human_powers.dm
 
 	var/taste_sensitivity = TASTE_NORMAL					// How sensitive the species is to minute tastes.

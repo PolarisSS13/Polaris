@@ -33,13 +33,35 @@
 	touching.clear_reagents()
 	..()
 
+/mob/living/carbon/proc/set_nutrition(var/amt)
+	nutrition = Clamp(amt, 0, initial(nutrition))
+
+/mob/living/carbon/proc/adjust_nutrition(var/amt)
+	set_nutrition(nutrition + amt)
+
+/mob/living/carbon/proc/set_hydration(var/amt)
+	hydration = Clamp(amt, 0, initial(hydration))
+
+/mob/living/carbon/proc/adjust_hydration(var/amt)
+	set_hydration(hydration + amt)
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
-	if(.)
-		if(src.nutrition && src.stat != 2)
-			src.nutrition -= DEFAULT_HUNGER_FACTOR/10
-			if(src.m_intent == "run")
-				src.nutrition -= DEFAULT_HUNGER_FACTOR/10
+	if(!.)
+		return
+	if(stat != DEAD)
+/*
+		if((MUTATION_FAT in src.mutations) && src.bodytemperature <= 360)
+			bodytemperature += 2
+*/
+		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
+		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
+		if(src.m_intent == "run")
+			nut_removed *= 2
+			hyd_removed *= 2
+		adjust_nutrition(-nut_removed)
+		adjust_hydration(-hyd_removed)
+
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
 
