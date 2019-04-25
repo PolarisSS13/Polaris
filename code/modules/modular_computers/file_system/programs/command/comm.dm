@@ -9,8 +9,7 @@
 	program_icon_state = "comm"
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control the station. Can relay long-range communications."
-	required_access_run = access_heads
-	required_access_download = access_heads
+	required_access = access_heads
 	requires_ntnet = 1
 	size = 12
 	usage_flags = PROGRAM_CONSOLE
@@ -25,7 +24,7 @@
 
 /datum/nano_module/program/comm
 	name = "Command and communications program"
-	available_to_ai = TRUE
+//	available_to_ai = TRUE
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
 	var/msg_line2 = ""
@@ -40,7 +39,9 @@
 	crew_announcement.newscast = 1
 
 /datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
-	var/list/data = host.initial_data()
+	var/list/data = list()
+	if(program)
+		data = program.get_header_data()
 
 	if(program)
 		data["emagged"] = program.computer_emagged
@@ -61,7 +62,7 @@
 	data["state"] = current_status
 	data["isAI"] = issilicon(usr)
 	data["authenticated"] = is_autenthicated(user)
-	data["boss_short"] = boss_short
+	data["boss_short"] = using_map.boss_short
 	data["current_security_level"] = security_level
 	data["current_security_level_title"] = num2seclevel(security_level)
 
@@ -156,17 +157,17 @@
 						usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
 						nanomanager.update_uis(src)
 						return
-					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
+					if(!universe.OnShuttleCall(usr))//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						usr <<"<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>"
 						nanomanager.update_uis(src)
 						return
-					var/input = sanitize(input("Please choose a message to transmit to [boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
+					var/input = sanitize(input("Please choose a message to transmit to [using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
 						nanomanager.update_uis(src)
 						return
-					Centcomm_announce(input, usr)
+					CentCom_announce(input, usr)
 					usr << "<span class='notice'>Message transmitted.</span>"
-					log_say("[key_name(usr)] has made an IA [boss_short] announcement: [input]")
+					log_say("[key_name(usr)] has made an IA [using_map.boss_short] announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
