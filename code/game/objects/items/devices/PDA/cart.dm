@@ -4,6 +4,7 @@ var/list/command_cartridges = list(
 	/obj/item/weapon/cartridge/hos,
 	/obj/item/weapon/cartridge/ce,
 	/obj/item/weapon/cartridge/rd,
+	/obj/item/weapon/cartridge/cmo,
 	/obj/item/weapon/cartridge/head,
 	/obj/item/weapon/cartridge/lawyer // Internal Affaris,
 	)

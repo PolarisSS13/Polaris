@@ -61,6 +61,11 @@
 	build_path = /obj/item/weapon/cartridge/quartermaster
 	sort_string = "VBAAI"
 
+/datum/design/item/pda_cartridge/head
+	id = "cart_hop"
+	build_path = /obj/item/weapon/cartridge/head
+	sort_string = "VBAAJ"
+
 /datum/design/item/pda_cartridge/hop
 	id = "cart_hop"
 	build_path = /obj/item/weapon/cartridge/hop
