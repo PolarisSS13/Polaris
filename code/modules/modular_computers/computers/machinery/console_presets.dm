@@ -33,7 +33,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
-
+	
 // Administrator
 
 /obj/machinery/modular_computer/console/preset/sysadmin/install_programs()
@@ -74,6 +74,7 @@
 	 _has_id_slot = 1
 
 /obj/machinery/modular_computer/console/preset/command/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
