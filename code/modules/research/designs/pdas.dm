@@ -62,7 +62,7 @@
 	sort_string = "VBAAI"
 
 /datum/design/item/pda_cartridge/head
-	id = "cart_hop"
+	id = "cart_head"
 	build_path = /obj/item/weapon/cartridge/head
 	sort_string = "VBAAJ"
 
