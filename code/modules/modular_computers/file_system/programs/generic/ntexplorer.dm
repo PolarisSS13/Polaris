@@ -15,9 +15,11 @@
 	var/datum/website/current_website
 	var/homepage = "ntoogle.nt"
 
+
 	var/browser_content
 	var/browser_title
 	var/browser_url
+	var/interactive_website
 
 /datum/nano_module/nt_explorer/New()
 	..()
@@ -31,6 +33,7 @@
 		browser_content = current_website.content
 		browser_title = current_website.title
 		browser_url = current_website.name
+		interactive_website = current_website.interactive_website
 
 /datum/nano_module/nt_explorer/proc/search(mob/user)
 	if(!websites.len)
@@ -50,6 +53,7 @@
 		browser_title = target.title
 		browser_url = target.name
 		current_website = target
+		interactive_website = target.interactive_website
 
 /datum/nano_module/nt_explorer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
@@ -59,10 +63,12 @@
 	data["website_content"] = browser_content
 	data["website_title"] = browser_title
 	data["website_url"] = browser_url
+	data["interactive_website"] = interactive_website
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_explorer.tmpl", "NtNet Explorer", 690, 680, state = state)
+		ui.add_template("Website", "ntnet_explorer_website.tmpl") // Main body
 		if(program.update_layout())
 			ui.auto_update_layout = 1
 		ui.set_auto_update(1)
@@ -79,3 +85,4 @@
 	if(href_list["Refresh"])
 		. = 1
 		fetch_website_data()
+
