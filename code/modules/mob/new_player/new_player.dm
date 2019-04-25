@@ -7,7 +7,7 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	universal_speak = 1
-	var/tos_consent = TRUE //i hate this code so much
+	var/tos_consent = TRUE
 	invisibility = 101
 
 	density = 0
@@ -452,7 +452,6 @@
 		AnnounceArrival(character, rank, join_message)
 	else
 		AnnounceCyborg(character, rank, join_message)
-
 	qdel(src)
 
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
