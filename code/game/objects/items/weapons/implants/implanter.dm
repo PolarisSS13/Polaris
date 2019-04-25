@@ -10,6 +10,7 @@
 	var/obj/item/weapon/implant/imp = null
 	var/active = 1
 
+
 /obj/item/weapon/implanter/attack_self(var/mob/user)
 	active = !active
 	to_chat(user, "<span class='notice'>You [active ? "" : "de"]activate \the [src].</span>")
@@ -91,6 +92,28 @@
 	..()
 	update()
 	return
+
+//begin worldserver code
+/obj/item/weapon/implanter/language/eal_implant
+	name = "implanter (EAL)"
+	desc = "An implant allowing an organic to both hear and speak Encoded Audio Language accurately. Only helps with hearing and producing sounds, not understanding them."
+
+/obj/item/weapon/implanter/language/eal_implant/New()
+	src.imp = new /obj/item/weapon/implant/language/eal(src)
+	..()
+	update()
+	return
+
+/obj/item/weapon/implanter/tracking_implant/weak
+	name = "implanter (tracking)"
+	desc = "An implant normally given to dangerous criminals. Allows security to track your location."
+
+/obj/item/weapon/implanter/tracking_implant/weak/New()
+	src.imp = new /obj/item/weapon/implant/tracking/weak(src)
+	..()
+	update()
+	return
+//end worldserver code --Redd
 
 /obj/item/weapon/implanter/adrenalin
 	name = "implanter-adrenalin"
