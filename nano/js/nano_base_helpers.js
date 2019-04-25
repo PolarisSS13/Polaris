@@ -13,6 +13,8 @@ NanoBaseHelpers = function ()
 				$('#uiTitleFluff').css("background-position","50% 50%");
 				$('#uiTitleFluff').css("background-repeat", "no-repeat");
 
+				$('#ntoogle').css("background-repeat", "no-repeat");
+	
 				return '';
 			},
 			// Generate a Byond link

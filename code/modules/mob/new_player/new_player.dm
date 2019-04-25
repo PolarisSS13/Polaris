@@ -7,7 +7,7 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	universal_speak = 1
-	var/tos_consent = FALSE
+	var/tos_consent = TRUE
 	invisibility = 101
 
 	density = 0
