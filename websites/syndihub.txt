@@ -1,3 +1,3 @@
-<h1>The syndie hub (NSFW)</h1>
+<center><h1>The syndie hub (NSFW)</h1>
 <h2>The home of all that illegal stuff NT doesn't want you to see</h2>
-<img src='seized.png' />
+<img src='seized.png' /></center>
