@@ -21,8 +21,9 @@
 	pref.b_type = character.b_type
 	pref.synth_color = character.synth_color
 	pref.r_synth = character.r_synth
-  pref.g_synth = 	character.g_synth
+ 	pref.g_synth = character.g_synth
 	pref.b_synth = character.b_synth
   
+	//might need code for saving tattoos. Hm.
   
 proc/
