@@ -6,7 +6,7 @@
 	program_key_state = "id_key"
 	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
-	required_access = access_hop
+	required_access = access_change_ids
 	requires_ntnet = 0
 	size = 8
 
