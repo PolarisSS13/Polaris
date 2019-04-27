@@ -68,7 +68,7 @@
 			message = "RFID card is not present in the device. Operation aborted."
 			return
 		running = TRUE
-		target_access = get_access_by_id(text2num(href_list["PRG_execute"]))
+		target_access = get_access_by_id(href_list["PRG_execute"])
 		if(ntnet_global.intrusion_detection_enabled)
 			ntnet_global.add_log("IDS WARNING - Unauthorised access attempt to primary keycode database from device: [computer.network_card.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
