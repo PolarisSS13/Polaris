@@ -3285,23 +3285,23 @@
 		return
 	..()
 
-/obj/item/pizzabox/margherita/New()
+/obj/item/pizzabox/margherita/Initialize()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
 
-/obj/item/pizzabox/vegetable/New()
+/obj/item/pizzabox/vegetable/Initialize()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
 
-/obj/item/pizzabox/mushroom/New()
+/obj/item/pizzabox/mushroom/Initialize()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
 
-/obj/item/pizzabox/meat/New()
+/obj/item/pizzabox/meat/Initialize()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"
 
-/obj/item/pizzabox/old/New()
+/obj/item/pizzabox/old/Initialize()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/oldpizza(src)
 	boxtag = "Deluxe Gourmet"
 
@@ -3451,6 +3451,7 @@
 	center_of_mass = list("x"=21, "y"=12)
 	nutriment_amt = 4
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
+
 /obj/item/weapon/reagent_containers/food/snacks/taco/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
