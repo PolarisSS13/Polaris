@@ -366,8 +366,8 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "\[row\]", "</td><tr>")
 	t = replacetext(t, "\[cell\]", "<td>")
 	t = replacetext(t, "\[logo\]", "<img src = ntlogo.png>")
-	t = replacetext(t, "\[bluelogo\]", "<img src = bluentlogo.png>")
-	t = replacetext(t, "\[solcrest\]", "<img src = sollogo.png>")
+	t = replacetext(t, "\[redlogo\]", "<img src = redntlogo.png>")
+	t = replacetext(t, "\[sglogo\]", "<img src = sglogo.png>")
 	t = replacetext(t, "\[editorbr\]", "")
 	return t
 
