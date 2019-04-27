@@ -2472,6 +2472,7 @@
 #include "code\modules\shuttles\shuttles_web.dm"
 #include "code\modules\shuttles\web_datums.dm"
 #include "code\modules\skills\skill_datums.dm"
+#include "code\modules\skills\skill_manager.dm"
 #include "code\modules\skills\skill_defines\technical.dm"
 #include "code\modules\spells\artifacts.dm"
 #include "code\modules\spells\construct_spells.dm"
