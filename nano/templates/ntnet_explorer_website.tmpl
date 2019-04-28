@@ -1,0 +1,49 @@
+
+{{if data.interactive_website == 1}}
+
+<p><strong>{{:data.website_title}}</strong> - NTNet Explorer</p>
+<hr>
+<table style="width: 100%; margin-right: calc(0%);">
+    <tbody>
+        <tr>
+            <td style="width: 85%; color: black; background-color: #FFFFFF; text-align: left;">{{:data.website_url}}<br></td>{{:helper.link("Browse", null, {'Browse' : 1})}} 
+        </tr>
+    </tbody>
+</table>
+<p>
+
+{{:helper.link("Refresh", null, {'Refresh' : 1})}} </p>
+<p><br></p>
+
+<div style="background-color: #FFFFFF; color: #000000; padding: 6px;">
+
+
+
+<table border="1" style="height: 80px; width: 100%; border-collapse: collapse; background-color: #181818; color: black;">
+<tbody>
+<tr style="height: 20%;">
+<td style="width: 100%; height: 100%px;"></td>
+</tr>
+</tbody>
+</table>
+<table border="1" style="height: 360px; width: 100%; border-collapse: collapse; background-color: #323639; color: black;">
+<tbody>
+<tr style="height: 80%;">
+<td style="width: 100%; height: 100%;">
+<center>
+<p><img src="ntoogle_logo.png" style="display: block; margin-left: auto; margin-right: auto;" /></p>
+<p><a href='{{:helper.link(null, null, {'Browse' : 1})}}'><img src="ntoogle_search.png"/></a></p>
+<p></p>
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+
+
+
+
+</div>
+
+{{/if}}

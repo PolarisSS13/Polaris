@@ -38,6 +38,7 @@ datum/preferences
 	var/g_hair = 0						//Hair color
 	var/b_hair = 0						//Hair color
 	var/f_style = "Shaved"				//Face hair type
+	var/lip_style						//Lips/Makeup Style
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color

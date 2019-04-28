@@ -32,6 +32,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/rcon_console())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 // Administrator
 
@@ -40,7 +41,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 // ===== MEDICAL CONSOLE =====
 /obj/machinery/modular_computer/console/preset/medical
@@ -51,7 +52,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 // ===== RESEARCH CONSOLE =====
 /obj/machinery/modular_computer/console/preset/research
@@ -64,7 +65,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 // ===== COMMAND CONSOLE =====
 /obj/machinery/modular_computer/console/preset/command
@@ -73,12 +74,13 @@
 	 _has_id_slot = 1
 
 /obj/machinery/modular_computer/console/preset/command/install_programs()
+//	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
-
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 
 // ===== SECURITY CONSOLE =====
@@ -92,6 +94,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 
 // ===== CIVILIAN CONSOLE =====
 /obj/machinery/modular_computer/console/preset/civilian
@@ -103,3 +106,4 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())

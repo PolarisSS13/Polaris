@@ -9,4 +9,5 @@
 	end_on_antag_death = 0
 	antag_tags = list(MODE_FACTIONS, MODE_FACTIONS_TF, MODE_FACTIONS_FI, MODE_FACTIONS_BC, MODE_FACTIONS_CD)
 	votable = 0 // Will be votable once it's done.
+	canon = 1
 

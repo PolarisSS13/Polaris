@@ -1,0 +1,30 @@
+
+
+	{{if data.interactive_website == 0}}
+
+<p><strong>{{:data.website_title}}</strong> - NTNet Explorer</p>
+<hr>
+<table style="width: 100%; margin-right: calc(0%);">
+    <tbody>
+        <tr>
+            <td style="width: 85%; color: black; background-color: #FFFFFF; color: black; text-align: left;">{{:data.website_url}}<br></td>{{:helper.link("Browse", null, {'Browse' : 1})}} 
+        </tr>
+    </tbody>
+</table>
+<p>
+
+{{:helper.link("Refresh", null, {'Refresh' : 1})}} </p>
+<p><br></p>
+
+
+<div style="background-color: #FFFFFF; color: #000000; padding: 6px;">
+
+
+
+		{{:data.website_content}}
+
+
+</div>
+
+
+	{{/if}}

@@ -376,3 +376,8 @@
     background-position: -112px -128px;
 }
 
+/* Website Images * /
+
+#ntoogle {
+    background: url(ntoogle.png) 100% 100% no-repeat;
+}
