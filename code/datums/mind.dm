@@ -65,6 +65,8 @@
 
 	var/list/initial_email_login = list("login" = "", "password" = "")
 
+	var/preferences
+
 	//used for antag tcrystal trading, more info in code\game\objects\items\telecrystals.dm
 	var/accept_tcrystals = 0
 
@@ -487,6 +489,8 @@
 /mob/living/proc/mind_initialize()
 	if(mind)
 		mind.key = key
+		if(client)
+			mind.preferences = client.prefs
 	else
 		mind = new /datum/mind(key)
 		mind.original = src
