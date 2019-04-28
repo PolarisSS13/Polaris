@@ -1,4 +1,4 @@
-/datum/game_mode/factions/workers union
+/datum/game_mode/factions/workers_union
 	name = "Union"
 	round_description = "The worker's union will stop at nothing to get their goals met. What do they want this time?"
 	extended_round_description = "The worker's union will stop at nothing to get their goals met. What do they want this time?"
