@@ -256,6 +256,8 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/toggleguests,
 	/datum/admins/proc/announce,
 	/client/proc/colorooc,
+	/client/proc/toggle_canon,
+	/client/proc/save_all_characters,
 	/client/proc/admin_ghost,
 	/client/proc/toggle_view_range,
 	/datum/admins/proc/view_txt_log,
@@ -391,6 +393,8 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/toggle_random_events,
 	/client/proc/editappear,
 	/client/proc/roll_dices,
+	/client/proc/toggle_canon,
+	/client/proc/save_all_characters,
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod
 )
@@ -1108,3 +1112,44 @@ var/list/admin_verbs_event_manager = list(
 
 	log_admin("[key_name(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.")
 	message_admins("\blue [key_name_admin(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.", 1)
+
+
+
+/client/proc/toggle_canon()
+	set name = "Toggle canon"
+	set desc = "Allows you to determine if the round is canon and if "
+	set category = "Persistence"
+
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return
+
+	if(config)
+		if(config.canonicity)
+			config.canonicity = 0
+			for (var/mob/T as mob in mob_list)
+				T << "<br><center><b><font size=4>This round is no longer canon.<br> Character data will not be saved this round.</font></b><br></center><br>"
+			message_admins("Admin [key_name_admin(usr)] has made the round non-canon and disabled saving.", 1)
+		else
+			config.canonicity = 1
+			for (var/mob/T as mob in mob_list)
+				T << "<br><center><span class='notice'><b><font size=4>This round is now canon.<br> Character data will be saved.</font></b><br></span></center><br>"
+			message_admins("Admin [key_name_admin(usr)] has made the round canon and enabled end-round saving.", 1)
+
+/client/proc/save_all_characters()
+	set name = "Save All Characters"
+	set desc = "Saves all characters, assuming the round is canon."
+	set category = "Persistence"
+
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return 0
+
+	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
+		usr << "<font color='red'>The round is not canon!</font>"
+		return 0
+
+	for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
+		H.save_mob_to_prefs()
+		return 1
+

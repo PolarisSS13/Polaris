@@ -8,6 +8,7 @@ var/global/list/additional_antag_types = list()
 	var/config_tag = null
 	var/votable = 1
 	var/probability = 0
+	var/canon = 0 							 // Is this gamemode canon? If 1, characters and money wills save.
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_players_secret = 0          // Minimum number of players for that game mode to be chose in Secret
@@ -558,6 +559,9 @@ proc/get_nt_opposed()
 /mob/verb/check_round_info()
 	set name = "Check Round Info"
 	set category = "OOC"
+
+	if(canonicity) //if we're not canon in config or by gamemode, nothing will save.
+		usr << "<b>This is a canon round.</b>"
 
 	if(!ticker || !ticker.mode)
 		usr << "Something is terribly wrong; there is no gametype."
