@@ -218,6 +218,9 @@ var/global/list/additional_antag_types = list()
 	if(emergency_shuttle && auto_recall_shuttle)
 		emergency_shuttle.auto_recall = 1
 
+	if(canon)
+		config.canonicity = 1
+
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)
 		feedback_set_details("game_mode","[ticker.mode]")
@@ -560,7 +563,7 @@ proc/get_nt_opposed()
 	set name = "Check Round Info"
 	set category = "OOC"
 
-	if(canonicity) //if we're not canon in config or by gamemode, nothing will save.
+	if(config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
 		usr << "<b>This is a canon round.</b>"
 
 	if(!ticker || !ticker.mode)

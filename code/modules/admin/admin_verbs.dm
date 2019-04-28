@@ -1116,7 +1116,7 @@ var/list/admin_verbs_event_manager = list(
 
 
 /client/proc/toggle_canon()
-	set name = "Toggle canon"
+	set name = "Toggle Canon"
 	set desc = "Allows you to determine if the round is canon and if "
 	set category = "Persistence"
 
