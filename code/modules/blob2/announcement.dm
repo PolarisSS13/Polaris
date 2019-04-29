@@ -4,7 +4,7 @@
 	var/datum/blob_type/blob = B.overmind.blob_type // Shortcut so we don't need to delve into three variables every time.
 	var/list/lines = list()
 
-	lines += "Confirmed outbreak of level [7 + blob.difficulty] biohazard aboard [station_name()]. All personnel must contain the outbreak."
+	lines += "Confirmed outbreak of level [7 + blob.difficulty] biohazard aboard [station_name()]. All current residents must contain the outbreak."
 
 	if(blob.difficulty >= BLOB_DIFFICULTY_MEDIUM) // Tell them what kind of blob it is if it's tough.
 		lines += "The biohazard has been identified as a '[blob.name]'."
