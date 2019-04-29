@@ -1,10 +1,12 @@
 // This holds the visual UIs, state, and logic for interacting with the skill system.
 // It is intended to be able to be used in many different places.
 // The actual storage for skills is just an assoc list, so that it is easy to store.
+// This holds the logic for skill allocating, as well as displaying the skills to users.
+// It's in its own datum to allow for it to be used in many places to minimize code duplication.
 
 /datum/skill_manager
 	var/client/user = null				// The client using this UI.
-	var/read_only = FALSE				// If true, the window is not interactable.
+	var/read_only = FALSE				// If true, the skill list cannot be altered.
 	var/list/skill_list_ref = null		// Reference to the true list to display/modify.
 
 /datum/skill_manager/New(client/new_user, list/new_skill_list_ref)
@@ -29,13 +31,33 @@
 	skill_list_ref = null // Don't cut the list, since the list is shared with other things.
 	return ..()
 
-// Outputs a table with
-/datum/skill_manager/proc/display_skill_table()
+/datum/skill_manager/proc/make_window()
+	var/list/dat = list()
+	dat += display_skill_setup_ui()
+
+	var/datum/browser/popup = new(user, "skill_manager_window_\ref[user]", "Skills", 500, 800, src)
+	popup.set_content(dat.Join("<br>"))
+	popup.open()
+
+
+/datum/skill_manager/proc/display_skill_setup_ui()
 	. = list()
 	. += "<b>Select your Skills</b><br>"
-	. += "Current skill points: <b>TODO/TODO</b><br>"
+	. += "[user.prefs.real_name] - <b>[get_fluff_title()]</b><br>"
+	. += skill_point_total_content()
 	. += href(src, list("premade_template" = 1), "Select Premade Template (TODO)")
 
+	. += skill_table_content()
+
+	. = jointext(.,null)
+
+/datum/skill_manager/proc/skill_point_total_content()
+	return "Current skill points: <b>[total_spent_points()]/TODO</b><br>"
+
+// Outputs a table with all the skills according to skill_list_ref, and buttons to modify the referenced list.
+/datum/skill_manager/proc/skill_table_content()
+	. = list()
+	. += "<p style='center'>"
 	. += "<table style = width:90%>"
 	for(var/datum/category_group/skill/group in GLOB.skill_collection.categories)
 		. += "<tr>"
@@ -44,7 +66,9 @@
 
 		for(var/datum/category_item/skill/item in group.items)
 			. += "<tr>"
-			. += "<th>[href(src, list("info" = item), item.name)]</th>"
+			var/invested = get_points_in_skill(item.id)
+			var/displayed_skill_name = "[item.name][invested > 0 ? " ([invested])":""]"
+			. += "<th style='text-align:center'>[href(src, list("info" = item), displayed_skill_name)]</th>"
 
 			var/i = 1
 			for(var/datum/skill_level/level in item.levels)
@@ -52,19 +76,25 @@
 				if(level.cost > 0)
 					displayed_name = "[displayed_name] ([level.cost])"
 
+				var/cell_content = null
 				if(get_skill_level(item.id) == i)
-					. += "<td><span class='linkOn'>[displayed_name]</span></td>"
+					cell_content = "<span class='linkOn'>[displayed_name]</span>"
+				else if(read_only)
+					cell_content = displayed_name
 				else
-					. += "<td>[href(src, list("chosen_skill" = item, "chosen_level" = i), displayed_name)]</td>"
+					cell_content = href(src, list("chosen_skill" = item, "chosen_level" = i), displayed_name)
+
+				. += "<td style='text-align:center'>[cell_content]</td>"
 				i++
 
 			. += "</tr>"
 	. += "</table>"
+	. += "</p>"
 	. = jointext(.,null)
 
 
-// Opens a window describing what the skill and all its levels do.
-// Also provides an alternative means of selecting the desired skill level.
+// Opens a standalone window describing what the skill and all its levels do.
+// Also provides an alternative means of selecting the desired skill level, if allowed to do so.
 /datum/skill_manager/proc/display_skill_info(datum/category_item/skill/item, user)
 	var/list/dat = list()
 	dat += "<i>[item.flavor_desc]</i>"
@@ -76,6 +106,8 @@
 	for(var/datum/skill_level/level in item.levels)
 		if(get_skill_level(item.id) == i)
 			dat += "<span class='linkOn'>[level.name]</span>"
+		else if(read_only)
+			dat += "<b>[level.name]</b>"
 		else
 			dat += href(src, list("chosen_skill" = item, "chosen_level" = i, "refresh_info" = 1), level.name)
 		i++
@@ -91,31 +123,97 @@
 	popup.set_content(dat.Join("<br>"))
 	popup.open()
 
+// Returns TRUE if everything is fine.
+// Things might not be fine if, for example, the player can't afford all the skills chosen.
+/datum/skill_manager/proc/is_valid()
+	return TRUE //TODO
+
 // Safely returns numerical index of the skill in an assoc list.
 // This is only intended for frontend UIs, use a different proc for in-game skill checks (since front-end can change constantly).
 /datum/skill_manager/proc/get_skill_level(skill_id)
 	var/answer = skill_list_ref[skill_id]
 	if(isnull(answer))
-		return 1 // Because Byond is dumb and counts from 1.
+		return SKILL_LEVEL_ZERO
 	return answer
+
+/datum/skill_manager/proc/get_points_in_skill(skill_id)
+	var/datum/category_item/skill/item = GLOB.skill_collection.skills_by_id[skill_id]
+	if(!item) // In case the skill got removed or something.
+		return 0
+	var/level_index = get_skill_level(skill_id)
+	var/datum/skill_level/level = item.levels[level_index]
+	return level.cost
+
+/datum/skill_manager/proc/total_spent_points()
+	. = 0
+	for(var/id in skill_list_ref)
+		. += get_points_in_skill(id)
+
+/datum/skill_manager/proc/get_name_in_skill(skill_id)
+	var/datum/category_item/skill/item = GLOB.skill_collection.skills_by_id[skill_id]
+	if(!item) // In case the skill got removed or something.
+		return "ERROR"
+	var/level_index = get_skill_level(skill_id)
+	var/datum/skill_level/level = item.levels[level_index]
+	return level.name
+/*
+/datum/skill_manager/proc/get_discount_modifier(skill_group, point_cap, max_discount_factor)
+	var/
+	for(var/id in skill_list_ref)
+		var/datum/category_item/skill/item = GLOB.skill_collection.skills_by_id[skill_id]
+		if(!item)
+			continue
+
+	return X * (1 - (X / point_cap) * max_discount_factor)
+*/
+/*
+Skill specialization discount formula;
+	point_cap = 100
+	max_discount_factor = 0.5
+	X = point total inside specific group
+	Y = Discount factor (Capped at max_discount_factor)
+
+	discount_modifier = 1 - (X / point_cap) * max_discount_factor
+	true_point_cost = X * discount_modifier
+*/
+
+// Returns the most expensive skill level rank.
+// Used for flavor, and is only shown to the user.
+/datum/skill_manager/proc/get_fluff_title()
+	var/highest_investment = 0
+	var/highest_skill = null
+
+	for(var/id in skill_list_ref)
+		var/cost = get_points_in_skill(id)
+		if(cost > highest_investment)
+			highest_skill = id
+			highest_investment = cost
+
+	if(highest_skill)
+		return get_name_in_skill(highest_skill)
+	return "Unremarkable"
 
 // Refreshes the window displaying this.
 // Overrided for subtypes which use a different window (like character setup).
 /datum/skill_manager/proc/refresh_ui()
 	return
 
-/datum/skill_manager/character_setup/refresh_ui()
-	return
+// Modifies the referenced list of skills.
+// Can be overrided to do additional things after the fact.
+/datum/skill_manager/proc/write_skill_level(skill_id, new_skill_level)
+	if(read_only)
+		return FALSE
+	skill_list_ref[skill_id] = new_skill_level
+	return TRUE
 
 /datum/skill_manager/Topic(var/href,var/list/href_list)
 	if(..())
 		return 1
-	var/mob/user = usr
 	world << "wew [href]!"
 
 	if(href_list["info"])
 		var/datum/category_item/skill/item = locate(href_list["info"])
-		display_skill_info(item, user)
+		display_skill_info(item, usr)
 		return TOPIC_HANDLED
 
 	if(href_list["chosen_skill"])
@@ -127,53 +225,16 @@
 
 		if(item && !isnull(chosen_level))
 			world << "[item.name] | [chosen_level]"
-			skill_list_ref[item.id] = chosen_level
+			write_skill_level(item.id, chosen_level)
 
 		refresh_ui()
 		// If they clicked the button in the info window, refresh that too.
 		if(href_list["refresh_info"])
-			display_skill_info(item, user)
+			display_skill_info(item, usr)
 		return TOPIC_REFRESH
 
-	return ..()
-
-/*
-/datum/category_item/player_setup_item/skills/OnTopic(href, href_list, user)
-	if(href_list["info"])
-		var/datum/category_item/skill/item = locate(href_list["info"])
-		display_skill_info(item, user)
-		return TOPIC_HANDLED
-
-	if(href_list["chosen_skill"])
-		var/datum/category_item/skill/item = locate(href_list["chosen_skill"])
-		var/chosen_level = text2num(href_list["chosen_level"])
-
-		if(item && !isnull(chosen_level))
-			world << "[item.name] | [chosen_level]"
-			pref.skill_list[item.id] = chosen_level
-
-		// If they clicked the button in the info window, refresh that too.
-		if(href_list["refresh_info"])
-			display_skill_info(item, user)
-		return TOPIC_REFRESH
+//	if(href_list["close"])
+//		qdel(src)
+//		return TOPIC_HANDLED
 
 	return ..()
-*/
-
-/*
-/datum/category_item/player_setup_item/Topic(var/href,var/list/href_list)
-	if(..())
-		return 1
-	var/mob/pref_mob = preference_mob()
-	if(!pref_mob || !pref_mob.client)
-		return 1
-
-	. = OnTopic(href, href_list, usr)
-	if(. & TOPIC_UPDATE_PREVIEW)
-		pref_mob.client.prefs.preview_icon = null
-	if(. & TOPIC_REFRESH)
-		pref_mob.client.prefs.ShowChoices(usr)
-
-/datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
-	return 1
-*/

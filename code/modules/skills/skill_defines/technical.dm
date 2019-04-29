@@ -44,3 +44,4 @@
 	mechanics_desc = null
 	enhancing = TRUE
 	cost = 60
+

@@ -1,7 +1,6 @@
 /datum/category_item/player_setup_item/skills
 	name = "Skills"
 	sort_order = 1
-	var/datum/skill_manager/skill_manager = null // Object that holds UI and logical information about skills.
 
 // 'skill_list' is the new skill system save format, to avoid any potential conflicts from overwriting 'skills' from the old system.
 /datum/category_item/player_setup_item/skills/load_character(var/savefile/S)
@@ -14,15 +13,24 @@
 	if(!pref.skill_list)
 		pref.skill_list = list()
 
+	// Lazyload the manager object.
 	make_skill_manager(pref.skill_list)
 
+	// Clean up any skills that stop existing.
+	for(var/skill_id in pref.skill_list)
+		var/datum/category_item/skill/item = GLOB.skill_collection.skills_by_id[skill_id]
+		if(!item)
+			pref.skill_list -= skill_id
+			to_chat(pref.client, span("warning", "The skill '[skill_id]' no longer exists and has been removed from your skill configuration."))
+
 /datum/category_item/player_setup_item/skills/proc/make_skill_manager(new_skill_list)
-	if(!skill_manager)
-		skill_manager = new(pref.client, new_skill_list)
+	if(!pref.skill_manager)
+		pref.skill_manager = new(pref.client, new_skill_list)
 	else
-		skill_manager.skill_list_ref = new_skill_list // In case we swapped characters or something.
+		pref.skill_manager.skill_list_ref = new_skill_list // In case we swapped characters or something.
 
 /datum/category_item/player_setup_item/skills/content(mob/user)
 	. = list()
-	. += skill_manager.display_skill_table()
+	. += pref.skill_manager.display_skill_setup_ui()
 	. = jointext(.,null)
+

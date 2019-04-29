@@ -163,7 +163,7 @@
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
-	
+
 		//Prevents people rejoining as same character.
 		for (var/mob/living/carbon/human/C in mob_list)
 			var/char_name = client.prefs.real_name
@@ -178,14 +178,8 @@
 			usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
 			return
 
-		if(!is_alien_whitelisted(src, all_species[client.prefs.species]))
-			src << alert("You are currently not whitelisted to play [client.prefs.species].")
-			return 0
-
-		var/datum/species/S = all_species[client.prefs.species]
-		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
-			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
-			return 0
+		if(!can_enter_round())
+			return
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
 		return
@@ -324,6 +318,17 @@
 	if(!job.player_old_enough(src.client))	return 0
 	return 1
 
+// Used to check someone doesn't try to join the game with skills they can't get.
+// Its possible for skill costs to change and as a result, people no longer being able to afford their setup.
+// Instead of wiping their setup entirely when that happens, this will let them go tweak it.
+/mob/new_player/proc/check_skill_validity()
+	if(!client)
+		return FALSE
+
+	if(!client.prefs.skill_manager) // Lazyload it if its not already instantiated.
+		client.prefs.skill_manager = new(client, client.prefs.skill_list, src)
+
+	return client.prefs.skill_manager.is_valid()
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if (src != usr)
@@ -354,6 +359,8 @@
 	job_master.AssignRole(src, rank, 1)
 
 	var/mob/living/character = create_character(T)	//creates the human and transfers vars and mind
+	if(!character)
+		return FALSE
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 
@@ -444,6 +451,21 @@
 	dat += "</center>"
 	src << browse(dat, "window=latechoices;size=300x640;can_close=1")
 
+// A nicer, more generic way to conditionally stop people from joining the round, via latejoin or otherwise. Doesn't forbid observing.
+/mob/new_player/proc/can_enter_round()
+	if(!is_alien_whitelisted(src, all_species[client.prefs.species]))
+		to_chat(src, span("warning", "You are currently not whitelisted to play [client.prefs.species]."))
+		return FALSE
+
+	var/datum/species/S = all_species[client.prefs.species]
+	if(!(S.spawn_flags & SPECIES_CAN_JOIN))
+		to_chat(src, span("warning", "Your current species, [client.prefs.species], is not available for play on the station."))
+		return FALSE
+
+	if(!check_skill_validity())
+		to_chat(src, span("warning", "There is a problem with your character's skill configuration, and you cannot join until it is resolved."))
+		return FALSE
+	return TRUE
 
 /mob/new_player/proc/create_character(var/turf/T)
 	spawning = 1
@@ -483,6 +505,7 @@
 			new_character.rename_self("clown")
 		mind.original = new_character
 		mind.traits = client.prefs.traits.Copy()
+		mind.skills = client.prefs.skill_list.Copy()
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.name = real_name

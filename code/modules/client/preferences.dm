@@ -89,6 +89,7 @@ datum/preferences
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 1
 
+	var/datum/skill_manager/character_setup/skill_manager = null // Object that holds UI and logical information about skills.
 	var/list/skill_list = list() // Assocative list of skills chosen.
 
 	// maps each organ to either null(intact), "cyborg" or "amputated"

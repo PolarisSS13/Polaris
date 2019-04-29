@@ -14,7 +14,7 @@ GLOBAL_DATUM_INIT(skill_collection, /datum/category_collection/skill, new)
 	var/id = null					// A unique identifer for the skill. See code\__defines\skills.dm for definitions.
 	var/flavor_desc = null			// General description of what the skill does.
 	var/govern_desc = null			// Explaination for what the skill covers.
-	var/typical_desc = null			// Descripes who generally has what level for this skill.
+	var/typical_desc = null			// Descripes who generally has what level for this skill, in-universe.
 	var/list/skill_groups = null	// Skills in the same group get a discount based on how heavily invested the character is in the group. This is a list.
 	var/list/levels = null			// List of /datum/skill_level objects which are ordered from lowest to highest skilled.
 									// The order of each one DOES matter. The first entry is the default selection.
