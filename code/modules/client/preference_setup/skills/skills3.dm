@@ -27,7 +27,7 @@
 	if(!pref.skill_manager)
 		pref.skill_manager = new(pref.client, new_skill_list)
 	else
-		pref.skill_manager.skill_list_ref = new_skill_list // In case we swapped characters or something.
+		pref.skill_manager.change_skill_list(new_skill_list) // In case we swapped characters or something.
 
 /datum/category_item/player_setup_item/skills/content(mob/user)
 	. = list()

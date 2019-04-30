@@ -2477,7 +2477,7 @@
 #include "code\modules\skills\skill_defines\technical.dm"
 #include "code\modules\skills\skill_defines\testing.dm"
 #include "code\modules\skills\skill_manager\character_setup.dm"
-#include "code\modules\skills\skill_manager\local_viewer.dm"
+#include "code\modules\skills\skill_manager\ingame_managers.dm"
 #include "code\modules\skills\skill_manager\skill_manager.dm"
 #include "code\modules\spells\artifacts.dm"
 #include "code\modules\spells\construct_spells.dm"

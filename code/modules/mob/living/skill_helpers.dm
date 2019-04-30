@@ -36,7 +36,3 @@
 		if(skill_check(skill_id, skills[skill_id]))
 			return TRUE
 	return FALSE
-
-/mob/living/verb/test_skill_check(req_level as num)
-	world << skill_check("Lorem Ipsum", req_level)
-

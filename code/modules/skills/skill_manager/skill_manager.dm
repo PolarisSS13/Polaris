@@ -17,13 +17,13 @@
 		var/mob/M = new_user
 		user = M.client
 	else
-		CRASH("skill_ui/New() suppled with non-client or non-mob argument '[new_user]'.")
+		crash_with("/datum/skill_manager/New() suppled with non-client or non-mob argument '[new_user]'.")
 		qdel(src)
 
 	if(islist(new_skill_list_ref))
 		skill_list_ref = new_skill_list_ref
 	else
-		CRASH("skill_ui/New() suppled with improper list reference argument '[new_skill_list_ref]'.")
+		crash_with("/datum/skill_manager/New() suppled with improper list reference argument '[new_skill_list_ref]'.")
 		qdel(src)
 
 /datum/skill_manager/Destroy()
@@ -31,18 +31,21 @@
 	skill_list_ref = null // Don't cut the list, since the list is shared with other things.
 	return ..()
 
+/datum/skill_manager/proc/change_skill_list(list/new_skill_list_ref)
+	skill_list_ref = new_skill_list_ref
+
 /datum/skill_manager/proc/make_window()
 	var/list/dat = list()
 	dat += display_skill_setup_ui()
 
-	var/datum/browser/popup = new(user, "skill_manager_window_\ref[user]", "Skills", 500, 800, src)
+	var/datum/browser/popup = new(user, "skill_manager_window_\ref[user]", "Skills", 800, 500, src)
 	popup.set_content(dat.Join("<br>"))
 	popup.open()
 
 
 /datum/skill_manager/proc/display_skill_setup_ui()
 	. = list()
-	. += "<b>Select your Skills</b><br>"
+//	. += "<b>Select your Skills</b><br>"
 	. += "[user.prefs.real_name] - <b>[get_fluff_title()]</b><br>"
 	. += skill_point_total_content()
 	. += href(src, list("premade_template" = 1), "Select Premade Template (TODO)")
