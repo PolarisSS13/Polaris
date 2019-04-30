@@ -4,8 +4,8 @@
 	power_usage = 50
 	icon_state = "printer"
 	hardware_size = 1
-	var/stored_paper = 5
-	var/max_paper = 10
+	var/stored_paper = 50
+	var/max_paper = 50
 	var/obj/item/weapon/paper/P = null	// Currently stored paper for scanning.
 
 
