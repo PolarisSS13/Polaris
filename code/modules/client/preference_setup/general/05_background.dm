@@ -8,7 +8,7 @@
 	S["gen_record"]				>> pref.gen_record
 	S["home_system"]			>> pref.home_system
 	S["citizenship"]			>> pref.citizenship
-	S["faction"]				>> pref.faction
+//	S["faction"]				>> pref.faction
 	S["religion"]				>> pref.religion
 	S["economic_status"]		>> pref.economic_status
 
@@ -18,14 +18,14 @@
 	S["gen_record"]				<< pref.gen_record
 	S["home_system"]			<< pref.home_system
 	S["citizenship"]			<< pref.citizenship
-	S["faction"]				<< pref.faction
+//	S["faction"]				<< pref.faction
 	S["religion"]				<< pref.religion
 	S["economic_status"]		<< pref.economic_status
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
 	if(!pref.citizenship) pref.citizenship = "None"
-	if(!pref.faction)     pref.faction =     "None"
+//	if(!pref.faction)     pref.faction =     "None"
 	if(!pref.religion)    pref.religion =    "None"
 
 	pref.economic_status = sanitize_inlist(pref.economic_status, ECONOMIC_CLASS, initial(pref.economic_status))
@@ -41,22 +41,29 @@
 	character.religion			= pref.religion
 
 /datum/category_item/player_setup_item/general/background/content(var/mob/user)
-	. += "<b>Background Information</b><br>"
-	. += "Social Class: <a href='?src=\ref[src];econ_status=1'>[pref.economic_status]</a><br/>"
-	. += "Home System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
-	. += "Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
-	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>"
+	. += "<h1>Character Background:</h1><hr>"
+	if(!pref.existing_character)
+		. += "Geminus City is on the planet Pollux, and is located in Blue Colony, in the Vetra star system. You may choose a different background. Social class and the system you are born in cannot be changed once set.</br><br>"
+		. += "Social Class: <a href='?src=\ref[src];econ_status=1'>[pref.economic_status]</a><br/>"
+		. += "Birth System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
+
+	else
+		. += "Social Class: [pref.economic_status]<br/>"
+		. += "Birth System: [pref.home_system]<br/>"
+
+	. += "Continental Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
+//	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>" // meh do we even use this?
 	. += "Religion: <a href='?src=\ref[src];religion=1'>[pref.religion]</a><br/>"
 
-	. += "<br/><b>Records</b>:<br/>"
+	. += "<br/><b>Public Records</b>:<br/>"
 	if(jobban_isbanned(user, "Records"))
 		. += "<span class='danger'>You are banned from using character records.</span><br>"
 	else
-		. += "Medical Records:<br>"
+		. += "Hospital Records:<br>"
 		. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br><br>"
 		. += "Employment Records:<br>"
 		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
-		. += "Security Records:<br>"
+		. += "Police Records:<br>"
 		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -67,7 +74,7 @@
 			return TOPIC_REFRESH
 
 	else if(href_list["home_system"])
-		var/choice = input(user, "Please choose a home system.", "Character Preference", pref.home_system) as null|anything in home_system_choices + list("Unset","Other")
+		var/choice = input(user, "Please choose a home system.", "Character Preference", pref.home_system) as null|anything in home_system_choices
 		if(!choice || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		if(choice == "Other")
@@ -89,7 +96,7 @@
 		else
 			pref.citizenship = choice
 		return TOPIC_REFRESH
-
+/*
 	else if(href_list["faction"])
 		var/choice = input(user, "Please choose a faction to work for.", "Character Preference", pref.faction) as null|anything in faction_choices + list("None","Other")
 		if(!choice || !CanUseTopic(user))
@@ -101,7 +108,7 @@
 		else
 			pref.faction = choice
 		return TOPIC_REFRESH
-
+*/
 	else if(href_list["religion"])
 		var/choice = input(user, "Please choose a religion.", "Character Preference", pref.religion) as null|anything in religion_choices + list("None","Other")
 		if(!choice || !CanUseTopic(user))

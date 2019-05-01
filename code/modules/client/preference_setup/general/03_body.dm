@@ -172,16 +172,43 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
  	user << browse_rsc(pref.preview_icon, "previewicon.png")
 
 	var/mob_species = all_species[pref.species]
-	. += "<table><tr style='vertical-align:top'><td><b>Body</b> "
-	. += "(<a href='?src=\ref[src];random=1'>&reg;</A>)"
+	. += "<h1>Physical Appearance:</h1><hr>"
+	if(!pref.existing_character)
+		. += "Set your character's physical appearance. Once this is done, you cannot undo this. You can change your character's appearance in-game.<br><br>"
+	. += "<table><tr style='vertical-align:top'><td>"
+	if(!pref.existing_character)
+		. += "<b>Body</b> "
+		. += "(<a href='?src=\ref[src];random=1'>&reg; Random</A>)"
 	. += "<br>"
-	. += "Species: <a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
-	. += "Blood Type: <a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	. += "<b>Species: </b><br>"
+	if(!pref.existing_character)
+		. += "<a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
+	else
+		. += "[pref.species]"
+	. += "<br>"
+	. += "<b>Blood Type: </b><br>"
+	if(!pref.existing_character)
+		. += "<a href='?src=\ref[src];blood_type=1'>[pref.b_type]</a><br>"
+	else
+		. += "[pref.b_type]"
+	. += "<br>"
 	if(has_flag(mob_species, HAS_SKIN_TONE))
-		. += "Skin Tone: <a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/220</a><br>"
-	. += "Needs Glasses: <a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
-	. += "Limbs: <a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
-	. += "Internal Organs: <a href='?src=\ref[src];organs=1'>Adjust</a><br>"
+		. += "<b>Skin Tone:</b> <br>"
+		if(!pref.existing_character)
+			. += "<a href='?src=\ref[src];skin_tone=1'>[-pref.s_tone + 35]/220</a> ([skintone2racedescription(pref.s_tone)])<br>"
+		else
+			. += "[skintone2racedescription(pref.s_tone)]<br>"
+
+	. += "<b>Needs Glasses: </b><br>"
+	if(!pref.existing_character)
+		. += "<a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
+	else
+		. += "[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]<br>"
+	if(!pref.existing_character)
+		. += "<b>Limbs:</b> "
+		. += "<br><a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
+		. += "<b>Internal Organs:</b> "
+		. += "<a href='?src=\ref[src];organs=1'>Adjust</a><br>"
 
 	//display limbs below
 	var/ind = 0
@@ -272,7 +299,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				else
 					. += "\tMechanically assisted [organ_name]"
 	if(!ind)
-		. += "\[...\]<br><br>"
+		if(!pref.existing_character)
+			. += "\[...\]<br><br>"
 	else
 		. += "<br><br>"
 
@@ -283,23 +311,43 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<br><a href='?src=\ref[src];toggle_preview_value=[EQUIP_PREVIEW_JOB]'>[pref.equip_preview_mob & EQUIP_PREVIEW_JOB ? "Hide job gear" : "Show job gear"]</a>"
 	. += "</td></tr></table>"
 
-	. += "<b>Hair</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
+		if(!pref.existing_character)
+			. += "<b>Hairstyle:</b><br>"
+			. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><tr><td>__</td></tr></table></font> "
+	. += "<br>"
 
-	. += "<br><b>Facial</b><br>"
+	if(!pref.existing_character)
+		. += " <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
+	else
+		. += "<b>Hairstyle:</b> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><tr><td>__</td></tr></table></font> "
+		. += "[pref.h_style]<br>"
+
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
-		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
-	. += " Style: <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
+		if(!pref.existing_character)
+			. += "<br><b>Facial Hair:</b><br>"
+			. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
+		else
+			. += "<b>Facial Hair:</b> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
+			. += "[pref.f_style]<br>"
+
+	if(!pref.existing_character)
+		. += "<a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
-		. += "<br><b>Eyes</b><br>"
-		. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<br><b>Eye Color: </b>"
+		if(!pref.existing_character)
+			. += "<font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><tr><td>__</td></tr></table></font><a href='?src=\ref[src];eye_color=1'>Change Color</a> <br>"
+		else
+			. += "<font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><tr><td>__</td></tr></table></font><br>"
+
 
 	if(has_flag(mob_species, HAS_SKIN_COLOR))
-		. += "<br><b>Body Color</b><br>"
-		. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><tr><td>__</td></tr></table></font><br>"
+		. += "<br><b>Body Color:</b><br>"
+		if(!pref.existing_character)
+			. += "<a href='?src=\ref[src];skin_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><tr><td>__</td></tr></table></font><br>"
+		else
+			. += "<font face='fixedsys' size='3' color='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_skin, 2)][num2hex(pref.g_skin, 2)][num2hex(pref.b_skin, 2)]'><tr><td>__</td></tr></table></font><br>"
 
 	. += "<br><a href='?src=\ref[src];marking_style=1'>Body Markings +</a><br>"
 	for(var/M in pref.body_markings)

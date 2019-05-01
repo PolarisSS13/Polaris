@@ -7,6 +7,9 @@ var/list/gamemode_cache = list()
 	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
 
 	var/canonicity = 0					// if we're canon or not.
+	var/years_in_future = 544			// how many years in the future are we?
+	var/days_in_future = 0				// how many years in the future are we?
+	var/months_in_future = 0			// how many years in the future are we?
 
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout

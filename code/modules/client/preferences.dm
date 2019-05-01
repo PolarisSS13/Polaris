@@ -29,6 +29,12 @@ datum/preferences
 	var/be_random_name = 0				//whether we are a random name every round
 	var/nickname						//our character's nickname
 	var/age = 30						//age of character
+	var/last_birthday = 30				//not to be confused with age. used for birthday calc
+	var/birth_day = 1					//day you were born
+	var/birth_month	= 1					//month you were born
+	var/birth_year						//year you were born
+	// There's no birth year, as that's automatically calculated by your age.
+
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "O+"					//blood type (not-chooseable)
 	var/backbag = 2					//backpack type
@@ -131,6 +137,8 @@ datum/preferences
 	var/datum/browser/panel
 
 	var/lastnews // Hash of last seen lobby news content.
+
+	var/existing_character = 0 //when someone spawns with this character for the first time or confirms, it's set to 1.
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
@@ -255,6 +263,7 @@ datum/preferences
 	if(href_list["save"])
 		save_preferences()
 		save_character()
+		make_existing()
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
@@ -287,6 +296,8 @@ datum/preferences
 	// Special Case: This references variables owned by two different datums, so do it here.
 	if(be_random_name)
 		real_name = random_name(identifying_gender,species)
+
+	character.adjust_aging()
 
 	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
@@ -324,3 +335,11 @@ datum/preferences
 /datum/preferences/proc/close_load_dialog(mob/user)
 	//user << browse(null, "window=saves")
 	panel.close()
+
+/datum/preferences/proc/make_existing()
+	existing_character = 1
+	return 1
+
+/datum/preferences/proc/make_editable()
+	existing_character = 0
+	return 1

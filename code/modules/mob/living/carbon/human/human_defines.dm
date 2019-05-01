@@ -37,6 +37,10 @@
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/age = 30		//Player's age (pure fluff)
+	var/birth_day = 28
+	var/birth_month = 3
+	var/birth_year = 2533
+
 	var/b_type = "A+"	//Player's bloodtype
 	var/synthetic		//If they are a synthetic (aka synthetic torso)
 	var/voice_type = 1 //for determining which sound to play when mob does *scream
