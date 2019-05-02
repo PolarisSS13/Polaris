@@ -28,7 +28,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_red"]			>> pref.r_eyes
 	S["eyes_green"]			>> pref.g_eyes
 	S["eyes_blue"]			>> pref.b_eyes
-	S["b_type"]				>> pref.b_type
+	S["b_type"]			>> pref.b_type
+	S["weight"]			>> pref.weight
 	S["disabilities"]		>> pref.disabilities
 	S["organ_data"]			>> pref.organ_data
 	S["rlimb_data"]			>> pref.rlimb_data
@@ -58,7 +59,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_red"]			<< pref.r_eyes
 	S["eyes_green"]			<< pref.g_eyes
 	S["eyes_blue"]			<< pref.b_eyes
-	S["b_type"]				<< pref.b_type
+	S["b_type"]			<< pref.b_type
+	S["weight"]			<< pref.weight
 	S["disabilities"]		<< pref.disabilities
 	S["organ_data"]			<< pref.organ_data
 	S["rlimb_data"]			<< pref.rlimb_data
@@ -88,6 +90,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.g_eyes			= sanitize_integer(pref.g_eyes, 0, 255, initial(pref.g_eyes))
 	pref.b_eyes			= sanitize_integer(pref.b_eyes, 0, 255, initial(pref.b_eyes))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
+	pref.weight			= sanitize_integer(pref.weight, WEIGHT_MIN, WEIGHT_MAX, initial(pref.weight))
 
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!pref.organ_data) pref.organ_data = list()
@@ -123,6 +126,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	character.r_synth	= pref.r_synth
 	character.g_synth	= pref.g_synth
 	character.b_synth	= pref.b_synth
+	character.weight	= pref.weight
+	character.calories	= character.weight_to_calories()
 
 	// Destroy/cyborgize organs and limbs.
 	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO))
@@ -185,6 +190,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<a href='?src=\ref[src];show_species=1'>[pref.species]</a><br>"
 	else
 		. += "[pref.species]"
+	. += "<br>"
+	. += "<b>Body Weight: </b><br>"
+	if(!pref.existing_character)
+		. += "<a href='?src=\ref[src];set_weight=1'>[pref.weight]</a><br>"
+	else
+		. += "[pref.weights]"
 	. += "<br>"
 	. += "<b>Blood Type: </b><br>"
 	if(!pref.existing_character)
@@ -377,6 +388,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if(new_b_type && CanUseTopic(user))
 			pref.b_type = new_b_type
 			return TOPIC_REFRESH
+			
+	else if(href_list["set_weight"])
+		var/min_weight = current_species.min_calories
+		var/max_weight = current_species.max_calories
+		var/new_weight = input(user, "Choose your character's age:\n([min_weight]-[max_weight])", "Character Preference", pref.weight) as num|null
+		if(new_weight && CanUseTopic(user))
+			pref.weight = max(min(round(text2num(new_weight)), max_weight), min_weight)
+			return TOPIC_REFRESH
+	
 
 	else if(href_list["show_species"])
 		// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
