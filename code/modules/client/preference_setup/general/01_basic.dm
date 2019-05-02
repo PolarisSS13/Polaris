@@ -175,13 +175,13 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		var/min_day = 1
 		var/max_day
 
-		if(pref.birth_month == 1|3|5|7|8|10|12) //Please don't look, I have shame.
+		if(pref.birth_month in THIRTY_ONE_DAY_MONTHS) //Please don't look, I have shame.
 			max_day = 31
 
-		if(pref.birth_month == 4|6|9|11)
+		if(pref.birth_month in THIRTY_DAY_MONTHS)
 			max_day = 30
 
-		if(pref.birth_month == 2)
+		if(pref.birth_month in TWENTY_EIGHT_DAY_MONTHS)
 			max_day = 28
 
 		var/new_day = input(user, "Choose your character's birth day:\n([min_day]-[max_day])", "Character Preference", pref.birth_day) as num|null
@@ -197,10 +197,10 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		var/new_month = input(user, "Choose your character's birth month:\n([month_min]-[month_max])", "Character Preference", pref.birth_month) as num|null
 		if(new_month && CanUseTopic(user))
 			pref.birth_month = max(min(round(text2num(new_month)), month_max), month_min)
-			if(pref.birth_month == 4|6|9|11)
+			if(pref.birth_month in THIRTY_DAY_MONTHS)
 				if(pref.birth_day > 30)
 					pref.birth_day = 30
-			if(pref.birth_month == 2)
+			if(pref.birth_month in TWENTY_EIGHT_DAY_MONTHS)
 				if(pref.birth_day > 28)
 					pref.birth_day = 28
 			adjust_year()
