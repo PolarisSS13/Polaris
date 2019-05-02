@@ -64,6 +64,9 @@ var/list/trait_categories = list() // The categories available for the trait men
 		if(T.category != current_tab)
 			continue
 
+		if(!T.selectable)
+			continue
+
 		var/ticked = (T.name in pref.traits)
 		var/style_class
 		if(!T.validate(pref.traits, src))
@@ -145,7 +148,7 @@ var/list/trait_categories = list() // The categories available for the trait men
 	var/desc = null							// Description of what it does, also shown on UI.
 	var/list/mutually_exclusive = list()	// List of trait types which cannot be taken alongside this trait.
 	var/category = null						// What section to place this trait inside.
-
+	var/selectable = 1
 // Applies effects to the newly spawned mob.
 /datum/trait/proc/apply_trait_post_spawn(var/mob/living/L)
 	return

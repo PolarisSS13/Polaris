@@ -114,6 +114,7 @@
 	var/charges = 0.0
 	var/nutrition = 400//Carbon
 	var/hydration = 400
+	var/calories = WEIGHT_NORMAL
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0

@@ -41,6 +41,7 @@
 	var/synthetic		//If they are a synthetic (aka synthetic torso)
 	var/voice_type = 1 //for determining which sound to play when mob does *scream
 
+	var/weight //defined by calories. see life.dm
 
 	var/list/all_underwear = list()
 	var/list/all_underwear_metadata = list()
