@@ -195,7 +195,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(!pref.existing_character)
 		. += "<a href='?src=\ref[src];set_weight=1'>[pref.weight]</a><br>"
 	else
-		. += "[pref.weights]"
+		. += "[pref.weight]"
 	. += "<br>"
 	. += "<b>Blood Type: </b><br>"
 	if(!pref.existing_character)
