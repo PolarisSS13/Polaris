@@ -1,7 +1,6 @@
 /datum/modifier/trait
 	flags = MODIFIER_GENETIC	// We want traits to persist if the person gets cloned.
 
-
 /datum/modifier/trait/flimsy
 	name = "flimsy"
 	desc = "You're more fragile than most, and have less of an ability to endure harm."
@@ -77,6 +76,7 @@
 	desc = "Your body is a bit shorter than average."
 	icon_width_percent = 1
 	icon_scale_percent = 0.95
+
 
 /datum/modifier/trait/shorter
 	name = "Shorter"

@@ -741,53 +741,6 @@
 	return
 
 
-/mob/living/carbon/human/proc/handle_weight()
-	if(!species.uses_calories)
-		return
-
-	weight = calories / 3500 //Weight is in pounds here.
-
-	// MIN TO THINNER
-	if (calories <= species.thinner_calories)
-		if(!has_modifier_of_type(/datum/modifier/trait/thinner))
-			reset_weight()
-			add_modifier(/datum/modifier/trait/thinner, null, src)
-
-			src << "<span class='danger'>You feel your body becoming thinner.</span>"
-			return
-
-	// THINNER TO THIN
-	else if ((calories >= species.thinner_calories) && (calories <= species.thin_calories))
-		if(!has_modifier_of_type(/datum/modifier/trait/thin))
-			reset_weight()
-			add_modifier(/datum/modifier/trait/thin, null, src)
-			src << "<span class='danger'>You feel your body becoming thin.</span>"
-			return
-
-	// THIN TO NORMAL
-	else if ((calories >= species.thin_calories) && (calories <= species.normal_calories))
-		if(has_modifier_of_type(/datum/modifier/trait/fat) | has_modifier_of_type(/datum/modifier/trait/thin) | has_modifier_of_type(/datum/modifier/trait/thinner) | has_modifier_of_type(/datum/modifier/trait/obese))
-			reset_weight()
-
-			src << "<span class='danger'>You feel your body becoming normal.</span>"
-			return
-
-	// NORMAL to FAT
-	else if ((calories >= species.normal_calories) && (calories <= species.fat_calories))
-		if(!has_modifier_of_type(/datum/modifier/trait/fat))
-			reset_weight()
-			add_modifier(/datum/modifier/trait/fat, null, src)
-			src << "<span class='danger'>You feel your body becoming fat.</span>"
-			return
-
-	// FAT to OBESE
-	else if (calories > species.fat_calories)
-		if(!has_modifier_of_type(/datum/modifier/trait/obese))
-			reset_weight()
-			add_modifier(/datum/modifier/trait/obese, null, src)
-			src << "<span class='danger'>You feel your body becoming obese.</span>"
-			return
-
 	//beyond this you're not getting any bigger, but you'll die.
 
 /mob/living/carbon/human/proc/stabilize_body_temperature()
