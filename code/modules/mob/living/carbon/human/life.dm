@@ -86,6 +86,8 @@
 
 		handle_nourishment()
 
+		handle_weight()
+
 		if(!client)
 			species.handle_npc(src)
 
@@ -719,6 +721,28 @@
 	return temp_change
 */
 
+/mob/living/carbon/human/proc/reset_weight()
+	if(has_modifier_of_type(/datum/modifier/trait/thin))
+		remove_a_modifier_of_type(/datum/modifier/trait/thin)
+
+
+	if(has_modifier_of_type(/datum/modifier/trait/thinner))
+		remove_a_modifier_of_type(/datum/modifier/trait/thinner)
+
+
+	if(has_modifier_of_type(/datum/modifier/trait/fat))
+		remove_a_modifier_of_type(/datum/modifier/trait/fat)
+
+
+	if(has_modifier_of_type(/datum/modifier/trait/obese))
+		remove_a_modifier_of_type(/datum/modifier/trait/obese)
+
+	update_transform()
+	return
+
+
+	//beyond this you're not getting any bigger, but you'll die.
+
 /mob/living/carbon/human/proc/stabilize_body_temperature()
 	// We produce heat naturally.
 	if (species.passive_temp_gain)
@@ -875,6 +899,22 @@
 		nutrition = max (0, nutrition - nutrition_reduction)
 	if(hydration > 0 && stat != DEAD)
 		adjust_hydration(-species.thirst_factor)
+
+
+
+	if(calories > 0 && stat != DEAD && client) //Calories won't burn when you're SSD or dead.
+		adjust_calories(-species.metabolic_rate / 10)
+
+	if(calories <= species.min_calories | calories >= species.max_calories)
+		if (prob(5))
+			adjustToxLoss(10)
+	//If you're too fat or skinny, you're gon die. Maybe make better symptoms later.
+		if (prob(5))
+			vomit()
+
+		if (prob(15))
+			src << "<span class='danger'>[pick("You feel dizzy and incredibly sick", "Your head is pounding", "Your entire body feels like it's dying")]!</span>"
+			Weaken(20)
 
 	if (nutrition > 450)
 		if(overeatduration < 600) //capped so people don't take forever to unfat
