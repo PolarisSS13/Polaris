@@ -10,7 +10,9 @@
 	density = 0
 	opacity = 0
 	anchored = 1
-
+	flags = ON_BORDER
+	layer = STAIRS_LAYER
+	
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
 	var/obj/structure/ladder/target_down
@@ -67,6 +69,10 @@
 	var/target_ladder = getTargetLadder(M)
 	if(target_ladder)
 		M.forceMove(get_turf(target_ladder))
+
+/obj/structure/ladder/attack_robot(var/mob/M)
+	attack_hand(M)
+	return
 
 /obj/structure/ladder/proc/getTargetLadder(var/mob/M)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc,/turf))))
@@ -130,7 +136,8 @@
 	density = 0
 	opacity = 0
 	anchored = 1
-
+	flags = ON_BORDER
+	
 /obj/structure/stairs/initialize()
 	. = ..()
 	for(var/turf/turf in locs)
