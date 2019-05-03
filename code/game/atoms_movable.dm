@@ -110,7 +110,7 @@
 	if(loc != newloc)
 		if(!direct)
 			direct = get_dir(oldloc, newloc)
-		if (direct in list(NORTH, SOUTH, EAST, WEST, UP, DOWN)) //Cardinal move
+		if (!(direct & (direct - 1))) //Cardinal move
 			. = ..()
 		else //Diagonal move, split it into cardinal moves
 			moving_diagonally = FIRST_DIAG_STEP
@@ -199,6 +199,13 @@
 /atom/movable/Cross(atom/movable/AM)
 	. = TRUE
 	return CanPass(AM, loc)
+
+/atom/movable/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(locs && locs.len >= 2)	// If something is standing on top of us, let them pass.
+		if(mover.loc in locs)
+			. = TRUE
+	return .
 
 //oldloc = old location on atom, inserted when forceMove is called and ONLY when forceMove is called!
 /atom/movable/Crossed(atom/movable/AM, oldloc)
