@@ -2,6 +2,13 @@
 /obj/item/weapon/material/fishing_rod
 	name = "crude fishing rod"
 	desc = "A crude rod made for catching fish."
+	description_info = "A tool usable on water-tiles to attempt to catch fish by swiping it over them.\
+	You can add or remove cable by wirecutter or coil respectively to allow its use.\
+	Any food containing things like protein, sugar, or standard nutriment can be attached to the rod, allowing for faster fishing based on the amount.\
+	You can examine the rod to check if it has bait attached, and examine it automatically if so.\
+	\
+	Ctrl clicking the rod will remove any attached bait from the rod."
+	description_antag = "Some fishing rods can be utilized as long-range, sharp weapons, though their pseudo ranged ability comes at the cost of slow speed."
 	icon_state = "fishing_rod"
 	item_state = "fishing_rod"
 	force_divisor = 0.25
@@ -57,7 +64,7 @@
 		if(do_after(user, rand(10 SECONDS, 20 SECONDS)))
 			C.use(5)
 			strung = TRUE
-			to_chat(user, "<span class='notice'>You re-string \the [src]!</span>")
+			to_chat(user, "<span class='notice'>You string \the [src]!</span>")
 			update_icon()
 			return
 	else if(istype(I, bait_type))
