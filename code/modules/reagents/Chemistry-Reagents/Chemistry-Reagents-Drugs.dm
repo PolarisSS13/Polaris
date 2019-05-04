@@ -166,6 +166,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	description = "Heroin, also known as diamorphine is a potent opiate with strong painkilling effects."
 	reagent_state = LIQUID
 	color = "#755202" //brown
+	calories_factor = -5
 	high_msg_list = list("You feel euphoric!",
 	"You have a strange sense of calm and excitement at the same time.",
 	"You feel... sleepy.",
@@ -195,6 +196,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	taste_description = "metallic and bitter"
 	overdose = 15
 	reagent_state = LIQUID
+	calories_factor = -15
 	color = "#FFFFFF" //white
 	high_msg_list = list ("You feel euphoric!",
 	"You feel like you can take on the world!",
@@ -225,6 +227,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	taste_description = "like car fuel"
 	overdose = 15
 	reagent_state = LIQUID
+	calories_factor = -8
 	color = "#FFFFFF" //white
 	high_msg_list = list ("You sniffle a bit.",
 	"You have a mild... headache",
@@ -258,6 +261,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	color = "#d0583a"
 	metabolism = REM * 3
 	overdose = 10
+	calories_factor = -2
 	high_msg_list = list ("You feel your heart pounding in your chest.",
 	"You shudder so violently that it hurts",
 	"You blink rapidly to wet your drying eyes")

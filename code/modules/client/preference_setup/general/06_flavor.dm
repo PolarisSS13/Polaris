@@ -33,6 +33,21 @@
 	for(var/module in robot_module_types)
 		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
 
+/datum/category_item/player_setup_item/general/flavor/delete_character(var/savefile/S)
+	pref.flavor_texts["general"] = null
+	pref.flavor_texts["head"] = null
+	pref.flavor_texts["face"] = null
+	pref.flavor_texts["eyes"] = null
+	pref.flavor_texts["torso"] = null
+	pref.flavor_texts["arms"] = null
+	pref.flavor_texts["hands"] = null
+	pref.flavor_texts["legs"] = null
+	pref.flavor_texts["feet"] = null
+
+	pref.flavour_texts_robot["Default"] = null
+	for(var/module in robot_module_types)
+		pref.flavour_texts_robot[module] = null
+
 /datum/category_item/player_setup_item/general/flavor/sanitize_character()
 	return
 

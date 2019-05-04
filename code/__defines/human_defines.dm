@@ -22,3 +22,5 @@
 
 #define WEIGHT_MAX 1050000 // 1050000 is equiv to 300 hundred pounds. Above this, heart attacks will happen
 
+
+#define CALORIES_MUL 3500

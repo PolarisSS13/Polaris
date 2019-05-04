@@ -39,7 +39,7 @@
 	..()
 	name = "powdered heroin"
 	desc = "Are we really doing this? Were all those government PSAs for nothing?"
-	reagents.add_reagent("heroin", volume)
+	reagents.add_reagent("diamorphine", volume)
 
 /obj/item/weapon/reagent_containers/powder/cannabis/New()
 	..()
@@ -130,7 +130,7 @@
 	var/obj/item/weapon/reagent_containers/powder/J = new /obj/item/weapon/reagent_containers/powder(user.loc)
 	if (!istype(W, /obj/item/weapon/reagent_containers/drugs/baggie))
 		J.name = "[W.name] powder"
-	to_chat(usr,"<span class='notice'>You use the [src] to refine the [W.name] into a powder!</span>")
+	to_chat(usr,"<span class='notice'>You use [src] to refine [W.name] into a powder!</span>")
 	playsound(loc, 'sound/items/grinder.ogg', 50, 1)
 	if(W.reagents)
 		W.reagents.trans_to_obj(J, W.reagents.total_volume)

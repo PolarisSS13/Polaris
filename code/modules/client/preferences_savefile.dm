@@ -94,6 +94,15 @@
 	player_setup.save_character(S)
 	return 1
 
+/datum/preferences/proc/delete_character()
+	if(!path)				return 0
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/character[default_slot]"
+
+	player_setup.delete_character(S)
+	return 1
+
 /datum/preferences/proc/sanitize_preferences()
 	player_setup.sanitize_setup()
 	return 1

@@ -17,6 +17,7 @@
 	//it's a body transformation, admin or antag fuckery. So this works.
 
 	mind.prefs.be_random_name = 0	//if the round is canon we don't want this...
+	adjust_aging()
 
 	// Copy basic values
 	mind.prefs.nickname = nickname
@@ -54,14 +55,30 @@
 	mind.prefs.gen_record = gen_record
 	mind.prefs.exploit_record = exploit_record
 	mind.prefs.lip_style = lip_style
+	mind.prefs.calories = calories
+
+	mind.prefs.weight = calories_to_weight(calories)
 
 	//might need code for saving tattoos. Hm.
 
 	mind.prefs.save_preferences()
 	mind.prefs.save_character()
 
+
 	return 1
 
 
 
+/mob/living/carbon/human/proc/adjust_aging()
+	var/ideal_age
+
+	//get the age they should be
+
+	ideal_age = get_game_year() - birth_year
+
+	//if it hasn't been their most recent birthday yet...
+	if((get_game_month() < birth_month) && (get_game_day() < birth_day))
+		ideal_age --
+
+	age = ideal_age
 

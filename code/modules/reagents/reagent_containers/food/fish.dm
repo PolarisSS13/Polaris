@@ -38,7 +38,7 @@
 	icon_state = "salmonsteak"
 	trash = /obj/item/trash/plate
 	filling_color = "#7A3D11"
-	nutriment_desc = list("nutriment" = 4, "nutriment" = 2)
+	nutriment_desc = list("protein" = 4, "nutriment" = 2)
 
 
 /obj/item/weapon/reagent_containers/food/snacks/sushi/catfishmeat

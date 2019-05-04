@@ -7,18 +7,26 @@
 	sort_order = 4
 
 /datum/category_item/player_setup_item/general/equipment/load_character(var/savefile/S)
-	S["all_underwear"] >> pref.all_underwear
-	S["all_underwear_metadata"] >> pref.all_underwear_metadata
-	S["backbag"]	>> pref.backbag
-	S["pdachoice"]	>> pref.pdachoice
-	S["communicator_visibility"]	>> pref.communicator_visibility
+	S["all_underwear"] 					>> pref.all_underwear
+	S["all_underwear_metadata"] 		>> pref.all_underwear_metadata
+	S["backbag"]						>> pref.backbag
+	S["pdachoice"]						>> pref.pdachoice
+	S["communicator_visibility"]		>> pref.communicator_visibility
 
 /datum/category_item/player_setup_item/general/equipment/save_character(var/savefile/S)
-	S["all_underwear"] << pref.all_underwear
-	S["all_underwear_metadata"] << pref.all_underwear_metadata
-	S["backbag"]	<< pref.backbag
-	S["pdachoice"]	<< pref.pdachoice
-	S["communicator_visibility"]	<< pref.communicator_visibility
+	S["all_underwear"] 					<< pref.all_underwear
+	S["all_underwear_metadata"]			<< pref.all_underwear_metadata
+	S["backbag"]						<< pref.backbag
+	S["pdachoice"]						<< pref.pdachoice
+	S["communicator_visibility"]		<< pref.communicator_visibility
+
+/datum/category_item/player_setup_item/general/equipment/delete_character(var/savefile/S)
+	pref.all_underwear = null
+	pref.all_underwear_metadata = null
+	pref.backbag = null
+	pref.pdachoice = null
+	pref.communicator_visibility = null
+
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/equipment/copy_to_mob(var/mob/living/carbon/human/character)
@@ -76,7 +84,10 @@
 
 /datum/category_item/player_setup_item/general/equipment/content()
 	. = list()
-	. += "<b>Equipment:</b><br>"
+	. = list()
+	. += "<h1>Spawn Equipment:</h1><hr>"
+	if(!pref.existing_character)
+		. += "This is not persistent and can be changed at any time. </br><br>"
 	for(var/datum/category_group/underwear/UWC in global_underwear.categories)
 		var/item_name = pref.all_underwear[UWC.name] ? pref.all_underwear[UWC.name] : "None"
 		. += "[UWC.name]: <a href='?src=\ref[src];change_underwear=[UWC.name]'><b>[item_name]</b></a>"
@@ -87,7 +98,7 @@
 
 		. += "<br>"
 	. += "Backpack Type: <a href='?src=\ref[src];change_backpack=1'><b>[backbaglist[pref.backbag]]</b></a><br>"
-	. += "PDA Type: <a href='?src=\ref[src];change_pda=1'><b>[pdachoicelist[pref.pdachoice]]</b></a><br>"
+//	. += "PDA Type: <a href='?src=\ref[src];change_pda=1'><b>[pdachoicelist[pref.pdachoice]]</b></a><br>"
 	. += "Communicator Visibility: <a href='?src=\ref[src];toggle_comm_visibility=1'><b>[(pref.communicator_visibility) ? "Yes" : "No"]</b></a><br>"
 
 	return jointext(.,null)
@@ -115,13 +126,13 @@
 		if(!isnull(new_backbag) && CanUseTopic(user))
 			pref.backbag = backbaglist.Find(new_backbag)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
-
+/*
 	else if(href_list["change_pda"])
 		var/new_pdachoice = input(user, "Choose your character's style of PDA:", "Character Preference", pdachoicelist[pref.pdachoice]) as null|anything in pdachoicelist
 		if(!isnull(new_pdachoice) && CanUseTopic(user))
 			pref.pdachoice = pdachoicelist.Find(new_pdachoice)
 			return TOPIC_REFRESH
-
+*/
 	else if(href_list["change_underwear"])
 		var/datum/category_group/underwear/UWC = global_underwear.categories_by_name[href_list["change_underwear"]]
 		if(!UWC)

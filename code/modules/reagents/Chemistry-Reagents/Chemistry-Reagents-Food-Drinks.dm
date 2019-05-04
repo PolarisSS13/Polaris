@@ -9,7 +9,7 @@
 	metabolism = REM * 4
 	ingest_met = REM * 4
 	var/nutriment_factor = 30 // Per unit
-
+	calories_factor = 40 // Per unit
 	var/injectable = 0
 	color = "#664330"
 
@@ -46,6 +46,7 @@
 		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
+	M.adjust_calories(calories_factor * removed)
 	var/nut_removed = removed
 	if(nutriment_factor)
 		M.adjust_nutrition(nutriment_factor * nut_removed) // For hunger and fatness
@@ -56,13 +57,14 @@
 	id = "glucose"
 	taste_description = "sweetness"
 	color = "#FFFFFF"
-
+	calories_factor = 8
 	injectable = 1
 
 /datum/reagent/nutriment/protein // Bad for Skrell!
 	name = "animal protein"
 	id = "protein"
 	taste_description = "some sort of meat"
+	calories_factor = 10
 	color = "#440000"
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -96,6 +98,7 @@
 	description = "A golden yellow syrup, loaded with sugary sweetness."
 	taste_description = "sweetness"
 	nutriment_factor = 10
+	calories_factor = 45
 	color = "#FFFF00"
 
 /datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -238,12 +241,14 @@
 	id = "lipozine"
 	description = "A chemical compound that causes a powerful fat-burning reaction."
 	taste_description = "mothballs"
+	calories_factor = -30
 	reagent_state = LIQUID
 	color = "#BBEDA4"
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(10 * removed)
+	M.adjust_calories(calories_factor * removed)
 	M.overeatduration = 0
 	if(M.nutrition < 0)
 		M.nutrition = 0
@@ -442,6 +447,7 @@
 	var/adj_drowsy = 0
 	var/adj_sleepy = 0
 	var/adj_temp = 0
+	calories_factor = 3
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
@@ -452,6 +458,8 @@
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
 		M.adjust_hydration(hydration * removed)
+	if(calories_factor)
+		M.adjust_calories(calories_factor * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
@@ -470,6 +478,7 @@
 	id = "banana"
 	description = "The raw essence of a banana."
 	taste_description = "banana"
+	calories_factor = 6
 	color = "#C3AF00"
 
 	glass_name = "banana juice"
@@ -480,6 +489,7 @@
 	id = "berryjuice"
 	description = "A delicious blend of several different kinds of berries."
 	taste_description = "berries"
+	calories_factor = 3
 	color = "#990066"
 
 	glass_name = "berry juice"
@@ -641,7 +651,7 @@
 	description = "An opaque white liquid produced by the mammary glands of mammals."
 	taste_description = "milk"
 	color = "#DFDFDF"
-
+	calories_factor = 8
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
 
@@ -677,7 +687,7 @@
 	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
 	taste_description = "thick milk"
 	color = "#DFD7AF"
-
+	calories_factor = 12
 	glass_name = "cream"
 	glass_desc = "Ewwww..."
 
@@ -816,7 +826,7 @@
 	adj_sleepy = -2
 	adj_temp = 25
 	overdose = 45
-
+	calories_factor = 1
 	cup_icon_state = "cup_coffee"
 	cup_name = "cup of coffee"
 	cup_desc = "Don't drop it, or you'll send scalding liquid and porcelain shards everywhere."
@@ -909,7 +919,7 @@
 	color = "#403010"
 	nutrition = 2
 	adj_temp = 5
-
+	calories_factor = 8
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
 
@@ -926,7 +936,7 @@
 	adj_dizzy = -5
 	adj_drowsy = -3
 	adj_temp = -5
-
+	calories_factor = 0
 	glass_name = "soda water"
 	glass_desc = "Soda water. Why not make a scotch and soda?"
 	glass_special = list(DRINK_FIZZ)
@@ -949,7 +959,7 @@
 	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
 	taste_description = "tart and fresh"
 	color = "#619494"
-
+	calories_factor = 1
 	adj_dizzy = -5
 	adj_drowsy = -3
 	adj_sleepy = -2
@@ -965,7 +975,7 @@
 	taste_description = "lemonade"
 	color = "#FFFF00"
 	adj_temp = -5
-
+	calories_factor = 2
 	glass_name = "lemonade"
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
@@ -1000,7 +1010,7 @@
 	taste_description = "vanilla milkshake"
 	color = "#AEE5E4"
 	adj_temp = -9
-
+	calories_factor = 16
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
@@ -1170,7 +1180,7 @@
 	taste_description = "tangy lime and lemon soda"
 	color = "#878F00"
 	adj_temp = -8
-
+	calories_factor = 2
 	glass_name = "lemon lime soda"
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
@@ -1314,7 +1324,7 @@
 	reagent_state = SOLID
 	color = "#619494"
 	adj_temp = -5
-
+	calories_factor = 0
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."
 	glass_icon = DRINK_ICON_NOISY
@@ -2873,5 +2883,5 @@
 	strength = 9
 	glass_special = list(DRINK_FIZZ)
 
-	glass_name = "Cider"
+	glass_name = "cider"
 	glass_desc = "A sparkling alcoholic beverage derived from apples, quite refreshing."

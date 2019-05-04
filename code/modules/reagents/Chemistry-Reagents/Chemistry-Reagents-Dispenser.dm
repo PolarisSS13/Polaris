@@ -70,7 +70,7 @@
 	var/nutriment_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
-
+	calories_factor = 5
 	var/druggy = 0
 	var/adj_temp = 0
 	var/targ_temp = 310
@@ -128,6 +128,7 @@
 	if(issmall(M)) removed *= 2
 	M.adjust_nutrition(nutriment_factor * removed)
 	M.adjust_hydration(hydration_factor * removed)
+	M.adjust_calories(calories_factor * removed)
 	var/strength_mod = 1
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
@@ -429,13 +430,14 @@
 	taste_mult = 1.8
 	reagent_state = SOLID
 	color = "#FFFFFF"
-
+	calories_factor = 18
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(removed * 3)
+	M.adjust_calories(calories_factor * removed)
 
 	var/effective_dose = dose
 	if(issmall(M))

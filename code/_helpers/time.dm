@@ -55,8 +55,40 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+544)) + "-" + time2text(timeofday, "MM-DD")
+		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+config.years_in_future)) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
+
+/proc/get_game_year()
+	var/game_year = (time2text(world.timeofday, "YYYY"))
+	game_year = (text2num(game_year)) + config.years_in_future
+	return game_year
+
+/proc/get_game_month()
+	var/game_month = (time2text(world.timeofday, "MM"))
+	game_month = (text2num(game_month)) + config.months_in_future
+	return game_month
+
+/proc/get_game_day()
+	var/game_day = (time2text(world.timeofday, "DD"))
+	game_day = (text2num(game_day)) + config.days_in_future
+	return game_day
+
+/proc/get_year()
+	var/year = (time2text(world.timeofday, "YYYY"))
+	year = (text2num(year)) + config.years_in_future
+	return year
+
+/proc/get_month()
+	var/month = (time2text(world.timeofday, "MM"))
+	month = (text2num(month)) + config.months_in_future
+	return month
+
+/proc/get_day()
+	var/day = (time2text(world.timeofday, "DD"))
+	day = (text2num(day))
+	return day
+
+
 
 //ISO 8601
 /proc/time_stamp()

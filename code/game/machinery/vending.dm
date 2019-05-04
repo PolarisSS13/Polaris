@@ -812,7 +812,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5,
-					/obj/item/weapon/reagent_containers/pill/diet = 25,
+					/obj/item/weapon/reagent_containers/pill/diet = 35,
 					/obj/item/weapon/towel/random = 40)
 
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)

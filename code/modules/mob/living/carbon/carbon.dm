@@ -62,11 +62,13 @@
 */
 		var/nut_removed = DEFAULT_HUNGER_FACTOR/10
 		var/hyd_removed = DEFAULT_THIRST_FACTOR/10
+		var/cal_removed = DEFAULT_THIRST_FACTOR/10
 		if(src.m_intent == "run")
 			nut_removed *= 2
 			hyd_removed *= 2
 		adjust_nutrition(-nut_removed)
 		adjust_hydration(-hyd_removed)
+		adjust_calories(-cal_removed)
 
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
