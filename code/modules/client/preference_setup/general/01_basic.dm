@@ -38,6 +38,20 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["OOC_Notes"]				<< pref.metadata
 	S["existing_character"]		<< pref.existing_character
 
+/datum/category_item/player_setup_item/general/basic/delete_character()
+	pref.real_name = null
+	pref.nickname = null
+	pref.be_random_name = null
+	pref.biological_gender = null
+	pref.identifying_gender = null
+	pref.age = null
+	pref.birth_day = null
+	pref.birth_month = null
+	pref.birth_year = null
+	pref.spawnpoint = null
+	pref.metadata = null
+	pref.existing_character = null
+
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	pref.age                = sanitize_integer(pref.age, get_min_age(), get_max_age(), initial(pref.age))
 	pref.birth_day          = sanitize_integer(pref.birth_day, 1, 31, initial(pref.birth_day))

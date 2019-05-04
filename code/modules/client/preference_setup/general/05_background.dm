@@ -22,6 +22,16 @@
 	S["religion"]				<< pref.religion
 	S["economic_status"]		<< pref.economic_status
 
+/datum/category_item/player_setup_item/general/background/delete_character(var/savefile/S)
+	pref.med_record = null
+	pref.sec_record = null
+	pref.gen_record = null
+	pref.home_system = null
+	pref.citizenship = null
+	pref.faction = null
+	pref.religion = null
+	pref.economic_status = null
+
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
 	if(!pref.citizenship) pref.citizenship = "None"

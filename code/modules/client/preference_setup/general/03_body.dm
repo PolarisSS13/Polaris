@@ -28,8 +28,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_red"]			>> pref.r_eyes
 	S["eyes_green"]			>> pref.g_eyes
 	S["eyes_blue"]			>> pref.b_eyes
-	S["b_type"]			>> pref.b_type
-	S["weight"]			>> pref.weight
+	S["b_type"]				>> pref.b_type
+	S["weight"]				>> pref.weight
+	S["calories"]			>> pref.calories
 	S["disabilities"]		>> pref.disabilities
 	S["organ_data"]			>> pref.organ_data
 	S["rlimb_data"]			>> pref.rlimb_data
@@ -59,8 +60,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["eyes_red"]			<< pref.r_eyes
 	S["eyes_green"]			<< pref.g_eyes
 	S["eyes_blue"]			<< pref.b_eyes
-	S["b_type"]			<< pref.b_type
-	S["weight"]			<< pref.weight
+	S["b_type"]				<< pref.b_type
+	S["weight"]				<< pref.weight
+	S["calories"]			<< pref.calories
 	S["disabilities"]		<< pref.disabilities
 	S["organ_data"]			<< pref.organ_data
 	S["rlimb_data"]			<< pref.rlimb_data
@@ -70,6 +72,38 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["synth_green"]		<< pref.g_synth
 	S["synth_blue"]			<< pref.b_synth
 	S["bgstate"]			<< pref.bgstate
+
+/datum/category_item/player_setup_item/general/body/delete_character(var/savefile/S)
+	pref.species = null
+	pref.r_hair = null
+	pref.g_hair = null
+	pref.b_hair = null
+	pref.r_facial = null
+	pref.g_facial = null
+	pref.b_facial = null
+	pref.s_tone = null
+	pref.r_skin = null
+	pref.g_skin = null
+	pref.b_skin = null
+	pref.h_style = null
+	pref.f_style = null
+	pref.lip_style = null
+	pref.r_eyes = null
+	pref.g_eyes = null
+	pref.b_eyes = null
+	pref.b_type = null
+	pref.weight = null
+	pref.disabilities = null
+	pref.organ_data = null
+	pref.rlimb_data = null
+	pref.body_markings = null
+	pref.synth_color = null
+	pref.r_synth = null
+	pref.g_synth = null
+	pref.b_synth	= null
+	pref.bgstate = null
+	pref.calories = null
+	pref.weight = null
 
 /datum/category_item/player_setup_item/general/body/sanitize_character(var/savefile/S)
 	if(!pref.species || !(pref.species in playable_species))
@@ -90,8 +124,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.g_eyes			= sanitize_integer(pref.g_eyes, 0, 255, initial(pref.g_eyes))
 	pref.b_eyes			= sanitize_integer(pref.b_eyes, 0, 255, initial(pref.b_eyes))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
-	pref.weight			= sanitize_integer(pref.weight, WEIGHT_MIN, WEIGHT_MAX, initial(pref.weight))
-
+	pref.weight			= sanitize_integer(pref.weight, WEIGHT_MIN / CALORIES_MUL, WEIGHT_MAX / CALORIES_MUL, initial(pref.weight))
+	pref.calories		= sanitize_integer(pref.calories, WEIGHT_MIN, WEIGHT_MAX, initial(pref.calories))
 	pref.disabilities	= sanitize_integer(pref.disabilities, 0, 65535, initial(pref.disabilities))
 	if(!pref.organ_data) pref.organ_data = list()
 	if(!pref.rlimb_data) pref.rlimb_data = list()
@@ -127,7 +161,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	character.g_synth	= pref.g_synth
 	character.b_synth	= pref.b_synth
 	character.weight	= pref.weight
-	character.calories	= character.weight_to_calories()
+	character.calories	= pref.calories
 
 	// Destroy/cyborgize organs and limbs.
 	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO))
@@ -182,8 +216,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "Set your character's physical appearance. Once this is done, you cannot undo this. You can change your character's appearance in-game.<br><br>"
 	. += "<table><tr style='vertical-align:top'><td>"
 	if(!pref.existing_character)
-		. += "<b>Body</b> "
-		. += "(<a href='?src=\ref[src];random=1'>&reg; Random</A>)"
+		. += "<b>Body:</b> "
+		. += "<a href='?src=\ref[src];random=1'>&reg; Random</A><br>"
 	. += "<br>"
 	. += "<b>Species: </b><br>"
 	if(!pref.existing_character)
@@ -193,9 +227,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<br>"
 	. += "<b>Body Weight: </b><br>"
 	if(!pref.existing_character)
-		. += "<a href='?src=\ref[src];set_weight=1'>[pref.weight]</a><br>"
+		. += "<a href='?src=\ref[src];set_weight=1'>[pref.weight]lbs ([get_weight(pref.calories,mob_species)])</a><br>"
 	else
-		. += "[pref.weight]"
+		. += "[pref.weight]lbs ([get_weight(pref.calories,mob_species)])"
 	. += "<br>"
 	. += "<b>Blood Type: </b><br>"
 	if(!pref.existing_character)
@@ -215,8 +249,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		. += "<a href='?src=\ref[src];disabilities=[NEARSIGHTED]'><b>[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]</b></a><br>"
 	else
 		. += "[pref.disabilities & NEARSIGHTED ? "Yes" : "No"]<br>"
+	. += "<b>Limbs:</b> <br>"
 	if(!pref.existing_character)
-		. += "<b>Limbs:</b> "
 		. += "<br><a href='?src=\ref[src];limbs=1'>Adjust</a> <a href='?src=\ref[src];reset_limbs=1'>Reset</a><br>"
 		. += "<b>Internal Organs:</b> "
 		. += "<a href='?src=\ref[src];organs=1'>Adjust</a><br>"
@@ -309,6 +343,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					. += "\tAssisted-interface [organ_name]"
 				else
 					. += "\tMechanically assisted [organ_name]"
+
+		else if(!organ_name)
+			. += "Normal Limbs"
 	if(!ind)
 		if(!pref.existing_character)
 			. += "\[...\]<br><br>"
@@ -331,7 +368,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(!pref.existing_character)
 		. += " <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
 	else
-		. += "<b>Hairstyle:</b> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><tr><td>__</td></tr></table></font> "
+		. += "<b>Hairstyle:</b><br> <font face='fixedsys' size='3' color='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(pref.r_hair, 2)][num2hex(pref.g_hair, 2)][num2hex(pref.b_hair, 2)]'><tr><td>__</td></tr></table></font> "
 		. += "[pref.h_style]<br>"
 
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
@@ -339,14 +376,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			. += "<br><b>Facial Hair: </b><br>"
 			. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
 		else
-			. += "<b>Facial Hair:</b> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
+			. += "<b>Facial Hair:</b><br> <font face='fixedsys' size='3' color='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_facial, 2)][num2hex(pref.g_facial, 2)][num2hex(pref.b_facial, 2)]'><tr><td>__</td></tr></table></font> "
 			. += "[pref.f_style]<br>"
 
 	if(!pref.existing_character)
-		. += "<a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
+		. += "<br><a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
-		. += "<br><b>Eye Color: </b><br>"
+		. += "<br><b>Eye Color: </b> <br>"
 		if(!pref.existing_character)
 			. += "<a href='?src=\ref[src];eye_color=1'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(pref.r_eyes, 2)][num2hex(pref.g_eyes, 2)][num2hex(pref.b_eyes, 2)]'><tr><td>__</td></tr></table></font> <br>"
 		else
@@ -388,15 +425,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		if(new_b_type && CanUseTopic(user))
 			pref.b_type = new_b_type
 			return TOPIC_REFRESH
-			
+
 	else if(href_list["set_weight"])
-		var/min_weight = current_species.min_calories
-		var/max_weight = current_species.max_calories
+		var/min_weight = mob_species.min_calories / 3500
+		var/max_weight = mob_species.max_calories / 3500
 		var/new_weight = input(user, "Choose your character's age:\n([min_weight]-[max_weight])", "Character Preference", pref.weight) as num|null
 		if(new_weight && CanUseTopic(user))
 			pref.weight = max(min(round(text2num(new_weight)), max_weight), min_weight)
+			pref.calories = weight_to_calories(pref.weight)
 			return TOPIC_REFRESH
-	
+
 
 	else if(href_list["show_species"])
 		// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.

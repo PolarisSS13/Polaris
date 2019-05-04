@@ -23,6 +23,7 @@
 			playsound(src.loc, 'sound/effects/woodhit.ogg', 25, 1, -1)
 			user.do_attack_animation(src)
 			user.adjust_nutrition(-(5 * DEFAULT_HUNGER_FACTOR))
+			user.adjust_calories(-(3 * DEFAULT_CALORIES_FACTOR * user.weight))
 			user.adjust_hydration(-(5 * DEFAULT_THIRST_FACTOR))
 			to_chat(user, "<span class='warning'>You [pick(hit_message)] \the [src].</span>")
 
@@ -59,6 +60,7 @@
 		if(do_after(user, 20 + (weight * 10)))
 			playsound(src.loc, 'sound/effects/weightdrop.ogg', 25, 1)
 			user.adjust_nutrition(-(weight * DEFAULT_HUNGER_FACTOR))
+			user.adjust_calories(-(weight * DEFAULT_CALORIES_FACTOR * user.weight))
 			user.adjust_hydration(-(weight * DEFAULT_THIRST_FACTOR))
 			to_chat(user, "<span class='notice'>You lift the weights [qualifiers[weight]].</span>")
 			being_used = 0

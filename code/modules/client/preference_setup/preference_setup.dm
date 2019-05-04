@@ -79,6 +79,10 @@
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.save_character(S)
 
+/datum/category_collection/player_setup_collection/proc/delete_character(var/savefile/S)
+	for(var/datum/category_group/player_setup_category/PS in categories)
+		PS.delete_character(S)
+
 /datum/category_collection/player_setup_collection/proc/load_preferences(var/savefile/S)
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.load_preferences(S)
@@ -148,6 +152,14 @@
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_character(S)
 
+/datum/category_group/player_setup_category/proc/delete_character(var/savefile/S)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.delete_character(S)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.save_character(S)
+	for(var/datum/category_item/player_setup_item/PI in items)
+		PI.sanitize_character()
+
 /datum/category_group/player_setup_category/proc/load_preferences(var/savefile/S)
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_preferences(S)
@@ -206,6 +218,13 @@
 * Called when the item is asked to save per character settings
 */
 /datum/category_item/player_setup_item/proc/save_character(var/savefile/S)
+	return
+
+
+/*
+* Called when the item is asked to delete per character settings
+*/
+/datum/category_item/player_setup_item/proc/delete_character(var/savefile/S)
 	return
 
 /*

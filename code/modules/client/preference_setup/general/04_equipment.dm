@@ -7,18 +7,26 @@
 	sort_order = 4
 
 /datum/category_item/player_setup_item/general/equipment/load_character(var/savefile/S)
-	S["all_underwear"] >> pref.all_underwear
-	S["all_underwear_metadata"] >> pref.all_underwear_metadata
-	S["backbag"]	>> pref.backbag
-	S["pdachoice"]	>> pref.pdachoice
-	S["communicator_visibility"]	>> pref.communicator_visibility
+	S["all_underwear"] 					>> pref.all_underwear
+	S["all_underwear_metadata"] 		>> pref.all_underwear_metadata
+	S["backbag"]						>> pref.backbag
+	S["pdachoice"]						>> pref.pdachoice
+	S["communicator_visibility"]		>> pref.communicator_visibility
 
 /datum/category_item/player_setup_item/general/equipment/save_character(var/savefile/S)
-	S["all_underwear"] << pref.all_underwear
-	S["all_underwear_metadata"] << pref.all_underwear_metadata
-	S["backbag"]	<< pref.backbag
-	S["pdachoice"]	<< pref.pdachoice
-	S["communicator_visibility"]	<< pref.communicator_visibility
+	S["all_underwear"] 					<< pref.all_underwear
+	S["all_underwear_metadata"]			<< pref.all_underwear_metadata
+	S["backbag"]						<< pref.backbag
+	S["pdachoice"]						<< pref.pdachoice
+	S["communicator_visibility"]		<< pref.communicator_visibility
+
+/datum/category_item/player_setup_item/general/equipment/delete_character(var/savefile/S)
+	pref.all_underwear = null
+	pref.all_underwear_metadata = null
+	pref.backbag = null
+	pref.pdachoice = null
+	pref.communicator_visibility = null
+
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/equipment/copy_to_mob(var/mob/living/carbon/human/character)

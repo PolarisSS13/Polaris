@@ -10,6 +10,10 @@
 	S["language"]			<< pref.alternate_languages
 	S["language_prefixes"]	<< pref.language_prefixes
 
+/datum/category_item/player_setup_item/general/language/delete_character()
+	pref.alternate_languages = null
+	pref.language_prefixes = null
+
 /datum/category_item/player_setup_item/general/language/sanitize_character()
 	if(!islist(pref.alternate_languages))	pref.alternate_languages = list()
 	if(pref.species)

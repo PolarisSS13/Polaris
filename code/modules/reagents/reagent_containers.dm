@@ -143,3 +143,13 @@
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
 	user << "<span class='notice'>You transfer [trans] units of the solution to [target].</span>"
 	return 1
+
+/obj/item/weapon/reagent_containers/proc/get_calories() // Calorie counting
+	var/total_cals
+	var/list/all_reagents = reagents.reagent_list
+	if(reagents)
+		for(var/datum/reagent/R in all_reagents)
+			total_cals += R.calories_factor * R.volume
+
+		return total_cals
+	return "No reagent holder"

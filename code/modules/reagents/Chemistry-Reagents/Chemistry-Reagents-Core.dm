@@ -109,7 +109,7 @@
 	reagent_state = LIQUID
 	color = "#0064C877"
 	metabolism = REM * 10
-
+	calories_factor = 0
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 
@@ -180,7 +180,7 @@
 	reagent_state = LIQUID
 	color = "#757547"
 	taste_description = "puke"
-
+	calories_factor = 0
 
 /datum/reagent/water/fishwater/toiletwater
 	name = "Toilet Water"
@@ -189,7 +189,7 @@
 	reagent_state = LIQUID
 	color = "#757547"
 	taste_description = "fecal matter"
-
+	calories_factor = 0
 /datum/reagent/fuel
 	name = "Welding fuel"
 	id = "fuel"

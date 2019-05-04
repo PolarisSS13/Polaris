@@ -55,12 +55,15 @@
 	mind.prefs.gen_record = gen_record
 	mind.prefs.exploit_record = exploit_record
 	mind.prefs.lip_style = lip_style
+	mind.prefs.calories = calories
+
+	mind.prefs.weight = calories_to_weight(calories)
 
 	//might need code for saving tattoos. Hm.
 
 	mind.prefs.save_preferences()
 	mind.prefs.save_character()
-	mind.prefs.existing_character = 1
+
 
 	return 1
 

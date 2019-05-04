@@ -903,7 +903,7 @@
 
 
 	if(calories > 0 && stat != DEAD && client) //Calories won't burn when you're SSD or dead.
-		adjust_calories(-species.metabolic_rate / 10)
+		adjust_calories(-species.metabolic_rate / 100)
 
 	if(calories <= species.min_calories | calories >= species.max_calories)
 		if (prob(5))

@@ -59,7 +59,7 @@
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
 	output +="<hr>"
-	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
+	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Character Panel</A></p>"
 
 	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
 		if(ready)
@@ -132,11 +132,11 @@
 	if(!client)	return 0
 
 	if(href_list["consent_signed"])
+		tos_consent = 1
 		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 		var/DBQuery/query = dbcon.NewQuery("REPLACE INTO erro_privacy (ckey, datetime, consent) VALUES ('[ckey]', '[sqltime]', 1)")
 		query.Execute()
 		src << browse(null, "window=privacy_consent")
-		tos_consent = 1
 		new_player_panel_proc()
 	if(href_list["consent_rejected"])
 		tos_consent = 0
@@ -147,7 +147,7 @@
 
 
 	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src)
+		client.prefs.open_load_dialog(src)
 		return 1
 
 	if(href_list["ready"])

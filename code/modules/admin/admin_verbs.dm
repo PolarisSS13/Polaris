@@ -1151,5 +1151,7 @@ var/list/admin_verbs_event_manager = list(
 
 	for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
 		H.save_mob_to_prefs()
+		message_admins("Admin [key_name_admin(usr)] has saved all characters.", 1)
+
 		return 1
 
