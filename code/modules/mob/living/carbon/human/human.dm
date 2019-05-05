@@ -1120,7 +1120,7 @@
 	if(species.default_language)
 		add_language(species.default_language)
 
-	if(species.icon_scale != 1)
+	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
 		update_transform()
 
 	if(species.base_color && default_colour)
