@@ -248,7 +248,7 @@
 	anchored = 1
 	buckle_lying = 0
 	buckle_dir = SOUTH
-	plane = -25
+	plane = UNDER_MOB_PLANE
 
 /obj/structure/bed/chair/sofa/update_icon()
 	// Prep icon.
@@ -287,7 +287,7 @@
 /obj/structure/bed/chair/sofa/corner/New()
 	..()
 	buckle_dir = SOUTH
-	plane = -25
+
 
 /obj/structure/bed/chair/sofa/right
 	icon_state = "sofaend_right"
@@ -295,3 +295,119 @@
 /obj/structure/bed/chair/sofa/corner
 	icon_state = "sofacorner"
 
+
+
+/obj/structure/bed/chair/sofa/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"leather")
+
+
+/obj/structure/bed/chair/sofa/brown/left
+		icon_state = "sofaend_left"
+
+
+/obj/structure/bed/chair/sofa/brown/right
+		icon_state = "sofaend_right"
+
+
+/obj/structure/bed/chair/sofa/brown/corner
+		icon_state = "sofacorner"
+
+
+/obj/structure/bed/chair/sofa/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/sofa/teal/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/teal/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/teal/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/black/New(var/newloc,var/newmaterial)
+	..(newloc,"black")
+
+/obj/structure/bed/chair/sofa/black/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/black/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/black/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/green/New(var/newloc,var/newmaterial)
+	..(newloc,"green")
+
+/obj/structure/bed/chair/sofa/green/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/green/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/green/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"purple")
+
+/obj/structure/bed/chair/sofa/purp/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/purp/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/purp/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/sofa/blue/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/blue/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/blue/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+
+/obj/structure/bed/chair/sofa/beige/left
+		icon_state = "sofaend_left"
+
+
+/obj/structure/bed/chair/sofa/beige/right
+		icon_state = "sofaend_right"
+
+
+/obj/structure/bed/chair/sofa/beige/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/sofa/lime/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/lime/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/lime/corner
+		icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+/obj/structure/bed/chair/sofa/yellow/left
+		icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/yellow/right
+		icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/yellow/corner
+		icon_state = "sofacorner"
