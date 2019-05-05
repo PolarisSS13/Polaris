@@ -19,12 +19,21 @@
 /obj/item/modular_computer/laptop/AltClick()
 	// Prevents carrying of open laptops inhand.
 	// While they work inhand, i feel it'd make tablets lose some of their high-mobility advantage they have over laptops now.
-	if(!istype(loc, /turf/))
+	if(!istype(loc, /turf))
 		to_chat(usr, "\The [src] has to be on a stable surface first!")
 		return
-	anchored = !anchored
-	screen_on = anchored
-	update_icon()
+	var/supported = FALSE
+	for(var/obj/structure/table/S in loc)
+		if(istype(S, /obj/structure/table/bench) || istype(S, /obj/structure/table/rack))
+			continue
+		supported = TRUE
+	if(!supported)
+		to_chat(usr, "You will need a better supporting surface before opening \the [src]!")
+		return
+	else
+		anchored = !anchored
+		screen_on = anchored
+		update_icon()
 
 /obj/item/modular_computer/laptop/update_icon()
 	if(anchored)
