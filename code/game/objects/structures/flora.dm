@@ -1,5 +1,6 @@
 /obj/structure/flora
-	layer = 3.3
+	layer = OBJ_LAYER
+	plane = ABOVE_MOB_PLANE
 	burn_state = 0 //Burnable
 	burntime = SHORT_BURN
 

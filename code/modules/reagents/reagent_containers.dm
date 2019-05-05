@@ -4,6 +4,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	w_class = ITEMSIZE_SMALL
+	plane = ABOVE_MOB_PLANE
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = list(5,10,15,25,30)
 	var/volume = 30

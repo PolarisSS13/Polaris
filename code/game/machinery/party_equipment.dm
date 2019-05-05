@@ -166,7 +166,8 @@
 	icon = 'icons/effects/lasers2.dmi'
 	icon_state = "laserred1"
 	anchored = 1
-	layer = 4
+	layer = OBJ_LAYER
+	plane = ABOVE_MOB_PLANE
 
 /obj/machinery/party/lasermachine/New()
 	turnoff() 		//||so verbs are correctly set

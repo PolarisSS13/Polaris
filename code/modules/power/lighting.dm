@@ -16,7 +16,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_MOB_PLANE
 	var/stage = 1
 	var/fixture_type = "tube"
 	var/sheets_refunded = 2
@@ -132,7 +132,7 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
 	anchored = 1
-	layer = 5
+	plane = ABOVE_MOB_PLANE
 	stage = 1
 	fixture_type = "bulb"
 	sheets_refunded = 1
@@ -144,6 +144,7 @@
 	icon_state = "flamp-construct-stage1"
 	anchored = 0
 	layer = OBJ_LAYER
+	plane = ABOVE_MOB_PLANE
 	stage = 1
 	fixture_type = "flamp"
 	sheets_refunded = 2
@@ -156,7 +157,8 @@
 	icon_state = "tube1"
 	desc = "A lighting fixture."
 	anchored = 1
-	layer = 5  					// They were appearing under mobs which is a little weird - Ostaf
+	layer = OBJ_LAYER
+	plane = ABOVE_MOB_PLANE
 	use_power = 2
 	idle_power_usage = 2
 	active_power_usage = 20
@@ -262,6 +264,7 @@
 	base_state = "floor"
 	light_type = /obj/item/weapon/light/bulb
 	layer = TURF_LAYER+0.002
+	plane = UNDER_MOB_PLANE
 	brightness_range = 2
 	brightness_power = 10
 	brightness_color = "#f7f1b9"
@@ -281,8 +284,7 @@
 	desc = "A street lighting fixture."
 	brightness_color = "#2c5370"
 	brightness_range = 3
-	layer = ABOVE_MOB_LAYER
-	plane = -10
+	plane = ABOVE_MOB_PLANE
 	density = 1
 	light_type = /obj/item/weapon/light/bulb
 	on_wall = 0
