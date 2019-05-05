@@ -427,9 +427,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH
 
 	else if(href_list["set_weight"])
-		var/min_weight = mob_species.min_calories / 3500
-		var/max_weight = mob_species.max_calories / 3500
-		var/new_weight = input(user, "Choose your character's age:\n([min_weight]-[max_weight])", "Character Preference", pref.weight) as num|null
+		var/min_weight = calories_to_weight(mob_species.min_calories)
+		var/max_weight = calories_to_weight(mob_species.max_calories)
+		var/new_weight = input(user, "Choose your character's weight:\n([round(min_weight)]-[round(max_weight)])", "Character Preference", pref.weight) as num|null
 		if(new_weight && CanUseTopic(user))
 			pref.weight = max(min(round(text2num(new_weight)), max_weight), min_weight)
 			pref.calories = weight_to_calories(pref.weight)
@@ -505,6 +505,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/min_age = get_min_age()
 			var/max_age = get_max_age()
 			pref.age = max(min(pref.age, max_age), min_age)
+
+			pref.weight = calories_to_weight(mob_species.normal_calories)
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
