@@ -28,7 +28,7 @@
 
 /datum/gear/accessory/wallet
 	display_name = "wallet, orange"
-	path = /obj/item/weapon/storage/wallet/random
+	path = /obj/item/weapon/storage/wallet
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"

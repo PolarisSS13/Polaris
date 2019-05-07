@@ -194,7 +194,7 @@
 	item_state_slots = list(slot_r_hand_str = "briefcase", slot_l_hand_str = "briefcase")
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
-	starts_with = list(/obj/item/weapon/storage/wallet/random)
+	starts_with = list(/obj/item/weapon/storage/wallet)
 
 /obj/item/weapon/storage/backpack/satchel/norm
 	name = "satchel"

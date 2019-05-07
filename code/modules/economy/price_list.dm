@@ -354,6 +354,9 @@
 /datum/reagent/ethanol/erebusmoonrise
 	price_tag = 4
 
+/datum/reagent/ethanol/cider
+	price_tag = 3
+
 // The Cheap Shit //
 
 /datum/reagent/ethanol/hooch
@@ -436,16 +439,16 @@
 // Beer //
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer
-	price_tag = 3
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
-	price_tag = 3
+	price_tag = 5
 
 
 // Spirituous Liquors //
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
-	price_tag = 15
+	price_tag = 25
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao
 	price_tag = 15
@@ -454,37 +457,37 @@
 	price_tag = 15
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua
-	price_tag = 15
+	price_tag = 35
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor
-	price_tag = 15
+	price_tag = 35
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/rum
-	price_tag = 15
+	price_tag = 30
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla
-	price_tag = 15
+	price_tag = 25
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
-	price_tag = 15
+	price_tag = 25
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey
-	price_tag = 15
+	price_tag = 25
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey
-	price_tag = 15
+	price_tag = 35
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron
-	price_tag = 15
+	price_tag = 45
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager
-	price_tag = 15
+	price_tag = 65
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing
 	price_tag = 15
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
-	price_tag = 15
+	price_tag = 10
 
 
 // Wines //
@@ -544,52 +547,52 @@
 // Burger //
 
 /obj/item/weapon/reagent_containers/food/snacks/brainburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/ghostburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/human/burger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/cheeseburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeyburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/fishburger
-	price_tag = 2
+	price_tag = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/tofuburger
 	price_tag = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/roburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/roburgerbig
-	price_tag = 2
+	price_tag = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/xenoburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/clownburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/mimeburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/jellyburger
-	price_tag = 2
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/bigbiteburger
-	price_tag = 4
+	price_tag = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/superbiteburger
-	price_tag = 8
+	price_tag = 15
 
 
 // Sandwiches //
@@ -893,16 +896,16 @@
 // Cakes //
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake
-	price_tag = 5
+	price_tag = 8
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake
-	price_tag = 1
+	price_tag = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
-	price_tag = 5
+	price_tag = 15
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/braincake
-	price_tag = 1
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake
 	price_tag = 5
@@ -911,10 +914,10 @@
 	price_tag = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
-	price_tag = 5
+	price_tag = 8
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/plaincake
-	price_tag = 1
+	price_tag = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
 	price_tag = 5
@@ -935,16 +938,16 @@
 	price_tag = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
-	price_tag = 5
+	price_tag = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/slice/chocolatecake
-	price_tag = 1
-
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
 	price_tag = 5
 
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
+	price_tag = 10
+
 /obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake
-	price_tag = 1
+	price_tag = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
 	price_tag = 5

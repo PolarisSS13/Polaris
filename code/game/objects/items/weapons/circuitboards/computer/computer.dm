@@ -192,3 +192,8 @@
 	name = T_BOARD("RCON remote control console")
 	build_path = /obj/machinery/computer/rcon
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
+
+/obj/item/weapon/circuitboard/coin_machine
+	name = T_BOARD("Coin Machine")
+	build_path = /obj/machinery/computer/coin_machine
+	origin_tech = list(TECH_DATA = 2)

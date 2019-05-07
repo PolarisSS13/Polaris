@@ -208,7 +208,7 @@
 /obj/item/weapon/storage/secure/briefcase/money
 	name = "suspicious briefcase"
 	desc = "An ominous briefcase that has the unmistakeable smell of old, stale, cigarette smoke, and gives those who look at it a bad feeling."
-	starts_with = list(/obj/item/weapon/spacecash/c1000 = 10)
+	starts_with = list(/obj/item/weapon/spacecash/c100 = 10)
 
 /obj/item/weapon/storage/box/syndie_kit/combat_armor
 	name = "combat armor kit"
