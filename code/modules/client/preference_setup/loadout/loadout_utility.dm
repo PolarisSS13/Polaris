@@ -194,11 +194,7 @@ modular computers
 	path = /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
 	cost = 5
 
-/datum/gear/utility/customlaptop
-	display_name = "laptop computer, custom"
-	path = /obj/item/modular_computer/laptop/preset/
-	cost = 6
-
-/datum/gear/utility/customlaptop/New()
-	..()
-	gear_tweaks += new /datum/gear_tweak/laptop()
+/datum/gear/utility/elitelaptop
+	display_name = "laptop computer, elite"
+	path = /obj/item/modular_computer/laptop/preset/custom_loadout/elite
+	cost = 7
