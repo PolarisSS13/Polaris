@@ -12,9 +12,12 @@
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	outfit_type = /decl/hierarchy/outfit/job/assistant
-	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant",
-					"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
-					"Resident" = /decl/hierarchy/outfit/job/assistant/resident)
+	alt_titles = list(
+		"Technical Assistant",
+		"Medical Intern",
+		"Research Assistant",
+		"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor
+	)
 
 /datum/job/assistant/get_access()
 	if(config.assistant_maint)
