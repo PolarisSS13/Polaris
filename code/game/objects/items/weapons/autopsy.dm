@@ -166,7 +166,8 @@
 /obj/item/weapon/autopsy_scanner/do_surgery(mob/living/carbon/human/M, mob/living/user)
 	if(!istype(M))
 		return 0
-
+	if (user.a_intent == I_HELP)
+		return ..()
 	if(target_name != M.name)
 		target_name = M.name
 		src.wdata = list()
