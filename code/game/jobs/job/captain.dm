@@ -17,7 +17,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
-	economic_modifier = 20
+	wage = 1600
 
 	minimum_character_age = 30
 	ideal_character_age = 50 // Old geezer captains ftw // Get your MILF/DILF fetish out of here //OwO What's this?
@@ -49,7 +49,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	idtype = /obj/item/weapon/card/id/silver/hop
 	req_admin_notify = 1
 	minimal_player_age = 10
-	economic_modifier = 10
+	wage = 850
 
 
 	minimum_character_age = 25
@@ -84,7 +84,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	supervisors = "government officials and the President"
 	selection_color = "#1D1D4F"
 	idtype = /obj/item/weapon/card/id/heads/judge
-	economic_modifier = 13
+	wage = 900
 	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
 	minimal_player_age = 1

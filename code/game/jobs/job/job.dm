@@ -22,7 +22,7 @@
 	var/minimum_character_age = 18
 	var/ideal_character_age = 30
 	var/account_allowed = 1				  // Does this job type come with a station account?
-	var/economic_modifier = 2			  // With how much does this job modify the initial account amount?
+	var/wage = 20			  // Per Hour
 	var/outfit_type
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
@@ -57,12 +57,12 @@
 	var/income = 1
 	if(H.client)
 		switch(H.client.prefs.economic_status)
-			if(CLASS_UPPER)		income = 2.30
-			if(CLASS_MIDDLE)	income = 1
-			if(CLASS_WORKING)		income = 0.50
+			if(CLASS_UPPER)		income = 400
+			if(CLASS_MIDDLE)	income = 200
+			if(CLASS_WORKING)	income = 50
 
 	//give them an account in the station database
-	var/money_amount = (rand(5,50) + rand(5, 50)) * income * economic_modifier * (H.species.economic_modifier)
+	var/money_amount = wage + H.species.additional_wage + income
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)
 		var/remembered_info = ""
@@ -78,6 +78,11 @@
 		H.mind.initial_account = M
 
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
+	if(wage)
+		H << "<span class='notice'>You got paid <b>[wage] credits</b> in wages.</span>"
+
+	if(H.mind.prefs.played)
+		H << "<span class='notice'>You recieved <b>[wage] credits</b> in inheritance. <b>Spend it wisely, you only get this once.</b></span>"
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)

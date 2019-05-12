@@ -651,6 +651,13 @@
 		M << "<span class='notice'>[on_enter_occupant_message]</span>"
 		M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
 		set_occupant(M)
+
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.save_mob_to_prefs() // saves character if round is canon.
+			spawn(20)
+			M << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
+
 		time_entered = world.time
 		if(ishuman(M) && applies_stasis)
 			var/mob/living/carbon/human/H = M

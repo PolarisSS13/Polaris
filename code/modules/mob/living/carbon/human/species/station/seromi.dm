@@ -14,7 +14,7 @@
 	min_age = 12
 	max_age = 45
 
-	economic_modifier = 6
+	additional_wage = 6
 
 	health_hud_intensity = 3
 

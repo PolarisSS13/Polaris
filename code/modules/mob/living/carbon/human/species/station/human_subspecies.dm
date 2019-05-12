@@ -75,7 +75,7 @@
 	max_age = 17
 	bandages_icon = 'icons/mob/bandage.dmi'
 	total_health = 85
-	economic_modifier = 1
+	additional_wage = 20
 	icon_scale = 0.9
 	brute_mod = 0.5
 	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
@@ -107,7 +107,7 @@
 	bandages_icon = 'icons/mob/bandage.dmi'
 	total_health = 50
 	brute_mod = 0.2
-	economic_modifier = 0.2
+	additional_wage = 10
 	icon_scale = 0.75
 	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
 	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'

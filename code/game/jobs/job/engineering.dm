@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
 	email_domain = "fire.cityworks.gov.nt"
-	economic_modifier = 10
+	wage = 780
 
 	minimum_character_age = 30
 	ideal_character_age = 50
@@ -43,7 +43,7 @@
 	supervisors = "the fire chief"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/engineering/engineer
-	economic_modifier = 5
+	wage = 5
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Firefighter/EMT")
@@ -64,7 +64,7 @@
 	supervisors = "the chief engineer"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/engineering/atmos
-	economic_modifier = 5
+	wage = 600
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 
@@ -87,7 +87,7 @@
 	supervisors = "the fire chief"
 	selection_color = "#5B4D20"
 	idtype = /obj/item/weapon/card/id/medical/paramedic
-	economic_modifier = 4
+	wage = 750
 	access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_construction, access_atmospherics, access_external_airlocks, access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic

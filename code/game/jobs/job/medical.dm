@@ -11,7 +11,7 @@
 	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
-	economic_modifier = 10
+	wage = 900
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
@@ -39,7 +39,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/doctor
-	economic_modifier = 7
+	wage = 600
 	minimum_character_age = 25
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
@@ -64,7 +64,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
-	economic_modifier = 5
+	wage = 400
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	alt_titles = list("Pharmacist")
@@ -83,7 +83,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist
-	economic_modifier = 7
+	wage = 7
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
@@ -99,7 +99,7 @@
 	faction = "City"
 	total_positions = 4
 	spawn_positions = 1
-	economic_modifier = 5
+	wage = 300
 	minimum_character_age = 25
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
@@ -121,7 +121,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/intern
-	economic_modifier = 1
+	wage = 150
 	minimum_character_age = 18 //Excuse me electric, what.
 	access = list(access_medical)
 	minimal_access = list(access_medical, access_maint_tunnels)

@@ -107,7 +107,7 @@
 	supervisors = "the Judge"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/defense
-	economic_modifier = 7
+	wage = 120
 	email_domain = "defender.nt"
 	req_admin_notify = 1
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
@@ -130,7 +130,7 @@
 	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/barber
-	minimum_character_age = 16
+	minimum_character_age = 30
 	access = list(access_barber, access_maint_tunnels)
 	minimal_access = list(access_barber)
 
@@ -148,7 +148,7 @@
 	supervisors = "the Mayor and the City Council"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/secretary
-	economic_modifier = 1
+	wage = 170
 	access = list(access_heads, access_hop, access_maint_tunnels)
 	minimal_access = list(access_heads, access_hop, access_maint_tunnels)
 	email_domain = "gminus.plux.gov.nt"
@@ -174,7 +174,7 @@
 	//email_domain = "aoki.nt" <-- needs updated when lore is updated
 	selection_color = "#7a4f33"
 	idtype = /obj/item/weapon/card/id/cargo/head
-	economic_modifier = 5
+	wage = 150
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station, access_heads)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimum_character_age = 20
@@ -195,6 +195,8 @@
 	supervisors = "the factory manager"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/cargo_tech
+	wage = 25
+
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 	minimum_character_age = 13
@@ -214,7 +216,7 @@
 	//email_domain = "aoki.nt" <-- SOON
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/mining
-	economic_modifier = 5
+	wage = 35
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	minimum_character_age = 18

@@ -12,7 +12,7 @@
 	selection_color = "#8E2929"
 	idtype = /obj/item/weapon/card/id/security/head
 	req_admin_notify = 1
-	economic_modifier = 10
+	wage = 1000
 	access = list(access_security, access_warrant, access_bodyguard, access_eva, access_sec_doors, access_brig, access_armory,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
@@ -37,7 +37,7 @@
 	supervisors = "the chief of police"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/warden
-	economic_modifier = 5
+	wage = 700
 	access = list(access_security, access_bodyguard, access_warrant, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_warrant, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
@@ -60,7 +60,7 @@
 	idtype = /obj/item/weapon/card/id/security/detective
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks, access_medical)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
-	economic_modifier = 5
+	wage = 600
 	minimal_player_age = 3
 	minimum_character_age = 25
 
@@ -79,7 +79,7 @@
 	supervisors = "the chief of police"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/officer
-	economic_modifier = 4
+	wage = 500
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
@@ -101,7 +101,7 @@
 	supervisors = "the chief of police and city clerk"
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/security/prosecutor
-	economic_modifier = 7
+	wage = 800
 	access = list(access_prosecutor, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_prosecutor, access_sec_doors, access_heads)
 //	minimal_player_age = 7 (need more prostitut-- prosecutors.)
@@ -123,7 +123,7 @@
 	selection_color = "#601C1C"
 	idtype = /obj/item/weapon/card/id/silver/secretary
 	minimal_player_age = 5
-	economic_modifier = 7
+	wage = 550
 	minimum_character_age = 25
 	access = list(access_heads, access_bodyguard, access_keycard_auth, access_security, access_sec_doors)
 	minimal_access = list(access_heads, access_bodyguard, access_keycard_auth, access_security, access_sec_doors)

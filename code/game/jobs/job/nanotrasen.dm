@@ -19,7 +19,7 @@
                       "Nanotrasen Officer" = /decl/hierarchy/outfit/job/nanotrasen/officer,
 					  "Nanotrasen Regional Commander" = /decl/hierarchy/outfit/job/nanotrasen/captain)
 	email_domain = "gov.nt"
-	economic_modifier = 40
+	wage = 4000
 	minimum_character_age = 20 // Pushing it I guess, but possible
 	ideal_character_age = 40
 	req_admin_notify = 1
@@ -43,7 +43,7 @@
 	email_domain = "cbia.gov.nt"
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/cbia
 
-	economic_modifier = 40
+	wage = 400
 	minimum_character_age = 20 // Pushing it I guess, but possible
 	ideal_character_age = 40
 	req_admin_notify = 1
@@ -72,7 +72,7 @@
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
 	email_domain = "president.gov.nt"
-	economic_modifier = 40
+	wage = 10000
 
 	minimum_character_age = 30
 	ideal_character_age = 50

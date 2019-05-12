@@ -190,7 +190,7 @@
 	var/gluttonous											// Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
 
 	var/rarity_value = 1									// Relative rarity/collector value for this species.
-	var/economic_modifier = 2								// How much money this species makes
+	var/additional_wage = 0									// How much extra money this species makes
 	var/can_drive = 1
 //	var/can_use_machinery = 1 //TODO
 

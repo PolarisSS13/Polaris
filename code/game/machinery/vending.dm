@@ -1103,7 +1103,8 @@
 	desc = "For that special someone!"
 	icon_state = "giftvendor"
 	vend_delay = 15
-	products = list(/obj/item/weapon/storage/fancy/heartbox = 5,
+	products = list(/obj/item/weapon/spacecash/ewallet/lotto = 20,
+					/obj/item/weapon/storage/fancy/heartbox = 5,
 					/obj/item/toy/bouquet = 5,
 					/obj/item/toy/bouquet/fake = 4,
 					/obj/item/weapon/melee/umbrella/random = 10,
@@ -1133,7 +1134,8 @@
 					/obj/item/toy/plushie/tabby_cat = 1)
 	premium = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne = 1,
 					/obj/item/weapon/storage/trinketbox = 2)
-	prices = list(/obj/item/weapon/storage/fancy/heartbox = 15,
+	prices = list(/obj/item/weapon/spacecash/ewallet/lotto = 10,
+					/obj/item/weapon/storage/fancy/heartbox = 15,
 					/obj/item/toy/bouquet = 10,
 					/obj/item/toy/bouquet/fake = 3,
 					/obj/item/weapon/spirit_board = 50,

@@ -123,6 +123,7 @@ datum/preferences
 	var/disabilities = 0
 
 	var/economic_status = "Working Class"
+
 	var/uplinklocation = "PDA"
 
 	// OOC Metadata:
@@ -141,6 +142,7 @@ datum/preferences
 	var/lastnews // Hash of last seen lobby news content.
 
 	var/existing_character = 0 //when someone spawns with this character for the first time or confirms, it's set to 1.
+	var/played = 0 //this will set to 1 once someone plays this character on a canon round.
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)

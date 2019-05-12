@@ -23,6 +23,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["spawnpoint"]				>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
 	S["existing_character"]		>> pref.existing_character
+	S["played"]					>> pref.played
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
@@ -37,6 +38,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["spawnpoint"]				<< pref.spawnpoint
 	S["OOC_Notes"]				<< pref.metadata
 	S["existing_character"]		<< pref.existing_character
+	S["played"]					<< pref.played
 
 /datum/category_item/player_setup_item/general/basic/delete_character()
 	pref.real_name = null
@@ -51,6 +53,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.spawnpoint = null
 	pref.metadata = null
 	pref.existing_character = null
+	pref.played = null
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	pref.age                = sanitize_integer(pref.age, get_min_age(), get_max_age(), initial(pref.age))

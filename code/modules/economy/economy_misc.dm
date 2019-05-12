@@ -74,6 +74,7 @@ var/global/next_account_number = 0
 var/global/list/all_money_accounts = list()
 var/global/list/transaction_devices = list()
 var/global/economy_init = 0
+var/global/datum/economy/bank_accounts/persistent_economy
 
 /proc/setup_economy()
 	if(economy_init)
@@ -103,6 +104,14 @@ var/global/economy_init = 0
 			CR.linked_account = department_accounts[CR.account_to_connect]
 
 	current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year]"
+
+	//starts economy persistence
+
+	persistent_economy = new(src)
+	persistent_economy.load_accounts()
+	persistent_economy.restore_economy()
+
+	//end economy persistence
 
 	economy_init = 1
 	return 1

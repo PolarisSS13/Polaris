@@ -59,6 +59,7 @@
 
 	mind.prefs.weight = calories_to_weight(calories)
 	mind.prefs.existing_character = 1
+	mind.prefs.played = 1
 	//might need code for saving tattoos. Hm.
 
 	mind.prefs.save_preferences()

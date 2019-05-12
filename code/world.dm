@@ -564,7 +564,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s += "<b>[config.server_name]</b> &#8212; "
 
 	s += "<b>The World Server! | City RP w/ presidential elections</b> - <b>[station_name()]</b>";
-	s += " - (High-MRP/Low-HRP)| Unique Setting ("
+	s += " - (High-MRP/Low-HRP)| DEVELOPMENT MODE ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.

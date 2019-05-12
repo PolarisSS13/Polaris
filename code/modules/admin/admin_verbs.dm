@@ -258,6 +258,8 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/colorooc,
 	/client/proc/toggle_canon,
 	/client/proc/save_all_characters,
+	/client/proc/save_department_accounts,
+	/client/proc/load_department_accounts,
 	/client/proc/admin_ghost,
 	/client/proc/toggle_view_range,
 	/datum/admins/proc/view_txt_log,
@@ -395,6 +397,8 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/roll_dices,
 	/client/proc/toggle_canon,
 	/client/proc/save_all_characters,
+	/client/proc/save_department_accounts,
+	/client/proc/load_department_accounts,
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod
 )
@@ -1155,3 +1159,37 @@ var/list/admin_verbs_event_manager = list(
 
 		return 1
 
+/client/proc/save_department_accounts()
+	set name = "Save Department Accounts"
+	set desc = "Saves all department accounts, assuming the round is canon."
+	set category = "Persistence"
+
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return 0
+
+	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
+		usr << "<font color='red'>The round is not canon!</font>"
+		return 0
+
+	persistent_economy.save_accounts()
+	message_admins("Admin [key_name_admin(usr)] has saved all dept accs through verb.", 1)
+	return 1
+
+/client/proc/load_department_accounts()
+	set name = "Load Department Accounts"
+	set desc = "Loads all department accounts."
+	set category = "Persistence"
+
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return 0
+
+	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
+		usr << "<font color='red'>The round is not canon!</font>"
+		return 0
+
+	persistent_economy.load_accounts()
+//	persistent_economy.restore_economy()
+	message_admins("Admin [key_name_admin(usr)] has loaded all dept accs through verb.", 1)
+	return 1

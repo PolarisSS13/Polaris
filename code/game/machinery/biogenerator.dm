@@ -1,6 +1,6 @@
 /obj/machinery/biogenerator
 	name = "biogenerator"
-	desc = ""
+	desc = "Converts plants into biomass, which can be used for fertilizer and sort-of-synthetic products."
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
 	density = 1
@@ -50,7 +50,7 @@
 		return
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='notice'>]The [src] is already loaded.</span>"
+			to_chat(user, "<span class='notice'>\The [src] is already loaded.</span>")
 		else
 			user.remove_from_mob(O)
 			O.loc = src
@@ -104,9 +104,10 @@
 				if(beaker)
 					dat += "<A href='?src=\ref[src];action=activate'>Activate Biogenerator!</A><BR>"
 					dat += "<A href='?src=\ref[src];action=detach'>Detach Container</A><BR><BR>"
-					dat += "Food<BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=milk;cost=20'>10 milk</A> <FONT COLOR=blue>([round(20/build_eff)])</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=meat;cost=50'>Slab of meat</A> <FONT COLOR=blue>([round(50/build_eff)])</FONT><BR>"
+					dat += "Food:<BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=milk;cost=20'>10 milk</A> <FONT COLOR=blue>([round(20/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=milk5;cost=95'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=cream;cost=30'>10 cream</A> <FONT COLOR=blue>([round(20/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=cream5;cost=120'>x5</A><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=meat;cost=50'>Slab of meat</A> <FONT COLOR=blue>([round(50/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=meat5;cost=24s0'>x5</A><BR>"
 					dat += "Nutrient<BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=ez;cost=60'>E-Z-Nutrient</A> <FONT COLOR=blue>([round(60/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=ez5;cost=300'>x5</A><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=l4z;cost=120'>Left 4 Zed</A> <FONT COLOR=blue>([round(120/build_eff)])</FONT> | <A href='?src=\ref[src];action=create;item=l4z5;cost=600'>x5</A><BR>"
@@ -164,7 +165,7 @@
 		processing = 1
 		update_icon()
 		updateUsrDialog()
-		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
+		playsound(src.loc, 'sound/machines/blender.ogg', 30, 1)
 		use_power(S * 30)
 		sleep((S + 15) / eat_eff)
 		processing = 0
@@ -186,7 +187,19 @@
 	switch(item)
 		if("milk")
 			beaker.reagents.add_reagent("milk", 10)
+		if("milk5")
+			beaker.reagents.add_reagent("milk", 50)
+		if("cream")
+			beaker.reagents.add_reagent("cream", 10)
+		if("cream5")
+			beaker.reagents.add_reagent("cream", 50)
 		if("meat")
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
+		if("meat5")
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc) //This is ugly.
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
+			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
 			new/obj/item/weapon/reagent_containers/food/snacks/meat(loc)
 		if("ez")
 			new/obj/item/weapon/reagent_containers/glass/bottle/eznutrient(loc)
@@ -216,6 +229,10 @@
 			new/obj/item/weapon/storage/wallet(loc)
 		if("gloves")
 			new/obj/item/clothing/gloves/botanic_leather(loc)
+		if("plantbag")
+			new/obj/item/weapon/storage/bag/plants(loc)
+		if("plantbaglarge")
+			new/obj/item/weapon/storage/bag/plants/large(loc)
 		if("tbelt")
 			new/obj/item/weapon/storage/belt/utility(loc)
 		if("satchel")
@@ -224,8 +241,11 @@
 			new/obj/item/weapon/storage/bag/cash(loc)
 		if("chembag")
 			new/obj/item/weapon/storage/bag/chemistry(loc)
+// no more. please.
+/*
 		if("monkey")
 			new/mob/living/carbon/human/monkey(loc)
+*/
 		if("workboots")
 			new/obj/item/clothing/shoes/boots/workboots(loc)
 		if("leathershoes")
