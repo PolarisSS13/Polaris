@@ -849,7 +849,7 @@ default behaviour is:
 /mob/living/proc/escape_buckle()
 	if(!buckled)
 		return FALSE
-		
+
 
 	if(istype(buckled, /obj/vehicle))
 		if(buckled.unbuckle_delay)
@@ -864,11 +864,11 @@ default behaviour is:
 				var/obj/vehicle/vehicle = buckled
 				vehicle.unload()
 				return TRUE
-		
+
 	if(buckled.unbuckle_delay)
 		if(do_after(src, buckled.unbuckle_delay)) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
 			if(buckled.user_unbuckle_mob(src, src))
-			return TRUE
+				return TRUE
 	else
 		buckled.user_unbuckle_mob(src, src)
 		return TRUE
