@@ -32,6 +32,8 @@
 //		new /datum/data/mining_equipment("Industrial Hardsuit - Material Scanner",	/obj/item/rig_module/vision/material,					500),
 //		new /datum/data/mining_equipment("Industrial Hardsuit - Maneuvering Jets",	/obj/item/rig_module/maneuvering_jets,					1250),
 //		new /datum/data/mining_equipment("Diamond Pickaxe",				/obj/item/weapon/pickaxe/diamond,									2000),
+		new /datum/data/mining_equipment("Fishing Net",					/obj/item/weapon/material/fishing_net,								500),
+		new /datum/data/mining_equipment("Titanium Fishing Rod",		/obj/item/weapon/material/fishing_rod/modern,						1000)
 		)
 
 /datum/data/mining_equipment

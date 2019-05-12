@@ -8,6 +8,10 @@
 		return
 	if(!loc)
 		return
+
+	if(machine && !CanMouseDrop(machine, src))
+		machine = null
+
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	handle_modifiers() // Do this early since it might affect other things later.

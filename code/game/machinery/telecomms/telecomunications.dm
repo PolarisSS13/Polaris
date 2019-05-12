@@ -371,6 +371,10 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/broadcasting = 1
 	var/receiving = 1
 
+/obj/machinery/telecomms/relay/forceMove(var/newloc)
+	. = ..(newloc)
+	listening_level = z
+
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
 	// Add our level and send it back
