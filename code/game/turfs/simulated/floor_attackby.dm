@@ -146,6 +146,14 @@
 		make_plating(1)
 		playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 		return 1
+	else if (istype(W, /obj/item/weapon/pickaxe) && (flooring.flags & TURF_REMOVE_MINEREQUIP))
+		var/obj/item/weapon/pickaxe/tmpVariableForPolymorphism = W
+		if (!do_after(user, tmpVariableForPolymorphism.digspeed))
+			return 0
+		to_chat(user, "<span class='notice'>You brutally remove the [flooring.descriptor].</span>")
+		make_plating()
+		playsound(src, tmpVariableForPolymorphism.drill_sound, 80, 1)
+		return 1
 	return 0
 
 /turf/simulated/floor/proc/try_replace_tile(obj/item/stack/tile/T as obj, mob/user as mob)
