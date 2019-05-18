@@ -254,6 +254,7 @@
 	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
 	icon_state = "TMpacket"
 	brand = "\improper Temperamento Menthol"
+	starts_with = list(/obj/item/clothing/mask/smokable/cigarette/menthol = 6)
 
 /obj/item/weapon/storage/fancy/cigarettes/carcinomas
 	name = "\improper pack of Carcinoma Angels"

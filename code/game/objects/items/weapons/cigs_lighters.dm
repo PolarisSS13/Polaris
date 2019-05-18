@@ -274,6 +274,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	max_smoketime = 300
 	smoketime = 300
 	var/nicotine_amt = 20
+	var/menthol_amt = 0
 	matchmes = "<span class='notice'>USER lights their NAME with their FLAME.</span>"
 	lightermes = "<span class='notice'>USER manages to light their NAME with FLAME.</span>"
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
@@ -284,6 +285,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	..()
 	if(nicotine_amt)
 		reagents.add_reagent("nicotine", nicotine_amt)
+	if(menthol_amt)
+		reagents.add_reagent("menthol", nicotine_amt)
+
+/obj/item/clothing/mask/smokable/cigarette/menthol
+	menthol_amt = 5
 
 /obj/item/clothing/mask/smokable/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()

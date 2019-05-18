@@ -216,6 +216,9 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/cannabisdeusseed
 	seed_type = "cannabis"
 
+/obj/item/seeds/coca
+	seed_type = "coca"
+
 /obj/item/seeds/whitebeetseed
 	seed_type = "whitebeet"
 
