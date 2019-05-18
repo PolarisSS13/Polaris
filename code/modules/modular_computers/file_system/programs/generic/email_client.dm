@@ -203,7 +203,7 @@
 		data["stored_login"] = stored_login
 		data["stored_password"] = stars(stored_password, 0)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "email_client.tmpl", "Email Client", 600, 450, state = state)
 		if(program.update_layout())

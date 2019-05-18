@@ -65,6 +65,11 @@
 
 	if(usr.incapacitated()) return
 
+	var/mob/living/carbon/human/user = usr
+	if(!ishuman(user))
+		to_chat(usr, "You can't do this!")
+		return
+
 	if(!on && cell && cell.charge > charge_use)
 		turn_on()
 		src.visible_message("\The [src] rumbles to life.", "You hear something rumble deeply.")
@@ -77,8 +82,8 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	var/mob/user = usr
-	if(!istype(user))
+	var/mob/living/carbon/human/user = usr
+	if(!ishuman(user))
 		to_chat(usr, "You can't do this!")
 		return
 
@@ -97,7 +102,7 @@
 	kickstand = !kickstand
 	anchored = (kickstand || on)
 
-/obj/vehicle/bike/load(var/atom/movable/C, var/mob/user as mob)
+/obj/vehicle/bike/load(var/atom/movable/C, var/mob/living/carbon/human/user as mob)
 	var/mob/living/M = C
 	if(!istype(C)) return 0
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
@@ -105,11 +110,13 @@
 	return ..(M, user)
 
 /obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, var/mob/user as mob)
+	if(!ishuman(user))
+		return
 	if(!load(C, user))
 		to_chat(user, "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>")
 		return
 
-/obj/vehicle/bike/attack_hand(var/mob/user as mob)
+/obj/vehicle/bike/attack_hand(var/mob/living/carbon/human/user as mob)
 	if(user == load)
 		unload(load, user)
 		to_chat(user, "You unbuckle yourself from \the [src].")
@@ -117,6 +124,8 @@
 		to_chat(user, "You buckle yourself to \the [src].")
 
 /obj/vehicle/bike/relaymove(mob/user, direction)
+	if(!ishuman(user))
+		return
 	if(user != load || !on)
 		return 0
 	if(Move(get_step(src, direction)))

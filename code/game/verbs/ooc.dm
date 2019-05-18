@@ -53,7 +53,7 @@
 	if(holder && !holder.fakekey)
 		ooc_style = "elevated"
 		if(holder.rights & R_CBIA)
-			ooc_style = "event_manager"
+			ooc_style = "SSevents"
 		if(holder.rights & R_MOD)
 			ooc_style = "moderator"
 		if(holder.rights & R_DEBUG)
@@ -61,7 +61,7 @@
 		if(holder.rights & R_ADMIN)
 			ooc_style = "admin"
 
-	for(var/client/target in clients)
+	for(var/client/target in GLOB.clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
 			if(target.is_key_ignored(key)) // If we're ignored by this person, then do nothing.
 				continue

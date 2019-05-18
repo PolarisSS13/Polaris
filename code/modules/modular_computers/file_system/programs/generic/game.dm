@@ -71,7 +71,7 @@
 	data["gameover"] = gameover
 	data["information"] = information
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "arcade_classic.tmpl", "Defeat [enemy_name]", 500, 350, state = state)
 		if(program.update_layout())
@@ -92,12 +92,14 @@
 		enemy_health += healamt
 		information += "[enemy_name] heals for [healamt] health!"
 	else
+		playsound(src, 'sound/arcade/explo.ogg', 50, 1, extrarange = -3, falloff = 10)
 		var/dam = rand(3,6)
 		player_health -= dam
 		information += "[enemy_name] attacks for [dam] damage!"
 
 /datum/nano_module/arcade_classic/proc/check_gameover()
 	if((player_health <= 0) || player_mana <= 0)
+		playsound(src, 'sound/arcade/Ori_fail.ogg', 50, 1, extrarange = -3, falloff = 10)
 		if(enemy_health <= 0)
 			information += "You have defeated [enemy_name], but you have died in the fight!"
 		else
@@ -117,7 +119,7 @@
 	enemy_health = 45
 	gameover = FALSE
 	information = "A new game has started!"
-
+	playsound(src, 'sound/arcade/Ori_begin.ogg', 50, 1, extrarange = -3, falloff = 10)
 
 
 /datum/nano_module/arcade_classic/Topic(href, href_list)
@@ -130,6 +132,7 @@
 		return 1	// Instead of adding checks into each of those three, we can easily add this one check here to reduce on code copy-paste.
 	if(href_list["attack"])
 		var/damage = rand(2, 6)
+		playsound(src, 'sound/arcade/explo.ogg', 50, 1, extrarange = -3, falloff = 10)
 		information = "You attack for [damage] damage."
 		enemy_health -= damage
 		enemy_play()

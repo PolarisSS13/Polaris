@@ -1,12 +1,12 @@
 /mob/Logout()
-	nanomanager.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
+	SSnanoui.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
 	player_list -= src
 	log_access_out(src)
 	if(admin_datums[src.ckey])
 		if (ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
 			var/admins_number = 0
 			var/admins_number_afk = 0
-			for (var/client/C in clients)
+			for (var/client/C in GLOB.clients)
 				if (C.holder && (C.holder.rights & (R_MOD|R_ADMIN)))
 					admins_number++
 					if (C.is_afk())

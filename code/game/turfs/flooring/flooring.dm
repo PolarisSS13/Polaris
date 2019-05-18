@@ -448,6 +448,7 @@ var/list/flooring_types
 	icon = 'icons/turf/roads.dmi'
 	icon_base = "road"
 	build_type = /obj/item/stack/tile/road
+	flags = TURF_REMOVE_MINEREQUIP | TURF_ACID_IMMUNE
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/pavement1.ogg',
 		'sound/effects/footstep/pavement2.ogg',

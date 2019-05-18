@@ -12,6 +12,11 @@
 	var/power_gen = 5000
 	var/recent_fault = 0
 	var/power_output = 1
+//	var/datum/looping_sound/generator/soundloop
+
+/obj/machinery/power/port_gen/initialize()
+	. = ..()
+//	soundloop = new(list(src), active)
 
 /obj/machinery/power/port_gen/proc/IsBroken()
 	return (stat & (BROKEN|EMPED))
@@ -43,8 +48,12 @@
 
 /obj/machinery/power/port_gen/attack_hand(mob/user as mob)
 	if(..())
+		update_icon()
+//		soundloop.stop()
 		return
 	if(!anchored)
+		update_icon()
+//		soundloop.start()
 		return
 
 /obj/machinery/power/port_gen/examine(mob/user)
@@ -324,7 +333,7 @@
 
 
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "pacman.tmpl", src.name, 500, 560)
 		ui.set_initial_data(data)

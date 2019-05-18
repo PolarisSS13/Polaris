@@ -57,6 +57,7 @@
 	germ_level = 0
 	fingerprint_chance = 25
 //	var/balloonPath = /obj/item/latexballon
+	drop_sound = 'sound/items/drop/rubber.ogg'
 
 //TODO: Make inflating gloves a thing
 /*/obj/item/clothing/gloves/sterile/proc/Inflate(/mob/living/carbon/human/user)
@@ -73,6 +74,7 @@
 	icon_state = "nitrile"
 	item_state = "ngloves"
 //	balloonPath = /obj/item/nitrileballoon
+	drop_sound = 'sound/items/drop/leather.ogg'
 
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."
@@ -81,6 +83,7 @@
 	item_state_slots = list(slot_r_hand_str = "lightbrown", slot_l_hand_str = "lightbrown")
 	permeability_coefficient = 0.05
 	siemens_coefficient = 0.75 //thick work gloves
+	drop_sound = 'sound/items/drop/leather.ogg'
 
 /obj/item/clothing/gloves/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
@@ -127,3 +130,4 @@
 	overgloves = 1
 	force = 5
 	punch_force = 5
+	drop_sound = 'sound/items/drop/metalshield.ogg'

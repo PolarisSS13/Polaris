@@ -4,6 +4,8 @@
 	storage_slots = 10
 	icon = 'icons/obj/wallet.dmi'
 	icon_state = "wallet-orange"
+	drop_sound = 'sound/items/drop/leather.ogg'
+
 	w_class = ITEMSIZE_SMALL
 	can_hold = list(
 		/obj/item/weapon/spacecash,

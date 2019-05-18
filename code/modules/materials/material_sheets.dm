@@ -16,6 +16,7 @@
 	var/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
+	drop_sound = 'sound/items/drop/axe.ogg'
 
 /obj/item/stack/material/New()
 	..()
@@ -117,6 +118,7 @@
 	name = "diamond"
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/stack/material/uranium
 	name = "uranium"
@@ -137,6 +139,7 @@
 	no_variants = FALSE
 	burn_state = 0 //Burnable
 	burntime = 5
+	drop_sound = 'sound/items/drop/boots.ogg'
 
 /obj/item/stack/material/gold
 	name = "gold"
@@ -355,6 +358,7 @@
 	icon_state = "sheet-glass"
 	default_type = "glass"
 	no_variants = FALSE
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"

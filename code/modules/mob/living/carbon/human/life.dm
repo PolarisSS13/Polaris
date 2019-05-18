@@ -897,35 +897,37 @@
 				nutrition_reduction *= mod.metabolism_percent
 
 		nutrition = max (0, nutrition - nutrition_reduction)
-	if(hydration > 0 && stat != DEAD)
-		adjust_hydration(-species.thirst_factor)
 
-
-
-	if(calories > 0 && stat != DEAD && client) //Calories won't burn when you're SSD or dead.
-		adjust_calories(-species.metabolic_rate / 100)
-
-	if(calories <= species.min_calories | calories >= species.max_calories)
-		if (prob(5))
-			adjustToxLoss(10)
-	//If you're too fat or skinny, you're gon die. Maybe make better symptoms later.
-		if (prob(5))
-			vomit()
-
-		if (prob(15))
-			src << "<span class='danger'>[pick("You feel dizzy and incredibly sick", "Your head is pounding", "Your entire body feels like it's dying")]!</span>"
-			Weaken(20)
-
-	if (nutrition > 450)
-		if(overeatduration < 600) //capped so people don't take forever to unfat
-			overeatduration++
-	else
-		if(overeatduration > 1)
-			overeatduration -= 2 //doubled the unfat rate
-
-	// TODO: stomach and bloodstream organ.
 	if(!isSynthetic())
-		handle_trace_chems()
+		if(hydration > 0 && stat != DEAD)
+			adjust_hydration(-species.thirst_factor)
+
+
+
+		if(calories > 0 && stat != DEAD && client) //Calories won't burn when you're SSD or dead.
+			adjust_calories(-species.metabolic_rate / 100)
+
+		if(calories <= species.min_calories | calories >= species.max_calories)
+			if (prob(5))
+				adjustToxLoss(10)
+		//If you're too fat or skinny, you're gon die. Maybe make better symptoms later.
+			if (prob(5))
+				vomit()
+
+			if (prob(15))
+				src << "<span class='danger'>[pick("You feel dizzy and incredibly sick", "Your head is pounding", "Your entire body feels like it's dying")]!</span>"
+				Weaken(20)
+
+		if (nutrition > 450)
+			if(overeatduration < 600) //capped so people don't take forever to unfat
+				overeatduration++
+		else
+			if(overeatduration > 1)
+				overeatduration -= 2 //doubled the unfat rate
+
+		// TODO: stomach and bloodstream organ.
+
+			handle_trace_chems()
 
 	updatehealth()
 

@@ -21,6 +21,7 @@
 	edge = 1
 	toolspeed = 1
 	var/random_color = TRUE
+	drop_sound = 'sound/items/drop/knife.ogg'
 
 /obj/item/weapon/wirecutters/New()
 	if(random_color && prob(50))

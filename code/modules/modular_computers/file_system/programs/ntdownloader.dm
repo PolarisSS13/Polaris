@@ -16,7 +16,7 @@
 	var/download_completion = 0 //GQ of downloaded data.
 	var/download_netspeed = 0
 	var/downloaderror = ""
-	
+
 /datum/computer_file/program/ntnetdownload/kill_program()
 	..()
 	downloaded_file = null
@@ -163,7 +163,7 @@
 			data["hacked_programs"] = hacked_programs
 
 		data["downloadable_programs"] = all_entries
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_downloader.tmpl", "NTNet Download Program", 575, 700, state = state)
 		ui.auto_update_layout = 1
