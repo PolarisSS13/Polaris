@@ -16,6 +16,8 @@
 
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1)
+	if (istype(src, /turf/simulated/wall))
+		return
 	if(wet > 2)	//Can't mop up ice
 		return
 	spawn(0)
