@@ -34,8 +34,8 @@ if(current_step == this_step || (initial_step && !resumed)) /* So we start at st
 
 #define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover();qdel(varname);}varname = src;}
 
-#define START_PROCESSING(Processor, Datum) if (!Datum.isprocessing) {Datum.isprocessing = 1;Processor.processing += Datum}
-#define STOP_PROCESSING(Processor, Datum) Datum.isprocessing = 0;Processor.processing -= Datum
+#define START_PROCESSING(Processor, Datum) if (!Datum.is_processing) {Datum.is_processing = 1;Processor.processing += Datum}
+#define STOP_PROCESSING(Processor, Datum) Datum.is_processing = 0;Processor.processing -= Datum
 
 //SubSystem flags (Please design any new flags so that the default is off, to make adding flags to subsystems easier)
 

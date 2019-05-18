@@ -172,11 +172,11 @@
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
 	var/dat = ""
 	if(src.broken > 0)
-		dat = {"<TT>Bzzzzttttt</TT>"}
+		dat = "<TT>Bzzzzttttt</TT>"
 	else if(src.operating)
-		dat = {"<TT>Microwaving in progress!<BR>Please wait...!</TT>"}
+		dat = "<TT>Microwaving in progress!<BR>Please wait...!</TT>"
 	else if(src.dirty==100)
-		dat = {"<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"}
+		dat = "<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"
 	else
 		var/list/items_counts = new
 		var/list/items_measures = new
@@ -203,12 +203,12 @@
 		for (var/O in items_counts)
 			var/N = items_counts[O]
 			if (!(O in items_measures))
-				dat += {"<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"}
+				dat += "<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"
 			else
 				if (N==1)
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"}
+					dat += "<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"
 				else
-					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
+					dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"
 
 		for (var/datum/reagent/R in reagents.reagent_list)
 			var/display_name = R.name
@@ -216,19 +216,19 @@
 				display_name = "Hotsauce"
 			if (R.id == "frostoil")
 				display_name = "Coldsauce"
-			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
+			dat += "<B>[display_name]:</B> [R.volume] unit\s<BR>"
 
 		if (items_counts.len==0 && reagents.reagent_list.len==0)
-			dat = {"<B>The microwave is empty</B><BR>"}
+			dat = "<B>The microwave is empty</B><BR>"
 		else
-			dat = {"<b>Ingredients:</b><br>[dat]"}
-		dat += {"<HR><BR>\
-<A href='?src=\ref[src];action=cook'>Turn on!<BR>\
-<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
-"}
+			dat = "<b>Ingredients:</b><br>[dat]"
+	dat += "<HR><BR>"
+	dat += "<A href='?src=\ref[src];action=cook'>Turn on!<BR>"
+
+	dat += 	"<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>"
 
 	var/datum/browser/popup = new(user, "Microwave", "Microwave Oven", 300, 390, src)
-	popup.set_content(jointext("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", null))
+	popup.set_content(jointext("<HEAD><TITLE>Microwave Controls</TITLE></HEAD>[dat]", null))
 	popup.open()
 	return
 
