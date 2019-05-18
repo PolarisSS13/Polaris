@@ -281,7 +281,7 @@ proc/admin_notice(var/message, var/rights)
 	dat += "<body>"
 
 	var/p_age = "unknown"
-	for(var/client/C in clients)
+	for(var/client/C in GLOB.clients)
 		if(C.ckey == key)
 			p_age = C.player_age
 			break

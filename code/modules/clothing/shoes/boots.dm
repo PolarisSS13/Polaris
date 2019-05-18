@@ -5,6 +5,7 @@
 	force = 3
 	can_hold_knife = 1
 	step_volume_mod = 1.2
+	drop_sound = 'sound/items/drop/boots.ogg'
 
 /obj/item/clothing/shoes/boots/cowboy
 	name = "cowboy boots"

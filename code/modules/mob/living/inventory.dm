@@ -1,7 +1,4 @@
 /mob/living
-	var/hand = null
-	var/obj/item/l_hand = null
-	var/obj/item/r_hand = null
 	var/obj/item/weapon/back = null//Human/Monkey
 	var/obj/item/weapon/tank/internal = null//Human/Monkey
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
@@ -30,12 +27,12 @@
 /mob/living/get_inactive_hand()
 	if(hand)	return r_hand
 	else		return l_hand
-
+/*
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/living/drop_item(var/atom/Target)
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
-
+*/
 //Drops the item in our left hand
 /mob/living/drop_l_hand(var/atom/Target)
 	return drop_from_inventory(l_hand, Target)

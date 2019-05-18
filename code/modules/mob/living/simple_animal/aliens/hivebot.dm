@@ -21,7 +21,7 @@
 	melee_damage_upper = 15
 
 	attacktext = list("clawed")
-	projectilesound = 'sound/weapons/Gunshot.ogg'
+	projectilesound = 'sound/weapons/gunshot/gunshot1.ogg'
 	projectiletype = /obj/item/projectile/bullet/hivebot
 
 	min_oxy = 0

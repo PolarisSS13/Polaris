@@ -137,7 +137,7 @@
 	rapid = 1
 	projectiletype = /obj/item/projectile/bullet/pistol/medium
 //	casingtype = /obj/item/ammo_casing/spent	//Makes infinite stacks of bullets when put in PoIs.
-	projectilesound = 'sound/weapons/Gunshot_light.ogg'
+	projectilesound = 'sound/weapons/gunshot/gunshot_light.ogg'
 
 	loot_list = list(/obj/item/weapon/gun/projectile/automatic/c20r = 100)
 

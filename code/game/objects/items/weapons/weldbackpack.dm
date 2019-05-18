@@ -8,6 +8,7 @@
 	var/max_fuel = 350
 	var/obj/item/weapon/nozzle = null //Attached welder, or other spray device.
 	var/nozzle_attached = 0
+	drop_sound = 'sound/items/drop/backpack.ogg'
 
 /obj/item/weapon/weldpack/New()
 	var/datum/reagents/R = new/datum/reagents(max_fuel) //Lotsa refills

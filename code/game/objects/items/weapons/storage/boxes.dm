@@ -27,6 +27,13 @@
 	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
 	max_w_class = ITEMSIZE_SMALL
 	max_storage_space = INVENTORY_BOX_SPACE
+	use_sound = 'sound/items/storage/box.ogg'
+	drop_sound = 'sound/items/drop/box.ogg'
+
+/obj/item/weapon/storage/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
+	..()
 
 // BubbleWrap - A box can be folded up to make card
 /obj/item/weapon/storage/box/attack_self(mob/user as mob)

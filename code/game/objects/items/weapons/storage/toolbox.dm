@@ -14,6 +14,7 @@
 	max_storage_space = ITEMSIZE_COST_SMALL * 7 //enough to hold all starting contents
 	origin_tech = list(TECH_COMBAT = 1)
 	attack_verb = list("robusted")
+	drop_sound = 'sound/items/drop/metalboots.ogg'
 
 /obj/item/weapon/storage/toolbox/emergency
 	name = "emergency toolbox"
@@ -191,6 +192,5 @@
 	desc = "A delivery box, it seems it can fit quite a lot of food in it, except for the big letters!"
 
 /obj/item/weapon/storage/toolbox/lunchbox/delbox/filled
-	filled = TRUE 
-	
-	
+	filled = TRUE
+

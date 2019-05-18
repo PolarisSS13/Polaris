@@ -55,7 +55,7 @@
 	return ..()
 
 /obj/item/weapon/card/id/guest/initialize()
-	. = ..() 
+	. = ..()
 	processing_objects.Add(src)
 	update_icon()
 
@@ -102,7 +102,7 @@
 		if(!giver && user.unEquip(I))
 			I.forceMove(src)
 			giver = I
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 		else if(giver)
 			user << "<span class='warning'>There is already ID card inside.</span>"
 		return
@@ -148,7 +148,7 @@
 	data["log"] = internal_log
 	data["uid"] = uid
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "guest_pass.tmpl", src.name, 400, 520)
 		ui.set_initial_data(data)
@@ -240,4 +240,4 @@
 					usr << "<span class='warning'>Cannot issue pass without issuing ID.</span>"
 
 	src.add_fingerprint(usr)
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)

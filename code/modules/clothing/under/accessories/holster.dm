@@ -5,8 +5,8 @@
 	slot = "utility"
 	concealed_holster = 1
 	var/obj/item/holstered = null
-	var/holster_in = 'sound/items/holsterin.ogg'
-	var/holster_out = 'sound/items/holsterout.ogg'
+	var/holster_in = 'sound/weapons/holster/holsterin.ogg'
+	var/holster_out = 'sound/weapons/holster/holsterout.ogg'
 
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))

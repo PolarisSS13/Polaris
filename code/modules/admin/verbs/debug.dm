@@ -664,7 +664,6 @@
 	return
 
 
-
 /client/proc/cmd_debug_mob_lists()
 	set category = "Debug"
 	set name = "Debug Mob Lists"
@@ -682,7 +681,7 @@
 		if("Dead Mobs")
 			usr << jointext(dead_mob_list,",")
 		if("Clients")
-			usr << jointext(clients,",")
+			usr << jointext(GLOB.clients,",")
 
 /client/proc/cmd_debug_using_map()
 	set category = "Debug"

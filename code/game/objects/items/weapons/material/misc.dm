@@ -7,6 +7,7 @@
 	item_state = "harpoon"
 	force_divisor = 0.3 // 18 with hardness 60 (steel)
 	attack_verb = list("jabbed","stabbed","ripped")
+	drop_sound = 'sound/items/drop/axe.ogg'
 
 /obj/item/weapon/material/knife/machete/hatchet
 	name = "hatchet"
@@ -78,6 +79,7 @@
 	dulled_divisor = 0.75	//Still metal on a long pole
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
+	drop_sound = 'sound/items/drop/knife.ogg'
 
 /obj/item/weapon/material/snow/snowball
 	name = "loose packed snowball"
@@ -91,6 +93,7 @@
 	thrown_force_divisor = 0.10
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list("mushed", "splatted", "splooshed", "splushed") // Words that totally exist.
+	drop_sound = 'sound/items/cigs_lighters/cig_snuff.ogg'
 
 /obj/item/weapon/material/snow/snowball/attack_self(mob/user as mob)
 	if(user.a_intent == I_HURT)

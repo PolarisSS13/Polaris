@@ -15,6 +15,7 @@
 	w_class = ITEMSIZE_SMALL
 	flags = CONDUCT
 	var/helpforce = 0	//For help intent things
+	drop_sound = 'sound/items/drop/scrap.ogg'
 
 /obj/item/weapon/surgical/attack(mob/M, mob/user)
 	if(user.a_intent == I_HELP)	//A tad messy, but this should stop people from smacking their patients in surgery
@@ -67,6 +68,7 @@
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("drilled")
+	drop_sound = 'sound/items/drop/accessory.ogg'
 
 	suicide_act(mob/user)
 		var/datum/gender/TU = gender_datums[user.get_visible_gender()]
@@ -92,7 +94,8 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 5000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	
+	drop_sound = 'sound/items/drop/knife.ogg'
+
 	suicide_act(mob/user)
 		var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 		viewers(user) << pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with the [src.name]! It looks like [TU.hes] trying to commit suicide.</span>", \
@@ -108,6 +111,7 @@
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
+	hitsound = 'sound/weapons/saw/circsawhit.ogg'
 
 /obj/item/weapon/surgical/scalpel/laser2
 	name = "laser scalpel"
@@ -115,6 +119,7 @@
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
+	drop_sound = 'sound/items/drop/accessory.ogg'
 
 /obj/item/weapon/surgical/scalpel/laser3
 	name = "laser scalpel"

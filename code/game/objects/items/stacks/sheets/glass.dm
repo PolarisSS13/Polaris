@@ -14,9 +14,7 @@
 	name = "glass"
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
-	var/list/construction_options = list("One Direction", "Full Window")
 	default_type = "glass"
 
 /obj/item/stack/material/glass/attack_self(mob/user as mob)
@@ -34,7 +32,7 @@
 			CC.use(5)
 			use(1)
 			user << "<span class='notice'>You attach wire to the [name].</span>"
-			new /obj/item/stack/light_w(user.loc)
+//			new /obj/item/stack/light_w(user.loc)
 		else if(istype(W, /obj/item/stack/rods))
 			var/obj/item/stack/rods/V  = W
 			if (V.get_amount() < 1 || get_amount() < 1)
@@ -52,76 +50,58 @@
 			if (!G && replace)
 				user.put_in_hands(RG)
 
+
 /obj/item/stack/material/glass/proc/construct_window(mob/user as mob)
 	if(!user || !src)	return 0
 	if(!istype(user.loc,/turf)) return 0
 	if(!user.IsAdvancedToolUser())
+		user << "\red You don't have the dexterity to do this!"
 		return 0
-	var/title = "Sheet-[name]"
-	title += " ([src.get_amount()] sheet\s left)"
-	switch(input(title, "What would you like to construct?") as null|anything in construction_options)
-		if("One Direction")
+	var/title = "Sheet-Glass"
+	title += " ([src.amount] sheet\s left)"
+	switch(alert(title, "Would you like full tile glass or one direction?", "one direct", "full (2 sheets)", "cancel", null))
+		if("one direct")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
-
 			var/list/directions = new/list(cardinal)
-			var/i = 0
 			for (var/obj/structure/window/win in user.loc)
-				i++
-				if(i >= 4)
-					user << "<span class='warning'>There are too many windows in this location.</span>"
-					return 1
 				directions-=win.dir
-				if(!(win.dir in cardinal))
-					user << "<span class='warning'>Can't let you do that.</span>"
+				if(!(win.ini_dir in cardinal))
+					user << "\red Can't let you do that."
 					return 1
-
-			//Determine the direction. It will first check in the direction the person making the window is facing, if it finds an already made window it will try looking at the next cardinal direction, etc.
 			var/dir_to_set = 2
-			for(var/direction in list( user.dir, turn(user.dir,90), turn(user.dir,180), turn(user.dir,270) ))
-				var/found = 0
-				for(var/obj/structure/window/WT in user.loc)
-					if(WT.dir == direction)
-						found = 1
-				if(!found)
-					dir_to_set = direction
-					break
-			new created_window( user.loc, dir_to_set, 1 )
+			//yes, this could probably be done better but hey... it works...
+			for(var/obj/structure/window/WT in user.loc)
+				if (WT.dir == dir_to_set)
+					dir_to_set = 4
+			for(var/obj/structure/window/WT in user.loc)
+				if (WT.dir == dir_to_set)
+					dir_to_set = 1
+			for(var/obj/structure/window/WT in user.loc)
+				if (WT.dir == dir_to_set)
+					dir_to_set = 8
+			for(var/obj/structure/window/WT in user.loc)
+				if (WT.dir == dir_to_set)
+					dir_to_set = 2
+			var/obj/structure/window/W
+			W = new /obj/structure/window/basic( user.loc, 0 )
+			W.dir = dir_to_set
+			W.ini_dir = W.dir
+			W.anchored = 0
 			src.use(1)
-		if("Full Window")
+		if("full (2 sheets)")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
-			if(src.get_amount() < 4)
-				user << "<span class='warning'>You need more glass to do that.</span>"
-				return 1
 			if(locate(/obj/structure/window) in user.loc)
-				user << "<span class='warning'>There is a window in the way.</span>"
+				user << "\red There is a window in the way."
 				return 1
-			new created_window( user.loc, SOUTHWEST, 1 )
-			src.use(4)
-		if("Windoor")
-			if(!is_reinforced) return 1
-
-
-			if(!src || src.loc != user) return 1
-
-			if(isturf(user.loc) && locate(/obj/structure/windoor_assembly/, user.loc))
-				user << "<span class='warning'>There is already a windoor assembly in that location.</span>"
-				return 1
-
-			if(isturf(user.loc) && locate(/obj/machinery/door/window/, user.loc))
-				user << "<span class='warning'>There is already a windoor in that location.</span>"
-				return 1
-
-			if(src.get_amount() < 5)
-				user << "<span class='warning'>You need more glass to do that.</span>"
-				return 1
-
-			new /obj/structure/windoor_assembly(user.loc, user.dir, 1)
-			src.use(5)
-
+			var/obj/structure/window/W
+			W = new /obj/structure/window/basic( user.loc, 0 )
+			W.dir = SOUTHWEST
+			W.ini_dir = SOUTHWEST
+			W.anchored = 0
+			src.use(2)
 	return 0
-
 
 /*
  * Reinforced glass sheets
@@ -131,9 +111,7 @@
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 	default_type = "reinforced glass"
-	created_window = /obj/structure/window/reinforced
 	is_reinforced = 1
-	construction_options = list("One Direction", "Full Window", "Windoor")
 
 /*
  * Phoron Glass sheets
@@ -142,7 +120,6 @@
 	name = "phoron glass"
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
-	created_window = /obj/structure/window/phoronbasic
 	default_type = "phoron glass"
 
 /obj/item/stack/material/glass/phoronglass/attackby(obj/item/W, mob/user)
@@ -170,5 +147,4 @@
 	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-phoronrglass"
 	default_type = "reinforced phoron glass"
-	created_window = /obj/structure/window/phoronreinforced
 	is_reinforced = 1

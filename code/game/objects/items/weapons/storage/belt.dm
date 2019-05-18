@@ -11,6 +11,7 @@
 	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/seromi/belt.dmi')
 
 	var/show_above_suit = 0
+	drop_sound = 'sound/items/drop/leather.ogg'
 
 /obj/item/weapon/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"

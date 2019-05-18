@@ -24,6 +24,7 @@
 	var/list/sprite_sheets_refit = null
 	var/ear_protection = 0
 	var/blood_sprite_state
+	drop_sound = 'sound/items/drop/clothing.ogg'
 
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()

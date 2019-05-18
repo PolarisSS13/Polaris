@@ -376,3 +376,4 @@
 	New(title, recipes)
 		src.title = title
 		src.recipes = recipes
+

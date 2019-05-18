@@ -29,7 +29,7 @@
 
 	melee_damage_lower = 30 // It has a built in esword.
 	melee_damage_upper = 30
-	attack_sound = 'sound/weapons/blade1.ogg'
+	attack_sound = 'sound/weapons/blade.ogg'
 	attacktext = list("slashed")
 	friendly = "hugs"
 	resistance = 0

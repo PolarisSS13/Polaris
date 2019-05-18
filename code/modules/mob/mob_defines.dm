@@ -128,6 +128,9 @@
 	var/m_intent = "run"//Living
 	var/lastKnownIP = null
 	var/obj/buckled = null//Living
+	var/hand = null
+	var/obj/item/l_hand = null//Living
+	var/obj/item/r_hand = null//Living
 
 	var/seer = 0 //for cult//Carbon, probably Human
 

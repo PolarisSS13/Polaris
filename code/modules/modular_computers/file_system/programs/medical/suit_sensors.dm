@@ -59,7 +59,7 @@
 	for(var/z_level in using_map.map_levels)
 		data["crewmembers"] += crew_repository.health_data(z_level)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "crew_monitor.tmpl", "Crew Monitoring Computer", 1050, 800, state = state)
 

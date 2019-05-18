@@ -17,7 +17,7 @@
 	cooldown = 10
 	var/list/available_sounds = list(
 		"Blade Slice"			=	'sound/weapons/bladeslice.ogg',
-		"Energy Blade Slice"	=	'sound/weapons/blade1.ogg',
+		"Energy Blade Slice"	=	'sound/weapons/blade.ogg',
 		"Explosions"			=	"explosion",
 		"Distant Explosion"		=	'sound/effects/explosionfar.ogg',
 		"Sparks"				=	"sparks",
