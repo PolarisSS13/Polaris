@@ -2199,6 +2199,91 @@
 	required_reagents = list("icecoffee" = 1, "whiskey" = 1, "mint" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/drinks/godka //Why you would put this in your body, I don't know.
+	name = "Godka"
+	id = "godka"
+	result = "godka"
+	required_reagents = list("vodka" = 1, "holywater" = 1, "ethanol" = 1, "carthatoline" = 1)
+	catalysts = list("enzyme" = 5, "holywater" = 5)
+	result_amount = 1
+
+/datum/chemical_reaction/drinks/holywine
+	name = "Angel Ichor"
+	id = "holywine"
+	result = "holywine"
+	required_reagents = list("grapejuice" = 5, "gold" = 5)
+	catalysts = list("holywater" = 5)
+	result_amount = 10
+
+/datum/chemical_reaction/drinks/holy_mary
+	name = "Holy Mary"
+	id = "holymary"
+	result = "holymary"
+	required_reagents = list("vodka" = 2, "holywine" = 3, "limejuice" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/angelskiss
+	name = "Angels Kiss"
+	id = "angelskiss"
+	result = "angelskiss"
+	required_reagents = list("holywine" = 1, "kahlua" = 1, "rum" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/angelswrath
+	name = "Angels Wrath"
+	id = "angelswrath"
+	result = "angelswrath"
+	required_reagents = list("rum" = 3, "spacemountainwind" = 1, "holywine" = 1, "dr_gibb" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/ichor_mead
+	name = "Ichor Mead"
+	id = "ichor_mead"
+	result = "ichor_mead"
+	required_reagents = list("holywine" = 1, "mead" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/oilslick
+	name = "Oil Slick"
+	id = "oilslick"
+	result = "oilslick"
+	required_reagents = list("cornoil" = 2, "honey" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/eggnog
+	name = "Eggnog"
+	id = "eggnog"
+	result = "eggnog"
+	required_reagents = list("milk" = 5, "cream" = 5, "sugar" = 5, "egg" = 3)
+	result_amount = 15
+
+/datum/chemical_reaction/drinks/nuclearwaste_radium
+	name = "Nuclear Waste"
+	id = "nuclearwasterad"
+	result = "nuclearwaste"
+	required_reagents = list("oilslick" = 1, "radium" = 1, "limejuice" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/drinks/nuclearwaste_uranium
+	name = "Nuclear Waste"
+	id = "nuclearwasteuran"
+	result = "nuclearwaste"
+	required_reagents = list("oilslick" = 2, "uranium" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/drinks/sodaoil
+	name = "Soda Oil"
+	id = "sodaoil"
+	result = "sodaoil"
+	required_reagents = list("cornoil" = 4, "sodawater" = 1, "carbon" = 1, "tricordrazine" = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/drinks/fusionnaire
+	name = "Fusionnaire"
+	id = "fusionnaire"
+	result = "fusionnaire"
+	required_reagents = list("lemonjuice" = 3, "vodka" = 2, "schnapps_pep" = 1, "schnapps_lem" = 1, "rum" = 1, "ice" = 1)
+	result_amount = 9
 
 //R-UST Port
 /datum/chemical_reaction/hyrdophoron
@@ -2257,7 +2342,7 @@
 /datum/chemical_reaction/heroin
 	name = "Heroin"
 	id = "diamorphine"
-	id = "diamorphine"
+	result = "diamorphine"
 	required_reagents = list("poppyresin" = 1, "enzyme" = 1)
 	result_amount = 1
 
