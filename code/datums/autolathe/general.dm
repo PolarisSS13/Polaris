@@ -122,3 +122,7 @@
 	name = "handcuffs"
 	path =/obj/item/weapon/handcuffs
 	hidden = 1
+
+/datum/category_item/autolathe/general/ecigcartridge
+	name = "ecigarette cartridge"
+	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank

@@ -50,3 +50,12 @@
 		var/obj/item/weapon/storage/fancy/cigarettes/cigarette_brand = cigarette
 		cigarettes[initial(cigarette_brand.name)] = cigarette_brand
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cigarettes))
+
+/datum/gear/ecig
+	display_name = "electronic cigarette"
+	path = /obj/item/clothing/mask/smokable/ecig/util
+
+/datum/gear/ecig/deluxe
+	display_name = "electronic cigarette, deluxe"
+	path = /obj/item/clothing/mask/smokable/ecig/deluxe
+	cost = 2

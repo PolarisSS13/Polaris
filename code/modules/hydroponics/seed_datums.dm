@@ -1232,7 +1232,7 @@
 	name = "tobacco"
 	seed_name = "tobacco"
 	display_name = "tobacco"
-	chems = list("nicotine" = list(3,5))
+	chems = list("nicotine" = list(3,7))
 
 /datum/seed/tobacco/New()
 	..()
