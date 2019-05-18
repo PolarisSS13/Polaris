@@ -10,7 +10,7 @@
 	var/icon_base = "tape"
 	burn_state = 0 //Burnable
 	burntime = 5
-
+	toolspeed = 3 //You can use it in surgery. It's stupid, but you can.
 	var/apply_tape = FALSE
 
 /obj/item/taperoll/initialize()
