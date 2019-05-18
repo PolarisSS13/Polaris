@@ -759,3 +759,8 @@ proc/dd_sortedTextList(list/incoming)
 	for(var/entry in L)
 		if(istype(entry, type))
 			. += entry
+
+/proc/popleft(list/L)
+	if(L.len)
+		. = L[1]
+		L.Cut(1,2)
