@@ -19,6 +19,7 @@
 	var/cuff_type = "handcuffs"
 	var/use_time = 15 // short stuns, faster cuffing
 	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/seromi/handcuffs.dmi')
+	drop_sound = 'sound/items/drop/accessory.ogg'
 
 /obj/item/weapon/handcuffs/get_worn_icon_state(var/slot_name)
 	if(slot_name == slot_handcuffed_str)

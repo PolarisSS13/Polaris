@@ -19,6 +19,7 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	usesound = 'sound/items/crowbar.ogg'
 	toolspeed = 1
+	drop_sound = 'sound/items/drop/sword.ogg'
 
 /obj/item/weapon/crowbar/is_crowbar()
 	return TRUE

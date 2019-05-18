@@ -23,6 +23,7 @@
 	display_contents_with_number = 0 // UNStABLE AS FuCK, turn on when it stops crashing clients
 	use_to_pickup = 1
 	slot_flags = SLOT_BELT
+	drop_sound = 'sound/items/drop/backpack.ogg'
 
 // -----------------------------
 //          Trash bag
@@ -39,6 +40,7 @@
 	max_storage_space = ITEMSIZE_SMALL * 21
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
+	drop_sound = 'sound/items/drop/wrapper.ogg'
 
 /obj/item/weapon/storage/bag/trash/update_icon()
 	if(contents.len == 0)
@@ -64,6 +66,7 @@
 	max_w_class = ITEMSIZE_SMALL
 	can_hold = list() // any
 	cant_hold = list(/obj/item/weapon/disk/nuclear)
+	drop_sound = 'sound/items/drop/wrapper.ogg'
 
 // -----------------------------
 //        Mining Satchel

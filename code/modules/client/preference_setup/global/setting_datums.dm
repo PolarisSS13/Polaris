@@ -181,6 +181,19 @@ var/list/_client_preferences_by_type
 	enabled_description = "Fancy"
 	disabled_description = "Plain"
 
+/datum/client_preference/weather_sounds
+	description ="Weather sounds"
+	key = "SOUND_WEATHER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+/datum/client_preference/supermatter_hum
+	description ="Supermatter hum"
+	key = "SOUND_SUPERMATTER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+
 /********************
 * Staff Preferences *
 ********************/

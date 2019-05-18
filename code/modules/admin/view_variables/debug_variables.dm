@@ -62,10 +62,10 @@
 		else
 			item = "<a href='?_src_=vars;Vars=\ref[value]'>[VV_HTML_ENCODE(name)] = /list ([L.len])</a>"
 
-	else if (name in bitfields)
+	else if (name in GLOB.bitfields)
 		var/list/flags = list()
-		for (var/i in bitfields[name])
-			if (value & bitfields[name][i])
+		for (var/i in GLOB.bitfields[name])
+			if (value & GLOB.bitfields[name][i])
 				flags += i
 			item = "[VV_HTML_ENCODE(name)] = [VV_HTML_ENCODE(jointext(flags, ", "))]"
 	else

@@ -847,16 +847,33 @@ default behaviour is:
 		H.forceMove(get_turf(H))
 
 /mob/living/proc/escape_buckle()
-	if(buckled)
+	if(!buckled)
+		return FALSE
+
+
+	if(istype(buckled, /obj/vehicle))
 		if(buckled.unbuckle_delay)
 			if(do_after(src, buckled.unbuckle_delay)) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
 				if(buckled.user_unbuckle_mob(src, src))
-					return TRUE
+					if(istype(buckled, /obj/vehicle))
+						var/obj/vehicle/vehicle = buckled
+						vehicle.unload()
+						return TRUE
+		else
+			if(istype(buckled, /obj/vehicle))
+				var/obj/vehicle/vehicle = buckled
+				vehicle.unload()
+				return TRUE
 
+	if(buckled.unbuckle_delay)
+		if(do_after(src, buckled.unbuckle_delay)) //this is the part that adds a delay. delay is in deciseconds. --Made it 5 seconds, because hair isn't cut in one second in real life, and I want at least a little bit longer time, (TGameCo)
+			if(buckled.user_unbuckle_mob(src, src))
+				return TRUE
+	else
 		buckled.user_unbuckle_mob(src, src)
 		return TRUE
-	else
-		return FALSE
+
+	return FALSE
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
@@ -1209,3 +1226,21 @@ default behaviour is:
 
 /mob/living/proc/has_vision()
 	return !(eye_blind || (disabilities & BLIND) || stat || blinded)
+
+/mob/living/proc/needs_to_breathe()
+	return !isSynthetic()
+
+/mob/living/vv_get_header()
+	. = ..()
+	. += {"
+		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
+		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
+		<br>
+		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
+		FIRE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=fire'>[getFireLoss()]</a>
+		TOXIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=toxin'>[getToxLoss()]</a>
+		OXY:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=oxygen'>[getOxyLoss()]</a>
+		CLONE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=clone'>[getCloneLoss()]</a>
+		BRAIN:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brain'>[getBrainLoss()]</a>
+		</font>
+		"}

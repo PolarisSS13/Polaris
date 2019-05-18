@@ -4,7 +4,7 @@
 
 /datum/controller/process/inactivity/doWork()
 	if(config.kick_inactive)
-		for(last_object in clients)
+		for(last_object in GLOB.clients)
 			var/client/C = last_object
 			if(C.is_afk(config.kick_inactive MINUTES))
 				to_chat(C,"<span class='warning'>You have been inactive for more than [config.kick_inactive] minute\s and have been disconnected.</span>")

@@ -118,14 +118,34 @@
 	desc = "Used in cooking various dishes."
 	icon_state = "enzyme"
 
-/obj/item/weapon/reagent_containers/food/condiment/enzyme/New()
+/obj/item/weapon/reagent_containers/food/condiment/enzyme/initialize()
 	..()
 	reagents.add_reagent("enzyme", 50)
 
-/obj/item/weapon/reagent_containers/food/condiment/sugar/New()
+/obj/item/weapon/reagent_containers/food/condiment/sugar/initialize()
 	..()
 	reagents.add_reagent("sugar", 50)
 
+/obj/item/weapon/reagent_containers/food/condiment/ketchup/initialize()
+	. = ..()
+	reagents.add_reagent("ketchup", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/hotsauce/initialize()
+	. = ..()
+	reagents.add_reagent("capsaicin", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/cornoil/initialize()
+	. = ..()
+	reagents.add_reagent("cornoil", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/coldsauce/initialize()
+	. = ..()
+	reagents.add_reagent("frostoil", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/soysauce/initialize()
+	. = ..()
+	reagents.add_reagent("soysauce", 50)
+	
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = list(1,20)
 	amount_per_transfer_from_this = 1

@@ -61,7 +61,7 @@
 		data["accounts"] = all_accounts
 		data["accountcount"] = all_accounts.len
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "email_administration.tmpl", "Email Administration Utility", 600, 450, state = state)
 		if(program.update_layout())

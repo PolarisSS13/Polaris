@@ -56,7 +56,7 @@
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
 	var/move_delay = 1
-	var/fire_sound = 'sound/weapons/Gunshot.ogg'
+	var/fire_sound = 'sound/weapons/gunshot/gunshot1.ogg'
 	var/fire_sound_text = "gunshot"
 	var/fire_anim = null
 	var/recoil = 0		//screen shake
@@ -91,6 +91,7 @@
 	var/obj/item/dnalockingchip/attached_lock
 
 	var/last_shot = 0			//records the last shot fired
+	drop_sound = 'sound/items/drop/gun.ogg'
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)

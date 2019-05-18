@@ -145,7 +145,7 @@
 
 //more or less a logging utility
 //Always return "Something/(Something)", even if it's an error message.
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/datum/ticket/ticket = null)
+/proc/key_name(var/whom, var/include_link = FALSE, var/include_name = TRUE, var/highlight_special_characters = TRUE)
 	var/mob/M
 	var/client/C
 	var/key
@@ -178,7 +178,7 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
+			. += "<a href='?priv_msg=\ref[C]'>"
 
 		if(C && C.holder && C.holder.fakekey)
 			. += "Administrator"

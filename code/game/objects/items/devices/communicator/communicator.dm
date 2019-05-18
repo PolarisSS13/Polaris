@@ -257,7 +257,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 		cartridge.forceMove(src)
 		to_chat(usr, "<span class='notice'>You slot \the [cartridge] into \the [src].</span>")
 		modules[++modules.len] = list("module" = "External Device", "icon" = "external64", "number" = EXTRTAB)
-		nanomanager.update_uis(src) // update all UIs attached to src
+		SSnanoui.update_uis(src) // update all UIs attached to src
 	return
 
 // Proc: attack_self()
@@ -448,6 +448,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(M.stat || M.restrained() || M.paralysis || M.stunned || M.weakened)
 		return 0
 	if((src in M.contents) || ( istype(loc, /turf) && in_range(src, M) ))
+		playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
 		return 1
 	else
 		return 0
@@ -457,6 +458,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 		if (ismob(loc))
 			var/mob/M = loc
 			M.put_in_hands(id)
+			playsound(loc, 'sound/machines/id_swipe.ogg', 100, 1)
 			to_chat(usr, "<span class='notice'>You remove the ID from the [name].</span>")
 		else
 			id.loc = get_turf(src)
@@ -523,7 +525,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.forceMove(get_turf(src.loc))
 	else
-		qdel_null(src.id)
+		QDEL_NULL(src.id)
 	return ..()
 
 	// Pen !

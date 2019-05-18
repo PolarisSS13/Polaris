@@ -58,6 +58,7 @@ var/list/possible_cable_coil_colours = list(
 	color = COLOR_RED
 	var/obj/machinery/power/breakerbox/breaker_box
 
+
 /obj/structure/cable/drain_power(var/drain_check, var/surge, var/amount = 0)
 
 	if(drain_check)
@@ -488,7 +489,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
-
+	drop_sound = 'sound/items/drop/accessory.ogg'
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
 	desc = "A device that makes cable."

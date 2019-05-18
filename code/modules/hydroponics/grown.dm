@@ -10,6 +10,7 @@
 	var/plantname
 	var/datum/seed/seed
 	var/potency = -1
+	drop_sound = 'sound/items/drop/herb.ogg'
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
 

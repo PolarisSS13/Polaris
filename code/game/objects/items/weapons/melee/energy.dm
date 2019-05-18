@@ -177,7 +177,7 @@
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
-		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
+		playsound(user.loc, 'sound/weapons/blade.ogg', 50, 1)
 		return 1
 	return 0
 
@@ -230,7 +230,7 @@
 		target.emp_act(3) // A weaker severity is used because this has infinite uses.
 		playsound(get_turf(target), 'sound/effects/EMPulse.ogg', 100, 1)
 		target.adjustFireLoss(force * 3) // 15 Burn, for 20 total.
-		playsound(get_turf(target), 'sound/weapons/blade1.ogg', 100, 1)
+		playsound(get_turf(target), 'sound/weapons/blade.ogg', 100, 1)
 
 		// Make lesser robots really mad at us.
 		if(istype(target, /mob/living/simple_animal))
@@ -364,6 +364,6 @@
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
-		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
+		playsound(user.loc, 'sound/weapons/blade.ogg', 50, 1)
 		return 1
 	return 0

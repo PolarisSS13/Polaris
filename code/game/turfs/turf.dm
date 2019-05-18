@@ -277,7 +277,7 @@ var/const/enterloopsanity = 100
 				L.Add(t)
 	return L
 
-/turf/proc/process()
+/turf/process()
 	return PROCESS_KILL
 
 /turf/proc/contains_dense_objects()

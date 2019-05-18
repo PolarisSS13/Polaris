@@ -67,6 +67,7 @@
 	var/req_log_access = access_cargo //default access for checking logs is cargo
 	var/has_logs = 0 //defaults to 0, set to anything else for vendor to have logs
 
+	var/vending_sound = "machines/vending_drop.ogg"
 
 /obj/machinery/vending/New()
 	..()
@@ -173,7 +174,7 @@
 			vend(currently_vending, usr)
 			return
 		else if(handled)
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 			return // don't smack that machine with your 2 thalers
 
 	if(I || istype(W, /obj/item/weapon/spacecash))
@@ -187,7 +188,7 @@
 		if(panel_open)
 			overlays += image(icon, "[initial(icon_state)]-panel")
 
-		nanomanager.update_uis(src)  // Speaker switch is on the main UI, not wires UI
+		SSnanoui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
 		if(panel_open)
@@ -199,7 +200,7 @@
 		coin = W
 		categories |= CAT_COIN
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 		return
 	else if(istype(W, /obj/item/weapon/wrench))
 		playsound(src, W.usesound, 100, 1)
@@ -403,7 +404,7 @@
 	else
 		data["panel"] = 0
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "vending_machine.tmpl", name, 440, 600)
 		ui.set_initial_data(data)
@@ -463,7 +464,7 @@
 			shut_up = !shut_up
 
 		add_fingerprint(usr)
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 /obj/machinery/vending/proc/vend(datum/stored_item/vending_product/R, mob/user)
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
@@ -474,7 +475,7 @@
 	vend_ready = 0 //One thing at a time!!
 	status_message = "Vending..."
 	status_error = 0
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 
 	if(R.category & CAT_COIN)
 		if(!coin)
@@ -501,6 +502,7 @@
 	use_power(vend_power_usage)	//actuators and stuff
 	if(icon_vend) //Show the vending animation if needed
 		flick(icon_vend,src)
+	playsound(src.loc, "sound/[vending_sound]", 100, 1)
 	spawn(vend_delay)
 		R.get_product(get_turf(src))
 		if(has_logs)
@@ -514,7 +516,7 @@
 		status_error = 0
 		vend_ready = 1
 		currently_vending = null
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 	return 1
 
@@ -570,7 +572,7 @@
 	if(has_logs)
 		do_logging(R, user)
 
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 
 /obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
@@ -732,6 +734,7 @@
 	req_access = list(access_bar)
 	req_log_access = access_bar
 	has_logs = 1
+	vending_sound = "machines/vending_cans.ogg"
 
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
@@ -751,6 +754,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
+	vending_sound = "machines/vending_coffee.ogg"
 
 /obj/machinery/vending/snack
 	name = "Getmore Chocolate Corp"
@@ -784,6 +788,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vending_sound = "machines/vending_cans.ogg"
 
 /obj/machinery/vending/cola/New()
 	..()
@@ -1027,6 +1032,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vending_sound = "machines/vending_cans.ogg"
 
 /obj/machinery/vending/tool
 	name = "YouTool"

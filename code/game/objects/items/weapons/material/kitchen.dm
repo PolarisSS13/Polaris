@@ -15,6 +15,7 @@
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
+	drop_sound = 'sound/items/drop/wooden.ogg'
 
 /obj/item/weapon/material/kitchen/utensil/New()
 	..()

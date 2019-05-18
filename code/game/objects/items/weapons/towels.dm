@@ -9,6 +9,7 @@
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
+	drop_sound = 'sound/items/drop/clothing.ogg'
 
 /obj/item/weapon/towel/attack_self(mob/living/user as mob)
 	var/mob/living/carbon/human/H = user
