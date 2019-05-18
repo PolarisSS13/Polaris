@@ -2342,7 +2342,7 @@
 /datum/chemical_reaction/heroin
 	name = "Heroin"
 	id = "diamorphine"
-	id = "diamorphine"
+	result = "diamorphine"
 	required_reagents = list("poppyresin" = 1, "enzyme" = 1)
 	result_amount = 1
 
