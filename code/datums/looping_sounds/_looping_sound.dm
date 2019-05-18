@@ -1,37 +1,22 @@
 /*
 	output_atoms	(list of atoms)			The destination(s) for the sounds
+
 	mid_sounds		(list or soundfile)		Since this can be either a list or a single soundfile you can have random sounds. May contain further lists but must contain a soundfile at the end.
 	mid_length		(num)					The length to wait between playing mid_sounds
+
 	start_sound		(soundfile)				Played before starting the mid_sounds loop
 	start_length	(num)					How long to wait before starting the main loop after playing start_sound
+
 	end_sound		(soundfile)				The sound played after the main loop has concluded
+
 	chance			(num)					Chance per loop to play a mid_sound
 	volume			(num)					Sound output volume
+	muted			(bool)					Private. Used to stop the sound loop.
 	max_loops		(num)					The max amount of loops to run for.
 	direct			(bool)					If true plays directly to provided atoms instead of from them
+	opacity_check	(bool)					If true, things behind walls/opaque things won't hear the sounds.
+	pref_check		(type)					If set to a /datum/client_preference type, will check if the hearer has that preference active before playing it to them.
 */
-
-//Timing subsystem
-//Don't run if there is an identical unique timer active
-//if the arguments to addtimer are the same as an existing timer, it doesn't create a new timer, and returns the id of the existing timer
-#define TIMER_UNIQUE			(1<<0)
-//For unique timers: Replace the old timer rather then not start this one
-#define TIMER_OVERRIDE			(1<<1)
-//Timing should be based on how timing progresses on clients, not the sever.
-//	tracking this is more expensive,
-//	should only be used in conjuction with things that have to progress client side, such as animate() or sound()
-#define TIMER_CLIENT_TIME		(1<<2)
-//Timer can be stopped using deltimer()
-#define TIMER_STOPPABLE			(1<<3)
-//To be used with TIMER_UNIQUE
-//prevents distinguishing identical timers with the wait variable
-#define TIMER_NO_HASH_WAIT		(1<<4)
-//Loops the timer repeatedly until qdeleted
-//In most cases you want a subsystem instead
-#define TIMER_LOOP				(1<<5)
-
-#define TIMER_ID_NULL -1
-
 /datum/looping_sound
 	var/list/atom/output_atoms
 	var/mid_sounds
@@ -43,6 +28,8 @@
 	var/volume = 100
 	var/max_loops
 	var/direct
+	var/opacity_check
+	var/pref_check
 
 	var/timerid
 
@@ -85,32 +72,39 @@
 	if(!chance || prob(chance))
 		play(get_sound(starttime))
 	if(!timerid)
-		timerid = addtimer(CALLBACK(src, .proc/sound_loop, world.time), mid_length, TIMER_CLIENT_TIME | TIMER_STOPPABLE | TIMER_LOOP)
+		timerid = addtimer(CALLBACK(src, .proc/sound_loop, world.time), mid_length, TIMER_STOPPABLE | TIMER_LOOP)
 
 /datum/looping_sound/proc/play(soundfile)
 	var/list/atoms_cache = output_atoms
 	var/sound/S = sound(soundfile)
-//	if(direct)
-	//	S.channel = open_sound_channel() someone could probably make this work but you could probably just delete this with no reprecussions.
-	//	S.volume = volume
+	if(direct)
+		S.channel = open_sound_channel()
+		S.volume = volume
 	for(var/i in 1 to atoms_cache.len)
 		var/atom/thing = atoms_cache[i]
-	//	if(direct)
-	//		SEND_SOUND(thing, S)
-	//	else
-		playsound(thing, S, volume)
+		if(direct)
+			if(ismob(thing))
+				var/mob/M = thing
+				if(!M.is_preference_enabled(pref_check))
+					continue
+			SEND_SOUND(thing, S)
+		else
+			playsound(thing, S, volume, ignore_walls = !opacity_check, preference = pref_check)
 
 /datum/looping_sound/proc/get_sound(starttime, _mid_sounds)
-	. = _mid_sounds || mid_sounds
+	if(!_mid_sounds)
+		. = mid_sounds
+	else
+		. = _mid_sounds
 	while(!isfile(.) && !isnull(.))
 		. = pickweight(.)
 
 /datum/looping_sound/proc/on_start()
-	var/start_wait = 0
+	var/start_wait = 1 // On TG this is 0, however it needs to be 1 to work around an issue.
 	if(start_sound)
 		play(start_sound)
 		start_wait = start_length
-	addtimer(CALLBACK(src, .proc/sound_loop), start_wait, TIMER_CLIENT_TIME)
+	addtimer(CALLBACK(src, .proc/sound_loop), start_wait)
 
 /datum/looping_sound/proc/on_stop()
 	if(end_sound)

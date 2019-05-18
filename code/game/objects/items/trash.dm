@@ -8,6 +8,7 @@
 	desc = "This is rubbish."
 	burn_state = 0 //Burnable
 	burntime = SHORT_BURN
+	drop_sound = 'sound/items/drop/wrapper.ogg'
 
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"
@@ -52,10 +53,12 @@
 /obj/item/trash/plate
 	name = "plate"
 	icon_state = "plate"
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/trash/pistachios
 	name = "pistachios pack"
@@ -68,6 +71,7 @@
 /obj/item/trash/tray
 	name = "tray"
 	icon_state = "tray"
+	drop_sound = 'sound/items/trayhit1.ogg'
 
 /obj/item/trash/candle
 	name = "candle"

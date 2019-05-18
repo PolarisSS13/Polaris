@@ -24,6 +24,7 @@
 	item_flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+	drop_sound = 'sound/items/drop/rubber.ogg'
 
 /obj/item/clothing/shoes/dress
 	name = "dress shoes"

@@ -115,8 +115,8 @@
 	src << "<font color='red'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</font>"
 
 
-	clients += src
-	directory[ckey] = src
+	GLOB.clients += src
+	GLOB.directory[ckey] = src
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
@@ -157,7 +157,7 @@
 	log_client_to_db()
 
 	send_resources()
-	nanomanager.send_resources(src)
+	SSnanoui.send_resources(src)
 
 	if(!void)
 		void = new()
@@ -179,8 +179,8 @@
 	if(holder)
 		holder.owner = null
 		admins -= src
-	directory -= ckey
-	clients -= src
+	GLOB.directory -= ckey
+	GLOB.clients -= src
 	return ..()
 
 /client/Destroy()

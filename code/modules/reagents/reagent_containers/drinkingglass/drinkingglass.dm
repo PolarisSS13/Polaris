@@ -26,6 +26,7 @@
 	flags = OPENCONTAINER
 
 	matter = list("glass" = 60)
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
 	..()

@@ -1,3 +1,6 @@
+/obj/item/stack/material/animalhide
+	drop_sound = 'sound/items/drop/clothing.ogg'
+
 /obj/item/stack/material/animalhide/human
 	name = "human skin"
 	desc = "The by-product of human farming."
@@ -96,6 +99,7 @@
 	no_variants = FALSE
 	burn_state = 0 //Burnable
 	burntime = 5
+	drop_sound = 'sound/items/drop/clothing.ogg'
 
 /obj/item/stack/material/wetleather
 	amount = 50

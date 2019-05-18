@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if(C.holder && C.holder.fakekey)
 				entry += " <i>(as [C.holder.fakekey])</i>"
@@ -51,7 +51,7 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			if(C.holder && C.holder.fakekey)
 				Lines += C.holder.fakekey
 			else
@@ -74,7 +74,7 @@
 	var/num_mods_online = 0
 	var/num_admins_online = 0
 	var/num_devs_online = 0
-	var/num_event_managers_online = 0
+	var/num_SSeventss_online = 0
 	if(holder)
 		for(var/client/C in admins)
 			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_CBIA & C.holder.rights))	//Used to determine who shows up in admin rows
@@ -152,7 +152,7 @@
 					eventMmsg += "[round(seconds / 60)] minutes, "
 					eventMmsg += "[seconds % 60] seconds)"
 				eventMmsg += "\n"
-				num_event_managers_online++
+				num_SSeventss_online++
 
 	else
 		for(var/client/C in admins)
@@ -168,7 +168,7 @@
 				num_devs_online++
 			else if (R_CBIA & C.holder.rights)
 				eventMmsg += "\t[C] is a [C.holder.rank]\n"
-				num_event_managers_online++
+				num_SSeventss_online++
 
 	if(config.admin_irc)
 		src << "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>"
@@ -180,7 +180,7 @@
 	if(config.show_devs)
 		msg += "\n<b> Current Developers ([num_devs_online]):</b>\n" + devmsg
 
-	if(config.show_event_managers)
-		msg += "\n<b> Current Event Managers ([num_event_managers_online]):</b>\n" + eventMmsg
+	if(config.show_SSeventss)
+		msg += "\n<b> Current Event Managers ([num_SSeventss_online]):</b>\n" + eventMmsg
 
 	src << msg

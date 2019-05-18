@@ -79,35 +79,9 @@
 /proc/Interpolate(a, b, weight = 0.5)
 	return a + (b - a) * weight // Equivalent to: a*(1 - weight) + b*weight
 
-/proc/Mean(...)
-	var/sum = 0
-	for(var/val in args)
-		sum += val
-	return sum / args.len
-
 // Returns the nth root of x.
 /proc/Root(n, x)
 	return x ** (1 / n)
-
-// The quadratic formula. Returns a list with the solutions, or an empty list
-// if they are imaginary.
-/proc/SolveQuadratic(a, b, c)
-	ASSERT(a)
-
-	. = list()
-	var/discriminant = b*b - 4*a*c
-	var/bottom       = 2*a
-
-	// Return if the roots are imaginary.
-	if(discriminant < 0)
-		return
-
-	var/root = sqrt(discriminant)
-	. += (-b + root) / bottom
-
-	// If discriminant == 0, there would be two roots at the same position.
-	if(discriminant != 0)
-		. += (-b - root) / bottom
 
 /proc/ToDegrees(radians)
 	// 180 / Pi ~ 57.2957795

@@ -53,7 +53,7 @@
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	casingtype = /obj/item/ammo_casing/spent
-	projectilesound = 'sound/weapons/Gunshot.ogg'
+	projectilesound = 'sound/weapons/gunshot/gunshot1.ogg'
 
 	loot_list = list(/obj/item/weapon/gun/projectile/revolver/mateba = 100)
 

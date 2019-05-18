@@ -2,6 +2,8 @@
 	name = "blood packs bags"
 	desc = "This box contains blood packs."
 	icon_state = "sterile"
+	drop_sound = 'sound/items/drop/food.ogg'
+
 
 /obj/item/weapon/storage/box/bloodpacks/New()
 		..()

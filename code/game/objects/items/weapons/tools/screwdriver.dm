@@ -20,6 +20,7 @@
 	sharp  = 1
 	toolspeed = 1
 	var/random_color = TRUE
+	drop_sound = 'sound/items/drop/scrap.ogg'
 
 /obj/item/weapon/screwdriver/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]

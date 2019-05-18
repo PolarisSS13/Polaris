@@ -24,7 +24,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .moderator			{color: #184880;}
 .ooc .developer			{color: #1b521f;}
 .ooc .admin				{color: #b82e00;}
-.ooc .event_manager		{color: #660033;}
+.ooc .SSevents		{color: #660033;}
 .ooc .aooc				{color: #960018;}
 
 /* Admin: Private Messages */

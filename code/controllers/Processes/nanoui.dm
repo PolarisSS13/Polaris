@@ -4,10 +4,10 @@
 
 /datum/controller/process/nanoui/statProcess()
 	..()
-	stat(null, "[nanomanager.processing_uis.len] UIs")
+	stat(null, "[SSnanoui.processing_uis.len] UIs")
 
 /datum/controller/process/nanoui/doWork()
-	for(last_object in nanomanager.processing_uis)
+	for(last_object in SSnanoui.processing_uis)
 		var/datum/nanoui/NUI = last_object
 		if(istype(NUI) && !QDELETED(NUI))
 			try
@@ -16,4 +16,4 @@
 				catchException(e, NUI)
 		else
 			catchBadType(NUI)
-			nanomanager.processing_uis -= NUI
+			SSnanoui.processing_uis -= NUI

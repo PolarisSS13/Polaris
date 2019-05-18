@@ -55,7 +55,7 @@
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 
-/obj/proc/process()
+/obj/process()
 	processing_objects.Remove(src)
 	return 0
 

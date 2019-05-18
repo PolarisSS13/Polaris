@@ -32,7 +32,7 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 	// Tell qdel() to Del() this object.
 	return QDEL_HINT_HARDDEL_NOW
 
-/datum/controller/vote/proc/process()	//called by master_controller
+/datum/controller/vote/process()	//called by master_controller
 	if(mode)
 		// No more change mode votes after the game has started.
 		if(mode == VOTE_GAMEMODE && ticker.current_state >= GAME_STATE_SETTING_UP)
@@ -77,7 +77,7 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 			greatest_votes = votes
 
 	if(!config.vote_no_default && choices.len) // Default-vote for everyone who didn't vote
-		var/non_voters = (clients.len - total_votes)
+		var/non_voters = (GLOB.clients.len - total_votes)
 		if(non_voters > 0)
 			if(mode == VOTE_RESTART)
 				choices["Continue Playing"] += non_voters

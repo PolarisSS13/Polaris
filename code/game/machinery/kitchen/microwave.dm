@@ -17,7 +17,7 @@
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
 	clicksound = "button"
-
+//	var/datum/looping_sound/microwave/soundloop
 
 // see code/modules/food/recipes_microwave.dm for recipes
 
@@ -25,8 +25,9 @@
 *   Initialising
 ********************/
 
-/obj/machinery/microwave/New()
+/obj/machinery/microwave/initialize(mapload)
 	..()
+//	soundloop = new(list(src), FALSE)
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 
@@ -226,8 +227,9 @@
 <A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
 "}
 
-	user << browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
-	onclose(user, "microwave")
+	var/datum/browser/popup = new(user, "Microwave", "Microwave Oven", 300, 390, src)
+	popup.set_content(jointext("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", null))
+	popup.open()
 	return
 
 
@@ -315,17 +317,21 @@
 	src.operating = 1
 	src.icon_state = "mw1"
 	src.updateUsrDialog()
+	set_light(1.5)
+//	soundloop.start()
 
 /obj/machinery/microwave/proc/abort()
 	src.operating = 0 // Turn it off again aferwards
 	src.icon_state = "mw"
 	src.updateUsrDialog()
+	after_finish_loop()
 
 /obj/machinery/microwave/proc/stop()
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	src.operating = 0 // Turn it off again aferwards
 	src.icon_state = "mw"
 	src.updateUsrDialog()
+	after_finish_loop()
 
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in ((contents-component_parts)-circuit))
@@ -341,6 +347,7 @@
 	src.icon_state = "mwbloody1" // Make it look dirty!!
 
 /obj/machinery/microwave/proc/muck_finish()
+	after_finish_loop()
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	src.visible_message("<span class='warning'>The microwave gets covered in muck!</span>")
 	src.dirty = 100 // Make it dirty so it can't be used util cleaned
@@ -350,6 +357,7 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/broke()
+	after_finish_loop()
 	var/datum/effect/effect/system/spark_spread/s = new
 	s.set_up(2, 1, src)
 	s.start()
@@ -361,6 +369,7 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/fail()
+	after_finish_loop()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
 	for (var/obj/O in (((contents - ffuu) - component_parts) - circuit))
@@ -374,6 +383,11 @@
 	ffuu.reagents.add_reagent("carbon", amount)
 	ffuu.reagents.add_reagent("toxin", amount/10)
 	return ffuu
+
+/obj/machinery/microwave/proc/after_finish_loop()
+	set_light(0)
+//	soundloop.stop()
+	update_icon()
 
 /obj/machinery/microwave/Topic(href, href_list)
 	if(..())
