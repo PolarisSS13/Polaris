@@ -73,7 +73,7 @@
 		to_chat(user, "<span class='danger'>\The frame cannot be placed on this spot.</span>")
 		return
 
-	if(A.requires_power == 0 || A.name == "Space")
+	if((A.requires_power == 0 || A.name == "Space")&& !isLightFrame())
 		to_chat(user, "<span class='danger'>\The [src] Alarm cannot be placed in this area.</span>")
 		return
 
@@ -101,6 +101,9 @@
 		user.drop_item()
 	qdel(src)
 
+/obj/item/frame/proc/isLightFrame()
+	return FALSE
+
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."
@@ -108,6 +111,9 @@
 	icon_state = "tube-construct-item"
 	build_machine_type = /obj/machinery/light_construct
 	reverse = 1
+
+/obj/item/frame/light/isLightFrame()
+	return TRUE
 
 /obj/item/frame/light/small
 	name = "small light fixture frame"
