@@ -22,7 +22,7 @@
 	burn_state = 0 //Burnable
 	burntime = SHORT_BURN
 	drop_sound = 'sound/items/drop/paper.ogg'
-
+	var/age = 0
 	var/info		//What's actually written on the paper.
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
 	var/stamps		//The (text for the) stamps on the paper.
@@ -38,6 +38,8 @@
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
 	var/const/crayonfont = "Comic Sans MS"
+
+	var/last_modified_ckey
 
 /obj/item/weapon/paper/card
 	name = "blank card"
@@ -227,7 +229,14 @@
 					H.lip_style = null
 					H.update_icons_body()
 
-
+/obj/item/weapon/paper/proc/set_content(text,title)
+	if(title)
+		name = title
+	info = html_encode(text)
+	info = parsepencode(text)
+	update_icon()
+	update_space(info)
+	updateinfolinks()
 
 /obj/item/weapon/paper/proc/addtofield(var/id, var/text, var/links = 0)
 	var/locid = 0
@@ -457,6 +466,7 @@
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
 
+		last_modified_ckey = usr.ckey
 		update_space(t)
 
 		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window

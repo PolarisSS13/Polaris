@@ -1364,11 +1364,13 @@ area/space/atmosalert()
 /area/crew_quarters/kitchen
 	name = "\improper Kitchen"
 	icon_state = "kitchen"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/bar
 	name = "\improper Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/barrestroom
 	name = "\improper Cafeteria Restroom"
@@ -1680,6 +1682,10 @@ area/space/atmosalert()
 
 //City Hospital
 
+/area/medical
+
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //hospitals get messy, so this is for the best.
+
 /area/medical/medbay
 	name = "\improper City Hospital Hallway - Port"
 	icon_state = "medbay"
@@ -1848,6 +1854,10 @@ area/space/atmosalert()
 
 //Security
 
+/area/security
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	//trust me, police stations get messy.
+
 /area/security/main
 	name = "\improper Police Station Office"
 	icon_state = "security"
@@ -1966,6 +1976,7 @@ area/space/atmosalert()
 /area/security/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/security/checkpoint
 	name = "\improper Police Station Checkpoint"
@@ -2037,13 +2048,13 @@ area/space/atmosalert()
 	icon_state = "shuttle3"
 	requires_power = 0
 	base_turf = /turf/simulated/floor/tiled/techmaint
-
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
 	base_turf = /turf/simulated/floor/tiled/techmaint
-
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 /area/janitor/
 	name = "\improper Custodial Closet"
 	icon_state = "janitor"
@@ -2295,6 +2306,9 @@ area/space/atmosalert()
 	icon_state = "engine"
 
 //HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
+
+/area/shuttle
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/constructionsite
 	name = "\improper Construction Site Shuttle"

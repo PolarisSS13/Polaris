@@ -1,6 +1,23 @@
 //Items labled as 'trash' for the trash bag.
 //TODO: Make this an item var or something...
 
+
+/obj/item/trash
+	var/age = 0
+
+/obj/item/trash/New(var/newloc, var/_age)
+	..(newloc)
+	if(!isnull(_age))
+		age = _age
+
+/obj/item/trash/initialize()
+	SSpersistence.track_value(src, /datum/persistent/filth/trash)
+	. = ..()
+
+/obj/item/trash/Destroy()
+	SSpersistence.forget_value(src, /datum/persistent/filth/trash)
+	. = ..()
+
 //Added by Jack Rost
 /obj/item/trash
 	icon = 'icons/obj/trash.dmi'

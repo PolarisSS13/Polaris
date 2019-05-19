@@ -54,6 +54,10 @@
 /turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
 	cut_overlays()
+
+	for(var/obj/effect/decal/writing/W in src)
+		qdel(W)
+
 	if(islist(decals))
 		decals.Cut()
 		decals = null
@@ -81,3 +85,6 @@
 /turf/simulated/floor/levelupdate()
 	for(var/obj/O in src)
 		O.hide(O.hides_under_flooring() && src.flooring)
+
+/turf/simulated/floor/can_engrave()
+	return (!flooring || flooring.can_engrave)

@@ -135,3 +135,9 @@
 	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Trolley Crate"
+
+/datum/supply_pack/supply/cardboard_sheets
+	name = "Stationery - sticky notes (50)"
+	contains = list(/obj/item/sticky_pad/random)
+	cost = 10
+	containername = "\improper Sticky notes crate"

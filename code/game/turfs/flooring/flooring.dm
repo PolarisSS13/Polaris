@@ -44,6 +44,8 @@ var/list/flooring_types
 	var/can_paint
 	var/list/footstep_sounds = list() // key=species name, value = list of soundss
 
+	var/can_engrave = FALSE
+
 /decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
@@ -223,6 +225,8 @@ var/list/flooring_types
 		'sound/effects/footstep/floor3.ogg',
 		'sound/effects/footstep/floor4.ogg',
 		'sound/effects/footstep/floor5.ogg'))
+
+	can_engrave = TRUE
 
 /decl/flooring/tiling/tech
 	desc = "Scuffed from the passage of countless greyshirts."
