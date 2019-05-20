@@ -555,6 +555,7 @@
 		step(O, get_dir(O, src))
 	return
 
+//Object placement on tables
 /obj/structure/table/Click(location, control,params)
 	var/list/PL = params2list(params)
 	var/icon_x = text2num(PL["icon-x"])
