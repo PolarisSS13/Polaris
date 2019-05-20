@@ -645,10 +645,11 @@
 
 	if(item_place)
 		user.drop_item(src.loc)
-		W.pixel_x = clickedx
-		W.pixel_y = clickedy
-		W.Move(loc)
-		W.plane = ABOVE_MOB_PLANE
+		if(!W.fixed_position)
+			W.pixel_x = clickedx
+			W.pixel_y = clickedy
+			W.Move(loc)
+			W.plane = ABOVE_MOB_PLANE
 	return
 
 /obj/structure/table/attack_tk() // no telehulk sorry
