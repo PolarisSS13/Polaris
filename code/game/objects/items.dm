@@ -225,6 +225,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 	var/old_loc = src.loc
 	src.pickup(user)
+	src.plane = initial(plane) //resets the plane of the object when it's picked up from a table. might have other consequences
 
 	//If it's a certain type of object, log it for admins, quite useful in some situations.
 	if(istype(src, /obj/item/weapon/melee))

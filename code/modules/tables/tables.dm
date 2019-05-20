@@ -542,9 +542,12 @@
 			return 1
 	return 1
 
+/obj/structure/table/MouseDrop(atom/over)
+	if(usr.stat || !Adjacent(usr) || (over != usr))
+		return
+	interact(usr)
 
 /obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return ..()
 	if(isrobot(user))
@@ -642,6 +645,10 @@
 
 	if(item_place)
 		user.drop_item(src.loc)
+		W.pixel_x = clickedx
+		W.pixel_y = clickedy
+		W.Move(loc)
+		W.plane = ABOVE_MOB_PLANE
 	return
 
 /obj/structure/table/attack_tk() // no telehulk sorry
