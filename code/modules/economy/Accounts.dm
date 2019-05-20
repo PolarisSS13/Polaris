@@ -17,6 +17,7 @@
 	var/date = ""
 	var/time = ""
 	var/source_terminal = ""
+	var/target_ckey = "n/a" //kept on admin side, for monitoring. n/a by default.
 
 /proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/account_database/source_db)
 

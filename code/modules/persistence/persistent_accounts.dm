@@ -1,86 +1,22 @@
 
 
 /datum/economy/bank_accounts
-	var/treasury_money = 8000000
-	var/list/treasury_logs = list()
-
-	var/council_money = 70000
-	var/list/council_logs = list()
-
-	var/hospital_money = 9000
-	var/list/hospital_logs = list()
-
-	var/emt_money = 300
-	var/list/emt_logs = list()
-
-	var/research_money = 9000
-	var/list/research_logs = list()
-
-	var/police_money = 9000
-	var/list/police_logs = list()
-
-	var/cargo_money = 9000
-	var/list/cargo_logs = list()
-
-// oof struggling businesses rip
-	var/bar_money = 200
-	var/list/bar_logs = list()
-
-	var/botany_money = 200
-	var/list/botany_logs = list()
-
-// Could be used for uh, welfare? ~ Cass
-	var/civilian_money = 10000
-	var/list/civilian_logs = list()
-
-//#############################################//
-
-	var/path = "data/persistence/banks.sav"
-
+	var/path = "data/persistent/banks.sav"
 
 /datum/economy/bank_accounts/proc/save_accounts()
-	message_admins("SAVE: Save all department accounts.", 1)
+//	message_admins("SAVE: Save all department accounts.", 1)
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
 	if(!fexists(path))		return 0
 	if(!S)					return 0
 	S.cd = "/"
 
-
-	S["treasury_money"]				<< treasury_money
-	S["treasury_logs"]				<< treasury_logs
-
-	S["council_money"]				<< council_money
-	S["council_logs"]				<< council_logs
-
-	S["hospital_money"]				<< hospital_money
-	S["hospital_logs"]				<< hospital_logs
-
-	S["emt_money"]					<< emt_money
-	S["emt_logs"]					<< emt_logs
-
-	S["research_money"]				<< research_money
-	S["research_logs"]				<< research_logs
-
-	S["police_money"]				<< police_money
-	S["police_logs"]				<< police_logs
-
-	S["cargo_money"]				<< cargo_money
-	S["cargo_logs"]					<< cargo_logs
-
-	S["bar_money"]					<< bar_money
-	S["bar_logs"]					<< bar_logs
-
-	S["botany_money"]				<< botany_money
-	S["botany_logs"]				<< botany_logs
-
-	S["civilian_money"]				<< civilian_money
-	S["civilian_logs"]				<< civilian_logs
+	S["department_accounts"]		<< 		department_accounts
 
 	message_admins("Saved all department accounts.", 1)
 
 /datum/economy/bank_accounts/proc/load_accounts()
-	message_admins("BEGIN: Loaded all department accounts.", 1)
+//	message_admins("BEGIN: Loaded all department accounts.", 1)
 	if(!path)				return 0
 	if(!fexists(path))		return 0
 	var/savefile/S = new /savefile(path)
@@ -88,67 +24,68 @@
 	S.cd = "/"
 
 
-	S["treasury_money"]				>> treasury_money
-	S["treasury_logs"]				>> treasury_logs
-
-	S["council_money"]				>> council_money
-	S["council_logs"]				>> council_logs
-
-	S["hospital_money"]				>> hospital_money
-	S["hospital_logs"]				>> hospital_logs
-
-	S["emt_money"]					>> emt_money
-	S["emt_logs"]					>> emt_logs
-
-	S["research_money"]				>> research_money
-	S["research_logs"]				>> research_logs
-
-	S["police_money"]				>> police_money
-	S["police_logs"]				>> police_logs
-
-	S["cargo_money"]				>> cargo_money
-	S["cargo_logs"]					>> cargo_logs
-
-	S["bar_money"]					>> bar_money
-	S["bar_logs"]					>> bar_logs
-
-	S["botany_money"]				>> botany_money
-	S["botany_logs"]				>> botany_logs
-
-	S["civilian_money"]				>> civilian_money
-	S["civilian_logs"]				>> civilian_logs
+	S["department_accounts"]		>> 		department_accounts
 
 	message_admins("Loaded all department accounts.", 1)
 
 /datum/economy/bank_accounts/proc/restore_economy()
-	department_accounts["Polluxian Treasury"].money = treasury_money
-	department_accounts["Polluxian Treasury"].transaction_log = treasury_logs
-
-	department_accounts["City Council"].money = council_money
-	department_accounts["City Council"].transaction_log = council_logs
-
-	department_accounts["Public Healthcare"].money = hospital_money
-	department_accounts["Public Healthcare"].transaction_log = hospital_logs
-
-	department_accounts["Emergency and Maintenance"].money = emt_money
-	department_accounts["Emergency and Maintenance"].transaction_log = emt_logs
-
-	department_accounts["Research and Science"].money = research_money
-	department_accounts["Research and Science"].transaction_log = research_logs
-
-	department_accounts["Police"].money = police_money
-	department_accounts["Police"].transaction_log = police_logs
-
-	department_accounts["Cargo"].money = cargo_money
-	department_accounts["Cargo"].transaction_log = cargo_logs
-
-	department_accounts["Bar"].money = bar_money
-	department_accounts["Bar"].transaction_log = bar_logs
-
-	department_accounts["Botany"].money = botany_money
-	department_accounts["Botany"].transaction_log = botany_logs
-
-	department_accounts["Civilian"].money = civilian_money
-	department_accounts["Civilian"].transaction_log = civilian_logs
+	load_accounts()
 
 	message_admins("Restored economy.", 1)
+
+/datum/economy/bank_accounts/proc/view_accounts()
+
+	var/list/dat = list("<table width = '100%'>")
+	dat += "<b>Money Accounts:</b><br>"
+	for(var/datum/money_account/D in all_money_accounts)
+
+		dat += "<h3>[D.owner_name]</h3> <br>"
+
+		dat += "<b>Balance:</b> [D.money] credits. <br>"
+		dat += "<b>Account Number:</b> [D.account_number]<br>"
+		dat += "<b>Pin:</b> [D.remote_access_pin] <br>"
+		dat += "<br>"
+		dat += "<a href='?src=\ref[src];adjust_money=[D]'>Adjust Money</a><br>"
+		dat += "<a href='?src=\ref[src];logs_view=[D.transaction_log]'>View Transaction Logs</a><br>"
+		dat += "<br><hr><br>"
+	dat += "</table>"
+	var/datum/browser/popup = new(usr, "admin_accounts", "View Accounts Data", src)
+	popup.set_content(jointext(dat, null))
+	popup.open()
+
+
+/datum/economy/bank_accounts/proc/view_logs(var/list/L)
+
+
+
+/datum/economy/bank_accounts/Topic(href, href_list)
+	if(..())
+		return 1
+
+	if(href_list["adjust_money"])
+		var/datum/money_account/M = href_list["adjust_money"]
+		var/adj_money = sanitize(input(usr, "Current money is [M.money]. Set money to what?", "Magical Money Adjustment", null)  as num|null)
+		if(!adj_money)
+			return
+
+		M.money = adj_money
+
+		message_admins("Adjusted money of [M] to [adj_money].", 1)
+
+	else if(href_list["logs_view"])
+		var/L = href_list["logs_view"]
+		var/list/dat = list("<table width = '100%'>")
+		for(var/datum/transaction/T in L)
+			dat += "<b>Name:</b> [T.target_name]. <br>"
+			dat += "<b>Amount:</b> [T.amount] credits<br>"
+			dat += "<br>"
+			dat += "<b>Purpose:</b> [T.purpose]<br>"
+			dat += "<b>Date & Time:</b> [T.date] - [T.time]<br>"
+			dat += "<b>Source Terminal:</b> [T.source_terminal]<br>"
+			dat += "<hr><br>"
+		dat += "</table>"
+		var/datum/browser/popup = new(usr, "admin_accounts_log", "View Transaction Logs", src)
+		popup.set_content(jointext(dat, null))
+		popup.open()
+
+	return ..()

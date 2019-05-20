@@ -306,6 +306,7 @@
 			T.source_terminal = machine_id
 			T.date = current_date_string
 			T.time = stationtime2text()
+			T.target_ckey = usr.client.ckey
 			linked_account.transaction_log.Add(T)
 
 			// Save log
@@ -341,7 +342,7 @@
 		cash_stored += transaction_amount
 
 		// Save log
-		add_transaction_log("n/A", "Cash", transaction_amount)
+		add_transaction_log("n/A", "Cash", transaction_amount, usr.client.ckey)
 
 		// Confirm and reset
 		transaction_complete()

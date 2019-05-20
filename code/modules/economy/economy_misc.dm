@@ -107,8 +107,8 @@ var/global/datum/economy/bank_accounts/persistent_economy
 
 	//starts economy persistence
 
-	persistent_economy = new(src)
-	persistent_economy.load_accounts()
+	persistent_economy = new /datum/economy/bank_accounts
+
 	persistent_economy.restore_economy()
 
 	//end economy persistence
