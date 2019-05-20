@@ -2477,7 +2477,6 @@
 #include "code\modules\surgery\~defines.dm"
 #include "code\modules\tables\bench.dm"
 #include "code\modules\tables\flipping.dm"
-#include "code\modules\tables\interactions.dm"
 #include "code\modules\tables\presets.dm"
 #include "code\modules\tables\rack.dm"
 #include "code\modules\tables\tables.dm"
