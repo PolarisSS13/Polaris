@@ -7,7 +7,6 @@
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	universal_speak = 1
-	var/tos_consent = TRUE
 	invisibility = 101
 
 	density = 0
@@ -22,59 +21,16 @@
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 
-	if(handle_tos_consent())
-		new_player_panel_proc()
-
-/mob/new_player/proc/handle_tos_consent()
-	if(!join_tos)
-		return TRUE
-
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		tos_consent = TRUE
-		return TRUE
-
-	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_privacy WHERE ckey='[src.ckey]' AND consent=1")
-	query.Execute()
-	while(query.NextRow())
-		tos_consent = TRUE
-		return TRUE
-
-	privacy_consent()
-	return FALSE
-
-/mob/new_player/proc/privacy_consent()
-	src << browse(null, "window=playersetup")
-	var/output = join_tos
-	output += "<p><A href='?src=\ref[src];consent_signed=SIGNED'>I agree to the rules</A>"
-	output += "<p><A href='?src=\ref[src];consent_rejected=NOTSIGNED'>I DO NOT agree to the rules</A>"
-	src << browse(output,"window=privacy_consent;size=500x300")
-	var/datum/browser/popup = new(src, "privacy_consent", "<div align='center'>The Rules</div>", 500, 400)
-	popup.set_window_options("can_close=0")
-	popup.set_content(output)
-	popup.open(0)
-	return
-
+	new_player_panel_proc()
 
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
+	output += "[using_map.get_map_info()]"
 	output +="<hr>"
-	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Character Panel</A></p>"
 
-	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
-		if(ready)
-			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
-		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Character Panel</A></p>"
 
-	else
-		output += "<a href='byond://?src=\ref[src];manifest=1'>Citizen's Roster</A><br><br>"
-		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
-
-	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
-
-	if(join_tos)
-		output += "<p><a href='byond://?src=\ref[src];tos=1'>Rules</A></p>"
+	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
 
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
@@ -89,24 +45,40 @@
 			while(query.NextRow())
 				newpoll = 1
 				break
-
 			if(newpoll)
-				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
+				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b>"
 			else
-				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
+				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A>"
 
 	if(client.check_for_new_server_news())
-		output += "<p><b><a href='byond://?src=\ref[src];shownews=1'>Show News</A> (NEW!)</b></p>"
+		output += "<b><a href='byond://?src=\ref[src];shownews=1'>Show News</A> (NEW!)</b>"
 	else
-		output += "<p><a href='byond://?src=\ref[src];shownews=1'>Show News</A></p>"
+		output += "<a href='byond://?src=\ref[src];shownews=1'>Show News</A>"
+
+	output +="<hr>"
+
+	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
+		if(ready)
+			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]"
+		else
+			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]"
+
+	else
+		output += "<a href='byond://?src=\ref[src];manifest=1'>Citizen's Roster</A><br>"
+		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
+
+
+	output += "<hr>Current character: <b>[client.prefs.real_name]</b>, [client.prefs.economic_status]<br>"
 
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome", 210, 280, src)
+
+	panel = new(src, "Welcome","Welcome, [client.prefs.real_name]", 500, 480, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(output)
 	panel.open()
 	return
+
 
 /mob/new_player/Stat()
 	..()
@@ -131,29 +103,11 @@
 /mob/new_player/Topic(href, href_list[])
 	if(!client)	return 0
 
-	if(href_list["consent_signed"])
-		tos_consent = 1
-		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
-		var/DBQuery/query = dbcon.NewQuery("REPLACE INTO erro_privacy (ckey, datetime, consent) VALUES ('[ckey]', '[sqltime]', 1)")
-		query.Execute()
-		src << browse(null, "window=privacy_consent")
-		new_player_panel_proc()
-	if(href_list["consent_rejected"])
-		tos_consent = 0
-		to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
-		var/DBQuery/query = dbcon.NewQuery("REPLACE INTO erro_privacy (ckey, datetime, consent) VALUES ('[ckey]', '[sqltime]', 0)")
-		query.Execute()
-
-
 	if(href_list["show_preferences"])
 		client.prefs.open_load_dialog(src)
 		return 1
 
 	if(href_list["ready"])
-		if(!tos_consent)
-			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return 0
 		ready = !ready
 		new_player_panel_proc()
 
@@ -163,10 +117,6 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
-		if(!tos_consent)
-			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return 0
-
 		if(alert(src,"Are you sure you wish to observe? You will have to wait 5 minutes before being able to respawn!","Player Setup","Yes","No") == "Yes")
 			if(!client)	return 1
 
@@ -204,14 +154,8 @@
 
 			return 1
 
-	if(href_list["tos"])
-		privacy_consent()
-		return 0
-
 	if(href_list["late_join"])
-		if(!tos_consent)
-			to_chat(usr, "<span class='warning'>You must consent to the terms of service before you can join!</span>")
-			return 0
+
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			usr << "<font color='red'>The round is either not ready, or has already finished...</font>"
 			return
