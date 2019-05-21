@@ -40,4 +40,3 @@ changes:
   - rscfix: Rechargers now correctly benefit from upgraded capacitors.
   - rscfix: Medical record laptops and detective TV camera consoles no longer turn into regular consoles when de- and re-constructed.
   - rscfix: Zaddat Shrouds now retain their base name when damaged, if the shroud has been customized.
-  - rscfix: The Unity has been added to the religion list.
