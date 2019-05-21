@@ -74,6 +74,7 @@ var/global/list/religion_choices = list(
 	"Singulitarian Worship",
 	"Xilar Qall",
 	"Tajr-kii Rarkajar",
+	"The Unity",
 	"Agnosticism",
 	"Deism"
 	)
