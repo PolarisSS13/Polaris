@@ -90,3 +90,11 @@
 		Z_LEVEL_SKY_GEMINUS,
 		Z_LEVEL_SECOND_GEMINUS
 	)
+
+/datum/map/geminus/get_map_info()
+	. = list()
+	. +=  "[full_name] is a very well-known metropolitan city in Blue Colony located on the planet Pollux.<br>"
+	. +=  "Pollux exists in the Vetra star system which is entirely monopolized by NanoTrasen acting as a quasi-corporate government."
+	. +=  "Being one of the first cities and initially a mining colony, Geminus has a rich history and is home to many descendants of the first prospectors.<br> "
+	. +=  "There's a definite class struggle, as working class Geminians feel pushed out by the richer colonists who wish to further gentrify the city and make it... <i>more profitable, more corporate, more <b>chic</b></i>."
+	return jointext(., "<br>")
