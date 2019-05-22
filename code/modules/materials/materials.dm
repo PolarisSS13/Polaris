@@ -331,8 +331,8 @@ var/list/name_to_material
 	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
 	shard_type = SHARD_STONE_PIECE
-	weight = 22
-	hardness = 55
+	weight = 18
+	hardness = 25
 	protectiveness = 5 // 20%
 	conductivity = 5
 	door_icon_base = "stone"
