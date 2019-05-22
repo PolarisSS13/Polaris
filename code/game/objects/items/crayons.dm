@@ -324,4 +324,7 @@
 	var/image/I = image('icons/obj/crayons.dmi',icon_state = "[capped ? "spraycan_cap_colors" : "spraycan_colors"]")
 	I.color = colour
 	overlays += I
+	
+/obj/item/weapon/pen/crayon/attack_self(var/mob/user)
+	return 
 
