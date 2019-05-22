@@ -223,3 +223,28 @@
 	name = "stun beam"
 	icon_state = "stun"
 	agony = 30
+
+/obj/item/projectile/beam/phase
+	name = "phase wave"
+	icon_state = "gauss"
+	fire_sound = 'sound/weapons/Taser.ogg'
+	damage = 5
+	SA_bonus_damage = 45	// 50 total on animals
+	SA_vulnerability = SA_ANIMAL
+	light_color = "#FFFFFF"
+
+	combustion = FALSE
+
+	muzzle_type = /obj/effect/projectile/muzzle/stun
+	tracer_type = /obj/effect/projectile/tracer/stun
+	impact_type = /obj/effect/projectile/impact/stun
+
+/obj/item/projectile/beam/phase/light
+	SA_bonus_damage = 35	// 40 total on animals
+
+/obj/item/projectile/beam/phase/heavy
+	SA_bonus_damage = 55	// 60 total on animals
+
+/obj/item/projectile/beam/phase/heavy/cannon
+	damage = 15
+	SA_bonus_damage = 60	// 75 total on animals
