@@ -1,3 +1,7 @@
+/datum/gear/cosmetic/makeover
+	display_name = "makeover kit"
+	path = /obj/item/weapon/makeover
+
 /datum/gear/cosmetic/lipstick/black
 	display_name = "lipstick, black"
 	path = /obj/item/weapon/lipstick/black
