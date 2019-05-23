@@ -478,8 +478,10 @@
 /atom/movable/proc/adjust_scale(new_scale_x, new_scale_y)
 	if(isnull(new_scale_y))
 		new_scale_y = new_scale_x
-	icon_scale_x = new_scale_x
-	icon_scale_y = new_scale_y
+	if(new_scale_x != 0)
+		icon_scale_x = new_scale_x
+	if(new_scale_y != 0)
+		icon_scale_y = new_scale_y
 	update_transform()
 
 /atom/movable/proc/adjust_rotation(new_rotation)
