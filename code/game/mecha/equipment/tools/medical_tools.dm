@@ -469,7 +469,8 @@
 				if(M)
 					S.icon_state = initial(S.icon_state)
 					S.icon = initial(S.icon)
-					S.reagents.trans_to_mob(M, S.reagents.total_volume, CHEM_BLOOD)
+					if(M.can_inject())
+						S.reagents.trans_to_mob(M, S.reagents.total_volume, CHEM_BLOOD)
 					M.take_organ_damage(2)
 					S.visible_message("<span class=\"attack\"> [M] was hit by the syringe!</span>")
 					break
@@ -619,7 +620,7 @@
 		if(R.reagent_state == 2 && add_known_reagent(R.id,R.name))
 			occupant_message("Reagent analyzed, identified as [R.name] and added to database.")
 			send_byjax(chassis.occupant,"msyringegun.browser","reagents_form",get_reagents_form())
-	occupant_message("Analyzis complete.")
+	occupant_message("Analysis complete.")
 	return 1
 
 /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/add_known_reagent(r_id,r_name)
