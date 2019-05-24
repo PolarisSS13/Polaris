@@ -18,7 +18,7 @@
 
 /obj/item/weapon/deskbell/attack(mob/target as mob, mob/living/user as mob)
 	if(!broken)
-		ring()
+		playsound(user.loc, 'sound/effects/deskbell.ogg', 50, 1)
 	..()
 
 /obj/item/weapon/deskbell/attack_hand(mob/user)
