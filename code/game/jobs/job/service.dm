@@ -171,7 +171,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the mayor"
-	email_domain = "aoki.nt" <-- needs updated when lore is updated
+	email_domain = ".aoki.nt"
 	selection_color = "#7a4f33"
 	idtype = /obj/item/weapon/card/id/cargo/head
 	wage = 150
@@ -190,7 +190,7 @@
 	department = "Cargo"
 	department_flag = CIVILIAN
 	total_positions = 4
-	email_domain = "aoki.nt" <-- SOON
+	email_domain = "aoki.nt"
 	spawn_positions = 4
 	supervisors = "the factory manager"
 	selection_color = "#9b633e"
@@ -213,7 +213,7 @@
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the factory manager"
-	email_domain = "aoki.nt" <-- SOON
+	email_domain = "aoki.nt"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/mining
 	wage = 16
