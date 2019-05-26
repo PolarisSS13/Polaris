@@ -21,6 +21,34 @@
 #define WINTER_MONTHS list(NOV,DEC,JAN)
 
 
+/proc/get_month_from_num(var/num)
+	switch(num)
+		if(JAN)
+			return "January"
+		if(FEB)
+			return "February"
+		if(MAR)
+			return "March"
+		if(APR)
+			return "April"
+		if(MAY)
+			return "May"
+		if(JUN)
+			return "June"
+		if(JUL)
+			return "July"
+		if(AUG)
+			return "August"
+		if(SEP)
+			return "September"
+		if(OCT)
+			return "October"
+		if(NOV)
+			return "November"
+		if(DEC)
+			return "December"
+		else
+			return 0
 
 
 

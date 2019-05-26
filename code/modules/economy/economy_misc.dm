@@ -66,6 +66,10 @@
 
 var/global/current_date_string
 
+var/global/tax_rate_upper = 0.20
+var/global/tax_rate_middle = 0.20
+var/global/tax_rate_lower = 0.20
+
 var/global/datum/money_account/vendor_account
 var/global/datum/money_account/station_account
 var/global/list/datum/money_account/department_accounts = list()
@@ -74,7 +78,11 @@ var/global/next_account_number = 0
 var/global/list/all_money_accounts = list()
 var/global/list/transaction_devices = list()
 var/global/economy_init = 0
+
 var/global/datum/economy/bank_accounts/persistent_economy
+var/global/list/datum/money_account/department_acc_list = list()
+
+var/global/list/station_departments = list("City Council", "Public Healthcare", "Emergency and Maintenance", "Research and Science", "Police", "Cargo", "Bar", "Botany", "Civilian")
 
 /proc/setup_economy()
 	if(economy_init)
@@ -96,22 +104,18 @@ var/global/datum/economy/bank_accounts/persistent_economy
 	create_department_account("Vendor")
 	vendor_account = department_accounts["Vendor"]
 
-	for(var/obj/item/device/retail_scanner/RS in transaction_devices)
-		if(RS.account_to_connect)
-			RS.linked_account = department_accounts[RS.account_to_connect]
-	for(var/obj/machinery/cash_register/CR in transaction_devices)
-		if(CR.account_to_connect)
-			CR.linked_account = department_accounts[CR.account_to_connect]
-
 	current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year]"
 
 	//starts economy persistence
 
 	persistent_economy = new /datum/economy/bank_accounts
 
-	persistent_economy.restore_economy()
+	persistent_economy.set_economy()
+	persistent_economy.load_accounts()
 
 	//end economy persistence
+
+	link_economy_accounts()
 
 	economy_init = 1
 	return 1
@@ -121,46 +125,48 @@ var/global/datum/economy/bank_accounts/persistent_economy
 		next_account_number = rand(111111, 999999)
 
 		station_account = new()
-		station_account.owner_name = "[station_name()] Station Account"
+		station_account.owner_name = "[station_name()] Funds"
 		station_account.account_number = rand(111111, 999999)
 		station_account.remote_access_pin = rand(1111, 111111)
-		station_account.money = 75000
-
+		station_account.money = 750000
+		station_account.department = "[station_name()] Funds"
 		//create an entry in the account transaction log for when it was created
 		var/datum/transaction/T = new()
 		T.target_name = station_account.owner_name
 		T.purpose = "Account creation"
-		T.amount = 75000
-		T.date = "2nd April, 2555"
+		T.amount = 750000
+		T.date = "2nd April, 2390"
 		T.time = "11:24"
-		T.source_terminal = "Biesel GalaxyNet Terminal #277"
+		T.source_terminal = "Pollux Gov Terminal #277"
 
 		//add the account
 		station_account.transaction_log.Add(T)
-		all_money_accounts.Add(station_account)
+		department_acc_list.Add(station_account)
+//		all_money_accounts.Add(station_account)
 
 /proc/create_department_account(department)
 	next_account_number = rand(111111, 999999)
 
 	var/datum/money_account/department_account = new()
-	department_account.owner_name = "[department] Account"
+	department_account.owner_name = "[department] Funds Account"
 	department_account.account_number = rand(111111, 999999)
 	department_account.remote_access_pin = rand(1111, 111111)
-	department_account.money = 5000
+	department_account.money = 500
+	department_account.department = department
 
 	//create an entry in the account transaction log for when it was created
 	var/datum/transaction/T = new()
 	T.target_name = department_account.owner_name
 	T.purpose = "Account creation"
 	T.amount = department_account.money
-	T.date = "2nd April, 2555"
+	T.date = "2nd April, 2390"
 	T.time = "11:24"
-	T.source_terminal = "Biesel GalaxyNet Terminal #277"
+	T.source_terminal = "Pollux Gov Terminal #277"
 
 	//add the account
 	department_account.transaction_log.Add(T)
-	all_money_accounts.Add(department_account)
-
+//	all_money_accounts.Add(department_account)
+	department_acc_list.Add(department_account)
 	department_accounts[department] = department_account
 
 /datum/money_account/proc/charge(var/transaction_amount,var/datum/money_account/dest,var/transaction_purpose, var/terminal_name="", var/terminal_id=0, var/dest_name = "UNKNOWN")
@@ -201,3 +207,14 @@ var/global/datum/economy/bank_accounts/persistent_economy
 	else
 		to_chat(usr, "\icon[src]<span class='warning'>You don't have that much money!</span>")
 		return 0
+
+
+/proc/link_economy_accounts()
+
+	for(var/obj/item/device/retail_scanner/RS in transaction_devices)
+		if(RS.account_to_connect)
+			RS.linked_account = department_accounts[RS.account_to_connect]
+	for(var/obj/machinery/cash_register/CR in transaction_devices)
+		if(CR.account_to_connect)
+			CR.linked_account = department_accounts[CR.account_to_connect]
+

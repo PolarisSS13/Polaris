@@ -10,6 +10,9 @@
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
 
+	var/dept_acc = 0		//If this is a department account or not.
+	var/department			// If this has a department, and what it is.
+
 /datum/transaction
 	var/target_name = ""
 	var/purpose = ""
@@ -34,8 +37,8 @@
 	T.amount = starting_funds
 	if(!source_db)
 		//set a random date, time and location some time over the past few decades
-		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], 25[rand(10,56)]"
-		T.time = "[rand(0,24)]:[rand(11,59)]"
+		T.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+		T.time = stationtime2text()
 		T.source_terminal = "NTGalaxyNet Terminal #[rand(111,1111)]"
 
 		M.account_number = rand(111111, 999999)
@@ -58,7 +61,7 @@
 		R.info += "<i>Account number:</i> [M.account_number]<br>"
 		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
 		R.info += "<i>Starting balance:</i> $[M.money]<br>"
-		R.info += "<i>Date and time:</i> [stationtime2text()], [current_date_string]<br><br>"
+		R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
 		R.info += "<i>Authorised NT officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
 
