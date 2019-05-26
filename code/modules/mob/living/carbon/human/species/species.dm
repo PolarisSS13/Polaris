@@ -229,6 +229,12 @@
 		/datum/mob_descriptor/build
 		)
 
+	// Skill point variables for the skill system, mainly for determining how many points a character will have as a specific species and at a specific age.
+	var/skill_point_curve_start = 16				// Sets the starting point for the age curve. Generally this should be min_age-1.
+	var/skill_point_diminishing_point = 35			// Low numbers *relative to max_age* cause a steeper curve in the beginning. High numbers make the curve more linear looking.
+	var/skill_point_base = 20						// How many skill points this species gets unconditionally.
+	var/skill_point_max_points_from_scaling = 130	// How many points can be gained from the age curve. This plus skill_point_base determines max point potential.
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
