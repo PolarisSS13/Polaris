@@ -43,7 +43,7 @@
 	idtype = /obj/item/weapon/card/id/cbia
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	email_domain = "cbia.gov.nt"
+	email_domain = "gov.nt"
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/cbia
 
 	wage = 1000
@@ -77,7 +77,7 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
-	email_domain = "president.gov.nt"
+	email_domain = "gov.nt"
 	wage = 9000
 
 	minimum_character_age = 30

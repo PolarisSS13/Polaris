@@ -11,7 +11,7 @@
 	selection_color = "#7F6E2C"
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
-	email_domain = "fire.cityworks.gov.nt"
+	email_domain = "cityworks.gov.nt"
 	wage = 780
 
 	minimum_character_age = 30
@@ -53,11 +53,11 @@
 */
 /datum/job/atmos
 	title = "Firefighter"
-	email_domain = "fire.cityworks.gov.nt"
+	email_domain = "cityworks.gov.nt"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
 	faction = "City"
-	email_domain = "fire.cityworks.gov.nt"
+	email_domain = "cityworks.gov.nt"
 	department = "Emergency and Maintenance"
 	total_positions = 3
 	spawn_positions = 2
@@ -77,7 +77,7 @@
 
 /datum/job/paramedic
 	title = "Paramedic"
-	email_domain = "emt.cityworks.gov.nt"
+	email_domain = "cityworks.gov.nt"
 	flag = PARAMEDIC
 	department_flag = ENGSEC
 	department = "Emergency and Maintenance"

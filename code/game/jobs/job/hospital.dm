@@ -7,11 +7,12 @@
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
+	email_domain = "med.gov.nt"
 	supervisors = "the Mayor"
 	selection_color = "#026865"
 	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
-	wage = 400
+	wage = 780
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
 			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
@@ -29,7 +30,7 @@
 
 /datum/job/doctor
 	title = "Doctor"
-	email_domain = "med.cityworks.gov.nt"
+	email_domain = "med.gov.nt"
 	flag = DOCTOR
 	department_flag = MEDSCI
 	department = "Public Healthcare"
@@ -52,7 +53,7 @@
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
 /datum/job/chemist
-	email_domain = "med.cityworks.gov.nt"
+	email_domain = "med.gov.nt"
 	title = "Chemist"
 	flag = CHEMIST
 	department = "Public Healthcare"
@@ -92,7 +93,7 @@
 
 /datum/job/psychiatrist
 	title = "Psychiatrist"
-	email_domain = "psych.cityworks.gov.nt"
+	email_domain = "med.gov.nt"
 	flag = PSYCHIATRIST
 	department_flag = MEDSCI
 	department = "Public Healthcare"
@@ -114,6 +115,7 @@
 	title = "Medical Intern"
 	flag = MEDICALINTERN
 	department_flag = MEDSCI
+	email_domain = "med.gov.nt"
 	department = "Public Healthcare"
 	faction = "City"
 	total_positions = 5
@@ -121,7 +123,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/intern
-	wage = 150
+	wage = 20
 	minimum_character_age = 18 //Excuse me electric, what.
 	access = list(access_medical)
 	minimal_access = list(access_medical, access_maint_tunnels)

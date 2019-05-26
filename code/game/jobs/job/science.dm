@@ -94,6 +94,7 @@
 
 /datum/job/scienceintern
 	title = "Research Assistant"
+	email_domain = "sciworks.nt"
 	flag = SCIENCEINTERN
 	faction = "City"
 	department = "Research and Science"
@@ -106,7 +107,7 @@
 	wage = 12
 	access = list(access_research, access_maint_tunnels)
 	minimal_access = list(access_research, access_maint_tunnels)
-	minimum_character_age = 13
+	minimum_character_age = 16
 	minimal_player_age = 0
 
 	outfit_type = /decl/hierarchy/outfit/job/science/intern
