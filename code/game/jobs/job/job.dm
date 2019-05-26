@@ -54,16 +54,40 @@
 	if(!account_allowed || (H.mind && H.mind.initial_account))
 		return
 
-	var/income = 1
+	var/income = 0
+	var/tax //TAX THEM ALL
+
 	if(H.client)
 		switch(H.client.prefs.economic_status)
-			if(CLASS_UPPER)		income = 400
-			if(CLASS_MIDDLE)	income = 200
-			if(CLASS_WORKING)	income = 50
+			if(CLASS_UPPER)
+				if(!H.mind.prefs.played)
+					income = 10000
+				tax = tax_rate_upper
+			if(CLASS_MIDDLE)
+				if(!H.mind.prefs.played)
+					income = 4000
+				tax = tax_rate_middle
+			if(CLASS_WORKING)
+				if(!H.mind.prefs.played)
+					income = 200
+				tax = tax_rate_lower
 
 	//give them an account in the station database
-	var/money_amount = wage + H.species.additional_wage + income
+	var/full_money = wage + H.species.additional_wage + income
+	var/calculated_tax
+	if(H.age > 17)
+		calculated_tax = tax * (wage + income)
+	var/money_amount = (full_money - calculated_tax)	//TAX THEM
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
+
+
+	//Tax goes to the treasury. Mh-hm.
+	department_accounts["[station_name()] Funds"].money += calculated_tax
+
+	//Your wage comes from your department, yes.
+	department_accounts[department].money -= wage
+
+
 	if(H.mind)
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
@@ -77,12 +101,17 @@
 
 		H.mind.initial_account = M
 
+
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
+
+	if(income)
+		H << "<span class='notice'>You recieved <b>[income] credits</b> in inheritance. <b>Spend it wisely, you only get this once.</b></span>"
+
 	if(wage)
 		H << "<span class='notice'>You got paid <b>[wage] credits</b> in wages.</span>"
+		H << "<span class='notice'>You paid <b>[calculated_tax]</b> credits from your bank balance in taxes.</span>"
+		H << "The president's current tax rate for your social class is <b>[tax * 100]%</b>"
 
-	if(H.mind.prefs.played)
-		H << "<span class='notice'>You recieved <b>[wage] credits</b> in inheritance. <b>Spend it wisely, you only get this once.</b></span>"
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)

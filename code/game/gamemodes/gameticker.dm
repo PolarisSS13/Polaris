@@ -404,6 +404,10 @@ var/global/datum/controller/gameticker/ticker
 	else
 		world << "<H2>This round was canon.</H2>"
 
+		//saves all department accounts
+		persistent_economy.save_accounts()
+
+		//saves all characters
 		for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
 			H.save_mob_to_prefs()
 

@@ -1,7 +1,7 @@
 /datum/job/nanotrasen
 	title = "Nanotrasen Representative"
 	flag = NANOTRASEN
-	department = "Command"
+	department = "City Council"
 	head_position = 0
 	department_flag = GOVLAW
 	faction = "City"
@@ -19,17 +19,20 @@
                       "Nanotrasen Officer" = /decl/hierarchy/outfit/job/nanotrasen/officer,
 					  "Nanotrasen Regional Commander" = /decl/hierarchy/outfit/job/nanotrasen/captain)
 	email_domain = "gov.nt"
-	wage = 4000
+	wage = 1000
 	minimum_character_age = 20 // Pushing it I guess, but possible
 	ideal_character_age = 40
 	req_admin_notify = 1
 
 	hard_whitelisted = 1
 
+/datum/job/nanotrasen/New()
+	department = "[station_name()] Funds"
+
 /datum/job/cbia
 	title = "CBIA Agent"
 	flag = CBIA
-	department = "Command"
+	department = "City Council"
 	head_position = 0
 	department_flag = GOVLAW
 	faction = "City"
@@ -40,10 +43,10 @@
 	idtype = /obj/item/weapon/card/id/cbia
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	email_domain = "cbia.gov.nt"
+	email_domain = "gov.nt"
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/cbia
 
-	wage = 400
+	wage = 1000
 	minimum_character_age = 20 // Pushing it I guess, but possible
 	ideal_character_age = 40
 	req_admin_notify = 1
@@ -55,10 +58,13 @@
 	get_all_centcom_access()
 	return
 
+/datum/job/nanotrasen/New()
+	department = "[station_name()] Funds"
+
 /datum/job/president
 	title = "President"
 	flag = PRESIDENT
-	department = "Command"
+//	department = "City Council"
 	head_position = 1
 	department_flag = GOVLAW
 	faction = "City"
@@ -71,12 +77,15 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
-	email_domain = "president.gov.nt"
-	wage = 10000
+	email_domain = "gov.nt"
+	wage = 9000
 
 	minimum_character_age = 30
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/heads/president
+
+/datum/job/president/New()
+	department = "[station_name()] Funds"
 
 /datum/job/president/get_access()
 	get_all_station_access()

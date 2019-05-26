@@ -3,7 +3,7 @@
 	email_domain = "sciworks.nt"
 	flag = RD
 	faction = "City"
-	department = "Science"
+	department = "Research and Science"
 	department_flag = MEDSCI
 	head_position = 1
 	total_positions = 1
@@ -12,7 +12,7 @@
 	selection_color = "#AD6BAD"
 	idtype = /obj/item/weapon/card/id/science/head
 	req_admin_notify = 1
-	wage = 890
+	wage = 490
 	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
@@ -34,14 +34,14 @@
 	email_domain = "sciworks.nt"
 	flag = SCIENTIST
 	faction = "City"
-	department = "Science"
+	department = "Research and Science"
 	department_flag = MEDSCI
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/scientist
-	wage = 560
+	wage = 90
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	minimum_character_age = 20
@@ -55,14 +55,14 @@
 	email_domain = "sciworks.nt"
 	flag = XENOBIOLOGIST
 	faction = "City"
-	department = "Science"
+	department = "Research and Science"
 	department_flag = MEDSCI
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the research director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/xenobiologist
-	wage = 340
+	wage = 90
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
 	minimal_access = list(access_research, access_xenobiology, access_hydroponics, access_tox_storage)
 	minimum_character_age = 20
@@ -76,14 +76,14 @@
 	email_domain = "sciworks.nt"
 	flag = ROBOTICIST
 	faction = "City"
-	department = "Science"
+	department = "Research and Science"
 	department_flag = MEDSCI
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "research director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/roboticist
-	wage = 540
+	wage = 90
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimum_character_age = 20
@@ -94,19 +94,20 @@
 
 /datum/job/scienceintern
 	title = "Research Assistant"
+	email_domain = "sciworks.nt"
 	flag = SCIENCEINTERN
 	faction = "City"
-	department = "Science"
+	department = "Research and Science"
 	department_flag = MEDSCI
 	total_positions = 5
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#633D63"
 	idtype = /obj/item/weapon/card/id/science/intern
-	wage = 200
+	wage = 12
 	access = list(access_research, access_maint_tunnels)
 	minimal_access = list(access_research, access_maint_tunnels)
-	minimum_character_age = 13
+	minimum_character_age = 16
 	minimal_player_age = 0
 
 	outfit_type = /decl/hierarchy/outfit/job/science/intern

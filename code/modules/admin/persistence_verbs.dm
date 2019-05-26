@@ -71,23 +71,20 @@
 		usr << "<font color='red'>Only admins can use this command!</font>"
 		return 0
 
-	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
-		usr << "<font color='red'>The round is not canon!</font>"
-		return 0
-
 	persistent_economy.load_accounts()
-//	persistent_economy.restore_economy()
 	message_admins("Admin [key_name_admin(usr)] has loaded all dept accs through verb.", 1)
+
 	return 1
 
 /client/proc/department_account_view()
-	set name = "View Money Accounts"
-	set desc = "View all money and department accounts."
+	set name = "View/Edit Economy Vars"
+	set desc = "View all department accounts, edit vars, edit taxes, etc."
 	set category = "Persistence"
 
 	if(!holder)
 		usr << "<font color='red'>Only admins can use this command!</font>"
 		return 0
 
-	persistent_economy.view_accounts()
+	debug_variables(persistent_economy)
+
 
