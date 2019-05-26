@@ -33,4 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Adds the makeover kit to the loadout for 1 point. Makeover kits can be used to change the user's hair style and color, and eye color."
+  - rscadd: "Adds the makeover kit to the traitor uplink for 5 TC, also available in the Infiltrator bundle null crate in Cargo. Makeover kits can be used to change the user's hair style and color, and eye color."
