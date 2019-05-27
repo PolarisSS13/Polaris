@@ -12,7 +12,6 @@
 
 	var/dept_acc = 0		//If this is a department account or not.
 	var/department			// If this has a department, and what it is.
-	var/payroll_enabled	= 1	//Can this account get a payroll?
 
 /datum/transaction
 	var/target_name = ""
