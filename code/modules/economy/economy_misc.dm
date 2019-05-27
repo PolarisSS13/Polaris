@@ -104,7 +104,7 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 	create_department_account("Vendor")
 	vendor_account = department_accounts["Vendor"]
 
-	current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year]"
+	current_date_string = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
 
 	//starts economy persistence
 
@@ -135,7 +135,7 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 		T.target_name = station_account.owner_name
 		T.purpose = "Account creation"
 		T.amount = 750000
-		T.date = "2nd April, 2390"
+		T.date = current_date_string
 		T.time = "11:24"
 		T.source_terminal = "Pollux Gov Terminal #277"
 
@@ -159,7 +159,7 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 	T.target_name = department_account.owner_name
 	T.purpose = "Account creation"
 	T.amount = department_account.money
-	T.date = "2nd April, 2390"
+	T.date = current_date_string
 	T.time = "11:24"
 	T.source_terminal = "Pollux Gov Terminal #277"
 

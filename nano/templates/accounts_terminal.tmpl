@@ -19,8 +19,7 @@
   <div class='item'>
     <h2>Menu</h2>
   </div>
-  {{:helper.link('Home', 'home', {'choice' : 'view_accounts_list'}, !data.creating_new_account && !data.detailed_account_view ? 'disabled' : null, 'fixedLeft')}}
-  {{:helper.link('New Account', 'gear', {'choice' : 'create_account'}, data.creating_new_account ? 'disabled' : null, 'fixedLeft')}}
+  {{:helper.link('Home', 'home', {'choice' : 'view_accounts_list'}, !data.detailed_account_view ? 'disabled' : null, 'fixedLeft')}}
   {{:helper.link('Print', 'print', {'choice' : 'print'}, data.creating_new_account ? 'disabled' : null, 'fixedLeft')}}
 
   {{if data.creating_new_account}}
@@ -127,28 +126,16 @@
         {{/if}}
       </div>
         <div class='item'>
-          <h2>CentCom Administrator</h2>
+
         </div>
         <div class='item'>
-          <div class='fixedLeft'>
-            Payroll:
-          </div>
-          {{:helper.link('Revoke', 'transferthick-e-w', {'choice' : 'revoke_payroll'}, data.account_number == data.station_account_number ? 'disabled' : null, 'linkDanger')}}
+       
         </div>
         {{if data.access_level >= 2}}
-        <div class='item'>
-          <div class='fixedLeft'>
-            Silent Fund Adjustment:
-          </div>
-          {{:helper.link('Add', 'plus', {'choice' : 'add_funds'})}}
-          {{:helper.link('Remove', 'minus', {'choice' : 'remove_funds'})}}
-        </div>
         {{/if}}
     {{else}}
 
-      <div class='item'>
-        <h2>NanoTrasen Accounts</h2>
-      </div>
+
       {{if data.accounts}}
         <table style="width: 100%">
           {{for data.accounts}}

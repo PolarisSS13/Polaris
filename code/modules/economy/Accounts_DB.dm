@@ -70,7 +70,7 @@
 	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
 	data["access_level"] = get_access_level()
 	data["machine_id"] = machine_id
-	data["creating_new_account"] = creating_new_account
+//	data["creating_new_account"] = creating_new_account
 	data["detailed_account_view"] = !!detailed_account_view
 	data["station_account_number"] = station_account.account_number
 	data["transactions"] = null
@@ -117,13 +117,17 @@
 	if(..())
 		return 1
 
-	var/datum/nanoui/ui = SSnanoui.get_open_ui(usr, src, "main")
+//	var/datum/nanoui/ui = SSnanoui.get_open_ui(usr, src, "main")
 
 	if(href_list["choice"])
 		switch(href_list["choice"])
+
+/*
 			if("create_account")
 				creating_new_account = 1
+*/
 
+/*
 			if("add_funds")
 				var/amount = input("Enter the amount you wish to add", "Silently add funds") as num
 				if(detailed_account_view)
@@ -133,12 +137,12 @@
 				var/amount = input("Enter the amount you wish to remove", "Silently remove funds") as num
 				if(detailed_account_view)
 					detailed_account_view.money = max(detailed_account_view.money - amount, -fund_cap)
-
+*/
 			if("toggle_suspension")
 				if(detailed_account_view)
 					detailed_account_view.suspended = !detailed_account_view.suspended
 					callHook("change_account_status", list(detailed_account_view))
-
+/*
 			if("finalise_create_account")
 				var/account_name = href_list["holder_name"]
 				var/starting_funds = max(text2num(href_list["starting_funds"]), 0)
@@ -159,6 +163,8 @@
 					ui.close()
 
 				creating_new_account = 0
+*/
+
 			if("insert_card")
 				if(held_card)
 					held_card.loc = src.loc
@@ -183,20 +189,19 @@
 			if("view_accounts_list")
 				detailed_account_view = null
 				creating_new_account = 0
-
+/*
 			if("revoke_payroll")
 				var/funds = detailed_account_view.money
 				var/account_trx = create_transation(station_account.owner_name, "Revoke payroll", "([funds])")
 				var/station_trx = create_transation(detailed_account_view.owner_name, "Revoke payroll", funds)
 
-				station_account.money += funds
-				detailed_account_view.money = 0
+				payroll_enabled	= 0
 
 				detailed_account_view.transaction_log.Add(account_trx)
 				station_account.transaction_log.Add(station_trx)
 
 				callHook("revoke_payroll", list(detailed_account_view))
-
+*/
 			if("print")
 				var/text
 				var/obj/item/weapon/paper/P = new(loc)

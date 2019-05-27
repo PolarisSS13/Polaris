@@ -113,7 +113,7 @@ log transactions
 			T.purpose = "Credit deposit"
 			T.amount = I:worth
 			T.source_terminal = machine_id
-			T.date = current_date_string
+			T.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
 			T.time = stationtime2text()
 			authenticated_account.transaction_log.Add(T)
 

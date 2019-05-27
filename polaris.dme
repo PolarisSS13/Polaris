@@ -208,6 +208,7 @@
 #include "code\controllers\subsystems\air.dm"
 #include "code\controllers\subsystems\airflow.dm"
 #include "code\controllers\subsystems\atoms.dm"
+#include "code\controllers\subsystems\economy.dm"
 #include "code\controllers\subsystems\events.dm"
 #include "code\controllers\subsystems\garbage.dm"
 #include "code\controllers\subsystems\lighting.dm"
