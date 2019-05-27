@@ -18,6 +18,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new, //shows an interface for all players, with links to various panels,
 	/datum/admins/proc/set_tcrystals,
 	/datum/admins/proc/add_tcrystals,
+	/client/proc/process_payroll,
 	/client/proc/invisimin,				//allows our mob to go invisible/visible,
 	/datum/admins/proc/show_traitor_panel,	//interface which shows a mob's mind.,	/datum/admins/proc/show_game_mode,  //Configuration window for the current game mode.,
 	/datum/admins/proc/force_mode_latespawn, //Force the mode to try a latespawn proc,
@@ -1121,3 +1122,12 @@ var/list/admin_verbs_event_manager = list(
 	log_admin("[key_name(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.")
 	message_admins("\blue [key_name_admin(usr)] told [key_name(T)] that ERP has been detected, and that jesus will be on their way.", 1)
 
+/client/proc/process_payroll()
+	set category = "Economy"
+	set name = "Process Payroll"
+	set desc = "Pays everyone."
+
+	//Search general records, and process payroll for all those that have bank numbers.
+	for(var/datum/data/record/R in data_core.general)
+		payroll(R)
+		command_announcement.Announce("Hourly payroll has been processed. Please check your bank accounts for your latest payment.", "Payroll")

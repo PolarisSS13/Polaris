@@ -22,7 +22,7 @@
 	var/minimum_character_age = 18
 	var/ideal_character_age = 30
 	var/account_allowed = 1				  // Does this job type come with a station account?
-	var/wage = 20			  // Per Hour
+	var/wage = 20						  // Per Hour
 	var/outfit_type
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
@@ -87,6 +87,16 @@
 	//Your wage comes from your department, yes.
 	department_accounts[department].money -= wage
 
+	//create an entry for the payroll (for the payee).
+	var/datum/transaction/P = new()
+	P.target_name = M.owner_name
+	P.purpose = "[department] Payroll: [H.real_name] ([calculated_tax] credit tax)"
+	P.amount = wage
+	P.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+	P.time = stationtime2text()
+	P.source_terminal = "[department] Funding Account"
+
+	M.transaction_log.Add(P)
 
 	if(H.mind)
 		var/remembered_info = ""
