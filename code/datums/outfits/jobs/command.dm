@@ -13,7 +13,7 @@
 
 /decl/hierarchy/outfit/job/heads/captain/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(H.gender == FEMALE)
+	if(H.identifying_gender == FEMALE)
 		uniform = /obj/item/clothing/under/rank/captain/skirt
 
 /decl/hierarchy/outfit/job/heads/captain/post_equip(var/mob/living/carbon/human/H)
