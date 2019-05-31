@@ -28,7 +28,11 @@
 	. = jointext(.,null)
 
 /datum/skill_manager/proc/skill_point_total_content()
-	return "Current skill points: <b>[total_spent_points()]/[get_max_point_budget()]</b><br>"
+	var/total = total_spent_points()
+	var/max = get_max_point_budget()
+	if(total > max) // Makes it obvious if the user goes over budget.
+		return "Current skill points: <b>[span("bad", total)]/[max]</b><br>"
+	return "Current skill points: <b>[total]/[max]</b><br>"
 
 // Outputs a table with all the skills, highlighted by the inputted skill list, and buttons to modify the referenced list.
 /datum/skill_manager/proc/skill_table_content(list/skills, local_read_only)

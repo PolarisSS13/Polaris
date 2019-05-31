@@ -277,7 +277,7 @@
 		if(PREF_FBP_CYBORG)
 			return S.max_age + 20
 		if(PREF_FBP_POSI)
-			return 220
+			return MAX_AGE_POSI
 		if(PREF_FBP_SOFTWARE)
-			return 150
+			return MAX_AGE_DRONE
 	return S.max_age // welp

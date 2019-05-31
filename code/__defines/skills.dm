@@ -1,5 +1,9 @@
 // These defines are for tweaking the 'balance' of the skill system.
 
+#define SKILL_POINT_FLOOR			20		// Default minimum amount of skill points, generally when at the min age.
+#define SKILL_POINT_CEILING			150		// Default maximum amount of skill points, generally when at the max age.
+#define SKILL_POINT_ANTAG_BONUS		50		// Flat bonus points given to antagonists. This is applied after the age-based curve and can exceed SKILL_POINT_CEILING.
+
 #define SKILL_DISCOUNT_FACTOR		0.5
 #define SKILL_DISCOUNT_MAX_POINTS	100
 
