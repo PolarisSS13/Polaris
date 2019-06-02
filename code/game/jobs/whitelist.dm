@@ -102,6 +102,9 @@ var/list/whitelist = list()
 	if(!jobs.hard_whitelisted)
 		return 1
 
+	if(check_rights(R_ADMIN, 0, M))
+		return 1
+
 	//If we have a loaded file, search it
 	if(jobs.hard_whitelisted)
 		for (var/s in hard_whitelist)
@@ -109,5 +112,26 @@ var/list/whitelist = list()
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
+
+
+
+/proc/get_available_classes(client/C)
+
+	if(!isnum(C.player_age))
+		return ECONOMIC_CLASS
+
+	if(59 < C.player_age)
+		return ECONOMIC_CLASS //60 days unlocks all classes
+
+	else if (29 < C.player_age)
+		return list(CLASS_WORKING, CLASS_MIDDLE)
+
+	else
+		return CLASS_WORKING
+
+
+	return CLASS_WORKING
+
+
 
 #undef WHITELISTFILE

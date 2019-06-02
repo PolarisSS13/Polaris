@@ -77,8 +77,10 @@
 		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
+	var/suitable_classes = get_available_classes(user.client)
+
 	if(href_list["econ_status"])
-		var/new_class = input(user, "Choose your social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in ECONOMIC_CLASS
+		var/new_class = input(user, "Choose your social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
 		if(new_class && CanUseTopic(user))
 			pref.economic_status = new_class
 			return TOPIC_REFRESH
