@@ -13,7 +13,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 /datum/category_item/player_setup_item/general/basic/load_character(var/savefile/S)
 	S["real_name"]				>> pref.real_name
 	S["nickname"]				>> pref.nickname
-	S["name_is_always_random"]	>> pref.be_random_name
+//	S["name_is_always_random"]	>> pref.be_random_name
 	S["gender"]					>> pref.biological_gender
 	S["id_gender"]				>> pref.identifying_gender
 	S["age"]					>> pref.age
@@ -22,13 +22,15 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["birth_year"]				>> pref.birth_year
 	S["spawnpoint"]				>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
+
 	S["existing_character"]		>> pref.existing_character
 	S["played"]					>> pref.played
+	S["unique_id"]				>> pref.unique_id
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
 	S["nickname"]				<< pref.nickname
-	S["name_is_always_random"]	<< pref.be_random_name
+//	S["name_is_always_random"]	<< pref.be_random_name
 	S["gender"]					<< pref.biological_gender
 	S["id_gender"]				<< pref.identifying_gender
 	S["age"]					<< pref.age
@@ -37,13 +39,15 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["birth_year"]				<< pref.birth_year
 	S["spawnpoint"]				<< pref.spawnpoint
 	S["OOC_Notes"]				<< pref.metadata
+
 	S["existing_character"]		<< pref.existing_character
 	S["played"]					<< pref.played
+	S["unique_id"]				<< pref.unique_id
 
 /datum/category_item/player_setup_item/general/basic/delete_character()
 	pref.real_name = null
 	pref.nickname = null
-	pref.be_random_name = null
+//	pref.be_random_name = null
 	pref.biological_gender = null
 	pref.identifying_gender = null
 	pref.age = null
@@ -54,21 +58,29 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.metadata = null
 	pref.existing_character = null
 	pref.played = null
+	pref.unique_id = null
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
-	pref.age                = sanitize_integer(pref.age, get_min_age(), get_max_age(), initial(pref.age))
-	pref.birth_day          = sanitize_integer(pref.birth_day, 1, 31, initial(pref.birth_day))
-	pref.birth_month        = sanitize_integer(pref.birth_month, 1, 12, initial(pref.birth_month))
+
 	pref.biological_gender  = sanitize_inlist(pref.biological_gender, get_genders(), pick(get_genders()))
 	pref.identifying_gender = (pref.identifying_gender in all_genders_define_list) ? pref.identifying_gender : pref.biological_gender
 	pref.real_name		= sanitize_name(pref.real_name, pref.species, is_FBP())
 	if(!pref.real_name)
 		pref.real_name      = random_name(pref.identifying_gender, pref.species)
+
 	if(!pref.birth_year)
 		adjust_year()
+
+	pref.age                = sanitize_integer(pref.age, get_min_age(), get_max_age(), initial(pref.age))
+	pref.birth_day          = sanitize_integer(pref.birth_day, 1, 31, initial(pref.birth_day))
+	pref.birth_month        = sanitize_integer(pref.birth_month, 1, 12, initial(pref.birth_month))
+
+
 	pref.nickname		= sanitize_name(pref.nickname)
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes, initial(pref.spawnpoint))
-	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
+//	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
+	if(!pref.unique_id)
+		pref.unique_id			= md5("[pref.client_ckey][rand(30,50)]")
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/basic/copy_to_mob(var/mob/living/carbon/human/character)
@@ -121,6 +133,9 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	else
 		. += "[pref.age] ([age2agedescription(pref.age)])<br>"
 
+	if(pref.existing_character)
+		. += "<b>Unique Character ID:</b> [pref.unique_id]<br>"
+
 
 	. += "<b>Birthday:</b><br>"
 
@@ -151,11 +166,11 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	else if(href_list["random_name"])
 		pref.real_name = random_name(pref.identifying_gender, pref.species)
 		return TOPIC_REFRESH
-
+/*
 	else if(href_list["always_random_name"])
 		pref.be_random_name = !pref.be_random_name
 		return TOPIC_REFRESH
-
+*/
 	else if(href_list["nickname"])
 		var/raw_nickname = input(user, "Choose your character's nickname:", "Character Nickname")  as text|null
 		if (!isnull(raw_nickname) && CanUseTopic(user))

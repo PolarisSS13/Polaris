@@ -40,9 +40,9 @@ var/station_date = ""
 var/next_station_date_change = 1 DAY
 
 #define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
-#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
+#define worldtime2stationtime(time) time2text(get_game_hour() HOURS + time, "hh:mm")
 #define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
-#define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
+#define station_time_in_ticks (get_game_hour() HOURS + round_duration_in_ticks)
 
 /proc/stationtime2text()
 	return time2text(station_time_in_ticks, "hh:mm")
@@ -72,6 +72,16 @@ var/next_station_date_change = 1 DAY
 	var/game_day = (time2text(world.timeofday, "DD"))
 	game_day = (text2num(game_day)) + config.days_in_future
 	return game_day
+
+/proc/get_game_hour()
+	var/game_hour = (time2text(world.timeofday, "hh"))
+	game_hour = (text2num(game_hour))
+	return game_hour
+
+/proc/get_game_minute()
+	var/game_minute = (time2text(world.timeofday, "mm"))
+	game_minute = (text2num(game_minute))
+	return game_minute
 
 /proc/get_year()
 	var/year = (time2text(world.timeofday, "YYYY"))

@@ -16,7 +16,6 @@
 	//There's no way (that I know of) to edit the "real name" of a character unless
 	//it's a body transformation, admin or antag fuckery. So this works.
 
-	mind.prefs.be_random_name = 0	//if the round is canon we don't want this...
 	adjust_aging()
 
 	// Copy basic values
@@ -61,9 +60,12 @@
 	mind.prefs.existing_character = 1
 	mind.prefs.played = 1
 	//might need code for saving tattoos. Hm.
+	save_character_money()
 
 	mind.prefs.save_preferences()
 	mind.prefs.save_character()
+
+
 
 
 	return 1

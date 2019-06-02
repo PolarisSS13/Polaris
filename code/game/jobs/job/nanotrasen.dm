@@ -16,9 +16,8 @@
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/representative
 
 	alt_titles = list("Nanotrasen Security" = /decl/hierarchy/outfit/job/nanotrasen/guard,
-                      "Nanotrasen Officer" = /decl/hierarchy/outfit/job/nanotrasen/officer,
-					  "Nanotrasen Regional Commander" = /decl/hierarchy/outfit/job/nanotrasen/captain)
-	email_domain = "gov.nt"
+                      "Nanotrasen Officer" = /decl/hierarchy/outfit/job/nanotrasen/officer)
+	email_domain = "nanotrasen.gov.nt"
 	wage = 1000
 	minimum_character_age = 20 // Pushing it I guess, but possible
 	ideal_character_age = 40
@@ -29,7 +28,18 @@
 /datum/job/nanotrasen/New()
 	department = "[station_name()] Funds"
 
-/datum/job/cbia
+
+/datum/job/nanotrasen/ceo
+	title = "Nanotrasen CEO"
+	total_positions = 1
+	spawn_positions = 1
+	flag = CEO
+	alt_titles = list("NanoTrasen Chairman")
+	wage = 10000
+	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/captain
+	idtype = /obj/item/weapon/card/id/centcom/station/ceo
+
+/datum/job/nanotrasen/cbia
 	title = "CBIA Agent"
 	flag = CBIA
 	department = "City Council"
@@ -43,7 +53,9 @@
 	idtype = /obj/item/weapon/card/id/cbia
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	email_domain = "gov.nt"
+	alt_titles = list()
+
+	email_domain = "nanotrasen.gov.nt"
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/cbia
 
 	wage = 1000
@@ -53,15 +65,15 @@
 
 	hard_whitelisted = 1
 
-/datum/job/nanotrasen/get_access()
+/datum/job/nanotrasen/cbia/get_access()
 	get_all_station_access()
 	get_all_centcom_access()
 	return
 
-/datum/job/nanotrasen/New()
+/datum/job/nanotrasen/cbia/New()
 	department = "[station_name()] Funds"
 
-/datum/job/president
+/datum/job/nanotrasen/president
 	title = "President"
 	flag = PRESIDENT
 //	department = "City Council"
@@ -77,17 +89,18 @@
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	minimal_player_age = 14
-	email_domain = "gov.nt"
+	email_domain = "nanotrasen.gov.nt"
 	wage = 9000
+	alt_titles = list()
 
 	minimum_character_age = 30
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/heads/president
 
-/datum/job/president/New()
+/datum/job/nanotrasen/president/New()
 	department = "[station_name()] Funds"
 
-/datum/job/president/get_access()
+/datum/job/nanotrasen/president/get_access()
 	get_all_station_access()
 	get_all_centcom_access()
 	return

@@ -39,6 +39,7 @@ SUBSYSTEM_DEF(economy)
 	for(var/datum/money_account/M in all_money_accounts)
 		if(M.account_number == bank_number)
 			bank_account = M
+			break
 //			message_admins("Found bank account for [bank_number].", 1)
 
 	if(!bank_account)
@@ -76,7 +77,7 @@ SUBSYSTEM_DEF(economy)
 		return
 
 	if(age > 17) // Do they pay tax?
-		calculated_tax = tax * wage
+		calculated_tax = round(tax * wage, 1)
 
 	//Tax goes to the treasury. Mh-hm.
 	department_accounts["[station_name()] Funds"].money += calculated_tax

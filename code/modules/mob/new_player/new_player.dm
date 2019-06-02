@@ -143,8 +143,8 @@
 
 			announce_ghost_joinleave(src)
 
-			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.identifying_gender)
+//			if(client.prefs.be_random_name)
+//				client.prefs.real_name = random_name(client.prefs.identifying_gender)
 			observer.real_name = client.prefs.real_name
 			observer.name = observer.real_name
 			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
@@ -389,7 +389,17 @@
 	matchmaker.do_matchmaking(character)
 
 	if(character.mind.assigned_role != "Cyborg")
-		data_core.manifest_inject(character)
+
+		var/already_joined
+
+		for(var/datum/data/record/R in data_core.general)
+			if(character.mind.prefs.unique_id == R.fields["unique_id"])
+				already_joined = 1
+				break
+
+		if(!already_joined)
+			data_core.manifest_inject(character)
+
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
 		//Grab some data from the character prefs for use in random news procs.
@@ -408,7 +418,7 @@
 		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 
 /mob/new_player/proc/LateChoices()
-	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
+	var/name = client.prefs.real_name
 
 	var/dat = "<html><body><center>"
 	dat += "<b>Welcome, [name].<br></b>"

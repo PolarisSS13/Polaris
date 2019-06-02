@@ -91,22 +91,22 @@
 
 
 	if(heads.len > 0)
-		dat += "<tr><th colspan=3>Heads</th></tr>"
+		dat += "<tr><th colspan=3>Council</th></tr>"
 		for(name in heads)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[heads[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(sec.len > 0)
-		dat += "<tr><th colspan=3>Security</th></tr>"
+		dat += "<tr><th colspan=3>Police</th></tr>"
 		for(name in sec)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sec[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(eng.len > 0)
-		dat += "<tr><th colspan=3>Engineering</th></tr>"
+		dat += "<tr><th colspan=3>Emergency</th></tr>"
 		for(name in eng)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[eng[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(med.len > 0)
-		dat += "<tr><th colspan=3>Medical</th></tr>"
+		dat += "<tr><th colspan=3>Hospital</th></tr>"
 		for(name in med)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[med[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
@@ -188,6 +188,7 @@
 			G.fields["brain_type"] = H.get_FBP_type()
 		else
 			G.fields["brain_type"] = "Organic"
+		G.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
@@ -230,6 +231,7 @@
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
+		G.fields["unique_id"]	= H.mind.prefs.unique_id
 		L.fields["sex"]			= gender2text(H.gender)
 		L.fields["id_gender"]	= gender2text(H.identifying_gender)
 		if(H.get_FBP_type())
