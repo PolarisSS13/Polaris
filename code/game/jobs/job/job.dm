@@ -53,7 +53,7 @@
 /datum/job/proc/setup_account(var/mob/living/carbon/human/H)
 	if(!account_allowed || (H.mind && H.mind.initial_account))
 		return
-
+/*
 	var/income = 0
 	var/tax //TAX THEM ALL
 
@@ -62,51 +62,74 @@
 			if(CLASS_UPPER)
 				if(!H.mind.prefs.played)
 					income = 10000
-				tax = tax_rate_upper
+				get_tax_rate(CLASS_UPPER)
+
 			if(CLASS_MIDDLE)
 				if(!H.mind.prefs.played)
 					income = 4000
-				tax = tax_rate_middle
+				get_tax_rate(CLASS_MIDDLE)
+
 			if(CLASS_WORKING)
 				if(!H.mind.prefs.played)
 					income = 200
-				tax = tax_rate_lower
+				get_tax_rate(CLASS_WORKING)
+
 
 	//give them an account in the station database
-	var/full_money = wage + H.species.additional_wage + income
+	var/full_money = wage + H.species.additional_wage + income + H.mind.prefs.money_balance
 	var/calculated_tax
 	if(H.age > 17)
-		calculated_tax = tax * (wage + income)
+		calculated_tax = round(tax * wage, 1)
 	var/money_amount = (full_money - calculated_tax)	//TAX THEM
-	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
+*/
 
+	// To prevent abuse, no one recieves wages at roundstart and must play for at least an hour.
+	// We'll see how this goes.
+	var/money_amount = H.mind.prefs.money_balance
+	var/datum/money_account/M
+	var/already_joined
 
-	//Tax goes to the treasury. Mh-hm.
-	department_accounts["[station_name()] Funds"].money += calculated_tax
+	for(var/datum/money_account/A in all_money_accounts)
+		if(A.account_number == H.mind.prefs.bank_no)
+			M = A
+			already_joined = 1
+			break
 
-	//Your wage comes from your department, yes.
-	department_accounts[department].money -= wage
+	if(!M)
+		M = create_account(H.real_name, money_amount, null)
 
-	//create an entry for the payroll (for the payee).
-	var/datum/transaction/P = new()
-	P.target_name = M.owner_name
-	P.purpose = "[department] Payroll: [H.real_name] ([calculated_tax] credit tax)"
-	P.amount = wage
-	P.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
-	P.time = stationtime2text()
-	P.source_terminal = "[department] Funding Account"
+	if(H.mind.prefs.bank_pin)
+		H.mind.prefs.bank_pin = M.remote_access_pin
 
-	M.transaction_log.Add(P)
+	if(H.mind.prefs.bank_no)
+		H.mind.prefs.bank_no = M.account_number
+/*
+		//Tax goes to the treasury. Mh-hm.
+		department_accounts["[station_name()] Funds"].money += calculated_tax
 
+		//Your wage comes from your department, yes.
+		department_accounts[department].money -= wage
+
+		//create an entry for the payroll (for the payee).
+		var/datum/transaction/P = new()
+		P.target_name = M.owner_name
+		P.purpose = "[department] Payroll: [H.real_name] ([calculated_tax] credit tax)"
+		P.amount = wage
+		P.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+		P.time = stationtime2text()
+		P.source_terminal = "[department] Funding Account"
+
+		M.transaction_log.Add(P)
+*/
 	if(H.mind)
 		var/remembered_info = ""
 		remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"
 		remembered_info += "<b>Your account pin is:</b> [M.remote_access_pin]<br>"
 		remembered_info += "<b>Your account funds are:</b> $[M.money]<br>"
-
-		if(M.transaction_log.len)
-			var/datum/transaction/T = M.transaction_log[1]
-			remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
+		if(!already_joined)
+			if(M.transaction_log.len)
+				var/datum/transaction/T = M.transaction_log[1]
+				remembered_info += "<b>Your account was created:</b> [T.time], [T.date] at [T.source_terminal]<br>"
 		H.mind.store_memory(remembered_info)
 
 		H.mind.initial_account = M
@@ -114,14 +137,16 @@
 
 	H << "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>"
 
-	if(income)
-		H << "<span class='notice'>You recieved <b>[income] credits</b> in inheritance. <b>Spend it wisely, you only get this once.</b></span>"
+/*	if(!already_joined)
+		if(income)
+			H << "<span class='notice'>You recieved <b>[income] credits</b> in inheritance. <b>Spend it wisely, you only get this once.</b></span>"
 
-	if(wage)
-		H << "<span class='notice'>You got paid <b>[wage] credits</b> in wages.</span>"
-		H << "<span class='notice'>You paid <b>[calculated_tax]</b> credits from your bank balance in taxes.</span>"
-		H << "The president's current tax rate for your social class is <b>[tax * 100]%</b>"
-
+		if(wage)
+			H << "<span class='notice'>You got paid <b>[wage] credits</b> in wages.</span>"
+			if(calculated_tax)
+				H << "<span class='notice'>You paid <b>[calculated_tax]</b> credits from your bank balance in taxes.</span>"
+				H << "The president's current tax rate for your social class is currently <b>[get_tax_rate(H.client.prefs.economic_status)]%</b>"
+*/
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)

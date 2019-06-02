@@ -191,7 +191,7 @@
 	icon_state = "nanotrasen"
 	registered_name = "Central Command"
 	assignment = "General"
-	job_access_type = /datum/job/cbia
+pref.money_balance
 
 /obj/item/weapon/card/id/cbia/initialize()
 	. = ..()
@@ -200,6 +200,10 @@
 
 /obj/item/weapon/card/id/centcom/station/president
 	name = "\improper President's ID"
+	desc = "An ID that has both centcom and full city access."
+
+/obj/item/weapon/card/id/centcom/station/ceo
+	name = "\improper NanoTrasen CEO's ID"
 	desc = "An ID that has both centcom and full city access."
 
 /obj/item/weapon/card/id/centcom/ERT

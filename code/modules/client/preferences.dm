@@ -26,10 +26,9 @@ datum/preferences
 
 	//character preferences
 	var/real_name						//our character's name
-	var/be_random_name = 0				//whether we are a random name every round
+//	var/be_random_name = 0				//whether we are a random name every round
 	var/nickname						//our character's nickname
 	var/age = 30						//age of character
-	var/last_birthday = 30				//not to be confused with age. used for birthday calc
 	var/birth_day = 1					//day you were born
 	var/birth_month	= 1					//month you were born
 	var/birth_year						//year you were born
@@ -98,6 +97,12 @@ datum/preferences
 	var/job_govlaw_med = 0
 	var/job_govlaw_low = 0
 
+	// Money related
+
+	var/money_balance = 0
+	var/bank_pin
+	var/bank_no
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 1
 
@@ -132,6 +137,7 @@ datum/preferences
 
 	var/client/client = null
 	var/client_ckey = null
+	var/unique_id
 
 	// Communicator identity data
 	var/communicator_visibility = 1
@@ -161,6 +167,8 @@ datum/preferences
 			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
+
+
 					return
 
 /datum/preferences/proc/ZeroSkills(var/forced = 0)
@@ -303,8 +311,8 @@ datum/preferences
 	// This needs to happen before anything else becuase it sets some variables.
 	character.set_species(species)
 	// Special Case: This references variables owned by two different datums, so do it here.
-	if(be_random_name)
-		real_name = random_name(identifying_gender,species)
+//	if(be_random_name)
+//		real_name = random_name(identifying_gender,species)
 
 	character.adjust_aging()
 

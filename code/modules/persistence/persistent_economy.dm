@@ -10,7 +10,6 @@
 	var/global/list/datum/money_account/eco_data
 	var/global/list/datum/money_account/treasury
 
-
 /datum/economy/bank_accounts/proc/set_economy()
 	if(!department_acc_list)
 		return 0

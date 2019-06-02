@@ -437,3 +437,14 @@ proc/random_eye_color()
 		)
 
 	return eye_color
+
+
+/proc/get_tax_rate(var/class)
+
+	switch(class)
+		if(CLASS_UPPER)
+			return tax_rate_upper * 100
+		if(CLASS_MIDDLE)
+			return tax_rate_middle * 100
+		if(CLASS_WORKING)
+			return tax_rate_lower * 100

@@ -70,6 +70,7 @@ var/global/tax_rate_upper = 0.20
 var/global/tax_rate_middle = 0.20
 var/global/tax_rate_lower = 0.20
 
+
 var/global/datum/money_account/vendor_account
 var/global/datum/money_account/station_account
 var/global/list/datum/money_account/department_accounts = list()
@@ -127,14 +128,14 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 		station_account = new()
 		station_account.owner_name = "[station_name()] Funds"
 		station_account.account_number = rand(111111, 999999)
-		station_account.remote_access_pin = rand(1111, 111111)
-		station_account.money = 750000
+		station_account.remote_access_pin = rand(1111, 9999)
+		station_account.money = 950000
 		station_account.department = "[station_name()] Funds"
 		//create an entry in the account transaction log for when it was created
 		var/datum/transaction/T = new()
 		T.target_name = station_account.owner_name
 		T.purpose = "Account creation"
-		T.amount = 750000
+		T.amount = 950000
 		T.date = current_date_string
 		T.time = "11:24"
 		T.source_terminal = "Pollux Gov Terminal #277"
@@ -150,8 +151,8 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 	var/datum/money_account/department_account = new()
 	department_account.owner_name = "[department] Funds Account"
 	department_account.account_number = rand(111111, 999999)
-	department_account.remote_access_pin = rand(1111, 111111)
-	department_account.money = 500
+	department_account.remote_access_pin = rand(1111, 9999)
+	department_account.money = 1500
 	department_account.department = department
 
 	//create an entry in the account transaction log for when it was created
