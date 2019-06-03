@@ -87,6 +87,16 @@
 	containername = "Clotting Medicine crate"
 	access = access_medical
 
+/datum/supply_pack/med/bonemed
+	name = "Bone Repair Medicine crate"
+	contains = list(
+			/obj/item/weapon/storage/firstaid/bonemed
+			)
+	cost = 100
+	containertype = "/obj/structure/closet/crate/secure"
+	containername = "Bone Repair Medicine crate"
+	access = access_medical
+
 /datum/supply_pack/med/sterile
 	name = "Sterile equipment crate"
 	contains = list(

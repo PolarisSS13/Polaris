@@ -103,6 +103,16 @@
 	siemens_coefficient = 0.6
 	valid_accessory_slots = null
 
+/obj/item/clothing/head/helmet/flexitac
+	name = "tactical light helmet"
+	desc = "A tan helmet made from advanced ceramic with an integrated tactical flashlight."
+	icon_state = "flexitac"
+	armor = list(40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
+	brightness_on = 6
+	light_overlay = "helmet_light_dual_green"
+	action_button_name = "Toggle Head-light"
+
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
 	desc = "They're often used by highly trained SWAT Officers."

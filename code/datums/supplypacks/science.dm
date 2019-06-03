@@ -56,3 +56,15 @@
 	cost = 30
 	containertype = /obj/structure/closet/crate
 	containername = "Integrated circuit crate"
+
+/datum/supply_pack/sci/xenoarch
+	name = "Xenoarchaeology Tech crate"
+	contains = list(
+				/obj/item/weapon/pickaxe/excavationdrill,
+				/obj/item/device/xenoarch_multi_tool,
+				/obj/item/clothing/suit/space/anomaly,
+				/obj/item/clothing/head/helmet/space/anomaly)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure/science
+	containername = "Xenoarchaeology Tech crate"
+	access = access_research
