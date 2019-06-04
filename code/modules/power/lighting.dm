@@ -10,6 +10,8 @@
 #define LIGHT_BURNED 3
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
 
+var/global/list/light_type_cache = list()
+
 /obj/machinery/light_construct
 	name = "light fixture frame"
 	desc = "A light fixture under construction."
@@ -164,9 +166,9 @@
 	active_power_usage = 10		// Previously 20.
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
-	var/brightness_range = 8	// luminosity when on, also used in power calculation
-	var/brightness_power = 0.8
-	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
+	var/brightness_range
+	var/brightness_power
+	var/brightness_color
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = 0
 	var/light_type = /obj/item/weapon/light/tube		// the type of light item
@@ -187,8 +189,6 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness_range = 4
-	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
@@ -199,10 +199,8 @@
 	icon_state = "flamp1"
 	base_state = "flamp"
 	fitting = "bulb"
-	brightness_range = 5
 	plane = OBJ_PLANE
 	layer = OBJ_LAYER
-	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 	desc = "A floor lamp."
 	light_type = /obj/item/weapon/light/bulb
 	var/lamp_shade = 1
@@ -212,8 +210,7 @@
 
 
 /obj/machinery/light/small/emergency
-	brightness_range = 4
-	brightness_color = "#da0205"
+	light_type = /obj/item/weapon/light/bulb/red
 
 /obj/machinery/light/small/emergency/flicker
 	auto_flicker = TRUE
@@ -223,8 +220,6 @@
 	name = "spotlight"
 	fitting = "large tube"
 	light_type = /obj/item/weapon/light/tube/large
-	brightness_range = 12
-	brightness_power = 0.9
 
 /obj/machinery/light/spot/flicker
 	auto_flicker = TRUE
@@ -250,18 +245,24 @@
 /obj/machinery/light/New()
 	..()
 
-	spawn(2)
-		on = has_power()
+	if(status != LIGHT_EMPTY)
+		var/obj/item/weapon/light/L = light_type_cache[light_type]
+		if(!L)
+			L = new light_type
+			light_type_cache[light_type] = L
+		update_from_bulb(L)
 
-		switch(fitting)
-			if("tube")
-				if(prob(2))
-					broken(1)
-			if("bulb")
-				if(prob(5))
-					broken(1)
-		spawn(1)
-			update(0)
+	on = powered()
+
+	switch(fitting)
+		if("tube")
+			if(prob(2))
+				broken(1)
+		if("bulb")
+			if(prob(5))
+				broken(1)
+
+	update(0)
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
@@ -373,6 +374,14 @@
 
 
 
+/obj/machinery/light/proc/update_from_bulb(obj/item/weapon/light/L)
+	status = L.status
+	switchcount = L.switchcount
+	rigged = L.rigged
+	brightness_range = L.brightness_range
+	brightness_power = L.brightness_power
+	brightness_color = L.brightness_color
+
 // attack with item - insert light (if right type), otherwise try to break the light
 
 /obj/machinery/light/attackby(obj/item/W, mob/user)
@@ -390,32 +399,26 @@
 		if(status != LIGHT_EMPTY)
 			user << "There is a [fitting] already inserted."
 			return
-		else
-			src.add_fingerprint(user)
-			var/obj/item/weapon/light/L = W
-			if(istype(L, light_type))
-				status = L.status
-				user << "You insert the [L.name]."
-				switchcount = L.switchcount
-				rigged = L.rigged
-				brightness_range = L.brightness_range
-				brightness_power = L.brightness_power
-				brightness_color = L.brightness_color
-				on = has_power()
-				update()
+		if(!istype(W, light_type))
+			user << "This type of light requires a [fitting]."
+			return
 
-				user.drop_item()	//drop the item to update overlays and such
-				qdel(L)
+		src.add_fingerprint(user)
+		var/obj/item/weapon/light/L = W
 
-				if(on && rigged)
+		user << "You insert [L]."
+		update_from_bulb(L)
+		qdel(L)
 
-					log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-					message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+		on = powered()
+		update()
 
-					explode()
-			else
-				user << "This type of light requires a [fitting]."
-				return
+		if(on && rigged)
+
+			log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+			message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+
+			explode()
 
 		// attempt to break the light
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
@@ -587,9 +590,6 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness_range = brightness_range
-	L.brightness_power = brightness_power
-	L.brightness_color = brightness_color
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -629,9 +629,6 @@
 	var/obj/item/weapon/light/L = new light_type()
 	L.status = status
 	L.rigged = rigged
-	L.brightness_range = brightness_range
-	L.brightness_power = brightness_power
-	L.brightness_color = brightness_color
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -741,7 +738,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/brightness_range = 2 //how much light it gives off
-	var/brightness_power = 0.8
+	var/brightness_power = 1
 	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
 /obj/item/weapon/light/tube
@@ -751,13 +748,14 @@
 	base_state = "ltube"
 	item_state = "c_tube"
 	matter = list("glass" = 100)
-	brightness_range = 8
+	brightness_range = 6	// luminosity when on, also used in power calculation
+	brightness_power = 6
 
 /obj/item/weapon/light/tube/large
 	w_class = ITEMSIZE_SMALL
 	name = "large light tube"
 	brightness_range = 15
-	brightness_power = 0.9
+	brightness_power = 9
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -767,11 +765,17 @@
 	item_state = "contvapour"
 	matter = list("glass" = 100)
 	brightness_range = 5
+	brightness_power = 4
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
 	shatter()
+
+/obj/item/weapon/light/bulb/red
+	brightness_range = 4
+	color = "#da0205"
+	brightness_color = "#da0205"
 
 /obj/item/weapon/light/bulb/fire
 	name = "fire bulb"
@@ -780,7 +784,6 @@
 	base_state = "fbulb"
 	item_state = "egg4"
 	matter = list("glass" = 100)
-	brightness_range = 5
 
 // update the icon state and description of the light
 
