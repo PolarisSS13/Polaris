@@ -219,10 +219,6 @@ var/global/list/light_type_cache = list()
 /obj/machinery/light/spot/flicker
 	auto_flicker = TRUE
 
-/obj/machinery/light/flamp/built/New()
-	lamp_shade = 0
-	..()
-
 // create a new lighting fixture
 /obj/machinery/light/New(atom/newloc, obj/machinery/light_construct/construct = null)
 	..(newloc)
