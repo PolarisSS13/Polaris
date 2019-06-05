@@ -35,3 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Adds greyscale pills, which are colored by their reagent"
   - rscadd: "Adds colored pill bottles, most pre-spawned pill bottles are colored"
+  - tweak: "Prespawn pills and pill bottles have had their names simplified"

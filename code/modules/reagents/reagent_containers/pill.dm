@@ -114,7 +114,7 @@
 /obj/item/weapon/reagent_containers/pill/cyanide
 	name = "Strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
-	icon_state = "pill10"
+	icon_state = "pill9"
 
 /obj/item/weapon/reagent_containers/pill/cyanide/Initialize()
 	. = ..()
