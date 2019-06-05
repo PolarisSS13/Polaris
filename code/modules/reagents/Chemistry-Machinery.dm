@@ -127,7 +127,7 @@
 	data["pillSprite"] = pillsprite
 	data["bottleSprite"] = bottlesprite
 
-	var/P[20] //how many pill sprites there are. Sprites are taken from chemical.dmi and can be found in nano/images/pill.png
+	var/P[24] //how many pill sprites there are. Sprites are taken from chemical.dmi and can be found in nano/images/pill.png
 	for(var/i = 1 to P.len)
 		P[i] = i
 	data["pillSpritesAmount"] = P
@@ -238,7 +238,7 @@
 			else
 				pill_cube = "pill"
 
-			var/name = sanitizeSafe(input(usr,"Name:","Name your [pill_cube]!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)") as null|text, MAX_NAME_LEN)
+			var/name = sanitizeSafe(input(usr,"Name:","Name your [pill_cube]!","[reagents.get_master_reagent_name()] ([amount_per_pill]u)") as null|text, MAX_NAME_LEN)
 
 			if(!name) //Blank name (sanitized to nothing, or left empty) or cancel
 				return
@@ -252,7 +252,9 @@
 				P.name = "[name] pill"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
-				if(!condi) //If normal
+				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4")) // if using greyscale, take colour from reagent
+					P.color = reagents.get_color()
+				elseif(!condi) //If normal
 					P.icon_state = "pill"+pillsprite
 				else //If condi is on
 					P.icon_state = "bouilloncube"//Reskinned monkey cube
