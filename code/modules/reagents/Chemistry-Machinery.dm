@@ -254,7 +254,7 @@
 				P.pixel_y = rand(-7, 7)
 				if(P.icon_state in list("pill1", "pill2", "pill3", "pill4")) // if using greyscale, take colour from reagent
 					P.color = reagents.get_color()
-				elseif(!condi) //If normal
+				else if(!condi) //If normal
 					P.icon_state = "pill"+pillsprite
 				else //If condi is on
 					P.icon_state = "bouilloncube"//Reskinned monkey cube
