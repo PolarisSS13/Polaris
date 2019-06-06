@@ -252,6 +252,7 @@
 	path = /obj/item/clothing/under/det/skirt
 	allowed_roles = list("Detective")
 
+//TFF 6/6/19 - allow lawyers to wear this.
 /datum/gear/uniform/suit/iaskirt
 	display_name = "suit, Internal Affairs skirt (Internal Affairs)"
 	path = /obj/item/clothing/under/rank/internalaffairs/skirt

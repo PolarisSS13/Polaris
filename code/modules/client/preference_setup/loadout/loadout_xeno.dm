@@ -257,10 +257,11 @@
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/para
 	allowed_roles = list("Paramedic")
 
+//TFF 6/6/19 - allow lawyers to wear this.
 /datum/gear/uniform/dept/undercoat/iaa
 	display_name = "internal affairs undercoat (Teshari)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/iaa
-	allowed_roles = list("Internal Affairs Agent")
+	allowed_roles = list("Internal Affairs Agent", "Lawyer")
 
 /datum/gear/suit/dept/cloak/
 	whitelisted = SPECIES_TESHARI
@@ -346,7 +347,8 @@
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/para
 	allowed_roles = list("Paramedic")
 
+//TFF 6/6/19 - allow lawyers to wear this.
 /datum/gear/suit/dept/cloak/iaa
 	display_name = "internal affairs cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/iaa
-	allowed_roles = list("Internal Affairs Agent")
+	allowed_roles = list("Internal Affairs Agent", "Lawyer")

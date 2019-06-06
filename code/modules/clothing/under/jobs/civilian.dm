@@ -115,15 +115,18 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	rolled_sleeves = 0
 
+//TFF 6/6/19 - New job gets lawyer clothes, changing descriptions on male/female variations.
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
 	name = "lawyer suit"
 
 /obj/item/clothing/under/lawyer/black
+	desc = "These are some slick threads..... Makes your attorney look like they're gonna smooth talk a client's way out of a pickle!"
 	name = "black lawyer suit"
 	icon_state = "lawyer_black"
 
 /obj/item/clothing/under/lawyer/black/skirt
+	desc = "This skirt makes you feel confident in helping your client."
 	name = "black lawyer skirt"
 	icon_state = "lawyer_black_skirt"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")

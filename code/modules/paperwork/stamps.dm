@@ -49,10 +49,14 @@
 	name = "clown's rubber stamp"
 	icon_state = "stamp-clown"
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer. - placeholder for the stamp until a new sprite is added.
 /obj/item/weapon/stamp/internalaffairs
 	name = "internal affairs rubber stamp"
 	icon_state = "stamp-intaff"
 
+/obj/item/weapon/stamp/lawyer
+	name = "lawyer's rubber stamp"
+	icon_state = "stamp-intaff"
 /obj/item/weapon/stamp/centcomm
 	name = "\improper CentCom rubber stamp"
 	icon_state = "stamp-cent"
