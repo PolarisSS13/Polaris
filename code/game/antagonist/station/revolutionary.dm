@@ -29,9 +29,10 @@ var/datum/antagonist/revolutionary/revs
 	faction_indicator = "rev"
 	faction_invisible = 1
 
+//TFF 6/6/19 - add Lawyer to restriction/protection.
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Colony Director", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
-	roundstart_restricted = list("Internal Affairs Agent", "Colony Director", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Lawyer", "Colony Director", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
+	roundstart_restricted = list("Internal Affairs Agent", "Lawyer", "Colony Director", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
 
 /datum/antagonist/revolutionary/New()
 	..()

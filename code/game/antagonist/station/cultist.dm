@@ -6,14 +6,15 @@ var/datum/antagonist/cultist/cult
 	if(player.mind in cult.current_antagonists)
 		return 1
 
+//TFF 6/6/19 - add Lawyer to restriction/protection.
 /datum/antagonist/cultist
 	id = MODE_CULTIST
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
 	bantype = "cultist"
 	restricted_jobs = list("Chaplain","AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Colony Director")
-	roundstart_restricted = list("Internal Affairs Agent", "Head of Security", "Colony Director")
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Lawyer", "Head of Security", "Colony Director")
+	roundstart_restricted = list("Lawyer", "Internal Affairs Agent", "Head of Security", "Colony Director")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"

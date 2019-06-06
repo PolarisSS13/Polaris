@@ -2,6 +2,7 @@
 
 var/datum/antagonist/traitor/infiltrator/infiltrators
 
+//TFF 6/6/19 - add Lawyer to restriction/protection.
 // Inherits most of its vars from the base datum.
 /datum/antagonist/traitor/infiltrator
 	id = MODE_INFILTRATOR
@@ -11,7 +12,7 @@ var/datum/antagonist/traitor/infiltrator/infiltrators
 	role_text = "Infiltrator"
 	role_text_plural = "Infiltrators"
 	welcome_text = "To speak on your team's private channel, use :t."
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Head of Security", "Colony Director")
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Internal Affairs Agent", "Lawyer", "Head of Security", "Colony Director")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	can_speak_aooc = TRUE
 
