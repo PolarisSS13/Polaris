@@ -303,9 +303,16 @@
 /obj/item/device/radio/headset/omni		//Only for the admin intercoms
 	ks2type = /obj/item/device/encryptionkey/omni
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
 /obj/item/device/radio/headset/ia
 	name = "internal affair's headset"
 	desc = "The headset of your worst enemy."
+	icon_state = "com_headset"
+	ks2type = /obj/item/device/encryptionkey/heads/hos
+
+/obj/item/device/radio/headset/lawyer
+	name = "lawyer's headset"
+	desc = "The headset of a boring, yet verbose lawyer. Another enemy!"
 	icon_state = "com_headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hos
 

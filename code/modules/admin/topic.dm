@@ -542,6 +542,11 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Internal Affairs Agent;jobban4=\ref[M]'>Internal Affairs Agent</a></td>"
 
+		//TFF 6/6/19 - add Lawyer jobban stuff, I think....
+		if(jobban_isbanned(M, "Lawyer"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Lawyer;jobban4=\ref[M]'><font color=red>Lawyer</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Lawyer;jobban4=\ref[M]'>Lawyer</a></td>"
 		jobs += "</tr></table>"
 
 	//Non-Human (Green)

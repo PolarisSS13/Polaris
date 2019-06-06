@@ -189,6 +189,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-holy"
 	ttone = "holy"
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
+/obj/item/device/pda/iaa
+	default_cartridge = /obj/item/weapon/cartridge/iaa
+	icon_state = "pda-lawyer"
+	ttone = "..."
+
 /obj/item/device/pda/lawyer
 	default_cartridge = /obj/item/weapon/cartridge/lawyer
 	icon_state = "pda-lawyer"

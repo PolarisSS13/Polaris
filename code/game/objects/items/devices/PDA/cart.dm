@@ -126,6 +126,12 @@ var/list/civilian_cartridges = list(
 	icon_state = "cart-j"
 	access_janitor = 1
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
+/obj/item/weapon/cartridge/iaa
+	name = "\improper P.R.O.V.E. cartridge"
+	icon_state = "cart-s"
+	access_security = 1
+
 /obj/item/weapon/cartridge/lawyer
 	name = "\improper P.R.O.V.E. cartridge"
 	icon_state = "cart-s"

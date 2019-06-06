@@ -143,10 +143,11 @@
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 	alt_titles = list("Journalist", "Writer")
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
-/datum/job/lawyer
+/datum/job/iaa
 	title = "Internal Affairs Agent"
-	flag = LAWYER
+	flag = IAA
 	department = "Civilian"
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -168,3 +169,21 @@
 	if(.)
 		H.implant_loyalty(H)
 */
+/datum/job/lawyer
+	title = "Lawyer"
+	flag = LAWYER
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "company officials, Corporate Regulations, and Admirality law"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian/lawyer
+	economic_modifier = 7
+	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
+	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	minimal_player_age = 7
+
+	outfit_type = /decl/hierarchy/outfit/job/lawyer
+	alt_titles = list("Attorney")

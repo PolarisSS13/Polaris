@@ -30,6 +30,7 @@ var/const/PARAMEDIC			=(1<<10)
 
 var/const/CIVILIAN			=(1<<2)
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)
 var/const/BOTANIST			=(1<<2)
@@ -39,10 +40,11 @@ var/const/LIBRARIAN			=(1<<5)
 var/const/QUARTERMASTER		=(1<<6)
 var/const/CARGOTECH			=(1<<7)
 var/const/MINER				=(1<<8)
-var/const/LAWYER			=(1<<9)
-var/const/CHAPLAIN			=(1<<10)
-var/const/ASSISTANT			=(1<<11)
-var/const/BRIDGE			=(1<<12)
+var/const/IAA				=(1<<9)
+var/const/LAWYER			=(1<<10)
+var/const/CHAPLAIN			=(1<<11)
+var/const/ASSISTANT			=(1<<12)
+var/const/BRIDGE			=(1<<13)
 
 
 var/list/assistant_occupations = list(

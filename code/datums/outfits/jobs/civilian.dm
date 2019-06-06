@@ -65,6 +65,7 @@
 	id_type = /obj/item/weapon/card/id/civilian/librarian
 	pda_type = /obj/item/device/pda/librarian
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
 	l_ear = /obj/item/device/radio/headset/ia
@@ -74,7 +75,25 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
 	id_type = /obj/item/weapon/card/id/civilian/internal_affairs_agent
+	pda_type = /obj/item/device/pda/iaa
+
+/decl/hierarchy/outfit/job/lawyer
+	name = OUTFIT_JOB_NAME("Lawyer")
+	l_ear = /obj/item/device/radio/headset/lawyer
+	suit = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
+	shoes = /obj/item/clothing/shoes/brown
+	glasses = /obj/item/clothing/glasses/sunglasses/big
+	l_hand = /obj/item/weapon/clipboard
+	id_type = /obj/item/weapon/card/id/civilian/lawyer
 	pda_type = /obj/item/device/pda/lawyer
+
+//TFF 6/6/19 - add female alternate outfit for lawyers
+/decl/hierarchy/outfit/job/lawyer/pre_equip(mob/living/carbon/human/H)
+	..()
+	if(H.gender == FEMALE)
+		uniform = /obj/item/clothing/under/lawyer/black/skirt
+	else
+		uniform = /obj/item/clothing/under/lawyer/black
 
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")

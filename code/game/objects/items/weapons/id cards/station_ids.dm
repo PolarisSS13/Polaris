@@ -392,9 +392,15 @@
 	rank = "Chef"
 	job_access_type = /datum/job/chef
 
+//TFF 6/6/19 - refactor IAA and adds regular lawyers. Seriously, we should be able to have a lawyer.
 /obj/item/weapon/card/id/civilian/internal_affairs_agent
 	assignment = "Internal Affairs Agent"
 	rank = "Internal Affairs Agent"
+	job_access_type = /datum/job/iaa
+
+/obj/item/weapon/card/id/civilian/lawyer
+	assignment = "Lawyer"
+	rank = "Lawyer"
 	job_access_type = /datum/job/lawyer
 
 /obj/item/weapon/card/id/civilian/janitor
