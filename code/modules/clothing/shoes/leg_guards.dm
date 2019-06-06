@@ -56,3 +56,5 @@
 	siemens_coefficient = 0.6
 	slowdown = SHOES_SLOWDOWN
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	cold_protection = LEGS

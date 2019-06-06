@@ -112,6 +112,8 @@
 	brightness_on = 6
 	light_overlay = "helmet_light_dual_green"
 	action_button_name = "Toggle Head-light"
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	cold_protection = HEAD
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"

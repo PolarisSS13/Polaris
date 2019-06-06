@@ -384,6 +384,8 @@
 	icon_state = "flexitac"
 	item_state = "flexitac"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	cold_protection = UPPER_TORSO|LOWER_TORSO
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/suit/storage/vest/detective
 	name = "detective armor vest"
