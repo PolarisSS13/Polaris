@@ -605,9 +605,9 @@
 			new_item.origin_tech[TECH_ARCANE] = 1
 			new_item.origin_tech[TECH_PRECURSOR] = 1
 
-		var/turf/T = get_turf(new_item)
-		if(istype(T, /turf/simulated/mineral))
-			T:last_find = new_item
+		var/turf/simulated/mineral/T = get_turf(new_item)
+		if(istype(T))
+			T.last_find = new_item
 
 		qdel(src)
 
