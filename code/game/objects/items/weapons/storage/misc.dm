@@ -51,7 +51,7 @@
 	name = "can of sickly worms"
 	desc = "You probably don't want to open this can of worms."
 	max_storage_space = ITEMSIZE_COST_TINY * 6
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/worm_sickly = 6)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/wormsickly = 6)
 
 /obj/item/weapon/storage/box/wormcan/sickly/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
@@ -62,7 +62,7 @@
 	name = "can of deluxe worms"
 	desc = "You absolutely want to open this can of worms."
 	max_storage_space = ITEMSIZE_COST_TINY * 6
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/worm_deluxe = 6)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/wormdeluxe = 6)
 
 /obj/item/weapon/storage/box/wormcan/deluxe/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
