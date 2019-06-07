@@ -37,7 +37,7 @@
 	var/datum/website/godaddy = new /datum/website
 	godaddy.name = toname
 	godaddy.content = new_content
-	var/datum/browser/popup = new(user, "[godaddy.name]", "NToogle search engine", godaddy.x, godaddy.y)
+	var/datum/browser/popup = new(user, "[godaddy.name]", "NToogle search engine")
 	popup.set_content(godaddy.content)
 	popup.open()
 	log_game("[user] published website: [toname]. With content: [new_content]")

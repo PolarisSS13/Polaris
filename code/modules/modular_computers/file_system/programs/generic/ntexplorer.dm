@@ -21,6 +21,10 @@
 	var/browser_url
 	var/interactive_website
 
+	var/party_cost
+
+
+
 /datum/nano_module/nt_explorer/New()
 	..()
 	if(!websites.len)
@@ -34,6 +38,10 @@
 		browser_title = current_website.title
 		browser_url = current_website.name
 		interactive_website = current_website.interactive_website
+
+/datum/nano_module/nt_explorer/proc/browse_url(var/url)
+	current_website = locate(url) in websites
+	fetch_website_data()
 
 /datum/nano_module/nt_explorer/proc/search(mob/user)
 	if(!websites.len)

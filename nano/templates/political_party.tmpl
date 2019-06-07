@@ -1,0 +1,87 @@
+<h1>Official Party Management Engine</h1>
+<hr>
+{{if data.index == 0}}
+<p>Welcome, {{:data.authuser}}.</p>
+
+<p>If you would like to login to your political party. Please login here.
+</p>
+{{:helper.link("Login", null, {'login' : 1})}}
+<br><br>
+
+<h2>Other Options</h2>
+<hr>
+{{:helper.link("Join A Party", null, {'join_party' : 1})}}
+
+{{:helper.link("Register a Party", null, {'register_party' : 1})}}
+
+{{:helper.link("View Existing Parties", null, {'view_parties' : 1})}}
+
+{{/if}}
+
+{{if data.index == 1}}
+
+<h2>Official Party Registrar</h2>
+<hr>
+
+<p>Before you register a party consider checking the official list of parties that already exist.</p>
+
+<p>
+{{:helper.link("View List of Parties", null, {'view_parties' : 1})}}
+</p>
+
+<h3>Registering your party</h3>
+
+<p>This is the Polluxian official registrar for political parties. To form a political party you must pay a sum of <strong>3,500 credits to cover the administration fee and licensing.</strong></p>
+
+<p><strong>Party Registration Rules:</strong></p>
+
+<ul>
+	<li>- Your party name must be unique.</li>
+	<li>- All party members must keep within the law, if a party is found to be participating in illegal activities it may be suspended for investigation.</li>
+	<li>- You must pay the registration fee monthly. Failure to do so may result in party suspension and/or deletion.&nbsp;</li>
+	<li>- Most political views are allowed, however those that may encourage terror acts are forbidden.</li>
+	<li>- The Polluxian Government & NanoTrasen reserves the right to request an audit at any given time.</li>
+</ul>
+
+<p><em>Registering a new party is easy and simple. Please fill in the form below.</em></p>
+<hr>
+
+<br><strong>Party Leader: </strong>
+</p>{{:data.party_leader}}
+
+<br><span style="color: rgb(226, 80, 65);">{{:data.registration_msg}}</span></p>
+
+<br><strong>Party Name*: </strong>{{:data.p_name}}</p>
+{{:helper.link("Set Party Name", null, {'set_party_name' : 1})}}
+
+<br><strong>Party Slogan*: </strong>{{:data.p_slogan}}</p>
+{{:helper.link("Set Slogan", null, {'set_party_slogan' : 1})}}
+
+<br><strong>Party Description*: </strong>{{:data.p_desc}}</p>
+{{:helper.link("Set Description", null, {'set_party_desc' : 1})}}
+
+<br><strong>Password*:</strong> {{:data.party_pass}}
+{{:helper.link("Set Password", null, {'set_party_pass' : 1})}}
+<br>
+
+<p>By pressing "Submit" you agree to the party terms and conditions and payment of 3,500 credits.</p>
+
+{{:helper.link("Submit", null, {'submit_new_party' : 1})}}
+{{:helper.link("Back", null, {'back' : 1})}}
+</br>
+{{/if}}
+
+{{if data.index == 2}}
+{{:data.page_msg}}
+<br>
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+{{if data.index == 3}}
+	{{for data.voice_mobs}}
+
+{{/if}}
+
+
+

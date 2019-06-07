@@ -16,8 +16,6 @@ var/global/list/websites = list()
 	var/content = "<h1>A heading!</h1>\
 	<h2>Any standard HTML works here!</h2>\
 	<p>Sign our guestbook!</p>"
-	var/x = 600
-	var/y = 600 //Window size!
 	var/path = null // If you want to load your site from a TXT, make a txt file in websites/ and edit path to point to it.
 	var/password = null //Set this if you require a password.
 	var/max_length = 1000 //Feel free to remove this. This limits your HTML to 1000 lines to prevent gigaspam.
@@ -44,5 +42,5 @@ var/global/list/websites = list()
 /datum/website/ntoogle
 	name = "ntoogle.nt"
 	title = "Ntoogle Search"
-	interactive_website = 1
+	interactive_website = "ntoogle"
 	var/search_query
