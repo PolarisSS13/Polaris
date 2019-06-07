@@ -19,4 +19,5 @@
 		if(M.initial_account)
 			var/datum/money_account/A = M.initial_account
 			C.associated_account_number = A.account_number
+			C.associated_pin_number = A.remote_access_pin
 	return C

@@ -36,11 +36,8 @@ SUBSYSTEM_DEF(economy)
 //		message_admins("ERROR: No bank number found for field.", 1)
 		return
 
-	for(var/datum/money_account/M in all_money_accounts)
-		if(M.account_number == bank_number)
-			bank_account = M
-			break
-//			message_admins("Found bank account for [bank_number].", 1)
+
+	bank_account = get_account(bank_number)
 
 	if(!bank_account)
 //		message_admins("ERROR: Could not find a bank account for [bank_number].", 1)

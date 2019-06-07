@@ -1,6 +1,5 @@
 
-{{if data.interactive_website == 1}}
-
+{{if data.interactive_website}}
 <p><strong>{{:data.website_title}}</strong> - NTNet Explorer</p>
 <hr>
 <table style="width: 100%; margin-right: calc(0%);">
@@ -16,6 +15,11 @@
 <p><br></p>
 
 <div style="background-color: #FFFFFF; color: #000000; padding: 6px;">
+
+{{/if}}
+
+{{if data.interactive_website == "ntoogle"}}
+
 
 
 
@@ -44,6 +48,35 @@
 
 
 
-</div>
+
 
 {{/if}}
+
+	{{if data.interactive_website == "party"}}
+
+<h1>Official Party Registrar</h1>
+<hr>
+
+<p>This is the Polluxian official registrar for political parties. To form a political party you must pay a sum of <strong>3,500<strong> credits to cover the administration fee and licensing.</p>
+
+<p><strong>Party Registration Rules:</strong></p>
+
+<ul>
+	<li>Your party name must be unique.</li>
+	<li>You must pay the registration fee monthly. Failure to do so may result in party suspension and/or deletion.</li>
+	<li>Most political views are allowed, however those that may encourage terror acts are forbidden.</li>
+	<li>The Polluxian Government &amp; NanoTrasen reserves the right to request an audit at any given time.</li>
+</ul>
+
+<p><strong>Register a Party:</strong></p>
+{{:helper.link("Register A New Party", null, {'register_party' : 1})}}
+<br>
+<br>
+<p><strong>View List of Parties:</strong></p>
+{{:helper.link("View List", null, {'view_parties' : 1})}}
+
+<br>
+<br>
+	{{/if}}
+
+</div>

@@ -18,6 +18,7 @@
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
 	var/associated_account_number = 0
+	var/associated_pin_number = 0
 
 	var/list/files = list(  )
 
