@@ -122,3 +122,10 @@
 
 /obj/item/weapon/material/fishing_rod/modern/built
 	strung = FALSE
+
+/obj/item/weapon/material/fishing_rod/modern/cheap //A rod sold by the fishing vendor. Done so that the rod sold by mining reward vendors doesn't loose its value.
+	name = "cheap fishing rod"
+	desc = "Mass produced, but somewhat reliable."
+	default_material = "plastic"
+
+	toolspeed = 0.9
