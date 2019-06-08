@@ -75,7 +75,6 @@
 					return
 
 			user.setClickCooldown(user.get_attack_speed(src)) //puts a limit on how fast people can eat/drink things
-			//VOREStation Edit Begin
 			if (fullness <= 50)
 				to_chat(M, "<span class='danger'>You hungrily chew out a piece of [src] and gobble it!</span>")
 			if (fullness > 50 && fullness <= 150)
@@ -84,23 +83,9 @@
 				to_chat(M, "<span class='notice'>You take a bite of [src].</span>")
 			if (fullness > 350 && fullness <= 550)
 				to_chat(M, "<span class='notice'>You unwillingly chew a bit of [src].</span>")
-			if (fullness > 550 && fullness <= 650)
-				to_chat(M, "<span class='notice'>You swallow some more of the [src], causing your belly to swell out a little.</span>")
-			if (fullness > 650 && fullness <= 1000)
-				to_chat(M, "<span class='notice'>You stuff yourself with the [src]. Your stomach feels very heavy.</span>")
-			if (fullness > 1000 && fullness <= 3000)
-				to_chat(M, "<span class='notice'>You gluttonously swallow down the hunk of [src]. You're so gorged, it's hard to stand.</span>")
-			if (fullness > 3000 && fullness <= 5500)
-				to_chat(M, "<span class='danger'>You force the piece of [src] down your throat. You can feel your stomach getting firm as it reaches its limits.</span>")
-			if (fullness > 5500 && fullness <= 6000)
-				to_chat(M, "<span class='danger'>You barely glug down the bite of [src], causing undigested food to force into your intestines. You can't take much more of this!</span>")
-			if (fullness > 6000) // There has to be a limit eventually.
-				to_chat(M, "<span class='danger'>Your stomach blorts and aches, prompting you to stop. You literally cannot force any more of [src] to go down your throat.</span>")
-				return 0
-			/*if (fullness > (550 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
+			if (fullness > (550 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
 				to_chat(M, "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>")
-				return 0*/
-			//VOREStation Edit End
+				return 0
 
 		else if(user.a_intent == I_HURT)
 			return ..()
@@ -128,12 +113,11 @@
 					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 					return
 
-				/*if (fullness <= (550 * (1 + M.overeatduration / 1000))) // Vorestation edit
+				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
 					user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
 				else
 					user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
-					return 0*/
-				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>") // Vorestation edit
+					return 0
 
 				user.setClickCooldown(user.get_attack_speed(src))
 				if(!do_mob(user, M)) return
@@ -3216,7 +3200,7 @@
 			icon_state = "pizzabox_open"
 
 		if( pizza )
-			var/image/pizzaimg = image(icon = pizza.icon, icon_state = pizza.icon_state)	//VOREStation Edit: Icons for bad pizza
+			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
 			pizzaimg.pixel_y = -3
 			overlays += pizzaimg
 
@@ -3900,6 +3884,19 @@
 	reagents.add_reagent("nutriment", 5)
 	reagents.add_reagent("capsaicin", 4)
 	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/piginblanket
+	name = "pig in a blanket"
+	desc = "A sausage embedded in soft, fluffy pastry. Free this pig from its blanket prison by eating it."
+	icon_state = "piginblanket"
+	nutriment_amt = 6
+	nutriment_desc = list("meat" = 3, "pastry" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/piginblanket/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	reagents.add_reagent("protein", 4)
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/piginblanket
 	name = "pig in a blanket"
