@@ -55,7 +55,7 @@
 
 /obj/item/weapon/storage/box/wormcan/sickly/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
-		icon_state = "wormcan_sickly_empty"
+		icon_state = "wormcan_empty_sickly"
 
 /obj/item/weapon/storage/box/wormcan/deluxe
 	icon_state = "wormcan_deluxe"
@@ -66,4 +66,4 @@
 
 /obj/item/weapon/storage/box/wormcan/deluxe/update_icon(var/itemremoved = 0)
 	if (contents.len == 0)
-		icon_state = "wormcan_deluxe_empty"
+		icon_state = "wormcan_empty_deluxe"
