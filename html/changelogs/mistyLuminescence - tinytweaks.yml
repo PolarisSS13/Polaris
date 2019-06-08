@@ -34,6 +34,7 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - tweak: "When the supermatter explodes, it now leaves behind a shattered plinth that continues to emit radiation. You should probably get rid of it."
+  - bugfix: "If you destroy the supermatter early (e.g. through admin deletion shenanigans), it no longer irradiates everyone forever."
   - bugfix: "Welding lockers now actually updates their sprite properly."
   - tweak: "Every floor tile now has a minor (2%) chance to spawn with some dirt on it. The Janitor now has a job again."
   - tweak: "Similarly, every Sif grass tile now has a minor (5%) chance to spawn with some fancy eyebulb grass on it. It can be removed by clicking on it with harm intent."

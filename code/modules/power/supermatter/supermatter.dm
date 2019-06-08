@@ -99,6 +99,7 @@
 	return ..()
 
 /obj/machinery/power/supermatter/Destroy()
+	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(soundloop)
 	return ..()
 
