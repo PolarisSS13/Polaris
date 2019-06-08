@@ -36,5 +36,5 @@ changes:
   - tweak: "When the supermatter explodes, it now leaves behind a shattered plinth that continues to emit radiation. You should probably get rid of it."
   - bugfix: "Welding lockers now actually updates their sprite properly."
   - tweak: "Every floor tile now has a minor (2%) chance to spawn with some dirt on it. The Janitor now has a job again."
-  - tweak: "Similarly, every Sif grass tile now has a minor (2%) chance to spawn with some fancy eyebulb grass on it. It can be removed by clicking on it with harm intent."
+  - tweak: "Similarly, every Sif grass tile now has a minor (5%) chance to spawn with some fancy eyebulb grass on it. It can be removed by clicking on it with harm intent."
   - rscadd: "Adds cats-in-boxes, which can be activated (once) to spawn cats. There's an orange tabby (Cargo cats) and a tuxedo (Runtime) version."
