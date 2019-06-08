@@ -341,3 +341,11 @@
 /obj/structure/flora/sif/eyes/Initialize()
 	icon_state = "[initial(icon_state)][rand(1,3)]"
 	. = ..()
+
+/obj/structure/flora/sif/attack_hand(mob/user)
+	if (user.a_intent == I_HURT)
+		if(do_after(user, 5 SECONDS))
+			visible_message("<span class='notice'>\The [user] digs up \the [src].</span>")
+			qdel(src)
+	else
+		visible_message("<span class='notice'>\The [user] pokes \the [src].</span>")
