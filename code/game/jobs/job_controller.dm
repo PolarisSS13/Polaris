@@ -573,6 +573,9 @@ var/global/datum/controller/occupations/job_master
 			if(H.mind && H.mind.initial_account)
 				C.associated_account_number = H.mind.initial_account.account_number
 
+
+			associated_unique_ID
+
 			H.equip_to_slot_or_del(C, slot_wear_id)
 
 //		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)

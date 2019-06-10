@@ -16,7 +16,10 @@
 	var/can_login
 
 	// SELECTED PARTY
-	var/current_party
+	var/datum/party/current_party
+	var/is_leader
+
+	var/party_announcement
 
 	// REGISTRATION
 	var/p_name = " "
@@ -27,8 +30,6 @@
 	var/acc_pin
 
 	var/party_pass = " "
-
-
 	var/reg_error = "*Fields marked with an asterisk are required."
 
 /datum/nano_module/program/party_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
@@ -40,6 +41,7 @@
 	data["page_msg"] = page_msg
 	data["parties"] = political_parties
 
+
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 
 	if(!ishuman(user) || !istype(I) || !I.registered_name)
@@ -50,7 +52,17 @@
 		data["authuser"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 		can_login = 1
 		user_uid = H.client.prefs.unique_id
+		data["user_uid"] = user_uid
 		data["party_leader"] = I.registered_name
+
+
+
+	if(current_party)
+		party_announcement = current_party.party_message
+		data["is_leader"] = is_party_leader(user_uid, current_party)
+		data["current_party_name"] = current_party.name
+		data["current_party"] = current_party
+		data["party_announcement"] = party_announcement
 
 
 	if(can_login)
@@ -69,6 +81,7 @@
 	data["reg_error"] = reg_error
 	data["party_pass"] = party_pass
 
+
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "political_party.tmpl", "Official Party Management", 690, 680, state = state)
@@ -78,16 +91,24 @@
 		ui.set_initial_data(data)
 		ui.open()
 
+/datum/nano_module/program/party_manager/proc/reset_fields()
+	p_name = initial(p_name)
+	p_desc = initial(p_desc)
+	p_slogan = initial(p_slogan)
+	party_pass = initial(party_pass)
+
 /datum/nano_module/program/party_manager/Topic(href, href_list)
 	if(..()) return 1
 
 	if(href_list["back"])
 		. = 1
 		index = 0
+		reset_fields()
 
 	if(href_list["login"])
 		. = 1
-		index = 0
+		index = 4
+		reset_fields()
 
 	if(href_list["register_party"])
 		. = 1
@@ -103,14 +124,25 @@
 
 	if(href_list["set_party_name"])
 		. = 1
-		p_name = sanitize(copytext(input(usr, "Enter your party name (40 chars max)", "Party Manager", null)  as text,1,40))
-		if(!p_name)
+		var/pa_name = sanitize(copytext(input(usr, "Enter your party name (40 chars max)", "Party Manager", null)  as text,1,40))
+		if(!pa_name)
 			return
+		p_name = pa_name
+
+	if(href_list["edit_party_name"])
+		. = 1
+
+		var/pa_name = sanitize(copytext(input(usr, "Enter your party name (40 chars max)", "Party Manager", null)  as text,1,40))
+		if(!pa_name)
+			return
+		p_name = pa_name
+
 
 	if(href_list["set_party_slogan"])
 		. = 1
 		p_slogan = sanitize(copytext(input(usr, "Enter your party's slogan (80 chars max)", "Party Manager", null)  as text,1,80))
 		if(!p_slogan)
+			p_slogan = initial(p_slogan)
 			return
 
 	if(href_list["set_party_desc"])
@@ -136,31 +168,37 @@
 		. = 1
 		if(p_name == initial(p_name))
 			reg_error = "You need to enter a party name!"
-			return 0
+			return
+
+		if(check_party_name_exist(p_name))
+			reg_error = "This party name already exists. Please choose another."
+			return
 
 		if(p_slogan == initial(p_slogan))
 			reg_error = "A party slogan is required!"
-			return 0
+			return
+
 		if(p_desc == initial(p_desc))
 			reg_error = "The party description cannot be left blank!"
-			return 0
+			return
+
 		if(party_pass == initial(party_pass))
 			reg_error = "A password is required!"
-			return 0
+			return
 
 		for(var/datum/party/K in political_parties)
 			if(K.name == p_name)
 				reg_error = "The name \"[p_name]\" already exists."
 				break
-				return 0
+				return
 
 
 		if("No" == alert("Create [p_name] party for 3,500 credits?", "Create Party", "No", "Yes"))
-			return 0
+			return
 
-		if(!attempt_account_access(acc_no, acc_pin, 2) || !charge_to_account(acc_no, "Party Registrar", "[p_name] registration", "Polluxian Party Registration", 3500))
+		if(!attempt_account_access(acc_no, acc_pin, 2) || !charge_to_account(acc_no, "Party Registrar", "[p_name] registration", "Polluxian Party Registration", -3500))
 			reg_error = "There was an error charging your bank account. Please contact your bank's administrator."
-			return 0
+			return
 		else
 			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, usr)
 			message_admins("Party created.")
@@ -171,12 +209,55 @@
 			<b>Party Unique ID:</b> [P.id] (Use this as a login.)<p>\
 			<b>Party Password:</b> [P.password]"
 
-			p_name = initial(p_name)
-			p_desc = initial(p_desc)
-			p_slogan = initial(p_slogan)
-			party_pass = initial(party_pass)
+			reset_fields()
 
+	if(href_list["party_logout"])
+		reset_fields()
+		current_party = null
+		page_msg = "Successfully logged out!"
+		index = 2
 
+	if(href_list["party_login"])
+		. = 1
 
+		if(p_name == initial(p_name))
+			reg_error = "You need to enter a party name!"
+			return
 
+		if(!check_party_name_exist(p_name))
+			reg_error = "This party does not exist."
+			return
 
+		var/datum/party/P
+
+		P = get_party_by_name(p_name)
+
+		if(!P)
+			message_admins("Could not find [P.name].")
+			page_msg = "Unable to login to this party. Please contact the party administration."
+			return
+
+		if(try_auth_party(P, p_name, party_pass))
+			page_msg = "Login successful!"
+			message_admins("Success! Logged into [P.name].")
+			current_party = P
+			party_announcement = current_party.party_message
+			index = 5
+		else
+			message_admins("Login failed for [P.name] with [party_pass].")
+			page_msg = "Login failed. Please check the password or party name."
+
+	if(href_list["party_settings"])
+		. = 1
+		index = 6
+
+	if(href_list["manage_members"])
+		. = 1
+
+	if(href_list["party_announcement"])
+		. = 1
+		party_announcement = sanitize(copytext(input(usr, "Enter a party announcement, this will be viewed by party members only.", "Party Announcement", null)  as message,1,200))
+		if(!party_announcement)
+			return
+		if(current_party)
+			current_party.party_message = party_announcement

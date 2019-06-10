@@ -19,6 +19,7 @@
 	slot_flags = SLOT_EARS
 	var/associated_account_number = 0
 	var/associated_pin_number = 0
+	var/associated_unique_ID
 
 	var/list/files = list(  )
 
