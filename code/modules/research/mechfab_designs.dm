@@ -108,6 +108,12 @@
 /datum/design/item/mechfab/gygax
 	category = "Gygax"
 
+/datum/design/item/mechfab/gygax/chassis/serenity
+	name = "Serenity Chassis"
+	id = "serenity_chassis"
+	build_path = /obj/item/mecha_parts/chassis/serenity
+	materials = list(DEFAULT_WALL_MATERIAL = 18750, "phoron" = 4000)
+
 /datum/design/item/mechfab/gygax/chassis
 	name = "Gygax Chassis"
 	id = "gygax_chassis"
