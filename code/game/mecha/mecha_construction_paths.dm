@@ -573,16 +573,16 @@
 					 list("key"=/obj/item/mecha_parts/part/gygax_head)
 					)
 
- /datum/construction/mecha/serenity_chassis/custom_action(step, obj/item/I, mob/user)
+/datum/construction/mecha/serenity_chassis/custom_action(step, obj/item/I, mob/user)
 	user.visible_message("[user] has connected [I] to [holder].", "You connect [I] to [holder]")
 	holder.overlays += I.icon_state+"+o"
 	qdel(I)
 	return 1
 
- /datum/construction/mecha/serenity_chassis/action(obj/item/I,mob/user as mob)
+/datum/construction/mecha/serenity_chassis/action(obj/item/I,mob/user as mob)
 	return check_all_steps(I,user)
 
- /datum/construction/mecha/serenity_chassis/spawn_result()
+/datum/construction/mecha/serenity_chassis/spawn_result()
 	var/obj/item/mecha_parts/chassis/const_holder = holder
 	const_holder.construct = new /datum/construction/reversible/mecha/serenity(const_holder)
 	const_holder.icon = 'icons/mecha/mech_construction.dmi'
@@ -593,7 +593,7 @@
 	return
 
 
- /datum/construction/reversible/mecha/serenity
+/datum/construction/reversible/mecha/serenity
 	result = "/obj/mecha/combat/gygax/serenity"
 	steps = list(
 					//1
@@ -677,10 +677,10 @@
 					 		"desc"="The hydraulic systems are disconnected.")
 					)
 
- /datum/construction/reversible/mecha/serenity/action(obj/item/I,mob/user as mob)
+/datum/construction/reversible/mecha/serenity/action(obj/item/I,mob/user as mob)
 	return check_step(I,user)
 
- /datum/construction/reversible/mecha/serenity/custom_action(index, diff, obj/item/I, mob/user)
+/datum/construction/reversible/mecha/serenity/custom_action(index, diff, obj/item/I, mob/user)
 	if(!..())
 		return 0
 
@@ -839,7 +839,7 @@
 				holder.icon_state = "gygax18"
 	return 1
 
- /datum/construction/reversible/mecha/serenity/spawn_result()
+/datum/construction/reversible/mecha/serenity/spawn_result()
 	..()
 	feedback_inc("mecha_serenity_created",1)
 	return

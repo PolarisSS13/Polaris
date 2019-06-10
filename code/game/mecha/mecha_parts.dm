@@ -1,4 +1,4 @@
-/////////////////////////
+ /////////////////////////
 ////// Mecha Parts //////
 /////////////////////////
 
@@ -114,10 +114,10 @@
 
 ////////// Serenity
 
- /obj/item/mecha_parts/chassis/serenity
+/obj/item/mecha_parts/chassis/serenity
 	name = "Serenity Chassis"
 
- 	New()
+	New()
 		..()
 		construct = new /datum/construction/mecha/serenity_chassis(src)
 
