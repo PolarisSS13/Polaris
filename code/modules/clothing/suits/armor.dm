@@ -378,14 +378,15 @@
 	item_state = "tacwebvest"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 
-/obj/item/clothing/suit/storage/vest/tactical/flexitac //a reskin of the above to have a matching armor set
+/obj/item/clothing/suit/storage/vest/heavy/flexitac //a reskin of the above to have a matching armor set
 	name = "tactical light vest"
 	desc = "An armored vest made from advanced flexible ceramic plates. It's surprisingly mobile, if a little unfashionable."
 	icon_state = "flexitac"
 	item_state = "flexitac"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 	cold_protection = UPPER_TORSO|LOWER_TORSO
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_cold_protection_temperature = T0C - 20
+	slowdown = 0.3
 
 /obj/item/clothing/suit/storage/vest/detective
 	name = "detective armor vest"
