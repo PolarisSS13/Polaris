@@ -116,6 +116,20 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/teleporter
 	sort_string = "HAAAA"
 
+/datum/design/circuit/telestation
+	name = "teleporter station"
+	id = "telestation"
+	req_tech = list(TECH_DATA = 4, TECH_BLUESPACE = 4)
+	build_path = /obj/item/weapon/circuitboard/teleporter_station
+	sort_string = "HAAAG"
+
+/datum/design/circuit/telehub
+	name = "teleporter hub"
+	id = "telehub"
+	req_tech = list(TECH_DATA = 5, TECH_BLUESPACE = 5)
+	build_path = /obj/item/weapon/circuitboard/teleporter_hub
+	sort_string = "HAAAH"
+
 /datum/design/circuit/robocontrol
 	name = "robotics control console"
 	id = "robocontrol"

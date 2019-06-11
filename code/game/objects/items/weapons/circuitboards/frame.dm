@@ -165,21 +165,23 @@
 /obj/item/weapon/circuitboard/teleporter_hub
 	name = T_BOARD("teleporter hub")
 	build_path = /obj/machinery/teleport/hub
-	board_type = "teleporter_hub"
-//	origin_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 4)
+	board_type = new /datum/frame/frame_types/machine
+	origin_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 5)
 	req_components = list(
-							/obj/item/weapon/stock_parts/scanning_module = 4,
-							/obj/item/weapon/stock_parts/micro_laser = 4,
+							/obj/item/weapon/stock_parts/scanning_module = 1,
+							/obj/item/weapon/stock_parts/micro_laser = 1,
+							/obj/item/weapon/stock_parts/subspace/treatment = 1,
 							/obj/item/stack/cable_coil = 10)
 
 /obj/item/weapon/circuitboard/teleporter_station
 	name = T_BOARD("teleporter station")
 	build_path = /obj/machinery/teleport/station
-	board_type = "teleporter_station"
-//	origin_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 3)
+	board_type = new /datum/frame/frame_types/machine
+	origin_tech = list(TECH_DATA = 2, TECH_BLUESPACE = 4)
 	req_components = list(
 							/obj/item/weapon/stock_parts/console_screen = 1,
-							/obj/item/weapon/stock_parts/capacitor = 2,
+							/obj/item/weapon/stock_parts/subspace/sub_filter = 1,
+							/obj/item/weapon/stock_parts/subspace/ansible = 1,
 							/obj/item/stack/cable_coil = 10)
 
 /obj/item/weapon/circuitboard/body_scanner

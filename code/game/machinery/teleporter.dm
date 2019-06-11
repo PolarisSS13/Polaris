@@ -87,8 +87,6 @@
 	attack_hand()
 
 /obj/machinery/computer/teleporter/attack_hand(user as mob)
-	if(..()) return
-
 	/* Ghosts can't use this one because it's a direct selection */
 	if(istype(user, /mob/observer/dead)) return
 
@@ -184,15 +182,20 @@
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 10)
 	RefreshParts()
+
+/obj/machinery/teleport/hub/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
+		return
+	else if(default_deconstruction_crowbar(user, W))
+		return
+	else if(default_part_replacement(user, W))
+		return
+	else
+		..()
 
 /obj/machinery/teleport/hub/Bumped(M as mob|obj)
 	spawn()
@@ -332,13 +335,20 @@
 
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 10)
 	RefreshParts()
 
-/obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
-	attack_hand()
+/obj/machinery/teleport/station/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
+		return
+	else if(default_deconstruction_crowbar(user, W))
+		return
+	else if(default_part_replacement(user, W))
+		return
+	else
+		attack_hand()
 
 /obj/machinery/teleport/station/attack_ai()
 	attack_hand()
