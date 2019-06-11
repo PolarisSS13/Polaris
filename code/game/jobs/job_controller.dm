@@ -575,7 +575,7 @@ var/global/datum/controller/occupations/job_master
 				C.associated_pin_number = H.mind.initial_account.remote_access_pin
 
 
-			C. associated_unique_ID = H.mind.prefs.unique_id
+			C.associated_unique_ID = H.mind.prefs.unique_id
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 
