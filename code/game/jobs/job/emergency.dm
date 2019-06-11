@@ -12,7 +12,7 @@
 	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
 	email_domain = "cityworks.gov.nt"
-	wage = 780
+	wage = 480
 
 	minimum_character_age = 30
 	ideal_character_age = 50
