@@ -87,6 +87,8 @@
 	attack_hand()
 
 /obj/machinery/computer/teleporter/attack_hand(user as mob)
+	if(..()) return
+
 	/* Ghosts can't use this one because it's a direct selection */
 	if(istype(user, /mob/observer/dead)) return
 
