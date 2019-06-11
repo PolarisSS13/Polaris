@@ -130,7 +130,7 @@
 	supervisors = "the city clerk"
 	selection_color = "#515151"
 	idtype = /obj/item/weapon/card/id/civilian/barber
-	minimum_character_age = 30
+	minimum_character_age = 16
 	access = list(access_barber, access_maint_tunnels)
 	minimal_access = list(access_barber)
 	wage = 13
