@@ -99,3 +99,8 @@
 	display_name = "Cards Against The Galaxy (black deck)"
 	path = /obj/item/weapon/deck/cah/black
 	description = "The ever-popular Cards Against The Galaxy word game. Warning: may include traces of broken fourth wall. This is the black deck."
+
+/datum/gear/rxpills
+	display_name = "bottle of prescription medicine pills"
+	path = /obj/item/weapon/storage/pill_bottle/rx
+	description = "What kind of medicine is this? What does it treat? Why are all the pills unlabelled? Who knows."

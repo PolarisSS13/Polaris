@@ -271,3 +271,8 @@
 	name = "bottle of Iron pills"
 	desc = "Contains pills used to aid in blood regeneration."
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
+
+/obj/item/weapon/storage/pill_bottle/rx
+	name = "bottle of prescription medicine pills"
+	desc = "Contains pills used to treat... something. The label doesn't say what."
+	starts_with = list(/obj/item/weapon/reagent_containers/pill/rx = 7)

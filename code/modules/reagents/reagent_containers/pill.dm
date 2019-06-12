@@ -304,3 +304,12 @@
 /obj/item/weapon/reagent_containers/pill/diet/Initialize()
 	. = ..()
 	reagents.add_reagent("lipozine", 2)
+
+/obj/item/weapon/reagent_containers/pill/rx
+	name = "prescription medicine pill"
+	desc = "This pill isn't actually labelled with anything, but you're pretty sure it's some kind of prescription medicine."
+	icon_state = "pill19"
+
+/obj/item/weapon/reagent_containers/pill/rx/Initialize()
+	. = ..()
+	reagents.add_reagent("banana", 2) //medicine tastes like bananas in space
