@@ -169,6 +169,15 @@ datum/design/item/laserpointer
 	build_path = /obj/item/device/t_scanner/advanced
 	sort_string = "VASSB"
 
+/datum/design/item/device/rcd_adv
+	name = "Advanced Rapid Construction Device"
+	desc = "An advanced version of the rapid construction device, capable of (de-)constructing walls, airlocks, grilles and windows at range."
+	id = "advancedtscanner"
+	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 8, TECH_MATERIAL = 6, TECH_BLUESPACE = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 12500, "glass" = 10000, "uranium" = 3500, MAT_VERDANTIUM = 1250)
+	build_path = /obj/item/weapon/rcd/advanced
+	sort_string = "VASSC"
+
 /datum/design/item/translator
 	name = "handheld translator"
 	id = "translator"

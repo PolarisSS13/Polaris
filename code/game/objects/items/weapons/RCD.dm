@@ -28,6 +28,9 @@
 	var/material_to_use = DEFAULT_WALL_MATERIAL // So badmins can make RCDs that print diamond walls.
 	var/make_rwalls = FALSE // If true, when building walls, they will be reinforced.
 
+	var/sheetmultiplier = RCD_SHEETS_PER_MATTER_UNIT //Controls the amount of matter added for each glass/metal sheet
+	var/rglassmultiplier = 1.5 //One glass, half a metal
+
 /obj/item/weapon/rcd/Initialize()
 	src.spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
@@ -60,7 +63,25 @@
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, span("notice", "The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		return TRUE
-	return ..()
+	else if(istype(W, /obj/item/stack/material/steel) || istype(W, /obj/item/stack/material/glass))
+		loadwithsheets(W, sheetmultiplier, user)
+	else if(istype(W, /obj/item/stack/material/glass/reinforced))
+		loadwithsheets(W, rglassmultiplier*sheetmultiplier, user)
+	else
+		return ..()
+
+// Used to turn sheets directly into matter-units
+/obj/item/weapon/rcd/proc/loadwithsheets(obj/item/stack/material/S, value, mob/user)
+	var/maxsheets = round((max_stored_matter-stored_matter)/value)    //calculate the max number of sheets that will fit in RCD
+	if(maxsheets > 0)
+		var/amount_to_use = min(S.amount, maxsheets)
+		S.use(amount_to_use)
+		stored_matter += value*amount_to_use
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		to_chat(user, "<span class='notice'>You insert [amount_to_use] [S.name] sheets into [src]. </span>")
+		return 1
+	to_chat(user, "<span class='warning'>You can't insert any more [S.name] sheets into [src].</span>")
+	return 0
 
 // Changes which mode it is on.
 /obj/item/weapon/rcd/attack_self(mob/living/user)
@@ -275,7 +296,7 @@
 	return TRUE
 
 /obj/item/weapon/rcd/debug/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/rcd_ammo))
+	if(istype(W, /obj/item/weapon/rcd_ammo) || istype(W, /obj/item/stack/material))
 		to_chat(user, span("notice", "\The [src] makes its own material, no need to add more."))
 		return FALSE
 	return ..()
@@ -294,12 +315,12 @@
 	item_state = "rcdammo"
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
-	var/remaining = RCD_MAX_CAPACITY / 3
+	matter = list(DEFAULT_WALL_MATERIAL = 15000,"glass" = 15000)
+	var/remaining = RCD_MAX_CAPACITY / 2
 
 /obj/item/weapon/rcd_ammo/large
 	name = "high-capacity matter cartridge"
 	desc = "Do not ingest."
-	matter = list(DEFAULT_WALL_MATERIAL = 45000,"glass" = 22500)
+	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 30000)
 	origin_tech = list(TECH_MATERIAL = 4)
 	remaining = RCD_MAX_CAPACITY

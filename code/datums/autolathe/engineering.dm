@@ -91,8 +91,14 @@
 	path =/obj/item/weapon/stock_parts/spring
 
 /datum/category_item/autolathe/engineering/rcd_ammo
-	name = "matter cartridge"
+	name = "compressed matter cartridge"
 	path =/obj/item/weapon/rcd_ammo
+	no_scale = 1
+
+/datum/category_item/autolathe/engineering/rcd_ammo_large
+	name = "high-capacity matter cartridge"
+	path =/obj/item/weapon/rcd_ammo
+	no_scale = 1
 
 /datum/category_item/autolathe/engineering/rcd
 	name = "rapid construction device"
