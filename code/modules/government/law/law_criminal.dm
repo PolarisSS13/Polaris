@@ -140,8 +140,7 @@
 
 /datum/law/criminal/force
 	name = "Excessive Use of Force"
-	description = "To fail to present a valid form of identification upon a lawful request a \
-	representative of local or federal authorities."
+	description = "To use more than a necessary amount of force in self defense."
 	fine = 200
 	cell_time = 20
 
@@ -159,9 +158,6 @@
 	notes = "The exceptions are items that the person is required to be in posession of due to the \
 	specifics of their profession (like the drugs inside of chemistry lab) \
 	although carrying them out of the workplace is discouraged."
-
-
-
 
 /datum/law/criminal/contraband_d
 	name = "Contraband with Intent to Distribute"
@@ -210,7 +206,6 @@
 	cell_time = 30
 
 	description = "Inciting, or attempting to incite, an unlawful demonstration."
-
 	notes = "If a Non-Pollux citizen incites any demonstration, lawful or not, they can be charged with this."
 
 /datum/law/criminal/demo
