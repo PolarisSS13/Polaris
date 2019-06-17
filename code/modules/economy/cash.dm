@@ -210,28 +210,28 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 		if(result <= 4000)
 			won = 0
 			speak("You've won: [won] CREDITS. Better luck next time!")
-		else if (result <= 8000) // 4% chance
+		else if (result <= 80000) // 4% chance
 			won = 1
 			speak("You've won: [won] CREDITS. Partial winner!")
-		else if (result <= 9000) // 1% chance
+		else if (result <= 90000) // 1% chance
 			won = 5
 			speak("You've won: [won] CREDITS. Winner!")
-		else if (result <= 9500) // 0.5% chance
+		else if (result <= 95000) // 0.5% chance
 			won = 10
 			speak("You've won: [won] CREDITS. SUPER WINNER! You're lucky!")
-		else if (result <= 9750) // 0.25% chance
+		else if (result <= 97500) // 0.25% chance
 			won = 20
 			speak("You've won: [won] CREDITS. MEGA WINNER! You're super lucky!")
-		else if (result <= 9900) // 0.15% chance
+		else if (result <= 99000) // 0.15% chance
 			won = 50
 			speak("You've won: [won] CREDITS. ULTRA WINNER! You're mega lucky!")
-		else if (result <= 9950) // 0.05% chance
+		else if (result <= 99500) // 0.05% chance
 			won = 80
 			speak("You've won: [won] CREDITS. ULTIMATE WINNER! You're ultra lucky!")
-		else if (result <= 9975) // 0.025% chance
+		else if (result <= 99750) // 0.025% chance
 			won = 100
 			speak("You've won: [won] CREDITS. ULTIMATE WINNER! You're ultra lucky!")
-		else if (result <= 9999) // 0.024% chance
+		else if (result <= 99990) // 0.024% chance
 			won = 150
 			speak("You've won: [won] CREDITS. ULTIMATE WINNER! You're ultra lucky!")
 		else ///0.001% chance
