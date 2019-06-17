@@ -1271,15 +1271,16 @@
 				if(250 to 350)					nutrition_icon.icon_state = "nutrition2"
 				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
 				if(50 to 150)					nutrition_icon.icon_state = "nutrition4"
-				else							nutrition_icon.icon_state = "nutrition5"
-		if(hydration_icon)
-			switch(hydration)
-				if(450 to INFINITY)				hydration_icon.icon_state = "thirst0"
-				if(350 to 450)					hydration_icon.icon_state = "thirst1"
-				if(250 to 350)					hydration_icon.icon_state = "thirst2"
-				if(150 to 250)					hydration_icon.icon_state = "thirst3"
-				if(50 to 150)					hydration_icon.icon_state = "thirst4"
-				else							hydration_icon.icon_state = "thirst5"
+				else						nutrition_icon.icon_state = "nutrition5"
+		if(!isSynthetic())		
+			if(hydration_icon)
+				switch(hydration)
+					if(450 to INFINITY)				hydration_icon.icon_state = "thirst0"
+					if(350 to 450)					hydration_icon.icon_state = "thirst1"
+					if(250 to 350)					hydration_icon.icon_state = "thirst2"
+					if(150 to 250)					hydration_icon.icon_state = "thirst3"
+					if(50 to 150)					hydration_icon.icon_state = "thirst4"
+					else						hydration_icon.icon_state = "thirst5"
 		if(pressure)
 			pressure.icon_state = "pressure[pressure_alert]"
 
