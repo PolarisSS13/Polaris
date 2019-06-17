@@ -16,13 +16,11 @@
 /datum/gear/utility/cheaptablet
 	display_name = "cheap tablet computer"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
-	sort_category = "utility"
 	cost = 3
 
 /datum/gear/utility/normaltablet
 	display_name = "tablet computer"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
-	sort_category = "utility"
 	cost = 4
 
 
