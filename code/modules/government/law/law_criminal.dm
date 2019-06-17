@@ -69,7 +69,7 @@
 
 /datum/law/criminal/violation
 	name = "Violation of Privacy Laws"
-	description = "To invade a person’s privacy, share or access personal \
+	description = "To invade a personâ€™s privacy, share or access personal \
 	information protected by privacy laws without a proper reason."
 	fine = 150
 	cell_time = 15
@@ -126,7 +126,7 @@
 	notes = "Make sure the car wasn't handed to the suspect before you charge them with GTA."
 
 
-/datum/law/id
+/datum/law/criminal/id
 	name = "Failure to Produce Identification"
 	description = "To fail to present a valid form of identification upon a lawful request a \
 	representative of local or federal authorities."
@@ -138,10 +138,9 @@
 	privacy and can be considered a \"Violation of Privacy Laws\"."
 
 
-/datum/law/force
+/datum/law/criminal/force
 	name = "Excessive Use of Force"
-	description = "To fail to present a valid form of identification upon a lawful request a \
-	representative of local or federal authorities."
+	description = "To use more than a necessary amount of force in self defense."
 	fine = 200
 	cell_time = 20
 
@@ -150,7 +149,7 @@
 	end in death or near death) can still be charged with \"Manslaughter\" or even \"Murder\". If a \
 	police officer is the offender, refer to Abuse of Police Powers."
 
-/datum/law/contraband
+/datum/law/criminal/contraband
 	name = "Possession of Contraband"
 	description = "To be in possession of items controlled or banned by law without proper authorization."
 	fine = 150
@@ -160,10 +159,7 @@
 	specifics of their profession (like the drugs inside of chemistry lab) \
 	although carrying them out of the workplace is discouraged."
 
-
-
-
-/datum/law/contraband_d
+/datum/law/criminal/contraband_d
 	name = "Contraband with Intent to Distribute"
 	description = "To be in possession of items controlled or banned by law without proper authorization \
 	with intent to distribute"
@@ -175,13 +171,13 @@
 	believable amount for personal use. When it's a bag full of pills chances are the person \
 	is probably trying to sell them. 200 credits fine. 20 mins them."
 
-/datum/law/fraud
+/datum/law/criminal/fraud
 	name = "Fraud & Embezzlement"
 	description = "To use deliberate deception in order to take advantage of other person or organization."
 	fine = 280
 	cell_time = 28
 
-/datum/law/justice
+/datum/law/criminal/justice
 	name = "Obstruction of Justice"
 	description = "To pervert, impede or obstruct the due administration of justice."
 	fine = 200
@@ -192,28 +188,27 @@
 	actions or requests of law enforcement officers are all examples of what could qualify as obstruction of justice."
 
 
-/datum/law/parental
+/datum/law/criminal/parental
 	name = "Neglect of Parental Duties"
-	description = "To fail to uphold a reasonable standard of care for a child as that child’s legal guardian."
+	description = "To fail to uphold a reasonable standard of care for a child as that childâ€™s legal guardian."
 	fine = 100
 
 
-/datum/law/reckless
+/datum/law/criminal/reckless
 	name = "Reckless Endangerment"
 	description = "To act in a way that creates a risk of potential serious physical injury to another \
-	person while disregarding the foreseeable consequences of one’s actions."
+	person while disregarding the foreseeable consequences of oneâ€™s actions."
 	fine = 150
 
-/datum/law/inciting
+/datum/law/criminal/inciting
 	name = "Inciting an Unlawful Demonstration"
 	fine = 300
 	cell_time = 30
 
 	description = "Inciting, or attempting to incite, an unlawful demonstration."
-
 	notes = "If a Non-Pollux citizen incites any demonstration, lawful or not, they can be charged with this."
 
-/datum/law/demo
+/datum/law/criminal/demo
 	name = "Participating in an Unlawful Demonstration"
 	fine = 400
 	cell_time = 45
@@ -227,7 +222,7 @@
 	undue impact. Non-Pollux citizens participating in demonstrations may be charged with this, whether the \
 	demonstration is lawful or not."
 
-/datum/law/impersonate
+/datum/law/criminal/impersonate
 	name = "Impersonation of Government Officials"
 	description = "This will include any high ranking 300 credits fine 30 mins a Government Member Government \
 	body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
@@ -235,7 +230,7 @@
 	cell_time = 30
 
 
-/datum/law/trespass
+/datum/law/criminal/trespass
 	name = "Trespassing in a Secure Area."
 	description = "To unlawfully access a high security area, including police property, government facilities, or high value storage."
 
