@@ -59,6 +59,10 @@
 			var/ending = copytext(scrambled_text, length(scrambled_text)-1)
 			if(findtext(ending,"."))
 				nword = capitalize(nword)
+			else if(findtext(ending,"!"))
+				nword = capitalize(nword)
+			else if(findtext(ending,"?"))
+				nword = capitalize(nword)
 			scrambled_text += nword
 	scrambled_text = replacetext(scrambled_text,"  "," ")
 	scrambled_text = capitalize(scrambled_text)
