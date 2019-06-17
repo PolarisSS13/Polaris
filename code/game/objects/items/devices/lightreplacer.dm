@@ -122,11 +122,11 @@
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
 
 	if(target.status == LIGHT_OK)
-		U << "There is a working [target.get_fitting_name()] already inserted."
+		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
-		U << failmsg
+		to_chat(U, failmsg)
 	else if(Use(U))
-		U << "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>"
+		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
 		if(target.status != LIGHT_EMPTY)
 			target.remove_bulb()
