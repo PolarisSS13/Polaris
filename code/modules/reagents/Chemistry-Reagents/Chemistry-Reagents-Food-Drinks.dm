@@ -3207,7 +3207,7 @@
 	description = "A sparkling alcoholic beverage derived from apples, quite refreshing."
 	taste_description = "farmyard apples"
 	color = "#EAB300"
-	strength = 9
+	strength = 5
 	glass_special = list(DRINK_FIZZ)
 
 	glass_name = "cider"
