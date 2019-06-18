@@ -127,7 +127,7 @@
 	var/random_color = TRUE
 	var/active_state = "sword"
 
-	var/projectile_parry_chance = 65
+	projectile_parry_chance = 65
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -359,7 +359,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
-	var/projectile_parry_chance = 60
+	projectile_parry_chance = 60
 	lcolor = "#00FF00"
 
 /obj/item/weapon/melee/energy/blade/New()

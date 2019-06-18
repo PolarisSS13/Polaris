@@ -62,8 +62,8 @@
 	var/weapType = "weapon"
 	var/weapLocation = "arm"
 
-	var/defend_chance = 30	// The base chance for the weapon to parry.
-	var/projectile_parry_chance = 15	// The base chance for a projectile to be deflected.
+	defend_chance = 40	// The base chance for the weapon to parry.
+	projectile_parry_chance = 15	// The base chance for a projectile to be deflected.
 
 /obj/item/weapon/melee/changeling/New(location)
 	..()
@@ -143,14 +143,14 @@
 	pry = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	defend_chance = 60
-	projectile_parry_chance = 45
+	projectile_parry_chance = 25
 
 /obj/item/weapon/melee/changeling/arm_blade/greater
 	name = "arm greatblade"
 	desc = "A grotesque blade made out of bone and flesh that cleaves through people and armor as a hot knife through butter."
 	armor_penetration = 30
 	defend_chance = 70
-	projectile_parry_chance = 60
+	projectile_parry_chance = 35
 
 /obj/item/weapon/melee/changeling/claw
 	name = "hand claw"
@@ -161,7 +161,7 @@
 	edge = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	defend_chance = 50
-	projectile_parry_chance = 30
+	projectile_parry_chance = 15
 
 /obj/item/weapon/melee/changeling/claw/greater
 	name = "hand greatclaw"
@@ -169,4 +169,4 @@
 	armor_penetration = 20
 	pry = 1
 	defend_chance = 60
-	projectile_parry_chance = 50
+	projectile_parry_chance = 25
