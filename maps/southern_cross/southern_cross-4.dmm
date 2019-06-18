@@ -368,7 +368,7 @@
 "hd" = (/turf/simulated/wall,/area/surface/outpost/research/xenoarcheology/emergencystorage)
 "he" = (/obj/machinery/space_heater,/obj/structure/cable/blue{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_x = 0; pixel_y = 24},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/emergencystorage)
 "hf" = (/obj/machinery/floodlight,/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/emergencystorage)
-"hg" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron{amount = 50},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/smes)
+"hg" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron{amount = 25},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/smes)
 "hh" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/obj/machinery/portable_atmospherics/powered/pump/filled{pixel_x = 0},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/smes)
 "hi" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/smes)
 "hj" = (/obj/machinery/atmospherics/omni/atmos_filter{tag_east = 5; tag_north = 1; tag_south = 2; tag_west = 0},/turf/simulated/floor/plating,/area/surface/outpost/research/xenoarcheology/smes)
