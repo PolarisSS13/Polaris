@@ -428,8 +428,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH
 
 	else if(href_list["set_weight"])
-		var/min_weight = calories_to_weight(mob_species.min_calories)
-		var/max_weight = calories_to_weight(mob_species.max_calories)
+		var/min_weight = calories_to_weight(mob_species.min_calories) + 10
+		var/max_weight = calories_to_weight(mob_species.max_calories) - 10
 		var/new_weight = input(user, "Choose your character's weight:\n([round(min_weight)]-[round(max_weight)])", "Character Preference", pref.weight) as num|null
 		if(new_weight && CanUseTopic(user))
 			pref.weight = max(min(round(text2num(new_weight)), max_weight), min_weight)
