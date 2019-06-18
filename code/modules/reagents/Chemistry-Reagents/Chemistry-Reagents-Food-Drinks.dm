@@ -1846,6 +1846,7 @@
 
 	glass_name = "cider"
 	glass_desc = "The second most Irish drink."
+	glass_special = list(DRINK_FIZZ)
 
 // Cocktails
 
@@ -3200,15 +3201,3 @@
 
 	glass_name = "fusionnaire"
 	glass_desc = "A relatively new cocktail, mostly served in the bars of NanoTrasen owned stations."
-	
-/datum/reagent/ethanol/cider
-	name = "Cider"
-	id = "cider"
-	description = "A sparkling alcoholic beverage derived from apples, quite refreshing."
-	taste_description = "farmyard apples"
-	color = "#EAB300"
-	strength = 5
-	glass_special = list(DRINK_FIZZ)
-
-	glass_name = "cider"
-	glass_desc = "A sparkling alcoholic beverage derived from apples, quite refreshing."
