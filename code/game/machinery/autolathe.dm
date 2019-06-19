@@ -19,6 +19,7 @@
 	var/busy = 0
 
 	var/mat_efficiency = 1
+	var/coeff = 1
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
@@ -252,6 +253,7 @@
 		update_use_power(2)
 
 		//Check if we still have the materials.
+		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
 				if(stored_material[material] < round(making.resources[material] * coeff) * multiplier)
