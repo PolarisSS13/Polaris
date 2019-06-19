@@ -151,7 +151,7 @@
 				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
 	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
-		sleep(5) //to allow the explosion to finish
+		spawn(5) //to allow the explosion to finish
 		new /obj/item/broken_sm(TS)
 		qdel(src)
 		return

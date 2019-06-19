@@ -39,3 +39,4 @@ changes:
   - tweak: "Every floor tile now has a minor (2%) chance to spawn with some dirt on it. The Janitor now has a job again."
   - tweak: "Similarly, every Sif grass tile now has a minor (5%) chance to spawn with some fancy eyebulb grass on it. It can be removed by clicking on it with harm intent."
   - rscadd: "Adds cats-in-boxes, which can be activated (once) to spawn cats. There's an orange tabby (Cargo cats) and a tuxedo (Runtime) version."
+  - bugfix: "Fixes a material duplication exploit."

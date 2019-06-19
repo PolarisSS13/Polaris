@@ -18,7 +18,7 @@
 	has_langs = list("Cat")
 
 	var/mob/living/friend = null // Our best pal, who we'll follow. Meow.
-	var/named = 0 //have I been named yet?
+	var/named = FALSE //have I been named yet?
 
 /mob/living/simple_mob/animal/passive/cat/Initialize()
 	icon_living = "[initial(icon_state)]"
@@ -95,7 +95,7 @@
 	gender = FEMALE
 	icon_state = "cat"
 	item_state = "cat"
-	named = 1
+	named = TRUE
 
 /mob/living/simple_mob/animal/passive/cat/kitten
 	name = "kitten"
@@ -126,7 +126,7 @@
 	gender = MALE
 	icon_state = "cat3"
 	item_state = "cat3"
-	named = 1
+	named = TRUE
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
 
 /datum/say_list/cat
@@ -147,23 +147,23 @@
 			else
 				to_chat(user, "<span class='notice'>You name \the [name]. Meow!</span>")
 				name = tmp_name
-				named = 1
+				named = TRUE
 	else
 		..()
 
-/obj/item/weapon/catinabox
+/obj/item/weapon/cat_box
 	name = "faintly purring box"
 	desc = "This box is purring faintly. You're pretty sure there's a cat inside it."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "box"
 	var/cattype = /mob/living/simple_mob/animal/passive/cat
 
-/obj/item/weapon/catinabox/attack_self(var/mob/user)
+/obj/item/weapon/cat_box/attack_self(var/mob/user)
 	var/turf/catturf = get_turf(src)
 	to_chat(user, "<span class='notice'>You peek into \the [name]-- and a cat jumps out!</span>")
 	new cattype(catturf)
 	new /obj/item/stack/material/cardboard(catturf) //if i fits i sits
 	qdel(src)
 
-/obj/item/weapon/catinabox/black
+/obj/item/weapon/cat_box/black
 	cattype = /mob/living/simple_mob/animal/passive/cat/black

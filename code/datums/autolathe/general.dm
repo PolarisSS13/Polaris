@@ -74,21 +74,25 @@
 	name = "steel sheets"
 	path =/obj/item/stack/material/steel
 	is_stack = 1
+	no_scale = 1 //prevents material duplication exploits
 
 /datum/category_item/autolathe/general/glass
 	name = "glass sheets"
 	path =/obj/item/stack/material/glass
 	is_stack = 1
+	no_scale = 1 //prevents material duplication exploits
 
 /datum/category_item/autolathe/general/rglass
 	name = "reinforced glass sheets"
 	path =/obj/item/stack/material/glass/reinforced
 	is_stack = 1
+	no_scale = 1 //prevents material duplication exploits
 
 /datum/category_item/autolathe/general/rods
 	name = "metal rods"
 	path =/obj/item/stack/rods
 	is_stack = 1
+	no_scale = 1 //prevents material duplication exploits
 
 /datum/category_item/autolathe/general/knife
 	name = "kitchen knife"
