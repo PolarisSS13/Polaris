@@ -20,7 +20,7 @@
 					"Asylum Seeker",
 					"Migrant",
 					"Traveller",
-					"Umemployed",
+					"Unemployed",
 					"Homeless",
 					"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
 					"Resident" = /decl/hierarchy/outfit/job/assistant/resident)
