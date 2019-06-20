@@ -6,7 +6,7 @@
 	species_restricted = null	//Unathi and Taj can wear leg armor now
 	w_class = ITEMSIZE_NORMAL
 	step_volume_mod = 1.3
-	can_hold_knife = 1
+	can_hold_knife = TRUE
 
 /obj/item/clothing/shoes/leg_guard/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = 0)
 	if(..()) //This will only run if no other problems occured when equiping.
