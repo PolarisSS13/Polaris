@@ -19,7 +19,6 @@
 	var/busy = 0
 
 	var/mat_efficiency = 1
-	var/coeff = 1
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
