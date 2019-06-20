@@ -107,7 +107,7 @@
 
 /datum/design/item/mechfab/gygax
 	category = "Gygax"
-/*                    //uncomment me to make the Serenity produceable in Robotics
+/*						//uncomment me to make the Serenity produceable in Robotics
 /datum/design/item/mechfab/gygax/chassis/serenity
 	name = "Serenity Chassis"
 	id = "serenity_chassis"
