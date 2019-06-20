@@ -33,5 +33,5 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: The Serenity medical mech is now available to create in Robotics. A lightly-armored variation of the Gygax, the Serenity is swift, effective, and a little too fragile to be practical.
+  - rscadd: The Serenity medical mech is now available as an adminspawn-only mech (for now!). A lightly-armored variation of the Gygax, the Serenity is swift, effective, and a little too fragile to be practical. A PR adding the Serenity to Robotics will open in two weeks.
   - rscadd: The Serenity, like the Firefighter, requires its own chassis, but uses the parts of its parent mech (the Gygax). Instead of armor plating, use plasteel, and instead of a targeting board, use the new Serenity medical control board.
