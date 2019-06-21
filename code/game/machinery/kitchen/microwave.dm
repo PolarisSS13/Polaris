@@ -17,7 +17,7 @@
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
 	clicksound = "button"
-//	var/datum/looping_sound/microwave/soundloop
+
 
 // see code/modules/food/recipes_microwave.dm for recipes
 
@@ -25,9 +25,8 @@
 *   Initialising
 ********************/
 
-/obj/machinery/microwave/initialize(mapload)
+/obj/machinery/microwave/New()
 	..()
-//	soundloop = new(list(src), FALSE)
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 
@@ -172,11 +171,11 @@
 /obj/machinery/microwave/interact(mob/user as mob) // The microwave Menu
 	var/dat = ""
 	if(src.broken > 0)
-		dat = "<TT>Bzzzzttttt</TT>"
+		dat = {"<TT>Bzzzzttttt</TT>"}
 	else if(src.operating)
-		dat = "<TT>Microwaving in progress!<BR>Please wait...!</TT>"
+		dat = {"<TT>Microwaving in progress!<BR>Please wait...!</TT>"}
 	else if(src.dirty==100)
-		dat = "<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"
+		dat = {"<TT>This microwave is dirty!<BR>Please clean it before use!</TT>"}
 	else
 		var/list/items_counts = new
 		var/list/items_measures = new
@@ -203,12 +202,12 @@
 		for (var/O in items_counts)
 			var/N = items_counts[O]
 			if (!(O in items_measures))
-				dat += "<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"
+				dat += {"<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s<BR>"}
 			else
 				if (N==1)
-					dat += "<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"
+					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures[O]]<BR>"}
 				else
-					dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"
+					dat += {"<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]<BR>"}
 
 		for (var/datum/reagent/R in reagents.reagent_list)
 			var/display_name = R.name
@@ -216,20 +215,19 @@
 				display_name = "Hotsauce"
 			if (R.id == "frostoil")
 				display_name = "Coldsauce"
-			dat += "<B>[display_name]:</B> [R.volume] unit\s<BR>"
+			dat += {"<B>[display_name]:</B> [R.volume] unit\s<BR>"}
 
 		if (items_counts.len==0 && reagents.reagent_list.len==0)
-			dat = "<B>The microwave is empty</B><BR>"
+			dat = {"<B>The microwave is empty</B><BR>"}
 		else
-			dat = "<b>Ingredients:</b><br>[dat]"
-	dat += "<HR><BR>"
-	dat += "<A href='?src=\ref[src];action=cook'>Turn on!<BR>"
+			dat = {"<b>Ingredients:</b><br>[dat]"}
+		dat += {"<HR><BR>\
+<A href='?src=\ref[src];action=cook'>Turn on!<BR>\
+<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
+"}
 
-	dat += 	"<A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>"
-
-	var/datum/browser/popup = new(user, "Microwave", "Microwave Oven", 300, 390, src)
-	popup.set_content(jointext("<HEAD><TITLE>Microwave Controls</TITLE></HEAD>[dat]", null))
-	popup.open()
+	user << browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
+	onclose(user, "microwave")
 	return
 
 
@@ -317,21 +315,17 @@
 	src.operating = 1
 	src.icon_state = "mw1"
 	src.updateUsrDialog()
-	set_light(1.5)
-//	soundloop.start()
 
 /obj/machinery/microwave/proc/abort()
 	src.operating = 0 // Turn it off again aferwards
 	src.icon_state = "mw"
 	src.updateUsrDialog()
-	after_finish_loop()
 
 /obj/machinery/microwave/proc/stop()
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	src.operating = 0 // Turn it off again aferwards
 	src.icon_state = "mw"
 	src.updateUsrDialog()
-	after_finish_loop()
 
 /obj/machinery/microwave/proc/dispose()
 	for (var/obj/O in ((contents-component_parts)-circuit))
@@ -347,7 +341,6 @@
 	src.icon_state = "mwbloody1" // Make it look dirty!!
 
 /obj/machinery/microwave/proc/muck_finish()
-	after_finish_loop()
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	src.visible_message("<span class='warning'>The microwave gets covered in muck!</span>")
 	src.dirty = 100 // Make it dirty so it can't be used util cleaned
@@ -357,7 +350,6 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/broke()
-	after_finish_loop()
 	var/datum/effect/effect/system/spark_spread/s = new
 	s.set_up(2, 1, src)
 	s.start()
@@ -369,7 +361,6 @@
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/fail()
-	after_finish_loop()
 	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	var/amount = 0
 	for (var/obj/O in (((contents - ffuu) - component_parts) - circuit))
@@ -383,11 +374,6 @@
 	ffuu.reagents.add_reagent("carbon", amount)
 	ffuu.reagents.add_reagent("toxin", amount/10)
 	return ffuu
-
-/obj/machinery/microwave/proc/after_finish_loop()
-	set_light(0)
-//	soundloop.stop()
-	update_icon()
 
 /obj/machinery/microwave/Topic(href, href_list)
 	if(..())
