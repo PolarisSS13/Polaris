@@ -253,11 +253,65 @@
 
 	if(href_list["manage_members"])
 		. = 1
+		index = 7
 
 	if(href_list["party_announcement"])
 		. = 1
-		party_announcement = sanitize(copytext(input(usr, "Enter a party announcement, this will be viewed by party members only.", "Party Announcement", null)  as message,1,200))
+		party_announcement = sanitize(copytext(input(usr, "Enter a party announcement, this will be viewed by party members only.", "Party Announcement", current_party.party_message)  as message,1,200))
 		if(!party_announcement)
 			return
 		if(current_party)
 			current_party.party_message = party_announcement
+
+	if(href_list["set_primary_color"])
+		. = 1
+		var/prim_color
+		prim_color = input(user,"Choose Color") as color
+		if(!prim_color)
+			return
+
+		current_party.primary_color = prim_color
+
+
+	if(href_list["set_secondary_color"])
+		. = 1
+		var/sec_color
+		sec_color = input(user,"Choose Color") as color
+		if(!sec_color)
+			return
+
+		current_party.secondary_color = sec_color
+
+	if(href_list["rename_party"])
+		. = 1
+		var/new_name
+		new_name = sanitize(copytext(input(usr, "Enter a new party name.", "Party Name", current_party.party_message)  as text,1,40))
+		if(!new_name)
+			return
+		if(current_party)
+			current_party.name = new_name
+
+
+	if(href_list["Assign New Leader"])
+		. = 1
+		if(current_party)
+			var/datum/party_member/p_members = current_party.members
+			if(!p_members)
+				return
+			else
+				var/new_leader = input(user, "Select a new party leader", "New Leader")  as null|anything in p_members
+				var/choice = alert(player.current,"Resign as party leader and set [new_leader.name] as new party leader?","[new_leader.name] as new party leader?","Yes","No")
+				if(choice == "Yes")
+					current_party.party_leader = new_leader
+				else
+					return
+
+	if(href_list["apply_for_party"])
+		. = 1
+		var/new_name
+		new_name = sanitize(copytext(input(usr, "Enter a new party name.", "Party Name", current_party.party_message)  as text,1,40))
+		if(!new_name)
+			return
+		if(current_party)
+			current_party.name = new_name
+

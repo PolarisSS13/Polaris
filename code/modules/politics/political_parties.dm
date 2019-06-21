@@ -10,7 +10,7 @@ var/global/list/political_parties = list()
 
 	var/party_message = " "						//party's announcement board message shown to members only
 
-	var/datum/party_member/members
+	var/list/datum/party_member/members
 	var/datum/party_member/party_leader
 
 	var/monthly_cost = 3500
