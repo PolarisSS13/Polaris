@@ -6,9 +6,9 @@
 	intelligence_level = SA_ANIMAL
 	icon_state = "cat2"
 	item_state = "cat2"
-	icon_living = "cat2"
-	icon_dead = "cat2_dead"
-	icon_rest = "cat2_rest"
+	icon_living = "[initial(icon_state)]"
+	icon_dead = "[initial(icon_state)]_dead"
+	icon_rest = "[initial(icon_state)]_rest"
 
 	investigates = 1
 	specific_targets = 1 //Only targets with Found()
@@ -161,9 +161,6 @@
 	gender = FEMALE
 	icon_state = "cat"
 	item_state = "cat"
-	icon_living = "cat"
-	icon_dead = "cat_dead"
-	icon_rest = "cat_rest"
 	befriend_job = "Chief Medical Officer"
 
 /mob/living/simple_animal/cat/kitten
@@ -188,9 +185,6 @@
 	gender = MALE
 	icon_state = "cat3"
 	item_state = "cat3"
-	icon_living = "cat3"
-	icon_dead = "cat3_dead"
-	icon_rest = "cat3_rest"
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
 	friend_name = "Erstatz Vryroxes"
 
