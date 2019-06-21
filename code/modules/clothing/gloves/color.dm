@@ -1,8 +1,6 @@
 /obj/item/clothing/gloves
 	desc = "you aren't supposed to see this."
 	name = "strange gloves"
-	icon_state = "black"
-	item_state = "bgloves"
 	drop_sound = 'sound/items/drop/gloves.ogg'
 
 /obj/item/clothing/gloves/yellow
