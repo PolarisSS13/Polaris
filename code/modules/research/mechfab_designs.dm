@@ -623,15 +623,7 @@
 	req_tech = list(TECH_POWER= 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 7500, "silver" = 375, "glass" = 750)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
-/*
-/datum/design/item/mecha/medbeam
-	name = "ML-3/M rapid restoration system"
-	desc = "A portable medical system used to treat external injuries from afar."
-	id = "mech_medbeam"
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 6)
-	materials = list(DEFAULT_WALL_MATERIAL = 8000, "gold" = 2000, "silver" = 1750, "diamond" = 1500, "phoron" = 4000)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/medbeam
-*/
+
 /datum/design/item/synthetic_flash
 	name = "Synthetic Flash"
 	id = "sflash"

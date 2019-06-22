@@ -227,7 +227,7 @@
 /obj/item/projectile/beam/medbeam
 	name = "healing beam"
 	icon_state = "healbeam"
-	damage = 0
+	nodamage = TRUE
 	no_attack_log = TRUE
 	damage_type = BURN
 	check_armour = "laser"
