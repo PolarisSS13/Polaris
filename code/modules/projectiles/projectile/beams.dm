@@ -223,3 +223,32 @@
 	name = "stun beam"
 	icon_state = "stun"
 	agony = 30
+
+/obj/item/projectile/beam/medbeam
+	name = "healing beam"
+	icon_state = "healbeam"
+	damage = 0
+	no_attack_log = 1
+	damage_type = BURN
+	check_armour = "laser"
+	light_color = "#80F5FF"
+
+	combustion = FALSE
+
+	muzzle_type = /obj/effect/projectile/muzzle/medbeam
+	tracer_type = /obj/effect/projectile/tracer/medbeam
+	impact_type = /obj/effect/projectile/impact/medbeam
+
+/obj/item/projectile/beam/medbeam/on_hit(var/atom/target, var/blocked = 0)
+	if(istype(target, /mob/living/carbon/human))
+		var/mob/living/carbon/human/M = target
+		if(M.health < M.maxHealth)
+			new /obj/effect/temp_visual/heal(get_turf(M))
+			new /obj/effect/temp_visual/heal(get_turf(M))
+			new /obj/effect/temp_visual/heal(get_turf(M))
+			to_chat(target, "<span class='notice'>As the beam strikes you, your injuries close up!</span>")
+			M.adjustBruteLoss(-15)
+			M.adjustFireLoss(-15)
+			M.adjustToxLoss(-5)
+			M.adjustOxyLoss(-5)
+	return 1

@@ -661,3 +661,14 @@
 		S.reagents.add_reagent(reagent,amount)
 		S.chassis.use_power(energy_drain)
 	return 1
+
+/obj/item/mecha_parts/mecha_equipment/weapon/energy/medbeam
+	equip_cooldown = 6
+	name = "\improper ML-3 \"Medbeam\" rapid restoration system"
+	desc = "The ML-3 'Medbeam' is a portable medical system used to treat external injuries from afar. It uses advanced nanite technology to deliver rapid restoration nanites along a targeted path, which self-destruct after healing their target."
+	icon_state = "mecha_medbeam"
+	energy_drain = 1000
+	projectile = /obj/item/projectile/beam/medbeam
+	fire_sound = 'sound/weapons/eluger.ogg'
+	equip_type = EQUIP_UTILITY
+	origin_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5, TECH_BIO = 6, TECH_POWER = 6)

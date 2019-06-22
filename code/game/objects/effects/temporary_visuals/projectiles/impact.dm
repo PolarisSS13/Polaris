@@ -79,3 +79,9 @@
 	light_range = 4
 	light_power = 3
 	light_color = "#3300ff"
+
+/obj/effect/projectile/impact/medbeam
+	icon_state = "impact_medbeam" //placeholder
+	light_range = 2
+	light_power = 0.5
+	light_color = "#80F5FF"

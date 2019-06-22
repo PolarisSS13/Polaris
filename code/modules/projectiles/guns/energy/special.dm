@@ -283,3 +283,20 @@ obj/item/weapon/gun/energy/staff/focus
 		power_cycle = FALSE
 	else
 		to_chat(user, "<span class='notice'>\The [src] is already powering up!</span>")
+
+/obj/item/weapon/gun/energy/medbeam
+	name = "rapid restoration system"
+	desc = "The ML-3 'Medbeam' is a portable medical system used to treat external injuries from afar. It uses advanced nanite technology to deliver rapid restoration nanites along a targeted path, which self-destruct after healing their target. The ML-3/M takes heavy-capacity power cells."
+	force = 5
+	icon_state = "medbeam"
+	item_state = "medbeam"
+	slot_flags = SLOT_BELT
+	accuracy = 100
+	fire_delay = 12
+	fire_sound = 'sound/weapons/eluger.ogg'
+
+	projectile_type = /obj/item/projectile/beam/medbeam
+
+	accept_cell_type = /obj/item/weapon/cell
+	cell_type = /obj/item/weapon/cell/high
+	charge_cost = 2500
