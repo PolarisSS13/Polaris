@@ -228,7 +228,7 @@
 	name = "healing beam"
 	icon_state = "healbeam"
 	damage = 0
-	no_attack_log = 1
+	no_attack_log = TRUE
 	damage_type = BURN
 	check_armour = "laser"
 	light_color = "#80F5FF"
