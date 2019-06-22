@@ -243,9 +243,13 @@
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = target
 		if(M.health < M.maxHealth)
-			new /obj/effect/temp_visual/heal(get_turf(M))
-			new /obj/effect/temp_visual/heal(get_turf(M))
-			new /obj/effect/temp_visual/heal(get_turf(M))
+			var/obj/effect/overlay/pulse = new /obj/effect/overlay(get_turf(M))
+			pulse.icon = 'icons/effects/effects.dmi'
+			pulse.icon_state = "heal"
+			pulse.name = "heal"
+			pulse.anchored = 1
+			spawn(20)
+				qdel(pulse)
 			to_chat(target, "<span class='notice'>As the beam strikes you, your injuries close up!</span>")
 			M.adjustBruteLoss(-15)
 			M.adjustFireLoss(-15)
