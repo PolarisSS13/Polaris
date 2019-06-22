@@ -33,4 +33,4 @@ delete-after: True
 # Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: Adds the rapid restoration system to the code - a gun that fires healing beams. Anyone struck by the beam will have their external injuries partially healed. Uses full-size power cells (like APCs). The rapid restoration system is currently adminspawn-only. A mech-mounted version also exists, but is similarly unobtainable.
+  - rscadd: Adds the rapid restoration system to the code - a gun that fires healing beams. Anyone struck by the beam will have their external injuries partially healed. Uses full-size power cells (like APCs). The rapid restoration system is currently adminspawn-only. A mech-mounted version also exists, but is similarly unobtainable. 
