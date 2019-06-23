@@ -171,6 +171,8 @@
 	icon_state = "tele0"
 	dir = 4
 	var/accurate = 0
+	var/failprob = 5 //percentage chance for teleporter to space you, default 5
+	var/testfire_broken = FALSE
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
@@ -214,7 +216,7 @@
 			O.show_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
 	if(istype(M, /atom/movable))
-		if(prob(5) && !accurate) //oh dear a problem, put em in deep space
+		if(prob(failprob) && !accurate) //oh dear a problem, put em in deep space- and if someone's tampered with the teleporter, even testfires won't help
 			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), 3), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision
@@ -226,8 +228,9 @@
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
-		accurate = 1
-		spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes
+		if(testfire_broken == FALSE)
+			accurate = 1
+			spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes... if the testfire system works
 		for(var/mob/B in hearers(src, null))
 			B.show_message("<span class='notice'>Test fire completed.</span>")
 	return
@@ -324,14 +327,21 @@
 	dir = 4
 	var/active = 0
 	var/engaged = 0
+	var/locked = TRUE //starts locked
+	var/fixlock = FALSE //is the lock fixed, or can it be toggled?
+	var/tele_broken = FALSE
+	panel_open = FALSE
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
 	circuit = /obj/item/weapon/circuitboard/teleporter_station
 	var/obj/machinery/teleport/hub/com
+	var/datum/wires/telestation/wires = null
+	req_access = list(access_teleporter)
 
 /obj/machinery/teleport/station/New()
 	..()
+	wires = new(src)
 	overlays.Cut()
 	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
@@ -343,23 +353,54 @@
 	RefreshParts()
 
 /obj/machinery/teleport/station/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(default_deconstruction_screwdriver(user, W))
-		return
+	if(W.is_screwdriver())
+		panel_open = !panel_open
+		user.visible_message("<span class='warning'>[user] screws the teleporter station maintenance panel [panel_open ? "open" : "closed"].</span>",
+		"<span class='notice'>You screw the maintenance panel [panel_open ? "open" : "closed"].</span>")
+		playsound(src.loc, W.usesound, 50, 1)
 	else if(default_deconstruction_crowbar(user, W))
 		return
 	else if(default_part_replacement(user, W))
 		return
+	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
+		interact(user)
+
+	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
+		if(panel_open)
+			to_chat(user,"You must close the maintenance panel to swipe an ID card.")
+		else if(stat & (BROKEN|NOPOWER))
+			to_chat(user,"Nothing happens.")
+		else
+			if(src.allowed(usr) && !isWireCut(WIRE_LOCK))
+				locked = !locked
+				to_chat(user,"You [ locked ? "lock" : "unlock"] the teleporter station.")
+			else
+				to_chat(user,"<span class='warning'>Access denied.</span>")
 	else
 		attack_hand()
 
-/obj/machinery/teleport/station/attack_ai()
-	attack_hand()
+/obj/machinery/teleport/station/interact(mob/living/user as mob)
+	if(!panel_open || istype(user, /mob/living/silicon/ai))
+		return
+	user.set_machine(src)
+	wires.Interact(user)
 
-/obj/machinery/teleport/station/attack_hand()
-	if(engaged)
+/obj/machinery/teleport/station/attack_ai()
+	if(engaged) //bypasses the lock
 		disengage()
 	else
 		engage()
+
+/obj/machinery/teleport/station/attack_hand(mob/user as mob)
+	if(panel_open)
+		interact(user)
+	else if(!locked)
+		if(engaged)
+			disengage()
+		else
+			engage()
+	else
+		to_chat(user, "<span class='warning'>\The [src] buzzes as you try and use it. It must be locked.</span>")
 
 /obj/machinery/teleport/station/proc/engage()
 	if(stat & (BROKEN|NOPOWER))
@@ -390,6 +431,18 @@
 	add_fingerprint(usr)
 	engaged = 0
 	return
+
+/obj/machinery/teleport/station/proc/lock()
+	if(stat & (BROKEN|NOPOWER))
+		return
+	if(!fixlock)
+		locked = !locked
+	else
+		for(var/mob/O in hearers(src, null))
+			O.show_message("<span class='warning'>Locking mechanism failed.</span>", 2)
+
+/obj/machinery/teleport/station/proc/isWireCut(var/wireIndex)
+	return wires.IsIndexCut(wireIndex)
 
 /obj/machinery/teleport/station/verb/testfire()
 	set name = "Test Fire Teleporter"

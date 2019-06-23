@@ -34,3 +34,6 @@ delete-after: True
 # Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
   - rscadd: You can now construct and deconstruct teleporters. You'll need certain subspace parts from telecomms storage or R&D, as well as high bluespace levels for the circuits.
+  - tweak: Teleporter stations can now be locked and unlocked with a teleporter-access ID. A locked teleporter cannot be changed from its current state (if it's disabled, it stays disabled; if it's enabled, it stays enabled).
+  - tweak: Teleporter stations now have six wires- two dummy wires, one that controls the lock, one that enables and disables it, one that test-fires it, and one that can be pulsed to randomise the chances of someone being spaced. (Don't pulse that one.)
+  - rscdel: Because the teleporters are now secure on their own, NanoTrasen has removed the turrets from the teleporter rooms. Safety first, people!
