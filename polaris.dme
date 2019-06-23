@@ -372,6 +372,7 @@
 #include "code\datums\wires\smartfridge.dm"
 #include "code\datums\wires\smes.dm"
 #include "code\datums\wires\suit_storage_unit.dm"
+#include "code\datums\wires\telestation.dm"
 #include "code\datums\wires\tesla_coil.dm"
 #include "code\datums\wires\vending.dm"
 #include "code\datums\wires\wires.dm"
