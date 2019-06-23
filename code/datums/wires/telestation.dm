@@ -34,6 +34,8 @@
 
 		if(WIRE_ACTIVATE)
 			if(!mended)
+				if(C.engaged)
+					C.disengage()
 				C.tele_broken = TRUE
 			else
 				C.tele_broken = FALSE

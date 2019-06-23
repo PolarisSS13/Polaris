@@ -405,7 +405,8 @@
 /obj/machinery/teleport/station/proc/engage()
 	if(stat & (BROKEN|NOPOWER))
 		return
-
+	if(tele_broken)
+		return
 	if(com)
 		com.icon_state = "tele1"
 		use_power(5000)
