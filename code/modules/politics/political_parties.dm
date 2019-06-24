@@ -10,6 +10,8 @@ var/global/list/political_parties = list()
 
 	var/party_message = " "						//party's announcement board message shown to members only
 
+	var/list/datum/party_member/applicants
+
 	var/list/datum/party_member/members
 	var/datum/party_member/party_leader
 
@@ -41,6 +43,39 @@ var/global/list/political_parties = list()
 	var/position = "Party Member"
 	var/unique_ID
 	var/is_admin = 0
+	var/email
+
+	var/join_date //date this person joins
+
+/datum/party_applicant
+	var/name
+	var/message //The application message someone applies with.
+	var/unique_ID
+	var/email
+
+	var/apply_date //date this person joins
+
+/proc/get_party_email(var/datum/party/P)
+	var/domain = get_party_domain(P)
+	var/email = "admin@[domain]"
+
+	return email
+
+/proc/get_party_member_email(var/datum/party/P, var/datum/party_member/M)
+	var/domain = get_party_domain(P)
+	var/prefix = replacetext(lowertext(P.name), " ", "_")
+	var/email = "[prefix]@[domain]"
+	if(ntnet_global.does_email_exist(email))
+		email = "[prefix][rand(100, 999)]@[domain]"
+	if(ntnet_global.does_email_exist(email))
+		email = get_party_email(P)
+
+	return email
+
+/proc/get_party_domain(var/datum/party/P)
+	var/domain = "[replacetext(lowertext(P.name), " ", "_")].parties.nanotrasen.gov"
+
+	return domain
 
 /proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/mob/living/carbon/human/H)
 
@@ -53,6 +88,14 @@ var/global/list/political_parties = list()
 	P.password = pass
 	P.id = md5("[P.name]")
 
+	P.party_email = get_party_email(P)
+
+	var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+	EA.password = GenerateKey()
+	EA.login = 	P.party_email
+
+	P.creation_time = current_date_string
+
 	political_parties += P
 
 	return P
@@ -64,17 +107,58 @@ var/global/list/political_parties = list()
 
 	return 1
 
-/proc/create_party_member(var/mob/living/carbon/human/H, var/position, var/admin, var/datum/party/party)
+/proc/create_party_member(var/mob/living/carbon/human/H, var/position, var/email, var/admin, var/datum/party/party)
 	//First of all, let's make a party member.
 	var/datum/party_member/M = new()
 	M.name = H.real_name
 	M.leader = 1
 	M.position = position
 	M.unique_ID = H.mind.prefs.unique_id
+	M.email = email
 	M.is_admin = admin
+	M.email = get_party_member_email(party, M)
+
+	var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+	EA.password = GenerateKey()
+	EA.login = 	M.email
+
 	party.members += M
 
+	M.join_date = current_date_string
+
+	// Send an email to the party member.
+
+	var/datum/computer_file/data/email_account/address = get_email(M.email)
+
+	var/datum/computer_file/data/email_message/message = new()
+	message.title = "You have joined a party: [party.name]"
+
+	message.stored_data = "This is a confirmation email showing that you have joined [party.name].\n\n \
+	To access the party, you must login with it's password. \n \
+	The current password is: [party.password] \n \
+	Use this to login."
+
+	message.source = "noreply@parties.nanotrasen.gov"
+
+	address.receive_mail(message, 1)
+
 	return M
+
+
+/proc/create_applicant(var/mob/living/carbon/human/H, var/email, var/msg, var/datum/party/party)
+	//First of all, let's make a party member.
+	var/datum/party_applicant/A = new()
+	A.name = H.real_name
+	A.unique_ID = H.mind.prefs.unique_id
+	A.message = msg
+	A.email = email
+	A.apply_date = current_date_string
+
+	party.applicants += A
+
+
+
+	return A
 
 /proc/create_party_leader(var/mob/living/carbon/human/H, var/datum/party/party)
 	var/L = create_party_member(H, "Party Leader", 1, party)

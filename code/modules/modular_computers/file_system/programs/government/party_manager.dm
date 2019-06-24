@@ -39,7 +39,7 @@
 
 	data["index"] = index
 	data["page_msg"] = page_msg
-	data["parties"] = political_parties
+//	data["parties"] = political_parties
 
 
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
@@ -53,14 +53,14 @@
 		can_login = 1
 		user_uid = H.client.prefs.unique_id
 		data["user_uid"] = user_uid
-		data["party_leader"] = I.registered_name
+//		data["party_leader"] = I.registered_name
 
 
 
 	if(current_party)
 		party_announcement = current_party.party_message
-		data["is_leader"] = is_party_leader(user_uid, current_party)
-		data["current_party_name"] = current_party.name
+//		data["is_leader"] = is_party_leader(user_uid, current_party)
+//		data["current_party_name"] = current_party.name
 		data["current_party"] = current_party
 		data["party_announcement"] = party_announcement
 
@@ -266,7 +266,7 @@
 	if(href_list["set_primary_color"])
 		. = 1
 		var/prim_color
-		prim_color = input(user,"Choose Color") as color
+		prim_color = input(usr,"Choose Color") as color
 		if(!prim_color)
 			return
 
@@ -276,7 +276,7 @@
 	if(href_list["set_secondary_color"])
 		. = 1
 		var/sec_color
-		sec_color = input(user,"Choose Color") as color
+		sec_color = input(usr,"Choose Color") as color
 		if(!sec_color)
 			return
 
@@ -292,15 +292,15 @@
 			current_party.name = new_name
 
 
-	if(href_list["Assign New Leader"])
+	if(href_list["assign_new_leader"])
 		. = 1
 		if(current_party)
 			var/datum/party_member/p_members = current_party.members
 			if(!p_members)
 				return
 			else
-				var/new_leader = input(user, "Select a new party leader", "New Leader")  as null|anything in p_members
-				var/choice = alert(player.current,"Resign as party leader and set [new_leader.name] as new party leader?","[new_leader.name] as new party leader?","Yes","No")
+				var/datum/party_member/new_leader = input(usr, "Select a new party leader", "New Leader")  as null|anything in p_members
+				var/choice = alert(usr,"Resign as party leader and set [new_leader.name] as new party leader?","[new_leader.name] as new party leader?","Yes","No")
 				if(choice == "Yes")
 					current_party.party_leader = new_leader
 				else

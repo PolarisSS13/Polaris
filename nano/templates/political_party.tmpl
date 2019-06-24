@@ -6,12 +6,12 @@
 {{if data.current_party}}
 	<h2>{{:data.current_party_name}}</h2><br>
 	<h3>Party Announcement:</h3><p>
-{{:data.party_announcement}}
+	{{:data.party_announcement}}
 
 	{{:helper.link("View Party Page", null, {'login' : 1})}}
 	{{:helper.link("Log Out", null, {'party_logout' : 1})}}   
 
-	  {{else}}
+	{{else}}
 <p>If you would like to login to your political party. Please login here.
 </p>
 {{:helper.link("Login", null, {'login' : 1})}}
@@ -20,7 +20,7 @@
 
 <h2>Other Options</h2>
 <hr>
-{{:helper.link("Join A Party", null, {'join_party' : 1})}}
+{{:helper.link("Apply for Party", null, {'apply_for_party' : 1})}}
 
 {{:helper.link("Register a Party", null, {'register_party' : 1})}}
 
@@ -146,11 +146,9 @@
 
 	{{:helper.link("Edit Party Announcement", null, {'party_announcement' : 1})}}   
 
-	{{:helper.link("Party Settings", null, {'party_settings' : 1})}}   	
-	{{:helper.link("View Party Members", null, {'back' : 1})}}   
+	{{:helper.link("Party Settings", null, {'party_settings' : 1})}}  
 
-
-	{{:helper.link("Manage Members", null, {'back' : 1})}} <br>
+	{{:helper.link("Manage Members", null, {'manage_members' : 1})}} <br>
 
 	{{:helper.link("Log Out", null, {'party_logout' : 1})}}   
 
@@ -159,10 +157,10 @@
 {{if data.index == 6}}
 	<h3>Party Settings:</h3><p>
 
-	{{:helper.link("Change Party Name", null, {'back' : 1})}} 
-	{{:helper.link("Change Primary Color", null, {'back' : 1})}}
+	{{:helper.link("Change Party Name", null, {'rename_party' : 1})}} 
+	{{:helper.link("Change Primary Color", null, {'set_primary_color' : 1})}}
 
-	{{:helper.link("Change Secondary Color", null, {'back' : 1})}} 
+	{{:helper.link("Change Secondary Color", null, {'set_secondary_color' : 1})}} 
 
 
 {{/if}}
@@ -170,7 +168,7 @@
 {{if data.index == 7}}
 	<h3>Manage Party:</h3><p>
 
-
+	{{:helper.link("Assign New Leader", null, {'assign_new_leader' : 1})}} <br>
 
 
 {{/if}}
