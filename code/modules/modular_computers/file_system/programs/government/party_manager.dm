@@ -285,7 +285,7 @@
 	if(href_list["rename_party"])
 		. = 1
 		var/new_name
-		new_name = sanitize(copytext(input(usr, "Enter a new party name.", "Party Name", current_party.party_message)  as text,1,40))
+		new_name = sanitize(copytext(input(usr, "Enter a new party name.", "Party Name", current_party.name)  as text,1,40))
 		if(!new_name)
 			return
 		if(current_party)
@@ -308,10 +308,5 @@
 
 	if(href_list["apply_for_party"])
 		. = 1
-		var/new_name
-		new_name = sanitize(copytext(input(usr, "Enter a new party name.", "Party Name", current_party.party_message)  as text,1,40))
-		if(!new_name)
-			return
-		if(current_party)
-			current_party.name = new_name
+		for
 
