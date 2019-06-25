@@ -62,6 +62,7 @@
 	switch(index)
 		if(WIRE_LOCK)
 			C.visible_message("\icon[C] *beep-beep*", "\icon[C] *beep-beep*")
+			C.com.failprob = min(90, C.com.failprob + 15 + rand(-15, 30)) //add 15, then add between -15 and +30, to a maximum of 90. scrambles, but (un)locks.
 			C.lock()
 
 		if(WIRE_TESTFIRE)
@@ -82,7 +83,7 @@
 
 		if(WIRE_RANDOMISE)
 			if(C.com)
-				C.com.failprob = min(90, C.com.failprob + 10 + rand(-15, 30)) //add 10, then add between -15 and +30, to a maximum of 90
+				C.com.failprob = min(90, C.com.failprob + 10 + rand(-15, 30)) //add 10, then add between -15 and +30, to a maximum of 90. scrambles and doesn't unlock, but will tell you if it's really bad.
 				if(C.com.failprob > 75)
 					C.visible_message("<span class='warning'>\icon[C] *Alert: bluespace matrix out of alignment.*</span>", "<span class='warning'>\icon[C] *Alert: bluespace matrix out of alignment.*</span>")
 	return
