@@ -308,5 +308,5 @@
 
 	if(href_list["apply_for_party"])
 		. = 1
-		for
+
 
