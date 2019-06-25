@@ -6,7 +6,7 @@
 #define WIRE_TESTFIRE 	2 //pulse to testfire, cut to stop testfires working
 #define WIRE_ACTIVATE	4 //pulse to activate/deactivate, cut to disable the teleporter
 #define WIRE_DUMMY_1	8 //does nothing
-#define WIRE_DUMMY_2	16 //does nothing
+#define WIRE_ELECTRIC	16 //creates electrosmoke when pulsed, zaps you when cut
 #define WIRE_RANDOMISE	32 //pulse to randomise the "get spaced" chance, cut to reset it to 5%
 
 /datum/wires/telestation/GetInteractWindow()
@@ -43,7 +43,11 @@
 		if(WIRE_DUMMY_1)
 			return
 
-		if(WIRE_DUMMY_2)
+		if(WIRE_ELECTRIC)
+			if(!mended)
+				C.electrified = TRUE
+			else
+				C.electrified = FALSE
 			return
 
 		if(WIRE_RANDOMISE)
@@ -72,12 +76,13 @@
 		if(WIRE_DUMMY_1)
 			return
 
-		if(WIRE_DUMMY_2)
+		if(WIRE_ELECTRIC)
+			new /obj/effect/effect/smoke/elemental/shock(get_turf(C))
 			return
 
 		if(WIRE_RANDOMISE)
 			if(C.com)
-				C.com.failprob = rand(1,100)
+				C.com.failprob = min(90, C.com.failprob + 10 + rand(-15, 30)) //add 10, then add between -15 and +30, to a maximum of 90
 				if(C.com.failprob > 75)
 					C.visible_message("<span class='warning'>\icon[C] *Alert: bluespace matrix out of alignment.*</span>", "<span class='warning'>\icon[C] *Alert: bluespace matrix out of alignment.*</span>")
 	return

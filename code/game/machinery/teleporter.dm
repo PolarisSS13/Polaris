@@ -216,7 +216,7 @@
 			O.show_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
 		return
 	if(istype(M, /atom/movable))
-		if(prob(failprob) && !accurate) //oh dear a problem, put em in deep space- and if someone's tampered with the teleporter, even testfires won't help
+		if(prob(failprob) && (!accurate || failprob >= 25)) //oh dear a problem, put em in deep space- and if someone's tampered with the teleporter, even testfires won't help
 			do_teleport(M, locate(rand((2*TRANSITIONEDGE), world.maxx - (2*TRANSITIONEDGE)), rand((2*TRANSITIONEDGE), world.maxy - (2*TRANSITIONEDGE)), 3), 2)
 		else
 			do_teleport(M, com.locked) //dead-on precision
@@ -230,7 +230,7 @@
 		s.start()
 		if(testfire_broken == FALSE)
 			accurate = 1
-			spawn(3000)	accurate = 0 //Accurate teleporting for 5 minutes... if the testfire system works
+			spawn(5 MINUTES)	accurate = 0 //Accurate teleporting for 5 minutes... if the testfire system works
 		for(var/mob/B in hearers(src, null))
 			B.show_message("<span class='notice'>Test fire completed.</span>")
 	return
@@ -330,6 +330,7 @@
 	var/locked = TRUE //starts locked
 	var/fixlock = FALSE //is the lock fixed, or can it be toggled?
 	var/tele_broken = FALSE
+	var/electrified = FALSE
 	panel_open = FALSE
 	use_power = 1
 	idle_power_usage = 10
@@ -392,7 +393,11 @@
 		engage()
 
 /obj/machinery/teleport/station/attack_hand(mob/user as mob)
-	if(panel_open)
+	if(!istype(user, /mob/living/silicon))
+		if(electrified == TRUE)
+			if(shock(user, 100))
+				return
+	else if(panel_open)
 		interact(user)
 	else if(!locked)
 		if(engaged)
