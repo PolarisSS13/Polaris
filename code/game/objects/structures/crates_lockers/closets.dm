@@ -384,7 +384,7 @@
 	if(!opened)
 		icon_state = icon_closed
 		if(sealed)
-			overlays += "sealed"
+			overlays += "welded"
 	else
 		icon_state = icon_opened
 
