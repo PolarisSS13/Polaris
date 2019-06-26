@@ -121,6 +121,14 @@
 			M.sleeping = max(M.sleeping, 20)
 			M.drowsyness = max(M.drowsyness, 60)
 
+/datum/reagent/nutriment/mayo
+	name = "mayonnaise"
+	id = "mayo"
+	description = "A thick, bitter sauce."
+	taste_description = "unmistakably mayonnaise"
+	nutriment_factor = 10
+	color = "#FFFFFF"
+
 /datum/reagent/nutriment/flour
 	name = "Flour"
 	id = "flour"
@@ -207,6 +215,76 @@
 
 	if(volume >= 3)
 		T.wet_floor()
+
+/datum/reagent/nutriment/peanutoil
+	name = "Peanut Oil"
+	id = "peanutoil"
+	description = "An oil derived from various types of nuts."
+	taste_description = "nuts"
+	taste_mult = 0.3
+	reagent_state = LIQUID
+	nutriment_factor = 15
+	color = "#4F3500"
+
+/datum/reagent/nutriment/peanutoil/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+
+	var/hotspot = (locate(/obj/fire) in T)
+	if(hotspot && !istype(T, /turf/space))
+		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
+		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
+		lowertemp.react()
+		T.assume_air(lowertemp)
+		qdel(hotspot)
+
+	if(volume >= 5)
+		T.wet_floor()
+
+/datum/reagent/nutriment/peanutbutter
+	name = "Peanut Butter"
+	id = "peanutbutter"
+	description = "A butter derived from various types of nuts."
+	taste_description = "peanuts"
+	taste_mult = 0.5
+	reagent_state = LIQUID
+	nutriment_factor = 30
+	color = "#4F3500"
+
+/datum/reagent/nutriment/vanilla
+	name = "Vanilla Extract"
+	id = "vanilla"
+	description = "Vanilla extract. Tastes suspiciously like boring ice-cream."
+	taste_description = "vanilla"
+	taste_mult = 5
+	reagent_state = LIQUID
+	nutriment_factor = 2
+	color = "#0F0A00"
+
+/datum/reagent/nutriment/durian
+	name = "Durian Paste"
+	id = "durianpaste"
+	description = "A strangely sweet and savory paste."
+	taste_description = "sweet and savory"
+	color = "#757631"
+
+	glass_name = "durian paste"
+	glass_desc = "Durian paste. It smells horrific."
+
+/datum/reagent/nutriment/durian/touch_mob(var/mob/M, var/amount)
+	if(iscarbon(M) && !M.isSynthetic())
+		var/message = pick("Oh god, it smells disgusting here.", "What is that stench?", "That's an awful odor.")
+		to_chat(M,"<span class='alien'>[message]</span>")
+		if(prob(CLAMP(amount, 5, 90)))
+			var/mob/living/L = M
+			L.vomit()
+	return ..()
+
+/datum/reagent/nutriment/durian/touch_turf(var/turf/T, var/amount)
+	if(istype(T))
+		var/obj/effect/decal/cleanable/chemcoating/C = new /obj/effect/decal/cleanable/chemcoating(T)
+		C.reagents.add_reagent(id, amount)
+	return ..()
 
 /datum/reagent/nutriment/virus_food
 	name = "Virus Food"
@@ -550,6 +628,16 @@
 
 	glass_name = "berry juice"
 	glass_desc = "Berry juice. Or maybe it's jam. Who cares?"
+
+/datum/reagent/drink/juice/pineapple
+	name = "Pineapple Juice"
+	id = "pineapplejuice"
+	description = "A sour but refreshing juice from a pineapple."
+	taste_description = "pineapple"
+	color = "#C3AF00"
+
+	glass_name = "pineapple juice"
+	glass_desc = "Pineapple juice. Or maybe it's spineapple. Who cares?"
 
 /datum/reagent/drink/juice/carrot
 	name = "Carrot juice"

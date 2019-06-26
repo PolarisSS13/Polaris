@@ -1194,6 +1194,21 @@
 	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
 	result_amount = 4
 
+/datum/chemical_reaction/food/peanutbutter
+	name = "Peanut Butter"
+	id = "peanutbutter"
+	result = "peanutbutter"
+	required_reagents = list("peanutoil" = 2, "sugar" = 1, "salt" = 1, "milk" = 1)
+	catalysts = list("enzyme" = 5)
+	result_amount = 3
+
+/datum/chemical_reaction/food/mayonnaise
+	name = "mayonnaise"
+	id = "mayo"
+	result = "mayo"
+	required_reagents = list("egg" = 9, "cornoil" = 5, "lemonjuice" = 5, "salt" = 1)
+	result_amount = 15
+
 /datum/chemical_reaction/food/cheesewheel
 	name = "Cheesewheel"
 	id = "cheesewheel"
