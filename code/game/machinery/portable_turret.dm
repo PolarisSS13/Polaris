@@ -188,6 +188,7 @@
 	health = 200
 	maxhealth = 200
 
+	icon_state = "turret_cover_industrial"
 	closed_state = "turret_cover_industrial"
 	raising_state = "popup_industrial"
 	opened_state = "open_industrial"
