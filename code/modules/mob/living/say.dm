@@ -40,18 +40,18 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Hospital",	".ü" = "Hospital",
-	  ":ó" = "Fire",		".ó" = "Fire",
-	  ":û" = "Police",		".û" = "Police",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",
+	  ":Ãª" = "right ear",	".Ãª" = "right ear",
+	  ":Ã¤" = "left ear",	".Ã¤" = "left ear",
+	  ":Ã¸" = "intercom",	".Ã¸" = "intercom",
+	  ":Ã°" = "department",	".Ã°" = "department",
+	  ":Ã±" = "Command",		".Ã±" = "Command",
+	  ":Ã²" = "Science",		".Ã²" = "Science",
+	  ":Ã¼" = "Hospital",	".Ã¼" = "Hospital",
+	  ":Ã³" = "Fire",		".Ã³" = "Fire",
+	  ":Ã»" = "Police",		".Ã»" = "Police",
+	  ":Ã¶" = "whisper",		".Ã¶" = "whisper",
+	  ":Ã¥" = "Mercenary",	".Ã¥" = "Mercenary",
+	  ":Ã©" = "Supply",		".Ã©" = "Supply",
 )
 
 
@@ -154,6 +154,9 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//Parse the mode
 	var/message_mode = parse_message_mode(message, "headset")
+	
+	//Allow them use to markup, if used.
+	message = process_chat_markup(message, list("~", "_"))
 
 	//Maybe they are using say/whisper to do a quick emote, so do those
 	switch(copytext(message,1,2))
@@ -186,7 +189,13 @@ proc/get_radio_key_from_channel(var/channel)
 	if(speaking && (speaking.flags & HIVEMIND))
 		speaking.broadcast(src,trim(message))
 		return 1
-
+		
+	//If there's no punctuation, add punctuation.
+	var/p_ending = copytext(message, length(message))
+	var/p_message = "[message]."
+	if(!(p_ending in list(".","?","!")))
+		if(message)
+			message = p_message
 	//If it looks like accidental IC-OOK/emoting
 	if((copytext(message, 1, 2) in list("say","me")) || (findtext(lowertext(copytext(message, 1, 5)), "ooc")))
 		if(alert("Your message \"[message]\" looks like it was meant for OOC instead of IC, say it in IC still?", "Confirm if meant for IC?", "No", "Yes") != "Yes")
@@ -196,21 +205,14 @@ proc/get_radio_key_from_channel(var/channel)
 	if(is_muzzled() && !(speaking && (speaking.flags & SIGNLANG)))
 		src << "<span class='danger'>You're muzzled and cannot speak!</span>"
 		return
+		
+
 
 	//Clean up any remaining junk on the left like spaces.
 	message = trim_left(message)
 
 	//Autohiss handles auto-rolling tajaran R's and unathi S's/Z's
 	message = handle_autohiss(message, speaking)
-
-	//If there's no punctuation, add punctuation.
-	var/p_ending = copytext(message, length(message))
-	var/p_message = "[message]."
-	if(!(p_ending in list(".","?","!")))
-		message = p_message
-
-	//Allow them use to markup, if used.
-	message = process_chat_markup(message, list("~", "_"))
 
 	//Whisper vars
 	var/w_scramble_range = 5	//The range at which you get ***as*th**wi****
