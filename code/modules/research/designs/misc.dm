@@ -29,13 +29,18 @@
 	sort_string = "GAAAB"
 
 /datum/design/item/hud/mesons
-	name = "Optical meson scanners design"
-	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
+	name = "optical meson scanner"
 	id = "mesons"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
-	materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
 	sort_string = "GAAAC"
+
+/datum/design/item/hud/material
+	name = "optical material scanner"
+	id = "material"
+	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
+	build_path = /obj/item/clothing/glasses/material
+	sort_string = "GAAAD"
 
 /datum/design/item/device/ano_scanner
 	name = "Alden-Saraspova counter"
