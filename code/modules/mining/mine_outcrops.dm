@@ -92,3 +92,21 @@
 				new outcropdrop(get_turf(src))
 			qdel(src)
 			return
+
+/obj/random/outcrop //In case you want an outcrop without pre-determining the type of ore.
+	name = "random rock outcrop"
+	desc = "This is a random rock outcrop."
+	icon = 'icons/obj/outcrop.dmi'
+	icon_state = "outcrop-random"
+
+/obj/random/outcrop/item_to_spawn()
+	return pick(prob(100);/obj/structure/outcrop,
+				prob(100);/obj/structure/outcrop/iron,
+				prob(100);/obj/structure/outcrop/coal,
+				prob(65);/obj/structure/outcrop/silver,
+				prob(50);/obj/structure/outcrop/gold,
+				prob(30);/obj/structure/outcrop/uranium,
+				prob(30);/obj/structure/outcrop/phoron,
+				prob(7);/obj/structure/outcrop/diamond,
+				prob(15);/obj/structure/outcrop/platinum,
+				prob(15);/obj/structure/outcrop/lead)
