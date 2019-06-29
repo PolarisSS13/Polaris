@@ -212,6 +212,13 @@ var/global/list/light_type_cache = list()
 	construct_type = /obj/machinery/light_construct/flamp
 	var/lamp_shade = 1
 
+/obj/machinery/light/flamp/New(atom/newloc, obj/machinery/light_construct/construct = null)
+	..(newloc, construct)
+
+	if(construct)
+		lamp_shade = 0
+		update_icon()
+
 /obj/machinery/light/flamp/flicker
 	auto_flicker = TRUE
 
