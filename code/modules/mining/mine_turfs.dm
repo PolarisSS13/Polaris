@@ -11,6 +11,9 @@ var/list/mining_overlay_cache = list()
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
+	var/rock_side_icon_state = "rock_side"
+	var/sand_icon_state = "asteroid"
+	var/rock_icon_state = "rock"
 	oxygen = 0
 	nitrogen = 0
 	opacity = 1
@@ -54,6 +57,13 @@ var/list/mining_overlay_cache = list()
 
 	has_resources = 1
 
+// Alternative rock wall sprites.
+/turf/simulated/mineral/light
+	icon_state = "rock-light"
+	rock_side_icon_state = "rock_side-light"
+	sand_icon_state = "sand-light"
+	rock_icon_state = "rock-light"
+
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
 
@@ -65,6 +75,11 @@ var/list/mining_overlay_cache = list()
 	opacity = 0
 	blocks_air = 0
 	can_build_into_floor = TRUE
+
+//Alternative sand floor sprite.
+turf/simulated/mineral/floor/light
+	icon_state = "sand-light"
+	sand_icon_state = "sand-light"
 
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
@@ -147,13 +162,13 @@ var/list/mining_overlay_cache = list()
 			name = "rock"
 
 		icon = 'icons/turf/walls.dmi'
-		icon_state = "rock"
+		icon_state = rock_icon_state
 
 		//Apply overlays if we should have borders
 		for(var/direction in cardinal)
 			var/turf/T = get_step(src,direction)
 			if(istype(T) && !T.density)
-				add_overlay(get_cached_border("rock_side",direction,icon,"rock_side"))
+				add_overlay(get_cached_border(rock_side_icon_state,direction,icon,rock_side_icon_state))
 
 			if(archaeo_overlay)
 				add_overlay(archaeo_overlay)
@@ -165,7 +180,7 @@ var/list/mining_overlay_cache = list()
 	else
 		name = "sand"
 		icon = 'icons/turf/flooring/asteroid.dmi'
-		icon_state = "asteroid"
+		icon_state = sand_icon_state
 
 		if(sand_dug)
 			add_overlay("dug_overlay")
@@ -179,7 +194,7 @@ var/list/mining_overlay_cache = list()
 			else
 				var/turf/T = get_step(src, direction)
 				if(istype(T) && T.density)
-					add_overlay(get_cached_border("rock_side",direction,'icons/turf/walls.dmi',"rock_side"))
+					add_overlay(get_cached_border(rock_side_icon_state,direction,'icons/turf/walls.dmi',rock_side_icon_state))
 
 		if(overlay_detail)
 			add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
