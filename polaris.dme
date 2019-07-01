@@ -1089,6 +1089,7 @@
 #include "code\game\objects\structures\janicart.dm"
 #include "code\game\objects\structures\kitchen_spike.dm"
 #include "code\game\objects\structures\lattice.dm"
+#include "code\game\objects\structures\ledges.dm"
 #include "code\game\objects\structures\lightpost.dm"
 #include "code\game\objects\structures\loot_piles.dm"
 #include "code\game\objects\structures\mirror.dm"

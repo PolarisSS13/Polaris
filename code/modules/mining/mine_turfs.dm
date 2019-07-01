@@ -14,6 +14,7 @@ var/list/mining_overlay_cache = list()
 	var/rock_side_icon_state = "rock_side"
 	var/sand_icon_state = "asteroid"
 	var/rock_icon_state = "rock"
+	var/random_icon = 0
 	oxygen = 0
 	nitrogen = 0
 	opacity = 1
@@ -63,6 +64,7 @@ var/list/mining_overlay_cache = list()
 	rock_side_icon_state = "rock_side-light"
 	sand_icon_state = "sand-light"
 	rock_icon_state = "rock-light"
+	random_icon = 1
 
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
@@ -80,6 +82,18 @@ var/list/mining_overlay_cache = list()
 turf/simulated/mineral/floor/light
 	icon_state = "sand-light"
 	sand_icon_state = "sand-light"
+
+turf/simulated/mineral/floor/light_border
+	icon_state = "sand-light-border"
+	sand_icon_state = "sand-light-border"
+
+turf/simulated/mineral/floor/light_nub
+	icon_state = "sand-light-nub"
+	sand_icon_state = "sand-light-nub"
+
+turf/simulated/mineral/floor/light_corner
+	icon_state = "sand-light-corner"
+	sand_icon_state = "sand-light-corner"
 
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
@@ -144,6 +158,9 @@ turf/simulated/mineral/floor/light
 		overlay_detail = "asteroid[rand(0,9)]"
 	update_icon(1)
 	if(density && mineral)
+		. = INITIALIZE_HINT_LATELOAD
+	if(random_icon)
+		dir = pick(alldirs)
 		. = INITIALIZE_HINT_LATELOAD
 
 /turf/simulated/mineral/LateInitialize()
