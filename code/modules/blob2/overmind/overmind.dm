@@ -42,7 +42,19 @@ var/list/overminds = list()
 	if(blob_core)
 		blob_core.update_icon()
 		level_seven_blob_announcement(blob_core)
+		
+	if(!(blob_type.can_build_resources))
+		verbs -= /mob/observer/blob/verb/create_resource
+		verbs -= /mob/observer/blob/verb/auto_resource
 
+	if(!(blob_type.can_build_factories))
+		verbs -= /mob/observer/blob/verb/create_factory
+		verbs -= /mob/observer/blob/verb/auto_factory
+	
+	
+	if(!(blob_type.can_build_nodes))
+		verbs -= /mob/observer/blob/verb/create_node
+		verbs -= /mob/observer/blob/verb/auto_node
 	..(newloc)
 
 /mob/observer/blob/Destroy()
@@ -93,5 +105,9 @@ var/list/overminds = list()
 			auto_attack()
 
 		if(blob_points >= 100)
-			if(!auto_factory() && !auto_resource())
-				auto_node()
+			if(blob_type.can_build_factories && auto_factory())
+				return
+			if(blob_type.can_build_resources && auto_resource())
+				return
+			if(blob_type.can_build_nodes && auto_node())
+				return //pointless right now but if anyone ever tries to add new blob types this is already in the correct format
