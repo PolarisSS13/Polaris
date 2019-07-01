@@ -59,6 +59,9 @@
 	set category = "Vehicle"
 	set src in view(0)
 
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+
 	if(usr.incapacitated()) return
 
 	if(!on && cell && cell.charge > charge_use)
@@ -72,6 +75,9 @@
 	set name = "Toggle Kickstand"
 	set category = "Vehicle"
 	set src in view(0)
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
 
 	if(usr.incapacitated()) return
 
