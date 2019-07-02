@@ -11,6 +11,11 @@
 	var/upperdrop = 10
 	var/outcropdrop = /obj/item/weapon/ore/glass
 
+/obj/structure/outcrop/Initialize()
+	. = ..()
+	if(prob(1))
+		overlays += image(icon, "[initial(icon_state)]-egg")
+
 /obj/structure/outcrop/diamond
 	name = "shiny outcrop"
 	desc = "A shiny rocky outcrop."
