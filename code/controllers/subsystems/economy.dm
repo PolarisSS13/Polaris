@@ -21,7 +21,7 @@ SUBSYSTEM_DEF(economy)
 
 /proc/payroll(var/datum/data/record/G)
 	var/bank_number = text2num(G.fields["bank_number"])
-	var/datum/job/job = job_master.GetJob(G.fields["rank"])
+	var/datum/job/job = job_master.GetJob(G.fields["real_rank"])
 	var/department
 	var/class = G.fields["economic_status"]
 	var/name = G.fields["name"]
