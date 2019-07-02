@@ -1160,6 +1160,42 @@
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
 
+/datum/reagent/drink/soda/melonade
+	name = "Melonade"
+	id = "melonade"
+	description = "Oh the.. nostalgia?"
+	taste_description = "watermelon"
+	color = "#FFB3BB"
+	adj_temp = -5
+
+	glass_name = "melonade"
+	glass_desc = "Oh the.. nostalgia?"
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/soda/appleade
+	name = "Appleade"
+	id = "appleade"
+	description = "Applejuice, improved."
+	taste_description = "apples"
+	color = "#FFD1B3"
+	adj_temp = -5
+
+	glass_name = "appleade"
+	glass_desc = "Applejuice, improved."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/soda/pineappleade
+	name = "Pineappleade"
+	id = "pineappleade"
+	description = "Spineapple, juiced up."
+	taste_description = "sweet`n`sour pineapples"
+	color = "#FFFF00"
+	adj_temp = -5
+
+	glass_name = "pineappleade"
+	glass_desc = "Spineapple, juiced up."
+	glass_special = list(DRINK_FIZZ)
+
 /datum/reagent/drink/soda/kiraspecial
 	name = "Kira Special"
 	id = "kiraspecial"
@@ -1255,6 +1291,16 @@
 /datum/reagent/drink/milkshake/coffeeshake/overdose(var/mob/living/carbon/M, var/alien)
 	M.make_jittery(5)
 
+/datum/reagent/drink/milkshake/peanutshake
+	name = "Peanut Milkshake"
+	id = "peanutmilkshake"
+	description = "Savory cream in an ice-cold stature."
+	taste_description = "cold peanuts and cream"
+	color = "#8e6f44"
+
+	glass_name = "Peanut Milkshake"
+	glass_desc = "Savory cream in an ice-cold stature."
+
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
 	id = "rewriter"
@@ -1297,6 +1343,7 @@
 	description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
 	taste_description = "100% pure pomegranate"
 	color = "#FF004F"
+	water_based = FALSE
 
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
@@ -1364,7 +1411,6 @@
 	glass_name = "lemon lime soda"
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
-
 
 /datum/reagent/drink/soda/gingerale
 	name = "Ginger Ale"
@@ -1589,6 +1635,18 @@
 	glass_desc = "A concoction that should probably be in an engine, rather than your stomach."
 	glass_icon = DRINK_ICON_NOISY
 
+/datum/reagent/drink/slimeslammer
+	name = "Slick Slimes Slammer"
+	id = "slimeslammer"
+	description = "A viscous, but savory, ooze."
+	taste_description = "peanuts`n`slime"
+	color = "#93604D"
+	water_based = FALSE
+
+	glass_name = "Slick Slime Slammer"
+	glass_desc = "A concoction that should probably be in an engine, rather than your stomach. Still."
+	glass_icon = DRINK_ICON_NOISY
+
 /datum/reagent/drink/eggnog
 	name = "Eggnog"
 	id = "eggnog"
@@ -1654,6 +1712,73 @@
 				var/datum/reagent/drink/D = R
 				if(D.water_based)
 					M.adjustToxLoss(removed * -2)
+
+/datum/reagent/drink/mojito
+	name = "Mojito"
+	id = "virginmojito"
+	description = "Mint, bubbly water, and citrus, made for sailing."
+	taste_description = "mint and lime"
+	color = "#FFF7B3"
+
+	glass_name = "mojito"
+	glass_desc = "Mint, bubbly water, and citrus, made for sailing."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/sexonthebeach
+	name = "Virgin Sex On The Beach"
+	id = "virginsexonthebeach"
+	description = "A secret combination of orange juice and pomegranate."
+	taste_description = "60% orange juice, 40% pomegranate"
+	color = "#7051E3"
+
+	glass_name = "sex on the beach"
+	glass_desc = "A secret combination of orange juice and pomegranate."
+
+/datum/reagent/drink/driverspunch
+	name = "Driver's Punch"
+	id = "driverspunch"
+	description = "A fruity punch!"
+	taste_description = "sharp, sour apples"
+	color = "#D2BA6E"
+
+	glass_name = "driver`s punch"
+	glass_desc = "A fruity punch!"
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/berrycordial
+	name = "Berry Cordial"
+	id = "berrycordial"
+	description = "How <font face='comic sans ms'>berry cordial</font> of you."
+	taste_description = "sweet chivalry"
+	color = "#D26EB8"
+
+	glass_name = "berry cordial"
+	glass_desc = "How <font face='comic sans ms'>berry cordial</font> of you."
+	glass_icon = DRINK_ICON_NOISY
+
+/datum/reagent/drink/tropicalfizz
+	name = "Tropical Fizz"
+	id = "tropicalfizz"
+	description = "One sip and you're in the bahamas."
+	taste_description = "tropical"
+	color = "#69375C"
+
+	glass_name = "tropical fizz"
+	glass_desc = "One sip and you're in the bahamas."
+	glass_icon = DRINK_ICON_NOISY
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/fauxfizz
+	name = "Faux Fizz"
+	id = "fauxfizz"
+	description = "One sip and you're in the bahamas... maybe."
+	taste_description = "slightly tropical"
+	color = "#69375C"
+
+	glass_name = "tropical fizz"
+	glass_desc = "One sip and you're in the bahamas... maybe."
+	glass_icon = DRINK_ICON_NOISY
+	glass_special = list(DRINK_FIZZ)
 
 /* Alcohol */
 
@@ -1742,6 +1867,17 @@
 		return
 	M.dizziness +=5
 
+/datum/reagent/ethanol/firepunch
+	name = "Fire Punch"
+	id = "firepunch"
+	description = "Yo ho ho and a jar of honey."
+	taste_description = "sharp butterscotch"
+	color = "#ECB633"
+	strength = 7
+
+	glass_name = "fire punch"
+	glass_desc = "Yo ho ho and a jar of honey."
+
 /datum/reagent/ethanol/gin
 	name = "Gin"
 	id = "gin"
@@ -1809,6 +1945,18 @@
 	glass_name = "melon liquor"
 	glass_desc = "A relatively sweet and fruity 46 proof liquor."
 
+/datum/reagent/ethanol/melonspritzer
+	name = "Melon Spritzer"
+	id = "melonspritzer"
+	description = "Melons: Citrus style."
+	taste_description = "sour melon"
+	color = "#934D5D"
+	strength = 10
+
+	glass_name = "melon spritzer"
+	glass_desc = "Melons: Citrus style."
+	glass_special = list(DRINK_FIZZ)
+
 /datum/reagent/ethanol/rum
 	name = "Rum"
 	id = "rum"
@@ -1831,6 +1979,17 @@
 
 	glass_name = "sake"
 	glass_desc = "A glass of sake."
+
+/datum/reagent/ethanol/sexonthebeach
+	name = "Sex On The Beach"
+	id = "sexonthebeach"
+	description = "A concoction of vodka and a secret combination of orange juice and pomegranate."
+	taste_description = "60% orange juice, 40% pomegranate, 100% alcohol"
+	color = "#7051E3"
+	strength = 15
+
+	glass_name = "sex on the beach"
+	glass_desc = "A concoction of vodka and a secret combination of orange juice and pomegranate."
 
 /datum/reagent/ethanol/tequila
 	name = "Tequila"
