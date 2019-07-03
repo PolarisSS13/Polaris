@@ -59,7 +59,7 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!isliving(usr) || ismouse(usr))
 		return
 
 	if(usr.incapacitated()) return
@@ -76,7 +76,7 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(!istype(usr, /mob/living/carbon/human))
+	if(!isliving(usr) || ismouse(usr))
 		return
 
 	if(usr.incapacitated()) return
