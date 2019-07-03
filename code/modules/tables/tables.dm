@@ -24,6 +24,7 @@
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
 	// Convert if/when you can easily get stacks of these.
 	var/carpeted = 0
+	var/carpeted_type = /obj/item/stack/tile/carpet
 
 	var/list/connections = list("nw0", "ne0", "sw0", "se0")
 
@@ -108,7 +109,7 @@
 	if(carpeted && W.is_crowbar())
 		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
 		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
-		new /obj/item/stack/tile/carpet(loc)
+		new carpeted_type(loc)
 		carpeted = 0
 		update_icon()
 		return 1
@@ -119,6 +120,7 @@
 			user.visible_message("<span class='notice'>\The [user] adds \the [C] to \the [src].</span>",
 			                              "<span class='notice'>You add \the [C] to \the [src].</span>")
 			carpeted = 1
+			carpeted_type = W.type
 			update_icon()
 			return 1
 		else
@@ -313,7 +315,7 @@
 			S = material.place_shard(loc)
 			if(S) shards += S
 	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
-		new /obj/item/stack/tile/carpet(src.loc)
+		new carpeted_type(src.loc)
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
