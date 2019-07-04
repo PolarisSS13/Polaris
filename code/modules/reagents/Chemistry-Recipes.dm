@@ -1198,7 +1198,7 @@
 	name = "Peanut Butter"
 	id = "peanutbutter"
 	result = "peanutbutter"
-	required_reagents = list("peanutoil" = 2, "sugar" = 1, "salt" = 1, "milk" = 1)
+	required_reagents = list("peanutoil" = 2, "sugar" = 1, "salt" = 1)
 	catalysts = list("enzyme" = 5)
 	result_amount = 3
 
