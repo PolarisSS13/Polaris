@@ -516,6 +516,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	update_icon()
 	update_wclass()
 
+/obj/item/stack/cable_coil/is_cable_coil()
+	return TRUE
+
 ///////////////////////////////////
 // General procedures
 ///////////////////////////////////
