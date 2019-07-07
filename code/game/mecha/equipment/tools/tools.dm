@@ -42,7 +42,7 @@
 							FD.open(1)
 							FD.visible_message("<span class='warning'>\The [chassis] tears \the [FD] open!</span>")
 					else if(FD.density)
-						FD.visible_message("<span class='alium'>\The [chassis] begins forcing \the [FD] open!</span>")
+						FD.visible_message("<span class='warning'>\The [chassis] begins forcing \the [FD] open!</span>")
 						if(do_after(chassis.occupant, 5 SECONDS,FD))
 							playsound(FD.loc, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							FD.visible_message("<span class='danger'>\The [chassis] forces \the [FD] open!</span>")

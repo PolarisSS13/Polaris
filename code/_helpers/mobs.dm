@@ -259,9 +259,10 @@ Proc for attack log creation, because really why not
 			. = FALSE
 			break
 
-		if(M && (user.loc != M || (M.loc != original_loc && !ignore_movement))) // Mech coooooode.
-			. = FALSE
-			break
+		if(M)
+			if(user.loc != M || (M.loc != original_loc && !ignore_movement)) // Mech coooooode.
+				. = FALSE
+				break
 
 		else if(user.loc != original_loc && !ignore_movement)
 			. = FALSE
