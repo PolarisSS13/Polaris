@@ -1,3 +1,7 @@
+#define Z_LEVEL_FIRST_GEMINUS					1
+#define Z_LEVEL_SECOND_GEMINUS					2
+#define Z_LEVEL_SKY_GEMINUS						3
+
 /datum/map/geminus
 	name = "Geminus"
 	full_name = "Geminus City"
@@ -5,6 +9,10 @@
 
 	lobby_icon = 'icons/misc/title.dmi'
 	lobby_screens = list("pollux")
+
+	holomap_smoosh = list(list(
+		Z_LEVEL_FIRST_GEMINUS,
+		Z_LEVEL_SECOND_GEMINUS))
 
 	zlevel_datum_type = /datum/map_z_level/geminus
 
@@ -50,9 +58,12 @@
 							NETWORK_INTERROGATION
 							)
 
-#define Z_LEVEL_FIRST_GEMINUS						1
-#define Z_LEVEL_SECOND_GEMINUS					2
-#define Z_LEVEL_SKY_GEMINUS						3
+// For making the 6-in-1 holomap, we calculate some offsets
+#define GEMINUS_MAP_SIZE 177 // Width and height of compiled in Southern Cross z levels.
+#define GEMINUS_HOLOMAP_CENTER_GUTTER 40 // 40px central gutter between columns
+#define GEMINUS_HOLOMAP_MARGIN_X ((HOLOMAP_ICON_SIZE - (2*GEMINUS_MAP_SIZE) - GEMINUS_HOLOMAP_CENTER_GUTTER) / 2) // 100
+#define GEMINUS_HOLOMAP_MARGIN_Y ((HOLOMAP_ICON_SIZE - (3*GEMINUS_MAP_SIZE)) / 2) // 60
+
 
 /datum/map/geminus/perform_map_generation()
 //	new /datum/random_map/automata/cave_system(null, 1, 1, Z_LEVEL_FIRST_GEMINUS	, world.maxx, world.maxy) // Create the mining Z-level.
@@ -69,6 +80,8 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER
 	transit_chance = 50
 	base_turf = /turf/simulated/floor/plating
+	holomap_legend_x = 220
+	holomap_legend_y = 200
 
 /datum/map_z_level/geminus/second
 	z = Z_LEVEL_SECOND_GEMINUS
@@ -76,6 +89,8 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER
 	transit_chance = 50
 	base_turf = /turf/simulated/floor/outdoors/dirt
+	holomap_offset_x = 220
+	holomap_offset_y = GEMINUS_HOLOMAP_MARGIN_Y + GEMINUS_MAP_SIZE*1
 
 /datum/map_z_level/geminus/sky
 	z = Z_LEVEL_SKY_GEMINUS
@@ -83,7 +98,8 @@
 	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT
 	transit_chance = 50
 	base_turf = /turf/simulated/sky/moving
-
+//	holomap_offset_x = GEMINUS_HOLOMAP_MARGIN_X - 40
+//	holomap_offset_y = GEMINUS_HOLOMAP_MARGIN_Y + GEMINUS_MAP_SIZE*0
 
 /datum/planet/sif
 	expected_z_levels = list(
@@ -98,3 +114,4 @@
 	. +=  "Being one of the first cities and initially a mining colony, Geminus has a rich history and is home to many descendants of the first prospectors.<br> "
 	. +=  "There's a definite class struggle, as working class Geminians feel pushed out by the richer colonists who wish to further gentrify the city and make it... <i>more profitable, more corporate, more <b>chic</b></i>."
 	return jointext(., "<br>")
+

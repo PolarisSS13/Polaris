@@ -41,10 +41,38 @@
 	lift_announce_str = "Lift arriving at Geminus City - Hospital Underground, please stand clear of the doors."
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
+/area/turbolift/geminus_court_top
+	name = "lift (main courtroom)"
+	lift_floor_label = "Floor 2"
+	lift_floor_name = "Geminus City Courtroom"
+	lift_announce_str = "Lift arriving at Geminus City Courtroom, please stand clear of the doors."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
+/area/turbolift/geminus_court_ground
+	name = "lift (court underground)"
+	lift_floor_label = "Floor 1"
+	lift_floor_name = "Geminus City Court Offices"
+	lift_announce_str = "Lift arriving at Geminus City Court Offices, please stand clear of the doors."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
+/area/turbolift/geminus_bar_top
+	name = "lift (bar)"
+	lift_floor_label = "Floor 2"
+	lift_floor_name = "Bar"
+	lift_announce_str = "Lift arriving at the bar, please stand clear of the doors."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
+
+/area/turbolift/geminus_bar_ground
+	name = "lift (nightclub and casino)"
+	lift_floor_label = "Floor 1"
+	lift_floor_name = "Nightclub and Casino"
+	lift_announce_str = "Lift arriving at the casino and nightclub, please stand clear of the doors."
+	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 //shuttle areas
+/area/shuttle
+	dynamic_lighting = 1 //OH BOY
+
 /area/shuttle/arrival/pre_game
 	icon_state = "shuttle2"
 	base_turf = /turf/simulated/sky
@@ -189,10 +217,12 @@
 /area/planets/Geminus/indoor/police_station
 	name = "\improper Police Station"
 	icon_state = "brig"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/planets/Geminus/indoor/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/planets/Geminus/indoor/xenoflora
 	name = "\improper Xenoflora Lab"
@@ -201,14 +231,17 @@
 /area/planets/Geminus/indoor/city_hall
 	name = "\improper City Hall"
 	icon_state = "dk_yellow"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/planets/Geminus/indoor/mayor
 	name = "\improper Mayor Office"
 	icon_state = "captain"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/planets/Geminus/indoor/mayor_car_park
 	name = "\improper Mayor Car Park"
 	icon_state = "captain"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/planets/Geminus/indoor/headmeetingroom
 	name = "\improper City Hall Meeting Room"
@@ -290,15 +323,18 @@
 /area/planets/Geminus/indoor/armory
 	name = "\improper City Police Armory"
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/planets/Geminus/indoor/panicbunker
 	name = "\improper Unknown Area"
 	icon_state = "yellow"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 //This is the head of city staff's safe room. Panic bunker, etc.
 
 /area/planets/Geminus/indoor/hospital
 	name = "\improper City Hospital"
 	icon_state = "medbay"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/planets/Geminus/indoor/cmo
 	name = "\improper Chief Medical Officer Office"

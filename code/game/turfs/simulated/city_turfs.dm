@@ -29,34 +29,7 @@
 	initial_flooring = /decl/flooring/pavement/brick_paving
 
 
-//| Stairs
-	// - default is South, in terms of being at the top of the stairs looking down.
-/turf/simulated/floor/stairs/
-	name = "stairs"
-	icon = 'icons/turf/ramps.dmi'
-	icon_state = "ramptop"
 
-/turf/simulated/floor/stairs/north
-	dir = 1
-	icon_state = "ramptop"
-/turf/simulated/floor/stairs/east
-	dir = 4
-	icon_state = "ramptop"
-/turf/simulated/floor/stairs/west
-	dir = 8
-	icon_state = "ramptop"
-
-/turf/simulated/floor/stairs/stairsdark/
-	icon_state = "rampbottom"
-/turf/simulated/floor/stairs/stairsdark/north
-	dir = 1
-	icon_state = "rampbottom"
-/turf/simulated/floor/stairs/stairsdark/east
-	dir = 4
-	icon_state = "rampbottom"
-/turf/simulated/floor/stairs/stairsdark/west
-	dir = 8
-	icon_state = "rampbottom"
 
 /turf/simulated/floor/road
 	name = "Road"

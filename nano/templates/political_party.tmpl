@@ -1,16 +1,26 @@
-<h1>Official Party Management Engine</h1>
-<hr>
+<h1>Official Party Management Engine</h1><hr>
+
 {{if data.index == 0}}
 <p>Welcome, {{:data.authuser}}.</p>
 
+{{if data.current_party}}
+	<h2>{{:data.current_party_name}}</h2><br>
+	<h3>Party Announcement:</h3><p>
+	{{:data.party_announcement}}
+
+	{{:helper.link("View Party Page", null, {'login' : 1})}}
+	{{:helper.link("Log Out", null, {'party_logout' : 1})}}   
+
+	{{else}}
 <p>If you would like to login to your political party. Please login here.
 </p>
 {{:helper.link("Login", null, {'login' : 1})}}
 <br><br>
+{{/if}}
 
 <h2>Other Options</h2>
 <hr>
-{{:helper.link("Join A Party", null, {'join_party' : 1})}}
+{{:helper.link("Apply for Party", null, {'apply_for_party' : 1})}}
 
 {{:helper.link("Register a Party", null, {'register_party' : 1})}}
 
@@ -46,25 +56,33 @@
 <p><em>Registering a new party is easy and simple. Please fill in the form below.</em></p>
 <hr>
 
-<br><strong>Party Leader: </strong>
-</p>{{:data.party_leader}}
+<br><strong>Party Leader: </strong> {{:data.party_leader}}
 
-<br><span style="color: rgb(226, 80, 65);">{{:data.registration_msg}}</span></p>
+<br>
+
+<span style="color: rgb(226, 80, 65);">{{:data.reg_error}}</span></p>
 
 <br><strong>Party Name*: </strong>{{:data.p_name}}</p>
 {{:helper.link("Set Party Name", null, {'set_party_name' : 1})}}
 
-<br><strong>Party Slogan*: </strong>{{:data.p_slogan}}</p>
+<br><p>
+
+<strong>Party Slogan*: </strong>{{:data.p_slogan}}</p>
 {{:helper.link("Set Slogan", null, {'set_party_slogan' : 1})}}
 
-<br><strong>Party Description*: </strong>{{:data.p_desc}}</p>
+<br><p>
+
+<strong>Party Description*: </strong>{{:data.p_desc}}</p>
 {{:helper.link("Set Description", null, {'set_party_desc' : 1})}}
 
-<br><strong>Password*:</strong> {{:data.party_pass}}
-{{:helper.link("Set Password", null, {'set_party_pass' : 1})}}
-<br>
+<br><p>
 
-<p>By pressing "Submit" you agree to the party terms and conditions and payment of 3,500 credits.</p>
+<strong>Password*:</strong> {{:data.party_pass}}
+{{:helper.link("Set Password", null, {'set_party_pass' : 1})}}
+
+<br><p>
+
+<p>By pressing "Submit" you agree to the party terms and conditions and a payment of 3,500 credits charged to your bank account.</p>
 
 {{:helper.link("Submit", null, {'submit_new_party' : 1})}}
 {{:helper.link("Back", null, {'back' : 1})}}
@@ -79,9 +97,78 @@
 {{/if}}
 
 {{if data.index == 3}}
-	{{for data.voice_mobs}}
+	
+{{:helper.link("Back", null, {'back' : 1})}}   
 
 {{/if}}
 
+{{if data.index == 4}}
+
+<p>Welcome back,</p><br>
+
+<p>To log into your party's board, please enter your login details.</p>
+<br>
+
+<span style="color: rgb(226, 80, 65);">{{:data.reg_error}}</span></p>
+<p>
+<p><b>Note:</b> All fields are case sensitive, please ensure that you are entering your details correctly.</p>
+<p>
+
+<p><strong>Party Name*: </strong>{{:data.p_name}}</p>
+
+{{:helper.link("Change", null, {'set_party_name' : 1})}}
+
+<br><p>
+
+<strong>Password*:</strong> {{:data.party_pass}}
+{{:helper.link("Change", null, {'set_party_pass' : 1})}}
 
 
+<br><br><p>
+{{:helper.link("Login", null, {'party_login' : 1})}}
+{{:helper.link("Register New Party", null, {'register_party' : 1})}}
+<br><p>	
+{{:helper.link("Back", null, {'back' : 1})}}   
+
+
+{{/if}}
+
+{{if data.index == 5}}
+	
+	<b>Current user:</b> {{:data.authuser}}<br>
+	<h2>{{:data.current_party_name}}</h2><br>
+
+	<h3>Party Announcement:</h3><p>
+{{:data.party_announcement}}
+
+<br>
+<hr>
+
+	{{:helper.link("Edit Party Announcement", null, {'party_announcement' : 1})}}   
+
+	{{:helper.link("Party Settings", null, {'party_settings' : 1})}}  
+
+	{{:helper.link("Manage Members", null, {'manage_members' : 1})}} <br>
+
+	{{:helper.link("Log Out", null, {'party_logout' : 1})}}   
+
+{{/if}}
+
+{{if data.index == 6}}
+	<h3>Party Settings:</h3><p>
+
+	{{:helper.link("Change Party Name", null, {'rename_party' : 1})}} 
+	{{:helper.link("Change Primary Color", null, {'set_primary_color' : 1})}}
+
+	{{:helper.link("Change Secondary Color", null, {'set_secondary_color' : 1})}} 
+
+
+{{/if}}
+
+{{if data.index == 7}}
+	<h3>Manage Party:</h3><p>
+
+	{{:helper.link("Assign New Leader", null, {'assign_new_leader' : 1})}} <br>
+
+
+{{/if}}

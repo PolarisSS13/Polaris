@@ -53,6 +53,13 @@ var/list/all_maps = list()
 
 	var/station_name  = "BAD Station"
 	var/station_short = "Baddy"
+
+	var/list/holomap_smoosh		// List of lists of zlevels to smoosh into single icons
+	var/list/holomap_offset_x = list()
+	var/list/holomap_offset_y = list()
+	var/list/holomap_legend_x = list()
+	var/list/holomap_legend_y = list()
+
 	var/dock_name     = "THE PirateBay"
 	var/boss_name     = "Captain Roger"
 	var/boss_short    = "Cap'"
@@ -87,6 +94,7 @@ var/list/all_maps = list()
 	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
 	var/list/usable_email_tlds = list("freemail.net")
+
 /datum/map/New()
 	..()
 	if(zlevel_datum_type)
@@ -157,6 +165,11 @@ var/list/all_maps = list()
 	var/flags = 0			// Bitflag of which *_levels lists this z should be put into.
 	var/turf/base_turf		// Type path of the base turf for this z
 	var/transit_chance = 0	// Percentile chance this z will be chosen for map-edge space transit.
+// Holomaps
+	var/holomap_offset_x = -1	// Number of pixels to offset the map right (for centering) for this z
+	var/holomap_offset_y = -1	// Number of pixels to offset the map up (for centering) for this z
+	var/holomap_legend_x = 96	// x position of the holomap legend for this z
+	var/holomap_legend_y = 96	// y position of the holomap legend for this z
 
 // Default constructor applies itself to the parent map datum
 /datum/map_z_level/New(var/datum/map/map)
@@ -177,6 +190,17 @@ var/list/all_maps = list()
 		map.base_turf_by_z["[z]"] = base_turf
 	if(transit_chance)
 		map.accessible_z_levels["[z]"] = transit_chance
+	// Holomaps
+	// Auto-center the map if needed (Guess based on maxx/maxy)
+	if (holomap_offset_x < 0)
+		holomap_offset_x = ((HOLOMAP_ICON_SIZE - world.maxx) / 2)
+	if (holomap_offset_x < 0)
+		holomap_offset_y = ((HOLOMAP_ICON_SIZE - world.maxy) / 2)
+	// Assign them to the map lists
+	LIST_NUMERIC_SET(map.holomap_offset_x, z, holomap_offset_x)
+	LIST_NUMERIC_SET(map.holomap_offset_y, z, holomap_offset_y)
+	LIST_NUMERIC_SET(map.holomap_legend_x, z, holomap_legend_x)
+	LIST_NUMERIC_SET(map.holomap_legend_y, z, holomap_legend_y)
 
 /datum/map_z_level/Destroy(var/force)
 	crash_with("Attempt to delete a map_z_level instance [log_info_line(src)]")

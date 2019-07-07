@@ -227,7 +227,6 @@ var/list/airlock_overlays = list()
 	glass = 1
 
 /obj/machinery/door/airlock/vault/bolted
-	icon_state = "door_locked"
 	locked = 1
 
 /obj/machinery/door/airlock/freezer
@@ -386,7 +385,6 @@ var/list/airlock_overlays = list()
 
 /obj/machinery/door/airlock/science
 	name = "Airlock"
-	icon = 'icons/obj/doors/Doorsci.dmi'
 
 
 /obj/machinery/door/airlock/glass_science

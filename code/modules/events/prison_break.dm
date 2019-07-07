@@ -7,9 +7,11 @@
 
 	var/eventDept = "Security"			//Department name in announcement
 	var/list/areaName = list("Brig")	//Names of areas mentioned in AI and Engineering announcements
-	var/list/areaType = list(/area/security/prison, /area/security/brig)	//Area types to include.
+	var/list/areaType = list(/area/security/prison, /area/security/brig, /area/planets/Geminus/indoor/prison, /area/planets/Geminus/indoor/police_station)//Area types to include.
 	var/list/areaNotType = list()		//Area types to specifically exclude.
 
+// Don't see the point of these ones.
+/*
 /datum/event/prison_break/virology
 	eventDept = "Medical"
 	areaName = list("Virology")
@@ -26,7 +28,7 @@
 	areaName = list("Brig","Virology","Xenobiology")
 	areaType = list(/area/security/prison, /area/security/brig, /area/medical/virology, /area/medical/virologyaccess, /area/rnd/xenobiology)
 	areaNotType = list(/area/rnd/xenobiology/xenoflora, /area/rnd/xenobiology/xenoflora_storage)
-
+*/
 
 /datum/event/prison_break/setup()
 	announceWhen = rand(75, 105)

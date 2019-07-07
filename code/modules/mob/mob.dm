@@ -670,6 +670,7 @@
 			stat("Current Date", stationdate2text())
 			stat("Round Duration", roundduration2text())
 			stat("Round Persistence:", "[config.canonicity ? "Canon" : "Non-Canon"]")
+			stat("Game ID:", "[game_id]")
 
 		if(client.holder)
 			if(statpanel("Status"))

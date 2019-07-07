@@ -75,6 +75,7 @@ What is the naming convention for planes or layers?
 	#define DOOR_CLOSED_LAYER		3.1	// Doors when closed
 	#define WINDOW_LAYER			3.2	// Windows
 	#define ON_WINDOW_LAYER			3.3 // Ontop of a window
+	#define ABOVE_WINDOW_LAYER 		3.25 //Above full tile windows so wall items are clickable
 	#define SHOWER_OPEN_LAYER		3.4	// Showers when open
 	// Obj/Mob layer boundary
 	#define SHOWER_CLOSED_LAYER 	4.2	// Should be converted to plane swaps

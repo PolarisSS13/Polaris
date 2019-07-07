@@ -10,6 +10,8 @@
 	var/activated = FALSE
 	var/fulltile = TRUE
 
+	var/win_color // If it has a window color, it'll spawn with this.
+
 /obj/effect/wallframe_spawn/CanPass()
 	return 0
 
@@ -46,12 +48,16 @@
 	if(locate(/obj/structure/grille) in loc)
 		warning("Frame Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
 	else
-		var/obj/structure/grille/G = new grille_path(loc)
-		handle_grille_spawn(G)
+		if(grille_path)
+			var/obj/structure/grille/G = new grille_path(loc)
+			handle_grille_spawn(G)
 
 	var/list/neighbours = list()
 	if(fulltile)
 		var/obj/structure/window/new_win = new win_path(loc)
+		//Apply color
+		if(win_color)
+			new_win.color = win_color
 		handle_window_spawn(new_win)
 	else
 		for (var/dir in cardinal)
@@ -66,10 +72,16 @@
 							qdel(W)
 				if(!found_connection)
 					var/obj/structure/window/new_win = new win_path(loc)
+					//Apply color
+					if(win_color)
+						new_win.color = win_color
 					new_win.set_dir(dir)
 					handle_window_spawn(new_win)
 			else
 				neighbours |= other
+
+
+
 	activated = 1
 	for(var/obj/effect/wallframe_spawn/other in neighbours)
 		if(!other.activated) other.activate()
@@ -88,6 +100,31 @@
 
 /obj/effect/wallframe_spawn/proc/handle_grille_spawn(var/obj/structure/grille/G)
 	return
+
+/obj/effect/wallframe_spawn/basic
+	name = "basic wall frame window spawner"
+	grille_path = null
+
+/obj/effect/wallframe_spawn/basic/purple
+	name = "purple wall frame window spawner"
+	win_color = "#cc6699"
+
+/obj/effect/wallframe_spawn/basic/blue
+	name = "blue wall frame window spawner"
+	win_color = COLOR_BLUE_GRAY
+
+/obj/effect/wallframe_spawn/basic/blue/hospital
+	frame_path = /obj/structure/wall_frame/blue
+
+
+/obj/effect/wallframe_spawn/basic/green
+	name = "green wall frame window spawner"
+	win_color = COLOR_PALE_GREEN_GRAY
+
+/obj/effect/wallframe_spawn/basic/red
+	name = "red wall frame window spawner"
+	win_color = COLOR_PALE_RED_GRAY
+
 
 /obj/effect/wallframe_spawn/reinforced
 	name = "reinforced wall frame window spawner"

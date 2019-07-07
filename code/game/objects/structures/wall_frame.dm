@@ -140,6 +140,9 @@
 /obj/structure/wall_frame/hull
 	color = COLOR_HULL
 
+/obj/structure/wall_frame/blue
+	color = COLOR_BLUE_GRAY
+
 /*
 /obj/structure/wall_frame/hull/initialize()
 	. = ..()

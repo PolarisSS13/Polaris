@@ -74,9 +74,10 @@
 	icon_state = "plain_preview"
 	color = "#00E1FF"
 	alpha = 77 // 0.3 * 255
+	var/glass_type = "glass"
 
 /obj/structure/table/glass/New()
-	material = get_material_by_name("glass")
+	material = get_material_by_name(glass_type)
 	..()
 
 /obj/structure/table/holotable
@@ -209,23 +210,28 @@
 
 
 /obj/structure/table/woodentable_reinforced/walnut/New()
+	..()
 	icon_state = "reinf_preview"
 	color = WOOD_COLOR_CHOCOLATE
-	get_material_by_name(MATERIAL_WALNUT)
+	material = get_material_by_name(MATERIAL_WALNUT)
 	reinforced = MATERIAL_WALNUT
 
 /obj/structure/table/woodentable/mahogany/New()
+	..()
 	color = WOOD_COLOR_RICH
-	get_material_by_name(MATERIAL_MAHOGANY)
+	material = get_material_by_name(MATERIAL_MAHOGANY)
 
 /obj/structure/table/woodentable/maple/New()
+	..()
 	color = WOOD_COLOR_PALE
-	get_material_by_name(MATERIAL_MAPLE)
+	material = get_material_by_name(MATERIAL_MAPLE)
 
 /obj/structure/table/woodentable/ebony/New()
+	..()
 	color = WOOD_COLOR_BLACK
-	get_material_by_name(MATERIAL_EBONY)
+	material = get_material_by_name(MATERIAL_EBONY)
 
 /obj/structure/table/woodentable/walnut/New()
+	..()
 	color = WOOD_COLOR_CHOCOLATE
-	get_material_by_name(MATERIAL_WALNUT)
+	material = get_material_by_name(MATERIAL_WALNUT)

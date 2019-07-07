@@ -731,6 +731,7 @@
 
 /datum/reagent/menthol
 	name = "Menthol"
+	id = "menthol"
 	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
 	taste_description = "mint"
 	reagent_state = LIQUID

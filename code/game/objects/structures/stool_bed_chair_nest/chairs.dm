@@ -250,24 +250,8 @@
 	buckle_lying = 0
 	buckle_dir = SOUTH
 	plane = UNDER_MOB_PLANE
-
-/obj/structure/bed/chair/sofa/update_icon()
-	// Prep icon.
-
-	if(applies_material_colour) //VOREStation Add - Goes with added var
-		color = material.icon_colour
-
-
-	desc = initial(desc)
-	if(padding_material)
-		name = "[padding_material.display_name] [initial(name)]" //this is not perfect but it will do for now.
-		desc += " It's made of [material.use_name] and covered with [padding_material.use_name]."
-	else
-		name = "[material.display_name] [initial(name)]"
-		desc += " It's made of [material.use_name]."
-
-/obj/structure/bed/chair/sofa/New(var/newloc)
-	..(newloc, "carpet")
+	applies_material_colour = 1
+	var/sofa_material = "carpet"
 
 /obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"
@@ -284,23 +268,67 @@
 	if(dir == 8)
 		buckle_dir = WEST
 
+	update_icon()
+
+/obj/structure/bed/chair/sofa/update_icon()
+	if(applies_material_colour && sofa_material)
+		material = get_material_by_name(sofa_material)
+		color = material.icon_colour
+
+		if(sofa_material == "carpet")
+			name = "red [initial(name)]"
+		else
+			name = "[sofa_material] [initial(name)]"
+
+//color variations
+
+/obj/structure/bed/chair/sofa
+	sofa_material = "carpet"
+
+/obj/structure/bed/chair/sofa/brown
+	sofa_material = "leather"
+
+/obj/structure/bed/chair/sofa/teal
+	sofa_material = "teal"
+
+/obj/structure/bed/chair/sofa/black
+	sofa_material = "black"
+
+/obj/structure/bed/chair/sofa/green
+	sofa_material = "green"
+
+/obj/structure/bed/chair/sofa/purp
+	sofa_material = "purple"
+
+/obj/structure/bed/chair/sofa/blue
+	sofa_material = "blue"
+
+/obj/structure/bed/chair/sofa/beige
+	sofa_material = "beige"
+
+/obj/structure/bed/chair/sofa/lime
+	sofa_material = "lime"
+
+/obj/structure/bed/chair/sofa/yellow
+	sofa_material = "yellow"
+
+//sofa directions
 
 /obj/structure/bed/chair/sofa/corner/New()
 	..()
 	buckle_dir = SOUTH
 
 
+/obj/structure/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+
+
 /obj/structure/bed/chair/sofa/right
 	icon_state = "sofaend_right"
 
+
 /obj/structure/bed/chair/sofa/corner
 	icon_state = "sofacorner"
-
-
-
-/obj/structure/bed/chair/sofa/brown/New(var/newloc)
-	..(newloc,"leather")
-
 
 /obj/structure/bed/chair/sofa/brown/left
 	icon_state = "sofaend_left"
@@ -313,10 +341,6 @@
 /obj/structure/bed/chair/sofa/brown/corner
 	icon_state = "sofacorner"
 
-
-/obj/structure/bed/chair/sofa/teal/New(var/newloc)
-	..(newloc,"teal")
-
 /obj/structure/bed/chair/sofa/teal/left
 	icon_state = "sofaend_left"
 
@@ -325,9 +349,6 @@
 
 /obj/structure/bed/chair/sofa/teal/corner
 	icon_state = "sofacorner"
-
-/obj/structure/bed/chair/sofa/black/New(var/newloc)
-	..(newloc,"black")
 
 /obj/structure/bed/chair/sofa/black/left
 	icon_state = "sofaend_left"
@@ -338,9 +359,6 @@
 /obj/structure/bed/chair/sofa/black/corner
 	icon_state = "sofacorner"
 
-/obj/structure/bed/chair/sofa/green/New(var/newloc)
-	..(newloc,"green")
-
 /obj/structure/bed/chair/sofa/green/left
 	icon_state = "sofaend_left"
 
@@ -349,9 +367,6 @@
 
 /obj/structure/bed/chair/sofa/green/corner
 	icon_state = "sofacorner"
-
-/obj/structure/bed/chair/sofa/purp/New(var/newloc)
-	..(newloc,"purple")
 
 /obj/structure/bed/chair/sofa/purp/left
 	icon_state = "sofaend_left"
@@ -362,9 +377,6 @@
 /obj/structure/bed/chair/sofa/purp/corner
 	icon_state = "sofacorner"
 
-/obj/structure/bed/chair/sofa/blue/New(var/newloc)
-	..(newloc,"blue")
-
 /obj/structure/bed/chair/sofa/blue/left
 	icon_state = "sofaend_left"
 
@@ -373,10 +385,6 @@
 
 /obj/structure/bed/chair/sofa/blue/corner
 	icon_state = "sofacorner"
-
-/obj/structure/bed/chair/sofa/beige/New(var/newloc)
-	..(newloc,"beige")
-
 
 /obj/structure/bed/chair/sofa/beige/left
 	icon_state = "sofaend_left"
@@ -389,9 +397,6 @@
 /obj/structure/bed/chair/sofa/beige/corner
 	icon_state = "sofacorner"
 
-/obj/structure/bed/chair/sofa/lime/New(var/newloc)
-	..(newloc,"lime")
-
 /obj/structure/bed/chair/sofa/lime/left
 	icon_state = "sofaend_left"
 
@@ -400,9 +405,6 @@
 
 /obj/structure/bed/chair/sofa/lime/corner
 	icon_state = "sofacorner"
-
-/obj/structure/bed/chair/sofa/yellow/New(var/newloc)
-	..(newloc,"yellow")
 
 /obj/structure/bed/chair/sofa/yellow/left
 	icon_state = "sofaend_left"

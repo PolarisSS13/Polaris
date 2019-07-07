@@ -172,6 +172,7 @@
 /obj/machinery/door/airlock/multi_tile/glass
 	name = "Glass Airlock"
 	glass = 1
+	opacity = 0
 
 /obj/machinery/door/airlock/multi_tile/glass/command
 	door_color = COLOR_COMMAND_BLUE

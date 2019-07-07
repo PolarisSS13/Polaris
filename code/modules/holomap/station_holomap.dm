@@ -2,8 +2,8 @@
 // Wall mounted holomap of the station
 //
 /obj/machinery/station_map
-	name = "station holomap"
-	desc = "A virtual map of the surrounding station."
+	name = "city holomap"
+	desc = "A virtual map of the city, useful for tourists."
 	icon = 'icons/obj/machines/stationmap.dmi'
 	icon_state = "station_map"
 	anchored = 1
@@ -129,9 +129,9 @@
 			update_use_power(2)
 
 			if(bogus)
-				to_chat(user, "<span class='warning'>The holomap failed to initialize. This area of space cannot be mapped.</span>")
+				to_chat(user, "<span class='warning'>The holomap failed to initialize. This area of the city cannot be mapped.</span>")
 			else
-				to_chat(user, "<span class='notice'>A hologram of the station appears before your eyes.</span>")
+				to_chat(user, "<span class='notice'>A hologram of the city appears before your eyes.</span>")
 
 /obj/machinery/station_map/attack_ai(var/mob/living/silicon/robot/user)
 	return // TODO - Implement for AI ~Leshana
@@ -221,7 +221,7 @@
 				set_broken()
 
 /datum/frame/frame_types/station_map
-	name = "Station Map Frame"
+	name = "City Map Frame"
 	frame_class = "display"
 	frame_size = 3
 	frame_style = "wall"
@@ -237,7 +237,7 @@
 	layer = ABOVE_WINDOW_LAYER
 
 /obj/item/weapon/circuitboard/station_map
-	name = T_BOARD("Station Map")
+	name = T_BOARD("City Map")
 	board_type = new /datum/frame/frame_types/station_map
 	build_path = /obj/machinery/station_map
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
