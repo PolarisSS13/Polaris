@@ -74,6 +74,7 @@ area/space/atmosalert()
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
+	holomap_color = HOLOMAP_AREACOLOR_ARRIVALS
 
 /area/shuttle/arrival/pre_game
 	icon_state = "shuttle2"
@@ -85,7 +86,7 @@ area/space/atmosalert()
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
 	music = "music/escape.ogg"
-
+	holomap_color = HOLOMAP_AREACOLOR_ESCAPE
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
 	icon_state = "shuttle2"
@@ -1091,30 +1092,37 @@ area/space/atmosalert()
 /area/crew_quarters/heads/hop
 	name = "\improper Command - City Clerk's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/crew_quarters/heads/hor
 	name = "\improper Research - RD's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/crew_quarters/heads/chief
-	name = "\improper Engineering - CE's Office"
+	name = "\improper Fire Station - CE's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/crew_quarters/heads/hos
 	name = "\improper Security - Chief of Police' Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/crew_quarters/heads/cmo
 	name = "\improper City Hospital - CMO's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
 	icon_state = "courtroom"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/crew_quarters/courtroom/judge
 	name = "\improper Courtroom - Judge's Quarters"
 	icon_state = "courtroom"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/crew_quarters/courtroom/defense
 	name = "\improper Courtroom - Defense Attorney Office"
@@ -1142,6 +1150,7 @@ area/space/atmosalert()
 	name = "\improper City Hotel"
 	icon_state = "Sleep"
 	flags = RAD_SHIELDED
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/crew_quarters/toilet
 	name = "\improper City Hotel Toilets"
@@ -1151,6 +1160,7 @@ area/space/atmosalert()
 /area/crew_quarters/sleep
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/crew_quarters/sleep/Apartment_A1
 	name = "\improper Apartment A1"
@@ -1364,13 +1374,13 @@ area/space/atmosalert()
 /area/crew_quarters/kitchen
 	name = "\improper Kitchen"
 	icon_state = "kitchen"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = AREA_FLAG_IS_NOT_PERSISTENT | RAD_SHIELDED
 
 /area/crew_quarters/bar
 	name = "\improper Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = AREA_FLAG_IS_NOT_PERSISTENT | RAD_SHIELDED
 
 /area/crew_quarters/barrestroom
 	name = "\improper Cafeteria Restroom"
@@ -1683,8 +1693,7 @@ area/space/atmosalert()
 //City Hospital
 
 /area/medical
-
-	flags = AREA_FLAG_IS_NOT_PERSISTENT //hospitals get messy, so this is for the best.
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT //hospitals get messy, so this is for the best.
 
 /area/medical/medbay
 	name = "\improper City Hospital Hallway - Port"
@@ -1855,7 +1864,7 @@ area/space/atmosalert()
 //Security
 
 /area/security
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT
 	//trust me, police stations get messy.
 
 /area/security/main
@@ -1976,7 +1985,7 @@ area/space/atmosalert()
 /area/security/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/security/checkpoint
 	name = "\improper Police Station Checkpoint"
@@ -2003,7 +2012,7 @@ area/space/atmosalert()
 	icon_state = "checkpoint1"
 
 /area/security/vacantoffice
-	name = "\improper Vacant Office"
+	name = "\improper Police Station - Car Park"
 	icon_state = "security"
 
 /area/security/vacantoffice2
@@ -2048,13 +2057,13 @@ area/space/atmosalert()
 	icon_state = "shuttle3"
 	requires_power = 0
 	base_turf = /turf/simulated/floor/tiled/techmaint
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT
 /area/supply/dock
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	requires_power = 0
 	base_turf = /turf/simulated/floor/tiled/techmaint
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT
 /area/janitor/
 	name = "\improper Custodial Closet"
 	icon_state = "janitor"
@@ -2308,7 +2317,7 @@ area/space/atmosalert()
 //HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
 
 /area/shuttle
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED || AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/shuttle/constructionsite
 	name = "\improper Construction Site Shuttle"
@@ -2452,6 +2461,7 @@ area/space/atmosalert()
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
 	ambience = list('sound/ambience/ambimalf.ogg')
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/ai_cyborg_station
 	name = "\improper Cyborg Station"
@@ -2525,6 +2535,7 @@ area/space/atmosalert()
 // Telecommunications Satellite
 /area/tcommsat/
 	ambience = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/tcommsat/entrance
 	name = "\improper Telecomms Teleporter"

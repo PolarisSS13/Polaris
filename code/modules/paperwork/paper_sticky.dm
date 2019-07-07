@@ -82,7 +82,7 @@
 
 /obj/item/weapon/paper/sticky/initialize()
 	. = ..()
-	moved_event.register(src, src, /obj/item/weapon/paper/sticky/proc/reset_persistence_tracking)
+	GLOB.moved_event.register(src, src, /obj/item/weapon/paper/sticky/proc/reset_persistence_tracking)
 
 /obj/item/weapon/paper/sticky/proc/reset_persistence_tracking()
 	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)
@@ -91,7 +91,7 @@
 
 /obj/item/weapon/paper/sticky/Destroy()
 	reset_persistence_tracking()
-	moved_event.unregister(src, src)
+	GLOB.moved_event.unregister(src, src)
 	. = ..()
 
 /obj/item/weapon/paper/sticky/update_icon()

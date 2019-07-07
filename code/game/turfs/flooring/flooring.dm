@@ -42,7 +42,12 @@ var/list/flooring_types
 	var/descriptor = "tiles"
 	var/flags
 	var/can_paint
-	var/list/footstep_sounds = list() // key=species name, value = list of soundss
+	var/list/footstep_sounds = list("human" = list(
+		'sound/effects/footstep/floor1.ogg',
+		'sound/effects/footstep/floor2.ogg',
+		'sound/effects/footstep/floor3.ogg',
+		'sound/effects/footstep/floor4.ogg',
+		'sound/effects/footstep/floor5.ogg'))
 
 	var/can_engrave = FALSE
 
@@ -353,6 +358,10 @@ var/list/flooring_types
 		'sound/effects/footstep/wood4.ogg',
 		'sound/effects/footstep/wood5.ogg'))
 
+/decl/flooring/wood/tiled
+	icon_base = "tiledwood2"
+	has_damage_range = 0
+
 /decl/flooring/wood/sif
 	name = "alien wooden floor"
 	desc = "Polished alien wood planks."
@@ -470,3 +479,17 @@ var/list/flooring_types
 
 /decl/flooring/road/garage
 	icon_base = "garage"
+
+/decl/flooring/diamond
+	icon = 'icons/turf/flooring/decorative.dmi'
+	icon_base = "tiles1"
+
+/decl/flooring/discoedge
+	icon = 'icons/turf/flooring/decorative.dmi'
+	icon_base = "outertile"
+
+/decl/flooring/stairs
+	icon = 'icons/turf/ramps.dmi'
+	icon_base = "ramptop"
+
+

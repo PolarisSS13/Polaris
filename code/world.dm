@@ -38,7 +38,6 @@ var/global/datum/global_init/init = new ()
 
 	fps = 30
 
-/var/diary_date_string
 /var/game_id = null
 /proc/generate_gameid()
 	if(game_id != null)
@@ -64,10 +63,8 @@ var/global/datum/global_init/init = new ()
 /world/New()
 	world.log << "Map Loading Complete"
 	//logs
-//	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/round-hh-mm-ss")
+	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/[game_id]/round-hh-mm-ss")
 	diary = file("[log_path].log")
-	diary_date_string = time2text(world.realtime, "YYYY/MM/DD")
-//	diary = "data/logs/[diary_date_string]_[game_id].log"
 	href_logfile = file("[log_path]-hrefs.htm")
 	error_log = file("[log_path]-error.log")
 	debug_log = file("[log_path]-debug.log")
@@ -563,8 +560,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server! | City RP w/ presidential elections</b> - <b>[station_name()]</b>";
-	s += " - (High-MRP/Low-HRP)| DEVELOPMENT MODE ("
+	s += "<b>The World Server Redux | Partially persistent city roleplay</b> - <b>[station_name()]</b>";
+	s += " | DEVELOPMENT MODE ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
 	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.

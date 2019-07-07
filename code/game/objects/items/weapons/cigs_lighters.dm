@@ -292,7 +292,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(nicotine_amt)
 		reagents.add_reagent("nicotine", nicotine_amt)
 	if(menthol_amt)
-		reagents.add_reagent("menthol", nicotine_amt)
+		reagents.add_reagent("menthol", menthol_amt)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
 	menthol_amt = 5

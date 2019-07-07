@@ -353,7 +353,10 @@
 		'icons/spideros_icons/sos_11.png',
 		'icons/spideros_icons/sos_12.png',
 		'icons/spideros_icons/sos_13.png',
-		'icons/spideros_icons/sos_14.png'
+		'icons/spideros_icons/sos_14.png',
+		'websites/website_images/ntoogle_logo.png',
+		'websites/website_images/ntoogle_search.png',
+		'websites/website_images/seized.png'
 		)
 
 
