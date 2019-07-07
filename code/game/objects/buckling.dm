@@ -132,7 +132,8 @@
 	if(!ticker)
 		user << "<span class='warning'>You can't buckle anyone in before the game starts.</span>"
 		return FALSE // Is this really needed?
-	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
+
+	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai) || user.mind.assigned_role == "Zombie")
 		return FALSE
 	if(M in buckled_mobs)
 		to_chat(user, "<span class='warning'>\The [M] is already buckled to \the [src].</span>")
