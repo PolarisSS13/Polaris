@@ -200,7 +200,24 @@
 				qdel(src)
 				return
 			else if(seed.chems)
-				if(!isnull(seed.chems["potato"]))
+				if(W.sharp && W.edge && !isnull(seed.chems["woodpulp"]))
+					user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
+					playsound(loc, 'sound/effects/woodcutting.ogg', 50, 1)
+					var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
+					if(!flesh_colour) flesh_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
+					for(var/i=0,i<2,i++)
+						var/obj/item/stack/material/wood/NG = new (user.loc)
+						if(flesh_colour) NG.color = flesh_colour
+						for (var/obj/item/stack/material/wood/G in user.loc)
+							if(G==NG)
+								continue
+							if(G.amount>=G.max_amount)
+								continue
+							G.attackby(NG, user)
+						user << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
+					qdel(src)
+					return
+				else if(!isnull(seed.chems["potato"]))
 					user << "You slice \the [src] into sticks."
 					new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
