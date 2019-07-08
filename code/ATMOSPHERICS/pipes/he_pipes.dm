@@ -67,8 +67,8 @@
 		return
 
 	update_icon()
+	handle_leaking()
 	return
-
 
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/process()
 	if(!parent)
@@ -180,4 +180,5 @@
 		return
 
 	update_icon()
+	handle_leaking()
 	return
