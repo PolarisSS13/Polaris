@@ -13,6 +13,9 @@
 	knockout_message = "has been knocked unconscious!"
 
 	spawn_flags =		SPECIES_IS_RESTRICTED
+	flags = NO_SCAN | NO_PAIN | NO_SLIP | NO_POISON | NO_MINOR_CUT | NO_BLOOD | UNDEAD
+	remains_type = /obj/effect/effect/sparks
+	show_ssd = "appears to be disconnected"
 
 	speech_bubble_appearance = "cyber"
 
@@ -85,24 +88,26 @@
 		return
 	if(!mind)
 		return
-
+/*
 	var/total_damage
 	// Tally human damage
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		total_damage = H.getBruteLoss() + H.getFireLoss() + H.getOxyLoss() + H.getToxLoss()
-
+*/
 	// Move the mind back to the original mob
 //	vr_holder.Sleeping(1)
 	src.mind.transfer_to(vr_holder)
 	to_chat(vr_holder, "<span class='notice'>You black out for a moment, and wake to find yourself back in your own body.</span>")
 	// Two-thirds damage is transferred as agony for /humans
 	// Getting hurt in VR doesn't damage the physical body, but you still got hurt.
+
+/*
 	if(ishuman(vr_holder) && total_damage)
 		var/mob/living/carbon/human/V = vr_holder
 		V.stun_effect_act(0, total_damage*2/3, null)												// 200 damage leaves the user in paincrit for several seconds, agony reaches 0 after around 2m.
 		to_chat(vr_holder, "<span class='warning'>Pain from your time in VR lingers.</span>")		// 250 damage leaves the user unconscious for several seconds in addition to paincrit
-
+*/
 	// Maintain a link with the mob, but don't use teleop
 	vr_holder.vr_link = src
 	vr_holder.teleop = null

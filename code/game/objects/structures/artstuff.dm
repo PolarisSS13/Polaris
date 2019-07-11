@@ -9,16 +9,16 @@
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "easel"
 	density = TRUE
-	resistance_flags = FLAMMABLE
-	max_integrity = 60
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
+//	max_integrity = 60
 	var/obj/item/canvas/painting = null
-
 
 //Adding canvases
 /obj/structure/easel/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/canvas))
 		var/obj/item/canvas/C = I
-		user.dropItemToGround(C)
+		user.drop_from_inventory(C)
 		painting = C
 		C.forceMove(get_turf(src))
 		C.layer = layer+0.1
@@ -51,7 +51,8 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 	desc = "Draw out your soul on this canvas!"
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "11x11"
-	resistance_flags = FLAMMABLE
+	burn_state = 0 //Burnable
+	burntime = SHORT_BURN
 	var/whichGlobalBackup = 1 //List index
 
 /obj/item/canvas/nineteenXnineteen
@@ -66,7 +67,17 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 	icon_state = "23x23"
 	whichGlobalBackup = 4
 
-
+//HEY YOU
+//ARE YOU READING THE CODE FOR CANVASES?
+//ARE YOU AWARE THEY CRASH HALF THE SERVER WHEN SOMEONE DRAWS ON THEM...
+//...AND NOBODY CAN FIGURE OUT WHY?
+//THEN GO ON BRAVE TRAVELER
+//TRY TO FIX THEM AND REMOVE THIS CODE
+/*
+/obj/item/canvas/initialize()
+	..()
+	return INITIALIZE_HINT_QDEL //Delete on creation
+*/
 //Find the right size blank canvas
 /obj/item/canvas/proc/getGlobalBackup()
 	. = null
@@ -91,7 +102,7 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 		return
 
 	//Cleaning one pixel with a soap or rag
-	if(istype(I, /obj/item/soap) || istype(I, /obj/item/reagent_containers/glass/rag))
+	if(istype(I, /obj/item/weapon/soap) || istype(I, /obj/item/weapon/reagent_containers/glass/rag))
 		//Pixel info created only when needed
 		var/icon/masterpiece = icon(icon,icon_state)
 		var/thePix = masterpiece.GetPixel(pixX,pixY)
@@ -106,9 +117,9 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 		qdel(masterpiece)
 
 	//Drawing one pixel with a crayon
-	else if(istype(I, /obj/item/toy/crayon))
-		var/obj/item/toy/crayon/C = I
-		DrawPixelOn(C.paint_color, pixX, pixY)
+	else if(istype(I, /obj/item/weapon/pen/crayon))
+		var/obj/item/weapon/pen/crayon/C = I
+		DrawPixelOn(C.colour, pixX, pixY)
 	else
 		return ..()
 
@@ -122,7 +133,6 @@ GLOBAL_LIST_INIT(globalBlankCanvases, new(AMT_OF_CANVASES))
 		//it's basically a giant etch-a-sketch
 		icon = blank
 		user.visible_message("<span class='notice'>[user] cleans the canvas.</span>","<span class='notice'>You clean the canvas.</span>")
-
 
 
 #undef AMT_OF_CANVASES
