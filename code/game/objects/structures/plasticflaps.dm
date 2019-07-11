@@ -65,3 +65,10 @@
 	name = "airtight plastic flaps"
 	desc = "Heavy duty, airtight, plastic flaps."
 	can_atmos_pass = ATMOS_PASS_NO
+
+/obj/structure/plasticflaps/mining/CanPass(atom/A, turf/T)
+	for(var/mob_type in mobs_can_pass)
+		if(istype(A, mob_type))
+			return ..()
+
+	return 0
