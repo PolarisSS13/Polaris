@@ -897,3 +897,77 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_d"
 	. = ..()
+
+
+/obj/structure/loot_pile/VR
+	loot_depletion = FALSE
+	density = TRUE
+	desc = "This isn't real, is it?"
+
+/obj/structure/loot_pile/VR/firstaid
+	name = "VR First Aid Kit"
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "firstaid"
+
+
+	common_loot = list(/obj/item/weapon/storage/firstaid/regular
+		)
+
+	uncommon_loot = list(
+		/obj/item/weapon/storage/firstaid/adv
+		)
+
+	rare_loot = list(
+		/obj/item/weapon/storage/firstaid/combat
+		)
+
+/obj/structure/loot_pile/VR/weapon
+	name = "VR Gun Item"
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "revolver"
+
+
+	common_loot = list(/obj/random/projectile
+		)
+
+	uncommon_loot = list(
+		/obj/random/projectile
+		)
+
+	rare_loot = list(
+		/obj/random/projectile
+		)
+
+/obj/structure/loot_pile/VR/knife
+	name = "VR Knife"
+	icon = 'icons/obj/kitchen.dmi'
+	icon_state = "survivalknife"
+
+
+	common_loot = list(/obj/item/weapon/material/knife/tacknife/survival
+		)
+
+	uncommon_loot = list(
+		/obj/item/weapon/material/sword/katana
+		)
+
+	rare_loot = list(
+		/obj/item/weapon/material/twohanded/fireaxe/scythe
+		)
+
+/obj/structure/loot_pile/VR/light
+	name = "VR Light"
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "maglight"
+
+
+	common_loot = list(/obj/item/device/flashlight/maglight
+		)
+
+	uncommon_loot = list(
+		/obj/item/device/flashlight/color
+		)
+
+	rare_loot = list(
+		/obj/item/device/flashlight/lantern
+		)

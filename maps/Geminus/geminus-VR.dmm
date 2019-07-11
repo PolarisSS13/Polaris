@@ -1,0 +1,106 @@
+"a" = (/turf/unsimulated/wall/planetary/normal,/area/planets/Geminus/outdoor/vr/forest)
+"b" = (/turf/simulated/mineral/impassable,/area/planets/Geminus/outdoor/vr/forest)
+"c" = (/obj/structure/closet/statue,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"d" = (/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"e" = (/obj/structure/flora/tree/dead,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"f" = (/obj/structure/flora/tree/jungle_small,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"g" = (/obj/structure/flora/grass/brown,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"h" = (/obj/effect/spawner/lootdrop,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"i" = (/obj/effect/landmark/mobcorpse/russian,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"j" = (/obj/structure/flora/tree/jungle,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"k" = (/obj/item/weapon/nullrod,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"l" = (/obj/structure/table/alien,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"m" = (/obj/structure/bonfire/permanent,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"n" = (/obj/structure/flora/rock,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"o" = (/obj/structure/flora/grass/green,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"p" = (/obj/structure/loot_pile/VR/weapon,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"q" = (/obj/structure/closet/statue,/mob/living/simple_animal/hostile/statue{banishable = 1},/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"r" = (/obj/structure/flora/grass/both,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"s" = (/turf/unsimulated/wall/planetary/normal,/area/planets/Geminus/outdoor/vr)
+"t" = (/obj/structure/loot_pile/VR/firstaid,/obj/structure/table/alien,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"u" = (/turf/simulated/mineral,/area/planets/Geminus/outdoor/vr)
+"v" = (/obj/structure/loot_pile/VR/light,/obj/structure/table/alien,/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+"w" = (/turf/simulated/mineral/floor,/area/planets/Geminus/outdoor/vr)
+"x" = (/turf/simulated/floor/outdoors/grass,/area/planets/Geminus/outdoor/vr)
+"y" = (/turf/simulated/floor/outdoors/grass/forest,/area/planets/Geminus/outdoor/vr)
+"z" = (/turf/simulated/floor/outdoors/grass/nogrowth,/area/planets/Geminus/outdoor/vr)
+"A" = (/mob/living/simple_animal/hostile/bear,/turf/simulated/mineral/floor,/area/planets/Geminus/outdoor/vr)
+"B" = (/obj/structure/loot_pile/VR/knife,/turf/simulated/floor/outdoors/grass/nogrowth,/area/planets/Geminus/outdoor/vr)
+"C" = (/obj/structure/loot_pile/VR/light,/turf/simulated/floor/outdoors/grass/nogrowth,/area/planets/Geminus/outdoor/vr)
+"D" = (/obj/effect/landmark/virtual_reality{name = "CaveCraft"},/obj/structure/bed,/turf/simulated/floor/outdoors/grass/nogrowth,/area/planets/Geminus/outdoor/vr)
+"E" = (/obj/structure/bonfire/permanent,/turf/simulated/floor/outdoors/grass/nogrowth,/area/planets/Geminus/outdoor/vr)
+"F" = (/turf/simulated/floor/water,/area/planets/Geminus/outdoor/vr)
+"G" = (/obj/effect/landmark/virtual_reality{name = "Bosnian Caves: 2324 - Remastered"},/turf/simulated/floor/outdoors/snow,/area/planets/Geminus/outdoor/vr/forest)
+
+(1,1,1) = {"
+sssssssssssssssssssssssssssssssssssssssssssss
+suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuus
+suuuuuwwwwwuuuxxxxyyyyuuuuuuuuuuuuuuuuxxuuuus
+suuuuwwwwwwuuuxxxxyyyyyyyyuuuuuuuuuuuxxxzzuus
+suuuuwwwAwwwuuuxxxyyyyyyyyyxxuuuuuuuxzzzBzzus
+suuuuwwwwwAwuuuxyyyyyyyyyyyxxuuuuuuuxCzzzzDus
+suuuuwAwwwwwuuxyyyyyyyyyyyyxxxxxuuuxxzzzEzzus
+suuuwwwwwwwuuuxyyyyyyyyyyyyxxxxxxxuuxzzzzzuus
+suuuuuwwwwuuuuxyyyyyyyyyyyyxxxxxxxxuuzzzuuuus
+suuuuuuuuwuuuyyyyyyyyyxxxxxxxxxxxxxzzzzuuuuus
+suuxxxuuuzzyyyyyyyyyyzzxxxxxxxzzzzzzzzzxxxxus
+suuxxxxzzzzyyyyyyyyzzxxxxxzzzzzzzzzzzzxxxxxus
+suuxxxxzzzzyyyyyyyyzzzzzzzzzzzzzzxzzxxxxxxxus
+suuxxxxxxzzyyyyyyyyzzzzzzzzzzzzzzzxxxxxxxxxus
+suuxxxxxxzzzzyyyzzzzzzzzzzzzzzyyyzzxxxxxxxxus
+suuxxxxxxxzzzyyzzzzzzzzzzzzyyyyyyzzyyxxxxxxus
+suuxxxxxxxzzzzzzzzzzyyyzzzzyyyyyyyyyyxxxxyyus
+suuxxxxxxxxzzzzzyyyyyyyyyyyyyyyyyyyyyyyyyyyus
+suuxxxxxxxxxxzzxxyyyyyyyyyyyyyyyyyyyyyyyyyyus
+suuuxxxxxxxxxzzxxyyyyyyyyyyyyyyyyyyyyyyuuyyus
+suuuxxxxxxxxxzzxxxxyyyyyyyyyyyyyyyyyyyyuuyyus
+suuuxxxxxxxxxzzxxxxxxxxxyyyyyyyyyyyyyuuuuuuus
+suuuuyyxxxxxzzzxxxxxxxxxyyyyyyyyyyyyyuuuuuuus
+suuyyyyxxxxxzzxxxxxxxxxxxxxxyyyyyxxxxuyuuuuus
+suuyyyxxxxxxzzxxxxxxxxxxxxxxxxxxxxxxxyyuuuuus
+suuFyyzzzxxzzzxxxxxxxxxxxxxxxxxxxxxxxxxyyyuus
+suuFFFzzzxzzzxxxxxxxxxxxxxxxxxxxxxxxxxxyyyyus
+suuFFFzzzxzzxxxxxxxxxxyyyyyyxxxxxxxxxxxyyyyus
+suuFFFzzzzzzzxxxxxxxxxyyyyyyxxxxxxxxxxxyyyyus
+suuFFFFFzzzzzxxxyyyyyyyyyyyyxxxxxxxxxxxxxxxus
+suuFFFFFFxzzzzzxyyyyyyyyyyyyyyxxxxxxxxxxxxxus
+suuFFFFFFFxzzzzxyyyyyyyyyyyyyyxxxxxxxxxxxxxus
+suuFFFFFFFFFFzzxuuyyyyyyyyyyyyxxxxxxxxxxxxuus
+suuuFFFFFFFFFFuuuuuuyyyyyyyyyyyyyyxxxxxuuuuus
+suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuus
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbcdeddddddfdddddgddhbbbbbbbbba
+abdddebbbbbbbbdddddddddiddddddddddddddecdbbba
+abjdkdbbbbbbbddddddddbbbbbbbbddddddddddddbbba
+abbbdgdbbbbbbddmdgbbbbbbbbbbbbbbbbbdndddjcbba
+abbbbddibbbhdddddbbbbbbbbbdbbbbbbbbbbddmddbba
+abbbbbdddnbbbddddbbcddddddddddddhebbbbdddhbba
+abbbbbbddfbbbddobbdddddcbbboddddddbbbpdgddbba
+abbbbbbddbbbddddbbddmdbbbbbbbbbbdddddiddddbba
+abbbbbbddbbbddddbbddddbbbbbbbbbbbddddddfddbba
+abbbbbbdhbbbnddbbbhddddibbbbbbbbbbbbbdddddbba
+abbbbddddbbdddfbbbbbbddddbbbbbcbbbbbbbbbddeba
+abbbedddgddddddbbbbbbbbddddddddnbbbbbbbbdgdba
+abbbdibbbbbbbdddbbbbbbbbbbbbbddddgddbbbbdddba
+abbbddcbbbbbbddddbbbbbbbbbbbbbbbddddbbbhdddba
+abbbddbbbbbdddddddddjdbbbdddbbbbbbbdbbbbdddba
+abbbddbbbcddddbbdddddddddddddddebbbddjbbddbba
+abbdddbbbddgddbbbbbddddddhddmdddbbbddgddddbba
+abbdnbbbbdddddddebbbbbbbbdddddddcbbbbddoedbba
+abbddbbbbdedbddddbbbbbbbbbbegddbbbbbbddfdhbba
+abddgdjbbddbbbbbbbbbbbbbbbbbbbbbbbbbbdddddbba
+abfdpqbbbbbbbddbbbbbbbbbbbbbbbbbbdidgddddbbba
+abbddbbbbbbbbdeddhdcebbbbbbdjddddhdoddedbbbba
+abbbbbbbbdebbfddoddndddddddrdddddddddddbbbbba
+abbbbbbddgdbbbbddddddddfrddddddbbddddbbbbbbba
+abbbbdeddrdcbbbbbbbbddddddbbbbbbbdddcbbbbbbba
+abbbddddidddndbbbbbbdddgdbbbbbbberddbbbbbbbba
+abbbddddmdgdddjdbbbbdddbbbbbbbdfddddbbbbbbbba
+abbbfdgddddddddddddrddibbbedrddddddbbbbbbbbba
+abbbbbddhdpdbbbgdddddddbbbdmdGddidbbbbbbbbbba
+abbbbbbdddbbbbbdddfdhbbbbdrdddddbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbtlvbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
