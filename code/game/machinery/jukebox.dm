@@ -7,10 +7,14 @@ datum/track/New(var/title_name, var/audio)
 	sound = audio
 
 /obj/machinery/media/jukebox/
-	name = "space jukebox"
-	icon = 'icons/obj/jukebox.dmi'
-	icon_state = "jukebox2-nopower"
-	var/state_base = "jukebox2"
+	name = "Funkmaster 9000 jukebox"
+	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Funkmaster 9000'."
+	description_info = "Click the jukebox and then select a track on the interface. You can choose to play or stop the track, or set the volume. Use a wrench to attach or detach the jukebox to the floor. The room it is installed in must have power for it to operate!"
+	description_fluff = "The Funkmaster 9000, putting a modern spin on the ancient curved plasmascreen design."
+	description_antag = "Slide a cryptographic sequencer into the jukebox to overload its speakers. Instead of music, it'll produce a hellish blast of noise and explode!"
+	icon = 'icons/obj/jukebox_new.dmi'
+	icon_state = "jukebox3-nopower"
+	var/state_base = "jukebox3"
 	anchored = 1
 	density = 1
 	power_channel = EQUIP
@@ -18,8 +22,10 @@ datum/track/New(var/title_name, var/audio)
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/weapon/circuitboard/jukebox
+	pixel_x = -8
 
 	var/playing = 0
+	var/volume = 20
 
 	// Vars for hacking
 	var/datum/wires/jukebox/wires = null
@@ -28,24 +34,16 @@ datum/track/New(var/title_name, var/audio)
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
-		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
-		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
-		new/datum/track("D`Bert", 'sound/music/title2.ogg'),
-		new/datum/track("D`Fort", 'sound/ambience/song_game.ogg'),
-		new/datum/track("Floating", 'sound/music/main.ogg'),
-		new/datum/track("Endless Space", 'sound/music/space.ogg'),
-		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
-		new/datum/track("Scratch", 'sound/music/title1.ogg'),
-		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
-		new/datum/track("Stellar Transit", 'sound/ambience/serspaceamb1.ogg'),
+		new/datum/track("Honk", 'sound/music/clown.ogg'),
+		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
+		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
+		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
+		new/datum/track("Victory", 'sound/music/Victory.ogg')
 	)
 
 	// Only visible if hacked
 	var/list/datum/track/secret_tracks = list(
-		new/datum/track("Clown", 'sound/music/clown.ogg'),
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
-		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
-		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
+		new/datum/track("Cursed Song", 'sound/music/Despacito.ogg')
 	)
 
 /obj/machinery/media/jukebox/New()
