@@ -6,7 +6,7 @@
 					{{:value.entry}}:
 				</div>
 				<div class="itemContent">
-					{{:helper.string('<span class="{0}">{1}{2}</span>', value.val < value.bad_low || value.val > value.bad_high ? 'bad' : value.val < value.poor_low || value.val > value.poor_high ? 'average' : 'good' , value.val, value.type == 'pressure' ? 'kPa' : '&degC')}}
+					{{:helper.string('<span class="{0}">{1}{2}</span>', value.val < value.bad_low || value.val > value.bad_high ? 'bad' : value.val < value.poor_low || value.val > value.poor_high ? 'average' : 'good' , value.val, value.units)}}
 				</div>
 			</div>
 		{{/if}}
