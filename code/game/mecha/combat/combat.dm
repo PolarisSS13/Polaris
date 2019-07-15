@@ -26,14 +26,15 @@
 	return
 */
 
-/obj/mecha/combat/melee_action(target as obj|mob|turf)
+/obj/mecha/combat/melee_action(atom/T)
 	if(internal_damage&MECHA_INT_CONTROL_LOST)
-		target = safepick(oview(1,src))
-	if(!melee_can_hit || !istype(target, /atom)) return
-	if(istype(target, /mob/living))
-		var/mob/living/M = target
+		T = safepick(oview(1,src))
+	if(!melee_can_hit)
+		return
+	if(istype(T, /mob/living))
+		var/mob/living/M = T
 		if(src.occupant.a_intent == I_HURT || istype(src.occupant, /mob/living/carbon/brain)) //Brains cannot change intents; Exo-piloting brains lack any form of physical feedback for control, limiting the ability to 'play nice'.
-			playsound(src, 'sound/weapons/punch4.ogg', 50, 1)
+			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
 			if(damtype == "brute")
 				step_away(M,src,15)
 			/*
@@ -44,8 +45,8 @@
 					melee_can_hit = 1
 				return
 			*/
-			if(istype(target, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = target
+			if(ishuman(T))
+				var/mob/living/carbon/human/H = T
 	//			if (M.health <= 0) return
 
 				var/obj/item/organ/external/temp = H.get_organ(pick(BP_TORSO, BP_TORSO, BP_TORSO, BP_HEAD))
@@ -86,12 +87,12 @@
 					else
 						return
 				M.updatehealth()
-			src.occupant_message("You hit [target].")
-			src.visible_message("<font color='red'><b>[src.name] hits [target].</b></font>")
+			src.occupant_message("You hit [T].")
+			src.visible_message("<font color='red'><b>[src.name] hits [T].</b></font>")
 		else
 			step_away(M,src)
-			src.occupant_message("You push [target] out of the way.")
-			src.visible_message("[src] pushes [target] out of the way.")
+			src.occupant_message("You push [T] out of the way.")
+			src.visible_message("[src] pushes [T] out of the way.")
 
 		melee_can_hit = 0
 		if(do_after(melee_cooldown))
@@ -99,20 +100,19 @@
 		return
 
 	else
-		if(istype(target, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
+		if(istype(T, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
 			return
 		if(src.occupant.a_intent == I_HURT || istype(src.occupant, /mob/living/carbon/brain)) // Don't smash unless we mean it
 			if(damtype == "brute")
-				src.occupant_message("You hit [target].")
-				src.visible_message("<font color='red'><b>[src.name] hits [target]</b></font>")
+				src.occupant_message("You hit [T].")
+				src.visible_message("<font color='red'><b>[src.name] hits [T]</b></font>")
+				playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
 
-				if(istype(target, /turf/simulated/wall))
-					target:take_damage(force)
-				else if(istype(target, /obj/structure/girder))
-					target:take_damage(force * 3) //Girders have 200 health by default. Steel, non-reinforced walls take four punches, girders take (with this value-mod) two, girders took five without.
+				if(istype(T, /obj/structure/girder))
+					T:take_damage(force * 3) //Girders have 200 health by default. Steel, non-reinforced walls take four punches, girders take (with this value-mod) two, girders took five without.
 				else
-					target:attackby(src, src.occupant)
-					target:take_damage(force)
+					T:take_damage(force)
+
 				melee_can_hit = 0
 
 				if(do_after(melee_cooldown))

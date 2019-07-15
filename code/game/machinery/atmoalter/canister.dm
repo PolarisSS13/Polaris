@@ -450,6 +450,6 @@ update_flag
 	src.update_icon()
 	return 1
 
-/obj/machinery/portable_atmospherics/canister/proc/take_damage(var/damage)
+/obj/machinery/portable_atmospherics/canister/take_damage(var/damage)
 	src.health -= damage
 	healthcheck()
