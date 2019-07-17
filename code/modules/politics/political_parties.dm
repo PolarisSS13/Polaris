@@ -77,10 +77,10 @@ var/global/list/political_parties = list()
 
 	return domain
 
-/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/mob/living/carbon/human/H)
+/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/leader_uid, var/email)
 
 	var/datum/party/P = new()
-	create_party_leader(H, P)
+	create_party_leader(name, leader_uid, P)
 	P.name = name
 	P.description = description
 	P.slogan = slogan
@@ -107,13 +107,13 @@ var/global/list/political_parties = list()
 
 	return 1
 
-/proc/create_party_member(var/mob/living/carbon/human/H, var/position, var/email, var/admin, var/datum/party/party)
+/proc/create_party_member(var/name, var/uid, var/position, var/admin, var/datum/party/party)
 	//First of all, let's make a party member.
 	var/datum/party_member/M = new()
-	M.name = H.real_name
+	M.name = name
 	M.leader = 1
 	M.position = position
-	M.unique_ID = H.mind.prefs.unique_id
+	M.unique_ID = uid
 	M.email = email
 	M.is_admin = admin
 	M.email = get_party_member_email(party, M)
@@ -145,23 +145,21 @@ var/global/list/political_parties = list()
 	return M
 
 
-/proc/create_applicant(var/mob/living/carbon/human/H, var/email, var/msg, var/datum/party/party)
+/proc/create_applicant(var/name, var/uid, var/email, var/msg, var/datum/party/party)
 	//First of all, let's make a party member.
 	var/datum/party_applicant/A = new()
-	A.name = H.real_name
-	A.unique_ID = H.mind.prefs.unique_id
+	A.name = name
+	A.unique_ID = uid
 	A.message = msg
 	A.email = email
 	A.apply_date = current_date_string
 
 	party.applicants += A
 
-
-
 	return A
 
-/proc/create_party_leader(var/mob/living/carbon/human/H, var/datum/party/party)
-	var/L = create_party_member(H, "Party Leader", 1, party)
+/proc/create_party_leader(var/name, var/uid, var/datum/party/party)
+	var/L = create_party_member(name, uid, "Party Leader", 1, party)
 	party.party_leader = L
 
 	return L

@@ -529,6 +529,10 @@ var/global/datum/controller/occupations/job_master
 			EA.login = 	complete_login
 			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
 			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+
+			H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
+
+			H.mind.initial_email = EA.login
 		// END EMAIL GENERATION
 
 

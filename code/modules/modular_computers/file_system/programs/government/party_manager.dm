@@ -10,7 +10,7 @@
 	name = "Official Party Management"
 	var/index = 0
 	var/page_msg
-	var/authuser
+	var/
 
 	var/user_uid
 	var/can_login
@@ -200,14 +200,23 @@
 			reg_error = "There was an error charging your bank account. Please contact your bank's administrator."
 			return
 		else
-			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, usr)
-			message_admins("Party created.")
+
+			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+			EA.password = party_pass
+			EA.login = "[replacetext(lowertext(p_name), " ", "-")]@parties.nanotrasen.gov"
+
+			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, user_uid, EA.login)
+			message_admins("Party created: [p_name].")
+
+			P.party_email = EA.login
 
 			index = 2
 			page_msg = "Party created! <br><br>\
 			<b>Party Name:</b> [P.name]<p>\
-			<b>Party Unique ID:</b> [P.id] (Use this as a login.)<p>\
-			<b>Party Password:</b> [P.password]"
+			<b>Party Unique ID:</b> [P.id]<p>\
+			<b>Party Password:</b> [P.password]\
+			<b>Email:</b> [P.party_email]\
+			<b>Email Password:</b> [party_pass]"
 
 			reset_fields()
 
@@ -294,19 +303,73 @@
 
 	if(href_list["assign_new_leader"])
 		. = 1
+
+
+		var/p_members
 		if(current_party)
-			var/datum/party_member/p_members = current_party.members
+			for(var/list/datum/party_member/party_mem in current_party.members)
+				p_members += party_mem.name
+
 			if(!p_members)
 				return
+
+			var/new_leader = input(usr, "Select a new party leader", "New Leader")  as null|anything in p_members
+			var/choice = alert(usr,"Resign as party leader and set [new_leader] as new party leader?","[new_leader] as new party leader?","Yes","No")
+			if(choice == "Yes")
+
+				var/party_member
+
+				for(var/list/datum/party_member/PM in current_party.members)
+					if(new_leader == PM.name)
+						party_member = PM
+						break
+
+				current_party.party_leader = party_member
+
+				index = 1
+				page_msg = "You have set [new_leader] as the new party leader of [current_party.name]."
+
 			else
-				var/datum/party_member/new_leader = input(usr, "Select a new party leader", "New Leader")  as null|anything in p_members
-				var/choice = alert(usr,"Resign as party leader and set [new_leader.name] as new party leader?","[new_leader.name] as new party leader?","Yes","No")
-				if(choice == "Yes")
-					current_party.party_leader = new_leader
-				else
-					return
+
+				return
 
 	if(href_list["apply_for_party"])
 		. = 1
 
 
+
+		if(!ishuman(usr))
+			return
+
+		var/mob/living/carbon/human/H = usr
+
+		var/obj/item/weapon/card/id/I = H.GetIdCard()
+
+		if(!I)
+			return
+
+		var/UID = I.unique_ID
+		var/email = I.email
+		var/reg_name = I.registered_name
+
+
+		var/avail_parties
+
+		for(var/datum/party/party in political_parties)
+			avail_parties += party.name
+
+		var/applied_party = input(usr, "Select a party to apply for", "Apply for Party")  as null|anything in avail_parties
+
+		var/choice = alert(usr,"Apply for a position at [applied_party]?","Yes","No")
+		if(choice == "Yes")
+
+			var/applied
+
+			for(var/datum/party/party in political_parties)
+				if(applied_party == party.name)
+					applied = party
+					break
+
+			var/app_msg = sanitize(copytext(input(usr, "Enter your application message, this will be reviewed by the party leaders. (300 chars max)", "Party Message", null)  as message,1,300))
+
+			create_applicant(reg_name, UID, email, app_msg, applied)
