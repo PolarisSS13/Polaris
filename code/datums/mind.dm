@@ -63,6 +63,8 @@
 	//put this here for easier tracking ingame
 	var/datum/money_account/initial_account
 
+	var/initial_email
+
 	var/list/initial_email_login = list("login" = "", "password" = "")
 
 	var/datum/preferences/prefs

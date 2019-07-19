@@ -529,6 +529,10 @@ var/global/datum/controller/occupations/job_master
 			EA.login = 	complete_login
 			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
 			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+
+			H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
+
+			H.mind.initial_email = EA.login
 		// END EMAIL GENERATION
 
 
@@ -572,6 +576,10 @@ var/global/datum/controller/occupations/job_master
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)
 				C.associated_account_number = H.mind.initial_account.account_number
+				C.associated_pin_number = H.mind.initial_account.remote_access_pin
+
+
+			C.associated_unique_ID = H.mind.prefs.unique_id
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 

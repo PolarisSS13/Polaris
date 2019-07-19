@@ -1,7 +1,7 @@
 /obj/machinery/modular_computer/console/preset/
 	// Can be changed to give devices specific hardware
 	var/_has_id_slot = 0
-	var/_has_printer = 0
+	var/_has_printer = 1
 	var/_has_battery = 0
 
 /obj/machinery/modular_computer/console/preset/New()
@@ -107,3 +107,4 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/library())

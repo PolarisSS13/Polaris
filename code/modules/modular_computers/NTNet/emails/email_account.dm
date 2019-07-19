@@ -25,6 +25,12 @@
 /datum/computer_file/data/email_account/proc/all_emails()
 	return (inbox | spam | deleted)
 
+/proc/get_email(var/email)
+	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+		if(account.login == email)
+			return account
+	return 0
+
 /datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
 	var/datum/computer_file/data/email_account/recipient
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
@@ -79,4 +85,4 @@
 			send_mail(email_account.login, new_message, 1)
 			sleep(2)
 
-	return 1 
+	return 1

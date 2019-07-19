@@ -8,7 +8,11 @@ var/global/list/political_parties = list()
 	var/name
 	var/description
 
-	var/datum/party_member/members
+	var/party_message = " "						//party's announcement board message shown to members only
+
+	var/list/datum/party_member/applicants
+
+	var/list/datum/party_member/members
 	var/datum/party_member/party_leader
 
 	var/monthly_cost = 3500
@@ -33,27 +37,64 @@ var/global/list/political_parties = list()
 
 	var/linked_account
 
-
-/datum/party/New()
-	..()
-	id = md5(name)
-
 /datum/party_member
 	var/name
 	var/leader // If this person is a leader or not
 	var/position = "Party Member"
 	var/unique_ID
 	var/is_admin = 0
+	var/email
 
-/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/mob/living/carbon/human/H)
+	var/join_date //date this person joins
+
+/datum/party_applicant
+	var/name
+	var/message //The application message someone applies with.
+	var/unique_ID
+	var/email
+
+	var/apply_date //date this person joins
+
+/proc/get_party_email(var/datum/party/P)
+	var/domain = get_party_domain(P)
+	var/email = "admin@[domain]"
+
+	return email
+
+/proc/get_party_member_email(var/datum/party/P, var/datum/party_member/M)
+	var/domain = get_party_domain(P)
+	var/prefix = replacetext(lowertext(P.name), " ", "_")
+	var/email = "[prefix]@[domain]"
+	if(ntnet_global.does_email_exist(email))
+		email = "[prefix][rand(100, 999)]@[domain]"
+	if(ntnet_global.does_email_exist(email))
+		email = get_party_email(P)
+
+	return email
+
+/proc/get_party_domain(var/datum/party/P)
+	var/domain = "[replacetext(lowertext(P.name), " ", "_")].parties.nanotrasen.gov"
+
+	return domain
+
+/proc/create_new_party(var/name, var/description, var/slogan, var/pass, var/leader_uid)
 
 	var/datum/party/P = new()
-	create_party_leader(H, P)
+	create_party_leader(name, leader_uid, P)
 	P.name = name
 	P.description = description
 	P.slogan = slogan
 	P.creation_time = get_game_time()
 	P.password = pass
+	P.id = md5("[P.name]")
+
+	P.party_email = get_party_email(P)
+
+	var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+	EA.password = GenerateKey()
+	EA.login = 	P.party_email
+
+	P.creation_time = current_date_string
 
 	political_parties += P
 
@@ -66,26 +107,104 @@ var/global/list/political_parties = list()
 
 	return 1
 
-/proc/create_party_member(var/mob/living/carbon/human/H, var/position, var/admin, var/datum/party/party)
+/proc/create_party_member(var/name, var/uid, var/position, var/admin, var/datum/party/party)
 	//First of all, let's make a party member.
 	var/datum/party_member/M = new()
-	M.name = H.real_name
+	M.name = name
 	M.leader = 1
 	M.position = position
-	M.unique_ID = H.mind.prefs.unique_id
+	M.unique_ID = uid
 	M.is_admin = admin
+	M.email = get_party_member_email(party, M)
+
+	var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+	EA.password = GenerateKey()
+	EA.login = 	M.email
+
 	party.members += M
+
+	M.join_date = current_date_string
+
+	// Send an email to the party member.
+
+	var/datum/computer_file/data/email_account/address = get_email(M.email)
+
+	var/datum/computer_file/data/email_message/message = new()
+	message.title = "You have joined a party: [party.name]"
+
+	message.stored_data = "This is a confirmation email showing that you have joined [party.name].\n\n \
+	To access the party, you must login with it's password. \n \
+	The current password is: [party.password] \n \
+	Use this to login."
+
+	message.source = "noreply@parties.nanotrasen.gov"
+
+	address.receive_mail(message, 1)
 
 	return M
 
-/proc/create_party_leader(var/mob/living/carbon/human/H, var/datum/party/party)
-	var/L = create_party_member(H, "Party Leader", 1, party)
+
+/proc/create_applicant(var/name, var/uid, var/email, var/msg, var/datum/party/party)
+	//First of all, let's make a party member.
+	var/datum/party_applicant/A = new()
+	A.name = name
+	A.unique_ID = uid
+	A.message = msg
+	A.email = email
+	A.apply_date = current_date_string
+
+	party.applicants += A
+
+	return A
+
+/proc/create_party_leader(var/name, var/uid, var/datum/party/party)
+	var/L = create_party_member(name, uid, "Party Leader", 1, party)
 	party.party_leader = L
 
 	return L
 
-/proc/get_all_parties()
+/proc/is_party_member(var/uid, var/datum/party/party)
+	for(var/datum/party_member/M in party.members)
+		if(M.unique_ID == uid)
+			return 1
+	return 0
 
+/proc/is_party_leader(var/uid, var/datum/party/party)
+	for(var/datum/party_member/M in party.members)
+		if(M.unique_ID == uid  && M.is_admin == 1)
+			return 1
+	return 0
+
+/proc/get_party_by_id(var/id)
+	for(var/datum/party/P in political_parties)
+		if(P.id == id)
+			return P
+
+/proc/get_party_by_name(var/name)
+	for(var/datum/party/P in political_parties)
+		if(P.name == name)
+			return P
+
+/proc/try_auth_party(var/datum/party/P, var/name, var/pass)
+	if(P.name == name && P.password == pass)
+		return 1
+	return 0
+
+/proc/try_auth_party_id(var/datum/party/P, var/id, var/pass)
+	if(P.id == id && P.password == pass)
+		return 1
+	return 0
+
+/proc/check_party_name_exist(var/name)
+	for(var/datum/party/P in political_parties)
+		if(name == P.name)
+			message_admins("Found [P.name].")
+			return 1
+	return 0
+
+
+/proc/get_all_parties(mob/user)
+	user.client.debug_variables(political_parties)
 	var/dat = list()
 	dat += "<center>"
 	if(!political_parties.len)
@@ -128,40 +247,3 @@ var/global/list/political_parties = list()
 	var/datum/browser/popup = new(usr, "Parties", "Parties", 640, 600, src)
 	popup.set_content(jointext(dat,null))
 	popup.open()
-
-
-/proc/make_party(var/mob/living/carbon/human/H)
-
-	var/p_name
-	var/p_slogan
-	var/p_desc
-
-	var/acc_no
-	var/acc_pin
-
-	p_name = sanitize(copytext(input(H, "Enter your party name (40 chars max)", "Picket Message", null)  as text,1,40))
-	if(!p_name)
-		return
-
-	p_slogan = sanitize(copytext(input(H, "Enter your party's slogan (80 chars max)", "Picket Message", null)  as text,1,80))
-	if(!p_slogan)
-		return
-
-	p_desc = sanitize(copytext(input(H, "Enter your party's description (200 chars max)", "Picket Message", null)  as message,1,200))
-	if(!p_desc)
-		return
-
-	acc_no = H.mind.prefs.bank_no
-
-	var/datum/money_account/bank = get_account(text2num(acc_no))
-
-	if(!bank)
-		message_admins("No bank found.")
-		return
-
-	if(attempt_account_access(acc_no, acc_pin, 2))
-		charge_to_account(acc_no, "Party Registrar", "[p_name] registration", "Polluxian Party Registration", 3500)
-		message_admins("Bank charge successful.")
-
-	create_new_party(p_name, p_desc, p_slogan, H)
-	message_admins("Party created.")
