@@ -16,6 +16,8 @@
 	icon_state = "film"
 	item_state = "camera"
 	w_class = ITEMSIZE_TINY
+	
+	price_tag = 5
 
 
 /********
@@ -35,14 +37,23 @@ var/global/photo_count = 0
 	var/icon/tiny
 	var/cursed = 0
 	var/photo_size = 3
+	
+	var/sensational			//pictures of high ranking people, depending on rank
+	var/gruesome			//people covered with blood, dead bodies, etc
+	var/scandalous			//famous people near dead bodies, etc
+	var/scary			//something terribly wrong is with this picture
 
 /obj/item/weapon/photo/New()
 	id = photo_count++
 
-
-
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
+	
+/obj/item/weapon/photo/get_item_cost()
+	var/price_tag = sensational + gruesome + scandalous + scary
+	
+	return price_tag
+	
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen))
@@ -242,6 +253,51 @@ var/global/photo_count = 0
 		 mob_detail +=	"You can see \a [S] on the photo. Its stare makes you feel uneasy." //"That which holds the image of an angel, becomes itself an angel."
 
 	return mob_detail
+	
+/obj/item/device/camera/proc/get_sensationalist_value(turf/the_turf as turf)
+	//Journalistic Features
+	var/sensational			//pictures of high ranking people, depending on rank
+	var/gruesome			//people covered with blood, dead bodies, etc
+	var/scandalous			//famous people near dead bodies, etc
+	var/scary			//something terribly wrong is with this picture
+	
+	var/see_face			// Can we see this person's face?
+	
+	
+	// How valuable is their job to the media?
+	// Will be multiplied if caught in a scandal.
+	
+	var/gov_job_worth = 20 
+	var/council_job_worth = 10
+	
+	
+	//To be expanded.
+	for(var/mob/living/carbon/human/A in the_turf)
+	
+		if(see_face)
+			// Sensational Points.
+			// What's their job?
+			var/datum/job/job = A.mind.assigned_job
+
+			if(job in command_positions)
+				sensational += council_job_worth
+
+			if(job in gov_positions)
+				sensational += gov_job_worth
+				
+		//gruesome points		
+		
+		if(A.health < 75) // They're injured.
+			gruesome += 2
+			
+		if(stat == DEAD) // They're dead. 
+			gruesome += 10
+			scary += 2
+			
+	return 
+			
+
+		
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
