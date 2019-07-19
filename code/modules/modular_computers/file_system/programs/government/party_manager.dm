@@ -205,7 +205,7 @@
 			EA.password = party_pass
 			EA.login = "[replacetext(lowertext(p_name), " ", "-")]@parties.nanotrasen.gov"
 
-			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, user_uid, EA.login)
+			var/datum/party/P = create_new_party(p_name, p_desc, p_slogan, party_pass, user_uid)
 			message_admins("Party created: [p_name].")
 
 			P.party_email = EA.login
@@ -214,8 +214,8 @@
 			page_msg = "Party created! <br><br>\
 			<b>Party Name:</b> [P.name]<p>\
 			<b>Party Unique ID:</b> [P.id]<p>\
-			<b>Party Password:</b> [P.password]\
-			<b>Email:</b> [P.party_email]\
+			<b>Party Password:</b> [P.password]<p>\
+			<b>Email:</b> [P.party_email]<p>\
 			<b>Email Password:</b> [party_pass]"
 
 			reset_fields()
@@ -357,6 +357,9 @@
 
 		for(var/datum/party/party in political_parties)
 			avail_parties += party.name
+
+		if(!avail_parties)
+			return
 
 		var/applied_party = input(usr, "Select a party to apply for", "Apply for Party")  as null|anything in avail_parties
 
