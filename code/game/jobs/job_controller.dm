@@ -681,11 +681,11 @@ var/global/datum/controller/occupations/job_master
 			.["turf"] = spawnpos.get_spawn_position()
 			.["msg"] = spawnpos.msg
 		else
-			to_chat(C,"Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead.")
+			to_chat(C,"Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Airbus instead.")
 			var/spawning = pick(latejoin)
 			.["turf"] = get_turf(spawning)
-			.["msg"] = "will arrive to the city shortly by shuttle"
+			.["msg"] = "will arrive to the city shortly by airbus"
 	else
 		var/spawning = pick(latejoin)
 		.["turf"] = get_turf(spawning)
-		.["msg"] = "has arrived on the city"
+		.["msg"] = "has arrived to the city"
