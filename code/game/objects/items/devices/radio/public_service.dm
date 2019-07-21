@@ -2,6 +2,7 @@
 	name = "request booth"
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "lawyer"
+	anchored = 1
 
 	var/department = "Common" //Has to be linked to an actual department for it to work.
 	var/service = "Common Broadcast"
@@ -20,4 +21,6 @@
 
 		user << "<span class='danger'>You sent over the message \"[text]\" over to the [service] hotline.</span>"
 		log_pda("(COMM: [src]) sent \"[text]\" to [service]", usr)
+		user.dialogue_log += "<b>([time_stamp()])</b> (<b>[user]/[user.client]</b>) <u>PUBLIC INTERCOM:</u> - <span style=\"color:blue\">[text]</span>"
+		round_text_log += "<b>([time_stamp()])</b> (<b>[user]/[user.client]</b>) <u>PUBLIC INTERCOM:</u> - <span style=\"color:blue\">[text]</span>"
 
