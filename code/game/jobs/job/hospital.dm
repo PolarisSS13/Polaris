@@ -42,14 +42,13 @@
 	idtype = /obj/item/weapon/card/id/medical/doctor
 	wage = 80
 	minimum_character_age = 25
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
+	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
 	alt_titles = list(
 		"Surgeon" = /decl/hierarchy/outfit/job/medical/doctor/surgeon,
 		"Emergency Physician" = /decl/hierarchy/outfit/job/medical/doctor/emergency_physician,
-		"Nurse" = /decl/hierarchy/outfit/job/medical/doctor/nurse,
-		"Virologist" = /decl/hierarchy/outfit/job/medical/doctor/virologist)
+		"Nurse" = /decl/hierarchy/outfit/job/medical/doctor/nurse)
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro // Chemistry does more actual science than RnD at this point. But I'm glad you took time to bicker about which file it should go in instead of properly organizing the parenting. - Nappist
 /datum/job/chemist
@@ -66,7 +65,7 @@
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/chemist
 	wage = 60
-	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	alt_titles = list("Pharmacist")
 
@@ -74,21 +73,22 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
-/*/datum/job/geneticist
+/datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
+	department = "Public Healthcare"
 	department_flag = MEDSCI
 	faction = "City"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the chief medical officer"
+	supervisors = "your private company director"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist
 	wage = 7
-	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
-	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
+	access = list(access_genetics)
+	minimal_access = list(access_genetics)
 
-	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist */
+	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
 
 
 /datum/job/psychiatrist

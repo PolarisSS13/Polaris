@@ -19,6 +19,8 @@
 					"Expat",
 					"Asylum Seeker",
 					"Migrant",
+					"Socialite",
+					"Job Seeker",
 					"Traveller",
 					"Unemployed",
 					"Homeless",
