@@ -533,7 +533,7 @@
 
 /obj/item/weapon/dnainjector/antiblind
 	name = "\improper DNA injector (Anti-Blind)"
-	desc = "ITS A MIRACLE!!!"
+	desc = "It's a miracle!"
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 11

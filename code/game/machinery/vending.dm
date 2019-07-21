@@ -1688,3 +1688,60 @@
 
 /obj/machinery/vending/crittercare/free
 	prices = list()
+
+
+
+/obj/machinery/vending/dna
+	name = "\improper DNA mods"
+	desc = "A vending machine for dispensing DNA modifiers."
+	product_slogans = "Become the best version of yourself!; Why stick with ordinary?"
+	product_ads = "Wear glasses? Fix that with our eyesight correctors!; Fat? Not for long!"
+	vend_delay = 15
+	icon_state = "gene"
+	products = list(/obj/item/weapon/dnainjector/antiblind = 3,
+					/obj/item/weapon/dnainjector/antihulk = 3,
+					/obj/item/weapon/dnainjector/xraymut = 3,
+					/obj/item/weapon/dnainjector/antifire = 3,
+					/obj/item/weapon/dnainjector/antitele = 3,
+					/obj/item/weapon/dnainjector/nobreath = 3,
+					/obj/item/weapon/dnainjector/antinobreath = 3,
+					/obj/item/weapon/dnainjector/antirunfast = 3,
+					/obj/item/weapon/dnainjector/runfast = 3,
+					/obj/item/weapon/dnainjector/antimorph = 3,
+					/obj/item/weapon/dnainjector/antinoprints = 3,
+					/obj/item/weapon/dnainjector/insulation = 3,
+					/obj/item/weapon/dnainjector/antiinsulation = 3,
+					/obj/item/weapon/dnainjector/antiglasses = 3,
+					/obj/item/weapon/dnainjector/antiepi = 3,
+					/obj/item/weapon/dnainjector/anticough = 3,
+					/obj/item/weapon/dnainjector/anticlumsy = 3,
+					/obj/item/weapon/dnainjector/antitour = 3,
+					/obj/item/weapon/dnainjector/antistutt = 3,
+					/obj/item/weapon/dnainjector/antideaf = 3,
+					/obj/item/weapon/dnainjector/antihallucination = 3,
+					/obj/item/weapon/dnainjector/dnacorrector = 10
+
+					)
+	prices = list(/obj/item/weapon/dnainjector/antiblind = 700,
+					/obj/item/weapon/dnainjector/antihulk = 500,
+					/obj/item/weapon/dnainjector/xraymut = 350,
+					/obj/item/weapon/dnainjector/antifire = 300,
+					/obj/item/weapon/dnainjector/antitele = 300,
+					/obj/item/weapon/dnainjector/nobreath = 400,
+					/obj/item/weapon/dnainjector/antinobreath = 400,
+					/obj/item/weapon/dnainjector/antirunfast = 300,
+					/obj/item/weapon/dnainjector/runfast = 900,
+					/obj/item/weapon/dnainjector/antimorph = 300,
+					/obj/item/weapon/dnainjector/antinoprints = 400,
+					/obj/item/weapon/dnainjector/insulation = 1000,
+					/obj/item/weapon/dnainjector/antiinsulation = 500,
+					/obj/item/weapon/dnainjector/antiglasses = 900,
+					/obj/item/weapon/dnainjector/antiepi = 400,
+					/obj/item/weapon/dnainjector/anticough = 400,
+					/obj/item/weapon/dnainjector/anticlumsy = 300,
+					/obj/item/weapon/dnainjector/antitour = 400,
+					/obj/item/weapon/dnainjector/antistutt = 300,
+					/obj/item/weapon/dnainjector/antideaf = 400,
+					/obj/item/weapon/dnainjector/antihallucination = 500,
+					/obj/item/weapon/dnainjector/dnacorrector = 3000
+					)
