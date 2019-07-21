@@ -23,6 +23,12 @@ var/image/no_ceiling_image = null
 		desc = flooring.desc
 		icon = flooring.icon
 
+		if(flooring.floor_material)
+			material = get_material_by_name(flooring.floor_material)
+
+			if(material && flooring.applies_material_color)
+				color = material.icon_colour
+
 		if(flooring_override)
 			icon_state = flooring_override
 		else

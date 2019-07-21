@@ -81,6 +81,7 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 
 
 // ===== SECURITY CONSOLE =====

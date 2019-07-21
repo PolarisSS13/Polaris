@@ -426,3 +426,7 @@
 /obj/item/device/retail_scanner/civilian
 	account_to_connect = "Civilian"
 	..()
+
+/obj/item/device/retail_scanner/bar
+	account_to_connect = "Bar"
+	..()

@@ -51,6 +51,9 @@ var/list/flooring_types
 
 	var/can_engrave = FALSE
 
+	var/floor_material
+	var/applies_material_color = FALSE
+
 /decl/flooring/grass
 	name = "grass"
 	desc = "Do they smoke grass out in space, Bowie? Or do they smoke AstroTurf?"
@@ -346,7 +349,7 @@ var/list/flooring_types
 	desc = "Polished wooden planks."
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_base = "wood"
-	has_damage_range = 6
+	has_damage_range = 3
 	damage_temperature = T0C+200
 	descriptor = "planks"
 	build_type = /obj/item/stack/tile/wood
@@ -358,38 +361,41 @@ var/list/flooring_types
 		'sound/effects/footstep/wood4.ogg',
 		'sound/effects/footstep/wood5.ogg'))
 
+	floor_material = "wood"
+	applies_material_color = TRUE
+
 /decl/flooring/wood/tiled
-	icon_base = "tiledwood2"
+	icon_base = "tiledwood_check"
 	has_damage_range = 0
+	applies_material_color = FALSE
+	build_type = /obj/item/stack/tile/woodcheck
+
+/decl/flooring/wood/tiledwood
+	icon_base = "tiledwood"
+	has_damage_range = 3
+	build_type = /obj/item/stack/tile/woodtile
 
 /decl/flooring/wood/sif
 	name = "alien wooden floor"
 	desc = "Polished alien wood planks."
 	icon = 'icons/turf/flooring/wood.dmi'
-	icon_base = "sifwood"
+	floor_material = MAT_SIFLOG
 	build_type = /obj/item/stack/tile/wood/sif
 
-/decl/flooring/wood/pale
-	name = "pale wooden floor"
-	desc = "Old oak wood floor."
-	icon = 'icons/turf/flooring/wood.dmi'
-	icon_base = "palewood"
-	build_type = /obj/item/stack/tile/wood
-
 /decl/flooring/wood/mahogany
-	icon_base = "mahogany"
+	floor_material = MATERIAL_MAHOGANY
 	build_type = /obj/item/stack/tile/mahogany
 
 /decl/flooring/wood/maple
-	icon_base = "maple"
+	floor_material = MATERIAL_MAPLE
 	build_type = /obj/item/stack/tile/maple
 
 /decl/flooring/wood/ebony
-	icon_base = "ebony"
+	floor_material = MATERIAL_EBONY
 	build_type = /obj/item/stack/tile/ebony
 
 /decl/flooring/wood/walnut
-	icon_base = "walnut"
+	floor_material = MATERIAL_WALNUT
 	build_type = /obj/item/stack/tile/walnut
 
 

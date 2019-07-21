@@ -26,6 +26,8 @@
 	var/decl/flooring/flooring
 	var/mineral = DEFAULT_WALL_MATERIAL
 
+	var/material/material
+
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	var/lava = 0
