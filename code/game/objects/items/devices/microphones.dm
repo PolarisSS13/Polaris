@@ -37,7 +37,7 @@
 		return
 	var/turf/T = get_turf(src)
 	if (M in range(1, T))
-		msg = sanitize(input(usr, "What is your message?", "Microphone", null)  as text)
+		msg = sanitize(input(usr, "What is your message?", "Microphone", null)  as message)
 		if(!msg)
 			return
 		msg = capitalize(msg)
@@ -50,6 +50,9 @@
 		return
 
 	M.visible_message("<font size=3><b>[M]</b> says, <span style=\"color:[font_color]\">''[msg]''</font></span>")
+	log_say("(MICROPHONE SAY) [msg]", M)
+	M.dialogue_log += "<b>([time_stamp()])</b> (<b>[M]/[M.client]</b>) <u>MICROPHONE SAY:</u> - <span style=\"color:[font_color]\">[msg]</span>"
+	round_text_log += "<b>([time_stamp()])</b> (<b>[M]/[M.client]</b>) <u>MICROPHONE SAY:</u> - <span style=\"color:[font_color]\">[msg]</span>"
 
 	if (prob(10) && locate(/obj/loudspeaker) in range(2, T))
 		for (var/obj/loudspeaker/S in range(7, T))
