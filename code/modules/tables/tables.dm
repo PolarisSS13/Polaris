@@ -99,9 +99,10 @@
 			if(0.5 to 1.0)
 				user << "<span class='notice'>It has a few scrapes and dents.</span>"
 
+
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
+	if(reinforced && W.is_screwdriver())
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -109,10 +110,10 @@
 			update_material()
 		return 1
 
-	if(carpeted && istype(W, /obj/item/weapon/crowbar))
+	if(carpeted && W.is_crowbar())
 		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
 		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
-		new /obj/item/stack/tile/carpet(loc)
+//		new carpeted_type(loc)
 		carpeted = 0
 		update_icon()
 		return 1
@@ -123,12 +124,13 @@
 			user.visible_message("<span class='notice'>\The [user] adds \the [C] to \the [src].</span>",
 			                              "<span class='notice'>You add \the [C] to \the [src].</span>")
 			carpeted = 1
+//			carpeted_type = W.type
 			update_icon()
 			return 1
 		else
-			user << "<span class='warning'>You don't have enough carpet!</span>"
+			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
 
-	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
+	if(!reinforced && !carpeted && material && W.is_wrench())
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -139,14 +141,14 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && istype(W, /obj/item/weapon/wrench))
+	if(!carpeted && !reinforced && !material && W.is_wrench())
 		dismantle(W, user)
 		return 1
 
 	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.welding)
-			user << "<span class='notice'>You begin reparing damage to \the [src].</span>"
+			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src, F.usesound, 50, 1)
 			if(!do_after(user, 20 * F.toolspeed) || !F.remove_fuel(1, user))
 				return
@@ -178,6 +180,21 @@
 	visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
 	src.break_to_parts()
 
+/obj/structure/table/attack_generic(mob/user as mob, var/damage)
+	if(damage >= 10)
+		if(reinforced && prob(70))
+			visible_message("<span class='danger'>\The [user] smashes against \the [src]!</span>")
+			take_damage(damage/2)
+			user.do_attack_animation(src)
+			..()
+		else
+			visible_message("<span class='danger'>\The [user] tears apart \the [src]!</span>")
+			src.break_to_parts()
+			user.do_attack_animation(src)
+			return 1
+	visible_message("<span class='notice'>\The [user] scratches at \the [src]!</span>")
+	return ..()
+
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
 	if(can_reinforce && isliving(usr) && (!usr.stat) && istype(what) && usr.get_active_hand() == what && Adjacent(usr))
 		reinforce_table(what, usr)
@@ -186,19 +203,19 @@
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
 	if(reinforced)
-		user << "<span class='warning'>\The [src] is already reinforced!</span>"
+		to_chat(user, "<span class='warning'>\The [src] is already reinforced!</span>")
 		return
 
 	if(!can_reinforce)
-		user << "<span class='warning'>\The [src] cannot be reinforced!</span>"
+		to_chat(user, "<span class='warning'>\The [src] cannot be reinforced!</span>")
 		return
 
 	if(!material)
-		user << "<span class='warning'>Plate \the [src] before reinforcing it!</span>"
+		to_chat(user, "<span class='warning'>Plate \the [src] before reinforcing it!</span>")
 		return
 
 	if(flipped)
-		user << "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>"
+		to_chat(user, "<span class='warning'>Put \the [src] back in place before reinforcing it!</span>")
 		return
 
 	reinforced = common_material_add(S, user, "reinforc")
@@ -223,12 +240,12 @@
 /obj/structure/table/proc/common_material_add(obj/item/stack/material/S, mob/user, verb) // Verb is actually verb without 'e' or 'ing', which is added. Works for 'plate'/'plating' and 'reinforce'/'reinforcing'.
 	var/material/M = S.get_material()
 	if(!istype(M))
-		user << "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>"
+		to_chat(user, "<span class='warning'>You cannot [verb]e \the [src] with \the [S].</span>")
 		return null
 
 	if(manipulating) return M
 	manipulating = 1
-	user << "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>"
+	to_chat(user, "<span class='notice'>You begin [verb]ing \the [src] with [M.display_name].</span>")
 	if(!do_after(user, 20) || !S.use(1))
 		manipulating = 0
 		return null
@@ -239,7 +256,7 @@
 // Returns the material to set the table to.
 /obj/structure/table/proc/common_material_remove(mob/user, material/M, delay, what, type_holding, sound)
 	if(!M.stack_type)
-		user << "<span class='warning'>You are unable to remove the [what] from this [src]!</span>"
+		to_chat(user, "<span class='warning'>You are unable to remove the [what] from this [src]!</span>")
 		return M
 
 	if(manipulating) return M
@@ -257,13 +274,13 @@
 	manipulating = 0
 	return null
 
-/obj/structure/table/proc/remove_reinforced(obj/item/weapon/screwdriver/S, mob/user)
+/obj/structure/table/proc/remove_reinforced(obj/item/weapon/S, mob/user)
 	reinforced = common_material_remove(user, reinforced, 40 * S.toolspeed, "reinforcements", "screws", S.usesound)
 
-/obj/structure/table/proc/remove_material(obj/item/weapon/wrench/W, mob/user)
+/obj/structure/table/proc/remove_material(obj/item/weapon/W, mob/user)
 	material = common_material_remove(user, material, 20 * W.toolspeed, "plating", "bolts", W.usesound)
 
-/obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+/obj/structure/table/proc/dismantle(obj/item/W, mob/user)
 	if(manipulating) return
 	manipulating = 1
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
@@ -301,8 +318,8 @@
 		else
 			S = material.place_shard(loc)
 			if(S) shards += S
-	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
-		new /obj/item/stack/tile/carpet(src.loc)
+//	if(carpeted && (full_return || prob(50))) // Higher chance to get the carpet back intact, since there's no non-intact option
+//		new carpeted_type(src.loc)
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
@@ -448,7 +465,8 @@
 */
 
 /proc/dirs_to_corner_states(list/dirs)
-	if(!istype(dirs)) return
+	if(!istype(dirs))
+		return
 
 	var/list/ret = list(NORTHWEST, SOUTHEAST, NORTHEAST, SOUTHWEST)
 
@@ -469,188 +487,3 @@
 #undef CORNER_COUNTERCLOCKWISE
 #undef CORNER_DIAGONAL
 #undef CORNER_CLOCKWISE
-
-/obj/structure/table/proc/shatter(var/display_message = 1)
-	if (!istype(src, /obj/structure/table/glass)) return
-
-	playsound(src, "shatter", 70, 1)
-	if(display_message)
-		visible_message("[src] shatters!")
-		break_to_parts()
-	qdel(src)
-	return
-
-
-/obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover,/obj/item/projectile))
-		return (check_cover(mover,target))
-	if (flipped == 1)
-		if (get_dir(loc, target) == dir)
-			return !density
-		else
-			return 1
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	if(locate(/obj/structure/table/bench) in get_turf(mover))
-		return 0
-	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(mover)
-	if(table && !table.flipped)
-		return 1
-	return 0
-
-//checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
-/obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
-	var/turf/cover
-	if(flipped==1)
-		cover = get_turf(src)
-	else if(flipped==0)
-		cover = get_step(loc, get_dir(from, loc))
-	if(!cover)
-		return 1
-	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
-		return 1
-	if (get_turf(P.original) == cover)
-		var/chance = 20
-		if (ismob(P.original))
-			var/mob/M = P.original
-			if (M.lying)
-				chance += 20				//Lying down lets you catch less bullets
-		if(flipped==1)
-			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
-				chance += 20
-			else
-				return 1					//But only from one side
-		if(prob(chance))
-			health -= P.damage/2
-			if (health > 0)
-				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
-				return 0
-			else
-				visible_message("<span class='warning'>[src] breaks down!</span>")
-				break_to_parts()
-				return 1
-	return 1
-
-/obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
-	if(istype(O) && O.checkpass(PASSTABLE))
-		return 1
-	if (flipped==1)
-		if (get_dir(loc, target) == dir)
-			return !density
-		else
-			return 1
-	return 1
-
-/obj/structure/table/MouseDrop(atom/over)
-	if(usr.stat || !Adjacent(usr) || (over != usr))
-		return
-	interact(usr)
-
-/obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
-		return ..()
-	if(isrobot(user))
-		return
-	if(!user.drop_item())
-		return
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
-	return
-
-//Object placement on tables
-/obj/structure/table/Click(location, control,params)
-	var/list/PL = params2list(params)
-	var/icon_x = text2num(PL["icon-x"])
-	var/icon_y = text2num(PL["icon-y"])
-	clickedx = icon_x - 16
-	clickedy = icon_y - 16
-	if (clickedy >16)
-		clickedy = 16
-	if (clickedx >16)
-		clickedx = 16
-	if (clickedy < -16)
-		clickedy = -16
-	if (clickedx <-16)
-		clickedx = -16
-	..()
-
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
-	if (!W) return
-
-	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
-		if (istype(G.affecting, /mob/living))
-			var/mob/living/M = G.affecting
-			var/obj/occupied = turf_is_crowded()
-			if(occupied)
-				user << "<span class='danger'>There's \a [occupied] in the way.</span>"
-				return
-			if(!user.Adjacent(M))
-				return
-			if (G.state < 2)
-				if(user.a_intent == I_HURT)
-					if (prob(15))	M.Weaken(5)
-					M.apply_damage(8,def_zone = BP_HEAD)
-					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
-					if(material)
-						playsound(loc, material.tableslam_noise, 50, 1)
-					else
-						playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-					var/list/L = take_damage(rand(1,5))
-					// Shards. Extra damage, plus potentially the fact YOU LITERALLY HAVE A PIECE OF GLASS/METAL/WHATEVER IN YOUR FACE
-					for(var/obj/item/weapon/material/shard/S in L)
-						if(prob(50))
-							M.visible_message("<span class='danger'>\The [S] slices [M]'s face messily!</span>",
-							                   "<span class='danger'>\The [S] slices your face messily!</span>")
-							M.apply_damage(10, def_zone = BP_HEAD)
-							if(prob(2))
-								M.embed(S, def_zone = BP_HEAD)
-				else
-					user << "<span class='danger'>You need a better grip to do that!</span>"
-					return
-			else if(G.state > GRAB_AGGRESSIVE || world.time >= (G.last_action + UPGRADE_COOLDOWN))
-				M.forceMove(get_turf(src))
-				M.Weaken(5)
-				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-			qdel(W)
-			return
-
-	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
-
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
-		return
-
-	if(istype(W, /obj/item/weapon/melee/energy/blade))
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src.loc)
-		spark_system.start()
-		playsound(src.loc, 'sound/weapons/blade.ogg', 50, 1)
-		playsound(src.loc, "sparks", 50, 1)
-		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
-		break_to_parts()
-		return
-
-	if(istype(W, /obj/item/weapon/melee/changeling/arm_blade))
-		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
-		break_to_parts()
-		return
-
-	if(can_plate && !material)
-		user << "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>"
-		return
-
-	if(item_place)
-		user.drop_item(src.loc)
-		if(!W.fixed_position)
-			W.pixel_x = clickedx
-			W.pixel_y = clickedy
-			W.Move(loc)
-			W.plane = ABOVE_MOB_PLANE
-	return
-
-/obj/structure/table/attack_tk() // no telehulk sorry
-	return
