@@ -102,7 +102,7 @@
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
-	total_positions = 1
+	total_positions = 4
 	spawn_positions = 1
 	supervisors = "the Judge"
 	selection_color = "#515151"
@@ -114,7 +114,7 @@
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
 //	minimal_player_age = 7 (More lawyers please.)
 	minimum_character_age = 20
-	alt_titles = list("Defense Lawyer","Defense Attorney","Barrister")
+	alt_titles = list("Defense Lawyer","Defense Attorney","Barrister", "Legal Advisor")
 
 	outfit_type = /decl/hierarchy/outfit/job/civilian/defense/defense
 

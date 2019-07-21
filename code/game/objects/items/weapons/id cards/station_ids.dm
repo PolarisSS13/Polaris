@@ -197,20 +197,33 @@
 	icon_state = "nanotrasen"
 	registered_name = "Central Command"
 	assignment = "General"
-pref.money_balance
+	job_access_type = /datum/job/nanotrasen/cbia
 
 /obj/item/weapon/card/id/cbia/initialize()
 	. = ..()
-	access += get_all_centcom_access()
-	access += get_all_station_access()
+	access |= get_all_centcom_access()
+	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/centcom/station/president
 	name = "\improper President's ID"
 	desc = "An ID that has both centcom and full city access."
+	job_access_type = /datum/job/nanotrasen/president
+
+/obj/item/weapon/card/id/centcom/station/president/initialize()
+	. = ..()
+	access |= get_all_centcom_access()
+	access |= get_all_station_access()
+
 
 /obj/item/weapon/card/id/centcom/station/ceo
 	name = "\improper NanoTrasen CEO's ID"
 	desc = "An ID that has both centcom and full city access."
+	job_access_type = /datum/job/nanotrasen/ceo
+
+/obj/item/weapon/card/id/centcom/station/ceo/initialize()
+	. = ..()
+	access |= get_all_centcom_access()
+	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"

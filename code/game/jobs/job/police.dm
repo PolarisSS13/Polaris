@@ -23,7 +23,7 @@
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
-	alt_titles = list("Head of Police", "Police Commander", "Police Commissioner")
+	alt_titles = list("Head of Police", "Police Commander", "Police Commissioner", "Police Chief")
 
 /datum/job/warden
 	title = "Prison Warden"
@@ -44,7 +44,7 @@
 	minimum_character_age = 28
 
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
-	alt_titles = list("Correctional Officer")
+	alt_titles = list("Correctional Officer", "Brig Attendant")
 
 /datum/job/detective
 	title = "Detective"
