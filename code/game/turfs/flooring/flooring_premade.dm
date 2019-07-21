@@ -61,29 +61,26 @@
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
+	color = "#8f5a25"
 	initial_flooring = /decl/flooring/wood
 
-/turf/simulated/floor/wood/pale
-	icon_state = "palewood"
-	initial_flooring = /decl/flooring/wood/pale
-
 /turf/simulated/floor/wood/sif
-	icon_state = "sifwood"
+	color = "#0099cc"
 
 /turf/simulated/floor/wood/mahogany
-	icon_state = "mahogany"
+	color = WOOD_COLOR_RICH
 	initial_flooring = /decl/flooring/wood/mahogany
 
 /turf/simulated/floor/wood/maple
-	icon_state = "maple"
+	color = WOOD_COLOR_PALE
 	initial_flooring = /decl/flooring/wood/maple
 
 /turf/simulated/floor/wood/ebony
-	icon_state = "ebony"
+	color = WOOD_COLOR_BLACK
 	initial_flooring = /decl/flooring/wood/ebony
 
 /turf/simulated/floor/wood/walnut
-	icon_state = "walnut"
+	color = WOOD_COLOR_CHOCOLATE
 	initial_flooring = /decl/flooring/wood/walnut
 
 /turf/simulated/floor/grass
@@ -462,9 +459,15 @@
 	initial_flooring = /decl/flooring/discoedge
 
 /turf/simulated/floor/wood/tiledwood
+	name = "tiled check floor"
+	icon_state = "tiledwood_check"
+	initial_flooring = /decl/flooring/wood/tiled
+	color = null
+
+/turf/simulated/floor/wood/tiledwood_plain
 	name = "tiled wood floor"
 	icon_state = "tiledwood2"
-	initial_flooring = /decl/flooring/wood/tiled
+	initial_flooring = /decl/flooring/wood/tiledwood
 
 
 //| Stairs

@@ -43,7 +43,12 @@
 /turf/simulated/wall/update_icon()
 	if(!material)
 		return
-
+/*
+	if(!stripe_color && !stripes_glow)
+		light_color = initial(light_color)
+		light_power = initial(light_power)
+		light_range = initial(light_range)
+*/
 	if(!damage_overlays[1]) //list hasn't been populated
 		generate_overlays()
 
@@ -91,7 +96,12 @@
 				I = image('icons/turf/wall_masks.dmi', "stripe[wall_connections[i]]", dir = 1<<(i-1))
 			I.color = stripe_color
 			overlays += I
-
+/*
+		if(stripes_glow)
+			light_color = stripe_color
+			light_power = 2
+			light_range = 2
+*/
 	if(damage != 0)
 		var/integrity = material.integrity
 		if(reinf_material)

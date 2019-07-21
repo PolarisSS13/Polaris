@@ -531,6 +531,8 @@
 	desc = "It looks rather strong. Might take a few good hits to shatter it."
 	icon_state = "rwindow"
 	basestate = "rwindow"
+	material_color = GLASS_COLOR
+	color = GLASS_COLOR
 	maxhealth = 40.0
 	reinf = 1
 	maximal_heat = T0C + 750

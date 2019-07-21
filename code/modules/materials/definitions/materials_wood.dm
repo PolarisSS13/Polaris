@@ -2,7 +2,7 @@
 /material/wood
 	name = MAT_WOOD
 	stack_type = /obj/item/stack/material/wood
-	icon_colour = "#664c15"
+	icon_colour = "#8f5a25"
 	integrity = 50
 	icon_base = "wood"
 	explosion_resistance = 2
