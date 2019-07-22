@@ -1536,7 +1536,7 @@
 	origin_tech = list( TECH_POWER = 5, TECH_MATERIAL = 4, TECH_ENGINEERING = 4)
 	required_type = list(/obj/mecha/working/ripley)
 
-	equip_type = EQUIP_SPECIAL
+	equip_type = EQUIP_HULL
 
 /obj/item/mecha_parts/mecha_equipment/speedboost/attach(obj/mecha/M as obj)
 	..()
