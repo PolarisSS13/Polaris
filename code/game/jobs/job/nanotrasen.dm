@@ -9,7 +9,7 @@
 	spawn_positions = -1
 	supervisors = "the NanoTrasen CEO"
 	selection_color = "#0F0F6F"
-	idtype = /obj/item/weapon/card/id/centcom/station
+	idtype = /obj/item/weapon/card/id/ntrep
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 
@@ -27,7 +27,10 @@
 
 /datum/job/nanotrasen/New()
 	department = "[station_name()] Funds"
+	..()
 
+/datum/job/nanotrasen/get_access()
+	return 	(get_all_station_access() || get_all_centcom_access())
 
 /datum/job/nanotrasen/ceo
 	title = "Nanotrasen CEO"
@@ -37,7 +40,7 @@
 	alt_titles = list("NanoTrasen Chairman")
 	wage = 10000
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/captain
-	idtype = /obj/item/weapon/card/id/centcom/station/ceo
+	idtype = /obj/item/weapon/card/id/ceo
 
 /datum/job/nanotrasen/cbia
 	title = "CBIA Agent"
@@ -63,28 +66,17 @@
 	ideal_character_age = 40
 	req_admin_notify = 1
 
-	hard_whitelisted = 1
-
-/datum/job/nanotrasen/cbia/get_access()
-	get_all_station_access()
-	get_all_centcom_access()
-	return
-
-/datum/job/nanotrasen/cbia/New()
-	department = "[station_name()] Funds"
-
 /datum/job/nanotrasen/president
 	title = "President"
 	flag = PRESIDENT
-//	department = "City Council"
 	head_position = 1
 	department_flag = GOVLAW
 	faction = "City"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "NanoTrasen"
 	selection_color = "#1D1D4F"
-	idtype = /obj/item/weapon/card/id/centcom/station/president
+	idtype = /obj/item/weapon/card/id/president
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
@@ -97,11 +89,4 @@
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/heads/president
 
-/datum/job/nanotrasen/president/New()
-	department = "[station_name()] Funds"
-
-/datum/job/nanotrasen/president/get_access()
-	get_all_station_access()
-	get_all_centcom_access()
-	return
 

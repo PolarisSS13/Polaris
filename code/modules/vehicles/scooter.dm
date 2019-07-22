@@ -3,7 +3,8 @@
 	desc = "A fun way to get around."
 	icon_state = "scooter"
 	var/riding_datum_type = /datum/riding/scooter
-	move_delay = 0
+	move_delay = 1.5
+	plane = -25
 
 
 /obj/vehicle/scooter/attackby(obj/item/I, mob/user, params)

@@ -191,39 +191,34 @@
 	. = ..()
 	access |= get_all_station_access()
 
+// NT big bad IDs
+
+/obj/item/weapon/card/id/ntrep
+	name = "\improper NanoTrasen Representative ID"
+	desc = "An ID for NanoTrasen representatives. You can smell the pompous."
+	icon_state = "nanotrasen"
+	job_access_type = /datum/job/nanotrasen
+
 /obj/item/weapon/card/id/cbia
 	name = "\improper CBIA Agent ID"
-	desc = "An ID straight from Central Command for the CBIA."
+	desc = "An ID straight from NanoTrasen for the CBIA."
 	icon_state = "nanotrasen"
-	registered_name = "Central Command"
-	assignment = "General"
 	job_access_type = /datum/job/nanotrasen/cbia
 
-/obj/item/weapon/card/id/cbia/initialize()
-	. = ..()
-	access |= get_all_centcom_access()
-	access |= get_all_station_access()
-
-/obj/item/weapon/card/id/centcom/station/president
+/obj/item/weapon/card/id/president
 	name = "\improper President's ID"
-	desc = "An ID that has both centcom and full city access."
+	icon_state = "nanotrasen"
+	desc = "An ID that reeks of appointed entitlement. For the president, naturally."
 	job_access_type = /datum/job/nanotrasen/president
 
-/obj/item/weapon/card/id/centcom/station/president/initialize()
-	. = ..()
-	access |= get_all_centcom_access()
-	access |= get_all_station_access()
-
-
-/obj/item/weapon/card/id/centcom/station/ceo
+/obj/item/weapon/card/id/ceo
 	name = "\improper NanoTrasen CEO's ID"
-	desc = "An ID that has both centcom and full city access."
+	icon_state = "nanotrasen"
+	desc = "The head honcho themselves. This has access to anything that exists under the colonies."
 	job_access_type = /datum/job/nanotrasen/ceo
 
-/obj/item/weapon/card/id/centcom/station/ceo/initialize()
-	. = ..()
-	access |= get_all_centcom_access()
-	access |= get_all_station_access()
+
+// Emergency response team IDs
 
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
