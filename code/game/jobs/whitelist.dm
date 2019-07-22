@@ -95,8 +95,8 @@ var/list/whitelist = list()
 
 /proc/is_hard_whitelisted(mob/M, var/datum/job/jobs)
 	//They are admin or the whitelist isn't in use
-//	if(whitelist_overrides(M))
-//		return 1
+	if(whitelist_overrides(M))
+		return 1
 
 	//The job isn't even whitelisted
 	if(!jobs.hard_whitelisted)

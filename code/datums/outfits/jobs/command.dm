@@ -76,7 +76,7 @@
 	backpack = /obj/item/weapon/storage/backpack
 	satchel_one = /obj/item/weapon/storage/backpack/satchel
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
-	id_type = /obj/item/weapon/card/id/centcom/station/president
+	id_type = /obj/item/weapon/card/id/president
 	pda_type = /obj/item/device/pda/captain
 
 /decl/hierarchy/outfit/job/heads/president/post_equip(var/mob/living/carbon/human/H)

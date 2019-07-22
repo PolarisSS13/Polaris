@@ -166,7 +166,15 @@
 			update_material()
 		return 1
 
-	return ..()
+	if(item_place)
+		user.drop_item(src.loc)
+		if(!W.fixed_position)
+			W.pixel_x = clickedx
+			W.pixel_y = clickedy
+			W.Move(loc)
+			W.plane = ABOVE_MOB_PLANE
+
+	return
 
 /obj/structure/table/attack_hand(mob/user as mob)
 	if(istype(user, /mob/living/carbon/human))

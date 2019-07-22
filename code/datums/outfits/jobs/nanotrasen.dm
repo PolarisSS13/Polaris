@@ -6,7 +6,7 @@
 	l_ear = /obj/item/device/radio/headset/government
 	glasses = /obj/item/clothing/glasses/sunglasses
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/centcom	//station
+	id_type = /obj/item/weapon/card/id/ntrep	//station
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/heads
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
@@ -23,6 +23,7 @@
 	l_hand = /obj/item/weapon/paper
 	r_hand = /obj/item/weapon/clipboard
 	id_pda_assignment = "Nanotrasen Representative"
+
 
 /decl/hierarchy/outfit/job/nanotrasen/guard //Deployed to keep NT officials safe, like the city hall guard -- not death squad
 	name = "Nanotrasen Security" //Name also subject to lore nerds, Nanotrasen Guard just seemed wimpy
@@ -50,12 +51,13 @@
 	id_pda_assignment = "Nanotrasen Officer"
 
 /decl/hierarchy/outfit/job/nanotrasen/captain
-	name = "Nanotrasen Regional Commander" //Name subject to change depending on what lore nerds think fits
+	name = "NanoTrasen CEO" //Name subject to change depending on what lore nerds think fits
 	uniform = /obj/item/clothing/under/suit_jacket/really_black
 	suit = /obj/item/clothing/suit/storage/toggle/dress/fleet/command
 	head = /obj/item/clothing/head/beret/centcom/captain
 	belt = /obj/item/weapon/gun/energy/toxgun //Fancy gun for bosses that like melting the insides of people
 	id_pda_assignment = "Nanotrasen Regional Commander"
+	id_type = /obj/item/weapon/card/id/ceo
 
 /decl/hierarchy/outfit/job/nanotrasen/cbia
 	name = "Nanotrasen CBIA Agent"
@@ -66,3 +68,4 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	belt = /obj/item/weapon/gun/energy
 	id_pda_assignment = "Nanotrasen CBIA Agent"
+	id_type = /datum/job/nanotrasen/cbia	//station
