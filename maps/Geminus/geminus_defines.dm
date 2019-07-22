@@ -97,7 +97,7 @@
 	name = "Sky"
 	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT
 	transit_chance = 50
-	base_turf = /turf/simulated/sky/moving
+	base_turf = /turf/simulated/floor/outdoors/dirt
 //	holomap_offset_x = GEMINUS_HOLOMAP_MARGIN_X - 40
 //	holomap_offset_y = GEMINUS_HOLOMAP_MARGIN_Y + GEMINUS_MAP_SIZE*0
 

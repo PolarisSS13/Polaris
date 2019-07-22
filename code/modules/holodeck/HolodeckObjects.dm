@@ -41,6 +41,7 @@
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "wood"
 	initial_flooring = /decl/flooring/wood
+	color = "#8f5a25"
 
 /turf/simulated/floor/holofloor/grass
 	name = "lush grass"

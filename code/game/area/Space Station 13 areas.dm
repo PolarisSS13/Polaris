@@ -81,7 +81,7 @@ area/space/atmosalert()
 
 /area/shuttle/arrival/station
 	icon_state = "shuttle"
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
@@ -90,17 +90,19 @@ area/space/atmosalert()
 /area/shuttle/escape/station
 	name = "\improper Emergency Shuttle Station"
 	icon_state = "shuttle2"
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 	base_turf = /turf/simulated/floor/tiled/steel_ridged
 
 /area/shuttle/escape/centcom
 	name = "\improper Emergency Shuttle CentCom"
 	icon_state = "shuttle"
-	base_turf = /turf/simulated/sky
+	dynamic_lighting = 0
+	base_turf = /turf/simulated/floor/tiled/techmaint
 
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
 	name = "\improper Emergency Shuttle Transit"
 	icon_state = "shuttle"
+	dynamic_lighting = 1
 	base_turf = /turf/simulated/sky
 
 /area/shuttle/escape_pod1
