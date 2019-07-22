@@ -111,7 +111,15 @@
 	else if(istype(O, /obj/item/weapon/weldingtool))
 		if(health < getMaxHealth())
 			if(open)
-				health = min(getMaxHealth(), health + 10)
+				if(getBruteLoss() < 10)
+					bruteloss = 0
+				else
+					bruteloss = bruteloss - 10
+				if(getFireLoss() < 10)
+					fireloss = 0
+				else
+					fireloss = fireloss - 10
+				updatehealth()
 				user.visible_message("<span class='notice'>[user] repairs [src].</span>","<span class='notice'>You repair [src].</span>")
 				playsound(src, O.usesound, 50, 1)
 			else
