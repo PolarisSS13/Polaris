@@ -22,6 +22,7 @@
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/has_mob_product
+	var/has_item_product           // Item products. (Eggy)
 	var/force_layer
 
 /datum/seed/New()
@@ -619,6 +620,7 @@
 			gene.values["[TRAIT_CONSUME_GASSES]"] = null
 		if(GENE_METABOLISM)
 			has_mob_product = gene.values["mob_product"]
+			has_item_product = gene.values["item_product"]
 			gene.values["mob_product"] = null
 
 	for(var/trait in gene.values)
@@ -649,6 +651,7 @@
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
 		if(GENE_METABOLISM)
 			P.values["mob_product"] = has_mob_product
+			P.values["item_product"] = has_item_product
 			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
@@ -709,8 +712,10 @@
 			var/obj/item/product
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
+			else if(has_item_product)
+				product = new has_item_product(get_turf(user),name)
 			else
-				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product = new has_item_product(get_turf(user))
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
@@ -749,6 +754,7 @@
 	new_seed.kitchen_tag =      kitchen_tag
 	new_seed.trash_type =       trash_type
 	new_seed.has_mob_product =  has_mob_product
+	new_seed.has_item_product = has_item_product
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
 	if(chems)          new_seed.chems = chems.Copy()
