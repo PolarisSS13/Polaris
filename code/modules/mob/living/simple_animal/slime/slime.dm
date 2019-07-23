@@ -465,3 +465,9 @@
 	lines.Add(description_info)
 	return lines.Join("\n")
 
+
+/mob/living/simple_animal/slime/DestroySurroundings(var/direction)
+	
+	if(!rabid)		// Slimes should only destroy windows when they've been abused.
+		return
+	..()
