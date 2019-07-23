@@ -84,40 +84,54 @@
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetID())
-		if(access_scanner.allowed(user) && !open && !emagged)
+		if(access_scanner.allowed(user) && !open)
 			locked = !locked
-			user << "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>"
+			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
 			attack_hand(user)
-		else
 			if(emagged)
-				user << "<span class='warning'>ERROR</span>"
+				to_chat(user, "<span class='warning'>ERROR! SYSTEMS COMPROMISED!</span>")
+		else
 			if(open)
-				user << "<span class='warning'>Please close the access panel before locking it.</span>"
+				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 			else
-				user << "<span class='warning'>Access denied.</span>"
+				to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/screwdriver))
+	else if(O.is_screwdriver())
 		if(!locked)
 			open = !open
-			user << "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>"
+			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
 			playsound(src, O.usesound, 50, 1)
 		else
-			user << "<span class='notice'>You need to unlock the controls first.</span>"
+			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
 	else if(istype(O, /obj/item/weapon/weldingtool))
 		if(health < getMaxHealth())
 			if(open)
-				health = min(getMaxHealth(), health + 10)
+				if(getBruteLoss() < 10)
+					bruteloss = 0
+				else
+					bruteloss = bruteloss - 10
+				if(getFireLoss() < 10)
+					fireloss = 0
+				else
+					fireloss = fireloss - 10
+				updatehealth()
 				user.visible_message("<span class='notice'>[user] repairs [src].</span>","<span class='notice'>You repair [src].</span>")
 				playsound(src, O.usesound, 50, 1)
 			else
-				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
+				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else
-			user << "<span class='notice'>[src] does not need a repair.</span>"
+			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 		return
+	else if(istype(O, /obj/item/device/assembly/prox_sensor) && emagged)
+		if(open)
+			to_chat(user, "<span class='notice'>You repair the bot's systems.</span>")
+			emagged = 0
+			qdel(O)
+		else
+			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 	else
 		..()
-
 /mob/living/bot/attack_ai(var/mob/user)
 	return attack_hand(user)
 
