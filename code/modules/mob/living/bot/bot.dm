@@ -88,13 +88,13 @@
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetID())
-		if(access_scanner.allowed(user) && !open && !emagged)
+		if(access_scanner.allowed(user) && !open)
 			locked = !locked
 			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
 			attack_hand(user)
-		else
 			if(emagged)
-				to_chat(user, "<span class='warning'>ERROR</span>")
+				to_chat(user, "<span class='warning'>ERROR! SYSTEMS COMPROMISED!</span>")
+		else
 			if(open)
 				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 			else
@@ -127,6 +127,13 @@
 		else
 			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 		return
+	else if(istype(O, /obj/item/device/assembly/prox_sensor) && emagged)
+		if(open)
+			to_chat(user, "<span class='notice'>You repair the bot's systems.</span>")
+			emagged = 0
+			qdel(O)
+		else
+			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 	else
 		..()
 
