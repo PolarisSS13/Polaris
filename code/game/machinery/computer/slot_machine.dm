@@ -147,9 +147,9 @@
 		#endif
 
 		switch(victory)
-			if(1 to 5) //1 in 10 for a guaranteed small reward
+			if(1) //1 in 10 for a guaranteed small reward
 				spin_wheels(win = pick(BELL, MUSHROOM, TREE))
-			if(6 to 20) //Otherwise, a fully random spin (1/1000 to get jackpot, 1/100 to get other reward)
+			if(2 to 20) //Otherwise, a fully random spin (1/1000 to get jackpot, 1/100 to get other reward)
 				spin_wheels(win = -1)
 
 	//If there's only one icon_state for spinning, everything looks weird
