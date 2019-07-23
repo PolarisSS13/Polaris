@@ -7,9 +7,19 @@
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 60000	//60 kW. (this the power drawn when charging)
+	var/efficiency = 60000 //will provide the modified power rate when upgraded
 	power_channel = EQUIP
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
+	circuit = /obj/item/weapon/circuitboard/cell_charger
+
+/obj/machinery/cell_charger/New()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 5)
+	RefreshParts()
+	..()
+	return
 
 /obj/machinery/cell_charger/update_icon()
 	icon_state = "ccharger[charging ? 1 : 0]"
@@ -69,6 +79,12 @@
 		anchored = !anchored
 		user << "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground"
 		playsound(src, W.usesound, 75, 1)
+	else if(default_deconstruction_screwdriver(user, W))
+		return
+	else if(default_deconstruction_crowbar(user, W))
+		return
+	else if(default_part_replacement(user, W))
+		return
 
 /obj/machinery/cell_charger/attack_hand(mob/user)
 	if(charging)
@@ -108,9 +124,15 @@
 		return
 
 	if(charging && !charging.fully_charged())
-		charging.give(active_power_usage*CELLRATE)
+		charging.give(efficiency*CELLRATE)
 		update_use_power(2)
 
 		update_icon()
 	else
 		update_use_power(1)
+
+/obj/machinery/cell_charger/RefreshParts()
+	var/E = 0
+	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
+		E += C.rating
+	efficiency = active_power_usage * (1+ (E - 1)*0.5)

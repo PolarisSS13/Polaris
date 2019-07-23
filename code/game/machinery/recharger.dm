@@ -1,5 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-obj/machinery/recharger
+/obj/machinery/recharger
 	name = "recharger"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
@@ -25,9 +25,6 @@ obj/machinery/recharger
 	return
 
 /obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
-	if(istype(user,/mob/living/silicon))
-		return
-
 	var/allowed = 0
 	for (var/allowed_type in allowed_devices)
 		if(istype(G, allowed_type)) allowed = 1
