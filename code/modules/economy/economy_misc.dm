@@ -70,6 +70,8 @@ var/global/tax_rate_upper = 0.20
 var/global/tax_rate_middle = 0.20
 var/global/tax_rate_lower = 0.20
 
+var/global/general_sales_tax = 0.10 // 10% sales tax. Remind me to add all this to the economy subsystem.
+
 
 var/global/datum/money_account/vendor_account
 var/global/datum/money_account/station_account
