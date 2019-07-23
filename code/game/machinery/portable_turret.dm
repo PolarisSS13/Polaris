@@ -732,7 +732,7 @@
 	if(!emagged && issilicon(L) && check_all == FALSE)	// Don't target silica, unless told to neutralize everything.
 		return TURRET_NOT_TARGET
 
-	if(L.stat == DEAD && !emagged)		//if the perp is dead no need to bother really
+	if(L.stat && !emagged)		//if the perp is dead/dying, no need to bother really
 		return TURRET_NOT_TARGET	//move onto next potential victim!
 
 	if(get_dist(src, L) > 7)	//if it's too far away, why bother?
