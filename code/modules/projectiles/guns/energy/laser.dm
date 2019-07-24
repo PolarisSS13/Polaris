@@ -248,9 +248,7 @@
 /obj/item/weapon/gun/energy/lasertag/omni
 	projectile_type = /obj/item/projectile/beam/lasertag/omni
 
-/*
- * Laser scattergun, proof of concept.
- */
+// Laser scattergun, proof of concept.
 
 /obj/item/weapon/gun/energy/lasershotgun
 	name = "laser scattergun"
