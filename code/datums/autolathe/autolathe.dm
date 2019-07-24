@@ -8,12 +8,9 @@ var/datum/category_collection/autolathe/autolathe_recipes
 		for(var/material in I.matter)
 			var/coeff = (no_scale ? 1 : 1.25) //most objects are more expensive to produce than to recycle
 			resources[material] = I.matter[material]*coeff // but if it's a sheet or RCD cartridge, it's 1:1
-	if(is_stack)
-		if(istype(I, /obj/item/stack))
-			var/obj/item/stack/IS = I
-			max_stack = IS.max_amount
-		else
-			max_stack = 10
+	if(is_stack && istype(I, /obj/item/stack))
+		var/obj/item/stack/IS = I
+		max_stack = IS.max_amount
 	qdel(I)
 
 /****************************
@@ -68,7 +65,7 @@ var/datum/category_collection/autolathe/autolathe_recipes
 	var/list/resources
 	var/hidden
 	var/power_use = 0
-	var/is_stack // Creates multiple of an item if applied to non-stack items
+	var/is_stack
 	var/max_stack
 	var/no_scale
 

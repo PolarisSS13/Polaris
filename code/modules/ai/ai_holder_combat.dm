@@ -65,11 +65,6 @@
 		on_engagement(target)
 		melee_attack(target)
 
-	else if(distance <= 1 && !holder.ICheckRangedAttack(target)) // Doesn't have projectile, but is pointblank
-		ai_log("engage_target() : Attempting a melee attack.", AI_LOG_TRACE)
-		on_engagement(target)
-		melee_attack(target)
-
 	// Shoot them.
 	else if(holder.ICheckRangedAttack(target) && (distance <= max_range(target)) )
 		on_engagement(target)

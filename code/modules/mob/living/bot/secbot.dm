@@ -280,6 +280,8 @@
 		var/mob/living/simple_mob/slime/xenobio/S = L
 		S.slimebatoned(src, xeno_stun_strength)
 
+
+
 /mob/living/bot/secbot/explode()
 	visible_message("<span class='warning'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)

@@ -11,8 +11,6 @@
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/blueprints,
-		/obj/item/clamp,
-		/obj/item/clamp,
 		/obj/item/clothing/under/rank/chief_engineer,
 		/obj/item/clothing/under/rank/chief_engineer/skirt,
 		/obj/item/clothing/head/hardhat/white,
@@ -125,7 +123,6 @@
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clamp,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
 		/obj/item/clothing/suit/storage/hazardvest,
