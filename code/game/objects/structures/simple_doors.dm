@@ -124,16 +124,16 @@
 		icon_state = material.door_icon_base
 
 /obj/structure/simple_door/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	usr.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(W,/obj/item/weapon/pickaxe))
 		var/obj/item/weapon/pickaxe/digTool = W
-		visible_message("<span class='danger'>[usr] starts digging [src]!</span>")
+		visible_message("<span class='danger'>[user] starts digging [src]!</span>")
 		if(do_after(user,digTool.digspeed*hardness) && src)
-			visible_message("<span class='danger'>[usr] finished digging [src]!</span>")
+			visible_message("<span class='danger'>[user] finished digging [src]!</span>")
 			Dismantle()
 	else if(istype(W,/obj/item/weapon)) //not sure, can't not just weapons get passed to this proc?
 		hardness -= W.force/10
-		visible_message("<span class='danger'>[usr] hits [src] with [W]!</span>")
+		visible_message("<span class='danger'>[user] hits [src] with [W]!</span>")
 		if(material == get_material_by_name("resin"))
 			playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
 		else if(material == (get_material_by_name(MAT_WOOD) || get_material_by_name(MAT_SIFWOOD)))

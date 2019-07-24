@@ -130,7 +130,7 @@ Barricades
 	icon_state = "barrier[locked]"
 
 /obj/machinery/deployable/barrier/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	usr.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(W, /obj/item/weapon/card/id/))
 		if(allowed(user))
 			if	(emagged < 2.0)
