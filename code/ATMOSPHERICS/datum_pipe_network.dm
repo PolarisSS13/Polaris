@@ -29,6 +29,8 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 		update = 0
 		reconcile_air() //equalize_gases(gases)
 
+	listclearnulls(leaks) // Let's not have forever-seals.
+
 	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes dont radiate heat - Mport
 	//for(var/datum/pipeline/line_member in line_members)
 	//	line_member.process()

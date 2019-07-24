@@ -142,9 +142,12 @@
 
 	if (istype(A, /obj/machinery/atmospherics/pipe/simple))
 		to_chat(user, "<span class='notice'>You begin to attach \the [src] to \the [A]...</span>")
-		if (do_after(user, 30, src))
+		var/C = locate(/obj/machinery/clamp) in get_turf(A)
+		if (do_after(user, 30, src) && !C)
 			if(!user.unEquip(src))
 				return
 			to_chat(user, "<span class='notice'>You have attached \the [src] to \the [A].</span>")
 			new/obj/machinery/clamp(A.loc, A)
 			qdel(src)
+		if(C)
+			to_chat(user, "<span class='notice'>\The [C] is already attached to the pipe at this location!</span>")
