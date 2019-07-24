@@ -548,7 +548,7 @@
 		enabled = 1 //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
-/obj/machinery/porta_turret/proc/take_damage(var/force)
+/obj/machinery/porta_turret/take_damage(var/force)
 	if(!raised && !raising)
 		force = force / 8
 		if(force < 5)
@@ -840,8 +840,7 @@
 	//Shooting Code:
 	A.firer = src
 	A.old_style_target(target)
-	A.def_zone = def_zone
-	A.fire()
+	A.launch_projectile_from_turf(target, def_zone, src)
 
 	// Reset the time needed to go back down, since we just tried to shoot at someone.
 	timeout = 10
