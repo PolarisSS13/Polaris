@@ -4,6 +4,7 @@
 /obj/machinery/clamp
 	name = "stasis clamp"
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
+	description_info = "Click-dragging this to yourself while adjacent will attempt to remove it from the pipe."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
 	anchored = 1.0
