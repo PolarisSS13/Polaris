@@ -345,5 +345,76 @@
 	icon_state = "yellow"
 
 
+//Residential Area
 
+/area/centcom/residential_area
+	name = "\improper Residential Area"
+	icon_state = "yellow"
+	requires_power = 0
+	dynamic_lighting = 1
 
+/area/centcom/residential_area/bar
+	name = "\improper Residential Area - Bar"
+
+/area/centcom/residential_area/coffee_shop
+	name = "\improper Residential Area - Coffee Shop"
+
+/area/centcom/residential_area/mansions
+	name = "\improper Residential Area - Mansion Area"
+	icon_state = "green"
+
+/area/centcom/residential_area/mansions/mansion_one
+	name = "\improper Residential Area - Mansion One"
+
+/area/centcom/residential_area/mansions/mansion_two
+	name = "\improper Residential Area - Mansion Two"
+
+/area/centcom/residential_area/mansions/mansion_three
+	name = "\improper Residential Area - Mansion Three"
+
+/area/centcom/residential_area/houses
+	name = "\improper Residential Area - House Area"
+
+/area/centcom/residential_area/houses/house_one
+	name = "\improper Residential Area - House One"
+
+/area/centcom/residential_area/houses/house_two
+	name = "\improper Residential Area - House Two"
+
+/area/centcom/residential_area/flats
+	name = "\improper Residential Area - Flats"
+
+/area/centcom/residential_area/flats/flat_one
+	name = "\improper Residential Area - Flat One"
+
+/area/centcom/residential_area/flats/flat_two
+	name = "\improper Residential Area - Flat Two"
+
+/area/centcom/residential_area/flats/flat_three
+	name = "\improper Residential Area - Flat Three"
+
+/area/centcom/residential_area/flats/flat_four
+	name = "\improper Residential Area - Flat Four"
+
+/area/centcom/residential_area/flats/flat_five
+	name = "\improper Residential Area - Flat Five"
+
+/area/centcom/residential_area/flats/flat_fox
+	name = "\improper Residential Area - Flat Six"
+
+/area/centcom/residential_area/house_masonette
+	name = "\improper Residential Area - Masonette"
+
+/area/centcom/residential_area/house_masonette/mason_one
+	name = "\improper Residential Area - Masonette One"
+
+/area/centcom/residential_area/house_masonette/mason_two
+	name = "\improper Residential Area - Masonette Two"
+
+/area/centcom/president_office_geminus
+	name = "\improper President's Geminus City HQ" //Central Command Command totally isn't RAS Syndrome in action.
+	icon_state = "centcom_command"
+
+/area/centcom/president_office_geminus/office
+	name = "\improper President's Office - Geminus" //Central Command Command totally isn't RAS Syndrome in action.
+	icon_state = "centcom_command"

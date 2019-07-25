@@ -96,7 +96,7 @@ area/space/atmosalert()
 /area/shuttle/escape/centcom
 	name = "\improper Emergency Shuttle CentCom"
 	icon_state = "shuttle"
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 	base_turf = /turf/simulated/floor/tiled/techmaint
 
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
@@ -357,7 +357,7 @@ area/space/atmosalert()
 	name = "\improper CentCom"
 	icon_state = "centcom"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 
 /area/centcom/control
 	name = "\improper CentCom Control"
@@ -423,6 +423,15 @@ area/space/atmosalert()
 /area/centcom/bathroom
 	name = "\improper CentCom Bathroom"
 	icon_state = "centcom_crew"
+
+/area/centcom/president_office
+	name = "\improper President's Office" //Central Command Command totally isn't RAS Syndrome in action.
+	icon_state = "centcom_command"
+
+/area/centcom/marble_office
+	name = "\improper The Marble Office" //Central Command Command totally isn't RAS Syndrome in action.
+	icon_state = "centcom_command"
+
 
 //SYNDICATES
 
