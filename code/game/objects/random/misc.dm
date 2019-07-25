@@ -364,7 +364,7 @@
 	name = "random action figure"
 	desc = "This is a random action figure."
 	icon = 'icons/obj/toy.dmi'
-	icon_state = "Civilian"
+	icon_state = "assistant"
 
 /obj/random/action_figure/item_to_spawn()
 	return pick(/obj/item/toy/figure/cmo,

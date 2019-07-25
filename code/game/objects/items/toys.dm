@@ -533,7 +533,7 @@
 /obj/item/toy/figure/assistant
 	name = "Assistant action figure"
 	desc = "A \"Space Life\" brand Assistant action figure."
-	icon_state = "Civilian"
+	icon_state = "assistant"
 	toysay = "Grey tide station wide!"
 
 /obj/item/toy/figure/atmos
