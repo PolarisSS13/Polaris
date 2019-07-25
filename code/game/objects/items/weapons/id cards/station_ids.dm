@@ -192,28 +192,31 @@
 	access |= get_all_station_access()
 
 // NT big bad IDs
+/obj/item/weapon/card/id/nanotrasen
+	icon_state = "nanotrasen"
 
-/obj/item/weapon/card/id/ntrep
+/obj/item/weapon/card/id/nanotrasen/initialize()
+	. = ..()
+	access += get_all_centcom_access()
+	access += get_all_station_access()
+
+/obj/item/weapon/card/id/nanotrasen/ntrep
 	name = "\improper NanoTrasen Representative ID"
 	desc = "An ID for NanoTrasen representatives. You can smell the pompous."
-	icon_state = "nanotrasen"
 	job_access_type = /datum/job/nanotrasen
 
-/obj/item/weapon/card/id/cbia
+/obj/item/weapon/card/id/nanotrasen/cbia
 	name = "\improper CBIA Agent ID"
 	desc = "An ID straight from NanoTrasen for the CBIA."
-	icon_state = "nanotrasen"
 	job_access_type = /datum/job/nanotrasen/cbia
 
-/obj/item/weapon/card/id/president
+/obj/item/weapon/card/id/nanotrasen/president
 	name = "\improper President's ID"
-	icon_state = "nanotrasen"
 	desc = "An ID that reeks of appointed entitlement. For the president, naturally."
 	job_access_type = /datum/job/nanotrasen/president
 
-/obj/item/weapon/card/id/ceo
+/obj/item/weapon/card/id/nanotrasen/ceo
 	name = "\improper NanoTrasen CEO's ID"
-	icon_state = "nanotrasen"
 	desc = "The head honcho themselves. This has access to anything that exists under the colonies."
 	job_access_type = /datum/job/nanotrasen/ceo
 

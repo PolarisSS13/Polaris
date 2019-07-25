@@ -102,9 +102,6 @@ var/list/whitelist = list()
 	if(!jobs.hard_whitelisted)
 		return 1
 
-	if(check_rights(R_ADMIN, 0, M))
-		return 1
-
 	//If we have a loaded file, search it
 	if(jobs.hard_whitelisted)
 		for (var/s in hard_whitelist)

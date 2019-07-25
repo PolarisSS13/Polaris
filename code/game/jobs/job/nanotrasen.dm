@@ -9,7 +9,7 @@
 	spawn_positions = -1
 	supervisors = "the NanoTrasen CEO"
 	selection_color = "#0F0F6F"
-	idtype = /obj/item/weapon/card/id/ntrep
+	idtype = /obj/item/weapon/card/id/nanotrasen/ntrep
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 
@@ -26,21 +26,22 @@
 	hard_whitelisted = 1
 
 /datum/job/nanotrasen/New()
-	department = "[station_name()] Funds"
 	..()
+	department = "[station_name()] Funds"
+
 
 /datum/job/nanotrasen/get_access()
-	return 	(get_all_station_access() || get_all_centcom_access())
+	return get_all_centcom_access()
 
 /datum/job/nanotrasen/ceo
 	title = "Nanotrasen CEO"
 	total_positions = 1
 	spawn_positions = 1
 	flag = CEO
-	alt_titles = list("NanoTrasen Chairman")
+	alt_titles = list("NanoTrasen Chairman", "NanoTrasen COO")
 	wage = 10000
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/captain
-	idtype = /obj/item/weapon/card/id/ceo
+	idtype = /obj/item/weapon/card/id/nanotrasen/ceo
 
 /datum/job/nanotrasen/cbia
 	title = "CBIA Agent"
@@ -53,7 +54,7 @@
 	spawn_positions = -1
 	supervisors = "NanoTrasen"
 	selection_color = "#0F0F6F"
-	idtype = /obj/item/weapon/card/id/cbia
+	idtype = /obj/item/weapon/card/id/nanotrasen/cbia
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
 	alt_titles = list()
@@ -76,7 +77,7 @@
 	spawn_positions = 1
 	supervisors = "NanoTrasen"
 	selection_color = "#1D1D4F"
-	idtype = /obj/item/weapon/card/id/president
+	idtype = /obj/item/weapon/card/id/nanotrasen/president
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()

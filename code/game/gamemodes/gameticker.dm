@@ -341,7 +341,7 @@ var/global/datum/controller/gameticker/ticker
 					feedback_set_details("end_proper","nuke")
 					time_left = 1 MINUTE //No point waiting five minutes if everyone's dead.
 					if(!delay_end)
-						to_chat(world, "<span class='notice'><b>Rebooting due to destruction of station in [round(time_left/600)] minutes.</b></span>")
+						to_chat(world, "<span class='notice'><b>Rebooting due to destruction of city in [round(time_left/600)] minutes.</b></span>")
 				else
 					feedback_set_details("end_proper","proper completion")
 					time_left = round(restart_timeout)
@@ -420,20 +420,20 @@ var/global/datum/controller/gameticker/ticker
 					if(isNotAdminLevel(playerTurf.z))
 						Player << "<font color='blue'><b>You survived the round, but remained on [station_name()] as [Player.real_name].</b></font>"
 					else
-						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>"
+						Player << "<font color='green'><b>You managed to survive the events in [station_name()] as [Player.real_name].</b></font>"
 				else if(isAdminLevel(playerTurf.z))
-					Player << "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='green'><b>You successfully underwent crew transfer after events in [station_name()] as [Player.real_name].</b></font>"
 				else if(issilicon(Player))
-					Player << "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='green'><b>You remain operational after the events in [station_name()] as [Player.real_name].</b></font>"
 				else
-					Player << "<font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font>"
+					Player << "<font color='blue'><b>You missed the crew transfer after the events in [station_name()] as [Player.real_name].</b></font>"
 			else
 				if(istype(Player,/mob/observer/dead))
 					var/mob/observer/dead/O = Player
 					if(!O.started_as_observer)
-						Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+						Player << "<font color='red'><b>You did not survive the events in [station_name()]...</b></font>"
 				else
-					Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>"
+					Player << "<font color='red'><b>You did not survive the events in [station_name()]...</b></font>"
 	world << "<br>"
 
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
@@ -459,9 +459,9 @@ var/global/datum/controller/gameticker/ticker
 
 		if (!robo.connected_ai)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Played by: [robo.key]) survived as an AI-less stationbound synthetic! Its laws were:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) survived as an AI-less city bound synthetic! Its laws were:</b>"
 			else
-				world << "<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a stationbound synthetic without an AI. Its laws were:</b>"
+				world << "<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a city bound synthetic without an AI. Its laws were:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
