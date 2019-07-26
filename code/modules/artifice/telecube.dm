@@ -26,8 +26,6 @@
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 7, TECH_POWER = 6, TECH_BLUESPACE = 7, TECH_ANOMALY = 2, TECH_PRECURSOR = 2)
 
-	density = TRUE
-
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/telecube)
 
 	slowdown = 5
@@ -130,7 +128,6 @@
 		return 0
 	else
 		mate = M
-		M.pair_cube(src)
 		update_icon()
 		return 1
 
@@ -231,6 +228,9 @@
 
 /obj/item/weapon/telecube/precursor/mated
 	start_paired = TRUE
+
+/obj/item/weapon/telecube/precursor/mated/zone
+	teleport_range = 2
 
 /obj/item/weapon/telecube/precursor/mated/mirrorcolor
 	mirror_colors = TRUE

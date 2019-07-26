@@ -8,6 +8,7 @@
 #include "Mineshaft1.dmm"
 #include "Scave1.dmm"
 #include "crashed_ufo.dmm"
+#include "crashed_ufo_frigate.dmm"
 #include "crystal1.dmm"
 #include "crystal2.dmm"
 #include "crystal3.dmm"
@@ -210,6 +211,13 @@
 	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet it still seems to be running..."
 	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
 	cost = 40
+	discard_prob = 50
+
+/datum/map_template/surface/mountains/deep/crashed_ufo_frigate
+	name = "Crashed UFO Frigate"
+	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet its combat protocols still seem to be running..."
+	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
+	cost = 60
 	discard_prob = 50
 
 /datum/map_template/surface/mountains/deep/Scave1

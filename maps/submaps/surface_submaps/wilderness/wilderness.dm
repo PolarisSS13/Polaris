@@ -230,3 +230,9 @@
 	desc = "An old, bloody butcher's shack. Get your meat here!"
 	mappath = 'maps/submaps/surface_submaps/wilderness/ButcherShack.dmm'
 	cost = 5
+
+/datum/map_template/surface/wilderness/deep/Chapel1
+	name = "Chapel1"
+	desc = "The chapel of lights and a robot."
+	mappath = 'maps/submaps/surface_submaps/wilderness/Chapel.dmm'
+	cost = 20
