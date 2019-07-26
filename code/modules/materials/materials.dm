@@ -71,6 +71,8 @@ var/list/name_to_material
 	var/sheet_plural_name = "sheets"
 	var/is_fusion_fuel
 
+	var/worth = 1
+
 	// Shards/tables/structures
 	var/shard_type = SHARD_SHRAPNEL       // Path of debris object.
 	var/shard_icon                        // Related to above.
@@ -592,6 +594,8 @@ var/list/name_to_material
 	sheet_singular_name = "brick"
 	sheet_plural_name = "bricks"
 	radiation_resistance = 1
+
+	worth = 0
 
 /material/cloth //todo
 	name = "cloth"
