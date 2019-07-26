@@ -6,6 +6,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	w_class = ITEMSIZE_TINY
 	origin_tech = list(TECH_BIO = 4)
+	price_tag = 15
 
 // This is actually applied to an extract, so no attack() overriding needed.
 /obj/item/slimepotion/enhancer
@@ -205,6 +206,7 @@
 	description_info = "The slime or other animal needs to be alive for this to work.  The slime this is applied to will consider the user \
 	their 'friend', and will never attack them.  This might also work on other things besides slimes."
 	icon_state = "potlightpink"
+	price_tag = 20
 
 /obj/item/slimepotion/friendship/attack(mob/living/simple_animal/M, mob/user)
 	if(!istype(M))

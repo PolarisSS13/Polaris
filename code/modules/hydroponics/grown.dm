@@ -12,6 +12,8 @@
 	var/potency = -1
 	drop_sound = 'sound/items/drop/herb.ogg'
 
+	price_tag = 1
+
 /obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
 
 	..()
