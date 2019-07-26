@@ -6,7 +6,7 @@
 	l_ear = /obj/item/device/radio/headset/government
 	glasses = /obj/item/clothing/glasses/sunglasses
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/ntrep	//station
+	id_type = /obj/item/weapon/card/id/nanotrasen/ntrep	//station
 	pda_slot = slot_r_store
 	pda_type = /obj/item/device/pda/heads
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun = 1)
@@ -57,7 +57,7 @@
 	head = /obj/item/clothing/head/beret/centcom/captain
 	belt = /obj/item/weapon/gun/energy/toxgun //Fancy gun for bosses that like melting the insides of people
 	id_pda_assignment = "Nanotrasen Regional Commander"
-	id_type = /obj/item/weapon/card/id/ceo
+	id_type = /obj/item/weapon/card/id/nanotrasen/ceo
 
 /decl/hierarchy/outfit/job/nanotrasen/cbia
 	name = "Nanotrasen CBIA Agent"
@@ -68,4 +68,27 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	belt = /obj/item/weapon/gun/energy
 	id_pda_assignment = "Nanotrasen CBIA Agent"
-	id_type = /datum/job/nanotrasen/cbia	//station
+	id_type = /obj/item/weapon/card/id/nanotrasen/cbia
+
+/decl/hierarchy/outfit/job/heads/president
+	name = OUTFIT_JOB_NAME("President")
+	glasses = /obj/item/clothing/glasses/sunglasses
+	uniform = /obj/item/clothing/under/rank/president
+	suit = /obj/item/clothing/suit/storage/toggle/presidential_jacket
+	l_ear = /obj/item/device/radio/headset/headset_com
+	shoes = /obj/item/clothing/shoes/leather
+	backpack = /obj/item/weapon/storage/backpack
+	satchel_one = /obj/item/weapon/storage/backpack/satchel
+	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
+	id_type = /obj/item/weapon/card/id/nanotrasen/president
+	pda_type = /obj/item/device/pda/captain
+
+/decl/hierarchy/outfit/job/heads/president/post_equip(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/clothing/uniform = H.w_uniform
+	if(uniform)
+		var/obj/item/clothing/accessory/tie/president/tie = new()
+		if(uniform.can_attach_accessory(tie))
+			uniform.attach_accessory(null, tie)
+		else
+			qdel(tie)

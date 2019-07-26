@@ -76,7 +76,7 @@
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	department = "Public Healthcare"
+	department = "Civilian"
 	department_flag = MEDSCI
 	faction = "City"
 	total_positions = 0
@@ -84,7 +84,7 @@
 	supervisors = "your private company director"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist
-	wage = 7
+	wage = 60
 	access = list(access_genetics)
 	minimal_access = list(access_genetics)
 
