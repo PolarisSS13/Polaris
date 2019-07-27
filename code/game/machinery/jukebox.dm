@@ -34,16 +34,16 @@ datum/track/New(var/title_name, var/audio)
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
-		new/datum/track("Honk", 'sound/music/clown.ogg'),
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
-		new/datum/track("Space Oddity", 'sound/music/space_oddity.ogg'),
-		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
-		new/datum/track("Victory", 'sound/music/Victory.ogg')
+		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg')
+		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg')
+		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg')
+		new/datum/track("Electrified", 'sound/music/disco/Electrified.ogg')
+		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg')
 	)
 
 	// Only visible if hacked
 	var/list/datum/track/secret_tracks = list(
-		new/datum/track("Cursed Song", 'sound/music/Despacito.ogg')
+		new/datum/track("#$@^^/:|~", 'sound/music/Despacito.ogg')
 	)
 
 /obj/machinery/media/jukebox/New()
