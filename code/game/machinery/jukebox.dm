@@ -34,10 +34,10 @@ datum/track/New(var/title_name, var/audio)
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
-		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg')
-		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg')
-		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg')
-		new/datum/track("Electrified", 'sound/music/disco/Electrified.ogg')
+		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg'),
+		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg'),
+		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg'),
+		new/datum/track("Electrified", 'sound/music/disco/Electrified.ogg'),
 		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg')
 	)
 
