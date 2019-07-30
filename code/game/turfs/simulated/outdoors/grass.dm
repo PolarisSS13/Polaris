@@ -34,7 +34,7 @@ var/list/grass_types = list(
 
 	grass_types = list(
 		/obj/structure/flora/sif/eyes = 1,
-
+		/obj/structure/flora/sif/tendrils = 10
 		)
 
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_grass)

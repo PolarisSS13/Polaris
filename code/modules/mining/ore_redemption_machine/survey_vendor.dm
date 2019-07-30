@@ -55,7 +55,7 @@
 	for(var/datum/data/mining_equipment/prize in prize_list)
 		dat += "<tr><td>[prize.equipment_name]</td><td>[prize.cost]</td><td><A href='?src=\ref[src];purchase=\ref[prize]'>Purchase</A></td></tr>"
 	dat += "</table>"
-	var/datum/browser/popup = new(user, "miningvendor", "Mining Equipment Vendor", 400, 600)
+	var/datum/browser/popup = new(user, "miningvendor", "Survey Equipment Vendor", 400, 600)
 	popup.set_content(dat)
 	popup.open()
 
