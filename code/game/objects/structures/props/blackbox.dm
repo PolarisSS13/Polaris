@@ -118,7 +118,7 @@
 		<B>@$&@$& Human ##:##:##:</B> Attention unidentified vessel, state your designation and intent.<BR>
 		<B>!#@$&&^ Human ##:##:##:</B> Commander I don't think they're going to stop.<BR>
 		<B>@$&@$& Human ##:##:##:</B> Unidentified vessel, you have until the count of three before we engage weapon-<BR>
-		<B>!#@$&&^ Human ##:##:##:</B> Commander! Think about that you're-<BR>
+		<B>!#@$&&^ Human ##:##:##:</B> Commander! Think about what you're-<BR>
 		<B>A repeating clicking, before silence.</B><BR>
 		<B>End of first log.</B><BR>
 		**<BR>
