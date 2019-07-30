@@ -254,6 +254,36 @@ var/global/photo_count = 0
 
 	return mob_detail
 	
+	
+//Journalistic Features
+
+/obj/item/device/camera/proc/get_sensationalist_value(turf/the_turf as turf)
+
+	var/sensational			//pictures of high ranking people, depending on rank
+
+	// How valuable is their job to the media?
+	// Will be multiplied if caught in a scandal.
+	
+	var/gov_job_worth = 20 
+	var/council_job_worth = 10
+
+	//To be expanded.
+	for(var/mob/living/carbon/human/A in the_turf)
+		// Sensational Points.
+		// What's their job?
+		var/datum/job/job = A.mind.assigned_job
+
+		if(job in command_positions)
+			sensational += council_job_worth
+
+		if(job in gov_positions)
+			sensational += gov_job_worth	
+	
+	return sensational
+	
+/obj/item/device/camera/proc/get_gruesome_value(turf/the_turf as turf)
+	return
+	
 /obj/item/device/camera/proc/get_sensationalist_value(turf/the_turf as turf)
 	//Journalistic Features
 	var/sensational			//pictures of high ranking people, depending on rank
@@ -264,26 +294,13 @@ var/global/photo_count = 0
 	var/see_face			// Can we see this person's face?
 	
 	
-	// How valuable is their job to the media?
-	// Will be multiplied if caught in a scandal.
-	
-	var/gov_job_worth = 20 
-	var/council_job_worth = 10
+
 	
 	
-	//To be expanded.
-	for(var/mob/living/carbon/human/A in the_turf)
+
 	
 		if(see_face)
-			// Sensational Points.
-			// What's their job?
-			var/datum/job/job = A.mind.assigned_job
 
-			if(job in command_positions)
-				sensational += council_job_worth
-
-			if(job in gov_positions)
-				sensational += gov_job_worth
 				
 		//gruesome points		
 		
