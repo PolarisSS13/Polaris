@@ -467,8 +467,8 @@
 
 
 /mob/living/simple_animal/slime/DestroySurroundings(var/direction)
-	
 	if(!rabid)		// Slimes should only destroy windows when they've been abused.
+	
 		spawn(15)	// wait a wee bit, if they can still get to their food or not.
 		LoseTarget()
 		
