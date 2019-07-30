@@ -47,6 +47,11 @@
 	var/const/STATUS_DISPLAY_TIME = 4
 	var/const/STATUS_DISPLAY_CUSTOM = 99
 
+	//If any of these are set, they'll override the default.
+	var/font_size = "5pt"
+	var/font_color = "#09f"
+	var/font_style = "Arial Black"
+
 /obj/machinery/status_display/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
@@ -167,11 +172,30 @@
 	remove_display()
 	if(!picture || picture_state != state)
 		picture_state = state
-		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
+		picture = image(icon, icon_state=picture_state)
 	overlays |= picture
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
-	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
+	var/fnt_sz
+	var/fnt_cl
+	var/fnt_stl
+
+	if(font_size)
+		fnt_sz = font_size
+	else
+		fnt_sz = FONT_SIZE
+
+	if(font_color)
+		fnt_cl = font_color
+	else
+		fnt_cl = FONT_COLOR
+
+	if(font_style)
+		fnt_stl = font_style
+	else
+		fnt_stl = FONT_STYLE
+
+	var/new_text = {"<div style="font-size:[fnt_sz];color:[fnt_cl];font:'[fnt_stl]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
 
@@ -243,3 +267,65 @@
 	message1 = "TIME"
 	message2 = stationtime2text()
 	update_display(message1, message2)
+
+/obj/machinery/status_display/money_display
+	ignore_friendc = 1
+	desc = "This displays the current funding of a particular institution or company."
+	name = "funding display"
+	var/department = "Civilian"
+	var/dept_name = "PUBLIC FUNDS"
+	icon = 'icons/obj/status_display_wide.dmi'
+	maptext_height = 26
+	maptext_width = 62
+	font_color = "#84ff00"
+
+/obj/machinery/status_display/money_display/update()
+	update_display(message1, message2)
+	message1 = "[dept_name]:"
+	message2 = "[department_accounts[department].money]CR"
+
+
+/obj/machinery/status_display/money_display/city/initialize()
+	department = "[station_name()] Funds"
+	dept_name = "City Funds"
+	..()
+
+/obj/machinery/status_display/money_display/civilian
+	department = "Civilian"
+	dept_name = "Public Funds"
+
+/obj/machinery/status_display/money_display/police
+	department = "Police"
+	dept_name = "Police Funds"
+
+/obj/machinery/status_display/money_display/cargo
+	department = "Cargo"
+	dept_name = "Cargo Funds"
+
+/obj/machinery/status_display/money_display/council
+	department = "City Council"
+	dept_name = "Council Funds"
+
+
+/obj/machinery/status_display/money_display/hospital
+	department = "Public Healthcare"
+	dept_name = "Health Funds"
+
+/obj/machinery/status_display/money_display/emt
+	department = "Emergency and Maintenance"
+	dept_name = "EMT Funds"
+
+
+/obj/machinery/status_display/money_display/rnd
+	department = "Research and Science"
+	dept_name = "R&D Funds"
+
+
+/obj/machinery/status_display/money_display/bar
+	department = "Bar"
+	dept_name = "Bar Funds"
+
+
+/obj/machinery/status_display/money_display/botany
+	department = "Botany"
+	dept_name = "Botany Funds"
