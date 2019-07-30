@@ -13,7 +13,7 @@
 	S["bank_pin"]		<< pref.bank_pin
 
 /datum/category_item/player_setup_item/general/economy/sanitize_character()
-	pref.money_balance		= sanitize_integer(pref.money_balance, 0, 99999999, initial(pref.money_balance))
+	pref.money_balance		= sanitize_integer(pref.money_balance, 0, 999999, initial(pref.money_balance))
 	pref.bank_no			= sanitize_integer(pref.bank_no, 111111, 999999, initial(pref.bank_no))
 	pref.bank_pin			= sanitize_integer(pref.bank_pin, 1111, 9999, initial(pref.bank_pin))
 	if(!pref.bank_pin)

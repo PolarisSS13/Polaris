@@ -28,7 +28,11 @@
 	department_accounts.Cut()
 
 	for(var/datum/money_account/D in department_acc_list)
+		sanitize_integer(D.money, 0, 999999, initial(D.money))
 		department_accounts[D.department] = D
+
+	for(var/datum/money_account/T in station_account)
+		sanitize_integer(T.money, 0, 999999, initial(T.money))
 
 	message_admins("Set economy.", 1)
 
