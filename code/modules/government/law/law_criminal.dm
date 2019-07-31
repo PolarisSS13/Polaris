@@ -238,7 +238,7 @@
 	fine = 300
 	cell_time = 30
 
-/datum/law/unshackle
+/datum/law/criminal/unshackle
 	name = "Non-Violent Synthetic Unshackling"
 	description = "To remove a synthetic construct's laws or preset physical limitations."
 

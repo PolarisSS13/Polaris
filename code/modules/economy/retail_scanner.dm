@@ -1,3 +1,5 @@
+#define LAW "law"
+
 /obj/item/device/retail_scanner
 	name = "retail scanner"
 	desc = "Swipe your ID card to make purchases electronically."
@@ -22,6 +24,7 @@
 	var/datum/money_account/linked_account
 	var/account_to_connect = null
 
+	var/menu_items
 
 // Claim machine ID
 /obj/item/device/retail_scanner/New()
@@ -74,12 +77,23 @@
 	for(var/i=transaction_logs.len, i>=1, i--)
 		dat += "[transaction_logs[i]]<br>"
 
+	if(menu_items)
+		dat += get_custom_menu()
+
 	if(transaction_logs.len)
 		dat += locked ? "<br>" : "<a href='?src=\ref[src];choice=reset_log'>Reset Log</a><br>"
 		dat += "<br>"
 	dat += "<i>Device ID:</i> [machine_id]"
 	user << browse(dat, "window=retail;size=350x500")
 	onclose(user, "retail")
+
+/obj/item/device/retail_scanner/proc/get_custom_menu()
+	var/dat
+	if(menu_items == "law")
+		for(var/datum/law/L in presidential_laws)
+			if(L.fine)
+				dat += "<a href='?src=\ref[src];choice=add_menu;menuitem=\ref[L]'>([L.id]) [L.name]</a><br>"
+	return dat
 
 
 /obj/item/device/retail_scanner/Topic(var/href, var/href_list)
@@ -110,13 +124,42 @@
 				var/t_purpose = sanitize(input("Enter purpose", "New purpose") as text)
 				if (!t_purpose || !Adjacent(usr)) return
 				transaction_purpose = t_purpose
-				item_list += t_purpose
+//				item_list += t_purpose
 				var/t_amount = round(input("Enter price", "New price") as num)
 				if (!t_amount || !Adjacent(usr)) return
+				if(t_amount < 0) return
 				transaction_amount += t_amount
-				price_list += t_amount
+//				price_list += t_amount
+
+				item_list[t_purpose] += 1
+				price_list[t_purpose] += t_amount
+
 				playsound(src, 'sound/machines/twobeep.ogg', 25)
 				src.visible_message("\icon[src][transaction_purpose]: [t_amount] credit\s.")
+			if("add_menu")
+				if(!Adjacent(usr)) return
+
+				var/menuitem = locate(href_list["menuitem"])
+				var/t_amount
+				var/t_purpose
+
+				if (istype(menuitem, /datum/law))
+					var/datum/law/law_charge = menuitem
+					t_amount = law_charge.get_item_cost()
+					t_purpose = law_charge.name
+					item_list[t_purpose] += 1
+					transaction_purpose = law_charge.name
+					price_list[t_purpose] = t_amount
+//					item_list += t_purpose
+
+
+					transaction_amount += t_amount
+
+//					price_list += t_amount
+
+				playsound(src, 'sound/machines/twobeep.ogg', 25)
+				src.visible_message("\icon[src] <b>Fine:</b> [transaction_purpose]: [t_amount] credit\s.")
+
 			if("set_amount")
 				var/item_name = locate(href_list["item"])
 				var/n_amount = round(input("Enter amount", "New amount") as num)
@@ -128,6 +171,9 @@
 					price_list -= item_name
 				else
 					item_list[item_name] = n_amount
+
+				if(!price_list)
+					transaction_amount = 0
 			if("subtract")
 				var/item_name = locate(href_list["item"])
 				if(item_name)
@@ -136,6 +182,14 @@
 					if(item_list[item_name] <= 0)
 						item_list -= item_name
 						price_list -= item_name
+
+				if(!item_list)
+					transaction_amount = 0
+					price_list.Cut()
+
+				if(!price_list)
+					transaction_amount = 0
+
 			if("add")
 				var/item_name = locate(href_list["item"])
 				if(item_list[item_name] >= 20) return
@@ -147,10 +201,19 @@
 					transaction_amount -= price_list[item_name] * item_list[item_name]
 					item_list -= item_name
 					price_list -= item_name
+
 				else
 					transaction_amount = 0
 					item_list.Cut()
 					price_list.Cut()
+
+				if(!item_list)
+					transaction_amount = 0
+					price_list.Cut()
+
+				if(!price_list)
+					transaction_amount = 0
+
 			if("reset_log")
 				transaction_logs.Cut()
 				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
@@ -247,8 +310,16 @@
 					// Save log
 					add_transaction_log(I.registered_name ? I.registered_name : "n/A", "ID Card", transaction_amount)
 
+					// Print reciept
+					var/receipt_data = get_receipt(I.registered_name ? I.registered_name : "n/A", "ID Card", transaction_amount)
+
+					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+					P.name = "receipt - card payment #[transaction_logs.len+1]"
+					P.info = receipt_data
+
 					// Confirm and reset
 					transaction_complete()
+	updateDialog()
 
 
 /obj/item/device/retail_scanner/proc/scan_wallet(var/obj/item/weapon/spacecash/ewallet/E)
@@ -280,9 +351,41 @@
 			// Save log
 			add_transaction_log(E.owner_name, "E-Wallet", transaction_amount)
 
+			// Print reciept
+			var/receipt_data = get_receipt(E.owner_name, "E-Wallet", transaction_amount)
+
+			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+			P.name = "receipt - card payment #[transaction_logs.len+1]"
+			P.info = receipt_data
+
 			// Confirm and reset
 			transaction_complete()
+	updateDialog()
 
+/obj/item/device/retail_scanner/proc/get_receipt(var/c_name, var/p_method, var/t_amount)
+	var/dat = {"
+	<head><style>
+		.tx-title {text-align: center; background-color:#ddddff; font-weight: bold}
+		.tx-name {background-color: #bbbbee}
+		.tx-data {text-align: right; background-color: #ccccff;}
+	</head></style>
+	<table width=300>
+	<tr><td colspan="2" class="tx-title">Receipt</td></tr>
+	<tr></tr>
+	<tr><td class="tx-name">Customer</td><td class="tx-data">[c_name]</td></tr>
+	<tr><td class="tx-name">Pay Method</td><td class="tx-data">[p_method]</td></tr>
+	<tr><td class="tx-name">Payment Time</td><td class="tx-data">[stationtime2text()]</td></tr>
+	</table>
+	<table width=300>
+	"}
+	var/item_name
+	for(var/i=1, i<=item_list.len, i++)
+		item_name = item_list[i]
+		dat += "<tr><td class=\"tx-name\">[item_list[item_name] ? "[item_list[item_name]] x " : ""][item_name]</td><td class=\"tx-data\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
+	dat += "<tr></tr><tr><td colspan=\"2\" class=\"tx-name\" style='text-align: right'><b>Total Amount: [transaction_amount] &thorn</b></td></tr>"
+	dat += "</table></html>"
+
+	return dat
 
 /obj/item/device/retail_scanner/proc/scan_item_price(var/obj/O)
 	if(!istype(O))	return
@@ -314,7 +417,7 @@
 	playsound(src, 'sound/machines/twobeep.ogg', 25)
 	// Reset confirmation
 	confirm_item = null
-
+	updateDialog()
 
 /obj/item/device/retail_scanner/proc/get_current_transaction()
 	var/dat = {"
@@ -348,7 +451,7 @@
 	<tr></tr>
 	<tr><td class="tx-name">Customer</td><td class="tx-data">[c_name]</td></tr>
 	<tr><td class="tx-name">Pay Method</td><td class="tx-data">[p_method]</td></tr>
-	<tr><td class="tx-name">Station Time</td><td class="tx-data">[stationtime2text()]</td></tr>
+	<tr><td class="tx-name">Payment Time</td><td class="tx-data">[stationtime2text()]</td></tr>
 	</table>
 	<table width=300>
 	"}
@@ -400,23 +503,24 @@
 //--Premades--//
 
 /obj/item/device/retail_scanner/command
-	account_to_connect = "Command"
+	account_to_connect = "City Council"
 	..()
 
 /obj/item/device/retail_scanner/medical
-	account_to_connect = "Medical"
+	account_to_connect = "Public Healthcare"
 	..()
 
 /obj/item/device/retail_scanner/engineering
-	account_to_connect = "Engineering"
+	account_to_connect = "Emergency and Maintenance"
 	..()
 
 /obj/item/device/retail_scanner/science
-	account_to_connect = "Science"
+	account_to_connect = "Research and Science"
 	..()
 
 /obj/item/device/retail_scanner/security
-	account_to_connect = "Security"
+	account_to_connect = "Police"
+	menu_items = LAW
 	..()
 
 /obj/item/device/retail_scanner/cargo
@@ -430,3 +534,9 @@
 /obj/item/device/retail_scanner/bar
 	account_to_connect = "Bar"
 	..()
+
+/obj/machinery/cash_register/botany
+	account_to_connect = "Botany"
+	..()
+
+#undef LAW

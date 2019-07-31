@@ -15,6 +15,14 @@
 
 /datum/reagent/var/price_tag = null
 
+///////////////////
+//---Law---------//
+//***************//
+
+/datum/law/var/price_tag = null
+
+/datum/law/proc/get_item_cost()
+	return fine
 
 // Juices, soda and similar //
 
