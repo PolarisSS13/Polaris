@@ -502,6 +502,10 @@
 
 //--Premades--//
 
+/obj/item/device/retail_scanner/city
+	account_to_connect = "[station_name()] Funds"
+	..()
+
 /obj/item/device/retail_scanner/command
 	account_to_connect = "City Council"
 	..()
