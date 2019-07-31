@@ -601,6 +601,10 @@
 
 //--Premades--//
 
+/obj/machinery/cash_register/city/initialize()
+	account_to_connect = "[station_name()] Funds"
+	..()
+
 /obj/machinery/cash_register/command
 	account_to_connect = "City Council"
 	..()

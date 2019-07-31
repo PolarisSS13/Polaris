@@ -502,7 +502,7 @@
 
 //--Premades--//
 
-/obj/item/device/retail_scanner/city
+/obj/item/device/retail_scanner/city/initialize()
 	account_to_connect = "[station_name()] Funds"
 	..()
 
