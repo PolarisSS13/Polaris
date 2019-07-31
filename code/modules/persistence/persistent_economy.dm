@@ -28,16 +28,21 @@
 	department_accounts.Cut()
 
 	for(var/datum/money_account/D in department_acc_list)
-		sanitize_integer(D.money, 0, 999999, initial(D.money))
 		department_accounts[D.department] = D
 
-	for(var/datum/money_account/T in station_account)
-		sanitize_integer(T.money, 0, 999999, initial(T.money))
+	sanitize_economy()
 
 	message_admins("Set economy.", 1)
 
 	return 1
 
+
+/datum/economy/bank_accounts/proc/sanitize_economy()
+	for(var/datum/money_account/D in department_acc_list)
+		D.money = Clamp(D.money, 0, 999999)
+
+	for(var/datum/money_account/T in station_account)
+		T.money = Clamp(T.money, 0, 999999)
 
 
 /datum/economy/bank_accounts/proc/save_accounts()
@@ -47,6 +52,8 @@
 	if(!fexists(path))		return 0
 	if(!S)					return 0
 	S.cd = "/"
+
+	sanitize_economy()
 
 	tax_poor = tax_rate_lower
 	tax_middle = tax_rate_middle
@@ -76,6 +83,8 @@
 	S["tax_rate_upper"] >> tax_rich
 	S["tax_rate_middle"] >> tax_middle
 	S["tax_rate_lower"] >> tax_poor
+
+	sanitize_economy()
 
 	for (var/datum/money_account/T in all_money_accounts)
 		if(T.department)
