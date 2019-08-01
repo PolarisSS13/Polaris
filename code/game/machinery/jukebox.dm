@@ -34,11 +34,19 @@ datum/track/New(var/title_name, var/audio)
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
-		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg'),
-		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg'),
-		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg'),
+		new/datum/track("Bluespace Ocean", 'sound/music/disco/Bluespace Ocean.ogg'),
+		new/datum/track("Cyber Revolt", 'sound/music/disco/Cyber_Revolt.ogg'),
+		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg'),
 		new/datum/track("Electrified", 'sound/music/disco/Electrified.ogg'),
-		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg')
+		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg'),
+		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg'),
+		new/datum/track("Psionic Souls", 'sound/music/disco/Psionic_souls.ogg'),
+		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg'),
+		new/datum/track("Sunyo", 'sound/music/disco/Sunyo.ogg'),
+		new/datum/track("Syn", 'sound/music/disco/Syn.ogg'),
+		new/datum/track("System Collapse", 'sound/music/disco/System_Collapse.ogg'),
+		new/datum/track("This is Rain", 'sound/music/disco/This is Rain.ogg')
+
 	)
 
 	// Only visible if hacked
