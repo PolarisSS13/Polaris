@@ -21,6 +21,12 @@
 	..()
 	create_reagents(60)
 
+/obj/item/slime_extract/get_item_cost()
+	if(!uses)
+		return 2
+	else
+		return price_tag
+
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/slimepotion/enhancer))
 		if(enhanced)
@@ -68,7 +74,8 @@
 	name = "grey slime extract"
 	icon_state = "grey slime extract"
 	description_info = "This extract will create a new grey baby slime if injected with phoron, or some new monkey cubes if injected with blood."
-
+	price_tag = 10
+	
 /datum/chemical_reaction/slime/grey_new_slime
 	name = "Slime Spawn"
 	id = "m_spawn"
@@ -113,7 +120,8 @@
 	icon_state = "metal slime extract"
 	description_info = "This extract will create a metamorphic liquid which will transform into metallic liquid it comes into contact with, when injected with phoron.  \
 	It can also create a metallic binding liquid which will force metallic liquids to mix to form alloys when solified, when injected with water."
-	price_tag = 6
+	price_tag = 15
+	
 // 'Duplicates' liquid metals, consuming itself in the process.
 /datum/reagent/toxin/metamorphic_metal
 	name = "Metamorphic Metal"
@@ -144,7 +152,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 	prefill = list("metamorphic" = 60)
-
+	price_tag = 25
 
 // This is kind of a waste since iron is in the chem dispenser but it would be inconsistent if this wasn't here.
 /datum/chemical_reaction/metamorphic/iron
@@ -215,7 +223,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 	prefill = list("binding" = 60)
-
+	price_tag = 10
 
 /datum/chemical_reaction/binding
 	name = "Bind into Steel"
@@ -259,6 +267,7 @@
 	description_info = "This extract will create frost oil when injected with phoron, which can be used to solidify liquid metals.  \
 	The extract can also create a slime stability agent when injected with blood, which reduces the odds of newly created slimes mutating into \
 	a different color when a slime reproduces."
+	price_tag = 25
 
 /datum/chemical_reaction/slime/blue_frostoil
 	name = "Slime Frost Oil"
@@ -291,7 +300,7 @@
 	icon_state = "purple slime extract"
 	description_info = "This extract can create a slime steroid agent when injected with phoron, which increases the amount of slime extracts the processor \
 	can extract from a slime specimen."
-	price_tag = 8
+	price_tag = 30
 
 /datum/chemical_reaction/slime/purple_steroid
 	name = "Slime Steroid"
@@ -314,6 +323,7 @@
 	name = "orange slime extract"
 	icon_state = "orange slime extract"
 	description_info = "This extract creates a fire when injected with phoron, after a five second delay."
+	price_tag = 20
 
 /datum/chemical_reaction/slime/orange_fire
 	name = "Slime Fire"
@@ -351,7 +361,7 @@
 	icon_state = "yellow slime extract"
 	description_info = "This extract will create a special 10k capacity power cell that self recharges slowly over time, when injected with phoron.  \
 	When injected with blood, it will create a glob of slime which glows brightly.  If injected with water, it will emit a strong EMP, after a five second delay."
-	price_tag = 15
+	price_tag = 80
 
 /datum/chemical_reaction/slime/yellow_emp
 	name = "Slime EMP"
@@ -402,7 +412,7 @@
 	name = "gold slime extract"
 	icon_state = "gold slime extract"
 	description_info = "This extract will create 5u liquid gold when injected with phoron."
-	price_tag = 10
+	price_tag = 90
 
 /datum/chemical_reaction/slime/gold_gold
 	name = "Slime Gold"
@@ -421,7 +431,7 @@
 	name = "silver slime extract"
 	icon_state = "silver slime extract"
 	description_info = "This extract will create 5u liquid silver when injected with phoron."
-
+	price_tag = 50
 
 /datum/chemical_reaction/slime/silver_silver
 	name = "Slime Silver"
@@ -441,7 +451,7 @@
 	name = "dark purple slime extract"
 	icon_state = "dark purple slime extract"
 	description_info = "This extract will create 40u liquid phoron when injected with water."
-	price_tag = 7
+	price_tag = 50
 
 /datum/chemical_reaction/slime/dark_purple_phoron
 	name = "Slime Phoron"
@@ -463,7 +473,7 @@
 	description_info = "This extract will massively lower the temperature of the surrounding atmosphere when injected with phoron.  \
 	Slimes will suffer massive harm from the cold snap and most colors will die instantly.  Other entities are also chilled, however \
 	cold-resistant armor like winter coats can protect from this.  Note that the user is not immune to the extract's effects."
-
+	price_tag = 30
 
 /datum/chemical_reaction/slime/dark_blue_cold_snap
 	name = "Slime Cold Snap"
@@ -545,7 +555,7 @@
 	description_info = "This extract will create a slime mutator agent when injected with phoron, which increases a slime's odds of mutating \
 	into a different color when reproducing by 12%.  Injecting with blood causes all slimes that can see the user to enrage, becoming very violent and \
 	out of control."
-
+	price_tag = 30
 
 /datum/chemical_reaction/slime/red_enrage
 	name = "Slime Enrage"
@@ -598,6 +608,7 @@
 	name = "green slime extract"
 	icon_state = "green slime extract"
 	description_info = "This extract will create 5u of liquid uranium when injected with phoron."
+	price_tag = 60
 
 /datum/chemical_reaction/slime/green_uranium
 	name = "Slime Uranium"
@@ -617,7 +628,7 @@
 	icon_state = "pink slime extract"
 	description_info = "This extract will create 20u of blood clotting agent if injected with blood.  It can also create 20u of bone binding agent if injected \
 	with phoron.  When injected with water, it will create an organ-mending agent.  The slime medications have a very low threshold for overdosage, however."
-	price_tag = 9
+	price_tag = 70
 
 /datum/chemical_reaction/slime/pink_clotting
 	name = "Slime Clotting Med"
@@ -677,7 +688,7 @@
 	icon_state = "oil slime extract"
 	description_info = "This extract cause a moderately sized delayed explosion if injected with phoron.  The delay is five seconds.  Extract enhancers will \
 	increase the power of the explosion instead of allowing for multiple explosions."
-	price_tag = 8
+	price_tag = 40
 
 /datum/chemical_reaction/slime/oil_griff
 	name = "Slime Explosion"
@@ -716,7 +727,7 @@
 	description_info = "This extract creates slime crystals.  When injected with water, it creates five 'lesser' slime crystals, which allow for limited \
 	short ranged, random teleporting.  When injected with phoron, it creates one 'greater' slime crystal, which allows for a one time precise teleport to \
 	a specific area."
-	price_tag = 20
+	price_tag = 200
 
 /datum/chemical_reaction/slime/bluespace_lesser
 	name = "Slime Lesser Tele"
@@ -750,7 +761,7 @@
 	icon_state = "cerulean slime extract"
 	description_info = "This extract creates a slime extract enhancer agent, when injected with phoron.  The agent allows an extract to have more \
 	'charges' before it goes inert."
-	price_tag = 8
+	price_tag = 80
 
 /datum/chemical_reaction/slime/cerulean_enhancer
 	name = "Slime Enhancer"
@@ -773,7 +784,7 @@
 	description_info = "This extract creates a slime feeding agent when injected with phoron, which will instantly feed the slime and make it reproduce.  When \
 	injected with water, it will create a very delicious and filling product."
 
-	price_tag = 5
+	price_tag = 50
 
 
 /datum/chemical_reaction/slime/amber_slimefood
@@ -809,7 +820,7 @@
 	name = "sapphire slime extract"
 	icon_state = "sapphire slime extract"
 	description_info = "This extract will create one 'slime cube' when injected with phoron.  The slime cube is needed to create a Promethean."
-
+	price_tag = 200
 
 /datum/chemical_reaction/slime/sapphire_promethean
 	name = "Slime Promethean"
@@ -831,7 +842,8 @@
 	icon_state = "ruby slime extract"
 	description_info = "This extract will cause all entities close to the extract to become stronger for ten minutes, when injected with phoron.  \
 	When injected with blood, makes a slime loyalty agent which will make the slime fight other dangerous entities but not regular citizens."
-
+	price_tag = 220
+	
 /datum/chemical_reaction/slime/ruby_swole
 	name = "Slime Strength"
 	id = "m_strength"
@@ -880,7 +892,7 @@
 	name = "emerald slime extract"
 	icon_state = "emerald slime extract"
 	description_info = "This extract will cause all entities close to the extract to become more agile for ten minutes, when injected with phoron."
-	price_tag = 7
+	price_tag = 180
 
 /datum/chemical_reaction/slime/emerald_fast
 	name = "Slime Agility"
@@ -918,7 +930,7 @@
 	description_info = "This extract creates a slime docility agent when injected with water, which will make the slime be harmless forever.  \
 	When injected with phoron, it instead creates a slime friendship agent, which makes the slime consider the user their ally.  The agent \
 	might be useful on other specimens as well."
-	price_tag = 8
+	price_tag = 90
 
 /datum/chemical_reaction/slime/light_pink_docility
 	name = "Slime Docility"
@@ -954,7 +966,7 @@
 	icon_state = "rainbow slime extract"
 	description_info = "This extract will create a baby slime of a random color when injected with phoron, or a slime unification agent if injected with water, \
 	which makes slimes stop attacking other slime colors."
-	price_tag = 8
+	price_tag = 80
 
 /datum/chemical_reaction/slime/rainbow_random_slime
 	name = "Slime Random Slime"
