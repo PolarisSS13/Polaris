@@ -12,6 +12,8 @@ var/global/datum/controller/occupations/job_master
 		//Debug info
 	var/list/job_debug = list()
 
+	var/list/prioritized_jobs = list()
+
 
 	proc/SetupOccupations(var/faction = "City")
 		occupations = list()
