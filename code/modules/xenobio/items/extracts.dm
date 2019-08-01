@@ -24,6 +24,8 @@
 /obj/item/slime_extract/get_item_cost()
 	if(!uses)
 		return 2
+	else
+		return price_tag
 
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/slimepotion/enhancer))
