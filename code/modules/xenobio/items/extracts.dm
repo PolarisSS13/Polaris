@@ -21,6 +21,10 @@
 	..()
 	create_reagents(60)
 
+/obj/item/slime_extract/get_item_cost()
+	if(!uses)
+		return 2
+
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)
 	if(istype(O, /obj/item/slimepotion/enhancer))
 		if(enhanced)
@@ -146,7 +150,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 	prefill = list("metamorphic" = 60)
-
+	price_tag = 25
 
 // This is kind of a waste since iron is in the chem dispenser but it would be inconsistent if this wasn't here.
 /datum/chemical_reaction/metamorphic/iron
@@ -217,7 +221,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 	prefill = list("binding" = 60)
-
+	price_tag = 10
 
 /datum/chemical_reaction/binding
 	name = "Bind into Steel"
@@ -355,7 +359,7 @@
 	icon_state = "yellow slime extract"
 	description_info = "This extract will create a special 10k capacity power cell that self recharges slowly over time, when injected with phoron.  \
 	When injected with blood, it will create a glob of slime which glows brightly.  If injected with water, it will emit a strong EMP, after a five second delay."
-	price_tag = 150
+	price_tag = 80
 
 /datum/chemical_reaction/slime/yellow_emp
 	name = "Slime EMP"
@@ -425,7 +429,7 @@
 	name = "silver slime extract"
 	icon_state = "silver slime extract"
 	description_info = "This extract will create 5u liquid silver when injected with phoron."
-	price_tag = 40
+	price_tag = 50
 
 /datum/chemical_reaction/slime/silver_silver
 	name = "Slime Silver"
