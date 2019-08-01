@@ -10,7 +10,7 @@ datum/track/New(var/title_name, var/audio)
 	name = "Funkmaster 9000 jukebox"
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Funkmaster 9000'."
 	description_info = "Click the jukebox and then select a track on the interface. You can choose to play or stop the track, or set the volume. Use a wrench to attach or detach the jukebox to the floor. The room it is installed in must have power for it to operate!"
-	description_fluff = "The Funkmaster 9000, putting a modern spin on the ancient curved plasmascreen design."
+	description_fluff = "The Funkmaster 9000, putting a modern spin on the ancient retro curved plasmascreen design."
 	description_antag = "Slide a cryptographic sequencer into the jukebox to overload its speakers. Instead of music, it'll produce a hellish blast of noise and explode!"
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3-nopower"
