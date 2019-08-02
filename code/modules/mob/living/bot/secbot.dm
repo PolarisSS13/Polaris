@@ -9,7 +9,7 @@
 	maxHealth = 100
 	health = 100
 	req_one_access = list(access_security, access_forensics_lockers)
-	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
+	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_maint_tunnels)
 	patrol_speed = 2
 	target_speed = 3
 
@@ -19,8 +19,8 @@
 	var/check_arrest = TRUE // If true, arrests people who are set to arrest.
 	var/arrest_type = FALSE // If true, doesn't handcuff. You monster.
 	var/declare_arrests = FALSE // If true, announces arrests over sechuds.
-	var/threat = 0 // How much of a threat something is. Set upon acquring a target.
-	var/attacked = FALSE // Gives the bot enough threat assessment to attack immediately.
+	var/threat = 0 // How much of a threat something is. Set upon acquiring a target.
+	var/attacked = FALSE // If true, gives the bot enough threat assessment to attack immediately.
 
 	var/is_ranged = FALSE
 	var/awaiting_surrender = 0
@@ -120,10 +120,10 @@
 	if(!emagged)
 		if(user)
 			to_chat(user, "<span class='notice'>\The [src] buzzes and beeps.</span>")
-		emagged = 1
+		emagged = TRUE
 		patrol_speed = 3
 		target_speed = 4
-		return 1
+		return TRUE
 	else
 		to_chat(user, "<span class='notice'>\The [src] is already corrupt.</span>")
 
@@ -186,9 +186,10 @@
 
 /mob/living/bot/secbot/confirmTarget(var/atom/A)
 	if(!..())
-		return 0
+		return FALSE
 	check_threat(A)
-	return (threat >= SECBOT_THREAT_ARREST)
+	if(threat >= SECBOT_THREAT_ARREST)
+		return TRUE
 
 /mob/living/bot/secbot/lookForTargets()
 	for(var/mob/living/M in view(src))
@@ -212,7 +213,7 @@
 	else
 		if(declare_arrests)
 			var/action = arrest_type ? "detaining" : "arresting"
-			if(istype(target, /mob/living/simple_mob))
+			if(!ishuman(target))
 				action = "fighting"
 			global_announcer.autosay("[src] is [action] a level [threat] [action != "fighting" ? "suspect" : "threat"] <b>[target_name(target)]</b> in <b>[get_area(src)]</b>.", "[src]", "Security")
 		UnarmedAttack(target)
@@ -238,15 +239,15 @@
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/cuff = 1
+		var/cuff = TRUE
 
 		if(!H.lying || H.handcuffed || arrest_type)
-			cuff = 0
+			cuff = FALSE
 		if(!cuff)
 			H.stun_effect_act(0, stun_strength, null)
 			playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 			do_attack_animation(H)
-			busy = 1
+			busy = TRUE
 			update_icons()
 			spawn(2)
 				busy = FALSE
@@ -256,15 +257,15 @@
 		else
 			playsound(loc, 'sound/weapons/handcuffs.ogg', 30, 1, -2)
 			visible_message("<span class='warning'>\The [src] is trying to put handcuffs on \the [H]!</span>")
-			busy = 1
+			busy = TRUE
 			if(do_mob(src, H, 60))
 				if(!H.handcuffed)
 					if(istype(H.back, /obj/item/weapon/rig) && istype(H.gloves,/obj/item/clothing/gloves/gauntlets/rig))
-						H.handcuffed = new /obj/item/weapon/handcuffs/cable(H)
+						H.handcuffed = new /obj/item/weapon/handcuffs/cable(H) // Better to be cable cuffed than stun-locked
 					else
 						H.handcuffed = new /obj/item/weapon/handcuffs(H)
 					H.update_inv_handcuffed()
-			busy = 0
+			busy = FALSE
 	else if(istype(M, /mob/living))
 		var/mob/living/L = M
 		L.adjustBruteLoss(xeno_harm_strength)
@@ -400,6 +401,6 @@
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
 		if(!t)
 			return
-		if(!in_range(src, usr) && loc != usr)
+		if(!in_range(src, user) && loc != user)
 			return
 		created_name = t
