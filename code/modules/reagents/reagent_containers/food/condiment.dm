@@ -14,6 +14,7 @@
 	possible_transfer_amounts = list(1,5,10)
 	center_of_mass = list("x"=16, "y"=6)
 	volume = 50
+	drop_sound = 'sound/items/drop/bottle.ogg'
 
 /obj/item/weapon/reagent_containers/food/condiment/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	return
@@ -145,7 +146,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/soysauce/initialize()
 	. = ..()
 	reagents.add_reagent("soysauce", 50)
-	
+
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = list(1,20)
 	amount_per_transfer_from_this = 1

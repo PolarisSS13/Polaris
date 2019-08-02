@@ -1,4 +1,5 @@
 #define LAW "law"
+#define MED "medical"
 
 /obj/item/device/retail_scanner
 	name = "retail scanner"
@@ -93,6 +94,11 @@
 		for(var/datum/law/L in presidential_laws)
 			if(L.fine)
 				dat += "<a href='?src=\ref[src];choice=add_menu;menuitem=\ref[L]'>([L.id]) [L.name]</a><br>"
+
+	if(menu_items == "medical")
+		for(var/datum/medical_bill/M in medical_bills)
+			if(M.cost)
+				dat += "<a href='?src=\ref[src];choice=add_menu;menuitem=\ref[M]'>[M.name]</a><br>"
 	return dat
 
 
@@ -147,15 +153,20 @@
 					var/datum/law/law_charge = menuitem
 					t_amount = law_charge.get_item_cost()
 					t_purpose = law_charge.name
-					item_list[t_purpose] += 1
 					transaction_purpose = law_charge.name
-					price_list[t_purpose] = t_amount
-//					item_list += t_purpose
 
+				if (istype(menuitem, /datum/medical_bill))
+					var/datum/medical_bill/med_charge = menuitem
+					t_amount = med_charge.get_item_cost()
+					t_purpose = med_charge.name
+					transaction_purpose = med_charge.name
 
-					transaction_amount += t_amount
+				item_list[t_purpose] += 1
+				price_list[t_purpose] = t_amount
+				transaction_amount += t_amount
 
-//					price_list += t_amount
+				playsound(src, 'sound/machines/twobeep.ogg', 25)
+				src.visible_message("\icon[src] <b>Fine:</b> [transaction_purpose]: [t_amount] credit\s.")
 
 				playsound(src, 'sound/machines/twobeep.ogg', 25)
 				src.visible_message("\icon[src] <b>Fine:</b> [transaction_purpose]: [t_amount] credit\s.")
@@ -512,6 +523,7 @@
 
 /obj/item/device/retail_scanner/medical
 	account_to_connect = "Public Healthcare"
+	menu_items = MED
 	..()
 
 /obj/item/device/retail_scanner/engineering
@@ -544,3 +556,4 @@
 	..()
 
 #undef LAW
+#undef MED

@@ -355,3 +355,17 @@
 	max_w_class = ITEMSIZE_NORMAL
 	w_class = ITEMSIZE_SMALL
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks,/obj/item/weapon/reagent_containers/food/condiment)
+
+
+	// -----------------------------
+	//           Xenobio Bag
+	// -----------------------------
+/obj/item/weapon/storage/bag/xenobio
+	name = "slime extracts bag"
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "foodbag"
+	desc = "A bag for storing extracts harvested from slimes, potions, and monkey cubes as well."
+	max_storage_space = ITEMSIZE_COST_NORMAL * 25
+	max_w_class = ITEMSIZE_NORMAL
+	w_class = ITEMSIZE_SMALL
+	can_hold = list(/obj/item/slime_extract, /obj/item/weapon/reagent_containers/food/snacks/monkeycube, /obj/item/slimepotion)

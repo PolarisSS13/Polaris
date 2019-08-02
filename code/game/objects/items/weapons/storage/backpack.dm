@@ -354,6 +354,7 @@
 	w_class = ITEMSIZE_LARGE
 	max_w_class = ITEMSIZE_NORMAL
 	max_storage_space = ITEMSIZE_COST_NORMAL * 5
+	drop_sound = 'sound/items/drop/accessory.ogg'
 
 //Parachutes
 /obj/item/weapon/storage/backpack/parachute

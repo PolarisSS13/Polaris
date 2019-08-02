@@ -12,6 +12,7 @@
 	icon_state = "breadslice"
 	trash = /obj/item/trash/plate
 	bitesize = 2
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 	var/list/ingredients = list()
 

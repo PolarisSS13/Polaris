@@ -132,6 +132,7 @@
 	icon_state = "milk"
 	item_state = "carton"
 	center_of_mass = list("x"=16, "y"=9)
+	drop_sound = 'sound/items/drop/box.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/milk/New()
 	..()
@@ -143,6 +144,8 @@
 	icon_state = "soymilk"
 	item_state = "carton"
 	center_of_mass = list("x"=16, "y"=9)
+	drop_sound = 'sound/items/drop/box.ogg'
+
 /obj/item/weapon/reagent_containers/food/drinks/soymilk/New()
 	..()
 	reagents.add_reagent("soymilk", 50)
@@ -165,6 +168,8 @@
 	icon_state = "mini-milk_choco"
 	item_state = "carton"
 	center_of_mass = list("x"=16, "y"=9)
+	drop_sound = 'sound/items/drop/box.ogg'
+
 /obj/item/weapon/reagent_containers/food/drinks/smallchocmilk/New()
 	..()
 	reagents.add_reagent("chocolate_milk", 30)
@@ -225,6 +230,7 @@
 	possible_transfer_amounts = null
 	volume = 10
 	center_of_mass = list("x"=16, "y"=12)
+	drop_sound = 'sound/items/drop/box.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup/New()
 	..()
@@ -260,6 +266,7 @@
 	amount_per_transfer_from_this = 10
 	volume = 120
 	center_of_mass = list("x"=17, "y"=10)
+	drop_sound = 'sound/items/drop/bottle.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker/on_reagent_change()
 	..()
@@ -272,6 +279,7 @@
 	amount_per_transfer_from_this = 10
 	volume = 120
 	center_of_mass = list("x"=17, "y"=7)
+	drop_sound = 'sound/items/drop/bottle.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/teapot/on_reagent_change()
 	..()
@@ -282,6 +290,7 @@
 	icon_state = "flask"
 	volume = 60
 	center_of_mass = list("x"=17, "y"=7)
+	drop_sound = 'sound/items/drop/bottle.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/on_reagent_change()
 	..()
@@ -323,6 +332,7 @@
 	icon_state = "britcup"
 	volume = 30
 	center_of_mass = list("x"=15, "y"=13)
+	drop_sound = 'sound/items/drop/bottle.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup/on_reagent_change()
 	..()

@@ -69,6 +69,8 @@
 		return TRUE
 	if(istype(O, /obj/item/slimepotion))
 		return TRUE
+	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
+		return TRUE
 	return FALSE
 
 

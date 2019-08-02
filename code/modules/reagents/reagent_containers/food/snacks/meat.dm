@@ -5,6 +5,7 @@
 	health = 180
 	filling_color = "#FF1C1C"
 	center_of_mass = list("x"=16, "y"=14)
+	drop_sound = 'sound/items/drop/flesh.ogg'
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/New()
 	..()

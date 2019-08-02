@@ -1,7 +1,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sushi
 	nutriment_amt = 5
 	nutriment_desc = list("fish" = 5)
-
+	drop_sound = 'sound/items/drop/food.ogg'
 
 /obj/item/weapon/reagent_containers/food/snacks/sushi/New()
 	..()
@@ -59,7 +59,7 @@
 	bitesize = 2
 	nutriment_amt = 4
 	nutriment_desc = list("flour" = 1, "protein" = 4, "nutriment" = 4)
-
+	drop_sound = 'sound/items/drop/food.ogg'
 
 /obj/item/weapon/reagent_containers/food/snacks/fishburger
 	name = "Fillet -o- Carp Sandwich"
@@ -70,7 +70,7 @@
 	bitesize = 3
 	nutriment_amt = 6
 	nutriment_desc = list("fish" = 6)
-
+	drop_sound = 'sound/items/drop/food.ogg'
 
 
 /obj/item/weapon/reagent_containers/food/snacks/cubancarp

@@ -24,6 +24,15 @@
 /datum/law/proc/get_item_cost()
 	return fine
 
+///////////////////
+//---Med---------//
+//***************//
+
+/datum/medical_bill/var/price_tag = null
+
+/datum/medical_bill/proc/get_item_cost()
+	return cost
+
 // Juices, soda and similar //
 
 /datum/reagent/water

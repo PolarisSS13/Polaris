@@ -72,7 +72,7 @@
 	slot_flags = SLOT_EARS
 	icon = 'icons/obj/items.dmi'
 	icon_state = "purplecomb"
-
+	drop_sound = 'sound/items/drop/accessory.ogg'
 
 
 /obj/item/weapon/haircomb/attack_self(mob/living/user)

@@ -1698,9 +1698,11 @@
 	product_ads = "Wear glasses? Fix that with our eyesight correctors!; Fat? Not for long!"
 	vend_delay = 15
 	icon_state = "gene"
-	products = list(/obj/item/weapon/dnainjector/antiblind = 3,
+	products = list(/obj/item/weapon/dnainjector/regenerate = 3,
+					/obj/item/weapon/dnainjector/antiblind = 3,
 					/obj/item/weapon/dnainjector/antihulk = 3,
 					/obj/item/weapon/dnainjector/xraymut = 3,
+					/obj/item/weapon/dnainjector/antixray= 3,
 					/obj/item/weapon/dnainjector/antifire = 3,
 					/obj/item/weapon/dnainjector/antitele = 3,
 					/obj/item/weapon/dnainjector/nobreath = 3,
@@ -1722,9 +1724,11 @@
 					/obj/item/weapon/dnainjector/dnacorrector = 10
 
 					)
-	prices = list(/obj/item/weapon/dnainjector/antiblind = 700,
+	prices = list(/obj/item/weapon/dnainjector/regenerate = 1500,
+					/obj/item/weapon/dnainjector/antiblind = 700,
 					/obj/item/weapon/dnainjector/antihulk = 500,
-					/obj/item/weapon/dnainjector/xraymut = 350,
+					/obj/item/weapon/dnainjector/xraymut = 750,
+					/obj/item/weapon/dnainjector/antixray= 450,
 					/obj/item/weapon/dnainjector/antifire = 300,
 					/obj/item/weapon/dnainjector/antitele = 300,
 					/obj/item/weapon/dnainjector/nobreath = 400,

@@ -13,7 +13,7 @@ GLOBAL_LIST_BOILERPLATE(all_mops, /obj/item/weapon/mop)
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
-
+	drop_sound = 'sound/items/drop/clothing.ogg'
 
 /obj/item/weapon/mop/New()
 	create_reagents(30)

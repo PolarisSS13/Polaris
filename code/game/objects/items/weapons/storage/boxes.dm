@@ -345,6 +345,7 @@
 	icon_state = "monkeycubebox"
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)
 	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped = 4)
+	price_tag = 8
 
 /obj/item/weapon/storage/box/monkeycubes/farwacubes
 	name = "farwa cube box"

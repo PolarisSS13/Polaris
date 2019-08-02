@@ -75,7 +75,7 @@
 	icon_state = "grey slime extract"
 	description_info = "This extract will create a new grey baby slime if injected with phoron, or some new monkey cubes if injected with blood."
 	price_tag = 10
-	
+
 /datum/chemical_reaction/slime/grey_new_slime
 	name = "Slime Spawn"
 	id = "m_spawn"
@@ -121,7 +121,7 @@
 	description_info = "This extract will create a metamorphic liquid which will transform into metallic liquid it comes into contact with, when injected with phoron.  \
 	It can also create a metallic binding liquid which will force metallic liquids to mix to form alloys when solified, when injected with water."
 	price_tag = 15
-	
+
 // 'Duplicates' liquid metals, consuming itself in the process.
 /datum/reagent/toxin/metamorphic_metal
 	name = "Metamorphic Metal"
@@ -843,7 +843,7 @@
 	description_info = "This extract will cause all entities close to the extract to become stronger for ten minutes, when injected with phoron.  \
 	When injected with blood, makes a slime loyalty agent which will make the slime fight other dangerous entities but not regular citizens."
 	price_tag = 220
-	
+
 /datum/chemical_reaction/slime/ruby_swole
 	name = "Slime Strength"
 	id = "m_strength"

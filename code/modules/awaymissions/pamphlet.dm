@@ -36,3 +36,36 @@
 //we don't want the silly text overlay!
 /obj/item/weapon/paper/pamphlet/update_icon()
 	return
+
+/obj/item/weapon/paper/medical_pamphlet
+	name = "medical pamphlet"
+	icon_state = "medical"
+
+/obj/item/weapon/paper/medical_pamphlet/update_icon()
+	return
+
+/obj/item/weapon/paper/medical_pamphlet/New()
+	..()
+
+	info = "<h1>Medical Billing</h1> <hr>"
+
+	for(var/datum/medical_bill/M in medical_bills)
+		info += "<h3>[M.name]</h3><p> <i>[M.description]</i><p>"
+		if(!M.cost)
+			info += "<b>Cost:</b> <i>FREE</i>"
+		else
+			info += "<b>Cost:</b> [M.cost] credits"
+		info += "<p>"
+		info += "<b>Insurance Coverage: </b>"
+		switch(M.insurance_coverage)
+			if(INSURANCE_BASIC)
+				info += "Basic Insurance and above."
+			else if(INSURANCE_INTERMEDIATE)
+				info += "Intermediate Insurance and above."
+			else if(INSURANCE_HIGH)
+				info += "High tier Insurance required."
+			else
+				info += "Not on insurance."
+
+		info += "<br>"
+

@@ -61,6 +61,7 @@
 	glass_addition = "stick"
 	glass_desc = "There is a stick in the glass."
 	icon_state = "stick"
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/glass_extra/straw
 	name = "straw"

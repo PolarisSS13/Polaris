@@ -8,6 +8,7 @@
 	center_of_mass = list("x"=16, "y"=10)
 	matter = list("glass" = 500)
 	icon = 'icons/obj/drinks.dmi'
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/metaglass/on_reagent_change()
 	if (reagents.reagent_list.len > 0)

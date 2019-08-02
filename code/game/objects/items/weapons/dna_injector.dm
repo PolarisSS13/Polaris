@@ -15,6 +15,8 @@
 	var/is_bullet = 0
 	var/inuse = 0
 
+	price_tag = 300
+
 	// USE ONLY IN PREMADE SYRINGES.  WILL NOT WORK OTHERWISE.
 	var/datatype=0
 	var/value=0
@@ -143,6 +145,7 @@
 	desc = "This will make you big and strong, but give you a bad skin condition."
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
+	price_tag = 900
 	//block = 2
 	New()
 		block = HULKBLOCK
@@ -154,6 +157,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 2
+	price_tag = 500
 	New()
 		block = HULKBLOCK
 		..()
@@ -164,6 +168,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 8
+	price_tag = 750
 	New()
 		block = XRAYBLOCK
 		..()
@@ -174,6 +179,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 8
+	price_tag = 450
 	New()
 		block = XRAYBLOCK
 		..()
@@ -184,6 +190,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 10
+	price_tag = 450
 	New()
 		block = FIREBLOCK
 		..()
@@ -193,6 +200,7 @@
 	desc = "Cures fire."
 	datatype = DNA2_BUF_SE
 	value = 0x001
+	price_tag = 300
 	//block = 10
 	New()
 		block = FIREBLOCK
@@ -204,6 +212,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 12
+	price_tag = 960
 	New()
 		block = TELEBLOCK
 		..()
@@ -214,6 +223,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 12
+	price_tag = 300
 	New()
 		block = TELEBLOCK
 		..()
@@ -224,6 +234,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 2
+	price_tag = 400
 	New()
 		block = NOBREATHBLOCK
 		..()
@@ -234,6 +245,7 @@
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 2
+	price_tag = 400
 	New()
 		block = NOBREATHBLOCK
 		..()
@@ -244,16 +256,18 @@
 	datatype = DNA2_BUF_SE
 	value = 0xFFF
 	//block = 2
+	price_tag = 700
 	New()
 		block = REMOTEVIEWBLOCK
 		..()
 
 /obj/item/weapon/dnainjector/antiremoteview
 	name = "\improper DNA injector (Anti-Remote View)"
-	desc = "Cures green skin."
+	desc = "Stop being able to see into the distance."
 	datatype = DNA2_BUF_SE
 	value = 0x001
 	//block = 2
+	price_tag = 400
 	New()
 		block = REMOTEVIEWBLOCK
 		..()

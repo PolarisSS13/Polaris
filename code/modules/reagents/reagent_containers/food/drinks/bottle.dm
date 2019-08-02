@@ -12,6 +12,8 @@
 
 	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
 	var/rag_underlay = "rag"
+	drop_sound = 'sound/items/drop/glass.ogg'
+
 	on_reagent_change() return // To suppress price updating. Bottles have their own price tags.
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/New()

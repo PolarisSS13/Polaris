@@ -149,6 +149,7 @@
 	icon_state = "beaker"
 	item_state = "beaker"
 	matter = list("glass" = 500)
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/reagent_containers/glass/beaker/New()
 	..()
@@ -251,6 +252,7 @@
 	volume = 120
 	flags = OPENCONTAINER
 	unacidable = 0
+	drop_sound = 'sound/items/drop/box.ogg'
 
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob)
 	if(isprox(D))
@@ -339,3 +341,4 @@ obj/item/weapon/reagent_containers/glass/bucket/wood
 	amount_per_transfer_from_this = 20
 	possible_transfer_amounts = list(10,20,30,60,120)
 	volume = 120
+	drop_sound = 'sound/items/drop/glass.ogg'

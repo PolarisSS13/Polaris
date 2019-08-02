@@ -5,6 +5,7 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	center_of_mass = list("x"=16, "y"=16)
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/cup/on_reagent_change()
 	..()

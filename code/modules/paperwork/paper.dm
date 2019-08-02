@@ -596,7 +596,7 @@
  */
 /obj/item/weapon/paper/Court
 	name = "Judgement"
-	info = "For crimes against the city, the offender is sentenced to:<BR>\n<BR>\n"
+	info = "<font face=\"Verdana\" color=black><center><H2>Geminus City High Court</H2><BR><B>Official Court Ruling</B><BR><img src = ntlogo.png><BR></center><BR><HR><BR><font size = \"1\">The following constitutes an official, legally binding decision of the Geminus High Court.<BR><BR>On the following charges, the defendant is hereby found:</font><BR><BR><font size = \"1\"><B>(Guilty - G)<BR>(Not Guilty - NG)</B></font><BR><HR><BR><span class=\"paper_field\"></span><BR><BR><HR><BR><font size = \"1\"><BR><B>So orders the Geminus City High Court:</B></font><BR><BR><BR><B><font size = \"1\">Judge&#39;s signature:</font></B><BR><span class=\"paper_field\"></span><BR><BR><HR><BR><font size = \"1\"><B><U>Official Document of Geminus City Court. Forgery of this document is a crime.</U></B></font></font>"
 
 /obj/item/weapon/paper/Toxin
 	name = "Chemical Information"

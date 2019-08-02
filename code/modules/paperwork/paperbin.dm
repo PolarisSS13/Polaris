@@ -17,6 +17,9 @@
 	layer = OBJ_LAYER - 0.1
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
+	var/paper_type = /obj/item/weapon/paper				//The type of paper this gives you, by default
+	var/paper_type_carbon = /obj/item/weapon/paper/carbon
+	var/has_carbon_paper = 1		//Does this give you carbon copy paper?
 
 
 /obj/item/weapon/paper_bin/MouseDrop(mob/user as mob)
@@ -48,7 +51,10 @@
 			return
 	var/response = ""
 	if(!papers.len > 0)
-		response = alert(user, "Do you take regular paper, or Carbon copy paper?", "Paper type request", "Regular", "Carbon-Copy", "Cancel")
+		if(has_carbon_paper)
+			response = alert(user, "Do you take regular paper, or Carbon copy paper?", "Paper type request", "Regular", "Carbon-Copy", "Cancel")
+		else
+			response = "Regular"
 		if (response != "Regular" && response != "Carbon-Copy")
 			add_fingerprint(user)
 			return
@@ -63,14 +69,14 @@
 			papers.Remove(P)
 		else
 			if(response == "Regular")
-				P = new /obj/item/weapon/paper
+				P = new paper_type
 				if(Holiday == "April Fool's Day")
 					if(prob(30))
 						P.info = "<font face=\"[P.crayonfont]\" color=\"red\"><b>HONK HONK HONK HONK HONK HONK HONK<br>HOOOOOOOOOOOOOOOOOOOOOONK<br>APRIL FOOLS</b></font>"
 						P.rigged = 1
 						P.updateinfolinks()
 			else if (response == "Carbon-Copy")
-				P = new /obj/item/weapon/paper/carbon
+				P = new paper_type_carbon
 
 		P.loc = user.loc
 		user.put_in_hands(P)
@@ -108,3 +114,12 @@
 		icon_state = "paper_bin0"
 	else
 		icon_state = "paper_bin1"
+
+
+/obj/item/weapon/paper_bin/court
+	paper_type = /obj/item/weapon/paper/Court
+	has_carbon_paper = 0
+
+/obj/item/weapon/paper_bin/medical_bills
+	paper_type = /obj/item/weapon/paper/medical_pamphlet
+	has_carbon_paper = 0

@@ -1786,6 +1786,8 @@
 	var/wrapped = 0
 	var/monkey_type = "Monkey"
 
+	price_tag = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/New()
 	..()
 	reagents.add_reagent("protein", 10)
@@ -3154,6 +3156,7 @@
 	var/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pizza // Content pizza
 	var/list/boxes = list() // If the boxes are stacked, they come here
 	var/boxtag = ""
+	drop_sound = 'sound/items/drop/box.ogg'
 
 /obj/item/pizzabox/update_icon()
 
