@@ -10,7 +10,7 @@ datum/track/New(var/title_name, var/audio)
 	name = "Funkmaster 9000 jukebox"
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Funkmaster 9000'."
 	description_info = "Click the jukebox and then select a track on the interface. You can choose to play or stop the track, or set the volume. Use a wrench to attach or detach the jukebox to the floor. The room it is installed in must have power for it to operate!"
-	description_fluff = "The Funkmaster 9000, putting a modern spin on the ancient curved plasmascreen design."
+	description_fluff = "The Funkmaster 9000, putting a modern spin on the ancient retro curved plasmascreen design."
 	description_antag = "Slide a cryptographic sequencer into the jukebox to overload its speakers. Instead of music, it'll produce a hellish blast of noise and explode!"
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3-nopower"
@@ -34,11 +34,19 @@ datum/track/New(var/title_name, var/audio)
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
-		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg'),
-		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg'),
-		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg'),
+		new/datum/track("Bluespace Ocean", 'sound/music/disco/Bluespace Ocean.ogg'),
+		new/datum/track("Cyber Revolt", 'sound/music/disco/Cyber_Revolt.ogg'),
+		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg'),
 		new/datum/track("Electrified", 'sound/music/disco/Electrified.ogg'),
-		new/datum/track("Displaced", 'sound/music/disco/Displaced.ogg')
+		new/datum/track("Hack or be Hacked", 'sound/music/disco/Hack_or_be_hacked.ogg'),
+		new/datum/track("Hyper", 'sound/music/disco/Hyper.ogg'),
+		new/datum/track("Psionic Souls", 'sound/music/disco/Psionic_souls.ogg'),
+		new/datum/track("Scavenger Hideout", 'sound/music/disco/Scavenger_hideout.ogg'),
+		new/datum/track("Sunyo", 'sound/music/disco/Sunyo.ogg'),
+		new/datum/track("Syn", 'sound/music/disco/Syn.ogg'),
+		new/datum/track("System Collapse", 'sound/music/disco/System_Collapse.ogg'),
+		new/datum/track("This is Rain", 'sound/music/disco/This is Rain.ogg')
+
 	)
 
 	// Only visible if hacked
