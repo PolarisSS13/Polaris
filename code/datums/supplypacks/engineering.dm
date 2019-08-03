@@ -95,7 +95,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/engineering
 	containername = "Mechanical maintenance crate"
-
+/*
 /datum/supply_pack/eng/fueltank
 	name = "Fuel tank crate"
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
@@ -114,7 +114,7 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/engineering
 	containername = "Solar pack crate"
-
+*/
 /datum/supply_pack/eng/engine
 	name = "Emitter crate"
 	contains = list(/obj/machinery/power/emitter = 2)
@@ -129,7 +129,7 @@
 	containertype = /obj/structure/closet/crate/secure/engineering
 	containername = "Field Generator crate"
 	access = access_ce
-
+/*
 /datum/supply_pack/eng/engine/sing_gen
 	name = "Singularity Generator crate"
 	contains = list(/obj/machinery/the_singularitygen)
@@ -158,7 +158,7 @@
 	containertype = /obj/structure/closet/crate/secure/engineering
 	containername = "Particle Accelerator crate"
 	access = access_ce
-
+*/
 /datum/supply_pack/eng/shield_gen
 	contains = list(/obj/item/weapon/circuitboard/shield_gen)
 	name = "Bubble shield generator circuitry"
@@ -182,7 +182,7 @@
 	containertype = /obj/structure/closet/crate/secure/engineering
 	containername = "shield capacitor circuitry crate"
 	access = access_ce
-
+/*
 /datum/supply_pack/eng/smbig
 	name = "Supermatter Core"
 	contains = list(/obj/machinery/power/supermatter)
@@ -190,7 +190,7 @@
 	containertype = /obj/structure/closet/crate/secure/phoron
 	containername = "Supermatter crate (CAUTION)"
 	access = access_ce
-
+*/
 /datum/supply_pack/eng/teg
 	contains = list(/obj/machinery/power/generator)
 	name = "Mark I Thermoelectric Generator"
