@@ -12,6 +12,8 @@
 	var/written_by
 	var/paper_type = /obj/item/weapon/paper/sticky
 
+	price_tag = 1
+
 /obj/item/sticky_pad/update_icon()
 	if(papers <= 15)
 		icon_state = "pad_empty"
