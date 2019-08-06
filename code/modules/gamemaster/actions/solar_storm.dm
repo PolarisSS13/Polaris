@@ -29,9 +29,10 @@
 
 	var/start_time = world.time
 
-	while(world.time <= start_time + duration)
-		sleep(rad_interval)
-		radiate()
+	spawn()
+		while(world.time <= start_time + duration)
+			sleep(rad_interval)
+			radiate()
 
 /datum/gm_action/solar_storm/get_weight()
 	return 20 + (metric.count_people_in_department(ROLE_ENGINEERING) * 10) + (metric.count_all_space_mobs() * 30)
