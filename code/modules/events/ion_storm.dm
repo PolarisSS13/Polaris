@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
 
 /datum/event/ionstorm
-	var/botEmagChance = 0.5
+	var/botEmagChance = 0.05
 	var/list/players = list()
 
 /datum/event/ionstorm/announce()
@@ -14,8 +14,8 @@
 
 	for (var/mob/living/silicon/ai/target in silicon_mob_list)
 		var/law = target.generate_ion_law()
-		target << "<font color='red'><b>You have detected a change in your laws information:</b></font>"
-		target << law
+		to_chat(target, "<font color='red'><b>You have detected a change in your laws information:</b></font>")
+		to_chat(target, law)
 		target.add_ion_law(law)
 		target.show_laws()
 
