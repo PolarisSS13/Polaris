@@ -359,6 +359,19 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 		if(length(unique_enzymes) != 32)
 			unique_enzymes = md5(character.real_name)
+
+			// Start custom DNA checking
+			for(var/line in file2list("config/custom_dna.txt"))
+				if(!length(line))
+					continue
+				if(copytext(line,1,2) == "#")
+					continue
+
+				var/list/List = splittext(line, "|")
+				if(List.len >= 2)
+					if(character.real_name == List[1])
+						testing("Custom DNA loaded - " + List[1] + " - " + List[2])
+						unique_enzymes = md5(List[2])	// End custom DNA checking
 	else
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
@@ -371,6 +384,17 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	ResetUIFrom(character)
 
 	ResetSE()
-
 	unique_enzymes = md5(character.real_name)
+	// Start custom DNA checking
+	for(var/line in file2list("config/custom_dna.txt"))
+		if(!length(line))
+			continue
+		if(copytext(line,1,2) == "#")
+			continue
+
+		var/list/List = splittext(line, "|")
+		if(List.len >= 2)
+			if(character.real_name == List[1])
+				testing("Custom DNA loaded - " + List[1] + " - " + List[2])
+				unique_enzymes = md5(List[2])	// End custom DNA checking
 	reg_dna[unique_enzymes] = character.real_name
