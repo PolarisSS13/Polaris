@@ -264,57 +264,45 @@ var/global/photo_count = 0
 	// How valuable is their job to the media?
 	// Will be multiplied if caught in a scandal.
 	
-	var/gov_job_worth = 20 
+	var/gov_job_worth = 40 
 	var/council_job_worth = 10
+	
+	var/upper_class_worth = 10
 
 	//To be expanded.
 	for(var/mob/living/carbon/human/A in the_turf)
 		// Sensational Points.
 		// What's their job?
-		var/datum/job/job = A.mind.assigned_job
+		var/datum/job/job = job_master.GetJob(A.mind.assigned_job)
 
 		if(job in command_positions)
 			sensational += council_job_worth
 
 		if(job in gov_positions)
-			sensational += gov_job_worth	
-	
+			sensational += gov_job_worth
+			
+		if(job in gov_positions)
+			sensational += gov_job_worth
+
 	return sensational
 	
 /obj/item/device/camera/proc/get_gruesome_value(turf/the_turf as turf)
-	return
-	
-/obj/item/device/camera/proc/get_sensationalist_value(turf/the_turf as turf)
-	//Journalistic Features
-	var/sensational			//pictures of high ranking people, depending on rank
 	var/gruesome			//people covered with blood, dead bodies, etc
-	var/scandalous			//famous people near dead bodies, etc
-	var/scary			//something terribly wrong is with this picture
-	
-	var/see_face			// Can we see this person's face?
 	
 	
-
+	return gruesome
+	
+/obj/item/device/camera/proc/get_scandalous_value(turf/the_turf as turf)
+	var/scandalous			//people covered with blood, dead bodies, etc
 	
 	
-
+	return scandalous	
 	
-		if(see_face)
-
-				
-		//gruesome points		
-		
-		if(A.health < 75) // They're injured.
-			gruesome += 2
-			
-		if(stat == DEAD) // They're dead. 
-			gruesome += 10
-			scary += 2
-			
-	return 
-			
-
-		
+/obj/item/device/camera/proc/get_scandalous_value(turf/the_turf as turf)
+	var/scary			//people covered with blood, dead bodies, etc
+	
+	
+	return scary		
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
@@ -351,11 +339,12 @@ var/global/photo_count = 0
 			if(can_capture_turf(T, user))
 				turfs.Add(T)
 				mobs += get_mobs(T)
+				
+				get_sensationalist_value(T)
+				
 			x_c++
 		y_c--
 		x_c = x_c - size
-
-
 
 
 	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
@@ -369,7 +358,9 @@ var/global/photo_count = 0
 			T.visible_message("<span class='userdanger'>The photo turns into \a [S]!</span>")
 			qdel(p)
 
-
+	
+	
+	
 	printpicture(user, p)
 
 /obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
