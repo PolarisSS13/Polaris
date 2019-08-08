@@ -141,6 +141,8 @@
 	temp_shift = 4
 
 /datum/chemical_reaction/distilling/berserkjuice/on_reaction(var/datum/reagents/holder, var/created_volume)
+	..()
+
 	if(prob(1))
 		var/turf/T = get_turf(holder.my_atom)
 		explosion(T, -1, rand(-1, 1), rand(1,2), rand(3,5))
@@ -158,6 +160,8 @@
 	temp_shift = 20
 
 /datum/chemical_reaction/distilling/cryogel/on_reaction(var/datum/reagents/holder, var/created_volume)
+	..()
+
 	if(prob(1))
 		var/turf/T = get_turf(holder.my_atom)
 		var/datum/effect/effect/system/smoke_spread/frost/F = new (holder.my_atom)

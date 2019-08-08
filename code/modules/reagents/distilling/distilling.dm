@@ -10,7 +10,7 @@
 
 	icon = 'icons/obj/machines/reagent.dmi'
 	icon_state = "distiller"
-	var/base_state = "distiller"
+	var/base_state	// The string var used in update icon for overlays, either set manually or initialized.
 
 	power_rating = 3000
 	power_losses = 240
@@ -79,14 +79,22 @@
 	Reservoir = new (src)
 	Reservoir.Master = src
 
-	overlay_output_beaker = image(icon = src.icon, icon_state = "[icon_state]-output")
-	overlay_input_beaker = image(icon = src.icon, icon_state = "[icon_state]-input")
-	overlay_off = image(icon = src.icon, icon_state = "[icon_state]-bad")
-	overlay_ready = image(icon = src.icon, icon_state = "[icon_state]-good")
-	overlay_cooling = image(icon = src.icon, icon_state = "[icon_state]-cool")
-	overlay_heating = image(icon = src.icon, icon_state = "[icon_state]-heat")
-	overlay_dumping = image(icon = src.icon, icon_state = "[icon_state]-dump")
-	overlay_connected = image(icon = src.icon, icon_state = "[icon_state]-connector")
+	if(!base_state)
+		base_state = icon_state
+
+	setup_overlay_vars()
+
+	update_icon()
+
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/proc/setup_overlay_vars()
+	overlay_output_beaker = image(icon = src.icon, icon_state = "[base_state]-output")
+	overlay_input_beaker = image(icon = src.icon, icon_state = "[base_state]-input")
+	overlay_off = image(icon = src.icon, icon_state = "[base_state]-bad")
+	overlay_ready = image(icon = src.icon, icon_state = "[base_state]-good")
+	overlay_cooling = image(icon = src.icon, icon_state = "[base_state]-cool")
+	overlay_heating = image(icon = src.icon, icon_state = "[base_state]-heat")
+	overlay_dumping = image(icon = src.icon, icon_state = "[base_state]-dump")
+	overlay_connected = image(icon = src.icon, icon_state = "[base_state]-connector")
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/Destroy()
 	qdel(Reservoir)
