@@ -1,0 +1,6 @@
+######################################################################
+# Real_name goes first. String to hash goes after the "|"            #
+# Case is important for both.                                   ~Kyo #
+######################################################################
+
+# John Doe|HashPhrase
