@@ -95,6 +95,7 @@ var/list/gamemode_cache = list()
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
 	var/usealienwhitelist = 0
+	var/usednawhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 	var/allow_extra_antags = 0
@@ -645,6 +646,9 @@ var/list/gamemode_cache = list()
 
 				if("usealienwhitelist")
 					usealienwhitelist = 1
+
+				if ("usednawhitelist")
+					config.usednawhitelist = 1
 
 				if("alien_player_ratio")
 					limitalienplayers = 1

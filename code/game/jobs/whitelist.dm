@@ -19,7 +19,7 @@ var/list/whitelist = list()
 /var/list/alien_whitelist = list()
 
 /hook/startup/proc/loadAlienWhitelist()
-	if(config.usealienwhitelist)
+	if(config.usealienwhitelist || config.usednawhitelist)
 		load_alienwhitelist()
 	return 1
 
@@ -72,8 +72,31 @@ var/list/whitelist = list()
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
 
+/proc/is_dna_whitelisted(mob/M)
+	//They are admin or the DNA whitelist isn't in use
+	if(dna_whitelist_overrides(M))
+		return 1
+
+	//You did something wrong
+	if(!M)
+		return 0
+
+	//If we have a loaded file, search it
+	if(alien_whitelist)
+		for (var/s in alien_whitelist)
+			if(findtext(s,"[M.ckey] - DNA"))
+				return 1
+
 /proc/whitelist_overrides(mob/M)
 	if(!config.usealienwhitelist)
+		return 1
+	if(check_rights(R_ADMIN, 0, M))
+		return 1
+
+	return 0
+
+/proc/dna_whitelist_overrides(mob/M)
+	if(!config.usednawhitelist)
 		return 1
 	if(check_rights(R_ADMIN, 0, M))
 		return 1

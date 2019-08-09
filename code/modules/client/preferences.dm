@@ -61,6 +61,11 @@ datum/preferences
 	var/g_synth							//Same as above
 	var/b_synth							//Same as above
 	var/synth_markings = 0				//Enable/disable markings on synth parts.
+	
+	//Custom DNA preferences
+	var/use_custom_dna = 0				//Override standard DNA generation string
+	var/custom_dna_hash					//string to hash off of
+	
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.

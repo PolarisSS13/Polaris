@@ -19,6 +19,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["age"]					>> pref.age
 	S["spawnpoint"]				>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
+	S["use_custom_dna"]			>> pref.use_custom_dna
+	S["custom_dna_hash"]		>> pref.custom_dna_hash
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
@@ -29,6 +31,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["age"]					<< pref.age
 	S["spawnpoint"]				<< pref.spawnpoint
 	S["OOC_Notes"]				<< pref.metadata
+	S["use_custom_dna"]			<< pref.use_custom_dna
+	S["custom_dna_hash"]		<< pref.custom_dna_hash
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 	pref.age                = sanitize_integer(pref.age, get_min_age(), get_max_age(), initial(pref.age))
@@ -40,6 +44,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.nickname		= sanitize_name(pref.nickname)
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes, initial(pref.spawnpoint))
 	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
+	pref.use_custom_dna     = sanitize_integer(pref.use_custom_dna, 0, 1, initial(pref.use_custom_dna))
+	pref.custom_dna_hash	= sanitize_text(pref.custom_dna_hash)
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/basic/copy_to_mob(var/mob/living/carbon/human/character)
@@ -53,6 +59,10 @@ datum/preferences/proc/set_biological_gender(var/gender)
 
 	character.real_name = pref.real_name
 	character.name = character.real_name
+	if (pref.use_custom_dna && !isnull(pref.custom_dna_hash) && is_dna_whitelisted(preference_mob()))
+		//testing("Custom DNA for " + pref.real_name)
+		character.use_custom_dna = pref.use_custom_dna
+		character.custom_dna_hash = pref.custom_dna_hash
 	if(character.dna)
 		character.dna.real_name = character.real_name
 
@@ -77,6 +87,10 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	. += "<b>Spawn Point</b>: <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a><br>"
 	if(config.allow_Metadata)
 		. += "<b>OOC Notes:</b> <a href='?src=\ref[src];metadata=1'> Edit </a><br>"
+	if(is_dna_whitelisted(preference_mob()))
+		. += "<a href='?src=\ref[src];toggle_custom_dna=1'>Use Custom DNA Hash: [pref.use_custom_dna ? "Yes" : "No"]</a><br>"
+		if(pref.use_custom_dna)
+			. += "<b>DNA Hash Seed:</b> '[pref.custom_dna_hash]' <a href='?src=\ref[src];set_dna_string=1'> Edit </a><br>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/general/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -144,6 +158,21 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		if(new_metadata && CanUseTopic(user))
 			pref.metadata = new_metadata
 			return TOPIC_REFRESH
+
+	else if(href_list["toggle_custom_dna"])
+		pref.use_custom_dna = !pref.use_custom_dna
+		return TOPIC_REFRESH
+
+	else if(href_list["set_dna_string"])
+		var/raw_dna = input(user, "Choose your character's custom DNA hash. For twins, use matching hash strings:", "DNA Hash String")  as text|null
+		if (!isnull(raw_dna) && CanUseTopic(user))
+			var/new_dna = sanitize_name(raw_dna, pref.species, 1)
+			if(new_dna)
+				pref.custom_dna_hash = new_dna
+				return TOPIC_REFRESH
+			else
+				user << "<span class='warning'>Invalid string. It may only contain the characters A-Z, a-z, 0-9, -, ' and . and is limited to 32 characters.</span>"
+				return TOPIC_NOACTION
 
 	return ..()
 

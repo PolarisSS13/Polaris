@@ -80,6 +80,8 @@
 	var/gen_record = ""
 	var/exploit_record = ""
 	var/exploit_addons = list()		//Assorted things that show up at the end of the exploit_record list
+	var/use_custom_dna = 0			//Override standard DNA generation string
+	var/custom_dna_hash				//string to hash off of
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
