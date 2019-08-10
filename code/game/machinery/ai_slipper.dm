@@ -1,7 +1,7 @@
 /obj/machinery/ai_slipper
 	name = "\improper AI Liquid Dispenser"
 	icon = 'icons/obj/device.dmi'
-	icon_state = "motion0"
+	icon_state = "liquid_dispenser" // the liquid dispenser now has it's own sprite instead of being a motion sensor, but there's no visual difference between off/on states
 	anchored = 1.0
 	use_power = 1
 	idle_power_usage = 10
@@ -23,10 +23,10 @@
 	update_icon()
 
 /obj/machinery/ai_slipper/update_icon()
-	if(stat & NOPOWER || stat & BROKEN)
-		icon_state = "motion0"
+	if(stat & (NOPOWER|BROKEN) || disabled)
+		icon_state = "liquid_dispenser"
 	else
-		icon_state = disabled ? "motion0" : "motion3"
+		icon_state = "liquid_dispenser_on"
 
 /obj/machinery/ai_slipper/proc/setState(var/enabled, var/uses)
 	disabled = disabled

@@ -33,6 +33,11 @@
 
 	var/item_place = 1 //allows items to be placed on the table, but not on benches.
 
+/obj/structure/table/MouseDrop(atom/over)
+	if(usr.stat || !Adjacent(usr) || (over != usr))
+		return
+	interact(usr)
+
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
 	if(!material)
@@ -99,10 +104,58 @@
 			if(0.5 to 1.0)
 				user << "<span class='notice'>It has a few scrapes and dents.</span>"
 
+/obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
+	if(istype(O) && O.checkpass(PASSTABLE))
+		return 1
+	if (flipped==1)
+		if (get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+	return 1
+
+/obj/structure/table/MouseDrop(atom/over)
+	if(usr.stat || !Adjacent(usr) || (over != usr))
+		return
+	interact(usr)
+
+/obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
+	if ((!( istype(O, /obj/item/weapon) ) ||  user.get_active_hand() != O))
+		return ..()
+	if(isrobot(usr))
+		return
+	if(!user.drop_item())
+		return
+	if (O.loc != src.loc)
+		step(O, get_dir(O, src))
+	return
+
+//Object placement on tables
+/obj/structure/table/Click(location, control,params)
+	var/list/PL = params2list(params)
+	var/icon_x = text2num(PL["icon-x"])
+	var/icon_y = text2num(PL["icon-y"])
+	clickedx = icon_x - 16
+	clickedy = icon_y - 16
+	if (clickedy >16)
+		clickedy = 16
+	if (clickedx >16)
+		clickedx = 16
+	if (clickedy < -16)
+		clickedy = -16
+	if (clickedx <-16)
+		clickedx = -16
+	..()
 
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+	if (!W) return
 
-	if(reinforced && W.is_screwdriver())
+
+	if(W.loc != user)
+		return
+
+
+	if(reinforced && W.is_screwdriver()) // The problem is this is a lot of if-statements that then make it impossible to put screwdrivers and things on table. There should be an intent check buried somewhere and all the attackby with object put under one umbrella.
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -167,6 +220,8 @@
 		return 1
 
 	if(item_place)
+		if(isrobot(user))
+			return
 		user.drop_item(src.loc)
 		if(!W.fixed_position)
 			W.pixel_x = clickedx
@@ -175,6 +230,9 @@
 			W.plane = ABOVE_MOB_PLANE
 
 	return
+
+	if(W && W.loc)	W.loc = src.loc
+		return 1
 
 /obj/structure/table/attack_hand(mob/user as mob)
 	if(istype(user, /mob/living/carbon/human))
