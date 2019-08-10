@@ -2632,7 +2632,7 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\geminus\geminus.dm"
+#include "maps\Geminus\geminus.dm"
 #include "maps\submaps\_readme.dm"
 #include "maps\submaps\space_submaps\space.dm"
 #include "maps\submaps\surface_submaps\factions\factions_maps.dm"
