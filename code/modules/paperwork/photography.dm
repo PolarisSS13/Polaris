@@ -328,6 +328,8 @@ var/global/photo_count = 0
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
+	var/sensationality
+
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
@@ -340,7 +342,7 @@ var/global/photo_count = 0
 				turfs.Add(T)
 				mobs += get_mobs(T)
 				
-				get_sensationalist_value(T)
+				sensationality = get_sensationalist_value(T)
 				
 			x_c++
 		y_c--
@@ -348,6 +350,9 @@ var/global/photo_count = 0
 
 
 	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+	p.sensational = sensationality
+	
+	
 	if(findtext(mobs, "Its stare makes you feel uneasy"))
 		p.cursed = 1
 		user.visible_message("<span class='userdanger'>Something starts to slowly manifest from the picture!</span>")
