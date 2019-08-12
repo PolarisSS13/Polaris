@@ -267,7 +267,7 @@ var/global/photo_count = 0
 	var/gov_job_worth = 40 
 	var/council_job_worth = 10
 	
-	var/upper_class_worth = 10
+//	var/upper_class_worth = 10
 
 	//To be expanded.
 	for(var/mob/living/carbon/human/A in the_turf)
@@ -298,7 +298,7 @@ var/global/photo_count = 0
 	
 	return scandalous	
 	
-/obj/item/device/camera/proc/get_scandalous_value(turf/the_turf as turf)
+/obj/item/device/camera/proc/get_scary_value(turf/the_turf as turf)
 	var/scary			//people covered with blood, dead bodies, etc
 	
 	
