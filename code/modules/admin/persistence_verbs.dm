@@ -81,10 +81,16 @@
 	set desc = "View all department accounts, edit vars, edit taxes, etc."
 	set category = "Persistence"
 
+	debug_variables(persistent_economy)
+
+
+/client/proc/debug_politics()
+	set category = "Persistence"
+	set name = "Debug Politics"
+	set desc = "Let's get into the nepotism."
+
 	if(!holder)
 		usr << "<font color='red'>Only admins can use this command!</font>"
 		return 0
 
-	debug_variables(persistent_economy)
-
-
+	debug_variables(SSelections)

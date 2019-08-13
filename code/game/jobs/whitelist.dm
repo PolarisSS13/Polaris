@@ -95,12 +95,21 @@ var/list/whitelist = list()
 
 /proc/is_hard_whitelisted(mob/M, var/datum/job/jobs)
 	//They are admin or the whitelist isn't in use
-	if(whitelist_overrides(M))
-		return 1
+//	if(whitelist_overrides(M))
+//		return 1
 
 	//The job isn't even whitelisted
 	if(!jobs.hard_whitelisted)
 		return 1
+
+	if(jobs.title == "President") // Only the player who is president and their allotted character can be president
+		if(!SSelections.current_president.ckey || !!SSelections.current_president.name) //Just in case.
+			return 0
+
+		if(M.ckey == SSelections.current_president.ckey && M.client.prefs.real_name == SSelections.current_president.name)
+			return 1
+		else
+			return 0
 
 	//If we have a loaded file, search it
 	if(jobs.hard_whitelisted)
