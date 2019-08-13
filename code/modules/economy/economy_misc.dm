@@ -75,7 +75,7 @@ var/global/business_income_tax = 0.10
 
 var/global/medical_tax = 0.10
 var/global/weapons_tax = 0.10
-var/global/alcoholic_tax = 0.10 
+var/global/alcoholic_tax = 0.10
 var/global/tobacco_tax = 0.10
 var/global/recreational_drug_tax = 0.10
 var/global/gambling_tax = 0.10

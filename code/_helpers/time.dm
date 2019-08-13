@@ -150,7 +150,7 @@ proc/process_schedule_interval(var/process_name)
 	return process.schedule_interval
 
 /hook/startup/proc/set_roundstart_hour()
-	roundstart_hour = pick(2,7,12,17)
+	roundstart_hour = get_game_hour()
 	return 1
 
 /var/midnight_rollovers = 0
