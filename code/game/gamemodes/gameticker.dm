@@ -122,6 +122,8 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	to_chat(world, "[get_president_info()]")
+
 	setup_economy()
 	current_state = GAME_STATE_PLAYING
 	create_characters() //Create player characters and transfer them.
@@ -406,6 +408,9 @@ var/global/datum/controller/gameticker/ticker
 
 		//saves all department accounts
 		persistent_economy.save_accounts()
+
+		//save politics related data
+		SSelections.save_data.save_candidates()
 
 		//saves all characters
 		for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.

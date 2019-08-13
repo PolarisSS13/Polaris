@@ -1,0 +1,75 @@
+<h1>Presidential Candidate Registration</h1><hr>
+
+{{:data.page_msg}}
+
+<br>
+
+{{if data.index == 0}}
+{{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
+
+
+{{if data.index == 1}}
+	<br>
+	{{:helper.link("Register", null, {'register_new' : 1})}}
+
+	{{:helper.link("Edit Existing Candidacy", null, {'edit_candidacy' : 1})}}
+{{/if}}
+
+{{if data.index == 2}}
+	{{:data.reg_error}}  
+	<p>
+<b>I will:</b> {{if data.pitch}}{{:data.pitch}} {{/if}} 	<p>
+{{:helper.link("Enter pitch", null, {'enter_pitch' : 1})}}
+
+<br><br>
+
+<b>Slogan:</b> {{if data.slogan}}{{:data.slogan}}{{/if}}  <p>
+{{:helper.link("Enter slogan", null, {'enter_slogan' : 1})}}
+	<br>	<br>
+{{:helper.link("Submit Registration", null, {'submit_register' : 1})}}
+{{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
+
+{{if data.index == 3}}
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+{{if data.index == 4}}
+	<br>
+	{{:data.reg_error}} 
+ 
+	<br>
+{{if data.pitch}}{{:data.pitch}} {{/if}} 
+{{:helper.link("Update pitch", null, {'update_pitch' : 1})}}
+
+<br><br>
+
+{{if data.slogan}}{{:data.slogan}}{{/if}}  {{:helper.link("Update slogan", null, {'update_slogan' : 1})}}
+
+<br><br>
+
+	{{:helper.link("Withdraw Candidacy", null, {'withdraw_candidacy' : 1})}}
+
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+{{if data.index == 5}}
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+
+{{if data.index == 6}}
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+{{if data.index == 7}}
+{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+
+
