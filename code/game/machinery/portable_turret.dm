@@ -74,6 +74,7 @@
 	var/check_synth	 = FALSE 	//if active, will shoot at anything not an AI or cyborg
 	var/check_all = FALSE		//If active, will fire on anything, including synthetics.
 	var/ailock = FALSE 			// AI cannot use this
+	var/check_down = FALSE		//If active, will shoot to kill when lethals are also on
 	var/faction = null			//if set, will not fire at people in the same faction for any reason.
 
 	var/attacked = FALSE		//if set to TRUE, the turret gets pissed off and shoots at people nearby (unless they have sec access!)
@@ -103,6 +104,7 @@
 	check_weapons = TRUE
 	check_anomalies = TRUE
 	check_all = FALSE
+	check_down = TRUE
 
 /obj/machinery/porta_turret/can_catalogue(mob/user) // Dead turrets can't be scanned.
 	if(stat & BROKEN)
@@ -224,6 +226,7 @@
 	check_records = FALSE
 	check_anomalies = FALSE
 	check_all = FALSE
+	check_down = FALSE
 
 /obj/machinery/porta_turret/lasertag/red
 	turret_type = "red"
@@ -404,7 +407,7 @@
 		return 1
 
 	if(locked && !issilicon(user))
-		to_chat(user, "<span class='notice'>Access denied.</span>")
+		to_chat(user, "<span class='notice'>Controls locked.</span>")
 		return 1
 
 	return 0
@@ -438,6 +441,7 @@
 		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		settings[++settings.len] = list("category" = "Neutralize All Entities", "setting" = "check_all", "value" = check_all)
+		settings[++settings.len] = list("category" = "Neutralize Downed Entities on Lethal", "setting" = "check_down", "value" = check_down)
 		data["settings"] = settings
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -489,6 +493,8 @@
 			check_anomalies = value
 		else if(href_list["command"] == "check_all")
 			check_all = value
+		else if(href_list["command"] == "check_down")
+			check_down = value
 
 		return 1
 
@@ -732,8 +738,9 @@
 	if(!emagged && issilicon(L) && check_all == FALSE)	// Don't target silica, unless told to neutralize everything.
 		return TURRET_NOT_TARGET
 
-	if(L.stat && !emagged)		//if the perp is dead/dying, no need to bother really
-		return TURRET_NOT_TARGET	//move onto next potential victim!
+	if(L.stat && !emagged)					//if the target is dead/dying, check to see if we can continue shooting.
+		if(L.stat == DEAD || !check_down)	//if the target is dead or we're not allowed to shoot downed targets, don't fire.
+			return TURRET_NOT_TARGET		//move onto next potential victim!
 
 	if(get_dist(src, L) > 7)	//if it's too far away, why bother?
 		return TURRET_NOT_TARGET
