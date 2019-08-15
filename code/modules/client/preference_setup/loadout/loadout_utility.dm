@@ -41,6 +41,7 @@
 /datum/gear/utility/camera
 	display_name = "camera"
 	path = /obj/item/device/camera
+	cost = 10
 
 /*/datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
