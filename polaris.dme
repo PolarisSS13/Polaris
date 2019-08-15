@@ -2187,6 +2187,7 @@
 #include "code\modules\paperwork\pen.dm"
 #include "code\modules\paperwork\photocopier.dm"
 #include "code\modules\paperwork\photography.dm"
+#include "code\modules\paperwork\photography_journalism.dm"
 #include "code\modules\paperwork\silicon_photography.dm"
 #include "code\modules\paperwork\stamps.dm"
 #include "code\modules\persistence\filth.dm"
