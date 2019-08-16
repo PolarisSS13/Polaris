@@ -441,7 +441,7 @@
 		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		settings[++settings.len] = list("category" = "Neutralize All Entities", "setting" = "check_all", "value" = check_all)
-		settings[++settings.len] = list("category" = "Neutralize Downed Entities on Lethal", "setting" = "check_down", "value" = check_down)
+		settings[++settings.len] = list("category" = "Neutralize Downed Entities", "setting" = "check_down", "value" = check_down)
 		data["settings"] = settings
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
@@ -738,9 +738,8 @@
 	if(!emagged && issilicon(L) && check_all == FALSE)	// Don't target silica, unless told to neutralize everything.
 		return TURRET_NOT_TARGET
 
-	if(L.stat && !emagged)					//if the target is dead/dying, check to see if we can continue shooting.
-		if(L.stat == DEAD || !check_down)	//if the target is dead or we're not allowed to shoot downed targets, don't fire.
-			return TURRET_NOT_TARGET		//move onto next potential victim!
+	if(L.stat == DEAD && !emagged)		//if the perp is dead, no need to bother really
+		return TURRET_NOT_TARGET	//move onto next potential victim!
 
 	if(get_dist(src, L) > 7)	//if it's too far away, why bother?
 		return TURRET_NOT_TARGET
@@ -756,7 +755,7 @@
 
 	if(check_synth || check_all)	//If it's set to attack all non-silicons or everything, target them!
 		if(L.lying)
-			return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+			return check_down ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 		return TURRET_PRIORITY_TARGET
 
 	if(iscuffed(L)) // If the target is handcuffed, leave it alone
@@ -773,7 +772,7 @@
 			return TURRET_NOT_TARGET	//if threat level < 4, keep going
 
 	if(L.lying)		//if the perp is lying down, it's still a target but a less-important target
-		return lethal ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+		return check_down ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
