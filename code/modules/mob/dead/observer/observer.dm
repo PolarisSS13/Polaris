@@ -389,9 +389,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Jump to Mob"
 	set desc = "Teleport to a mob"
 
-	var/target = getmobs()[input]
 	if(istype(usr, /mob/observer/dead)) //Make sure they're an observer!
-
+		var/target = getmobs()[input]
 		if (!target)//Make sure we actually have a target
 			return
 		else
