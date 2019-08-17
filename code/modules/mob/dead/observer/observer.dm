@@ -384,11 +384,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	return (T && T.holy) && (is_manifest || (mind in cult.current_antagonists))
 
-/mob/observer/dead/verb/jumptomob(target in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
+/mob/observer/dead/verb/jumptomob(input in getmobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
 	set name = "Jump to Mob"
 	set desc = "Teleport to a mob"
 
+	var/target = getmobs()[input]
 	if(istype(usr, /mob/observer/dead)) //Make sure they're an observer!
 
 		if (!target)//Make sure we actually have a target
