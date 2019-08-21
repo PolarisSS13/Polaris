@@ -77,3 +77,20 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "Holoplant crate"
+
+/datum/supply_pack/misc/journalist
+	name = "Journalism Kit"
+	contains = list(
+	/obj/item/device/camera,
+	/obj/item/device/camera_film = 2)
+	cost = 300
+	containertype = /obj/structure/closet/crate
+	containername = "Journalism Kit"
+
+/datum/supply_pack/misc/camera_film
+	name = "Camera Film Refills"
+	contains = list(
+	/obj/item/device/camera_film = 5)
+	cost = 230
+	containertype = /obj/structure/closet/crate
+	containername = "Camera Film Refills"

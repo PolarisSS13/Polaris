@@ -17,6 +17,8 @@
 	item_state = "camera"
 	w_class = ITEMSIZE_TINY
 
+	price_tag = 30
+
 
 /********
 * photo *
@@ -36,13 +38,24 @@ var/global/photo_count = 0
 	var/cursed = 0
 	var/photo_size = 3
 
+	var/sensational			//pictures of high ranking people, depending on rank
+	var/gruesome			//people covered with blood, dead bodies, etc
+	var/scandalous			//famous people near dead bodies, etc
+	var/scary			//something terribly wrong is with this picture
+
+	drop_sound = 'sound/items/drop/paper.ogg'
+
 /obj/item/weapon/photo/New()
 	id = photo_count++
 
-
-
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
+
+/obj/item/weapon/photo/get_item_cost()
+	var/price_tag = sensational + gruesome + scandalous + scary
+
+	return price_tag
+
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen))
@@ -55,6 +68,14 @@ var/global/photo_count = 0
 	if(in_range(user, src))
 		show(user)
 		user << desc
+		if(sensational)
+			user << "<span class='notice'>The important people in this photo make it highly <b>sensational</b>!</span>"
+		if(gruesome)
+			user << "<span class='notice'>The photo has very <b>gruesome</b> details...</span>"
+		if(scandalous)
+			user << "<span class='notice'><b>S-Scandalous!</b> The media will love this.</span>"
+		if(scary)
+			user << "<span class='notice'>This photo is... <b>scary</b>.</span>"
 	else
 		user << "<span class='notice'>It is too far away.</span>"
 
@@ -243,6 +264,7 @@ var/global/photo_count = 0
 
 	return mob_detail
 
+
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
 	captureimage(target, user, flag)
@@ -267,6 +289,13 @@ var/global/photo_count = 0
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
+
+	var/sensationality
+	var/gruesomeness
+	var/scandal
+	var/scariness
+
+
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
@@ -278,14 +307,22 @@ var/global/photo_count = 0
 			if(can_capture_turf(T, user))
 				turfs.Add(T)
 				mobs += get_mobs(T)
+
+				sensationality += get_sensationalist_value(T)
+				gruesomeness += get_gruesome_value(T)
+				scandal += get_scandalous_value(T)
+				scariness += get_scary_value(T)
+
 			x_c++
 		y_c--
 		x_c = x_c - size
 
-
-
-
 	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+	p.sensational = sensationality
+	p.gruesome = gruesomeness
+	p.scandalous = scandal
+	p.scary = scariness
+
 	if(findtext(mobs, "Its stare makes you feel uneasy"))
 		p.cursed = 1
 		user.visible_message("<span class='userdanger'>Something starts to slowly manifest from the picture!</span>")
@@ -295,7 +332,6 @@ var/global/photo_count = 0
 			S.banishable = 1//At least you can get rid of those bastards
 			T.visible_message("<span class='userdanger'>The photo turns into \a [S]!</span>")
 			qdel(p)
-
 
 	printpicture(user, p)
 
