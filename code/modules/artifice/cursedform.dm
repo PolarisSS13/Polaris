@@ -20,19 +20,18 @@
 		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like [TU.hes] trying to burn it!</span>", \
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+		if(do_after(user, 2 SECONDS, src) && P.lit)
+			user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
+			"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
+			if(user.get_inactive_hand() == src)
+				user.drop_from_inventory(src)
 
-				new /obj/effect/decal/cleanable/ash(src.loc)
-				qdel(src)
+			new /obj/effect/decal/cleanable/ash(src.loc)
+			qdel(src)
 
-			else
-				to_chat(user,"<font color='red'>You must hold \the [P] steady to burn \the [src].</font>")
+		else
+			to_chat(user,"<font color='red'>You must hold \the [P] steady to burn \the [src].</font>")
 
 		if(isliving(user))
 			var/mob/living/L = user
