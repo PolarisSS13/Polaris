@@ -5,7 +5,7 @@
 	icon_state = "explore"
 	density = TRUE
 	anchored = TRUE
-	circuit = /obj/item/weapon/circuitboard/mining_equipment_vendor
+	circuit = /obj/item/weapon/circuitboard/exploration_equipment_vendor
 	icon_deny = "explore-deny"
 	prize_list = list(
 		new /datum/data/mining_equipment("1 Marker Beacon",				/obj/item/stack/marker_beacon,										1),
@@ -41,7 +41,7 @@
 		new /datum/data/mining_equipment("Defense Equipment - Steel Machete",	/obj/item/weapon/material/knife/machete,					75)
 		)
 
-/obj/machinery/mineral/equipment_vendor/explorer/interact(mob/user)
+/obj/machinery/mineral/equipment_vendor/survey/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat
@@ -59,7 +59,7 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/mineral/equipment_vendor/explorer/Topic(href, href_list)
+/obj/machinery/mineral/equipment_vendor/survey/Topic(href, href_list)
 	if(..())
 		return 1
 
