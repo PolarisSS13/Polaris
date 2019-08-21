@@ -25,6 +25,18 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+	has_organ = list(
+		O_HEART =		/obj/item/organ/internal/heart,
+		O_LUNGS =		/obj/item/organ/internal/lungs,
+		O_VOICE = 		/obj/item/organ/internal/voicebox,
+		O_LIVER =		/obj/item/organ/internal/liver,
+		O_KIDNEYS =		/obj/item/organ/internal/kidneys,
+		O_BRAIN =		/obj/item/organ/internal/brain,
+		O_APPENDIX = 	/obj/item/organ/internal/appendix,
+		O_SPLEEN = 		/obj/item/organ/internal/spleen,
+		O_EYES =		/obj/item/organ/internal/eyes
+		)
+
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tie_hair)
 

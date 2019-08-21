@@ -185,6 +185,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	strength = 5
+	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/toxin/expired_medicine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -226,6 +227,7 @@
 	color = "#FFFFFF"
 	strength = 0
 	overdose = REAGENTS_OVERDOSE
+	filtered_organs = list(O_SPLEEN, O_KIDNEYS)
 
 /datum/reagent/toxin/potassium_chloride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -251,6 +253,7 @@
 	color = "#FFFFFF"
 	strength = 10
 	overdose = 20
+	filtered_organs = list(O_SPLEEN, O_KIDNEYS)
 
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -286,6 +289,35 @@
 	M.tod = stationtime2text()
 
 /datum/reagent/toxin/zombiepowder/Destroy()
+	if(holder && holder.my_atom && ismob(holder.my_atom))
+		var/mob/M = holder.my_atom
+		M.status_flags &= ~FAKEDEATH
+	return ..()
+
+/datum/reagent/toxin/lichpowder
+	name = "Lich Powder"
+	id = "lichpowder"
+	description = "A stablized nerve agent that puts the subject into a strange state of un-death."
+	reagent_state = SOLID
+	color = "#666666"
+	metabolism = REM * 0.75
+	strength = 2
+	mrate_static = TRUE
+
+/datum/reagent/toxin/lichpowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.status_flags |= FAKEDEATH
+	M.adjustOxyLoss(1 * removed)
+	M.silent = max(M.silent, 10)
+	M.tod = stationtime2text()
+
+	if(prob(1))
+		M.visible_message("[M] wheezes.", "You wheeze sharply... it's cold.")
+		M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, T0C - 10)
+
+/datum/reagent/toxin/lichpowder/Destroy()
 	if(holder && holder.my_atom && ismob(holder.my_atom))
 		var/mob/M = holder.my_atom
 		M.status_flags &= ~FAKEDEATH
@@ -384,6 +416,7 @@
 	description = "A biological agent that acts similarly to pepperspray. This compound seems to be particularly cruel, however, capable of permeating the barriers of blood vessels."
 	taste_description = "fire"
 	color = "#B31008"
+	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/condensedcapsaicin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -682,6 +715,7 @@
 	id = "serotrotium_v"
 	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans. This appears to be a biologically produced form, resulting in a specifically toxic nature."
 	taste_description = "chalky bitterness"
+	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/serotrotium/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -724,6 +758,7 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose = REAGENTS_OVERDOSE
+	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -940,6 +975,7 @@ datum/reagent/talum_quem/affect_blood(var/mob/living/carbon/M, var/alien, var/re
 	reagent_state = SOLID
 	color = "#555555"
 	metabolism = REM * 4
+	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/neurophage_nanites/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustBrainLoss(2 * removed)	// Their job is to give you a bad time.

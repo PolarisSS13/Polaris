@@ -194,10 +194,16 @@
 #define O_KIDNEYS  "kidneys"
 #define O_APPENDIX "appendix"
 #define O_VOICE    "voicebox"
-#define O_STANDARD list(O_EYES, O_HEART, O_LUNGS, O_BRAIN, O_LIVER, O_KIDNEYS, O_APPENDIX, O_VOICE)
+#define O_SPLEEN   "spleen"
+#define O_STANDARD list(O_EYES, O_HEART, O_LUNGS, O_BRAIN, O_LIVER, O_KIDNEYS, O_SPLEEN, O_APPENDIX, O_VOICE)
 
 // Augments
 #define O_AUG_TSHADE "integrated thermolensing implant"
+#define O_AUG_ASWORD "integrated blade implant"
+#define O_AUG_L_FOREARM "left forearm augment"
+#define O_AUG_R_FOREARM "right forearm augment"
+#define O_AUG_L_UPPERARM "left upperarm augment"
+#define O_AUG_R_UPPERARM "right upperarm augment"
 
 // Non-Standard organs
 #define O_MOUTH    "mouth"
