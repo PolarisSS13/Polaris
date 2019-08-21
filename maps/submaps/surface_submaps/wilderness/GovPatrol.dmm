@@ -6,7 +6,7 @@
 "f" = (/obj/item/weapon/storage/backpack/parachute,/turf/template_noop,/area/submap/GovPatrol)
 "g" = (/obj/item/weapon/storage/box/flare,/turf/template_noop,/area/submap/GovPatrol)
 "h" = (/obj/item/ammo_casing,/turf/template_noop,/area/submap/GovPatrol)
-"i" = (/obj/item/clothing/under/utility/sifguard,/obj/item/clothing/shoes/boots/jackboots,/obj/effect/decal/remains,/turf/template_noop,/area/submap/GovPatrol)
+"i" = (/obj/item/clothing/under/solgov/utility/sifguard,/obj/item/clothing/shoes/boots/jackboots,/obj/effect/decal/remains,/turf/template_noop,/area/submap/GovPatrol)
 "j" = (/obj/item/stack/material/wood/sif,/turf/template_noop,/area/submap/GovPatrol)
 "k" = (/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever,/turf/template_noop,/area/submap/GovPatrol)
 "l" = (/obj/structure/bonfire/sifwood,/turf/template_noop,/area/submap/GovPatrol)
