@@ -580,7 +580,7 @@ area/space/atmosalert()
 	name = "\improper Skipjack"
 	icon_state = "yellow"
 	requires_power = 0
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 	luminosity = 0
 	base_turf = /turf/simulated/floor/water
 

@@ -79,8 +79,8 @@
 	department = "Civilian"
 	department_flag = MEDSCI
 	faction = "City"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "your private company director"
 	selection_color = "#013D3B"
 	idtype = /obj/item/weapon/card/id/medical/geneticist

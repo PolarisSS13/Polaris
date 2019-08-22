@@ -117,9 +117,16 @@
 
 
 /obj/item/weapon/paper_bin/court
+	name = "Court Forms"
 	paper_type = /obj/item/weapon/paper/Court
 	has_carbon_paper = 0
 
 /obj/item/weapon/paper_bin/medical_bills
+	name = "Medical Bills Menu Holder"
 	paper_type = /obj/item/weapon/paper/medical_pamphlet
+	has_carbon_paper = 0
+
+/obj/item/weapon/paper_bin/bar_menu
+	name = "Bar Menu Holder"
+	paper_type = /obj/item/weapon/paper/bar_menu
 	has_carbon_paper = 0

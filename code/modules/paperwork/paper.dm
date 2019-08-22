@@ -650,3 +650,19 @@
 /obj/item/weapon/paper/manifest
 	name = "supply manifest"
 	var/is_copy = 1
+
+/obj/item/weapon/paper/bar_menu
+	name = "bar menu"
+	info = "<center> \
+	<img src = ntlogo.png> <BR><B><BR> \
+	<HR><BR> Ask about our time-of-day special!<BR> <BR> DRINKS</B><BR> <HR><BR> \
+	Space Beer<BR> Iced Space Beer<BR> Station 13 Grog<BR> Magm-Ale<BR> Griffeater's Gin<BR> \
+	Uncle Git's Special Reserve<BR> Caccavo Guaranteed Quality Tequilla<BR> Tunguska Triple Distilled<BR> \
+	Goldeneye Vermouth<BR> Captain Pete's Cuban Spiced Rum<BR> Doublebeard Beared Special Wine<BR> \
+	Chateua De Baton Premium Cognac<BR> Robert Robust's Coffee Liqueur<BR> <BR> <B>MIXED DRINKS</B><BR> \
+	<HR><BR> Allies Cocktail<BR> Andalusia<BR> Anti-Freeze<BR> Bahama Mama<BR> Classic Martini<BR> Cuba Libre<BR> \
+	Gin Fizz<BR> Gin and Tonic<BR> Irish Car Bomb<BR> Irish Coffee<BR> Irish Cream<BR> Long Island Iced Tea<BR> \
+	Manhattan<BR> The Manly Dorf<BR> Margarita<BR> Screwdriver<BR> Syndicate Bomb<BR> Pan-Galactic Gargle Blaster<BR> \
+	Tequilla Sunrise<BR> Vodka Martini<BR> Vodka and Tonic<BR> Whiskey Cola<BR> Whiskey Soda<BR> White Russian<BR> \
+	<HR><BR><B>NON-ALCOHOLIC DRINKS</B><BR> Coffee<BR> Tea<BR> Hot Chocolate<BR> Iced Tea<BR> Iced Coffee<BR> Orange Juice<BR> \
+	Tomato Juice<BR> Tonic Water<BR> Sodas<BR>"

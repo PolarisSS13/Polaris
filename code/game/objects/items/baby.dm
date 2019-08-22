@@ -1,4 +1,4 @@
-// This can be a human, skrell, unathi, or tajara child. Don't do any freaky interspecies shit with this. I'm watching you.
+
 /obj/item/weapon/baby
 	name = "baby"
 	desc = "A very, very young child. How cute."
@@ -17,3 +17,10 @@
 	if ((src.loc == user && usr.stat == 0))
 		for(var/mob/O in (viewers(user)))
 			O.show_message("<B>[src]</B> [message]")
+
+
+/obj/item/weapon/baby/black
+	icon_state = "baby-black"
+
+/obj/item/weapon/baby/tanned
+	icon_state = "baby-tanned"

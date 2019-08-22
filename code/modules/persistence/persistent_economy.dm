@@ -39,10 +39,10 @@
 
 /datum/economy/bank_accounts/proc/sanitize_economy()
 	for(var/datum/money_account/D in department_acc_list)
-		D.money = Clamp(D.money, 0, 999999)
+		D.money = Clamp(D.money, -999999, 999999)
 
 	for(var/datum/money_account/T in station_account)
-		T.money = Clamp(T.money, 0, 999999)
+		T.money = Clamp(T.money, -999999, 999999)
 
 
 /datum/economy/bank_accounts/proc/save_accounts()

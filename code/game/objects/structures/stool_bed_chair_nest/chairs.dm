@@ -317,7 +317,7 @@
 /obj/structure/bed/chair/sofa/corner/New()
 	..()
 	buckle_dir = SOUTH
-
+	plane = UNDER_MOB_PLANE
 
 /obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"
