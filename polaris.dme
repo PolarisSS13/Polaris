@@ -1228,7 +1228,6 @@
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_memo.dm"
 #include "code\modules\admin\admin_ranks.dm"
-#include "code\modules\admin\admin_report.dm"
 #include "code\modules\admin\admin_secrets.dm"
 #include "code\modules\admin\admin_tools.dm"
 #include "code\modules\admin\admin_verbs.dm"
