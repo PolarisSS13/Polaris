@@ -80,7 +80,7 @@
 
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
 	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
-		return
+		return FALSE
 	if(!istype(entry))
 		return FALSE
 	if(GetEntryAge(entry) >= entries_expire_at)
