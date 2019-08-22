@@ -654,9 +654,11 @@
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			H.save_mob_to_prefs() // saves character if round is canon.
-			spawn(20)
-			M << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
+			if(H.save_mob_to_prefs()) // saves character if round is canon.
+				spawn(20)
+				M << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
+			else
+				M << "<span class='notice'><b>As this is not a canon round, your character will not be saved this time.</b></span>"
 
 		time_entered = world.time
 		if(ishuman(M) && applies_stasis)

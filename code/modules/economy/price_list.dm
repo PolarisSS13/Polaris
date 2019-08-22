@@ -394,6 +394,8 @@
 	price_tag = 3
 
 // From the machine //
+/obj/item/weapon/reagent_containers/food/drinks
+	price_tag = 1
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola
 	price_tag = 1
@@ -527,6 +529,9 @@
 //***************//
 //---Foodstuff---//
 //***************//
+
+/obj/item/weapon/reagent_containers/food/snacks
+	price_tag = 2
 
 // Snacks //
 

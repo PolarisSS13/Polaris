@@ -13,6 +13,9 @@
 	initial_flooring = /decl/flooring/water
 
 
+	var/reagent_type			//reagents other than water.
+	var/reagent_chance
+
 /turf/simulated/floor/water/initialize()
 	. = ..()
 	update_icon()
@@ -58,6 +61,13 @@
 		if(!istype(oldloc, /turf/simulated/floor/water))
 			to_chat(L, "<span class='warning'>You get drenched in water from entering \the [src]!</span>")
 	AM.water_act(5)
+
+	if(ishuman(AM))
+		var/mob/living/carbon/human/H = AM
+		var/target_zone = pick(BP_TORSO,BP_TORSO,BP_TORSO,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_HEAD)
+		if(reagent_type && reagent_chance && H.can_inject(src, null, target_zone))
+			if(prob(reagent_chance))
+				H.reagents.add_reagent(reagent_type, reagent_chance)
 	..()
 
 /turf/simulated/floor/water/Exited(atom/movable/AM, atom/newloc)
@@ -95,6 +105,12 @@
 	name = "deep pool"
 	desc = "Don't worry, it's not closed."
 	outdoors = FALSE
+
+/turf/simulated/floor/water/sewer
+	name = "sewage water"
+	color = "#049660"
+	reagent_type = "toiletwater"
+	reagent_chance = 5
 
 /mob/living/proc/can_breathe_water()
 	return FALSE
