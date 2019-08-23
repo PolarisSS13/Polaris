@@ -68,10 +68,11 @@
 	var/break_damage = 4
 	var/light_glove_d = rand(2, 4)
 	var/no_glove_d = rand(4, 6)
-	var/list/h_gloves = list(/obj/item/clothing/gloves/captain, /obj/item/clothing/gloves/cyborg, /obj/item/clothing/gloves/swat,
-								/obj/item/clothing/gloves/combat, /obj/item/clothing/gloves/botanic_leather, /obj/item/clothing/gloves/duty,
-								/obj/item/clothing/gloves/tactical, /obj/item/clothing/gloves/vox, /obj/item/clothing/gloves/gauntlets
-							)
+	var/list/h_gloves = list(/obj/item/clothing/gloves/captain, /obj/item/clothing/gloves/cyborg,
+							/obj/item/clothing/gloves/swat, /obj/item/clothing/gloves/combat,
+							/obj/item/clothing/gloves/botanic_leather, /obj/item/clothing/gloves/duty,
+							/obj/item/clothing/gloves/tactical, /obj/item/clothing/gloves/vox,
+							/obj/item/clothing/gloves/gauntlets)
 
 	if(istype(user.l_hand, src))
 		active_hand = BP_L_HAND
