@@ -168,3 +168,27 @@
 		F.set_up(6, 0, T)
 		F.start()
 	return
+
+/datum/chemical_reaction/distilling/lichpowder
+	name = "Distilling Lichpowder"
+	id = "distill_lichpowder"
+	result = "lichpowder"
+	required_reagents = list("zombiepowder" = 2, "leporazine" = 1)
+	result_amount = 2
+
+	reaction_rate = HALF_LIFE(8)
+
+	temp_range = list(T0C + 100, T0C + 150)
+
+/datum/chemical_reaction/distilling/necroxadone
+	name = "Distilling Necroxadone"
+	id = "distill_necroxadone"
+	result = "necroxadone"
+	required_reagents = list("lichpowder" = 1, "cryoxadone" = 1, "carthatoline" = 1)
+	result_amount = 2
+
+	catalysts = list("phoron" = 5)
+
+	reaction_rate = HALF_LIFE(20)
+
+	temp_range = list(T0C + 90, T0C + 95)

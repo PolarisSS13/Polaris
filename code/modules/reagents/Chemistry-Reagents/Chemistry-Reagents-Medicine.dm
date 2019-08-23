@@ -100,6 +100,25 @@
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(6 * removed * chem_effective, 0)
 
+/datum/reagent/calciumcarbonate
+	name = "calcium carbonate"
+	id = "calciumcarbonate"
+	description = "Calcium carbonate is a calcium salt commonly used as an antacid."
+	taste_description = "chalk"
+	reagent_state = SOLID
+	color = "#eae6e3"
+	overdose = REAGENTS_OVERDOSE * 0.8
+	metabolism = REM * 0.4
+	scannable = 1
+
+/datum/reagent/calciumcarbonate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // Why would you inject this.
+	if(alien != IS_DIONA)
+		M.adjustToxLoss(3 * removed)
+
+/datum/reagent/calciumcarbonate/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.add_chemical_effect(CE_ANTACID, 3)
+
 /datum/reagent/kelotane
 	name = "Kelotane"
 	id = "kelotane"
@@ -332,6 +351,40 @@
 		M.adjustOxyLoss(-30 * removed * chem_effective)
 		M.heal_organ_damage(30 * removed, 30 * removed * chem_effective)
 		M.adjustToxLoss(-30 * removed * chem_effective)
+
+/datum/reagent/necroxadone
+	name = "Necroxadone"
+	id = "necroxadone"
+	description = "A liquid compound based upon that which is used in the cloning process. Utilized primarily in severe cases of toxic shock."
+	taste_description = "meat"
+	reagent_state = LIQUID
+	color = "#94B21C"
+	metabolism = REM * 0.5
+	mrate_static = TRUE
+	scannable = 1
+
+/datum/reagent/necroxadone/on_mob_life(var/mob/living/carbon/M, var/alien, var/datum/reagents/metabolism/location)
+	if(M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump_corpse))
+		affects_dead = TRUE
+	else
+		affects_dead = FALSE
+
+	. = ..(M, alien, location)
+
+/datum/reagent/necroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature < 170 || (M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump_corpse)))
+		var/chem_effective = 1
+		if(alien == IS_SLIME)
+			if(prob(10))
+				to_chat(M, "<span class='danger'>It's so cold. Something causes your cellular mass to harden sporadically, resulting in seizure-like twitching.</span>")
+			chem_effective = 0.5
+			M.Weaken(20)
+			M.silent = max(M.silent, 20)
+			M.make_jittery(4)
+		if(M.stat != DEAD)
+			M.adjustCloneLoss(-5 * removed * chem_effective)
+		M.adjustOxyLoss(-20 * removed * chem_effective)
+		M.adjustToxLoss(-40 * removed * chem_effective)
 
 /* Painkillers */
 
@@ -877,11 +930,11 @@
 	if(M.ingested)
 		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
-				R.remove_self(removed * 5)
+				R.remove_self(removed * 30)
 	if(M.bloodstr)
 		for(var/datum/reagent/R in M.bloodstr.reagent_list)
 			if(istype(R, /datum/reagent/ethanol))
-				R.remove_self(removed * 15)
+				R.remove_self(removed * 20)
 
 /datum/reagent/hyronalin
 	name = "Hyronalin"

@@ -305,7 +305,7 @@ the artifact triggers the rage.
 
 	bleeding_rate_percent = 0.8
 
-	pulse_set_level = PULSE_SLOW
+	pulse_modifier = -1
 
 // Temperature Normalizer.
 /datum/modifier/homeothermic

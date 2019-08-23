@@ -310,7 +310,7 @@
 	strength = 2
 	mrate_static = TRUE
 
-/datum/reagent/toxin/lichpowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/toxin/lichpowder/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
