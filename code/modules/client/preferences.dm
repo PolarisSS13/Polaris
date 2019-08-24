@@ -150,6 +150,12 @@ datum/preferences
 	var/existing_character = 0 //when someone spawns with this character for the first time or confirms, it's set to 1.
 	var/played = 0 //this will set to 1 once someone plays this character on a canon round.
 
+	//Cooldowns for saving/loading. These are four are all separate due to loading code calling these one after another
+	var/saveprefcooldown
+	var/loadprefcooldown
+	var/savecharcooldown
+	var/loadcharcooldown
+
 /datum/preferences/New(client/C)
 	player_setup = new(src)
 	set_biological_gender(pick(MALE, FEMALE))
