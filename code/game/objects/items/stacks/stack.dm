@@ -88,7 +88,7 @@
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
-			var/max_multiplier = round(src.get_amount() / R.req_amount)
+			var/max_multiplier = round(amount / R.req_amount)
 			var/title as text
 			var/can_build = 1
 			can_build = can_build && (max_multiplier>0)
@@ -102,12 +102,12 @@
 			else
 				t1 += text("[]", title)
 				continue
-			if (R.max_res_amount>1 && max_multiplier>1)
+			if(R.max_res_amount > 1 && max_multiplier > 1)
 				max_multiplier = min(max_multiplier, round(R.max_res_amount/R.res_amount))
 				t1 += " |"
-				var/list/multipliers = list(5,10,25)
+				var/list/multipliers = list(5, 10, 25)
 				for (var/n in multipliers)
-					if (max_multiplier>=n)
+					if(max_multiplier >= n)
 						t1 += " <A href='?src=\ref[src];make=[i];multiplier=[n]'>[n*R.res_amount]x</A>"
 				if (!(max_multiplier in multipliers))
 					t1 += " <A href='?src=\ref[src];make=[i];multiplier=[max_multiplier]'>[max_multiplier*R.res_amount]x</A>"
@@ -177,7 +177,8 @@
 
 		var/datum/stack_recipe/R = recipes_list[text2num(href_list["make"])]
 		var/multiplier = text2num(href_list["multiplier"])
-		if (!multiplier || (multiplier <= 0)) //href exploit protection
+
+		if(!multiplier || multiplier <= 0 || multiplier > 50) // Href exploit checks
 			return
 
 		src.produce_recipe(R, multiplier, usr)

@@ -311,3 +311,5 @@ var/global/list/##LIST_NAME = list();\
 #define MOUSE_OPACITY_TRANSPARENT 0
 #define MOUSE_OPACITY_ICON 1
 #define MOUSE_OPACITY_OPAQUE 2
+
+#define PREF_SAVELOAD_COOLDOWN 5
