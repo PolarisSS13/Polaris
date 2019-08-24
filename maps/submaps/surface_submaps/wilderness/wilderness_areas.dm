@@ -132,3 +132,6 @@
 /area/submap/Shelter1
 	name = "POI - Raided Shelter"
 	ambience = AMBIENCE_GHOSTLY
+
+/area/submap/VRDen
+	name = "POI - VR Den"

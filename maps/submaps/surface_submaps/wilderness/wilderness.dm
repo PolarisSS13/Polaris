@@ -33,6 +33,7 @@
 #include "ButcherShack.dmm"
 #include "Chapel.dmm"
 #include "Shelter.dmm"
+#include "VRDen.dmm"
 
 #endif
 
@@ -267,3 +268,9 @@
 	desc = "The remains of a resourceful, but prideful explorer."
 	mappath = 'maps/submaps/surface_submaps/wilderness/Shelter.dmm'
 	cost = 10
+
+/datum/map_template/surface/wilderness/normal/VRDen
+	name = "VR Den"
+	desc = "Remains of an indie VR club."
+	mappath = 'maps/submaps/surface_submaps/wilderness/VRDen.dmm'
+	cost = 15
