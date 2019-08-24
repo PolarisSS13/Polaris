@@ -20,32 +20,32 @@
 "t" = (/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
 "u" = (/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
 "v" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"w" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/greengrid,/area/submap/VRDen)
+"w" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/greengrid,/area/submap/VRDen)
 "x" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
 "y" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/broken_device/random,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
 "z" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
 "A" = (/turf/simulated/floor/greengrid,/area/submap/VRDen)
-"B" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/VRDen)
-"C" = (/obj/effect/decal/cleanable/dirt,/obj/item/frame,/obj/item/integrated_circuit/logic/unary/not,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"D" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/telecomms/server{name = "Server"},/obj/item/device/gps/internal/poi,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"E" = (/obj/item/integrated_circuit/logic/binary,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"F" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"G" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"H" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"I" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/greengrid,/area/submap/VRDen)
-"J" = (/obj/structure/closet/toolcloset,/turf/simulated/floor,/area/submap/VRDen)
-"K" = (/obj/item/integrated_circuit/smart/basic_pathfinder,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
-"L" = (/obj/structure/girder/displaced,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
-"M" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor,/area/submap/VRDen)
-"N" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
-"O" = (/obj/structure/loot_pile/maint/junk,/turf/template_noop,/area/submap/VRDen)
-"P" = (/obj/machinery/door/airlock,/turf/simulated/floor,/area/submap/VRDen)
-"Q" = (/obj/machinery/light/small/flicker,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
-"R" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
-"S" = (/obj/effect/decal/remains/robot,/turf/template_noop,/area/submap/VRDen)
-"T" = (/obj/effect/decal/remains/posi,/obj/item/weapon/paper{info = "pain sim on your hardware is top-notch, 10/10, would be burned alive again"; name = "satisfied letter"},/obj/machinery/light/small,/turf/simulated/floor,/area/submap/VRDen)
-"U" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
-"V" = (/obj/structure/toilet{dir = 8},/obj/item/device/integrated_electronics/debugger,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/submap/VRDen)
+"B" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/greengrid,/area/submap/VRDen)
+"C" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/submap/VRDen)
+"D" = (/obj/effect/decal/cleanable/dirt,/obj/item/frame,/obj/item/integrated_circuit/logic/unary/not,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"E" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/telecomms/server{name = "Server"},/obj/item/device/gps/internal/poi,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"F" = (/obj/item/integrated_circuit/logic/binary,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"G" = (/obj/machinery/light/small/flicker,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
+"H" = (/obj/machinery/telecomms/processor,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"I" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"J" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"K" = (/obj/effect/decal/remains/posi,/obj/item/weapon/paper{info = "pain sim on your hardware is top-notch, 10/10, would be burned alive again"; name = "satisfied letter"},/obj/machinery/light/small,/turf/simulated/floor,/area/submap/VRDen)
+"L" = (/obj/structure/closet/toolcloset,/turf/simulated/floor,/area/submap/VRDen)
+"M" = (/obj/item/integrated_circuit/smart/basic_pathfinder,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
+"N" = (/obj/structure/girder/displaced,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
+"O" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor,/area/submap/VRDen)
+"P" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/tiled/steel,/area/submap/VRDen)
+"Q" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
+"R" = (/obj/structure/loot_pile/maint/junk,/turf/template_noop,/area/submap/VRDen)
+"S" = (/obj/machinery/door/airlock,/turf/simulated/floor,/area/submap/VRDen)
+"T" = (/obj/structure/toilet{dir = 8},/obj/item/device/integrated_electronics/debugger,/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/submap/VRDen)
+"U" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled/steel_dirty,/area/submap/VRDen)
+"V" = (/obj/effect/decal/remains/robot,/turf/template_noop,/area/submap/VRDen)
 "W" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/template_noop,/area/submap/VRDen)
 
 (1,1,1) = {"
@@ -55,16 +55,16 @@ abbbbbbbbbbbbbbbbbba
 abbbbbccccccccbbbbba
 abbbcccdefgcccccbbba
 abbbchijklmcnopcbbba
-abbbcqrstuvcIopcbbba
+abbbcqrstuvcwopcbbba
 abbbcxyzutuzAopcbbba
-abbbczxtuxttwopcbbba
-abbbcBuCuuDcAopcbbba
-abbbcjEtQuFcAopcbbba
-abbbcGcccHccIopcbbba
-abbbcTcJttKLwopcbbba
-abbbcccMNUccccccbbba
-abbbbOccjBPVccbbbbba
-abbbbbbccRcccbbSbbba
+abbbczxtuxttBopcbbba
+abbbcCuDuuEcAopcbbba
+abbbcjFtGuHcAopcbbba
+abbbcIcccJccwopcbbba
+abbbcKcLttMNBopcbbba
+abbbcccOPQccccccbbba
+abbbbRccjCSTccbbbbba
+abbbbbbccUcccbbVbbba
 abbbbbbbWbWbbbbbbbba
 abbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbba
