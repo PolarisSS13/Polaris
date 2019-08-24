@@ -12,8 +12,9 @@ var/global/list/plant_seed_sprites = list()
 	var/modified = 0
 
 /obj/item/seeds/get_item_cost()
+	var/half_cost
 	if(seed)
-		var/half_cost = round(seed.fruit_price / 2)
+		half_cost = round(seed.fruit_price / 2)
 
 	price_tag = half_cost
 

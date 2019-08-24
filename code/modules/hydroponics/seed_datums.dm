@@ -741,11 +741,11 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
 /datum/seed/onion
-    name = "onion"
-    seed_name = "onion"
-    display_name = "onions"
-    chems = list("nutriment" = list(1,10))
-    kitchen_tag = "onion"
+	name = "onion"
+	seed_name = "onion"
+	display_name = "onions"
+	chems = list("nutriment" = list(1,10))
+	kitchen_tag = "onion"
 	fruit_price	= 5
 
 /datum/seed/onion/New()
