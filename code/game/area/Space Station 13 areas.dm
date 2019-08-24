@@ -2515,6 +2515,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Unknown"
 	icon_state = "storage"
 
+/area/virtual_reality
+	name = "Virtual Reality"
+	icon_state = "VR"
+	dynamic_lighting = 0
+	requires_power = 0
 
 
 // Telecommunications Satellite
