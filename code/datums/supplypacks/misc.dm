@@ -145,7 +145,7 @@
 	containertype = /obj/structure/closet/crate
 	containername = "Glucose Hypo Crate"
 
-/datum/supply_pack/supply_pack/galley/rations
+/datum/supply_pack/misc/mre_rations
 	num_contained = 6
 	name = "Emergency - MREs"
 	contains = list(/obj/item/weapon/storage/mre,
@@ -162,7 +162,7 @@
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "ready to eat rations"
 
-/datum/supply_pack/supply_pack/galley/rations
+/datum/supply_pack/misc/paste_rations
 	name = "Emergency - Paste"
 	contains = list(
 			/obj/item/weapon/storage/mre/menu11 = 2
