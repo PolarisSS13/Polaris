@@ -169,8 +169,8 @@ MRE Stuff
 	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
-	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
-	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+	/obj/item/weapon/reagent_containers/food/snacks/liquidprotein,
+	/obj/item/weapon/reagent_containers/food/snacks/liquidprotein,
 	)
 
 /obj/item/weapon/storage/mre/menu12

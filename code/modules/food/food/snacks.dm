@@ -21,12 +21,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/Initialize()
 	. = ..()
 	if(nutriment_amt)
-		reagents.add_reagent("nutriment",nutriment_amt,nutriment_desc)
-
-/obj/item/weapon/reagent_containers/food/snacks/Initialize()
-	. = ..()
-	if(nutriment_amt)
-		reagents.add_reagent("nutriment", nutriment_amt)
+		reagents.add_reagent("nutriment",(nutriment_amt*2),nutriment_desc)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -3720,6 +3715,22 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood/Initialize()
 	. = ..()
+	reagents.add_reagent("iron", 3)
+	bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein
+	name = "\improper LiquidProtein Ration"
+	desc = "A variant of the liquidfood ration, designed for obligate carnivore species. Only barely more appealing than regular liquidfood. Should this be crunchy?"
+	icon = 'icons/obj/food_vr.dmi'
+	icon_state = "liquidprotein"
+	trash = /obj/item/trash/liquidprotein
+	filling_color = "#A8A8A8"
+	survivalfood = TRUE
+	center_of_mass = list("x"=16, "y"=15)
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein/Initialize()
+	..()
+	reagents.add_reagent("protein", 30)
 	reagents.add_reagent("iron", 3)
 	bitesize = 4
 
