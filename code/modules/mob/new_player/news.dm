@@ -21,7 +21,7 @@
 		else
 			current_news_page++
 			playsound(src.loc, "pageturn", 50, 1)
-
+			show_latest_news(news_data.city_newspaper)
 
 	if(href_list["previous_news"])
 		var/datum/feed_channel/prev_page = locate(href_list["prevpage"])
@@ -36,7 +36,7 @@
 		else
 			current_news_page--
 			playsound(src.loc, "pageturn", 50, 1)
-
+			show_latest_news(news_data.city_newspaper)
 
 /mob/new_player/proc/show_latest_news(var/datum/feed_channel/CHANNEL)
 	if(!news_data) return
@@ -99,5 +99,3 @@
 		dat += get_newspaper_content(MESSAGE.title, MESSAGE.body, MESSAGE.author, "#d4cec1", pic_data)
 
 	return dat
-
-

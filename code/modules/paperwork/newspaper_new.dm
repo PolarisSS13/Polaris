@@ -64,7 +64,7 @@
 			current_news_page++
 			playsound(src.loc, "pageturn", 50, 1)
 			updateDialog()
-
+			attack_self(loc)
 
 	if(href_list["previous_news"])
 		var/datum/feed_channel/prev_page = locate(href_list["prevpage"])
@@ -80,5 +80,5 @@
 			current_news_page--
 			playsound(src.loc, "pageturn", 50, 1)
 			updateDialog()
-
+			attack_self(loc)
 
