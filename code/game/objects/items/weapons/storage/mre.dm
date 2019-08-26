@@ -189,6 +189,7 @@ MRE Stuff
 	meal_desc = "The menu label is faded out."
 	starts_with = list(
 	/obj/random/mre/main,
+	/obj/item/weapon/storage/mrebag/side,
 	/obj/item/weapon/storage/mrebag/dessert,
 	/obj/item/weapon/storage/fancy/crackers,
 	/obj/random/mre/spread,
