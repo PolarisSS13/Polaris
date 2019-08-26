@@ -677,7 +677,7 @@
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy)
 
 /obj/random/mre/sauce/crayon/item_to_spawn()
-	return pick(/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon,
+	return pick(/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/generic,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/red,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/orange,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/yellow,
