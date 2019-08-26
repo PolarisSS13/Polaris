@@ -240,12 +240,12 @@
 		var/multiplier = text2num(href_list["multiplier"])
 		var/datum/category_item/autolathe/making = locate(href_list["make"]) in current_category.items
 
-		//Exploit detection, not sure if necessary after rewrite.
-		if(!making || multiplier < 0 || multiplier > 100)
-			var/turf/exploit_loc = get_turf(usr)
-			message_admins("[key_name_admin(usr)] tried to exploit an autolathe to duplicate an item! ([exploit_loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[exploit_loc.x];Y=[exploit_loc.y];Z=[exploit_loc.z]'>JMP</a>" : "null"])", 0)
-			log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe to duplicate an item!")
+
+		if(!making)
 			return
+		if(!making.is_stack && multiplier != 1)
+			return
+		sanitize_integer(multiplier, 1, 100, 1)
 
 		busy = 1
 		update_use_power(2)

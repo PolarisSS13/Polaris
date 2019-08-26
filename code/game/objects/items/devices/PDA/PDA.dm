@@ -1201,21 +1201,21 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
-/obj/item/device/pda/verb/verb_remove_id()
+/obj/item/device/pda/verb/verb_remove_id(mob/user)
 	set category = "Object"
 	set name = "Remove id"
 	set src in usr
 
-	if(issilicon(usr))
+	if(issilicon(user))
 		return
 
 	if ( can_use(usr) )
-		if(id)
+		if(id && (src in user.contents))
 			remove_id()
 		else
-			to_chat(usr, "<span class='notice'>This PDA does not have an ID in it.</span>")
+			to_chat(user, "<span class='notice'>This PDA does not have an ID in it.</span>")
 	else
-		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
+		to_chat(user, "<span class='notice'>You cannot do this while restrained.</span>")
 
 
 /obj/item/device/pda/verb/verb_remove_pen()

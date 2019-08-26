@@ -53,16 +53,16 @@
 				if(SSelections.political_candidates)
 					for(var/datum/president_candidate/P in SSelections.political_candidates)
 						dat += "<b>[P.name]</b> - <i>[P.slogan]</i><p>"
-						dat += "<br>I will:</b> \"[P.pitch]\"<br>"
+						dat += "<br>I will:</b> \"[P.pitch]\"<br><hr>"
 				else
 					dat += "<b>No political candidates registered.</b>"
 
-			else if(!SSelections.snap_election && SSelections.is_voting_days(get_game_day()))
+			else if(SSelections.is_voting_days(get_game_day()))
 				dat += "<h3>List of Candidates for [get_month_from_num(get_game_month())] [get_game_year()]:</h3><hr>"
 
 				for(var/datum/president_candidate/P in SSelections.political_candidates)
 					dat += "<h4>[P.name]</h4> - <i>[P.slogan]</i><p>"
-					dat += "<b>I will:</b> \"[P.pitch]\"<br>"
+					dat += "<b>I will:</b> \"[P.pitch]\"<br><hr>"
 					if(!has_voted)
 						dat += "<br><a href='?src=\ref[src];vote=1;candidate=\ref[P]'>Vote for [P.name]</a><hr>"
 
@@ -157,6 +157,8 @@
 			prez.no_confidence_votes += usr.client.ckey
 			SSelections.CheckNoConfidence()
 
+			updateDialog()
+
 	if(href_list["vote"])
 
 		if(!Adjacent(usr)) return
@@ -181,6 +183,6 @@
 			candidate.ckeys_voted += usr.client.ckey
 			SSelections.total_votes++
 
-	updateDialog()
+			updateDialog()
 
 

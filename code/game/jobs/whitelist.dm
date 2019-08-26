@@ -103,7 +103,7 @@ var/list/whitelist = list()
 		return 1
 
 	if(jobs.title == "President") // Only the player who is president and their allotted character can be president
-		if(!SSelections.current_president.ckey || !!SSelections.current_president.name) //Just in case.
+		if(!SSelections.current_president.ckey || !SSelections.current_president.name) //Just in case.
 			return 0
 
 		if(M.ckey == SSelections.current_president.ckey && M.client.prefs.real_name == SSelections.current_president.name)

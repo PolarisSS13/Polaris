@@ -5,7 +5,7 @@
 	block=MONKEYBLOCK
 
 /datum/dna/gene/monkey/can_activate(var/mob/M,var/flags)
-	return istype(M, /mob/living/carbon/human) || istype(M,/mob/living/carbon/monkey)
+	return istype(M, /mob/living/carbon/human) || istype(M,/mob/living/carbon/human/monkey)
 
 /datum/dna/gene/monkey/activate(var/mob/living/M, var/connected, var/flags)
 	if(!istype(M,/mob/living/carbon/human))
@@ -79,7 +79,7 @@
 	return
 
 /datum/dna/gene/monkey/deactivate(var/mob/living/M, var/connected, var/flags)
-	if(!istype(M,/mob/living/carbon/monkey))
+	if(!istype(M,/mob/living/carbon/human/monkey))
 		//testing("Cannot humanize [M], type is [M.type].")
 		return
 	var/mob/living/carbon/monkey/Mo = M

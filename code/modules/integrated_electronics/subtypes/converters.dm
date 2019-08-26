@@ -156,13 +156,33 @@
 	outputs = list("result" = IC_PINTYPE_STRING)
 	activators = list("concatenate" = IC_PINTYPE_PULSE_IN, "on concatenated" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	var/max_string_length = 512
 
 /obj/item/integrated_circuit/converter/concatenator/do_work()
 	var/result = null
+	var/spamprotection
 	for(var/datum/integrated_io/I in inputs)
 		I.pull_data()
 		if(!isnull(I.data))
+
+			if((result ? length(result) : 0) + length(I) > max_string_length)
+				spamprotection = (result ? length(result) : 0) + length(I)
+				break
 			result = result + I.data
+
+		if(spamprotection >= max_string_length*1.75 && assembly)
+			if(assembly.fingerprintslast)
+				var/mob/M = get_mob_by_key(assembly.fingerprintslast)
+				var/more = ""
+				if(M)
+					more = "[ADMIN_LOOKUPFLW(M)] "
+				message_admins("A concatenator circuit has greatly exceeded its [max_string_length] character limit with a total of [spamprotection] characters, and has been deleted. Assembly last touched by [more ? more : assembly.fingerprintslast].")
+				investigate_log("A concatenator circuit has greatly exceeded its [max_string_length] character limit with a total of [spamprotection] characters, and has been deleted. Assembly last touched by [assembly.fingerprintslast].")
+			else
+				message_admins("A concatenator circuit has greatly exceeded its [max_string_length] character limit with a total of [spamprotection] characters, and has been deleted. No associated key.")
+				investigate_log("A concatenator circuit has greatly exceeded its [max_string_length] character limit with a total of [spamprotection] characters, and has been deleted. No associated key.")
+			qdel(assembly)
+			return
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()

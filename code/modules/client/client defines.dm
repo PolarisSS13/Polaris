@@ -23,6 +23,7 @@
 	var/area			= null
 	var/time_died_as_mouse = null //when the client last died as a mouse
 	var/datum/tooltip/tooltips 	= null
+	var/seen_news = 0
 
 	var/adminhelped = 0
 
