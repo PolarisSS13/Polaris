@@ -163,9 +163,9 @@
 	containername = "ready to eat rations"
 
 /datum/supply_pack/supply_pack/galley/rations
-	name = "Emergency - MREs"
+	name = "Emergency - Paste"
 	contains = list(
-			/obj/item/weapon/storage/mre/menu11 = 1
+			/obj/item/weapon/storage/mre/menu11 = 2
 			)
 	cost = 25
 	containertype = /obj/structure/closet/crate/freezer
