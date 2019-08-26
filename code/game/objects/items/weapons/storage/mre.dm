@@ -257,7 +257,7 @@ MRE Stuff
 	name = "side dish"
 	desc = "A vacuum-sealed bag containing the MRE's side dish. Self-heats when opened."
 	icon_state = "pouch_small"
-	starts_with = list(/obj/random/mreside)
+	starts_with = list(/obj/random/mre/side)
 
 /obj/item/weapon/storage/mrebag/side/menu10
 	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/meatcube)

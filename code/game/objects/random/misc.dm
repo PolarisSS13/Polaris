@@ -584,8 +584,8 @@
 	icon_state = "pouch"
 	drop_get_turf = FALSE
 
-/obj/random/mre/side/spawn_choices()
-	return list(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
+/obj/random/mre/main/item_to_spawn()
+	return pick(/obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
 				/obj/item/weapon/reagent_containers/food/snacks/boiledrice,
 				/obj/item/weapon/reagent_containers/food/snacks/poppypretzel,
 				/obj/item/weapon/reagent_containers/food/snacks/twobread,
