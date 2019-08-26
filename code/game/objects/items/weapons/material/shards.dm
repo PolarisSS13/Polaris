@@ -85,12 +85,9 @@
 		will_break = FALSE
 
 	if(user.gloves && (user.gloves.body_parts_covered & HANDS))
-		var/obj/item/clothing/gloves/UG = user.gloves
-		user << "[UG]"
+		var/obj/item/clothing/gloves/UG = user.gloves.type
 		for(var/I in h_gloves)
-			user << "[I]"
-			if(istype(I, user.gloves)) //if gloves are heavy
-				user << "Heavy gloves."
+			if(UG == I)
 				gloves_are_heavy = TRUE
 				if(will_break)
 					user.visible_message("<span class='danger'>[user] hit \the [target] with \the [src], shattering it!</span>", "<span class='warning'>You shatter \the [src] in your hand!</span>")
@@ -98,7 +95,6 @@
 					qdel(src)
 
 		if(gloves_are_heavy == FALSE)
-			user << "Light gloves."
 			to_chat(user, "<span class='warning'>\The [src] partially cuts into your hand through your gloves as you hit \the [target]!</span>")
 			if(will_break)
 				user.visible_message("<span class='danger'>[user] hit \the [target] with \the [src], shattering it!</span>", "<span class='warning'>You shatter \the [src] in your hand!</span>")
@@ -108,7 +104,6 @@
 			else
 				user.apply_damage(light_glove_d, BRUTE, active_hand, 0 ,0, src, src.sharp, src.edge)
 	else
-		user << "No gloves."
 		to_chat(user, "<span class='warning'>\The [src] cuts into your hand as you hit \the [target]!</span>")
 		if(will_break)
 			user.visible_message("<span class='danger'>[user] hit \the [target] with \the [src], shattering it!</span>", "<span class='warning'>You shatter \the [src] in your hand!</span>")
