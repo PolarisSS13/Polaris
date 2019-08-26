@@ -144,3 +144,29 @@
 	cost = 25
 	containertype = /obj/structure/closet/crate
 	containername = "Glucose Hypo Crate"
+
+/datum/supply_pack/supply_pack/galley/rations
+	num_contained = 6
+	name = "Emergency - MREs"
+	contains = list(/obj/item/weapon/storage/mre,
+					/obj/item/weapon/storage/mre/menu2,
+					/obj/item/weapon/storage/mre/menu3,
+					/obj/item/weapon/storage/mre/menu4,
+					/obj/item/weapon/storage/mre/menu5,
+					/obj/item/weapon/storage/mre/menu6,
+					/obj/item/weapon/storage/mre/menu7,
+					/obj/item/weapon/storage/mre/menu8,
+					/obj/item/weapon/storage/mre/menu9,
+					/obj/item/weapon/storage/mre/menu10)
+	cost = 50
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "ready to eat rations"
+
+/datum/supply_pack/supply_pack/galley/rations
+	name = "Emergency - MREs"
+	contains = list(
+			/obj/item/weapon/storage/mre/menu11 = 1
+			)
+	cost = 25
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "emergency rations"
