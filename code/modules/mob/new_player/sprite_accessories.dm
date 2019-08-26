@@ -438,6 +438,10 @@
 		hair_type = HAIR_MEDIUM
 		icon_state = "hair_gentle"
 
+	gentlelong
+		name = "Gentle Long"
+		icon_state = "hair_gentle2long"
+
 	spiky
 		name = "Spiky"
 		icon_state = "hair_spikey"
@@ -768,6 +772,46 @@
 	averagejoe
 		name = "Average Joe"
 		icon_state = "hair_averagejoe"
+
+	amazon
+		name = "Amazon"
+		icon_state = "hair_amazon"
+
+	straightlong
+		name = "Straight Long"
+		icon_state = "hair_straightlong"
+
+	marysue
+		name = "Mary Sue"
+		icon_state = "hair_marysue"
+
+	sideundercut
+		name = "Side Undercut"
+		icon_state = "hair_sideundercut"
+
+	donutbun
+		name = "Donut Bun"
+		icon_state = "hair_donutbun"
+
+	sweepshave
+		name = "Sweep Shave"
+		icon_state = "hair_sweepshave"
+
+	beachwave
+		name = "Beach Waves"
+		icon_state = "hair_beachwave"
+
+	celebcurls
+		name = "Celeb Curls"
+		icon_state = "hair_celebcurls"
+
+	jessica
+		name = "Jessica"
+		icon_state = "hair_jessica"
+
+	proper
+		name = "Proper"
+		icon_state = "hair_proper"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
