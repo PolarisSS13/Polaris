@@ -162,7 +162,7 @@ MRE Stuff
 
 /obj/item/weapon/storage/mre/menu11
 	name = "emergency MRE"
-	meal_desc = "Contains nutriment and protein paste. Only for emergencies."
+	meal_desc = "This one is menu 11, nutriment paste. Only for emergencies."
 	icon_state = "crayonmre"
 	starts_with = list(
 	/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
