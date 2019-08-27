@@ -403,6 +403,7 @@ var/global/datum/controller/gameticker/ticker
 
 	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
 		world << "<H2>This round was not canon. It was all a dream.</H2>"
+		roll_titles()
 	else
 		world << "<H2>This round was canon.</H2>"
 
@@ -411,12 +412,15 @@ var/global/datum/controller/gameticker/ticker
 
 		//save politics related data
 		SSelections.save_data.save_candidates()
+		
+		//save news
+		news_data.save_main_news()
 
 		//saves all characters
 		for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
 			H.save_mob_to_prefs()
 
-	roll_titles()
+
 	for(var/mob/Player in player_list)
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
