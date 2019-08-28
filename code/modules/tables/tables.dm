@@ -33,10 +33,6 @@
 
 	var/item_place = 1 //allows items to be placed on the table, but not on benches.
 
-/obj/structure/table/MouseDrop(atom/over)
-	if(usr.stat || !Adjacent(usr) || (over != usr))
-		return
-	interact(usr)
 
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
@@ -104,21 +100,7 @@
 			if(0.5 to 1.0)
 				user << "<span class='notice'>It has a few scrapes and dents.</span>"
 
-/obj/structure/table/MouseDrop(atom/over)
-	if(usr.stat || !Adjacent(usr) || (over != usr))
-		return
-	interact(usr)
 
-/obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-	if ((!( istype(O, /obj/item/weapon) ) ||  user.get_active_hand() != O))
-		return ..()
-	if(isrobot(usr))
-		return
-	if(!user.drop_item())
-		return
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
-	return
 
 //Object placement on tables
 /obj/structure/table/Click(location, control,params)
@@ -285,6 +267,17 @@
 		reinforce_table(what, usr)
 	else
 		return ..()
+
+/obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
+	if ((!( istype(O, /obj/item/weapon) ) ||  user.get_active_hand() != O))
+		return ..()
+	if(isrobot(usr))
+		return
+	if(!user.drop_item())
+		return
+	if (O.loc != src.loc)
+		step(O, get_dir(O, src))
+	return
 
 /obj/structure/table/proc/reinforce_table(obj/item/stack/material/S, mob/user)
 	if(reinforced)
