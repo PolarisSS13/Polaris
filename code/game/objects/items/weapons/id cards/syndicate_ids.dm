@@ -12,7 +12,7 @@
 
 /obj/item/weapon/card/id/syndicate/station_access/Initialize()
 	. = ..() // Same as the normal Syndicate id, only already has all station access
-	access |= get_all_station_access()
+	access |= get_all_station_access().Copy()
 
 /obj/item/weapon/card/id/syndicate/Destroy()
 	unset_registered_user(registered_user)
