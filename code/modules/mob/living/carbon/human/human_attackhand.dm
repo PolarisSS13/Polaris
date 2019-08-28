@@ -1,4 +1,12 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
+	if(src.gloves)
+		var/obj/item/clothing/gloves/G = src.gloves
+		if(G.special_attack && G.special_attack.is_usable(src, target, hit_zone))
+			if(pulling_punches)
+				var/datum/unarmed_attack/soft_type = G.special_attack.get_sparring_variant()
+				if(soft_type)
+					return soft_type
+			return G.special_attack
 	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
 		if(u_attack.is_usable(src, target, hit_zone))
 			if(pulling_punches)
@@ -37,34 +45,6 @@
 		if(H != src && check_shields(0, null, H, H.zone_sel.selecting, H.name))
 			H.do_attack_animation(src)
 			return 0
-
-		if(istype(H.gloves, /obj/item/clothing/gloves/boxing/hologlove))
-			H.do_attack_animation(src)
-			var/damage = rand(0, 9)
-			if(!damage)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message("<font color='red'><B>[H] has attempted to punch [src]!</B></font>")
-				return 0
-			var/obj/item/organ/external/affecting = get_organ(ran_zone(H.zone_sel.selecting))
-			var/armor_block = run_armor_check(affecting, "melee")
-			var/armor_soak = get_armor_soak(affecting, "melee")
-
-			if(HULK in H.mutations)
-				damage += 5
-
-			playsound(loc, "punch", 25, 1, -1)
-
-			visible_message("<font color='red'><B>[H] has punched [src]!</B></font>")
-
-			if(armor_soak >= damage)
-				return
-
-			apply_damage(damage, HALLOSS, affecting, armor_block, armor_soak)
-			if(damage >= 9)
-				visible_message("<font color='red'><B>[H] has weakened [src]!</B></font>")
-				apply_effect(4, WEAKEN, armor_block)
-
-			return
 
 	if(istype(M,/mob/living/carbon))
 		var/mob/living/carbon/C = M
@@ -231,6 +211,9 @@
 			if(!attack)
 				return 0
 
+			if(attack.unarmed_override(H, src, hit_zone))
+				return 0
+
 			H.do_attack_animation(src)
 			if(!attack_message)
 				attack.show_attack(H, src, hit_zone, rand_damage)
@@ -252,7 +235,7 @@
 					var/obj/item/clothing/gloves/G = H.gloves
 					real_damage += G.punch_force
 					hit_dam_type = G.punch_damtype
-					if(H.pulling_punches)	//SO IT IS DECREED: PULLING PUNCHES WILL PREVENT THE ACTUAL DAMAGE FROM RINGS AND KNUCKLES, BUT NOT THE ADDED PAIN
+					if(H.pulling_punches && !attack.sharp && !attack.edge)	//SO IT IS DECREED: PULLING PUNCHES WILL PREVENT THE ACTUAL DAMAGE FROM RINGS AND KNUCKLES, BUT NOT THE ADDED PAIN, BUT YOU CAN'T "PULL" A FUCKING KNIFE
 						hit_dam_type = AGONY
 			real_damage *= damage_multiplier
 			rand_damage *= damage_multiplier

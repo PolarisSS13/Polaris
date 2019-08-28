@@ -105,6 +105,9 @@ var/global/list/sparring_attack_cache = list()
 		return
 	user.visible_message("<span class='danger'>[user] attempts to press [TU.his] [eye_attack_text] into [target]'s eyes, but [TT.he] [TT.does]n't have any!</span>")
 
+/datum/unarmed_attack/proc/unarmed_override(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/zone)
+	return 0 //return true if the unarmed override prevents further attacks
+
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'
