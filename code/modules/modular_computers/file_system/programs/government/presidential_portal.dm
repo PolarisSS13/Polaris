@@ -27,7 +27,7 @@
 
 /datum/nano_module/program/presidential_portal/proc/tax_range(num)
 	switch(num)
-		if(0 to 80)
+		if(1 to 80)
 			return TRUE
 
 	return FALSE
@@ -115,40 +115,55 @@
 
 	if(href_list["adjust_wc_taxes"])
 		. = 1
-		working_tax = tax_rate_lower / 100
+		working_tax = tax_rate_lower * 100
 
 
-		working_tax = sanitize(input(usr, "Please input the new tax rate for working class citizens. (Min 0% - Max 80%)", "Taxes for Working Class", working_tax)  as num)
-		if(!working_tax || !tax_range(working_tax) )
-			error_msg = "This tax range is incorrect. You must enter a decimal between 0 and 0.80."
+		working_tax = input(usr, "Please input the new tax rate for working class citizens. (Min 0% - Max 80%)", "Taxes for Working Class", working_tax) as num|null
+		working_tax = sanitize_integer(working_tax, 0, 100, initial(working_tax))
+		if(!working_tax)
+			error_msg = "You must enter a tax range."
 			return
 
-		tax_rate_lower = working_tax * 100
+		if(!tax_range(working_tax))
+			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
+			return
+
+		tax_rate_lower = working_tax / 100
 
 	if(href_list["adjust_mc_taxes"])
 		. = 1
 
-		middle_tax = tax_rate_middle / 100
+		middle_tax = tax_rate_middle * 100
 
 
-		middle_tax = sanitize(input(usr, "Please input the new tax rate for middle class citizens. (Min 0% - Max 80%)", "Taxes for Middle Class", middle_tax)  as num)
-		if(!middle_tax || !tax_range(middle_tax) )
-			error_msg = "This tax range is incorrect. You must enter a decimal between 0 and 0.80."
+		middle_tax = input(usr, "Please input the new tax rate for middle class citizens. (Min 0% - Max 80%)", "Taxes for Middle Class", middle_tax) as num|null
+		middle_tax = sanitize_integer(middle_tax, 0, 100, initial(middle_tax))
+		if(!middle_tax)
+			error_msg = "You must enter a tax range."
 			return
 
-		tax_rate_middle = middle_tax * 100
+		if(!tax_range(middle_tax))
+			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
+			return
+
+		tax_rate_middle = middle_tax / 100
 
 
 	if(href_list["adjust_uc_taxes"])
 		. = 1
-		upper_tax = tax_rate_upper / 100
+		upper_tax = tax_rate_upper * 100
 
-		upper_tax = sanitize(input(usr, "Please input the new tax rate for upper class citizens. (Min 0% - Max 80%)", "Taxes for Upper Class", upper_tax)  as num)
-		if(!upper_tax || !tax_range(upper_tax) )
-			error_msg = "This tax range is incorrect. You must enter a decimal between 0 and 0.80."
+		upper_tax = input(usr, "Please input the new tax rate for upper class citizens. (Min 0% - Max 80%)", "Taxes for Upper Class", upper_tax) as num|null
+		upper_tax = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		if(!upper_tax)
+			error_msg = "You must enter a tax range."
 			return
 
-		tax_rate_upper = upper_tax * 100
+		if(!tax_range(upper_tax))
+			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
+			return
+
+		tax_rate_upper = upper_tax / 100
 
 
 
