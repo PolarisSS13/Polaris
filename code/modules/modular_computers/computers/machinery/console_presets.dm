@@ -77,12 +77,14 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/card_mod())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/candidate_registration())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 // ===== SECURITY CONSOLE =====
 /obj/machinery/modular_computer/console/preset/security
@@ -92,10 +94,12 @@
 /obj/machinery/modular_computer/console/preset/security/install_programs()
 	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 // ===== CIVILIAN CONSOLE =====
 /obj/machinery/modular_computer/console/preset/civilian
@@ -110,3 +114,22 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/library())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/candidate_registration())
+
+// ===== GOVERNMENT CONSOLE =====
+/obj/machinery/modular_computer/console/preset/government
+	 console_department = "Government"
+	 desc = "A stationary computer. This one comes preloaded with government programs."
+
+/obj/machinery/modular_computer/console/preset/government/install_programs()
+	cpu.hard_drive.store_file(new/datum/computer_file/program/comm())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/chatclient())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nttransfer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/wordprocessor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/library())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/candidate_registration())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/presidential_portal())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/ntnetmonitor())
+	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())

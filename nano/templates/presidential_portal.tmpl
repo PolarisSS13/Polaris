@@ -1,0 +1,64 @@
+<h1>Presidential Portal</h1><hr>
+
+{{:data.page_msg}}<hr>
+
+<br>
+
+{{if data.index == 0}}
+{{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
+
+{{if data.index == -1}}
+{{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
+
+{{if data.index == 1}}
+
+<div class="itemLabel"><b>Government:</div> <br>
+{{:helper.link("Manage Council", null, {'notyet' : 1})}}
+{{:helper.link("Resign as President", null, {'notyet' : 1})}}
+{{:helper.link("Assign Vice President", null, {'notyet' : 1})}}
+<p><p><br>
+
+<div class="itemLabel"><b>Law and Order:</div> <br>
+{{:helper.link("Make New Bill", null, {'notyet' : 1})}}
+{{:helper.link("Edit Colony Laws", null, {'notyet' : 1})}}
+{{:helper.link("Set Contraband", null, {'notyet' : 1})}}
+<p><p><br>
+
+<div class="itemLabel"><b>Economy:</div> <br>
+{{:helper.link("View Economy Information", null, {'notyet' : 1})}}
+{{:helper.link("Modify Public Jobs", null, {'notyet' : 1})}}
+{{:helper.link("Adjust Tax Rates", null, {'taxes' : 1})}}
+<p><p><br>
+
+<div class="itemLabel">Communications:</div> <br>
+{{:helper.link("Public News Announcement", null, {'notyet' : 1})}}
+{{:helper.link("Public Emails", null, {'notyet' : 1})}}
+{{:helper.link("Fax NanoTrasen", null, {'notyet' : 1})}}
+{{:helper.link("Fax SolGov", null, {'notyet' : 1})}}
+{{:helper.link("Fax City Council", null, {'notyet' : 1})}}
+<p><p><br>
+
+{{/if}}
+
+{{if data.index == 2}}
+
+{{:data.error_msg}}<p>
+
+	<div class="itemLabel">
+		Working Class Tax:
+	</div> {{:data.working_tax}}%  <br> {{:helper.link("Adjust Working Tax", null, {'adjust_wc_taxes' : 1})}}
+
+<br><br>
+	<div class="itemLabel">
+		Middle Class Tax:
+	</div> {{:data.middle_tax}}% <br> {{:helper.link("Adjust Middle Tax", null, {'adjust_mc_taxes' : 1})}}
+
+<br><br>
+	<div class="itemLabel">
+		Upper Class Tax:
+	</div> {{:data.upper_tax}}% <br> {{:helper.link("Adjust Upper Tax", null, {'adjust_uc_taxes' : 1})}}
+<br><br>
+{{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
