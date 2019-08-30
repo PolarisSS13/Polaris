@@ -137,7 +137,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	if(!damage)
 		playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 		target.visible_message("<font color='red'><B>[user] has attempted to punch [target]!</B></font>")
-		return 1
+		return TRUE
 	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(user.zone_sel.selecting))
 	var/armor_block = target.run_armor_check(affecting, "melee")
 	var/armor_soak = target.get_armor_soak(affecting, "melee")
@@ -150,14 +150,14 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	target.visible_message("<font color='red'><B>[user] has punched [target]!</B></font>")
 
 	if(armor_soak >= damage)
-		return
+		return TRUE
 
 	target.apply_damage(damage, HALLOSS, affecting, armor_block, armor_soak)
 	if(damage >= 9)
 		target.visible_message("<font color='red'><B>[user] has weakened [target]!</B></font>")
 		target.apply_effect(4, WEAKEN, armor_block)
 
-	return 1
+	return TRUE
 
 /obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W))
@@ -289,8 +289,8 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /obj/item/weapon/holo/esword/New()
 	item_color = pick("red","blue","green","purple")
