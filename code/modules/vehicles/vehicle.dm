@@ -413,7 +413,12 @@
 	load.layer = initial(load.layer)
 
 	if(ismob(load))
-		unbuckle_mob(load)
+	//AEIOU-Station Edit: Show unbuckle message if unbuckled by a mob (including self).
+		if(user)
+			user_unbuckle_mob(load, user)
+		else
+			unbuckle_mob(load)
+	//AEIOU-Station Edit End
 
 	load = null
 
