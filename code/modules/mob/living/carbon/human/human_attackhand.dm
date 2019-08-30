@@ -1,7 +1,7 @@
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
 	if(src.gloves)
 		var/obj/item/clothing/gloves/G = src.gloves
-		if(G.special_attack && G.special_attack.is_usable(src, target, hit_zone))
+		if(istype(G) && G.special_attack && G.special_attack.is_usable(src, target, hit_zone))
 			if(pulling_punches)
 				var/datum/unarmed_attack/soft_type = G.special_attack.get_sparring_variant()
 				if(soft_type)
