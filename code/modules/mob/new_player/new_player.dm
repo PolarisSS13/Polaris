@@ -417,97 +417,6 @@
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
 
-/mob/new_player/proc/LateChoices()
-	var/name = client.prefs.real_name
-	var/dat = "<b>Welcome, [name].<br></b>"
-	 dat += "<div class='notice'>Round Duration: [roundduration2text()]</div>"
-
-	if(emergency_shuttle) //In case NanoTrasen decides reposess CentCom's shuttles.
-		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to CentCom, not recalled
-			dat += "<font color='red'><b>The city has been evacuated.</b></font><br>"
-		if(emergency_shuttle.online())
-			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
-				dat += "<font color='red'>The city is currently undergoing evacuation procedures.</font><br>"
-			else						// Crew transfer initiated
-				dat += "<font color='red'>The city is currently undergoing civilian transfer procedures.</font><br>"
-
-	if(length(job_master.prioritized_jobs))
-		dat += "<div class='notice red'>The city council has flagged these jobs as high priority:<br>"
-		for(var/datum/job/a in job_master.prioritized_jobs)
-			dat += " [a.title], "
-			dat += "</div>"
-
-	for(var/datum/job/job in job_master.occupations)
-		if(job && IsJobAvailable(job.title))
-			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
-
-				dat += "<div class='clearBoth'>Choose from the following open positions:</div><br>"
-				var/list/categorizedJobs = list(
-					"Council" = list(jobs = list(), titles = command_positions, color = "#aac1ee"),
-					"Emergency" = list(jobs = list(), titles = engineering_positions, color = "#ffd699"),
-					"Supply" = list(jobs = list(), titles = cargo_positions, color = "#ead4ae"),
-					"Miscellaneous" = list(jobs = list(), titles = list(), color = "#ffffff", colBreak = TRUE),
-					"Synthetic" = list(jobs = list(), titles = nonhuman_positions, color = "#ccffcc"),
-					"Service" = list(jobs = list(), titles = civilian_positions, color = "#cccccc"),
-					"Hospital" = list(jobs = list(), titles = medical_positions, color = "#99ffe6", colBreak = TRUE),
-					"Science" = list(jobs = list(), titles = science_positions, color = "#e6b3e6"),
-					"Police" = list(jobs = list(), titles = security_positions, color = "#ff9999"),
-					"Government" = list(jobs = list(), titles = gov_positions, color = "#fff000"),
-				)
-
-				if(job && !IsJobAvailable(job.title))
-					var/categorized = FALSE
-					for(var/jobcat in categorizedJobs)
-						var/list/jobs = categorizedJobs[jobcat]["jobs"]
-						if(job.title in categorizedJobs[jobcat]["titles"])
-							categorized = TRUE
-							if(jobcat == "Council")
-
-								if(job.title == "Mayor") // Put captain at top of command jobs
-									jobs.Insert(1, job)
-								else
-									jobs += job
-							else // Put heads at top of non-command jobs
-								if(job.title in command_positions)
-									jobs.Insert(1, job)
-								else
-									jobs += job
-					if(!categorized)
-						categorizedJobs["Miscellaneous"]["jobs"] += job
-
-				dat += "<table><tr><td valign='top'>"
-				for(var/jobcat in categorizedJobs)
-					if(categorizedJobs[jobcat]["colBreak"])
-						dat += "</td><td valign='top'>"
-					if(length(categorizedJobs[jobcat]["jobs"]) < 1)
-						continue
-					var/color = categorizedJobs[jobcat]["color"]
-					dat += "<fieldset style='border: 2px solid [color]; display: inline'>"
-					dat += "<legend align='center' style='color: [color]'>[jobcat]</legend>"
-					for(job in categorizedJobs[jobcat]["jobs"])
-						var/position_class = "otherPosition"
-						if(job.title in command_positions)
-							position_class = "commandPosition"
-						if(job in job_master.prioritized_jobs)
-							dat += "<a class='[position_class]' style='display:block;width:170px' href='byond://?src=[REF(src)];SelectedJob=[job.title]'><font color='lime'><b>[job.title] ([job.current_positions])</b></font></a>"
-						else
-							dat += "<a class='[position_class]' style='display:block;width:170px' href='byond://?src=[REF(src)];SelectedJob=[job.title]'>[job.title] ([job.current_positions])</a>"
-					dat += "</fieldset><br>"
-
-
-	dat += "</td></tr></table></center>"
-	dat += "</div></div>"
-
-
-	// Removing the old window method but leaving it here for reference
-	//src << browse(dat, "window=latechoices;size=300x640;can_close=1")
-
-	// Added the new browser window method
-	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 680, 580)
-	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
-	popup.set_content(dat)
-	popup.open(FALSE) // 0 is passed to open so that it doesn't use the onclose() proc
-
 
 /mob/new_player/proc/create_character(var/turf/T)
 	spawning = 1
@@ -629,3 +538,45 @@
 
 /mob/new_player/MayRespawn()
 	return 1
+
+/proc/get_job_unavailable_error_message(retval, jobtitle)
+	switch(retval)
+		if(JOB_AVAILABLE)
+			return "[jobtitle] is available."
+		if(JOB_UNAVAILABLE_GENERIC)
+			return "[jobtitle] is unavailable."
+		if(JOB_UNAVAILABLE_BANNED)
+			return "You are currently banned from [jobtitle]."
+		if(JOB_UNAVAILABLE_PLAYTIME)
+			return "You do not have enough relevant playtime for [jobtitle]."
+		if(JOB_UNAVAILABLE_ACCOUNTAGE)
+			return "Your account is not old enough for [jobtitle]."
+		if(JOB_UNAVAILABLE_SLOTFULL)
+			return "[jobtitle] is already filled to capacity."
+	return "Error: Unknown job availability."
+
+
+/mob/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
+	var/datum/job/job = job_master.GetJob(rank)
+	if(!job)
+		return JOB_UNAVAILABLE_GENERIC
+	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
+		if(job.title == "Civilian")
+			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
+				return JOB_AVAILABLE
+			for(var/datum/job/J in job_master.occupations)
+				if(J && J.current_positions < J.total_positions && J.title != job.title)
+					return JOB_UNAVAILABLE_SLOTFULL
+		else
+			return JOB_UNAVAILABLE_SLOTFULL
+	if(jobban_isbanned(src, rank))
+		return JOB_UNAVAILABLE_BANNED
+	if(QDELETED(src))
+		return JOB_UNAVAILABLE_GENERIC
+	if(!job.player_old_enough(client))
+		return JOB_UNAVAILABLE_ACCOUNTAGE
+//	if(job.required_playtime_remaining(client))
+//		return JOB_UNAVAILABLE_PLAYTIME
+//	if(latejoin && !job.special_check_latejoin(client))
+//		return JOB_UNAVAILABLE_GENERIC
+	return JOB_AVAILABLE
