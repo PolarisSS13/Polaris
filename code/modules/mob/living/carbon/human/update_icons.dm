@@ -56,6 +56,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		cut_overlay(I)
 		overlays_standing[cache_index] = null
 
+
 // These are used as the layers for the icons, as well as indexes in a list that holds onto them.
 // Technically the layers used are all -100+layer to make them FLOAT_LAYER overlays.
 //Human Overlays Indexes/////////
@@ -144,16 +145,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)
+		M.Translate(desired_width, 16*(desired_scale-1))
 		M.Scale(desired_width, desired_scale)
-		M.Translate(1,-6)
 		layer = MOB_LAYER -0.01 // Fix for a byond bug where turf entry order no longer matters
 	else
+		M.Translate(desired_width, 16*(desired_scale-1))
 		M.Scale(desired_width, desired_scale)
-		M.Translate(0, 16*(desired_scale-1))
 		layer = MOB_LAYER // Fix for a byond bug where turf entry order no longer matters
 
 	animate(src, transform = M, time = anim_time)
 	update_icon_special() //May contain transform-altering things
+
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
@@ -337,6 +339,8 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 	icon = stand_icon
+
+
 
 	//tail
 	update_tail_showing()

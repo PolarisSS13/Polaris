@@ -90,3 +90,6 @@
 
 /turf/simulated/floor/can_engrave()
 	return (!flooring || flooring.can_engrave)
+
+/turf/simulated/floor/is_floor()
+	return TRUE
