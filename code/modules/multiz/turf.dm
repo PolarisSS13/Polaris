@@ -148,3 +148,6 @@
 /turf/simulated/open/is_space()
 	var/turf/below = GetBelow(src)
 	return !below || below.is_space()
+
+/turf/simulated/open/is_open()
+	return TRUE
