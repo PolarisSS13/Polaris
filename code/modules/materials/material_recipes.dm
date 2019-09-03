@@ -72,6 +72,8 @@
 		new/datum/stack_recipe("modular console frame", /obj/machinery/modular_computer/console/buildable, 20), \
 		new/datum/stack_recipe("modular laptop frame", /obj/machinery/modular_computer/laptop/buildable, 10), \
 		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5)
+	recipes += new/datum/stack_recipe("desk bell", /obj/item/weapon/deskbell, 1, on_floor = 1, supplied_material = "[name]")
+
 
 		))
 	recipes += new/datum/stack_recipe("IV drip", /obj/machinery/iv_drip, 4, time = 20, one_per_turf = 1, on_floor = 1)
