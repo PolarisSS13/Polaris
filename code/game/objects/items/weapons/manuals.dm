@@ -821,8 +821,8 @@
 	author = "NanoTrasen"
 	title = "Pollux Law"
 
-/obj/item/weapon/book/manual/security_space_law/attack_self()
-	view_laws(usr)
+/obj/item/weapon/book/manual/security_space_law/attack_self(mob/user)
+	user.client.view_laws()
 
 /obj/item/weapon/book/manual/sop
 	name = "Policing: Standard Operating Procedure"
