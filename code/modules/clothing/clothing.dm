@@ -547,8 +547,13 @@
 	update_icon()
 
 /obj/item/clothing/shoes/update_icon()
+	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
+	if(blood_DNA)
+		add_blood()
 	if(holding)
 		overlays += image(icon, "[icon_state]_knife")
+	if(contaminated)
+		overlays += contamination_overlay
 	if(ismob(usr))
 		var/mob/M = usr
 		M.update_inv_shoes()
