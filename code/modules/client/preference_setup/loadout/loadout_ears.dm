@@ -11,7 +11,7 @@
 
 
 /datum/gear/ears/earrings
-	display_name = "Earring selection"
+	display_name = "earring selection"
 	description = "A selection of eye-catching earrings."
 	path = /obj/item/clothing/ears/earring
 
