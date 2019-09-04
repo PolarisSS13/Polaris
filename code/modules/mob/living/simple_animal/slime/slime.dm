@@ -11,7 +11,7 @@
 	pass_flags = PASSTABLE
 
 	speak_emote = list("chirps")
-
+	destroy_surroundings = 0
 	maxHealth = 150
 	var/maxHealth_adult = 200
 	melee_damage_lower = 5
@@ -465,12 +465,3 @@
 	lines.Add(description_info)
 	return lines.Join("\n")
 
-
-/mob/living/simple_animal/slime/DestroySurroundings(var/direction)
-	if(!rabid)		// Slimes should only destroy windows when they've been abused.
-	
-		spawn(15)	// wait a wee bit, if they can still get to their food or not.
-		LoseTarget()
-		
-		return
-	..()
