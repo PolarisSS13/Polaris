@@ -990,7 +990,7 @@ FIRE ALARM
 	for(var/obj/machinery/firealarm/FA in area)
 		fire_alarm.triggerAlarm(loc, FA, duration, hidden = alarms_hidden)
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
+	playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
 
 /obj/machinery/firealarm/proc/set_security_level(var/newlevel)
