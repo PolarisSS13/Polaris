@@ -1559,6 +1559,7 @@
 #include "code\modules\clothing\clothing.dm"
 #include "code\modules\clothing\clothing_accessories.dm"
 #include "code\modules\clothing\clothing_icons.dm"
+#include "code\modules\clothing\ears\earrings.dm"
 #include "code\modules\clothing\ears\ears.dm"
 #include "code\modules\clothing\glasses\glasses.dm"
 #include "code\modules\clothing\glasses\hud.dm"
