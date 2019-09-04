@@ -11,7 +11,7 @@
 	pass_flags = PASSTABLE
 
 	speak_emote = list("chirps")
-
+	destroy_surroundings = 0
 	maxHealth = 150
 	var/maxHealth_adult = 200
 	melee_damage_lower = 5
