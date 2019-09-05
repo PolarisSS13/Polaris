@@ -7,6 +7,8 @@ datum/expenses
   var/comments                      // comments on this particular case.
 
   var/amount_left
+  
+  var/active                        // If this is currently active, or not.
 
 
 datum/expense/police
