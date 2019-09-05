@@ -7,10 +7,7 @@
 	if(!mind)
 		return 0
 
-	if(!mind.original == src)
-		return 0
-
-	if(!real_name == mind.prefs.real_name)
+	if(!unique_id == mind.prefs.unique_id)
 		return 0
 
 	//There's no way (that I know of) to edit the "real name" of a character unless
