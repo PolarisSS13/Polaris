@@ -1,8 +1,10 @@
 datum/expenses
   var/name = "Generic Expense"
-  var/cost_per_payroll = 0   // per payroll
+  var/cost_per_payroll = 0          // per payroll
   var/department = "Civilian"
   var/purpose = "Bill"
+  
+  var/comments                      // comments on this particular case.
 
   var/amount_left
 
