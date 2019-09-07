@@ -68,18 +68,9 @@
 	src.opened = 0
 	return 1
 
-/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(opened)
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		user.drop_item()
-		if(W)
-			W.forceMove(src.loc)
-	else if(istype(W, /obj/item/weapon/packageWrap))
-		return
-	else if(istype(W, /obj/item/stack/cable_coil))
+/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob) // use the hierarchies properly instead of copy pasting code
+	..()
+	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/C = W
 		if(rigged)
 			user << "<span class='notice'>[src] is already rigged!</span>"
