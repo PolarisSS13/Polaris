@@ -6,7 +6,7 @@
 	density = 1
 	anchored = 1
 	climbable = 1
-	layer = 2.8
+	layer = TABLE_LAYER
 	throwpass = 1
 	surgery_odds = 66
 	burn_state = 0 //Burnable

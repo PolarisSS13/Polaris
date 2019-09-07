@@ -120,7 +120,7 @@
 	else
 		return ..()
 
-/obj/structure/proc/can_climb(var/mob/living/user, post_climb_check=0)
+/obj/structure/proc/can_climb(var/mob/living/user, post_climb_check=0) // this could probably include everything under the sun that would be a problem, including turf checks and other stuff. not sure why it's all spread out in different files or window checks.
 	if (!climbable || !can_touch(user) || (!post_climb_check && (user in climbers)))
 		return 0
 
@@ -136,7 +136,7 @@
 
 /obj/structure/proc/turf_is_crowded()
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T))
+	if(!T || !istype(T) || istype(T, /turf/simulated/wall))
 		return 0
 	for(var/obj/O in T.contents)
 		if(istype(O,/obj/structure))
