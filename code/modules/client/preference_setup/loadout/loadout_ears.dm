@@ -13,12 +13,13 @@
 	display_name = "earwear, circuitry (empty)"
 	path = /obj/item/clothing/ears/circuitry
 	
+
 /datum/gear/ears/earrings
 	display_name = "earring selection"
 	description = "A selection of eye-catching earrings."
 	path = /obj/item/clothing/ears/earring
 
- /datum/gear/ears/earrings/New()
+/datum/gear/ears/earrings/New()
 	..()
 	var/earrings = list()
 	earrings["stud, pearl"] = /obj/item/clothing/ears/earring/stud
