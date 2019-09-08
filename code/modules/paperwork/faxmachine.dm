@@ -81,12 +81,12 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	else if(href_list["remove"])
 		if(copyitem)
-			if(ishuman(usr))
-				copyitem.loc = usr.loc
+			if(!ishuman(usr))
+				copyitem.loc = src.loc
+				to_chat(usr, "<span class='notice'>[copyitem] ejects itself out of \the [src]!</span>")
+			else
 				usr.put_in_hands(copyitem)
 				to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-			else
-				copyitem.loc = src.loc
 			copyitem = null
 
 	if(href_list["scan"])
