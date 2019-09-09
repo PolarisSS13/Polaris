@@ -97,10 +97,16 @@
 	src.dump_contents()
 
 	src.icon_state = src.icon_opened
-	src.opened = 1
-	playsound(src.loc, open_sound, 15, 1, -3)
-	density = 0
+	openhelper()
 	return 1
+
+/obj/structure/closet/proc/openhelper() // there's probably a million better ways to do this but whatever
+	if(!opened)
+		playsound(src.loc, open_sound, 15, 1, -3)
+	else if(opened)
+		playsound(src.loc, close_sound, 15, 1, -3)
+	src.opened = !src.opened
+	src.density = !src.density
 
 /obj/structure/closet/proc/close()
 	if(!src.opened)
@@ -118,10 +124,7 @@
 		stored_units += store_mobs(stored_units)
 
 	src.icon_state = src.icon_closed
-	src.opened = 0
-
-	playsound(src.loc, close_sound, 15, 1, -3)
-	density = 1
+	openhelper()
 	return 1
 
 //Cham Projector Exception
@@ -284,7 +287,7 @@
 		return
 	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
-	if(!src.opened)
+	if(!src.opened) // I'm leaving this here, but it only fires on if(opened)
 		return
 	if(istype(O, /obj/structure/closet))
 		return
