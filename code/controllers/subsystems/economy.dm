@@ -31,6 +31,16 @@ SUBSYSTEM_DEF(economy)
 	var/calculated_tax
 	var/tax
 
+	var/unique_id = G.fields["unique_id"]
+
+	var/mob/living/carbon/human/linked_person
+
+
+
+	//let's find the relevent person.
+	for(var/mob/living/carbon/human/H in mob_list)
+		if(unique_id == H.unique_id)
+			linked_person = H
 
 	if(!bank_number)
 //		message_admins("ERROR: No bank number found for field.", 1)
@@ -50,6 +60,18 @@ SUBSYSTEM_DEF(economy)
 	if((!class)  ||  (class == "Unknown"))
 		class = CLASS_WORKING
 //		message_admins("ERROR: Could not find class. Assigned working class.", 1)
+
+	if(!unique_id) // shouldn't happen, but you know.
+		return
+
+
+	if(linked_person.client)
+		var/client/linked_client = linked_person.client
+
+		if(linked_client.inactivity > 18000) // About 30 minutes inactivity.
+			return // inactive people don't get paid, sorry.
+	else
+		return		// person's not in the round? welp.
 
 	switch(class)
 		if(CLASS_UPPER)
@@ -98,5 +120,11 @@ SUBSYSTEM_DEF(economy)
 
 	//add the account
 	bank_account.transaction_log.Add(T)
+
+
+
+	//if you owe anything, let's deduct your ownings.
+	for(var/datum/expense/E in linked_person.mind.prefs.expenses)
+		E.payroll_expense()
 
 	//Complete
