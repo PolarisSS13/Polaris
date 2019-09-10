@@ -70,11 +70,9 @@
 	contains_body = ..()
 	return contains_body
 
-/obj/structure/closet/body_bag/close()
-	if(..())
-		density = 0
-		return 1
-	return 0
+/obj/structure/closet/body_bag/openhelper()
+	..()
+	src.density = 0
 
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
 	..()
@@ -157,7 +155,7 @@
 	return ..()
 
 /obj/structure/closet/body_bag/cryobag/open()
-	. = ..()
+	..()
 	if(used && !reusable)
 		var/obj/item/O = new/obj/item(src.loc)
 		O.name = "used stasis bag"
