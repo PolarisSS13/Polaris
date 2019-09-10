@@ -79,7 +79,7 @@
 
 /datum/law/misdemeanor/littering
     name = "Littering"
-    description = "To obstruct the public’s face with trash or otherwise ecologically foreign material."
+    description = "To obstruct the public face with trash or otherwise ecologically foreign material."
     cell_time = 15
     fine = 200
 
