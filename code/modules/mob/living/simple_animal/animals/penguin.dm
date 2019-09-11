@@ -25,3 +25,9 @@
 	speak_chance = 0
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+
+/mob/living/simple_animal/penguin/Move(a, b, flag)
+	..()
+	animate(src, pixel_z = 4, time = 0)
+	animate(pixel_z = 0, transform = turn(matrix(), pick(-12, 0, 12)), time=2)
+	animate(pixel_z = 0, transform = matrix(), time = 0)
