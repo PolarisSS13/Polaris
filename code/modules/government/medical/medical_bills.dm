@@ -22,27 +22,63 @@ var/global/list/medical_bills = list()
 	var/can_edit = 1							//	Can the minister of health/president edit this?
 
 /datum/medical_bill/basic_treatment
-	name = "Basic Treatment"
-	description = "A basic treatment which usually involves items within any medical pack."
-	cost = 8
+	name = "Damage (Oxyloss, Toxin, Burns, Brute) under 50 ticks"
+	description = "A basic treatment which usually involves items within any medical pack under 50 ticks."
+	cost = 60
+	insurance_coverage = INSURANCE_BASIC
+	
+/datum/medical_bill/basic_treatment
+	name = "Damage (Oxyloss, Toxin, Burns, Brute) over 50 ticks"
+	description = "A basic treatment which usually involves items within any medical pack over 50 ticks."
+	cost = 80
+	insurance_coverage = INSURANCE_BASIC	
+
+/datum/medical_bill/basic_treatment
+	name = "NanoMed Vended Items"
+	description = "Items vended from NanoMed Plus."
+	cost = 150
+	insurance_coverage = INSURANCE_BASIC
+
+/datum/medical_bill/basic_treatment
+	name = "IV Drip"
+	description = "Use of IV drip to restore patient blood."
+	cost = 250
+	insurance_coverage = INSURANCE_BASIC
+	
+/datum/medical_bill/machinery
+	name = "Body Scan"
+	description = "Scan of patient vitals through body scanner."
+	cost = 50
+	insurance_coverage = INSURANCE_BASIC
+	
+/datum/medical_bill/machinery
+	name = "Sleeper"
+	description = "Use of sleeper."
+	cost = 300
+	insurance_coverage = INSURANCE_BASIC
+	
+/datum/medical_bill/machinery
+	name = "Cryo Cell"
+	description = "Use of cyro cell."
+	cost = 350
 	insurance_coverage = INSURANCE_BASIC
 
 /datum/medical_bill/bone_surgery
 	name = "Bone Repair Surgery"
 	description = "Surgery to mend and repair bones, per bone."
-	cost = 450
+	cost = 700
 	insurance_coverage = INSURANCE_INTERMEDIATE
 
 /datum/medical_bill/organ_repair
 	name = "Organ Repair Surgery"
 	description = "Surgery to mend injured or septic organs, per organ."
-	cost = 550
+	cost = 800
 	insurance_coverage = INSURANCE_INTERMEDIATE
 
 /datum/medical_bill/internal_bleeding
 	name = "Internal Bleeding"
 	description = "Fixing internal bleeding."
-	cost = 350
+	cost = 700
 	insurance_coverage = INSURANCE_BASIC
 
 /datum/medical_bill/organs_limbs
@@ -51,6 +87,23 @@ var/global/list/medical_bills = list()
 	cost = 2500
 	insurance_coverage = INSURANCE_HIGH
 
+/datum/medical_bill/organs_limbs
+	name = "Facial Reconstruction Surgery"
+	description = "Surgical repairment of face for cosmetic purposes."
+	cost = 2500
+	insurance_coverage = INSURANCE_HIGH
+
+/datum/medical_bill/miscellaneous
+	name = "Stasis Bag"
+	description = "Use of stasis bag to transport an individual."
+	cost = 150
+	insurance_coverage = INSURANCE_BASIC
+	
+/datum/medical_bill/miscellaneous
+	name = "Defibilirator"
+	description = "Use of defibilirator to revive."
+	cost = 150
+	insurance_coverage = INSURANCE_BASIC
 
 /datum/medical_bill/genetics_treatment
 	name = "Genetics Treatment"
