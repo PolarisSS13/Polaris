@@ -712,7 +712,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 						screen = 19
 
-						photo_data = null
 
 			updateUsrDialog()
 
@@ -845,8 +844,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
 	if(photo_data)
 		qdel(photo_data)
-		photo_data = null			photo_data = null
-		return			return
+		photo_data = null			
+		return	
 
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
 		var/obj/item/photo = user.get_active_hand()
