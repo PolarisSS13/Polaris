@@ -104,7 +104,7 @@ obj/dugpit/New(lnk)
 	if(!W || !user)
 		return 0
 
-	var/digging_speed = W.digspeed
+	var/digging_speed = (W.digspeed * 0.1)
 
 	if (digging_speed)
 		if (pit_sand < 1)
