@@ -63,13 +63,8 @@ obj/dugpit/New(lnk)
 			storedindex = storedindex+1
 
 		if(istype(W, /obj/item/weapon/ore/glass) && pit_sand < 1 )
-			var/obj/item/weapon/ore/glass/sand_target = W
 			usr.show_message("<span class='notice'>You fill the hole with sand</span>", 1)
-			if (pit_sand == 0)
-				if (sand_target.amount >= 1)
-					sand_target.amount = sand_target.amount - 1
-					pit_sand = pit_sand + 1
-			if (sand_target.amount == 0)
+			pit_sand = 1
 				qdel(W)
 	else return
 
@@ -104,20 +99,12 @@ obj/dugpit/New(lnk)
 /turf/simulated/floor/outdoors/dirt/proc/finishCoffin()
 	gravecoffin.loc = mypit
 
-/turf/simulated/floor/outdoors/dirt/attackby(obj/item/W, mob/user, params)
+/turf/simulated/floor/outdoors/dirt/attackby(obj/item/weapon/W, mob/user, params)
 
 	if(!W || !user)
 		return 0
 
-	var/digging_speed = 0
-
-	if (istype(W, /obj/item/weapon/shovel))
-		var/obj/item/shovel/S = W
-		digging_speed = S.digspeed
-
-	else if (istype(W, /obj/item/weapon/pickaxe))
-		var/obj/item/pickaxe/P = W
-		digging_speed = P.digspeed
+	var/digging_speed = W.digspeed
 
 	if (digging_speed)
 		if (pit_sand < 1)
