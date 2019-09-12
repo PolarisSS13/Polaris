@@ -289,8 +289,7 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 	if(chambered)
 		shoot_self(user)
 		chambered = null
-
-	.. ()
+		//it bothers me they had all these special spaghetti codes and returns and such and in the end, all you have to do is overwrite the firing proc.
 
 /obj/item/weapon/gun/projectile/revolver/president/proc/shoot_self(mob/living/carbon/human/user, target_zone = BP_HEAD)
 	user.apply_damage(300, BRUTE, target_zone)
