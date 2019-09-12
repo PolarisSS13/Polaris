@@ -172,7 +172,7 @@
 				busy = 1
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
-					T.attack_hand(src)
+					src.attack_hand(A) // the hydroponics tray can't attack itself. That would be silly. Neither is it capable of attacking the farmbot.
 			if(FARMBOT_WATER)
 				action = "water"
 				update_icons()
