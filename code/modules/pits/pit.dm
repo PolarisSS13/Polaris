@@ -39,7 +39,7 @@ obj/dugpit/New(lnk)
 		return
 
 
-	if(usr)
+	else if(ishuman(usr))
 
 		add_fingerprint(usr)
 
@@ -71,7 +71,7 @@ obj/dugpit/New(lnk)
 					pit_sand = pit_sand + 1
 			if (sand_target.amount == 0)
 				qdel(W)
-
+	else return
 
 /turf/simulated/floor/outdoors/dirt/attack_hand(mob/living/carbon/human/M)
 	if (dug)
@@ -113,11 +113,11 @@ obj/dugpit/New(lnk)
 
 	if (istype(W, /obj/item/weapon/shovel))
 		var/obj/item/shovel/S = W
-		digging_speed = S.toolspeed
+		digging_speed = S.digspeed
 
 	else if (istype(W, /obj/item/weapon/pickaxe))
 		var/obj/item/pickaxe/P = W
-		digging_speed = P.toolspeed
+		digging_speed = P.digspeed
 
 	if (digging_speed)
 		if (pit_sand < 1)
@@ -135,7 +135,7 @@ obj/dugpit/New(lnk)
 				if (!curcoffin.opened)
 					gravecoffin = curcoffin
 					break
-			playsound(src, 'sound/effects/shovel_dig.ogg', 50, 1)
+			playsound(src, 'sound/misc/shovel_dig.ogg', 50, 1)
 			if(!(gravebody in loc)) // prevents burying yourself while not on the tile
 				gravebody = null
 			if(!gravecoffin in loc) // just sanity checking
@@ -161,7 +161,7 @@ obj/dugpit/New(lnk)
 
 		else
 			user.show_message("<span class='notice'>You start digging...</span>", 1)
-			playsound(src, 'sound/effects/shovel_dig.ogg', 50, 1) //FUCK YO RUSTLE I GOT'S THE DIGS SOUND HERE
+			playsound(src, 'sound/misc/shovel_dig.ogg', 50, 1) //FUCK YO RUSTLE I GOT'S THE DIGS SOUND HERE
 			if(do_after(user, (50 * digging_speed), target = src))
 				if(istype(src, /turf/simulated/floor/outdoors/dirt))
 					if(pit_sand < 1)
@@ -181,22 +181,6 @@ obj/dugpit/New(lnk)
 		if (dug)
 			//add items
 			handle_item_insertion(W, user)
-
-		else
-			if(..())
-				return TRUE
-			if(can_lay_cable() && istype(W, /obj/item/stack/cable_coil))
-				var/obj/item/stack/cable_coil/coil = W
-				for(var/obj/structure/cable/LC in src)
-					if(!LC.d1 || !LC.d2)
-						LC.attackby(W,user)
-						return
-				coil.place_turf(src, user)
-				return TRUE
-
-			else if(istype(W, /obj/item/twohanded/rcl))
-				handleRCL(W, user)
-
 			return FALSE
 
 
@@ -213,7 +197,6 @@ obj/dugpit/New(lnk)
 	storedindex = 0
 	pitcontents = list()
 	dug = 1
-	slowdown = 0
 	if (gravebody!=null)
 		if (user!=null)
 			to_chat(user, "<span class='danger'>You have found a body in the pit!</span>")

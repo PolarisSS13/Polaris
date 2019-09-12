@@ -128,6 +128,7 @@
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1
+	var/digspeed = 40
 
 /obj/item/weapon/shovel/spade
 	name = "spade"
@@ -137,7 +138,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = ITEMSIZE_SMALL
-
+	digspeed = 60
 
 /**********************Mining car (Crate like thing, not the rail car)**************************/
 
