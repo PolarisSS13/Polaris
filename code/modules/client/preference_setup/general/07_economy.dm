@@ -6,11 +6,14 @@
 	S["money_balance"]	>> pref.money_balance
 	S["bank_no"]		>> pref.bank_no
 	S["money_balance"]	>> pref.money_balance
+	S["expenses"]    >> pref.expenses
 
 /datum/category_item/player_setup_item/general/economy/save_character(var/savefile/S)
 	S["money_balance"]	<< pref.money_balance
 	S["bank_no"]		<< pref.bank_no
 	S["bank_pin"]		<< pref.bank_pin
+	S["expenses"]    << pref.expenses
+
 
 /datum/category_item/player_setup_item/general/economy/sanitize_character()
 	pref.money_balance		= sanitize_integer(pref.money_balance, 0, 999999, initial(pref.money_balance))
@@ -25,7 +28,7 @@
 	pref.money_balance		= 0
 	pref.bank_no			= 0
 	pref.bank_pin			= 0
-
+	pref.expenses = list()
 
 /datum/category_item/player_setup_item/general/economy/content(var/mob/user)
 	. = list()
@@ -39,5 +42,16 @@
 		. += "<b>Account Pin:</b> [pref.bank_pin]<br>"
 	. += "<b>Social Class:</b> [pref.economic_status]<br>"
 	. += "<b>[pref.economic_status] Tax Rate:</b> [get_tax_rate(pref.economic_status)]%<br>"
+
+	. += "<b>Debts:</b></br>"
+	if(!pref.expenses)
+		. += "<i>You have no recorded debts.</i>"
+
+	for(var/datum/expense/E in pref.expenses)
+		var/purpose_name
+		if(E.purpose)
+			purpose_name = " ([E.purpose])"
+			. += "<b>[E.name][purpose_name]:</b> [E.amount_left] credits. ([E.cost_per_payroll] per payroll.)<br>"
+
 
 	. = jointext(.,null)

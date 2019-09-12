@@ -124,7 +124,7 @@ SUBSYSTEM_DEF(economy)
 
 
 	//if you owe anything, let's deduct your ownings.
-	for(var/datum/expense/E in linked_person.mind.prefs.expenses)
+	for(var/datum/expense/E in bank_account.expenses)
 		E.payroll_expense()
 
 	//Complete
