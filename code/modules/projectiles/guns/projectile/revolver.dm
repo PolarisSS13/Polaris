@@ -282,7 +282,7 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 
 /obj/item/weapon/gun/projectile/revolver/president
 	name = "\improper President's revolver"
-	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in it's chamber for a bullet."
+	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in its chamber for a bullet."
 	max_shells = 1
 
 /obj/item/weapon/gun/projectile/revolver/president/afterattack(atom/target, mob/living/carbon/human/user, flag, params)
