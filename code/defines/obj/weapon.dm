@@ -651,3 +651,11 @@
 	icon_state = "spring"
 	origin_tech = list(TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 40)
+
+//
+
+/obj/item/weapon/cane/crutch
+	name ="crutch"
+	desc = "A long stick with a crosspiece at the top, used to help with walking."
+	icon_state = "crutch"
+	item_state = "crutch"
