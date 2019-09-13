@@ -337,13 +337,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<B><A href='?src=\ref[src];set_new_title=1'>Article Title</A>:</B> [title] <BR>"
 				dat+="<B><A href='?src=\ref[src];set_new_message=1'>Article Body</A>:</B> [msg] <BR>"
 				dat+="<B>Photo</B>: "
-				dat+="<BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"					if(photo_data && photo_data.photo)
+
+				if(photo_data && photo_data.photo)
 					send_rsc(usr, photo_data.photo.img, "tmp_photo.png")
 					dat+="<BR><img src='tmp_photo.png' width = '180'>"
 					dat+="<BR><B><A href='?src=\ref[src];set_attachment=1'>Delete Photo</A></B></BR>"
 				else
 					dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>"
-				dat+="<BR><BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"				
 
 				dat+="<BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
 			if(4)
@@ -844,8 +844,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)
 	if(photo_data)
 		qdel(photo_data)
-		photo_data = null			
-		return	
+		photo_data = null
+		return
 
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
 		var/obj/item/photo = user.get_active_hand()
