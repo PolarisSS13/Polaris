@@ -23,6 +23,8 @@
 	var/horn_sound = 'sound/vehicles/car_horn.ogg'
 	var/engine_start = 'sound/vehicles/ignition.ogg'
 	var/engine_fail = 'sound/vehicles/wontstart.ogg'
+
+	var/drive_sound = 'sound/vehicles/cardrive.ogg'
 	var/land_speed = ""
 	var/space_speed = 0 //if 0 it can't go in space
 

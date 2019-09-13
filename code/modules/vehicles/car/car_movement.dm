@@ -5,7 +5,7 @@
 		return 0
 	else
 	// Play sound effects
-		playsound(src, 'sound/effects/roll.ogg', 100, 1) // This will do for now.
+		playsound(src, drive_sound, 100, 1) // This will do for now.
 
 	// The rest
 		if(world.time > l_move_time + move_delay)
