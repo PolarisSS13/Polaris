@@ -74,5 +74,5 @@
 	color = "#9999ff"
 
 /obj/item/clothing/ears/earring/dangle/diamond
- 	name = "diamond dangle earrings"
+	name = "diamond dangle earrings"
 	color = "#00ffe1"
