@@ -123,6 +123,10 @@
 
 	owner.toggle_shades()
 
+/*
+ * Arm mounted augments.
+ */
+
 /obj/item/organ/internal/augment/armmounted
 	name = "laser rifle implant"
 	desc = "A large implant that fits into a subject's arm. It deploys a laser-emitting array by some painful means."
@@ -174,6 +178,33 @@
 	w_class = ITEMSIZE_SMALL
 
 	integrated_object_type = /obj/item/weapon/gun/energy/crossbow
+
+// Wrist-or-hand-mounted implant
+
+/obj/item/organ/internal/augment/armmounted/hand
+	name = "resonant analyzer implant"
+	desc = "An augment that fits neatly into the hand, useful for determining the usefulness of an object for research."
+	icon_state = "augment_box"
+
+	w_class = ITEMSIZE_SMALL
+
+	integrated_object_type = /obj/item/weapon/portable_scanner
+
+/obj/item/organ/internal/augment/armmounted/hand/attackby(obj/item/I as obj, mob/user as mob)
+	if(I.is_screwdriver())
+		switch(organ_tag)
+			if(O_AUG_L_HAND)
+				organ_tag = O_AUG_R_HAND
+				parent_organ = BP_R_HAND
+				target_slot = slot_r_hand
+			if(O_AUG_R_HAND)
+				organ_tag = O_AUG_L_HAND
+				parent_organ = BP_L_HAND
+				target_slot = slot_l_hand
+		to_chat(user, "<span class='notice'>You swap \the [src]'s servos to install neatly into \the upper [parent_organ] mount.</span>")
+		return
+
+	. = ..()
 
 // The toolkit / multi-tool implant.
 

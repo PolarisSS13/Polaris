@@ -204,6 +204,8 @@
 #define O_AUG_R_FOREARM "right forearm augment"
 #define O_AUG_L_UPPERARM "left upperarm augment"
 #define O_AUG_R_UPPERARM "right upperarm augment"
+#define O_AUG_L_HAND "left hand augment"
+#define O_AUG_R_HAND "right hand augment"
 
 // Non-Standard organs
 #define O_MOUTH    "mouth"

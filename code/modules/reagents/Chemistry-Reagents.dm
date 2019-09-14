@@ -20,6 +20,7 @@
 	var/max_dose = 0
 	var/overdose = 0		//Amount at which overdose starts
 	var/overdose_mod = 2	//Modifier to overdose damage
+	var/can_overdose_touch = FALSE	// Can the chemical OD when processing on touch?
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/cup_icon_state = null
@@ -101,7 +102,7 @@
 				affect_ingest(M, alien, removed)
 			if(CHEM_TOUCH)
 				affect_touch(M, alien, removed)
-	if(overdose && (volume > overdose) && (active_metab.metabolism_class != CHEM_TOUCH))
+	if(overdose && (volume > overdose) && (active_metab.metabolism_class != CHEM_TOUCH && !can_overdose_touch))
 		overdose(M, alien, removed)
 	remove_self(removed)
 	return

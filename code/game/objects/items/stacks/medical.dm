@@ -11,6 +11,8 @@
 	var/heal_burn = 0
 	var/apply_sounds
 
+	var/upgrade_to	// The type path this stack can be upgraded to.
+
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if (!istype(M))
 		user << "<span class='warning'>\The [src] cannot be applied to [M]!</span>"
@@ -60,6 +62,17 @@
 
 	M.updatehealth()
 
+/obj/item/stack/medical/proc/upgrade_stack(var/upgrade_amount)
+	. = FALSE
+
+	var/turf/T = get_turf(src)
+
+	if(ispath(upgrade_to) && use(upgrade_amount))
+		var/obj/item/stack/medical/M = new upgrade_to(T, upgrade_amount)
+		return M
+
+	return .
+
 /obj/item/stack/medical/crude_pack
 	name = "crude bandage"
 	singular_name = "crude bandage length"
@@ -68,6 +81,8 @@
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
+
+	upgrade_to = /obj/item/stack/medical/bruise_pack
 
 /obj/item/stack/medical/crude_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
@@ -128,6 +143,8 @@
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
+
+	upgrade_to = /obj/item/stack/medical/advanced/bruise_pack
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())

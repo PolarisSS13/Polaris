@@ -104,6 +104,28 @@
 
 	temp_range = list(T0C + 115, T0C + 130)
 
+/datum/chemical_reaction/distilling/spacomycaze
+	name = "Distilling Spacomycaze"
+	id = "distill_spacomycaze"
+	result = "spacomycaze"
+	required_reagents = list("paracetamol" = 1, "spaceacillin" = 1, "foaming_agent" = 1)
+	result_amount = 2
+
+	reaction_rate = HALF_LIFE(10)
+
+	temp_range = list(T0C + 100, T0C + 120)
+
+/datum/chemical_reaction/distilling/tricorlidaze
+	name = "Distilling Tricorlidaze"
+	id = "distill_tricorlidaze"
+	result = "tricorlidaze"
+	required_reagents = list("tricordrazine" = 1, "sterilizine" = 1, "foaming_agent" = 1)
+	result_amount = 2
+
+	reaction_rate = HALF_LIFE(10)
+
+	temp_range = list(T0C + 100, T0C + 120)
+
 // Alcohol
 /datum/chemical_reaction/distilling/beer
 	name = "Distilling Beer"
