@@ -4,6 +4,7 @@
 	hitsound = "swing_hit"
 	var/can_cleave = FALSE // If true, a 'cleaving' attack will occur.
 	var/cleaving = FALSE // Used to avoid infinite cleaving.
+	var/digspeed // I'm a hack
 
 /obj/item/weapon/Bump(mob/M as mob)
 	spawn(0)
