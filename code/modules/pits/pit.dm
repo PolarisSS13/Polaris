@@ -33,15 +33,18 @@ obj/dugpit/New(lnk)
 	GM.temperature = parent.temperature
 	return GM
 
-
+//This proc is present in code/game/objects/items/weapons/storage/storage.dm L355, and should probably have them all merged up to /obj/ level, since it likely covers itself in a few other places.
+//Cross-ref code/game/objects/items.dm L292
 /turf/simulated/floor/outdoors/dirt/proc/handle_item_insertion(obj/item/W, mob/usr)
 	if(!istype(W))
 		return
 
+	if(ishuman(usr))
 
-	else if(ishuman(usr))
-
+		usr.remove_from_mob(W,target = src)
 		add_fingerprint(usr)
+		if (usr.client && usr.s_active != src)
+			usr.client.screen -= W
 
 		if(!istype(W, /obj/item/weapon/ore/glass ) )
 			if (storedindex>=NUMCONTENT)
@@ -56,11 +59,10 @@ obj/dugpit/New(lnk)
 				else if(W && W.w_class >= 3) //Otherwise they can only see large or normal items from a distance...
 					M.show_message("<span class='notice'>[usr] puts [W] in the hole.</span>", 1)
 
-			pitcontents += W
-			usr.drop_item(W)
-			if(W)
-				W.forceMove(src.loc)
-			storedindex = storedindex+1
+		W.forceMove(mypit)
+		W.on_enter_storage(mypit)
+		pitcontents += W
+		storedindex = storedindex+1
 
 		if(istype(W, /obj/item/weapon/ore/glass) && pit_sand < 1 )
 			usr.show_message("<span class='notice'>You fill the hole with sand</span>", 1)
@@ -104,7 +106,7 @@ obj/dugpit/New(lnk)
 	if(!W || !user)
 		return 0
 
-	var/digging_speed = (W.digspeed * 0.1)
+	var/digging_speed = (W.digspeed * 0.1) // should probably use toolspeed but eh, would require more checks
 
 	if (digging_speed)
 		if (pit_sand < 1)
