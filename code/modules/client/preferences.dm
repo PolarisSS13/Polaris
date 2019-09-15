@@ -103,6 +103,8 @@ datum/preferences
 	var/bank_pin
 	var/bank_no
 
+	var/datum/expense/expenses = list()
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 1
 

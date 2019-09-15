@@ -197,7 +197,18 @@ log transactions
 							dat += "</form>"
 						else
 							dat += "Welcome, <b>[authenticated_account.owner_name].</b><br/>"
-							dat += "<b>Account balance:</b> $[authenticated_account.money]"
+							dat += "<b>Account balance:</b> [authenticated_account.money]CR"
+
+							//show expenses
+							if(!isemptylist(authenticated_account.expenses))
+								dat += "<br><br><b>Debts:</b><br>"
+								for(var/datum/expense/E in authenticated_account.expenses)
+									var/purpose_name
+									if(E.purpose)
+										purpose_name = " ([E.purpose])"
+										dat += "<b>[E.name][purpose_name]:</b> [E.amount_left] credits. ([E.cost_per_payroll] per payroll.)<br>"
+							dat += "<br>"
+
 							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
 							dat += "<input type='radio' name='choice' value='withdrawal' checked> Cash  <input type='radio' name='choice' value='e_withdrawal'> Chargecard<br>"
@@ -217,9 +228,15 @@ log transactions
 				dat += "<input type='submit' value='Submit'><br>"
 				dat += "</form>"
 
-		user << browse(dat,"window=atm;size=550x650")
+		var/datum/browser/popup = new(user, "atm", "[src]", 550, 650, src)
+		popup.set_content(jointext(dat,null))
+		popup.open()
+
+		onclose(user, "atm")
+
 	else
-		user << browse(null,"window=atm")
+		onclose(user, "atm")
+
 
 /obj/machinery/atm/Topic(var/href, var/href_list)
 	if(href_list["choice"])
@@ -442,6 +459,7 @@ log transactions
 							held_card = I
 				else
 					release_held_id(usr)
+
 			if("logout")
 				authenticated_account = null
 				//usr << browse(null,"window=atm")

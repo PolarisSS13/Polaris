@@ -13,6 +13,8 @@
 	var/dept_acc = 0		//If this is a department account or not.
 	var/department			// If this has a department, and what it is.
 
+	var/list/datum/expense/expenses = list()		//list of debts and expenses
+
 /datum/transaction
 	var/target_name = ""
 	var/purpose = ""

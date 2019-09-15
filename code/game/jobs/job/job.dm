@@ -93,6 +93,9 @@
 	if(H.mind.prefs.bank_no)
 		H.mind.prefs.bank_no = M.account_number
 
+	if(H.mind.prefs.expenses)
+		H.mind.prefs.expenses = M.expenses
+
 	if(!H.mind.prefs.played)
 		M.money += income
 

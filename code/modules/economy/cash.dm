@@ -84,6 +84,9 @@
 	if(use_check(user,USE_FORCE_SRC_IN_USER))
 		return 0
 
+	if(amount > worth)
+		return 0
+
 	amount = round(Clamp(amount, 0, src.worth))
 	if(amount==0) return 0
 
