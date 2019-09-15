@@ -27,19 +27,19 @@ var/global/list/medical_bills = list()
 	cost = 60
 	insurance_coverage = INSURANCE_BASIC
 	
-/datum/medical_bill/basic_treatment
+/datum/medical_bill/basic_treatment_over
 	name = "Damage (Oxyloss, Toxin, Burns, Brute) over 50 ticks"
 	description = "A basic treatment which usually involves items within any medical pack over 50 ticks."
 	cost = 80
 	insurance_coverage = INSURANCE_BASIC	
 
-/datum/medical_bill/basic_treatment
+/datum/medical_bill/basic_treatment_vend
 	name = "NanoMed Vended Items"
 	description = "Items vended from NanoMed Plus."
 	cost = 150
 	insurance_coverage = INSURANCE_BASIC
 
-/datum/medical_bill/basic_treatment
+/datum/medical_bill/basic_treatment_iv
 	name = "IV Drip"
 	description = "Use of IV drip to restore patient blood."
 	cost = 250
@@ -51,13 +51,13 @@ var/global/list/medical_bills = list()
 	cost = 50
 	insurance_coverage = INSURANCE_BASIC
 	
-/datum/medical_bill/machinery
+/datum/medical_bill/machinery_sleep
 	name = "Sleeper"
 	description = "Use of sleeper."
 	cost = 300
 	insurance_coverage = INSURANCE_BASIC
 	
-/datum/medical_bill/machinery
+/datum/medical_bill/machinery_cryo
 	name = "Cryo Cell"
 	description = "Use of cyro cell."
 	cost = 350
@@ -87,19 +87,19 @@ var/global/list/medical_bills = list()
 	cost = 2500
 	insurance_coverage = INSURANCE_HIGH
 
-/datum/medical_bill/organs_limbs
+/datum/medical_bill/facial
 	name = "Facial Reconstruction Surgery"
 	description = "Surgical repairment of face for cosmetic purposes."
 	cost = 2500
 	insurance_coverage = INSURANCE_HIGH
 
-/datum/medical_bill/miscellaneous
+/datum/medical_bill/miscellaneous_stasis
 	name = "Stasis Bag"
 	description = "Use of stasis bag to transport an individual."
 	cost = 150
 	insurance_coverage = INSURANCE_BASIC
 	
-/datum/medical_bill/miscellaneous
+/datum/medical_bill/defib
 	name = "Defibilirator"
 	description = "Use of defibilirator to revive."
 	cost = 150
