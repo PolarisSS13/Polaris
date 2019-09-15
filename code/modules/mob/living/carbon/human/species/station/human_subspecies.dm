@@ -77,9 +77,9 @@
 	total_health = 85
 	additional_wage = 20
 	icon_scale = 0.9
-	icon_width = 0.9
+	icon_width = 1
 	brute_mod = 0.5
-	male_scream_sound		= 'sound/voice/human/boy_scream.ogg'
+	male_scream_sound	= 'sound/voice/human/boy_scream.ogg'
 	female_scream_sound	= 'sound/voice/human/girl_scream.ogg'
 
 
