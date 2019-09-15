@@ -246,7 +246,7 @@
 	var/expense_commments = sanitize_text(input(usr, "Enter any comments regarding this expense.", "Expense Comments", E.comments)  as message,1,100)
 	if(!expense_commments) return
 
-	E.name = expense_purpose
+	E.purpose = expense_purpose
 	E.comments = expense_commments
 	E.amount_left = expense_amount
 
