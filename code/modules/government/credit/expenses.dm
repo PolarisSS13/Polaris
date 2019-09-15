@@ -6,6 +6,8 @@
 
   var/comments                      // comments on this particular case.
 
+  var/initial_cost				//how much it cost in the beginning
+
   var/amount_left
 
   var/active = 1                      // If this is currently active, or not.
@@ -43,8 +45,8 @@
 
 // This proc is just a default proc for paying expenses per payroll.
 
-/datum/expense/proc/payroll_expense()
-	charge_expense(cost_per_payroll)
+/datum/expense/proc/payroll_expense(var/datum/money_account/bank_account)
+	charge_expense(src, bank_account, cost_per_payroll)
 
 //This if for if you have a expense, and a bank account.
 
@@ -55,8 +57,21 @@
 	E.process_charge(num)
 	bank_account.money -= num
 
+	//create an entry for the charge.
+	var/datum/transaction/T = new()
+	T.target_name = bank_account.owner_name
+	T.purpose = "Debt Payment: [E.name]"
+	T.amount = num
+	T.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+	T.time = stationtime2text()
+	T.source_terminal = "[E.department] Funding Account"
+
+	//add the account
+	bank_account.transaction_log.Add(T)
+
+
 	if(E.delete_paid)
-		if(0 > E.amount_left)
+		if(!E.amount_left)
 			bank_account.expenses -= E
 			qdel(E)
 
@@ -98,6 +113,7 @@
 	new_expense.name = name
 	new_expense.comments = comments
 	new_expense.amount_left = amount_left
+	new_expense.initial_cost = amount_left
 	new_expense.added_by = added_by
 	new_expense.applied_by = applied_by
 

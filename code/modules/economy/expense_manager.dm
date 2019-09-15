@@ -16,7 +16,7 @@
 
 	var/icon_state_active = "expense_1"
 	var/icon_state_inactive = "expense"
-	var/expense_limit = 50000			// highest expense you can set.
+	var/expense_limit = 500000			// highest expense you can set.
 
 /obj/machinery/expense_manager/update_icon()
 	if(stored_id)
@@ -25,13 +25,19 @@
 		icon_state = icon_state_inactive
 
 /obj/machinery/expense_manager/police
+	name = "police fine manager"
 	expense_type = /datum/expense/police
+	expense_limit = 10000
 
 /obj/machinery/expense_manager/hospital
+	name = "hospital bill manager"
 	expense_type = /datum/expense/hospital
+	expense_limit = 100000
 
 /obj/machinery/expense_manager/court
+	name = "court injunction manager"
 	expense_type = /datum/expense/law
+	expense_limit = 500000
 
 /obj/machinery/expense_manager/attackby(obj/item/I, mob/user)
 
@@ -44,11 +50,16 @@
 		to_chat(user, "\icon[src] <span class='warning'>Error: [src] already has an ID stored, please sell or eject this ID before continuing.</span>")
 		return
 
-	to_chat(user, "You place [I] into [src].")
-	playsound(src, 'sound/machines/chime.ogg', 25)
-	src.visible_message("\icon[src] \icon[I] <b>[src]</b> chimes, \"<span class='notice'>ID accepted.</span>\"")
-
 	if(insert_id(I, user))
+		var/obj/item/weapon/card/id/iden = user.GetIdCard()
+
+		if(!check_access(iden))
+			return
+
+		to_chat(user, "You place [I] into [src].")
+		playsound(src, 'sound/machines/chime.ogg', 25)
+		src.visible_message("\icon[src] \icon[I] <b>[src]</b> chimes, \"<span class='notice'>ID accepted.</span>\"")
+
 		interact(user)
 	else
 		to_chat(user, "\icon[src] <span class='warning'>Error: Unable to accept ID card, this may be due to incorrect details. Contact an administrator for more information.</span>")
@@ -69,34 +80,40 @@
 	return 1
 
 
-/obj/machinery/expense_manager/verb/eject_id(mob/user)
+/obj/machinery/expense_manager/verb/eject_id()
 	set name = "Eject ID"
 	set category = "Object"
 	set desc = "Ejects an item from the machine."
 	set src in view(1)
 
-	if(user.stat)
-		to_chat (user, "<span class='warning'>You can't operate [src] while in this state!</span>")
+	if(usr.stat)
+		to_chat (usr, "<span class='warning'>You can't operate [src] while in this state!</span>")
 		return
 
-	add_fingerprint(user)
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+
+		if(stored_id)
+			if(!H.get_active_hand())
+				H.put_in_hands(stored_id)
+			else
+				stored_id.forceMove(loc)
 
 
-	if(stored_id)
-		if(ishuman(user) && !user.get_active_hand())
-			user.put_in_hands(stored_id)
+			stored_id = null
+			current_account = null
+
+			update_icon()
+			add_fingerprint(H)
+			return 1
 		else
-			stored_id.forceMove(loc)
-		stored_id = null
-		current_account = null
+			to_chat(usr, "<span class='warning'>There's no cards stored within [src]!</span>")
+			return 0
 
-		update_icon()
 
-		return 1
 	else
-		to_chat (user, "<span class='warning'>There's no cards stored within [src]!</span>")
+		to_chat(usr, "<span class='warning'>You have trouble operating [src].</span>")
 		return 0
-
 
 
 
@@ -137,7 +154,7 @@
 
 			dat += "<b>Name:</b> [current_account.owner_name]<br>"
 			dat += "<b>Account No:</b> [current_account.account_number]<br>"
-			dat += "<b>Current Funds:</b> [current_account.money]<br><br>"
+			dat += "<b>Current Funds:</b> [current_account.money] credits.<br><br>"
 
 			dat += "<a href='?src=\ref[src];choice=add_new_expense'>Add New Expense</a> "
 			dat += "<a href='?src=\ref[src];choice=remove_all_expenses'>Remove All Expenses</a>"
@@ -159,18 +176,17 @@
 
 					dat += "<fieldset style='border: 2px solid [E.color]; display: inline'>"
 
-					dat += "<h3>[E.purpose]</h3><br>"
-
-					dat += "<br>Debt: <b>[E.name] ([E.purpose]):</b> [E.amount_left] credits."
+					dat += "Debt: <b>[E.purpose] - ([E.name])</b> ([E.initial_cost] credits)."
 					dat += "<br>Charge Per Payroll: [E.cost_per_payroll] credits."
+					dat += "<br>Current Debt Left: [E.amount_left] credits."
 					dat += "<br>Added By: [E.added_by]"
 					dat += "<br>Creation Date: [E.creation_date]"
 					dat += "<br>Status: [E.active ? "Active" : "Inactive"]<br><br>"
 
+					dat += "<br>Comments: <i>[E.comments]</i><br>"
 
 					dat += "<a href='?src=\ref[src];choice=edit_expense;expense=\ref[E]''>Edit Expense</a> "
 					dat += "<a href='?src=\ref[src];choice=remove_expense;expense=\ref[E]''>Remove Expense</a> "
-					dat += "<a href='?src=\ref[src];choice=charge_expense;expense=\ref[E]'>Deduct From Account</a> "
 					dat += "<a href='?src=\ref[src];choice=toggle_expense;expense=\ref[E]'>Toggle Expense</a> "
 
 					dat += "</fieldset>"
@@ -206,15 +222,15 @@
 
 /obj/machinery/expense_manager/proc/remove_expense(mob/user, var/datum/expense/E)
 	var/choice = alert(user,"Would you like to remove this expense?","Remove Expense","No","Yes")
-	if(choice == "Yes!")
+	if(choice == "Yes")
 		current_account.expenses -= E
 		qdel(E)
 	else
 		return
 
 /obj/machinery/expense_manager/proc/suspend_expense(mob/user, var/datum/expense/E)
-	var/choice = alert(user,"[E.active ? "Suspend" : "Un-suspend"] this expense?","Suspend Expense","No","Yes")
-	if(choice == "Yes!")
+	var/choice = alert(user,"[E.active ? "Suspend" : "Un-suspend"] this expense?","Suspend Expense","Suspend","Un-Suspend")
+	if(choice == "Suspend")
 		if(E.active)
 			E.active = 0
 	else
@@ -243,26 +259,12 @@
 		return
 	else
 		var/choice = alert(user,"Delete all expenses from account? This cannot be undone!","Delete Expense","No","Yes")
-		if(choice == "Yes!")
+		if(choice == "Yes")
 			for(var/datum/expense/E in current_account.expenses)
 				if (istype(E, expense_type))
 					current_account.expenses -= E
 		else if(choice == "No")
 			return
-
-/obj/machinery/expense_manager/proc/charge_expense(mob/user, var/datum/expense/E)
-
-	var/choice = alert(user,"Charge this expense onto the account?","Charge Account","No","Yes")
-	if(choice == "Yes!")
-
-		var/expense_amount = sanitize(input(usr, "How much would you like to charge?", "Expense Amount", E.amount_left)  as num|null)
-		if(!expense_amount) return
-
-		expense_amount = max(min(0, E.amount_left), 0)
-
-
-		charge_expense(E, current_account, expense_amount)
-
 
 /obj/machinery/expense_manager/Topic(var/href, var/href_list)
 	if(..())
@@ -274,10 +276,6 @@
 				add_new_expense(usr)
 
 			if("remove_expense")
-				var/E = locate(href_list["expense"])
-				remove_expense(usr, E)
-
-			if("charge_expense")
 				var/E = locate(href_list["expense"])
 				remove_expense(usr, E)
 

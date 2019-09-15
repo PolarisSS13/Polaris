@@ -125,6 +125,6 @@ SUBSYSTEM_DEF(economy)
 
 	//if you owe anything, let's deduct your ownings.
 	for(var/datum/expense/E in bank_account.expenses)
-		E.payroll_expense()
+		E.payroll_expense(bank_account)
 
 	//Complete

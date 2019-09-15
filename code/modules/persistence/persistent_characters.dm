@@ -65,9 +65,6 @@
 	mind.prefs.save_preferences()
 	mind.prefs.save_character()
 
-
-
-
 	return 1
 
 

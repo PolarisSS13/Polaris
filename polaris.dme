@@ -1673,6 +1673,7 @@
 #include "code\modules\economy\cash_register.dm"
 #include "code\modules\economy\economy_misc.dm"
 #include "code\modules\economy\EFTPOS.dm"
+#include "code\modules\economy\expense_manager.dm"
 #include "code\modules\economy\price_list.dm"
 #include "code\modules\economy\retail_scanner.dm"
 #include "code\modules\economy\TradeDestinations.dm"
