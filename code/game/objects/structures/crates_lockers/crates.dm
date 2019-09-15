@@ -12,18 +12,7 @@
 //	mouse_drag_pointer = MOUSE_ACTIVE_POINTER	//???
 	var/rigged = 0
 
-/obj/structure/closet/crate/can_open()
-	return 1
-
-/obj/structure/closet/crate/can_close()
-	return 1
-
 /obj/structure/closet/crate/open()
-	if(src.opened)
-		return 0
-	if(!src.can_open())
-		return 0
-
 	if(rigged && locate(/obj/item/device/radio/electropack) in src)
 		if(isliving(usr))
 			var/mob/living/L = usr
@@ -34,95 +23,41 @@
 				if(usr.stunned)
 					return 2
 
-	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
-	for(var/obj/O in src)
-		O.forceMove(get_turf(src))
-	icon_state = icon_opened
-	src.opened = 1
-
 	if(climbable)
 		structure_shaken()
-	return 1
 
-/obj/structure/closet/crate/close()
-	if(!src.opened)
-		return 0
-	if(!src.can_close())
-		return 0
+	..()
 
+/obj/structure/closet/crate/openhelper()
 	playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
-	var/itemcount = 0
-	for(var/obj/O in get_turf(src))
-		if(itemcount >= storage_capacity)
-			break
-		if(O.density || O.anchored || istype(O,/obj/structure/closet))
-			continue
-		if(istype(O, /obj/structure/bed)) //This is only necessary because of rollerbeds and swivel chairs.
-			var/obj/structure/bed/B = O
-			if(B.has_buckled_mobs())
-				continue
-		O.forceMove(src)
-		itemcount++
+	src.opened = !src.opened
 
-	icon_state = icon_closed
-	src.opened = 0
-	return 1
+/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob) // use the hierarchies properly instead of copy pasting code
+	if(!src.opened)
+		if(istype(W, /obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/C = W
+			if(rigged)
+				user << "<span class='notice'>[src] is already rigged!</span>"
+				return
+			if (C.use(1))
+				user  << "<span class='notice'>You rig [src].</span>"
+				rigged = 1
+				return
+		else if(istype(W, /obj/item/device/radio/electropack))
+			if(rigged)
+				user  << "<span class='notice'>You attach [W] to [src].</span>"
+				user.drop_item()
+				W.forceMove(src)
+				return
+		else if(istype(W, /obj/item/weapon/wirecutters))
+			if(rigged)
+				user  << "<span class='notice'>You cut away the wiring.</span>"
+				playsound(src.loc, W.usesound, 100, 1)
+				rigged = 0
+				return
+	..()
 
-/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(opened)
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		user.drop_item()
-		if(W)
-			W.forceMove(src.loc)
-	else if(istype(W, /obj/item/weapon/packageWrap))
-		return
-	else if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
-		if(rigged)
-			user << "<span class='notice'>[src] is already rigged!</span>"
-			return
-		if (C.use(1))
-			user  << "<span class='notice'>You rig [src].</span>"
-			rigged = 1
-			return
-	else if(istype(W, /obj/item/device/radio/electropack))
-		if(rigged)
-			user  << "<span class='notice'>You attach [W] to [src].</span>"
-			user.drop_item()
-			W.forceMove(src)
-			return
-	else if(istype(W, /obj/item/weapon/wirecutters))
-		if(rigged)
-			user  << "<span class='notice'>You cut away the wiring.</span>"
-			playsound(src.loc, W.usesound, 100, 1)
-			rigged = 0
-			return
-	else return attack_hand(user)
-
-/obj/structure/closet/crate/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			for(var/obj/O in src.contents)
-				qdel(O)
-			qdel(src)
-			return
-		if(2.0)
-			for(var/obj/O in src.contents)
-				if(prob(50))
-					qdel(O)
-			qdel(src)
-			return
-		if(3.0)
-			if (prob(50))
-				qdel(src)
-			return
-		else
-	return
-
-/obj/structure/closet/crate/secure
+/obj/structure/closet/crate/secure //a lot of this code is copied from secure_closets.dm There should theoretically be some way to merge the secure stuff into a single parent somewhere.
 	desc = "A secure crate."
 	name = "Secure crate"
 	icon_state = "securecrate"

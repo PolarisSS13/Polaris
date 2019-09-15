@@ -12,6 +12,15 @@
 		/obj/structure/flora/ausbushes/sparsegrass,
 		/obj/structure/flora/ausbushes/fullgrass
 		)
+	var/dug = FALSE				//FALSE = has not yet been dug, TRUE = has already been dug
+	var/pit_sand = 1
+	var/storedindex = 0			//amount of stored items
+	var/mob/living/gravebody	//is there a body in the pit?
+	var/obj/structure/closet/coffin/gravecoffin //or maybe a coffin?
+	var/pitcontents = list()
+	var/obj/dugpit/mypit
+	var/unburylevel = 0
+
 
 /turf/simulated/floor/outdoors/dirt/initialize()
 	if(prob(50))

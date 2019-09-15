@@ -2,7 +2,7 @@
 
 /datum/law/misdemeanor/threat
 	name = "Threat of Death or Bodily Harm"
-	description = "To threaten a person’s life or well-being."
+	description = "To threaten a personâ€™s life or well-being."
 
 	fine = 20
 
@@ -63,7 +63,7 @@
 
 	fine = 50
 
-	notes = "Make sure the person really doesn’t have access to the are or wasn’t let there \
+	notes = "Make sure the person really doesnâ€™t have access to the are or wasnâ€™t let there \
 	by other personnel. Trespassing often goes hand to hand with other crimes like damage \
 	of property (if a window or a door was broken) or theft. Be thorough."
 
@@ -77,3 +77,10 @@
 
 	notes = "Clearly unwanted means that it's been made clear that the advances aren't welcome."
 
+/datum/law/misdemeanor/littering
+    name = "Littering"
+    description = "To obstruct the public face with trash or otherwise ecologically foreign material."
+    cell_time = 15
+    fine = 200
+
+    notes = "Instances of littering could be any domestic pollutants, such as trash or foreign residues, medical waste, and discarded tobacco products."

@@ -21,7 +21,7 @@
 	item_state = "jackhammer"
 	w_class = ITEMSIZE_LARGE
 	matter = list(DEFAULT_WALL_MATERIAL = 3750)
-	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
+	digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
@@ -128,6 +128,7 @@
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
 	sharp = 0
 	edge = 1
+	digspeed = 40
 
 /obj/item/weapon/shovel/spade
 	name = "spade"
@@ -137,7 +138,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = ITEMSIZE_SMALL
-
+	digspeed = 60
 
 /**********************Mining car (Crate like thing, not the rail car)**************************/
 

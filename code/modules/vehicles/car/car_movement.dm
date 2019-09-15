@@ -4,6 +4,10 @@
 		to_chat(user, "<span class='warning'>The car seems to be turned off.</span>")
 		return 0
 	else
+	// Play sound effects
+		playsound(src, drive_sound, 100, 1) // This will do for now.
+
+	// The rest
 		if(world.time > l_move_time + move_delay)
 			var/old_loc = get_turf(src)
 			if(mechanical && on && powered && cell.charge < charge_use)

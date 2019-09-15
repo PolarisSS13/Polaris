@@ -178,7 +178,7 @@
 		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
 		var/hide_item = !has_edge(W) || !can_slice_here
 
-		if (hide_item)
+		if (hide_item && user.a_intent != I_HURT)
 			if (W.w_class >= src.w_class || is_robot_module(W))
 				return
 

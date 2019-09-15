@@ -279,3 +279,18 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+
+/obj/item/weapon/gun/projectile/revolver/president
+	name = "\improper President's revolver"
+	desc = "A Russian made revolver. Uses .357 ammo. It has a single slot in its chamber for a bullet."
+	max_shells = 1
+
+/obj/item/weapon/gun/projectile/revolver/president/afterattack(atom/target, mob/living/carbon/human/user, flag, params)
+	if(chambered)
+		shoot_self(user)
+		chambered = null
+		//it bothers me they had all these special spaghetti codes and returns and such and in the end, all you have to do is overwrite the firing proc.
+
+/obj/item/weapon/gun/projectile/revolver/president/proc/shoot_self(mob/living/carbon/human/user, target_zone = BP_HEAD)
+	user.apply_damage(300, BRUTE, target_zone)
+	user.visible_message("<span class='danger'>[user.name] fires [src] at their head!</span>", "<span class='userdanger'>You fire [src] at your head!</span>", "<span class='italics'>You hear a gunshot!</span>")
