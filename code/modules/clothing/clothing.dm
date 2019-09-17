@@ -570,6 +570,10 @@
 		M.update_inv_shoes()
 	return ..()
 
+/obj/item/clothing/shoes/clean_blood()
+	update_icon()
+	return ..()
+
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
 	return
 
