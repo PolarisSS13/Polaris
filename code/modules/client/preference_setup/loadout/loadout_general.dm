@@ -105,5 +105,13 @@
 	description = "The ever-popular Cards Against The Galaxy word game. Warning: may include traces of broken fourth wall. This is the black deck."
 
 /datum/gear/baby
-	display_name = "baby"
+	display_name = "baby selection"
 	path = /obj/item/weapon/baby
+
+/datum/gear/baby/New()
+	..()
+	var/baby = list()
+	baby["baby, light"] = /obj/item/weapon/baby
+	baby["baby, tanned"] = /obj/item/weapon/baby/tanned
+	baby["baby, dark"] = /obj/item/weapon/baby/black
+	gear_tweaks += new/datum/gear_tweak/path(baby)
