@@ -204,6 +204,10 @@
 		hair_type = HAIR_SHORT
 		icon_state = "hair_parted"
 
+	partedalt
+		name = "Parted Alt"
+		icon_state = "hair_partedalt"
+
 	pompadour
 		name = "Pompadour"
 		hair_type = HAIR_SHORT
@@ -411,6 +415,10 @@
 		name = "Feather"
 		hair_type = HAIR_MEDIUM
 		icon_state = "hair_feather"
+
+	glossy
+		name = "Glossy"
+		icon_state = "hair_glossy"
 
 	hitop
 		name = "Hitop"
@@ -812,6 +820,11 @@
 	proper
 		name = "Proper"
 		icon_state = "hair_proper"
+
+	newyou
+		name = "New You"
+		icon_state = "hair_newyou"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
