@@ -346,8 +346,6 @@
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
 
-
-
 	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
@@ -355,7 +353,7 @@
 		var/deathtime = world.time - src.timeofdeath
 		if(istype(src,/mob/observer/dead))
 			var/mob/observer/dead/G = src
-			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted && !holder)
+			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted && !client.holder)
 				usr << "<font color='blue'><B>Upon using the antagHUD you forfeighted the ability to join the round.</B></font>"
 				return
 		var/deathtimeminutes = round(deathtime / 600)
@@ -369,7 +367,7 @@
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
 
-		if (!holder && (deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
+		if (!client.holder && (deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
 			usr << "You must wait 5 minutes to respawn!"
 			return
 		else
