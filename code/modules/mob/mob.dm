@@ -345,6 +345,7 @@
 	if ((stat != 2 || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
+
 	if (ticker.mode && ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
@@ -352,7 +353,7 @@
 		var/deathtime = world.time - src.timeofdeath
 		if(istype(src,/mob/observer/dead))
 			var/mob/observer/dead/G = src
-			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+			if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted && !client.holder)
 				usr << "<font color='blue'><B>Upon using the antagHUD you forfeighted the ability to join the round.</B></font>"
 				return
 		var/deathtimeminutes = round(deathtime / 600)
@@ -366,13 +367,21 @@
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
 
-		if ((deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
+		if (!client.holder && (deathtime < (5 * 600)) && (ticker && ticker.current_state > GAME_STATE_PREGAME))
 			usr << "You must wait 5 minutes to respawn!"
 			return
 		else
 			usr << "You can respawn now, enjoy your new life!"
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
+
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		if(H.save_mob_to_prefs()) // saves character if round is canon.
+			spawn(20)
+			H << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
+		else
+			H << "<span class='notice'><b>As this is not a canon round, your character will not be saved this time.</b></span>"
 
 	usr << "<font color='blue'><B>Make sure to play a different character, and please roleplay correctly!</B></font>"
 
