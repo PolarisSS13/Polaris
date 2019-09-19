@@ -172,7 +172,10 @@
 				busy = 1
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
-					src.attack_hand(A) // the hydroponics tray can't attack itself. That would be silly. Neither is it capable of attacking the farmbot.
+					if(T.dead)
+						T.remove_dead(src) //attack_hand bugs out because the mob has no browser/client. /hydroponics/ has the proc built into itself, but has a callback to user.
+					else
+						T.harvest(src)
 			if(FARMBOT_WATER)
 				action = "water"
 				update_icons()
@@ -289,10 +292,10 @@
 	if(tray.closed_system || !tray.seed)
 		return 0
 
-	if(tray.dead && removes_dead || tray.harvest && collects_produce)
+	if(tray.dead || tray.harvest)
 		return FARMBOT_COLLECT
 
-	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent("water"))
+	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent("water") && tank.reagents.total_volume > 0)
 		return FARMBOT_WATER
 
 	else if(uproots_weeds && tray.weedlevel > 3)
