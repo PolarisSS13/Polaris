@@ -221,7 +221,6 @@
 	name = "basic data crystal"
 	id = "portadrive_basic"
 	req_tech = list(TECH_DATA = 1)
-	build_type = IMPRINTER
 	materials = list("glass" = 8000)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable
 	sort_string = "VFAAA"
@@ -230,7 +229,6 @@
 	name = "advanced data crystal"
 	id = "portadrive_advanced"
 	req_tech = list(TECH_DATA = 2)
-	build_type = IMPRINTER
 	materials = list("glass" = 16000)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/advanced
 	sort_string = "VFAAB"
@@ -239,7 +237,6 @@
 	name = "super data crystal"
 	id = "portadrive_super"
 	req_tech = list(TECH_DATA = 4)
-	build_type = IMPRINTER
 	materials = list("glass" = 32000)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/portable/super
 	sort_string = "VFAAC"
