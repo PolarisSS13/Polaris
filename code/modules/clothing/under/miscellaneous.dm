@@ -328,6 +328,7 @@
 	name = "red evening gown"
 	desc = "Fancy dress for space bar singers."
 	icon_state = "red_evening_gown"
+	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/dress/maid
 	name = "maid costume"
@@ -685,6 +686,13 @@
 	addblends = "whitedress4_a"
 	flags_inv = HIDESHOES
 
+/obj/item/clothing/under/dress/ariswedding
+	name = "pink aristocratic wedding dress"
+	desc = "A long pink frilly dress that flares out at the bottom."
+	icon_state = "ariswedding"
+	flags_inv = HIDESHOES
+	index = 1
+
 /obj/item/clothing/under/dress/darkred
 	name = "fancy dark red dress"
 	desc = "A short, red dress with a black belt. Fancy."
@@ -899,6 +907,7 @@
 	name = "victorian suit"
 	desc = "A victorian style suit, fancy!"
 	icon_state = "victorianvest"
+	index = 1
 
 /obj/item/clothing/under/victorian/musket
 	name = "victorian musketeer suit"

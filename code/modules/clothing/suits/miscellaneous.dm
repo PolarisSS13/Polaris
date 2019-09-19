@@ -384,6 +384,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	name = "tailcoat"
 	desc = "A fancy victorian tailcoat."
 	icon_state = "tailcoat"
+	index = 1
 
 /obj/item/clothing/suit/tailcoat/ladies
 	name = "ladies victorian coat"
