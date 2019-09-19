@@ -7,6 +7,9 @@
 	if(!mind)
 		return 0
 
+	if(!unique_id)
+		return 0
+
 	if(!(unique_id == mind.prefs.unique_id))
 		return 0
 
