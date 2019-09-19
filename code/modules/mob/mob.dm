@@ -375,8 +375,8 @@
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
 		if(H.save_mob_to_prefs()) // saves character if round is canon.
 			spawn(20)
 			M << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
