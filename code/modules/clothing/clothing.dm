@@ -26,6 +26,8 @@
 	var/blood_sprite_state
 	drop_sound = 'sound/items/drop/clothing.ogg'
 
+	var/index			//null by default, if set, will change which dmi it uses
+
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
@@ -587,11 +589,17 @@
 	valid_accessory_slots = list("over", "armband")
 	restricted_accessory_slots = list("armband")
 
+
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_wear_suit()
 
+/obj/item/clothing/suit/New()
+	if(index)
+		var/new_icon = "icons/obj/clothing/suits[index].dmi"
+		icon = new_icon
+	..()
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under
@@ -652,13 +660,18 @@
 
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s" in icon_states(INV_W_UNIFORM_DEF_ICON)) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
+		if(("[worn_state]_d_s" in icon_states("[INV_W_UNIFORM_DEF_ICON][index].dmi")) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
 			rolled_down = 0
 
 	if(rolled_down == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsuit
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
+
+	if(index)
+		var/new_icon = "icons/obj/clothing/uniforms[index].dmi"
+		icon = new_icon
+
 
 /obj/item/clothing/under/proc/update_rolldown_status()
 	var/mob/living/carbon/human/H
@@ -675,7 +688,7 @@
 	else if ("[worn_state]_s" in icon_states(rolled_down_icon))
 		under_icon = rolled_down_icon
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = "[INV_W_UNIFORM_DEF_ICON][index].dmi"
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_d_s" in icon_states(under_icon)))
@@ -700,7 +713,7 @@
 	else if ("[worn_state]_s" in icon_states(rolled_down_sleeves_icon))
 		under_icon = rolled_down_sleeves_icon
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		under_icon = "[INV_W_UNIFORM_DEF_ICON][index].dmi"
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_sleeves_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_r_s" in icon_states(under_icon)))

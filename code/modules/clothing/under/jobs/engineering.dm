@@ -24,3 +24,11 @@
 	name = "roboticist's jumpsuit"
 	icon_state = "robotics"
 	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/engineer/turtleneck
+	name = "engineering turtleneck"
+	desc = "It's a stylish turtleneck with minor radiation shielding. Nobody's going to see it behind the voidsuit, though."
+	icon_state = "turtle_eng"
+	rolled_down = -1
+	rolled_sleeves = -1
+	index = 1
