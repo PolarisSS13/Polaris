@@ -173,7 +173,7 @@ Proc for attack log creation, because really why not
 
 	//Log the message to file
 	if(ishuman(user))
-		round_text_log += "<b>([time_stamp()])</b>  <span style=\"color:red\"><u><b>ATTACK LOG:</b></u> (<b>[user]/[user.client]</b>) vs [target_str]: [what_done]</span>"
+		GLOB.round_text_log += "<b>([time_stamp()])</b>  <span style=\"color:red\"><u><b>ATTACK LOG:</b></u> (<b>[user]/[user.client]</b>) vs [target_str]: [what_done]</span>"
 
 	if(admin_notify)
 		msg_admin_attack("[key_name_admin(user)] vs [target_str]: [what_done]")

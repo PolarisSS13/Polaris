@@ -9,10 +9,23 @@
 	if(M.mind)
 		dat += "<b>Current Antag?:</b> [(M.mind.special_role)?"Yes":"No"]<br>"
 	dat += "<br><b>Note:</b> This is arranged from earliest to latest. <br><br>"
-	for(var/l in M.attack_log)
-		dat += "<li>[l]</li>"
 
-	usr << browse(dat, "window=admin_attack_log")
+
+	if(!isemptylist(M.attack_log))
+		dat += "<fieldset style='border: 2px solid white; display: inline'>"
+		for(var/l in M.attack_log)
+			dat += "[l]<br>"
+
+		dat += "</fieldset>"
+
+	else
+		dat += "<i>No attack logs found for [M].</i>"
+
+	var/datum/browser/popup = new(usr, "admin_attack_log", "[src]", 650, 650, src)
+	popup.set_content(jointext(dat,null))
+	popup.open()
+
+	onclose(usr, "admin_attack_log")
 
 	feedback_add_details("admin_verb","PL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -28,12 +41,22 @@
 		dat += "<b>Current Antag?:</b> [(M.mind.special_role)?"Yes":"No"]<br>"
 	dat += "<br><b>Note:</b> This is arranged from earliest to latest. <br><br>"
 
-	for(var/d in M.dialogue_log)
-		dat += "<li>[d]</li>"
+	if(!isemptylist(M.dialogue_log))
+		dat += "<fieldset style='border: 2px solid white; display: inline'>"
 
-	usr << browse(dat, "window=admin_dialogue_log")
+		for(var/d in M.dialogue_log)
+			dat += "[d]<br>"
+
+		dat += "</fieldset>"
+	else
+		dat += "<i>No dialogue logs found for [M].</i>"
+	var/datum/browser/popup = new(usr, "admin_dialogue_log", "[src]", 650, 650, src)
+	popup.set_content(jointext(dat,null))
+	popup.open()
+
+	onclose(usr, "admin_dialogue_log")
+
 
 	feedback_add_details("admin_verb","PDL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 
 

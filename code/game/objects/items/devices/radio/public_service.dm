@@ -20,7 +20,4 @@
 		global_announcer.autosay ("<FONT size=3>Relayed message in [user.loc.loc] from <B>[user]</B>: [text] </FONT>", "[service]", "[department]")
 
 		user << "<span class='danger'>You sent over the message \"[text]\" over to the [service] hotline.</span>"
-		log_pda("(COMM: [src]) sent \"[text]\" to [service]", usr)
-		user.dialogue_log += "<b>([time_stamp()])</b> (<b>[user]/[user.client]</b>) <u>PUBLIC INTERCOM:</u> - <span style=\"color:blue\">[text]</span>"
-		round_text_log += "<b>([time_stamp()])</b> (<b>[user]/[user.client]</b>) <u>PUBLIC INTERCOM:</u> - <span style=\"color:blue\">[text]</span>"
-
+		log_say("(COMM: [src]) sent \"[text]\" to [service]", usr)

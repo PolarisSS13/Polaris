@@ -23,10 +23,6 @@
 
 	if (message)
 		message = say_emphasis(message)
-		if(ishuman(src))
-			dialogue_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>CUSTOM EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
-			round_text_log += "<b>([time_stamp()])</b> (<b>[src]</b>) <u>CUSTOM EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
-
 
  // Hearing gasp and such every five seconds is not good emotes were not global for a reason.
  // Maybe some people are okay with that.
