@@ -891,8 +891,6 @@
 				src << "<span class='warning'>You cannot speak in IC (Muted).</span>"
 				return
 
-				dialogue_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
-				round_text_log += "<b>([time_stamp()])</b> (<b>[src]/[src.client]</b>) <u>EMOTE:</u> - <span style=\"color:purple\">[message]</span>"
 		custom_emote(m_type,message)
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
