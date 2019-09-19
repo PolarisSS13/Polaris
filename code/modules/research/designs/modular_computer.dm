@@ -9,7 +9,6 @@
 	name = "basic hard drive"
 	id = "hdd_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/
 	sort_string = "VAAAA"
@@ -17,8 +16,6 @@
 /datum/design/item/modularcomponent/disk/advanced
 	name = "advanced hard drive"
 	id = "hdd_advanced"
-	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/advanced
 	sort_string = "VAAAB"
@@ -27,7 +24,6 @@
 	name = "super hard drive"
 	id = "hdd_super"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 400)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/super
 	sort_string = "VAAAC"
@@ -36,7 +32,6 @@
 	name = "cluster hard drive"
 	id = "hdd_cluster"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 16000, "glass" = 800)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/cluster
 	sort_string = "VAAAD"
@@ -45,7 +40,6 @@
 	name = "small hard drive"
 	id = "hdd_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 200)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/small
 	sort_string = "VAAAE"
@@ -54,7 +48,6 @@
 	name = "micro hard drive"
 	id = "hdd_micro"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 100)
 	build_path = /obj/item/weapon/computer_hardware/hard_drive/micro
 	sort_string = "VAAAF"
@@ -65,7 +58,6 @@
 	name = "basic network card"
 	id = "netcard_basic"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 100)
 	build_path = /obj/item/weapon/computer_hardware/network_card
 	sort_string = "VBAAA"
@@ -74,7 +66,6 @@
 	name = "advanced network card"
 	id = "netcard_advanced"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 200)
 	build_path = /obj/item/weapon/computer_hardware/network_card/advanced
 	sort_string = "VBAAB"
@@ -83,7 +74,6 @@
 	name = "wired network card"
 	id = "netcard_wired"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 400)
 	build_path = /obj/item/weapon/computer_hardware/network_card/wired
 	sort_string = "VBAAC"
@@ -94,7 +84,6 @@
 	name = "standard battery module"
 	id = "bat_normal"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module
 	sort_string = "VCAAA"
@@ -103,7 +92,6 @@
 	name = "advanced battery module"
 	id = "bat_advanced"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/advanced
 	sort_string = "VCAAB"
@@ -112,7 +100,6 @@
 	name = "super battery module"
 	id = "bat_super"
 	req_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 3)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 8000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/super
 	sort_string = "VCAAC"
@@ -121,7 +108,6 @@
 	name = "ultra battery module"
 	id = "bat_ultra"
 	req_tech = list(TECH_POWER = 5, TECH_ENGINEERING = 4)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 16000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/ultra
 	sort_string = "VCAAD"
@@ -130,7 +116,6 @@
 	name = "nano battery module"
 	id = "bat_nano"
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 2000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/nano
 	sort_string = "VCAAE"
@@ -139,7 +124,6 @@
 	name = "micro battery module"
 	id = "bat_micro"
 	req_tech = list(TECH_POWER = 2, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/computer_hardware/battery_module/micro
 	sort_string = "VCAAF"
@@ -150,7 +134,6 @@
 	name = "computer processor unit"
 	id = "cpu_normal"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 8000)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit
 	sort_string = "VDAAA"
@@ -159,7 +142,6 @@
 	name = "computer microprocessor unit"
 	id = "cpu_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/small
 	sort_string = "VDAAB"
@@ -168,7 +150,6 @@
 	name = "computer photonic processor unit"
 	id = "pcpu_normal"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 32000, glass = 8000)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic
 	sort_string = "VDAAC"
@@ -177,7 +158,6 @@
 	name = "computer photonic microprocessor unit"
 	id = "pcpu_small"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
-	build_type = IMPRINTER
 	materials = list(DEFAULT_WALL_MATERIAL = 16000, glass = 4000)
 	build_path = /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	sort_string = "VDAAD"
@@ -188,7 +168,6 @@
 	name = "RFID card slot"
 	id = "cardslot"
 	req_tech = list(TECH_DATA = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	build_path = /obj/item/weapon/computer_hardware/card_slot
 	sort_string = "VEAAA"
@@ -197,7 +176,6 @@
 	name = "nano printer"
 	id = "nanoprinter"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	build_path = /obj/item/weapon/computer_hardware/nano_printer
 	sort_string = "VEAAB"
@@ -206,7 +184,6 @@
 	name = "tesla link"
 	id = "teslalink"
 	req_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
-	build_type = PROTOLATHE
 	materials = list(DEFAULT_WALL_MATERIAL = 10000)
 	build_path = /obj/item/weapon/computer_hardware/tesla_link
 	sort_string = "VEAAC"
