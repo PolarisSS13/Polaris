@@ -973,8 +973,20 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		var/obj/machinery/cryopod/CP = human_cryopods[input(usr,"Select a cryopod to use","Cryopod Choice") as null|anything in human_cryopods]
 		if(!CP)
 			return
+
+
+		var/mob/living/carbon/human/H = M
+		if(H.save_mob_to_prefs()) // saves character if round is canon.
+			spawn(20)
+			M << "<span class='notice'><b>Your character has now been saved.</b> All changes from this round will apply to your current character.</span>"
+		else
+			M << "<span class='notice'><b>As this is not a canon round, your character will not be saved this time.</b></span>"
+
+
 		M.ghostize()
 		CP.despawn_occupant(M)
+
+
 		return
 
 	else if(issilicon(M))
