@@ -293,6 +293,7 @@ obj/item/clothing/suit/kamishimo
 	desc = "Traditional Japanese menswear."
 	icon_state = "kamishimo"
 	index = 1
+
 /*
  * coats
  */
@@ -349,6 +350,7 @@ obj/item/clothing/suit/kamishimo
 	flags_inv = HIDEHOLSTER
 	index = 1
 
+
 /obj/item/clothing/suit/storage/trench
 	name = "brown trenchcoat"
 	desc = "A rugged canvas trenchcoat, designed and created by TX Fabrication Corp. The coat appears to have its kevlar lining removed."
@@ -376,6 +378,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	desc = "A duster commonly seen on cowboys from Earth's late 1800's."
 	icon_state = "duster"
 	index = 1
+
 	blood_overlay_type = "coat"
 	allowed = list(/obj/item/weapon/tank/emergency/oxygen, /obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	flags_inv = HIDEHOLSTER
@@ -385,6 +388,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	desc = "A fancy victorian tailcoat."
 	icon_state = "tailcoat"
 	index = 1
+
 
 /obj/item/clothing/suit/tailcoat/ladies
 	name = "ladies victorian coat"

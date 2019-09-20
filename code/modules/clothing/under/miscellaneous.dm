@@ -291,12 +291,14 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 	index = 1
 
+
 /obj/item/clothing/under/ascetic
 	name = "plain ascetic garb"
 	desc = "Popular with freshly grown vatborn and new age cultists alike."
 	icon_state = "ascetic"
 	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
 	index = 1
+
 /*
  * dress
  */
@@ -426,17 +428,20 @@
 	item_state_slots = list(slot_r_hand_str = "darkreddress", slot_l_hand_str = "darkreddress")
 	index = 1
 
+
 /obj/item/clothing/under/dress/sari/green
 	name = "green sari"
 	icon_state = "sari_green"
 	item_state_slots = list(slot_r_hand_str = "dress_green", slot_l_hand_str = "dress_green")
 	index = 1
 
+
 /obj/item/clothing/under/dress/lilacdress
 	name = "lilac dress"
 	desc = "A simple black dress adorned in fake purple lilacs."
 	icon_state = "lilacdress"
 	index = 1
+
 /*
  * wedding stuff
  */
@@ -693,6 +698,7 @@
 	flags_inv = HIDESHOES
 	index = 1
 
+
 /obj/item/clothing/under/dress/darkred
 	name = "fancy dark red dress"
 	desc = "A short, red dress with a black belt. Fancy."
@@ -907,7 +913,9 @@
 	name = "victorian suit"
 	desc = "A victorian style suit, fancy!"
 	icon_state = "victorianvest"
+	rolled_sleeves = 0
 	index = 1
+
 
 /obj/item/clothing/under/victorian/musket
 	name = "victorian musketeer suit"

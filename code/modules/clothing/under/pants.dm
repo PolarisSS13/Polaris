@@ -197,6 +197,7 @@
 	icon_state = "workpants_green"
 	index = 1
 
+
 /obj/item/clothing/under/pants/utility/orange
 	name = "orange utility pants"
 	desc = "A pair of pleather reinforced orange work pants."

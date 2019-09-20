@@ -240,3 +240,4 @@
 	desc = "A simple pleated skirt. It's like high school all over again."
 	icon_state = "pleated"
 	addblends = "pleated_a"
+	index = 1

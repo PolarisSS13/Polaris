@@ -597,8 +597,15 @@
 
 /obj/item/clothing/suit/New()
 	if(index)
-		var/new_icon = "icons/obj/clothing/suits[index].dmi"
+		var/new_icon = "icons/obj/clothing/suits_[index].dmi"
 		icon = new_icon
+		var/r_icon = "icons/mob/items/righthand_suits_[index].dmi"
+		var/l_icon = "icons/mob/items/lefthand_suits_[index].dmi"
+		item_icons = list(
+			slot_l_hand_str = l_icon,
+			slot_r_hand_str = r_icon,
+		)
+
 	..()
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
@@ -650,7 +657,25 @@
 	..()
 
 /obj/item/clothing/under/New()
+	if(index)
+		var/new_icon = "icons/obj/clothing/uniforms_[index].dmi"
+		icon = new_icon
+
+		var/r_icon = "icons/mob/items/righthand_uniforms_[index].dmi"
+		var/l_icon = "icons/mob/items/lefthand_uniforms_[index].dmi"
+
+		item_icons = list(
+			slot_l_hand_str = l_icon,
+			slot_r_hand_str = r_icon,
+			)
+
+		var/rd_icon = "icons/mob/uniform_rolled_down_[index].dmi"
+		var/rd_sleeves = "icons/mob/uniform_sleeves_rolled_[index].dmi"
+
+		rolled_down_icon = rd_icon
+		rolled_down_sleeves_icon = rd_sleeves
 	..()
+
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -658,9 +683,15 @@
 	else
 		worn_state = icon_state
 
+
+
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s" in icon_states("[INV_W_UNIFORM_DEF_ICON][index].dmi")) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
+		var/is = "[INV_W_UNIFORM_DEF_ICON].dmi"
+		if(index)
+			is = "[INV_W_UNIFORM_DEF_ICON]_[index].dmi"
+
+		if(("[worn_state]_d_s" in icon_states(is)) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
 			rolled_down = 0
 
 	if(rolled_down == -1)
@@ -668,9 +699,7 @@
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
-	if(index)
-		var/new_icon = "icons/obj/clothing/uniforms[index].dmi"
-		icon = new_icon
+
 
 
 /obj/item/clothing/under/proc/update_rolldown_status()
@@ -688,7 +717,13 @@
 	else if ("[worn_state]_s" in icon_states(rolled_down_icon))
 		under_icon = rolled_down_icon
 	else
-		under_icon = "[INV_W_UNIFORM_DEF_ICON][index].dmi"
+		var/new_icon
+		if(index)
+			new_icon = "[INV_W_UNIFORM_DEF_ICON]_[index].dmi"
+			under_icon = new_icon
+		else
+			new_icon = "[INV_W_UNIFORM_DEF_ICON].dmi"
+			under_icon = new_icon
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_d_s" in icon_states(under_icon)))
@@ -713,7 +748,8 @@
 	else if ("[worn_state]_s" in icon_states(rolled_down_sleeves_icon))
 		under_icon = rolled_down_sleeves_icon
 	else
-		under_icon = "[INV_W_UNIFORM_DEF_ICON][index].dmi"
+		var/new_icon = "[INV_W_UNIFORM_DEF_ICON]_[index].dmi"
+		under_icon = new_icon
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_sleeves_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_r_s" in icon_states(under_icon)))

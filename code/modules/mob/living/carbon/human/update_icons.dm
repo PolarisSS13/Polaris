@@ -574,8 +574,14 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	var/obj/item/clothing/under/under = w_uniform
 
+	var/uniform_sprite
+
+	if(under.index)
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON]_[under.index].dmi"
+	else
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
+
 	//Build a uniform sprite
-	var/uniform_sprite = "[INV_W_UNIFORM_DEF_ICON][under.index].dmi"
 	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER)
 	apply_layer(UNIFORM_LAYER)
 
@@ -739,8 +745,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		return //No point, no suit.
 
 	var/obj/item/clothing/suit/suit = wear_suit
+	var/suit_sprite
 
-	var/suit_sprite = "[INV_SUIT_DEF_ICON][suit.index].dmi"
+	if(suit.index)
+		suit_sprite = "[INV_SUIT_DEF_ICON]_[suit.index].dmi"
+	else
+		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
 
 	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER)
 

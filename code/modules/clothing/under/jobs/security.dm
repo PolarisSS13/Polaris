@@ -34,6 +34,7 @@
 	rolled_sleeves = -1
 	index = 1
 
+
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."

@@ -205,6 +205,7 @@
 	rolled_sleeves = -1
 	index = 1
 
+
 /obj/item/clothing/under/rank/medical/turtleneck
 	name = "medical turtleneck"
 	desc = "It's a stylish turtleneck made of bioresistant fiber. Look good, save lives- what more could you want?"
