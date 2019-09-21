@@ -510,3 +510,12 @@
 /datum/gear/uniform/sarigreen
 	display_name = "sari, green"
 	path = /obj/item/clothing/under/dress/sari/green
+
+
+/datum/gear/uniform/coveter
+	display_name = "coveter dress"
+	path = /obj/item/clothing/under/dress/coveter
+
+/datum/gear/uniform/coveter/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)

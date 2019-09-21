@@ -691,19 +691,36 @@
 	addblends = "whitedress4_a"
 	flags_inv = HIDESHOES
 
-/obj/item/clothing/under/dress/ariswedding
-	name = "pink aristocratic wedding dress"
-	desc = "A long pink frilly dress that flares out at the bottom."
-	icon_state = "ariswedding"
-	flags_inv = HIDESHOES
-	index = 1
-
-
 /obj/item/clothing/under/dress/darkred
 	name = "fancy dark red dress"
 	desc = "A short, red dress with a black belt. Fancy."
 	icon_state = "darkreddress"
 
+/obj/item/clothing/under/dress/ariswedding
+	name = "aristocratic wedding dress"
+	desc = "A long pink frilly dress that flares out at the bottom, very classy!"
+	icon_state = "ariswedding"
+	flags_inv = HIDESHOES
+	index = 1
+
+/obj/item/clothing/under/dress/arisbridesmaid
+	name = "aristocratic bridesmaid dress"
+	desc = "Always the bridesmaid, never the bride."
+	icon_state = "arisbridesmaid"
+	index = 1
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/arisflowergirl
+	name = "pink aristocratic flowergirl dress"
+	desc = "Always the bridesmaid, never the bride."
+	icon_state = "arisflowergirl"
+	index = 1
+
+/obj/item/clothing/under/dress/coveter
+	name = "coveter dress"
+	desc = "Ah, the dress of young love."
+	icon_state = "coveter"
+	index = 1
 /*
  * swimsuit
  */
@@ -916,7 +933,6 @@
 	rolled_sleeves = 0
 	index = 1
 
-
 /obj/item/clothing/under/victorian/musket
 	name = "victorian musketeer suit"
 	icon_state = "victorianmusk"
@@ -929,3 +945,15 @@
 /obj/item/clothing/under/victorian/red
 	name = "red victorian suit"
 	icon_state = "victorianredvest"
+
+/obj/item/clothing/under/arisgroom
+	name = "aristocratic groom tuxedo"
+	desc = "You can almost smell the bank notes this was sewn from."
+	icon_state = "arisgroom"
+	index = 1
+
+/obj/item/clothing/under/arisbestman
+	name = "aristocratic best man tuxedo"
+	desc = "You should have asked her out sooner. But at least you have this cool suit..."
+	icon_state = "arisbestman"
+	index = 1
