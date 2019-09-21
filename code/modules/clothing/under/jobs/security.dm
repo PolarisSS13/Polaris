@@ -26,6 +26,15 @@
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
 
+/obj/item/clothing/under/rank/security/turtleneck
+	name = "police officer's turtleneck"
+	desc = "It's a stylish turtleneck made of a robust nanoweave. Nobody said the Law couldn't be fashionable."
+	icon_state = "turtle_sec"
+	rolled_down = -1
+	rolled_sleeves = -1
+	index = 1
+
+
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."

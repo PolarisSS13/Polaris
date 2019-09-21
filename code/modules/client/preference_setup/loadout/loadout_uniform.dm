@@ -67,6 +67,15 @@
 		skirts[initial(skirt_type.name)] = skirt_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
 
+
+/datum/gear/uniform/pleated
+	display_name = "pleated skirt"
+	path = /obj/item/clothing/under/skirt/pleated
+
+/datum/gear/uniform/pleated/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
 /datum/gear/uniform/pants
 	display_name = "pants selection"
 	path = /obj/item/clothing/under/pants/white
@@ -363,6 +372,10 @@
 	display_name = "red evening gown"
 	path = /obj/item/clothing/under/dress/redeveninggown
 
+/datum/gear/uniform/dresses/eveninggown/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
 /datum/gear/uniform/dresses/maid
 	display_name = "maid uniform selection"
 	path = /obj/item/clothing/under/dress/maid
@@ -374,6 +387,18 @@
 		var/obj/item/clothing/under/dress/maid/maid_type = maid
 		maids[initial(maid_type.name)] = maid_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(maids))
+
+/datum/gear/uniform/dresses/victorian
+	display_name = "victorian selection"
+	path = /obj/item/clothing/under/victorian
+
+/datum/gear/uniform/dresses/victorian/New()
+	..()
+	var/list/victorians = list()
+	for(var/victorian in typesof(/obj/item/clothing/under/victorian))
+		var/obj/item/clothing/under/victorian/victorian_type = victorian
+		victorians[initial(victorian_type.name)] = victorian_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(victorians))
 
 /datum/gear/uniform/utility
 	display_name = "utility, black"
@@ -398,6 +423,26 @@
 /datum/gear/uniform/brandsuit/focal
 	display_name = "jumpsuit, focal"
 	path = /obj/item/clothing/under/focal
+
+/datum/gear/uniform/job_turtle/science
+	display_name = "turtleneck, science"
+	path = /obj/item/clothing/under/rank/scientist/turtleneck
+	allowed_roles = list("Research Director", "Scientist", "Roboticist")
+
+/datum/gear/uniform/job_turtle/security
+	display_name = "turtleneck, security"
+	path = /obj/item/clothing/under/rank/security/turtleneck
+	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
+
+/datum/gear/uniform/job_turtle/engineering
+	display_name = "turtleneck, engineering"
+	path = /obj/item/clothing/under/rank/engineer/turtleneck
+	allowed_roles = list("Chief Engineer", "Atmospheric Technician", "Station Engineer")
+
+/datum/gear/uniform/job_turtle/medical
+	display_name = "turtleneck, medical"
+	path = /obj/item/clothing/under/rank/medical/turtleneck
+	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychologist", "Search and Rescue", "Chemist")
 
 /datum/gear/uniform/mbill
 	display_name = "outfit, major bill's (Cargo)"
@@ -457,3 +502,29 @@
 /datum/gear/uniform/westernbustle
 	display_name = "western bustle"
 	path = /obj/item/clothing/under/dress/westernbustle
+
+/datum/gear/uniform/sarired
+	display_name = "sari, red"
+	path = /obj/item/clothing/under/dress/sari
+
+/datum/gear/uniform/sarigreen
+	display_name = "sari, green"
+	path = /obj/item/clothing/under/dress/sari/green
+
+
+/datum/gear/uniform/coveter
+	display_name = "coveter dress"
+	path = /obj/item/clothing/under/dress/coveter
+
+/datum/gear/uniform/coveter/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+
+/datum/gear/uniform/diva
+	display_name = "diva dress"
+	path = /obj/item/clothing/under/dress/diva
+
+/datum/gear/uniform/diva/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)

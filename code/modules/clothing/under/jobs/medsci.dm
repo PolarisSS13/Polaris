@@ -195,3 +195,21 @@
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	rolled_sleeves = 0
+
+/obj/item/clothing/under/rank/scientist/turtleneck
+	name = "science turtleneck"
+	desc = "It's a stylish turtleneck weaved with an explosive-resistant, comfortable mesh. You don't have to look like a dork to be a dork."
+	icon_state = "turtle_sci"
+	item_state_slots = list(slot_r_hand_str = "purple", slot_l_hand_str = "purple")
+	rolled_down = -1
+	rolled_sleeves = -1
+	index = 1
+
+
+/obj/item/clothing/under/rank/medical/turtleneck
+	name = "medical turtleneck"
+	desc = "It's a stylish turtleneck made of bioresistant fiber. Look good, save lives- what more could you want?"
+	icon_state = "turtle_med"
+	rolled_down = -1
+	rolled_sleeves = -1
+	index = 1

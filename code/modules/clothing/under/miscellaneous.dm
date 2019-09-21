@@ -283,6 +283,22 @@
 	item_state_slots = list(slot_r_hand_str = "yellow", slot_l_hand_str = "yellow")
 	body_parts_covered = LOWER_TORSO
 
+/obj/item/clothing/under/moderncoat
+	name = "modern wrapped coat"
+	desc = "The cutting edge of fashion."
+	icon_state = "moderncoat"
+	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	index = 1
+
+
+/obj/item/clothing/under/ascetic
+	name = "plain ascetic garb"
+	desc = "Popular with freshly grown vatborn and new age cultists alike."
+	icon_state = "ascetic"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
+	index = 1
+
 /*
  * dress
  */
@@ -314,6 +330,7 @@
 	name = "red evening gown"
 	desc = "Fancy dress for space bar singers."
 	icon_state = "red_evening_gown"
+	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/dress/maid
 	name = "maid costume"
@@ -403,6 +420,27 @@
 	name = "western bustle"
 	desc = "A western bustle dress from Earth's late 1800's."
 	icon_state = "westernbustle"
+
+/obj/item/clothing/under/dress/sari
+	name = "red sari"
+	desc = "A colorful traditional dress originating from India."
+	icon_state = "sari_red"
+	item_state_slots = list(slot_r_hand_str = "darkreddress", slot_l_hand_str = "darkreddress")
+	index = 1
+
+
+/obj/item/clothing/under/dress/sari/green
+	name = "green sari"
+	icon_state = "sari_green"
+	item_state_slots = list(slot_r_hand_str = "dress_green", slot_l_hand_str = "dress_green")
+	index = 1
+
+
+/obj/item/clothing/under/dress/lilacdress
+	name = "lilac dress"
+	desc = "A simple black dress adorned in fake purple lilacs."
+	icon_state = "lilacdress"
+	index = 1
 
 /*
  * wedding stuff
@@ -658,6 +696,36 @@
 	desc = "A short, red dress with a black belt. Fancy."
 	icon_state = "darkreddress"
 
+/obj/item/clothing/under/dress/ariswedding
+	name = "aristocratic wedding dress"
+	desc = "A long pink frilly dress that flares out at the bottom, very classy!"
+	icon_state = "ariswedding"
+	flags_inv = HIDESHOES
+	index = 1
+
+/obj/item/clothing/under/dress/arisbridesmaid
+	name = "aristocratic bridesmaid dress"
+	desc = "Always the bridesmaid, never the bride."
+	icon_state = "arisbridesmaid"
+	index = 1
+	flags_inv = HIDESHOES
+
+/obj/item/clothing/under/dress/arisflowergirl
+	name = "pink aristocratic flowergirl dress"
+	desc = "Always the bridesmaid, never the bride."
+	icon_state = "arisflowergirl"
+	index = 1
+
+/obj/item/clothing/under/dress/coveter
+	name = "coveter dress"
+	desc = "Ah, the dress of young love."
+	icon_state = "coveter"
+	index = 1
+
+/obj/item/clothing/under/dress/diva
+	name = "diva dress"
+	desc = "You know this dress was made for surviving."
+	icon_state = "diva"
 /*
  * swimsuit
  */
@@ -853,3 +921,44 @@
 	name = "hazard cohesion suit"
 	desc = "An orange cohesion suit with yellow hazard stripes intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
 	icon_state = "cohesionsuit_hazard"
+
+/obj/item/clothing/under/victorian/dress
+	name = "black victorian dress"
+	desc = "A victorian style dress, fancy!"
+	icon_state = "victorianblackdress"
+
+/obj/item/clothing/under/victorian/dress/red
+	name = "red victorian dress"
+	icon_state = "victorianreddress"
+
+/obj/item/clothing/under/victorian
+	name = "victorian suit"
+	desc = "A victorian style suit, fancy!"
+	icon_state = "victorianvest"
+	rolled_sleeves = 0
+	index = 1
+
+/obj/item/clothing/under/victorian/musket
+	name = "victorian musketeer suit"
+	icon_state = "victorianmusk"
+
+
+/obj/item/clothing/under/victorian/redblack
+	name = "red and black victorian suit"
+	icon_state = "victorianblred"
+
+/obj/item/clothing/under/victorian/red
+	name = "red victorian suit"
+	icon_state = "victorianredvest"
+
+/obj/item/clothing/under/arisgroom
+	name = "aristocratic groom tuxedo"
+	desc = "You can almost smell the bank notes this was sewn from."
+	icon_state = "arisgroom"
+	index = 1
+
+/obj/item/clothing/under/arisbestman
+	name = "aristocratic best man tuxedo"
+	desc = "You should have asked her out sooner. But at least you have this cool suit..."
+	icon_state = "arisbestman"
+	index = 1

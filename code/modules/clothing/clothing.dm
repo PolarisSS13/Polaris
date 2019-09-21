@@ -26,6 +26,12 @@
 	var/blood_sprite_state
 	drop_sound = 'sound/items/drop/clothing.ogg'
 
+	var/index			//null by default, if set, will change which dmi it uses
+
+/obj/item/clothing/New()
+	..()
+	set_clothing_index()
+
 //Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
@@ -213,6 +219,9 @@
 		SPECIES_TESHARI = 'icons/mob/species/seromi/gloves.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi'
 		)
+
+/obj/item/clothing/proc/set_clothing_index()
+	return
 
 /obj/item/clothing/gloves/update_clothing_icon()
 	if (ismob(src.loc))
@@ -587,10 +596,26 @@
 	valid_accessory_slots = list("over", "armband")
 	restricted_accessory_slots = list("armband")
 
+/obj/item/clothing/suit/set_clothing_index()
+	..()
+
+	if(index && !icon_override)
+		icon = new /icon("icons/obj/clothing/suits_[index].dmi")
+		item_icons = list(
+			slot_l_hand_str = new /icon("icons/mob/items/lefthand_suits_[index].dmi"),
+			slot_r_hand_str = new /icon("icons/mob/items/righthand_suits_[index].dmi"),
+		)
+
+		return 1
+
+	return 0
+
 /obj/item/clothing/suit/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_wear_suit()
+
+	set_clothing_index()
 
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
@@ -643,6 +668,7 @@
 
 /obj/item/clothing/under/New()
 	..()
+
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -650,15 +676,37 @@
 	else
 		worn_state = icon_state
 
+
+
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s" in icon_states(INV_W_UNIFORM_DEF_ICON)) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
+
+		if(("[worn_state]_d_s" in icon_states(icon)) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
 			rolled_down = 0
 
 	if(rolled_down == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsuit
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
+
+
+/obj/item/clothing/under/set_clothing_index()
+	..()
+
+	if(index && !icon_override)
+		icon = new /icon("icons/obj/clothing/uniforms_[index].dmi")
+
+		item_icons = list(
+			slot_l_hand_str = new /icon("icons/mob/items/lefthand_uniforms_[index].dmi"),
+			slot_r_hand_str = new /icon("icons/mob/items/righthand_uniforms_[index].dmi"),
+			)
+
+		rolled_down_icon = new /icon("icons/mob/uniform_rolled_down_[index].dmi")
+		rolled_down_sleeves_icon = new /icon("icons/mob/uniform_sleeves_rolled_[index].dmi")
+		return 1
+
+	return 0
+
 
 /obj/item/clothing/under/proc/update_rolldown_status()
 	var/mob/living/carbon/human/H
@@ -674,8 +722,6 @@
 		under_icon = item_icons[slot_w_uniform_str]
 	else if ("[worn_state]_s" in icon_states(rolled_down_icon))
 		under_icon = rolled_down_icon
-	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_d_s" in icon_states(under_icon)))
@@ -700,7 +746,8 @@
 	else if ("[worn_state]_s" in icon_states(rolled_down_sleeves_icon))
 		under_icon = rolled_down_sleeves_icon
 	else
-		under_icon = INV_W_UNIFORM_DEF_ICON
+		if(index)
+			under_icon = new /icon("[INV_W_UNIFORM_DEF_ICON]_[index].dmi")
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_sleeves_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_r_s" in icon_states(under_icon)))
@@ -714,6 +761,8 @@
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_w_uniform()
+
+	set_clothing_index()
 
 
 /obj/item/clothing/under/examine(mob/user)
