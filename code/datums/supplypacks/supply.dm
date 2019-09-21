@@ -33,7 +33,6 @@
 			/obj/item/weapon/reagent_containers/glass/bucket,
 			/obj/item/weapon/mop,
 			/obj/item/clothing/under/rank/janitor,
-			/obj/item/weapon/cartridge/janitor,
 			/obj/item/clothing/gloves/black,
 			/obj/item/clothing/head/soft/purple,
 			/obj/item/weapon/storage/belt/janitor,
@@ -84,12 +83,12 @@
 	containertype = /obj/structure/closet/crate
 	containername = "Office supplies crate"
 
-/datum/supply_pack/supply/spare_pda
-	name = "Spare PDAs"
+/datum/supply_pack/supply/spare_communicators
+	name = "Spare communicators"
 	cost = 10
 	containertype = /obj/structure/closet/crate
-	containername = "Spare PDA crate"
-	contains = list(/obj/item/device/pda = 3)
+	containername = "Spare communicator crate"
+	contains = list(/obj/item/device/communicator = 3)
 
 /datum/supply_pack/supply/minergear
 	name = "Shaft miner equipment"

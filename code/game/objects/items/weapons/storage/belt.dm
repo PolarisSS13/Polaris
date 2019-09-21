@@ -168,6 +168,7 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
 		/obj/item/device/pda,
+		/obj/item/device/communicator,
 		/obj/item/device/radio/headset,
 		/obj/item/clothing/gloves,
 		/obj/item/device/hailer,
@@ -180,6 +181,7 @@
 		/obj/item/taperoll,
 		/obj/item/weapon/gun/projectile/colt,
 		/obj/item/weapon/gun/projectile/revolver/deckard
+		/obj/item/device/holowarrant
 		)
 
 /obj/item/weapon/storage/belt/detective
@@ -434,4 +436,3 @@
  	name = "yellow fannypack"
  	icon_state = "fannypack_yellow"
  	item_state = "fannypack_yellow"
-
