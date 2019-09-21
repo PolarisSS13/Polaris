@@ -456,3 +456,27 @@ datum/gear/suit/duster
 	display_name = "snowsuit, supply"
 	path = /obj/item/clothing/suit/storage/snowsuit/cargo
 	allowed_roles = list("Factory Manager","shaft Miner","Factory Worker","City Clerk")
+
+/datum/gear/suit/miscellaneous/kamishimo
+	display_name = "kamishimo"
+	path = /obj/item/clothing/suit/kamishimo
+
+/datum/gear/suit/miscellaneous/cardigan
+	display_name = "cardigan"
+	path = /obj/item/clothing/suit/storage/toggle/cardigan
+
+/datum/gear/suit/miscellaneous/cardigan/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/suit/tailcoat
+	display_name = "tailcoat selection"
+	path = /obj/item/clothing/suit/tailcoat
+
+/datum/gear/suit/track/New()
+	..()
+	var/list/tailcoats = list()
+	for(var/tailcoat_style in typesof(/obj/item/clothing/suit/tailcoat))
+		var/obj/item/clothing/suit/tailcoat/tailcoat = tailcoat_style
+		tailcoats[initial(tailcoat.name)] = tailcoat
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tailcoats))

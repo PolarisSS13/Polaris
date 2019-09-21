@@ -234,3 +234,10 @@
 	desc = "It's a fashionable jumpskirt worn by those few with the dedication to achieve the position of \"Chief of Police\". It has additional armor to protect the wearer."
 	name = "chief of police's jumpskirt"
 	icon_state = "hosf"
+
+/obj/item/clothing/under/skirt/pleated
+	name = "pleated skirt"
+	desc = "A simple pleated skirt. It's like high school all over again."
+	icon_state = "pleated"
+	addblends = "pleated_a"
+	index = 1
