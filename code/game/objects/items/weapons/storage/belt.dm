@@ -180,7 +180,7 @@
 		/obj/item/weapon/gun/projectile/p92x,
 		/obj/item/taperoll,
 		/obj/item/weapon/gun/projectile/colt,
-		/obj/item/weapon/gun/projectile/revolver/deckard
+		/obj/item/weapon/gun/projectile/revolver/deckard,
 		/obj/item/device/holowarrant
 		)
 
