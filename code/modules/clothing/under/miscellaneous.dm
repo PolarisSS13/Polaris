@@ -721,6 +721,11 @@
 	desc = "Ah, the dress of young love."
 	icon_state = "coveter"
 	index = 1
+
+/obj/item/clothing/under/dress/diva
+	name = "diva dress"
+	desc = "You know this dress was made for surviving."
+	icon_state = "diva"
 /*
  * swimsuit
  */

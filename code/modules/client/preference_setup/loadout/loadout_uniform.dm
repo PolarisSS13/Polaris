@@ -519,3 +519,12 @@
 /datum/gear/uniform/coveter/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+
+/datum/gear/uniform/diva
+	display_name = "diva dress"
+	path = /obj/item/clothing/under/dress/diva
+
+/datum/gear/uniform/diva/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
