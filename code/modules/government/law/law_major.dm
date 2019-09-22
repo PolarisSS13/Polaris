@@ -29,7 +29,7 @@
 	fine = 450
 
 	
-        notes = "Injuries can be generally considered serious if they require specialized medical \
+	notes = "Injuries can be generally considered serious if they require specialized medical \
 	care to treat them. Any object capable of inflicting deadly wounds is considered a weapon \
 	in this case. Guns, knives, improperly used stunbatons are considered a deadly weapon as \
 	well as toolboxes, oxygen canisters, glass shards, metal rods, screwdrivers, etc."
