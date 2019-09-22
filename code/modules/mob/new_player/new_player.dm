@@ -423,6 +423,36 @@
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived to the city"].", "Arrivals Announcement Computer")
 
+/mob/new_player/proc/LateChoices()
+	var/name = client.prefs.real_name
+
+	var/dat = "<html><body><center>"
+	dat += "<b>Welcome, [name].<br></b>"
+	dat += "Round Duration: [roundduration2text()]<br>"
+
+	if(emergency_shuttle) //In case NanoTrasen decides reposess CentCom's shuttles.
+		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to CentCom, not recalled
+			dat += "<font color='red'><b>The city has been evacuated.</b></font><br>"
+		if(emergency_shuttle.online())
+			if (emergency_shuttle.evac)	// Emergency shuttle is past the point of no recall
+				dat += "<font color='red'>The city is currently undergoing evacuation procedures.</font><br>"
+			else						// Crew transfer initiated
+				dat += "<font color='red'>The city is currently undergoing civilian transfer procedures.</font><br>"
+
+	dat += "Choose from the following open/valid positions:<br>"
+	for(var/datum/job/job in job_master.occupations)
+		if(job && IsJobAvailable(job.title))
+			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
+				continue
+			var/active = 0
+			// Only players with the job assigned and AFK for less than 10 minutes count as active
+			for(var/mob/M in player_list) if(M.mind && M.client && M.mind.assigned_role == job.title && M.client.inactivity <= 10 * 60 * 10)
+				active++
+			dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
+
+	dat += "</center>"
+	src << browse(dat, "window=latechoices;size=300x640;can_close=1")
+
 
 /mob/new_player/proc/create_character(var/turf/T)
 	spawning = 1
@@ -548,45 +578,3 @@
 
 /mob/new_player/MayRespawn()
 	return 1
-
-/proc/get_job_unavailable_error_message(retval, jobtitle)
-	switch(retval)
-		if(JOB_AVAILABLE)
-			return "[jobtitle] is available."
-		if(JOB_UNAVAILABLE_GENERIC)
-			return "[jobtitle] is unavailable."
-		if(JOB_UNAVAILABLE_BANNED)
-			return "You are currently banned from [jobtitle]."
-		if(JOB_UNAVAILABLE_PLAYTIME)
-			return "You do not have enough relevant playtime for [jobtitle]."
-		if(JOB_UNAVAILABLE_ACCOUNTAGE)
-			return "Your account is not old enough for [jobtitle]."
-		if(JOB_UNAVAILABLE_SLOTFULL)
-			return "[jobtitle] is already filled to capacity."
-	return "Error: Unknown job availability."
-
-
-/mob/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
-	var/datum/job/job = job_master.GetJob(rank)
-	if(!job)
-		return JOB_UNAVAILABLE_GENERIC
-	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
-		if(job.title == "Civilian")
-			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
-				return JOB_AVAILABLE
-			for(var/datum/job/J in job_master.occupations)
-				if(J && J.current_positions < J.total_positions && J.title != job.title)
-					return JOB_UNAVAILABLE_SLOTFULL
-		else
-			return JOB_UNAVAILABLE_SLOTFULL
-	if(jobban_isbanned(src, rank))
-		return JOB_UNAVAILABLE_BANNED
-	if(QDELETED(src))
-		return JOB_UNAVAILABLE_GENERIC
-	if(!job.player_old_enough(client))
-		return JOB_UNAVAILABLE_ACCOUNTAGE
-//	if(job.required_playtime_remaining(client))
-//		return JOB_UNAVAILABLE_PLAYTIME
-//	if(latejoin && !job.special_check_latejoin(client))
-//		return JOB_UNAVAILABLE_GENERIC
-	return JOB_AVAILABLE
