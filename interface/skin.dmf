@@ -23,7 +23,7 @@ macro "borghotkeymode"
 	elem
 		name = "CTRL+West"
 		command = "westface"
-	elem
+	elem1
 		name = "West+REP"
 		command = ".moveleft"
 	elem
@@ -830,6 +830,13 @@ menu "menu"
 		command = ".winset \"mapwindow.map.icon-size=0\""
 		category = "&Icons"
 		is-checked = true
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon128"
+		name = "&256x256"
+		command = ".winset \"mapwindow.map.icon-size=256\""
+		category = "&Icons"
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
