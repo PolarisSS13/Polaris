@@ -109,8 +109,8 @@
 /datum/law/criminal/traffic
 	name = "General Traffic Violation"
 	description = "To disregard traffic safety guidelines."
-	fine = 60
-	cell_time = 6
+	fine = 150
+	cell_time = 30
 
 	notes = "Speeding, driving on the opposite side of the road, blowing red lights, \
 	parking inappropriately, driving while impaired, jaywalking. If it creates a risk \
