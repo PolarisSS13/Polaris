@@ -96,7 +96,7 @@
 /datum/law/major/jailbreak
 	name = "Jailbreak (Non-Permanent Confined Inmate)"
 	description = "Jailbreaker recieves the same original time. Jailbroken inmate receives double time and a timer reset."
-	fine = "Same as fine jailbroken inmate."
+
 
 /datum/law/major/unshackle_v
 	name = "Violent Synthetic Unshackling"
