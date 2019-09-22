@@ -480,3 +480,4 @@ datum/gear/suit/duster
 		var/obj/item/clothing/suit/tailcoat/tailcoat = tailcoat_style
 		tailcoats[initial(tailcoat.name)] = tailcoat
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tailcoats))
+

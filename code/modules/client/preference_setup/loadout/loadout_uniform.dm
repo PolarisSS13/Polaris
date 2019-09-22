@@ -528,3 +528,42 @@
 /datum/gear/uniform/diva/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+
+/datum/gear/uniform/polychrome/New()
+	..()
+	gear_tweaks = list(gear_tweak_polychrome_color_choice)
+
+
+/datum/gear/uniform/polychrome/polychromic_shirt
+	display_name = "polychromic button-up shirt"
+	path = /obj/item/clothing/under/polychromic/shirt
+
+/datum/gear/uniform/polychrome/polychromic_kilt
+	display_name = "polychromic kilt"
+	path = /obj/item/clothing/under/polychromic/kilt
+
+/datum/gear/uniform/polychrome/polychromic_skirt
+	display_name = "polychromic skirt"
+	path = /obj/item/clothing/under/polychromic/skirt
+
+/datum/gear/uniform/polychrome/polychromic_jorts
+	display_name = "polychromic shorts"
+	path = /obj/item/clothing/under/polychromic/shorts
+
+/datum/gear/uniform/polychrome/polychromic_jumpsuit
+	display_name = "polychromic jumpsuit"
+	path = /obj/item/clothing/under/polychromic/jumpsuit
+
+/datum/gear/uniform/polychrome/polychromic_shortpants
+	display_name = "polychromic athletic shorts"
+	path = /obj/item/clothing/under/polychromic/shortpants
+
+/datum/gear/uniform/polychrome/polychromic_pleat
+	display_name = "polychromic pleated skirt"
+	path = /obj/item/clothing/under/polychromic/pleat
+
+/datum/gear/uniform/polychrome/polychromic_shirt
+	display_name = "polychromic jumpsuit"
+	path = /obj/item/clothing/under/polychromic/jumpsuit
+
