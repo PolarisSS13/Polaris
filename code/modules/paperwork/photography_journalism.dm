@@ -29,7 +29,17 @@
 			if(A.mind.prefs)
 				if(A.mind.prefs.economic_status == CLASS_UPPER)
 					sensational += 5
-
+					
+			// If this person is unimportant, we don't care if they were arrested
+			// If they're in an important role or upper class, check to see if they look arrested.
+			
+			if(sensational > 0) 
+				if(A.w_uniform)
+					var/obj/item/clothing/C = A.w_uniform
+					if (istype(C, /obj/item/clothing/under/color/orange))
+						sensational = sensational * 2
+				if(A.handcuffed)
+					sensational = sensational * 2
 	return sensational
 
 /obj/item/device/camera/proc/get_gruesome_value(turf/the_turf as turf)
