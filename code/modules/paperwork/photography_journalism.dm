@@ -34,9 +34,9 @@
 			// If they're in an important role or upper class, check to see if they look arrested.
 			
 			if(sensational > 0) 
-				var/list/clothing_list = A.worn_clothing
-				for(var/obj/item/clothing/C in clothing_list)
-					if(C.name && C.name == "orange jumpsuit")
+				if(A.w_uniform)
+					var/obj/item/clothing/C = A.w_uniform
+					if (istype(C, /obj/item/clothing/under/color/orange))
 						sensational = sensational * 2
 				if(A.handcuffed)
 					sensational = sensational * 2
