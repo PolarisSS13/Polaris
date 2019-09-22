@@ -7,13 +7,13 @@
 	slot_flags = SLOT_TIE
 	w_class = ITEMSIZE_SMALL
 	var/slot = "decor"
-	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
+/*	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/image/mob_overlay = null
 	var/overlay_state = null
 	var/concealed_holster = 0
 	var/mob/living/carbon/human/wearer = null //To check if the wearer changes, so species spritesheets change properly.
-
+*/
 	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/seromi/ties.dmi') //Teshari can into webbing, too!
 
 /obj/item/clothing/accessory/Destroy()
@@ -31,7 +31,7 @@
 			inv_overlay = image(icon = INV_ACCESSORIES_DEF_ICON, icon_state = tmp_icon_state, dir = SOUTH)
 	return inv_overlay
 
-/obj/item/clothing/accessory/proc/get_mob_overlay()
+/obj/item/clothing/accessory/get_mob_overlay()
 	if(!mob_overlay || has_suit.loc != wearer)
 		var/tmp_icon_state = "[overlay_state? "[overlay_state]" : "[icon_state]"]"
 		if(ishuman(has_suit.loc))
