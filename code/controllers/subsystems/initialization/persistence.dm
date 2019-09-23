@@ -18,10 +18,6 @@ SUBSYSTEM_DEF(persistence)
 		P.Shutdown()
 
 /datum/controller/subsystem/persistence/proc/track_value(var/atom/value, var/track_type)
-
-	if(!config.canonicity) //if we're not canon in config or by gamemode, nothing will save.
-		return
-		
 	var/turf/T = get_turf(value)
 	if(!T)
 		return
