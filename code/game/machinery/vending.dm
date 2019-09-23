@@ -69,6 +69,23 @@
 
 	var/vending_sound = "machines/vending_drop.ogg"
 
+	var/vendor_department	//this is the department the vending machine gives money it acquires to.
+	var/charge_department	//"free items" get charged from this department account, or all paid items get charged, etcetera
+
+	var/charge_free_to_department			//free items get charged to dept account
+	var/charge_paid_to_department			//paid items get charged to dept instead of going through payment
+
+	var/auto_price			//select this if you want vending items to be autopriced based on actual cost so you don't have to use prices var
+
+/obj/machinery/vending/examine(mob/user)
+	..()
+	if(vendor_department)
+		to_chat(user, "<b>[src]</b> pays to the [vendor_department] account.")
+	if(charge_department && charge_free_to_department)
+		to_chat(user, "It charges from the [charge_department] account for free items.")
+	if(charge_department && charge_paid_to_department)
+		to_chat(user, "Paid items are supplied by the [charge_department] account.")
+
 /obj/machinery/vending/New()
 	..()
 	wires = new(src)
@@ -111,6 +128,10 @@
 			var/datum/stored_item/vending_product/product = new/datum/stored_item/vending_product(src, entry)
 
 			product.price = (entry in prices) ? prices[entry] : 0
+
+			if(!product.price && product.item_default_price && auto_price)
+				product.price = product.item_default_price
+
 			product.amount = (current_list[1][entry]) ? current_list[1][entry] : 1
 			product.category = category
 
@@ -171,7 +192,11 @@
 			handled = 1
 
 		if(paid)
+			if(vendor_department)
+				department_accounts["[vendor_department]"].money += currently_vending.price
+
 			vend(currently_vending, usr)
+
 			return
 		else if(handled)
 			SSnanoui.update_uis(src)
@@ -443,8 +468,21 @@
 			if(!(R.category & categories))
 				return
 
-			if(R.price <= 0)
+			if(charge_department)
+				if(charge_paid_to_department && R.price)
+					department_accounts["[charge_department]"].money -= R.price
+					vend(R, usr)
+
+				if(charge_free_to_department && !R.price && R.item_default_price)
+					department_accounts["[charge_department]"].money -= R.item_default_price
+					vend(R, usr)
+
+				if(vendor_department)
+					department_accounts["[vendor_department]"].money += R.price
+
+			if(R.price <= 0 && !charge_free_to_department)
 				vend(R, usr)
+
 			else if(istype(usr,/mob/living/silicon)) //If the item is not free, provide feedback if a synth is trying to buy something.
 				to_chat(usr, "<span class='danger'>Lawed unit recognized.  Lawed units cannot complete this transaction.  Purchase canceled.</span>")
 				return
@@ -736,6 +774,7 @@
 	has_logs = 1
 	vending_sound = "machines/vending_cans.ogg"
 
+
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
 						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
@@ -753,8 +792,12 @@
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
 	vending_sound = "machines/vending_coffee.ogg"
+
+	vendor_department = "Bar"
+
+	auto_price = 1
+
 
 /obj/machinery/vending/snack
 	name = "Getmore Chocolate Corp"
@@ -766,9 +809,10 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 3,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 3, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 4)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6,/obj/item/weapon/reagent_containers/food/snacks/unajerky = 6,)
-	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 4,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 3,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 4,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 4, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 7)
+
+
+	vendor_department = "Bar"
+	auto_price = 1
 
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
@@ -780,13 +824,12 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 10)
+					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 10, /obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 10)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 1)
+
+	vendor_department = "Bar"
+	auto_price = 1
+
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending_cans.ogg"
 
@@ -821,6 +864,10 @@
 					/obj/item/weapon/towel/random = 40)
 
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
+
+	vendor_department = "Civilian"
+	auto_price = 1
+
 
 /obj/machinery/vending/cart
 	name = "PTech"
@@ -889,6 +936,9 @@
 					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 15,
 					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 15)
 
+	vendor_department = "Civilian"
+	auto_price = 1
+
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
 	desc = "Medical drug dispenser."
@@ -936,11 +986,16 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,/obj/item/stack/medical/bruise_pack = 3,
-					/obj/item/stack/medical/ointment =3,/obj/item/device/healthanalyzer = 3)
+	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 10,/obj/item/weapon/reagent_containers/syringe/antitoxin = 10,/obj/item/stack/medical/bruise_pack = 10,
+					/obj/item/stack/medical/ointment = 10, /obj/item/device/healthanalyzer = 2)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3)
 	req_log_access = access_cmo
 	has_logs = 1
+
+	prices = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 15, /obj/item/weapon/reagent_containers/syringe/antitoxin = 10,/obj/item/stack/medical/bruise_pack = 15,
+					/obj/item/stack/medical/ointment = 15,/obj/item/device/healthanalyzer = 10)
+
+	vendor_department = "Public Healthcare"
 
 /obj/machinery/vending/security
 	name = "SecTech"
