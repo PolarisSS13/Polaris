@@ -493,7 +493,7 @@
 	M.failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	M.reload_fullscreen()
 
-	M.emote("gasp")
+	M.emote("airgasp")
 	M.Weaken(rand(10,25))
 	M.updatehealth()
 	apply_brain_damage(M, deadtime)

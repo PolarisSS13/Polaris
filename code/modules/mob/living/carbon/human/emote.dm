@@ -281,6 +281,29 @@
 			message = "waves."
 			m_type = 1
 
+		if ("airgasp")
+			if(miming)
+				message = "appears to be gasping!"
+				m_type = 1
+			else
+				if (!muzzled)
+					message = "makes a struggling, painful gasp."
+					m_type = 2
+					if(get_species() == SPECIES_HUMAN_CHILD || get_species() == SPECIES_HUMAN_TEEN)
+						playsound(src.loc, 'sound/voice/human/femalegasp5.ogg', 50, 1, 0)
+					else
+						var/gasp
+						if(get_gender() == FEMALE)
+							gasp = pick('sound/voice/human/femalegasp1.ogg', 'sound/voice/human/femalegasp2.ogg', 'sound/voice/human/femalegasp3.ogg', 'sound/voice/human/femalegasp4.ogg', 'sound/voice/human/femalegasp5.ogg')
+						else
+							gasp = pick('sound/voice/human/malegasp1.ogg', 'sound/voice/human/malegasp2.ogg', 'sound/voice/human/malegasp3.ogg', 'sound/voice/human/malegasp4.ogg')
+
+						playsound(src.loc, gasp, 50, 1, 0)
+
+				else
+					message = "makes a weak noise."
+					m_type = 2
+
 		if ("gasp")
 			if(miming)
 				message = "appears to be gasping!"
@@ -289,9 +312,12 @@
 				if (!muzzled)
 					message = "gasps!"
 					m_type = 2
-					playsound(src.loc, 'sound/voice/human/gasp.ogg', 50, 1)
+					if(get_gender() == FEMALE)
+						playsound(src.loc, 'sound/voice/human/gasp_w.ogg', 50, 1, 0)
+					else
+						playsound(src.loc, 'sound/voice/human/gasp.ogg', 50, 1, 0)
 				else
-					message = "makes a weak noise."
+					message = "makes a small brief noise."
 					m_type = 2
 
 		if ("deathgasp")
@@ -399,7 +425,7 @@
 					if(get_species() == SPECIES_HUMAN_CHILD || get_species() == SPECIES_HUMAN_TEEN)
 						if(get_gender() == FEMALE)
 							use_sound = pick(
-							'sound/voice/human/f_kid_cry.ogg')
+							'sound/voice/human/f_cry_4.ogg')
 							playsound(src.loc, use_sound, 50)
 						else
 							use_sound = pick(
