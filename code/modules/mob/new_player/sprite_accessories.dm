@@ -764,15 +764,16 @@
 	mohawkunshaven
 		name = "Unshaven Mohawk"
 		icon_state = "hair_unshaven_mohawk"
-
+/*
 	undercut4
 		name = "Regulation Undercut"
 		icon_state = "hair_undercut4"
-
+*/
+/*
 	slick
 		name = "Slick"
 		icon_state = "hair_slick"
-
+*/
 	messyhair
 		name = "All Up"
 		icon_state = "hair_messyhair"
@@ -889,6 +890,13 @@
 		name = "Long Side Part"
 		icon_state = "hair_longsidepart"
 
+	miles
+		name = "Miles Hair"
+		icon_state = "hair_miles"
+
+	vivi
+		name = "Vivi"
+		icon_state = "hair_vivi"
 
 
 /*
