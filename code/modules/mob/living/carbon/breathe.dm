@@ -18,7 +18,7 @@
 	if(losebreath>0) //Suffocating so do not take a breath
 		AdjustLosebreath(-1)
 		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
-			spawn emote("gasp")
+			spawn emote("airgasp")
 	else
 		//Okay, we can breathe, now check if we can get air
 		breath = get_breath_from_internal() //First, check for air from internals
