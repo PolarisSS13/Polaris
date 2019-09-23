@@ -7,8 +7,8 @@
 
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 
-	on = 0 // nah
-	locked = 0
+	on = FALSE
+	locked = FALSE
 
 	//AI vars
 	var/last_newpatient_speak = 0
@@ -42,6 +42,7 @@
 	treatment_oxy		= "dexalin"
 	treatment_tox		= "anti_toxin"
 	paid_time = INFINITY
+	on = TRUE
 
 /mob/living/bot/medbot/handleIdle()
 	if(vocal && prob(1))
