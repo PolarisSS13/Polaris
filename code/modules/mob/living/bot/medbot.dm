@@ -8,6 +8,7 @@
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 
 	on = 0 // nah
+	locked = 0
 
 	//AI vars
 	var/last_newpatient_speak = 0
@@ -30,6 +31,7 @@
 	var/paid_time
 	var/paying_time
 	var/timing
+	var/department_account = "Public Healthcare"
 
 /mob/living/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
@@ -39,6 +41,7 @@
 	treatment_fire		= "dermaline"
 	treatment_oxy		= "dexalin"
 	treatment_tox		= "anti_toxin"
+	paid_time = INFINITY
 
 /mob/living/bot/medbot/handleIdle()
 	if(vocal && prob(1))
@@ -146,35 +149,44 @@
 /mob/living/bot/medbot/attack_hand(var/mob/user)
 	var/dat
 	dat += "<TT><B>Automatic Medical Unit v1.0</B></TT><BR><BR>"
-	dat += "Status: <A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A><BR>"
+	dat += "Status: [on ? "On" : "Off"]</A><BR>"
 	dat += "Maintenance panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
 	if (reagent_glass)
-		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a>"
+		dat += "<A href='?src=\ref[src];eject=1'>Loaded \[[reagent_glass.reagents.total_volume]/[reagent_glass.reagents.maximum_volume]\]</a><BR>"
 	else
-		dat += "None Loaded"
-	dat += "<br>Behaviour controls are [locked ? "locked" : "unlocked"]<hr>"
-	if(!locked || issilicon(user))
-		dat += "<TT>Healing Threshold: "
-		dat += "<a href='?src=\ref[src];adj_threshold=-10'>--</a> "
-		dat += "<a href='?src=\ref[src];adj_threshold=-5'>-</a> "
-		dat += "[heal_threshold] "
-		dat += "<a href='?src=\ref[src];adj_threshold=5'>+</a> "
-		dat += "<a href='?src=\ref[src];adj_threshold=10'>++</a>"
-		dat += "</TT><br>"
+		dat += "None Loaded<BR>"
 
-		dat += "<TT>Injection Level: "
-		dat += "<a href='?src=\ref[src];adj_inject=-5'>-</a> "
-		dat += "[injection_amount] "
-		dat += "<a href='?src=\ref[src];adj_inject=5'>+</a> "
-		dat += "</TT><br>"
 
-		dat += "Reagent Source: "
-		dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
+	dat += "<TT>Pay For Time  "
+	dat += "<a href='?src=\ref[src];pay_for_time=-5'>--</a> "
+	dat += "<a href='?src=\ref[src];pay_for_time=-1'>-</a> "
+	dat += "[paying_time] "
+	dat += "<a href='?src=\ref[src];pay_for_time=+1'>+</a> "
+	dat += "<a href='?src=\ref[src];pay_for_time=+5'>++</a>"
+	dat += "</TT><br>"
+	dat += "Time Left: [paid_time]</A><BR>"
 
-		dat += "Treatment report is [declare_treatment ? "on" : "off"]. <a href='?src=\ref[src];declaretreatment=[1]'>Toggle</a><br>"
+	dat += "<TT>Healing Threshold: "
+	dat += "<a href='?src=\ref[src];adj_threshold=-10'>--</a> "
+	dat += "<a href='?src=\ref[src];adj_threshold=-5'>-</a> "
+	dat += "[heal_threshold] "
+	dat += "<a href='?src=\ref[src];adj_threshold=5'>+</a> "
+	dat += "<a href='?src=\ref[src];adj_threshold=10'>++</a>"
+	dat += "</TT><br>"
 
-		dat += "The speaker switch is [vocal ? "on" : "off"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
+	dat += "<TT>Injection Level: "
+	dat += "<a href='?src=\ref[src];adj_inject=-5'>-</a> "
+	dat += "[injection_amount] "
+	dat += "<a href='?src=\ref[src];adj_inject=5'>+</a> "
+	dat += "</TT><br>"
+
+	dat += "Reagent Source: "
+	dat += "<a href='?src=\ref[src];use_beaker=1'>[use_beaker ? "Loaded Beaker (When available)" : "Internal Synthesizer"]</a><br>"
+
+	dat += "Treatment report is [declare_treatment ? "on" : "off"]. <a href='?src=\ref[src];declaretreatment=[1]'>Toggle</a><br>"
+
+	dat += "The speaker switch is [vocal ? "on" : "off"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a><br>"
 
 	user << browse("<HEAD><TITLE>Medibot v1.0 controls</TITLE></HEAD>[dat]", "window=automed")
 	onclose(user, "automed")
@@ -196,19 +208,18 @@
 		return
 
 //moneystuff
-	if(vendor_account(MEDSCI) && !vendor_account(MEDSCI).suspended)
+	if(department_accounts["Public Healthcare"] && !department_accounts["Public Healthcare"].suspended)
 		var/paid = 0
-		var/handled = 0
 
 //coin operated only
-		if(istype(W, /obj/item/weapon/spacecash))
-			var/obj/item/weapon/spacecash/C = W
+		if(istype(O, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = O
 			paid = pay_with_cash(C, user)
-			handled = 1
 
 		if(paid)
-			department_accounts["[vendor_department(MEDSCI)]"].money += paying_time
-			return
+			paid_time = paying_time
+			turn_on()
+			return paying_time = 0
 // end money
 	else
 		..()
@@ -222,12 +233,10 @@
 	if (href_list["pay_for_time"])
 		var/adjust_num = text2num(href_list["pay_for_time"])
 		paying_time += adjust_num
-		if(paid)
-			paid_time = paying_time
+		if(paying_time < 0)
 			paying_time = 0
-			turn_on()
 
-	else if((href_list["adj_threshold"]) && (!locked || issilicon(usr)))
+	else if(href_list["adj_threshold"])
 		var/adjust_num = text2num(href_list["adj_threshold"])
 		heal_threshold += adjust_num
 		if(heal_threshold < 5)
@@ -235,7 +244,7 @@
 		if(heal_threshold > 75)
 			heal_threshold = 75
 
-	else if((href_list["adj_inject"]) && (!locked || issilicon(usr)))
+	else if(href_list["adj_inject"])
 		var/adjust_num = text2num(href_list["adj_inject"])
 		injection_amount += adjust_num
 		if(injection_amount < 5)
@@ -243,7 +252,7 @@
 		if(injection_amount > 15)
 			injection_amount = 15
 
-	else if((href_list["use_beaker"]) && (!locked || issilicon(usr)))
+	else if(href_list["use_beaker"])
 		use_beaker = !use_beaker
 
 	else if (href_list["eject"] && (!isnull(reagent_glass)))
@@ -253,10 +262,10 @@
 		else
 			usr << "<span class='notice'>You cannot eject the beaker because the panel is locked.</span>"
 
-	else if ((href_list["togglevoice"]) && (!locked || issilicon(usr)))
+	else if (href_list["togglevoice"])
 		vocal = !vocal
 
-	else if ((href_list["declaretreatment"]) && (!locked || issilicon(usr)))
+	else if (href_list["declaretreatment"])
 		declare_treatment = !declare_treatment
 
 	attack_hand(usr)
@@ -451,19 +460,31 @@
 			qdel(cashmoney)
 		else
 			cashmoney.update_icon()
-
-	// Vending machines have no idea who paid with cash
 	credit_purchase("(cash)")
 	return 1
+
+/mob/living/bot/medbot/proc/credit_purchase(var/target as text)
+	department_accounts["Public Healthcare"].money += paying_time
+	var/datum/transaction/T = new()
+	T.target_name = target
+	T.purpose = "Purchase of medibot usage time, [paying_time] seconds"
+	T.amount = "[paying_time]"
+	T.source_terminal = name
+	T.date = current_date_string
+	T.time = stationtime2text()
+	vendor_account.transaction_log.Add(T)
 
 /mob/living/bot/medbot/turn_on()
 	..()
 	timing = 1
+	countdown()
 
-/mob/living/bot/medbot/process()
-	..()
+/mob/living/bot/medbot/proc/countdown()
 	if(timing && paid_time > 0)
-		paid_time-- >= 0
-	if(timing && paid_time <= 0)
+		paid_time--
+		sleep(10)
+		New(countdown())
+	else if(timing && paid_time <= 0)
 		timing = 0
+		paid_time = 0
 		turn_off()
