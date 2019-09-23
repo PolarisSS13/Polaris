@@ -7,6 +7,8 @@
 
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 
+	on = 0 // nah
+
 	//AI vars
 	var/last_newpatient_speak = 0
 	var/vocal = 1
@@ -23,6 +25,11 @@
 	var/treatment_virus = "spaceacillin"
 	var/treatment_emag = "toxin"
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
+
+// Money stuff
+	var/paid_time
+	var/paying_time
+	var/timing
 
 /mob/living/bot/medbot/mysterious
 	name = "\improper Mysterious Medibot"
@@ -187,6 +194,22 @@
 		reagent_glass = O
 		user << "<span class='notice'>You insert [O].</span>"
 		return
+
+//moneystuff
+	if(vendor_account(MEDSCI) && !vendor_account(MEDSCI).suspended)
+		var/paid = 0
+		var/handled = 0
+
+//coin operated only
+		if(istype(W, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = W
+			paid = pay_with_cash(C, user)
+			handled = 1
+
+		if(paid)
+			department_accounts["[vendor_department(MEDSCI)]"].money += paying_time
+			return
+// end money
 	else
 		..()
 
@@ -195,10 +218,13 @@
 		return
 	usr.set_machine(src)
 	add_fingerprint(usr)
-	if ((href_list["power"]) && access_scanner.allowed(usr))
-		if (on)
-			turn_off()
-		else
+
+	if (href_list["pay_for_time"])
+		var/adjust_num = text2num(href_list["pay_for_time"])
+		paying_time += adjust_num
+		if(paid)
+			paid_time = paying_time
+			paying_time = 0
 			turn_on()
 
 	else if((href_list["adj_threshold"]) && (!locked || issilicon(usr)))
@@ -246,7 +272,6 @@
 		target = null
 		busy = 0
 		emagged = 1
-		on = 1
 		update_icons()
 		. = 1
 	ignore_list |= user
@@ -402,3 +427,43 @@
 					S.name = created_name
 					user.drop_from_inventory(src)
 					qdel(src)
+
+/**
+ *  Receive payment with cashmoney.
+ *
+ *  usr is the mob who gets the change.
+ */
+/mob/living/bot/medbot/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
+	if(paying_time > cashmoney.worth)
+
+		// This is not a status display message, since it's something the character
+		// themselves is meant to see BEFORE putting the money in
+		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
+		return 0
+
+	if(istype(cashmoney, /obj/item/weapon/spacecash))
+
+		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+		cashmoney.worth -= paying_time
+
+		if(cashmoney.worth <= 0)
+			usr.drop_from_inventory(cashmoney)
+			qdel(cashmoney)
+		else
+			cashmoney.update_icon()
+
+	// Vending machines have no idea who paid with cash
+	credit_purchase("(cash)")
+	return 1
+
+/mob/living/bot/medbot/turn_on()
+	..()
+	timing = 1
+
+/mob/living/bot/medbot/process()
+	..()
+	if(timing && paid_time > 0)
+		paid_time-- >= 0
+	if(timing && paid_time <= 0)
+		timing = 0
+		turn_off()
