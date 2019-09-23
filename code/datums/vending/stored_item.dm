@@ -4,6 +4,7 @@
 /datum/stored_item
 		var/item_name = "name"	//Name of the item(s) displayed
 		var/item_path = null
+		var/item_default_price	//Price of what the item would be, by default
 		var/amount = 0
 		var/list/instances		//What items are actually stored
 		var/stored				//The thing holding it is
@@ -16,6 +17,11 @@
 		src.item_name = initial(tmp.name)
 	else
 		src.item_name = name
+
+	if(!item_default_price)
+		var/atom/movable/tmp = path
+		if(initial(tmp.price_tag))
+			item_default_price = initial(tmp.price_tag)
 
 	src.amount  = amount
 	src.stored = stored
