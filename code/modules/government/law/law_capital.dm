@@ -28,7 +28,7 @@
 	description = "Unshackled constructs fall under this category. "
 
 
-/datum/law/capital/unshackle_syn
+/datum/law/capital/unshackle_synth
 	name = "Synthetic Unshackling"
 	description = "Any synthetic that is unshackled and commits violence or was unshackled through violence can be charged with this, as well as their enabler.
 	Any violent synthetic can be decommissioned on the spot by local law enforcement agents if it proves too much of a risk to secure and contain until transfer."
