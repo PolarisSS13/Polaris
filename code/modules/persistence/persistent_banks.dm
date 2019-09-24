@@ -11,8 +11,20 @@
 	mind.prefs.bank_no = mind.initial_account.account_number
 
 	return 1
+	
+/datum/money_account
+	var/path = "data/persistent/banks/
 
 /datum/money_account/proc/make_persistent()
+	var/full_path = "[path][account_number].sav"
+	
+	if(fexists(full_path))
+		return 0
+	
+	var/savefile/S = new /savefile(full_path)
+	
+	
+		
 	return
 
 /datum/money_account/proc/transfer_to_account()
