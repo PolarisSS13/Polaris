@@ -12,3 +12,11 @@
 
 	return 1
 
+/datum/money_account/proc/make_persistent()
+	return
+
+/datum/money_account/proc/transfer_to_account()
+	return
+
+/datum/money_account/proc/charge_account()
+	return
