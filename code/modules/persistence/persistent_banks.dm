@@ -13,7 +13,7 @@
 	return 1
 	
 /datum/money_account
-	var/path = "data/persistent/banks/
+	var/path = "data/persistent/banks/"
 
 /datum/money_account/proc/make_persistent()
 	var/full_path = "[path][account_number].sav"
