@@ -102,5 +102,5 @@
 	description = "This will include any high ranking \
 	body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
     
-	fine = 300
-	cell_time = 30
+	fine = 700
+	cell_time = 60
