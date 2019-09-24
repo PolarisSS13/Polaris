@@ -38,6 +38,7 @@
 	name = "Jailbreak (Permanently Confined Inmate)"
 	description = "Same time as the jailbroken inmate."
 
+	death_penalty = 1
 
 /datum/law/capital/treason
 	name = "Treason"
