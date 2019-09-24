@@ -97,13 +97,10 @@
 	name = "Jailbreak (Non-Permanent Confined Inmate)"
 	description = "Jailbreaker recieves the same original time. Jailbroken inmate receives double time and a timer reset."
 
-
-/datum/law/major/unshackle_v
-	name = "Violent Synthetic Unshackling"
-	description = "Applies to a human unshackling a synthetic. Citizens of Pollux only. \
-	Violence was used or incited to unshackle a synthetic, or the synthetic would be \
-	capable of nearby humans if unshackled."
-
-	cell_time = 60
-	fine = 600
-
+/datum/law/major/impersonate
+    name = "Impersonation of Government Officials"
+    description = "This will include any high ranking \
+    body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
+    
+	fine = 300
+	cell_time = 30
