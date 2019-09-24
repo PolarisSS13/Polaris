@@ -237,8 +237,8 @@
 	fine = 250
 	cell_time = 30
 
-/datum/law/criminal/unshackle
-	name = "Non-Violent Synthetic Unshackling"
+/datum/law/criminal/weapon_misconduct
+	name = "Weapon Handling Misconduct"
 	description = "Any citizen of Pollux with a valid weapon permit found to be committing a crime with it or not following proper concealment protocol for said weapon can be charged for this. 
 	After three strikes, counting repeat offender price/timer modifiers, the weapon permit shall be hereby null and the weapon confiscated."
 
