@@ -126,7 +126,11 @@
 			H.regenerate_icons()
 			unbuckle_mob()
 			kill_count += 1
-
+			if(H.mind.prefs.economic_status == CLASS_UPPER)
+				for(var/mob/living/carbon/human/HM in viewers(src, 7))
+					if(HM.mind.prefs.economic_status == CLASS_LOWER)
+						to_chat(HM, "<span class='warning'>You watch the oppressive aristocrat bleed.</span>")				
+				
 			var/blood_overlay = "bloody"
 
 			if(kill_count == 2)
