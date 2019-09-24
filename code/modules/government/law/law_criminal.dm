@@ -222,14 +222,6 @@
 	undue impact. Non-Pollux citizens participating in demonstrations may be charged with this, whether the \
 	demonstration is lawful or not."
 
-/datum/law/criminal/impersonate
-	name = "Impersonation of Government Officials"
-	description = "This will include any high ranking 300 credits fine 30 mins a Government Member Government \
-	body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
-	fine = 300
-	cell_time = 30
-
-
 /datum/law/criminal/trespass
 	name = "Trespassing in a Secure Area."
 	description = "To unlawfully access a high security area, including police property, government facilities, or high value storage."
