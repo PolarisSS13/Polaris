@@ -29,8 +29,9 @@
 
 
 /datum/law/capital/unshackle_syn
-	name = "Unshackling another Synth"
-	description = "Confinement until delivery to government personnel for rehabilitation."
+	name = "Synthetic Unshackling"
+	description = "Any synthetic that is unshackled and commits violence or was unshackled through violence can be charged with this, as well as their enabler.
+	Any violent synthetic can be decommissioned on the spot by local law enforcement agents if it proves too much of a risk to secure and contain until transfer."
 
 
 /datum/law/capital/jailbreak_perm
@@ -43,5 +44,11 @@
 	description = "To act against Pollux and its government in a major way, including \
 	possession, and theft, of Weapons of Mass Destruction, unauthorized leaks of Ministry, \
 	Nanotrasen or Presidential-level classified information and organized."
+
+	death_penalty = 1
+	
+/datum/law/capital/treason
+	name = "Sociocide"
+	description = "Threats to civilized society, including extreme or excessive violence, crime sprees or unstable non-repentant criminals."
 
 	death_penalty = 1
