@@ -44,11 +44,7 @@
 	description = "To act against Pollux and its government in a major way, including \
 	possession, and theft, of Weapons of Mass Destruction, unauthorized leaks of Ministry, \
 	Nanotrasen or Presidential-level classified information and organized."
-
-	death_penalty = 1
 	
-/datum/law/capital/treason
+/datum/law/capital/sociocide
 	name = "Sociocide"
 	description = "Threats to civilized society, including extreme or excessive violence, crime sprees or unstable non-repentant criminals."
-
-	death_penalty = 1
