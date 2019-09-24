@@ -49,6 +49,7 @@
 		var/message_options = list(
 			"Radar, put a mask on!" = 'sound/voice/medbot/mradar.ogg',
 			"There's always a catch, and it's the best there is." = 'sound/voice/medbot/mcatch.ogg',
+			"Avaricious!" = 'sound/machines/buzzbeep.ogg', //placeholder until we can get the voice thing. Why don't they just use dynamic voice gen from VOX?
 			"I knew it, I should've been a plastic surgeon." = 'sound/voice/medbot/msurgeon.ogg',
 			"What kind of medbay is this? Everyone's dropping like flies." = 'sound/voice/medbot/mflies.ogg',
 			"Delicious!" = 'sound/voice/medbot/mdelicious.ogg'
@@ -489,3 +490,7 @@
 		timing = 0
 		paid_time = 0
 		turn_off()
+
+/mob/living/bot/medbot/turn_off()
+	say(pick("I'm sorry! You're out of time!", "Please insert thalers to continue."))
+	.. ()
