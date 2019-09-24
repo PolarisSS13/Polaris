@@ -222,14 +222,6 @@
 	undue impact. Non-Pollux citizens participating in demonstrations may be charged with this, whether the \
 	demonstration is lawful or not."
 
-/datum/law/criminal/impersonate
-	name = "Impersonation of Government Officials"
-	description = "This will include any high ranking 300 credits fine 30 mins a Government Member Government \
-	body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
-	fine = 300
-	cell_time = 30
-
-
 /datum/law/criminal/trespass
 	name = "Trespassing in a Secure Area."
 	description = "To unlawfully access a high security area, including police property, government facilities, or high value storage."
@@ -245,3 +237,10 @@
 	fine = 250
 	cell_time = 30
 
+/datum/law/criminal/misconduct
+	name = "Weapon Handling Misconduct"
+	description = "Any citizen of Pollux with a valid weapon permit found to be committing a crime with it or not following proper concealment protocol for said weapon can be charged for this. \
+	After three strikes, counting repeat offender price/timer modifiers, the weapon permit shall be hereby null and the weapon confiscated."
+
+	fine = 450
+	cell_time = 30
