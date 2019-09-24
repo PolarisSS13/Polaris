@@ -917,7 +917,7 @@ var/list/gamemode_cache = list()
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
 			return M
-	return gamemode_cache["extended"]
+	return gamemode_cache["canon"]
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/runnable_modes = list()
