@@ -98,9 +98,9 @@
 	description = "Jailbreaker recieves the same original time. Jailbroken inmate receives double time and a timer reset."
 
 /datum/law/major/impersonate
-    name = "Impersonation of Government Officials"
-    description = "This will include any high ranking \
-    body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
+	name = "Impersonation of Government Officials"
+	description = "This will include any high ranking \
+	body from the rank of Mayor up to President in Chief, or any titles pertaining to the local Nanotrasen branch."
     
 	fine = 300
 	cell_time = 30
