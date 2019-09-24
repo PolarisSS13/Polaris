@@ -30,8 +30,7 @@
 
 /datum/law/capital/unshackle_syn
 	name = "Synthetic Unshackling"
-	description = "Any synthetic that is unshackled and commits violence or was unshackled through violence can be charged with this, as well as their enabler.
-	Any violent synthetic can be decommissioned on the spot by local law enforcement agents if it proves too much of a risk to secure and contain until transfer."
+	description = "Any synthetic that is unshackled and commits violence or was unshackled through violence can be charged with this, as well as their enabler. Any violent synthetic can be decommissioned on the spot by local law enforcement agents if it proves too much of a risk to secure and contain until transfer."
 
 
 /datum/law/capital/jailbreak_perm
@@ -48,5 +47,4 @@
 	
 /datum/law/capital/sociocide
 	name = "Sociocide"
-	description = "Threats to civilized society, including extreme or excessive violence, \
-	crime sprees or unstable non-repentant criminals."
+	description = "Threats to civilized society, including extreme or excessive violence, crime sprees or unstable non-repentant criminals."
