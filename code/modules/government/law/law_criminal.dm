@@ -244,3 +244,10 @@
 
 	fine = 450
 	cell_time = 30
+	
+/datum/law/criminal/impersonating_city
+	name = "Impersonating City Officials"
+	description = "To impersonate a member of city council, law enforcement, or health personnel."
+
+	fine = 300
+	cell_time = 30
