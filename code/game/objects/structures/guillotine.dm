@@ -33,7 +33,7 @@
 
 	var/msg = ""
 
-	msg += "It is [anchored ? "wrenched to the floor." : "unsecured. A wrench should fix that."]<br/>"
+	msg += "It is [anchored ? "wrenched to the floor." : "unsecured. A wrench should fix that."]<BR>"
 
 	if(blade_status == GUILLOTINE_BLADE_RAISED)
 		msg += "The blade is raised, ready to fall, and"
@@ -46,7 +46,7 @@
 		msg += "The blade is hidden inside the stocks."
 
 	if(has_buckled_mobs())
-		msg += "<br/>"
+		msg += "<BR>"
 		msg += "Someone appears to be strapped in. You can help them out, or you can harm them by activating the guillotine."
 
 	to_chat(user, msg)
@@ -129,8 +129,8 @@
 			if(H.mind.prefs.economic_status == CLASS_UPPER)
 				for(var/mob/living/carbon/human/HM in viewers(src, 7))
 					if(HM.mind.prefs.economic_status == CLASS_WORKING)
-						to_chat(HM, "<span class='warning'>You watch the oppressive aristocrat bleed.</span>")				
-				
+						to_chat(HM, "<span class='warning'>You watch the oppressive aristocrat bleed.</span>")
+
 			var/blood_overlay = "bloody"
 
 			if(kill_count == 2)
