@@ -728,7 +728,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/I in H.internal_organs)
-			if(I.robotic >= ORGAN_ROBOT || !(I.organ_tag in list(O_APPENDIX, O_NUTRIENT, O_PLASMA, O_POLYP)))
+			if(I.robotic >= ORGAN_ROBOT || !(I.organ_tag in list(O_APPENDIX, O_STOMACH, O_INTESTINE, O_NUTRIENT, O_PLASMA, O_POLYP)))
 				continue
 			if(I.damage > 0)
 				I.damage = max(I.damage - 4 * removed * repair_strength, 0)
@@ -792,7 +792,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/obj/item/organ/I in H.internal_organs)
-			if(I.robotic >= ORGAN_ROBOT || !(I.organ_tag in list(O_HEART, O_RESPONSE, O_ANCHOR, O_EGG)))
+			if(I.robotic >= ORGAN_ROBOT || !(I.organ_tag in list(O_HEART, O_SPLEEN, O_RESPONSE, O_ANCHOR, O_EGG)))
 				continue
 			if(I.damage > 0)
 				I.damage = max(I.damage - 4 * removed * repair_strength, 0)

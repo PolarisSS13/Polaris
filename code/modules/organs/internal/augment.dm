@@ -24,6 +24,9 @@
 	var/radial_name = null	// The augment's name in the Radial Menu.
 	var/radial_state = null	// Icon state for the augment's radial icon.
 
+	var/aug_cooldown = 30 SECONDS
+	var/last_activate = null
+
 /obj/item/organ/internal/augment/Initialize()
 	..()
 
@@ -54,13 +57,19 @@
 	if(!owner)
 		return
 
+	if(aug_cooldown)
+		if(last_activate <= world.time + aug_cooldown)
+			last_activate = world.time
+		else
+			return
+
 	var/item_to_equip = integrated_object
 	if(!item_to_equip && integrated_object_type)
 		item_to_equip = integrated_object_type
 
 	if(ispath(item_to_equip))
 		owner.equip_augment_item(target_slot, item_to_equip, silent_deploy, FALSE)
-	else
+	else if(item_to_equip)
 		owner.equip_augment_item(target_slot, item_to_equip, silent_deploy, FALSE, src)
 
 /*
@@ -91,7 +100,10 @@
 /obj/item/organ/internal/augment/bioaugment
 	name = "bioaugmenting implant"
 
-	robotic = ORGAN_ROBOT
+	icon_state = "augment_hybrid"
+	dead_icon = "augment_hybrid_dead"
+
+	robotic = ORGAN_ASSISTED
 	target_parent_classes = list(ORGAN_FLESH)
 
 /* Jensen Shades. Your vision can be augmented.
@@ -107,7 +119,9 @@
 
 	w_class = ITEMSIZE_TINY
 
-	organ_tag = O_AUG_TSHADE
+	organ_tag = O_AUG_EYES
+
+	robotic = ORGAN_ROBOT
 
 	parent_organ = BP_HEAD
 
@@ -122,6 +136,32 @@
 		return
 
 	owner.toggle_shades()
+
+/obj/item/organ/internal/augment/bioaugment/sprint_enhance
+	name = "locomotive optimization implant"
+	desc = "A chunk of meat and metal that can manage an individual's leg musculature."
+
+	organ_tag = O_AUG_PELVIC
+
+	parent_organ = BP_GROIN
+
+	target_parent_classes = list(ORGAN_FLESH, ORGAN_ASSISTED)
+
+	aug_cooldown = 2 MINUTES
+
+/obj/item/organ/internal/augment/bioaugment/sprint_enhance/augment_action()
+	if(!owner)
+		return
+
+	if(aug_cooldown)
+		if(last_activate <= world.time + aug_cooldown)
+			last_activate = world.time
+		else
+			return
+
+	if(istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = owner
+		H.add_modifier(/datum/modifier/sprinting, 1 MINUTES)
 
 /*
  * Arm mounted augments.
@@ -206,9 +246,65 @@
 
 	. = ..()
 
+/obj/item/organ/internal/augment/armmounted/hand/sword
+	name = "energy blade implant"
+
+	integrated_object_type = /obj/item/weapon/melee/energy/sword
+
+/*
+ * Shoulder augment.
+ */
+
+/obj/item/organ/internal/augment/armmounted/shoulder
+	name = "shoulder augment"
+	desc = "A large implant that fits into a subject's arm. It looks kind of like a skeleton."
+
+	icon_state = "augment_armframe"
+
+	organ_tag = O_AUG_R_UPPERARM
+
+	w_class = ITEMSIZE_HUGE
+
+	integrated_object_type = null
+
+/obj/item/organ/internal/augment/armmounted/shoulder/attackby(obj/item/I as obj, mob/user as mob)
+	if(I.is_screwdriver())
+		switch(organ_tag)
+			if(O_AUG_L_UPPERARM)
+				organ_tag = O_AUG_R_UPPERARM
+				parent_organ = BP_R_ARM
+				target_slot = slot_r_hand
+			if(O_AUG_R_UPPERARM)
+				organ_tag = O_AUG_L_UPPERARM
+				parent_organ = BP_L_ARM
+				target_slot = slot_l_hand
+		to_chat(user, "<span class='notice'>You swap \the [src]'s servos to install neatly into \the upper [parent_organ] mount.</span>")
+		return
+
+	. = ..()
+
+/obj/item/organ/internal/augment/armmounted/shoulder/surge
+	name = "muscle overclocker"
+
+	aug_cooldown = 1.5 MINUTES
+
+/obj/item/organ/internal/augment/armmounted/shoulder/surge/augment_action()
+	if(!owner)
+		return
+
+	if(aug_cooldown)
+		if(last_activate <= world.time + aug_cooldown)
+			last_activate = world.time
+		else
+			return
+
+	if(istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = owner
+		H.add_modifier(/datum/modifier/melee_surge, 0.75 MINUTES)
+
 // The toolkit / multi-tool implant.
 
-/obj/item/organ/internal/augment/armmounted/multiple
+/obj/item/organ/internal/augment/armmounted/shoulder/multiple
 	name = "rotary toolkit"
 	desc = "A large implant that fits into a subject's arm. It deploys an array of tools by some painful means."
 
@@ -218,7 +314,7 @@
 
 	w_class = ITEMSIZE_HUGE
 
-	integrated_object_type = /obj/item/weapon/tool/screwdriver
+	integrated_object_type = null
 
 	toolspeed = 0.8
 
@@ -242,40 +338,43 @@
 		/datum/matter_synth/wire
 		)
 
-/obj/item/organ/internal/augment/armmounted/multiple/Initialize()
+/obj/item/organ/internal/augment/armmounted/shoulder/multiple/Initialize()
 	..()
 
-	integrated_tools[integrated_object_type] = integrated_object
+	if(integrated_object)
+		integrated_tools[integrated_object_type] = integrated_object
 
-	integrated_tools_by_name = list()
+	if(integrated_tools && integrated_tools.len)
 
-	integrated_tool_images = list()
+		integrated_tools_by_name = list()
 
-	if(synth_types)
-		synths = list()
-		for(var/datumpath in synth_types)
-			var/datum/matter_synth/MS = new datumpath
-			synths += MS
+		integrated_tool_images = list()
 
-	for(var/path in integrated_tools)
-		if(!integrated_tools[path])
-			integrated_tools[path] = new path(src)
-		var/obj/item/I = integrated_tools[path]
-		I.canremove = FALSE
-		I.toolspeed = toolspeed
-		I.my_augment = src
-		I.name = "integrated [I.name]"
+		if(synth_types)
+			synths = list()
+			for(var/datumpath in synth_types)
+				var/datum/matter_synth/MS = new datumpath
+				synths += MS
 
-	for(var/tool in integrated_tools)
-		var/obj/item/Tool = integrated_tools[tool]
-		if(istype(Tool, /obj/item/stack))
-			var/obj/item/stack/S = Tool
-			S.synths = synths
-			S.uses_charge = synths.len
-		integrated_tools_by_name[Tool.name] = Tool
-		integrated_tool_images[Tool.name] = image(icon = Tool.icon, icon_state = Tool.icon_state)
+		for(var/path in integrated_tools)
+			if(!integrated_tools[path])
+				integrated_tools[path] = new path(src)
+			var/obj/item/I = integrated_tools[path]
+			I.canremove = FALSE
+			I.toolspeed = toolspeed
+			I.my_augment = src
+			I.name = "integrated [I.name]"
 
-/obj/item/organ/internal/augment/armmounted/multiple/handle_organ_proc_special()
+		for(var/tool in integrated_tools)
+			var/obj/item/Tool = integrated_tools[tool]
+			if(istype(Tool, /obj/item/stack))
+				var/obj/item/stack/S = Tool
+				S.synths = synths
+				S.uses_charge = synths.len
+			integrated_tools_by_name[Tool.name] = Tool
+			integrated_tool_images[Tool.name] = image(icon = Tool.icon, icon_state = Tool.icon_state)
+
+/obj/item/organ/internal/augment/armmounted/shoulder/multiple/handle_organ_proc_special()
 	..()
 
 	if(!owner || is_bruised() || !synths)
@@ -285,23 +384,7 @@
 		for(var/datum/matter_synth/MS in synths)
 			MS.add_charge(MS.recharge_rate)
 
-/obj/item/organ/internal/augment/armmounted/multiple/attackby(obj/item/I as obj, mob/user as mob)
-	if(I.is_screwdriver())
-		switch(organ_tag)
-			if(O_AUG_L_UPPERARM)
-				organ_tag = O_AUG_R_UPPERARM
-				parent_organ = BP_R_ARM
-				target_slot = slot_r_hand
-			if(O_AUG_R_UPPERARM)
-				organ_tag = O_AUG_L_UPPERARM
-				parent_organ = BP_L_ARM
-				target_slot = slot_l_hand
-		to_chat(user, "<span class='notice'>You swap \the [src]'s servos to install neatly into \the upper [parent_organ] mount.</span>")
-		return
-
-	. = ..()
-
-/obj/item/organ/internal/augment/armmounted/multiple/augment_action()
+/obj/item/organ/internal/augment/armmounted/shoulder/multiple/augment_action()
 	if(!owner)
 		return
 
@@ -321,10 +404,10 @@
 
 	..()
 
-/obj/item/organ/internal/augment/armmounted/multiple/medical
+/obj/item/organ/internal/augment/armmounted/shoulder/multiple/medical
 	name = "rotary medical kit"
 	icon_state = "augment_medkit"
-	integrated_object_type = /obj/item/weapon/surgical/hemostat
+	integrated_object_type = null
 
 	integrated_tools = list(
 		/obj/item/weapon/surgical/hemostat = null,
@@ -352,7 +435,7 @@
 	set desc = "Toggle your flash-proof, thermal-integrated sunglasses."
 	set category = "Augments"
 
-	var/obj/item/organ/internal/augment/aug = internal_organs_by_name[O_AUG_TSHADE]
+	var/obj/item/organ/internal/augment/aug = internal_organs_by_name[O_AUG_EYES]
 
 	if(glasses)
 		if(aug && aug.integrated_object == glasses)
@@ -425,6 +508,9 @@
 
 /mob/living/carbon/human/proc/equip_augment_item(var/slot, var/obj/item/equipping = null, var/make_sound = TRUE, var/destroy_on_drop = FALSE, var/obj/item/organ/cling_to_organ = null)
 	if(!ishuman(src))
+		return 0
+
+	if(!equipping)
 		return 0
 
 	var/mob/living/carbon/human/M = src

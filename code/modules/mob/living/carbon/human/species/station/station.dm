@@ -34,7 +34,9 @@
 		O_BRAIN =		/obj/item/organ/internal/brain,
 		O_APPENDIX = 	/obj/item/organ/internal/appendix,
 		O_SPLEEN = 		/obj/item/organ/internal/spleen,
-		O_EYES =		/obj/item/organ/internal/eyes
+		O_EYES =		/obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 
 	inherent_verbs = list(
@@ -134,6 +136,8 @@
 		O_LIVER =    /obj/item/organ/internal/liver/unathi,
 		O_BRAIN =    /obj/item/organ/internal/brain/unathi,
 		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach/unathi,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/unathi
 		)
 
 
@@ -240,7 +244,9 @@
 		O_LIVER =    /obj/item/organ/internal/liver,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
-		O_EYES =     /obj/item/organ/internal/eyes
+		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
@@ -396,7 +402,9 @@
 	O_LIVER =    /obj/item/organ/internal/liver,
 	O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 	O_BRAIN =    /obj/item/organ/internal/brain,
-	O_EYES =     /obj/item/organ/internal/eyes
+	O_EYES =     /obj/item/organ/internal/eyes,
+	O_STOMACH =	 /obj/item/organ/internal/stomach,
+	O_INTESTINE =/obj/item/organ/internal/intestine
 	)
 
 	descriptors = list(

@@ -424,6 +424,16 @@
 	power = 10
 	meltdose = 4
 
+/datum/reagent/acid/digestive
+	name = "Digestive acid"
+	id = "stomacid"
+	description = "Some form of digestive slurry."
+	taste_description = "vomit"
+	reagent_state = LIQUID
+	color = "#664330"
+	power = 2
+	meltdose = 30
+
 /datum/reagent/thermite/venom
 	name = "Pyrotoxin"
 	id = "thermite_v"
