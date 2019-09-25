@@ -11,20 +11,24 @@
 	mind.prefs.bank_no = mind.initial_account.account_number
 
 	return 1
-	
+
 /datum/money_account
 	var/path = "data/persistent/banks/"
 
 /datum/money_account/proc/make_persistent()
+	if(!path)				return 0
 	var/full_path = "[path][account_number].sav"
-	
-	if(fexists(full_path))
-		return 0
-	
+	if(fexists(full_path)) return 0
+
 	var/savefile/S = new /savefile(full_path)
-	
-	
-		
+	if(!S)					return 0
+	S.cd = "/"
+
+	S["money"] << money
+	S["account_number" << account_number
+	S["remote_access_pin"] << remote_access_pin
+	S["expenses"] << expenses
+
 	return
 
 /datum/money_account/proc/transfer_to_account()
