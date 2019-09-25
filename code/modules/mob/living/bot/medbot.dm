@@ -151,7 +151,7 @@
 /mob/living/bot/medbot/attack_hand(var/mob/user)
 	var/dat
 	dat += "<TT><B>Automatic Medical Unit v1.0</B></TT><BR><BR>"
-	dat += "Status: [on ? "On" : "Off"]</A><BR>"
+	dat += "Status: [on]</A><BR>"
 	dat += "Maintenance panel is [open ? "opened" : "closed"]<BR>"
 	dat += "Beaker: "
 	if (reagent_glass)
