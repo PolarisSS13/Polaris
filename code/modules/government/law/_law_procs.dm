@@ -142,7 +142,7 @@
 	dat += "<h3>Major Laws</h3>"
 	dat += "<hr>"
 	dat += "Major crimes are some of the most serious types of law violations. \
-	They are almost always taken to court and carry a hefty fine. Courts can choose if someone stays in jail, or pays the fine."
+	They are almost always taken to court. All major crimes, current and future, include a mandatory fine that must be paid on the spot or as soon as possible by the felon, regardless of their plea."
 	dat += "<br><br>"
 	dat += "<hr>"
 	dat += "<table align='center' bgcolor='black' cellspacing='0' border=1><B><tr><th>ID</th><th>Name</th><th>Description</th><th>Fine</th><th>Cell Time</th><th>Notes</th></tr></B>"
