@@ -14,10 +14,13 @@
 
 /datum/money_account
 	var/path = "data/persistent/banks/"
+	var/full_path
 
 /datum/money_account/proc/make_persistent()
 	if(!path)				return 0
-	var/full_path = "[path][account_number].sav"
+	full_path = "[path][account_number].sav"
+
+	if(!full_path)			return 0
 	if(fexists(full_path)) return 0
 
 	var/savefile/S = new /savefile(full_path)
@@ -31,7 +34,16 @@
 
 	return
 
-/datum/money_account/proc/transfer_to_account()
+/datum/money_account/proc/transfer_to_account(var/transferring, var/transferred, var/amount)
+	if(!path)				return 0
+	if(!full_path)			return 0
+	if(fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(path)
+	if(!S)					return 0
+	S.cd = "/"
+
+
 	return
 
 /datum/money_account/proc/charge_account()
