@@ -24,6 +24,10 @@
 	if(!pref.bank_no)
 		pref.bank_no = rand(111111, 999999)
 
+	if(!persist_acc(pref.bank_no))
+		make_new_persistent_account(pref.real_name, pref.bank_no, pref.money_balance, pref.bank_pin, pref.expenses, null, 0, 0)
+
+
 /datum/category_item/player_setup_item/general/economy/delete_character(var/savefile/S)
 	pref.money_balance		= 0
 	pref.bank_no			= 0

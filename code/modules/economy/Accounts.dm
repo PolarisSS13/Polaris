@@ -10,10 +10,8 @@
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
 
-	var/dept_acc = 0		//If this is a department account or not.
-	var/department			// If this has a department, and what it is.
-
 	var/list/datum/expense/expenses = list()		//list of debts and expenses
+	var/department
 
 /datum/transaction
 	var/target_name = ""
@@ -102,6 +100,26 @@
 
 			return 1
 
+
+	if(persist_acc(attempt_account_number))
+		persist_adjust_balance(attempt_account_number, amount)
+
+
+		//create a transaction log entry
+		var/datum/transaction/T = new()
+		T.target_name = source_name
+		T.purpose = purpose
+		if(amount < 0)
+			T.amount = "([amount])"
+		else
+			T.amount = "[amount]"
+		T.date = current_date_string
+		T.time = stationtime2text()
+		T.source_terminal = terminal_id
+
+		persist_add_log(attempt_account_number, T)
+		return 1
+
 	return 0
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
@@ -116,3 +134,5 @@
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)
 			return D
+
+/proc/
