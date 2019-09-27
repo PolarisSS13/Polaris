@@ -64,6 +64,7 @@
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
 
+	if(!config.canonicity) return 0
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -100,6 +101,7 @@
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
 
+	if(!config.canonicity) return 0
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -120,6 +122,8 @@
 
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
+
+	if(!config.canonicity) return 0
 
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
