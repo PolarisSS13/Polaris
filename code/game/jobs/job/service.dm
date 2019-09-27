@@ -14,7 +14,7 @@
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
 	minimum_character_age = 18
-	wage = 12
+	wage = 15
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 	alt_titles = list("Waiting Staff","Barkeep","Mixologist","Barista" = /decl/hierarchy/outfit/job/service/bartender/barista)
 
@@ -34,7 +34,7 @@
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 	minimum_character_age = 15 //Those kids better serve some good burgers or I'll ask for the manager
-	wage = 12
+	wage = 15
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
 	alt_titles = list("Restaurant Cashier","Cook","Restaurant Host")
 
@@ -53,7 +53,7 @@
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
 	minimum_character_age = 16 //Eh, I can see it happening
-	wage = 15
+	wage = 19
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
 	alt_titles = list("Hydroponicist", "Gardener","Farmer")
 
@@ -73,7 +73,7 @@
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
 	minimum_character_age = 16 //Not making it any younger because being a janitor requires a lot of labor, or maybe it just means I'm very lazy? Oh well
-	wage = 14
+	wage = 18
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 	alt_titles = list("Recycling Technician", "Sanitation Engineer")
 
@@ -92,7 +92,7 @@
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	minimum_character_age = 16
-	wage = 11
+	wage = 16
 	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
 	alt_titles = list("TV Host", "Radio Host", "Journalist", "Professor", "Historian", "Writer")
 
@@ -133,7 +133,7 @@
 	minimum_character_age = 16
 	access = list(access_barber, access_maint_tunnels)
 	minimal_access = list(access_barber)
-	wage = 13
+	wage = 17
 	outfit_type = /decl/hierarchy/outfit/job/civilian/barber
 	alt_titles = list("Hairdresser", "Stylist", "Beautician")
 
@@ -195,7 +195,7 @@
 	supervisors = "the factory manager"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/cargo_tech
-	wage = 13
+	wage = 20
 
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
@@ -216,7 +216,7 @@
 	email_domain = "aoki.nt"
 	selection_color = "#9b633e"
 	idtype = /obj/item/weapon/card/id/cargo/mining
-	wage = 16
+	wage = 20
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	minimum_character_age = 18
