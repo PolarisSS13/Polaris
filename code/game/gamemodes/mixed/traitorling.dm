@@ -1,6 +1,6 @@
 /datum/game_mode/traitorling
 	name = "Traitors & Changelings"
-	round_description = "There are traitors and alien changelings on the station. Do not let the changelings succeed!"
+	round_description = "There are traitors and alien changelings in the city. Do not let the changelings succeed!"
 	extended_round_description = "Traitors and changelings both spawn during this mode."
 	config_tag = "traitorling"
 	required_players = 10
