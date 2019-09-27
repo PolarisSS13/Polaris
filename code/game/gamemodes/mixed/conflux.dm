@@ -1,6 +1,6 @@
 /datum/game_mode/conflux
 	name = "Technomancers & Cult"
-	round_description = "A space wizard and a cult have invaded the station!"
+	round_description = "A space wizard and a cult have invaded the city!"
 	extended_round_description = "Cultists and wizards spawn during this round."
 	config_tag = "conflux"
 	required_players = 15

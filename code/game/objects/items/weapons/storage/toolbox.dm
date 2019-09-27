@@ -194,3 +194,11 @@
 /obj/item/weapon/storage/toolbox/lunchbox/delbox/filled
 	filled = TRUE
 
+/obj/item/weapon/storage/toolbox/lunchbox/bluespace_lunchbox
+	name = "bluespace lunchbox"
+	icon_state = "bluespace_lunchbox"
+	item_state_slots = list(slot_r_hand_str = "toolbox_blue", slot_l_hand_str = "toolbox_blue")
+	desc = "A pocket of bluespace, for your lunch!"
+
+/obj/item/weapon/storage/toolbox/lunchbox/bluespace_lunchbox/filled
+	filled = TRUE
