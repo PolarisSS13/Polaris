@@ -492,5 +492,5 @@
 		turn_off()
 
 /mob/living/bot/medbot/turn_off()
-	say(pick("I'm sorry! You're out of time!", "Please insert thalers to continue."))
+	say(pick("I'm sorry! You're out of time!", "Please insert credits to continue."))
 	.. ()
