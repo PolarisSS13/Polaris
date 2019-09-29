@@ -107,7 +107,7 @@
 		/obj/item/weapon/storage/pill_bottle/dexalin_plus,
 		/obj/item/weapon/storage/pill_bottle/dylovene,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
-		/obj/item/weapon/storage/pill_bottle/spaceacillin,
+		/obj/item/weapon/storage/pill_bottle/penicillin,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
 		/obj/item/stack/medical/splint,
 		/obj/item/device/healthanalyzer/advanced
@@ -245,10 +245,10 @@
 	desc = "Contains pills used to treat burns."
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/kelotane = 7)
 
-/obj/item/weapon/storage/pill_bottle/spaceacillin
-	name = "bottle of Spaceacillin pills"
+/obj/item/weapon/storage/pill_bottle/penicillin
+	name = "bottle of Penicillin pills"
 	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space."
-	starts_with = list(/obj/item/weapon/reagent_containers/pill/spaceacillin = 7)
+	starts_with = list(/obj/item/weapon/reagent_containers/pill/penicillin = 7)
 
 /obj/item/weapon/storage/pill_bottle/tramadol
 	name = "bottle of Tramadol pills"
