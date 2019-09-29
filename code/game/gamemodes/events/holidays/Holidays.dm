@@ -16,7 +16,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 	Get_Holiday()
 	return 1
 
-//sets up the Holiday global variable. Shouldbe called on game configuration or something.
+//sets up the Holiday global variable. Should be called on game configuration or something.
 /proc/Get_Holiday()
 	if(!Holiday)	return		// Holiday stuff was not enabled in the config!
 
@@ -33,31 +33,25 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(1)	//Jan
 			switch(DD)
 				if(1)
-					Holiday["New Years's Day"] = "The day of the new solar year on Sol."
-				if(12)
-					Holiday["Vertalliq-Qerr"] = "Vertalliq-Qerr, translated to mean 'Festival of the Royals', is a \
-					Skrell holiday that celebrates the Qerr-Katish and all they have provided for the rest of Skrell society, \
-					it often features colourful displays and skilled performers take this time to show off some of their more \
-					fancy displays."
+					Holiday["New Years' Day"] = "The day of the new solar year in Vetra."
+
 
 		if(2)	//Feb
 			switch(DD)
 				if(2)
-					Holiday["Groundhog Day"] = "An unoffical holiday based on ancient folklore that originated on Earth, \
+					Holiday["Groundhog Day"] = "An unofficial holiday based on ancient folklore that originated on Earth, \
 					that involves the worship of an almighty groundhog, that could control the weather based on if it casted a shadow."
 				if(14)
 					Holiday["Valentine's Day"] = "An old holiday that revolves around romance and love."
 				if(17)
-					Holiday["Random Acts of Kindness Day"] = "An unoffical holiday that challenges everyone to perform \
+					Holiday["Random Acts of Kindness Day"] = "An unofficial holiday that challenges everyone to perform \
 					acts of kindness to their friends, co-workers, and strangers, for no reason."
 
 		if(3)	//Mar
 			switch(DD)
-				if(3)
-					Holiday["Qixm-tes"] = "Qixm-tes, or 'Day of mourning', is a Skrell holiday where Skrell gather at places \
-					of worship and sing a song of mourning for all those who have died in service to their empire."
+
 				if(14)
-					Holiday["Pi Day"] = "An unoffical holiday celebrating the mathematical constant Pi.  It is celebrated on \
+					Holiday["Pi Day"] = "An unofficial holiday celebrating the mathematical constant Pi.  It is celebrated on \
 					March 14th, as the digits form 3 14, the first three significant digits of Pi.  Observance of Pi Day generally \
 					involve eating (or throwing) pie, due to a pun.  Pies also tend to be round, and thus relatable to Pi."
 				if(17)
@@ -73,7 +67,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(4)	//Apr
 			switch(DD)
 				if(1)
-					Holiday["April Fool's Day"] = "An old holiday that endevours one to pull pranks and spread hoaxes on their friends."
+					Holiday["April Fool's Day"] = "An old holiday that endeavors one to pull pranks and spread hoaxes on their friends."
 					if(YY == 18)
 						Holiday["Easter"] = ""
 				if(8)
@@ -87,27 +81,19 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					if(YY == 14)
 						Holiday["Easter"] = ""
 				if(22)
-					Holiday["Earth Day"] = "A holiday of enviromentalism, that originated on it's namesake, Earth."
+					Holiday["Earth Day"] = "A holiday of environmentalism, that originated on it's namesake, Earth."
 
 		if(5)	//May
 			switch(DD)
 				if(1)
 					Holiday["Interstellar Workers' Day"] = "This holiday celebrates the work of laborers and the working class."
-				if(18)
-					Holiday["Remembrance Day"] = "Remembrance Day (or, as it is more informally known, Armistice Day) is a confederation-wide holiday \
-					mostly observed by its member states since late 2520. Officially, it is a day of remembering the men and women who died in various armed conflicts \
-					throughout human history. Unofficially, however, it is commonly treated as a holiday honoring the victims of the Human-Unathi war. \
-					Observance of this day varies throughout human space, but most common traditions are the act of bringing flowers to graves,\
-					attending parades, and the wearing of poppies (either paper or real) in one's clothing."
-				if(28)
-					Holiday["Jiql-tes"] = "A Skrellian holiday that translates to 'Day of Celebration', Skrell communities \
-					gather for a grand feast and give gifts to friends and close relatives."
+
+
+
 
 		if(6)	//Jun
 			switch(DD)
-				if(6)
-					Holiday["Sapient Rights Day"] = "This holiday celebrates the passing of the Declaration of Sapient Rights by SolGov, which guarantees the \
-					same protections humans are granted to all sapient, living species."
+
 				if(14)
 					Holiday["Blood Donor Day"] = "This holiday was created to raise awareness of the need for safe blood and blood products, \
 					and to thank blood donors for their voluntary, life-saving gifts of blood."
@@ -121,28 +107,23 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Holiday["Doctors' Day"] = "A holiday that recognizes the services of physicians, commonly celebrated \
 					in healthcare organizations and facilities."
 				if(30)
-					Holiday["Friendship Day"] = "An unoffical holiday that recognizes the value of friends and companionship.  Indeed, not having someone watch \
+					Holiday["Friendship Day"] = "An unofficial holiday that recognizes the value of friends and companionship.  Indeed, not having someone watch \
 					your back while in space can be dangerous, and the cold, isolating nature of space makes friends all the more important."
 
 		if(8)	//Aug
 			switch(DD)
-//				if(10)
-//					Holiday["S'randarr's Day"] = "A Tajaran holiday that occurs on the longest day of the year in summer, \
-//					on Ahdomai. It is named after the Tajaran deity of Light, and huge celebrations are common."
+//
 				if(27)
 					Holiday["Forgiveness Day"] = "A time to forgive and be forgiven."
 
 		if(9)	//Sep
 			switch(DD)
-				if(17)
-					Holiday["Qill-xamr"] = "Translated to 'Night of the dead', it is a Skrell holiday where Skrell \
-					communities hold parties in order to remember loved ones who passed, unlike Qixm-tes, this applies to everyone \
-					and is a joyful celebration."
+
 				if(19)
-					Holiday["Talk-Like-a-Pirate Day"] = "Ahoy, matey!  Tis unoffical holiday be celebratin' the jolly \
+					Holiday["Talk-Like-a-Pirate Day"] = "Ahoy, matey!  Tis unofficial holiday be celebratin' the jolly \
 					good humor of speakin' like the pirates of old."
 				if(28)
-					Holiday["Stupid-Questions Day"] = "Known as Ask A Stupid Question Day, it is an unoffical holiday \
+					Holiday["Stupid-Questions Day"] = "Known as Ask A Stupid Question Day, it is an unofficial holiday \
 					created by teachers in Sol, very long ago, to encourage students to ask more questions in the classroom."
 
 		if(10)	//Oct
@@ -173,23 +154,18 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 
 		if(12)	//Dec
 			switch(DD)
-				if(10)
-					Holiday["Human-Rights Day"] = "An old holiday created by an intergovernmental organization known back than as the United Nations, \
-					human rights were not recognized globally at the time, and the holiday was made in honor of the Universal Declaration of Human Rights.  \
-					These days, SolGov ensures that past efforts were not in vein, and continues to honor this holiday across the galaxy."
-				if(22)
-					Holiday["Vertalliq-qixim"] = "A Skrellian holiday that celebrates the Skrell's first landing on one of \
-					their moons.  It's often celebrated with grand festivals."
+
+
 				if(24)
 					Holiday["Christmas Eve"] = "The eve of Christmas, an old holiday from Earth that mainly involves gift \
 					giving, decorating, family reunions, and a fat red human breaking into people's homes to steal milk and cookies."
 				if(25)
 					Holiday["Christmas"] = "Christmas is a very old holiday that originated in Earth, Sol.  It was a \
-					religious holiday for the Christian religion, which would later form Unitarianism.  Nowdays, the holiday is celebrated \
+					religious holiday for the Christian religion, which would later form Unitarianism. Nowadays, the holiday is celebrated \
 					generally by giving gifts, symbolic decoration, and reuniting with one's family.  It also features a mythical fat \
 					red human, known as Santa, who broke into people's homes to loot cookies and milk."
 				if(31)
-					Holiday["New Year's Eve"] = "The eve of the New Year for Sol.  It is traditionally celebrated by counting down to midnight, as that is \
+					Holiday["New Year's Eve"] = "The eve of the New Year for Vetra. It is traditionally celebrated by counting down to midnight, as that is \
 					when the new year begins.  Other activities include planning for self-improvement over the new year, attending New Year's parties, or \
 					watching a timer count to zero, a large object descending, and fireworks exploding in the sky, in person or on broadcast."
 
