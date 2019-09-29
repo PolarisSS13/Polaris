@@ -252,14 +252,14 @@
 	reagents.add_reagent("bicaridine", 20)
 
 
-/obj/item/weapon/reagent_containers/pill/spaceacillin
-	name = "Spaceacillin pill"
-	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space. Contains 15 units of Spaceacillin."
+/obj/item/weapon/reagent_containers/pill/penicillin
+	name = "penicillin pill"
+	desc = "A theta-lactam antibiotic. Effective against many diseases likely to be encountered in space. Contains 15 units of penicillin."
 	icon_state = "pill19"
 
-/obj/item/weapon/reagent_containers/pill/spaceacillin/New()
+/obj/item/weapon/reagent_containers/pill/penicillin/New()
 	..()
-	reagents.add_reagent("spaceacillin", 15)
+	reagents.add_reagent("penicillin", 15)
 
 
 /obj/item/weapon/reagent_containers/pill/carbon

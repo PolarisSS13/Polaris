@@ -88,7 +88,7 @@
 	name = "purity hypo"
 	desc = "A refined version of the standard autoinjector, allowing greater capacity.  This variant excels at \
 	resolving viruses, infections, radiation, and genetic maladies."
-	filled_reagents = list("spaceacillin" = 9, "arithrazine" = 5, "ryetalyn" = 1)
+	filled_reagents = list("penicillin" = 9, "arithrazine" = 5, "ryetalyn" = 1)
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/pain
 	name = "pain hypo"

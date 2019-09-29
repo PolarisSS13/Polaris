@@ -16,7 +16,7 @@
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 
-		if(H.reagents.has_reagent("spaceacillin", 15))
+		if(H.reagents.has_reagent("penicillin", 15))
 			return
 
 		if(H.stat == DEAD)
