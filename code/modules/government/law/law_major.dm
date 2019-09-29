@@ -86,7 +86,8 @@
 
 /datum/law/major/unrest
 	name = "Civil Unrest"
-	description = "Threatening, inciting, organizing, or acting in a way that may destabilize civilized society. This includes extreme or excessive violence, crime sprees, multiple acts of civil disobedience, or non-repentant criminals."
+	description = "Inciting, organizing or acting in a manner that may destabilize civilized society \
+	in a minor way such as multiple and/or violent acts of civil disobedience or crime sprees."
 
 	notes = "Should this happen in a larger scale, Sociocide charges may be applicable."
 	cell_time = 60
