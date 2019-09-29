@@ -95,7 +95,7 @@
 	imidazoline	spawn_reagent = "imidazoline"
 	peridaxon	spawn_reagent = "peridaxon"
 	bicaridine	spawn_reagent = "bicaridine"
-	hyperzine spawn_reagent = "hyperzine"
+	hyperzine	spawn_reagent = "hyperzine"
 	rezadone	spawn_reagent = "rezadone"
 	penicillin	spawn_reagent = "penicillin"
 	ethylredox	spawn_reagent = "ethylredoxrazine"
