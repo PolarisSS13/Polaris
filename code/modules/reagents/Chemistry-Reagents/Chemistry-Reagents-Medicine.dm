@@ -354,7 +354,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#561EC3"
-	overdose = 10
+	overdose = 15
 	scannable = 1
 
 /datum/reagent/peridaxon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -365,7 +365,7 @@
 				continue
 			if(I.damage > 0) //Peridaxon heals only non-robotic organs
 				I.damage = max(I.damage - removed, 0)
-				H.Confuse(5)
+				H.Confuse(0)
 			if(I.damage <= 5 && I.organ_tag == O_EYES)
 				H.eye_blurry = min(M.eye_blurry + 10, 250) //Eyes need to reset, or something
 				H.sdisabilities &= ~BLIND
