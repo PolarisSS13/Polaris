@@ -101,7 +101,7 @@
 			return 1
 
 
-	if(persist_acc(attempt_account_number))
+	if(check_persistent_account(attempt_account_number))
 		persist_adjust_balance(attempt_account_number, amount)
 
 

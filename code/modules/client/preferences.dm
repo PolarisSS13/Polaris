@@ -101,7 +101,7 @@ datum/preferences
 
 	var/money_balance = 0
 	var/bank_pin
-	var/bank_no
+	var/bank_account
 
 	var/datum/expense/expenses = list()
 

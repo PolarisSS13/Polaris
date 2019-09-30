@@ -108,6 +108,7 @@ var/global/list/station_departments = list("City Council", "Public Healthcare", 
 		weighted_randomevent_locations[D] = D.viable_random_events.len
 		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
 
+
 	create_station_account()
 
 	for(var/department in station_departments)
