@@ -473,7 +473,7 @@ datum/gear/suit/duster
 	display_name = "tailcoat selection"
 	path = /obj/item/clothing/suit/tailcoat
 
-/datum/gear/suit/track/New()
+/datum/gear/suit/tailcoat/New()
 	..()
 	var/list/tailcoats = list()
 	for(var/tailcoat_style in typesof(/obj/item/clothing/suit/tailcoat))

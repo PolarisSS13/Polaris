@@ -6,7 +6,7 @@
 	display_name = "white cane"
 	path = /obj/item/weapon/cane/whitecane
 
-/datum/gear/cane
+/datum/gear/crutch
 	display_name = "crutch"
 	path = /obj/item/weapon/cane/crutch
 
