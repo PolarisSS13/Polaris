@@ -87,7 +87,6 @@
 	if(!M)
 		M = create_account(H.real_name, money_amount, null)
 
-
 	if(H.mind.prefs.bank_pin)
 		H.mind.prefs.bank_pin = M.remote_access_pin
 

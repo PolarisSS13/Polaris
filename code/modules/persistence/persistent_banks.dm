@@ -28,7 +28,7 @@
 	S["account_number"] << account_number
 	S["remote_access_pin"] << remote_access_pin
 	S["expenses"] << expenses
-	S["transaction_log"] += transaction_log
+//	S["transaction_log"] += transaction_log
 	S["suspended"] << suspended
 
 	S["security_level"] << security_level
@@ -75,7 +75,8 @@
 /proc/check_persistent_account(var/account_id)
 	var/full_path = "data/persistent/banks/[account_id].sav"
 	if(!full_path)			return 0
-	if(!fexists(full_path)) return 1
+	if(fexists(full_path))
+		return 1
 
 	return 0
 
@@ -116,6 +117,23 @@
 	S["money"] >> transferred_money
 
 	return transferred_money
+
+/proc/get_persistent_acc_logs(var/acc_no)
+	var/full_path = "data/persistent/banks/[acc_no].sav"
+
+	if(!full_path)			return 0
+	if(!fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(full_path)
+	if(!S)					return 0
+	S.cd = "/"
+
+	var/list/acc_logs
+
+	S["transaction_log"] >> acc_logs
+
+	return acc_logs
+
 
 /proc/persist_set_balance(var/acc_no, var/amount)
 	var/full_path = "data/persistent/banks/[acc_no].sav"

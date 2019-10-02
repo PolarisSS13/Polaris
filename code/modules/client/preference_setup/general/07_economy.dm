@@ -28,6 +28,9 @@
 		pref.bank_account = make_new_persistent_account(pref.real_name, pref.money_balance, pref.bank_pin, pref.expenses, null, 0, 0)
 		persist_set_balance(pref.bank_account, pref.money_balance)
 
+	if(check_persistent_account(pref.bank_account))
+		pref.money_balance = get_persistent_acc_balance(pref.bank_account)
+
 	pref.money_balance		= sanitize_integer(pref.money_balance, 0, 999999, initial(pref.money_balance))
 	pref.bank_pin			= sanitize_integer(pref.bank_pin, 1111, 9999, initial(pref.bank_pin))
 
