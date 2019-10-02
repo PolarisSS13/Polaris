@@ -65,9 +65,9 @@ var/list/assistant_occupations = list(
 
 
 var/list/gov_positions = list(
-	"Nanotrasen CEO",
+	"NanoTrasen Sector Administrator",
 	"Nanotrasen Representative",
-	"CBIA Agent",
+	"PDSI Agent",
 	"President"
 )
 
