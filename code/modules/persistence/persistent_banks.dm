@@ -75,8 +75,8 @@
 /proc/check_persistent_account(var/account_id)
 	var/full_path = "data/persistent/banks/[account_id].sav"
 	if(!full_path)			return 0
-	if(fexists(full_path))
-		return 1
+	if(fexists(full_path))	return 1
+	usr << "\icon[src]<span class='warning'>TESTING: check persis account fail.</span>"
 
 	return 0
 
@@ -87,7 +87,6 @@
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
 
-	if(!config.canonicity) return 0
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -99,23 +98,25 @@
 	transferred_money += amount
 
 	S["money"] << transferred_money
-
+	usr << "\icon[src]<span class='warning'>TESTING: transferred money.</span>"
 	return 1
 
 /proc/get_persistent_acc_balance(var/acc_no)
 	var/full_path = "data/persistent/banks/[acc_no].sav"
-
+	usr << "\icon[src]<span class='warning'>TESTING: full path error?.</span>"
 	if(!full_path)			return 0
+	usr << "\icon[src]<span class='warning'>TESTING: file error.</span>"
 	if(!fexists(full_path)) return 0
 
 	var/savefile/S = new /savefile(full_path)
+	usr << "\icon[src]<span class='warning'>TESTING: S error.</span>"
 	if(!S)					return 0
 	S.cd = "/"
 
 	var/transferred_money
 
 	S["money"] >> transferred_money
-
+	usr << "\icon[src]<span class='warning'>TESTING: Unknown.</span>"
 	return transferred_money
 
 /proc/get_persistent_acc_logs(var/acc_no)
@@ -141,7 +142,6 @@
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
 
-	if(!config.canonicity) return 0
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -163,8 +163,6 @@
 	if(!full_path)			return 0
 	if(!fexists(full_path)) return 0
 
-	if(!config.canonicity) return 0
-
 	var/savefile/S = new /savefile(full_path)
 	if(!S)					return 0
 	S.cd = "/"
@@ -179,4 +177,19 @@
 
 	return 1
 
+/proc/get_persistent_acc_suspension(var/acc_no)
+	var/full_path = "data/persistent/banks/[acc_no].sav"
 
+	if(!full_path)			return 0
+	if(!fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(full_path)
+	if(!S)					return 0
+	S.cd = "/"
+
+	var/suspended
+
+	S["suspended"] >> suspended
+	usr << "\icon[src]<span class='warning'>TESTING: suspend.</span>"
+
+	return suspended
