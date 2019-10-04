@@ -51,7 +51,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/peridaxon,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/bicaridine,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/rezadone,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/spaceacillin,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/penicillin,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ethylredox,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sleeptox,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chloral,

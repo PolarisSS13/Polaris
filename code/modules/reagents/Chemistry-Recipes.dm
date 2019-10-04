@@ -405,10 +405,10 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/datum/chemical_reaction/spaceacillin
-	name = "Spaceacillin"
-	id = "spaceacillin"
-	result = "spaceacillin"
+/datum/chemical_reaction/penicillin
+	name = "penicillin"
+	id = "penicillin"
+	result = "penicillin"
 	required_reagents = list("cryptobiolin" = 1, "inaprovaline" = 1)
 	result_amount = 2
 
@@ -416,7 +416,7 @@
 	name = "Corophizine"
 	id = "corophizine"
 	result = "corophizine"
-	required_reagents = list("spaceacillin" = 1, "carbon" = 1, "phoron" = 0.1)
+	required_reagents = list("penicillin" = 1, "carbon" = 1, "phoron" = 0.1)
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 

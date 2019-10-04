@@ -501,9 +501,9 @@
 	if(prob(60))
 		M.take_organ_damage(4 * removed, 0)
 
-/datum/reagent/spaceacillin
-	name = "Spaceacillin"
-	id = "spaceacillin"
+/datum/reagent/penicillin
+	name = "penicillin"
+	id = "penicillin"
 	description = "An all-purpose antiviral agent."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
@@ -513,7 +513,7 @@
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
-/datum/reagent/spaceacillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/penicillin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.add_chemical_effect(CE_ANTIBIOTIC, dose >= overdose ? ANTIBIO_OD : ANTIBIO_NORM)
 

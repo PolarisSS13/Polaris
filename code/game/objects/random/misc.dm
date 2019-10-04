@@ -183,7 +183,7 @@
 	icon_state = "pill_canister"
 
 /obj/random/medical/pillbottle/item_to_spawn()
-	return pick(prob(1);/obj/item/weapon/storage/pill_bottle/spaceacillin,
+	return pick(prob(1);/obj/item/weapon/storage/pill_bottle/penicillin,
 				prob(1);/obj/item/weapon/storage/pill_bottle/dermaline,
 				prob(1);/obj/item/weapon/storage/pill_bottle/dexalin_plus,
 				prob(1);/obj/item/weapon/storage/pill_bottle/bicaridine,

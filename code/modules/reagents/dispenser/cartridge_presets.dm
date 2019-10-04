@@ -97,7 +97,7 @@
 	bicaridine	spawn_reagent = "bicaridine"
 	hyperzine	spawn_reagent = "hyperzine"
 	rezadone	spawn_reagent = "rezadone"
-	spaceacillin	spawn_reagent = "spaceacillin"
+	penicillin	spawn_reagent = "penicillin"
 	ethylredox	spawn_reagent = "ethylredoxrazine"
 	sleeptox	spawn_reagent = "stoxin"
 	chloral		spawn_reagent = "chloralhydrate"
