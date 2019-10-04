@@ -143,8 +143,8 @@
 				var/default = fingerprint_hash
 				if(default == initial(fingerprint_hash) && ishuman(user))
 					var/mob/living/carbon/human/H = user
-					if(H.dna)
-						default = md5(H.dna.uni_identity)
+					if(H.unique_id)
+						default = H.get_full_print()
 				var/new_fingerprint_hash = sanitize(input(user,"What fingerprint hash would you like to be written on this card?","Agent Card Fingerprint Hash",default) as null|text)
 				if(!isnull(new_fingerprint_hash) && CanUseTopic(user, state))
 					src.fingerprint_hash = new_fingerprint_hash
