@@ -10,10 +10,10 @@
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
 
-	var/dept_acc = 0		//If this is a department account or not.
-	var/department			// If this has a department, and what it is.
-
 	var/list/datum/expense/expenses = list()		//list of debts and expenses
+	var/department
+
+	var/fingerprint
 
 /datum/transaction
 	var/target_name = ""
@@ -83,10 +83,10 @@
 	return M
 
 /proc/charge_to_account(var/attempt_account_number, var/source_name, var/purpose, var/terminal_id, var/amount)
-	for(var/datum/money_account/D in all_money_accounts)
-		if(D.account_number == attempt_account_number && !D.suspended)
-			D.money += amount
 
+	for(var/datum/money_account/D in all_money_accounts)
+		if(D.account_number == text2num(attempt_account_number) && !D.suspended || D.account_number == attempt_account_number && !D.suspended)
+			D.money += amount
 			//create a transaction log entry
 			var/datum/transaction/T = new()
 			T.target_name = source_name
@@ -99,6 +99,24 @@
 			T.time = stationtime2text()
 			T.source_terminal = terminal_id
 			D.transaction_log.Add(T)
+
+			return 1
+
+
+	if(config.canonicity)
+		if(check_persistent_account(attempt_account_number) && !get_persistent_acc_suspension(attempt_account_number))
+			persist_adjust_balance(attempt_account_number, amount)
+			//create a transaction log entry
+			var/datum/transaction/T = new()
+			T.target_name = source_name
+			T.purpose = purpose
+			if(amount < 0)
+				T.amount = "([amount])"
+			else
+				T.amount = "[amount]"
+			T.date = current_date_string
+			T.time = stationtime2text()
+			T.source_terminal = terminal_id
 
 			return 1
 
