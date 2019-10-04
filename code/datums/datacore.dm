@@ -189,7 +189,7 @@
 		else
 			G.fields["brain_type"] = "Organic"
 		G.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
-		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
+		G.fields["fingerprint"]	= H.get_full_print()
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= gender2text(H.gender)

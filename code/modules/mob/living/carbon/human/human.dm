@@ -993,9 +993,9 @@
 	return 1 //we applied blood to the item
 
 /mob/living/carbon/human/proc/get_full_print()
-	if(!dna ||!dna.uni_identity)
+	if(!unique_id)
 		return
-	return md5(dna.uni_identity)
+	return unique_id
 
 /mob/living/carbon/human/clean_blood(var/washshoes)
 	. = ..()
