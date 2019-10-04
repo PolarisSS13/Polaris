@@ -13,6 +13,8 @@
 	var/list/datum/expense/expenses = list()		//list of debts and expenses
 	var/department
 
+	var/fingerprint
+
 /datum/transaction
 	var/target_name = ""
 	var/purpose = ""
@@ -81,10 +83,10 @@
 	return M
 
 /proc/charge_to_account(var/attempt_account_number, var/source_name, var/purpose, var/terminal_id, var/amount)
+
 	for(var/datum/money_account/D in all_money_accounts)
-		if(D.account_number == attempt_account_number && !D.suspended)
+		if(D.account_number == text2num(attempt_account_number) && !D.suspended || D.account_number == attempt_account_number && !D.suspended)
 			D.money += amount
-			usr << "\icon[src]<span class='warning'>TESTING: Checked mains.</span>"
 			//create a transaction log entry
 			var/datum/transaction/T = new()
 			T.target_name = source_name
@@ -102,11 +104,8 @@
 
 
 	if(config.canonicity)
-		usr << "\icon[src]<span class='warning'>TESTING: Checked canon.</span>"
 		if(check_persistent_account(attempt_account_number) && !get_persistent_acc_suspension(attempt_account_number))
 			persist_adjust_balance(attempt_account_number, amount)
-			usr << "\icon[src]<span class='warning'>TESTING: Trasnaction error</span>"
-
 			//create a transaction log entry
 			var/datum/transaction/T = new()
 			T.target_name = source_name
@@ -119,10 +118,8 @@
 			T.time = stationtime2text()
 			T.source_terminal = terminal_id
 
-			persist_add_log(attempt_account_number, T)
-
 			return 1
-	usr << "\icon[src]<span class='warning'>TESTING: All conditions failed.</span>"
+
 	return 0
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account

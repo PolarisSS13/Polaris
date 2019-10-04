@@ -28,7 +28,6 @@
 	S["account_number"] << account_number
 	S["remote_access_pin"] << remote_access_pin
 	S["expenses"] << expenses
-//	S["transaction_log"] += transaction_log
 	S["suspended"] << suspended
 
 	S["security_level"] << security_level
@@ -76,7 +75,6 @@
 	var/full_path = "data/persistent/banks/[account_id].sav"
 	if(!full_path)			return 0
 	if(fexists(full_path))	return 1
-	usr << "\icon[src]<span class='warning'>TESTING: check persis account fail.</span>"
 
 	return 0
 
@@ -98,25 +96,20 @@
 	transferred_money += amount
 
 	S["money"] << transferred_money
-	usr << "\icon[src]<span class='warning'>TESTING: transferred money.</span>"
 	return 1
 
 /proc/get_persistent_acc_balance(var/acc_no)
 	var/full_path = "data/persistent/banks/[acc_no].sav"
-	usr << "\icon[src]<span class='warning'>TESTING: full path error?.</span>"
 	if(!full_path)			return 0
-	usr << "\icon[src]<span class='warning'>TESTING: file error.</span>"
 	if(!fexists(full_path)) return 0
 
 	var/savefile/S = new /savefile(full_path)
-	usr << "\icon[src]<span class='warning'>TESTING: S error.</span>"
 	if(!S)					return 0
 	S.cd = "/"
 
 	var/transferred_money
 
 	S["money"] >> transferred_money
-	usr << "\icon[src]<span class='warning'>TESTING: Unknown.</span>"
 	return transferred_money
 
 /proc/get_persistent_acc_logs(var/acc_no)
@@ -156,27 +149,6 @@
 
 	return 1
 
-
-/proc/persist_add_log(var/acc_no, var/log)
-	var/full_path = "data/persistent/banks/[acc_no].sav"
-
-	if(!full_path)			return 0
-	if(!fexists(full_path)) return 0
-
-	var/savefile/S = new /savefile(full_path)
-	if(!S)					return 0
-	S.cd = "/"
-
-	var/transaction_log
-
-	S["transaction_log"] >> transaction_log
-
-	transaction_log += log
-
-	S["transaction_log"] << transaction_log
-
-	return 1
-
 /proc/get_persistent_acc_suspension(var/acc_no)
 	var/full_path = "data/persistent/banks/[acc_no].sav"
 
@@ -190,6 +162,5 @@
 	var/suspended
 
 	S["suspended"] >> suspended
-	usr << "\icon[src]<span class='warning'>TESTING: suspend.</span>"
 
 	return suspended
