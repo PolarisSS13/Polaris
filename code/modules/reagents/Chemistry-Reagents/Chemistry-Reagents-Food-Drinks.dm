@@ -833,7 +833,7 @@
 
 	glass_name = "cup of coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-
+	glass_special = list(DRINK_VAPOR)
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -922,6 +922,7 @@
 	calories_factor = 8
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
+	glass_special = list(DRINK_VAPOR)
 
 	cup_icon_state = "cup_coco"
 	cup_name = "cup of hot chocolate"
