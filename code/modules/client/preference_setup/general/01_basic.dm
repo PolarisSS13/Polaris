@@ -103,8 +103,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	character.identifying_gender = pref.identifying_gender
 	character.age = pref.age
 	character.birth_year = pref.birth_year
-	character.birth_month = pref.birth_month
-	character.adjust_aging()
+	character.birth_month = pref.birth_month.
 
 /datum/category_item/player_setup_item/general/basic/content()
 	. = list()

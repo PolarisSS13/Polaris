@@ -16,7 +16,6 @@
 	//There's no way (that I know of) to edit the "real name" of a character unless
 	//it's a body transformation, admin or antag fuckery. So this works.
 
-	adjust_aging()
 
 	// Copy basic values
 	mind.prefs.nickname = nickname
@@ -66,19 +65,4 @@
 	mind.prefs.save_character()
 
 	return 1
-
-
-
-/mob/living/carbon/human/proc/adjust_aging()
-	var/ideal_age
-
-	//get the age they should be
-
-	ideal_age = get_game_year() - birth_year
-
-	//if it hasn't been their most recent birthday yet...
-	if((get_game_month() < birth_month) && (get_game_day() < birth_day))
-		ideal_age --
-
-	age = ideal_age
 
