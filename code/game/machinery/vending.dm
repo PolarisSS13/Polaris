@@ -1249,6 +1249,7 @@
 					/obj/item/toy/plushie/deer = 50,
 					/obj/item/toy/plushie/tabby_cat = 50)
 
+	vendor_department = "Civilian"
 
 // Clothing dispensers
 
@@ -1444,6 +1445,7 @@
 						/obj/item/clothing/under/croptop/red = 30,
 						/obj/item/clothing/under/cuttop = 30,
 						/obj/item/clothing/under/cuttop/red = 30)
+	vendor_department = "Civilian"
 
 /obj/machinery/vending/suitdispenser
 	name = "\improper Suitlord 9000"
@@ -1570,6 +1572,7 @@
 						 /obj/item/clothing/suit/storage/snowsuit = 40,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat = 40)
 
+	vendor_department = "Civilian"
 /obj/machinery/vending/shoedispenser
 	name = "\improper Shoe O Mat"
 	desc = "Wow, hatlord looked fancy, suitlord looked streamlined, and this is just normal. The guy who designed these must be an idiot."
@@ -1635,6 +1638,7 @@
 						/obj/item/clothing/shoes/heels = 30)
 
 	premium = list(/obj/item/clothing/shoes/rainbow = 1)
+	vendor_department = "Civilian"
 
 /obj/machinery/vending/hatdispenser
 	name = "\improper Hatlord 9000"
@@ -1720,6 +1724,8 @@
 	contraband = list(/obj/item/clothing/head/bearpelt = 5)
 	premium = list(/obj/item/clothing/head/soft/rainbow = 1)
 
+	vendor_department = "Civilian"
+
 /obj/machinery/vending/crittercare//Paradise port.
 	name = "\improper CritterCare"
 	desc = "A vending machine for pet supplies."
@@ -1739,6 +1745,8 @@
 					)
 	contraband = list(/obj/item/fish_eggs/babycarp = 5)
 	premium = list(/obj/item/toy/pet_rock/fred = 1, /obj/item/toy/pet_rock/roxie = 1)
+
+	vendor_department = "Civilian"
 
 
 /obj/machinery/vending/crittercare/free
@@ -1804,3 +1812,6 @@
 					/obj/item/weapon/dnainjector/antihallucination = 500,
 					/obj/item/weapon/dnainjector/dnacorrector = 3000
 					)
+
+
+	vendor_department = "Public Healthcare"
