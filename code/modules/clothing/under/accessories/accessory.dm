@@ -146,6 +146,12 @@
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
 
+
+/obj/item/clothing/accessory/tie/sash
+	name = "red sash"
+	desc = "A red banner that may or may not have some kind of meaning. Who knows?"
+	icon_state = "sash"
+
 /obj/item/clothing/accessory/stethoscope
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."

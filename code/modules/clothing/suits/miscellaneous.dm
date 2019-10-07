@@ -398,6 +398,14 @@ obj/item/clothing/suit/storage/toggle/peacoat
 /obj/item/clothing/suit/tailcoat/ladies/red
 	name = "ladies red victorian coat"
 	icon_state = "ladiesredvictoriancoat"
+
+
+/obj/item/clothing/suit/tailcoat/mayor
+	name = "mayor's tailcoat"
+	desc = "A fancy blue and gold pinstripe tailcoat. For when you wanted to be something more than the mayoral corps but had to settle in the end...."
+	icon_state = "mayortailcoat"
+	index = null
+
 /*
  * stripper
  */
