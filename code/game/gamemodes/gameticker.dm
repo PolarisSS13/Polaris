@@ -43,7 +43,6 @@ var/global/datum/controller/gameticker/ticker
 	'sound/music/starvetheego.ogg')
 
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
-	global_initialize_webhooks()
 
 	do
 		pregame_timeleft = 180
@@ -412,7 +411,7 @@ var/global/datum/controller/gameticker/ticker
 
 		//save politics related data
 		SSelections.save_data.save_candidates()
-		
+
 		//save news
 		news_data.save_main_news()
 

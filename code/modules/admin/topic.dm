@@ -1222,7 +1222,6 @@
 			for(var/client/X in admins)
 				if((R_ADMIN|R_MOD|R_CBIA|R_SERVER) & X.holder.rights)
 					to_chat(X, take_msg)
-			post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is nolonger needed", "message"="Request for Help from **[key_name(M)]** is being tended to by **[key_name(usr)]**."))
 			to_chat(M, "<span class='notice'><b>Your adminhelp is being attended to by [usr.client]. Thanks for your patience!</b></span>")
 		else
 			to_chat(usr, "<span class='warning'>Unable to locate mob.</span>")
