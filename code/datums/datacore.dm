@@ -198,7 +198,7 @@
 		G.fields["citizenship"]	= H.citizenship
 		G.fields["faction"]		= H.personal_faction
 		G.fields["email"]		= H.mind.initial_email_login["login"]
-		G.fields["bank_account"]	= H.mind.initial_account.bank_account
+		G.fields["bank_account"]	= H.mind.initial_account.account_number
 		G.fields["economic_status"]	= H.mind.prefs.economic_status
 		G.fields["religion"]	= H.religion
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
