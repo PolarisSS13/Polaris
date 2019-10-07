@@ -4,7 +4,7 @@
 	faction = "City"
 	head_position = 1
 	department_flag = ENGSEC
-	department = "Emergency and Maintenance"
+	department = "City Council"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Mayor"

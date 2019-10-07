@@ -3,7 +3,7 @@
 	flag = CMO
 	head_position = 1
 	department_flag = MEDSCI
-	department = "Public Healthcare"
+	department = "City Council"
 	faction = "City"
 	total_positions = 1
 	spawn_positions = 1
