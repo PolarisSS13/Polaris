@@ -198,7 +198,7 @@
 		G.fields["citizenship"]	= H.citizenship
 		G.fields["faction"]		= H.personal_faction
 		G.fields["email"]		= H.mind.initial_email_login["login"]
-		G.fields["bank_number"]	= H.mind.initial_account.account_number
+		G.fields["bank_account"]	= H.mind.initial_account.bank_account
 		G.fields["economic_status"]	= H.mind.prefs.economic_status
 		G.fields["religion"]	= H.religion
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
@@ -293,7 +293,7 @@
 	G.fields["citizenship"]	= "Unknown"
 	G.fields["faction"]		= "Unknown"
 	G.fields["religion"]	= "Unknown"
-	G.fields["bank_number"]	= "Unknown"
+	G.fields["bank_account"]	= "None"
 	G.fields["email"] = "Unspecified"
 	G.fields["economic_status"]	= "Unknown"
 	G.fields["photo_front"]	= front
@@ -309,7 +309,7 @@
 	R.name = "Security Record #[id]"
 	R.fields["name"] = name
 	R.fields["id"] = id
-	R.fields["bank_number"]	= "Unknown"
+	R.fields["bank_account"]	= "None"
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
 	R.fields["pre_con"]		= "None"

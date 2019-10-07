@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(economy)
 
 
 /proc/payroll(var/datum/data/record/G)
-	var/bank_number = text2num(G.fields["bank_number"])
+	var/bank_number = text2num(G.fields["bank_account"])
 	var/datum/job/job = job_master.GetJob(G.fields["real_rank"])
 	var/department
 	var/class = G.fields["economic_status"]
@@ -89,10 +89,27 @@ SUBSYSTEM_DEF(economy)
 		return
 
 	wage = job.wage
+
 //	message_admins("Wage set to [job.wage].", 1)
 
 	if(!wage)
 //		message_admins("ERROR: Job does not have wage.", 1)
+		return
+
+
+	if(wage > department_accounts[department].money)
+		// If there's no money in the department account, tough luck. Not getting paid.
+		var/datum/transaction/N = new()
+		N.target_name = bank_account.owner_name
+		N.purpose = "[department] Payroll: Failed (Inadequate Department Funds)"
+		N.amount = 0
+		N.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+		N.time = stationtime2text()
+		N.source_terminal = "[department] Funding Account"
+
+		//add the account
+		bank_account.transaction_log.Add(N)
+
 		return
 
 	if(age > 17) // Do they pay tax?
