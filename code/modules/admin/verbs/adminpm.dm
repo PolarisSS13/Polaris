@@ -134,7 +134,6 @@
 		C << 'sound/effects/adminhelp.ogg'
 
 	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
-	post_webhook_event(WEBHOOK_ADMIN_PM, list("title"="Help is requested", "message"="PlayerPM to **[key_name(C)]** from **[key_name(src)]**: ```[html_decode(msg)]```"))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	//we don't use message_admins here because the sender/receiver might get it too
