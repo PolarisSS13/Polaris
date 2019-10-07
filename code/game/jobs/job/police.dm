@@ -3,7 +3,7 @@
 	email_domain = "secure.plux.gov.nt"
 	flag = HOS
 	faction = "City"
-	department = "Police"
+	department = "City Council"
 	department_flag = ENGSEC
 	head_position = 1
 	total_positions = 1

@@ -3,7 +3,7 @@
 	email_domain = "sciworks.nt"
 	flag = RD
 	faction = "City"
-	department = "Research and Science"
+	department = "City Council"
 	department_flag = MEDSCI
 	head_position = 1
 	total_positions = 1
