@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(economy)
 
 
 /proc/payroll(var/datum/data/record/G)
-	var/bank_number = text2num(G.fields["bank_account"])
+	var/bank_number = G.fields["bank_account"]
 	var/datum/job/job = job_master.GetJob(G.fields["real_rank"])
 	var/department
 	var/class = G.fields["economic_status"]
@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(economy)
 			linked_person = H
 
 	if(!bank_number)
-//		message_admins("ERROR: No bank number found for field.", 1)
+//		message_admins("ERROR: No bank number found for field. Returned [bank_number].", 1)
 		return
 
 
@@ -53,8 +53,26 @@ SUBSYSTEM_DEF(economy)
 //		message_admins("ERROR: Could not find a bank account for [bank_number].", 1)
 		return
 
+
+	department = job.department
+
+	if(!(department in station_departments))
+//		message_admins("ERROR: Could not find [department] in station departments.", 1)
+		return
+
 	if(bank_account.suspended)
 //		message_admins("ERROR: Bank account [bank_number] is suspended.", 1)
+		// If there's no money in the department account, tough luck. Not getting paid.
+		var/datum/transaction/N = new()
+		N.target_name = bank_account.owner_name
+		N.purpose = "[department] Payroll: Failed (Payment Bounced Due to Suspension)"
+		N.amount = 0
+		N.date = "[get_game_day()] [get_month_from_num(get_game_month())], [get_game_year()]"
+		N.time = stationtime2text()
+		N.source_terminal = "[department] Funding Account"
+
+		//add the account
+		bank_account.transaction_log.Add(N)
 		return
 
 	if((!class)  ||  (class == "Unknown"))
@@ -71,6 +89,7 @@ SUBSYSTEM_DEF(economy)
 		if(linked_client.inactivity > 18000) // About 30 minutes inactivity.
 			return // inactive people don't get paid, sorry.
 	else
+//		message_admins("ERROR: Not paid due to inactivity.", 1)
 		return		// person's not in the round? welp.
 
 	switch(class)
@@ -81,12 +100,6 @@ SUBSYSTEM_DEF(economy)
 		if(CLASS_WORKING)
 			tax = tax_rate_lower
 
-
-	department = job.department
-
-	if(!(department in station_departments))
-//		message_admins("ERROR: Could not find [department] in station departments.", 1)
-		return
 
 	wage = job.wage
 
@@ -110,6 +123,7 @@ SUBSYSTEM_DEF(economy)
 		//add the account
 		bank_account.transaction_log.Add(N)
 
+//		message_admins("ERROR: Not paid because not enough money in department account.", 1)
 		return
 
 	if(age > 17) // Do they pay tax?

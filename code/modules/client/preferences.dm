@@ -322,7 +322,6 @@ datum/preferences
 //	if(be_random_name)
 //		real_name = random_name(identifying_gender,species)
 
-	character.adjust_aging()
 
 	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
