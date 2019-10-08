@@ -32,6 +32,15 @@
 		send2irc(config.admin_irc, msg)
 	return
 
+/proc/get_world_url()
+	. = "byond://"
+	if(config.serverurl)
+		. += config.serverurl
+	else if(config.server)
+		. += config.server
+	else
+		. += "[world.address]:[world.port]"
+
 
 /hook/startup/proc/ircNotify()
 	send2mainirc("Server starting up on byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")

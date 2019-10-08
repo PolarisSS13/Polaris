@@ -224,6 +224,7 @@ GLOBAL_VAR_INIT(CURRENT_TICKLIMIT, TICK_LIMIT_RUNNING)
 	set waitfor = 0
 	if(delay)
 		sleep(delay)
+	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
 	var/rtn = Loop()
 	if (rtn > 0 || processing < 0)
 		return //this was suppose to happen.
