@@ -8,7 +8,7 @@
 
 /datum/gear/suit/coat
 	display_name = "coat"
-	path = /obj/item/clothing/suit/coat
+	path = /obj/item/clothing/suit/storage/toggle/coat
 
 /datum/gear/suit/coat/New()
 	..()

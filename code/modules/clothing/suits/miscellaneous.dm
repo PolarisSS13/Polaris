@@ -305,7 +305,7 @@ obj/item/clothing/suit/kamishimo
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 	flags_inv = HIDEHOLSTER
 
-/obj/item/clothing/suit/coat
+/obj/item/clothing/suit/storage/toggle/coat
 	name = "coat"
 	desc = "Your typical coat, this particular brand has a lot of different colors."
 	icon_state = "jacket_chrom"
@@ -911,7 +911,7 @@ obj/item/clothing/suit/storage/toggle/peacoat
 	icon_state = "PresidentJacket"
 	item_state_slots = list(slot_r_hand_str = "PresidentJacket", slot_l_hand_str = "PresidentJacket")
 	flags_inv = HIDEHOLSTER
-	open = 0
+	open = 1
 
 /*
  * Department Jackets
