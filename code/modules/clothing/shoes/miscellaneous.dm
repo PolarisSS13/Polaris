@@ -148,6 +148,12 @@
 	icon_state = "heels"
 	addblends = "heels_a"
 
+/obj/item/clothing/shoes/heels/long
+	name = "long high heels"
+	desc = "Go to church."
+	icon_state = "high_boots"
+	addblends = "high_boots_a"
+
 /obj/item/clothing/shoes/footwraps
 	name = "cloth footwraps"
 	desc = "A roll of treated canvas used for wrapping claws or paws"
