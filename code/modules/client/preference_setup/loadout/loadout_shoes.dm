@@ -175,6 +175,11 @@
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
+
+/datum/gear/shoes/heels/long
+	display_name = "long high heels"
+	path = /obj/item/clothing/shoes/heels/long
+
 /datum/gear/shoes/slippers
 	display_name = "bunny slippers"
 	path = /obj/item/clothing/shoes/slippers

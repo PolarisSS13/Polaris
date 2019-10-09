@@ -712,15 +712,26 @@
 
 /obj/item/clothing/under/dress/arisflowergirl
 	name = "pink aristocratic flowergirl dress"
-	desc = "Always the bridesmaid, never the bride."
+	desc = "What did the flowers do to deserve this?."
 	icon_state = "arisflowergirl"
 	index = 1
+
+/obj/item/clothing/under/dress/arisflowergirl/colorable
+	name = "aristocratic flowergirl dress"
+	icon_state = "flowergirl"
+	index = 1
+
 
 /obj/item/clothing/under/dress/coveter
 	name = "coveter dress"
 	desc = "Ah, the dress of young love."
 	icon_state = "coveter"
 	index = 1
+
+/obj/item/clothing/under/dress/club
+	name = "club dress"
+	desc = "This is the kind of dress that makes you want to do irresponsible partying after dark."
+	icon_state = "club_dress"
 
 /obj/item/clothing/under/dress/diva
 	name = "diva dress"
