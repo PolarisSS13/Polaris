@@ -14,34 +14,34 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["real_name"]				>> pref.real_name
 	S["nickname"]				>> pref.nickname
 //	S["name_is_always_random"]	>> pref.be_random_name
-	S["gender"]					>> pref.biological_gender
+	S["gender"]				>> pref.biological_gender
 	S["id_gender"]				>> pref.identifying_gender
 	S["age"]					>> pref.age
 	S["birth_day"]				>> pref.birth_day
 	S["birth_month"]			>> pref.birth_month
-	S["birth_year"]				>> pref.birth_year
-	S["spawnpoint"]				>> pref.spawnpoint
+	S["birth_year"]			>> pref.birth_year
+	S["spawnpoint"]			>> pref.spawnpoint
 	S["OOC_Notes"]				>> pref.metadata
-
+	S["email"]				>> pref.email
 	S["existing_character"]		>> pref.existing_character
-	S["played"]					>> pref.played
+	S["played"]				>> pref.played
 	S["unique_id"]				>> pref.unique_id
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
 	S["nickname"]				<< pref.nickname
 //	S["name_is_always_random"]	<< pref.be_random_name
-	S["gender"]					<< pref.biological_gender
+	S["gender"]				<< pref.biological_gender
 	S["id_gender"]				<< pref.identifying_gender
 	S["age"]					<< pref.age
 	S["birth_day"]				<< pref.birth_day
 	S["birth_month"]			<< pref.birth_month
-	S["birth_year"]				<< pref.birth_year
-	S["spawnpoint"]				<< pref.spawnpoint
+	S["birth_year"]			<< pref.birth_year
+	S["spawnpoint"]			<< pref.spawnpoint
 	S["OOC_Notes"]				<< pref.metadata
-
+	S["email"]				<< pref.email
 	S["existing_character"]		<< pref.existing_character
-	S["played"]					<< pref.played
+	S["played"]				<< pref.played
 	S["unique_id"]				<< pref.unique_id
 
 /datum/category_item/player_setup_item/general/basic/delete_character()
@@ -59,6 +59,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.existing_character = null
 	pref.played = null
 	pref.unique_id = null
+	pref.email = null
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 
@@ -274,5 +275,15 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	//if it hasn't been their most recent birthday yet...
 	if((get_game_month() < pref.birth_month) && (get_game_day() < pref.birth_day))
 		pref.birth_year --
+
+	return TOPIC_REFRESH
+
+
+/datum/category_item/player_setup_item/general/basic/proc/random_email()
+	var/email_prefix = "[replacetext(lowertext(pref.real_name), " ", ".")]"
+
+	if(ntnet_global.does_email_exist(complete_login))
+		complete_login = "[replacetext(lowertext(H.real_name), " ", ".")][rand(100, 999)]@[domain]"
+
 
 	return TOPIC_REFRESH
