@@ -712,7 +712,7 @@
 
 /obj/item/clothing/under/dress/arisflowergirl
 	name = "pink aristocratic flowergirl dress"
-	desc = "What did the flowers do to deserve this?."
+	desc = "What did the flowers do to deserve this?"
 	icon_state = "arisflowergirl"
 	index = 1
 
