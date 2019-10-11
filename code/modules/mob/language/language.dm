@@ -167,8 +167,7 @@
 			if(H.species.has_organ[O_VOICE] && !(flags & SIGNLANG) && !(flags & NONVERBAL)) // Does the species need a voicebox? Is the language even spoken?
 				var/obj/item/organ/internal/voicebox/vocal = H.internal_organs_by_name[O_VOICE]
 				if(!vocal || vocal.is_broken() || vocal.mute)
-					. = FALSE
-					return .
+					return FALSE
 
 			if(src.name in H.species.assisted_langs)
 				. = FALSE
