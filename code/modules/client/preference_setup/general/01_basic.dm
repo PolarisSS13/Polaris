@@ -59,7 +59,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.existing_character = null
 	pref.played = null
 	pref.unique_id = null
-	pref.email = null
+	if(fdel("data/persistent/emails/[pref.email].sav"))
+		pref.email = null
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 
@@ -82,6 +83,16 @@ datum/preferences/proc/set_biological_gender(var/gender)
 //	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
 	if(!pref.unique_id)
 		pref.unique_id			= md5("[pref.client_ckey][rand(30,50)]")
+
+	if(!pref.email)
+		var/new_email = generate_email(pref.real_name)
+
+		if(!ntnet_global.does_email_exist(new_email) || !check_persistent_email(new_email))
+			pref.email = new_email
+
+	if(pref.email && !check_persistent_email(pref.email))
+		new_persistent_email(pref.email)
+
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/basic/copy_to_mob(var/mob/living/carbon/human/character)
@@ -126,12 +137,18 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		. += "<a href='?src=\ref[src];bio_gender=1'><b>[gender2text(pref.biological_gender)]</b></a><br>"
 	else
 		. += "[gender2text(pref.biological_gender)]<br>"
+
 	. += "<b>Gender Identity:</b><br> <a href='?src=\ref[src];id_gender=1'><b>[gender2text(pref.identifying_gender)]</b></a><br>"
+
 	. += "<b>Age:</b><br>"
+	. += "<a href='?src=\ref[src];age=1'>[pref.age] ([age2agedescription(pref.age)])</a><br><br>"
+
+	. += "<b>Email Address:</b><br>"
+
 	if(!pref.existing_character)
-		. += "<a href='?src=\ref[src];age=1'>[pref.age] ([age2agedescription(pref.age)])</a><br><br>"
+		. += "Email: <a href='?src=\ref[src];email_domain=1'>[pref.email]</a><br><br>"
 	else
-		. += "[pref.age] ([age2agedescription(pref.age)])<br>"
+		. += "Email: [pref.email]<br>Password: [get_persistent_email_password(pref.email)] <br>"
 
 	if(pref.existing_character)
 		. += "<b>Unique Character ID:</b> [pref.unique_id]<br>"
@@ -202,6 +219,37 @@ datum/preferences/proc/set_biological_gender(var/gender)
 			pref.age = max(min(round(text2num(new_age)), max_age), min_age)
 			adjust_year()
 			return TOPIC_REFRESH
+
+
+	else if(href_list["email_domain"])
+		var/list/domains = using_map.usable_email_tlds
+		var/prefix = input(user, "Enter your email username.", "Email Username")  as text|null
+		if(!prefix)
+			return
+
+		var/domain = input(user, "What is the email domain provider you use?", "Email Provider") as null|anything in domains
+		if(!domain)
+			return
+
+		var/full_email = "[prefix]@[domain]"
+
+		if(full_email && check_persistent_email(full_email))
+			alert(user, "This email already exists, please choose another.")
+			return
+
+		if(full_email && !check_persistent_email(pref.email))
+			new_persistent_email(full_email)
+
+
+		fcopy("data/persistent/emails/[pref.email].sav","data/persistent/emails/[full_email].sav")
+		fdel("data/persistent/emails/[pref.email].sav")
+		change_persistent_email_address(pref.email, full_email)
+
+		pref.email = "[prefix]@[domain]"
+
+
+		return TOPIC_REFRESH
+
 
 	else if(href_list["birth_day"])
 		var/min_day = 1
@@ -275,15 +323,5 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	//if it hasn't been their most recent birthday yet...
 	if((get_game_month() < pref.birth_month) && (get_game_day() < pref.birth_day))
 		pref.birth_year --
-
-	return TOPIC_REFRESH
-
-
-/datum/category_item/player_setup_item/general/basic/proc/random_email()
-	var/email_prefix = "[replacetext(lowertext(pref.real_name), " ", ".")]"
-
-	if(ntnet_global.does_email_exist(complete_login))
-		complete_login = "[replacetext(lowertext(H.real_name), " ", ".")][rand(100, 999)]@[domain]"
-
 
 	return TOPIC_REFRESH

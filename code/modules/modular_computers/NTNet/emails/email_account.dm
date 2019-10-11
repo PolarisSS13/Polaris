@@ -39,10 +39,12 @@
 			break
 
 	if(!istype(recipient))
-		return 0
+		if(!check_persistent_email(recipient_address))
+			return 0
 
 	if(!recipient.receive_mail(message, relayed))
-		return
+		if(!send_to_persistent_email(recipient_address, message))
+			return 0
 
 	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
 	return 1
