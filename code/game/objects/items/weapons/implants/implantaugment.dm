@@ -97,8 +97,6 @@
 			to_chat(H, "<span class='warning'>You feel a pinching sensation in your [part]. The implant remains.</span>")
 
 /obj/item/weapon/implant/organ/limbaugment/proc/setup_augment_slots(var/mob/living/carbon/human/H, var/obj/item/organ/internal/augment/armmounted/I)
-	. = H.get_organ(I.parent_organ)
-
 	var/list/Choices = possible_targets.Copy()
 
 	for(var/targ in possible_targets)
@@ -113,7 +111,7 @@
 			target_choice = input("Choose augment location:") in Choices
 
 	else
-		. = FALSE
+		return FALSE
 
 	if(target_choice)
 		switch(target_choice)
