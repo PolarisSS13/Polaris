@@ -208,9 +208,23 @@
 			/obj/item/weapon/storage/photo_album,
 			/obj/item/device/reagent_scanner,
 			/obj/item/device/flashlight/maglight,
-			/obj/item/weapon/storage/briefcase/crimekit
+			/obj/item/weapon/storage/briefcase/crimekit,
+			/obj/item/weapon/storage/bag/detective
 			)
 	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Forensic equipment"
+	access = access_forensics_lockers
+
+/datum/supply_pack/security/detectivescan
+	name = "Forensic - Scanning Equipment"
+	contains = list(
+			/obj/item/device/mass_spectrometer,
+			/obj/item/device/reagent_scanner,
+			/obj/item/weapon/storage/briefcase/crimekit,
+			/obj/item/device/detective_scanner
+			)
+	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Forensic equipment"
 	access = access_forensics_lockers
@@ -396,3 +410,13 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Security biohazard gear"
 	access = access_security
+
+/datum/supply_pack/security/posters
+	name = "Gear - Morale Posters"
+	contains = list(
+			/obj/item/weapon/contraband/poster/nanotrasen = 6
+			)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Morale Posters"
+	access = access_maint_tunnels
