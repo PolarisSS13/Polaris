@@ -530,6 +530,39 @@
 	gear_tweaks = list(gear_tweak_free_color_choice)
 
 
+
+/datum/gear/uniform/flowergirl
+	display_name = "flowergirl dress"
+	path = /obj/item/clothing/under/dress/arisflowergirl/colorable
+
+/datum/gear/uniform/flowergirl/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/uniform/ariswedding
+	display_name = "aristocratic wedding dress"
+	path = /obj/item/clothing/under/dress/ariswedding
+
+/datum/gear/uniform/arisbridesmaid
+	display_name = "aristocratic bridesmaid dress"
+	path = /obj/item/clothing/under/dress/arisbridesmaid
+
+/datum/gear/uniform/arisgroom
+	display_name = "aristocratic groom tuxedo"
+	path = /obj/item/clothing/under/arisgroom
+
+/datum/gear/uniform/arisbestman
+	display_name = "aristocratic best man's tuxedo"
+	path = /obj/item/clothing/under/arisbestman
+
+/datum/gear/uniform/club
+	display_name = "club dress"
+	path = /obj/item/clothing/under/dress/club
+
+/datum/gear/uniform/club/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
 /datum/gear/uniform/polychrome/New()
 	..()
 	gear_tweaks = list(gear_tweak_polychrome_color_choice)

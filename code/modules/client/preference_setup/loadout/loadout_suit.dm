@@ -6,6 +6,15 @@
 	sort_category = "Suits and Overwear"
 	cost = 2
 
+/datum/gear/suit/coat
+	display_name = "coat"
+	path = /obj/item/clothing/suit/storage/toggle/coat
+
+/datum/gear/suit/coat/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+
 /datum/gear/suit/greatcoat
 	display_name = "greatcoat"
 	path = /obj/item/clothing/suit/greatcoat
