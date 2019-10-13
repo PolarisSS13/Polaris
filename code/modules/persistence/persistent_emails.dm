@@ -135,7 +135,7 @@
 	var/list/all_messages = 	(inbox | spam | deleted | outbox)
 
 	if(!isemptylist(all_messages))
-		if(all_messages.len >= max_messages)
+		if((all_messages.len - 1) > max_messages)
 			return 0
 
 	if(message.spam)

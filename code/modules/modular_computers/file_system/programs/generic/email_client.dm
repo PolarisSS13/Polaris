@@ -76,46 +76,38 @@
 	var/datum/computer_file/data/email_message/current_message = null
 
 /datum/nano_module/email_client/proc/log_in()
-	var/datum/computer_file/data/email_account/found_email = get_email(stored_login)
+	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+		if(!account.can_login)
+			continue
 
-	message_admins("found email is [found_email] and using [stored_login]", 1)
-
-	if(found_email)
-		if(found_email.password == stored_password)
-			if(found_email.suspended)
-				error = "This account has been suspended. Please contact the system administrator for assistance."
-				return 0
-
-			if(!found_email.can_login)
-				error = "This account cannot be accessed at this time."
-				return 0
-
-			current_account = found_email
-			return 1
-		else
-			error = "Invalid Password"
-			return 0
-
-	else
-		if(config.canonicity)
-			message_admins("no found email, going to save db", 1)
-			if(check_persistent_email(stored_login))
-				if(get_persistent_email_password(stored_login) == stored_password)
-					if(get_persistent_email_suspended(stored_login))
-						error = "This account has been suspended. Please contact the system administrator for assistance."
-						return 0
-					found_email = manifest_persistent_email(stored_login)
-					current_account = found_email
-					return 1
-				else
-					error = "Invalid Password"
+		if(account.login == stored_login)
+			if(account.password == stored_password)
+				if(account.suspended)
+					error = "This account has been suspended. Please contact the system administrator for assistance."
 					return 0
+				current_account = account
+				return 1
+			else
+				error = "Invalid Password"
+				return 0
 
+		else
+			// checking our persistent emails for this email so we can login offline. if it's successful and the email
+			// isn't suspended, it'll make a copy and it will exist in-game (late joining owners of this email will be
+			// able to use it as normal too.
+			if(check_persistent_email(stored_login))
+				if(get_persistent_email_suspended(stored_login))
+					error = "This account has been suspended. Please contact the system administrator for assistance."
+					return 0
+				else
+					current_account = manifest_persistent_email(stored_login)
+					if(current_account)
+						return 1
 
 
 	error = "Invalid Login"
-
 	return 0
+
 
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
@@ -414,7 +406,7 @@
 		message.attachment = msg_attachment
 
 		if(!current_account.send_mail(msg_recipient, message))
-			error = "Error sending email: this address doesn't exist or has reached the set message limit."
+			error = "Error sending email: this address doesn't exist or you or the recipient has reached the set message limit."
 			return 1
 		else
 			error = "Email successfully sent."

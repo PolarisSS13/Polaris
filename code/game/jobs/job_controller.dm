@@ -537,6 +537,7 @@ var/global/datum/controller/occupations/job_master
 			EA = new/datum/computer_file/data/email_account()
 			EA.password = get_persistent_email_password(complete_login)
 			EA.login = complete_login
+			EA.get_persistent_data()
 
 		H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
 		H.mind.initial_email = EA
@@ -545,7 +546,7 @@ var/global/datum/controller/occupations/job_master
 		to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
 		H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
 
-		EA.get_persistent_data()
+
 		// END EMAIL GENERATION
 
 

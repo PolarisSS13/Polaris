@@ -37,23 +37,23 @@
 	return messages
 
 /datum/computer_file/data/email_account/proc/cannot_recieve()
-	if(suspended)
-		return "suspended"
-
 	if(max_messages)
-		if(get_email_count() >= max_messages)
-			return "max"
+		if((get_email_count() - 1) > max_messages)
+			return 1
 
 	return 0
 
 /proc/get_email(var/email)
-	for(var/datum/computer_file/data/email_account/account in world)
+	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(account.login == email)
 			return account
 	return 0
 
 /datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
 	var/datum/computer_file/data/email_account/recipient
+
+	if(cannot_recieve())
+		return 0
 
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(account.login == recipient_address)
