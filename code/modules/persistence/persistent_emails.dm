@@ -1,3 +1,76 @@
+/proc/save_all_emails()
+	if(!config.canonicity)
+		return 0
+
+	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+		account.save_email()
+
+	return 1
+
+/client/verb/load_emails()
+	set name = "Get Emails"
+	set desc = "Loads all emails"
+	set category = "Persistence"
+
+	if(!holder)
+		usr << "<font color='red'>Only admins can use this command!</font>"
+		return 0
+
+
+	debug_variables(ntnet_global.email_accounts)
+
+
+/datum/computer_file/data/email_account/proc/save_email()
+	var/full_path = "data/persistent/emails/[login].sav"
+	if(!full_path)			return 0
+	if(!fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(full_path)
+	if(!S)					return 0
+	S.cd = "/"
+
+	S["login"] 		<<		login
+	S["inbox"] 		<< 		inbox
+	S["outbox"]		<<		outbox
+	S["spam"]			<< 		spam
+	S["deleted"]		<<		deleted
+	S["login"] 		<< 		login
+	S["password"] 		<< 		password
+	S["suspended"] 	<< 		suspended
+	S["max_messages"] 	<<		max_messages
+
+	return 1
+
+/proc/manifest_persistent_email(address)
+	var/datum/computer_file/data/email_account/account = new/datum/computer_file/data/email_account()
+	account.login = address
+
+	if(!account.get_persistent_data())
+		return 0
+
+	return account
+
+
+
+/datum/computer_file/data/email_account/proc/get_persistent_data()
+	var/full_path = "data/persistent/emails/[login].sav"
+	if(!full_path)			return 0
+	if(!fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(full_path)
+	if(!S)					return 0
+	S.cd = "/"
+
+	S["login"]		>>	login
+	S["password"]		>>	password
+	S["inbox"]		>>	inbox
+	S["outbox"]		>>	outbox
+	S["spam"]			>>	spam
+	S["deleted"]		>>	deleted
+	S["suspended"]		>>	suspended
+	S["max_messages"]	>>	max_messages
+	return 1
+
 
 /proc/new_persistent_email(var/address, var/password)
 	var/full_path = "data/persistent/emails/[address].sav"
@@ -18,9 +91,13 @@
 	else
 		pass = password
 
-
-	S["address"] << address
+	S["inbox"] << list()
+	S["outbox"] << list()
+	S["spam"] << list()
+	S["deleted"] << list()
+	S["login"] << address
 	S["password"] << pass
+	S["max_messages"] << 50
 
 	return full_path
 
@@ -41,22 +118,36 @@
 	if(!message)
 		return 0
 
-	var/list/inbox
-	var/list/spam
+	var/list/inbox = list()
+	var/list/spam = list()
+	var/list/deleted = list()
+	var/list/outbox = list()
 
-	S["inbox"] >> inbox
-	S["spam"] >> spam
+	var/max_messages
+
+	S["inbox"]		>>	inbox
+	S["outbox"]		>>	outbox
+	S["spam"]			>>	spam
+	S["deleted"]		>>	deleted
+
+	S["max_messages"]	>>	max_messages
+
+	var/list/all_messages = 	(inbox | spam | deleted | outbox)
+
+	if(!isemptylist(all_messages))
+		if(all_messages.len >= max_messages)
+			return 0
 
 	if(message.spam)
 		if(prob(98))
-			spam.Add(message)
+			spam += message
 		else
-			inbox.Add(message)
+			inbox += message
 	else
 		if(prob(1))
-			spam.Add(message)
+			spam += message
 		else
-			inbox.Add(message)
+			inbox += message
 
 	S["inbox"] << inbox
 	S["spam"] << spam
@@ -76,6 +167,25 @@
 	return new_email
 
 
+/proc/get_persistent_email_suspended(var/address)
+	var/full_path = "data/persistent/emails/[address].sav"
+	if(!full_path)			return 0
+	if(!fexists(full_path)) return 0
+
+	var/savefile/S = new /savefile(full_path)
+	if(!S)					return 0
+	S.cd = "/"
+
+	if(!address)
+		return 0
+
+	var/suspended
+
+	S["suspended"] >> suspended
+
+	return suspended
+
+
 /proc/get_persistent_email_password(var/address)
 	var/full_path = "data/persistent/emails/[address].sav"
 	if(!full_path)			return 0
@@ -93,7 +203,6 @@
 	S["password"] >> password
 
 	return password
-
 
 /proc/change_persistent_email_address(var/address, var/new_address)
 	var/full_path = "data/persistent/emails/[address].sav"

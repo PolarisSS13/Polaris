@@ -2349,6 +2349,7 @@
 #include "code\modules\persistence\persistent_emails.dm"
 #include "code\modules\persistence\persistent_news.dm"
 #include "code\modules\persistence\persistent_politics.dm"
+#include "code\modules\persistence\persistent_world.dm"
 #include "code\modules\pits\pit.dm"
 #include "code\modules\planet\planet.dm"
 #include "code\modules\planet\pollux.dm"
