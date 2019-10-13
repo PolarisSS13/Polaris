@@ -496,19 +496,19 @@ var/global/datum/controller/occupations/job_master
 
 		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
 
-		if(job.supervisors)
-			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-
 		if(job.idtype)
-			spawnId(H, rank, alt_title)
 			H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
 			H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
 
+		if(job.supervisors)
+			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
+
 		if(job.req_admin_notify)
-			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
+			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, ensure that you cryo first to free up your job slot.</b>"
 
 
 		// EMAIL GENERATION
+/*
 		var/domain
 		if(job && job.email_domain)
 			domain = job.email_domain
@@ -516,25 +516,37 @@ var/global/datum/controller/occupations/job_master
 			domain = "freemail.nt"
 		var/complete_login = "[replacetext(lowertext(H.real_name), " ", ".")]@[domain]"
 
+
 		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
 		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
 		if(ntnet_global.does_email_exist(complete_login))
 			complete_login = "[replacetext(lowertext(H.real_name), " ", ".")][rand(100, 999)]@[domain]"
 
-		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
-		if(ntnet_global.does_email_exist(complete_login))
-			to_chat(H, "You were not assigned an email address.")
-			H.mind.store_memory("You were not assigned an email address.")
-		else
-			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
-			EA.password = GenerateKey()
-			EA.login = 	complete_login
-			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
-			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+*/
+		var/complete_login = H.client.prefs.email
+		var/datum/computer_file/data/email_account/EA
 
-			H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
+		// If someone already joined and email is already in-game.
+		for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+			if(account.login == H.client.prefs.email)
+				H.mind.initial_email = account
+				EA = account
+				break
 
-			H.mind.initial_email = EA.login
+		if(!EA)
+			EA = new/datum/computer_file/data/email_account()
+			EA.password = get_persistent_email_password(complete_login)
+			EA.login = complete_login
+			EA.get_persistent_data()
+
+		H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
+		H.mind.initial_email = EA
+
+
+		to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+		H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+
+
 		// END EMAIL GENERATION
 
 
@@ -544,6 +556,9 @@ var/global/datum/controller/occupations/job_master
 			if(equipped != 1)
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 1
+
+		spawnId(H, rank, alt_title)
+
 
 		BITSET(H.hud_updateflag, ID_HUD)
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
@@ -576,12 +591,10 @@ var/global/datum/controller/occupations/job_master
 			H.set_id_info(C)
 
 			//put the player's account number onto the ID
-			if(H.mind && H.mind.initial_account)
-				C.associated_account_number = H.mind.initial_account.account_number
-				C.associated_pin_number = H.mind.initial_account.remote_access_pin
-
-
-			C.associated_unique_ID = H.mind.prefs.unique_id
+			if(H.mind)
+				if(H.mind.initial_account)
+					C.associated_account_number = H.mind.initial_account.account_number
+					C.associated_pin_number = H.mind.initial_account.remote_access_pin
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 

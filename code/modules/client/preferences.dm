@@ -132,6 +132,7 @@ datum/preferences
 	var/economic_status = "Working Class"
 
 	var/uplinklocation = "PDA"
+	var/email = null
 
 	// OOC Metadata:
 	var/metadata = ""
