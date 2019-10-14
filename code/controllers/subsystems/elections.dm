@@ -84,7 +84,6 @@ SUBSYSTEM_DEF(elections)
 	var/prez
 	if(SSelections.current_president)
 		prez = "<b>[SSelections.current_president.name]</b> - Played by </b>[SSelections.current_president.ckey]</b> (Won [SSelections.current_president.ckeys_voted.len] out of [SSelections.last_election_votes].)"
-
 	return prez
 /proc/get_president_info()
 	var/info
