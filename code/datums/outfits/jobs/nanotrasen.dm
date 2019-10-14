@@ -13,8 +13,9 @@
 
 /decl/hierarchy/outfit/job/nanotrasen/post_equip(mob/living/carbon/human/H)
 	..()
-	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
-		permit.set_name(H.real_name)
+	if(H.back)
+		for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+			permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/nanotrasen/representative
 	name = "Nanotrasen Representative"
