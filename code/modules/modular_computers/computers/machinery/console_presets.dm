@@ -84,7 +84,6 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/candidate_registration())
-	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 // ===== SECURITY CONSOLE =====
 /obj/machinery/modular_computer/console/preset/security
@@ -99,7 +98,6 @@
 	cpu.hard_drive.store_file(new/datum/computer_file/program/digitalwarrant())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/email_client())
 	cpu.hard_drive.store_file(new/datum/computer_file/program/nt_explorer())
-	cpu.hard_drive.store_file(new/datum/computer_file/program/email_administration())
 
 // ===== CIVILIAN CONSOLE =====
 /obj/machinery/modular_computer/console/preset/civilian
