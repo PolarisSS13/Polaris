@@ -51,10 +51,10 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/get_icon()
 	..()
-	
+
 	//The overlays are not drawn on the mob, they are used for if the head is removed and becomes an item
 	cut_overlays()
-	
+
 	//Every 'addon' below requires information from species
 	if(!owner || !owner.species)
 		return
@@ -78,10 +78,13 @@ var/global/list/limb_icon_cache = list()
 			eyes_icon.Blend(rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes), ICON_ADD)
 		add_overlay(eyes_icon)
 		mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-		
+
 	//Lip color/icon
 	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
-		var/icon/lip_icon = new/icon('icons/mob/human_face.dmi', "lips_[owner.lip_style]_s")
+		var/image/lips = new/image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "lips_[owner.lip_style]_s")
+		lips.color = owner.lip_color
+		var/icon/lip_icon = new/icon(getCompoundIcon(lips))
+
 		add_overlay(lip_icon)
 		mob_icon.Blend(lip_icon, ICON_OVERLAY)
 
@@ -205,7 +208,7 @@ var/global/list/limb_icon_cache = list()
 	return applying
 
 /obj/item/organ/external/proc/bandage_level()
-	if(damage_state_text() == "00") 
+	if(damage_state_text() == "00")
 		return 0
 	if(!is_bandaged())
 		return 0
@@ -216,8 +219,8 @@ var/global/list/limb_icon_cache = list()
 	else if (burn_dam + brute_dam < (max_damage * 0.75 / 2))
 		. = 2
 	else
-		. = 3	
-	
+		. = 3
+
 /obj/item/organ/external/var/icon_cache_key
 
 // new damage icon system

@@ -35,6 +35,7 @@
 	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_color			// groan remind me to redo this entire thing one day.
 
 	var/age = 30		//Player's age (pure fluff)
 	var/birth_day = 28

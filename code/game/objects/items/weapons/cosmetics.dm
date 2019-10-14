@@ -1,41 +1,75 @@
 /obj/item/weapon/lipstick
 	gender = PLURAL
-	name = "red lipstick"
+	name = "lipstick"
 	desc = "A generic brand of lipstick."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lipstick"
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
-	var/colour = "red"
+	var/colour = COLOR_RED
 	var/open = 0
 	drop_sound = 'sound/items/drop/glass.ogg'
 
+	var/lip_type = "lipstick"
+
+/obj/item/weapon/lipstick/red
+	name = "red lipstick"
+	colour = COLOR_RED
+
 /obj/item/weapon/lipstick/purple
 	name = "purple lipstick"
-	colour = "purple"
+	colour = COLOR_PURPLE
 
 /obj/item/weapon/lipstick/jade
 	name = "jade lipstick"
-	colour = "jade"
+	colour = COLOR_PAKISTAN_GREEN
 
 /obj/item/weapon/lipstick/black
 	name = "black lipstick"
-	colour = "black"
+	colour = COLOR_BLACK
+
+/obj/item/weapon/lipstick/maroon
+	name = "maroon lipstick"
+	colour = COLOR_MAROON
+
+/obj/item/weapon/lipstick/pink
+	name = "pink lipstick"
+	colour = COLOR_PINK
+
+/obj/item/weapon/lipstick/brown
+	name = "brown lipstick"
+	colour = COLOR_BROWN
+
+/obj/item/weapon/lipstick/nude
+	name = "nude lipstick"
+	colour = COLOR_BEIGE
 
 /obj/item/weapon/lipstick/random
 	name = "lipstick"
 
 /obj/item/weapon/lipstick/random/New()
-	colour = pick("red","purple","jade","black")
-	name = "[colour] lipstick"
+	colour = pick(COLOR_RED, COLOR_PURPLE, COLOR_PAKISTAN_GREEN, COLOR_BLACK, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)
 	user << "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>"
+	playsound(loc, 'sound/effects/pop.ogg', 5, 1, 5)
 	open = !open
+
+	update_icon()
+
+/obj/item/weapon/lipstick/update_icon()
+	overlays.Cut()
+
 	if(open)
-		icon_state = "[initial(icon_state)]_[colour]"
+		icon_state = "lipstick_open"
+		if(colour)
+			var/image/I =  image(icon, "lipstick_overlay")
+			I.color = colour
+			overlays |= I
 	else
 		icon_state = initial(icon_state)
+
+
 
 /obj/item/weapon/lipstick/attack(mob/M as mob, mob/user as mob)
 	if(!open)	return
@@ -50,7 +84,8 @@
 		if(H == user)
 			user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
 								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-			H.lip_style = colour
+			H.lip_style = lip_type
+			H.lip_color = colour
 			H.update_icons_body()
 		else
 			user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
@@ -58,7 +93,8 @@
 			if(do_after(user, 20) && do_after(H, 20, 5, 0))	//user needs to keep their active hand, H does not.
 				user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 									 "<span class='notice'>You apply \the [src].</span>")
-				H.lip_style = colour
+				H.lip_style = lip_type
+				H.lip_color = colour
 				H.update_icons_body()
 	else
 		user << "<span class='notice'>Where are the lips on that?</span>"
@@ -75,26 +111,33 @@
 	drop_sound = 'sound/items/drop/accessory.ogg'
 
 
-/obj/item/weapon/haircomb/attack_self(mob/living/user)
+/obj/item/weapon/haircomb/attack(mob/living/carbon/human/H, mob/user)
 	var/text = "person"
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+
+	if(ishuman(H))
 		if(H.h_style == "Bald" || H.h_style == "Balding Hair" || H.h_style == "Skinhead")
-			user.visible_message(text("<span class='notice'>[] lifts the [] and stares at it for a moment with longing, for they are bald. How pathetic. </span>", user, src))
+			if(H == user) //shaving yourself
+				H.visible_message(text("<span class='notice'>[user] lifts [src] and stares at it for a moment with longing, for they are bald. How pathetic. </span>"))
+			else
+				user.visible_message(text("<span class='notice'>[user] lifts [src] and realises there's no hair to actually shave. Awkward. </span>"))
 			return
-		var/mob/living/carbon/human/U = user
-		switch(U.identifying_gender)
+
+		switch(H.identifying_gender)
 			if(MALE)
 				text = "guy"
 			if(FEMALE)
 				text = "lady"
 	else
-		switch(user.gender)
+		switch(H.gender)
 			if(MALE)
 				text = "guy"
 			if(FEMALE)
 				text = "lady"
-	user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [text].</span>")
+
+	if(H == user) //shaving yourself
+		user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [text].</span>")
+	else
+		H.visible_message("<span class='notice'>[user] uses [src] to comb [H]'s hair with incredible style and sophistication. The [text] sure looks pampered.</span>")
 
 /obj/item/weapon/razor
 	name = "electric razor"
