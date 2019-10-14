@@ -7,7 +7,7 @@
 //	program_menu_icon = "mail-open"
 	size = 12
 	requires_ntnet = 1
-	available_on_ntnet = 1
+	available_on_ntnet = 0
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
 
