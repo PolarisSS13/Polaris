@@ -42,6 +42,10 @@
 	name = "diamond stud earrings"
 	color = "#00ffe1"
 
+/obj/item/clothing/ears/earring/stud/rose_quartz
+	name = "rose quartz stud earrings"
+	color = "#db95c7"
+
 /obj/item/clothing/ears/earring/dangle
 	icon_state = "ear_dangle"
 
@@ -76,3 +80,7 @@
 /obj/item/clothing/ears/earring/dangle/diamond
 	name = "diamond dangle earrings"
 	color = "#00ffe1"
+
+/obj/item/clothing/ears/earring/dangle/rose_quartz
+	name = "rose quartz dangle earrings"
+	color = "#db95c7"

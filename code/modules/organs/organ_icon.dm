@@ -81,12 +81,15 @@ var/global/list/limb_icon_cache = list()
 
 	//Lip color/icon
 	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
-		var/image/lips = new/image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "lips_[owner.lip_style]_s")
-		lips.color = owner.lip_color
-		var/icon/lip_icon = new/icon(getCompoundIcon(lips))
+		var/icon/lips_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "lips_[owner.lip_style]_s")
+		var/icon/lips_s_add = new/icon("icon" = 'icons/mob/human_face_m.dmi', "icon_state" = "lips_[owner.lip_style]_s")
 
-		add_overlay(lip_icon)
-		mob_icon.Blend(lip_icon, ICON_OVERLAY)
+		lips_s.Blend(rgb(hex2rgb_r(owner.lip_color), hex2rgb_g(owner.lip_color), hex2rgb_b(owner.lip_color)), ICON_MULTIPLY)
+		lips_s.Blend(lips_s_add, ICON_ADD)
+
+		add_overlay(lips_s)
+
+		mob_icon.Blend(lips_s, ICON_OVERLAY) //So when it's on your body, it has icons
 
 	//Head markings
 	for(var/M in markings)

@@ -216,3 +216,256 @@
 			..()
 	else
 		..()
+
+//Pure fluff.
+
+/obj/item/weapon/cosmetic
+	name = "shampoo"
+	desc = "A generic brand shampoo."
+
+	icon = 'icons/obj/items.dmi'
+	icon_state = "shampoo"
+
+	var/cosmetic_sound = 'sound/effects/bubbles2.ogg'
+
+	var/use_msg = "You foam up their hair with the shampoo."
+	var/use_msg_see = "They have their hair foamed up with the shampoo."
+
+	var/use_msg_self = "You foam up your hair with the shampoo."
+	var/use_msg_self_see = "You see them foam up them hair with the shampoo."
+
+	var/after_use_self_see = "They finish foaming up their hair. They smell good."
+	var/after_use_see = "You delicately shampoo your own hair, how great!"
+
+
+	var/after_use = "They just get their hair shampooed, it looks great."
+	var/after_use_self = "You shampoo your own hair, it looks amazing."
+
+	var/scent //if it has a scent, otherwise, leave blank.
+
+	var/usage_time = 40
+
+	var/zone_requirement = "head"
+
+	var/uses = 20
+
+/obj/item/weapon/cosmetic/New()
+	if(scent)
+		name = "[scent] [initial(name)]"
+		desc = "This is a [initial(name)] that has the label \"[scent]\" on it. Even the packaging smells nice."
+
+	..()
+
+/obj/item/weapon/cosmetic/proc/conditionals() // add a conditional here, if 1, will continue. if 0, will end behaviour
+	return 1
+
+
+/obj/item/weapon/cosmetic/proc/activate() // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/proc/post_activate() // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/proc/set_text(mob/M, mob/user) // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/attack(mob/M, mob/user)
+	if(!uses)
+		to_chat(user, "<span class='notice'>It looks like [src] is empty...</span>")
+		return
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+
+		var/location = user.zone_sel.selecting
+		if(!location == zone_requirement && zone_requirement)
+			H.visible_message("<span class='notice'>You must aim for the [zone_requirement] to use this.</span>")
+		else
+
+			if(!conditionals())
+				return
+
+			set_text(M, user)
+
+			if(cosmetic_sound)
+				playsound(loc, cosmetic_sound, 5, 1, 5)
+
+			activate()
+
+			if(H == user)
+				H.visible_message("<span class='notice'>[use_msg_self_see]</span>", "<span class='notice'>[use_msg_self]</span>")
+			else
+				H.visible_message("<span class='notice'>[use_msg]</span>", "<span class='notice'>[use_msg_see]</span>")
+
+			if(scent)
+				spawn(8)
+					H.visible_message("<b>You can smell the scent of <i>[scent]</i>...</b>")
+
+			if(do_after(user, usage_time, target = H))
+				if(H == user)
+					H.visible_message("<span class='notice'>[after_use_self_see]</span>", "<span class='notice'>[after_use_self]</span>")
+				else
+					H.visible_message("<span class='notice'>[after_use]</span>", "<span class='notice'>[after_use_see]</span>")
+
+			uses--
+			post_activate()
+
+	return
+
+/obj/item/weapon/cosmetic/shampoo/set_text(mob/M, mob/user)
+	use_msg = "You foam up [M]'s hair with the [src]."
+	use_msg_see = "[M] has their hair foamed up with the [src]."
+
+	use_msg_self = "You foam up your hair with the [src]."
+	use_msg_self_see = "You see [M] foam up their hair with the [src]."
+
+	after_use_self_see = "[M] finishes foaming up their own hair. They smell good."
+	after_use_see = "You have your own hair shampoo'ed. You feel prestiged."
+
+	after_use = "[M] has their hair shampooed, it smells <b>amazing.</b>"
+	after_use_self = "You shampoo your own hair delicately with the [src]."
+
+/obj/item/weapon/cosmetic/conditioner/set_text(mob/M, mob/user)
+	use_msg = "You gently condition [M]'s hair with the [src]."
+	use_msg_see = "[M] has their hair moisturized and conditioned with the [src]."
+
+	use_msg_self = "You apply conditioning lotion up your hair with the [src]."
+	use_msg_self_see = "You see [M] add a dollop of [src] to their hair."
+
+	after_use_self_see = "[M] finishes conditioning their own hair. The smell of [scent] is really noticeable."
+	after_use_see = "You smell [scent] in your hair, after it gets conditioned by the [src]"
+
+	after_use = "[M]'s hair is fully conditioned with the [src]."
+	after_use_self = "You condition your own hair with [src], making sure it's distrubuted properly. It feels silky"
+
+
+/obj/item/weapon/cosmetic/perfume/set_text(mob/M, mob/user)
+	use_msg = "You spray [M] carefully with the [src]."
+	use_msg_see = "[M] is being sprayed with the [src]."
+
+	use_msg_self = "You daintily spray [src] behind your ears and around you."
+	use_msg_self_see = "You see [M] lavish themselves with [src]."
+
+	after_use_self_see = "The smell of [scent] wafts in the air as [M] sprays the [initial(name)]."
+	after_use_see = "The smell of [scent] fills your senses as you get sprayed with [src]."
+
+	after_use = "[M] is sprayed with [src] and the aroma is strong in the air."
+	after_use_self = "You generously spray yourself with [src], the [initial(name)] wafts in the air."
+
+
+/obj/item/weapon/cosmetic/shampoo
+	name = "shampoo"
+	desc = "A generic brand shampoo."
+
+	icon = 'icons/obj/items.dmi'
+	icon_state = "shampoo"
+
+
+	cosmetic_sound = 'sound/items/soda_shaking.ogg'
+
+	lemongrass
+		scent = "lemongrass and ginger"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cinnamon
+		scent = "cinnamon"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_ORANGE
+
+	strawberry
+		scent = "strawberry"
+		color = COLOR_PALE_RED_GRAY
+
+	apple
+		scent = "apple"
+		color = COLOR_PALE_GREEN_GRAY
+
+	chamomile
+		scent = "chamomile"
+		color = COLOR_SILVER
+
+	ginger
+		scent = "ginger"
+		color = COLOR_YELLOW
+
+/obj/item/weapon/cosmetic/conditioner
+	name = "conditioner"
+	desc = "A generic brand conditioner."
+
+	icon = 'icons/obj/items.dmi'
+	icon_state = "conditioner"
+
+	cosmetic_sound = 'sound/effects/squelch1.ogg'
+
+	lemongrass
+		scent = "lemongrass and ginger"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cinnamon
+		scent = "cinnamon"
+		color = COLOR_BROWN
+
+	apple
+		scent = "apple"
+		color = COLOR_PALE_GREEN_GRAY
+
+	strawberry
+		scent = "strawberry"
+		color = COLOR_PALE_RED_GRAY
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_ORANGE
+
+	chamomile
+		scent = "chamomile"
+		color = COLOR_SILVER
+
+	ginger
+		scent = "ginger"
+		color = COLOR_YELLOW
+
+/obj/item/weapon/cosmetic/perfume
+	name = "perfume"
+	desc = "A generic brand perfume."
+
+	icon = 'icons/obj/items.dmi'
+	icon_state = "perfume"
+
+	cosmetic_sound = 'sound/effects/spray2.ogg'
+
+
+	vanilla
+		scent = "vanilla"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	musk
+		scent = "sol musk"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_PALE_GREEN_GRAY
+
+	lavender
+		scent = "lavender"
+		color = COLOR_PALE_PURPLE_GRAY
+
+	orange_blossom
+		scent = "orange blossom"
+		color = COLOR_ORANGE

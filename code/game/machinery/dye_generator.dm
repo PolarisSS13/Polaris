@@ -55,6 +55,7 @@
 /obj/machinery/dye_generator/attackby(obj/item/weapon/W, mob/user, params)
 	if(making)
 		to_chat(user,"<span class='notice'>[src] is currently busy, try waiting a while.</span>")
+		return
 
 	if(default_unfasten_wrench(user, W, time = 60))
 		return
