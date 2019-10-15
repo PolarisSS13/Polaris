@@ -92,6 +92,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 
 	if(pref.email && !check_persistent_email(pref.email))
 		new_persistent_email(pref.email)
+		save_character()
 
 
 // Moved from /datum/preferences/proc/copy_to()
@@ -148,7 +149,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	if(!pref.existing_character)
 		. += "Email: <a href='?src=\ref[src];email_domain=1'>[pref.email]</a><br><br>"
 	else
-		. += "Email: [pref.email]<br>Password: [get_persistent_email_password(pref.email)] <br>"
+		. += "Login: [pref.email]<br>Password: [get_persistent_email_password(pref.email)] <br><br>"
 
 	if(pref.existing_character)
 		. += "<b>Unique Character ID:</b> [pref.unique_id]<br>"
