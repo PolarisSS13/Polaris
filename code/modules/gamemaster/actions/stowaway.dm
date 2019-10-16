@@ -58,14 +58,14 @@
 
 	var/obj/structure/ghost_pod/ghost_activated/human/HP = new (target_turf)
 
-	if(severity == EVENT_LEVEL_MUNDANE)
+	if(severity == EVENT_LEVEL_MUNDANE || istype(ticker.mode, /datum/game_mode/extended))
 		HP.make_antag = MODE_THUG
 
-	if(severity == EVENT_LEVEL_MODERATE)
+	else if(severity == EVENT_LEVEL_MODERATE)
 		HP.make_antag = MODE_RENEGADE
 		HP.occupant_type = "renegade [HP.occupant_type]"
 
-	if(severity == EVENT_LEVEL_MAJOR)
+	else if(severity == EVENT_LEVEL_MAJOR)
 		HP.make_antag = MODE_INFILTRATOR
 		HP.occupant_type = "volatile [HP.occupant_type]"
 

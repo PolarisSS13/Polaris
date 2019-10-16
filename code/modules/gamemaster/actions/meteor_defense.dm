@@ -2,7 +2,7 @@
 
 /datum/gm_action/meteor_defense
 	name = "meteor defense"
-	departments = list(ROLE_ENGINEERING)
+	departments = list(ROLE_ENGINEERING, ROLE_CARGO)
 	chaotic = 50
 	var/direction = null
 	var/dir_text = null
@@ -10,7 +10,14 @@
 
 /datum/gm_action/meteor_defense/get_weight()
 	var/engineers = metric.count_people_in_department(ROLE_ENGINEERING)
-	var/weight = (max(engineers - 1, 0) * 25) // If only one engineer exists, no meteors for now.
+	var/cargo = metric.count_people_in_department(ROLE_CARGO)
+	var/bots = metric.count_people_in_department(ROLE_SYNTHETIC)
+	var/weight = (max(engineers - 1, 0) * 20) // If only one engineer exists, no meteors for now.
+
+	if(engineers >= 2)
+		weight += ((cargo - 1) * 10)
+		weight += (bots * 15)
+
 	return weight
 
 /datum/gm_action/meteor_defense/set_up()
