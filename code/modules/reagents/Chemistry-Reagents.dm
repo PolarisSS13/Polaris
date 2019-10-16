@@ -91,14 +91,14 @@
 			if(H.species.has_organ[O_STOMACH] && (active_metab.metabolism_class == CHEM_INGEST))
 				var/obj/item/organ/internal/stomach/Chamber = H.internal_organs_by_name[O_STOMACH]
 				if(Chamber)
-					ingest_rem_mult = max(0.1, Chamber.max_damage - (Chamber.damage / Chamber.max_damage))
+					ingest_rem_mult *= max(0.1, 1 - (Chamber.damage / Chamber.max_damage))
 				else
 					ingest_rem_mult = 0.1
 
 			if(H.species.has_organ[O_INTESTINE] && (active_metab.metabolism_class == CHEM_INGEST))
 				var/obj/item/organ/internal/intestine/Tube = H.internal_organs_by_name[O_INTESTINE]
 				if(Tube)
-					ingest_abs_mult = max(0.1, Tube.max_damage - (Tube.damage / Tube.max_damage))
+					ingest_abs_mult *= max(0.1, 1 - (Tube.damage / Tube.max_damage))
 				else
 					ingest_abs_mult = 0.1
 
