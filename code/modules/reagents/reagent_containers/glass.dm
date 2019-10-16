@@ -132,7 +132,7 @@
 			update_name_label()
 	if(istype(W,/obj/item/weapon/storage/bag))
 		..()
-	if(W.w_class <= w_class && (flags & OPENCONTAINER))
+	if(W && W.w_class <= w_class && (flags & OPENCONTAINER))
 		to_chat(user, "<span class='notice'>You dip \the [W] into \the [src].</span>")
 		reagents.touch_obj(W, reagents.total_volume)
 
