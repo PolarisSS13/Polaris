@@ -2276,6 +2276,8 @@
 #include "code\modules\organs\internal\spleen.dm"
 #include "code\modules\organs\internal\stomach.dm"
 #include "code\modules\organs\internal\voicebox.dm"
+#include "code\modules\organs\internal\augment\armmounted.dm"
+#include "code\modules\organs\internal\augment\bio.dm"
 #include "code\modules\organs\subtypes\diona.dm"
 #include "code\modules\organs\subtypes\indestructible.dm"
 #include "code\modules\organs\subtypes\machine.dm"
