@@ -18,11 +18,13 @@
 				var/obj/item/clothing/G = H.gloves
 				if(G.body_parts_covered & ARMS)
 					to_chat(H, "<span class='warning'>You can't wear \the [src] with \the [G], it's in the way.</span>")
+					S.accessories -= src
 					return
 			else if((body_parts_covered & LEGS) && istype(H.shoes, /obj/item/clothing))
 				var/obj/item/clothing/Sh = H.shoes
-				if(S.body_parts_covered & LEGS)
+				if(Sh.body_parts_covered & LEGS)
 					to_chat(H, "<span class='warning'>You can't wear \the [src] with \the [Sh], it's in the way.</span>")
+					S.accessories -= src
 					return
 	..()
 
