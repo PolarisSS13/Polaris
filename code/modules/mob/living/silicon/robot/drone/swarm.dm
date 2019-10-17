@@ -15,7 +15,7 @@
 	lawupdate = 0
 	density = 1
 	idcard_type = /obj/item/weapon/card/id/syndicate
-	req_access = list(access_engine, access_robotics)
+	req_access = list(999)
 	integrated_light_power = 3
 	local_transmit = 0
 
@@ -37,6 +37,7 @@
 	hat_y_offset = -10
 
 	foreign_droid = TRUE
+	scrambledcodes = TRUE
 
 	holder_type = /obj/item/weapon/holder/drone
 
@@ -60,6 +61,7 @@
 
 /mob/living/silicon/robot/drone/swarm/init()
 	..()
+	QDEL_NULL(aiCamera)
 	flavor_text = "Some form of ancient machine."
 
 /mob/living/silicon/robot/drone/swarm/gunner

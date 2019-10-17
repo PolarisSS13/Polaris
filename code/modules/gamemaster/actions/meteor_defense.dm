@@ -8,6 +8,8 @@
 	var/dir_text = null
 	var/waves = 0
 
+	var/meteor_types
+
 /datum/gm_action/meteor_defense/get_weight()
 	var/engineers = metric.count_people_in_department(ROLE_ENGINEERING)
 	var/cargo = metric.count_people_in_department(ROLE_CARGO)
@@ -21,6 +23,17 @@
 	return weight
 
 /datum/gm_action/meteor_defense/set_up()
+	severity = pickweight(EVENT_LEVEL_MUNDANE = 10,
+	EVENT_LEVEL_MODERATE = 3
+	)
+
+	switch(severity)
+		if(EVENT_LEVEL_MUNDANE)
+			meteor_types = meteors_threatening.Copy()
+
+		if(EVENT_LEVEL_MODERATE)
+			meteor_types = meteors_catastrophic.Copy()
+
 	direction = pick(cardinal) // alldirs doesn't work with current meteor code unfortunately.
 	waves = rand(5, 8)
 	switch(direction)
@@ -34,17 +47,17 @@
 			dir_text = "starboard"
 
 /datum/gm_action/meteor_defense/announce()
-	var/announcement = "Alert!  Two other asteroids have collided near [station_name()].  Chunks of it are expected to approach from the [dir_text] side.  ETA to arrival is \
-	approximately 10 minutes."
+	var/announcement = "Alert!  Two asteroids have collided near [station_name()].  Chunks of it are expected to approach from the [dir_text] side.  ETA to arrival is \
+	approximately [round(5 * severity * 2)] minutes."
 	command_announcement.Announce(announcement, "Meteor Alert", new_sound = 'sound/AI/meteors.ogg')
 
 /datum/gm_action/meteor_defense/start()
 	..()
 	spawn(0)
-		sleep(5 MINUTES)
-		var/announcement = "The incoming debris are expected to approach from the [dir_text] side.  ETA to arrival is approximately 5 minutes."
+		sleep(round(5 * severity) MINUTES)
+		var/announcement = "The incoming debris are expected to approach from the [dir_text] side.  ETA to arrival is approximately [round(5 * severity)] minutes."
 		command_announcement.Announce(announcement, "Meteor Alert - Update")
-		sleep(5 MINUTES)
+		sleep(round(5 * severity) MINUTES)
 		announcement = "Incoming debris approaches from the [dir_text] side!"
 		command_announcement.Announce(announcement, "Meteor Alert - Update")
 		while(waves)
@@ -53,6 +66,6 @@
 				spawn_meteors(rand(8, 12), meteors_threatening, reverse_dir[direction])
 			waves--
 			sleep(30 SECONDS)
-		announcement = "The colony has cleared the incoming debris."
+		announcement = "The station has cleared the incoming debris."
 		command_announcement.Announce(announcement, "Meteor Alert - Update")
 		message_admins("Meteor defense event has ended.")
