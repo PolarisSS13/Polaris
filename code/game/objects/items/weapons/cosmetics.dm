@@ -357,7 +357,7 @@
 					H.visible_message("<span class='notice'>[after_use]</span>", "<span class='notice'>[after_use_see]</span>")
 
 			uses--
-			post_activate()
+			post_activate(M, user)
 
 	return
 
