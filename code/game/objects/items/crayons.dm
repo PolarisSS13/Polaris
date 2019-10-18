@@ -255,8 +255,8 @@
 
 		playsound(loc, 'sound/effects/spray.ogg', 5, 1, 5)
 		update_icon()
-		H.lip_style = "spray_face"
-		H.lip_color = colour
+		H.set_face_style("spray_face", colour)
+		H.update_icons_body()
 
 		uses = max(0, uses - 10)
 	return (OXYLOSS)
@@ -301,8 +301,9 @@
 					if(C.eyecheck() <= 0) // no eye protection? ARGH IT BURNS.
 						C.confused = max(C.confused, 3)
 						C.Weaken(3)
-				C.lip_style = "spray_face"
+				C.set_face_style("spray_face", colour)
 				C.update_icons_body()
+
 				uses = max(0,uses-10)
 	if(is_type_in_list(target,validSurfaces))
 		playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)

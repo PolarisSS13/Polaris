@@ -218,7 +218,7 @@
 			var/mob/living/carbon/human/H = M
 			if(H == user)
 				user << "<span class='notice'>You wipe your face with the [src].</span>"
-				H.lip_style = null
+				H.remove_face_style()
 				H.update_icons_body()
 			else
 				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s face off with \the [src].</span>", \
@@ -226,7 +226,7 @@
 				if(do_after(user, 10) && do_after(H, 10, 5, 0))	//user needs to keep their active hand, H does not.
 					user.visible_message("<span class='notice'>[user] wipes [H]'s face off with \the [src].</span>", \
 										 "<span class='notice'>You wipe off [H]'s face.</span>")
-					H.lip_style = null
+					H.remove_face_style()
 					H.update_icons_body()
 
 /obj/item/weapon/paper/proc/set_content(text,title)

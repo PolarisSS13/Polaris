@@ -76,22 +76,23 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #define TAIL_LAYER				14		//Some species have tails to render
 #define GLASSES_LAYER			15		//Eye-slot item
 #define BELT_LAYER_ALT			16		//Belt-slot item (when set to be above suit via verb)
-#define SUIT_STORE_LAYER		17		//Suit storage-slot item
+#define SUIT_STORE_LAYER			17		//Suit storage-slot item
 #define BACK_LAYER				18		//Back-slot item
 #define HAIR_LAYER				19		//The human's hair
 #define EARS_LAYER				20		//Both ear-slot items (combined image)
 #define EYES_LAYER				21		//Mob's eyes (used for glowing eyes)
-#define FACEMASK_LAYER			22		//Mask-slot item
-#define HEAD_LAYER				23		//Head-slot item
-#define HANDCUFF_LAYER			24		//Handcuffs, if the human is handcuffed, in a secret inv slot
-#define LEGCUFF_LAYER			25		//Same as handcuffs, for legcuffs
-#define L_HAND_LAYER			26		//Left-hand item
-#define R_HAND_LAYER			27		//Right-hand item
-#define MODIFIER_EFFECTS_LAYER	28		//Effects drawn by modifiers
-#define FIRE_LAYER				29		//'Mob on fire' overlay layer
-#define WATER_LAYER				30		//'Mob submerged' overlay layer
-#define TARGETED_LAYER			31		//'Aimed at' overlay layer
-#define TOTAL_LAYERS			31//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
+#define FACE_STYLE_LAYER			22		//Mob's lipstyles, or any type of face decor.
+#define FACEMASK_LAYER			23		//Mask-slot item
+#define HEAD_LAYER				24		//Head-slot item
+#define HANDCUFF_LAYER			25		//Handcuffs, if the human is handcuffed, in a secret inv slot
+#define LEGCUFF_LAYER			26		//Same as handcuffs, for legcuffs
+#define L_HAND_LAYER			27		//Left-hand item
+#define R_HAND_LAYER			28		//Right-hand item
+#define MODIFIER_EFFECTS_LAYER	29		//Effects drawn by modifiers
+#define FIRE_LAYER				30		//'Mob on fire' overlay layer
+#define WATER_LAYER				31		//'Mob submerged' overlay layer
+#define TARGETED_LAYER			32		//'Aimed at' overlay layer
+#define TOTAL_LAYERS			32//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -245,10 +246,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		g = "female"
 
 	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
-	if(lip_style)
-		icon_key += "[lip_style]"
-	else
-		icon_key += "nolips"
+
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[O_EYES]
 	if(eyes)
 		icon_key += "[rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3])]"
@@ -340,10 +338,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 	icon = stand_icon
 
-
-
 	//tail
 	update_tail_showing()
+
+	//face style
+	update_face_style()
+
 
 /mob/living/carbon/human/proc/update_skin()
 	if(QDESTROYING(src))
@@ -1011,6 +1011,51 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(total.overlays.len)
 		overlays_standing[SURGERY_LAYER] = total
 		apply_layer(SURGERY_LAYER)
+
+
+/mob/living/carbon/human/proc/update_face_style()
+	remove_layer(FACE_STYLE_LAYER)
+
+	for(var/obj/item/organ/external/head/O in organs)
+		if(isnull(O) || O.is_stump())
+			return 0
+
+	if(! (lip_style && (species && (species.appearance_flags & HAS_LIPS))) )
+		return 0
+
+	var/icon/lips
+
+	lips = icon('icons/mob/human_facestyle.dmi', "[lip_style]")
+	lips.Blend(lip_color, ICON_MULTIPLY)
+
+	overlays_standing[FACE_STYLE_LAYER] = lips
+
+	apply_layer(FACE_STYLE_LAYER)
+
+	return 1
+
+/mob/living/carbon/human/proc/set_face_style(style, color)
+	if(!(species && (species.appearance_flags & HAS_LIPS)))
+		return 0
+
+	lip_style = style
+	lip_color = color
+
+	if(update_face_style())
+		return 1
+
+	lip_style = null
+	lip_color = null
+
+	return 0
+
+/mob/living/carbon/human/proc/remove_face_style()
+	remove_layer(FACE_STYLE_LAYER)
+	lip_style = null
+	lip_color = null
+	update_face_style()
+
+	return 1
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER

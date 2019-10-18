@@ -79,18 +79,6 @@ var/global/list/limb_icon_cache = list()
 		add_overlay(eyes_icon)
 		mob_icon.Blend(eyes_icon, ICON_OVERLAY)
 
-	//Lip color/icon
-	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
-		var/icon/lips_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "lips_[owner.lip_style]_s")
-		var/icon/lips_s_add = new/icon("icon" = 'icons/mob/human_face_m.dmi', "icon_state" = "lips_[owner.lip_style]_s")
-
-		lips_s.Blend(rgb(hex2rgb_r(owner.lip_color), hex2rgb_g(owner.lip_color), hex2rgb_b(owner.lip_color)), ICON_MULTIPLY)
-		lips_s.Blend(lips_s_add, ICON_ADD)
-
-		add_overlay(lips_s)
-
-		mob_icon.Blend(lips_s, ICON_OVERLAY) //So when it's on your body, it has icons
-
 	//Head markings
 	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
@@ -171,6 +159,7 @@ var/global/list/limb_icon_cache = list()
 					I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
 					limb_icon_cache[cache_key] = I
 				mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
+
 
 	if(model)
 		icon_cache_key += "_model_[model]"
