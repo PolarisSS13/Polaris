@@ -86,7 +86,7 @@
 /obj/item/hair_dye_bottle
 	name = "Hair Dye Bottle"
 	desc = "A refillable bottle used for holding hair dyes of all sorts of colors."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "hairdyebottle"
 	throwforce = 0
 	throw_speed = 4

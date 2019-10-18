@@ -89,7 +89,7 @@
 	name = "spooky makeup kit"
 	desc = "Can't tell if you're doing this unironically or dressing for halloween."
 
-	icon_state = "clowny"
+	icon_state = "blush_shadow_clowny"
 	lip_type = "clowny"
 
 
@@ -658,6 +658,11 @@
 			user.visible_message("<span class='notice'>[user] does their body with \the [src].</span>", \
 								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
 
-		H.set_face_style("tan", color)
+		var/tan_style = "tan_m"
+
+		if(H.gender == "female")
+			tan_style = "tan_f"
+
+		H.set_face_style(tan_style, color)
 		H.update_icons_body()
 
