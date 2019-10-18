@@ -565,6 +565,11 @@
 	desc = "A lightweight blue plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon_state = "pcarrier_blue"
 
+/obj/item/clothing/suit/armor/pcarrier/press
+	name = "light blue plate carrier"
+	desc = "A lightweight light blue plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
+	icon_state = "pcarrier_press"
+
 /obj/item/clothing/suit/armor/pcarrier/blue/sol
 	name = "peacekeeper plate carrier"
 	desc = "A lightweight plate carrier vest in SCG Peacekeeper colors. It can be equipped with armor plates, but provides no protection of its own."
