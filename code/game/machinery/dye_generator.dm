@@ -101,7 +101,7 @@
 
 /obj/item/hair_dye_bottle/proc/update_dye_overlay()
 	overlays.Cut()
-	var/image/I = new('icons/obj/items.dmi', "hairdyebottle-overlay")
+	var/image/I = new('icons/obj/cosmetics.dmi', "hairdyebottle-overlay")
 	I.color = dye_color
 	overlays += I
 
