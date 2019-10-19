@@ -9,6 +9,8 @@
 	var/dye_color = "#FFFFFF"
 	clicksound = "button"
 
+	var/making = 0
+
 /obj/machinery/dye_generator/initialize()
 	power_change()
 
@@ -51,9 +53,25 @@
 	set_light(2, l_color = temp)
 
 /obj/machinery/dye_generator/attackby(obj/item/weapon/W, mob/user, params)
+	if(making)
+		to_chat(user,"<span class='notice'>[src] is currently busy, try waiting a while.</span>")
+		return
 
 	if(default_unfasten_wrench(user, W, time = 60))
 		return
+
+	if(istype(W, /obj/item/stack/wax))
+		user.visible_message("<span class='notice'>[user] inserts [W] into the [src].</span>","<span class='notice'>You insert [W] into the [src].</span>")
+		var/obj/item/stack/wax/B = W
+		qdel(B)
+		playsound(loc, 'sound/effects/bubbles2.ogg', 5, 1, 5)
+		making = 1
+		spawn(70)
+			playsound(loc, 'sound/effects/pop.ogg', 5, 1, 5)
+			var/obj/item/weapon/lipstick/lipstick = new /obj/item/weapon/lipstick(loc)
+			lipstick.colour = dye_color
+			making = 0
+			return
 
 	if(istype(W, /obj/item/hair_dye_bottle))
 		user.visible_message("<span class='notice'>[user] fills the [W] up with some dye.</span>","<span class='notice'>You fill the [W] up with some hair dye.</span>")
@@ -68,7 +86,7 @@
 /obj/item/hair_dye_bottle
 	name = "Hair Dye Bottle"
 	desc = "A refillable bottle used for holding hair dyes of all sorts of colors."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "hairdyebottle"
 	throwforce = 0
 	throw_speed = 4
@@ -83,7 +101,7 @@
 
 /obj/item/hair_dye_bottle/proc/update_dye_overlay()
 	overlays.Cut()
-	var/image/I = new('icons/obj/items.dmi', "hairdyebottle-overlay")
+	var/image/I = new('icons/obj/cosmetics.dmi', "hairdyebottle-overlay")
 	I.color = dye_color
 	overlays += I
 

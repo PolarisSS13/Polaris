@@ -1,41 +1,118 @@
 /obj/item/weapon/lipstick
 	gender = PLURAL
-	name = "red lipstick"
+	name = "lipstick"
 	desc = "A generic brand of lipstick."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "lipstick"
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
-	var/colour = "red"
+	var/colour = COLOR_RED
 	var/open = 0
 	drop_sound = 'sound/items/drop/glass.ogg'
 
+	var/lip_type = "lipstick"
+	var/body_area = "lips"
+
+/obj/item/weapon/lipstick/red
+	name = "red lipstick"
+	colour = COLOR_RED
+
 /obj/item/weapon/lipstick/purple
 	name = "purple lipstick"
-	colour = "purple"
+	colour = COLOR_PURPLE
 
 /obj/item/weapon/lipstick/jade
 	name = "jade lipstick"
-	colour = "jade"
+	colour = COLOR_PAKISTAN_GREEN
 
 /obj/item/weapon/lipstick/black
 	name = "black lipstick"
-	colour = "black"
+	colour = COLOR_BLACK
+
+/obj/item/weapon/lipstick/maroon
+	name = "maroon lipstick"
+	colour = COLOR_MAROON
+
+/obj/item/weapon/lipstick/pink
+	name = "pink lipstick"
+	colour = COLOR_PINK
+
+/obj/item/weapon/lipstick/brown
+	name = "brown lipstick"
+	colour = COLOR_BROWN
+
+/obj/item/weapon/lipstick/nude
+	name = "nude lipstick"
+	colour = COLOR_BEIGE
 
 /obj/item/weapon/lipstick/random
 	name = "lipstick"
 
 /obj/item/weapon/lipstick/random/New()
-	colour = pick("red","purple","jade","black")
-	name = "[colour] lipstick"
+	colour = pick(COLOR_RED, COLOR_PURPLE, COLOR_PAKISTAN_GREEN, COLOR_BLACK, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
+
+/obj/item/weapon/lipstick/blusher	// I'll make it it's own thing, eventually.
+	name = "blusher"
+	desc = "A classier way to apply it."
+
+	icon_state = "blusher"
+	lip_type = "blush"
+	body_area = "cheeks"
+
+/obj/item/weapon/lipstick/blusher/random/New()
+	colour = pick(COLOR_RED, COLOR_ORANGE, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
+
+/obj/item/weapon/lipstick/eyeshadow
+	name = "eyeshadow brush"
+	desc = "Get that evening look."
+
+	icon_state = "eyeshadow_brush"
+	lip_type = "eyeshadow"
+	body_area = "eyes"
+
+/obj/item/weapon/lipstick/eyeshadow/random/New()
+	colour = pick(COLOR_RED, COLOR_ORANGE, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
+
+
+/obj/item/weapon/lipstick/shadow_blush
+	name = "shadow and blush set"
+	desc = "What will your parents think?"
+
+	icon_state = "blush_shadow"
+	lip_type = "blush_shadow"
+	body_area = "eyes"
+
+	colour = COLOR_WHITE
+
+
+/obj/item/weapon/lipstick/shadow_blush/spooky
+	name = "spooky makeup kit"
+	desc = "Can't tell if you're doing this unironically or dressing for halloween."
+
+	icon_state = "blush_shadow_clowny"
+	lip_type = "clowny"
+
 
 /obj/item/weapon/lipstick/attack_self(mob/user as mob)
-	user << "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>"
+	user << "<span class='notice'>You [open ? "close" : "open"] \the [src].</span>"
+	playsound(loc, 'sound/effects/pop.ogg', 5, 1, 5)
 	open = !open
+
+	update_icon()
+
+/obj/item/weapon/lipstick/update_icon()
+	overlays.Cut()
+
 	if(open)
-		icon_state = "[initial(icon_state)]_[colour]"
+		icon_state = "[initial(icon_state)]_open"
+		if(colour)
+			var/image/I =  image(icon, "[initial(icon_state)]_overlay")
+			I.color = colour
+			overlays |= I
 	else
 		icon_state = initial(icon_state)
+
+
 
 /obj/item/weapon/lipstick/attack(mob/M as mob, mob/user as mob)
 	if(!open)	return
@@ -45,23 +122,23 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.lip_style)	//if they already have lipstick on
-			user << "<span class='notice'>You need to wipe off the old lipstick first!</span>"
+			user << "<span class='notice'>You need to wipe off the old makeup first!</span>"
 			return
 		if(H == user)
-			user.visible_message("<span class='notice'>[user] does their lips with \the [src].</span>", \
+			user.visible_message("<span class='notice'>[user] does their [body_area] with \the [src].</span>", \
 								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-			H.lip_style = colour
+			H.set_face_style(lip_type, colour)
 			H.update_icons_body()
 		else
-			user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
+			user.visible_message("<span class='warning'>[user] begins to do [H]'s [body_area] with \the [src].</span>", \
 								 "<span class='notice'>You begin to apply \the [src].</span>")
 			if(do_after(user, 20) && do_after(H, 20, 5, 0))	//user needs to keep their active hand, H does not.
-				user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
+				user.visible_message("<span class='notice'>[user] does [H]'s [body_area] with \the [src].</span>", \
 									 "<span class='notice'>You apply \the [src].</span>")
-				H.lip_style = colour
+				H.set_face_style(lip_type, colour)
 				H.update_icons_body()
 	else
-		user << "<span class='notice'>Where are the lips on that?</span>"
+		user << "<span class='notice'>Where are the [body_area] on that?</span>"
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 
@@ -70,39 +147,47 @@
 	desc = "A pristine purple comb made from flexible plastic."
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "purplecomb"
 	drop_sound = 'sound/items/drop/accessory.ogg'
 
 
-/obj/item/weapon/haircomb/attack_self(mob/living/user)
+/obj/item/weapon/haircomb/attack(mob/living/carbon/human/H, mob/user)
 	var/text = "person"
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+
+	if(ishuman(H))
 		if(H.h_style == "Bald" || H.h_style == "Balding Hair" || H.h_style == "Skinhead")
-			user.visible_message(text("<span class='notice'>[] lifts the [] and stares at it for a moment with longing, for they are bald. How pathetic. </span>", user, src))
+			if(H == user) //shaving yourself
+				H.visible_message(text("<span class='notice'>[user] lifts [src] and stares at it for a moment with longing, for they are bald. How pathetic. </span>"))
+			else
+				user.visible_message(text("<span class='notice'>[user] lifts [src] and realises there's no hair to actually shave. Awkward. </span>"))
 			return
-		var/mob/living/carbon/human/U = user
-		switch(U.identifying_gender)
+
+		switch(H.identifying_gender)
 			if(MALE)
 				text = "guy"
 			if(FEMALE)
 				text = "lady"
 	else
-		switch(user.gender)
+		switch(H.gender)
 			if(MALE)
 				text = "guy"
 			if(FEMALE)
 				text = "lady"
-	user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [text].</span>")
+
+	if(H == user) //shaving yourself
+		user.visible_message("<span class='notice'>[user] uses [src] to comb their hair with incredible style and sophistication. What a [text].</span>")
+	else
+		H.visible_message("<span class='notice'>[user] uses [src] to comb [H]'s hair with incredible style and sophistication. The [text] sure looks pampered.</span>")
 
 /obj/item/weapon/razor
 	name = "electric razor"
 	desc = "The latest and greatest power razor born from the science of shaving."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "razor"
 	flags = CONDUCT
 	w_class = 1
+	var/shave_sound = 'sound/items/Welder2.ogg'
 
 
 /obj/item/weapon/razor/proc/shave(mob/living/carbon/human/H, location = "mouth")
@@ -112,7 +197,8 @@
 		H.h_style = "Skinhead"
 
 	H.update_hair()
-	playsound(loc, 'sound/items/Welder2.ogg', 20, 1)
+	if(shave_sound)
+		playsound(loc, shave_sound, 20, 1)
 
 
 /obj/item/weapon/razor/attack(mob/M, mob/user)
@@ -173,3 +259,410 @@
 			..()
 	else
 		..()
+
+/obj/item/weapon/razor/blade
+	name = "razor blade"
+	desc = "Careful not to cut yourself on that edge."
+	icon_state = "razorblade"
+	shave_sound = null
+
+//Pure fluff.
+
+/obj/item/weapon/cosmetic
+	name = "shampoo"
+	desc = "A generic brand shampoo."
+
+	icon = 'icons/obj/cosmetics.dmi'
+	icon_state = "shampoo"
+
+	var/cosmetic_sound = 'sound/effects/bubbles2.ogg'
+
+	var/use_msg = "You foam up their hair with the shampoo."
+	var/use_msg_see = "They have their hair foamed up with the shampoo."
+
+	var/use_msg_self = "You foam up your hair with the shampoo."
+	var/use_msg_self_see = "You see them foam up them hair with the shampoo."
+
+	var/after_use_self_see = "They finish foaming up their hair. They smell good."
+	var/after_use_see = "You delicately shampoo your own hair, how great!"
+
+
+	var/after_use = "They just get their hair shampooed, it looks great."
+	var/after_use_self = "You shampoo your own hair, it looks amazing."
+
+	var/scent //if it has a scent, otherwise, leave blank.
+
+	var/usage_time = 40
+
+	var/zone_requirement = "head"
+
+	var/uses = 20
+
+/obj/item/weapon/cosmetic/New()
+	if(scent)
+		name = "[scent] [initial(name)]"
+		desc = "This is a [initial(name)] that has the label \"[scent]\" on it. Even the packaging smells nice."
+
+	..()
+
+/obj/item/weapon/cosmetic/proc/conditionals() // add a conditional here, if 1, will continue. if 0, will end behaviour
+	return 1
+
+
+/obj/item/weapon/cosmetic/proc/activate() // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/proc/post_activate() // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/proc/set_text(mob/M, mob/user) // add custom behaviour here.
+	return
+
+/obj/item/weapon/cosmetic/attack(mob/M, mob/user)
+	if(!uses)
+		to_chat(user, "<span class='notice'>It looks like [src] is empty...</span>")
+		return
+
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+
+		var/location = user.zone_sel.selecting
+		if(!location == zone_requirement && zone_requirement)
+			H.visible_message("<span class='notice'>You must aim for the [zone_requirement] to use this.</span>")
+		else
+
+			if(!conditionals())
+				return
+
+			set_text(M, user)
+
+			if(cosmetic_sound)
+				playsound(loc, cosmetic_sound, 5, 1, 5)
+
+			activate()
+
+			if(H == user)
+				H.visible_message("<span class='notice'>[use_msg_self_see]</span>", "<span class='notice'>[use_msg_self]</span>")
+			else
+				H.visible_message("<span class='notice'>[use_msg]</span>", "<span class='notice'>[use_msg_see]</span>")
+
+			if(scent)
+				spawn(8)
+					H.visible_message("<b>You can smell the scent of <i>[scent]</i>...</b>")
+
+			if(do_after(user, usage_time, target = H))
+				if(H == user)
+					H.visible_message("<span class='notice'>[after_use_self_see]</span>", "<span class='notice'>[after_use_self]</span>")
+				else
+					H.visible_message("<span class='notice'>[after_use]</span>", "<span class='notice'>[after_use_see]</span>")
+
+			uses--
+			post_activate(M, user)
+
+	return
+
+/obj/item/weapon/cosmetic/shampoo/set_text(mob/M, mob/user)
+	use_msg = "You foam up [M]'s hair with the [src]."
+	use_msg_see = "[M] has their hair foamed up with the [src]."
+
+	use_msg_self = "You foam up your hair with the [src]."
+	use_msg_self_see = "You see [M] foam up their hair with the [src]."
+
+	after_use_self_see = "[M] finishes foaming up their own hair. They smell good."
+	after_use_see = "You have your own hair shampoo'ed. You feel prestiged."
+
+	after_use = "[M] has their hair shampooed, it smells <b>amazing.</b>"
+	after_use_self = "You shampoo your own hair delicately with the [src]."
+
+/obj/item/weapon/cosmetic/conditioner/set_text(mob/M, mob/user)
+	use_msg = "You gently condition [M]'s hair with the [src]."
+	use_msg_see = "[M] has their hair moisturized and conditioned with the [src]."
+
+	use_msg_self = "You apply conditioning lotion up your hair with the [src]."
+	use_msg_self_see = "You see [M] add a dollop of [src] to their hair."
+
+	after_use_self_see = "[M] finishes conditioning their own hair. The smell of [scent] is really noticeable."
+	after_use_see = "You smell [scent] in your hair, after it gets conditioned by the [src]"
+
+	after_use = "[M]'s hair is fully conditioned with the [src]."
+	after_use_self = "You condition your own hair with [src], making sure it's distrubuted properly. It feels silky"
+
+
+/obj/item/weapon/cosmetic/perfume/set_text(mob/M, mob/user)
+	use_msg = "You spray [M] carefully with the [src]."
+	use_msg_see = "[M] is being sprayed with the [src]."
+
+	use_msg_self = "You daintily spray [src] behind your ears and around you."
+	use_msg_self_see = "You see [M] lavish themselves with [src]."
+
+	after_use_self_see = "The smell of [scent] wafts in the air as [M] sprays the [initial(name)]."
+	after_use_see = "The smell of [scent] fills your senses as you get sprayed with [src]."
+
+	after_use = "[M] is sprayed with [src] and the aroma is strong in the air."
+	after_use_self = "You generously spray yourself with [src], the [initial(name)] wafts in the air."
+
+
+/obj/item/weapon/cosmetic/cologne/set_text(mob/M, mob/user)
+	use_msg = "You spray [M] around their ears and neck [src]."
+	use_msg_see = "[M] is being sprayed generously with the [src]."
+
+	use_msg_self = "You lavishly spray [src] around your ears and neck."
+	use_msg_self_see = "You see [M] spray themselves generously themselves with [src]."
+
+	after_use_self_see = "The smell of [scent] wafts in the air as [M] sprays the [initial(name)]."
+	after_use_see = "The smell of [scent] fills your senses as you get sprayed with [initial(name)]."
+
+	after_use = "[M] is sprayed with [src] and the aroma is strong in the air."
+	after_use_self = "After you spray yourself with [src], the [initial(name)] wafts in the air."
+
+/obj/item/weapon/cosmetic/aftershave/set_text(mob/M, mob/user)
+	use_msg = "You apply some [src] to your hands and begin patting [M]'s face."
+	use_msg_see = "[M] is being patted down by [user] with [src]."
+
+	use_msg_self = "You add some [src] to your hands and begin patting your cheeks with it."
+	use_msg_self_see = "You see [M] apply [src] to their hands and begin patting their cheeks down."
+
+	after_use_self_see = "The smell of [scent] wafts in the air as [M] applies the [initial(name)]."
+	after_use_see = "The smell of [scent] fills your senses as you pat yourself down with [initial(name)]."
+
+	after_use = "[user] finishes applying [src] to [M] and the aroma is strong in the air."
+	after_use_self = "After you pamper yourself with [src], the [initial(name)]'s [scent] blends strongly in the air."
+
+/obj/item/weapon/cosmetic/shampoo
+	name = "shampoo"
+	desc = "A generic brand shampoo."
+
+	icon = 'icons/obj/cosmetics.dmi'
+	icon_state = "shampoo"
+
+
+	cosmetic_sound = 'sound/items/soda_shaking.ogg'
+
+	lemongrass
+		scent = "lemongrass and ginger"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cinnamon
+		scent = "cinnamon"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_ORANGE
+
+	strawberry
+		scent = "strawberry"
+		color = COLOR_PALE_RED_GRAY
+
+	apple
+		scent = "apple"
+		color = COLOR_PALE_GREEN_GRAY
+
+	chamomile
+		scent = "chamomile"
+		color = COLOR_SILVER
+
+	ginger
+		scent = "ginger"
+		color = COLOR_YELLOW
+
+/obj/item/weapon/cosmetic/conditioner
+	name = "conditioner"
+	desc = "A generic brand conditioner."
+
+	icon = 'icons/obj/cosmetics.dmi'
+	icon_state = "conditioner"
+
+	cosmetic_sound = 'sound/effects/squelch1.ogg'
+
+	lemongrass
+		scent = "lemongrass and ginger"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cinnamon
+		scent = "cinnamon"
+		color = COLOR_BROWN
+
+	apple
+		scent = "apple"
+		color = COLOR_PALE_GREEN_GRAY
+
+	strawberry
+		scent = "strawberry"
+		color = COLOR_PALE_RED_GRAY
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_ORANGE
+
+	chamomile
+		scent = "chamomile"
+		color = COLOR_SILVER
+
+	ginger
+		scent = "ginger"
+		color = COLOR_YELLOW
+
+/obj/item/weapon/cosmetic/perfume
+	name = "perfume"
+	desc = "A generic brand perfume."
+
+	icon = 'icons/obj/cosmetics.dmi'
+	icon_state = "perfume"
+
+	cosmetic_sound = 'sound/effects/spray2.ogg'
+
+
+	vanilla
+		scent = "vanilla"
+		color = COLOR_BEIGE
+
+	rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	musk
+		scent = "sol musk"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_PALE_GREEN_GRAY
+
+	lavender
+		scent = "lavender"
+		color = COLOR_PALE_PURPLE_GRAY
+
+	orange_blossom
+		scent = "orange blossom"
+		color = COLOR_ORANGE
+
+/obj/item/weapon/cosmetic/cologne
+	name = "cologne"
+	desc = "A generic brand cologne."
+
+	icon = 'icons/obj/cosmetics.dmi'
+	icon_state = "cologne"
+
+	cosmetic_sound = 'sound/effects/spray2.ogg'
+
+
+	cotton
+		scent = "fresh cotton"
+		color = COLOR_BEIGE
+
+	greek_rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cocoa
+		scent = "cocoa"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_PALE_GREEN_GRAY
+
+	lavender
+		scent = "lavender"
+		color = COLOR_PALE_PURPLE_GRAY
+
+	ginger
+		scent = "ginger"
+		color = COLOR_ORANGE
+
+
+/obj/item/weapon/cosmetic/aftershave
+	name = "aftershave"
+	desc = "A generic brand aftershave."
+
+	icon_state = "aftershave"
+
+	cosmetic_sound = 'sound/effects/spray2.ogg'
+
+
+	cotton
+		scent = "fresh cotton"
+		color = COLOR_BEIGE
+
+	greek_rose
+		scent = "rose water"
+		color = COLOR_PINK
+
+	cocoa
+		scent = "cocoa"
+		color = COLOR_BROWN
+
+	sandalwood
+		scent = "sandalwood"
+		color = COLOR_PALE_GREEN_GRAY
+
+	lavender
+		scent = "lavender"
+		color = COLOR_PALE_PURPLE_GRAY
+
+	ginger
+		scent = "ginger"
+		color = COLOR_ORANGE
+
+/obj/item/weapon/cosmetic/aftershave/tonic
+	name = "tonic"
+	desc = "Skin firming action, for pores that don't look like craters."
+
+	icon_state = "tonic"
+	scent = "alcohol"
+
+	cosmetic_sound = 'sound/items/soda_shaking.ogg'
+
+/obj/item/weapon/cosmetic/tan
+	name = "tanning spray"
+	desc = "It's so orange you could just run for office and win."
+
+	icon_state = "tan"
+	scent = null
+
+	cosmetic_sound = 'sound/effects/spray2.ogg'
+
+	color = COLOR_BROWN
+
+/obj/item/weapon/cosmetic/tan/set_text(mob/M, mob/user)
+	use_msg = "You adjust [src]'s nozzle and begin spraying [M]'s body."
+	use_msg_see = "[M] is being sprayed with [src] by [user]."
+
+	use_msg_self = "You adjust begin spraying yourself down with [src]."
+	use_msg_self_see = "You see [M] begin to spray themselves with [src]."
+
+	after_use_self_see = "Your eyes burn slightly as [initial(name)] enters the air from [M] spraying it."
+	after_use_see = "Your eyes burn slightly as [initial(name)] enters the air around you."
+
+	after_use = "[user] finishes applying [src] to [M]'s body."
+	after_use_self = "You spray yourself with [src]."
+
+/obj/item/weapon/cosmetic/tan/post_activate(mob/M, mob/user)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+
+		if(!M == user)
+			user.visible_message("<span class='notice'>[user] does [M]'s body with \the [src].</span>", \
+								 "<span class='notice'>You apply \the [src].</span>")
+
+		else
+			user.visible_message("<span class='notice'>[user] does their body with \the [src].</span>", \
+								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
+
+		var/tan_style = "tan_m"
+
+		if(H.gender == "female")
+			tan_style = "tan_f"
+
+		H.set_face_style(tan_style, color)
+		H.update_icons_body()
+

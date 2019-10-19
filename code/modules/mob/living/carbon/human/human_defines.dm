@@ -34,7 +34,8 @@
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 
-	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_style = null	//arguably misleading, intended for all kinds of face design, not just lips. like face paint or eyeshadow
+	var/lip_color
 
 	var/age = 30		//Player's age (pure fluff)
 	var/birth_day = 28

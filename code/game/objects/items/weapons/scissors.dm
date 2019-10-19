@@ -38,7 +38,9 @@
 						species_facial_hair += i
 			else
 				species_facial_hair = facial_hair_styles_list
+
 		var/f_new_style = input(user, "Select a facial hair style", "Grooming")  as null|anything in species_facial_hair
+
 		//handle normal hair
 		var/list/species_hair = list()
 		if(H.species)
@@ -49,6 +51,7 @@
 		else
 			species_hair = hair_styles_list
 		var/h_new_style = input(user, "Select a hair style", "Grooming")  as null|anything in species_hair
+
 		user.visible_message("<span class='notice'>[user] starts cutting [M]'s hair!</span>", "<span class='notice'>You start cutting [M]'s hair!</span>") //arguments for this are: 1. what others see 2. what the user sees. --Fixed grammar, (TGameCo)
 		playsound(loc, "sound/items/Wirecutter.ogg", 50, 1, -1)
 		spawn(5)
@@ -65,7 +68,8 @@
 				H.h_style = h_new_style
 
 		H.update_hair()
-		user.visible_message("<span class='notice'>[user] finishes cutting [M]'s hair!</span>")
+		user.visible_message("[user] finishes cutting [M]'s hair!")
+
 
 /obj/item/weapon/scissors/safety //Totally safe, I assure you.
 	name = "safety scissors"

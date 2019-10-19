@@ -25,6 +25,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["hair_style_name"]	>> pref.h_style
 	S["facial_style_name"]	>> pref.f_style
 	S["lip_style"]			>> pref.lip_style
+	S["lip_color"]			>> pref.lip_color
 	S["eyes_red"]			>> pref.r_eyes
 	S["eyes_green"]			>> pref.g_eyes
 	S["eyes_blue"]			>> pref.b_eyes
@@ -57,6 +58,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	S["hair_style_name"]	<< pref.h_style
 	S["facial_style_name"]	<< pref.f_style
 	S["lip_style"]			<< pref.lip_style
+	S["lip_color"]			<< pref.lip_color
 	S["eyes_red"]			<< pref.r_eyes
 	S["eyes_green"]			<< pref.g_eyes
 	S["eyes_blue"]			<< pref.b_eyes
@@ -88,6 +90,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.h_style = null
 	pref.f_style = null
 	pref.lip_style = null
+	pref.lip_color = null
 	pref.r_eyes = null
 	pref.g_eyes = null
 	pref.b_eyes = null
@@ -150,6 +153,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	character.g_facial	= pref.g_facial
 	character.b_facial	= pref.b_facial
 	character.lip_style = pref.lip_style
+	character.lip_color = pref.lip_color
 	character.r_skin	= pref.r_skin
 	character.g_skin	= pref.g_skin
 	character.b_skin	= pref.b_skin
