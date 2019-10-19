@@ -61,6 +61,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.unique_id = null
 	if(fdel("data/persistent/emails/[pref.email].sav"))
 		pref.email = null
+		var/savefile/S
+		S["email"] << pref.email
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 
