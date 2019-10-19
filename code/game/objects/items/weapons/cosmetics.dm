@@ -59,6 +59,38 @@
 	lip_type = "blush"
 	body_area = "cheeks"
 
+/obj/item/weapon/lipstick/blusher/red
+	name = "red blusher"
+	colour = COLOR_RED
+
+/obj/item/weapon/lipstick/blusher/purple
+	name = "purple blusher"
+	colour = COLOR_PURPLE
+
+/obj/item/weapon/lipstick/blusher/jade
+	name = "jade lipstick"
+	colour = COLOR_PAKISTAN_GREEN
+
+/obj/item/weapon/lipstick/blusher/black
+	name = "black blusher"
+	colour = COLOR_BLACK
+
+/obj/item/weapon/lipstick/blusher/maroon
+	name = "maroon blusher"
+	colour = COLOR_MAROON
+
+/obj/item/weapon/lipstick/blusher/pink
+	name = "pink blusher"
+	colour = COLOR_PINK
+
+/obj/item/weapon/lipstick/blusher/brown
+	name = "brown blusher"
+	colour = COLOR_BROWN
+
+/obj/item/weapon/lipstick/blusher/nude
+	name = "nude blusher"
+	colour = COLOR_BEIGE
+
 /obj/item/weapon/lipstick/blusher/random/New()
 	colour = pick(COLOR_RED, COLOR_ORANGE, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
 
@@ -73,6 +105,38 @@
 /obj/item/weapon/lipstick/eyeshadow/random/New()
 	colour = pick(COLOR_RED, COLOR_ORANGE, COLOR_MAROON, COLOR_PINK, COLOR_BROWN, COLOR_BEIGE)
 
+
+/obj/item/weapon/lipstick/eyeshadow/red
+	name = "red eyeshadow"
+	colour = COLOR_RED
+
+/obj/item/weapon/lipstick/eyeshadow/purple
+	name = "purple eyeshadow"
+	colour = COLOR_PURPLE
+
+/obj/item/weapon/lipstick/eyeshadow/jade
+	name = "jade lipstick"
+	colour = COLOR_PAKISTAN_GREEN
+
+/obj/item/weapon/lipstick/eyeshadow/black
+	name = "black eyeshadow"
+	colour = COLOR_BLACK
+
+/obj/item/weapon/lipstick/eyeshadow/maroon
+	name = "maroon eyeshadow"
+	colour = COLOR_MAROON
+
+/obj/item/weapon/lipstick/eyeshadow/pink
+	name = "pink eyeshadow"
+	colour = COLOR_PINK
+
+/obj/item/weapon/lipstick/eyeshadow/brown
+	name = "brown eyeshadow"
+	colour = COLOR_BROWN
+
+/obj/item/weapon/lipstick/eyeshadow/nude
+	name = "nude eyeshadow"
+	colour = COLOR_BEIGE
 
 /obj/item/weapon/lipstick/shadow_blush
 	name = "shadow and blush set"
