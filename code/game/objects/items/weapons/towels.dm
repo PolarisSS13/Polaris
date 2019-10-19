@@ -15,7 +15,7 @@
 	var/mob/living/carbon/human/H = user
 	user.visible_message(text("<span class='notice'>[] uses [] to towel themselves off.</span>", user, src))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
-	H.lip_style = null
+	H.remove_face_style()
 	H.update_icons_body()
 	if(user.fire_stacks > 0)
 		user.fire_stacks = (max(0, user.fire_stacks - 1.5))

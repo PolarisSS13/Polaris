@@ -1,7 +1,10 @@
 /datum/computer_file/data/email_account/
 	var/list/inbox = list()
+	var/list/outbox = list()
 	var/list/spam = list()
 	var/list/deleted = list()
+
+	var/max_messages = 50
 
 	var/login = ""
 	var/password = ""
@@ -23,7 +26,22 @@
 	. = ..()
 
 /datum/computer_file/data/email_account/proc/all_emails()
-	return (inbox | spam | deleted)
+	return (inbox | spam | deleted | outbox)
+
+
+/datum/computer_file/data/email_account/proc/get_email_count()
+	var/messages = 0
+	for(var/datum/computer_file/data/email_message/M in all_emails())
+		messages++
+
+	return messages
+
+/datum/computer_file/data/email_account/proc/cannot_recieve()
+	if(max_messages)
+		if((get_email_count() - 1) > max_messages)
+			return 1
+
+	return 0
 
 /proc/get_email(var/email)
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
@@ -33,22 +51,39 @@
 
 /datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
 	var/datum/computer_file/data/email_account/recipient
+
+	if(cannot_recieve())
+		return 0
+
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(account.login == recipient_address)
 			recipient = account
 			break
 
-	if(!istype(recipient))
-		return 0
+	// Try sending to the in-game email addresses first.
+	if(istype(recipient))
+		if(recipient.receive_mail(message, relayed))
+			outbox.Add(message)
+			ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
+			return 1
 
-	if(!recipient.receive_mail(message, relayed))
-		return
+	if(config.canonicity)
+		// If not, send to a persistent email address out of game. (If it's a canon round.)
+		if(send_to_persistent_email(recipient_address, message))
+			outbox.Add(message)
+			ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient_address] title: [message.title].")
+			return 1
 
-	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
-	return 1
+
+	// If all fails, this is email probably doesn't exist at all or reached it's limit.
+	return 0
 
 /datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
 	received_message.set_timestamp()
+
+	if(cannot_recieve())
+		return 0
+
 	if(!ntnet_global.intrusion_detection_enabled)
 		inbox.Add(received_message)
 		return 1

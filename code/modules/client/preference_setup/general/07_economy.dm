@@ -27,6 +27,7 @@
 	if(!check_persistent_account(pref.bank_account))
 		pref.bank_account = make_new_persistent_account(pref.real_name, pref.money_balance, pref.bank_pin, pref.expenses, null, 0, 0)
 		persist_set_balance(pref.bank_account, pref.money_balance)
+		save_character()
 
 	if(check_persistent_account(pref.bank_account))
 		pref.money_balance = get_persistent_acc_balance(pref.bank_account)

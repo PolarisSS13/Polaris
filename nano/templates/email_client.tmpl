@@ -26,6 +26,8 @@
 	{{:helper.link('Cancel Download', null, {'canceldownload' : 1})}}
 {{else data.current_account}}
 	<b>Welcome to your account, {{:data.current_account}}</b><br>
+	<b>Mailbox:</b> {{:data.message_count}}/{{:data.max_messages}} messages.
+	<hr><br>
 	{{:helper.link('New Message', 'mail-closed', {'new_message' : 1})}}
 	{{:helper.link('Change Password', 'locked', {'changepassword' : 1})}}
 	{{:helper.link('Log Out', 'key', {'logout' : 1})}}<br><br>

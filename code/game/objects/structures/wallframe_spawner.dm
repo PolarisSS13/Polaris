@@ -141,6 +141,11 @@
 	icon_state = "r-wingrille"
 	grille_path = /obj/structure/grille/electric
 
+/obj/effect/wallframe_spawn/reinforced/tinted
+	name = "reinforced tinted wall frame window spawner"
+	icon_state = "r-wingrille"
+	win_path = /obj/structure/window/reinforced/tinted
+
 /obj/effect/wallframe_spawn/reinforced/titanium
 	name = "reinforced titanium wall frame window spawner"
 	frame_path = /obj/structure/wall_frame/titanium

@@ -106,12 +106,12 @@
 	if(is_type_in_list(target,validSurfaces))
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow")
 		if(get_dist(target, user) > 1 || !(user.z == target.z))
-			return		
+			return
 		switch(drawtype)
 			if("letter")
 				drawtype = input("Choose the letter.", "Crayon scribbles") in list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 				if(get_dist(target, user) > 1 || !(user.z == target.z))
-					return				
+					return
 				to_chat(user, "You start drawing a letter on the [target.name].")
 			if("graffiti")
 				to_chat(user, "You start drawing graffiti on the [target.name].")
@@ -255,7 +255,8 @@
 
 		playsound(loc, 'sound/effects/spray.ogg', 5, 1, 5)
 		update_icon()
-		H.lip_style = "spray_face"
+		H.set_face_style("spray_face", colour)
+		H.update_icons_body()
 
 		uses = max(0, uses - 10)
 	return (OXYLOSS)
@@ -300,8 +301,9 @@
 					if(C.eyecheck() <= 0) // no eye protection? ARGH IT BURNS.
 						C.confused = max(C.confused, 3)
 						C.Weaken(3)
-				C.lip_style = "spray_face"
+				C.set_face_style("spray_face", colour)
 				C.update_icons_body()
+
 				uses = max(0,uses-10)
 	if(is_type_in_list(target,validSurfaces))
 		playsound(loc, 'sound/effects/spraycan_shake.ogg', 5, 1, 5)
@@ -324,7 +326,7 @@
 	var/image/I = image('icons/obj/crayons.dmi',icon_state = "[capped ? "spraycan_cap_colors" : "spraycan_colors"]")
 	I.color = colour
 	overlays += I
-	
+
 /obj/item/weapon/pen/crayon/attack_self(var/mob/user)
-	return 
+	return
 

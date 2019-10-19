@@ -20,4 +20,5 @@
 			var/datum/money_account/A = M.initial_account
 			C.associated_account_number = A.account_number
 			C.associated_pin_number = A.remote_access_pin
+			C.associated_email_login = M.initial_email_login
 	return C

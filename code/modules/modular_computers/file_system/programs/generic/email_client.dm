@@ -79,6 +79,7 @@
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(!account.can_login)
 			continue
+
 		if(account.login == stored_login)
 			if(account.password == stored_password)
 				if(account.suspended)
@@ -89,8 +90,24 @@
 			else
 				error = "Invalid Password"
 				return 0
+
+		else
+			// checking our persistent emails for this email so we can login offline. if it's successful and the email
+			// isn't suspended, it'll make a copy and it will exist in-game (late joining owners of this email will be
+			// able to use it as normal too.
+			if(check_persistent_email(stored_login))
+				if(get_persistent_email_suspended(stored_login))
+					error = "This account has been suspended. Please contact the system administrator for assistance."
+					return 0
+				else
+					current_account = manifest_persistent_email(stored_login)
+					if(current_account)
+						return 1
+
+
 	error = "Invalid Login"
 	return 0
+
 
 // Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
 // and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
@@ -145,6 +162,9 @@
 
 	else if(istype(current_account))
 		data["current_account"] = current_account.login
+		data["message_count"] = current_account.get_email_count()
+		data["max_messages"] = current_account.max_messages
+
 		if(addressbook)
 			var/list/all_accounts = list()
 			for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
@@ -176,11 +196,14 @@
 				data["cur_attachment_size"] = current_message.attachment.size
 		else
 			data["label_inbox"] = "Inbox ([current_account.inbox.len])"
+			data["label_outbox"] = "Sent ([current_account.outbox.len])"
 			data["label_spam"] = "Spam ([current_account.spam.len])"
 			data["label_deleted"] = "Deleted ([current_account.deleted.len])"
 			var/list/message_source
 			if(folder == "Inbox")
 				message_source = current_account.inbox
+			else if(folder == "Sent")
+				message_source = current_account.outbox
 			else if(folder == "Spam")
 				message_source = current_account.spam
 			else if(folder == "Deleted")
@@ -300,7 +323,7 @@
 	// This uses similar editing mechanism as the FileManager program, therefore it supports various paper tags and remembers formatting.
 	if(href_list["edit_body"])
 		var/oldtext = html_decode(msg_body)
-		oldtext = replacetext(oldtext, "\[editorbr\]", "\n")
+		oldtext = replacetext(oldtext, "\[br\]", "\n")
 
 		var/newtext = sanitize(replacetext(input(usr, "Enter your message. You may use most tags from paper formatting", "Message Editor", oldtext) as message|null, "\n", "\[editorbr\]"), 20000)
 		if(newtext)
@@ -311,16 +334,40 @@
 		var/newrecipient = sanitize(input(user,"Enter recipient's email address:", "Recipient", msg_recipient), 100)
 		if(newrecipient)
 			msg_recipient = newrecipient
+		addressbook = FALSE
+		return 1
+
+	if(href_list["close_addressbook"])
+		addressbook = 0
 		return 1
 
 	if(href_list["edit_login"])
-		var/newlogin = sanitize(input(user,"Enter login", "Login", stored_login), 100)
+		var/newlogin
+
+		if(!stored_login && user.GetIdCard())
+			var/obj/item/weapon/card/id/I = user.GetIdCard()
+			if(I.associated_email_login)
+				newlogin = I.associated_email_login["login"]
+		else
+			newlogin = stored_login
+
+
+		newlogin = sanitize(input(user,"Enter login", "Login", newlogin), 100)
+
 		if(newlogin)
 			stored_login = newlogin
 		return 1
 
 	if(href_list["edit_password"])
-		var/newpass = sanitize(input(user,"Enter password", "Password"), 100)
+		var/newpass
+
+		if(!stored_password && user.GetIdCard())
+			var/obj/item/weapon/card/id/I = user.GetIdCard()
+			if(I.associated_email_login)
+				newpass = I.associated_email_login["password"]
+
+		newpass = sanitize(input(user,"Enter password", "Password", newpass), 100)
+
 		if(newpass)
 			stored_password = newpass
 		return 1
@@ -338,6 +385,7 @@
 			current_account.deleted.Add(M)
 			current_account.inbox.Remove(M)
 			current_account.spam.Remove(M)
+			current_account.outbox.Remove(M)
 		if(current_message == M)
 			current_message = null
 		return 1
@@ -345,17 +393,20 @@
 	if(href_list["send"])
 		if(!current_account)
 			return 1
-		if((msg_title == "") || (msg_body == "") || (msg_recipient == ""))
-			error = "Error sending mail: Title or message body is empty!"
+		if((msg_body == "") || (msg_recipient == ""))
+			error = "Error sending mail: Message body is empty!"
 			return 1
+		if(!length(msg_title))
+			msg_title = "No subject"
 
 		var/datum/computer_file/data/email_message/message = new()
 		message.title = msg_title
 		message.stored_data = msg_body
 		message.source = current_account.login
 		message.attachment = msg_attachment
+
 		if(!current_account.send_mail(msg_recipient, message))
-			error = "Error sending email: this address doesn't exist."
+			error = "Error sending email: this address doesn't exist or you or the recipient has reached the set message limit."
 			return 1
 		else
 			error = "Email successfully sent."
@@ -371,11 +422,14 @@
 		if(!istype(M))
 			return 1
 
+		error = null
 		new_message = TRUE
 		msg_recipient = M.source
 		msg_title = "Re: [M.title]"
-		msg_body = "\[editorbr\]\[editorbr\]\[editorbr\]\[br\]==============================\[br\]\[editorbr\]"
-		msg_body += "Received by [current_account.login] at [M.timestamp]\[br\]\[editorbr\][M.stored_data]"
+		var/atom/movable/AM = host
+		if(istype(AM))
+			if(ismob(AM.loc))
+				ui_interact(AM.loc)
 		return 1
 
 	if(href_list["view"])

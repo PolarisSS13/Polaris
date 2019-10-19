@@ -44,6 +44,7 @@ datum/preferences
 	var/b_hair = 0						//Hair color
 	var/f_style = "Shaved"				//Face hair type
 	var/lip_style						//Lips/Makeup Style
+	var/lip_color						//Color of the makeup/lips
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
@@ -132,6 +133,7 @@ datum/preferences
 	var/economic_status = "Working Class"
 
 	var/uplinklocation = "PDA"
+	var/email = null
 
 	// OOC Metadata:
 	var/metadata = ""

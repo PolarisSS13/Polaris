@@ -103,6 +103,11 @@
 
 	return ..()
 
+/obj/item/organ/external/head/Destroy()
+	..()
+	owner.remove_face_style()
+
+
 /obj/item/organ/external/emp_act(severity)
 	if(!(robotic >= ORGAN_ROBOT))
 		return
@@ -330,7 +335,7 @@
 		owner.updatehealth() //droplimb will call updatehealth() again if it does end up being called
 	if(status & ORGAN_BLEEDING)
 		owner.update_bandages()
-			
+
 	//If limb took enough damage, try to cut or tear it off
 	if(owner && loc == owner && !is_stump())
 		if(!cannot_amputate && config.limbs_can_break && (brute_dam + burn_dam) >= (max_damage * config.organ_health_multiplier))
@@ -925,7 +930,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 
 			qdel(src)
-			
+
 	if(victim.l_hand)
 		if(istype(victim.l_hand,/obj/item/weapon/material/twohanded)) //if they're holding a two-handed weapon, drop it now they've lost a hand
 			victim.l_hand.update_held_icon()
