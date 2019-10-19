@@ -7,19 +7,6 @@
 
 	return 1
 
-/client/verb/load_emails()
-	set name = "Get Emails"
-	set desc = "Loads all emails"
-	set category = "Persistence"
-
-	if(!holder)
-		usr << "<font color='red'>Only admins can use this command!</font>"
-		return 0
-
-
-	debug_variables(ntnet_global.email_accounts)
-
-
 /datum/computer_file/data/email_account/proc/save_email()
 	var/full_path = "data/persistent/emails/[login].sav"
 	if(!full_path)			return 0

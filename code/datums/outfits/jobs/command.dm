@@ -19,8 +19,9 @@
 
 /decl/hierarchy/outfit/job/heads/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
-	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
-		permit.set_name(H.real_name)
+	if(H.back)
+		for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+			permit.set_name(H.real_name)
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this
 		// point, check if we can actually attach the medal
@@ -47,8 +48,9 @@
 
 /decl/hierarchy/outfit/job/heads/hop/post_equip(mob/living/carbon/human/H)
 	..()
-	for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
-		permit.set_name(H.real_name)
+	if(H.back)
+		for(var/obj/item/clothing/accessory/permit/gun/permit in H.back.contents)
+			permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/heads/secretary
 	name = OUTFIT_JOB_NAME("City Hall Guard")
