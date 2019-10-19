@@ -78,10 +78,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #define BELT_LAYER_ALT			16		//Belt-slot item (when set to be above suit via verb)
 #define SUIT_STORE_LAYER			17		//Suit storage-slot item
 #define BACK_LAYER				18		//Back-slot item
-#define HAIR_LAYER				19		//The human's hair
-#define EARS_LAYER				20		//Both ear-slot items (combined image)
-#define EYES_LAYER				21		//Mob's eyes (used for glowing eyes)
-#define FACE_STYLE_LAYER			22		//Mob's lipstyles, or any type of face decor.
+#define FACE_STYLE_LAYER			19		//Mob's lipstyles, or any type of face decor.
+#define HAIR_LAYER				20		//The human's hair
+#define EARS_LAYER				21		//Both ear-slot items (combined image)
+#define EYES_LAYER				22		//Mob's eyes (used for glowing eyes)
 #define FACEMASK_LAYER			23		//Mask-slot item
 #define HEAD_LAYER				24		//Head-slot item
 #define HANDCUFF_LAYER			25		//Handcuffs, if the human is handcuffed, in a secret inv slot
@@ -93,6 +93,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #define WATER_LAYER				31		//'Mob submerged' overlay layer
 #define TARGETED_LAYER			32		//'Aimed at' overlay layer
 #define TOTAL_LAYERS			32//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
+
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -1016,9 +1017,8 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 /mob/living/carbon/human/proc/update_face_style()
 	remove_layer(FACE_STYLE_LAYER)
 
-	for(var/obj/item/organ/external/head/O in organs)
-		if(isnull(O) || O.is_stump())
-			return 0
+	if(!head)
+		return 0
 
 	if(! (lip_style && (species && (species.appearance_flags & HAS_LIPS))) )
 		return 0
@@ -1075,6 +1075,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #undef BELT_LAYER_ALT
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
+#undef FACE_STYLE_LAYER
 #undef HAIR_LAYER
 #undef EARS_LAYER
 #undef EYES_LAYER
