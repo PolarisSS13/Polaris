@@ -104,7 +104,7 @@
 
 	//FIBERS
 	if(A.suit_fibers && A.suit_fibers.len)
-		to_chat(user,"<span class='notice'>Fibers/Materials detected.[reveal_fibers ? " Analysing..." : " Acquisition of fibers for H.R.F.S. analysis advised."]")
+		to_chat(user,"<span class='notice'>Fibers/Materials detected.[reveal_fibers ? " Analysing..." : " Acquisition of fibers for H.R.F.S. analysis advised."]</span>")
 		flick("[icon_state]2",src)
 		if(reveal_fibers && do_after(user, 5 SECONDS))
 			to_chat(user,"<span class='notice'>Apparel samples scanned:</span>")
