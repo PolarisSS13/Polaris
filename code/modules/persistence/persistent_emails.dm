@@ -78,11 +78,11 @@
 	else
 		pass = password
 
+	S["login"] << address
 	S["inbox"] << list()
 	S["outbox"] << list()
 	S["spam"] << list()
 	S["deleted"] << list()
-	S["login"] << address
 	S["password"] << pass
 	S["max_messages"] << 50
 
@@ -205,10 +205,10 @@
 
 	var/adr
 
-	S["address"] >> adr
+	S["login"] >> adr
 
 	adr = new_address
 
-	S["address"] << adr
+	S["login"] << adr
 
 	return adr

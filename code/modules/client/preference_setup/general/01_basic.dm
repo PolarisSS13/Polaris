@@ -61,8 +61,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.unique_id = null
 	if(fdel("data/persistent/emails/[pref.email].sav"))
 		pref.email = null
-		var/savefile/S
-		S["email"] << pref.email
+
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 
@@ -93,13 +92,14 @@ datum/preferences/proc/set_biological_gender(var/gender)
 			pref.email = new_email
 
 	if(pref.email && !check_persistent_email(pref.email))
-		new_persistent_email(pref.email)
-		save_character()
-
+		new_persistent_email(pref.email) // so this saves without having to make dupes over and over.
+		var/savefile/S = new /savefile(pref.path)
+		if(S)
+			S["email"] << pref.email
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/basic/copy_to_mob(var/mob/living/carbon/human/character)
-	if(config.humans_need_surnames)
+	if(config.humans_need_surnames && !is_FBP())
 		var/firstspace = findtext(pref.real_name, " ")
 		var/name_length = length(pref.real_name)
 		if(!firstspace)	//we need a surname

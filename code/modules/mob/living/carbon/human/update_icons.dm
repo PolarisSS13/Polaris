@@ -62,23 +62,23 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 //Human Overlays Indexes/////////
 #define MUTATIONS_LAYER			1		//Mutations like fat, and lasereyes
 #define SKIN_LAYER				2		//Skin things added by a call on species
-#define BLOOD_LAYER				3		//Bloodied hands/feet/anything else
-#define DAMAGE_LAYER			4		//Injury overlay sprites like open wounds
-#define SURGERY_LAYER			5		//Overlays for open surgical sites
-#define UNDERWEAR_LAYER  		6		//Underwear/bras/etc
-#define SHOES_LAYER_ALT			7		//Shoe-slot item (when set to be under uniform via verb)
-#define UNIFORM_LAYER			8		//Uniform-slot item
-#define ID_LAYER				9		//ID-slot item
-#define SHOES_LAYER				10		//Shoe-slot item
-#define GLOVES_LAYER			11		//Glove-slot item
-#define BELT_LAYER				12		//Belt-slot item
-#define SUIT_LAYER				13		//Suit-slot item
-#define TAIL_LAYER				14		//Some species have tails to render
-#define GLASSES_LAYER			15		//Eye-slot item
-#define BELT_LAYER_ALT			16		//Belt-slot item (when set to be above suit via verb)
-#define SUIT_STORE_LAYER			17		//Suit storage-slot item
-#define BACK_LAYER				18		//Back-slot item
-#define FACE_STYLE_LAYER			19		//Mob's lipstyles, or any type of face decor.
+#define FACE_STYLE_LAYER			3		//Mob's lipstyles, or any type of face decor.
+#define BLOOD_LAYER				4		//Bloodied hands/feet/anything else
+#define DAMAGE_LAYER			5		//Injury overlay sprites like open wounds
+#define SURGERY_LAYER			6		//Overlays for open surgical sites
+#define UNDERWEAR_LAYER  		7		//Underwear/bras/etc
+#define SHOES_LAYER_ALT			8		//Shoe-slot item (when set to be under uniform via verb)
+#define UNIFORM_LAYER			9		//Uniform-slot item
+#define ID_LAYER				10		//ID-slot item
+#define SHOES_LAYER				11		//Shoe-slot item
+#define GLOVES_LAYER			12		//Glove-slot item
+#define BELT_LAYER				13		//Belt-slot item
+#define SUIT_LAYER				14		//Suit-slot item
+#define TAIL_LAYER				15		//Some species have tails to render
+#define GLASSES_LAYER			16		//Eye-slot item
+#define BELT_LAYER_ALT			17		//Belt-slot item (when set to be above suit via verb)
+#define SUIT_STORE_LAYER			18		//Suit storage-slot item
+#define BACK_LAYER				19		//Back-slot item
 #define HAIR_LAYER				20		//The human's hair
 #define EARS_LAYER				21		//Both ear-slot items (combined image)
 #define EYES_LAYER				22		//Mob's eyes (used for glowing eyes)
@@ -1017,19 +1017,13 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 /mob/living/carbon/human/proc/update_face_style()
 	remove_layer(FACE_STYLE_LAYER)
 
-	if(!head)
-		return 0
-
 	if(! (lip_style && (species && (species.appearance_flags & HAS_LIPS))) )
 		return 0
 
-	var/icon/lips
-
-	lips = icon('icons/mob/human_facestyle.dmi', "[lip_style]")
+	var/icon/lips = icon('icons/mob/human_facestyle.dmi', "[lip_style]")
 	lips.Blend(lip_color, ICON_MULTIPLY)
 
 	overlays_standing[FACE_STYLE_LAYER] = lips
-
 	apply_layer(FACE_STYLE_LAYER)
 
 	return 1

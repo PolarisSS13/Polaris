@@ -188,6 +188,7 @@
 		if(H.lip_style)	//if they already have lipstick on
 			user << "<span class='notice'>You need to wipe off the old makeup first!</span>"
 			return
+
 		if(H == user)
 			user.visible_message("<span class='notice'>[user] does their [body_area] with \the [src].</span>", \
 								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
@@ -196,7 +197,7 @@
 		else
 			user.visible_message("<span class='warning'>[user] begins to do [H]'s [body_area] with \the [src].</span>", \
 								 "<span class='notice'>You begin to apply \the [src].</span>")
-			if(do_after(user, 20) && do_after(H, 20, 5, 0))	//user needs to keep their active hand, H does not.
+			if(do_after(user, 20) && do_after(user, 20, H, 5, 0))	//user needs to keep their active hand, H does not.
 				user.visible_message("<span class='notice'>[user] does [H]'s [body_area] with \the [src].</span>", \
 									 "<span class='notice'>You apply \the [src].</span>")
 				H.set_face_style(lip_type, colour)
@@ -685,48 +686,4 @@
 	scent = "alcohol"
 
 	cosmetic_sound = 'sound/items/soda_shaking.ogg'
-
-/obj/item/weapon/cosmetic/tan
-	name = "tanning spray"
-	desc = "It's so orange you could just run for office and win."
-
-	icon_state = "tan"
-	scent = null
-
-	cosmetic_sound = 'sound/effects/spray2.ogg'
-
-	color = COLOR_BROWN
-
-/obj/item/weapon/cosmetic/tan/set_text(mob/M, mob/user)
-	use_msg = "You adjust [src]'s nozzle and begin spraying [M]'s body."
-	use_msg_see = "[M] is being sprayed with [src] by [user]."
-
-	use_msg_self = "You adjust begin spraying yourself down with [src]."
-	use_msg_self_see = "You see [M] begin to spray themselves with [src]."
-
-	after_use_self_see = "Your eyes burn slightly as [initial(name)] enters the air from [M] spraying it."
-	after_use_see = "Your eyes burn slightly as [initial(name)] enters the air around you."
-
-	after_use = "[user] finishes applying [src] to [M]'s body."
-	after_use_self = "You spray yourself with [src]."
-
-/obj/item/weapon/cosmetic/tan/post_activate(mob/M, mob/user)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-
-		if(!M == user)
-			user.visible_message("<span class='notice'>[user] does [M]'s body with \the [src].</span>", \
-								 "<span class='notice'>You apply \the [src].</span>")
-
-		else
-			user.visible_message("<span class='notice'>[user] does their body with \the [src].</span>", \
-								 "<span class='notice'>You take a moment to apply \the [src]. Perfect!</span>")
-
-		var/tan_style = "tan_m"
-
-		if(H.gender == "female")
-			tan_style = "tan_f"
-
-		H.set_face_style(tan_style, color)
-		H.update_icons_body()
 

@@ -100,9 +100,13 @@
 					error = "This account has been suspended. Please contact the system administrator for assistance."
 					return 0
 				else
-					current_account = manifest_persistent_email(stored_login)
-					if(current_account)
+					if((get_persistent_email_password(stored_login) == stored_password))
+						current_account = manifest_persistent_email(stored_login)
 						return 1
+
+
+	if(current_account)
+		return 1
 
 
 	error = "Invalid Login"

@@ -337,6 +337,8 @@ var/list/organ_cache = list()
 
 	owner = null
 
+	return 1
+
 /obj/item/organ/proc/replaced(var/mob/living/carbon/human/target,var/obj/item/organ/external/affected)
 
 	if(!istype(target)) return
