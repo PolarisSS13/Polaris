@@ -103,10 +103,6 @@
 
 	return ..()
 
-/obj/item/organ/external/head/Destroy()
-	..()
-	owner.remove_face_style()
-
 
 /obj/item/organ/external/emp_act(severity)
 	if(!(robotic >= ORGAN_ROBOT))
