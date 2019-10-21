@@ -88,6 +88,16 @@ var/global/list/limb_icon_cache = list()
 		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 		icon_cache_key += "[M][markings[M]["color"]]"
 
+
+	//face style
+	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
+		var/icon/lips
+		lips = icon('icons/mob/human_facestyle.dmi', "[owner.lip_style]")
+		lips.Blend(owner.lip_color, ICON_MULTIPLY)
+
+		add_overlay(lips)
+		mob_icon.Blend(lips, ICON_OVERLAY)
+
 	//Facial hair
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
@@ -109,6 +119,10 @@ var/global/list/limb_icon_cache = list()
 			add_overlay(hair_s)
 
 	return mob_icon
+
+/obj/item/organ/external/head/removed()
+	owner.remove_face_style()
+	..()
 
 /obj/item/organ/external/proc/get_icon(var/skeletal)
 

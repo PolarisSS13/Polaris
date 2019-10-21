@@ -114,7 +114,7 @@
 			icon_state = "guillotine"
 			return
 
-		if(qdel(head))
+		if(head.removed())
 			blade_status = GUILLOTINE_BLADE_DROPPED
 			icon_state = "guillotine"
 			return
@@ -126,7 +126,7 @@
 			H.regenerate_icons()
 			unbuckle_mob()
 			kill_count += 1
-			if(H.mind.prefs.economic_status == CLASS_UPPER)
+			if(H.mind && H.mind.prefs.economic_status == CLASS_UPPER)
 				for(var/mob/living/carbon/human/HM in viewers(src, 7))
 					if(HM.mind.prefs.economic_status == CLASS_WORKING)
 						to_chat(HM, "<span class='warning'>You watch the oppressive aristocrat bleed.</span>")
