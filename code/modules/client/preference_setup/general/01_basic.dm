@@ -103,9 +103,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		else if(firstspace == name_length)
 			pref.real_name += "[pick(last_names)]"
 
-	if(is_FBP())
-		if(!pref.real_name)
-			pref.real_name = "[pick(first_names)]"
+	if(is_FBP() && !pref.real_name)
+		pref.real_name = "[pick(last_names)]"
 
 	character.real_name = pref.real_name
 	character.name = character.real_name
