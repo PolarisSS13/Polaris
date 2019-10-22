@@ -231,7 +231,7 @@
 	set desc = "Secrete tough malleable resin."
 	set category = "Abilities"
 
-	var/choice = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
+	var/choice = input("Choose what you wish to shape.","Resin building") as null|anything in list("resin door","resin wall","resin membrane","resin nest","resin blob") //would do it through typesof but then the player choice would have the type path and we don't want the internal workings to be exposed ICly - Urist
 	if(!choice)
 		return
 
@@ -248,6 +248,8 @@
 			new /obj/effect/alien/resin/membrane(loc)
 		if("resin nest")
 			new /obj/structure/bed/nest(loc)
+		if("resin blob")
+			new /obj/item/stack/material/resin(loc)
 	return
 
 /mob/living/carbon/human/proc/leap()
