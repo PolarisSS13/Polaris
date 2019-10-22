@@ -91,11 +91,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		if(!ntnet_global.does_email_exist(new_email) || !check_persistent_email(new_email))
 			pref.email = new_email
 
-	if(pref.email && !check_persistent_email(pref.email))
-		new_persistent_email(pref.email) // so this saves without having to make dupes over and over.
-		var/savefile/S = new /savefile(pref.path)
-		if(S)
-			S["email"] << pref.email
+
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/basic/copy_to_mob(var/mob/living/carbon/human/character)
@@ -106,6 +102,10 @@ datum/preferences/proc/set_biological_gender(var/gender)
 			pref.real_name += " [pick(last_names)]"
 		else if(firstspace == name_length)
 			pref.real_name += "[pick(last_names)]"
+
+	if(is_FBP())
+		if(!pref.real_name)
+			pref.real_name = "[pick(first_names)]"
 
 	character.real_name = pref.real_name
 	character.name = character.real_name
@@ -118,7 +118,10 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	character.identifying_gender = pref.identifying_gender
 	character.age = pref.age
 	character.birth_year = pref.birth_year
-	character.birth_month = pref.birth_month.
+	character.birth_month = pref.birth_month
+
+	if(pref.email && !check_persistent_email(pref.email))
+		new_persistent_email(pref.email) // so this saves without having to make dupes over and over.
 
 /datum/category_item/player_setup_item/general/basic/content()
 	. = list()
