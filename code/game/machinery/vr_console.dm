@@ -61,7 +61,7 @@
 		return
 
 
-/obj/machinery/vr_sleeper/MouseDrop_T(var/mob/target, var/mob/user)
+/obj/machinery/vr_sleeper/MouseDrop_T(var/mob/living/carbon/human/target, var/mob/living/carbon/human/user)
 	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !isliving(target))
 		return
 	go_in(target, user)

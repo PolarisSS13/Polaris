@@ -2,7 +2,7 @@
 
 /datum/law/misdemeanor/threat
 	name = "Threat of Death or Bodily Harm"
-	description = "To threaten a person’s life or well-being."
+	description = "To threaten a person's life or well-being."
 
 	fine = 20
 

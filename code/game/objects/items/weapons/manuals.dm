@@ -839,7 +839,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]index.php?title=Guide_to_Policing&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="[config.wikiurl]doku.php?id=guide_to_policing" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>

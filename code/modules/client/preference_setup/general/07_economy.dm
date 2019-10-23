@@ -6,13 +6,13 @@
 	S["money_balance"]	>> pref.money_balance
 	S["bank_account"]	>> pref.bank_account
 	S["bank_pin"]		>> pref.bank_pin
-	S["expenses"]    >> pref.expenses
+	S["expenses"]   	>> pref.expenses
 
 /datum/category_item/player_setup_item/general/economy/save_character(var/savefile/S)
 	S["money_balance"]	<< pref.money_balance
 	S["bank_account"]	<< pref.bank_account
 	S["bank_pin"]		<< pref.bank_pin
-	S["expenses"]    << pref.expenses
+	S["expenses"]    	<< pref.expenses
 
 
 /datum/category_item/player_setup_item/general/economy/sanitize_character()
