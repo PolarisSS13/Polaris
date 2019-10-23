@@ -119,8 +119,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	character.birth_year = pref.birth_year
 	character.birth_month = pref.birth_month
 
-	if(pref.email && !check_persistent_email(pref.email))
-		new_persistent_email(pref.email) // so this saves without having to make dupes over and over.
+F
 
 /datum/category_item/player_setup_item/general/basic/content()
 	. = list()
