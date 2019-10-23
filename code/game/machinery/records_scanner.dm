@@ -46,7 +46,7 @@ obj/machinery/scanner/attack_hand(mob/living/carbon/human/user)
 	var/mname = user.real_name
 	var/dna = user.dna.unique_enzymes
 	var/bloodtype = user.dna.b_type
-	var/fingerprint = md5(user.dna.uni_identity)
+	var/fingerprint = user.get_full_print()
 	var/list/marks = list()
 	var/age = user.age
 	var/gender = user.gender
