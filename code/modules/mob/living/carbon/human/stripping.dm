@@ -7,6 +7,12 @@
 		user << browse(null, text("window=mob[src.name]"))
 		return
 
+	if(isLivingSSD(src))
+		if(user.client && !user.client.can_harm_ssds() && !isAntag(user))
+			to_chat(user, "<span class='warning'>AdminHelp (F1) to get permission before stripping players who are suffering from Space Sleep Disorder / disconnected from the game. Read the server rules for more details.</span>")
+			return
+
+
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip))
 
 	switch(slot_to_strip)
@@ -38,6 +44,8 @@
 			var/obj/item/clothing/accessory/A = suit.accessories[1]
 			if(!istype(A))
 				return
+
+
 			visible_message("<span class='danger'>\The [usr] is trying to remove \the [src]'s [A.name]!</span>")
 
 			if(!do_after(user,HUMAN_STRIP_DELAY,src))

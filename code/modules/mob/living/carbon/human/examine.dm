@@ -309,9 +309,9 @@
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ("brain") || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span><br>"
+			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. The classical symptoms of SSD disorder. It doesn't look like [T.he] [T.is] waking up anytime soon.</span><br>"
 		else if(!client)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span><br>"
+			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. The classical symptoms of SSD disorder.</span><br>"
 
 	var/list/wound_flavor_text = list()
 	var/list/is_bleeding = list()

@@ -235,6 +235,8 @@ var/list/gamemode_cache = list()
 	var/radiation_resistance_multiplier = 6.5
 	var/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
+	var/ssd_protect = 0
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -699,6 +701,10 @@ var/list/gamemode_cache = list()
 				if("player_levels")
 					using_map.player_levels = text2numlist(value, ";")
 */
+
+				if("ssd_protect")
+					config.ssd_protect = text2num(value)
+
 				if("expected_round_length")
 					config.expected_round_length = MinutesToTicks(text2num(value))
 
