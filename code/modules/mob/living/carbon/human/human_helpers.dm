@@ -164,6 +164,9 @@
 		plane_holder.set_vis(vis,FALSE)
 		vis_enabled -= vis
 
+/proc/isLivingSSD(mob/living/M)
+	return istype(M) && !M.client || !M.key && M.stat != DEAD
+
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH

@@ -55,3 +55,5 @@
 
 	var/global/obj/screen/click_catcher/void
 
+	// Has the client been granted permission to mess with SSDs by an admin?
+	var/bypass_ssd_guard = FALSE

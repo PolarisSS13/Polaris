@@ -673,3 +673,11 @@ var/global/image/backplane
 			if(!mob.mind)
 				return
 			return mob.mind.initial_email_login["login"]
+
+/proc/isAntag(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.mind && C.mind.special_role)
+			return 1
+	return 0
+
