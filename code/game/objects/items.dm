@@ -229,6 +229,8 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	src.plane = initial(plane) //resets the plane of the object when it's picked up from a table. might have other consequences
 
 	//If it's a certain type of object, log it for admins, quite useful in some situations.
+	//todo, create an attack log proc that's that's a lot shorter.
+	//This technically isn't on pickup, this is if you literally try to interact with it at all. attack_hand() versus pickup()
 	if(istype(src, /obj/item/weapon/melee))
 		usr.attack_log += "\[[time_stamp()]\] <font color='blue'>Has picked up the melee object <b>[src]</b> from [src.loc.loc].</font>"
 

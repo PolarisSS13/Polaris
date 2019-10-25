@@ -733,3 +733,10 @@
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	switch_firemodes(user)
+
+/obj/item/weapon/gun/weapondraw(obj/item/weapon/gun/G, mob/living/user)
+	if(user.a_intent == I_HURT)
+		user.visible_message("<span class='danger'>[user] grabs \a [G], ready to use it!</span>")
+	else
+		user.visible_message("<span class='notice'>[user] pulls out \the [G], pointing it at the ground.</span>",)
+	//user.SetWeaponDrawDelay(max((4 * G.weapon_weight + 1),(user.AmountWeaponDrawDelay())))
