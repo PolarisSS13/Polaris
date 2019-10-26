@@ -430,11 +430,12 @@
 
 	// First check if item has a valid price
 	var/price = O.get_item_cost()
+	var/tax = O.get_tax() * 100
 	if(isnull(price))
 		src.visible_message("\icon[src]<span class='warning'>Unable to find item in database.</span>")
 		return
 	// Call out item cost
-	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"].")
+	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"][tax ? " (Plus [tax]% Tax)" : ""].")
 	// Note the transaction purpose for later use
 	if(transaction_purpose)
 		transaction_purpose += "<br>"

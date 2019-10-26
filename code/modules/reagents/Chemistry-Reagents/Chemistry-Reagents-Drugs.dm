@@ -11,6 +11,11 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 
+	price_tag = 0.2
+
+/datum/reagent/drug/get_tax()
+	return DRUG_TAX
+
 /datum/reagent/drug/affect_blood(var/mob/living/carbon/M)
 
 	if(high_msg_enabled)
@@ -34,6 +39,8 @@
 	"You feel incredibly confident. No one can stop you.",
 	"You clench your jaw involuntarily.",
 	"You feel... unsteady.")
+
+	price_tag = 0.9
 
 
 /datum/reagent/drug/ecstasy/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -77,6 +84,10 @@ datum/reagent/drug/ecstasy/overdose(var/mob/living/M as mob)
 	"You feel like the stress is going away.",
 	"You feel calm.",
 	"You feel collected.")
+	price_tag = 0.09
+
+/datum/reagent/drug/nicotine/get_tax()
+	return TOBACCO_TAX
 
 datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	M.AdjustStunned(-1)
@@ -94,6 +105,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel very jittery and it's almost painful to stay still.",
 	"Everything seems to be going in slow motion.",
 	"Your feet are dying for some action right now.")
+
+	price_tag = 2.2
 
 /datum/reagent/drug/meth/affect_blood(var/mob/living/carbon/M)
 	M.AdjustParalysis(-2)
@@ -142,6 +155,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You momentarily forget where you are.",
 	"You have a mild urge to look over your shoulder.")
 
+	price_tag = 1
+
 /datum/reagent/drug/cannabis/affect_blood(var/mob/living/carbon/M)
 	M.adjustToxLoss(-2)
 	M.druggy = max(M.druggy, 3)
@@ -171,6 +186,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You have a strange sense of calm and excitement at the same time.",
 	"You feel... sleepy.",
 	"You feel dizzy.")
+
+	price_tag = 0.05
 
 /datum/reagent/drug/heroin/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER, 40)
@@ -205,6 +222,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"Your tongue feels very dry.",
 	"Your eyes feel dry.")
 
+	price_tag = 2
+
 /datum/reagent/drug/cocaine/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER,3)
 	M.adjust_hydration(-15)
@@ -234,6 +253,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel a bit sick...",
 	"You feel hyper and confident",
 	"You feel terrible.")
+
+	price_tag = 1.5
 
 /datum/reagent/drug/crack/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER,1)
@@ -265,6 +286,8 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	high_msg_list = list ("You feel your heart pounding in your chest.",
 	"You shudder so violently that it hurts",
 	"You blink rapidly to wet your drying eyes")
+
+	price_tag = 1.8
 
 /datum/reagent/drug/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_TAJARA)

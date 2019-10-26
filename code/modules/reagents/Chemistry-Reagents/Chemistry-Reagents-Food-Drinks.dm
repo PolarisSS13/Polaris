@@ -12,6 +12,7 @@
 	calories_factor = 40 // Per unit
 	var/injectable = 0
 	color = "#664330"
+	price_tag = 0.01
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -66,6 +67,7 @@
 	taste_description = "some sort of meat"
 	calories_factor = 10
 	color = "#440000"
+	price_tag = 0.05
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(nutriment_factor * removed) // For hunger and fatness
@@ -91,6 +93,7 @@
 	id = "egg"
 	taste_description = "egg"
 	color = "#FFFFAA"
+	price_tag = 0.06
 
 /datum/reagent/nutriment/honey
 	name = "Honey"
@@ -100,6 +103,7 @@
 	nutriment_factor = 10
 	calories_factor = 45
 	color = "#FFFF00"
+	price_tag = 0.08
 
 /datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -130,6 +134,7 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#FFFFFF"
+	price_tag = 0.05
 
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
@@ -144,7 +149,7 @@
 	reagent_state = SOLID
 	nutriment_factor = 5
 	color = "#302000"
-
+	price_tag = 0.09
 /datum/reagent/nutriment/soysauce
 	name = "Soysauce"
 	id = "soysauce"
@@ -164,6 +169,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#731008"
+	price_tag = 0.04
 
 /datum/reagent/nutriment/rice
 	name = "Rice"
@@ -245,6 +251,7 @@
 	reagent_state = LIQUID
 	color = "#BBEDA4"
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 1
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(10 * removed)
@@ -265,6 +272,7 @@
 	overdose = REAGENTS_OVERDOSE
 	ingest_met = REM
 	hydration_factor = -5
+	price_tag = 0.01
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -274,6 +282,7 @@
 	reagent_state = SOLID
 	ingest_met = REM
 	color = "#000000"
+	price_tag = 0.01
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -284,6 +293,7 @@
 	reagent_state = LIQUID
 	color = "#365E30"
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 0.02
 
 /datum/reagent/frostoil
 	name = "Frost Oil"
@@ -448,6 +458,7 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	calories_factor = 3
+	price_tag = 0.01
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
@@ -658,6 +669,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
+	price_tag = 0.04
 
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
@@ -694,6 +706,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of cream"
 	cup_desc = "Ewwww..."
+	price_tag = 0.05
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
@@ -708,6 +721,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
+	price_tag = 0.06
 
 /datum/reagent/drink/tea
 	name = "Tea"

@@ -9,6 +9,9 @@
 	attack_verb = list("jabbed","stabbed","ripped")
 	drop_sound = 'sound/items/drop/axe.ogg'
 
+	get_tax()
+		return WEAPONS_TAX
+
 /obj/item/weapon/material/knife/machete/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
@@ -23,6 +26,9 @@
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
 
+	get_tax()
+		return WEAPONS_TAX
+
 /obj/item/weapon/material/knife/machete/hatchet/unathiknife
 	name = "duelling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
@@ -30,7 +36,10 @@
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
 	can_cleave = FALSE
-	var hits = 0
+	var/hits = 0
+
+	get_tax()
+		return WEAPONS_TAX
 
 /obj/item/weapon/material/knife/machete/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
 	if(hits > 0)

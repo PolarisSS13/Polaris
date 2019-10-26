@@ -12,6 +12,9 @@ obj/item/weapon/chainsaw
 	var/active_force = 55
 	var/inactive_force = 10
 
+	get_tax()
+		return WEAPONS_TAX
+
 obj/item/weapon/chainsaw/New()
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R

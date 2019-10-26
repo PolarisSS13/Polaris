@@ -14,6 +14,9 @@
 	var/det_time = 50
 	var/loadable = 1
 
+	get_tax()
+		return WEAPONS_TAX
+
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
 		user << "<span class='warning'>Huh? How does this thing work?</span>"

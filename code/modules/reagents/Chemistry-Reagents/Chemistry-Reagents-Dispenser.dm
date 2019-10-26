@@ -76,8 +76,13 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
+	price_tag = 0.18
+
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
+
+/datum/reagent/ethanol/get_tax()
+	return ALCOHOL_TAX
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -434,6 +439,7 @@
 	glass_name = "sugar"
 	glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 	glass_icon = DRINK_ICON_NOISY
+	price_tag = 0.01
 
 /datum/reagent/sugar/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(removed * 3)

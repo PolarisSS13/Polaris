@@ -8,6 +8,7 @@
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
+	price_tag = 0.01
 
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
@@ -402,9 +403,9 @@
 			M.vomit()
 
 /datum/reagent/lube // TODO: spraying on borgs speeds them up
-	name = "Space Lube"
+	name = "Lube"
 	id = "lube"
-	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
+	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them, giggity."
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#009CA8"
@@ -492,6 +493,9 @@
 	reagent_state = LIQUID
 	color = "#755202"
 
+	get_tax()
+		return DRUG_TAX
+
 /datum/reagent/coca
 	name = "coca extract"
 	id = "coca"
@@ -499,3 +503,18 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#755202"
+
+	get_tax()
+		return DRUG_TAX
+
+/datum/reagent/menthol
+	name = "Menthol"
+	id = "menthol"
+	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
+	taste_description = "mint"
+	reagent_state = LIQUID
+	color = "#80af9c"
+	metabolism = REM * 0.002
+	overdose = REAGENTS_OVERDOSE * 0.25
+	scannable = 1
+	price_tag = 0.3
