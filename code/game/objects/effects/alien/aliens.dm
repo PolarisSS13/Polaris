@@ -156,6 +156,8 @@
 #define WEED_SOUTH_EDGING "south"
 #define WEED_EAST_EDGING "east"
 #define WEED_WEST_EDGING "west"
+#define WEED_NODE_GLOW "glow"
+#define WEED_NODE_BASE "nodebase"
 
 /obj/effect/alien/weeds
 	name = "weeds"
@@ -189,12 +191,18 @@
 	light_range = NODERANGE
 	var/node_range = NODERANGE
 
+	var/set_color = null
+
 /obj/effect/alien/weeds/node/New()
 	..(src.loc, src)
 
 /obj/effect/alien/weeds/node/Initialize()
 	..()
 	START_PROCESSING(SSobj, src)
+
+	spawn(1 SECOND)
+		if(color)
+			set_color = color
 
 /obj/effect/alien/weeds/node/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -216,7 +224,7 @@
 
 	if(!weedImageCache || !weedImageCache.len)
 		weedImageCache = list()
-		weedImageCache.len = 4
+//		weedImageCache.len = 4
 		weedImageCache[WEED_NORTH_EDGING] = image('icons/mob/alien.dmi', "weeds_side_n", layer=2.11, pixel_y = -32)
 		weedImageCache[WEED_SOUTH_EDGING] = image('icons/mob/alien.dmi', "weeds_side_s", layer=2.11, pixel_y = 32)
 		weedImageCache[WEED_EAST_EDGING] = image('icons/mob/alien.dmi', "weeds_side_e", layer=2.11, pixel_x = -32)
@@ -267,6 +275,9 @@ Alien plants should do something if theres a lot of poison
 	if(!linked_node || (get_dist(linked_node, src) > linked_node.node_range) )
 		return
 
+	if(linked_node != src)
+		color = linked_node.set_color
+
 	direction_loop:
 		for(var/dirn in cardinal)
 			var/turf/T = get_step(src, dirn)
@@ -281,7 +292,9 @@ Alien plants should do something if theres a lot of poison
 				if(!O.CanZASPass(U))
 					continue direction_loop
 
-			new /obj/effect/alien/weeds(T, linked_node)
+			var/obj/effect/E = new /obj/effect/alien/weeds(T, linked_node)
+
+			E.color = color
 
 	if(istype(src, /obj/effect/alien/weeds/node))
 		var/obj/effect/alien/weeds/node/N = src
@@ -293,11 +306,13 @@ Alien plants should do something if theres a lot of poison
 			if(!W)
 				continue
 
-			if(W == src)
-				continue
-
 			if(!W.linked_node)
 				linked_node = src
+
+			W.color = W.linked_node.set_color
+
+			if(W == src)
+				continue
 
 			if(prob(max(10, 40 - (5 * nearby_weeds.len))))
 				W.process()
@@ -361,6 +376,8 @@ Alien plants should do something if theres a lot of poison
 #undef WEED_SOUTH_EDGING
 #undef WEED_EAST_EDGING
 #undef WEED_WEST_EDGING
+#undef WEED_NODE_GLOW
+#undef WEED_NODE_BASE
 
 /*
  * Acid
