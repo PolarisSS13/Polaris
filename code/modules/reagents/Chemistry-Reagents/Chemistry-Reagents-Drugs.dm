@@ -187,7 +187,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel... sleepy.",
 	"You feel dizzy.")
 
-	price_tag = 0.05
+	price_tag = 1.5
 
 /datum/reagent/drug/heroin/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER, 40)

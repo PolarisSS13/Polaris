@@ -17,12 +17,43 @@
 /datum/reagent/proc/get_tax()
 	return
 
+/datum/reagent/proc/get_item_cost()
+	return round(price_tag)
+
+//post tax post gets the "extra" money added that is added from tax
+
+/datum/reagent/proc/post_tax_cost()
+	if(!get_tax())
+		return 0
+
+	return round(get_tax() * get_item_cost())
+
+/atom/movable/proc/post_tax_cost()
+	if(!get_tax())
+		return 0
+
+	return round(get_tax() * get_item_cost())
+
+/datum/medical_bill/proc/post_tax_cost()
+	if(!get_tax())
+		return 0
+
+	return round(get_tax() * get_item_cost())
+
+/datum/law/proc/post_tax_cost()
+	if(!get_tax())
+		return 0
+
+	return round(get_tax() * get_item_cost())
+
 //***************//
 //---Beverages---//
 //***************//
 
 /datum/reagent/var/price_tag = null		// This is now price per unit. It gets rounded up to the nearest 10 when get_item_cost() is called.
 /datum/reagent/var/tax_type = null
+
+
 ///////////////////
 //---Law---------//
 //***************//
@@ -31,6 +62,9 @@
 
 /datum/law/proc/get_item_cost()
 	return fine
+
+/datum/law/proc/get_tax()
+	return
 
 ///////////////////
 //---Med---------//
@@ -113,8 +147,8 @@
 /obj/item/weapon/reagent_containers/get_tax()
 	if(reagents)
 		for(var/datum/reagent/R in reagents.reagent_list)
-			if(R.tax_type)
-				return R.tax_type
+			if(R.get_tax())
+				return R.get_tax()
 
 
 

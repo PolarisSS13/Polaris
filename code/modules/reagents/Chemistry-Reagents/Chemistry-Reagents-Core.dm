@@ -112,6 +112,7 @@
 	calories_factor = 0
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
+	price_tag = 0
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))

@@ -76,7 +76,7 @@
 	var/targ_temp = 310
 	var/halluci = 0
 
-	price_tag = 0.18
+	price_tag = 0.3
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."

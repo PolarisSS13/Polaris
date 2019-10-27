@@ -8,7 +8,7 @@
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
-	price_tag = 0.01
+	price_tag = 0.1
 
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"

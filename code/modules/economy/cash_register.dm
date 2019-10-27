@@ -19,6 +19,7 @@
 	var/list/transaction_logs = list() // list of strings using html code to visualise data
 	var/list/item_list = list()  // entities and according
 	var/list/price_list = list() // prices for each purchase
+	var/list/tax_list = list() // tax for each purchase
 	var/manipulating = 0
 
 	var/cash_stored = 0
@@ -28,6 +29,8 @@
 
 	var/menu_items
 
+	var/adds_tax = 1
+	var/total_tax
 
 // Claim machine ID
 /obj/machinery/cash_register/New()
@@ -161,18 +164,37 @@
 				var/t_purpose
 				var/item_desc
 
+
 				if (istype(menuitem, /datum/law))
 					var/datum/law/law_charge = menuitem
-					t_amount = law_charge.get_item_cost()
-					t_purpose = law_charge.name
-					transaction_purpose = law_charge.name
+					var/tax = law_charge.post_tax_cost()
+					if(adds_tax && tax)
+
+						t_amount = law_charge.get_item_cost() + tax
+						t_purpose = "[law_charge.name][tax ? " (With [tax]% Tax)" : ""]"
+						transaction_purpose = "[law_charge.name][tax ? " (With [tax]% Tax)" : ""]"
+						tax_list[t_purpose] = law_charge.get_tax()
+					else
+						t_amount = law_charge.get_item_cost()
+						t_purpose = law_charge.name
+						transaction_purpose = law_charge.name
+
 					item_desc = "Fine"
 
 				if (istype(menuitem, /datum/medical_bill))
 					var/datum/medical_bill/med_charge = menuitem
-					t_amount = med_charge.get_item_cost()
-					t_purpose = med_charge.name
-					transaction_purpose = med_charge.name
+					var/tax = med_charge.post_tax_cost()
+
+					if(adds_tax && tax)
+						t_amount = med_charge.get_item_cost() + tax
+						t_purpose = "[med_charge.name][tax ? " (With [tax]% Tax)" : ""]"
+						transaction_purpose = "[med_charge.name][tax ? " (With [tax]% Tax)" : ""]"
+						tax_list[t_purpose] = med_charge.get_tax()
+					else
+						t_amount = med_charge.get_item_cost()
+						t_purpose = med_charge.name
+						transaction_purpose = med_charge.name
+
 					item_desc = "Medical Bill"
 
 				item_list[t_purpose] += 1
@@ -201,21 +223,27 @@
 					if(item_list[item_name] <= 0)
 						item_list -= item_name
 						price_list -= item_name
+						tax_list -= item_name
+
+
 			if("add")
 				var/item_name = locate(href_list["item"])
 				if(item_list[item_name] >= 20) return
 				transaction_amount += price_list[item_name]
 				item_list[item_name]++
+
 			if("clear")
 				var/item_name = locate(href_list["item"])
 				if(item_name)
 					transaction_amount -= price_list[item_name] * item_list[item_name]
 					item_list -= item_name
 					price_list -= item_name
+					tax_list -= item_name
 				else
 					transaction_amount = 0
 					item_list.Cut()
 					price_list.Cut()
+					tax_list.Cut()
 			if("reset_log")
 				transaction_logs.Cut()
 				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
@@ -430,23 +458,35 @@
 
 	// First check if item has a valid price
 	var/price = O.get_item_cost()
-	var/tax = O.get_tax() * 100
+	var/tax
+
+	if(adds_tax)
+		tax = O.get_tax() * 100
+		price = O.get_item_cost() + O.post_tax_cost()
+
 	if(isnull(price))
 		src.visible_message("\icon[src]<span class='warning'>Unable to find item in database.</span>")
 		return
 	// Call out item cost
-	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"][tax ? " (Plus [tax]% Tax)" : ""].")
+	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"][tax ? " (With [tax]% Tax)" : ""].")
 	// Note the transaction purpose for later use
 	if(transaction_purpose)
 		transaction_purpose += "<br>"
-	transaction_purpose += "[O]: [price] credit\s"
-	transaction_amount += price
+	if(adds_tax && tax)
+		transaction_purpose += "[O]: [price] credit\s[tax ? " (With [tax]% Tax)" : ""]"
+		transaction_amount += price + O.post_tax_cost()
+	else
+		transaction_purpose += "[O]: [price] credit\s"
+		transaction_amount += price
+
 	for(var/previously_scanned in item_list)
 		if(price == price_list[previously_scanned] && O.name == previously_scanned)
 			. = item_list[previously_scanned]++
 	if(!.)
 		item_list[O.name] = 1
 		price_list[O.name] = price
+		if(tax)
+			tax_list[O.name] = O.get_tax()
 		. = 1
 	// Animation and sound
 	playsound(src, 'sound/machines/twobeep.ogg', 25)
@@ -536,13 +576,17 @@
 	return 1
 
 /obj/machinery/cash_register/proc/transaction_complete()
+	if(adds_tax)
+		for(var/P in price_list)
+
+
 	/// Visible confirmation
 	playsound(src, 'sound/machines/chime.ogg', 25)
 	src.visible_message("\icon[src]<span class='notice'>Transaction complete.</span>")
 	flick("register_approve", src)
 	reset_memory()
 	updateDialog()
-
+//	total_tax = 0
 
 /obj/machinery/cash_register/proc/reset_memory()
 	transaction_amount = null

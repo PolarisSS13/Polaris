@@ -21,6 +21,9 @@
 	icon_state = "waterbottle"
 	center_of_mass = list("x"=15, "y"=8)
 
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/get_item_cost()
+	return 1
+
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/New()
 	..()
 	reagents.add_reagent("water", 30)
