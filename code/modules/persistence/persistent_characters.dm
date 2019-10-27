@@ -53,6 +53,7 @@
 	mind.prefs.gen_record = gen_record
 	mind.prefs.exploit_record = exploit_record
 	mind.prefs.lip_style = lip_style
+	mind.prefs.lip_color = lip_color
 	mind.prefs.calories = calories
 
 	mind.prefs.weight = calories_to_weight(calories)
