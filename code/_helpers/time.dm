@@ -98,6 +98,8 @@ var/next_station_date_change = 1 DAY
 	day = (text2num(day))
 	return day
 
+/proc/full_game_time()
+	return "[get_game_day()]/[get_game_month()]/[get_game_year()]"
 
 
 //ISO 8601
