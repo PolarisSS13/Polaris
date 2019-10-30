@@ -139,20 +139,14 @@
 /obj/item/weapon/melee/energy/update_icon()
 	. = ..()
 	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
-	var/mutable_appearance/inhand_overlay = mutable_appearance(item, "[icon_state]_blade")
-
 	if(colorable)
 		blade_overlay.color = lcolor
-		inhand_overlay.color = lcolor
 	if(rainbow || !colorable)
 		blade_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
-		inhand_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
-		inhand_overlay.color = "FFFFFF"
 		blade_overlay.color = "FFFFFF"
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-		add_overlay(inhand_overlay)
 	if(istype(usr,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = usr
 		H.update_inv_l_hand()
@@ -185,6 +179,7 @@
 	name = "energy axe"
 	desc = "An energised battle axe."
 	icon_state = "eaxe"
+	item_state = "eaxe"
 	//active_force = 150 //holy...
 	active_force = 60
 	active_throwforce = 35
@@ -239,6 +234,7 @@
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "esword"
+	item_state = "esword"
 	active_force = 30
 	active_throwforce = 20
 	active_w_class = ITEMSIZE_LARGE
@@ -310,6 +306,7 @@
 	name = "energy cutlass"
 	desc = "Arrrr matey."
 	icon_state = "cutlass"
+	item_state = "cutlass"
 	colorable = TRUE
 
 
@@ -324,6 +321,7 @@
 	Striking a lesser robotic entity will compel it to attack you, as well.  It also does extra burn damage to robotic entities, but it does \
 	very little damage to purely organic targets."
 	icon_state = "ionrapier"
+	item_state = "ionrapier"
 	active_force = 5
 	active_throwforce = 3
 	active_embed_chance = 0
@@ -386,6 +384,7 @@
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
+	item_state = "blade"
 	force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
 	armor_penetration = 100
 	sharp = 1

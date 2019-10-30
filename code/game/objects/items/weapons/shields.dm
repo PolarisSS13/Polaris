@@ -116,6 +116,7 @@
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "eshield"
+	item_state = "eshield"
 	slot_flags = SLOT_EARS
 	flags = NOCONDUCT
 	force = 3.0
