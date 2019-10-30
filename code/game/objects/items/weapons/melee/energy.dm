@@ -31,6 +31,7 @@
 	edge = 1
 	w_class = active_w_class
 	playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+	update_icon()
 	set_light(lrange, lpower, lcolor)
 
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
@@ -44,6 +45,7 @@
 	sharp = initial(sharp)
 	edge = initial(edge)
 	w_class = initial(w_class)
+	update_icon()
 	set_light(0,0)
 
 /obj/item/weapon/melee/energy/proc/use_charge(var/cost)
@@ -104,12 +106,13 @@
 	return ..()
 
 /obj/item/weapon/melee/energy/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/device/multitool) && colorable)
+	if(istype(W, /obj/item/device/multitool) && colorable && !active)
 		if(!rainbow)
 			rainbow = TRUE
 		else
 			rainbow = FALSE
 		to_chat(user, "<span class='notice'>You manipulate the color controller in [src].</span>")
+		update_icon()
 	if(use_cell)
 		if(istype(W, cell_type))
 			if(!bcell)
@@ -145,6 +148,11 @@
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
+	if(istype(usr,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
 
 /obj/item/weapon/melee/energy/AltClick(mob/living/user)
 	if(!colorable) //checks if is not colorable
@@ -155,10 +163,10 @@
 		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
 		return
 
-	if(alert("Are you sure you want to recolor your blade?", "Confirm Recolort", "Yes", "No") == "Yes")
+	if(alert("Are you sure you want to recolor your blade?", "Confirm Recolor", "Yes", "No") == "Yes")
 		var/energy_color_input = input(usr,"","Choose Energy Color",lcolor) as color|null
 		if(energy_color_input)
-			lcolor = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=1)
+			lcolor = sanitize_hexcolor(energy_color_input)
 		update_icon()
 
 /obj/item/weapon/melee/energy/examine(mob/user)
