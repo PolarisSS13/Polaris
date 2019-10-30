@@ -137,6 +137,8 @@
 	. = ..()
 	if(colorable)
 		blade_overlay.color = lcolor
+	if(rainbow || !colorable)
+		blade_overlay.color = NULL
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
