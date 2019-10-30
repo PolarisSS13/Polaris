@@ -92,6 +92,10 @@
 
 	var/last_shot = 0			//records the last shot fired
 	drop_sound = 'sound/items/drop/gun.ogg'
+
+	get_tax()
+		return WEAPONS_TAX
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)

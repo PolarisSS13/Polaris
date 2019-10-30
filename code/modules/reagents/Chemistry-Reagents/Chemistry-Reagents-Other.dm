@@ -8,6 +8,7 @@
 	reagent_state = LIQUID
 	color = "#888888"
 	overdose = 5
+	price_tag = 0.1
 
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
@@ -206,6 +207,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#F7C430"
+	price_tag = 2.2
 
 /datum/reagent/silver
 	name = "Silver"
@@ -214,6 +216,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#D0D0D0"
+	price_tag = 1.2
 
 /datum/reagent/uranium
 	name ="Uranium"
@@ -222,6 +225,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#B8B8C0"
+	price_tag = 3.2
 
 /datum/reagent/platinum
 	name = "Platinum"
@@ -230,6 +234,7 @@
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#777777"
+	price_tag = 2.9
 
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
@@ -350,6 +355,7 @@
 	reagent_state = LIQUID
 	color = "#A5F0EE"
 	touch_met = 50
+	price_tag = 0.2
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	O.clean_blood()
@@ -402,12 +408,13 @@
 			M.vomit()
 
 /datum/reagent/lube // TODO: spraying on borgs speeds them up
-	name = "Space Lube"
+	name = "Lube"
 	id = "lube"
-	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
+	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them, giggity."
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#009CA8"
+	price_tag = 0.2
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -422,6 +429,7 @@
 	taste_description = "plastic"
 	reagent_state = LIQUID
 	color = "#C7FFFF"
+	price_tag = 0.5
 
 /datum/reagent/silicate/touch_obj(var/obj/O)
 	if(istype(O, /obj/structure/window))
@@ -477,6 +485,7 @@
 	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#F2F3F4"
+	price_tag = 0.7
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()
@@ -491,6 +500,10 @@
 	taste_description = "a bitter gooey substance"
 	reagent_state = LIQUID
 	color = "#755202"
+	price_tag = 0.8
+
+	get_tax()
+		return DRUG_TAX
 
 /datum/reagent/coca
 	name = "coca extract"
@@ -499,3 +512,19 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#755202"
+	price_tag = 0.9
+
+	get_tax()
+		return DRUG_TAX
+
+/datum/reagent/menthol
+	name = "Menthol"
+	id = "menthol"
+	description = "Tastes naturally minty, and imparts a very mild numbing sensation."
+	taste_description = "mint"
+	reagent_state = LIQUID
+	color = "#80af9c"
+	metabolism = REM * 0.002
+	overdose = REAGENTS_OVERDOSE * 0.25
+	scannable = 1
+	price_tag = 0.3

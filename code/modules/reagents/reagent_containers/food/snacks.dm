@@ -2238,6 +2238,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/carrotfries/New()
 	..()
 	reagents.add_reagent("imidazoline", 3)
+	reagents.add_reagent("carrotjuice", 3)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/superbiteburger
@@ -2265,8 +2266,15 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/candiedapple/New()
 	..()
+	reagents.add_reagent("sugar", 3)
+	reagents.add_reagent("applejuice", 3)
 	bitesize = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/aesirsalad/New()
+	..()
+	reagents.add_reagent("doctorsdelight", 8)
+	reagents.add_reagent("tricordrazine", 8)
+	bitesize = 3
 /obj/item/weapon/reagent_containers/food/snacks/applepie
 	name = "Apple Pie"
 	desc = "A pie containing sweet sweet love... or apple."
@@ -2278,6 +2286,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/applepie/New()
 	..()
+	reagents.add_reagent("sugar", 3)
+	reagents.add_reagent("applejuice", 3)
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cherrypie
@@ -2291,6 +2301,8 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/cherrypie/New()
 	..()
+	reagents.add_reagent("sugar", 3)
+	reagents.add_reagent("berryjuice", 3)
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/twobread
@@ -2623,6 +2635,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake/New()
 	..()
+	reagents.add_reagent("carrotjuice", 3)
 	reagents.add_reagent("imidazoline", 10)
 	bitesize = 2
 

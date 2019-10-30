@@ -18,6 +18,8 @@
 	force = 10
 	drop_sound = 'sound/items/drop/metalweapon.ogg'
 
+	get_tax()
+		return WEAPONS_TAX
 
 /obj/item/weapon/melee/classic_baton
 	name = "police baton"

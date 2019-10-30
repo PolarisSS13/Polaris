@@ -15,6 +15,10 @@
 	throw_range = 8
 	max_storage_space = ITEMSIZE_COST_SMALL * 7 // 14
 	var/list/icon_variety
+	price_tag = 5
+
+/obj/item/weapon/storage/firstaid/get_tax()
+	return MEDICAL_TAX
 
 /obj/item/weapon/storage/firstaid/initialize()
 	. = ..()
