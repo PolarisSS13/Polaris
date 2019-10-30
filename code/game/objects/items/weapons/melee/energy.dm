@@ -13,12 +13,12 @@
 	var/lcolor = "#0099FF"
 	var/colorable = FALSE
 	var/rainbow = FALSE
-	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
 	// If it uses energy.
 	var/use_cell = FALSE
 	var/hitcost = 120
 	var/obj/item/weapon/cell/bcell = null
 	var/cell_type = /obj/item/weapon/cell/device
+
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	if(active)
@@ -104,11 +104,11 @@
 	return ..()
 
 /obj/item/weapon/melee/energy/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, obj/item/device/multitool) && colorable)
+	if(istype(W, /obj/item/device/multitool) && colorable)
 		if(!rainbow)
-			src.blade_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
+			rainbow = TRUE
 		else
-			src.blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
+			rainbow = FALSE
 		to_chat(user, "<span class='notice'>You manipulate the color controller in [src].</span>")
 	if(use_cell)
 		if(istype(W, cell_type))
@@ -135,16 +135,16 @@
 
 /obj/item/weapon/melee/energy/update_icon()
 	. = ..()
+	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
+
 	if(colorable)
 		blade_overlay.color = lcolor
 	if(rainbow || !colorable)
-		blade_overlay.color = NULL
+		blade_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
+		blade_overlay.color = "FFFFFF"
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_hands()
 
 /obj/item/weapon/melee/energy/AltClick(mob/living/user)
 	if(!colorable) //checks if is not colorable
@@ -311,7 +311,6 @@
 	Striking a lesser robotic entity will compel it to attack you, as well.  It also does extra burn damage to robotic entities, but it does \
 	very little damage to purely organic targets."
 	icon_state = "ionrapier"
-	random_color = FALSE
 	active_force = 5
 	active_throwforce = 3
 	active_embed_chance = 0
@@ -322,7 +321,6 @@
 	lrange = 2
 	lpower = 2
 	lcolor = "#0000FF"
-	active_state = "ionic_rapier"
 	projectile_parry_chance = 30	// It's not specifically designed for cutting and slashing, but it can still, maybe, save your life.
 
 /obj/item/weapon/melee/energy/sword/ionic_rapier/afterattack(var/atom/movable/AM, var/mob/living/user, var/proximity)

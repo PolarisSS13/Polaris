@@ -115,7 +115,7 @@
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "eshield" 
+	icon_state = "eshield"
 	slot_flags = SLOT_EARS
 	flags = NOCONDUCT
 	force = 3.0
@@ -129,6 +129,7 @@
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
+
 
 /obj/item/weapon/shield/energy/handle_shield(mob/user)
 	if(!active)
@@ -184,9 +185,6 @@
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-	if(ismob(loc))
-		var/mob/M = loc
-		M.update_inv_hands()
 	if(active)
 		set_light(lrange, lpower, lcolor)
 	else
