@@ -130,7 +130,10 @@
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
-
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
+			)
 
 /obj/item/weapon/shield/energy/handle_shield(mob/user)
 	if(!active)
@@ -149,6 +152,13 @@
 		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
 			return (base_block_chance - round(damage / 3)) //block bullets and beams using the old block chance
 	return base_block_chance
+
+/obj/item/weapon/melee/energy/worn_overlays(isinhands, icon_file)
+	. = ..()
+	if(active)
+		if(isinhands)
+			var/mutable_appearance/blade_inhand = mutable_appearance(icon_file, "[icon_state]_blade")
+			blade_inhand.color = lcolor
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))

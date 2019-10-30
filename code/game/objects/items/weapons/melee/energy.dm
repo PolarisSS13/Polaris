@@ -18,7 +18,10 @@
 	var/hitcost = 120
 	var/obj/item/weapon/cell/bcell = null
 	var/cell_type = /obj/item/weapon/cell/device
-
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
+			)
 
 /obj/item/weapon/melee/energy/proc/activate(mob/living/user)
 	if(active)
@@ -151,6 +154,19 @@
 		var/mob/living/carbon/human/H = usr
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
+
+
+
+/obj/item/weapon/melee/energy/worn_overlays(isinhands, icon_file)
+	. = ..()
+	if(active)
+		if(isinhands)
+			var/mutable_appearance/blade_inhand = mutable_appearance(icon_file, "[icon_state]_blade")
+			if(colorable && !rainbow)
+				blade_inhand.color = lcolor
+			else
+				blade_inhand.color = "FFFFFF"
+			. += blade_inhand
 
 
 /obj/item/weapon/melee/energy/AltClick(mob/living/user)
