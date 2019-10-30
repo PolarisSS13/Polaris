@@ -84,6 +84,9 @@
 /datum/reagent/ethanol/get_tax()
 	return ALCOHOL_TAX
 
+/datum/reagent/ethanol/is_contraband()
+	return CONTRABAND_ALCOHOL
+
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 15)

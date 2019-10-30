@@ -153,3 +153,23 @@
 
 		return total_cals
 	return "No reagent holder"
+
+/obj/item/weapon/reagent_containers/proc/get_contraband_types() // returns what contraband types are found in a particular container
+	var/list/contraband_items = list()
+	var/list/all_reagents = reagents.reagent_list
+	if(reagents)
+		for(var/datum/reagent/R in all_reagents)
+			if(R.is_contraband())
+				contraband_items += R.is_contraband()
+
+		return uniquelist(contraband_items)
+
+/obj/item/weapon/reagent_containers/proc/get_contraband_reagents() // same as get_contraband_types() but actually returns the reagents instead
+	var/list/contraband_reagents = list()
+	var/list/all_reagents = reagents.reagent_list
+	if(reagents)
+		for(var/datum/reagent/R in all_reagents)
+			if(R.is_contraband())
+				contraband_reagents += R
+
+		return contraband_reagents

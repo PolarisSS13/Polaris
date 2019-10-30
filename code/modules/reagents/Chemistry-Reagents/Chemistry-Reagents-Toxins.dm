@@ -479,7 +479,10 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	overdose_mod = 5	//For that good, lethal feeling
-	price_tag = 0.8
+	price_tag = 4
+
+/datum/reagent/chloralhydrate/is_contraband()
+	return CONTRABAND_CHLORAL
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -530,7 +533,7 @@
 
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
-
+	price_tag = 0.5
 
 /datum/reagent/serotrotium
 	name = "Serotrotium"
@@ -640,6 +643,10 @@
 	color = "#E700E7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
+	price_tag = 0.8
+
+/datum/reagent/psilocybin/is_contraband()
+	return CONTRABAND_PSILOCYBIN
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)

@@ -42,6 +42,8 @@
 
 	price_tag = 0.9
 
+/datum/reagent/drug/ecstasy/is_contraband()
+	return CONTRABAND_ECSTASY
 
 /datum/reagent/drug/ecstasy/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -89,6 +91,9 @@ datum/reagent/drug/ecstasy/overdose(var/mob/living/M as mob)
 /datum/reagent/drug/nicotine/get_tax()
 	return TOBACCO_TAX
 
+/datum/reagent/drug/nicotine/is_contraband()
+	return CONTRABAND_NICOTINE
+
 datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	M.AdjustStunned(-1)
 	..()
@@ -107,6 +112,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"Your feet are dying for some action right now.")
 
 	price_tag = 2.2
+
+/datum/reagent/drug/meth/is_contraband()
+	return CONTRABAND_METH
 
 /datum/reagent/drug/meth/affect_blood(var/mob/living/carbon/M)
 	M.AdjustParalysis(-2)
@@ -157,6 +165,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 
 	price_tag = 1
 
+/datum/reagent/drug/cannabis/is_contraband()
+	return CONTRABAND_CANNABIS
+
 /datum/reagent/drug/cannabis/affect_blood(var/mob/living/carbon/M)
 	M.adjustToxLoss(-2)
 	M.druggy = max(M.druggy, 3)
@@ -188,6 +199,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel dizzy.")
 
 	price_tag = 1.5
+
+/datum/reagent/drug/heroin/is_contraband()
+	return CONTRABAND_HEROIN
 
 /datum/reagent/drug/heroin/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER, 40)
@@ -224,6 +238,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 
 	price_tag = 2
 
+/datum/reagent/drug/cocaine/is_contraband()
+	return CONTRABAND_COCAINE
+
 /datum/reagent/drug/cocaine/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER,3)
 	M.adjust_hydration(-15)
@@ -255,6 +272,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You feel terrible.")
 
 	price_tag = 1.5
+
+/datum/reagent/drug/crack/is_contraband()
+	return CONTRABAND_CRACK
 
 /datum/reagent/drug/crack/affect_blood(var/mob/living/carbon/M)
 	M.add_chemical_effect(CE_PAINKILLER,1)
@@ -288,6 +308,9 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	"You blink rapidly to wet your drying eyes")
 
 	price_tag = 1.8
+
+/datum/reagent/drug/stimm/is_contraband()
+	return CONTRABAND_STIMM
 
 /datum/reagent/drug/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_TAJARA)
