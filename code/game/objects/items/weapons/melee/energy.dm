@@ -11,7 +11,9 @@
 	var/lrange = 2
 	var/lpower = 2
 	var/lcolor = "#0099FF"
-
+	var/colorable = FALSE
+	var/rainbow = FALSE
+	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
 	// If it uses energy.
 	var/use_cell = FALSE
 	var/hitcost = 120
@@ -102,6 +104,12 @@
 	return ..()
 
 /obj/item/weapon/melee/energy/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, obj/item/device/multitool) && colorable)
+		if(!rainbow)
+			src.blade_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
+		else
+			src.blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
+		to_chat(user, "<span class='notice'>You manipulate the color controller in [src].</span>")
 	if(use_cell)
 		if(istype(W, cell_type))
 			if(!bcell)
@@ -125,13 +133,43 @@
 /obj/item/weapon/melee/energy/get_cell()
 	return bcell
 
+/obj/item/weapon/melee/energy/update_icon()
+	. = ..()
+	if(colorable)
+		blade_overlay.color = lcolor
+	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
+	if(active)
+		add_overlay(blade_overlay)
+	if(ismob(loc))
+		var/mob/M = loc
+		M.update_inv_hands()
+
+/obj/item/weapon/melee/energy/AltClick(mob/living/user)
+	if(!colorable) //checks if is not colorable
+		return
+	if(!in_range(src, user))	//Basic checks to prevent abuse
+		return
+	if(user.incapacitated() || !istype(user))
+		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
+		return
+
+	if(alert("Are you sure you want to recolor your blade?", "Confirm Recolort", "Yes", "No") == "Yes")
+		var/energy_color_input = input(usr,"","Choose Energy Color",lcolor) as color|null
+		if(energy_color_input)
+			lcolor = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=1)
+		update_icon()
+
+/obj/item/weapon/melee/energy/examine(mob/user)
+	..()
+	to_chat(user, "<span class='notice'>Alt-click to recolor it.</span>")
+
 /*
  * Energy Axe
  */
 /obj/item/weapon/melee/energy/axe
 	name = "energy axe"
 	desc = "An energised battle axe."
-	icon_state = "axe0"
+	icon_state = "eaxe"
 	//active_force = 150 //holy...
 	active_force = 60
 	active_throwforce = 35
@@ -152,13 +190,11 @@
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
 	..()
 	damtype = SEARING
-	icon_state = "axe1"
 	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 
 /obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
 	..()
 	damtype = BRUTE
-	icon_state = initial(icon_state)
 	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
 
 /obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
@@ -187,7 +223,7 @@
 	color
 	name = "energy sword"
 	desc = "May the force be within you."
-	icon_state = "sword0"
+	icon_state = "esword"
 	active_force = 30
 	active_throwforce = 20
 	active_w_class = ITEMSIZE_LARGE
@@ -200,9 +236,8 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_ILLEGAL = 4)
 	sharp = 1
 	edge = 1
-	var/blade_color
-	var/random_color = TRUE
-	var/active_state = "sword"
+	colorable = TRUE
+
 
 	projectile_parry_chance = 65
 
@@ -211,30 +246,6 @@
 	if(!istype(loc,/mob))
 		deactivate(user)
 
-/obj/item/weapon/melee/energy/sword/New()
-	if(random_color)
-		blade_color = pick("red","blue","green","purple","white")
-		lcolor = blade_color
-
-/obj/item/weapon/melee/energy/sword/green/New()
-	blade_color = "green"
-	lcolor = "#008000"
-
-/obj/item/weapon/melee/energy/sword/red/New()
-	blade_color = "red"
-	lcolor = "#FF0000"
-
-/obj/item/weapon/melee/energy/sword/blue/New()
-	blade_color = "blue"
-	lcolor = "#0000FF"
-
-/obj/item/weapon/melee/energy/sword/purple/New()
-	blade_color = "purple"
-	lcolor = "#800080"
-
-/obj/item/weapon/melee/energy/sword/white/New()
-	blade_color = "white"
-	lcolor = "#FFFFFF"
 
 /obj/item/weapon/melee/energy/sword/activate(mob/living/user)
 	if(!active)
@@ -242,14 +253,13 @@
 
 	..()
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	icon_state = "[active_state][blade_color]"
+
 
 /obj/item/weapon/melee/energy/sword/deactivate(mob/living/user)
 	if(active)
 		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 	..()
 	attack_verb = list()
-	icon_state = initial(icon_state)
 
 /obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(60))
@@ -284,11 +294,9 @@
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"
 	desc = "Arrrr matey."
-	icon_state = "cutlass0"
+	icon_state = "cutlass"
+	colorable = TRUE
 
-/obj/item/weapon/melee/energy/sword/pirate/activate(mob/living/user)
-	..()
-	icon_state = "cutlass1"
 
 /*
  *Ionic Rapier
@@ -300,7 +308,7 @@
 	description_info = "This is a dangerous melee weapon that will deliver a moderately powerful electromagnetic pulse to whatever it strikes.  \
 	Striking a lesser robotic entity will compel it to attack you, as well.  It also does extra burn damage to robotic entities, but it does \
 	very little damage to purely organic targets."
-	icon_state = "ionic_rapier0"
+	icon_state = "ionrapier"
 	random_color = FALSE
 	active_force = 5
 	active_throwforce = 3
@@ -350,6 +358,7 @@
 	active_force = 25
 	armor_penetration = 25
 	projectile_parry_chance = 40
+	colorable = TRUE
 
 	hitcost = 75
 
@@ -357,9 +366,7 @@
 	..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 
-/*
- *Energy Blade
- */
+//Energy Blade (ninja uses this)
 
 //Can't be activated or deactivated, so no reason to be a subtype of energy
 /obj/item/weapon/melee/energy/blade
@@ -448,49 +455,27 @@
 
 	return 1
 
-/*
- *Energy Spear
- */
+//Energy Spear
 
 /obj/item/weapon/melee/energy/spear
- 	name = "energy spear"
- 	desc = "Concentrated energy forming a sharp tip at the end of a long rod."
- 	icon_state = "espear0"
- 	armor_penetration = 75
- 	sharp = 1
- 	edge = 1
- 	force = 5
- 	throwforce = 10
- 	throw_speed = 7
- 	throw_range = 11
- 	reach = 2
- 	w_class = ITEMSIZE_LARGE
- 	active_force = 25
- 	active_throwforce = 30
- 	active_w_class = ITEMSIZE_HUGE
- 	var/random_color = TRUE
- 	var/tip_color = ""
- 	var/active_state = "espear"
+	name = "energy spear"
+	desc = "Concentrated energy forming a sharp tip at the end of a long rod."
+	icon_state = "espear"
+	armor_penetration = 75
+	sharp = 1
+	edge = 1
+	force = 5
+	throwforce = 10
+	throw_speed = 7
+	throw_range = 11
+	reach = 2
+	w_class = ITEMSIZE_LARGE
+	active_force = 25
+	active_throwforce = 30
+	active_w_class = ITEMSIZE_HUGE
+	colorable = TRUE
 
-/obj/item/weapon/melee/energy/spear/New()
-	if(random_color)
-		tip_color = pick("red","blue","green","purple")
-		lcolor = tip_color
 
-/obj/item/weapon/melee/energy/spear/green/New()
-	tip_color = "green"
-	lcolor = "#008000"
-
-/obj/item/weapon/melee/energy/spear/red/New()
-	tip_color = "red"
-	lcolor = "#FF0000"
-
-/obj/item/weapon/melee/energy/spear/blue/New()
-	tip_color = "blue"
-	lcolor = "#0000FF"
-
-/obj/item/weapon/melee/energy/spear/purple/New()
-	tip_color = "purple"
 	lcolor = "#800080"
 
 /obj/item/weapon/melee/energy/spear/activate(mob/living/user)
@@ -498,7 +483,6 @@
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	..()
 	attack_verb = list("jabbed", "stabbed", "impaled")
-	icon_state = "[active_state]-[tip_color]"
 
 
 /obj/item/weapon/melee/energy/spear/deactivate(mob/living/user)
@@ -506,7 +490,6 @@
 		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 	..()
 	attack_verb = list("whacked", "beat", "slapped", "thonked")
-	icon_state = "espear0"
 
 /obj/item/weapon/melee/energy/spear/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
