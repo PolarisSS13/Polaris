@@ -139,15 +139,20 @@
 /obj/item/weapon/melee/energy/update_icon()
 	. = ..()
 	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
+	var/mutable_appearance/inhand_overlay = mutable_appearance(item, "[icon_state]_blade")
 
 	if(colorable)
 		blade_overlay.color = lcolor
+		inhand_overlay.color = lcolor
 	if(rainbow || !colorable)
 		blade_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
+		inhand_overlay = mutable_appearance(icon, "[icon_state]_blade_rainbow")
+		inhand_overlay.color = "FFFFFF"
 		blade_overlay.color = "FFFFFF"
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
+		add_overlay(inhand_overlay)
 	if(istype(usr,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = usr
 		H.update_inv_l_hand()
