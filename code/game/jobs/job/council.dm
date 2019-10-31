@@ -80,6 +80,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	spawn_positions = 1
 	department_flag = CIVILIAN
 	req_admin_notify = 1
+	minimal_player_age = 10
 	email_domain = "judges.gov.nt"
 	supervisors = "government officials and the President"
 	selection_color = "#1D1D4F"
@@ -87,7 +88,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	wage = 350
 	access = list(access_judge, access_warrant, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_judge, access_warrant, access_sec_doors, access_heads)
-	minimal_player_age = 1
+	minimal_player_age = 14
 	minimum_character_age = 25
 	alt_titles = list("Magistrate")
 
