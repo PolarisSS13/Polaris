@@ -91,5 +91,3 @@
 /mob/proc/update_targeted()
 	return
 
-/obj/item/proc/worn_overlays(isinhands = FALSE, icon_file)
-	. = list()

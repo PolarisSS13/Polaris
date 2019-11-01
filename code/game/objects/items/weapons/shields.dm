@@ -153,13 +153,6 @@
 			return (base_block_chance - round(damage / 3)) //block bullets and beams using the old block chance
 	return base_block_chance
 
-/obj/item/weapon/melee/energy/worn_overlays(isinhands, icon_file)
-	. = ..()
-	if(active)
-		if(isinhands)
-			var/mutable_appearance/blade_inhand = mutable_appearance(icon_file, "[icon_state]_blade")
-			blade_inhand.color = lcolor
-
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
 		user << "<span class='warning'>You beat yourself in the head with [src].</span>"
@@ -196,10 +189,11 @@
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-	if(active)
+		item_state = "[icon_state]_blade"
 		set_light(lrange, lpower, lcolor)
 	else
 		set_light(0)
+		item_state = "[icon_state]"
 
 /obj/item/weapon/shield/energy/AltClick(mob/living/user)
 	if(!in_range(src, user))	//Basic checks to prevent abuse

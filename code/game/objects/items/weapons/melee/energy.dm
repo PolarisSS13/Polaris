@@ -27,6 +27,10 @@
 	if(active)
 		return
 	active = 1
+	if(rainbow)
+		item_state = "[icon_state]_blade_rainbow"
+	else
+		item_state = "[icon_state]_blade"
 	embed_chance = active_embed_chance
 	force = active_force
 	throwforce = active_throwforce
@@ -41,6 +45,7 @@
 	if(!active)
 		return
 	playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+	item_state = "[icon_state]"
 	active = 0
 	embed_chance = initial(embed_chance)
 	force = initial(force)
@@ -156,17 +161,6 @@
 		H.update_inv_r_hand()
 
 
-
-/obj/item/weapon/melee/energy/worn_overlays(isinhands, icon_file)
-	. = ..()
-	if(active)
-		if(isinhands)
-			var/mutable_appearance/blade_inhand = mutable_appearance(icon_file, "[icon_state]_blade")
-			if(colorable && !rainbow)
-				blade_inhand.color = lcolor
-			else
-				blade_inhand.color = "FFFFFF"
-			. += blade_inhand
 
 
 /obj/item/weapon/melee/energy/AltClick(mob/living/user)
