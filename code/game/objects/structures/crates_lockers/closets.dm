@@ -253,11 +253,11 @@
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(istype(W, /obj/item/weapon/weldingtool))
+		if(is_welder(W))
 			var/obj/item/weapon/weldingtool/WT = W
-			if(!WT.remove_fuel(0,user))
-				if(!WT.isOn())
-					return
+					if(WT.consumeFuel)
+						WT.consumeFuel(1)
+						return
 				else
 					to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 					return
@@ -288,14 +288,6 @@
 	else if(seal_tool)
 		if(istype(W, seal_tool))
 			var/obj/item/weapon/S = W
-			if(istype(S, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = S
-				if(!WT.remove_fuel(0,user))
-					if(!WT.isOn())
-						return
-					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-						return
 			if(do_after(user, 20 * S.toolspeed))
 				playsound(src, S.usesound, 50)
 				src.sealed = !src.sealed
