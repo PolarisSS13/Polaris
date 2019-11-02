@@ -134,7 +134,7 @@
 
 /obj/item/weapon/tool/screwdriver/power/examine()
 	..()
-	to_chat(usr, "<span class = 'notice'>It has a [tool_behaviour == TOOL_SCREWDRIVER ? "screwdriver" : "bolt driver"] bit.</span")
+	to_chat(usr, "<span class='notice'>It has a [tool_behaviour == TOOL_SCREWDRIVER ? "screwdriver" : "bolt driver"] bit.</span")
 
 /obj/item/weapon/tool/screwdriver/power/attack_self(mob/user)
 	playsound(get_turf(user),'sound/items/change_drill.ogg',50,1)
