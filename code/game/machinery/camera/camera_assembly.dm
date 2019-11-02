@@ -40,9 +40,9 @@
 
 		if(1)
 			// State 1
-			if(istype(W, /obj/item/weapon/weldingtool))
-				if(weld(W, user))
-					user << "You weld the assembly securely into place."
+			if(W.is_welder())
+				if(W.doWeld(0) )
+					playsound(src, W.usesound, 50)
 					anchored = 1
 					state = 2
 				return
@@ -66,13 +66,12 @@
 					user << "<span class='warning'>You need 2 coils of wire to wire the assembly.</span>"
 				return
 
-			else if(istype(W, /obj/item/weapon/weldingtool))
-
-				if(weld(W, user))
-					user << "You unweld the assembly from its place."
-					state = 1
-					anchored = 1
-				return
+			else if(W.is_welder())
+				W.doWeld(0)
+				user << "You unweld the assembly from its place."
+				state = 1
+				anchored = 1
+			return
 
 
 		if(3)
@@ -152,22 +151,3 @@
 /obj/item/weapon/camera_assembly/attack_hand(mob/user as mob)
 	if(!anchored)
 		..()
-
-/obj/item/weapon/camera_assembly/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
-
-	if(busy)
-		return 0
-	if(!WT.isOn())
-		return 0
-
-	user << "<span class='notice'>You start to weld the [src]..</span>"
-	playsound(src.loc, WT.usesound, 50, 1)
-	WT.eyecheck(user)
-	busy = 1
-	if(do_after(user, 20 * WT.toolspeed))
-		busy = 0
-		if(!WT.isOn())
-			return 0
-		return 1
-	busy = 0
-	return 0

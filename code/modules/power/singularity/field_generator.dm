@@ -122,32 +122,29 @@ field_generator power level display
 			if(2)
 				user << "<font color='red'>The [src.name] needs to be unwelded from the floor.</font>"
 				return
-	else if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	else if(W.is_welder())
 		switch(state)
 			if(0)
 				user << "<font color='red'>The [src.name] needs to be wrenched to the floor.</font>"
 				return
 			if(1)
-				if (WT.remove_fuel(0,user))
-					playsound(loc, WT.usesound, 50, 1)
+				if (W.doWeld(0))
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.toolspeed))
-						if(!src || !WT.isOn()) return
+					if (do_after(user,20 * W.toolspeed))
+						if(!src || !W.is_welder()) return
 						state = 2
 						user << "You weld the field generator to the floor."
 				else
 					return
 			if(2)
-				if (WT.remove_fuel(0,user))
-					playsound(loc, WT.usesound, 50, 1)
+				if (W.doWeld(0))
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.toolspeed))
-						if(!src || !WT.isOn()) return
+					if (do_after(user,20 * W.toolspeed))
+						if(!src || !W.is_welder()) return
 						state = 1
 						user << "You cut the [src] free from the floor."
 				else

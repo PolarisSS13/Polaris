@@ -253,19 +253,12 @@
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(is_welder(W))
-			var/obj/item/weapon/weldingtool/WT = W
-					if(WT.consumeFuel)
-						WT.consumeFuel(1)
-						return
-				else
-					to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-					return
-			playsound(src, WT.usesound, 50)
-			new /obj/item/stack/material/steel(src.loc)
-			for(var/mob/M in viewers(src))
-				M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [WT].</span>", 3, "You hear welding.", 2)
-			qdel(src)
+		if(W.is_welder())
+			if(W.doWeld(0))
+				new /obj/item/stack/material/steel(src.loc)
+				for(var/mob/M in viewers(src))
+					M.show_message("<span class='notice'>\The [src] has been cut apart by [user] with \the [W].</span>", 3, "You hear welding.", 2)
+				qdel(src)
 			return
 		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
 			var/obj/item/weapon/storage/laundry_basket/LB = W

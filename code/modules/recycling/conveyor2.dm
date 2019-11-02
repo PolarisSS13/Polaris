@@ -259,15 +259,12 @@
 	if(default_deconstruction_screwdriver(user, I))
 		return
 
-	if(istype(I, /obj/item/weapon/weldingtool))
+	if(I.is_welder())
 		if(panel_open)
-			var/obj/item/weapon/weldingtool/WT = I
-			if(!WT.remove_fuel(0, user))
-				to_chat(user, "The welding tool must be on to complete this task.")
+			if(!I.doWeld(0))
 				return
-			playsound(src, WT.usesound, 50, 1)
-			if(do_after(user, 20 * WT.toolspeed))
-				if(!src || !WT.isOn()) return
+			if(do_after(user, 20 * I.toolspeed))
+				if(!src || !I.is_welder()) return
 				to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 				new /obj/item/stack/material/steel( src.loc, 2 )
 				qdel(src)

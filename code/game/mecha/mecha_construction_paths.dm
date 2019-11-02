@@ -3,12 +3,8 @@
 ////////////////////////////////
 
 /datum/construction/mecha/custom_action(step, obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
-		if (W.remove_fuel(0, user))
-			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
-		else
-			return 0
+	if(I.is_welder())
+		I.doWeld(0)
 	else if(I.is_wrench())
 		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 
@@ -35,12 +31,8 @@
 	return 1
 
 /datum/construction/reversible/mecha/custom_action(index as num, diff as num, obj/item/I, mob/user as mob)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
-		if (W.remove_fuel(0, user))
-			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
-		else
-			return 0
+	if(I.is_welder())
+		I.doWeld(0)
 	else if(I.is_wrench())
 		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 

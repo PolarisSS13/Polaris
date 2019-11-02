@@ -260,14 +260,12 @@
 		update()
 
 	// weldingtool: convert to real pipe
-	else if(istype(I, /obj/item/weapon/weldingtool))
+	else if(I.is_welder())
 		if(anchored)
-			var/obj/item/weapon/weldingtool/W = I
-			if(W.remove_fuel(0,user))
-				playsound(src, W.usesound, 100, 1)
+			if(I.doWeld(0))
 				to_chat(user, "Welding the [nicetype] in place.")
-				if(do_after(user, 20 * W.toolspeed))
-					if(!src || !W.isOn()) return
+				if(do_after(user, 20 * I.toolspeed))
+					if(!src || !I.is_welder()) return
 					to_chat(user, "The [nicetype] has been welded in place!")
 					update() // TODO: Make this neat
 					if(ispipe) // Pipe

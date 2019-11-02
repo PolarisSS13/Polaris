@@ -141,9 +141,8 @@
 		else
 			playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 		CheckHardness()
-	else if(istype(W,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(material.ignition_point && WT.remove_fuel(0, user))
+	else if(W.is_welder())
+		if(material.ignition_point && W.doWeld(0))
 			TemperatureAct(150)
 	else
 		attack_hand(user)

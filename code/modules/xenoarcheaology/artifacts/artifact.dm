@@ -233,7 +233,7 @@
 			secondary_effect.ToggleActivate(0)
 
 	else if (istype(W,/obj/item/weapon/flame) && W:lit ||\
-			istype(W,/obj/item/weapon/weldingtool) && W:welding)
+			W.is_welder())
 		if(my_effect.trigger == TRIGGER_HEAT)
 			my_effect.ToggleActivate()
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_HEAT && prob(25))

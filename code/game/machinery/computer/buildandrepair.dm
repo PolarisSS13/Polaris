@@ -19,17 +19,14 @@
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
 					src.anchored = 1
 					src.state = 1
-			if(istype(P, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = P
-				if(!WT.remove_fuel(0, user))
-					to_chat(user, "The welding tool must be on to complete this task.")
-					return
-				playsound(src.loc, WT.usesound, 50, 1)
-				if(do_after(user, 20 * WT.toolspeed))
-					if(!src || !WT.isOn()) return
-					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
-					new /obj/item/stack/material/steel( src.loc, 5 )
-					qdel(src)
+				if(P.is_welder())
+					P.doWeld(0)
+					if(do_after(user, 20 * P.toolspeed))
+						if(!src || !P.is_welder())
+							return
+						to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
+						new /obj/item/stack/material/steel( src.loc, 5 )
+						qdel(src)
 		if(1)
 			if(P.is_wrench())
 				playsound(src.loc, P.usesound, 50, 1)

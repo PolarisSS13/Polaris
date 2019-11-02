@@ -197,9 +197,8 @@
 /datum/surgery_step/hardsuit/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!istype(target))
 		return 0
-	if(istype(tool,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/welder = tool
-		if(!welder.isOn() || !welder.remove_fuel(1,user))
+	if(tool.is_welder())
+		if(!tool.doWeld(1))
 			return 0
 	return (target_zone == BP_TORSO) && ((istype(target.back, /obj/item/weapon/rig) && !(target.back.canremove)) || (istype(target.belt, /obj/item/weapon/rig) && !(target.belt.canremove)))
 

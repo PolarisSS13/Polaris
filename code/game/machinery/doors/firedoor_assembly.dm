@@ -52,18 +52,15 @@ obj/structure/firedoor_assembly/attackby(obj/item/C, mob/user as mob)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")
 		update_icon()
-	else if(!anchored && istype(C, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
-			user.visible_message("<span class='warning'>[user] dissassembles \the [src].</span>",
-			"You start to dissassemble \the [src].")
-			if(do_after(user, 40))
-				if(!src || !WT.isOn()) return
-				user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
-									"You have dissassembled \the [src].")
-				new /obj/item/stack/material/steel(src.loc, 2)
-				qdel(src)
-		else
-			user << "<span class='notice'>You need more welding fuel.</span>"
+	else if(!anchored && C.is_welder())
+		C.doWeld(0)
+		user.visible_message("<span class='warning'>[user] dissassembles \the [src].</span>",
+		"You start to dissassemble \the [src].")
+		if(do_after(user, 40))
+			if(!src || !C.is_welder()) return
+			user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
+								"You have dissassembled \the [src].")
+			new /obj/item/stack/material/steel(src.loc, 2)
+			qdel(src)
 	else
 		..(C, user)

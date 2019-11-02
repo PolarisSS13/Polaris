@@ -171,8 +171,7 @@
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.is_welder())
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return
@@ -180,26 +179,25 @@
 			if(0)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
 			if(1)
-				if (WT.remove_fuel(0,user))
-					playsound(loc, WT.usesound, 50, 1)
+				if (W.doWeld(0))
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
 						"You start to weld [src] to the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.toolspeed))
-						if(!src || !WT.isOn()) return
+					if(do_after(user,20 * W.toolspeed))
+						if(!src || !W.is_welder())
+							return
 						state = 2
 						to_chat(user, "You weld [src] to the floor.")
 						connect_to_network()
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 			if(2)
-				if (WT.remove_fuel(0,user))
-					playsound(loc, WT.usesound, 50, 1)
+				if (W.doWeld(0))
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.toolspeed))
-						if(!src || !WT.isOn()) return
+					if (do_after(user,20 * W.toolspeed))
+						if(!src || !W.is_welder()) return
 						state = 1
 						to_chat(user, "You cut [src] free from the floor.")
 						disconnect_from_network()

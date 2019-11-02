@@ -888,18 +888,14 @@ About the new airlock wires panel:
 	if(istype(C, /mob/living))
 		..()
 		return
-	if(!repairing && istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density)
-		var/obj/item/weapon/weldingtool/W = C
-		if(W.remove_fuel(0,user))
-			if(!src.welded)
-				src.welded = 1
-			else
-				src.welded = null
-			playsound(src.loc, C.usesound, 75, 1)
-			src.update_icon()
-			return
+	if(!repairing && C.is_welder() && !( src.operating > 0 ) && src.density)
+		C.doWeld(0)
+		if(!src.welded)
+			src.welded = 1
 		else
-			return
+			src.welded = null
+		src.update_icon()
+		return
 	else if(C.is_screwdriver())
 		if (src.p_open)
 			if (stat & BROKEN)

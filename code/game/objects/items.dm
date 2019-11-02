@@ -852,3 +852,19 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/is_welder()
 	return FALSE
+
+/obj/item/proc/doWeld(var/ufuel, mob/user)
+	if(!ufuel)
+		ufuel = 0
+	if(src.is_welder())
+		if(istype(src, /obj/item/weapon/weldingtool))
+			var/obj/item/weapon/weldingtool/WT = src
+			if(WT.remove_fuel(ufuel, user))
+				WT.eyecheck(user)
+			else
+				to_chat(user, "<span class ='notice'>You need more fuel to complete the task.</span>")
+				return FALSE
+		playsound(src.loc, src.usesound, 50)
+		return TRUE
+	else
+		return FALSE

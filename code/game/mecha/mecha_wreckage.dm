@@ -31,12 +31,11 @@
 
 
 /obj/effect/decal/mecha_wreckage/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.is_welder())
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
 			return
-		if (!isemptylist(welder_salvage) && WT.remove_fuel(0,user))
+		if (!isemptylist(welder_salvage) && W.doWeld(0))
 			var/type = prob(70)?pick(welder_salvage):null
 			if(type)
 				var/N = new type(get_turf(user))
@@ -46,9 +45,6 @@
 				salvage_num--
 			else
 				to_chat(user, "You failed to salvage anything valuable from [src].")
-		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return
 	if(W.is_wirecutter())
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")

@@ -98,9 +98,8 @@
 				icon_state = "ed209_shell"
 
 		if(3)
-			if(istype(W, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = W
-				if(WT.remove_fuel(0, user))
+			if(W.is_welder())
+				if(W.doWeld(0))
 					build_step++
 					name = "shielded frame assembly"
 					to_chat(user, "<span class='notice'>You welded the vest to [src].</span>")
@@ -169,4 +168,3 @@
 				qdel(W)
 				user.drop_from_inventory(src)
 				qdel(src)
-

@@ -40,23 +40,16 @@
 		qdel(src)
 		return
 
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
-		if(W.isOn())
-			if(W.get_fuel() >= 2)
-				var/obj/item/inside = locate() in src
-				if(inside)
-					inside.loc = get_turf(src)
-					visible_message("<span class='info'>\The [src] burns away revealing \the [inside].</span>")
-				else
-					visible_message("<span class='info'>\The [src] burns away into nothing.</span>")
-				qdel(src)
-				W.remove_fuel(2)
+	if(I.is_welder())
+		if(I.doWeld(2))
+			var/obj/item/inside = locate() in src
+			if(inside)
+				inside.loc = get_turf(src)
+				visible_message("<span class='info'>\The [src] burns away revealing \the [inside].</span>")
 			else
-				visible_message("<span class='info'>A few sparks fly off \the [src], but nothing else happens.</span>")
-				W.remove_fuel(1)
+				visible_message("<span class='info'>\The [src] burns away into nothing.</span>")
+				qdel(src)
 			return
-
 	else if(istype(I, /obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/S = I
 		S.sample_item(src, user)

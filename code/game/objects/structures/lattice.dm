@@ -59,14 +59,12 @@
 		var/turf/T = get_turf(src)
 		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
-	if (istype(C, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = C
-		if(WT.welding == 1)
-			if(WT.remove_fuel(0, user))
-				user << "<span class='notice'>Slicing lattice joints ...</span>"
-			new /obj/item/stack/rods(src.loc)
-			qdel(src)
-		return
+	if (C.is_welder())
+		if(C.doWeld(0))
+			user << "<span class='notice'>Slicing lattice joints ...</span>"
+		new /obj/item/stack/rods(src.loc)
+		qdel(src)
+	return
 	if (istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
 		if(R.use(2))

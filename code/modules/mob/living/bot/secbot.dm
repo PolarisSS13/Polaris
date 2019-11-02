@@ -361,9 +361,8 @@
 
 /obj/item/weapon/secbot_assembly/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/weapon/weldingtool) && !build_step)
-		var/obj/item/weapon/weldingtool/WT = W
-		if(WT.remove_fuel(0, user))
+	if(W.is_welder() && !build_step)
+		if(W.doWeld(0))
 			build_step = 1
 			overlays += image('icons/obj/aibots.dmi', "hs_hole")
 			to_chat(user, "You weld a hole in \the [src].")

@@ -39,14 +39,11 @@ var/global/list/datum/stack_recipe/rods_recipes = list( \
 	new/datum/stack_recipe("catwalk", /obj/structure/catwalk, 2, time = 80, one_per_turf = 1, on_floor = 1))
 
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-
+	if (W.is_welder())
 		if(get_amount() < 2)
 			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
-
-		if(WT.remove_fuel(0,user))
+		if(W.doWeld(0))
 			var/obj/item/stack/material/steel/new_item = new(usr.loc)
 			new_item.add_to_stacks(usr)
 			for (var/mob/M in viewers(src))

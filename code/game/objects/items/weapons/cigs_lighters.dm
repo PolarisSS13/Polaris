@@ -239,7 +239,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			text = zippomes
 		else if(istype(W, /obj/item/weapon/flame/lighter))
 			text = lightermes
-		else if(istype(W, /obj/item/weapon/weldingtool))
+		else if(W.is_welder())
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes

@@ -87,14 +87,11 @@ obj/structure/windoor_assembly/Destroy()
 
 	switch(state)
 		if("01")
-			if(istype(W, /obj/item/weapon/weldingtool) && !anchored )
-				var/obj/item/weapon/weldingtool/WT = W
-				if (WT.remove_fuel(0,user))
+			if(W.is_welder() && !anchored )
+				if(W.doWeld(0))
 					user.visible_message("[user] disassembles the windoor assembly.", "You start to disassemble the windoor assembly.")
-					playsound(src.loc, WT.usesound, 50, 1)
-
-					if(do_after(user, 40 * WT.toolspeed))
-						if(!src || !WT.isOn()) return
+					if(do_after(user, 40 * W.toolspeed))
+						if(!src || !W.is_welder()) return
 						to_chat(user,"<span class='notice'>You disassembled the windoor assembly!</span>")
 						if(secure)
 							new /obj/item/stack/material/glass/reinforced(get_turf(src), 2)

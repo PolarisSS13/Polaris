@@ -179,24 +179,26 @@
 	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
 		interact(user)
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && (wires.CanDeconstruct() || (stat & BROKEN)))
-		if(weld(W, user))
-			if(assembly)
-				assembly.loc = src.loc
-				assembly.anchored = 1
-				assembly.camera_name = c_tag
-				assembly.camera_network = english_list(network, NETWORK_DEFAULT, ",", ",")
-				assembly.update_icon()
-				assembly.dir = src.dir
-				if(stat & BROKEN)
-					assembly.state = 2
-					user << "<span class='notice'>You repaired \the [src] frame.</span>"
-				else
-					assembly.state = 1
-					user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
-					new /obj/item/stack/cable_coil(src.loc, length=2)
-				assembly = null //so qdel doesn't eat it.
-			qdel(src)
+	else if(W.is_welder() && (wires.CanDeconstruct() || (stat & BROKEN)))
+		if(W.is_welder())
+			if(W.doWeld(0))
+				if(assembly)
+					assembly.loc = src.loc
+					assembly.anchored = 1
+					assembly.camera_name = c_tag
+					assembly.camera_network = english_list(network, NETWORK_DEFAULT, ",", ",")
+					assembly.update_icon()
+					assembly.dir = src.dir
+					if(stat & BROKEN)
+						assembly.state = 2
+						user << "<span class='notice'>You repaired \the [src] frame.</span>"
+					else
+						assembly.state = 1
+						user << "<span class='notice'>You cut \the [src] free from the wall.</span>"
+						new /obj/item/stack/cable_coil(src.loc, length=2)
+					assembly = null //so qdel doesn't eat it.
+				qdel(src)
+			return
 
 	// OTHER
 	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
@@ -383,25 +385,7 @@
 
 	return null
 
-/obj/machinery/camera/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
 
-	if(busy)
-		return 0
-	if(!WT.isOn())
-		return 0
-
-	// Do after stuff here
-	user << "<span class='notice'>You start to weld [src]..</span>"
-	playsound(src.loc, WT.usesound, 50, 1)
-	WT.eyecheck(user)
-	busy = 1
-	if(do_after(user, 100 * WT.toolspeed))
-		busy = 0
-		if(!WT.isOn())
-			return 0
-		return 1
-	busy = 0
-	return 0
 
 /obj/machinery/camera/interact(mob/living/user as mob)
 	if(!panel_open || istype(user, /mob/living/silicon/ai))

@@ -130,21 +130,19 @@
 
 		else if(istype(W, /obj/item/weapon/cell) && !cell && open)
 			insert_cell(W, user)
-		else if(istype(W, /obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.welding)
-				if(health < maxhealth)
-					if(open)
-						health = min(maxhealth, health+10)
-						user.setClickCooldown(user.get_attack_speed(W))
-						playsound(src, T.usesound, 50, 1)
-						user.visible_message("<font color='red'>[user] repairs [src]!</font>","<font color='blue'> You repair [src]!</font>")
-					else
-						to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
+		else if(W.is_welder())
+			if(health < maxhealth)
+				if(open)
+					health = min(maxhealth, health+10)
+					user.setClickCooldown(user.get_attack_speed(W))
+					playsound(src, W.usesound, 50, 1)
+					user.visible_message("<font color='red'>[user] repairs [src]!</font>","<font color='blue'> You repair [src]!</font>")
 				else
-					to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
+					to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 			else
-				to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
+				to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
+		else
+			to_chat(user, "<span class='notice'>Unable to repair.</span>")
 
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		user.setClickCooldown(user.get_attack_speed(W))

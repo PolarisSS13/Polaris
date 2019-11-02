@@ -610,27 +610,22 @@
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && ((stat & BROKEN)))
 		to_chat(user,"<span class='warning'>The [src] is too broken for that. Repair it first.</span>")
 		return
-	else if (istype(W, /obj/item/weapon/weldingtool) && opened && has_electronics==0 && !terminal)
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.get_fuel() < 3)
-			to_chat(user,"<span class='warning'>You need more welding fuel to complete this task.</span>")
-			return
-		user.visible_message("<span class='warning'>[user.name] begins cutting apart [src] with the [WT.name].</span>", \
+	else if (W.is_welder() && opened && has_electronics==0 && !terminal)
+		user.visible_message("<span class='warning'>[user.name] begins cutting apart [src] with the [W.name].</span>", \
 							"You start welding the APC frame...", \
 							"You hear welding.")
-		playsound(src, WT.usesound, 25, 1)
-		if(do_after(user, 50 * WT.toolspeed))
-			if(!src || !WT.remove_fuel(3, user)) return
+		if(do_after(user, 50 * W.toolspeed))
+			if(!src || !W.doWeld(3)) return
 			if (emagged || (stat & BROKEN) || opened==2)
 				new /obj/item/stack/material/steel(loc)
 				user.visible_message(\
-					"<span class='warning'>[src] has been cut apart by [user.name] with the [WT.name].</span>",\
+					"<span class='warning'>[src] has been cut apart by [user.name] with the [W.name].</span>",\
 					"<span class='notice'>You disassembled the broken APC frame.</span>",\
 					"You hear welding.")
 			else
 				new /obj/item/frame/apc(loc)
 				user.visible_message(\
-					"<span class='warning'>[src] has been cut from the wall by [user.name] with the [WT.name].</span>",\
+					"<span class='warning'>[src] has been cut from the wall by [user.name] with the [W.name].</span>",\
 					"<span class='notice'>You cut the APC frame from the wall.</span>",\
 					"You hear welding.")
 			qdel(src)

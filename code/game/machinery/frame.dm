@@ -290,22 +290,17 @@
 			if(do_after(user, 20 * P.toolspeed))
 				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 				anchored = FALSE
-
-	else if(istype(P, /obj/item/weapon/weldingtool))
+	else if(P.is_welder())
 		if(state == FRAME_PLACED)
-			var/obj/item/weapon/weldingtool/WT = P
-			if(WT.remove_fuel(0, user))
-				playsound(src.loc, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.toolspeed))
-					if(src && WT.isOn())
-						to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
-						new /obj/item/stack/material/steel(src.loc, frame_type.frame_size)
-						qdel(src)
-						return
-			else if(!WT.remove_fuel(0, user))
-				to_chat(user, "The welding tool must be on to complete this task.")
+			P.doWeld(0)
+			if(do_after(user, 20 * P.toolspeed))
+				if(src && P.is_welder())
+					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
+					new /obj/item/stack/material/steel(src.loc, frame_type.frame_size)
+					qdel(src)
+					return
+			else
 				return
-
 	else if(istype(P, /obj/item/weapon/circuitboard) && need_circuit && !circuit)
 		if(state == FRAME_PLACED && anchored)
 			var/obj/item/weapon/circuitboard/B = P

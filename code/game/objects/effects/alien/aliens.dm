@@ -249,12 +249,9 @@ Alien plants should do something if theres a lot of poison
 
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(WT.remove_fuel(0, user))
+	if(W.is_welder())
+		if(W.doWeld(0))
 			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
 
 	health -= damage
 	healthcheck()
@@ -448,12 +445,9 @@ Alien plants should do something if theres a lot of poison
 		src.visible_message("<span class='danger'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(WT.remove_fuel(0, user))
+	if(W.is_welder())
+		if(W.doWeld(0))
 			damage = 15
-			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 	src.health -= damage
 	src.healthcheck()

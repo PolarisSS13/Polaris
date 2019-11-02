@@ -99,7 +99,7 @@
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
 				return
-	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
+	else if(istype(W,/obj/item/weapon/packageWrap) || W.is_welder())
 		return ..(W,user)
 	else
 		togglelock(user)

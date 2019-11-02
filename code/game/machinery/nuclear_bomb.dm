@@ -94,18 +94,11 @@ var/bomb_set
 	if(anchored)
 		switch(removal_stage)
 			if(0)
-				if(istype(O,/obj/item/weapon/weldingtool))
-
-					var/obj/item/weapon/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
-						return
-
+				if(O.is_welder())
+					O.doWeld(5)
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
-
-					if(do_after(user,40 * WT.toolspeed))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+					if(do_after(user,40 * O.toolspeed))
+						if(!src || !user || !O.is_welder()) return
 						user.visible_message("[user] cuts through the bolt covers on [src].", "You cut through the bolt cover.")
 						removal_stage = 1
 				return
@@ -122,18 +115,11 @@ var/bomb_set
 				return
 
 			if(2)
-				if(istype(O,/obj/item/weapon/weldingtool))
-
-					var/obj/item/weapon/weldingtool/WT = O
-					if(!WT.isOn()) return
-					if(WT.get_fuel() < 5) // uses up 5 fuel.
-						to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
-						return
-
+				if(O.is_welder())
+					O.doWeld(0)
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
-					playsound(src, WT.usesound, 50, 1)
-					if(do_after(user,40 * WT.toolspeed))
-						if(!src || !user || !WT.remove_fuel(5, user)) return
+					if(do_after(user,40 * O.toolspeed))
+						if(!src || !user || !O.is_welder()) return
 						user.visible_message("[user] cuts apart the anchoring system sealant on [src].", "You cut apart the anchoring system's sealant.")
 						removal_stage = 3
 				return

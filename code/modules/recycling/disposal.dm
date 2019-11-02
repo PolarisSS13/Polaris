@@ -69,17 +69,15 @@
 				playsound(src, I.usesound, 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
-		else if(istype(I, /obj/item/weapon/weldingtool) && mode==-1)
+		else if(I.is_welder() && mode==-1)
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
 				return
-			var/obj/item/weapon/weldingtool/W = I
-			if(W.remove_fuel(0,user))
-				playsound(src, W.usesound, 100, 1)
+			if(I.doWeld(0))
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
 
-				if(do_after(user,20 * W.toolspeed))
-					if(!src || !W.isOn()) return
+				if(do_after(user,20 * I.toolspeed))
+					if(!src || !I.is_welder()) return
 					to_chat(user, "You sliced the floorweld off the disposal unit.")
 					var/obj/structure/disposalconstruct/C = new (src.loc)
 					src.transfer_fingerprints_to(C)
@@ -877,23 +875,18 @@
 		if(!T.is_plating())
 			return		// prevent interaction with T-scanner revealed pipes
 		src.add_fingerprint(user)
-		if(istype(I, /obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/W = I
-
-			if(W.remove_fuel(0,user))
-				playsound(src, W.usesound, 50, 1)
+		if(I.is_welder())
+			if(I.doWeld(0))
 				// check if anything changed over 2 seconds
 				var/turf/uloc = user.loc
-				var/atom/wloc = W.loc
+				var/atom/wloc = I.loc
 				to_chat(user, "Slicing the disposal pipe.")
 				sleep(30)
-				if(!W.isOn()) return
-				if(user.loc == uloc && wloc == W.loc)
+				if(!I.is_welder()) return
+				if(user.loc == uloc && wloc == I.loc)
 					welded()
 				else
 					to_chat(user, "You must stay still while welding the pipe.")
-			else
-				to_chat(user, "You need more welding fuel to cut the pipe.")
 				return
 
 	// called when pipe is cut with welder
@@ -1357,18 +1350,15 @@
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
-
-		if(W.remove_fuel(0,user))
-			playsound(src, W.usesound, 100, 1)
+	if(I.is_welder())
+		if(I.doWeld(0))
 			// check if anything changed over 2 seconds
 			var/turf/uloc = user.loc
-			var/atom/wloc = W.loc
+			var/atom/wloc = I.loc
 			to_chat(user, "Slicing the disposal pipe.")
 			sleep(30)
-			if(!W.isOn()) return
-			if(user.loc == uloc && wloc == W.loc)
+			if(!I.is_welder()) return
+			if(user.loc == uloc && wloc == I.loc)
 				welded()
 			else
 				to_chat(user, "You must stay still while welding the pipe.")
@@ -1486,13 +1476,11 @@
 				to_chat(user, "You attach the screws around the power connection.")
 				playsound(src, I.usesound, 50, 1)
 				return
-		else if(istype(I, /obj/item/weapon/weldingtool) && mode==1)
-			var/obj/item/weapon/weldingtool/W = I
-			if(W.remove_fuel(0,user))
-				playsound(src, W.usesound, 100, 1)
+		else if(I.is_welder() && mode==1)
+			if(I.doWeld(0))
 				to_chat(user, "You start slicing the floorweld off the disposal outlet.")
-				if(do_after(user,20 * W.toolspeed))
-					if(!src || !W.isOn()) return
+				if(do_after(user,20 * I.toolspeed))
+					if(!src || !I.is_welder()) return
 					to_chat(user, "You sliced the floorweld off the disposal outlet.")
 					var/obj/structure/disposalconstruct/C = new (src.loc)
 					src.transfer_fingerprints_to(C)

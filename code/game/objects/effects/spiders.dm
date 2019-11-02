@@ -30,10 +30,9 @@
 
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.is_welder())
 
-		if(WT.remove_fuel(0, user))
+		if(W.doWeld(0))
 			damage = 15
 			playsound(src, W.usesound, 100, 1)
 

@@ -204,14 +204,11 @@
 			return
 
 	// Repair
-	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/F = W
-		if(F.welding)
-			playsound(src.loc, F.usesound, 50, 1)
-			if(do_after(user, 20, src))
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth) // 20% repair per application
-				return
+	if(health < maxhealth && W.is_welder())
+		if(W.doWeld(0) && do_after(user, 20, src))
+			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
+			health = min(health+(maxhealth/5), maxhealth) // 20% repair per application
+		return
 
 	// Install
 	if(W.is_screwdriver())

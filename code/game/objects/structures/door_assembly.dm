@@ -170,29 +170,27 @@
 		rename_door(user)
 		return
 
-	if(istype(W, /obj/item/weapon/weldingtool) && ( (istext(glass)) || (glass == 1) || (!anchored) ))
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0, user))
-			playsound(src, WT.usesound, 50, 1)
+	if(W.is_welder() && ( (istext(glass)) || (glass == 1) || (!anchored) ))
+		if (W.doWeld(0))
 			if(istext(glass))
 				user.visible_message("[user] welds the [glass] plating off the airlock assembly.", "You start to weld the [glass] plating off the airlock assembly.")
-				if(do_after(user, 40 * WT.toolspeed))
-					if(!src || !WT.isOn()) return
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src || !W.is_welder()) return
 					to_chat(user, "<span class='notice'>You welded the [glass] plating off!</span>")
 					var/M = text2path("/obj/item/stack/material/[glass]")
 					new M(src.loc, 2)
 					glass = 0
 			else if(glass == 1)
 				user.visible_message("[user] welds the glass panel out of the airlock assembly.", "You start to weld the glass panel out of the airlock assembly.")
-				if(do_after(user, 40 * WT.toolspeed))
-					if(!src || !WT.isOn()) return
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src || !W.is_welder()) return
 					to_chat(user, "<span class='notice'>You welded the glass panel out!</span>")
 					new /obj/item/stack/material/glass/reinforced(src.loc)
 					glass = 0
 			else if(!anchored)
 				user.visible_message("[user] dissassembles the airlock assembly.", "You start to dissassemble the airlock assembly.")
-				if(do_after(user, 40 * WT.toolspeed))
-					if(!src || !WT.isOn()) return
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src || !W.is_welder()) return
 					to_chat(user, "<span class='notice'>You dissasembled the airlock assembly!</span>")
 					new /obj/item/stack/material/steel(src.loc, 4)
 					qdel (src)

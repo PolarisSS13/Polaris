@@ -191,16 +191,14 @@
 
 	if(istype(I))
 		// Fixing.
-		if(istype(I, /obj/item/weapon/weldingtool) && user.a_intent == I_HELP)
-			var/obj/item/weapon/weldingtool/WT = I
+		if(I.is_welder() && user.a_intent == I_HELP)
+			I.doWeld(0)
 			if(health < maxhealth)
-				if(WT.remove_fuel(1 ,user))
-					to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
-					playsound(src, WT.usesound, 50, 1)
-					if(do_after(user, 40 * WT.toolspeed, target = src))
-						health = maxhealth
-						update_icon()
-						to_chat(user, "<span class='notice'>You repair [src].</span>")
+				to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
+				if(do_after(user, 40 * I.toolspeed, target = src))
+					health = maxhealth
+					update_icon()
+					to_chat(user, "<span class='notice'>You repair [src].</span>")
 			else
 				to_chat(user, "<span class='warning'>[src] is already in good condition!</span>")
 			return

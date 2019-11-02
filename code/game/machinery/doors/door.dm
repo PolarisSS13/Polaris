@@ -241,21 +241,18 @@
 
 			return
 
-		if(repairing && istype(I, /obj/item/weapon/weldingtool))
-			if(!density)
-				to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
+			if(repairing && I.is_welder())
+				if(!density)
+					to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
+					return
+				if(I.doWeld(0))
+					to_chat(user, "<span class='notice'>You start to fix dents and weld \the [get_material_name()] into place.</span>")
+					if(do_after(user, (5 * repairing) * I.toolspeed))
+						to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
+						health = between(health, health + repairing*DOOR_REPAIR_AMOUNT, maxhealth)
+						update_icon()
+						repairing = 0
 				return
-
-			var/obj/item/weapon/weldingtool/welder = I
-			if(welder.remove_fuel(0,user))
-				to_chat(user, "<span class='notice'>You start to fix dents and weld \the [get_material_name()] into place.</span>")
-				playsound(src, welder.usesound, 50, 1)
-				if(do_after(user, (5 * repairing) * welder.toolspeed) && welder && welder.isOn())
-					to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-					health = between(health, health + repairing*DOOR_REPAIR_AMOUNT, maxhealth)
-					update_icon()
-					repairing = 0
-			return
 
 		if(repairing && I.is_crowbar())
 			var/obj/item/stack/material/repairing_sheet = get_material().place_sheet(loc)

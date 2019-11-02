@@ -991,17 +991,10 @@
 				build_step = 3
 				return
 
-			else if(istype(I, /obj/item/weapon/weldingtool))
-				var/obj/item/weapon/weldingtool/WT = I
-				if(!WT.isOn())
-					return
-				if(WT.get_fuel() < 5) //uses up 5 fuel.
-					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
-					return
-
-				playsound(loc, I.usesound, 50, 1)
+			else if(I.is_welder())
+				I.doWeld(5)
 				if(do_after(user, 20 * I.toolspeed))
-					if(!src || !WT.remove_fuel(5, user)) return
+					if(!src || !I.is_welder()) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
 					new /obj/item/stack/material/steel(loc, 2)

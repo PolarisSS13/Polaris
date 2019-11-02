@@ -8,13 +8,13 @@
 	w_class = ITEMSIZE_SMALL
 
 	var/list/allowed_modes = list(
-		off
-		screwdiver
-		wrench
-		crowbar
-		wirecutter
-		welder
-		multitool
+		"off",
+		"screwdiver",
+		"wrench",
+		"crowbar",
+		"wirecutter",
+		"welder",
+		"multitool"
 		)
 	var/mode
 

@@ -152,9 +152,8 @@
 /datum/surgery_step/robotics/repair_brute/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(istype(tool, /obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/welder = tool
-			if(!welder.isOn() || !welder.remove_fuel(1,user))
+		if(tool.is_welder())
+			if(!tool.doWeld(0))
 				return 0
 		return affected && affected.open == 3 && (affected.disfigured || affected.brute_dam > 0) && target_zone != O_MOUTH
 

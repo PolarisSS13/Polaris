@@ -141,17 +141,14 @@
 		dismantle(W, user)
 		return 1
 
-	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/F = W
-		if(F.welding)
-			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
-			playsound(src, F.usesound, 50, 1)
-			if(!do_after(user, 20 * F.toolspeed) || !F.remove_fuel(1, user))
-				return
-			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
-			                              "<span class='notice'>You repair some damage to \the [src].</span>")
-			health = max(health+(maxhealth/5), maxhealth) // 20% repair per application
-			return 1
+	if(health < maxhealth && W.is_welder())
+		to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
+		if(!do_after(user, 20 * W.toolspeed) || !W.doWeld(1))
+			return
+		user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
+		                              "<span class='notice'>You repair some damage to \the [src].</span>")
+		health = max(health+(maxhealth/5), maxhealth) // 20% repair per application
+		return 1
 
 	if(!material && can_plate && istype(W, /obj/item/stack/material))
 		material = common_material_add(W, user, "plat")

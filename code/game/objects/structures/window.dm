@@ -220,13 +220,11 @@
 	if(!istype(W)) return//I really wish I did not need this
 
 	// Fixing.
-	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent == I_HELP)
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.is_welder() && user.a_intent == I_HELP)
 		if(health < maxhealth)
-			if(WT.remove_fuel(1 ,user))
+			if(W.doWeld(1))
 				to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
-				playsound(src, WT.usesound, 50, 1)
-				if(do_after(user, 40 * WT.toolspeed, target = src))
+				if(do_after(user, 40 * W.toolspeed, target = src))
 					health = maxhealth
 			//		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 					update_icon()

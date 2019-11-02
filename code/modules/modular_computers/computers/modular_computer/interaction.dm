@@ -155,18 +155,12 @@
 		src.visible_message("\The [src] has been disassembled by [user].")
 		qdel(src)
 		return
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
-			return
-
+	if(W.is_welder())
 		if(!damage)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
-
 		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
+		if(W.doWeld(round(damage/75)) && do_after(usr, damage/10))
 			damage = 0
 			to_chat(user, "You repair \the [src].")
 		return

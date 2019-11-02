@@ -33,15 +33,8 @@
 		increment_construction_stage()
 		return
 
-	if(istype(thing, /obj/item/weapon/weldingtool) && construction_stage == 4)
-		var/obj/item/weapon/weldingtool/welder = thing
-
-		if(!welder.isOn())
-			to_chat(user, "<span class='warning'>Turn it on first!</span>")
-			return
-
-		if(!welder.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more fuel!</span>")
+	if(thing.is_welder() && construction_stage == 4)
+		if(!thing.doWeld(0))
 			return
 
 		user.visible_message("<span class='notice'>\The [user] welds the barrel of \the [src] into place.</span>")

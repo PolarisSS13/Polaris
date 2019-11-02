@@ -487,7 +487,7 @@
 		M.install(src, user)
 		return
 
-	if (istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
+	if (W.is_welder() && user.a_intent != I_HURT)
 		if (src == user)
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
@@ -495,9 +495,8 @@
 		if (!getBruteLoss())
 			to_chat(user, "Nothing to fix here!")
 			return
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0))
-			user.setClickCooldown(user.get_attack_speed(WT))
+		if (W.doWeld(0))
+			user.setClickCooldown(user.get_attack_speed(W))
 			adjustBruteLoss(-30)
 			updatehealth()
 			add_fingerprint(user)

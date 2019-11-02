@@ -185,27 +185,23 @@
 			buildstate++
 			update_icon()
 			return
-	else if(istype(W,/obj/item/weapon/weldingtool))
+	else if(W.is_welder())
 		if(buildstate == 1)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
-				playsound(src, W.usesound, 100, 1)
+			if(W.doWeld(0))
+				if(!src || !W.is_welder()) return
 				user << "<span class='notice'>You weld the pipe into place.</span>"
 				buildstate++
 				update_icon()
 		if(buildstate == 3)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
+			if(W.doWeld(0))
+				if(!src || !W.is_welder()) return
 				playsound(src, W.usesound, 100, 1)
 				user << "<span class='notice'>You weld the metal chassis together.</span>"
 				buildstate++
 				update_icon()
 		if(buildstate == 5)
-			var/obj/item/weapon/weldingtool/T = W
-			if(T.remove_fuel(0,user))
-				if(!src || !T.isOn()) return
+			if(W.doWeld(0))
+				if(!src || !W.is_welder()) return
 				playsound(src, W.usesound, 100, 1)
 				user << "<span class='notice'>You weld the valve into place.</span>"
 				new /obj/item/weapon/gun/launcher/pneumatic(get_turf(src))

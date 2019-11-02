@@ -184,11 +184,9 @@
 
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		if(istype(W, /obj/item/weapon/weldingtool) )
-			var/obj/item/weapon/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
-				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
-				playsound(src, WT.usesound, 10, 1)
+		if(W.is_welder())
+			if(W.doWeld(0))
+				to_chat(user, "<span class='notice'>You burn away the fungi with \the [W].</span>")
 				for(var/obj/effect/overlay/wallrot/WR in src)
 					qdel(WR)
 				return
@@ -199,9 +197,8 @@
 
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 	if(thermite)
-		if( istype(W, /obj/item/weapon/weldingtool) )
-			var/obj/item/weapon/weldingtool/WT = W
-			if( WT.remove_fuel(0,user) )
+		if(W.is_welder())
+			if(W.doWeld(0))
 				thermitemelt(user)
 				return
 
@@ -222,17 +219,10 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
-	if(damage && istype(W, /obj/item/weapon/weldingtool))
-
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(!WT.isOn())
-			return
-
-		if(WT.remove_fuel(0,user))
+	if(damage && W.is_welder())
+		if(W.doWeld(0))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
-			playsound(src.loc, WT.usesound, 100, 1)
-			if(do_after(user, max(5, damage / 5) * WT.toolspeed) && WT && WT.isOn())
+			if(do_after(user, max(5, damage / 5) * W.toolspeed) && W.is_welder())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
 		else
@@ -248,12 +238,8 @@
 		var/dismantle_verb
 		var/dismantle_sound
 
-		if(istype(W,/obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/WT = W
-			if(!WT.isOn())
-				return
-			if(!WT.remove_fuel(0,user))
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+		if(W.is_welder())
+			if(!W.doWeld(0))
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = W.usesound
@@ -316,15 +302,9 @@
 					return
 			if(4)
 				var/cut_cover
-				if(istype(W,/obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
-					if(!WT.isOn())
-						return
-					if(WT.remove_fuel(0,user))
+				if(W.is_welder())
+					if(W.doWeld(0))
 						cut_cover=1
-					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-						return
 				else if (istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
@@ -371,13 +351,9 @@
 					return
 			if(1)
 				var/cut_cover
-				if(istype(W, /obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
-					if( WT.remove_fuel(0,user) )
+				if(W.is_welder())
+					if(W.doWeld(0))
 						cut_cover=1
-					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-						return
 				else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 					cut_cover = 1
 				if(cut_cover)
@@ -408,5 +384,3 @@
 
 	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
 		return attack_hand(user)
-
-

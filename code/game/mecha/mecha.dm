@@ -854,9 +854,8 @@
 				user << "There's already a powercell installed."
 		return
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
-		var/obj/item/weapon/weldingtool/WT = W
-		if (WT.remove_fuel(0,user))
+	else if(W.is_welder() && user.a_intent != I_HURT)
+		if (W.doWeld(0))
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
 				clearInternalDamage(MECHA_INT_TANK_BREACH)
 				user << "<span class='notice'>You repair the damaged gas tank.</span>"
