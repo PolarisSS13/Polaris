@@ -16,9 +16,6 @@
 	usesound = 'sound/items/ratchet.ogg'
 	toolspeed = 1
 
-/obj/item/weapon/tool/wrench/is_wrench()
-	return TRUE
-
 /obj/item/weapon/tool/wrench/cyborg
 	name = "automatic wrench"
 	desc = "An advanced robotic wrench. Can be found in industrial synthetic shells."
@@ -42,12 +39,11 @@
 	reach = 2
 
 /obj/item/weapon/tool/wrench/hybrid/is_wrench()
+	..()
 	if(prob(10))
 		var/turf/T = get_turf(src)
 		SSradiation.radiate(get_turf(src), 5)
 		T.visible_message("<span class='alien'>\The [src] shudders!</span>")
-		return FALSE
-	return TRUE
 
 /datum/category_item/catalogue/anomalous/precursor_a/alien_wrench
 	name = "Precursor Alpha Object - Fastener Torque Tool"
@@ -74,37 +70,3 @@
 	toolspeed = 0.1
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 
-/obj/item/weapon/tool/wrench/power
-	name = "hand drill"
-	desc = "A simple powered hand drill. It's fitted with a bolt bit."
-	icon_state = "drill_bolt"
-	item_state = "drill"
-	usesound = 'sound/items/drill_use.ogg'
-	matter = list(DEFAULT_WALL_MATERIAL = 150, MAT_SILVER = 50)
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	force = 8
-	w_class = ITEMSIZE_SMALL
-	throwforce = 8
-	attack_verb = list("drilled", "screwed", "jabbed")
-	toolspeed = 0.25
-	var/obj/item/weapon/tool/screwdriver/power/counterpart = null
-
-/obj/item/weapon/tool/wrench/power/New(newloc, no_counterpart = TRUE)
-	..(newloc)
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
-		counterpart.counterpart = src
-
-/obj/item/weapon/tool/wrench/power/Destroy()
-	if(counterpart)
-		counterpart.counterpart = null // So it can qdel cleanly.
-		QDEL_NULL(counterpart)
-	return ..()
-
-/obj/item/weapon/tool/wrench/power/attack_self(mob/user)
-	playsound(get_turf(user),'sound/items/change_drill.ogg',50,1)
-	user.drop_item(src)
-	counterpart.forceMove(get_turf(src))
-	src.forceMove(counterpart)
-	user.put_in_active_hand(counterpart)
-	to_chat(user, "<span class='notice'>You attach the screw driver bit to [src].</span>")

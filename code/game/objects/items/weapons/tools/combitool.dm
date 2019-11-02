@@ -23,11 +23,3 @@
 	..()
 	to_chat(usr, "<span class = notice>Alt-click to change tool colour.</span>")
 
-/obj/item/weapon/combitool/is_screwdriver()
-	if(mode == "screwdriver")
-		return TRUE
-	else
-		return FALSE
-
-/obj/item/weapon/combitool/is_welder()
-	return FALSE

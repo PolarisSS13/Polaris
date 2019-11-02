@@ -19,6 +19,8 @@
 	sharp  = 1
 	toolspeed = 1
 	var/random_color = TRUE
+	tool_behaviour = TOOL_SCREWDRIVER
+
 
 /obj/item/weapon/tool/screwdriver/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
@@ -64,10 +66,6 @@
 		M = user
 	return eyestab(M,user)
 
-/obj/item/weapon/tool/screwdriver/is_screwdriver()
-	return TRUE
-
-
 /datum/category_item/catalogue/anomalous/precursor_a/alien_screwdriver
 	name = "Precursor Alpha Object - Hard Light Torgue Tool"
 	desc = "This appears to be a tool, with a solid handle, and a thin hard light \
@@ -106,12 +104,8 @@
 	reach = 2
 
 /obj/item/weapon/tool/screwdriver/hybrid/is_screwdriver()
+	..()
 	if(prob(10))
-		var/turf/T = get_turf(src)
-		SSradiation.radiate(get_turf(src), 5)
-		T.visible_message("<span class='alien'>\The [src] shudders!</span>")
-		return FALSE
-	return TRUE
 
 /obj/item/weapon/tool/screwdriver/cyborg
 	name = "powered screwdriver"
@@ -137,24 +131,18 @@
 	usesound = 'sound/items/drill_use.ogg'
 	toolspeed = 0.25
 	random_color = FALSE
-	var/obj/item/weapon/tool/wrench/power/counterpart = null
 
-/obj/item/weapon/tool/screwdriver/power/New(newloc, no_counterpart = TRUE)
-	..(newloc)
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
-		counterpart.counterpart = src
-
-/obj/item/weapon/tool/screwdriver/power/Destroy()
-	if(counterpart)
-		counterpart.counterpart = null // So it can qdel cleanly.
-		QDEL_NULL(counterpart)
-	return ..()
+/obj/item/weapon/tool/screwdriver/power/examine()
+	..()
+	to_chat(usr, "<span class = 'notice'>It has a [tool_behaviour == TOOL_SCREWDRIVER ? "screwdriver" : "bolt driver"] bit.</span")
 
 /obj/item/weapon/tool/screwdriver/power/attack_self(mob/user)
 	playsound(get_turf(user),'sound/items/change_drill.ogg',50,1)
-	user.drop_item(src)
-	counterpart.forceMove(get_turf(src))
-	src.forceMove(counterpart)
-	user.put_in_active_hand(counterpart)
-	to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")
+	if(tool_behaviour == TOOL_SCREWDRIVER
+		to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")
+		tool_behaviour = TOOL_WRENCH
+		icon_state = "drill_bolt"
+	else
+		to_chat(user, "<span class='notice'>You attach the screwdriver bit to [src].</span>")
+		tool_behaviour = TOOL_SCREWDRIVER
+		icon_state = "drill_screw"

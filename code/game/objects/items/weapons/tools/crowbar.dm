@@ -18,9 +18,7 @@
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 	usesound = 'sound/items/crowbar.ogg'
 	toolspeed = 1
-
-/obj/item/weapon/tool/crowbar/is_crowbar()
-	return TRUE
+	tool_behavior = TOOL_CROWBAR
 
 /obj/item/weapon/tool/crowbar/red
 	icon = 'icons/obj/tools.dmi'
@@ -62,12 +60,12 @@
 	reach = 2
 
 /obj/item/weapon/tool/crowbar/hybrid/is_crowbar()
+	..()
 	if(prob(10))
 		var/turf/T = get_turf(src)
 		SSradiation.radiate(get_turf(src), 5)
 		T.visible_message("<span class='alien'>\The [src] shudders!</span>")
-		return FALSE
-	return TRUE
+
 
 /obj/item/weapon/tool/crowbar/cyborg
 	name = "hydraulic crowbar"
@@ -86,24 +84,19 @@
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 15
 	toolspeed = 0.25
-	var/obj/item/weapon/tool/wirecutters/power/counterpart = null
+	tool_behaviour = TOOL_CROWBAR
 
-/obj/item/weapon/tool/crowbar/power/New(newloc, no_counterpart = TRUE)
-	..(newloc)
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
-		counterpart.counterpart = src
-
-/obj/item/weapon/tool/crowbar/power/Destroy()
-	if(counterpart)
-		counterpart.counterpart = null // So it can qdel cleanly.
-		QDEL_NULL(counterpart)
-	return ..()
+/obj/item/weapon/tool/crowbar/power/examine()
+	..()
+	to_chat(usr, "<span class = 'notice'>It has [tool_behaviour == TOOL_CROWBAR ? "prying" : "cutting"] jaws.</span")
 
 /obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
-	user.drop_item(src)
-	counterpart.forceMove(get_turf(src))
-	src.forceMove(counterpart)
-	user.put_in_active_hand(counterpart)
-	to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
+	if(tool_behaviour == TOOL_CROWBAR
+		to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
+		tool_behaviour = TOOL_WIRECUTTER
+		icon_state = "jaws_cutter"
+	else
+		to_chat(user, "<span class='notice'>You attach the prying jaws to [src].</span>")
+		tool_behaviour = TOOL_WIRECUTTER
+		icon_state = "jaws_pry"

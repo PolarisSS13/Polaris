@@ -87,9 +87,13 @@
 	var/attackspeed = DEFAULT_ATTACK_COOLDOWN // How long click delay will be when using this, in 1/10ths of a second. Checked in the user's get_attack_speed().
 	var/reach = 1 // Length of tiles it can reach, 1 is adjacent.
 	var/addblends // Icon overlay for ADD highlights when applicable.
+	var/tool_behavior //Tool behaviors for isTool procs.
 
 	var/icon/default_worn_icon	//Default on-mob icon
 	var/worn_layer				//Default on-mob layer
+
+
+
 
 /obj/item/New()
 	..()
@@ -833,25 +837,43 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
  *	Assorted tool procs, so any item can emulate any tool, if coded
 */
 /obj/item/proc/is_screwdriver()
-	return FALSE
+	if(src.tool_behaviour == TOOL_SCREWDRIVER)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/is_wrench()
-	return FALSE
+	if(src.tool_behaviour == TOOL_WRENCH)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/is_crowbar()
-	return FALSE
+	if(src.tool_behaviour == TOOL_CROWBAR)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/is_wirecutter()
-	return FALSE
+	if(src.tool_behaviour == TOOL_WIRECUTTER)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/is_cable_coil()
 	return FALSE
 
 /obj/item/proc/is_multitool()
-	return FALSE
+	if(src.tool_behaviour == TOOL_MULTITOOL)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/is_welder()
-	return FALSE
+	if(src.tool_behaviour == TOOL_WELDER)
+		return TRUE
+	else
+		return FALSE
 
 /obj/item/proc/doWeld(var/ufuel, mob/user)
 	if(!ufuel)
@@ -861,6 +883,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			var/obj/item/weapon/weldingtool/WT = src
 			if(WT.remove_fuel(ufuel, user))
 				WT.eyecheck(user)
+			else if(!WT.isOn())
+				to_chat(user, "<span class ='notice'>You need to turn on the welding tool!</span>")
+				return FALSE
 			else
 				to_chat(user, "<span class ='notice'>You need more fuel to complete the task.</span>")
 				return FALSE

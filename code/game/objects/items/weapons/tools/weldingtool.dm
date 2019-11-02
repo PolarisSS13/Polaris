@@ -37,6 +37,7 @@
 	var/burned_fuel_for = 0 // Keeps track of how long the welder's been on, used to gradually empty the welder if left one, without RNG.
 	var/always_process = FALSE // If true, keeps the welder on the process list even if it's off.  Used for when it needs to regenerate fuel.
 	toolspeed = 1
+	tool_behavior = TOOL_WELDER
 
 /obj/item/weapon/weldingtool/Initialize()
 	. = ..()
@@ -338,9 +339,6 @@
 	return
 
 /obj/item/weapon/weldingtool/is_hot()
-	return isOn()
-
-/obj/item/weapon/weldingtool/is_welder()
 	return isOn()
 
 /obj/item/weapon/weldingtool/largetank
