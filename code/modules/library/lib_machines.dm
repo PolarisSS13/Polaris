@@ -139,13 +139,18 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	..()
 	if(!all_books || !all_books.len)
 		all_books = list()
-		for(var/path in subtypesof(/obj/item/weapon/book/custom_library))
-			var/obj/item/weapon/book/B = new path(null)
-			all_books[B.title] = B
 
 		for(var/path in subtypesof(/obj/item/weapon/book/codex/lore))
 			var/obj/item/weapon/book/C = new path(null)
 			all_books[C.name] = C
+
+		for(var/path in subtypesof(/obj/item/weapon/book/custom_library))
+			var/obj/item/weapon/book/B = new path(null)
+			all_books[B.title] = B
+
+		for(var/path in subtypesof(/obj/item/weapon/book/bundle/custom_library))
+			var/obj/item/weapon/book/M = new path(null)
+			all_books[M.title] = M
 
 /obj/machinery/librarycomp/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)

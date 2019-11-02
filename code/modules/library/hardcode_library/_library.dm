@@ -13,3 +13,19 @@
 	// This is the ckey of the book's author.
 	var/origkey = null
 	author = "UNKNOWN"
+
+/obj/item/weapon/book/bundle/custom_library
+	name = "Book"
+	desc = "A hardbound book."
+	description_info = "This book is printed from the custom repo. If you can see this, something went wrong."
+
+	icon = 'icons/obj/custom_books.dmi'
+	icon_state = "book"
+
+	// This is the ckey of the book's author.
+	var/origkey = null
+	author = "UNKNOWN"
+
+	page = 1 //current page
+	pages = list() //the contents of each page
+
