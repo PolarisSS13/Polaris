@@ -25,10 +25,10 @@
 
 /obj/item/weapon/book/custom_library/religious
 	libcategory = "Religious"
-
+/*
 /obj/item/weapon/book/custom_library/adult
 	libcategory = "Adult"
-
+*/
 /obj/item/weapon/book/bundle/custom_library
 	name = "Book"
 	desc = "A hardbound book."
@@ -55,6 +55,7 @@
 
 /obj/item/weapon/book/bundle/custom_library/religious
 	libcategory = "Religious"
-
+/*
 /obj/item/weapon/book/bundle/custom_library/adult
 	libcategory = "Adult"
+*/

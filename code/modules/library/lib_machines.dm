@@ -146,12 +146,10 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			/obj/item/weapon/book/custom_library/nonfiction,
 			/obj/item/weapon/book/custom_library/reference,
 			/obj/item/weapon/book/custom_library/religious,
-			/obj/item/weapon/book/custom_library/adult,
 			/obj/item/weapon/book/bundle/custom_library/fiction,
 			/obj/item/weapon/book/bundle/custom_library/nonfiction,
 			/obj/item/weapon/book/bundle/custom_library/reference,
-			/obj/item/weapon/book/bundle/custom_library/religious,
-			/obj/item/weapon/book/bundle/custom_library/adult
+			/obj/item/weapon/book/bundle/custom_library/religious
 			)
 
 	if(!all_books || !all_books.len)
