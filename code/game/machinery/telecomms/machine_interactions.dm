@@ -17,7 +17,7 @@
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
 	// Using a multitool lets you access the receiver's interface
-	if(istype(P, /obj/item/device/multitool))
+	if(P.is_multitool())
 		attack_hand(user)
 
 	// REPAIRING: Use Nanopaste to repair 10-20 integrity points.

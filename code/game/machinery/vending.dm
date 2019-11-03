@@ -185,7 +185,7 @@
 
 		SSnanoui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool) || W.is_wirecutter())
+	else if(W.is_multitool() || W.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return

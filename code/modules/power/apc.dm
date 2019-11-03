@@ -646,7 +646,7 @@
 				if (opened==2)
 					opened = 1
 				update_icon()
-		else if (istype(W, /obj/item/device/multitool) && (hacker || emagged))
+		else if (W.is_multitool() && (hacker || emagged))
 			if(cell)
 				to_chat(user, "<span class='warning'>You need to remove the power cell first.</span>")
 				return
@@ -674,7 +674,7 @@
 		else
 			if (istype(user, /mob/living/silicon))
 				return src.attack_hand(user)
-			if (!opened && wiresexposed && (istype(W, /obj/item/device/multitool) || W.is_wirecutter() || istype(W, /obj/item/device/assembly/signaler)))
+			if (!opened && wiresexposed && W.is_multitool() || W.is_wirecutter() || istype(W, /obj/item/device/assembly/signaler)))
 				return src.attack_hand(user)
 			//Placeholder until someone can do take_damage() for APCs or something.
 			to_chat(user,"<span class='notice'>The [src.name] looks too sturdy to bash open with \the [W.name].</span>")

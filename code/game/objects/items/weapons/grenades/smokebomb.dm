@@ -32,7 +32,7 @@
 	return
 
 /obj/item/weapon/grenade/smokebomb/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I,/obj/item/device/multitool))
+	if(I.is_multitool())
 		var/new_smoke_color = input(user, "Choose a color for the smoke:", "Smoke Color", smoke_color) as color|null
 		if(new_smoke_color)
 			smoke_color = new_smoke_color

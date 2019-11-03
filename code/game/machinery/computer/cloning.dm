@@ -70,7 +70,7 @@
 			to_chat(user, "You insert [W].")
 			updateUsrDialog()
 			return
-	else if(istype(W, /obj/item/device/multitool))
+	else if(W.is_multitool())
 		var/obj/item/device/multitool/M = W
 		var/obj/machinery/clonepod/P = M.connecting
 		if(P && !(P in pods))

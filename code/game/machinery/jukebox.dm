@@ -76,9 +76,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 	if(default_deconstruction_crowbar(user, W))
 		return
-	if(W.is_wirecutter())
-		return wires.Interact(user)
-	if(istype(W, /obj/item/device/multitool))
+	if(W.is_wirecutter() || W.is_multitool())
 		return wires.Interact(user)
 	if(W.is_wrench())
 		if(playing)

@@ -70,7 +70,7 @@
 			user << "<span class='notice'>You [locked ? "" : "un"]lock the circuit controls.</span>"
 		else
 			user << "<span class='warning'>Access denied.</span>"
-	else if(istype(I,/obj/item/device/multitool))
+	else if(I.is_multitool())
 		if(locked)
 			user << "<span class='warning'>Circuit controls are locked.</span>"
 			return

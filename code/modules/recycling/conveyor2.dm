@@ -108,7 +108,7 @@
 	if(default_deconstruction_crowbar(user, I))
 		return
 
-	if(istype(I, /obj/item/device/multitool))
+	if(I.is_multitool())
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor?", "Multitool-Conveyor interface", id))
 			if(!input)
@@ -270,7 +270,7 @@
 				qdel(src)
 				return
 
-	if(istype(I, /obj/item/device/multitool))
+	if(I.is_multitool())
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor switch?", "Multitool-Conveyor interface", id))
 			if(!input)

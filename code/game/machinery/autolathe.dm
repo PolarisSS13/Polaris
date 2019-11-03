@@ -135,7 +135,7 @@
 
 	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
-		if(istype(O, /obj/item/device/multitool) || O.is_wirecutter())
+		if(O.is_multitool() || O.is_wirecutter())
 			attack_hand(user)
 			return
 

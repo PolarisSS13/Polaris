@@ -1087,7 +1087,7 @@ var/global/list/common_tools = list(
 
 
 /proc/is_wire_tool(obj/item/I)
-	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())
+	if(I.is_multitool() || I.is_wirecutter())
 		return TRUE
 	if(istype(I, /obj/item/device/assembly/signaler))
 		return TRUE

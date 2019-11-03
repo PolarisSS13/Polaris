@@ -78,7 +78,7 @@ var/bomb_set
 			flick("nuclearbombc", src)
 
 		return
-	if(O.is_wirecutter() || istype(O, /obj/item/device/multitool))
+	if(O.is_wirecutter() || O.is_multitool())
 		if(opened == 1)
 			nukehack_win(user)
 		return

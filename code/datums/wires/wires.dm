@@ -125,7 +125,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 					L << "<span class='error'>You need wirecutters!</span>"
 
 			else if(href_list["pulse"])
-				if(istype(I, /obj/item/device/multitool))
+				if(I.is_multitool())
 					var/colour = href_list["pulse"]
 					PulseColour(colour)
 					playsound(holder, 'sound/weapons/empty.ogg', 20, 1)

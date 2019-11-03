@@ -595,7 +595,7 @@
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
-	else if (W.is_wirecutter() || istype(W, /obj/item/device/multitool))
+	else if (W.is_wirecutter() || W.is_multitool())
 		if (wiresexposed)
 			wires.Interact(user)
 		else

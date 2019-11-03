@@ -269,7 +269,7 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
-	else if(istype(W, /obj/item/device/multitool))
+	else if(W.is_multitool())
 		var/obj/item/device/multitool/M = W
 		M.connecting = src
 		to_chat(user, "<span class='notice'>You load connection data from [src] to [M].</span>")
