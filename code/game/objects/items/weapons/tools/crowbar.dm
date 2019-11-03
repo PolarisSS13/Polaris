@@ -92,7 +92,7 @@
 
 /obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
-	if(tool_behaviour == TOOL_CROWBAR
+	if(tool_behaviour == TOOL_CROWBAR)
 		to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
 		tool_behaviour = TOOL_WIRECUTTER
 		icon_state = "jaws_cutter"

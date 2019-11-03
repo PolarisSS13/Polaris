@@ -103,10 +103,6 @@
 	random_color = FALSE
 	reach = 2
 
-/obj/item/weapon/tool/screwdriver/hybrid/is_screwdriver()
-	..()
-	if(prob(10))
-
 /obj/item/weapon/tool/screwdriver/cyborg
 	name = "powered screwdriver"
 	desc = "An electrical screwdriver, designed to be both precise and quick."
@@ -138,7 +134,7 @@
 
 /obj/item/weapon/tool/screwdriver/power/attack_self(mob/user)
 	playsound(get_turf(user),'sound/items/change_drill.ogg',50,1)
-	if(tool_behaviour == TOOL_SCREWDRIVER
+	if(tool_behaviour == TOOL_SCREWDRIVER)
 		to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")
 		tool_behaviour = TOOL_WRENCH
 		icon_state = "drill_bolt"
