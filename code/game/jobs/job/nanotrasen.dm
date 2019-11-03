@@ -38,7 +38,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	flag = CEO
-	alt_titles = list("NanoTrasen Regional Director")
+	alt_titles = list("NanoTrasen Regional Director", "NanoTrasen CEO", "NanoTrasen COO")
 	wage = 10000
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/captain
 	idtype = /obj/item/weapon/card/id/nanotrasen/ceo
