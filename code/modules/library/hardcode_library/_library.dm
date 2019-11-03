@@ -14,6 +14,21 @@
 	var/origkey = null
 	author = "UNKNOWN"
 
+/obj/item/weapon/book/custom_library/fiction
+	libcategory = "Fiction"
+
+/obj/item/weapon/book/custom_library/nonfiction
+	libcategory = "Non-Fiction"
+
+/obj/item/weapon/book/custom_library/reference
+	libcategory = "Reference"
+
+/obj/item/weapon/book/custom_library/religious
+	libcategory = "Religious"
+
+/obj/item/weapon/book/custom_library/adult
+	libcategory = "Adult"
+
 /obj/item/weapon/book/bundle/custom_library
 	name = "Book"
 	desc = "A hardbound book."
@@ -29,3 +44,17 @@
 	page = 1 //current page
 	pages = list() //the contents of each page
 
+/obj/item/weapon/book/bundle/custom_library/fiction
+	libcategory = "Fiction"
+
+/obj/item/weapon/book/bundle/custom_library/nonfiction
+	libcategory = "Non-Fiction"
+
+/obj/item/weapon/book/bundle/custom_library/reference
+	libcategory = "Reference"
+
+/obj/item/weapon/book/bundle/custom_library/religious
+	libcategory = "Religious"
+
+/obj/item/weapon/book/bundle/custom_library/adult
+	libcategory = "Adult"

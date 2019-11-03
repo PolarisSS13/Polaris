@@ -135,8 +135,25 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 
 	var/static/list/all_books
 
+	var/static/list/base_genre_books
+
 /obj/machinery/librarycomp/Initialize()
 	..()
+
+	if(!base_genre_books || !base_genre_books.len)
+		base_genre_books = list(
+			/obj/item/weapon/book/custom_library/fiction,
+			/obj/item/weapon/book/custom_library/nonfiction,
+			/obj/item/weapon/book/custom_library/reference,
+			/obj/item/weapon/book/custom_library/religious,
+			/obj/item/weapon/book/custom_library/adult,
+			/obj/item/weapon/book/bundle/custom_library/fiction,
+			/obj/item/weapon/book/bundle/custom_library/nonfiction,
+			/obj/item/weapon/book/bundle/custom_library/reference,
+			/obj/item/weapon/book/bundle/custom_library/religious,
+			/obj/item/weapon/book/bundle/custom_library/adult
+			)
+
 	if(!all_books || !all_books.len)
 		all_books = list()
 
@@ -144,11 +161,11 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			var/obj/item/weapon/book/C = new path(null)
 			all_books[C.name] = C
 
-		for(var/path in subtypesof(/obj/item/weapon/book/custom_library))
+		for(var/path in subtypesof(/obj/item/weapon/book/custom_library) - base_genre_books)
 			var/obj/item/weapon/book/B = new path(null)
 			all_books[B.title] = B
 
-		for(var/path in subtypesof(/obj/item/weapon/book/bundle/custom_library))
+		for(var/path in subtypesof(/obj/item/weapon/book/bundle/custom_library) - base_genre_books)
 			var/obj/item/weapon/book/M = new path(null)
 			all_books[M.title] = M
 
