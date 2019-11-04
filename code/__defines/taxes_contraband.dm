@@ -20,3 +20,12 @@
 #define CONTRABAND_STIMM "stimm"
 #define CONTRABAND_CYANIDE "cyanide"
 #define CONTRABAND_CHLORAL "chloral hydrate"
+
+#define CONTRABAND_GUN "gun"
+
+
+#define ILLEGAL "illegal"
+#define PROFESSIONAL_ONLY "professional use only"
+#define PERMIT_SELLING "permit required for selling"
+#define PERMIT_POSSESSION "permit required for creation, possession and selling"
+#define LEGAL "legal"

@@ -68,6 +68,10 @@
 		<br> \
 		Choose your taxes wisely, as this will have a huge effect on earnings for each group of people."
 
+	else if(index == 3) // Item Tax Page
+		page_msg = "There are a few present items in the colony you can restrict access to legally. See the options below."
+
+
 	if(index == -1)
 		page_msg = "This isn't a thing yet, sorry."
 

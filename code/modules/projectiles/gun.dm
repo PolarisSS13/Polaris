@@ -96,6 +96,9 @@
 	get_tax()
 		return WEAPONS_TAX
 
+/obj/item/weapon/gun/is_contraband()
+	return CONTRABAND_GUN
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
