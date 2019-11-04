@@ -28,11 +28,13 @@
 	name = "police fine manager"
 	expense_type = /datum/expense/police
 	expense_limit = 10000
+	req_access = list(access_sec_doors)
 
 /obj/machinery/expense_manager/hospital
 	name = "hospital bill manager"
 	expense_type = /datum/expense/hospital
 	expense_limit = 100000
+	req_access = list(access_medical)
 
 /obj/machinery/expense_manager/court
 	name = "court injunction manager"
