@@ -1,4 +1,5 @@
 //Combitools
+//assume device cell for uses, weapon  cells provide 4x the uses
 #define POWER_USE_SCREWDRIVER 20 //24 uses
 #define POWER_USE_CROWBAR 40 //12 uses
 #define POWER_USE_WIRECUTTER 20 //24 uses
@@ -35,14 +36,44 @@
 	var/static/radial_welder = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_welder")
 	var/static/radial_multitool = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_multitool")
 
+/obj/item/weapon/holotool/update_icon()
+	. = ..()
+	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_[tool_behavior]")
+	blade_overlay.color = lcolor
+	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
+	if(tool_behavior)
+		add_overlay(blade_overlay)
+	if(istype(usr,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+	return
 
-
-/obj/item/weapon/holotool/proc/enervate
+/obj/item/weapon/holotool/proc/enervate()
 	poweruse = 0
+	tool_behavior = null
 	update_icon()
 
 /obj/item/weapon/holotool/proc/empower(var/chosen, mob/user)
-	poweruse = POWER_USE_[chosen]
+	switch(chosen)
+		if("screwdriver")
+			poweruse = POWER_USE_SCREWDRIVER
+			tool_behavior = TOOL_SCREWDRIVER
+		if("crowbar")
+			poweruse = POWER_USE_CROWBAR
+			tool_behavior = TOOL_CROWBAR
+		if("wirecutter")
+			poweruse = POWER_USE_WIRECUTTER
+			tool_behavior = TOOL_WIRECUTTER
+		if("wrench")
+			poweruse = POWER_USE_WRENCH
+			tool_behavior = TOOL_WRENCH
+		if("welder")
+			poweruse = POWER_USE_WELDER
+			tool_behavior = TOOL_WELDER
+		if("multitool")
+			poweruse = POWER_USE_MULTITOOL
+			tool_behavior = TOOL_MULTITOOL
 	update_icon()
 
 /obj/item/weapon/holotool/examine(mob/user)
@@ -50,9 +81,9 @@
 	to_chat(user, "<span class = notice>Alt-click to change tool colour.</span>")
 	if(use_cell)
 		if(power_supply)
-			to_chat(user, "<span class='notice'>The blade is [round(power_supply.percent())]% charged.</span>")
+			to_chat(user, "<span class='notice'>The tool is [round(power_supply.percent())]% charged.</span>")
 		if(!power_supply)
-			to_chat(user, "<span class='warning'>The blade does not have a power source installed.</span>")
+			to_chat(user, "<span class='warning'>The tool does not have a power source installed.</span>")
 
 /obj/item/weapon/holotool/AltClick(mob/living/user)
 	if(!in_range(src, user))	//Basic checks to prevent abuse
@@ -67,17 +98,6 @@
 			lcolor = sanitize_hexcolor(energy_color_input)
 		update_icon()
 
-/obj/item/weapon/holotool/update_icon()
-	. = ..()
-	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_[tool_behavior]")
-	blade_overlay.color = lcolor
-	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
-	if(tool_behavior)
-		add_overlay(blade_overlay)
-	if(istype(usr,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = usr
-		H.update_inv_l_hand()
-		H.update_inv_r_hand()
 
 
 /obj/item/weapon/holotool/attack_self(mob/user)
@@ -112,4 +132,38 @@
 			empower(choice, user)
 		add_fingerprint(user)
 
+/obj/item/weapon/holotool/attackby(obj/item/weapon/W, mob/user)
+	if(use_cell)
+		if(istype(W, cell_type))
+			if(!power_supply)
+				user.drop_item()
+				W.loc = src
+				power_supply = W
+				to_chat(user, "<span class='notice'>You install a cell in [src].</span>")
+				update_icon()
+			else
+				to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+		else if(W.is_screwdriver() && power_supply)
+			power_supply.update_icon()
+			power_supply.forceMove(get_turf(loc))
+			power_supply = null
+			to_chat(user, "<span class='notice'>You remove the cell from \the [src].</span>")
+			enervate()
+			update_icon()
+			return
 
+/obj/item/weapon/holotool/proc/use_charge(var/cost)
+	if(tool_behavior)
+		if(power_supply)
+			if(power_supply.checked_use(cost))
+				return 1
+			else
+				return 0
+	return null
+
+#undef POWER_USE_SCREWDRIVER
+#undef POWER_USE_CROWBAR
+#undef POWER_USE_WIRECUTTER
+#undef POWER_USE_WRENCH
+#undef POWER_USE_WELDER
+#undef POWER_USE_MULTITOOL

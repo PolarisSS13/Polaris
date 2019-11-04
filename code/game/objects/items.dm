@@ -837,25 +837,25 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
  *	Assorted tool procs, so any item can emulate any tool, if coded
 */
 /obj/item/proc/is_screwdriver()
-	if(src.tool_behaviour == TOOL_SCREWDRIVER)
+	if(src.tool_behavior == TOOL_SCREWDRIVER)
 		return TRUE
 	else
 		return FALSE
 
 /obj/item/proc/is_wrench()
-	if(src.tool_behaviour == TOOL_WRENCH)
+	if(src.tool_behavior == TOOL_WRENCH)
 		return TRUE
 	else
 		return FALSE
 
 /obj/item/proc/is_crowbar()
-	if(src.tool_behaviour == TOOL_CROWBAR)
+	if(src.tool_behavior == TOOL_CROWBAR)
 		return TRUE
 	else
 		return FALSE
 
 /obj/item/proc/is_wirecutter()
-	if(src.tool_behaviour == TOOL_WIRECUTTER)
+	if(src.tool_behavior == TOOL_WIRECUTTER)
 		return TRUE
 	else
 		return FALSE
@@ -864,13 +864,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return FALSE
 
 /obj/item/proc/is_multitool()
-	if(src.tool_behaviour == TOOL_MULTITOOL)
+	if(src.tool_behavior == TOOL_MULTITOOL)
 		return TRUE
 	else
 		return FALSE
 
 /obj/item/proc/is_welder()
-	if(src.tool_behaviour == TOOL_WELDER)
+	if(src.tool_behavior == TOOL_WELDER)
 		return TRUE
 	else
 		return FALSE

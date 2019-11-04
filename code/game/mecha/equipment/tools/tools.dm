@@ -391,7 +391,7 @@
 	required_type = list(/obj/mecha/working/ripley)
 
 	var/obj/item/my_tool = null
-	var/tooltype = /obj/item/weapon/tool/wrench/power
+	var/tooltype = /obj/item/weapon/tool/wrench
 
 /obj/item/mecha_parts/mecha_equipment/tool/powertool/Initialize()
 	my_tool = new tooltype(src)

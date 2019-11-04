@@ -84,19 +84,19 @@
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 15
 	toolspeed = 0.25
-	tool_behaviour = TOOL_CROWBAR
+	tool_behavior = TOOL_CROWBAR
 
 /obj/item/weapon/tool/crowbar/power/examine()
 	..()
-	to_chat(usr, "<span class='notice'>It has [tool_behaviour == TOOL_CROWBAR ? "prying" : "cutting"] jaws.</span")
+	to_chat(usr, "<span class='notice'>It has [tool_behavior == TOOL_CROWBAR ? "prying" : "cutting"] jaws.</span")
 
 /obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
-	if(tool_behaviour == TOOL_CROWBAR)
+	if(tool_behavior == TOOL_CROWBAR)
 		to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
-		tool_behaviour = TOOL_WIRECUTTER
+		tool_behavior = TOOL_WIRECUTTER
 		icon_state = "jaws_cutter"
 	else
 		to_chat(user, "<span class='notice'>You attach the prying jaws to [src].</span>")
-		tool_behaviour = TOOL_WIRECUTTER
+		tool_behavior = TOOL_WIRECUTTER
 		icon_state = "jaws_pry"

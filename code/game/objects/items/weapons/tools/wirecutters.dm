@@ -20,7 +20,7 @@
 	edge = 1
 	toolspeed = 1
 	var/random_color = TRUE
-	tool_behaviour = TOOL_WIRECUTTER
+	tool_behavior = TOOL_WIRECUTTER
 
 /obj/item/weapon/tool/wirecutters/New()
 	if(random_color && prob(50))

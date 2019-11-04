@@ -19,7 +19,7 @@
 	sharp  = 1
 	toolspeed = 1
 	var/random_color = TRUE
-	tool_behaviour = TOOL_SCREWDRIVER
+	tool_behavior = TOOL_SCREWDRIVER
 
 
 /obj/item/weapon/tool/screwdriver/suicide_act(mob/user)
@@ -130,15 +130,15 @@
 
 /obj/item/weapon/tool/screwdriver/power/examine()
 	..()
-	to_chat(usr, "<span class='notice'>It has a [tool_behaviour == TOOL_SCREWDRIVER ? "screwdriver" : "bolt driver"] bit.</span")
+	to_chat(usr, "<span class='notice'>It has a [tool_behavior == TOOL_SCREWDRIVER ? "screwdriver" : "bolt driver"] bit.</span")
 
 /obj/item/weapon/tool/screwdriver/power/attack_self(mob/user)
 	playsound(get_turf(user),'sound/items/change_drill.ogg',50,1)
-	if(tool_behaviour == TOOL_SCREWDRIVER)
+	if(tool_behavior == TOOL_SCREWDRIVER)
 		to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")
-		tool_behaviour = TOOL_WRENCH
+		tool_behavior = TOOL_WRENCH
 		icon_state = "drill_bolt"
 	else
 		to_chat(user, "<span class='notice'>You attach the screwdriver bit to [src].</span>")
-		tool_behaviour = TOOL_SCREWDRIVER
+		tool_behavior = TOOL_SCREWDRIVER
 		icon_state = "drill_screw"
