@@ -281,6 +281,16 @@
 	..()
 	reagents.add_reagent("iron", 15)
 
+
+/obj/item/weapon/reagent_containers/pill/rezadone
+	name = "rezadone pill"
+	desc = "Used to treat genetic damage. Contains 5 units of Rezadone."
+	icon_state = "pill5"
+
+/obj/item/weapon/reagent_containers/pill/rezadone/New()
+	..()
+	reagents.add_reagent("rezadone", 5)
+
 //Not-quite-medicine
 /obj/item/weapon/reagent_containers/pill/ecstasy
 	name = "Ectasy pill"
