@@ -1,6 +1,6 @@
 /obj/machinery/expense_manager
 	name = "expense manager"
-	desc = "Swipe your ID card to manage expenses for a bank account."
+	desc = "Swipe your ID card to manage expenses for a bank account. Put in the client's ID, not your own."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "expense"
 	flags = NOBLUDGEON
