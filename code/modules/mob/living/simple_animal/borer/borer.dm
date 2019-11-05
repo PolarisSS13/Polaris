@@ -66,14 +66,14 @@
 					if(controlling)
 						host << "<font color='blue'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</font>"
 					else
-						src << "<font color='blue'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</font>"
+						to_chat(src, "<font color='blue'>You feel the soporific flow of sugar in your host's blood, lulling you into docility.</font>")
 					docile = 1
 			else
 				if(docile)
 					if(controlling)
 						host << "<font color='blue'>You shake off your lethargy as the sugar leaves your host's blood.</font>"
 					else
-						src << "<font color='blue'>You shake off your lethargy as the sugar leaves your host's blood.</font>"
+						to_chat(src, "<font color='blue'>You shake off your lethargy as the sugar leaves your host's blood.</font>")
 					docile = 0
 
 			if(chemicals < 250)
@@ -204,10 +204,10 @@
 		src.mind.assigned_role = "Cortical Borer"
 		src.mind.special_role = "Cortical Borer"
 
-	src << "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	to_chat(src, "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
-	your host and your eventual spawn safe and warm."
-	src << "You can speak to your victim with <b>say</b>, to other borers with <b>say :x</b>, and use your Abilities tab to access powers."
+	your host and your eventual spawn safe and warm.")
+	to_chat(src, "You can speak to your victim with <b>say</b>, to other borers with <b>say :x</b>, and use your Abilities tab to access powers.")
 
 /mob/living/simple_mob/animal/borer/cannot_use_vents()
 	return
