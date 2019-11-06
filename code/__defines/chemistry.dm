@@ -11,6 +11,10 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
+#define POWDER 4
+
+#define METAL 1
+#define NONMETAL 2
 
 #define REAGENTS_OVERDOSE 30
 
