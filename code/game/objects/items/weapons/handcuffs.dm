@@ -198,7 +198,7 @@ var/last_chew = 0
 	cuff_type = "duct tape"
 
 /obj/item/weapon/handcuffs/cable/tape/cyborg
-	dispenser = 1
+	dispenser = TRUE
 
 //Legcuffs. Not /really/ handcuffs, but its close enough.
 /obj/item/weapon/handcuffs/legcuffs

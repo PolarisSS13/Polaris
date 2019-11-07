@@ -19,7 +19,7 @@
 		return
 
 	//Used to give the right message.
-	var/grabbed_something = 0
+	var/grabbed_something = FALSE
 
 	for(var/mob/M in T)
 		if(istype(M,/mob/living/simple_mob/animal/passive/lizard) || istype(M,/mob/living/simple_mob/animal/passive/mouse))
@@ -95,14 +95,14 @@
 			continue
 
 		qdel(W)
-		grabbed_something = 1
+		grabbed_something = TRUE
 
 	if(istype(T,/turf/simulated/wall) && (last_field < world.time + field_cooldown))
-		if(!(locate(/obj/effect/temporary_effect/pulse/disintigrate)))
+		if(!(locate(/obj/effect/temporary_effect/pulse/disintegrate)))
 			last_field = world.time
 			to_chat(user, "<span class='alien'>You deploy an energetic field through \the [T], beginning its deconstruction.</span>")
 			to_chat(user, "<span class='warning'>You should stand back.</span>")
-			new /obj/effect/temporary_effect/pulse/disintigrate(T)
+			new /obj/effect/temporary_effect/pulse/disintegrate(T)
 		else
 			to_chat(user, "<span class='notice'>There is already a disintigration field affecting \the [T].</span>")
 
@@ -112,7 +112,7 @@
 		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
 	return
 
-/obj/effect/temporary_effect/pulse/disintigrate
+/obj/effect/temporary_effect/pulse/disintegrate
 	name = "molecular debonding field"
 	desc = "This is something you do not want to near."
 	icon = 'icons/mob/swarmbot.dmi'
@@ -123,18 +123,18 @@
 	pulses_remaining = 5
 	pulse_delay = 2 SECONDS
 
-/obj/effect/temporary_effect/pulse/disintigrate/emp_act()
+/obj/effect/temporary_effect/pulse/disintegrate/emp_act()
 	visible_message("<span class='warning'>\The [src] flickers, before dispersing energetically.</span>")
 	qdel(src)
 
-/obj/effect/temporary_effect/pulse/disintigrate/on_pulse()
+/obj/effect/temporary_effect/pulse/disintegrate/on_pulse()
 	var/turf/T = get_turf(src)
 	if(istype(T,/turf/simulated/wall))
 		explosion(get_turf(src), -1, -1, 1, 3, adminlog = 0)
 	else
 		qdel(src)
 
-/obj/effect/temporary_effect/pulse/disintigrate/Destroy()
+/obj/effect/temporary_effect/pulse/disintegrate/Destroy()
 	if(istype(get_turf(src), /turf/simulated/wall))
 		explosion(get_turf(src), -1, 1, 2, 5, adminlog = 1)
 	..()
@@ -149,8 +149,8 @@
 	projectile_type = /obj/item/projectile/beam/shock
 	charge_cost = 175
 
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 	firemodes = list(
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam/gamma, charge_cost = 300),

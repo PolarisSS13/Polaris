@@ -16,7 +16,7 @@
 
 	var/allow_appearance_change = TRUE
 
-	var/make_antag = MODE_THUG
+	var/make_antag = MODE_STOWAWAY
 
 	var/start_injured = FALSE
 	var/spawn_with_emag = TRUE
@@ -143,7 +143,7 @@
 
 	var/allow_appearance_change = TRUE
 
-	var/make_antag = MODE_THUG
+	var/make_antag = MODE_STOWAWAY
 
 	var/start_injured = TRUE
 
