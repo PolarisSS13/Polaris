@@ -2,7 +2,7 @@
 	var/datum/planet/our_planet = null // Reference to the planet datum that holds this datum.
 	var/datum/weather/current_weather = null // The current weather that is affecting the planet.
 	var/temperature = T20C // The temperature to set planetary walls to.
-	var/wind_dir = 0 / The direction the wind is blowing. Moving against the wind slows you down, while moving with it speeds you up.
+	var/wind_dir = 0 // The direction the wind is blowing. Moving against the wind slows you down, while moving with it speeds you up.
 	var/wind_speed = 0 // How fast or slow a mob can be due to wind acting on them.
 	var/list/allowed_weather_types = list() // Assoc list of weather identifiers, containing the actual weather datum.
 	var/list/roundstart_weather_chances = list() // Assoc list of weather identifiers and their odds of being picked to happen at roundstart.
