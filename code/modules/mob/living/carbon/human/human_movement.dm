@@ -1,4 +1,4 @@
-/mob/living/carbon/human/movement_delay()
+/mob/living/carbon/human/movement_delay(oldloc, direct)
 
 	var/tally = 0
 
@@ -69,6 +69,7 @@
 
 	// Turf related slowdown
 	var/turf/T = get_turf(src)
+	tally += calculate_turf_slowdown(T, direct)
 	if(T && T.movement_cost)
 		var/turf_move_cost = T.movement_cost
 		if(istype(T, /turf/simulated/floor/water))
