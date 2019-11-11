@@ -363,6 +363,14 @@
 	for(var/datum/data/record/R in L)
 		if(R.fields[field] == value)
 			return R
+			
+/proc/find_record_by_mob(var/mob/living/carbon/human/H)
+	var/mob_uid = H.unique_id
+	
+	for(var/datum/data/record/R in data_core.general)
+		if(mob_uid == R.fields["unique_id"])
+			return R
+	return 0
 
 /proc/GetAssignment(var/mob/living/carbon/human/H)
 	if(H.mind.role_alt_title)
