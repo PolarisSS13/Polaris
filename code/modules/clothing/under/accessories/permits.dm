@@ -7,6 +7,12 @@
 	icon_state = "permit"
 	w_class = ITEMSIZE_TINY
 	var/owner = 0	//To prevent people from just renaming the thing if they steal it
+	var/tiered = TRUE // If this is true, this will have different tiers
+	var/tier = 0	// different tiers allow different things
+
+/obj/item/clothing/accessory/permit/New()
+	..()
+	update_icon()
 
 /obj/item/clothing/accessory/permit/attack_self(mob/user as mob)
 	if(isliving(user))
@@ -22,6 +28,10 @@
 		src.name += " ([new_name])"
 		desc += " It belongs to [new_name]."
 
+/obj/item/clothing/accessory/permit/update_icon()
+	if(tiered)
+		icon_state = "[initial(icon_state)]_[tier]"
+
 /obj/item/clothing/accessory/permit/emag_act(var/remaining_charges, var/mob/user)
 	to_chat(user, "You reset the naming locks on [src]!")
 	owner = 0
@@ -29,6 +39,38 @@
 /obj/item/clothing/accessory/permit/gun
 	name = "weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 0
+	price_tag = 50
+
+/obj/item/clothing/accessory/permit/gun/tier_one
+	name = "tier one weapon permit"
+	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 1
+	price_tag = 200
+
+/obj/item/clothing/accessory/permit/gun/tier_two
+	name = "tier two weapon permit"
+	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 2
+	price_tag = 200
+
+/obj/item/clothing/accessory/permit/gun/tier_three
+	name = "tier three weapon permit"
+	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 3
+	price_tag = 200
+
+/obj/item/clothing/accessory/permit/gun/tier_four
+	name = "tier four weapon permit"
+	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 4
+	price_tag = 200
+
+/obj/item/clothing/accessory/permit/gun/tier_five
+	name = "tier five weapon permit"
+	desc = "A card indicating that the owner is allowed to carry a firearm."
+	tier = 5
+	price_tag = 200
 
 /obj/item/clothing/accessory/permit/gun/bar
 	name = "bar shotgun permit"
