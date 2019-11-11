@@ -35,6 +35,8 @@ SUBSYSTEM_DEF(elections)
 	var/snap_election
 
 	var/last_election_date
+	
+	var/president_email
 
 
 /datum/president_candidate
@@ -105,6 +107,17 @@ SUBSYSTEM_DEF(elections)
 /datum/controller/subsystem/elections/proc/SetupPolitics()
 	CheckNoConfidence()
 	SetNewPresident()
+	
+
+/datum/controller/subsystem/elections/proc/SetupEmails()
+	var/president_eml = "president@nanotrasen.gov.nt"
+	var/vice_pres_eml = "vice-president@nanotrasen.gov.nt"
+
+	if(!check_persistent_email(president_eml))
+		new_persistent_email(president_eml)
+
+	if(!check_persistent_email(vice-president@nanotrasen.gov.nt))
+		new_persistent_email(vice-president@nanotrasen.gov.nt)
 
 /datum/controller/subsystem/elections/proc/GetLastElectionTotalVotes()
 	var/votes = 0
