@@ -126,6 +126,7 @@ SUBSYSTEM_DEF(elections)
 			current_president.name = "NanoTrasen"
 		else
 			current_president = vice_president
+			vice_president = null
 
 		return 1
 
@@ -138,6 +139,7 @@ SUBSYSTEM_DEF(elections)
 				current_president.name = "NanoTrasen"
 			else
 				current_president = vice_president
+				vice_president = null
 			return 1
 
 /datum/controller/subsystem/elections/proc/SetNewPresident()
@@ -209,6 +211,16 @@ SUBSYSTEM_DEF(elections)
 		CheckNoConfidence()
 
 	return 1
+
+/datum/controller/subsystem/elections/proc/clear_president()
+	//clear the current president's votes and make them into a former president
+	current_president.no_confidence_votes = list()
+	current_president.ckeys_voted = list()
+	former_presidents += current_president
+
+	CheckNoConfidence()
+
+
 
 //Testing only.
 /*
