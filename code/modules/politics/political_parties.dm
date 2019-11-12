@@ -48,7 +48,7 @@ var/global/list/political_parties = list()
 	var/unique_ID
 	var/is_admin = 0
 	var/email
-	var//datum/party/party
+	var/datum/party/party
 
 	var/join_date //date this person joins
 
