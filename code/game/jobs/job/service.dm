@@ -98,7 +98,7 @@
 	
 /datum/job/journalist
 	title = "Journalist"
-	flag = JOURNALIST
+	flag = LIBRARIAN
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
