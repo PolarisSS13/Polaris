@@ -94,7 +94,24 @@
 	minimum_character_age = 16
 	wage = 16
 	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
-	alt_titles = list("TV Host", "Radio Host", "Journalist", "Professor", "Historian", "Writer")
+	alt_titles = list("TV Host", "Radio Host", "Professor", "Historian", "Writer")
+	
+/datum/job/journalist
+	title = "Journalist"
+	flag = JOURNALIST
+	faction = "City"
+	department_flag = CIVILIAN
+	department = "Civilian"
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "the city clerk"
+	selection_color = "#515151"
+	idtype = /obj/item/weapon/card/id/civilian/librarian
+	access = list(access_library, access_maint_tunnels)
+	minimal_access = list(access_library)
+	minimum_character_age = 16
+	wage = 16
+	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
 
 /datum/job/defense
 	title = "Defense Attorney"
