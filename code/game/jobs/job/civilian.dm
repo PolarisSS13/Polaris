@@ -24,6 +24,7 @@
 					"Traveller",
 					"Unemployed",
 					"Homeless",
+					"Entrepreneur",
 					"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
 					"Resident" = /decl/hierarchy/outfit/job/assistant/resident)
 
