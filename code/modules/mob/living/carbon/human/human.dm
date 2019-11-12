@@ -31,7 +31,14 @@
 		else
 			set_species()
 
-	if(species)
+	var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
+	if(culture)
+		real_name = culture.get_random_name(gender, species.name)
+		name = real_name
+		if(mind)
+			mind.name = real_name
+
+	else if(species)
 		real_name = species.get_random_name(gender)
 		name = real_name
 		if(mind)
@@ -189,6 +196,8 @@
 /mob/living/carbon/human/var/co2overloadtime = null
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
 
+/mob/living/carbon/human/proc/get_cultural_value(var/token)
+	return cultural_info[token]
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
 	if(user.incapacitated()  || !user.Adjacent(src))

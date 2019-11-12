@@ -91,6 +91,35 @@ var/list/all_maps = list()
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
 
+	// Culture defaults.
+	var/list/available_cultural_info = list(
+		TAG_HOMEWORLD = list(
+			HOME_SYSTEM_EARTH,
+			HOME_SYSTEM_OTHER
+		),
+		TAG_FACTION = list(
+			FACTION_NANOTRASEN,
+			FACTION_OTHER
+		),
+		TAG_CULTURE = list(
+			CULTURE_HUMAN,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_OTHER,
+			CULTURE_OTHER
+		),
+		TAG_RELIGION = list(
+			RELIGION_OTHER,
+			RELIGION_AGNOSTICISM
+		)
+	)
+
+	var/list/default_cultural_info = list(
+		TAG_HOMEWORLD = HOME_SYSTEM_EARTH,
+		TAG_FACTION =   FACTION_NANOTRASEN,
+		TAG_CULTURE =   CULTURE_HUMAN_EARTH,
+		TAG_RELIGION =  RELIGION_AGNOSTICISM
+	)
+
 	// Some maps include areas for that map only and don't exist when not compiled, so Travis needs this to learn of new areas that are specific to a map.
 	var/list/unit_test_exempt_areas = list()
 	var/list/unit_test_exempt_from_atmos = list()

@@ -4,6 +4,8 @@
 #define TOPIC_UPDATE_PREVIEW 4
 #define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
 
+var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
+
 #define PREF_FBP_CYBORG "cyborg"
 #define PREF_FBP_POSI "posi"
 #define PREF_FBP_SOFTWARE "software"
@@ -13,34 +15,44 @@
 	sort_order = 1
 	category_item_type = /datum/category_item/player_setup_item/general
 
+/datum/category_group/player_setup_category/background_preferences
+	name = "Background"
+	sort_order = 2
+	category_item_type = /datum/category_item/player_setup_item/background
+
+/datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
+
 /datum/category_group/player_setup_category/skill_preferences
 	name = "Skills"
-	sort_order = 2
+	sort_order = 3
 	category_item_type = /datum/category_item/player_setup_item/skills
 
 /datum/category_group/player_setup_category/occupation_preferences
 	name = "Occupation"
-	sort_order = 3
+	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/occupation
 
 /datum/category_group/player_setup_category/appearance_preferences
 	name = "Antagonism"
-	sort_order = 4
+	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
 /datum/category_group/player_setup_category/loadout_preferences
 	name = "Loadout"
-	sort_order = 5
+	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
 /datum/category_group/player_setup_category/trait_preferences
 	name = "Traits"
-	sort_order = 6
+	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/traits
 
 /datum/category_group/player_setup_category/global_preferences
 	name = "Global"
-	sort_order = 7
+	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
 /****************************

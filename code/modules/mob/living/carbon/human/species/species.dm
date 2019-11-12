@@ -232,6 +232,28 @@
 		/datum/mob_descriptor/build
 		)
 
+	var/list/available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_OTHER,
+							CULTURE_HUMAN,
+							CULTURE_HUMAN_EARTH,
+							CULTURE_HUMAN_OTHER
+							),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS,
+							HOME_SYSTEM_OTHER,
+							HOME_SYSTEM_EARTH
+							),
+		TAG_FACTION =   list(FACTION_OTHER,
+							FACTION_NANOTRASEN
+							),
+		TAG_RELIGION =  list(RELIGION_OTHER,
+							RELIGION_ATHEISM,
+							RELIGION_AGNOSTICISM
+							)
+	)
+	var/list/force_cultural_info =                list()
+	var/list/default_cultural_info =              list()
+	var/list/additional_available_cultural_info = list()
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()

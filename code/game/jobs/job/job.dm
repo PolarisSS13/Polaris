@@ -60,8 +60,19 @@
 			if(CLASS_LOWMID)	income = 0.75
 			if(CLASS_LOWER)		income = 0.50
 
+	// Get an average economic power for our cultures.
+	var/culture_mod =   0
+	var/culture_count = 0
+	for(var/token in H.cultural_info)
+		var/decl/cultural_info/culture = H.get_cultural_value(token)
+		if(culture && !isnull(culture.economic_power))
+			culture_count++
+			culture_mod += culture.economic_power
+	if(culture_count)
+		culture_mod /= culture_count
+
 	//give them an account in the station database
-	var/money_amount = (rand(5,50) + rand(5, 50)) * income * economic_modifier * (H.species.economic_modifier)
+	var/money_amount = (rand(5,50) + rand(5, 50)) * income * economic_modifier * (H.species.economic_modifier) * culture_mod
 	var/datum/money_account/M = create_account(H.real_name, money_amount, null)
 	if(H.mind)
 		var/remembered_info = ""

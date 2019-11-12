@@ -67,6 +67,7 @@ datum/preferences
 	var/citizenship = "None"            //Current home system.
 	var/faction = "None"                //General associated faction.
 	var/religion = "None"               //Religious association.
+	var/custculture = "None"            //Cultural association.
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
 
@@ -294,7 +295,11 @@ datum/preferences
 	character.set_species(species)
 	// Special Case: This references variables owned by two different datums, so do it here.
 	if(be_random_name)
-		real_name = random_name(identifying_gender,species)
+		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
+		if(culture)
+			real_name = culture.get_random_name(biological_gender)
+		else
+			real_name = random_name(identifying_gender,species)
 
 	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
