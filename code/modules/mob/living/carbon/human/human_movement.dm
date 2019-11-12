@@ -1,3 +1,5 @@
+#define HUMAN_LOWEST_SLOWDOWN -3
+
 /mob/living/carbon/human/movement_delay(oldloc, direct)
 
 	var/tally = 0
