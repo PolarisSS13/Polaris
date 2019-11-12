@@ -31,8 +31,7 @@ Atmospheric Technician=4
 Cargo Technician=3
 Chaplain=1
 Lawyer=2
-Librarian=1
-Journalist=4
+Librarian=4
 
 AI=1
 Cyborg=1
