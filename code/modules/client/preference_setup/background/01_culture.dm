@@ -27,6 +27,8 @@
 	..()
 
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
+	if(islist(pref.background_modifiers))
+		pref.background_modifiers.Cut()
 	if(!islist(pref.cultural_info))
 		pref.cultural_info = list()
 	for(var/token in tokens)
@@ -57,6 +59,14 @@
 	S["religion"]				>> pref.religion
 	S["custculture"]			>> pref.custculture
 
+	for(var/token in pref.cultural_info)
+		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
+		if(islist(culture.modifiers) && LAZYLEN(culture.modifiers))
+			if(!islist(pref.background_modifiers))
+				pref.background_modifiers = list()
+
+			pref.background_modifiers |= culture.modifiers.Copy()
+
 /datum/category_item/player_setup_item/background/culture/save_character(var/savefile/S)
 	for(var/token in tokens)
 		to_file(S[token], pref.cultural_info[token])
@@ -76,6 +86,9 @@
 	character.religion			= pref.religion
 	character.custculture		= pref.custculture
 
+	for(var/path in pref.background_modifiers)
+		character.add_modifier(path, 0)
+
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
 	for(var/token in tokens)
@@ -83,21 +96,22 @@
 		var/title = "<b>[tokens[token]]<a href='?src=\ref[src];set_[token]=1'><small>?</small></a>:</b><a href='?src=\ref[src];set_[token]=2'>[pref.cultural_info[token]]</a>"
 		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 
-		if(culture.other_tag)
-			var/display = "Pref"
-			switch(culture.other_tag)
-				if("custculture")
-					display = pref.custculture
-				if("home_system")
-					display = pref.home_system
-				if("religion")
-					display = pref.religion
-				if("faction")
-					display = pref.faction
+		if(culture)
+			if(culture.other_tag)
+				var/display = "Pref"
+				switch(culture.other_tag)
+					if("custculture")
+						display = pref.custculture
+					if("home_system")
+						display = pref.home_system
+					if("religion")
+						display = pref.religion
+					if("faction")
+						display = pref.faction
 
-			append_text += "<br><a href='?src=\ref[src];[culture.other_tag]=1'>[display]</a>"
+				append_text += "<br><a href='?src=\ref[src];[culture.other_tag]=1'>[display]</a>"
 
-		. += culture.get_description(title, append_text, verbose = !hidden[token])
+			. += culture.get_description(title, append_text, verbose = !hidden[token])
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)

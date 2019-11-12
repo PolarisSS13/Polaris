@@ -71,6 +71,8 @@ datum/preferences
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
 
+	var/list/background_modifiers		// Temporary list of modifiers applied from background settings.
+
 		//Mob preview
 	var/icon/preview_icon = null
 
