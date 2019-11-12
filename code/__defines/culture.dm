@@ -2,12 +2,14 @@
 #define TAG_HOMEWORLD "home_system"
 #define TAG_FACTION   "faction"
 #define TAG_RELIGION  "religion"
+#define TAG_SUBSPECIES "subspecies"
 
 #define ALL_CULTURAL_TAGS list( \
 	TAG_CULTURE =   "Culture", \
 	TAG_HOMEWORLD = "Residence", \
 	TAG_FACTION =   "Faction", \
-	TAG_RELIGION =  "Beliefs" \
+	TAG_RELIGION =  "Beliefs",\
+	TAG_SUBSPECIES = "Subspecies"\
 	)
 
 // Cultural IDs.

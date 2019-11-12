@@ -23,16 +23,28 @@
 
 /datum/category_item/player_setup_item/background/languages/content()
 	. += "<b>Languages</b><br>"
+
+	var/datum/language/L
+
 	var/datum/species/S = all_species[pref.species]
 	if(S.language)
-		. += "- [S.language]<br>"
+		L = all_languages[S.language]
+		. += "- <b>[S.language]</b><br>"
+		. += "<small><b>Description:</b> [L.desc]</small><br>"
+		. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
 	if(S.default_language && S.default_language != S.language)
-		. += "- [S.default_language]<br>"
+		L = all_languages[S.default_language]
+		. += "- <b>[S.default_language]</b><br>"
+		. += "<small><b>Description:</b> [L.desc]</small><br>"
+		. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
 	if(S.num_alternate_languages)
 		if(pref.alternate_languages.len)
 			for(var/i = 1 to pref.alternate_languages.len)
 				var/lang = pref.alternate_languages[i]
-				. += "- [lang] - <a href='?src=\ref[src];remove_language=[i]'>remove</a><br>"
+				L = all_languages[lang]
+				. += "- <b>[lang]</b> - <a href='?src=\ref[src];remove_language=[i]'>remove</a><br>"
+				. += "<small><b>Description:</b> [L.desc]</small><br>"
+				. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
 
 		if(pref.alternate_languages.len < S.num_alternate_languages)
 			. += "- <a href='?src=\ref[src];add_language=1'>add</a> ([S.num_alternate_languages - pref.alternate_languages.len] remaining)<br>"

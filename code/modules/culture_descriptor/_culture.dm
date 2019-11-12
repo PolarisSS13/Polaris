@@ -13,6 +13,7 @@
 	var/hidden
 	var/hidden_from_codex
 	var/list/qualifications
+	var/list/modifiers
 
 	var/other_tag
 
