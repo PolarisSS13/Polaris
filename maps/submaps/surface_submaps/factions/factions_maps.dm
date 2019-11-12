@@ -47,3 +47,10 @@ var/list/global/workers_union_bases = list()
 /area/submap/factions/bluemooncartel/cartel_aqua
 	name = "Aquatic Weapons Deal Base"
 	music = "music/escape.ogg"
+
+
+
+//Quercus Bases.
+/area/submap/factions/bluemooncartel/cartel_aqua
+	name = "Trendy Computer Lab"
+	music = "music/escape.ogg"
