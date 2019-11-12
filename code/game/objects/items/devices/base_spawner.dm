@@ -21,7 +21,7 @@
 	..()
 	base_type = workers_union_bases
 
-/obj/item/device/base_key/union/New()
+/obj/item/device/base_key/quercus/New()
 	..()
 	base_type = quercus_coalition_bases
 
