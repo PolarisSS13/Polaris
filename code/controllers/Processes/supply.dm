@@ -29,7 +29,6 @@ var/datum/controller/supply/supply_controller = new()
 
 /datum/controller/supply
 	//supply points
-	var/points = 50
 	var/points_per_slip = 2
 	var/points_per_money = 0.02 // 1 point for $50
 	//control
