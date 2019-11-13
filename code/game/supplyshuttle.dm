@@ -138,8 +138,6 @@ var/list/mechtoys = list(
 
 /datum/controller/supply
 	//supply points
-	var/points = 50
-	var/points_per_process = 1.5
 	var/points_per_slip = 2
 	var/points_per_platinum = 5 // 5 points per sheet
 	var/points_per_phoron = 5
@@ -160,11 +158,6 @@ var/list/mechtoys = list(
 	for(var/typepath in (typesof(/datum/supply_packs) - /datum/supply_packs))
 		var/datum/supply_packs/P = new typepath()
 		supply_packs[P.name] = P
-
-// Supply shuttle ticker - handles supply point regeneration
-// This is called by the process scheduler every thirty seconds
-/datum/controller/supply/process()
-	points += points_per_process
 
 //To stop things being sent to CentCom which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/supply/proc/forbidden_atoms_check(atom/A)
@@ -200,7 +193,7 @@ var/list/mechtoys = list(
 
 		// Must be in a crate!
 		if(istype(MA,/obj/structure/closet/crate))
-			var/oldpoints = points
+			var/oldpoints = department_accounts["Cargo"].money
 			var/oldphoron = phoron_count
 			var/oldplatinum = plat_count
 			var/oldmoney = money_count
@@ -208,7 +201,7 @@ var/list/mechtoys = list(
 			var/obj/structure/closet/crate/CR = MA
 			callHook("sell_crate", list(CR, area_shuttle))
 
-			points += CR.points_per_crate
+			department_accounts["Cargo"].money += CR.points_per_crate
 			var/find_slip = 1
 
 			for(var/atom in CR)
@@ -217,7 +210,7 @@ var/list/mechtoys = list(
 				if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
 					var/obj/item/weapon/paper/manifest/slip = A
 					if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
-						points += points_per_slip
+						department_accounts["Cargo"].money += points_per_slip
 						find_slip = 0
 					continue
 
@@ -235,7 +228,7 @@ var/list/mechtoys = list(
 
 			var/datum/exported_crate/EC = new /datum/exported_crate()
 			EC.name = CR.name
-			EC.value = points - oldpoints
+			EC.value = department_accounts["Cargo"].money - oldpoints
 			EC.value += (phoron_count - oldphoron) * points_per_phoron
 			EC.value += (plat_count - oldplatinum) * points_per_platinum
 			EC.value += (money_count - oldmoney) * points_per_money
@@ -243,9 +236,9 @@ var/list/mechtoys = list(
 
 		qdel(MA)
 
-	points += phoron_count * points_per_phoron
-	points += plat_count * points_per_platinum
-	points += money_count * points_per_money
+	department_accounts["Cargo"].money += phoron_count * points_per_phoron
+	department_accounts["Cargo"].money += plat_count * points_per_platinum
+	department_accounts["Cargo"].money += money_count * points_per_money
 
 //Buyin
 /datum/controller/supply/proc/buy()
