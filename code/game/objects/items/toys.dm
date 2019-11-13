@@ -283,8 +283,7 @@
 /obj/item/toy/sword/update_icon()
 	. = ..()
 	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
-	if(colorable)
-		blade_overlay.color = lcolor
+	blade_overlay.color = lcolor
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
@@ -294,8 +293,6 @@
 		H.update_inv_r_hand()
 
 /obj/item/toy/sword/AltClick(mob/living/user)
-	if(!colorable) //checks if is not colorable
-		return
 	if(!in_range(src, user))	//Basic checks to prevent abuse
 		return
 	if(user.incapacitated() || !istype(user))
