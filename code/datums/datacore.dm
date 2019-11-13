@@ -225,6 +225,8 @@
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
 			S.fields["notes"] = H.sec_record
 
+		S.fields["crim_record"] = H.mind.prefs.crime_record
+
 		//Locked Record
 		var/datum/data/record/L = new()
 		L.fields["id"]			= md5("[H.real_name][H.mind.assigned_role]")
@@ -312,13 +314,10 @@
 	R.fields["bank_account"]	= "None"
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
-	R.fields["pre_con"]		= "None"
-	R.fields["pre_con_d"]	= "No previous crime convictions."
-	R.fields["warn"]		= "None"
-	R.fields["warn_d"]	= "No warnings."
-	R.fields["injunc"]	= "None."
-	R.fields["injunc_d"]	= "No injunctions."
-	R.fields["notes"]		= "No notes."
+
+	R.fields["crim_record"]	= list()
+	R.fields["notes"]		= list()
+
 	data_core.security += R
 
 	return R

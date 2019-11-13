@@ -61,6 +61,14 @@
 		else
 			K.id = "i[K.prefix][x]"
 
+/proc/get_law_names()
+	var/list/law_list = list()
+
+	for(var/datum/law/L in presidential_laws)
+		law_list += "[L.name]"
+
+	return law_list
+
 
 /client/verb/view_laws()
 	set category = "Special Verbs"

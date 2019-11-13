@@ -126,6 +126,7 @@ datum/preferences
 
 	var/med_record = ""
 	var/sec_record = ""
+	var/list/datum/record/crime_record = list()
 	var/gen_record = ""
 	var/exploit_record = ""
 	var/disabilities = 0

@@ -391,6 +391,7 @@
 #include "code\datums\organs.dm"
 #include "code\datums\progressbar.dm"
 #include "code\datums\recipe.dm"
+#include "code\datums\records.dm"
 #include "code\datums\riding.dm"
 #include "code\datums\sun.dm"
 #include "code\datums\weakref.dm"
