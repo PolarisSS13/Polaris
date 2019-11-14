@@ -83,7 +83,7 @@
 			record_count++
 
 		. += "Criminal Record:<br>"
-		. += "<a href='?src=\ref[src];edit_criminal_record=1'>Edit Criminal Record [record_count ? "([record_count])" : ""]</a><br>"
+		. += "<a href='?src=\ref[src];edit_criminal_record=1'>Edit Criminal Record[record_count ? " ([record_count])" : ""]</a><br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/suitable_classes = get_available_classes(user.client)
@@ -166,8 +166,9 @@
 		return TOPIC_REFRESH
 
 	else if(href_list["remove_criminal_record"])
-		var/record = href_list["remove_criminal_record"]
-		qdel(record)
+		var/datum/record/record = href_list["remove_criminal_record"]
+
+		pref.crime_record -= record
 
 		return TOPIC_REFRESH
 
@@ -177,8 +178,7 @@
 		var/laws_list = get_law_names()
 		var/crime = input(user, "Select a crime.", "Edit Criminal Records", null) as null|anything in laws_list
 		var/sec = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_RECORD_LENGTH, extra = 0)
-
-
+		if(isnull(sec)) return
 
 		var/year = 0
 		var/month = 01
@@ -195,7 +195,7 @@
 		if((month in THIRTY_DAY_MONTHS) && month > 30 || (month in THIRTY_ONE_DAY_MONTHS) && month > 31 || (month in TWENTY_EIGHT_DAY_MONTHS) && month > 28) return
 		if(!year && month == get_game_month() && day > get_game_day()) return
 
-		if(!isnull(crime) && !isnull(sec) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.crime_record += make_new_record(crime, "n/a", user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
 		return TOPIC_REFRESH
@@ -211,9 +211,14 @@
 	HTML += "<br><a href='?src=\ref[src];set_criminal_record=1'>Add Criminal Record</a><br>"
 
 	for(var/datum/record/C in pref.crime_record)
-		HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i> <a href='?src=\ref[src];remove_criminal_record=[C]'>remove</a><br>"
+		HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i> <a href='?src=\ref[src];remove_criminal_record=[C]'>Remove</a><br>"
 
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavor_text;size=430x300")
+
+	var/datum/browser/popup = new(user, "crim_record", "Criminal Records", 430, 300, src)
+	popup.set_content(jointext(HTML,null))
+	popup.open()
+
+	onclose(user, "crim_record")
 	return

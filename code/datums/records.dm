@@ -14,7 +14,8 @@
 	name = r_name
 	author = r_author
 	author_ckey = r_ckey
-	if(!date_added)
+
+	if(!r_date_added)
 		date_added = full_game_time()
 	else
 		date_added = r_date_added
