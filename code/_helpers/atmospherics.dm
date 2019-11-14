@@ -1,4 +1,4 @@
-/obj/proc/analyze_gases(var/obj/A, var/mob/user)
+/obj/proc/analyze_gases(var/atom/A, var/mob/user)
 	if(src != A)
 		user.visible_message("<span class='notice'>\The [user] has used \an [src] on \the [A]</span>")
 
@@ -13,7 +13,7 @@
 	user << "<span class='warning'>Your [src] flashes a red light as it fails to analyze \the [A].</span>"
 	return 0
 
-/proc/atmosanalyzer_scan(var/obj/target, var/datum/gas_mixture/mixture, var/mob/user)
+/proc/atmosanalyzer_scan(var/atom/target, var/datum/gas_mixture/mixture, var/mob/user)
 	var/list/results = list()
 
 	if (mixture && mixture.total_moles > 0)
@@ -28,10 +28,10 @@
 
 	return results
 
-/turf/proc/atmosanalyze(var/mob/user)
+/turf/atmosanalyze(var/mob/user)
 	return atmosanalyzer_scan(src, src.air, user)
 
-/obj/proc/atmosanalyze(var/mob/user)
+/atom/proc/atmosanalyze(var/mob/user)
 	return
 
 /obj/item/weapon/tank/atmosanalyze(var/mob/user)
