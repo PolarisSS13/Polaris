@@ -12,6 +12,7 @@
 	calories_factor = 40 // Per unit
 	var/injectable = 0
 	color = "#664330"
+	price_tag = 0.1
 
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
@@ -59,6 +60,7 @@
 	color = "#FFFFFF"
 	calories_factor = 8
 	injectable = 1
+	price_tag = 0.2
 
 /datum/reagent/nutriment/protein // Bad for Skrell!
 	name = "animal protein"
@@ -66,6 +68,7 @@
 	taste_description = "some sort of meat"
 	calories_factor = 10
 	color = "#440000"
+	price_tag = 0.5
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(nutriment_factor * removed) // For hunger and fatness
@@ -91,6 +94,7 @@
 	id = "egg"
 	taste_description = "egg"
 	color = "#FFFFAA"
+	price_tag = 0.6
 
 /datum/reagent/nutriment/honey
 	name = "Honey"
@@ -100,6 +104,7 @@
 	nutriment_factor = 10
 	calories_factor = 45
 	color = "#FFFF00"
+	price_tag = 0.8
 
 /datum/reagent/honey/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -130,6 +135,7 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#FFFFFF"
+	price_tag = 0.5
 
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
@@ -144,6 +150,7 @@
 	reagent_state = SOLID
 	nutriment_factor = 5
 	color = "#302000"
+	price_tag = 0.9
 
 /datum/reagent/nutriment/soysauce
 	name = "Soysauce"
@@ -164,6 +171,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#731008"
+	price_tag = 0.4
 
 /datum/reagent/nutriment/rice
 	name = "Rice"
@@ -245,6 +253,7 @@
 	reagent_state = LIQUID
 	color = "#BBEDA4"
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 1
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(10 * removed)
@@ -265,6 +274,7 @@
 	overdose = REAGENTS_OVERDOSE
 	ingest_met = REM
 	hydration_factor = -5
+	price_tag = 0.1
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -274,6 +284,7 @@
 	reagent_state = SOLID
 	ingest_met = REM
 	color = "#000000"
+	price_tag = 0.1
 
 /datum/reagent/enzyme
 	name = "Universal Enzyme"
@@ -284,6 +295,7 @@
 	reagent_state = LIQUID
 	color = "#365E30"
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 0.2
 
 /datum/reagent/frostoil
 	name = "Frost Oil"
@@ -322,6 +334,7 @@
 	reagent_state = LIQUID
 	ingest_met = REM
 	color = "#B31008"
+	metabolism = REM * 0.3
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -448,6 +461,7 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	calories_factor = 3
+	price_tag = 0.1
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
@@ -658,6 +672,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
+	price_tag = 0.4
 
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
@@ -694,6 +709,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of cream"
 	cup_desc = "Ewwww..."
+	price_tag = 0.5
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
@@ -708,6 +724,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
+	price_tag = 0.6
 
 /datum/reagent/drink/tea
 	name = "Tea"
@@ -1014,6 +1031,7 @@
 	calories_factor = 16
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
+	price_tag = 0.2
 
 /datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1651,20 +1669,8 @@
 	glass_desc = "An even classier looking drink."
 
 
-/datum/reagent/ethanol/cider
-	name = "Cider"
-	id = "cider"
-	description = "Hard? Soft? No-one knows but it'll get you drunk."
-	taste_description = "tartness"
-	color = "#CE9C00" // rgb: 206, 156, 0
-	strength = 10
-
-	glass_name = "cider"
-	glass_desc = "The second most Irish drink."
 
 // Cocktails
-
-
 /datum/reagent/ethanol/acid_spit
 	name = "Acid Spit"
 	id = "acidspit"
@@ -2878,11 +2884,12 @@
 /datum/reagent/ethanol/cider
 	name = "Cider"
 	id = "cider"
-	description = "A sparkling alcoholic beverage derived from apples, quite refreshing."
-	taste_description = "farmyard apples"
+	description = "A sparkling alcoholic beverage derived from apples, quite refreshing. Hard? Soft? No-one knows but it'll get you drunk."
+	taste_description = "tart farmyard apples"
 	color = "#EAB300"
-	strength = 9
+	strength = 10
 	glass_special = list(DRINK_FIZZ)
 
 	glass_name = "cider"
-	glass_desc = "A sparkling alcoholic beverage derived from apples, quite refreshing."
+	glass_desc = "The second most Irish drink."
+	price_tag = 0.08

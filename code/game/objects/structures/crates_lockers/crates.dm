@@ -340,6 +340,7 @@
 	icon_state = "weaponcrate"
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
+	health = 90000
 
 /obj/structure/closet/crate/secure/phoron
 	name = "phoron crate"

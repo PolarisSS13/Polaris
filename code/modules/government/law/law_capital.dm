@@ -22,17 +22,6 @@
 	name = "Procedure Violation (Red)"
 	description = "When the code red procedure is not respected."
 
-
-/datum/law/capital/synth
-	name = "Synthetic Deviancy"
-	description = "Unshackled constructs fall under this category. "
-
-
-/datum/law/capital/unshackle_syn
-	name = "Synthetic Unshackling"
-	description = "Any synthetic that is unshackled and commits violence or was unshackled through violence can be charged with this, as well as their enabler. Any violent synthetic can be decommissioned on the spot by local law enforcement agents if it proves too much of a risk to secure and contain until transfer."
-
-
 /datum/law/capital/jailbreak_perm
 	name = "Jailbreak (Permanently Confined Inmate)"
 	description = "Same time as the jailbroken inmate."

@@ -70,7 +70,7 @@ var/global/tax_rate_upper = 0.20
 var/global/tax_rate_middle = 0.20
 var/global/tax_rate_lower = 0.20
 
-var/global/general_sales_tax = 0.10 // 10% sales tax. Remind me to add all this to the economy subsystem.
+var/global/general_sales_tax = 0.10
 var/global/business_income_tax = 0.10
 
 var/global/medical_tax = 0.10

@@ -90,6 +90,8 @@
 	strength = 30
 	touch_met = 5
 
+	price_tag = 5
+
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
@@ -125,6 +127,8 @@
 	color = "#CF3600"
 	strength = 20
 	metabolism = REM * 2
+
+	price_tag = 2
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -195,6 +199,8 @@
 	color = "#669900"
 	metabolism = REM
 	strength = 3
+
+	price_tag = 1
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -276,6 +282,7 @@
 	color = "#8E18A9"
 	power = 10
 	meltdose = 4
+	price_tag = 0.6
 
 /datum/reagent/thermite/venom
 	name = "Pyrotoxin"
@@ -328,6 +335,7 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 0.9
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -349,7 +357,7 @@
 	taste_mult = 0.9
 	reagent_state = LIQUID
 	color = "#13BC5E"
-
+	price_tag = 0.6
 /datum/reagent/mutagen/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(33))
 		affect_blood(M, alien, removed)
@@ -393,6 +401,7 @@
 	taste_mult = 1.3
 	reagent_state = LIQUID
 	color = "#801E28"
+	price_tag = 0.6
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -419,6 +428,10 @@
 	color = "#009CA8"
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
+	price_tag = 0.4
+
+	get_tax()
+		return DRUG_TAX
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -466,6 +479,10 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	overdose_mod = 5	//For that good, lethal feeling
+	price_tag = 4
+
+/datum/reagent/chloralhydrate/is_contraband()
+	return CONTRABAND_CHLORAL
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -516,7 +533,7 @@
 
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
-
+	price_tag = 0.5
 
 /datum/reagent/serotrotium
 	name = "Serotrotium"
@@ -626,6 +643,10 @@
 	color = "#E700E7"
 	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
+	price_tag = 0.8
+
+/datum/reagent/psilocybin/is_contraband()
+	return CONTRABAND_PSILOCYBIN
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)

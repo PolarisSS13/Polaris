@@ -287,6 +287,16 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	weldermes = "<span class='notice'>USER casually lights the NAME with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME.</span>"
 
+	price_tag = 1
+
+/obj/item/clothing/mask/smokable/cigarette/get_tax()
+	if(nicotine_amt)
+		tax_type = TOBACCO_TAX
+	else
+		tax_type = null
+
+	return tax_type
+
 /obj/item/clothing/mask/smokable/cigarette/New()
 	..()
 	if(nicotine_amt)

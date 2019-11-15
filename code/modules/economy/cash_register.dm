@@ -19,6 +19,7 @@
 	var/list/transaction_logs = list() // list of strings using html code to visualise data
 	var/list/item_list = list()  // entities and according
 	var/list/price_list = list() // prices for each purchase
+	var/list/tax_list = list() // prices for each purchase
 	var/manipulating = 0
 
 	var/cash_stored = 0
@@ -27,7 +28,7 @@
 	var/account_to_connect = null
 
 	var/menu_items
-
+	var/adds_tax = TRUE
 
 // Claim machine ID
 /obj/machinery/cash_register/New()
@@ -159,24 +160,36 @@
 				var/menuitem = locate(href_list["menuitem"])
 				var/t_amount
 				var/t_purpose
+				var/tax_percent
 				var/item_desc
+				var/tax_cost
 
 				if (istype(menuitem, /datum/law))
 					var/datum/law/law_charge = menuitem
 					t_amount = law_charge.get_item_cost()
 					t_purpose = law_charge.name
+					tax_percent = law_charge.get_tax()
 					transaction_purpose = law_charge.name
+					tax_cost = law_charge.post_tax_cost()
 					item_desc = "Fine"
 
 				if (istype(menuitem, /datum/medical_bill))
 					var/datum/medical_bill/med_charge = menuitem
 					t_amount = med_charge.get_item_cost()
 					t_purpose = med_charge.name
+					tax_percent = med_charge.get_tax()
 					transaction_purpose = med_charge.name
+					tax_cost = med_charge.post_tax_cost()
 					item_desc = "Medical Bill"
+
+				if(adds_tax)
+					t_amount += tax_cost
 
 				item_list[t_purpose] += 1
 				price_list[t_purpose] = t_amount
+
+				tax_list[t_purpose] = tax_percent
+
 				transaction_amount += t_amount
 
 				playsound(src, 'sound/machines/twobeep.ogg', 25)
@@ -201,6 +214,7 @@
 					if(item_list[item_name] <= 0)
 						item_list -= item_name
 						price_list -= item_name
+						tax_list -= item_name
 			if("add")
 				var/item_name = locate(href_list["item"])
 				if(item_list[item_name] >= 20) return
@@ -212,10 +226,12 @@
 					transaction_amount -= price_list[item_name] * item_list[item_name]
 					item_list -= item_name
 					price_list -= item_name
+					tax_list -= item_name
 				else
 					transaction_amount = 0
 					item_list.Cut()
 					price_list.Cut()
+					tax_list.Cut()
 			if("reset_log")
 				transaction_logs.Cut()
 				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
@@ -430,11 +446,16 @@
 
 	// First check if item has a valid price
 	var/price = O.get_item_cost()
+	var/tax
+
+	if(adds_tax)
+		tax = O.get_tax()
+		price += O.post_tax_cost()
 	if(isnull(price))
 		src.visible_message("\icon[src]<span class='warning'>Unable to find item in database.</span>")
 		return
 	// Call out item cost
-	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"].")
+	src.visible_message("\icon[src]\A [O]: [price ? "[price] credit\s" : "free of charge"][tax ? "([tax * 100]% tax)" : ""].")
 	// Note the transaction purpose for later use
 	if(transaction_purpose)
 		transaction_purpose += "<br>"
@@ -446,6 +467,7 @@
 	if(!.)
 		item_list[O.name] = 1
 		price_list[O.name] = price
+		tax_list[O.name] = tax
 		. = 1
 	// Animation and sound
 	playsound(src, 'sound/machines/twobeep.ogg', 25)
@@ -465,9 +487,13 @@
 	<tr><td colspan="2" class="tx-title-r">New Entry</td></tr>
 	<tr></tr>"}
 	var/item_name
+	var/tax
+
+	if(adds_tax)
+		tax = tax_list[item_name]
 	for(var/i=1, i<=item_list.len, i++)
 		item_name = item_list[i]
-		dat += "<tr><td class=\"tx-name-r\">[item_list[item_name] ? "<a href='?src=\ref[src];choice=subtract;item=\ref[item_name]'>-</a> <a href='?src=\ref[src];choice=set_amount;item=\ref[item_name]'>Set</a> <a href='?src=\ref[src];choice=add;item=\ref[item_name]'>+</a> [item_list[item_name]] x " : ""][item_name] <a href='?src=\ref[src];choice=clear;item=\ref[item_name]'>Remove</a></td><td class=\"tx-data-r\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
+		dat += "<tr><td class=\"tx-name-r\">[item_list[item_name] ? "<a href='?src=\ref[src];choice=subtract;item=\ref[item_name]'>-</a> <a href='?src=\ref[src];choice=set_amount;item=\ref[item_name]'>Set</a> <a href='?src=\ref[src];choice=add;item=\ref[item_name]'>+</a> [item_list[item_name]] x " : ""][item_name][tax ? " ([tax * 100]% tax)" : ""] <a href='?src=\ref[src];choice=clear;item=\ref[item_name]'>Remove</a></td><td class=\"tx-data-r\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
 	dat += "</table><table width=300>"
 	dat += "<tr><td class=\"tx-name-r\"><a href='?src=\ref[src];choice=clear'>Clear Entry</a></td><td class=\"tx-name-r\" style='text-align: right'><b>Total Amount: [transaction_amount] &thorn</b></td></tr>"
 	dat += "</table></html>"
@@ -491,9 +517,12 @@
 	<table width=300>
 	"}
 	var/item_name
+	var/tax
+	if(adds_tax)
+		tax = tax_list[item_name]
 	for(var/i=1, i<=item_list.len, i++)
 		item_name = item_list[i]
-		dat += "<tr><td class=\"tx-name\">[item_list[item_name] ? "[item_list[item_name]] x " : ""][item_name]</td><td class=\"tx-data\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
+		dat += "<tr><td class=\"tx-name\">[item_list[item_name] ? "[item_list[item_name]] x " : ""][item_name][tax ? " ([tax * 100]% tax)" : ""]</td><td class=\"tx-data\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
 	dat += "<tr></tr><tr><td colspan=\"2\" class=\"tx-name\" style='text-align: right'><b>Total Amount: [transaction_amount] &thorn</b></td></tr>"
 	dat += "</table></html>"
 
@@ -516,9 +545,12 @@
 	<table width=300>
 	"}
 	var/item_name
+	var/tax
+	if(adds_tax)
+		tax = tax_list[item_name]
 	for(var/i=1, i<=item_list.len, i++)
 		item_name = item_list[i]
-		dat += "<tr><td class=\"tx-name\">[item_list[item_name] ? "[item_list[item_name]] x " : ""][item_name]</td><td class=\"tx-data\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
+		dat += "<tr><td class=\"tx-name\">[item_list[item_name] ? "[item_list[item_name]] x " : ""][item_name][tax ? " ([tax * 100]% tax)" : ""]</td><td class=\"tx-data\" width=50>[price_list[item_name] * item_list[item_name]] &thorn</td></tr>"
 	dat += "<tr></tr><tr><td colspan=\"2\" class=\"tx-name\" style='text-align: right'><b>Total Amount: [transaction_amount] &thorn</b></td></tr>"
 	dat += "</table></html>"
 
@@ -535,6 +567,13 @@
 	return 1
 
 /obj/machinery/cash_register/proc/transaction_complete()
+	if(adds_tax)
+		var/total_tax
+		for(var/item in tax_list)
+			total_tax += tax_list[item] * (item_list[item] * price_list[item])
+
+		department_accounts["[station_name()] Funds"].money += total_tax
+
 	/// Visible confirmation
 	playsound(src, 'sound/machines/chime.ogg', 25)
 	src.visible_message("\icon[src]<span class='notice'>Transaction complete.</span>")
@@ -548,6 +587,7 @@
 	transaction_purpose = ""
 	item_list.Cut()
 	price_list.Cut()
+	tax_list.Cut()
 	confirm_item = null
 
 

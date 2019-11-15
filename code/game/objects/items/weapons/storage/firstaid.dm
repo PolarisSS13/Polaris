@@ -15,6 +15,10 @@
 	throw_range = 8
 	max_storage_space = ITEMSIZE_COST_SMALL * 7 // 14
 	var/list/icon_variety
+	price_tag = 5
+
+/obj/item/weapon/storage/firstaid/get_tax()
+	return MEDICAL_TAX
 
 /obj/item/weapon/storage/firstaid/initialize()
 	. = ..()
@@ -269,3 +273,8 @@
 	name = "bottle of Iron pills"
 	desc = "Contains pills used to aid in blood regeneration."
 	starts_with = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
+
+/obj/item/weapon/storage/pill_bottle/rezadone
+	name = "bottle of rezadone pills"
+	desc = "Contains pills used to treat genetic damage."
+	starts_with = list(/obj/item/weapon/reagent_containers/pill/rezadone = 7)
