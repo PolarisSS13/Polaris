@@ -14,6 +14,10 @@
 	icon_state = "pave_corner"
 	initial_flooring = /decl/flooring/pavement/corner
 
+/turf/simulated/floor/pavement/stairs
+	icon_state = "pave_stairs"
+	initial_flooring = /decl/flooring/pavement/stairs
+
 /turf/simulated/floor/pavement/corner_invert
 	icon_state = "pave_invert_corner"
 	initial_flooring = /decl/flooring/pavement/invert_corner
