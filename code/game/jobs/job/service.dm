@@ -78,9 +78,9 @@
 	alt_titles = list("Recycling Technician", "Sanitation Engineer")
 
 //More or less assistants
-/datum/job/librarian
+/datum/job/journalist
 	title = "Journalist"
-	flag = LIBRARIAN
+	flag = JOURNALIST
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
