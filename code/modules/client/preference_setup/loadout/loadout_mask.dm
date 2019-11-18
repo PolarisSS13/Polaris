@@ -21,3 +21,8 @@
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
+	
+/datum/gear/mask/ipc_monitor
+	display_name = "display monitor (Full Body Prosthetic)"
+	path = /obj/item/clothing/mask/monitor
+	sort_category = "Robotic"
