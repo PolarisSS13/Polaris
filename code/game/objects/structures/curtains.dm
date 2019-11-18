@@ -6,6 +6,8 @@
 	plane = ABOVE_PLANE
 	opacity = 1
 	density = 0
+	var/open_state = "open"
+	var/closed_state = "closed"
 
 /obj/structure/curtain/open
 	icon_state = "open"
@@ -27,10 +29,10 @@
 /obj/structure/curtain/proc/toggle()
 	set_opacity(!opacity)
 	if(opacity)
-		icon_state = "closed"
+		icon_state = closed_state
 		layer = SHOWER_CLOSED_LAYER
 	else
-		icon_state = "open"
+		icon_state = open_state
 		layer = SHOWER_OPEN_LAYER
 
 /obj/structure/curtain/attackby(obj/item/P, mob/user)
@@ -139,6 +141,20 @@
 	color = "#204f13"
 /obj/structure/curtain/open/color/forest
 	color = "#204f13"
+
+
+/obj/structure/curtain/blinds
+	name = "blinds"
+	desc = "What goes on behind these? Who knows. All people have secrets."
+	icon_state = "blinds_closed"
+	open_state = "blinds_open"
+	closed_state = "blinds_closed"
+
+/obj/structure/curtain/blinds/open
+	icon_state = "blinds_open"
+	layer = SHOWER_CLOSED_LAYER
+	opacity = 0
+
 
 #undef SHOWER_OPEN_LAYER
 #undef SHOWER_CLOSED_LAYER

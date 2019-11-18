@@ -42,31 +42,18 @@
 	if(!current_ad)
 		overlays += pick(ads)
 	else
-		overlays = current_ad
+		overlays += current_ad
 
 
 /obj/structure/billboard/city
 	name = "city billboard"
 	desc = "A billboard"
-	icon_state = "welcome"
+	icon_state = "billboard"
 	light_range = 4
 	light_power = 5
 	light_color = "#bbfcb6"  //watered lime
-
-/obj/structure/billboard/city/Destroy()
-	set_light(0)
-	return ..()
-
-/obj/structure/billboard/city/New()
-	..()
 	current_ad = "welcome"
-
-/obj/structure/billboard/sign
-	name = "city billboard"
-	icon_state = "welcome"
-	light_color = "#bbfcb6"  //watered lime
-	current_ad = "welcome"
-
 
 /obj/structure/billboard/sign/lisa
+	icon_state = "billboard"
 	current_ad = "lisa"

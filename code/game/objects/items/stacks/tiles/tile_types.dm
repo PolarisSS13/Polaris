@@ -260,6 +260,14 @@
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
 
+/obj/item/stack/tile/pavement/stairs
+	name = "pavement tile"
+	singular_name = "pavement tile"
+	desc = "A section of pavement. It is the same size as a normal floor tile!"
+	icon_state = "tile-pavement"
+	origin_tech = list(TECH_BIO = 1)
+	no_variants = FALSE
+
 /obj/item/stack/tile/brick_paving
 	name = "brick pavement tile"
 	singular_name = "brickpavement tile"

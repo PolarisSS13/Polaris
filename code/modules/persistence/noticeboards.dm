@@ -109,7 +109,7 @@
 			visible_message(SPAN_DANGER("\The [user] has dismantled \the [src]!"))
 			dismantle()
 		return
-	else if(istype(thing, /obj/item/weapon/paper) || istype(thing, /obj/item/weapon/photo))
+	else if(istype(thing, /obj/item/weapon/paper) || istype(thing, /obj/item/weapon/photo) || istype(thing, /obj/item/weapon/paper_bundle) )
 		if(jobban_isbanned(user, "Graffiti"))
 			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
 		else

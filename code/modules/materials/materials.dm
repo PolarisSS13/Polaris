@@ -691,7 +691,7 @@ var/list/name_to_material
 	melting_point = T0C+300
 	protectiveness = 1 // 4%
 
-/material/cloth_puple
+/material/cloth_purple
 	name = "purple"
 	display_name = "purple"
 	use_name = "purple cloth"
@@ -726,6 +726,17 @@ var/list/name_to_material
 	display_name = "lime"
 	use_name = "lime cloth"
 	icon_colour = "#62E36C"
+	flags = MATERIAL_PADDING
+	ignition_point = T0C+232
+	melting_point = T0C+300
+	protectiveness = 1 // 4%
+
+
+/material/cloth_yellow
+	name = "yellow"
+	display_name = "yellow"
+	use_name = "yellow cloth"
+	icon_colour = "#ebc934"
 	flags = MATERIAL_PADDING
 	ignition_point = T0C+232
 	melting_point = T0C+300
