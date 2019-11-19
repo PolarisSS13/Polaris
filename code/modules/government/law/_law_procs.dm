@@ -26,8 +26,6 @@
 
 		dat += "<tr>"
 
-
-
 		dat += "<td width='5%' align='center' bgcolor='[L.law_color]'>[L.id]</td>"
 		dat += "<td width='15%' align='center' bgcolor='[L.law_color]'><b>[L.name]</b></td>"
 		dat += "</span>"

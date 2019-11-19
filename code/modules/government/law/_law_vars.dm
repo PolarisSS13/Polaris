@@ -1,3 +1,27 @@
+
+var/global/voting_age = 13
+var/global/drinking_age = 18
+var/global/smoking_age = 18
+var/global/gambling_age = 18
+var/global/synth_vote = TRUE			// Are FBPs allowed to vote?
+var/global/citizenship_vote = TRUE		// Are starsystem immigrants allowed to vote?
+var/global/criminal_vote = TRUE		// Can people with criminal records vote? (unimplemented)
+
+/proc/is_voting_eligible(var/mob/living/carbon/human/H)
+	if(!ishuman(H))
+		return 0
+
+	if(!(voting_age >= H.age) )
+		return 0
+
+	if(!synth_vote && H.isSynthetic() )
+		return 0
+
+	if(!citizenship_vote && H.home_system != using_map.starsys_name)
+		return 0
+
+	return 1
+
 /atom/movable/proc/is_contraband()
 	return
 

@@ -2,7 +2,7 @@
 // Handles initialization of political parties and assigning presidents on the server.
 //
 
-
+var/global/list/government_emails = list("president@nanotrasen.gov.nt", "vice-president@nanotrasen.gov.nt")
 
 SUBSYSTEM_DEF(elections)
 	name = "Elections"
@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(elections)
 	var/snap_election
 
 	var/last_election_date
-	
+
 	var/president_email
 
 
@@ -107,17 +107,14 @@ SUBSYSTEM_DEF(elections)
 /datum/controller/subsystem/elections/proc/SetupPolitics()
 	CheckNoConfidence()
 	SetNewPresident()
-	
+
 
 /datum/controller/subsystem/elections/proc/SetupEmails()
-	var/president_eml = "president@nanotrasen.gov.nt"
-	var/vice_pres_eml = "vice-president@nanotrasen.gov.nt"
+	//makes sure an email exists for these emails.
+	for(var/E in government_emails)
+		if(!check_persistent_email(E))
+			new_persistent_email(E)
 
-	if(!check_persistent_email(president_eml))
-		new_persistent_email(president_eml)
-
-	if(!check_persistent_email(vice-president@nanotrasen.gov.nt))
-		new_persistent_email(vice-president@nanotrasen.gov.nt)
 
 /datum/controller/subsystem/elections/proc/GetLastElectionTotalVotes()
 	var/votes = 0
@@ -232,6 +229,7 @@ SUBSYSTEM_DEF(elections)
 	former_presidents += current_president
 
 	CheckNoConfidence()
+	return 1
 
 
 

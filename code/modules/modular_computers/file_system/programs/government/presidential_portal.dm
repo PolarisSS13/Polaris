@@ -32,6 +32,13 @@
 
 	return FALSE
 
+/datum/nano_module/program/presidential_portal/proc/age_range(num)
+	switch(num)
+		if(13 to 25)
+			return TRUE
+
+	return FALSE
+
 /datum/nano_module/program/presidential_portal/proc/clear_data()
 	error_msg = " "
 
@@ -91,6 +98,11 @@
 		else
 			page_msg = "Currently, there is no president. NanoTrasen officials handle this colony."
 
+
+	else if(index == 6) // Voting Eligibility Page
+		page_msg += "Here, you can change the voting eligibility of groups in the colony. Beware, this can be quite controversial."
+
+
 	if(index == -1)
 		page_msg = "This isn't a thing yet, sorry."
 
@@ -106,7 +118,8 @@
 
 	//current president stuff
 	data["current_president"] = SSelections.current_president.name
-	data["vice_president"] = SSelections.vice_president.name
+	if(SSelections.vice_president)
+		data["vice_president"] = SSelections.vice_president.name
 
 	//classes
 	data["working_tax"] = wc
@@ -116,7 +129,7 @@
 	//statuses
 	data["cannabis_status"] = law_CANNABIS
 	data["alcohol_status"] = law_ALCOHOL
-	data["ectasy_status"] = law_ECSTASY
+	data["ecstasy_status"] = law_ECSTASY
 	data["psilocybin_status"] = law_PSILOCYBIN
 	data["crack_status"] = law_CRACK
 	data["cocaine_status"] = law_COCAINE
@@ -164,8 +177,6 @@
 
 	if(href_list["taxes"])
 		. = 1
-
-
 		index = 2
 
 
@@ -280,7 +291,7 @@
 		var/contraband = input(usr, "Please select which contraband classification you'd like to edit.", "Select Contraband") as null|anything in potential_contraband
 		if(!contraband) return
 
-		var/cont_status = input(usr, "What legal classification would you like to set the contraband setting to?", "Select Contraband Classification") as null|anything in contraband_classifications
+		var/cont_status = input(usr, "What legal classification would you like to set [contraband] to?", "Select Contraband Classification") as null|anything in contraband_classifications
 		if(!cont_status) return
 
 		switch(contraband)
@@ -332,6 +343,8 @@
 			else if("Explosives")
 				law_EXPLOSIVES = cont_status
 
+
+
 		return
 
 	if(href_list["resign"])
@@ -350,3 +363,96 @@
 			return
 
 		SSelections.clear_president()
+
+	if(href_list["voting_panel"])
+		. = 1
+
+		index = 6
+
+	if(href_list["drinking_age"])
+		. = 1
+
+		var/age = input(usr, "Please select the minimum drinking age. Min: 13. Max: 25.", "Drinking Age") as num|null
+		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		if(!age)
+			error_msg = "You must enter an age."
+			return
+
+		if(!age_range(age))
+			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
+			return
+
+		drinking_age = age
+
+
+	if(href_list["smoking_age"])
+		. = 1
+
+		var/age = input(usr, "Please select the minimum smoking age. Min: 13. Max: 25.", "Smoking Age") as num|null
+		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		if(!age)
+			error_msg = "You must enter an age."
+			return
+
+		if(!age_range(age))
+			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
+			return
+
+		smoking_age = age
+
+	if(href_list["gambling_age"])
+		. = 1
+
+		var/age = input(usr, "Please select the minimum gambling age. Min: 13. Max: 25.", "Gambling Age") as num|null
+		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		if(!age)
+			error_msg = "You must enter an age."
+			return
+
+		if(!age_range(age))
+			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
+			return
+
+		gambling_age = age
+
+	if(href_list["voting_age"])
+		. = 1
+
+		var/age = input(usr, "Please select the minimum voting age. Min: 13. Max: 25.", "Voting Age") as num|null
+		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		if(!age)
+			error_msg = "You must enter an age."
+			return
+
+		if(!age_range(age))
+			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
+			return
+
+		voting_age = age
+
+	if(href_list["synth_vote"])
+		. = 1
+
+		var/vote_status = input(usr, "Please select a voting status for synths.", "Synthetic Vote") as null|anything in list("Able to vote", "Disallowed from voting")
+		if(vote_status == "Able to vote")
+			synth_vote = TRUE
+		else
+			synth_vote = FALSE
+
+	if(href_list["citizenship_vote"])
+		. = 1
+
+		var/vote_status = input(usr, "Please select a voting status for non-Polluxian citizens.", "Citizenship Vote") as null|anything in list("Able to vote", "Disallowed from voting")
+		if(vote_status == "Able to vote")
+			citizenship_vote = TRUE
+		else
+			citizenship_vote = FALSE
+
+	if(href_list["criminal_vote"])
+		. = 1
+
+		var/vote_status = input(usr, "Please select a voting status for people with a criminal record.", "Criminal Vote") as null|anything in list("Able to vote", "Disallowed from voting")
+		if(vote_status == "Able to vote")
+			criminal_vote = TRUE
+		else
+			criminal_vote = FALSE

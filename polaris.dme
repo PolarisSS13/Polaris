@@ -1783,7 +1783,7 @@
 #include "code\modules\government\credit\expenses.dm"
 #include "code\modules\government\democracy\voting_ballot.dm"
 #include "code\modules\government\law\_law_procs.dm"
-#include "code\modules\government\law\contraband_tax.dm"
+#include "code\modules\government\law\_law_vars.dm"
 #include "code\modules\government\law\law_capital.dm"
 #include "code\modules\government\law\law_criminal.dm"
 #include "code\modules\government\law\law_major.dm"
