@@ -97,13 +97,13 @@
 		Gambling Tax:
 	</div> {{:data.gambling_tax}}%  <br>
 
-<br><br>
-{{:helper.link("Back", null, {'back' : 1})}}
+	<br><br>
+	{{:helper.link("Back", null, {'back' : 1})}}
 {{/if}}
 
 {{if data.index == 4}}
 
-{{:data.error_msg}}<p>
+	{{:data.error_msg}}<p>
 
 	{{:helper.link("Edit Contraband", null, {'contraband_edit' : 1})}}
 
@@ -178,26 +178,26 @@
 		Explosives Ownership:
 	</div> {{:data.explosives_status}}  <br>
 
-<br><br>
-{{:helper.link("Back", null, {'back' : 1})}}
+	<br><br>
+	{{:helper.link("Back", null, {'back' : 1})}}
 {{/if}}
 
 {{if data.index == 5}}
 
-{{:data.error_msg}}<p>
+	{{:data.error_msg}}<p>
 
-<center>{{:helper.link("Resign President", null, {'resign_president' : 1})}}</center>
+	<center>{{:helper.link("Resign President", null, {'resign_president' : 1})}}</center>
+
+	<br><br>
+	{{:helper.link("Don't Resign", null, {'back' : 1})}}
+{{/if}}
+
+{{if data.index == 6}}
+
+{{:data.error_msg}}<p>
 
 <br><br>
 {{:helper.link("Don't Resign", null, {'back' : 1})}}
 {{/if}}
 
-{{if data.index == 5}}
 
-{{:data.error_msg}}<p>
-
-<center>{{:helper.link("Resign President", null, {'resign_president' : 1})}}</center>
-
-<br><br>
-{{:helper.link("Don't Resign", null, {'back' : 1})}}
-{{/if}}
