@@ -119,7 +119,7 @@
 
 	<div class="itemLabel">
 		Ecstasy Status:
-	</div> {{:data.ectasy_status}}  <br>
+	</div> {{:data.ecstasy_status}}  <br>
 
 	<div class="itemLabel">
 		Psilocybin Status:
@@ -180,6 +180,16 @@
 
 <br><br>
 {{:helper.link("Back", null, {'back' : 1})}}
+{{/if}}
+
+{{if data.index == 5}}
+
+{{:data.error_msg}}<p>
+
+<center>{{:helper.link("Resign President", null, {'resign_president' : 1})}}</center>
+
+<br><br>
+{{:helper.link("Don't Resign", null, {'back' : 1})}}
 {{/if}}
 
 {{if data.index == 5}}
