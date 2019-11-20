@@ -74,7 +74,11 @@
 		. += "Employment Records:<br>"
 		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
 		. += "Police Notes:<br>"
-		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+		if(!pref.existing_character)
+			. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+		else
+			. += "<i>[pref.sec_record]</i>"
+
 
 		var/crime_data
 		var/record_count
@@ -87,6 +91,14 @@
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/suitable_classes = get_available_classes(user.client)
+
+	if(href_list["choice"])
+		switch(href_list["choice"])
+			if("remove_criminal_record")
+				var/datum/record/record = locate(href_list["record"])
+				pref.crime_record -= record
+
+				return TOPIC_REFRESH
 
 	if(href_list["econ_status"])
 		var/new_class = input(user, "Choose your social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
@@ -165,13 +177,6 @@
 
 		return TOPIC_REFRESH
 
-	else if(href_list["remove_criminal_record"])
-		var/datum/record/record = href_list["remove_criminal_record"]
-
-		pref.crime_record -= record
-
-		return TOPIC_REFRESH
-
 
 	else if(href_list["set_criminal_record"])
 
@@ -196,25 +201,27 @@
 		if(!year && month == get_game_month() && day > get_game_day()) return
 
 		if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
-			pref.crime_record += make_new_record(crime, "n/a", user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
+			pref.crime_record += make_new_record(/datum/record/police, crime, "n/a", user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
 		return TOPIC_REFRESH
 
 	return ..()
 
 /datum/category_item/player_setup_item/general/background/proc/EditCriminalRecord(mob/user)
-	var/HTML = "<body>"
-	HTML += "<tt><center>"
+	var/HTML
+	HTML += "<center>"
 	HTML += "<b>Edit Criminal Record</b> <hr />"
 	HTML += "<br></center>"
 
 	HTML += "<br><a href='?src=\ref[src];set_criminal_record=1'>Add Criminal Record</a><br>"
 
 	for(var/datum/record/C in pref.crime_record)
-		HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i> <a href='?src=\ref[src];remove_criminal_record=[C]'>Remove</a><br>"
+		if(!pref.existing_character)
+			HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i> <a href='?src=\ref[src];choice=remove_criminal_record;record=\ref[C]'>Remove</a><br>"
+		else
+			HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>"
 
 	HTML += "<hr />"
-	HTML += "<tt>"
 
 	var/datum/browser/popup = new(user, "crim_record", "Criminal Records", 430, 300, src)
 	popup.set_content(jointext(HTML,null))
