@@ -27,7 +27,7 @@
 /obj/random/tool/powermaint/item_to_spawn()
 	return pick(prob(320);/obj/random/tool,
 				prob(1);/obj/item/weapon/tool/screwdriver/power,
-				prob(1);/obj/item/weapon/tool/wirecutters/power,
+				prob(1);/obj/item/weapon/tool/crowbar/power,
 				prob(15);/obj/item/weapon/weldingtool/electric,
 				prob(5);/obj/item/weapon/weldingtool/experimental)
 
@@ -38,7 +38,7 @@
 
 /obj/random/tool/power/item_to_spawn()
 	return pick(/obj/item/weapon/tool/screwdriver/power,
-				/obj/item/weapon/tool/wirecutters/power,
+				/obj/item/weapon/tool/crowbar/power,
 				/obj/item/weapon/weldingtool/electric,
 				/obj/item/weapon/weldingtool/experimental)
 
