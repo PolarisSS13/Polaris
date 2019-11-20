@@ -88,7 +88,7 @@
 
 /obj/item/weapon/tool/crowbar/power/examine()
 	..()
-	to_chat(usr, "<span class='notice'>It has [tool_behavior == TOOL_CROWBAR ? "prying" : "cutting"] jaws.</span")
+	to_chat(usr, "<span class='notice'>It has [tool_behavior == TOOL_CROWBAR ? "prying" : "cutting"] jaws.</span>")
 
 /obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
