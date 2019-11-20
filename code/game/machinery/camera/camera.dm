@@ -41,6 +41,8 @@
 
 	var/list/camera_computers_using_this = list()
 
+	var/on_wall = 1
+
 /obj/machinery/camera/New()
 	wires = new(src)
 	assembly = new(src)
@@ -310,17 +312,17 @@
 				O << "The screen bursts into static."
 
 /obj/machinery/camera/update_icon()
-	pixel_x = 0
-	pixel_y = 0
-
-	var/turf/T = get_step(get_turf(src), turn(src.dir, 180))
-	if(istype(T, /turf/simulated/wall))
-		if(src.dir == NORTH)
-			pixel_y = 21
-		else if(src.dir == EAST)
-			pixel_x = 10
-		else if(src.dir == WEST)
-			pixel_x = -10
+	if(on_wall)
+		pixel_y = 0
+		pixel_x = 0
+		var/turf/T = get_step(get_turf(src), src.dir)
+		if(istype(T, /turf/simulated/wall))
+			if(src.dir == NORTH)
+				pixel_y = 21
+			else if(src.dir == EAST)
+				pixel_x = 10
+			else if(src.dir == WEST)
+				pixel_x = -10
 
 	if (!status || (stat & BROKEN))
 		icon_state = "[initial(icon_state)]1"

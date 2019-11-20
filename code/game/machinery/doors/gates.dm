@@ -40,6 +40,7 @@ obj/machinery/door/blast/gate/proc/force_close_transparent()
 	src.operating = 0
 
 /obj/machinery/door/blast/gate/thin
+	name = "thin gate"
 	icon_state_open = "shutter2_0"
 	icon_state_opening = "shutter2_c0"
 	icon_state_closed = "shutter2_1"

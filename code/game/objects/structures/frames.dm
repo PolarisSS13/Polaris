@@ -5,6 +5,8 @@
 	icon_state = "fence"
 	health = 10
 	no_states = 1
+	pixel_y = 15
+	plane = ABOVE_MOB_PLANE
 
 
 /obj/structure/grille/frame
