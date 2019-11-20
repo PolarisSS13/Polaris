@@ -520,7 +520,7 @@
 	return list(
 			"shuttle_auth" = (internal_data["supply_controls"] & SUP_SEND_SHUTTLE),
 			"order_auth" = (internal_data["supply_controls"] & SUP_ACCEPT_ORDERS),
-			"supply_points" = supply_controller.points,
+			"supply_points" = department_accounts["Cargo"].money,
 			"supply_categories" = all_supply_groups
 		)
 

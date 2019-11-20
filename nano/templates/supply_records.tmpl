@@ -3,7 +3,7 @@
 <!-- Supply points and shuttle status -->
 <div class='statusDisplay'>
 	<!-- List points -->
-	Supply points: {{:data.supply_points}}<br>
+	Supply Funds: {{:data.supply_points}} credits<br>
 	
 	<!-- Shuttle status -->
 	<div class='item'>
@@ -111,7 +111,7 @@
 				{{else}}
 					{{for value.contents :contentVal:contentIndex}}
 						<div class='itemContent'>
-							{{:contentVal.quantity}}x {{:contentVal.object}} - {{:contentVal.value}} points
+							{{:contentVal.quantity}}x {{:contentVal.object}} - {{:contentVal.value}} credits
 						</div>
 						{{if data.order_auth}}
 							<div class='itemContent'>
