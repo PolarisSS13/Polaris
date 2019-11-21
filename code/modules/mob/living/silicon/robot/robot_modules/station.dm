@@ -173,6 +173,7 @@ var/global/list/robot_modules = list(
 					"Android" = "droid",
 					"Drone" = "drone-standard",
 					"Insekt" = "insekt-Default"
+					"Usagi-II" = "tall2standard"
 					)
 
 
@@ -207,6 +208,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-surgery",
 					"Handy" = "handy-med",
 					"Insekt" = "insekt-Med"
+					"Usagi-II" = "tall2medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/surgeon/New()
@@ -278,6 +280,7 @@ var/global/list/robot_modules = list(
 					"Drone - Medical" = "drone-medical",
 					"Drone - Chemistry" = "drone-chemistry",
 					"Insekt" = "insekt-Med"
+					"Usagi-II" = "tall2medical"
 					)
 
 /obj/item/weapon/robot_module/robot/medical/crisis/New()
@@ -352,6 +355,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-engineer",
 					"Treadwell" = "treadwell",
 					"Handy" = "handy-engineer"
+					"Usagi-II" = "tall2engineer"
 					)
 
 /obj/item/weapon/robot_module/robot/engineering/construction
@@ -511,6 +515,7 @@ var/global/list/robot_modules = list(
 					"Black Knight" = "securityrobot",
 					"Drone" = "drone-sec",
 					"Insekt" = "insekt-Sec"
+					"Usagi-II" = "tall2security"
 					)
 
 /obj/item/weapon/robot_module/robot/security/general/New()
@@ -553,6 +558,7 @@ var/global/list/robot_modules = list(
 					"Mopbot"  = "janitorrobot",
 					"Mop Gear Rex" = "mopgearrex",
 					"Drone" = "drone-janitor"
+					"Usagi-II" = "tall2janitor"
 					)
 
 /obj/item/weapon/robot_module/robot/janitor/New()
@@ -610,6 +616,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Drone - Service" = "drone-service",
 					"Drone - Hydro" = "drone-hydro"
+					"Usagi-II" = "tall2service"
 				  	)
 
 /obj/item/weapon/robot_module/robot/clerical/butler/New()
@@ -662,6 +669,7 @@ var/global/list/robot_modules = list(
 					"Rich" = "maximillion",
 					"Default" = "Service2",
 					"Drone" = "drone-blu"
+					"Usagi-II" = "tall2service"
 					)
 
 /obj/item/weapon/robot_module/robot/clerical/general/New()
@@ -698,6 +706,7 @@ var/global/list/robot_modules = list(
 					"Advanced Droid" = "droid-miner",
 					"Treadhead" = "Miner",
 					"Drone" = "drone-miner"
+					"Usagi-II" = "tall2miner"
 				)
 
 /obj/item/weapon/robot_module/robot/miner/New()
@@ -726,6 +735,7 @@ var/global/list/robot_modules = list(
 					"Drone" = "drone-science",
 					"Handy" = "handy-science",
 					"Insekt" = "insekt-Sci"
+					"Usagi-II" = "tall2peace"
 					)
 
 /obj/item/weapon/robot_module/robot/research/New()
