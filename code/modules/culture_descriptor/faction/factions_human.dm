@@ -3,6 +3,8 @@
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."
 	subversive_potential = 25
 
+	other_tag = "faction"
+
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN
 	description = "The NanoTrasen Corporation, commonly referred to as NT, is one of the great megacorporations of the modern day.\

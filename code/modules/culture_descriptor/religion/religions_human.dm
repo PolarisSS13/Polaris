@@ -2,6 +2,8 @@
 	name = RELIGION_OTHER
 	description = "One of the many, many niche or relatively unknown religions of the galaxy."
 
+	other_tag = "religion"
+
 /decl/cultural_info/religion/agnostic
 	name = RELIGION_AGNOSTICISM
 	description = "A belief that nothing is known or can be known of the existence or nature of God. Someone who holds to agnosticism is called an agnostic."

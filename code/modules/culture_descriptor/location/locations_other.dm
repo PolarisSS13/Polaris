@@ -13,3 +13,5 @@
 	capital = "Various"
 	economic_power = 1
 	ruling_body = "Various"
+
+	other_tag = "home_system"
