@@ -88,7 +88,7 @@
 	spawn_positions = 1
 	supervisors = "the city clerk"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/librarian
+	idtype = /obj/item/weapon/card/id/civilian/journalist
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	minimum_character_age = 16
