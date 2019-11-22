@@ -126,12 +126,17 @@ datum/preferences
 
 	var/med_record = ""
 	var/sec_record = ""
-	var/list/datum/record/crime_record = list()
 	var/gen_record = ""
+
+	var/list/datum/record/police/crime_record = list()
+	var/list/datum/record/hospital/health_record = list()
+	var/list/datum/record/employment/job_record = list()
+
 	var/exploit_record = ""
 	var/disabilities = 0
 
 	var/economic_status = "Working Class"
+	var/social_class = "Working Class"
 
 	var/uplinklocation = "PDA"
 	var/email = null

@@ -35,3 +35,6 @@
 
 /datum/record/hospital
 	var/medical_institution = "n/a" // Where this record took place.
+
+/datum/record/employment
+	var/employment_place = "n/a" // Where this record took place.

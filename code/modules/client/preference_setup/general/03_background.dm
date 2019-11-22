@@ -6,22 +6,27 @@
 	S["med_record"]				>> pref.med_record
 	S["sec_record"]				>> pref.sec_record
 	S["gen_record"]				>> pref.gen_record
-	S["home_system"]			>> pref.home_system
-	S["citizenship"]			>> pref.citizenship
-//	S["faction"]				>> pref.faction
-	S["religion"]				>> pref.religion
-	S["economic_status"]		>> pref.economic_status
+	S["home_system"]				>> pref.home_system
+	S["citizenship"]				>> pref.citizenship
+//	S["faction"]					>> pref.faction
+	S["religion"]					>> pref.religion
+	S["economic_status"]			>> pref.economic_status
+	S["crime_record"]				>> pref.crime_record
+	S["health_record"]				>> pref.health_record
+	S["job_record"]				>> pref.job_record
 
 /datum/category_item/player_setup_item/general/background/save_character(var/savefile/S)
 	S["med_record"]				<< pref.med_record
 	S["sec_record"]				<< pref.sec_record
 	S["gen_record"]				<< pref.gen_record
-	S["home_system"]			<< pref.home_system
-	S["citizenship"]			<< pref.citizenship
-//	S["faction"]				<< pref.faction
-	S["religion"]				<< pref.religion
-	S["economic_status"]		<< pref.economic_status
-
+	S["home_system"]				<< pref.home_system
+	S["citizenship"]				<< pref.citizenship
+//	S["faction"]					<< pref.faction
+	S["religion"]					<< pref.religion
+	S["economic_status"]			<< pref.economic_status
+	S["crime_record"]				<< pref.crime_record
+	S["health_record"]				>> pref.health_record
+	S["job_record"]				>> pref.job_record
 /datum/category_item/player_setup_item/general/background/delete_character(var/savefile/S)
 	pref.med_record = null
 	pref.sec_record = null
@@ -31,6 +36,9 @@
 	pref.faction = null
 	pref.religion = null
 	pref.economic_status = null
+	pref.crime_record = list()
+	pref.health_record = list()
+	pref.job_record = list()
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
@@ -39,6 +47,11 @@
 	if(!pref.religion)    pref.religion =    "None"
 
 	pref.economic_status = sanitize_inlist(pref.economic_status, ECONOMIC_CLASS, initial(pref.economic_status))
+
+	if(!pref.social_class)
+		pref.social_class = economic_status
+
+	pref.social_class = sanitize_inlist(pref.social_class, ECONOMIC_CLASS, initial(pref.social_class))
 
 // Moved from /datum/preferences/proc/copy_to()
 /datum/category_item/player_setup_item/general/background/copy_to_mob(var/mob/living/carbon/human/character)
@@ -54,6 +67,7 @@
 	. += "<h1>Character Background:</h1><hr>"
 	if(!pref.existing_character)
 		. += "Geminus City is on the planet Pollux, and is located in Blue Colony, in the Vetra star system. You may choose a different background. Social class and the system you are born in cannot be changed once set.</br><br>"
+		. += "Economic Class: [pref.economic_status]<br>"
 		. += "Social Class: <a href='?src=\ref[src];econ_status=1'>[pref.economic_status]</a><br/>"
 		. += "Birth System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
 
@@ -101,7 +115,13 @@
 				return TOPIC_REFRESH
 
 	if(href_list["econ_status"])
-		var/new_class = input(user, "Choose your social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
+		var/new_class = input(user, "Choose your starting economic class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
+		if(new_class && CanUseTopic(user))
+			pref.economic_status = new_class
+			return TOPIC_REFRESH
+
+	if(href_list["soc_class"])
+		var/new_class = input(user, "Choose your starting social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
 		if(new_class && CanUseTopic(user))
 			pref.economic_status = new_class
 			return TOPIC_REFRESH
@@ -201,7 +221,9 @@
 		if(!year && month == get_game_month() && day > get_game_day()) return
 
 		if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
-			pref.crime_record += make_new_record(/datum/record/police, crime, "n/a", user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
+			var/officer_name = random_name(pick("male","female"), SPECIES_HUMAN)
+
+			pref.crime_record += make_new_record(/datum/record/police, crime, officer_name, user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
 		return TOPIC_REFRESH
 
