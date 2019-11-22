@@ -232,3 +232,19 @@
 	display_name = "hydroponics winter boots"
 	path = /obj/item/clothing/shoes/boots/winter/hydro
 	allowed_roles = list("Botanist", "Xenobiologist")
+
+/datum/gear/shoes/boots/stylish
+	display_name = "stylish boots selection"
+	path = /obj/item/clothing/shoes/boots/stylish
+	cost = 2
+
+/datum/gear/shoes/boots/stylish/New()
+	..()
+	var/list/stylish_boots = list()
+	stylish_boots["brown stylish boots"] = /obj/item/clothing/shoes/boots/stylish
+	stylish_boots["charcoal stylish boots"] = /obj/item/clothing/shoes/boots/stylish/charcoal
+	stylish_boots["navy stylish boots"] = /obj/item/clothing/shoes/boots/stylish/navy
+	stylish_boots["red stylish boots"] = /obj/item/clothing/shoes/boots/stylish/red
+	stylish_boots["silver stylish boots"] = /obj/item/clothing/shoes/boots/stylish/silver
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(stylish_boots))
+
