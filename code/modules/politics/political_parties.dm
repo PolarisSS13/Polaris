@@ -1,7 +1,7 @@
 
 var/global/list/political_parties = list()
 
-#DEFINE PARTY_CHARGE_PERIOD 30		// How often a party is charged their bills.
+#define PARTY_CHARGE_PERIOD 30		// How often a party is charged their bills.
 
 /datum/party
 	var/id
