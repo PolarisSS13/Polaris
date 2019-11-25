@@ -40,11 +40,17 @@
 	pref.health_record = list()
 	pref.job_record = list()
 
+	pref.faction = null
+	pref.religion = null
+
 /datum/category_item/player_setup_item/general/background/sanitize_character()
 	if(!pref.home_system) pref.home_system = "Unset"
 	if(!pref.citizenship) pref.citizenship = "None"
 //	if(!pref.faction)     pref.faction =     "None"
 	if(!pref.religion)    pref.religion =    "None"
+	if(!pref.crime_record) pref.crime_record = list()
+	if(!pref.health_record) pref.health_record = list()
+	if(!pref.job_record) pref.job_record = list()
 
 	pref.economic_status = sanitize_inlist(pref.economic_status, ECONOMIC_CLASS, initial(pref.economic_status))
 
@@ -245,9 +251,7 @@
 
 	HTML += "<hr />"
 
-	var/datum/browser/popup = new(user, "crim_record", "Criminal Records", 430, 300, src)
-	popup.set_content(jointext(HTML,null))
-	popup.open()
+	user << browse(HTML, "window=crim_record;size=430x300")
 
 	onclose(user, "crim_record")
 	return

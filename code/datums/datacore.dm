@@ -226,6 +226,9 @@
 			S.fields["notes"] = H.sec_record
 
 		S.fields["crim_record"] = H.mind.prefs.crime_record
+		S.fields["criminal"] = H.mind.prefs.criminal_status
+		S.fields["prison_date"] = H.mind.prefs.prison_date
+		S.fields["prison_release_date"] = H.mind.prefs.prison_release_date
 
 		//Locked Record
 		var/datum/data/record/L = new()
@@ -315,6 +318,9 @@
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
 
+	S.fields["prison_date"] = ""
+	S.fields["prison_release_date"] = ""
+
 	R.fields["crim_record"]	= list()
 	R.fields["notes"]		= list()
 
@@ -336,9 +342,9 @@
 	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
 	M.fields["ma_dis"]		= "None"
 	M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
-	M.fields["alg"]			= "None"
+	M.fields["alg"]		= "None"
 	M.fields["alg_d"]		= "No allergies have been detected in this patient."
-	M.fields["cdi"]			= "None"
+	M.fields["cdi"]		= "None"
 	M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 	M.fields["notes"] = "No notes found."
 	data_core.medical += M
@@ -372,3 +378,20 @@
 		return H.job
 	else
 		return "Unassigned"
+
+/proc/get_gen_record(var/mob/living/carbon/human/H)
+	for(var/datum/data/record/R in data_core.general)
+		if(R.fields["unique_id"] == H.unique_id)
+			return R
+	return 0
+
+/proc/get_med_record(var/mob/living/carbon/human/H)
+	for(var/datum/data/record/R in data_core.medical)
+		if(R.fields["unique_id"] == H.unique_id)
+	return 0
+
+/proc/get_sec_record(var/mob/living/carbon/human/H)
+	for(var/datum/data/record/R in data_core.security)
+		if(R.fields["unique_id"] == H.unique_id)
+			return R
+	return 0

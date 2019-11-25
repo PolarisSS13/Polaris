@@ -684,13 +684,17 @@ var/global/datum/controller/occupations/job_master
 
 	var/datum/spawnpoint/spawnpos
 
-	//Spawn them at their preferred one
-	if(C && C.prefs.spawnpoint)
-		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
-			to_chat(C, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
-			spawnpos = null
-		else
-			spawnpos = spawntypes[C.prefs.spawnpoint]
+	//Handling Prisoners
+	if(C.prefs.criminal_status == "Incarcerated")
+		spawnpos = spawntypes["Prison"]
+	else
+		//Spawn them at their preferred one
+		if(C && C.prefs.spawnpoint)
+			if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
+				to_chat(C, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
+				spawnpos = null
+			else
+				spawnpos = spawntypes[C.prefs.spawnpoint]
 
 	//We will return a list key'd by "turf" and "msg"
 	. = list("turf","msg")
