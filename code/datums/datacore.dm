@@ -388,6 +388,7 @@
 /proc/get_med_record(var/mob/living/carbon/human/H)
 	for(var/datum/data/record/R in data_core.medical)
 		if(R.fields["unique_id"] == H.unique_id)
+			return R
 	return 0
 
 /proc/get_sec_record(var/mob/living/carbon/human/H)
