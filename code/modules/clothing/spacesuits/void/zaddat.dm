@@ -106,6 +106,17 @@
 				helmet.desc = "Supposedly, this helmet should make humans more comfortable and familiar with the Zaddat."
 				helmet.icon_state = "zaddat_rugged"
 				helmet.item_state = "zaddat_rugged"
+		if("Soft")
+			name = "\improper soft Shroud"
+			base_name = "\improper soft Shroud"
+			desc = "Material and design is chosen for practical reasons, making it take as little space as possible when stowed whilst also providing reasonable comfort when worn for long periods."
+			icon_state = "zaddat_soft"
+			item_state = "zaddat_soft"
+			if(helmet)
+				helmet.name = "\improper soft Shroud hood"
+				helmet.desc = "Not as solid as a proper helmet, but works nonetheless."
+				helmet.icon_state = "zaddat_soft"
+				helmet.item_state = "zaddat_soft"
 
 	to_chat(M, "You finish customizing your Shroud. Looking good!")
 	has_been_customized = TRUE
