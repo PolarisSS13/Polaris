@@ -66,6 +66,7 @@ var/list/latejoin_gateway  = list()
 var/list/latejoin_elevator = list()
 var/list/latejoin_cryo     = list()
 var/list/latejoin_cyborg   = list()
+var/list/latejoin_prison   = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
 var/list/holdingfacility    = list() // Captured people go here

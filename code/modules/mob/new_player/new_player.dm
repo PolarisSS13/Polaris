@@ -386,7 +386,7 @@
 		qdel(C)
 		qdel(src)
 		return
-	if(!character.mind.assigned_role == "Prisoner")
+	if(!is_prisoner)
 		// Equip our custom items only AFTER deploying to spawn points eh? Also, not as a prisoner, since they can break out.
 		equip_custom_items(character)
 

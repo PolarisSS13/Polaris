@@ -318,8 +318,8 @@
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
 
-	S.fields["prison_date"] = ""
-	S.fields["prison_release_date"] = ""
+	R.fields["prison_date"] = ""
+	R.fields["prison_release_date"] = ""
 
 	R.fields["crim_record"]	= list()
 	R.fields["notes"]		= list()

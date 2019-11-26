@@ -55,7 +55,7 @@
 	pref.economic_status = sanitize_inlist(pref.economic_status, ECONOMIC_CLASS, initial(pref.economic_status))
 
 	if(!pref.social_class)
-		pref.social_class = economic_status
+		pref.social_class = pref.economic_status
 
 	pref.social_class = sanitize_inlist(pref.social_class, ECONOMIC_CLASS, initial(pref.social_class))
 
@@ -95,9 +95,9 @@
 		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br><br>"
 		. += "Police Notes:<br>"
 		if(!pref.existing_character)
-			. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
+			. += "<a href='?src=\ref[src];set_security_records=1'>[pref.sec_record ? "[TextPreview(pref.sec_record,40)]" : "Add Police Notes"]</a><br>"
 		else
-			. += "<i>[pref.sec_record]</i>"
+			. += "<i>[pref.sec_record ? "[pref.sec_record]" : "No police notes found."]</i><br>"
 
 
 		var/crime_data
@@ -231,7 +231,7 @@
 
 			pref.crime_record += make_new_record(/datum/record/police, crime, officer_name, user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
-		return TOPIC_REFRESH
+		return TOPIC_HANDLED
 
 	return ..()
 
@@ -247,7 +247,7 @@
 		if(!pref.existing_character)
 			HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i> <a href='?src=\ref[src];choice=remove_criminal_record;record=\ref[C]'>Remove</a><br>"
 		else
-			HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>"
+			HTML += "\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i><br>"
 
 	HTML += "<hr />"
 

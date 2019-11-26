@@ -42,6 +42,10 @@
 			latejoin_cyborg += loc
 			delete_me = 1
 			return
+		if("JoinLatePrison")
+			latejoin_prison += loc
+			delete_me = 1
+			return
 		if("prisonwarp")
 			prisonwarp += loc
 			delete_me = 1

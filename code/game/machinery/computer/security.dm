@@ -524,6 +524,25 @@ What a mess.*/
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
 							temp += "</ul>"
+
+					//temporary, until we can get judges their computer, access locked to judges for now.
+					if("criminal_record")
+						temp = "<h5>Criminal Record:</h5>"
+						temp += "<br><a href='?src=\ref[src];choice=criminal_record_add'><br>"
+
+						temp += "<ul>"
+						for(var/datum/record/police/C in active2.fields["crim_record"])
+							temp += "<li>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i><br>"
+
+							temp += " <a href='?src=\ref[src];choice=criminal_record_remove;criminal_record_r=[C]'>(Remove)</a></li></ul>"
+
+					if("criminal_record_add")
+						add_crim_record()
+					if("criminal_record_remove")
+						if (active1)
+							var/datum/record/record = locate(href_list["crminal_record_r"])
+							active2.fields["crim_record"] -= record
+
 					if("rank")
 						var/list/L = list( "City Clerk", "Mayor", "AI" )
 						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
@@ -545,12 +564,11 @@ What a mess.*/
 						var/icon/photo = get_photo(usr)
 						if(photo)
 							active1.fields["photo_front"] = photo
+
 					if("photo side")
 						var/icon/photo = get_photo(usr)
 						if(photo)
 							active1.fields["photo_side"] = photo
-
-
 
 //TEMPORARY MENU FUNCTIONS
 			else//To properly clear as per clear screen.
@@ -640,6 +658,35 @@ What a mess.*/
 			continue
 
 	..(severity)
+
+/obj/machinery/computer/secure_data/proc/add_crim_record(mob/user)
+
+	if(!active2) return
+
+	var/laws_list = get_law_names()
+	var/crime = input(user, "Select a crime.", "Edit Criminal Records") as null|anything in laws_list
+	var/sec = sanitize(input(user,"Enter security information here.","Character Preference") as message|null, MAX_RECORD_LENGTH, extra = 0)
+	if(isnull(sec)) return
+
+	var/year = 0
+	var/month = 01
+	var/day = 01
+
+	year = input(user, "How many years ago? IE: 3 years ago. Input 0 for current year", "Edit Criminal Year", 0) as num|null
+	if(year > active2.fields["age"]) return
+
+	month = input(user, "On which month?", "Edit Month", 0) as num|null
+	if(!get_month_from_num(month)) return
+	if(!year && month > get_game_month()) return
+
+	day = input(user, "On what day?", "Edit Day", 0) as num|null
+	if((month in THIRTY_DAY_MONTHS) && month > 30 || (month in THIRTY_ONE_DAY_MONTHS) && month > 31 || (month in TWENTY_EIGHT_DAY_MONTHS) && month > 28) return
+	if(!year && month == get_game_month() && day > get_game_day()) return
+
+	if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
+		var/officer_name = random_name(pick("male","female"), SPECIES_HUMAN)
+
+		active2.fields["crim_record"] += make_new_record(/datum/record/police, crime, officer_name, user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
 /obj/machinery/computer/secure_data/detective_computer
 	icon_state = "messyfiles"

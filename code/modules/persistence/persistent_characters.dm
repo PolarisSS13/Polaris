@@ -87,33 +87,31 @@
 	return 1
 
 /proc/handle_jail(var/mob/living/carbon/human/H)
-	var/var/datum/data/record/police_record = get_sec_record(H)
+	// this proc determines if someone has escaped from prison or not.
+	var/datum/data/record/police_record = get_sec_record(H)
+	if(!police_record) return
 
+	var/new_status = "None"
 	var/crim_statuses = list("*Arrest*", "Incarcerated")
 
-	if(!police_record.fields["criminal"] in crim_statuses)
-		return 0
+	if(police_record.fields["criminal"] in crim_statuses)
+		new_status = police_record.fields["criminal"]
+
 
 	// If this returns 1, the character will have their criminal status changed and will be locked to the prison role next round.
-	var/turf/location = get_turf(location)
-	if(!location || !floor)
+	var/turf/location = get_turf(H)
+	var/area/check_area = location.loc
+
+	if(!location || !check_area)
 		return 0
 
-	if(istype(location, /turf/simulated/shuttle)
-		if(istype(floor, /turf/simulated/shuttle/floor4)) // Fails traitors if they are in the shuttle brig -- Polymorph
-			if (!C.handcuffed)
-				police_record.fields["criminal"] = "Incarcerated"
 
+	if(police_record.fields["criminal"] in crim_statuses) // if you have arrest or incarcerated as your status...
+		if(H.handcuffed && istype(location, /turf/simulated/shuttle/floor)) // check if you have handcuffs and are in the shuttle brig
+			if(istype(check_area, /area/shuttle/escape/centcom)) // we're now in escape and arrived at centcom
+				new_status = "Incarcerated" // if you are in cuffs, and in the prisoner area of the shuttle, you're officially captured
+		else
+			new_status = "*Arrest*" // if you're not in handcuffs, or in the shuttle, you'll be reported to be "on the run"
 
-
-	var/area/check_area = location.loc
-	if(istype(check_area, /area/shuttle/escape/centcom))
-		return 1
-	if(istype(check_area, /area/shuttle/escape_pod1/centcom))
-		return 1
-	if(istype(check_area, /area/shuttle/escape_pod2/centcom))
-		return 1
-	if(istype(check_area, /area/shuttle/escape_pod3/centcom))
-		return 1
-	if(istype(check_area, /area/shuttle/escape_pod5/centcom))
-		return 1
+	police_record.fields["criminal"] = new_status	//update their records so it can be saved.
+	return 0
