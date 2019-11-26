@@ -56,6 +56,8 @@
 
 //This is called when we want different types of 'cloaks' to stop working, e.g. when attacking.
 /mob/living/carbon/human/break_cloak()
+	..()
+
 	if(mind && mind.changeling) //Changeling visible camo
 		mind.changeling.cloaked = 0
 	if(istype(back, /obj/item/weapon/rig)) //Ninja cloak
