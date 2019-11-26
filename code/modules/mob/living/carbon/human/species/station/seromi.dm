@@ -45,9 +45,9 @@
 	slowdown = -1
 	snow_movement = -2	// Ignores light snow
 	item_slowdown_mod = 2	// Tiny birds don't like heavy things
-	total_health = 50
-	brute_mod = 1.35
-	burn_mod =  1.35
+	total_health = 65
+	brute_mod = 1.15
+	burn_mod =  1.2
 	mob_size = MOB_SMALL
 	pass_flags = PASSTABLE
 	holder_type = /obj/item/weapon/holder/human

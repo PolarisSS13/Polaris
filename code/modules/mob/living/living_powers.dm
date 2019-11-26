@@ -15,3 +15,11 @@
 		layer = HIDING_LAYER //Just above cables with their 2.44
 		plane = OBJ_PLANE
 		to_chat(src,"<span class='notice'>You are now hiding.</span>")
+
+/mob/living/break_cloak()
+	..()
+
+	if(status_flags & HIDING)
+		status_flags &= ~HIDING
+		reset_plane_and_layer()
+		to_chat(src,"<span class='notice'>You have stopped hiding.</span>")
