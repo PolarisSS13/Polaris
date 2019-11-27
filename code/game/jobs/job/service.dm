@@ -93,7 +93,7 @@
 	minimal_access = list(access_library)
 	minimum_character_age = 16
 	wage = 16
-	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
+	outfit_type = /decl/hierarchy/outfit/job/civilian/journalist
 	alt_titles = list("Archivist", "Librarian", "Radio Host")
 
 /datum/job/defense
