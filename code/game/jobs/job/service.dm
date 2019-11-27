@@ -78,23 +78,23 @@
 	alt_titles = list("Recycling Technician", "Sanitation Engineer")
 
 //More or less assistants
-/datum/job/librarian
-	title = "Librarian"
-	flag = LIBRARIAN
+/datum/job/journalist
+	title = "Journalist"
+	flag = JOURNALIST
 	faction = "City"
 	department_flag = CIVILIAN
 	department = "Civilian"
-	total_positions = 1
+	total_positions = 4
 	spawn_positions = 1
 	supervisors = "the city clerk"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/librarian
+	idtype = /obj/item/weapon/card/id/civilian/journalist
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	minimum_character_age = 16
 	wage = 16
-	outfit_type = /decl/hierarchy/outfit/job/civilian/librarian
-	alt_titles = list("TV Host", "Radio Host", "Journalist", "Professor", "Historian", "Writer")
+	outfit_type = /decl/hierarchy/outfit/job/civilian/journalist
+	alt_titles = list("Archivist", "Librarian", "Radio Host")
 
 /datum/job/defense
 	title = "Defense Attorney"
