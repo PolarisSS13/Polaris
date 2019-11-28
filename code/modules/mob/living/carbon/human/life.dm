@@ -1589,12 +1589,18 @@
 /mob/living/carbon/human/proc/handle_nourishment()
 	if (nutrition <= 0)
 		if (prob(1.5))
-			src << span("warning", "Your hunger pangs are excruciating as the stomach acid sears in your stomach... you feel weak.")
+			if(!isSynthetic())
+				to_chat(src, span("warning", "Your hunger pangs are excruciating as the stomach acid sears in your stomach... you feel weak."))
+			else
+				to_chat(src, span("warning", "Your internal battery makes a silent beep. It is time to recharge."))
+				
 		return
 
 	if (hydration <= 0)
 		if (prob(1.5))
-			src << span("warning", "You feel dizzy and disorientated as your lack of hydration becomes impossible to ignore.")
+			if(!isSynthetic())
+				to_chat(src, span("warning", "You feel dizzy and disorientated as your lack of hydration becomes impossible to ignore."))
+				
 		return
 
 
