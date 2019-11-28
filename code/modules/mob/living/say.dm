@@ -155,13 +155,6 @@ proc/get_radio_key_from_channel(var/channel)
 	//Parse the mode
 	var/message_mode = parse_message_mode(message, "headset")
 
-	//If there's no punctuation, add punctuation.
-	var/p_ending = copytext(message, length(message))
-	var/p_message = "[message]."
-	if(!(p_ending in list(".","?","!")))
-		if(message)
-			message = p_message
-
 	//Allow them use to markup, if used.
 	message = process_chat_markup(message, list("~", "_"))
 
@@ -169,6 +162,13 @@ proc/get_radio_key_from_channel(var/channel)
 	switch(copytext(message,1,2))
 		if("*") return emote(copytext(message,2))
 		if("^") return custom_emote(1, copytext(message,2))
+
+	//If there's no punctuation, add punctuation.
+	var/p_ending = copytext(message, length(message))
+	var/p_message = "[message]."
+	if(!(p_ending in list(".","?","!")))
+		if(message)
+			message = p_message
 
 	//Parse the radio code and consume it
 	if (message_mode)
