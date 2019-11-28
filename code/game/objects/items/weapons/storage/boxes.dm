@@ -325,6 +325,13 @@
 	icon_state = "donk_kit"
 	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket = 7)
 
+/obj/item/weapon/storage/box/buns
+	name = "box of bread buns"
+	desc = "Freshly baked at some point in the past few months."
+	icon_state = "bun_box"
+	max_storage_space = ITEMSIZE_COST_NORMAL * 5
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/donkpocket = 12)
+
 /obj/item/weapon/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
