@@ -24,6 +24,7 @@
 {{:helper.link("Make New Bill", null, {'notyet' : 1})}}
 {{:helper.link("Edit Colony Laws", null, {'notyet' : 1})}}
 {{:helper.link("Set Contraband", null, {'contraband' : 1})}}
+{{:helper.link("Citizen Rights", null, {'rights_panel' : 1})}}
 <p><p><br>
 
 <div class="itemLabel"><b>Economy:</div> <br>
@@ -189,15 +190,56 @@
 	<center>{{:helper.link("Resign President", null, {'resign_president' : 1})}}</center>
 
 	<br><br>
-	{{:helper.link("Don't Resign", null, {'back' : 1})}}
+	{{:helper.link("Back", null, {'back' : 1})}}
 {{/if}}
 
 {{if data.index == 6}}
 
 {{:data.error_msg}}<p>
 
+	<h3>Voting Status and Eligibility Options:</h3><br>
+
+	<div class="itemLabel">
+		Synth Voting Rights:
+	</div> {{:data.synth_vote}}  {{:helper.link("Change", null, {'synth_vote' : 1})}}
+	<br>
+	<br>
+
+	<div class="itemLabel">
+		Immigrant Voting Rights:
+	</div> {{:data.citizenship_vote}}  {{:helper.link("Change", null, {'citizenship_vote' : 1})}}
+	<br>
+	<br>
+
+	<div class="itemLabel">
+		Criminal Voting Rights:
+	</div> {{:data.criminal_vote}}  {{:helper.link("Change", null, {'criminal_vote' : 1})}}
+	<br>
+	<br>
+	<h3>Age Options:</h3><br>
+
+	<div class="itemLabel">
+		Voting Age:
+	</div> {{:data.voting_age}}  {{:helper.link("Change", null, {'voting_age' : 1})}}<br>
+	<br>
+
+	<div class="itemLabel">
+		Drinking Age:
+	</div> {{:data.drinking_age}}  {{:helper.link("Change", null, {'drinking_age' : 1})}}<br>
+	<br>
+
+	<div class="itemLabel">
+		Smoking Age:
+	</div> {{:data.smoking_age}}  {{:helper.link("Change", null, {'smoking_age' : 1})}}<br>
+	<br>
+
+	<div class="itemLabel">
+		Gambling Age:
+	</div> {{:data.gambling_age}}  {{:helper.link("Change", null, {'gambling_age' : 1})}}<br>
+	<br>
+	
 <br><br>
-{{:helper.link("Don't Resign", null, {'back' : 1})}}
+{{:helper.link("Back", null, {'back' : 1})}}
 {{/if}}
 
 

@@ -443,8 +443,8 @@ proc/random_eye_color()
 
 	switch(class)
 		if(CLASS_UPPER)
-			return tax_rate_upper * 100
+			return persistent_economy.tax_rate_upper * 100
 		if(CLASS_MIDDLE)
-			return tax_rate_middle * 100
+			return persistent_economy.tax_rate_middle * 100
 		if(CLASS_WORKING)
-			return tax_rate_lower * 100
+			return persistent_economy.tax_rate_lower * 100

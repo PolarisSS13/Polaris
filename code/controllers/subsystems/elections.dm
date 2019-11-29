@@ -115,19 +115,6 @@ SUBSYSTEM_DEF(elections)
 		if(!check_persistent_email(E))
 			new_persistent_email(E)
 
-
-/datum/controller/subsystem/elections/proc/GetLastElectionTotalVotes()
-	var/votes = 0
-	for(var/datum/president_candidate/cand in former_candidates)
-		if(cand.ckeys_voted)
-			votes += cand.ckeys_voted.len
-
-	if(current_president.ckeys_voted)
-		votes += current_president.ckeys_voted.len
-
-	return votes
-
-
 /datum/controller/subsystem/elections/proc/CheckNoConfidence()
 	if(!current_president) // This shouldn't happen except for when you start the same anew.
 		snap_election = 1
@@ -227,6 +214,7 @@ SUBSYSTEM_DEF(elections)
 	current_president.no_confidence_votes = list()
 	current_president.ckeys_voted = list()
 	former_presidents += current_president
+	current_president = null
 
 	CheckNoConfidence()
 	return 1

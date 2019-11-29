@@ -90,7 +90,7 @@
 
 	else if(index == 5) // Contraband Page
 		if(SSelections.current_president)
-			page_msg = "The colony's current president is [SSelections.current_president.name]."
+			page_msg = "The colony's current president is [SSelections.current_president.name]. Once resigned, this cannot be reversed."
 			if(SSelections.vice_president)
 				page_msg += " If [SSelections.current_president.name] resigns, vice president [SSelections.vice_president.name] will become the current president."
 			else
@@ -100,7 +100,7 @@
 
 
 	else if(index == 6) // Voting Eligibility Page
-		page_msg += "Here, you can change the voting eligibility of groups in the colony. Beware, this can be quite controversial."
+		page_msg = "Here, you can change the voting eligibility of groups in the colony. Beware, this can be quite controversial."
 
 
 	if(index == -1)
@@ -112,9 +112,9 @@
 	data["unique_id"] = unique_id
 	data["error_msg"] = error_msg
 
-	var/wc = (tax_rate_lower * 100)
-	var/mc = (tax_rate_middle * 100)
-	var/uc = (tax_rate_upper * 100)
+	var/wc = (persistent_economy.tax_rate_lower * 100)
+	var/mc = (persistent_economy.tax_rate_middle * 100)
+	var/uc = (persistent_economy.tax_rate_upper * 100)
 
 	//current president stuff
 	data["current_president"] = SSelections.current_president.name
@@ -127,32 +127,40 @@
 	data["upper_tax"] = uc
 
 	//statuses
-	data["cannabis_status"] = law_CANNABIS
-	data["alcohol_status"] = law_ALCOHOL
-	data["ecstasy_status"] = law_ECSTASY
-	data["psilocybin_status"] = law_PSILOCYBIN
-	data["crack_status"] = law_CRACK
-	data["cocaine_status"] = law_COCAINE
-	data["heroin_status"] = law_HEROIN
-	data["meth_status"] = law_METH
-	data["nicotine_status"] = law_NICOTINE
-	data["stimm_status"] = law_STIMM
-	data["cyanide_status"] = law_CYANIDE
-	data["chloral_status"] = law_CHLORAL
+	data["cannabis_status"] = persistent_economy.law_CANNABIS
+	data["alcohol_status"] = persistent_economy.law_ALCOHOL
+	data["ecstasy_status"] = persistent_economy.law_ECSTASY
+	data["psilocybin_status"] = persistent_economy.law_PSILOCYBIN
+	data["crack_status"] = persistent_economy.law_CRACK
+	data["cocaine_status"] = persistent_economy.law_COCAINE
+	data["heroin_status"] = persistent_economy.law_HEROIN
+	data["meth_status"] = persistent_economy.law_METH
+	data["nicotine_status"] = persistent_economy.law_NICOTINE
+	data["stimm_status"] = persistent_economy.law_STIMM
+	data["cyanide_status"] = persistent_economy.law_CYANIDE
+	data["chloral_status"] = persistent_economy.law_CHLORAL
 
-	data["guns_status"] = law_GUNS
-	data["smallknives_status"] = law_SMALLKNIVES
-	data["largeknives_status"] = law_LARGEKNIVES
-	data["explosives_status"] = law_EXPLOSIVES
+	data["guns_status"] = persistent_economy.law_GUNS
+	data["smallknives_status"] = persistent_economy.law_SMALLKNIVES
+	data["largeknives_status"] = persistent_economy.law_LARGEKNIVES
+	data["explosives_status"] = persistent_economy.law_EXPLOSIVES
 
 	//taxes
-	data["medical_tax"] = medical_tax
-	data["weapons_tax"] = weapons_tax
-	data["alcoholic_tax"] = alcoholic_tax
-	data["tobacco_tax"] = tobacco_tax
-	data["recreational_drug_tax"] = recreational_drug_tax
-	data["gambling_tax"] = gambling_tax
+	data["medical_tax"] = persistent_economy.medical_tax * 100
+	data["weapons_tax"] = persistent_economy.weapons_tax * 100
+	data["alcoholic_tax"] = persistent_economy.alcoholic_tax * 100
+	data["tobacco_tax"] = persistent_economy.tobacco_tax * 100
+	data["recreational_drug_tax"] = persistent_economy.recreational_drug_tax * 100
+	data["gambling_tax"] = persistent_economy.gambling_tax * 100
 
+	//legal statuses
+	data["voting_age"] = persistent_economy.voting_age
+	data["drinking_age"] = persistent_economy.drinking_age
+	data["smoking_age"] = persistent_economy.smoking_age
+	data["gambling_age"] = persistent_economy.gambling_age
+	data["synth_vote"] = "[persistent_economy.synth_vote ? "Can Vote" : "Cannot Vote"]"
+	data["citizenship_vote"] = "[persistent_economy.citizenship_vote ? "Can Vote" : "Cannot Vote"]"
+	data["criminal_vote"] = "[persistent_economy.criminal_vote ? "Can Vote" : "Cannot Vote"]"
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -182,55 +190,48 @@
 
 	if(href_list["adjust_wc_taxes"])
 		. = 1
-		working_tax = tax_rate_lower * 100
+		working_tax = persistent_economy.tax_rate_lower * 100
 
 
 		working_tax = input(usr, "Please input the new tax rate for working class citizens. (Min 0% - Max 80%)", "Taxes for Working Class", working_tax) as num|null
 		working_tax = sanitize_integer(working_tax, 0, 100, initial(working_tax))
-		if(!working_tax)
-			error_msg = "You must enter a tax range."
-			return
 
 		if(!tax_range(working_tax))
 			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
 			return
 
-		tax_rate_lower = working_tax / 100
+		persistent_economy.tax_rate_lower = working_tax / 100
 
 	if(href_list["adjust_mc_taxes"])
 		. = 1
 
-		middle_tax = tax_rate_middle * 100
+		middle_tax = persistent_economy.tax_rate_middle * 100
 
 
 		middle_tax = input(usr, "Please input the new tax rate for middle class citizens. (Min 0% - Max 80%)", "Taxes for Middle Class", middle_tax) as num|null
 		middle_tax = sanitize_integer(middle_tax, 0, 100, initial(middle_tax))
-		if(!middle_tax)
-			error_msg = "You must enter a tax range."
-			return
+
 
 		if(!tax_range(middle_tax))
 			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
 			return
 
-		tax_rate_middle = middle_tax / 100
+		persistent_economy.tax_rate_middle = middle_tax / 100
 
 
 	if(href_list["adjust_uc_taxes"])
 		. = 1
-		upper_tax = tax_rate_upper * 100
+		upper_tax = persistent_economy.tax_rate_upper * 100
 
 		upper_tax = input(usr, "Please input the new tax rate for upper class citizens. (Min 0% - Max 80%)", "Taxes for Upper Class", upper_tax) as num|null
 		upper_tax = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
-		if(!upper_tax)
-			error_msg = "You must enter a tax range."
-			return
+
 
 		if(!tax_range(upper_tax))
 			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
 			return
 
-		tax_rate_upper = upper_tax / 100
+		persistent_economy.tax_rate_upper = upper_tax / 100
 
 	if(href_list["item_tax"])
 		. = 1
@@ -249,10 +250,6 @@
 		var/new_tax = input(usr, "Please input the new tax rate for \"[tax_group]\". (Min 0% - Max 80%)", "[tax_group]") as num|null
 		new_tax = sanitize_integer(new_tax, 0, 80, initial(new_tax))
 
-		if(!new_tax)
-			error_msg = "You must enter a tax range."
-			return
-
 		if(!tax_range(new_tax))
 			error_msg = "This tax range is incorrect. You must enter a decimal between 1 and 80."
 			return
@@ -261,29 +258,37 @@
 
 		switch(tax_group)
 			if("General Sales Tax")
-				general_sales_tax = new_tax
+				persistent_economy.general_sales_tax = new_tax
+				return
 
-			else if("Business Income Tax")
-				business_income_tax = new_tax
+			if("Business Income Tax")
+				persistent_economy.business_income_tax = new_tax
+				return
 
-			else if("Medical Tax")
-				medical_tax = new_tax
+			if("Medical Tax")
+				persistent_economy.medical_tax = new_tax
+				return
 
-			else if("Weapons Tax")
-				weapons_tax = new_tax
+			if("Weapons Tax")
+				persistent_economy.weapons_tax = new_tax
+				return
 
-			else if("Alcoholic Tax")
-				alcoholic_tax = new_tax
+			if("Alcoholic Tax")
+				persistent_economy.alcoholic_tax = new_tax
+				return
 
-			else if("Tobacco Tax")
-				tobacco_tax = new_tax
+			if("Tobacco Tax")
+				persistent_economy.tobacco_tax = new_tax
+				return
 
-			else if("Recreational Drug Tax")
-				recreational_drug_tax = new_tax
+			if("Recreational Drug Tax")
+				persistent_economy.recreational_drug_tax = new_tax
+				return
 
-			else if("Gambling Tax")
-				gambling_tax = new_tax
-		return
+			if("Gambling Tax")
+				persistent_economy.gambling_tax = new_tax
+				return
+
 
 	if(href_list["contraband_edit"])
 		. = 1
@@ -296,56 +301,69 @@
 
 		switch(contraband)
 			if("Cannabis")
-				law_CANNABIS = cont_status
+				persistent_economy.law_CANNABIS = cont_status
+				return
 
-			else if("Alcohol")
-				law_ALCOHOL = cont_status
+			if("Alcohol")
+				persistent_economy.law_ALCOHOL = cont_status
+				return
 
-			else if("Ecstasy")
-				law_ECSTASY = cont_status
+			if("Ecstasy")
+				persistent_economy.law_ECSTASY = cont_status
+				return
 
-			else if("Psilocybin")
-				law_PSILOCYBIN = cont_status
+			if("Psilocybin")
+				persistent_economy.law_PSILOCYBIN = cont_status
+				return
 
-			else if("Crack")
-				law_CRACK = cont_status
+			if("Crack")
+				persistent_economy.law_CRACK = cont_status
+				return
 
-			else if("Cocaine")
-				law_COCAINE = cont_status
+			if("Cocaine")
+				persistent_economy.law_COCAINE = cont_status
+				return
 
-			else if("Heroin")
-				law_HEROIN = cont_status
+			if("Heroin")
+				persistent_economy.law_HEROIN = cont_status
+				return
 
-			else if("Meth")
-				law_METH = cont_status
+			if("Meth")
+				persistent_economy.law_METH = cont_status
+				return
 
-			else if("Nicotine")
-				law_NICOTINE = cont_status
+			if("Nicotine")
+				persistent_economy.law_NICOTINE = cont_status
+				return
 
-			else if("Stimm")
-				law_STIMM = cont_status
+			if("Stimm")
+				persistent_economy.law_STIMM = cont_status
+				return
 
-			else if("Cyanide")
-				law_CYANIDE = cont_status
+			if("Cyanide")
+				persistent_economy.law_CYANIDE = cont_status
+				return
 
-			else if("Chloral Hydrate")
-				law_CHLORAL = cont_status
+			if("Chloral Hydrate")
+				persistent_economy.law_CHLORAL = cont_status
+				return
 
-			else if("Guns")
-				law_GUNS = cont_status
+			if("Guns")
+				persistent_economy.law_GUNS = cont_status
+				return
 
-			else if("Short Knives")
-				law_SMALLKNIVES = cont_status
+			if("Short Knives")
+				persistent_economy.law_SMALLKNIVES = cont_status
+				return
 
-			else if("Long Knives")
-				law_LARGEKNIVES = cont_status
+			if("Long Knives")
+				persistent_economy.law_LARGEKNIVES = cont_status
+				return
 
-			else if("Explosives")
-				law_EXPLOSIVES = cont_status
+			if("Explosives")
+				persistent_economy.law_EXPLOSIVES = cont_status
+				return
 
-
-
-		return
 
 	if(href_list["resign"])
 		. = 1
@@ -363,8 +381,9 @@
 			return
 
 		SSelections.clear_president()
+		index = 1
 
-	if(href_list["voting_panel"])
+	if(href_list["rights_panel"])
 		. = 1
 
 		index = 6
@@ -373,7 +392,7 @@
 		. = 1
 
 		var/age = input(usr, "Please select the minimum drinking age. Min: 13. Max: 25.", "Drinking Age") as num|null
-		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, initial(persistent_economy.drinking_age))
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -382,14 +401,14 @@
 			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
 			return
 
-		drinking_age = age
+		persistent_economy.drinking_age = age
 
 
 	if(href_list["smoking_age"])
 		. = 1
 
 		var/age = input(usr, "Please select the minimum smoking age. Min: 13. Max: 25.", "Smoking Age") as num|null
-		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		age = sanitize_integer(persistent_economy.smoking_age, 0, 100, initial(persistent_economy.smoking_age))
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -398,13 +417,13 @@
 			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
 			return
 
-		smoking_age = age
+		persistent_economy.smoking_age = age
 
 	if(href_list["gambling_age"])
 		. = 1
 
 		var/age = input(usr, "Please select the minimum gambling age. Min: 13. Max: 25.", "Gambling Age") as num|null
-		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, initial(persistent_economy.drinking_age))
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -413,13 +432,13 @@
 			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
 			return
 
-		gambling_age = age
+		persistent_economy.gambling_age = age
 
 	if(href_list["voting_age"])
 		. = 1
 
 		var/age = input(usr, "Please select the minimum voting age. Min: 13. Max: 25.", "Voting Age") as num|null
-		age = sanitize_integer(upper_tax, 0, 100, initial(upper_tax))
+		age = sanitize_integer(persistent_economy.voting_age, 0, 100, initial(persistent_economy.voting_age))
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -428,31 +447,31 @@
 			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
 			return
 
-		voting_age = age
+		persistent_economy.voting_age = age
 
 	if(href_list["synth_vote"])
 		. = 1
 
 		var/vote_status = input(usr, "Please select a voting status for synths.", "Synthetic Vote") as null|anything in list("Able to vote", "Disallowed from voting")
 		if(vote_status == "Able to vote")
-			synth_vote = TRUE
+			persistent_economy.synth_vote = TRUE
 		else
-			synth_vote = FALSE
+			persistent_economy.synth_vote = FALSE
 
 	if(href_list["citizenship_vote"])
 		. = 1
 
 		var/vote_status = input(usr, "Please select a voting status for non-Polluxian citizens.", "Citizenship Vote") as null|anything in list("Able to vote", "Disallowed from voting")
 		if(vote_status == "Able to vote")
-			citizenship_vote = TRUE
+			persistent_economy.citizenship_vote = TRUE
 		else
-			citizenship_vote = FALSE
+			persistent_economy.citizenship_vote = FALSE
 
 	if(href_list["criminal_vote"])
 		. = 1
 
 		var/vote_status = input(usr, "Please select a voting status for people with a criminal record.", "Criminal Vote") as null|anything in list("Able to vote", "Disallowed from voting")
 		if(vote_status == "Able to vote")
-			criminal_vote = TRUE
+			persistent_economy.criminal_vote = TRUE
 		else
-			criminal_vote = FALSE
+			persistent_economy.criminal_vote = FALSE

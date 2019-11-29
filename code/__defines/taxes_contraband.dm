@@ -1,30 +1,30 @@
-#define GENERAL_TAX general_sales_tax
-#define BUSINESS_TAX business_income_tax
+#define GENERAL_TAX persistent_economy.general_sales_tax
+#define BUSINESS_TAX persistent_economy.business_income_tax
 
-#define MEDICAL_TAX medical_tax
-#define WEAPONS_TAX weapons_tax
-#define ALCOHOL_TAX alcoholic_tax
-#define TOBACCO_TAX tobacco_tax
-#define DRUG_TAX recreational_drug_tax
-#define GAMBLING_TAX gambling_tax
+#define MEDICAL_TAX persistent_economy.medical_tax
+#define WEAPONS_TAX persistent_economy.weapons_tax
+#define ALCOHOL_TAX persistent_economy.alcoholic_tax
+#define TOBACCO_TAX persistent_economy.tobacco_tax
+#define DRUG_TAX persistent_economy.recreational_drug_tax
+#define GAMBLING_TAX persistent_economy.gambling_tax
 
-#define CONTRABAND_CANNABIS law_CANNABIS
-#define CONTRABAND_ALCOHOL law_ALCOHOL
-#define CONTRABAND_ECSTASY law_ECSTASY
-#define CONTRABAND_PSILOCYBIN law_PSILOCYBIN
-#define CONTRABAND_CRACK law_CRACK
-#define CONTRABAND_COCAINE law_COCAINE
-#define CONTRABAND_HEROIN law_HEROIN
-#define CONTRABAND_METH law_METH
-#define CONTRABAND_NICOTINE law_NICOTINE
-#define CONTRABAND_STIMM law_STIMM
-#define CONTRABAND_CYANIDE law_CYANIDE
-#define CONTRABAND_CHLORAL law_CHLORAL
+#define CONTRABAND_CANNABIS persistent_economy.law_CANNABIS
+#define CONTRABAND_ALCOHOL persistent_economy.law_ALCOHOL
+#define CONTRABAND_ECSTASY persistent_economy.law_ECSTASY
+#define CONTRABAND_PSILOCYBIN persistent_economy.law_PSILOCYBIN
+#define CONTRABAND_CRACK persistent_economy.law_CRACK
+#define CONTRABAND_COCAINE persistent_economy.law_COCAINE
+#define CONTRABAND_HEROIN persistent_economy.law_HEROIN
+#define CONTRABAND_METH persistent_economy.law_METH
+#define CONTRABAND_NICOTINE persistent_economy.law_NICOTINE
+#define CONTRABAND_STIMM persistent_economy.law_STIMM
+#define CONTRABAND_CYANIDE persistent_economy.law_CYANIDE
+#define CONTRABAND_CHLORAL persistent_economy.law_CHLORAL
 
-#define CONTRABAND_GUN law_GUNS
-#define CONTRABAND_KNIFESMALL law_SMALLKNIVES
-#define CONTRABAND_KNIFELARGE law_LARGEKNIVES
-#define CONTRABAND_EXPLOSIVES law_EXPLOSIVES
+#define CONTRABAND_GUN persistent_economy.law_GUNS
+#define CONTRABAND_KNIFESMALL persistent_economy.law_SMALLKNIVES
+#define CONTRABAND_KNIFELARGE persistent_economy.law_LARGEKNIVES
+#define CONTRABAND_EXPLOSIVES persistent_economy.law_EXPLOSIVES
 
 #define ILLEGAL "Illegal"
 #define PROFESSIONAL_ONLY "Professional Use Only"

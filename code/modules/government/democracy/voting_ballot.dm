@@ -93,7 +93,7 @@
 				dat += "<br><center>Election day is here. The <i>new</i> elected president is:<br>"
 				dat += "<h1>[SSelections.current_president.name]</h1><p>"
 				if(SSelections.current_president.ckeys_voted)
-					dat += "(Won [SSelections.current_president.ckeys_voted.len] out of [SSelections.GetLastElectionTotalVotes()] votes.)</center>"
+					dat += "(Won [SSelections.current_president.ckeys_voted.len] out of [SSelections.last_election_votes] votes.)</center>"
 			else
 				dat += "<h3>Candidates that ran this election:</h3><hr>"
 				for(var/datum/president_candidate/P in SSelections.political_candidates)
