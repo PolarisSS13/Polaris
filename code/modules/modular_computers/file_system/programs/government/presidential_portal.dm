@@ -392,7 +392,7 @@
 		. = 1
 
 		var/age = input(usr, "Please select the minimum drinking age. Min: 13. Max: 25.", "Drinking Age") as num|null
-		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, 25))
+		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, 25)
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -408,7 +408,7 @@
 		. = 1
 
 		var/age = input(usr, "Please select the minimum smoking age. Min: 13. Max: 25.", "Smoking Age") as num|null
-		age = sanitize_integer(persistent_economy.smoking_age, 0, 100, 25))
+		age = sanitize_integer(persistent_economy.smoking_age, 0, 100, 25)
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -423,7 +423,7 @@
 		. = 1
 
 		var/age = input(usr, "Please select the minimum gambling age. Min: 13. Max: 25.", "Gambling Age") as num|null
-		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, 25))
+		age = sanitize_integer(persistent_economy.drinking_age, 0, 100, 25)
 		if(!age)
 			error_msg = "You must enter an age."
 			return
@@ -438,7 +438,7 @@
 		. = 1
 
 		var/age = input(usr, "Please select the minimum voting age. Min: 13. Max: 25.", "Voting Age") as num|null
-		age = sanitize_integer(persistent_economy.voting_age, 0, 100, 25))
+		age = sanitize_integer(persistent_economy.voting_age, 0, 100, 25)
 		if(!age)
 			error_msg = "You must enter an age."
 			return
