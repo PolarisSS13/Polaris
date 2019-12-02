@@ -94,11 +94,11 @@ SUBSYSTEM_DEF(economy)
 
 	switch(class)
 		if(CLASS_UPPER)
-			tax = tax_rate_upper
+			tax = persistent_economy.tax_rate_upper
 		if(CLASS_MIDDLE)
-			tax = tax_rate_middle
+			tax = persistent_economy.tax_rate_middle
 		if(CLASS_WORKING)
-			tax = tax_rate_lower
+			tax = persistent_economy.tax_rate_lower
 
 
 	wage = job.wage

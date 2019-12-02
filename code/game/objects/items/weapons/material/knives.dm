@@ -11,6 +11,13 @@
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	drop_sound = 'sound/items/drop/knife.ogg'
 
+	get_tax()
+		return WEAPONS_TAX
+
+	is_contraband()
+		return CONTRABAND_KNIFESMALL
+
+
 /obj/item/weapon/material/butterfly/update_force()
 	if(active)
 		edge = 1
@@ -72,6 +79,9 @@
 	get_tax()
 		return WEAPONS_TAX
 
+	is_contraband()
+		return CONTRABAND_KNIFESMALL
+
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 	viewers(user) << pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
@@ -91,12 +101,18 @@
 	icon_state = "render"
 	applies_material_colour = 0
 
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
+
 /obj/item/weapon/material/knife/butch
 	name = "butcher's cleaver"
 	icon_state = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
 	force_divisor = 0.25 // 15 when wielded with hardness 60 (steel)
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
 
 /obj/item/weapon/material/knife/machete
 	name = "machete"
@@ -106,6 +122,9 @@
 	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
 	can_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
 	slot_flags = SLOT_BELT
+
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
 
 /obj/item/weapon/material/knife/tacknife/survival
 	name = "survival knife"
