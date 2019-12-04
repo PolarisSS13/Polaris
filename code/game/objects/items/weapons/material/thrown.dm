@@ -9,6 +9,13 @@
 	sharp = 1
 	edge =  1
 
+	get_tax()
+		return WEAPONS_TAX
+
+	is_contraband()
+		return CONTRABAND_KNIFESMALL
+
+
 /obj/item/weapon/material/star/New()
 	..()
 	src.pixel_x = rand(-12, 12)

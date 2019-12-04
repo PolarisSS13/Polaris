@@ -15,6 +15,7 @@
 	var/ckey
 	var/has_voted
 	var/no_confidence_voted
+	var/eligible = 1
 
 	if(H.client)
 		ckey = H.ckey
@@ -28,6 +29,10 @@
 				if(ckey in P.ckeys_voted)
 					has_voted = 1
 					break
+
+			//eligibility
+			if(is_voting_eligible(H))
+				eligible = 0
 
 			if(ckey in SSelections.current_president.no_confidence_votes)
 				no_confidence_voted = 1
@@ -63,8 +68,10 @@
 				for(var/datum/president_candidate/P in SSelections.political_candidates)
 					dat += "<h4>[P.name]</h4> - <i>[P.slogan]</i><p>"
 					dat += "<b>I will:</b> \"[P.pitch]\"<br><hr>"
-					if(!has_voted)
+					if(!has_voted && eligible)
 						dat += "<br><a href='?src=\ref[src];vote=1;candidate=\ref[P]'>Vote for [P.name]</a><hr>"
+				if(!eligible)
+					dat += "<br><i>You currently do not qualify for voting as you do not possess the legal rights to do so.</i>"
 
 			else if(SSelections.snap_election)
 				dat += "<h4>A snap election is in progress.</h4>"
@@ -74,16 +81,19 @@
 					for(var/datum/president_candidate/P in SSelections.political_candidates)
 						dat += "<h4>[P.name]</h4> - <i>[P.slogan]</i><p>"
 						dat += "<b>I will:</b> \"[P.pitch]\"<br>"
-						if(!has_voted)
+						if(!has_voted && eligible)
 							dat += "<br><a href='?src=\ref[src];vote=1;candidate=\ref[P]'>Vote for [P.name]</a><hr>"
 				else
 					dat += "<b>No political candidates registered.</b>"
+
+				if(!eligible)
+					dat += "<br><i>You currently do not qualify for voting as you do not possess the legal rights to do so.</i>"
 
 			else if(SSelections.is_election_day(get_game_day()))
 				dat += "<br><center>Election day is here. The <i>new</i> elected president is:<br>"
 				dat += "<h1>[SSelections.current_president.name]</h1><p>"
 				if(SSelections.current_president.ckeys_voted)
-					dat += "(Won [SSelections.current_president.ckeys_voted.len] out of [SSelections.GetLastElectionTotalVotes()] votes.)</center>"
+					dat += "(Won [SSelections.current_president.ckeys_voted.len] out of [SSelections.last_election_votes] votes.)</center>"
 			else
 				dat += "<h3>Candidates that ran this election:</h3><hr>"
 				for(var/datum/president_candidate/P in SSelections.political_candidates)
@@ -120,7 +130,6 @@
 
 		onclose(usr, "voting")
 
-		updateDialog()
 
 /obj/machinery/ballot_box/attack_hand(mob/user as mob)
 	add_fingerprint(usr)
@@ -130,7 +139,6 @@
 		return
 
 	interact(user)
-	updateDialog()
 
 
 /obj/machinery/ballot_box/Topic(var/href, var/href_list)
@@ -157,8 +165,6 @@
 			prez.no_confidence_votes += usr.client.ckey
 			SSelections.CheckNoConfidence()
 
-			updateDialog()
-
 	if(href_list["vote"])
 
 		if(!Adjacent(usr)) return
@@ -183,6 +189,6 @@
 			candidate.ckeys_voted += usr.client.ckey
 			SSelections.total_votes++
 
-			updateDialog()
+	updateDialog()
 
 

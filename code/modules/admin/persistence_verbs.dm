@@ -40,10 +40,11 @@
 		return 0
 
 	for(var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
-		H.save_mob_to_prefs()
-		message_admins("Admin [key_name_admin(usr)] has saved all characters.", 1)
+		if(!H.save_mob_to_prefs())
+			message_admins("ERROR: Unable to save all characters.", 1)
+			return 0
 
-		return 1
+	return 1
 
 /client/proc/save_department_accounts()
 	set name = "Save Department Accounts"
@@ -58,7 +59,7 @@
 		usr << "<font color='red'>The round is not canon!</font>"
 		return 0
 
-	persistent_economy.save_accounts()
+	persistent_economy.save_economy()
 	message_admins("Admin [key_name_admin(usr)] has saved all dept accs through verb.", 1)
 	return 1
 

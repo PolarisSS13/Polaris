@@ -473,10 +473,10 @@
 	rank = "Sanitation Technician"
 	job_access_type = /datum/job/janitor
 
-/obj/item/weapon/card/id/civilian/librarian
-	assignment = "Librarian"
-	rank = "Librarian"
-	job_access_type = /datum/job/librarian
+/obj/item/weapon/card/id/civilian/journalist
+	assignment = "Journalist"
+	rank = "Journalist"
+	job_access_type = /datum/job/journalist
 
 /obj/item/weapon/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
 	name = "identification card"
