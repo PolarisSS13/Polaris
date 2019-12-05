@@ -2893,3 +2893,99 @@
 	glass_name = "cider"
 	glass_desc = "The second most Irish drink."
 	price_tag = 0.08
+
+/datum/reagent/nutriment/coffee
+	name = "Coffee Powder"
+	id = "coffeepowder"
+	description = "A bitter powder made by grinding coffee beans."
+	taste_description = "bitterness"
+	taste_mult = 1.3
+	nutriment_factor = 1
+	color = "#482000"
+
+/datum/reagent/nutriment/tea
+	name = "Tea Powder"
+	id = "teapowder"
+	description = "A dark, tart powder made from black tea leaves."
+	taste_description = "tartness"
+	taste_mult = 1.3
+	nutriment_factor = 1
+	color = "#101000"
+
+/datum/reagent/nutriment/instantjuice
+	name = "Juice Powder"
+	id = "instantjuice"
+	description = "Dehydrated, powdered juice of some kind."
+	taste_mult = 1.3
+	nutriment_factor = 1
+
+/datum/reagent/nutriment/instantjuice/grape
+	name = "Grape Juice Powder"
+	id = "instantgrape"
+	description = "Dehydrated, powdered grape juice."
+	taste_description = "dry grapes"
+	color = "#863333"
+
+/datum/reagent/nutriment/instantjuice/orange
+	name = "Orange Juice Powder"
+	id = "instantorange"
+	description = "Dehydrated, powdered orange juice."
+	taste_description = "dry oranges"
+	color = "#e78108"
+
+/datum/reagent/nutriment/instantjuice/watermelon
+	name = "Watermelon Juice Powder"
+	id = "instantwatermelon"
+	description = "Dehydrated, powdered watermelon juice."
+	taste_description = "dry sweet watermelon"
+	color = "#b83333"
+
+/datum/reagent/nutriment/instantjuice/apple
+	name = "Apple Juice Powder"
+	id = "instantapple"
+	description = "Dehydrated, powdered apple juice."
+	taste_description = "dry sweet apples"
+	color = "#c07c40"
+
+/datum/reagent/nutriment/peanutoil
+	name = "Peanut Oil"
+	id = "peanutoil"
+	description = "An oil derived from various types of nuts."
+	taste_description = "nuts"
+	taste_mult = 0.3
+	reagent_state = LIQUID
+	nutriment_factor = 15
+	color = "#4F3500"
+
+/datum/reagent/nutriment/peanutoil/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+
+	var/hotspot = (locate(/obj/fire) in T)
+	if(hotspot && !istype(T, /turf/space))
+		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
+		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
+		lowertemp.react()
+		T.assume_air(lowertemp)
+		qdel(hotspot)
+
+	if(volume >= 5)
+		T.wet_floor()
+
+/datum/reagent/nutriment/peanutbutter
+	name = "Peanut Butter"
+	id = "peanutbutter"
+	description = "A butter derived from various types of nuts."
+	taste_description = "peanuts"
+	taste_mult = 0.5
+	reagent_state = LIQUID
+	nutriment_factor = 30
+	color = "#4F3500"
+
+/datum/reagent/nutriment/mayo
+	name = "mayonnaise"
+	id = "mayo"
+	description = "A thick, bitter sauce."
+	taste_description = "unmistakably mayonnaise"
+	nutriment_factor = 10
+	color = "#FFFFFF"
