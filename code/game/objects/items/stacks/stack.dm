@@ -27,7 +27,7 @@
 	var/reagent_per_unit = 0
 
 /obj/item/stack/proc/update_reagents()
-	create_reagents(reagent_per_unit) // making the cigarrete a chemical holder with a maximum volume of 15
+	create_reagents(max_amount * reagents_per_unit) // getting the max that any stack will have
 	
 	if(reagents)
 		reagents.reagent_list.Cut()
