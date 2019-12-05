@@ -27,11 +27,13 @@
 	var/reagent_per_unit = 0
 
 /obj/item/stack/proc/update_reagents()
+	create_reagents(reagent_per_unit) // making the cigarrete a chemical holder with a maximum volume of 15
+	
 	if(reagents)
 		reagents.reagent_list.Cut()
 	if(associated_reagent)
 		var/total_volume = amount * reagent_per_unit
-		add_reagent(associated_reagent, total_volume)
+		reagents.add_reagent(associated_reagent, total_volume)
 		
 	return 1
 
