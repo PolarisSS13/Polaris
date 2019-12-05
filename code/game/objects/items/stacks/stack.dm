@@ -27,7 +27,7 @@
 	var/reagent_per_unit = 0
 
 /obj/item/stack/proc/update_reagents()
-	create_reagents(max_amount * reagents_per_unit) // getting the max that any stack will have
+
 	
 	if(reagents)
 		reagents.reagent_list.Cut()
@@ -43,6 +43,7 @@
 		stacktype = type
 	if (amount)
 		src.amount = amount
+	create_reagents(max_amount * reagents_per_unit) // getting the max that any stack will have
 	update_reagents()
 	update_icon()
 	return
