@@ -189,7 +189,7 @@
 	maxHealth = health
 
 	for(var/L in has_langs)
-		languages |= all_languages[L]
+		languages |= GLOB.all_languages[L]
 	if(languages.len)
 		default_language = languages[1]
 

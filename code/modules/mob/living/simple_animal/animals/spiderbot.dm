@@ -56,7 +56,7 @@
 /mob/living/simple_animal/spiderbot/New()
 	..()
 	add_language(LANGUAGE_GALCOM)
-	default_language = all_languages[LANGUAGE_GALCOM]
+	default_language = GLOB.all_languages[LANGUAGE_GALCOM]
 	verbs |= /mob/living/proc/ventcrawl
 	verbs |= /mob/living/proc/hide
 

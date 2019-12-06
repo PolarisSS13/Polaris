@@ -13,9 +13,9 @@
 		var/obj/item/organ/O = new build_path(newloc)
 		if(prosfab.manufacturer)
 			var/datum/robolimb/manf = all_robolimbs[prosfab.manufacturer]
-			O.species = all_species["[manf.suggested_species]"]
+			O.species = GLOB.all_species["[manf.suggested_species]"]
 		else
-			O.species = all_species["Human"]
+			O.species = GLOB.all_species["Human"]
 		O.robotize(prosfab.manufacturer)
 		O.dna = new/datum/dna() //Uuughhhh... why do I have to do this?
 		O.dna.ResetUI()
@@ -43,7 +43,7 @@
 				EO.remove_rejuv()
 
 		for(var/obj/item/organ/external/O in H.organs)
-			O.species = all_species[newspecies]
+			O.species = GLOB.all_species[newspecies]
 			O.robotize(prosfab.manufacturer)
 			O.dna = new/datum/dna()
 			O.dna.ResetUI()
