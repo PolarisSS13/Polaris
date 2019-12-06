@@ -292,21 +292,7 @@
 	var/obj/item/weapon/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
-	var/list/sheet_reagents = list( //have a number of reageents divisible by REAGENTS_PER_SHEET (default 20) unless you like decimals,
-		/obj/item/stack/material/iron = list("iron"),
-		/obj/item/stack/material/uranium = list("uranium"),
-		/obj/item/stack/material/phoron = list("phoron"),
-		/obj/item/stack/material/gold = list("gold"),
-		/obj/item/stack/material/silver = list("silver"),
-		/obj/item/stack/material/platinum = list("platinum"),
-		/obj/item/stack/material/mhydrogen = list("hydrogen"),
-		/obj/item/stack/material/steel = list("iron", "carbon"),
-		/obj/item/stack/material/plasteel = list("iron", "iron", "carbon", "carbon", "platinum"), //8 iron, 8 carbon, 4 platinum,
-		/obj/item/stack/material/snow = list("water"),
-		/obj/item/stack/material/sandstone = list("silicon", "oxygen"),
-		/obj/item/stack/material/glass = list("silicon"),
-		/obj/item/stack/material/glass/phoronglass = list("platinum", "silicon", "silicon", "silicon"), //5 platinum, 15 silicon,
-		)
+
 
 /obj/machinery/reagentgrinder/New()
 	..()
@@ -383,10 +369,16 @@
 			user << "You use \the [B] to load \the [src] with \the [B_held]."
 
 		return 0
-
-	if(!sheet_reagents[O.type] && (!O.reagents || !O.reagents.total_volume))
-		user << "\The [O] is not suitable for blending."
-		return 1
+		
+		
+	if(istype(O,/obj/item/stack))
+		var/obj/item/stack/stack = O
+		
+		if(!(O.associated_reagent && O.reagents.total_volume))
+			user << "\The [O] is not suitable for blending."
+		
+		
+			
 
 	user.remove_from_mob(O)
 	O.loc = src
@@ -508,7 +500,7 @@
 			var/obj/item/stack/stack = O
 			if(istype(stack))
 				var/list/sheet_components = sheet_reagents[stack.type]
-				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/REAGENTS_PER_SHEET)))
+				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/reagents_per_unit)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
 					if(QDELETED(stack))
@@ -516,9 +508,9 @@
 					if(islist(sheet_components))
 						amount_to_take = (amount_to_take/(sheet_components.len))
 						for(var/i in sheet_components)
-							beaker.reagents.add_reagent(i, (amount_to_take*REAGENTS_PER_SHEET))
+							beaker.reagents.add_reagent(i, (amount_to_take*reagents_per_unit))
 					else
-						beaker.reagents.add_reagent(sheet_components, (amount_to_take*REAGENTS_PER_SHEET))
+						beaker.reagents.add_reagent(sheet_components, (amount_to_take*reagents_per_unit))
 					continue
 
 		if(O.reagents)
