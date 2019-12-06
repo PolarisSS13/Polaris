@@ -32,7 +32,7 @@
 	if(reagents)
 		reagents.reagent_list.Cut()
 	if(associated_reagent)
-		var/total_volume = amount * reagent_per_unit
+		var/total_volume = amount * reagents_per_unit
 		reagents.add_reagent(associated_reagent, total_volume)
 		
 	return 1
