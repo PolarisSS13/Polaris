@@ -1309,7 +1309,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/bun,
 		/obj/item/weapon/fuel_assembly/supermatter
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/bagelraisin
+	result = /obj/item/weapon/reagent_containers/food/snacks/bageleverything
 
 /datum/recipe/bageltwo
 	reagents = list("water" = 5)
