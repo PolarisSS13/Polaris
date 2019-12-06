@@ -332,10 +332,6 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
 
-/obj/item/weapon/holo/esword/examine(mob/user)
-	..()
-	to_chat(user, "<span class='notice'>Alt-click to recolor it.</span>")
-
 //BASKETBALL OBJECTS
 
 /obj/item/weapon/beach_ball/holoball
