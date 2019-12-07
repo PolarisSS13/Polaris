@@ -52,18 +52,22 @@
 	eighties
 		name = "80's"
 		icon_state = "hair_80s"
+		flags = HAIR_TIEABLE
 
 	afro
 		name = "Afro"
 		icon_state = "hair_afro"
+		flags = HAIR_TIEABLE
 
 	afro2
 		name = "Afro 2"
 		icon_state = "hair_afro2"
+		flags = HAIR_TIEABLE
 
 	afro_large
 		name = "Big Afro"
 		icon_state = "hair_bigafro"
+		flags = HAIR_TIEABLE
 
 	bald
 		name = "Bald"
@@ -87,10 +91,12 @@
 	bedhead
 		name = "Bedhead"
 		icon_state = "hair_bedhead"
+		flags = HAIR_TIEABLE
 
 	bedhead2
 		name = "Bedhead 2"
 		icon_state = "hair_bedheadv2"
+		flags = HAIR_TIEABLE
 
 	bedhead3
 		name = "Bedhead 3"
@@ -170,14 +176,17 @@
 	bun
 		name = "Bun"
 		icon_state = "hair_bun"
+		flags = HAIR_TIEABLE
 
 	bun2
 		name = "Bun 2"
 		icon_state = "hair_bun2"
+		flags = HAIR_TIEABLE
 
 	bun3
 		name = "Bun 3"
 		icon_state = "hair_bun3"
+		flags = HAIR_TIEABLE
 
 	bun
 		name = "Bun Casual"
@@ -204,6 +213,7 @@
 	crono
 		name = "Chrono"
 		icon_state = "hair_toriyama"
+		flags = HAIR_TIEABLE
 
 	cia
 		name = "CIA"
@@ -222,6 +232,7 @@
 	country
 		name = "Country"
 		icon_state = "hair_country"
+		flags = HAIR_TIEABLE
 
 	crew
 		name = "Crewcut"
@@ -249,18 +260,22 @@
 	dreadlocks
 		name = "Dreadlocks"
 		icon_state = "hair_dreads"
+		flags = HAIR_TIEABLE
 
 	mahdrills
 		name = "Drillruru"
 		icon_state = "hair_drillruru"
+		flags = HAIR_TIEABLE
 
 	emo
 		name = "Emo"
 		icon_state = "hair_emo"
+		flags = HAIR_TIEABLE
 
 	emo2
 		name = "Emo Alt"
 		icon_state = "hair_emo2"
+		flags = HAIR_TIEABLE
 
 	fringeemo
 		name = "Emo Fringe"
@@ -270,6 +285,7 @@
 	halfshaved
 		name = "Emo Half-Shaved"
 		icon_state = "hair_halfshaved"
+		flags = HAIR_TIEABLE
 
 	longemo
 		name = "Emo Long"
@@ -344,6 +360,7 @@
 	gelled
 		name = "Gelled Back"
 		icon_state = "hair_gelled"
+		flags = HAIR_TIEABLE
 
 	gentle
 		name = "Gentle"
@@ -385,6 +402,7 @@
 	jade
 		name = "Jade"
 		icon_state = "hair_jade"
+		flags = HAIR_TIEABLE
 
 	jensen
 		name = "Jensen"
@@ -436,6 +454,7 @@
 	modern
 		name = "Modern"
 		icon_state = "hair_modern"
+		flags = HAIR_TIEABLE
 
 	mohawk
 		name = "Mohawk"
@@ -467,6 +486,7 @@
 	nia
 		name = "Nia"
 		icon_state = "hair_nia"
+		flags = HAIR_TIEABLE
 
 	nitori
 		name = "Nitori"
@@ -495,6 +515,7 @@
 	shortovereye
 		name = "Overeye Short"
 		icon_state = "hair_shortovereye"
+		flags = HAIR_TIEABLE
 
 	veryshortovereyealternate
 		name = "Overeye Very Short, Alternate"
@@ -515,10 +536,12 @@
 	pompadour
 		name = "Pompadour"
 		icon_state = "hair_pompadour"
+		flags = HAIR_TIEABLE
 
 	dandypomp
 		name = "Pompadour Dandy"
 		icon_state = "hair_dandypompadour"
+		flags = HAIR_TIEABLE
 
 	ponytail1
 		name = "Ponytail 1"
@@ -588,6 +611,7 @@
 	rosa
 		name = "Rosa"
 		icon_state = "hair_rosa"
+		flags = HAIR_TIEABLE
 
 	rows
 		name = "Rows"
@@ -645,6 +669,7 @@
 	shy
 		name = "Shy"
 		icon_state = "hair_shy"
+		flags = HAIR_TIEABLE
 
 	sideponytail
 		name = "Side Ponytail"
@@ -739,6 +764,7 @@
 	unkept
 		name = "Unkept"
 		icon_state = "hair_unkept"
+		flags = HAIR_TIEABLE
 
 	updo
 		name = "Updo"
