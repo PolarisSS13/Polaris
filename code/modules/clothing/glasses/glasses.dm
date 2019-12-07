@@ -166,15 +166,6 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(!usr.canmove || usr.stat || usr.restrained()) return
 	src.flipped = !src.flipped
-/*	src.flipped = !src.flipped
-	if(src.flipped)
-		icon_state = "[icon_state]_r"
-	else
-		src.icon_state = initial(icon_state)
-
-	usr<<("You change \the [src] to cover your [src.flipped ? "left" : "right"] eye.")
-	update_clothing_icon()
-*/
 
 	if(src.flipped) //Will check whether icon state is currently set to the flipped or not flipped state and switch it around with a message to the user. Flip to right eye
 		icon_state = "[icon_state]_r"
