@@ -1875,7 +1875,9 @@
 	product_slogans = "Have you tried Menu #2? It's pizza time!; It's always Taco Tuesday with Menu #5!; Liberals leave you thirsting for freedom? Wash that despair down with an Instant Grape packet!; Want something to spice up your life? Try Menu #8: Hot Chili!"
 	product_ads = "Order. Unity. Conduct.; Remember the Pillars of civilized society and we shall be successful.; The True Citizen knows the true value of Charity.; Remember, it is great to be part of the Greater Good."
 	vend_delay = 15
+	vend_reply = "Enjoy your delicious ration pack! Remember: it is great to be part of the Greater Good!"
 	icon_state = "rations-psp"
+	shut_up = 0
 	products = list(/obj/item/weapon/storage/mre/menu2 = 5,
 					/obj/item/weapon/storage/mre/menu3 = 5,
 					/obj/item/weapon/storage/mre/menu4 = 5,
