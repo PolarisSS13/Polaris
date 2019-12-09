@@ -149,6 +149,61 @@
 	icon_state = "marshalbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
+/obj/item/clothing/accessory/badge/press
+	name = "press badge"
+	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
+	icon_state = "pressbadge"
+	badge_string = "Journalist"
+	var/emagged //for the stealthy antag
+
+/obj/item/clothing/accessory/badge/press/verb/Reset()
+	if(access_library in usr.GetIdCard().access || emagged)
+		if(!stored_name)
+			usr << "There is no information stored on the badge."
+		else
+			usr << "You reset the press badge."
+			stored_name = FALSE
+			name = name_reset
+	else
+		usr << "[name] rejects your insufficient access rights."
+	return
+
+/obj/item/clothing/accessory/badge/press/attack_self(mob/user as mob)
+	if(!stored_name)
+		user << "Waving around a press badge before swiping an ID would be pretty pointless."
+		return
+	return ..()
+
+/obj/item/clothing/accessory/badge/press/emag_act(var/remaining_charges, var/mob/user)
+	if (emagged)
+		user << "<span class='danger'>\The [src] is already cracked.</span>"
+		return
+	else
+		emagged = 1
+		user << "<span class='danger'>You crack the press badge's security checks.</span>"
+		return 1
+
+/obj/item/clothing/accessory/badge/press/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
+
+		var/obj/item/weapon/card/id/id_card = null
+
+		if(istype(O, /obj/item/weapon/card/id))
+			id_card = O
+		else
+			var/obj/item/device/pda/pda = O
+			id_card = pda.id
+
+		if(access_library in id_card.access || emagged)
+			user << "You imprint your ID details onto the badge."
+			if (!name_reset)
+				name_reset = name
+			set_name(user.real_name)
+		else
+			user << "[src] rejects your insufficient access rights."
+		return
+	..()
+
 /obj/item/weapon/storage/box/holobadge/hos
 	name = "holobadge box"
 	desc = "A box claiming to contain holobadges."
