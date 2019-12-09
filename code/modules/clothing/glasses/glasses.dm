@@ -157,21 +157,95 @@ BLIND     // can't see anything
 	icon_state = "eyepatch"
 	item_state_slots = list(slot_r_hand_str = "blindfold", slot_l_hand_str = "blindfold")
 	body_parts_covered = 0
-	var/eye = null
+	var/flipped = FALSE // Indicates left or right eye; 0 = on the right
 
 /obj/item/clothing/glasses/eyepatch/verb/switcheye()
-	set name = "Switch Eyepatch"
+	set name = "Flip Patch"
 	set category = "Object"
 	set src in usr
 	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
+	if(!usr.canmove || usr.stat || usr.restrained()) return
+	src.flipped = !src.flipped
 
-	eye = !eye
-	if(eye)
-		icon_state = "[icon_state]_1"
-	else
-		icon_state = initial(icon_state)
-	update_clothing_icon()
+	if(src.flipped) //Will check whether icon state is currently set to the flipped or not flipped state and switch it around with a message to the user. Flip to right eye
+		icon_state = "[icon_state]_r"
+		usr << "You change \the [src] to cover your right eye."
+	else if(!src.flipped) //Flip to left eye
+		if(icon_state == "hudpatch_r")
+			icon_state = "hudpatch"
+		else
+			icon_state = initial(icon_state)
+		usr << "You change \the [src] to cover your left eye."
+	else //in case some goofy admin switches icon states around without switching the icon_open or icon_closed
+		usr << "You reach to flip \the [src], but it is already on your [src.flipped ? "left" : "right"] eye."
+		return
+	update_clothing_icon()	//so our overlays update
+
+/////eyepatch Variants begin/////
+/obj/item/clothing/glasses/eyepatch/hud
+	name = "iPatch"
+	desc = "A cost-effective removable eye prosthetic. It connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "hudpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle iPatch"
+	toggleable = 1
+
+/obj/item/clothing/glasses/eyepatch/hud/New()
+	.  = ..()
+	update_icon()
+
+/obj/item/clothing/glasses/eyepatch/hud/attack_self()
+	..()
+	update_icon()
+
+/obj/item/clothing/glasses/eyepatch/hud/security
+	name = "SECpatch"
+	desc = "A Security-type heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "secpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle HUD"
+	toggleable = 1
+	enables_planes = list(VIS_CH_ID,VIS_CH_WANTED,VIS_CH_IMPTRACK,VIS_CH_IMPLOYAL,VIS_CH_IMPCHEM)
+
+/obj/item/clothing/glasses/eyepatch/hud/medical
+	name = "MEDpatch"
+	desc = "A Medical-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "medpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle HUD"
+	toggleable = 1
+	enables_planes = list(VIS_CH_STATUS,VIS_CH_HEALTH)
+
+/obj/item/clothing/glasses/eyepatch/hud/meson
+	name = "MESpatch"
+	desc = "An optical meson scanner display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "mespatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle Mesons"
+	toggleable = 1
+	vision_flags = SEE_TURFS
+	enables_planes = list(VIS_FULLBRIGHT, VIS_MESONS)
+
+/obj/item/clothing/glasses/hudpatch/meson/New()
+
+	..()
+	overlay = global_hud.meson
+
+/obj/item/clothing/glasses/eyepatch/hud/material
+	name = "MATpatch"
+	desc = "An optical material scanner display that connects directly to the oclar nerve of the user, replacing the need for that useless eyeball."
+	icon_state = "matpatch"
+	off_state = "hudpatch"
+	action_button_name = "Toggle Material scanner"
+	toggleable = 1
+	vision_flags = SEE_OBJS
+	enables_planes = list(VIS_FULLBRIGHT)
+
+/obj/item/clothing/glasses/hudpatch/material/New()
+
+	..()
+	overlay = global_hud.material
+/////eyepatch Variants End/////
 
 /obj/item/clothing/glasses/monocle
 	name = "monocle"
