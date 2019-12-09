@@ -102,7 +102,13 @@ var/global/datum/global_init/init = new ()
 
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
+	
+	// Loads all the pre-made submap templates.	
+	load_map_templates()	
 
+	if(config.generate_map)	
+		if(using_map.perform_map_generation())	
+			using_map.refresh_mining_turfs()
 /*
 	if(config.generate_asteroid)
 		// These values determine the specific area that the map is applied to.
