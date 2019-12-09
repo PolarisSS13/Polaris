@@ -102,12 +102,12 @@ var/global/datum/global_init/init = new ()
 
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
+	
+	// Loads all the pre-made submap templates.	
+	load_map_templates()	
 
-	// Loads all the pre-made submap templates.
-	load_map_templates()
-
-	if(config.generate_map)
-		if(using_map.perform_map_generation())
+	if(config.generate_map)	
+		if(using_map.perform_map_generation())	
 			using_map.refresh_mining_turfs()
 /*
 	if(config.generate_asteroid)
@@ -640,9 +640,10 @@ proc/setup_database_connection()
 	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon.IsConnected()
 	if ( . )
-		failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
+		reset_db_chances()	//If this connection succeeded, reset the failed connections counter.
 	else
 		failed_db_connections++		//If it failed, increase the failed connections counter.
+		message_admins("ERROR: Could not connect to mysql server. Error: [dbcon.ErrorMsg()]", 1)
 		world.log << dbcon.ErrorMsg()
 
 	return .
@@ -685,12 +686,17 @@ proc/setup_old_database_connection()
 	dbcon_old.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
 	. = dbcon_old.IsConnected()
 	if ( . )
-		failed_old_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
+		reset_db_chances()	//If this connection succeeded, reset the failed connections counter.
 	else
 		failed_old_db_connections++		//If it failed, increase the failed connections counter.
+		message_admins("ERROR: Could not connect to mysql server (old db). Error: [dbcon.ErrorMsg()] - Details: [db]:[address]:[port]","[user]","[pass]", 1)
 		world.log << dbcon.ErrorMsg()
 
 	return .
+
+proc/reset_db_chances()
+	failed_old_db_connections = 0
+	return 1
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 proc/establish_old_db_connection()
