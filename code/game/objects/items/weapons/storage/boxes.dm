@@ -494,3 +494,8 @@
 	desc = "A box that holds social service cards."
 	icon_state = "socialservice"
 	starts_with = list(/obj/item/weapon/card/foodstamp = 7)
+
+/obj/item/weapon/storage/box/press_badges
+	name = "box of press badges"
+	desc = "A box that holds press badges."
+	starts_with = list(/obj/item/clothing/accessory/badge/press = 7)

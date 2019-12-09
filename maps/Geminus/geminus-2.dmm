@@ -2969,7 +2969,7 @@
 "bfe" = (/obj/effect/floor_decal/corner/paleblue/diagonal,/turf/simulated/floor/tiled/white,/area/crew_quarters/heads/cmo)
 "bff" = (/obj/machinery/navbeacon/patrol{next_patrol = "CH11"; location = "CH10"},/turf/simulated/floor/pavement/pave_tiling,/area/planets/Geminus/outdoor/central)
 "bfg" = (/turf/simulated/wall/walnut,/area/planets/Geminus/indoor/city_hall)
-"bfh" = (/obj/structure/table/woodentable,/obj/item/device/tvcamera,/obj/machinery/light/small{dir = 4; pixel_y = 0},/obj/item/device/retail_scanner/civilian{tag = "icon-retail_idle (NORTH)"; icon_state = "retail_idle"; dir = 1},/obj/item/weapon/barcodescanner,/obj/item/clothing/accessory/badge/press,/turf/simulated/floor/carpet/turcarpet,/area/library)
+"bfh" = (/obj/structure/table/woodentable,/obj/item/device/tvcamera,/obj/machinery/light/small{dir = 4; pixel_y = 0},/obj/item/device/retail_scanner/civilian{tag = "icon-retail_idle (NORTH)"; icon_state = "retail_idle"; dir = 1},/obj/item/weapon/barcodescanner,/obj/item/weapon/storage/box/press_badges,/turf/simulated/floor/carpet/turcarpet,/area/library)
 "bfi" = (/obj/structure/table/reinforced,/obj/machinery/cash_register/civilian{icon_state = "register_idle"; dir = 4},/turf/simulated/floor/carpet/turcarpet,/area/library)
 "bfj" = (/obj/structure/table/reinforced,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/rnd/lab)
 "bfk" = (/obj/structure/bed/chair/office/light{dir = 8},/obj/effect/landmark/start{name = "Librarian"},/turf/simulated/floor/carpet/turcarpet,/area/library)
