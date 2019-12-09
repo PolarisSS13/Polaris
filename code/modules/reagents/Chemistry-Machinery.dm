@@ -496,10 +496,10 @@
 		if(remaining_volume <= 0)
 			break
 
-		if(sheet_reagents[O.type])
+		if(reagents[O.type])
 			var/obj/item/stack/stack = O
 			if(istype(stack))
-				var/list/sheet_components = sheet_reagents[stack.type]
+				var/list/sheet_components = reagents[stack.type]
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/reagents_per_unit)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
