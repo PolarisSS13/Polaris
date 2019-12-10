@@ -78,8 +78,14 @@
 					return
 				to_chat(user, "You start drawing a letter on the [target.name].")
 			if("graffiti")
+				drawtype = input("Choose the graffiti.", "Crayon scribbles") in list("amyjon","face","matt","revolution","engie","guy","end","dwarf","uboa")
+				if(get_dist(target, user) > 1 || !(user.z == target.z))
+					return
 				to_chat(user, "You start drawing graffiti on the [target.name].")
 			if("rune")
+				drawtype = input("Choose the rune.", "Crayon scribbles") in list("rune1", "rune2", "rune3", "rune4", "rune5", "rune6")
+				if(get_dist(target, user) > 1 || !(user.z == target.z))
+					return
 				to_chat(user, "You start drawing a rune on the [target.name].")
 			if("arrow")
 				drawtype = input("Choose the arrow.", "Crayon scribbles") in list("left", "right", "up", "down")
