@@ -563,6 +563,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "<b>Official World Server | Roleplay</b> - <b>[station_name()]</b>";
 	s += " | Persistent money, partial map saving, economy, elections. ("
 	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
+	if(SSelections && SSelections.current_president)
+		s += "<br><b>Current President:</b> [SSelections.current_president.name]<br>"	
 //	s += "[game_version]"
 	s += "DISCORD"
 	s += "</a>"
