@@ -13,6 +13,7 @@
 	var/stored_name
 	var/badge_string = "Geminus City Police Department"
 	var/name_reset = ""
+	var/news_network_name
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -169,10 +170,25 @@
 	return
 
 /obj/item/clothing/accessory/badge/press/attack_self(mob/user as mob)
+
 	if(!stored_name)
 		user << "Waving around a press badge before swiping an ID would be pretty pointless."
 		return
-	return ..()
+
+	if(isliving(user))
+		if(stored_name && news_network_name)
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [stored_name], [badge_string], [news_network_name].</span>","<span class='notice'>You display your [src.name].\nIt reads: [stored_name], [badge_string], [news_network_name].</span>")
+		else if(stored_name)
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [stored_name], [badge_string].</span>","<span class='notice'>You display your [src.name].\nIt reads: [stored_name], [badge_string].</span>")
+		else
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
+
+/obj/item/clothing/accessory/badge/press/verb/Change_Network()
+	var/new_news_network_name = sanitize(input(usr,"What news network would you like to put on this badge?","News Network Name", news_network_name) as null|text)
+
+	if(!isnull(new_news_network_name))
+		src.news_network_name = new_news_network_name
+		usr << "<span class='notice'>News Network changed to '[new_news_network_name]'.</span>"
 
 /obj/item/clothing/accessory/badge/press/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
