@@ -13,6 +13,7 @@
 	var/stored_name
 	var/badge_string = "Geminus City Police Department"
 	var/name_reset = ""
+	var/news_network_name
 
 /obj/item/clothing/accessory/badge/old
 	name = "faded badge"
@@ -148,6 +149,76 @@
 	desc = "An immaculately polished gold police badge on leather. Labeled 'Detective.'"
 	icon_state = "marshalbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
+
+/obj/item/clothing/accessory/badge/press
+	name = "press badge"
+	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
+	icon_state = "pressbadge"
+	badge_string = "Journalist"
+	var/emagged //for the stealthy antag
+
+/obj/item/clothing/accessory/badge/press/verb/Reset()
+	if(access_library in usr.GetIdCard().access || emagged)
+		if(!stored_name)
+			usr << "There is no information stored on the badge."
+		else
+			usr << "You reset the press badge."
+			stored_name = FALSE
+			name = name_reset
+	else
+		usr << "[name] rejects your insufficient access rights."
+	return
+
+/obj/item/clothing/accessory/badge/press/attack_self(mob/user as mob)
+
+	if(!stored_name)
+		user << "Waving around a press badge before swiping an ID would be pretty pointless."
+		return
+
+	if(isliving(user))
+		if(stored_name && news_network_name)
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [stored_name], [badge_string], [news_network_name].</span>","<span class='notice'>You display your [src.name].\nIt reads: [stored_name], [badge_string], [news_network_name].</span>")
+		else if(stored_name)
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [stored_name], [badge_string].</span>","<span class='notice'>You display your [src.name].\nIt reads: [stored_name], [badge_string].</span>")
+		else
+			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
+
+/obj/item/clothing/accessory/badge/press/verb/Change_Network()
+	var/new_news_network_name = sanitize(input(usr,"What news network would you like to put on this badge?","News Network Name", news_network_name) as null|text)
+
+	if(!isnull(new_news_network_name))
+		src.news_network_name = new_news_network_name
+		usr << "<span class='notice'>News Network changed to '[new_news_network_name]'.</span>"
+
+/obj/item/clothing/accessory/badge/press/emag_act(var/remaining_charges, var/mob/user)
+	if (emagged)
+		user << "<span class='danger'>\The [src] is already cracked.</span>"
+		return
+	else
+		emagged = 1
+		user << "<span class='danger'>You crack the press badge's security checks.</span>"
+		return 1
+
+/obj/item/clothing/accessory/badge/press/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
+
+		var/obj/item/weapon/card/id/id_card = null
+
+		if(istype(O, /obj/item/weapon/card/id))
+			id_card = O
+		else
+			var/obj/item/device/pda/pda = O
+			id_card = pda.id
+
+		if(access_library in id_card.access || emagged)
+			user << "You imprint your ID details onto the badge."
+			if (!name_reset)
+				name_reset = name
+			set_name(user.real_name)
+		else
+			user << "[src] rejects your insufficient access rights."
+		return
+	..()
 
 /obj/item/weapon/storage/box/holobadge/hos
 	name = "holobadge box"
