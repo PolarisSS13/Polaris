@@ -24,7 +24,7 @@
 	var/list/datum/matter_synth/synths = null
 	var/no_variants = TRUE // Determines whether the item should update it's sprites based on amount.
 	var/associated_reagent	// put reagent "id" here
-	var/reagents_per_unit = 10
+	var/reagents_per_unit = 2
 
 /obj/item/stack/proc/update_reagents()
 
