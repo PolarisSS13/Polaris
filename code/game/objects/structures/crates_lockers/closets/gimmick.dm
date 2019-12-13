@@ -143,3 +143,28 @@
 	icon_closed = "alien_locker"
 	icon_opened = "alien_locker_open"
 	anchored = TRUE
+
+/obj/structure/closet/poxball
+	name = "poxball closet"
+	desc = "A closet containing the latest in poxball technology. Smells like sweat and blood."
+	icon_state = "syndicate1"
+	icon_closed = "syndicate1"
+	icon_opened = "syndicateopen"
+
+/obj/structure/closet/poxball/New()
+	..()
+	new /obj/item/clothing/suit/armor/poxball(src)
+	new /obj/item/clothing/suit/armor/poxball(src)
+	new /obj/item/clothing/suit/armor/poxball(src)
+	new /obj/item/clothing/head/helmet/poxball(src)
+	new /obj/item/clothing/head/helmet/poxball(src)
+	new /obj/item/clothing/head/helmet/poxball(src)
+	new /obj/item/clothing/shoes/leg_guard/poxball(src)
+	new /obj/item/clothing/shoes/leg_guard/poxball(src)
+	new /obj/item/clothing/shoes/leg_guard/poxball(src)
+	new /obj/item/clothing/gloves/arm_guard/poxball(src)
+	new /obj/item/clothing/gloves/arm_guard/poxball(src)
+	new /obj/item/clothing/gloves/arm_guard/poxball(src)
+	new /obj/item/weapon/gun/energy/poxball(src)
+	new /obj/item/weapon/gun/energy/poxball(src)
+	new /obj/item/weapon/gun/energy/poxball(src)
