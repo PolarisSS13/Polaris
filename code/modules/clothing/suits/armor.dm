@@ -552,3 +552,57 @@
 /obj/item/clothing/suit/armor/pcarrier/merc
 	starting_accessories = list(/obj/item/clothing/accessory/armor/armorplate/merc, /obj/item/clothing/accessory/armor/armguards/merc, /obj/item/clothing/accessory/armor/legguards/merc, /obj/item/clothing/accessory/storage/pouches/large)
 
+/obj/item/clothing/suit/armor/poxball
+	name = "poxball chestpiece"
+	desc = "A modified ablative armor vest designed to protect from poxball surges."
+	icon_state = "poxball_chest"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	blood_overlay_type = "armor"
+	allowed = list(/obj/item/weapon/tank)
+	armor = list(melee = 10, bullet = 10, laser = 20, energy = 30, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.1
+	var/team_color
+
+/obj/item/clothing/suit/armor/poxball/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+	if(istype(damage_source, /obj/item/projectile/energy/poxball) || istype(damage_source, /obj/item/weapon/melee/poxball))
+		var/obj/item/projectile/P = damage_source
+
+		if(P.reflected) // Can't reflect twice
+			return ..()
+
+		var/reflectchance = 40 - round(damage/3)
+		if(!(def_zone in list(BP_TORSO, BP_GROIN)))
+			reflectchance /= 2
+		if(P.starting && prob(reflectchance))
+			visible_message("<span class='danger'>\The [user]'s [src.name] dispels /the [damage_source]'s charge!</span>")
+			playsound(loc, "sparks", 75, 1, -1)
+
+			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+			sparks.set_up(3, 0, get_turf(user))
+			sparks.start()
+
+			// Find a turf near or on the original location to bounce to
+			var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+			var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+			var/turf/curloc = get_turf(user)
+
+			// redirect the projectile
+			P.redirect(new_x, new_y, curloc, user)
+			P.reflected = 1
+
+			return PROJECTILE_CONTINUE // complete projectile permutation
+
+/obj/item/clothing/suit/armor/poxball/verb/Set_Team_Color()
+	set name = "Set Team Color"
+	if(!usr.canmove || usr.stat || usr.restrained()) return
+
+	switch(alert("Select a color.", "Which team are you on?", "Red", "Blue", "Disable Team Color"))
+		if("Red")
+			icon_state = "poxball_chest_r"
+			update_clothing_icon()
+		if("Blue")
+			icon_state = "poxball_chest_b"
+			update_clothing_icon()
+		if("Disable Team Color")
+			icon_state = initial(icon_state)
+			update_clothing_icon()

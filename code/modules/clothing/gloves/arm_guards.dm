@@ -46,3 +46,26 @@
 	item_state_slots = list(slot_r_hand_str = "swat", slot_l_hand_str = "swat")
 	siemens_coefficient = 0.6
 	armor = list(melee = 50, bullet = 50, laser = 50, energy = 30, bomb = 30, bio = 0, rad = 0)
+
+/obj/item/clothing/gloves/arm_guard/poxball
+	name = "poxball arm guards"
+	desc = "These arm guards will protect your hands and arms from energy weapons."
+	icon_state = "poxball_hands"
+	item_state_slots = list(slot_r_hand_str = "swat", slot_l_hand_str = "swat")
+	siemens_coefficient = 0.5 //worse than ablative gloves to prevent their use as insulated gloves
+	armor = list(melee = 10, bullet = 5, laser = 20, energy = 30, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/gloves/arm_guard/poxball/verb/Set_Team_Color()
+	set name = "Set Team Color"
+	if(!usr.canmove || usr.stat || usr.restrained()) return
+
+	switch(alert("Select a color.", "Which team are you on?", "Red", "Blue", "Disable Team Color"))
+		if("Red")
+			icon_state = "poxball_hands_r"
+			update_clothing_icon()
+		if("Blue")
+			icon_state = "poxball_hands_b"
+			update_clothing_icon()
+		if("Disable Team Color")
+			icon_state = initial(icon_state)
+			update_clothing_icon()
