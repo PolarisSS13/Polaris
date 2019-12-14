@@ -452,3 +452,36 @@
 /mob/living/simple_animal/hostile/carp/holodeck/proc/derez()
 	visible_message("<span class='notice'>\The [src] fades away!</span>")
 	qdel(src)
+
+//Poxball objects
+
+/obj/item/weapon/melee/poxball
+	name = "poxball"
+	desc = "A rigid ball made of conductive material glowing with blue energy. It probably isn't safe to lick this thing."
+	icon = 'icons/obj/poxball.dmi'
+	icon_state = "poxball"
+	force = 5
+	pass_flags = PASSTABLE
+	attack_verb = list("bopped", "bonked", "boinked")
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 1)
+	w_class = ITEMSIZE_NORMAL
+	light_color = "#619EFF"
+	light_range = 2
+	light_power = 1
+	embed_chance = 0
+
+/obj/item/weapon/melee/poxball/suicide_act(mob/user)
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+	user.visible_message("<span class='suicide'>\The [user] is licking the conductive threads of the [name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
+	return (FIRELOSS)
+
+/obj/item/weapon/melee/poxball/gold
+	name = "golden poxball"
+	desc = "A golden poxball signed by Poxball champion Yuan Ts'ui. It seems to be disabled"
+	icon_state = "poxball_gold"
+	force = 10
+	w_class = ITEMSIZE_NORMAL
+	pass_flags = PASSTABLE
+	attack_verb = list("bopped", "bonked", "boinked")
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 1)
+	embed_chance = 0
