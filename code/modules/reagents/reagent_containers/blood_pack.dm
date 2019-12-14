@@ -72,10 +72,10 @@
 		name = base_name
 	else if(length(label_text) > 10)
 		var/short_label_text = copytext(label_text, 1, 11)
-		name = "[base_name] ([short_label_text]...)"
+		name = "IV Pack ([short_label_text]...)"
 	else
-		name = "[base_name] ([label_text])"
-	desc = "[base_desc] It is labeled \"[label_text]\"."
+		name = "IV Pack ([label_text])"
+	desc = "Holds liquids used for transfusion. It is labeled \"[label_text]\"."
 
 /obj/item/weapon/reagent_containers/blood/APlus
 	blood_type = "A+"
