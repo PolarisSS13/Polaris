@@ -47,7 +47,7 @@
 		usr << "<span class='danger'>You have deadchat muted.</span>"
 		return
 
-	message = say_emphasis(message)
+	message = encode_html_emphasis(message)
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
 
