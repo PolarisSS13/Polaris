@@ -165,62 +165,11 @@ The Polluxian Government & NanoTrasen reserves the right to request an audit at 
 	{{:helper.link("Edit Business Description", null, {'edit_business_desc' : 1})}}
 	{{:helper.link("Edit Business Category", null, {'edit_business_category' : 1})}}
 	{{:helper.link("Change Business Password", null, {'change_password' : 1})}}
+	
 	{{:helper.link("Change Primary Color", null, {'set_primary_color' : 1})}}
 	{{:helper.link("Change Secondary Color", null, {'set_secondary_color' : 1})}} 
+	
 	{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
 
 
 {{/if}}
-
-<!--DO NOT TOUCH THIS. IT WILL STOP WORKING. 
-
-{{if data.index == 7}}
-<h3>Employee Management</h3><p>
-{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
-
-	<div class="item">
-		<div class="itemLabel">
-			Commands:
-		</div>
-		<div class="itemContent">
-			{{:helper.link("Fire", null, {'terminate_employee' : 1})}}
-			{{:helper.link("Blacklist", null, {'blacklist_employee' : 1})}}
-			{{:helper.link("Email Employee", null, {'email_employee' : 1})}}
-		</div>
-	</div>
-
-	<table style="width:100%">
-		<tr><th style="width:20%">Name<th style="width:40%">Position<th style="width:15%">Employment Date<th style="width:10%">EmplID
-		{{for data.employees}}
-		<tr><td>{{:value.name}}
-			<td>{{:value.position}}
-			<td>{{:value.join_date}}
-			<td>{{:value.unique_ID}}
-		</div>
-		{{/for}}
-	</table>
-{{/if}}
-
-{{if data.index == 8}}
-	<h3>Pending Applications</h3><p>
-
-	<div class="item">
-		<div class="itemLabel">
-			Commands:
-		</div>
-		<div class="itemContent">
-			{{:helper.link("Hire", null, {'hire_applicant' : 1})}}
-			{{:helper.link("Delete Application", null, {'delete_applicant' : 1})}}
-			{{:helper.link("Email Applicant", null, {'email_applicant' : 1})}}
-		</div>
-	</div>
-
-	<table style="width:100%">
-		<tr><th style="width:50%">Name<th style="width:50%">Application Date
-		{{for data.applicants}}
-		<tr><td>{{:value.name}}
-			<td>{{:value.apply_date}}
-		</div>
-		
-	{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
-{{/if}} -->
