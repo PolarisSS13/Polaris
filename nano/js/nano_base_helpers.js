@@ -24,7 +24,6 @@ NanoBaseHelpers = function ()
 				$('body').css("background-image","url('uiBackground-techsoft.png')");
 				$('body').css("background-position","50% 50%");
 				$('body').css("background-repeat","repeat-x");
-				$('body').css("background-size","100% 100%");
 
 				$('#uiTitleFluff').css("background-image","url('uiTitleFluff.png')");
 				$('#uiTitleFluff').css("background-position","50% 50%");

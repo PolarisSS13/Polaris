@@ -4,7 +4,7 @@
 {{if data.index == 0}}
 <p>Welcome, {{:data.authuser}}.</p>
 
-{{if data.current_party}}
+{{if data.current_business}}
 	<h2>{{:data.current_business_name}}</h2><br>
 
 	{{:helper.link("View Business Page", null, {'login' : 1})}}
@@ -21,7 +21,7 @@
 <hr>
 
 {{:helper.link("Register a Business", null, {'register_business' : 1})}}
-
+<!-- {{:helper.link("Apply to a Business", null, {'apply_to_business' : 1})}} -->
 {{:helper.link("View Existing Businesses", null, {'view_businesses' : 1})}}
 
 {{/if}}
@@ -150,8 +150,9 @@ The Polluxian Government & NanoTrasen reserves the right to request an audit at 
 <br>
 <hr> 
 
+<!--	{{:helper.link("Manage Employees", null, {'manage_employees' : 1})}} -->
+<!--	{{:helper.link("Check Employee Applications", null, {'check_applications' : 1})}} -->
 	{{:helper.link("Business Settings", null, {'business_settings' : 1})}}  
-
 	{{:helper.link("Log Out", null, {'business_logout' : 1})}}   
 
 {{/if}}
@@ -166,13 +167,60 @@ The Polluxian Government & NanoTrasen reserves the right to request an audit at 
 	{{:helper.link("Change Business Password", null, {'change_password' : 1})}}
 	{{:helper.link("Change Primary Color", null, {'set_primary_color' : 1})}}
 	{{:helper.link("Change Secondary Color", null, {'set_secondary_color' : 1})}} 
-	{{:helper.link("Back", null, {'return_to_business_page' :1})}}
+	{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
 
 
 {{/if}}
+
+<!--DO NOT TOUCH THIS. IT WILL STOP WORKING. 
 
 {{if data.index == 7}}
-	{{:helper.link("Back", null, {'return_to_business_page' :1})}}
+<h3>Employee Management</h3><p>
+{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
 
+	<div class="item">
+		<div class="itemLabel">
+			Commands:
+		</div>
+		<div class="itemContent">
+			{{:helper.link("Fire", null, {'terminate_employee' : 1})}}
+			{{:helper.link("Blacklist", null, {'blacklist_employee' : 1})}}
+			{{:helper.link("Email Employee", null, {'email_employee' : 1})}}
+		</div>
+	</div>
 
+	<table style="width:100%">
+		<tr><th style="width:20%">Name<th style="width:40%">Position<th style="width:15%">Employment Date<th style="width:10%">EmplID
+		{{for data.employees}}
+		<tr><td>{{:value.name}}
+			<td>{{:value.position}}
+			<td>{{:value.join_date}}
+			<td>{{:value.unique_ID}}
+		</div>
+		{{/for}}
+	</table>
 {{/if}}
+
+{{if data.index == 8}}
+	<h3>Pending Applications</h3><p>
+
+	<div class="item">
+		<div class="itemLabel">
+			Commands:
+		</div>
+		<div class="itemContent">
+			{{:helper.link("Hire", null, {'hire_applicant' : 1})}}
+			{{:helper.link("Delete Application", null, {'delete_applicant' : 1})}}
+			{{:helper.link("Email Applicant", null, {'email_applicant' : 1})}}
+		</div>
+	</div>
+
+	<table style="width:100%">
+		<tr><th style="width:50%">Name<th style="width:50%">Application Date
+		{{for data.applicants}}
+		<tr><td>{{:value.name}}
+			<td>{{:value.apply_date}}
+		</div>
+		
+	{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
+{{/if}} -->

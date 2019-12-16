@@ -3,9 +3,9 @@
 	This file will contain a ton of comments
 	to aid in modifying it in the future, once
 	businesses are fully fleshed out. DO NOT
-	remove any comments lest future coders be
+	remove any comments lest our posterity be
 	forced to reverse engineer this word wall of
-	coder jargon.
+	confounding variables.
 
 **************************************************/
 
@@ -24,7 +24,7 @@
 
 /**********************
 
-	Login Variables
+	User Variables
 
 **********************/
 
@@ -50,6 +50,8 @@
 	var/reg_error = "*Fields marked with an asterisk are required."
 
 	var/datum/business/current_business
+
+	var/sort_by = "empl_ID"
 
 /datum/nano_module/program/business_manager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = list()
@@ -98,6 +100,7 @@
 	data["b_name"] = b_name
 	data["b_slogan"] = b_slogan
 	data["b_desc"] = b_desc
+	data["b_category"] = b_category
 	data["acc_no"] = acc_no
 	data["acc_pin"] = acc_pin
 	data["reg_error"] = reg_error
@@ -126,6 +129,16 @@
 		. = 1
 		index = 0
 		reset_fields()
+
+	if(href_list["return_to_business_page"])
+		. = 1
+		index = 5
+
+/*******************
+
+	Registration
+
+*******************/
 
 	if(href_list["login"])
 		. = 1
@@ -221,8 +234,14 @@
 			return
 		else
 
+			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+			EA.password = business_pass
+			EA.login = "[replacetext(lowertext(b_name), " ", "-")]@businesses.nanotrasen.gov"
+
 			var/datum/business/B = create_new_business(b_name, b_desc, b_slogan, business_pass, b_category, user_uid, user_name)
-			message_admins("New Business registered: [b_name].")
+			log_and_message_admins("New Business registered: [b_name].") //To prevent rule breaking names
+
+			B.email = EA.login
 
 			index = 2
 			page_msg = "Business Registered <br><br>\
@@ -232,9 +251,19 @@
 			<b>Business Category:</b> [B.category]<p>\
 			<b>Business Descripton:</b> [B.description]<p>\
 			<b>Business Slogan:</b> [B.slogan]<p>\
-			<b>Business Password:</b> [business_pass]"
+			<b>Business Email:</b> [B.email]<p>\
+			<b>Business Password:</b> [business_pass]<p>\
+			<br>\
+			Please note that your business account and email passwords are linked."
 
+			create_employee(user_name, usr.client.prefs.unique_id, "CEO", B)
 			reset_fields()
+
+/*****************************
+
+	Login to Business Account
+
+*****************************/
 
 	if(href_list["business_logout"])
 		reset_fields()
@@ -258,18 +287,21 @@
 		B = get_business_by_name(b_name)
 
 		if(!B)
-			message_admins("Could not find [B.name].")
 			page_msg = "Unable to login to this business."
 			return
 
 		if(try_auth_business(B, b_name, business_pass))
 			page_msg = "Login successful!"
-			message_admins("Success! Logged into [B.name].")
 			current_business = B
 			index = 5
 		else
-			message_admins("Login failed for [B.name] with [business_pass].")
 			page_msg = "Login failed. Please check the password or business name."
+
+/***********************
+
+	Business Settings
+
+************************/
 
 	if(href_list["business_settings"])
 		. = 1
@@ -290,7 +322,7 @@
 			return
 
 		else if(current_business)
-			message_admins("The [current_business.name] business has been renamed to [new_name].")
+			log_and_message_admins("The [current_business.name] business has been renamed to [new_name].") // To prevent names that break the rules
 			current_business.name = new_name
 
 	if(href_list["set_primary_color"])
@@ -348,26 +380,123 @@
 		if(current_business)
 			current_business.password = new_pass
 
-	if(href_list["return_to_business_page"])
-		. = 1
-		index = 5
+/***************************************************
 
-/**********************
+	Temporarily commented out.
+
+/**************************
 
 	Employee Management
 
+**************************/
 
-
-	if(href_list["Manage Employees"])
+	if(href_list["manage_employees"])
 		. = 1
 		index = 7
 
-	if(href_list["Terminate Employee"])
+	if(href_list["return_to_manage_employees"])
+		. = 1
+		index = 7
+
+	if(href_list["terminate_employee"])
+		. = 1
+		var/employee = input(usr, "Select an employee to terminate", "Terminate Employee") as null|anything in list(current_business.employees)
+
+		switch(alert(usr, "Are you sure you want to terminate [employee]?","Yes","No"))
+			if("Yes")
+
+				terminate_employee(current_business, employee)
+
+			if("No")
+				return
+
+	if(href_list["blacklist_employee"])
+		. = 1
+		var/employee = input(usr, "Select an employee to blacklist", "Blacklist Employee") as null|anything in list(current_business.employees)
+
+		switch(alert(usr, "Are you sure you want to blacklist [employee]?","Yes","No"))
+			if("Yes")
+
+				blacklist_employee(current_business, employee)
+
+			if("No")
+				return
+
+	if(href_list["view_applicant"])
 		. = 1
 
-	if(href_list["Blacklist Employee"])
+	if(href_list["check_applications"])
+		. = 1
+		index = 8
+
+	if(href_list["return_to_applications"])
+		. = 1
+		index = 8
+
+
+	if(href_list["email_employee"])
 		. = 1
 
-	if
+/*******************
 
-***********************/
+	Application
+
+*******************/
+
+	if(href_list["apply_to_business"])
+		. = 1
+
+		if(!ishuman(usr))
+			return
+
+		var/mob/living/carbon/human/H = usr
+
+		var/obj/item/weapon/card/id/I = H.GetIdCard()
+
+		if(!I)
+			return
+
+		var/UID = I.unique_ID
+		var/email = get_email(I.associated_email_login["login"])
+		var/reg_name = I.registered_name
+
+
+		var/list/avail_business
+
+		for(var/datum/business/business in businesses)
+			avail_business += business.name
+
+		if(!avail_business)
+			return
+
+		var/applied_business = input(usr, "Select a business to apply to", "Apply to Business")  as null|anything in list(avail_business)
+
+		var/choice = input(usr,"Apply for a position at [applied_business]?", "Apply to Business") in list("Yes","No")
+
+		if(choice == "Yes")
+
+			var/applied
+
+			for(var/datum/business/business in businesses)
+				if(applied_business == business.name)
+					applied = business
+					break
+
+			var/app_msg = sanitize(copytext(input(usr, "Enter your application message. This will be reviewed by the business owner or managers. (300 chars max)", "Application Message", null)  as message,1,300))
+
+			create_business_applicant(reg_name, UID, email, app_msg, applied)
+
+		if(choice == "No")
+			return
+
+
+	if(href_list["delete_applicant"])
+		. = 1
+
+	if(href_list["email_applicant"])
+		. = 1
+
+	if(href_list["hire_applicant"])
+		. = 1
+
+***********************************************************************/
