@@ -221,8 +221,8 @@
 	name = "charged poxball"
 	icon_state = "poxball"
 	fire_sound = 'sound/weapons/poxball_launched.ogg'
-	damage = 5
-	agony = 10
+	damage = 10
+	agony = 35
 	pass_flags = PASSTABLE
 	light_color = "#619EFF"
 	light_range = 2
