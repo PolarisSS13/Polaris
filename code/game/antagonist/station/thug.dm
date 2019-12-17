@@ -6,7 +6,8 @@ var/datum/antagonist/thug/thugs
 	role_text = "Thug"
 	role_text_plural = "Thugs"
 	bantype = "renegade"
-	restricted_jobs = list("AI", "Cyborg","Mayor","Chief of Police","Chief Medical Officer","Chief Engineer","Research Director","Judge")
+	restricted_jobs = list("AI", "Cyborg","Mayor","Chief of Police","Police Officer",\
+	"Prison Warden","Detective","Chief Medical Officer","Chief Engineer","Research Director","Judge")
 	welcome_text = "Sometimes, people just need to get messed up.Luckily, that's what you're here to do."
 	antag_text = "You are a <b>thug</b>! Within the server rules, do whatever it is \
 		that you came to the city to do, be it violence, drug dealing, theft, or \
