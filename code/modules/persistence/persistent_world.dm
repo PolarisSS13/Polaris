@@ -1,7 +1,7 @@
 
 /proc/save_world()
 	//saves all department accounts
-	persistent_economy.save_accounts()
+	persistent_economy.save_economy()
 
 	//save politics related data
 	SSelections.save_data.save_candidates()

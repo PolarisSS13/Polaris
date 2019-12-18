@@ -560,16 +560,19 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server Redux | Partially persistent city roleplay</b> - <b>[station_name()]</b>";
-	s += " | DEVELOPMENT MODE ("
-	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
+	s += "<b>Official World Server | Roleplay</b> - <b>[station_name()]</b>";
+	s += " | Persistent money, partial map saving, economy, elections."
+
+	s += "(<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "DISCORD"
 	s += "</a>"
 	s += ")"
-
+	
 	var/list/features = list()
-
+	if(SSelections && SSelections.current_president)
+		features += "<br><b>Current President:</b> [SSelections.current_president.name]<br>"
+		
 	if(ticker)
 		if(master_mode)
 			features += master_mode
@@ -579,10 +582,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (!config.enter_allowed)
 		features += "closed"
 
-	features += config.abandon_allowed ? "respawn" : "no respawn"
+//	features += config.abandon_allowed ? "respawn" : "no respawn"
 
-	if (config && config.allow_vote_mode)
-		features += "vote"
+//	if (config && config.allow_vote_mode)
+//		features += "vote"
 
 	if (config && config.allow_ai)
 		features += "AI allowed"
@@ -593,13 +596,13 @@ var/world_topic_spam_protect_time = world.timeofday
 			n++
 
 	if (n > 1)
-		features += "~[n] players"
+		features += "~[n] civilians"
 	else if (n > 0)
-		features += "~[n] player"
+		features += "~[n] civilian"
 
 
-	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
+//	if (config && config.hostedby)
+//		features += "hosted by <b>[config.hostedby]</b>"
 
 	s += "<img src=\"https://i.imgur.com/RGXrBHu.gif\">" //Banner image
 

@@ -63,11 +63,11 @@
 	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
-/decl/hierarchy/outfit/job/civilian/librarian
-	name = OUTFIT_JOB_NAME("Librarian")
+/decl/hierarchy/outfit/job/civilian/journalist
+	name = OUTFIT_JOB_NAME("Journalist")
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	l_hand = /obj/item/weapon/barcodescanner
-	id_type = /obj/item/weapon/card/id/civilian/librarian
+	id_type = /obj/item/weapon/card/id/civilian/journalist
 	pda_type = /obj/item/device/pda/librarian
 
 /decl/hierarchy/outfit/job/civilian/chaplain

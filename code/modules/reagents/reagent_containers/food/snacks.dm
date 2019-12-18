@@ -3907,3 +3907,29 @@
 	reagents.add_reagent("cannabis", 10)
 	reagents.add_reagent("coco", 5)
 	bitesize = 5
+
+/obj/item/weapon/reagent_containers/food/snacks/meatcube
+	name = "cubed meat"
+	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
+	icon_state = "meatcube"
+	filling_color = "#7a3d11"
+	center_of_mass = list("x"=16, "y"=16)
+
+/obj/item/weapon/reagent_containers/food/snacks/meatcube/New()
+	. = ..()
+	reagents.add_reagent("protein", 15)
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein
+	name = "\improper LiquidProtein Ration"
+	desc = "A variant of the liquidfood ration, designed for the anemic and hardcore bodybuilders. Only barely more appealing than regular liquidfood. Should this be crunchy?"
+	icon_state = "liquidprotein"
+	trash = /obj/item/trash/liquidprotein
+	filling_color = "#A8A8A8"
+	center_of_mass = list("x"=16, "y"=15)
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidprotein/New()
+	..()
+	reagents.add_reagent("protein", 30)
+	reagents.add_reagent("iron", 3)
+	bitesize = 4

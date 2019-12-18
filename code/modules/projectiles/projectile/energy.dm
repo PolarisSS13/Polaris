@@ -216,3 +216,17 @@
 	damage = 5
 	SA_bonus_damage = 55 // 60 total on animals.
 	SA_vulnerability = SA_ANIMAL
+
+/obj/item/projectile/energy/poxball
+	name = "charged poxball"
+	icon_state = "poxball"
+	fire_sound = 'sound/weapons/poxball_launched.ogg'
+	damage = 10
+	agony = 35
+	pass_flags = PASSTABLE
+	light_color = "#619EFF"
+	light_range = 2
+	light_power = 1
+	check_armour = "energy"
+	embed_chance = 0
+

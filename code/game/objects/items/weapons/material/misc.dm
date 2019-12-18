@@ -12,6 +12,10 @@
 	get_tax()
 		return WEAPONS_TAX
 
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
+
+
 /obj/item/weapon/material/knife/machete/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."

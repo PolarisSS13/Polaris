@@ -10,6 +10,8 @@
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
 	applies_material_colour = 1 // applies material color if set to 1
 
+
+
 /obj/structure/bed/chair/New()
 	..() //Todo make metal/stone chairs display as thrones
 	spawn(3)	//sorry. i don't think there's a better way to do this.
@@ -91,8 +93,10 @@
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
 	desc = "It's a chair. It looks comfy."
-	icon_state = "comfychair_preview"
+	icon_state = "comfychair"
 	applies_material_colour = 1
+	base_icon = "comfychair"
+	armrest_icon = TRUE
 
 /obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","leather")
@@ -414,3 +418,85 @@
 
 /obj/structure/bed/chair/sofa/yellow/corner
 	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/frilly
+	desc = "It's a frilly sofa chair. It looks fancy!"
+	icon_state = "frillychair"
+	applies_material_colour = 1
+	base_icon = "frillychair"
+	armrest_icon = TRUE
+
+/obj/structure/bed/chair/frilly/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")
+
+/obj/structure/bed/chair/frilly/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/frilly/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/frilly/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/frilly/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/frilly/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/frilly/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/frilly/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/frilly/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/frilly/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+
+/obj/structure/bed/chair/barber
+	applies_material_colour = 0
+	icon_state = "barberchair"
+	base_icon = "barberchair"
+	color = COLOR_WHITE
+
+/obj/structure/bed/chair/bosschair
+	name = "big chair"
+	desc = "A regal looking chair. Looks like big-bad territory."
+	icon_state = "capchair"
+	applies_material_colour = 1
+	base_icon = "capchair"
+	armrest_icon = TRUE
+
+/obj/structure/bed/chair/bosschair/red/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","carpet")
+
+/obj/structure/bed/chair/bosschair/teal/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","teal")
+
+/obj/structure/bed/chair/bosschair/black/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","black")
+
+/obj/structure/bed/chair/bosschair/green/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","green")
+
+/obj/structure/bed/chair/bosschair/purp/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","purple")
+
+/obj/structure/bed/chair/bosschair/blue/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","blue")
+
+/obj/structure/bed/chair/bosschair/beige/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","beige")
+
+/obj/structure/bed/chair/bosschair/lime/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","lime")
+
+/obj/structure/bed/chair/bosschair/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+/obj/structure/bed/chair/bosschair/brown/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","leather")

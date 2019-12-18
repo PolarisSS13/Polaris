@@ -29,8 +29,6 @@ var/datum/controller/supply/supply_controller = new()
 
 /datum/controller/supply
 	//supply points
-	var/points = 50
-	var/points_per_process = 1.5
 	var/points_per_slip = 2
 	var/points_per_money = 0.02 // 1 point for $50
 	//control
@@ -60,14 +58,6 @@ var/datum/controller/supply/supply_controller = new()
 /datum/controller/process/supply/setup()
 	name = "supply controller"
 	schedule_interval = 300 // every 30 seconds
-
-/datum/controller/process/supply/doWork()
-	supply_controller.process()
-
-// Supply shuttle ticker - handles supply point regeneration
-// This is called by the process scheduler every thirty seconds
-/datum/controller/supply/process()
-	points += points_per_process
 
 //To stop things being sent to CentCom which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/supply/proc/forbidden_atoms_check(atom/A)
@@ -105,8 +95,8 @@ var/datum/controller/supply/supply_controller = new()
 		if(istype(MA,/obj/structure/closet/crate))
 			var/obj/structure/closet/crate/CR = MA
 			callHook("sell_crate", list(CR, area_shuttle))
-
-			points += CR.points_per_crate
+			
+			department_accounts["Cargo"].money += CR.points_per_crate
 			var/find_slip = 1
 
 			for(var/atom/A in CR)
@@ -120,7 +110,7 @@ var/datum/controller/supply/supply_controller = new()
 				if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
 					var/obj/item/weapon/paper/manifest/slip = A
 					if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
-						points += points_per_slip
+						department_accounts["Cargo"].money += points_per_slip
 						EC.contents[EC.contents.len]["value"] = points_per_slip
 						find_slip = 0
 					continue
@@ -150,7 +140,7 @@ var/datum/controller/supply/supply_controller = new()
 				)
 
 		exported_crates += EC
-		points += EC.value
+		department_accounts["Cargo"].money += EC.value
 
 		// Duplicate the receipt for the admin-side log
 		var/datum/exported_crate/adm = new()
@@ -256,7 +246,7 @@ var/datum/controller/supply/supply_controller = new()
 // Will attempt to purchase the specified order, returning TRUE on success, FALSE on failure
 /datum/controller/supply/proc/approve_order(var/datum/supply_order/O, var/mob/user)
 	// Not enough points to purchase the crate
-	if(supply_controller.points <= O.object.cost)
+	if(department_accounts["Cargo"].money <= O.object.cost)
 		return FALSE
 
 	// Based on the current model, there shouldn't be any entries in order_history, requestlist, or shoppinglist, that aren't matched in adm_order_history
@@ -283,7 +273,7 @@ var/datum/controller/supply/supply_controller = new()
 	adm_order.approved_at = stationdate2text() + " - " + stationtime2text()
 
 	// Deduct cost
-	supply_controller.points -= O.object.cost
+	department_accounts["Cargo"].money -= O.object.cost
 	return TRUE
 
 // Will deny the specified order. Only useful if the order is currently requested, but available at any status

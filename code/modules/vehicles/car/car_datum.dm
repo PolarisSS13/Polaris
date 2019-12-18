@@ -17,7 +17,6 @@
 	var/obj/vehicle/car/E = ridden
 	if(!E.emagged)
 		if(!(istype(next, /turf/simulated/floor/road) || istype(current, /turf/simulated/floor/road))) //We can move from land to water, or water to land, but not from land to land
-			to_chat(user, "<span class='warning'>The car safety controls keep you on the road!</span>")
 			return FALSE
 
 	var/mob/living/carbon/human/H = user

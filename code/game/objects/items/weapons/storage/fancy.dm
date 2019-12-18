@@ -435,3 +435,19 @@
 	new /obj/item/fish_net(src)
 	new /obj/item/tank_brush(src)
 	new /obj/item/fishfood(src)
+
+/*
+ * Cracker Packet
+ */
+
+/obj/item/weapon/storage/fancy/crackers
+	name = "\improper Getmore Crackers"
+	icon = 'icons/obj/food.dmi'
+	icon_state = "crackerbox"
+	icon_type = "cracker"
+	max_storage_space = ITEMSIZE_COST_TINY * 6
+	max_w_class = ITEMSIZE_TINY
+	w_class = ITEMSIZE_SMALL
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/cracker)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/cracker = 6)
+

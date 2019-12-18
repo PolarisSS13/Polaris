@@ -100,6 +100,14 @@
 	applies_material_colour = 0
 	can_cleave = TRUE
 
+
+	get_tax()
+		return WEAPONS_TAX
+
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
+
+
 /obj/item/weapon/material/twohanded/fireaxe/update_held_icon()
 	var/mob/living/M = loc
 	if(istype(M) && !issmall(M) && M.item_is_in_hands(src) && !M.hands_are_full())
@@ -161,3 +169,11 @@
 	fragile = 1	//It's a haphazard thing of glass, wire, and steel
 	reach = 2 // Spears are long.
 	attackspeed = 14
+
+
+	get_tax()
+		return WEAPONS_TAX
+
+	is_contraband()
+		return CONTRABAND_KNIFELARGE
+

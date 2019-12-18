@@ -207,15 +207,19 @@
 
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 
-/obj/item/weapon/haircomb //sparklysheep's comb
-	name = "purple comb"
-	desc = "A pristine purple comb made from flexible plastic."
+/obj/item/weapon/haircomb
+	name = "comb"
+	desc = "A pristine comb made from flexible plastic."
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
 	icon = 'icons/obj/cosmetics.dmi'
 	icon_state = "purplecomb"
 	drop_sound = 'sound/items/drop/accessory.ogg'
+	color = COLOR_PURPLE
 
+/obj/item/weapon/haircomb/random/New()
+	color = "#"+get_random_colour()
+	..()
 
 /obj/item/weapon/haircomb/attack(mob/living/carbon/human/H, mob/user)
 	var/text = "person"

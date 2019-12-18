@@ -121,3 +121,27 @@
 /datum/gear/eyes/sun/prescriptionsun
 	display_name = "sunglasses, presciption (Security/Command)"
 	path = /obj/item/clothing/glasses/sunglasses/prescription
+
+/datum/gear/eyes/security/ipatch
+	display_name = "iPatch, Security"
+	path = /obj/item/clothing/glasses/eyepatch/hud/security
+	cost = 2
+
+/datum/gear/eyes/hudpatch
+	display_name = "iPatch"
+	path = /obj/item/clothing/glasses/eyepatch/hud
+
+/datum/gear/eyes/medical/ipatch
+	display_name = "iPatch, Medical"
+	path = /obj/item/clothing/glasses/eyepatch/hud/medical
+	cost = 2
+
+/datum/gear/eyes/meson/ipatch
+	display_name = "iPatch, Meson"
+	path = /obj/item/clothing/glasses/eyepatch/hud/meson
+	cost = 2
+
+/datum/gear/eyes/material/ipatch
+	display_name = "iPatch, Material"
+	path = /obj/item/clothing/glasses/eyepatch/hud/material
+	cost = 2

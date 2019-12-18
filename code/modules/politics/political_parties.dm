@@ -1,6 +1,8 @@
 
 var/global/list/political_parties = list()
 
+#define PARTY_CHARGE_PERIOD 30		// How often a party is charged their bills.
+
 /datum/party
 	var/id
 	var/password								//password needed to access party
@@ -10,17 +12,19 @@ var/global/list/political_parties = list()
 
 	var/party_message = " "						//party's announcement board message shown to members only
 
-	var/list/datum/party_member/applicants
+	var/list/datum/party_member/applicants = list()
 
-	var/list/datum/party_member/members
+	var/list/datum/party_member/members = list()
 	var/datum/party_member/party_leader
 
 	var/monthly_cost = 3500
 	var/current_balance = 0
 	var/public_balance = TRUE
+	var/last_transaction
 
 	var/max_party = 10 //max amount of party members. Can be upgraded.
 
+	var/creation_date
 	var/creation_time
 	var/party_email
 
@@ -44,6 +48,7 @@ var/global/list/political_parties = list()
 	var/unique_ID
 	var/is_admin = 0
 	var/email
+	var/datum/party/party
 
 	var/join_date //date this person joins
 
@@ -85,6 +90,8 @@ var/global/list/political_parties = list()
 	P.description = description
 	P.slogan = slogan
 	P.creation_time = get_game_time()
+	P.last_transaction = full_game_time()
+	P.creation_date = full_game_time()
 	P.password = pass
 	P.id = md5("[P.name]")
 
@@ -94,7 +101,6 @@ var/global/list/political_parties = list()
 	EA.password = GenerateKey()
 	EA.login = 	P.party_email
 
-	P.creation_time = current_date_string
 
 	political_parties += P
 
@@ -123,7 +129,7 @@ var/global/list/political_parties = list()
 
 	party.members += M
 
-	M.join_date = current_date_string
+	M.join_date = full_game_time()
 
 	// Send an email to the party member.
 

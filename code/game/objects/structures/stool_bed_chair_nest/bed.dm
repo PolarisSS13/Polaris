@@ -23,6 +23,7 @@
 	var/material/padding_material
 	var/base_icon = "bed"
 	var/applies_material_colour = 1
+	var/armrest_icon = FALSE		//if TRUE, this will overlay on the chair.
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
@@ -61,6 +62,16 @@
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		overlays |= stool_cache[padding_cache_key]
+	// armrest/overlay icon
+	if(armrest_icon && buckled_mobs)
+		var/armrest_cache_key = "[armrest_icon]-padding-[padding_material.name]"
+		if(isnull(stool_cache[armrest_cache_key]))
+			var/image/I =  image(icon, "[base_icon]_armrest")
+			I.color = padding_material.icon_colour
+			I.layer = ABOVE_MOB_LAYER
+			stool_cache[armrest_cache_key] = I
+		overlays |= stool_cache[armrest_cache_key]
+
 	// Strings.
 	desc = initial(desc)
 	if(padding_material)
@@ -335,3 +346,8 @@
 /obj/structure/bed/alien/attackby(obj/item/weapon/W, mob/user)
 	return // No deconning.
 
+/obj/structure/bed/user_unbuckle_mob(mob/living/M)
+	..()
+
+	if(armrest_icon && !has_buckled_mobs())
+		overlays -= stool_cache["[armrest_icon]-padding-[padding_material.name]"]

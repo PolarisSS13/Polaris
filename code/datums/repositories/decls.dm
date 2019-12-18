@@ -23,6 +23,12 @@
 		. = get_decls(subtypesof(decl_prototype))
 		fetched_decl_subtypes[decl_prototype] = .
 
+/repository/decls/proc/get_decls_of_subtype(var/decl_prototype)
+	. = fetched_decl_subtypes[decl_prototype]
+	if(!.)
+		. = get_decls(subtypesof(decl_prototype))
+		fetched_decl_subtypes[decl_prototype] = .
+
 /repository/decls/proc/get_decl(var/decl_type)
 	. = fetched_decls[decl_type]
 	if(!.)

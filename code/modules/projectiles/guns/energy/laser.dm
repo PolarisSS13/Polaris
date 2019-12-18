@@ -182,3 +182,19 @@
 	item_state = "redtag"
 	projectile_type = /obj/item/projectile/beam/lastertag/red
 	required_vest = /obj/item/clothing/suit/redtag
+
+//Poxball//
+
+/obj/item/weapon/gun/energy/poxball
+	name = "poxball launcher"
+	icon_state = "poxball"
+	item_state = "poxball"
+	desc = "A somewhat cumbersome arm cannon capable of firing charged poxball projectiles."
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
+	projectile_type = /obj/item/projectile/energy/poxball
+	cell_type = /obj/item/weapon/cell/device/weapon/recharge/captain
+	force = 5
+	fire_delay = 15
+	charge_cost = 180
+	battery_lock = 1
+	self_recharge = 1

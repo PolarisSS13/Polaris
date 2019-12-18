@@ -66,19 +66,6 @@
 
 var/global/current_date_string
 
-var/global/tax_rate_upper = 0.20
-var/global/tax_rate_middle = 0.20
-var/global/tax_rate_lower = 0.20
-
-var/global/general_sales_tax = 0.10
-var/global/business_income_tax = 0.10
-
-var/global/medical_tax = 0.10
-var/global/weapons_tax = 0.10
-var/global/alcoholic_tax = 0.10
-var/global/tobacco_tax = 0.10
-var/global/recreational_drug_tax = 0.10
-var/global/gambling_tax = 0.10
 
 
 var/global/datum/money_account/vendor_account

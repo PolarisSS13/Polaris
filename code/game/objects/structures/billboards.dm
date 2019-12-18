@@ -14,14 +14,7 @@
 	plane = ABOVE_PLANE
 	layer = ABOVE_MOB_LAYER
 	pixel_y = 10
-
-/obj/structure/billboard/Destroy()
-	set_light(0)
-	return ..()
-
-/obj/structure/billboard/New()
-	..()
-	icon_state = pick("ssl",
+	var/ads = list(			"ssl",
 							"ntbuilding",
 							"keeptidy",
 							"smoke",
@@ -29,31 +22,38 @@
 							"rent",
 							"vets")
 
-/obj/structure/billboard/city
-	name = "city billboard"
-	desc = "A billboard"
-	icon_state = "welcome"
-	light_range = 4
-	light_power = 5
-	light_color = "#bbfcb6"  //watered lime
+	var/current_ad
 
-/obj/structure/billboard/city/Destroy()
+/obj/structure/billboard/Destroy()
 	set_light(0)
 	return ..()
 
-/obj/structure/billboard/city/New()
+/obj/structure/billboard/New()
 	..()
-	icon_state = "welcome"
+	var/type = rand(1,4)
+	if(prob(50))
+		icon_state = "[initial(icon_state)][type]"
 
-/obj/structure/billboard/sign
+	update_icon()
+
+/obj/structure/billboard/update_icon()
+	overlays.Cut()
+
+	if(!current_ad)
+		overlays += pick(ads)
+	else
+		overlays += current_ad
+
+
+/obj/structure/billboard/city
 	name = "city billboard"
-	icon_state = "welcome"
+	desc = "A billboard"
+	icon_state = "billboard"
+	light_range = 4
+	light_power = 5
 	light_color = "#bbfcb6"  //watered lime
-	var/sign_type = "welcome"
-
-/obj/structure/billboard/sign/New()
-	..()
-	icon_state = "[sign_type]"
+	current_ad = "welcome"
 
 /obj/structure/billboard/sign/lisa
-	sign_type = "lisa"
+	icon_state = "billboard"
+	current_ad = "lisa"

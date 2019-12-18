@@ -1,0 +1,14 @@
+<!-- 
+Title: Social Service Card, uses some javascript to change nanoUI up a bit.
+Used In File(s): \code\game\objects\items\weapons\id cards\social_service_cards.dm
+ -->
+<H1>Available Entries</H1>
+<table>
+{{for data.entries}}
+    <tr>
+		<td>{{:helper.link('', 'gear', {'set' : value.name})}}</td><td>{{:value.name}}</td><td>{{:value.value}}</td>
+	</tr>
+{{/for}}
+</table>
+
+

@@ -69,7 +69,6 @@
 
 	return law_list
 
-
 /client/verb/view_laws()
 	set category = "Special Verbs"
 	set name = "View Current Laws"
@@ -97,8 +96,6 @@
 	for(var/datum/law/misdemeanor/L in misdemeanor_laws)
 
 		dat += "<tr>"
-
-
 
 		dat += "<td width='5%' align='center' bgcolor='[L.law_color]'>[L.id]</td>"
 		dat += "<td width='15%' align='center' bgcolor='[L.law_color]'><b>[L.name]</b></td>"

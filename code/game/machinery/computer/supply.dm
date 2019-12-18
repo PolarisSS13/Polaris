@@ -160,7 +160,7 @@
 	data["shuttle_auth"] = (authorization & SUP_SEND_SHUTTLE) // Whether this ui is permitted to control the supply shuttle
 	data["order_auth"] = (authorization & SUP_ACCEPT_ORDERS)   // Whether this ui is permitted to accept/deny requested orders
 	data["shuttle"] = shuttle_status
-	data["supply_points"] = supply_controller.points
+	data["supply_points"] = department_accounts["Cargo"].money
 	data["categories"] = all_supply_groups
 	data["active_category"] = active_category
 	data["supply_packs"] = pack_list

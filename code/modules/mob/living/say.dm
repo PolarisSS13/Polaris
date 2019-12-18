@@ -163,6 +163,13 @@ proc/get_radio_key_from_channel(var/channel)
 		if("*") return emote(copytext(message,2))
 		if("^") return custom_emote(1, copytext(message,2))
 
+	//If there's no punctuation, add punctuation.
+	var/p_ending = copytext(message, length(message))
+	var/p_message = "[message]."
+	if(!(p_ending in list(".","?","!")))
+		if(message)
+			message = p_message
+
 	//Parse the radio code and consume it
 	if (message_mode)
 		if (message_mode == "headset")
@@ -190,12 +197,6 @@ proc/get_radio_key_from_channel(var/channel)
 		speaking.broadcast(src,trim(message))
 		return 1
 
-	//If there's no punctuation, add punctuation.
-	var/p_ending = copytext(message, length(message))
-	var/p_message = "[message]."
-	if(!(p_ending in list(".","?","!")))
-		if(message)
-			message = p_message
 	//If it looks like accidental IC-OOK/emoting
 	if((copytext(message, 1, 2) in list("say","me")) || (findtext(lowertext(copytext(message, 1, 5)), "ooc")))
 		if(alert("Your message \"[message]\" looks like it was meant for OOC instead of IC, say it in IC still?", "Confirm if meant for IC?", "No", "Yes") != "Yes")

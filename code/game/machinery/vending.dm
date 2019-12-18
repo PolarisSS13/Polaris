@@ -190,7 +190,10 @@
 			var/obj/item/weapon/spacecash/C = W
 			paid = pay_with_cash(C, user)
 			handled = 1
-
+		else if(istype(W, /obj/item/weapon/card/foodstamp))
+			var/obj/item/weapon/card/foodstamp/C = W
+			paid = pay_with_foodstamp(C)
+			handled = 1
 		if(paid)
 			if(vendor_department)
 				department_accounts["[vendor_department]"].money += currently_vending.price
@@ -291,6 +294,26 @@
 		wallet.worth -= currently_vending.price
 		credit_purchase("[wallet.owner_name] (chargecard)")
 		return 1
+
+/**
+ * Scan food stamp card and dispense product.
+ *
+ * Returns 1 if successful, 0 if failed
+ */
+/obj/machinery/vending/proc/pay_with_foodstamp(var/obj/item/weapon/card/foodstamp/ebt)
+	visible_message("<span class='info'>\The [usr] taps \the [ebt] against \the [src]'s scanner.</span>")
+	if(istype(src, /obj/machinery/vending/foodstamp))
+		if(ebt.meals_remaining > 0)
+			ebt.meals_remaining = ebt.meals_remaining - 1
+			return 1
+		else
+			status_message = "No meals remaining on social service card."
+			status_error = 1
+			return 0
+	else
+		status_message = "Social service cards cannot be used at this machine."
+		status_error = 1
+		return 0
 
 /**
  * Scan a card and attempt to transfer payment from associated account.
@@ -1815,3 +1838,65 @@
 
 
 	vendor_department = "Public Healthcare"
+
+//ration vending machines
+/obj/machinery/vending/foodstamp/rations
+	name = "Ration Dispenser"
+	desc = "A vending machine holding self-contained complete meals."
+	product_slogans = "Have you tried Menu #2? It's pizza time!; It's always Taco Tuesday with Menu #5!; Want something to spice up your life? Try Menu #8: Hot Chili!"
+	product_ads = ""
+	vend_delay = 15
+	icon_state = "rations"
+	products = list(/obj/item/weapon/storage/mre/menu2 = 5,
+					/obj/item/weapon/storage/mre/menu3 = 5,
+					/obj/item/weapon/storage/mre/menu4 = 5,
+					/obj/item/weapon/storage/mre/menu5 = 5,
+					/obj/item/weapon/storage/mre/menu6 = 5,
+					/obj/item/weapon/storage/mre/menu7 = 5,
+					/obj/item/weapon/storage/mre/menu8 = 5,
+					/obj/item/weapon/storage/mre/menu9 = 5,
+					/obj/item/weapon/storage/mre/menu10 = 5
+					)
+	contraband = list(/obj/item/weapon/storage/mre/menu12 = 5)
+	prices = list(/obj/item/weapon/storage/mre/menu2 = 50,
+					/obj/item/weapon/storage/mre/menu3 = 50,
+					/obj/item/weapon/storage/mre/menu4 = 50,
+					/obj/item/weapon/storage/mre/menu5 = 50,
+					/obj/item/weapon/storage/mre/menu6 = 50,
+					/obj/item/weapon/storage/mre/menu7 = 50,
+					/obj/item/weapon/storage/mre/menu8 = 50,
+					/obj/item/weapon/storage/mre/menu9 = 50,
+					/obj/item/weapon/storage/mre/menu10 = 50
+					)
+
+/obj/machinery/vending/foodstamp/rations/psp
+	name = "Ration Dispenser"
+	desc = "A vending machine holding self-contained complete meals. This particular machine has the Planetary Security Party's emblem on it."
+	product_slogans = "Have you tried Menu #2? It's pizza time!; It's always Taco Tuesday with Menu #5!; Liberals leave you thirsting for freedom? Wash that despair down with an Instant Grape packet!; Want something to spice up your life? Try Menu #8: Hot Chili!"
+	product_ads = "Order. Unity. Conduct.; Remember the Pillars of civilized society and we shall be successful.; The True Citizen knows the true value of Charity.; Remember, it is great to be part of the Greater Good."
+	vend_delay = 15
+	vend_reply = "Enjoy your delicious ration pack! Remember: it is great to be part of the Greater Good!"
+	icon_state = "rations-psp"
+	shut_up = 0
+	products = list(/obj/item/weapon/storage/mre/menu2 = 5,
+					/obj/item/weapon/storage/mre/menu3 = 5,
+					/obj/item/weapon/storage/mre/menu4 = 5,
+					/obj/item/weapon/storage/mre/menu5 = 5,
+					/obj/item/weapon/storage/mre/menu6 = 5,
+					/obj/item/weapon/storage/mre/menu7 = 5,
+					/obj/item/weapon/storage/mre/menu8 = 5,
+					/obj/item/weapon/storage/mre/menu9 = 5,
+					/obj/item/weapon/storage/mre/menu10 = 5
+					)
+	contraband = list(/obj/item/weapon/storage/mre/menu12 = 5)
+	prices = list(/obj/item/weapon/storage/mre/menu2 = 50,
+					/obj/item/weapon/storage/mre/menu3 = 50,
+					/obj/item/weapon/storage/mre/menu4 = 50,
+					/obj/item/weapon/storage/mre/menu5 = 50,
+					/obj/item/weapon/storage/mre/menu6 = 50,
+					/obj/item/weapon/storage/mre/menu7 = 50,
+					/obj/item/weapon/storage/mre/menu8 = 50,
+					/obj/item/weapon/storage/mre/menu9 = 50,
+					/obj/item/weapon/storage/mre/menu10 = 50
+					)
+

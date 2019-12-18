@@ -488,3 +488,14 @@
 	name = "cannabis deus seeds box"
 	desc = "Contains the seeds you need to get a proper healthy high."
 	starts_with = list(/obj/item/seeds/cannabisdeusseed = 7)
+
+/obj/item/weapon/storage/box/social_service_cards
+	name = "box of social service cards"
+	desc = "A box that holds social service cards."
+	icon_state = "socialservice"
+	starts_with = list(/obj/item/weapon/card/foodstamp = 7)
+
+/obj/item/weapon/storage/box/press_badges
+	name = "box of press badges"
+	desc = "A box that holds press badges."
+	starts_with = list(/obj/item/clothing/accessory/badge/press = 7)
