@@ -25,10 +25,13 @@ var/global/datum/economy/news/news_data = new /datum/economy/news
 
 	load_main_news()
 
+/datum/economy/news/proc/news_edit_list()	// unique ids are stored in these vars
+	return (city_anchors || city_anchor_managers)
+
 /datum/economy/news/proc/save_main_news()
 	if(!path)				return 0
 	var/savefile/S = new /savefile(path)
-	if(!fexists(path))		return 0
+	if(!fexists(path))			return 0
 	if(!S)					return 0
 	S.cd = "/"
 
