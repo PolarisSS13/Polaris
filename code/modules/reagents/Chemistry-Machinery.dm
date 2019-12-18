@@ -369,16 +369,16 @@
 			user << "You use \the [B] to load \the [src] with \the [B_held]."
 
 		return 0
-		
-		
+
+
 	if(istype(O,/obj/item/stack))
 		var/obj/item/stack/stack = O
-		
+
 		if(!(stack.associated_reagent && stack.reagents.total_volume))
 			user << "\The [O] is not suitable for blending."
-		
-		
-			
+
+
+
 
 	user.remove_from_mob(O)
 	O.loc = src
@@ -496,10 +496,10 @@
 		if(remaining_volume <= 0)
 			break
 
-		if(reagents[O.type])
+		if(reagents)
 			var/obj/item/stack/stack = O
 			if(istype(stack))
-				var/list/sheet_components = stack.reagents[stack.type]
+				var/list/sheet_components = stack.reagents.reagent_list
 				var/amount_to_take = max(0,min(stack.amount,round(remaining_volume/stack.reagents_per_unit)))
 				if(amount_to_take)
 					stack.use(amount_to_take)
