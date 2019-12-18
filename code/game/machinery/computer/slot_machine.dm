@@ -40,7 +40,7 @@
 	var/stored_money = 0 //Cash
 
 	var/spin_cost = 15 //How much it costs to play - base before tax
-	var/tax_type = GAMBLING_TAX
+	tax_type = GAMBLING_TAX
 	var/spinning = 0
 
 	var/id = 0 //The slot machine's ID. Fluff mostly
@@ -59,15 +59,10 @@
 	update_icon()
 	
 /obj/machinery/computer/slot_machine/proc/get_spin_cost()
-	var/added_tax = 0
-	var/totalcost = 0
-	
-	if(tax_type)
-		added_tax = round(GAMBLING_TAX * spin_cost)
-		
-	totalcost = spin_cost + added_tax
-	
-	return totalcost
+	return get_item_cost()
+
+/obj/machinery/computer/slot_machine/get_item_cost()
+	return round(spin_cost)
 
 /obj/machinery/computer/slot_machine/proc/remove_overlays()
 	overlays -= list(overlay_1,overlay_2,overlay_3)
@@ -134,6 +129,7 @@
 	//Charge money:
 	if(stored_money >= get_spin_cost()) //If there's cash in the machine
 		stored_money -= get_spin_cost()
+		department_accounts["[station_name()] Funds"].money += post_tax_cost()
 	else
 		return
 
