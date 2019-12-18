@@ -34,3 +34,19 @@
 	..()
 	for(var/i = 1 to storage_slots)
 		new /obj/item/weapon/sample/print(src)
+
+/obj/item/weapon/storage/box/csi_markers
+	name = "crime scene markers box"
+	desc = "A cardboard box for crime scene marker cards."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "cards"
+	w_class = ITEMSIZE_TINY
+	starts_with = list(
+		/obj/item/weapon/csi_marker/n1 = 1,
+		/obj/item/weapon/csi_marker/n2 = 1,
+		/obj/item/weapon/csi_marker/n3 = 1,
+		/obj/item/weapon/csi_marker/n4 = 1,
+		/obj/item/weapon/csi_marker/n5 = 1,
+		/obj/item/weapon/csi_marker/n6 = 1,
+		/obj/item/weapon/csi_marker/n7 = 1
+	)
