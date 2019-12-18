@@ -560,8 +560,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>Official World Server | Roleplay</b> - <b>[station_name()]</b>";
-	s += " | Persistent money, partial map saving, economy, elections."
+	s += "<b>Official World Server | Roleplaying</b>";
+	s += " | Persistent money, partial map saving, elections."
 
 	s += "(<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
@@ -587,8 +587,8 @@ var/world_topic_spam_protect_time = world.timeofday
 //	if (config && config.allow_vote_mode)
 //		features += "vote"
 
-	if (config && config.allow_ai)
-		features += "AI allowed"
+//	if (config && config.allow_ai)
+//		features += "AI allowed"
 
 	var/n = 0
 	for (var/mob/M in player_list)
