@@ -17,6 +17,22 @@ NanoBaseHelpers = function ()
 	
 				return '';
 			},
+			
+			//change ui styling to business manager
+			businessManager: function() {
+				$('body').css("background-color","#272727");
+				$('body').css("background-image","url('uiBackground-techsoft.png')");
+				$('body').css("background-position","50% 50%");
+				$('body').css("background-repeat","repeat-x");
+
+				$('#uiTitleFluff').css("background-image","url('uiTitleFluff.png')");
+				$('#uiTitleFluff').css("background-position","50% 50%");
+				$('#uiTitleFluff').css("background-repeat", "no-repeat");
+
+				$('#ntoogle').css("background-repeat", "no-repeat");
+	
+				return '';
+			},
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
 
