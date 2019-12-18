@@ -18,12 +18,21 @@ a, a:link, a:visited, a:active, .linkOn, .linkOff
 { 
 	color: #ffffff; 
 	text-decoration: none;
-	background: #40628a;
-	border: 1px solid #161616;
-	padding: 1px 4px 1px 4px;
+	background: #9370c8;
+	border: 2px solid #bd98f5;
+	padding: 1px 1.5px 1px 1.5px;
 	margin: 0 2px 0 0;
 	cursor:default;
 	white-space:nowrap;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font: normal 11px/1 Arial, Helvetica, sans-serif;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-decoration: none;
 }
 
 a:hover 
