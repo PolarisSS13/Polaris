@@ -123,7 +123,7 @@
 	path = /obj/item/clothing/glasses/sunglasses/prescription
 
 /datum/gear/eyes/security/ipatch
-	display_name = "iPpatch, Security"
+	display_name = "iPatch, Security"
 	path = /obj/item/clothing/glasses/eyepatch/hud/security
 	cost = 2
 
