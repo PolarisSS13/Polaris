@@ -569,11 +569,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "</a>"
 	s += ")"
 	
-	if(SSelections && SSelections.current_president)
-		features += "<br><b>Current President:</b> [SSelections.current_president.name]<br>"	
-		
 	var/list/features = list()
-
+	if(SSelections && SSelections.current_president)
+		features += "<br><b>Current President:</b> [SSelections.current_president.name]<br>"
+		
 	if(ticker)
 		if(master_mode)
 			features += master_mode
