@@ -40,7 +40,6 @@
 	var/stored_money = 0 //Cash
 
 	var/spin_cost = 15 //How much it costs to play - base before tax
-	tax_type = GAMBLING_TAX
 	var/spinning = 0
 
 	var/id = 0 //The slot machine's ID. Fluff mostly
@@ -62,7 +61,10 @@
 	return get_item_cost()
 
 /obj/machinery/computer/slot_machine/get_item_cost()
-	return round(spin_cost)
+	return spin_cost
+
+/obj/machinery/computer/slot_machine/get_tax()
+	return GAMBLING_TAX
 
 /obj/machinery/computer/slot_machine/proc/remove_overlays()
 	overlays -= list(overlay_1,overlay_2,overlay_3)
