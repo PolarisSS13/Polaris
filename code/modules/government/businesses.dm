@@ -30,7 +30,6 @@ var/global/list/businesses = list()
 	var/list/applicants = list()
 
 /proc/get_all_businesses(mob/user) //Displays all businesses in a table.
-	user.client.debug_variables(businesses)
 	var/dat = list()
 	dat += "<center>"
 	if(!businesses.len)
