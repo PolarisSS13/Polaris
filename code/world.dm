@@ -571,7 +571,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	
 	var/list/features = list()
 	if(SSelections && SSelections.current_president)
-		features += "<br><b>Current President:</b> [SSelections.current_president.name]<br>"
+		features += "<br><b>Current President:</b> [SSelections.current_president.name]"
 		
 	if(ticker)
 		if(master_mode)
