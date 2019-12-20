@@ -191,7 +191,6 @@ CATEGORY: Fiction
 					div {text-indent: 30pt;}
 					</style>
 					</head>
-					</style>
 					<body>
 					<div>"Gadroc, where are you?" Carne shouted. "You can come out now, she didn’t follow us." Gadroc looked around and slowly stepped out from behind a tree that didn't even come close to consealing him whatsoever.</div>
 					<div>"I... I don’t know if it worked, Carne," the boy said nervously.</div>
@@ -200,9 +199,9 @@ CATEGORY: Fiction
 					<div>"It’s beautiful, Carne," Gadroc went on.</div>
 					<div>"Keep it, kid," the blacksmith said with a smile. "You need it more than I do. Let’s go home."</div>
 					<div>Gadroc had gold poop for a week.</div>
-					</br>
-					</br>
-					<h1><b>Fin.<b></h1>
+					<br>
+					<br>
+					<h1><b>Fin.</b></h1>
 					</body>
 					</html>
 					"})

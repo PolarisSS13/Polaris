@@ -27,7 +27,7 @@ CATEGORY: Fiction
 
 					<body>
 					<center><h1>Beyond the Door</h1>
-					<h2>by Philip K. Dick</h2>
+					<h2>by Philip K. Dick</h2></center>
 					</body>
 					</html>
 					"},

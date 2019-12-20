@@ -47,11 +47,11 @@ Category: Reference
 					<body>
 					<center>
 					<h1>Station-Side Recycling Procedures</h1>
-					<center>
+					</center>
 					<hr>
 					<center>
 					<h2>Resource Re-purposing</h2>
-					<center>
+					</center>
 					<p class="borders">
 					<b>Cardboard Products</b><br>
 					Most cardboard-based products, especially any boxes you may find, can be broken down to a sheet and stacked up. From there, you can reuse it to make folders, more boxes, or anything else you may need (such as a clever disguise).
