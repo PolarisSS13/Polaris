@@ -29,6 +29,7 @@
 	var/atom/original = null // the target clicked (not necessarily where the projectile is headed). Should probably be renamed to 'target' or something.
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
+	var/makeshift = 0 //if it is fired from a makeshift weapon, sparks fly out when its fired
 
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
@@ -134,6 +135,10 @@
 /obj/item/projectile/proc/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
 	var/turf/curloc = get_turf(src)
 	var/turf/targloc = get_turf(target)
+	if(makeshift)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
 	if (!istype(targloc) || !istype(curloc))
 		return 1
 
