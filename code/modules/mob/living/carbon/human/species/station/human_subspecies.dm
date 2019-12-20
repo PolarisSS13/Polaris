@@ -48,6 +48,7 @@
 		O_HEART =    /obj/item/organ/internal/heart,
 		O_LUNGS =    /obj/item/organ/internal/lungs,
 		O_LIVER =    /obj/item/organ/internal/liver,
+		O_VOICE =    /obj/item/organ/internal/voicebox,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
 		O_EYES =     /obj/item/organ/internal/eyes

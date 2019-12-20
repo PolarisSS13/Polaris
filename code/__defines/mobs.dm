@@ -175,6 +175,8 @@
 #define O_LIVER    "liver"
 #define O_KIDNEYS  "kidneys"
 #define O_APPENDIX "appendix"
+#define O_VOICE    "voicebox"
+
 #define O_PLASMA   "plasma vessel"
 #define O_HIVE     "hive node"
 #define O_NUTRIENT "nutrient vessel"
