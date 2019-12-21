@@ -128,11 +128,14 @@
 	display_name = "implant, tracking"
 	path = /obj/item/weapon/implanter/tracking_implant/weak
 	cost = 6
+	exploitable = 1
 
 /datum/gear/utility/implant/language/eal
 	display_name = "vocal synthesizer, EAL"
 	description = "A surgically implanted vocal synthesizer which allows the owner to speak EAL, if they know it."
-	path = /obj/item/weapon/implant/language/eal
+	path = /obj/item/weapon/implanter/language/eal_implant
+	cost = 2
+	exploitable = 1
 
 /datum/gear/utility/pen
 	display_name = "Fountain Pen"
