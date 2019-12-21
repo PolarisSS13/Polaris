@@ -165,6 +165,9 @@
 
 #define MODIFIER_GENETIC	1	// Modifiers with this flag will be copied to mobs who get cloned.
 
+//Augmentations defined here, for convenience
+#define O_AUG_TSHADE "integrated thermolensing implant"
+
 // Bodyparts and organs.
 #define O_MOUTH    "mouth"
 #define O_EYES     "eyes"
