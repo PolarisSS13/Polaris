@@ -13,6 +13,7 @@
 	var/implant_color = "b"
 	var/allow_reagents = 0
 	var/malfunction = 0
+	var/initialize_loc = BP_TORSO
 	show_messages = 1
 
 /obj/item/weapon/implant/proc/trigger(emote, source as mob)
@@ -67,8 +68,8 @@
 
 /obj/item/weapon/implant/proc/implant_loadout(var/mob/living/carbon/human/H)
 	if(H)
-		var/obj/item/organ/external/affected = H.organs_by_name[BP_HEAD]
-		if(handle_implant(H, affected))
+		if(handle_implant(H, initialize_loc))
+			invisibility = initial(invisibility)
 			post_implant(H)
 
 /obj/item/weapon/implant/Destroy()

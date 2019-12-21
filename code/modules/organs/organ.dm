@@ -34,6 +34,11 @@ var/list/organ_cache = list()
 	var/list/will_assist_languages = list()
 	var/list/datum/language/assists_languages = list()
 
+	// Organ verb vars.
+	var/list/organ_verbs		// Verbs added by the organ when present in the body.
+	var/list/target_parent_classes = list()	// Is the parent supposed to be organic, robotic, assisted?
+	var/forgiving_class = TRUE	// Will the organ give its verbs when it isn't a perfect match? I.E., assisted in organic, synthetic in organic.
+
 	drop_sound = 'sound/items/drop/flesh.ogg'
 
 /obj/item/organ/Destroy()
@@ -405,3 +410,59 @@ var/list/organ_cache = list()
 	if(robotic && robotic < ORGAN_LIFELIKE)	//Super fancy humanlike robotics probably have sensors, or something?
 		return 0
 	return 1
+
+/obj/item/organ/proc/handle_organ_mod_special(var/removed = FALSE)	// Called when created, transplanted, and removed.
+	if(!istype(owner))
+		return
+	var/list/save_verbs = list()
+	if(removed && organ_verbs)	// Do we share verbs with any other organs? Are they functioning?
+		var/list/all_organs = list()
+		all_organs |= owner.organs
+		all_organs |= owner.internal_organs
+
+		for(var/obj/item/organ/O in all_organs)
+			if(!(O.status & ORGAN_DEAD) && O.organ_verbs && O.check_verb_compatability())
+				for(var/verb_type in O.organ_verbs)
+					if(verb_type in organ_verbs)
+						save_verbs |= verb_type
+
+	if(!removed && organ_verbs && check_verb_compatability())
+		for(var/verb_path in organ_verbs)
+			owner.verbs |= verb_path
+	else if(organ_verbs)
+		for(var/verb_path in organ_verbs)
+			if(!(verb_path in save_verbs))
+				owner.verbs -= verb_path
+	return
+
+/obj/item/organ/proc/handle_organ_proc_special()	// Called when processed.
+	return
+
+/obj/item/organ/proc/check_verb_compatability()		// Used for determining if an organ should give or remove its verbs. I.E., FBP part in a human, no verbs. If true, keep or add.
+	if(owner)
+		if(ishuman(owner))
+			var/mob/living/carbon/human/H = owner
+			var/obj/item/organ/O = H.get_organ(parent_organ)
+			if(forgiving_class)
+				if(O.robotic <= ORGAN_ASSISTED && robotic <= ORGAN_LIFELIKE)	// Parent is organic or assisted, we are at most synthetic.
+					return TRUE
+
+				if(O.robotic >= ORGAN_ROBOT && robotic >= ORGAN_ASSISTED)		// Parent is synthetic, and we are biosynthetic at least.
+					return TRUE
+
+			if(!target_parent_classes || !target_parent_classes.len)	// Default checks, if we're not looking for a Specific type.
+
+				if(O.robotic == robotic)	// Same thing, we're fine.
+					return TRUE
+
+				if(O.robotic < ORGAN_ROBOT && robotic < ORGAN_ROBOT)
+					return TRUE
+
+				if(O.robotic > ORGAN_ASSISTED && robotic > ORGAN_ASSISTED)
+					return TRUE
+
+			else
+				if(O.robotic in target_parent_classes)
+					return TRUE
+
+	return FALSE
