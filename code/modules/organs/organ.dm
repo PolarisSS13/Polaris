@@ -14,6 +14,7 @@ var/list/organ_cache = list()
 	var/vital							// Lose a vital limb, die immediately.
 	var/damage = 0						// Current damage to the organ
 	var/robotic = 0
+	var/stapled_nerves = FALSE
 
 	// Reference data.
 	var/mob/living/carbon/human/owner	// Current mob owning the organ.
@@ -64,10 +65,10 @@ var/list/organ_cache = list()
 	if(istype(holder))
 		src.owner = holder
 		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
-		species = all_species[SPECIES_HUMAN]
+		species = GLOB.all_species[SPECIES_HUMAN]
 		if(holder.dna)
 			dna = holder.dna.Clone()
-			species = all_species[dna.species]
+			species = GLOB.all_species[dna.species]
 		else
 			log_debug("[src] at [loc] spawned without a proper DNA.")
 		var/mob/living/carbon/human/H = holder
@@ -86,7 +87,7 @@ var/list/organ_cache = list()
 		if(internal)
 			holder.internal_organs |= src
 	else
-		species = all_species["Human"]
+		species = GLOB.all_species["Human"]
 
 	handle_organ_mod_special()
 
@@ -418,6 +419,8 @@ var/list/organ_cache = list()
 	if(status & ORGAN_DESTROYED)
 		return 0
 	if(robotic && robotic < ORGAN_LIFELIKE)	//Super fancy humanlike robotics probably have sensors, or something?
+		return 0
+	if(stapled_nerves)
 		return 0
 	return 1
 

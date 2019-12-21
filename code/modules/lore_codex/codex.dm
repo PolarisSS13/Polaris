@@ -23,13 +23,14 @@
 	has the words 'Don't Panic' in small, friendly letters on the cover."
 	icon_state = "codex"
 	root_type = /datum/lore/codex/category/main_vir_lore
+	libcategory = "Reference"
 
 /obj/item/weapon/book/codex/lore/robutt
 	name = "A Buyer's Guide to Artificial Bodies"
 	desc = "Recommended reading for the newly cyborgified, new positronics, and the upwardly-mobile FBP."
 	icon_state = "codex_robutt"
 	root_type = /datum/lore/codex/category/main_robutts
-
+	libcategory = "Reference"
 
 /obj/item/weapon/book/codex/lore/news
 	name = "Daedalus Pocket Newscaster"
@@ -37,6 +38,7 @@
 	icon_state = "newscodex"
 	w_class = ITEMSIZE_SMALL
 	root_type = /datum/lore/codex/category/main_news
+	libcategory = "Reference"
 
 // Combines SOP/Regs/Law
 /obj/item/weapon/book/codex/corp_regs
@@ -46,3 +48,4 @@
 	icon_state = "corp_regs"
 	root_type = /datum/lore/codex/category/main_corp_regs
 	throwforce = 5 // Throw the book at 'em.
+	libcategory = "Reference"

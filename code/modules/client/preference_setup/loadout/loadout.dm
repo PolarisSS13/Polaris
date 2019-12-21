@@ -66,7 +66,7 @@ var/list/gear_datums = list()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob, all_species[G.whitelisted]))
+		if(G.whitelisted && !is_alien_whitelisted(preference_mob, GLOB.all_species[G.whitelisted]))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
@@ -262,4 +262,7 @@ var/list/gear_datums = list()
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_item(item, metadata["[gt]"])
+	var/mob/M = location
+	if(istype(M) && exploitable) //Update exploitable info records for the mob without creating a duplicate object at their feet.
+		M.amend_exploitable(item)
 	return item
