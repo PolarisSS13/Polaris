@@ -146,7 +146,9 @@
 
 						var/list/criminal_record = active2.fields["crim_record"]
 						for(var/datum/record/C in criminal_record)
-							dat += text("<BR>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+							dat += text("<BR>\n<a href='?src=\ref[src];choice=criminal_record_remove;criminal_record_r=[C]'>(Remove)</a> <b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+
+						dat += text("<BR>\n<a href='?src=\ref[src];choice=criminal_record_add'>")
 
 						dat += text("<BR>\nImportant Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[decode(active2.fields["notes"])]</A><BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", src)
 
@@ -437,6 +439,16 @@ What a mess.*/
 			if ("Delete Entry")
 				if ((istype(active2, /datum/data/record) && active2.fields[text("com_[]", href_list["del_c"])]))
 					active2.fields[text("com_[]", href_list["del_c"])] = "<B>Deleted</B>"
+
+			if("criminal_record_add")
+				add_crim_record()
+
+			if("criminal_record_remove")
+				if (active2)
+					var/datum/record/record = locate(href_list["crminal_record_r"])
+					active2.fields["crim_record"] -= record
+
+
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
@@ -446,7 +458,6 @@ What a mess.*/
 			if ("New Record (General)")
 				active1 = data_core.CreateGeneralRecord()
 				active2 = null
-
 //FIELD FUNCTIONS
 			if ("Edit Field")
 				if (is_not_allowed(usr))
@@ -524,24 +535,6 @@ What a mess.*/
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
 							temp += "</ul>"
-
-					//temporary, until we can get judges their computer, access locked to judges for now.
-					if("criminal_record")
-						temp = "<h5>Criminal Record:</h5>"
-						temp += "<br><a href='?src=\ref[src];choice=criminal_record_add'><br>"
-
-						temp += "<ul>"
-						for(var/datum/record/police/C in active2.fields["crim_record"])
-							temp += "<li>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i><br>"
-
-							temp += " <a href='?src=\ref[src];choice=criminal_record_remove;criminal_record_r=[C]'>(Remove)</a></li></ul>"
-
-					if("criminal_record_add")
-						add_crim_record()
-					if("criminal_record_remove")
-						if (active1)
-							var/datum/record/record = locate(href_list["crminal_record_r"])
-							active2.fields["crim_record"] -= record
 
 					if("rank")
 						var/list/L = list( "City Clerk", "Mayor", "AI" )

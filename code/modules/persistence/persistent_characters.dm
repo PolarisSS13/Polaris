@@ -17,7 +17,6 @@
 	var/var/datum/data/record/hospital_record = get_med_record(src)
 	var/var/datum/data/record/employment_record = get_gen_record(src)
 
-
 	//There's no way (that I know of) to edit the "real name" of a character unless
 	//it's a body transformation, admin or antag fuckery. So this works.
 
@@ -89,7 +88,7 @@
 /proc/handle_jail(var/mob/living/carbon/human/H)
 	// this proc determines if someone has escaped from prison or not.
 	var/datum/data/record/police_record = get_sec_record(H)
-	if(!police_record) return
+	if(!police_record) return 0
 
 	var/new_status = "None"
 	var/crim_statuses = list("*Arrest*", "Incarcerated")

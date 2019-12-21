@@ -208,6 +208,7 @@
 		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
 		M.fields["b_type"]		= H.b_type
 		M.fields["b_dna"]		= H.dna.unique_enzymes
+		M.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		M.fields["id_gender"]	= gender2text(H.identifying_gender)
 		if(H.get_FBP_type())
 			M.fields["brain_type"] = H.get_FBP_type()
@@ -224,7 +225,7 @@
 			S.fields["brain_type"] = "Organic"
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
 			S.fields["notes"] = H.sec_record
-
+		S.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		S.fields["crim_record"] = H.mind.prefs.crime_record
 		S.fields["criminal"] = H.mind.prefs.criminal_status
 		S.fields["prison_date"] = H.mind.prefs.prison_date
@@ -234,6 +235,7 @@
 		var/datum/data/record/L = new()
 		L.fields["id"]			= md5("[H.real_name][H.mind.assigned_role]")
 		L.fields["name"]		= H.real_name
+		L.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
@@ -368,10 +370,10 @@
 	for(var/datum/data/record/R in L)
 		if(R.fields[field] == value)
 			return R
-			
+
 /proc/find_record_by_mob(var/mob/living/carbon/human/H)
 	var/mob_uid = H.unique_id
-	
+
 	for(var/datum/data/record/R in data_core.general)
 		if(mob_uid == R.fields["unique_id"])
 			return R
