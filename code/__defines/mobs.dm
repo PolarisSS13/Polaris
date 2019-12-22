@@ -190,6 +190,9 @@
 #define O_KIDNEYS  "kidneys"
 #define O_APPENDIX "appendix"
 #define O_VOICE    "voicebox"
+#define O_SPLEEN   "spleen"
+#define O_STOMACH  "stomach"
+#define O_INTESTINE "intestine"
 
 #define O_PLASMA   "plasma vessel"
 #define O_HIVE     "hive node"

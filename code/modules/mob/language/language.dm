@@ -164,6 +164,7 @@
 	. = TRUE
 	if(ishuman(speaker))
 		var/mob/living/carbon/human/H = speaker
+
 		if(src.name in H.species.assisted_langs)
 			. = FALSE
 			var/obj/item/organ/internal/voicebox/vox = locate() in H.internal_organs	// Only voiceboxes for now. Maybe someday it'll include other organs, but I'm not that clever

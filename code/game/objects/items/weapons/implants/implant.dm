@@ -34,7 +34,7 @@
 		var/mob/living/carbon/human/H = source
 		var/obj/item/organ/external/affected = H.get_organ(target_zone)
 		if(affected)
-			affected.implants += src
+			affected.implants |= src
 			part = affected
 	if(part)
 		forceMove(part)
