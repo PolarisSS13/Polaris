@@ -639,3 +639,4 @@
 /datum/gear/uniform/haltertop
 	display_name = "halter top"
 	path = /obj/item/clothing/under/haltertop
+	
