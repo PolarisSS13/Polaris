@@ -141,14 +141,14 @@
 		dat += "<b>Gambling Age:</b> [persistent_economy.gambling_age]<br>"
 		dat += "<b>Criminal Sentencing Age:</b> [persistent_economy.sentencing_age]<br>"
 
-		dat += "<br><br>"
+		dat += "<br>"
 
 		dat += "<h3>Voting Policies:</h3><p>"
 		dat += "<b>Voting Rights of Synthetics:</b> [persistent_economy.synth_vote]<br>"
 		dat += "<b>Voting of Non-Vetra Citizens:</b> [persistent_economy.citizenship_vote]<br>"
 		dat += "<b>Smoking and Tobacco Usage Age:</b> [persistent_economy.smoking_age]<br>"
 
-		dat += "<br><br>"
+		dat += "<br>"
 
 		dat += "<h3>Contraband Policies:</h3><p>"
 		dat += "<b>Cannabis:</b> [persistent_economy.law_CANNABIS]<br>"
