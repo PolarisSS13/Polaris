@@ -158,6 +158,7 @@
 	data["drinking_age"] = persistent_economy.drinking_age
 	data["smoking_age"] = persistent_economy.smoking_age
 	data["gambling_age"] = persistent_economy.gambling_age
+	data["sentencing_age"] = persistent_economy.sentencing_age
 	data["synth_vote"] = "[persistent_economy.synth_vote ? "Can Vote" : "Cannot Vote"]"
 	data["citizenship_vote"] = "[persistent_economy.citizenship_vote ? "Can Vote" : "Cannot Vote"]"
 	data["criminal_vote"] = "[persistent_economy.criminal_vote ? "Can Vote" : "Cannot Vote"]"
@@ -442,6 +443,21 @@
 			return
 
 		persistent_economy.voting_age = age
+
+	if(href_list["sentencing_age"])
+		. = 1
+
+		var/age = input(usr, "Please select the minimum age for criminal sentencing. Min: 13. Max: 25.", "Criminal Sentencing Age") as num|null
+		age = sanitize_integer(persistent_economy.sentencing_age, 0, 100, 25)
+		if(!age)
+			error_msg = "You must enter an age."
+			return
+
+		if(!age_range(age))
+			error_msg = "This age is incorrect. You must enter a decimal between 13 and 25."
+			return
+
+		persistent_economy.sentencing_age = age
 
 	if(href_list["synth_vote"])
 		. = 1
