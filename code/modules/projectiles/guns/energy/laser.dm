@@ -24,11 +24,6 @@
 	use_external_power = 1
 	one_handed_penalty = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 
-/obj/item/weapon/gun/energy/laser/mounted/augment
-	use_external_power = FALSE
-	use_organic_power = TRUE
-	canremove = FALSE
-
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
 	desc = "A modified version of the HI G40E, this one fires less concentrated energy bolts designed for target practice."
@@ -203,3 +198,28 @@
 	charge_cost = 180
 	battery_lock = 1
 	self_recharge = 1
+
+//Augment Weapons
+/obj/item/weapon/gun/energy/augment
+	name = "internal arm cannon"
+	desc = "If you're seeing this description, something has gone very wrong."
+	self_recharge = 1
+	w_class = ITEMSIZE_LARGE
+	use_external_power = FALSE
+	use_organic_power = TRUE
+	canremove = FALSE
+
+/obj/item/weapon/gun/energy/augment/laser
+	name = "internal laser cannon"
+	desc = "A modified version of the HI G40E, adapted to work within a multitude of cybernetic limbs."
+	icon_state = "laser_augment"
+	item_state = "laser_augment"
+	force = 10
+	fire_delay = 8
+	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	projectile_type = /obj/item/projectile/beam/midlaser
+
+	firemodes = list(
+		list(mode_name="normal", fire_delay=8, projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 240),
+		list(mode_name="suppressive", fire_delay=5, projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 60),
+		)

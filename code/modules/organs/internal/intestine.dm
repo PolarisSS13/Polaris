@@ -2,7 +2,7 @@
 	name = "intestine"
 	icon_state = "intestine"
 	organ_tag = O_INTESTINE
-	parent_organ = BP_GROIN
+	parent_organ = BP_TORSO
 
 /obj/item/organ/internal/intestine/handle_germ_effects()
 	. = ..() //Up should return an infection level as an integer
