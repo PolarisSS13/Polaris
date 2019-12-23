@@ -198,3 +198,18 @@
 	charge_cost = 180
 	battery_lock = 1
 	self_recharge = 1
+
+/obj/item/weapon/gun/energy/poxball/street
+	name = "makeshift poxball launcher"
+	icon_state = "poxball_s"
+	item_state = "poxball_s"
+	desc = "A bulky arm cannon haphazardly assembled in some back-alley. It buzzes with uncontained energy."
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
+	projectile_type = /obj/item/projectile/energy/poxball/street
+	cell_type = /obj/item/weapon/cell/device/weapon/recharge/captain
+	force = 5
+	fire_delay = 15
+	charge_cost = 360 //double the cost of a real launcher
+	battery_lock = 1
+	self_recharge = 1
+

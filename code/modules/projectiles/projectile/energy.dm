@@ -221,6 +221,19 @@
 	name = "charged poxball"
 	icon_state = "poxball"
 	fire_sound = 'sound/weapons/poxball_launched.ogg'
+	damage = 0
+	agony = 35
+	pass_flags = PASSTABLE
+	light_color = "#619EFF"
+	light_range = 2
+	light_power = 1
+	check_armour = "energy"
+	embed_chance = 0
+
+/obj/item/projectile/energy/poxball/street
+	name = "unstable poxball"
+	icon_state = "poxball"
+	fire_sound = 'sound/weapons/poxball_launched.ogg'
 	damage = 10
 	agony = 35
 	pass_flags = PASSTABLE
@@ -229,4 +242,5 @@
 	light_power = 1
 	check_armour = "energy"
 	embed_chance = 0
+	makeshift = 1
 
