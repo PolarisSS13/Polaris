@@ -609,9 +609,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			for(var/datum/feed_channel/F in news_network.network_channels)
 				if(check_rights(R_ADMIN, 0, usr))
 					available_channels += F.channel_name
-				else if
-					if(unique_id_card && unique_id_card in news_data.news_edit_list())
-						available_channels += F.channel_name
+				else if(unique_id_card && unique_id_card in news_data.news_edit_list())
+					available_channels += F.channel_name
 				else
 					if((!F.locked || F.author == scanned_user) && !F.censored)
 						available_channels += F.channel_name
