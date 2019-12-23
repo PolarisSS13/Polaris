@@ -155,7 +155,7 @@
 		dat += "<b>Alcoholic Beverages:</b> [persistent_economy.law_ALCOHOL]<br>"
 		dat += "<b>Ecstasy:</b> [persistent_economy.law_ECSTASY]<br>"
 		dat += "<b>Psilocybin:</b> [persistent_economy.law_PSILOCYBIN]<br>"
-		dat += "<b>Crack:</b> [persistent_economy.law_CRACK<br>"
+		dat += "<b>Crack:</b> [persistent_economy.law_CRACK]<br>"
 		dat += "<b>Cocaine:</b> [persistent_economy.law_COCAINE]<br>"
 		dat += "<b>Heroin:</b> [persistent_economy.law_HEROIN]<br>"
 		dat += "<b>Meth:</b> [persistent_economy.law_METH]<br>"	
