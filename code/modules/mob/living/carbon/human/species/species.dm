@@ -205,10 +205,12 @@
 		O_LUNGS =		/obj/item/organ/internal/lungs,
 		O_LIVER =		/obj/item/organ/internal/liver,
 		O_VOICE = 		/obj/item/organ/internal/voicebox,
-		O_KIDNEYS =	/obj/item/organ/internal/kidneys,
+		O_KIDNEYS =		/obj/item/organ/internal/kidneys,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine,
 		O_BRAIN =		/obj/item/organ/internal/brain,
-		O_APPENDIX = /obj/item/organ/internal/appendix,
-		O_EYES =		 /obj/item/organ/internal/eyes
+		O_APPENDIX = 	/obj/item/organ/internal/appendix,
+		O_EYES =		/obj/item/organ/internal/eyes
 		)
 	var/vision_organ										// If set, this organ is required for vision. Defaults to "eyes" if the species has them.
 
