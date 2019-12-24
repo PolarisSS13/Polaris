@@ -59,7 +59,7 @@ var/global/list/medical_bills = list()
 	
 /datum/medical_bill/machinery_cryo
 	name = "Cryo Cell"
-	description = "Use of cyro cell."
+	description = "Use of cryo cell."
 	cost = 350
 	insurance_coverage = INSURANCE_BASIC
 
@@ -82,15 +82,21 @@ var/global/list/medical_bills = list()
 	insurance_coverage = INSURANCE_BASIC
 
 /datum/medical_bill/organs_limbs
-	name = "Organ and Limb Replacement"
-	description = "Replacement of organs and limbs. Limbs and organs sold separately."
-	cost = 2500
+	name = "Organ Replacement"
+	description = "Organ replacement surgery. Organs sold separately."
+	cost = 2000
+	insurance_coverage = INSURANCE_HIGH
+
+/datum/medical_bill/organs_limbs
+	name = "Limb Replacement"
+	description = "Limb replacement surgery. Limbs sold separately."
+	cost = 1750
 	insurance_coverage = INSURANCE_HIGH
 
 /datum/medical_bill/facial
 	name = "Facial Reconstruction Surgery"
-	description = "Surgical repairment of face for cosmetic purposes."
-	cost = 2500
+	description = "Surgical reconstruction of a face for cosmetic purposes."
+	cost = 500
 	insurance_coverage = INSURANCE_HIGH
 
 /datum/medical_bill/miscellaneous_stasis
@@ -100,9 +106,9 @@ var/global/list/medical_bills = list()
 	insurance_coverage = INSURANCE_BASIC
 	
 /datum/medical_bill/defib
-	name = "Defibilirator"
-	description = "Use of defibilirator to revive."
-	cost = 150
+	name = "Defibrillator"
+	description = "Use of Defibrillator to revive."
+	cost = 250
 	insurance_coverage = INSURANCE_BASIC
 
 /datum/medical_bill/genetics_treatment

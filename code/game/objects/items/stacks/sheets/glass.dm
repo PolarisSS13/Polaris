@@ -121,6 +121,7 @@
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
 	default_type = "phoron glass"
+	associated_reagent = "phoron"
 
 /obj/item/stack/material/glass/phoronglass/attackby(obj/item/W, mob/user)
 	..()

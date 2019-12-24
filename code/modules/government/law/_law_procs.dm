@@ -18,7 +18,7 @@
 	dat += "Misdemeanor Laws are known as \"petty\" laws - they don't make it to court on their own usually, they have a small fine. \
 	If the paying party cannot afford the fine, there's usually a very small cell time. \
 	Officers can charge the party on the spot or choose to waive it for the charged in certain circumstances."
-	dat += "<br><br>"
+	dat += "<br>"
 	dat += "<hr>"
 	dat += "<table align='center' bgcolor='black'  cellspacing='0' border=1><B><tr><th>ID</th><th>Name</th><th>Description</th><th>Fine</th><th>Cell Time</th><th>Notes</th></tr></B>"
 
@@ -133,7 +133,43 @@
 
 	dat += "</table>"
 
+	if(persistent_economy)
+		dat += "<h3>Age Policies:</h3><p>"
+		dat += "<b>Voting Age:</b> [persistent_economy.voting_age]<br>"
+		dat += "<b>Drinking Age:</b> [persistent_economy.drinking_age]<br>"
+		dat += "<b>Smoking and Tobacco Usage Age:</b> [persistent_economy.smoking_age]<br>"
+		dat += "<b>Gambling Age:</b> [persistent_economy.gambling_age]<br>"
+		dat += "<b>Criminal Sentencing Age:</b> [persistent_economy.sentencing_age]<br>"
 
+		dat += "<br>"
+
+		dat += "<h3>Voting Policies:</h3><p>"
+		dat += "<b>Voting Rights of Synthetics:</b> [persistent_economy.synth_vote]<br>"
+		dat += "<b>Voting of Non-Vetra Citizens:</b> [persistent_economy.citizenship_vote]<br>"
+		dat += "<b>Smoking and Tobacco Usage Age:</b> [persistent_economy.smoking_age]<br>"
+
+		dat += "<br>"
+
+		dat += "<h3>Contraband Policies:</h3><p>"
+		dat += "<b>Cannabis:</b> [persistent_economy.law_CANNABIS]<br>"
+		dat += "<b>Alcoholic Beverages:</b> [persistent_economy.law_ALCOHOL]<br>"
+		dat += "<b>Ecstasy:</b> [persistent_economy.law_ECSTASY]<br>"
+		dat += "<b>Psilocybin:</b> [persistent_economy.law_PSILOCYBIN]<br>"
+		dat += "<b>Crack:</b> [persistent_economy.law_CRACK]<br>"
+		dat += "<b>Cocaine:</b> [persistent_economy.law_COCAINE]<br>"
+		dat += "<b>Heroin:</b> [persistent_economy.law_HEROIN]<br>"
+		dat += "<b>Meth:</b> [persistent_economy.law_METH]<br>"	
+		dat += "<b>Nicotine:</b> [persistent_economy.law_NICOTINE]<br>"	
+		dat += "<b>Stimm:</b> [persistent_economy.law_STIMM]<br>"	
+		dat += "<b>Cyanide:</b> [persistent_economy.law_CYANIDE]<br>"	
+		dat += "<b>Chloral Hydrate:</b> [persistent_economy.law_CHLORAL]<br>"	
+
+		dat += "<br>"
+
+		dat += "<b>Guns:</b> [persistent_economy.law_GUNS]<br>"	
+		dat += "<b>Small Knives:</b> [persistent_economy.law_SMALLKNIVES]<br>"	
+		dat += "<b>Large Knives:</b> [persistent_economy.law_LARGEKNIVES]<br>"	
+		dat += "<b>Explosives and High-Detonating Devices:</b> [persistent_economy.law_EXPLOSIVES]<br>"	
 
 	dat += "</body></html>"
 

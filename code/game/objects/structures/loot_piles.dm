@@ -210,6 +210,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	rare_loot = list(
 		/obj/item/clothing/suit/storage/vest/heavy/merc,
 		/obj/item/clothing/shoes/boots/combat,
+		/obj/item/weapon/gun/energy/poxball/street
 	)
 
 // Contains mostly useless garbage.
