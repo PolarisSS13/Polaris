@@ -191,7 +191,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	anchored = 1
 	var/obj/machinery/exonet_node/node = null
 	circuit = /obj/item/weapon/circuitboard/newscaster
-	var/unique_id_scan
+	var/unique_id_card
 
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"
