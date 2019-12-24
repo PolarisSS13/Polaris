@@ -1055,6 +1055,9 @@
 	icon_state = "arisbestman"
 	index = 1
 
-//
+/obj/item/clothing/under/hartsuit
+	name = "striped suit"
+	desc = "A red and white striped ensemble with dark suspenders."
+	icon_state = "hartsuit"
 
 

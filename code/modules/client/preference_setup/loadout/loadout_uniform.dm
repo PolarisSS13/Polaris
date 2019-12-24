@@ -639,4 +639,7 @@
 /datum/gear/uniform/haltertop
 	display_name = "halter top"
 	path = /obj/item/clothing/under/haltertop
-	
+
+/datum/gear/uniform/hartsuit
+	display_name = "striped suit"
+	path = /obj/item/clothing/under/hartsuit
