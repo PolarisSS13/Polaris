@@ -141,14 +141,10 @@
 		dat += "<b>Gambling Age:</b> [persistent_economy.gambling_age]<br>"
 		dat += "<b>Criminal Sentencing Age:</b> [persistent_economy.sentencing_age]<br>"
 
-		dat += "<br>"
-
 		dat += "<h3>Voting Policies:</h3><p>"
-		dat += "<b>Voting Rights of Synthetics:</b> [persistent_economy.synth_vote]<br>"
-		dat += "<b>Voting of Non-Vetra Citizens:</b> [persistent_economy.citizenship_vote]<br>"
-		dat += "<b>Smoking and Tobacco Usage Age:</b> [persistent_economy.smoking_age]<br>"
-
-		dat += "<br>"
+		dat += "<b>Voting Rights of Synthetics:</b> [persistent_economy.synth_vote ? "Can Vote" : "Cannot Vote"]<br>"
+		dat += "<b>Voting Rights of Non-Vetra Citizens:</b> [persistent_economy.citizenship_vote ? "Can Vote" : "Cannot Vote"]<br>"
+		dat += "<b>Voting Rights of Former Convicts:</b> [persistent_economy.criminal_vote ? "Can Vote" : "Cannot Vote"]<br>"
 
 		dat += "<h3>Contraband Policies:</h3><p>"
 		dat += "<b>Cannabis:</b> [persistent_economy.law_CANNABIS]<br>"
@@ -163,8 +159,6 @@
 		dat += "<b>Stimm:</b> [persistent_economy.law_STIMM]<br>"	
 		dat += "<b>Cyanide:</b> [persistent_economy.law_CYANIDE]<br>"	
 		dat += "<b>Chloral Hydrate:</b> [persistent_economy.law_CHLORAL]<br>"	
-
-		dat += "<br>"
 
 		dat += "<b>Guns:</b> [persistent_economy.law_GUNS]<br>"	
 		dat += "<b>Small Knives:</b> [persistent_economy.law_SMALLKNIVES]<br>"	
