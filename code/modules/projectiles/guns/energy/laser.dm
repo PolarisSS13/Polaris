@@ -199,27 +199,17 @@
 	battery_lock = 1
 	self_recharge = 1
 
-//Augment Weapons
-/obj/item/weapon/gun/energy/augment
-	name = "internal arm cannon"
-	desc = "If you're seeing this description, something has gone very wrong."
+/obj/item/weapon/gun/energy/poxball/street
+	name = "makeshift poxball launcher"
+	icon_state = "poxball_s"
+	item_state = "poxball_s"
+	desc = "A bulky arm cannon haphazardly assembled in some back-alley. It buzzes with uncontained energy."
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2)
+	projectile_type = /obj/item/projectile/energy/poxball/street
+	cell_type = /obj/item/weapon/cell/device/weapon/recharge/captain
+	force = 5
+	fire_delay = 15
+	charge_cost = 360 //double the cost of a real launcher
+	battery_lock = 1
 	self_recharge = 1
-	w_class = ITEMSIZE_LARGE
-	use_external_power = FALSE
-	use_organic_power = TRUE
-	canremove = FALSE
 
-/obj/item/weapon/gun/energy/augment/laser
-	name = "internal laser cannon"
-	desc = "A modified version of the HI G40E, adapted to work within a multitude of cybernetic limbs."
-	icon_state = "laser_augment"
-	item_state = "laser_augment"
-	force = 10
-	fire_delay = 8
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
-	projectile_type = /obj/item/projectile/beam/midlaser
-
-	firemodes = list(
-		list(mode_name="normal", fire_delay=8, projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 240),
-		list(mode_name="suppressive", fire_delay=5, projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 60),
-		)
