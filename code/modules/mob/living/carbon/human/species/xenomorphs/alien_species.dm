@@ -5,6 +5,7 @@
 
 	default_language = "Xenomorph"
 	language = "Hivemind"
+	assisted_langs = list()
 	unarmed_types = list(/datum/unarmed_attack/claws/strong/xeno, /datum/unarmed_attack/bite/strong/xeno)
 	hud_type = /datum/hud_data/alien
 	rarity_value = 3
@@ -50,7 +51,9 @@
 		O_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		O_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel,
 		O_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients,
+		O_STOMACH =		/obj/item/organ/internal/stomach/xeno,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/xeno
 		)
 
 	bump_flag = ALIEN
@@ -181,7 +184,9 @@
 		O_ACID =		/obj/item/organ/internal/xenos/acidgland,
 		O_HIVE =		/obj/item/organ/internal/xenos/hivenode,
 		O_RESIN =		/obj/item/organ/internal/xenos/resinspinner,
-		O_NUTRIENT =	/obj/item/organ/internal/diona/nutrients
+		O_NUTRIENT =	/obj/item/organ/internal/diona/nutrients,
+		O_STOMACH =		/obj/item/organ/internal/stomach/xeno,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/xeno
 		)
 
 	inherent_verbs = list(
@@ -217,7 +222,9 @@
 		O_BRAIN =    /obj/item/organ/internal/brain/xeno,
 		O_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/hunter,
 		O_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients,
+		O_STOMACH =		/obj/item/organ/internal/stomach/xeno,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/xeno
 		)
 
 	inherent_verbs = list(
@@ -246,7 +253,9 @@
 		O_PLASMA =   /obj/item/organ/internal/xenos/plasmavessel/sentinel,
 		O_ACID =     /obj/item/organ/internal/xenos/acidgland,
 		O_HIVE =     /obj/item/organ/internal/xenos/hivenode,
-		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients
+		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients,
+		O_STOMACH =		/obj/item/organ/internal/stomach/xeno,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/xeno
 		)
 
 	inherent_verbs = list(

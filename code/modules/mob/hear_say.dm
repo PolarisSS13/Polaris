@@ -33,7 +33,7 @@
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
 			if(language)
-				message = language.scramble(message)
+				message = language.scramble(message, languages)
 			else
 				message = stars(message)
 
@@ -166,7 +166,7 @@
 					return
 			else
 				if(language)
-					message = language.scramble(message)
+					message = language.scramble(message, languages)
 				else
 					message = stars(message)
 

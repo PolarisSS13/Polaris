@@ -68,6 +68,30 @@ the artifact triggers the rage.
 	var/exhaustion_duration = 2 MINUTES 	// How long the exhaustion modifier lasts after it expires. Set to 0 to not apply one.
 	var/last_shock_stage = 0
 
+// Speedy, but not hasted.
+/datum/modifier/sprinting
+	name = "sprinting"
+	desc = "You are filled with energy!"
+
+	on_created_text = "<span class='warning'>You feel a surge of energy!</span>"
+	on_expired_text = "<span class='notice'>The energy high dies out.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+	slowdown = -1
+	disable_duration_percent = 0.8
+
+// Speedy, but not berserked.
+/datum/modifier/melee_surge
+	name = "melee surge"
+	desc = "You are filled with energy!"
+
+	on_created_text = "<span class='warning'>You feel a surge of energy!</span>"
+	on_expired_text = "<span class='notice'>The energy high dies out.</span>"
+	stacks = MODIFIER_STACK_ALLOWED
+
+	attack_speed_percent = 0.8
+	outgoing_melee_damage_percent = 1.1
+	disable_duration_percent = 0.8
 
 // For changelings.
 /datum/modifier/berserk/changeling
