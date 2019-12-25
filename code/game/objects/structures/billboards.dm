@@ -24,10 +24,16 @@
 							"army",
 							"fitness",
 							"movie1",
+							"movie2",
 							"blank",
 							"gentrified",
 							"legalcoke",
-							"pollux")
+							"pollux",
+							"vacay",
+							"atluscity",
+							"sunstar",
+							"speedweed",
+							"golf")
 
 	var/current_ad
 
