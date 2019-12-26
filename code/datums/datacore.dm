@@ -324,7 +324,7 @@
 	R.fields["prison_release_date"] = ""
 
 	R.fields["crim_record"]	= list()
-	R.fields["notes"]		= list()
+	R.fields["notes"]		= ""
 
 	data_core.security += R
 
@@ -371,14 +371,6 @@
 		if(R.fields[field] == value)
 			return R
 
-/proc/find_record_by_mob(var/mob/living/carbon/human/H)
-	var/mob_uid = H.unique_id
-
-	for(var/datum/data/record/R in data_core.general)
-		if(mob_uid == R.fields["unique_id"])
-			return R
-	return 0
-
 /proc/GetAssignment(var/mob/living/carbon/human/H)
 	if(H.mind.role_alt_title)
 		return H.mind.role_alt_title
@@ -389,20 +381,30 @@
 	else
 		return "Unassigned"
 
-/proc/get_gen_record(var/mob/living/carbon/human/H)
+/proc/gen_record_by_uid(uid)
 	for(var/datum/data/record/R in data_core.general)
-		if(R.fields["unique_id"] == H.unique_id)
+		if(uid == R.fields["unique_id"])
 			return R
 	return 0
+
+/proc/sec_record_by_uid(uid)
+	for(var/datum/data/record/R in data_core.security)
+		if(uid == R.fields["unique_id"])
+			return R
+	return 0
+
+/proc/med_record_by_uid(uid)
+	for(var/datum/data/record/R in data_core.medical)
+		if(uid == R.fields["unique_id"])
+			return R
+	return 0
+
+
+/proc/get_gen_record(var/mob/living/carbon/human/H)
+	return gen_record_by_uid(H.unique_id)
 
 /proc/get_med_record(var/mob/living/carbon/human/H)
-	for(var/datum/data/record/R in data_core.medical)
-		if(R.fields["unique_id"] == H.unique_id)
-			return R
-	return 0
+	return med_record_by_uid(H.unique_id)
 
 /proc/get_sec_record(var/mob/living/carbon/human/H)
-	for(var/datum/data/record/R in data_core.security)
-		if(R.fields["unique_id"] == H.unique_id)
-			return R
-	return 0
+	return sec_record_by_uid(H.unique_id)

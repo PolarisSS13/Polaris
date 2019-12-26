@@ -146,9 +146,8 @@
 
 						var/list/criminal_record = active2.fields["crim_record"]
 						for(var/datum/record/C in criminal_record)
-							dat += text("<BR>\n<a href='?src=\ref[src];choice=criminal_record_remove;criminal_record_r=[C]'>(Remove)</a> <b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+							dat += text("<BR>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
 
-						dat += text("<BR>\n<a href='?src=\ref[src];choice=criminal_record_add'>")
 
 						dat += text("<BR>\nImportant Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[decode(active2.fields["notes"])]</A><BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", src)
 
@@ -233,6 +232,8 @@ What a mess.*/
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		switch(href_list["choice"])
+
+
 // SORTING!
 			if("Sorting")
 				// Reverse the order if clicked twice
@@ -440,14 +441,6 @@ What a mess.*/
 				if ((istype(active2, /datum/data/record) && active2.fields[text("com_[]", href_list["del_c"])]))
 					active2.fields[text("com_[]", href_list["del_c"])] = "<B>Deleted</B>"
 
-			if("criminal_record_add")
-				add_crim_record()
-
-			if("criminal_record_remove")
-				if (active2)
-					var/datum/record/record = locate(href_list["crminal_record_r"])
-					active2.fields["crim_record"] -= record
-
 
 //RECORD CREATE
 			if ("New Record (Security)")
@@ -652,34 +645,6 @@ What a mess.*/
 
 	..(severity)
 
-/obj/machinery/computer/secure_data/proc/add_crim_record(mob/user)
-
-	if(!active2) return
-
-	var/laws_list = get_law_names()
-	var/crime = input(user, "Select a crime.", "Edit Criminal Records") as null|anything in laws_list
-	var/sec = sanitize(input(user,"Enter security information here.","Character Preference") as message|null, MAX_RECORD_LENGTH, extra = 0)
-	if(isnull(sec)) return
-
-	var/year = 0
-	var/month = 01
-	var/day = 01
-
-	year = input(user, "How many years ago? IE: 3 years ago. Input 0 for current year", "Edit Criminal Year", 0) as num|null
-	if(year > active2.fields["age"]) return
-
-	month = input(user, "On which month?", "Edit Month", 0) as num|null
-	if(!get_month_from_num(month)) return
-	if(!year && month > get_game_month()) return
-
-	day = input(user, "On what day?", "Edit Day", 0) as num|null
-	if((month in THIRTY_DAY_MONTHS) && month > 30 || (month in THIRTY_ONE_DAY_MONTHS) && month > 31 || (month in TWENTY_EIGHT_DAY_MONTHS) && month > 28) return
-	if(!year && month == get_game_month() && day > get_game_day()) return
-
-	if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
-		var/officer_name = random_name(pick("male","female"), SPECIES_HUMAN)
-
-		active2.fields["crim_record"] += make_new_record(/datum/record/police, crime, officer_name, user.ckey, "[day]/[month]/[get_game_year() - year]", sec)
 
 /obj/machinery/computer/secure_data/detective_computer
 	icon_state = "messyfiles"

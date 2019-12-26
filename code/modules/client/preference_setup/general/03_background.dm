@@ -11,6 +11,7 @@
 //	S["faction"]					>> pref.faction
 	S["religion"]					>> pref.religion
 	S["economic_status"]			>> pref.economic_status
+	S["social_class"]				>> pref.social_class
 	S["crime_record"]				>> pref.crime_record
 	S["health_record"]				>> pref.health_record
 	S["job_record"]				>> pref.job_record
@@ -24,9 +25,11 @@
 //	S["faction"]					<< pref.faction
 	S["religion"]					<< pref.religion
 	S["economic_status"]			<< pref.economic_status
+	S["social_class"]				<< pref.social_class
 	S["crime_record"]				<< pref.crime_record
 	S["health_record"]				>> pref.health_record
 	S["job_record"]				>> pref.job_record
+
 /datum/category_item/player_setup_item/general/background/delete_character(var/savefile/S)
 	pref.med_record = null
 	pref.sec_record = null
@@ -36,6 +39,7 @@
 	pref.faction = null
 	pref.religion = null
 	pref.economic_status = null
+	pref.social_class = null
 	pref.crime_record = list()
 	pref.health_record = list()
 	pref.job_record = list()
@@ -51,6 +55,8 @@
 	if(!pref.crime_record) pref.crime_record = list()
 	if(!pref.health_record) pref.health_record = list()
 	if(!pref.job_record) pref.job_record = list()
+
+	pref.economic_status = get_economic_class(pref.money_balance)
 
 	pref.economic_status = sanitize_inlist(pref.economic_status, ECONOMIC_CLASS, initial(pref.economic_status))
 
@@ -74,11 +80,12 @@
 	if(!pref.existing_character)
 		. += "Geminus City is on the planet Pollux, and is located in Blue Colony, in the Vetra star system. You may choose a different background. Social class and the system you are born in cannot be changed once set.</br><br>"
 		. += "Economic Class: [pref.economic_status]<br>"
-		. += "Social Class: <a href='?src=\ref[src];econ_status=1'>[pref.economic_status]</a><br/>"
+		. += "Social Class: <a href='?src=\ref[src];soc_class=1'>[pref.social_class]</a><br/>"
 		. += "Birth System: <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
 
 	else
-		. += "Social Class: [pref.economic_status]<br/>"
+		. += "Social Class: [pref.social_class]<br/>"
+		. += "Economic Class: [pref.economic_status]<br>"
 		. += "Birth System: [pref.home_system]<br/>"
 
 	. += "Continental Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
@@ -108,6 +115,7 @@
 
 		. += "Criminal Record:<br>"
 		. += "<a href='?src=\ref[src];edit_criminal_record=1'>Edit Criminal Record[record_count ? " ([record_count])" : ""]</a><br>"
+		. += "\n<b>Criminal Status:<b> [pref.criminal_status]<br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/suitable_classes = get_available_classes(user.client)
@@ -119,12 +127,6 @@
 				pref.crime_record -= record
 
 				return TOPIC_REFRESH
-
-	if(href_list["econ_status"])
-		var/new_class = input(user, "Choose your starting economic class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
-		if(new_class && CanUseTopic(user))
-			pref.economic_status = new_class
-			return TOPIC_REFRESH
 
 	if(href_list["soc_class"])
 		var/new_class = input(user, "Choose your starting social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
@@ -212,19 +214,20 @@
 		if(isnull(sec)) return
 
 		var/year = 0
-		var/month = 01
-		var/day = 01
+		var/month = get_game_month()
+		var/day = get_game_day()
 
-		year = input(user, "How many years ago? IE: 3 years ago. Input 0 for current year", "Edit Criminal Year", 0) as num|null
-		if(year > pref.age) return
+		if(!pref.existing_character)
+			year = input(user, "How many years ago? IE: 3 years ago. Input 0 for current year", "Edit Criminal Year", year) as num|null
+			if(year > pref.age) return
 
-		month = input(user, "On which month?", "Edit Month", 0) as num|null
-		if(!get_month_from_num(month)) return
-		if(!year && month > get_game_month()) return
+			month = input(user, "On which month?", "Edit Month", month) as num|null
+			if(!get_month_from_num(month)) return
+			if(!year && month > get_game_month()) return
 
-		day = input(user, "On what day?", "Edit Day", 0) as num|null
-		if((month in THIRTY_DAY_MONTHS) && month > 30 || (month in THIRTY_ONE_DAY_MONTHS) && month > 31 || (month in TWENTY_EIGHT_DAY_MONTHS) && month > 28) return
-		if(!year && month == get_game_month() && day > get_game_day()) return
+			day = input(user, "On what day?", "Edit Day", day) as num|null
+			if((month in THIRTY_DAY_MONTHS) && month > 30 || (month in THIRTY_ONE_DAY_MONTHS) && month > 31 || (month in TWENTY_EIGHT_DAY_MONTHS) && month > 28) return
+			if(!year && month == get_game_month() && day > get_game_day()) return
 
 		if(!isnull(crime) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			var/officer_name = random_name(pick("male","female"), SPECIES_HUMAN)

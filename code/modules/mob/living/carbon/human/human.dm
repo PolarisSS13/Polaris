@@ -442,12 +442,15 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Previous Convictions:</b> [R.fields["pre_con"]]"
-								usr << "<b>Details:</b> [R.fields["pre_con_d"]]"
-								usr << "<b>Warnings:</b> [R.fields["warn"]]"
-								usr << "<b>Details:</b> [R.fields["warn_d"]]"
-								usr << "<b>Injunctions:</b> [R.fields["injunc"]]"
-								usr << "<b>Details:</b> [R.fields["injunc_d"]]"
+								usr << "<b>Criminal Record:</b><br>"
+
+								var/list/criminal_record = R.fields["crim_record"]
+								if(!isemptylist(criminal_record))
+									for(var/datum/record/C in criminal_record)
+										usr << text("<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+								else
+									usr << text("<BR>No records found.")
+
 								usr << "<b>Notes:</b> [R.fields["notes"]]"
 								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
