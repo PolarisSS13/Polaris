@@ -52,7 +52,8 @@
 	if(pref.bank_pin)
 		. += "<b>Account Pin:</b> [pref.bank_pin]<br>"
 	. += "<b>Economic Class:</b> [pref.economic_status]<br>"
-	. += "<b>[pref.economic_status] Tax Rate:</b> [get_tax_rate(pref.economic_status)]%<br>"
+	if(persistent_economy)
+		. += "<b>[pref.economic_status] Tax Rate:</b> [get_tax_rate(pref.economic_status)]%<br>"
 
 	. += "<b>Debts:</b></br>"
 	if(isemptylist(pref.expenses))
