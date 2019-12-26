@@ -115,7 +115,7 @@
 
 		. += "Criminal Record:<br>"
 		. += "<a href='?src=\ref[src];edit_criminal_record=1'>Edit Criminal Record[record_count ? " ([record_count])" : ""]</a><br>"
-		. += "\n<b>Criminal Status:<b> [pref.criminal_status]<br>"
+		. += "\n<b>Criminal Status:</b> [pref.criminal_status]<br>"
 
 /datum/category_item/player_setup_item/general/background/OnTopic(var/href,var/list/href_list, var/mob/user)
 	var/suitable_classes = get_available_classes(user.client)
@@ -131,7 +131,7 @@
 	if(href_list["soc_class"])
 		var/new_class = input(user, "Choose your starting social class. This will affect the amount of money you will start with, your position in the revolution and other events.", "Character Preference", pref.economic_status)  as null|anything in suitable_classes
 		if(new_class && CanUseTopic(user))
-			pref.economic_status = new_class
+			pref.social_class = new_class
 			return TOPIC_REFRESH
 
 	else if(href_list["home_system"])
