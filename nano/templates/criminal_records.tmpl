@@ -1,0 +1,30 @@
+ <style type="text/css">
+a {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 4px;
+  border: 2px solid rgba(255,255,0,1);
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font: normal 11px/1 Arial, Helvetica, sans-serif;
+  color: black;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #ffd966;
+  text-decoration: none;
+}
+</style>
+
+<h1>Criminal Record Management</h1><hr>
+
+{{:data.page_msg}}<hr>
+
+{{if data.index == 1}}
+	<br>
+
+{{else}}
+	{{:helper.link("Back", null, {'back' : 1})}}
+
+{{/if}}
+

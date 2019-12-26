@@ -58,7 +58,7 @@
 
 
 	if(H.client)
-		switch(H.client.prefs.economic_status)
+		switch(H.client.prefs.social_class)
 			if(CLASS_UPPER)
 				if(!H.mind.prefs.played)
 					income = 10000

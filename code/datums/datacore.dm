@@ -208,6 +208,7 @@
 		var/datum/data/record/M = CreateMedicalRecord(H.real_name, id)
 		M.fields["b_type"]		= H.b_type
 		M.fields["b_dna"]		= H.dna.unique_enzymes
+		M.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		M.fields["id_gender"]	= gender2text(H.identifying_gender)
 		if(H.get_FBP_type())
 			M.fields["brain_type"] = H.get_FBP_type()
@@ -224,11 +225,17 @@
 			S.fields["brain_type"] = "Organic"
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
 			S.fields["notes"] = H.sec_record
+		S.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
+		S.fields["crim_record"] = H.mind.prefs.crime_record
+		S.fields["criminal"] = H.mind.prefs.criminal_status
+		S.fields["prison_date"] = H.mind.prefs.prison_date
+		S.fields["prison_release_date"] = H.mind.prefs.prison_release_date
 
 		//Locked Record
 		var/datum/data/record/L = new()
 		L.fields["id"]			= md5("[H.real_name][H.mind.assigned_role]")
 		L.fields["name"]		= H.real_name
+		L.fields["unique_id"]	= H.mind.prefs.unique_id // this is persistent
 		L.fields["rank"] 		= H.mind.assigned_role
 		L.fields["age"]			= H.age
 		L.fields["fingerprint"]	= md5(H.dna.uni_identity)
@@ -312,13 +319,13 @@
 	R.fields["bank_account"]	= "None"
 	R.fields["brain_type"] = "Unknown"
 	R.fields["criminal"]	= "None"
-	R.fields["pre_con"]		= "None"
-	R.fields["pre_con_d"]	= "No previous crime convictions."
-	R.fields["warn"]		= "None"
-	R.fields["warn_d"]	= "No warnings."
-	R.fields["injunc"]	= "None."
-	R.fields["injunc_d"]	= "No injunctions."
-	R.fields["notes"]		= "No notes."
+
+	R.fields["prison_date"] = ""
+	R.fields["prison_release_date"] = ""
+
+	R.fields["crim_record"]	= list()
+	R.fields["notes"]		= ""
+
 	data_core.security += R
 
 	return R
@@ -337,9 +344,9 @@
 	M.fields["mi_dis_d"]	= "No minor disabilities have been declared."
 	M.fields["ma_dis"]		= "None"
 	M.fields["ma_dis_d"]	= "No major disabilities have been diagnosed."
-	M.fields["alg"]			= "None"
+	M.fields["alg"]		= "None"
 	M.fields["alg_d"]		= "No allergies have been detected in this patient."
-	M.fields["cdi"]			= "None"
+	M.fields["cdi"]		= "None"
 	M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 	M.fields["notes"] = "No notes found."
 	data_core.medical += M
@@ -363,14 +370,6 @@
 	for(var/datum/data/record/R in L)
 		if(R.fields[field] == value)
 			return R
-			
-/proc/find_record_by_mob(var/mob/living/carbon/human/H)
-	var/mob_uid = H.unique_id
-	
-	for(var/datum/data/record/R in data_core.general)
-		if(mob_uid == R.fields["unique_id"])
-			return R
-	return 0
 
 /proc/GetAssignment(var/mob/living/carbon/human/H)
 	if(H.mind.role_alt_title)
@@ -381,3 +380,31 @@
 		return H.job
 	else
 		return "Unassigned"
+
+/proc/gen_record_by_uid(uid)
+	for(var/datum/data/record/R in data_core.general)
+		if(uid == R.fields["unique_id"])
+			return R
+	return 0
+
+/proc/sec_record_by_uid(uid)
+	for(var/datum/data/record/R in data_core.security)
+		if(uid == R.fields["unique_id"])
+			return R
+	return 0
+
+/proc/med_record_by_uid(uid)
+	for(var/datum/data/record/R in data_core.medical)
+		if(uid == R.fields["unique_id"])
+			return R
+	return 0
+
+
+/proc/get_gen_record(var/mob/living/carbon/human/H)
+	return gen_record_by_uid(H.unique_id)
+
+/proc/get_med_record(var/mob/living/carbon/human/H)
+	return med_record_by_uid(H.unique_id)
+
+/proc/get_sec_record(var/mob/living/carbon/human/H)
+	return sec_record_by_uid(H.unique_id)
