@@ -145,6 +145,9 @@
 	if(config.log_world_output)
 		diary << "\[[time_stamp()]]DD_OUTPUT: [text][log_end]"
 
+/proc/log_election(mob/user, votee)
+	vote_log << "\[[time_stamp()]]VOTE: [user.client.simple_info_line()] voted for [votee] [log_end]"
+
 /proc/log_error(text)
 	world.log << text
 	error_log << "\[[time_stamp()]]RUNTIME: [text][log_end]"

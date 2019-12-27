@@ -191,6 +191,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	anchored = 1
 	var/obj/machinery/exonet_node/node = null
 	circuit = /obj/item/weapon/circuitboard/newscaster
+	var/unique_id_card
 
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"
@@ -608,6 +609,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			for(var/datum/feed_channel/F in news_network.network_channels)
 				if(check_rights(R_ADMIN, 0, usr))
 					available_channels += F.channel_name
+				else if(unique_id_card && unique_id_card in news_data.news_edit_list())
+					available_channels += F.channel_name
 				else
 					if((!F.locked || F.author == scanned_user) && !F.censored)
 						available_channels += F.channel_name
@@ -870,6 +873,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
 		if(I)
 			scanned_user = GetNameAndAssignmentFromId(I)
+			unique_id_card = I.unique_ID
 		else
 			scanned_user = "Unknown"
 	else
