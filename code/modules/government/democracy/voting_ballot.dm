@@ -186,8 +186,9 @@
 			to_chat(usr, SPAN_WARNING("You decide to refrain participating in the system for now."))
 			return
 		else
+			log_election(usr, candidate.name)
 			candidate.ckeys_voted += usr.client.ckey
-			SSelections.total_votes++
+			SSelections.recount_votes()
 
 	updateDialog()
 
