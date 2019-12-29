@@ -40,13 +40,13 @@
 	name = "tier 0 weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a firearm."
 	tier = 0
-	price_tag = 50
+	price_tag = 200
 	
 /obj/item/clothing/accessory/permit/gun/tier_one
 	name = "tier one weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a firearm."
 	tier = 1
-	price_tag = 200
+	price_tag = 400
 
 /obj/item/clothing/accessory/permit/gun/tier_two
 	name = "tier two weapon permit"
@@ -70,7 +70,6 @@
 	name = "tier five weapon permit"
 	desc = "A card indicating that the owner is allowed to carry a firearm."
 	tier = 5
-	price_tag = 3000
 
 /obj/item/clothing/accessory/permit/gun/bar
 	name = "bar shotgun permit"
