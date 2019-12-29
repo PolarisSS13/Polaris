@@ -104,3 +104,11 @@
     
 	fine = 2250
 	cell_time = 60
+	
+/datum/law/major/elec_fraud
+	name = "Electoral Fraud"
+	description = "Coercing voters via bribery or blackmail, to ensure \
+	they vote in the offender´s interest."
+    
+	fine = 50000
+	cell_time = 43710
