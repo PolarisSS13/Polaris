@@ -111,4 +111,4 @@
 	they vote in the offender´s interest."
     
 	fine = 50000
-	cell_time = One_Month
+	cell_time = 43710
