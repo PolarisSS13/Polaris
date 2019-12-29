@@ -1,0 +1,175 @@
+{{:helper.businessManager()}}
+<h1>Business Management Utility</h1><hr>
+
+{{if data.index == 0}}
+<p>Welcome, {{:data.authuser}}.</p>
+
+{{if data.current_business}}
+	<h2>{{:data.current_business_name}}</h2><br>
+
+	{{:helper.link("View Business Page", null, {'login' : 1})}}
+	{{:helper.link("Log Out", null, {'business_logout' : 1})}}   
+
+	{{else}}
+<p>If you would like to login to your business, please click here.
+</p>
+{{:helper.link("Login", null, {'login' : 1})}}
+<br><br>
+{{/if}}
+
+<h2>Other Options</h2>
+<hr>
+
+{{:helper.link("Register a Business", null, {'register_business' : 1})}}
+<!-- {{:helper.link("Apply to a Business", null, {'apply_to_business' : 1})}} -->
+{{:helper.link("View Existing Businesses", null, {'view_businesses' : 1})}}
+
+{{/if}}
+
+{{if data.index == 1}}
+
+<h2>Business Registrar</h2>
+<hr>
+
+<p>Before you register a business consider checking the official list of businesses that already exist.</p>
+
+<p>
+{{:helper.link("View Existing Businesses", null, {'view_businesses' : 1})}}
+</p>
+
+<h3>Registering your business</h3>
+
+<h2>Terms and Conditions</h2>
+
+<p>All businesses must remain in accordance with Polluxian law. If a business is found to be participating in illegal activity it will be suspended pending investigation. 
+The Polluxian Government & NanoTrasen reserves the right to request an audit at any given time. Failure to comply with auditing procedures may result in the termination of your company.</p>
+		
+<h2>Disclaimer</h2>
+	<p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our utility and the use of this utility including, without limitation, any warranties implied by law in respect of satisfactory quality, fitness for purpose and/or the use of reasonable care and skill. Nothing in this disclaimer will:</p>
+	<ol>
+	<li>limit or exclude our or your liability for death or personal injury resulting from negligence;</li>
+	<li>limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
+	<li>limit any of our or your liabilities in any way that is not permitted under applicable law; or</li>
+	<li>exclude any of our or your liabilities that may not be excluded under applicable law.</li>
+	</ol>
+	<p>The limitations and exclusions of liability set out in this Section and elsewhere in this disclaimer: a - 
+	are subject to the preceding paragraph; and b - govern all liabilities arising under the disclaimer or
+	in relation to the subject matter of this disclaimer, including liabilities arising in contract, in tort 
+	including negligence and for breach of statutory duty.</p>
+	<p>To the extent that the utility and the information and services on the utility are provided,
+	we will not be liable for any loss or damage of any nature.</p>
+
+<p><em>Please complete the form below.</em></p>
+<hr>
+
+<br>
+
+<span style="color: rgb(226, 80, 65);">{{:data.reg_error}}</span></p>
+
+<br><strong>Business Name*: </strong>{{:data.b_name}}</p>
+{{:helper.link("Set Business Name", null, {'set_business_name' : 1})}}
+
+<br><p>
+
+<strong>Business Slogan*: </strong>{{:data.b_slogan}}</p>
+{{:helper.link("Set Slogan", null, {'set_business_slogan' : 1})}}
+
+<br><p>
+
+<strong>Business Category*: </strong>{{:data.b_category}}</p>
+{{:helper.link("Set Category", null, {'set_business_category' : 1})}}
+
+<br><p>
+
+<strong>Business Description*: </strong>{{:data.b_desc}}</p>
+{{:helper.link("Set Description", null, {'set_business_desc' : 1})}}
+
+<br><p>
+
+<strong>Password*:</strong> {{:data.business_pass}}
+{{:helper.link("Set Password", null, {'set_business_pass' : 1})}}
+
+<br><p>
+
+<p>By pressing "Submit" you agree to the business terms and conditions and a payment of 3,500 credits charged to your bank account.</p>
+
+{{:helper.link("Submit", null, {'submit_new_business' : 1})}}
+{{:helper.link("Back", null, {'return_to_main_menu' : 1})}}
+</br>
+{{/if}}
+
+{{if data.index == 2}}
+{{:data.page_msg}}
+<br>
+{{:helper.link("Back", null, {'return_to_main_menu' : 1})}}
+
+{{/if}}
+
+{{if data.index == 3}}
+	
+{{:helper.link("Back", null, {'return_to_main_menu' : 1})}}   
+
+{{/if}}
+
+{{if data.index == 4}}
+
+<p>Welcome back,</p><br>
+
+<p>To log into your business page, please enter your login details.</p>
+<br>
+
+<span style="color: rgb(226, 80, 65);">{{:data.reg_error}}</span></p>
+<p>
+<p><b>Note:</b> All fields are case sensitive, please ensure that you are entering your details correctly.</p>
+<p>
+
+<p><strong>Business Name*: </strong>{{:data.b_name}}</p>
+
+{{:helper.link("Change", null, {'set_business_name' : 1})}}
+
+<br><p>
+
+<strong>Password*:</strong> {{:data.business_pass}}
+{{:helper.link("Change", null, {'set_business_pass' : 1})}}
+
+
+<br><br><p>
+{{:helper.link("Login", null, {'business_login' : 1})}}
+{{:helper.link("Register New Business", null, {'register_business' : 1})}}
+<br><p>	
+{{:helper.link("Back", null, {'return_to_main_menu' : 1})}}   
+
+
+{{/if}}
+
+{{if data.index == 5}}
+	
+	<b>Current user:</b> {{:data.authuser}}<br>
+	<h2>{{:data.current_business_name}}</h2><br>
+
+<br>
+<hr> 
+
+<!--	{{:helper.link("Manage Employees", null, {'manage_employees' : 1})}} -->
+<!--	{{:helper.link("Check Employee Applications", null, {'check_applications' : 1})}} -->
+	{{:helper.link("Business Settings", null, {'business_settings' : 1})}}  
+	{{:helper.link("Log Out", null, {'business_logout' : 1})}}   
+
+{{/if}}
+
+{{if data.index == 6}}
+	<h3>Business Settings:</h3><p>
+
+	{{:helper.link("Change Business Name", null, {'rename_business' : 1})}}
+	{{:helper.link("Edit Business Slogan", null, {'edit_business_slogan' : 1})}}
+	{{:helper.link("Edit Business Description", null, {'edit_business_desc' : 1})}}
+	{{:helper.link("Edit Business Category", null, {'edit_business_category' : 1})}}
+	{{:helper.link("Change Business Password", null, {'change_password' : 1})}}
+	
+	{{:helper.link("Change Primary Color", null, {'set_primary_color' : 1})}}
+	{{:helper.link("Change Secondary Color", null, {'set_secondary_color' : 1})}} 
+	
+	{{:helper.link("Back", null, {'return_to_business_page' : 1})}}
+
+
+{{/if}}

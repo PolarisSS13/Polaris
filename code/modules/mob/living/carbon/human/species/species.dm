@@ -55,12 +55,17 @@
 	// Language/culture vars.
 	var/default_language = LANGUAGE_GALCOM					// Default language is used when 'say' is used without modifiers.
 	var/language = LANGUAGE_GALCOM							// Default racial language, if any.
-	var/species_language = LANGUAGE_GALCOM					// Used on the Character Setup screen
+	var/list/species_language = list(LANGUAGE_GALCOM)		// Used on the Character Setup screen
 	var/list/secondary_langs = list()						// The names of secondary languages that are available to this species.
 	var/list/speech_sounds									// A list of sounds to potentially play when speaking.
 	var/list/speech_chance									// The likelihood of a speech sound playing.
 	var/num_alternate_languages = 0							// How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM						// The language to use when determining names for this species, or null to use the first name/last name generator
+
+	// The languages the species can't speak without an assisted organ.
+	// This list is a guess at things that no one other than the parent species should be able to speak
+	var/list/assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_SKRELLIAN, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
+
 
 	//Soundy emotey things.
 	var/scream_verb = "screams"
@@ -199,10 +204,13 @@
 		O_HEART =		/obj/item/organ/internal/heart,
 		O_LUNGS =		/obj/item/organ/internal/lungs,
 		O_LIVER =		/obj/item/organ/internal/liver,
-		O_KIDNEYS =	/obj/item/organ/internal/kidneys,
+		O_VOICE = 		/obj/item/organ/internal/voicebox,
+		O_KIDNEYS =		/obj/item/organ/internal/kidneys,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine,
 		O_BRAIN =		/obj/item/organ/internal/brain,
-		O_APPENDIX = /obj/item/organ/internal/appendix,
-		O_EYES =		 /obj/item/organ/internal/eyes
+		O_APPENDIX = 	/obj/item/organ/internal/appendix,
+		O_EYES =		/obj/item/organ/internal/eyes
 		)
 	var/vision_organ										// If set, this organ is required for vision. Defaults to "eyes" if the species has them.
 

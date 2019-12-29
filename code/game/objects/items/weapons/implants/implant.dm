@@ -13,6 +13,7 @@
 	var/implant_color = "b"
 	var/allow_reagents = 0
 	var/malfunction = 0
+	var/initialize_loc = BP_TORSO
 	show_messages = 1
 
 /obj/item/weapon/implant/proc/trigger(emote, source as mob)
@@ -24,9 +25,25 @@
 	// What does the implant do upon injection?
 	// return 0 if the implant fails (ex. Revhead and loyalty implant.)
 	// return 1 if the implant succeeds (ex. Nonrevhead and loyalty implant.)
-/obj/item/weapon/implant/proc/implanted(var/mob/source)
+// Moves the implant where it needs to go, and tells it if there's more to be done in post_implant
+/obj/item/weapon/implant/proc/handle_implant(var/mob/source, var/target_zone = BP_TORSO)
+	. = TRUE
+	imp_in = source
+	implanted = TRUE
+	if(ishuman(source))
+		var/mob/living/carbon/human/H = source
+		var/obj/item/organ/external/affected = H.get_organ(target_zone)
+		if(affected)
+			affected.implants |= src
+			part = affected
+	if(part)
+		forceMove(part)
+	else
+		forceMove(source)
+
 	listening_objects |= src
-	return 1
+
+/obj/item/weapon/implant/proc/post_implant(var/mob/source)
 
 /obj/item/weapon/implant/proc/get_data()
 	return "No information available"
@@ -48,6 +65,12 @@
 	desc = "Charred circuit in melted plastic case. Wonder what that used to be..."
 	icon_state = "implant_melted"
 	malfunction = MALFUNCTION_PERMANENT
+
+/obj/item/weapon/implant/proc/implant_loadout(var/mob/living/carbon/human/H)
+	if(H)
+		if(handle_implant(H, initialize_loc))
+			invisibility = initial(invisibility)
+			post_implant(H)
 
 /obj/item/weapon/implant/Destroy()
 	if(part)
@@ -88,7 +111,7 @@ GLOBAL_LIST_BOILERPLATE(all_tracking_implants, /obj/item/weapon/implant/tracking
 	id = rand(1, 1000)
 	..()
 
-/obj/item/weapon/implant/tracking/implanted(var/mob/source)
+/obj/item/weapon/implant/tracking/post_implant(var/mob/source)
 	processing_objects.Add(src)
 	return 1
 
@@ -253,7 +276,7 @@ Implant Specifics:<BR>"}
 	if(t)
 		t.hotspot_expose(3500,125)
 
-/obj/item/weapon/implant/explosive/implanted(mob/source as mob)
+/obj/item/weapon/implant/explosive/post_implant(mob/source as mob)
 	elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 	phrase = input("Choose activation phrase:") as text
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
@@ -411,18 +434,20 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	return dat
 
 
-/obj/item/weapon/implant/loyalty/implanted(mob/M)
-	if(!istype(M, /mob/living/carbon/human))	return 0
+/obj/item/weapon/implant/loyalty/handle_implant(mob/M, target_zone = BP_TORSO)
+	. = ..(M, target_zone)
+	if(!istype(M, /mob/living/carbon/human))
+		. = FALSE
 	var/mob/living/carbon/human/H = M
 	var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [using_map.company_name] try to invade your mind!")
-		return 0
-	else
-		clear_antag_roles(H.mind, 1)
-		H << "<span class='notice'>You feel a surge of loyalty towards [using_map.company_name].</span>"
-	return 1
+		. = FALSE
 
+/obj/item/weapon/implant/loyalty/post_implant(mob/M)
+	var/mob/living/carbon/human/H = M
+	clear_antag_roles(H.mind, 1)
+	to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [using_map.company_name].</span>")
 
 /obj/item/weapon/implant/adrenalin
 	name = "adrenalin"
@@ -455,11 +480,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	return
 
 
-/obj/item/weapon/implant/adrenalin/implanted(mob/source)
+/obj/item/weapon/implant/adrenalin/post_implant(mob/source)
 	source.mind.store_memory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", 0, 0)
 	source << "The implanted freedom implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate."
-	listening_objects |= src
-	return 1
 
 
 /obj/item/weapon/implant/death_alarm
@@ -538,10 +561,9 @@ the implant may become unstable and either pre-maturely inject the subject or si
 	spawn(20)
 		malfunction--
 
-/obj/item/weapon/implant/death_alarm/implanted(mob/source as mob)
+/obj/item/weapon/implant/death_alarm/post_implant(mob/source as mob)
 	mobname = source.real_name
 	processing_objects.Add(src)
-	return 1
 
 /obj/item/weapon/implant/compressed
 	name = "compressed matter implant"
@@ -580,13 +602,12 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		scanned.loc = t
 	qdel(src)
 
-/obj/item/weapon/implant/compressed/implanted(mob/source as mob)
+/obj/item/weapon/implant/compressed/post_implant(mob/source as mob)
 	src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
 	if (source.mind)
 		source.mind.store_memory("Compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
 	source << "The implanted compressed matter implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate."
-	listening_objects |= src
-	return 1
+
 
 /obj/item/weapon/implant/compressed/islegal()
 	return 0

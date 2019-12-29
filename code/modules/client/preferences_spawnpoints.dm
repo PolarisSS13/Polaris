@@ -66,3 +66,13 @@ var/list/spawntypes = list()
 /datum/spawnpoint/cyborg/New()
 	..()
 	turfs = latejoin_cyborg
+
+
+/datum/spawnpoint/prison
+	display_name = "Prison"
+	msg = "will continue serving their sentence in police custody"
+	restrict_job = list("Prisoner")
+
+/datum/spawnpoint/prison/New()
+	..()
+	turfs = latejoin_prison

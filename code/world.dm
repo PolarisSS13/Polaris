@@ -67,6 +67,7 @@ var/global/datum/global_init/init = new ()
 	diary = file("[log_path].log")
 	href_logfile = file("[log_path]-hrefs.htm")
 	error_log = file("[log_path]-error.log")
+	vote_log = file("data/logs/vote.log")
 	debug_log = file("[log_path]-debug.log")
 	debug_log << "[log_end]\n[log_end]\nStarting up. [time_stamp()][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
@@ -560,16 +561,19 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.server_name)
 		s += "<b>[config.server_name]</b> &#8212; "
 
-	s += "<b>The World Server Redux | Partially persistent city roleplay</b> - <b>[station_name()]</b>";
-	s += " | DEVELOPMENT MODE ("
-	s += "<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
+	s += "<b>Official World Server | Roleplaying</b>";
+	s += " | Persistent money, partial map saving, elections."
+
+	s += "(<a href=\"https://discord.gg/4KUpvnJ\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "DISCORD"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "DISCORD"
 	s += "</a>"
 	s += ")"
-
+	
 	var/list/features = list()
-
+	if(SSelections && SSelections.current_president)
+		features += "<br><b>Current President:</b> [SSelections.current_president.name]"
+		
 	if(ticker)
 		if(master_mode)
 			features += master_mode
@@ -579,13 +583,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (!config.enter_allowed)
 		features += "closed"
 
-	features += config.abandon_allowed ? "respawn" : "no respawn"
+//	features += config.abandon_allowed ? "respawn" : "no respawn"
 
-	if (config && config.allow_vote_mode)
-		features += "vote"
+//	if (config && config.allow_vote_mode)
+//		features += "vote"
 
-	if (config && config.allow_ai)
-		features += "AI allowed"
+//	if (config && config.allow_ai)
+//		features += "AI allowed"
 
 	var/n = 0
 	for (var/mob/M in player_list)
@@ -593,13 +597,13 @@ var/world_topic_spam_protect_time = world.timeofday
 			n++
 
 	if (n > 1)
-		features += "~[n] players"
+		features += "~[n] civilians"
 	else if (n > 0)
-		features += "~[n] player"
+		features += "~[n] civilian"
 
 
-	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
+//	if (config && config.hostedby)
+//		features += "hosted by <b>[config.hostedby]</b>"
 
 	s += "<img src=\"https://i.imgur.com/RGXrBHu.gif\">" //Banner image
 

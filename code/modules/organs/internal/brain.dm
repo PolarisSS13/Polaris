@@ -15,6 +15,21 @@
 	attack_verb = list("attacked", "slapped", "whacked")
 	var/clone_source = FALSE
 	var/mob/living/carbon/brain/brainmob = null
+	var/can_assist = TRUE
+
+/obj/item/organ/internal/brain/proc/can_assist()
+	return can_assist
+
+/obj/item/organ/internal/brain/proc/implant_assist(var/targ_icon_state = null)
+	name = "[owner.real_name]'s assisted [initial(name)]"
+	if(targ_icon_state)
+		icon_state = targ_icon_state
+		if(dead_icon)
+			dead_icon = "[targ_icon_state]_dead"
+	else
+		icon_state = "[initial(icon_state)]_assisted"
+	if(dead_icon)
+		dead_icon = "[initial(dead_icon)]_assisted"
 
 /obj/item/organ/internal/brain/robotize()
 	replace_self_with(/obj/item/organ/internal/mmi_holder/posibrain)

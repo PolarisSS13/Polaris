@@ -169,3 +169,23 @@
 
 /obj/item/weapon/flame/lighter/zippo
 	price_tag = 5
+
+////////////////////
+// -- Minerals -- //
+////////////////////
+
+/obj/item/stack/get_item_cost()
+	var/total_price
+
+	if(reagents)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			total_price += R.price_tag * R.volume
+
+	return round(total_price)
+
+
+/obj/item/stack/get_tax()
+	if(reagents)
+		for(var/datum/reagent/R in reagents.reagent_list)
+			if(R.get_tax())
+				return R.get_tax()

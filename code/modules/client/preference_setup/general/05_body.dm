@@ -291,6 +291,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = "right hand"
 			if(O_HEART)
 				organ_name = "heart"
+			if(O_VOICE)
+				organ_name = "larynx"
 			if(O_EYES)
 				organ_name = "eyes"
 			if(O_BRAIN)
@@ -301,6 +303,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = "liver"
 			if(O_KIDNEYS)
 				organ_name = "kidneys"
+			if(O_SPLEEN)
+				organ_name = "spleen"
+			if(O_STOMACH)
+				organ_name = "stomach"
+			if(O_INTESTINE)
+				organ_name = "intestines"
 
 		if(status == "cyborg")
 			++ind
@@ -743,7 +751,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	else if(href_list["organs"])
 
-		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys", "Brain")
+		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes","Larynx", "Lungs", "Liver", "Kidneys", "Spleen", "Intestines", "Stomach", "Brain")
 		if(!organ_name) return
 
 		var/organ = null
@@ -756,8 +764,16 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = O_LUNGS
 			if("Liver")
 				organ = O_LIVER
+			if("Larynx")
+				organ = O_VOICE
 			if("Kidneys")
 				organ = O_KIDNEYS
+			if("Spleen")
+				organ = O_SPLEEN
+			if("Intestines")
+				organ = O_INTESTINE
+			if("Stomach")
+				organ = O_STOMACH
 			if("Brain")
 				if(pref.organ_data[BP_HEAD] != "cyborg")
 					user << "<span class='warning'>You may only select a cybernetic or synthetic brain if you have a full prosthetic body.</span>"

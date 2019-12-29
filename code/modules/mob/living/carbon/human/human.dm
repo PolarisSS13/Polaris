@@ -167,25 +167,12 @@
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-/mob/living/carbon/human/proc/implant_loadout(var/datum/gear/G = new/datum/gear/utility/implant)
-	var/obj/item/weapon/implant/I = new G.path(src)
-	I.imp_in = src
-	I.implanted = 1
-	var/obj/item/organ/external/affected = src.organs_by_name[BP_HEAD]
-	affected.implants += I
-	I.part = affected
-	I.implanted(src)
-
 /mob/living/carbon/human/proc/implant_loyalty(override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(src)
-	L.imp_in = src
-	L.implanted = 1
-	var/obj/item/organ/external/affected = src.organs_by_name[BP_HEAD]
-	affected.implants += L
-	L.part = affected
-	L.implanted(src)
+	if(L.handle_implant(src, BP_HEAD))
+		L.post_implant(src)
 
 /mob/living/carbon/human/proc/is_loyalty_implanted()
 	for(var/L in src.contents)
@@ -442,12 +429,15 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Previous Convictions:</b> [R.fields["pre_con"]]"
-								usr << "<b>Details:</b> [R.fields["pre_con_d"]]"
-								usr << "<b>Warnings:</b> [R.fields["warn"]]"
-								usr << "<b>Details:</b> [R.fields["warn_d"]]"
-								usr << "<b>Injunctions:</b> [R.fields["injunc"]]"
-								usr << "<b>Details:</b> [R.fields["injunc_d"]]"
+								usr << "<b>Criminal Record:</b><br>"
+
+								var/list/criminal_record = R.fields["crim_record"]
+								if(!isemptylist(criminal_record))
+									for(var/datum/record/C in criminal_record)
+										usr << text("<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+								else
+									usr << text("<BR>No records found.")
+
 								usr << "<b>Notes:</b> [R.fields["notes"]]"
 								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
@@ -1117,6 +1107,8 @@
 			remove_language(species.language)
 		if(species.default_language)
 			remove_language(species.default_language)
+		for(var/datum/language/L in species.assisted_langs)
+			remove_language(L)
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
 		holder_type = null

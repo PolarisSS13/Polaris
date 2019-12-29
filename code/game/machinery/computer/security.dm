@@ -141,7 +141,16 @@
 					else
 						dat += "<B>General Record Lost!</B><BR>"
 					if ((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
-						dat += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: <A href='?src=\ref[];choice=Edit Field;field=criminal'>[]</A><BR>\n<BR>\nMinor Crimes: <A href='?src=\ref[];choice=Edit Field;field=mi_crim'>[]</A><BR>\nDetails: <A href='?src=\ref[];choice=Edit Field;field=mi_crim_d'>[]</A><BR>\n<BR>\nMajor Crimes: <A href='?src=\ref[];choice=Edit Field;field=ma_crim'>[]</A><BR>\nDetails: <A href='?src=\ref[];choice=Edit Field;field=ma_crim_d'>[]</A><BR>\n<BR>\nImportant Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[]</A><BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", src, active2.fields["criminal"], src, active2.fields["mi_crim"], src, active2.fields["mi_crim_d"], src, active2.fields["ma_crim"], src, active2.fields["ma_crim_d"], src, decode(active2.fields["notes"]))
+						dat += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: <A href='?src=\ref[src];choice=Edit Field;field=criminal'>[active2.fields["criminal"]]</A><BR>\n")
+
+
+						var/list/criminal_record = active2.fields["crim_record"]
+						for(var/datum/record/C in criminal_record)
+							dat += text("<BR>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>")
+
+
+						dat += text("<BR>\nImportant Notes:<BR>\n\t<A href='?src=\ref[];choice=Edit Field;field=notes'>[decode(active2.fields["notes"])]</A><BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", src)
+
 						var/counter = 1
 						while(active2.fields[text("com_[]", counter)])
 							dat += text("[]<BR><A href='?src=\ref[];choice=Delete Entry;del_c=[]'>Delete Entry</A><BR><BR>", active2.fields[text("com_[]", counter)], src, counter)
@@ -202,7 +211,11 @@
 				else
 		else
 			dat += text("<A href='?src=\ref[];choice=Log In'>{Log In}</A>", src)
-	user << browse(text("<HEAD><TITLE>Security Records</TITLE></HEAD><TT>[]</TT>", dat), "window=secure_rec;size=600x400")
+
+	var/datum/browser/popup = new(user, "secure_rec", "<HEAD><TITLE>Security Records</TITLE></HEAD>", 600, 400, src)
+	popup.set_content(jointext(dat,null))
+	popup.open()
+
 	onclose(user, "secure_rec")
 	return
 
@@ -219,6 +232,8 @@ What a mess.*/
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		switch(href_list["choice"])
+
+
 // SORTING!
 			if("Sorting")
 				// Reverse the order if clicked twice
@@ -346,10 +361,19 @@ What a mess.*/
 					printing = 1
 					var/datum/data/record/record1 = null
 					var/datum/data/record/record2 = null
+
+
+					//Criminal Record:
+
+
+
 					if ((istype(active1, /datum/data/record) && data_core.general.Find(active1)))
 						record1 = active1
 					if ((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
 						record2 = active2
+
+					var/list/criminal_record = record2.fields["crim_record"]
+
 					sleep(50)
 					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( loc )
 					P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
@@ -360,7 +384,14 @@ What a mess.*/
 						P.info += "<B>General Record Lost!</B><BR>"
 						P.name = "Security Record"
 					if (record2)
-						P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\nCriminal Status: []<BR>\n<BR>\nMinor Crimes: []<BR>\nDetails: []<BR>\n<BR>\nMajor Crimes: []<BR>\nDetails: []<BR>\n<BR>\nImportant Notes:<BR>\n\t[]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>", record2.fields["criminal"], record2.fields["mi_crim"], record2.fields["mi_crim_d"], record2.fields["ma_crim"], record2.fields["ma_crim_d"], decode(record2.fields["notes"]))
+						P.info += "<BR>\n<CENTER><B>Security Data</B></CENTER><BR>"
+						P.info += "\nWanted Status: [record2.fields["criminal"]]<BR>\n<BR>"
+						P.info += "\nCriminal Record: <BR>"
+
+						for(var/datum/record/C in criminal_record)
+							P.info += "<BR>\n<b>[C.name]</b>: [C.details] - [C.author] <i>([C.date_added])</i>"
+
+						P.info += "<BR>\nImportant Notes:<BR>\n\t[decode(record2.fields["notes"])]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>"
 						var/counter = 1
 						while(record2.fields[text("com_[]", counter)])
 							P.info += text("[]<BR>", record2.fields[text("com_[]", counter)])
@@ -409,6 +440,8 @@ What a mess.*/
 			if ("Delete Entry")
 				if ((istype(active2, /datum/data/record) && active2.fields[text("com_[]", href_list["del_c"])]))
 					active2.fields[text("com_[]", href_list["del_c"])] = "<B>Deleted</B>"
+
+
 //RECORD CREATE
 			if ("New Record (Security)")
 				if ((istype(active1, /datum/data/record) && !( istype(active2, /datum/data/record) )))
@@ -418,7 +451,6 @@ What a mess.*/
 			if ("New Record (General)")
 				active1 = data_core.CreateGeneralRecord()
 				active2 = null
-
 //FIELD FUNCTIONS
 			if ("Edit Field")
 				if (is_not_allowed(usr))
@@ -496,6 +528,7 @@ What a mess.*/
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
 							temp += "</ul>"
+
 					if("rank")
 						var/list/L = list( "City Clerk", "Mayor", "AI" )
 						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
@@ -517,11 +550,11 @@ What a mess.*/
 						var/icon/photo = get_photo(usr)
 						if(photo)
 							active1.fields["photo_front"] = photo
+
 					if("photo side")
 						var/icon/photo = get_photo(usr)
 						if(photo)
 							active1.fields["photo_side"] = photo
-
 
 //TEMPORARY MENU FUNCTIONS
 			else//To properly clear as per clear screen.
@@ -611,6 +644,7 @@ What a mess.*/
 			continue
 
 	..(severity)
+
 
 /obj/machinery/computer/secure_data/detective_computer
 	icon_state = "messyfiles"

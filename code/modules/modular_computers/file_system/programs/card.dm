@@ -39,7 +39,7 @@
 	if(program && program.computer && program.computer.card_slot)
 		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
 		data["has_id"] = !!id_card
-		data["id_account_number"] = id_card ? id_card.associated_account_number : null
+//		data["id_account_number"] = id_card ? id_card.associated_account_number : null
 		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
 		data["id_owner"] = id_card && id_card.registered_name ? id_card.registered_name : "-----"
 		data["id_name"] = id_card ? id_card.name : "-----"
@@ -134,7 +134,7 @@
 									<u>For:</u> [id_card.registered_name ? id_card.registered_name : "Unregistered"]<br>
 									<hr>
 									<u>Assignment:</u> [id_card.assignment]<br>
-									<u>Account Number:</u> #[id_card.associated_account_number]<br>
+//									<u>Account Number:</u> #[id_card.associated_account_number]<br>
 									<u>Blood Type:</u> [id_card.blood_type]<br><br>
 									<u>Access:</u><br>
 								"}
@@ -172,9 +172,11 @@
 						id_card.registered_name = temp_name
 					else
 						computer.visible_message("<span class='notice'>[computer] buzzes rudely.</span>")
+/*
 				else if(href_list["account"])
 					var/account_num = text2num(input("Enter account number.", "Account", id_card.associated_account_number))
 					id_card.associated_account_number = account_num
+*/
 		if("assign")
 			if(computer && can_run(user, 1) && id_card)
 				var/t1 = href_list["assign_target"]

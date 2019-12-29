@@ -94,6 +94,7 @@
 	default_type = "iron"
 	apply_colour = 1
 	no_variants = FALSE
+	associated_reagent = "iron"
 
 /obj/item/stack/material/lead
 	name = "lead"
@@ -107,6 +108,7 @@
 	icon_state = "sheet-sandstone"
 	default_type = "sandstone"
 	no_variants = FALSE
+	associated_reagent = "silicon"
 
 /obj/item/stack/material/marble
 	name = "marble brick"
@@ -131,6 +133,7 @@
 	icon_state = "sheet-phoron"
 	default_type = "phoron"
 	no_variants = FALSE
+	associated_reagent = "phoron"
 
 /obj/item/stack/material/plastic
 	name = "plastic"
@@ -140,18 +143,21 @@
 	burn_state = 0 //Burnable
 	burntime = 5
 	drop_sound = 'sound/items/drop/boots.ogg'
+	associated_reagent = "silicon"
 
 /obj/item/stack/material/gold
 	name = "gold"
 	icon_state = "sheet-gold"
 	default_type = "gold"
 	no_variants = FALSE
+	associated_reagent = "gold"
 
 /obj/item/stack/material/silver
 	name = "silver"
 	icon_state = "sheet-silver"
 	default_type = "silver"
 	no_variants = FALSE
+	associated_reagent = "silver"
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
@@ -159,6 +165,7 @@
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
 	no_variants = FALSE
+	associated_reagent = "platinum"
 
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
@@ -166,6 +173,7 @@
 	icon_state = "sheet-mythril"
 	default_type = "mhydrogen"
 	no_variants = FALSE
+	associated_reagent = "hydrogen"
 
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
@@ -337,12 +345,14 @@
 	desc = "The temptation to build a snowman rises."
 	icon_state = "sheet-snow"
 	default_type = "snow"
+	associated_reagent = "water"
 
 /obj/item/stack/material/snowbrick
 	name = "snow brick"
 	desc = "For all of your igloo building needs."
 	icon_state = "sheet-snowbrick"
 	default_type = "packed snow"
+	associated_reagent = "water"
 
 /obj/item/stack/material/leather
 	name = "leather"
@@ -359,6 +369,7 @@
 	default_type = "glass"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/glass.ogg'
+	associated_reagent = "silicon"
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"

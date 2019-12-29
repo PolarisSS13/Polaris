@@ -33,3 +33,16 @@
 		return list(access_maint_tunnels)
 	else
 		return list()
+
+/datum/job/prisoner
+	title = "Prisoner"
+	flag = PRISONER
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "City"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "the police department holding you"
+	selection_color = "#515151"
+	wage = 0 // oof
+	outfit_type = /decl/hierarchy/outfit/job/civilian/prisoner

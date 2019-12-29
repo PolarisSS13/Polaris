@@ -39,7 +39,7 @@
 
 	var/stored_money = 0 //Cash
 
-	var/spin_cost = 15 //How much it costs to play
+	var/spin_cost = 15 //How much it costs to play - base before tax
 	var/spinning = 0
 
 	var/id = 0 //The slot machine's ID. Fluff mostly
@@ -56,6 +56,15 @@
 	radio = new(src)
 
 	update_icon()
+	
+/obj/machinery/computer/slot_machine/proc/get_spin_cost()
+	return get_item_cost()
+
+/obj/machinery/computer/slot_machine/get_item_cost()
+	return spin_cost
+
+/obj/machinery/computer/slot_machine/get_tax()
+	return GAMBLING_TAX
 
 /obj/machinery/computer/slot_machine/proc/remove_overlays()
 	overlays -= list(overlay_1,overlay_2,overlay_3)
@@ -120,8 +129,9 @@
 	if(spinning) return
 
 	//Charge money:
-	if(stored_money >= spin_cost) //If there's cash in the machine
-		stored_money -= spin_cost
+	if(stored_money >= get_spin_cost()) //If there's cash in the machine
+		stored_money -= get_spin_cost()
+		department_accounts["[station_name()] Funds"].money += post_tax_cost()
 	else
 		return
 
@@ -140,7 +150,7 @@
 		rigged = 0
 
 	else
-		var/victory = rand(1,20)
+		var/victory = rand(1,30)
 
 		#ifdef DEBUG_SLOT_MACHINES
 		user << "Rolled [victory]!"
@@ -149,7 +159,7 @@
 		switch(victory)
 			if(1) //1 in 10 for a guaranteed small reward
 				spin_wheels(win = pick(BELL, MUSHROOM, TREE))
-			if(2 to 20) //Otherwise, a fully random spin (1/1000 to get jackpot, 1/100 to get other reward)
+			if(2 to 30) //Otherwise, a fully random spin (1/1000 to get jackpot, 1/100 to get other reward)
 				spin_wheels(win = -1)
 
 	//If there's only one icon_state for spinning, everything looks weird
@@ -209,7 +219,7 @@
 			//Average gain: 2837,5$
 
 			if(CHICKEN)
-				win_value = 400 * spin_cost //6000$
+				win_value = 400 * get_spin_cost() //6000$
 				var/mob/living/simple_animal/chicken/C = new(src.loc)
 				C.name = "Pomf chicken"
 				C.body_color = "white"
@@ -217,26 +227,26 @@
 				C.icon_living = "chicken_white"
 				C.icon_dead = "chicken_white_dead"
 			if(DIAMOND)
-				win_value = 300 * spin_cost //4500$
+				win_value = 300 * get_spin_cost() //4500$
 			if(CHERRY)
-				win_value = 200 * spin_cost //3000$
+				win_value = 200 * get_spin_cost() //3000$
 			if(HEART)
-				win_value = 100 * spin_cost //1500$
+				win_value = 100 * get_spin_cost() //1500$
 			if(MELON)
-				win_value = 75 * spin_cost //1125$
+				win_value = 75 * get_spin_cost() //1125$
 			if(PLUM)
-				win_value = 60 * spin_cost //900$
+				win_value = 60 * get_spin_cost() //900$
 
 			//There is a 1/10 + 3/1000 chance of winning either of the below three rewards. This means you've got to play 10 times (and spend 150$) to get a
 			//chance of winning either 180$,150$ or 60$
 			//The rewards average to 130$, which means our machine comes out with 20$ profit!
 
 			if(BELL)
-				win_value = 12 * spin_cost //180$ by default
+				win_value = 12 * get_spin_cost() //180$ by default
 			if(MUSHROOM)
-				win_value = 10 * spin_cost //150$ by default
+				win_value = 10 * get_spin_cost() //150$ by default
 			if(TREE)
-				win_value = 4 * spin_cost //60$ by default
+				win_value = 4 * get_spin_cost() //60$ by default
 
 		if(win_value)
 			win_value = min(win_value, our_money_account.money)
@@ -286,14 +296,14 @@
 			var/dat = {"<h4><center>Current Jackpot: <b>[our_money_account ? "$[num2septext(our_money_account.money)]" : "---ERROR---"]</b></center></h4><br>"}
 
 			if(stored_money > 0)
-				dat += {"There are <span style="color:[stored_money<spin_cost?"red":"green"]"><b>$[num2septext(stored_money)]</b>
+				dat += {"There are <span style="color:[stored_money<get_spin_cost()?"red":"green"]"><b>$[num2septext(stored_money)]</b>
 					space credits insterted. <span style="color:blue"><a href='?src=\ref[src];reclaim=1'>Reclaim</a></span><br>"}
 			else
-				dat += {"You need at least <b>$[spin_cost]</b> credits to play. Use a nearby ATM and retreive some cash from your money account!<br>"}
+				dat += {"You need at least <b>$[get_spin_cost()]</b> credits to play. Use a nearby ATM and retreive some cash from your money account!<br>"}
 
 			if(can_play())
-				if(stored_money >= spin_cost)
-					dat += {"<span style="color:yellow"><a href='?src=\ref[src];spin=1'>Play! (<b>$[spin_cost]</b>)</a></span><br>"}
+				if(stored_money >= get_spin_cost())
+					dat += {"<span style="color:yellow"><a href='?src=\ref[src];spin=1'>Play! (<b>$[get_spin_cost()]</b>)</a></span><br>"}
 
 			else
 				dat += {"<b>OUT OF SERVICE</b><br>"}
@@ -317,7 +327,7 @@
 		stored_money = 0
 
 	else if(href_list["spin"])
-		if((stored_money >= spin_cost) && can_play())
+		if((stored_money >= get_spin_cost()) && can_play())
 			spin(usr)
 
 	src.updateUsrDialog()

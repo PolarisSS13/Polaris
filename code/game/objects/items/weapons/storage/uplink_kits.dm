@@ -266,3 +266,4 @@
 		/obj/item/weapon/fuel_assembly/phoron,
 		/obj/item/weapon/screwdriver
 	)
+
