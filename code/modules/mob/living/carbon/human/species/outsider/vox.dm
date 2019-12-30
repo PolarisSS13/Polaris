@@ -7,6 +7,7 @@
 	language = LANGUAGE_GALCOM
 	species_language = LANGUAGE_VOX
 	num_alternate_languages = 1
+	assisted_langs = list(LANGUAGE_ROOTGLOBAL)
 	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
 	rarity_value = 4
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
@@ -72,6 +73,7 @@
 		O_HEART =    /obj/item/organ/internal/heart/vox,
 		O_LUNGS =    /obj/item/organ/internal/lungs/vox,
 		O_LIVER =    /obj/item/organ/internal/liver/vox,
+		O_VOICE =	 /obj/item/organ/internal/voicebox,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys/vox,
 		O_BRAIN =    /obj/item/organ/internal/brain/vox,
 		O_EYES =     /obj/item/organ/internal/eyes,

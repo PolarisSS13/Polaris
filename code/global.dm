@@ -27,6 +27,7 @@ var/diary				= null
 var/error_log			= null
 var/debug_log			= null
 var/href_logfile		= null
+var/vote_log			= null
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
 // var/const/station_short	= "Northern Star"
@@ -66,6 +67,7 @@ var/list/latejoin_gateway  = list()
 var/list/latejoin_elevator = list()
 var/list/latejoin_cryo     = list()
 var/list/latejoin_cyborg   = list()
+var/list/latejoin_prison   = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
 var/list/holdingfacility    = list() // Captured people go here

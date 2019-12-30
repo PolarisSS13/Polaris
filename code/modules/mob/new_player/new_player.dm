@@ -327,8 +327,9 @@
 	if(jobban_isbanned(src,rank))	return 0
 	if(!is_hard_whitelisted(src, job)) return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(job.title == "Prisoner" && client.prefs.criminal_status != "Incarcerated")	return 0
+	if(job.title != "Prisoner" && client.prefs.criminal_status == "Incarcerated")	return 0
 	return 1
-
 
 /mob/new_player/proc/AttemptLateSpawn(rank,var/spawning_at)
 	if (src != usr)
@@ -344,6 +345,11 @@
 		return 0
 	if(!client)
 		return 0
+
+	var/is_prisoner
+	if(rank == "Prisoner")
+		is_prisoner = 1
+
 
 	//Find our spawning point.
 	var/list/join_props = job_master.LateSpawn(client, rank)
@@ -380,9 +386,9 @@
 		qdel(C)
 		qdel(src)
 		return
-
-	// Equip our custom items only AFTER deploying to spawn points eh?
-	equip_custom_items(character)
+	if(!is_prisoner)
+		// Equip our custom items only AFTER deploying to spawn points eh? Also, not as a prisoner, since they can break out.
+		equip_custom_items(character)
 
 	character.apply_traits()
 

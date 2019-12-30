@@ -165,6 +165,20 @@
 
 #define MODIFIER_GENETIC	1	// Modifiers with this flag will be copied to mobs who get cloned.
 
+// Augments
+#define O_AUG_EYES "occular augment"
+
+#define O_AUG_L_FOREARM "left forearm augment"
+#define O_AUG_R_FOREARM "right forearm augment"
+#define O_AUG_L_UPPERARM "left upperarm augment"
+#define O_AUG_R_UPPERARM "right upperarm augment"
+#define O_AUG_L_HAND "left hand augment"
+#define O_AUG_R_HAND "right hand augment"
+
+#define O_AUG_RIBS "rib augment"
+#define O_AUG_SPINE "spinal augment"
+#define O_AUG_PELVIC "pelvic augment"
+
 // Bodyparts and organs.
 #define O_MOUTH    "mouth"
 #define O_EYES     "eyes"
@@ -175,6 +189,11 @@
 #define O_LIVER    "liver"
 #define O_KIDNEYS  "kidneys"
 #define O_APPENDIX "appendix"
+#define O_VOICE    "voicebox"
+#define O_SPLEEN   "spleen"
+#define O_STOMACH  "stomach"
+#define O_INTESTINE "intestine"
+
 #define O_PLASMA   "plasma vessel"
 #define O_HIVE     "hive node"
 #define O_NUTRIENT "nutrient vessel"

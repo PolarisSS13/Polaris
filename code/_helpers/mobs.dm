@@ -116,7 +116,7 @@ proc/skintone2racedescription(tone)
 	switch (tone)
 		if(30 to INFINITY)		return "albino"
 		if(20 to 30)			return "pale"
-		if(5 to 15)				return "light skinned"
+		if(5 to 15)			return "light skinned"
 		if(-10 to 5)			return "white"
 		if(-25 to -10)			return "tan"
 		if(-45 to -25)			return "darker skinned"
@@ -438,13 +438,3 @@ proc/random_eye_color()
 
 	return eye_color
 
-
-/proc/get_tax_rate(var/class)
-
-	switch(class)
-		if(CLASS_UPPER)
-			return persistent_economy.tax_rate_upper * 100
-		if(CLASS_MIDDLE)
-			return persistent_economy.tax_rate_middle * 100
-		if(CLASS_WORKING)
-			return persistent_economy.tax_rate_lower * 100

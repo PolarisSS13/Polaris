@@ -386,11 +386,9 @@ var/global/datum/controller/occupations/job_master
 							H << "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>"
 							continue
 
-						if(G.exploitable)
-							H.amend_exploitable(G.path)
-
 						if(G.slot == "implant")
-							H.implant_loadout(G)
+							var/obj/item/weapon/implant/I = G.spawn_item(H)
+							I.implant_loadout(H)
 							continue
 
 						if(G.slot && !(G.slot in custom_equip_slots))
@@ -684,13 +682,17 @@ var/global/datum/controller/occupations/job_master
 
 	var/datum/spawnpoint/spawnpos
 
-	//Spawn them at their preferred one
-	if(C && C.prefs.spawnpoint)
-		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
-			to_chat(C, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
-			spawnpos = null
-		else
-			spawnpos = spawntypes[C.prefs.spawnpoint]
+	//Handling Prisoners
+	if(C.prefs.criminal_status == "Incarcerated")
+		spawnpos = spawntypes["Prison"]
+	else
+		//Spawn them at their preferred one
+		if(C && C.prefs.spawnpoint)
+			if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
+				to_chat(C, "<span class='warning'>Your chosen spawnpoint ([C.prefs.spawnpoint]) is unavailable for the current map. Spawning you at one of the enabled spawn points instead.</span>")
+				spawnpos = null
+			else
+				spawnpos = spawntypes[C.prefs.spawnpoint]
 
 	//We will return a list key'd by "turf" and "msg"
 	. = list("turf","msg")

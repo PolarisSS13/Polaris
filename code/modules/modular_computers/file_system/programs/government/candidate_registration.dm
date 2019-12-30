@@ -205,6 +205,10 @@
 		associated_candidacy.pitch = pitch
 		associated_candidacy.slogan = slogan
 
+		//ensure nothing vote-wise is transferring.
+		associated_candidacy.ckeys_voted = list()
+		associated_candidacy.no_confidence_votes = list()
+
 		SSelections.political_candidates += associated_candidacy
 		registered = associated_candidacy
 		index = 3

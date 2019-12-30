@@ -34,9 +34,9 @@
 	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at the west side of the city in approximately %ETA%"
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
-	allowed_spawns = list("Arrivals Shuttle")
+	allowed_spawns = list("City Arrivals Airbus", "Cryogenic Storage", "Prison")
 
-	usable_email_tlds = list("freemail.net", "ntmail.nt", "interpollux.org")
+	usable_email_tlds = list("freemail.net", "ntmail.nt", "interpollux.org", "solnet.org", "vetralife.nt", "andromedian.org")
 	default_law_type = /datum/ai_laws/pollux
 
 	station_networks = list(

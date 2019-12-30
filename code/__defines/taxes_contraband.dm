@@ -36,3 +36,22 @@
 #define PERMIT_SELLING "Selling permit needed"
 #define PERMIT_POSSESSION "Possession and creation permit needed"
 #define LEGAL "Legal"
+
+
+/proc/get_tax_rate(class)
+
+	switch(class)
+		if(CLASS_UPPER)
+			return persistent_economy.tax_rate_upper * 100
+		if(CLASS_MIDDLE)
+			return persistent_economy.tax_rate_middle * 100
+		if(CLASS_WORKING)
+			return persistent_economy.tax_rate_lower * 100
+
+/proc/get_economic_class(money)
+	switch(money)
+		if(0 to 9999)				return CLASS_WORKING
+		if(10000 to 79999)			return CLASS_MIDDLE
+		if(80,000 to INFINITY)		return CLASS_UPPER
+
+		else 					return CLASS_WORKING	// this accounts for balances that are negative

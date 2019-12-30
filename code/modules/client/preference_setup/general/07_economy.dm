@@ -51,18 +51,19 @@
 
 	if(pref.bank_pin)
 		. += "<b>Account Pin:</b> [pref.bank_pin]<br>"
-	. += "<b>Social Class:</b> [pref.economic_status]<br>"
-	. += "<b>[pref.economic_status] Tax Rate:</b> [get_tax_rate(pref.economic_status)]%<br>"
+	. += "<b>Economic Class:</b> [pref.economic_status]<br>"
+	if(persistent_economy)
+		. += "<b>[pref.economic_status] Tax Rate:</b> [get_tax_rate(pref.economic_status)]%<br>"
 
 	. += "<b>Debts:</b></br>"
-	if(!pref.expenses)
+	if(isemptylist(pref.expenses))
 		. += "<i>You have no recorded debts.</i>"
-
-	for(var/datum/expense/E in pref.expenses)
-		var/purpose_name
-		if(E.purpose)
-			purpose_name = " ([E.purpose])"
-			. += "<b>[E.name][purpose_name]:</b> [E.amount_left] credits. ([E.cost_per_payroll] per payroll.)<br>"
+	else
+		for(var/datum/expense/E in pref.expenses)
+			var/purpose_name
+			if(E.purpose)
+				purpose_name = " ([E.purpose])"
+				. += "<b>[E.name][purpose_name]:</b> [E.amount_left] credits. ([E.cost_per_payroll] per payroll.)<br>"
 
 
 	. = jointext(.,null)

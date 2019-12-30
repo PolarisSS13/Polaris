@@ -20,7 +20,20 @@
 							"smoke",
 							"tunguska",
 							"rent",
-							"vets")
+							"vets",
+							"army",
+							"fitness",
+							"movie1",
+							"movie2",
+							"blank",
+							"gentrified",
+							"legalcoke",
+							"pollux",
+							"vacay",
+							"atluscity",
+							"sunstar",
+							"speedweed",
+							"golf")
 
 	var/current_ad
 
