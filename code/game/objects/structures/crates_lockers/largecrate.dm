@@ -34,6 +34,11 @@
 /obj/structure/largecrate/mule
 	name = "MULE crate"
 
+/obj/structure/largecrate/suspicious
+	name = "Suspicious crate"
+	desc = "A dark wooden crate with red securing bands."
+	icon_state = "suspicious crate"
+
 /obj/structure/largecrate/hoverpod
 	name = "\improper Hoverpod assembly crate"
 	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"

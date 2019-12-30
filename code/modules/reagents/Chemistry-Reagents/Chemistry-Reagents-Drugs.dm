@@ -299,7 +299,7 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	description = "A homemade stimulant with some serious side-effects."
 	taste_description = "sweetness"
 	taste_mult = 1.8
-	color = "#d0583a"
+	color = "#d0583a" //pale brownish-orange
 	metabolism = REM * 3
 	overdose = 10
 	calories_factor = -2
@@ -321,3 +321,214 @@ datum/reagent/drug/nicotine/affect_blood(var/mob/living/carbon/M)
 	if(prob(15))
 		M.take_organ_damage(6 * removed, 0)
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+
+/datum/reagent/drug/dmt
+	name = "Dimethyltryptamine"
+	id = "dimethyltryptamine"
+	description = "An intense psychedelic with a short duration of action."
+	taste_description = "plastic"
+	taste_mult = 1.8
+	color = "#d4bc8e"
+	metabolism = REM * 5
+	high_msg_list = list ("The clockwork elves are watching you.",
+	"Join us in the spirit world...",
+	"You feel a deep sense of belonging.")
+
+	price_tag = 1
+
+/datum/reagent/drug/dmt/is_contraband()
+	return CONTRABAND_DMT
+
+/datum/reagent/drug/dmt/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_TAJARA)
+		removed *= 1.25
+	..()
+	if(prob(15))
+		M.emote(pick("deathgasp", "sigh", "smile"))
+
+	var/drug_strength = 300
+
+	if(alien == IS_SKRELL)
+		drug_strength *= 0.8
+
+	if(alien == IS_SLIME)
+		drug_strength *= 1.2
+
+	M.hallucination = max(M.hallucination, drug_strength)
+
+/datum/reagent/drug/ayahuasca
+	name = "Ayahuasca"
+	id = "ayahuasca"
+	description = "A brew of jungle herbs that produce an intense spiritual experience."
+	taste_description = "bitter herbs"
+	metabolism = REM * 1.25
+	color = "#5e3d22" //slightly muted milk-chocolatey brown
+	high_msg_list = list ("Your stomach grumbles violently.",
+	"You feel at one with the universe.",
+	"You feel in tune with the vibrations of the cosmos.",
+	"Let the spirits take you...")
+
+	price_tag = 1
+
+/datum/reagent/drug/ayahuasca/is_contraband()
+	return CONTRABAND_AYAHUASCA
+
+/datum/reagent/drug/ayahuasca/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_TAJARA)
+		removed *= 1.25
+	..()
+	if(prob(15))
+		M.emote(pick("deathgasp", "moan", "smile", "groan"))
+
+	var/drug_strength = 60
+
+	if(alien == IS_SKRELL)
+		drug_strength *= 0.8
+
+	if(alien == IS_SLIME)
+		drug_strength *= 1.2
+
+	M.hallucination = max(M.hallucination, drug_strength)
+
+/datum/reagent/drug/bathsalts
+	name = "Bath Salts"
+	id = "bath_salts"
+	description = "A pale drug resembling epsom salts. Not for human consumption."
+	taste_description = "bitterness and salt"
+	metabolism = REM * 0.5
+	overdose = 20
+	color = "#FFFFFF" //white
+	high_msg_list = list ("You feel unstoppable!",
+	"Tasty! Crazy? No I'm crazy...",
+	"Need some more bath salts...")
+
+	price_tag = 1
+
+/datum/reagent/drug/bathsalts/is_contraband()
+	return CONTRABAND_BATHSALTS
+
+/datum/reagent/drug/bathsalts/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	var/drug_strength = 120
+
+	if(alien == IS_SKRELL)
+		drug_strength *= 0.8
+
+	if(alien == IS_SLIME)
+		drug_strength *= 1.2
+
+	if(prob(15))
+		M.emote(pick("scream", "moan", "twitch", "groan", "twitch_s", "vomit", "shiver", "stare", "pale"))
+
+	M.adjustBrainLoss(0.30)
+	M.hallucination = max(M.hallucination, drug_strength)
+	M.druggy = max(M.druggy, drug_strength)
+	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+		step(M, pick(cardinal))
+
+/datum/reagent/drug/bathsalts/overdose(var/mob/living/M as mob)
+	M.adjustToxLoss(1)
+	M.drowsyness = max(M.drowsyness, 10)
+	if(prob(50))
+		M.vomit()
+		M.adjustToxLoss(5)
+		M.adjustBrainLoss(10)
+		..()
+
+/datum/reagent/drug/lsd
+	name ="Lysergic acid diethylamide"
+	id = "lsd"
+	description = "A hallucinogenic drug that induces altered thoughts and perception."
+	taste_description = "nothing"
+	color = "#b8b8b8" //light grey
+	high_msg_list = list ("The floor is melting...",
+	"Wow, everything seems so much brighter.",
+	"Everything seems to be shifting.")
+
+	price_tag = 1
+
+/datum/reagent/drug/lsd/is_contraband()
+	return CONTRABAND_LSD
+
+/datum/reagent/drug/lsd/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	var/drug_strength = 80
+
+	if(alien == IS_SKRELL)
+		drug_strength *= 0.8
+
+	if(alien == IS_SLIME)
+		drug_strength *= 1.2
+
+	M.hallucination = max(M.hallucination, drug_strength)
+
+/datum/reagent/drug/jenkem
+	name = "Jenkem"
+	id = "jenkem"
+	description = "Jenkem is a prison drug made from fermenting feces in a solution of urine. Extremely disgusting."
+	reagent_state = LIQUID
+	color = "#644600"
+	taste_description = "the inside of a toilet... or worse"
+	high_msg_list = list("You smell the aroma of a particularly dirty restroom.",
+	"Your stommach grumbles unpleasantly.",
+	"The taste of excrement sits uncomfortably in your mouth.")
+
+/datum/reagent/drug/jenkem/affect_blood(var/mob/living/M as mob)
+	M.drowsyness = max(M.drowsyness, 5)
+	M.adjustToxLoss(1)
+	if(prob(10))
+		M.emote(pick("twitch_s","drool","moan"))
+		M.adjustToxLoss(3)
+		..()
+
+/datum/reagent/drug/krokodil
+	name = "Krokodil"
+	id = "krokodil"
+	description = "A sketchy homemade opiate, often used by disgruntled Cosmonauts."
+	reagent_state = LIQUID
+	color = "#0264B4"
+	overdose = 20
+	taste_description = "very poor life choices"
+	high_msg_list = list("You feel pretty chill.",
+	"Your skin feels all rough and dry.",
+	"The feel too chill!")
+
+/datum/reagent/drug/krokodil/is_contraband()
+	return CONTRABAND_KROKODIL
+
+/datum/reagent/drug/krokodil/affect_blood(var/mob/living/carbon/M)
+	M.drowsyness = max(M.drowsyness, 5)
+	M.add_chemical_effect(CE_PAINKILLER,1)
+	M.adjustToxLoss(1)
+	if(prob(10))
+		M.visible_message("<span class='warning'>[M] looks dazed!</span>")
+		M.Stun(3)
+		M.emote("drool")
+		..()
+
+/datum/reagent/drug/krokodil/overdose(var/mob/living/M as mob)
+	M.adjustToxLoss(1)
+	M.drowsyness = max(M.drowsyness, 10)
+	if(prob(40))
+		M.visible_message("<span class='warning'>[M] looks dazed!</span>")
+		M.Stun(3)
+		M.emote("drool")
+		..()
+	if(prob(30))
+		to_chat(M, "<span class ='warning'>Your skin is cracking and bleeding!</span>")
+		M.adjustBruteLoss(5)
+		M.adjustToxLoss(2)
+		M.adjustBrainLoss(1)
+		M.emote("cry")
+		..()
+	if(prob(20))
+		M.visible_message("<span class ='warning'>[M] sways and falls over!</span>")
+		M.adjustToxLoss(3)
+		M.adjustBrainLoss(3)
+		M.Weaken(8)
+		M.emote("faint")
+		..()

@@ -58,29 +58,13 @@
 	name = "ERR_NULL_ENTRY" //null crate! also dream maker is hell,
 	num_contained = 1
 	contains = list(
-			list( //the operator,
-					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-					/obj/item/clothing/suit/storage/vest/heavy/merc,
-					/obj/item/clothing/glasses/night,
-					/obj/item/weapon/storage/box/anti_photons,
-					/obj/item/ammo_magazine/clip/c12g/pellet,
-					/obj/item/ammo_magazine/clip/c12g
-					),
-			list( //the doc,
-					/obj/item/weapon/storage/firstaid/combat,
-					/obj/item/weapon/gun/projectile/dartgun,
-					/obj/item/weapon/reagent_containers/hypospray,
-					/obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate,
-					/obj/item/weapon/reagent_containers/glass/bottle/cyanide,
-					/obj/item/ammo_magazine/chemdart
-					),
-			list( //the sapper,
-					/obj/item/weapon/melee/energy/sword/ionic_rapier,
-					/obj/item/weapon/storage/box/syndie_kit/space, //doesn't matter what species you are,
-					/obj/item/weapon/storage/box/syndie_kit/demolitions,
-					/obj/item/device/multitool/ai_detector,
-					/obj/item/weapon/plastique,
-					/obj/item/weapon/storage/toolbox/syndicate/powertools
+			list( //drug hydroponicist
+					/obj/item/seeds/chacruna = 2,
+					/obj/item/seeds/caapi = 2,
+					/obj/item/seeds/coca = 2,
+					/obj/item/seeds/poppyseed = 2,
+					/obj/machinery/portable_atmospherics/hydroponics{anchored = 0} = 3,
+					/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 2
 					),
 			list( //the infiltrator,
 					/obj/item/weapon/gun/projectile/silenced,
@@ -98,9 +82,24 @@
 					/obj/item/ammo_magazine/m45/ap,
 					/obj/item/weapon/material/knife/tacknife/combatknife,
 					/obj/item/clothing/mask/balaclava
+					),
+			list( //poxball
+					/obj/item/weapon/gun/energy/poxball/street = 2,
+					/obj/item/clothing/suit/armor/poxball = 2,
+					/obj/item/clothing/head/helmet/poxball = 2,
+					/obj/item/clothing/shoes/leg_guard/poxball = 2,
+					/obj/item/clothing/gloves/arm_guard/poxball = 2
+					),
+			list( //the operator,
+					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+					/obj/item/clothing/suit/storage/vest/heavy/merc,
+					/obj/item/clothing/glasses/night,
+					/obj/item/weapon/storage/box/anti_photons,
+					/obj/item/ammo_magazine/clip/c12g/pellet,
+					/obj/item/ammo_magazine/clip/c12g
 					)
 			)
-	cost = 250 //more than a hat crate!,
+	cost = 2500 //very expensive to curb abuse at the factory
 	contraband = 1
-	containertype = /obj/structure/largecrate
+	containertype = /obj/structure/largecrate/suspicious
 	containername = "Suspicious crate"

@@ -528,3 +528,35 @@
 	overdose = REAGENTS_OVERDOSE * 0.25
 	scannable = 1
 	price_tag = 0.3
+
+/datum/reagent/caapi
+	name = "caapi extract"
+	id = "caapi_extract"
+	description = "An extract from the caapi plant."
+	taste_description = "a bitter gooey substance"
+	reagent_state = LIQUID
+	color = "#755202"
+	price_tag = 0.8
+
+	get_tax()
+		return DRUG_TAX
+
+/datum/reagent/chacruna
+	name = "chacruna extract"
+	id = "chacruna_extract"
+	description = "An extract from the chacruna plant."
+	taste_description = "a bitter gooey substance"
+	reagent_state = LIQUID
+	color = "#755202"
+	price_tag = 0.8
+
+	get_tax()
+		return DRUG_TAX
+
+/datum/reagent/toiletwater
+	name = "Toilet Water"
+	id = "toiletwater"
+	description = "Nasty water taken from a toilet."
+	taste_description = "feces and urine"
+	reagent_state = LIQUID
+	color = "#757547"
