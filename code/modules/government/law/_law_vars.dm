@@ -41,7 +41,12 @@ var/global/list/potential_contraband = list(
 	"Guns",
 	"Short Knives",
 	"Long Knives",
-	"Explosives"
+	"Explosives",
+	"LSD",
+	"DMT",
+	"Bath Salts",
+	"Ayahuasca",
+	"Krokodil"
 	)
 
 var/global/list/tax_groups = list(

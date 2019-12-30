@@ -293,3 +293,9 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/thaadra
 	seed_type = "thaadra"
+
+/obj/item/seeds/caapi
+	seed_type = "caapi"
+
+/obj/item/seeds/chacruna
+	seed_type = "chacruna"

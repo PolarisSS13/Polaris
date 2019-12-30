@@ -20,6 +20,11 @@
 #define CONTRABAND_STIMM persistent_economy.law_STIMM
 #define CONTRABAND_CYANIDE persistent_economy.law_CYANIDE
 #define CONTRABAND_CHLORAL persistent_economy.law_CHLORAL
+#define CONTRABAND_DMT persistent_economy.law_DMT
+#define CONTRABAND_LSD persistent_economy.law_LSD
+#define CONTRABAND_AYAHUASCA persistent_economy.law_AYAHUASCA
+#define CONTRABAND_BATHSALTS persistent_economy.law_BATHSALTS
+#define CONTRABAND_KROKODIL persistent_economy.law_KROKODIL
 
 #define CONTRABAND_GUN persistent_economy.law_GUNS
 #define CONTRABAND_KNIFESMALL persistent_economy.law_SMALLKNIVES

@@ -1266,6 +1266,7 @@
 	display_name = "coca"
 	chems = list("coca" = list(3,5))
 	fruit_price	= 25
+
 /datum/seed/coca/New()
 	..()
 	set_trait(TRAIT_HARVEST_REPEAT,1)
@@ -1284,7 +1285,46 @@
 	display_name = "tobacco"
 	chems = list("nicotine" = list(3,7))
 	fruit_price	= 10
+
 /datum/seed/tobacco/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"nettles")
+	set_trait(TRAIT_PRODUCT_COLOUR, "#a89854")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/caapi
+	name = "caapi"
+	seed_name = "caapi"
+	display_name = "caapi"
+	chems = list("caapi_extract" = list(3,5))
+	fruit_price	= 13
+
+/datum/seed/caapi/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,6)
+	set_trait(TRAIT_YIELD,6)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"nettles")
+	set_trait(TRAIT_PRODUCT_COLOUR, "#a89854")
+	set_trait(TRAIT_PLANT_ICON,"bush2")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+
+/datum/seed/chacruna
+	name = "chacruna"
+	seed_name = "chacruna"
+	display_name = "chacruna"
+	chems = list("chacruna_extract" = list(3,5))
+	fruit_price	= 13
+
+/datum/seed/chacruna/New()
 	..()
 	set_trait(TRAIT_HARVEST_REPEAT,1)
 	set_trait(TRAIT_MATURATION,6)

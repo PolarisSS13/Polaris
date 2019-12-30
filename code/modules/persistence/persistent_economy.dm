@@ -38,6 +38,11 @@
 	var/law_NICOTINE = PERMIT_SELLING
 	var/law_STIMM = LEGAL
 	var/law_CYANIDE = LEGAL
+	var/law_LSD = ILLEGAL
+	var/law_DMT = ILLEGAL
+	var/law_AYAHUASCA = ILLEGAL
+	var/law_BATHSALTS = ILLEGAL
+	var/law_KROKODIL = ILLEGAL
 	var/law_CHLORAL = ILLEGAL
 
 	var/law_GUNS = PERMIT_POSSESSION
