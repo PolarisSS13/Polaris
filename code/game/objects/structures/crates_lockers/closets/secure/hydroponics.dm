@@ -31,7 +31,7 @@
 
 /obj/structure/closet/secure_closet/hydroponics/sci
 	name = "xenoflorist's locker"
-	req_access = list(access_hydroponics)
+	req_access = list(access_xenobiology)
 	icon_state = "scihydrosecure1"
 	icon_closed = "scihydrosecure"
 	icon_locked = "scihydrosecure1"
