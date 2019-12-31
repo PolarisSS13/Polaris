@@ -11,7 +11,7 @@
 	selection_color = "#515151"
 	minimum_character_age = 1
 	hide_on_manifest = 0
-	wage = 12 // Ha-ha poor people (tm)
+	wage = 5 // Ha-ha poor people (tm)
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	outfit_type = /decl/hierarchy/outfit/job/assistant
