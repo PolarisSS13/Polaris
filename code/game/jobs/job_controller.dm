@@ -532,13 +532,13 @@ var/global/datum/controller/occupations/job_master
 				break
 
 		if(H.client.prefs.email && !check_persistent_email(H.client.prefs.email))
-			new_persistent_email(H.client.prefs.email) // so this saves without having to make dupes over and over.
+			EA = manifest_persistent_email(H.client.prefs.email) // so this saves without having to make dupes over and over.
 
 		if(!EA)
 			EA = new/datum/computer_file/data/email_account()
 			EA.password = get_persistent_email_password(complete_login)
 			EA.login = complete_login
-			EA.get_persistent_data()
+			
 
 		H.mind.initial_email_login = list("login" = "[EA.login]", "password" = "[EA.password]")
 		H.mind.initial_email = EA
