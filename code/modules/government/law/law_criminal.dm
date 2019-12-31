@@ -244,3 +244,11 @@
 
 	fine = 1140
 	cell_time = 30
+	
+/datum/law/criminal/contempt
+	name = "Contempt of Court"
+	description = "To be disrespectful towards the Court of law, in the form of \
+	behaviour that defies the authority, justice and dignity of the Court."
+
+	fine = 650
+	cell_time = 20
