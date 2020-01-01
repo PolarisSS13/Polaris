@@ -105,3 +105,13 @@
 	contraband = 1
 	containertype = /obj/structure/largecrate
 	containername = "Suspicious crate"
+
+/datum/supply_pack/supply/gnomes
+	name = "Gnome crate"
+	contains = list(
+			/obj/item/seeds/rose/gnomes = 2
+			)
+	cost = 50
+	containertype = /obj/structure/closet/crate
+	containername = "Mysterious crate"
+	contraband = 1
