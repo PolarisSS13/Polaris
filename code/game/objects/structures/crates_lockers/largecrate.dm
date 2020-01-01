@@ -37,7 +37,7 @@
 /obj/structure/largecrate/suspicious
 	name = "Suspicious crate"
 	desc = "A dark wooden crate with red securing bands."
-	icon_state = "suspicious crate"
+	icon_state = "suspiciouscrate"
 
 /obj/structure/largecrate/hoverpod
 	name = "\improper Hoverpod assembly crate"
