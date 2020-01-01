@@ -109,7 +109,7 @@
 /datum/supply_pack/supply/gnomes
 	name = "Gnome crate"
 	contains = list(
-			/obj/item/seeds/rose/gnomes = 2
+			/obj/item/seeds/gnomes = 2
 			)
 	cost = 50
 	containertype = /obj/structure/closet/crate
