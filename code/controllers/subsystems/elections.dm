@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(elections)
 /datum/controller/subsystem/elections/proc/get_next_election_month()
 	var/info
 
-	if(get_game_day() > 28)
+	if(get_game_day() > 27)
 		if(get_game_month() == 12) // If it's december, the next year will be January.
 			info = 1
 		else
@@ -108,12 +108,6 @@ SUBSYSTEM_DEF(elections)
 	CheckNoConfidence()
 	SetNewPresident()
 
-
-/datum/controller/subsystem/elections/proc/SetupEmails()
-	//makes sure an email exists for these emails.
-	for(var/E in government_emails)
-		if(!check_persistent_email(E))
-			new_persistent_email(E)
 
 /datum/controller/subsystem/elections/proc/CheckNoConfidence()
 	if(!current_president) // This shouldn't happen except for when you start the same anew.
@@ -222,6 +216,11 @@ SUBSYSTEM_DEF(elections)
 
 	postelection_news_article()
 
+	// change the prez email so the old president can't get back into the email...
+	SSemails.change_persistent_email_password(using_map.president_email, GenerateKey())
+
+	postelection_email()
+
 	return winning_vote
 
 /datum/controller/subsystem/elections/proc/clear_president()
@@ -243,6 +242,64 @@ SUBSYSTEM_DEF(elections)
 	total_votes = votes
 
 	return votes
+
+
+/datum/controller/subsystem/elections/proc/postelection_email()
+	if(!using_map.president_email) return
+	if(!current_president) return
+	if(!current_president.ckey) return // In case it's NT officials
+
+	var/datum/computer_file/data/email_account/prez_email = get_email(using_map.president_email)
+
+	if(!prez_email) return
+
+	var/datum/computer_file/data/email_message/message = new/datum/computer_file/data/email_message()
+
+	var/eml_cnt
+
+
+	eml_cnt = "Dear [current_president], \[editorbr\]"
+
+
+	eml_cnt += "Congratulations on winning the presidential race this month, you are now President of the colony. Your presidency shall last a month, \
+	so make the most of it.\[br\] Being a President is an arduous duty with many responsibilities - it involves keeping a colony in line \
+	and retaining the appeal of the citizens, during your presidency you must also adhere to the company's guidelines."
+
+
+	eml_cnt += "You must keep the following in mind at all times:\[br\]"
+
+	eml_cnt += "\[list\] \
+	\[*\] Image: Do not debase or slander the corporation in a way that would make it lose credibility in the eyes of our citizens, \
+	or to Sol. Our main institution is in Sol, if we lose face on our colony, we lose our most secure footing. Retain as much PR as possible or face removal.\
+	\[br\]\[*\] Profit: Do not cause the colony to fall into debt, or allow it to remain in debt. You must sure profits are kept to a healthy level so company \
+	growth can continue. You have freedom in what methods you utilize to do this, as long as they are within the charter. \[br\] \
+	\[*\] Power: Nanotrasen owns this colony, a president has access to the steering wheel but not the vehicle; ensure that it is kept under control. \
+	If agents on the colony try to gain power you must utilize the resources given to you to stop it. Do not form militias to usurp power from Nanotrasen \
+	or delibrately cause chaos on the colony. Remember that Nanotrasen has a blue space artiltery - do you? \[/list\]"
+
+	eml_cnt += "\[editorbr\]As president, you are able to modify various aspects of the colony such as taxes, laws, contraband, et cetera, \
+	and can do this through the presidential portal. You may also assign a vice president and some ministers to help you get work done in the short \
+	time that you have. \[editorbr\]"
+
+	eml_cnt += "\[br\]Your work email is \[b]\[prez_email.login]\[\b]\ and the password is \[b]\[prez_email.password]\[\b]\ - do not share these details. If your account does \
+	become compromised, you may request a password change from the Nanotrasen IT department sector, but this will come at a cost of 5,500 credits. \[editorbr\]"
+
+	eml_cnt += "\[br\]As you manage the colony it is important to be mindful of your own image, citizens can vote against you - if thirty no confidence \
+	votes are reached you will be removed from your post, please beware.\[editorbr\] We hope you have a fruitful term, and wish you all the best. \[editorbr\] \
+	Best Regards, \[editorbr\]Nanotrasen Headquarters"
+
+	eml_cnt = jointext(eml_cnt,null)
+
+	message.stored_data = eml_cnt
+	message.title = "Congratulations on Presidency: [current_president.name]"
+	message.source = "noreply@nanotrasen.gov.nt"
+	message.timestamp = stationtime2text()
+
+	prez_email.send_mail(prez_email.login, message)
+
+	prez_email.save_email()
+
+	return 1
 
 
 /datum/controller/subsystem/elections/proc/postelection_news_article()
@@ -279,7 +336,7 @@ SUBSYSTEM_DEF(elections)
 	message = "<b>Castor Headquarters: [full_game_time()]</b> - Electoral Assistants of [using_map.boss_name] have counted the final votes and \
 	presented the electoral results to all, there were [last_election_votes] total. \
 	People from several continents on Pollux watched as the name was pulled from the traditional ballot hat. \
-	<p>Millions of people gathered in-person to watch the event, others stayed home to observe their televisions and communicator screens \
+	<br><br>Millions of people gathered in-person to watch the event, others stayed home to observe their televisions and communicator screens \
 	as they watch Pollux's moon through their screens. Many [pick(prospectors)] [pick(getformernames())] would win based on the monthly election president website \
 	electionpredictions.nt."
 

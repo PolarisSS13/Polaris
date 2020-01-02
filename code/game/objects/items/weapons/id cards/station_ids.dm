@@ -81,7 +81,7 @@
 
 	id_card.age = age
 	if(mind)
-		id_card.associated_email_login = list("login" = "[mind.prefs.email]", "password" = "[get_persistent_email_password(mind.prefs.email)]")
+		id_card.associated_email_login = list("login" = "[mind.prefs.email]", "password" = "[SSemails.get_persistent_email_password(mind.prefs.email)]")
 		id_card.unique_ID = mind.prefs.unique_id
 
 	return 1

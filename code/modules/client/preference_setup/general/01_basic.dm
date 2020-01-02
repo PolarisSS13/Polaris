@@ -86,9 +86,9 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		pref.unique_id			= md5("[pref.client_ckey][rand(30,50)]")
 
 	if(!pref.email)
-		var/new_email = generate_email(pref.real_name)
+		var/new_email = SSemails.generate_email(pref.real_name)
 
-		if(!ntnet_global.does_email_exist(new_email) || !check_persistent_email(new_email))
+		if(!ntnet_global.does_email_exist(new_email) || !SSemails.check_persistent_email(new_email))
 			pref.email = new_email
 
 
@@ -152,7 +152,7 @@ F
 	if(!pref.existing_character)
 		. += "Email: <a href='?src=\ref[src];email_domain=1'>[pref.email]</a><br><br>"
 	else
-		. += "Login: [pref.email]<br>Password: [get_persistent_email_password(pref.email)] <br><br>"
+		. += "Login: [pref.email]<br>Password: [SSemails.get_persistent_email_password(pref.email)] <br><br>"
 
 	if(pref.existing_character)
 		. += "<b>Unique Character ID:</b> [pref.unique_id]<br>"
@@ -237,17 +237,17 @@ F
 
 		var/full_email = "[prefix]@[domain]"
 
-		if(full_email && check_persistent_email(full_email))
+		if(full_email && SSemails.check_persistent_email(full_email))
 			alert(user, "This email already exists, please choose another.")
 			return
 
-		if(full_email && !check_persistent_email(pref.email))
-			new_persistent_email(full_email)
+		if(full_email && !SSemails.check_persistent_email(pref.email))
+			SSemails.new_persistent_email(full_email)
 
 
 		fcopy("data/persistent/emails/[pref.email].sav","data/persistent/emails/[full_email].sav")
 		fdel("data/persistent/emails/[pref.email].sav")
-		change_persistent_email_address(pref.email, full_email)
+		SSemails.change_persistent_email_address(pref.email, full_email)
 
 		pref.email = "[prefix]@[domain]"
 

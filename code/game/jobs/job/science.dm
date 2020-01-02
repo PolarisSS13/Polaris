@@ -29,6 +29,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 	alt_titles = list("Research Supervisor")
 
+/datum/job/rd/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.council_email
+
 /datum/job/scientist
 	title = "Scientist"
 	email_domain = "sciworks.nt"

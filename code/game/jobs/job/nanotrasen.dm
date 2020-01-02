@@ -25,6 +25,9 @@
 
 	hard_whitelisted = 1
 
+/datum/job/nanotrasen/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.rep_email
+
 /datum/job/nanotrasen/New()
 	..()
 	department = "[station_name()] Funds"
@@ -43,7 +46,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/nanotrasen/captain
 	idtype = /obj/item/weapon/card/id/nanotrasen/ceo
 	minimum_character_age = 30
-	
+
 /datum/job/nanotrasen/cbia
 	title = "PDSI Agent"
 	flag = CBIA
@@ -69,6 +72,9 @@
 	ideal_character_age = 40
 	req_admin_notify = 1
 
+/datum/job/nanotrasen/cbia/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.investigation_email
+
 /datum/job/nanotrasen/president
 	title = "President"
 	flag = PRESIDENT
@@ -93,3 +99,5 @@
 	outfit_type = /decl/hierarchy/outfit/job/heads/president
 
 
+/datum/job/nanotrasen/president/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.president_email

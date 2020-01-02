@@ -28,6 +28,9 @@
 	alt_titles = list(
 		"Chief of Medicine", "Medical Director")
 
+/datum/job/cmo/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.council_email
+
 /datum/job/doctor
 	title = "Doctor"
 	email_domain = "med.gov.nt"

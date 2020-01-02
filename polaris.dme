@@ -354,6 +354,7 @@
 #include "code\controllers\subsystems\atoms.dm"
 #include "code\controllers\subsystems\economy.dm"
 #include "code\controllers\subsystems\elections.dm"
+#include "code\controllers\subsystems\emails.dm"
 #include "code\controllers\subsystems\events.dm"
 #include "code\controllers\subsystems\garbage.dm"
 #include "code\controllers\subsystems\holomaps.dm"

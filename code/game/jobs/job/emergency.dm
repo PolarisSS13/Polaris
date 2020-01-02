@@ -30,6 +30,10 @@
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+
+
+/datum/job/chief_engineer/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.council_email
 /*
 /datum/job/engineer
 	title = "Firefighter"

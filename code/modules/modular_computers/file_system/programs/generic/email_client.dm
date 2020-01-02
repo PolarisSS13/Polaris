@@ -91,20 +91,6 @@
 				error = "Invalid Password"
 				return 0
 
-		else
-			// checking our persistent emails for this email so we can login offline. if it's successful and the email
-			// isn't suspended, it'll make a copy and it will exist in-game (late joining owners of this email will be
-			// able to use it as normal too.
-			if(check_persistent_email(stored_login))
-				if(get_persistent_email_suspended(stored_login))
-					error = "This account has been suspended. Please contact the system administrator for assistance."
-					return 0
-				else
-					if((get_persistent_email_password(stored_login) == stored_password))
-						current_account = manifest_persistent_email(stored_login)
-						return 1
-
-
 	if(current_account)
 		return 1
 

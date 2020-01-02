@@ -25,6 +25,9 @@
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 	alt_titles = list("Head of Police", "Police Commander", "Police Commissioner", "Police Chief")
 
+/datum/job/hos/get_job_email()	// whatever this is set to will be the job's communal email. should be persistent.
+	return using_map.council_email
+
 /datum/job/warden
 	title = "Prison Warden"
 	email_domain = "secure.plux.gov.nt"
