@@ -15,7 +15,11 @@ SUBSYSTEM_DEF(emails)
 	gov_emails += using_map.president_email
 	gov_emails += using_map.vice_email
 	gov_emails += using_map.boss_email
+	gov_emails += using_map.rep_email
 	gov_emails += using_map.director_email
+	gov_emails += using_map.investigation_email
+
+	gov_emails += using_map.council_email
 
 	gov_emails += using_map.minister_defense_email
 	gov_emails += using_map.minister_health_email

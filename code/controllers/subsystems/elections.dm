@@ -217,7 +217,7 @@ SUBSYSTEM_DEF(elections)
 	postelection_news_article()
 
 	// change the prez email so the old president can't get back into the email...
-
+	SSemails.change_persistent_email_password(using_map.president_email, GenerateKey())
 
 	postelection_email()
 
@@ -262,11 +262,11 @@ SUBSYSTEM_DEF(elections)
 
 
 	eml_cnt += "Congratulations on winning the presidential race this month, you are now President of the colony. Your presidency shall last a month, \
-	so make the most of it.\[editorbr\] Being a President is an arduous duty with many responsibilities - it involves keeping a colony in line \
+	so make the most of it.\[br\] Being a President is an arduous duty with many responsibilities - it involves keeping a colony in line \
 	and retaining the appeal of the citizens, during your presidency you must also adhere to the company's guidelines."
 
 
-	eml_cnt += "You must keep the following in mind at all times:\[editorbr\]"
+	eml_cnt += "You must keep the following in mind at all times:\[br\]"
 
 	eml_cnt += "\[list\] \
 	\[*\] Image: Do not debase or slander the corporation in a way that would make it lose credibility in the eyes of our citizens, \
@@ -279,12 +279,12 @@ SUBSYSTEM_DEF(elections)
 
 	eml_cnt += "\[editorbr\]As president, you are able to modify various aspects of the colony such as taxes, laws, contraband, et cetera, \
 	and can do this through the presidential portal. You may also assign a vice president and some ministers to help you get work done in the short \
-	time that you have.\[editorbr\]"
+	time that you have. \[editorbr\]"
 
-	eml_cnt += "Your work email is [prez_email.login] and the password is [prez_email.login] - do not share these details. If your account does \
-	become compromised, you may request a password change from the Nanotrasen IT department sector, but this will come at a cost of 5,500 credits.\[editorbr\]"
+	eml_cnt += "\[br\]Your work email is \[b]\[prez_email.login]\[\b]\ and the password is \[b]\[prez_email.password]\[\b]\ - do not share these details. If your account does \
+	become compromised, you may request a password change from the Nanotrasen IT department sector, but this will come at a cost of 5,500 credits. \[editorbr\]"
 
-	eml_cnt += "As you manage the colony it is important to be mindful of your own image, citizens can vote against you - if thirty no confidence \
+	eml_cnt += "\[br\]As you manage the colony it is important to be mindful of your own image, citizens can vote against you - if thirty no confidence \
 	votes are reached you will be removed from your post, please beware.\[editorbr\] We hope you have a fruitful term, and wish you all the best. \[editorbr\] \
 	Best Regards, \[editorbr\]Nanotrasen Headquarters"
 
