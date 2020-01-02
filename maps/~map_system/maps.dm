@@ -95,6 +95,21 @@ var/list/all_maps = list()
 
 	var/list/usable_email_tlds = list("freemail.net")
 
+	var/president_email = "president@nanotrasen.gov.nt"
+	var/vice_email = "vice-president@nanotrasen.gov.nt"
+	var/boss_email = "headoffice@nanotrasen.gov.nt"
+	var/rep_email = "nanotrasen@nanotrasen.gov.nt"
+	var/director_email = "director@nanotrasen.gov.nt"
+	var/investigation_email = "pdsi@nanotrasen.gov.nt"
+
+	var/minister_defense_email = "defense@nanotrasen.gov.nt"
+	var/minister_health_email = "health@nanotrasen.gov.nt"
+	var/minister_innovation_email = "innovation@nanotrasen.gov.nt"
+	var/minister_justice_email = "justice@nanotrasen.gov.nt"
+	var/minister_information_email = "information@nanotrasen.gov.nt"
+
+	var/council_email = "city-council@nanotrasen.gov.nt"
+
 /datum/map/New()
 	..()
 	if(zlevel_datum_type)

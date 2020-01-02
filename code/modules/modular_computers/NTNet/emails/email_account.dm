@@ -69,7 +69,7 @@
 
 	if(config.canonicity)
 		// If not, send to a persistent email address out of game. (If it's a canon round.)
-		if(send_to_persistent_email(recipient_address, message))
+		if(SSemails.send_to_persistent_email(recipient_address, message))
 			outbox.Add(message)
 			ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient_address] title: [message.title].")
 			return 1

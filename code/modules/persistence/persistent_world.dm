@@ -10,7 +10,7 @@
 	news_data.save_main_news()
 
 	//save emails
-	save_all_emails()
+	SSemails.save_all_emails()
 
 	//saves all characters
 	for (var/mob/living/carbon/human/H in mob_list) //only humans, we don't really save AIs or robots.
