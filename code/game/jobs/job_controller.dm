@@ -410,6 +410,8 @@ var/global/datum/controller/occupations/job_master
 			job.equip_backpack(H)
 //			job.equip_survival(H)
 			job.apply_fingerprints(H)
+			
+			equip_passport(H)
 			if(job.title != "Cyborg" && job.title != "AI")
 				H.equip_post_job()
 
@@ -713,3 +715,15 @@ var/global/datum/controller/occupations/job_master
 		var/spawning = pick(latejoin)
 		.["turf"] = get_turf(spawning)
 		.["msg"] = "has arrived to the city"
+
+/datum/species/human/equip_passport(var/mob/living/carbon/human/H)
+	var/obj/item/weapon/passport/pass = new/obj/item/weapon/passport(get_turf(H))
+	
+	if(!H.mind || !H.mind.prefs) return
+	
+	pass.name = "[H.real_name]'s passport"
+	pass.citizenship = H.mind.prefs.home_system
+	pass.owner = H.real_name
+	
+	H.equip_to_slot_or_del(pass, slot_in_backpack)
+	
