@@ -74,6 +74,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	
 	if(can_use(usr))
 		remove_pen()
+		return
+	..()
 
 /obj/item/device/pda/AltClick()
 	if(issilicon(usr))
