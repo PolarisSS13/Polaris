@@ -77,6 +77,7 @@ obj/machinery/air_sensor/Destroy()
 	icon_keyboard = "atmos_key"
 	icon_screen = "tank"
 	name = "Computer"
+	desc = "Control atmospheric systems, remotely."
 	var/frequency = 1439
 	var/list/sensors = list()
 	var/list/sensor_information = list()

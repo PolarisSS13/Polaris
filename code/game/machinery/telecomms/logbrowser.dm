@@ -5,6 +5,7 @@
 
 /obj/machinery/computer/telecomms/server
 	name = "Telecommunications Server Monitor"
+	desc = "View communication logs here. Translation not guarenteed."
 	icon_screen = "comm_logs"
 
 	var/screen = 0				// the screen number:
