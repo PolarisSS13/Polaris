@@ -83,7 +83,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/examine(mob/user, distance, infix, suffix)
 	if(..())
-		to_chat(user, "It appears to be [active ? online : offline].")
+		to_chat(user, "It appears to be [active ? "online" : "offline"].")
 	
 
 /obj/machinery/message_server/proc/GenerateKey()

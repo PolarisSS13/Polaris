@@ -2,6 +2,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
 	name = "Gas Sensor"
+	desc = "Senses atmospheric conditions."
 
 	anchored = 1
 	var/state = 0

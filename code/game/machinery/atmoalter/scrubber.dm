@@ -233,7 +233,10 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
-	desc = "[initial(desc)] This one seems to be tightly secured with large bolts."
+
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/Initialize()
+	. = ..()
+	desc += "This one seems to be tightly secured with large bolts."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(I.is_wrench())
