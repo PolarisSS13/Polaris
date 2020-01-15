@@ -50,7 +50,7 @@
 	reagents = list("flour" = 180, "milk" = 100, "sugar" = 60, "egg" = 18, "blood" = 300)
 	fruit = list("tomato" = 20)
 	items = list()
-		/*
+		/*,
 			/obj/item/weapon/reagent_containers/food/snacks/lobster, Remind me to port lobster later
 			/obj/item/weapon/reagent_containers/food/snacks/lobster,
 			/obj/item/weapon/reagent_containers/food/snacks/lobster,
@@ -125,14 +125,6 @@
 			"The second pair of triplets rest on the cake, if you stand on the bright side, you can feel a good aura lifting your mood.",
 			"A chaos cake. Both a creation of dark and light, the two cakes are kept in a careful balance by that mystical coin in the middle. It's said its effects would dissipate if the balance is ever tipped in favour of one side too much, so both sides much be cut equally."
 		)
-
-/*
-/obj/item/weapon/chaoscake_layerone
-	name = "A layer of cake"
-	desc = "a layer of cake, you can see the cherry paste ooze."
-	icon = 'icons/obj/food_ch.dmi'
-	icon_state = "chaoscake_layer-1"
-*/
 
 /obj/item/weapon/chaoscake_layer
 	name = "A layer of cake"
