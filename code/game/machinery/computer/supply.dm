@@ -5,7 +5,7 @@
 // Supply requests console
 /obj/machinery/computer/supplycomp
 	name = "supply ordering console"
-	desc = "Request crates from here! Delivery not guarenteed."
+	desc = "Request crates from here! Delivery not guaranteed."
 	icon_screen = "request"
 	circuit = /obj/item/weapon/circuitboard/supplycomp
 	var/authorization = 0
