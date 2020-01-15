@@ -14,4 +14,6 @@
 	build_path = /obj/machinery/chem_master
 	board_type = new /datum/frame/frame_types/machine
 	origin_tech = list(TECH_DATA = 3, TECH_MAGNET = 2)
-	req_components = list()
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 2)
