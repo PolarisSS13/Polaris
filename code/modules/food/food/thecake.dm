@@ -7,11 +7,7 @@
 			/obj/item/weapon/reagent_containers/food/snacks/meat/,
 			/obj/item/weapon/reagent_containers/food/snacks/meat/,
 			/obj/item/weapon/reagent_containers/food/snacks/meat/,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/,
-			/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
-			/obj/item/weapon/reagent_containers/food/snacks/carpmeat/,
-			/obj/item/weapon/reagent_containers/food/snacks/carpmeat/,
-			/obj/item/weapon/reagent_containers/food/snacks/carpmeat/
+			/obj/item/weapon/reagent_containers/food/snacks/meat/
 		)
 	result = /obj/structure/chaoscake
 
