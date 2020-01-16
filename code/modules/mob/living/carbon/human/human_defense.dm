@@ -575,7 +575,6 @@ emp_act
 	return perm
 
 // This is for preventing harm by being covered in water, which only prometheans need to deal with.
-// This is not actually used for now since the code for prometheans gets changed a lot.
 /mob/living/carbon/human/get_water_protection()
 	var/protection = species.water_resistance
 	if(protection == 1) // No point doing permeability checks if it won't matter.
