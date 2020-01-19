@@ -185,7 +185,7 @@
 				opr=new
 				val=new
 			src.expecting=VALUE
-			for()
+			while(TRUE)
 				if(EndOfExpression(end))
 					break
 				if(istype(curToken, /token/symbol) && ErrChars.Find(curToken.value))
@@ -278,7 +278,7 @@
 			NextToken() //skip open parenthesis, already found
 			var/loops = 0
 
-			for()
+			while(TRUE)
 				loops++
 				if(loops>=1000)
 					CRASH("Something TERRIBLE has gone wrong in ParseFunctionExpression ;__;")
