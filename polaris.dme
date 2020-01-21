@@ -1671,6 +1671,7 @@
 #include "code\modules\food\food\lunch.dm"
 #include "code\modules\food\food\sandwich.dm"
 #include "code\modules\food\food\snacks.dm"
+#include "code\modules\food\food\thecake.dm"
 #include "code\modules\food\food\drinks\bottle.dm"
 #include "code\modules\food\food\drinks\cup.dm"
 #include "code\modules\food\food\drinks\drinkingglass.dm"
