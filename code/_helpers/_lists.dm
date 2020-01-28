@@ -5,17 +5,68 @@
  *			Sorting
  */
 
+// Determiner constants
+#define DET_NONE		0x00;
+#define DET_DEFINITE	0x01; // the
+#define DET_INDEFINITE	0x02; // a, an, some
+#define DET_AUTO		0x04;
+
 /*
  * Misc
  */
 
-//Returns a list in plain english as a string
-/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
-	switch(input.len)
+//Returns a list in plain english as a string, optionally counting the elements, displaying icons, etc. (icons, determiners work only with counting)
+/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "", output_counts = FALSE, output_icons = TRUE, determiners = DET_NONE)
+	// non-countable lists MUST use legacy code to maintain compatibility
+	// with shoddy usage of english_list for code logic
+	// and because it preserves order of inputs
+	if (!output_counts)
+		switch(input.len)
+			if(0) return nothing_text
+			if(1) return "[input[1]]"
+			if(2) return "[input[1]][and_text][input[2]]"
+			else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
+
+	var/list/counts = list() // counted input items
+	var/list/items = list() // actual objects for later reference (for icons and formatting)
+	// count items
+	for(var/item in input)
+		var/name = "[item]" // index items by name; usually works fairly well for loose equality
+		if(name in counts)
+			counts[name]++
+		else
+			counts[name] = 1
+			items.Add(item)
+
+	// assemble the output list
+	var/list/out = list()
+	for(var/item in items)
+		var/name = "[item]"
+		var/count = counts[name]
+		var/item_str = ""
+		if(count > 1)
+			item_str += "[count]x&nbsp;"
+
+		if(isatom(item))
+			// atoms/items/objects can be pretty and whatnot
+			var/atom/A = item
+			if(output_icons && isicon(A.icon) && !ismob(A)) // mobs tend to have unusable icons
+				item_str += "\icon[A]&nbsp;"
+			switch(determiners)
+				if(DET_NONE) item_str += A.name
+				if(DET_DEFINITE) item_str += "\the [A]"
+				if(DET_INDEFINITE) item_str += "\a [A]"
+				else item_str += name
+		else
+			// non-atoms use plain string conversion
+			item_str = name
+		out.Add(item_str)
+
+	switch(out.len)
 		if(0) return nothing_text
-		if(1) return "[input[1]]"
-		if(2) return "[input[1]][and_text][input[2]]"
-		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
+		if(1) return "[out[1]]"
+		if(2) return "[out[1]][and_text][out[2]]"
+		else return "[jointext(out, comma_text, 1, -1)][final_comma_text][and_text][out[out.len]]"
 
 //Returns list element or null. Should prevent "index out of bounds" error.
 proc/listgetindex(var/list/list,index)
@@ -762,4 +813,4 @@ proc/dd_sortedTextList(list/incoming)
 /proc/popleft(list/L)
 	if(L.len)
 		. = L[1]
-		L.Cut(1,2) 
+		L.Cut(1,2)
