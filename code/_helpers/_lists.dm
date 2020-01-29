@@ -60,7 +60,7 @@
 				else item_str += name
 		else
 			// non-atoms use plain string conversion
-			item_str = name
+			item_str += name
 		out.Add(item_str)
 
 	// finally return the list using regular english_list builder
