@@ -15,20 +15,21 @@
  * Misc
  */
 
-//Returns a list in plain english as a string, optionally counting the elements, displaying icons, etc. (icons, determiners work only with counting)
-/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "", output_counts = FALSE, output_icons = TRUE, determiners = DET_NONE)
-	// non-countable lists MUST use legacy code to maintain compatibility
-	// with shoddy usage of english_list for code logic
-	// and because it preserves order of inputs
-	if (!output_counts)
-		switch(input.len)
-			if(0) return nothing_text
-			if(1) return "[input[1]]"
-			if(2) return "[input[1]][and_text][input[2]]"
-			else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
+//Returns a list in plain english as a string
+/proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "")
+	// this proc cannot be merged with counting_english_list to maintain compatibility
+	// with shoddy use of this proc for code logic and for cases that require original order
+	switch(input.len)
+		if(0) return nothing_text
+		if(1) return "[input[1]]"
+		if(2) return "[input[1]][and_text][input[2]]"
+		else  return "[jointext(input, comma_text, 1, -1)][final_comma_text][and_text][input[input.len]]"
 
+//Returns a list that counts equal-ish items, outputting count and item names, optionally with icons and specific determiners
+/proc/counting_english_list(var/list/input, output_icons = TRUE, determiners = DET_NONE, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "")
 	var/list/counts = list() // counted input items
 	var/list/items = list() // actual objects for later reference (for icons and formatting)
+
 	// count items
 	for(var/item in input)
 		var/name = "[item]" // index items by name; usually works fairly well for loose equality
@@ -62,11 +63,8 @@
 			item_str = name
 		out.Add(item_str)
 
-	switch(out.len)
-		if(0) return nothing_text
-		if(1) return "[out[1]]"
-		if(2) return "[out[1]][and_text][out[2]]"
-		else return "[jointext(out, comma_text, 1, -1)][final_comma_text][and_text][out[out.len]]"
+	// finally return the list using regular english_list builder
+	return english_list(out, nothing_text, and_text, comma_text, final_comma_text)
 
 //Returns list element or null. Should prevent "index out of bounds" error.
 proc/listgetindex(var/list/list,index)
