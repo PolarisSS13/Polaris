@@ -74,7 +74,7 @@
 			to_chat(user, "It is full.")
 
 	if(!src.opened && isobserver(user))
-		to_chat(user, "It contains: [counting_english_list(contents)].")
+		to_chat(user, "It contains: [counting_english_list(contents)]")
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target)
 	if(wall_mounted)
