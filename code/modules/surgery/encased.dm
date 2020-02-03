@@ -12,6 +12,12 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	if(affected.organ_tag == BP_HEAD)
+		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
+			return 0
+	else
+		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
+			return 0
 	return affected && !(affected.robotic >= ORGAN_ROBOT) && affected.encased && affected.open >= 2
 
 ///////////////////////////////////////////////////////////////
