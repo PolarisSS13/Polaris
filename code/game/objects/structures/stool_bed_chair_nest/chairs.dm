@@ -46,7 +46,6 @@
 		var/cache_key = "[base_icon]-armrest-[padding_material ? padding_material.name : "no_material"]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
-			world << "Thought is a nerd."
 			I.layer = MOB_LAYER + 0.1
 			I.plane = MOB_PLANE
 			if(padding_material)
