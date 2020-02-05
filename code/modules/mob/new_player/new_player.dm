@@ -426,7 +426,7 @@
 	dat += "<a href='byond://?src=\ref[src];hidden_jobs=1'>[show_hidden_jobs ? "Hide":"Show"] Hidden Jobs.</a><br>"
 	for(var/datum/job/job in job_master.occupations)
 		if(!IsJobAvailable(job.title))
-			return FALSE	// Prevents bypassing whitelist checks with switching characters.
+			continue	// Prevents bypassing whitelist checks with switching characters.
 	
 		if(job && IsJobAvailable(job.title))
 			// Checks for jobs with minimum age requirements
