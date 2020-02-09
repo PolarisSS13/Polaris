@@ -90,7 +90,7 @@ var/warrant_uid = 0
 				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "arrest"
 			if(temp == "search")
-				W.fields["namewarrant"] = "No location given"
+				W.fields["namewarrant"] = "No suspect/location given"
 				W.fields["charges"] = "No reason given"
 				W.fields["auth"] = "Unauthorized"
 				W.fields["arrestsearch"] = "search"
@@ -136,7 +136,7 @@ var/warrant_uid = 0
 	if(href_list["editwarrantauth"])
 		. = 1
 		if(!(access_hos in I.access))
-			to_chat(user, "<span class='warning'>You don't have the access to do this!")
+			to_chat(user, "<span class='warning'>You don't have the access to do this!</span>")
 			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 

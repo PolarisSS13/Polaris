@@ -46,6 +46,8 @@
 			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
 					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
 			return 1
+		to_chat(user, "<span class='warning'>You don't have the access to do this!</span>")
+		return 1
 	..()
 
 //hit other people with it
