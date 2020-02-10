@@ -68,7 +68,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 
 		if(!(plant_sprites[base]) || (plant_sprites[base]<ikey))
 			plant_sprites[base] = ikey
-			if(!(base in forbidden_plant_growth_sprites))
+			if(!(base in GLOB.forbidden_plant_growth_sprites))
 				accessible_plant_sprites[base] = ikey
 
 	for(var/icostate in icon_states('icons/obj/hydroponics_products.dmi'))
@@ -76,7 +76,7 @@ var/global/datum/controller/plants/plant_controller // Set in New().
 		var/base = copytext(icostate,1,split)
 		if(split)
 			plant_product_sprites |= base
-			if(!(base in forbidden_plant_product_sprites))
+			if(!(base in GLOB.forbidden_plant_product_sprites))
 				accessible_product_sprites |= base
 
 	// Populate the global seed datum list.
