@@ -20,12 +20,8 @@
 		return 0
 	if (affected.robotic >= ORGAN_ROBOT)
 		return 0
-	if(affected.organ_tag == BP_HEAD)
-		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
-			return 0
-	else
-		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
-			return 0
+	if(coverage_check(user, target, affected, tool))
+		return 0
 	return 1
 
 ///////////////////////////////////////////////////////////////

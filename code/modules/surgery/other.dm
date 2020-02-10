@@ -25,12 +25,8 @@
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!affected) return
-	if(affected.organ_tag == BP_HEAD)
-		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
-			return 0
-	else
-		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
-			return 0
+	if(coverage_check(user, target, affected, tool))
+		return 0
 	var/internal_bleeding = 0
 	for(var/datum/wound/W in affected.wounds) if(W.internal)
 		internal_bleeding = 1
@@ -86,12 +82,8 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected.organ_tag == BP_HEAD)
-		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
-			return 0
-	else
-		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
-			return 0
+	if(coverage_check(user, target, affected, tool))
+		return 0
 
 	return affected && affected.open >= 2 && (affected.status & ORGAN_DEAD)
 
@@ -148,12 +140,8 @@
 		return 0
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	if(affected.organ_tag == BP_HEAD)
-		if(target.head && istype(target.head,/obj/item/clothing/head/helmet/space))
-			return 0
-	else
-		if(target.wear_suit && istype(target.wear_suit,/obj/item/clothing/suit/space))
-			return 0
+	if(coverage_check(user, target, affected, tool))
+		return 0
 	return affected && affected.open == 3 && (affected.status & ORGAN_DEAD)
 
 /datum/surgery_step/treat_necrosis/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
