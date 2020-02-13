@@ -200,7 +200,7 @@
 	var/need_circuit = TRUE
 	var/datum/frame/frame_types/frame_type = new /datum/frame/frame_types/machine
 
-	var/list/components = null
+	var/list/components = list()
 	var/list/req_components = null
 	var/list/req_component_names = null
 
@@ -231,7 +231,6 @@
 	icon_state = frame_type.get_icon_state(state)
 
 /obj/structure/frame/proc/check_components(mob/user as mob)
-	components = list()
 	req_components = circuit.req_components.Copy()
 	for(var/A in circuit.req_components)
 		req_components[A] = circuit.req_components[A]
