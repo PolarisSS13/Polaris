@@ -68,7 +68,7 @@
 	if(QDELETED(src))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 	if(initialized)
-		crash_with("Warning: [src]([type]) initialized multiple times!")
+		return
 	initialized = TRUE
 	return INITIALIZE_HINT_NORMAL
 
