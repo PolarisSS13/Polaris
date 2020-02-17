@@ -874,7 +874,10 @@
 	anchored = 0
 	density = 1
 	var/phrase = "I don't want to exist anymore!"
-
+	var/searching = FALSE
+	var/opened = FALSE	// has this been slit open? this will allow you to store an object in a plushie.
+	var/obj/item/stored_item	// Note: Stored items can't be bigger than the plushie itself.
+	
 /obj/structure/plushie/examine(mob/user)
 	..()
 	if(opened)
