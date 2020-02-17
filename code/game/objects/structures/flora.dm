@@ -222,7 +222,8 @@
 	icon_state = "plant-01"
 
 	plane = OBJ_PLANE
-
+	var/obj/item/stored_item
+	
 /obj/structure/flora/pottedplant/examine(mob/user)
 	..()
 	if(in_range(user, src) && stored_item)
