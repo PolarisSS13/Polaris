@@ -223,6 +223,43 @@
 
 	plane = OBJ_PLANE
 
+/obj/structure/flora/pottedplant/examine(mob/user)
+	..()
+	if(in_range(user, src) && stored_item)
+		to_chat(user, "<i>You can see something in there...</i>")
+
+/obj/structure/flora/pottedplant/attackby(obj/item/I, mob/user)
+	if(stored_item)
+		to_chat(user, "<span class='notice'>[I] won't fit in. There already appears to be something in here...</span>")
+		return
+
+	if(I.w_class > ITEMSIZE_SMALL)
+		to_chat(user, "<span class='notice'>[I] is too big to fit inside [src].</span>")
+		return
+
+	if(do_after(user, 10))
+		user.drop_from_inventory(I, src)
+		I.forceMove(src)
+		stored_item = I
+		src.visible_message("\icon[src] \icon[I] [user] places [I] into [src].")
+		return
+	else
+		to_chat(user, "<span class='notice'>You refrain from putting things into the plant pot.</span>")
+		return
+
+	..()
+
+/obj/structure/flora/pottedplant/attack_hand(mob/user)
+	if(!stored_item)
+		to_chat(user, "<b>You see nothing of interest in [src]...</b>")
+	else
+		if(do_after(user, 10))
+			to_chat(user, "You find \icon[stored_item] [stored_item] in [src]!")
+			stored_item.forceMove(get_turf(src))
+			stored_item = null
+	..()
+
+
 /obj/structure/flora/pottedplant/large
 	name = "large potted plant"
 	desc = "This is a large plant. Three branches support pairs of waxy leaves."
