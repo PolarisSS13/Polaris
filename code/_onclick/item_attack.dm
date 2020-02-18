@@ -44,11 +44,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /mob/living/attackby(obj/item/I, mob/user, var/attack_modifier)
 	if(!ismob(user))
 		return 0
-	if(can_operate(src) && I.can_do_surgery(src,user))
-		if(I.do_surgery(src,user))
-			return 1
-		else
-			return 0
+	if(can_operate(src) && I.do_surgery(src,user))
+		return 1
 	return I.attack(src, user, user.zone_sel.selecting, attack_modifier)
 
 // Used to get how fast a mob should attack, and influences click delay.
