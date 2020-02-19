@@ -181,7 +181,7 @@
 		item_state_slots = list(slot_r_hand_str = "whitecane", slot_l_hand_str = "whitecane")
 		w_class = ITEMSIZE_NORMAL
 		force = 5
-		attack_verb = list("smacked", "struck", "craked", "beaten")
+		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
 		user.visible_message("<span class='notice'>\The [user] collapses the white cane.</span>",\
 		"<span class='notice'>You collapse the white cane.</span>",\
