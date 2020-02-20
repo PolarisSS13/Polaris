@@ -283,7 +283,6 @@
 		cartridge.active_devices ^= list(O) // Exclusive or, will toggle its presence
 
 	if(href_list["newsfeed"])
-		world << "newsfeed [href_list["newsfeed"]]"
 		newsfeed_channel = text2num(href_list["newsfeed"])
 
 	if(href_list["cartridge_topic"] && cartridge) // Has to have a cartridge to perform these functions
