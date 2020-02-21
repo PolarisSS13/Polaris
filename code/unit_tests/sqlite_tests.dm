@@ -20,7 +20,7 @@
 
 	// Act.
 	SSsqlite.insert_feedback(author = test_author, topic = test_topic, content = test_content, sqlite_object = stub_sqlite_db)
-	var/database/query/Q = new("SELECT * FROM feedback")
+	var/database/query/Q = new("SELECT * FROM [SQLITE_TABLE_FEEDBACK]")
 	Q.Execute(stub_sqlite_db)
 	SSsqlite.sqlite_check_for_errors(Q, "Sqlite Insert Unit Test")
 	Q.NextRow()

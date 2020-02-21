@@ -39,9 +39,9 @@
 	if(exact) // Useful for ID searches, so searching for 'id 10' doesn't also get 'id 101'.
 		query = new({"
 			SELECT *
-			FROM feedback
+			FROM [SQLITE_TABLE_FEEDBACK]
 			WHERE [row_name] == ?
-			ORDER BY id
+			ORDER BY [SQLITE_FEEDBACK_COLUMN_ID]
 			DESC LIMIT 50;
 		"},
 		thing_to_find
@@ -52,9 +52,9 @@
 		thing_to_find = "%[thing_to_find]%"
 		query = new({"
 			SELECT *
-			FROM feedback
+			FROM [SQLITE_TABLE_FEEDBACK]
 			WHERE [row_name] LIKE ?
-			ORDER BY id
+			ORDER BY [SQLITE_FEEDBACK_COLUMN_ID]
 			DESC LIMIT 50;
 		"},
 		thing_to_find
@@ -69,8 +69,8 @@
 	if(!last_query) // If no query was done before, just show the most recent feedbacks.
 		var/database/query/query = new({"
 			SELECT *
-			FROM feedback
-			ORDER BY id
+			FROM [SQLITE_TABLE_FEEDBACK]
+			ORDER BY [SQLITE_FEEDBACK_COLUMN_ID]
 			DESC LIMIT 50;
 			"}
 			)
@@ -134,29 +134,29 @@
 	if(href_list["filter_id"])
 		var/id_to_search = input(my_client, "Write feedback ID here.", "Filter by ID", null) as null|num
 		if(id_to_search)
-			last_query = feedback_filter("id", id_to_search, TRUE)
+			last_query = feedback_filter(SQLITE_FEEDBACK_COLUMN_ID, id_to_search, TRUE)
 
 	if(href_list["filter_author"])
 		var/author_to_search = input(my_client, "Write desired key or hash here. Partial keys/hashes are allowed.", "Filter by Author", null) as null|text
 		if(author_to_search)
-			last_query = feedback_filter("author", author_to_search)
+			last_query = feedback_filter(SQLITE_FEEDBACK_COLUMN_AUTHOR, author_to_search)
 
 	if(href_list["filter_topic"])
 		var/topic_to_search = input(my_client, "Write desired topic here. Partial topics are allowed. \
 		\nThe current topics in the config are [english_list(config.sqlite_feedback_topics)].", "Filter by Topic", null) as null|text
 		if(topic_to_search)
-			last_query = feedback_filter("topic", topic_to_search)
+			last_query = feedback_filter(SQLITE_FEEDBACK_COLUMN_TOPIC, topic_to_search)
 
 	if(href_list["filter_content"])
 		var/content_to_search = input(my_client, "Write desired content to find here. Partial matches are allowed.", "Filter by Content", null) as null|message
 		if(content_to_search)
-			last_query = feedback_filter("content", content_to_search)
+			last_query = feedback_filter(SQLITE_FEEDBACK_COLUMN_CONTENT, content_to_search)
 
 	if(href_list["filter_datetime"])
 		var/datetime_to_search = input(my_client, "Write desired datetime. Partial matches are allowed.\n\
 		Format is 'YYYY-MM-DD HH:MM:SS'.", "Filter by Datetime", null) as null|text
 		if(datetime_to_search)
-			last_query = feedback_filter("datetime", datetime_to_search)
+			last_query = feedback_filter(SQLITE_FEEDBACK_COLUMN_DATETIME, datetime_to_search)
 
 	// Refresh.
 	display()

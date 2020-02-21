@@ -43,14 +43,14 @@ SUBSYSTEM_DEF(sqlite)
 	 */
 	var/database/query/init_schema = new(
 		{"
-		CREATE TABLE IF NOT EXISTS feedback
+		CREATE TABLE IF NOT EXISTS [SQLITE_FEEDBACK_COLUMN_DATETIME]
 		(
-			`id`	INTEGER NOT NULL UNIQUE,
-			`author`	TEXT NOT NULL,
-			`topic`	TEXT NOT NULL,
-			`content`	TEXT NOT NULL,
-			`datetime`	TEXT NOT NULL,
-			PRIMARY KEY(`id`)
+			`[SQLITE_FEEDBACK_COLUMN_ID]`		INTEGER NOT NULL UNIQUE,
+			`[SQLITE_FEEDBACK_COLUMN_AUTHOR]`	TEXT NOT NULL,
+			`[SQLITE_FEEDBACK_COLUMN_TOPIC]`	TEXT NOT NULL,
+			`[SQLITE_FEEDBACK_COLUMN_CONTENT]`	TEXT NOT NULL,
+			`[SQLITE_FEEDBACK_COLUMN_DATETIME]`	TEXT NOT NULL,
+			PRIMARY KEY(`[SQLITE_FEEDBACK_COLUMN_ID]`)
 		);
 		"}
 	)
@@ -85,10 +85,10 @@ SUBSYSTEM_DEF(sqlite)
 	var/sqlite_topic = sql_sanitize_text(topic)
 
 	var/database/query/query = new(
-	"INSERT INTO feedback (\
-		author, \
-		topic, \
-		content, \
+	"INSERT INTO [SQLITE_TABLE_FEEDBACK] (\
+		[SQLITE_FEEDBACK_COLUMN_AUTHOR], \
+		[SQLITE_FEEDBACK_COLUMN_TOPIC], \
+		[SQLITE_FEEDBACK_COLUMN_CONTENT], \
 		[SQLITE_FEEDBACK_COLUMN_DATETIME]) \
 		\
 		VALUES (\
@@ -127,8 +127,8 @@ SUBSYSTEM_DEF(sqlite)
 	// First query is to get the most recent time the player has submitted feedback.
 	var/database/query/query = new({"
 		SELECT [SQLITE_FEEDBACK_COLUMN_DATETIME]
-		FROM feedback
-		WHERE author == ? OR author == ?
+		FROM [SQLITE_TABLE_FEEDBACK]
+		WHERE [SQLITE_FEEDBACK_COLUMN_AUTHOR] == ? OR [SQLITE_FEEDBACK_COLUMN_AUTHOR] == ?
 		ORDER BY [SQLITE_FEEDBACK_COLUMN_DATETIME]
 		DESC LIMIT 1;
 		"},
