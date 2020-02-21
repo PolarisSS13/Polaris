@@ -168,10 +168,10 @@ var/list/shoreline_icon_cache = list()
 
 turf/simulated/floor/water/contaminated/Entered(atom/movable/AM, atom/oldloc)
 	..()
-	var/mob/living/L = AM
-	if(L.isSynthetic())
-		return
-	poisonlevel *= 1 - L.get_water_protection()
-	if(poisonlevel > 0)
-		L.adjustToxLoss(poisonlevel)
-
+	if(istype(AM, /mob/living))
+		var/mob/living/L = AM
+		if(L.isSynthetic())
+			return
+		poisonlevel *= 1 - L.get_water_protection()
+		if(poisonlevel > 0)
+			L.adjustToxLoss(poisonlevel)
