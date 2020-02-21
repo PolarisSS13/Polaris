@@ -167,7 +167,7 @@
 	var/datum/shuttle/multi_shuttle/MS = shuttle_controller.shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
-	//world << "multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]"
+	//to_world("multi_shuttle: last_departed=[MS.last_departed], origin=[MS.origin], interim=[MS.interim], travel_time=[MS.move_time]")
 
 	if(href_list["refresh"])
 		updateUsrDialog()
@@ -200,7 +200,7 @@
 
 		// No point giving a warning if it does literally nothing.
 //		if(!MS.return_warning)
-//			usr << "<font color='red'>Returning to your home base will end your mission. If you are sure, press the button again.</font>"
+//			to_chat(usr, "<font color='red'>Returning to your home base will end your mission. If you are sure, press the button again.</font>")
 //			//TODO: Actually end the mission.
 //			MS.return_warning = 1
 //			return
