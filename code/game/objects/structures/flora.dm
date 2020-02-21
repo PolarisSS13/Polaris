@@ -234,7 +234,7 @@
 		to_chat(user, "<span class='notice'>[I] won't fit in. There already appears to be something in here...</span>")
 		return
 
-	if(I.w_class > ITEMSIZE_SMALL)
+	if(I.w_class > ITEMSIZE_TINY)
 		to_chat(user, "<span class='notice'>[I] is too big to fit inside [src].</span>")
 		return
 
