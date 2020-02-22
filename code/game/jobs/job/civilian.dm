@@ -58,7 +58,7 @@
 
 /datum/alt_title/cook
 	title = "Cook"
-	title_blurb = "Ahelp if you see this"
+	title_blurb = "A Cook has the same duties, though they may be less experienced."
 
 //////////////////////////////////
 //			Botanist
