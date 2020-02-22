@@ -401,6 +401,11 @@ nanoui is used to open and update nano browser uis
 	if(!user.client)
 		return
 
+	// An attempted fix to UIs sometimes locking up spamming runtime errors due to src_object being null for whatever reason.
+	// This hard-deletes the UI, preventing the device that uses the UI from being locked up permanently.
+	if(!src_object)
+		del(src)
+
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
@@ -412,7 +417,7 @@ nanoui is used to open and update nano browser uis
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
 	//onclose(user, window_id)
-	nanomanager.ui_opened(src)
+	SSnanoui.ui_opened(src)
 
  /**
   * Reinitialise this UI, potentially with a different template and/or initial data
@@ -433,7 +438,7 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/close()
 	is_auto_updating = 0
-	nanomanager.ui_closed(src)
+	SSnanoui.ui_closed(src)
 	user << browse(null, "window=[window_id]")
 	for(var/datum/nanoui/child in children)
 		child.close()
@@ -466,7 +471,7 @@ nanoui is used to open and update nano browser uis
 
 	var/list/send_data = get_send_data(data)
 
-	//user << list2json_usecache(send_data) // used for debugging //NANO DEBUG HOOK
+	//to_chat(user,list2json_usecache(send_data)) // used for debugging //NANO DEBUG HOOK
 	user << output(list2params(list(strip_improper(json_encode(send_data)))),"[window_id].browser:receiveUpdateData")
 
  /**
@@ -492,7 +497,7 @@ nanoui is used to open and update nano browser uis
 		map_update = 1
 
 	if ((src_object && src_object.Topic(href, href_list, state)) || map_update)
-		nanomanager.update_uis(src_object) // update all UIs attached to src_object
+		SSnanoui.update_uis(src_object) // update all UIs attached to src_object
 
  /**
   * Process this UI, updating the entire UI or just the status (aka visibility)
@@ -502,7 +507,7 @@ nanoui is used to open and update nano browser uis
   *
   * @return nothing
   */
-/datum/nanoui/proc/process(update = 0)
+/datum/nanoui/process(update = 0)
 	if (!src_object || !user)
 		close()
 		return

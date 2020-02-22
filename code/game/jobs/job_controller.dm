@@ -19,7 +19,7 @@ var/global/datum/controller/occupations/job_master
 		//var/list/all_jobs = typesof(/datum/job)
 		var/list/all_jobs = list(/datum/job/assistant) | using_map.allowed_jobs
 		if(!all_jobs.len)
-			world << "<span class='warning'>Error setting up jobs, no job datums found!</span>"
+			to_world("<span class='warning'>Error setting up jobs, no job datums found!</span>")
 			return 0
 		for(var/J in all_jobs)
 			var/datum/job/job = new J()
@@ -330,11 +330,13 @@ var/global/datum/controller/occupations/job_master
 
 		if(!joined_late)
 			var/obj/S = null
+			var/list/possible_spawns = list()
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if(sloc.name != rank)	continue
 				if(locate(/mob/living) in sloc.loc)	continue
-				S = sloc
-				break
+				possible_spawns.Add(sloc)
+			if(possible_spawns.len)
+				S = pick(possible_spawns)
 			if(!S)
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
@@ -366,20 +368,18 @@ var/global/datum/controller/occupations/job_master
 						else
 							permitted = 1
 
-						if(G.whitelisted && !is_alien_whitelisted(H, all_species[G.whitelisted]))
+						if(G.whitelisted && !is_alien_whitelisted(H, GLOB.all_species[G.whitelisted]))
 
 						//if(G.whitelisted && (G.whitelisted != H.species.name || !is_alien_whitelisted(H, G.whitelisted)))
 							permitted = 0
 
 						if(!permitted)
-							H << "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>"
+							to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
 							continue
-
-						if(G.exploitable)
-							H.amend_exploitable(G.path)
 
 						if(G.slot == "implant")
 							var/obj/item/weapon/implant/I = G.spawn_item(H)
+							I.invisibility = 100
 							I.implant_loadout(H)
 							continue
 
@@ -390,7 +390,7 @@ var/global/datum/controller/occupations/job_master
 							if(G.slot == slot_wear_mask || G.slot == slot_wear_suit || G.slot == slot_head)
 								custom_equip_leftovers += thing
 							else if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
-								H << "<span class='notice'>Equipping you with \the [thing]!</span>"
+								to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
 								custom_equip_slots.Add(G.slot)
 							else
 								custom_equip_leftovers.Add(thing)
@@ -399,8 +399,6 @@ var/global/datum/controller/occupations/job_master
 			//Equip job items.
 			job.setup_account(H)
 			job.equip(H, H.mind ? H.mind.role_alt_title : "")
-			job.equip_backpack(H)
-//			job.equip_survival(H)
 			job.apply_fingerprints(H)
 			if(job.title != "Cyborg" && job.title != "AI")
 				H.equip_post_job()
@@ -413,12 +411,12 @@ var/global/datum/controller/occupations/job_master
 				else
 					var/metadata = H.client.prefs.gear[G.display_name]
 					if(H.equip_to_slot_or_del(G.spawn_item(H, metadata), G.slot))
-						H << "<span class='notice'>Equipping you with \the [thing]!</span>"
+						to_chat(H, "<span class='notice'>Equipping you with \the [thing]!</span>")
 						custom_equip_slots.Add(G.slot)
 					else
 						spawn_in_storage += thing
 		else
-			H << "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator."
+			to_chat(H, "Your job is [rank] and the game just can't handle it! Please report this bug to an administrator.")
 
 		H.job = rank
 		log_game("JOINED [key_name(H)] as \"[rank]\"")
@@ -458,12 +456,12 @@ var/global/datum/controller/occupations/job_master
 
 				if(!isnull(B))
 					for(var/thing in spawn_in_storage)
-						H << "<span class='notice'>Placing \the [thing] in your [B.name]!</span>"
+						to_chat(H, "<span class='notice'>Placing \the [thing] in your [B.name]!</span>")
 						var/datum/gear/G = gear_datums[thing]
 						var/metadata = H.client.prefs.gear[G.display_name]
 						G.spawn_item(B, metadata)
 				else
-					H << "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>"
+					to_chat(H, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no arms and no backpack or this is a bug.</span>")
 
 		if(istype(H)) //give humans wheelchairs, if they need them.
 			var/obj/item/organ/external/l_foot = H.get_organ("l_foot")
@@ -482,18 +480,39 @@ var/global/datum/controller/occupations/job_master
 					W.color = R.color
 					qdel(R)
 
-		H << "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>"
+		to_chat(H, "<B>You are [job.total_positions == 1 ? "the" : "a"] [alt_title ? alt_title : rank].</B>")
 
 		if(job.supervisors)
-			H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-
-		if(job.idtype)
-			spawnId(H, rank, alt_title)
+			to_chat(H, "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
+		if(job.has_headset)
 			H.equip_to_slot_or_del(new /obj/item/device/radio/headset(H), slot_l_ear)
-			H << "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>"
+			to_chat(H, "<b>To speak on your department's radio channel use :h. For the use of other channels, examine your headset.</b>")
 
 		if(job.req_admin_notify)
-			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
+			to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
+
+		// EMAIL GENERATION
+		// Email addresses will be created under this domain name. Mostly for the looks.
+		var/domain = "freemail.nt"
+		var/sanitized_name = sanitize(replacetext(replacetext(lowertext(H.real_name), " ", "."), "'", ""))
+		var/complete_login = "[sanitized_name]@[domain]"
+
+		// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+		// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+		if(ntnet_global.does_email_exist(complete_login))
+			complete_login = "[sanitized_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+
+		// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+		if(ntnet_global.does_email_exist(complete_login))
+			to_chat(H, "You were not assigned an email address.")
+			H.mind.store_memory("You were not assigned an email address.")
+		else
+			var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+			EA.password = GenerateKey()
+			EA.login = 	complete_login
+			to_chat(H, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
+			H.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+		// END EMAIL GENERATION
 
 		//Gives glasses to the vision impaired
 		if(H.disabilities & NEARSIGHTED)
@@ -506,48 +525,6 @@ var/global/datum/controller/occupations/job_master
 		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
 		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 		return H
-
-
-	proc/spawnId(var/mob/living/carbon/human/H, rank, title)
-		if(!H)	return 0
-		var/obj/item/weapon/card/id/C = H.get_equipped_item(slot_wear_id)
-		if(istype(C))  return 0
-
-		var/datum/job/job = null
-		for(var/datum/job/J in occupations)
-			if(J.title == rank)
-				job = J
-				break
-
-		if(job)
-			if(job.title == "Cyborg")
-				return
-			else
-				C = new job.idtype(H)
-				C.access = job.get_access()
-		else
-			C = new /obj/item/weapon/card/id(H)
-		if(C)
-			C.rank = rank
-			C.assignment = title ? title : rank
-			H.set_id_info(C)
-
-			//put the player's account number onto the ID
-			if(H.mind && H.mind.initial_account)
-				C.associated_account_number = H.mind.initial_account.account_number
-
-			H.equip_to_slot_or_del(C, slot_wear_id)
-
-//		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
-		if(locate(/obj/item/device/pda,H))
-			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
-			pda.owner = H.real_name
-			pda.ownjob = C.assignment
-			pda.ownrank = C.rank
-			pda.name = "PDA-[H.real_name] ([pda.ownjob])"
-
-		return 1
-
 
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist
 		if(!config.load_jobs_from_txt)
@@ -633,7 +610,7 @@ var/global/datum/controller/occupations/job_master
 			.["turf"] = spawnpos.get_spawn_position()
 			.["msg"] = spawnpos.msg
 		else
-			to_chat(C,"Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead.")
+			to_chat(C, "Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Spawning you at the Arrivals shuttle instead.")
 			var/spawning = pick(latejoin)
 			.["turf"] = get_turf(spawning)
 			.["msg"] = "will arrive to the station shortly by shuttle"

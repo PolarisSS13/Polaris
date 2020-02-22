@@ -7,14 +7,16 @@
 	w_class = ITEMSIZE_LARGE
 	var/max_fuel = 350
 	var/obj/item/weapon/nozzle = null //Attached welder, or other spray device.
+	var/nozzle_type = /obj/item/weapon/weldingtool/tubefed
 	var/nozzle_attached = 0
 
-/obj/item/weapon/weldpack/New()
+/obj/item/weapon/weldpack/Initialize()
+	. = ..()
 	var/datum/reagents/R = new/datum/reagents(max_fuel) //Lotsa refills
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("fuel", max_fuel)
-	nozzle = new/obj/item/weapon/weldingtool/tubefed(src)
+	nozzle = new nozzle_type(src)
 	nozzle_attached = 1
 
 /obj/item/weapon/weldpack/Destroy()
@@ -55,14 +57,14 @@
 		if(T.welding & prob(50))
 			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
 			log_game("[key_name(user)] triggered a fueltank explosion.")
-			to_chat(user,"<span class='danger'>That was stupid of you.</span>")
+			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
 			explosion(get_turf(src),-1,0,2)
 			if(src)
 				qdel(src)
 			return
 		else if(T.status)
 			if(T.welding)
-				to_chat(user,"<span class='danger'>That was close!</span>")
+				to_chat(user, "<span class='danger'>That was close!</span>")
 			src.reagents.trans_to_obj(W, T.max_fuel)
 			to_chat(user, "<span class='notice'>Welder refilled!</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
@@ -70,16 +72,16 @@
 	else if(nozzle)
 		if(nozzle == W)
 			if(!user.unEquip(W))
-				to_chat(user,"<span class='notice'>\The [W] seems to be stuck to your hand.</span>")
+				to_chat(user, "<span class='notice'>\The [W] seems to be stuck to your hand.</span>")
 				return
 			if(!nozzle_attached)
 				return_nozzle()
-				to_chat(user,"<span class='notice'>You attach \the [W] to the [src].</span>")
+				to_chat(user, "<span class='notice'>You attach \the [W] to the [src].</span>")
 				return
 		else
-			to_chat(user,"<span class='notice'>The [src] already has a nozzle!</span>")
+			to_chat(user, "<span class='notice'>The [src] already has a nozzle!</span>")
 	else
-		to_chat(user,"<span class='warning'>The tank scoffs at your insolence. It only provides services to welders.</span>")
+		to_chat(user, "<span class='warning'>The tank scoffs at your insolence. It only provides services to welders.</span>")
 	return
 
 /obj/item/weapon/weldpack/attack_hand(mob/user as mob)
@@ -90,7 +92,7 @@
 				if(!wearer.incapacitated())
 					get_nozzle(user)
 			else
-				to_chat(user,"<span class='notice'>\The [src] does not have a nozzle attached!</span>")
+				to_chat(user, "<span class='notice'>\The [src] does not have a nozzle attached!</span>")
 		else
 			..()
 	else
@@ -101,11 +103,11 @@
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
 		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user,"<span class='notice'>You crack the cap off the top of the pack and fill it back up again from the tank.</span>")
+		to_chat(user, "<span class='notice'>You crack the cap off the top of the pack and fill it back up again from the tank.</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume == max_fuel)
-		to_chat(user,"<span class='warning'>The pack is already full!</span>")
+		to_chat(user, "<span class='warning'>The pack is already full!</span>")
 		return
 
 /obj/item/weapon/weldpack/MouseDrop(obj/over_object as obj) //This is terrifying.
@@ -142,5 +144,16 @@
 
 /obj/item/weapon/weldpack/examine(mob/user)
 	..(user)
-	user << text("\icon[] [] units of fuel left!", src, src.reagents.total_volume)
+	to_chat(user, "\icon[src] [src.reagents.total_volume] units of fuel left!")
 	return
+
+/obj/item/weapon/weldpack/survival
+	name = "emergency welding kit"
+	desc = "A heavy-duty, portable welding fluid carrier."
+	slot_flags = SLOT_BACK
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "welderpack-e"
+	item_state = "welderpack"
+	w_class = ITEMSIZE_LARGE
+	max_fuel = 100
+	nozzle_type = /obj/item/weapon/weldingtool/tubefed/survival

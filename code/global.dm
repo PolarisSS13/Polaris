@@ -8,7 +8,6 @@ var/global/datum/datacore/data_core = null
 var/global/list/all_areas                = list()
 var/global/list/machines                 = list()	// ALL Machines, wether processing or not.
 var/global/list/processing_machines      = list()	// TODO - Move into SSmachines
-var/global/list/processing_objects       = list()
 var/global/list/processing_power_items   = list()	// TODO - Move into SSmachines
 var/global/list/active_diseases          = list()
 var/global/list/hud_icon_reference       = list()
@@ -91,7 +90,6 @@ var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 )
 
 var/datum/configuration/config      = null
-var/datum/sun/sun                   = null
 
 var/list/combatlog = list()
 var/list/IClog     = list()
@@ -109,25 +107,10 @@ var/gravity_is_on = 1
 
 var/join_motd = null
 
-var/datum/nanomanager/nanomanager		= new() // NanoManager, the manager for Nano UIs.
-var/datum/event_manager/event_manager	= new() // Event Manager, the manager for events.
 var/datum/game_master/game_master = new() // Game Master, an AI for choosing events.
 var/datum/metric/metric = new() // Metric datum, used to keep track of the round.
 
 var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
-
-// MySQL configuration
-var/sqladdress = "localhost"
-var/sqlport    = "3306"
-var/sqldb      = "tgstation"
-var/sqllogin   = "root"
-var/sqlpass    = ""
-
-// Feedback gathering sql connection
-var/sqlfdbkdb    = "test"
-var/sqlfdbklogin = "root"
-var/sqlfdbkpass  = ""
-var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.

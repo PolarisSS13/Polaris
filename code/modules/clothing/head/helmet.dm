@@ -6,7 +6,7 @@
 	restricted_accessory_slots = (ACCESSORY_SLOT_HELM_C)
 	flags = THICKMATERIAL
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
-	flags_inv = HIDEEARS|HIDEEYES
+	flags_inv = HIDEEARS|BLOCKHEADHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HEAD
@@ -62,7 +62,6 @@
 	icon_state = "riot"
 	item_state_slots = list(slot_r_hand_str = "swat", slot_l_hand_str = "swat")
 	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
-	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 	valid_accessory_slots = null
 	action_button_name = "Toggle Visor"
@@ -70,10 +69,10 @@
 /obj/item/clothing/head/helmet/riot/attack_self(mob/user as mob)
 	if(src.icon_state == initial(icon_state))
 		src.icon_state = "[icon_state]up"
-		user << "You raise the visor on the riot helmet."
+		to_chat(user, "You raise the visor on the riot helmet.")
 	else
 		src.icon_state = initial(icon_state)
-		user << "You lower the visor on the riot helmet."
+		to_chat(user, "You lower the visor on the riot helmet.")
 	update_clothing_icon()	//so our mob-overlays update
 
 /obj/item/clothing/head/helmet/laserproof
@@ -82,7 +81,6 @@
 	icon_state = "helmet_reflec"
 	item_state_slots = list(slot_r_hand_str = "helmet", slot_l_hand_str = "helmet")
 	armor = list(melee = 10, bullet = 10, laser = 80 ,energy = 50, bomb = 0, bio = 0, rad = 0)
-	flags_inv = HIDEEARS
 	siemens_coefficient = 0.1
 	valid_accessory_slots = null
 
@@ -92,7 +90,6 @@
 	icon_state = "helmet_bulletproof"
 	item_state_slots = list(slot_r_hand_str = "helmet", slot_l_hand_str = "helmet")
 	armor = list(melee = 10, bullet = 80, laser = 10 ,energy = 10, bomb = 0, bio = 0, rad = 0)
-	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7
 	valid_accessory_slots = null
 
@@ -102,16 +99,28 @@
 	icon_state = "helmet_combat"
 	item_state_slots = list(slot_r_hand_str = "helmet", slot_l_hand_str = "helmet")
 	armor = list(melee = 50, bullet = 50, laser = 50 ,energy = 30, bomb = 30, bio = 0, rad = 0)
-	flags_inv = HIDEEARS
+	flags_inv = HIDEEARS|HIDEEYES|BLOCKHEADHAIR
 	siemens_coefficient = 0.6
 	valid_accessory_slots = null
+
+/obj/item/clothing/head/helmet/flexitac
+	name = "tactical light helmet"
+	desc = "A tan helmet made from advanced ceramic with an integrated tactical flashlight."
+	icon_state = "flexitac"
+	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	siemens_coefficient = 0.6
+	brightness_on = 6
+	light_overlay = "helmet_light_dual_green"
+	action_button_name = "Toggle Head-light"
+	min_cold_protection_temperature = T0C - 20
+	cold_protection = HEAD
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
 	desc = "They're often used by highly trained SWAT Officers."
 	icon_state = "swat"
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
-	flags_inv = HIDEEARS|HIDEEYES
+	flags_inv = HIDEEARS|HIDEEYES|BLOCKHEADHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5
@@ -142,8 +151,7 @@
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "gladiator"
 	item_state_slots = list(slot_r_hand_str = "vhelmet", slot_l_hand_str = "vhelmet")
-	flags = BLOCKHAIR
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	siemens_coefficient = 1
 	valid_accessory_slots = null
 
@@ -158,7 +166,7 @@
 		)
 
 	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
-	flags_inv = HIDEEARS
+	flags_inv = HIDEEARS|BLOCKHAIR
 	siemens_coefficient = 0.7
 	valid_accessory_slots = null
 
@@ -168,7 +176,7 @@
 	icon_state = "v62"
 	item_state_slots = list(slot_r_hand_str = "head_m", slot_l_hand_str = "head_m")
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
-	flags_inv = HIDEEARS|HIDEEYES
+	flags_inv = HIDEEARS|HIDEEYES|BLOCKHEADHAIR
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.5

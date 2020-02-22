@@ -14,8 +14,9 @@
 	minimal_player_age = 7
 	account_allowed = 0
 	economic_modifier = 0
+	has_headset = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
-	job_description = "The AI manages oversees the operation of the station and its crew, but has no real authority over them. \
+	job_description = "The AI oversees the operation of the station and its crew, but has no real authority over them. \
 						The AI is required to follow its Laws, and Lawbound Synthetics that are linked to it are expected to follow \
 						the AI's commands, and their own Laws."
 
@@ -25,14 +26,6 @@
 
 // AI procs
 /datum/job/ai/equip(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
-/*
-/datum/job/ai/equip_survival(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
-*/
-/datum/job/ai/equip_backpack(var/mob/living/carbon/human/H)
 	if(!H)	return 0
 	return 1
 
@@ -59,6 +52,7 @@
 	minimal_player_age = 1
 	account_allowed = 0
 	economic_modifier = 0
+	has_headset = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
 	job_description = "A Cyborg is a mobile station synthetic, piloted by a cybernetically preserved brain. It is considered a person, but is still required \
 						to follow its Laws."
@@ -81,15 +75,6 @@
 // Cyborg procs
 /datum/job/cyborg/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
-	return 1
-/*
-/datum/job/cyborg/equip_survival(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
-*/
-/datum/job/cyborg/equip_backpack(var/mob/living/carbon/human/H)
-	if(!H)	return 0
-	return 1
 	return 1
 
 /datum/job/cyborg/equip_preview(mob/living/carbon/human/H)

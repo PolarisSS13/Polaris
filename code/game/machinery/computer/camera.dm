@@ -49,7 +49,7 @@
 		switch_to_camera(user, current_camera)
 	data["map_levels"] = using_map.get_map_levels(src.z)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Console", 900, 800)
 
@@ -92,7 +92,7 @@
 
 /obj/machinery/computer/security/attack_hand(var/mob/user as mob)
 	if (using_map && !(src.z in using_map.contact_levels))
-		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
 		return
 	if(stat & (NOPOWER|BROKEN))	return
 
@@ -152,7 +152,7 @@
 /obj/machinery/computer/security/process()
 	if(cache_id != camera_repository.camera_cache_id)
 		cache_id = camera_repository.camera_cache_id
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 /obj/machinery/computer/security/proc/can_access_camera(var/obj/machinery/camera/C)
 	var/list/shared_networks = src.network & C.network
@@ -225,7 +225,7 @@
 	circuit = /obj/item/weapon/circuitboard/security/telescreen/entertainment
 	var/obj/item/device/radio/radio = null
 
-/obj/machinery/computer/security/telescreen/entertainment/initialize()
+/obj/machinery/computer/security/telescreen/entertainment/Initialize()
 	. = ..()
 	radio = new(src)
 	radio.listening = TRUE
@@ -244,17 +244,17 @@
 
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
-	desc = "An old TV hooked into the stations camera network."
+	desc = "An old TV hooked into the station's camera network."
 	icon_state = "television"
 	icon_keyboard = null
 	icon_screen = "detective_tv"
-	circuit = null
+	circuit = /obj/item/weapon/circuitboard/security/tv
 	light_color = "#3848B3"
 	light_power_on = 0.5
 
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
-	desc = "Used to access the various cameras on the outpost."
+	desc = "Used to watch over mining operations."
 	icon_keyboard = "mining_key"
 	icon_screen = "mining"
 	network = list("Mining Outpost")

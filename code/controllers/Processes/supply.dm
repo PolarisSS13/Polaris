@@ -55,7 +55,10 @@ var/datum/controller/supply/supply_controller = new()
 
 	for(var/typepath in subtypesof(/datum/supply_pack))
 		var/datum/supply_pack/P = new typepath()
-		supply_pack[P.name] = P
+		if(P.name)
+			supply_pack[P.name] = P
+		else
+			qdel(P)
 
 /datum/controller/process/supply/setup()
 	name = "supply controller"
@@ -66,7 +69,7 @@ var/datum/controller/supply/supply_controller = new()
 
 // Supply shuttle ticker - handles supply point regeneration
 // This is called by the process scheduler every thirty seconds
-/datum/controller/supply/proc/process()
+/datum/controller/supply/process()
 	points += points_per_process
 
 //To stop things being sent to CentCom which should not be sent to centcomm. Recursively checks for these types.
@@ -100,6 +103,7 @@ var/datum/controller/supply/supply_controller = new()
 		EC.name = "\proper[MA.name]"
 		EC.value = 0
 		EC.contents = list()
+		var/base_value = 0
 
 		// Must be in a crate!
 		if(istype(MA,/obj/structure/closet/crate))
@@ -107,6 +111,8 @@ var/datum/controller/supply/supply_controller = new()
 			callHook("sell_crate", list(CR, area_shuttle))
 
 			points += CR.points_per_crate
+			if(CR.points_per_crate)
+				base_value = CR.points_per_crate
 			var/find_slip = 1
 
 			for(var/atom/A in CR)
@@ -151,6 +157,7 @@ var/datum/controller/supply/supply_controller = new()
 
 		exported_crates += EC
 		points += EC.value
+		EC.value += base_value
 
 		// Duplicate the receipt for the admin-side log
 		var/datum/exported_crate/adm = new()
@@ -220,8 +227,12 @@ var/datum/controller/supply/supply_controller = new()
 		if(SP.access)
 			if(isnum(SP.access))
 				A.req_access = list(SP.access)
-			else if(islist(SP.access))
+			else if(islist(SP.access) && SP.one_access)
 				var/list/L = SP.access // access var is a plain var, we need a list
+				A.req_one_access = L.Copy()
+				A.req_access.Cut()
+			else if(islist(SP.access) && !SP.one_access)
+				var/list/L = SP.access
 				A.req_access = L.Copy()
 			else
 				log_debug("<span class='danger'>Supply pack with invalid access restriction [SP.access] encountered!</span>")

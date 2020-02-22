@@ -7,6 +7,7 @@
 	level = 1
 
 	name = "Gas filter"
+	desc = "Filters one type of gas from an input, and pushes it out the side."
 
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -105,7 +106,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/trinary/atmos_filter/initialize()
+/obj/machinery/atmospherics/trinary/atmos_filter/Initialize()
 	. = ..()
 	if(frequency)
 		set_frequency(frequency)

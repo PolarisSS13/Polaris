@@ -121,7 +121,7 @@
 			var/mob/living/carbon/human/dummy/mannequin = new()
 			client.prefs.dress_preview_mob(mannequin)
 			var/mob/observer/dead/observer = new(mannequin)
-			observer.forceMove(null) //Let's not stay in our doomed mannequin
+			observer.moveToNullspace() //Let's not stay in our doomed mannequin
 			qdel(mannequin)
 
 			spawning = 1
@@ -132,10 +132,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src,"<span class='notice'>Now teleporting.</span>")
+				to_chat(src, "<span class='notice'>Now teleporting.</span>")
 				observer.forceMove(O.loc)
 			else
-				to_chat(src,"<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>")
+				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the station map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			announce_ghost_joinleave(src)
@@ -154,30 +154,36 @@
 	if(href_list["late_join"])
 
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-			usr << "<font color='red'>The round is either not ready, or has already finished...</font>"
+			to_chat(usr, "<font color='red'>The round is either not ready, or has already finished...</font>")
 			return
-
 		LateChoices()
 
 	if(href_list["manifest"])
 		ViewManifest()
 
 	if(href_list["SelectedJob"])
+	
+		//Prevents people rejoining as same character.
+		for (var/mob/living/carbon/human/C in mob_list)
+			var/char_name = client.prefs.real_name
+			if(char_name == C.real_name)
+				to_chat(usr, "<span class='notice'>There is a character that already exists with the same name - <b>[C.real_name]</b>, please join with a different one.</span>")
+				return
 
 		if(!config.enter_allowed)
-			usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 			return
 		else if(ticker && ticker.mode && ticker.mode.explosion_in_progress)
-			usr << "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>"
+			to_chat(usr, "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>")
 			return
 
-		if(!is_alien_whitelisted(src, all_species[client.prefs.species]))
-			src << alert("You are currently not whitelisted to play [client.prefs.species].")
+		if(!is_alien_whitelisted(src, GLOB.all_species[client.prefs.species]))
+			alert(src, "You are currently not whitelisted to play [client.prefs.species].")
 			return 0
 
-		var/datum/species/S = all_species[client.prefs.species]
+		var/datum/species/S = GLOB.all_species[client.prefs.species]
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
-			src << alert("Your current species, [client.prefs.species], is not available for play on the station.")
+			alert(src,"Your current species, [client.prefs.species], is not available for play on the station.")
 			return 0
 
 		AttemptLateSpawn(href_list["SelectedJob"],client.prefs.spawnpoint)
@@ -218,7 +224,7 @@
 			var/sql = "INSERT INTO erro_privacy VALUES (null, Now(), '[src.ckey]', '[option]')"
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
-			usr << "<b>Thank you for your vote!</b>"
+			to_chat(usr, "<b>Thank you for your vote!</b>")
 			usr << browse(null,"window=privacypoll")
 
 	if(!ready && href_list["preference"])
@@ -256,7 +262,7 @@
 				var/id_max = text2num(href_list["maxid"])
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					usr << "The option ID difference is too big. Please contact administration or the database admin."
+					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -275,7 +281,7 @@
 				var/id_max = text2num(href_list["maxoptionid"])
 
 				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					usr << "The option ID difference is too big. Please contact administration or the database admin."
+					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
 					return
 
 				for(var/optionid = id_min; optionid <= id_max; optionid++)
@@ -296,7 +302,7 @@
 	var/savefile/F = get_server_news()
 	if(F)
 		client.prefs.lastnews = md5(F["body"])
-		client.prefs.save_preferences()
+		SScharacter_setup.queue_preferences_save(client.prefs)
 
 		var/dat = "<html><body><center>"
 		dat += "<h1>[F["title"]]</h1>"
@@ -322,13 +328,13 @@
 	if (src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-		usr << "<font color='red'>The round is either not ready, or has already finished...</font>"
+		to_chat(usr, "<font color='red'>The round is either not ready, or has already finished...</font>")
 		return 0
 	if(!config.enter_allowed)
-		usr << "<span class='notice'>There is an administrative lock on entering the game!</span>"
+		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
 		return 0
 	if(!IsJobAvailable(rank))
-		src << alert("[rank] is not available. Please try another.")
+		alert(src,"[rank] is not available. Please try another.")
 		return 0
 	if(!client)
 		return 0
@@ -447,7 +453,7 @@
 	var/use_species_name
 	var/datum/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = all_species[client.prefs.species]
+		chosen_species = GLOB.all_species[client.prefs.species]
 		use_species_name = chosen_species.get_station_variant() //Only used by pariahs atm.
 
 	if(chosen_species && use_species_name)
@@ -488,7 +494,7 @@
 		new_character.disabilities |= NEARSIGHTED
 
 	for(var/lang in client.prefs.alternate_languages)
-		var/datum/language/chosen_language = all_languages[lang]
+		var/datum/language/chosen_language = GLOB.all_languages[lang]
 		if(chosen_language)
 			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
 				new_character.add_language(lang)
@@ -528,7 +534,7 @@
 /mob/new_player/get_species()
 	var/datum/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = all_species[client.prefs.species]
+		chosen_species = GLOB.all_species[client.prefs.species]
 
 	if(!chosen_species)
 		return SPECIES_HUMAN

@@ -26,7 +26,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	escape_pods = list()
 	..()
 
-/datum/emergency_shuttle_controller/proc/process()
+/datum/emergency_shuttle_controller/process()
 	if (wait_for_launch)
 		if (evac && auto_recall && world.time >= auto_recall_time)
 			recall()
@@ -35,7 +35,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
-				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+				for (var/EP in escape_pods)
+					var/datum/shuttle/ferry/escape_pod/pod
+					if(istype(escape_pods[EP], /datum/shuttle/ferry/escape_pod))
+						pod = escape_pods[EP]
+					else
+						continue
 					if (!pod.arming_controller || pod.arming_controller.armed)
 						pod.launch(src)
 
@@ -57,7 +62,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 		//arm the escape pods
 		if (evac)
-			for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+			for (var/EP in escape_pods)
+				var/datum/shuttle/ferry/escape_pod/pod
+				if(istype(escape_pods[EP], /datum/shuttle/ferry/escape_pod))
+					pod = escape_pods[EP]
+				else
+					continue
 				if (pod.arming_controller)
 					pod.arming_controller.arm()
 
@@ -98,10 +108,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	autopilot = 1
 	set_launch_countdown(get_shuttle_prep_time())
 	auto_recall_time = rand(world.time + 300, launch_time - 300)
-	var/estimated_time = round(estimate_arrival_time()/60,1)
 
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
+	var/estimated_time = round(estimate_arrival_time()/60,1)
 
 	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[estimated_time] minute\s"))
 	atc.shift_ending()
@@ -195,6 +205,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns 1 if the shuttle is not idle at centcom
 /datum/emergency_shuttle_controller/proc/online()
+	if(!shuttle)
+		return FALSE
 	if (!shuttle.location)	//not at centcom
 		return 1
 	if (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)

@@ -22,7 +22,7 @@
 	welder.setWelding(1)
 
 /obj/item/weapon/spell/flame_tongue/Destroy()
-	qdel_null(welder)
+	QDEL_NULL(welder)
 	return ..()
 
 /obj/item/weapon/weldingtool/spell
@@ -44,7 +44,7 @@
 		var/mob/living/L = hit_atom
 		if(pay_energy(1000))
 			visible_message("<span class='danger'>\The [user] reaches out towards \the [L] with the flaming hand, and they ignite!</span>")
-			L << "<span class='danger'>You ignite!</span>"
+			to_chat(L, "<span class='danger'>You ignite!</span>")
 			L.fire_act()
 			log_and_message_admins("has ignited [L] with [src].")
 			adjust_instability(12)

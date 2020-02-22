@@ -34,6 +34,8 @@
 	var/obj/item/weapon/cell/cell
 	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
+	var/paint_color = "#666666" //For vehicles with special paint overlays.
+
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
@@ -50,7 +52,7 @@
 	//spawn the cell you want in each vehicle
 
 /obj/vehicle/Destroy()
-	qdel_null(riding_datum)
+	QDEL_NULL(riding_datum)
 	return ..()
 
 //BUCKLE HOOKS
@@ -78,7 +80,6 @@
 /obj/vehicle/relaymove(mob/user, direction)
 	if(riding_datum)
 		riding_datum.handle_ride(user, direction)
-
 
 /obj/vehicle/Moved()
 	. = ..()
@@ -160,6 +161,10 @@
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.get_structure_damage()
 	..()
+	healthcheck()
+
+/obj/vehicle/proc/adjust_health(amount)
+	health = between(0, health + amount, maxhealth)
 	healthcheck()
 
 /obj/vehicle/ex_act(severity)
@@ -414,6 +419,15 @@
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	user.do_attack_animation(src)
+	src.health -= damage
+	if(mechanical && prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	spawn(1) healthcheck()
+	return 1
+
+/obj/vehicle/take_damage(var/damage)
+	if(!damage)
+		return
 	src.health -= damage
 	if(mechanical && prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)

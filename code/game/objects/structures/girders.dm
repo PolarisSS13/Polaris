@@ -25,12 +25,12 @@
 
 /obj/structure/girder/Destroy()
 	if(girder_material.products_need_process())
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/structure/girder/process()
 	if(!radiate())
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 		return
 
 /obj/structure/girder/proc/radiate()
@@ -38,7 +38,7 @@
 	if(!total_radiation)
 		return
 
-	radiation_repository.radiate(src, total_radiation)
+	SSradiation.radiate(src, total_radiation)
 	return total_radiation
 
 
@@ -53,16 +53,16 @@
 	if(applies_material_colour)
 		color = girder_material.icon_colour
 	if(girder_material.products_need_process()) //Am I radioactive or some other? Process me!
-		processing_objects |= src
-	else if(src in processing_objects) //If I happened to be radioactive or s.o. previously, and am not now, stop processing.
-		processing_objects -= src
+		START_PROCESSING(SSobj, src)
+	else if(datum_flags & DF_ISPROCESSING) //If I happened to be radioactive or s.o. previously, and am not now, stop processing.
+		STOP_PROCESSING(SSobj, src)
 
 /obj/structure/girder/get_material()
 	return girder_material
 
 /obj/structure/girder/update_icon()
 	if(anchored)
-		icon_state = "girder"
+		icon_state = initial(icon_state)
 	else
 		icon_state = "displaced"
 
@@ -83,8 +83,8 @@
 	health = (displaced_health - round(current_damage / 4))
 	cover = 25
 
-/obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
-	if(!damage || !wallbreaker)
+/obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart")
+	if(damage < STRUCTURE_MIN_DAMAGE_THRESHOLD)
 		return 0
 	user.do_attack_animation(src)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
@@ -212,7 +212,7 @@
 	else
 		return ..()
 
-/obj/structure/girder/proc/take_damage(var/damage)
+/obj/structure/girder/take_damage(var/damage)
 	health -= damage
 	if(health <= 0)
 		dismantle()
@@ -317,12 +317,20 @@
 	return
 
 /obj/structure/girder/cult
+	name = "column"
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
+	max_health = 250
 	health = 250
 	cover = 70
-	girder_material = DEFAULT_WALL_MATERIAL
+	girder_material = "cult"
 	applies_material_colour = 0
+
+/obj/structure/girder/cult/update_icon()
+	if(anchored)
+		icon_state = "cultgirder"
+	else
+		icon_state = "displaced"
 
 /obj/structure/girder/cult/dismantle()
 	new /obj/effect/decal/remains/human(get_turf(src))
@@ -346,3 +354,61 @@
 		to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 		new /obj/effect/decal/remains/human(get_turf(src))
 		dismantle()
+
+/obj/structure/girder/resin
+	name = "soft girder"
+	icon_state = "girder_resin"
+	max_health = 225
+	health = 225
+	cover = 60
+	girder_material = "resin"
+
+/obj/structure/girder/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	var/turf/simulated/T = get_turf(src)
+	if(!istype(T) || T.density)
+		return FALSE
+
+	switch(passed_mode)
+		if(RCD_FLOORWALL)
+			// Finishing a wall costs two sheets.
+			var/cost = RCD_SHEETS_PER_MATTER_UNIT * 2
+			// Rwalls cost three to finish.
+			if(the_rcd.make_rwalls)
+				cost += RCD_SHEETS_PER_MATTER_UNIT * 1
+			return list(
+				RCD_VALUE_MODE = RCD_FLOORWALL,
+				RCD_VALUE_DELAY = 2 SECONDS,
+				RCD_VALUE_COST = cost
+			)
+		if(RCD_DECONSTRUCT)
+			return list(
+				RCD_VALUE_MODE = RCD_DECONSTRUCT,
+				RCD_VALUE_DELAY = 2 SECONDS,
+				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 5
+			)
+	return FALSE
+
+/obj/structure/girder/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	var/turf/simulated/T = get_turf(src)
+	if(!istype(T) || T.density) // Should stop future bugs of people bringing girders to centcom and RCDing them, or somehow putting a girder on a durasteel wall and deconning it.
+		return FALSE
+
+	switch(passed_mode)
+		if(RCD_FLOORWALL)
+			to_chat(user, span("notice", "You finish a wall."))
+			// This is mostly the same as using on a floor. The girder's material is preserved, however.
+			T.ChangeTurf(/turf/simulated/wall)
+			var/turf/simulated/wall/new_T = get_turf(src) // Ref to the wall we just built.
+			// Apparently set_material(...) for walls requires refs to the material singletons and not strings.
+			// This is different from how other material objects with their own set_material(...) do it, but whatever.
+			var/material/M = name_to_material[the_rcd.material_to_use]
+			new_T.set_material(M, the_rcd.make_rwalls ? M : null, girder_material)
+			new_T.add_hiddenprint(user)
+			qdel(src)
+			return TRUE
+
+		if(RCD_DECONSTRUCT)
+			to_chat(user, span("notice", "You deconstruct \the [src]."))
+			qdel(src)
+			return TRUE
+

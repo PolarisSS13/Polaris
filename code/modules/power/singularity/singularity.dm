@@ -37,14 +37,14 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 	energy = starting_energy
 
 	..()
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
@@ -403,7 +403,7 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 	if (src.energy>200)
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
-	radiation_repository.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
+	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
@@ -422,11 +422,11 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 			if (istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(istype(H.glasses,/obj/item/clothing/glasses/meson) && current_size != STAGE_SUPER)
-					H << "<span class=\"notice\">You look directly into The [src.name], good thing you had your protective eyewear on!</span>"
+					to_chat(H, "<span class=\"notice\">You look directly into The [src.name], good thing you had your protective eyewear on!</span>")
 					return
 				else
-					H << "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>"
-		M << "<span class='danger'>You look directly into The [src.name] and feel [current_size == STAGE_SUPER ? "helpless" : "weak"].</span>"
+					to_chat(H, "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>")
+		to_chat(M, "<span class='danger'>You look directly into The [src.name] and feel [current_size == STAGE_SUPER ? "helpless" : "weak"].</span>")
 		M.apply_effect(3, STUN)
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='danger'>[] stares blankly at The []!</span>", M, src), 1)
@@ -443,10 +443,10 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
 		else
-			M << "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>"
-			M << "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>"
+			to_chat(M, "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
 			M.dust()
-	radiation_repository.radiate(src, rand(energy))
+	SSradiation.radiate(src, rand(energy))
 	return
 
 /obj/singularity/proc/pulse()

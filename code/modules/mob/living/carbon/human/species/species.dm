@@ -8,6 +8,7 @@
 	var/name												// Species name.
 	var/name_plural											// Pluralized name (since "[name]s" is not always valid)
 	var/blurb = "A completely nondescript species."			// A brief lore summary for use in the chargen screen.
+	var/list/catalogue_data = null							// A list of /datum/category_item/catalogue datums, for the cataloguer, or null.
 
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'		// Normal icon set.
@@ -31,7 +32,8 @@
 	var/tail_animation										// If set, the icon to obtain tail animation states from.
 	var/tail_hair
 
-	var/icon_scale = 1										// Makes the icon larger/smaller.
+	var/icon_scale_x = 1										// Makes the icon wider/thinner.
+	var/icon_scale_y = 1										// Makes the icon taller/shorter.
 
 	var/race_key = 0										// Used for mob icon cache string.
 	var/icon/icon_template									// Used for mob icon generation for non-32x32 species.
@@ -85,6 +87,7 @@
 	var/toxins_mod =    1									// Toxloss modifier
 	var/radiation_mod = 1									// Radiation modifier
 	var/flash_mod =     1									// Stun from blindness modifier.
+	var/flash_burn =    0									// how much damage to take from being flashed if light hypersensitive
 	var/sound_mod =     1									// Stun from sounds, I.E. flashbangs.
 	var/chemOD_mod =	1									// Damage modifier for overdose
 	var/vision_flags = SEE_SELF								// Same flags as glasses.
@@ -139,12 +142,15 @@
 		"Your skin prickles in the heat."
 		)
 
+	var/water_resistance = 0.1								// How wet the species gets from being splashed.
+	var/water_damage_mod = 0								// How much water damage is multiplied by when splashing this species.
 
 	var/passive_temp_gain = 0								// Species will gain this much temperature every second
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE			// Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE		// High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE			// Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE			// Dangerously low pressure.
+	var/safe_pressure = ONE_ATMOSPHERE
 	var/light_dam											// If set, mob will be damaged in light over this value and heal in light below its negative.
 	var/minimum_breath_pressure = 16						// Minimum required pressure for breath, in kPa
 
@@ -192,7 +198,9 @@
 		O_KIDNEYS =	/obj/item/organ/internal/kidneys,
 		O_BRAIN =		/obj/item/organ/internal/brain,
 		O_APPENDIX = /obj/item/organ/internal/appendix,
-		O_EYES =		 /obj/item/organ/internal/eyes
+		O_EYES =		 /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 	var/vision_organ										// If set, this organ is required for vision. Defaults to "eyes" if the species has them.
 	var/dispersed_eyes            // If set, the species will be affected by flashbangs regardless if they have eyes or not, as they see in large areas.
@@ -221,11 +229,25 @@
 
 	var/pass_flags = 0
 
+	var/list/descriptors = list(
+		/datum/mob_descriptor/height,
+		/datum/mob_descriptor/build
+		)
+
 /datum/species/New()
 	if(hud_type)
 		hud = new hud_type()
 	else
 		hud = new()
+
+	// Prep the descriptors for the species
+	if(LAZYLEN(descriptors))
+		var/list/descriptor_datums = list()
+		for(var/desctype in descriptors)
+			var/datum/mob_descriptor/descriptor = new desctype
+			descriptor.comparison_offset = descriptors[desctype]
+			descriptor_datums[descriptor.name] = descriptor
+		descriptors = descriptor_datums
 
 	//If the species has eyes, they are the default vision organ
 	if(!vision_organ && has_organ[O_EYES])
@@ -399,6 +421,10 @@
 
 // Called in life() when the mob has no client.
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+	if(H.stat == CONSCIOUS && H.ai_holder)
+		if(H.resting)
+			H.resting = FALSE
+			H.update_canmove()
 	return
 
 // Called when lying down on a water tile.
@@ -436,3 +462,9 @@
 // Allow species to display interesting information in the human stat panels
 /datum/species/proc/Stat(var/mob/living/carbon/human/H)
 	return
+
+/datum/species/proc/handle_water_damage(var/mob/living/carbon/human/H, var/amount = 0)
+	amount *= 1 - H.get_water_protection()
+	amount *= water_damage_mod
+	if(amount > 0)
+		H.adjustToxLoss(amount)

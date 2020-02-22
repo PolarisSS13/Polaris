@@ -46,8 +46,10 @@ var/global/list/limb_icon_cache = list()
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
 	..()
-	var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[O_EYES]
-	if(eyes) eyes.update_colour()
+
+	if(owner)
+		var/obj/item/organ/internal/eyes/eyes = owner.internal_organs_by_name[O_EYES]
+		if(eyes) eyes.update_colour()
 
 /obj/item/organ/external/head/get_icon()
 	..()
@@ -69,7 +71,8 @@ var/global/list/limb_icon_cache = list()
 		if(should_have_eyes)
 			//And we have them
 			if(eyes)
-				eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
+				if(has_eye_color)
+					eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
 			//They're gone!
 			else
 				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
@@ -110,7 +113,7 @@ var/global/list/limb_icon_cache = list()
 			res.add_overlay(facial_s)
 
 	//Head hair
-	if(owner.h_style && !(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR)))
+	if(owner.h_style)
 		var/style = owner.h_style
 		var/datum/sprite_accessory/hair/hair_style = hair_styles_list[style]
 		if(owner.head && (owner.head.flags_inv & BLOCKHEADHAIR))
@@ -275,5 +278,5 @@ var/list/robot_hud_colours = list("#CFCFCF","#AFAFAF","#8F8F8F","#6F6F6F","#4F4F
 		dam_state = min_dam_state
 	// Apply colour and return product.
 	var/list/hud_colours = (robotic < ORGAN_ROBOT) ? flesh_hud_colours : robot_hud_colours
-	hud_damage_image.color = hud_colours[max(1,min(ceil(dam_state*hud_colours.len),hud_colours.len))]
+	hud_damage_image.color = hud_colours[max(1,min(CEILING(dam_state*hud_colours.len, 1),hud_colours.len))]
 	return hud_damage_image

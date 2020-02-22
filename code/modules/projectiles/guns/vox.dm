@@ -9,22 +9,22 @@
 
 	var/last_regen = 0
 	var/spike_gen_time = 150
-	var/max_spikes = 3
-	var/spikes = 3
+	var/max_spikes = 5
+	var/spikes = 5
 	release_force = 30
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "spikethrower3"
 	item_state = "spikethrower"
-	fire_sound_text = "a strange noise"
 	fire_sound = 'sound/weapons/bladeslice.ogg'
+	fire_sound_text = "a strange noise"
 
 /obj/item/weapon/gun/launcher/spikethrower/New()
 	..()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	last_regen = world.time
 
 /obj/item/weapon/gun/launcher/spikethrower/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	..()
 
 /obj/item/weapon/gun/launcher/spikethrower/process()
@@ -35,7 +35,7 @@
 
 /obj/item/weapon/gun/launcher/spikethrower/examine(mob/user)
 	..(user)
-	user << "It has [spikes] spike\s remaining."
+	to_chat(user, "It has [spikes] spike\s remaining.")
 
 /obj/item/weapon/gun/launcher/spikethrower/update_icon()
 	icon_state = "spikethrower[spikes]"
@@ -65,7 +65,7 @@
 
 	firemodes = list(
 		list(mode_name="stunning", burst=1, fire_delay=null, move_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/stun/darkmatter, charge_cost = 300),
-		list(mode_name="focused", burst=1, fire_delay=null, move_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 600),
+		list(mode_name="focused", burst=1, fire_delay=null, move_delay=null, burst_accuracy=list(30), dispersion=null, projectile_type=/obj/item/projectile/beam/darkmatter, charge_cost = 400),
 		list(mode_name="scatter burst", burst=8, fire_delay=null, move_delay=4, burst_accuracy=list(0, 0, 0, 0, 0, 0, 0, 0), dispersion=list(3, 3, 3, 3, 3, 3, 3, 3, 3), projectile_type=/obj/item/projectile/energy/darkmatter, charge_cost = 300),
 		)
 
@@ -79,9 +79,9 @@
 	damage_type = HALLOSS
 	light_color = "#8837A3"
 
-	muzzle_type = /obj/effect/projectile/darkmatterstun/muzzle
-	tracer_type = /obj/effect/projectile/darkmatterstun/tracer
-	impact_type = /obj/effect/projectile/darkmatterstun/impact
+	muzzle_type = /obj/effect/projectile/muzzle/darkmatterstun
+	tracer_type = /obj/effect/projectile/tracer/darkmatterstun
+	impact_type = /obj/effect/projectile/impact/darkmatterstun
 
 /obj/item/projectile/beam/darkmatter
 	name = "dark matter bolt"
@@ -95,9 +95,9 @@
 
 	embed_chance = 0
 
-	muzzle_type = /obj/effect/projectile/darkmatter/muzzle
-	tracer_type = /obj/effect/projectile/darkmatter/tracer
-	impact_type = /obj/effect/projectile/darkmatter/impact
+	muzzle_type = /obj/effect/projectile/muzzle/darkmatter
+	tracer_type = /obj/effect/projectile/tracer/darkmatter
+	impact_type = /obj/effect/projectile/impact/darkmatter
 
 /obj/item/projectile/energy/darkmatter
 	name = "dark matter pellet"
@@ -112,7 +112,7 @@
 	embed_chance = 0
 
 /*
- * Vox Darkmatter Cannon
+ * Vox Sonic Cannon
  */
 /obj/item/weapon/gun/energy/sonic
 	name = "soundcannon"
@@ -122,7 +122,7 @@
 	w_class = ITEMSIZE_HUGE
 	cell_type = /obj/item/weapon/cell/device/weapon/recharge
 	battery_lock = 1
-	charge_cost = 600
+	charge_cost = 400
 
 	projectile_type=/obj/item/projectile/sonic/weak
 

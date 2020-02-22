@@ -55,6 +55,12 @@
 	else
 		return 0
 
+/obj/machinery/power/proc/viewload()
+	if(powernet)
+		return powernet.viewload
+	else
+		return 0
+
 /obj/machinery/power/proc/disconnect_terminal() // machines without a terminal will just return, no harm no fowl.
 	return
 
@@ -240,7 +246,7 @@
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/O, var/datum/powernet/PN)
-	//world.log << "propagating new network"
+	//to_world_log("propagating new network")
 	var/list/worklist = list()
 	var/list/found_machines = list()
 	var/index = 1

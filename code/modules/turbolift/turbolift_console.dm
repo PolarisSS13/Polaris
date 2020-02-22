@@ -71,7 +71,7 @@
 		return
 	light_up()
 	pressed(user)
-	if(floor == lift.current_floor)
+	if(floor == lift.current_floor && !(lift.target_floor))	//Make sure we're not going anywhere before opening doors
 		lift.open_doors()
 		spawn(3)
 			reset()
@@ -93,6 +93,7 @@
 // Panel. Lists floors (HTML), moves with the elevator, schedules a move to a given floor.
 /obj/structure/lift/panel
 	name = "elevator control panel"
+	desc = "A control panel for moving the elevator. There's a slot for swiping IDs to enable additional controls."
 	icon_state = "panel"
 
 

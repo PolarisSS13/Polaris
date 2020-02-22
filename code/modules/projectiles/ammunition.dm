@@ -3,7 +3,7 @@
 	desc = "A bullet casing."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "s-casing"
-	flags = CONDUCT
+	randpixel = 10
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 1
 	w_class = ITEMSIZE_TINY
@@ -13,14 +13,13 @@
 	var/caliber = ""					//Which kind of guns it can be loaded into
 	var/projectile_type					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null	//The loaded bullet - make it so that the projectiles are created only when needed?
-//	var/spent_icon = null
+	var/caseless = null					//Caseless ammo deletes its self once the projectile is fired.
 
 /obj/item/ammo_casing/New()
 	..()
 	if(ispath(projectile_type))
 		BB = new projectile_type(src)
-	pixel_x = rand(-10, 10)
-	pixel_y = rand(-10, 10)
+	randpixel_xy()
 
 //removes the projectile from the ammo casing
 /obj/item/ammo_casing/proc/expend()
@@ -47,9 +46,7 @@
 			BB.name = "[initial(BB.name)] (\"[label_text]\")"
 
 /obj/item/ammo_casing/update_icon()
-/*	if(spent_icon && !BB)
-		icon_state = spent_icon*/
-	if(!BB) // This is really just a much better way of doing this.
+	if(!BB)
 		icon_state = "[initial(icon_state)]-spent"
 
 /obj/item/ammo_casing/examine(mob/user)
@@ -68,7 +65,6 @@
 	desc = "A magazine for some kind of gun."
 	icon_state = ".357"
 	icon = 'icons/obj/ammo.dmi'
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "syringe_kit"
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
@@ -85,6 +81,8 @@
 
 	var/ammo_type = /obj/item/ammo_casing //ammo type that is initially loaded
 	var/initial_ammo = null
+
+	var/can_remove_ammo = TRUE	// Can this thing have bullets removed one-by-one? As of first implementation, only affects smart magazines
 
 	var/multiple_sprites = 0
 	//because BYOND doesn't support numbers as keys in associative lists
@@ -117,7 +115,7 @@
 			return
 		user.remove_from_mob(C)
 		C.loc = src
-		stored_ammo.Insert(1, C) //add to the head of the list
+		stored_ammo.Add(C)
 		update_icon()
 	if(istype(W, /obj/item/ammo_magazine/clip))
 		var/obj/item/ammo_magazine/clip/L = W
@@ -138,16 +136,39 @@
 	playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 	update_icon()
 
+// This dumps all the bullets right on the floor
 /obj/item/ammo_magazine/attack_self(mob/user)
-	if(!stored_ammo.len)
-		to_chat(user, "<span class='notice'>[src] is already empty!</span>")
+	if(can_remove_ammo)
+		if(!stored_ammo.len)
+			to_chat(user, "<span class='notice'>[src] is already empty!</span>")
+			return
+		to_chat(user, "<span class='notice'>You empty [src].</span>")
+		playsound(user.loc, "casing_sound", 50, 1)
+		spawn(7)
+			playsound(user.loc, "casing_sound", 50, 1)
+		spawn(10)
+			playsound(user.loc, "casing_sound", 50, 1)
+		for(var/obj/item/ammo_casing/C in stored_ammo)
+			C.loc = user.loc
+			C.set_dir(pick(cardinal))
+		stored_ammo.Cut()
+		update_icon()
+	else
+		to_chat(user, "<span class='notice'>\The [src] is not designed to be unloaded.</span>")
 		return
-	to_chat(user, "<span class='notice'>You empty [src].</span>")
-	for(var/obj/item/ammo_casing/C in stored_ammo)
-		C.loc = user.loc
-		C.set_dir(pick(cardinal))
-	stored_ammo.Cut()
-	update_icon()
+
+// This puts one bullet from the magazine into your hand
+/obj/item/ammo_magazine/attack_hand(mob/user)
+	if(can_remove_ammo)	// For Smart Magazines
+		if(user.get_inactive_hand() == src)
+			if(stored_ammo.len)
+				var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+				stored_ammo-=C
+				user.put_in_hands(C)
+				user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+				update_icon()
+				return
+	..()
 
 /obj/item/ammo_magazine/update_icon()
 	if(multiple_sprites)

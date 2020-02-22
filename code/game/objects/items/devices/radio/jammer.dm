@@ -15,7 +15,7 @@ var/global/list/active_radio_jammers = list()
 
 /obj/item/device/radio_jammer
 	name = "subspace jammer"
-	desc = "Primarily for blocking subspace communications, preventing the use of headsets, PDAs, and communicators."
+	desc = "Primarily for blocking subspace communications, preventing the use of headsets, PDAs, and communicators. Also masks suit sensors."	// Added suit sensor jamming
 	icon = 'icons/obj/device.dmi'
 	icon_state = "jammer0"
 	var/active_state = "jammer1"
@@ -24,7 +24,7 @@ var/global/list/active_radio_jammers = list()
 	var/on = 0
 	var/jam_range = 7
 	var/obj/item/weapon/cell/device/weapon/power_source
-	var/tick_cost = 80 // Will last for roughly one minute, as process() ticks every 2 seconds.
+	var/tick_cost = 8 // Will last for roughly ten minutes, as process() ticks every 2 seconds.
 
 	origin_tech = list(TECH_ILLEGAL = 7, TECH_BLUESPACE = 5) //Such technology! Subspace jamming!
 
@@ -35,7 +35,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/Destroy()
 	if(on)
 		turn_off()
-	qdel_null(power_source)
+	QDEL_NULL(power_source)
 	return ..()
 
 /obj/item/device/radio_jammer/get_cell()
@@ -44,7 +44,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/proc/turn_off(mob/user)
 	if(user)
 		to_chat(user,"<span class='warning'>\The [src] deactivates.</span>")
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	active_radio_jammers -= src
 	on = FALSE
 	update_icon()
@@ -52,7 +52,7 @@ var/global/list/active_radio_jammers = list()
 /obj/item/device/radio_jammer/proc/turn_on(mob/user)
 	if(user)
 		to_chat(user,"<span class='notice'>\The [src] is now active.</span>")
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	active_radio_jammers += src
 	on = TRUE
 	update_icon()

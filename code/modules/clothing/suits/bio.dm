@@ -3,13 +3,15 @@
 	name = "bio hood"
 	icon_state = "bio"
 	desc = "A hood that protects the head and face from biological comtaminants."
+	randpixel = 0
+	center_of_mass = null
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0.9
-	item_flags = THICKMATERIAL
-	phoronproof = 1
+	flags = PHORONGUARD
+	item_flags = THICKMATERIAL | ALLOW_SURVIVALFOOD
 
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
@@ -24,8 +26,8 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL|HIDETIE|HIDEHOLSTER
 	siemens_coefficient = 0.9
+	flags = PHORONGUARD
 	item_flags = THICKMATERIAL
-	phoronproof = 1
 
 //Standard biosuit, orange stripe
 /obj/item/clothing/head/bio_hood/general

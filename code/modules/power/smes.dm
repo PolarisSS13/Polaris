@@ -144,11 +144,6 @@
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
 
 		add_avail(output_used)				// add output to powernet (smes side)
-
-		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting(0)
-			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
-			log_game("SMES([x],[y],[z]) Power depleted.")
 	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
@@ -255,7 +250,7 @@
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
-		if (CC.get_amount() <= 10)
+		if (CC.get_amount() < 10)
 			to_chat(user, "<span class='warning'>You need more cables.</span>")
 			building_terminal = 0
 			return 0
@@ -328,7 +323,7 @@
 		data["outputting"] = 0			// smes is not outputting
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

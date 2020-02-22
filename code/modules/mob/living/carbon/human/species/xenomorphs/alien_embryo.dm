@@ -13,7 +13,7 @@
 /obj/item/alien_embryo/New()
 	if(istype(loc, /mob/living))
 		affected_mob = loc
-		processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 		spawn(0)
 			AddInfectionImages(affected_mob)
 	else
@@ -30,7 +30,7 @@
 	if(!affected_mob)	return
 	if(loc != affected_mob)
 		affected_mob.status_flags &= ~(XENO_HOST)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		spawn(0)
 			RemoveInfectionImages(affected_mob)
 			affected_mob = null
@@ -48,25 +48,25 @@
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(1))
-				affected_mob << "<span class='danger'>Your throat feels sore.</span>"
+				to_chat(affected_mob, "<span class='danger'>Your throat feels sore.</span>")
 			if(prob(1))
-				affected_mob << "<span class='danger'>Mucous runs down the back of your throat.</span>"
+				to_chat(affected_mob, "<span class='danger'>Mucous runs down the back of your throat.</span>")
 		if(4)
 			if(prob(1))
 				affected_mob.emote("sneeze")
 			if(prob(1))
 				affected_mob.emote("cough")
 			if(prob(2))
-				affected_mob << "<span class='danger'> Your muscles ache.</span>"
+				to_chat(affected_mob, "<span class='danger'> Your muscles ache.</span>")
 				if(prob(20))
 					affected_mob.take_organ_damage(1)
 			if(prob(2))
-				affected_mob << "<span class='danger'>Your stomach hurts.</span>"
+				to_chat(affected_mob, "<span class='danger'>Your stomach hurts.</span>")
 				if(prob(20))
 					affected_mob.adjustToxLoss(1)
 					affected_mob.updatehealth()
 		if(5)
-			affected_mob << "<span class='danger'>You feel something tearing its way out of your stomach...</span>"
+			to_chat(affected_mob, "<span class='danger'>You feel something tearing its way out of your stomach...</span>")
 			affected_mob.adjustToxLoss(10)
 			affected_mob.updatehealth()
 			if(prob(50))

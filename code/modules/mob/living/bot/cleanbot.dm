@@ -3,7 +3,7 @@
 	desc = "A little cleaning robot, it looks so excited!"
 	icon_state = "cleanbot0"
 	req_one_access = list(access_robotics, access_janitor)
-	botcard_access = list(access_janitor, access_maint_tunnels)
+	botcard_access = list(access_janitor)
 
 	locked = 0 // Start unlocked so roboticist can set them to patrol.
 	wait_if_pulled = 1
@@ -37,6 +37,32 @@
 		ignore_list += g
 		spawn(600)
 			ignore_list -= g
+
+/mob/living/bot/cleanbot/handlePanic()	// Speed modification based on alert level.
+	. = 0
+	switch(get_security_level())
+		if("green")
+			. = 0
+
+		if("yellow")
+			. = 1
+
+		if("violet")
+			. = 1
+
+		if("orange")
+			. = 1
+
+		if("blue")
+			. = 2
+
+		if("red")
+			. = 2
+
+		if("delta")
+			. = 2
+
+	return .
 
 /mob/living/bot/cleanbot/lookForTargets()
 	for(var/obj/effect/decal/cleanable/D in view(world.view, src)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
@@ -113,7 +139,8 @@
 	dat += "Maintenance panel is [open ? "opened" : "closed"]"
 	if(!locked || issilicon(user))
 		dat += "<BR>Cleans Blood: <A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A><BR>"
-		dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
+		if(using_map.bot_patrolling)
+			dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
 	if(open && !locked)
 		dat += "Odd looking screw twiddled: <A href='?src=\ref[src];operation=screw'>[screwloose ? "Yes" : "No"]</A><BR>"
 		dat += "Weird button pressed: <A href='?src=\ref[src];operation=oddbutton'>[oddbutton ? "Yes" : "No"]</A>"
@@ -141,17 +168,17 @@
 			patrol_path = null
 		if("screw")
 			screwloose = !screwloose
-			usr << "<span class='notice'>You twiddle the screw.</span>"
+			to_chat(usr, "<span class='notice'>You twiddle the screw.</span>")
 		if("oddbutton")
 			oddbutton = !oddbutton
-			usr << "<span class='notice'>You press the weird button.</span>"
+			to_chat(usr, "<span class='notice'>You press the weird button.</span>")
 	attack_hand(usr)
 
 /mob/living/bot/cleanbot/emag_act(var/remaining_uses, var/mob/user)
 	. = ..()
 	if(!screwloose || !oddbutton)
 		if(user)
-			user << "<span class='notice'>The [src] buzzes and beeps.</span>"
+			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
 			playsound(src.loc, 'sound/machines/buzzbeep.ogg', 50, 0)
 		oddbutton = 1
 		screwloose = 1
@@ -192,7 +219,7 @@
 		var/turf/T = get_turf(loc)
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
 		A.name = created_name
-		user << "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>"
+		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
 		user.drop_from_inventory(src)
 		qdel(src)
 

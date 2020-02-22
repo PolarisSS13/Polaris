@@ -9,6 +9,7 @@
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
 	circuit = /obj/item/weapon/circuitboard/skills
+	density = 0
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -28,7 +29,7 @@
 	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
-		user << "You insert [O]."
+		to_chat(user, "You insert [O].")
 	else
 		..()
 
@@ -40,7 +41,7 @@
 	if(..())
 		return
 	if (using_map && !(src.z in using_map.contact_levels))
-		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
 		return
 	var/dat
 

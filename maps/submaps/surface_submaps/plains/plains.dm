@@ -8,6 +8,7 @@
 #include "house1.dmm"
 #include "beacons.dmm"
 #include "Epod.dmm"
+#include "Epod2.dmm"
 #include "PascalB.dmm"
 #include "bonfire.dmm"
 #include "Rocky5.dmm"
@@ -68,11 +69,18 @@
 	desc = "A bunch of marker beacons, scattered in a strange pattern."
 	mappath = 'maps/submaps/surface_submaps/plains/beacons.dmm'
 	cost = 5
+	fixed_orientation = TRUE
 
 /datum/map_template/surface/plains/Epod
 	name = "Emergency Pod"
 	desc = "A vacant Emergency pod in the middle of nowhere."
 	mappath = 'maps/submaps/surface_submaps/plains/Epod.dmm'
+	cost = 5
+
+/datum/map_template/surface/plains/Epod2
+	name = "Emergency Pod 2"
+	desc = "A locked Emergency pod in the middle of nowhere."
+	mappath = 'maps/submaps/surface_submaps/plains/Epod2.dmm'
 	cost = 5
 
 /datum/map_template/surface/plains/normal/Rocky2

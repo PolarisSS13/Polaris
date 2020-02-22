@@ -25,6 +25,7 @@
 	var/burn_dam = 0                   // Actual current burn damage.
 	var/last_dam = -1                  // used in healing/processing calculations.
 	var/spread_dam = 0
+	var/thick_skin = 0                 // If a needle has a chance to fail to penetrate.
 
 	// Appearance vars.
 	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.
@@ -148,7 +149,7 @@
 		for(var/obj/item/I in contents)
 			if(istype(I, /obj/item/organ))
 				continue
-			usr << "<span class='danger'>There is \a [I] sticking out of it.</span>"
+			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
 	return
 
 /obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
@@ -410,11 +411,11 @@
 		else return 0
 
 	if(!damage_amount)
-		user << "<span class='notice'>Nothing to fix!</span>"
+		to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
 	if(brute_dam + burn_dam >= ROBOLIMB_REPAIR_CAP)
-		user << "<span class='danger'>The damage is far too severe to patch over externally.</span>"
+		to_chat(user, "<span class='danger'>The damage is far too severe to patch over externally.</span>")
 		return 0
 
 	if(user == src.owner)
@@ -425,12 +426,12 @@
 			grasp = "r_hand"
 
 		if(grasp)
-			user << "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>"
+			to_chat(user, "<span class='warning'>You can't reach your [src.name] while holding [tool] in your [owner.get_bodypart_name(grasp)].</span>")
 			return 0
 
 	user.setClickCooldown(user.get_attack_speed(tool))
 	if(!do_mob(user, owner, 10))
-		user << "<span class='warning'>You must stand still to do that.</span>"
+		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
 		return 0
 
 	switch(damage_type)
@@ -689,7 +690,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(. >= 3 && antibiotics < ANTIBIO_OD)	//INFECTION_LEVEL_THREE
 		if (!(status & ORGAN_DEAD))
 			status |= ORGAN_DEAD
-			owner << "<span class='notice'>You can't feel your [name] anymore...</span>"
+			to_chat(owner, "<span class='notice'>You can't feel your [name] anymore...</span>")
 			owner.update_icons_body()
 			for (var/obj/item/organ/external/child in children)
 				child.germ_level += 110 //Burst of infection from a parent organ becoming necrotic
@@ -936,6 +937,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 			qdel(src)
 
+	if(victim.l_hand)
+		if(istype(victim.l_hand,/obj/item/weapon/material/twohanded)) //if they're holding a two-handed weapon, drop it now they've lost a hand
+			victim.l_hand.update_held_icon()
+	if(victim.r_hand)
+		if(istype(victim.r_hand,/obj/item/weapon/material/twohanded))
+			victim.r_hand.update_held_icon()
+
 /****************************************************
 			   HELPERS
 ****************************************************/
@@ -1008,7 +1016,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		W.germ_level = 0
 	return rval
 
-/obj/item/organ/external/proc/clamp()
+/obj/item/organ/external/proc/organ_clamp()
 	var/rval = 0
 	src.status &= ~ORGAN_BLEEDING
 	for(var/datum/wound/W in wounds)
@@ -1332,12 +1340,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return english_list(flavor_text)
 
 // Returns a list of the clothing (not glasses) that are covering this part
-/obj/item/organ/external/proc/get_covering_clothing()
+/obj/item/organ/external/proc/get_covering_clothing(var/target_covering)	// target_covering checks for mouth/eye coverage
 	var/list/covering_clothing = list()
+
+	if(!target_covering)
+		target_covering = src.body_part
+
 	if(owner)
-		var/list/protective_gear = list(owner.head, owner.wear_mask, owner.wear_suit, owner.w_uniform, owner.gloves, owner.shoes)
+		var/list/protective_gear = list(owner.head, owner.wear_mask, owner.wear_suit, owner.w_uniform, owner.gloves, owner.shoes, owner.glasses)
 		for(var/obj/item/clothing/gear in protective_gear)
-			if(gear.body_parts_covered & src.body_part)
+			if(gear.body_parts_covered & target_covering)
 				covering_clothing |= gear
 			if(LAZYLEN(gear.accessories))
 				for(var/obj/item/clothing/accessory/bling in gear.accessories)

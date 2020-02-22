@@ -29,7 +29,7 @@
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
 	can_cleave = FALSE
-	var hits = 0
+	var/hits = 0
 
 /obj/item/weapon/material/knife/machete/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
 	if(hits > 0)
@@ -45,28 +45,6 @@
 /obj/item/weapon/material/knife/machete/hatchet/unathiknife/afterattack(mob/M as mob, mob/user as mob)
 	hits = initial(hits)
 	..()
-
-// These no longer inherit from hatchets.
-/obj/item/weapon/material/knife/tacknife
-	name = "tactical knife"
-	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "tacknife"
-	item_state = "knife"
-	force_divisor = 0.25 //15 when hardness 60 (steel)
-	attack_verb = list("stabbed", "chopped", "cut")
-	applies_material_colour = 1
-
-/obj/item/weapon/material/knife/tacknife/combatknife
-	name = "combat knife"
-	desc = "If only you had a boot to put it in."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "tacknife"
-	item_state = "knife"
-	force_divisor = 0.34 // 20 with hardness 60 (steel)
-	thrown_force_divisor = 1.75 // 20 with weight 20 (steel)
-	attack_verb = list("sliced", "stabbed", "chopped", "cut")
-	applies_material_colour = 1
 
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"

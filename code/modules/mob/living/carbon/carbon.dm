@@ -1,12 +1,12 @@
-/mob/living/carbon/New()
+/mob/living/carbon/Initialize()
+	. = ..()
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism/bloodstream(500, src)
 	ingested = new/datum/reagents/metabolism/ingested(500, src)
 	touching = new/datum/reagents/metabolism/touch(500, src)
 	reagents = bloodstr
 	if (!default_language && species_language)
-		default_language = all_languages[species_language]
-	..()
+		default_language = GLOB.all_languages[species_language]
 
 /mob/living/carbon/Life()
 	..()
@@ -91,7 +91,7 @@
 		if (H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			H << "<font color='red'>You can't use your [temp.name]</font>"
+			to_chat(H, "<font color='red'>You can't use your [temp.name]</font>")
 			return
 
 	return
@@ -289,7 +289,7 @@
 /mob/living/carbon/can_use_hands()
 	if(handcuffed)
 		return 0
-	if(buckled && ! istype(buckled, /obj/structure/bed/chair)) // buckling does not restrict hands
+	if(buckled && istype(buckled, /obj/structure/bed/nest)) // buckling does not restrict hands
 		return 0
 	return 1
 
@@ -342,17 +342,17 @@
 	set category = "IC"
 
 	if(usr.sleeping)
-		usr << "<font color='red'>You are already sleeping</font>"
+		to_chat(usr, "<font color='red'>You are already sleeping</font>")
 		return
 	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
 		usr.sleeping = 20 //Short nap
 
-/mob/living/carbon/Bump(var/atom/movable/AM, yes)
-	if(now_pushing || !yes)
+/mob/living/carbon/Bump(atom/A)
+	if(now_pushing)
 		return
 	..()
-	if(istype(AM, /mob/living/carbon) && prob(10))
-		src.spread_disease_to(AM, "Contact")
+	if(istype(A, /mob/living/carbon) && prob(10))
+		spread_disease_to(A, "Contact")
 
 /mob/living/carbon/cannot_use_vents()
 	return
@@ -361,9 +361,9 @@
 	if(buckled)
 		return 0
 	stop_pulling()
-	src << "<span class='warning'>You slipped on [slipped_on]!</span>"
+	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
 	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-	Weaken(Floor(stun_duration/2))
+	Weaken(FLOOR(stun_duration/2, 1))
 	return 1
 
 /mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
@@ -373,12 +373,16 @@
 		chem_effects[effect] = magnitude
 
 /mob/living/carbon/get_default_language()
-	if(default_language && can_speak(default_language))
-		return default_language
+	if(default_language)
+		if(can_speak(default_language))
+			return default_language
+		else
+			return GLOB.all_languages[LANGUAGE_GIBBERISH]
 
 	if(!species)
 		return null
-	return species.default_language ? all_languages[species.default_language] : null
+
+	return species.default_language ? GLOB.all_languages[species.default_language] : null
 
 /mob/living/carbon/proc/should_have_organ(var/organ_check)
 	return 0
@@ -387,3 +391,8 @@
 	if(isSynthetic())
 		return 0
 	return !(species.flags & NO_PAIN)
+
+/mob/living/carbon/needs_to_breathe()
+	if(does_not_breathe)
+		return FALSE
+	return ..()

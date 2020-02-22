@@ -73,60 +73,72 @@
 	Click()
 		switch(master.cl.buildmode)
 			if(1) // Basic Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>"
-				usr << "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>"
-				usr << "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>"
-				usr << "<span class='notice'>Left Mouse Button + alt  = Airlock</span>"
-				usr << ""
-				usr << "<span class='notice'>Use the button in the upper left corner to</span>"
-				usr << "<span class='notice'>change the direction of built objects.</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + alt  = Airlock</span>")
+				to_chat(usr, "")
+				to_chat(usr, "<span class='notice'>Use the button in the upper left corner to</span>")
+				to_chat(usr, "<span class='notice'>change the direction of built objects.</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(2) // Adv. Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Set object type</span>"
-				usr << "<span class='notice'>Middle Mouse Button on buildmode button= On/Off object type saying</span>"
-				usr << "<span class='notice'>Middle Mouse Button on turf/obj        = Capture object type</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj          = Place objects</span>"
-				usr << "<span class='notice'>Right Mouse Button                     = Delete objects</span>"
-				usr << "<span class='notice'>Mouse Button + ctrl                    = Copy object type</span>"
-				usr << ""
-				usr << "<span class='notice'>Use the button in the upper left corner to</span>"
-				usr << "<span class='notice'>change the direction of built objects.</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Set object type</span>")
+				to_chat(usr, "<span class='notice'>Middle Mouse Button on buildmode button= On/Off object type saying</span>")
+				to_chat(usr, "<span class='notice'>Middle Mouse Button on turf/obj        = Capture object type</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj          = Place objects</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button                     = Delete objects</span>")
+				to_chat(usr, "<span class='notice'>Mouse Button + ctrl                    = Copy object type</span>")
+				to_chat(usr, "")
+				to_chat(usr, "<span class='notice'>Use the button in the upper left corner to</span>")
+				to_chat(usr, "<span class='notice'>change the direction of built objects.</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(3) // Edit
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Select var(type) & value</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Set var(type) & value</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset var's value</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Select var(type) & value</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Set var(type) & value</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset var's value</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(4) // Throw
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Throw</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Throw</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(5) // Room Build
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf              = Select as point A</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf             = Select as point B</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Change floor/wall type</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf              = Select as point A</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf             = Select as point B</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Change floor/wall type</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(6) // Make Ladders
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf              = Set as upper ladder loc</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf             = Set as lower ladder loc</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf              = Set as upper ladder loc</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf             = Set as lower ladder loc</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(7) // Move Into Contents
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Move into selection</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Move into selection</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 			if(8) // Make Lights
-				usr << "<span class='notice'>***********************************************************</span>"
-				usr << "<span class='notice'>Left Mouse Button on turf/obj/mob      = Make it glow</span>"
-				usr << "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset glowing</span>"
-				usr << "<span class='notice'>Right Mouse Button on buildmode button = Change glow properties</span>"
-				usr << "<span class='notice'>***********************************************************</span>"
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Make it glow</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset glowing</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on buildmode button = Change glow properties</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+			if(9) // Control mobs with ai_holders.
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button on AI mob            = Select/Deselect mob</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + alt on AI mob      = Toggle hostility on mob</span>")
+				to_chat(usr, "<span class='notice'>Left Mouse Button + ctrl on AI mob     = Reset target/following/movement</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on enemy mob        = Command selected mobs to attack mob</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on allied mob       = Command selected mobs to follow mob</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button + shift on any mob  = Command selected mobs to follow mob regardless of faction</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button on tile             = Command selected mobs to move to tile (will cancel if enemies are seen)</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button + shift on tile     = Command selected mobs to reposition to tile (will not be inturrupted by enemies)</span>")
+				to_chat(usr, "<span class='notice'>Right Mouse Button + alt on obj/turfs  = Command selected mobs to attack obj/turf</span>")
+				to_chat(usr, "<span class='notice'>***********************************************************</span>")
 		return 1
 
 /obj/effect/bmode/buildquit
@@ -146,6 +158,7 @@
 	var/obj/effect/bmode/buildmode/buildmode = null
 	var/obj/effect/bmode/buildquit/buildquit = null
 	var/atom/movable/throw_atom = null
+	var/list/selected_mobs = list()
 
 /obj/effect/bmode/buildholder/Destroy()
 	qdel(builddir)
@@ -157,8 +170,20 @@
 	qdel(buildquit)
 	buildquit = null
 	throw_atom = null
+	for(var/mob/living/unit in selected_mobs)
+		deselect_AI_mob(cl, unit)
+	selected_mobs.Cut()
 	cl = null
 	return ..()
+
+/obj/effect/bmode/buildholder/proc/select_AI_mob(client/C, mob/living/unit)
+	selected_mobs += unit
+	C.images += unit.selected_image
+
+/obj/effect/bmode/buildholder/proc/deselect_AI_mob(client/C, mob/living/unit)
+	selected_mobs -= unit
+	C.images -= unit.selected_image
+
 
 /obj/effect/bmode/buildmode
 	icon_state = "buildmode1"
@@ -210,6 +235,9 @@
 				master.cl.buildmode = 8
 				src.icon_state = "buildmode8"
 			if(8)
+				master.cl.buildmode = 9
+				src.icon_state = "buildmode9"
+			if(9)
 				master.cl.buildmode = 1
 				src.icon_state = "buildmode1"
 
@@ -335,10 +363,11 @@
 					qdel(object)
 			else if(pa.Find("ctrl"))
 				holder.buildmode.objholder = object.type
-				user << "<span class='notice'>[object]([object.type]) copied to buildmode.</span>"
+				to_chat(user, "<span class='notice'>[object]([object.type]) copied to buildmode.</span>")
 			if(pa.Find("middle"))
 				holder.buildmode.objholder = text2path("[object.type]")
-				if(holder.buildmode.objsay)	usr << "[object.type]"
+				if(holder.buildmode.objsay)
+					to_chat(usr, "[object.type]")
 
 
 		if(3) // Edit
@@ -347,13 +376,13 @@
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = holder.buildmode.valueholder
 				else
-					user << "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>"
+					to_chat(user, "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>")
 			if(pa.Find("right"))
 				if(object.vars.Find(holder.buildmode.varholder))
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = initial(object.vars[holder.buildmode.varholder])
 				else
-					user << "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>"
+					to_chat(user, "<span class='danger'>[initial(object.name)] does not have a var called '[holder.buildmode.varholder]'</span>")
 
 		if(4) // Throw
 			if(pa.Find("left"))
@@ -366,14 +395,14 @@
 		if(5) // Room build
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as point A.</span>"
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point A.</span>")
 
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as point B.</span>"
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as point B.</span>")
 
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
-				user << "<span class='notice'>A and B set, creating rectangle.</span>"
+				to_chat(user, "<span class='notice'>A and B set, creating rectangle.</span>")
 				holder.buildmode.make_rectangle(
 					holder.buildmode.coordA,
 					holder.buildmode.coordB,
@@ -385,14 +414,14 @@
 		if(6) // Ladders
 			if(pa.Find("left"))
 				holder.buildmode.coordA = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as upper ladder location.</span>"
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as upper ladder location.</span>")
 
 			if(pa.Find("right"))
 				holder.buildmode.coordB = get_turf(object)
-				user << "<span class='notice'>Defined [object] ([object.type]) as lower ladder location.</span>"
+				to_chat(user, "<span class='notice'>Defined [object] ([object.type]) as lower ladder location.</span>")
 
 			if(holder.buildmode.coordA && holder.buildmode.coordB)
-				user << "<span class='notice'>Ladder locations set, building ladders.</span>"
+				to_chat(user, "<span class='notice'>Ladder locations set, building ladders.</span>")
 				var/obj/structure/ladder/A = new /obj/structure/ladder/up(holder.buildmode.coordA)
 				var/obj/structure/ladder/B = new /obj/structure/ladder(holder.buildmode.coordB)
 				A.target_up = B
@@ -416,6 +445,86 @@
 			if(pa.Find("right"))
 				if(object)
 					object.set_light(0, 0, "#FFFFFF")
+		if(9) // AI control
+			if(pa.Find("left"))
+				if(isliving(object))
+					var/mob/living/L = object
+					// Reset processes.
+					if(pa.Find("ctrl"))
+						if(!isnull(L.get_AI_stance())) // Null means there's no AI datum or it has one but is player controlled w/o autopilot on.
+							var/datum/ai_holder/AI = L.ai_holder
+							AI.forget_everything()
+							to_chat(user, span("notice", "\The [L]'s AI has forgotten its target/movement destination/leader."))
+						else
+							to_chat(user, span("warning", "\The [L] is not AI controlled."))
+						return
+
+					// Toggle hostility
+					if(pa.Find("alt"))
+						if(!isnull(L.get_AI_stance()))
+							var/datum/ai_holder/AI = L.ai_holder
+							AI.hostile = !AI.hostile
+							to_chat(user, span("notice", "\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
+						else
+							to_chat(user, span("warning", "\The [L] is not AI controlled."))
+						return
+
+					// Select/Deselect
+					if(!isnull(L.get_AI_stance()))
+						if(L in holder.selected_mobs)
+							holder.deselect_AI_mob(user.client, L)
+							to_chat(user, span("notice", "Deselected \the [L]."))
+						else
+							holder.select_AI_mob(user.client, L)
+							to_chat(user, span("notice", "Selected \the [L]."))
+					else
+						to_chat(user, span("warning", "\The [L] is not AI controlled."))
+
+			if(pa.Find("right"))
+				if(istype(object, /atom)) // Force attack.
+					var/atom/A = object
+
+					if(pa.Find("alt"))
+						var/i = 0
+						for(var/mob/living/unit in holder.selected_mobs)
+							var/datum/ai_holder/AI = unit.ai_holder
+							AI.give_target(A)
+							i++
+						to_chat(user, span("notice", "Commanded [i] mob\s to attack \the [A]."))
+						return
+
+				if(isliving(object)) // Follow or attack.
+					var/mob/living/L = object
+					var/i = 0 // Attacking mobs.
+					var/j = 0 // Following mobs.
+					for(var/mob/living/unit in holder.selected_mobs)
+						var/datum/ai_holder/AI = unit.ai_holder
+						if(L.IIsAlly(unit) || !AI.hostile || pa.Find("shift"))
+							AI.set_follow(L)
+							j++
+						else
+							AI.give_target(L)
+							i++
+					var/message = "Commanded "
+					if(i)
+						message += "[i] mob\s to attack \the [L]"
+						if(j)
+							message += ", and "
+						else
+							message += "."
+					if(j)
+						message += "[j] mob\s to follow \the [L]."
+					to_chat(user, span("notice", message))
+
+				if(isturf(object)) // Move or reposition.
+					var/turf/T = object
+					var/i = 0
+					for(var/mob/living/unit in holder.selected_mobs)
+						var/datum/ai_holder/AI = unit.ai_holder
+						AI.give_destination(T, 1, pa.Find("shift")) // If shift is held, the mobs will not stop moving to attack a visible enemy.
+						i++
+					to_chat(user, span("notice", "Commanded [i] mob\s to move to \the [T]."))
+
 
 /obj/effect/bmode/buildmode/proc/get_path_from_partial_text(default_path)
 	var/desired_path = input("Enter full or partial typepath.","Typepath","[default_path]")

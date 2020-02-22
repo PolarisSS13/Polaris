@@ -24,7 +24,7 @@
 		process()
 		checkReagents()
 	spawn(120)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		sleep(30)
 		if(metal)
 			var/obj/structure/foamedmetal/M = new(src.loc)
@@ -130,6 +130,7 @@
 	anchored = 1
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall."
+	can_atmos_pass = ATMOS_PASS_NO
 	var/metal = 1 // 1 = aluminum, 2 = iron
 
 /obj/structure/foamedmetal/New()
@@ -161,7 +162,7 @@
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else
-		user << "<span class='notice'>You hit the metal foam but bounce off it.</span>"
+		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
 	return
 
 /obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
@@ -177,9 +178,4 @@
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the foamed metal with \the [I].</span>")
 		qdel(src)
 	else
-		user << "<span class='notice'>You hit the metal foam to no effect.</span>"
-
-/obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	if(air_group)
-		return 0
-	return !density
+		to_chat(user, "<span class='notice'>You hit the metal foam to no effect.</span>")

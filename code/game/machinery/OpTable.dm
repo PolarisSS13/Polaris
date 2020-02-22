@@ -48,13 +48,10 @@
 		qdel(src)
 	return
 
-/obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
+/obj/machinery/optable/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	else
-		return 0
+		return TRUE
+	return FALSE
 
 /obj/machinery/optable/MouseDrop_T(obj/O as obj, mob/user as mob)
 
@@ -83,7 +80,7 @@
 	if(C == user)
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
-		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
+		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>")
 	if(C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
@@ -130,9 +127,9 @@
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	check_victim()
 	if(victim && get_turf(victim) == get_turf(src) && victim.lying)
-		usr << "<span class='warning'>\The [src] is already occupied!</span>"
+		to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 		return 0
 	if(patient.buckled)
-		usr << "<span class='notice'>Unbuckle \the [patient] first!</span>"
+		to_chat(usr, "<span class='notice'>Unbuckle \the [patient] first!</span>")
 		return 0
 	return 1

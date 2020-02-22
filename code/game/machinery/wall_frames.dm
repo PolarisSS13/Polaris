@@ -3,7 +3,6 @@
 	desc = "Used for building frames."
 	icon = 'icons/obj/stock_parts.dmi'
 	icon_state = "frame_bitem"
-	flags = CONDUCT
 	var/build_machine_type
 	var/refund_amt = 5
 	var/refund_type = /obj/item/stack/material/steel
@@ -106,6 +105,7 @@
 	desc = "Used for building lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
+	refund_amt = 2	//TFF 17/1/20 - Oversight fix for infinite steel produciton.
 	build_machine_type = /obj/machinery/light_construct
 	reverse = 1
 
@@ -146,4 +146,4 @@
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "fireaxe0101"
 	refund_amt = 4
-	build_machine_type = /obj/structure/closet/fireaxecabinet
+	build_machine_type = /obj/structure/fireaxecabinet

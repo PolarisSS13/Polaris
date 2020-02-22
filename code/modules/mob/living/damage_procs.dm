@@ -10,7 +10,7 @@
 */
 /mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/soaked = 0, var/used_weapon = null, var/sharp = 0, var/edge = 0)
 	if(Debug2)
-		world.log << "## DEBUG: apply_damage() was called on [src], with [damage] damage, and an armor value of [blocked]."
+		to_world_log("## DEBUG: apply_damage() was called on [src], with [damage] damage, and an armor value of [blocked].")
 	if(!damage || (blocked >= 100))
 		return 0
 	if(soaked)
@@ -26,6 +26,9 @@
 			if(COLD_RESISTANCE in mutations)
 				damage = 0
 			adjustFireLoss(damage * blocked)
+		if(SEARING)
+			apply_damage(damage / 3, BURN, def_zone, blocked, soaked, used_weapon, sharp, edge)
+			apply_damage(damage / 3 * 2, BRUTE, def_zone, blocked, soaked, used_weapon, sharp, edge)
 		if(TOX)
 			adjustToxLoss(damage * blocked)
 		if(OXY)
@@ -36,6 +39,11 @@
 			adjustHalLoss(damage * blocked)
 		if(ELECTROCUTE)
 			electrocute_act(damage, used_weapon, 1.0, def_zone)
+		if(BIOACID)
+			if(isSynthetic())
+				adjustFireLoss(damage * blocked)
+			else
+				adjustToxLoss(damage * blocked)
 	flash_weak_pain()
 	updatehealth()
 	return 1
@@ -56,7 +64,7 @@
 
 /mob/living/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0, var/check_protection = 1)
 	if(Debug2)
-		world.log << "## DEBUG: apply_effect() was called.  The type of effect is [effecttype].  Blocked by [blocked]."
+		to_world_log("## DEBUG: apply_effect() was called.  The type of effect is [effecttype].  Blocked by [blocked].")
 	if(!effect || (blocked >= 100))
 		return 0
 	blocked = (100-blocked)/100

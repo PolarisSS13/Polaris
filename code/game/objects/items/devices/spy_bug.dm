@@ -4,7 +4,6 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "camgrenade"
 	item_state = "empgrenade"
-	flags = CONDUCT
 	w_class = ITEMSIZE_SMALL
 	force = 0
 	throwforce = 5.0
@@ -50,7 +49,6 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "camgrenadebroken"
 	item_state = "empgrenade"
-	flags = CONDUCT
 	force = 5.0
 	w_class = ITEMSIZE_SMALL
 	throwforce = 5.0
@@ -62,13 +60,12 @@
 	name = "broken bug"
 	desc = ""	//Even when it's broken it's inconspicuous
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "eshield0"
+	icon_state = "eshield"
 	item_state = "nothing"
 	layer = TURF_LAYER+0.2
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
 	origin_tech = list(TECH_ENGINEERING = 1, TECH_ILLEGAL = 3) //crush it and you lose the data
-	flags = CONDUCT
 	force = 0
 	throwforce = 5.0
 	throw_range = 15
@@ -78,7 +75,7 @@
 	name = "bug"
 	desc = ""	//Nothing to see here
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "eshield0"
+	icon_state = "eshield"
 	item_state = "nothing"
 	layer = TURF_LAYER+0.2
 	w_class = ITEMSIZE_TINY

@@ -141,23 +141,24 @@
 	store_items = 0
 	var/used = 0
 	var/obj/item/weapon/tank/tank = null
+	var/tank_type = /obj/item/weapon/tank/stasis/oxygen
 	var/stasis_level = 3 //Every 'this' life ticks are applied to the mob (when life_ticks%stasis_level == 1)
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
-/obj/structure/closet/body_bag/cryobag/New()
-	tank = new /obj/item/weapon/tank/emergency/oxygen/double(null) //It's in nullspace to prevent ejection when the bag is opened.
+/obj/structure/closet/body_bag/cryobag/Initialize()
+	tank = new tank_type(null) //It's in nullspace to prevent ejection when the bag is opened.
 	..()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
-	qdel_null(syringe)
-	qdel_null(tank)
+	QDEL_NULL(syringe)
+	QDEL_NULL(tank)
 	return ..()
 
 /obj/structure/closet/body_bag/cryobag/open()
 	. = ..()
 	if(used)
 		var/obj/item/O = new/obj/item(src.loc)
-		O.name = "used stasis bag"
+		O.name = "used [name]"
 		O.icon = src.icon
 		O.icon_state = "bodybag_used"
 		O.desc = "Pretty useless now..."

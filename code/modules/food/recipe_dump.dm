@@ -16,7 +16,7 @@
 		qdel(CR)
 
 	//////////////////////// FOOD
-	var/list/food_recipes = typesof(/datum/recipe) - /datum/recipe
+	var/list/food_recipes = typesof(/datum/recipe/microwave) - /datum/recipe/microwave
 	//Build a useful list
 	for(var/Rp in food_recipes)
 		//Lists don't work with datum-stealing no-instance initial() so we have to.
@@ -68,14 +68,14 @@
 	//Reagents can be resolved to nicer names as well
 	for(var/Rp in food_recipes)
 		for(var/rid in food_recipes[Rp]["Reagents"])
-			var/datum/reagent/Rd = chemical_reagents_list[rid]
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
 			var/R_name = Rd.name
 			var/amt = food_recipes[Rp]["Reagents"][rid]
 			food_recipes[Rp]["Reagents"] -= rid
 			food_recipes[Rp]["Reagents"][R_name] = amt
 	for(var/Rp in drink_recipes)
 		for(var/rid in drink_recipes[Rp]["Reagents"])
-			var/datum/reagent/Rd = chemical_reagents_list[rid]
+			var/datum/reagent/Rd = SSchemistry.chemical_reagents[rid]
 			var/R_name = Rd.name
 			var/amt = drink_recipes[Rp]["Reagents"][rid]
 			drink_recipes[Rp]["Reagents"] -= rid
@@ -214,4 +214,4 @@
 	html += "</table></body></html>"
 	src << browse(html, "window=recipes;file=recipes_drinks.html;display=0")
 
-	src << "<span class='notice'>In your byond cache, recipe-xxx.png files and recipes_drinks.html and recipes_food.html now exist. Place recipe-xxx.png files in a subfolder named 'imgrecipes' wherever you put them. The file will take a food.css or drinks.css file if in the same path.</span>"
+	to_chat(src, "<span class='notice'>In your byond cache, recipe-xxx.png files and recipes_drinks.html and recipes_food.html now exist. Place recipe-xxx.png files in a subfolder named 'imgrecipes' wherever you put them. The file will take a food.css or drinks.css file if in the same path.</span>")

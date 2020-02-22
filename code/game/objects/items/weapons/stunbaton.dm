@@ -9,6 +9,7 @@
 	sharp = 0
 	edge = 0
 	throwforce = 7
+	flags = NOCONDUCT
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
@@ -18,6 +19,7 @@
 	var/status = 0		//whether the thing is on or not
 	var/obj/item/weapon/cell/bcell = null
 	var/hitcost = 240
+	var/use_external_power = FALSE //only used to determine if it's a cyborg baton
 
 /obj/item/weapon/melee/baton/New()
 	..()
@@ -103,23 +105,25 @@
 		return
 
 	if(bcell)
-		user <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
+		to_chat(user, "<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>")
 	if(!bcell)
-		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
+		to_chat(user, "<span class='warning'>The baton does not have a power source installed.</span>")
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
+	if(use_external_power)
+		return
 	if(istype(W, /obj/item/weapon/cell))
 		if(istype(W, /obj/item/weapon/cell/device))
 			if(!bcell)
 				user.drop_item()
 				W.loc = src
 				bcell = W
-				user << "<span class='notice'>You install a cell in [src].</span>"
+				to_chat(user, "<span class='notice'>You install a cell in [src].</span>")
 				update_icon()
 			else
-				user << "<span class='notice'>[src] already has a cell.</span>"
+				to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
 		else
-			user << "<span class='notice'>This cell is not fitted for [src].</span>"
+			to_chat(user, "<span class='notice'>This cell is not fitted for [src].</span>")
 
 /obj/item/weapon/melee/baton/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -127,7 +131,7 @@
 			bcell.update_icon()
 			user.put_in_hands(bcell)
 			bcell = null
-			user << "<span class='notice'>You remove the cell from the [src].</span>"
+			to_chat(user, "<span class='notice'>You remove the cell from the [src].</span>")
 			status = 0
 			update_icon()
 			return
@@ -136,22 +140,27 @@
 		return ..()
 
 /obj/item/weapon/melee/baton/attack_self(mob/user)
+	if(use_external_power)
+		//try to find our power cell
+		var/mob/living/silicon/robot/R = loc
+		if (istype(R))
+			bcell = R.cell
 	if(bcell && bcell.charge > hitcost)
 		status = !status
-		user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
+		to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
 		playsound(loc, "sparks", 75, 1, -1)
 		update_icon()
 	else
 		status = 0
 		if(!bcell)
-			user << "<span class='warning'>[src] does not have a power source!</span>"
+			to_chat(user, "<span class='warning'>[src] does not have a power source!</span>")
 		else
-			user << "<span class='warning'>[src] is out of charge.</span>"
+			to_chat(user, "<span class='warning'>[src] is out of charge.</span>")
 	add_fingerprint(user)
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
 	if(status && (CLUMSY in user.mutations) && prob(50))
-		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
+		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
 		user.Weaken(30)
 		deductcharge(hitcost)
 		return
@@ -169,7 +178,7 @@
 		var/mob/living/carbon/human/H = target
 		affecting = H.get_organ(hit_zone)
 
-	if(user.a_intent == I_HURT || user.a_intent == I_DISARM)
+	if(user.a_intent == I_GRAB || user.a_intent == I_HURT)
 		. = ..()
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		agony *= 0.5
@@ -204,16 +213,7 @@
 //secborg stun baton module
 /obj/item/weapon/melee/baton/robot
 	hitcost = 500
-
-/obj/item/weapon/melee/baton/robot/attack_self(mob/user)
-	//try to find our power cell
-	var/mob/living/silicon/robot/R = loc
-	if (istype(R))
-		bcell = R.cell
-	return ..()
-
-/obj/item/weapon/melee/baton/robot/attackby(obj/item/weapon/W, mob/user)
-	return
+	use_external_power = TRUE
 
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/weapon/melee/baton/cattleprod
@@ -236,12 +236,12 @@
 				user.drop_item()
 				W.loc = src
 				bcell = W
-				user << "<span class='notice'>You install a cell in [src].</span>"
+				to_chat(user, "<span class='notice'>You install a cell in [src].</span>")
 				update_icon()
 			else
-				user << "<span class='notice'>[src] already has a cell.</span>"
+				to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
 		else
-			user << "<span class='notice'>This cell is not fitted for [src].</span>"
+			to_chat(user, "<span class='notice'>This cell is not fitted for [src].</span>")
 
 /obj/item/weapon/melee/baton/get_description_interaction()
 	var/list/results = list()
@@ -269,19 +269,9 @@
 
 /obj/item/weapon/melee/baton/shocker/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	..(target, user, hit_zone)
-	if(istype(target, /mob/living/simple_animal) && status)
-		var/mob/living/simple_animal/SA = target
-		SA.taunt(user)
+	if(status && target.has_AI())
+		target.taunt(user)
 
 // Borg version, for the lost module.
 /obj/item/weapon/melee/baton/shocker/robot
-
-/obj/item/weapon/melee/baton/shocker/robot/attack_self(mob/user)
-	//try to find our power cell
-	var/mob/living/silicon/robot/R = loc
-	if (istype(R))
-		bcell = R.cell
-	return ..()
-
-/obj/item/weapon/melee/baton/shocker/robot/attackby(obj/item/weapon/W, mob/user)
-	return
+	use_external_power = TRUE

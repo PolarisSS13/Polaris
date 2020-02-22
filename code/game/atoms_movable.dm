@@ -4,6 +4,7 @@
 	var/last_move = null
 	var/anchored = 0
 	// var/elevation = 2    - not used anywhere
+	var/moving_diagonally
 	var/move_speed = 10
 	var/l_move_time = 1
 	var/m_flag = 1
@@ -15,9 +16,13 @@
 	var/moved_recently = 0
 	var/mob/pulledby = null
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
-	var/icon_scale = 1 // Used to scale icons up or down in update_transform().
+	var/icon_scale_x = 1 // Used to scale icons up or down horizonally in update_transform().
+	var/icon_scale_y = 1 // Used to scale icons up or down vertically in update_transform().
+	var/icon_rotation = 0 // Used to rotate icons in update_transform()
 	var/old_x = 0
 	var/old_y = 0
+	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
+	var/movement_type = NONE
 
 /atom/movable/Destroy()
 	. = ..()
@@ -30,7 +35,7 @@
 	if(opacity && isturf(loc))
 		un_opaque = loc
 
-	loc = null
+	moveToNullspace()
 	if(un_opaque)
 		un_opaque.recalc_atom_opacity()
 	if (pulledby)
@@ -38,51 +43,259 @@
 			pulledby.pulling = null
 		pulledby = null
 
-/atom/movable/Bump(var/atom/A, yes)
-	if(src.throwing)
-		src.throw_impact(A)
-		src.throwing = 0
+/atom/movable/vv_edit_var(var_name, var_value)
+	if(GLOB.VVpixelmovement[var_name])			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
+		return FALSE
+	return ..()
 
-	spawn(0)
-		if ((A && yes))
-			A.last_bumped = world.time
-			A.Bumped(src)
+////////////////////////////////////////
+// Here's where we rewrite how byond handles movement except slightly different
+// To be removed on step_ conversion
+// All this work to prevent a second bump
+/atom/movable/Move(atom/newloc, direct=0)
+	. = FALSE
+	if(!newloc || newloc == loc)
 		return
-	..()
+
+	if(!direct)
+		direct = get_dir(src, newloc)
+	set_dir(direct)
+
+	if(!loc.Exit(src, newloc))
+		return
+
+	if(!newloc.Enter(src, src.loc))
+		return
+
+	if(!check_multi_tile_move_density_dir(direct, locs))	// We're big, and we can't move that way.
+		return
+
+	// Past this is the point of no return
+	if(!locs || locs.len <= 1)	// We're not a multi-tile object.
+		var/atom/oldloc = loc
+		var/area/oldarea = get_area(oldloc)
+		var/area/newarea = get_area(newloc)
+		loc = newloc
+		. = TRUE
+		oldloc.Exited(src, newloc)
+		if(oldarea != newarea)
+			oldarea.Exited(src, newloc)
+
+		for(var/i in oldloc)
+			if(i == src) // Multi tile objects
+				continue
+			var/atom/movable/thing = i
+			thing.Uncrossed(src)
+
+		newloc.Entered(src, oldloc)
+		if(oldarea != newarea)
+			newarea.Entered(src, oldloc)
+
+		for(var/i in loc)
+			if(i == src) // Multi tile objects
+				continue
+			var/atom/movable/thing = i
+			thing.Crossed(src)
+
+	else if(newloc)	// We're a multi-tile object.
+		. = doMove(newloc)
+
+//
+////////////////////////////////////////
+
+/atom/movable/Move(atom/newloc, direct = 0)
+	if(!loc || !newloc)
+		return FALSE
+	var/atom/oldloc = loc
+
+	if(loc != newloc)
+		if(!direct)
+			direct = get_dir(oldloc, newloc)
+		if (!(direct & (direct - 1))) //Cardinal move
+			. = ..()
+		else //Diagonal move, split it into cardinal moves
+			moving_diagonally = FIRST_DIAG_STEP
+			var/first_step_dir
+			// The `&& moving_diagonally` checks are so that a forceMove taking
+			// place due to a Crossed, Bumped, etc. call will interrupt
+			// the second half of the diagonal movement, or the second attempt
+			// at a first half if step() fails because we hit something.
+			if (direct & NORTH)
+				if (direct & EAST)
+					if (step(src, NORTH) && moving_diagonally)
+						first_step_dir = NORTH
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, EAST)
+					else if (moving_diagonally && step(src, EAST))
+						first_step_dir = EAST
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, NORTH)
+				else if (direct & WEST)
+					if (step(src, NORTH) && moving_diagonally)
+						first_step_dir = NORTH
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, WEST)
+					else if (moving_diagonally && step(src, WEST))
+						first_step_dir = WEST
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, NORTH)
+			else if (direct & SOUTH)
+				if (direct & EAST)
+					if (step(src, SOUTH) && moving_diagonally)
+						first_step_dir = SOUTH
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, EAST)
+					else if (moving_diagonally && step(src, EAST))
+						first_step_dir = EAST
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, SOUTH)
+				else if (direct & WEST)
+					if (step(src, SOUTH) && moving_diagonally)
+						first_step_dir = SOUTH
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, WEST)
+					else if (moving_diagonally && step(src, WEST))
+						first_step_dir = WEST
+						moving_diagonally = SECOND_DIAG_STEP
+						. = step(src, SOUTH)
+			if(moving_diagonally == SECOND_DIAG_STEP)
+				if(!.)
+					set_dir(first_step_dir)
+				//else if (!inertia_moving)
+				//	inertia_next_move = world.time + inertia_move_delay
+				//	newtonian_move(direct)
+			moving_diagonally = 0
+			return
+
+	if(!loc || (loc == oldloc && oldloc != newloc))
+		last_move = 0
+		return
+
+	if(.)
+		Moved(oldloc, direct)
+
+	//Polaris stuff
+	move_speed = world.time - l_move_time
+	l_move_time = world.time
+	m_flag = 1
+	//End
+
+	last_move = direct
+	set_dir(direct)
+	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc,direct)) //movement failed due to buckled mob(s)
+		return FALSE
+
+//Called after a successful Move(). By this point, we've already moved
+/atom/movable/proc/Moved(atom/OldLoc, Dir, Forced = FALSE)
+	//if (!inertia_moving)
+	//	inertia_next_move = world.time + inertia_move_delay
+	//	newtonian_move(Dir)
+	//if (length(client_mobs_in_contents))
+	//	update_parallax_contents()
+
+	return TRUE
+
+// Make sure you know what you're doing if you call this, this is intended to only be called by byond directly.
+// You probably want CanPass()
+/atom/movable/Cross(atom/movable/AM)
+	. = TRUE
+	return CanPass(AM, loc)
+
+/atom/movable/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(locs && locs.len >= 2)	// If something is standing on top of us, let them pass.
+		if(mover.loc in locs)
+			. = TRUE
+	return .
+
+//oldloc = old location on atom, inserted when forceMove is called and ONLY when forceMove is called!
+/atom/movable/Crossed(atom/movable/AM, oldloc)
 	return
 
+/atom/movable/Uncross(atom/movable/AM, atom/newloc)
+	. = ..()
+	if(isturf(newloc) && !CheckExit(AM, newloc))
+		return FALSE
+
+/atom/movable/Bump(atom/A)
+	if(!A)
+		CRASH("Bump was called with no argument.")
+	. = ..()
+	if(throwing)
+		throw_impact(A)
+		throwing = 0
+		if(QDELETED(A))
+			return
+	A.Bumped(src)
+	A.last_bumped = world.time
+
 /atom/movable/proc/forceMove(atom/destination)
-	if(loc == destination)
-		return 0
-	var/is_origin_turf = isturf(loc)
-	var/is_destination_turf = isturf(destination)
-	// It is a new area if:
-	//  Both the origin and destination are turfs with different areas.
-	//  When either origin or destination is a turf and the other is not.
-	var/is_new_area = (is_origin_turf ^ is_destination_turf) || (is_origin_turf && is_destination_turf && loc.loc != destination.loc)
-
-	var/atom/origin = loc
-	loc = destination
-
-	if(origin)
-		origin.Exited(src, destination)
-		if(is_origin_turf)
-			for(var/atom/movable/AM in origin)
-				AM.Uncrossed(src)
-			if(is_new_area && is_origin_turf)
-				origin.loc.Exited(src, destination)
-
+	. = FALSE
 	if(destination)
-		destination.Entered(src, origin)
-		if(is_destination_turf) // If we're entering a turf, cross all movable atoms
-			for(var/atom/movable/AM in loc)
-				if(AM != src)
-					AM.Crossed(src)
-			if(is_new_area && is_destination_turf)
-				destination.loc.Entered(src, origin)
+		. = doMove(destination)
+	else
+		CRASH("No valid destination passed into forceMove")
 
-	Moved(origin)
-	return 1
+/atom/movable/proc/moveToNullspace()
+	return doMove(null)
+
+/atom/movable/proc/doMove(atom/destination)
+	. = FALSE
+	if(destination)
+		var/atom/oldloc = loc
+		var/same_loc = oldloc == destination
+		var/area/old_area = get_area(oldloc)
+		var/area/destarea = get_area(destination)
+
+		loc = destination
+		moving_diagonally = 0
+
+		if(!same_loc)
+			if(oldloc)
+				oldloc.Exited(src, destination)
+				if(old_area && old_area != destarea)
+					old_area.Exited(src, destination)
+			for(var/atom/movable/AM in oldloc)
+				AM.Uncrossed(src)
+			var/turf/oldturf = get_turf(oldloc)
+			var/turf/destturf = get_turf(destination)
+			var/old_z = (oldturf ? oldturf.z : null)
+			var/dest_z = (destturf ? destturf.z : null)
+			if (old_z != dest_z)
+				onTransitZ(old_z, dest_z)
+			destination.Entered(src, oldloc)
+			if(destarea && old_area != destarea)
+				destarea.Entered(src, oldloc)
+
+			for(var/atom/movable/AM in destination)
+				if(AM == src)
+					continue
+				AM.Crossed(src, oldloc)
+
+		// Break pulling if we are too far to pull now.
+		if(pulledby && (pulledby.z != src.z || get_dist(pulledby, src) > 1))
+			pulledby.stop_pulling()
+
+		Moved(oldloc, NONE, TRUE)
+		. = TRUE
+
+	//If no destination, move the atom into nullspace (don't do this unless you know what you're doing)
+	else
+		. = TRUE
+		if (loc)
+			var/atom/oldloc = loc
+			var/area/old_area = get_area(oldloc)
+			oldloc.Exited(src, null)
+			if(old_area)
+				old_area.Exited(src, null)
+		loc = null
+
+/atom/movable/proc/onTransitZ(old_z,new_z)
+	GLOB.z_moved_event.raise_event(src, old_z, new_z)
+	for(var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
+		var/atom/movable/AM = item
+		AM.onTransitZ(old_z,new_z)
+/////////////////////////////////////////////////////////////////
 
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, var/speed)
@@ -117,7 +330,7 @@
 				// Special handling of windows, which are dense but block only from some directions
 				if(istype(A, /obj/structure/window))
 					var/obj/structure/window/W = A
-					if (!W.is_full_window() && !(turn(src.last_move, 180) & A.dir))
+					if (!W.is_fulltile() && !(turn(src.last_move, 180) & A.dir))
 						continue
 				// Same thing for (closed) windoors, which have the same problem
 				else if(istype(A, /obj/machinery/door/window) && !(turn(src.last_move, 180) & A.dir))
@@ -125,16 +338,22 @@
 				src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
-	if(!target || !src)	return 0
+	if(!target || !src)
+		return 0
+	if(target.z != src.z)
+		return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
-
 	src.throwing = 1
 	src.thrower = thrower
 	src.throw_source = get_turf(src)	//store the origin turf
-
+	src.pixel_z = 0
 	if(usr)
 		if(HULK in usr.mutations)
 			src.throwing = 2 // really strong throw!
+
+	var/dist_travelled = 0
+	var/dist_since_sleep = 0
+	var/area/a = get_area(src.loc)
 
 	var/dist_x = abs(target.x - src.x)
 	var/dist_y = abs(target.y - src.y)
@@ -150,77 +369,57 @@
 		dy = NORTH
 	else
 		dy = SOUTH
-	var/dist_travelled = 0
-	var/dist_since_sleep = 0
-	var/area/a = get_area(src.loc)
+
+	var/error
+	var/major_dir
+	var/major_dist
+	var/minor_dir
+	var/minor_dist
 	if(dist_x > dist_y)
-		var/error = dist_x/2 - dist_y
-
-
-
-		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
-			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
-			if(error < 0)
-				var/atom/step = get_step(src, dy)
-				if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
-					break
-				src.Move(step)
-				hit_check(speed)
-				error += dist_x
-				dist_travelled++
-				dist_since_sleep++
-				if(dist_since_sleep >= speed)
-					dist_since_sleep = 0
-					sleep(1)
-			else
-				var/atom/step = get_step(src, dx)
-				if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
-					break
-				src.Move(step)
-				hit_check(speed)
-				error -= dist_y
-				dist_travelled++
-				dist_since_sleep++
-				if(dist_since_sleep >= speed)
-					dist_since_sleep = 0
-					sleep(1)
-			a = get_area(src.loc)
+		error = dist_x/2 - dist_y
+		major_dir = dx
+		major_dist = dist_x
+		minor_dir = dy
+		minor_dist = dist_y
 	else
-		var/error = dist_y/2 - dist_x
-		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
-			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
-			if(error < 0)
-				var/atom/step = get_step(src, dx)
-				if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
-					break
-				src.Move(step)
-				hit_check(speed)
-				error += dist_y
-				dist_travelled++
-				dist_since_sleep++
-				if(dist_since_sleep >= speed)
-					dist_since_sleep = 0
-					sleep(1)
-			else
-				var/atom/step = get_step(src, dy)
-				if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
-					break
-				src.Move(step)
-				hit_check(speed)
-				error -= dist_x
-				dist_travelled++
-				dist_since_sleep++
-				if(dist_since_sleep >= speed)
-					dist_since_sleep = 0
-					sleep(1)
+		error = dist_y/2 - dist_x
+		major_dir = dy
+		major_dist = dist_y
+		minor_dir = dx
+		minor_dist = dist_x
 
-			a = get_area(src.loc)
+	while(src && target && src.throwing && istype(src.loc, /turf) \
+		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
+		  	   || (a && a.has_gravity == 0) \
+			   || istype(src.loc, /turf/space)))
+		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
+		var/atom/step
+		if(error >= 0)
+			step = get_step(src, major_dir)
+			error -= minor_dist
+		else
+			step = get_step(src, minor_dir)
+			error += major_dist
+		if(!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
+			break
+		src.Move(step)
+		hit_check(speed)
+		dist_travelled++
+		dist_since_sleep++
+		if(dist_since_sleep >= speed)
+			dist_since_sleep = 0
+			sleep(1)
+		a = get_area(src.loc)
+		// and yet it moves
+		if(src.does_spin)
+			src.SpinAnimation(speed = 4, loops = 1)
 
 	//done throwing, either because it hit something or it finished moving
 	if(isobj(src)) src.throw_impact(get_turf(src),speed)
 	src.throwing = 0
 	src.thrower = null
 	src.throw_source = null
+	fall()
 
 
 //Overlays
@@ -289,10 +488,24 @@
 
 /atom/movable/proc/update_transform()
 	var/matrix/M = matrix()
-	M.Scale(icon_scale)
+	M.Scale(icon_scale_x, icon_scale_y)
+	M.Turn(icon_rotation)
 	src.transform = M
 
 // Use this to set the object's scale.
-/atom/movable/proc/adjust_scale(new_scale)
-	icon_scale = new_scale
+/atom/movable/proc/adjust_scale(new_scale_x, new_scale_y)
+	if(isnull(new_scale_y))
+		new_scale_y = new_scale_x
+	if(new_scale_x != 0)
+		icon_scale_x = new_scale_x
+	if(new_scale_y != 0)
+		icon_scale_y = new_scale_y
 	update_transform()
+
+/atom/movable/proc/adjust_rotation(new_rotation)
+	icon_rotation = new_rotation
+	update_transform()
+
+// Called when touching a lava tile.
+/atom/movable/proc/lava_act()
+	fire_act(null, 10000, 1000)

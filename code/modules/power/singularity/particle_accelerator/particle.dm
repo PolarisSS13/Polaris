@@ -44,7 +44,7 @@
 	if (A)
 		if(ismob(A))
 			toxmob(A)
-		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/)))
+		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/))||(istype(A, /obj/machinery/particle_smasher)))
 			A:energy += energy
 		//R-UST port
 		else if(istype(A,/obj/machinery/power/fusion_core))
@@ -78,7 +78,7 @@
 	var/radiation = (energy*2)
 	M.apply_effect((radiation*3),IRRADIATE,0)
 	M.updatehealth()
-	//M << "<font color='red'>You feel odd.</font>"
+	//to_chat(M, "<font color='red'>You feel odd.</font>")
 
 
 /obj/effect/accelerated_particle/proc/move(var/lag)

@@ -33,7 +33,7 @@
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
 			if(language)
-				message = language.scramble(message)
+				message = language.scramble(message, languages)
 			else
 				message = stars(message)
 
@@ -45,7 +45,7 @@
 	if(italics)
 		message = "<i>[message]</i>"
 
-	message = say_emphasis(message)
+	message = encode_html_emphasis(message)
 
 	var/track = null
 	if(istype(src, /mob/observer/dead))
@@ -60,9 +60,9 @@
 	if(is_deaf())
 		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
 			if(speaker == src)
-				src << "<span class='warning'>You cannot hear yourself speak!</span>"
+				to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
 			else
-				src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear."
+				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear.")
 	else
 		var/message_to_send = null
 		if(language)
@@ -78,6 +78,12 @@
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
+// Done here instead of on_hear_say() since that is NOT called if the mob is clientless (which includes most AI mobs).
+/mob/living/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+	..()
+	if(has_AI()) // Won't happen if no ai_holder exists or there's a player inside w/o autopilot active.
+		ai_holder.on_hear_say(speaker, message)
+
 /mob/proc/on_hear_say(var/message)
 	to_chat(src, message)
 	if(teleop)
@@ -91,7 +97,7 @@
 
 // Checks if the mob's own name is included inside message.  Handles both first and last names.
 /mob/proc/check_mentioned(var/message)
-	var/not_included = list("a", "the", "of", "in", "for", "through", "throughout", "therefore", "here", "there", "then", "now", "I", "you", "they", "he", "she", "by")
+	var/not_included = list("A", "The", "Of", "In", "For", "Through", "Throughout", "Therefore", "Here", "There", "Then", "Now", "I", "You", "They", "He", "She", "By")
 	var/list/valid_names = splittext(real_name, " ") // Should output list("John", "Doe") as an example.
 	valid_names -= not_included
 	var/list/nicknames = splittext(nickname, " ")
@@ -109,36 +115,14 @@
 /mob/living/silicon/ai/special_mentions()
 	return list("AI") // AI door!
 
-// Converts specific characters, like +, |, and _ to formatted output.
-/mob/proc/say_emphasis(var/message)
-	message = encode_html_emphasis(message, "|", "i")
-	message = encode_html_emphasis(message, "+", "b")
-	message = encode_html_emphasis(message, "_", "u")
-	return message
-
-// Replaces a character inside message with html tags.  Note that html var must not include brackets.
-// Will not create an open html tag if it would not have a closing one.
-/proc/encode_html_emphasis(var/message, var/char, var/html)
-	var/i = 20 // Infinite loop safety.
-	var/pattern = "(?<!<)\\" + char
-	var/regex/re = regex(pattern,"i") // This matches results which do not have a < next to them, to avoid stripping slashes from closing html tags.
-	var/first = re.Find(message) // Find first occurance.
-	var/second = re.Find(message, first + 1) // Then the second.
-	while(first && second && i)
-		// Calculate how far foward the second char is, as the first replacetext() will displace it.
-		var/length_increase = length("<[html]>") - 1
-
-		// Now replace both.
-		message = replacetext(message, char, "<[html]>", first, first + 1)
-		message = replacetext(message, char, "</[html]>", second + length_increase, second + length_increase + 1)
-
-		// Check again to see if we need to keep going.
-		first = re.Find(message)
-		second = re.Find(message, first + 1)
-		i--
-	if(!i)
-		CRASH("Possible infinite loop occured in encode_html_emphasis().")
-	return message
+/proc/encode_html_emphasis(message)
+    var/tagged_message = message
+    for(var/delimiter in GLOB.speech_toppings)
+        var/regex/R = new("\\[delimiter](.+?)\\[delimiter]","g")
+        var/tag = GLOB.speech_toppings[delimiter]
+        tagged_message = R.Replace(tagged_message,"<[tag]>$1</[tag]>")
+        
+    return tagged_message
 
 /mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
@@ -158,17 +142,10 @@
 
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				if(S.speak && S.speak.len)
-					message = pick(S.speak)
-				else
-					return
+			if(language)
+				message = language.scramble(message, languages)
 			else
-				if(language)
-					message = language.scramble(message)
-				else
-					message = stars(message)
+				message = stars(message)
 
 		if(hard_to_hear)
 			message = stars(message)
@@ -241,7 +218,7 @@
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "[speaker_name] ([ghost_follow_link(speaker, src)])"
 
-	message = say_emphasis(message)
+	message = encode_html_emphasis(message)
 
 	var/formatted
 	if(language)
@@ -252,7 +229,7 @@
 
 	if((sdisabilities & DEAF) || ear_deaf)
 		if(prob(20))
-			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
+			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
 	else
 		on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 
@@ -276,6 +253,8 @@
 	var/final_message = "[part_a][speaker_name][part_b][formatted]"
 	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
 		final_message = "[time]<font size='3'><b>[final_message]</b></font>"
+	else
+		final_message = "[time][final_message]"
 	to_chat(src, final_message)
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
@@ -283,6 +262,8 @@
 	var/final_message = "[part_a][track][part_b][formatted]"
 	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
 		final_message = "[time]<font size='3'><b>[final_message]</b></font>"
+	else
+		final_message = "[time][final_message]"
 	to_chat(src, final_message)
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
@@ -314,10 +295,10 @@
 		if(copytext(heardword,1, 1) in punctuation)
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
-			heardword = copytext(heardword,1,lentext(heardword))
+			heardword = copytext(heardword,1,length(heardword))
 		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
 	else
 		heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
 
-	src << heard
+	to_chat(src,heard)

@@ -34,6 +34,7 @@
 
 /obj/machinery/alarm
 	name = "alarm"
+	desc = "Used to control various station atmospheric systems. The light indicates the current air status of the area."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	plane = TURF_PLANE
@@ -137,7 +138,7 @@
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
 
 
-/obj/machinery/alarm/initialize()
+/obj/machinery/alarm/Initialize()
 	. = ..()
 	set_frequency(frequency)
 	if(!master_is_operating())
@@ -396,7 +397,7 @@
 	signal.data["sigtype"] = "command"
 
 	radio_connection.post_signal(src, signal, RADIO_FROM_AIRALARM)
-//			world << text("Signal [] Broadcasted to []", command, target)
+//			to_world("Signal [command] Broadcasted to [target]")
 
 	return 1
 
@@ -496,7 +497,7 @@
 	if(!(locked && !remote_connection) || remote_access || issilicon(user))
 		populate_controls(data)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "air_alarm.tmpl", name, 325, 625, master_ui = master_ui, state = state)
 		ui.set_initial_data(data)
@@ -604,7 +605,7 @@
 
 /obj/machinery/alarm/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list = list())
 	if(aidisabled && isAI(user))
-		user << "<span class='warning'>AI control for \the [src] interface has been disabled.</span>"
+		to_chat(user, "<span class='warning'>AI control for \the [src] interface has been disabled.</span>")
 		return STATUS_CLOSE
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
@@ -641,7 +642,7 @@
 		var/input_temperature = input("What temperature would you like the system to mantain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C) as num|null
 		if(isnum(input_temperature))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
-				usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
+				to_chat(usr, "Temperature must be between [min_temperature]C and [max_temperature]C")
 			else
 				target_temperature = input_temperature + T0C
 		return 1
@@ -766,17 +767,24 @@
 		return
 
 	if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
-		if(stat & (NOPOWER|BROKEN))
-			user << "It does nothing"
-			return
-		else
-			if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
-				locked = !locked
-				user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>"
-			else
-				user << "<span class='warning'>Access denied.</span>"
-			return
+		togglelock()
 	return ..()
+
+/obj/machinery/alarm/verb/togglelock(mob/user as mob)
+	if(stat & (NOPOWER|BROKEN))
+		to_chat(user, "It does nothing.")
+		return
+	else
+		if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
+			locked = !locked
+			to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
+		else
+			to_chat(user, "<span class='warning'>Access denied.</span>")
+		return
+
+/obj/machinery/alarm/AltClick()
+	..()
+	togglelock()
 
 /obj/machinery/alarm/power_change()
 	..()
@@ -847,6 +855,9 @@ FIRE ALARM
 			icon_state = "fire0"
 			switch(seclevel)
 				if("green")	set_light(l_range = 2, l_power = 0.25, l_color = "#00ff00")
+				if("yellow")	set_light(l_range = 2, l_power = 0.25, l_color = "#ffff00")
+				if("violet")	set_light(l_range = 2, l_power = 0.25, l_color = "#9933ff")
+				if("orange")	set_light(l_range = 2, l_power = 0.25, l_color = "#ff9900")
 				if("blue")	set_light(l_range = 2, l_power = 0.25, l_color = "#1024A9")
 				if("red")	set_light(l_range = 4, l_power = 0.9, l_color = "#ff0000")
 				if("delta")	set_light(l_range = 4, l_power = 0.9, l_color = "#FF6633")
@@ -872,6 +883,11 @@ FIRE ALARM
 /obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
 	add_fingerprint(user)
 
+	if(alarm_deconstruction_screwdriver(user, W))
+		return
+	if(alarm_deconstruction_wirecutters(user, W))
+		return
+
 	if(panel_open)
 		if(istype(W, /obj/item/device/multitool))
 			detecting = !(detecting)
@@ -895,7 +911,7 @@ FIRE ALARM
 			alarm()
 			time = 0
 			timing = 0
-			processing_objects.Remove(src)
+			STOP_PROCESSING(SSobj, src)
 		updateDialog()
 	last_process = world.timeofday
 
@@ -964,7 +980,7 @@ FIRE ALARM
 		else if(href_list["time"])
 			timing = text2num(href_list["time"])
 			last_process = world.timeofday
-			processing_objects.Add(src)
+			START_PROCESSING(SSobj, src)
 		else if(href_list["tp"])
 			var/tp = text2num(href_list["tp"])
 			time += tp
@@ -1002,7 +1018,7 @@ FIRE ALARM
 		seclevel = newlevel
 		update_icon()
 
-/obj/machinery/firealarm/initialize()
+/obj/machinery/firealarm/Initialize()
 	. = ..()
 	if(z in using_map.contact_levels)
 		set_security_level(security_level? get_security_level() : "green")

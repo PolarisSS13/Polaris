@@ -19,7 +19,7 @@
 	set category = "IC"
 
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<font color='red'>Speech is currently admin-disabled.</font>"
+		to_chat(usr, "<font color='red'>Speech is currently admin-disabled.</font>")
 		return
 
 	message = sanitize(message)
@@ -32,7 +32,7 @@
 
 /mob/proc/say_dead(var/message)
 	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
 
 	if(!client)
@@ -40,14 +40,14 @@
 
 	if(!src.client.holder)
 		if(!config.dsay_allowed)
-			src << "<span class='danger'>Deadchat is globally muted.</span>"
+			to_chat(src, "<span class='danger'>Deadchat is globally muted.</span>")
 			return
 
 	if(!is_preference_enabled(/datum/client_preference/show_dsay))
-		usr << "<span class='danger'>You have deadchat muted.</span>"
+		to_chat(usr, "<span class='danger'>You have deadchat muted.</span>")
 		return
 
-	message = say_emphasis(message)
+	message = encode_html_emphasis(message)
 
 	say_dead_direct("[pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span>", src)
 
@@ -139,13 +139,15 @@
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
+	// This is for audible emotes
 	if(length(message) >= 1 && prefix == "!")
-		return all_languages["Noise"]
+		return GLOB.all_languages["Noise"]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = lowertext(copytext(message, 2 ,3))
-		var/datum/language/L = language_keys[language_prefix]
+		var/datum/language/L = GLOB.language_keys[language_prefix]
 		if (can_speak(L))
 			return L
-
+		else
+			return GLOB.all_languages[LANGUAGE_GIBBERISH]
 	return null

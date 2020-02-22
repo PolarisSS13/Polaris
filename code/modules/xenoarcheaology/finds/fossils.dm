@@ -10,13 +10,10 @@
 	var/animal = 1
 
 /obj/item/weapon/fossil/base/New()
-	var/list/l = list("/obj/item/weapon/fossil/bone"=9,"/obj/item/weapon/fossil/skull"=3,
-	"/obj/item/weapon/fossil/skull/horned"=2)
+	var/list/l = list(/obj/item/weapon/fossil/bone = 9,/obj/item/weapon/fossil/skull = 3,
+	/obj/item/weapon/fossil/skull/horned = 2)
 	var/t = pickweight(l)
-	var/obj/item/weapon/W = new t(src.loc)
-	var/turf/T = get_turf(src)
-	if(istype(T, /turf/simulated/mineral))
-		T:last_find = W
+	new t(src.loc)
 	qdel(src)
 
 /obj/item/weapon/fossil/bone
@@ -75,7 +72,7 @@
 					src.desc = "A creature made of [src.contents.len-1] assorted bones and a skull. The plaque reads \'[plaque_contents]\'."
 			else
 				src.desc = "Incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
-				user << "Looks like it could use [src.breq-src.bnum] more bones."
+				to_chat(user, "Looks like it could use [src.breq-src.bnum] more bones.")
 		else
 			..()
 	else if(istype(W,/obj/item/weapon/pen))

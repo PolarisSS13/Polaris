@@ -32,7 +32,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/produces_heat = 1	//whether the machine will produce heat when on.
 	var/delay = 10 // how many process() ticks to delay per heat
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
-	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_level = 0	// 0 = auto set in New() - this is the z level that the machine is listening to.
 
@@ -42,7 +41,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	if(!on)
 		return
-	//world << "[src] ([src.id]) - [signal.debug_print()]"
+	//to_world("[src] ([src.id]) - [signal.debug_print()]")
 	var/send_count = 0
 
 	signal.data["slow"] += rand(0, round((100-integrity))) // apply some lag based on integrity
@@ -122,7 +121,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		var/turf/position = get_turf(src)
 		listening_level = position.z
 
-/obj/machinery/telecomms/initialize()
+/obj/machinery/telecomms/Initialize()
 	if(autolinkers.len)
 		// Links nearby machines
 		if(!long_range_link)
@@ -256,7 +255,17 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 1
 	produces_heat = 0
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/receiver"
+	circuit = /obj/item/weapon/circuitboard/telecomms/receiver
+
+/obj/machinery/telecomms/receiver/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
+	RefreshParts()
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
 
@@ -312,14 +321,21 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1600
 	machinetype = 7
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/hub"
+	circuit = /obj/item/weapon/circuitboard/telecomms/hub
 	long_range_link = 1
 	netspeed = 40
 	var/list/telecomms_map
 
-/obj/machinery/telecomms/hub/initialize()
+/obj/machinery/telecomms/hub/Initialize()
 	. = ..()
 	LAZYINITLIST(telecomms_map)
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
 
 /obj/machinery/telecomms/hub/process()
 	. = ..()
@@ -365,11 +381,25 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 8
 	produces_heat = 0
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/relay"
+	circuit = /obj/item/weapon/circuitboard/telecomms/relay
 	netspeed = 5
 	long_range_link = 1
 	var/broadcasting = 1
 	var/receiving = 1
+
+/obj/machinery/telecomms/relay/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
+
+/obj/machinery/telecomms/relay/forceMove(var/newloc)
+	. = ..(newloc)
+	listening_level = z
 
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -416,9 +446,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1000
 	machinetype = 2
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/bus"
+	circuit = /obj/item/weapon/circuitboard/telecomms/bus
 	netspeed = 40
 	var/change_frequency = 0
+
+/obj/machinery/telecomms/bus/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 1)
+	RefreshParts()
 
 /obj/machinery/telecomms/bus/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -469,23 +508,37 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 3
 	delay = 5
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/processor"
+	circuit = /obj/item/weapon/circuitboard/telecomms/processor
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
-	receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
+/obj/machinery/telecomms/processor/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/analyzer(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
 
-		if(is_freq_listening(signal))
+/obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
-			if(process_mode)
-				signal.data["compression"] = 0 // uncompress subspace signal
-			else
-				signal.data["compression"] = 100 // even more compressed signal
+	if(is_freq_listening(signal))
 
-			if(istype(machine_from, /obj/machinery/telecomms/bus))
-				relay_direct_information(signal, machine_from) // send the signal back to the machine
-			else // no bus detected - send the signal to servers instead
-				signal.data["slow"] += rand(5, 10) // slow the signal down
-				relay_information(signal, "/obj/machinery/telecomms/server")
+		if(process_mode)
+			signal.data["compression"] = 0 // uncompress subspace signal
+		else
+			signal.data["compression"] = 100 // even more compressed signal
+
+		if(istype(machine_from, /obj/machinery/telecomms/bus))
+			relay_direct_information(signal, machine_from) // send the signal back to the machine
+		else // no bus detected - send the signal to servers instead
+			signal.data["slow"] += rand(5, 10) // slow the signal down
+			relay_information(signal, "/obj/machinery/telecomms/server")
 
 
 /*
@@ -506,7 +559,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 300
 	machinetype = 4
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/server"
+	circuit = /obj/item/weapon/circuitboard/telecomms/server
 	var/list/log_entries = list()
 	var/list/stored_names = list()
 	var/list/TrafficActions = list()
@@ -529,6 +582,15 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	Compiler = new()
 	Compiler.Holder = src
 	server_radio = new()
+
+/obj/machinery/telecomms/server/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 1)
+	RefreshParts()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 

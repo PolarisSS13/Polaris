@@ -27,16 +27,16 @@
 		return
 
 	#if defined(TOPIC_DEBUGGING)
-	world << "[src]'s Topic: [href] destined for [hsrc]."
+	to_world("[src]'s Topic: [href] destined for [hsrc].")
 
 	if(href_list["nano_err"]) //nano throwing errors
-		world << "## NanoUI, Subject [src]: " + html_decode(href_list["nano_err"]) //NANO DEBUG HOOK
+		to_world("## NanoUI, Subject [src]: " + html_decode(href_list["nano_err")]) //NANO DEBUG HOOK
 
 	#endif
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
-		world.log << "Attempted use of scripts within a topic call, by [src]"
+		to_world_log("Attempted use of scripts within a topic call, by [src]")
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		//del(usr)
 		return
@@ -44,7 +44,7 @@
 	//Admin PM
 	if(href_list["priv_msg"])
 		var/client/C = locate(href_list["priv_msg"])
-		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
+		if(ismob(C)) 		//Old stuff can feed-in mobs instead ofGLOB.clients
 			var/mob/M = C
 			C = M.client
 		cmd_admin_pm(C,null)
@@ -52,12 +52,12 @@
 
 	if(href_list["irc_msg"])
 		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
-			usr << "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>"
+			to_chat(usr, "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>")
 			return
 		if(mute_irc)
-			usr << "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>"
+			to_chat(usr, "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>")
 			return
-		cmd_admin_irc_pm(href_list["irc_msg"])
+		send2adminirc(href_list["irc_msg"])
 		return
 
 
@@ -77,13 +77,13 @@
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
 	if(filelength > UPLOAD_LIMIT)
-		src << "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>"
+		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0
 /*	//Don't need this at the moment. But it's here if it's needed later.
 	//Helps prevent multiple files being uploaded at once. Or right after eachother.
 	var/time_to_wait = fileaccess_timer - world.time
 	if(time_to_wait > 0)
-		src << "<font color='red'>Error: AllowUpload(): Spam prevention. Please wait [round(time_to_wait/10)] seconds.</font>"
+		to_chat(src, "<font color='red'>Error: AllowUpload(): Spam prevention. Please wait [round(time_to_wait/10)] seconds.</font>")
 		return 0
 	fileaccess_timer = world.time + FTPDELAY	*/
 	return 1
@@ -105,11 +105,13 @@
 		del(src)
 		return
 
-	src << "<font color='red'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</font>"
+	to_chat(src, "<font color='red'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</font>")
 
 
-	clients += src
-	directory[ckey] = src
+	GLOB.clients += src
+	GLOB.directory[ckey] = src
+
+	GLOB.ahelp_tickets.ClientLogin(src)
 
 	//Admin Authorisation
 	holder = admin_datums[ckey]
@@ -129,10 +131,10 @@
 	prefs.sanitize_preferences()
 
 	if(custom_event_msg && custom_event_msg != "")
-		src << "<h1 class='alert'>Custom Event</h1>"
-		src << "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>"
-		src << "<span class='alert'>[custom_event_msg]</span>"
-		src << "<br>"
+		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
+		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
+		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
+		to_chat(src, "<br>")
 
 
 	if(holder)
@@ -150,7 +152,7 @@
 	log_client_to_db()
 
 	send_resources()
-	nanomanager.send_resources(src)
+	SSnanoui.send_resources(src)
 
 	if(!void)
 		void = new()
@@ -158,11 +160,11 @@
 	screen += void
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		src << "<span class='info'>You have unread updates in the changelog.</span>"
+		to_chat(src, "<span class='info'>You have unread updates in the changelog.</span>")
 		winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold")
 		if(config.aggressive_changelog)
 			src.changes()
-	
+
 	if(config.paranoia_logging)
 		if(isnum(player_age) && player_age == 0)
 			log_and_message_admins("PARANOIA: [key_name(src)] has connected here for the first time.")
@@ -176,8 +178,9 @@
 	if(holder)
 		holder.owner = null
 		admins -= src
-	directory -= ckey
-	clients -= src
+	GLOB.ahelp_tickets.ClientLogout(src)
+	GLOB.directory -= ckey
+	GLOB.clients -= src
 	return ..()
 
 /client/Destroy()
@@ -268,6 +271,31 @@
 			qdel(src)
 			return 0
 
+	// IP Reputation Check
+	if(config.ip_reputation)
+		if(config.ipr_allow_existing && player_age >= config.ipr_minimum_age)
+			log_admin("Skipping IP reputation check on [key] with [address] because of player age")
+		else if(update_ip_reputation()) //It is set now
+			if(ip_reputation >= config.ipr_bad_score) //It's bad
+
+				//Log it
+				if(config.paranoia_logging) //We don't block, but we want paranoia log messages
+					log_and_message_admins("[key] at [address] has bad IP reputation: [ip_reputation]. Will be kicked if enabled in config.")
+				else //We just log it
+					log_admin("[key] at [address] has bad IP reputation: [ip_reputation]. Will be kicked if enabled in config.")
+
+				//Take action if required
+				if(config.ipr_block_bad_ips && config.ipr_allow_existing) //We allow players of an age, but you don't meet it
+					to_chat(src, "Sorry, we only allow VPN/Proxy/Tor usage for players who have spent at least [config.ipr_minimum_age] days on the server. If you are unable to use the internet without your VPN/Proxy/Tor, please contact an admin out-of-game to let them know so we can accommodate this.")
+					qdel(src)
+					return 0
+				else if(config.ipr_block_bad_ips) //We don't allow players of any particular age
+					to_chat(src, "Sorry, we do not accept connections from users via VPN/Proxy/Tor connections.")
+					qdel(src)
+					return 0
+		else
+			log_admin("Couldn't perform IP check on [key] with [address]")
+
 	if(sql_id)
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
 		var/DBQuery/query_update = dbcon.NewQuery("UPDATE erro_player SET lastseen = Now(), ip = '[sql_ip]', computerid = '[sql_computerid]', lastadminrank = '[sql_admin_rank]' WHERE id = [sql_id]")
@@ -317,6 +345,7 @@
 		'html/images/sglogo.png',
 		'html/images/talisman.png',
 		'html/images/paper_bg.png',
+		'html/images/no_image32.png',
 		'icons/pda_icons/pda_atmos.png',
 		'icons/pda_icons/pda_back.png',
 		'icons/pda_icons/pda_bell.png',
@@ -386,3 +415,68 @@ client/verb/character_setup()
 			. = R.group[1]
 		else
 			CRASH("Age check regex failed for [src.ckey]")
+
+/client/vv_edit_var(var_name, var_value)
+	if(var_name == NAMEOF(src, holder))
+		return FALSE
+	return ..()
+
+//This is for getipintel.net.
+//You're welcome to replace this proc with your own that does your own cool stuff.
+//Just set the client's ip_reputation var and make sure it makes sense with your config settings (higher numbers are worse results)
+/client/proc/update_ip_reputation()
+	var/request = "http://check.getipintel.net/check.php?ip=[address]&contact=[config.ipr_email]"
+	var/http[] = world.Export(request)
+
+	/* Debug
+	to_world_log("Requested this: [request]")
+	for(var/entry in http)
+		to_world_log("[entry] : [http[entry]]")
+	*/
+
+	if(!http || !islist(http)) //If we couldn't check, the service might be down, fail-safe.
+		log_admin("Couldn't connect to getipintel.net to check [address] for [key]")
+		return FALSE
+
+	//429 is rate limit exceeded
+	if(text2num(http["STATUS"]) == 429)
+		log_and_message_admins("getipintel.net reports HTTP status 429. IP reputation checking is now disabled. If you see this, let a developer know.")
+		config.ip_reputation = FALSE
+		return FALSE
+
+	var/content = file2text(http["CONTENT"]) //world.Export actually returns a file object in CONTENT
+	var/score = text2num(content)
+	if(isnull(score))
+		return FALSE
+
+	//Error handling
+	if(score < 0)
+		var/fatal = TRUE
+		var/ipr_error = "getipintel.net IP reputation check error while checking [address] for [key]: "
+		switch(score)
+			if(-1)
+				ipr_error += "No input provided"
+			if(-2)
+				fatal = FALSE
+				ipr_error += "Invalid IP provided"
+			if(-3)
+				fatal = FALSE
+				ipr_error += "Unroutable/private IP (spoofing?)"
+			if(-4)
+				fatal = FALSE
+				ipr_error += "Unable to reach database"
+			if(-5)
+				ipr_error += "Our IP is banned or otherwise forbidden"
+			if(-6)
+				ipr_error += "Missing contact info"
+
+		log_and_message_admins(ipr_error)
+		if(fatal)
+			config.ip_reputation = FALSE
+			log_and_message_admins("With this error, IP reputation checking is disabled for this shift. Let a developer know.")
+		return FALSE
+
+	//Went fine
+	else
+		ip_reputation = score
+		return TRUE

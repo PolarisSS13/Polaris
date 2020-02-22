@@ -104,6 +104,8 @@ datum/preferences
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
 
+	var/list/body_descriptors = list()
+
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
@@ -204,7 +206,7 @@ datum/preferences
 	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
-		user << "<span class='danger'>No mob exists for the given client!</span>"
+		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
@@ -215,7 +217,8 @@ datum/preferences
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
-		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a>"
+		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+		dat += "<a href='?src=\ref[src];copy=1'>Copy slot</a>"
 
 	else
 		dat += "Please create an account to save your preferences."
@@ -240,7 +243,7 @@ datum/preferences
 		if(config.forumurl)
 			user << link(config.forumurl)
 		else
-			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
 	ShowChoices(usr)
 	return 1
@@ -269,6 +272,14 @@ datum/preferences
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()
+	else if(href_list["copy"])
+		if(!IsGuestKey(usr.key))
+			open_copy_dialog(usr)
+			return 1
+	else if(href_list["overwrite"])
+		overwrite_character(text2num(href_list["overwrite"]))
+		sanitize_preferences()
+		close_load_dialog(usr)
 	else
 		return 0
 
@@ -294,6 +305,10 @@ datum/preferences
 		character.update_mutations()
 		character.update_underwear()
 		character.update_hair()
+
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat = "<body>"
@@ -321,3 +336,26 @@ datum/preferences
 /datum/preferences/proc/close_load_dialog(mob/user)
 	//user << browse(null, "window=saves")
 	panel.close()
+
+/datum/preferences/proc/open_copy_dialog(mob/user)
+	var/dat = "<body>"
+	dat += "<tt><center>"
+
+	var/savefile/S = new /savefile(path)
+	if(S)
+		dat += "<b>Select a character slot to overwrite</b><br>"
+		dat += "<b>You will then need to save to confirm</b><hr>"
+		var/name
+		for(var/i=1, i<= config.character_slots, i++)
+			S.cd = "/character[i]"
+			S["real_name"] >> name
+			if(!name)	name = "Character[i]"
+			if(i==default_slot)
+				name = "<b>[name]</b>"
+			dat += "<a href='?src=\ref[src];overwrite=[i]'>[name]</a><br>"
+
+	dat += "<hr>"
+	dat += "</center></tt>"
+	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel.set_content(dat)
+	panel.open()

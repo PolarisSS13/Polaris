@@ -44,10 +44,10 @@
 /obj/item/weapon/material/butterfly/attack_self(mob/user)
 	active = !active
 	if(active)
-		user << "<span class='notice'>You flip out \the [src].</span>"
+		to_chat(user, "<span class='notice'>You flip out \the [src].</span>")
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
-		user << "<span class='notice'>\The [src] can now be concealed.</span>"
+		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
 	update_force()
 	add_fingerprint(user)
 
@@ -59,7 +59,6 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "knife"
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
-	flags = CONDUCT
 	sharp = 1
 	edge = 1
 	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
@@ -69,10 +68,43 @@
 
 /obj/item/weapon/material/knife/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	viewers(user) << pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
+	to_chat(viewers(user), pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
 	                      "<span class='danger'>\The [user] is slitting [TU.his] throat with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.hes] trying to commit seppuku.</span>")
+	                      "<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.hes] trying to commit seppuku.</span>"))
 	return (BRUTELOSS)
+
+// These no longer inherit from hatchets.
+/obj/item/weapon/material/knife/tacknife
+	name = "tactical knife"
+	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	force_divisor = 0.25 //15 when hardness 60 (steel)
+	attack_verb = list("stabbed", "chopped", "cut")
+	applies_material_colour = 1
+
+/obj/item/weapon/material/knife/tacknife/combatknife
+	name = "combat knife"
+	desc = "If only you had a boot to put it in."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	force_divisor = 0.34 // 20 with hardness 60 (steel)
+	thrown_force_divisor = 1.75 // 20 with weight 20 (steel)
+	attack_verb = list("sliced", "stabbed", "chopped", "cut")
+	applies_material_colour = 1
+
+// Identical to the tactical knife but nowhere near as stabby.
+// Kind of like the toy esword compared to the real thing.
+/obj/item/weapon/material/knife/tacknife/boot
+	name = "boot knife"
+	desc = "A small fixed-blade knife for putting inside a boot."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "tacknife"
+	item_state = "knife"
+	force_divisor = 0.15
+	applies_material_colour = 0
 
 /obj/item/weapon/material/knife/hook
 	name = "meat hook"

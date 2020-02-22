@@ -6,7 +6,13 @@
   * Odds are, there is a reason
   *
  **/
-var/datum/controller/master/Master = new()
+
+//This is the ABSOLUTE ONLY THING that should init globally like this
+GLOBAL_REAL(Master, /datum/controller/master) = new
+
+//THIS IS THE INIT ORDER
+//Master -> SSPreInit -> GLOB -> world -> config -> SSInit -> Failsafe
+//GOT IT MEMORIZED?
 
 /datum/controller/master
 	name = "Master"
@@ -48,9 +54,9 @@ var/datum/controller/master/Master = new()
 	var/static/restart_timeout = 0
 	var/static/restart_count = 0
 
-	//current tick limit, assigned before running a subsystem.
-	//used by CHECK_TICK as well so that the procs subsystems call can obey that SS's tick limits
-	var/static/current_ticklimit = TICK_LIMIT_RUNNING
+	//current tick limit, assigned by the queue controller before running a subsystem.
+	//used by check_tick as well so that the procs subsystems call can obey that SS's tick limits
+	var/static/current_ticklimit
 
 /datum/controller/master/New()
 	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
@@ -66,6 +72,9 @@ var/datum/controller/master/Master = new()
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
+
+	if(!GLOB)
+		new /datum/controller/global_vars
 
 /datum/controller/master/Destroy()
 	..()
@@ -136,6 +145,7 @@ var/datum/controller/master/Master = new()
 	if (istype(Master.subsystems))
 		if(FireHim)
 			Master.subsystems += new BadBoy.type	//NEW_SS_GLOBAL will remove the old one
+
 		subsystems = Master.subsystems
 		current_runlevel = Master.current_runlevel
 		StartProcessing(10)

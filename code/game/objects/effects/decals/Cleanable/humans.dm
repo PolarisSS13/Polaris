@@ -33,11 +33,11 @@ var/global/list/image/splatter_cache=list()
 	if(invisibility != 100)
 		invisibility = 100
 		amount = 0
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	..(ignore=1)
 
 /obj/effect/decal/cleanable/blood/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/effect/decal/cleanable/blood/New()
@@ -53,7 +53,7 @@ var/global/list/image/splatter_cache=list()
 						blood_DNA |= B.blood_DNA.Copy()
 					qdel(B)
 	drytime = world.time + DRYING_TIME * (amount+1)
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/process()
 	if(world.time > drytime)
@@ -93,7 +93,6 @@ var/global/list/image/splatter_cache=list()
 				S.overlays += S.blood_overlay
 			if(S.blood_overlay && S.blood_overlay.color != basecolor)
 				S.blood_overlay.color = basecolor
-				S.overlays.Cut()
 				S.overlays += S.blood_overlay
 			S.blood_DNA |= blood_DNA.Copy()
 			perp.update_inv_shoes()
@@ -115,7 +114,7 @@ var/global/list/image/splatter_cache=list()
 	desc = drydesc
 	color = adjust_brightness(color, -50)
 	amount = 0
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
@@ -125,7 +124,7 @@ var/global/list/image/splatter_cache=list()
 			return
 		var/taken = rand(1,amount)
 		amount -= taken
-		user << "<span class='notice'>You get some of \the [src] on your hands.</span>"
+		to_chat(user, "<span class='notice'>You get some of \the [src] on your hands.</span>")
 		if (!user.blood_DNA)
 			user.blood_DNA = list()
 		user.blood_DNA |= blood_DNA.Copy()
@@ -171,7 +170,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine(mob/user)
 	..(user)
-	user << "It reads: <font color='[basecolor]'>\"[message]\"</font>"
+	to_chat(user, "It reads: <font color='[basecolor]'>\"[message]\"</font>")
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
@@ -200,10 +199,10 @@ var/global/list/image/splatter_cache=list()
 	overlays += giblets
 
 /obj/effect/decal/cleanable/blood/gibs/up
-	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
+	random_icon_states = list("gib1", "gib2", "gib3", "gib5", "gib6","gibup1","gibup1","gibup1")
 
 /obj/effect/decal/cleanable/blood/gibs/down
-	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibdown1","gibdown1","gibdown1")
+	random_icon_states = list("gib1", "gib2", "gib3", "gib5", "gib6","gibdown1","gibdown1","gibdown1")
 
 /obj/effect/decal/cleanable/blood/gibs/body
 	random_icon_states = list("gibhead", "gibtorso")
@@ -216,17 +215,17 @@ var/global/list/image/splatter_cache=list()
 
 
 /obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
-        spawn (0)
-                var/direction = pick(directions)
-                for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
-                        sleep(3)
-                        if (i > 0)
-                                var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(src.loc)
-                                b.basecolor = src.basecolor
-                                b.update_icon()
+	spawn (0)
+		var/direction = pick(directions)
+		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
+			sleep(3)
+			if (i > 0)
+				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(src.loc)
+				b.basecolor = src.basecolor
+				b.update_icon()
 
-                        if (step_to(src, get_step(src, direction), 0))
-                                break
+			if (step_to(src, get_step(src, direction), 0))
+				break
 
 
 /obj/effect/decal/cleanable/mucus
@@ -249,5 +248,5 @@ var/global/list/image/splatter_cache=list()
 //This version should be used for admin spawns and pre-mapped virus vectors (e.g. in PoIs), this version does not dry
 /obj/effect/decal/cleanable/mucus/mapped/New()
 	..()
-	virus2 = new /datum/disease2/disease
-	virus2.makerandom()
+	virus2 |= new /datum/disease2/disease
+	virus2[1].makerandom()

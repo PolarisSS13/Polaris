@@ -9,16 +9,16 @@
 
 
 /proc/error(msg)
-	world.log << "## ERROR: [msg][log_end]"
+	to_world_log("## ERROR: [msg][log_end]")
 
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
 //print a warning message to world.log
 /proc/warning(msg)
-	world.log << "## WARNING: [msg][log_end]"
+	to_world_log("## WARNING: [msg][log_end]")
 
 //print a testing-mode debug message to world.log
 /proc/testing(msg)
-	world.log << "## TESTING: [msg][log_end]"
+	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/log_admin(text)
 	admin_log.Add(text)
@@ -36,7 +36,7 @@
 
 	for(var/client/C in admins)
 		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
-			C << "DEBUG: [text]"
+			to_chat(C, "DEBUG: [text]")
 
 /proc/log_game(text)
 	if (config.log_game)
@@ -48,7 +48,7 @@
 
 /proc/log_access_in(client/new_client)
 	if (config.log_access)
-		var/message = "[key_name(new_client)] - IP:[new_client.address] - CID:[new_client.computer_id] - BYOND v[new_client.byond_version]"			
+		var/message = "[key_name(new_client)] - IP:[new_client.address] - CID:[new_client.computer_id] - BYOND v[new_client.byond_version]"
 		diary << "\[[time_stamp()]]ACCESS IN: [message][log_end]"
 
 /proc/log_access_out(mob/last_mob)
@@ -60,25 +60,45 @@
 	if (config.log_say)
 		diary << "\[[time_stamp()]]SAY: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
 
+	//Log the message to in-game dialogue logs, as well.
+	if(speaker.client)
+		speaker.dialogue_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>SAY:</u> - <span style=\"color:#32cd32\">[text]</span>"
+		GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>SAY:</u> - <span style=\"color:#32cd32\">[text]</span>"
+
 /proc/log_ooc(text, client/user)
 	if (config.log_ooc)
 		diary << "\[[time_stamp()]]OOC: [user.simple_info_line()]: [html_decode(text)][log_end]"
+
+	GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[user]</b>) <u>OOC:</u> - <span style=\"color:blue\"><b>[text]</b></span>"
 
 /proc/log_aooc(text, client/user)
 	if (config.log_ooc)
 		diary << "\[[time_stamp()]]AOOC: [user.simple_info_line()]: [html_decode(text)][log_end]"
 
+	GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[user]</b>) <u>AOOC:</u> - <span style=\"color:red\"><b>[text]</b></span>"
+
 /proc/log_looc(text, client/user)
 	if (config.log_ooc)
 		diary << "\[[time_stamp()]]LOOC: [user.simple_info_line()]: [html_decode(text)][log_end]"
+
+	GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[user]</b>) <u>LOOC:</u> - <span style=\"color:orange\"><b>[text]</b></span>"
 
 /proc/log_whisper(text, mob/speaker)
 	if (config.log_whisper)
 		diary << "\[[time_stamp()]]WHISPER: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
 
+	if(speaker.client)
+		speaker.dialogue_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>SAY:</u> - <span style=\"color:gray\"><i>[text]</i></span>"
+		GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>SAY:</u> - <span style=\"color:gray\"><i>[text]</i></span>"
+
+
 /proc/log_emote(text, mob/speaker)
 	if (config.log_emote)
 		diary << "\[[time_stamp()]]EMOTE: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
+
+	if(speaker.client)
+		speaker.dialogue_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>EMOTE:</u> - <span style=\"color:#CCBADC\">[text]</span>"
+		GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>EMOTE:</u> - <span style=\"color:#CCBADC\">[text]</span>"
 
 /proc/log_attack(attacker, defender, message)
 	if (config.log_attack)
@@ -100,6 +120,10 @@
 	if (config.log_say)
 		diary << "\[[time_stamp()]]DEADCHAT: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
 
+	speaker.dialogue_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>DEADSAY:</u> - <span style=\"color:green\">[text]</span>"
+	GLOB.round_text_log += "<font size=1><span style=\"color:#7e668c\"><b>([time_stamp()])</b> (<b>[src]/[speaker.client]</b>) <u>DEADSAY:</u> - [text]</span></font>"
+
+
 /proc/log_ghostemote(text, mob/speaker)
 	if (config.log_emote)
 		diary << "\[[time_stamp()]]DEADEMOTE: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
@@ -112,20 +136,24 @@
 	if (config.log_pda)
 		diary << "\[[time_stamp()]]PDA: [speaker.simple_info_line()]: [html_decode(text)][log_end]"
 
+	speaker.dialogue_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>MSG:</u> - <span style=\"color:[COLOR_GREEN]\">[text]</span>"
+	GLOB.round_text_log += "<b>([time_stamp()])</b> (<b>[speaker]/[speaker.client]</b>) <u>MSG:</u> - <span style=\"color:[COLOR_GREEN]\">[text]</span>"
+
+
 /proc/log_to_dd(text)
-	world.log << text //this comes before the config check because it can't possibly runtime
+	to_world_log(text) //this comes before the config check because it can't possibly runtime
 	if(config.log_world_output)
 		diary << "\[[time_stamp()]]DD_OUTPUT: [text][log_end]"
 
 /proc/log_error(text)
-	world.log << text
+	to_world_log(text)
 	error_log << "\[[time_stamp()]]RUNTIME: [text][log_end]"
 
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
 
 /proc/log_unit_test(text)
-	world.log << "## UNIT_TEST: [text]"
+	to_world_log("## UNIT_TEST: [text]")
 
 /proc/report_progress(var/progress_message)
 	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
@@ -201,7 +229,7 @@
 
 			if(include_link && is_special_character(M) && highlight_special_characters)
 				name = "<font color='#FFA500'>[name]</font>" //Orange
-		
+
 		. += "/([name])"
 
 	return .

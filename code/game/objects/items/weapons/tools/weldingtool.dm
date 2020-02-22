@@ -1,14 +1,12 @@
-
 #define WELDER_FUEL_BURN_INTERVAL 13
 /*
  * Welding Tool
  */
 /obj/item/weapon/weldingtool
-	name = "welding tool"
+	name = "\improper welding tool"
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "welder"
 	item_state = "welder"
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
 	//Amount of OUCH when it's thrown
@@ -40,7 +38,8 @@
 	var/always_process = FALSE // If true, keeps the welder on the process list even if it's off.  Used for when it needs to regenerate fuel.
 	toolspeed = 1
 
-/obj/item/weapon/weldingtool/New()
+/obj/item/weapon/weldingtool/Initialize()
+	. = ..()
 //	var/random_fuel = min(rand(10,20),max_fuel)
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
@@ -48,12 +47,11 @@
 	R.add_reagent("fuel", max_fuel)
 	update_icon()
 	if(always_process)
-		processing_objects |= src
-	..()
+		START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/weldingtool/Destroy()
 	if(welding || always_process)
-		processing_objects -= src
+		STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
@@ -61,6 +59,32 @@
 		if(max_fuel)
 			to_chat(user, text("\icon[] The [] contains []/[] units of fuel!", src, src.name, get_fuel(),src.max_fuel ))
 
+/obj/item/weapon/weldingtool/attack(atom/A, mob/living/user, def_zone)
+	if(ishuman(A) && user.a_intent == I_HELP)
+		var/mob/living/carbon/human/H = A
+		var/obj/item/organ/external/S = H.organs_by_name[user.zone_sel.selecting]
+
+		if(!S || S.robotic < ORGAN_ROBOT || S.open == 3)
+			return ..()
+
+		if(S.organ_tag == BP_HEAD)
+			if(H.head && istype(H.head,/obj/item/clothing/head/helmet/space))
+				to_chat(user, "<span class='warning'>You can't apply [src] through [H.head]!</span>")
+				return 1
+		else
+			if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+				to_chat(user, "<span class='warning'>You can't apply [src] through [H.wear_suit]!</span>")
+				return 1
+
+		if(!welding)
+			to_chat(user, "<span class='warning'>You'll need to turn [src] on to patch the damage on [H]'s [S.name]!</span>")
+			return 1
+
+		if(S.robo_repair(15, BRUTE, "some dents", src, user))
+			remove_fuel(1, user)
+			return 1
+
+	return ..()
 
 /obj/item/weapon/weldingtool/attackby(obj/item/W as obj, mob/living/user as mob)
 	if(istype(W,/obj/item/weapon/tool/screwdriver))
@@ -99,28 +123,21 @@
 	..()
 	return
 
-
 /obj/item/weapon/weldingtool/process()
 	if(welding)
 		++burned_fuel_for
 		if(burned_fuel_for >= WELDER_FUEL_BURN_INTERVAL)
 			remove_fuel(1)
-
-
-
 		if(get_fuel() < 1)
 			setWelding(0)
-
-	//I'm not sure what this does. I assume it has to do with starting fires...
-	//...but it doesnt check to see if the welder is on or not.
-	var/turf/location = src.loc
-	if(istype(location, /mob/living))
-		var/mob/living/M = location
-		if(M.item_is_in_hands(src))
-			location = get_turf(M)
-	if (istype(location, /turf))
-		location.hotspot_expose(700, 5)
-
+		else			//Only start fires when its on and has enough fuel to actually keep working
+			var/turf/location = src.loc
+			if(istype(location, /mob/living))
+				var/mob/living/M = location
+				if(M.item_is_in_hands(src))
+					location = get_turf(M)
+			if (istype(location, /turf))
+				location.hotspot_expose(700, 5)
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -148,12 +165,8 @@
 			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
-	return
-
-
-/obj/item/weapon/weldingtool/attack_self(mob/user as mob)
-	setWelding(!welding, usr)
-	return
+/obj/item/weapon/weldingtool/attack_self(mob/user)
+	setWelding(!welding, user)
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
@@ -182,7 +195,7 @@
 
 //Returns whether or not the welding tool is currently on.
 /obj/item/weapon/weldingtool/proc/isOn()
-	return src.welding
+	return welding
 
 /obj/item/weapon/weldingtool/update_icon()
 	..()
@@ -198,7 +211,7 @@
 	// Fuel counter overlay.
 	if(change_icons && get_max_fuel())
 		var/ratio = get_fuel() / get_max_fuel()
-		ratio = Ceiling(ratio*4) * 25
+		ratio = CEILING(ratio * 4, 1) * 25
 		var/image/I = image(icon, src, "[icon_state][ratio]")
 		overlays.Add(I)
 
@@ -267,7 +280,7 @@
 			welding = 1
 			update_icon()
 			if(!always_process)
-				processing_objects |= src
+				START_PROCESSING(SSobj, src)
 		else
 			if(M)
 				var/msg = max_fuel ? "welding fuel" : "charge"
@@ -276,7 +289,7 @@
 	//Otherwise
 	else if(!set_welding && welding)
 		if(!always_process)
-			processing_objects -= src
+			STOP_PROCESSING(SSobj, src)
 		if(M)
 			to_chat(M, "<span class='notice'>You switch \the [src] off.</span>")
 		else if(T)
@@ -369,9 +382,34 @@
 	toolspeed = 2
 	eye_safety_modifier = 1 // Safer on eyes.
 
+/datum/category_item/catalogue/anomalous/precursor_a/alien_welder
+	name = "Precursor Alpha Object - Self Refueling Exothermic Tool"
+	desc = "An unwieldly tool which somewhat resembles a weapon, due to \
+	having a prominent trigger attached to the part which would presumably \
+	have been held by whatever had created this object. When the trigger is \
+	held down, a small but very high temperature flame shoots out from the \
+	tip of the tool. The grip is able to be held by human hands, however the \
+	shape makes it somewhat awkward to hold.\
+	<br><br>\
+	The tool appears to utilize an unknown fuel to light and maintain the \
+	flame. What is more unusual, is that the fuel appears to replenish itself. \
+	How it does this is not known presently, however experimental human-made \
+	welders have been known to have a similar quality.\
+	<br><br>\
+	Interestingly, the flame is able to cut through a wide array of materials, \
+	such as iron, steel, stone, lead, plasteel, and even durasteel. Yet, it is unable \
+	to cut the unknown material that itself and many other objects made by this \
+	precursor civilization have made. This raises questions on the properties of \
+	that material, and how difficult it would have been to work with. This tool \
+	does demonstrate, however, that the alien fuel cannot melt precursor beams, walls, \
+	or other structual elements, making it rather limited for their \
+	deconstruction purposes."
+	value = CATALOGUER_REWARD_EASY
+
 /obj/item/weapon/weldingtool/alien
 	name = "alien welding tool"
 	desc = "An alien welding tool. Whatever fuel it uses, it never runs out."
+	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_welder)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "welder"
 	toolspeed = 0.1
@@ -405,6 +443,19 @@
 	if(get_fuel() < get_max_fuel() && nextrefueltick < world.time)
 		nextrefueltick = world.time + 10
 		reagents.add_reagent("fuel", 1)
+
+/obj/item/weapon/weldingtool/experimental/hybrid
+	name = "strange welding tool"
+	desc = "An experimental welder capable of synthesizing its own fuel from spatial waveforms. It's like welding with a star!"
+	icon_state = "hybwelder"
+	max_fuel = 20
+	eye_safety_modifier = -2	// Brighter than the sun. Literally, you can look at the sun with a welding mask of proper grade, this will burn through that.
+	slowdown = 0.1
+	toolspeed = 0.25
+	w_class = ITEMSIZE_LARGE
+	flame_intensity = 5
+	origin_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4, TECH_PRECURSOR = 1)
+	reach = 2
 
 /*
  * Backpack Welder.
@@ -461,6 +512,14 @@
 		mounted_pack.return_nozzle()
 		to_chat(user, "<span class='notice'>\The [src] retracts to its fueltank.</span>")
 
+/obj/item/weapon/weldingtool/tubefed/survival
+	name = "tube-fed emergency welding tool"
+	desc = "A bulky, cooler-burning welding tool that draws from a worn welding tank."
+	icon_state = "tubewelder"
+	max_fuel = 5
+	toolspeed = 1.75
+	eye_safety_modifier = 2
+
 /*
  * Electric/Arc Welder
  */
@@ -498,11 +557,11 @@
 /obj/item/weapon/weldingtool/electric/examine(mob/user)
 	if(get_dist(src, user) > 1)
 		to_chat(user, desc)
-	else					// The << need to stay, for some reason
+	else
 		if(power_supply)
-			user << text("\icon[] The [] has [] charge left.", src, src.name, get_fuel())
+			to_chat(user, "\icon[src] The [src.name] has [get_fuel()] charge left.")
 		else
-			user << text("\icon[] The [] has no power cell!", src, src.name)
+			to_chat(user, "\icon[src] The [src.name] has no power cell!")
 
 /obj/item/weapon/weldingtool/electric/get_fuel()
 	if(use_external_power)

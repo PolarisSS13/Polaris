@@ -108,6 +108,12 @@
 /datum/design/item/mechfab/gygax
 	category = "Gygax"
 
+/datum/design/item/mechfab/gygax/chassis/serenity
+	name = "Serenity Chassis"
+	id = "serenity_chassis"
+	build_path = /obj/item/mecha_parts/chassis/serenity
+	materials = list(DEFAULT_WALL_MATERIAL = 18750, "phoron" = 4000)
+
 /datum/design/item/mechfab/gygax/chassis
 	name = "Gygax Chassis"
 	id = "gygax_chassis"
@@ -223,6 +229,67 @@
 	time = 60
 	materials = list(DEFAULT_WALL_MATERIAL = 37500, "uranium" = 7500)
 
+/datum/design/item/mechfab/janus
+	category = "Janus"
+	req_tech = list(TECH_MATERIAL = 7, TECH_BLUESPACE = 5, TECH_MAGNET = 6, TECH_PHORON = 3, TECH_ARCANE = 1, TECH_PRECURSOR = 2)
+
+/datum/design/item/mechfab/janus/chassis
+	name = "Janus Chassis"
+	id = "janus_chassis"
+	build_path = /obj/item/mecha_parts/chassis/janus
+	time = 100
+	materials = list(MAT_DURASTEEL = 19000, MAT_MORPHIUM = 10500, MAT_PLASTEEL = 5500, MAT_LEAD = 2500)
+	req_tech = list(TECH_MATERIAL = 7, TECH_BLUESPACE = 5, TECH_MAGNET = 6, TECH_PHORON = 3, TECH_ARCANE = 1, TECH_PRECURSOR = 3)
+
+/datum/design/item/mechfab/janus/torso
+	name = "Imperion Torso"
+	id = "janus_torso"
+	build_path = /obj/item/mecha_parts/part/janus_torso
+	time = 300
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_DURASTEEL = 8000, MAT_MORPHIUM = 10000, MAT_GOLD = 5000, MAT_VERDANTIUM = 5000)
+
+/datum/design/item/mechfab/janus/head
+	name = "Imperion Head"
+	id = "janus_head"
+	build_path = /obj/item/mecha_parts/part/janus_head
+	time = 200
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 6000, MAT_GOLD = 5000)
+
+/datum/design/item/mechfab/janus/left_arm
+	name = "Prototype Gygax Left Arm"
+	id = "janus_left_arm"
+	build_path = /obj/item/mecha_parts/part/janus_left_arm
+	time = 200
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_METALHYDROGEN = 3000, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 3000, MAT_GOLD = 5000, MAT_DIAMOND = 7000)
+
+/datum/design/item/mechfab/janus/right_arm
+	name = "Prototype Gygax Right Arm"
+	id = "janus_right_arm"
+	build_path = /obj/item/mecha_parts/part/janus_right_arm
+	time = 200
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_METALHYDROGEN = 3000, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 3000, MAT_GOLD = 5000, MAT_DIAMOND = 7000)
+
+/datum/design/item/mechfab/janus/left_leg
+	name = "Prototype Durand Left Leg"
+	id = "janus_left_leg"
+	build_path = /obj/item/mecha_parts/part/janus_left_leg
+	time = 200
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_METALHYDROGEN = 3000, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 3000, MAT_GOLD = 5000, MAT_URANIUM = 7000)
+
+/datum/design/item/mechfab/janus/right_leg
+	name = "Prototype Durand Right Leg"
+	id = "janus_right_leg"
+	build_path = /obj/item/mecha_parts/part/janus_right_leg
+	time = 200
+	materials = list(DEFAULT_WALL_MATERIAL = 30000, MAT_METALHYDROGEN = 3000, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 3000, MAT_GOLD = 5000, MAT_URANIUM = 7000)
+
+/datum/design/item/mechfab/janus/phase_coil
+	name = "Janus Phase Coil"
+	id = "janus_coil"
+	build_path = /obj/item/prop/alien/phasecoil
+	time = 600
+	materials = list(MAT_SUPERMATTER = 2000, MAT_PLASTEEL = 60000, MAT_URANIUM = 3250, MAT_DURASTEEL = 2000, MAT_MORPHIUM = 3000, MAT_GOLD = 5000, MAT_VERDANTIUM = 5000, MAT_DIAMOND = 10000, MAT_LEAD = 15000)
+
 /datum/design/item/mecha
 	build_type = MECHFAB
 	category = "Exosuit Equipment"
@@ -291,6 +358,11 @@
 	id = "mech_taser"
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/taser
 
+/datum/design/item/mecha/rigged_taser
+	name = "Jury-Rigged Taser"
+	id = "mech_taser-r"
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/taser/rigged
+
 /datum/design/item/mecha/shocker
 	name = "Exosuit Electrifier"
 	desc = "A device to electrify the external portions of a mecha in order to increase its defensive capabilities."
@@ -304,6 +376,11 @@
 	id = "mech_lmg"
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg
 
+/datum/design/item/mecha/rigged_lmg
+	name = "Jury-Rigged Machinegun"
+	id = "mech_lmg-r"
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/rigged
+
 /datum/design/item/mecha/weapon
 	req_tech = list(TECH_COMBAT = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 2000)
@@ -315,6 +392,13 @@
 	req_tech = list(TECH_COMBAT = 4)
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 3000, "plastic" = 2000, "silver" = 2500)
+
+/datum/design/item/mecha/weapon/rigged_scattershot
+	name = "Jury-Rigged Shrapnel Cannon"
+	id = "mech_scattershot-r"
+	req_tech = list(TECH_COMBAT = 4)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot/rigged
+	materials = list(DEFAULT_WALL_MATERIAL = 7000, "glass" = 2000, "plastic" = 2000, "silver" = 2000)
 
 /datum/design/item/mecha/weapon/laser
 	name = "CH-PS \"Immolator\" Laser"
@@ -337,6 +421,34 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 3000, "diamond" = 2000, "osmium" = 5000, "plastic" = 2000)
 
+/datum/design/item/mecha/weapon/rigged_laser_heavy
+	name = "Jury-Rigged Emitter Cannon"
+	id = "mech_laser_heavy-r"
+	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4, TECH_PHORON = 3, TECH_ILLEGAL = 1)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/rigged
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, "glass" = 4000, "diamond" = 1500, "osmium" = 4000, "plastic" = 2000)
+
+/datum/design/item/mecha/weapon/laser_xray
+	name = "CH-XS \"Penetrator\" Laser"
+	id = "mech_laser_xray"
+	req_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_PHORON = 3, TECH_POWER = 4)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/xray
+	materials = list(DEFAULT_WALL_MATERIAL = 9000, "glass" = 3000, "phoron" = 1000, "silver" = 1500, "gold" = 2500, "plastic" = 2000)
+
+/datum/design/item/mecha/weapon/rigged_laser_xray
+	name = "Jury-Rigged Xray Rifle"
+	id = "mech_laser_xray-r"
+	req_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_PHORON = 3, TECH_POWER = 4)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/xray/rigged
+	materials = list(DEFAULT_WALL_MATERIAL = 8500, "glass" = 2500, "phoron" = 1000, "silver" = 1250, "gold" = 2000, "plastic" = 2000)
+
+/datum/design/item/mecha/weapon/phase
+	name = "NT-PE \"Scorpio\" Phase-Emitter"
+	id = "mech_phase"
+	req_tech = list(TECH_MATERIAL = 1, TECH_COMBAT = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/phase
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 3000, "plastic" = 3000)
+
 /datum/design/item/mecha/weapon/ion
 	name = "MK-IV Ion Heavy Cannon"
 	id = "mech_ion"
@@ -344,12 +456,26 @@
 	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion
 	materials = list(DEFAULT_WALL_MATERIAL = 15000, "uranium" = 2000, "silver" = 2000, "osmium" = 4500, "plastic" = 2000)
 
+/datum/design/item/mecha/weapon/rigged_ion
+	name = "Jury-Rigged Ion Cannon"
+	id = "mech_ion-r"
+	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/energy/ion/rigged
+	materials = list(DEFAULT_WALL_MATERIAL = 13000, "uranium" = 1000, "silver" = 1000, "osmium" = 3000, "plastic" = 2000)
+
 /datum/design/item/mecha/weapon/grenade_launcher
 	name = "SGL-6 Grenade Launcher"
 	id = "mech_grenade_launcher"
 	req_tech = list(TECH_COMBAT = 3)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade
 	materials = list(DEFAULT_WALL_MATERIAL = 7000, "gold" = 2000, "plastic" = 3000)
+
+/datum/design/item/mecha/weapon/rigged_grenade_launcher
+	name = "Jury-Rigged Pneumatic Flashlauncher"
+	id = "mech_grenade_launcher-rig"
+	req_tech = list(TECH_COMBAT = 3)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade/rigged
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "gold" = 2000, "plastic" = 2000)
 
 /datum/design/item/mecha/weapon/clusterbang_launcher
 	name = "SOP-6 Grenade Launcher"
@@ -357,7 +483,21 @@
 	id = "clusterbang_launcher"
 	req_tech = list(TECH_COMBAT= 5, TECH_MATERIAL = 5, TECH_ILLEGAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 15000, "gold" = 4500, "uranium" = 4500)
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade/clusterbang/limited
+
+/datum/design/item/mecha/weapon/conc_grenade_launcher
+	name = "SGL-9 Grenade Launcher"
+	id = "mech_grenade_launcher_conc"
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_ILLEGAL = 1)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade/concussion
+	materials = list(DEFAULT_WALL_MATERIAL = 9000, "gold" = 1000, "osmium" = 1000, "plastic" = 3000)
+
+/datum/design/item/mecha/weapon/frag_grenade_launcher
+	name = "HEP-MI 6 Grenade Launcher"
+	id = "mech_grenade_launcher_frag"
+	req_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 2, TECH_MATERIAL = 3, TECH_ILLEGAL = 2)
+	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade/frag/mini
+	materials = list(DEFAULT_WALL_MATERIAL = 10000, "gold" = 2500, "uranium" = 3000, "osmium" = 3000, "plastic" = 3000)
 
 /datum/design/item/mecha/weapon/flamer
 	name = "CR-3 Mark 8 Flamethrower"
@@ -422,6 +562,38 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 7500, "gold" = 750, "silver" = 1500, "glass" = 3750)
 	build_path = /obj/item/mecha_parts/mecha_equipment/repair_droid
 
+/datum/design/item/mecha/shield_drone
+	name = "Shield Drone"
+	desc = "Manual shield drone. Deploys a large, familiar, and rectangular shield in one direction at a time."
+	id = "mech_shield_droid"
+	req_tech = list(TECH_PHORON = 3, TECH_MAGNET = 6, TECH_ILLEGAL = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, "gold" = 2000, "silver" = 3000, "phoron" = 5000, "glass" = 3750)
+	build_path = /obj/item/mecha_parts/mecha_equipment/combat_shield
+
+/datum/design/item/mecha/crisis_drone
+	name = "Crisis Drone"
+	desc = "Deploys a small medical drone capable of patching small wounds in order to stabilize nearby patients."
+	id = "mech_med_droid"
+	req_tech = list(TECH_PHORON = 3, TECH_MAGNET = 6, TECH_BIO = 5, TECH_DATA = 4, TECH_ARCANE = 1)
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, MAT_GOLD = 2000, MAT_SILVER = 3000, MAT_VERDANTIUM = 2500, MAT_GLASS = 3000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/crisis_drone
+
+/datum/design/item/mecha/rad_drone
+	name = "Hazmat Drone"
+	desc = "Deploys a small hazmat drone capable of purging minor radiation damage in order to stabilize nearby patients."
+	id = "mech_rad_droid"
+	req_tech = list(TECH_PHORON = 4, TECH_MAGNET = 5, TECH_BIO = 6, TECH_DATA = 4, TECH_ARCANE = 1)
+	materials = list(DEFAULT_WALL_MATERIAL = 8000, MAT_GOLD = 2000, MAT_URANIUM = 3000, MAT_VERDANTIUM = 2500, MAT_GLASS = 3000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/crisis_drone/rad
+
+/datum/design/item/mecha/medanalyzer
+	name = "Mounted Body Scanner"
+	desc = "An advanced mech-mounted device that is not quite as powerful as a stationary body scanner, though still suitably powerful."
+	id = "mech_med_analyzer"
+	req_tech = list(TECH_PHORON = 4, TECH_MAGNET = 5, TECH_BIO = 5, TECH_DATA = 4)
+	materials = list(MAT_PLASTEEL = 4500, MAT_GOLD = 2000, MAT_URANIUM = 3000, MAT_GLASS = 3000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/powertool/medanalyzer
+
 /datum/design/item/mecha/jetpack
 	name = "Ion Jetpack"
 	desc = "Using directed ion bursts and cunning solar wind reflection technique, this device enables controlled space flight."
@@ -468,6 +640,46 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 7500, "diamond" = 4875)
 	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
 
+/datum/design/item/mecha/ground_drill
+	name = "Surface Bore"
+	desc = "A heavy duty bore. Bigger, better, stronger than the core sampler, but not quite as good as a large drill."
+	id = "mech_ground_drill"
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 2, TECH_PHORON = 1)
+	materials = list(DEFAULT_WALL_MATERIAL = 7000, "silver" = 3000, "phoron" = 2000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/bore
+
+/datum/design/item/mecha/orescanner
+	name = "Ore Scanner"
+	desc = "A hefty device used to scan for subterranean veins of ore."
+	id = "mech_ore_scanner"
+	req_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 2, TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 1000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/orescanner
+
+/datum/design/item/mecha/advorescanner
+	name = "Advanced Ore Scanner"
+	desc = "A hefty device used to scan for the exact volumes of subterranean veins of ore."
+	id = "mech_ore_scanner_adv"
+	req_tech = list(TECH_MATERIAL = 5, TECH_MAGNET = 4, TECH_POWER = 4, TECH_BLUESPACE = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "osmium" = 3000, "silver" = 1000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/orescanner/advanced
+
+/datum/design/item/mecha/powerwrench
+	name = "hydraulic wrench"
+	desc = "A large, hydraulic wrench."
+	id = "mech_wrench"
+	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2, TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, "plastic" = 2000, "glass" = 1250)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/powertool
+
+/datum/design/item/mecha/powercrowbar
+	name = "hydraulic prybar"
+	desc = "A large, hydraulic prybar."
+	id = "mech_crowbar"
+	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2, TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 4000, "osmium" = 3000, "glass" = 1000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/powertool/prybar
+
 /datum/design/item/mecha/generator_nuclear
 	name = "Nuclear Reactor"
 	desc = "Exosuit-held nuclear reactor. Converts uranium and everyone's health to energy."
@@ -475,6 +687,14 @@
 	req_tech = list(TECH_POWER= 3, TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 7500, "silver" = 375, "glass" = 750)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator/nuclear
+
+/datum/design/item/mecha/speedboost_ripley
+	name = "Ripley Leg Actuator Overdrive"
+	desc = "System enhancements and overdrives to make a mech's legs move faster."
+	id = "mech_speedboost_ripley"
+	req_tech = list( TECH_POWER = 5, TECH_MATERIAL = 4, TECH_ENGINEERING = 4)
+	materials = list(DEFAULT_WALL_MATERIAL = 10000, "silver" = 1000, "gold" = 1000)
+	build_path = /obj/item/mecha_parts/mecha_equipment/speedboost
 
 /datum/design/item/synthetic_flash
 	name = "Synthetic Flash"
@@ -484,3 +704,28 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 562, "glass" = 562)
 	build_path = /obj/item/device/flash/synthetic
 	category = "Misc"
+
+/*
+ * Non-Mech Vehicles
+ */
+
+/datum/design/item/mechfab/vehicle
+	build_type = MECHFAB
+	category = "Vehicle"
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6)
+
+/datum/design/item/mechfab/vehicle/spacebike_chassis
+	name = "Spacebike Chassis"
+	desc = "A space-bike's un-assembled frame."
+	id = "vehicle_chassis_spacebike"
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6, TECH_BLUESPACE = 3, TECH_PHORON = 3)
+	materials = list(DEFAULT_WALL_MATERIAL = 12000, "silver" = 3000, "phoron" = 3000, "osmium" = 1000)
+	build_path = /obj/item/weapon/vehicle_assembly/spacebike
+
+/datum/design/item/mechfab/vehicle/quadbike_chassis
+	name = "Quadbike Chassis"
+	desc = "A space-bike's un-assembled frame."
+	id = "vehicle_chassis_quadbike"
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6, TECH_MAGNET = 3, TECH_POWER = 2)
+	materials = list(DEFAULT_WALL_MATERIAL = 15000, "silver" = 3000, "plastic" = 3000, "osmium" = 1000)
+	build_path = /obj/item/weapon/vehicle_assembly/quadbike

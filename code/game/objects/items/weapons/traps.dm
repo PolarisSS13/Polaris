@@ -6,15 +6,19 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "beartrap0"
 	desc = "A mechanically activated leg trap. Low-tech, but reliable. Looks like it could really hurt if you set it off."
+	randpixel = 0
+	center_of_mass = null
 	throwforce = 0
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 18750)
 	var/deployed = 0
+	var/camo_net = FALSE
+	var/stun_length = 0.25 SECONDS
 
 /obj/item/weapon/beartrap/suicide_act(mob/user)
 	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	viewers(user) << "<span class='danger'>[user] is putting the [src.name] on [T.his] head! It looks like [T.hes] trying to commit suicide.</span>"
+	to_chat(viewers(user),"<span class='danger'>[user] is putting the [src.name] on [T.his] head! It looks like [T.hes] trying to commit suicide.</span>")
 	return (BRUTELOSS)
 
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
@@ -98,7 +102,8 @@
 	set_dir(L.dir)
 	can_buckle = 1
 	buckle_mob(L)
-	L << "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>"
+	L.Stun(stun_length)
+	to_chat(L, "<span class='danger'>The steel jaws of \the [src] bite into you, trapping you in place!</span>")
 	deployed = 0
 	can_buckle = initial(can_buckle)
 
@@ -122,6 +127,21 @@
 	..()
 
 	if(!deployed)
+		if(camo_net)
+			alpha = 255
+
 		icon_state = "beartrap0"
 	else
+		if(camo_net)
+			alpha = 50
+
 		icon_state = "beartrap1"
+
+/obj/item/weapon/beartrap/hunting
+	name = "hunting trap"
+	desc = "A mechanically activated leg trap. High-tech and reliable. Looks like it could really hurt if you set it off."
+	stun_length = 1 SECOND
+	camo_net = TRUE
+	color = "#C9DCE1"
+
+	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 3, TECH_MAGNET = 4, TECH_PHORON = 2, TECH_ARCANE = 1)

@@ -132,17 +132,17 @@
 /datum/gear/accessory/brown_vest
 	display_name = "webbing, brown"
 	path = /obj/item/clothing/accessory/storage/brown_vest
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
 
 /datum/gear/accessory/black_vest
 	display_name = "webbing, black"
 	path = /obj/item/clothing/accessory/storage/black_vest
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
 
 /datum/gear/accessory/white_vest
 	display_name = "webbing, white"
 	path = /obj/item/clothing/accessory/storage/white_vest
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor")
+	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
 
 /datum/gear/accessory/brown_drop_pouches
 	display_name = "drop pouches, brown"
@@ -241,3 +241,36 @@
 /datum/gear/accessory/locket
 	display_name = "locket"
 	path = /obj/item/clothing/accessory/locket
+
+/datum/gear/accessory/halfcape
+	display_name = "half cape"
+	path = /obj/item/clothing/accessory/halfcape
+
+/datum/gear/accessory/fullcape
+	display_name = "full cape"
+	path = /obj/item/clothing/accessory/fullcape
+
+/datum/gear/accessory/sash
+	display_name = "sash (colorable)"
+	path = /obj/item/clothing/accessory/sash
+
+/datum/gear/accessory/sash/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/accessory/asym
+	display_name = "asymmetric jacket selection"
+	path = /obj/item/clothing/accessory/asymmetric
+	cost = 1
+
+/datum/gear/accessory/asym/New()
+	..()
+	var/list/asyms = list()
+	for(var/asym in typesof(/obj/item/clothing/accessory/asymmetric))
+		var/obj/item/clothing/accessory/asymmetric_type = asym
+		asyms[initial(asymmetric_type.name)] = asymmetric_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(asyms))
+
+/datum/gear/accessory/cowledvest
+	display_name = "cowled vest"
+	path = /obj/item/clothing/accessory/cowledvest

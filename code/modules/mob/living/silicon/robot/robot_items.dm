@@ -25,12 +25,12 @@
 		if(loaded_item)
 			var/confirm = alert(user, "This will destroy the item inside forever.  Are you sure?","Confirm Analyze","Yes","No")
 			if(confirm == "Yes" && !QDELETED(loaded_item)) //This is pretty copypasta-y
-				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
+				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 				for(var/T in loaded_item.origin_tech)
 					files.UpdateTech(T, loaded_item.origin_tech[T])
-					user << "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)]."
+					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
@@ -51,7 +51,7 @@
 			else
 				return
 		else
-			user << "The [src] is empty.  Put something inside it first."
+			to_chat(user, "The [src] is empty.  Put something inside it first.")
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
@@ -62,10 +62,10 @@
 			success = 1
 			files.RefreshResearch()
 		if(success)
-			user << "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch."
+			to_chat(user, "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch.")
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		else
-			user << "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator."
+			to_chat(user, "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator.")
 			playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 1)
 	if(response == "Eject")
 		if(loaded_item)
@@ -74,7 +74,7 @@
 			icon_state = initial(icon_state)
 			loaded_item = null
 		else
-			user << "The [src] is already empty."
+			to_chat(user, "The [src] is already empty.")
 
 
 /obj/item/weapon/portable_destructive_analyzer/afterattack(var/atom/target, var/mob/living/user, proximity)
@@ -86,7 +86,7 @@
 		return
 	if(istype(target,/obj/item))
 		if(loaded_item)
-			user << "Your [src] already has something inside.  Analyze or eject it first."
+			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
 			return
 		var/obj/item/I = target
 		I.loc = src
@@ -97,12 +97,60 @@
 		flick("portable_analyzer_load", src)
 		icon_state = "portable_analyzer_full"
 
+/obj/item/weapon/portable_scanner
+	name = "Portable Resonant Analyzer"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "portable_scanner"
+	desc = "An advanced scanning device used for analyzing objects without completely annihilating them for science. Unfortunately, it has no connection to any database like its angrier cousin."
+
+/obj/item/weapon/portable_scanner/afterattack(var/atom/target, var/mob/living/user, proximity)
+	if(!target)
+		return
+	if(!proximity)
+		return
+	if(istype(target,/obj/item))
+		var/obj/item/I = target
+		if(do_after(src, 5 SECONDS * I.w_class))
+			for(var/mob/M in viewers())
+				M.show_message(text("<span class='notice'>[user] sweeps \the [src] over \the [I].</span>"), 1)
+			flick("[initial(icon_state)]-scan", src)
+			if(I.origin_tech && I.origin_tech.len)
+				for(var/T in I.origin_tech)
+					to_chat(user, "<span class='notice'>\The [I] had level [I.origin_tech[T]] in [CallTechName(T)].</span>")
+			else
+				to_chat(user, "<span class='notice'>\The [I] cannot be scanned by \the [src].</span>")
+
 //This is used to unlock other borg covers.
 /obj/item/weapon/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.
 	name = "access code transmission device"
 	icon_state = "id-robot"
 	desc = "A circuit grafted onto the bottom of an ID card.  It is used to transmit access codes into other robot chassis, \
 	allowing you to lock and unlock other robots' panels."
+
+	var/dummy_card = null
+	var/dummy_card_type = /obj/item/weapon/card/id/science/roboticist/dummy_cyborg
+
+/obj/item/weapon/card/robot/Initialize()
+	..()
+	dummy_card = new dummy_card_type(src)
+
+/obj/item/weapon/card/robot/Destroy()
+	qdel(dummy_card)
+	dummy_card = null
+	..()
+
+/obj/item/weapon/card/robot/GetID()
+	return dummy_card
+
+/obj/item/weapon/card/robot/syndi
+	dummy_card_type = /obj/item/weapon/card/id/syndicate/dummy_cyborg
+
+/obj/item/weapon/card/id/science/roboticist/dummy_cyborg
+	access = list(access_robotics)
+
+/obj/item/weapon/card/id/syndicate/dummy_cyborg/Initialize()
+	..()
+	access |= access_robotics
 
 //A harvest item for serviceborgs.
 /obj/item/weapon/robot_harvester
@@ -123,7 +171,7 @@
 		else if(T.dead) //It's probably dead otherwise.
 			T.remove_dead(user)
 	else
-		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
+		to_chat(user, "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown.")
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -241,7 +289,7 @@
 				mode = 2
 			else
 				mode = 1
-			user << "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'"
+			to_chat(user, "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'")
 
 	return
 
@@ -307,11 +355,11 @@
 	var/last_flash = 0				//Stores the time of last flash
 
 /obj/item/borg/combat/shield/New()
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	..()
 
 /obj/item/borg/combat/shield/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	..()
 
 /obj/item/borg/combat/shield/attack_self(var/mob/living/user)

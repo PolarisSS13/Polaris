@@ -3,7 +3,7 @@
 	desc = "A large cleaning robot. It looks rather efficient."
 	icon_state = "edCLN0"
 	req_one_access = list(access_robotics, access_janitor)
-	botcard_access = list(access_janitor, access_maint_tunnels)
+	botcard_access = list(access_janitor)
 
 	locked = 0 // Start unlocked so roboticist can set them to patrol.
 	wait_if_pulled = 0 // One big boi.
@@ -82,7 +82,8 @@
 	dat += "Maintenance panel is [open ? "opened" : "closed"]"
 	if(!locked || issilicon(user))
 		dat += "<BR>Cleans Blood: <A href='?src=\ref[src];operation=blood'>[blood ? "Yes" : "No"]</A><BR>"
-		dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
+		if(using_map.bot_patrolling)
+			dat += "<BR>Patrol station: <A href='?src=\ref[src];operation=patrol'>[will_patrol ? "Yes" : "No"]</A><BR>"
 	if(open && !locked)
 		dat += "<BR>Red Switch: <A href='?src=\ref[src];operation=red_switch'>[red_switch ? "On" : "Off"]</A><BR>"
 		dat += "<BR>Green Switch: <A href='?src=\ref[src];operation=green_switch'>[green_switch ? "On" : "Off"]</A><BR>"
@@ -228,7 +229,8 @@
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the ED-CLN.</span>")
 				var/turf/T = get_turf(src)
-				new /mob/living/bot/cleanbot/edCLN(T,created_name)
+				var/mob/living/bot/cleanbot/edCLN/S = new /mob/living/bot/cleanbot/edCLN(T)
+				S.name = created_name
 				user.drop_item()
 				qdel(W)
 				user.drop_from_inventory(src)

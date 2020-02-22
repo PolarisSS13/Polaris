@@ -59,7 +59,7 @@
 	var/delay_to_self_open = 10 MINUTES // How long to wait for first attempt.  Note that the timer by default starts when the pod is created.
 	var/delay_to_try_again = 20 MINUTES // How long to wait if first attempt fails.  Set to 0 to never try again.
 
-/obj/structure/ghost_pod/automatic/initialize()
+/obj/structure/ghost_pod/automatic/Initialize()
 	. = ..()
 	spawn(delay_to_self_open)
 		if(src)
@@ -80,6 +80,15 @@
 
 /obj/structure/ghost_pod/ghost_activated/attack_ghost(var/mob/observer/dead/user)
 	if(used)
+		to_chat(user, "<span class='warning'>Another spirit appears to have gotten to \the [src] before you.  Sorry.</span>")
+		return
+
+	var/choice = input(user, "Are you certain you wish to activate this pod?", "Control Pod") as null|anything in list("Yes", "No")
+
+	if(!choice || choice == "No")
+		return
+
+	else if(used)
 		to_chat(user, "<span class='warning'>Another spirit appears to have gotten to \the [src] before you.  Sorry.</span>")
 		return
 

@@ -13,7 +13,7 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 	var/datum/seed/seed
 	var/modified = 0
 
-/obj/item/seeds/initialize()
+/obj/item/seeds/Initialize()
 	update_seed()
 	. = ..()
 
@@ -62,7 +62,7 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/examine(mob/user)
 	..(user)
 	if(seed && !seed.roundstart)
-		user << "It's tagged as variety #[seed.uid]."
+		to_chat(user, "It's tagged as variety #[seed.uid].")
 
 /obj/item/seeds/cutting
 	name = "cuttings"
@@ -75,7 +75,7 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/random
 	seed_type = null
 
-/obj/item/seeds/random/initialize()
+/obj/item/seeds/random/Initialize()
 	seed = plant_controller.create_random_seed()
 	seed_type = seed.name
 	. = ..()
@@ -182,6 +182,12 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/plumpmycelium
 	seed_type = "plumphelmet"
 
+/obj/item/seeds/plastellmycelium
+	seed_type = "plastic"
+
+/obj/item/seeds/sporemycelium
+	seed_type = "sporeshroom"
+
 /obj/item/seeds/nettleseed
 	seed_type = "nettle"
 
@@ -217,6 +223,9 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 
 /obj/item/seeds/ambrosiadeusseed
 	seed_type = "ambrosiadeus"
+
+/obj/item/seeds/ambrosiainfernusseed
+	seed_type = "ambrosiainfernus"
 
 /obj/item/seeds/whitebeetseed
 	seed_type = "whitebeet"
@@ -283,3 +292,45 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 
 /obj/item/seeds/thaadra
 	seed_type = "thaadra"
+
+/obj/item/seeds/celery
+	seed_type = "celery"
+
+/obj/item/seeds/rhubarb
+	seed_type = "rhubarb"
+
+/obj/item/seeds/wabback
+	seed_type = "whitewabback"
+
+/obj/item/seeds/blackwabback
+	seed_type = "blackwabback"
+
+/obj/item/seeds/wildwabback
+	seed_type = "wildwabback"
+
+/obj/item/seeds/lettuce
+	seed_type = "lettuce"
+
+/obj/item/seeds/siflettuce
+	seed_type = "siflettuce"
+
+/obj/item/seeds/eggyplant
+	seed_type = "egg-plant"
+
+/obj/item/seeds/spineapple
+	seed_type = "spineapple"
+
+/obj/item/seeds/durian
+	seed_type = "durian"
+
+/obj/item/seeds/vanilla
+	seed_type = "vanilla"
+
+/obj/item/seeds/rose
+	seed_type = "rose"
+
+/obj/item/seeds/rose/blood
+	seed_type = "bloodrose"
+
+/obj/item/seeds/gnomes
+	seed_type = "gnomes"

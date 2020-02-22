@@ -32,22 +32,22 @@
 	"Beach" 			= new/datum/holodeck_program(/area/holodeck/source_beach),
 	"Desert" 			= new/datum/holodeck_program(/area/holodeck/source_desert,
 													list(
-														'sound/effects/wind/wind_2_1.ogg',
-											 			'sound/effects/wind/wind_2_2.ogg',
-											 			'sound/effects/wind/wind_3_1.ogg',
-											 			'sound/effects/wind/wind_4_1.ogg',
-											 			'sound/effects/wind/wind_4_2.ogg',
-											 			'sound/effects/wind/wind_5_1.ogg'
+														'sound/effects/weather/wind/wind_2_1.ogg',
+											 			'sound/effects/weather/wind/wind_2_2.ogg',
+											 			'sound/effects/weather/wind/wind_3_1.ogg',
+											 			'sound/effects/weather/wind/wind_4_1.ogg',
+											 			'sound/effects/weather/wind/wind_4_2.ogg',
+											 			'sound/effects/weather/wind/wind_5_1.ogg'
 												 		)
 		 											),
 	"Snowfield" 		= new/datum/holodeck_program(/area/holodeck/source_snowfield,
 													list(
-														'sound/effects/wind/wind_2_1.ogg',
-											 			'sound/effects/wind/wind_2_2.ogg',
-											 			'sound/effects/wind/wind_3_1.ogg',
-											 			'sound/effects/wind/wind_4_1.ogg',
-											 			'sound/effects/wind/wind_4_2.ogg',
-											 			'sound/effects/wind/wind_5_1.ogg'
+														'sound/effects/weather/wind/wind_2_1.ogg',
+											 			'sound/effects/weather/wind/wind_2_2.ogg',
+											 			'sound/effects/weather/wind/wind_3_1.ogg',
+											 			'sound/effects/weather/wind/wind_4_1.ogg',
+											 			'sound/effects/weather/wind/wind_4_2.ogg',
+											 			'sound/effects/weather/wind/wind_5_1.ogg'
 												 		)
 		 											),
 	"Space" 			= new/datum/holodeck_program(/area/holodeck/source_space,
@@ -112,7 +112,7 @@
 	else
 		data["gravity"] = null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "holodeck.tmpl", src.name, 400, 550)
 		ui.set_initial_data(data)
@@ -152,7 +152,7 @@
 
 		src.add_fingerprint(usr)
 
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 
 /obj/machinery/computer/HolodeckControl/emag_act(var/remaining_charges, var/mob/user as mob)
 	playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
@@ -161,8 +161,8 @@
 		emagged = 1
 		safety_disabled = 1
 		update_projections()
-		user << "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>"
-		user << "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [using_map.company_name] maintenance and do not use the simulator."
+		to_chat(user, "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>")
+		to_chat(user, "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [using_map.company_name] maintenance and do not use the simulator.")
 		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 		return 1
 	return
@@ -177,7 +177,7 @@
 		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
 			H.damtype = initial(H.damtype)
 
-	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+	for(var/mob/living/simple_mob/animal/space/carp/holodeck/C in holographic_mobs)
 		C.set_safety(!safety_disabled)
 		if (last_to_emag)
 			C.friends = list(last_to_emag)
@@ -187,7 +187,7 @@
 	current_program = powerdown_program
 	linkedholodeck = locate(projection_area)
 	if(!linkedholodeck)
-		world << "<span class='danger'>Holodeck computer at [x],[y],[z] failed to locate projection area.</span>"
+		to_world("<span class='danger'>Holodeck computer at [x],[y],[z] failed to locate projection area.</span>")
 
 //This could all be done better, but it works for now.
 /obj/machinery/computer/HolodeckControl/Destroy()
@@ -210,7 +210,7 @@
 			derez(item, 0)
 
 	if (!safety_disabled)
-		for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+		for(var/mob/living/simple_mob/animal/space/carp/holodeck/C in holographic_mobs)
 			if (get_area(C.loc) != linkedholodeck)
 				holographic_mobs -= C
 				C.derez()
@@ -306,7 +306,7 @@
 	for(var/item in holographic_objs)
 		derez(item)
 
-	for(var/mob/living/simple_animal/hostile/carp/holodeck/C in holographic_mobs)
+	for(var/mob/living/simple_mob/animal/space/carp/holodeck/C in holographic_mobs)
 		holographic_mobs -= C
 		C.derez()
 
@@ -340,11 +340,11 @@
 						T.temperature = 5000
 						T.hotspot_expose(50000,50000,1)
 			if(L.name=="Holocarp Spawn")
-				holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+				holographic_mobs += new /mob/living/simple_mob/animal/space/carp/holodeck(L.loc)
 
 			if(L.name=="Holocarp Spawn Random")
 				if (prob(4)) //With 4 spawn points, carp should only appear 15% of the time.
-					holographic_mobs += new /mob/living/simple_animal/hostile/carp/holodeck(L.loc)
+					holographic_mobs += new /mob/living/simple_mob/animal/space/carp/holodeck(L.loc)
 
 		update_projections()
 

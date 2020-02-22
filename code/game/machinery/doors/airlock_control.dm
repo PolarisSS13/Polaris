@@ -129,7 +129,7 @@ obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 
-obj/machinery/door/airlock/initialize()
+obj/machinery/door/airlock/Initialize()
 	. = ..()
 	if(frequency)
 		set_frequency(frequency)
@@ -145,6 +145,7 @@ obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
 	name = "airlock sensor"
+	desc = "Sends atmospheric readings to a nearby controller."
 
 	anchored = 1
 	power_channel = ENVIRON
@@ -203,7 +204,7 @@ obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
-obj/machinery/airlock_sensor/initialize()
+obj/machinery/airlock_sensor/Initialize()
 	. = ..()
 	set_frequency(frequency)
 
@@ -258,7 +259,7 @@ obj/machinery/access_button/attackby(obj/item/I as obj, mob/user as mob)
 obj/machinery/access_button/attack_hand(mob/user)
 	add_fingerprint(usr)
 	if(!allowed(user))
-		user << "<span class='warning'>Access Denied</span>"
+		to_chat(user, "<span class='warning'>Access Denied</span>")
 
 	else if(radio_connection)
 		var/datum/signal/signal = new
@@ -276,7 +277,7 @@ obj/machinery/access_button/proc/set_frequency(new_frequency)
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 
-obj/machinery/access_button/initialize()
+obj/machinery/access_button/Initialize()
 	. = ..()
 	set_frequency(frequency)
 

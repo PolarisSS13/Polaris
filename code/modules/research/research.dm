@@ -208,9 +208,15 @@ research holder datum.
 	level = 0
 
 /datum/tech/arcane
-	name = "Arcane Research"
-	desc = "Research into the occult and arcane field for use in practical science"
+	name = "Anomalous Research"
+	desc = "Study of phenomena that disobey the fundamental laws of this universe."
 	id = TECH_ARCANE
+	level = 0
+
+/datum/tech/precursor
+	name = "Precursor Research"
+	desc = "The applied study of Precursor Technology, for modern applications."
+	id = TECH_PRECURSOR
 	level = 0
 
 /obj/item/weapon/disk/tech_disk
@@ -219,13 +225,13 @@ research holder datum.
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
+	randpixel = 5
 	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
+	randpixel_xy()
 
 /obj/item/weapon/disk/design_disk
 	name = "component design disk"
@@ -233,10 +239,10 @@ research holder datum.
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
+	randpixel = 5
 	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
+	randpixel_xy()

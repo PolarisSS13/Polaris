@@ -51,7 +51,7 @@
 			isactive[name] = active ? "Active" : "Inactive"
 		else
 			isactive[name] = t.fields["p_stat"]
-			//world << "[name]: [rank]"
+			//to_world("[name]: [rank]")
 			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
 		var/department = 0
 		if(real_rank in command_positions)
@@ -83,8 +83,8 @@
 		bot[ai.name] = "Artificial Intelligence"
 
 	for(var/mob/living/silicon/robot/robot in mob_list)
-		// No combat/syndicate cyborgs, no drones.
-		if(!robot.scrambledcodes && !(robot.module && robot.module.hide_on_manifest))
+		// No combat/syndicate cyborgs, no drones, and no AI shells.
+		if(!robot.scrambledcodes && !robot.shell && !(robot.module && robot.module.hide_on_manifest))
 			bot[robot.name] = "[robot.modtype] [robot.braintype]"
 
 
@@ -262,6 +262,9 @@
 		var/icon/charicon = cached_character_icon(H)
 		front = icon(charicon, dir = SOUTH)
 		side = icon(charicon, dir = WEST)
+	else // Sending null things through browse_rsc() makes a runtime and breaks the console trying to view the record.
+		front = icon('html/images/no_image32.png')
+		side = icon('html/images/no_image32.png')
 
 	if(!id)
 		id = text("[]", add_zero(num2hex(rand(1, 65536)), 4))

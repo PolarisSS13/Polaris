@@ -12,12 +12,13 @@
 
 	var/last_message	= "" //Contains the last message sent by this client - used to protect against copy-paste spamming.
 	var/last_message_count = 0 //contins a number of how many times a message identical to last_message was sent.
+	var/ircreplyamount = 0
 
 		/////////
 		//OTHER//
 		/////////
 	var/datum/preferences/prefs = null
-	var/move_delay		= 1
+	//var/move_delay		= 1
 	var/moving			= null
 	var/adminobs		= null
 	var/area			= null
@@ -40,6 +41,7 @@
 	var/received_irc_pm = -99999
 	var/irc_admin			//IRC admin that spoke with them last.
 	var/mute_irc = 0
+	var/ip_reputation = 0 //Do we think they're using a proxy/vpn? Only if IP Reputation checking is enabled in config.
 
 
 		////////////////////////////////////

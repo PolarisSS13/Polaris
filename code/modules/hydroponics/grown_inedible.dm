@@ -37,6 +37,7 @@
 	desc = "A reminder of meals gone by."
 	icon = 'icons/obj/trash.dmi'
 	icon_state = "corncob"
+	flags = NOCONDUCT
 	w_class = ITEMSIZE_SMALL
 	throwforce = 0
 	throw_speed = 4
@@ -45,7 +46,7 @@
 /obj/item/weapon/corncob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/weapon/surgical/circular_saw) || istype(W, /obj/item/weapon/material/knife/machete/hatchet) || istype(W, /obj/item/weapon/material/knife))
-		user << "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>"
+		to_chat(user, "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>")
 		new /obj/item/clothing/mask/smokable/pipe/cobpipe (user.loc)
 		qdel(src)
 		return
@@ -55,6 +56,7 @@
 	desc = "A peel from a banana."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "banana_peel"
+	flags = NOCONDUCT
 	w_class = ITEMSIZE_SMALL
 	throwforce = 0
 	throw_speed = 4

@@ -19,6 +19,11 @@
 	var/base_print_delay = 100	// For Adminbus reasons
 	var/printing
 	var/loaded_dna //Blood sample for DNA hashing.
+	var/malfunctioning = FALSE	// May cause rejection, or the printing of some alien limb instead!
+
+	var/complex_organs = FALSE	// Can it print more 'complex' organs?
+
+	var/anomalous_organs = FALSE	// Can it print anomalous organs?
 
 	// These should be subtypes of /obj/item/organ
 	// Costs roughly 20u Phoron (1 sheet) per internal organ, limbs are 60u for limb and extremity
@@ -28,6 +33,7 @@
 		"Kidneys" = list(/obj/item/organ/internal/kidneys,20),
 		"Eyes"    = list(/obj/item/organ/internal/eyes,   20),
 		"Liver"   = list(/obj/item/organ/internal/liver,  20),
+		"Spleen"  = list(/obj/item/organ/internal/spleen, 20),
 		"Arm, Left"   = list(/obj/item/organ/external/arm,  40),
 		"Arm, Right"   = list(/obj/item/organ/external/arm/right,  40),
 		"Leg, Left"   = list(/obj/item/organ/external/leg,  40),
@@ -36,6 +42,18 @@
 		"Foot, Right"   = list(/obj/item/organ/external/foot/right,  20),
 		"Hand, Left"   = list(/obj/item/organ/external/hand,  20),
 		"Hand, Right"   = list(/obj/item/organ/external/hand/right,  20)
+		)
+
+	var/list/complex_products = list(
+		"Brain" = list(/obj/item/organ/internal/brain, 60),
+		"Larynx" = list(/obj/item/organ/internal/voicebox, 20),
+		"Head" = list(/obj/item/organ/external/head, 40)
+		)
+
+	var/list/anomalous_products = list(
+		"Lymphatic Complex" = list(/obj/item/organ/internal/immunehub, 120),
+		"Respiration Nexus" = list(/obj/item/organ/internal/lungs/replicant/mending, 80),
+		"Adrenal Valve Cluster" = list(/obj/item/organ/internal/heart/replicant/rage, 80)
 		)
 
 /obj/machinery/organ_printer/attackby(var/obj/item/O, var/mob/user)
@@ -76,9 +94,29 @@
 /obj/machinery/organ_printer/RefreshParts()
 	// Print Delay updating
 	print_delay = base_print_delay
+	var/manip_rating = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/manip in component_parts)
+		manip_rating += manip.rating
 		print_delay -= (manip.rating-1)*10
 	print_delay = max(0,print_delay)
+
+	manip_rating = round(manip_rating / 2)
+
+	if(manip_rating >= 5)
+		malfunctioning = TRUE
+	else
+		malfunctioning = initial(malfunctioning)
+
+	if(manip_rating >= 3)
+		complex_organs = TRUE
+		if(manip_rating >= 4)
+			anomalous_organs = TRUE
+			if(manip_rating >= 5)
+				malfunctioning = TRUE
+	else
+		complex_organs = initial(complex_organs)
+		anomalous_organs = initial(anomalous_organs)
+		malfunctioning = initial(malfunctioning)
 
 	. = ..()
 
@@ -103,15 +141,25 @@
 		to_chat(user, "<span class='warning'>\The [src] can't operate without a reagent reservoir!</span>")
 
 /obj/machinery/organ_printer/proc/printing_menu(mob/user)
-	var/choice = input("What would you like to print?") as null|anything in products
+	var/list/possible_list = list()
+
+	possible_list |= products
+
+	if(complex_organs)
+		possible_list |= complex_products
+
+	if(anomalous_organs)
+		possible_list |= anomalous_products
+
+	var/choice = input("What would you like to print?") as null|anything in possible_list
 
 	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
 		return
 
-	if(!can_print(choice))
+	if(!can_print(choice, possible_list[choice][2]))
 		return
 
-	container.reagents.remove_reagent("biomass", products[choice][2])
+	container.reagents.remove_reagent("biomass", possible_list[choice][2])
 
 	use_power = 2
 	printing = 1
@@ -128,7 +176,7 @@
 	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
 		return
 
-	print_organ(choice)
+	print_organ(possible_list[choice][1])
 
 	return
 
@@ -162,10 +210,10 @@
 
 	return biomass_count
 
-/obj/machinery/organ_printer/proc/can_print(var/choice)
+/obj/machinery/organ_printer/proc/can_print(var/choice, var/masscount = 0)
 	var/biomass = get_biomass_volume()
-	if(biomass < products[choice][2])
-		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough biomass. [biomass] stored and [products[choice][2]] needed.'</span>")
+	if(biomass < masscount)
+		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough biomass. [biomass] stored and [masscount] needed.'</span>")
 		return 0
 
 	if(!loaded_dna || !loaded_dna["donor"])
@@ -175,14 +223,24 @@
 	return 1
 
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
-	var/new_organ = products[choice][1]
+	var/new_organ = choice
 	var/obj/item/organ/O = new new_organ(get_turf(src))
 	O.status |= ORGAN_CUT_AWAY
 	var/mob/living/carbon/human/C = loaded_dna["donor"]
 	O.set_dna(C.dna)
 	O.species = C.species
 
-	if(istype(O, /obj/item/organ/external))
+	var/malfunctioned = FALSE
+
+	if(malfunctioning && prob(30)) // Alien Tech is a hell of a drug.
+		malfunctioned = TRUE
+		var/possible_species = list(SPECIES_HUMAN, SPECIES_VOX, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_UNATHI, SPECIES_GOLEM, SPECIES_SHADOW)
+		var/new_species = pick(possible_species)
+		if(!GLOB.all_species[new_species])
+			new_species = SPECIES_HUMAN
+		O.species = GLOB.all_species[new_species]
+
+	if(istype(O, /obj/item/organ/external) && !malfunctioned)
 		var/obj/item/organ/external/E = O
 		E.sync_colour_to_human(C)
 
@@ -287,7 +345,7 @@
 
 /obj/machinery/organ_printer/robot/dismantle()
 	if(stored_matter >= matter_amount_per_sheet)
-		new /obj/item/stack/material/steel(get_turf(src), Floor(stored_matter/matter_amount_per_sheet))
+		new /obj/item/stack/material/steel(get_turf(src), FLOOR(stored_matter/matter_amount_per_sheet, 1))
 	return ..()
 
 /obj/machinery/organ_printer/robot/print_organ(var/choice)
@@ -305,7 +363,7 @@
 			return
 		var/obj/item/stack/S = W
 		var/space_left = max_stored_matter - stored_matter
-		var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
+		var/sheets_to_take = min(S.amount, FLOOR(space_left/matter_amount_per_sheet, 1))
 		if(sheets_to_take <= 0)
 			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
 			return

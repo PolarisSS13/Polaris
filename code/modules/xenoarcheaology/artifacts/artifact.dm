@@ -21,7 +21,7 @@
 		if(prob(75))
 			secondary_effect.ToggleActivate(0)
 
-	icon_num = rand(0, 11)
+	icon_num = rand(0, 14)
 
 	icon_state = "ano[icon_num]0"
 	if(icon_num == 7 || icon_num == 8)
@@ -47,6 +47,11 @@
 		desc = "A strange alien device."
 		if(prob(25))
 			my_effect.trigger = pick(TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
+	else if(icon_num == 12 || icon_num == 14)
+		name = "intricately carved statue"
+		desc = "A strange statue."
+		if(prob(60))
+			my_effect.trigger = pick(TRIGGER_TOUCH, TRIGGER_HEAT, TRIGGER_COLD, TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
 
 /obj/machinery/artifact/proc/choose_effect()
 	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in typesof(/datum/artifact_effect) - /datum/artifact_effect
@@ -171,19 +176,19 @@
 
 /obj/machinery/artifact/attack_hand(var/mob/user as mob)
 	if (get_dist(user, src) > 1)
-		user << "<font color='red'>You can't reach [src] from here.</font>"
+		to_chat(user, "<font color='red'>You can't reach [src] from here.</font>")
 		return
 	if(ishuman(user) && user:gloves)
-		user << "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
+		to_chat(user, "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 		return
 
 	src.add_fingerprint(user)
 
 	if(my_effect.trigger == TRIGGER_TOUCH)
-		user << "<b>You touch [src].</b>"
+		to_chat(user, "<b>You touch [src].</b>")
 		my_effect.ToggleActivate()
 	else
-		user << "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
+		to_chat(user, "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 
 	if(prob(25) && secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH)
 		secondary_effect.ToggleActivate(0)
@@ -266,7 +271,7 @@
 			warn = 1
 
 		if(warn)
-			M << "<b>You accidentally touch [src].</b>"
+			to_chat(M, "<b>You accidentally touch [src].</b>")
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

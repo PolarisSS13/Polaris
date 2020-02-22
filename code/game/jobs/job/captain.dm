@@ -15,7 +15,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#1D1D4F"
-	idtype = /obj/item/weapon/card/id/gold
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
@@ -40,7 +39,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 */
 
 /datum/job/captain/get_access()
-	return get_all_station_access()
+	return get_all_station_access().Copy()
 
 
 // Captain Alt Titles
@@ -67,7 +66,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	spawn_positions = 1
 	supervisors = "the Colony Director"
 	selection_color = "#2F2F7F"
-	idtype = /obj/item/weapon/card/id/silver/hop
 	req_admin_notify = 1
 	minimal_player_age = 10
 	economic_modifier = 10
@@ -109,13 +107,13 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	title = "Command Secretary"
 	flag = BRIDGE
 	department = "Command"
+	head_position = 1
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "command staff"
 	selection_color = "#2F2F7F"
-	idtype = /obj/item/weapon/card/id/silver/secretary
 	minimal_player_age = 5
 	economic_modifier = 7
 

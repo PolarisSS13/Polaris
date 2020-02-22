@@ -31,6 +31,7 @@
 // Languages.
 #define LANGUAGE_GALCOM "Galactic Common"
 #define LANGUAGE_EAL "Encoded Audio Language"
+#define LANGUAGE_SWARMBOT "Ancient Audio Encryption"
 #define LANGUAGE_SOL_COMMON "Sol Common"
 #define LANGUAGE_UNATHI "Sinta'unathi"
 #define LANGUAGE_SIIK "Siik"
@@ -51,6 +52,8 @@
 #define LANGUAGE_EVENT1 "Occursus"
 #define LANGUAGE_AKHANI "Akhani"
 #define LANGUAGE_ALAI "Alai"
+#define LANGUAGE_ZADDAT "Vedahq"
+#define LANGUAGE_GIBBERISH "Babel"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

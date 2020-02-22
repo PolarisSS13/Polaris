@@ -25,6 +25,7 @@
 #define IS_XENOS   6
 #define IS_TESHARI 7
 #define IS_SLIME   8
+#define IS_ZADDAT  9
 
 #define CE_STABLE "stable" // Inaprovaline
 #define CE_ANTIBIOTIC "antibiotic" // Antibiotics
@@ -34,6 +35,7 @@
 #define CE_ALCOHOL_TOXIC "alcotoxic" // Liver damage
 #define CE_SPEEDBOOST "gofast" // Hyperzine
 #define CE_SLOWDOWN "goslow" // Slowdown
+#define CE_ANTACID "nopuke" // Don't puke.
 
 #define REAGENTS_PER_SHEET 20
 

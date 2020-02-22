@@ -23,7 +23,7 @@
 /turf/simulated/wall/cult
 	icon_state = "cult"
 /turf/simulated/wall/cult/New(var/newloc)
-	..(newloc,"cult","cult2")
+	..(newloc,"cult","cult2","cult")
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."
@@ -58,6 +58,9 @@
 	..(newloc,"sandstone","diamond")
 /turf/simulated/wall/snowbrick/New(var/newloc)
 	..(newloc,"packed snow")
+
+/turf/simulated/wall/resin/New(var/newloc)
+	..(newloc,"resin",null,"resin")
 
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/skipjack/New(var/newloc)
@@ -154,7 +157,7 @@
 	//To allow mappers to rename shuttle walls to like "redfloor interior" or whatever for ease of use.
 	name = true_name
 
-/turf/simulated/shuttle/wall/initialize()
+/turf/simulated/shuttle/wall/Initialize()
 	. = ..()
 
 	if(join_group)
@@ -235,7 +238,7 @@
 /turf/simulated/shuttle/wall/voidcraft/green
 	stripe_color = "#00FF00"
 
-/turf/simulated/shuttle/wall/voidcraft/initialize()
+/turf/simulated/shuttle/wall/voidcraft/Initialize()
 	. = ..()
 	update_icon()
 

@@ -88,7 +88,7 @@
 				if(autopilot_delay % 10 == 0) // Every ten ticks.
 					var/seconds_left = autopilot_delay * 2
 					if(seconds_left >= 60) // A minute
-						var/minutes_left = Floor(seconds_left / 60)
+						var/minutes_left = FLOOR(seconds_left / 60, 1)
 						seconds_left = seconds_left % 60
 						autopilot_say("Departing in [minutes_left] minute\s[seconds_left ? ", [seconds_left] seconds":""].")
 					else
@@ -162,7 +162,7 @@
 	var/list/my_doors //Should be list("id_tag" = "Pretty Door Name", ...)
 	var/list/my_sensors //Should be list("id_tag" = "Pretty Sensor Name", ...)
 
-/obj/machinery/computer/shuttle_control/web/initialize()
+/obj/machinery/computer/shuttle_control/web/Initialize()
 	. = ..()
 	var/area/my_area = get_area(src)
 	if(my_doors)
@@ -191,7 +191,7 @@
 		var/obj/item/clothing/head/pilot/H = I
 		H.shuttle_comp = src
 		shuttle.helmets |= I
-		to_chat(user,"<span class='notice'>You register the helmet with the ship's console.</span>")
+		to_chat(user, "<span class='notice'>You register the helmet with the ship's console.</span>")
 		shuttle.update_helmets()
 		return
 
@@ -350,7 +350,7 @@
 		"sensors" = sensors
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if(!ui)
 		ui = new(user, src, ui_key, "flight.tmpl", "[shuttle.visible_name] Flight Computer", 500, 500)
@@ -375,7 +375,7 @@
 		ui_interact(usr)
 
 	if (WS.moving_status != SHUTTLE_IDLE)
-		usr << "<font color='blue'>[WS.visible_name] is busy moving.</font>"
+		to_chat(usr, "<font color='blue'>[WS.visible_name] is busy moving.</font>")
 		return
 
 	if(href_list["rename_command"])
@@ -417,7 +417,7 @@
 			return
 
 		if((WS.last_move + WS.cooldown) > world.time)
-			usr << "<font color='red'>The ship's drive is inoperable while the engines are charging.</font>"
+			to_chat(usr, "<font color='red'>The ship's drive is inoperable while the engines are charging.</font>")
 			return
 
 		var/index = text2num(href_list["traverse"])
@@ -472,7 +472,7 @@
 	var/shuttle_name					//Text name of the shuttle to connect to
 	var/list/destinations				//Make sure this STARTS with a destination that builds a route to one that always exists as an anchor.
 
-/obj/shuttle_connector/initialize()
+/obj/shuttle_connector/Initialize()
 	. = ..()
 	SSshuttles.OnDocksInitialized(CALLBACK(src, .proc/setup_routes))
 

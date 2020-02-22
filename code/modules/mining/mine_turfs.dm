@@ -11,6 +11,10 @@ var/list/mining_overlay_cache = list()
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
+	var/rock_side_icon_state = "rock_side"
+	var/sand_icon_state = "asteroid"
+	var/rock_icon_state = "rock"
+	var/random_icon = 0
 	oxygen = 0
 	nitrogen = 0
 	opacity = 1
@@ -24,7 +28,6 @@ var/list/mining_overlay_cache = list()
 	var/sand_dug
 	var/mined_ore = 0
 	var/last_act = 0
-	var/emitter_blasts_taken = 0 // EMITTER MINING! Muhehe.
 	var/overlay_detail
 
 	var/datum/geosample/geologic_data
@@ -47,10 +50,21 @@ var/list/mining_overlay_cache = list()
 		"osmium" = /obj/item/weapon/ore/osmium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
-		"carbon" = /obj/item/weapon/ore/coal
+		"carbon" = /obj/item/weapon/ore/coal,
+		"verdantium" = /obj/item/weapon/ore/verdantium,
+		"marble" = /obj/item/weapon/ore/marble,
+		"lead" = /obj/item/weapon/ore/lead
 	)
 
 	has_resources = 1
+
+// Alternative rock wall sprites.
+/turf/simulated/mineral/light
+	icon_state = "rock-light"
+	rock_side_icon_state = "rock_side-light"
+	sand_icon_state = "sand-light"
+	rock_icon_state = "rock-light"
+	random_icon = 1
 
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
@@ -62,6 +76,24 @@ var/list/mining_overlay_cache = list()
 	density = 0
 	opacity = 0
 	blocks_air = 0
+	can_build_into_floor = TRUE
+
+//Alternative sand floor sprite.
+turf/simulated/mineral/floor/light
+	icon_state = "sand-light"
+	sand_icon_state = "sand-light"
+
+turf/simulated/mineral/floor/light_border
+	icon_state = "sand-light-border"
+	sand_icon_state = "sand-light-border"
+
+turf/simulated/mineral/floor/light_nub
+	icon_state = "sand-light-nub"
+	sand_icon_state = "sand-light-nub"
+
+turf/simulated/mineral/floor/light_corner
+	icon_state = "sand-light-corner"
+	sand_icon_state = "sand-light-corner"
 
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
@@ -72,6 +104,7 @@ var/list/mining_overlay_cache = list()
 	density = 0
 	opacity = 0
 	blocks_air = 0
+	can_build_into_floor = TRUE
 	update_general()
 
 /turf/simulated/mineral/proc/make_wall()
@@ -80,6 +113,7 @@ var/list/mining_overlay_cache = list()
 	density = 1
 	opacity = 1
 	blocks_air = 1
+	can_build_into_floor = FALSE
 	update_general()
 
 /turf/simulated/mineral/proc/update_general()
@@ -89,15 +123,6 @@ var/list/mining_overlay_cache = list()
 		reconsider_lights()
 		if(air_master)
 			air_master.mark_for_update(src)
-
-/turf/simulated/mineral/Entered(atom/movable/M as mob|obj)
-	. = ..()
-	if(istype(M,/mob/living/silicon/robot))
-		var/mob/living/silicon/robot/R = M
-		if(R.module)
-			for(var/obj/item/weapon/storage/bag/ore/O in list(R.module_state_1, R.module_state_2, R.module_state_3))
-				attackby(O, R)
-				return
 
 /turf/simulated/mineral/proc/get_cached_border(var/cache_id, var/direction, var/icon_file, var/icon_state, var/offset = 32)
 	//Cache miss
@@ -118,12 +143,15 @@ var/list/mining_overlay_cache = list()
 	//Cache hit
 	return mining_overlay_cache["[cache_id]_[direction]"]
 
-/turf/simulated/mineral/initialize()
+/turf/simulated/mineral/Initialize()
 	. = ..()
 	if(prob(20))
 		overlay_detail = "asteroid[rand(0,9)]"
 	update_icon(1)
 	if(density && mineral)
+		. = INITIALIZE_HINT_LATELOAD
+	if(random_icon)
+		dir = pick(alldirs)
 		. = INITIALIZE_HINT_LATELOAD
 
 /turf/simulated/mineral/LateInitialize()
@@ -142,13 +170,13 @@ var/list/mining_overlay_cache = list()
 			name = "rock"
 
 		icon = 'icons/turf/walls.dmi'
-		icon_state = "rock"
+		icon_state = rock_icon_state
 
 		//Apply overlays if we should have borders
 		for(var/direction in cardinal)
 			var/turf/T = get_step(src,direction)
 			if(istype(T) && !T.density)
-				add_overlay(get_cached_border("rock_side",direction,icon,"rock_side"))
+				add_overlay(get_cached_border(rock_side_icon_state,direction,icon,rock_side_icon_state))
 
 			if(archaeo_overlay)
 				add_overlay(archaeo_overlay)
@@ -160,7 +188,7 @@ var/list/mining_overlay_cache = list()
 	else
 		name = "sand"
 		icon = 'icons/turf/flooring/asteroid.dmi'
-		icon_state = "asteroid"
+		icon_state = sand_icon_state
 
 		if(sand_dug)
 			add_overlay("dug_overlay")
@@ -174,7 +202,7 @@ var/list/mining_overlay_cache = list()
 			else
 				var/turf/T = get_step(src, direction)
 				if(istype(T) && T.density)
-					add_overlay(get_cached_border("rock_side",direction,'icons/turf/walls.dmi',"rock_side"))
+					add_overlay(get_cached_border(rock_side_icon_state,direction,'icons/turf/walls.dmi',rock_side_icon_state))
 
 		if(overlay_detail)
 			add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
@@ -199,20 +227,28 @@ var/list/mining_overlay_cache = list()
 	if(severity <= 2) // Now to expose the ore lying under the sand.
 		spawn(1) // Otherwise most of the ore is lost to the explosion, which makes this rather moot.
 			for(var/ore in resources)
-				var/amount_to_give = rand(Ceiling(resources[ore]/2), resources[ore])  // Should result in at least one piece of ore.
+				var/amount_to_give = rand(CEILING(resources[ore]/2, 1), resources[ore])  // Should result in at least one piece of ore.
 				for(var/i=1, i <= amount_to_give, i++)
 					var/oretype = ore_types[ore]
 					new oretype(src)
 				resources[ore] = 0
 
-/turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj)
+/turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj) // only emitters for now
+	if(Proj.excavation_amount)
+		var/newDepth = excavation_level + Proj.excavation_amount // Used commonly below
+		if(newDepth >= 200) // first, if the turf is completely drilled then don't bother checking for finds and just drill it
+			GetDrilled(0)
 
-	// Emitter blasts
-	if(istype(Proj, /obj/item/projectile/beam/emitter))
-		emitter_blasts_taken++
-		if(emitter_blasts_taken > 2) // 3 blasts per tile
-			mined_ore = 1
-			GetDrilled()
+		//destroy any archaeological finds
+		if(finds && finds.len)
+			var/datum/find/F = finds[1]
+			if(newDepth > F.excavation_required) // Digging too deep with something as clumsy or random as a blaster will destroy artefacts
+				finds.Remove(finds[1])
+				if(prob(50))
+					artifact_debris()
+
+		excavation_level += Proj.excavation_amount
+		update_archeo_overlays(Proj.excavation_amount)
 
 /turf/simulated/mineral/Bumped(AM)
 
@@ -380,16 +416,8 @@ var/list/mining_overlay_cache = list()
 				var/datum/find/F = finds[1]
 				if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
 					fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
-
+				wreckfinds(P.destroy_artefacts)
 			to_chat(user, "<span class='notice'>You start [P.drill_verb][fail_message].</span>")
-
-			if(fail_message && prob(90))
-				if(prob(25))
-					excavate_find(prob(5), finds[1])
-				else if(prob(50))
-					finds.Remove(finds[1])
-					if(prob(50))
-						artifact_debris()
 
 			if(do_after(user,P.digspeed))
 
@@ -403,61 +431,14 @@ var/list/mining_overlay_cache = list()
 				to_chat(user, "<span class='notice'>You finish [P.drill_verb] \the [src].</span>")
 
 				if(newDepth >= 200) // This means the rock is mined out fully
-					var/obj/structure/boulder/B
-					if(artifact_find)
-						if( excavation_level > 0 || prob(15) )
-							//boulder with an artifact inside
-							B = new(src)
-							if(artifact_find)
-								B.artifact_find = artifact_find
-						else
-							artifact_debris(1)
-					else if(prob(5))
-						//empty boulder
-						B = new(src)
-
-					if(B)
+					if(P.destroy_artefacts)
 						GetDrilled(0)
 					else
-						GetDrilled(1)
+						excavate_turf()
 					return
 
 				excavation_level += P.excavation_amount
-				var/updateIcon = 0
-
-				//archaeo overlays
-				if(!archaeo_overlay && finds && finds.len)
-					var/datum/find/F = finds[1]
-					if(F.excavation_required <= excavation_level + F.view_range)
-						cut_overlay(archaeo_overlay)
-						archaeo_overlay = "overlay_archaeo[rand(1,3)]"
-						add_overlay(archaeo_overlay)
-
-				else if(archaeo_overlay && (!finds || !finds.len))
-					cut_overlay(archaeo_overlay)
-					archaeo_overlay = null
-
-				//there's got to be a better way to do this
-				var/update_excav_overlay = 0
-				if(excavation_level >= 150)
-					if(excavation_level - P.excavation_amount < 150)
-						update_excav_overlay = 1
-				else if(excavation_level >= 100)
-					if(excavation_level - P.excavation_amount < 100)
-						update_excav_overlay = 1
-				else if(excavation_level >= 50)
-					if(excavation_level - P.excavation_amount < 50)
-						update_excav_overlay = 1
-
-				//update overlays displaying excavation level
-				if( !(excav_overlay && excavation_level > 0) || update_excav_overlay )
-					var/excav_quadrant = round(excavation_level / 25) + 1
-					cut_overlay(excav_overlay)
-					excav_overlay = "overlay_excv[excav_quadrant]_[rand(1,3)]"
-					add_overlay(excav_overlay)
-
-				if(updateIcon)
-					update_icon()
+				update_archeo_overlays(P.excavation_amount)
 
 				//drop some rocks
 				next_rock += P.excavation_amount
@@ -469,6 +450,54 @@ var/list/mining_overlay_cache = list()
 			return
 
 	return attack_hand(user)
+
+/turf/simulated/mineral/proc/wreckfinds(var/destroy = FALSE)
+	if(!destroy && prob(90)) //nondestructive methods have a chance of letting you step away to not trash things
+		if(prob(25))
+			excavate_find(prob(5), finds[1])
+	else if(prob(50) || destroy) //destructive methods will always destroy finds, no bowls menacing with spikes for you
+		finds.Remove(finds[1])
+		if(prob(50))
+			artifact_debris()
+
+/turf/simulated/mineral/proc/update_archeo_overlays(var/excavation_amount = 0)
+	var/updateIcon = 0
+
+	//archaeo overlays
+	if(!archaeo_overlay && finds && finds.len)
+		var/datum/find/F = finds[1]
+		if(F.excavation_required <= excavation_level + F.view_range)
+			cut_overlay(archaeo_overlay)
+			archaeo_overlay = "overlay_archaeo[rand(1,3)]"
+			add_overlay(archaeo_overlay)
+
+	else if(archaeo_overlay && (!finds || !finds.len))
+		cut_overlay(archaeo_overlay)
+		archaeo_overlay = null
+
+	//there's got to be a better way to do this
+	var/update_excav_overlay = 0
+	if(excavation_level >= 150)
+		if(excavation_level - excavation_amount < 150)
+			update_excav_overlay = 1
+	else if(excavation_level >= 100)
+		if(excavation_level - excavation_amount < 100)
+			update_excav_overlay = 1
+	else if(excavation_level >= 50)
+		if(excavation_level - excavation_amount < 50)
+			update_excav_overlay = 1
+
+	//update overlays displaying excavation level
+	if( !(excav_overlay && excavation_level > 0) || update_excav_overlay )
+		var/excav_quadrant = round(excavation_level / 25) + 1
+		if(excav_quadrant > 5)
+			excav_quadrant = 5
+		cut_overlay(excav_overlay)
+		excav_overlay = "overlay_excv[excav_quadrant]_[rand(1,3)]"
+		add_overlay(excav_overlay)
+
+	if(updateIcon)
+		update_icon()
 
 /turf/simulated/mineral/proc/clear_ore_effects()
 	for(var/obj/effect/mineral/M in contents)
@@ -483,6 +512,26 @@ var/list/mining_overlay_cache = list()
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		O.geologic_data = geologic_data
 	return O
+
+/turf/simulated/mineral/proc/excavate_turf()
+	var/obj/structure/boulder/B
+	if(artifact_find)
+		if( excavation_level > 0 || prob(15) )
+			//boulder with an artifact inside
+			B = new(src)
+			if(artifact_find)
+				B.artifact_find = artifact_find
+		else
+			artifact_debris(1)
+	else if(prob(5))
+		//empty boulder
+		B = new(src)
+
+	if(B)
+		GetDrilled(0)
+	else
+		GetDrilled(1)
+	return
 
 /turf/simulated/mineral/proc/GetDrilled(var/artifact_fail = 0)
 
@@ -516,7 +565,7 @@ var/list/mining_overlay_cache = list()
 				M.flash_eyes()
 				if(prob(50))
 					M.Stun(5)
-			radiation_repository.flat_radiate(src, 25, 100)
+			SSradiation.flat_radiate(src, 25, 100)
 			if(prob(25))
 				excavate_find(prob(5), finds[1])
 	else if(rand(1,500) == 1)
@@ -533,9 +582,10 @@ var/list/mining_overlay_cache = list()
 	if(is_clean)
 		X = new /obj/item/weapon/archaeological_find(src, new_item_type = F.find_type)
 	else
-		X = new /obj/item/weapon/ore/strangerock(src, inside_item_type = F.find_type)
+		X = new /obj/item/weapon/strangerock(src, inside_item_type = F.find_type)
 		geologic_data.UpdateNearbyArtifactInfo(src)
-		X:geologic_data = geologic_data
+		var/obj/item/weapon/strangerock/SR = X
+		SR.geologic_data = geologic_data
 
 	//some find types delete the /obj/item/weapon/archaeological_find and replace it with something else, this handles when that happens
 	//yuck
@@ -585,10 +635,10 @@ var/list/mining_overlay_cache = list()
 
 	var/mineral_name
 	if(rare_ore)
-		mineral_name = pickweight(list("uranium" = 10, "platinum" = 10, "hematite" = 20, "carbon" = 20, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20))
+		mineral_name = pickweight(list("marble" = 5, "uranium" = 10, "platinum" = 10, "hematite" = 20, "carbon" = 20, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20, "lead" = 5, "verdantium" = 1))
 
 	else
-		mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "hematite" = 35, "carbon" = 35, "diamond" = 1, "gold" = 5, "silver" = 5, "phoron" = 10))
+		mineral_name = pickweight(list("marble" = 3, "uranium" = 10, "platinum" = 10, "hematite" = 70, "carbon" = 70, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20, "lead" = 2, "verdantium" = 1))
 
 	if(mineral_name && (mineral_name in ore_data))
 		mineral = ore_data[mineral_name]

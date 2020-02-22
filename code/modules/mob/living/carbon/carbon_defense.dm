@@ -8,10 +8,6 @@
 	if(!effective_force || blocked >= 100)
 		return 0
 
-	//Hulk modifier
-	if(HULK in user.mutations)
-		effective_force *= 2
-
 	//If the armor soaks all of the damage, it just skips the rest of the checks
 	if(effective_force <= soaked)
 		return 0
@@ -73,7 +69,7 @@
 	var/damage_mod = 1
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
 	var/obj/item/clothing/head/helmet = get_equipped_item(slot_head)
-	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.flags & STOPPRESSUREDAMAGE))
+	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.min_pressure_protection != null)) // Both min- and max_pressure_protection must be set for it to function at all, so we can just check that one is set.
 		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
 		damage_mod = 1.0 - (helmet.armor["melee"]/100)
 

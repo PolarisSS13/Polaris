@@ -263,7 +263,7 @@
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/valve/digital/initialize()
+/obj/machinery/atmospherics/valve/digital/Initialize()
 	. = ..()
 	if(frequency)
 		set_frequency(frequency)
@@ -308,4 +308,4 @@
 
 /obj/machinery/atmospherics/valve/examine(mob/user)
 	..()
-	user << "It is [open ? "open" : "closed"]."
+	to_chat(user, "It is [open ? "open" : "closed"].")

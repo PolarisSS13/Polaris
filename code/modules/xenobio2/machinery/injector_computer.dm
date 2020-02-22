@@ -38,9 +38,9 @@
 				var/obj/machinery/xenobio2/manualinjector/I = P.connectable
 				injector = I
 				I.computer = src
-				user << "<span class='warning'> You link the [src] to the [P.connectable]!</span>"
+				to_chat(user, "<span class='warning'> You link the [src] to the [P.connectable]!</span>")
 		else
-			user << "<span class='warning'> You store the [src] in the [P]'s buffer!</span>"
+			to_chat(user, "<span class='warning'> You store the [src] in the [P]'s buffer!</span>")
 			P.connectable = src
 		return
 
@@ -81,7 +81,7 @@
 		data["occupantHealth"] = null
 		data["occupantHealthMax"] = null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "xenobio_computer.tmpl", "Injector Control Console UI", 470, 450)
 		ui.set_initial_data(data)

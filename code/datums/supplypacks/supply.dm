@@ -61,7 +61,7 @@
 				/obj/item/weapon/tool/wirecutters,
 				/obj/item/weapon/tape_roll = 2)
 	cost = 10
-	containertype = "/obj/structure/closet/crate"
+	containertype = /obj/structure/closet/crate
 	containername = "Shipping supplies crate"
 
 /datum/supply_pack/supply/bureaucracy
@@ -111,7 +111,7 @@
 			/obj/item/clothing/glasses/meson
 			)
 	cost = 10
-	containertype = "/obj/structure/closet/crate/secure"
+	containertype = /obj/structure/closet/crate/secure
 	containername = "Shaft miner equipment"
 	access = access_mining
 
@@ -124,14 +124,14 @@
 
 /datum/supply_pack/supply/cargotrain
 	name = "Cargo Train Tug"
-	contains = list(/obj/vehicle/train/cargo/engine)
+	contains = list(/obj/vehicle/train/engine)
 	cost = 35
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Tug Crate"
 
 /datum/supply_pack/supply/cargotrailer
 	name = "Cargo Train Trolley"
-	contains = list(/obj/vehicle/train/cargo/trolley)
+	contains = list(/obj/vehicle/train/trolley)
 	cost = 15
 	containertype = /obj/structure/largecrate
 	containername = "Cargo Train Trolley Crate"

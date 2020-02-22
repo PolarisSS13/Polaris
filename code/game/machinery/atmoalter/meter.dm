@@ -12,7 +12,7 @@
 	use_power = 1
 	idle_power_usage = 15
 
-/obj/machinery/meter/initialize()
+/obj/machinery/meter/Initialize()
 	. = ..()
 	if (!target)
 		target = select_target()
@@ -94,7 +94,7 @@
 	else
 		t += "The connect error light is blinking."
 
-	user << t
+	to_chat(user,t)
 
 /obj/machinery/meter/Click()
 

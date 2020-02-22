@@ -1,4 +1,8 @@
 /*
+				DO NOT USE THIS. THIS IS BEING DEPRECATED BY PROCESSING SUBSYSTEMS (controllers/subsystems/processing) AND TIMERS.
+*/
+
+/*
 README:
 
 The global_iterator datum is supposed to provide a simple and robust way to
@@ -109,9 +113,6 @@ Data storage vars:
 				CRASH("The global_iterator loop \ref[src] failed to terminate in designated timeframe. This may be caused by server lagging.")
 		return 1
 
-	proc/process()
-		return
-
 	proc/active()
 		return control_switch
 
@@ -139,7 +140,7 @@ Data storage vars:
 			arg_list = arguments
 			return 1
 		else
-//			world << "<span class='danger'>Invalid arguments supplied for [src.type], ref = \ref[src]</span>"
+//			to_world("<span class='danger'>Invalid arguments supplied for [src.type], ref = \ref[src]</span>")
 			return 0
 
 	proc/toggle_null_checks()

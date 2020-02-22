@@ -16,6 +16,7 @@
 	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
 	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
 	dealing with their traders and merchants; those that do rarely enjoy the experience."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/vox)
 
 //	taste_sensitivity = TASTE_DULL
 
@@ -81,8 +82,14 @@
 
 	genders = list(NEUTER)
 
+	descriptors = list(
+		/datum/mob_descriptor/height = -1,
+		/datum/mob_descriptor/build = 1,
+		/datum/mob_descriptor/vox_markings = 0
+		)
+
 /datum/species/vox/get_random_name(var/gender)
-	var/datum/language/species_language = all_languages[default_language]
+	var/datum/language/species_language = GLOB.all_languages[default_language]
 	return species_language.get_random_name(gender)
 
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 0,var/comprehensive = 0)

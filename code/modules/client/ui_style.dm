@@ -42,7 +42,7 @@ var/global/list/all_tooltip_styles = list(
 
 	if(!ishuman(usr))
 		if(!isrobot(usr))
-			usr << "<span class='warning'>You must be a human or a robot to use this verb.</span>"
+			to_chat(usr, "<span class='warning'>You must be a human or a robot to use this verb.</span>")
 			return
 
 	var/UI_style_new = input(usr, "Select a style. White is recommended for customization") as null|anything in all_ui_styles
@@ -77,5 +77,5 @@ var/global/list/all_tooltip_styles = list(
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
-		prefs.save_preferences()
-		usr << "UI was saved"
+		SScharacter_setup.queue_preferences_save(prefs)
+		to_chat(usr, "UI was saved")

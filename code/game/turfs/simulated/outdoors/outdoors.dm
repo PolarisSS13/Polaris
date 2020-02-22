@@ -15,11 +15,12 @@ var/list/turf_edge_cache = list()
 	edge_blending_priority = 1
 	outdoors = TRUE					// This variable is used for weather effects.
 	can_dirty = FALSE				// Looks hideous with dirt on it.
+	can_build_into_floor = TRUE
 
 	// When a turf gets demoted or promoted, this list gets adjusted.  The top-most layer is the layer on the bottom of the list, due to how pop() works.
 	var/list/turf_layers = list(/turf/simulated/floor/outdoors/rocks)
 
-/turf/simulated/floor/outdoors/initialize()
+/turf/simulated/floor/outdoors/Initialize()
 	update_icon()
 	. = ..()
 
@@ -50,10 +51,10 @@ var/list/turf_edge_cache = list()
 		make_indoors()
 
 /turf/simulated/proc/update_icon_edge()
-	if(edge_blending_priority)
+	if(edge_blending_priority && !forbid_turf_edge())
 		for(var/checkdir in cardinal)
 			var/turf/simulated/T = get_step(src, checkdir)
-			if(istype(T) && T.edge_blending_priority && edge_blending_priority < T.edge_blending_priority && icon_state != T.icon_state)
+			if(istype(T) && T.edge_blending_priority && edge_blending_priority < T.edge_blending_priority && icon_state != T.icon_state && !T.forbid_turf_edge())
 				var/cache_key = "[T.get_edge_icon_state()]-[checkdir]"
 				if(!turf_edge_cache[cache_key])
 					var/image/I = image(icon = 'icons/turf/outdoors_edge.dmi', icon_state = "[T.get_edge_icon_state()]-edge", dir = checkdir, layer = ABOVE_TURF_LAYER)
@@ -63,6 +64,14 @@ var/list/turf_edge_cache = list()
 
 /turf/simulated/proc/get_edge_icon_state()
 	return icon_state
+
+// Tests if we shouldn't apply a turf edge.
+// Returns the blocker if one exists.
+/turf/simulated/proc/forbid_turf_edge()
+	for(var/obj/structure/S in contents)
+		if(S.block_turf_edges)
+			return S
+	return null
 
 /turf/simulated/floor/outdoors/update_icon()
 	..()
@@ -79,6 +88,8 @@ var/list/turf_edge_cache = list()
 	icon_state = "rock"
 	edge_blending_priority = 1
 
+/turf/simulated/floor/outdoors/rocks/caves
+	outdoors = FALSE
 
 // This proc adds a 'layer' on top of the turf.
 /turf/simulated/floor/outdoors/proc/promote(var/new_turf_type)

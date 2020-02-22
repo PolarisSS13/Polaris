@@ -32,7 +32,7 @@
 		var/mob/living/new_mob
 
 		var/options = list("robot", "slime")
-		for(var/t in all_species)
+		for(var/t in GLOB.all_species)
 			options += t
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -54,7 +54,7 @@
 				Robot.mmi = new /obj/item/device/mmi(new_mob)
 				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
-				new_mob = new /mob/living/simple_animal/slime(M.loc)
+				new_mob = new /mob/living/simple_mob/slime/xenobio(M.loc)
 				new_mob.universal_speak = 1
 			else
 				var/mob/living/carbon/human/H
@@ -92,10 +92,10 @@
 			else
 				new_mob.key = M.key
 
-			new_mob << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+			to_chat(new_mob, "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>")
 
 			qdel(M)
 			return
 		else
-			M << "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>"
+			to_chat(M, "<span class='warning'>Your form morphs into that of \a [lowertext(randomize)].</span>")
 			return

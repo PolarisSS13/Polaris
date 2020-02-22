@@ -1,5 +1,6 @@
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
+	desc = "Helpful for giving someone blood! Or taking it away. It giveth, it taketh."
 	icon = 'icons/obj/iv_drip.dmi'
 	anchored = 0
 	density = 0
@@ -180,7 +181,7 @@
 
 	to_chat(user, "<span class='notice'>[attached ? attached : "No one"] is attached.</span>")
 
-/obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target, height = 0, air_group = 0)
-	if(height && istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.
-		return 1
+/obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target)
+	if(istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.
+		return TRUE
 	return ..()

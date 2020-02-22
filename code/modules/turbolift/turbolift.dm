@@ -97,7 +97,9 @@
 			if(istype(AM, /mob/living))
 				var/mob/living/M = AM
 				M.gib()
-			else if(AM.simulated)
+			else if(istype(AM, /mob/zshadow))
+				AM.Destroy()		//prevent deleting shadow without deleting shadow's shadows
+			else if(AM.simulated && !(istype(AM, /mob/observer)))
 				qdel(AM)
 
 	origin.move_contents_to(destination)

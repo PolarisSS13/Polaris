@@ -33,7 +33,7 @@
 		tot_rating += SP.rating
 	idle_power_usage /= max(1, tot_rating)
 
-/obj/machinery/r_n_d/server/initialize()
+/obj/machinery/r_n_d/server/Initialize()
 	. = ..()
 	if(!files)
 		files = new /datum/research(src)
@@ -150,6 +150,7 @@
 
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
+	desc = "Manage the research designs and servers. Can also modify upload/download permissions to R&D consoles."
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
@@ -167,7 +168,7 @@
 	add_fingerprint(usr)
 	usr.set_machine(src)
 	if(!allowed(usr) && !emagged)
-		usr << "<span class='warning'>You do not have the required access level</span>"
+		to_chat(usr, "<span class='warning'>You do not have the required access level</span>")
 		return
 
 	if(href_list["main"])
@@ -295,7 +296,7 @@
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		user << "<span class='notice'>You you disable the security protocols.</span>"
+		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		src.updateUsrDialog()
 		return 1
 

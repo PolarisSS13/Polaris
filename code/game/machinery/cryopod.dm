@@ -299,7 +299,7 @@
 		occupant.resting = 1
 	return ..()
 
-/obj/machinery/cryopod/initialize()
+/obj/machinery/cryopod/Initialize()
 	. = ..()
 
 	find_control_computer()
@@ -426,7 +426,7 @@
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == to_despawn.mind)
 			if(O.owner && O.owner.current)
-				O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach...</span>"
+				to_chat(O.owner.current, "<span class='warning'>You get the feeling your target is no longer within your reach...</span>")
 			qdel(O)
 
 	//Handle job slot/tater cleanup.
@@ -532,9 +532,10 @@
 		to_chat(usr, "<span class='notice'><B>\The [src] is in use.</B></span>")
 		return
 
-	for(var/mob/living/simple_animal/slime/M in range(1,usr))
-		if(M.victim == usr)
-			to_chat(usr, "You're too busy getting your life sucked out of you.")
+	if(isliving(usr))
+		var/mob/living/L = usr
+		if(L.has_buckled_mobs())
+			to_chat(L, span("warning", "You have other entities attached to yourself. Remove them first."))
 			return
 
 	visible_message("[usr] [on_enter_visible_message] [src].", 3)
@@ -617,7 +618,7 @@
 	if(!M)
 		return
 	if(occupant)
-		to_chat(user,"<span class='warning'>\The [src] is already occupied.</span>")
+		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 		return
 
 	var/willing = null //We don't want to allow people to be forced into despawning.
@@ -637,7 +638,7 @@
 
 		if(do_after(user, 20))
 			if(occupant)
-				to_chat(user,"<span class='warning'>\The [src] is already occupied.</span>")
+				to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
 				return
 			M.forceMove(src)
 
@@ -648,8 +649,8 @@
 
 		icon_state = occupied_icon_state
 
-		M << "<span class='notice'>[on_enter_occupant_message]</span>"
-		M << "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>"
+		to_chat(M, "<span class='notice'>[on_enter_occupant_message]</span>")
+		to_chat(M, "<span class='notice'><b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b></span>")
 		set_occupant(M)
 		time_entered = world.time
 		if(ishuman(M) && applies_stasis)

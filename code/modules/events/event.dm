@@ -40,15 +40,16 @@
 	return total_weight
 
 /datum/event	//NOTE: Times are measured in master controller ticks!
-	var/startWhen		= 0	//When in the lifetime to call start().
-	var/announceWhen	= 0	//When in the lifetime to call announce().
-	var/endWhen			= 0	//When in the lifetime the event should end.
+	var/startWhen			= 0	//When in the lifetime to call start().
+	var/announceWhen		= 0	//When in the lifetime to call announce().
+	var/endWhen				= 0	//When in the lifetime the event should end.
 
-	var/severity		= 0 //Severity. Lower means less severe, higher means more severe. Does not have to be supported. Is set on New().
-	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
-	var/isRunning		= 1 //If this event is currently running. You should not change this.
-	var/startedAt		= 0 //When this event started.
-	var/endedAt			= 0 //When this event ended.
+	var/severity			= 0 //Severity. Lower means less severe, higher means more severe. Does not have to be supported. Is set on New().
+	var/activeFor			= 0	//How long the event has existed. You don't need to change this.
+	var/isRunning			= TRUE //If this event is currently running. You should not change this.
+	var/startedAt			= 0 //When this event started.
+	var/endedAt				= 0 //When this event ended.
+	var/processing_active 	= TRUE
 	var/datum/event_meta/event_meta = null
 
 /datum/event/nothing
@@ -94,20 +95,28 @@
 
 //Do not override this proc, instead use the appropiate procs.
 //This proc will handle the calls to the appropiate procs.
-/datum/event/proc/process()
+/datum/event/process()
 	if(activeFor > startWhen && activeFor < endWhen)
+		processing_active = FALSE
 		tick()
+		processing_active = TRUE
 
 	if(activeFor == startWhen)
-		isRunning = 1
+		isRunning = TRUE
+		processing_active = FALSE
 		start()
+		processing_active = TRUE
 
 	if(activeFor == announceWhen)
+		processing_active = FALSE
 		announce()
+		processing_active = TRUE
 
 	if(activeFor == endWhen)
-		isRunning = 0
+		isRunning = FALSE
+		processing_active = FALSE
 		end()
+		processing_active = TRUE
 
 	// Everything is done, let's clean up.
 	if(activeFor >= lastProcessAt())
@@ -123,12 +132,12 @@
 		end()
 
 	endedAt = world.time
-	event_manager.active_events -= src
-	event_manager.event_complete(src)
+	SSevents.active_events -= src
+	SSevents.event_complete(src)
 
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
-	event_manager.active_events += src
+	SSevents.active_events += src
 
 	event_meta = EM
 	severity = event_meta.severity

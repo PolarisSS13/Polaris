@@ -7,7 +7,7 @@ var/obj/effect/lobby_image = new /obj/effect/lobby_image
 	desc = "How are you reading this?"
 	screen_loc = "1,1"
 
-/obj/effect/lobby_image/initialize()
+/obj/effect/lobby_image/Initialize()
 	icon = using_map.lobby_icon
 	var/known_icon_states = icon_states(icon)
 	for(var/lobby_screen in using_map.lobby_screens)
@@ -27,7 +27,7 @@ var/obj/effect/lobby_image = new /obj/effect/lobby_image
 /mob/new_player/Login()
 	update_Login_details()	//handles setting lastKnownIP and computer_id for use by the ban systems as well as checking for multikeying
 	if(join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
+		to_chat(src, "<div class=\"motd\">[join_motd]</div>")
 
 	if(!mind)
 		mind = new /datum/mind(key)

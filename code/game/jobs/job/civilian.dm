@@ -14,7 +14,6 @@
 	spawn_positions = 2
 	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/bartender
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
 
@@ -46,7 +45,6 @@
 	spawn_positions = 2
 	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/chef
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 
@@ -76,7 +74,6 @@
 	spawn_positions = 1
 	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/botanist
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
 
@@ -92,68 +89,7 @@
 	title = "Gardener"
 	title_blurb = "A Gardener may be less professional than their counterparts, and are more likely to tend to the public gardens if they aren't needed elsewhere."
 
-//////////////////////////////////
-//			Janitor
-//////////////////////////////////
-/datum/job/janitor
-	title = "Janitor"
-	flag = JANITOR
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Head of Personnel"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/janitor
-	access = list(access_janitor, access_maint_tunnels)
-	minimal_access = list(access_janitor, access_maint_tunnels)
-
-	outfit_type = /decl/hierarchy/outfit/job/service/janitor
-	job_description = "A Janitor keeps the station clean, as long as it doesn't interfere with active crime scenes."
-	alt_titles = list("Janitor" = /datum/alt_title/janitor, "Custodian" = /datum/alt_title/custodian)
-
-// Janitor Alt Titles
-/datum/alt_title/janitor
-	title = "Janitor"
-
-/datum/alt_title/custodian
-	title = "Custodian"
-
-//////////////////////////////////
-//			Librarian
-//////////////////////////////////
-/datum/job/librarian
-	title = "Librarian"
-	flag = LIBRARIAN
-	department = "Civilian"
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Head of Personnel"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/librarian
-	access = list(access_library, access_maint_tunnels)
-	minimal_access = list(access_library)
-
-	outfit_type = /decl/hierarchy/outfit/job/librarian
-	job_description = "The Librarian curates the book selection in the Library, so the crew might enjoy it."
-	alt_titles = list("Librarian" = /datum/alt_title/librarian, "Journalist" = /datum/alt_title/journalist, "Writer" = /datum/alt_title/writer)
-
-// Librarian Alt Titles
-/datum/alt_title/librarian
-	title = "Librarian"
-
-/datum/alt_title/journalist
-	title = "Journalist"
-	title_blurb = "The Journalist uses the Library as a base of operations, from which they can report the news and goings-on on the station with their camera."
-
-/datum/alt_title/writer
-	title = "Writer"
-	title_blurb = "The Writer uses the Library as a quiet place to write whatever it is they choose to write."
-
-
+//Cargo
 //////////////////////////////////
 //			Quartermaster
 //////////////////////////////////
@@ -168,7 +104,6 @@
 	spawn_positions = 1
 	supervisors = "the Head of Personnel"
 	selection_color = "#7a4f33"
-	idtype = /obj/item/weapon/card/id/cargo/head
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
@@ -199,7 +134,6 @@
 	spawn_positions = 2
 	supervisors = "the Quartermaster and the Head of Personnel"
 	selection_color = "#9b633e"
-	idtype = /obj/item/weapon/card/id/cargo/cargo_tech
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 
@@ -225,13 +159,12 @@
 	spawn_positions = 3
 	supervisors = "the Quartermaster and the Head of Personnel"
 	selection_color = "#9b633e"
-	idtype = /obj/item/weapon/card/id/cargo/mining
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
-	job_description = "A Shaft Miner mines and smelts minerals to be delivered to departments that need them."
+	job_description = "A Shaft Miner mines and processes minerals to be delivered to departments that need them."
 	alt_titles = list("Shaft Miner" = /datum/alt_title/miner, "Drill Technician" = /datum/alt_title/drill_tech)
 
 // Shaft Miner Alt Titles
@@ -241,6 +174,67 @@
 /datum/alt_title/drill_tech
 	title = "Drill Technician"
 	title_blurb = "A Drill Technician specializes in operating and maintaining the machinery needed to extract ore from veins deep below the surface."
+
+//Service
+//////////////////////////////////
+//			Janitor
+//////////////////////////////////
+/datum/job/janitor
+	title = "Janitor"
+	flag = JANITOR
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Head of Personnel"
+	selection_color = "#515151"
+	access = list(access_janitor, access_maint_tunnels)
+	minimal_access = list(access_janitor, access_maint_tunnels)
+
+	outfit_type = /decl/hierarchy/outfit/job/service/janitor
+	job_description = "A Janitor keeps the station clean, as long as it doesn't interfere with active crime scenes."
+	alt_titles = list("Janitor" = /datum/alt_title/janitor, "Custodian" = /datum/alt_title/custodian)
+
+// Janitor Alt Titles
+/datum/alt_title/janitor
+	title = "Janitor"
+
+/datum/alt_title/custodian
+	title = "Custodian"
+
+//More or less assistants
+//////////////////////////////////
+//			Librarian
+//////////////////////////////////
+/datum/job/librarian
+	title = "Librarian"
+	flag = LIBRARIAN
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Head of Personnel"
+	selection_color = "#515151"
+	access = list(access_library, access_maint_tunnels)
+	minimal_access = list(access_library)
+
+	outfit_type = /decl/hierarchy/outfit/job/librarian
+	job_description = "The Librarian curates the book selection in the Library, so the crew might enjoy it."
+	alt_titles = list("Librarian" = /datum/alt_title/librarian, "Journalist" = /datum/alt_title/journalist, "Writer" = /datum/alt_title/writer)
+
+// Librarian Alt Titles
+/datum/alt_title/librarian
+	title = "Librarian"
+
+/datum/alt_title/journalist
+	title = "Journalist"
+	title_blurb = "The Journalist uses the Library as a base of operations, from which they can report the news and goings-on on the station with their camera."
+
+/datum/alt_title/writer
+	title = "Writer"
+	title_blurb = "The Writer uses the Library as a quiet place to write whatever it is they choose to write."
 
 //////////////////////////////////
 //		Internal Affairs Agent
@@ -257,7 +251,6 @@
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian/internal_affairs_agent
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)

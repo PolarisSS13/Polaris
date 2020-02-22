@@ -38,11 +38,11 @@
 
 /obj/item/weapon/technomancer_core/New()
 	..()
-	processing_objects |= src
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/technomancer_core/Destroy()
 	dismiss_all_summons()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 // Add the spell buttons to the HUD.
@@ -130,7 +130,7 @@
 	for(var/mob/living/L in summoned_mobs)
 		summoned_mobs -= L
 		qdel(L)
-	for(var/mob/living/simple_animal/ward/ward in wards_in_use)
+	for(var/mob/living/ward in wards_in_use)
 		wards_in_use -= ward
 		qdel(ward)
 
@@ -287,7 +287,7 @@
 		if(prob(30))
 			give_energy(round(amount / 2))
 			if(amount >= 50) // Managing to recover less than half of this isn't worth telling the user about.
-				wearer << "<span class='notice'>\The [src] has recovered [amount/2 >= 1000 ? "a lot of" : "some"] energy.</span>"
+				to_chat(wearer, "<span class='notice'>\The [src] has recovered [amount/2 >= 1000 ? "a lot of" : "some"] energy.</span>")
 	return success
 
 // For those dedicated to summoning hoards of things.

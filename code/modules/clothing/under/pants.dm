@@ -5,6 +5,7 @@
 	icon_state = "jeans"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO|LEGS
+	index = 1
 
 /obj/item/clothing/under/pants/ripped
 	name = "ripped jeans"
@@ -190,3 +191,28 @@
 	name = "baggy camo pants"
 	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
 	icon_state = "baggy_camopants"
+
+/obj/item/clothing/under/pants/utility
+	name = "green utility pants"
+	desc = "A pair of pleather reinforced green work pants."
+	icon_state = "workpants_green"
+
+/obj/item/clothing/under/pants/utility/orange
+	name = "orange utility pants"
+	desc = "A pair of pleather reinforced orange work pants."
+	icon_state = "workpants_orange"
+
+/obj/item/clothing/under/pants/utility/blue
+	name = "blue utility pants"
+	desc = "A pair of pleather reinforced blue work pants."
+	icon_state = "workpants_blue"
+
+/obj/item/clothing/under/pants/utility/white
+	name = "white utility pants"
+	desc = "A pair of pleather reinforced white work pants."
+	icon_state = "workpants_white"
+
+/obj/item/clothing/under/pants/utility/red
+	name = "red utility pants"
+	desc = "A pair of pleather reinforced red work pants."
+	icon_state = "workpants_red"

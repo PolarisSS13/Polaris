@@ -12,7 +12,6 @@
 	spawn_positions = 1
 	supervisors = "the Colony Director"
 	selection_color = "#7F6E2C"
-	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
 	economic_modifier = 10
 
@@ -52,7 +51,6 @@
 	spawn_positions = 5
 	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
-	idtype = /obj/item/weapon/card/id/engineering/engineer
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
@@ -71,7 +69,7 @@
 
 /datum/alt_title/maint_tech
 	title = "Maintenance Technician"
-	title_blurb = "A Maintenace Technician is generally a junior Engineer, and can be expected to run the mildly unpleasant or boring tasks that other \
+	title_blurb = "A Maintenance Technician is generally a junior Engineer, and can be expected to run the mildly unpleasant or boring tasks that other \
 					Engineers don't care to do."
 
 /datum/alt_title/engine_tech
@@ -97,7 +95,6 @@
 	spawn_positions = 2
 	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
-	idtype = /obj/item/weapon/card/id/engineering/atmos
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)

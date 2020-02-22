@@ -8,6 +8,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/
 	name = "space jukebox"
+	desc = "Filled with songs both past and present!"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
 	var/state_base = "jukebox2"
@@ -184,7 +185,7 @@ datum/track/New(var/title_name, var/audio)
 		data["tracks"] = nano_tracks
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm

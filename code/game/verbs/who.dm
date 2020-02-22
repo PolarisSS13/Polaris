@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if(C.holder && C.holder.fakekey)
 				entry += " <i>(as [C.holder.fakekey])</i>"
@@ -51,7 +51,7 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			if(C.holder && C.holder.fakekey)
 				Lines += C.holder.fakekey
 			else
@@ -61,7 +61,7 @@
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
-	src << msg
+	to_chat(src,msg)
 
 /client/verb/staffwho()
 	set category = "Admin"
@@ -171,7 +171,7 @@
 				num_event_managers_online++
 
 	if(config.admin_irc)
-		src << "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>"
+		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
 	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg
 
 	if(config.show_mods)
@@ -183,4 +183,4 @@
 	if(config.show_event_managers)
 		msg += "\n<b> Current Event Managers ([num_event_managers_online]):</b>\n" + eventMmsg
 
-	src << msg
+	to_chat(src,msg)

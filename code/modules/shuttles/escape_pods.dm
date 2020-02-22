@@ -55,7 +55,7 @@
 		"is_armed" = pod.arming_controller.armed,
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "escape_pod_console.tmpl", name, 470, 290)
@@ -83,7 +83,7 @@
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth
 	name = "escape pod berth controller"
 
-/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/initialize()
+/obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/Initialize()
 	. = ..()
 	docking_program = new/datum/computer/file/embedded_program/docking/simple/escape_pod(src)
 	program = docking_program
@@ -102,7 +102,7 @@
 		"armed" = armed,
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "escape_pod_berth_console.tmpl", name, 470, 290)
@@ -112,7 +112,7 @@
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/escape_pod_berth/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
-		user << "<span class='notice'>You emag the [src], arming the escape pod!</span>"
+		to_chat(user, "<span class='notice'>You emag the [src], arming the escape pod!</span>")
 		emagged = 1
 		if (istype(docking_program, /datum/computer/file/embedded_program/docking/simple/escape_pod))
 			var/datum/computer/file/embedded_program/docking/simple/escape_pod/P = docking_program

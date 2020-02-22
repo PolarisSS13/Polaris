@@ -2,6 +2,7 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
+	desc = "Used to cool people down for medical reasons. Totally."
 	icon = 'icons/obj/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
 	density = 1
@@ -30,7 +31,7 @@
 	icon_state = "base"
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/initialize()
+/obj/machinery/atmospherics/unary/cryo_cell/Initialize()
 	. = ..()
 	var/image/tank = image(icon,"tank")
 	tank.alpha = 200
@@ -141,7 +142,7 @@
 				data["beakerVolume"] += R.volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -199,10 +200,9 @@
 			return
 		if(occupant)
 			to_chat(user,"<span class='warning'>\The [src] is already occupied by [occupant].</span>")
-		for(var/mob/living/simple_animal/slime/M in range(1,grab.affecting))
-			if(M.victim == grab.affecting)
-				to_chat(usr, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
-				return
+		if(grab.affecting.has_buckled_mobs())
+			to_chat(user, span("warning", "\The [grab.affecting] has other entities attached to it. Remove them first."))
+			return
 		var/mob/M = grab.affecting
 		qdel(grab)
 		put_mob(M)
@@ -349,14 +349,14 @@
 	set name = "Move Inside"
 	set category = "Object"
 	set src in oview(1)
-	for(var/mob/living/simple_animal/slime/M in range(1,usr))
-		if(M.victim == usr)
-			to_chat(usr, "You're too busy getting your life sucked out of you.")
+	if(isliving(usr))
+		var/mob/living/L = usr
+		if(L.has_buckled_mobs())
+			to_chat(L, span("warning", "You have other entities attached to yourself. Remove them first."))
 			return
-	if(usr.stat != 0)
-		return
-	put_mob(usr)
-	return
+		if(L.stat != CONSCIOUS)
+			return
+		put_mob(L)
 
 /atom/proc/return_air_for_internal_lifeform(var/mob/living/lifeform)
 	return return_air()

@@ -65,7 +65,8 @@
 	var/sound = get_sfx("thunder")
 	for(var/mob/M in player_list)
 		if((P && M.z in P.expected_z_levels) || M.z == T.z)
-			M.playsound_local(get_turf(M), soundin = sound, vol = 70, vary = FALSE, is_global = TRUE)
+			if(M.is_preference_enabled(/datum/client_preference/weather_sounds))
+				M.playsound_local(get_turf(M), soundin = sound, vol = 70, vary = FALSE, is_global = TRUE)
 
 	if(cosmetic) // Everything beyond here involves potentially damaging things. If we don't want to do that, stop now.
 		return
@@ -84,23 +85,7 @@
 	// Some apply to those within zap range, others if they were a bit farther away.
 	for(var/mob/living/L in view(5, T))
 		if(get_dist(L, T) <= LIGHTNING_ZAP_RANGE) // They probably got zapped.
-			// The actual damage/electrocution is handled by tesla_zap().
-			L.Paralyse(5)
-			L.stuttering += 20
-			L.make_jittery(20)
-			L.emp_act(1)
-			to_chat(L, span("critical", "You've been struck by lightning!"))
-
-			// If a non-player simplemob was struck, inflict huge damage.
-			// If the damage is fatal, the SA is turned to ash.
-			if(istype(L, /mob/living/simple_animal) && !L.key)
-				var/mob/living/simple_animal/SA = L
-				SA.adjustFireLoss(200)
-				SA.updatehealth()
-				if(SA.health <= 0) // Might be best to check/give simple_mobs siemens when this gets ported to new mobs.
-					SA.visible_message(span("critical", "\The [SA] disintegrates into ash!"))
-					SA.ash()
-					continue // No point deafening something that wont exist.
+			L.lightning_act()
 
 		// Deafen them.
 		if(L.get_ear_protection() < 2)

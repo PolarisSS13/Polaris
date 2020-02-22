@@ -121,13 +121,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 /mob/living/carbon/human/update_transform()
 	// First, get the correct size.
-	var/desired_scale = icon_scale
+	var/desired_scale_x = icon_scale_x
+	var/desired_scale_y = icon_scale_y
 
-	desired_scale *= species.icon_scale
+	desired_scale_x *= species.icon_scale_x
+	desired_scale_y *= species.icon_scale_y
 
 	for(var/datum/modifier/M in modifiers)
-		if(!isnull(M.icon_scale_percent))
-			desired_scale *= M.icon_scale_percent
+		if(!isnull(M.icon_scale_x_percent))
+			desired_scale_x *= M.icon_scale_x_percent
+		if(!isnull(M.icon_scale_y_percent))
+			desired_scale_y *= M.icon_scale_y_percent
 
 	// Regular stuff again.
 	var/matrix/M = matrix()
@@ -139,12 +143,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	if(lying && !species.prone_icon) //Only rotate them if we're not drawing a specific icon for being prone.
 		M.Turn(90)
-		M.Scale(desired_scale)
+		M.Scale(desired_scale_x, desired_scale_y)
 		M.Translate(1,-6)
 		layer = MOB_LAYER -0.01 // Fix for a byond bug where turf entry order no longer matters
 	else
-		M.Scale(desired_scale)
-		M.Translate(0, 16*(desired_scale-1))
+		M.Scale(desired_scale_x, desired_scale_y)
+		M.Translate(0, 16*(desired_scale_y-1))
 		layer = MOB_LAYER // Fix for a byond bug where turf entry order no longer matters
 
 	animate(src, transform = M, time = anim_time)
@@ -406,8 +410,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 			face_standing.Blend(facial_s, ICON_OVERLAY)
 
-	if(h_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
+	if(h_style)
 		var/datum/sprite_accessory/hair/hair_style = hair_styles_list[h_style]
+		if(head && (head.flags_inv & BLOCKHEADHAIR))
+			if(!(hair_style.flags & HAIR_VERY_SHORT))
+				hair_style = hair_styles_list["Short Hair"]
+
 		if(hair_style && (src.species.get_bodytype(src) in hair_style.species_allowed))
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
 			var/icon/hair_s_add = new/icon("icon" = hair_style.icon_add, "icon_state" = "[hair_style.icon_state]_s")
@@ -548,8 +556,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(wear_suit && (wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space/rig))
 		return //Wearing a suit that prevents uniform rendering
 
+	var/obj/item/clothing/under/under = w_uniform
+
+	var/uniform_sprite
+
+	if(under.index)
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON]_[under.index].dmi"
+	else
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
+
 	//Build a uniform sprite
-	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = INV_W_UNIFORM_DEF_ICON, default_layer = UNIFORM_LAYER)
+	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER)
 	apply_layer(UNIFORM_LAYER)
 
 /mob/living/carbon/human/update_inv_wear_id()
@@ -711,14 +728,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(!wear_suit)
 		return //No point, no suit.
 
-	// Part of splitting the suit sprites up
-	var/iconFile = INV_SUIT_DEF_ICON
-	if(istype(wear_suit, /obj/item/clothing/suit))
-		var/obj/item/clothing/suit/S = wear_suit
-		if(S.update_icon_define)
-			iconFile = S.update_icon_define
+	var/obj/item/clothing/suit/suit = wear_suit
+	var/suit_sprite
 
-	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = iconFile, default_layer = SUIT_LAYER)
+	if(suit.index)
+		suit_sprite = "[INV_SUIT_DEF_ICON]_[suit.index].dmi"
+	else if(istype(suit, /obj/item/clothing) && !isnull(suit.update_icon_define))
+		suit_sprite = suit.update_icon_define
+	else
+		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
+
+	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER)
 
 	apply_layer(SUIT_LAYER)
 

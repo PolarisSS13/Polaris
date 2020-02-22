@@ -5,6 +5,7 @@
 	the polar tundral regions outside of Skrell territory. Extremely fragile, they developed \
 	hunting skills that emphasized taking out their prey without themselves getting hit. They \
 	are only recently becoming known on human stations after reaching space with Skrell assistance."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/teshari)
 
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_SCHECHI, LANGUAGE_SKRELLIAN)
@@ -43,6 +44,7 @@
 
 	slowdown = -1
 	snow_movement = -2	// Ignores light snow
+	item_slowdown_mod = 2	// Tiny birds don't like heavy things
 	total_health = 50
 	brute_mod = 1.35
 	burn_mod =  1.35
@@ -108,7 +110,9 @@
 		O_LIVER =    /obj/item/organ/internal/liver,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
-		O_EYES =     /obj/item/organ/internal/eyes
+		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 
 	unarmed_types = list(
@@ -120,6 +124,11 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/sonar_ping,
 		/mob/living/proc/hide
+		)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = -3,
+		/datum/mob_descriptor/build = -3
 		)
 
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)

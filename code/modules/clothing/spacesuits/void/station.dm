@@ -6,6 +6,8 @@
 	icon_state = "rig0-engineering"
 	item_state_slots = list(slot_r_hand_str = "eng_helm", slot_l_hand_str = "eng_helm")
 	armor = list(melee = 40, bullet = 5, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 80)
+	min_pressure_protection = 0  * ONE_ATMOSPHERE
+	max_pressure_protection = 15 * ONE_ATMOSPHERE
 
 /obj/item/clothing/suit/space/void/engineering
 	name = "engineering voidsuit"
@@ -15,6 +17,8 @@
 	slowdown = 1
 	armor = list(melee = 40, bullet = 5, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	min_pressure_protection = 0  * ONE_ATMOSPHERE
+	max_pressure_protection = 15 * ONE_ATMOSPHERE
 
 //Engineering HAZMAT Voidsuit
 
@@ -90,6 +94,7 @@
 	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
 	icon_state = "rig-mining"
 	item_state_slots = list(slot_r_hand_str = "mining_voidsuit", slot_l_hand_str = "mining_voidsuit")
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/pickaxe)
 	armor = list(melee = 50, bullet = 5, laser = 20, energy = 5, bomb = 55, bio = 100, rad = 20)
 
 //Mining Surplus Voidsuit
@@ -219,6 +224,8 @@
 	armor = list(melee = 40, bullet = 5, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	light_overlay = "helmet_light_dual"
+	min_pressure_protection = 0 * ONE_ATMOSPHERE
+	max_pressure_protection = 20* ONE_ATMOSPHERE
 
 /obj/item/clothing/suit/space/void/atmos
 	name = "atmos voidsuit"
@@ -227,6 +234,8 @@
 	item_state_slots = list(slot_r_hand_str = "atmos_voidsuit", slot_l_hand_str = "atmos_voidsuit")
 	armor = list(melee = 40, bullet = 5, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	min_pressure_protection = 0 * ONE_ATMOSPHERE
+	max_pressure_protection = 20* ONE_ATMOSPHERE
 
 //Atmospherics Surplus Voidsuit
 
@@ -244,3 +253,62 @@
 	name = "heavy duty atmos voidsuit"
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 15, bomb = 45, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+
+//Exploration
+/obj/item/clothing/head/helmet/space/void/exploration
+	name = "exploration voidsuit helmet"
+	desc = "A radiation-resistant helmet made especially for exploring unknown planetary environments."
+	icon_state = "helm_explorer"
+	item_state = "helm_explorer"
+	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
+	armor = list(melee = 40, bullet = 15, laser = 25,energy = 35, bomb = 30, bio = 100, rad = 70)
+	light_overlay = "helmet_light_dual" //explorer_light
+
+/obj/item/clothing/suit/space/void/exploration
+	name = "exploration voidsuit"
+	desc = "A lightweight, radiation-resistant voidsuit, featuring the Explorer emblem on its chest plate. Designed for exploring unknown planetary environments."
+	icon_state = "void_explorer"
+	item_state_slots = list(slot_r_hand_str = "skrell_suit_black", slot_l_hand_str = "skrell_suit_black")
+	armor = list(melee = 40, bullet = 15, laser = 25,energy = 35, bomb = 30, bio = 100, rad = 70)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/healthanalyzer,/obj/item/device/gps,/obj/item/device/radio/beacon, \
+	/obj/item/weapon/shovel,/obj/item/ammo_magazine,/obj/item/weapon/gun)
+
+/obj/item/clothing/head/helmet/space/void/exploration/alt
+	desc = "A radiation-resistant helmet retrofitted for exploring unknown planetary environments."
+	icon_state = "helm_explorer2"
+	item_state = "helm_explorer2"
+	item_state_slots = list(slot_r_hand_str = "mining_helm", slot_l_hand_str = "mining_helm")
+
+/obj/item/clothing/suit/space/void/exploration/alt
+	desc = "A lightweight, radiation-resistant voidsuit. Retrofitted for exploring unknown planetary environments."
+	icon_state = "void_explorer2"
+	item_state_slots = list(slot_r_hand_str = "skrell_suit_white", slot_l_hand_str = "skrell_suit_white")
+
+//Pilot
+/obj/item/clothing/head/helmet/space/void/pilot
+	desc = "An atmos resistant helmet for space and planet exploration."
+	name = "pilot voidsuit helmet"
+	icon_state = "rig0_pilot"
+	item_state = "pilot_helm"
+	item_state_slots = list(slot_r_hand_str = "atmos_helm", slot_l_hand_str = "atmos_helm")
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	light_overlay = "helmet_light_dual"
+
+/obj/item/clothing/suit/space/void/pilot
+	desc = "An atmos resistant voidsuit for space and planet exploration."
+	icon_state = "rig-pilot"
+	item_state_slots = list(slot_r_hand_str = "atmos_voidsuit", slot_l_hand_str = "atmos_voidsuit")
+	name = "pilot voidsuit"
+	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 50)
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable)
+
+/obj/item/clothing/head/helmet/space/void/pilot/alt
+	icon_state = "rig0_pilot2"
+	item_state = "pilot_helm2"
+
+/obj/item/clothing/suit/space/void/pilot/alt
+	desc = "An atmos resistant voidsuit for space."
+	icon_state = "rig-pilot2"
+	item_state = "rig-pilot2"

@@ -135,7 +135,7 @@
 		update_inv_handcuffed()
 
 /mob/living/carbon/proc/break_legcuffs()
-	src << "<span class='warning'>You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)</span>"
+	to_chat(src, "<span class='warning'>You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)</span>")
 	visible_message("<span class='danger'>[src] is trying to break the legcuffs!</span>")
 
 	if(do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -152,11 +152,6 @@
 		qdel(legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
-
-/mob/living/carbon/human/can_break_cuffs()
-	if(species.can_shred(src,1))
-		return 1
-	return ..()
 
 /mob/living/carbon/escape_buckle()
 	if(!buckled) return

@@ -6,10 +6,11 @@
 
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
+	can_build_into_floor = TRUE
 	var/keep_sprite = FALSE
 //	heat_capacity = 700000 No.
 
-/turf/space/initialize()
+/turf/space/Initialize()
 	. = ..()
 	if(!keep_sprite)
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
@@ -126,9 +127,9 @@
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		to_world("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		to_world("Target Z = [target_z]")
+		to_world("Next X = [next_x]")
 		//debug
 */
 		if(target_z)
@@ -151,9 +152,9 @@
 		target_z = y_arr[cur_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Target Z = [target_z]"
-		world << "Next X = [next_x]"
+		to_world("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		to_world("Target Z = [target_z]")
+		to_world("Next X = [next_x]")
 		//debug
 */
 		if(target_z)
@@ -175,9 +176,9 @@
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		to_world("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		to_world("Next Y = [next_y]")
+		to_world("Target Z = [target_z]")
 		//debug
 */
 		if(target_z)
@@ -200,9 +201,9 @@
 		target_z = y_arr[next_y]
 /*
 		//debug
-		world << "Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]"
-		world << "Next Y = [next_y]"
-		world << "Target Z = [target_z]"
+		to_world("Src.z = [src.z] in global map X = [cur_x], Y = [cur_y]")
+		to_world("Next Y = [next_y]")
+		to_world("Target Z = [target_z]")
 		//debug
 */
 		if(target_z)

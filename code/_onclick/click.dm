@@ -76,7 +76,7 @@
 		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
 			return
 		var/obj/mecha/M = loc
-		return M.click_action(A, src)
+		return M.click_action(A, src, params)
 
 	if(restrained())
 		setClickCooldown(10)
@@ -103,7 +103,7 @@
 	var/sdepth = A.storage_depth(src)
 	if((!isturf(A) && A == loc) || (sdepth != -1 && sdepth <= 1))
 		if(W)
-			var/resolved = W.resolve_attackby(A, src)
+			var/resolved = W.resolve_attackby(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
@@ -124,7 +124,7 @@
 		if(A.Adjacent(src) || (W && W.attack_can_reach(src, A, W.reach)) ) // see adjacent.dm
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
-				var/resolved = W.resolve_attackby(A,src)
+				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
@@ -170,7 +170,7 @@
 /mob/living/UnarmedAttack(var/atom/A, var/proximity_flag)
 
 	if(!ticker)
-		src << "You cannot attack people before the game has started."
+		to_chat(src, "You cannot attack people before the game has started.")
 		return 0
 
 	if(stat)
@@ -282,10 +282,10 @@
 	Laser Eyes: as the name implies, handles this since nothing else does currently
 	face_atom: turns the mob towards what you clicked on
 */
-/mob/proc/LaserEyes(atom/A)
+/mob/proc/LaserEyes(atom/A, params)
 	return
 
-/mob/living/LaserEyes(atom/A)
+/mob/living/LaserEyes(atom/A, params)
 	setClickCooldown(4)
 	var/turf/T = get_turf(src)
 
@@ -293,14 +293,17 @@
 	LE.icon = 'icons/effects/genetics.dmi'
 	LE.icon_state = "eyelasers"
 	playsound(usr.loc, 'sound/weapons/taser2.ogg', 75, 1)
-	LE.launch(A)
-/mob/living/carbon/human/LaserEyes()
+	LE.firer = src
+	LE.preparePixelProjectile(A, src, params)
+	LE.fire()
+
+/mob/living/carbon/human/LaserEyes(atom/A, params)
 	if(nutrition>0)
 		..()
 		nutrition = max(nutrition - rand(1,5),0)
 		handle_regular_hud_updates()
 	else
-		src << "<span class='warning'>You're out of energy!  You need food!</span>"
+		to_chat(src, "<span class='warning'>You're out of energy!  You need food!</span>")
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)

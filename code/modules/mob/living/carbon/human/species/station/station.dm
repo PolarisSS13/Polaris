@@ -8,6 +8,7 @@
 	While the central Sol government maintains control of its far-flung people, powerful corporate \
 	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
 	worlds tumultous at best."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/humans)
 	num_alternate_languages = 3
 	species_language = LANGUAGE_SOL_COMMON
 	secondary_langs = list(LANGUAGE_SOL_COMMON, LANGUAGE_TERMINUS)
@@ -23,6 +24,20 @@
 
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+	has_organ = list(
+		O_HEART =		/obj/item/organ/internal/heart,
+		O_LUNGS =		/obj/item/organ/internal/lungs,
+		O_VOICE = 		/obj/item/organ/internal/voicebox,
+		O_LIVER =		/obj/item/organ/internal/liver,
+		O_KIDNEYS =		/obj/item/organ/internal/kidneys,
+		O_BRAIN =		/obj/item/organ/internal/brain,
+		O_APPENDIX = 	/obj/item/organ/internal/appendix,
+		O_SPLEEN = 		/obj/item/organ/internal/spleen,
+		O_EYES =		/obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
+		)
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tie_hair)
@@ -47,7 +62,7 @@
 	brute_mod = 0.85
 	burn_mod = 0.85
 	metabolic_rate = 0.85
-	item_slowdown_mod = 0.5
+	item_slowdown_mod = 0.25
 	mob_size = MOB_LARGE
 	blood_volume = 840
 	bloodloss_rate = 0.75
@@ -67,6 +82,7 @@
 	planet, they mostly hold ideals of honesty, virtue, proficiency and bravery above all \
 	else, frequently even their own lives. They prefer warmer temperatures than most species and \
 	their native tongue is a heavy hissing laungage called Sinta'Unathi."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/unathi)
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -120,6 +136,8 @@
 		O_LIVER =    /obj/item/organ/internal/liver/unathi,
 		O_BRAIN =    /obj/item/organ/internal/brain/unathi,
 		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach/unathi,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/unathi
 		)
 
 
@@ -135,6 +153,11 @@
 		"You feel chilly.",
 		"You feel sluggish and cold.",
 		"Your scales bristle against the cold."
+		)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 2,
+		/datum/mob_descriptor/build = 2
 		)
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
@@ -173,6 +196,7 @@
 	and have accelerated the fledgling culture into the interstellar age. Their history is full of war and highly fractious \
 	governments, something that permeates even to today's times. They prefer colder, tundra-like climates, much like their \
 	home worlds and speak a variety of languages, especially Siik and Akhani."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/tajaran)
 
 	body_temperature = 320.15	//Even more cold resistant, even more flammable
 
@@ -220,7 +244,9 @@
 		O_LIVER =    /obj/item/organ/internal/liver,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
-		O_EYES =     /obj/item/organ/internal/eyes
+		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
@@ -239,6 +265,7 @@
 	of the Qerr'Katish, a caste within their society which keeps the empire of the Skrell running smoothly. Skrell are \
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/skrell)
 	num_alternate_languages = 3
 	secondary_langs = list(LANGUAGE_SKRELLIAN, LANGUAGE_SCHECHI)
 	name_language = LANGUAGE_SKRELLIAN
@@ -303,6 +330,118 @@
 /datum/species/skrell/can_breathe_water()
 	return TRUE
 
+/datum/species/zaddat
+	name = SPECIES_ZADDAT
+	name_plural = "Zaddat"
+	icobase = 'icons/mob/human_races/r_zaddat.dmi'
+	deform = 'icons/mob/human_races/r_zaddat.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/punch)
+	brute_mod = 1.15
+	burn_mod =  1.15
+	toxins_mod = 1.5
+	flash_mod = 2
+	flash_burn = 15 //flashing a zaddat probably counts as police brutality
+	metabolic_rate = 0.7 //did u know if your ancestors starved ur body will actually start in starvation mode?
+	gluttonous = 1
+	taste_sensitivity = TASTE_SENSITIVE
+	num_alternate_languages = 3
+	secondary_langs = list(LANGUAGE_ZADDAT, LANGUAGE_UNATHI)
+	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_SKRELLIANFAR, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX, LANGUAGE_SOL_COMMON, LANGUAGE_AKHANI, LANGUAGE_SIIK, LANGUAGE_GUTTER) //limited vocal range; can talk Unathi and magical Galcom but not much else
+	name_language = LANGUAGE_ZADDAT
+	species_language = LANGUAGE_ZADDAT
+	health_hud_intensity = 2.5
+
+	minimum_breath_pressure = 20 //have fun with underpressures. any higher than this and they'll be even less suitible for life on the station
+
+	economic_modifier = 3
+
+	min_age = 16
+	max_age = 90
+
+	blurb = "The Zaddat are an Unathi client race only recently introduced to SolGov space. Having evolved on \
+	the high-pressure and post-apocalyptic world of Xohok, Zaddat require an environmental suit called a Shroud \
+	to survive in usual planetary and station atmospheres. Despite these restrictions, worsening conditions on \
+	Xohok and the blessing of the Moghes Hegemony have lead the Zaddat to enter human space in search of work \
+	and living space."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/zaddat)
+
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE + 500  // Dangerously high pressure.
+	warning_high_pressure = WARNING_HIGH_PRESSURE + 500 // High pressure warning.
+	warning_low_pressure = 300   // Low pressure warning.
+	hazard_low_pressure = 220     // Dangerously low pressure.
+	safe_pressure = 400
+	poison_type = "nitrogen"      // technically it's a partial pressure thing but IDK if we can emulate that
+
+	genders = list(FEMALE, PLURAL) //females are polyp-producing, infertile females and males are nigh-identical
+
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	appearance_flags = null
+
+	flesh_color = "#AFA59E"
+	base_color = "#e2e4a6"
+	blood_color = "#FFCC00" //a gross sort of orange color
+
+	reagent_tag = IS_ZADDAT
+
+	heat_discomfort_strings = list(
+		"Your joints itch.",
+		"You feel uncomfortably warm.",
+		"Your carapace feels like a stove."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your antenna ache."
+		)
+
+	has_organ = list(    //No appendix.
+	O_HEART =    /obj/item/organ/internal/heart,
+	O_LUNGS =    /obj/item/organ/internal/lungs,
+	O_VOICE = 	 /obj/item/organ/internal/voicebox,
+	O_LIVER =    /obj/item/organ/internal/liver,
+	O_KIDNEYS =  /obj/item/organ/internal/kidneys,
+	O_BRAIN =    /obj/item/organ/internal/brain,
+	O_EYES =     /obj/item/organ/internal/eyes,
+	O_STOMACH =	 /obj/item/organ/internal/stomach,
+	O_INTESTINE =/obj/item/organ/internal/intestine
+	)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 0,
+		/datum/mob_descriptor/build = -1
+		)
+/datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
+	..()
+	if(H.wear_suit) //get rid of job labcoats so they don't stop us from equipping the Shroud
+		qdel(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
+	if(H.wear_mask)
+		qdel(H.wear_mask)
+	if(H.head)
+		qdel(H.head)
+
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat/(H), slot_wear_mask) // mask has to come first or Shroud helmet will get in the way
+	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
+
+/datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
+
+	if(H.inStasisNow())
+		return
+
+	var/damageable = H.get_damageable_organs()
+	var/covered = H.get_coverage()
+
+	var/light_amount = 0 //how much light there is in the place, affects damage
+	if(isturf(H.loc)) //else, there's considered to be no light
+		var/turf/T = H.loc
+		light_amount = T.get_lumcount() * 5
+
+
+	for(var/K in damageable)
+		if(!(K in covered))
+			H.apply_damage(light_amount/4, BURN, K, 0, 0, "Abnormal growths")
+
+
 /datum/species/diona
 	name = SPECIES_DIONA
 	name_plural = "Dionaea"
@@ -319,7 +458,7 @@
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
 	health_hud_intensity = 2.5
-	item_slowdown_mod = 0.25
+	item_slowdown_mod = 0.1
 
 	num_alternate_languages = 2
 	name_language = LANGUAGE_ROOTLOCAL
@@ -338,6 +477,7 @@
 	all known species, especially the Skrell. Their communal mind makes them slow to react, and they have difficulty understanding \
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
 	water and other radiation."
+	catalogue_data = list(/datum/category_item/catalogue/fauna/dionaea)
 
 	has_organ = list(
 		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients,

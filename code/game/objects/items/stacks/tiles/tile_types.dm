@@ -14,13 +14,13 @@
 	name = "tile"
 	singular_name = "tile"
 	desc = "A non-descript floor tile"
+	randpixel = 7
 	w_class = ITEMSIZE_NORMAL
 	max_amount = 60
 
 /obj/item/stack/tile/New()
 	..()
-	pixel_x = rand(-7, 7)
-	pixel_y = rand(-7, 7)
+	randpixel_xy()
 
 /*
  * Grass
@@ -114,7 +114,6 @@
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	flags = CONDUCT
 	no_variants = FALSE
 
 /obj/item/stack/tile/floor/red
@@ -205,3 +204,11 @@
 	singular_name = "roofing"
 	desc = "A section of roofing material. You can use it to repair the ceiling, or expand it."
 	icon_state = "techtile_grid"
+
+/obj/item/stack/tile/roofing/cyborg
+	name = "roofing synthesizer"
+	desc = "A device that makes roofing tiles."
+	uses_charge = 1
+	charge_costs = list(250)
+	stacktype = /obj/item/stack/tile/roofing
+	build_type = /obj/item/stack/tile/roofing

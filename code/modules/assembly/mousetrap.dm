@@ -40,7 +40,7 @@
 				H.UpdateDamageIcon()
 			H.updatehealth()
 	else if(ismouse(target))
-		var/mob/living/simple_animal/mouse/M = target
+		var/mob/living/simple_mob/animal/passive/mouse/M = target
 		visible_message("<font color='red'><b>SPLAT!</b></font>")
 		M.splat()
 	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
@@ -52,7 +52,7 @@
 
 /obj/item/device/assembly/mousetrap/attack_self(mob/living/user as mob)
 	if(!armed)
-		user << "<span class='notice'>You arm [src].</span>"
+		to_chat(user, "<span class='notice'>You arm [src].</span>")
 	else
 		if((CLUMSY in user.mutations) && prob(50))
 			var/which_hand = "l_hand"

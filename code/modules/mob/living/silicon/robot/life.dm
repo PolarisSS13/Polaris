@@ -18,6 +18,7 @@
 
 	if(client)
 		handle_regular_hud_updates()
+		handle_vision()
 		update_items()
 	if (src.stat != DEAD) //still using power
 		use_power()
@@ -39,7 +40,7 @@
 
 /mob/living/silicon/robot/proc/use_power()
 	// Debug only
-	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+	// to_world("DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]")
 	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
@@ -59,7 +60,7 @@
 		src.has_power = 1
 	else
 		if (src.has_power)
-			src << "<font color='red'>You are now running on emergency backup power.</font>"
+			to_chat(src, "<font color='red'>You are now running on emergency backup power.</font>")
 		src.has_power = 0
 		if(lights_on) // Light is on but there is no power!
 			lights_on = 0
@@ -103,9 +104,8 @@
 
 		AdjustConfused(-1)
 
-	else //Dead.
+	else //Dead or just unconscious.
 		src.blinded = 1
-		src.stat = 2
 
 	if (src.stuttering) src.stuttering--
 
@@ -152,6 +152,7 @@
 
 /mob/living/silicon/robot/handle_regular_hud_updates()
 	var/fullbright = FALSE
+	var/seemeson = FALSE
 	if (src.stat == 2 || (XRAY in mutations) || (src.sight_mode & BORGXRAY))
 		src.sight |= SEE_TURFS
 		src.sight |= SEE_MOBS
@@ -169,6 +170,7 @@
 		src.see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_MINIMUM
 		fullbright = TRUE
+		seemeson = TRUE
 	else if (src.sight_mode & BORGMATERIAL)
 		src.sight |= SEE_OBJS
 		src.see_in_dark = 8
@@ -193,6 +195,7 @@
 		src.see_invisible = SEE_INVISIBLE_LIVING // This is normal vision (25), setting it lower for normal vision means you don't "see" things like darkness since darkness
 							 // has a "invisible" value of 15
 	plane_holder.set_vis(VIS_FULLBRIGHT,fullbright)
+	plane_holder.set_vis(VIS_MESONS,seemeson)
 	..()
 
 	if (src.healths)
@@ -316,7 +319,7 @@
 		killswitch_time --
 		if(killswitch_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Killswitch Activated</span>"
+				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
 			killswitch = 0
 			spawn(5)
 				gib()
@@ -327,7 +330,7 @@
 		weaponlock_time --
 		if(weaponlock_time <= 0)
 			if(src.client)
-				src << "<span class='danger'>Weapon Lock Timed Out!</span>"
+				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
 			weapon_lock = 0
 			weaponlock_time = 120
 

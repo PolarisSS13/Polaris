@@ -8,7 +8,7 @@
 	var/list/Lines = list()
 
 	if(holder && (R_ADMIN & holder.rights || R_MOD & holder.rights))
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
 			if(C.holder && C.holder.fakekey)
 				entry += " <i>(as [C.holder.fakekey])</i>"
@@ -52,31 +52,23 @@
 
 			Lines += entry
 	else
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
+			var/entry = "\t"
 			if(C.holder && C.holder.fakekey)
-				var/entry = "\t[C.key]"
-				var/mob/observer/dead/O = C.mob
-				entry = C.holder.fakekey
-				if(isobserver(O))
-					entry += " - <font color='gray'>Observing</font>"
-				else if(istype(O,/mob/new_player))
-					entry += " - <font color='blue'>In Lobby</font>"
-				else
-					entry += " - <font color='green'>Playing</font>"
-				Lines += entry
+				entry += "[C.holder.fakekey]"
 			else
-				var/entry = "\t[C.key]"
-				var/mob/observer/dead/O = C.mob
-				if(isobserver(O)) //Woo, players can see
-					entry += " - <font color='gray'>Observing</font>"
-				else if(istype(O,/mob/new_player))
-					entry += " - <font color='blue'>In Lobby</font>"
-				else
-					entry += " - <font color='green'>Playing</font>"
-				Lines += entry
+				entry += "[C.key]"
+			var/mob/observer/dead/O = C.mob
+			if(isobserver(O))
+				entry += " - <font color='gray'>Observing</font>"
+			else if(istype(O,/mob/new_player))
+				entry += " - <font color='blue'>In Lobby</font>"
+			else
+				entry += " - <font color='green'>Playing</font>"
+			Lines += entry
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
-	src << msg
+	to_chat(src, msg)

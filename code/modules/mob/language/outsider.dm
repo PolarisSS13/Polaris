@@ -27,16 +27,16 @@
 
 /datum/language/corticalborer/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 
-	var/mob/living/simple_animal/borer/B
+	var/mob/living/simple_mob/animal/borer/B
 
 	if(istype(speaker,/mob/living/carbon))
 		var/mob/living/carbon/M = speaker
 		B = M.has_brain_worms()
-	else if(istype(speaker,/mob/living/simple_animal/borer))
+	else if(istype(speaker,/mob/living/simple_mob/animal/borer))
 		B = speaker
 
 	if(B)
-		speaker_mask = B.truename
+		speaker_mask = B.true_name
 	..(speaker,message,speaker_mask)
 
 /datum/language/vox
@@ -115,6 +115,18 @@
 		return 1
 
 	return 0
+
+/datum/language/swarmbot
+	name = LANGUAGE_SWARMBOT
+	desc = "A confusing mechanical language spoken by some form of ancient machine."
+	speech_verb = "clatters"
+	ask_verb = "chatters"
+	exclaim_verb = "shrieks"
+	colour = "changeling"
+	key = "_"
+	flags = NO_STUTTER | RESTRICTED
+	syllables = list("^", "v", "-", ".", "~")
+	space_chance = 60
 
 //for your antag purposes.
 /datum/language/minbus

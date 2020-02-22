@@ -47,6 +47,12 @@ var/list/admin_datums = list()
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()
 
+/datum/admins/vv_edit_var(var_name, var_value)
+	if(var_name == NAMEOF(src, rights) || var_name == NAMEOF(src, owner) || var_name == NAMEOF(src, rank))
+		return FALSE
+	return ..()
+
+//TODO: Proccall guard, when all try/catch are removed and WrapAdminProccall is ported.
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
@@ -56,7 +62,7 @@ generally it would be used like so:
 
 proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
-	world << "you have enough rights!"
+	to_world("you have enough rights!")
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
@@ -70,7 +76,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		return FALSE
 	if(!C.holder)
 		if(show_msg)
-			C << "<span class='warning'>Error: You are not an admin.</span>"
+			to_chat(C, "<span class='warning'>Error: You are not an admin.</span>")
 		return FALSE
 
 	if(rights_required)
@@ -78,7 +84,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 			return TRUE
 		else
 			if(show_msg)
-				C << "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>"
+				to_chat(C, "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>")
 			return FALSE
 	else
 		return TRUE
@@ -92,10 +98,21 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 			if(usr.client.holder.rights != other.holder.rights)
 				if( (usr.client.holder.rights & other.holder.rights) == other.holder.rights )
 					return 1	//we have all the rights they have and more
-		usr << "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>"
+		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
+/client/proc/mark_datum(datum/D)
+	if(!holder)
+		return
+	if(holder.marked_datum)
+		vv_update_display(holder.marked_datum, "marked", "")
+	holder.marked_datum = D
+	vv_update_display(D, "marked", VV_MSG_MARKED)
 
+/client/proc/mark_datum_mapview(datum/D as mob|obj|turf|area in view(view))
+	set category = "Debug"
+	set name = "Mark Object"
+	mark_datum(D)
 
 /client/proc/deadmin()
 	if(holder)

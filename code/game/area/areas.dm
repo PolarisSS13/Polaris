@@ -59,7 +59,7 @@
 
 	..()
 
-/area/initialize()
+/area/Initialize()
 	. = ..()
 	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
 
@@ -68,10 +68,8 @@
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
-	return INITIALIZE_HINT_LATELOAD
-
-/area/LateInitialize()
 	power_change()		// all machines set to current power level, also updates lighting icon
+	return INITIALIZE_HINT_LATELOAD
 
 /area/proc/get_contents()
 	return contents
@@ -325,7 +323,7 @@ var/list/mob/living/forced_ambiance_list = new
 		else
 			H.AdjustStunned(3)
 			H.AdjustWeakened(3)
-		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
+		to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 		playsound(get_turf(src), "bodyfall", 50, 1)
 
 /area/proc/prison_break()

@@ -26,6 +26,13 @@
 	siemens_coefficient = 0.9
 	rolled_sleeves = 0
 
+/obj/item/clothing/under/rank/security/turtleneck
+	name = "security turtleneck"
+	desc = "It's a stylish turtleneck made of a robust nanoweave. Nobody said the Law couldn't be fashionable."
+	icon_state = "turtle_sec"
+	rolled_down = -1
+	rolled_sleeves = -1
+
 /obj/item/clothing/under/rank/dispatch
 	name = "dispatcher's uniform"
 	desc = "A dress shirt and khakis with a security patch sewn on."
@@ -84,7 +91,7 @@
 	item_state_slots[slot_w_uniform_str] = unrolled ? "[worn_state]_r" : initial(worn_state)
 	var/mob/living/carbon/human/H = loc
 	H.update_inv_w_uniform(1)
-	H << "<span class='notice'>You roll the sleeves of your shirt [unrolled ? "up" : "down"]</span>"
+	to_chat(H, "<span class='notice'>You roll the sleeves of your shirt [unrolled ? "up" : "down"]</span>")
 */
 /obj/item/clothing/under/det/grey
 	icon_state = "detective2"

@@ -12,7 +12,6 @@
 	spawn_positions = 1
 	supervisors = "the Colony Director"
 	selection_color = "#8E2929"
-	idtype = /obj/item/weapon/card/id/security/head
 	req_admin_notify = 1
 	economic_modifier = 10
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory,
@@ -55,7 +54,6 @@
 	spawn_positions = 1
 	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security/warden
 	economic_modifier = 5
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
@@ -84,7 +82,6 @@
 	spawn_positions = 2
 	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security/detective
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	economic_modifier = 5
@@ -117,7 +114,6 @@
 	spawn_positions = 4
 	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security/officer
 	economic_modifier = 4
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)

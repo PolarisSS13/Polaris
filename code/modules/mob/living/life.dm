@@ -8,6 +8,10 @@
 		return
 	if(!loc)
 		return
+
+	if(machine && !CanMouseDrop(machine, src))
+		machine = null
+
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	handle_modifiers() // Do this early since it might affect other things later.
@@ -61,6 +65,8 @@
 
 	handle_regular_hud_updates()
 
+	handle_vision()
+
 /mob/living/proc/handle_breathing()
 	return
 
@@ -107,6 +113,7 @@
 	handle_silent()
 	handle_drugged()
 	handle_slurring()
+	handle_confused()
 
 /mob/living/proc/handle_stunned()
 	if(stunned)
@@ -143,6 +150,11 @@
 		AdjustParalysis(-1)
 	return paralysis
 
+/mob/living/proc/handle_confused()
+	if(confused)
+		AdjustConfused(-1)
+	return confused
+
 /mob/living/proc/handle_disabilities()
 	//Eyes
 	if(sdisabilities & BLIND || stat)	//blindness from disability or unconsciousness doesn't get better on its own
@@ -171,9 +183,6 @@
 	handle_hud_icons()
 
 	return 1
-
-/mob/living/proc/handle_vision()
-	return
 
 /mob/living/proc/update_sight()
 	if(!seedarkness)
@@ -233,5 +242,5 @@
 	var/distance = abs(current-adjust_to)		//Used for how long to animate for
 	if(distance < 0.01) return					//We're already all set
 
-	//world << "[src] in B:[round(brightness,0.1)] C:[round(current,0.1)] A2:[round(adjust_to,0.1)] D:[round(distance,0.01)] T:[round(distance*10 SECONDS,0.1)]"
+	//to_world("[src] in B:[round(brightness,0.1)] C:[round(current,0.1)] A2:[round(adjust_to,0.1)] D:[round(distance,0.01)] T:[round(distance*10 SECONDS,0.1)]")
 	animate(dsoverlay, alpha = (adjust_to*255), time = (distance*10 SECONDS))

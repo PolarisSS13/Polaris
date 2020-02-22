@@ -110,7 +110,7 @@ var/const/tk_maxrange = 15
 	if(focus)
 		d = max(d, get_dist(user, focus)) // whichever is further
 	if(d > tk_maxrange)
-		user << "<span class='notice'>Your mind won't reach that far.</span>"
+		to_chat(user, "<span class='notice'>Your mind won't reach that far.</span>")
 		return
 
 	if(!focus)
@@ -154,7 +154,7 @@ var/const/tk_maxrange = 15
 	O.anchored = 1
 	O.density = 0
 	O.layer = FLY_LAYER
-	O.set_dir(pick(cardinal))
+	O.set_dir(pick(GLOB.cardinal))
 	O.icon = 'icons/effects/effects.dmi'
 	O.icon_state = "nothing"
 	flick("empdisable",O)

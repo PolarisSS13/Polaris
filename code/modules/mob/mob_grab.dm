@@ -75,7 +75,7 @@
 		if(affecting.buckled)
 			return null
 		if(state >= GRAB_AGGRESSIVE)
-			animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1)
+			animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 4, 1)
 			return affecting
 
 	return null
@@ -184,10 +184,10 @@
 		qdel(src)
 		return
 	if(affecting.buckled)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+		animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 4, 1, LINEAR_EASING)
 		return
 	if(affecting.lying && state != GRAB_KILL)
-		animate(affecting, pixel_x = 0, pixel_y = 0, 5, 1, LINEAR_EASING)
+		animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 5, 1, LINEAR_EASING)
 		if(force_down)
 			affecting.set_dir(SOUTH) //face up
 		return
@@ -215,14 +215,14 @@
 
 	switch(adir)
 		if(NORTH)
-			animate(affecting, pixel_x = 0, pixel_y =-shift, 5, 1, LINEAR_EASING)
+			animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y =-shift, 5, 1, LINEAR_EASING)
 			affecting.layer = BELOW_MOB_LAYER
 		if(SOUTH)
-			animate(affecting, pixel_x = 0, pixel_y = shift, 5, 1, LINEAR_EASING)
+			animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = shift, 5, 1, LINEAR_EASING)
 		if(WEST)
-			animate(affecting, pixel_x = shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+			animate(affecting, pixel_x = shift, pixel_y = initial(affecting.pixel_y), 5, 1, LINEAR_EASING)
 		if(EAST)
-			animate(affecting, pixel_x =-shift, pixel_y = 0, 5, 1, LINEAR_EASING)
+			animate(affecting, pixel_x =-shift, pixel_y = initial(affecting.pixel_y), 5, 1, LINEAR_EASING)
 
 /obj/item/weapon/grab/proc/s_click(obj/screen/S)
 	if(QDELETED(src))
@@ -257,7 +257,7 @@
 		hud.icon_state = "reinforce1"
 	else if(state < GRAB_NECK)
 		if(isslime(affecting))
-			assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
+			to_chat(assailant, "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>")
 			return
 
 		assailant.visible_message("<span class='warning'>[assailant] has reinforced [TU.his] grip on [affecting] (now neck)!</span>")
@@ -313,7 +313,7 @@
 			switch(assailant.a_intent)
 				if(I_HELP)
 					if(force_down)
-						assailant << "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>"
+						to_chat(assailant, "<span class='warning'>You are no longer pinning [affecting] to the ground.</span>")
 						force_down = 0
 						return
 					if(state >= GRAB_AGGRESSIVE)
@@ -380,7 +380,7 @@
 	//It's easier to break out of a grab by a smaller mob
 	break_strength += max(size_difference(affecting, assailant), 0)
 
-	var/break_chance = break_chance_table[Clamp(break_strength, 1, break_chance_table.len)]
+	var/break_chance = break_chance_table[CLAMP(break_strength, 1, break_chance_table.len)]
 	if(prob(break_chance))
 		if(state == GRAB_KILL)
 			reset_kill_state()
@@ -394,7 +394,7 @@
 	return mob_size_difference(A.mob_size, B.mob_size)
 
 /obj/item/weapon/grab/Destroy()
-	animate(affecting, pixel_x = 0, pixel_y = 0, 4, 1, LINEAR_EASING)
+	animate(affecting, pixel_x = initial(affecting.pixel_x), pixel_y = initial(affecting.pixel_y), 4, 1, LINEAR_EASING)
 	affecting.reset_plane_and_layer()
 	if(affecting)
 		affecting.grabbed_by -= src

@@ -14,7 +14,7 @@
 	can_be_asked_input = 1
 	inputs = list()
 	outputs = list()
-	activators = list("on pressed" = IC_PINTYPE_PULSE_IN)
+	activators = list("on pressed" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 
@@ -31,7 +31,7 @@
 	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("on" = IC_PINTYPE_BOOLEAN)
-	activators = list("on toggle" = IC_PINTYPE_PULSE_IN)
+	activators = list("on toggle" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 
 /obj/item/integrated_circuit/input/toggle_button/ask_for_input(mob/user) // Ditto.
@@ -48,12 +48,12 @@
 	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("number entered" = IC_PINTYPE_NUMBER)
-	activators = list("on entered" = IC_PINTYPE_PULSE_IN)
+	activators = list("on entered" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 4
 
 /obj/item/integrated_circuit/input/numberpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter a number, please.","Number pad") as null|num
+	var/new_input = input(user, "Enter a number, please.","Number pad", get_pin_data(IC_OUTPUT, 1)) as null|num
 	if(isnum(new_input) && CanInteract(user, physical_state))
 		set_pin_data(IC_OUTPUT, 1, new_input)
 		push_data()
@@ -67,14 +67,33 @@
 	can_be_asked_input = 1
 	inputs = list()
 	outputs = list("string entered" = IC_PINTYPE_STRING)
-	activators = list("on entered" = IC_PINTYPE_PULSE_IN)
+	activators = list("on entered" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 4
 
 /obj/item/integrated_circuit/input/textpad/ask_for_input(mob/user)
-	var/new_input = input(user, "Enter some words, please.","Number pad") as null|text
+	var/new_input = input(user, "Enter some words, please.","Number pad", get_pin_data(IC_OUTPUT, 1)) as null|text
 	if(istext(new_input) && CanInteract(user, physical_state))
 		set_pin_data(IC_OUTPUT, 1, new_input)
+		push_data()
+		activate_pin(1)
+
+/obj/item/integrated_circuit/input/colorpad
+	name = "color pad"
+	desc = "This small color pad allows someone to input a hexadecimal color into the system."
+	icon_state = "colorpad"
+	complexity = 2
+	can_be_asked_input = 1
+	inputs = list()
+	outputs = list("color entered" = IC_PINTYPE_COLOR)
+	activators = list("on entered" = IC_PINTYPE_PULSE_OUT)
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	power_draw_per_use = 4
+
+/obj/item/integrated_circuit/input/colorpad/ask_for_input(mob/user)
+	var/new_color = input(user, "Enter a color, please.", "Color pad", get_pin_data(IC_OUTPUT, 1)) as color|null
+	if(new_color && CanInteract(user, physical_state))
+		set_pin_data(IC_OUTPUT, 1, new_color)
 		push_data()
 		activate_pin(1)
 
@@ -83,7 +102,7 @@
 	desc = "A very small version of the common medical analyser.  This allows the machine to know how healthy someone is."
 	icon_state = "medscan"
 	complexity = 4
-	inputs = list("\<REF\> target")
+	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
 		"total health %" = IC_PINTYPE_NUMBER,
 		"total missing health" = IC_PINTYPE_NUMBER
@@ -117,7 +136,7 @@
 	This type is much more precise, allowing the machine to know much more about the target than a normal analyzer."
 	icon_state = "medscan_adv"
 	complexity = 12
-	inputs = list("\<REF\> target")
+	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
 		"total health %"		= IC_PINTYPE_NUMBER,
 		"total missing health"	= IC_PINTYPE_NUMBER,
@@ -159,7 +178,7 @@
 	relative coordinates, total amount of reagents, and maximum amount of reagents of the referenced object."
 	icon_state = "video_camera"
 	complexity = 6
-	inputs = list("\<REF\> target" = IC_PINTYPE_REF)
+	inputs = list("target" = IC_PINTYPE_REF)
 	outputs = list(
 		"name"	            	= IC_PINTYPE_STRING,
 		"description"       	= IC_PINTYPE_STRING,
@@ -262,7 +281,7 @@
 	complexity = 6
 	name = "advanced locator"
 	desc = "This is needed for certain devices that demand a reference for a target to act upon. This type locates something \
-	that is standing in given radius of up to 8 meters"
+	that is standing in given radius of up to 7 meters"
 	extended_desc = "The first pin requires a ref to a kind of object that you want the locator to acquire. This means that it will \
 	give refs to nearby objects that are similar to given sample. If this pin is a string, the locator will search for\
 	 item by matching desired text in name + description. If more than one valid object is found nearby, it will choose one of them at \
@@ -277,7 +296,7 @@
 /obj/item/integrated_circuit/input/advanced_locator/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
 	if(isnum(rad))
-		rad = Clamp(rad, 0, 8)
+		rad = CLAMP(rad, 0, 7)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator/do_work()
@@ -289,11 +308,12 @@
 	var/list/valid_things = list()
 	if(isweakref(I.data))
 		var/atom/A = I.data.resolve()
-		var/desired_type = A.type
-		if(desired_type)
-			for(var/atom/thing in nearby_things)
-				if(thing.type == desired_type)
-					valid_things.Add(thing)
+		if(A)
+			var/desired_type = A.type
+			if(desired_type)
+				for(var/atom/thing in nearby_things)
+					if(thing.type == desired_type)
+						valid_things.Add(thing)
 	else if(istext(I.data))
 		var/DT = I.data
 		for(var/atom/thing in nearby_things)
@@ -334,7 +354,7 @@
 	var/code = 30
 	var/datum/radio_frequency/radio_connection
 
-/obj/item/integrated_circuit/input/signaler/initialize()
+/obj/item/integrated_circuit/input/signaler/Initialize()
 	. = ..()
 	set_frequency(frequency)
 	// Set the pins so when someone sees them, they won't show as null
@@ -394,15 +414,18 @@
 
 	activate_pin(3)
 
-	for(var/mob/O in hearers(1, get_turf(src)))
-		O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+	if(loc)
+		for(var/mob/O in hearers(1, get_turf(src)))
+			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
 
 /obj/item/integrated_circuit/input/EPv2
 	name = "\improper EPv2 circuit"
 	desc = "Enables the sending and receiving of messages on the Exonet with the EPv2 protocol."
 	extended_desc = "An EPv2 address is a string with the format of XXXX:XXXX:XXXX:XXXX.  Data can be send or received using the \
 	second pin on each side, with additonal data reserved for the third pin.  When a message is received, the second activaiton pin \
-	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message."
+	will pulse whatever's connected to it.  Pulsing the first activation pin will send a message.\
+	\
+	When messaging Communicators, you must set data to send to the string `text` to avoid errors in reception."
 	icon_state = "signal"
 	complexity = 4
 	inputs = list(
@@ -520,7 +543,59 @@
 	if(translated)
 		activate_pin(2)
 
+/obj/item/integrated_circuit/input/microphone/sign
+	name = "sign-language translator"
+	desc = "Useful for spying on people or for sign activated machines."
+	extended_desc = "This will automatically translate galactic standard sign language it sees to Galactic Common.  \
+	The first activation pin is always pulsed when the circuit sees someone speak sign, while the second one \
+	is only triggered if it sees someone speaking a language other than sign language, which it will attempt to \
+	lip-read."
+	icon_state = "video_camera"
+	complexity = 12
+	inputs = list()
+	outputs = list(
+	"speaker" = IC_PINTYPE_STRING,
+	"message" = IC_PINTYPE_STRING
+	)
+	activators = list("on message received" = IC_PINTYPE_PULSE_OUT, "on translation" = IC_PINTYPE_PULSE_OUT)
+	spawn_flags = IC_SPAWN_RESEARCH
+	power_draw_per_use = 30
 
+	var/list/my_langs = list()
+	var/list/readable_langs = list(
+		LANGUAGE_GALCOM,
+		LANGUAGE_SOL_COMMON,
+		LANGUAGE_TRADEBAND,
+		LANGUAGE_GUTTER,
+		LANGUAGE_TERMINUS,
+		LANGUAGE_SIGN
+		)
+
+/obj/item/integrated_circuit/input/microphone/sign/Initialize()
+	..()
+	for(var/lang in readable_langs)
+		var/datum/language/newlang = GLOB.all_languages[lang]
+		my_langs |= newlang
+
+/obj/item/integrated_circuit/input/microphone/sign/hear_talk(mob/living/M, msg, var/verb="says", datum/language/speaking=null)
+	var/translated = FALSE
+	if(M && msg)
+		if(speaking)
+			if(!((speaking.flags & NONVERBAL) || (speaking.flags & SIGNLANG)))
+				translated = TRUE
+				msg = speaking.scramble(msg, my_langs)
+		set_pin_data(IC_OUTPUT, 1, M.GetVoice())
+		set_pin_data(IC_OUTPUT, 2, msg)
+
+	push_data()
+	if(!translated)
+		activate_pin(1)
+	if(translated)
+		activate_pin(2)
+
+/obj/item/integrated_circuit/input/microphone/sign/hear_signlang(text, verb, datum/language/speaking, mob/M as mob)
+	hear_talk(M, text, verb, speaking)
+	return
 
 /obj/item/integrated_circuit/input/sensor
 	name = "sensor"

@@ -42,6 +42,9 @@
 			if(!isnull(matter[material_type]))
 				matter[material_type] *= force_divisor // May require a new var instead.
 
+	if(!(material.conductive))
+		src.flags |= NOCONDUCT
+
 /obj/item/weapon/material/get_material()
 	return material
 
@@ -55,7 +58,7 @@
 		force = round(force*dulled_divisor)
 	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
 	//spawn(1)
-	//	world << "[src] has force [force] and throwforce [throwforce] when made from default material [material.name]"
+	//	to_world("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 
 /obj/item/weapon/material/proc/set_material(var/new_material)
 	material = get_material_by_name(new_material)
@@ -67,11 +70,11 @@
 		if(applies_material_colour)
 			color = material.icon_colour
 		if(material.products_need_process())
-			processing_objects |= src
+			START_PROCESSING(SSobj, src)
 		update_force()
 
 /obj/item/weapon/material/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/item/weapon/material/apply_hit_effect()
@@ -83,10 +86,13 @@
 			health--
 		check_health()
 
-/obj/item/weapon/material/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/item/weapon/material/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/whetstone))
 		var/obj/item/weapon/whetstone/whet = W
 		repair(whet.repair_amount, whet.repair_time, user)
+	if(istype(W, /obj/item/weapon/material/sharpeningkit))
+		var/obj/item/weapon/material/sharpeningkit/SK = W
+		repair(SK.repair_amount, SK.repair_time, user)
 	..()
 
 /obj/item/weapon/material/proc/check_health(var/consumed)
@@ -131,7 +137,19 @@
 		to_chat(user, "<span class='warning'>You can't repair \the [src].</span>")
 		return
 
-
+/obj/item/weapon/material/proc/sharpen(var/material, var/sharpen_time, var/kit, mob/living/M)
+	if(!fragile)
+		if(health < initial(health))
+			to_chat(M, "You should repair [src] first. Try using [kit] on it.")
+			return FALSE
+		M.visible_message("[M] begins to replace parts of [src] with [kit].", "You begin to replace parts of [src] with [kit].")
+		if(do_after(usr, sharpen_time))
+			M.visible_message("[M] has finished replacing parts of [src].", "You finish replacing parts of [src].")
+			src.set_material(material)
+			return TRUE
+	else
+		to_chat(M, "<span class = 'warning'>You can't sharpen and re-edge [src].</span>")
+		return FALSE
 
 /*
 Commenting this out pending rebalancing of radiation based on small objects.

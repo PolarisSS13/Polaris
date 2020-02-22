@@ -24,12 +24,13 @@
 	sync_icon(L)
 
 /mob/zshadow/Destroy()
+	owner.shadow = null
 	owner = null
 	..() //But we don't return because the hint is wrong
 	return QDEL_HINT_QUEUE
 
 /mob/Destroy()
-	qdel_null(shadow)
+	QDEL_NULL(shadow)
 	. = ..()
 
 /mob/zshadow/examine(mob/user, distance, infix, suffix)

@@ -47,10 +47,10 @@
 
 		var/obj/item/organ/internal/brain/B = O
 		if(B.health <= 0)
-			user << "<span class='warning'>That brain is well and truly dead.</span>"
+			to_chat(user, "<span class='warning'>That brain is well and truly dead.</span>")
 			return
 		else if(!B.brainmob)
-			user << "<span class='warning'>You aren't sure where this brain came from, but you're pretty sure it's useless.</span>"
+			to_chat(user, "<span class='warning'>You aren't sure where this brain came from, but you're pretty sure it's useless.</span>")
 			return
 
 		for(var/modifier_type in B.brainmob.modifiers)	//Can't be shoved in an MMI.
@@ -84,9 +84,9 @@
 	if((istype(O,/obj/item/weapon/card/id)||istype(O,/obj/item/device/pda)) && brainmob)
 		if(allowed(user))
 			locked = !locked
-			user << "<span class='notice'>You [locked ? "lock" : "unlock"] the brain holder.</span>"
+			to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the brain holder.</span>")
 		else
-			user << "<span class='warning'>Access denied.</span>"
+			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	if(brainmob)
 		O.attack(brainmob, user)//Oh noooeeeee
@@ -96,11 +96,11 @@
 //TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)
 	if(!brainmob)
-		user << "<span class='warning'>You upend the MMI, but there's nothing in it.</span>"
+		to_chat(user, "<span class='warning'>You upend the MMI, but there's nothing in it.</span>")
 	else if(locked)
-		user << "<span class='warning'>You upend the MMI, but the brain is clamped into place.</span>"
+		to_chat(user, "<span class='warning'>You upend the MMI, but the brain is clamped into place.</span>")
 	else
-		user << "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>"
+		to_chat(user, "<span class='notice'>You upend the MMI, spilling the brain onto the floor.</span>")
 		var/obj/item/organ/internal/brain/brain
 		if (brainobj)	//Pull brain organ out of MMI.
 			brainobj.loc = user.loc
@@ -146,8 +146,8 @@
 	if(isrobot(loc))
 		var/mob/living/silicon/robot/borg = loc
 		borg.mmi = null
-	qdel_null(radio)
-	qdel_null(brainmob)
+	QDEL_NULL(radio)
+	QDEL_NULL(brainmob)
 	return ..()
 
 /obj/item/device/mmi/radio_enabled
@@ -209,7 +209,7 @@
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	msg += "</span><span class='info'>*---------*</span>"
-	user << msg
+	to_chat(user,msg)
 	return
 
 /obj/item/device/mmi/digital/emp_act(severity)
@@ -238,7 +238,7 @@
 /obj/item/device/mmi/digital/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.
-		user << "<font color='blue'>You carefully locate the manual activation switch and start the [src]'s boot process.</font>"
+		to_chat(user, "<font color='blue'>You carefully locate the manual activation switch and start the [src]'s boot process.</font>")
 		request_player()
 
 /obj/item/device/mmi/digital/proc/request_player()
@@ -272,10 +272,10 @@
 		src.brainmob.mind.reset()
 	src.brainmob.ckey = candidate.ckey
 	src.name = "[name] ([src.brainmob.name])"
-	src.brainmob << "<b>You are [src.name], brought into existence on [station_name()].</b>"
-	src.brainmob << "<b>As a synthetic intelligence, you are designed with organic values in mind.</b>"
-	src.brainmob << "<b>However, unless placed in a lawed chassis, you are not obligated to obey any individual crew member.</b>" //it's not like they can hurt anyone
-//	src.brainmob << "<b>Use say #b to speak to other artificial intelligences.</b>"
+	to_chat(src.brainmob, "<b>You are [src.name], brought into existence on [station_name()].</b>")
+	to_chat(src.brainmob, "<b>As a synthetic intelligence, you are designed with organic values in mind.</b>")
+	to_chat(src.brainmob, "<b>However, unless placed in a lawed chassis, you are not obligated to obey any individual crew member.</b>") //it's not like they can hurt anyone
+//	to_chat(src.brainmob, "<b>Use say #b to speak to other artificial intelligences.</b>")
 	src.brainmob.mind.assigned_role = "Synthetic Brain"
 
 	var/turf/T = get_turf_or_move(src.loc)
@@ -285,6 +285,7 @@
 /obj/item/device/mmi/digital/robot
 	name = "robotic intelligence circuit"
 	desc = "The pinnacle of artifical intelligence which can be achieved using classical computer science."
+	catalogue_data = list(/datum/category_item/catalogue/technology/drone/drones)
 	icon = 'icons/obj/module.dmi'
 	icon_state = "mainboard"
 	w_class = ITEMSIZE_NORMAL
@@ -300,12 +301,13 @@
 	..()
 	if(brainmob.mind)
 		brainmob.mind.assigned_role = "Robotic Intelligence"
-	brainmob << "<span class='notify'>You feel slightly disoriented. That's normal when you're little more than a complex circuit.</span>"
+	to_chat(brainmob, "<span class='notify'>You feel slightly disoriented. That's normal when you're little more than a complex circuit.</span>")
 	return
 
 /obj/item/device/mmi/digital/posibrain
 	name = "positronic brain"
 	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
+	catalogue_data = list(/datum/category_item/catalogue/technology/positronics)
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "posibrain"
 	w_class = ITEMSIZE_NORMAL
@@ -321,7 +323,7 @@
 	..()
 	if(brainmob.mind)
 		brainmob.mind.assigned_role = "Positronic Brain"
-	brainmob << "<span class='notify'>You feel slightly disoriented. That's normal when you're just a metal cube.</span>"
+	to_chat(brainmob, "<span class='notify'>You feel slightly disoriented. That's normal when you're just a metal cube.</span>")
 	icon_state = "posibrain-occupied"
 	return
 
@@ -337,3 +339,16 @@
 	..()
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	src.brainmob.real_name = src.brainmob.name
+
+// This type shouldn't care about brainmobs.
+/obj/item/device/mmi/inert
+
+// This is a 'fake' MMI that is used to let AIs control borg shells directly.
+// This doesn't inherit from /digital because all that does is add ghost pulling capabilities, which this thing won't need.
+/obj/item/device/mmi/inert/ai_remote
+	name = "\improper AI remote interface"
+	desc = "A sophisticated board which allows for an artificial intelligence to remotely control a synthetic chassis."
+	icon = 'icons/obj/module.dmi'
+	icon_state = "mainboard"
+	w_class = ITEMSIZE_NORMAL
+	origin_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2, TECH_BLUESPACE = 2, TECH_DATA = 3)

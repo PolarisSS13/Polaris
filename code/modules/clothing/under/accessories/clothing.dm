@@ -30,7 +30,6 @@
 	desc = "Lucky suit jacket."
 	icon_state = "checkered_jacket"
 
-
 /obj/item/clothing/accessory/chaps
 	name = "brown chaps"
 	desc = "A pair of loose, brown leather chaps."
@@ -62,6 +61,19 @@
 	sprite_sheets = list(
 		"Teshari" = 'icons/mob/species/seromi/suit.dmi'
 		)
+
+/obj/item/clothing/accessory/poncho/equipped() //Solution for race-specific sprites for an accessory which is also a suit. Suit icons break if you don't use icon override which then also overrides race-specific sprites.
+	..()
+	var/mob/living/carbon/human/H = loc
+	if(istype(H) && H.wear_suit == src)
+		if(H.species.name == "Teshari")
+			icon_override = 'icons/mob/species/seromi/suit.dmi'
+		else
+			icon_override = 'icons/mob/ties.dmi'
+		update_clothing_icon()
+
+/obj/item/clothing/accessory/poncho/dropped() //Resets the override to prevent the wrong .dmi from being used because equipped only triggers when wearing ponchos as suits.
+	icon_override = null
 
 /obj/item/clothing/accessory/poncho/green
 	name = "green poncho"
@@ -217,6 +229,13 @@
 	icon_state = "medcloak"
 	item_state = "medcloak"
 
+
+/obj/item/clothing/accessory/poncho/roles/cloak/custom //A colorable cloak
+	name = "cloak"
+	desc = "A simple, bland cloak."
+	icon_state = "colorcloak"
+	item_state = "colorcloak"
+
 /obj/item/clothing/accessory/hawaii
 	name = "flower-pattern shirt"
 	desc = "You probably need some welder googles to look at this."
@@ -257,31 +276,38 @@
 /obj/item/clothing/accessory/wcoat/red
 	name = "red waistcoat"
 	icon_state = "red_waistcoat"
+	item_state = "red_waistcoat"
 
 /obj/item/clothing/accessory/wcoat/grey
 	name = "grey waistcoat"
 	icon_state = "grey_waistcoat"
+	item_state = "grey_waistcoat"
 
 /obj/item/clothing/accessory/wcoat/brown
 	name = "brown waistcoat"
 	icon_state = "brown_waistcoat"
+	item_state = "brown_waistcoat"
 
 /obj/item/clothing/accessory/wcoat/gentleman
 	name = "elegant waistcoat"
 	icon_state = "elegant_waistcoat"
+	item_state = "elegant_waistcoat"
 
 /obj/item/clothing/accessory/wcoat/swvest
 	name = "black sweatervest"
 	desc = "A sleeveless sweater. Wear this if you don't want your arms to be warm, or if you're a nerd."
 	icon_state = "sweatervest"
+	item_state = "sweatervest"
 
 /obj/item/clothing/accessory/wcoat/swvest/blue
 	name = "blue sweatervest"
 	icon_state = "sweatervest_blue"
+	item_state = "sweatervest_blue"
 
 /obj/item/clothing/accessory/wcoat/swvest/red
 	name = "red sweatervest"
 	icon_state = "sweatervest_red"
+	item_state = "sweatervest_red"
 
 //Sweaters.
 
@@ -335,3 +361,42 @@
 	name = "Christmas turtleneck"
 	desc = "A really cheesy holiday sweater, it actually kinda itches."
 	icon_state = "turtleneck_winterred"
+
+/obj/item/clothing/accessory/sweater/uglyxmas
+	name = "ugly Christmas sweater"
+	desc = "A gift that probably should've stayed in the back of the closet."
+	icon_state = "uglyxmas"
+
+/obj/item/clothing/accessory/sweater/flowersweater
+	name = "flowery sweater"
+	desc =  "An oversized and flowery pink sweater."
+	icon_state = "flowersweater"
+
+/obj/item/clothing/accessory/sweater/redneck
+	name = "red turtleneck"
+	desc = "A comfortable turtleneck in a dark red."
+	icon_state = "turtleneck_red"
+
+//***
+// End of sweaters
+//***
+
+/obj/item/clothing/accessory/cowledvest
+	name = "cowled vest"
+	desc = "A body warmer for the 26th century."
+	icon_state = "cowled_vest"
+
+/obj/item/clothing/accessory/asymmetric
+	name = "blue asymmetrical jacket"
+	desc = "Insultingly avant-garde in prussian blue."
+	icon_state = "asym_blue"
+
+/obj/item/clothing/accessory/asymmetric/purple
+	name = "purple asymmetrical jacket"
+	desc = "Insultingly avant-garde in mauve."
+	icon_state = "asym_purple"
+
+/obj/item/clothing/accessory/asymmetric/green
+	name = "green asymmetrical jacket"
+	desc = "Insultingly avant-garde in aqua."
+	icon_state = "asym_green"

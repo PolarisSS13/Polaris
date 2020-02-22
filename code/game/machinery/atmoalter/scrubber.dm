@@ -1,5 +1,6 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "Portable Air Scrubber"
+	desc = "Similar to room scrubbers, this device contains an internal tank to scrub gasses from the atmosphere."
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
@@ -114,7 +115,7 @@
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "portscrubber.tmpl", "Portable Scrubber", 480, 400, state = physical_state)
 		ui.set_initial_data(data)
@@ -136,7 +137,7 @@
 		. = 1
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
-		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		volume_rate = CLAMP(volume_rate+diff, minrate, maxrate)
 		. = 1
 	update_icon()
 
@@ -144,6 +145,7 @@
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
+	desc = "A larger variation of the portable scrubber, for industrial scrubbing of air. Must be turned on from a remote terminal."
 	icon_state = "scrubber:0"
 	anchored = 1
 	volume = 50000
@@ -231,6 +233,10 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
+
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/Initialize()
+	. = ..()
+	desc += "This one seems to be tightly secured with large bolts."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(I.is_wrench())

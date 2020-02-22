@@ -4,17 +4,30 @@
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	projectile_type = /obj/item/projectile/beam/stun
+	charge_cost = 480
 
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
 	self_recharge = 1
 	use_external_power = 1
 
+/obj/item/weapon/gun/energy/taser/mounted/augment
+	self_recharge = 1
+	use_external_power = 0
+	use_organic_power = TRUE
+	canremove = FALSE
+
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
 	name = "taser gun"
 	charge_cost = 400
 	recharge_time = 7 //Time it takes for shots to recharge (in ticks)
 
+/obj/item/weapon/gun/energy/taser/mounted/cyborg/swarm
+	name = "disabler"
+	desc = "An archaic device which attacks the target's nervous-system or control circuits."
+	projectile_type = /obj/item/projectile/beam/stun/disabler
+	charge_cost = 800
+	recharge_time = 0.5 SECONDS
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
@@ -24,7 +37,6 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	projectile_type = /obj/item/projectile/energy/electrode/strong
 	charge_cost = 300
-
 
 /obj/item/weapon/gun/energy/crossbow
 	name = "mini energy-crossbow"
@@ -36,7 +48,6 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT | SLOT_HOLSTER
 	silenced = 1
-	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = /obj/item/projectile/energy/bolt
 	charge_cost = 480
 	cell_type = /obj/item/weapon/cell/device/weapon/recharge

@@ -1,34 +1,10 @@
-/mob/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
-	if(ismob(mover))
-		var/mob/moving_mob = mover
-		if ((other_mobs && moving_mob.other_mobs))
-			return 1
-		return (!mover.density || !density || lying)
-	else
-		return (!mover.density || !density || lying)
-	return
-
 /mob/proc/setMoveCooldown(var/timeout)
-	if(client)
-		client.move_delay = max(world.time + timeout, client.move_delay)
+	move_delay = max(world.time + timeout, move_delay)
 
-/client/North()
-	..()
-
-
-/client/South()
-	..()
-
-
-/client/West()
-	..()
-
-
-/client/East()
-	..()
-
+/mob/proc/check_move_cooldown()
+	if(world.time < src.move_delay)
+		return FALSE // Need to wait more.
+	return TRUE
 
 /client/proc/client_dir(input, direction=-1)
 	return turn(input, direction*dir2angle(dir))
@@ -55,17 +31,17 @@
 				var/mob/living/carbon/C = usr
 				C.toggle_throw_mode()
 			else
-				usr << "<font color='red'>This mob type cannot throw items.</font>"
+				to_chat(usr, "<font color='red'>This mob type cannot throw items.</font>")
 			return
 		if(NORTHWEST)
 			if(isliving(usr))
 				var/mob/living/carbon/C = usr
 				if(!C.get_active_hand())
-					usr << "<font color='red'>You have nothing to drop in your hand.</font>"
+					to_chat(usr, "<font color='red'>You have nothing to drop in your hand.</font>")
 					return
 				drop_item()
 			else
-				usr << "<font color='red'>This mob type cannot drop items.</font>"
+				to_chat(usr, "<font color='red'>This mob type cannot drop items.</font>")
 			return
 
 //This gets called when you press the delete button.
@@ -73,7 +49,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		usr << "<font color='blue'>You are not pulling anything.</font>"
+		to_chat(usr, "<font color='blue'>You are not pulling anything.</font>")
 		return
 	usr.stop_pulling()
 
@@ -122,60 +98,6 @@
 	*/
 	return
 
-//This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
-/atom/movable/Move(newloc, direct)
-	if (direct & (direct - 1))
-		if (direct & 1)
-			if (direct & 4)
-				if (step(src, NORTH))
-					step(src, EAST)
-				else
-					if (step(src, EAST))
-						step(src, NORTH)
-			else
-				if (direct & 8)
-					if (step(src, NORTH))
-						step(src, WEST)
-					else
-						if (step(src, WEST))
-							step(src, NORTH)
-		else
-			if (direct & 2)
-				if (direct & 4)
-					if (step(src, SOUTH))
-						step(src, EAST)
-					else
-						if (step(src, EAST))
-							step(src, SOUTH)
-				else
-					if (direct & 8)
-						if (step(src, SOUTH))
-							step(src, WEST)
-						else
-							if (step(src, WEST))
-								step(src, SOUTH)
-	else
-		var/atom/A = src.loc
-
-		var/olddir = dir //we can't override this without sacrificing the rest of movable/New()
-		. = ..()
-		if(direct != olddir)
-			dir = olddir
-			set_dir(direct)
-
-		src.move_speed = world.time - src.l_move_time
-		src.l_move_time = world.time
-		src.m_flag = 1
-		if ((A != src.loc && A && A.z == src.z))
-			src.last_move = get_dir(A, src.loc)
-		if(.)
-			Moved(A, direct)
-	return
-
-// Called on a successful Move().
-/atom/movable/proc/Moved(atom/oldloc)
-	return
-
 /client/proc/Move_object(direct)
 	if(mob && mob.control_object)
 		if(mob.control_object.density)
@@ -199,7 +121,8 @@
 
 	if(moving)	return 0
 
-	if(world.time < move_delay)	return
+	if(!mob.check_move_cooldown())
+		return
 
 	if(locate(/obj/effect/stop/, mob.loc))
 		for(var/obj/effect/stop/S in mob.loc)
@@ -262,36 +185,30 @@
 			for(var/mob/M in range(mob, 1))
 				if(M.pulling == mob)
 					if(!M.restrained() && M.stat == 0 && M.canmove && mob.Adjacent(M))
-						src << "<font color='blue'>You're restrained! You can't move!</font>"
+						to_chat(src, "<font color='blue'>You're restrained! You can't move!</font>")
 						return 0
 					else
 						M.stop_pulling()
 
 		if(mob.pinned.len)
-			src << "<font color='blue'>You're pinned to a wall by [mob.pinned[1]]!</font>"
+			to_chat(src, "<font color='blue'>You're pinned to a wall by [mob.pinned[1]]!</font>")
 			return 0
 
-		move_delay = world.time//set move delay
+		mob.move_delay = world.time//set move delay
 
 		switch(mob.m_intent)
 			if("run")
 				if(mob.drowsyness > 0)
-					move_delay += 6
-				move_delay += config.run_speed
+					mob.move_delay += 6
+				mob.move_delay += config.run_speed
 			if("walk")
-				move_delay += config.walk_speed
-		move_delay += mob.movement_delay()
-
-		var/tickcomp = 0 //moved this out here so we can use it for vehicles
-		if(config.Tickcomp)
-			// move_delay -= 1.3 //~added to the tickcomp calculation below
-			tickcomp = ((1/(world.tick_lag))*1.3) - 1.3
-			move_delay = move_delay + tickcomp
+				mob.move_delay += config.walk_speed
+		mob.move_delay += mob.movement_delay(n, direct)
 
 		if(istype(mob.buckled, /obj/vehicle))
 			//manually set move_delay for vehicles so we don't inherit any mob movement penalties
 			//specific vehicle move delays are set in code\modules\vehicles\vehicle.dm
-			move_delay = world.time + tickcomp
+			mob.move_delay = world.time
 			//drunk driving
 			if(mob.confused && prob(20)) //vehicles tend to keep moving in the same direction
 				direct = turn(direct, pick(90, -90))
@@ -320,14 +237,14 @@
 							if(prob(50))	direct = turn(direct, pick(90, -90))
 						if("walk")
 							if(prob(25))	direct = turn(direct, pick(90, -90))
-				move_delay += 2
+				mob.move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
 
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
 		if(locate(/obj/item/weapon/grab, mob))
-			move_delay = max(move_delay, world.time + 7)
+			mob.move_delay = max(mob.move_delay, world.time + 7)
 			var/list/L = mob.ret_grab()
 			if(istype(L, /list))
 				if(L.len == 2)
@@ -397,8 +314,10 @@
 	switch(mob.incorporeal_move)
 		if(1)
 			var/turf/T = get_step(mob, direct)
+			if(!T)
+				return
 			if(mob.check_holy(T))
-				mob << "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>"
+				to_chat(mob, "<span class='warning'>You cannot get past holy grounds while you are in this plane of existence!</span>")
 				return
 			else
 				mob.forceMove(get_step(mob, direct))
@@ -477,7 +396,7 @@
 
 	//Check to see if we slipped
 	if(prob(Process_Spaceslipping(5)) && !buckled)
-		src << "<font color='blue'><B>You slipped!</B></font>"
+		to_chat(src, "<font color='blue'><B>You slipped!</B></font>")
 		src.inertia_dir = src.last_move
 		step(src, src.inertia_dir)
 		return 0
@@ -560,3 +479,20 @@
 /obj/item/weapon/storage/on_loc_moved(atom/oldloc)
 	for(var/obj/O in contents)
 		O.on_loc_moved(oldloc)
+
+/client/verb/moveup()
+	set name = ".moveup"
+	set instant = 1
+	Move(get_step(mob, NORTH), NORTH)
+/client/verb/movedown()
+	set name = ".movedown"
+	set instant = 1
+	Move(get_step(mob, SOUTH), SOUTH)
+/client/verb/moveright()
+	set name = ".moveright"
+	set instant = 1
+	Move(get_step(mob, EAST), EAST)
+/client/verb/moveleft()
+	set name = ".moveleft"
+	set instant = 1
+	Move(get_step(mob, WEST), WEST)

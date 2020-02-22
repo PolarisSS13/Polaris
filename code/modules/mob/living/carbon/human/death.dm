@@ -60,11 +60,11 @@
 
 	//Handle brain slugs.
 	var/obj/item/organ/external/Hd = get_organ(BP_HEAD)
-	var/mob/living/simple_animal/borer/B
+	var/mob/living/simple_mob/animal/borer/B
 
 	if(Hd)
 		for(var/I in Hd.implants)
-			if(istype(I,/mob/living/simple_animal/borer))
+			if(istype(I,/mob/living/simple_mob/animal/borer))
 				B = I
 	if(B)
 		if(!B.ckey && ckey && B.controlling)
@@ -79,6 +79,11 @@
 		verbs -= /mob/living/carbon/proc/release_control
 
 	callHook("death", list(src, gibbed))
+	
+	if(mind)
+		for(var/mob/observer/dead/O in mob_list)
+			if(O.client && O.client.is_preference_enabled(/datum/client_preference/show_dsay))
+				to_chat(O, "<span class='deadsay'><b>[src]</b> has died in <b>[get_area(src)]</b>. [ghost_follow_link(src, O)] </span>")
 
 	if(!gibbed && species.death_sound)
 		playsound(loc, species.death_sound, 80, 1, 1)

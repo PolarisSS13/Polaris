@@ -5,6 +5,7 @@
 
 /obj/machinery/disease2/isolator/
 	name = "pathogenic isolator"
+	desc = "Used to isolate and identify diseases, allowing for comparison with a remote database."
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/virology.dmi'
@@ -35,7 +36,7 @@
 	var/obj/item/weapon/reagent_containers/syringe/S = O
 
 	if(sample)
-		user << "\The [src] is already loaded."
+		to_chat(user, "\The [src] is already loaded.")
 		return
 
 	sample = S
@@ -43,7 +44,7 @@
 	S.loc = src
 
 	user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 	update_icon()
 
 	src.attack_hand(user)
@@ -103,7 +104,7 @@
 					"name" = entry.fields["name"], \
 					"description" = replacetext(desc, "\n", ""))
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "pathogenic_isolator.tmpl", src.name, 400, 500)
 		ui.set_initial_data(data)
@@ -119,14 +120,14 @@
 				virus2 = null
 				ping("\The [src] pings, \"Viral strain isolated.\"")
 
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 			update_icon()
 
 /obj/machinery/disease2/isolator/Topic(href, href_list)
 	if (..()) return 1
 
 	var/mob/user = usr
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+	var/datum/nanoui/ui = SSnanoui.get_open_ui(user, src, "main")
 
 	src.add_fingerprint(user)
 

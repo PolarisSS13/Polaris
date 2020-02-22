@@ -282,11 +282,11 @@
 				var/obj/item/device/pda/pda = H.wear_id
 				id = pda.id
 			id.icon_state = "gold"
-			id.access = get_all_accesses()
+			id.access = get_all_accesses().Copy()
 		else
 			var/obj/item/weapon/card/id/id = new/obj/item/weapon/card/id(M);
 			id.icon_state = "gold"
-			id.access = get_all_accesses()
+			id.access = get_all_accesses().Copy()
 			id.registered_name = H.real_name
 			id.assignment = "Colony Director"
 			id.name = "[id.registered_name]'s ID Card ([id.assignment])"
@@ -388,33 +388,33 @@
 	var/list/areas_without_intercom = areas_all - areas_with_intercom
 	var/list/areas_without_camera = areas_all - areas_with_camera
 
-	world << "<b>AREAS WITHOUT AN APC:</b>"
+	to_world("<b>AREAS WITHOUT AN APC:</b>")
 	for(var/areatype in areas_without_APC)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT AN AIR ALARM:</b>"
+	to_world("<b>AREAS WITHOUT AN AIR ALARM:</b>")
 	for(var/areatype in areas_without_air_alarm)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT A REQUEST CONSOLE:</b>"
+	to_world("<b>AREAS WITHOUT A REQUEST CONSOLE:</b>")
 	for(var/areatype in areas_without_RC)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT ANY LIGHTS:</b>"
+	to_world("<b>AREAS WITHOUT ANY LIGHTS:</b>")
 	for(var/areatype in areas_without_light)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT A LIGHT SWITCH:</b>"
+	to_world("<b>AREAS WITHOUT A LIGHT SWITCH:</b>")
 	for(var/areatype in areas_without_LS)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT ANY INTERCOMS:</b>"
+	to_world("<b>AREAS WITHOUT ANY INTERCOMS:</b>")
 	for(var/areatype in areas_without_intercom)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
-	world << "<b>AREAS WITHOUT ANY CAMERAS:</b>"
+	to_world("<b>AREAS WITHOUT ANY CAMERAS:</b>")
 	for(var/areatype in areas_without_camera)
-		world << "* [areatype]"
+		to_world("* [areatype]")
 
 /datum/admins/proc/cmd_admin_dress(input in getmobs())
 	set category = "Fun"
@@ -562,7 +562,7 @@
 				SMES.output_level = 75000
 
 	if(!found_the_pump && response == "Setup Completely")
-		src << "<font color='red'>Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter</font>"
+		to_chat(src, "<font color='red'>Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter</font>")
 		var/turf/simulated/T = SM.loc
 		T.zone.air.gas["nitrogen"] += 450
 		T.zone.air.temperature = 50
@@ -592,7 +592,7 @@
 		if("Dead Mobs")
 			usr << jointext(dead_mob_list,",")
 		if("Clients")
-			usr << jointext(clients,",")
+			usr << jointext(GLOB.clients,",")
 
 /client/proc/cmd_debug_using_map()
 	set category = "Debug"
@@ -641,6 +641,7 @@
 	var/datum/weather/new_weather = input(usr, "What weather do you want to change to?", "Change Weather") as null|anything in planet.weather_holder.allowed_weather_types
 	if(new_weather)
 		planet.weather_holder.change_weather(new_weather)
+		planet.weather_holder.rebuild_forecast()
 		var/log = "[key_name(src)] changed [planet.name]'s weather to [new_weather]."
 		message_admins(log)
 		log_admin(log)

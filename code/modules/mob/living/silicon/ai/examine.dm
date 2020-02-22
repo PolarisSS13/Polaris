@@ -28,11 +28,13 @@
 		if (src.stat == UNCONSCIOUS)
 			msg += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
 		msg += "</span>"
+		if(deployed_shell)
+			msg += "The wireless networking light is blinking.\n"
 	msg += "*---------*"
 	if(hardware && (hardware.owner == src))
 		msg += "<br>"
 		msg += hardware.get_examine_desc()
-	user << msg
+	to_chat(user,msg)
 	user.showLaws(src)
 	return
 

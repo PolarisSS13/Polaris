@@ -74,6 +74,18 @@ var/list/_client_preferences_by_type
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 1)
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 2)
 
+/datum/client_preference/weather_sounds
+	description ="Weather sounds"
+	key = "SOUND_WEATHER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+/datum/client_preference/supermatter_hum
+	description ="Supermatter hum"
+	key = "SOUND_SUPERMATTER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
@@ -98,11 +110,17 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/air_pump_noise 
+	description ="Air Pump Ambient Noise" 
+	key = "SOUND_AIRPUMP" 
+	enabled_description = "Audible" 
+	disabled_description = "Silent" 
+
 /datum/client_preference/mob_tooltips
 	description ="Mob tooltips"
 	key = "MOB_TOOLTIPS"
 	enabled_description = "Show"
-	disabled_description = "Hide"	
+	disabled_description = "Hide"
 
 /datum/client_preference/attack_icons
 	description ="Attack icons"
@@ -182,6 +200,10 @@ var/list/_client_preferences_by_type
 		var/datum/plane_holder/PH = preference_mob.plane_holder
 		PH.set_ao(VIS_OBJS, enabled)
 		PH.set_ao(VIS_MOBS, enabled)
+
+/datum/client_preference/instrument_toggle
+	description ="Hear In-game Instruments"
+	key = "SOUND_INSTRUMENT"
 
 /********************
 * Staff Preferences *

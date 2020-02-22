@@ -9,7 +9,7 @@
 
 /obj/item/slime_cube/attack_self(mob/user as mob)
 	if(!searching)
-		user << "<span class='warning'>You stare at the slimy cube, watching as some activity occurs.</span>"
+		to_chat(user, "<span class='warning'>You stare at the slimy cube, watching as some activity occurs.</span>")
 		icon_state = "slime cube active"
 		searching = 1
 		request_player()
@@ -123,6 +123,6 @@
 	nutriment_amt = 25 // Very filling.
 	nutriment_desc = list("slime" = 10, "sweetness" = 10, "bliss" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/slime/New()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/slime/Initialize()
+	. = ..()
 	bitesize = 5

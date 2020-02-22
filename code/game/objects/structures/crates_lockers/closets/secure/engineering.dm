@@ -11,6 +11,8 @@
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/blueprints,
+		/obj/item/clamp,
+		/obj/item/clamp,
 		/obj/item/clothing/under/rank/chief_engineer,
 		/obj/item/clothing/under/rank/chief_engineer/skirt,
 		/obj/item/clothing/head/hardhat/white,
@@ -32,7 +34,7 @@
 		/obj/item/clothing/shoes/boots/winter/engineering,
 		/obj/item/weapon/tank/emergency/oxygen/engi)
 
-/obj/structure/closet/secure_closet/engineering_chief/initialize()
+/obj/structure/closet/secure_closet/engineering_chief/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/industrial
 	else
@@ -94,11 +96,12 @@
 		/obj/item/clothing/glasses/meson,
 		/obj/item/weapon/cartridge/engineering,
 		/obj/item/taperoll/engineering,
+		/obj/item/clothing/head/hardhat,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
 		/obj/item/clothing/shoes/boots/winter/engineering,
 		/obj/item/weapon/tank/emergency/oxygen/engi)
 
-/obj/structure/closet/secure_closet/engineering_personal/initialize()
+/obj/structure/closet/secure_closet/engineering_personal/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/industrial
 	else
@@ -121,8 +124,10 @@
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/head/hardhat/red,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/extinguisher,
+		/obj/item/clamp,
 		/obj/item/device/radio/headset/headset_eng,
 		/obj/item/device/radio/headset/headset_eng/alt,
 		/obj/item/clothing/suit/storage/hazardvest,
@@ -133,7 +138,7 @@
 		/obj/item/clothing/shoes/boots/winter/atmos,
 		/obj/item/weapon/tank/emergency/oxygen/engi)
 
-/obj/structure/closet/secure_closet/atmos_personal/initialize()
+/obj/structure/closet/secure_closet/atmos_personal/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/industrial
 	else

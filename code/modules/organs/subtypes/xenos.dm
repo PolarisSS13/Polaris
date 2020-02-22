@@ -29,6 +29,27 @@
 	var/stored_plasma = 0
 	var/max_plasma = 500
 
+	organ_verbs = list(
+		/mob/living/carbon/human/proc/transfer_plasma
+		)
+
+/obj/item/organ/internal/xenos/plasmavessel/handle_organ_proc_special()
+	if(!istype(owner))
+		return
+
+	var/modifier = 1 - 0.5 * is_bruised()
+
+	if(owner.bloodstr.has_reagent("phoron"))
+		adjust_plasma(round(4 * modifier))
+
+	if(owner.ingested.has_reagent("phoron"))
+		adjust_plasma(round(2 * modifier))
+
+	adjust_plasma(1)
+
+/obj/item/organ/internal/xenos/plasmavessel/proc/adjust_plasma(var/amount = 0)
+	stored_plasma = CLAMP(stored_plasma + amount, 0, max_plasma)
+
 /obj/item/organ/internal/xenos/plasmavessel/grey
 	icon_state = "plasma_grey"
 	stored_plasma = 200
@@ -60,6 +81,12 @@
 	parent_organ = BP_HEAD
 	icon_state = "acidgland"
 	organ_tag = O_ACID
+
+	organ_verbs = list(
+		/mob/living/carbon/human/proc/corrosive_acid,
+		/mob/living/carbon/human/proc/neurotoxin,
+		/mob/living/carbon/human/proc/acidspit
+		)
 
 /obj/item/organ/internal/xenos/acidgland/grey
 	icon_state = "acidgland_grey"
@@ -95,6 +122,10 @@
 	icon_state = "xenode"
 	organ_tag = O_RESIN
 
+	organ_verbs = list(
+		/mob/living/carbon/human/proc/resin,
+		/mob/living/carbon/human/proc/plant
+		)
 
 /obj/item/organ/internal/xenos/resinspinner/grey
 	icon_state = "xenode_grey"
@@ -106,3 +137,79 @@
 		if(ishuman(owner))
 			H = owner
 			color = H.species.blood_color
+
+
+// XENOMORPH EXTERNAL ORGANS
+
+/obj/item/organ/external/chest/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	thick_skin = TRUE
+
+/obj/item/organ/external/groin/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/arm/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/arm/right/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/leg/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/leg/right/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/foot/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/foot/right/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/hand/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/hand/right/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	stapled_nerves = TRUE
+	encased = TRUE
+	thick_skin = TRUE
+
+/obj/item/organ/external/head/unseverable/xeno
+	cannot_gib = 1
+	cannot_amputate = 1
+	thick_skin = TRUE
+	eye_icon = "blank_eyes"

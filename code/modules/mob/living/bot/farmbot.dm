@@ -10,7 +10,7 @@
 	icon_state = "farmbot0"
 	health = 50
 	maxHealth = 50
-	req_one_access = list(access_robotics, access_hydroponics)
+	req_one_access = list(access_robotics, access_hydroponics, access_xenobiology)	//TFF 11/7/19 - adds Xenobio access on behalf of Nalarac
 
 	var/action = "" // Used to update icon
 	var/waters_trays = 1
@@ -65,7 +65,7 @@
 	. = ..()
 	if(!emagged)
 		if(user)
-			user << "<span class='notice'>You short out [src]'s plant identifier circuits.</span>"
+			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
 		spawn(rand(30, 50))
 			visible_message("<span class='warning'>[src] buzzes oddly.</span>")
 			emagged = 1
@@ -292,7 +292,7 @@
 	if(tray.dead && removes_dead || tray.harvest && collects_produce)
 		return FARMBOT_COLLECT
 
-	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent("water"))
+	else if(refills_water && tray.waterlevel < 40 && !tray.reagents.has_reagent("water") && tank.reagents.total_volume > 0)
 		return FARMBOT_WATER
 
 	else if(uproots_weeds && tray.weedlevel > 3)
@@ -330,7 +330,7 @@
 		return
 
 
-	user << "You add the robot arm to [src]."
+	to_chat(user, "You add the robot arm to [src].")
 
 	user.drop_from_inventory(S)
 	qdel(S)
@@ -342,7 +342,7 @@
 		..()
 		return
 
-	user << "You add the robot arm to [src]."
+	to_chat(user, "You add the robot arm to [src].")
 
 	user.drop_from_inventory(S)
 	qdel(S)
@@ -353,7 +353,7 @@
 	..()
 	if((istype(W, /obj/item/device/analyzer/plant_analyzer)) && (build_step == 0))
 		build_step++
-		user << "You add the plant analyzer to [src]."
+		to_chat(user, "You add the plant analyzer to [src].")
 		name = "farmbot assembly"
 
 		user.remove_from_mob(W)
@@ -361,7 +361,7 @@
 
 	else if((istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (build_step == 1))
 		build_step++
-		user << "You add a bucket to [src]."
+		to_chat(user, "You add a bucket to [src].")
 		name = "farmbot assembly with bucket"
 
 		user.remove_from_mob(W)
@@ -369,7 +369,7 @@
 
 	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
 		build_step++
-		user << "You add a minihoe to [src]."
+		to_chat(user, "You add a minihoe to [src].")
 		name = "farmbot assembly with bucket and minihoe"
 
 		user.remove_from_mob(W)
@@ -377,7 +377,7 @@
 
 	else if((isprox(W)) && (build_step == 3))
 		build_step++
-		user << "You complete the Farmbot! Beep boop."
+		to_chat(user, "You complete the Farmbot! Beep boop.")
 
 		var/mob/living/bot/farmbot/S = new /mob/living/bot/farmbot(get_turf(src), tank)
 		S.name = created_name

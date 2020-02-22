@@ -8,7 +8,6 @@
 	icon = 'icons/obj/autopsy_scanner.dmi'
 	icon_state = ""
 	item_state = "autopsy_scanner"
-	flags = CONDUCT
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	var/list/datum/autopsy_data_scanner/wdata = list()
@@ -81,7 +80,7 @@
 	set src in view(usr, 1)
 	set name = "Print Data"
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
-		usr << "No."
+		to_chat(usr, "No.")
 		return
 
 	var/scan_data = ""

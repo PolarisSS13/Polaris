@@ -29,6 +29,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole
 	name = "R&D control console"
+	desc = "Science, in a computer! Experiment results not guaranteed."
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
@@ -113,7 +114,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			S.update_connections()
 			break
 
-/obj/machinery/computer/rdconsole/initialize()
+/obj/machinery/computer/rdconsole/Initialize()
 	SyncRDevices()
 	. = ..()
 
@@ -121,7 +122,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	//Loading a disk into it.
 	if(istype(D, /obj/item/weapon/disk))
 		if(t_disk || d_disk)
-			user << "A disk is already loaded into the machine."
+			to_chat(user, "A disk is already loaded into the machine.")
 			return
 
 		if(istype(D, /obj/item/weapon/disk/tech_disk))
@@ -129,11 +130,11 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		else if (istype(D, /obj/item/weapon/disk/design_disk))
 			d_disk = D
 		else
-			user << "<span class='notice'>Machine cannot accept disks in that format.</span>"
+			to_chat(user, "<span class='notice'>Machine cannot accept disks in that format.</span>")
 			return
 		user.drop_item()
 		D.loc = src
-		user << "<span class='notice'>You add \the [D] to the machine.</span>"
+		to_chat(user, "<span class='notice'>You add \the [D] to the machine.</span>")
 	else
 		//The construction/deconstruction of the console code.
 		..()
@@ -145,7 +146,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		user << "<span class='notice'>You you disable the security protocols.</span>"
+		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		return 1
 
 /obj/machinery/computer/rdconsole/Topic(href, href_list)
@@ -155,12 +156,16 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	add_fingerprint(usr)
 
 	usr.set_machine(src)
+	if((screen < 1 || (screen == 1.6 && href_list["menu"] != "1.0")) && (!allowed(usr) && !emagged)) //Stops people from HREF exploiting out of the lock screen, but allow it if they have the access.
+		to_chat(usr, "Unauthorized Access")
+		return
+
 	if(href_list["menu"]) //Switches menu screens. Converts a sent text string into a number. Saves a LOT of code.
 		var/temp_screen = text2num(href_list["menu"])
 		if(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged) //Unless you are making something, you need access.
 			screen = temp_screen
 		else
-			usr << "Unauthorized Access."
+			to_chat(usr, "Unauthorized Access.")
 
 	else if(href_list["updt_tech"]) //Update the research holder with information from the technology disk.
 		screen = 0.0
@@ -211,7 +216,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["eject_item"]) //Eject the item inside the destructive analyzer.
 		if(linked_destroy)
 			if(linked_destroy.busy)
-				usr << "<span class='notice'>The destructive analyzer is busy at the moment.</span>"
+				to_chat(usr, "<span class='notice'>The destructive analyzer is busy at the moment.</span>")
 
 			else if(linked_destroy.loaded_item)
 				linked_destroy.loaded_item.loc = linked_destroy.loc
@@ -222,7 +227,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else if(href_list["deconstruct"]) //Deconstruct the item in the destructive analyzer and update the research holder.
 		if(linked_destroy)
 			if(linked_destroy.busy)
-				usr << "<span class='notice'>The destructive analyzer is busy at the moment.</span>"
+				to_chat(usr, "<span class='notice'>The destructive analyzer is busy at the moment.</span>")
 			else
 				if(alert("Proceeding will destroy loaded item. Continue?", "Destructive analyzer confirmation", "Yes", "No") == "No" || !linked_destroy)
 					return
@@ -234,7 +239,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					if(linked_destroy)
 						linked_destroy.busy = 0
 						if(!linked_destroy.loaded_item)
-							usr <<"<span class='notice'>The destructive analyzer appears to be empty.</span>"
+							to_chat(usr, "<span class='notice'>The destructive analyzer appears to be empty.</span>")
 							screen = 1.0
 							return
 
@@ -270,12 +275,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(allowed(usr))
 			screen = text2num(href_list["lock"])
 		else
-			usr << "Unauthorized Access."
+			to_chat(usr, "Unauthorized Access.")
 
 	else if(href_list["sync"]) //Sync the research holder with all the R&D consoles in the game that aren't sync protected.
 		screen = 0.0
 		if(!sync)
-			usr << "<span class='notice'>You must connect to the network first.</span>"
+			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
 			griefProtection() //Putting this here because I dont trust the sync process
 			spawn(30)
@@ -389,7 +394,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
 			PR.name = "list of researched technologies"
 			PR.info = "<center><b>[station_name()] Science Laboratories</b>"
-			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Research Progress Report</h2>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : null] Research Progress Report</h2>"
 			PR.info += "<i>report prepared at [stationtime2text()] station time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
@@ -638,9 +643,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					continue
 				var/temp_dat
 				for(var/M in D.materials)
-					temp_dat += ", [D.materials[M]] [CallMaterialName(M)]"
+					temp_dat += ", [D.materials[M]*linked_lathe.mat_efficiency] [CallMaterialName(M)]"
 				for(var/T in D.chemicals)
-					temp_dat += ", [D.chemicals[T]*linked_imprinter.mat_efficiency] [CallReagentName(T)]"
+					temp_dat += ", [D.chemicals[T]*linked_lathe.mat_efficiency] [CallReagentName(T)]"
 				if(temp_dat)
 					temp_dat = " \[[copytext(temp_dat, 3)]\]"
 				if(linked_lathe.canBuild(D))
@@ -656,6 +661,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			for(var/M in linked_lathe.materials)
 				var/amount = linked_lathe.materials[M]
+				var/hidden_mat = FALSE
+				for(var/HM in linked_lathe.hidden_materials)
+					if(M == HM && amount == 0)
+						hidden_mat = TRUE
+						break
+				if(hidden_mat)
+					continue
 				dat += "<LI><B>[capitalize(M)]</B>: [amount] cm<sup>3</sup>"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject "
@@ -741,6 +753,13 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<UL>"
 			for(var/M in linked_imprinter.materials)
 				var/amount = linked_imprinter.materials[M]
+				var/hidden_mat = FALSE
+				for(var/HM in linked_imprinter.hidden_materials)
+					if(M == HM && amount == 0)
+						hidden_mat = TRUE
+						break
+				if(hidden_mat)
+					continue
 				dat += "<LI><B>[capitalize(M)]</B>: [amount] cm<sup>3</sup>"
 				if(amount >= SHEET_MATERIAL_AMOUNT)
 					dat += " || Eject: "

@@ -69,6 +69,9 @@ LOG_ATTACK
 ## log pda messages
 LOG_PDA
 
+## log graffiti drawings
+LOG_GRAFFITI
+
 ## log world.log messages
 # LOG_WORLD_OUTPUT
 
@@ -123,6 +126,12 @@ PROBABILITY EXTEND-A-TRAITORMONGOUS 6
 PROBABILITY LIZARD 1
 PROBABILITY INTRIGUE 1
 PROBABILITY VISITORS 1
+
+## Overrides for required number of readied up players for a gamemode to be able to start can be defined here.
+## If it is unset, it will default to the requirement set by the gamemode datum.
+## Note that this does not control the required amount of antags for a gamemode, and so a lower number may still fail to start if not enough people want to be antags.
+## By default, this overrides the voted gamemode requirement. To override the requirement for Secret, append '_SECRET' to the end of the first word.
+## The format to use is REQUIRED_PLAYERS[_SECRET] [gamemode tag] [number of readies needed], for example, "REQUIRED_PLAYERS TRAITOR 1", or "REQUIRED_PLAYERS_SECRET MERCENARY 10".
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -400,11 +409,67 @@ STARLIGHT 0
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
 
-## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and - 
-# DEFAULT_LANGUAGE_PREFIXES , # -
+## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , and # 
+# DEFAULT_LANGUAGE_PREFIXES , #
 
 ## Uncomment to enable the Panic Bunker by default. This will prevent all unseen-before players from connecting. Requires SQL.
 # PANIC_BUNKER
 
 ## Uncomment to enable Paranoia Logging. This will notify admins and write to a file any time a new player (byond or your server) connects.
 # PARANOIA_LOGGING
+
+## Uncomment to enable submaps to have their orientation rotated randomly during map generation.
+## Submap rotation is an experimental feature and can cause bugs and weirdness if certain objects inside the submap are coded poorly.
+## Submaps can still be rotated when loading manually with the admin verbs, if desired.
+# RANDOM_SUBMAP_ORIENTATION
+
+## Uncomment to allow the AI job to use 'AI Shells', a new type of borg that lets the AI hop into and out of them at will.
+## This has some balance implications, and so it might not be desirable for all servers.
+# ALLOW_AI_SHELLS
+
+## Uncomment to provide the AI with one free AI Shell at roundstart. Requires ALLOW_AI_SHELLS to also be uncommented.
+## This is intended for low-pop servers, where robotics might rarely be staffed.
+## Note that this will make it possible for the AI to 'bootstrap' more AI Shells on their own by using the science module. If this is not acceptable for your server, you should not uncomment this.
+## The landmark object that spawns the shell will also need to be mapped in for this to work.
+# GIVE_FREE_AI_SHELL
+
+## Uncomment to allow specific solar control computers to set themselves up.
+## This requires solar controller computers in the map to be set up to use it, with the auto_start variable.
+# AUTOSTART_SOLARS
+
+## Rate of radiation decay (how much it's reduced by) per life tick
+RADIATION_DECAY_RATE 1
+
+## Lower limit on radiation for actually irradiating things on a turf
+RADIATION_LOWER_LIMIT 0.01
+
+## Multiplier for radiation resistances when tracing a ray from source to destination to compute radiation on a turf
+RADIATION_RESISTANCE_MULTIPLIER 2.1
+
+## Divisor for material weights when computing radiation resistance of a material object (walls)
+RADIATION_MATERIAL_RESISTANCE_DIVISOR 16
+
+
+## Mode of computing radiation resistance into effective radiation on a turf
+## One and only one of the following options must be uncommented
+RADIATION_RESISTANCE_CALC_DIVIDE
+# RADIATION_RESISTANCE_CALC_SUBTRACT
+
+## IP Reputation Checking
+# Enable/disable IP reputation checking (present/nonpresent)
+#IP_REPUTATION
+
+# Set the e-mail address problems can go to for IPR checks (e-mail address)
+IPR_EMAIL whatever@whatever.com
+
+# Above this value, reputation scores are considered 'bad' (number)
+IPR_BAD_SCORE 1
+
+# If you want the people disconnected. Otherwise it just logs. (present/nonpresent)
+IPR_BLOCK_BAD_IPS
+
+# If players of a certain length of playtime are allowed anyway (REQUIRES DATABASE) (present/nonpresent)
+IPR_ALLOW_EXISTING
+
+# And what that age is (number)
+IPR_MINIMUM_AGE 5

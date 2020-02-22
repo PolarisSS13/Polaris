@@ -13,10 +13,10 @@
 	if(..()) //This will only run if no other problems occured when equiping.
 		for(var/obj/item/clothing/I in list(H.gloves, H.shoes))
 			if(I && (src.body_parts_covered & ARMS && I.body_parts_covered & ARMS) )
-				H << "<span class='warning'>You can't wear \the [src] with \the [I], it's in the way.</span>"
+				to_chat(H, "<span class='warning'>You can't wear \the [src] with \the [I], it's in the way.</span>")
 				return 0
 			if(I && (src.body_parts_covered & LEGS && I.body_parts_covered & LEGS) )
-				H << "<span class='warning'>You can't wear \the [src] with \the [I], it's in the way.</span>"
+				to_chat(H, "<span class='warning'>You can't wear \the [src] with \the [I], it's in the way.</span>")
 				return 0
 		return 1
 
@@ -126,7 +126,7 @@
 	item_state_slots = list(slot_r_hand_str = "swat", slot_l_hand_str = "swat")
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
-	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL
+	item_flags = THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/head/helmet)
 	slowdown = 1
@@ -135,6 +135,8 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	min_pressure_protection = 0 * ONE_ATMOSPHERE
+	max_pressure_protection = 20* ONE_ATMOSPHERE
 	siemens_coefficient = 0.6
 
 
@@ -196,10 +198,10 @@
 /obj/item/clothing/suit/armor/reactive/attack_self(mob/user as mob)
 	active = !( active )
 	if (active)
-		user << "<font color='blue'>The reactive armor is now active.</font>"
+		to_chat(user, "<font color='blue'>The reactive armor is now active.</font>")
 		icon_state = "reactive"
 	else
-		user << "<font color='blue'>The reactive armor is now inactive.</font>"
+		to_chat(user, "<font color='blue'>The reactive armor is now inactive.</font>")
 		icon_state = "reactiveoff"
 		add_fingerprint(user)
 	return
@@ -376,6 +378,16 @@
 	item_state = "tacwebvest"
 	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 
+/obj/item/clothing/suit/storage/vest/heavy/flexitac //a reskin of the above to have a matching armor set
+	name = "tactical light vest"
+	desc = "An armored vest made from advanced flexible ceramic plates. It's surprisingly mobile, if a little unfashionable."
+	icon_state = "flexitac"
+	item_state = "flexitac"
+	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
+	cold_protection = UPPER_TORSO|LOWER_TORSO
+	min_cold_protection_temperature = T0C - 20
+	slowdown = 0.3
+
 /obj/item/clothing/suit/storage/vest/detective
 	name = "detective armor vest"
 	desc = "A simple kevlar plate carrier in a vintage brown, it has a badge clipped to the chest that reads, 'Private investigator'."
@@ -508,6 +520,22 @@
 		|ACCESSORY_SLOT_ARMOR_M)
 	blood_overlay_type = "armor"
 
+/obj/item/clothing/suit/armor/pcarrier/mob_can_equip(var/mob/living/carbon/human/H, slot)
+	if(..()) //This will only run if no other problems occured when equiping.
+		if(H.gloves)
+			if(H.gloves.body_parts_covered & ARMS)
+				for(var/obj/item/clothing/accessory/A in src)
+					if(A.body_parts_covered & ARMS)
+						to_chat(H, "<span class='warning'>You can't wear \the [A] with \the [H.gloves], they're in the way.</span>")
+						return 0
+		if(H.shoes)
+			if(H.shoes.body_parts_covered & LEGS)
+				for(var/obj/item/clothing/accessory/A in src)
+					if(A.body_parts_covered & LEGS)
+						to_chat(H, "<span class='warning'>You can't wear \the [A] with \the [H.shoes], they're in the way.</span>")
+						return 0
+		return 1
+
 /obj/item/clothing/suit/armor/pcarrier/light
 	starting_accessories = list(/obj/item/clothing/accessory/armor/armorplate)
 
@@ -536,6 +564,11 @@
 	name = "blue plate carrier"
 	desc = "A lightweight blue plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon_state = "pcarrier_blue"
+
+/obj/item/clothing/suit/armor/pcarrier/press
+	name = "light blue plate carrier"
+	desc = "A lightweight light blue plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
+	icon_state = "pcarrier_press"
 
 /obj/item/clothing/suit/armor/pcarrier/blue/sol
 	name = "peacekeeper plate carrier"

@@ -12,7 +12,6 @@
 	spawn_positions = 1
 	supervisors = "the Colony Director"
 	selection_color = "#026865"
-	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
 	economic_modifier = 10
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
@@ -28,7 +27,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
-						staff keep the station’s crew healthy and whole. They are primarily interested in making sure that patients are safely found and \
+						staff keep the station's crew healthy and whole. They are primarily interested in making sure that patients are safely found and \
 						transported to Medical for treatment. They are expected to keep the crew informed about threats to their health and safety, and \
 						about the importance of Suit Sensors."
 
@@ -49,7 +48,6 @@
 	spawn_positions = 3
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/doctor
 	economic_modifier = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
@@ -82,7 +80,7 @@
 
 /datum/alt_title/nurse
 	title = "Nurse"
-	title_blurb = "A Nurse acts as a general purpose Doctor's Aide, providing basical care to non-critical patients, and stabilizing critical patients during \
+	title_blurb = "A Nurse acts as a general purpose Doctor's Aide, providing basic care to non-critical patients, and stabilizing critical patients during \
 					busy periods. They frequently watch the suit sensors console, to help manage the time of other Doctors. In rare occasions, a Nurse can be \
 					called upon to revive deceased crew members."
 	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/nurse
@@ -107,7 +105,6 @@
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/chemist
 	economic_modifier = 5
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
@@ -140,13 +137,12 @@
 	spawn_positions = 0
 	supervisors = "the Chief Medical Officer and Research Director"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/geneticist
 	economic_modifier = 7
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
-	job_description = "The Geneticist operates genetic manipulation equipment to repair any genetic defects encountered in crew, from cloning or radiation as examples. \
+	job_description = "A Geneticist operates genetic manipulation equipment to repair any genetic defects encountered in crew, from cloning or radiation as examples. \
 						When required, geneticists have the skills to clone, and are the superior choice when available for doing so."
 
 // Geneticist Alt Titles
@@ -168,7 +164,6 @@
 	economic_modifier = 5
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/psychiatrist
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
@@ -182,7 +177,7 @@
 
 /datum/alt_title/psychologist
 	title = "Psychologist"
-	title_blurb =  "The Psychologist provides mental health services to crew members in need, focusing more on therapy than medication. They may also be \
+	title_blurb =  "A Psychiatrist provides mental health services to crew members in need, focusing more on therapy than medication. They may also be \
 					called upon to determine whatever ails the mentally unwell, frequently under Security supervision."
 	title_outfit = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
 
@@ -199,7 +194,6 @@
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical/paramedic
 	economic_modifier = 4
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)

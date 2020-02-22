@@ -110,7 +110,7 @@
 	var/temperature = 0		//The current temperature
 	var/overheating = 0		//if this gets high enough the generator explodes
 
-/obj/machinery/power/port_gen/pacman/initialize()
+/obj/machinery/power/port_gen/pacman/Initialize()
 	. = ..()
 	if(anchored)
 		connect_to_network()
@@ -282,6 +282,7 @@
 				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			anchored = !anchored
+			return
 		else if(default_deconstruction_screwdriver(user, O))
 			return
 		else if(default_deconstruction_crowbar(user, O))
@@ -326,7 +327,7 @@
 
 
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "pacman.tmpl", src.name, 500, 560)
 		ui.set_initial_data(data)
@@ -398,13 +399,13 @@
 /obj/machinery/power/port_gen/pacman/super/UseFuel()
 	//produces a tiny amount of radiation when in use
 	if (prob(2*power_output))
-		radiation_repository.radiate(src, 4)
+		SSradiation.radiate(src, 4)
 	..()
 
 /obj/machinery/power/port_gen/pacman/super/explode()
 	//a nice burst of radiation
 	var/rads = 50 + (sheets + sheet_left)*1.5
-	radiation_repository.radiate(src, (max(20, rads)))
+	SSradiation.radiate(src, (max(20, rads)))
 
 	explosion(src.loc, 3, 3, 5, 3)
 	qdel(src)

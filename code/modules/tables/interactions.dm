@@ -1,21 +1,20 @@
 
-/obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+/obj/structure/table/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
 	if (flipped == 1)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
-			return 1
+			return TRUE
 	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
+		return TRUE
 	if(locate(/obj/structure/table/bench) in get_turf(mover))
-		return 0
+		return FALSE
 	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(mover)
 	if(table && !table.flipped)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
@@ -73,7 +72,7 @@
 	return
 
 
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob, var/click_parameters)
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
@@ -83,7 +82,7 @@
 			var/mob/living/M = G.affecting
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
-				user << "<span class='danger'>There's \a [occupied] in the way.</span>"
+				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
 				return
 			if(!user.Adjacent(M))
 				return
@@ -106,7 +105,7 @@
 							if(prob(2))
 								M.embed(S, def_zone = BP_HEAD)
 				else
-					user << "<span class='danger'>You need a better grip to do that!</span>"
+					to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 					return
 			else if(G.state > GRAB_AGGRESSIVE || world.time >= (G.last_action + UPGRADE_COOLDOWN))
 				M.forceMove(get_turf(src))
@@ -138,12 +137,52 @@
 		return
 
 	if(can_plate && !material)
-		user << "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>"
+		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
 		return
 
-	if(item_place)
-		user.drop_item(src.loc)
-	return
+// Placing stuff on tables
+	if(user.unEquip(W, 0, src.loc))
+		auto_align(W, click_parameters)
+		return 1
+
+#define CELLS 8								//Amount of cells per row/column in grid
+#define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels
+/*
+Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE.
+Since the grid will be shifted to own a cell that is perfectly centered on the turf, we end up with two 'cell halves'
+on edges of each row/column.
+Each item defines a center_of_mass, which is the pixel of a sprite where its projected center of mass toward a turf
+surface can be assumed. For a piece of paper, this will be in its center. For a bottle, it will be (near) the bottom
+of the sprite.
+auto_align() will then place the sprite so the defined center_of_mass is at the bottom left corner of the grid cell
+closest to where the cursor has clicked on.
+Note: This proc can be overwritten to allow for different types of auto-alignment.
+*/
+
+/obj/item/var/list/center_of_mass = list("x" = 16,"y" = 16)
+
+/obj/structure/table/proc/auto_align(obj/item/W, click_parameters)
+	if(!W.center_of_mass)
+		W.randpixel_xy()
+		return
+
+	if(!click_parameters)
+		return
+
+	var/list/mouse_control = params2list(click_parameters)
+
+	var/mouse_x = text2num(mouse_control["icon-x"])
+	var/mouse_y = text2num(mouse_control["icon-y"])
+
+	if(isnum(mouse_x) && isnum(mouse_y))
+		var/cell_x = max(0, min(CELLS-1, round(mouse_x/CELLSIZE)))
+		var/cell_y = max(0, min(CELLS-1, round(mouse_y/CELLSIZE)))
+
+		W.pixel_x = (CELLSIZE * (0.5 + cell_x)) - W.center_of_mass["x"]
+		W.pixel_y = (CELLSIZE * (0.5 + cell_y)) - W.center_of_mass["y"]
+
+#undef CELLS
+#undef CELLSIZE
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return

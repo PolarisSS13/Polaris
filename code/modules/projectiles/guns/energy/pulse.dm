@@ -22,12 +22,11 @@
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon. Because of its complexity and cost, it is rarely seen in use except by specialists."
-	fire_sound='sound/weapons/gauss_shoot.ogg'
 	projectile_type=/obj/item/projectile/beam/pulse
 	charge_cost = 120
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer/attack_self(mob/living/user as mob)
-	user << "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>"
+	to_chat(user, "<span class='warning'>[src.name] has three settings, and they are all DESTROY.</span>")
 
 //WHY?
 /obj/item/weapon/gun/energy/pulse_rifle/M1911

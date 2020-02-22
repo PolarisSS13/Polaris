@@ -147,7 +147,7 @@
 		else
 			die(0)
 
-/obj/effect/meteor/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/effect/meteor/CanPass(atom/movable/mover, turf/target)
 	return istype(mover, /obj/effect/meteor) ? 1 : ..()
 
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
@@ -272,7 +272,7 @@
 	if(explode)
 		explosion(src.loc, devastation_range = 0, heavy_impact_range = 0, light_impact_range = 4, flash_range = 6, adminlog = 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
-	radiation_repository.radiate(src, 50)
+	SSradiation.radiate(src, 50)
 
 // This meteor fries toasters.
 /obj/effect/meteor/emp

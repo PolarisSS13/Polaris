@@ -59,6 +59,7 @@
 
 /area/surface/outside
 	ambience = AMBIENCE_SIF
+	always_unpowered = TRUE
 
 // The area near the outpost, so POIs don't show up right next to the outpost.
 /area/surface/outside/plains/outpost
@@ -123,6 +124,7 @@
 
 /area/surface/cave
 	flags = RAD_SHIELDED
+	always_unpowered = TRUE
 
 /area/surface/cave
 
@@ -150,6 +152,11 @@
 
 /area/surface/outpost
 	ambience = AMBIENCE_GENERIC
+
+//Wilderness Shuttle Shelter
+
+/area/surface/outpost/shelter
+	name = "Wilderness Shelter"
 
 // Main mining outpost
 /area/surface/outpost/mining_main
@@ -311,11 +318,11 @@
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/surface/outpost/main/telecomms
-	name = "Main Outpost Telecommunications"
+	name = "\improper Main Outpost Telecommunications"
 	music = "signal"
 
 /area/surface/outpost/main/teleporter
-	name = "Main Outpost Teleporter"
+	name = "\improper Main Outpost Teleporter"
 	icon_state = "teleporter"
 
 /area/surface/outpost/main/first_aid
@@ -582,7 +589,7 @@
 	icon_state = "escape_pod"
 
 /area/hallway/secondary/escape/firstdeck/ep_starboard1
-	name = "\improper Escape Pod 3 Starboard"
+	name = "\improper First Deck Research Access Hallway"
 	icon_state = "escape_pod"
 
 /area/hallway/secondary/escape/firstdeck/ep_starboard2
@@ -719,6 +726,9 @@
 
 /area/construction/seconddeck/construction1
 	name = "\improper Second Deck Engineering Construction Area 1"
+
+/area/construction/seconddeck/construction2
+	name = "\improper Abandoned Locker Room"
 
 /area/crew_quarters/seconddeck/locker
 	name = "\improper Locker Room"
@@ -897,6 +907,14 @@
 /area/rnd/toxins_launch
 	name = "\improper Research - Toxins Launch Room"
 	icon_state = "toxtest"
+
+/area/rnd/research/firstdeck/hallway
+	name = "\improper Research - First Deck Hallway"
+	icon_state = "research"
+
+/area/rnd/xenobiology/xenoflora_isolation
+	name = "\improper Xenoflora Isolation"
+	icon_state = "xeno_f_store"
 
 /area/quartermaster/lockerroom
 	name = "\improper Cargo Locker Room"

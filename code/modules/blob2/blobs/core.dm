@@ -6,6 +6,7 @@ var/list/blob_cores = list()
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blank_blob"
 	desc = "A huge, pulsating yellow mass."
+	density = TRUE //bandaid fix for PolarisSS13/6173
 	max_integrity = 150
 	point_return = -1
 	health_regen = 0 //we regen in Life() instead of when pulsed
@@ -37,6 +38,9 @@ var/list/blob_cores = list()
 
 /obj/structure/blob/core/grey_goo
 	desired_blob_type = /datum/blob_type/grey_goo
+
+/obj/structure/blob/core/fabrication_swarm
+	desired_blob_type = /datum/blob_type/fabrication_swarm
 
 /obj/structure/blob/core/electromagnetic_web
 	desired_blob_type = /datum/blob_type/electromagnetic_web
@@ -71,13 +75,16 @@ var/list/blob_cores = list()
 /obj/structure/blob/core/radioactive_ooze
 	desired_blob_type = /datum/blob_type/radioactive_ooze
 
+/obj/structure/blob/core/volatile_alluvium
+	desired_blob_type = /datum/blob_type/volatile_alluvium
+
 /obj/structure/blob/core/classic
 	desired_blob_type = /datum/blob_type/classic
 
 /obj/structure/blob/core/New(var/newloc, var/client/new_overmind = null, new_rate = 2, placed = 0)
 	..(newloc)
 	blob_cores += src
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 	update_icon() //so it atleast appears
 	if(!placed && !overmind)
 		create_overmind(new_overmind)
@@ -91,7 +98,7 @@ var/list/blob_cores = list()
 		overmind.blob_core = null
 		qdel(overmind)
 	overmind = null
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/structure/blob/core/update_icon()

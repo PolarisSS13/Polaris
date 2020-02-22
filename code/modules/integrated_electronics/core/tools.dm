@@ -9,11 +9,10 @@
 	desc = "It's a small wiring tool, with a wire roll, electric soldering iron, wire cutter, and more in one package. \
 	The wires used are generally useful for small electronics, such as circuitboards and breadboards, as opposed to larger wires \
 	used for power or data transmission."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
 	icon_state = "wirer-wire"
 	item_state = "wirer"
-	flags = CONDUCT
-	w_class = 2
+	w_class = ITEMSIZE_SMALL
 	var/datum/integrated_io/selected_io = null
 	var/mode = WIRE
 
@@ -108,9 +107,8 @@
 	name = "circuit debugger"
 	desc = "This small tool allows one working with custom machinery to directly set data to a specific pin, useful for writing \
 	settings to specific circuits, or for debugging purposes.  It can also pulse activation pins."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
 	icon_state = "debugger"
-	flags = CONDUCT
 	w_class = 2
 	var/data_to_write = null
 	var/accepting_refs = 0
@@ -170,6 +168,7 @@
 
 
 /obj/item/device/multitool
+	var/accepting_refs
 	var/datum/integrated_io/selected_io = null
 	var/mode = 0
 
@@ -190,6 +189,10 @@
 	else
 		if(buffer || connecting || connectable)
 			icon_state = "multitool_tracking_fail"
+		else if(accepting_refs)
+			icon_state = "multitool_ref_scan"
+		else if(weakref_wiring)
+			icon_state = "multitool_no_camera"
 		else
 			icon_state = "multitool"
 
@@ -239,7 +242,13 @@
 		io1.holder.interact(user) // This is to update the UI.
 		update_icon()
 
-
+/obj/item/device/multitool/afterattack(atom/target, mob/living/user, proximity)
+	if(accepting_refs && toolmode == MULTITOOL_MODE_INTCIRCUITS && proximity)
+		weakref_wiring = weakref(target)
+		visible_message("<span class='notice'>[user] slides \a [src]'s over \the [target].</span>")
+		to_chat(user, "<span class='notice'>You set \the [src]'s memory to a reference to [target.name] \[Ref\].  The ref scanner is \
+		now off.</span>")
+		accepting_refs = 0
 
 
 
@@ -252,7 +261,7 @@
 /obj/item/weapon/storage/bag/circuits
 	name = "circuit kit"
 	desc = "This kit's essential for any circuitry projects."
-	icon = 'icons/obj/electronic_assemblies.dmi'
+	icon = 'icons/obj/integrated_electronics/electronic_misc.dmi'
 	icon_state = "circuit_kit"
 	w_class = 3
 	display_contents_with_number = 0

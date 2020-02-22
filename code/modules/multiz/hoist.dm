@@ -100,7 +100,7 @@
 	var/obj/effect/hoist_hook/source_hook
 	description_info = "Click this to raise or lower the hoist, or to switch directions if it can't move any further. It can also be collapsed into a hoist kit."
 
-/obj/structure/hoist/initialize(mapload, ndir)
+/obj/structure/hoist/Initialize(mapload, ndir)
 	. = ..()
 	dir = ndir
 	var/turf/newloc = get_step(src, dir)
@@ -110,7 +110,7 @@
 /obj/structure/hoist/Destroy()
 	if(hoistee)
 		release_hoistee()
-	qdel_null(src.source_hook)
+	QDEL_NULL(src.source_hook)
 	return ..()
 
 /obj/effect/hoist_hook/Destroy()
@@ -139,7 +139,7 @@
 	desc += " It looks broken, and the clamp has retracted back into the hoist. Seems like you'd have to re-deploy it to get it to work again."
 	if(hoistee)
 		release_hoistee()
-	qdel_null(source_hook)
+	QDEL_NULL(source_hook)
 
 /obj/structure/hoist/ex_act(severity)
 	switch(severity)

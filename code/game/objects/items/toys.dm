@@ -49,7 +49,7 @@
 	if(!proximity) return
 	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
 		A.reagents.trans_to_obj(src, 10)
-		user << "<span class='notice'>You fill the balloon with the contents of [A].</span>"
+		to_chat(user, "<span class='notice'>You fill the balloon with the contents of [A].</span>")
 		src.desc = "A translucent balloon with some form of liquid sloshing around in it."
 		src.update_icon()
 	return
@@ -58,15 +58,15 @@
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(O.reagents)
 			if(O.reagents.total_volume < 1)
-				user << "The [O] is empty."
+				to_chat(user, "The [O] is empty.")
 			else if(O.reagents.total_volume >= 1)
 				if(O.reagents.has_reagent("pacid", 1))
-					user << "The acid chews through the balloon!"
+					to_chat(user, "The acid chews through the balloon!")
 					O.reagents.splash(user, reagents.total_volume)
 					qdel(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
-					user << "<span class='notice'>You fill the balloon with the contents of [O].</span>"
+					to_chat(user, "<span class='notice'>You fill the balloon with the contents of [O].</span>")
 					O.reagents.trans_to_obj(src, 10)
 	src.update_icon()
 	return
@@ -150,7 +150,7 @@
 
 	examine(mob/user)
 		if(..(user, 2) && bullets)
-			user << "<span class='notice'>It is loaded with [bullets] foam darts!</span>"
+			to_chat(user, "<span class='notice'>It is loaded with [bullets] foam darts!</span>")
 
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -158,9 +158,9 @@
 				user.drop_item()
 				qdel(I)
 				bullets++
-				user << "<span class='notice'>You load the foam dart into the crossbow.</span>"
+				to_chat(user, "<span class='notice'>You load the foam dart into the crossbow.</span>")
 			else
-				usr << "<span class='warning'>It's already fully loaded.</span>"
+				to_chat(usr, "<span class='warning'>It's already fully loaded.</span>")
 
 
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
@@ -255,36 +255,70 @@
 	name = "toy sword"
 	desc = "A cheap, plastic replica of an energy sword. Realistic sounds! Ages 8 and up."
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "sword0"
+	icon_state = "esword"
+	var/lcolor
+	var/rainbow = FALSE
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
 		slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
 		)
-	var/active = 0.0
+	var/active = 0
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
 	attack_self(mob/user as mob)
 		src.active = !( src.active )
 		if (src.active)
-			user << "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>"
+			to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
 			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-			src.icon_state = "swordblue"
+			src.item_state = "[icon_state]_blade"
 			src.w_class = ITEMSIZE_LARGE
 		else
-			user << "<span class='notice'>You push the plastic blade back down into the handle.</span>"
+			to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
 			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-			src.icon_state = "sword0"
+			src.item_state = "[icon_state]"
 			src.w_class = ITEMSIZE_SMALL
-
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			H.update_inv_l_hand()
-			H.update_inv_r_hand()
-
+		update_icon()
 		src.add_fingerprint(user)
 		return
 
+/obj/item/toy/sword/update_icon()
+	. = ..()
+	var/mutable_appearance/blade_overlay = mutable_appearance(icon, "[icon_state]_blade")
+	blade_overlay.color = lcolor
+	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
+	if(active)
+		add_overlay(blade_overlay)
+	if(istype(usr,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
+/obj/item/toy/sword/AltClick(mob/living/user)
+	if(!in_range(src, user))	//Basic checks to prevent abuse
+		return
+	if(user.incapacitated() || !istype(user))
+		to_chat(user, "<span class='warning'>You can't do that right now!</span>")
+		return
+
+	if(alert("Are you sure you want to recolor your blade?", "Confirm Recolor", "Yes", "No") == "Yes")
+		var/energy_color_input = input(usr,"","Choose Energy Color",lcolor) as color|null
+		if(energy_color_input)
+			lcolor = sanitize_hexcolor(energy_color_input)
+		update_icon()
+
+/obj/item/toy/sword/examine(mob/user)
+	..()
+	to_chat(user, "<span class='notice'>Alt-click to recolor it.</span>")
+
+/obj/item/toy/sword/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/device/multitool) && !active)
+		if(!rainbow)
+			rainbow = TRUE
+		else
+			rainbow = FALSE
+		to_chat(user, "<span class='notice'>You manipulate the color controller in [src].</span>")
+		update_icon()
 /obj/item/toy/katana
 	name = "replica katana"
 	desc = "Woefully underpowered in D20."
@@ -295,7 +329,6 @@
 		slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
 		slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
 		)
-	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 5
 	throwforce = 5
@@ -326,7 +359,7 @@
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(M.m_intent == "run")
-			M << "<span class='warning'>You step on the snap pop!</span>"
+			to_chat(M, "<span class='warning'>You step on the snap pop!</span>")
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(2, 0, src)
@@ -366,13 +399,13 @@
 		return
 
 	else if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to(src, 10)
-		user << "<span class='notice'>You refill your flower!</span>"
+		A.reagents.trans_to_obj(src, 10)
+		to_chat(user, "<span class='notice'>You refill your flower!</span>")
 		return
 
 	else if (src.reagents.total_volume < 1)
 		src.empty = 1
-		user << "<span class='notice'>Your flower has run dry!</span>"
+		to_chat(user, "<span class='notice'>Your flower has run dry!</span>")
 		return
 
 	else
@@ -394,7 +427,7 @@
 				for(var/atom/T in get_turf(D))
 					D.reagents.touch(T)
 					if(ismob(T) && T:client)
-						T:client << "<span class='warning'>\The [user] has sprayed you with water!</span>"
+						to_chat(T:client, "<span class='warning'>\The [user] has sprayed you with water!</span>")
 				sleep(4)
 			qdel(D)
 
@@ -402,7 +435,7 @@
 
 /obj/item/toy/waterflower/examine(mob/user)
 	if(..(user, 0))
-		user << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
+		to_chat(user, "\icon[src] [src.reagents.total_volume] units of water left!")
 
 /*
  * Bosun's whistle
@@ -419,7 +452,7 @@
 
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
 	if(cooldown < world.time - 35)
-		user << "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>"
+		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
 		cooldown = world.time
 
@@ -434,14 +467,14 @@
 //all credit to skasi for toy mech fun ideas
 /obj/item/toy/prize/attack_self(mob/user as mob)
 	if(cooldown < world.time - 8)
-		user << "<span class='notice'>You play with [src].</span>"
+		to_chat(user, "<span class='notice'>You play with [src].</span>")
 		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user as mob)
 	if(loc == user)
 		if(cooldown < world.time - 8)
-			user << "<span class='notice'>You play with [src].</span>"
+			to_chat(user, "<span class='notice'>You play with [src].</span>")
 			playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
 			cooldown = world.time
 			return
@@ -887,6 +920,7 @@
 	icon_state = "nymphplushie"
 	w_class = ITEMSIZE_TINY
 	var/last_message = 0
+	var/pokephrase = "Uww!"
 
 /obj/item/toy/plushie/attack_self(mob/user as mob)
 	if(world.time - last_message <= 1 SECOND)
@@ -899,6 +933,7 @@
 		user.visible_message("<span class='warning'><b>\The [user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
 	else
 		user.visible_message("<span class='notice'><b>\The [user]</b> pokes [src].</span>","<span class='notice'>You poke [src].</span>")
+		visible_message("[src] says, \"[pokephrase]\"")
 	last_message = world.time
 
 /obj/item/toy/plushie/verb/rename_plushie()
@@ -926,121 +961,155 @@
 	name = "diona nymph plush"
 	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
+	pokephrase = "Chirp!"
+
+/obj/item/toy/plushie/teshari
+	name = "teshari plush"
+	desc = "This is a plush teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
+	icon_state = "teshariplushie"
+	pokephrase = "Rya!"
 
 /obj/item/toy/plushie/mouse
 	name = "mouse plush"
 	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
-	icon_state = "mouseplushie"
+	icon_state = "mouseplushie"	//TFF 12/11/19 - updated icon to show a sprite that doesn't replicate a dead mouse. Heck you for that! >:C
+	pokephrase = "Squeak!"
 
 /obj/item/toy/plushie/kitten
 	name = "kitten plush"
 	desc = "A plushie of a cute kitten! Watch as it purrs its way right into your heart."
 	icon_state = "kittenplushie"
+	pokephrase = "Mrow!"
 
 /obj/item/toy/plushie/lizard
 	name = "lizard plush"
 	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
 	icon_state = "lizardplushie"
+	pokephrase = "Hiss!"
 
 /obj/item/toy/plushie/spider
 	name = "spider plush"
 	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
 	icon_state = "spiderplushie"
+	pokephrase = "Sksksk!"
 
 /obj/item/toy/plushie/farwa
 	name = "farwa plush"
 	desc = "A farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
+	pokephrase = "Squaw!"
 
 /obj/item/toy/plushie/corgi
 	name = "corgi plushie"
 	icon_state = "corgi"
+	pokephrase = "Woof!"
 
 /obj/item/toy/plushie/girly_corgi
 	name = "corgi plushie"
 	icon_state = "girlycorgi"
+	pokephrase = "Arf!"
 
 /obj/item/toy/plushie/robo_corgi
 	name = "borgi plushie"
 	icon_state = "robotcorgi"
+	pokephrase = "Bark."
 
 /obj/item/toy/plushie/octopus
 	name = "octopus plushie"
 	icon_state = "loveable"
+	pokephrase = "Squish!"
 
 /obj/item/toy/plushie/face_hugger
 	name = "facehugger plushie"
 	icon_state = "huggable"
+	pokephrase = "Hug!"
 
 //foxes are basically the best
 
 /obj/item/toy/plushie/red_fox
 	name = "red fox plushie"
 	icon_state = "redfox"
+	pokephrase = "Gecker!"
 
 /obj/item/toy/plushie/black_fox
 	name = "black fox plushie"
 	icon_state = "blackfox"
+	pokephrase = "Ack!"
 
 /obj/item/toy/plushie/marble_fox
 	name = "marble fox plushie"
 	icon_state = "marblefox"
+	pokephrase = "Awoo!"
 
 /obj/item/toy/plushie/blue_fox
 	name = "blue fox plushie"
 	icon_state = "bluefox"
+	pokephrase = "Yoww!"
 
 /obj/item/toy/plushie/orange_fox
 	name = "orange fox plushie"
 	icon_state = "orangefox"
+	pokephrase = "Yagh!"
 
 /obj/item/toy/plushie/coffee_fox
 	name = "coffee fox plushie"
 	icon_state = "coffeefox"
+	pokephrase = "Gerr!"
 
 /obj/item/toy/plushie/pink_fox
 	name = "pink fox plushie"
 	icon_state = "pinkfox"
+	pokephrase = "Yack!"
 
 /obj/item/toy/plushie/purple_fox
 	name = "purple fox plushie"
 	icon_state = "purplefox"
+	pokephrase = "Whine!"
 
 /obj/item/toy/plushie/crimson_fox
 	name = "crimson fox plushie"
 	icon_state = "crimsonfox"
+	pokephrase = "Auuu!"
 
 /obj/item/toy/plushie/deer
 	name = "deer plushie"
 	icon_state = "deer"
+	pokephrase = "Bleat!"
 
 /obj/item/toy/plushie/black_cat
 	name = "black cat plushie"
 	icon_state = "blackcat"
+	pokephrase = "Mlem!"
 
 /obj/item/toy/plushie/grey_cat
 	name = "grey cat plushie"
 	icon_state = "greycat"
+	pokephrase = "Mraw!"
 
 /obj/item/toy/plushie/white_cat
 	name = "white cat plushie"
 	icon_state = "whitecat"
+	pokephrase = "Mew!"
 
 /obj/item/toy/plushie/orange_cat
 	name = "orange cat plushie"
 	icon_state = "orangecat"
+	pokephrase = "Meow!"
 
 /obj/item/toy/plushie/siamese_cat
 	name = "siamese cat plushie"
 	icon_state = "siamesecat"
+	pokephrase = "Mrew?"
 
 /obj/item/toy/plushie/tabby_cat
 	name = "tabby cat plushie"
 	icon_state = "tabbycat"
+	pokephrase = "Purr!"
 
 /obj/item/toy/plushie/tuxedo_cat
 	name = "tuxedo cat plushie"
 	icon_state = "tuxedocat"
+	pokephrase = "Mrowww!!"
 
 // nah, squids are better than foxes :>
 
@@ -1050,6 +1119,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "greensquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Squrr!"
 
 /obj/item/toy/plushie/squid/mint
 	name = "mint squid plushie"
@@ -1057,6 +1127,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "mintsquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Blurble!"
 
 /obj/item/toy/plushie/squid/blue
 	name = "blue squid plushie"
@@ -1064,6 +1135,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "bluesquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Blob!"
 
 /obj/item/toy/plushie/squid/orange
 	name = "orange squid plushie"
@@ -1071,6 +1143,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "orangesquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Squash!"
 
 /obj/item/toy/plushie/squid/yellow
 	name = "yellow squid plushie"
@@ -1078,6 +1151,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "yellowsquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Glorble!"
 
 /obj/item/toy/plushie/squid/pink
 	name = "pink squid plushie"
@@ -1085,6 +1159,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "pinksquid"
 	slot_flags = SLOT_HEAD
+	pokephrase = "Wobble!"
 
 /obj/item/toy/plushie/therapy/red
 	name = "red therapy doll"

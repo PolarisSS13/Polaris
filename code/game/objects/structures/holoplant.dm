@@ -17,7 +17,7 @@
 		"plant-13"
 	)
 
-/obj/machinery/holoplant/initialize()
+/obj/machinery/holoplant/Initialize()
 	. = ..()
 	activate()
 
@@ -52,7 +52,7 @@
 
 /obj/machinery/holoplant/proc/deactivate()
 	overlays -= plant
-	qdel_null(plant)
+	QDEL_NULL(plant)
 	set_light(0)
 	use_power = 0
 
@@ -101,5 +101,5 @@
 
 /obj/machinery/holoplant/shipped
 	anchored = FALSE
-/obj/machinery/holoplant/shipped/initialize()
+/obj/machinery/holoplant/shipped/Initialize()
 	. = ..()

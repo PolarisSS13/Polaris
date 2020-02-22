@@ -28,7 +28,7 @@
 
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && !istype(below,/turf/space))
+		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
 			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
@@ -38,8 +38,9 @@
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
 	var/old_outdoors = outdoors
+	var/old_dangerous_objects = dangerous_objects
 
-	//world << "Replacing [src.type] with [N]"
+	//to_world("Replacing [src.type] with [N]")
 
 	if(connections) connections.erase_all()
 
@@ -94,6 +95,8 @@
 		. =  W
 
 	recalc_atom_opacity()
+
+	dangerous_objects = old_dangerous_objects
 
 	if(lighting_overlays_initialised)
 		lighting_overlay = old_lighting_overlay

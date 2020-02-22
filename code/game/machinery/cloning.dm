@@ -113,6 +113,8 @@
 	if(!R.dna.real_name)	//to prevent null names
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
+	H.gender = R.gender
+	H.descriptors = R.body_descriptors
 
 	//Get the clone body ready
 	H.adjustCloneLoss(150) // New damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
@@ -194,7 +196,7 @@
 			occupant.adjustCloneLoss(-2 * heal_rate)
 
 			//Premature clones may have brain damage.
-			occupant.adjustBrainLoss(-(ceil(0.5*heal_rate)))
+			occupant.adjustBrainLoss(-(CEILING(0.5*heal_rate, 1)))
 
 			//So clones don't die of oxyloss in a running pod.
 			if(occupant.reagents.get_reagent_amount("inaprovaline") < 30)
