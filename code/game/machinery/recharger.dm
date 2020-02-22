@@ -72,7 +72,7 @@
 			if(EW.use_external_power)
 				to_chat(user, "<span class='notice'>\The [EW] has no recharge port.</span>")
 				return
-		else if(!G.get_cell())
+		if(!G.get_cell())
 			to_chat(user, "\The [G] does not have a battery installed.")
 			return
 
