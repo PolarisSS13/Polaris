@@ -125,27 +125,6 @@
 		update_use_power(1)
 		icon_state = icon_state_idle
 	else
-		if(istype(charging, /obj/item/modular_computer))
-			var/obj/item/modular_computer/C = charging
-			if(!C.battery_module.battery.fully_charged())
-				icon_state = icon_state_charging
-				C.battery_module.battery.give(CELLRATE*efficiency)
-				update_use_power(2)
-			else
-				icon_state = icon_state_charged
-				update_use_power(1)
-			return
-		else if(istype(charging, /obj/item/weapon/computer_hardware/battery_module))
-			var/obj/item/weapon/computer_hardware/battery_module/BM = charging
-			if(!BM.battery.fully_charged())
-				icon_state = icon_state_charging
-				BM.battery.give(CELLRATE*efficiency)
-				update_use_power(2)
-			else
-				icon_state = icon_state_charged
-				update_use_power(1)
-			return
-
 		var/obj/item/weapon/cell/C = charging.get_cell()
 		if(istype(C))
 			if(!C.fully_charged())
