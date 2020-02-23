@@ -47,20 +47,24 @@
 	return ..()
 
 /datum/ai_holder/proc/update_stance_hud()
-	var/image/state = holder.grab_hud(LIFE_HUD)
-	state.icon_state = "ais_[stance]"
-	holder.apply_hud(LIFE_HUD, state)
+	var/image/stanceimage = holder.grab_hud(LIFE_HUD)
+	stanceimage.icon_state = "ais_[stance]"
+	holder.apply_hud(LIFE_HUD, stanceimage)
 
-/datum/ai_holder/proc/update_active_hud()
-	var/image/state = holder.grab_hud(STATUS_HUD)
-	state.icon_state = "ais_[busy || stance == STANCE_SLEEP]"
-	holder.apply_hud(STATUS_HUD, state)
+/datum/ai_holder/proc/update_paused_hud()
+	var/image/sleepingimage = holder.grab_hud(STATUS_HUD)
+	var/asleep = 0
+	if(busy)
+		asleep = 2
+	else if (stance == STANCE_SLEEP)
+		asleep = 1
+	sleepingimage.icon_state = "ai_[asleep]"
+	holder.apply_hud(STATUS_HUD, sleepingimage)
 
 // Now for the actual AI stuff.
-
 /datum/ai_holder/proc/set_busy(var/value = 0)
 	busy = value
-	update_active_hud()
+	update_paused_hud()
 
 // Makes this ai holder not get processed.
 // Called automatically when the host mob is killed.
@@ -71,6 +75,7 @@
 	forget_everything() // If we ever wake up, its really unlikely that our current memory will be of use.
 	set_stance(STANCE_SLEEP)
 	SSai.processing -= src
+	update_paused_hud()
 
 // Reverses the above proc.
 // Revived mobs will wake their AI if they have one.
@@ -81,6 +86,7 @@
 		return
 	set_stance(STANCE_IDLE)
 	SSai.processing += src
+	update_paused_hud()
 
 /datum/ai_holder/proc/should_wake()
 	if(holder.client && !autopilot)

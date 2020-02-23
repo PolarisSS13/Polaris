@@ -164,6 +164,7 @@
 	wander = TRUE //Wander around
 	returns_home = TRUE //But not too far
 	use_astar = TRUE //Path smartly
+	home_low_priority = TRUE //Following/helping is more important
 
 // The hostile subtype is implied to be trained combatants who use ""tactics""
 /datum/ai_holder/simple_mob/humanoid/hostile
