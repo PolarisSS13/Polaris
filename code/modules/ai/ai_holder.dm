@@ -46,8 +46,21 @@
 	home_turf = null
 	return ..()
 
+/datum/ai_holder/proc/update_stance_hud()
+	var/image/state = holder.grab_hud(LIFE_HUD)
+	state.icon_state = "ais_[stance]"
+	holder.apply_hud(LIFE_HUD, state)
+
+/datum/ai_holder/proc/update_active_hud()
+	var/image/state = holder.grab_hud(STATUS_HUD)
+	state.icon_state = "ais_[busy || stance == STANCE_SLEEP]"
+	holder.apply_hud(STATUS_HUD, state)
 
 // Now for the actual AI stuff.
+
+/datum/ai_holder/proc/set_busy(var/value = 0)
+	busy = value
+	update_active_hud()
 
 // Makes this ai holder not get processed.
 // Called automatically when the host mob is killed.
@@ -136,6 +149,7 @@
 	stance = new_stance
 	if(stance_coloring) // For debugging or really weird mobs.
 		stance_color()
+	update_stance_hud()
 
 // This is called every half a second.
 /datum/ai_holder/proc/handle_stance_tactical()
@@ -263,7 +277,7 @@
 // Helper proc to turn AI 'busy' mode on or off without having to check if there is an AI, to simplify writing code.
 /mob/living/proc/set_AI_busy(value)
 	if(ai_holder)
-		ai_holder.busy = value
+		ai_holder.set_busy(value)
 
 /mob/living/proc/is_AI_busy()
 	if(!ai_holder)

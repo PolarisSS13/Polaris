@@ -6,6 +6,7 @@
 			log_admin("[key_name(usr)] has left build mode.")
 			M.client.buildmode = 0
 			M.client.show_popup_menus = 1
+			M.plane_holder.set_vis(VIS_BUILDMODE, FALSE)
 			for(var/obj/effect/bmode/buildholder/H)
 				if(H.cl == M.client)
 					qdel(H)
@@ -13,6 +14,7 @@
 			log_admin("[key_name(usr)] has entered build mode.")
 			M.client.buildmode = 1
 			M.client.show_popup_menus = 0
+			M.plane_holder.set_vis(VIS_BUILDMODE, TRUE)
 
 			var/obj/effect/bmode/buildholder/H = new/obj/effect/bmode/buildholder()
 			var/obj/effect/bmode/builddir/A = new/obj/effect/bmode/builddir(H)
