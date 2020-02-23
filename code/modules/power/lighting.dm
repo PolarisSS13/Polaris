@@ -629,12 +629,15 @@ var/global/list/light_type_cache = list()
 		flickering = 0
 
 // ai attack - turn on/off emergency lighting for a specific fixture
-
 /obj/machinery/light/attack_ai(mob/user)
 	no_emergency = !no_emergency
 	to_chat(user, "<span class='notice'>Emergency lights for this fixture have been [no_emergency ? "disabled" : "enabled"].</span>")
 	update(FALSE)
 	return
+
+// ai alt click - Make light flicker.  Very important for atmosphere.  
+/obj/machinery/light/AIAltClick(mob/user)
+	flicker(1)
 
 /obj/machinery/light/flamp/attack_ai(mob/user)
 	attack_hand()
