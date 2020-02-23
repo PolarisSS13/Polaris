@@ -167,7 +167,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
-	job_description = "The Psychologist provides mental health services to crew members in need. They may also be called upon to determine whatever \
+	job_description = "A Psychiatrist provides mental health services to crew members in need. They may also be called upon to determine whatever \
 					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
 	alt_titles = list("Psychiatrist" = /datum/alt_title/psychiatrist, "Psychologist" = /datum/alt_title/psychologist)
 
@@ -177,7 +177,7 @@
 
 /datum/alt_title/psychologist
 	title = "Psychologist"
-	title_blurb =  "A Psychiatrist provides mental health services to crew members in need, focusing more on therapy than medication. They may also be \
+	title_blurb =  "A Psychologist provides mental health services to crew members in need, focusing more on therapy than medication. They may also be \
 					called upon to determine whatever ails the mentally unwell, frequently under Security supervision."
 	title_outfit = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
 
