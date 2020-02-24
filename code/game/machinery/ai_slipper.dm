@@ -24,7 +24,7 @@
 
 /obj/machinery/ai_slipper/update_icon()
 	if(stat & NOPOWER || stat & BROKEN)
-		icon_state = "liquidd_dispenser"
+		icon_state = "liquid_dispenser"
 	else
 		icon_state = disabled ? "liquid_dispenser" : "liquid_dispenser_on"
 
