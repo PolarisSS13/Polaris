@@ -124,6 +124,12 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+/obj/structure/bed/chair/comfy/orange/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","orange")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -271,6 +277,9 @@
 /obj/structure/bed/chair/sofa/yellow
 	sofa_material = "yellow"
 
+/obj/structure/bed/chair/sofa/orange
+	sofa_material = "orange"
+
 //sofa directions
 
 /obj/structure/bed/chair/sofa/left
@@ -361,4 +370,13 @@
 	icon_state = "sofaend_right"
 
 /obj/structure/bed/chair/sofa/yellow/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/orange/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/orange/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/orange/corner
 	icon_state = "sofacorner"
