@@ -22,10 +22,10 @@ SUBSYSTEM_DEF(sqlite)
 
 
 	if(!sqlite_db)
-		world.log << "Failed to load or create a SQLite database."
+		to_world_log("Failed to load or create a SQLite database.")
 		log_debug("ERROR: SQLite database is active in config but failed to load.")
 	else
-		world.log << "SQLite database connected."
+		to_world_log("Sqlite database connected.")
 
 // Makes the tables, if they do not already exist in the sqlite file.
 /datum/controller/subsystem/sqlite/proc/init_schema(database/sqlite_object)
