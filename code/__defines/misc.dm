@@ -77,6 +77,7 @@
 #define COLOR_PURPLE_GRAY 		"#A2819E"
 #define COLOR_RED_LIGHT         "#FF3333"
 #define COLOR_DEEP_SKY_BLUE     "#00e1ff"
+#define COLOR_DARK_GRAY 		"#404040"
 
 
 
