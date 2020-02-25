@@ -1172,6 +1172,7 @@
 		name = "Tajaran Plait"
 		icon_state = "hair_plait"
 		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
+
 	taj_ears_straight
 		name = "Tajaran Straight"
 		icon_state = "hair_straight"
