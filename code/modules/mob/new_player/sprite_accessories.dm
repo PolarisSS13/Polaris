@@ -1141,87 +1141,86 @@
 	taj_ears
 		name = "Tajaran Ears"
 		icon_state = "ears_plain"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_clean
 		name = "Tajaran Clean"
 		icon_state = "hair_clean"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_bangs
 		name = "Tajaran Bangs"
 		icon_state = "hair_bangs"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_braid
 		name = "Tajaran Braid"
 		icon_state = "hair_tbraid"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_shaggy
 		name = "Tajaran Shaggy"
 		icon_state = "hair_shaggy"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_mohawk
 		name = "Tajaran Mohawk"
 		icon_state = "hair_mohawk"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_plait
 		name = "Tajaran Plait"
 		icon_state = "hair_plait"
-		species_allowed = list(SPECIES_TAJ)
-
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 	taj_ears_straight
 		name = "Tajaran Straight"
 		icon_state = "hair_straight"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_long
 		name = "Tajaran Long"
 		icon_state = "hair_long"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_rattail
 		name = "Tajaran Rat Tail"
 		icon_state = "hair_rattail"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_spiky
 		name = "Tajaran Spiky"
 		icon_state = "hair_tajspiky"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_messy
 		name = "Tajaran Messy"
 		icon_state = "hair_messy"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_curls
 		name = "Tajaran Curly"
 		icon_state = "hair_curly"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_wife
 		name = "Tajaran Housewife"
 		icon_state = "hair_wife"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_victory
 		name = "Tajaran Victory Curls"
 		icon_state = "hair_victory"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_bob
 		name = "Tajaran Bob"
 		icon_state = "hair_tbob"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 	taj_ears_fingercurl
 		name = "Tajaran Finger Curls"
 		icon_state = "hair_fingerwave"
-		species_allowed = list(SPECIES_TAJ)
+		species_allowed = list(SPECIES_TAJ, SPECIES_HUMAN, SPECIES_PROMETHEAN, SPECIES_HUMAN_VATBORN)
 
 //Teshari things
 	teshari
