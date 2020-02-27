@@ -48,7 +48,7 @@ var/const/BRIDGE			=(1<<12)
 var/list/assistant_occupations = list(
 )
 
-
+/*
 var/list/command_positions = list(
 	"Colony Director",
 	"Head of Personnel",
@@ -70,7 +70,6 @@ var/list/engineering_positions = list(
 var/list/medical_positions = list(
 	"Chief Medical Officer",
 	"Medical Doctor",
-	"Geneticist",
 	"Psychiatrist",
 	"Chemist",
 	"Paramedic"
@@ -80,7 +79,6 @@ var/list/medical_positions = list(
 var/list/science_positions = list(
 	"Research Director",
 	"Scientist",
-	"Geneticist",	//Part of both medical and science
 	"Roboticist",
 	"Xenobiologist"
 )
@@ -99,7 +97,6 @@ var/list/civilian_positions = list(
 	"Chef",
 	"Janitor",
 	"Librarian",
-	"Lawyer",
 	"Chaplain",
 	"Assistant"
 )
@@ -125,10 +122,10 @@ var/list/nonhuman_positions = list(
 	"Cyborg",
 	"pAI"
 )
-
+*/
 
 /proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))
+	return ( (job in SSjob.get_job_titles_in_department(ROLE_COMMAND)) || (job in SSjob.get_job_titles_in_department(ROLE_SYNTHETIC)) || (job in SSjob.get_job_titles_in_department(ROLE_SECURITY)) )
 
 /proc/get_job_datums()
 	var/list/occupations = list()

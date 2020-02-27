@@ -238,16 +238,17 @@
 #define ANTAG_KNOWN		"Known"
 
 // Job groups
-#define ROLE_COMMAND			"command"
-#define ROLE_SECURITY			"security"
-#define ROLE_ENGINEERING		"engineering"
-#define ROLE_MEDICAL			"medical"
-#define ROLE_RESEARCH			"research"
-#define ROLE_CARGO				"cargo"
-#define ROLE_CIVILIAN			"civilian"
-#define ROLE_SYNTHETIC			"synthetic"
-#define ROLE_UNKNOWN			"unknown"
-#define ROLE_EVERYONE			"everyone"
+#define ROLE_COMMAND			"Command"
+#define ROLE_SECURITY			"Security"
+#define ROLE_ENGINEERING		"Engineering"
+#define ROLE_MEDICAL			"Medical"
+#define ROLE_RESEARCH			"Research"
+#define ROLE_CARGO				"Cargo"
+#define ROLE_CIVILIAN			"Civilian"
+#define ROLE_PLANET				"Planetside" // I hate having this be here and not in a SC file.
+#define ROLE_SYNTHETIC			"Synthetic"
+#define ROLE_UNKNOWN			"Unknown"
+#define ROLE_EVERYONE			"Everyone"
 
 // Canonical spellings of TSCs, so typos never have to happen again due to human error.
 #define TSC_NT		"NanoTrasen"

@@ -102,16 +102,24 @@
 	data["all_centcom_access"] = null
 	data["regions"] = null
 
+	data["jobs"] = list()
+	for(var/D in SSjob.department_datums)
+		var/datum/department/dept = D
+		data["jobs"] += list("cat" = dept.name, "jobs" = format_jobs(SSjob.get_job_titles_in_department(dept.name)) )
+
+	data["jobs"] += list("cat" = "CentCom", "jobs" = format_jobs(get_all_centcom_jobs()))
+	/*
 	data["jobs"] = list(
-				list("cat" = "Engineering", "jobs" = format_jobs(engineering_positions)),
-				list("cat" = "Medical", "jobs" = format_jobs(medical_positions)),
-				list("cat" = "Science", "jobs" = format_jobs(science_positions)),
-				list("cat" = "Security", "jobs" = format_jobs(security_positions)),
-				list("cat" = "Cargo", "jobs" = format_jobs(cargo_positions)),
-				list("cat" = "Planetside", "jobs" = format_jobs(planet_positions)),
-				list("cat" = "Civilian", "jobs" = format_jobs(civilian_positions)),
+				list("cat" = "Engineering", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_ENGINEERING))),
+				list("cat" = "Medical", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_MEDICAL))),
+				list("cat" = "Science", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_RESEARCH))),
+				list("cat" = "Security", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_SECURITY))),
+				list("cat" = "Cargo", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_CARGO))),
+				list("cat" = "Planetside", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_PLANET))),
+				list("cat" = "Civilian", "jobs" = format_jobs(SSjob.get_job_titles_in_department(ROLE_CIVILIAN))),
 				list("cat" = "CentCom", "jobs" = format_jobs(get_all_centcom_jobs()))
 			)
+	*/
 
 	if (modify && is_centcom())
 		var/list/all_centcom_access = list()

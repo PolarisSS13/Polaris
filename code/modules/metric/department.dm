@@ -35,28 +35,28 @@
 /datum/metric/proc/role_name_to_department(var/role_name)
 	var/list/result = list()
 
-	if(role_name in security_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_SECURITY))
 		result += ROLE_SECURITY
 
-	if(role_name in engineering_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_ENGINEERING))
 		result += ROLE_ENGINEERING
 
-	if(role_name in medical_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_MEDICAL))
 		result += ROLE_MEDICAL
 
-	if(role_name in science_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_RESEARCH))
 		result += ROLE_RESEARCH
 
-	if(role_name in cargo_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_CARGO))
 		result += ROLE_CARGO
 
-	if(role_name in civilian_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_CIVILIAN))
 		result += ROLE_CIVILIAN
 
-	if(role_name in nonhuman_positions)
+	if(SSjob.is_job_in_department(role_name, ROLE_SYNTHETIC))
 		result += ROLE_SYNTHETIC
 
-	if(role_name in command_positions) // We do Command last, since we consider command to only be a primary department for hop/admin.
+	if(SSjob.is_job_in_department(role_name, ROLE_COMMAND)) // We do Command last, since we consider command to only be a primary department for hop/admin.
 		result += ROLE_COMMAND
 
 	if(!result.len) // No department was found.
