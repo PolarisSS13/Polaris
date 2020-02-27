@@ -1126,6 +1126,14 @@ window "mainwindow"
 		alpha = 255
 		macro = "macro"
 		menu = "menu"
+	elem "asset_cache_browser"
+		type = BROWSER
+		pos = 0,0
+		size = 200x200
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = ""
 	elem "hotkey_toggle"
 		type = BUTTON
 		pos = 560,420
