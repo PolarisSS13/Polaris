@@ -223,7 +223,7 @@
 		/obj/item/clothing/gloves/chameleon,
 		/obj/item/clothing/mask/chameleon,
 		/obj/item/clothing/glasses/chameleon,
-		/obj/item/clothing/accessory/chameleon,
+		/obj/item/clothing/accessory/chameleon
 	)
 
 //********************
