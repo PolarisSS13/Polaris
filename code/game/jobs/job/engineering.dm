@@ -2,7 +2,7 @@
 	title = "Chief Engineer"
 	flag = CHIEF
 	head_position = 1
-	departments = list(ROLE_ENGINEERING, ROLE_COMMAND)
+	departments = list(DEPARTMENT_ENGINEERING, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = ENGSEC
 	faction = "Station"
@@ -32,7 +32,7 @@
 /datum/job/engineer
 	title = "Station Engineer"
 	flag = ENGINEER
-	departments = list(ROLE_ENGINEERING)
+	departments = list(DEPARTMENT_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5
@@ -51,7 +51,7 @@
 /datum/job/atmos
 	title = "Atmospheric Technician"
 	flag = ATMOSTECH
-	departments = list(ROLE_ENGINEERING)
+	departments = list(DEPARTMENT_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3

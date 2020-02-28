@@ -54,25 +54,25 @@
 			//to_world("[name]: [rank]")
 			//cael - to prevent multiple appearances of a player/job combination, add a continue after each line
 		var/department = 0
-		if(SSjob.is_job_in_department(real_rank, ROLE_COMMAND))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_COMMAND))
 			heads[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_SECURITY))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_SECURITY))
 			sec[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_ENGINEERING))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_ENGINEERING))
 			eng[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_MEDICAL))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_MEDICAL))
 			med[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_RESEARCH))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RESEARCH))
 			sci[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_CARGO))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CARGO))
 			car[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, ROLE_CIVILIAN))
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CIVILIAN))
 			civ[name] = rank
 			department = 1
 		if(!department && !(name in heads))

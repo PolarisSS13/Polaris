@@ -113,7 +113,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
-			if(SSjob.is_job_in_department(job.title, ROLE_COMMAND)) //If you want a command position, select it!
+			if(SSjob.is_job_in_department(job.title, DEPARTMENT_COMMAND)) //If you want a command position, select it!
 				continue
 
 			if(jobban_isbanned(player, job.title))
@@ -143,7 +143,7 @@ var/global/datum/controller/occupations/job_master
 	///This proc is called before the level loop of DivideOccupations() and will try to select a head, ignoring ALL non-head preferences for every level until it locates a head or runs out of levels to check
 	proc/FillHeadPosition()
 		for(var/level = 1 to 3)
-			for(var/command_position in SSjob.get_job_titles_in_department(ROLE_COMMAND))
+			for(var/command_position in SSjob.get_job_titles_in_department(DEPARTMENT_COMMAND))
 				var/datum/job/job = GetJob(command_position)
 				if(!job)	continue
 				var/list/candidates = FindOccupationCandidates(job, level)
@@ -183,7 +183,7 @@ var/global/datum/controller/occupations/job_master
 
 	///This proc is called at the start of the level loop of DivideOccupations() and will cause head jobs to be checked before any other jobs of the same level
 	proc/CheckHeadPositions(var/level)
-		for(var/command_position in SSjob.get_job_titles_in_department(ROLE_COMMAND))
+		for(var/command_position in SSjob.get_job_titles_in_department(DEPARTMENT_COMMAND))
 			var/datum/job/job = GetJob(command_position)
 			if(!job)	continue
 			var/list/candidates = FindOccupationCandidates(job, level)

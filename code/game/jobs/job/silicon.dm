@@ -1,7 +1,7 @@
 /datum/job/ai
 	title = "AI"
 	flag = AI
-	departments = list(ROLE_SYNTHETIC)
+	departments = list(DEPARTMENT_SYNTHETIC)
 	sorting_order = 1 // Be above their borgs.
 	department_flag = ENGSEC
 	faction = "Station"
@@ -31,7 +31,7 @@
 /datum/job/cyborg
 	title = "Cyborg"
 	flag = CYBORG
-	departments = list(ROLE_SYNTHETIC)
+	departments = list(DEPARTMENT_SYNTHETIC)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2

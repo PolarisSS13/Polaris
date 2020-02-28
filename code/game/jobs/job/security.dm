@@ -2,7 +2,7 @@
 	title = "Head of Security"
 	flag = HOS
 	head_position = 1
-	departments = list(ROLE_SECURITY, ROLE_COMMAND)
+	departments = list(DEPARTMENT_SECURITY, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = ENGSEC
 	faction = "Station"
@@ -29,7 +29,7 @@
 /datum/job/warden
 	title = "Warden"
 	flag = WARDEN
-	departments = list(ROLE_SECURITY)
+	departments = list(DEPARTMENT_SECURITY)
 	sorting_order = 1
 	department_flag = ENGSEC
 	faction = "Station"
@@ -46,7 +46,7 @@
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
-	departments = list(ROLE_SECURITY)
+	departments = list(DEPARTMENT_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2
@@ -63,7 +63,7 @@
 /datum/job/officer
 	title = "Security Officer"
 	flag = OFFICER
-	departments = list(ROLE_SECURITY)
+	departments = list(DEPARTMENT_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 4

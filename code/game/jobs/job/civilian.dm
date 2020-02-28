@@ -2,7 +2,7 @@
 /datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -19,7 +19,7 @@
 /datum/job/chef
 	title = "Chef"
 	flag = CHEF
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -35,7 +35,7 @@
 /datum/job/hydro
 	title = "Botanist"
 	flag = BOTANIST
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -52,7 +52,7 @@
 /datum/job/qm
 	title = "Quartermaster"
 	flag = QUARTERMASTER
-	departments = list(ROLE_CARGO)
+	departments = list(DEPARTMENT_CARGO)
 	sorting_order = 1 // QM is above the cargo techs, but below the HoP.
 	head_position = 1
 	department_flag = CIVILIAN
@@ -73,7 +73,7 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
-	departments = list(ROLE_CARGO)
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -88,7 +88,7 @@
 /datum/job/mining
 	title = "Shaft Miner"
 	flag = MINER
-	departments = list(ROLE_CARGO)
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
@@ -106,7 +106,7 @@
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -123,7 +123,7 @@
 /datum/job/librarian
 	title = "Librarian"
 	flag = LIBRARIAN
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -140,7 +140,7 @@
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
 	flag = LAWYER
-	departments = list(ROLE_CIVILIAN)
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2

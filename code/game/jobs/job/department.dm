@@ -13,43 +13,43 @@
 	var/centcom_only = FALSE
 
 /datum/department/command
-	name = ROLE_COMMAND
+	name = DEPARTMENT_COMMAND
 	short_name = "Heads"
 	color = "#3333FF"
 	sorting_order = 10
 
 /datum/department/security
-	name = ROLE_SECURITY
+	name = DEPARTMENT_SECURITY
 	short_name = "Sec"
 	color = "#8E0000"
 	sorting_order = 6
 
 /datum/department/engineering
-	name = ROLE_ENGINEERING
+	name = DEPARTMENT_ENGINEERING
 	short_name = "Eng"
 	color = "#B27300"
 	sorting_order = 5
 
 /datum/department/medical
-	name = ROLE_MEDICAL
+	name = DEPARTMENT_MEDICAL
 	short_name = "Med"
 	color = "#006600"
 	sorting_order = 4
 
 /datum/department/research
-	name = ROLE_RESEARCH
+	name = DEPARTMENT_RESEARCH
 	short_name = "Sci"
 	color = "#A65BA6"
 	sorting_order = 3
 
 /datum/department/cargo
-	name = ROLE_CARGO
+	name = DEPARTMENT_CARGO
 	short_name = "Car"
 	color = "#BB9040"
 	sorting_order = 2
 
 /datum/department/civilian
-	name = ROLE_CIVILIAN
+	name = DEPARTMENT_CIVILIAN
 	short_name = "Civ"
 	color = "#A32800"
 	sorting_order = 1
@@ -63,7 +63,7 @@
 	assignable = FALSE
 
 /datum/department/synthetic
-	name = ROLE_SYNTHETIC
+	name = DEPARTMENT_SYNTHETIC
 	short_name = "Bot"
 	color = "#222222"
 	sorting_order = -1

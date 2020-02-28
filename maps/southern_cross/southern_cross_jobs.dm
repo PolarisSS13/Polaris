@@ -51,14 +51,14 @@ var/const/access_explorer = 43
 */
 
 /datum/department/planetside
-	name = ROLE_PLANET
+	name = DEPARTMENT_PLANET
 	color = "#555555"
 	sorting_order = 2 // Same as cargo in importance.
 
 /datum/job/pilot
 	title = "Pilot"
 	flag = PILOT
-	departments = list(ROLE_PLANET)
+	departments = list(DEPARTMENT_PLANET)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -73,7 +73,7 @@ var/const/access_explorer = 43
 /datum/job/explorer
 	title = "Explorer"
 	flag = EXPLORER
-	departments = list(ROLE_PLANET)
+	departments = list(DEPARTMENT_PLANET)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 4
@@ -93,7 +93,7 @@ var/const/access_explorer = 43
 /datum/job/sar
 	title = "Search and Rescue"
 	flag = SAR
-	departments = list(ROLE_MEDICAL, ROLE_PLANET)
+	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_PLANET)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

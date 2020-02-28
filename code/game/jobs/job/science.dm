@@ -2,7 +2,7 @@
 	title = "Research Director"
 	flag = RD
 	head_position = 1
-	departments = list(ROLE_RESEARCH, ROLE_COMMAND)
+	departments = list(DEPARTMENT_RESEARCH, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = MEDSCI
 	faction = "Station"
@@ -31,7 +31,7 @@
 /datum/job/scientist
 	title = "Scientist"
 	flag = SCIENTIST
-	departments = list(ROLE_RESEARCH)
+	departments = list(DEPARTMENT_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
@@ -50,7 +50,7 @@
 /datum/job/xenobiologist
 	title = "Xenobiologist"
 	flag = XENOBIOLOGIST
-	departments = list(ROLE_RESEARCH)
+	departments = list(DEPARTMENT_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 3
@@ -69,7 +69,7 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	flag = ROBOTICIST
-	departments = list(ROLE_RESEARCH)
+	departments = list(DEPARTMENT_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
