@@ -17,6 +17,43 @@
 			return 1
 	return 0
 
+/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/handle_projectile_contact(var/obj/item/projectile/Proj, var/inc_damage)
+	if(istype(Proj, /obj/item/projectile/test))
+		return inc_damage// Don't care about test projectiles, just what comes after them
+	if(!action_checks(src))
+		return inc_damage
+	if(prob(chassis.deflect_chance*deflect_coeff))
+		chassis.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
+		chassis.visible_message("The [chassis.name] armor deflects the projectile")
+		chassis.log_append_to_last("Armor saved.")
+		inc_damage = 0
+	else
+		inc_damage *= src.damage_coeff
+	set_ready_state(0)
+	chassis.use_power(energy_drain)
+	do_after_cooldown()
+	return inc_damage
+
+/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/handle_ranged_contact(var/obj/A, var/inc_damage = 0)
+	if(!action_checks(A))
+		return inc_damage
+	if(prob(chassis.deflect_chance*deflect_coeff))
+		chassis.occupant_message("<span class='notice'>The [A] bounces off the armor.</span>")
+		chassis.visible_message("The [A] bounces off the [chassis] armor")
+		chassis.log_append_to_last("Armor saved.")
+		inc_damage = 0
+	else if(istype(A, /obj))
+		inc_damage *= damage_coeff
+	set_ready_state(0)
+	chassis.use_power(energy_drain)
+	do_after_cooldown()
+	return inc_damage
+
+/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/get_equip_info()
+	if(!chassis) return
+	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+
+/*
 /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/attach(obj/mecha/M as obj)
 	..()
 	chassis.proc_res["dynbulletdamage"] = src
@@ -28,10 +65,6 @@
 	chassis.proc_res["dynhitby"] = null
 	..()
 	return
-
-/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/get_equip_info()
-	if(!chassis) return
-	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
 
 /obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster/proc/dynbulletdamage(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/test))
@@ -70,3 +103,4 @@
 	chassis.use_power(energy_drain)
 	do_after_cooldown()
 	return
+*/
