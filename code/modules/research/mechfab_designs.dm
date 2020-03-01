@@ -893,7 +893,7 @@
 	desc = "A compact overclocking system for a hardsuit."
 	id = "rig_component_sprinter"
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5, TECH_BIO = 4, TECH_POWER = 4)
-	materials = list(MAT_PLASTEEL = 2000, MAT_GRAPHITE = 1500, MAT_PLASTIC = 500, TECH_VERDANTIUM = 1000)
+	materials = list(MAT_PLASTEEL = 2000, MAT_GRAPHITE = 1500, MAT_PLASTIC = 500, MAT_VERDANTIUM = 1000)
 	build_path = /obj/item/rig_module/sprinter
 
 /datum/design/item/mechfab/rigsuit/meson
