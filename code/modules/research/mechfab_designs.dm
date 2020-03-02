@@ -907,7 +907,7 @@
 /datum/design/item/mechfab/rigsuit/material
 	name = "hardsuit material visor"
 	desc = "A compact material visor for a hardsuit."
-	id = "rig_component_meson"
+	id = "rig_component_material"
 	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 5, TECH_MAGNET = 3, TECH_POWER = 4)
 	materials = list(MAT_PLASTEEL = 2000, MAT_GRAPHITE = 1500, MAT_OSMIUM = 500)
 	build_path = /obj/item/rig_module/vision/material
