@@ -4,6 +4,8 @@
 /datum/job/ai
 	title = "AI"
 	flag = AI
+	departments = list(DEPARTMENT_SYNTHETIC)
+	sorting_order = 1 // Be above their borgs.
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 0 // Not used for AI, see is_position_available below and modules/mob/living/silicon/ai/latejoin.dm
@@ -15,6 +17,7 @@
 	account_allowed = 0
 	economic_modifier = 0
 	has_headset = FALSE
+	assignable = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
 	job_description = "The AI oversees the operation of the station and its crew, but has no real authority over them. \
 						The AI is required to follow its Laws, and Lawbound Synthetics that are linked to it are expected to follow \
@@ -43,6 +46,7 @@
 /datum/job/cyborg
 	title = "Cyborg"
 	flag = CYBORG
+	departments = list(DEPARTMENT_SYNTHETIC)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2
@@ -53,6 +57,7 @@
 	account_allowed = 0
 	economic_modifier = 0
 	has_headset = FALSE
+	assignable = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
 	job_description = "A Cyborg is a mobile station synthetic, piloted by a cybernetically preserved brain. It is considered a person, but is still required \
 						to follow its Laws."

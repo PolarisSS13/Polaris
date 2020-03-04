@@ -50,10 +50,15 @@ var/const/access_explorer = 43
 	return get_all_station_access()
 */
 
+/datum/department/planetside
+	name = DEPARTMENT_PLANET
+	color = "#555555"
+	sorting_order = 2 // Same as cargo in importance.
+
 /datum/job/pilot
 	title = "Pilot"
 	flag = PILOT
-	department = "Civilian"
+	departments = list(DEPARTMENT_PLANET)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -70,7 +75,7 @@ var/const/access_explorer = 43
 /datum/job/explorer
 	title = "Explorer"
 	flag = EXPLORER
-	department = "Civilian"
+	departments = list(DEPARTMENT_PLANET)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 4
@@ -93,7 +98,7 @@ var/const/access_explorer = 43
 /datum/job/sar
 	title = "Search and Rescue"
 	flag = SAR
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_PLANET)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2

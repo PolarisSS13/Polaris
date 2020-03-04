@@ -124,6 +124,12 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+/obj/structure/bed/chair/comfy/orange/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","orange")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -219,8 +225,8 @@
 
 /obj/structure/bed/chair/sofa/update_icon()
 	if(applies_material_colour && sofa_material)
-		material = get_material_by_name(sofa_material)
-		color = material.icon_colour
+		var/material/color_material = get_material_by_name(sofa_material)
+		color = color_material.icon_colour
 
 		if(sofa_material == "carpet")
 			name = "red [initial(name)]"
@@ -270,6 +276,9 @@
 
 /obj/structure/bed/chair/sofa/yellow
 	sofa_material = "yellow"
+
+/obj/structure/bed/chair/sofa/orange
+	sofa_material = "orange"
 
 //sofa directions
 
@@ -361,4 +370,13 @@
 	icon_state = "sofaend_right"
 
 /obj/structure/bed/chair/sofa/yellow/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/orange/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/orange/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/orange/corner
 	icon_state = "sofacorner"

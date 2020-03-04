@@ -148,14 +148,14 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(T == "manifest")
 		var/list/positions = list()
 		var/list/set_names = list(
-				"heads" = command_positions,
-				"sec" = security_positions,
-				"eng" = engineering_positions,
-				"med" = medical_positions,
-				"sci" = science_positions,
-				"car" = cargo_positions,
-				"civ" = civilian_positions,
-				"bot" = nonhuman_positions
+				"heads" = SSjob.get_job_titles_in_department(DEPARTMENT_COMMAND),
+				"sec" = SSjob.get_job_titles_in_department(DEPARTMENT_SECURITY),
+				"eng" = SSjob.get_job_titles_in_department(DEPARTMENT_ENGINEERING),
+				"med" = SSjob.get_job_titles_in_department(DEPARTMENT_MEDICAL),
+				"sci" = SSjob.get_job_titles_in_department(DEPARTMENT_RESEARCH),
+				"car" = SSjob.get_job_titles_in_department(DEPARTMENT_CARGO),
+				"civ" = SSjob.get_job_titles_in_department(DEPARTMENT_CIVILIAN),
+				"bot" = SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC)
 			)
 
 		for(var/datum/data/record/t in data_core.general)

@@ -66,13 +66,11 @@
 		return ..()
 	if(isrobot(user))
 		return
-	user.drop_item()
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+	user.unEquip(O, 0, src.loc)
 	return
 
 
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob, var/click_parameters)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob, var/hit_modifier, var/click_parameters)
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
@@ -141,7 +139,7 @@
 		return
 
 // Placing stuff on tables
-	if(user.unEquip(W, 0, src.loc))
+	if(user.unEquip(W, 0, src.loc) && user.is_preference_enabled(/datum/client_preference/precision_placement))
 		auto_align(W, click_parameters)
 		return 1
 

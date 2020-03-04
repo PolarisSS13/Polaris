@@ -7,7 +7,7 @@
 /datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -38,7 +38,7 @@
 /datum/job/chef
 	title = "Chef"
 	flag = CHEF
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -67,7 +67,7 @@
 /datum/job/hydro
 	title = "Botanist"
 	flag = BOTANIST
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -96,7 +96,8 @@
 /datum/job/qm
 	title = "Quartermaster"
 	flag = QUARTERMASTER
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
+	sorting_order = 1 // QM is above the cargo techs, but below the HoP.
 	head_position = 1
 	department_flag = CIVILIAN
 	faction = "Station"
@@ -127,7 +128,7 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -152,7 +153,7 @@
 /datum/job/mining
 	title = "Shaft Miner"
 	flag = MINER
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
@@ -182,7 +183,7 @@
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
@@ -210,7 +211,7 @@
 /datum/job/librarian
 	title = "Librarian"
 	flag = LIBRARIAN
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -244,7 +245,7 @@
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
 	flag = LAWYER
-	department = "Internal Affairs"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
