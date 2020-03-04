@@ -87,22 +87,22 @@
 		lastJob = job
 		. += "<a href='?src=\ref[src];job_info=[rank]'>"
 		if(jobban_isbanned(user, rank))
-			. += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
+			. += "<del>[rank]</del></td></a><td><b> \[BANNED]</b></td></tr>"
 			continue
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
-			. += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			. += "<del>[rank]</del></td></a><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
-			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
+			. += "<del>[rank]</del></td></a><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
 			continue
 		if((pref.job_civilian_low & ASSISTANT) && job.type != /datum/job/assistant)
-			. += "<font color=grey>[rank]</font></td><td></td></tr>"
+			. += "<font color=grey>[rank]</font></a></td><td></td></tr>"
 			continue
 		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
-			. += "<b>[rank]</b>"
+			. += "<b>[rank]</b></a>"
 		else
-			. += "[rank]"
+			. += "[rank]</a>"
 
 		. += "</td><td width='40%'>"
 
@@ -190,7 +190,7 @@
 		if(config.wikiurl)
 			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 
-		var/alt_title = pref.player_alt_titles[job.title]
+		var/alt_title = pref.GetPlayerAltTitle(job)
 		var/list/description = job.get_description_blurb(alt_title)
 		if(LAZYLEN(description))
 			dat += html_encode(description[1])
