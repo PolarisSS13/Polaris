@@ -9,7 +9,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = CAPTAIN
 	departments = list(DEPARTMENT_COMMAND)
 	sorting_order = 3 // Above everyone.
-	head_position = 1
+	departments_managed = list(DEPARTMENT_COMMAND)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
@@ -61,7 +61,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	flag = HOP
 	departments = list(DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO, DEPARTMENT_COMMAND)
 	sorting_order = 2 // Above the QM, below captain.
-	head_position = 1
+	departments_managed = list(DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
@@ -109,7 +109,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	title = "Command Secretary"
 	flag = BRIDGE
 	departments = list(DEPARTMENT_COMMAND)
-	head_position = 1
+	department_accounts = list(DEPARTMENT_COMMAND)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2

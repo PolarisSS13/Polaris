@@ -98,7 +98,7 @@
 	flag = QUARTERMASTER
 	departments = list(DEPARTMENT_CARGO)
 	sorting_order = 1 // QM is above the cargo techs, but below the HoP.
-	head_position = 1
+	departments_managed = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1

@@ -4,7 +4,7 @@
 /datum/job/cmo
 	title = "Chief Medical Officer"
 	flag = CMO
-	head_position = 1
+	departments_managed = list(DEPARTMENT_MEDICAL)
 	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = MEDSCI

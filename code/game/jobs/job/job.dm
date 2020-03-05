@@ -18,7 +18,8 @@
 	var/minimal_player_age = 0            // If you have use_age_restriction_for_jobs config option enabled and the database set up, this option will add a requirement for players to be at least minimal_player_age days old. (meaning they first signed in at least that many days before.)
 	var/list/departments = list()         // List of departments this job belongs to, if any. The first one on the list will be the 'primary' department.
 	var/sorting_order = 0                 // Used for sorting jobs so boss jobs go above regular ones, and their boss's boss is above that. Higher numbers = higher in sorting.
-	var/head_position = 0                 // Is this position Command?
+	var/departments_managed = null        // Is this a management position?  If yes, list of departments managed.  Otherwise null.
+	var/department_accounts = null        // Which department accounts should people with this position be given the pin for?
 	var/assignable = TRUE                 // Should it show up on things like the ID computer?
 	var/minimum_character_age = 0
 	var/ideal_character_age = 30
@@ -31,6 +32,10 @@
 
 	// Description of the job's role and minimum responsibilities.
 	var/job_description = "This Job doesn't have a description! Please report it!"
+
+/datum/job/New()
+	. = ..()
+	department_accounts = department_accounts || departments_managed
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)

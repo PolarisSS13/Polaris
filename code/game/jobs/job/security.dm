@@ -4,7 +4,7 @@
 /datum/job/hos
 	title = "Head of Security"
 	flag = HOS
-	head_position = 1
+	departments_managed = list(DEPARTMENT_SECURITY)
 	departments = list(DEPARTMENT_SECURITY, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = ENGSEC

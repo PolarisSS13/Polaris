@@ -179,10 +179,10 @@
 			dat += "<i><b>Alternate titles:</b> [english_list(job.alt_titles)].</i>"
 		send_rsc(user, job.get_job_icon(), "job[ckey(rank)].png")
 		dat += "<img src=job[ckey(rank)].png width=96 height=96 style='float:left;'>"
-		if(job.department)
-			dat += "<b>Department:</b> [job.department]."
-			if(job.head_position)
-				dat += "You manage this department."
+		if(job.departments)
+			dat += "<b>Departments:</b> [english_list(job.departments)]."
+			if(LAZYLEN(job.departments_managed))
+				dat += "You manage these departments: [english_list(job.departments_managed)]"
 
 		dat += "You answer to <b>[job.supervisors]</b> normally."
 
