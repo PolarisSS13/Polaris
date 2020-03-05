@@ -106,8 +106,10 @@
 		qdel(src)
 	return
 
-/obj/item/weapon/material/shard/Crossed(AM as mob|obj)
+/obj/item/weapon/material/shard/Crossed(atom/movable/AM as mob|obj)
 	..()
+	if(AM.is_incorporeal())
+		return
 	if(isliving(AM))
 		var/mob/M = AM
 

@@ -355,7 +355,9 @@
 		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 		qdel(src)
 
-/obj/item/toy/snappop/Crossed(H as mob|obj)
+/obj/item/toy/snappop/Crossed(atom/movable/H as mob|obj)
+	if(H.is_incorporeal())
+		return
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(M.m_intent == "run")

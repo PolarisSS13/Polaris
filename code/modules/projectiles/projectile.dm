@@ -219,6 +219,8 @@
 	Range()
 
 /obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
+	if(AM.is_incorporeal())
+		return
 	..()
 	if(isliving(AM) && !(pass_flags & PASSMOB))
 		var/mob/living/L = AM

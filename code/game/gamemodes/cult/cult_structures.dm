@@ -132,16 +132,6 @@
 	anchored = 1.0
 	var/spawnable = null
 
-/obj/effect/gateway/Bumped(mob/M as mob|obj)
-	spawn(0)
-		return
-	return
-
-/obj/effect/gateway/Crossed(AM as mob|obj)
-	spawn(0)
-		return
-	return
-
 /obj/effect/gateway/active
 	light_range=5
 	light_color="#ff0000"
@@ -170,6 +160,8 @@
 		qdel(src)
 
 /obj/effect/gateway/active/Crossed(var/atom/A)
+	if(A.is_incorporeal())
+		return
 	if(!istype(A, /mob/living))
 		return
 

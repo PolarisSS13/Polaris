@@ -612,6 +612,9 @@
 	//Stuff like the xenomorph's plasma regen happens here.
 	species.handle_environment_special(src)
 
+	if(is_incorporeal())
+		return
+
 	//Moved pressure calculations here for use in skip-processing check.
 	var/pressure = environment.return_pressure()
 	var/adjusted_pressure = calculate_affecting_pressure(pressure)
