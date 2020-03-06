@@ -264,6 +264,14 @@
 	damage = 15
 	range = 6
 
+/obj/item/projectile/bullet/incendiary/flamethrower/tiny
+	damage = 2
+	incendiary = 0
+	modifier_type_to_apply = /datum/modifier/fire/weak
+	modifier_duration = 20 SECONDS
+	range = 7
+	agony = 3
+
 /* Practice rounds and blanks */
 
 /obj/item/projectile/bullet/practice

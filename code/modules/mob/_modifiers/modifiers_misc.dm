@@ -245,6 +245,8 @@ the artifact triggers the rage.
 /datum/modifier/fire/tick()
 	holder.inflict_heat_damage(damage_per_tick)
 
+/datum/modifier/fire/weak
+	damage_per_tick = 1
 
 // Applied when near something very cold.
 // Reduces mobility, attack speed.
