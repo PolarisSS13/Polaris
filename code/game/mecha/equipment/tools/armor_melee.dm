@@ -20,7 +20,7 @@
 		return inc_damage
 	chassis.log_message("Attacked by [W]. Attacker - [user]")
 	if(prob(chassis.deflect_chance*deflect_coeff))
-		to_chat(user, "<span class='danger'>\The [W] bounces off [chassis] armor.</span>")
+		to_chat(user, "<span class='danger'>\The [W] bounces off \the [chassis]'s armor.</span>")
 		chassis.log_append_to_last("Armor saved.")
 		inc_damage = 0
 	else
@@ -29,8 +29,9 @@
 		inc_damage *= damage_coeff
 	set_ready_state(0)
 	chassis.use_power(energy_drain)
-	do_after_cooldown()
-	return inc_damage
+	spawn()
+		do_after_cooldown()
+	return max(0, inc_damage)
 
 /*
 
