@@ -54,7 +54,7 @@
 		if (src == C.wear_mask && C.check_has_mouth()) // if it's in the human/monkey mouth, transfer reagents to the mob
 			if (!active || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
 				active=0//autodisable the cigarette
-//				STOP_PROCESSING(SSobj, src)
+				STOP_PROCESSING(SSobj, src)
 				update_icon()
 				return
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
@@ -93,7 +93,7 @@
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)
 	if (active)
 		active=0
-//		STOP_PROCESSING(SSobj, src)
+		STOP_PROCESSING(SSobj, src)
 		to_chat(user, "<span class='notice'>You turn off \the [src]. </span> ")
 		update_icon()
 	else
@@ -101,7 +101,7 @@
 			to_chat(user, "<span class='notice'>You can't use it with no cartridge installed!.</span> ")
 			return
 		active=1
-//		START_PROCESSING(SSobj, src)
+		START_PROCESSING(SSobj, src)
 		to_chat(user, "<span class='notice'>You turn on \the [src]. </span> ")
 		update_icon()
 
