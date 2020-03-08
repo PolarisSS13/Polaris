@@ -287,6 +287,16 @@
 		/obj/item/weapon/grenade/concussion = 8
 		)
 
+/obj/item/weapon/storage/box/syndie_kit/deadliest_game
+	starts_with = list(
+		/obj/item/weapon/beartrap/hunting = 4
+		)
+
+/obj/item/weapon/storage/box/syndie_kit/viral
+	starts_with = list(
+		/obj/item/weapon/virusdish/random = 3
+		)
+
 /obj/item/weapon/storage/secure/briefcase/rifle
 	name = "secure briefcase"
 	starts_with = list(

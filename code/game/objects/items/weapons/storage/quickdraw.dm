@@ -78,3 +78,17 @@
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/reagent_containers/syringe
 	)
+
+/obj/item/weapon/storage/quickdraw/syringe_case/clotting
+	starts_with = list(
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/clotting
+	)
+
+/obj/item/weapon/storage/quickdraw/syringe_case/bonemed
+	starts_with = list(
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/bonemed,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/bonemed,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/bonemed
+	)
