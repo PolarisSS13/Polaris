@@ -8,6 +8,7 @@ var/list/department_radio_keys = list(
 	  ":n" = "Science",		".n" = "Science",
 	  ":m" = "Medical",		".m" = "Medical",
 	  ":e" = "Engineering", ".e" = "Engineering",
+	  ":r" = "Response Team",	".r" = "Response Team",	//TFF 7/3/20 - Add Response Team to channels usable rather than resorting to :H or such.,
 	  ":s" = "Security",	".s" = "Security",
 	  ":w" = "whisper",		".w" = "whisper",
 	  ":t" = "Mercenary",	".t" = "Mercenary",
@@ -25,6 +26,7 @@ var/list/department_radio_keys = list(
 	  ":N" = "Science",		".N" = "Science",
 	  ":M" = "Medical",		".M" = "Medical",
 	  ":E" = "Engineering",	".E" = "Engineering",
+	  ":R" = "Response Team",	".R" = "Response Team",	//TFF 7/3/20 - Add Response Team to channels usable rather than resorting to :H or such.,
 	  ":S" = "Security",	".S" = "Security",
 	  ":W" = "whisper",		".W" = "whisper",
 	  ":T" = "Mercenary",	".T" = "Mercenary",
@@ -36,18 +38,18 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Medical",		".ü" = "Medical",
-	  ":ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	".û" = "Security",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",
+	  ":Ãª" = "right ear",	".Ãª" = "right ear",
+	  ":Ã¤" = "left ear",	".Ã¤" = "left ear",
+	  ":Ã¸" = "intercom",	".Ã¸" = "intercom",
+	  ":Ã°" = "department",	".Ã°" = "department",
+	  ":Ã±" = "Command",		".Ã±" = "Command",
+	  ":Ã²" = "Science",		".Ã²" = "Science",
+	  ":Ã¼" = "Medical",		".Ã¼" = "Medical",
+	  ":Ã³" = "Engineering",	".Ã³" = "Engineering",
+	  ":Ã»" = "Security",	".Ã»" = "Security",
+	  ":Ã¶" = "whisper",		".Ã¶" = "whisper",
+	  ":Ã¥" = "Mercenary",	".Ã¥" = "Mercenary",
+	  ":Ã©" = "Supply",		".Ã©" = "Supply",
 )
 
 
