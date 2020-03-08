@@ -19,6 +19,7 @@ datum/track/New(var/title_name, var/audio)
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/weapon/circuitboard/jukebox
+	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
 
