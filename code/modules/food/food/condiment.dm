@@ -413,13 +413,5 @@
 /obj/item/weapon/reagent_containers/food/condiment/yeast
 	name = "Yeast"
 
-/obj/item/weapon/reagent_containers/food/condiment/yeast/Initialize()
-	. = ..()
-	reagents.add_reagent("yeast", 50)
-
 /obj/item/weapon/reagent_containers/food/condiment/cornoil
 	name = "Corn Oil"
-
-/obj/item/weapon/reagent_containers/food/condiment/yeast/Initialize()
-	. = ..()
-	reagents.add_reagent("cornoil", 50)
