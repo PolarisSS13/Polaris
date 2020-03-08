@@ -31,7 +31,7 @@
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
 	icon_state ="bookParticleAccelerator"
-	item_state = "book6"
+	item_state = "book15"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Particle Accelerator User's Guide"
 
@@ -79,7 +79,7 @@
 /obj/item/weapon/book/manual/supermatter_engine
 	name = "Supermatter Engine Operating Manual"
 	icon_state = "bookSupermatter"
-	item_state = "book6"
+	item_state = "book15"
 	author = "Central Engineering Division"
 	title = "Supermatter Engine Operating Manual"
 
@@ -163,7 +163,7 @@
 /obj/item/weapon/book/manual/tesla_engine
 	name = "Tesla Operating Manual"
 	icon_state ="bookTesla"
-	item_state = "book6"
+	item_state = "book15"
 	author = "Engineering Encyclopedia"
 	title = "Tesla Engine User's Guide"
 	dat = {"<html>
@@ -233,7 +233,7 @@
 /obj/item/weapon/book/manual/rust_engine
 	name = "R-UST Operating Manual"
 	icon_state = "bookSupermatter"
-	item_state = "book6"
+	item_state = "book15"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
 
@@ -297,7 +297,7 @@
 /obj/item/weapon/book/manual/engineering_singularity_safety
 	name = "Singularity Safety in Special Circumstances"
 	icon_state ="bookEngineeringSingularitySafety"
-	item_state = "book6"
+	item_state = "book15"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Singularity Safety in Special Circumstances"
 
