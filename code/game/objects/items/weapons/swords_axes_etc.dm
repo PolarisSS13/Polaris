@@ -9,7 +9,7 @@
  * Classic Baton
  */
 
- /obj/item/weapon/melee
+/obj/item/weapon/melee
 	name = "weapon"
 	desc = "Murder device."
 	icon = 'icons/obj/weapons.dmi'
