@@ -136,8 +136,8 @@
 	empty_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
 	firemodes = list(
-		list(mode_name="high power", power_cost = 600, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=15),
-		list(mode_name="low power", power_cost = 300, projectile_type = /obj/item/projectile/bullet/magnetic/heated/weak, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=15),
+		list(mode_name="high power", power_cost = 400, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=15),
+		list(mode_name="low power", power_cost = 150, projectile_type = /obj/item/projectile/bullet/magnetic/heated/weak, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=15),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/heater/pistol
@@ -158,8 +158,8 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 	firemodes = list(
-		list(mode_name="lethal", power_cost = 800, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=10, move_delay=null, one_handed_penalty=0),
-		list(mode_name="stun", power_cost = 480, projectile_type = /obj/item/projectile/energy/electrode/stunshot, burst=1, fire_delay=7, move_delay=null, one_handed_penalty=0),
+		list(mode_name="lethal", power_cost = 500, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=10, move_delay=null, one_handed_penalty=0),
+		list(mode_name="stun", power_cost = 350, projectile_type = /obj/item/projectile/energy/electrode/strong, burst=1, fire_delay=7, move_delay=null, one_handed_penalty=0),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/heater/pistol/hos
@@ -170,8 +170,8 @@
 	description_antag = "This weapon starts with a DNA locking chip attached. Using an EMAG on the weapon will disarm it, and allow you to use the chip as your own."
 
 	firemodes = list(
-		list(mode_name="lethal", power_cost = 600, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=0),
-		list(mode_name="stun", power_cost = 400, projectile_type = /obj/item/projectile/energy/electrode/stunshot, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=0),
+		list(mode_name="lethal", power_cost = 400, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=0),
+		list(mode_name="stun", power_cost = 300, projectile_type = /obj/item/projectile/energy/electrode/strong, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=0),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/sif
