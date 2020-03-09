@@ -167,15 +167,14 @@ var/global/list/string_slot_flags = list(
 
 	for (var/language_name in GLOB.all_languages)
 		var/datum/language/L = GLOB.all_languages[language_name]
-		var/lkey = lowertext(L.key)
 		if(!(L.flags & NONGLOBAL))
-			if(isnull(GLOB.language_keys[lkey]))
-				GLOB.language_keys[lkey] = L
+			if(isnull(GLOB.language_keys[L.key]))
+				GLOB.language_keys[L.key] = L
 			else
-				log_debug("Language key conflict! [L] has key [L.key], but that is taken by [(GLOB.language_keys[lkey])]")
-				if(isnull(GLOB.language_key_conflicts[lkey]))
-					GLOB.language_key_conflicts[lkey] = list(GLOB.language_keys[lkey])
-				GLOB.language_key_conflicts[lkey] += L
+				log_debug("Language key conflict! [L] has key [L.key], but that is taken by [(GLOB.language_keys[L.key])]")
+				if(isnull(GLOB.language_key_conflicts[L.key]))
+					GLOB.language_key_conflicts[L.key] = list(GLOB.language_keys[L.key])
+				GLOB.language_key_conflicts[L.key] += L
 
 	//Species
 	var/rkey = 0
