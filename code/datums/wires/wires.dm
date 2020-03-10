@@ -45,6 +45,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 		else
 			var/list/wires = same_wires[holder_type]
 			src.wires = wires // Reference the wires list.
+	make_wire_hints()
 
 /datum/wires/Destroy()
 	holder = null
@@ -107,6 +108,10 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 		html += "<i>\The [holder] appears to have tamper-resistant electronics installed.</i><br><br>" //maybe this could be more generic?
 
 	return html
+
+// Override to spawn the wire hints here, to avoid touching New().
+/datum/wires/proc/make_wire_hints()
+	return
 
 /datum/wires/Topic(href, href_list)
 	..()
