@@ -11,7 +11,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "company officials and Corporate Regulations"
-	selection_color = "#1D1D4F"
+	selection_color = "#2F2F7F"
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
@@ -36,7 +36,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
-	departments = list(DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO, DEPARTMENT_COMMAND)
+	departments = list(DEPARTMENT_COMMAND, DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO)
 	sorting_order = 2 // Above the QM, below captain.
 	head_position = 1
 	department_flag = CIVILIAN
@@ -44,7 +44,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the Colony Director"
-	selection_color = "#2F2F7F"
+	selection_color = "#1D1D4F"
 	req_admin_notify = 1
 	minimal_player_age = 10
 	economic_modifier = 10
@@ -78,7 +78,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "command staff"
-	selection_color = "#2F2F7F"
+	selection_color = "#1D1D4F"
 	minimal_player_age = 5
 	economic_modifier = 7
 
