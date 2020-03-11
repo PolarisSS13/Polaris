@@ -193,13 +193,11 @@
 
 /obj/item/rig_module/vision/engage()
 
-	var/starting_up = !active
-
 	if(!..() || !vision_modes)
 		return 0
 
 	// Don't cycle if this engage() is being called by activate().
-	if(starting_up)
+	if(!active)
 		to_chat(holder.wearer, "<font color='blue'>You activate your visual sensors.</font>")
 		return 1
 

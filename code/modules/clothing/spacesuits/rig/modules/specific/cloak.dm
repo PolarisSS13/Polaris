@@ -49,6 +49,5 @@
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 	H.alpha = initial(H.alpha)
 
-	for(var/mob/O in oviewers(H))
-		O.show_message("[H.name] appears from thin air!",1)
+	H.visible_message("[H.name] appears from thin air!")
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
