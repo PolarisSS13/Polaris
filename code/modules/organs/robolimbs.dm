@@ -52,7 +52,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	var/skin_color										 // If set, applies skin color rather than part color.
 	var/blood_color = "#030303"
 	var/list/species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA)
-	var/list/species_alternates = list(SPECIES_TAJ = "Unbranded - Tajaran")				 //"Species Name" = "Robolimb Company" , List, when initialized, will become "Species Name" = RobolimbDatum, used for alternate species sprites.
+	var/list/species_alternates = list(SPECIES_TAJ = "Unbranded - Tajaran", SPECIES_UNATHI = "Unbranded - Unathi")				 //"Species Name" = "Robolimb Company" , List, when initialized, will become "Species Name" = RobolimbDatum, used for alternate species sprites.
 	var/list/monitor_styles			 		 			 //If empty, the model of limbs offers a head compatible with monitors.
 	var/parts = BP_ALL						 			 //Defines what parts said brand can replace on a body.
 	var/health_hud_intensity = 1						 // Intensity modifier for the health GUI indicator.
@@ -90,11 +90,19 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_tajaran.dmi'
 	unavailable_to_build = 1
 
+/datum/robolimb/unbranded_unathi
+	company = "Unbranded - Unathi"
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	suggested_species = SPECIES_UNATHI
+	desc = "A simple robotic limb with feline design. Seems rather stiff."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_unathi.dmi'
+	unavailable_to_build = 1
+
 /datum/robolimb/nanotrasen
 	company = "NanoTrasen"
 	desc = "A simple but efficient robotic limb, created by NanoTrasen."
 	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_main.dmi'
-	species_alternates = list(SPECIES_TAJ = "NanoTrasen - Tajaran")
+	species_alternates = list(SPECIES_TAJ = "NanoTrasen - Tajaran", SPECIES_UNATHI = "NanoTrasen - Unathi")
 
 /datum/robolimb/nanotrasen_tajaran
 	company = "NanoTrasen - Tajaran"
@@ -103,6 +111,15 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	suggested_species = SPECIES_TAJ
 	desc = "A simple but efficient robotic limb, created by NanoTrasen."
 	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_tajaran.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/nanotrasen_unathi
+	company = "NanoTrasen - Unathi"
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
+	suggested_species = SPECIES_UNATHI
+	desc = "A simple but efficient robotic limb, created by NanoTrasen."
+	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_unathi.dmi'
 	unavailable_to_build = 1
 
 /datum/robolimb/bishop
