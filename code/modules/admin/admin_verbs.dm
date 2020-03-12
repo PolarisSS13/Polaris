@@ -398,7 +398,7 @@ var/list/admin_verbs_event_manager = list(
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod,
 
-	// This is mostly the same as what admins get, but filtered down to what would be useful for running an event.
+	// This is mostly the same as what admins get, but filtered down to what would be useful for running an event,
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,
