@@ -82,7 +82,9 @@
 	..()
 
 
-/obj/item/device/assembly/mousetrap/Crossed(AM as mob|obj)
+/obj/item/device/assembly/mousetrap/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	if(armed)
 		if(ishuman(AM))
 			var/mob/living/carbon/H = AM

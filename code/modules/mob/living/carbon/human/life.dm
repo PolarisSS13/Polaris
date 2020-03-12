@@ -356,6 +356,11 @@
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
+		else if(istype(belt,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = belt
+			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
+				rig_supply = rig.air_supply
+
 		if ((!rig_supply && !contents.Find(internal)) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT))))
 			internal = null
 
@@ -611,6 +616,9 @@
 
 	//Stuff like the xenomorph's plasma regen happens here.
 	species.handle_environment_special(src)
+
+	if(is_incorporeal())
+		return
 
 	//Moved pressure calculations here for use in skip-processing check.
 	var/pressure = environment.return_pressure()

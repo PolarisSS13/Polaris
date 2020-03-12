@@ -10,7 +10,9 @@
 /obj/effect/step_trigger/proc/Trigger(var/atom/movable/A)
 	return 0
 
-/obj/effect/step_trigger/Crossed(H as mob|obj)
+/obj/effect/step_trigger/Crossed(atom/movable/H as mob|obj)
+	if(H.is_incorporeal())
+		return
 	..()
 	if(!H)
 		return

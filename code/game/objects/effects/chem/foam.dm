@@ -74,6 +74,8 @@
 			qdel(src)
 
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
+	if(AM.is_incorporeal())
+		return
 	if(metal)
 		return
 	if(istype(AM, /mob/living))
