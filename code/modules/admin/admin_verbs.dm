@@ -359,7 +359,6 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/cmd_event_say,
 	/client/proc/cmd_admin_pm_context,
 	/client/proc/cmd_admin_pm_panel,
-
 	/client/proc/admin_ghost,
 	/datum/admins/proc/show_player_info,
 	/client/proc/dsay,
@@ -374,7 +373,6 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/respawn_character,
 	/proc/possess,
 	/proc/release,
-
 	/datum/admins/proc/change_weather,
 	/datum/admins/proc/change_time,
 	/client/proc/admin_give_modifier,
@@ -397,8 +395,6 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/roll_dices,
 	/datum/admins/proc/call_supply_drop,
 	/datum/admins/proc/call_drop_pod,
-
-	// This is mostly the same as what admins get, but filtered down to what would be useful for running an event,
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,
@@ -409,7 +405,6 @@ var/list/admin_verbs_event_manager = list(
 	/client/proc/admin_give_modifier,
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
-
 	/datum/admins/proc/set_tcrystals,
 	/datum/admins/proc/add_tcrystals,
 	/client/proc/invisimin,                         //allows our mob to go invisible/visible,
