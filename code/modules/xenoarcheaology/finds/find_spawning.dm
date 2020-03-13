@@ -21,7 +21,7 @@
 	var/apply_prefix = 1
 
 	if(prob(40))
-		material_descriptor = pick("rusted ","dusty ","archaic ","fragile ")
+		material_descriptor = pick("rusted ","dusty ","archaic ","fragile ", "damaged", "pristine")
 	source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
 
 	var/talkative = 0
@@ -234,6 +234,7 @@
 			apply_prefix = 0
 			new_item = new /obj/item/weapon/material/sword(src.loc)
 			new_item.force = 10
+			new_item.name = pick("great-sword","claymore","longsword","broadsword","shortsword","gladius")
 			item_type = new_item.name
 			if(prob(30))
 				new_item.icon = 'icons/obj/xenoarchaeology.dmi'
@@ -282,6 +283,7 @@
 			apply_prefix = 0
 			new_item = new /obj/item/weapon/material/sword/katana(src.loc)
 			new_item.force = 10
+			new_item.name = "katana"
 			item_type = new_item.name
 		if(26)
 			//energy gun
@@ -520,6 +522,62 @@
 			if(prob(25))
 				apply_material_decorations = FALSE
 			new_item = new /obj/item/weapon/telecube/randomized(src.loc)
+			item_type = new_item.name
+
+		if(40)
+			// Battery!
+			var/new_path = pick(subtypesof(/obj/item/weapon/cell))
+			new_item = new new_path(src.loc)
+			new_item.name = pick("cell", "battery", "device")
+
+			if(prob(30))
+				apply_prefix = FALSE
+			if(prob(5))
+				apply_image_decorations = TRUE
+			if(prob(15))
+				apply_material_decorations = FALSE
+
+			item_type = new_item.name
+
+		if(41)
+			// Syringe.
+			if(prob(25))
+				apply_prefix = FALSE
+			if(prob(75))
+				apply_image_decorations = TRUE
+			if(prob(25))
+				apply_material_decorations = FALSE
+			new_item = new /obj/item/weapon/reagent_containers/syringe(src.loc)
+			var/obj/item/weapon/reagent_containers/syringe/S = new_item
+
+			S.volume = 30
+			S.reagents.maximum_volume = 30
+
+			item_type = new_item.name
+
+		if(42)
+			// Ring.
+			if(prob(15))
+				apply_prefix = FALSE
+			if(prob(40))
+				apply_image_decorations = TRUE
+			if(prob(25))
+				apply_material_decorations = FALSE
+			new_item = new /obj/item/clothing/gloves/ring/material(src.loc)
+			item_type = new_item.name
+
+		if(43)
+			// Baseball Bat
+			if(prob(30))
+				apply_prefix = FALSE
+			if(prob(80))
+				apply_image_decorations = TRUE
+			if(prob(10))
+				apply_material_decorations = FALSE
+
+			new_item = new /obj/item/weapon/material/twohanded/baseballbat(src.loc)
+			new_item.name = pick("great-club","club","billyclub","mace","tenderizer","maul","bat")
+			item_type = new_item.name
 
 	if(istype(new_item, /obj/item/weapon/material))
 		var/new_item_mat = pickweight(list(
@@ -553,9 +611,13 @@
 	var/decorations = ""
 	if(apply_material_decorations)
 		source_material = pick("cordite","quadrinium",DEFAULT_WALL_MATERIAL,"titanium","aluminium","ferritic-alloy","plasteel","duranium")
+
 		if(istype(new_item, /obj/item/weapon/material))
 			var/obj/item/weapon/material/MW = new_item
 			source_material = MW.material.display_name
+		if(istype(new_item, /obj/vehicle/boat))
+			var/obj/vehicle/boat/B = new_item
+			source_material = B.material.display_name
 		desc = "A [material_descriptor ? "[material_descriptor] " : ""][item_type] made of [source_material], all craftsmanship is of [pick("the lowest","low","average","high","the highest")] quality."
 
 		var/list/descriptors = list()
