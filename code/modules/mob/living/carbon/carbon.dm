@@ -105,10 +105,10 @@
 	if (shock_damage<1)
 		return 0
 
-	src.apply_damage(0.25 * shock_damage, BURN, def_zone, used_weapon="Electrocution") //shock the target organ
-	src.apply_damage(0.50 * shock_damage, BURN, BP_TORSO, used_weapon="Electrocution") //shock the torso more
-	src.apply_damage(0.25 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
-	src.apply_damage(0.25 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+	src.apply_damage(0.2 * shock_damage, BURN, def_zone, used_weapon="Electrocution") //shock the target organ
+	src.apply_damage(0.4 * shock_damage, BURN, BP_TORSO, used_weapon="Electrocution") //shock the torso more
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
 	
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
