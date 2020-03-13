@@ -94,7 +94,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	company = "Unbranded - Unathi"
 	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	suggested_species = SPECIES_UNATHI
-	desc = "A simple robotic limb with feline design. Seems rather stiff."
+	desc = "A simple robotic limb with reptilian design. Seems rather stiff."
 	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_unathi.dmi'
 	unavailable_to_build = 1
 
