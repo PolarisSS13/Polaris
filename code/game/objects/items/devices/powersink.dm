@@ -4,9 +4,7 @@
 	name = "power sink"
 	desc = "A nulling power sink which drains energy from electrical systems."
 	icon_state = "powersink0"
-	item_state = "electronic"
-	w_class = 4.0
-	flags = CONDUCT
+	w_class = ITEMSIZE_LARGE
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 2
@@ -18,7 +16,7 @@
 	var/apc_drain_rate = 5000 		// Max. amount drained from single APC. In Watts.
 	var/dissipation_rate = 20000	// Passive dissipation of drained power. In Watts.
 	var/power_drained = 0 			// Amount of power drained.
-	var/max_power = 5e9				// Detonation point.
+	var/max_power = 1e9				// Detonation point.
 	var/mode = 0					// 0 = off, 1=clamped (off), 2=operating
 	var/drained_this_tick = 0		// This is unfortunately necessary to ensure we process powersinks BEFORE other machinery such as APCs.
 
@@ -26,35 +24,37 @@
 	var/obj/structure/cable/attached		// the attached cable
 
 /obj/item/device/powersink/Destroy()
-	processing_objects.Remove(src)
-	processing_power_items.Remove(src)
+	STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING_POWER_OBJECT(src)
 	..()
 
 /obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(I.is_screwdriver())
 		if(mode == 0)
 			var/turf/T = loc
 			if(isturf(T) && !!T.is_plating())
 				attached = locate() in T
 				if(!attached)
-					user << "No exposed cable here to attach to."
+					to_chat(user, "No exposed cable here to attach to.")
 					return
 				else
 					anchored = 1
 					mode = 1
 					src.visible_message("<span class='notice'>[user] attaches [src] to the cable!</span>")
+					playsound(src, I.usesound, 50, 1)
 					return
 			else
-				user << "Device must be placed over an exposed cable to attach to it."
+				to_chat(user, "Device must be placed over an exposed cable to attach to it.")
 				return
 		else
 			if (mode == 2)
-				processing_objects.Remove(src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
-				processing_power_items.Remove(src)
+				STOP_PROCESSING(SSobj, src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
+				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = 0
 			mode = 0
 			src.visible_message("<span class='notice'>[user] detaches [src] from the cable!</span>")
 			set_light(0)
+			playsound(src, I.usesound, 50, 1)
 			icon_state = "powersink0"
 
 			return
@@ -72,15 +72,16 @@
 			src.visible_message("<span class='notice'>[user] activates [src]!</span>")
 			mode = 2
 			icon_state = "powersink1"
-			processing_objects.Add(src)
-			processing_power_items.Add(src)
+			START_PROCESSING(SSobj, src)
+			datum_flags &= ~DF_ISPROCESSING // Have to reset this flag so that PROCESSING_POWER_OBJECT can re-add it. It fails if the flag is already present. - Ater
+			START_PROCESSING_POWER_OBJECT(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
-			processing_objects.Remove(src)
-			processing_power_items.Remove(src)
+			STOP_PROCESSING(SSobj, src)
+			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/device/powersink/pwr_drain()
 	if(!attached)

@@ -22,6 +22,8 @@
 var/camera_range_display_status = 0
 var/intercom_range_display_status = 0
 
+GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
+
 /obj/effect/debugging/camera_range
 	icon = 'icons/480x480.dmi'
 	icon_state = "25percent"
@@ -54,7 +56,7 @@ var/intercom_range_display_status = 0
 
 
 
-	for(var/obj/effect/debugging/camera_range/C in world)
+	for(var/obj/effect/debugging/camera_range/C in all_debugging_effects)
 		qdel(C)
 
 	if(camera_range_display_status)
@@ -113,11 +115,11 @@ var/intercom_range_display_status = 0
 	else
 		intercom_range_display_status = 1
 
-	for(var/obj/effect/debugging/marker/M in world)
+	for(var/obj/effect/debugging/marker/M in all_debugging_effects)
 		qdel(M)
 
 	if(intercom_range_display_status)
-		for(var/obj/item/device/radio/intercom/I in world)
+		for(var/obj/item/device/radio/intercom/I in machines)
 			for(var/turf/T in orange(7,I))
 				var/obj/effect/debugging/marker/F = new/obj/effect/debugging/marker(T)
 				if (!(F in view(7,I.loc)))
@@ -159,9 +161,10 @@ var/list/debug_verbs = list (
         ,/client/proc/hide_debug_verbs
         ,/client/proc/testZAScolors
         ,/client/proc/testZAScolors_remove
-        ,/client/proc/setup_supermatter_engine
-		,/client/proc/atmos_toggle_debug
-		,/client/proc/spawn_tanktransferbomb
+        ,/datum/admins/proc/setup_supermatter
+        ,/client/proc/atmos_toggle_debug
+        ,/client/proc/spawn_tanktransferbomb
+        ,/client/proc/take_picture
 	)
 
 
@@ -217,7 +220,7 @@ var/list/debug_verbs = list (
 	var/turf/simulated/location = get_turf(usr)
 
 	if(!istype(location, /turf/simulated)) // We're in space, let's not cause runtimes.
-		usr << "\red this debug tool cannot be used from space"
+		to_chat(usr, "<font color='red'>this debug tool cannot be used from space</font>")
 		return
 
 	var/icon/red = new('icons/misc/debug_group.dmi', "red")		//created here so we don't have to make thousands of these.
@@ -225,11 +228,11 @@ var/list/debug_verbs = list (
 	var/icon/blue = new('icons/misc/debug_group.dmi', "blue")
 
 	if(!usedZAScolors)
-		usr << "ZAS Test Colors"
-		usr << "Green = Zone you are standing in"
-		usr << "Blue = Connected zone to the zone you are standing in"
-		usr << "Yellow = A zone that is connected but not one adjacent to your connected zone"
-		usr << "Red = Not connected"
+		to_chat(usr, "ZAS Test Colors")
+		to_chat(usr, "Green = Zone you are standing in")
+		to_chat(usr, "Blue = Connected zone to the zone you are standing in")
+		to_chat(usr, "Yellow = A zone that is connected but not one adjacent to your connected zone")
+		to_chat(usr, "Red = Not connected")
 		usedZAScolors = 1
 
 	testZAScolors_zones += location.zone
@@ -273,14 +276,7 @@ var/list/debug_verbs = list (
 	set name = "Reboot ZAS"
 
 	if(alert("This will destroy and remake all zone geometry on the whole map.","Reboot ZAS","Reboot ZAS","Nevermind") == "Reboot ZAS")
-		var/datum/controller/air_system/old_air = air_master
-		for(var/zone/zone in old_air.zones)
-			zone.c_invalidate()
-		qdel(old_air)
-		air_master = new
-		air_master.Setup()
-		spawn air_master.Start()
-
+		SSair.RebootZAS()
 
 /client/proc/count_objects_on_z_level()
 	set category = "Mapping"
@@ -320,9 +316,9 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		to_world(line)*/
 
-	world << "There are [count] objects of type [type_path] on z-level [num_level]"
+	to_world("There are [count] objects of type [type_path] on z-level [num_level]")
 	feedback_add_details("admin_verb","mOBJZ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/count_objects_all()
@@ -347,9 +343,9 @@ var/list/debug_verbs = list (
 			if(i*10+j <= atom_list.len)
 				temp_atom = atom_list[i*10+j]
 				line += " no.[i+10+j]@\[[temp_atom.x], [temp_atom.y], [temp_atom.z]\]; "
-		world << line*/
+		to_world(line)*/
 
-	world << "There are [count] objects of type [type_path] in the game world"
+	to_world("There are [count] objects of type [type_path] in the game world")
 	feedback_add_details("admin_verb","mOBJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -368,7 +364,7 @@ var/global/prevent_airgroup_regroup = 0
 	set category = "Mapping"
 	set name = "Regroup All Airgroups Attempt"
 
-	usr << "\red Proc disabled."
+	to_chat(usr, "<font color='red'>Proc disabled.</font>") //Why not.. Delete the procs instead?
 
 	/*prevent_airgroup_regroup = 0
 	for(var/datum/air_group/AG in air_master.air_groups)
@@ -379,7 +375,7 @@ var/global/prevent_airgroup_regroup = 0
 	set category = "Mapping"
 	set name = "Kill pipe processing"
 
-	usr << "\red Proc disabled."
+	to_chat(usr, "<font color='red'>Proc disabled.</font>")
 
 	/*pipe_processing_killed = !pipe_processing_killed
 	if(pipe_processing_killed)
@@ -391,7 +387,7 @@ var/global/prevent_airgroup_regroup = 0
 	set category = "Mapping"
 	set name = "Kill air processing"
 
-	usr << "\red Proc disabled."
+	to_chat(usr, "<font color='red'>Proc disabled.</font>")
 
 	/*air_processing_killed = !air_processing_killed
 	if(air_processing_killed)
@@ -405,7 +401,7 @@ var/global/say_disabled = 0
 	set category = "Mapping"
 	set name = "Disable all communication verbs"
 
-	usr << "\red Proc disabled."
+	to_chat(usr, "<font color='red'>Proc disabled.</font>")
 
 	/*say_disabled = !say_disabled
 	if(say_disabled)
@@ -420,7 +416,7 @@ var/global/movement_disabled_exception //This is the client that calls the proc,
 	set category = "Mapping"
 	set name = "Disable all movement"
 
-	usr << "\red Proc disabled."
+	to_chat(usr, "<font color='red'>Proc disabled.</font>")
 
 	/*movement_disabled = !movement_disabled
 	if(movement_disabled)

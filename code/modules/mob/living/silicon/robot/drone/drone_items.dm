@@ -3,6 +3,8 @@
 /obj/item/weapon/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
+	description_info = "Ctrl-Clicking on the gripper will drop whatever it is holding.<br>\
+	Using an object on the gripper will interact with the item inside it, if it exists, instead."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "gripper"
 
@@ -26,6 +28,23 @@
 
 	var/force_holder = null //
 
+/obj/item/weapon/gripper/examine(mob/user)
+	..()
+	if(wrapped)
+		to_chat(user, "<span class='notice'>\The [src] is holding \the [wrapped].</span>")
+		wrapped.examine(user)
+
+/obj/item/weapon/gripper/CtrlClick(mob/user)
+	drop_item()
+	return
+
+/obj/item/weapon/gripper/omni
+	name = "omni gripper"
+	desc = "A strange grasping tool that can hold anything a human can, but still maintains the limitations of application its more limited cousins have."
+	icon_state = "gripper-omni"
+
+	can_hold = list(/obj/item) // Testing and Event gripper.
+
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
 	name = "drill maintenance gripper"
@@ -35,6 +54,22 @@
 	can_hold = list(
 	/obj/item/weapon/cell,
 	/obj/item/weapon/stock_parts
+	)
+
+/obj/item/weapon/gripper/security
+	name = "security gripper"
+	desc = "A simple grasping tool for corporate security work."
+	icon_state = "gripper-sec"
+
+	can_hold = list(
+	/obj/item/weapon/paper,
+	/obj/item/weapon/paper_bundle,
+	/obj/item/weapon/pen,
+	/obj/item/weapon/sample,
+	/obj/item/weapon/forensics/sample_kit,
+	/obj/item/device/taperecorder,
+	/obj/item/device/tape,
+	/obj/item/device/uv_light
 	)
 
 /obj/item/weapon/gripper/paperwork
@@ -50,6 +85,18 @@
 		/obj/item/weapon/newspaper
 		)
 
+/obj/item/weapon/gripper/medical
+	name = "medical gripper"
+	desc = "A simple grasping tool for medical work."
+
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/reagent_containers/blood,
+		/obj/item/stack/material/phoron
+		)
+
 /obj/item/weapon/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
 	name = "scientific gripper"
 	icon_state = "gripper-sci"
@@ -62,12 +109,38 @@
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
 		/obj/item/device/flash, //to build borgs,
-		/obj/item/organ/internal/brain, //to insert into MMIs,
 		/obj/item/weapon/disk,
 		/obj/item/weapon/circuitboard,
-		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/device/assembly/prox_sensor,
+		/obj/item/device/healthanalyzer, //to build medibots,
+		/obj/item/slime_cube,
+		/obj/item/slime_crystal,
+		/obj/item/weapon/disposable_teleporter/slime,
+		/obj/item/slimepotion,
+		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube
+
+		)
+
+/obj/item/weapon/gripper/circuit
+	name = "circuit assembly gripper"
+	icon_state = "gripper-circ"
+	desc = "A complex grasping tool used for working with circuitry."
+
+	can_hold = list(
+		/obj/item/weapon/cell/device,
+		/obj/item/device/electronic_assembly,
+		/obj/item/device/assembly/electronic_assembly,
+		/obj/item/clothing/under/circuitry,
+		/obj/item/clothing/gloves/circuitry,
+		/obj/item/clothing/glasses/circuitry,
+		/obj/item/clothing/shoes/circuitry,
+		/obj/item/clothing/head/circuitry,
+		/obj/item/clothing/ears/circuitry,
+		/obj/item/clothing/suit/circuitry,
+		/obj/item/weapon/implant/integrated_circuit,
+		/obj/item/integrated_circuit
 
 		)
 
@@ -83,6 +156,17 @@
 		/obj/item/weapon/grown
 		)
 
+/obj/item/weapon/gripper/gravekeeper	//Used for handling grave things, flowers, etc.
+	name = "grave gripper"
+	icon_state = "gripper"
+	desc = "A specialized grasping tool used in the preparation and maintenance of graves."
+
+	can_hold = list(
+		/obj/item/seeds,
+		/obj/item/weapon/grown,
+		/obj/item/weapon/material/gravemarker
+		)
+
 /obj/item/weapon/gripper/no_use/organ
 	name = "organ gripper"
 	icon_state = "gripper-flesh"
@@ -92,14 +176,32 @@
 		/obj/item/organ
 		)
 
+/obj/item/weapon/gripper/no_use/organ/Entered(var/atom/movable/AM)
+	if(istype(AM, /obj/item/organ))
+		var/obj/item/organ/O = AM
+		O.preserved = 1
+		for(var/obj/item/organ/organ in O)
+			organ.preserved = 1
+	..()
+
+/obj/item/weapon/gripper/no_use/organ/Exited(var/atom/movable/AM)
+	if(istype(AM, /obj/item/organ))
+		var/obj/item/organ/O = AM
+		O.preserved = 0
+		for(var/obj/item/organ/organ in O)
+			organ.preserved = 0
+	..()
+
 /obj/item/weapon/gripper/no_use/organ/robotics
-	name = "external organ gripper"
+	name = "robotics organ gripper"
 	icon_state = "gripper-flesh"
 	desc = "A specialized grasping tool used in robotics work."
 
 	can_hold = list(
 		/obj/item/organ/external,
-		/obj/item/organ/internal/cell
+		/obj/item/organ/internal/brain, //to insert into MMIs,
+		/obj/item/organ/internal/cell,
+		/obj/item/organ/internal/eyes/robot
 		)
 
 /obj/item/weapon/gripper/no_use/mech
@@ -109,7 +211,8 @@
 
 	can_hold = list(
 		/obj/item/mecha_parts/part,
-		/obj/item/mecha_parts/mecha_equipment
+		/obj/item/mecha_parts/mecha_equipment,
+		/obj/item/mecha_parts/mecha_tracking
 		)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
@@ -131,6 +234,21 @@
 		return wrapped.attack_self(user)
 	return ..()
 
+/obj/item/weapon/gripper/attackby(var/obj/item/O, var/mob/user)
+	if(wrapped) // We're interacting with the item inside. If you can hold a cup with 2 fingers and stick a straw in it, you could do that with a gripper and another robotic arm.
+		wrapped.loc = src.loc
+		var/resolved = wrapped.attackby(O, user)
+		if(QDELETED(wrapped) || wrapped.loc != src.loc)	 //Juuuust in case.
+			wrapped = null
+		if(!resolved && wrapped && O)
+			O.afterattack(wrapped,user,1)
+			if(QDELETED(wrapped) || wrapped.loc != src.loc)	 // I don't know of a nicer way to do this.
+				wrapped = null
+		if(wrapped)
+			wrapped.loc = src
+		return resolved
+	return ..()
+
 /obj/item/weapon/gripper/verb/drop_item()
 
 	set name = "Drop Item"
@@ -147,7 +265,22 @@
 		wrapped = null
 		return
 
-	src.loc << "<span class='danger'>You drop \the [wrapped].</span>"
+	to_chat(src.loc, "<span class='danger'>You drop \the [wrapped].</span>")
+	wrapped.loc = get_turf(src)
+	wrapped = null
+	//update_icon()
+
+/obj/item/weapon/gripper/proc/drop_item_nm()
+
+	if(!wrapped)
+		for(var/obj/item/thing in src.contents)
+			thing.loc = get_turf(src)
+		return
+
+	if(wrapped.loc != src)
+		wrapped = null
+		return
+
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -156,10 +289,17 @@
 	if(wrapped) 	//The force of the wrapped obj gets set to zero during the attack() and afterattack().
 		force_holder = wrapped.force
 		wrapped.force = 0.0
-		wrapped.attack(M,user)
-		if(deleted(wrapped))
+		if(QDELETED(wrapped) || wrapped.loc != src.loc)	 //qdel check here so it doesn't duplicate/spawn ghost items
 			wrapped = null
-		return 1
+		else
+			wrapped.loc = src.loc //To ensure checks pass.
+			wrapped.attack(M,user)
+			M.attackby(wrapped, user)	//attackby reportedly gets procced by being clicked on, at least according to Anewbe.
+			if(QDELETED(wrapped) || wrapped.loc != src.loc)
+				wrapped = null
+			if(wrapped) //In the event nothing happened to wrapped, go back into the gripper.
+				wrapped.loc = src
+			return 1
 	return 0
 
 /obj/item/weapon/gripper/afterattack(var/atom/target, var/mob/living/user, proximity, params)
@@ -183,7 +323,8 @@
 			wrapped.afterattack(target,user,1)
 
 		//wrapped's force was set to zero.  This resets it to the value it had before.
-		wrapped.force = force_holder
+		if(wrapped)
+			wrapped.force = force_holder
 		force_holder = null
 		//If wrapped was neither deleted nor put into target, put it back into the gripper.
 		if(wrapped && user && (wrapped.loc == user))
@@ -200,6 +341,10 @@
 
 		var/obj/item/I = target
 
+		if(I.anchored)
+			to_chat(user,"<span class='notice'>You are unable to lift \the [I] from \the [I.loc].</span>")
+			return
+
 		//Check if the item is blacklisted.
 		var/grab = 0
 		for(var/typepath in can_hold)
@@ -209,12 +354,12 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			user << "You collect \the [I]."
+			to_chat(user, "You collect \the [I].")
 			I.loc = src
 			wrapped = I
 			return
 		else
-			user << "<span class='danger'>Your gripper cannot hold \the [target].</span>"
+			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -278,7 +423,7 @@
 	var/grabbed_something = 0
 
 	for(var/mob/M in T)
-		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
+		if(istype(M,/mob/living/simple_mob/animal/passive/lizard) || istype(M,/mob/living/simple_mob/animal/passive/mouse))
 			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(M)
@@ -295,15 +440,15 @@
 			if(!istype(D))
 				return
 
-			D << "<span class='danger'>You begin decompiling [M].</span>"
+			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
 			if(!do_after(D,50))
-				D << "<span class='danger'>You need to remain still while decompiling such a large object.</span>"
+				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 
 			if(!M || !D) return
 
-			D << "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>"
+			to_chat(D, "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>")
 			qdel(M)
 			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -376,16 +521,16 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		user << "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>"
+		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
 	else
-		user << "<span class='danger'>Nothing on \the [T] is useful to you.</span>"
+		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
 	return
 
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
 	if(weapon_lock)
-		src << "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>"
+		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
 		return
 
 	if(!module)

@@ -14,14 +14,15 @@ var/list/gear_datums = list()
 	//create a list of gear datums to sort
 	for(var/geartype in typesof(/datum/gear)-/datum/gear)
 		var/datum/gear/G = geartype
-
+		if(initial(G.type_category) == geartype)
+			continue
 		var/use_name = initial(G.display_name)
 		var/use_category = initial(G.sort_category)
 
 		if(!use_name)
 			error("Loadout - Missing display name: [G]")
 			continue
-		if(!initial(G.cost))
+		if(isnull(initial(G.cost)))
 			error("Loadout - Missing cost: [G]")
 			continue
 		if(!initial(G.path))
@@ -46,40 +47,54 @@ var/list/gear_datums = list()
 	var/current_tab = "General"
 
 /datum/category_item/player_setup_item/loadout/load_character(var/savefile/S)
-	S["gear"] >> pref.gear
+	from_file(S["gear_list"], pref.gear_list)
+	from_file(S["gear_slot"], pref.gear_slot)
+	if(pref.gear_list!=null && pref.gear_slot!=null)
+		pref.gear = pref.gear_list["[pref.gear_slot]"]
+	else
+		from_file(S["gear"], pref.gear)
+		pref.gear_slot = 1
 
 /datum/category_item/player_setup_item/loadout/save_character(var/savefile/S)
-	S["gear"] << pref.gear
+	pref.gear_list["[pref.gear_slot]"] = pref.gear
+	to_file(S["gear_list"], pref.gear_list)
+	to_file(S["gear_slot"], pref.gear_slot)
 
 /datum/category_item/player_setup_item/loadout/proc/valid_gear_choices(var/max_cost)
-	var/list/valid_gear_choices = list()
+	. = list()
+	var/mob/preference_mob = preference_mob()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob(), G.whitelisted))
+
+		if(G.whitelisted && !is_alien_whitelisted(preference_mob, GLOB.all_species[G.whitelisted]))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
-		valid_gear_choices += gear_name
-	return valid_gear_choices
+		. += gear_name
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
+	var/mob/preference_mob = preference_mob()
 	if(!islist(pref.gear))
 		pref.gear = list()
+	if(!islist(pref.gear_list))
+		pref.gear_list = list()
 
 	for(var/gear_name in pref.gear)
 		if(!(gear_name in gear_datums))
 			pref.gear -= gear_name
-
 	var/total_cost = 0
 	for(var/gear_name in pref.gear)
 		if(!gear_datums[gear_name])
+			to_chat(preference_mob, "<span class='warning'>You cannot have more than one of the \the [gear_name]</span>")
 			pref.gear -= gear_name
 		else if(!(gear_name in valid_gear_choices()))
+			to_chat(preference_mob, "<span class='warning'>You cannot take \the [gear_name] as you are not whitelisted for the species.</span>")
 			pref.gear -= gear_name
 		else
 			var/datum/gear/G = gear_datums[gear_name]
 			if(total_cost + G.cost > MAX_GEAR_COST)
 				pref.gear -= gear_name
+				to_chat(preference_mob, "<span class='warning'>You cannot afford to take \the [gear_name]</span>")
 			else
 				total_cost += G.cost
 
@@ -97,7 +112,7 @@ var/list/gear_datums = list()
 		fcolor = "#E67300"
 
 	. += "<table align = 'center' width = 100%>"
-	. += "<tr><td colspan=3><center><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
+	. += "<tr><td colspan=3><center><a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a><b><font color = '[fcolor]'>[total_cost]/[MAX_GEAR_COST]</font> loadout points spent.</b> \[<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a>\]</center></td></tr>"
 
 	. += "<tr><td colspan=3><center><b>"
 	var/firstcat = 1
@@ -182,6 +197,29 @@ var/list/gear_datums = list()
 			return TOPIC_NOACTION
 		set_tweak_metadata(gear, tweak, metadata)
 		return TOPIC_REFRESH_UPDATE_PREVIEW
+	if(href_list["next_slot"] || href_list["prev_slot"])
+		//Set the current slot in the gear list to the currently selected gear
+		pref.gear_list["[pref.gear_slot]"] = pref.gear
+		//If we're moving up a slot..
+		if(href_list["next_slot"])
+			//change the current slot number
+			pref.gear_slot = pref.gear_slot+1
+			if(pref.gear_slot>config.loadout_slots)
+				pref.gear_slot = 1
+		//If we're moving down a slot..
+		else if(href_list["prev_slot"])
+			//change current slot one down
+			pref.gear_slot = pref.gear_slot-1
+			if(pref.gear_slot<1)
+				pref.gear_slot = config.loadout_slots
+		// Set the currently selected gear to whatever's in the new slot
+		if(pref.gear_list["[pref.gear_slot]"])
+			pref.gear = pref.gear_list["[pref.gear_slot]"]
+		else
+			pref.gear = list()
+			pref.gear_list["[pref.gear_slot]"] = list()
+		// Refresh?
+		return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["select_category"])
 		current_tab = href_list["select_category"]
 		return TOPIC_REFRESH
@@ -200,6 +238,8 @@ var/list/gear_datums = list()
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
+	var/exploitable = 0		//Does it go on the exploitable information list?
+	var/type_category = null
 
 /datum/gear/New()
 	..()
@@ -217,9 +257,14 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_item(var/location, var/metadata)
 	var/datum/gear_data/gd = new(path, location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_gear_data(metadata["[gt]"], gd)
+	if(length(gear_tweaks) && metadata)
+		for(var/datum/gear_tweak/gt in gear_tweaks)
+			gt.tweak_gear_data(metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(item, metadata["[gt]"])
+	if(length(gear_tweaks) && metadata)
+		for(var/datum/gear_tweak/gt in gear_tweaks)
+			gt.tweak_item(item, metadata["[gt]"])
+	var/mob/M = location
+	if(istype(M) && exploitable) //Update exploitable info records for the mob without creating a duplicate object at their feet.
+		M.amend_exploitable(item)
 	return item

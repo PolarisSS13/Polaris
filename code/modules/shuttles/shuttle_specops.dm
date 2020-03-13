@@ -4,7 +4,7 @@
 	req_access = list(access_cent_specops)
 
 /obj/machinery/computer/shuttle_control/specops/attack_ai(user as mob)
-	user << "\red Access Denied."
+	to_chat(user, "<font color='red'>Access Denied.</font>")
 	return 1
 
 //for shuttles that may use a different docking port at each location
@@ -13,16 +13,17 @@
 	var/docking_controller_tag_offsite
 	var/datum/computer/file/embedded_program/docking/docking_controller_station
 	var/datum/computer/file/embedded_program/docking/docking_controller_offsite
+	category = /datum/shuttle/ferry/multidock
 
 /datum/shuttle/ferry/multidock/init_docking_controllers()
 	if(docking_controller_tag_station)
 		docking_controller_station = locate(docking_controller_tag_station)
 		if(!istype(docking_controller_station))
-			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_station] could not find it's controller!</span>"
+			warning("warning: shuttle with docking tag [docking_controller_station] could not find it's controller!")
 	if(docking_controller_tag_offsite)
 		docking_controller_offsite = locate(docking_controller_tag_offsite)
 		if(!istype(docking_controller_offsite))
-			world << "<span class='danger'>warning: shuttle with docking tag [docking_controller_offsite] could not find it's controller!</span>"
+			warning("warning: shuttle with docking tag [docking_controller_offsite] could not find it's controller!")
 	if (!location)
 		docking_controller = docking_controller_station
 	else
@@ -43,6 +44,7 @@
 	var/reset_time = 0	//the world.time at which the shuttle will be ready to move again.
 	var/launch_prep = 0
 	var/cancel_countdown = 0
+	category = /datum/shuttle/ferry/multidock/specops
 
 /datum/shuttle/ferry/multidock/specops/New()
 	..()
@@ -62,14 +64,14 @@
 		var/obj/machinery/computer/C = user
 
 		if(world.time <= reset_time)
-			C.visible_message("\blue [boss_name] will not allow the Special Operations shuttle to launch yet.")
+			C.visible_message("<font color='blue'>[using_map.boss_name] will not allow the Special Operations shuttle to launch yet.</font>")
 			if (((world.time - reset_time)/10) > 60)
-				C.visible_message("\blue [-((world.time - reset_time)/10)/60] minutes remain!")
+				C.visible_message("<font color='blue'>[-((world.time - reset_time)/10)/60] minutes remain!</font>")
 			else
-				C.visible_message("\blue [-(world.time - reset_time)/10] seconds remain!")
+				C.visible_message("<font color='blue'>[-(world.time - reset_time)/10] seconds remain!</font>")
 			return
 
-		C.visible_message("\blue The Special Operations shuttle will depart in [(specops_countdown_time/10)] seconds.")
+		C.visible_message("<font color='blue'>The Special Operations shuttle will depart in [(specops_countdown_time/10)] seconds.</font>")
 
 	if (location)	//returning
 		radio_announce("THE SPECIAL OPERATIONS SHUTTLE IS PREPARING TO RETURN")
@@ -88,18 +90,18 @@
 
 /datum/shuttle/ferry/multidock/specops/move(var/area/origin,var/area/destination)
 	..(origin, destination)
-	
+
 	spawn(20)
 		if (!location)	//just arrived home
 			for(var/turf/T in get_area_turfs(destination))
 				var/mob/M = locate(/mob) in T
-				M << "<span class='danger'>You have arrived at [boss_name]. Operation has ended!</span>"
+				to_chat(M, "<span class='danger'>You have arrived at [using_map.boss_name]. Operation has ended!</span>")
 		else	//just left for the station
 			launch_mauraders()
 			for(var/turf/T in get_area_turfs(destination))
 				var/mob/M = locate(/mob) in T
-				M << "<span class='danger'>You have arrived at [station_name]. Commence operation!</span>"
-				
+				to_chat(M, "<span class='danger'>You have arrived at [station_name()]. Commence operation!</span>")
+
 				var/obj/machinery/light/small/readylight/light = locate() in T
 				if(light) light.set_state(1)
 
@@ -111,7 +113,7 @@
 	radio_announce("ALERT: LAUNCH SEQUENCE ABORTED")
 	if (istype(in_use, /obj/machinery/computer))
 		var/obj/machinery/computer/C = in_use
-		C.visible_message("\red Launch sequence aborted.")
+		C.visible_message("<font color='red'>Launch sequence aborted.</font>")
 
 	..()
 
@@ -180,10 +182,10 @@
 		sleep(10)
 
 		var/spawn_marauder[] = new()
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/effect/landmark/L in landmarks_list)
 			if(L.name == "Marauder Entry")
 				spawn_marauder.Add(L)
-		for(var/obj/effect/landmark/L in world)
+		for(var/obj/effect/landmark/L in landmarks_list)
 			if(L.name == "Marauder Exit")
 				var/obj/effect/portal/P = new(L.loc)
 				P.invisibility = 101//So it is not seen by anyone.

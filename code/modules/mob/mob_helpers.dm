@@ -1,10 +1,24 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
+/proc/isxenomorph(A)
+	if(istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		return istype(H.species, /datum/species/xenos)
+	return 0
+
 /proc/issmall(A)
 	if(A && istype(A, /mob/living))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SMALL
 	return 0
 
+//returns the number of size categories between two mob_sizes, rounded. Positive means A is larger than B
+/proc/mob_size_difference(var/mob_size_A, var/mob_size_B)
+	return round(log(2, mob_size_A/mob_size_B), 1)
+
+/mob/proc/can_wield_item(obj/item/W)
+	if(W.w_class >= ITEMSIZE_LARGE && issmall(src))
+		return FALSE //M is too small to wield this
+	return TRUE
 
 /proc/istiny(A)
 	if(A && istype(A, /mob/living))
@@ -40,6 +54,9 @@ proc/isdeaf(A)
 /mob/proc/break_cloak()
 	return
 
+/mob/proc/is_cloaked()
+	return FALSE
+
 proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
@@ -66,7 +83,7 @@ proc/getsensorlevel(A)
 
 
 /proc/is_admin(var/mob/user)
-	return check_rights(R_ADMIN, 0, user) != 0
+	return check_rights(R_ADMIN|R_EVENT, 0, user) != 0
 
 
 /proc/hsl2rgb(h, s, l)
@@ -130,6 +147,8 @@ proc/getsensorlevel(A)
 	var/miss_chance = 10
 	if (zone in base_miss_chance)
 		miss_chance = base_miss_chance[zone]
+	if (zone == "eyes" || zone == "mouth")
+		miss_chance = base_miss_chance["head"]
 	miss_chance = max(miss_chance + miss_chance_mod, 0)
 	if(prob(miss_chance))
 		if(prob(70))
@@ -141,7 +160,7 @@ proc/getsensorlevel(A)
 /proc/stars(n, pr)
 	if (pr == null)
 		pr = 25
-	if (pr <= 0)
+	if (pr < 0)
 		return null
 	else
 		if (pr >= 100)
@@ -167,8 +186,8 @@ proc/getsensorlevel(A)
 
 proc/slur(phrase)
 	phrase = html_decode(phrase)
-	var/leng=lentext(phrase)
-	var/counter=lentext(phrase)
+	var/leng=length(phrase)
+	var/counter=length(phrase)
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
@@ -314,7 +333,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 	set name = "a-intent"
 	set hidden = 1
 
-	if(ishuman(src) || isbrain(src) || isslime(src))
+	if(isliving(src) && !isrobot(src))
 		switch(input)
 			if(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				a_intent = input
@@ -346,19 +365,6 @@ proc/is_blind(A)
 			return 1
 	return 0
 
-/proc/broadcast_security_hud_message(var/message, var/broadcast_source)
-	broadcast_hud_message(message, broadcast_source, sec_hud_users, /obj/item/clothing/glasses/hud/security)
-
-/proc/broadcast_medical_hud_message(var/message, var/broadcast_source)
-	broadcast_hud_message(message, broadcast_source, med_hud_users, /obj/item/clothing/glasses/hud/health)
-
-/proc/broadcast_hud_message(var/message, var/broadcast_source, var/list/targets, var/icon)
-	var/turf/sourceturf = get_turf(broadcast_source)
-	for(var/mob/M in targets)
-		var/turf/targetturf = get_turf(M)
-		if((targetturf.z == sourceturf.z))
-			M.show_message("<span class='info'>\icon[icon] [message]</span>", 1)
-
 /proc/mobs_in_area(var/area/A)
 	var/list/mobs = new
 	for(var/mob/living/M in mob_list)
@@ -387,10 +393,16 @@ proc/is_blind(A)
 			else
 				name = realname
 
+	if(subject && subject.forbid_seeing_deadchat && !subject.client.holder)
+		return // Can't talk in deadchat if you can't see it.
+
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && !is_mentor(M.client))) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
+			if(M.forbid_seeing_deadchat && !M.client.holder)
+				continue
+
 			if(subject)
 				if(M.is_key_ignored(subject.client.key)) // If we're ignored, do nothing.
 					continue
@@ -411,7 +423,21 @@ proc/is_blind(A)
 					else										// Everyone else (dead people who didn't ghost yet, etc.)
 						lname = name
 				lname = "<span class='name'>[lname]</span> "
-			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
+			to_chat(M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>")
+
+/proc/say_dead_object(var/message, var/obj/subject = null)
+	for(var/mob/M in player_list)
+		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+			var/follow
+			var/lname = "Game Master"
+			if(M.forbid_seeing_deadchat && !M.client.holder)
+				continue
+
+			if(subject)
+				lname = "[subject.name] ([subject.x],[subject.y],[subject.z])"
+
+			lname = "<span class='name'>[lname]</span> "
+			to_chat(M, "<span class='deadsay'>" + create_text_tag("event_dead", "EVENT:", M.client) + " [lname][follow][message]</span>")
 
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
@@ -510,7 +536,7 @@ proc/is_blind(A)
 		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
 			threatcount += 2
 
-		if(species.name != "Human")
+		if(species.name != SPECIES_HUMAN)
 			threatcount += 2
 
 	if(check_records || check_arrest)
@@ -527,13 +553,40 @@ proc/is_blind(A)
 
 	return threatcount
 
-/mob/living/simple_animal/hostile/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+/mob/living/simple_mob/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
 	var/threatcount = ..()
 	if(. == SAFE_PERP)
 		return SAFE_PERP
 
-	if(!istype(src, /mob/living/simple_animal/hostile/retaliate/goat))
+	if(has_AI() && ai_holder.hostile && faction != "neutral") // Otherwise Runtime gets killed.
 		threatcount += 4
+	return threatcount
+
+// Beepsky will (try to) only beat 'bad' slimes.
+/mob/living/simple_mob/slime/xenobio/assess_perp(var/obj/access_obj, var/check_access, var/auth_weapons, var/check_records, var/check_arrest)
+	var/threatcount = 0
+
+	if(stat == DEAD)
+		return SAFE_PERP
+
+	if(is_justified_to_discipline())
+		threatcount += 4
+/*
+	if(discipline && !rabid)
+		if(!target_mob || istype(target_mob, /mob/living/carbon/human/monkey))
+			return SAFE_PERP
+
+	if(target_mob)
+		threatcount += 4
+
+	if(victim)
+		threatcount += 4
+*/
+	if(has_AI())
+		var/datum/ai_holder/simple_mob/xenobio_slime/AI = ai_holder
+		if(AI.rabid)
+			threatcount = 10
+
 	return threatcount
 
 #undef SAFE_PERP
@@ -571,3 +624,58 @@ var/list/global/organ_rel_size = list(
 	"l_foot" = 10,
 	"r_foot" = 10,
 )
+
+/mob/proc/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
+	return
+
+//Recalculates what planes this mob can see using their plane_holder, for humans this is checking slots, for others, could be whatever.
+/mob/proc/recalculate_vis()
+	return
+
+//General HUD updates done regularly (health puppet things, etc)
+/mob/proc/handle_regular_hud_updates()
+	return
+
+//Handle eye things like the Byond SEE_TURFS, SEE_OBJS, etc.
+/mob/proc/handle_vision()
+	return
+
+//Icon is used to occlude things like huds from the faulty byond context menu.
+//   http://www.byond.com/forum/?post=2336679
+var/global/image/backplane
+/hook/startup/proc/generate_backplane()
+	backplane = image('icons/misc/win32.dmi')
+	backplane.alpha = 0
+	backplane.plane = -100
+	backplane.layer = MOB_LAYER-0.1
+	backplane.mouse_opacity = 0
+
+	return TRUE
+
+/mob/proc/get_sound_env(var/pressure_factor)
+	if (pressure_factor < 0.5)
+		return SPACE
+	else
+		var/area/A = get_area(src)
+		return A.sound_env
+
+/mob/proc/position_hud_item(var/obj/item/item, var/slot)
+	if(!istype(hud_used) || !slot || !LAZYLEN(hud_used.slot_info))
+		return
+
+	//They may have hidden their entire hud but the hands
+	if(!hud_used.hud_shown && slot > slot_r_hand)
+		item.screen_loc = null
+		return
+
+	//They may have hidden the icons in the bottom left with the hide button
+	if(!hud_used.inventory_shown && slot > slot_r_store)
+		item.screen_loc = null
+		return
+
+	var/screen_place = hud_used.slot_info["[slot]"]
+	if(!screen_place)
+		item.screen_loc = null
+		return
+
+	item.screen_loc = screen_place

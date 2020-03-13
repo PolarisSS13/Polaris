@@ -54,6 +54,7 @@ research holder datum.
 		known_tech += new T(src)
 	for(var/D in typesof(/datum/design) - /datum/design)
 		possible_designs += new D(src)
+//	generate_integrated_circuit_designs()
 	RefreshResearch()
 
 /datum/research/techonly
@@ -128,6 +129,21 @@ research holder datum.
 		var/datum/tech/check_tech = T
 		if(initial(check_tech.id) == ID)
 			return  initial(check_tech.name)
+/*
+/datum/research/proc/generate_integrated_circuit_designs()
+	spawn(2 SECONDS) // So the list has time to initialize.
+		for(var/obj/item/integrated_circuit/IC in all_integrated_circuits)
+			if(IC.spawn_flags & IC_SPAWN_RESEARCH)
+				var/datum/design/D = new /datum/design/circuit(src)
+				D.name = "Custom circuitry \[[IC.category_text]\] ([IC.name])"
+				D.id = "ic-[lowertext(IC.name)]"
+				if(IC.origin_tech && IC.origin_tech.len)
+					D.req_tech = IC.origin_tech.Copy()
+				else
+					D.req_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2)
+				D.build_path = IC.type
+				possible_designs += D
+*/
 
 /***************************************************************
 **						Technology Datums					  **
@@ -192,9 +208,15 @@ research holder datum.
 	level = 0
 
 /datum/tech/arcane
-	name = "Arcane Research"
-	desc = "Research into the occult and arcane field for use in practical science"
+	name = "Anomalous Research"
+	desc = "Study of phenomena that disobey the fundamental laws of this universe."
 	id = TECH_ARCANE
+	level = 0
+
+/datum/tech/precursor
+	name = "Precursor Research"
+	desc = "The applied study of Precursor Technology, for modern applications."
+	id = TECH_PRECURSOR
 	level = 0
 
 /obj/item/weapon/disk/tech_disk
@@ -203,13 +225,13 @@ research holder datum.
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 2.0
+	randpixel = 5
+	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/tech/stored
 
 /obj/item/weapon/disk/tech_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
+	randpixel_xy()
 
 /obj/item/weapon/disk/design_disk
 	name = "component design disk"
@@ -217,10 +239,10 @@ research holder datum.
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 2.0
+	randpixel = 5
+	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()
-	pixel_x = rand(-5.0, 5)
-	pixel_y = rand(-5.0, 5)
+	randpixel_xy()

@@ -1,6 +1,7 @@
 /datum/power/changeling/DeathSting
 	name = "Death Sting"
 	desc = "We silently sting a human, filling him with potent chemicals. His rapid death is all but assured."
+	ability_icon_state = "ling_sting_death"
 	genomecost = 10
 	verbpath = /mob/proc/changeling_DEATHsting
 
@@ -12,7 +13,8 @@
 	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_DEATHsting)
 	if(!T)
 		return 0
-	T << "<span class='danger'>You feel a small prick and your chest becomes tight.</span>"
+	add_attack_logs(src,T,"Death sting (changeling)")
+	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.silent = 10
 	T.Paralyse(10)
 	T.make_jittery(100)

@@ -68,6 +68,9 @@
 	//used for optional self-objectives that antagonists can give themselves, which are displayed at the end of the round.
 	var/ambitions
 
+	//used to store what traits the player had picked out in their preferences before joining, in text form.
+	var/list/traits = list()
+
 /datum/mind/New(var/key)
 	src.key = key
 
@@ -75,14 +78,14 @@
 
 /datum/mind/proc/transfer_to(mob/living/new_character)
 	if(!istype(new_character))
-		world.log << "## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn"
+		to_world_log("## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn")
 	if(current)					//remove ourself from our old body's mind variable
 		if(changeling)
 			current.remove_changeling_powers()
 			current.verbs -= /datum/changeling/proc/EvolutionMenu
 		current.mind = null
 
-		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
+		SSnanoui.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 	if(new_character.mind)		//remove any mind currently in our new body's mind variable
 		new_character.mind.current = null
 
@@ -150,7 +153,7 @@
 	usr << browse(out, "window=edit_memory[src]")
 
 /datum/mind/Topic(href, href_list)
-	if(!check_rights(R_ADMIN))	return
+	if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
@@ -158,7 +161,7 @@
 			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
-				usr << "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>"
+				to_chat(usr, "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>")
 
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antagonist"]]
@@ -195,7 +198,7 @@
 			return
 		if(mind)
 			mind.ambitions = sanitize(new_ambition)
-			mind.current << "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>"
+			to_chat(mind.current, "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>")
 		log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
@@ -341,10 +344,10 @@
 						if(I in organs.implants)
 							qdel(I)
 							break
-				H << "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</B></font></span>"
+				to_chat(H, "<span class='notice'><font size =3><B>Your loyalty implant has been deactivated.</B></font></span>")
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
 			if("add")
-				H << "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font></span>"
+				to_chat(H, "<span class='danger'><font size =3>You somehow have become the recepient of a loyalty transplant, and it just activated!</font></span>")
 				H.implant_loyalty(override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 			else
@@ -407,9 +410,9 @@
 
 	else if (href_list["obj_announce"])
 		var/obj_count = 1
-		current << "\blue Your current objectives:"
+		to_chat(current, "<font color='blue'>Your current objectives:</font>")
 		for(var/datum/objective/objective in objectives)
-			current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			to_chat(current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 			obj_count++
 	edit_memory()
 
@@ -487,9 +490,11 @@
 		if(ticker)
 			ticker.minds += mind
 		else
-			world.log << "## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn"
+			to_world_log("## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn")
 	if(!mind.name)	mind.name = real_name
 	mind.current = src
+	if(player_is_antag(mind))
+		src.client.verbs += /client/proc/aooc
 
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
@@ -497,54 +502,55 @@
 	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
 
 //slime
-/mob/living/carbon/slime/mind_initialize()
-	..()
+/mob/living/simple_mob/slime/mind_initialize()
+	. = ..()
 	mind.assigned_role = "slime"
 
 /mob/living/carbon/alien/larva/mind_initialize()
-	..()
+	. = ..()
 	mind.special_role = "Larva"
 
 //AI
 /mob/living/silicon/ai/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "AI"
 
 //BORG
 /mob/living/silicon/robot/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "Cyborg"
 
 //PAI
 /mob/living/silicon/pai/mind_initialize()
-	..()
+	. = ..()
 	mind.assigned_role = "pAI"
 	mind.special_role = ""
 
 //Animals
-/mob/living/simple_animal/mind_initialize()
-	..()
-	mind.assigned_role = "Animal"
+/mob/living/simple_mob/mind_initialize()
+	. = ..()
+	mind.assigned_role = "Simple Mob"
 
-/mob/living/simple_animal/corgi/mind_initialize()
-	..()
+/mob/living/simple_mob/animal/passive/dog/corgi/mind_initialize()
+	. = ..()
 	mind.assigned_role = "Corgi"
 
-/mob/living/simple_animal/shade/mind_initialize()
-	..()
+/mob/living/simple_mob/construct/shade/mind_initialize()
+	. = ..()
 	mind.assigned_role = "Shade"
+	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/builder/mind_initialize()
-	..()
+/mob/living/simple_mob/construct/artificer/mind_initialize()
+	. = ..()
 	mind.assigned_role = "Artificer"
 	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/wraith/mind_initialize()
-	..()
+/mob/living/simple_mob/construct/wraith/mind_initialize()
+	. = ..()
 	mind.assigned_role = "Wraith"
 	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/construct/armoured/mind_initialize()
-	..()
+/mob/living/simple_mob/construct/juggernaut/mind_initialize()
+	. = ..()
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"

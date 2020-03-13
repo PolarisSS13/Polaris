@@ -2,11 +2,11 @@
 *	Here is where any supply packs
 *	related to civilian tasks live
 */
-/datum/supply_packs/supply
-	group = "Supply"
 
+/datum/supply_pack/supply
+	group = "Supplies"
 
-/datum/supply_packs/supply/food
+/datum/supply_pack/supply/food
 	name = "Kitchen supply crate"
 	contains = list(
 			/obj/item/weapon/reagent_containers/food/condiment/flour = 6,
@@ -14,20 +14,21 @@
 			/obj/item/weapon/reagent_containers/food/drinks/soymilk = 2,
 			/obj/item/weapon/storage/fancy/egg_box = 2,
 			/obj/item/weapon/reagent_containers/food/snacks/tofu = 4,
-			/obj/item/weapon/reagent_containers/food/snacks/meat = 4
+			/obj/item/weapon/reagent_containers/food/snacks/meat = 4,
+			/obj/item/weapon/reagent_containers/food/condiment/yeast = 3
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Food crate"
-	
-/datum/supply_packs/supply/toner
+
+/datum/supply_pack/supply/toner
 	name = "Toner cartridges"
 	contains = list(/obj/item/device/toner = 6)
 	cost = 10
 	containertype = /obj/structure/closet/crate
 	containername = "Toner cartridges"
-	
-/datum/supply_packs/supply/janitor
+
+/datum/supply_pack/supply/janitor
 	name = "Janitorial supplies"
 	contains = list(
 			/obj/item/weapon/reagent_containers/glass/bucket,
@@ -49,15 +50,22 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate
 	containername = "Janitorial supplies"
-	
-/datum/supply_packs/supply/boxes
-	name = "Empty boxes"
-	contains = list(/obj/item/weapon/storage/box = 10)
+
+/datum/supply_pack/supply/shipping
+	name = "Shipping supplies"
+	contains = list(
+				/obj/fiftyspawner/cardboard,
+				/obj/item/weapon/packageWrap = 4,
+				/obj/item/weapon/wrapping_paper = 2,
+				/obj/item/device/destTagger,
+				/obj/item/weapon/hand_labeler,
+				/obj/item/weapon/tool/wirecutters,
+				/obj/item/weapon/tape_roll = 2)
 	cost = 10
-	containertype = "/obj/structure/closet/crate"
-	containername = "Empty box crate"
-	
-/datum/supply_packs/supply/bureaucracy
+	containertype = /obj/structure/closet/crate
+	containername = "Shipping supplies crate"
+
+/datum/supply_pack/supply/bureaucracy
 	contains = list(
 			/obj/item/weapon/clipboard = 2,
 			/obj/item/weapon/pen/red,
@@ -76,29 +84,15 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate
 	containername = "Office supplies crate"
-	
-	
-/datum/supply_packs/supply/spare_pda
+
+/datum/supply_pack/supply/spare_pda
 	name = "Spare PDAs"
 	cost = 10
 	containertype = /obj/structure/closet/crate
 	containername = "Spare PDA crate"
 	contains = list(/obj/item/device/pda = 3)
-	
-/datum/supply_packs/supply/voidsuits
-	name = "Mining voidsuits"
-	contains = list(
-			/obj/item/clothing/suit/space/void/mining = 2,
-			/obj/item/clothing/head/helmet/space/void/mining = 2,
-			/obj/item/clothing/mask/breath = 2,
-			/obj/item/weapon/tank/oxygen = 2
-			)
-	cost = 35
-	containertype = "/obj/structure/closet/crate/secure"
-	containername = "Mining voidsuit crate"
-	access = access_mining
-	
-/datum/supply_packs/supply/minergear
+
+/datum/supply_pack/supply/minergear
 	name = "Shaft miner equipment"
 	contains = list(
 			/obj/item/weapon/storage/backpack/industrial,
@@ -117,7 +111,28 @@
 			/obj/item/clothing/glasses/material,
 			/obj/item/clothing/glasses/meson
 			)
-	cost = 15
-	containertype = "/obj/structure/closet/crate/secure"
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure
 	containername = "Shaft miner equipment"
 	access = access_mining
+
+/datum/supply_pack/supply/mule
+	name = "Mulebot Crate"
+	contains = list()
+	cost = 20
+	containertype = /obj/structure/largecrate/animal/mulebot
+	containername = "Mulebot Crate"
+
+/datum/supply_pack/supply/cargotrain
+	name = "Cargo Train Tug"
+	contains = list(/obj/vehicle/train/engine)
+	cost = 35
+	containertype = /obj/structure/largecrate
+	containername = "Cargo Train Tug Crate"
+
+/datum/supply_pack/supply/cargotrailer
+	name = "Cargo Train Trolley"
+	contains = list(/obj/vehicle/train/trolley)
+	cost = 15
+	containertype = /obj/structure/largecrate
+	containername = "Cargo Train Trolley Crate"

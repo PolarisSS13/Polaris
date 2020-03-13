@@ -54,7 +54,7 @@
 	B.item_state = "melted"
 	new /obj/item/weapon/paper/sc_safehint_paper_bible(B)
 	new /obj/item/weapon/pen(B)
-	del(src)
+	qdel(src)
 
 /*
  * Guns - I'm making these specifically so that I dont spawn a pile of fully loaded weapons on the map.
@@ -63,7 +63,7 @@
 obj/item/weapon/gun/energy/laser/retro/sc_retro
 	name ="retro laser"
 	icon_state = "retro"
-	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces."
+	desc = "An older model of the basic lasergun, no longer used by NanoTrasen's security or military forces."
 	projectile_type = "/obj/item/projectile/practice"
 	clumsy_check = 0 //No sense in having a harmless gun blow up in the clowns face
 
@@ -189,7 +189,7 @@ var/sc_safecode5 = "[rand(0,9)]"
 	else if(istype(A,/obj/))
 		var/obj/O = A
 		O.ex_act(1.0)
-		if(O) del(O)
+		if(O) qdel(O)
 	else if(isturf(A))
 		var/turf/T = A
 		if(T.intact)

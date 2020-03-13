@@ -1,10 +1,11 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "Portable Air Scrubber"
+	desc = "Similar to room scrubbers, this device contains an internal tank to scrub gasses from the atmosphere."
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
 	density = 1
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	var/on = 0
 	var/volume_rate = 800
@@ -17,7 +18,7 @@
 	var/minrate = 0
 	var/maxrate = 10 * ONE_ATMOSPHERE
 
-	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent", "oxygen_agent_b")
+	var/list/scrubbing_gas = list("phoron", "carbon_dioxide", "sleeping_agent", "volatile_fuel")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/New()
 	..()
@@ -114,7 +115,7 @@
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "portscrubber.tmpl", "Portable Scrubber", 480, 400, state = physical_state)
 		ui.set_initial_data(data)
@@ -136,7 +137,7 @@
 		. = 1
 	if (href_list["volume_adj"])
 		var/diff = text2num(href_list["volume_adj"])
-		volume_rate = Clamp(volume_rate+diff, minrate, maxrate)
+		volume_rate = CLAMP(volume_rate+diff, minrate, maxrate)
 		. = 1
 	update_icon()
 
@@ -144,6 +145,7 @@
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
+	desc = "A larger variation of the portable scrubber, for industrial scrubbing of air. Must be turned on from a remote terminal."
 	icon_state = "scrubber:0"
 	anchored = 1
 	volume = 50000
@@ -166,7 +168,7 @@
 	name = "[name] (ID [id])"
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(var/mob/user as mob)
-		usr << "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>"
+		to_chat(user, "<span class='notice'>You can't directly interact with this machine. Use the scrubber control console.</span>")
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/update_icon()
 	src.overlays = 0
@@ -205,21 +207,21 @@
 		update_connected_network()
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/wrench))
+	if(I.is_wrench())
 		if(on)
-			user << "<span class='warning'>Turn \the [src] off first!</span>"
+			to_chat(user, "<span class='warning'>Turn \the [src] off first!</span>")
 			return
 
 		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+		playsound(src.loc, I.usesound, 50, 1)
+		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 
 		return
 
 	//doesn't use power cells
 	if(istype(I, /obj/item/weapon/cell))
 		return
-	if (istype(I, /obj/item/weapon/screwdriver))
+	if(I.is_screwdriver())
 		return
 
 	//doesn't hold tanks
@@ -232,9 +234,13 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
 
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/Initialize()
+	. = ..()
+	desc += "This one seems to be tightly secured with large bolts."
+
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/wrench))
-		user << "<span class='warning'>The bolts are too tight for you to unscrew!</span>"
+	if(I.is_wrench())
+		to_chat(user, "<span class='warning'>The bolts are too tight for you to unscrew!</span>")
 		return
 
 	..()

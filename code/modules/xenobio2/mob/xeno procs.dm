@@ -6,6 +6,7 @@ Proc for metabolism
 Proc for mutating
 Procs for copying speech, if applicable
 Procs for targeting
+Divergence proc, used in mutation to make unique datums.
 */
 /mob/living/simple_animal/xeno/proc/ProcessTraits()
 	if(maleable >= MAX_MALEABLE)
@@ -29,7 +30,7 @@ Procs for targeting
 		set_light(traitdat.traits[TRAIT_XENO_GLOW_RANGE], traitdat.traits[TRAIT_XENO_GLOW_STRENGTH], traitdat.traits[TRAIT_XENO_BIO_COLOR])
 	else
 		set_light(0, 0, "#000000")	//Should kill any light that shouldn't be there.
-	
+
 	hostile = traitdat.traits[TRAIT_XENO_HOSTILE]
 
 	speed = traitdat.traits[TRAIT_XENO_SPEED]
@@ -64,6 +65,9 @@ Procs for targeting
 
 			reagent_response = chemreact[R.id]
 
+			if(!reagent_response)
+				continue // just skip this reagent, rather than clearing the whole thing
+
 			if(reagent_response["toxic"])
 				adjustToxLoss(reagent_response["toxic"] * reagent_total)
 
@@ -81,8 +85,14 @@ Procs for targeting
 		return 1 //Everything worked out okay.
 
 	return 0
+	
+/mob/living/simple_animal/xeno/proc/diverge()
+	var/datum/xeno/traits/newtraits = new()
+	newtraits.copy_traits(traitdat)
+	return newtraits
 
 /mob/living/simple_animal/xeno/proc/Mutate()
+	traitdat = diverge()
 	nameVar = "mutated"
 	if((COLORMUT & mutable))
 		traitdat.traits[TRAIT_XENO_COLOR] = "#"
@@ -144,6 +154,7 @@ Procs for targeting
 
 		// redirect the projectile
 		P.redirect(new_x, new_y, curloc, src)
+		P.reflected = 1
 
 		return -1
 

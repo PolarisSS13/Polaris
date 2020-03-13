@@ -1,4 +1,6 @@
-/mob/living/carbon/human/movement_delay()
+#define HUMAN_LOWEST_SLOWDOWN -3
+
+/mob/living/carbon/human/movement_delay(oldloc, direct)
 
 	var/tally = 0
 
@@ -10,10 +12,16 @@
 	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(CE_SPEEDBOOST in chem_effects)
-		return -1
+	if(force_max_speed)
+		return HUMAN_LOWEST_SLOWDOWN
 
-	var/health_deficiency = (maxHealth - health)
+	for(var/datum/modifier/M in modifiers)
+		if(!isnull(M.haste) && M.haste == TRUE)
+			return HUMAN_LOWEST_SLOWDOWN // Returning -1 will actually result in a slowdown for Teshari.
+		if(!isnull(M.slowdown))
+			tally += M.slowdown
+
+	var/health_deficiency = (getMaxHealth() - health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
 	if(can_feel_pain())
@@ -22,34 +30,21 @@
 	var/hungry = (500 - nutrition)/5 // So overeat would be 100 and default level would be 80
 	if (hungry >= 70) tally += hungry/50
 
-	// Loop through some slots, and add up their slowdowns.  Shoes are handled below, unfortunately.
-	// Includes slots which can provide armor, the back slot, and suit storage.
-	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store) )
-		tally += I.slowdown
-
-	// Hands are also included, to make the 'take off your armor instantly and carry it with you to go faster' trick no longer viable.
-	// This is done seperately to disallow negative numbers.
-	for(var/obj/item/I in list(r_hand, l_hand) )
-		tally += max(I.slowdown, 0)
-
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
-			if(E.status & ORGAN_SPLINTED)
+			else if(E.splinted && E.splinted.loc != E)
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
 	else
-		if(shoes)
-			tally += shoes.slowdown
-
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = get_organ(organ_name)
 			if(!E || E.is_stump())
 				tally += 4
-			else if(E.status & ORGAN_SPLINTED)
+			else if(E.splinted && E.splinted.loc != E)
 				tally += 0.5
 			else if(E.status & ORGAN_BROKEN)
 				tally += 1.5
@@ -60,15 +55,104 @@
 
 	if(FAT in src.mutations)
 		tally += 1.5
-	if (bodytemperature < 283.222)
-		tally += (283.222 - bodytemperature) / 10 * 1.75
+
+	if (bodytemperature < species.cold_level_1)
+		tally += (species.cold_level_1 - bodytemperature) / 10 * 1.75
 
 	tally += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow
 
 	if(mRun in mutations)
 		tally = 0
 
-	return (tally+config.human_delay)
+	// Turf related slowdown
+	var/turf/T = get_turf(src)
+	tally += calculate_turf_slowdown(T, direct)
+
+	// Item related slowdown.
+	var/item_tally = calculate_item_encumbrance()
+
+	// Dragging heavy objects will also slow you down, similar to above.
+	if(pulling)
+		if(istype(pulling, /obj/item))
+			var/obj/item/pulled = pulling
+			item_tally += max(pulled.slowdown, 0)
+		else if(ishuman(pulling))
+			var/mob/living/carbon/human/H = pulling
+			var/their_slowdown = max(H.calculate_item_encumbrance(), 1)
+			item_tally = max(item_tally, their_slowdown) // If our slowdown is less than theirs, then we become as slow as them (before species modifires).
+
+	item_tally *= species.item_slowdown_mod
+
+	tally += item_tally
+
+	if(CE_SLOWDOWN in chem_effects)
+		if (tally >= 0 )
+			tally = (tally + tally/4) //Add a quarter of penalties on top.
+		tally += chem_effects[CE_SLOWDOWN]
+
+	if(CE_SPEEDBOOST in chem_effects)
+		if (tally >= 0)	// cut any penalties in half
+			tally = tally/2
+		tally -= chem_effects[CE_SPEEDBOOST]	// give 'em a buff on top.
+
+	return max(HUMAN_LOWEST_SLOWDOWN, tally+config.human_delay)	// Minimum return should be the same as force_max_speed
+
+// This calculates the amount of slowdown to receive from items worn. This does NOT include species modifiers.
+// It is in a seperate place to avoid an infinite loop situation with dragging mobs dragging each other.
+// Also its nice to have these things seperated.
+/mob/living/carbon/human/proc/calculate_item_encumbrance()
+	if(!buckled && shoes) // Shoes can make you go faster.
+		. += shoes.slowdown
+
+	// Loop through some slots, and add up their slowdowns.
+	// Includes slots which can provide armor, the back slot, and suit storage.
+	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store))
+		. += I.slowdown
+
+	// Hands are also included, to make the 'take off your armor instantly and carry it with you to go faster' trick no longer viable.
+	// This is done seperately to disallow negative numbers (so you can't hold shoes in your hands to go faster).
+	for(var/obj/item/I in list(r_hand, l_hand) )
+		. += max(I.slowdown, 0)
+
+// Similar to above, but for turf slowdown.
+/mob/living/carbon/human/proc/calculate_turf_slowdown(turf/T, direct)
+	if(!T)
+		return 0
+
+	if(T.movement_cost)
+		var/turf_move_cost = T.movement_cost
+		if(istype(T, /turf/simulated/floor/water))
+			if(species.water_movement)
+				turf_move_cost = CLAMP(turf_move_cost + species.water_movement, HUMAN_LOWEST_SLOWDOWN, 15)
+			if(shoes)
+				var/obj/item/clothing/shoes/feet = shoes
+				if(feet.water_speed)
+					turf_move_cost = CLAMP(turf_move_cost + feet.water_speed, HUMAN_LOWEST_SLOWDOWN, 15)
+			. += turf_move_cost
+
+		if(istype(T, /turf/simulated/floor/outdoors/snow))
+			if(species.snow_movement)
+				turf_move_cost = CLAMP(turf_move_cost + species.snow_movement, HUMAN_LOWEST_SLOWDOWN, 15)
+			if(shoes)
+				var/obj/item/clothing/shoes/feet = shoes
+				if(feet.water_speed)
+					turf_move_cost = CLAMP(turf_move_cost + feet.snow_speed, HUMAN_LOWEST_SLOWDOWN, 15)
+			. += turf_move_cost
+
+	// Wind makes it easier or harder to move, depending on if you're with or against the wind.
+	if(T.outdoors && (T.z <= SSplanets.z_to_planet.len))
+		var/datum/planet/P = SSplanets.z_to_planet[z]
+		if(P)
+			var/datum/weather_holder/WH = P.weather_holder
+			if(WH && WH.wind_speed) // Is there any wind?
+				// With the wind.
+				if(direct & WH.wind_dir)
+					. = max(. - WH.wind_speed, -1) // Wind speedup is capped to prevent supersonic speeds from a storm.
+				// Against it.
+				else if(direct & reverse_dir[WH.wind_dir])
+					. += WH.wind_speed
+
+#undef HUMAN_LOWEST_SLOWDOWN
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
 	//Can we act?
@@ -117,3 +201,47 @@
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)
+
+// Handle footstep sounds
+/mob/living/carbon/human/handle_footstep(var/turf/T)
+	if(is_incorporeal())
+		return
+	if(!config.footstep_volume || !T.footstep_sounds || !T.footstep_sounds.len)
+		return
+	// Future Upgrades - Multi species support
+	var/list/footstep_sounds = T.footstep_sounds["human"]
+	if(!footstep_sounds)
+		return
+
+	var/S = pick(footstep_sounds)
+	if(!S) return
+
+	// Play every 20 steps while walking, for the sneak
+	if(m_intent == "walk" && step_count++ % 20 != 0)
+		return
+
+	// Play every other step while running
+	if(m_intent == "run" && step_count++ % 2 != 0)
+		return
+
+	var/volume = config.footstep_volume
+
+	// Reduce volume while walking or barefoot
+	if(!shoes || m_intent == "walk")
+		volume *= 0.5
+	else if(shoes)
+		var/obj/item/clothing/shoes/feet = shoes
+		if(istype(feet))
+			volume *= feet.step_volume_mod
+
+	if(!has_organ(BP_L_FOOT) && !has_organ(BP_R_FOOT))
+		return // no feet = no footsteps
+
+	if(buckled || lying || throwing)
+		return // people flying, lying down or sitting do not step
+
+	if(!has_gravity(src) && prob(75))
+		return // Far less likely to make noise in no gravity
+
+	playsound(T, S, volume, FALSE)
+	return

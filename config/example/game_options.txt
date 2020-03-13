@@ -35,7 +35,8 @@ REVIVAL_CLONING 1
 ## amount of time (in hundredths of seconds) for which a brain retains the "spark of life" after the person's death (set to -1 for infinite)
 REVIVAL_BRAIN_LIFE -1
 
-
+## Uncomment to allow headgibbing
+ALLOW_HEADGIBS
 
 ### MOB MOVEMENT ###
 
@@ -57,6 +58,8 @@ ALIEN_DELAY 0
 METROID_DELAY 0
 ANIMAL_DELAY 0
 
+## Volume of footstep sound effects.  Range: 1-100, Set to 0 to disable footstep sounds.
+FOOTSTEP_VOLUME 60
 
 ### Miscellaneous ###
 

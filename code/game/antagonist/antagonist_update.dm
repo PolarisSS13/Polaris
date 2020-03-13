@@ -14,7 +14,8 @@
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = z_state)
+			if(istype(H))
+				H.change_appearance(APPEARANCE_ALL, H.loc, H, species_whitelist = valid_species, state = z_state)
 	return player.current
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
@@ -32,7 +33,9 @@
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	return image('icons/mob/mob.dmi', loc = other.current, icon_state = indicator, layer = LIGHTING_LAYER+0.1)
+	var/image/returnimage = image('icons/mob/mob.dmi', loc = other.current, icon_state = indicator)
+	returnimage.plane = PLANE_LIGHTING_ABOVE
+	return returnimage
 
 /datum/antagonist/proc/update_all_icons()
 	if(!antag_indicator)

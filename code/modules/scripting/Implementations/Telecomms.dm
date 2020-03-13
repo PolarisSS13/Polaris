@@ -2,7 +2,7 @@
 
 
 /* --- Traffic Control Scripting Language --- */
-	// Nanotrasen TCS Language - Made by Doohl
+	// NanoTrasen TCS Language - Made by Doohl
 
 /n_Interpreter/TCS_Interpreter
 	var/datum/TCS_Compiler/Compiler
@@ -69,6 +69,7 @@
 		interpreter.SetVar("$engineering",ENG_FREQ)
 		interpreter.SetVar("$security",	SEC_FREQ)
 		interpreter.SetVar("$supply",	SUP_FREQ)
+		interpreter.SetVar("$explorer", EXP_FREQ)
 
 		// Signal data
 

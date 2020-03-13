@@ -7,7 +7,6 @@
 	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
-	frame_type = "computer"
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -16,11 +15,14 @@
 	var/light_power_on = 1
 	var/overlay_layer
 
+	clicksound = "keyboard"
+
 /obj/machinery/computer/New()
 	overlay_layer = layer
 	..()
 
-/obj/machinery/computer/initialize()
+/obj/machinery/computer/Initialize()
+	. = ..()
 	power_change()
 	update_icon()
 
@@ -60,6 +62,9 @@
 		set_broken()
 	..()
 
+/obj/machinery/computer/blob_act()
+	ex_act(2)
+
 /obj/machinery/computer/update_icon()
 	overlays.Cut()
 	if(stat & NOPOWER)
@@ -97,37 +102,18 @@
 	return text
 
 /obj/machinery/computer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		user << "<span class='notice'>You start disconnecting the monitor.</span>"
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.circuit = M
-			A.anchored = 1
-			A.density = 1
-			A.frame_type = M.board_type
-			for (var/obj/C in src)
-				C.forceMove(loc)
-			if (src.stat & BROKEN)
-				user << "<span class='notice'>The broken glass falls out.</span>"
-				new /obj/item/weapon/material/shard( src.loc )
-				A.state = 3
-				A.icon_state = "[A.frame_type]_3"
-			else
-				user << "<span class='notice'>You disconnect the monitor.</span>"
-				A.state = 4
-				A.icon_state = "[A.frame_type]_4"
-			A.pixel_x = pixel_x
-			A.pixel_y = pixel_y
-			M.deconstruct(src)
-			qdel(src)
+	if(computer_deconstruction_screwdriver(user, I))
+		return
 	else
-		src.attack_hand(user)
-	return
-
-
-
-
-
-
+		if(istype(I,/obj/item/weapon/gripper)) //Behold, Grippers and their horribleness. If ..() is called by any computers' attackby() now or in the future, this should let grippers work with them appropriately.
+			var/obj/item/weapon/gripper/B = I	//B, for Borg.
+			if(!B.wrapped)
+				to_chat(user, "\The [B] is not holding anything.")
+				return
+			else
+				var/B_held = B.wrapped
+				to_chat(user, "You use \the [B] to use \the [B_held] with \the [src].")
+				playsound(src, "keyboard", 100, 1, 0)
+			return
+		attack_hand(user)
+		return

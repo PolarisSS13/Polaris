@@ -12,7 +12,7 @@
 	desc = "Small machine which transmits data about specific powernet"
 	anchored = 1
 	density = 0
-	layer = 2.46 // Above cables, but should be below floors.
+	layer = ABOVE_UTILITY
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_beacon" // If anyone wants to make better sprite, feel free to do so without asking me.
 
@@ -31,6 +31,13 @@
 // Description: Sets name of this sensor according to the ID tag.
 /obj/machinery/power/sensor/proc/auto_set_name()
 	name = "[name_tag] - Powernet Sensor"
+
+/obj/machinery/power/sensor/Destroy()
+	. = ..()
+	// TODO - Switch power_monitor to register deletion events instead of this.
+	for(var/obj/machinery/computer/power_monitor/PM in machines)
+		if(PM.power_monitor)
+			PM.power_monitor.refresh_sensors()
 
 // Proc: check_grid_warning()
 // Parameters: None
@@ -163,6 +170,10 @@
 			// Cell Status
 			APC_entry["cell_charge"] = A.cell ? round(A.cell.percent()) : "NO CELL"
 			APC_entry["cell_status"] = A.cell ? chg[A.charging+1] : "N"
+			// Location
+			APC_entry["x"] = A.x
+			APC_entry["y"] = A.y
+			APC_entry["z"] = A.z
 			// Other info
 			APC_entry["total_load"] = reading_to_text(A.lastused_total)
 			// Hopefully removes those goddamn \improper s which are screwing up the UI

@@ -40,26 +40,26 @@
 	if(!usr || usr.stat || usr.lying)	return
 
 	if(scan)
-		usr << "You remove \the [scan] from \the [src]."
+		to_chat(usr, "You remove \the [scan] from \the [src].")
 		scan.forceMove(get_turf(src))
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else if(modify)
-		usr << "You remove \the [modify] from \the [src]."
+		to_chat(usr, "You remove \the [modify] from \the [src].")
 		modify.forceMove(get_turf(src))
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(modify)
 		modify = null
 	else
-		usr << "There is nothing to remove from the console."
+		to_chat(usr, "There is nothing to remove from the console.")
 	return
 
 /obj/machinery/computer/card/attackby(obj/item/weapon/card/id/id_card, mob/user)
 	if(!istype(id_card))
 		return ..()
 
-	if(!scan && (access_change_ids in id_card.access) && user.unEquip(id_card))
+	if(!scan && (access_change_ids in id_card.access) && (user.unEquip(id_card) || (id_card.loc == user && istype(user,/mob/living/silicon/robot)))) //Grippers. Again. ~Mechoid
 		user.drop_item()
 		id_card.forceMove(src)
 		scan = id_card
@@ -68,7 +68,7 @@
 		id_card.forceMove(src)
 		modify = id_card
 
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 	attack_hand(user)
 
 /obj/machinery/computer/card/attack_ai(var/mob/user as mob)
@@ -82,12 +82,15 @@
 /obj/machinery/computer/card/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
 
+	if(data_core)
+		data_core.get_manifest_list()
+
 	var/data[0]
 	data["src"] = "\ref[src]"
 	data["station_name"] = station_name()
 	data["mode"] = mode
 	data["printing"] = printing
-	data["manifest"] = data_core ? data_core.get_manifest(0) : null
+	data["manifest"] = PDA_Manifest
 	data["target_name"] = modify ? modify.name : "-----"
 	data["target_owner"] = modify && modify.registered_name ? modify.registered_name : "-----"
 	data["target_rank"] = get_target_rank()
@@ -98,13 +101,18 @@
 	data["centcom_access"] = is_centcom()
 	data["all_centcom_access"] = null
 	data["regions"] = null
+	data["id_rank"] = modify && modify.assignment ? modify.assignment : "Unassigned"
 
-	data["engineering_jobs"] = format_jobs(engineering_positions)
-	data["medical_jobs"] = format_jobs(medical_positions)
-	data["science_jobs"] = format_jobs(science_positions)
-	data["security_jobs"] = format_jobs(security_positions)
-	data["civilian_jobs"] = format_jobs(civilian_positions)
-	data["centcom_jobs"] = format_jobs(get_all_centcom_jobs())
+	var/list/departments = list()
+	for(var/D in SSjob.get_all_department_datums())
+		var/datum/department/dept = D
+		if(!dept.assignable) // No AI ID cards for you.
+			continue
+		if(dept.centcom_only && !is_centcom())
+			continue
+		departments[++departments.len] = list("department_name" = dept.name, "jobs" = format_jobs(SSjob.get_job_titles_in_department(dept.name)) )
+
+	data["departments"] = departments
 
 	if (modify && is_centcom())
 		var/list/all_centcom_access = list()
@@ -132,7 +140,7 @@
 
 		data["regions"] = regions
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "identification_computer.tmpl", src.name, 600, 700)
 		ui.set_initial_data(data)
@@ -201,16 +209,10 @@
 					if(is_centcom())
 						access = get_centcom_access(t1)
 					else
-						var/datum/job/jobdatum
-						for(var/jobtype in typesof(/datum/job))
-							var/datum/job/J = new jobtype
-							if(ckey(J.title) == ckey(t1))
-								jobdatum = J
-								break
+						var/datum/job/jobdatum = SSjob.get_job(t1)
 						if(!jobdatum)
-							usr << "<span class='warning'>No log exists for this job: [t1]</span>"
+							to_chat(usr, "<span class='warning'>No log exists for this job: [t1]</span>")
 							return
-
 						access = jobdatum.get_access()
 
 					modify.access = access
@@ -228,7 +230,7 @@
 						modify.registered_name = temp_name
 					else
 						src.visible_message("<span class='notice'>[src] buzzes rudely.</span>")
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 		if ("account")
 			if (is_authenticated())
@@ -236,7 +238,7 @@
 				if ((modify == t2 && (in_range(src, usr) || (istype(usr, /mob/living/silicon))) && istype(loc, /turf)))
 					var/account_num = text2num(href_list["account"])
 					modify.associated_account_number = account_num
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 		if ("mode")
 			mode = text2num(href_list["mode_target"])
@@ -246,11 +248,11 @@
 				printing = 1
 				spawn(50)
 					printing = null
-					nanomanager.update_uis(src)
+					SSnanoui.update_uis(src)
 
 					var/obj/item/weapon/paper/P = new(loc)
 					if (mode)
-						P.name = text("crew manifest ([])", worldtime2text())
+						P.name = text("crew manifest ([])", stationtime2text())
 						P.info = {"<h4>Crew Manifest</h4>
 							<br>
 							[data_core ? data_core.get_manifest(0) : ""]

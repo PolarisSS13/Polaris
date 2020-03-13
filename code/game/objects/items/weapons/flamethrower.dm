@@ -3,13 +3,16 @@
 	desc = "You are a firestarter!"
 	icon = 'icons/obj/flamethrower.dmi'
 	icon_state = "flamethrowerbase"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_guns.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_guns.dmi',
+			)
 	item_state = "flamethrower_0"
-	flags = CONDUCT
 	force = 3.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 1, TECH_PHORON = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 500)
 	var/status = 0
@@ -23,19 +26,14 @@
 
 
 /obj/item/weapon/flamethrower/Destroy()
-	if(weldtool)
-		qdel(weldtool)
-	if(igniter)
-		qdel(igniter)
-	if(ptank)
-		qdel(ptank)
-	..()
-	return
-
+	QDEL_NULL(weldtool)
+	QDEL_NULL(igniter)
+	QDEL_NULL(ptank)
+	. = ..()
 
 /obj/item/weapon/flamethrower/process()
 	if(!lit)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		return null
 	var/turf/location = loc
 	if(istype(location, /mob/))
@@ -71,7 +69,7 @@
 
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
-	if(iswrench(W) && !status)//Taking this apart
+	if(W.is_wrench() && !status)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(weldtool)
 			weldtool.loc = T
@@ -82,13 +80,13 @@
 		if(ptank)
 			ptank.loc = T
 			ptank = null
-		PoolOrNew(/obj/item/stack/rods, T)
+		new /obj/item/stack/rods(T)
 		qdel(src)
 		return
 
-	if(isscrewdriver(W) && igniter && !lit)
+	if(W.is_screwdriver() && igniter && !lit)
 		status = !status
-		user << "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>"
+		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
 		update_icon()
 		return
 
@@ -104,7 +102,7 @@
 
 	if(istype(W,/obj/item/weapon/tank/phoron))
 		if(ptank)
-			user << "<span class='notice'>There appears to already be a phoron tank loaded in [src]!</span>"
+			to_chat(user, "<span class='notice'>There appears to already be a phoron tank loaded in [src]!</span>")
 			return
 		user.drop_item()
 		ptank = W
@@ -124,7 +122,7 @@
 	if(user.stat || user.restrained() || user.lying)	return
 	user.set_machine(src)
 	if(!ptank)
-		user << "<span class='notice'>Attach a phoron tank first!</span>"
+		to_chat(user, "<span class='notice'>Attach a phoron tank first!</span>")
 		return
 	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove phorontank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
 	user << browse(dat, "window=flamethrower;size=600x300")
@@ -145,7 +143,7 @@
 		if(!status)	return
 		lit = !lit
 		if(lit)
-			processing_objects.Add(src)
+			START_PROCESSING(SSobj, src)
 	if(href_list["amount"])
 		throw_amount = throw_amount + text2num(href_list["amount"])
 		throw_amount = max(50, min(5000, throw_amount))

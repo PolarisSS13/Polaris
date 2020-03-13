@@ -5,12 +5,11 @@
 	icon_state = "fire_extinguisher0"
 	item_state = "fire_extinguisher"
 	hitsound = 'sound/weapons/smash.ogg'
-	flags = CONDUCT
 	throwforce = 10
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	throw_speed = 2
 	throw_range = 10
-	force = 10.0
+	force = 10
 	matter = list(DEFAULT_WALL_MATERIAL = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 
@@ -28,28 +27,26 @@
 	item_state = "miniFE"
 	hitsound = null	//it is much lighter, after all.
 	throwforce = 2
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	force = 3.0
 	max_water = 150
 	spray_particles = 3
 	sprite_name = "miniFE"
 
-/obj/item/weapon/extinguisher/New()
+/obj/item/weapon/extinguisher/Initialize()
 	create_reagents(max_water)
 	reagents.add_reagent("water", max_water)
-	..()
+	. = ..()
 
 /obj/item/weapon/extinguisher/examine(mob/user)
 	if(..(user, 0))
-		user << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
-	return
+		to_chat(user, text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume))
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
 	safety = !safety
-	src.icon_state = "[sprite_name][!safety]"
-	src.desc = "The safety is [safety ? "on" : "off"]."
-	user << "The safety is [safety ? "on" : "off"]."
-	return
+	icon_state = "[sprite_name][!safety]"
+	desc = "The safety is [safety ? "on" : "off"]."
+	to_chat(user, "The safety is [safety ? "on" : "off"].")
 
 /obj/item/weapon/extinguisher/proc/propel_object(var/obj/O, mob/user, movementdirection)
 	if(O.anchored) return
@@ -75,13 +72,13 @@
 	if( istype(target, /obj/structure/reagent_dispensers/watertank) && flag)
 		var/obj/o = target
 		var/amount = o.reagents.trans_to_obj(src, 50)
-		user << "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>"
+		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 
 	if (!safety)
 		if (src.reagents.total_volume < 1)
-			usr << "<span class='notice'>\The [src] is empty.</span>"
+			to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
 			return
 
 		if (world.time < src.last_use + 20)
@@ -107,7 +104,7 @@
 			spawn(0)
 				if(!src || !reagents.total_volume) return
 
-				var/obj/effect/effect/water/W = PoolOrNew(/obj/effect/effect/water, get_turf(src))
+				var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(src))
 				var/turf/my_target
 				if(a <= the_targets.len)
 					my_target = the_targets[a]

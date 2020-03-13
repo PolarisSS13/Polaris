@@ -5,6 +5,7 @@
 	helptext = "We can shock someone by grabbing them and using this ability, or using the ability with an empty hand and touching them.  \
 	Shocking someone costs ten chemicals per use."
 	enhancedtext = "Shocking biologicals without grabbing only requires five chemicals, and has more disabling power."
+	ability_icon_state = "ling_bioelectrogenesis"
 	genomecost = 2
 	verbpath = /mob/living/carbon/human/proc/changeling_bioelectrogenesis
 
@@ -23,9 +24,8 @@
 
 	if(held_item == null)
 		if(src.mind.changeling.recursive_enhancement)
-			if(changeling_generic_weapon(/obj/item/weapon/electric_hand/efficent))
-				src << "<span class='notice'>We will shock others more efficently.</span>"
-				src.mind.changeling.recursive_enhancement = 0
+			if(changeling_generic_weapon(/obj/item/weapon/electric_hand/efficent,0))
+				to_chat(src, "<span class='notice'>We will shock others more efficently.</span>")
 				return 1
 		else
 			if(changeling_generic_weapon(/obj/item/weapon/electric_hand,0))  //Chemical cost is handled in the equip proc.
@@ -43,18 +43,18 @@
 		if(istype(held_item,/obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = held_item
 			if(G.affecting)
-				G.affecting.electrocute_act(10 * siemens,src,1.0,BP_TORSO)
+				G.affecting.electrocute_act(10 * siemens, src, 1.0, BP_TORSO, 0)
 				var/agony = 80 * siemens //Does more than if hit with an electric hand, since grabbing is slower.
 				G.affecting.stun_effect_act(0, agony, BP_TORSO, src)
 
-				msg_admin_attack("[key_name(src)] shocked [key_name(G.affecting)] with the [src].")
+				add_attack_logs(src,G.affecting,"Changeling shocked")
 
 				if(siemens)
 					visible_message("<span class='warning'>Arcs of electricity strike [G.affecting]!</span>",
 					"<span class='warning'>Our hand channels raw electricity into [G.affecting].</span>",
 					"<span class='italics'>You hear sparks!</span>")
 				else
-					src << "<span class='warning'>Our gloves block us from shocking \the [G.affecting].</span>"
+					to_chat(src, "<span class='warning'>Our gloves block us from shocking \the [G.affecting].</span>")
 				src.mind.changeling.chem_charges -= 10
 				return 1
 
@@ -92,7 +92,7 @@
 						sleep(1 SECOND)
 					success = 1
 			if(success == 0) //If we couldn't do anything with the ability, don't deduct the chemicals.
-				src << "<span class='warning'>We are unable to affect \the [held_item].</span>"
+				to_chat(src, "<span class='warning'>We are unable to affect \the [held_item].</span>")
 			else
 				src.mind.changeling.chem_charges -= 10
 			return success
@@ -102,6 +102,8 @@
 	desc = "You could probably shock someone badly if you touched them, or recharge something."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "electric_hand"
+	show_examine = FALSE
+
 	var/shock_cost = 10
 	var/agony_amount = 60
 	var/electrocute_amount = 10
@@ -141,20 +143,20 @@
 		var/mob/living/carbon/C = target
 
 		if(user.mind.changeling.chem_charges < shock_cost)
-			src << "<span class='warning'>We require more chemicals to electrocute [C]!</span>"
+			to_chat(src, "<span class='warning'>We require more chemicals to electrocute [C]!</span>")
 			return 0
 
 		C.electrocute_act(electrocute_amount * siemens,src,1.0,BP_TORSO)
 		C.stun_effect_act(0, agony_amount * siemens, BP_TORSO, src)
 
-		msg_admin_attack("[key_name(user)] shocked [key_name(C)] with the [src].")
+		add_attack_logs(user,C,"Shocked with [src]")
 
 		if(siemens)
 			visible_message("<span class='warning'>Arcs of electricity strike [C]!</span>",
 			"<span class='warning'>Our hand channels raw electricity into [C]</span>",
 			"<span class='italics'>You hear sparks!</span>")
 		else
-			src << "<span class='warning'>Our gloves block us from shocking \the [C].</span>"
+			to_chat(src, "<span class='warning'>Our gloves block us from shocking \the [C].</span>")
 		//qdel(src)  //Since we're no longer a one hit stun, we need to stick around.
 		user.mind.changeling.chem_charges -= shock_cost
 		return 1
@@ -163,15 +165,15 @@
 		var/mob/living/silicon/S = target
 
 		if(user.mind.changeling.chem_charges < 10)
-			src << "<span class='warning'>We require more chemicals to electrocute [S]!</span>"
+			to_chat(src, "<span class='warning'>We require more chemicals to electrocute [S]!</span>")
 			return 0
 
-		S.electrocute_act(60 * siemens,src,1.0) //If only they had surge protectors.
+		S.electrocute_act(60,src,0.75) //If only they had surge protectors.
 		if(siemens)
 			visible_message("<span class='warning'>Arcs of electricity strike [S]!</span>",
 			"<span class='warning'>Our hand channels raw electricity into [S]</span>",
 			"<span class='italics'>You hear sparks!</span>")
-			S << "<span class='danger'>Warning: Electrical surge detected!</span>"
+			to_chat(S, "<span class='danger'>Warning: Electrical surge detected!</span>")
 		//qdel(src)
 		user.mind.changeling.chem_charges -= 10
 		return 1
@@ -203,7 +205,7 @@
 					success = 1
 					break
 			if(success == 0)
-				src << "<span class='warning'>We are unable to affect \the [target].</span>"
+				to_chat(src, "<span class='warning'>We are unable to affect \the [target].</span>")
 			else
 				qdel(src)
 			return 1

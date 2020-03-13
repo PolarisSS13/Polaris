@@ -8,7 +8,7 @@
 
 	//luminosity = 5
 	//l_color="#0066FF"
-	layer = LIGHTING_LAYER+1
+	plane = PLANE_LIGHTING_ABOVE
 
 	var/spawned=0 // DIR mask
 	var/next_check=0
@@ -16,11 +16,11 @@
 
 /turf/unsimulated/wall/supermatter/New()
 	..()
-	processing_turfs.Add(src)
+	START_PROCESSING(SSturfs, src)
 	next_check = world.time+5 SECONDS
 
 /turf/unsimulated/wall/supermatter/Destroy()
-	processing_turfs.Remove(src)
+	STOP_PROCESSING(SSturfs, src)
 	..()
 
 /turf/unsimulated/wall/supermatter/process()
@@ -29,7 +29,7 @@
 
 	// No more available directions? Shut down process().
 	if(avail_dirs.len==0)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		return 1
 
 	// We're checking, reset the timer.
@@ -57,7 +57,7 @@
 			T.ChangeTurf(type)
 
 	if((spawned & (NORTH|SOUTH|EAST|WEST)) == (NORTH|SOUTH|EAST|WEST))
-		processing_turfs -= src
+		STOP_PROCESSING(SSturfs, src)
 		return
 
 /turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
@@ -67,7 +67,7 @@
 	if(Adjacent(user))
 		return attack_hand(user)
 	else
-		user << "<span class = \"warning\">What the fuck are you doing?</span>"
+		to_chat(user, "<span class='warning'>What the fuck are you doing?</span>")
 	return
 
 // /vg/: Don't let ghosts fuck with this.
@@ -99,7 +99,9 @@
 
 /turf/unsimulated/wall/supermatter/Bumped(atom/AM as mob|obj)
 	if(istype(AM, /mob/living))
-		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
+		var/mob/living/M = AM
+		var/datum/gender/T = gender_datums[M.get_visible_gender()]
+		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... [T.his] body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
 		"<span class=\"warning\">You hear an unearthly noise as a wave of heat washes over you.</span>")
 	else

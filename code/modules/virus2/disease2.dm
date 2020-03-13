@@ -1,7 +1,7 @@
 /datum/disease2/disease
 	var/infectionchance = 70
 	var/speed = 1
-	var/spreadtype = "Contact" // Can also be "Airborne"
+	var/spreadtype = "Blood" // Can also be "Contact" or "Airborne"
 	var/stage = 1
 	var/stageprob = 10
 	var/dead = 0
@@ -10,7 +10,8 @@
 	var/list/datum/disease2/effectholder/effects = list()
 	var/antigen = list() // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
-	var/list/affected_species = list("Human","Unathi","Skrell","Tajara")
+	var/list/affected_species = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_TAJ)
+	var/resistance = 10 // % chance a disease will resist cure, up to 100
 
 /datum/disease2/disease/New()
 	uniqueID = rand(0,10000)
@@ -36,15 +37,19 @@
 	antigen = list(pick(ALL_ANTIGENS))
 	antigen |= pick(ALL_ANTIGENS)
 	spreadtype = prob(70) ? "Airborne" : "Contact"
+	resistance = rand(15,70)
 
-	if(all_species.len)
+	if(severity >= 2 && prob(33))
+		resistance += 10
+
+	if(GLOB.all_species.len)
 		affected_species = get_infectable_species()
 
 /proc/get_infectable_species()
 	var/list/meat = list()
 	var/list/res = list()
-	for (var/specie in all_species)
-		var/datum/species/S = all_species[specie]
+	for (var/specie in GLOB.all_species)
+		var/datum/species/S = GLOB.all_species[specie]
 		if(!S.get_virus_immune())
 			meat += S
 	if(meat.len)
@@ -79,11 +84,17 @@
 		if(prob(1))
 			majormutate()
 
-	//Space antibiotics stop disease completely
-	if(mob.reagents.has_reagent("spaceacillin"))
-		if(stage == 1 && prob(20))
+	//Space antibiotics have a good chance to stop disease completely
+	if(mob.chem_effects[CE_ANTIBIOTIC])
+		if(stage == 1 && prob(70-resistance))
 			src.cure(mob)
-		return
+		else
+			resistance += rand(1,9)
+
+	//Resistance is capped at 90 without being manually set to 100
+	if(resistance > 90 && resistance < 100)
+		resistance = 90
+
 
 	//Virus food speeds up disease progress
 	if(mob.reagents.has_reagent("virusfood"))
@@ -96,7 +107,7 @@
 
 	//Moving to the next stage
 	if(clicks > max(stage*100, 200) && prob(10))
-		if((stage <= max_stage) && prob(20)) // ~60% of viruses will be cured by the end of S4 with this
+		if((stage <= max_stage) && prob(5)) // ~20% of viruses will be cured by the end of S4 with this
 			src.cure(mob)
 			mob.antibodies |= src.antigen
 		stage++
@@ -137,11 +148,15 @@
 		if(D != holder)
 			exclude += D.effect.type
 	holder.majormutate(exclude)
-	if (prob(5))
+	if (prob(5) && prob(100-resistance)) // The more resistant the disease,the lower the chance of randomly developing the antibodies
 		antigen = list(pick(ALL_ANTIGENS))
 		antigen |= pick(ALL_ANTIGENS)
-	if (prob(5) && all_species.len)
+	if (prob(5) && GLOB.all_species.len)
 		affected_species = get_infectable_species()
+	if (prob(10))
+		resistance += rand(1,9)
+		if(resistance > 90 && resistance < 100)
+			resistance = 90
 
 /datum/disease2/disease/proc/getcopy()
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
@@ -150,6 +165,7 @@
 	disease.stageprob = stageprob
 	disease.antigen   = antigen
 	disease.uniqueID = uniqueID
+	disease.resistance = resistance
 	disease.affected_species = affected_species.Copy()
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
@@ -210,6 +226,7 @@ var/global/list/virusDB = list()
 	<u>Antigen:</u> [antigens2string(antigen)]<br>
 	<u>Transmitted By:</u> [spreadtype]<br>
 	<u>Rate of Progression:</u> [stageprob * 10]<br>
+	<u>Antibiotic Resistance</u> [resistance]% <br>
 	<u>Species Affected:</u> [jointext(affected_species, ", ")]<br>
 "}
 
@@ -217,7 +234,7 @@ var/global/list/virusDB = list()
 	for(var/datum/disease2/effectholder/E in effects)
 		r += "([E.stage]) [E.effect.name]    "
 		r += "<small><u>Strength:</u> [E.multiplier >= 3 ? "Severe" : E.multiplier > 1 ? "Above Average" : "Average"]    "
-		r += "<u>Verosity:</u> [E.chance * 15]</small><br>"
+		r += "<u>Aggressiveness:</u> [E.chance * 15]</small><br>"
 
 	return r
 

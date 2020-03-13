@@ -1,3 +1,7 @@
+#define OFF 0
+#define FORWARDS 1
+#define BACKWARDS -1
+
 //conveyor2 is pretty much like the original, except it supports corners, but not diverters.
 //note that corner pieces transfer stuff clockwise when running forward, and anti-clockwise backwards.
 
@@ -6,10 +10,11 @@
 	icon_state = "conveyor0"
 	name = "conveyor belt"
 	desc = "A conveyor belt."
-	layer = 2			// so they appear under stuff
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	anchored = 1
 	circuit = /obj/item/weapon/circuitboard/conveyor
-	var/operating = 0	// 1 if running forward, -1 if backwards, 0 if off
+	var/operating = OFF	// 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1	// true if can operate (no broken segments in this belt run)
 	var/forwards		// this is the default (forward) direction, set by the map dir
 	var/backwards		// hopefully self-explanatory
@@ -22,23 +27,17 @@
 	id = "round_end_belt"
 
 	// create a conveyor
-/obj/machinery/conveyor/New(loc, newdir, on = 0)
-	..(loc)
+/obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
+	. = ..()
 	if(newdir)
 		set_dir(newdir)
 
-	if(dir & (dir-1)) // Diagonal. Forwards is *away* from dir, curving to the right.
-		forwards = turn(dir, 135)
-		backwards = turn(dir, 45)
-	else
-		forwards = dir
-		backwards = turn(dir, 180)
+	update_dir()
 
 	if(on)
-		operating = 1
+		operating = FORWARDS
 		setmove()
 
-	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/gear(src)
 	component_parts += new /obj/item/weapon/stock_parts/motor(src)
@@ -48,22 +47,35 @@
 	RefreshParts()
 
 /obj/machinery/conveyor/proc/setmove()
-	if(operating == 1)
+	if(operating == FORWARDS)
 		movedir = forwards
-	else if(operating == -1)
+	else if(operating == BACKWARDS)
 		movedir = backwards
-	else operating = 0
+	else
+		operating = OFF
 	update()
+
+/obj/machinery/conveyor/set_dir()
+	.=..()
+	update_dir()
+
+/obj/machinery/conveyor/proc/update_dir()
+	if(!(dir in cardinal)) // Diagonal. Forwards is *away* from dir, curving to the right.
+		forwards = turn(dir, 135)
+		backwards = turn(dir, 45)
+	else
+		forwards = dir
+		backwards = turn(dir, 180)
 
 /obj/machinery/conveyor/proc/update()
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
-		operating = 0
+		operating = OFF
 		return
 	if(!operable)
-		operating = 0
+		operating = OFF
 	if(stat & NOPOWER)
-		operating = 0
+		operating = OFF
 	icon_state = "conveyor[operating]"
 
 	// machine process
@@ -100,12 +112,12 @@
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor?", "Multitool-Conveyor interface", id))
 			if(!input)
-				usr << "No input found please hang up and try your call again."
+				to_chat(user, "No input found. Please hang up and try your call again.")
 				return
 			id = input
-			for(var/obj/machinery/conveyor_switch/C in world)
+			for(var/obj/machinery/conveyor_switch/C in machines)
 				if(C.id == id)
-					C.conveyors += src
+					C.conveyors |= src
 			return
 
 	user.drop_item(get_turf(src))
@@ -158,12 +170,6 @@
 	if(C)
 		C.set_operable(stepdir, id, op)
 
-/*
-/obj/machinery/conveyor/verb/destroy()
-	set src in view()
-	src.broken()
-*/
-
 /obj/machinery/conveyor/power_change()
 	..()
 	update()
@@ -189,15 +195,16 @@
 
 
 
-/obj/machinery/conveyor_switch/New()
+/obj/machinery/conveyor_switch/Initialize()
 	..()
 	update()
+	return INITIALIZE_HINT_LATELOAD
 
-	spawn(5)		// allow map load
-		conveyors = list()
-		for(var/obj/machinery/conveyor/C in world)
-			if(C.id == id)
-				conveyors += C
+/obj/machinery/conveyor_switch/LateInitialize()
+	conveyors = list()
+	for(var/obj/machinery/conveyor/C in machines)
+		if(C.id == id)
+			conveyors += C
 
 // update the icon depending on the position
 
@@ -225,7 +232,7 @@
 // attack with hand, switch position
 /obj/machinery/conveyor_switch/attack_hand(mob/user)
 	if(!allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	if(position == 0)
@@ -243,7 +250,7 @@
 	update()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update()
@@ -256,12 +263,12 @@
 		if(panel_open)
 			var/obj/item/weapon/weldingtool/WT = I
 			if(!WT.remove_fuel(0, user))
-				user << "The welding tool must be on to complete this task."
+				to_chat(user, "The welding tool must be on to complete this task.")
 				return
-			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-			if(do_after(user, 20))
+			playsound(src, WT.usesound, 50, 1)
+			if(do_after(user, 20 * WT.toolspeed))
 				if(!src || !WT.isOn()) return
-				user << "<span class='notice'>You deconstruct the frame.</span>"
+				to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 				new /obj/item/stack/material/steel( src.loc, 2 )
 				qdel(src)
 				return
@@ -270,10 +277,11 @@
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor switch?", "Multitool-Conveyor interface", id))
 			if(!input)
-				usr << "No input found please hang up and try your call again."
+				to_chat(user, "No input found. Please hang up and try your call again.")
 				return
 			id = input
-			for(var/obj/machinery/conveyor/C in world)
+			conveyors = list() // Clear list so they aren't double added.
+			for(var/obj/machinery/conveyor/C in machines)
 				if(C.id == id)
 					conveyors += C
 			return
@@ -293,7 +301,7 @@
 	update()
 
 	// find any switches with same id as this one, and set their positions to match us
-	for(var/obj/machinery/conveyor_switch/S in world)
+	for(var/obj/machinery/conveyor_switch/S in machines)
 		if(S.id == src.id)
 			S.position = position
 			S.update()

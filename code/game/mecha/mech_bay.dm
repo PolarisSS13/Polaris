@@ -4,6 +4,7 @@
 	icon = 'icons/mecha/mech_bay.dmi'
 	icon_state = "recharge_floor"
 	density = 0
+	anchored = 1
 	layer = TURF_LAYER + 0.1
 	circuit = /obj/item/weapon/circuitboard/mech_recharger
 
@@ -14,13 +15,11 @@
 /obj/machinery/mech_recharger/New()
 	..()
 	component_parts = list()
-
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
 	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-
 	RefreshParts()
 
 /obj/machinery/mech_recharger/Crossed(var/obj/mecha/M)
@@ -50,25 +49,24 @@
 	..()
 	if(!charging)
 		return
-	if(charging.loc != loc) // Could be qdel or teleport or something
+	if(charging.loc != src.loc) // Could be qdel or teleport or something
 		stop_charging()
 		return
-	var/done = 1
-	if(charging.cell)
+	var/done = FALSE
+	if(charging.cell)	
 		var/t = min(charge, charging.cell.maxcharge - charging.cell.charge)
 		if(t > 0)
 			charging.give_power(t)
 			use_power(t * 150)
-			done = 0
 		else
 			charging.occupant_message("<span class='notice'>Fully charged.</span>")
+			done = TRUE
 	if(repair && charging.health < initial(charging.health))
 		charging.health = min(charging.health + repair, initial(charging.health))
 		if(charging.health == initial(charging.health))
 			charging.occupant_message("<span class='notice'>Fully repaired.</span>")
-
 		else
-			done = 0
+			done = FALSE
 	if(done)
 		stop_charging()
 	return

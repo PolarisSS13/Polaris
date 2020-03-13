@@ -8,7 +8,7 @@
 	item_state = "electronic"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	var/obj/item/weapon/implantcase/case = null
 	var/broadcasting = null
 	var/listening = 1.0
@@ -82,7 +82,7 @@
 			if (href_list["tracking_id"])
 				var/obj/item/weapon/implant/tracking/T = src.case.imp
 				T.id += text2num(href_list["tracking_id"])
-				T.id = min(100, T.id)
+				T.id = min(1000, T.id)
 				T.id = max(1, T.id)
 
 			if (istype(src.loc, /mob))

@@ -7,13 +7,13 @@
 	name = "laundry basket"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "laundry-empty"
-	item_state = "laundry"
+	item_state_slots = list(slot_r_hand_str = "laundry", slot_l_hand_str = "laundry")
 	desc = "The peak of thousands of years of laundry evolution."
 
-	w_class = 5
-	max_w_class = 4
-	max_storage_space = 25 //20 for clothes + a bit of additional space for non-clothing items that were worn on body
-	storage_slots = 14
+	w_class = ITEMSIZE_HUGE
+	max_w_class = ITEMSIZE_LARGE
+	max_storage_space = ITEMSIZE_COST_NORMAL * 8
+	storage_slots = 20
 	use_to_pickup = 1
 	allow_quick_empty = 1
 	allow_quick_gather = 1
@@ -28,17 +28,17 @@
 		if (user.hand)
 			temp = H.get_organ("l_hand")
 		if(!temp)
-			user << "<span class='warning'>You need two hands to pick this up!</span>"
+			to_chat(user, "<span class='warning'>You need two hands to pick this up!</span>")
 			return
 
 	if(user.get_inactive_hand())
-		user << "<span class='warning'>You need your other hand to be empty</span>"
+		to_chat(user, "<span class='warning'>You need your other hand to be empty</span>")
 		return
 	return ..()
 
 /obj/item/weapon/storage/laundry_basket/attack_self(mob/user as mob)
 	var/turf/T = get_turf(user)
-	user << "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>"
+	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
 	return ..()
 
 /obj/item/weapon/storage/laundry_basket/pickup(mob/user)
@@ -65,7 +65,7 @@
 		return ..()
 
 /obj/item/weapon/storage/laundry_basket/dropped(mob/user as mob)
-	qdel(linked)
+	QDEL_NULL(linked)
 	return ..()
 
 /obj/item/weapon/storage/laundry_basket/show_to(mob/user as mob)

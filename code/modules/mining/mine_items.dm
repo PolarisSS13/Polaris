@@ -1,33 +1,3 @@
-/**********************Miner Lockers**************************/
-
-/obj/structure/closet/secure_closet/miner
-	name = "miner's equipment"
-	icon_state = "miningsec1"
-	icon_closed = "miningsec"
-	icon_locked = "miningsec1"
-	icon_opened = "miningsecopen"
-	icon_broken = "miningsecbroken"
-	icon_off = "miningsecoff"
-	req_access = list(access_mining)
-
-/obj/structure/closet/secure_closet/miner/New()
-	..()
-	sleep(2)
-	if(prob(50))
-		new /obj/item/weapon/storage/backpack/industrial(src)
-	else
-		new /obj/item/weapon/storage/backpack/satchel/eng(src)
-	new /obj/item/device/radio/headset/headset_cargo(src)
-	new /obj/item/clothing/under/rank/miner(src)
-	new /obj/item/clothing/gloves/black(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/device/analyzer(src)
-	new /obj/item/weapon/storage/bag/ore(src)
-	new /obj/item/device/flashlight/lantern(src)
-	new /obj/item/weapon/shovel(src)
-	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/material(src)
-
 /******************************Lantern*******************************/
 
 /obj/item/device/flashlight/lantern
@@ -35,6 +5,7 @@
 	icon_state = "lantern"
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on
+	light_color = "FF9933" // A slight yellow/orange color.
 
 /*****************************Pickaxe********************************/
 
@@ -42,13 +13,12 @@
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	icon = 'icons/obj/items.dmi'
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 15.0
 	throwforce = 4.0
 	icon_state = "pickaxe"
 	item_state = "jackhammer"
-	w_class = 4.0
+	w_class = ITEMSIZE_LARGE
 	matter = list(DEFAULT_WALL_MATERIAL = 3750)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
@@ -57,12 +27,8 @@
 	var/drill_verb = "drilling"
 	sharp = 1
 
-	var/excavation_amount = 100
-
-/obj/item/weapon/pickaxe/hammer
-	name = "sledgehammer"
-	//icon_state = "sledgehammer" Waiting on sprite
-	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
+	var/excavation_amount = 200
+	var/destroy_artefacts = FALSE // some mining tools will destroy artefacts completely while avoiding side-effects.
 
 /obj/item/weapon/pickaxe/silver
 	name = "silver pickaxe"
@@ -103,7 +69,7 @@
 	name = "plasma cutter"
 	icon_state = "plasmacutter"
 	item_state = "gun"
-	w_class = 3.0 //it is smaller than the pickaxe
+	w_class = ITEMSIZE_NORMAL //it is smaller than the pickaxe
 	damtype = "fire"
 	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
@@ -132,12 +98,12 @@
 	drill_verb = "drilling"
 
 /obj/item/weapon/pickaxe/borgdrill
-	name = "cyborg mining drill"
-	icon_state = "diamonddrill"
+	name = "enhanced sonic jackhammer"
+	icon_state = "jackhammer"
 	item_state = "jackhammer"
 	digspeed = 15
-	desc = ""
-	drill_verb = "drilling"
+	desc = "Cracks rocks with sonic blasts. This one seems like an improved design."
+	drill_verb = "hammering"
 
 /*****************************Shovel********************************/
 
@@ -146,12 +112,11 @@
 	desc = "A large tool for digging and moving dirt."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "shovel"
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	force = 8.0
 	throwforce = 4.0
 	item_state = "shovel"
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
@@ -165,7 +130,7 @@
 	item_state = "spade"
 	force = 5.0
 	throwforce = 7.0
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 
 
 /**********************Mining car (Crate like thing, not the rail car)**************************/
@@ -236,17 +201,17 @@
 
 	var/turf/T = get_turf(src)
 	if(!T || !istype(T,/turf/simulated/mineral))
-		user << "The flag won't stand up in this terrain."
+		to_chat(user, "The flag won't stand up in this terrain.")
 		return
 
 	if(F && F.upright)
-		user << "There is already a flag here."
+		to_chat(user, "There is already a flag here.")
 		return
 
 	var/obj/item/stack/flag/newflag = new src.type(T)
 	newflag.amount = 1
 	newflag.upright = 1
-	anchored = 1
+	newflag.anchored = 1
 	newflag.name = newflag.singular_name
 	newflag.icon_state = "[newflag.base_state]_open"
 	newflag.visible_message("<b>[user]</b> plants [newflag] firmly in the ground.")

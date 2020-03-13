@@ -1,15 +1,16 @@
 /obj/item/projectile/bullet
 	name = "bullet"
 	icon_state = "bullet"
+	fire_sound = 'sound/weapons/Gunshot4.ogg'
 	damage = 60
 	damage_type = BRUTE
 	nodamage = 0
 	check_armour = "bullet"
-	embed = 1
+	embed_chance = 20	//Modified in the actual embed process, but this should keep embed chance about the same
 	sharp = 1
 	var/mob_passthrough_check = 0
 
-	muzzle_type = /obj/effect/projectile/bullet/muzzle
+	muzzle_type = /obj/effect/projectile/muzzle/bullet
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -61,93 +62,58 @@
 
 	return 0
 
-//For projectiles that actually represent clouds of projectiles
-/obj/item/projectile/bullet/pellet
-	name = "shrapnel" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet'
-	damage = 20
-	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
-	var/pellets = 4			//number of pellets
-	var/range_step = 2		//projectile will lose a fragment each time it travels this distance. Can be a non-integer.
-	var/base_spread = 90	//lower means the pellets spread more across body parts. If zero then this is considered a shrapnel explosion instead of a shrapnel cone
-	var/spread_step = 10	//higher means the pellets spread more across body parts with distance
-
-/obj/item/projectile/bullet/pellet/Bumped()
-	. = ..()
-	bumped = 0 //can hit all mobs in a tile. pellets is decremented inside attack_mob so this should be fine.
-
-/obj/item/projectile/bullet/pellet/proc/get_pellets(var/distance)
-	var/pellet_loss = round((distance - 1)/range_step) //pellets lost due to distance
-	return max(pellets - pellet_loss, 1)
-
-/obj/item/projectile/bullet/pellet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
-	if (pellets < 0) return 1
-
-	var/total_pellets = get_pellets(distance)
-	var/spread = max(base_spread - (spread_step*distance), 0)
-
-	//shrapnel explosions miss prone mobs with a chance that increases with distance
-	var/prone_chance = 0
-	if(!base_spread)
-		prone_chance = max(spread_step*(distance - 2), 0)
-
-	var/hits = 0
-	for (var/i in 1 to total_pellets)
-		if(target_mob.lying && target_mob != original && prob(prone_chance))
-			continue
-
-		//pellet hits spread out across different zones, but 'aim at' the targeted zone with higher probability
-		//whether the pellet actually hits the def_zone or a different zone should still be determined by the parent using get_zone_with_miss_chance().
-		var/old_zone = def_zone
-		def_zone = ran_zone(def_zone, spread)
-		if (..()) hits++
-		def_zone = old_zone //restore the original zone the projectile was aimed at
-
-	pellets -= hits //each hit reduces the number of pellets left
-	if (hits >= total_pellets || pellets <= 0)
-		return 1
-	return 0
-
-/obj/item/projectile/bullet/pellet/get_structure_damage()
-	var/distance = get_dist(loc, starting)
-	return ..() * get_pellets(distance)
-
-/obj/item/projectile/bullet/pellet/Move()
-	. = ..()
-
-	//If this is a shrapnel explosion, allow mobs that are prone to get hit, too
-	if(. && !base_spread && isturf(loc))
-		for(var/mob/living/M in loc)
-			if(M.lying || !M.CanPass(src, loc)) //Bump if lying or if we would normally Bump.
-				if(Bump(M)) //Bump will make sure we don't hit a mob multiple times
-					return
-
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 
-/obj/item/projectile/bullet/pistol
+/obj/item/projectile/bullet/pistol // 9mm pistols and most SMGs. Sacrifice power for capacity.
+	fire_sound = 'sound/weapons/gunshot2.ogg'
 	damage = 20
 
 /obj/item/projectile/bullet/pistol/ap
-	damage = 20
+	damage = 15
 	armor_penetration = 30
 
-/obj/item/projectile/bullet/pistol/medium
+/obj/item/projectile/bullet/pistol/hp
+	damage = 25
+	armor_penetration = -50
+
+/obj/item/projectile/bullet/pistol/medium // .45 (and maybe .40 if it ever gets added) caliber security pistols. Balance between capacity and power.
+	fire_sound = 'sound/weapons/gunshot3.ogg' // Snappier sound.
 	damage = 25
 
-/obj/item/projectile/bullet/pistol/strong //revolvers and matebas
+/obj/item/projectile/bullet/pistol/medium/ap
+	damage = 20
+	armor_penetration = 15
+
+/obj/item/projectile/bullet/pistol/medium/hp
+	damage = 30
+	armor_penetration = -50
+
+/obj/item/projectile/bullet/pistol/strong // .357 and .44 caliber stuff. High power pistols like the Mateba or Desert Eagle. Sacrifice capacity for power.
+	fire_sound = 'sound/weapons/gunshot4.ogg'
 	damage = 60
 
-/obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
+/obj/item/projectile/bullet/pistol/rubber/strong // "Rubber" bullets for high power pistols.
+	fire_sound = 'sound/weapons/gunshot3.ogg' // Rubber shots have less powder, but these still have more punch than normal rubber shot.
+	damage = 10
+	agony = 60
+	embed_chance = 0
+	sharp = 0
+	check_armour = "melee"
+
+/obj/item/projectile/bullet/pistol/rubber // "Rubber" bullets for all other pistols.
 	name = "rubber bullet"
 	damage = 5
 	agony = 40
-	embed = 0
+	embed_chance = 0
 	sharp = 0
 	check_armour = "melee"
+	fire_sound ='sound/weapons/Gunshot_pathetic.ogg' // Rubber shots have less powder in the casing.
 
 /* shotgun projectiles */
 
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
+	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	damage = 50
 	armor_penetration = 15
 
@@ -155,7 +121,7 @@
 	name = "beanbag"
 	damage = 20
 	agony = 60
-	embed = 0
+	embed_chance = 0
 	sharp = 0
 	check_armour = "melee"
 
@@ -163,32 +129,84 @@
 //Overall less damage than slugs in exchange for more damage at very close range and more embedding
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
+	fire_sound = 'sound/weapons/Gunshot_shotgun.ogg'
 	damage = 13
 	pellets = 6
 	range_step = 1
 	spread_step = 10
 
+/obj/item/projectile/bullet/pellet/shotgun/flak
+	damage = 2 //The main weapon using these fires four at a time, usually with different destinations. Usually.
+	range_step = 2
+	spread_step = 30
+	armor_penetration = 10
+
+//EMP shotgun 'slug', it's basically a beanbag that pops a tiny emp when it hits. //Not currently used
+/obj/item/projectile/bullet/shotgun/ion
+	name = "ion slug"
+	fire_sound = 'sound/weapons/Laser.ogg' // Really? We got nothing better than this?
+	damage = 15
+	embed_chance = 0
+	sharp = 0
+	check_armour = "melee"
+
+	combustion = FALSE
+
+/obj/item/projectile/bullet/shotgun/ion/on_hit(var/atom/target, var/blocked = 0)
+	..()
+	empulse(target, 0, 0, 0, 0)	//Only affects what it hits
+	return 1
+
+
 /* "Rifle" rounds */
 
 /obj/item/projectile/bullet/rifle
+	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg'
 	armor_penetration = 15
 	penetrating = 1
 
 /obj/item/projectile/bullet/rifle/a762
-	damage = 25
-
-/obj/item/projectile/bullet/rifle/a762/ap
-	damage = 20
-	armor_penetration = 50 // At 40 or more armor, this will do more damage than standard rounds.
-
-/obj/item/projectile/bullet/rifle/a556
+	fire_sound = 'sound/weapons/Gunshot_heavy.ogg'
 	damage = 35
 
-/obj/item/projectile/bullet/rifle/a556/ap
+/obj/item/projectile/bullet/rifle/a762/sniper // Hitscan specifically for sniper ammo; to be implimented at a later date, probably for the SVD. -Ace
+	fire_sound = 'sound/weapons/Gunshot_sniper.ogg'
+	hitscan = 1 //so the ammo isn't useless as a sniper weapon
+
+/obj/item/projectile/bullet/rifle/a762/ap
 	damage = 30
 	armor_penetration = 50 // At 30 or more armor, this will do more damage than standard rounds.
 
-/obj/item/projectile/bullet/rifle/a145
+/obj/item/projectile/bullet/rifle/a762/hp
+	damage = 40
+	armor_penetration = -50
+	penetrating = 0
+
+/obj/item/projectile/bullet/rifle/a762/hunter // Optimized for killing simple animals and not people, because Balance(tm)
+	damage = 20
+	SA_bonus_damage = 50 // 70 total on animals.
+	SA_vulnerability = SA_ANIMAL
+
+/obj/item/projectile/bullet/rifle/a545
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
+	damage = 25
+
+/obj/item/projectile/bullet/rifle/a545/ap
+	damage = 20
+	armor_penetration = 50 // At 40 or more armor, this will do more damage than standard rounds.
+
+/obj/item/projectile/bullet/rifle/a545/hp
+	damage = 35
+	armor_penetration = -50
+	penetrating = 0
+
+/obj/item/projectile/bullet/rifle/a545/hunter
+	damage = 15
+	SA_bonus_damage = 35 // 50 total on animals.
+	SA_vulnerability = SA_ANIMAL
+
+/obj/item/projectile/bullet/rifle/a145 // 14.5×114mm is bigger than a .50 BMG round.
+	fire_sound = 'sound/weapons/Gunshot_cannon.ogg' // This is literally an anti-tank rifle caliber. It better sound like a fucking cannon.
 	damage = 80
 	stun = 3
 	weaken = 3
@@ -210,41 +228,73 @@
 
 /obj/item/projectile/bullet/burstbullet
 	name = "exploding bullet"
+	fire_sound = 'sound/effects/Explosion1.ogg'
 	damage = 20
-	embed = 0
+	embed_chance = 0
 	edge = 1
 
-/obj/item/projectile/bullet/gyro/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/bullet/burstbullet/on_hit(var/atom/target, var/blocked = 0)
 	if(isturf(target))
 		explosion(target, -1, 0, 2)
 	..()
 
-/obj/item/projectile/bullet/blank
-	invisibility = 101
-	damage = 1
-	embed = 0
+/* Incendiary */
 
-/* Practice */
+/obj/item/projectile/bullet/incendiary
+	name = "incendiary bullet"
+	icon_state = "bullet_alt"
+	damage = 15
+	damage_type = BURN
+	incendiary = 0.5
+	flammability = 2
 
-/obj/item/projectile/bullet/pistol/practice
+/obj/item/projectile/bullet/incendiary/flamethrower
+	name = "ball of fire"
+	desc = "Don't stand in the fire."
+	icon_state = "fireball"
+	damage = 10
+	embed_chance = 0
+	incendiary = 2
+	flammability = 4
+	agony = 30
+	range = 4
+	vacuum_traversal = 0
+
+/obj/item/projectile/bullet/incendiary/flamethrower/large
+	damage = 5
+	incendiary = 3
+	flammability = 2
+	range = 6
+
+/* Practice rounds and blanks */
+
+/obj/item/projectile/bullet/practice
 	damage = 5
 
-/obj/item/projectile/bullet/rifle/practice
-	damage = 5
-	penetrating = 0
-
-/obj/item/projectile/bullet/shotgun/practice
-	name = "practice"
-	damage = 5
-
-/obj/item/projectile/bullet/pistol/cap
+/obj/item/projectile/bullet/pistol/cap // Just the primer, such as a cap gun.
 	name = "cap"
 	damage_type = HALLOSS
+	fire_sound = 'sound/effects/snap.ogg'
 	damage = 0
 	nodamage = 1
-	embed = 0
+	embed_chance = 0
 	sharp = 0
 
+	combustion = FALSE
+
 /obj/item/projectile/bullet/pistol/cap/process()
+	loc = null
+	qdel(src)
+
+/obj/item/projectile/bullet/blank
+	name = "blank"
+	damage_type = HALLOSS
+	fire_sound = 'sound/weapons/Gunshot_generic_rifle.ogg' // Blanks still make loud noises.
+	damage = 0
+	nodamage = 1
+	embed_chance = 0
+	sharp = 0
+
+/obj/item/projectile/bullet/blank/cap/process()
 	loc = null
 	qdel(src)

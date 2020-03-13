@@ -33,11 +33,13 @@
 
 /obj/machinery/cash_register/examine(mob/user as mob)
 	..(user)
+	if(transaction_amount)
+		to_chat(user, "It has a purchase of [transaction_amount] pending[transaction_purpose ? " for [transaction_purpose]" : ""].")
 	if(cash_open)
 		if(cash_stored)
-			user << "It holds [cash_stored] Thaler\s of money."
+			to_chat(user, "It holds [cash_stored] Thaler\s of money.")
 		else
-			user << "It's completely empty."
+			to_chat(user, "It's completely empty.")
 
 
 /obj/machinery/cash_register/attack_hand(mob/user as mob)
@@ -101,7 +103,7 @@
 				if(allowed(usr))
 					locked = !locked
 				else
-					usr << "\icon[src]<span class='warning'>Insufficient access.</span>"
+					to_chat(usr, "\icon[src]<span class='warning'>Insufficient access.</span>")
 			if("toggle_cash_lock")
 				cash_locked = !cash_locked
 			if("link_account")
@@ -113,7 +115,7 @@
 						linked_account = null
 						src.visible_message("\icon[src]<span class='warning'>Account has been suspended.</span>")
 				else
-					usr << "\icon[src]<span class='warning'>Account not found.</span>"
+					to_chat(usr, "\icon[src]<span class='warning'>Account not found.</span>")
 			if("custom_order")
 				var/t_purpose = sanitize(input("Enter purpose", "New purpose") as text)
 				if (!t_purpose || !Adjacent(usr)) return
@@ -128,7 +130,7 @@
 			if("set_amount")
 				var/item_name = locate(href_list["item"])
 				var/n_amount = round(input("Enter amount", "New amount") as num)
-				n_amount = Clamp(n_amount, 0, 20)
+				n_amount = CLAMP(n_amount, 0, 20)
 				if (!item_list[item_name] || !Adjacent(usr)) return
 				transaction_amount += (n_amount - item_list[item_name]) * price_list[item_name]
 				if(!n_amount)
@@ -161,12 +163,12 @@
 					price_list.Cut()
 			if("reset_log")
 				transaction_logs.Cut()
-				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
+				to_chat(usr, "\icon[src]<span class='notice'>Transaction log reset.</span>")
 	updateDialog()
 
 
 
-/obj/machinery/cash_register/attackby(obj/O as obj, user as mob)
+/obj/machinery/cash_register/attackby(obj/item/O as obj, user as mob)
 	// Check for a method of paying (ID, PDA, e-wallet, cash, ect.)
 	var/obj/item/weapon/card/id/I = O.GetID()
 	if(I)
@@ -177,7 +179,7 @@
 	else if (istype(O, /obj/item/weapon/spacecash))
 		var/obj/item/weapon/spacecash/SC = O
 		if(cash_open)
-			user << "You neatly sort the cash into the box."
+			to_chat(user, "You neatly sort the cash into the box.")
 			cash_stored += SC.worth
 			overlays |= "register_cash"
 			if(ishuman(user))
@@ -188,8 +190,8 @@
 			scan_cash(SC)
 	else if(istype(O, /obj/item/weapon/card/emag))
 		return ..()
-	else if(istype(O, /obj/item/weapon/wrench))
-		var/obj/item/weapon/wrench/W = O
+	else if(O.is_wrench())
+		var/obj/item/weapon/tool/wrench/W = O
 		toggle_anchors(W, user)
 	// Not paying: Look up price and add it to transaction_amount
 	else
@@ -217,7 +219,7 @@
 
 	if (cash_open)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
-		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		to_chat(usr, "\icon[src]<span class='warning'>The cash box is open.</span>")
 		return
 
 	if((item_list.len > 1 || item_list[item_list[1]] > 1) && !confirm(I))
@@ -256,7 +258,7 @@
 					T.amount = "([transaction_amount])"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					D.transaction_log.Add(T)
 
 					// Create log entry in owner's account
@@ -266,7 +268,7 @@
 					T.amount = "[transaction_amount]"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					linked_account.transaction_log.Add(T)
 
 					// Save log
@@ -282,7 +284,7 @@
 
 	if (cash_open)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
-		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		to_chat(usr, "\icon[src]<span class='warning'>The cash box is open.</span>")
 		return
 
 	if((item_list.len > 1 || item_list[item_list[1]] > 1) && !confirm(E))
@@ -304,7 +306,7 @@
 			T.amount = "[transaction_amount]"
 			T.source_terminal = machine_id
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			linked_account.transaction_log.Add(T)
 
 			// Save log
@@ -320,7 +322,7 @@
 
 	if (cash_open)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
-		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		to_chat(usr, "\icon[src]<span class='warning'>The cash box is open.</span>")
 		return
 
 	if((item_list.len > 1 || item_list[item_list[1]] > 1) && !confirm(SC))
@@ -353,7 +355,7 @@
 		return
 	if (cash_open)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 25)
-		usr << "\icon[src]<span class='warning'>The cash box is open.</span>"
+		to_chat(usr, "\icon[src]<span class='warning'>The cash box is open.</span>")
 		return
 
 	// First check if item has a valid price
@@ -414,7 +416,7 @@
 	<tr></tr>
 	<tr><td class="tx-name">Customer</td><td class="tx-data">[c_name]</td></tr>
 	<tr><td class="tx-name">Pay Method</td><td class="tx-data">[p_method]</td></tr>
-	<tr><td class="tx-name">Station Time</td><td class="tx-data">[worldtime2text()]</td></tr>
+	<tr><td class="tx-name">Station Time</td><td class="tx-data">[stationtime2text()]</td></tr>
 	</table>
 	<table width=300>
 	"}
@@ -476,10 +478,10 @@
 		if(cash_stored)
 			overlays += "register_cash"
 	else
-		usr << "<span class='warning'>The cash box is locked.</span>"
+		to_chat(usr, "<span class='warning'>The cash box is locked.</span>")
 
 
-/obj/machinery/cash_register/proc/toggle_anchors(obj/item/weapon/wrench/W, mob/user)
+/obj/machinery/cash_register/proc/toggle_anchors(obj/item/weapon/tool/wrench/W, mob/user)
 	if(manipulating) return
 	manipulating = 1
 	if(!anchored)
@@ -488,8 +490,8 @@
 	else
 		user.visible_message("<span class='warning'>\The [user] begins unsecuring \the [src] from the floor.</span>",
 	                         "You begin unsecuring \the [src] from the floor.")
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	if(!do_after(user, 20))
+	playsound(src, W.usesound, 50, 1)
+	if(!do_after(user, 20 * W.toolspeed))
 		manipulating = 0
 		return
 	if(!anchored)
@@ -519,28 +521,21 @@
 
 /obj/machinery/cash_register/command
 	account_to_connect = "Command"
-	..()
 
 /obj/machinery/cash_register/medical
 	account_to_connect = "Medical"
-	..()
 
 /obj/machinery/cash_register/engineering
 	account_to_connect = "Engineering"
-	..()
 
 /obj/machinery/cash_register/science
 	account_to_connect = "Science"
-	..()
 
 /obj/machinery/cash_register/security
 	account_to_connect = "Security"
-	..()
 
 /obj/machinery/cash_register/cargo
 	account_to_connect = "Cargo"
-	..()
 
 /obj/machinery/cash_register/civilian
 	account_to_connect = "Civilian"
-	..()

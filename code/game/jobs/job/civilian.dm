@@ -1,278 +1,274 @@
 //Food
+
+//////////////////////////////////
+//			Bartender
+//////////////////////////////////
+
 /datum/job/bartender
 	title = "Bartender"
 	flag = BARTENDER
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
-	alt_titles = list("Barista")
 
+	outfit_type = /decl/hierarchy/outfit/job/service/bartender
+	job_description = "A Bartender mixes drinks for the crew. They generally have permission to charge for drinks or deny service to unruly patrons."
+	alt_titles = list("Bartender" = /datum/alt_title/bartender, "Barista" = /datum/alt_title/barista)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/bartender(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/bar(H), slot_belt)
-		return 1
+// Bartender Alt Titles
+/datum/alt_title/bartender
+	title = "Bartender"
 
+/datum/alt_title/barista
+	title = "Barista"
+	title_blurb = "A barista mans the Cafe, serving primarily non-alcoholic drinks to the crew. They generally have permission to charge for drinks \
+					or deny service to unruly patrons."
+	title_outfit = /decl/hierarchy/outfit/job/service/bartender/barista
 
+//////////////////////////////////
+//			   Chef
+//////////////////////////////////
 
 /datum/job/chef
 	title = "Chef"
 	flag = CHEF
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
-	alt_titles = list("Cook")
 
+	outfit_type = /decl/hierarchy/outfit/job/service/chef
+	job_description = "A Chef cooks food for the crew. They generally have permission to charge for food or deny service to unruly diners."
+	alt_titles = list("Chef" = /datum/alt_title/chef, "Cook" = /datum/alt_title/cook)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chef(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/chef(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/chefhat(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/chef(H), slot_belt)
-		return 1
+// Chef Alt Titles
+/datum/alt_title/chef
+	title = "Chef"
 
+/datum/alt_title/cook
+	title = "Cook"
+	title_blurb = "A Cook has the same duties, though they may be less experienced."
 
+//////////////////////////////////
+//			Botanist
+//////////////////////////////////
 
 /datum/job/hydro
-	title = "Gardener"
+	title = "Botanist"
 	flag = BOTANIST
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
-	alt_titles = list("Hydroponicist")
 
+	outfit_type = /decl/hierarchy/outfit/job/service/gardener
+	job_description = "A Botanist grows plants for the Chef and Bartender."
+	alt_titles = list("Botanist" = /datum/alt_title/botanist, "Gardener" = /datum/alt_title/gardener)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/botanic_leather(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/device/analyzer/plant_analyzer(H), slot_s_store)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_belt)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/hydroponics(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/hyd(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		return 1
+//Botanist Alt Titles
+/datum/alt_title/botanist
+	title = "Botanist"
 
-
+/datum/alt_title/gardener
+	title = "Gardener"
+	title_blurb = "A Gardener may be less professional than their counterparts, and are more likely to tend to the public gardens if they aren't needed elsewhere."
 
 //Cargo
+//////////////////////////////////
+//			Quartermaster
+//////////////////////////////////
 /datum/job/qm
 	title = "Quartermaster"
 	flag = QUARTERMASTER
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
+	sorting_order = 1 // QM is above the cargo techs, but below the HoP.
+	departments_managed = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/cargo/head
+	supervisors = "the Head of Personnel"
+	selection_color = "#7a4f33"
 	economic_modifier = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 
 	ideal_character_age = 40
 
+	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
+	job_description = "The Quartermaster manages the Supply department, checking cargo orders and ensuring supplies get to where they are needed."
+	alt_titles = list("Quartermaster" = /datum/alt_title/qm, "Supply Chief" = /datum/alt_title/supply_chief)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargo(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/quartermaster(H), slot_belt)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(H), slot_glasses)
-		H.equip_to_slot_or_del(new /obj/item/weapon/clipboard(H), slot_l_hand)
-		return 1
+// Quartermaster Alt Titles
+/datum/alt_title/qm
+	title = "Quartermaster"
 
+/datum/alt_title/supply_chief
+	title = "Supply Chief"
 
-
+//////////////////////////////////
+//			Cargo Tech
+//////////////////////////////////
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/cargo
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	supervisors = "the Quartermaster and the Head of Personnel"
+	selection_color = "#9b633e"
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 
+	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
+	job_description = "A Cargo Technician fills and delivers cargo orders. They are encouraged to return delivered crates to the Cargo Shuttle, \
+						because Central Command gives a partial refund."
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargotech(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/cargo(H), slot_belt)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		return 1
+// Cargo Tech Alt Titles
+/datum/alt_title/cargo_tech
+	title = "Cargo Tech"
 
-
+//////////////////////////////////
+//			Shaft Miner
+//////////////////////////////////
 
 /datum/job/mining
 	title = "Shaft Miner"
 	flag = MINER
-	department = "Cargo"
+	departments = list(DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/cargo
+	supervisors = "the Quartermaster and the Head of Personnel"
+	selection_color = "#9b633e"
 	economic_modifier = 5
-	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
-	alt_titles = list("Drill Technician","Prospector")
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo (H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/eng(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/miner(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/shaftminer(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/crowbar(H), slot_l_hand)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/bag/ore(H), slot_l_store)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/crowbar(H), slot_in_backpack)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/bag/ore(H), slot_in_backpack)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
+	job_description = "A Shaft Miner mines and processes minerals to be delivered to departments that need them."
+	alt_titles = list("Shaft Miner" = /datum/alt_title/miner, "Drill Technician" = /datum/alt_title/drill_tech)
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
+// Shaft Miner Alt Titles
+/datum/alt_title/miner
+	title = "Shaft Miner"
 
+/datum/alt_title/drill_tech
+	title = "Drill Technician"
+	title_blurb = "A Drill Technician specializes in operating and maintaining the machinery needed to extract ore from veins deep below the surface."
+
+//Service
+//////////////////////////////////
+//			Janitor
+//////////////////////////////////
 /datum/job/janitor
 	title = "Janitor"
 	flag = JANITOR
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
-	alt_titles = list("Custodian")
 
+	outfit_type = /decl/hierarchy/outfit/job/service/janitor
+	job_description = "A Janitor keeps the station clean, as long as it doesn't interfere with active crime scenes."
+	alt_titles = list("Janitor" = /datum/alt_title/janitor, "Custodian" = /datum/alt_title/custodian)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/janitor(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/janitor(H), slot_belt)
-		return 1
+// Janitor Alt Titles
+/datum/alt_title/janitor
+	title = "Janitor"
 
-
+/datum/alt_title/custodian
+	title = "Custodian"
 
 //More or less assistants
+//////////////////////////////////
+//			Librarian
+//////////////////////////////////
 /datum/job/librarian
 	title = "Librarian"
 	flag = LIBRARIAN
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
-	alt_titles = list("Journalist")
 
+	outfit_type = /decl/hierarchy/outfit/job/librarian
+	job_description = "The Librarian curates the book selection in the Library, so the crew might enjoy it."
+	alt_titles = list("Librarian" = /datum/alt_title/librarian, "Journalist" = /datum/alt_title/journalist, "Writer" = /datum/alt_title/writer)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/red(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/librarian(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/barcodescanner(H), slot_l_hand)
-		return 1
+// Librarian Alt Titles
+/datum/alt_title/librarian
+	title = "Librarian"
 
+/datum/alt_title/journalist
+	title = "Journalist"
+	title_blurb = "The Journalist uses the Library as a base of operations, from which they can report the news and goings-on on the station with their camera."
 
+/datum/alt_title/writer
+	title = "Writer"
+	title_blurb = "The Writer uses the Library as a quiet place to write whatever it is they choose to write."
+
+//////////////////////////////////
+//		Internal Affairs Agent
+//////////////////////////////////
 
 //var/global/lawyer = 0//Checks for another lawyer //This changed clothes on 2nd lawyer, both IA get the same dreds.
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
 	flag = LAWYER
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
 	selection_color = "#515151"
-	idtype = /obj/item/weapon/card/id/civilian
 	economic_modifier = 7
 	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	minimal_player_age = 7
 
+	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
+	job_description = "An Internal Affairs Agent makes sure that the crew is following Standard Operating Procedure. They also \
+						handle complaints against crew members, and can have issues brought to the attention of Central Command, \
+						assuming their paperwork is in order."
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/ia(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/internalaffairs(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/internalaffairs(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(H), slot_glasses)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/lawyer(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase(H), slot_l_hand)
+/*
+/datum/job/lawyer/equip(var/mob/living/carbon/human/H)
+	. = ..()
+	if(.)
+		H.implant_loyalty(H)
+*/
 
-		H.implant_loyalty()
-
-
-		return 1
+// IAA Alt Titles
+/datum/alt_title/iaa
+	title = "Internal Affairs Agent"

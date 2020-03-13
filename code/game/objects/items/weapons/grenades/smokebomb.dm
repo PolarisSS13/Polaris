@@ -12,7 +12,7 @@
 
 /obj/item/weapon/grenade/smokebomb/New()
 	..()
-	src.smoke = PoolOrNew(/datum/effect/effect/system/smoke_spread/bad)
+	src.smoke = new /datum/effect/effect/system/smoke_spread/bad()
 	src.smoke.attach(src)
 
 /obj/item/weapon/grenade/smokebomb/Destroy()
@@ -20,7 +20,7 @@
 	smoke = null
 	return ..()
 
-/obj/item/weapon/grenade/smokebomb/prime()
+/obj/item/weapon/grenade/smokebomb/detonate()
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 	src.smoke.set_up(10, 0, usr.loc)
 	spawn(0)

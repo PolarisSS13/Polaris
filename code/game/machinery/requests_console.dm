@@ -23,11 +23,13 @@ var/req_console_information = list()
 var/list/obj/machinery/requests_console/allConsoles = list()
 
 /obj/machinery/requests_console
-	name = "Requests Console"
+	name = "requests console"
 	desc = "A console intended to send requests to different departments on the station."
 	anchored = 1
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	circuit = /obj/item/weapon/circuitboard/request
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/message_log = list() //List of all messages
@@ -72,13 +74,13 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	announcement.title = "[department] announcement"
 	announcement.newscast = 1
 
-	name = "[department] Requests Console"
+	name = "[department] requests console"
 	allConsoles += src
-	if (departmentType & RC_ASSIST)
+	if(departmentType & RC_ASSIST)
 		req_console_assistance |= department
-	if (departmentType & RC_SUPPLY)
+	if(departmentType & RC_SUPPLY)
 		req_console_supplies |= department
-	if (departmentType & RC_INFO)
+	if(departmentType & RC_INFO)
 		req_console_information |= department
 
 	set_light(1)
@@ -87,17 +89,17 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	allConsoles -= src
 	var/lastDeptRC = 1
 	for (var/obj/machinery/requests_console/Console in allConsoles)
-		if (Console.department == department)
+		if(Console.department == department)
 			lastDeptRC = 0
 			break
 	if(lastDeptRC)
-		if (departmentType & RC_ASSIST)
+		if(departmentType & RC_ASSIST)
 			req_console_assistance -= department
-		if (departmentType & RC_SUPPLY)
+		if(departmentType & RC_SUPPLY)
 			req_console_supplies -= department
-		if (departmentType & RC_INFO)
+		if(departmentType & RC_INFO)
 			req_console_information -= department
-	..()
+	return ..()
 
 /obj/machinery/requests_console/attack_hand(user as mob)
 	if(..(user))
@@ -125,8 +127,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	data["msgVerified"] = msgVerified
 	data["announceAuth"] = announceAuth
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
 		ui = new(user, src, ui_key, "request_console.tmpl", "[department] Request Console", 520, 410)
 		ui.set_initial_data(data)
 		ui.open()
@@ -162,11 +164,11 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		announcement.Announce(message, msg_sanitized = 1)
 		reset_message(1)
 
-	if( href_list["department"] && message )
+	if(href_list["department"] && message)
 		var/log_msg = message
 		var/pass = 0
 		screen = RCS_SENTFAIL
-		for (var/obj/machinery/message_server/MS in world)
+		for (var/obj/machinery/message_server/MS in machines)
 			if(!MS.active) continue
 			MS.send_rc_message(ckey(href_list["department"]),department,log_msg,msgStamped,msgVerified,priority)
 			pass = 1
@@ -183,7 +185,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			return
 		if(tempScreen == RCS_VIEWMSGS)
 			for (var/obj/machinery/requests_console/Console in allConsoles)
-				if (Console.department == department)
+				if(Console.department == department)
 					Console.newmessagepriority = 0
 					Console.icon_state = "req_comp0"
 					Console.set_light(1)
@@ -198,33 +200,30 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	updateUsrDialog()
 	return
 
-					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messanging on that console (EXTREME priority...), but the code for that was removed.
+					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messaging on that console (EXTREME priority...), but the code for that was removed.
 /obj/machinery/requests_console/attackby(var/obj/item/weapon/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
+	if(computer_deconstruction_screwdriver(user, O))
 		return
 	if(istype(O, /obj/item/device/multitool))
-		if(panel_open)
-			var/input = sanitize(input(usr, "What Department id would you like to give this Request Console?", "Multitool-Request Console interface", department))
-			if(!input)
-				usr << "No input found please hang up and try your call again."
-				return
-			department = input
-			announcement.title = "[department] announcement"
-			announcement.newscast = 1
-
-			name = "[department] Requests Console"
-			allConsoles += src
-			if (departmentType & RC_ASSIST)
-				req_console_assistance |= department
-			if (departmentType & RC_SUPPLY)
-				req_console_supplies |= department
-			if (departmentType & RC_INFO)
-				req_console_information |= department
+		var/input = sanitize(input(usr, "What Department ID would you like to give this request console?", "Multitool-Request Console Interface", department))
+		if(!input)
+			to_chat(usr, "No input found. Please hang up and try your call again.")
 			return
+		department = input
+		announcement.title = "[department] announcement"
+		announcement.newscast = 1
 
-	if (istype(O, /obj/item/weapon/card/id))
+		name = "[department] Requests Console"
+		allConsoles += src
+		if(departmentType & RC_ASSIST)
+			req_console_assistance |= department
+		if(departmentType & RC_SUPPLY)
+			req_console_supplies |= department
+		if(departmentType & RC_INFO)
+			req_console_information |= department
+		return
+
+	if(istype(O, /obj/item/weapon/card/id))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/weapon/card/id/T = O
@@ -232,14 +231,14 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			updateUsrDialog()
 		if(screen == RCS_ANNOUNCE)
 			var/obj/item/weapon/card/id/ID = O
-			if (access_RC_announce in ID.GetAccess())
+			if(access_RC_announce in ID.GetAccess())
 				announceAuth = 1
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
 				reset_message()
-				user << "<span class='warning'>You are not authorized to send announcements.</span>"
+				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
 			updateUsrDialog()
-	if (istype(O, /obj/item/weapon/stamp))
+	if(istype(O, /obj/item/weapon/stamp))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/weapon/stamp/T = O

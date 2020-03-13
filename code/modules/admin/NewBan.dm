@@ -23,7 +23,7 @@ var/savefile/Banlist
 				.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: [GetExp(Banlist["minutes"])]\nBy: [Banlist["bannedby"]][appeal]"
 		else
 			Banlist.cd	= "/base/[ckey][id]"
-			.["desc"]	= "\nReason: [Banlist["reason"]]\nExpires: <B>PERMENANT</B>\nBy: [Banlist["bannedby"]][appeal]"
+			.["desc"]	= "\nReason: [Banlist["reason"]]\nExpires: <B>PERMANENT</B>\nBy: [Banlist["bannedby"]][appeal]"
 		.["reason"]	= "ckey/id"
 		return .
 	else
@@ -49,7 +49,7 @@ var/savefile/Banlist
 					else
 						.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: [GetExp(Banlist["minutes"])]\nBy: [Banlist["bannedby"]][appeal]"
 				else
-					.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: <B>PERMENANT</B>\nBy: [Banlist["bannedby"]][appeal]"
+					.["desc"] = "\nReason: [Banlist["reason"]]\nExpires: <B>PERMANENT</B>\nBy: [Banlist["bannedby"]][appeal]"
 				.["reason"] = matches
 				return .
 	return 0
@@ -106,7 +106,7 @@ var/savefile/Banlist
 
 	Banlist.cd = "/base"
 	if ( Banlist.dir.Find("[ckey][computerid]") )
-		usr << text("\red Ban already exists.")
+		to_chat(usr, "<font color='red'>Ban already exists.</font>")
 		return 0
 	else
 		Banlist.dir.Add("[ckey][computerid]")
@@ -168,7 +168,7 @@ var/savefile/Banlist
 /datum/admins/proc/unbanpanel()
 	var/count = 0
 	var/dat
-	//var/dat = "<HR><B>Unban Player:</B> \blue(U) = Unban , (E) = Edit Ban\green (Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >"
+	//var/dat = "<HR><B>Unban Player:</B> <font color='blue'>(U) = Unban</font> , (E) = Edit Ban <font color='green'>(Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 ></font>"
 	Banlist.cd = "/base"
 	for (var/A in Banlist.dir)
 		count++
@@ -207,17 +207,17 @@ var/savefile/Banlist
 			Banlist.cd = "/base"
 			Banlist.dir.Add("trash[i]trashid[i]")
 			Banlist.cd = "/base/trash[i]trashid[i]"
-			Banlist["key"] << "trash[i]"
+			to_chat(Banlist["key"], "trash[i]")
 		else
 			Banlist.cd = "/base"
 			Banlist.dir.Add("[last]trashid[i]")
 			Banlist.cd = "/base/[last]trashid[i]"
 			Banlist["key"] << last
-		Banlist["id"] << "trashid[i]"
-		Banlist["reason"] << "Trashban[i]."
+		to_chat(Banlist["id"], "trashid[i]")
+		to_chat(Banlist["reason"], "Trashban[i].")
 		Banlist["temp"] << a
 		Banlist["minutes"] << CMinutes + rand(1,2000)
-		Banlist["bannedby"] << "trashmin"
+		to_chat(Banlist["bannedby"], "trashmin")
 		last = "trash[i]"
 
 	Banlist.cd = "/base"

@@ -1,7 +1,6 @@
 /obj/machinery/exonet_node
 	name = "exonet node"
-	desc = "This machine is one of many, many nodes inside "+starsys_name+"'s section of the Exonet, connecting the "+station_orig+" to the rest of the system, at least \
-	electronically."
+	desc = null // Gets written in New()
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "exonet_node"
 	idle_power_usage = 2500
@@ -15,6 +14,10 @@
 
 	var/opened = 0
 
+	var/list/logs = list() // Gets written to by exonet's send_message() function.
+
+//TFF 3/6/19 - Port Cit RP fix for infinite frames
+	circuit = /obj/item/weapon/circuitboard/telecomms/exonet_node
 // Proc: New()
 // Parameters: None
 // Description: Adds components to the machine for deconstruction.
@@ -22,9 +25,8 @@
 	..()
 
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/telecomms/exonet_node(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
@@ -33,6 +35,9 @@
 	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
 	RefreshParts()
+
+	desc = "This machine is one of many, many nodes inside [using_map.starsys_name]'s section of the Exonet, connecting the [using_map.station_short] to the rest of the system, at least \
+	electronically."
 
 // Proc: update_icon()
 // Parameters: None
@@ -60,6 +65,7 @@
 	else
 		on = 0
 		idle_power_usage = 0
+	update_icon()
 
 // Proc: emp_act()
 // Parameters: 1 (severity - how strong the EMP is, with lower numbers being stronger)
@@ -83,9 +89,9 @@
 // Parameters: 2 (I - the item being whacked against the machine, user - the person doing the whacking)
 // Description: Handles deconstruction.
 /obj/machinery/exonet_node/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(I.is_screwdriver())
 		default_deconstruction_screwdriver(user, I)
-	else if(istype(I, /obj/item/weapon/crowbar))
+	else if(I.is_crowbar())
 		default_deconstruction_crowbar(user, I)
 	else
 		..()
@@ -114,10 +120,11 @@
 	data["allowPDAs"] = allow_external_PDAs
 	data["allowCommunicators"] = allow_external_communicators
 	data["allowNewscasters"] = allow_external_newscasters
+	data["logs"] = logs
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -161,7 +168,7 @@
 			log_game(msg)
 
 	update_icon()
-	nanomanager.update_uis(src)
+	SSnanoui.update_uis(src)
 	add_fingerprint(usr)
 
 // Proc: get_exonet_node()
@@ -171,3 +178,14 @@
 	for(var/obj/machinery/exonet_node/E in machines)
 		if(E.on)
 			return E
+
+// Proc: write_log()
+// Parameters: 4 (origin_address - Where the message is from, target_address - Where the message is going, data_type - Instructions on how to interpet content,
+// 		content - The actual message.
+// Description: This writes to the logs list, so that people can see what people are doing on the Exonet ingame.  Note that this is not an admin logging function.
+// 		Communicators are already logged seperately.
+/obj/machinery/exonet_node/proc/write_log(var/origin_address, var/target_address, var/data_type, var/content)
+	//var/timestamp = time2text(station_time_in_ticks, "hh:mm:ss")
+	var/timestamp = "[stationdate2text()] [stationtime2text()]"
+	var/msg = "[timestamp] | FROM [origin_address] TO [target_address] | TYPE: [data_type] | CONTENT: [content]"
+	logs.Add(msg)

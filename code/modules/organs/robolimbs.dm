@@ -4,7 +4,7 @@ var/list/chargen_robolimbs = list()
 var/datum/robolimb/basic_robolimb
 var/const/standard_monitor_styles = "blank=ipc_blank;\
 	pink=ipc_pink;\
-	green=ipc_green,\
+	green=ipc_green;\
 	red=ipc_red;\
 	blue=ipc_blue;\
 	shower=ipc_shower;\
@@ -21,7 +21,9 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	scroll=ipc_scroll;\
 	console=ipc_console;\
 	glider=ipc_gol_glider;\
-	rainbow=ipc_rainbow"
+	rainbow=ipc_rainbow;\
+	smiley=ipc_smiley;\
+	database=ipc_database"
 
 /proc/populate_robolimb_list()
 	basic_robolimb = new()
@@ -38,10 +40,42 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	var/unavailable_at_chargen                           // If set, not available at chargen.
 	var/unavailable_to_build							 // If set, can't be constructed.
 	var/lifelike										 // If set, appears organic.
+	var/skin_tone										 // If set, applies skin tone rather than part color
 	var/blood_color = "#030303"
-	var/list/species_cannot_use = list("Teshari")
+	var/list/species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA)
 	var/list/monitor_styles			 		 			 //If empty, the model of limbs offers a head compatible with monitors.
 	var/parts = BP_ALL						 			 //Defines what parts said brand can replace on a body.
+	var/health_hud_intensity = 1						 // Intensity modifier for the health GUI indicator.
+	var/suggested_species = "Human"						 //If it should make the torso a species
+	var/speech_bubble_appearance = "synthetic"			 // What icon_state to use for speech bubbles when talking.  Check talk.dmi for all the icons.
+
+	var/robo_brute_mod = 1								 // Multiplier for incoming brute damage.
+	var/robo_burn_mod = 1								 // As above for burn.
+
+/datum/robolimb/unbranded_monitor
+	company = "Unbranded Monitor"
+	desc = "A generic unbranded interpretation of a popular prosthetic head model. It looks rudimentary and cheaply constructed."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_monitor.dmi'
+	parts = list(BP_HEAD)
+	monitor_styles = standard_monitor_styles
+	unavailable_to_build = 1
+
+/datum/robolimb/unbranded_alt1
+	company = "Unbranded - Protez"
+	desc = "A simple robotic limb with retro design. Seems rather stiff."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_alt1.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/unbranded_alt2
+	company = "Unbranded - Mantis Prosis"
+	desc = "This limb has a casing of sleek black metal and repulsive insectile design."
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_alt2.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/nanotrasen
+	company = "NanoTrasen"
+	desc = "A simple but efficient robotic limb, created by NanoTrasen."
+	icon = 'icons/mob/human_races/cyberlimbs/nanotrasen/nanotrasen_main.dmi'
 
 /datum/robolimb/bishop
 	company = "Bishop"
@@ -56,6 +90,12 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/bishop_alt2
+	company = "Bishop - Rook"
+	desc = "This limb has a solid plastic casing with blue lights along it."
+	icon = 'icons/mob/human_races/cyberlimbs/bishop/bishop_alt2.dmi'
+	unavailable_to_build = 1
+
 /datum/robolimb/bishop_monitor
 	company = "Bishop Monitor"
 	desc = "Bishop Cybernetics' unique spin on a popular prosthetic head model. The themes conflict in an intriguing way."
@@ -64,30 +104,94 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
 
-/datum/robolimb/hesphiastos
-	company = "Hesphiastos"
-	desc = "This limb has a militaristic black and green casing with gold stripes."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_main.dmi'
+/datum/robolimb/cybersolutions
+	company = "Cyber Solutions"
+	desc = "This limb is grey and rough, with little in the way of aesthetic."
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_main.dmi'
 	unavailable_to_build = 1
 
-/datum/robolimb/hesphiastos_alt1
-	company = "Hesphiastos - Frontier"
-	desc = "A rugged prosthetic head featuring the standard Hesphiastos theme, a visor and an external display."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_alt1.dmi'
+/datum/robolimb/cybersolutions_alt2
+	company = "Cyber Solutions - Array"
+	desc = "This limb is simple and functional; array of sensors on a featureless case."
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt2.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
-	monitor_styles = "blank=hesphiastos_alt_off;\
-		pink=hesphiastos_alt_pink;\
-		orange=hesphiastos_alt_orange;\
-		goggles=hesphiastos_alt_goggles;\
-		scroll=hesphiastos_alt_scroll;\
-		rgb=hesphiastos_alt_rgb;\
-		rainbow=hesphiastos_alt_rainbow"
 
-/datum/robolimb/hesphiastos_monitor
-	company = "Hesphiastos Monitor"
-	desc = "Hesphiastos' unique spin on a popular prosthetic head model. It looks rugged and sturdy."
-	icon = 'icons/mob/human_races/cyberlimbs/hesphiastos/hesphiastos_monitor.dmi'
+/datum/robolimb/cybersolutions_alt1
+	company = "Cyber Solutions - Wight"
+	desc = "This limb has cheap plastic panels mounted on grey metal."
+	icon = 'icons/mob/human_races/cyberlimbs/cybersolutions/cybersolutions_alt1.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/einstein
+	company = "Einstein Engines"
+	desc = "This limb is lightweight with a sleek design."
+	icon = 'icons/mob/human_races/cyberlimbs/einstein/einstein_main.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/grayson
+	company = "Grayson"
+	desc = "This limb has a sturdy and heavy build to it."
+	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_main.dmi'
+	unavailable_to_build = 1
+	monitor_styles = "blank=grayson_off;\
+		red=grayson_red;\
+		green=grayson_green;\
+		blue=grayson_blue;\
+		rgb=grayson_rgb"
+
+/datum/robolimb/grayson_alt1
+	company = "Grayson - Reinforced"
+	desc = "This limb has a sturdy and heavy build to it."
+	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_alt1.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+	monitor_styles = "blank=grayson_alt_off;\
+		green=grayson_alt_green;\
+		scroll=grayson_alt_scroll;\
+		rgb=grayson_alt_rgb;\
+		rainbow=grayson_alt_rainbow"
+
+/datum/robolimb/grayson_monitor
+	company = "Grayson Monitor"
+	desc = "This limb has a sturdy and heavy build to it, and uses plastics in the place of glass for the monitor."
+	icon = 'icons/mob/human_races/cyberlimbs/grayson/grayson_monitor.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+	monitor_styles = standard_monitor_styles
+
+/datum/robolimb/hephaestus
+	company = "Hephaestus"
+	desc = "This limb has a militaristic black and green casing with gold stripes."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_main.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/hephaestus_alt1
+	company = "Hephaestus - Frontier"
+	desc = "A rugged prosthetic head featuring the standard Hephaestus theme, a visor and an external display."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt1.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+	monitor_styles = "blank=hephaestus_alt_off;\
+		pink=hephaestus_alt_pink;\
+		orange=hephaestus_alt_orange;\
+		goggles=hephaestus_alt_goggles;\
+		scroll=hephaestus_alt_scroll;\
+		rgb=hephaestus_alt_rgb;\
+		rainbow=hephaestus_alt_rainbow"
+
+/datum/robolimb/hephaestus_alt2
+	company = "Hephaestus - Athena"
+	desc = "This rather thick limb has a militaristic green plating."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_alt2.dmi'
+	unavailable_to_build = 1
+	monitor_styles = "red=athena_red;\
+		blank=athena_off"
+
+/datum/robolimb/hephaestus_monitor
+	company = "Hephaestus Monitor"
+	desc = "Hephaestus' unique spin on a popular prosthetic head model. It looks rugged and sturdy."
+	icon = 'icons/mob/human_races/cyberlimbs/hephaestus/hephaestus_monitor.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 	monitor_styles = standard_monitor_styles
@@ -106,13 +210,24 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/morpheus_alt2
+	company = "Morpheus - Skeleton Crew"
+	desc = "This limb is simple and functional; it's basically just a case for a brain."
+	icon = 'icons/mob/human_races/cyberlimbs/morpheus/morpheus_alt2.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+
 /datum/robolimb/veymed
 	company = "Vey-Med"
 	desc = "This high quality limb is nearly indistinguishable from an organic one."
 	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
 	unavailable_to_build = 1
 	lifelike = 1
+	skin_tone = 1
 	blood_color = "#CCCCCC"
+	speech_bubble_appearance = "normal"
+	robo_brute_mod = 1.1
+	robo_burn_mod = 1.1
 
 /datum/robolimb/wardtakahashi
 	company = "Ward-Takahashi"
@@ -126,6 +241,12 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt1.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
+
+/datum/robolimb/wardtakahashi_alt2
+	company = "Ward-Takahashi - Spirit"
+	desc = "This limb has white and purple features, with a heavier casing."
+	icon = 'icons/mob/human_races/cyberlimbs/wardtakahashi/wardtakahashi_alt2.dmi'
+	unavailable_to_build = 1
 
 /datum/robolimb/wardtakahashi_monitor
 	company = "Ward-Takahashi Monitor"
@@ -142,14 +263,39 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 
 /datum/robolimb/xion_alt1
-	company = "Xion Mfg. - Breach"
+	company = "Xion - Breach"
 	desc = "This limb has a minimalist black and red casing. Looks a bit menacing."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt1.dmi'
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
 
+/datum/robolimb/xion_alt2
+	company = "Xion - Hull"
+	desc = "This limb has a thick orange casing with steel plating."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt2.dmi'
+	unavailable_to_build = 1
+	monitor_styles = "blank=xion_off;\
+		red=xion_red;\
+		green=xion_green;\
+		blue=xion_blue;\
+		rgb=xion_rgb"
+
+/datum/robolimb/xion_alt3
+	company = "Xion - Whiteout"
+	desc = "This limb has a minimalist black and white casing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt3.dmi'
+	unavailable_to_build = 1
+
+/datum/robolimb/xion_alt4
+	company = "Xion - Breach - Whiteout"
+	desc = "This limb has a minimalist black and white casing. Looks a bit menacing."
+	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_alt4.dmi'
+	unavailable_to_build = 1
+	parts = list(BP_HEAD)
+
+
 /datum/robolimb/xion_monitor
-	company = "Xion Mfg. Monitor"
+	company = "Xion Monitor"
 	desc = "Xion Mfg.'s unique spin on a popular prosthetic head model. It looks and minimalist and utilitarian."
 	icon = 'icons/mob/human_races/cyberlimbs/xion/xion_monitor.dmi'
 	unavailable_to_build = 1
@@ -161,6 +307,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	desc = "This limb has a rubbery fleshtone covering with visible seams."
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_main.dmi'
 	unavailable_to_build = 1
+	skin_tone = 1
 
 /obj/item/weapon/disk/limb
 	name = "Limb Blueprints"
@@ -169,29 +316,45 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon_state = "datadisk2"
 	var/company = ""
 
-	//I'm normally opposed to relative pathing, but pls.
-	bishop
-		company = "Bishop"
-
-	hesphiastos
-		company = "Hesphiastos"
-
-	morpheus
-		company = "Morpheus"
-
-	veymed
-		company = "Vey-Med"
-
-	wardtakahashi
-		company = "Ward-Takahashi"
-
-	xion
-		company = "Xion"
-
-	zenghu
-		company = "Zeng-Hu"
-
 /obj/item/weapon/disk/limb/New(var/newloc)
 	..()
 	if(company)
 		name = "[company] [initial(name)]"
+
+/obj/item/weapon/disk/limb/bishop
+	company = "Bishop"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/bishop)
+
+/obj/item/weapon/disk/limb/cybersolutions
+	company = "Cyber Solutions"
+
+/obj/item/weapon/disk/limb/grayson
+	company = "Grayson"
+
+/obj/item/weapon/disk/limb/hephaestus
+	company = "Hephaestus"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/hephaestus)
+
+/obj/item/weapon/disk/limb/morpheus
+	company = "Morpheus"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/morpheus)
+
+/obj/item/weapon/disk/limb/veymed
+	company = "Vey-Med"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/vey_med)
+
+/obj/item/weapon/disk/limb/wardtakahashi
+	company = "Ward-Takahashi"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/ward_takahashi)
+
+/obj/item/weapon/disk/limb/xion
+	company = "Xion"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/xion)
+
+/obj/item/weapon/disk/limb/zenghu
+	company = "Zeng-Hu"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/zeng_hu)
+
+/obj/item/weapon/disk/limb/nanotrasen
+	company = "NanoTrasen"
+	catalogue_data = list(/datum/category_item/catalogue/information/organization/nanotrasen)

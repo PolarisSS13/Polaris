@@ -62,7 +62,7 @@ var/global/list/SKILL_PRE = list("Engineer" = SKILL_ENGINEER, "Roboticist" = SKI
 /datum/skill/knowledge/law
 	ID = "law"
 	name = "Corporate Law"
-	desc = "Your knowledge of corporate law and procedures. This includes Corporate Regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for captains."
+	desc = "Your knowledge of corporate law and procedures. This includes Corporate Regulations, as well as general station rulings and procedures. A low level in this skill is typical for security officers, a high level in this skill is typical for Colony Directors."
 	field = "Security"
 	secondary = 1
 
@@ -176,7 +176,7 @@ var/global/list/SKILL_PRE = list("Engineer" = SKILL_ENGINEER, "Roboticist" = SKI
 		setup_skills()
 
 	if(!M.skills || M.skills.len == 0)
-		user << "There are no skills to display."
+		to_chat(user, "There are no skills to display.")
 		return
 
 	var/HTML = "<body>"

@@ -9,6 +9,7 @@
 	light_color = "#00b000"
 	req_one_access = list(access_heads)
 	circuit = /obj/item/weapon/circuitboard/skills
+	density = 0
 	var/obj/item/weapon/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
@@ -28,7 +29,7 @@
 	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
-		user << "You insert [O]."
+		to_chat(user, "You insert [O].")
 	else
 		..()
 
@@ -39,8 +40,8 @@
 /obj/machinery/computer/skills/attack_hand(mob/user as mob)
 	if(..())
 		return
-	if (src.z > 6)
-		user << "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!"
+	if (using_map && !(src.z in using_map.contact_levels))
+		to_chat(user, "<span class='danger'>Unable to establish a connection:</span> You're too far away from the station!")
 		return
 	var/dat
 
@@ -93,6 +94,7 @@
 						dat += text("<table><tr><td>	\
 						Name: <A href='?src=\ref[src];choice=Edit Field;field=name'>[active1.fields["name"]]</A><BR> \
 						ID: <A href='?src=\ref[src];choice=Edit Field;field=id'>[active1.fields["id"]]</A><BR>\n	\
+						Entity Classification: <A href='?src=\ref[src];field=brain_type'>[active1.fields["brain_type"]]</A><BR>\n	\
 						Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
 						Age: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
 						Rank: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
@@ -343,7 +345,7 @@ What a mess.*/
 								return
 							active1.fields["age"] = t1
 					if("rank")
-						var/list/L = list( "Head of Personnel", "Captain", "AI" )
+						var/list/L = list( "Head of Personnel", "Colony Director", "AI" )
 						//This was so silly before the change. Now it actually works without beating your head against the keyboard. /N
 						if ((istype(active1, /datum/data/record) && L.Find(rank)))
 							temp = "<h5>Rank:</h5>"

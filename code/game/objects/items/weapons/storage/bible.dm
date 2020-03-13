@@ -4,7 +4,7 @@
 	icon_state ="bible"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	var/mob/affecting = null
 	var/deity_name = "Christ"
 
@@ -14,18 +14,19 @@
 	icon_state ="bible"
 
 /obj/item/weapon/storage/bible/booze/New()
-	..()
-	new /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer(src)
-	new /obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer(src)
-	new /obj/item/weapon/spacecash(src)
-	new /obj/item/weapon/spacecash(src)
-	new /obj/item/weapon/spacecash(src)
+	starts_with = list(
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
+		/obj/item/weapon/spacecash/c100,
+		/obj/item/weapon/spacecash/c100,
+		/obj/item/weapon/spacecash/c100
+	)
 
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
 	if(user.mind && (user.mind.assigned_role == "Chaplain"))
 		if(A.reagents && A.reagents.has_reagent("water")) //blesses all the water in the holder
-			user << "<span class='notice'>You bless [A].</span>"
+			to_chat(user, "<span class='notice'>You bless [A].</span>")
 			var/water2holy = A.reagents.get_reagent_amount("water")
 			A.reagents.del_reagent("water")
 			A.reagents.add_reagent("holywater",water2holy)

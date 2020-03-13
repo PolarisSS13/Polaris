@@ -17,7 +17,7 @@
 	var/inactive_on_main_station = 0
 	for(var/zone/zone in air_master.zones)
 		var/turf/simulated/turf = locate() in zone.contents
-		if(turf && turf.z in config.station_levels)
+		if(turf && turf.z in using_map.station_levels)
 			if(zone.needs_update)
 				active_on_main_station++
 			else
@@ -48,7 +48,7 @@
 	var/largest_click_time = 0
 	var/mob/largest_move_mob = null
 	var/mob/largest_click_mob = null
-	for(var/mob/M in world)
+	for(var/mob/M in mob_list)
 		if(!M.client)
 			continue
 		if(M.next_move >= largest_move_time)
@@ -83,12 +83,12 @@
 		if (!fqs)
 			output += "&nbsp;&nbsp;<b>ERROR</b><br>"
 			continue
-		for (var/filter in fqs.devices)
-			var/list/f = fqs.devices[filter]
+		for (var/radio_filter in fqs.devices)
+			var/list/f = fqs.devices[radio_filter]
 			if (!f)
-				output += "&nbsp;&nbsp;[filter]: ERROR<br>"
+				output += "&nbsp;&nbsp;[radio_filter]: ERROR<br>"
 				continue
-			output += "&nbsp;&nbsp;[filter]: [f.len]<br>"
+			output += "&nbsp;&nbsp;[radio_filter]: [f.len]<br>"
 			for (var/device in f)
 				if (isobj(device))
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device] ([device:x],[device:y],[device:z] in area [get_area(device:loc)])<br>"
@@ -108,13 +108,13 @@
 	load_admins()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/reload_mentors()
-	set name = "Reload Mentors"
+/client/proc/reload_eventMs()
+	set name = "Reload Event Managers"
 	set category = "Debug"
 
 	if(!check_rights(R_SERVER)) return
 
-	message_admins("[usr] manually reloaded Mentors")
+	message_admins("[usr] manually reloaded Event Managers")
 	world.load_mods()
 
 
@@ -124,11 +124,11 @@
 	set category = "Debug"
 		/*
 	if(!holder)
-		src << "Only administrators may use this command."
+		to_chat(src, "Only administrators may use this command.")
 		return
 
 	if(!air_master)
-		usr << "Cannot find air_system"
+		to_chat(usr, "Cannot find air_system")
 		return
 	var/datum/air_group/dead_groups = list()
 	for(var/datum/air_group/group in air_master.air_groups)
@@ -146,11 +146,11 @@
 	set category = "Debug"
 	/*
 	if(!holder)
-		src << "Only administrators may use this command."
+		to_chat(src, "Only administrators may use this command.")
 		return
 
 	if(!air_master)
-		usr << "Cannot find air_system"
+		to_chat(usr, "Cannot find air_system")
 		return
 
 	var/turf/T = get_turf(usr)
@@ -159,7 +159,7 @@
 		AG.next_check = 30
 		AG.group_processing = 0
 	else
-		usr << "Local airgroup is unsimulated!"
+		to_chat(usr, "Local airgroup is unsimulated!")
 	feedback_add_details("admin_verb","KLAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	*/
 
@@ -168,20 +168,20 @@
 	set desc = "This spams all the active jobban entries for the current round to standard output."
 	set category = "Debug"
 
-	usr << "<b>Jobbans active in this round.</b>"
+	to_chat(usr, "<b>Jobbans active in this round.</b>")
 	for(var/t in jobban_keylist)
-		usr << "[t]"
+		to_chat(usr, "[t]")
 
 /client/proc/print_jobban_old_filter()
 	set name = "Search Jobban Log"
 	set desc = "This searches all the active jobban entries for the current round and outputs the results to standard output."
 	set category = "Debug"
 
-	var/filter = input("Contains what?","Filter") as text|null
-	if(!filter)
+	var/job_filter = input("Contains what?","Job Filter") as text|null
+	if(!job_filter)
 		return
 
-	usr << "<b>Jobbans active in this round.</b>"
+	to_chat(usr, "<b>Jobbans active in this round.</b>")
 	for(var/t in jobban_keylist)
-		if(findtext(t, filter))
-			usr << "[t]"
+		if(findtext(t, job_filter))
+			to_chat(usr, "[t]")

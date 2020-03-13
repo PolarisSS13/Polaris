@@ -11,7 +11,7 @@
 	var/mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/capacity = 500; //the number of seeds it can carry.
 	slot_flags = SLOT_BELT
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	var/list/item_quants = list()
 
 /obj/item/weapon/seedbag/attack_self(mob/user as mob)
@@ -25,9 +25,9 @@
 	mode = !mode
 	switch (mode)
 		if(1)
-			usr << "The bag now picks up all seeds in a tile at once."
+			to_chat(usr, "The bag now picks up all seeds in a tile at once.")
 		if(0)
-			usr << "The bag now picks up one seed pouch at a time."
+			to_chat(usr, "The bag now picks up one seed pouch at a time.")
 
 /obj/item/seeds/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	..()
@@ -42,10 +42,10 @@
 					else
 						S.item_quants[G.name] = 1
 				else
-					user << "<span class='warning'>The seed bag is full.</span>"
+					to_chat(user, "<span class='warning'>The seed bag is full.</span>")
 					S.updateUsrDialog()
 					return
-			user << "<span class='notice'>You pick up all the seeds.</span>"
+			to_chat(user, "<span class='notice'>You pick up all the seeds.</span>")
 		else
 			if (S.contents.len < S.capacity)
 				S.contents += src;
@@ -54,7 +54,7 @@
 				else
 					S.item_quants[name] = 1
 			else
-				user << "<span class='warning'>The seed bag is full.</span>"
+				to_chat(user, "<span class='warning'>The seed bag is full.</span>")
 		S.updateUsrDialog()
 	return
 

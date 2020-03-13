@@ -94,7 +94,7 @@
 	if(href_list["change_supplied_law_position"])
 		var/new_position = input(usr, "Enter new supplied law position between 1 and [MAX_SUPPLIED_LAW_NUMBER], inclusive. Inherent laws at the same index as a supplied law will not be stated.", "Law Position", supplied_law_position) as num|null
 		if(isnum(new_position) && can_still_topic())
-			supplied_law_position = Clamp(new_position, 1, MAX_SUPPLIED_LAW_NUMBER)
+			supplied_law_position = CLAMP(new_position, 1, MAX_SUPPLIED_LAW_NUMBER)
 		return 1
 
 	if(href_list["edit_law"])
@@ -134,15 +134,15 @@
 		return 1
 
 	if(href_list["notify_laws"])
-		owner << "<span class='danger'>Law Notice</span>"
+		to_chat(owner, "<span class='danger'>Law Notice</span>")
 		owner.laws.show_laws(owner)
 		if(isAI(owner))
 			var/mob/living/silicon/ai/AI = owner
 			for(var/mob/living/silicon/robot/R in AI.connected_robots)
-				R << "<span class='danger'>Law Notice</span>"
+				to_chat(R, "<span class='danger'>Law Notice</span>")
 				R.laws.show_laws(R)
 		if(usr != owner)
-			usr << "<span class='notice'>Laws displayed.</span>"
+			to_chat(usr, "<span class='notice'>Laws displayed.</span>")
 		return 1
 
 	return 0
@@ -176,7 +176,7 @@
 	data["channels"] = channels
 	data["law_sets"] = package_multiple_laws(data["isAdmin"] ? admin_laws : player_laws)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "law_manager.tmpl", sanitize("[src] - [owner]"), 800, is_malf(user) ? 600 : 400, state = state)
 		ui.set_initial_data(data)
@@ -203,7 +203,13 @@
 	return law_sets
 
 /datum/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
+	return (is_admin(user) && !owner.is_slaved()) || is_special_role(user)
+
+/datum/nano_module/law_manager/proc/is_special_role(var/mob/user)
+	if(user.mind.special_role)
+		return TRUE
+	else
+		return FALSE
 
 /mob/living/silicon/proc/is_slaved()
 	return 0

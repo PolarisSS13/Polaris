@@ -25,7 +25,6 @@
 	reagents = R
 	R.my_atom = src
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -49,11 +48,11 @@
 
 /obj/machinery/xenobio2/manualinjector/proc/move_into_injector(var/mob/user,var/mob/living/victim)
 	if(src.occupant)
-		user << "<span class='danger'>The injector is full, empty it first!</span>"
+		to_chat(user, "<span class='danger'>The injector is full, empty it first!</span>")
 		return
 
 	if(!(istype(victim, /mob/living/simple_animal/xeno)) && !emagged)
-		user << "<span class='danger'>This is not a suitable subject for the injector!</span>"
+		to_chat(user, "<span class='danger'>This is not a suitable subject for the injector!</span>")
 		return
 
 	user.visible_message("<span class='danger'>[user] starts to put [victim] into the injector!</span>")
@@ -75,7 +74,7 @@
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant = null
-	
+
 /obj/machinery/xenobio2/manualinjector/proc/eject_beaker()
 	if(beaker)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B = beaker
@@ -94,11 +93,11 @@
 /obj/machinery/xenobio2/manualinjector/attackby(var/obj/item/W, var/mob/user)
 
 	//Let's try to deconstruct first.
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		default_deconstruction_screwdriver(user, W)
 		return
 
-	if(istype(W, /obj/item/weapon/crowbar) && !occupant)
+	if(W.is_crowbar() && !occupant)
 		default_deconstruction_crowbar(user, W)
 		return
 
@@ -117,14 +116,14 @@
 				var/obj/machinery/computer/xenobio2/C = P.connectable
 				computer = C
 				C.injector = src
-				user << "<span class='warning'> You link the [src] to the [P.connectable]!</span>"
+				to_chat(user, "<span class='warning'> You link the [src] to the [P.connectable]!</span>")
 		else
-			user << "<span class='warning'> You store the [src] in the [P]'s buffer!</span>"
+			to_chat(user, "<span class='warning'> You store the [src] in the [P]'s buffer!</span>")
 			P.connectable = src
 		return
 
 	if(panel_open)
-		user << "<span class='warning'>Close the panel first!</span>"
+		to_chat(user, "<span class='warning'>Close the panel first!</span>")
 
 	var/obj/item/weapon/grab/G = W
 
@@ -132,7 +131,7 @@
 		return ..()
 
 	if(G.state < 2)
-		user << "<span class='danger'>You need a better grip to do that!</span>"
+		to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
 		return
 
 	move_into_injector(user,G.affecting)
@@ -140,7 +139,7 @@
 
 /obj/item/weapon/circuitboard/xenobioinjectormachine
 	name = T_BOARD("biological injector")
-	build_path = "/obj/machinery/xenobio2/manualinjector"
-	board_type = "machine"
+	build_path = /obj/machinery/xenobio2/manualinjector
+	board_type = /datum/frame/frame_types/machine
 	origin_tech = list()	//To be filled,
 	req_components = list()	//To be filled,

@@ -2,10 +2,12 @@
 	name = "station intercom (General)"
 	desc = "Talk through this."
 	icon_state = "intercom"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	anchored = 1
-	w_class = 4.0
+	w_class = ITEMSIZE_LARGE
 	canhear_range = 2
-	flags = CONDUCT | NOBLOODY
+	flags = NOBLOODY
 	var/circuit = /obj/item/weapon/circuitboard/intercom
 	var/number = 0
 	var/last_tick //used to delay the powercheck
@@ -27,6 +29,8 @@
 /obj/item/device/radio/intercom/specops
 	name = "\improper Spec Ops intercom"
 	frequency = ERT_FREQ
+	subspace_transmission = 1
+	centComm = 1
 
 /obj/item/device/radio/intercom/department
 	canhear_range = 5
@@ -35,17 +39,28 @@
 
 /obj/item/device/radio/intercom/department/medbay
 	name = "station intercom (Medbay)"
-	icon_state = "secintercom"
+	icon_state = "medintercom"
 	frequency = MED_I_FREQ
 
 /obj/item/device/radio/intercom/department/security
 	name = "station intercom (Security)"
-	icon_state = "medintercom"
+	icon_state = "secintercom"
 	frequency = SEC_I_FREQ
+
+/obj/item/device/radio/intercom/entertainment
+	name = "entertainment intercom"
+	frequency = ENT_FREQ
+
+/obj/item/device/radio/intercom/omni
+	name = "global announcer"
+/obj/item/device/radio/intercom/omni/Initialize()
+	channels = radiochannels.Copy()
+	return ..()
 
 /obj/item/device/radio/intercom/New()
 	..()
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
+	circuit = new circuit(src)
 
 /obj/item/device/radio/intercom/department/medbay/New()
 	..()
@@ -56,6 +71,13 @@
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(SEC_I_FREQ) = list(access_security)
+	)
+
+/obj/item/device/radio/intercom/entertainment/New()
+	..()
+	internal_channels = list(
+		num2text(PUB_FREQ) = list(),
+		num2text(ENT_FREQ) = list()
 	)
 
 /obj/item/device/radio/intercom/syndicate
@@ -69,9 +91,20 @@
 	..()
 	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
 
-/obj/item/device/radio/intercom/Destroy()
-	processing_objects -= src
+/obj/item/device/radio/intercom/raider
+	name = "illicit intercom"
+	desc = "Pirate radio, but not in the usual sense of the word."
+	frequency = RAID_FREQ
+	subspace_transmission = 1
+	syndie = 1
+
+/obj/item/device/radio/intercom/raider/New()
 	..()
+	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
+
+/obj/item/device/radio/intercom/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
 	src.add_fingerprint(user)
@@ -84,10 +117,11 @@
 		attack_self(user)
 
 /obj/item/device/radio/intercom/attackby(obj/item/W as obj, mob/user as mob)
-	src.add_fingerprint(user)
-	if(istype(W, /obj/item/weapon/screwdriver))  // Opening the intercom up.
+	add_fingerprint(user)
+	if(W.is_screwdriver())  // Opening the intercom up.
 		wiresexposed = !wiresexposed
-		user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
+		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
+		playsound(src, W.usesound, 50, 1)
 		if(wiresexposed)
 			if(!on)
 				icon_state = "intercom-p_open"
@@ -96,22 +130,20 @@
 		else
 			icon_state = "intercom"
 		return
-	if (wiresexposed && istype(W, /obj/item/weapon/wirecutters))
+	if(wiresexposed && W.is_wirecutter())
 		user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
+		playsound(src, W.usesound, 50, 1)
 		new/obj/item/stack/cable_coil(get_turf(src), 5)
-		var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
-		var/obj/item/weapon/circuitboard/M = new circuit( A )
-		A.frame_type = "intercom"
+		var/obj/structure/frame/A = new /obj/structure/frame(src.loc)
+		var/obj/item/weapon/circuitboard/M = circuit
+		A.frame_type = M.board_type
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 		A.circuit = M
 		A.set_dir(dir)
 		A.anchored = 1
-		for (var/obj/C in src)
-			C.forceMove(loc)
 		A.state = 2
-		A.icon_state = "intercom_2"
+		A.update_icon()
 		M.deconstruct(src)
 		qdel(src)
 	else

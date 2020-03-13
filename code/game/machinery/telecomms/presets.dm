@@ -25,7 +25,7 @@
 	autolinkers = list("r_relay")
 
 /obj/machinery/telecomms/relay/preset/centcom
-	id = "Centcom Relay"
+	id = "CentCom Relay"
 	hide = 1
 	toggled = 1
 	//anchored = 1
@@ -44,11 +44,11 @@
 	"receiverA", "broadcasterA")
 
 /obj/machinery/telecomms/hub/preset_cent
-	id = "CentComm Hub"
+	id = "CentCom Hub"
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("hub_cent", "c_relay", "s_relay", "m_relay", "r_relay",
-	 "centcomm", "receiverCent", "broadcasterCent")
+	 "centcom", "receiverCent", "broadcasterCent")
 
 //Receivers
 
@@ -56,7 +56,7 @@
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ)
+	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ, ENT_FREQ)
 
 	//Common and other radio frequencies for people to freely use
 	New()
@@ -65,7 +65,7 @@
 		..()
 
 /obj/machinery/telecomms/receiver/preset_cent
-	id = "CentComm Receiver"
+	id = "CentCom Receiver"
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("receiverCent")
@@ -102,15 +102,15 @@
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ)
+	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
 
 /obj/machinery/telecomms/bus/preset_cent
-	id = "CentComm Bus"
+	id = "CentCom Bus"
 	network = "tcommsat"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
 	produces_heat = 0
-	autolinkers = list("processorCent", "centcomm")
+	autolinkers = list("processorCent", "centcom")
 
 //Processors
 
@@ -135,7 +135,7 @@
 	autolinkers = list("processor4")
 
 /obj/machinery/telecomms/processor/preset_cent
-	id = "CentComm Processor"
+	id = "CentCom Processor"
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("processorCent")
@@ -168,7 +168,7 @@
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(PUB_FREQ, AI_FREQ) // AI Private and Common
+	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ) // AI Private and Common
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
@@ -200,10 +200,10 @@
 	autolinkers = list("security")
 
 /obj/machinery/telecomms/server/presets/centcomm
-	id = "CentComm Server"
+	id = "CentCom Server"
 	freq_listening = list(ERT_FREQ, DTH_FREQ)
 	produces_heat = 0
-	autolinkers = list("centcomm")
+	autolinkers = list("centcom")
 
 
 //Broadcasters
@@ -216,7 +216,7 @@
 	autolinkers = list("broadcasterA")
 
 /obj/machinery/telecomms/broadcaster/preset_cent
-	id = "CentComm Broadcaster"
+	id = "CentCom Broadcaster"
 	network = "tcommsat"
 	produces_heat = 0
 	autolinkers = list("broadcasterCent")

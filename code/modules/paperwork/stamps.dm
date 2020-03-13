@@ -5,7 +5,8 @@
 	icon_state = "stamp-qm"
 	item_state = "stamp"
 	throwforce = 0
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
+	slot_flags = SLOT_HOLSTER
 	throw_speed = 7
 	throw_range = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
@@ -13,7 +14,7 @@
 	attack_verb = list("stamped")
 
 /obj/item/weapon/stamp/captain
-	name = "captain's rubber stamp"
+	name = "colony director's rubber stamp"
 	icon_state = "stamp-cap"
 
 /obj/item/weapon/stamp/hop
@@ -23,6 +24,10 @@
 /obj/item/weapon/stamp/hos
 	name = "head of security's rubber stamp"
 	icon_state = "stamp-hos"
+
+/obj/item/weapon/stamp/ward
+	name = "warden's rubber stamp"
+	icon_state = "stamp-ward"
 
 /obj/item/weapon/stamp/ce
 	name = "chief engineer's rubber stamp"
@@ -49,12 +54,21 @@
 	icon_state = "stamp-intaff"
 
 /obj/item/weapon/stamp/centcomm
-	name = "centcomm rubber stamp"
+	name = "\improper CentCom rubber stamp"
 	icon_state = "stamp-cent"
 
 /obj/item/weapon/stamp/qm
-	name = "quartermaster's stamp"
+	name = "quartermaster's rubber stamp"
 	icon_state = "stamp-qm"
+
+/obj/item/weapon/stamp/cargo
+	name = "cargo rubber stamp"
+	icon_state = "stamp-cargo"
+
+/obj/item/weapon/stamp/solgov
+	name = "\improper Sol Government rubber stamp"
+	icon_state = "stamp-sg"
+
 
 // Syndicate stamp to forge documents.
 /obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)

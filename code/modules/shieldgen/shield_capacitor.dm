@@ -4,7 +4,7 @@
 
 /obj/machinery/shield_capacitor
 	name = "shield capacitor"
-	desc = "Machine that charges a shield generator."
+	desc = "A machine that charges a shield generator."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "capacitor"
 	var/active = 0
@@ -19,18 +19,16 @@
 	var/charge_rate = 100000	//100 kW
 	var/obj/machinery/shield_gen/owned_gen
 
-/obj/machinery/shield_capacitor/New()
-	spawn(10)
-		for(var/obj/machinery/shield_gen/possible_gen in range(1, src))
-			if(get_dir(src, possible_gen) == src.dir)
-				possible_gen.owned_capacitor = src
-				break
-	..()
-	
+/obj/machinery/shield_capacitor/advanced
+	name = "advanced shield capacitor"
+	desc = "A machine that charges a shield generator.  This version can store, input, and output more electricity."
+	max_charge = 12e6
+	max_charge_rate = 600000
+
 /obj/machinery/shield_capacitor/emag_act(var/remaining_charges, var/mob/user)
 	if(prob(75))
 		src.locked = !src.locked
-		user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+		to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 		. = 1
 		updateDialog()
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -43,24 +41,25 @@
 		var/obj/item/weapon/card/id/C = W
 		if(access_captain in C.access || access_security in C.access || access_engine in C.access)
 			src.locked = !src.locked
-			user << "Controls are now [src.locked ? "locked." : "unlocked."]"
+			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 			updateDialog()
 		else
-			user << "\red Access denied."
-	else if(istype(W, /obj/item/weapon/wrench))
+			to_chat(user, "<font color='red'>Access denied.</font>")
+	else if(W.is_wrench())
 		src.anchored = !src.anchored
-		src.visible_message("\blue \icon[src] [src] has been [anchored ? "bolted to the floor" : "unbolted from the floor"] by [user].")
+		playsound(src, W.usesound, 75, 1)
+		src.visible_message("<font color='blue'>\icon[src] [src] has been [anchored ? "bolted to the floor" : "unbolted from the floor"] by [user].</font>")
 
 		if(anchored)
 			spawn(0)
 				for(var/obj/machinery/shield_gen/gen in range(1, src))
-					if(get_dir(src, gen) == src.dir && !gen.owned_capacitor)
+					if(get_dir(src, gen) == src.dir)
 						owned_gen = gen
-						owned_gen.owned_capacitor = src
+						owned_gen.capacitors |= src
 						owned_gen.updateDialog()
 		else
-			if(owned_gen && owned_gen.owned_capacitor == src)
-				owned_gen.owned_capacitor = null
+			if(owned_gen && src in owned_gen.capacitors)
+				owned_gen.capacitors -= src
 			owned_gen = null
 	else
 		..()
@@ -82,16 +81,16 @@
 	else
 		t += "This capacitor is: [active ? "<font color=green>Online</font>" : "<font color=red>Offline</font>" ] <a href='?src=\ref[src];toggle=1'>[active ? "\[Deactivate\]" : "\[Activate\]"]</a><br>"
 		t += "Capacitor Status: [time_since_fail > 2 ? "<font color=green>OK.</font>" : "<font color=red>Discharging!</font>"]<br>"
-		t += "Stored Energy: [round(stored_charge/1000, 0.1)] kJ ([100 * round(stored_charge/max_charge, 0.1)]%)<br>"
+		t += "Stored Energy: [format_SI(stored_charge, "J")] ([100 * round(stored_charge/max_charge, 0.01)]%)<br>"
 		t += "Charge Rate: \
 		<a href='?src=\ref[src];charge_rate=-100000'>\[----\]</a> \
 		<a href='?src=\ref[src];charge_rate=-10000'>\[---\]</a> \
 		<a href='?src=\ref[src];charge_rate=-1000'>\[--\]</a> \
-		<a href='?src=\ref[src];charge_rate=-100'>\[-\]</a>[charge_rate] W \
+		<a href='?src=\ref[src];charge_rate=-100'>\[-\]</a>[format_SI(charge_rate, "W")]\
 		<a href='?src=\ref[src];charge_rate=100'>\[+\]</a> \
 		<a href='?src=\ref[src];charge_rate=1000'>\[++\]</a> \
 		<a href='?src=\ref[src];charge_rate=10000'>\[+++\]</a> \
-		<a href='?src=\ref[src];charge_rate=100000'>\[+++\]</a><br>"
+		<a href='?src=\ref[src];charge_rate=100000'>\[++++\]</a><br>"
 	t += "<hr>"
 	t += "<A href='?src=\ref[src]'>Refresh</A> "
 	t += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
@@ -105,7 +104,7 @@
 
 	//see if we can connect to a power net.
 	var/datum/powernet/PN
-	var/turf/T = src.loc
+	var/turf/T = get_turf(src)
 	var/obj/structure/cable/C = T.get_cable_node()
 	if (C)
 		PN = C.powernet
@@ -128,7 +127,7 @@
 		return
 	if( href_list["toggle"] )
 		if(!active && !anchored)
-			usr << "\red The [src] needs to be firmly secured to the floor first."
+			to_chat(usr, "<font color='red'>The [src] needs to be firmly secured to the floor first.</font>")
 			return
 		active = !active
 	if( href_list["charge_rate"] )
@@ -142,13 +141,14 @@
 	else
 		..()
 
-/obj/machinery/shield_capacitor/verb/rotate()
-	set name = "Rotate capacitor clockwise"
+/obj/machinery/shield_capacitor/verb/rotate_clockwise()
+	set name = "Rotate Capacitor Clockwise"
 	set category = "Object"
 	set src in oview(1)
 
 	if (src.anchored)
-		usr << "It is fastened to the floor!"
+		to_chat(usr, "It is fastened to the floor!")
 		return
+
 	src.set_dir(turn(src.dir, 270))
 	return

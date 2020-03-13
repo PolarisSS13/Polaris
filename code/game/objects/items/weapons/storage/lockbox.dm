@@ -4,11 +4,12 @@
 	name = "lockbox"
 	desc = "A locked box."
 	icon_state = "lockbox+l"
-	item_state = "syringe_kit"
-	w_class = 4
-	max_w_class = 3
-	max_storage_space = 14 //The sum of the w_classes of all the items in this storage item.
+	item_state_slots = list(slot_r_hand_str = "syringe_kit", slot_l_hand_str = "syringe_kit")
+	w_class = ITEMSIZE_LARGE
+	max_w_class = ITEMSIZE_NORMAL
+	max_storage_space = ITEMSIZE_COST_NORMAL * 4 //The sum of the w_classes of all the items in this storage item.
 	req_access = list(access_armory)
+	preserve_item = 1
 	var/locked = 1
 	var/broken = 0
 	var/icon_locked = "lockbox+l"
@@ -19,21 +20,21 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if (istype(W, /obj/item/weapon/card/id))
 			if(src.broken)
-				user << "<span class='warning'>It appears to be broken.</span>"
+				to_chat(user, "<span class='warning'>It appears to be broken.</span>")
 				return
 			if(src.allowed(user))
 				src.locked = !( src.locked )
 				if(src.locked)
 					src.icon_state = src.icon_locked
-					user << "<span class='notice'>You lock \the [src]!</span>"
+					to_chat(user, "<span class='notice'>You lock \the [src]!</span>")
 					close_all()
 					return
 				else
 					src.icon_state = src.icon_closed
-					user << "<span class='notice'>You unlock \the [src]!</span>"
+					to_chat(user, "<span class='notice'>You unlock \the [src]!</span>")
 					return
 			else
-				user << "<span class='warning'>Access Denied</span>"
+				to_chat(user, "<span class='warning'>Access Denied</span>")
 		else if(istype(W, /obj/item/weapon/melee/energy/blade))
 			if(emag_act(INFINITY, user, W, "The locker has been sliced open by [user] with an energy blade!", "You hear metal being sliced and sparks flying."))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -44,13 +45,13 @@
 		if(!locked)
 			..()
 		else
-			user << "<span class='warning'>It's locked!</span>"
+			to_chat(user, "<span class='warning'>It's locked!</span>")
 		return
 
 
 	show_to(mob/user as mob)
 		if(locked)
-			user << "<span class='warning'>It's locked!</span>"
+			to_chat(user, "<span class='warning'>It's locked!</span>")
 		else
 			..()
 		return
@@ -76,36 +77,28 @@
 /obj/item/weapon/storage/lockbox/loyalty
 	name = "lockbox of loyalty implants"
 	req_access = list(access_security)
-
-	New()
-		..()
-		new /obj/item/weapon/implantcase/loyalty(src)
-		new /obj/item/weapon/implantcase/loyalty(src)
-		new /obj/item/weapon/implantcase/loyalty(src)
-		new /obj/item/weapon/implanter/loyalty(src)
-
+	starts_with = list(
+		/obj/item/weapon/implantcase/loyalty = 3,
+		/obj/item/weapon/implanter/loyalty
+	)
 
 /obj/item/weapon/storage/lockbox/clusterbang
 	name = "lockbox of clusterbangs"
 	desc = "You have a bad feeling about opening this."
 	req_access = list(access_security)
-
-	New()
-		..()
-		new /obj/item/weapon/grenade/flashbang/clusterbang(src)
+	starts_with = list(/obj/item/weapon/grenade/flashbang/clusterbang)
 
 /obj/item/weapon/storage/lockbox/medal
 	name = "lockbox of medals"
 	desc = "A lockbox filled with commemorative medals, it has the NanoTrasen logo stamped on it."
 	req_access = list(access_heads)
 	storage_slots = 7
-
-	New()
-		..()
-		new /obj/item/clothing/accessory/medal/conduct(src)
-		new /obj/item/clothing/accessory/medal/bronze_heart(src)
-		new /obj/item/clothing/accessory/medal/nobel_science(src)
-		new /obj/item/clothing/accessory/medal/silver/valor(src)
-		new /obj/item/clothing/accessory/medal/silver/security(src)
-		new /obj/item/clothing/accessory/medal/gold/captain(src)
-		new /obj/item/clothing/accessory/medal/gold/heroism(src)
+	starts_with = list(
+		/obj/item/clothing/accessory/medal/conduct,
+		/obj/item/clothing/accessory/medal/bronze_heart,
+		/obj/item/clothing/accessory/medal/nobel_science,
+		/obj/item/clothing/accessory/medal/silver/valor,
+		/obj/item/clothing/accessory/medal/silver/security,
+		/obj/item/clothing/accessory/medal/gold/captain,
+		/obj/item/clothing/accessory/medal/gold/heroism
+	)

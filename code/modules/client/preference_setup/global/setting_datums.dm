@@ -74,6 +74,18 @@ var/list/_client_preferences_by_type
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 1)
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 0, channel = 2)
 
+/datum/client_preference/weather_sounds
+	description ="Weather sounds"
+	key = "SOUND_WEATHER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+/datum/client_preference/supermatter_hum
+	description ="Supermatter hum"
+	key = "SOUND_SUPERMATTER"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
 /datum/client_preference/ghost_ears
 	description ="Ghost ears"
 	key = "CHAT_GHOSTEARS"
@@ -98,6 +110,37 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/air_pump_noise
+	description ="Air Pump Ambient Noise"
+	key = "SOUND_AIRPUMP"
+	enabled_description = "Audible"
+	disabled_description = "Silent"
+
+/datum/client_preference/mob_tooltips
+	description ="Mob tooltips"
+	key = "MOB_TOOLTIPS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
+/datum/client_preference/attack_icons
+	description ="Attack icons"
+	key = "ATTACK_ICONS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
+/datum/client_preference/precision_placement
+	description ="Precision Placement"
+	key = "PRECISE_PLACEMENT"
+	enabled_description = "Active"
+	disabled_description = "Inactive"
+
+/datum/client_preference/hotkeys_default
+	description ="Hotkeys Default"
+	key = "HUD_HOTKEYS"
+	enabled_description = "Enabled"
+	disabled_description = "Disabled"
+	enabled_by_default = FALSE // Backwards compatibility
+
 /datum/client_preference/show_typing_indicator
 	description ="Typing indicator"
 	key = "SHOW_TYPING"
@@ -106,7 +149,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
 	if(!enabled)
-		preference_mob.set_typing_indicator(0)
+		preference_mob.set_typing_indicator(FALSE)
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
@@ -126,6 +169,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/check_mention
+	description ="Emphasize Name Mention"
+	key = "CHAT_MENTION"
+	enabled_description = "Emphasize"
+	disabled_description = "Normal"
+
 /datum/client_preference/show_progress_bar
 	description ="Progress Bar"
 	key = "SHOW_PROGRESS"
@@ -144,11 +193,29 @@ var/list/_client_preferences_by_type
 	enabled_description = "Fancy"
 	disabled_description = "Plain"
 
+/datum/client_preference/ambient_occlusion
+	description = "Fake Ambient Occlusion"
+	key = "AMBIENT_OCCLUSION_PREF"
+	enabled_by_default = FALSE
+	enabled_description = "On"
+	disabled_description = "Off"
+
+/datum/client_preference/ambient_occlusion/toggled(var/mob/preference_mob, var/enabled)
+	. = ..()
+	if(preference_mob && preference_mob.plane_holder)
+		var/datum/plane_holder/PH = preference_mob.plane_holder
+		PH.set_ao(VIS_OBJS, enabled)
+		PH.set_ao(VIS_MOBS, enabled)
+
+/datum/client_preference/instrument_toggle
+	description ="Hear In-game Instruments"
+	key = "SOUND_INSTRUMENT"
+
 /********************
 * Staff Preferences *
 ********************/
 /datum/client_preference/admin/may_toggle(var/mob/preference_mob)
-	return check_rights(R_ADMIN, 0, preference_mob)
+	return check_rights(R_ADMIN|R_EVENT, 0, preference_mob)
 
 /datum/client_preference/mod/may_toggle(var/mob/preference_mob)
 	return check_rights(R_MOD|R_ADMIN, 0, preference_mob)

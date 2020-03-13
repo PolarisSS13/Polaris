@@ -18,6 +18,9 @@
 	var/mind=null
 	var/languages=null
 	var/list/flavor=null
+	var/gender = null
+	var/list/body_descriptors = null
+	var/list/genetic_modifiers = list() // Modifiers with the MODIFIER_GENETIC flag are saved.  Note that only the type is saved, not an instance.
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
@@ -92,6 +95,11 @@
 		for(var/mob/M in src)//Failsafe so you can get mobs out
 			M.loc = get_turf(src)
 
+/obj/machinery/dna_scannernew/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to clone people without external assistance
+	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
+		return
+	put_in(target)
+
 /obj/machinery/dna_scannernew/verb/move_inside()
 	set src in oview(1)
 	set category = "Object"
@@ -100,13 +108,13 @@
 	if (usr.stat != 0)
 		return
 	if (!ishuman(usr) && !issmall(usr)) //Make sure they're a mob that has dna
-		usr << "<span class='notice'>Try as you might, you can not climb up into the scanner.</span>"
+		to_chat(usr, "<span class='notice'>Try as you might, you can not climb up into the scanner.</span>")
 		return
 	if (src.occupant)
-		usr << "<span class='warning'>The scanner is already occupied!</span>"
+		to_chat(usr, "<span class='warning'>The scanner is already occupied!</span>")
 		return
 	if (usr.abiotic())
-		usr << "<span class='warning'>The subject cannot have abiotic items on.</span>"
+		to_chat(usr, "<span class='warning'>The subject cannot have abiotic items on.</span>")
 		return
 	usr.stop_pulling()
 	usr.client.perspective = EYE_PERSPECTIVE
@@ -120,7 +128,7 @@
 /obj/machinery/dna_scannernew/attackby(var/obj/item/weapon/item as obj, var/mob/user as mob)
 	if(istype(item, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='warning'>A beaker is already loaded into the machine.</span>"
+			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
 
 		beaker = item
@@ -128,16 +136,32 @@
 		item.loc = src
 		user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
 		return
+
+	else if(istype(item, /obj/item/organ/internal/brain))
+		if (src.occupant)
+			to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+			return
+		var/obj/item/organ/internal/brain/brain = item
+		if(brain.clone_source)
+			user.drop_item()
+			brain.loc = src
+			put_in(brain.brainmob)
+			src.add_fingerprint(user)
+			user.visible_message("\The [user] adds \a [item] to \the [src]!", "You add \a [item] to \the [src]!")
+			return
+		else
+			to_chat(user, "\The [brain] is not acceptable for genetic sampling!")
+
 	else if (!istype(item, /obj/item/weapon/grab))
 		return
 	var/obj/item/weapon/grab/G = item
 	if (!ismob(G.affecting))
 		return
 	if (src.occupant)
-		user << "<span class='warning'>The scanner is already occupied!</span>"
+		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
 		return
 	if (G.affecting.abiotic())
-		user << "<span class='warning'>The subject cannot have abiotic items on.</span>"
+		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
 		return
 	put_in(G.affecting)
 	src.add_fingerprint(user)
@@ -161,7 +185,7 @@
 		if(!M.client && M.mind)
 			for(var/mob/observer/dead/ghost in player_list)
 				if(ghost.mind == M.mind)
-					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>"
+					to_chat(ghost, "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>")
 					break
 	return
 
@@ -171,7 +195,14 @@
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.loc = src.loc
+	if(istype(occupant,/mob/living/carbon/brain))
+		for(var/obj/O in src)
+			if(istype(O,/obj/item/organ/internal/brain))
+				O.loc = get_turf(src)
+				src.occupant.loc = O
+				break
+	else
+		src.occupant.loc = src.loc
 	src.occupant = null
 	src.icon_state = "scanner_0"
 	return
@@ -209,8 +240,7 @@
 
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
-	desc = "Scand DNA."
-	icon = 'icons/obj/computer.dmi'
+	desc = "Scan DNA."
 	icon_keyboard = "med_key"
 	icon_screen = "dna"
 	density = 1
@@ -241,8 +271,8 @@
 			user.drop_item()
 			I.loc = src
 			src.disk = I
-			user << "You insert [I]."
-			nanomanager.update_uis(src) // update all UIs attached to src
+			to_chat(user, "You insert [I].")
+			SSnanoui.update_uis(src) // update all UIs attached to src
 			return
 	else
 		..()
@@ -322,7 +352,7 @@
   */
 /obj/machinery/computer/scan_consolenew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
-	if(user == connected.occupant || user.stat)
+	if(!connected || user == connected.occupant || user.stat)
 		return
 
 	// this is the data which will be sent to the ui
@@ -400,7 +430,7 @@
 				data["beakerVolume"] += R.volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -437,7 +467,7 @@
 		irradiating = src.radiation_duration
 		var/lock_state = src.connected.locked
 		src.connected.locked = 1//lock it
-		nanomanager.update_uis(src) // update all UIs attached to src
+		SSnanoui.update_uis(src) // update all UIs attached to src
 
 		sleep(10*src.radiation_duration) // sleep for radiation_duration seconds
 
@@ -538,7 +568,7 @@
 		irradiating = src.radiation_duration
 		var/lock_state = src.connected.locked
 		src.connected.locked = 1//lock it
-		nanomanager.update_uis(src) // update all UIs attached to src
+		SSnanoui.update_uis(src) // update all UIs attached to src
 
 		sleep(10*src.radiation_duration) // sleep for radiation_duration seconds
 
@@ -596,7 +626,7 @@
 		irradiating = src.radiation_duration
 		var/lock_state = src.connected.locked
 		src.connected.locked = 1 //lock it
-		nanomanager.update_uis(src) // update all UIs attached to src
+		SSnanoui.update_uis(src) // update all UIs attached to src
 
 		sleep(10*src.radiation_duration) // sleep for radiation_duration seconds
 
@@ -678,7 +708,10 @@
 				databuf.types = DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.dna.real_name
+					var/mob/living/carbon/human/H = connected.occupant
+					databuf.dna.real_name = H.dna.real_name
+					databuf.gender = H.gender
+					databuf.body_descriptors = H.descriptors
 				databuf.name = "Unique Identifier"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -689,7 +722,10 @@
 				databuf.types = DNA2_BUF_UI|DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.dna.real_name
+					var/mob/living/carbon/human/H = connected.occupant
+					databuf.dna.real_name = H.dna.real_name
+					databuf.gender = H.gender
+					databuf.body_descriptors = H.descriptors
 				databuf.name = "Unique Identifier + Unique Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -700,7 +736,10 @@
 				databuf.types = DNA2_BUF_SE
 				databuf.dna = src.connected.occupant.dna.Clone()
 				if(ishuman(connected.occupant))
-					databuf.dna.real_name=connected.occupant.dna.real_name
+					var/mob/living/carbon/human/H = connected.occupant
+					databuf.dna.real_name = H.dna.real_name
+					databuf.gender = H.gender
+					databuf.body_descriptors = H.descriptors
 				databuf.name = "Structural Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -723,7 +762,7 @@
 			irradiating = 2
 			var/lock_state = src.connected.locked
 			src.connected.locked = 1//lock it
-			nanomanager.update_uis(src) // update all UIs attached to src
+			SSnanoui.update_uis(src) // update all UIs attached to src
 
 			sleep(10*2) // sleep for 2 seconds
 
@@ -736,10 +775,18 @@
 				if ((buf.types & DNA2_BUF_UE))
 					src.connected.occupant.real_name = buf.dna.real_name
 					src.connected.occupant.name = buf.dna.real_name
+					if(ishuman(connected.occupant))
+						var/mob/living/carbon/human/H = connected.occupant
+						H.gender = buf.gender
+						H.descriptors = buf.body_descriptors
 				src.connected.occupant.UpdateAppearance(buf.dna.UI.Copy())
 			else if (buf.types & DNA2_BUF_SE)
 				src.connected.occupant.dna.SE = buf.dna.SE
 				src.connected.occupant.dna.UpdateSE()
+				if(ishuman(connected.occupant))
+					var/mob/living/carbon/human/H = connected.occupant
+					H.gender = buf.gender
+					H.descriptors = buf.body_descriptors
 				domutcheck(src.connected.occupant,src.connected)
 			src.connected.occupant.apply_effect(rand(20,50), IRRADIATE, check_protection = 0)
 			return 1

@@ -1,10 +1,15 @@
 /datum/reagent/blood
-	data = new/list("donor" = null, "viruses" = null, "species" = "Human", "blood_DNA" = null, "blood_type" = null, "blood_colour" = "#A10808", "resistances" = null, "trace_chem" = null, "antibodies" = list())
+	data = new/list("donor" = null, "viruses" = null, "species" = SPECIES_HUMAN, "blood_DNA" = null, "blood_type" = null, "blood_colour" = "#A10808", "resistances" = null, "trace_chem" = null, "antibodies" = list())
 	name = "Blood"
 	id = "blood"
+	taste_description = "iron"
+	taste_mult = 1.3
 	reagent_state = LIQUID
 	metabolism = REM * 5
+	mrate_static = TRUE
+	affects_dead = 1 //so you can pump blood into someone before defibbing them
 	color = "#C80000"
+	var/volume_mod = 1	// So if you add different subtypes of blood, you can affect how much vessel blood each unit of reagent adds
 
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
@@ -37,6 +42,13 @@
 	var/effective_dose = dose
 	if(issmall(M)) effective_dose *= 2
 
+	if(alien == IS_SLIME)	// Treat it like nutriment for the jello, but not equivalent.
+		M.heal_organ_damage(0.2 * removed * volume_mod, 0)	// More 'effective' blood means more usable material.
+		M.nutrition += 20 * removed * volume_mod
+		M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+		M.adjustToxLoss(removed / 2)	// Still has some water in the form of plasma.
+		return
+
 	if(effective_dose > 5)
 		M.adjustToxLoss(removed)
 	if(effective_dose > 15)
@@ -54,6 +66,9 @@
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
+	if(alien == IS_SLIME)
+		affect_ingest(M, alien, removed)
+		return
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -65,16 +80,33 @@
 		M.antibodies |= data["antibodies"]
 
 /datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.inject_blood(src, volume)
+	if(alien == IS_SLIME)	//They don't have blood, so it seems weird that they would instantly 'process' the chemical like another species does.
+		affect_ingest(M, alien, removed)
+		return
+	M.inject_blood(src, volume * volume_mod)
 	remove_self(volume)
+
+/datum/reagent/blood/synthblood
+	name = "Synthetic blood"
+	id = "synthblood"
+	color = "#999966"
+	volume_mod = 2
+
+/datum/reagent/blood/synthblood/initialize_data(var/newdata)
+	..()
+	if(data && !data["blood_type"])
+		data["blood_type"] = "O-"
+	return
 
 // pure concentrated antibodies
 /datum/reagent/antibodies
 	data = list("antibodies"=list())
 	name = "Antibodies"
+	taste_description = "slime"
 	id = "antibodies"
 	reagent_state = LIQUID
 	color = "#0050F0"
+	mrate_static = TRUE
 
 /datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(src.data)
@@ -85,6 +117,7 @@
 /datum/reagent/water
 	name = "Water"
 	id = "water"
+	taste_description = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
 	color = "#0064C877"
@@ -117,52 +150,65 @@
 	else if(volume >= 10)
 		T.wet_floor(1)
 
-/datum/reagent/water/touch_obj(var/obj/O)
+/datum/reagent/water/touch_obj(var/obj/O, var/amount)
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
+	else
+		O.water_act(amount / 5)
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
-		var/needed = L.fire_stacks * 10
+		// First, kill slimes.
+		if(istype(L, /mob/living/simple_mob/slime))
+			var/mob/living/simple_mob/slime/S = L
+			S.adjustToxLoss(15 * amount)
+			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+
+		// Then extinguish people on fire.
+		var/needed = L.fire_stacks * 5
 		if(amount > needed)
-			L.fire_stacks = 0
 			L.ExtinguishMob()
-			remove_self(needed)
-		else
-			L.adjust_fire_stacks(-(amount / 10))
-			remove_self(amount)
+		L.adjust_fire_stacks(-(amount / 5))
+		remove_self(needed)
+
+/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(6 * removed)
+	else
+		..()
+
+/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_SLIME)
+		M.adjustToxLoss(6 * removed)
+	else
+		..()
 
 /datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(istype(M, /mob/living/carbon/slime))
-		var/mob/living/carbon/slime/S = M
-		S.adjustToxLoss(15 * removed) // Babies have 150 health, adults have 200; So, 10 units and 13.5
-		if(!S.client)
-			if(S.Target) // Like cats
-				S.Target = null
-				++S.Discipline
-		if(dose == removed)
-			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+	if(alien == IS_SLIME && prob(10))
+		M.visible_message("<span class='warning'>[M]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
+	..()
 
 /datum/reagent/fuel
 	name = "Welding fuel"
 	id = "fuel"
 	description = "Required for welders. Flamable."
+	taste_description = "gross metal"
 	reagent_state = LIQUID
 	color = "#660000"
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 
-/datum/reagent/fuel/touch_turf(var/turf/T)
-	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
-	remove_self(volume)
+/datum/reagent/fuel/touch_turf(var/turf/T, var/amount)
+	new /obj/effect/decal/cleanable/liquid_fuel(T, amount, FALSE)
+	remove_self(amount)
 	return
 
 /datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
-	M.adjustToxLoss(2 * removed)
+	M.adjustToxLoss(4 * removed)
 
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))

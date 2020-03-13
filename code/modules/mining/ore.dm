@@ -1,8 +1,9 @@
 /obj/item/weapon/ore
-	name = "rock"
+	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
-	w_class = 2
+	randpixel = 8
+	w_class = ITEMSIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/material
 
@@ -24,6 +25,12 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	material = "carbon"
 
+/obj/item/weapon/ore/marble
+	name = "recrystallized carbonate"
+	icon_state = "ore_marble"
+	origin_tech = list(TECH_MATERIAL = 1)
+	material = "marble"
+
 /obj/item/weapon/ore/glass
 	name = "sand"
 	icon_state = "ore_glass"
@@ -36,8 +43,8 @@
 	..()
 	var/mob/living/carbon/human/H = hit_atom
 	if(istype(H) && H.has_eyes() && prob(85))
-		H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
-		H.eye_blind += 5
+		to_chat(H, "<span class='danger'>Some of \the [src] gets in your eyes!</span>")
+		H.Blind(5)
 		H.eye_blurry += 10
 		spawn(1)
 			if(istype(loc, /turf/)) qdel(src)
@@ -77,6 +84,29 @@
 	icon_state = "ore_hydrogen"
 	material = "mhydrogen"
 
+/obj/item/weapon/ore/verdantium
+	name = "verdantite dust"
+	icon_state = "ore_verdantium"
+	material = MAT_VERDANTIUM
+	origin_tech = list(TECH_MATERIAL = 7)
+
+// POCKET ... Crystal dust.
+/obj/item/weapon/ore/verdantium/throw_impact(atom/hit_atom)
+	..()
+	var/mob/living/carbon/human/H = hit_atom
+	if(istype(H) && H.has_eyes() && prob(85))
+		to_chat(H, "<span class='danger'>Some of \the [src] gets in your eyes!</span>")
+		H.Blind(10)
+		H.eye_blurry += 15
+		spawn(1)
+			if(istype(loc, /turf/)) qdel(src)
+
+/obj/item/weapon/ore/lead
+	name = "lead glance"
+	icon_state = "ore_lead"
+	material = MAT_LEAD
+	origin_tech = list(TECH_MATERIAL = 3)
+
 /obj/item/weapon/ore/slag
 	name = "Slag"
 	desc = "Someone screwed up..."
@@ -84,8 +114,7 @@
 	material = null
 
 /obj/item/weapon/ore/New()
-	pixel_x = rand(0,16)-8
-	pixel_y = rand(0,8)-8
+	randpixel_xy()
 
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))

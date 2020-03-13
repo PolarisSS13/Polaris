@@ -5,12 +5,15 @@
 	set category = "OOC"
 	if(config.wikiurl)
 		if(query)
-			var/output = config.wikiurl + "/doku.php?do=search&id=" + query
-			src << link(output)
+			if(config.wikisearchurl)
+				var/output = replacetext(config.wikisearchurl, "%s", url_encode(query))
+				src << link(output)
+			else
+				to_chat(src, "<span class='warning'> The wiki search URL is not set in the server configuration.</span>")
 		else
 			src << link(config.wikiurl)
 	else
-		src << "<span class='warning'>The wiki URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
 		return
 
 /client/verb/forum()
@@ -22,7 +25,7 @@
 			return
 		src << link(config.forumurl)
 	else
-		src << "<span class='warning'>The forum URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 		return
 
 /client/verb/rules()
@@ -35,7 +38,7 @@
 			return
 		src << link(config.rulesurl)
 	else
-		src << "<span class='danger'>The rules URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='danger'>The rules URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/map()
@@ -48,7 +51,7 @@
 			return
 		src << link(config.mapurl)
 	else
-		src << "<span class='danger'>The map URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='danger'>The map URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/github()
@@ -61,7 +64,7 @@
 			return
 		src << link(config.githuburl)
 	else
-		src << "<span class='danger'>The GitHub URL is not set in the server configuration.</span>"
+		to_chat(src, "<span class='danger'>The GitHub URL is not set in the server configuration.</span>")
 	return
 
 /client/verb/hotkeys_help()
@@ -97,8 +100,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t2 = disarm-intent
 \t3 = grab-intent
 \t4 = harm-intent
-\tCtrl = drag
-\tShift = examine
+\tCtrl+Click = pull
+\tShift+Click = examine
 </font>"}
 
 	var/other = {"<font color='purple'>
@@ -122,7 +125,7 @@ Any-Mode: (hotkey doesn't need to be on)
 \tF2 = ooc
 \tF3 = say
 \tF4 = emote
-\tDEL = pull
+\tDEL = stop pulling
 \tINS = cycle-intents-right
 \tHOME = drop
 \tPGUP = swap-hand
@@ -148,8 +151,8 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t3 = activate module 3
 \t4 = toggle intents
 \t5 = emote
-\tCtrl = drag
-\tShift = examine
+\tCtrl+Click = pull
+\tShift+Click = examine
 </font>"}
 
 	var/robot_other = {"<font color='purple'>
@@ -171,17 +174,28 @@ Any-Mode: (hotkey doesn't need to be on)
 \tF2 = ooc
 \tF3 = say
 \tF4 = emote
-\tDEL = pull
+\tDEL = stop pulling
 \tINS = toggle intents
 \tPGUP = cycle active modules
 \tPGDN = activate held object
 </font>"}
 
 	if(isrobot(src.mob))
-		src << robot_hotkey_mode
-		src << robot_other
+		to_chat(src,robot_hotkey_mode)
+		to_chat(src,robot_other)
 	else
-		src << hotkey_mode
-		src << other
+		to_chat(src,hotkey_mode)
+		to_chat(src,other)
 	if(holder)
-		src << admin
+		to_chat(src,admin)
+
+// Set the DreamSeeker input macro to the type appropriate for its mob
+/client/proc/set_hotkeys_macro(macro_name = "macro", hotkey_macro_name = "hotkeymode", hotkeys_enabled = null)
+	// If hotkeys mode was not specified, fall back to choice of default in client preferences.
+	if(isnull(hotkeys_enabled))
+		hotkeys_enabled = is_preference_enabled(/datum/client_preference/hotkeys_default)
+
+	if(hotkeys_enabled)
+		winset(src, null, "mainwindow.macro=[hotkey_macro_name] hotkey_toggle.is-checked=true mapwindow.map.focus=true")
+	else
+		winset(src, null, "mainwindow.macro=[macro_name] hotkey_toggle.is-checked=false input.focus=true")

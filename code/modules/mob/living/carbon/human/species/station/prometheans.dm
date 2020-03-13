@@ -3,9 +3,14 @@ var/datum/species/shapeshifter/promethean/prometheans
 // Species definition follows.
 /datum/species/shapeshifter/promethean
 
-	name =             "Promethean"
+	name =             SPECIES_PROMETHEAN
 	name_plural =      "Prometheans"
-	blurb =            "What has Science done?"
+	blurb =            "Prometheans (Macrolimus artificialis) are a species of artificially-created gelatinous humanoids, \
+	chiefly characterized by their primarily liquid bodies and ability to change their bodily shape and color in order to  \
+	mimic many forms of life. Derived from the Aetolian giant slime (Macrolimus vulgaris) inhabiting the warm, tropical planet \
+	of Aetolus, they are a relatively new lab-created sapient species, and as such many things about them have yet to be comprehensively studied. \
+	What has Science done?"
+	catalogue_data = list(/datum/category_item/catalogue/fauna/promethean)
 	show_ssd =         "totally quiescent"
 	death_message =    "rapidly loses cohesion, splattering across the ground..."
 	knockout_message = "collapses inwards, forming a disordered puddle of goo."
@@ -14,44 +19,74 @@ var/datum/species/shapeshifter/promethean/prometheans
 	blood_color = "#05FF9B"
 	flesh_color = "#05FFFB"
 
-	hunger_factor =    DEFAULT_HUNGER_FACTOR //todo
+	hunger_factor =    0.2
 	reagent_tag =      IS_SLIME
 	mob_size =         MOB_SMALL
 	bump_flag =        SLIME
 	swap_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
-	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS
-	spawn_flags =      SPECIES_IS_RESTRICTED
+	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT
+	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR
+	spawn_flags		 = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	health_hud_intensity = 2
+	num_alternate_languages = 3
+	species_language = LANGUAGE_SOL_COMMON
+	secondary_langs = list(LANGUAGE_SOL_COMMON)	// For some reason, having this as their species language does not allow it to be chosen.
+	assisted_langs = list(LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)	// Prometheans are weird, let's just assume they can use basically any language.
 
 	breath_type = null
 	poison_type = null
 
-	gluttonous =            2
-	virus_immune =          1
-	blood_volume =          600
-	min_age =               1
-	max_age =               5
-	brute_mod =             0.5
-	burn_mod =              2
-	oxy_mod =               0
-	total_health =          120
+	speech_bubble_appearance = "slime"
 
-	cold_level_1 =          260
-	cold_level_2 =          200
-	cold_level_3 =          120
+	male_cough_sounds = list('sound/effects/slime_squish.ogg')
+	female_cough_sounds = list('sound/effects/slime_squish.ogg')
 
-	heat_level_1 =          360
-	heat_level_2 =          400
-	heat_level_3 =          1000
+	min_age =		1
+	max_age =		10
 
-	body_temperature =      310.15
+	economic_modifier = 3
 
-	siemens_coefficient =   -1
-	rarity_value =          5
+	gluttonous =	1
+	virus_immune =	1
+	blood_volume =	560
+	brute_mod =		0.75
+	burn_mod =		2
+	oxy_mod =		0
+	flash_mod =		0.5 //No centralized, lensed eyes.
+	item_slowdown_mod = 1.33
+
+	cloning_modifier = /datum/modifier/cloning_sickness/promethean
+
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 320 //Default 360
+	heat_level_2 = 370 //Default 400
+	heat_level_3 = 600 //Default 1000
+
+	body_temperature = T20C	// Room temperature
+
+	rarity_value = 5
+	siemens_coefficient = 0.8
+
+	water_resistance = 0
+	water_damage_mod = 0.3
+
+	genders = list(MALE, FEMALE, NEUTER, PLURAL)
 
 	unarmed_types = list(/datum/unarmed_attack/slime_glomp)
-	has_organ =     list(O_BRAIN = /obj/item/organ/internal/brain/slime) // Slime core.
+
+	has_organ =     list(O_BRAIN = /obj/item/organ/internal/brain/slime,
+						O_HEART = /obj/item/organ/internal/heart/grey/colormatch/slime,
+						O_REGBRUTE = /obj/item/organ/internal/regennetwork,
+						O_REGBURN = /obj/item/organ/internal/regennetwork/burn,
+						O_REGOXY = /obj/item/organ/internal/regennetwork/oxy,
+						O_REGTOX = /obj/item/organ/internal/regennetwork/tox)
+
+	dispersed_eyes = TRUE
+
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest/unbreakable/slime),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin/unbreakable/slime),
@@ -72,41 +107,55 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_shape,
 		/mob/living/carbon/human/proc/shapeshifter_select_colour,
 		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender
+		/mob/living/carbon/human/proc/shapeshifter_select_eye_colour,
+		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
+		/mob/living/carbon/human/proc/shapeshifter_select_gender,
+		/mob/living/carbon/human/proc/regenerate
 		)
 
-	valid_transform_species = list("Human", "Unathi", "Tajara", "Skrell", "Diona", "Teshari", "Monkey")
-	monochromatic = 1
+	valid_transform_species = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_TESHARI, SPECIES_MONKEY)
 
-	var/heal_rate = 5 // Temp. Regen per tick.
+	var/heal_rate = 0.5 // Temp. Regen per tick.
 
 /datum/species/shapeshifter/promethean/New()
 	..()
 	prometheans = src
 
 /datum/species/shapeshifter/promethean/equip_survival_gear(var/mob/living/carbon/human/H)
-	var/boxtype = pick(typesof(/obj/item/weapon/storage/toolbox/lunchbox))
+	var/boxtype = pick(list(/obj/item/weapon/storage/toolbox/lunchbox,
+							/obj/item/weapon/storage/toolbox/lunchbox/heart,
+							/obj/item/weapon/storage/toolbox/lunchbox/cat,
+							/obj/item/weapon/storage/toolbox/lunchbox/nt,
+							/obj/item/weapon/storage/toolbox/lunchbox/mars,
+							/obj/item/weapon/storage/toolbox/lunchbox/cti,
+							/obj/item/weapon/storage/toolbox/lunchbox/nymph,
+							/obj/item/weapon/storage/toolbox/lunchbox/syndicate))	//Only pick the empty types
 	var/obj/item/weapon/storage/toolbox/lunchbox/L = new boxtype(get_turf(H))
-	var/mob/living/simple_animal/mouse/mouse = new (L)
-	var/obj/item/weapon/holder/holder = new (L)
-	mouse.forceMove(holder)
-	holder.sync(mouse)
+	new /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar(L)
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(L, slot_r_hand)
 	else
 		H.equip_to_slot_or_del(L, slot_in_backpack)
 
-/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H,var/mob/living/target)
+/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H, var/mob/living/target)
 
 	var/t_him = "them"
-	switch(target.gender)
-		if(MALE)
-			t_him = "him"
-		if(FEMALE)
-			t_him = "her"
+	if(ishuman(target))
+		var/mob/living/carbon/human/T = target
+		switch(T.identifying_gender)
+			if(MALE)
+				t_him = "him"
+			if(FEMALE)
+				t_him = "her"
+	else
+		switch(target.gender)
+			if(MALE)
+				t_him = "him"
+			if(FEMALE)
+				t_him = "her"
 
 	H.visible_message("<span class='notice'>\The [H] glomps [target] to make [t_him] feel better!</span>", \
-					"<span class='notice'>You glomps [target] to make [t_him] feel better!</span>")
+					"<span class='notice'>You glomp [target] to make [t_him] feel better!</span>")
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(var/mob/living/carbon/human/H)
@@ -115,48 +164,137 @@ var/datum/species/shapeshifter/promethean/prometheans
 			H.gib()
 
 /datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
+	var/healing = TRUE	// Switches to FALSE if healing is not possible at all.
+	var/regen_brute = TRUE
+	var/regen_burn = TRUE
+	var/regen_tox = TRUE
+	var/regen_oxy = TRUE
+	if(H.fire_stacks < 0 && H.get_water_protection() <= 0.5)	// If over half your body is soaked, you're melting.
+		H.adjustToxLoss(max(0,(3 - (3 * H.get_water_protection())) * heal_rate))	// Tripled because 0.5 is miniscule, and fire_stacks are capped in both directions.
+		healing = FALSE
 
-	var/turf/T = H.loc
+	//Prometheans automatically clean every surface they're in contact with every life tick - this includes the floor without shoes.
+	//They gain nutrition from doing this.
+	var/turf/T = get_turf(H)
 	if(istype(T))
-		var/obj/effect/decal/cleanable/C = locate() in T
-		if(C)
-			qdel(C)
-			//TODO: gain nutriment
+		if(!(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET))))
+			for(var/obj/O in T)
+				O.clean_blood()
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+			if (istype(T, /turf/simulated))
+				var/turf/simulated/S = T
+				T.clean_blood()
+				S.dirt = 0
+				H.nutrition = min(500, max(0, H.nutrition + rand(10, 20)))
+		if(H.clean_blood(1))
+			H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		if(H.r_hand)
+			if(H.r_hand.clean_blood())
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		if(H.l_hand)
+			if(H.l_hand.clean_blood())
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		if(H.head)
+			if(H.head.clean_blood())
+				H.update_inv_head(0)
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		if(H.wear_suit)
+			if(H.wear_suit.clean_blood())
+				H.update_inv_wear_suit(0)
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		if(H.w_uniform)
+			if(H.w_uniform.clean_blood())
+				H.update_inv_w_uniform(0)
+				H.nutrition = min(500, max(0, H.nutrition + rand(5, 15)))
+		//End cleaning code.
 
-	// Regenerate limbs and heal damage if we have any. Copied from Bay xenos code.
+		var/datum/gas_mixture/environment = T.return_air()
+		var/pressure = environment.return_pressure()
+		var/affecting_pressure = H.calculate_affecting_pressure(pressure)
+		if(affecting_pressure <= hazard_low_pressure) // Dangerous low pressure stops the regeneration of physical wounds. Body is focusing on keeping them intact rather than sealing.
+			regen_brute = FALSE
+			regen_burn = FALSE
 
-	// Theoretically the only internal organ a slime will have
-	// is the slime core. but we might as well be thorough.
-	for(var/obj/item/organ/I in H.internal_organs)
-		if(I.damage > 0)
-			I.damage = max(I.damage - heal_rate, 0)
-			if (prob(5))
-				H << "<span class='notice'>You feel a soothing sensation within your [I.name]...</span>"
-			return 1
+	if(world.time < H.l_move_time + 1 MINUTE)	// Need to stay still for a minute, before passive healing will activate.
+		healing = FALSE
 
-	// Replace completely missing limbs.
-	for(var/limb_type in has_limbs)
-		var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-		if(E && (E.is_stump() || (E.status & (ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_MUTATED))))
-			E.removed()
-			qdel(E)
-			E = null
-		if(!E)
-			var/list/organ_data = has_limbs[limb_type]
-			var/limb_path = organ_data["path"]
-			var/obj/item/organ/O = new limb_path(H)
-			organ_data["descriptor"] = O.name
-			H << "<span class='notice'>You feel a slithering sensation as your [O.name] reforms.</span>"
-			H.update_body()
-			return 1
+	if(H.bodytemperature > heat_level_1 || H.bodytemperature < cold_level_1)	// If you're too hot or cold, you can't heal.
+		healing = FALSE
 
 	// Heal remaining damage.
-	if (H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
-		H.adjustBruteLoss(-heal_rate)
-		H.adjustFireLoss(-heal_rate)
-		H.adjustOxyLoss(-heal_rate)
-		H.adjustToxLoss(-heal_rate)
-		return 1
+	if(healing)
+		if(H.getBruteLoss() || H.getFireLoss() || H.getOxyLoss() || H.getToxLoss())
+			var/nutrition_cost = 0		// The total amount of nutrition drained every tick, when healing
+			var/nutrition_debt = 0		// Holder variable used to store previous damage values prior to healing for use in the nutrition_cost equation.
+			var/starve_mod = 1			// Lowering this lowers healing and increases agony multiplicatively.
+
+			var/strain_negation = 0		// How much agony is being prevented by the
+
+			if(H.nutrition <= 150)		// This is when the icon goes red
+				starve_mod = 0.75
+				if(H.nutrition <= 50)	// Severe starvation. Damage repaired beyond this point will cause a stunlock if untreated.
+					starve_mod = 0.5
+
+			var/to_pay = 0
+			if(regen_brute)
+				nutrition_debt = H.getBruteLoss()
+				H.adjustBruteLoss(-heal_rate * starve_mod)
+
+				to_pay = nutrition_debt - H.getBruteLoss()
+
+				nutrition_cost += to_pay
+
+				var/obj/item/organ/internal/regennetwork/BrReg = H.internal_organs_by_name[O_REGBRUTE]
+
+				if(BrReg)
+					strain_negation += to_pay * max(0, (1 - BrReg.get_strain_percent()))
+
+			if(regen_burn)
+				nutrition_debt = H.getFireLoss()
+				H.adjustFireLoss(-heal_rate * starve_mod)
+
+				to_pay = nutrition_debt - H.getFireLoss()
+
+				nutrition_cost += to_pay
+
+				var/obj/item/organ/internal/regennetwork/BuReg = H.internal_organs_by_name[O_REGBURN]
+
+				if(BuReg)
+					strain_negation += to_pay * max(0, (1 - BuReg.get_strain_percent()))
+
+			if(regen_oxy)
+				nutrition_debt = H.getOxyLoss()
+				H.adjustOxyLoss(-heal_rate * starve_mod)
+
+				to_pay = nutrition_debt - H.getOxyLoss()
+
+				nutrition_cost += to_pay
+
+				var/obj/item/organ/internal/regennetwork/OxReg = H.internal_organs_by_name[O_REGOXY]
+
+				if(OxReg)
+					strain_negation += to_pay * max(0, (1 - OxReg.get_strain_percent()))
+
+			if(regen_tox)
+				nutrition_debt = H.getToxLoss()
+				H.adjustToxLoss(-heal_rate * starve_mod)
+
+				to_pay = nutrition_debt - H.getToxLoss()
+
+				nutrition_cost += to_pay
+
+				var/obj/item/organ/internal/regennetwork/ToxReg = H.internal_organs_by_name[O_REGTOX]
+
+				if(ToxReg)
+					strain_negation += to_pay * max(0, (1 - ToxReg.get_strain_percent()))
+
+			H.nutrition -= (3 * nutrition_cost) //Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
+			H.nutrition = max(0, H.nutrition) //Ensure it's not below 0.
+
+			var/agony_to_apply = ((1 / starve_mod) * (nutrition_cost - strain_negation)) //Regenerating damage causes minor pain over time, if the organs responsible are nonexistant or too high on strain. Small injures will be no issue, large ones will cause problems.
+
+			if((starve_mod <= 0.5 && (H.getHalLoss() + agony_to_apply) <= 90) || ((H.getHalLoss() + agony_to_apply) <= 70))	// Will max out at applying halloss at 70, unless they are starving; starvation regeneration will bring them up to a maximum of 120, the same amount of agony a human receives from three taser hits.
+				H.apply_damage(agony_to_apply, HALLOSS)
 
 /datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/carbon/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
@@ -170,11 +308,11 @@ var/datum/species/shapeshifter/promethean/prometheans
 		return
 
 	var/t_she = "She is"
-	if(H.gender == MALE)
+	if(H.identifying_gender == MALE)
 		t_she = "He is"
-	else if(H.gender == PLURAL)
+	else if(H.identifying_gender == PLURAL)
 		t_she = "They are"
-	else if(H.gender == NEUTER)
+	else if(H.identifying_gender == NEUTER)
 		t_she = "It is"
 
 	switch(stored_shock_by_ref["\ref[H]"])

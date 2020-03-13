@@ -67,8 +67,8 @@ var/const/tk_maxrange = 15
 	icon_state = "2"
 	flags = NOBLUDGEON
 	//item_state = null
-	w_class = 10.0
-	layer = 20
+	w_class = ITEMSIZE_NO_CONTAINER
+	layer = HUD_LAYER
 
 	var/last_throw = 0
 	var/atom/movable/focus = null
@@ -110,7 +110,7 @@ var/const/tk_maxrange = 15
 	if(focus)
 		d = max(d, get_dist(user, focus)) // whichever is further
 	if(d > tk_maxrange)
-		user << "<span class='notice'>Your mind won't reach that far.</span>"
+		to_chat(user, "<span class='notice'>Your mind won't reach that far.</span>")
 		return
 
 	if(!focus)
@@ -149,12 +149,12 @@ var/const/tk_maxrange = 15
 
 /obj/item/tk_grab/proc/apply_focus_overlay()
 	if(!focus)	return
-	var/obj/effect/overlay/O = PoolOrNew(/obj/effect/overlay, locate(focus.x,focus.y,focus.z))
+	var/obj/effect/overlay/O = new /obj/effect/overlay(locate(focus.x,focus.y,focus.z))
 	O.name = "sparkles"
 	O.anchored = 1
 	O.density = 0
 	O.layer = FLY_LAYER
-	O.set_dir(pick(cardinal))
+	O.set_dir(pick(GLOB.cardinal))
 	O.icon = 'icons/effects/effects.dmi'
 	O.icon_state = "nothing"
 	flick("empdisable",O)

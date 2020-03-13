@@ -4,30 +4,23 @@
 	req_access = list(access_all_personal_lockers)
 	var/registered_name = null
 
-/obj/structure/closet/secure_closet/personal/New()
-	..()
-	spawn(2)
-		if(prob(50))
-			new /obj/item/weapon/storage/backpack(src)
-		else
-			new /obj/item/weapon/storage/backpack/satchel/norm(src)
-		new /obj/item/device/radio/headset( src )
-	return
+	starts_with = list(
+		/obj/item/device/radio/headset)
 
+/obj/structure/closet/secure_closet/personal/Initialize()
+	if(prob(50))
+		starts_with += /obj/item/weapon/storage/backpack
+	else
+		starts_with += /obj/item/weapon/storage/backpack/satchel/norm
+	return ..()
 
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
 
-/obj/structure/closet/secure_closet/personal/patient/New()
-	..()
-	spawn(4)
-		// Not really the best way to do this, but it's better than "contents = list()"!
-		for(var/atom/movable/AM in contents)
-			qdel(AM)
-		new /obj/item/clothing/under/color/white( src )
-		new /obj/item/clothing/shoes/white( src )
-	return
-
+	starts_with = list(
+		/obj/item/clothing/under/medigown,
+		/obj/item/clothing/under/color/white,
+		/obj/item/clothing/shoes/white)
 
 
 /obj/structure/closet/secure_closet/personal/cabinet
@@ -37,6 +30,11 @@
 	icon_opened = "cabinetdetective_open"
 	icon_broken = "cabinetdetective_broken"
 	icon_off = "cabinetdetective_broken"
+
+	starts_with = list(
+		/obj/item/weapon/storage/backpack/satchel/withwallet,
+		/obj/item/device/radio/headset
+		)
 
 /obj/structure/closet/secure_closet/personal/cabinet/update_icon()
 	if(broken)
@@ -50,27 +48,18 @@
 		else
 			icon_state = icon_opened
 
-/obj/structure/closet/secure_closet/personal/cabinet/New()
-	..()
-	spawn(4)
-		// Not really the best way to do this, but it's better than "contents = list()"!
-		for(var/atom/movable/AM in contents)
-			qdel(AM)
-		new /obj/item/weapon/storage/backpack/satchel/withwallet( src )
-		new /obj/item/device/radio/headset( src )
-	return
-
 /obj/structure/closet/secure_closet/personal/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.opened)
 		if (istype(W, /obj/item/weapon/grab))
-			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
+			var/obj/item/weapon/grab/G = W
+			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 		user.drop_item()
 		if (W) W.forceMove(src.loc)
 	else if(W.GetID())
 		var/obj/item/weapon/card/id/I = W.GetID()
 
 		if(src.broken)
-			user << "<span class='warning'>It appears to be broken.</span>"
+			to_chat(user, "<span class='warning'>It appears to be broken.</span>")
 			return
 		if(!I || !I.registered_name)	return
 		if(src.allowed(user) || !src.registered_name || (istype(I) && (src.registered_name == I.registered_name)))
@@ -83,7 +72,7 @@
 				src.registered_name = I.registered_name
 				src.desc = "Owned by [I.registered_name]."
 		else
-			user << "<span class='warning'>Access Denied</span>"
+			to_chat(user, "<span class='warning'>Access Denied</span>")
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		if(emag_act(INFINITY, user, "The locker has been sliced open by [user] with \an [W]!", "You hear metal being sliced and sparks flying."))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -92,7 +81,7 @@
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src.loc, "sparks", 50, 1)
 	else
-		user << "<span class='warning'>Access Denied</span>"
+		to_chat(user, "<span class='warning'>Access Denied</span>")
 	return
 
 /obj/structure/closet/secure_closet/personal/emag_act(var/remaining_charges, var/mob/user, var/visual_feedback, var/audible_feedback)
@@ -114,9 +103,9 @@
 	if(ishuman(usr))
 		src.add_fingerprint(usr)
 		if (src.locked || !src.registered_name)
-			usr << "<span class='warning'>You need to unlock it first.</span>"
+			to_chat(usr, "<span class='warning'>You need to unlock it first.</span>")
 		else if (src.broken)
-			usr << "<span class='warning'>It appears to be broken.</span>"
+			to_chat(usr, "<span class='warning'>It appears to be broken.</span>")
 		else
 			if (src.opened)
 				if(!src.close())

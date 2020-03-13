@@ -4,6 +4,7 @@ var/list/command_cartridges = list(
 	/obj/item/weapon/cartridge/hos,
 	/obj/item/weapon/cartridge/ce,
 	/obj/item/weapon/cartridge/rd,
+	/obj/item/weapon/cartridge/cmo,
 	/obj/item/weapon/cartridge/head,
 	/obj/item/weapon/cartridge/lawyer // Internal Affaris,
 	)
@@ -49,7 +50,7 @@ var/list/civilian_cartridges = list(
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "cart"
 	item_state = "electronic"
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 
 	var/obj/item/radio/integrated/radio = null
 	var/access_security = 0
@@ -78,6 +79,10 @@ var/list/civilian_cartridges = list(
 	var/message2
 	var/list/stored_data = list()
 
+/obj/item/weapon/cartridge/Destroy()
+	QDEL_NULL(radio)
+	return ..()
+
 /obj/item/weapon/cartridge/engineering
 	name = "\improper Power-ON cartridge"
 	icon_state = "cart-e"
@@ -97,15 +102,16 @@ var/list/civilian_cartridges = list(
 	name = "\improper ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
+	access_medical = 1
 
 /obj/item/weapon/cartridge/security
 	name = "\improper R.O.B.U.S.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/initialize()
+/obj/item/weapon/cartridge/security/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
@@ -144,7 +150,7 @@ var/list/civilian_cartridges = list(
 */
 
 /obj/item/weapon/cartridge/service
-	name = "\improper Serv-U Pro"
+	name = "\improper Serv-U Pro cartridge"
 	desc = "A data cartridge designed to serve YOU!"
 
 /obj/item/weapon/cartridge/signal
@@ -159,13 +165,9 @@ var/list/civilian_cartridges = list(
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/initialize()
+/obj/item/weapon/cartridge/signal/Initialize()
     radio = new /obj/item/radio/integrated/signal(src)
-    ..()
-
-/obj/item/weapon/cartridge/signal/Destroy()
-	qdel(radio)
-	..()
+    . = ..()
 
 /obj/item/weapon/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
@@ -174,12 +176,12 @@ var/list/civilian_cartridges = list(
 	access_quartermaster = 1
 
 /obj/item/weapon/cartridge/miner
-	name = "\improper Drill-Jockey 4.5"
+	name = "\improper Drill-Jockey 4.5 cartridge"
 	desc = "It's covered in some sort of sand."
 	icon_state = "cart-q"
 
 /obj/item/weapon/cartridge/head
-	name = "\improper Easy-Record DELUXE"
+	name = "\improper Easy-Record DELUXE cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
 
@@ -192,39 +194,39 @@ var/list/civilian_cartridges = list(
 	access_security = 1
 
 /obj/item/weapon/cartridge/hos
-	name = "\improper R.O.B.U.S.T. DELUXE"
+	name = "\improper R.O.B.U.S.T. DELUXE cartridge"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/initialize()
+/obj/item/weapon/cartridge/hos/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/ce
-	name = "\improper Power-On DELUXE"
+	name = "\improper Power-On DELUXE cartridge"
 	icon_state = "cart-ce"
 	access_status_display = 1
 	access_engine = 1
 	access_atmos = 1
 
 /obj/item/weapon/cartridge/cmo
-	name = "\improper Med-U DELUXE"
+	name = "\improper Med-U DELUXE cartridge"
 	icon_state = "cart-cmo"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_medical = 1
 
 /obj/item/weapon/cartridge/rd
-	name = "\improper Signal Ace DELUXE"
+	name = "\improper Signal Ace DELUXE cartridge"
 	icon_state = "cart-rd"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/initialize()
+/obj/item/weapon/cartridge/rd/Initialize()
 	radio = new /obj/item/radio/integrated/signal(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/cartridge/captain
 	name = "\improper Value-PAK cartridge"
@@ -264,8 +266,6 @@ var/list/civilian_cartridges = list(
 			if(loc)
 				var/obj/item/PDA = loc
 				var/mob/user = PDA.fingerprintslast
-				if(istype(PDA.loc,/mob/living))
-					name = PDA.loc
 				log_admin("STATUS: [user] set status screen with [PDA]. Message: [data1] [data2]")
 				message_admins("STATUS: [user] set status screen with [PDA]. Message: [data1] [data2]")
 
@@ -435,7 +435,7 @@ var/list/civilian_cartridges = list(
 		for(var/S in supply_controller.shoppinglist)
 			var/datum/supply_order/SO = S
 
-			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.ordered_by, "Comment" = html_encode(SO.comment))
 		if(!supplyOrderData.len)
 			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
 
@@ -444,10 +444,13 @@ var/list/civilian_cartridges = list(
 
 		var/requestCount = 0
 		var/requestData[0]
-		for(var/S in supply_controller.requestlist)
+		for(var/S in supply_controller.order_history)
 			var/datum/supply_order/SO = S
+			if(SO.status != SUP_ORDER_REQUESTED)
+				continue
+
 			requestCount++
-			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.ordered_by, "Comment" = html_encode(SO.comment))
 		if(!requestData.len)
 			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
 
@@ -469,7 +472,7 @@ var/list/civilian_cartridges = list(
 		else
 			JaniData["user_loc"] = list("x" = 0, "y" = 0)
 		var/MopData[0]
-		for(var/obj/item/weapon/mop/M in world)
+		for(var/obj/item/weapon/mop/M in all_mops)
 			var/turf/ml = get_turf(M)
 			if(ml)
 				if(ml.z != cl.z)
@@ -482,7 +485,7 @@ var/list/civilian_cartridges = list(
 
 
 		var/BucketData[0]
-		for(var/obj/structure/mopbucket/B in world)
+		for(var/obj/structure/mopbucket/B in all_mopbuckets)
 			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
@@ -494,7 +497,7 @@ var/list/civilian_cartridges = list(
 			BucketData[++BucketData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
 
 		var/CbotData[0]
-		for(var/mob/living/bot/cleanbot/B in world)
+		for(var/mob/living/bot/cleanbot/B in mob_list)
 			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
@@ -506,7 +509,7 @@ var/list/civilian_cartridges = list(
 		if(!CbotData.len)
 			CbotData[++CbotData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
 		var/CartData[0]
-		for(var/obj/structure/janitorialcart/B in world)
+		for(var/obj/structure/janitorialcart/B in all_janitorial_carts)
 			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
@@ -570,6 +573,8 @@ var/list/civilian_cartridges = list(
 				active3 = S
 
 		if("Send Signal")
+			if(is_jammed(src))
+				return
 			spawn( 0 )
 				radio:send_signal("ACTIVATE")
 				return

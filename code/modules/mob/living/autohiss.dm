@@ -25,15 +25,15 @@
 	autohiss_mode = (autohiss_mode + 1) % AUTOHISS_NUM
 	switch(autohiss_mode)
 		if(AUTOHISS_OFF)
-			src << "Auto-hiss is now OFF."
+			to_chat(src, "Auto-hiss is now OFF.")
 		if(AUTOHISS_BASIC)
-			src << "Auto-hiss is now BASIC."
+			to_chat(src, "Auto-hiss is now BASIC.")
 		if(AUTOHISS_FULL)
-			src << "Auto-hiss is now FULL."
+			to_chat(src, "Auto-hiss is now FULL.")
 		else
 			soft_assert(0, "invalid autohiss value [autohiss_mode]")
 			autohiss_mode = AUTOHISS_OFF
-			src << "Auto-hiss is now OFF."
+			to_chat(src, "Auto-hiss is now OFF.")
 
 /datum/species
 	var/list/autohiss_basic_map = null
@@ -47,17 +47,19 @@
 	autohiss_extra_map = list(
 			"x" = list("ks", "kss", "ksss")
 		)
-	autohiss_exempt = list("Sinta'unathi")
+	autohiss_exempt = list(LANGUAGE_UNATHI)
 
 /datum/species/tajaran
 	autohiss_basic_map = list(
 			"r" = list("rr", "rrr", "rrrr")
 		)
-	autohiss_exempt = list("Siik'tajr")
+	autohiss_exempt = list(LANGUAGE_SIIK,LANGUAGE_AKHANI)
 
 
 /datum/species/proc/handle_autohiss(message, datum/language/lang, mode)
 	if(!autohiss_basic_map)
+		return message
+	if(lang.flags & NO_STUTTER)		// Currently prevents EAL, Sign language, and emotes from autohissing
 		return message
 	if(autohiss_exempt && (lang.name in autohiss_exempt))
 		return message

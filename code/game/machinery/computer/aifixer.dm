@@ -1,6 +1,6 @@
 /obj/machinery/computer/aifixer
 	name = "\improper AI system integrity restorer"
-	icon = 'icons/obj/computer.dmi'
+	desc = "Restores AI units to working condition, assuming you have one inside!"
 	icon_keyboard = "rd_key"
 	icon_screen = "ai-fixer"
 	light_color = "#a97faa"
@@ -10,6 +10,7 @@
 	var/active = 0
 
 /obj/machinery/computer/aifixer/New()
+	..()
 	update_icon()
 
 /obj/machinery/computer/aifixer/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
@@ -18,8 +19,8 @@
 		return
 
 	// Transfer over the AI.
-	transfer << "You have been uploaded to a stationary terminal. Sadly, there is no remote access from here."
-	user << "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed."
+	to_chat(transfer, "You have been transferred into a stationary terminal. Sadly, there is no remote access from here.")
+	to_chat(user, "<span class='notice'>Transfer successful:</span> [transfer.name] placed within stationary terminal.")
 
 	transfer.loc = src
 	transfer.cancel_camera()
@@ -36,7 +37,7 @@
 	if(istype(I, /obj/item/device/aicard))
 
 		if(stat & (NOPOWER|BROKEN))
-			user << "This terminal isn't functioning right now."
+			to_chat(user, "This terminal isn't functioning right now.")
 			return
 
 		var/obj/item/device/aicard/card = I
@@ -45,7 +46,7 @@
 
 		if(istype(comp_ai))
 			if(active)
-				user << "<span class='danger'>ERROR:</span> Reconstruction in progress."
+				to_chat(user, "<span class='danger'>ERROR:</span> Reconstruction in progress.")
 				return
 			card.grab_ai(comp_ai, user)
 			if(!(locate(/mob/living/silicon/ai) in src)) occupant = null
@@ -101,8 +102,8 @@
 		return 1
 	if (href_list["fix"])
 		src.active = 1
-		src.overlays += image('icons/obj/computer.dmi', "ai-fixer-on")
-		while (src.occupant.health < 100)
+		src.overlays += image(icon, "ai-fixer-on")
+		while (src.occupant.getOxyLoss() > 0 || src.occupant.getFireLoss() > 0 || src.occupant.getToxLoss() > 0 || src.occupant.getBruteLoss() > 0)
 			src.occupant.adjustOxyLoss(-1)
 			src.occupant.adjustFireLoss(-1)
 			src.occupant.adjustToxLoss(-1)
@@ -113,13 +114,13 @@
 				src.occupant.lying = 0
 				dead_mob_list -= src.occupant
 				living_mob_list += src.occupant
-				src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-404")
-				src.overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
+				src.overlays -= image(icon, "ai-fixer-404")
+				src.overlays += image(icon, "ai-fixer-full")
 				src.occupant.add_ai_verbs()
 			src.updateUsrDialog()
 			sleep(10)
 		src.active = 0
-		src.overlays -= image('icons/obj/computer.dmi', "ai-fixer-on")
+		src.overlays -= image(icon, "ai-fixer-on")
 
 
 		src.add_fingerprint(usr)
@@ -134,8 +135,8 @@
 
 	if(occupant)
 		if(occupant.stat)
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-404", overlay_layer)
+			overlays += image(icon, "ai-fixer-404", overlay_layer)
 		else
-			overlays += image('icons/obj/computer.dmi', "ai-fixer-full", overlay_layer)
+			overlays += image(icon, "ai-fixer-full", overlay_layer)
 	else
-		overlays += image('icons/obj/computer.dmi', "ai-fixer-empty", overlay_layer)
+		overlays += image(icon, "ai-fixer-empty", overlay_layer)

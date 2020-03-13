@@ -12,30 +12,41 @@
 	var/charge_cost = 50
 	var/charge_tick = 0
 	var/recharge_time = 5 //Time it takes for shots to recharge (in seconds)
+	var/bypass_protection = FALSE // If true, can inject through things like spacesuits and armor.
 
-	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "tramadol", "dexalin" ,"spaceacillin")
+	var/list/reagent_ids = list("tricordrazine", "inaprovaline", "anti_toxin", "tramadol", "dexalin" ,"spaceacillin")
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
 /obj/item/weapon/reagent_containers/borghypo/surgeon
-	reagent_ids = list("tricordrazine", "inaprovaline", "tramadol", "dexalin" ,"spaceacillin")
+	reagent_ids = list("tricordrazine", "inaprovaline", "oxycodone", "dexalin" ,"spaceacillin")
 
 /obj/item/weapon/reagent_containers/borghypo/crisis
-	reagent_ids = list("tricordrazine", "inaprovaline", "tramadol", "dexalin" ,"spaceacillin")
+	reagent_ids = list("tricordrazine", "inaprovaline", "anti_toxin", "tramadol", "dexalin" ,"spaceacillin")
 
-/obj/item/weapon/reagent_containers/borghypo/New()
-	..()
+/obj/item/weapon/reagent_containers/borghypo/lost
+	reagent_ids = list("tricordrazine", "bicaridine", "dexalin", "anti_toxin", "tramadol", "spaceacillin")
+
+/obj/item/weapon/reagent_containers/borghypo/merc
+	name = "advanced cyborg hypospray"
+	desc = "An advanced nanite and chemical synthesizer and injection system, designed for heavy-duty medical equipment.  This type is capable of safely bypassing \
+	thick materials that other hyposprays would struggle with."
+	bypass_protection = TRUE // Because mercs tend to be in spacesuits.
+	reagent_ids = list("healing_nanites", "hyperzine", "tramadol", "oxycodone", "spaceacillin", "peridaxon", "osteodaxon", "myelamine", "synthblood")
+
+/obj/item/weapon/reagent_containers/borghypo/Initialize()
+	. = ..()
 
 	for(var/T in reagent_ids)
 		reagent_volumes[T] = volume
-		var/datum/reagent/R = chemical_reagents_list[T]
+		var/datum/reagent/R = SSchemistry.chemical_reagents[T]
 		reagent_names += R.name
 
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/reagent_containers/borghypo/Destroy()
-	processing_objects.Remove(src)
-	..()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/weapon/reagent_containers/borghypo/process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
 	if(++charge_tick < recharge_time)
@@ -56,29 +67,29 @@
 		return
 
 	if(!reagent_volumes[reagent_ids[mode]])
-		user << "<span class='warning'>The injector is empty.</span>"
+		to_chat(user, "<span class='warning'>The injector is empty.</span>")
 		return
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 		if(!affected)
-			user << "<span class='danger'>\The [H] is missing that limb!</span>"
+			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
 			return
 		else if(affected.robotic >= ORGAN_ROBOT)
-			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
+			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
 			return
 
-	if (M.can_inject(user, 1))
-		user << "<span class='notice'>You inject [M] with the injector.</span>"
-		M << "<span class='notice'>You feel a tiny prick!</span>"
+	if(M.can_inject(user, 1, ignore_thickness = bypass_protection))
+		to_chat(user, "<span class='notice'>You inject [M] with the injector.</span>")
+		to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
 
 		if(M.reagents)
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
 			M.reagents.add_reagent(reagent_ids[mode], t)
 			reagent_volumes[reagent_ids[mode]] -= t
-			admin_inject_log(user, M, src, reagent_ids[mode], t)
-			user << "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>"
+			add_attack_logs(user, M, "Borg injected with [reagent_ids[mode]]")
+			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob) //Change the mode
@@ -91,7 +102,7 @@
 		else
 			t += "<a href='?src=\ref[src];reagent=[reagent_ids[i]]'>[reagent_names[i]]</a>"
 	t = "Available reagents: [t]."
-	user << t
+	to_chat(user,t)
 
 	return
 
@@ -101,16 +112,16 @@
 		if(t)
 			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
 			mode = t
-			var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
-			usr << "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>"
+			var/datum/reagent/R = SSchemistry.chemical_reagents[reagent_ids[mode]]
+			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[R.name]'.</span>")
 
 /obj/item/weapon/reagent_containers/borghypo/examine(mob/user)
 	if(!..(user, 2))
 		return
 
-	var/datum/reagent/R = chemical_reagents_list[reagent_ids[mode]]
+	var/datum/reagent/R = SSchemistry.chemical_reagents[reagent_ids[mode]]
 
-	user << "<span class='notice'>It is currently producing [R.name] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>"
+	to_chat(user, "<span class='notice'>It is currently producing [R.name] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 
 /obj/item/weapon/reagent_containers/borghypo/service
 	name = "cyborg drink synthesizer"
@@ -121,7 +132,7 @@
 	recharge_time = 3
 	volume = 60
 	possible_transfer_amounts = list(5, 10, 20, 30)
-	reagent_ids = list("beer", "kahlua", "whiskey", "specialwhiskey", "wine", "vodka", "gin", "rum", "tequilla", "vermouth", "cognac", "ale", "mead", "water", "sugar", "ice", "tea", "icetea", "cola", "spacemountainwind", "dr_gibb", "space_up", "tonic", "sodawater", "lemon_lime", "orangejuice", "limejuice", "watermelonjuice")
+	reagent_ids = list("ale", "cider", "beer", "berryjuice", "bitters", "coffee", "cognac", "cola", "dr_gibb", "egg", "gin", "gingerale", "hot_coco", "ice", "icetea", "kahlua", "lemonjuice", "lemon_lime", "limejuice", "mead", "milk", "mint", "orangejuice", "rum", "sake", "sodawater", "soymilk", "space_up", "spacemountainwind", "specialwhiskey", "sugar", "tea", "tequilla", "tomatojuice", "tonic", "vermouth", "vodka", "water", "watermelonjuice", "whiskey", "wine")
 
 /obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return
@@ -134,15 +145,15 @@
 		return
 
 	if(!reagent_volumes[reagent_ids[mode]])
-		user << "<span class='notice'>[src] is out of this reagent, give it some time to refill.</span>"
+		to_chat(user, "<span class='notice'>[src] is out of this reagent, give it some time to refill.</span>")
 		return
 
 	if(!target.reagents.get_free_space())
-		user << "<span class='notice'>[target] is full.</span>"
+		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return
 
 	var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
 	target.reagents.add_reagent(reagent_ids[mode], t)
 	reagent_volumes[reagent_ids[mode]] -= t
-	user << "<span class='notice'>You transfer [t] units of the solution to [target].</span>"
+	to_chat(user, "<span class='notice'>You transfer [t] units of the solution to [target].</span>")
 	return

@@ -3,6 +3,7 @@
 	name = "Transformation Sting"
 	desc = "We silently sting a human, injecting a retrovirus that forces them to transform into another."
 	helptext = "Does not provide a warning to others. The victim will transform much like a changeling would."
+	ability_icon_state = "ling_sting_transform"
 	genomecost = 3
 	verbpath = /mob/proc/changeling_transformation_sting
 
@@ -33,8 +34,9 @@
 	if(!T)
 		return 0
 	if((HUSK in T.mutations) || (!ishuman(T) && !issmall(T)))
-		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
+		to_chat(src, "<span class='warning'>Our sting appears ineffective against its DNA.</span>")
 		return 0
+	add_attack_logs(src,T,"Transformation sting (changeling)")
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
 	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name

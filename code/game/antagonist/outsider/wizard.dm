@@ -83,10 +83,10 @@ var/datum/antagonist/wizard/wizards
 	if(wizard_mob.backbag == 2) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(wizard_mob), slot_back)
 	if(wizard_mob.backbag == 3) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(wizard_mob), slot_back)
 	if(wizard_mob.backbag == 4) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(wizard_mob), slot_back)
+	if(wizard_mob.backbag == 5) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(wizard_mob), slot_back)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box(wizard_mob), slot_in_backpack)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
 	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/spellbook(wizard_mob), slot_r_hand)
-	wizard_mob.update_icons()
 	return 1
 
 /datum/antagonist/wizard/check_victory()
@@ -98,7 +98,7 @@ var/datum/antagonist/wizard/wizards
 		break
 	if(!survivor)
 		feedback_set_details("round_end_result","loss - wizard killed")
-		world << "<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew!</font></span>"
+		to_world("<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew!</font></span>")
 
 //To batch-remove wizard spells. Linked to mind.dm.
 /mob/proc/spellremove()
@@ -115,18 +115,18 @@ obj/item/clothing
 /*Checks if the wizard is wearing the proper attire.
 Made a proc so this is not repeated 14 (or more) times.*/
 /mob/proc/wearing_wiz_garb()
-	src << "Silly creature, you're not a human. Only humans can cast this spell."
+	to_chat(src, "Silly creature, you're not a human. Only humans can cast this spell.")
 	return 0
 
 // Humans can wear clothes.
 /mob/living/carbon/human/wearing_wiz_garb()
 	if(!is_wiz_garb(src.wear_suit))
-		src << "<span class='warning'>I don't feel strong enough without my robe.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my robe.</span>")
 		return 0
 	if(!is_wiz_garb(src.shoes))
-		src << "<span class='warning'>I don't feel strong enough without my sandals.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my sandals.</span>")
 		return 0
 	if(!is_wiz_garb(src.head))
-		src << "<span class='warning'>I don't feel strong enough without my hat.</span>"
+		to_chat(src, "<span class='warning'>I don't feel strong enough without my hat.</span>")
 		return 0
 	return 1

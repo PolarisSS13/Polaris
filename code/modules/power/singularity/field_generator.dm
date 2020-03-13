@@ -83,72 +83,73 @@ field_generator power level display
 	if(state == 2)
 		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
 			if(src.active >= 1)
-				user << "You are unable to turn off the [src.name] once it is online."
+				to_chat(user, "You are unable to turn off the [src.name] once it is online.")
 				return 1
 			else
 				user.visible_message("[user.name] turns on the [src.name]", \
 					"You turn on the [src.name].", \
 					"You hear heavy droning")
 				turn_on()
+				log_game("FIELDGEN([x],[y],[z]) Activated by [key_name(user)]")
 				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
 
 				src.add_fingerprint(user)
 	else
-		user << "The [src] needs to be firmly secured to the floor first."
+		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
 		return
 
 
 /obj/machinery/field_generator/attackby(obj/item/W, mob/user)
 	if(active)
-		user << "The [src] needs to be off."
+		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(W.is_wrench())
 		switch(state)
 			if(0)
 				state = 1
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+				playsound(src, W.usesound, 75, 1)
 				user.visible_message("[user.name] secures [src.name] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear ratchet")
 				src.anchored = 1
 			if(1)
 				state = 0
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+				playsound(src, W.usesound, 75, 1)
 				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear ratchet")
 				src.anchored = 0
 			if(2)
-				user << "\red The [src.name] needs to be unwelded from the floor."
+				to_chat(user, "<font color='red'>The [src.name] needs to be unwelded from the floor.</font>")
 				return
 	else if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		switch(state)
 			if(0)
-				user << "\red The [src.name] needs to be wrenched to the floor."
+				to_chat(user, "<font color='red'>The [src.name] needs to be wrenched to the floor.</font>")
 				return
 			if(1)
 				if (WT.remove_fuel(0,user))
-					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+					playsound(loc, WT.usesound, 50, 1)
 					user.visible_message("[user.name] starts to weld the [src.name] to the floor.", \
 						"You start to weld the [src] to the floor.", \
 						"You hear welding")
-					if (do_after(user,20))
+					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 2
-						user << "You weld the field generator to the floor."
+						to_chat(user, "You weld the field generator to the floor.")
 				else
 					return
 			if(2)
 				if (WT.remove_fuel(0,user))
-					playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+					playsound(loc, WT.usesound, 50, 1)
 					user.visible_message("[user.name] starts to cut the [src.name] free from the floor.", \
 						"You start to cut the [src] free from the floor.", \
 						"You hear welding")
-					if (do_after(user,20))
+					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 1
-						user << "You cut the [src] free from the floor."
+						to_chat(user, "You cut the [src] free from the floor.")
 				else
 					return
 	else
@@ -168,7 +169,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/Destroy()
 	src.cleanup()
-	..()
+	. = ..()
 
 
 
@@ -211,8 +212,9 @@ field_generator power level display
 		return 1
 	else
 		for(var/mob/M in viewers(src))
-			M.show_message("\red \The [src] shuts down!")
+			M.show_message("<font color='red'>\The [src] shuts down!</font>")
 		turn_off()
+		log_game("FIELDGEN([x],[y],[z]) Lost power and was ON.")
 		investigate_log("ran out of power and <font color='red'>deactivated</font>","singulo")
 		src.power = 0
 		return 0
@@ -312,12 +314,12 @@ field_generator power level display
 /obj/machinery/field_generator/proc/cleanup()
 	clean_up = 1
 	for (var/obj/machinery/containment_field/F in fields)
-		if (isnull(F))
+		if (QDELETED(F))
 			continue
 		qdel(F)
 	fields = list()
 	for(var/obj/machinery/field_generator/FG in connected_gens)
-		if (isnull(FG))
+		if (QDELETED(FG))
 			continue
 		FG.connected_gens.Remove(src)
 		if(!FG.clean_up)//Makes the other gens clean up as well
@@ -338,4 +340,5 @@ field_generator power level display
 					temp = 0
 					message_admins("A singulo exists and a containment field has failed.",1)
 					investigate_log("has <font color='red'>failed</font> whilst a singulo exists.","singulo")
+					log_game("FIELDGEN([x],[y],[z]) Containment failed while singulo/tesla exists.")
 			O.last_warning = world.time

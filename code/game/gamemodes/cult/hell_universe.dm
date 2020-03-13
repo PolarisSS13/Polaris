@@ -16,7 +16,7 @@ In short:
 	return 1
 	/*
 	if(user)
-		user << "<span class='sinister'>All you hear on the frequency is static and panicked screaming. There will be no shuttle call today.</span>"
+		to_chat(user, "<span class='sinister'>All you hear on the frequency is static and panicked screaming. There will be no shuttle call today.</span>")
 	return 0
 	*/
 
@@ -62,7 +62,7 @@ In short:
 
 /datum/universal_state/hell/OverlayAndAmbientSet()
 	spawn(0)
-		for(var/atom/movable/lighting_overlay/L in world)
+		for(var/datum/lighting_corner/L in world)
 			L.update_lumcount(1, 0, 0)
 
 		for(var/turf/space/T in turfs)

@@ -21,12 +21,12 @@
 	return
 
 /obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed(W))
 
 	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message("<span class='warning'>\The [src] has been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
 	else
-		visible_message("<span class='warning'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message("<span class='warning'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 
 	var/damage = W.force / 4.0
 
@@ -35,10 +35,22 @@
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+			playsound(src, W.usesound, 100, 1)
 
 	health -= damage
 	healthcheck()
+
+/obj/effect/spider/spiderling/attack_hand(mob/living/user)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	if(prob(20))
+		visible_message("<span class='warning'>\The [user] tries to stomp on \the [src], but misses!</span>")
+		var/list/nearby = oview(2, src)
+		if(length(nearby))
+			walk_to(src, pick(nearby), 2)
+			return
+	visible_message("<span class='warning'>\The [user] stomps \the [src] dead!</span>")
+	die()
 
 /obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
 	..()
@@ -56,74 +68,93 @@
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
-	New()
-		if(prob(50))
-			icon_state = "stickyweb2"
 
-/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-	if(istype(mover, /mob/living/simple_animal/hostile/giant_spider))
-		return 1
+/obj/effect/spider/stickyweb/Initialize()
+	if(prob(50))
+		icon_state = "stickyweb2"
+	return ..()
+
+/obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target)
+	if(istype(mover, /mob/living/simple_mob/animal/giant_spider))
+		return TRUE
 	else if(istype(mover, /mob/living))
 		if(prob(50))
-			mover << "<span class='warning'>You get stuck in \the [src] for a moment.</span>"
-			return 0
+			to_chat(mover, span("warning", "You get stuck in \the [src] for a moment."))
+			return FALSE
 	else if(istype(mover, /obj/item/projectile))
 		return prob(30)
-	return 1
+	return TRUE
 
 /obj/effect/spider/eggcluster
 	name = "egg cluster"
 	desc = "They seem to pulse slightly with an inner life"
 	icon_state = "eggs"
 	var/amount_grown = 0
-	New()
-		pixel_x = rand(3,-3)
-		pixel_y = rand(3,-3)
-		processing_objects |= src
+	var/spiders_min = 6
+	var/spiders_max = 24
+	var/spider_type = /obj/effect/spider/spiderling
+
+/obj/effect/spider/eggcluster/Initialize()
+	pixel_x = rand(3,-3)
+	pixel_y = rand(3,-3)
+	START_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
 	get_light_and_color(parent)
 	..()
 
 /obj/effect/spider/eggcluster/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
 
-	..()
+	return ..()
 
 /obj/effect/spider/eggcluster/process()
 	amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(6,24)
+		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/spiderling = PoolOrNew(/obj/effect/spider/spiderling, list(src.loc, src))
+			var/spiderling = new spider_type(src.loc, src)
 			if(O)
 				O.implants += spiderling
 		qdel(src)
+
+/obj/effect/spider/eggcluster/small
+	spiders_min = 1
+	spiders_max = 3
+
+/obj/effect/spider/eggcluster/small/frost
+	spider_type = /obj/effect/spider/spiderling/frost
 
 /obj/effect/spider/spiderling
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "spiderling"
 	anchored = 0
-	layer = 2.7
+	layer = HIDING_LAYER
 	health = 3
 	var/last_itch = 0
 	var/amount_grown = -1
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
+	var/list/grow_as = list(/mob/living/simple_mob/animal/giant_spider, /mob/living/simple_mob/animal/giant_spider/nurse, /mob/living/simple_mob/animal/giant_spider/hunter)
+
+	var/stunted = FALSE
+
+/obj/effect/spider/spiderling/frost
+	grow_as = list(/mob/living/simple_mob/animal/giant_spider/frost)
 
 /obj/effect/spider/spiderling/New(var/location, var/atom/parent)
 	pixel_x = rand(6,-6)
 	pixel_y = rand(6,-6)
-	processing_objects |= src
+	START_PROCESSING(SSobj, src)
 	//50% chance to grow up
 	if(prob(50))
 		amount_grown = 1
@@ -131,8 +162,9 @@
 	..()
 
 /obj/effect/spider/spiderling/Destroy()
-	processing_objects -= src
-	..()
+	STOP_PROCESSING(SSobj, src)
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
+	return ..()
 
 /obj/effect/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
@@ -142,7 +174,7 @@
 
 /obj/effect/spider/spiderling/proc/die()
 	visible_message("<span class='alert'>[src] dies!</span>")
-	PoolOrNew(/obj/effect/decal/cleanable/spiderling_remains, src.loc)
+	new /obj/effect/decal/cleanable/spiderling_remains(src.loc)
 	qdel(src)
 
 /obj/effect/spider/spiderling/healthcheck()
@@ -195,6 +227,30 @@
 	//=================
 
 	if(isturf(loc))
+		skitter()
+
+	else if(isorgan(loc))
+		if(amount_grown < 0) amount_grown = 1
+		var/obj/item/organ/external/O = loc
+		if(!O.owner || O.owner.stat == DEAD || amount_grown > 80)
+			O.implants -= src
+			src.loc = O.owner ? O.owner.loc : O.loc
+			src.visible_message("<span class='warning'>\A [src] makes its way out of [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
+			if(O.owner)
+				O.owner.apply_damage(1, BRUTE, O.organ_tag)
+		else if(prob(1))
+			O.owner.apply_damage(1, TOX, O.organ_tag)
+			if(world.time > last_itch + 30 SECONDS)
+				last_itch = world.time
+				to_chat(O.owner, "<span class='notice'>Your [O.name] itches...</span>")
+	else if(prob(1))
+		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
+
+	if(amount_grown >= 0)
+		amount_grown += rand(0,2)
+
+/obj/effect/spider/spiderling/proc/skitter()
+	if(isturf(loc))
 		if(prob(25))
 			var/list/nearby = trange(5, src) - loc
 			if(nearby.len)
@@ -209,30 +265,18 @@
 					entry_vent = v
 					walk_to(src, entry_vent, 5)
 					break
-
 		if(amount_grown >= 100)
-			var/spawn_type = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
-			new spawn_type(src.loc, src)
+			var/spawn_type = pick(grow_as)
+			var/mob/living/simple_mob/animal/giant_spider/GS = new spawn_type(src.loc, src)
+			if(stunted)
+				spawn(2)
+					GS.make_spiderling()
 			qdel(src)
-	else if(isorgan(loc))
-		if(!amount_grown) amount_grown = 1
-		var/obj/item/organ/external/O = loc
-		if(!O.owner || O.owner.stat == DEAD || amount_grown > 80)
-			O.implants -= src
-			src.loc = O.owner ? O.owner.loc : O.loc
-			src.visible_message("<span class='warning'>\A [src] makes its way out of [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
-			if(O.owner)
-				O.owner.apply_damage(1, BRUTE, O.organ_tag)
-		else if(prob(1))
-			O.owner.apply_damage(1, TOX, O.organ_tag)
-			if(world.time > last_itch + 30 SECONDS)
-				last_itch = world.time
-				O.owner << "<span class='notice'>Your [O.name] itches...</span>"
-	else if(prob(1))
-		src.visible_message("<span class='notice'>\The [src] skitters.</span>")
 
-	if(amount_grown)
-		amount_grown += rand(0,2)
+/obj/effect/spider/spiderling/stunted
+	stunted = TRUE
+
+	grow_as = list(/mob/living/simple_mob/animal/giant_spider, /mob/living/simple_mob/animal/giant_spider/hunter)
 
 /obj/effect/decal/cleanable/spiderling_remains
 	name = "spiderling remains"
@@ -246,7 +290,7 @@
 	icon_state = "cocoon1"
 	health = 60
 
-	New()
+/obj/effect/spider/cocoon/New()
 		icon_state = pick("cocoon1","cocoon2","cocoon3")
 
 /obj/effect/spider/cocoon/Destroy()

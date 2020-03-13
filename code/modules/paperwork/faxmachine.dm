@@ -1,11 +1,12 @@
 var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[boss_name]", "Sif Governmental Authority", "Supply")
+var/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
 var/list/alldepartments = list()
 
 var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
+	desc = "Sent papers and pictures far away! Or to your co-worker's office a few doors down."
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
@@ -24,7 +25,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine/New()
 	allfaxes += src
-	if(!destination) destination = "[boss_name]"
+	if(!destination) destination = "[using_map.boss_name]"
 	if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) )
 		alldepartments |= department
 	..()
@@ -32,54 +33,37 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
 
-	var/dat = "Fax Machine<BR>"
+	ui_interact(user)
 
-	var/scan_name
+/**
+ *  Display the NanoUI window for the fax machine.
+ *
+ *  See NanoUI documentation for details.
+ */
+/obj/machinery/photocopier/faxmachine/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	user.set_machine(src)
+
+	var/list/data = list()
 	if(scan)
-		scan_name = scan.name
+		data["scanName"] = scan.name
 	else
-		scan_name = "--------"
-
-	dat += "Confirm Identity: <a href='byond://?src=\ref[src];scan=1'>[scan_name]</a><br>"
-
-	if(authenticated)
-		dat += "<a href='byond://?src=\ref[src];logout=1'>{Log Out}</a>"
+		data["scanName"] = null
+	data["bossName"] = using_map.boss_name
+	data["authenticated"] = authenticated
+	data["copyItem"] = copyitem
+	if(copyitem)
+		data["copyItemName"] = copyitem.name
 	else
-		dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a>"
+		data["copyItemName"] = null
+	data["cooldown"] = sendcooldown
+	data["destination"] = destination
 
-	dat += "<hr>"
-
-	if(authenticated)
-		dat += "<b>Logged in to:</b> [boss_name] Quantum Entanglement Network<br><br>"
-
-		if(copyitem)
-			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
-
-			if(sendcooldown)
-				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-
-			else
-
-				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
-				dat += "<b>Currently sending:</b> [copyitem.name]<br>"
-				dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[destination]</a><br>"
-
-		else
-			if(sendcooldown)
-				dat += "Please insert paper to send via secure connection.<br><br>"
-				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-			else
-				dat += "Please insert paper to send via secure connection.<br><br>"
-
-	else
-		dat += "Proper authentication is required to use this device.<br><br>"
-
-		if(copyitem)
-			dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Item</a><br>"
-
-	user << browse(dat, "window=copier")
-	onclose(user, "copier")
-	return
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "fax.tmpl", src.name, 500, 500)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(10) //this machine is so unimportant let's not have it update that often.
 
 /obj/machinery/photocopier/faxmachine/Topic(href, href_list)
 	if(href_list["send"])
@@ -95,11 +79,13 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	else if(href_list["remove"])
 		if(copyitem)
+			if(get_dist(usr, src) >= 2)
+				to_chat(usr, "\The [copyitem] is too far away for you to remove it.")
+				return
 			copyitem.loc = usr.loc
 			usr.put_in_hands(copyitem)
-			usr << "<span class='notice'>You take \the [copyitem] out of \the [src].</span>"
+			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
 			copyitem = null
-			updateUsrDialog()
 
 	if(href_list["scan"])
 		if (scan)
@@ -131,7 +117,38 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	if(href_list["logout"])
 		authenticated = 0
 
-	updateUsrDialog()
+	SSnanoui.update_uis(src)
+
+/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
+		if(!copyitem)
+			user.drop_item()
+			copyitem = O
+			O.loc = src
+			to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+			playsound(loc, "sound/machines/click.ogg", 100, 1)
+			flick(insert_anim, src)
+		else
+			to_chat(user, "<span class='notice'>There is already something in \the [src].</span>")
+	else if(istype(O, /obj/item/device/multitool) && panel_open)
+		var/input = sanitize(input(usr, "What Department ID would you like to give this fax machine?", "Multitool-Fax Machine Interface", department))
+		if(!input)
+			to_chat(usr, "No input found. Please hang up and try your call again.")
+			return
+		department = input
+		if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) && !(department == "Unknown"))
+			alldepartments |= department
+	else if(O.is_wrench())
+		playsound(loc, O.usesound, 50, 1)
+		anchored = !anchored
+		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
+
+	else if(default_deconstruction_screwdriver(user, O))
+		return
+	else if(default_deconstruction_crowbar(user, O))
+		return
+
+	return
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))
@@ -142,7 +159,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	var/success = 0
 	for(var/obj/machinery/photocopier/faxmachine/F in allfaxes)
 		if( F.department == destination )
-			success = F.recievefax(copyitem)
+			success = F.receivefax(copyitem)
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
@@ -150,7 +167,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 
-/obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
+/obj/machinery/photocopier/faxmachine/proc/receivefax(var/obj/item/incoming)
 	if(stat & (BROKEN|NOPOWER))
 		return 0
 
@@ -158,7 +175,8 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 		return 0	//You can't send faxes to "Unknown"
 
 	flick("faxreceive", src)
-	playsound(loc, "sound/items/polaroid1.ogg", 50, 1)
+	playsound(loc, "sound/effects/printer.ogg", 50, 1)
+
 
 	// give the sprite some time to flick
 	sleep(20)
@@ -181,11 +199,12 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	use_power(200)
 
+	//received copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
 	if (istype(copyitem, /obj/item/weapon/paper))
-		rcvdcopy = copy(copyitem)
+		rcvdcopy = copy(copyitem, 0)
 	else if (istype(copyitem, /obj/item/weapon/photo))
-		rcvdcopy = photocopy(copyitem)
+		rcvdcopy = photocopy(copyitem, 0)
 	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
 		rcvdcopy = bundlecopy(copyitem, 0)
 	else
@@ -196,14 +215,15 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	adminfaxes += rcvdcopy
 
 	//message badmins that a fax has arrived
-	switch(destination)
-		if (boss_name)
-			message_admins(sender, "[uppertext(boss_short)] FAX", rcvdcopy, "CentcommFaxReply", "#006100")
-		if ("Sif Governmental Authority")
-			message_admins(sender, "SIF GOVERNMENT FAX", rcvdcopy, "CentcommFaxReply", "#1F66A0")
-			//message_admins(sender, "SOL GOVERNMENT FAX", rcvdcopy, "SolGovFaxReply", "#1F66A0")
-		if ("Supply")
-			message_admins(sender, "[uppertext(boss_short)] SUPPLY FAX", rcvdcopy, "CentcommFaxReply", "#5F4519")
+	if (destination == using_map.boss_name)
+		message_admins(sender, "[uppertext(using_map.boss_short)] FAX", rcvdcopy, "CentComFaxReply", "#006100")
+	else if ("Sif Governmental Authority")
+		message_admins(sender, "SIF GOVERNMENT FAX", rcvdcopy, "CentComFaxReply", "#1F66A0")
+	else if ("Supply")
+		message_admins(sender, "[uppertext(using_map.boss_short)] SUPPLY FAX", rcvdcopy, "CentComFaxReply", "#5F4519")
+	else
+		message_admins(sender, "[uppertext(destination)] FAX", rcvdcopy, "UNKNOWN")
+
 
 	sendcooldown = 1800
 	sleep(50)
@@ -211,8 +231,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 
 /obj/machinery/photocopier/faxmachine/proc/message_admins(var/mob/sender, var/faxname, var/obj/item/sent, var/reply_type, font_colour="#006100")
-	var/msg = "\blue <b><font color='[font_colour]'>[faxname]: </font>[key_name(sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[sender]'>SM</A>) ([admin_jump_link(sender, src)]) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;[reply_type]=\ref[sender];originfax=\ref[src]'>REPLY</a>)</b>: Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
+	var/msg = "<span class='notice'><b><font color='[font_colour]'>[faxname]: </font>[get_options_bar(sender, 2,1,1)]"
+	msg += "(<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
+	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a></span>"
 
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
-			C << msg
+		if(check_rights((R_ADMIN|R_MOD|R_EVENT),0,C))
+			to_chat(C,msg)
+			C << 'sound/effects/printer.ogg'

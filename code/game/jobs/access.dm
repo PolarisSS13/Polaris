@@ -14,8 +14,12 @@
 		return check_access(id)
 	return 0
 
-/obj/item/proc/GetAccess()
-	return list()
+///obj/item/proc/GetAccess()
+//	return list()
+
+/atom/movable/proc/GetAccess()
+	var/obj/item/weapon/card/id/id = GetIdCard()
+	return id ? id.GetAccess() : list()
 
 /obj/proc/GetID()
 	return null
@@ -125,6 +129,13 @@
 
 	return priv_syndicate_access
 
+/var/list/priv_private_access
+/proc/get_all_private_access()
+	if(!priv_private_access)
+		priv_private_access = get_access_ids(ACCESS_TYPE_PRIVATE)
+
+	return priv_syndicate_access
+
 /var/list/priv_region_access
 /proc/get_region_accesses(var/code)
 	if(code == ACCESS_REGION_ALL)
@@ -167,6 +178,10 @@
 /proc/get_centcom_access_desc(A)
 	return get_access_desc(A)
 
+/proc/get_access_by_id(id)
+	var/list/AS = get_all_access_datums_by_id()
+	return AS[id]
+
 /proc/get_all_jobs()
 	var/list/all_jobs = list()
 	var/list/all_datums = typesof(/datum/job)
@@ -190,7 +205,7 @@
 		"Emergency Response Team",
 		"Emergency Response Team Leader")
 
-/mob/proc/GetIdCard()
+/atom/movable/proc/GetIdCard()
 	return null
 
 /mob/living/bot/GetIdCard()
@@ -230,10 +245,10 @@ proc/get_all_job_icons() //For all existing HUD icons
 			return I.rank
 
 		var/centcom = get_all_centcom_jobs()
-		if(I.assignment	in centcom) //Return with the NT logo if it is a Centcom job
-			return "Centcom"
+		if(I.assignment	in centcom) //Return with the NT logo if it is a CentCom job
+			return "CentCom"
 		if(I.rank in centcom)
-			return "Centcom"
+			return "CentCom"
 	else
 		return
 

@@ -13,15 +13,18 @@ var/list/admin_datums = list()
 	var/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
 	var/admincaster_signature	//What you'll sign the newsfeeds as
 
+
 /datum/admins/New(initial_rank = "Temporary Admin", initial_rights = 0, ckey)
 	if(!ckey)
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		qdel(src)
 		return
-	admincaster_signature = "[company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
+	admincaster_signature = "[using_map.company_name] Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	rank = initial_rank
 	rights = initial_rights
 	admin_datums[ckey] = src
+	if(rights & R_DEBUG) //grant profile access
+		world.SetConfig("APP/admin", ckey, "role=admin")
 
 /datum/admins/proc/associate(client/C)
 	if(istype(C))
@@ -44,6 +47,12 @@ var/list/admin_datums = list()
 		owner.deadmin_holder = null
 		owner.add_admin_verbs()
 
+/datum/admins/vv_edit_var(var_name, var_value)
+	if(var_name == NAMEOF(src, rights) || var_name == NAMEOF(src, owner) || var_name == NAMEOF(src, rank))
+		return FALSE
+	return ..()
+
+//TODO: Proccall guard, when all try/catch are removed and WrapAdminProccall is ported.
 
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
@@ -53,26 +62,32 @@ generally it would be used like so:
 
 proc/admin_proc()
 	if(!check_rights(R_ADMIN)) return
-	world << "you have enough rights!"
+	to_world("you have enough rights!")
 
 NOTE: It checks usr by default. Supply the "user" argument if you wish to check for a specific mob.
 */
-/proc/check_rights(rights_required, show_msg=1, var/mob/user = usr)
-	if(user && user.client)
-		if(rights_required)
-			if(user.client.holder)
-				if(rights_required & user.client.holder.rights)
-					return 1
-				else
-					if(show_msg)
-						user << "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>"
+/proc/check_rights(rights_required, show_msg=1, var/client/C = usr)
+	if(ismob(C))
+		var/mob/M = C
+		C = M.client
+	if(!C)
+		return FALSE
+	if(!(istype(C, /client))) // If we still didn't find a client, something is wrong.
+		return FALSE
+	if(!C.holder)
+		if(show_msg)
+			to_chat(C, "<span class='warning'>Error: You are not an admin.</span>")
+		return FALSE
+
+	if(rights_required)
+		if(rights_required & C.holder.rights)
+			return TRUE
 		else
-			if(user.client.holder)
-				return 1
-			else
-				if(show_msg)
-					user << "<font color='red'>Error: You are not an admin.</font>"
-	return 0
+			if(show_msg)
+				to_chat(C, "<span class='warning'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</span>")
+			return FALSE
+	else
+		return TRUE
 
 //probably a bit iffy - will hopefully figure out a better solution
 /proc/check_if_greater_rights_than(client/other)
@@ -83,10 +98,21 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 			if(usr.client.holder.rights != other.holder.rights)
 				if( (usr.client.holder.rights & other.holder.rights) == other.holder.rights )
 					return 1	//we have all the rights they have and more
-		usr << "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>"
+		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
+/client/proc/mark_datum(datum/D)
+	if(!holder)
+		return
+	if(holder.marked_datum)
+		vv_update_display(holder.marked_datum, "marked", "")
+	holder.marked_datum = D
+	vv_update_display(D, "marked", VV_MSG_MARKED)
 
+/client/proc/mark_datum_mapview(datum/D as mob|obj|turf|area in view(view))
+	set category = "Debug"
+	set name = "Mark Object"
+	mark_datum(D)
 
 /client/proc/deadmin()
 	if(holder)

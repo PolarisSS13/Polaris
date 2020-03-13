@@ -1,6 +1,8 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
 
+	var/datum/gender/T = gender_datums[get_visible_gender()]
+
 	if (findtext(act, "-", 1, null))
 		var/t1 = findtext(act, "-", 1, null)
 		param = copytext(act, t1 + 1, length(act) + 1)
@@ -12,9 +14,10 @@
 	var/muzzled = is_muzzled()
 	//var/m_type = 1
 
-	for (var/obj/item/weapon/implant/I in src)
-		if (I.implanted)
-			I.trigger(act, src)
+	for(var/obj/item/organ/O in src.organs)
+		for (var/obj/item/weapon/implant/I in O)
+			if (I.implanted)
+				I.trigger(act, src)
 
 	if(src.stat == 2.0 && (act != "deathgasp"))
 		return
@@ -25,10 +28,11 @@
 				message = "is strumming the air and headbanging like a safari chimp."
 				m_type = 1
 
-		if("ping", "beep", "buzz", "yes", "no")
+		//Machine-only emotes
+		if("ping", "beep", "buzz", "yes", "ye", "dwoop", "no", "rcough", "rsneeze")
 
 			if(!isSynthetic())
-				src << "<span class='warning'>You are not a synthetic.</span>"
+				to_chat(src, "<span class='warning'>You are not a synthetic.</span>")
 				return
 
 			var/M = null
@@ -48,12 +52,27 @@
 			else if(act == "ping")
 				display_msg = "pings"
 				use_sound = 'sound/machines/ping.ogg'
-			else if(act == "yes")
+			else if(act == "yes" || act == "ye")
 				display_msg = "emits an affirmative blip"
 				use_sound = 'sound/machines/synth_yes.ogg'
+			else if(act == "dwoop")
+				display_msg = "chirps happily"
+				use_sound = 'sound/machines/dwoop.ogg'
 			else if(act == "no")
 				display_msg = "emits a negative blip"
 				use_sound = 'sound/machines/synth_no.ogg'
+			else if(act == "rcough")
+				display_msg = "emits a robotic cough"
+				if(get_gender() == FEMALE)
+					use_sound = pick('sound/effects/mob_effects/f_machine_cougha.ogg','sound/effects/mob_effects/f_machine_coughb.ogg')
+				else
+					use_sound = pick('sound/effects/mob_effects/m_machine_cougha.ogg','sound/effects/mob_effects/m_machine_coughb.ogg', 'sound/effects/mob_effects/m_machine_coughc.ogg')
+			else if(act == "rsneeze")
+				display_msg = "emits a robotic sneeze"
+				if(get_gender() == FEMALE)
+					use_sound = 'sound/effects/mob_effects/machine_sneeze.ogg'
+				else
+					use_sound = 'sound/effects/mob_effects/f_machine_sneeze.ogg'
 
 			if (param)
 				message = "[display_msg] at [param]."
@@ -61,6 +80,26 @@
 				message = "[display_msg]."
 			playsound(src.loc, use_sound, 50, 0)
 			m_type = 1
+
+		//Promethean-only emotes
+		if("squish")
+			if(species.bump_flag != SLIME) //This should definitely do it.
+				to_chat(src, "<span class='warning'>You are not a slime thing!</span>")
+				return
+
+			playsound(src.loc, 'sound/effects/slime_squish.ogg', 50, 0) //Credit to DrMinky (freesound.org) for the sound.
+			message = "squishes."
+			m_type = 1
+
+		//Skrell-only emotes
+		if("warble")
+			if(species.name != SPECIES_SKRELL)
+				to_chat(src, "<span class='warning'>You are not a Skrell!</span>")
+				return
+
+			playsound(src.loc, 'sound/effects/warble.ogg', 50, 0) // Copyright CC BY 3.0 alienistcog (freesound.org) for the sound.
+			message = "warbles."
+			m_type = 2
 
 		if ("blink")
 			message = "blinks."
@@ -110,7 +149,7 @@
 
 			if (src.client)
 				if (client.prefs.muted & MUTE_IC)
-					src << "\red You cannot send IC messages (muted)."
+					to_chat(src, "<font color='red'>You cannot send IC messages (muted).</font>")
 					return
 			if (stat)
 				return
@@ -137,7 +176,7 @@
 
 		if ("choke")
 			if(miming)
-				message = "clutches [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] throat desperately!"
+				message = "clutches [T.his] throat desperately!"
 				m_type = 1
 			else
 				if (!muzzled)
@@ -150,19 +189,21 @@
 		if ("clap")
 			if (!src.restrained())
 				message = "claps."
+				playsound(src.loc, 'sound/misc/clapping.ogg')
 				m_type = 2
 				if(miming)
 					m_type = 1
+
 		if ("flap")
 			if (!src.restrained())
-				message = "flaps [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] wings."
+				message = "flaps [T.his] wings."
 				m_type = 2
 				if(miming)
 					m_type = 1
 
 		if ("aflap")
 			if (!src.restrained())
-				message = "flaps [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] wings ANGRILY!"
+				message = "flaps [T.his] wings ANGRILY!"
 				m_type = 2
 				if(miming)
 					m_type = 1
@@ -188,11 +229,11 @@
 					m_type = 2
 
 		if ("twitch")
-			message = "twitches violently."
+			message = "twitches."
 			m_type = 1
 
-		if ("twitch_s")
-			message = "twitches."
+		if ("twitch_v")
+			message = "twitches violently."
 			m_type = 1
 
 		if ("faint")
@@ -202,14 +243,34 @@
 			src.sleeping += 10 //Short-short nap
 			m_type = 1
 
-		if ("cough")
+		if("cough", "coughs")
 			if(miming)
 				message = "appears to cough!"
 				m_type = 1
 			else
-				if (!muzzled)
-					message = "coughs!"
+				if(!muzzled)
+					var/robotic = 0
 					m_type = 2
+					if(should_have_organ(O_LUNGS))
+						var/obj/item/organ/internal/lungs/L = internal_organs_by_name[O_LUNGS]
+						if(L && L.robotic == 2)	//Hard-coded to 2, incase we add lifelike robotic lungs
+							robotic = 1
+					if(!robotic)
+						message = "coughs!"
+						if(get_gender() == FEMALE)
+							if(species.female_cough_sounds)
+								playsound(src, pick(species.female_cough_sounds), 120)
+						else
+							if(species.male_cough_sounds)
+								playsound(src, pick(species.male_cough_sounds), 120)
+					else
+						message = "emits a robotic cough"
+						var/use_sound
+						if(get_gender() == FEMALE)
+							use_sound = pick('sound/effects/mob_effects/f_machine_cougha.ogg','sound/effects/mob_effects/f_machine_coughb.ogg')
+						else
+							use_sound = pick('sound/effects/mob_effects/m_machine_cougha.ogg','sound/effects/mob_effects/m_machine_coughb.ogg', 'sound/effects/mob_effects/m_machine_coughc.ogg')
+						playsound(src.loc, use_sound, 50, 0)
 				else
 					message = "makes a strong noise."
 					m_type = 2
@@ -318,7 +379,7 @@
 					message = "cries."
 					m_type = 2
 				else
-					message = "makes a weak noise. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"] [get_visible_gender() == NEUTER ? "frown" : "frowns"]."
+					message = "makes a weak noise. [T.he] [get_visible_gender() == NEUTER ? "frown" : "frowns"]." // no good, non-unwieldy alternative to this ternary at the moment
 					m_type = 2
 
 		if ("sigh")
@@ -421,7 +482,7 @@
 			m_type = 1
 
 		if("shake")
-			message = "shakes [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] head."
+			message = "shakes [T.his] head."
 			m_type = 1
 
 		if ("shrug")
@@ -456,14 +517,33 @@
 			message = "trembles in fear!"
 			m_type = 1
 
-		if ("sneeze")
-			if (miming)
+		if("sneeze", "sneezes")
+			if(miming)
 				message = "sneezes."
 				m_type = 1
 			else
-				if (!muzzled)
-					message = "sneezes."
+				if(!muzzled)
+					var/robotic = 0
 					m_type = 2
+					if(should_have_organ(O_LUNGS))
+						var/obj/item/organ/internal/lungs/L = internal_organs_by_name[O_LUNGS]
+						if(L && L.robotic == 2)	//Hard-coded to 2, incase we add lifelike robotic lungs
+							robotic = 1
+					if(!robotic)
+						message = "sneezes."
+						if(get_gender() == FEMALE)
+							playsound(src, species.female_sneeze_sound, 70)
+						else
+							playsound(src, species.male_sneeze_sound, 70)
+						m_type = 2
+					else
+						message = "emits a robotic sneeze"
+						var/use_sound
+						if(get_gender() == FEMALE)
+							use_sound = 'sound/effects/mob_effects/machine_sneeze.ogg'
+						else
+							use_sound = 'sound/effects/mob_effects/f_machine_sneeze.ogg'
+						playsound(src.loc, use_sound, 50, 0)
 				else
 					message = "makes a strange noise."
 					m_type = 2
@@ -531,7 +611,7 @@
 				if (M)
 					message = "hugs [M]."
 				else
-					message = "hugs [get_visible_gender() == MALE ? "himself" : get_visible_gender() == FEMALE ? "herself" : "themselves"]."
+					message = "hugs [T.himself]."
 
 		if ("handshake")
 			m_type = 1
@@ -549,7 +629,7 @@
 					if (M.canmove && !M.r_hand && !M.restrained())
 						message = "shakes hands with [M]."
 					else
-						message = "holds out [get_visible_gender() == MALE ? "his" : get_visible_gender() == FEMALE ? "her" : "their"] hand to [M]."
+						message = "holds out [T.his] hand to [M]."
 
 		if("dap")
 			m_type = 1
@@ -563,19 +643,64 @@
 				if (M)
 					message = "gives daps to [M]."
 				else
-					message = "sadly can't find anybody to give daps to, and daps [get_visible_gender() == MALE ? "himself" : get_visible_gender() == FEMALE ? "herself" : "themselves"]. Shameful."
+					message = "sadly can't find anybody to give daps to, and daps [T.himself]. Shameful."
 
-		if ("scream")
-			if (miming)
+		if("slap", "slaps")
+			m_type = 1
+			if(!restrained())
+				var/M = null
+				if(param)
+					for(var/mob/A in view(1, null))
+						if(param == A.name)
+							M = A
+							break
+				if(M)
+					message = "<span class='danger'>slaps [M] across the face. Ouch!</span>"
+					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+					if(ishuman(M)) //Snowflakey!
+						var/mob/living/carbon/human/H = M
+						if(istype(H.wear_mask,/obj/item/clothing/mask/smokable))
+							H.drop_from_inventory(H.wear_mask)
+				else
+					message = "<span class='danger'>slaps [T.himself]!</span>"
+					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+
+		if("scream", "screams")
+			if(miming)
 				message = "acts out a scream!"
 				m_type = 1
 			else
-				if (!muzzled)
-					message = "screams!"
+				if(!muzzled)
+					message = "[species.scream_verb]!"
 					m_type = 2
+					/* Removed, pending the location of some actually good, properly licensed sounds.
+					if(get_gender() == FEMALE)
+						playsound(loc, "[species.female_scream_sound]", 80, 1)
+					else
+						playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
+					*/
 				else
 					message = "makes a very loud noise."
 					m_type = 2
+
+		if("snap", "snaps")
+			m_type = 2
+			var/mob/living/carbon/human/H = src
+			var/obj/item/organ/external/L = H.get_organ("l_hand")
+			var/obj/item/organ/external/R = H.get_organ("r_hand")
+			var/left_hand_good = 0
+			var/right_hand_good = 0
+			if(L && (!(L.status & ORGAN_DESTROYED)) && (!(L.splinted)) && (!(L.status & ORGAN_BROKEN)))
+				left_hand_good = 1
+			if(R && (!(R.status & ORGAN_DESTROYED)) && (!(R.splinted)) && (!(R.status & ORGAN_BROKEN)))
+				right_hand_good = 1
+
+			if(!left_hand_good && !right_hand_good)
+				to_chat(usr, "You need at least one hand in good working order to snap your fingers.")
+				return
+
+			message = "snaps [T.his] fingers."
+			playsound(loc, 'sound/effects/fingersnap.ogg', 50, 1, -3)
 
 		if("swish")
 			src.animate_tail_once()
@@ -589,31 +714,47 @@
 		if("swag", "stopsway")
 			src.animate_tail_stop()
 
+		if("vomit")
+			if(isSynthetic())
+				to_chat(src, "<span class='warning'>You are unable to vomit.</span>")
+				return
+			vomit()
+			return
+
+		if("whistle" || "whistles")
+			if(!muzzled)
+				message = "whistles a tune."
+				playsound(loc, 'sound/misc/longwhistle.ogg') //praying this doesn't get abused
+			else
+				message = "makes a light spitting noise, a poor attempt at a whistle."
+
+		if("qwhistle")
+			if(!muzzled)
+				message = "whistles quietly."
+				playsound(loc, 'sound/misc/shortwhistle.ogg')
+			else
+				message = "makes a light spitting noise, a poor attempt at a whistle."
+
 		if ("help")
-			src << {"blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,
-cry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,
-grin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,
-sigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,
-wink, yawn, swish, sway/wag, fastsway/qwag, stopsway/swag"}
+			to_chat(src, "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, deathgasp, drool, eyebrow, fastsway/qwag, \
+					frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, \
+					raise, salute, scream, sneeze, shake, shiver, shrug, sigh, signal-#1-10, slap-(none)/mob, smile, sneeze, sniff, snore, stare-(none)/mob, stopsway/swag, sway/wag, swish, tremble, twitch, \
+					twitch_v, vomit, whimper, wink, yawn. Prometheans: squish Synthetics: beep, buzz, dwoop, yes, no, rcough, rsneeze, ping. Skrell: warble")
 
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
-
-
-
-
+			to_chat(src, "<font color='blue'>Unusable emote '[act]'. Say *help for a list.</font>")
 
 	if (message)
-		log_emote("[name]/[key] : [message]")
 		custom_emote(m_type,message)
-
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(input(usr, "This is [src]. [get_visible_gender() == MALE ? "He" : get_visible_gender() == FEMALE ? "She" : "They"] [get_visible_gender() == NEUTER ? "are" : "is"]...", "Pose", null)  as text)
+	var/datum/gender/T = gender_datums[get_visible_gender()]
+
+	pose =  sanitize(input(usr, "This is [src]. [T.he]...", "Pose", null)  as text)
 
 /mob/living/carbon/human/verb/set_flavor()
 	set name = "Set Flavour Text"

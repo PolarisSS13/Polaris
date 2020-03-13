@@ -30,6 +30,7 @@
 	ethanol		spawn_reagent = "ethanol"
 	sacid		spawn_reagent = "sacid"
 	tungsten	spawn_reagent = "tungsten"
+	calcium		spawn_reagent = "calcium"
 
 	// Bar, alcoholic
 	beer		spawn_reagent = "beer"
@@ -44,6 +45,8 @@
 	cognac		spawn_reagent = "cognac"
 	ale			spawn_reagent = "ale"
 	mead		spawn_reagent = "mead"
+	bitters		spawn_reagent = "bitters"
+	cider		spawn_reagent = "cider"
 
 	// Bar, soft
 	ice			spawn_reagent = "ice"
@@ -59,6 +62,7 @@
 	orange		spawn_reagent = "orangejuice"
 	lime		spawn_reagent = "limejuice"
 	watermelon	spawn_reagent = "watermelonjuice"
+	lemon		spawn_reagent = "lemonjuice"
 
 	// Bar, coffee
 	coffee		spawn_reagent = "coffee"
@@ -67,6 +71,9 @@
 	hot_coco	spawn_reagent = "hot_coco"
 	milk		spawn_reagent = "milk"
 	cream		spawn_reagent = "cream"
+	mint		spawn_reagent = "mint"
+	berry		spawn_reagent = "berryjuice"
+	decaf		spawn_reagent = "decaf"
 
 	// ERT
 	inaprov		spawn_reagent = "inaprovaline"

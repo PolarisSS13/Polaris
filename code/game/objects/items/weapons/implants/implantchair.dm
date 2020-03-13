@@ -76,13 +76,13 @@
 
 	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 		if(istype(G, /obj/item/weapon/grab))
-			if(!ismob(G:affecting))
+			var/obj/item/weapon/grab/grab = G
+			if(!ismob(grab.affecting))
 				return
-			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
-				if(M.Victim == G:affecting)
-					usr << "[G:affecting:name] will not fit into the [src.name] because they have a slime latched onto their head."
-					return
-			var/mob/M = G:affecting
+			if(grab.affecting.has_buckled_mobs())
+				to_chat(user, span("warning", "\The [grab.affecting] has other entities attached to them. Remove them first."))
+				return
+			var/mob/M = grab.affecting
 			if(put_mob(M))
 				qdel(G)
 		src.updateUsrDialog()
@@ -108,10 +108,10 @@
 
 	put_mob(mob/living/carbon/M as mob)
 		if(!iscarbon(M))
-			usr << "<span class='warning'>\The [src] cannot hold this!</span>"
+			to_chat(usr, "<span class='warning'>\The [src] cannot hold this!</span>")
 			return
 		if(src.occupant)
-			usr << "<span class='warning'>\The [src] is already occupied!</span>"
+			to_chat(usr, "<span class='warning'>\The [src] is already occupied!</span>")
 			return
 		if(M.client)
 			M.client.perspective = EYE_PERSPECTIVE
@@ -134,10 +134,9 @@
 				for (var/mob/O in viewers(M, null))
 					O.show_message("<span class='warning'>\The [M] has been implanted by \the [src].</span>", 1)
 
-				if(imp.implanted(M))
-					imp.loc = M
-					imp.imp_in = M
-					imp.implanted = 1
+				if(imp.handle_implant(M, BP_TORSO))
+					imp.post_implant(M)
+
 				implant_list -= imp
 				break
 		return

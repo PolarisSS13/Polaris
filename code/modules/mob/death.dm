@@ -1,6 +1,6 @@
 //This is the proc for gibbing a mob. Cannot gib ghosts.
 //added different sort of gibs and animations. N
-/mob/proc/gib(anim="gibbed-m",do_gibs)
+/mob/proc/gib(anim="gibbed-m", do_gibs, gib_file = 'icons/mob/mob.dmi')
 	death(1)
 	transforming = 1
 	canmove = 0
@@ -12,7 +12,7 @@
 	var/atom/movable/overlay/animation = null
 	animation = new(loc)
 	animation.icon_state = "blank"
-	animation.icon = 'icons/mob/mob.dmi'
+	animation.icon = gib_file
 	animation.master = src
 
 	flick(anim, animation)
@@ -46,6 +46,25 @@
 		if(animation)	qdel(animation)
 		if(src)			qdel(src)
 
+/mob/proc/ash(anim="dust-m")
+	death(1)
+	var/atom/movable/overlay/animation = null
+	transforming = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'icons/mob/mob.dmi'
+	animation.master = src
+
+	flick(anim, animation)
+
+	dead_mob_list -= src
+	spawn(15)
+		if(animation)	qdel(animation)
+		if(src)			qdel(src)
 
 /mob/proc/death(gibbed,deathmessage="seizes up and falls limp...")
 
@@ -66,9 +85,6 @@
 
 	layer = MOB_LAYER
 
-	if(blind && client)
-		blind.layer = 0
-
 	sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_LEVEL_TWO
@@ -77,15 +93,17 @@
 	drop_l_hand()
 
 	if(healths)
+		healths.overlays = null // This is specific to humans but the relevant code is here; shouldn't mess with other mobs.
 		healths.icon_state = "health6"
 
 	timeofdeath = world.time
-	if(mind) mind.store_memory("Time of death: [worldtime2text()]", 0)
+	if(mind) mind.store_memory("Time of death: [stationtime2text()]", 0)
 	living_mob_list -= src
 	dead_mob_list |= src
 
 	updateicon()
 	handle_regular_hud_updates()
+	handle_vision()
 
 	if(ticker && ticker.mode)
 		ticker.mode.check_win()

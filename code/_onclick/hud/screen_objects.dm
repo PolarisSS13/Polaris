@@ -9,9 +9,12 @@
 /obj/screen
 	name = ""
 	icon = 'icons/mob/screen1.dmi'
-	layer = 20.0
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|NO_CLIENT_COLOR
+	layer = LAYER_HUD_BASE
+	plane = PLANE_PLAYER_HUD
 	unacidable = 1
 	var/obj/master = null	//A reference to the object in the slot. Grabs or items, generally.
+	var/datum/hud/hud = null // A reference to the owner HUD, if any.
 
 /obj/screen/Destroy()
 	master = null
@@ -45,7 +48,7 @@
 	var/obj/item/owner
 
 /obj/screen/item_action/Destroy()
-	..()
+	. = ..()
 	owner = null
 
 /obj/screen/item_action/Click()
@@ -161,6 +164,12 @@
 		update_icon()
 	return 1
 
+/obj/screen/zone_sel/proc/set_selected_zone(bodypart)
+	var/old_selecting = selecting
+	selecting = bodypart
+	if(old_selecting != selecting)
+		update_icon()
+
 /obj/screen/zone_sel/update_icon()
 	overlays.Cut()
 	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
@@ -192,20 +201,22 @@
 				L.resist()
 
 		if("mov_intent")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
-				if(C.legcuffed)
-					C << "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>"
-					C.m_intent = "walk"	//Just incase
-					C.hud_used.move_intent.icon_state = "walking"
-					return 1
-				switch(usr.m_intent)
+			if(isliving(usr))
+				if(iscarbon(usr))
+					var/mob/living/carbon/C = usr
+					if(C.legcuffed)
+						to_chat(C, "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>")
+						C.m_intent = "walk"	//Just incase
+						C.hud_used.move_intent.icon_state = "walking"
+						return 1
+				var/mob/living/L = usr
+				switch(L.m_intent)
 					if("run")
-						usr.m_intent = "walk"
-						usr.hud_used.move_intent.icon_state = "walking"
+						L.m_intent = "walk"
+						L.hud_used.move_intent.icon_state = "walking"
 					if("walk")
-						usr.m_intent = "run"
-						usr.hud_used.move_intent.icon_state = "running"
+						L.m_intent = "run"
+						L.hud_used.move_intent.icon_state = "running"
 		if("m_intent")
 			if(!usr.m_int)
 				switch(usr.m_intent)
@@ -234,7 +245,7 @@
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
 						C.internal = null
-						C << "<span class='notice'>No longer running on internals.</span>"
+						to_chat(C, "<span class='notice'>No longer running on internals.</span>")
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
@@ -246,7 +257,7 @@
 								no_mask = 1
 
 						if(no_mask)
-							C << "<span class='notice'>You are not wearing a suitable mask or helmet.</span>"
+							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
 							return 1
 						else
 							var/list/nicename = null
@@ -267,7 +278,7 @@
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
 							if(istype(C.back,/obj/item/weapon/rig))
 								var/obj/item/weapon/rig/rig = C.back
-								if(rig.air_supply)
+								if(rig.air_supply && !rig.offline)
 									from = "in"
 									nicename |= "hardsuit"
 									tankcheck |= rig.air_supply
@@ -300,6 +311,13 @@
 											else
 												contents.Add(0)
 
+										// And here's for the Vox
+										if ("phoron")
+											if(t.air_contents.gas["phoron"] && !t.air_contents.gas["oxygen"])
+												contents.Add(t.air_contents.gas["phoron"])
+											else
+												contents.Add(0)
+
 
 								else
 									//no tank so we set contents to 0
@@ -320,7 +338,7 @@
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								C << "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>"
+								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
 								C.internal = tankcheck[best]
 
 
@@ -328,7 +346,7 @@
 								if(C.internals)
 									C.internals.icon_state = "internal1"
 							else
-								C << "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>"
+								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
 		if("act_intent")
 			usr.a_intent_change("right")
 		if(I_HELP)
@@ -368,7 +386,7 @@
 					R.hud_used.toggle_show_robot_modules()
 					return 1
 				else
-					R << "You haven't selected a module yet."
+					to_chat(R, "You haven't selected a module yet.")
 
 		if("radio")
 			if(issilicon(usr))
@@ -384,7 +402,7 @@
 					R.uneq_active()
 					R.hud_used.update_robot_modules_display()
 				else
-					R << "You haven't selected a module yet."
+					to_chat(R, "You haven't selected a module yet.")
 
 		if("module1")
 			if(istype(usr, /mob/living/silicon/robot))
@@ -469,8 +487,6 @@
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
 				AI.view_images()
-		else
-			return 0
 	return 1
 
 /obj/screen/inventory/Click()
@@ -500,3 +516,20 @@
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 	return 1
+
+// Hand slots are special to handle the handcuffs overlay
+/obj/screen/inventory/hand
+	var/image/handcuff_overlay
+
+/obj/screen/inventory/hand/update_icon()
+	..()
+	if(!hud)
+		return
+	if(!handcuff_overlay)
+		var/state = (hud.l_hand_hud_object == src) ? "l_hand_hud_handcuffs" : "r_hand_hud_handcuffs"
+		handcuff_overlay = image("icon"='icons/mob/screen_gen.dmi', "icon_state"=state)
+	overlays.Cut()
+	if(hud.mymob && iscarbon(hud.mymob))
+		var/mob/living/carbon/C = hud.mymob
+		if(C.handcuffed)
+			overlays |= handcuff_overlay

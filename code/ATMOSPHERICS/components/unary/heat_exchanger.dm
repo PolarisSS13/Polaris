@@ -2,6 +2,7 @@
 
 	icon = 'icons/obj/atmospherics/heat_exchanger.dmi'
 	icon_state = "intact"
+	pipe_state = "heunary"
 	density = 1
 
 	name = "Heat Exchanger"
@@ -18,7 +19,7 @@
 
 		return
 
-	initialize()
+	atmos_init()
 		if(!partner)
 			var/partner_connect = turn(dir,180)
 
@@ -66,24 +67,21 @@
 		return 1
 
 	attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-		if (!istype(W, /obj/item/weapon/wrench))
+		if (!W.is_wrench())
 			return ..()
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && !T.is_plating())
-			user << "<span class='warning'>You must remove the plating first.</span>"
+			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 			return 1
-		var/datum/gas_mixture/int_air = return_air()
-		var/datum/gas_mixture/env_air = loc.return_air()
-		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
+		if (!can_unwrench())
+			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 			add_fingerprint(user)
 			return 1
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
-		if (do_after(user, 40))
+		playsound(src, W.usesound, 50, 1)
+		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+		if (do_after(user, 40 * W.toolspeed))
 			user.visible_message( \
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \
 				"You hear a ratchet.")
-			new /obj/item/pipe(loc, make_from=src)
-			qdel(src)
+			deconstruct()

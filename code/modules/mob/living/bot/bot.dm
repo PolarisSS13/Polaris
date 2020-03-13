@@ -7,6 +7,8 @@
 	universal_speak = 1
 	density = 0
 
+	makes_dirt = FALSE	// No more dirt from Beepsky
+
 	var/obj/item/weapon/card/id/botcard = null
 	var/list/botcard_access = list()
 	var/on = 1
@@ -27,9 +29,10 @@
 	var/turf/obstacle = null
 
 	var/wait_if_pulled = 0 // Only applies to moving to the target
-	var/will_patrol = 0 // Not a setting - whether or no this type of bots patrols at all
+	var/will_patrol = 0 // If set to 1, will patrol, duh
 	var/patrol_speed = 1 // How many times per tick we move when patrolling
 	var/target_speed = 2 // Ditto for chasing the target
+	var/panic_on_alert = FALSE	// Will the bot go faster when the alert level is raised?
 	var/min_target_dist = 1 // How close we try to get to the target
 	var/max_target_dist = 50 // How far we are willing to go
 	var/max_patrol_dist = 250
@@ -42,6 +45,8 @@
 	..()
 	update_icons()
 
+	default_language = GLOB.all_languages[LANGUAGE_GALCOM]
+
 	botcard = new /obj/item/weapon/card/id(src)
 	botcard.access = botcard_access.Copy()
 
@@ -49,7 +54,14 @@
 	access_scanner.req_access = req_access.Copy()
 	access_scanner.req_one_access = req_one_access.Copy()
 
-	turn_on()
+	if(!using_map.bot_patrolling)
+		will_patrol = FALSE
+
+// Make sure mapped in units start turned on.
+/mob/living/bot/Initialize()
+	. = ..()
+	if(on)
+		turn_on() // Update lights and other stuff
 
 /mob/living/bot/Life()
 	..()
@@ -61,14 +73,15 @@
 	paralysis = 0
 
 	if(on && !client && !busy)
-		handleAI()
+		spawn(0)
+			handleAI()
 
 /mob/living/bot/updatehealth()
 	if(status_flags & GODMODE)
-		health = maxHealth
+		health = getMaxHealth()
 		stat = CONSCIOUS
 	else
-		health = maxHealth - getFireLoss() - getBruteLoss()
+		health = getMaxHealth() - getFireLoss() - getBruteLoss()
 	oxyloss = 0
 	toxloss = 0
 	cloneloss = 0
@@ -79,35 +92,52 @@
 
 /mob/living/bot/attackby(var/obj/item/O, var/mob/user)
 	if(O.GetID())
-		if(access_scanner.allowed(user) && !open && !emagged)
+		if(access_scanner.allowed(user) && !open)
 			locked = !locked
-			user << "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>"
+			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
 			attack_hand(user)
-		else
 			if(emagged)
-				user << "<span class='warning'>ERROR</span>"
+				to_chat(user, "<span class='warning'>ERROR! SYSTEMS COMPROMISED!</span>")
+		else
 			if(open)
-				user << "<span class='warning'>Please close the access panel before locking it.</span>"
+				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 			else
-				user << "<span class='warning'>Access denied.</span>"
+				to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/screwdriver))
+	else if(O.is_screwdriver())
 		if(!locked)
 			open = !open
-			user << "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>"
+			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
+			playsound(src, O.usesound, 50, 1)
 		else
-			user << "<span class='notice'>You need to unlock the controls first.</span>"
+			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
 	else if(istype(O, /obj/item/weapon/weldingtool))
-		if(health < maxHealth)
+		if(health < getMaxHealth())
 			if(open)
-				health = min(maxHealth, health + 10)
+				if(getBruteLoss() < 10)
+					bruteloss = 0
+				else
+					bruteloss = bruteloss - 10
+				if(getFireLoss() < 10)
+					fireloss = 0
+				else
+					fireloss = fireloss - 10
+				updatehealth()
 				user.visible_message("<span class='notice'>[user] repairs [src].</span>","<span class='notice'>You repair [src].</span>")
+				playsound(src, O.usesound, 50, 1)
 			else
-				user << "<span class='notice'>Unable to repair with the maintenance panel closed.</span>"
+				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 		else
-			user << "<span class='notice'>[src] does not need a repair.</span>"
+			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 		return
+	else if(istype(O, /obj/item/device/assembly/prox_sensor) && emagged)
+		if(open)
+			to_chat(user, "<span class='notice'>You repair the bot's systems.</span>")
+			emagged = 0
+			qdel(O)
+		else
+			to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 	else
 		..()
 
@@ -121,10 +151,13 @@
 
 	..(message, null, verb)
 
+/mob/living/bot/speech_bubble_appearance()
+	return "machine"
+
 /mob/living/bot/Bump(var/atom/A)
 	if(on && botcard && istype(A, /obj/machinery/door))
 		var/obj/machinery/door/D = A
-		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && D.check_access(botcard))
+		if(!istype(D, /obj/machinery/door/firedoor) && !istype(D, /obj/machinery/door/blast) && !istype(D, /obj/machinery/door/airlock/lift) && D.check_access(botcard))
 			D.open()
 	else
 		..()
@@ -138,27 +171,31 @@
 			if(!A || !A.loc || prob(1))
 				ignore_list -= A
 	handleRegular()
+
+	var/panic_speed_mod = 0
+
+	if(panic_on_alert)
+		panic_speed_mod = handlePanic()
+
 	if(target && confirmTarget(target))
 		if(Adjacent(target))
 			handleAdjacentTarget()
 		else
 			handleRangedTarget()
 		if(!wait_if_pulled || !pulledby)
-			for(var/i = 1 to target_speed)
+			for(var/i = 1 to (target_speed + panic_speed_mod))
+				sleep(20 / (target_speed + panic_speed_mod + 1))
 				stepToTarget()
-				if(i < target_speed)
-					sleep(20 / target_speed)
 		if(max_frustration && frustration > max_frustration * target_speed)
 			handleFrustrated(1)
 	else
 		resetTarget()
 		lookForTargets()
 		if(will_patrol && !pulledby && !target)
-			if(patrol_path.len)
-				for(var/i = 1 to patrol_speed)
+			if(patrol_path && patrol_path.len)
+				for(var/i = 1 to (patrol_speed + panic_speed_mod))
+					sleep(20 / (patrol_speed + 1))
 					handlePatrol()
-					if(i < patrol_speed)
-						sleep(20 / patrol_speed)
 				if(max_frustration && frustration > max_frustration * patrol_speed)
 					handleFrustrated(0)
 			else
@@ -174,6 +211,32 @@
 
 /mob/living/bot/proc/handleRangedTarget()
 	return
+
+/mob/living/bot/proc/handlePanic()	// Speed modification based on alert level.
+	. = 0
+	switch(get_security_level())
+		if("green")
+			. = 0
+
+		if("yellow")
+			. = 0
+
+		if("violet")
+			. = 0
+
+		if("orange")
+			. = 0
+
+		if("blue")
+			. = 1
+
+		if("red")
+			. = 2
+
+		if("delta")
+			. = 2
+
+	return .
 
 /mob/living/bot/proc/stepToTarget()
 	if(!target || !target.loc)
@@ -219,6 +282,25 @@
 	return
 
 /mob/living/bot/proc/getPatrolTurf()
+	var/minDist = INFINITY
+	var/obj/machinery/navbeacon/targ = locate() in get_turf(src)
+
+	if(!targ)
+		for(var/obj/machinery/navbeacon/N in navbeacons)
+			if(!N.codes["patrol"])
+				continue
+			if(get_dist(src, N) < minDist)
+				minDist = get_dist(src, N)
+				targ = N
+
+	if(targ && targ.codes["next_patrol"])
+		for(var/obj/machinery/navbeacon/N in navbeacons)
+			if(N.location == targ.codes["next_patrol"])
+				targ = N
+				break
+
+	if(targ)
+		return get_turf(targ)
 	return null
 
 /mob/living/bot/proc/handleIdle()
@@ -255,18 +337,22 @@
 	on = 1
 	set_light(light_strength)
 	update_icons()
+	resetTarget()
+	patrol_path = list()
+	ignore_list = list()
 	return 1
 
 /mob/living/bot/proc/turn_off()
 	on = 0
+	busy = 0 // If ever stuck... reboot!
 	set_light(0)
 	update_icons()
-	resetTarget()
-	patrol_path = list()
-	ignore_list = list()
 
 /mob/living/bot/proc/explode()
 	qdel(src)
+
+/mob/living/bot/is_sentient()
+	return FALSE
 
 /******************************************************************/
 // Navigation procs
@@ -281,6 +367,18 @@
 	//	for(var/turf/simulated/t in oview(src,1))
 
 	for(var/d in cardinal)
+		var/turf/T = get_step(src, d)
+		if(istype(T) && !T.density)
+			if(!LinkBlockedWithAccess(src, T, ID))
+				L.Add(T)
+	return L
+
+
+// Similar to above but not restricted to just cardinal directions.
+/turf/proc/TurfsWithAccess(var/obj/item/weapon/card/id/ID)
+	var/L[] = new()
+
+	for(var/d in alldirs)
 		var/turf/T = get_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))
@@ -327,6 +425,11 @@
 
 	for(var/obj/machinery/door/D in loc)
 		if(!D.density)			continue
+
+		if(istype(D, /obj/machinery/door/airlock))
+			var/obj/machinery/door/airlock/A = D
+			if(!A.can_open())	return 1
+
 		if(istype(D, /obj/machinery/door/window))
 			if( dir & D.dir )	return !D.check_access(ID)
 
@@ -335,3 +438,6 @@
 		else return !D.check_access(ID)	// it's a real, air blocking door
 	return 0
 
+
+/mob/living/bot/isSynthetic() //Robots are synthetic, no?
+	return 1

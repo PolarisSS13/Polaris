@@ -7,7 +7,9 @@
 	icon = 'icons/obj/power_cond_heavy.dmi'
 	name = "large power cable"
 	desc = "This cable is tough. It cannot be cut with simple hand tools."
-	layer = 2.39 //Just below pipes, which are at 2.4
+	plane = PLATING_PLANE
+	layer = PIPES_LAYER - 0.05 //Just below pipes
+	color = null
 
 /obj/structure/cable/heavyduty/attackby(obj/item/W, mob/user)
 
@@ -15,11 +17,11 @@
 	if(!T.is_plating())
 		return
 
-	if(istype(W, /obj/item/weapon/wirecutters))
-		usr << "\blue These cables are too tough to be cut with those [W.name]."
+	if(W.is_wirecutter())
+		to_chat(usr, "<font color='blue'>These cables are too tough to be cut with those [W.name].</font>")
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
-		usr << "\blue You will need heavier cables to connect to these."
+		to_chat(usr, "<font color='blue'>You will need heavier cables to connect to these.</font>")
 		return
 	else
 		..()

@@ -49,24 +49,24 @@
 	..()
 
 /obj/structure/mirror/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/wrench))
+	if(I.is_wrench())
 		if(!glass)
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			if(do_after(user, 20))
-				user << "<span class='notice'>You unfasten the frame.</span>"
+			playsound(src.loc, I.usesound, 50, 1)
+			if(do_after(user, 20 * I.toolspeed))
+				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 				new /obj/item/frame/mirror( src.loc )
 				qdel(src)
 		return
-	if(istype(I, /obj/item/weapon/crowbar))
+	if(I.is_wrench())
 		if(shattered && glass)
-			user << "<span class='notice'>The broken glass falls out.</span>"
+			to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 			icon_state = "mirror_frame"
 			glass = !glass
 			new /obj/item/weapon/material/shard( src.loc )
 			return
 		if(!shattered && glass)
-			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-			user << "<span class='notice'>You remove the glass.</span>"
+			playsound(src.loc, I.usesound, 50, 1)
+			to_chat(user, "<span class='notice'>You remove the glass.</span>")
 			glass = !glass
 			icon_state = "mirror_frame"
 			new /obj/item/stack/material/glass( src.loc, 2 )
@@ -76,15 +76,15 @@
 		if(!glass)
 			var/obj/item/stack/material/glass/G = I
 			if (G.get_amount() < 2)
-				user << "<span class='warning'>You need two sheets of glass to add them to the frame.</span>"
+				to_chat(user, "<span class='warning'>You need two sheets of glass to add them to the frame.</span>")
 				return
-			user << "<span class='notice'>You start to add the glass to the frame.</span>"
+			to_chat(user, "<span class='notice'>You start to add the glass to the frame.</span>")
 			if(do_after(user, 20))
 				if (G.use(2))
 					shattered = 0
 					glass = 1
 					icon_state = "mirror"
-					user << "<span class='notice'>You add the glass to the frame.</span>"
+					to_chat(user, "<span class='notice'>You add the glass to the frame.</span>")
 			return
 
 	if(shattered && glass)
@@ -113,3 +113,31 @@
 	else
 		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
 	return 1
+
+// The following mirror is ~special~.
+/obj/structure/mirror/raider
+	name = "cracked mirror"
+	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
+	icon_state = "mirror_broke"
+	shattered = 1
+
+/obj/structure/mirror/raider/attack_hand(var/mob/living/carbon/human/user)
+	if(istype(get_area(src),/area/syndicate_mothership))
+		if(istype(user) && user.mind && user.mind.special_role == "Raider" && user.species.name != SPECIES_VOX && is_alien_whitelisted(user, SPECIES_VOX))
+			var/choice = input("Do you wish to become a true Vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")
+			if(choice && choice == "Yes")
+				var/mob/living/carbon/human/vox/vox = new(get_turf(src),SPECIES_VOX)
+				vox.gender = user.gender
+				raiders.equip(vox)
+				if(user.mind)
+					user.mind.transfer_to(vox)
+				spawn(1)
+					var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+					if(!newname || newname == "")
+						var/datum/language/L = GLOB.all_languages[vox.species.default_language]
+						newname = L.get_random_name()
+					vox.real_name = newname
+					vox.name = vox.real_name
+					raiders.update_access(vox)
+				qdel(user)
+	..()

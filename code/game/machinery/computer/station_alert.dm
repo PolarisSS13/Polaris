@@ -17,10 +17,10 @@
 	monitor_type = /datum/nano_module/alarm_monitor/all
 	circuit = /obj/item/weapon/circuitboard/stationalert_all
 
-/obj/machinery/computer/station_alert/initialize()
+/obj/machinery/computer/station_alert/Initialize()
 	alarm_monitor = new monitor_type(src)
 	alarm_monitor.register_alarm(src, /obj/machinery/computer/station_alert/update_icon)
-	..()
+	. = ..()
 
 /obj/machinery/computer/station_alert/Destroy()
 	alarm_monitor.unregister_alarm(src)

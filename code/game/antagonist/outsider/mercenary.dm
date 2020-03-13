@@ -16,8 +16,8 @@ var/datum/antagonist/mercenary/mercs
 
 	hard_cap = 4
 	hard_cap_round = 8
-	initial_spawn_req = 4
-	initial_spawn_target = 6
+	initial_spawn_req = 3
+	initial_spawn_target = 3
 
 /datum/antagonist/mercenary/New()
 	..()
@@ -36,20 +36,19 @@ var/datum/antagonist/mercenary/mercs
 		return 0
 
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(player), slot_shoes)
+	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/boots/swat(player), slot_shoes)
 	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(player), slot_gloves)
 	if(player.backbag == 2) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(player), slot_back)
 	if(player.backbag == 3) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(player), slot_back)
 	if(player.backbag == 4) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
+	if(player.backbag == 5) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/messenger(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
+
 	player.mind.tcrystals = DEFAULT_TELECRYSTAL_AMOUNT
 	player.mind.accept_tcrystals = 1
 
 	var/obj/item/device/radio/uplink/U = new(player.loc, player.mind, DEFAULT_TELECRYSTAL_AMOUNT)
 	player.put_in_hands(U)
-
-	player.update_icons()
 
 	create_id("Mercenary", player)
 	create_radio(SYND_FREQ, player)

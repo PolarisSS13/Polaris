@@ -5,13 +5,15 @@
 	desc = "An empty evidence bag."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "evidenceobj"
-	item_state = ""
-	w_class = 2
+	item_state = null
+	w_class = ITEMSIZE_SMALL
 	var/obj/item/stored_item = null
 
 /obj/item/weapon/evidencebag/MouseDrop(var/obj/item/I as obj)
 	if (!ishuman(usr))
 		return
+	if(!istype(I) || I.anchored)
+		return  ..()
 
 	var/mob/living/carbon/human/user = usr
 
@@ -36,19 +38,16 @@
 		else
 			return
 
-	if(!istype(I) || I.anchored)
-		return
-
 	if(istype(I, /obj/item/weapon/evidencebag))
-		user << "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>"
+		to_chat(user, "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>")
 		return
 
 	if(I.w_class > 3)
-		user << "<span class='notice'>[I] won't fit in [src].</span>"
+		to_chat(user, "<span class='notice'>[I] won't fit in [src].</span>")
 		return
 
 	if(contents.len)
-		user << "<span class='notice'>[src] already has something inside it.</span>"
+		to_chat(user, "<span class='notice'>[src] already has something inside it.</span>")
 		return
 
 	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
@@ -87,7 +86,7 @@
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
 	else
-		user << "[src] is empty."
+		to_chat(user, "[src] is empty.")
 		icon_state = "evidenceobj"
 	return
 

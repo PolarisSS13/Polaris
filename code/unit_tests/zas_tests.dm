@@ -19,7 +19,7 @@
 	var/list/GM_checked = list()
 
 	for(var/turf/simulated/T in A)
-		if(!istype(T) || isnull(T.zone) || istype(T, /turf/simulated/floor/airless))
+		if(!istype(T) || isnull(T.zone) || istype(T, /turf/simulated/floor/airless) || istype(T,/turf/simulated/shuttle/plating/airless))
 			continue
 		if(T.zone.air in GM_checked)
 			continue
@@ -44,7 +44,7 @@
 					return test_result
 
 				if(expectation == UT_NORMAL)
-	
+
 					if(abs(temp - T20C) > 10)
 						test_result["msg"] = "Temperature out of bounds: [temp] | [t_msg]"
 						return test_result
@@ -77,43 +77,3 @@
 		fail(test["msg"])
 	return 1
 
-/datum/unit_test/zas_area_test/supply_centcomm
-	name = "ZAS: Supply Shuttle (CentComm)"
-	area_path = /area/supply/dock
-
-/datum/unit_test/zas_area_test/emergency_shuttle
-	name = "ZAS: Emergency Shuttle"
-	area_path = /area/shuttle/escape/centcom
-
-/datum/unit_test/zas_area_test/ai_chamber
-	name = "ZAS: AI Chamber"
-	area_path = /area/ai
-
-/datum/unit_test/zas_area_test/mining_shuttle_at_station
-	name = "ZAS: Mining Shuttle (Station)"
-	area_path = /area/shuttle/mining/station
-
-/datum/unit_test/zas_area_test/cargo_maint
-	name = "ZAS: Cargo Maintenance"
-	area_path = /area/maintenance/cargo 
-
-/datum/unit_test/zas_area_test/eng_shuttle
-	name = "ZAS: Construction Site Shuttle (Station)"
-	area_path = /area/shuttle/constructionsite/station
-
-/datum/unit_test/zas_area_test/virology
-	name = "ZAS: Virology"
-	area_path = /area/medical/virology
-
-/datum/unit_test/zas_area_test/xenobio
-	name = "ZAS: Xenobiology"
-	area_path = /area/rnd/xenobiology
-
-/datum/unit_test/zas_area_test/mining_area
-	name = "ZAS: Mining Area (Vacuum)"
-	area_path = /area/mine/explored
-	expectation = UT_VACUUM
-
-/datum/unit_test/zas_area_test/cargo_bay
-	name = "ZAS: Cargo Bay"
-	area_path = /area/quartermaster/storage

@@ -1,15 +1,18 @@
+//////////////////////////////////
+//		Chief Medical Officer
+//////////////////////////////////
 /datum/job/cmo
 	title = "Chief Medical Officer"
 	flag = CMO
-	head_position = 1
-	department = "Medical"
+	departments_managed = list(DEPARTMENT_MEDICAL)
+	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_COMMAND)
+	sorting_order = 2
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "the Colony Director"
 	selection_color = "#026865"
-	idtype = /obj/item/weapon/card/id/medical/head
 	req_admin_notify = 1
 	economic_modifier = 10
 	access = list(access_medical, access_medical_equip, access_morgue, access_genetics, access_heads,
@@ -23,216 +26,189 @@
 	minimal_player_age = 10
 	ideal_character_age = 50
 
-	equip(var/mob/living/carbon/human/H, var/alt_title)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/cmo(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/med(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_medical_officer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/cmo(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/cmo(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
+	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
+						staff keep the station's crew healthy and whole. They are primarily interested in making sure that patients are safely found and \
+						transported to Medical for treatment. They are expected to keep the crew informed about threats to their health and safety, and \
+						about the importance of Suit Sensors."
 
+// CMO Alt Titles
+/datum/alt_title/cmo
+	title = "Chief Medical Officer"
+
+//////////////////////////////////
+//		Medical Doctor
+//////////////////////////////////
 /datum/job/doctor
 	title = "Medical Doctor"
 	flag = DOCTOR
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 7
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
-	alt_titles = list("Surgeon","Emergency Physician","Nurse","Virologist")
+	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
+	job_description = "A Medical Doctor is a Jack-of-All-Trades Medical title, covering a variety of skill levels and minor specializations. They are likely \
+						familiar with basic first aid, and a number of accompanying medications, and can generally save, if not cure, a majority of the \
+						patients they encounter."
+	alt_titles = list("Medical Doctor" = /datum/alt_title/doctor,
+					"Surgeon" = /datum/alt_title/surgeon,
+					"Emergency Physician" = /datum/alt_title/emergency_physician,
+					"Nurse" = /datum/alt_title/nurse,
+					"Virologist" = /datum/alt_title/virologist)
 
-	equip(var/mob/living/carbon/human/H, var/alt_title)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/med(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(has_alt_title(H, alt_title,"Emergency Physician"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/fr_jacket(H), slot_wear_suit)
-		else if(has_alt_title(H, alt_title,"Surgeon"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical/blue(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
-			H.equip_to_slot_or_del(new /obj/item/clothing/head/surgery/blue(H), slot_head)
-		else if(has_alt_title(H, alt_title,"Virologist"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/virologist(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(H), slot_wear_suit)
-			H.equip_to_slot_or_del(new /obj/item/clothing/mask/surgical(H), slot_wear_mask)
-			switch(H.backbag)
-				if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/virology(H), slot_back)
-				if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/vir(H), slot_back)
-				if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		else if(has_alt_title(H, alt_title,"Medical Doctor"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
-		else if(has_alt_title(H, alt_title,"Nurse"))
-			if(H.gender == FEMALE)
-				if(prob(50))
-					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/nursesuit(H), slot_w_uniform)
-				else
-					H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/nurse(H), slot_w_uniform)
-				H.equip_to_slot_or_del(new /obj/item/clothing/head/nursehat(H), slot_head)
-			else
-				H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical/purple(H), slot_w_uniform)
-		else
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
-		return 1
+//Medical Doctor Alt Titles
+/datum/alt_title/doctor
+	title = "Medical Doctor"
 
+/datum/alt_title/surgeon
+	title = "Surgeon"
+	title_blurb = "A Surgeon specializes in providing surgical aid to injured patients, up to and including amputation and limb reattachement. They are expected \
+					to know the ins and outs of anesthesia and surgery."
+	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/surgeon
 
+/datum/alt_title/emergency_physician
+	title = "Emergency Physician"
+	title_blurb = "An Emergency Physician is a Medical professional trained for stabilizing and treating severely injured and/or dying patients. \
+					They are generally the first response for any such individual brought to the Medbay, and can sometimes be expected to help their patients \
+					make a full recovery."
+	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/emergency_physician
+
+/datum/alt_title/nurse
+	title = "Nurse"
+	title_blurb = "A Nurse acts as a general purpose Doctor's Aide, providing basic care to non-critical patients, and stabilizing critical patients during \
+					busy periods. They frequently watch the suit sensors console, to help manage the time of other Doctors. In rare occasions, a Nurse can be \
+					called upon to revive deceased crew members."
+	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/nurse
+
+/datum/alt_title/virologist
+	title = "Virologist"
+	title_blurb = "A Virologist cures active diseases in the crew, and prepares antibodies for possible infections. They also have the skills \
+					to produce the various types of virus foods or mutagens."
+	title_outfit = /decl/hierarchy/outfit/job/medical/doctor/virologist
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
+//////////////////////////////////
+//			Chemist
+//////////////////////////////////
 /datum/job/chemist
 	title = "Chemist"
 	flag = CHEMIST
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 5
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
-	alt_titles = list("Pharmacist")
+	minimal_player_age = 3
 
+	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
+	job_description = "A Chemist produces and maintains a stock of basic to advanced chemicals for medical and occasionally research use. \
+						They are likely to know the use and dangers of many lab-produced chemicals."
+	alt_titles = list("Chemist" = /datum/alt_title/chemist, "Pharmacist" = /datum/alt_title/pharmacist)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chemist(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/chemist(H), slot_belt)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/chemistry(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/chem(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/chemist(H), slot_wear_suit)
-		return 1
+// Chemist Alt Titles
+/datum/alt_title/chemist
+	title = "Chemist"
 
+/datum/alt_title/pharmacist
+	title = "Pharmacist"
+	title_blurb = "A Pharmacist focuses on the chemical needs of the Medical Department, and often offers to fill crew prescriptions at their discretion."
 
 /* I'm commenting out Geneticist so you can't actually see it in the job menu, given that you can't play as one - Jon.
+//////////////////////////////////
+//			Geneticist
+//////////////////////////////////
 /datum/job/geneticist
 	title = "Geneticist"
 	flag = GENETICIST
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL, DEPARTMENT_RESEARCH)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the chief medical officer and research director"
+	supervisors = "the Chief Medical Officer and Research Director"
 	selection_color = "#013D3B"
 	economic_modifier = 7
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_research)
 	minimal_access = list(access_medical, access_morgue, access_genetics, access_research)
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_medsci(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/geneticist(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/geneticist(H), slot_belt)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/genetics(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/gen(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(H), slot_wear_suit)
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/pen(H), slot_s_store)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/medical/geneticist
+	job_description = "A Geneticist operates genetic manipulation equipment to repair any genetic defects encountered in crew, from cloning or radiation as examples. \
+						When required, geneticists have the skills to clone, and are the superior choice when available for doing so."
+
+// Geneticist Alt Titles
+/datum/alt_title/geneticist
+	title = "Geneticist"
 */
 
+//////////////////////////////////
+//			Psychiatrist
+//////////////////////////////////
 /datum/job/psychiatrist
 	title = "Psychiatrist"
 	flag = PSYCHIATRIST
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	economic_modifier = 5
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
-	alt_titles = list("Psychologist")
+	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
+	job_description = "A Psychiatrist provides mental health services to crew members in need. They may also be called upon to determine whatever \
+					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
+	alt_titles = list("Psychiatrist" = /datum/alt_title/psychiatrist, "Psychologist" = /datum/alt_title/psychologist)
 
-	equip(var/mob/living/carbon/human/H, var/alt_title)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(has_alt_title(H, alt_title,"Psychiatrist"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/psych(H), slot_w_uniform)
-		else if(has_alt_title(H, alt_title,"Psychologist"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/psych/turtleneck(H), slot_w_uniform)
-		else
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/labcoat(H), slot_wear_suit)
+//Psychiatrist Alt Titles
+/datum/alt_title/psychiatrist
+	title = "Psychiatrist"
 
+/datum/alt_title/psychologist
+	title = "Psychologist"
+	title_blurb =  "A Psychologist provides mental health services to crew members in need, focusing more on therapy than medication. They may also be \
+					called upon to determine whatever ails the mentally unwell, frequently under Security supervision."
+	title_outfit = /decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
 
-/datum/job/Paramedic
+//////////////////////////////////
+//			Paramedic
+//////////////////////////////////
+/datum/job/paramedic
 	title = "Paramedic"
 	flag = PARAMEDIC
-	department = "Medical"
+	departments = list(DEPARTMENT_MEDICAL)
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "the Chief Medical Officer"
 	selection_color = "#013D3B"
-	idtype = /obj/item/weapon/card/id/medical
 	economic_modifier = 4
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
-	alt_titles = list("Emergency Medical Technician")
+	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
+	job_description = "A Paramedic is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their own. \
+						They may also be called upon to keep patients stable when Medical is busy or understaffed."
+	alt_titles = list("Paramedic" = /datum/alt_title/paramedic, "Emergency Medical Technician" = /datum/alt_title/emt)
 
-	equip(var/mob/living/carbon/human/H, var/alt_title)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/med(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		if(has_alt_title(H, alt_title,"Emergency Medical Technician"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical/paramedic(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/fr_jacket(H), slot_wear_suit)
-		else if(has_alt_title(H, alt_title,"Paramedic"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical/black(H), slot_w_uniform)
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/fr_jacket(H), slot_wear_suit)
-		else
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/medical/emt(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/medical(H), slot_l_store)
-		return 1
+// Paramedic Alt Titles
+/datum/alt_title/paramedic
+	title = "Paramedic"
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
+/datum/alt_title/emt
+	title = "Emergency Medical Technician"
+	title_blurb = "An Emergency Medical Technician is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their \
+					own. They are capable of keeping a patient stabilized until they reach the hands of someone with more training."
+	title_outfit = /decl/hierarchy/outfit/job/medical/paramedic/emt

@@ -4,9 +4,9 @@
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
 	icon_state = "t-ray0"
+	item_state = "t-ray"
 	slot_flags = SLOT_BELT
-	w_class = 2
-	item_state = "electronic"
+	w_class = ITEMSIZE_SMALL
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
@@ -28,10 +28,10 @@
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		processing_objects.Add(src)
+		START_PROCESSING(SSobj, src)
 		flicker = 0
 	else
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		set_user_client(null)
 	update_icon()
 
@@ -131,5 +131,20 @@
 
 /obj/item/device/t_scanner/dropped(mob/user)
 	set_user_client(null)
+
+/obj/item/device/t_scanner/upgraded
+	name = "Upgraded T-ray Scanner"
+	desc = "An upgraded version of the terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
+	matter = list(DEFAULT_WALL_MATERIAL = 500, PHORON = 150)
+	origin_tech = list(TECH_MAGNET = 4, TECH_ENGINEERING = 5)
+	scan_range = 3
+
+/obj/item/device/t_scanner/advanced
+	name = "Advanced T-ray Scanner"
+	desc = "An advanced version of the terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
+	matter = list(DEFAULT_WALL_MATERIAL = 1500, PHORON = 200, SILVER = 250)
+	origin_tech = list(TECH_MAGNET = 7, TECH_ENGINEERING = 7, TECH_MATERIAL = 6)
+	scan_range = 7
+
 
 #undef OVERLAY_CACHE_LEN

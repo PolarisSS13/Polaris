@@ -21,6 +21,10 @@
 	name = T_BOARD("medical records console")
 	build_path = /obj/machinery/computer/med_data
 
+/obj/item/weapon/circuitboard/med_data/laptop
+	name = T_BOARD("medical records laptop")
+	build_path = /obj/machinery/computer/med_data/laptop
+
 /obj/item/weapon/circuitboard/scan_consolenew
 	name = T_BOARD("DNA machine")
 	build_path = /obj/machinery/computer/scan_consolenew
@@ -100,6 +104,7 @@
 /obj/item/weapon/circuitboard/turbine_control
 	name = T_BOARD("turbine control console")
 	build_path = /obj/machinery/computer/turbine_computer
+	origin_tech = list(TECH_DATA = 2, TECH_POWER = 2)
 
 /obj/item/weapon/circuitboard/solar_control
 	name = T_BOARD("solar control console")
@@ -152,11 +157,6 @@
 	name = T_BOARD("disease splicer")
 	build_path = /obj/machinery/computer/diseasesplicer
 
-/obj/item/weapon/circuitboard/ordercomp
-	name = T_BOARD("supply ordering console")
-	build_path = /obj/machinery/computer/ordercomp
-	origin_tech = list(TECH_DATA = 2)
-
 /obj/item/weapon/circuitboard/mining_shuttle
 	name = T_BOARD("mining shuttle console")
 	build_path = /obj/machinery/computer/shuttle_control/mining
@@ -191,3 +191,8 @@
 	name = T_BOARD("RCON remote control console")
 	build_path = /obj/machinery/computer/rcon
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3, TECH_POWER = 5)
+
+/obj/item/weapon/circuitboard/shutoff_monitor
+	name = T_BOARD("automatic shutoff valve monitor")
+	build_path = /obj/machinery/computer/shutoff_monitor
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)

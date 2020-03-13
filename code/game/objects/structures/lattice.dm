@@ -5,20 +5,19 @@
 	icon_state = "latticefull"
 	density = 0
 	anchored = 1.0
-	w_class = 3
-	layer = 2.3 //under pipes
-	//	flags = CONDUCT
+	w_class = ITEMSIZE_NORMAL
+	plane = PLATING_PLANE
 
-/obj/structure/lattice/initialize()
-	..()
+/obj/structure/lattice/Initialize()
+	. = ..()
 
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open) || istype(src.loc, /turf/simulated/mineral)))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	for(var/obj/structure/lattice/LAT in src.loc)
 		if(LAT != src)
-			qdel(LAT)
+			crash_with("Found multiple lattices at '[log_info_line(loc)]'")
+			return INITIALIZE_HINT_QDEL
 	icon = 'icons/obj/smoothlattice.dmi'
 	icon_state = "latticeblank"
 	updateOverlays()
@@ -34,7 +33,12 @@
 		if(locate(/obj/structure/lattice, get_step(src, dir)))
 			L = locate(/obj/structure/lattice, get_step(src, dir))
 			L.updateOverlays(src.loc)
-	..()
+	if(istype(loc, /turf/simulated/open))
+		var/turf/simulated/open/O = loc
+		spawn(1)
+			if(istype(O)) // If we built a new floor with the lattice, the open turf won't exist anymore.
+				O.update() // This lattice may be supporting things on top of it.  If it's being deleted, they need to fall down.
+	. = ..()
 
 /obj/structure/lattice/ex_act(severity)
 	switch(severity)
@@ -57,11 +61,21 @@
 		return
 	if (istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = C
-		if(WT.remove_fuel(0, user))
-			user << "<span class='notice'>Slicing lattice joints ...</span>"
-		PoolOrNew(/obj/item/stack/rods, src.loc)
-		qdel(src)
-
+		if(WT.welding == 1)
+			if(WT.remove_fuel(0, user))
+				to_chat(user, "<span class='notice'>Slicing lattice joints ...</span>")
+			new /obj/item/stack/rods(src.loc)
+			qdel(src)
+		return
+	if (istype(C, /obj/item/stack/rods))
+		var/obj/item/stack/rods/R = C
+		if(R.use(2))
+			to_chat(user, "<span class='notice'>You start connecting \the [R.name] to \the [src.name] ...</span>")
+			if(do_after(user, 5 SECONDS))
+				src.alpha = 0 // Note: I don't know why this is set, Eris did it, just trusting for now. ~Leshana
+				new /obj/structure/catwalk(src.loc)
+				qdel(src)
+		return
 	return
 
 /obj/structure/lattice/proc/updateOverlays()

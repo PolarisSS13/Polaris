@@ -11,8 +11,7 @@
 		switch(alert("Travel back to ss13?",,"Yes","No"))
 			if("Yes")
 				if(user.z != src.z)	return
-				user.loc.loc.Exited(user)
-				user.loc = pick(latejoin)
+				user.forceMove(pick(latejoin))
 			if("No")
 				return
 
@@ -66,15 +65,16 @@ var/global/list/PDA_Manifest = list()
 /datum/datacore/proc/get_manifest_list()
 	if(PDA_Manifest.len)
 		return
-	var/heads[0]
-	var/sec[0]
-	var/eng[0]
-	var/med[0]
-	var/sci[0]
-	var/car[0]
-	var/civ[0]
-	var/bot[0]
-	var/misc[0]
+	var/list/heads = list()
+	var/list/sec = list()
+	var/list/eng = list()
+	var/list/med = list()
+	var/list/sci = list()
+	var/list/car = list()
+	var/list/pla = list() // Planetside crew: Explorers, Pilots, S&S
+	var/list/civ = list()
+	var/list/bot = list()
+	var/list/misc = list()
 	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
@@ -83,67 +83,84 @@ var/global/list/PDA_Manifest = list()
 		var/isactive = t.fields["p_stat"]
 		var/department = 0
 		var/depthead = 0 			// Department Heads will be placed at the top of their lists.
-		if(real_rank in command_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_COMMAND))
 			heads[++heads.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			depthead = 1
-			if(rank=="Captain" && heads.len != 1)
+			if(rank=="Colony Director" && heads.len != 1)
 				heads.Swap(1,heads.len)
 
-		if(real_rank in security_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_SECURITY))
 			sec[++sec.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && sec.len != 1)
 				sec.Swap(1,sec.len)
 
-		if(real_rank in engineering_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_ENGINEERING))
 			eng[++eng.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && eng.len != 1)
 				eng.Swap(1,eng.len)
 
-		if(real_rank in medical_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_MEDICAL))
 			med[++med.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && med.len != 1)
 				med.Swap(1,med.len)
 
-		if(real_rank in science_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RESEARCH))
 			sci[++sci.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && sci.len != 1)
 				sci.Swap(1,sci.len)
 
-		if(real_rank in cargo_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_PLANET))
+			pla[++pla.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			department = 1
+
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CARGO))
 			car[++car.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && car.len != 1)
 				car.Swap(1,car.len)
 
-		if(real_rank in civilian_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CARGO))
 			civ[++civ.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 			if(depthead && civ.len != 1)
 				civ.Swap(1,civ.len)
 
-		if(real_rank in nonhuman_positions)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_SYNTHETIC))
 			bot[++bot.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
 
 		if(!department && !(name in heads))
 			misc[++misc.len] = list("name" = name, "rank" = rank, "active" = isactive)
 
+	// Synthetics don't have actual records, so we will pull them from here.
+	// Synths don't have records, which is the means by which isactive is retrieved, so I'm hardcoding it to active, don't really have any better means
+	for(var/mob/living/silicon/ai/ai in mob_list)
+		bot[++bot.len] = list("name" = ai.real_name, "rank" = "Artificial Intelligence", "active" = "Active")
 
-	PDA_Manifest = list(\
-		"heads" = heads,\
-		"sec" = sec,\
-		"eng" = eng,\
-		"med" = med,\
-		"sci" = sci,\
-		"car" = car,\
-		"civ" = civ,\
-		"bot" = bot,\
-		"misc" = misc\
+	for(var/mob/living/silicon/robot/robot in mob_list)
+		// No combat/syndicate cyborgs, no drones, and no AI shells.
+		if(robot.scrambledcodes || robot.shell || (robot.module && robot.module.hide_on_manifest))
+			continue
+
+		bot[++bot.len] = list("name" = robot.real_name, "rank" = "[robot.modtype] [robot.braintype]", "active" = "Active")
+
+
+	PDA_Manifest = list(
+		list("cat" = "Command", "elems" = heads),
+		list("cat" = "Security", "elems" = sec),
+		list("cat" = "Engineering", "elems" = eng),
+		list("cat" = "Medical", "elems" = med),
+		list("cat" = "Science", "elems" = sci),
+		list("cat" = "Cargo", "elems" = car),
+		list("cat" = "Planetside", "elems" = pla),
+		list("cat" = "Civilian", "elems" = civ),
+		list("cat" = "Silicon", "elems" = bot),
+		list("cat" = "Miscellaneous", "elems" = misc)
 		)
 	return
 
@@ -186,21 +203,25 @@ var/global/list/PDA_Manifest = list()
 	anchored = 1
 	unacidable = 1//temporary until I decide whether the borg can be removed. -veyveyr
 
+/obj/structure/showcase/sign
+	name = "WARNING: WILDERNESS"
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "wilderness1"
+	desc = "This appears to be a sign warning people that the other side is dangerous. It also says that NanoTrasen cannot guarantee your safety beyond this point."
+
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 /obj/item/weapon/beach_ball
 	icon = 'icons/misc/beach.dmi'
-	icon_state = "ball"
+	icon_state = "beachball"
 	name = "beach ball"
-	item_state = "beachball"
 	density = 0
 	anchored = 0
-	w_class = 4
+	w_class = ITEMSIZE_LARGE
 	force = 0.0
 	throwforce = 0.0
 	throw_speed = 1
 	throw_range = 20
-	flags = CONDUCT
 
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		user.drop_item()

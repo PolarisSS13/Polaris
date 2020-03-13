@@ -13,7 +13,8 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "diamond" = 0, "phoron" = 0, "uranium" = 0, "plasteel" = 0)
+	var/list/materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0)
+	var/list/hidden_materials = list(MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM)
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -28,7 +29,6 @@
 
 /obj/machinery/pros_fabricator/New()
 	..()
-	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -40,7 +40,8 @@
 	files = new /datum/research(src) //Setup the research data holder.
 	return
 
-/obj/machinery/pros_fabricator/initialize()
+/obj/machinery/pros_fabricator/Initialize()
+	. = ..()
 	manufacturer = basic_robolimb.company
 	update_categories()
 
@@ -77,7 +78,7 @@
 	var/T = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += M.rating
-	mat_efficiency = 1 - (T - 1) / 4 // 1 -> 0.5
+	mat_efficiency = max(0.2, 1 - (T - 1) / 4) // 1 -> 0.2
 	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
 		T += M.rating
 	speed = T / 2 // 1 -> 3
@@ -113,7 +114,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Prosthetics Fab UI", 800, 600)
 		ui.set_initial_data(data)
@@ -150,7 +151,7 @@
 
 /obj/machinery/pros_fabricator/attackby(var/obj/item/I, var/mob/user)
 	if(busy)
-		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
 	if(default_deconstruction_screwdriver(user, I))
 		return
@@ -162,38 +163,38 @@
 	if(istype(I,/obj/item/weapon/disk/limb))
 		var/obj/item/weapon/disk/limb/D = I
 		if(!D.company || !(D.company in all_robolimbs))
-			user << "<span class='warning'>This disk seems to be corrupted!</span>"
+			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else
-			user << "<span class='notice'>Installing blueprint files for [D.company]...</span>"
+			to_chat(user, "<span class='notice'>Installing blueprint files for [D.company]...</span>")
 			if(do_after(user,50,src))
 				var/datum/robolimb/R = all_robolimbs[D.company]
 				R.unavailable_to_build = 0
-				user << "<span class='notice'>Installed [D.company] blueprints!</span>"
+				to_chat(user, "<span class='notice'>Installed [D.company] blueprints!</span>")
 				qdel(I)
 		return
 
 	if(istype(I,/obj/item/stack/material))
 		var/obj/item/stack/material/S = I
 		if(!(S.material.name in materials))
-			user << "<span class='warning'>The [src] doesn't accept [S.material]!</span>"
+			to_chat(user, "<span class='warning'>The [src] doesn't accept [S.material]!</span>")
 			return
 
 		var/sname = "[S.name]"
 		var/amnt = S.perunit
 		if(materials[S.material.name] + amnt <= res_max_amount)
-			if(S && S.amount >= 1)
+			if(S && S.get_amount() >= 1)
 				var/count = 0
 				overlays += "fab-load-metal"
 				spawn(10)
 					overlays -= "fab-load-metal"
-				while(materials[S.material.name] + amnt <= res_max_amount && S.amount >= 1)
+				while(materials[S.material.name] + amnt <= res_max_amount && S.get_amount() >= 1)
 					materials[S.material.name] += amnt
 					S.use(1)
 					count++
-				user << "You insert [count] [sname] into the fabricator."
+				to_chat(user, "You insert [count] [sname] into the fabricator.")
 				update_busy()
 		else
-			user << "The fabricator cannot hold more [sname]."
+			to_chat(user, "The fabricator cannot hold more [sname].")
 
 		return
 
@@ -209,7 +210,7 @@
 			sleep(15)
 			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
 			sleep(30)
-			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [company_name] system operator for future assistance.\"")
+			visible_message("\icon[src] <b>[src]</b> beeps: \"User DB truncated. Please contact your [using_map.company_name] system operator for future assistance.\"")
 			req_access = null
 			emagged = 1
 			return 1
@@ -240,7 +241,7 @@
 
 /obj/machinery/pros_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] < (D.materials[M] * mat_efficiency))
 			return 0
 	return 1
 
@@ -257,10 +258,10 @@
 	for(var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
 	if(D.build_path)
-		var/obj/new_item = D.Fabricate(get_step(get_turf(src), src.dir), src)
+		var/obj/new_item = D.Fabricate(get_step(get_turf(src), src.dir), src) // Sometimes returns a mob. Beware!
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
 		if(mat_efficiency != 1)
-			if(new_item.matter && new_item.matter.len > 0)
+			if(istype(new_item, /obj/) && new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)
@@ -299,7 +300,13 @@
 /obj/machinery/pros_fabricator/proc/get_materials()
 	. = list()
 	for(var/T in materials)
-		. += list(list("mat" = capitalize(T), "amt" = materials[T]))
+		var/hidden_mat = FALSE
+		for(var/HM in hidden_materials) // Direct list contents comparison was failing.
+			if(T == HM && materials[T] == 0)
+				hidden_mat = TRUE
+				continue
+		if(!hidden_mat)
+			. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
 /obj/machinery/pros_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0

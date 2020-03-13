@@ -9,6 +9,7 @@
 	icon = 'icons/obj/pipes.dmi'
 	icon_state = "circ-off"
 	anchored = 0
+	pipe_flags = PIPING_DEFAULT_LAYER_ONLY|PIPING_ONE_PER_TURF
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2
@@ -88,12 +89,12 @@
 	return 1
 
 /obj/machinery/atmospherics/binary/circulator/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+	if(W.is_wrench())
+		playsound(src, W.usesound, 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
-					"You hear a ratchet")
+					"You hear a ratchet.")
 
 		if(anchored)
 			if(dir & (NORTH|SOUTH))
@@ -101,13 +102,13 @@
 			else if(dir & (EAST|WEST))
 				initialize_directions = EAST|WEST
 
-			initialize()
+			atmos_init()
 			build_network()
 			if (node1)
-				node1.initialize()
+				node1.atmos_init()
 				node1.build_network()
 			if (node2)
-				node2.initialize()
+				node2.atmos_init()
 				node2.build_network()
 		else
 			if(node1)
@@ -124,24 +125,24 @@
 		..()
 
 /obj/machinery/atmospherics/binary/circulator/verb/rotate_clockwise()
+	set name = "Rotate Circulator Clockwise"
 	set category = "Object"
-	set name = "Rotate Circulator (Clockwise)"
+	set src in view(1)
+
+	if (usr.stat || usr.restrained() || anchored)
+		return
+
+	src.set_dir(turn(src.dir, 270))
+	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
+
+
+/obj/machinery/atmospherics/binary/circulator/verb/rotate_counterclockwise()
+	set name = "Rotate Circulator Counterclockwise"
+	set category = "Object"
 	set src in view(1)
 
 	if (usr.stat || usr.restrained() || anchored)
 		return
 
 	src.set_dir(turn(src.dir, 90))
-	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
-
-
-/obj/machinery/atmospherics/binary/circulator/verb/rotate_anticlockwise()
-	set category = "Object"
-	set name = "Rotate Circulator (Counterclockwise)"
-	set src in view(1)
-
-	if (usr.stat || usr.restrained() || anchored)
-		return
-
-	src.set_dir(turn(src.dir, -90))
 	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."

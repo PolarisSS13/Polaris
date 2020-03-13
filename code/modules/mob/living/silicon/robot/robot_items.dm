@@ -24,13 +24,13 @@
 	if(response == "Analyze")
 		if(loaded_item)
 			var/confirm = alert(user, "This will destroy the item inside forever.  Are you sure?","Confirm Analyze","Yes","No")
-			if(confirm == "Yes") //This is pretty copypasta-y
-				user << "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down."
+			if(confirm == "Yes" && !QDELETED(loaded_item)) //This is pretty copypasta-y
+				to_chat(user, "You activate the analyzer's microlaser, analyzing \the [loaded_item] and breaking it down.")
 				flick("portable_analyzer_scan", src)
 				playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
 				for(var/T in loaded_item.origin_tech)
 					files.UpdateTech(T, loaded_item.origin_tech[T])
-					user << "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)]."
+					to_chat(user, "\The [loaded_item] had level [loaded_item.origin_tech[T]] in [CallTechName(T)].")
 				loaded_item = null
 				for(var/obj/I in contents)
 					for(var/mob/M in I.contents)
@@ -51,7 +51,7 @@
 			else
 				return
 		else
-			user << "The [src] is empty.  Put something inside it first."
+			to_chat(user, "The [src] is empty.  Put something inside it first.")
 	if(response == "Sync")
 		var/success = 0
 		for(var/obj/machinery/r_n_d/server/S in machines)
@@ -62,10 +62,10 @@
 			success = 1
 			files.RefreshResearch()
 		if(success)
-			user << "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch."
+			to_chat(user, "You connect to the research server, push your data upstream to it, then pull the resulting merged data from the master branch.")
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		else
-			user << "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator."
+			to_chat(user, "Reserch server ping response timed out.  Unable to connect.  Please contact the system administrator.")
 			playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 1)
 	if(response == "Eject")
 		if(loaded_item)
@@ -74,7 +74,7 @@
 			icon_state = initial(icon_state)
 			loaded_item = null
 		else
-			user << "The [src] is already empty."
+			to_chat(user, "The [src] is already empty.")
 
 
 /obj/item/weapon/portable_destructive_analyzer/afterattack(var/atom/target, var/mob/living/user, proximity)
@@ -86,7 +86,7 @@
 		return
 	if(istype(target,/obj/item))
 		if(loaded_item)
-			user << "Your [src] already has something inside.  Analyze or eject it first."
+			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
 			return
 		var/obj/item/I = target
 		I.loc = src
@@ -97,12 +97,60 @@
 		flick("portable_analyzer_load", src)
 		icon_state = "portable_analyzer_full"
 
+/obj/item/weapon/portable_scanner
+	name = "Portable Resonant Analyzer"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "portable_scanner"
+	desc = "An advanced scanning device used for analyzing objects without completely annihilating them for science. Unfortunately, it has no connection to any database like its angrier cousin."
+
+/obj/item/weapon/portable_scanner/afterattack(var/atom/target, var/mob/living/user, proximity)
+	if(!target)
+		return
+	if(!proximity)
+		return
+	if(istype(target,/obj/item))
+		var/obj/item/I = target
+		if(do_after(src, 5 SECONDS * I.w_class))
+			for(var/mob/M in viewers())
+				M.show_message(text("<span class='notice'>[user] sweeps \the [src] over \the [I].</span>"), 1)
+			flick("[initial(icon_state)]-scan", src)
+			if(I.origin_tech && I.origin_tech.len)
+				for(var/T in I.origin_tech)
+					to_chat(user, "<span class='notice'>\The [I] had level [I.origin_tech[T]] in [CallTechName(T)].</span>")
+			else
+				to_chat(user, "<span class='notice'>\The [I] cannot be scanned by \the [src].</span>")
+
 //This is used to unlock other borg covers.
 /obj/item/weapon/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.
 	name = "access code transmission device"
 	icon_state = "id-robot"
 	desc = "A circuit grafted onto the bottom of an ID card.  It is used to transmit access codes into other robot chassis, \
 	allowing you to lock and unlock other robots' panels."
+
+	var/dummy_card = null
+	var/dummy_card_type = /obj/item/weapon/card/id/science/roboticist/dummy_cyborg
+
+/obj/item/weapon/card/robot/Initialize()
+	..()
+	dummy_card = new dummy_card_type(src)
+
+/obj/item/weapon/card/robot/Destroy()
+	qdel(dummy_card)
+	dummy_card = null
+	..()
+
+/obj/item/weapon/card/robot/GetID()
+	return dummy_card
+
+/obj/item/weapon/card/robot/syndi
+	dummy_card_type = /obj/item/weapon/card/id/syndicate/dummy_cyborg
+
+/obj/item/weapon/card/id/science/roboticist/dummy_cyborg
+	access = list(access_robotics)
+
+/obj/item/weapon/card/id/syndicate/dummy_cyborg/Initialize()
+	..()
+	access |= access_robotics
 
 //A harvest item for serviceborgs.
 /obj/item/weapon/robot_harvester
@@ -123,7 +171,7 @@
 		else if(T.dead) //It's probably dead otherwise.
 			T.remove_dead(user)
 	else
-		user << "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown."
+		to_chat(user, "Harvesting \a [target] is not the purpose of this tool.  The [src] is for plants being grown.")
 
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
@@ -152,9 +200,9 @@
 
 			if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
 				var/add = 0
-				if(I.w_class == 1.0)
+				if(I.w_class == ITEMSIZE_TINY)
 					add = 1
-				else if(I.w_class == 2.0)
+				else if(I.w_class == ITEMSIZE_SMALL)
 					add = 3
 				else
 					add = 5
@@ -166,7 +214,7 @@
 				overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
 				addedSomething = 1
 		if ( addedSomething )
-			user.visible_message("\blue [user] load some items onto their service tray.")
+			user.visible_message("<font color='blue'>[user] load some items onto their service tray.</font>")
 
 		return
 
@@ -206,9 +254,9 @@
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
-				user.visible_message("\blue [user] unloads their service tray.")
+				user.visible_message("<font color='blue'>[user] unloads their service tray.</font>")
 			else
-				user.visible_message("\blue [user] drops all the items on their tray.")
+				user.visible_message("<font color='blue'>[user] drops all the items on their tray.</font>")
 
 	return ..()
 
@@ -241,7 +289,7 @@
 				mode = 2
 			else
 				mode = 1
-			user << "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'"
+			to_chat(user, "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'")
 
 	return
 
@@ -267,6 +315,10 @@
 	name = "paper dispenser"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
+			)
 	item_state = "sheet-metal"
 
 /obj/item/weapon/form_printer/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -284,7 +336,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/weapon/form_printer/proc/deploy_paper(var/turf/T)
-	T.visible_message("\blue \The [src.loc] dispenses a sheet of crisp white paper.")
+	T.visible_message("<font color='blue'>\The [src.loc] dispenses a sheet of crisp white paper.</font>")
 	new /obj/item/weapon/paper(T)
 
 
@@ -294,7 +346,53 @@
 	desc = "A powerful experimental module that turns aside or absorbs incoming attacks at the cost of charge."
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
-	var/shield_level = 0.5 //Percentage of damage absorbed by the shield.
+	var/shield_level = 0.5			//Percentage of damage absorbed by the shield.
+	var/active = 1					//If the shield is on
+	var/flash_count = 0				//Counter for how many times the shield has been flashed
+	var/overload_threshold = 3		//Number of flashes it takes to overload the shield
+	var/shield_refresh = 15 SECONDS	//Time it takes for the shield to reboot after destabilizing
+	var/overload_time = 0			//Stores the time of overload
+	var/last_flash = 0				//Stores the time of last flash
+
+/obj/item/borg/combat/shield/New()
+	START_PROCESSING(SSobj, src)
+	..()
+
+/obj/item/borg/combat/shield/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	..()
+
+/obj/item/borg/combat/shield/attack_self(var/mob/living/user)
+	set_shield_level()
+
+/obj/item/borg/combat/shield/process()
+	if(active)
+		if(flash_count && (last_flash + shield_refresh < world.time))
+			flash_count = 0
+			last_flash = 0
+	else if(overload_time + shield_refresh < world.time)
+		active = 1
+		flash_count = 0
+		overload_time = 0
+
+		var/mob/living/user = src.loc
+		user.visible_message("<span class='danger'>[user]'s shield reactivates!</span>", "<span class='danger'>Your shield reactivates!.</span>")
+		user.update_icon()
+
+/obj/item/borg/combat/shield/proc/adjust_flash_count(var/mob/living/user, amount)
+	if(active)			//Can't destabilize a shield that's not on
+		flash_count += amount
+
+		if(amount > 0)
+			last_flash = world.time
+			if(flash_count >= overload_threshold)
+				overload(user)
+
+/obj/item/borg/combat/shield/proc/overload(var/mob/living/user)
+	active = 0
+	user.visible_message("<span class='danger'>[user]'s shield destabilizes!</span>", "<span class='danger'>Your shield destabilizes!.</span>")
+	user.update_icon()
+	overload_time = world.time
 
 /obj/item/borg/combat/shield/verb/set_shield_level()
 	set name = "Set shield level"
@@ -310,3 +408,103 @@
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
+
+/obj/item/weapon/inflatable_dispenser
+	name = "inflatables dispenser"
+	desc = "Hand-held device which allows rapid deployment and removal of inflatables."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "inf_deployer"
+	w_class = ITEMSIZE_LARGE
+
+	var/stored_walls = 5
+	var/stored_doors = 2
+	var/max_walls = 5
+	var/max_doors = 2
+	var/mode = 0 // 0 - Walls   1 - Doors
+
+/obj/item/weapon/inflatable_dispenser/robot
+	w_class = ITEMSIZE_HUGE
+	stored_walls = 10
+	stored_doors = 5
+	max_walls = 10
+	max_doors = 5
+
+/obj/item/weapon/inflatable_dispenser/examine(var/mob/user)
+	if(!..(user))
+		return
+	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
+	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
+
+/obj/item/weapon/inflatable_dispenser/attack_self()
+	mode = !mode
+	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
+
+/obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
+	..(A, user)
+	if(!user)
+		return
+	if(!user.Adjacent(A))
+		to_chat(user, "You can't reach!")
+		return
+	if(istype(A, /turf))
+		try_deploy_inflatable(A, user)
+	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
+		pick_up(A, user)
+
+/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
+	if(mode) // Door deployment
+		if(!stored_doors)
+			to_chat(user, "\The [src] is out of doors!")
+			return
+
+		if(T && istype(T))
+			new /obj/structure/inflatable/door(T)
+			stored_doors--
+
+	else // Wall deployment
+		if(!stored_walls)
+			to_chat(user, "\The [src] is out of walls!")
+			return
+
+		if(T && istype(T))
+			new /obj/structure/inflatable(T)
+			stored_walls--
+
+	playsound(T, 'sound/items/zip.ogg', 75, 1)
+	to_chat(user, "You deploy the inflatable [mode ? "door" : "wall"]!")
+
+/obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
+	if(istype(A, /obj/structure/inflatable))
+		if(!istype(A, /obj/structure/inflatable/door))
+			if(stored_walls >= max_walls)
+				to_chat(user, "\The [src] is full.")
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				to_chat(user, "\The [src] is full.")
+				return
+			stored_doors++
+			qdel(A)
+		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+		visible_message("\The [user] deflates \the [A] with \the [src]!")
+		return
+	if(istype(A, /obj/item/inflatable))
+		if(!istype(A, /obj/item/inflatable/door))
+			if(stored_walls >= max_walls)
+				to_chat(user, "\The [src] is full.")
+				return
+			stored_walls++
+			qdel(A)
+		else
+			if(stored_doors >= max_doors)
+				to_chat(usr, "\The [src] is full!")
+				return
+			stored_doors++
+			qdel(A)
+		visible_message("\The [user] picks up \the [A] with \the [src]!")
+		return
+
+	to_chat(user, "You fail to pick up \the [A] with \the [src]")
+	return

@@ -1,11 +1,26 @@
 //Most of these are defined at this level to reduce on checks elsewhere in the code.
 //Having them here also makes for a nice reference list of the various overlay-updating procs available
 
-/mob/proc/regenerate_icons()		//TODO: phase this out completely if possible
+/mob/proc/regenerate_icons()		//Update every aspect of the mob's icons (expensive, resist the urge to use unless you need it)
 	return
 
 /mob/proc/update_icons()
+	update_icon() //Ugh.
 	return
+
+// Obsolete
+/mob/proc/update_icons_layers()
+	return
+
+/mob/proc/update_icons_huds()
+	return
+
+/mob/proc/update_icons_body()
+	return
+
+/mob/proc/update_icons_all()
+	return
+// End obsolete
 
 /mob/proc/update_hud()
 	return
@@ -75,3 +90,4 @@
 
 /mob/proc/update_targeted()
 	return
+

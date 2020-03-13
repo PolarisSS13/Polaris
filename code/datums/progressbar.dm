@@ -15,6 +15,7 @@
 	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0")
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	bar.pixel_y = 32
+	bar.plane = PLANE_PLAYER_HUD
 	src.user = user
 	if(user)
 		client = user.client
@@ -22,11 +23,13 @@
 /datum/progressbar/Destroy()
 	if (client)
 		client.images -= bar
-	qdel(bar)
-	. = ..()
+	QDEL_NULL(bar)
+	user = null
+	client = null
+	return ..()
 
 /datum/progressbar/proc/update(progress)
-	//world << "Update [progress] - [goal] - [(progress / goal)] - [((progress / goal) * 100)] - [round(((progress / goal) * 100), 5)]"
+	//to_world("Update [progress] - [goal] - [(progress / goal)] - [((progress / goal) * 100)] - [round(((progress / goal) * 100), 5)]")
 	if (!user || !user.client)
 		shown = 0
 		return
@@ -36,7 +39,7 @@
 			shown = 0
 		client = user.client
 
-	progress = Clamp(progress, 0, goal)
+	progress = CLAMP(progress, 0, goal)
 	bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
 	if (!shown && user.is_preference_enabled(/datum/client_preference/show_progress_bar))
 		user.client.images += bar

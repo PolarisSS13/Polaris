@@ -6,11 +6,12 @@
 	var/list/nanoui_items				// List of items for NanoUI use
 	var/nanoui_menu = 0					// The current menu we are in
 	var/list/nanoui_data = new 			// Additional data for NanoUI use
+	var/faction = ""					//Antag faction holder.
 
 	var/list/purchase_log = new
 	var/datum/mind/uplink_owner = null
 	var/used_TC = 0
-	var/offer_time = 15 MINUTES			//The time increment per discount offered
+	var/offer_time = 10 MINUTES			//The time increment per discount offered
 	var/next_offer_time					//The time a discount will next be offered
 	var/datum/uplink_item/discount_item	//The item to be discounted
 	var/discount_amount					//The amount as a percent the item will be discounted by
@@ -18,17 +19,20 @@
 /obj/item/device/uplink/nano_host()
 	return loc
 
-/obj/item/device/uplink/New(var/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
+/obj/item/device/uplink/New(var/location, var/datum/mind/owner = null, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	..()
 	src.uplink_owner = owner
 	purchase_log = list()
 	world_uplinks += src
-	uses = owner.tcrystals
-	processing_objects += src
+	if(owner)
+		uses = owner.tcrystals
+	else
+		uses = telecrystals
+	START_PROCESSING(SSobj, src)
 
 /obj/item/device/uplink/Destroy()
 	world_uplinks -= src
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/item/device/uplink/get_item_cost(var/item_type, var/item_cost)
@@ -68,7 +72,7 @@
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
 		next_offer_time = world.time + offer_time
 		update_nano_data()
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 // Toggles the uplink on and off. Normally this will bypass the item's normal functions and go to the uplink menu, if activated.
 /obj/item/device/uplink/hidden/proc/toggle()
@@ -96,6 +100,9 @@
 	var/title = "Remote Uplink"
 	var/data[0]
 	uses = user.mind.tcrystals
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		faction = H.antag_faction
 
 	data["welcome"] = welcome
 	data["crystals"] = uses
@@ -103,7 +110,7 @@
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = inventory_state)
 		data["menu"] = 0
@@ -131,7 +138,7 @@
 		UI.buy(src, usr)
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+		var/datum/nanoui/ui = SSnanoui.get_open_ui(user, src, "main")
 		ui.close()
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
@@ -154,7 +161,7 @@
 		nanoui_data["categories"] = categories
 		nanoui_data["discount_name"] = discount_item ? discount_item.name : ""
 		nanoui_data["discount_amount"] = (1-discount_amount)*100
-		nanoui_data["offer_expiry"] = worldtime2text(next_offer_time)
+		nanoui_data["offer_expiry"] = worldtime2stationtime(next_offer_time)
 	else if(nanoui_menu == 1)
 		var/items[0]
 		for(var/datum/uplink_item/item in category.items)
@@ -188,7 +195,10 @@
 				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
 				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
 				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
-
+				if(L.fields["antagvis"] == ANTAG_KNOWN || (faction == L.fields["antagfac"] && (L.fields["antagvis"] == ANTAG_SHARED)))
+					nanoui_data["exploit"]["antagfaction"] = html_encode(L.fields["antagfac"])
+				else
+					nanoui_data["exploit"]["antagfaction"] = html_encode("None")
 				nanoui_data["exploit_exists"] = 1
 				break
 
@@ -210,8 +220,9 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/device/radio/uplink/New()
-	hidden_uplink = new(src)
+/obj/item/device/radio/uplink/New(atom/loc, datum/mind/target_mind, telecrystals)
+	..(loc)
+	hidden_uplink = new(src, target_mind, telecrystals)
 	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)

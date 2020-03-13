@@ -8,22 +8,26 @@
 /*
  * Banana Peals
  */
-/obj/item/weapon/bananapeel/Crossed(AM as mob|obj)
+/obj/item/weapon/bananapeel/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	if (istype(AM, /mob/living))
 		var/mob/living/M = AM
 		M.slip("the [src.name]",4)
 /*
  * Soap
  */
-/obj/item/weapon/soap/New()
-	..()
+/obj/item/weapon/soap/Initialize()
+	. = ..()
 	create_reagents(5)
 	wet()
- 
+
 /obj/item/weapon/soap/proc/wet()
 	reagents.add_reagent("cleaner", 5)
 
-/obj/item/weapon/soap/Crossed(AM as mob|obj)
+/obj/item/weapon/soap/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	if (istype(AM, /mob/living))
 		var/mob/living/M =	AM
 		M.slip("the [src.name]",3)
@@ -33,23 +37,23 @@
 	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	if(user.client && (target in user.client.screen))
-		user << "<span class='notice'>You need to take that [target.name] off before cleaning it.</span>"
+		to_chat(user, "<span class='notice'>You need to take that [target.name] off before cleaning it.</span>")
 	else if(istype(target,/obj/effect/decal/cleanable/blood))
-		user << "<span class='notice'>You scrub \the [target.name] out.</span>"
+		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
 		target.clean_blood()
 		return	//Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 	else if(istype(target,/obj/effect/decal/cleanable))
-		user << "<span class='notice'>You scrub \the [target.name] out.</span>"
+		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
 		qdel(target)
 	else if(istype(target,/turf))
-		user << "<span class='notice'>You scrub \the [target.name] clean.</span>"
+		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 		var/turf/T = target
 		T.clean(src, user)
 	else if(istype(target,/obj/structure/sink))
-		user << "<span class='notice'>You wet \the [src] in the sink.</span>"
+		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()
 	else
-		user << "<span class='notice'>You clean \the [target.name].</span>"
+		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
 		target.clean_blood()
 	return
 

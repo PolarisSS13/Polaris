@@ -11,11 +11,12 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
+	center_of_mass = list("x" = 16,"y" = 14)
 	matter = list("glass" = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null
 	volume = 15
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
 	sharp = 1
 	unacidable = 1 //glass
@@ -23,6 +24,7 @@
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
 	var/time = 30
+	var/drawing = 0
 
 /obj/item/weapon/reagent_containers/syringe/on_reagent_change()
 	update_icon()
@@ -57,7 +59,7 @@
 		return
 
 	if(mode == SYRINGE_BROKEN)
-		user << "<span class='warning'>This syringe is broken!</span>"
+		to_chat(user, "<span class='warning'>This syringe is broken!</span>")
 		return
 
 	if(user.a_intent == I_HURT && ismob(target))
@@ -66,63 +68,79 @@
 		syringestab(target, user)
 		return
 
-
+	var/injtime = time // Calculated 'true' injection time (as added to by hardsuits and whatnot), 66% of this goes to warmup, then every 33% after injects 5u
 	switch(mode)
 		if(SYRINGE_DRAW)
-
 			if(!reagents.get_free_space())
-				user << "<span class='warning'>The syringe is full.</span>"
+				to_chat(user, "<span class='warning'>The syringe is full.</span>")
 				mode = SYRINGE_INJECT
 				return
 
 			if(ismob(target))//Blood!
 				if(reagents.has_reagent("blood"))
-					user << "<span class='notice'>There is already a blood sample in this syringe.</span>"
+					to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 					return
+
 				if(istype(target, /mob/living/carbon))
-					if(istype(target, /mob/living/carbon/slime))
-						user << "<span class='warning'>You are unable to locate any blood.</span>"
-						return
 					var/amount = reagents.get_free_space()
 					var/mob/living/carbon/T = target
 					if(!T.dna)
-						user << "<span class='warning'>You are unable to locate any blood. (To be specific, your target seems to be missing their DNA datum).</span>"
+						to_chat(user, "<span class='warning'>You are unable to locate any blood. (To be specific, your target seems to be missing their DNA datum).</span>")
 						return
 					if(NOCLONE in T.mutations) //target done been et, no more blood in him
-						user << "<span class='warning'>You are unable to locate any blood.</span>"
+						to_chat(user, "<span class='warning'>You are unable to locate any blood.</span>")
+						return
+
+					if(T.isSynthetic())
+						to_chat(user, "<span class = 'warning'>You can't draw blood from a synthetic!</span>")
+						return
+
+					if(drawing)
+						to_chat(user, "<span class='warning'>You are already drawing blood from [T.name].</span>")
 						return
 
 					var/datum/reagent/B
+					drawing = 1
 					if(istype(T, /mob/living/carbon/human))
 						var/mob/living/carbon/human/H = T
 						if(H.species && !H.should_have_organ(O_HEART))
 							H.reagents.trans_to_obj(src, amount)
 						else
+							if(ismob(H) && H != user)
+								if(!do_mob(user, target, time))
+									drawing = 0
+									return
 							B = T.take_blood(src, amount)
+							drawing = 0
 					else
+						if(!do_mob(user, target, time))
+							drawing = 0
+							return
 						B = T.take_blood(src,amount)
+						drawing = 0
 
 					if (B)
 						reagents.reagent_list += B
 						reagents.update_total()
 						on_reagent_change()
 						reagents.handle_reactions()
-					user << "<span class='notice'>You take a blood sample from [target].</span>"
+					to_chat(user, "<span class='notice'>You take a blood sample from [target].</span>")
 					for(var/mob/O in viewers(4, user))
 						O.show_message("<span class='notice'>[user] takes a blood sample from [target].</span>", 1)
 
 			else //if not mob
 				if(!target.reagents.total_volume)
-					user << "<span class='notice'>[target] is empty.</span>"
+					to_chat(user, "<span class='notice'>[target] is empty.</span>")
 					return
 
-				if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract))
-					user << "<span class='notice'>You cannot directly remove reagents from this object.</span>"
+				if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/weapon/reagent_containers/food))
+					to_chat(user, "<span class='notice'>You cannot directly remove reagents from this object.</span>")
 					return
 
 				var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
-				user << "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>"
+				to_chat(user, "<span class='notice'>You fill the syringe with [trans] units of the solution.</span>")
 				update_icon()
+
 
 			if(!reagents.get_free_space())
 				mode = SYRINGE_INJECT
@@ -130,66 +148,78 @@
 
 		if(SYRINGE_INJECT)
 			if(!reagents.total_volume)
-				user << "<span class='notice'>The syringe is empty.</span>"
+				to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 				mode = SYRINGE_DRAW
 				return
 			if(istype(target, /obj/item/weapon/implantcase/chem))
 				return
 
 			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
-				user << "<span class='notice'>You cannot directly fill this object.</span>"
+				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 			if(!target.reagents.get_free_space())
-				user << "<span class='notice'>[target] is full.</span>"
+				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
 			var/mob/living/carbon/human/H = target
 			if(istype(H))
 				var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 				if(!affected)
-					user << "<span class='danger'>\The [H] is missing that limb!</span>"
+					to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
 					return
 				else if(affected.robotic >= ORGAN_ROBOT)
-					user << "<span class='danger'>You cannot inject a robotic limb.</span>"
+					to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
 					return
 
-			if(ismob(target) && target != user)
+			var/cycle_time = injtime*0.33 //33% of the time slept between 5u doses
+			var/warmup_time = 0	//0 for containers
+			if(ismob(target))
+				warmup_time = cycle_time //If the target is another mob, this gets overwritten
 
-				var/injtime = time //Injecting through a hardsuit takes longer due to needing to find a port.
+			if(ismob(target) && target != user)
+				warmup_time = injtime*0.66 // Otherwise 66% of the time is warmup
 
 				if(istype(H))
 					if(H.wear_suit)
 						if(istype(H.wear_suit, /obj/item/clothing/suit/space))
 							injtime = injtime * 2
-						else if(!H.can_inject(user, 1))
-							return
 
 				else if(isliving(target))
-
 					var/mob/living/M = target
 					if(!M.can_inject(user, 1))
 						return
 
 				if(injtime == time)
-					user.visible_message("<span class='warning'>[user] is trying to inject [target] with [visible_name]!</span>")
+					user.visible_message("<span class='warning'>[user] is trying to inject [target] with [visible_name]!</span>","<span class='notice'>You begin injecting [target] with [visible_name].</span>")
 				else
-					user.visible_message("<span class='warning'>[user] begins hunting for an injection port on [target]'s suit!</span>")
+					user.visible_message("<span class='warning'>[user] begins hunting for an injection port on [target]'s suit!</span>","<span class='notice'>You begin hunting for an injection port on [target]'s suit!</span>")
 
-				user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+			//The warmup
+			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+			if(!do_after(user,warmup_time,target))
+				return
 
-				if(!do_mob(user, target, injtime))
-					return
-
-				user.visible_message("<span class='warning'>[user] injects [target] with the syringe!</span>")
-
-			var/trans
+			var/trans = 0
+			var/contained = reagentlist()
 			if(ismob(target))
-				var/contained = reagentlist()
-				trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
-				admin_inject_log(user, target, src, contained, trans)
+				while(reagents.total_volume)
+					trans += reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+					update_icon()
+					if(!reagents.total_volume || !do_after(user,cycle_time,target))
+						break
 			else
-				trans = reagents.trans_to(target, amount_per_transfer_from_this)
-			user << "<span class='notice'>You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units.</span>"
+				trans += reagents.trans_to_obj(target, amount_per_transfer_from_this)
+
+			if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
+				mode = SYRINGE_DRAW
+				update_icon()
+
+			if(trans)
+				to_chat(user, "<span class='notice'>You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units.</span>")
+				if(ismob(target))
+					add_attack_logs(user,target,"Injected with [src.name] containing [contained], trasferred [trans] units")
+			else
+				to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 			if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 				mode = SYRINGE_DRAW
 				update_icon()
@@ -232,7 +262,7 @@
 		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 		if (!affecting || affecting.is_stump())
-			user << "<span class='danger'>They are missing that limb!</span>"
+			to_chat(user, "<span class='danger'>They are missing that limb!</span>")
 			return
 
 		var/hit_area = affecting.name
@@ -242,13 +272,11 @@
 
 		if (target != user && H.getarmor(target_zone, "melee") > 5 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
-				O.show_message(text("\red <B>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</B>"), 1)
+				O.show_message(text("<font color='red'><B>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</B></font>"), 1)
 			user.remove_from_mob(src)
 			qdel(src)
 
-			user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with \the [src] (INTENT: HARM).</font>"
-			target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: HARM).</font>"
-			msg_admin_attack("[key_name_admin(user)] attacked [key_name_admin(target)] with [src.name] (INTENT: HARM) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			add_attack_logs(user,target,"Syringe harmclick")
 
 			return
 
@@ -264,10 +292,10 @@
 
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
-	var/contained_reagents = reagents.get_reagents()
+	var/contained = reagents.get_reagents()
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 	if(isnull(trans)) trans = 0
-	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
+	add_attack_logs(user,target,"Stabbed with [src.name] containing [contained], trasferred [trans] units")
 	break_syringe(target, user)
 
 /obj/item/weapon/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
@@ -289,10 +317,10 @@
 
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/afterattack(obj/target, mob/user, flag)
 	if(mode == SYRINGE_DRAW && ismob(target)) // No drawing 50 units of blood at once
-		user << "<span class='notice'>This needle isn't designed for drawing blood.</span>"
+		to_chat(user, "<span class='notice'>This needle isn't designed for drawing blood.</span>")
 		return
 	if(user.a_intent == "hurt" && ismob(target)) // No instant injecting
-		user << "<span class='notice'>This syringe is too big to stab someone with it.</span>"
+		to_chat(user, "<span class='notice'>This syringe is too big to stab someone with it.</span>")
 	..()
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -303,8 +331,8 @@
 	name = "Syringe (inaprovaline)"
 	desc = "Contains inaprovaline - used to stabilize patients."
 
-/obj/item/weapon/reagent_containers/syringe/inaprovaline/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/inaprovaline/Initialize()
+	. = ..()
 	reagents.add_reagent("inaprovaline", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -313,8 +341,8 @@
 	name = "Syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
 
-/obj/item/weapon/reagent_containers/syringe/antitoxin/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/antitoxin/Initialize()
+	. = ..()
 	reagents.add_reagent("anti_toxin", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -323,8 +351,8 @@
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."
 
-/obj/item/weapon/reagent_containers/syringe/antiviral/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/antiviral/Initialize()
+	. = ..()
 	reagents.add_reagent("spaceacillin", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -333,16 +361,16 @@
 	name = "Syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."
 
-/obj/item/weapon/reagent_containers/syringe/drugs/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/drugs/Initialize()
+	. = ..()
 	reagents.add_reagent("space_drugs",  5)
 	reagents.add_reagent("mindbreaker",  5)
 	reagents.add_reagent("cryptobiolin", 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral/Initialize()
+	. = ..()
 	reagents.add_reagent("chloralhydrate", 50)
 	mode = SYRINGE_INJECT
 	update_icon()
@@ -351,7 +379,7 @@
 	name = "Syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
 
-/obj/item/weapon/reagent_containers/syringe/steroid/New()
-	..()
+/obj/item/weapon/reagent_containers/syringe/steroid/Initialize()
+	. = ..()
 	reagents.add_reagent("adrenaline",5)
 	reagents.add_reagent("hyperzine",10)

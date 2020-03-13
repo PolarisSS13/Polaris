@@ -24,7 +24,7 @@
 		process()
 		checkReagents()
 	spawn(120)
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 		sleep(30)
 		if(metal)
 			var/obj/structure/foamedmetal/M = new(src.loc)
@@ -74,6 +74,8 @@
 			qdel(src)
 
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
+	if(AM.is_incorporeal())
+		return
 	if(metal)
 		return
 	if(istype(AM, /mob/living))
@@ -108,7 +110,7 @@
 			F.amount += amount
 			return
 
-		F = PoolOrNew(/obj/effect/effect/foam, list(location, metal))
+		F = new /obj/effect/effect/foam(location, metal)
 		F.amount = amount
 
 		if(!metal) // don't carry other chemicals if a metal foam
@@ -130,6 +132,7 @@
 	anchored = 1
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall."
+	can_atmos_pass = ATMOS_PASS_NO
 	var/metal = 1 // 1 = aluminum, 2 = iron
 
 /obj/structure/foamedmetal/New()
@@ -139,7 +142,7 @@
 /obj/structure/foamedmetal/Destroy()
 	density = 0
 	update_nearby_tiles(1)
-	..()
+	return ..()
 
 /obj/structure/foamedmetal/proc/updateicon()
 	if(metal == 1)
@@ -150,8 +153,10 @@
 /obj/structure/foamedmetal/ex_act(severity)
 	qdel(src)
 
-/obj/structure/foamedmetal/bullet_act()
-	if(metal == 1 || prob(50))
+/obj/structure/foamedmetal/bullet_act(var/obj/item/projectile/P)
+	if(istype(P, /obj/item/projectile/test))
+		return
+	else if(metal == 1 || prob(50))
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
@@ -159,7 +164,7 @@
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else
-		user << "<span class='notice'>You hit the metal foam but bounce off it.</span>"
+		to_chat(user, "<span class='notice'>You hit the metal foam but bounce off it.</span>")
 	return
 
 /obj/structure/foamedmetal/attackby(var/obj/item/I, var/mob/user)
@@ -175,9 +180,4 @@
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the foamed metal with \the [I].</span>")
 		qdel(src)
 	else
-		user << "<span class='notice'>You hit the metal foam to no effect.</span>"
-
-/obj/structure/foamedmetal/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-	if(air_group)
-		return 0
-	return !density
+		to_chat(user, "<span class='notice'>You hit the metal foam to no effect.</span>")

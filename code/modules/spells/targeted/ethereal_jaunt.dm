@@ -26,7 +26,8 @@
 			animation.density = 0
 			animation.anchored = 1
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.layer = 5
+			animation.plane = MOB_PLANE
+			animation.layer = ABOVE_MOB_LAYER
 			animation.master = holder
 			target.ExtinguishMob()
 			if(target.buckled)
@@ -96,7 +97,7 @@
 		if(!T.contains_dense_objects())
 			last_valid_turf = T
 	else
-		user << "<span class='warning'>Some strange aura is blocking the way!</span>"
+		to_chat(user, "<span class='warning'>Some strange aura is blocking the way!</span>")
 	src.canmove = 0
 	spawn(2) src.canmove = 1
 

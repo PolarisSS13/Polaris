@@ -18,7 +18,7 @@
 	..()
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
-	if(w_class > 0 && w_class < 4)
+	if(w_class > 0 && w_class < ITEMSIZE_LARGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
@@ -30,7 +30,7 @@
 		user.put_in_active_hand(gift)
 		src.gift.add_fingerprint(user)
 	else
-		user << "<span class='warning'>The gift was empty!</span>"
+		to_chat(user, "<span class='warning'>The gift was empty!</span>")
 	qdel(src)
 	return
 
@@ -41,16 +41,16 @@
 /obj/effect/spresent/relaymove(mob/user as mob)
 	if (user.stat)
 		return
-	user << "<span class='warning'>You can't move.</span>"
+	to_chat(user, "<span class='warning'>You can't move.</span>")
 
 /obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
-	if (!istype(W, /obj/item/weapon/wirecutters))
-		user << "<span class='warning'>I need wirecutters for that.</span>"
+	if (!W.is_wirecutter())
+		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
 		return
 
-	user << "<span class='notice'>You cut open the present.</span>"
+	to_chat(user, "<span class='notice'>You cut open the present.</span>")
 
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.loc = src.loc
@@ -101,9 +101,9 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/device/paicard,
-		/obj/item/device/violin,
+		/obj/item/device/instrument/violin,
 		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/clothing/accessory/horrible)
+		/obj/item/clothing/accessory/tie/horrible)
 
 	if(!ispath(gift_type,/obj/item))	return
 
@@ -127,12 +127,13 @@
 /obj/item/weapon/wrapping_paper/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	..()
 	if (!( locate(/obj/structure/table, src.loc) ))
-		user << "<span class='warning'>You MUST put the paper on a table!</span>"
-	if (W.w_class < 4)
-		if (user.get_type_in_hands(/obj/item/weapon/wirecutters))
+		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
+	if (W.w_class < ITEMSIZE_LARGE)
+		var/obj/item/I = user.get_inactive_hand()
+		if(I.is_wirecutter())
 			var/a_used = 2 ** (src.w_class - 1)
 			if (src.amount < a_used)
-				user << "<span class='warning'>You need more paper!</span>"
+				to_chat(user, "<span class='warning'>You need more paper!</span>")
 				return
 			else
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
@@ -154,15 +155,15 @@
 				qdel(src)
 				return
 		else
-			user << "<span class='warning'>You need scissors!</span>"
+			to_chat(user, "<span class='warning'>You need scissors!</span>")
 	else
-		user << "<span class='warning'>The object is FAR too large!</span>"
+		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
 	return
 
 
 /obj/item/weapon/wrapping_paper/examine(mob/user)
 	if(..(user, 1))
-		user << text("There is about [] square units of paper left!", src.amount)
+		to_chat(user, "There is about [src.amount] square units of paper left!")
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)
 	if (!istype(target, /mob/living/carbon/human)) return
@@ -179,11 +180,8 @@
 
 			H.loc = present
 
-			H.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been wrapped with [src.name]  by [user.name] ([user.ckey])</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to wrap [H.name] ([H.ckey])</font>")
-			msg_admin_attack("[key_name(user)] used [src] to wrap [key_name(H)]")
-
+			add_attack_logs(user,H,"Wrapped with [src]")
 		else
-			user << "<span class='warning'>You need more paper.</span>"
+			to_chat(user, "<span class='warning'>You need more paper.</span>")
 	else
-		user << "They are moving around too much. A straightjacket would help."
+		to_chat(user, "They are moving around too much. A straightjacket would help.")

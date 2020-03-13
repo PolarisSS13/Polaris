@@ -17,13 +17,16 @@
 	item_state = "pen"
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 0
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
 	throw_speed = 7
 	throw_range = 15
 	matter = list(DEFAULT_WALL_MATERIAL = 10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 
+/obj/item/weapon/pen/attack_self(var/mob/user)
+	to_chat(user, "<span class='notice'>Click.</span>")
+	playsound(loc, 'sound/items/penclick.ogg', 50, 1)
 
 /obj/item/weapon/pen/blue
 	desc = "It's a normal blue ink pen."
@@ -34,6 +37,10 @@
 	desc = "It's a normal red ink pen."
 	icon_state = "pen_red"
 	colour = "red"
+
+/obj/item/weapon/pen/fountain
+	desc = "A well made fountain pen."
+	icon_state = "pen_fountain"
 
 /obj/item/weapon/pen/multi
 	desc = "It's a pen with multiple colors of ink!"
@@ -51,23 +58,12 @@
 	else
 		icon_state = "pen_[colour]"
 
-	user << "<span class='notice'>Changed color to '[colour].'</span>"
+	to_chat(user, "<span class='notice'>Changed color to '[colour].'</span>")
 
 /obj/item/weapon/pen/invisible
 	desc = "It's an invisble pen marker."
 	icon_state = "pen"
 	colour = "white"
-
-
-/obj/item/weapon/pen/attack(mob/M as mob, mob/user as mob)
-	if(!ismob(M))
-		return
-	user << "<span class='warning'>You stab [M] with the pen.</span>"
-//	M << "\red You feel a tiny prick!" //That's a whole lot of meta!
-	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")
-	msg_admin_attack("[user.name] ([user.ckey]) Used the [name] to stab [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-	return
 
 /*
  * Reagent pens
@@ -75,7 +71,6 @@
 
 /obj/item/weapon/pen/reagent
 	flags = OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/weapon/pen/reagent/New()
@@ -92,9 +87,9 @@
 	if(M.can_inject(user,1))
 		if(reagents.total_volume)
 			if(M.reagents)
-				var/contained_reagents = reagents.get_reagents()
+				var/contained = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(M, 30, CHEM_BLOOD)
-				admin_inject_log(user, M, src, contained_reagents, trans)
+				add_attack_logs(user,M,"Injected with [src.name] containing [contained], trasferred [trans] units")
 
 /*
  * Sleepy Pens
@@ -116,8 +111,8 @@
 
 /obj/item/weapon/pen/reagent/paralysis/New()
 	..()
-	reagents.add_reagent("zombiepowder", 10)
-	reagents.add_reagent("cryptobiolin", 15)
+	reagents.add_reagent("zombiepowder", 5)
+	reagents.add_reagent("cryptobiolin", 10)
 
 /*
  * Chameleon pen
@@ -172,7 +167,7 @@
 				colour = COLOR_WHITE
 			else
 				colour = COLOR_BLACK
-		usr << "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>"
+		to_chat(usr, "<span class='info'>You select the [lowertext(selected_type)] ink container.</span>")
 
 
 /*
@@ -184,7 +179,7 @@
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
 	attack_verb = list("attacked", "coloured")
 	colour = "#FF0000" //RGB
 	var/shadeColour = "#220000" //RGB
@@ -192,10 +187,18 @@
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
 
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</b>"
-		return (BRUTELOSS|OXYLOSS)
+/obj/item/weapon/pen/crayon/suicide_act(mob/user)
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+	to_chat(viewers(user),"<font color='red'><b>[user] is jamming the [src.name] up [TU.his] nose and into [TU.his] brain. It looks like [TU.he] [TU.is] trying to commit suicide.</b></font>")
+	return (BRUTELOSS|OXYLOSS)
 
-	New()
-		name = "[colourName] crayon"
-		..()
+/obj/item/weapon/pen/crayon/New()
+	name = "[colourName] crayon"
+
+/obj/item/weapon/pen/crayon/marker
+	name = "marker"
+	desc = "A chisel-tip permanent marker. Hopefully non-toxic."
+	icon_state = "markerred"
+
+/obj/item/weapon/pen/crayon/marker/New()
+	name = "[colourName] marker"

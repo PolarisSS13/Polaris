@@ -12,12 +12,11 @@
 	var/closed = 0
 	var/scanning = 0
 	var/scanner_progress = 0
-	var/scanner_rate = 2.50
+	var/scanner_rate = 5
 	var/last_process_worldtime = 0
 	var/report_num = 0
 
 /obj/machinery/dnaforensics/New()
-	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
@@ -29,7 +28,7 @@
 /obj/machinery/dnaforensics/attackby(var/obj/item/W, mob/user as mob)
 
 	if(bloodsamp)
-		user << "<span class='warning'>There is already a sample in the machine.</span>"
+		to_chat(user, "<span class='warning'>There is already a sample in the machine.</span>")
 		return
 
 	if(closed)
@@ -39,7 +38,7 @@
 			if(default_deconstruction_crowbar(user, W))
 				return
 		else
-			user << "<span class='warning'>Open the cover before inserting the sample.</span>"
+			to_chat(user, "<span class='warning'>Open the cover before inserting the sample.</span>")
 		return
 
 	var/obj/item/weapon/forensics/swab/swab = W
@@ -47,9 +46,9 @@
 		user.unEquip(W)
 		src.bloodsamp = swab
 		swab.loc = src
-		user << "<span class='notice'>You insert \the [W] into \the [src].</span>"
+		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 	else
-		user << "<span class='warning'>\The [src] only accepts used swabs.</span>"
+		to_chat(user, "<span class='warning'>\The [src] only accepts used swabs.</span>")
 		return
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
@@ -62,7 +61,7 @@
 	data["bloodsamp_desc"] = (bloodsamp ? (bloodsamp.desc ? bloodsamp.desc : "No information on record.") : "")
 	data["lidstate"] = closed
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		ui = new(user, src, ui_key, "dnaforensics.tmpl", "QuikScan DNA Analyzer", 540, 326)
 		ui.set_initial_data(data)
@@ -84,12 +83,12 @@
 				if(closed == 1)
 					scanner_progress = 0
 					scanning = 1
-					usr << "<span class='notice'>Scan initiated.</span>"
+					to_chat(usr, "<span class='notice'>Scan initiated.</span>")
 					update_icon()
 				else
-					usr << "<span class='notice'>Please close sample lid before initiating scan.</span>"
+					to_chat(usr, "<span class='notice'>Please close sample lid before initiating scan.</span>")
 			else
-				usr << "<span class='warning'>Insert an item to scan.</span>"
+				to_chat(usr, "<span class='warning'>Insert an item to scan.</span>")
 
 	if(href_list["ejectItem"])
 		if(bloodsamp)
@@ -128,7 +127,7 @@
 		if(bloodsamp.dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of [bloodsamp.dna.len] strings of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
-				data += "\blue Blood type: [bloodsamp.dna[blood]]<br>\nDNA: [blood]<br><br>"
+				data += "<font color='blue'>Blood type: [bloodsamp.dna[blood]]<br>\nDNA: [blood]<br><br></font>"
 		else
 			data += "No DNA found.<br>"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
@@ -154,7 +153,7 @@
 		return
 
 	if(scanning)
-		usr << "<span class='warning'>You can't do that while [src] is scanning!</span>"
+		to_chat(usr, "<span class='warning'>You can't do that while [src] is scanning!</span>")
 		return
 
 	closed = !closed

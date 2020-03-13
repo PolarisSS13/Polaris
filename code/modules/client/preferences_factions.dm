@@ -1,6 +1,7 @@
 var/global/list/seen_citizenships = list()
 var/global/list/seen_systems = list()
 var/global/list/seen_factions = list()
+var/global/list/seen_antag_factions = list()
 var/global/list/seen_religions = list()
 
 //Commenting this out for now until I work the lists it into the event generator/journalist/chaplain.
@@ -15,18 +16,21 @@ var/global/list/seen_religions = list()
 var/global/list/citizenship_choices = list(
 	"Earth",
 	"Mars",
+	"Sif",
+	"Binma",
 	"Moghes",
-	"Ahdomai",
-	"Qerrbalak"
+	"Meralar",
+	"Qerr'balak"
 	)
 
 var/global/list/home_system_choices = list(
 	"Sol",
-	starsys_name,
+	"Vir",
 	"Nyx",
 	"Tau Ceti",
+	"Qerr'valis",
 	"Epsilon Ursae Minoris",
-	"S'randarr"
+	"Rarkajar"
 	)
 
 var/global/list/faction_choices = list(
@@ -40,15 +44,36 @@ var/global/list/faction_choices = list(
 	"Grayson Manufactories Ltd.",
 	"Aether Atmospherics",
 	"Zeng-Hu Pharmaceuticals",
-	"Hesphaistos Industries"
+	"Hephaestus Industries",
+	"Morpheus Cyberkinetics",
+	"Xion Manufacturing Group"
+	)
+
+var/global/list/antag_faction_choices = list()	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
+
+var/global/list/antag_visiblity_choices = list(
+	"Hidden",
+	"Shared",
+	"Known"
 	)
 
 var/global/list/religion_choices = list(
 	"Unitarianism",
+	"Neopaganism",
+	"Islam",
+	"Christianity",
+	"Judaism",
 	"Hinduism",
-	"Buddhist",
-	"Islamic",
-	"Christian",
-	"Agnostic",
-	"Deist"
+	"Buddhism",
+	"Pleromanism",
+	"Spectralism",
+	"Phact Shintoism",
+	"Kishari Faith",
+	"Hauler Faith",
+	"Nock",
+	"Singulitarian Worship",
+	"Xilar Qall",
+	"Tajr-kii Rarkajar",
+	"Agnosticism",
+	"Deism"
 	)

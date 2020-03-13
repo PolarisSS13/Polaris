@@ -30,7 +30,7 @@ var/obj/screen/robot_inventory
 	using.alpha = ui_alpha
 	using.icon_state = "radio"
 	using.screen_loc = ui_movi
-	using.layer = 20
+	using.layer = HUD_LAYER
 	src.adding += using
 
 //Module select
@@ -43,7 +43,7 @@ var/obj/screen/robot_inventory
 	using.alpha = ui_alpha
 	using.icon_state = "inv1"
 	using.screen_loc = ui_inv1
-	using.layer = 20
+	using.layer = HUD_LAYER
 	src.adding += using
 	mymob:inv1 = using
 
@@ -55,7 +55,7 @@ var/obj/screen/robot_inventory
 	using.alpha = ui_alpha
 	using.icon_state = "inv2"
 	using.screen_loc = ui_inv2
-	using.layer = 20
+	using.layer = HUD_LAYER
 	src.adding += using
 	mymob:inv2 = using
 
@@ -67,7 +67,7 @@ var/obj/screen/robot_inventory
 	using.alpha = ui_alpha
 	using.icon_state = "inv3"
 	using.screen_loc = ui_inv3
-	using.layer = 20
+	using.layer = HUD_LAYER
 	src.adding += using
 	mymob:inv3 = using
 
@@ -81,7 +81,7 @@ var/obj/screen/robot_inventory
 	using.alpha = ui_alpha
 	using.icon_state = mymob.a_intent
 	using.screen_loc = ui_acti
-	using.layer = 20
+	using.layer = HUD_LAYER
 	src.adding += using
 	action_intent = using
 
@@ -119,7 +119,7 @@ var/obj/screen/robot_inventory
 	using.icon_state = "panel"
 	using.alpha = ui_alpha
 	using.screen_loc = ui_borg_panel
-	using.layer = 19
+	using.layer = HUD_LAYER-0.01
 	src.adding += using
 
 //Store
@@ -173,21 +173,6 @@ var/obj/screen/robot_inventory
 	mymob.pullin.screen_loc = ui_borg_pull
 	src.other += mymob.pullin
 
-	mymob.blind = new /obj/screen()
-	mymob.blind.icon = 'icons/mob/screen1_full.dmi'
-	mymob.blind.icon_state = "blackimageoverlay"
-	mymob.blind.name = " "
-	mymob.blind.screen_loc = "1,1"
-	mymob.blind.layer = 0
-
-	mymob.flash = new /obj/screen()
-	mymob.flash.icon = ui_style
-	mymob.flash.icon_state = "blank"
-	mymob.flash.name = "flash"
-	mymob.flash.screen_loc = ui_entire_screen
-	mymob.flash.layer = 17
-	src.other += mymob.flash
-
 	mymob.zone_sel = new /obj/screen/zone_sel()
 	mymob.zone_sel.icon = ui_style
 	mymob.zone_sel.alpha = ui_alpha
@@ -210,7 +195,7 @@ var/obj/screen/robot_inventory
 
 	mymob.client.screen = list()
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, robot_inventory, mymob.gun_setting_icon)
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, robot_inventory, mymob.gun_setting_icon)
 	mymob.client.screen += src.adding + src.other
 	mymob.client.screen += mymob.client.void
 
@@ -238,11 +223,11 @@ var/obj/screen/robot_inventory
 		//r.client.screen += robot_inventory	//"store" icon
 
 		if(!r.module)
-			usr << "<span class='danger'>No module selected</span>"
+			to_chat(usr, "<span class='danger'>No module selected</span>")
 			return
 
 		if(!r.module.modules)
-			usr << "<span class='danger'>Selected module has no modules to select</span>"
+			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
 			return
 
 		if(!r.robot_modules_background)
@@ -258,7 +243,7 @@ var/obj/screen/robot_inventory
 		//Unfortunately adding the emag module to the list of modules has to be here. This is because a borg can
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
-		if(r.emagged)
+		if(r.emagged || r.emag_items)
 			if(!(r.module.emag in r.module.modules))
 				r.module.modules.Add(r.module.emag)
 		else
@@ -273,7 +258,7 @@ var/obj/screen/robot_inventory
 					A.screen_loc = "CENTER[x]:16,SOUTH+[y]:7"
 				else
 					A.screen_loc = "CENTER+[x]:16,SOUTH+[y]:7"
-				A.layer = 20
+				A.hud_layerise()
 
 				x++
 				if(x == 4)
@@ -289,3 +274,8 @@ var/obj/screen/robot_inventory
 				r.client.screen -= A
 		r.shown_robot_modules = 0
 		r.client.screen -= r.robot_modules_background
+
+/mob/living/silicon/robot/update_hud()
+	if(modtype)
+		hands.icon_state = lowertext(modtype)
+	..()

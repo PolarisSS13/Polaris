@@ -3,7 +3,7 @@
 /atom/proc/singularity_act()
 	return
 
-/atom/proc/singularity_pull()
+/atom/proc/singularity_pull(S, current_size)
 	return
 
 /mob/living/singularity_act()
@@ -11,8 +11,9 @@
 	gib()
 	return 20
 
-/mob/living/singularity_pull(S)
+/mob/living/singularity_pull(S, current_size)
 	step_towards(src, S)
+	apply_effect(current_size * 3, IRRADIATE, blocked = getarmor(null, "rad"))
 
 /mob/living/carbon/human/singularity_act()
 	var/gain = 20
@@ -29,12 +30,13 @@
 	if(current_size >= STAGE_THREE)
 		var/list/handlist = list(l_hand, r_hand)
 		for(var/obj/item/hand in handlist)
-			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && u_equip(hand))
-				step_towards(hand, src)
-				src << "<span class = 'warning'>The [S] pulls \the [hand] from your grip!</span>"
-	apply_effect(current_size * 3, IRRADIATE)
-	if(shoes)
-		if(shoes.item_flags & NOSLIP) return 0
+			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))
+				step_towards(hand, S)
+				to_chat(src, "<span class = 'warning'>The [S] pulls \the [hand] from your grip!</span>")
+
+	if(!lying && (!shoes || !(shoes.item_flags & NOSLIP)) && (!species || !(species.flags & NOSLIP)) && prob(current_size*5))
+		to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
+		Weaken(current_size)
 	..()
 
 /obj/singularity_act()
@@ -73,7 +75,6 @@
 	return
 
 /obj/machinery/power/supermatter/shard/singularity_act()
-	src.loc = null
 	qdel(src)
 	return 5000
 
@@ -88,11 +89,13 @@
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
 	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	src.loc = null
 	qdel(src)
 	return 50000
 
 /obj/item/projectile/beam/emitter/singularity_pull()
+	return
+
+/obj/effect/projectile/emitter/singularity_pull()
 	return
 
 /obj/item/weapon/storage/backpack/holding/singularity_act(S, current_size)
@@ -110,6 +113,15 @@
 	ChangeTurf(get_base_turf_by_area(src))
 	return 2
 
+/turf/simulated/floor/singularity_pull(S, current_size)
+	if(flooring && current_size >= STAGE_THREE)
+		if(prob(current_size / 2))
+			var/leave_tile = TRUE
+			if(broken || burnt || flooring.flags & TURF_IS_FRAGILE)
+				leave_tile = FALSE
+			playsound(src, 'sound/items/crowbar.ogg', 50, 1)
+			make_plating(leave_tile)
+
 /turf/simulated/wall/singularity_pull(S, current_size)
 
 	if(!reinf_material)
@@ -126,6 +138,9 @@
 				dismantle_wall()
 
 /turf/space/singularity_act()
+	return
+
+/turf/simulated/open/singularity_act()
 	return
 
 /*******************

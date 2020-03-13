@@ -78,10 +78,10 @@
 /obj/machinery/power/smes/batteryrack/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob) //these can only be moved by being reconstructed, solves having to remake the powernet.
 	..() //SMES attackby for now handles screwdriver, cable coils and wirecutters, no need to repeat that here
 	if(open_hatch)
-		if(istype(W, /obj/item/weapon/crowbar))
+		if(W.is_crowbar())
 			if (charge < (capacity / 100))
 				if (!output_attempt && !input_attempt)
-					playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+					playsound(src, W.usesound, 50, 1)
 					var/obj/structure/frame/M = new /obj/structure/frame(src.loc)
 					M.frame_type = "machine"
 					M.state = 2
@@ -91,9 +91,9 @@
 					qdel(src)
 					return 1
 				else
-					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
+					to_chat(user, "<span class='warning'>Turn off the [src] before dismantling it.</span>")
 			else
-				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
+				to_chat(user, "<span class='warning'>Better let [src] discharge before dismantling it.</span>")
 		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
 			if (charge < (capacity / 100))
 				if (!output_attempt && !input_attempt)
@@ -101,11 +101,11 @@
 					component_parts += W
 					W.loc = src
 					RefreshParts()
-					user << "<span class='notice'>You upgrade the [src] with [W.name].</span>"
+					to_chat(user, "<span class='notice'>You upgrade the [src] with [W.name].</span>")
 				else
-					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
+					to_chat(user, "<span class='warning'>Turn off the [src] before dismantling it.</span>")
 			else
-				user << "<span class='warning'>Better let [src] discharge before putting your hand inside it.</span>"
+				to_chat(user, "<span class='warning'>Better let [src] discharge before putting your hand inside it.</span>")
 		else
 			user.set_machine(src)
 			interact(user)
@@ -165,7 +165,7 @@
 				return
 			if (overcharge_percent >= 140)
 				if (prob(1))
-					empulse(src.loc, 3, 8, 1)
+					empulse(src.loc, 2, 3, 6, 8, 1)
 		if ((2.4e6+1) to 3.6e6)
 			if (overcharge_percent >= 115)
 				if (prob(7))
@@ -174,7 +174,7 @@
 				return
 			if (overcharge_percent >= 130)
 				if (prob(1))
-					empulse(src.loc, 3, 8, 1)
+					empulse(src.loc, 2, 3, 6, 8, 1)
 			if (overcharge_percent >= 150)
 				if (prob(1))
 					explosion(src.loc, 0, 1, 3, 5)
@@ -186,7 +186,7 @@
 				return
 			if (overcharge_percent >= 125)
 				if (prob(2))
-					empulse(src.loc, 4, 10, 1)
+					empulse(src.loc, 2, 4, 7, 10, 1)
 			if (overcharge_percent >= 140)
 				if (prob(1))
 					explosion(src.loc, 1, 3, 5, 8)

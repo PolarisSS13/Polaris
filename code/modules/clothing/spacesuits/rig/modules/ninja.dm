@@ -37,12 +37,12 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	H << "<font color='blue'><b>You are now invisible to normal detection.</b></font>"
-	H.invisibility = INVISIBILITY_LEVEL_TWO
+	to_chat(H, "<font color='blue'><b>You are now nearly invisible to normal detection.</b></font>")
+	H.alpha = 5
 
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
-	H.visible_message("[H.name] vanishes into thin air!",1)
+	H.visible_message("[H.name] vanishes into thin air!")
 
 /obj/item/rig_module/stealth_field/deactivate()
 
@@ -51,11 +51,11 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	H << "<span class='danger'>You are now visible.</span>"
-	H.invisibility = 0
+	to_chat(H, "<span class='danger'>You are now visible.</span>")
 
 	anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
 	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
+	H.alpha = initial(H.alpha)
 
 	for(var/mob/O in oviewers(H))
 		O.show_message("[H.name] appears from thin air!",1)
@@ -100,7 +100,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!istype(H.loc, /turf))
-		H << "<span class='warning'>You cannot teleport out of your current location.</span>"
+		to_chat(H, "<span class='warning'>You cannot teleport out of your current location.</span>")
 		return 0
 
 	var/turf/T
@@ -110,23 +110,23 @@
 		T = get_teleport_loc(get_turf(H), H, 6, 1, 1, 1)
 
 	if(!T)
-		H << "<span class='warning'>No valid teleport target found.</span>"
+		to_chat(H, "<span class='warning'>No valid teleport target found.</span>")
 		return 0
 
 	if(T.density)
-		H << "<span class='warning'>You cannot teleport into solid walls.</span>"
+		to_chat(H, "<span class='warning'>You cannot teleport into solid walls.</span>")
 		return 0
 
-	if(T.z in config.admin_levels)
-		H << "<span class='warning'>You cannot use your teleporter on this Z-level.</span>"
+	if(T.z in using_map.admin_levels)
+		to_chat(H, "<span class='warning'>You cannot use your teleporter on this Z-level.</span>")
 		return 0
 
 	if(T.contains_dense_objects())
-		H << "<span class='warning'>You cannot teleport to a location with solid objects.</span>"
+		to_chat(H, "<span class='warning'>You cannot teleport to a location with solid objects.</span>")
 		return 0
 
 	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
-		H << "<span class='warning'>You cannot teleport to such a distant object.</span>"
+		to_chat(H, "<span class='warning'>You cannot teleport to such a distant object.</span>")
 		return 0
 
 	if(!..()) return 0
@@ -161,6 +161,7 @@
 
 	if(holder && holder.wearer)
 		if(..(target) && target)
+			set_dir(get_dir(src,target))  // Face the target
 			holder.wearer.Beam(target,"n_beam",,10)
 		return 1
 	return 0
@@ -168,20 +169,28 @@
 /obj/item/rig_module/self_destruct
 
 	name = "self-destruct module"
-	desc = "Oh my God, Captain. A bomb."
+	desc = "Oh my God, a bomb!"
 	icon_state = "deadman"
 	usable = 1
 	active = 1
 	permanent = 1
+	var/datum/effect/effect/system/smoke_spread/bad/smoke
+	var/smoke_strength = 8
 
 	engage_string = "Detonate"
 
 	interface_name = "dead man's switch"
-	interface_desc = "An integrated self-destruct module. When the wearer dies, so does the surrounding area. Do not press this button."
-	var/list/explosion_values = list(1,2,4,5)
+	interface_desc = "An integrated self-destruct module. When the wearer dies, they vanish in smoke. Do not press this button."
 
-/obj/item/rig_module/self_destruct/small
-	explosion_values = list(0,0,3,4)
+/obj/item/rig_module/self_destruct/New()
+	..()
+	src.smoke = new /datum/effect/effect/system/smoke_spread/bad()
+	src.smoke.attach(src)
+
+/obj/item/rig_module/self_destruct/Destroy()
+	qdel(smoke)
+	smoke = null
+	return ..()
 
 /obj/item/rig_module/self_destruct/activate()
 	return
@@ -202,8 +211,8 @@
 /obj/item/rig_module/self_destruct/engage(var/skip_check)
 	if(!skip_check && usr && alert(usr, "Are you sure you want to push that button?", "Self-destruct", "No", "Yes") == "No")
 		return
-	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
-		holder.wearer.drop_from_inventory(src)
-		qdel(holder)
-	qdel(src)
+		smoke.set_up(10, 0, holder.loc)
+		for(var/i = 1 to smoke_strength)
+			smoke.start(272727)
+		holder.wearer.ash()

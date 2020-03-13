@@ -6,19 +6,21 @@
  *		Carpet
  * 		Blue Carpet
  *		Linoleum
+ *
+ * Put your stuff in fifty_stacks_tiles.dm as well.
  */
 
 /obj/item/stack/tile
 	name = "tile"
 	singular_name = "tile"
 	desc = "A non-descript floor tile"
-	w_class = 3
+	randpixel = 7
+	w_class = ITEMSIZE_NORMAL
 	max_amount = 60
 
 /obj/item/stack/tile/New()
 	..()
-	pixel_x = rand(-7, 7)
-	pixel_y = rand(-7, 7)
+	randpixel_xy()
 
 /*
  * Grass
@@ -34,7 +36,7 @@
 	throw_range = 20
 	flags = 0
 	origin_tech = list(TECH_BIO = 1)
-
+	no_variants = FALSE
 /*
  * Wood
  */
@@ -48,6 +50,13 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
+	no_variants = FALSE
+
+/obj/item/stack/tile/wood/sif
+	name = "alien wood tile"
+	singular_name = "alien wood tile"
+	desc = "An easy to fit wooden floor tile. It's blue!"
+	icon_state = "tile-sifwood"
 
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
@@ -70,60 +79,103 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
+	no_variants = FALSE
 
-/obj/item/stack/tile/carpet/blue
-	name = "blue carpet"
-	singular_name = "blue carpet"
-	desc = "A piece of blue carpet. It is the same size as a normal floor tile!"
-	icon_state = "tile-bluecarpet"
+/obj/item/stack/tile/carpet/teal
+	name = "teal carpet"
+	singular_name = "teal carpet"
+	desc = "A piece of teal carpet. It is the same size as a normal floor tile!"
+	icon_state = "tile-tealcarpet"
+	no_variants = FALSE
+
+// TODO - Add descriptions to these
+/obj/item/stack/tile/carpet/bcarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/blucarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/turcarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/sblucarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/gaycarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/purcarpet
+	icon_state = "tile-carpet"
+/obj/item/stack/tile/carpet/oracarpet
+	icon_state = "tile-carpet"
 
 /obj/item/stack/tile/floor
 	name = "floor tile"
 	singular_name = "floor tile"
-	desc = "Those could work as a pretty decent throwing weapon" //why?
+	desc = "A metal tile fit for covering a section of floor."
 	icon_state = "tile"
 	force = 6.0
 	matter = list(DEFAULT_WALL_MATERIAL = SHEET_MATERIAL_AMOUNT / 4)
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	flags = CONDUCT
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_red
+/obj/item/stack/tile/floor/red
 	name = "red floor tile"
 	singular_name = "red floor tile"
 	color = COLOR_RED_GRAY
 	icon_state = "tile_white"
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_steel
+/obj/item/stack/tile/floor/techgrey
+	name = "grey techfloor tile"
+	singular_name = "grey techfloor tile"
+	icon_state = "techtile_grey"
+	no_variants = FALSE
+
+/obj/item/stack/tile/floor/techgrid
+	name = "grid techfloor tile"
+	singular_name = "grid techfloor tile"
+	icon_state = "techtile_grid"
+	no_variants = FALSE
+
+/obj/item/stack/tile/floor/steel_dirty
 	name = "steel floor tile"
 	singular_name = "steel floor tile"
 	icon_state = "tile_steel"
 	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_white
+/obj/item/stack/tile/floor/steel
+	name = "steel floor tile"
+	singular_name = "steel floor tile"
+	icon_state = "tile_steel"
+	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
+	no_variants = FALSE
+
+/obj/item/stack/tile/floor/white
 	name = "white floor tile"
 	singular_name = "white floor tile"
 	icon_state = "tile_white"
 	matter = list("plastic" = SHEET_MATERIAL_AMOUNT / 4)
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_yellow
+/obj/item/stack/tile/floor/yellow
 	name = "yellow floor tile"
 	singular_name = "yellow floor tile"
 	color = COLOR_BROWN
 	icon_state = "tile_white"
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_dark
+/obj/item/stack/tile/floor/dark
 	name = "dark floor tile"
 	singular_name = "dark floor tile"
-	icon_state = "fr_tile"
+	icon_state = "tile_steel"
 	matter = list("plasteel" = SHEET_MATERIAL_AMOUNT / 4)
+	no_variants = FALSE
 
-/obj/item/stack/tile/floor_freezer
+/obj/item/stack/tile/floor/freezer
 	name = "freezer floor tile"
 	singular_name = "freezer floor tile"
 	icon_state = "tile_freezer"
 	matter = list("plastic" = SHEET_MATERIAL_AMOUNT / 4)
+	no_variants = FALSE
 
 /obj/item/stack/tile/floor/cyborg
 	name = "floor tile synthesizer"
@@ -145,3 +197,18 @@
 	throw_speed = 5
 	throw_range = 20
 	flags = 0
+	no_variants = FALSE
+
+/obj/item/stack/tile/roofing
+	name = "roofing"
+	singular_name = "roofing"
+	desc = "A section of roofing material. You can use it to repair the ceiling, or expand it."
+	icon_state = "techtile_grid"
+
+/obj/item/stack/tile/roofing/cyborg
+	name = "roofing synthesizer"
+	desc = "A device that makes roofing tiles."
+	uses_charge = 1
+	charge_costs = list(250)
+	stacktype = /obj/item/stack/tile/roofing
+	build_type = /obj/item/stack/tile/roofing

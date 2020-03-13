@@ -1,6 +1,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber
 	icon = 'icons/atmos/vent_scrubber.dmi'
 	icon_state = "map_scrubber_off"
+	pipe_state = "scrubber"
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it"
@@ -44,8 +45,10 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	unregister_radio(src, frequency)
-	..()
-
+	if(initial_loc)
+		initial_loc.air_scrub_info -= id_tag
+		initial_loc.air_scrub_names -= id_tag
+	return ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -105,6 +108,7 @@
 		"filter_co2" = ("carbon_dioxide" in scrubbing_gas),
 		"filter_phoron" = ("phoron" in scrubbing_gas),
 		"filter_n2o" = ("sleeping_agent" in scrubbing_gas),
+		"filter_fuel" = ("volatile_fuel" in scrubbing_gas),
 		"sigtype" = "status"
 	)
 	if(!initial_loc.air_scrub_names[id_tag])
@@ -116,7 +120,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/unary/vent_scrubber/initialize()
+/obj/machinery/atmospherics/unary/vent_scrubber/atmos_init()
 	..()
 	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
@@ -231,6 +235,11 @@
 	else if(signal.data["toggle_n2o_scrub"])
 		toggle += "sleeping_agent"
 
+	if(!isnull(signal.data["fuel_scrub"]) && text2num(signal.data["fuel_scrub"]) != ("volatile_fuel" in scrubbing_gas))
+		toggle += "volatile_fuel"
+	else if(signal.data["toggle_fuel_scrub"])
+		toggle += "volatile_fuel"
+
 	scrubbing_gas ^= toggle
 
 	if(signal.data["init"] != null)
@@ -255,40 +264,30 @@
 		update_icon()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+	if (!W.is_wrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
-		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
 		return 1
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
-		user << "<span class='warning'>You must remove the plating first.</span>"
+		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>"
+	if(!can_unwrench())
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
-	if (do_after(user, 40))
+	playsound(src, W.usesound, 50, 1)
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+	if (do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
+		deconstruct()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
 	if(..(user, 1))
-		user << "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
+		to_chat(user, "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
-		user << "You are too far away to read the gauge."
-
-/obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
-	if(initial_loc)
-		initial_loc.air_scrub_info -= id_tag
-		initial_loc.air_scrub_names -= id_tag
-	..()
-	return
+		to_chat(user, "You are too far away to read the gauge.")

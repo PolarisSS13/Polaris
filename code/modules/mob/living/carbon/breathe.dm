@@ -7,16 +7,16 @@
 
 /mob/living/carbon/proc/breathe()
 	//if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-	if(!should_have_organ(O_LUNGS) || does_not_breathe) return
+	if(!should_have_organ(O_LUNGS)) return
 
 	var/datum/gas_mixture/breath = null
 
 	//First, check if we can breathe at all
 	if(health < config.health_threshold_crit && !(CE_STABLE in chem_effects)) //crit aka circulatory shock
-		losebreath++
+		AdjustLosebreath(1)
 
 	if(losebreath>0) //Suffocating so do not take a breath
-		losebreath--
+		AdjustLosebreath(-1)
 		if (prob(10)) //Gasp per 10 ticks? Sounds about right.
 			spawn emote("gasp")
 	else
@@ -24,6 +24,11 @@
 		breath = get_breath_from_internal() //First, check for air from internals
 		if(!breath)
 			breath = get_breath_from_environment() //No breath from internals so let's try to get air from our location
+		if(!breath)
+			var/static/datum/gas_mixture/vacuum //avoid having to create a new gas mixture for each breath in space
+			if(!vacuum) vacuum = new
+
+			breath = vacuum //still nothing? must be vacuum
 
 	handle_breath(breath)
 	handle_post_breath(breath)
@@ -48,7 +53,7 @@
 
 	var/datum/gas_mixture/environment
 	if(loc)
-		environment = loc.return_air_for_internal_lifeform()
+		environment = loc.return_air_for_internal_lifeform(src)
 
 	if(environment)
 		breath = environment.remove_volume(volume_needed)
@@ -58,8 +63,8 @@
 		//handle mask filtering
 		if(istype(wear_mask, /obj/item/clothing/mask) && breath)
 			var/obj/item/clothing/mask/M = wear_mask
-			var/datum/gas_mixture/filtered = M.filter_air(breath)
-			loc.assume_air(filtered)
+			var/datum/gas_mixture/gas_filtered = M.filter_air(breath)
+			loc.assume_air(gas_filtered)
 		return breath
 	return null
 

@@ -18,15 +18,15 @@
 
 	switch(hardsuit_click_mode)
 		if(MIDDLE_CLICK)
-			src << "Hardsuit activation mode set to middle-click."
+			to_chat(src, "Hardsuit activation mode set to middle-click.")
 		if(ALT_CLICK)
-			src << "Hardsuit activation mode set to alt-click."
+			to_chat(src, "Hardsuit activation mode set to alt-click.")
 		if(CTRL_CLICK)
-			src << "Hardsuit activation mode set to control-click."
+			to_chat(src, "Hardsuit activation mode set to control-click.")
 		else
 			// should never get here, but just in case:
 			soft_assert(0, "Bad hardsuit click mode: [hardsuit_click_mode] - expected 0 to [MAX_HARDSUIT_CLICK_MODE]")
-			src << "Somehow you bugged the system. Setting your hardsuit mode to middle-click."
+			to_chat(src, "Somehow you bugged the system. Setting your hardsuit mode to middle-click.")
 			hardsuit_click_mode = MIDDLE_CLICK
 
 /mob/living/MiddleClickOn(atom/A)
@@ -74,7 +74,7 @@
 				return 0
 		rig.selected_module.engage(A, alert_ai)
 		if(ismob(A)) // No instant mob attacking - though modules have their own cooldowns
-			setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+			setClickCooldown(get_attack_speed())
 		return 1
 	return 0
 

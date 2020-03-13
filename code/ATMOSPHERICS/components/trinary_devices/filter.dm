@@ -1,10 +1,13 @@
-/obj/machinery/atmospherics/trinary/filter
+/obj/machinery/atmospherics/trinary/atmos_filter
 	icon = 'icons/atmos/filter.dmi'
 	icon_state = "map"
+	construction_type = /obj/item/pipe/trinary/flippable
+	pipe_state = "filter"
 	density = 0
 	level = 1
 
 	name = "Gas filter"
+	desc = "Filters one type of gas from an input, and pushes it out the side."
 
 	use_power = 1
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
@@ -30,17 +33,17 @@
 	var/frequency = 0
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/trinary/filter/proc/set_frequency(new_frequency)
+/obj/machinery/atmospherics/trinary/atmos_filter/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
 	if(frequency)
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
-/obj/machinery/atmospherics/trinary/filter/New()
+/obj/machinery/atmospherics/trinary/atmos_filter/New()
 	..()
 	switch(filter_type)
 		if(0) //removing hydrocarbons
-			filtered_out = list("phoron", "oxygen_agent_b")
+			filtered_out = list("phoron")
 		if(1) //removing O2
 			filtered_out = list("oxygen")
 		if(2) //removing N2
@@ -54,8 +57,12 @@
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air3.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
-/obj/machinery/atmospherics/trinary/filter/update_icon()
-	if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
+/obj/machinery/atmospherics/trinary/atmos_filter/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
+
+/obj/machinery/atmospherics/trinary/atmos_filter/update_icon()
+	if(mirrored)
 		icon_state = "m"
 	else
 		icon_state = ""
@@ -68,37 +75,12 @@
 		icon_state += "off"
 		use_power = 0
 
-/obj/machinery/atmospherics/trinary/filter/update_underlays()
-	if(..())
-		underlays.Cut()
-		var/turf/T = get_turf(src)
-		if(!istype(T))
-			return
-
-		add_underlay(T, node1, turn(dir, -180))
-
-		if(istype(src, /obj/machinery/atmospherics/trinary/filter/m_filter))
-			add_underlay(T, node2, turn(dir, 90))
-		else
-			add_underlay(T, node2, turn(dir, -90))
-
-		add_underlay(T, node3, dir)
-
-/obj/machinery/atmospherics/trinary/filter/hide(var/i)
-	update_underlays()
-
-/obj/machinery/atmospherics/trinary/filter/power_change()
-	var/old_stat = stat
+/obj/machinery/atmospherics/trinary/atmos_filter/process()
 	..()
-	if(old_stat != stat)
-		update_icon()
 
-/obj/machinery/atmospherics/trinary/filter/process()
-	..()
-	
 	last_power_draw = 0
 	last_flow_rate = 0
-	
+
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return
 
@@ -124,36 +106,17 @@
 
 	return 1
 
-/obj/machinery/atmospherics/trinary/filter/initialize()
-	set_frequency(frequency)
-	..()
+/obj/machinery/atmospherics/trinary/atmos_filter/Initialize()
+	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 
-/obj/machinery/atmospherics/trinary/filter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
-		return ..()
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "<span class='warning'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>"
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
-	if (do_after(user, 40))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
-
-
-/obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
+/obj/machinery/atmospherics/trinary/atmos_filter/attack_hand(user as mob) // -- TLE
 	if(..())
 		return
 
 	if(!src.allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 
 	var/dat
@@ -190,11 +153,11 @@
 			<B>Flow rate: </B>[round(last_flow_rate, 0.1)]L/s
 			"}
 
-	user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmo_filter")
-	onclose(user, "atmo_filter")
+	user << browse("<HEAD><TITLE>[src.name] control</TITLE></HEAD><TT>[dat]</TT>", "window=atmos_filter")
+	onclose(user, "atmos_filter")
 	return
 
-/obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
+/obj/machinery/atmospherics/trinary/atmos_filter/Topic(href, href_list) // -- TLE
 	if(..())
 		return 1
 	usr.set_machine(src)
@@ -232,47 +195,11 @@
 */
 	return
 
-/obj/machinery/atmospherics/trinary/filter/m_filter
+//
+// Mirrored Orientation - Flips the output dir to opposite side from normal.
+//
+/obj/machinery/atmospherics/trinary/atmos_filter/m_filter
 	icon_state = "mmap"
-
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH|EAST
-
-obj/machinery/atmospherics/trinary/filter/m_filter/New()
-	..()
-	switch(dir)
-		if(NORTH)
-			initialize_directions = WEST|NORTH|SOUTH
-		if(SOUTH)
-			initialize_directions = SOUTH|EAST|NORTH
-		if(EAST)
-			initialize_directions = EAST|WEST|NORTH
-		if(WEST)
-			initialize_directions = WEST|SOUTH|EAST
-
-/obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
-	set_frequency(frequency)
-
-	if(node1 && node2 && node3) return
-
-	var/node1_connect = turn(dir, -180)
-	var/node2_connect = turn(dir, 90)
-	var/node3_connect = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node1 = target
-			break
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node2 = target
-			break
-
-	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node3 = target
-			break
-
-	update_icon()
-	update_underlays()
+	mirrored = TRUE

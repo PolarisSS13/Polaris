@@ -19,7 +19,7 @@
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
 		if(!SK.status)
-			user << "<span class='notice'>\The [SK] is not ready to be attached!</span>"
+			to_chat(user, "<span class='notice'>\The [SK] is not ready to be attached!</span>")
 			return
 		user.drop_item()
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
@@ -31,10 +31,10 @@
 		qdel(src)
 
 /obj/structure/bed/chair/attack_tk(mob/user as mob)
-	if(buckled_mob)
+	if(has_buckled_mobs())
 		..()
 	else
-		rotate()
+		rotate_clockwise()
 	return
 
 /obj/structure/bed/chair/post_buckle_mob()
@@ -42,50 +42,59 @@
 
 /obj/structure/bed/chair/update_icon()
 	..()
-	if(buckled_mob && padding_material)
-		var/cache_key = "[base_icon]-armrest-[padding_material.name]"
+	if(has_buckled_mobs())
+		var/cache_key = "[base_icon]-armrest-[padding_material ? padding_material.name : "no_material"]"
 		if(isnull(stool_cache[cache_key]))
 			var/image/I = image(icon, "[base_icon]_armrest")
-			I.layer = MOB_LAYER + 0.1
-			I.color = padding_material.icon_colour
+			I.plane = MOB_PLANE
+			I.layer = ABOVE_MOB_LAYER
+			if(padding_material)
+				I.color = padding_material.icon_colour
 			stool_cache[cache_key] = I
-		overlays |= stool_cache[cache_key]
+		add_overlay(stool_cache[cache_key])
 
 /obj/structure/bed/chair/proc/update_layer()
 	if(src.dir == NORTH)
-		src.layer = FLY_LAYER
+		plane = MOB_PLANE
+		layer = MOB_LAYER + 0.1
 	else
-		src.layer = OBJ_LAYER
+		reset_plane_and_layer()
 
 /obj/structure/bed/chair/set_dir()
 	..()
 	update_layer()
-	if(buckled_mob)
-		buckled_mob.set_dir(dir)
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			L.set_dir(dir)
 
-/obj/structure/bed/chair/verb/rotate()
-	set name = "Rotate Chair"
+/obj/structure/bed/chair/verb/rotate_clockwise()
+	set name = "Rotate Chair Clockwise"
 	set category = "Object"
 	set src in oview(1)
 
-	if(config.ghost_interaction)
-		src.set_dir(turn(src.dir, 90))
+	if(!usr || !isturf(usr.loc))
 		return
-	else
-		if(istype(usr,/mob/living/simple_animal/mouse))
-			return
-		if(!usr || !isturf(usr.loc))
-			return
-		if(usr.stat || usr.restrained())
-			return
+	if(usr.stat || usr.restrained())
+		return
+	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		return
 
-		src.set_dir(turn(src.dir, 90))
-		return
+	src.set_dir(turn(src.dir, 270))
+
+/obj/structure/bed/chair/shuttle
+	name = "chair"
+	desc = "You sit in this. Either by will or force."
+	icon_state = "shuttlechair"
+	color = null
+	base_icon = "shuttlechair"
+	applies_material_colour = 0
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
 	desc = "It's a chair. It looks comfy."
-	icon_state = "comfychair_preview"
+	icon_state = "comfychair"
+	base_icon = "comfychair"
 
 /obj/structure/bed/chair/comfy/brown/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","leather")
@@ -114,6 +123,12 @@
 /obj/structure/bed/chair/comfy/lime/New(var/newloc,var/newmaterial)
 	..(newloc,"steel","lime")
 
+/obj/structure/bed/chair/comfy/yellow/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","yellow")
+
+/obj/structure/bed/chair/comfy/orange/New(var/newloc,var/newmaterial)
+	..(newloc,"steel","orange")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -122,49 +137,53 @@
 	return
 
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 
 /obj/structure/bed/chair/office/Move()
 	..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle_mob()
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/occupant = A
+			occupant.buckled = null
+			occupant.Move(src.loc)
+			occupant.buckled = src
+			if (occupant && (src.loc != occupant.loc))
+				if (propelled)
+					for (var/mob/O in src.loc)
+						if (O != occupant)
+							Bump(O)
+				else
+					unbuckle_mob()
 
 /obj/structure/bed/chair/office/Bump(atom/A)
 	..()
-	if(!buckled_mob)	return
+	if(!has_buckled_mobs())	return
 
 	if(propelled)
-		var/mob/living/occupant = unbuckle_mob()
+		for(var/a in buckled_mobs)
+			var/mob/living/occupant = unbuckle_mob(a)
 
-		var/def_zone = ran_zone()
-		var/blocked = occupant.run_armor_check(def_zone, "melee")
-		occupant.throw_at(A, 3, propelled)
-		occupant.apply_effect(6, STUN, blocked)
-		occupant.apply_effect(6, WEAKEN, blocked)
-		occupant.apply_effect(6, STUTTER, blocked)
-		occupant.apply_damage(10, BRUTE, def_zone, blocked)
-		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
-		if(istype(A, /mob/living))
-			var/mob/living/victim = A
-			def_zone = ran_zone()
-			blocked = victim.run_armor_check(def_zone, "melee")
-			victim.apply_effect(6, STUN, blocked)
-			victim.apply_effect(6, WEAKEN, blocked)
-			victim.apply_effect(6, STUTTER, blocked)
-			victim.apply_damage(10, BRUTE, def_zone, blocked)
-		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
+			var/def_zone = ran_zone()
+			var/blocked = occupant.run_armor_check(def_zone, "melee")
+			var/soaked = occupant.get_armor_soak(def_zone, "melee")
+			occupant.throw_at(A, 3, propelled)
+			occupant.apply_effect(6, STUN, blocked)
+			occupant.apply_effect(6, WEAKEN, blocked)
+			occupant.apply_effect(6, STUTTER, blocked)
+			occupant.apply_damage(10, BRUTE, def_zone, blocked, soaked)
+			playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+			if(istype(A, /mob/living))
+				var/mob/living/victim = A
+				def_zone = ran_zone()
+				blocked = victim.run_armor_check(def_zone, "melee")
+				soaked = victim.get_armor_soak(def_zone, "melee")
+				victim.apply_effect(6, STUN, blocked)
+				victim.apply_effect(6, WEAKEN, blocked)
+				victim.apply_effect(6, STUTTER, blocked)
+				victim.apply_damage(10, BRUTE, def_zone, blocked, soaked)
+			occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
 /obj/structure/bed/chair/office/light
 	icon_state = "officechair_white"
@@ -182,7 +201,7 @@
 	return
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 
@@ -191,3 +210,172 @@
 
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
+
+//sofa
+
+/obj/structure/bed/chair/sofa
+	name = "sofa"
+	desc = "It's a sofa. You sit on it. Possibly with someone else."
+	icon = 'icons/obj/sofas.dmi'
+	base_icon = "sofamiddle"
+	icon_state = "sofamiddle"
+	applies_material_colour = 1
+	var/sofa_material = "carpet"
+
+/obj/structure/bed/chair/sofa/update_icon()
+	if(applies_material_colour && sofa_material)
+		var/material/color_material = get_material_by_name(sofa_material)
+		color = color_material.icon_colour
+
+		if(sofa_material == "carpet")
+			name = "red [initial(name)]"
+		else
+			name = "[sofa_material] [initial(name)]"
+
+/obj/structure/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+	base_icon = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+	base_icon = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/corner
+	icon_state = "sofacorner"
+	base_icon = "sofacorner"
+
+//color variations
+
+/obj/structure/bed/chair/sofa
+	sofa_material = "carpet"
+
+/obj/structure/bed/chair/sofa/brown
+	sofa_material = "leather"
+
+/obj/structure/bed/chair/sofa/teal
+	sofa_material = "teal"
+
+/obj/structure/bed/chair/sofa/black
+	sofa_material = "black"
+
+/obj/structure/bed/chair/sofa/green
+	sofa_material = "green"
+
+/obj/structure/bed/chair/sofa/purp
+	sofa_material = "purple"
+
+/obj/structure/bed/chair/sofa/blue
+	sofa_material = "blue"
+
+/obj/structure/bed/chair/sofa/beige
+	sofa_material = "beige"
+
+/obj/structure/bed/chair/sofa/lime
+	sofa_material = "lime"
+
+/obj/structure/bed/chair/sofa/yellow
+	sofa_material = "yellow"
+
+/obj/structure/bed/chair/sofa/orange
+	sofa_material = "orange"
+
+//sofa directions
+
+/obj/structure/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/brown/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/brown/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/brown/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/teal/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/teal/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/teal/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/black/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/black/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/black/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/green/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/green/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/green/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/purp/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/purp/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/purp/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/blue/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/blue/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/blue/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/beige/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/beige/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/beige/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/lime/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/lime/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/lime/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/yellow/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/yellow/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/yellow/corner
+	icon_state = "sofacorner"
+
+/obj/structure/bed/chair/sofa/orange/left
+	icon_state = "sofaend_left"
+
+/obj/structure/bed/chair/sofa/orange/right
+	icon_state = "sofaend_right"
+
+/obj/structure/bed/chair/sofa/orange/corner
+	icon_state = "sofacorner"

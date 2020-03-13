@@ -28,7 +28,7 @@
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/telecomms/pda_multicaster(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
 	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
 	component_parts += new /obj/item/stack/cable_coil(src, 2)
@@ -46,9 +46,9 @@
 		icon_state = "[initial(icon_state)]-p"
 
 /obj/machinery/pda_multicaster/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(I.is_screwdriver())
 		default_deconstruction_screwdriver(user, I)
-	else if(istype(I, /obj/item/weapon/crowbar))
+	else if(I.is_crowbar())
 		default_deconstruction_crowbar(user, I)
 	else
 		..()

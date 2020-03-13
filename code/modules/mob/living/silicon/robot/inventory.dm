@@ -96,6 +96,13 @@
 		return 0
 	updateicon()
 
+// This one takes an object's type instead of an instance, as above.
+/mob/living/silicon/robot/proc/has_active_type(var/type_to_compare)
+	var/list/active_modules = list(module_state_1, module_state_2, module_state_3)
+	if(is_path_in_list(type_to_compare, active_modules))
+		return TRUE
+	return FALSE
+
 //Helper procs for cyborg modules on the UI.
 //These are hackish but they help clean up code elsewhere.
 
@@ -220,32 +227,48 @@
 	if(!(locate(O) in src.module.modules) && O != src.module.emag)
 		return
 	if(activated(O))
-		src << "<span class='notice'>Already activated</span>"
+		to_chat(src, "<span class='notice'>Already activated</span>")
 		return
 	if(!module_state_1)
 		module_state_1 = O
-		O.layer = 20
+		O.hud_layerise()
 		O.screen_loc = inv1.screen_loc
 		contents += O
 		if(istype(module_state_1,/obj/item/borg/sight))
 			sight_mode |= module_state_1:sight_mode
 	else if(!module_state_2)
 		module_state_2 = O
-		O.layer = 20
+		O.hud_layerise()
 		O.screen_loc = inv2.screen_loc
 		contents += O
 		if(istype(module_state_2,/obj/item/borg/sight))
 			sight_mode |= module_state_2:sight_mode
 	else if(!module_state_3)
 		module_state_3 = O
-		O.layer = 20
+		O.hud_layerise()
 		O.screen_loc = inv3.screen_loc
 		contents += O
 		if(istype(module_state_3,/obj/item/borg/sight))
 			sight_mode |= module_state_3:sight_mode
 	else
-		src << "<span class='notice'>You need to disable a module first!</span>"
+		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
 
 /mob/living/silicon/robot/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
 	return 1
+
+/mob/living/silicon/robot/is_holding_item_of_type(typepath)
+	for(var/obj/item/I in list(module_state_1, module_state_2, module_state_3))
+		if(istype(I, typepath))
+			return I
+	return FALSE
+
+// Returns a list of all held items in a borg's 'hands'.
+/mob/living/silicon/robot/get_all_held_items()
+	. = list()
+	if(module_state_1)
+		. += module_state_1
+	if(module_state_2)
+		. += module_state_2
+	if(module_state_3)
+		. += module_state_3

@@ -10,12 +10,12 @@
 	var/on = 0
 	var/set_temperature = T0C + 20	//K
 	var/heating_power = 40000
-
+	clicksound = "switch"
 
 /obj/machinery/space_heater/New()
 	..()
-	if (cell_type)
-		src.cell = new cell_type(src)
+	if(cell_type)
+		cell = new cell_type(src)
 	update_icon()
 
 /obj/machinery/space_heater/update_icon()
@@ -23,15 +23,19 @@
 	icon_state = "sheater[on]"
 	if(panel_open)
 		overlays  += "sheater-open"
+	if(on)
+		set_light(3, 3, "#FFCC00")
+	else
+		set_light(0)
 
 /obj/machinery/space_heater/examine(mob/user)
 	..(user)
 
-	user << "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"]."
+	to_chat(user, "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
 	if(panel_open)
-		user << "The power cell is [cell ? "installed" : "missing"]."
+		to_chat(user, "The power cell is [cell ? "installed" : "missing"].")
 	else
-		user << "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
+		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 	return
 
 /obj/machinery/space_heater/powered()
@@ -51,7 +55,7 @@
 	if(istype(I, /obj/item/weapon/cell))
 		if(panel_open)
 			if(cell)
-				user << "There is already a power cell inside."
+				to_chat(user, "There is already a power cell inside.")
 				return
 			else
 				// insert cell
@@ -65,10 +69,11 @@
 					user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
 					power_change()
 		else
-			user << "The hatch must be open to insert a power cell."
+			to_chat(user, "The hatch must be open to insert a power cell.")
 			return
-	else if(istype(I, /obj/item/weapon/screwdriver))
+	else if(I.is_screwdriver())
 		panel_open = !panel_open
+		playsound(src, I.usesound, 50, 1)
 		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
 		update_icon()
 		if(!panel_open && user.machine == src)
@@ -79,7 +84,7 @@
 	return
 
 /obj/machinery/space_heater/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 	interact(user)
 
 /obj/machinery/space_heater/interact(mob/user as mob)
@@ -113,9 +118,9 @@
 
 
 /obj/machinery/space_heater/Topic(href, href_list)
-	if (usr.stat)
+	if(usr.stat)
 		return
-	if ((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
+	if((in_range(src, usr) && istype(src.loc, /turf)) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 
 		switch(href_list["op"])
@@ -128,7 +133,7 @@
 
 			if("cellremove")
 				if(panel_open && cell && !usr.get_active_hand())
-					usr.visible_message("<span class='notice'>\The usr] removes \the [cell] from \the [src].</span>", "<span class='notice'>You remove \the [cell] from \the [src].</span>")
+					usr.visible_message("<span class='notice'>\The [usr] removes \the [cell] from \the [src].</span>", "<span class='notice'>You remove \the [cell] from \the [src].</span>")
 					cell.update_icon()
 					usr.put_in_hands(cell)
 					cell.add_fingerprint(usr)
@@ -153,8 +158,6 @@
 		usr.unset_machine()
 	return
 
-
-
 /obj/machinery/space_heater/process()
 	if(on)
 		if(cell && cell.charge)
@@ -166,7 +169,7 @@
 				if(removed)
 					var/heat_transfer = removed.get_thermal_energy_change(set_temperature)
 					if(heat_transfer > 0)	//heating air
-						heat_transfer = min( heat_transfer , heating_power ) //limit by the power rating of the heater
+						heat_transfer = min(heat_transfer , heating_power) //limit by the power rating of the heater
 
 						removed.add_thermal_energy(heat_transfer)
 						cell.use(heat_transfer*CELLRATE)

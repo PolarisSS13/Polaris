@@ -36,7 +36,7 @@
 	dna.SetSEState(MONKEYBLOCK,1)
 	dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
-	src << "<B>You are now [species.name]. </B>"
+	to_chat(src, "<B>You are now [species.name]. </B>")
 	qdel(animation)
 
 	return src
@@ -67,7 +67,7 @@
 /mob/proc/AIize(move=1)
 	if(client)
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jams for AIs
-	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc, using_map.default_law_type,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 
@@ -76,6 +76,30 @@
 		O.mind.original = O
 	else
 		O.key = key
+
+	//Languages
+	add_language("Robot Talk", 1)
+	add_language(LANGUAGE_GALCOM, 1)
+	add_language(LANGUAGE_SOL_COMMON, 1)
+	add_language(LANGUAGE_UNATHI, 1)
+	add_language(LANGUAGE_SIIK, 1)
+	add_language(LANGUAGE_AKHANI, 1)
+	add_language(LANGUAGE_SKRELLIAN, 1)
+	add_language(LANGUAGE_TRADEBAND, 1)
+	add_language(LANGUAGE_GUTTER, 1)
+	add_language(LANGUAGE_EAL, 1)
+	add_language(LANGUAGE_SCHECHI, 1)
+	add_language(LANGUAGE_SIGN, 1)
+	add_language(LANGUAGE_TERMINUS, 1)
+	add_language(LANGUAGE_ZADDAT, 0)
+
+	// Lorefolks say it may be so.
+	if(O.client && O.client.prefs)
+		var/datum/preferences/B = O.client.prefs
+		if(LANGUAGE_ROOTGLOBAL in B.alternate_languages)
+			O.add_language(LANGUAGE_ROOTGLOBAL, 1)
+		if(LANGUAGE_ROOTLOCAL in B.alternate_languages)
+			O.add_language(LANGUAGE_ROOTLOCAL, 1)
 
 	if(move)
 		var/obj/loc_landmark
@@ -92,7 +116,7 @@
 						continue
 					loc_landmark = tripai
 		if (!loc_landmark)
-			O << "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone."
+			to_chat(O, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "AI")
 					loc_landmark = sloc
@@ -154,6 +178,11 @@
 
 		O.mmi.transfer_identity(src)
 
+	if(O.client && O.client.prefs)
+		var/datum/preferences/B = O.client.prefs
+		for(var/language in B.alternate_languages)
+			O.add_language(language)
+
 	callHook("borgify", list(O))
 	O.Namepick()
 
@@ -161,7 +190,8 @@
 		qdel(src)
 	return O
 
-/mob/living/carbon/human/proc/slimeize(adult as num, reproduce as num)
+//human -> alien
+/mob/living/carbon/human/proc/Alienize()
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -174,26 +204,16 @@
 	for(var/t in organs)
 		qdel(t)
 
-	var/mob/living/carbon/slime/new_slime
-	if(reproduce)
-		var/number = pick(14;2,3,4)	//reproduce (has a small chance of producing 3 or 4 offspring)
-		var/list/babies = list()
-		for(var/i=1,i<=number,i++)
-			var/mob/living/carbon/slime/M = new/mob/living/carbon/slime(loc)
-			M.nutrition = round(nutrition/number)
-			step_away(M,src)
-			babies += M
-		new_slime = pick(babies)
-	else
-		new_slime = new /mob/living/carbon/slime(loc)
-		if(adult)
-			new_slime.is_adult = 1
-		else
-	new_slime.key = key
+	var/alien_caste = pick("Hunter","Sentinel","Drone")
+	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
-	new_slime << "<B>You are now a slime. Skreee!</B>"
+	new_xeno.a_intent = I_HURT
+	new_xeno.key = key
+
+	to_chat(new_xeno, "<B>You are now an alien.</B>")
 	qdel(src)
 	return
+
 
 /mob/living/carbon/human/proc/corgize()
 	if (transforming)
@@ -208,21 +228,21 @@
 	for(var/t in organs)	//this really should not be necessary
 		qdel(t)
 
-	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
+	var/mob/living/simple_mob/animal/passive/dog/corgi/new_corgi = new /mob/living/simple_mob/animal/passive/dog/corgi (loc)
 	new_corgi.a_intent = I_HURT
 	new_corgi.key = key
 
-	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
+	to_chat(new_corgi, "<B>You are now a Corgi. Yap Yap!</B>")
 	qdel(src)
 	return
 
 /mob/living/carbon/human/Animalize()
 
-	var/list/mobtypes = typesof(/mob/living/simple_animal)
+	var/list/mobtypes = typesof(/mob/living/simple_mob)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		usr << "\red Sorry but this mob type is currently unavailable."
+		to_chat(usr, "<font color='red'>Sorry but this mob type is currently unavailable.</font>")
 		return
 
 	if(transforming)
@@ -245,25 +265,25 @@
 	new_mob.a_intent = I_HURT
 
 
-	new_mob << "You suddenly feel more... animalistic."
+	to_chat(new_mob, "You suddenly feel more... animalistic.")
 	spawn()
 		qdel(src)
 	return
 
 /mob/proc/Animalize()
 
-	var/list/mobtypes = typesof(/mob/living/simple_animal)
+	var/list/mobtypes = typesof(/mob/living/simple_mob)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		usr << "\red Sorry but this mob type is currently unavailable."
+		to_chat(usr, "<font color='red'>Sorry but this mob type is currently unavailable.</font>")
 		return
 
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
 	new_mob.a_intent = I_HURT
-	new_mob << "You feel more... animalistic"
+	to_chat(new_mob, "You feel more... animalistic")
 
 	qdel(src)
 
@@ -278,39 +298,29 @@
 	if(!MP)
 		return 0	//Sanity, this should never happen.
 
+/*
 	if(ispath(MP, /mob/living/simple_animal/space_worm))
 		return 0 //Unfinished. Very buggy, they seem to just spawn additional space worms everywhere and eating your own tail results in new worms spawning.
-
-	if(ispath(MP, /mob/living/simple_animal/construct/behemoth))
-		return 0 //I think this may have been an unfinished WiP or something. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/armoured))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/wraith))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
-
-	if(ispath(MP, /mob/living/simple_animal/construct/builder))
-		return 0 //Verbs do not appear for players. These constructs should really have their own class simple_animal/construct/subtype
+*/
 
 //Good mobs!
-	if(ispath(MP, /mob/living/simple_animal/cat))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/cat))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/corgi))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/dog))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/crab))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/crab))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+	if(ispath(MP, /mob/living/simple_mob/animal/space/carp))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/shade))
+	if(ispath(MP, /mob/living/simple_mob/construct))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/tomato))
+	if(ispath(MP, /mob/living/simple_mob/tomato))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/mouse))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/mouse))
 		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
+	if(ispath(MP, /mob/living/simple_mob/animal/space/bear))
 		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
-	if(ispath(MP, /mob/living/simple_animal/parrot))
+	if(ispath(MP, /mob/living/simple_mob/animal/passive/bird/parrot))
 		return 1 //Parrots are no longer unfinished! -Nodrak
 
 	//Not in here? Must be untested!

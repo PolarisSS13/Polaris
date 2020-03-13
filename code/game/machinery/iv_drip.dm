@@ -1,8 +1,9 @@
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
+	desc = "Helpful for giving someone blood! Or taking it away. It giveth, it taketh."
 	icon = 'icons/obj/iv_drip.dmi'
 	anchored = 0
-	density = 1
+	density = 0
 
 
 /obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
@@ -10,7 +11,7 @@
 /obj/machinery/iv_drip/var/obj/item/weapon/reagent_containers/beaker = null
 
 /obj/machinery/iv_drip/update_icon()
-	if(src.attached)
+	if(attached)
 		icon_state = "hooked"
 	else
 		icon_state = ""
@@ -41,40 +42,40 @@
 		return
 
 	if(attached)
-		visible_message("[src.attached] is detached from \the [src]")
-		src.attached = null
-		src.update_icon()
+		visible_message("[attached] is detached from \the [src]")
+		attached = null
+		update_icon()
 		return
 
 	if(in_range(src, usr) && ishuman(over_object) && get_dist(over_object, src) <= 1)
 		visible_message("[usr] attaches \the [src] to \the [over_object].")
-		src.attached = over_object
-		src.update_icon()
+		attached = over_object
+		update_icon()
 
 
 /obj/machinery/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/reagent_containers))
-		if(!isnull(src.beaker))
-			user << "There is already a reagent container loaded!"
+	if(istype(W, /obj/item/weapon/reagent_containers))
+		if(!isnull(beaker))
+			to_chat(user, "There is already a reagent container loaded!")
 			return
 
 		user.drop_item()
 		W.loc = src
-		src.beaker = W
-		user << "You attach \the [W] to \the [src]."
-		src.update_icon()
+		beaker = W
+		to_chat(user, "You attach \the [W] to \the [src].")
+		update_icon()
 		return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		user << "<span class='notice'>You start to dismantle the IV drip.</span>"
+	if(W.is_screwdriver())
+		playsound(src, W.usesound, 50, 1)
+		to_chat(user, "<span class='notice'>You start to dismantle the IV drip.</span>")
 		if(do_after(user, 15))
-			user << "<span class='notice'>You dismantle the IV drip.</span>"
-			var/obj/item/stack/rods/A = new /obj/item/stack/rods( src.loc )
+			to_chat(user, "<span class='notice'>You dismantle the IV drip.</span>")
+			var/obj/item/stack/rods/A = new /obj/item/stack/rods(src.loc)
 			A.amount = 6
-			if(src.beaker)
-				src.beaker.loc = get_turf(src)
-				src.beaker = null
+			if(beaker)
+				beaker.loc = get_turf(src)
+				beaker = null
 			qdel(src)
 		return
 	else
@@ -84,24 +85,24 @@
 /obj/machinery/iv_drip/process()
 	set background = 1
 
-	if(src.attached)
+	if(attached)
 
-		if(!(get_dist(src, src.attached) <= 1 && isturf(src.attached.loc)))
-			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
-			src.attached:apply_damage(3, BRUTE, pick("r_arm", "l_arm"))
-			src.attached = null
-			src.update_icon()
+		if(!(get_dist(src, attached) <= 1 && isturf(attached.loc)))
+			visible_message("The needle is ripped out of [attached], doesn't that hurt?")
+			attached:apply_damage(3, BRUTE, pick("r_arm", "l_arm"))
+			attached = null
+			update_icon()
 			return
 
-	if(src.attached && src.beaker)
+	if(attached && beaker)
 		// Give blood
 		if(mode)
-			if(src.beaker.volume > 0)
+			if(beaker.volume > 0)
 				var/transfer_amount = REM
-				if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
+				if(istype(beaker, /obj/item/weapon/reagent_containers/blood))
 					// speed up transfer on blood packs
 					transfer_amount = 4
-				src.beaker.reagents.trans_to_mob(src.attached, transfer_amount, CHEM_BLOOD)
+				beaker.reagents.trans_to_mob(attached, transfer_amount, CHEM_BLOOD)
 				update_icon()
 
 		// Take blood
@@ -110,12 +111,14 @@
 			amount = min(amount, 4)
 			// If the beaker is full, ping
 			if(amount == 0)
-				if(prob(5)) visible_message("\The [src] pings.")
+				if(prob(5))
+					visible_message("\The [src] pings.")
 				return
 
 			var/mob/living/carbon/human/T = attached
 
-			if(!istype(T)) return
+			if(!istype(T))
+				return
 			if(!T.dna)
 				return
 			if(NOCLONE in T.mutations)
@@ -130,7 +133,7 @@
 
 			var/datum/reagent/B = T.take_blood(beaker,amount)
 
-			if (B)
+			if(B)
 				beaker.reagents.reagent_list |= B
 				beaker.reagents.update_total()
 				beaker.on_reagent_change()
@@ -138,9 +141,9 @@
 				update_icon()
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
-	if(src.beaker)
-		src.beaker.loc = get_turf(src)
-		src.beaker = null
+	if(beaker)
+		beaker.loc = get_turf(src)
+		beaker = null
 		update_icon()
 	else
 		return ..()
@@ -152,32 +155,33 @@
 	set src in view(1)
 
 	if(!istype(usr, /mob/living))
-		usr << "<span class='warning'>You can't do that.</span>"
+		to_chat(usr, "<span class='warning'>You can't do that.</span>")
 		return
 
 	if(usr.stat)
 		return
 
 	mode = !mode
-	usr << "The IV drip is now [mode ? "injecting" : "taking blood"]."
+	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
 /obj/machinery/iv_drip/examine(mob/user)
 	..(user)
-	if (!(user in view(2)) && user!=src.loc) return
+	if(!(user in view(2)) && user != src.loc)
+		return
 
-	user << "The IV drip is [mode ? "injecting" : "taking blood"]."
+	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")
 
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.reagent_list.len)
-			usr << "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>"
+			to_chat(user, "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>")
 		else
-			usr << "<span class='notice'>Attached is an empty [beaker].</span>"
+			to_chat(user, "<span class='notice'>Attached is an empty [beaker].</span>")
 	else
-		usr << "<span class='notice'>No chemicals are attached.</span>"
+		to_chat(user, "<span class='notice'>No chemicals are attached.</span>")
 
-	usr << "<span class='notice'>[attached ? attached : "No one"] is attached.</span>"
+	to_chat(user, "<span class='notice'>[attached ? attached : "No one"] is attached.</span>")
 
-/obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(height && istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.
-		return 1
+/obj/machinery/iv_drip/CanPass(atom/movable/mover, turf/target)
+	if(istype(mover) && mover.checkpass(PASSTABLE)) //allow bullets, beams, thrown objects, mice, drones, and the like through.
+		return TRUE
 	return ..()

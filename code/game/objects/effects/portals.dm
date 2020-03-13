@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
+
 /obj/effect/portal
 	name = "portal"
 	desc = "Looks unstable. Best to test it with the clown."
@@ -11,24 +13,33 @@
 	anchored = 1.0
 
 /obj/effect/portal/Bumped(mob/M as mob|obj)
+	if(istype(M,/mob) && !(istype(M,/mob/living)))
+		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(M)
 		return
 	return
 
-/obj/effect/portal/Crossed(AM as mob|obj)
+/obj/effect/portal/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
+	if(istype(AM,/mob) && !(istype(AM,/mob/living)))
+		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(AM)
 		return
 	return
 
 /obj/effect/portal/attack_hand(mob/user as mob)
+	if(istype(user) && !(istype(user,/mob/living)))
+		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
 		src.teleport(user)
 		return
 	return
 
 /obj/effect/portal/New()
+	..() // Necessary for the list boilerplate to work
 	spawn(300)
 		qdel(src)
 		return

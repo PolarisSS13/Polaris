@@ -22,12 +22,18 @@
 	var/lastgen2 = 0
 	var/effective_gen = 0
 	var/lastgenlev = 0
+	var/datum/looping_sound/generator/soundloop
 
-/obj/machinery/power/generator/New()
-	..()
+/obj/machinery/power/generator/Initialize()
+	soundloop = new(list(src), FALSE)
 	desc = initial(desc) + " Rated for [round(max_power/1000)] kW."
 	spawn(1)
 		reconnect()
+	return ..()
+
+/obj/machinery/power/generator/Destroy()
+	QDEL_NULL(soundloop)
+	return ..()
 
 //generators connect in dir and reverse_dir(dir) directions
 //mnemonic to determine circulator/generator directions: the cirulators orbit clockwise around the generator
@@ -124,6 +130,13 @@
 	stored_energy -= lastgen1
 	effective_gen = (lastgen1 + lastgen2) / 2
 
+	// Sounds.
+	if(effective_gen > (max_power * 0.05)) // More than 5% and sounds start.
+		soundloop.start()
+		soundloop.volume = LERP(1, 40, effective_gen / max_power)
+	else
+		soundloop.stop()
+
 	// update icon overlays and power usage only if displayed level has changed
 	var/genlev = max(0, min( round(11*effective_gen / max_power), 11))
 	if(effective_gen > 100 && genlev == 0)
@@ -137,12 +150,12 @@
 	attack_hand(user)
 
 /obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+	if(W.is_wrench())
+		playsound(src, W.usesound, 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
-					"You hear a ratchet")
+					"You hear a ratchet.")
 		use_power = anchored
 		if(anchored) // Powernet connection stuff.
 			connect_to_network()
@@ -198,7 +211,7 @@
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -215,9 +228,19 @@
 	updateicon()
 
 
-/obj/machinery/power/generator/verb/rotate_clock()
+/obj/machinery/power/generator/verb/rotate_clockwise()
 	set category = "Object"
-	set name = "Rotate Generator (Clockwise)"
+	set name = "Rotate Generator Clockwise"
+	set src in view(1)
+
+	if (usr.stat || usr.restrained()  || anchored)
+		return
+
+	src.set_dir(turn(src.dir, 270))
+
+/obj/machinery/power/generator/verb/rotate_counterclockwise()
+	set category = "Object"
+	set name = "Rotate Generator Counterclockwise"
 	set src in view(1)
 
 	if (usr.stat || usr.restrained()  || anchored)
@@ -225,12 +248,32 @@
 
 	src.set_dir(turn(src.dir, 90))
 
-/obj/machinery/power/generator/verb/rotate_anticlock()
-	set category = "Object"
-	set name = "Rotate Generator (Counterclockwise)"
-	set src in view(1)
+/obj/machinery/power/generator/power_spike()
+//	if(!effective_gen >= max_power / 2 && powernet) // Don't make a spike if we're not making a whole lot of power.
+//		return
 
-	if (usr.stat || usr.restrained()  || anchored)
-		return
+	var/list/powernet_union = powernet.nodes
+	for(var/obj/machinery/power/terminal/T in powernet.nodes)
+		if(T.master && istype(T.master, /obj/machinery/power/smes))
+			var/obj/machinery/power/smes/S = T.master
+			powernet_union |= S.powernet.nodes
 
-	src.set_dir(turn(src.dir, -90))
+	var/found_grid_checker = FALSE
+	for(var/obj/machinery/power/grid_checker/G in powernet_union)
+		G.power_failure(prob(30)) // If we found a grid checker, then all is well.
+		found_grid_checker = TRUE
+	if(!found_grid_checker) // Otherwise lets break some stuff.
+		spawn(1)
+			command_announcement.Announce("Dangerous power spike detected in the power network.  Please check machinery \
+			for electrical damage.",
+			"Critical Power Overload")
+			var/i = 0
+			var/limit = rand(30, 50)
+			for(var/obj/machinery/power/P in powernet_union)
+				P.overload(src)
+				i++
+				if(i % 5)
+					sleep(1)
+				if(i >= limit)
+					break
+

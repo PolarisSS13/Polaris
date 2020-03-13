@@ -14,8 +14,8 @@
 	icon = 'icons/obj/items.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
-	item_state = "electropack"
-	w_class = 1.0
+	item_state = "camera"
+	w_class = ITEMSIZE_TINY
 
 
 /********
@@ -28,7 +28,7 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
@@ -37,6 +37,8 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo/New()
 	id = photo_count++
+
+
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
@@ -51,9 +53,9 @@ var/global/photo_count = 0
 /obj/item/weapon/photo/examine(mob/user)
 	if(in_range(user, src))
 		show(user)
-		user << desc
+		to_chat(user,desc)
 	else
-		user << "<span class='notice'>It is too far away.</span>"
+		to_chat(user, "<span class='notice'>It is too far away.</span>")
 
 /obj/item/weapon/photo/proc/show(mob/user as mob)
 	user << browse_rsc(img, "tmp_photo_[id].png")
@@ -98,10 +100,10 @@ var/global/photo_count = 0
 		if((!( M.restrained() ) && !( M.stat ) && M.back == src))
 			switch(over_object.name)
 				if("r_hand")
-					M.u_equip(src)
+					M.unEquip(src)
 					M.put_in_r_hand(src)
 				if("l_hand")
-					M.u_equip(src)
+					M.unEquip(src)
 					M.put_in_l_hand(src)
 			add_fingerprint(usr)
 			return
@@ -120,9 +122,8 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	desc = "A polaroid camera. 10 photos left."
 	icon_state = "camera"
-	item_state = "electropack"
-	w_class = 2.0
-	flags = CONDUCT
+	item_state = "camera"
+	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	var/pictures_max = 10
@@ -131,6 +132,7 @@ var/global/photo_count = 0
 	var/icon_on = "camera"
 	var/icon_off = "camera_off"
 	var/size = 3
+	var/list/picture_planes = list()
 
 /obj/item/device/camera/verb/change_size()
 	set name = "Set Photo Focus"
@@ -138,7 +140,7 @@ var/global/photo_count = 0
 	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
 	if(nsize)
 		size = nsize
-		usr << "<span class='notice'>Camera will now take [size]x[size] photos.</span>"
+		to_chat(usr, "<span class='notice'>Camera will now take [size]x[size] photos.</span>")
 
 /obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
@@ -149,15 +151,15 @@ var/global/photo_count = 0
 		src.icon_state = icon_on
 	else
 		src.icon_state = icon_off
-	user << "You switch the camera [on ? "on" : "off"]."
+	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
 /obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/camera_film))
 		if(pictures_left)
-			user << "<span class='notice'>[src] still has some film in it!</span>"
+			to_chat(user, "<span class='notice'>[src] still has some film in it!</span>")
 			return
-		user << "<span class='notice'>You insert [I] into [src].</span>"
+		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 		user.drop_item()
 		qdel(I)
 		pictures_left = pictures_max
@@ -181,6 +183,7 @@ var/global/photo_count = 0
 		// As well as anything that isn't invisible.
 		for(var/atom/A in the_turf)
 			if(A.invisibility) continue
+			if(A.plane > 0 && !(A.plane in picture_planes)) continue
 			atoms.Add(A)
 
 	// Sort the atoms into their layers
@@ -189,7 +192,7 @@ var/global/photo_count = 0
 	for(var/i; i <= sorted.len; i++)
 		var/atom/A = sorted[i]
 		if(A)
-			var/icon/img = getFlatIcon(A)//build_composite_icon(A)
+			var/icon/img = getFlatIcon(A, picture_planes)//build_composite_icon(A)
 
 			// If what we got back is actually a picture, draw it.
 			if(istype(img, /icon))
@@ -231,6 +234,7 @@ var/global/photo_count = 0
 			mob_detail = "You can see [A] on the photo[A:health < 75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]. "
 		else
 			mob_detail += "You can also see [A] on the photo[A:health < 75 ? " - [A] looks hurt":""].[holding ? " [holding]":"."]."
+
 	return mob_detail
 
 /obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
@@ -241,7 +245,7 @@ var/global/photo_count = 0
 
 	pictures_left--
 	desc = "A polaroid camera. It has [pictures_left] photos left."
-	user << "<span class='notice'>[pictures_left] photos left.</span>"
+	to_chat(user, "<span class='notice'>[pictures_left] photos left.</span>")
 	icon_state = icon_off
 	on = 0
 	spawn(64)
@@ -249,13 +253,11 @@ var/global/photo_count = 0
 		on = 1
 
 /obj/item/device/camera/proc/can_capture_turf(turf/T, mob/user)
-	var/mob/dummy = new(T)	//Go go visibility check dummy
 	var/viewer = user
 	if(user.client)		//To make shooting through security cameras possible
 		viewer = user.client.eye
-	var/can_see = (dummy in viewers(world.view, viewer))
+	var/can_see = (T in view(viewer))
 
-	qdel(dummy)
 	return can_see
 
 /obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
@@ -264,8 +266,8 @@ var/global/photo_count = 0
 	var/z_c	= target.z
 	var/list/turfs = list()
 	var/mobs = ""
-	for(var/i = 1; i <= size; i++)
-		for(var/j = 1; j <= size; j++)
+	for(var/i = 1 to size)
+		for(var/j = 1 to size)
 			var/turf/T = locate(x_c, y_c, z_c)
 			if(can_capture_turf(T, user))
 				turfs.Add(T)
@@ -275,6 +277,7 @@ var/global/photo_count = 0
 		x_c = x_c - size
 
 	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
+
 	printpicture(user, p)
 
 /obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
@@ -298,7 +301,6 @@ var/global/photo_count = 0
 	p.pixel_x = rand(-10, 10)
 	p.pixel_y = rand(-10, 10)
 	p.photo_size = size
-
 	return p
 
 /obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)

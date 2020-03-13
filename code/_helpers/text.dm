@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
 
 /*
  * Text sanitization
@@ -84,8 +84,7 @@
 
 			// 0  .. 9
 			if(48 to 57)			//Numbers
-				if(!last_char_group)		continue	//suppress at start of string
-				if(!allow_numbers)			continue
+				if(!allow_numbers)			continue	// If allow_numbers is 0, then don't do this.
 				output += ascii2text(ascii_char)
 				number_of_alphanumeric++
 				last_char_group = 3
@@ -250,9 +249,9 @@
 //This is used for fingerprints
 /proc/stringmerge(var/text,var/compare,replace = "*")
 	var/newtext = text
-	if(lentext(text) != lentext(compare))
+	if(length(text) != length(compare))
 		return 0
-	for(var/i = 1, i < lentext(text), i++)
+	for(var/i = 1, i < length(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
@@ -272,7 +271,7 @@
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= lentext(text), i++)
+	for(var/i = 1, i <= length(text), i++)
 		var/a = copytext(text,i,i+1)
 		if(a == character)
 			count++
@@ -287,8 +286,8 @@
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
 proc/TextPreview(var/string,var/len=40)
-	if(lentext(string) <= len)
-		if(!lentext(string))
+	if(length(string) <= len)
+		if(!length(string))
 			return "\[...\]"
 		else
 			return string
@@ -330,5 +329,111 @@ proc/TextPreview(var/string,var/len=40)
  */
 /proc/strip_improper(var/text)
 	return replacetext(replacetext(text, "\proper", ""), "\improper", "")
+
+/proc/pencode2html(t)
+	t = replacetext(t, "\n", "<BR>")
+	t = replacetext(t, "\[center\]", "<center>")
+	t = replacetext(t, "\[/center\]", "</center>")
+	t = replacetext(t, "\[br\]", "<BR>")
+	t = replacetext(t, "\[b\]", "<B>")
+	t = replacetext(t, "\[/b\]", "</B>")
+	t = replacetext(t, "\[i\]", "<I>")
+	t = replacetext(t, "\[/i\]", "</I>")
+	t = replacetext(t, "\[u\]", "<U>")
+	t = replacetext(t, "\[/u\]", "</U>")
+	t = replacetext(t, "\[time\]", "[stationtime2text()]")
+	t = replacetext(t, "\[date\]", "[stationdate2text()]")
+	t = replacetext(t, "\[large\]", "<font size=\"4\">")
+	t = replacetext(t, "\[/large\]", "</font>")
+	t = replacetext(t, "\[field\]", "<span class=\"paper_field\"></span>")
+	t = replacetext(t, "\[h1\]", "<H1>")
+	t = replacetext(t, "\[/h1\]", "</H1>")
+	t = replacetext(t, "\[h2\]", "<H2>")
+	t = replacetext(t, "\[/h2\]", "</H2>")
+	t = replacetext(t, "\[h3\]", "<H3>")
+	t = replacetext(t, "\[/h3\]", "</H3>")
+	t = replacetext(t, "\[*\]", "<li>")
+	t = replacetext(t, "\[hr\]", "<HR>")
+	t = replacetext(t, "\[small\]", "<font size = \"1\">")
+	t = replacetext(t, "\[/small\]", "</font>")
+	t = replacetext(t, "\[list\]", "<ul>")
+	t = replacetext(t, "\[/list\]", "</ul>")
+	t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+	t = replacetext(t, "\[/table\]", "</td></tr></table>")
+	t = replacetext(t, "\[grid\]", "<table>")
+	t = replacetext(t, "\[/grid\]", "</td></tr></table>")
+	t = replacetext(t, "\[row\]", "</td><tr>")
+	t = replacetext(t, "\[cell\]", "<td>")
+	t = replacetext(t, "\[logo\]", "<img src = ntlogo.png>")
+	t = replacetext(t, "\[redlogo\]", "<img src = redntlogo.png>")
+	t = replacetext(t, "\[sglogo\]", "<img src = sglogo.png>")
+	t = replacetext(t, "\[editorbr\]", "")
+	return t
+
+// Random password generator
+/proc/GenerateKey()
+	//Feel free to move to Helpers.
+	var/newKey
+	newKey += pick("the", "if", "of", "as", "in", "a", "you", "from", "to", "an", "too", "little", "snow", "dead", "drunk", "rosebud", "duck", "al", "le")
+	newKey += pick("diamond", "beer", "mushroom", "assistant", "clown", "captain", "twinkie", "security", "nuke", "small", "big", "escape", "yellow", "gloves", "monkey", "engine", "nuclear", "ai")
+	newKey += pick("1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+	return newKey
+
+//Used for applying byonds text macros to strings that are loaded at runtime
+/proc/apply_text_macros(string)
+	var/next_backslash = findtext(string, "\\")
+	if(!next_backslash)
+		return string
+
+	var/leng = length(string)
+
+	var/next_space = findtext(string, " ", next_backslash + 1)
+	if(!next_space)
+		next_space = leng - next_backslash
+
+	if(!next_space)	//trailing bs
+		return string
+
+	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
+	var/macro = lowertext(copytext(string, next_backslash + 1, next_space))
+	var/rest = next_backslash > leng ? "" : copytext(string, next_space + 1)
+
+	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
+	switch(macro)
+		//prefixes/agnostic
+		if("the")
+			rest = text("\the []", rest)
+		if("a")
+			rest = text("\a []", rest)
+		if("an")
+			rest = text("\an []", rest)
+		if("proper")
+			rest = text("\proper []", rest)
+		if("improper")
+			rest = text("\improper []", rest)
+		if("roman")
+			rest = text("\roman []", rest)
+		//postfixes
+		if("th")
+			base = text("[]\th", rest)
+		if("s")
+			base = text("[]\s", rest)
+		if("he")
+			base = text("[]\he", rest)
+		if("she")
+			base = text("[]\she", rest)
+		if("his")
+			base = text("[]\his", rest)
+		if("himself")
+			base = text("[]\himself", rest)
+		if("herself")
+			base = text("[]\herself", rest)
+		if("hers")
+			base = text("[]\hers", rest)
+
+	. = base
+	if(rest)
+		. += .(rest)
+
 
 #define gender2text(gender) capitalize(gender)

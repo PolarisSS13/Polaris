@@ -2,6 +2,7 @@
 	name = "Digital Camoflauge"
 	desc = "We evolve the ability to distort our form and proprtions, defeating common altgorthms used to detect lifeforms on cameras."
 	helptext = "We cannot be tracked by camera while using this skill.  However, humans looking at us will find us.. uncanny.  We must constantly expend chemicals to maintain our form like this."
+	ability_icon_state = "ling_digital_camo"
 	genomecost = 1
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_digitalcamo
@@ -18,9 +19,9 @@
 
 	var/mob/living/carbon/human/C = src
 	if(C.digitalcamo)
-		C << "<span class='notice'>We return to normal.</span>"
+		to_chat(C, "<span class='notice'>We return to normal.</span>")
 	else
-		C << "<span class='notice'>We distort our form to prevent AI-tracking.</span>"
+		to_chat(C, "<span class='notice'>We distort our form to prevent AI-tracking.</span>")
 	C.digitalcamo = !C.digitalcamo
 
 	spawn(0)

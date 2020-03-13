@@ -1,6 +1,6 @@
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
-	icon = 'icons/obj/computer.dmi'
+	desc = "Used to control a linked shuttle."
 	icon_keyboard = "atmos_key"
 	icon_screen = "shuttle"
 	circuit = null
@@ -14,7 +14,7 @@
 		return
 	//src.add_fingerprint(user)	//shouldn't need fingerprints just for looking at it.
 	if(!allowed(user))
-		user << "\red Access Denied."
+		to_chat(user, "<font color='red'>Access Denied.</font>")
 		return 1
 
 	ui_interact(user)
@@ -41,7 +41,7 @@
 			else
 				shuttle_status = "Standing-by at offsite location."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)
@@ -58,7 +58,7 @@
 		"can_force" = shuttle.can_force(),
 	)
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "shuttle_control_console.tmpl", "[shuttle_tag] Shuttle Control", 470, 310)
@@ -89,7 +89,7 @@
 		req_access = list()
 		req_one_access = list()
 		hacked = 1
-		user << "You short out the console's ID checking system. It's now available to everyone!"
+		to_chat(user, "You short out the console's ID checking system. It's now available to everyone!")
 		return 1
 
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)

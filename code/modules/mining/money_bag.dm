@@ -4,10 +4,9 @@
 	icon = 'icons/obj/storage.dmi'
 	name = "Money bag"
 	icon_state = "moneybag"
-	flags = CONDUCT
 	force = 10.0
 	throwforce = 2.0
-	w_class = 4.0
+	w_class = ITEMSIZE_LARGE
 
 /obj/item/weapon/moneybag/attack_hand(user as mob)
 	var/amt_gold = 0
@@ -50,14 +49,14 @@
 	..()
 	if (istype(W, /obj/item/weapon/coin))
 		var/obj/item/weapon/coin/C = W
-		user << "\blue You add the [C.name] into the bag."
+		to_chat(user, "<font color='blue'>You add the [C.name] into the bag.</font>")
 		usr.drop_item()
 		contents += C
 	if (istype(W, /obj/item/weapon/moneybag))
 		var/obj/item/weapon/moneybag/C = W
 		for (var/obj/O in C.contents)
 			contents += O;
-		user << "\blue You empty the [C.name] into the bag."
+		to_chat(user, "<font color='blue'>You empty the [C.name] into the bag.</font>")
 	return
 
 /obj/item/weapon/moneybag/Topic(href, href_list)

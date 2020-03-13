@@ -1,4 +1,4 @@
-/datum/supply_packs/chemistry_dispenser
+/datum/supply_pack/chemistry_dispenser
 	name = "Reagent dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser{anchored = 0}
@@ -8,7 +8,7 @@
 	containername = "reagent dispenser crate"
 	group = "Reagents"
 
-/datum/supply_packs/beer_dispenser
+/datum/supply_pack/beer_dispenser
 	name = "Booze dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_alc{anchored = 0}
@@ -18,7 +18,7 @@
 	containername = "booze dispenser crate"
 	group = "Reagents"
 
-/datum/supply_packs/soda_dispenser
+/datum/supply_pack/soda_dispenser
 	name = "Soda dispenser"
 	contains = list(
 			/obj/machinery/chemical_dispenser/bar_soft{anchored = 0}
@@ -28,7 +28,7 @@
 	containername = "soda dispenser crate"
 	group = "Reagents"
 
-/datum/supply_packs/reagents
+/datum/supply_pack/reagents
 	name = "Chemistry dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hydrogen,
@@ -60,7 +60,7 @@
 	access = list(access_chemistry)
 	group = "Reagents"
 
-/datum/supply_packs/alcohol_reagents
+/datum/supply_pack/alcohol_reagents
 	name = "Bar alcoholic dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/beer,
@@ -74,7 +74,8 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/vermouth,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cognac,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ale,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/bitters
 		)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
@@ -82,7 +83,7 @@
 	access = list(access_bar)
 	group = "Reagents"
 
-/datum/supply_packs/softdrink_reagents
+/datum/supply_pack/softdrink_reagents
 	name = "Bar soft drink dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/water,
@@ -101,14 +102,15 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sugar,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/orange,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/lime,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/watermelon
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/watermelon,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/lemon
 		)
 	cost = 50
 	containertype = /obj/structure/closet/crate
 	containername = "soft drinks crate"
 	group = "Reagents"
 
-/datum/supply_packs/coffee_reagents
+/datum/supply_pack/coffee_reagents
 	name = "Coffee machine dispenser refill"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee,
@@ -125,7 +127,7 @@
 	containername = "coffee drinks crate"
 	group = "Reagents"
 
-/datum/supply_packs/dispenser_cartridges
+/datum/supply_pack/dispenser_cartridges
 	name = "Empty dispenser cartridges"
 	contains = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge,
@@ -145,7 +147,7 @@
 	group = "Reagents"
 
 #define SEC_PACK(_tname, _type, _name, _cname, _cost, _access)\
-	datum/supply_packs/dispenser_cartridges{\
+	datum/supply_pack/dispenser_cartridges{\
 		_tname {\
 			name = _name ;\
 			containername = _cname ;\
@@ -157,7 +159,7 @@
 		}\
 	}
 #define PACK(_tname, _type, _name, _cname, _cost)\
-	datum/supply_packs/dispenser_cartridges{\
+	datum/supply_pack/dispenser_cartridges{\
 		_tname {\
 			name = _name ;\
 			containername = _cname ;\
@@ -190,6 +192,7 @@ SEC_PACK(radium,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/radi
 SEC_PACK(ethanol,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/ethanol,    "Reagent refill - Ethanol",       "ethanol reagent cartridge crate",       15, access_chemistry)
 SEC_PACK(sacid,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/sacid,      "Reagent refill - Sulfuric Acid", "sulfuric acid reagent cartridge crate", 15, access_chemistry)
 SEC_PACK(tungsten,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/tungsten,   "Reagent refill - Tungsten",      "tungsten reagent cartridge crate",      15, access_chemistry)
+SEC_PACK(calcium,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/calcium,    "Reagent refill - Calcium",       "calcium reagent cartridge crate",       15, access_chemistry)
 
 // Bar-restricted (alcoholic drinks)
 //      Datum path Contents type                                                     Supply pack name             Container name                    Cost  Container access
@@ -222,6 +225,7 @@ PACK(sodawater,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/sodawat
 PACK(lemon_lime, /obj/item/weapon/reagent_containers/chem_disp_cartridge/lemon_lime, "Reagent refill - Lemon-Lime Juice",    "lemon-lime juice reagent cartridge crate",              15)
 PACK(orange,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/orange,     "Reagent refill - Orange Juice",        "orange juice reagent cartridge crate",                  15)
 PACK(lime,       /obj/item/weapon/reagent_containers/chem_disp_cartridge/lime,       "Reagent refill - Lime Juice",          "lime juice reagent cartridge crate",                    15)
+PACK(lemon,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/lemon,      "Reagent refill - Lemon Juice",         "lemon juice reagent cartridge crate",                   15)
 PACK(watermelon, /obj/item/weapon/reagent_containers/chem_disp_cartridge/watermelon, "Reagent refill - Watermelon Juice",    "watermelon juice reagent cartridge crate",              15)
 PACK(coffee,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee,     "Reagent refill - Coffee",              "coffee reagent cartridge crate",                        15)
 PACK(cafe_latte, /obj/item/weapon/reagent_containers/chem_disp_cartridge/cafe_latte, "Reagent refill - Cafe Latte",          "cafe latte reagent cartridge crate",                    15)

@@ -1,4 +1,5 @@
 var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_random_selection/default()
+var/datum/uplink_random_selection/all_uplink_selection = new/datum/uplink_random_selection/all()
 
 /datum/uplink_random_item
 	var/uplink_item				// The uplink item
@@ -14,16 +15,22 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 
 /datum/uplink_random_selection
 	var/list/datum/uplink_random_item/items
+	var/list/datum/uplink_random_item/all_items
 
 /datum/uplink_random_selection/New()
 	..()
 	items = list()
+	all_items = list()
 
-/datum/uplink_random_selection/proc/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items)
+/datum/uplink_random_selection/proc/get_random_item(var/telecrystals, obj/item/device/uplink/U, var/list/bought_items, var/items_override = 0)
 	var/const/attempts = 50
 
 	for(var/i = 0; i < attempts; i++)
-		var/datum/uplink_random_item/RI = pick(items)
+		var/datum/uplink_random_item/RI
+		if(items_override)
+			RI = pick(all_items)
+		else
+			RI = pick(items)
 		if(!prob(RI.keep_probability))
 			continue
 		var/datum/uplink_item/I = uplink.items_assoc[RI.uplink_item]
@@ -35,6 +42,14 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 			continue
 		return I
 
+/datum/uplink_random_selection/all/New()
+	..()
+	for(var/datum/uplink_item/item in uplink.items)
+		if(item.blacklisted)
+			continue
+		else
+			all_items += new/datum/uplink_random_item(item.type)
+
 /datum/uplink_random_selection/default/New()
 	..()
 
@@ -42,7 +57,7 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/mc9mm)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/a357)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysnipermerc, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/ammo/sniperammo, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/crossbow, 33)
@@ -59,7 +74,6 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_kit)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/chameleon_projector)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/voice)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/stealth_items/camera_floppy, 10, 0)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/armor/heavy_vest)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/armor/combat)
@@ -86,7 +100,7 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/thermal, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/energy_net, reselect_propbability = 15)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/ewar_voice, reselect_propbability = 15)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/ewar_voice, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/maneuvering_jets, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/egun, reselect_propbability = 15)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/hardsuit_modules/power_sink, reselect_propbability = 15)
@@ -100,5 +114,5 @@ var/datum/uplink_random_selection/default_uplink_selection = new/datum/uplink_ra
 
 /proc/debug_uplink_item_assoc_list()
 	for(var/key in uplink.items_assoc)
-		world << "[key] - [uplink.items_assoc[key]]"
+		to_world("[key] - [uplink.items_assoc[key]]")
 #endif

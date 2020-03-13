@@ -1,20 +1,46 @@
 /obj
+	layer = OBJ_LAYER
+	plane = OBJ_PLANE
 	//Used to store information about the contents of the object.
 	var/list/matter
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	animate_movement = 2
 	var/throwforce = 1
+	var/catchable = 1	// can it be caught on throws/flying?
 	var/sharp = 0		// whether this object cuts
 	var/edge = 0		// whether this object is more likely to dismember
+	var/pry = 0			//Used in attackby() to open doors
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/damtype = "brute"
 	var/armor_penetration = 0
 	var/show_messages
+	var/preserve_item = 0 //whether this object is preserved when its owner goes into cryo-storage, gateway, etc
+	var/can_speak = 0 //For MMIs and admin trickery. If an object has a brainmob in its contents, set this to 1 to allow it to speak.
+
+	var/show_examine = TRUE	// Does this pop up on a mob when the mob is examined?
+	var/register_as_dangerous_object = FALSE // Should this tell its turf that it is dangerous automatically?
+
+/obj/Initialize()
+	if(register_as_dangerous_object)
+		register_dangerous_to_step()
+	return ..()
 
 /obj/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
+	if(register_as_dangerous_object)
+		unregister_dangerous_to_step()
 	return ..()
+
+/obj/Moved(atom/oldloc)
+	. = ..()
+	if(register_as_dangerous_object)
+		var/turf/old_turf = get_turf(oldloc)
+		var/turf/new_turf = get_turf(src)
+
+		if(old_turf != new_turf)
+			old_turf.unregister_dangerous_object(src)
+			new_turf.register_dangerous_object(src)
 
 /obj/Topic(href, href_list, var/datum/topic_state/state = default_state)
 	if(usr && ..())
@@ -29,10 +55,10 @@
 	CouldNotUseTopic(usr)
 	return 1
 
-/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state)
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = default_state)
 	if(user.CanUseObjTopic(src))
 		return ..()
-	user << "<span class='danger'>\icon[src]Access Denied!</span>"
+	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)
@@ -50,10 +76,6 @@
 	// Nada
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
-
-/obj/proc/process()
-	processing_objects.Remove(src)
-	return 0
 
 /obj/assume_air(datum/gas_mixture/giver)
 	if(loc)
@@ -119,9 +141,6 @@
 /obj/proc/interact(mob/user)
 	return
 
-/obj/proc/update_icon()
-	return
-
 /mob/proc/unset_machine()
 	src.machine = null
 
@@ -154,8 +173,29 @@
 		*/
 	return
 
+/obj/proc/hear_signlang(mob/M as mob, text, verb, datum/language/speaking) // Saycode gets worse every day.
+	return FALSE
+
 /obj/proc/see_emote(mob/M as mob, text, var/emote_type)
 	return
 
 /obj/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 	return
+
+/obj/proc/get_cell()
+	return
+
+// Used to mark a turf as containing objects that are dangerous to step onto.
+/obj/proc/register_dangerous_to_step()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.register_dangerous_object(src)
+
+/obj/proc/unregister_dangerous_to_step()
+	var/turf/T = get_turf(src)
+	if(T)
+		T.unregister_dangerous_object(src)
+
+// Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
+/obj/proc/is_safe_to_step(mob/living/L)
+	return TRUE

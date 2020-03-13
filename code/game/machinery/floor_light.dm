@@ -16,23 +16,23 @@ var/list/floor_light_cache = list()
 	var/on
 	var/damaged
 	var/default_light_range = 4
-	var/default_light_power = 2
-	var/default_light_colour = "#FFFFFF"
+	var/default_light_power = 0.75
+	var/default_light_colour = LIGHT_COLOR_INCANDESCENT_BULB
 
 /obj/machinery/floor_light/prebuilt
 	anchored = 1
 
 /obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		anchored = !anchored
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
 	else if(istype(W, /obj/item/weapon/weldingtool) && (damaged || (stat & BROKEN)))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
-			user << "<span class='warning'>\The [src] must be on to complete this task.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
 			return
-		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
-		if(!do_after(user, 20))
+		playsound(src.loc, WT.usesound, 50, 1)
+		if(!do_after(user, 20 * WT.toolspeed))
 			return
 		if(!src || !WT.isOn())
 			return
@@ -60,15 +60,15 @@ var/list/floor_light_cache = list()
 	else
 
 		if(!anchored)
-			user << "<span class='warning'>\The [src] must be screwed down first.</span>"
+			to_chat(user, "<span class='warning'>\The [src] must be screwed down first.</span>")
 			return
 
 		if(stat & BROKEN)
-			user << "<span class='warning'>\The [src] is too damaged to be functional.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is too damaged to be functional.</span>")
 			return
 
 		if(stat & NOPOWER)
-			user << "<span class='warning'>\The [src] is unpowered.</span>"
+			to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
 			return
 
 		on = !on
@@ -132,7 +132,7 @@ var/list/floor_light_cache = list()
 		if(1)
 			qdel(src)
 		if(2)
-			if (prob(50))
+			if(prob(50))
 				qdel(src)
 			else if(prob(20))
 				stat |= BROKEN
@@ -140,7 +140,7 @@ var/list/floor_light_cache = list()
 				if(isnull(damaged))
 					damaged = 0
 		if(3)
-			if (prob(5))
+			if(prob(5))
 				qdel(src)
 			else if(isnull(damaged))
 				damaged = 0
@@ -150,7 +150,7 @@ var/list/floor_light_cache = list()
 	var/area/A = get_area(src)
 	if(A)
 		on = 0
-	..()
+	. = ..()
 
 /obj/machinery/floor_light/cultify()
 	default_light_colour = "#FF0000"

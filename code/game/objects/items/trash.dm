@@ -4,7 +4,7 @@
 //Added by Jack Rost
 /obj/item/trash
 	icon = 'icons/obj/trash.dmi'
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	desc = "This is rubbish."
 
 /obj/item/trash/raisins
@@ -34,6 +34,10 @@
 /obj/item/trash/sosjerky
 	name = "Scaredy's Private Reserve Beef Jerky"
 	icon_state = "sosjerky"
+
+/obj/item/trash/unajerky
+	name = "Moghes Imported Sissalik Jerky"
+	icon_state = "unathitinred"
 
 /obj/item/trash/syndi_cakes
 	name = "syndi cakes"
@@ -71,6 +75,14 @@
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" ration"
 	icon_state = "liquidfood"
+
+/obj/item/trash/liquidprotein
+	name = "\improper \"LiquidProtein\" ration"
+	icon_state = "liquidprotein"
+
+/obj/item/trash/liquidvitamin
+	name = "\improper \"VitaPaste\" ration"
+	icon_state = "liquidvitamin"
 
 /obj/item/trash/tastybread
 	name = "bread tube"

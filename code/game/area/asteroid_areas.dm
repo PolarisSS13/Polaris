@@ -2,28 +2,23 @@
 
 /area/mine
 	icon_state = "mining"
-	music = 'sound/ambience/song_game.ogg'
 	sound_env = ASTEROID
 
 /area/mine/explored
 	name = "Mine"
 	icon_state = "explored"
-	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 
 /area/mine/unexplored
 	name = "Mine"
 	icon_state = "unexplored"
-	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 
 /area/mine/explored/upper_level
 	name = "Upper Level Mine"
 	icon_state = "explored"
-	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 
 /area/mine/unexplored/upper_level
 	name = "Upper Level Mine"
 	icon_state = "unexplored"
-	ambience = list('sound/ambience/ambimine.ogg', 'sound/ambience/song_game.ogg')
 
 
 // OUTPOSTS
@@ -126,7 +121,7 @@
 /area/outpost/engineering/solarsoutside
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 0
+	dynamic_lighting = 0
 
 	aft
 		name = "\improper Engineering Outpost Solar Array"

@@ -9,12 +9,23 @@
 	if(L)
 		qdel(L)
 
+// Called after turf replaces old one
+/turf/proc/post_change()
+	levelupdate()
+
+	var/turf/simulated/open/above = GetAbove(src)
+	if(istype(above))
+		above.update_icon()
+
+	var/turf/simulated/below = GetBelow(src)
+	if(istype(below))
+		below.update_icon() // To add or remove the 'ceiling-less' overlay.
+
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0, var/preserve_outdoors = FALSE)
 	if (!N)
 		return
 
-	// This makes sure that turfs are not changed to space when one side is part of a zone
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
 		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
@@ -23,10 +34,13 @@
 	var/obj/fire/old_fire = fire
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
-	var/list/old_affecting_lights = affecting_lights
+	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
+	var/old_corners = corners
+	var/old_outdoors = outdoors
+	var/old_dangerous_objects = dangerous_objects
 
-	//world << "Replacing [src.type] with [N]"
+	//to_world("Replacing [src.type] with [N]")
 
 	if(connections) connections.erase_all()
 
@@ -55,6 +69,8 @@
 			S.update_starlight()
 
 		W.levelupdate()
+		W.update_icon(1)
+		W.post_change()
 		. = W
 
 	else
@@ -74,14 +90,25 @@
 			S.update_starlight()
 
 		W.levelupdate()
+		W.update_icon(1)
+		W.post_change()
 		. =  W
 
-	lighting_overlay = old_lighting_overlay
-	affecting_lights = old_affecting_lights
-	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
-		reconsider_lights()
-	if(dynamic_lighting != old_dynamic_lighting)
-		if(dynamic_lighting)
-			lighting_build_overlays()
-		else
-			lighting_clear_overlays()
+	recalc_atom_opacity()
+
+	dangerous_objects = old_dangerous_objects
+
+	if(lighting_overlays_initialised)
+		lighting_overlay = old_lighting_overlay
+		affecting_lights = old_affecting_lights
+		corners = old_corners
+		if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting))
+			reconsider_lights()
+		if(dynamic_lighting != old_dynamic_lighting)
+			if(dynamic_lighting)
+				lighting_build_overlay()
+			else
+				lighting_clear_overlay()
+
+	if(preserve_outdoors)
+		outdoors = old_outdoors

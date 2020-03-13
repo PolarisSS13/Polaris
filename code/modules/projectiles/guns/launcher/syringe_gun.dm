@@ -5,11 +5,10 @@
 	icon_state = "syringe-cartridge"
 	var/icon_flight = "syringe-cartridge-flight" //so it doesn't look so weird when shot
 	matter = list(DEFAULT_WALL_MATERIAL = 125, "glass" = 375)
-	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_EARS
 	throwforce = 3
 	force = 3
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	var/obj/item/weapon/reagent_containers/syringe/syringe
 
 /obj/item/weapon/syringe_cartridge/update_icon()
@@ -21,7 +20,7 @@
 /obj/item/weapon/syringe_cartridge/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe))
 		syringe = I
-		user << "<span class='notice'>You carefully insert [syringe] into [src].</span>"
+		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
 		user.remove_from_mob(syringe)
 		syringe.loc = src
 		sharp = 1
@@ -30,7 +29,7 @@
 
 /obj/item/weapon/syringe_cartridge/attack_self(mob/user)
 	if(syringe)
-		user << "<span class='notice'>You remove [syringe] from [src].</span>"
+		to_chat(user, "<span class='notice'>You remove [syringe] from [src].</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		user.put_in_hands(syringe)
 		syringe = null
@@ -52,9 +51,9 @@
 			var/mob/living/L = hit_atom
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
 			if(L.can_inject() && syringe.reagents)
-				var/reagent_log = syringe.reagents.get_reagents()
-				syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
-				admin_inject_log(thrower, L, src, reagent_log, 15, violent=1)
+				var/contained = syringe.reagents.get_reagents()
+				var/trans = syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
+				add_attack_logs(thrower,L,"Shot with [src.name] containing [contained], trasferred [trans] units")
 
 		syringe.break_syringe(iscarbon(hit_atom)? hit_atom : null)
 		syringe.update_icon()
@@ -67,7 +66,7 @@
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	force = 7
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	slot_flags = SLOT_BELT
@@ -106,10 +105,10 @@
 /obj/item/weapon/gun/launcher/syringe/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
 		if(!darts.len)
-			user << "<span class='warning'>[src] is empty.</span>"
+			to_chat(user, "<span class='warning'>[src] is empty.</span>")
 			return
 		if(next)
-			user << "<span class='warning'>[src]'s cover is locked shut.</span>"
+			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
 			return
 		var/obj/item/weapon/syringe_cartridge/C = darts[1]
 		darts -= C
@@ -123,7 +122,7 @@
 	if(istype(A, /obj/item/weapon/syringe_cartridge))
 		var/obj/item/weapon/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
-			user << "<span class='warning'>[src] is full!</span>"
+			to_chat(user, "<span class='warning'>[src] is full!</span>")
 			return
 		user.remove_from_mob(C)
 		C.loc = src

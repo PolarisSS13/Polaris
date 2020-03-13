@@ -9,10 +9,13 @@ var/list/global_huds = list(
 		global_hud.whitense,
 		global_hud.vimpaired,
 		global_hud.darkMask,
+		global_hud.centermarker,
 		global_hud.nvg,
 		global_hud.thermal,
 		global_hud.meson,
-		global_hud.science
+		global_hud.science,
+		global_hud.material,
+		global_hud.holomap
 		)
 
 /datum/hud/var/obj/screen/grab_intent
@@ -26,48 +29,75 @@ var/list/global_huds = list(
 	var/obj/screen/whitense
 	var/list/vimpaired
 	var/list/darkMask
+	var/obj/screen/centermarker
+	var/obj/screen/darksight
 	var/obj/screen/nvg
 	var/obj/screen/thermal
 	var/obj/screen/meson
 	var/obj/screen/science
+	var/obj/screen/material
+	var/obj/screen/holomap
 
 /datum/global_hud/proc/setup_overlay(var/icon_state)
 	var/obj/screen/screen = new /obj/screen()
-	screen.screen_loc = "1,1"
-	screen.icon = 'icons/obj/hud_full.dmi'
+	screen.alpha = 40 // Adjut this if you want goggle overlays to be thinner or thicker.
+	screen.screen_loc = "SOUTHWEST to NORTHEAST" // Will tile up to the whole screen, scaling beyond 15x15 if needed.
+	screen.icon = 'icons/obj/hud_tiled.dmi'
 	screen.icon_state = icon_state
 	screen.layer = SCREEN_LAYER
+	screen.plane = PLANE_FULLSCREEN
 	screen.mouse_opacity = 0
 
 	return screen
 
+/obj/screen/global_screen
+	screen_loc = ui_entire_screen
+	plane = PLANE_FULLSCREEN
+	mouse_opacity = 0
+
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
-	druggy = new /obj/screen()
-	druggy.screen_loc = ui_entire_screen
+	druggy = new /obj/screen/global_screen()
 	druggy.icon_state = "druggy"
-	druggy.layer = 17
-	druggy.mouse_opacity = 0
 
 	//that white blurry effect you get when you eyes are damaged
-	blurry = new /obj/screen()
-	blurry.screen_loc = ui_entire_screen
+	blurry = new /obj/screen/global_screen()
 	blurry.icon_state = "blurry"
-	blurry.layer = 17
-	blurry.mouse_opacity = 0
 
 	//static overlay effect for cameras and the like
-	whitense = new /obj/screen()
-	whitense.screen_loc = ui_entire_screen
+	whitense = new /obj/screen/global_screen()
 	whitense.icon = 'icons/effects/static.dmi'
 	whitense.icon_state = "1 light"
-	whitense.layer = 17
-	whitense.mouse_opacity = 0
+
+	//darksight 'hanger' for attached icons
+	darksight = new /obj/screen()
+	darksight.icon = null
+	darksight.screen_loc = "1,1"
+	darksight.plane = PLANE_LIGHTING
+
+	//Marks the center of the screen, for things like ventcrawl
+	centermarker = new /obj/screen()
+	centermarker.icon = 'icons/mob/screen1.dmi'
+	centermarker.icon_state = "centermarker"
+	centermarker.screen_loc = "CENTER,CENTER"
 
 	nvg = setup_overlay("nvg_hud")
 	thermal = setup_overlay("thermal_hud")
 	meson = setup_overlay("meson_hud")
 	science = setup_overlay("science_hud")
+	material = setup_overlay("material_hud")
+
+	// The holomap screen object is actually totally invisible.
+	// Station maps work by setting it as an images location before sending to client, not
+	// actually changing the icon or icon state of the screen object itself!
+	// Why do they work this way? I don't know really, that is how /vg designed them, but since they DO
+	// work this way, we can take advantage of their immutability by making them part of
+	// the global_hud (something we have and /vg doesn't) instead of an instance per mob.
+	holomap = new /obj/screen()
+	holomap.name = "holomap"
+	holomap.icon = null
+	holomap.screen_loc = ui_holomap
+	holomap.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i
@@ -75,12 +105,16 @@ var/list/global_huds = list(
 	vimpaired = newlist(/obj/screen,/obj/screen,/obj/screen,/obj/screen)
 	O = vimpaired[1]
 	O.screen_loc = "1,1 to 5,15"
+	O.plane = PLANE_FULLSCREEN
 	O = vimpaired[2]
 	O.screen_loc = "5,1 to 10,5"
+	O.plane = PLANE_FULLSCREEN
 	O = vimpaired[3]
 	O.screen_loc = "6,11 to 10,15"
+	O.plane = PLANE_FULLSCREEN
 	O = vimpaired[4]
 	O.screen_loc = "11,1 to 15,15"
+	O.plane = PLANE_FULLSCREEN
 
 	//welding mask overlay black/dither
 	darkMask = newlist(/obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen, /obj/screen)
@@ -104,19 +138,19 @@ var/list/global_huds = list(
 	for(i = 1, i <= 4, i++)
 		O = vimpaired[i]
 		O.icon_state = "dither50"
-		O.layer = 17
+		O.plane = PLANE_FULLSCREEN
 		O.mouse_opacity = 0
 
 		O = darkMask[i]
 		O.icon_state = "dither50"
-		O.layer = 17
+		O.plane = PLANE_FULLSCREEN
 		O.mouse_opacity = 0
 
 	for(i = 5, i <= 8, i++)
 		O = darkMask[i]
 		O.icon_state = "black"
-		O.layer = 17
-		O.mouse_opacity = 0
+		O.plane = PLANE_FULLSCREEN
+		O.mouse_opacity = 2
 
 /*
 	The hud datum
@@ -133,6 +167,8 @@ var/list/global_huds = list(
 	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/lingchemdisplay
+	var/obj/screen/wiz_instability_display
+	var/obj/screen/wiz_energy_display
 	var/obj/screen/blobpwrdisplay
 	var/obj/screen/blobhealthdisplay
 	var/obj/screen/r_hand_hud_object
@@ -146,6 +182,7 @@ var/list/global_huds = list(
 
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
 	var/action_buttons_hidden = 0
+	var/list/slot_info
 
 datum/hud/New(mob/owner)
 	mymob = owner
@@ -153,12 +190,14 @@ datum/hud/New(mob/owner)
 	..()
 
 /datum/hud/Destroy()
-	..()
+	. = ..()
 	grab_intent = null
 	hurt_intent = null
 	disarm_intent = null
 	help_intent = null
 	lingchemdisplay = null
+	wiz_instability_display = null
+	wiz_energy_display = null
 	blobpwrdisplay = null
 	blobhealthdisplay = null
 	r_hand_hud_object = null
@@ -269,11 +308,9 @@ datum/hud/New(mob/owner)
 	else if(isrobot(mymob))
 		robot_hud(ui_style, ui_color, ui_alpha, mymob)
 	else if(isbrain(mymob))
-		brain_hud(ui_style)
+		mymob.instantiate_hud(src)
 	else if(isalien(mymob))
 		larva_hud()
-	else if(isslime(mymob))
-		slime_hud()
 	else if(isAI(mymob))
 		ai_hud()
 	else if(isobserver(mymob))
@@ -290,11 +327,11 @@ datum/hud/New(mob/owner)
 	set hidden = 1
 
 	if(!hud_used)
-		usr << "<span class='warning'>This mob type does not use a HUD.</span>"
+		to_chat(usr, "<span class='warning'>This mob type does not use a HUD.</span>")
 		return
 
 	if(!ishuman(src))
-		usr << "<span class='warning'>Inventory hiding is currently only supported for human mobs, sorry.</span>"
+		to_chat(usr, "<span class='warning'>Inventory hiding is currently only supported for human mobs, sorry.</span>")
 		return
 
 	if(!client) return
@@ -382,3 +419,9 @@ datum/hud/New(mob/owner)
 	hud_used.hidden_inventory_update()
 	hud_used.persistant_inventory_update()
 	update_action_buttons()
+
+/mob/proc/add_click_catcher()
+	client.screen += client.void
+
+/mob/new_player/add_click_catcher()
+	return

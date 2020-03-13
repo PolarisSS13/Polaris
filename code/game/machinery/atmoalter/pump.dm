@@ -4,7 +4,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "psiphon:0"
 	density = 1
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	var/on = 0
 	var/direction_out = 0 //0 = siphoning, 1 = releasing
@@ -138,7 +138,7 @@
 	if (holding)
 		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0))
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "portpump.tmpl", "Portable Pump", 480, 410, state = physical_state)
 		ui.set_initial_data(data)

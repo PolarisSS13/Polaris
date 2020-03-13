@@ -51,6 +51,7 @@ var/global/list/ore_data = list()
 	name = "carbon"
 	display_name = "raw carbon"
 	smelts_to = "plastic"
+	compresses_to = "graphite"
 	alloy = 1
 	result_amount = 5
 	spread_chance = 25
@@ -61,6 +62,7 @@ var/global/list/ore_data = list()
 	name = "sand"
 	display_name = "sand"
 	smelts_to = "glass"
+	alloy = 1
 	compresses_to = "sandstone"
 
 /ore/phoron
@@ -107,6 +109,7 @@ var/global/list/ore_data = list()
 /ore/diamond
 	name = "diamond"
 	display_name = "diamond"
+	alloy = 1
 	compresses_to = "diamond"
 	result_amount = 5
 	spread_chance = 10
@@ -130,4 +133,35 @@ var/global/list/ore_data = list()
 	display_name = "metallic hydrogen"
 	smelts_to = "tritium"
 	compresses_to = "mhydrogen"
+	scan_icon = "mineral_rare"
+
+/ore/verdantium
+	name = MAT_VERDANTIUM
+	display_name = "crystalline verdantite"
+	compresses_to = MAT_VERDANTIUM
+	result_amount = 2
+	spread_chance = 5
+	ore = /obj/item/weapon/ore/verdantium
+	scan_icon = "mineral_rare"
+	xarch_ages = list(
+		"billion" = 13,
+		"billion_lower" = 10
+		)
+
+/ore/marble
+	name = MAT_MARBLE
+	display_name = "recrystallized carbonate"
+	compresses_to = "marble"
+	result_amount = 1
+	spread_chance = 10
+	ore = /obj/item/weapon/ore/marble
+	scan_icon = "mineral_common"
+
+/ore/lead
+	name = MAT_LEAD
+	display_name = "lead glance"
+	smelts_to = "lead"
+	result_amount = 3
+	spread_chance = 20
+	ore = /obj/item/weapon/ore/lead
 	scan_icon = "mineral_rare"

@@ -13,7 +13,7 @@
 
 ///process()
 ///Called by the gameticker
-/datum/game_mode/proc/process()
+/datum/game_mode/process()
 	// Slow this down a bit so latejoiners have a chance of being antags.
 	process_count++
 	if(process_count >= 10)
@@ -29,6 +29,16 @@
 /datum/game_mode/proc/try_latespawn(var/datum/mind/player, var/latejoin_only)
 
 	if(emergency_shuttle.departed || !round_autoantag)
+		return
+
+	if(emergency_shuttle.shuttle && (emergency_shuttle.shuttle.moving_status == SHUTTLE_WARMUP || emergency_shuttle.shuttle.moving_status == SHUTTLE_INTRANSIT))
+		return // Don't do anything if the shuttle's coming.
+
+	var/mills = round_duration_in_ticks
+	var/mins = round((mills % 36000) / 600)
+	var/hours = round(mills / 36000)
+
+	if(hours >= 2 && mins >= 40) // Don't do anything in the last twenty minutes of the round, as well.
 		return
 
 	if(world.time < next_spawn)

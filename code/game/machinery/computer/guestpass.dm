@@ -9,6 +9,7 @@
 
 	var/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
+	var/expired = 0
 	var/reason = "NOT SPECIFIED"
 
 /obj/item/weapon/card/id/guest/GetAccess()
@@ -20,23 +21,55 @@
 /obj/item/weapon/card/id/guest/examine(mob/user)
 	..(user)
 	if (world.time < expiration_time)
-		user << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
+		to_chat(user, "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>")
 	else
-		user << "<span class='warning'>It expired at [worldtime2text(expiration_time)].</span>"
+		to_chat(user, "<span class='warning'>It expired at [worldtime2stationtime(expiration_time)].</span>")
 
 /obj/item/weapon/card/id/guest/read()
 	if(!Adjacent(usr))
 		return //Too far to read
 	if (world.time > expiration_time)
-		usr << "<span class='notice'>This pass expired at [worldtime2text(expiration_time)].</span>"
+		to_chat(usr, "<span class='notice'>This pass expired at [worldtime2stationtime(expiration_time)].</span>")
 	else
-		usr << "<span class='notice'>This pass expires at [worldtime2text(expiration_time)].</span>"
+		to_chat(usr, "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>")
 
-	usr << "<span class='notice'>It grants access to following areas:</span>"
+	to_chat(usr, "<span class='notice'>It grants access to following areas:</span>")
 	for (var/A in temp_access)
-		usr << "<span class='notice'>[get_access_desc(A)].</span>"
-	usr << "<span class='notice'>Issuing reason: [reason].</span>"
+		to_chat(usr, "<span class='notice'>[get_access_desc(A)].</span>")
+	to_chat(usr, "<span class='notice'>Issuing reason: [reason].</span>")
 	return
+
+/obj/item/weapon/card/id/guest/attack_self(mob/living/user as mob)
+	if(user.a_intent == I_HURT)
+		if(icon_state == "guest_invalid")
+			to_chat(user, "<span class='warning'>This guest pass is already deactivated!</span>")
+			return
+
+		var/confirm = alert("Do you really want to deactivate this guest pass? (you can't reactivate it)", "Confirm Deactivation", "Yes", "No")
+		if(confirm == "Yes")
+			//rip guest pass </3
+			user.visible_message("<span class='notice'>\The [user] deactivates \the [src].</span>")
+			icon_state = "guest_invalid"
+			expiration_time = world.time
+			expired = 1
+	return ..()
+
+/obj/item/weapon/card/id/guest/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+	update_icon()
+
+/obj/item/weapon/card/id/guest/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/weapon/card/id/guest/process()
+	if(expired == 0 && world.time >= expiration_time)
+		visible_message("<span class='warning'>\The [src] flashes a few times before turning red.</span>")
+		icon_state = "guest_invalid"
+		expired = 1
+		world.time = expiration_time
+		return
 
 /////////////////////////////////////////////
 //Guest pass terminal////////////////////////
@@ -44,7 +77,10 @@
 
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
+	desc = "Used to print temporary passes for people. Handy!"
 	icon_state = "guest"
+	plane = TURF_PLANE
+	layer = ABOVE_TURF_LAYER
 	icon_keyboard = null
 	icon_screen = "pass"
 	density = 0
@@ -65,32 +101,13 @@
 
 
 /obj/machinery/computer/guestpass/attackby(obj/I, mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		user << "<span class='notice'>You start disconnecting the monitor.</span>"
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.frame_type = "guestpass"
-			A.pixel_x = pixel_x
-			A.pixel_y = pixel_y
-			A.circuit = M
-			A.anchored = 1
-			for (var/obj/C in src)
-				C.forceMove(loc)
-			user << "<span class='notice'>You disconnect the monitor.</span>"
-			A.state = 4
-			A.icon_state = "guestpass_4"
-			M.deconstruct(src)
-			qdel(src)
-		return
 	if(istype(I, /obj/item/weapon/card/id))
 		if(!giver && user.unEquip(I))
 			I.forceMove(src)
 			giver = I
-			updateUsrDialog()
+			SSnanoui.update_uis(src)
 		else if(giver)
-			user << "<span class='warning'>There is already ID card inside.</span>"
+			to_chat(user, "<span class='warning'>There is already ID card inside.</span>")
 		return
 	..()
 
@@ -102,45 +119,56 @@
 		return
 
 	user.set_machine(src)
-	var/dat
 
-	if (mode == 1) //Logs
-		dat += "<h3>Activity log</h3><br>"
-		for (var/entry in internal_log)
-			dat += "[entry]<br><hr>"
-		dat += "<a href='?src=\ref[src];action=print'>Print</a><br>"
-		dat += "<a href='?src=\ref[src];mode=0'>Back</a><br>"
-	else
-		dat += "<h3>Guest pass terminal #[uid]</h3><br>"
-		dat += "<a href='?src=\ref[src];mode=1'>View activity log</a><br><br>"
-		dat += "Issuing ID: <a href='?src=\ref[src];action=id'>[giver]</a><br>"
-		dat += "Issued to: <a href='?src=\ref[src];choice=giv_name'>[giv_name]</a><br>"
-		dat += "Reason:  <a href='?src=\ref[src];choice=reason'>[reason]</a><br>"
-		dat += "Duration (minutes):  <a href='?src=\ref[src];choice=duration'>[duration] m</a><br>"
-		dat += "Access to areas:<br>"
-		if (giver && giver.access)
-			for (var/A in giver.access)
-				var/area = get_access_desc(A)
-				if (A in accesses)
-					area = "<b>[area]</b>"
-				dat += "<a href='?src=\ref[src];choice=access;access=[A]'>[area]</a><br>"
-		dat += "<br><a href='?src=\ref[src];action=issue'>Issue pass</a><br>"
+	ui_interact(user)
 
-	user << browse(dat, "window=guestpass;size=400x520")
-	onclose(user, "guestpass")
+/**
+ *  Display the NanoUI window for the guest pass console.
+ *
+ *  See NanoUI documentation for details.
+ */
+/obj/machinery/computer/guestpass/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+	user.set_machine(src)
 
+	var/list/data = list()
+
+	var/area_list[0]
+
+	if (giver && giver.access)
+		data["access"] = giver.access
+		for (var/A in giver.access)
+			if(A in accesses)
+				area_list[++area_list.len] = list("area" = A, "area_name" = get_access_desc(A), "on" = 1)
+			else
+				area_list[++area_list.len] = list("area" = A, "area_name" = get_access_desc(A), "on" = null)
+
+	data["giver"] = giver
+	data["giveName"] = giv_name
+	data["reason"] = reason
+	data["duration"] = duration
+	data["area"] = area_list
+	data["mode"] = mode
+	data["log"] = internal_log
+	data["uid"] = uid
+
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "guest_pass.tmpl", src.name, 400, 520)
+		ui.set_initial_data(data)
+		ui.open()
+		//ui.set_auto_update(5)
 
 /obj/machinery/computer/guestpass/Topic(href, href_list)
 	if(..())
 		return 1
 	usr.set_machine(src)
 	if (href_list["mode"])
-		mode = text2num(href_list["mode"])
+		mode = href_list["mode"]
 
 	if (href_list["choice"])
 		switch(href_list["choice"])
 			if ("giv_name")
-				var/nam = sanitize(input("Person pass is issued to", "Name", giv_name) as text|null)
+				var/nam = sanitizeName(input("Person pass is issued to", "Name", giv_name) as text|null)
 				if (nam)
 					giv_name = nam
 			if ("reason")
@@ -153,7 +181,7 @@
 					if (dur > 0 && dur <= 120)
 						duration = dur
 					else
-						usr << "<span class='warning'>Invalid duration.</span>"
+						to_chat(usr, "<span class='warning'>Invalid duration.</span>")
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
@@ -162,7 +190,7 @@
 					if(A in giver.access)	//Let's make sure the ID card actually has the access.
 						accesses.Add(A)
 					else
-						usr << "<span class='warning'>Invalid selection, please consult technical support if there are any issues.</span>"
+						to_chat(usr, "<span class='warning'>Invalid selection, please consult technical support if there are any issues.</span>")
 						log_debug("[key_name_admin(usr)] tried selecting an invalid guest pass terminal option.")
 	if (href_list["action"])
 		switch(href_list["action"])
@@ -182,13 +210,12 @@
 					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
 						I.loc = src
 						giver = I
-				updateUsrDialog()
 
 			if ("print")
 				var/dat = "<h3>Activity log of guest pass terminal #[uid]</h3><br>"
 				for (var/entry in internal_log)
 					dat += "[entry]<br><hr>"
-				//usr << "Printing the log, standby..."
+				//to_chat(usr, "Printing the log, standby...")
 				//sleep(50)
 				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
 				P.name = "activity log"
@@ -197,13 +224,13 @@
 			if ("issue")
 				if (giver)
 					var/number = add_zero("[rand(0,9999)]", 4)
-					var/entry = "\[[worldtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Grants access to following areas: "
+					var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Grants access to following areas: "
 					for (var/i=1 to accesses.len)
 						var/A = accesses[i]
 						if (A)
 							var/area = get_access_desc(A)
 							entry += "[i > 1 ? ", [area]" : "[area]"]"
-					entry += ". Expires at [worldtime2text(world.time + duration*10*60)]."
+					entry += ". Expires at [worldtime2stationtime(world.time + duration*10*60)]."
 					internal_log.Add(entry)
 
 					var/obj/item/weapon/card/id/guest/pass = new(src.loc)
@@ -213,6 +240,7 @@
 					pass.reason = reason
 					pass.name = "guest pass #[number]"
 				else
-					usr << "<span class='warning'>Cannot issue pass without issuing ID.</span>"
-	updateUsrDialog()
-	return
+					to_chat(usr, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
+
+	src.add_fingerprint(usr)
+	SSnanoui.update_uis(src)

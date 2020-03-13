@@ -4,7 +4,7 @@
 
 	if(istype(O,/obj/singularity))
 		if(config.forbid_singulo_possession)
-			usr << "It is forbidden to possess singularities."
+			to_chat(usr, "It is forbidden to possess singularities.")
 			return
 
 	var/turf/T = get_turf(O)
@@ -37,7 +37,6 @@
 		if(ishuman(usr))
 			var/mob/living/carbon/human/H = usr
 			H.name = H.get_visible_name()
-//		usr.regenerate_icons() //So the name is updated properly
 
 	usr.loc = O.loc // Appear where the object you were controlling is -- TLE
 	usr.client.eye = usr

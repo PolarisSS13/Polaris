@@ -4,7 +4,7 @@
 
 /obj/machinery/computer/atmoscontrol
 	name = "\improper Central Atmospherics Computer"
-	icon = 'icons/obj/computer.dmi'
+	desc = "Control the station's atmospheric systems from afar! Certified atmospherics technicians only."
 	icon_keyboard = "generic_key"
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
@@ -21,6 +21,7 @@
 /obj/machinery/computer/atmoscontrol/laptop
 	name = "Atmospherics Laptop"
 	desc = "A cheap laptop."
+	icon_screen = "atmoslaptop"
 	icon_state = "laptop"
 	icon_keyboard = "laptop_key"
 	density = 0

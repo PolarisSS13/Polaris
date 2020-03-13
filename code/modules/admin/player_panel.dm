@@ -363,20 +363,14 @@
 		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
 		"}
 
-
-
 		if(usr.client)
-			var/client/C = usr.client
-			if(is_mentor(C))
-				dat += {"<td align=center> N/A </td>"}
-			else
-				switch(is_special_character(M))
-					if(0)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-					if(1)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-					if(2)
-						dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+			switch(is_special_character(M))
+				if(0)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
+				if(1)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
+				if(2)
+					dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
 		else
 			dat += {"<td align=center> N/A </td>"}
 
@@ -392,7 +386,7 @@
 	if (ticker && ticker.current_state >= GAME_STATE_PLAYING)
 		var/dat = "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
 		dat += "Current Game Mode: <B>[ticker.mode.name]</B><BR>"
-		dat += "Round Duration: <B>[round_duration_as_text()]</B><BR>"
+		dat += "Round Duration: <B>[roundduration2text()]</B><BR>"
 		dat += "<B>Emergency shuttle</B><BR>"
 		if (!emergency_shuttle.online())
 			dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Shuttle</a><br>"

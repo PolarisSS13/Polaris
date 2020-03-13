@@ -7,7 +7,7 @@
 	var/spell/targeted/projectile/carried
 
 	penetrating = 0
-	kill_count = 10 //set by the duration of the spell
+	range = 10 //set by the duration of the spell
 
 	var/proj_trail = 0 //if it leaves a trail
 	var/proj_trail_lifespan = 0 //deciseconds
@@ -26,7 +26,7 @@
 
 /obj/item/projectile/spell_projectile/before_move()
 	if(proj_trail && src && src.loc) //pretty trails
-		var/obj/effect/overlay/trail = PoolOrNew(/obj/effect/overlay, src.loc)
+		var/obj/effect/overlay/trail = new /obj/effect/overlay(src.loc)
 		trails += trail
 		trail.icon = proj_trail_icon
 		trail.icon_state = proj_trail_icon_state

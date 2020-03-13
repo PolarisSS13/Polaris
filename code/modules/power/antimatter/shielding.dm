@@ -68,15 +68,14 @@ proc/cardinalrange(var/center)
 /obj/machinery/am_shielding/Destroy()
 	if(control_unit)	control_unit.remove_shielding(src)
 	if(processing)	shutdown_core()
-	visible_message("\red The [src.name] melts!")
+	visible_message("<font color='red'>The [src.name] melts!</font>")
 	//Might want to have it leave a mess on the floor but no sprites for now
 	..()
 	return
 
 
-/obj/machinery/am_shielding/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0))	return 1
-	return 0
+/obj/machinery/am_shielding/CanPass(atom/movable/mover, turf/target)
+	return FALSE
 
 
 /obj/machinery/am_shielding/process()
@@ -151,7 +150,7 @@ proc/cardinalrange(var/center)
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
-	machines.Add(src)
+	START_MACHINE_PROCESSING(src)
 	if(!control_unit)	return
 	control_unit.linked_cores.Add(src)
 	control_unit.reported_core_efficiency += efficiency
@@ -191,8 +190,7 @@ proc/cardinalrange(var/center)
 	icon = 'icons/obj/machines/antimatter.dmi'
 	icon_state = "box"
 	item_state = "electronic"
-	w_class = 4.0
-	flags = CONDUCT
+	w_class = ITEMSIZE_LARGE
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 2

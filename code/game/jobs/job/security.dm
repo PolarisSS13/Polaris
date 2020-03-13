@@ -1,15 +1,18 @@
+//////////////////////////////////
+//		Head of Security
+//////////////////////////////////
 /datum/job/hos
 	title = "Head of Security"
 	flag = HOS
-	head_position = 1
-	department = "Security"
+	departments_managed = list(DEPARTMENT_SECURITY)
+	departments = list(DEPARTMENT_SECURITY, DEPARTMENT_COMMAND)
+	sorting_order = 2
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "the Colony Director"
 	selection_color = "#8E2929"
-	idtype = /obj/item/weapon/card/id/security/head
 	req_admin_notify = 1
 	economic_modifier = 10
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory,
@@ -23,141 +26,113 @@
 	minimum_character_age = 25
 	minimal_player_age = 14
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/sec(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/hos(H), slot_l_ear)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/head_of_security(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/hos(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas(H), slot_wear_mask) //Grab one from the armory you donk
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud(H), slot_glasses)
-		H.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/gun(H), slot_s_store)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_l_store)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
-		H.implant_loyalty()
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/security/hos
+	job_description = "	The Head of Security manages the Security Department, keeping the station safe and making sure the rules are followed. They are expected to \
+						keep the other Department Heads, and the rest of the crew, aware of developing situations that may be a threat. If necessary, the HoS may \
+						perform the duties of absent Security roles, such as distributing gear from the Armory."
+	alt_titles = list("Head of Security" = /datum/alt_title/hos, "Security Commander" = /datum/alt_title/sec_commander, "Chief of Security" = /datum/alt_title/sec_chief)
 
+// Head of Security Alt Titles
+/datum/alt_title/hos
+	title = "Head of Security"
 
+/datum/alt_title/sec_commander
+	title = "Security Commander"
 
+/datum/alt_title/sec_chief
+	title = "Chief of Security"
+
+//////////////////////////////////
+//			Warden
+//////////////////////////////////
 /datum/job/warden
 	title = "Warden"
 	flag = WARDEN
-	department = "Security"
+	departments = list(DEPARTMENT_SECURITY)
+	sorting_order = 1
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security
 	economic_modifier = 5
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/sec(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/warden(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/warden(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud(H), slot_glasses)
-//		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas(H), slot_wear_mask) //Grab one from the armory you donk
-		H.equip_to_slot_or_del(new /obj/item/device/flash(H), slot_l_store)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_l_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/security/warden
+	job_description = "The Warden watches over the physical Security Department, making sure the Brig and Armoury are secure and in order at all times. They oversee \
+						prisoners that have been processed and brigged, and are responsible for their well being. The Warden is also in charge of distributing \
+						Armoury gear in a crisis, and retrieving it when the crisis has passed. In an emergency, the Warden may be called upon to direct the \
+						Security Department as a whole."
 
+// Warden Alt Titles
+/datum/alt_title/warden
+	title = "Warden"
 
-
+//////////////////////////////////
+//			Detective
+//////////////////////////////////
 /datum/job/detective
 	title = "Detective"
 	flag = DETECTIVE
-	department = "Security"
+	departments = list(DEPARTMENT_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security
-	alt_titles = list("Forensic Technician","Investigator")
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	economic_modifier = 5
 	minimal_player_age = 3
-	equip(var/mob/living/carbon/human/H, var/alt_title)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/det(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/detective(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/weapon/flame/lighter/zippo(H), slot_l_store)
-		if(H.backbag == 1)//Why cant some of these things spawn in his office?
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/evidence(H), slot_l_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/evidence(H), slot_in_backpack)
-		if(has_alt_title(H, alt_title,"Forensic Technician"))
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/forensics/blue(H), slot_wear_suit)
-			H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase/crimekit, slot_r_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_trench(H), slot_wear_suit)
-			H.equip_to_slot_or_del(new /obj/item/clothing/head/det(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase/crimekit(H), slot_r_hand)
-		return 1
 
+	outfit_type = /decl/hierarchy/outfit/job/security/detective
+	job_description = "A Detective works to help Security find criminals who have not properly been identified, through interviews and forensic work. \
+						For crimes only witnessed after the fact, or those with no survivors, they attempt to piece together what they can from pure evidence."
+	alt_titles = list("Detective" = /datum/alt_title/detective, "Forensic Technician" = /datum/alt_title/forensic_tech)
 
+// Detective Alt Titles
+/datum/alt_title/detective
+	title = "Detective"
 
+/datum/alt_title/forensic_tech
+	title = "Forensic Technician"
+	title_blurb = "A Forensic Technician works more with hard evidence and labwork than a Detective, but they share the purpose of solving crimes."
+	title_outfit = /decl/hierarchy/outfit/job/security/detective/forensic
+
+//////////////////////////////////
+//		Security Officer
+//////////////////////////////////
 /datum/job/officer
 	title = "Security Officer"
 	flag = OFFICER
-	department = "Security"
+	departments = list(DEPARTMENT_SECURITY)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the head of security"
+	supervisors = "the Head of Security"
 	selection_color = "#601C1C"
-	idtype = /obj/item/weapon/card/id/security
-	alt_titles = list("Junior Officer")
 	economic_modifier = 4
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/sec(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/security(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_s_store)
-		H.equip_to_slot_or_del(new /obj/item/device/flash(H), slot_l_store)
-		if(H.backbag == 1)
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_l_hand)
-		else
-			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
-		return 1
+
+	outfit_type = /decl/hierarchy/outfit/job/security/officer
+	job_description = "A Security Officer is concerned with maintaining the safety and security of the station as a whole, dealing with external threats and \
+						apprehending criminals. A Security Officer is responsible for the health, safety, and processing of any prisoner they arrest. \
+						No one is above the Law, not Security or Command."
+	alt_titles = list("Security Officer" = /datum/alt_title/sec_officer, "Junior Officer" = /datum/alt_title/junior_officer)
+
+// Security Officer Alt Titles
+/datum/alt_title/sec_officer
+	title = "Security Officer"
+
+/datum/alt_title/junior_officer
+	title = "Junior Officer"
+	title_blurb = "A Junior Officer is an inexperienced Security Officer. They likely have training, but not experience, and are frequently \
+					paired off with a more senior co-worker. Junior Officers may also be expected to take over the boring duties of other Officers \
+					including patrolling the station or maintaining specific posts."

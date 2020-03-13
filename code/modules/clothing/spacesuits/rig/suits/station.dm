@@ -19,10 +19,11 @@
 	light_overlay = "helmet_light_dual"
 	camera_networks = list(NETWORK_SECURITY)
 
+//Internal Affairs suit
 /obj/item/weapon/rig/internalaffairs
 	name = "augmented tie"
 	suit_type = "augmented suit"
-	desc = "Prepare for paperwork."
+	desc = "The last suit you'll ever wear."
 	icon_state = "internalaffairs_rig"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
@@ -30,7 +31,13 @@
 	offline_slowdown = 0
 	offline_vision_restriction = 0
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase,/obj/item/weapon/storage/secure/briefcase)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/briefcase,
+		/obj/item/weapon/storage/secure/briefcase
+		)
 
 	req_access = list()
 	req_one_access = list()
@@ -55,20 +62,32 @@
 	helm_type = null
 	boot_type = null
 
+//Mining suit
 /obj/item/weapon/rig/industrial
 	name = "industrial suit control module"
 	suit_type = "industrial hardsuit"
-	desc = "A heavy, powerful rig used by construction crews and mining corporations."
+	desc = "A heavy, powerful hardsuit used by construction crews and mining corporations."
 	icon_state = "engineering_rig"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 100, rad = 50)
-	slowdown = 3
+	slowdown = 1
 	offline_slowdown = 10
 	offline_vision_restriction = 2
 	emp_protection = -20
+	siemens_coefficient= 0.75
+	rigsuit_max_pressure = 15 * ONE_ATMOSPHERE			  // Max pressure the rig protects against when sealed
+	rigsuit_min_pressure = 0							  // Min pressure the rig protects against when sealed
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/industrial
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/bag/ore,
+		/obj/item/device/t_scanner,
+		/obj/item/weapon/pickaxe,
+		/obj/item/weapon/rcd
+		)
 
 	req_access = list()
 	req_one_access = list()
@@ -83,24 +102,41 @@
 		/obj/item/rig_module/vision/meson
 		)
 
+//Engineering suit
 /obj/item/weapon/rig/eva
 	name = "EVA suit control module"
 	suit_type = "EVA hardsuit"
-	desc = "A light rig for repairs and maintenance to the outside of habitats and vessels."
+	desc = "A light hardsuit for repairs and maintenance to the outside of habitats and vessels."
 	icon_state = "eva_rig"
 	armor = list(melee = 30, bullet = 10, laser = 20,energy = 25, bomb = 20, bio = 100, rad = 100)
 	slowdown = 0
 	offline_slowdown = 1
 	offline_vision_restriction = 1
+	siemens_coefficient= 0.75
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/eva
+	glove_type = /obj/item/clothing/gloves/gauntlets/rig/eva
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/briefcase/inflatable,
+		/obj/item/device/t_scanner,
+		/obj/item/weapon/rcd
+		)
 
 	req_access = list()
 	req_one_access = list()
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/gloves/gauntlets/rig/eva
+	name = "insulated gauntlets"
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/eva/equipped
+
+	req_access = list(access_engine)
 
 	initial_modules = list(
 		/obj/item/rig_module/device/plasmacutter,
@@ -120,17 +156,29 @@
 	slowdown = 0
 	offline_slowdown = 0
 	offline_vision_restriction = 0
+	siemens_coefficient= 0.75
+	rigsuit_max_pressure = 20 * ONE_ATMOSPHERE			  // Max pressure the rig protects against when sealed
+	rigsuit_min_pressure = 0							  // Min pressure the rig protects against when sealed
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
+	glove_type = /obj/item/clothing/gloves/gauntlets/rig/ce
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
-
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/briefcase/inflatable,
+		/obj/item/device/t_scanner,
+		/obj/item/weapon/rcd
+		)
 
 	req_access = list()
 	req_one_access = list()
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
-	boot_type =  null
-	glove_type = null
+/obj/item/clothing/gloves/gauntlets/rig/ce
+	name = "insulated gauntlets"
+	siemens_coefficient = 0
 
 /obj/item/weapon/rig/ce/equipped
 
@@ -144,14 +192,7 @@
 		/obj/item/rig_module/vision/meson
 		)
 
-	chest_type = /obj/item/clothing/suit/space/rig/ce
-	boot_type =  null
-	glove_type = null
-
-/obj/item/clothing/suit/space/rig/ce
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-
+//Research Director's suit. Just add red crowbar.
 /obj/item/weapon/rig/hazmat
 
 	name = "AMI control module"
@@ -161,12 +202,27 @@
 	armor = list(melee = 45, bullet = 5, laser = 45, energy = 80, bomb = 60, bio = 100, rad = 100)
 	slowdown = 1
 	offline_vision_restriction = 1
+	siemens_coefficient= 0.75
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazmat
 
-	helm_type = /obj/item/clothing/head/helmet/space/rig/ert
-
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/box/excavation,/obj/item/weapon/pickaxe,/obj/item/device/healthanalyzer,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/device/beacon_locator,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/hand,/obj/item/weapon/storage/bag/fossils)
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/stack/flag,
+		/obj/item/weapon/storage/excavation,
+		/obj/item/weapon/pickaxe,
+		/obj/item/device/healthanalyzer,
+		/obj/item/device/measuring_tape,
+		/obj/item/device/ano_scanner,
+		/obj/item/device/depth_scanner,
+		/obj/item/device/core_sampler,
+		/obj/item/device/gps,
+		/obj/item/device/beacon_locator,
+		/obj/item/device/radio/beacon,
+		/obj/item/weapon/pickaxe/hand,
+		/obj/item/weapon/storage/bag/fossils)
 
 	req_access = list()
 	req_one_access = list()
@@ -181,6 +237,7 @@
 		/obj/item/rig_module/device/anomaly_scanner
 		)
 
+//Paramedic suit
 /obj/item/weapon/rig/medical
 
 	name = "rescue suit control module"
@@ -190,23 +247,36 @@
 	armor = list(melee = 30, bullet = 15, laser = 20, energy = 60, bomb = 30, bio = 100, rad = 100)
 	slowdown = 1
 	offline_vision_restriction = 1
+	siemens_coefficient= 0.75
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical,/obj/item/roller )
+	allowed = list(
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/firstaid,
+		/obj/item/device/healthanalyzer,
+		/obj/item/stack/medical,
+		/obj/item/roller
+		)
 
 	req_access = list()
 	req_one_access = list()
 
 /obj/item/weapon/rig/medical/equipped
 
+	req_access = list(access_medical)
+
 	initial_modules = list(
+		/obj/item/rig_module/sprinter,
 		/obj/item/rig_module/chem_dispenser/injector,
 		/obj/item/rig_module/maneuvering_jets,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/vision/medhud
 		)
 
+//Security suit
 /obj/item/weapon/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"
@@ -216,10 +286,17 @@
 	slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = 1
+	siemens_coefficient= 0.7
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazard
 
-	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
+	allowed = list(
+		/obj/item/weapon/gun,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/melee/baton
+		)
 
 	req_access = list()
 	req_one_access = list()

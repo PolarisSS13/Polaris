@@ -1,7 +1,7 @@
 // At minimum every mob has a hear_say proc.
 
 /mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
-	if(!client)
+	if(!client && !teleop)
 		return
 
 	if(speaker && !speaker.client && istype(src,/mob/observer/dead) && is_preference_enabled(/datum/client_preference/ghost_ears) && !(speaker in view(src)))
@@ -32,14 +32,10 @@
 
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				message = pick(S.speak)
+			if(language)
+				message = language.scramble(message, languages)
 			else
-				if(language)
-					message = language.scramble(message)
-				else
-					message = stars(message)
+				message = stars(message)
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
@@ -48,6 +44,8 @@
 
 	if(italics)
 		message = "<i>[message]</i>"
+
+	message = encode_html_emphasis(message)
 
 	var/track = null
 	if(istype(src, /mob/observer/dead))
@@ -59,27 +57,72 @@
 		if(is_preference_enabled(/datum/client_preference/ghost_ears) && (speaker in view(src)))
 			message = "<b>[message]</b>"
 
-	if((sdisabilities & DEAF) || ear_deaf)
+	if(is_deaf())
 		if(!language || !(language.flags & INNATE)) // INNATE is the flag for audible-emote-language, so we don't want to show an "x talks but you cannot hear them" message if it's set
 			if(speaker == src)
-				src << "<span class='warning'>You cannot hear yourself speak!</span>"
+				to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
 			else
-				src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
+				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear.")
 	else
+		var/message_to_send = null
 		if(language)
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>")
+			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>"
 		else
-			on_hear_say("<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>"
+		if(check_mentioned(message) && is_preference_enabled(/datum/client_preference/check_mention))
+			message_to_send = "<font size='3'><b>[message_to_send]</b></font>"
+
+		on_hear_say(message_to_send)
+
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
 
+// Done here instead of on_hear_say() since that is NOT called if the mob is clientless (which includes most AI mobs).
+/mob/living/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+	..()
+	if(has_AI()) // Won't happen if no ai_holder exists or there's a player inside w/o autopilot active.
+		ai_holder.on_hear_say(speaker, message)
+
 /mob/proc/on_hear_say(var/message)
-	src << message
+	to_chat(src, message)
+	if(teleop)
+		to_chat(teleop, create_text_tag("body", "BODY:", teleop) + "[message]")
 
 /mob/living/silicon/on_hear_say(var/message)
 	var/time = say_timestamp()
-	src << "[time] [message]"
+	to_chat(src, "[time] [message]")
+	if(teleop)
+		to_chat(teleop, create_text_tag("body", "BODY:", teleop) + "[time] [message]")
+
+// Checks if the mob's own name is included inside message.  Handles both first and last names.
+/mob/proc/check_mentioned(var/message)
+	var/not_included = list("A", "The", "Of", "In", "For", "Through", "Throughout", "Therefore", "Here", "There", "Then", "Now", "I", "You", "They", "He", "She", "By")
+	var/list/valid_names = splittext(real_name, " ") // Should output list("John", "Doe") as an example.
+	valid_names -= not_included
+	var/list/nicknames = splittext(nickname, " ")
+	valid_names += nicknames
+	valid_names += special_mentions()
+	for(var/name in valid_names)
+		if(findtext(message, regex("\\b[name]\\b", "i"))) // This is to stop 'ai' from triggering if someone says 'wait'.
+			return TRUE
+	return FALSE
+
+// Override this if you want something besides the mob's name to count for being mentioned in check_mentioned().
+/mob/proc/special_mentions()
+	return list()
+
+/mob/living/silicon/ai/special_mentions()
+	return list("AI") // AI door!
+
+/proc/encode_html_emphasis(message)
+    var/tagged_message = message
+    for(var/delimiter in GLOB.speech_toppings)
+        var/regex/R = new("\\[delimiter](.+?)\\[delimiter]","g")
+        var/tag = GLOB.speech_toppings[delimiter]
+        tagged_message = R.Replace(tagged_message,"<[tag]>$1</[tag]>")
+        
+    return tagged_message
 
 /mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
@@ -99,17 +142,10 @@
 
 	if(!(language && (language.flags & INNATE))) // skip understanding checks for INNATE languages
 		if(!say_understands(speaker,language))
-			if(istype(speaker,/mob/living/simple_animal))
-				var/mob/living/simple_animal/S = speaker
-				if(S.speak && S.speak.len)
-					message = pick(S.speak)
-				else
-					return
+			if(language)
+				message = language.scramble(message, languages)
 			else
-				if(language)
-					message = language.scramble(message)
-				else
-					message = stars(message)
+				message = stars(message)
 
 		if(hard_to_hear)
 			message = stars(message)
@@ -182,49 +218,72 @@
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "[speaker_name] ([ghost_follow_link(speaker, src)])"
 
+	message = encode_html_emphasis(message)
+
 	var/formatted
 	if(language)
 		formatted = "[language.format_message_radio(message, verb)][part_c]"
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>[part_c]"
+
+
 	if((sdisabilities & DEAF) || ear_deaf)
 		if(prob(20))
-			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
+			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
 	else
 		on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 
 /proc/say_timestamp()
-	return "<span class='say_quote'>\[[worldtime2text()]\]</span>"
+	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
 
 /mob/proc/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][speaker_name][part_b][formatted]"
+	var/final_message = "[part_a][speaker_name][part_b][formatted]"
+	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
+		final_message = "<font size='3'><b>[final_message]</b></font>"
+	to_chat(src, final_message)
 
 /mob/observer/dead/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
-	src << "[part_a][track][part_b][formatted]"
+	var/final_message = "[part_a][track][part_b][formatted]"
+	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
+		final_message = "<font size='3'><b>[final_message]</b></font>"
+	to_chat(src, final_message)
 
 /mob/living/silicon/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][speaker_name][part_b][formatted]"
+	var/final_message = "[part_a][speaker_name][part_b][formatted]"
+	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
+		final_message = "[time]<font size='3'><b>[final_message]</b></font>"
+	else
+		final_message = "[time][final_message]"
+	to_chat(src, final_message)
 
 /mob/living/silicon/ai/on_hear_radio(part_a, speaker_name, track, part_b, formatted)
 	var/time = say_timestamp()
-	src << "[time][part_a][track][part_b][formatted]"
+	var/final_message = "[part_a][track][part_b][formatted]"
+	if(check_mentioned(formatted) && is_preference_enabled(/datum/client_preference/check_mention))
+		final_message = "[time]<font size='3'><b>[final_message]</b></font>"
+	else
+		final_message = "[time][final_message]"
+	to_chat(src, final_message)
 
 /mob/proc/hear_signlang(var/message, var/verb = "gestures", var/datum/language/language, var/mob/speaker = null)
 	if(!client)
 		return
 
 	if(say_understands(speaker, language))
-		message = "<B>[src]</B> [verb], \"[message]\""
+		message = "<B>[speaker]</B> [verb], \"[message]\""
 	else
-		message = "<B>[src]</B> [verb]."
+		var/adverb
+		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Adds a little bit of fuzziness
+		switch(length)
+			if(0 to 12)		adverb = " briefly"
+			if(12 to 30)	adverb = " a short message"
+			if(30 to 48)	adverb = " a message"
+			if(48 to 90)	adverb = " a lengthy message"
+			else			adverb = " a very lengthy message"
+		message = "<B>[speaker]</B> [verb][adverb]."
 
-	if(src.status_flags & PASSEMOTES)
-		for(var/obj/item/weapon/holder/H in src.contents)
-			H.show_message(message)
-		for(var/mob/living/M in src.contents)
-			M.show_message(message)
-	src.show_message(message)
+	show_message(message, type = 1) // Type 1 is visual message
 
 /mob/proc/hear_sleep(var/message)
 	var/heard = ""
@@ -236,10 +295,10 @@
 		if(copytext(heardword,1, 1) in punctuation)
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
-			heardword = copytext(heardword,1,lentext(heardword))
+			heardword = copytext(heardword,1,length(heardword))
 		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
 	else
 		heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
 
-	src << heard
+	to_chat(src,heard)

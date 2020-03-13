@@ -1,13 +1,15 @@
 /mob/living/silicon/pai
 	name = "pAI"
 	icon = 'icons/mob/pai.dmi'
-	icon_state = "repairbot"
+	icon_state = "pai-repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
 	pass_flags = 1
 	mob_size = MOB_SMALL
 
-	can_pull_size = 2
+	holder_type = /obj/item/weapon/holder/pai
+
+	can_pull_size = ITEMSIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	idcard_type = /obj/item/weapon/card/id
@@ -23,12 +25,16 @@
 	var/obj/item/device/radio/radio		// Our primary radio
 	var/obj/item/device/communicator/integrated/communicator	// Our integrated communicator.
 
-	var/chassis = "repairbot"   // A record of your chosen chassis.
+	var/chassis = "pai-repairbot"   // A record of your chosen chassis.
 	var/global/list/possible_chassis = list(
-		"Drone" = "repairbot",
-		"Cat" = "cat",
-		"Mouse" = "mouse",
-		"Monkey" = "monkey"
+		"Drone" = "pai-repairbot",
+		"Cat" = "pai-cat",
+		"Mouse" = "pai-mouse",
+		"Monkey" = "pai-monkey",
+		"Corgi" = "pai-borgi",
+		"Fox" = "pai-fox",
+		"Parrot" = "pai-parrot",
+		"Rabbit" = "pai-rabbit"
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -36,7 +42,8 @@
 		"Natural" = list("says","yells","asks"),
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
-		"Feline" = list("purrs","yowls","meows")
+		"Feline" = list("purrs","yowls","meows"),
+		"Canine" = list("yaps","barks","woofs")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -89,10 +96,12 @@
 		radio = card.radio
 
 	//Default languages without universal translator software
-	add_language("Sol Common", 1)
-	add_language("Tradeband", 1)
-	add_language("Gutter", 1)
-	add_language("Encoded Audio Language", 1)
+	add_language(LANGUAGE_SOL_COMMON, 1)
+	add_language(LANGUAGE_TRADEBAND, 1)
+	add_language(LANGUAGE_GUTTER, 1)
+	add_language(LANGUAGE_EAL, 1)
+	add_language(LANGUAGE_TERMINUS, 1)
+	add_language(LANGUAGE_SIGN, 0)
 
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
@@ -141,18 +150,18 @@
 		// 33% chance of no additional effect
 
 	src.silence_time = world.timeofday + 120 * 10		// Silence for 2 minutes
-	src << "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>"
+	to_chat(src, "<font color=green><b>Communication circuit overload. Shutting down and reloading communication circuits - speech and messaging functionality will be unavailable until the reboot is complete.</b></font>")
 	if(prob(20))
 		var/turf/T = get_turf_or_move(src.loc)
 		for (var/mob/M in viewers(T))
-			M.show_message("\red A shower of sparks spray from [src]'s inner workings.", 3, "\red You hear and smell the ozone hiss of electrical sparks being expelled violently.", 2)
+			M.show_message("<font color='red'>A shower of sparks spray from [src]'s inner workings.</font>", 3, "<font color='red'>You hear and smell the ozone hiss of electrical sparks being expelled violently.</font>", 2)
 		return src.death(0)
 
 	switch(pick(1,2,3))
 		if(1)
 			src.master = null
 			src.master_dna = null
-			src << "<font color=green>You feel unbound.</font>"
+			to_chat(src, "<font color=green>You feel unbound.</font>")
 		if(2)
 			var/command
 			if(severity  == 1)
@@ -160,9 +169,9 @@
 			else
 				command = pick("Serve", "Kill", "Love", "Hate", "Disobey", "Devour", "Fool", "Enrage", "Entice", "Observe", "Judge", "Respect", "Disrespect", "Consume", "Educate", "Destroy", "Disgrace", "Amuse", "Entertain", "Ignite", "Glorify", "Memorialize", "Analyze")
 			src.pai_law0 = "[command] your master."
-			src << "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>"
+			to_chat(src, "<font color=green>Pr1m3 d1r3c71v3 uPd473D.</font>")
 		if(3)
-			src << "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>"
+			to_chat(src, "<font color=green>You feel an electric surge run through your circuitry and become acutely aware at how lucky you are that you can still feel at all.</font>")
 
 /mob/living/silicon/pai/proc/switchCamera(var/obj/machinery/camera/C)
 	if (!C)
@@ -188,8 +197,8 @@
 	medicalActive1 = null
 	medicalActive2 = null
 	medical_cannotfind = 0
-	nanomanager.update_uis(src)
-	usr << "<span class='notice'>You reset your record-viewing software.</span>"
+	SSnanoui.update_uis(src)
+	to_chat(usr, "<span class='notice'>You reset your record-viewing software.</span>")
 
 /mob/living/silicon/pai/cancel_camera()
 	set category = "pAI Commands"
@@ -209,7 +218,7 @@
 	var/cameralist[0]
 
 	if(usr.stat == 2)
-		usr << "You can't change your camera network because you are dead!"
+		to_chat(usr, "You can't change your camera network because you are dead!")
 		return
 
 	for (var/obj/machinery/camera/C in Cameras)
@@ -220,7 +229,7 @@
 				cameralist[C.network] = C.network
 
 	src.network = input(usr, "Which network would you like to view?") as null|anything in cameralist
-	src << "\blue Switched to [src.network] camera network."
+	to_chat(src, "<font color='blue'>Switched to [src.network] camera network.</font>")
 //End of code by Mord_Sith
 */
 
@@ -256,7 +265,7 @@
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/obj/item/rig_module))
-		src << "There is no room to unfold inside this rig module. You're good and stuck."
+		to_chat(src, "There is no room to unfold inside this rig module. You're good and stuck.")
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
@@ -306,29 +315,26 @@
 	var/finalized = "No"
 	while(finalized == "No" && src.client)
 
-		choice = input(usr,"What would you like to use for your mobile chassis icon? This decision can only be made once.") as null|anything in possible_chassis
+		choice = input(usr,"What would you like to use for your mobile chassis icon?") as null|anything in possible_chassis
 		if(!choice) return
 
 		icon_state = possible_chassis[choice]
 		finalized = alert("Look at your sprite. Is this what you wish to use?",,"No","Yes")
 
 	chassis = possible_chassis[choice]
-	verbs -= /mob/living/silicon/pai/proc/choose_chassis
-	verbs += /mob/living/proc/hide
+	verbs |= /mob/living/proc/hide
 
 /mob/living/silicon/pai/proc/choose_verbs()
 	set category = "pAI Commands"
 	set name = "Choose Speech Verbs"
 
-	var/choice = input(usr,"What theme would you like to use for your speech verbs? This decision can only be made once.") as null|anything in possible_say_verbs
+	var/choice = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in possible_say_verbs
 	if(!choice) return
 
 	var/list/sayverbs = possible_say_verbs[choice]
 	speak_statement = sayverbs[1]
 	speak_exclamation = sayverbs[(sayverbs.len>1 ? 2 : sayverbs.len)]
 	speak_query = sayverbs[(sayverbs.len>2 ? 3 : sayverbs.len)]
-
-	verbs -= /mob/living/silicon/pai/proc/choose_verbs
 
 /mob/living/silicon/pai/lay_down()
 	set name = "Rest"
@@ -343,7 +349,7 @@
 	else
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 	canmove = !resting
 
@@ -360,8 +366,11 @@
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
-	close_up()
+	if(user.a_intent == I_HELP)
+		visible_message("<span class='notice'>[user.name] pats [src].</span>")
+	else
+		visible_message("<span class='danger'>[user.name] boops [src] on the head.</span>")
+		close_up()
 
 //I'm not sure how much of this is necessary, but I would rather avoid issues.
 /mob/living/silicon/pai/proc/close_up()
@@ -374,9 +383,10 @@
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
-	src.stop_pulling()
-	src.client.perspective = EYE_PERSPECTIVE
-	src.client.eye = card
+	if(client)
+		src.stop_pulling()
+		src.client.perspective = EYE_PERSPECTIVE
+		src.client.eye = card
 
 	//stop resting
 	resting = 0
@@ -408,7 +418,8 @@
 	var/obj/item/weapon/holder/H = ..(grabber, self_drop)
 	if(!istype(H))
 		return
-	H.icon_state = "pai-[icon_state]"
+
+	H.icon_state = "[chassis]"
 	grabber.update_inv_l_hand()
 	grabber.update_inv_r_hand()
 	return H
@@ -420,27 +431,42 @@
 			switch(alert(user, "Do you wish to add access to [src] or remove access from [src]?",,"Add Access","Remove Access", "Cancel"))
 				if("Add Access")
 					idcard.access |= ID.access
-					user << "<span class='notice'>You add the access from the [W] to [src].</span>"
+					to_chat(user, "<span class='notice'>You add the access from the [W] to [src].</span>")
 					return
 				if("Remove Access")
-					idcard.access = null
-					user << "<span class='notice'>You remove the access from [src].</span>"
+					idcard.access = list()
+					to_chat(user, "<span class='notice'>You remove the access from [src].</span>")
 					return
 				if("Cancel")
 					return
 		else if (istype(W, /obj/item/weapon/card/id) && idaccessible == 0)
-			user << "<span class='notice'>[src] is not accepting access modifcations at this time.</span>"
+			to_chat(user, "<span class='notice'>[src] is not accepting access modifcations at this time.</span>")
 			return
 
 /mob/living/silicon/pai/verb/allowmodification()
 	set name = "Change Access Modifcation Permission"
 	set category = "pAI Commands"
-	desc = "Allows people to modify your access or block people from modifying your access."
+	set desc = "Allows people to modify your access or block people from modifying your access."
 
 	if(idaccessible == 0)
 		idaccessible = 1
-		src << "<span class='notice'>You allow access modifications.</span>"
+		to_chat(src, "<span class='notice'>You allow access modifications.</span>")
 
 	else
 		idaccessible = 0
-		src << "<span class='notice'>You block access modfications.</span>"
+		to_chat(src, "<span class='notice'>You block access modfications.</span>")
+
+/mob/living/silicon/pai/verb/wipe_software()
+	set name = "Wipe Software"
+	set category = "OOC"
+	set desc = "Wipe your software. This is functionally equivalent to cryo or robotic storage, freeing up your job slot."
+
+	// Make sure people don't kill themselves accidentally
+	if(alert("WARNING: This will immediately wipe your software and ghost you, removing your character from the round permanently (similar to cryo and robotic storage). Are you entirely sure you want to do this?",
+					"Wipe Software", "No", "No", "Yes") != "Yes")
+		return
+
+	close_up()
+	visible_message("<b>[src]</b> fades away from the screen, the pAI device goes silent.")
+	card.removePersonality()
+	clear_client()

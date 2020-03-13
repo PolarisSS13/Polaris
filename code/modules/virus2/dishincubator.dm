@@ -1,5 +1,6 @@
 /obj/machinery/disease2/incubator/
 	name = "pathogenic incubator"
+	desc = "Encourages the growth of diseases. This model comes with a dispenser system and a small radiation generator."
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/virology.dmi'
@@ -15,10 +16,13 @@
 	var/toxins = 0
 
 /obj/machinery/disease2/incubator/attackby(var/obj/O as obj, var/mob/user as mob)
+	if(default_unfasten_wrench(user, O, 20))
+		return
+
 	if(istype(O, /obj/item/weapon/reagent_containers/glass) || istype(O,/obj/item/weapon/reagent_containers/syringe))
 
 		if(beaker)
-			user << "\The [src] is already loaded."
+			to_chat(user, "\The [src] is already loaded.")
 			return
 
 		beaker = O
@@ -26,7 +30,7 @@
 		O.loc = src
 
 		user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 		src.attack_hand(user)
 		return
@@ -34,7 +38,7 @@
 	if(istype(O, /obj/item/weapon/virusdish))
 
 		if(dish)
-			user << "The dish tray is aleady full!"
+			to_chat(user, "The dish tray is aleady full!")
 			return
 
 		dish = O
@@ -42,7 +46,7 @@
 		O.loc = src
 
 		user.visible_message("[user] adds \a [O] to \the [src]!", "You add \a [O] to \the [src]!")
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 		src.attack_hand(user)
 
@@ -82,7 +86,7 @@
 			for (var/ID in virus)
 				data["blood_already_infected"] = virus[ID]
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "dish_incubator.tmpl", src.name, 400, 600)
 		ui.set_initial_data(data)
@@ -101,7 +105,7 @@
 
 			foodsupply -= 1
 			dish.growth += 3
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 		if(radiation)
 			if(radiation > 50 & prob(5))
@@ -114,27 +118,24 @@
 			else if(prob(5))
 				dish.virus2.minormutate()
 			radiation -= 1
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 		if(toxins && prob(5))
 			dish.virus2.infectionchance -= 1
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 		if(toxins > 50)
 			dish.growth = 0
 			dish.virus2 = null
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 	else if(!dish)
 		on = 0
 		icon_state = "incubator"
-		nanomanager.update_uis(src)
+		SSnanoui.update_uis(src)
 
 	if(beaker)
 		if(foodsupply < 100 && beaker.reagents.remove_reagent("virusfood",5))
 			if(foodsupply + 10 <= 100)
 				foodsupply += 10
-			else
-				beaker.reagents.add_reagent("virusfood",(100 - foodsupply)/2)
-				foodsupply = 100
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 		if (locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
@@ -143,13 +144,13 @@
 				if(toxins > 100)
 					toxins = 100
 					break
-			nanomanager.update_uis(src)
+			SSnanoui.update_uis(src)
 
 /obj/machinery/disease2/incubator/Topic(href, href_list)
 	if (..()) return 1
 
 	var/mob/user = usr
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+	var/datum/nanoui/ui = SSnanoui.get_open_ui(user, src, "main")
 
 	src.add_fingerprint(user)
 

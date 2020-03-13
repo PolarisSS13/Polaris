@@ -2,17 +2,22 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
+	desc = "Used to cool people down for medical reasons. Totally."
 	icon = 'icons/obj/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
 	density = 1
 	anchored = 1.0
-	layer = 2.8
+	layer = UNDER_JUNK_LAYER
 	interact_offline = 1
 
 	var/on = 0
 	use_power = 1
 	idle_power_usage = 20
 	active_power_usage = 200
+	buckle_lying = FALSE
+	buckle_dir = SOUTH
+	clicksound = 'sound/machines/buttonbeep.ogg'
+	clickvol = 30
 
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
@@ -20,26 +25,36 @@
 
 	var/current_heat_capacity = 50
 
+	var/image/fluid
+
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
 	icon = 'icons/obj/cryogenics_split.dmi'
-	update_icon()
+	icon_state = "base"
 	initialize_directions = dir
 
+/obj/machinery/atmospherics/unary/cryo_cell/Initialize()
+	. = ..()
+	var/image/tank = image(icon,"tank")
+	tank.alpha = 200
+	tank.pixel_y = 18
+	tank.plane = MOB_PLANE
+	tank.layer = MOB_LAYER+0.2 //Above fluid
+	fluid = image(icon, "tube_filler")
+	fluid.pixel_y = 18
+	fluid.alpha = 200
+	fluid.plane = MOB_PLANE
+	fluid.layer = MOB_LAYER+0.1 //Below glass, above mob
+	add_overlay(tank)
+	update_icon()
+
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
-	var/turf/T = loc
+	var/turf/T = src.loc
 	T.contents += contents
 	if(beaker)
-		beaker.loc = get_step(loc, SOUTH) //Beaker is carefully ejected from the wreckage of the cryotube
-	..()
-
-/obj/machinery/atmospherics/unary/cryo_cell/initialize()
-	if(node) return
-	var/node_connect = dir
-	for(var/obj/machinery/atmospherics/target in get_step(src,node_connect))
-		if(target.initialize_directions & get_dir(target,src))
-			node = target
-			break
+		beaker.forceMove(get_step(loc, SOUTH)) //Beaker is carefully ejected from the wreckage of the cryotube
+		beaker = null
+	. = ..()
 
 /obj/machinery/atmospherics/unary/cryo_cell/process()
 	..()
@@ -64,7 +79,7 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
 	// note that relaymove will also be called for mobs outside the cell with UI open
-	if(src.occupant == user && !user.stat)
+	if(occupant == user && !user.stat)
 		go_out()
 
 /obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
@@ -92,11 +107,11 @@
 	data["hasOccupant"] = occupant ? 1 : 0
 
 	var/occupantData[0]
-	if (occupant)
+	if(occupant)
 		occupantData["name"] = occupant.name
 		occupantData["stat"] = occupant.stat
 		occupantData["health"] = occupant.health
-		occupantData["maxHealth"] = occupant.maxHealth
+		occupantData["maxHealth"] = occupant.getMaxHealth()
 		occupantData["minHealth"] = config.health_threshold_dead
 		occupantData["bruteLoss"] = occupant.getBruteLoss()
 		occupantData["oxyLoss"] = occupant.getOxyLoss()
@@ -124,13 +139,13 @@
 	data["beakerVolume"] = 0
 	if(beaker)
 		data["beakerLabel"] = beaker.label_text ? beaker.label_text : null
-		if (beaker.reagents && beaker.reagents.reagent_list.len)
+		if(beaker.reagents && beaker.reagents.reagent_list.len)
 			for(var/datum/reagent/R in beaker.reagents.reagent_list)
 				data["beakerVolume"] += R.volume
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if(!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
@@ -158,8 +173,9 @@
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
-			beaker.loc = get_step(loc, SOUTH)
+			beaker.loc = get_step(src.loc, SOUTH)
 			beaker = null
+			update_icon()
 
 	if(href_list["ejectOccupant"])
 		if(!occupant || isslime(usr) || ispAI(usr))
@@ -172,60 +188,52 @@
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "<span class='warning'>A beaker is already loaded into the machine.</span>"
+			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
 
 		beaker =  G
 		user.drop_item()
 		G.loc = src
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
+		update_icon()
 	else if(istype(G, /obj/item/weapon/grab))
-		if(!ismob(G:affecting))
+		var/obj/item/weapon/grab/grab = G
+		if(!ismob(grab.affecting))
 			return
-		for(var/mob/living/carbon/slime/M in range(1,G:affecting))
-			if(M.Victim == G:affecting)
-				usr << "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head."
-				return
-		var/mob/M = G:affecting
-		if(put_mob(M))
-			qdel(G)
+		if(occupant)
+			to_chat(user,"<span class='warning'>\The [src] is already occupied by [occupant].</span>")
+		if(grab.affecting.has_buckled_mobs())
+			to_chat(user, span("warning", "\The [grab.affecting] has other entities attached to it. Remove them first."))
+			return
+		var/mob/M = grab.affecting
+		qdel(grab)
+		put_mob(M)
+
 	return
 
+/obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(var/mob/target, var/mob/user) //Allows borgs to put people into cryo without external assistance
+	if(user.stat || user.lying || !Adjacent(user) || !target.Adjacent(user)|| !ishuman(target))
+		return
+	put_mob(target)
+
 /obj/machinery/atmospherics/unary/cryo_cell/update_icon()
-	overlays.Cut()
-	icon_state = "pod[on]"
-	var/image/I
-
-	I = image(icon, "pod[on]_top")
-	I.layer = 5 // this needs to be fairly high so it displays over most things, but it needs to be under lighting (at 10)
-	I.pixel_z = 32
-	overlays += I
-
-	if(occupant)
-		var/image/pickle = image(occupant.icon, occupant.icon_state)
-		pickle.overlays = occupant.overlays
-		pickle.pixel_z = 18
-		pickle.layer = 5
-		overlays += pickle
-
-	I = image(icon, "lid[on]")
-	I.layer = 5
-	overlays += I
-
-	I = image(icon, "lid[on]_top")
-	I.layer = 5
-	I.pixel_z = 32
-	overlays += I
+	cut_overlay(fluid)
+	fluid.color = null
+	if(on)
+		if(beaker)
+			fluid.color = beaker.reagents.get_color()
+		add_overlay(fluid)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/process_occupant()
 	if(air_contents.total_moles < 10)
 		return
 	if(occupant)
-		if(occupant.stat == 2)
+		if(occupant.stat >= DEAD)
 			return
 		occupant.bodytemperature += 2*(air_contents.temperature - occupant.bodytemperature)*current_heat_capacity/(current_heat_capacity + air_contents.heat_capacity())
 		occupant.bodytemperature = max(occupant.bodytemperature, air_contents.temperature) // this is so ugly i'm sorry for doing it i'll fix it later i promise
-		occupant.stat = 1
+		occupant.stat = UNCONSCIOUS
+		occupant.dir = SOUTH
 		if(occupant.bodytemperature < T0C)
 			occupant.sleeping = max(5, (1/occupant.bodytemperature)*2000)
 			occupant.Paralyse(max(5, (1/occupant.bodytemperature)*3000))
@@ -235,7 +243,7 @@
 				occupant.adjustOxyLoss(-1)
 			//severe damage should heal waaay slower without proper chemicals
 			if(occupant.bodytemperature < 225)
-				if (occupant.getToxLoss())
+				if(occupant.getToxLoss())
 					occupant.adjustToxLoss(max(-1, -20/occupant.getToxLoss()))
 				var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
 				var/heal_fire = occupant.getFireLoss() ? min(1, 20/occupant.getFireLoss()) : 0
@@ -267,47 +275,52 @@
 	//loc.assume_air(expel_gas)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/go_out()
-	if(!( occupant ))
+	if(!(occupant))
 		return
 	//for(var/obj/O in src)
-	//	O.loc = loc
-	if (occupant.client)
+	//	O.loc = src.loc
+	if(occupant.client)
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
-	occupant.loc = get_step(loc, SOUTH)	//this doesn't account for walls or anything, but i don't forsee that being a problem.
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
+	vis_contents -= occupant
+	occupant.pixel_x = occupant.default_pixel_x
+	occupant.pixel_y = occupant.default_pixel_y
+	occupant.loc = get_step(src.loc, SOUTH)	//this doesn't account for walls or anything, but i don't forsee that being a problem.
+	if(occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
 		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
-//	occupant.metabslow = 0
+	unbuckle_mob(occupant, force = TRUE)
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(1)
-	update_icon()
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
-	if (stat & (NOPOWER|BROKEN))
-		usr << "<span class='warning'>The cryo cell is not functioning.</span>"
+	if(stat & (NOPOWER|BROKEN))
+		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
 		return
-	if (!istype(M))
-		usr << "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>"
+	if(!istype(M))
+		to_chat(usr, "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>")
 		return
-	if (occupant)
-		usr << "<span class='danger'>The cryo cell is already occupied!</span>"
+	if(occupant)
+		to_chat(usr, "<span class='danger'>The cryo cell is already occupied!</span>")
 		return
-	if (M.abiotic())
-		usr << "<span class='warning'>Subject may not have abiotic items on.</span>"
+	if(M.abiotic())
+		to_chat(usr, "<span class='warning'>Subject may not have abiotic items on.</span>")
 		return
 	if(!node)
-		usr << "<span class='warning'>The cell is not correctly connected to its pipe network!</span>"
+		to_chat(usr, "<span class='warning'>The cell is not correctly connected to its pipe network!</span>")
 		return
-	if (M.client)
+	if(M.client)
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
 	M.stop_pulling()
 	M.loc = src
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
-		M << "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>"
+		to_chat(M, "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>")
 	occupant = M
+	buckle_mob(occupant, forced = TRUE, check_loc = FALSE)
+	vis_contents |= occupant
+	occupant.pixel_y += 19
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(2)
 //	M.metabslow = 1
@@ -320,15 +333,15 @@
 	set category = "Object"
 	set src in oview(1)
 	if(usr == occupant)//If the user is inside the tube...
-		if (usr.stat == 2)//and he's not dead....
+		if(usr.stat == 2)//and he's not dead....
 			return
-		usr << "<span class='notice'>Release sequence activated. This will take two minutes.</span>"
+		to_chat(usr, "<span class='notice'>Release sequence activated. This will take two minutes.</span>")
 		sleep(1200)
 		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
 			return
 		go_out()//and release him from the eternal prison.
 	else
-		if (usr.stat != 0)
+		if(usr.stat != 0)
 			return
 		go_out()
 	add_fingerprint(usr)
@@ -338,22 +351,22 @@
 	set name = "Move Inside"
 	set category = "Object"
 	set src in oview(1)
-	for(var/mob/living/carbon/slime/M in range(1,usr))
-		if(M.Victim == usr)
-			usr << "You're too busy getting your life sucked out of you."
+	if(isliving(usr))
+		var/mob/living/L = usr
+		if(L.has_buckled_mobs())
+			to_chat(L, span("warning", "You have other entities attached to yourself. Remove them first."))
 			return
-	if (usr.stat != 0)
-		return
-	put_mob(usr)
-	return
+		if(L.stat != CONSCIOUS)
+			return
+		put_mob(L)
 
-/atom/proc/return_air_for_internal_lifeform()
+/atom/proc/return_air_for_internal_lifeform(var/mob/living/lifeform)
 	return return_air()
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air_for_internal_lifeform()
 	//assume that the cryo cell has some kind of breath mask or something that
 	//draws from the cryo tube's environment, instead of the cold internal air.
-	if(loc)
+	if(src.loc)
 		return loc.return_air()
 	else
 		return null

@@ -96,7 +96,8 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
-	w_class = 10
+	w_class = ITEMSIZE_NO_CONTAINER
+	layer = UNDER_JUNK_LAYER
 
 	var/stat = 0
 	var/emagged = 0
@@ -111,22 +112,34 @@ Class Procs:
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
+	var/clicksound			// sound played on succesful interface. Just put it in the list of vars at the start.
+	var/clickvol = 40		// volume
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
-	var/circuit = null
-	var/frame_type = "machine"
+	var/obj/item/weapon/circuitboard/circuit = null
+
+	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
 /obj/machinery/New(l, d=0)
 	..(l)
 	if(d)
 		set_dir(d)
-	if(!machinery_sort_required && ticker)
-		dd_insertObjectList(machines, src)
+	if(circuit)
+		circuit = new circuit(src)
+
+/obj/machinery/Initialize()
+	. = ..()
+	global.machines += src
+	if(!speed_process)
+		START_MACHINE_PROCESSING(src)
 	else
-		machines += src
-		machinery_sort_required = 1
+		START_PROCESSING(SSfastprocess, src)
 
 /obj/machinery/Destroy()
-	machines -= src
+	if(!speed_process)
+		STOP_MACHINE_PROCESSING(src)
+	else
+		STOP_PROCESSING(SSfastprocess, src)
+	global.machines -= src
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.
@@ -135,20 +148,24 @@ Class Procs:
 				component_parts -= A
 	if(contents) // The same for contents.
 		for(var/atom/A in contents)
-			qdel(A)
+			if(ishuman(A))
+				var/mob/living/carbon/human/H = A
+				H.client.eye = H.client.mob
+				H.client.perspective = MOB_PERSPECTIVE
+				H.loc = src.loc
+			else
+				qdel(A)
 	return ..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
 	if(!(use_power || idle_power_usage || active_power_usage))
 		return PROCESS_KILL
 
-	return
-
 /obj/machinery/emp_act(severity)
 	if(use_power && stat == 0)
 		use_power(7500/severity)
 
-		var/obj/effect/overlay/pulse2 = PoolOrNew(/obj/effect/overlay, src.loc)
+		var/obj/effect/overlay/pulse2 = new /obj/effect/overlay(src.loc)
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
@@ -165,11 +182,11 @@ Class Procs:
 			qdel(src)
 			return
 		if(2.0)
-			if (prob(50))
+			if(prob(50))
 				qdel(src)
 				return
 		if(3.0)
-			if (prob(25))
+			if(prob(25))
 				qdel(src)
 				return
 		else
@@ -182,22 +199,21 @@ Class Procs:
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
-	if(src.use_power == 1)
-		use_power(idle_power_usage,power_channel, 1)
-	else if(src.use_power >= 2)
-		use_power(active_power_usage,power_channel, 1)
+	if(use_power == 1)
+		use_power(idle_power_usage, power_channel, 1)
+	else if(use_power >= 2)
+		use_power(active_power_usage, power_channel, 1)
 	return 1
 
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)
 
 /obj/machinery/proc/inoperable(var/additional_flags = 0)
-	return (stat & (NOPOWER|BROKEN|additional_flags))
+	return (stat & (NOPOWER | BROKEN | additional_flags))
 
 /obj/machinery/CanUseTopic(var/mob/user)
-	if(!interact_offline && (stat & (NOPOWER|BROKEN)))
+	if(!interact_offline && (stat & (NOPOWER | BROKEN)))
 		return STATUS_CLOSE
-
 	return ..()
 
 /obj/machinery/CouldUseTopic(var/mob/user)
@@ -214,29 +230,32 @@ Class Procs:
 		// For some reason attack_robot doesn't work
 		// This is to stop robots from using cameras to remotely control machines.
 		if(user.client && user.client.eye == user)
-			return src.attack_hand(user)
+			return attack_hand(user)
 	else
-		return src.attack_hand(user)
+		return attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
+
 	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
-	if ( ! (istype(usr, /mob/living/carbon/human) || \
-			istype(usr, /mob/living/silicon)))
-		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
+	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
+		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return 1
-	if (ishuman(user))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 55)
 			visible_message("<span class='warning'>[H] stares cluelessly at [src].</span>")
 			return 1
 		else if(prob(H.getBrainLoss()))
-			user << "<span class='warning'>You momentarily forget how to use [src].</span>"
+			to_chat(user, "<span class='warning'>You momentarily forget how to use [src].</span>")
 			return 1
 
-	src.add_fingerprint(user)
+	if(clicksound && istype(user, /mob/living/carbon))
+		playsound(src, clicksound, clickvol)
+
+	add_fingerprint(user)
 
 	return ..()
 
@@ -252,7 +271,7 @@ Class Procs:
 		O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
 
 /obj/machinery/proc/ping(text=null)
-	if (!text)
+	if(!text)
 		text = "\The [src] pings."
 
 	state(text, "blue")
@@ -266,7 +285,7 @@ Class Procs:
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
-	if (electrocute_mob(user, get_area(src), src, 0.7))
+	if(electrocute_mob(user, get_area(src), src, 0.7))
 		var/area/temp_area = get_area(src)
 		if(temp_area)
 			var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
@@ -276,6 +295,13 @@ Class Procs:
 		if(user.stunned)
 			return 1
 	return 0
+
+/obj/machinery/proc/default_apply_parts()
+	var/obj/item/weapon/circuitboard/CB = circuit
+	if(!istype(CB))
+		return
+	CB.apply_default_parts(src)
+	RefreshParts()
 
 /obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 	if(!istype(R))
@@ -298,57 +324,137 @@ Class Procs:
 						component_parts -= A
 						component_parts += B
 						B.loc = null
-						user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+						to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
 						break
 			update_icon()
 			RefreshParts()
 	else
-		user << "<span class='notice'>Following parts detected in the machine:</span>"
-		for(var/var/obj/item/C in component_parts)
-			user << "<span class='notice'>    [C.name]</span>"
+		to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
+		for(var/var/obj/item/C in component_parts) //var/var/obj/item/C?
+			to_chat(user, "<span class='notice'>    [C.name]</span>")
 	return 1
 
-/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/weapon/crowbar/C)
-	if(!istype(C))
+// Default behavior for wrenching down machines.  Supports both delay and instant modes.
+/obj/machinery/proc/default_unfasten_wrench(var/mob/user, var/obj/item/W, var/time = 0)
+	if(!W.is_wrench())
+		return FALSE
+	if(panel_open)
+		return FALSE // Close panel first!
+	playsound(loc, W.usesound, 50, 1)
+	var/actual_time = W.toolspeed * time
+	if(actual_time != 0)
+		user.visible_message( \
+			"<span class='warning'>\The [user] begins [anchored ? "un" : ""]securing \the [src].</span>", \
+			"<span class='notice'>You start [anchored ? "un" : ""]securing \the [src].</span>")
+	if(actual_time == 0 || do_after(user, actual_time, target = src))
+		user.visible_message( \
+			"<span class='warning'>\The [user] has [anchored ? "un" : ""]secured \the [src].</span>", \
+			"<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
+		anchored = !anchored
+		power_change() //Turn on or off the machine depending on the status of power in the new area.
+		update_icon()
+	return TRUE
+
+/obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/C)
+	if(!C.is_crowbar())
 		return 0
 	if(!panel_open)
 		return 0
 	. = dismantle()
 
-/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/weapon/screwdriver/S)
-	if(!istype(S))
+/obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
+	if(!S.is_screwdriver())
 		return 0
-	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+	playsound(src, S.usesound, 50, 1)
 	panel_open = !panel_open
-	user << "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>"
+	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>")
 	update_icon()
 	return 1
 
+/obj/machinery/proc/computer_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
+	if(!S.is_screwdriver())
+		return 0
+	if(!circuit)
+		return 0
+	to_chat(user, "<span class='notice'>You start disconnecting the monitor.</span>")
+	playsound(src, S.usesound, 50, 1)
+	if(do_after(user, 20 * S.toolspeed))
+		if(stat & BROKEN)
+			to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+			new /obj/item/weapon/material/shard(src.loc)
+		else
+			to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+		. = dismantle()
+
+/obj/machinery/proc/alarm_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
+	if(!S.is_screwdriver())
+		return 0
+	playsound(src, S.usesound, 50, 1)
+	panel_open = !panel_open
+	to_chat(user, "The wires have been [panel_open ? "exposed" : "unexposed"]")
+	update_icon()
+	return 1
+
+/obj/machinery/proc/alarm_deconstruction_wirecutters(var/mob/user, var/obj/item/W)
+	if(!W.is_wirecutter())
+		return 0
+	if(!panel_open)
+		return 0
+	user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
+	playsound(src.loc, W.usesound, 50, 1)
+	new/obj/item/stack/cable_coil(get_turf(src), 5)
+	. = dismantle()
+
 /obj/machinery/proc/dismantle()
-	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
+	playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+	//TFF 3/6/19 - port Cit RP fix of infinite frames. If it doesn't have a circuit board, don't create a frame. Return a smack instead. BONK!
+	if(!circuit)
+		return 0
+	var/obj/structure/frame/A = new /obj/structure/frame(src.loc)
 	var/obj/item/weapon/circuitboard/M = circuit
 	A.circuit = M
 	A.anchored = 1
-	A.density = 1
 	A.frame_type = M.board_type
-	if(A.frame_type in A.no_circuit)
+	if(A.frame_type.circuit)
 		A.need_circuit = 0
-	for (var/obj/D in src.component_parts)
-		D.forceMove(loc)
-	if(A.components)
-		A.components.Cut()
+
+	if(A.frame_type.frame_class == FRAME_CLASS_ALARM || A.frame_type.frame_class == FRAME_CLASS_DISPLAY)
+		A.density = 0
 	else
-		A.components = list()
-	component_parts = list()
-	A.icon_state = "[A.frame_type]_3"
-	A.state = 3
-	A.dir = dir
+		A.density = 1
+
+	if(A.frame_type.frame_class == FRAME_CLASS_MACHINE)
+		for(var/obj/D in component_parts)
+			D.forceMove(src.loc)
+		if(A.components)
+			A.components.Cut()
+		else
+			A.components = list()
+		component_parts = list()
+		A.check_components()
+
+	if(A.frame_type.frame_class == FRAME_CLASS_ALARM)
+		A.state = FRAME_FASTENED
+	else if(A.frame_type.frame_class == FRAME_CLASS_COMPUTER || A.frame_type.frame_class == FRAME_CLASS_DISPLAY)
+		if(stat & BROKEN)
+			A.state = FRAME_WIRED
+		else
+			A.state = FRAME_PANELED
+	else
+		A.state = FRAME_WIRED
+
+	A.set_dir(dir)
 	A.pixel_x = pixel_x
 	A.pixel_y = pixel_y
-	A.check_components()
 	A.update_desc()
+	A.update_icon()
 	M.loc = null
 	M.deconstruct(src)
 	qdel(src)
 	return 1
+
+/datum/proc/apply_visual(mob/M)
+	return
+
+/datum/proc/remove_visual(mob/M)
+	return

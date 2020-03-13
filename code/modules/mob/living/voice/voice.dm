@@ -8,11 +8,8 @@
 	emote_type = 2 //This lets them emote through containers.  The communicator has a image feed of the person calling them so...
 
 /mob/living/voice/New(loc)
-	add_language("Galactic Common")
-	for(var/datum/language/L in languages) //This is needed to get around some saycode problems.
-		if(L.name == "Galactic Common")
-			set_default_language(L)
-			break
+	add_language(LANGUAGE_GALCOM)
+	set_default_language(GLOB.all_languages[LANGUAGE_GALCOM])
 
 	if(istype(loc, /obj/item/device/communicator))
 		comm = loc
@@ -51,7 +48,7 @@
 // Description: Removes reference to the communicator, so it can qdel() successfully.
 /mob/living/voice/Destroy()
 	comm = null
-	..()
+	return ..()
 
 // Proc: ghostize()
 // Parameters: None
@@ -72,7 +69,7 @@
 	if(comm)
 		comm.close_connection(user = src, target = src, reason = "[src] hung up")
 	else
-		src << "You appear to not be inside a communicator.  This is a bug and you should report it."
+		to_chat(src, "You appear to not be inside a communicator.  This is a bug and you should report it.")
 
 // Verb: change_name()
 // Parameters: None
@@ -93,7 +90,7 @@
 		log_game(msg)
 		src.name = new_name
 	else
-		src << "<span class='warning'>Invalid name.  Rejected.</span>"
+		to_chat(src, "<span class='warning'>Invalid name.  Rejected.</span>")
 
 // Proc: Life()
 // Parameters: None
@@ -111,7 +108,8 @@
 	//Speech bubbles.
 	if(comm)
 		var/speech_bubble_test = say_test(message)
-		var/image/speech_bubble = image('icons/mob/talk.dmi',comm,"h[speech_bubble_test]")
+		var/speech_type = speech_bubble_appearance()
+		var/image/speech_bubble = image('icons/mob/talk.dmi',comm,"[speech_type][speech_bubble_test]")
 		spawn(30)
 			qdel(speech_bubble)
 
@@ -120,6 +118,23 @@
 		src << speech_bubble
 
 	..(message, speaking, verb, alt_name, whispering) //mob/living/say() can do the actual talking.
+
+// Proc: speech_bubble_appearance()
+// Parameters: 0
+// Description: Gets the correct icon_state information for chat bubbles to work.
+/mob/living/voice/speech_bubble_appearance()
+	return "comm"
+
+/mob/living/voice/say_understands(var/other,var/datum/language/speaking = null)
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon))
+			return 1
+		if (istype(other, /mob/living/silicon))
+			return 1
+		if (istype(other, /mob/living/carbon/brain))
+			return 1
+	return ..()
 
 /mob/living/voice/custom_emote(var/m_type=1,var/message = null,var/range=world.view)
 	if(!comm) return

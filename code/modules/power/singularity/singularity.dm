@@ -1,5 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
+GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
+
 /obj/singularity/
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
@@ -7,7 +9,7 @@
 	icon_state = "singularity_s1"
 	anchored = 1
 	density = 1
-	layer = 6
+	plane = ABOVE_PLANE
 	light_range = 6
 	unacidable = 1 //Don't comment this out.
 
@@ -29,25 +31,21 @@
 
 	var/chained = 0//Adminbus chain-grab
 
-/obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+/obj/singularity/New(loc, var/starting_energy = 50)
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
 
-	if (temp)
-		spawn (temp)
-			qdel(src)
-
 	..()
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 
 /obj/singularity/Destroy()
-	processing_objects -= src
-	..()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/singularity/attack_hand(mob/user as mob)
 	consume(user)
@@ -82,7 +80,7 @@
 	dissipate()
 	check_energy()
 
-	if (current_size >= STAGE_THREE)
+	if (current_size >= STAGE_TWO)
 		move()
 		pulse()
 
@@ -148,7 +146,7 @@
 			pixel_y = -32
 			grav_pull = 6
 			consume_range = 1
-			dissipate_delay = 5
+			dissipate_delay = 10
 			dissipate_track = 0
 			dissipate_strength = 5
 			overlays = 0
@@ -192,7 +190,7 @@
 				consume_range = 3
 				dissipate_delay = 10
 				dissipate_track = 0
-				dissipate_strength = 10
+				dissipate_strength = 8
 				overlays = 0
 				if(chained)
 					overlays = "chain_s7"
@@ -267,19 +265,15 @@
 	return 1
 
 /obj/singularity/proc/eat()
-	for(var/atom/X in orange(grav_pull, src))
+	for(var/T in orange(grav_pull, src))
+		var/atom/X = T
+		if(!X.simulated)
+			continue
 		var/dist = get_dist(X, src)
-		var/obj/singularity/S = src
-		if(!istype(src))
-			return
 		if(dist > consume_range)
-			X.singularity_pull(S, current_size)
-		else if(dist <= consume_range)
+			X.singularity_pull(src, current_size)
+		else
 			consume(X)
-
-	//for (var/turf/T in trange(grav_pull, src)) //TODO: Create a similar trange for orange to prevent snowflake of self check.
-	//	consume(T)
-
 	return
 
 /obj/singularity/proc/consume(const/atom/A)
@@ -298,7 +292,7 @@
 	if(target && prob(60))
 		movement_dir = get_dir(src,target) //moves to a singulo beacon, if there is one
 
-	if(current_size >= 9)//The superlarge one does not care about things in its way
+	if(current_size >= STAGE_FIVE)//The superlarge one does not care about things in its way
 		spawn(0)
 			step(src, movement_dir)
 		spawn(1)
@@ -319,17 +313,17 @@
 	var/steps = 0
 	if(!step)
 		switch(current_size)
-			if(1)
+			if(STAGE_ONE)
 				steps = 1
-			if(3)
+			if(STAGE_TWO)
 				steps = 3//Yes this is right
-			if(5)
+			if(STAGE_THREE)
 				steps = 3
-			if(7)
+			if(STAGE_FOUR)
 				steps = 4
-			if(9)
+			if(STAGE_FIVE)
 				steps = 5
-			if(11)
+			if(STAGE_SUPER)
 				steps = 6
 	else
 		steps = step
@@ -397,7 +391,7 @@
 			mezzer()
 		else
 			return 0
-	if(current_size == 11)
+	if(current_size == STAGE_SUPER)
 		smwave()
 	return 1
 
@@ -406,15 +400,13 @@
 	var/toxrange = 10
 	var/toxdamage = 4
 	var/radiation = 15
-	var/radiationmin = 3
 	if (src.energy>200)
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
-		radiationmin = round((radiation/5),1)//
+	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		M.apply_effect(rand(radiationmin,radiation), IRRADIATE)
 		toxdamage = (toxdamage - (toxdamage*M.getarmor(null, "rad")))
 		M.apply_effect(toxdamage, TOX)
 	return
@@ -429,32 +421,32 @@
 		if(M.stat == CONSCIOUS)
 			if (istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(istype(H.glasses,/obj/item/clothing/glasses/meson) && current_size != 11)
-					H << "<span class=\"notice\">You look directly into The [src.name], good thing you had your protective eyewear on!</span>"
+				if(istype(H.glasses,/obj/item/clothing/glasses/meson) && current_size != STAGE_SUPER)
+					to_chat(H, "<span class=\"notice\">You look directly into The [src.name], good thing you had your protective eyewear on!</span>")
 					return
 				else
-					H << "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>"
-		M << "<span class='danger'>You look directly into The [src.name] and feel [current_size == 11 ? "helpless" : "weak"].</span>"
+					to_chat(H, "<span class=\"warning\">You look directly into The [src.name], but your eyewear does absolutely nothing to protect you from it!</span>")
+		to_chat(M, "<span class='danger'>You look directly into The [src.name] and feel [current_size == STAGE_SUPER ? "helpless" : "weak"].</span>")
 		M.apply_effect(3, STUN)
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='danger'>[] stares blankly at The []!</span>", M, src), 1)
 
 /obj/singularity/proc/emp_area()
-	if(current_size != 11)
-		empulse(src, 8, 10)
+	if(current_size != STAGE_SUPER)
+		empulse(src, 4, 6, 8, 10)
 	else
-		empulse(src, 12, 16)
+		empulse(src, 12, 14, 16, 18)
 
 /obj/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))
 		if(prob(67))
-			M.apply_effect(rand(energy), IRRADIATE)
-			M << "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>"
-			M << "<span class=\"notice\">Miraculously, it fails to kill you.</span>"
+			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
 		else
-			M << "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>"
-			M << "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>"
+			to_chat(M, "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
 			M.dust()
+	SSradiation.radiate(src, rand(energy))
 	return
 
 /obj/singularity/proc/pulse()
@@ -467,15 +459,15 @@
 	overlays = 0
 	move_self = 0
 	switch (current_size)
-		if(1)
+		if(STAGE_ONE)
 			overlays += image('icons/obj/singularity.dmi',"chain_s1")
-		if(3)
+		if(STAGE_TWO)
 			overlays += image('icons/effects/96x96.dmi',"chain_s3")
-		if(5)
+		if(STAGE_THREE)
 			overlays += image('icons/effects/160x160.dmi',"chain_s5")
-		if(7)
+		if(STAGE_FOUR)
 			overlays += image('icons/effects/224x224.dmi',"chain_s7")
-		if(9)
+		if(STAGE_FIVE)
 			overlays += image('icons/effects/288x288.dmi',"chain_s9")
 
 /obj/singularity/proc/on_release()

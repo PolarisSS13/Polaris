@@ -9,7 +9,7 @@
 
 /proc/ChristmasEvent()
 	for(var/obj/structure/flora/tree/pine/xmas in world)
-		var/mob/living/simple_animal/hostile/tree/evil_tree = new /mob/living/simple_animal/hostile/tree(xmas.loc)
+		var/mob/living/simple_mob/animal/space/tree/evil_tree = new /mob/living/simple_mob/animal/space/tree(xmas.loc)
 		evil_tree.icon_state = xmas.icon_state
 		evil_tree.icon_living = evil_tree.icon_state
 		evil_tree.icon_dead = evil_tree.icon_state
@@ -27,7 +27,7 @@
 	..()
 
 /obj/item/weapon/toy/xmas_cracker/attack(mob/target, mob/user)
-	if( !cracked && istype(target,/mob/living/carbon/human) && (target.stat == CONSCIOUS) && !target.get_active_hand() )
+	if( !cracked && (istype(target,/mob/living/silicon) || (istype(target,/mob/living/carbon/human) && !target.get_active_hand())) && target.stat == CONSCIOUS)
 		target.visible_message("<span class='notice'>[user] and [target] pop \an [src]! *pop*</span>", "<span class='notice'>You pull \an [src] with [target]! *pop*</span>", "<span class='notice'>You hear a *pop*.</span>")
 		var/obj/item/weapon/paper/Joke = new /obj/item/weapon/paper(user.loc)
 		Joke.name = "[pick("awful","terrible","unfunny")] joke"

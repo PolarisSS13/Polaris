@@ -4,6 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "blueprints"
 	attack_verb = list("attacked", "bapped", "hit")
+	preserve_item = 1
 	var/const/AREA_ERRNONE = 0
 	var/const/AREA_STATION = 1
 	var/const/AREA_SPACE =   2
@@ -19,9 +20,26 @@
 	var/const/ROOM_ERR_SPACE = -1
 	var/const/ROOM_ERR_TOOLARGE = -2
 
+	var/static/list/SPACE_AREA_TYPES = list(
+		/area/space,
+		/area/mine
+	)
+	var/static/list/SPECIAL_AREA_TYPES = list(
+		/area/shuttle,
+		/area/admin,
+		/area/arrival,
+		/area/centcom,
+		/area/asteroid,
+		/area/tdome,
+		/area/syndicate_station,
+		/area/wizard_station,
+		/area/prison
+		// /area/derelict //commented out, all hail derelict-rebuilders!
+	)
+
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))
-		M << "This stack of blue paper means nothing to you." //monkeys cannot into projecting
+		to_chat(M, "This stack of blue paper means nothing to you.") //monkeys cannot into projecting
 		return
 	interact()
 	return
@@ -48,7 +66,7 @@
 	var/area/A = get_area()
 	var/text = {"<HTML><head><title>[src]</title></head><BODY>
 <h2>[station_name()] blueprints</h2>
-<small>Property of [company_name]. For heads of staff only. Store in high-secure storage.</small><hr>
+<small>Property of [using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>
 "}
 	switch (get_area_type())
 		if (AREA_SPACE)
@@ -79,22 +97,11 @@ move an amendment</a> to the drawing.</p>
 	return A
 
 /obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
-	if(istype(A, /area/space))
-		return AREA_SPACE
-	var/list/SPECIALS = list(
-		/area/shuttle,
-		/area/admin,
-		/area/arrival,
-		/area/centcom,
-		/area/asteroid,
-		/area/tdome,
-		/area/syndicate_station,
-		/area/wizard_station,
-		/area/prison
-		// /area/derelict //commented out, all hail derelict-rebuilders!
-	)
-	for (var/type in SPECIALS)
-		if ( istype(A,type) )
+	for(var/type in SPACE_AREA_TYPES)
+		if(istype(A, type))
+			return AREA_SPACE
+	for (var/type in SPECIAL_AREA_TYPES)
+		if(istype(A, type))
 			return AREA_SPECIAL
 	return AREA_STATION
 
@@ -104,20 +111,20 @@ move an amendment</a> to the drawing.</p>
 	if(!istype(res,/list))
 		switch(res)
 			if(ROOM_ERR_SPACE)
-				usr << "<span class='warning'>The new area must be completely airtight!</span>"
+				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")
 				return
 			if(ROOM_ERR_TOOLARGE)
-				usr << "<span class='warning'>The new area too large!</span>"
+				to_chat(usr, "<span class='warning'>The new area too large!</span>")
 				return
 			else
-				usr << "<span class='warning'>Error! Please notify administration!</span>"
+				to_chat(usr, "<span class='warning'>Error! Please notify administration!</span>")
 				return
 	var/list/turf/turfs = res
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
 	if(!str || !length(str)) //cancel
 		return
 	if(length(str) > 50)
-		usr << "<span class='warning'>Name too long.</span>"
+		to_chat(usr, "<span class='warning'>Name too long.</span>")
 		return
 	var/area/A = new
 	A.name = str
@@ -153,11 +160,11 @@ move an amendment</a> to the drawing.</p>
 	if(!str || !length(str) || str==prevname) //cancel
 		return
 	if(length(str) > 50)
-		usr << "<span class='warning'>Text too long.</span>"
+		to_chat(usr, "<span class='warning'>Text too long.</span>")
 		return
 	set_area_machinery_title(A,str,prevname)
 	A.name = str
-	usr << "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>"
+	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
 	interact()
 	return
 

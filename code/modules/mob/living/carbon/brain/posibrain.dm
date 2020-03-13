@@ -3,7 +3,7 @@
 	desc = "A cube of shining metal, four inches to a side and covered in shallow grooves."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "posibrain"
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 
 	var/searching = 0
@@ -16,7 +16,7 @@
 /obj/item/device/mmi/digital/posibrain/attack_self(mob/user as mob)
 	if(brainmob && !brainmob.key && searching == 0)
 		//Start the process of searching for a new user.
-		user << "\blue You carefully locate the manual activation switch and start the positronic brain's boot process."
+		to_chat(user, "<font color='blue'>You carefully locate the manual activation switch and start the positronic brain's boot process.</font>")
 		icon_state = "posibrain-searching"
 		src.searching = 1
 		src.request_player()
@@ -49,7 +49,7 @@
 	..()
 	if(brainmob.mind)
 		brainmob.mind.assigned_role = "Positronic Brain"
-	brainmob << "<span class='notify'>You feel slightly disoriented. That's normal when you're just a metal cube.</span>"
+	to_chat(brainmob, "<span class='notify'>You feel slightly disoriented. That's normal when you're just a metal cube.</span>")
 	icon_state = "posibrain-occupied"
 	return
 
@@ -60,28 +60,30 @@
 	src.brainmob.ckey = candidate.ckey
 	src.brainmob.mind.reset()
 	src.name = "positronic brain ([src.brainmob.name])"
-	src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
-	src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
-	src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
-	src.brainmob << "<b>Use say #b to speak to other artificial intelligences.</b>"
+	to_chat(src.brainmob, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+	to_chat(src.brainmob, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
+	to_chat(src.brainmob, "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>")
+	to_chat(src.brainmob, "<b>Use say #b to speak to other artificial intelligences.</b>")
 	src.brainmob.mind.assigned_role = "Positronic Brain"
 
 	var/turf/T = get_turf_or_move(src.loc)
 	for (var/mob/M in viewers(T))
-		M.show_message("\blue The positronic brain chimes quietly.")
+		M.show_message("<font color='blue'>The positronic brain beeps as it loads a personality.</font>")
+	playsound(src, 'sound/misc/boobeebeep.ogg', 50, 1)
 	icon_state = "posibrain-occupied"
 
 /obj/item/device/mmi/digital/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
 
 	if(src.brainmob && src.brainmob.key) return
-	world.log << "Resetting Posibrain: [brainmob][brainmob ? ", [brainmob.key]" : ""]"
+	to_world_log("Resetting Posibrain: [brainmob][brainmob ? ", [brainmob.key]" : ""]")
 
 	src.searching = 0
 	icon_state = "posibrain"
 
 	var/turf/T = get_turf_or_move(src.loc)
 	for (var/mob/M in viewers(T))
-		M.show_message("\blue The positronic brain buzzes quietly, and the golden lights fade away. Perhaps you could try again?")
+		M.show_message("<font color='blue'>The positronic brain buzzes and beeps, and the golden lights fade away. Perhaps you could try again?</font>")
+	playsound(src, 'sound/misc/buzzbeep.ogg', 50, 1)
 
 /obj/item/device/mmi/digital/posibrain/examine(mob/user)
 	if(!..(user))
@@ -99,7 +101,7 @@
 	else
 		msg += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
 	msg += "</span><span class='info'>*---------*</span>"
-	user << msg
+	to_chat(user,msg)
 	return
 
 /obj/item/device/mmi/digital/posibrain/emp_act(severity)
@@ -112,7 +114,9 @@
 			if(2)
 				src.brainmob.emp_damage += rand(10,20)
 			if(3)
-				src.brainmob.emp_damage += rand(0,10)
+				src.brainmob.emp_damage += rand(5,10)
+			if(4)
+				src.brainmob.emp_damage += rand(0,5)
 	..()
 
 /obj/item/device/mmi/digital/posibrain/New()

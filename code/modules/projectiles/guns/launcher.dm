@@ -1,8 +1,7 @@
 /obj/item/weapon/gun/launcher
 	name = "launcher"
 	desc = "A device that launches things."
-	w_class = 5.0
-	flags =  CONDUCT
+	w_class = ITEMSIZE_HUGE
 	slot_flags = SLOT_BACK
 
 	var/release_force = 0
@@ -16,7 +15,7 @@
 
 //Override this to avoid a runtime with suicide handling.
 /obj/item/weapon/gun/launcher/handle_suicide(mob/living/user)
-	user << "\red Shooting yourself with \a [src] is pretty tricky. You can't seem to manage it."
+	to_chat(user, "<font color='red'>Shooting yourself with \a [src] is pretty tricky. You can't seem to manage it.</font>")
 	return
 
 /obj/item/weapon/gun/launcher/proc/update_release_force(obj/item/projectile)

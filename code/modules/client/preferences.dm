@@ -1,4 +1,4 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
+#define SAVE_RESET -1
 
 var/list/preferences_datums = list()
 
@@ -21,10 +21,13 @@ datum/preferences
 	var/UI_style = "Midnight"
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
+	var/tooltipstyle = "Midnight"		//Style for popup tooltips
+	var/client_fps = 0
 
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
+	var/nickname						//our character's nickname
 	var/age = 30						//age of character
 	var/spawnpoint = "Arrivals Shuttle" //where this character will spawn (0-2).
 	var/b_type = "A+"					//blood type (not-chooseable)
@@ -45,17 +48,27 @@ datum/preferences
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
-	var/species = "Human"               //Species datum to use.
+	var/species = SPECIES_HUMAN         //Species datum to use.
 	var/species_preview                 //Used for the species selection window.
 	var/list/alternate_languages = list() //Secondary language(s)
 	var/list/language_prefixes = list() //Kanguage prefix keys
-	var/list/gear						//Custom/fluff item loadout.
+	var/list/gear						//Left in for Legacy reasons, will no longer save.
+	var/list/gear_list = list()			//Custom/fluff item loadouts.
+	var/gear_slot = 1					//The current gear save slot
+	var/list/traits						//Traits which modifier characters for better or worse (mostly worse).
+	var/synth_color	= 0					//Lets normally uncolorable synth parts be colorable.
+	var/r_synth							//Used with synth_color to color synth parts that normaly can't be colored.
+	var/g_synth							//Same as above
+	var/b_synth							//Same as above
+	var/synth_markings = 0				//Enable/disable markings on synth parts.
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
 	var/citizenship = "None"            //Current home system.
-	var/faction = "None"                //Antag faction/general associated faction.
+	var/faction = "None"                //General associated faction.
 	var/religion = "None"               //Religious association.
+	var/antag_faction = "None"			//Antag associated faction.
+	var/antag_vis = "Hidden"			//How visible antag association is to others.
 
 		//Mob preview
 	var/icon/preview_icon = null
@@ -74,7 +87,7 @@ datum/preferences
 	var/job_engsec_low = 0
 
 	//Keeps track of preferrence for not getting any wanted jobs
-	var/alternate_option = 0
+	var/alternate_option = 1
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
@@ -86,8 +99,12 @@ datum/preferences
 	var/list/rlimb_data = list()
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
+	var/list/body_markings = list() // "name" = "#rgbcolor"
+
 	var/list/flavor_texts = list()
 	var/list/flavour_texts_robot = list()
+
+	var/list/body_descriptors = list()
 
 	var/med_record = ""
 	var/sec_record = ""
@@ -95,7 +112,7 @@ datum/preferences
 	var/exploit_record = ""
 	var/disabilities = 0
 
-	var/nanotrasen_relation = "Neutral"
+	var/economic_status = "Average"
 
 	var/uplinklocation = "PDA"
 
@@ -112,6 +129,8 @@ datum/preferences
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
 
+	var/lastnews // Hash of last seen lobby news content.
+
 /datum/preferences/New(client/C)
 	player_setup = new(src)
 	set_biological_gender(pick(MALE, FEMALE))
@@ -119,6 +138,8 @@ datum/preferences
 	b_type = RANDOM_BLOOD_TYPE
 
 	gear = list()
+	gear_list = list()
+	gear_slot = 1
 
 	if(istype(C))
 		client = C
@@ -185,7 +206,7 @@ datum/preferences
 	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
-		user << "<span class='danger'>No mob exists for the given client!</span>"
+		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
 		close_load_dialog(user)
 		return
 
@@ -195,7 +216,9 @@ datum/preferences
 		dat += "Slot - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
-		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
+		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a> - "
+		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
+		dat += "<a href='?src=\ref[src];copy=1'>Copy slot</a>"
 
 	else
 		dat += "Please create an account to save your preferences."
@@ -220,7 +243,7 @@ datum/preferences
 		if(config.forumurl)
 			user << link(config.forumurl)
 		else
-			user << "<span class='danger'>The forum URL is not set in the server configuration.</span>"
+			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
 	ShowChoices(usr)
 	return 1
@@ -235,12 +258,27 @@ datum/preferences
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
+		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
+		sanitize_preferences()
+		close_load_dialog(usr)
+	else if(href_list["resetslot"])
+		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+			return 0
+		load_character(SAVE_RESET)
+		sanitize_preferences()
+	else if(href_list["copy"])
+		if(!IsGuestKey(usr.key))
+			open_copy_dialog(usr)
+			return 1
+	else if(href_list["overwrite"])
+		overwrite_character(text2num(href_list["overwrite"]))
+		sanitize_preferences()
 		close_load_dialog(usr)
 	else
 		return 0
@@ -248,7 +286,7 @@ datum/preferences
 	ShowChoices(usr)
 	return 1
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 
@@ -258,16 +296,19 @@ datum/preferences
 	if(be_random_name)
 		real_name = random_name(identifying_gender,species)
 
-	// Ask the preferences datums to apply their own settings to the new mob 
+	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
 
 	if(icon_updates)
 		character.force_update_limbs()
-		character.update_mutations(0)
-		character.update_body(0)
-		character.update_underwear(0)
-		character.update_hair(0)
-		character.update_icons()
+		character.update_icons_body()
+		character.update_mutations()
+		character.update_underwear()
+		character.update_hair()
+
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat = "<body>"
@@ -295,3 +336,26 @@ datum/preferences
 /datum/preferences/proc/close_load_dialog(mob/user)
 	//user << browse(null, "window=saves")
 	panel.close()
+
+/datum/preferences/proc/open_copy_dialog(mob/user)
+	var/dat = "<body>"
+	dat += "<tt><center>"
+
+	var/savefile/S = new /savefile(path)
+	if(S)
+		dat += "<b>Select a character slot to overwrite</b><br>"
+		dat += "<b>You will then need to save to confirm</b><hr>"
+		var/name
+		for(var/i=1, i<= config.character_slots, i++)
+			S.cd = "/character[i]"
+			S["real_name"] >> name
+			if(!name)	name = "Character[i]"
+			if(i==default_slot)
+				name = "<b>[name]</b>"
+			dat += "<a href='?src=\ref[src];overwrite=[i]'>[name]</a><br>"
+
+	dat += "<hr>"
+	dat += "</center></tt>"
+	panel = new(user, "Character Slots", "Character Slots", 300, 390, src)
+	panel.set_content(dat)
+	panel.open()

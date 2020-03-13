@@ -22,7 +22,17 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/broadcaster"
+	circuit = /obj/item/weapon/circuitboard/telecomms/broadcaster
+
+/obj/machinery/telecomms/processor/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser/high(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 1)
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	// Don't broadcast rejected signals
@@ -138,6 +148,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(original)
 			original.data["done"] = 1
 
+		// For some reason level is both used as a list and not a list, and now it needs to be a list.
+		// Because this is a 'all in one' machine, we're gonna just cheat.
+		signal.data["level"] = using_map.contact_levels.Copy()
+
 		if(signal.data["slow"] > 0)
 			sleep(signal.data["slow"]) // simulate the network lag if necessary
 
@@ -246,7 +260,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 
-			if(istype(R, /obj/item/device/radio/headset))
+			if(istype(R, /obj/item/device/radio/headset) && !R.adhoc_fallback)
 				continue
 
 			if(R.receive_range(display_freq, level) > -1)
@@ -374,10 +388,14 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_deathsquad += blackbox_msg
 				if(SYND_FREQ)
 					blackbox.msg_syndicate += blackbox_msg
+				if(RAID_FREQ)
+					blackbox.msg_raider += blackbox_msg
 				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
 				if(SRV_FREQ)
 					blackbox.msg_service += blackbox_msg
+				if(EXP_FREQ)
+					blackbox.msg_explorer += blackbox_msg
 				else
 					blackbox.messages += blackbox_msg
 
@@ -554,6 +572,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_deathsquad += blackbox_msg
 				if(SYND_FREQ)
 					blackbox.msg_syndicate += blackbox_msg
+				if(RAID_FREQ)
+					blackbox.msg_raider += blackbox_msg
 				if(SUP_FREQ)
 					blackbox.msg_cargo += blackbox_msg
 				if(SRV_FREQ)
@@ -627,7 +647,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(do_sleep)
 		sleep(rand(10,25))
 
-	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
+	//to_world_log("Level: [signal.data["level"]] - Done: [signal.data["done"]]")
 
 	return signal
 

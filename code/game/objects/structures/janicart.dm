@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
+
 /obj/structure/janitorialcart
 	name = "janitorial cart"
 	desc = "The ultimate in janitorial carts! Has space for water, mops, signs, trash bags, and more!"
@@ -5,6 +7,7 @@
 	icon_state = "cart"
 	anchored = 0
 	density = 1
+	climbable = 1
 	flags = OPENCONTAINER
 	//copypaste sorry
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
@@ -16,12 +19,13 @@
 
 
 /obj/structure/janitorialcart/New()
-	create_reagents(100)
+	create_reagents(300)
+	..()
 
 
 /obj/structure/janitorialcart/examine(mob/user)
 	if(..(user, 1))
-		user << "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!"
+		to_chat(user, "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!")
 	//everything else is visible, so doesn't need to be mentioned
 
 
@@ -32,15 +36,15 @@
 		I.loc = src
 		update_icon()
 		updateUsrDialog()
-		user << "<span class='notice'>You put [I] into [src].</span>"
+		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/weapon/mop))
 		if(I.reagents.total_volume < I.reagents.maximum_volume)	//if it's not completely soaked we assume they want to wet it, otherwise store it
 			if(reagents.total_volume < 1)
-				user << "<span class='warning'>[src] is out of water!</span>"
+				to_chat(user, "<span class='warning'>[src] is out of water!</span>")
 			else
 				reagents.trans_to_obj(I, 5)	//
-				user << "<span class='notice'>You wet [I] in [src].</span>"
+				to_chat(user, "<span class='notice'>You wet [I] in [src].</span>")
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 				return
 		if(!mymop)
@@ -49,7 +53,7 @@
 			I.loc = src
 			update_icon()
 			updateUsrDialog()
-			user << "<span class='notice'>You put [I] into [src].</span>"
+			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/weapon/reagent_containers/spray) && !myspray)
 		user.drop_item()
@@ -57,7 +61,7 @@
 		I.loc = src
 		update_icon()
 		updateUsrDialog()
-		user << "<span class='notice'>You put [I] into [src].</span>"
+		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/device/lightreplacer) && !myreplacer)
 		user.drop_item()
@@ -65,7 +69,7 @@
 		I.loc = src
 		update_icon()
 		updateUsrDialog()
-		user << "<span class='notice'>You put [I] into [src].</span>"
+		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 
 	else if(istype(I, /obj/item/weapon/caution))
 		if(signs < 4)
@@ -74,9 +78,12 @@
 			signs++
 			update_icon()
 			updateUsrDialog()
-			user << "<span class='notice'>You put [I] into [src].</span>"
+			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 		else
-			user << "<span class='notice'>[src] can't hold any more signs.</span>"
+			to_chat(user, "<span class='notice'>[src] can't hold any more signs.</span>")
+
+	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		return // So we do not put them in the trash bag as we mean to fill the mop bucket
 
 	else if(mybag)
 		mybag.attackby(I, user)
@@ -95,7 +102,7 @@
 	data["replacer"] = myreplacer ? capitalize(myreplacer.name) : null
 	data["signs"] = signs ? "[signs] sign\s" : null
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "janitorcart.tmpl", "Janitorial cart", 240, 160)
 		ui.set_initial_data(data)
@@ -113,29 +120,29 @@
 			if("garbage")
 				if(mybag)
 					user.put_in_hands(mybag)
-					user << "<span class='notice'>You take [mybag] from [src].</span>"
+					to_chat(user, "<span class='notice'>You take [mybag] from [src].</span>")
 					mybag = null
 			if("mop")
 				if(mymop)
 					user.put_in_hands(mymop)
-					user << "<span class='notice'>You take [mymop] from [src].</span>"
+					to_chat(user, "<span class='notice'>You take [mymop] from [src].</span>")
 					mymop = null
 			if("spray")
 				if(myspray)
 					user.put_in_hands(myspray)
-					user << "<span class='notice'>You take [myspray] from [src].</span>"
+					to_chat(user, "<span class='notice'>You take [myspray] from [src].</span>")
 					myspray = null
 			if("replacer")
 				if(myreplacer)
 					user.put_in_hands(myreplacer)
-					user << "<span class='notice'>You take [myreplacer] from [src].</span>"
+					to_chat(user, "<span class='notice'>You take [myreplacer] from [src].</span>")
 					myreplacer = null
 			if("sign")
 				if(signs)
 					var/obj/item/weapon/caution/Sign = locate() in src
 					if(Sign)
 						user.put_in_hands(Sign)
-						user << "<span class='notice'>You take \a [Sign] from [src].</span>"
+						to_chat(user, "<span class='notice'>You take \a [Sign] from [src].</span>")
 						signs--
 					else
 						warning("[src] signs ([signs]) didn't match contents")
@@ -174,7 +181,7 @@
 
 
 /obj/structure/bed/chair/janicart/New()
-	create_reagents(100)
+	create_reagents(300)
 	update_layer()
 
 
@@ -182,23 +189,23 @@
 	if(!..(user, 1))
 		return
 
-	user << "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!"
+	to_chat(user, "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!")
 	if(mybag)
-		user << "\A [mybag] is hanging on the [callme]."
+		to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 
 /obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to_obj(I, 2)
-			user << "<span class='notice'>You wet [I] in the [callme].</span>"
+			to_chat(user, "<span class='notice'>You wet [I] in the [callme].</span>")
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		else
-			user << "<span class='notice'>This [callme] is out of water!</span>"
+			to_chat(user, "<span class='notice'>This [callme] is out of water!</span>")
 	else if(istype(I, /obj/item/key))
-		user << "Hold [I] in one of your hands while you drive this [callme]."
+		to_chat(user, "Hold [I] in one of your hands while you drive this [callme].")
 	else if(istype(I, /obj/item/weapon/storage/bag/trash))
-		user << "<span class='notice'>You hook the trashbag onto the [callme].</span>"
+		to_chat(user, "<span class='notice'>You hook the trashbag onto the [callme].</span>")
 		user.drop_item()
 		I.loc = src
 		mybag = I
@@ -220,14 +227,16 @@
 		step(src, direction)
 		update_mob()
 	else
-		user << "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>"
+		to_chat(user, "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>")
 
 
 /obj/structure/bed/chair/janicart/Move()
 	..()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)
-			buckled_mob.loc = loc
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			if(L.buckled == src)
+				L.loc = loc
 
 
 /obj/structure/bed/chair/janicart/post_buckle_mob(mob/living/M)
@@ -253,36 +262,41 @@
 /obj/structure/bed/chair/janicart/set_dir()
 	..()
 	update_layer()
-	if(buckled_mob)
-		if(buckled_mob.loc != loc)
-			buckled_mob.buckled = null //Temporary, so Move() succeeds.
-			buckled_mob.buckled = src //Restoring
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			if(L.loc != loc)
+				L.buckled = null //Temporary, so Move() succeeds.
+				L.buckled = src //Restoring
 
 	update_mob()
 
 
 /obj/structure/bed/chair/janicart/proc/update_mob()
-	if(buckled_mob)
-		buckled_mob.set_dir(dir)
-		switch(dir)
-			if(SOUTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 7
-			if(WEST)
-				buckled_mob.pixel_x = 13
-				buckled_mob.pixel_y = 7
-			if(NORTH)
-				buckled_mob.pixel_x = 0
-				buckled_mob.pixel_y = 4
-			if(EAST)
-				buckled_mob.pixel_x = -13
-				buckled_mob.pixel_y = 7
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			L.set_dir(dir)
+			switch(dir)
+				if(SOUTH)
+					L.pixel_x = 0
+					L.pixel_y = 7
+				if(WEST)
+					L.pixel_x = 13
+					L.pixel_y = 7
+				if(NORTH)
+					L.pixel_x = 0
+					L.pixel_y = 4
+				if(EAST)
+					L.pixel_x = -13
+					L.pixel_y = 7
 
 
 /obj/structure/bed/chair/janicart/bullet_act(var/obj/item/projectile/Proj)
-	if(buckled_mob)
+	if(has_buckled_mobs())
 		if(prob(85))
-			return buckled_mob.bullet_act(Proj)
+			var/mob/living/L = pick(buckled_mobs)
+			return L.bullet_act(Proj)
 	visible_message("<span class='warning'>[Proj] ricochets off the [callme]!</span>")
 
 
@@ -291,4 +305,4 @@
 	desc = "A keyring with a small steel key, and a pink fob reading \"Pussy Wagon\"."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "keys"
-	w_class = 1
+	w_class = ITEMSIZE_TINY

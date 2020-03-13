@@ -12,36 +12,48 @@
 /proc/is_on_same_plane_or_station(var/z1, var/z2)
 	if(z1 == z2)
 		return 1
-	if((z1 in config.station_levels) &&	(z2 in config.station_levels))
+	if((z1 in using_map.station_levels) &&	(z2 in using_map.station_levels))
 		return 1
 	return 0
 
 /proc/max_default_z_level()
 	var/max_z = 0
-	for(var/z in config.station_levels)
+	for(var/z in using_map.station_levels)
 		max_z = max(z, max_z)
-	for(var/z in config.admin_levels)
+	for(var/z in using_map.admin_levels)
 		max_z = max(z, max_z)
-	for(var/z in config.player_levels)
+	for(var/z in using_map.player_levels)
 		max_z = max(z, max_z)
 	return max_z
 
-/proc/get_area(O)
-	var/turf/loc = get_turf(O)
-	if(loc)
-		var/area/res = loc.loc
-		.= res
+/proc/get_area(atom/A)
+	if(isarea(A))
+		return A
+	var/turf/T = get_turf(A)
+	return T ? T.loc : null
 
-/proc/get_area_name(N) //get area by its name
-	for(var/area/A in world)
-		if(A.name == N)
-			return A
-	return 0
+/proc/get_area_name(atom/X, format_text = FALSE)
+	var/area/A = isarea(X) ? X : get_area(X)
+	if(!A)
+		return null
+	return format_text ? format_text(A.name) : A.name
 
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
 	if (isarea(A))
 		return A
+
+
+/** Checks if any living humans are in a given area. */
+/proc/area_is_occupied(var/area/myarea)
+	// Testing suggests looping over human_mob_list is quicker than looping over area contents
+	for(var/mob/living/carbon/human/H in human_mob_list)
+		if(H.stat >= DEAD) //Conditions for exclusion here, like if disconnected people start blocking it.
+			continue
+		var/area/A = get_area(H)
+		if(A == myarea) //The loc of a turf is the area it is in.
+			return 1
+	return 0
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
@@ -62,16 +74,16 @@
 	return heard
 
 /proc/isStationLevel(var/level)
-	return level in config.station_levels
+	return level in using_map.station_levels
 
 /proc/isNotStationLevel(var/level)
 	return !isStationLevel(level)
 
 /proc/isPlayerLevel(var/level)
-	return level in config.player_levels
+	return level in using_map.player_levels
 
 /proc/isAdminLevel(var/level)
-	return level in config.admin_levels
+	return level in using_map.admin_levels
 
 /proc/isNotAdminLevel(var/level)
 	return !isAdminLevel(level)
@@ -156,7 +168,7 @@
 // It will keep doing this until it checks every content possible. This will fix any problems with mobs, that are inside objects,
 // being unable to hear people due to being in a box within a bag.
 
-/proc/recursive_content_check(var/atom/O,  var/list/L = list(), var/recursion_limit = 3, var/client_check = 1, var/sight_check = 1, var/include_mobs = 1, var/include_objects = 1)
+/proc/recursive_content_check(var/atom/O,  var/list/L = list(), var/recursion_limit = 3, var/client_check = 1, var/sight_check = 1, var/include_mobs = 1, var/include_objects = 1, var/ignore_show_messages = 0)
 
 	if(!recursion_limit)
 		return L
@@ -176,7 +188,7 @@
 
 		else if(istype(I,/obj/))
 			var/obj/check_obj = I
-			if(check_obj.show_messages)
+			if(ignore_show_messages || check_obj.show_messages)
 				if(!sight_check || isInSight(I, O))
 					L |= recursive_content_check(I, L, recursion_limit - 1, client_check, sight_check, include_mobs, include_objects)
 					if(include_objects)
@@ -252,27 +264,32 @@
 // then adds additional mobs or objects if they are in range 'smartly',
 // based on their presence in lists of players or registered objects
 // Type: 1-audio, 2-visual, 0-neither
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/type = 1)
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/type = 1, var/remote_ghosts = TRUE)
 	var/list/mobs = list()
 	var/list/objs = list()
 
 	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
 	var/list/hearturfs = list()
 
-	for(var/atom/movable/AM in hear)
-		if(ismob(AM))
-			mobs += AM
-			hearturfs += AM.locs[1]
-		else if(isobj(AM))
-			objs += AM
-			hearturfs += AM.locs[1]
+	for(var/thing in hear)
+		if(istype(thing,/obj))
+			objs += thing
+			hearturfs |= get_turf(thing)
+		else if(istype(thing,/mob))
+			mobs += thing
+			hearturfs |= get_turf(thing)
 
 	//A list of every mob with a client
-	for(var/mob/M in player_list)
-		if(M.loc && M.locs[1] in hearturfs)
-			mobs |= M
+	for(var/mob in player_list)
+		if(!istype(mob, /mob))
+			crash_with("There is a null or non-mob reference inside player_list.")
+			continue
+		if(get_turf(mob) in hearturfs)
+			mobs |= mob
+			continue
 
-		else if(M.stat == DEAD)
+		var/mob/M = mob
+		if(M && M.stat == DEAD && remote_ghosts && !M.forbid_seeing_deadchat)
 			switch(type)
 				if(1) //Audio messages use ghost_ears
 					if(M.is_preference_enabled(/datum/client_preference/ghost_ears))
@@ -282,9 +299,9 @@
 						mobs |= M
 
 	//For objects below the top level who still want to hear
-	for(var/obj/O in listening_objects)
-		if(O.loc && O.locs[1] in hearturfs)
-			objs |= O
+	for(var/obj in listening_objects)
+		if(get_turf(obj) in hearturfs)
+			objs |= obj
 
 	return list("mobs" = mobs, "objs" = objs)
 
@@ -321,6 +338,23 @@ proc
 					return 0
 		return 1
 #undef SIGN
+
+/proc/flick_overlay(image/I, list/show_to, duration, gc_after)
+	for(var/client/C in show_to)
+		C.images += I
+	spawn(duration)
+		if(gc_after)
+			qdel(I)
+		for(var/client/C in show_to)
+			C.images -= I
+
+/proc/flick_overlay_view(image/I, atom/target, duration, gc_after) //wrapper for the above, flicks to everyone who can see the target atom
+	var/list/viewing = list()
+	for(var/m in viewers(target))
+		var/mob/M = m
+		if(M.client)
+			viewing += M.client
+	flick_overlay(I, viewing, duration, gc_after)
 
 proc/isInSight(var/atom/A, var/atom/B)
 	var/turf/Aturf = get_turf(A)
@@ -395,7 +429,7 @@ proc/isInSight(var/atom/A, var/atom/B)
 
 /proc/Show2Group4Delay(obj/O, list/group, delay=0)
 	if(!isobj(O))	return
-	if(!group)	group = clients
+	if(!group)	group = GLOB.clients
 	for(var/client/C in group)
 		C.screen += O
 	if(delay)
@@ -509,7 +543,7 @@ datum/projectile_data
 /proc/getOPressureDifferential(var/turf/loc)
 	var/minp=16777216;
 	var/maxp=0;
-	for(var/dir in cardinal)
+	for(var/dir in GLOB.cardinal)
 		var/turf/simulated/T=get_turf(get_step(loc,dir))
 		var/cp=0
 		if(T && istype(T) && T.zone)
@@ -530,7 +564,7 @@ datum/projectile_data
 
 /proc/getCardinalAirInfo(var/turf/loc, var/list/stats=list("temperature"))
 	var/list/temps = new/list(4)
-	for(var/dir in cardinal)
+	for(var/dir in GLOB.cardinal)
 		var/direction
 		switch(dir)
 			if(NORTH)
@@ -568,3 +602,8 @@ datum/projectile_data
 
 /proc/SecondsToTicks(var/seconds)
 	return seconds * 10
+
+/proc/window_flash(var/client_or_usr)
+	if (!client_or_usr)
+		return
+	winset(client_or_usr, "mainwindow", "flash=5")

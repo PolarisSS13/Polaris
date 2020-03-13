@@ -4,7 +4,7 @@
 
 	var/releaseWhen = 60
 	var/list/area/areas = list()		//List of areas to affect. Filled by start()
-	
+
 	var/eventDept = "Security"			//Department name in announcement
 	var/list/areaName = list("Brig")	//Names of areas mentioned in AI and Engineering announcements
 	var/list/areaType = list(/area/security/prison, /area/security/brig)	//Area types to include.
@@ -41,20 +41,20 @@
 
 
 /datum/event/prison_break/start()
-	for(var/area/A in world)
+	for(var/area/A in all_areas)
 		if(is_type_in_list(A,areaType) && !is_type_in_list(A,areaNotType))
 			areas += A
 
 	if(areas && areas.len > 0)
 		var/my_department = "[station_name()] firewall subroutines"
-		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [worldtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
-		for(var/obj/machinery/message_server/MS in world)
+		var/rc_message = "An unknown malicious program has been detected in the [english_list(areaName)] lighting and airlock control systems at [stationtime2text()]. Systems will be fully compromised within approximately three minutes. Direct intervention is required immediately.<br>"
+		for(var/obj/machinery/message_server/MS in machines)
 			MS.send_rc_message("Engineering", my_department, rc_message, "", "", 2)
 		for(var/mob/living/silicon/ai/A in player_list)
-			A << "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>"
+			to_chat(A, "<span class='danger'>Malicious program detected in the [english_list(areaName)] lighting and airlock control systems by [my_department].</span>")
 
 	else
-		world.log << "ERROR: Could not initate grey-tide. Unable to find suitable containment area."
+		to_world_log("ERROR: Could not initate grey-tide. Unable to find suitable containment area.")
 		kill()
 
 

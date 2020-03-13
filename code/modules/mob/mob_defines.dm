@@ -1,17 +1,18 @@
 /mob
 	density = 1
-	layer = 4.0
+	layer = MOB_LAYER
+	plane = MOB_PLANE
 	animate_movement = 2
 	flags = PROXMOVE
 	var/datum/mind/mind
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/move_delay = null // For movement speed delays.
+	var/next_move = null // For click delay, despite the misleading name.
 
 	//Not in use yet
 	var/obj/effect/organstructure/organStructure = null
 
-	var/obj/screen/flash = null
-	var/obj/screen/blind = null
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
 	var/obj/screen/purged = null
@@ -26,7 +27,6 @@
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
 	var/obj/screen/pressure = null
-	var/obj/screen/damageoverlay = null
 	var/obj/screen/pain = null
 	var/obj/screen/gun/item/item_use_icon = null
 	var/obj/screen/gun/radio/radio_use_icon = null
@@ -34,9 +34,16 @@
 	var/obj/screen/gun/run/gun_run_icon = null
 	var/obj/screen/gun/mode/gun_setting_icon = null
 	var/obj/screen/ling/chems/ling_chem_display = null
+	var/obj/screen/wizard/energy/wiz_energy_display = null
+	var/obj/screen/wizard/instability/wiz_instability_display = null
+
+	var/datum/plane_holder/plane_holder = null
+	var/list/vis_enabled = null		// List of vision planes that should be graphically visible (list of their VIS_ indexes).
+	var/list/planes_visible = null	// List of atom planes that are logically visible/interactable (list of actual plane numbers).
 
 	//spells hud icons - this interacts with add_spell and remove_spell
 	var/list/obj/screen/movable/spell_master/spell_masters = null
+	var/obj/screen/movable/ability_master/ability_master = null
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
@@ -57,7 +64,6 @@
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
-	var/next_move = null
 	var/transforming = null	//Carbon
 	var/other = 0.0
 	var/eye_blind = null	//Carbon
@@ -67,11 +73,13 @@
 	var/stuttering = null	//Carbon
 	var/slurring = null		//Carbon
 	var/real_name = null
+	var/nickname = null
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/gen_record = ""
 	var/exploit_record = ""
+	var/exploit_addons = list()		//Assorted things that show up at the end of the exploit_record list
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
@@ -90,6 +98,8 @@
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
+	var/species_language = null			// For species who want reset to use a specified default.
+	var/only_species_language  = 0		// For species who can only speak their default and no other languages. Does not affect understanding.
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
@@ -100,8 +110,6 @@
 	var/cpr_time = 1.0//Carbon
 
 	var/bodytemperature = 310.055	//98.7 F
-	var/old_x = 0
-	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
@@ -124,7 +132,6 @@
 	var/datum/hud/hud_used = null
 
 	var/list/grabbed_by = list(  )
-	var/list/requests = list(  )
 
 	var/list/mapobjs = list()
 
@@ -140,7 +147,7 @@
 	var/const/deafness = 2//Carbon
 	var/const/muteness = 4//Carbon
 
-	var/can_pull_size = 10              // Maximum w_class the mob can pull.
+	var/can_pull_size = ITEMSIZE_NO_CONTAINER // Maximum w_class the mob can pull.
 	var/can_pull_mobs = MOB_PULL_LARGER // Whether or not the mob can pull other mobs.
 
 	var/datum/dna/dna = null//Carbon
@@ -152,7 +159,8 @@
 	var/voice_name = "unidentifiable voice"
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
-	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true. Only used by energy nets, TODO replace with buckling
+
+	var/can_be_antagged = FALSE // To prevent pAIs/mice/etc from getting antag in autotraitor and future auto- modes. Uses inheritance instead of a bunch of typechecks.
 
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.
@@ -207,3 +215,21 @@
 
 	var/list/active_genes=list()
 	var/mob_size = MOB_MEDIUM
+	var/forbid_seeing_deadchat = FALSE // Used for lings to not see deadchat, and to have ghosting behave as if they were not really dead.
+
+	var/seedarkness = 1	//Determines mob's ability to see shadows. 1 = Normal vision, 0 = darkvision
+
+	var/get_rig_stats = 0 //Moved from computer.dm
+
+	var/typing
+	var/obj/effect/decal/typing_indicator
+
+	var/low_priority = FALSE //Skip processing life() if there's just no players on this Z-level
+
+	var/default_pixel_x = 0 //For offsetting mobs
+	var/default_pixel_y = 0
+
+	var/attack_icon //Icon to use when attacking w/o anything in-hand
+	var/attack_icon_state //State for above
+
+	var/registered_z

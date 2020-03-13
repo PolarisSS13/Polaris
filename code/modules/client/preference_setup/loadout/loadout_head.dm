@@ -31,6 +31,21 @@
 	path = /obj/item/clothing/head/beret/sec/navy/hos
 	allowed_roles = list("Head of Security")
 
+/datum/gear/head/beret/csec
+	display_name = "beret, corporate (officer)"
+	path = /obj/item/clothing/head/beret/sec/corporate/officer
+	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
+
+/datum/gear/head/beret/csec_warden
+	display_name = "beret, corporate (warden)"
+	path = /obj/item/clothing/head/beret/sec/corporate/warden
+	allowed_roles = list("Head of Security","Warden")
+
+/datum/gear/head/beret/csec_hos
+	display_name = "beret, corporate (hos)"
+	path = /obj/item/clothing/head/beret/sec/corporate/hos
+	allowed_roles = list("Head of Security")
+
 /datum/gear/head/beret/eng
 	display_name = "beret, engie-orange"
 	path = /obj/item/clothing/head/beret/engineering
@@ -42,7 +57,7 @@
 /datum/gear/head/beret/sec
 	display_name = "beret, red (security)"
 	path = /obj/item/clothing/head/beret/sec
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
 /datum/gear/head/cap
 	display_name = "cap, black"
@@ -99,54 +114,81 @@
 	path = /obj/item/clothing/head/soft/yellow
 
 /datum/gear/head/cap/white
-	display_name = "cap, white"
+	display_name = "cap (colorable)"
 	path = /obj/item/clothing/head/soft/mime
+
+/datum/gear/head/cap/white/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/cap/mbill
+	display_name = "cap, bill"
+	path = /obj/item/clothing/head/soft/mbill
+
+/datum/gear/head/cap/sol
+	display_name = "cap, sol"
+	path = /obj/item/clothing/head/soft/sol
+
+/datum/gear/head/cap/expdition
+	display_name = "cap, expedition"
+	path = /obj/item/clothing/head/soft/sol/expedition
+
+/datum/gear/head/cap/fleet
+	display_name = "cap, fleet"
+	path = /obj/item/clothing/head/soft/sol/fleet
 
 /datum/gear/head/cowboy
 	display_name = "cowboy, rodeo"
 	path = /obj/item/clothing/head/cowboy_hat
-	cost = 3
+
+/datum/gear/head/cowboy/black
+	display_name = "cowboy, black"
+	path = /obj/item/clothing/head/cowboy_hat/black
+
+/datum/gear/head/cowboy/wide
+	display_name = "cowboy, wide"
+	path = /obj/item/clothing/head/cowboy_hat/wide
+
+/datum/gear/head/fedora
+	display_name = "fedora, brown"
+	path = /obj/item/clothing/head/fedora/brown
+
+/datum/gear/head/fedora/grey
+	display_name = "fedora, grey"
+	path = /obj/item/clothing/head/fedora/grey
 
 /datum/gear/head/hairflower
-	display_name = "hair flower pin, red"
-	path = /obj/item/clothing/head/hairflower
+	display_name = "hair flower pin (colorable)"
+	path = /obj/item/clothing/head/pin/flower/white
 
-/datum/gear/head/hairflower/yellow
-	display_name = "hair flower pin, yellow"
-	path = /obj/item/clothing/head/hairflower/yellow
+/datum/gear/head/hairflower/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
 
-/datum/gear/head/hairflower/pink
-	display_name = "hair flower pin, pink"
-	path = /obj/item/clothing/head/hairflower/pink
+/datum/gear/head/pin
+	display_name = "pin selection"
+	path = /obj/item/clothing/head/pin
 
-/datum/gear/head/hairflower/blue
-	display_name = "hair flower pin, blue"
-	path = /obj/item/clothing/head/hairflower/blue
-
-/datum/gear/head/hairflower/violet
-	display_name = "hair flower pin, violet"
-	path = /obj/item/clothing/head/hairflower/violet
-
-/datum/gear/head/hairflower/orange
-	display_name = "hair flower pin, orange"
-	path = /obj/item/clothing/head/hairflower/orange
+/datum/gear/head/pin/New()
+	..()
+	var/list/pins = list()
+	for(var/pin in typesof(/obj/item/clothing/head/pin))
+		var/obj/item/clothing/head/pin/pin_type = pin
+		pins[initial(pin_type.name)] = pin_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pins))
 
 /datum/gear/head/hardhat
-	display_name = "hardhat, yellow"
+	display_name = "hardhat selection"
 	path = /obj/item/clothing/head/hardhat
 	cost = 2
 
-/datum/gear/head/hardhat/blue
-	display_name = "hardhat, blue"
-	path = /obj/item/clothing/head/hardhat/dblue
-
-/datum/gear/head/hardhat/orange
-	display_name = "hardhat, orange"
-	path = /obj/item/clothing/head/hardhat/orange
-
-/datum/gear/head/hardhat/red
-	display_name = "hardhat, red"
-	path = /obj/item/clothing/head/hardhat/red
+/datum/gear/head/hardhat/New()
+	..()
+	var/list/hardhats = list()
+	for(var/hardhat in typesof(/obj/item/clothing/head/hardhat))
+		var/obj/item/clothing/head/hardhat/hardhat_type = hardhat
+		hardhats[initial(hardhat_type.name)] = hardhat_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(hardhats))
 
 /datum/gear/head/boater
 	display_name = "hat, boatsman"
@@ -164,27 +206,30 @@
 	display_name = "hat, tophat"
 	path = /obj/item/clothing/head/that
 
-/datum/gear/head/philosopher_wig
+/datum/gear/head/wig/philosopher
 	display_name = "natural philosopher's wig"
 	path = /obj/item/clothing/head/philosopher_wig
+
+/datum/gear/head/wig
+	display_name = "powdered wig"
+	path = /obj/item/clothing/head/powdered_wig
 
 /datum/gear/head/ushanka
 	display_name = "ushanka"
 	path = /obj/item/clothing/head/ushanka
 
 /datum/gear/head/santahat
-	display_name = "santa hat, red (holiday)"
+	display_name = "santa hat"
 	path = /obj/item/clothing/head/santa
-	cost = 11
+	cost = 2
 
-/datum/gear/head/santahat/green
-	display_name = "santa hat, green (holiday)"
-	path = /obj/item/clothing/head/santa/green
-
-/datum/gear/head/zhan_scarf
-	display_name = "Zhan headscarf"
-	path = /obj/item/clothing/head/tajaran/scarf
-	whitelisted = "Tajara"
+/datum/gear/head/santahat/New()
+	..()
+	var/list/santahats = list()
+	for(var/santahat in typesof(/obj/item/clothing/head/santa))
+		var/obj/item/clothing/head/santa/santahat_type = santahat
+		santahats[initial(santahat_type.name)] = santahat_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(santahats))
 
 /datum/gear/head/hijab
 	display_name = "hijab"
@@ -209,3 +254,125 @@
 /datum/gear/head/turban/New()
 	..()
 	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/taqiyah
+	display_name = "taqiyah"
+	path = /obj/item/clothing/head/taqiyah
+
+/datum/gear/head/taqiyah/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/kitty
+	display_name = "kitty ears"
+	path = /obj/item/clothing/head/kitty
+
+/datum/gear/head/rabbit
+	display_name = "rabbit ears"
+	path = /obj/item/clothing/head/rabbitears
+
+/datum/gear/head/beanie
+	display_name = "beanie"
+	path = /obj/item/clothing/head/beanie
+
+/datum/gear/head/beanie/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/loose_beanie
+	display_name = "loose beanie"
+	path = /obj/item/clothing/head/beanie_loose
+
+/datum/gear/head/loose_beanie/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/beretg
+	display_name = "beret"
+	path = /obj/item/clothing/head/beretg
+
+/datum/gear/head/beretg/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/sombrero
+	display_name = "sombrero"
+	path = /obj/item/clothing/head/sombrero
+
+/datum/gear/head/flatcapg
+	display_name = "flat cap"
+	path = /obj/item/clothing/head/flatcap/grey
+
+/datum/gear/head/flatcapg/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/bow/small
+	display_name = "hair bow, small (colorable)"
+	path = /obj/item/clothing/head/pin/bow
+
+/datum/gear/head/bow/small/New()
+	..()
+	gear_tweaks = list(gear_tweak_free_color_choice)
+
+/datum/gear/head/welding/
+	display_name = "welding, normal (engineering/robotics)"
+	path = /obj/item/clothing/head/welding
+	cost = 2
+	allowed_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Roboticist")
+
+/datum/gear/head/welding/demon
+	display_name = "welding, demon (engineering/robotics)"
+	path = /obj/item/clothing/head/welding/demon
+
+/datum/gear/head/welding/knight
+	display_name = "welding, knight (engineering/robotics)"
+	path = /obj/item/clothing/head/welding/knight
+
+/datum/gear/head/welding/fancy
+	display_name = "welding, fancy (engineering/robotics)"
+	path = /obj/item/clothing/head/welding/fancy
+
+/datum/gear/head/welding/engie
+	display_name = "welding, engie (engineering/robotics)"
+	path = /obj/item/clothing/head/welding/engie
+
+/datum/gear/head/beret/sol
+	display_name = "beret sol, selection"
+	path = /obj/item/clothing/head/beret/sol
+
+/datum/gear/head/beret/sol/New()
+	..()
+	var/list/sols = list()
+	for(var/sol_style in typesof(/obj/item/clothing/head/beret/sol))
+		var/obj/item/clothing/head/beret/sol/sol = sol_style
+		sols[initial(sol.name)] = sol
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sols))
+
+/datum/gear/head/surgery
+	display_name = "surgical cap selection"
+	description = "Choose from a number of rings of different caps."
+	path = /obj/item/clothing/head/surgery
+
+/datum/gear/head/surgery/New()
+	..()
+	var/cap_type = list()
+	cap_type["Purple cap"] = /obj/item/clothing/head/surgery/purple
+	cap_type["Blue cap"] = /obj/item/clothing/head/surgery/blue
+	cap_type["Green cap"] = /obj/item/clothing/head/surgery/green
+	cap_type["Black cap"] = /obj/item/clothing/head/surgery/black
+	cap_type["Navy cap"] = /obj/item/clothing/head/surgery/navyblue
+	gear_tweaks += new/datum/gear_tweak/path(cap_type)
+
+/datum/gear/head/circuitry
+	display_name = "headwear, circuitry (empty)"
+	path = /obj/item/clothing/head/circuitry
+
+/datum/gear/head/maangtikka
+	display_name = "maang tikka"
+	path = /obj/item/clothing/head/maangtikka
+
+/datum/gear/head/jingasa
+	display_name = "jingasa"
+	path = /obj/item/clothing/head/jingasa
+

@@ -3,7 +3,8 @@
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob"
-	light_range = 3
+	light_range = 2
+	light_color = "#b5ff5b"
 	desc = "Some blob creature thingy"
 	density = 1
 	opacity = 0
@@ -21,10 +22,8 @@
 	update_icon()
 	return ..(loc)
 
-/obj/effect/blob/CanPass(var/atom/movable/mover, vra/turf/target, var/height = 0, var/air_group = 0)
-	if(air_group || height == 0)
-		return 1
-	return 0
+/obj/effect/blob/CanPass(var/atom/movable/mover, vra/turf/target)
+	return FALSE
 
 /obj/effect/blob/ex_act(var/severity)
 	switch(severity)
@@ -73,6 +72,9 @@
 	if(GR)
 		qdel(GR)
 		return
+	for(var/obj/structure/reagent_dispensers/fueltank/Fuel in T)
+		Fuel.ex_act(2)
+		return
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
 		if(D.density)
 			D.ex_act(2)
@@ -108,6 +110,8 @@
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	regen()
+	animate(src, color = "#FF0000", time=1)
+	animate(color = "#FFFFFF", time=4, easing=ELASTIC_EASING)
 	sleep(5)
 	var/pushDir = pick(dirs)
 	var/turf/T = get_step(src, pushDir)
@@ -138,7 +142,7 @@
 		if("fire")
 			damage = (W.force / fire_resist)
 			if(istype(W, /obj/item/weapon/weldingtool))
-				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+				playsound(src, W.usesound, 100, 1)
 		if("brute")
 			damage = (W.force / brute_resist)
 
@@ -149,6 +153,8 @@
 	name = "blob core"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_core"
+	light_range = 3
+	light_color = "#ffc880"
 	maxHealth = 200
 	brute_resist = 2
 	fire_resist = 2
@@ -159,11 +165,11 @@
 	return
 
 /obj/effect/blob/core/New(loc)
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	return ..(loc)
 
 /obj/effect/blob/core/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/effect/blob/core/process()
@@ -176,6 +182,7 @@
 	name = "strong blob"
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blob_idle"
+	light_range = 3
 	desc = "Some blob creature thingy"
 	maxHealth = 60
 	brute_resist = 1
@@ -198,5 +205,5 @@
 	else
 		icon_state = "blob_damaged"
 
-/obj/effect/blob/shield/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
+/obj/effect/blob/shield/CanPass(var/atom/movable/mover, var/turf/target)
 	return !density

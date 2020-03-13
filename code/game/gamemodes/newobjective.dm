@@ -177,7 +177,7 @@
 				if(!killobjectives.len)
 					continue
 				var/datum/objective/assassinate/objective = pickweight(killobjectives)
-				world << objective
+				to_world(objective)
 				for(1 to 10)
 					if(objective.points + total_weight <= 100 || !killobjectives.len)
 						break
@@ -264,7 +264,7 @@ datum
 				target = targeta
 				job = joba
 				weight = get_points(job)
-				explanation_text = "Frame [target.current.real_name], the [target.assigned_role] for a crime and make sure they are arrested and brought back to the Centcom station alive.  We'll handle the rest from there."
+				explanation_text = "Frame [target.current.real_name], the [target.assigned_role] for a crime and make sure they are arrested and brought back to the CentCom station alive.  We'll handle the rest from there."
 
 			check_completion()
 				if(!emergency_shuttle.returned())
@@ -564,7 +564,7 @@ datum
 
 			captainslaser
 				steal_target = /obj/item/weapon/gun/energy/captain
-				explanation_text = "Steal the captain's antique laser gun."
+				explanation_text = "Steal the Colony Director's antique laser gun."
 				weight = 20
 
 				get_points(var/job)
@@ -1045,7 +1045,7 @@ datum
 					return 20
 			AI
 				steal_target = /obj/structure/AIcore
-				explanation_text = "Steal a finished AI, either by intellicard or stealing the whole construct."
+				explanation_text = "Steal a finished AI, either by intelliCore or stealing the whole construct."
 				weight = 50
 
 				get_points(var/job)
@@ -1252,7 +1252,8 @@ datum
 			proc/find_target()
 				..()
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role], has defied us for the last time.  Make an example of [target.current.gender == MALE ? "him" : target.current.gender == FEMALE ? "her" : "them"], and bring us [target.current.gender == MALE ? "his" : target.current.gender == FEMALE ? "her" : "their"] severed head."
+					var/datum/gender/T = gender_datums[target.current.get_visible_gender()]
+					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : target.assigned_role], has defied us for the last time.  Make an example of [T.him], and bring us [T.his] severed head."
 				else
 					explanation_text = "Free Objective"
 				return target
@@ -1261,7 +1262,8 @@ datum
 			find_target_by_role(role, role_type=0)
 				..(role, role_type)
 				if(target && target.current)
-					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)], has defied us for the last time.  Make an example of [target.current.gender == MALE ? "him" : target.current.gender == FEMALE ? "her" : "them"], and bring us [target.current.gender == MALE ? "his" : target.current.gender == FEMALE ? "her" : "their"] severed head."
+					var/datum/gender/T = gender_datums[target.current.get_visible_gender()]
+					explanation_text = "[target.current.real_name], the [target.role_alt_title ? target.role_alt_title : (!role_type ? target.assigned_role : target.special_role)], has defied us for the last time.  Make an example of [T.him], and bring us [T.his] severed head."
 				else
 					explanation_text = "Free Objective"
 				return target

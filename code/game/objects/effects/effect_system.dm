@@ -13,11 +13,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASSTABLE | PASSGRILLE
 
-/obj/effect/Destroy()
-	if(reagents)
-		reagents.delete()
-	return ..()
-
 /datum/effect/effect/system
 	var/number = 3
 	var/cardinals = 0
@@ -75,7 +70,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, src.location)
+				var/obj/effect/effect/steam/steam = new /obj/effect/effect/steam(src.location)
 				var/direction
 				if(src.cardinals)
 					direction = pick(cardinal)
@@ -108,9 +103,9 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 
-/obj/effect/effect/sparks/initialize()
-	..()
-	schedule_task_in(5 SECONDS, /proc/qdel, list(src))
+/obj/effect/effect/sparks/Initialize()
+	. = ..()
+	QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/effect/sparks/Destroy()
 	var/turf/T = src.loc
@@ -146,7 +141,7 @@ steam.start() -- spawns the effect
 			spawn(0)
 				if(holder)
 					src.location = get_turf(holder)
-				var/obj/effect/effect/sparks/sparks = PoolOrNew(/obj/effect/effect/sparks, src.location)
+				var/obj/effect/effect/sparks/sparks = new /obj/effect/effect/sparks(src.location)
 				src.total_sparks++
 				var/direction
 				if(src.cardinals)
@@ -184,10 +179,14 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/New()
 	..()
-	spawn (time_to_live)
-		qdel(src)
+	if(time_to_live)
+		spawn (time_to_live)
+			if(!QDELETED(src))
+				qdel(src)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
+	if(M.is_incorporeal())
+		return
 	..()
 	if(istype(M))
 		affect(M)
@@ -228,15 +227,16 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/bad/Move()
 	..()
-	for(var/mob/living/carbon/M in get_turf(src))
-		affect(M)
+	for(var/mob/living/L in get_turf(src))
+		affect(L)
 
-/obj/effect/effect/smoke/bad/affect(var/mob/living/carbon/M)
+/obj/effect/effect/smoke/bad/affect(var/mob/living/L)
 	if (!..())
 		return 0
-	M.adjustOxyLoss(1)
-	if(prob(25))
-		M.emote("cough")
+	if(L.needs_to_breathe())
+		L.adjustOxyLoss(1)
+		if(prob(25))
+			L.emote("cough")
 
 /* Not feasile until a later date
 /obj/effect/effect/smoke/bad/Crossed(atom/movable/M as mob|obj)
@@ -247,12 +247,78 @@ steam.start() -- spawns the effect
 			B.damage = (B.damage/2)
 			projectiles += B
 			destroyed_event.register(B, src, /obj/effect/effect/smoke/bad/proc/on_projectile_delete)
-		world << "Damage is: [B.damage]"
+		to_world("Damage is: [B.damage]")
 	return 1
 
 /obj/effect/effect/smoke/bad/proc/on_projectile_delete(obj/item/projectile/beam/proj)
 	projectiles -= proj
 */
+
+/////////////////////////////////////////////
+// 'Elemental' smoke
+/////////////////////////////////////////////
+
+/obj/effect/effect/smoke/elemental
+	name = "cloud"
+	desc = "A cloud of some kind that seems really generic and boring."
+	opacity = FALSE
+	var/strength = 5 // How much damage to do inside each affect()
+
+/obj/effect/effect/smoke/elemental/Initialize()
+	START_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/effect/effect/smoke/elemental/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/effect/effect/smoke/elemental/Move()
+	..()
+	for(var/mob/living/L in range(1, src))
+		affect(L)
+
+/obj/effect/effect/smoke/elemental/process()
+	for(var/mob/living/L in range(1, src))
+		affect(L)
+
+
+/obj/effect/effect/smoke/elemental/fire
+	name = "burning cloud"
+	desc = "A cloud of something that is on fire."
+	color = "#FF9933"
+	light_color = "#FF0000"
+	light_range = 2
+	light_power = 5
+
+/obj/effect/effect/smoke/elemental/fire/affect(mob/living/L)
+	L.inflict_heat_damage(strength)
+	L.add_modifier(/datum/modifier/fire, 6 SECONDS) // Around 15 damage per stack.
+
+/obj/effect/effect/smoke/elemental/frost
+	name = "freezing cloud"
+	desc = "A cloud filled with brutally cold mist."
+	color = "#00CCFF"
+
+/obj/effect/effect/smoke/elemental/frost/affect(mob/living/L)
+	L.inflict_cold_damage(strength)
+
+/obj/effect/effect/smoke/elemental/shock
+	name = "charged cloud"
+	desc = "A cloud charged with electricity."
+	color = "#4D4D4D"
+
+/obj/effect/effect/smoke/elemental/shock/affect(mob/living/L)
+	L.inflict_shock_damage(strength)
+
+/obj/effect/effect/smoke/elemental/mist
+	name = "misty cloud"
+	desc = "A cloud filled with water vapor."
+	color = "#CCFFFF"
+	alpha = 128
+	strength = 1
+
+/obj/effect/effect/smoke/elemental/mist/affect(mob/living/L)
+	L.water_act(strength)
 
 /////////////////////////////////////////////
 // Smoke spread
@@ -283,9 +349,10 @@ steam.start() -- spawns the effect
 		spawn(0)
 			if(holder)
 				src.location = get_turf(holder)
-			var/obj/effect/effect/smoke/smoke = PoolOrNew(smoke_type, src.location)
+			var/obj/effect/effect/smoke/smoke = new smoke_type(src.location)
 			src.total_smoke++
-			smoke.color = I
+			if(I)
+				smoke.color = I
 			var/direction = src.direction
 			if(!direction)
 				if(src.cardinals)
@@ -299,9 +366,20 @@ steam.start() -- spawns the effect
 				if (smoke) qdel(smoke)
 				src.total_smoke--
 
-
 /datum/effect/effect/system/smoke_spread/bad
 	smoke_type = /obj/effect/effect/smoke/bad
+
+/datum/effect/effect/system/smoke_spread/fire
+	smoke_type = /obj/effect/effect/smoke/elemental/fire
+
+/datum/effect/effect/system/smoke_spread/frost
+	smoke_type = /obj/effect/effect/smoke/elemental/frost
+
+/datum/effect/effect/system/smoke_spread/shock
+	smoke_type = /obj/effect/effect/smoke/elemental/shock
+
+/datum/effect/effect/system/smoke_spread/mist
+	smoke_type = /obj/effect/effect/smoke/elemental/mist
 
 /////////////////////////////////////////////
 //////// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
@@ -332,9 +410,13 @@ steam.start() -- spawns the effect
 			src.processing = 0
 			spawn(0)
 				var/turf/T = get_turf(src.holder)
+				if(istype(holder, /atom/movable))
+					var/atom/movable/AM = holder
+					if(AM.locs && AM.locs.len)
+						T = pick(AM.locs)
 				if(T != src.oldposition)
-					if(istype(T, /turf/space))
-						var/obj/effect/effect/ion_trails/I = PoolOrNew(/obj/effect/effect/ion_trails, src.oldposition)
+					if(isturf(T))
+						var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
 						src.oldposition = T
 						I.set_dir(src.holder.dir)
 						flick("ion_fade", I)
@@ -380,7 +462,7 @@ steam.start() -- spawns the effect
 			src.processing = 0
 			spawn(0)
 				if(src.number < 3)
-					var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, src.oldposition)
+					var/obj/effect/effect/steam/I = new /obj/effect/effect/steam(src.oldposition)
 					src.number++
 					src.oldposition = get_turf(holder)
 					I.set_dir(src.holder.dir)
@@ -420,15 +502,15 @@ steam.start() -- spawns the effect
 
 	start()
 		if (amount <= 2)
-			var/datum/effect/effect/system/spark_spread/s = PoolOrNew(/datum/effect/effect/system/spark_spread)
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 			s.set_up(2, 1, location)
 			s.start()
 
 			for(var/mob/M in viewers(5, location))
-				M << "<span class='warning'>The solution violently explodes.</span>"
+				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
 			for(var/mob/M in viewers(1, location))
 				if (prob (50 * amount))
-					M << "<span class='warning'>The explosion knocks you down.</span>"
+					to_chat(M, "<span class='warning'>The explosion knocks you down.</span>")
 					M.Weaken(rand(1,5))
 			return
 		else
@@ -451,7 +533,7 @@ steam.start() -- spawns the effect
 				flash = (amount/4) * flashing_factor
 
 			for(var/mob/M in viewers(8, location))
-				M << "<span class='warning'>The solution violently explodes.</span>"
+				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
 
 			explosion(
 				location,

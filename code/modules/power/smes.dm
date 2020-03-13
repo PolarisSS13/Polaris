@@ -13,6 +13,7 @@
 	anchored = 1
 	use_power = 0
 	circuit = /obj/item/weapon/circuitboard/smes
+	clicksound = "switch"
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -44,6 +45,7 @@
 	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 	var/obj/machinery/power/terminal/terminal = null
 	var/should_be_mapped = 0 // If this is set to 0 it will send out warning on New()
+	var/grid_check = FALSE // If true, suspends all I/O.
 
 /obj/machinery/power/smes/drain_power(var/drain_check, var/surge, var/amount = 0)
 
@@ -93,22 +95,22 @@
 	return 0
 
 /obj/machinery/power/smes/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & BROKEN)	return
 
-	overlays += image('icons/obj/power.dmi', "smes-op[outputting]")
+	add_overlay("smes-op[outputting]")
 
 	if(inputting == 2)
-		overlays += image('icons/obj/power.dmi', "smes-oc2")
+		add_overlay("smes-oc2")
 	else if (inputting == 1)
-		overlays += image('icons/obj/power.dmi', "smes-oc1")
+		add_overlay("smes-oc1")
 	else
 		if(input_attempt)
-			overlays += image('icons/obj/power.dmi', "smes-oc0")
+			add_overlay("smes-oc0")
 
 	var/clevel = chargedisplay()
 	if(clevel>0)
-		overlays += image('icons/obj/power.dmi', "smes-og[clevel]")
+		add_overlay("smes-og[clevel]")
 	return
 
 
@@ -124,7 +126,7 @@
 	var/last_onln = outputting
 
 	//inputting
-	if(input_attempt && (!input_pulsed && !input_cut))
+	if(input_attempt && (!input_pulsed && !input_cut) && !grid_check)
 		var/target_load = min((capacity-charge)/SMESRATE, input_level)	// charge at set rate, limited to spare capacity
 		var/actual_load = draw_power(target_load)						// add the load to the terminal side network
 		charge += actual_load * SMESRATE								// increase the charge
@@ -137,16 +139,12 @@
 			inputting = 0
 
 	//outputting
-	if(outputting && (!output_pulsed && !output_cut))
+	if(outputting && (!output_pulsed && !output_cut) && !grid_check)
 		output_used = min( charge/SMESRATE, output_level)		//limit output to that stored
 
 		charge -= output_used*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
 
 		add_avail(output_used)				// add output to powernet (smes side)
-
-		if(output_used < 0.0001)			// either from no charge or set to 0
-			outputting(0)
-			investigate_log("lost power and turned <font color='red'>off</font>","singulo")
 	else if(output_attempt && output_level > 0)
 		outputting = 1
 	else
@@ -190,7 +188,7 @@
 //Will return 1 on failure
 /obj/machinery/power/smes/proc/make_terminal(const/mob/user)
 	if (user.loc == loc)
-		user << "<span class='warning'>You must not be on the same tile as the [src].</span>"
+		to_chat(user, "<span class='warning'>You must not be on the same tile as the [src].</span>")
 		return 1
 
 	//Direction the terminal will face to
@@ -202,17 +200,18 @@
 			tempDir = WEST
 	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
 	if (istype(tempLoc, /turf/space))
-		user << "<span class='warning'>You can't build a terminal on space.</span>"
+		to_chat(user, "<span class='warning'>You can't build a terminal on space.</span>")
 		return 1
 	else if (istype(tempLoc))
 		if(!tempLoc.is_plating())
-			user << "<span class='warning'>You must remove the floor plating first.</span>"
+			to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
 			return 1
-	user << "<span class='notice'>You start adding cable to the [src].</span>"
+	to_chat(user, "<span class='notice'>You start adding cable to the [src].</span>")
 	if(do_after(user, 50))
 		terminal = new /obj/machinery/power/terminal(tempLoc)
 		terminal.set_dir(tempDir)
 		terminal.master = src
+		terminal.connect_to_network()
 		return 0
 	return 1
 
@@ -233,25 +232,27 @@
 
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		if(!open_hatch)
 			open_hatch = 1
-			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
+			to_chat(user, "<span class='notice'>You open the maintenance hatch of [src].</span>")
+			playsound(src, W.usesound, 50, 1)
 			return 0
 		else
 			open_hatch = 0
-			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
+			to_chat(user, "<span class='notice'>You close the maintenance hatch of [src].</span>")
+			playsound(src, W.usesound, 50, 1)
 			return 0
 
 	if (!open_hatch)
-		user << "<span class='warning'>You need to open access hatch on [src] first!</span>"
+		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
 		return 0
 
 	if(istype(W, /obj/item/stack/cable_coil) && !terminal && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
-		if (CC.get_amount() <= 10)
-			user << "<span class='warning'>You need more cables.</span>"
+		if (CC.get_amount() < 10)
+			to_chat(user, "<span class='warning'>You need more cables.</span>")
 			building_terminal = 0
 			return 0
 		if (make_terminal(user))
@@ -262,20 +263,19 @@
 		user.visible_message(\
 				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
 				"<span class='notice'>You added cables to the [src].</span>")
-		terminal.connect_to_network()
 		stat = 0
 		return 0
 
-	else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+	else if(W.is_wirecutter() && terminal && !building_terminal)
 		building_terminal = 1
 		var/turf/tempTDir = terminal.loc
 		if (istype(tempTDir))
 			if(!tempTDir.is_plating())
-				user << "<span class='warning'>You must remove the floor plating first.</span>"
+				to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
 			else
-				user << "<span class='notice'>You begin to cut the cables...</span>"
+				to_chat(user, "<span class='notice'>You begin to cut the cables...</span>")
 				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-				if(do_after(user, 50))
+				if(do_after(user, 50 * W.toolspeed))
 					if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
 						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 						s.set_up(5, 1, src)
@@ -307,7 +307,10 @@
 	data["chargeMode"] = input_attempt
 	data["chargeLevel"] = round(input_level/1000, 0.1)
 	data["chargeMax"] = round(input_level_max/1000)
-	data["chargeLoad"] = round(terminal.powernet.avail/1000, 0.1)
+	if (terminal && terminal.powernet)
+		data["chargeLoad"] = round(terminal.powernet.avail/1000, 0.1)
+	else
+		data["chargeLoad"] = 0
 	data["outputOnline"] = output_attempt
 	data["outputLevel"] = round(output_level/1000, 0.1)
 	data["outputMax"] = round(output_level_max/1000)
@@ -321,7 +324,7 @@
 		data["outputting"] = 0			// smes is not outputting
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -368,15 +371,15 @@
 		output_level = max(0, min(output_level_max, output_level))	// clamp to range
 
 	investigate_log("input/output; <font color='[input_level>output_level?"green":"red"][input_level]/[output_level]</font> | Output-mode: [output_attempt?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [input_attempt?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-
+	log_game("SMES([x],[y],[z]) [key_name(usr)] changed settings: I:[input_level]([input_attempt]), O:[output_level]([output_attempt])")
 	return 1
 
 
 /obj/machinery/power/smes/proc/ion_act()
-	if(src.z in config.station_levels)
+	if(src.z in using_map.station_levels)
 		if(prob(1)) //explosion
 			for(var/mob/M in viewers(src))
-				M.show_message("\red The [src.name] is making strange noises!", 3, "\red You hear sizzling electronics.", 2)
+				M.show_message("<font color='red'>The [src.name] is making strange noises!</font>", 3, "<font color='red'>You hear sizzling electronics.</font>", 2)
 			sleep(10*pick(4,5,6,7,10,14))
 			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
 			smoke.set_up(3, 0, src.loc)
@@ -389,10 +392,14 @@
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
-			if(prob(50))
+			if(prob(25))
 				emp_act(1)
-			else
+			else if(prob(25))
 				emp_act(2)
+			else if(prob(25))
+				emp_act(3)
+			else
+				emp_act(4)
 		if(prob(5)) //smoke only
 			var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
 			smoke.set_up(3, 0, src.loc)
@@ -419,7 +426,6 @@
 		charge = 0
 	update_icon()
 	..()
-
 
 /obj/machinery/power/smes/magical
 	name = "magical power storage unit"

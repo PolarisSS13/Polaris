@@ -4,18 +4,18 @@
 
 	if(href_list["info"])
 		// spawn or admin privileges to see info about viruses
-		if(!check_rights(R_ADMIN|R_SPAWN)) return
+		if(!check_rights(R_ADMIN|R_SPAWN|R_EVENT)) return
 
-		usr << "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]"
-		usr << "Affected species: [english_list(affected_species)]"
-		usr << "Effects:"
+		to_chat(usr, "Infection chance: [infectionchance]; Speed: [speed]; Spread type: [spreadtype]")
+		to_chat(usr, "Affected species: [english_list(affected_species)]")
+		to_chat(usr, "Effects:")
 		for(var/datum/disease2/effectholder/E in effects)
-			usr << "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]"
-		usr << "Antigens: [antigens2string(antigen)]"
+			to_chat(usr, "[E.stage]: [E.effect.name]; chance=[E.chance]; multiplier=[E.multiplier]")
+		to_chat(usr, "Antigens: [antigens2string(antigen)]; Resistance: [resistance]")
 
 		return 1
 
-/datum/disease2/disease/get_view_variables_header()
+/datum/disease2/disease/vv_get_header()
 	. = list()
 	for(var/datum/disease2/effectholder/E in effects)
 		. += "[E.stage]: [E.effect.name]"
@@ -46,6 +46,7 @@
 	var/spreadtype = "Contact"
 	var/list/antigens = list()
 	var/speed = 1
+	var/resistance = 10
 	var/mob/living/carbon/infectee = null
 
 	// this holds spawned viruses so that the "Info" links work after the proc exits
@@ -85,8 +86,8 @@
 		<b>Infectable Species:</b><br />
 		"}
 		var/f = 1
-		for(var/k in all_species)
-			var/datum/species/S = all_species[k]
+		for(var/k in GLOB.all_species)
+			var/datum/species/S = GLOB.all_species[k]
 			if(S.get_virus_immune())
 				continue
 			if(!f) H += " | "
@@ -98,6 +99,7 @@
 		<b>Infection Chance:</b> <a href="?src=\ref[src];what=ichance">[infectionchance]</a><br />
 		<b>Spread Type:</b> <a href="?src=\ref[src];what=stype">[spreadtype]</a><br />
 		<b>Speed:</b> <a href="?src=\ref[src];what=speed">[speed]</a><br />
+		<b>Resistance:</b> <a href="?src=\ref[src];what=resistance">[resistance]</a><br />
 		<br />
 		"}
 		f = 1
@@ -153,8 +155,8 @@
 				if(!I) return
 				infectionchance = I
 			if("stype")
-				var/S = alert("Which spread type?", "Spread Type", "Cancel", "Contact", "Airborne")
-				if(!S || S == "Cancel") return
+				var/S = alert("Which spread type?", "Spread Type", "Contact", "Airborne", "Blood")
+				if(!S) return
 				spreadtype = S
 			if("speed")
 				var/S = input("Input speed", "Speed", speed) as null|num
@@ -170,6 +172,10 @@
 						antigens |= T
 				else if(href_list["reset"])
 					antigens = list()
+			if("resistance")
+				var/S = input("Input % resistance to antibiotics", "Resistance", resistance) as null|num
+				if(!S) return
+				resistance = S
 			if("infectee")
 				var/list/candidates = list()
 				for(var/mob/living/carbon/G in living_mob_list)
@@ -178,7 +184,8 @@
 							candidates["[G.name][G.client ? "" : " (no client)"]"] = G
 						else
 							candidates["[G.name] ([G.species.get_bodytype()])[G.client ? "" : " (no client)"]"] = G
-				if(!candidates.len) usr << "No possible candidates found!"
+				if(!candidates.len)
+					to_chat(usr, "No possible candidates found!")
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return
@@ -195,6 +202,7 @@
 				D.antigen = antigens
 				D.affected_species = species
 				D.speed = speed
+				D.resistance = resistance
 				for(var/i in 1 to 4)
 					var/datum/disease2/effectholder/E = new
 					var/Etype = s[i]

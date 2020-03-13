@@ -16,7 +16,7 @@
 			Occupant status:
 			</div>
 			<div class="itemContent">
-				Health: {{:data.health}}% ({{:data.stat}}).
+				Health: {{:helper.round(data.health / data.maxHealth)*100}}% ({{:data.stat}}).
 			</div>
 			<div class="itemLabel">
 				Pulse:
@@ -49,7 +49,10 @@
 			{{:helper.displayBar(data.tox, 0, 100, (data.tox <= 25) ? 'good' : (data.tox <= 50) ? 'average' : 'bad')}}{{:helper.round(data.tox)}}
 			</div>
 			<div class="itemContent">
-			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'filter' : !data.filtering})}}
+			{{:helper.link(data.filtering ? "Dialysis active" : "Dialysis inactive", null, {'sleeper_filter' : !data.filtering})}}
+			</div>
+			<div class="itemContent">
+			{{:helper.link(data.pump ? "Stomach pump active" : "Stomach pump inactive", null, {'pump' : !data.pump})}}
 			</div>
 			<div class="itemContent">
 				{{:helper.link("Eject occupant", null, {'eject' : 0})}}
@@ -88,4 +91,12 @@
 			</div>
 		</div>
 	{{/if}}
+	<div class="item">
+		<div class="itemLabel">
+			Stasis Level:
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.stasis, null, {'change_stasis' : 1})}}
+		</div>
+	</div>
 {{/if}}

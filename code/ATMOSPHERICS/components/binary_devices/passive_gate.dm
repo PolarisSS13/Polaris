@@ -5,21 +5,23 @@
 /obj/machinery/atmospherics/binary/passive_gate
 	icon = 'icons/atmos/passive_gate.dmi'
 	icon_state = "map"
+	construction_type = /obj/item/pipe/directional
+	pipe_state = "passivegate"
 	level = 1
 
 	name = "pressure regulator"
 	desc = "A one-way air valve that can be used to regulate input or output pressure, and flow rate. Does not require power."
 
 	use_power = 0
-	
+
 	var/unlocked = 0	//If 0, then the valve is locked closed, otherwise it is open(-able, it's a one-way valve so it closes if gas would flow backwards).
 	var/target_pressure = ONE_ATMOSPHERE
 	var/max_pressure_setting = 15000	//kPa
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_PUMP * 2.5
 	var/regulate_mode = REGULATE_OUTPUT
-	
+
 	var/flowing = 0	//for icons - becomes zero if the valve closes itself due to regulation mode
-	
+
 	var/frequency = 0
 	var/id = null
 	var/datum/radio_frequency/radio_connection
@@ -28,6 +30,10 @@
 	..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP * 2.5
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP * 2.5
+
+/obj/machinery/atmospherics/binary/passive_gate/Destroy()
+	unregister_radio(src, frequency)
+	. = ..()
 
 /obj/machinery/atmospherics/binary/passive_gate/update_icon()
 	icon_state = (unlocked && flowing)? "on" : "off"
@@ -46,9 +52,9 @@
 
 /obj/machinery/atmospherics/binary/passive_gate/process()
 	..()
-	
+
 	last_flow_rate = 0
-	
+
 	if(!unlocked)
 		return 0
 
@@ -61,35 +67,74 @@
 			pressure_delta = input_starting_pressure - target_pressure
 		if (REGULATE_OUTPUT)
 			pressure_delta = target_pressure - output_starting_pressure
-	
+		if (REGULATE_NONE)
+			pressure_delta = input_starting_pressure - output_starting_pressure
+
 	//-1 if pump_gas() did not move any gas, >= 0 otherwise
 	var/returnval = -1
 	if((regulate_mode == REGULATE_NONE || pressure_delta > 0.01) && (air1.temperature > 0 || air2.temperature > 0))	//since it's basically a valve, it makes sense to check both temperatures
 		flowing = 1
-		
+
 		//flow rate limit
 		var/transfer_moles = (set_flow_rate/air1.volume)*air1.total_moles
-		
+
 		//Figure out how much gas to transfer to meet the target pressure.
 		switch (regulate_mode)
 			if (REGULATE_INPUT)
 				transfer_moles = min(transfer_moles, calculate_transfer_moles(air2, air1, pressure_delta, (network1)? network1.volume : 0))
 			if (REGULATE_OUTPUT)
 				transfer_moles = min(transfer_moles, calculate_transfer_moles(air1, air2, pressure_delta, (network2)? network2.volume : 0))
-		
+			if (REGULATE_NONE)
+				var/source = air1
+				var/sink = air2
+				// If node1 is a network of more than 1 pipe, we want to transfer from that whole network, otw use just node1, as current
+				if(istype(node1, /obj/machinery/atmospherics/pipe))
+					var/obj/machinery/atmospherics/pipe/p = node1
+					if(istype(p.parent, /datum/pipeline)) // Nested if-blocks to avoid the mystical :
+						var/datum/pipeline/l = p.parent
+						if(istype(l.air, /datum/gas_mixture))
+							source = l.air
+				// If node2 is a network of more than 1 pipe, we want to transfer to that whole network, otw use just node2, as current
+				if(istype(node2, /obj/machinery/atmospherics/pipe))
+					var/obj/machinery/atmospherics/pipe/p = node2
+					if(istype(p.parent, /datum/pipeline))
+						var/datum/pipeline/l = p.parent
+						if(istype(l.air, /datum/gas_mixture))
+							sink = l.air
+				transfer_moles = max(0, calculate_equalize_moles(source, sink)) // Not regulated, don't care about flow rate
+
 		//pump_gas() will return a negative number if no flow occurred
-		returnval = pump_gas_passive(src, air1, air2, transfer_moles)
-	
+		if(regulate_mode == REGULATE_NONE) // ACTUALLY move gases from the whole network, not just the immediate pipes
+			var/source = air1
+			var/sink = air2
+			// If node1 is a network of more than 1 pipe, we want to transfer from that whole network, otw use just node1, as current
+			if(istype(node1, /obj/machinery/atmospherics/pipe))
+				var/obj/machinery/atmospherics/pipe/p = node1
+				if(istype(p.parent, /datum/pipeline)) // Nested if-blocks to avoid the mystical :
+					var/datum/pipeline/l = p.parent
+					if(istype(l.air, /datum/gas_mixture))
+						source = l.air
+			// If node2 is a network of more than 1 pipe, we want to transfer to that whole network, otw use just node2, as current
+			if(istype(node2, /obj/machinery/atmospherics/pipe))
+				var/obj/machinery/atmospherics/pipe/p = node2
+				if(istype(p.parent, /datum/pipeline))
+					var/datum/pipeline/l = p.parent
+					if(istype(l.air, /datum/gas_mixture))
+						sink = l.air
+			returnval = pump_gas_passive(src, source, sink, transfer_moles)
+		else
+			returnval = pump_gas_passive(src, air1, air2, transfer_moles)
+
 	if (returnval >= 0)
 		if(network1)
 			network1.update = 1
 
 		if(network2)
 			network2.update = 1
-		
+
 	if (last_flow_rate)
 		flowing = 1
-	
+
 	update_icon()
 
 
@@ -123,8 +168,8 @@
 
 	return 1
 
-/obj/machinery/atmospherics/binary/passive_gate/initialize()
-	..()
+/obj/machinery/atmospherics/binary/passive_gate/Initialize()
+	. = ..()
 	if(frequency)
 		set_frequency(frequency)
 
@@ -166,7 +211,7 @@
 		return
 	src.add_fingerprint(usr)
 	if(!src.allowed(user))
-		user << "<span class='warning'>Access denied.</span>"
+		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
 	usr.set_machine(src)
 	ui_interact(user)
@@ -178,7 +223,7 @@
 
 	// this is the data which will be sent to the ui
 	var/data[0]
-	
+
 	data = list(
 		"on" = unlocked,
 		"pressure_set" = round(target_pressure*100),	//Nano UI can't handle rounded non-integers, apparently.
@@ -191,7 +236,7 @@
 	)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -203,16 +248,16 @@
 
 /obj/machinery/atmospherics/binary/passive_gate/Topic(href,href_list)
 	if(..()) return 1
-	
+
 	if(href_list["toggle_valve"])
 		unlocked = !unlocked
-	
+
 	if(href_list["regulate_mode"])
 		switch(href_list["regulate_mode"])
 			if ("off") regulate_mode = REGULATE_NONE
 			if ("input") regulate_mode = REGULATE_INPUT
 			if ("output") regulate_mode = REGULATE_OUTPUT
-	
+
 	switch(href_list["set_press"])
 		if ("min")
 			target_pressure = 0
@@ -221,7 +266,7 @@
 		if ("set")
 			var/new_pressure = input(usr,"Enter new output pressure (0-[max_pressure_setting]kPa)","Pressure Control",src.target_pressure) as num
 			src.target_pressure = between(0, new_pressure, max_pressure_setting)
-	
+
 	switch(href_list["set_flow_rate"])
 		if ("min")
 			set_flow_rate = 0
@@ -230,33 +275,30 @@
 		if ("set")
 			var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[air1.volume]kPa)","Flow Rate Control",src.set_flow_rate) as num
 			src.set_flow_rate = between(0, new_flow_rate, air1.volume)
-	
+
 	usr.set_machine(src)	//Is this even needed with NanoUI?
 	src.update_icon()
 	src.add_fingerprint(usr)
 	return
 
 /obj/machinery/atmospherics/binary/passive_gate/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+	if (!W.is_wrench())
 		return ..()
 	if (unlocked)
-		user << "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>"
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
 		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		user << "<span class='warning'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>"
+	if(!can_unwrench())
+		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it too exerted due to internal pressure.</span>")
 		add_fingerprint(user)
 		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	user << "<span class='notice'>You begin to unfasten \the [src]...</span>"
-	if (do_after(user, 40))
+	playsound(src, W.usesound, 50, 1)
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+	if (do_after(user, 40 * W.toolspeed))
 		user.visible_message( \
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
-		qdel(src)
+		deconstruct()
 
 #undef REGULATE_NONE
 #undef REGULATE_INPUT

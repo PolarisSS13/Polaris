@@ -18,7 +18,6 @@
 
 /obj/machinery/mass_driver/New()
 	..()
-	circuit = new circuit(src)
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/motor(src)
 	component_parts += new /obj/item/weapon/stock_parts/motor(src)
@@ -39,7 +38,7 @@
 		if(panel_open)
 			var/input = sanitize(input(usr, "What id would you like to give this conveyor?", "Multitool-Conveyor interface", id))
 			if(!input)
-				usr << "No input found please hang up and try your call again."
+				to_chat(usr, "No input found please hang up and try your call again.")
 				return
 			id = input
 			return
@@ -56,10 +55,10 @@
 			O_limit++
 			if(O_limit >= 20)
 				for(var/mob/M in hearers(src, null))
-					M << "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>"
+					to_chat(M, "<span class='notice'>The mass driver lets out a screech, it mustn't be able to handle any more items.</span>")
 				break
 			use_power(500)
-			spawn( 0 )
+			spawn(0)
 				O.throw_at(target, drive_range * power, power)
 	flick("mass_driver1", src)
 	return

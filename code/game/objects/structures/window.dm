@@ -3,9 +3,10 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
-	w_class = 3
+	can_atmos_pass = ATMOS_PASS_DENSITY
+	w_class = ITEMSIZE_NORMAL
 
-	layer = 3.2//Just above doors
+	layer = WINDOW_LAYER
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
 	flags = ON_BORDER
@@ -13,6 +14,7 @@
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/health
+	var/force_threshold = 0
 	var/ini_dir = null
 	var/state = 2
 	var/reinf = 0
@@ -20,31 +22,32 @@
 	var/shardtype = /obj/item/weapon/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
+	var/fulltile = FALSE // Set to true on full-tile variants.
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
 
 	if(health == maxhealth)
-		user << "<span class='notice'>It looks fully intact.</span>"
+		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
 		var/perc = health / maxhealth
 		if(perc > 0.75)
-			user << "<span class='notice'>It has a few cracks.</span>"
+			to_chat(user, "<span class='notice'>It has a few cracks.</span>")
 		else if(perc > 0.5)
-			user << "<span class='warning'>It looks slightly damaged.</span>"
+			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
 		else if(perc > 0.25)
-			user << "<span class='warning'>It looks moderately damaged.</span>"
+			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
 		else
-			user << "<span class='danger'>It looks heavily damaged.</span>"
+			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
 	if(silicate)
 		if (silicate < 30)
-			user << "<span class='notice'>It has a thin layer of silicate.</span>"
+			to_chat(user, "<span class='notice'>It has a thin layer of silicate.</span>")
 		else if (silicate < 70)
-			user << "<span class='notice'>It is covered in silicate.</span>"
+			to_chat(user, "<span class='notice'>It is covered in silicate.</span>")
 		else
-			user << "<span class='notice'>There is a thick layer of silicate covering it.</span>"
+			to_chat(user, "<span class='notice'>There is a thick layer of silicate covering it.</span>")
 
-/obj/structure/window/proc/take_damage(var/damage = 0,  var/sound_effect = 1)
+/obj/structure/window/take_damage(var/damage = 0,  var/sound_effect = 1)
 	var/initialhealth = health
 
 	if(silicate)
@@ -59,10 +62,13 @@
 			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
 			visible_message("[src] looks like it's about to shatter!" )
+			update_icon()
 		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
 			visible_message("[src] looks seriously damaged!" )
+			update_icon()
 		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
 			visible_message("Cracks begin to appear in [src]!" )
+			update_icon()
 	return
 
 /obj/structure/window/proc/apply_silicate(var/amount)
@@ -77,8 +83,9 @@
 /obj/structure/window/proc/updateSilicate()
 	if (overlays)
 		overlays.Cut()
+	update_icon()
 
-	var/image/img = image(src.icon, src.icon_state)
+	var/image/img = image(src)
 	img.color = "#ffffff"
 	img.alpha = silicate * 255 / 100
 	overlays += img
@@ -87,16 +94,13 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-	if(dir == SOUTHWEST)
-		var/index = null
-		index = 0
-		while(index < 2)
-			new shardtype(loc) //todo pooling?
-			if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
-			index++
-	else
+	new shardtype(loc)
+	if(reinf)
+		new /obj/item/stack/rods(loc)
+	if(is_fulltile())
 		new shardtype(loc) //todo pooling?
-		if(reinf) PoolOrNew(/obj/item/stack/rods, loc)
+		if(reinf)
+			new /obj/item/stack/rods(loc)
 	qdel(src)
 	return
 
@@ -124,22 +128,23 @@
 				shatter(0)
 				return
 
-//TODO: Make full windows a separate type of window.
-//Once a full window, it will always be a full window, so there's no point
-//having the same type for both.
-/obj/structure/window/proc/is_full_window()
-	return (dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
+/obj/structure/window/blob_act()
+	take_damage(50)
 
-/obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/structure/window/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASSGLASS))
-		return 1
-	if(is_full_window())
-		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) & dir)
+		return TRUE
+	if(is_fulltile())
+		return FALSE	//full tile window, you can't move into it!
+	if((get_dir(loc, target) & dir) || (get_dir(mover, target) == turn(dir, 180)))
 		return !density
 	else
-		return 1
+		return TRUE
 
+/obj/structure/window/CanZASPass(turf/T, is_zone)
+	if(is_fulltile() || get_dir(T, loc) == turn(dir, 180)) // Make sure we're handling the border correctly.
+		return anchored ? ATMOS_PASS_NO : ATMOS_PASS_YES // If it's anchored, it'll block air.
+	return ATMOS_PASS_YES // Don't stop airflow from the other sides.
 
 /obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASSGLASS))
@@ -147,7 +152,6 @@
 	if(get_dir(O.loc, target) == dir)
 		return 0
 	return 1
-
 
 /obj/structure/window/hitby(AM as mob|obj)
 	..()
@@ -161,6 +165,7 @@
 	if(reinf) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf)
 		anchored = 0
+		update_verbs()
 		update_nearby_icons()
 		step(src, get_dir(AM, src))
 	take_damage(tforce)
@@ -170,7 +175,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 
 /obj/structure/window/attack_hand(mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
 		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
@@ -198,11 +203,13 @@
 	return
 
 /obj/structure/window/attack_generic(var/mob/user, var/damage)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	if(!damage)
 		return
-	if(damage >= 10)
+	if(damage >= STRUCTURE_MIN_DAMAGE_THRESHOLD)
 		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		if(reinf)
+			damage = damage / 2
 		take_damage(damage)
 	else
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
@@ -211,6 +218,24 @@
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
+
+	// Fixing.
+	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent == I_HELP)
+		var/obj/item/weapon/weldingtool/WT = W
+		if(health < maxhealth)
+			if(WT.remove_fuel(1 ,user))
+				to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
+				playsound(src, WT.usesound, 50, 1)
+				if(do_after(user, 40 * WT.toolspeed, target = src))
+					health = maxhealth
+			//		playsound(src, 'sound/items/Welder.ogg', 50, 1)
+					update_icon()
+					to_chat(user, "<span class='notice'>You repair [src].</span>")
+		else
+			to_chat(user, "<span class='warning'>[src] is already in good condition!</span>")
+		return
+
+	// Slamming.
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if(istype(G.affecting,/mob/living))
@@ -237,45 +262,62 @@
 
 	if(W.flags & NOBLUDGEON) return
 
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(W.is_screwdriver())
 		if(reinf && state >= 1)
 			state = 3 - state
 			update_nearby_icons()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			user << (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>")
+			playsound(src, W.usesound, 75, 1)
+			to_chat(user, "<span class='notice'>You have [state == 1 ? "un" : ""]fastened the window [state ? "from" : "to"] the frame.</span>")
 		else if(reinf && state == 0)
 			anchored = !anchored
 			update_nearby_icons()
 			update_verbs()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			user << (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>")
+			playsound(src, W.usesound, 75, 1)
+			to_chat(user, "<span class='notice'>You have [anchored ? "" : "un"]fastened the frame [anchored ? "to" : "from"] the floor.</span>")
 		else if(!reinf)
 			anchored = !anchored
 			update_nearby_icons()
 			update_verbs()
-			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			user << (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>")
-	else if(istype(W, /obj/item/weapon/crowbar) && reinf && state <= 1)
+			playsound(src, W.usesound, 75, 1)
+			to_chat(user, "<span class='notice'>You have [anchored ? "" : "un"]fastened the window [anchored ? "to" : "from"] the floor.</span>")
+	else if(W.is_crowbar() && reinf && state <= 1)
 		state = 1 - state
-		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		user << (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>")
-	else if(istype(W, /obj/item/weapon/wrench) && !anchored && (!state || !reinf))
+		playsound(src, W.usesound, 75, 1)
+		to_chat(user, "<span class='notice'>You have pried the window [state ? "into" : "out of"] the frame.</span>")
+	else if(W.is_wrench() && !anchored && (!state || !reinf))
 		if(!glasstype)
-			user << "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>"
+			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
 		else
-			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+			playsound(src, W.usesound, 75, 1)
 			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
-			if(dir == SOUTHWEST)
-				var/obj/item/stack/material/mats = new glasstype(loc)
-				mats.amount = is_fulltile() ? 4 : 2
-			else
-				new glasstype(loc)
+			var/obj/item/stack/material/mats = new glasstype(loc)
+			if(is_fulltile())
+				mats.amount = 4
 			qdel(src)
+	else if(istype(W, /obj/item/stack/cable_coil) && reinf && state == 0 && !istype(src, /obj/structure/window/reinforced/polarized))
+		var/obj/item/stack/cable_coil/C = W
+		if (C.use(1))
+			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
+			user.visible_message( \
+				"<span class='notice'>\The [user] begins to wire \the [src] for electrochromic tinting.</span>", \
+				"<span class='notice'>You begin to wire \the [src] for electrochromic tinting.</span>", \
+				"You hear sparks.")
+			if(do_after(user, 20 * C.toolspeed, src) && state == 0)
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				var/obj/structure/window/reinforced/polarized/P = new(loc, dir)
+				if(is_fulltile())
+					P.fulltile = TRUE
+					P.icon_state = "fwindow"
+				P.maxhealth = maxhealth
+				P.health = health
+				P.state = state
+				P.anchored = anchored
+				qdel(src)
 	else if(istype(W,/obj/item/frame) && anchored)
 		var/obj/item/frame/F = W
-		F.try_build(src)
+		F.try_build(src, user)
 	else
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.setClickCooldown(user.get_attack_speed(W))
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)
@@ -289,31 +331,36 @@
 	return
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
+	if(damage < force_threshold || force_threshold < 0)
+		return
 	if(reinf) damage *= 0.5
 	take_damage(damage)
 	return
 
 
-/obj/structure/window/proc/rotate()
-	set name = "Rotate Window Counter-Clockwise"
+/obj/structure/window/verb/rotate_counterclockwise()
+	set name = "Rotate Window Counterclockwise"
 	set category = "Object"
 	set src in oview(1)
 
 	if(usr.incapacitated())
 		return 0
 
+	if(is_fulltile())
+		return 0
+
 	if(anchored)
-		usr << "It is fastened to the floor therefore you can't rotate it!"
+		to_chat(usr, "It is fastened to the floor therefore you can't rotate it!")
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	set_dir(turn(dir, 90))
+	src.set_dir(turn(src.dir, 90))
 	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
 
 
-/obj/structure/window/proc/revrotate()
+/obj/structure/window/verb/rotate_clockwise()
 	set name = "Rotate Window Clockwise"
 	set category = "Object"
 	set src in oview(1)
@@ -321,12 +368,15 @@
 	if(usr.incapacitated())
 		return 0
 
+	if(is_fulltile())
+		return 0
+
 	if(anchored)
-		usr << "It is fastened to the floor therefore you can't rotate it!"
+		to_chat(usr, "It is fastened to the floor therefore you can't rotate it!")
 		return 0
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
-	set_dir(turn(dir, 270))
+	src.set_dir(turn(src.dir, 270))
 	updateSilicate()
 	update_nearby_tiles(need_rebuild=1)
 	return
@@ -334,13 +384,14 @@
 /obj/structure/window/New(Loc, start_dir=null, constructed=0)
 	..()
 
+	if (start_dir)
+		set_dir(start_dir)
+
 	//player-constructed windows
 	if (constructed)
 		anchored = 0
+		state = 0
 		update_verbs()
-
-	if (start_dir)
-		set_dir(start_dir)
 
 	health = maxhealth
 
@@ -354,12 +405,9 @@
 	density = 0
 	update_nearby_tiles()
 	var/turf/location = loc
-	loc = null
+	. = ..()
 	for(var/obj/structure/window/W in orange(location, 1))
 		W.update_icon()
-	loc = location
-	..()
-
 
 /obj/structure/window/Move()
 	var/ini_dir = dir
@@ -370,9 +418,7 @@
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()
-	if(dir & (dir - 1))
-		return 1
-	return 0
+	return fulltile
 
 //This proc is used to update the icons of nearby windows. It should not be confused with update_nearby_tiles(), which is an atmos proc!
 /obj/structure/window/proc/update_nearby_icons()
@@ -382,12 +428,12 @@
 
 //Updates the availabiliy of the rotation verbs
 /obj/structure/window/proc/update_verbs()
-	if(anchored)
-		verbs -= /obj/structure/window/proc/rotate
-		verbs -= /obj/structure/window/proc/revrotate
-	else
-		verbs += /obj/structure/window/proc/rotate
-		verbs += /obj/structure/window/proc/revrotate
+	if(anchored || is_fulltile())
+		verbs -= /obj/structure/window/verb/rotate_counterclockwise
+		verbs -= /obj/structure/window/verb/rotate_clockwise
+	else if(!is_fulltile())
+		verbs += /obj/structure/window/verb/rotate_counterclockwise
+		verbs += /obj/structure/window/verb/rotate_clockwise
 
 //merges adjacent full-tile windows into one (blatant ripoff from game/smoothwall.dm)
 /obj/structure/window/update_icon()
@@ -400,7 +446,7 @@
 	var/list/dirs = list()
 	if(anchored)
 		for(var/obj/structure/window/W in orange(src,1))
-			if(W.anchored && W.density && W.type == src.type && W.is_fulltile()) //Only counts anchored, not-destroyed fill-tile windows.
+			if(W.anchored && W.density && W.glasstype == src.glasstype && W.is_fulltile()) //Only counts anchored, not-destroyed fill-tile windows.
 				dirs += get_dir(src, W)
 
 	var/list/connections = dirs_to_corner_states(dirs)
@@ -409,6 +455,15 @@
 	for(var/i = 1 to 4)
 		var/image/I = image(icon, "[basestate][connections[i]]", dir = 1<<(i-1))
 		overlays += I
+
+	// Damage overlays.
+	var/ratio = health / maxhealth
+	ratio = CEILING(ratio * 4, 1) * 25
+
+	if(ratio > 75)
+		return
+	var/image/I = image(icon, "damage[ratio]", layer = layer + 0.1)
+	overlays += I
 
 	return
 
@@ -420,13 +475,19 @@
 
 
 /obj/structure/window/basic
-	desc = "It looks thin and flimsy. A few knocks with... anything, really should shatter it."
+	desc = "It looks thin and flimsy. A few knocks with... almost anything, really should shatter it."
 	icon_state = "window"
 	basestate = "window"
 	glasstype = /obj/item/stack/material/glass
 	maximal_heat = T0C + 100
 	damage_per_fire_tick = 2.0
 	maxhealth = 12.0
+	force_threshold = 3
+
+/obj/structure/window/basic/full
+	icon_state = "window-full"
+	maxhealth = 24
+	fulltile = TRUE
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"
@@ -438,6 +499,12 @@
 	maximal_heat = T0C + 2000
 	damage_per_fire_tick = 1.0
 	maxhealth = 40.0
+	force_threshold = 5
+
+/obj/structure/window/phoronbasic/full
+	icon_state = "phoronwindow-full"
+	maxhealth = 80
+	fulltile = TRUE
 
 /obj/structure/window/phoronreinforced
 	name = "reinforced borosilicate window"
@@ -450,7 +517,12 @@
 	maximal_heat = T0C + 4000
 	damage_per_fire_tick = 1.0 // This should last for 80 fire ticks if the window is not damaged at all. The idea is that borosilicate windows have something like ablative layer that protects them for a while.
 	maxhealth = 80.0
+	force_threshold = 10
 
+/obj/structure/window/phoronreinforced/full
+	icon_state = "phoronrwindow-full"
+	maxhealth = 160
+	fulltile = TRUE
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
@@ -462,14 +534,12 @@
 	maximal_heat = T0C + 750
 	damage_per_fire_tick = 2.0
 	glasstype = /obj/item/stack/material/glass/reinforced
+	force_threshold = 6
 
-
-/obj/structure/window/New(Loc, constructed=0)
-	..()
-
-	//player-constructed windows
-	if (constructed)
-		state = 0
+/obj/structure/window/reinforced/full
+	icon_state = "rwindow-full"
+	maxhealth = 80
+	fulltile = TRUE
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
@@ -484,6 +554,7 @@
 	icon_state = "fwindow"
 	basestate = "fwindow"
 	maxhealth = 30
+	force_threshold = 5
 
 /obj/structure/window/shuttle
 	name = "shuttle window"
@@ -495,11 +566,34 @@
 	reinf = 1
 	basestate = "w"
 	dir = 5
+	force_threshold = 7
 
 /obj/structure/window/reinforced/polarized
 	name = "electrochromic window"
 	desc = "Adjusts its tint with voltage. Might take a few good hits to shatter it."
 	var/id
+
+/obj/structure/window/reinforced/polarized/full
+	icon_state = "rwindow-full"
+	maxhealth = 80
+	fulltile = TRUE
+
+/obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/device/multitool) && !anchored) // Only allow programming if unanchored!
+		var/obj/item/device/multitool/MT = W
+		// First check if they have a windowtint button buffered
+		if(istype(MT.connectable, /obj/machinery/button/windowtint))
+			var/obj/machinery/button/windowtint/buffered_button = MT.connectable
+			src.id = buffered_button.id
+			to_chat(user, "<span class='notice'>\The [src] is linked to \the [buffered_button].</span>")
+			return TRUE
+		// Otherwise fall back to asking them
+		var/t = sanitizeSafe(input(user, "Enter the ID for the window.", src.name, null), MAX_NAME_LEN)
+		if (!t && user.get_active_hand() != W && in_range(src, user))
+			src.id = t
+			to_chat(user, "<span class='notice'>The new ID of \the [src] is [id]</span>")
+			return TRUE
+	. = ..()
 
 /obj/structure/window/reinforced/polarized/proc/toggle()
 	if(opacity)
@@ -543,3 +637,37 @@
 
 /obj/machinery/button/windowtint/update_icon()
 	icon_state = "light[active]"
+
+/obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/device/multitool))
+		var/obj/item/device/multitool/MT = W
+		if(!id)
+			// If no ID is set yet (newly built button?) let them select an ID for first-time use!
+			var/t = sanitizeSafe(input(user, "Enter an ID for \the [src].", src.name, null), MAX_NAME_LEN)
+			if (t && user.get_active_hand() != W && in_range(src, user))
+				src.id = t
+				to_chat(user, "<span class='notice'>The new ID of \the [src] is [id]</span>")
+		if(id)
+			// It already has an ID (or they just set one), buffer it for copying to windows.
+			to_chat(user, "<span class='notice'>You store \the [src] in \the [MT]'s buffer!</span>")
+			MT.connectable = src
+			MT.update_icon()
+		return TRUE
+	. = ..()
+
+/obj/structure/window/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_DECONSTRUCT)
+			return list(
+				RCD_VALUE_MODE = RCD_DECONSTRUCT,
+				RCD_VALUE_DELAY = 5 SECONDS,
+				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 5
+			)
+
+/obj/structure/window/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_DECONSTRUCT)
+			to_chat(user, span("notice", "You deconstruct \the [src]."))
+			qdel(src)
+			return TRUE
+	return FALSE

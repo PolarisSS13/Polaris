@@ -1,15 +1,18 @@
+//////////////////////////////////
+//		Chief Engineer
+//////////////////////////////////
 /datum/job/chief_engineer
 	title = "Chief Engineer"
 	flag = CHIEF
-	head_position = 1
-	department = "Engineering"
+	departments_managed = list(DEPARTMENT_ENGINEERING)
+	departments = list(DEPARTMENT_ENGINEERING, DEPARTMENT_COMMAND)
+	sorting_order = 2
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "the Colony Director"
 	selection_color = "#7F6E2C"
-	idtype = /obj/item/weapon/card/id/engineering/head
 	req_admin_notify = 1
 	economic_modifier = 10
 
@@ -27,96 +30,82 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 7
 
+	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+	job_description = "The Chief Engineer manages the Engineering Department, ensuring that the Engineers work on what needs to be done, handling distribution \
+						of manpower as much as they handle hands-on operations and repairs. They are also expected to keep the rest of the station informed of \
+						any structural threats to the station that may be hazardous to health or disruptive to work."
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/ce(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/eng(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_engineer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/ce(H), slot_l_store)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/workboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat/white(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
-		return 1
+// Chief Engineer Alt Titles
+/datum/alt_title/chief_engineer
+	title = "Chief Engineer"
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
-
-
+//////////////////////////////////
+//			Engineer
+//////////////////////////////////
 /datum/job/engineer
 	title = "Station Engineer"
 	flag = ENGINEER
-	department = "Engineering"
+	departments = list(DEPARTMENT_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the chief engineer"
+	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
-	idtype = /obj/item/weapon/card/id/engineering
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
-	alt_titles = list("Maintenance Technician","Engine Technician","Electrician")
+	alt_titles = list("Station Engineer" = /datum/alt_title/engineer, "Maintenance Technician" = /datum/alt_title/maint_tech,
+						"Engine Technician" = /datum/alt_title/engine_tech, "Electrician" = /datum/alt_title/electrician)
 
+	minimal_player_age = 3
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/eng(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/engineer(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/workboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/engineering(H), slot_l_store)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
+	job_description = "An Engineer keeps the station running. They repair damages, keep the atmosphere stable, and ensure that power is being \
+						generated and distributed. On quiet shifts, they may be called upon to make cosmetic alterations to the station."
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
+// Engineer Alt Titles
+/datum/alt_title/engineer
+	title = "Station Engineer"
 
+/datum/alt_title/maint_tech
+	title = "Maintenance Technician"
+	title_blurb = "A Maintenance Technician is generally a junior Engineer, and can be expected to run the mildly unpleasant or boring tasks that other \
+					Engineers don't care to do."
 
+/datum/alt_title/engine_tech
+	title = "Engine Technician"
+	title_blurb = "An Engine Technician tends to the engine, most commonly a Supermatter crystal. They are expected to be able to keep it stable, and \
+					possibly even run it beyond normal tolerances."
+
+/datum/alt_title/electrician
+	title = "Electrician"
+	title_blurb = "An Electrician's primary duty is making sure power is properly distributed thoughout the station, utilizing solars, substations, and other \
+					methods to ensure every department has power in an emergency."
+
+//////////////////////////////////
+//			Atmos Tech
+//////////////////////////////////
 /datum/job/atmos
 	title = "Atmospheric Technician"
 	flag = ATMOSTECH
-	department = "Engineering"
+	departments = list(DEPARTMENT_ENGINEERING)
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the chief engineer"
+	supervisors = "the Chief Engineer"
 	selection_color = "#5B4D20"
-	idtype = /obj/item/weapon/card/id/engineering
 	economic_modifier = 5
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_external_airlocks)
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 
+	minimal_player_age = 3
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(H), slot_l_ear)
-		switch(H.backbag)
-			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
-			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel/norm(H), slot_back)
-			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/atmospheric_technician(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/workboots(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/atmos(H), slot_l_store)
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
-		return 1
+	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
+	job_description = "An Atmospheric Technician is primarily concerned with keeping the station's atmosphere breathable. They are expected to have a good \
+						understanding of the pipes, vents, and scrubbers that move gasses around the station, and to be familiar with proper firefighting procedure."
 
-	equip_survival(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.species.equip_survival_gear(H,1)
-		return 1
+// Atmos Tech Alt Titles
+/datum/alt_title/atmos_tech
+	title = "Atmospheric Technician"

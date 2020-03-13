@@ -14,25 +14,25 @@ obj/structure/firedoor_assembly/update_icon()
 	else
 		icon_state = "door_construction"
 
-obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
+obj/structure/firedoor_assembly/attackby(obj/item/C, mob/user as mob)
 	if(istype(C, /obj/item/stack/cable_coil) && !wired && anchored)
 		var/obj/item/stack/cable_coil/cable = C
 		if (cable.get_amount() < 1)
-			user << "<span class='warning'>You need one length of coil to wire \the [src].</span>"
+			to_chat(user, "<span class='warning'>You need one length of coil to wire \the [src].</span>")
 			return
 		user.visible_message("[user] wires \the [src].", "You start to wire \the [src].")
 		if(do_after(user, 40) && !wired && anchored)
 			if (cable.use(1))
 				wired = 1
-				user << "<span class='notice'>You wire \the [src].</span>"
+				to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 
-	else if(istype(C, /obj/item/weapon/wirecutters) && wired )
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+	else if(C.is_wirecutter() && wired )
+		playsound(src.loc, C.usesound, 100, 1)
 		user.visible_message("[user] cuts the wires from \the [src].", "You start to cut the wires from \the [src].")
 
 		if(do_after(user, 40))
 			if(!src) return
-			user << "<span class='notice'>You cut the wires!</span>"
+			to_chat(user, "<span class='notice'>You cut the wires!</span>")
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			wired = 0
 
@@ -45,10 +45,10 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 			qdel(C)
 			qdel(src)
 		else
-			user << "<span class='warning'>You must secure \the [src] first!</span>"
-	else if(istype(C, /obj/item/weapon/wrench))
+			to_chat(user, "<span class='warning'>You must secure \the [src] first!</span>")
+	else if(C.is_wrench())
 		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		playsound(src.loc, C.usesound, 50, 1)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")
 		update_icon()
@@ -64,6 +64,6 @@ obj/structure/firedoor_assembly/attackby(C as obj, mob/user as mob)
 				new /obj/item/stack/material/steel(src.loc, 2)
 				qdel(src)
 		else
-			user << "<span class='notice'>You need more welding fuel.</span>"
+			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 	else
 		..(C, user)

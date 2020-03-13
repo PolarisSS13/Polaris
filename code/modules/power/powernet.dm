@@ -15,7 +15,7 @@
 	var/problem = 0				// If this is not 0 there is some sort of issue in the powernet. Monitors will display warnings.
 
 /datum/powernet/New()
-	powernets += src
+	START_PROCESSING_POWERNET(src)
 	..()
 
 /datum/powernet/Destroy()
@@ -25,7 +25,7 @@
 	for(var/obj/machinery/power/M in nodes)
 		nodes -= M
 		M.powernet = null
-	powernets -= src
+	STOP_PROCESSING_POWERNET(src)
 	return ..()
 
 //Returns the amount of excess power (before refunding to SMESs) from last tick.
@@ -148,8 +148,6 @@
 // return a knot cable (O-X) if one is present in the turf
 // null if there's none
 /turf/proc/get_cable_node()
-	if(!istype(src, /turf/simulated/floor))
-		return null
 	for(var/obj/structure/cable/C in src)
 		if(C.d1 == 0)
 			return C

@@ -3,18 +3,18 @@
 /obj/item/weapon/coin
 	icon = 'icons/obj/items.dmi'
 	name = "Coin"
+	desc = "A simple coin you can flip."
 	icon_state = "coin"
-	flags = CONDUCT
+	randpixel = 8
 	force = 0.0
 	throwforce = 0.0
-	w_class = 1.0
+	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
 	var/string_attached
 	var/sides = 2
 
 /obj/item/weapon/coin/New()
-	pixel_x = rand(0,16)-8
-	pixel_y = rand(0,8)-8
+	randpixel_xy()
 
 /obj/item/weapon/coin/gold
 	name = "gold coin"
@@ -48,16 +48,16 @@
 	if(istype(W,/obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/CC = W
 		if(string_attached)
-			user << "<span class='notice'>There already is a string attached to this coin.</span>"
+			to_chat(user, "<span class='notice'>There already is a string attached to this coin.</span>")
 			return
 		if (CC.use(1))
 			overlays += image('icons/obj/items.dmi',"coin_string_overlay")
 			string_attached = 1
-			user << "<span class='notice'>You attach a string to the coin.</span>"
+			to_chat(user, "<span class='notice'>You attach a string to the coin.</span>")
 		else
-			user << "<span class='notice'>This cable coil appears to be empty.</span>"
+			to_chat(user, "<span class='notice'>This cable coil appears to be empty.</span>")
 		return
-	else if(istype(W,/obj/item/weapon/wirecutters))
+	else if(W.is_wirecutter())
 		if(!string_attached)
 			..()
 			return
@@ -67,7 +67,7 @@
 		CC.update_icon()
 		overlays = list()
 		string_attached = null
-		user << "\blue You detach the string from the coin."
+		to_chat(user, "<font color='blue'>You detach the string from the coin.</font>")
 	else ..()
 
 /obj/item/weapon/coin/attack_self(mob/user as mob)

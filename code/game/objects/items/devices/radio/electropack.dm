@@ -2,11 +2,14 @@
 	name = "electropack"
 	desc = "Dance my monkeys! DANCE!!!"
 	icon_state = "electropack0"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_storage.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_storage.dmi',
+			)
 	item_state = "electropack"
 	frequency = 1449
-	flags = CONDUCT
 	slot_flags = SLOT_BACK
-	w_class = 5.0
+	w_class = ITEMSIZE_HUGE
 
 	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 2500)
 
@@ -14,7 +17,7 @@
 
 /obj/item/device/radio/electropack/attack_hand(mob/living/user as mob)
 	if(src == user.back)
-		user << "<span class='notice'>You need help taking this off!</span>"
+		to_chat(user, "<span class='notice'>You need help taking this off!</span>")
 		return
 	..()
 
@@ -22,7 +25,7 @@
 	..()
 	if(istype(W, /obj/item/clothing/head/helmet))
 		if(!b_stat)
-			user << "<span class='notice'>[src] is not ready to be attached!</span>"
+			to_chat(user, "<span class='notice'>[src] is not ready to be attached!</span>")
 			return
 		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit( user )
 		A.icon = 'icons/obj/assemblies.dmi'
@@ -92,7 +95,7 @@
 				sleep(50)
 				if(M)
 					M.moved_recently = 0
-		M << "<span class='danger'>You feel a sharp shock!</span>"
+		to_chat(M, "<span class='danger'>You feel a sharp shock!</span>")
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(3, 1, M)
 		s.start()

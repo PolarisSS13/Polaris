@@ -5,9 +5,9 @@
  * Utensils
  */
 /obj/item/weapon/material/kitchen/utensil
-	w_class = 1
+	w_class = ITEMSIZE_TINY
 	thrown_force_divisor = 1
-	origin_tech = "materials=1"
+	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	sharp = 1
 	edge = 1
@@ -50,7 +50,7 @@
 		overlays.Cut()
 		return
 	else
-		user << "<span class='warning'>You don't have anything on \the [src].</span>"	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
+		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
 /obj/item/weapon/material/kitchen/utensil/fork
@@ -78,32 +78,16 @@
 /*
  * Knives
  */
-/obj/item/weapon/material/kitchen/utensil/knife
-	name = "knife"
-	desc = "A knife for eating with. Can cut through any food."
-	icon_state = "knife"
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	scoop_food = 0
 
-// Identical to the tactical knife but nowhere near as stabby.
-// Kind of like the toy esword compared to the real thing.
-/obj/item/weapon/material/kitchen/utensil/knife/boot
-	name = "boot knife"
-	desc = "A small fixed-blade knife for putting inside a boot."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "tacknife"
-	item_state = "knife"
-	applies_material_colour = 0
-	unbreakable = 1
-
-/obj/item/weapon/material/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
+/* From the time of Clowns. Commented out for posterity, and sanity.
+/obj/item/weapon/material/knife/attack(target as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>You accidentally cut yourself with \the [src].</span>"
+		to_chat(user, "<span class='warning'>You accidentally cut yourself with \the [src].</span>")
 		user.take_organ_damage(20)
 		return
 	return ..()
-
-/obj/item/weapon/material/kitchen/utensil/knife/plastic
+*/
+/obj/item/weapon/material/knife/plastic
 	default_material = "plastic"
 
 /*
@@ -117,11 +101,12 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = "wood"
 	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
+	dulled_divisor = 0.75	// Still a club
 	thrown_force_divisor = 1 // as above
 
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((CLUMSY in user.mutations) && prob(50))
-		user << "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>"
+		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)
 		user.Paralyse(2)
 		return

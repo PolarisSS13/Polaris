@@ -1,6 +1,6 @@
 /obj/machinery/computer/mecha
 	name = "Exosuit Control"
-	icon = 'icons/obj/computer.dmi'
+	desc = "Used to track exosuits, as well as view their logs and activate EMP beacons."
 	icon_keyboard = "rd_key"
 	icon_screen = "mecha"
 	light_color = "#a97faa"
@@ -42,19 +42,19 @@
 	Topic(href, href_list)
 		if(..())
 			return
-		var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
+		var/datum/topic_input/top_filter = new /datum/topic_input(href,href_list)
 		if(href_list["send_message"])
-			var/obj/item/mecha_parts/mecha_tracking/MT = filter.getObj("send_message")
+			var/obj/item/mecha_parts/mecha_tracking/MT = top_filter.getObj("send_message")
 			var/message = sanitize(input(usr,"Input message","Transmit message") as text)
 			var/obj/mecha/M = MT.in_mecha()
 			if(message && M)
 				M.occupant_message(message)
 			return
 		if(href_list["shock"])
-			var/obj/item/mecha_parts/mecha_tracking/MT = filter.getObj("shock")
+			var/obj/item/mecha_parts/mecha_tracking/MT = top_filter.getObj("shock")
 			MT.shock()
 		if(href_list["get_log"])
-			var/obj/item/mecha_parts/mecha_tracking/MT = filter.getObj("get_log")
+			var/obj/item/mecha_parts/mecha_tracking/MT = top_filter.getObj("get_log")
 			stored_data = MT.get_mecha_log()
 			screen = 1
 		if(href_list["return"])
@@ -105,7 +105,7 @@
 	proc/shock()
 		var/obj/mecha/M = in_mecha()
 		if(M)
-			M.emp_act(2)
+			M.emp_act(4)
 		qdel(src)
 
 	proc/get_mecha_log()

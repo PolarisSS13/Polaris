@@ -1,12 +1,15 @@
+GLOBAL_LIST_BOILERPLATE(all_pai_cards, /obj/item/device/paicard)
+
 /obj/item/device/paicard
 	name = "personal AI device"
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pai"
 	item_state = "electronic"
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_DATA = 2)
 	show_messages = 0
+	preserve_item = 1
 
 	var/obj/item/device/radio/radio
 	var/looking_for_personality = 0
@@ -27,7 +30,8 @@
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)
-	..()
+	QDEL_NULL(radio)
+	return ..()
 
 /obj/item/device/paicard/attack_self(mob/user)
 	if (!in_range(src, user))
@@ -235,12 +239,12 @@
 			return
 		var/mob/M = usr
 		if(!istype(M, /mob/living/carbon))
-			usr << "<font color=blue>You don't have any DNA, or your DNA is incompatible with this device.</font>"
+			to_chat(usr, "<font color=blue>You don't have any DNA, or your DNA is incompatible with this device.</font>")
 		else
 			var/datum/dna/dna = usr.dna
 			pai.master = M.real_name
 			pai.master_dna = dna.unique_enzymes
-			pai << "<font color = red><h3>You have been bound to a new master.</h3></font>"
+			to_chat(pai, "<font color = red><h3>You have been bound to a new master.</h3></font>")
 	if(href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)
@@ -248,10 +252,10 @@
 		var/confirm = input("Are you CERTAIN you wish to delete the current personality? This action cannot be undone.", "Personality Wipe") in list("Yes", "No")
 		if(confirm == "Yes")
 			for(var/mob/M in src)
-				M << "<font color = #ff0000><h2>You feel yourself slipping away from reality.</h2></font>"
-				M << "<font color = #ff4d4d><h3>Byte by byte you lose your sense of self.</h3></font>"
-				M << "<font color = #ff8787><h4>Your mental faculties leave you.</h4></font>"
-				M << "<font color = #ffc4c4><h5>oblivion... </h5></font>"
+				to_chat(M, "<font color = #ff0000><h2>You feel yourself slipping away from reality.</h2></font>")
+				to_chat(M, "<font color = #ff4d4d><h3>Byte by byte you lose your sense of self.</h3></font>")
+				to_chat(M, "<font color = #ff8787><h4>Your mental faculties leave you.</h4></font>")
+				to_chat(M, "<font color = #ffc4c4><h5>oblivion... </h5></font>")
 				M.death(0)
 			removePersonality()
 	if(href_list["wires"])
@@ -265,9 +269,9 @@
 		var/newlaws = sanitize(input("Enter any additional directives you would like your pAI personality to follow. Note that these directives will not override the personality's allegiance to its imprinted master. Conflicting directives will be ignored.", "pAI Directive Configuration", pai.pai_laws) as message)
 		if(newlaws)
 			pai.pai_laws = newlaws
-			pai << "Your supplemental directives have been updated. Your new directives are:"
-			pai << "Prime Directive: <br>[pai.pai_law0]"
-			pai << "Supplemental Directives: <br>[pai.pai_laws]"
+			to_chat(pai, "Your supplemental directives have been updated. Your new directives are:")
+			to_chat(pai, "Prime Directive: <br>[pai.pai_law0]")
+			to_chat(pai, "Supplemental Directives: <br>[pai.pai_laws]")
 	attack_self(usr)
 
 // 		WIRE_SIGNAL = 1

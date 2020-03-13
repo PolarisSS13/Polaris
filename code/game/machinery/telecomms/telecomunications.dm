@@ -32,7 +32,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/produces_heat = 1	//whether the machine will produce heat when on.
 	var/delay = 10 // how many process() ticks to delay per heat
 	var/long_range_link = 0	// Can you link it across Z levels or on the otherside of the map? (Relay & Hub)
-	var/circuitboard = null // string pointing to a circuitboard type
 	var/hide = 0				// Is it a hidden machine?
 	var/listening_level = 0	// 0 = auto set in New() - this is the z level that the machine is listening to.
 
@@ -42,7 +41,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	if(!on)
 		return
-	//world << "[src] ([src.id]) - [signal.debug_print()]"
+	//to_world("[src] ([src.id]) - [signal.debug_print()]")
 	var/send_count = 0
 
 	signal.data["slow"] += rand(0, round((100-integrity))) // apply some lag based on integrity
@@ -122,7 +121,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		var/turf/position = get_turf(src)
 		listening_level = position.z
 
-/obj/machinery/telecomms/initialize()
+/obj/machinery/telecomms/Initialize()
 	if(autolinkers.len)
 		// Links nearby machines
 		if(!long_range_link)
@@ -131,6 +130,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
+	. = ..()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
@@ -255,7 +255,17 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 1
 	produces_heat = 0
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/receiver"
+	circuit = /obj/item/weapon/circuitboard/telecomms/receiver
+
+/obj/machinery/telecomms/receiver/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
+	RefreshParts()
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
 
@@ -311,10 +321,35 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1600
 	machinetype = 7
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/hub"
+	circuit = /obj/item/weapon/circuitboard/telecomms/hub
 	long_range_link = 1
 	netspeed = 40
+	var/list/telecomms_map
 
+/obj/machinery/telecomms/hub/Initialize()
+	. = ..()
+	LAZYINITLIST(telecomms_map)
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
+
+/obj/machinery/telecomms/hub/process()
+	. = ..()
+	telecomms_map.Cut()
+
+	if(!on)
+		return
+
+	for(var/M in links)
+		if(istype(M,/obj/machinery/telecomms/receiver) || istype(M,/obj/machinery/telecomms/relay))
+			var/obj/machinery/telecomms/R = M
+			if(!R.on)
+				continue
+			telecomms_map |= R.listening_level
 
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
@@ -346,11 +381,25 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 8
 	produces_heat = 0
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/relay"
+	circuit = /obj/item/weapon/circuitboard/telecomms/relay
 	netspeed = 5
 	long_range_link = 1
 	var/broadcasting = 1
 	var/receiving = 1
+
+/obj/machinery/telecomms/relay/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
+
+/obj/machinery/telecomms/relay/forceMove(var/newloc)
+	. = ..(newloc)
+	listening_level = z
 
 /obj/machinery/telecomms/relay/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -397,9 +446,18 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 1000
 	machinetype = 2
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/bus"
+	circuit = /obj/item/weapon/circuitboard/telecomms/bus
 	netspeed = 40
 	var/change_frequency = 0
+
+/obj/machinery/telecomms/bus/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 1)
+	RefreshParts()
 
 /obj/machinery/telecomms/bus/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -450,23 +508,37 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	idle_power_usage = 600
 	machinetype = 3
 	delay = 5
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/processor"
+	circuit = /obj/item/weapon/circuitboard/telecomms/processor
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
-	receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
+/obj/machinery/telecomms/processor/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
+	component_parts += new /obj/item/weapon/stock_parts/subspace/analyzer(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 2)
+	RefreshParts()
 
-		if(is_freq_listening(signal))
+/obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
-			if(process_mode)
-				signal.data["compression"] = 0 // uncompress subspace signal
-			else
-				signal.data["compression"] = 100 // even more compressed signal
+	if(is_freq_listening(signal))
 
-			if(istype(machine_from, /obj/machinery/telecomms/bus))
-				relay_direct_information(signal, machine_from) // send the signal back to the machine
-			else // no bus detected - send the signal to servers instead
-				signal.data["slow"] += rand(5, 10) // slow the signal down
-				relay_information(signal, "/obj/machinery/telecomms/server")
+		if(process_mode)
+			signal.data["compression"] = 0 // uncompress subspace signal
+		else
+			signal.data["compression"] = 100 // even more compressed signal
+
+		if(istype(machine_from, /obj/machinery/telecomms/bus))
+			relay_direct_information(signal, machine_from) // send the signal back to the machine
+		else // no bus detected - send the signal to servers instead
+			signal.data["slow"] += rand(5, 10) // slow the signal down
+			relay_information(signal, "/obj/machinery/telecomms/server")
 
 
 /*
@@ -487,7 +559,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	use_power = 1
 	idle_power_usage = 300
 	machinetype = 4
-	circuitboard = "/obj/item/weapon/circuitboard/telecomms/server"
+	circuit = /obj/item/weapon/circuitboard/telecomms/server
 	var/list/log_entries = list()
 	var/list/stored_names = list()
 	var/list/TrafficActions = list()
@@ -510,6 +582,15 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	Compiler = new()
 	Compiler.Holder = src
 	server_radio = new()
+
+/obj/machinery/telecomms/server/Initialize()
+	. = ..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
+	component_parts += new /obj/item/stack/cable_coil(src, 1)
+	RefreshParts()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -547,8 +628,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 					race = "[H.species.name]"
 					log.parameters["intelligible"] = 1
 				else if(isbrain(M))
-					var/mob/living/carbon/brain/B = M
-					race = "[B.species.name]"
+					race = "Brain"
 					log.parameters["intelligible"] = 1
 				else if(M.isMonkey())
 					race = "Monkey"
@@ -634,9 +714,40 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/garbage_collector = 1 // if set to 0, will not be garbage collected
 	var/input_type = "Speech File"
 
+//Generic telecomm connectivity test proc
+/proc/can_telecomm(var/atom/A, var/atom/B, var/ad_hoc = FALSE)
+	if(!A || !B)
+		log_debug("can_telecomm(): Undefined endpoints!")
+		return FALSE
 
+	//Can't in this case, obviously!
+	if(is_jammed(A) || is_jammed(B))
+		return FALSE
 
+	//Items don't have a Z when inside an object or mob
+	var/turf/src_turf = get_turf(A)
+	var/turf/dst_turf = get_turf(B)
 
+	//Nullspace, probably.
+	if(!src_turf || !dst_turf)
+		return FALSE
 
+	var/src_z = src_turf.z
+	var/dst_z = dst_turf.z
 
+	//Mysterious!
+	if(!src_z || !dst_z)
+		return FALSE
 
+	//We can do the simple check first, if you have ad_hoc radios.
+	if(ad_hoc && src_z == dst_z)
+		return TRUE
+
+	//Let's look at hubs and see what we got.
+	var/can_comm = FALSE
+	for(var/obj/machinery/telecomms/hub/H in telecomms_list)
+		if((src_z in H.telecomms_map) && (dst_z in H.telecomms_map))
+			can_comm = TRUE
+			break
+
+	return can_comm

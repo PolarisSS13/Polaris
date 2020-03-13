@@ -1,6 +1,5 @@
 /obj/machinery/computer/curer
 	name = "cure research machine"
-	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "med_key"
 	icon_screen = "dna"
 	circuit = /obj/item/weapon/circuitboard/curefab
@@ -19,7 +18,7 @@
 		return
 	if(istype(I,/obj/item/weapon/virusdish))
 		if(virusing)
-			user << "<b>The pathogen materializer is still recharging..</b>"
+			to_chat(user, "<b>The pathogen materializer is still recharging..</b>")
 			return
 		var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
 

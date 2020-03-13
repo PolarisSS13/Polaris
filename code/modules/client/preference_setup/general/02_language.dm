@@ -12,12 +12,16 @@
 
 /datum/category_item/player_setup_item/general/language/sanitize_character()
 	if(!islist(pref.alternate_languages))	pref.alternate_languages = list()
+	if(pref.species)
+		var/datum/species/S = GLOB.all_species[pref.species]
+		if(S && pref.alternate_languages.len > S.num_alternate_languages)
+			pref.alternate_languages.len = S.num_alternate_languages // Truncate to allowed length
 	if(isnull(pref.language_prefixes) || !pref.language_prefixes.len)
 		pref.language_prefixes = config.language_prefixes.Copy()
 
 /datum/category_item/player_setup_item/general/language/content()
 	. += "<b>Languages</b><br>"
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = GLOB.all_species[pref.species]
 	if(S.language)
 		. += "- [S.language]<br>"
 	if(S.default_language && S.default_language != S.language)
@@ -34,7 +38,7 @@
 		. += "- [pref.species] cannot choose secondary languages.<br>"
 
 	. += "<b>Language Keys</b><br>"
-	. += " [english_list(pref.language_prefixes, and_text = " ", comma_text = " ")] <a href='?src=\ref[src];change_prefix=1'>Change</a> <a href='?src=\ref[src];reset_prefix=1'>Reset</a><br>"
+	. += " [jointext(pref.language_prefixes, " ")] <a href='?src=\ref[src];change_prefix=1'>Change</a> <a href='?src=\ref[src];reset_prefix=1'>Reset</a><br>"
 
 /datum/category_item/player_setup_item/general/language/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["remove_language"])
@@ -42,14 +46,14 @@
 		pref.alternate_languages.Cut(index, index+1)
 		return TOPIC_REFRESH
 	else if(href_list["add_language"])
-		var/datum/species/S = all_species[pref.species]
+		var/datum/species/S = GLOB.all_species[pref.species]
 		if(pref.alternate_languages.len >= S.num_alternate_languages)
 			alert(user, "You have already selected the maximum number of alternate languages for this species!")
 		else
 			var/list/available_languages = S.secondary_langs.Copy()
-			for(var/L in all_languages)
-				var/datum/language/lang = all_languages[L]
-				if(!(lang.flags & RESTRICTED) && (!config.usealienwhitelist || is_alien_whitelisted(user, L) || !(lang.flags & WHITELISTED)))
+			for(var/L in GLOB.all_languages)
+				var/datum/language/lang = GLOB.all_languages[L]
+				if(!(lang.flags & RESTRICTED) && (is_lang_whitelisted(user, lang)))
 					available_languages |= L
 
 			// make sure we don't let them waste slots on the default languages
@@ -61,7 +65,7 @@
 				alert(user, "There are no additional languages available to select.")
 			else
 				var/new_lang = input(user, "Select an additional language", "Character Generation", null) as null|anything in available_languages
-				if(new_lang)
+				if(new_lang && pref.alternate_languages.len < S.num_alternate_languages)
 					pref.alternate_languages |= new_lang
 					return TOPIC_REFRESH
 

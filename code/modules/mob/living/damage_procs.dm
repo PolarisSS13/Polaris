@@ -8,11 +8,16 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/used_weapon = null, var/sharp = 0, var/edge = 0)
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/soaked = 0, var/used_weapon = null, var/sharp = 0, var/edge = 0)
 	if(Debug2)
-		world.log << "## DEBUG: apply_damage() was called on [src], with [damage] damage, and an armor value of [blocked]."
+		to_world_log("## DEBUG: apply_damage() was called on [src], with [damage] damage, and an armor value of [blocked].")
 	if(!damage || (blocked >= 100))
 		return 0
+	if(soaked)
+		if(soaked >= round(damage*0.8))
+			damage -= round(damage*0.8)
+		else
+			damage -= soaked
 	blocked = (100-blocked)/100
 	switch(damagetype)
 		if(BRUTE)
@@ -21,6 +26,9 @@
 			if(COLD_RESISTANCE in mutations)
 				damage = 0
 			adjustFireLoss(damage * blocked)
+		if(SEARING)
+			apply_damage(damage / 3, BURN, def_zone, blocked, soaked, used_weapon, sharp, edge)
+			apply_damage(damage / 3 * 2, BRUTE, def_zone, blocked, soaked, used_weapon, sharp, edge)
 		if(TOX)
 			adjustToxLoss(damage * blocked)
 		if(OXY)
@@ -29,6 +37,13 @@
 			adjustCloneLoss(damage * blocked)
 		if(HALLOSS)
 			adjustHalLoss(damage * blocked)
+		if(ELECTROCUTE)
+			electrocute_act(damage, used_weapon, 1.0, def_zone)
+		if(BIOACID)
+			if(isSynthetic())
+				adjustFireLoss(damage * blocked)
+			else
+				adjustToxLoss(damage * blocked)
 	flash_weak_pain()
 	updatehealth()
 	return 1
@@ -49,7 +64,7 @@
 
 /mob/living/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0, var/check_protection = 1)
 	if(Debug2)
-		world.log << "## DEBUG: apply_effect() was called.  The type of effect is [effecttype].  Blocked by [blocked]."
+		to_world_log("## DEBUG: apply_effect() was called.  The type of effect is [effecttype].  Blocked by [blocked].")
 	if(!effect || (blocked >= 100))
 		return 0
 	blocked = (100-blocked)/100
@@ -82,7 +97,7 @@
 	return 1
 
 
-/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
+/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0, var/ignite = 0, var/flammable = 0)
 	if(blocked >= 100)
 		return 0
 	if(stun)		apply_effect(stun, STUN, blocked)
@@ -93,4 +108,10 @@
 	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
 	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(flammable)	adjust_fire_stacks(flammable)
+	if(ignite)
+		if(ignite >= 3)
+			add_modifier(/datum/modifier/fire/stack_managed/intense, 60 SECONDS)
+		else
+			add_modifier(/datum/modifier/fire/stack_managed, 45 * ignite SECONDS)
 	return 1

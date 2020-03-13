@@ -2,9 +2,29 @@
 	display_name = "cane"
 	path = /obj/item/weapon/cane
 
+/datum/gear/cane/white
+	display_name = "white cane"
+	path = /obj/item/weapon/cane/whitecane
+
+/datum/gear/cane/white2
+	display_name = "telescopic white cane"
+	path = /obj/item/weapon/melee/collapsable_whitecane
+
+/datum/gear/crutch
+	display_name = "crutch"
+	path = /obj/item/weapon/cane/crutch
+
 /datum/gear/dice
-	display_name = "d20"
-	path = /obj/item/weapon/dice/d20
+	display_name = "dice pack"
+	path = /obj/item/weapon/storage/pill_bottle/dice
+
+/datum/gear/dice/nerd
+	display_name = "dice pack (gaming)"
+	path = /obj/item/weapon/storage/pill_bottle/dice_nerd
+
+/datum/gear/dice/cup
+	display_name = "dice cup and dice"
+	path = /obj/item/weapon/storage/dicecup/loaded
 
 /datum/gear/cards
 	display_name = "deck of cards"
@@ -26,6 +46,48 @@
 	display_name = "Spaceball booster pack"
 	path = /obj/item/weapon/pack/spaceball
 
+/datum/gear/plushie
+	display_name = "plushie selection"
+	path = /obj/item/toy/plushie/
+
+/datum/gear/plushie/New()
+	..()
+	var/list/plushies = list()
+	for(var/plushie in subtypesof(/obj/item/toy/plushie/) - /obj/item/toy/plushie/therapy)
+		var/obj/item/toy/plushie/plushie_type = plushie
+		plushies[initial(plushie_type.name)] = plushie_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(plushies))
+
+/datum/gear/figure
+	display_name = "action figure selection"
+	description = "A \"Space Life\" brand action figure."
+	path = /obj/item/toy/figure/
+
+/datum/gear/figure/New()
+	..()
+	var/list/figures = list()
+	for(var/figure in typesof(/obj/item/toy/figure/) - /obj/item/toy/figure)
+		var/obj/item/toy/figure/figure_type = figure
+		figures[initial(figure_type.name)] = figure_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(figures))
+
+/datum/gear/toy
+	display_name = "toy selection"
+	description = "Choose from a number of toys."
+	path = /obj/item/toy/
+
+/datum/gear/toy/New()
+	..()
+	var/toytype = list()
+	toytype["Blink toy"] = /obj/item/toy/blink
+	toytype["Gravitational singularity"] = /obj/item/toy/spinningtoy
+	toytype["Water flower"] = /obj/item/toy/waterflower
+	toytype["Bosun's whistle"] = /obj/item/toy/bosunwhistle
+	toytype["Magic 8 Ball"] = /obj/item/toy/eight_ball
+	toytype["Magic Conch shell"] = /obj/item/toy/eight_ball/conch
+	gear_tweaks += new/datum/gear_tweak/path(toytype)
+
+
 /datum/gear/flask
 	display_name = "flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/barflask
@@ -41,10 +103,6 @@
 /datum/gear/vacflask/New()
 	..()
 	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_drink_reagents())
-
-/datum/gear/comb
-	display_name = "purple comb"
-	path = /obj/item/weapon/haircomb
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"

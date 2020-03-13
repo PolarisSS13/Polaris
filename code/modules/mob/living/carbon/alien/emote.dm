@@ -16,7 +16,7 @@
 				return
 			if (src.client)
 				if (client.prefs.muted & MUTE_IC)
-					src << "\red You cannot send IC messages (muted)."
+					to_chat(src, "<font color='red'>You cannot send IC messages (muted).</font>")
 					return
 			if (stat)
 				return
@@ -80,6 +80,9 @@
 			message = "<B>The [src.name]</B> sulks down sadly."
 			m_type = 1
 		if("twitch")
+			message = "<B>The [src.name]</B> twitches."
+			m_type = 1
+		if("twitch_v")
 			message = "<B>The [src.name]</B> twitches violently."
 			m_type = 1
 		if("dance")
@@ -112,11 +115,11 @@
 			playsound(src.loc, 'sound/misc/nymphchirp.ogg', 50, 0)
 			m_type = 2
 		if("help")
-			src << "burp, chirp, choke, collapse, dance, drool, gasp, shiver, gnarl, jump, moan, nod, roll, scratch,\nscretch, shake, sign-#, sulk, sway, tail, twitch, whimper"
+			to_chat(src, "burp, chirp, choke, collapse, dance, drool, gasp, shiver, gnarl, jump, moan, nod, roll, scratch,\nscretch, shake, sign-#, sulk, sway, tail, twitch, whimper")
 		else
-			src << text("Invalid Emote: []", act)
+			to_chat(src, "Invalid Emote: [act]")
 	if ((message && src.stat == 0))
-		log_emote("[name]/[key] : [message]")
+		log_emote(message, src)
 		if (m_type & 1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(message, m_type)

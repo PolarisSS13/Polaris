@@ -5,11 +5,12 @@
 	icon = 'icons/obj/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
+	randpixel = 8
 	sharp = 1
 	edge = 1
-	w_class = 2
-	force_divisor = 0.2 // 6 with hardness 30 (glass)
-	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
+	w_class = ITEMSIZE_SMALL
+	force_divisor = 0.25 // 7.5 with hardness 30 (glass)
+	thrown_force_divisor = 0.5
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	default_material = "glass"
@@ -17,8 +18,9 @@
 	drops_debris = 0
 
 /obj/item/weapon/material/shard/suicide_act(mob/user)
-	viewers(user) << pick("<span class='danger'>\The [user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</span>",
-	                      "<span class='danger'>\The [user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</span>")
+	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
+	to_chat(viewers(user), pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>",
+	                      "<span class='danger'>\The [user] is slitting [TU.his] throat with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>"))
 	return (BRUTELOSS)
 
 /obj/item/weapon/material/shard/set_material(var/new_material)
@@ -27,8 +29,7 @@
 		return
 
 	icon_state = "[material.shard_icon][pick("large", "medium", "small")]"
-	pixel_x = rand(-8, 8)
-	pixel_y = rand(-8, 8)
+	randpixel_xy()
 	update_icon()
 
 	if(material.shard_type)
@@ -60,8 +61,55 @@
 			return
 	return ..()
 
-/obj/item/weapon/material/shard/Crossed(AM as mob|obj)
+/obj/item/weapon/material/shard/afterattack(var/atom/target, mob/living/carbon/human/user as mob)
+	var/active_hand //hand the shard is in
+	var/will_break = FALSE
+	var/protected_hands = FALSE //this is a fucking mess
+	var/break_damage = 4
+	var/light_glove_d = rand(2, 4)
+	var/no_glove_d = rand(4, 6)
+	var/list/forbidden_gloves = list(
+			/obj/item/clothing/gloves/sterile,
+			/obj/item/clothing/gloves/knuckledusters
+		)
+
+	if(src == user.l_hand)
+		active_hand = BP_L_HAND
+	else if(src == user.r_hand)
+		active_hand = BP_R_HAND
+	else
+		return // If it's not actually in our hands anymore, we were probably gentle with it
+
+	active_hand = (src == user.l_hand) ? BP_L_HAND : BP_R_HAND // May not actually be faster than an if-else block, but a little bit cleaner -Ater
+
+	if(prob(75))
+		will_break = TRUE
+
+	if(user.gloves && (user.gloves.body_parts_covered & HANDS) && istype(user.gloves, /obj/item/clothing/gloves)) // Not-gloves aren't gloves, and therefore don't protect us
+		protected_hands = TRUE // If we're wearing gloves we can probably handle it just fine
+		for(var/I in forbidden_gloves)
+			if(istype(user.gloves, I)) // forbidden_gloves is a blacklist, so if we match anything in there, our hands are not protected
+				protected_hands = FALSE
+				break
+
+	if(user.gloves && !protected_hands)
+		to_chat(user, "<span class='warning'>\The [src] partially cuts into your hand through your gloves as you hit \the [target]!</span>")
+		user.apply_damage(light_glove_d + will_break ? break_damage : 0, BRUTE, active_hand, 0, 0, src, src.sharp, src.edge) // Ternary to include break damage
+
+	else if(!user.gloves)
+		to_chat(user, "<span class='warning'>\The [src] cuts into your hand as you hit \the [target]!</span>")
+		user.apply_damage(no_glove_d + will_break ? break_damage : 0, BRUTE, active_hand, 0, 0, src, src.sharp, src.edge)
+
+	if(will_break && src.loc == user) // If it's not in our hand anymore
+		user.visible_message("<span class='danger'>[user] hit \the [target] with \the [src], shattering it!</span>", "<span class='warning'>You shatter \the [src] in your hand!</span>")
+		playsound(user, pick('sound/effects/Glassbr1.ogg', 'sound/effects/Glassbr2.ogg', 'sound/effects/Glassbr3.ogg'), 30, 1)
+		qdel(src)
+	return
+
+/obj/item/weapon/material/shard/Crossed(atom/movable/AM as mob|obj)
 	..()
+	if(AM.is_incorporeal())
+		return
 	if(isliving(AM))
 		var/mob/M = AM
 
@@ -78,7 +126,10 @@
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 				return
 
-			M << "<span class='danger'>You step on \the [src]!</span>"
+			if(H.species.flags & NO_MINOR_CUT)
+				return
+
+			to_chat(H, "<span class='danger'>You step on \the [src]!</span>")
 
 			var/list/check = list("l_foot", "r_foot")
 			while(check.len)
@@ -87,10 +138,10 @@
 				if(affecting)
 					if(affecting.robotic >= ORGAN_ROBOT)
 						return
-					if(affecting.take_damage(5, 0))
+					if(affecting.take_damage(force, 0))
 						H.UpdateDamageIcon()
 					H.updatehealth()
-					if(affecting.can_feel_pain())
+					if(affecting.organ_can_feel_pain())
 						H.Weaken(3)
 					return
 				check -= picked

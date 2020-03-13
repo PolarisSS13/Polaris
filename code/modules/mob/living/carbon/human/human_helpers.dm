@@ -8,9 +8,9 @@
 		return 1
 	if(feedback)
 		if(status[1] == HUMAN_EATING_NO_MOUTH)
-			src << "Where do you intend to put \the [food]? You don't have a mouth!"
+			to_chat(src, "Where do you intend to put \the [food]? You don't have a mouth!")
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
-			src << "<span class='warning'>\The [status[2]] is in the way!</span>"
+			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
 /mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
@@ -19,9 +19,9 @@
 		return 1
 	if(feedback)
 		if(status[1] == HUMAN_EATING_NO_MOUTH)
-			feeder << "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!"
+			to_chat(feeder, "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!")
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
-			feeder << "<span class='warning'>\The [status[2]] is in the way!</span>"
+			to_chat(feeder, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
 /mob/living/carbon/human/proc/can_eat_status()
@@ -32,6 +32,28 @@
 		return list(HUMAN_EATING_BLOCKED_MOUTH, blocked)
 	return list(HUMAN_EATING_NO_ISSUE)
 
+/mob/living/carbon/human/proc/get_coverage()
+	var/list/coverage = list()
+	for(var/obj/item/clothing/C in src)
+		if(item_is_in_hands(C))
+			continue
+		if(C.body_parts_covered & HEAD)
+			coverage += list(organs_by_name[BP_HEAD])
+		if(C.body_parts_covered & UPPER_TORSO)
+			coverage += list(organs_by_name[BP_TORSO])
+		if(C.body_parts_covered & LOWER_TORSO)
+			coverage += list(organs_by_name[BP_GROIN])
+		if(C.body_parts_covered & LEGS)
+			coverage += list(organs_by_name[BP_L_LEG], organs_by_name[BP_R_LEG])
+		if(C.body_parts_covered & ARMS)
+			coverage += list(organs_by_name[BP_R_ARM], organs_by_name[BP_L_ARM])
+		if(C.body_parts_covered & FEET)
+			coverage += list(organs_by_name[BP_L_FOOT], organs_by_name[BP_R_FOOT])
+		if(C.body_parts_covered & HANDS)
+			coverage += list(organs_by_name[BP_L_HAND], organs_by_name[BP_R_HAND])
+	return coverage
+
+
 //This is called when we want different types of 'cloaks' to stop working, e.g. when attacking.
 /mob/living/carbon/human/break_cloak()
 	if(mind && mind.changeling) //Changeling visible camo
@@ -41,6 +63,21 @@
 		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
 			if(cloaker.active)
 				cloaker.deactivate()
+	for(var/obj/item/weapon/deadringer/dr in src)
+		dr.uncloak()
+
+/mob/living/carbon/human/is_cloaked()
+	if(mind && mind.changeling && mind.changeling.cloaked) // Ling camo.
+		return TRUE
+	else if(istype(back, /obj/item/weapon/rig)) //Ninja cloak
+		var/obj/item/weapon/rig/suit = back
+		for(var/obj/item/rig_module/stealth_field/cloaker in suit.installed_modules)
+			if(cloaker.active)
+				return TRUE
+	for(var/obj/item/weapon/deadringer/dr in src)
+		if(dr.timer > 20)
+			return TRUE
+	return ..()
 
 /mob/living/carbon/human/get_ear_protection()
 	var/sum = 0
@@ -89,6 +126,80 @@
 				return 1
 
 	return 0
+
+// Returns a string based on what kind of brain the FBP has.
+/mob/living/carbon/human/proc/get_FBP_type()
+	if(!isSynthetic())
+		return FBP_NONE
+	var/obj/item/organ/internal/brain/B
+	B = internal_organs_by_name[O_BRAIN]
+	if(B) // Incase we lost our brain for some reason, like if we got decapped.
+		if(istype(B, /obj/item/organ/internal/mmi_holder))
+			var/obj/item/organ/internal/mmi_holder/mmi_holder = B
+			if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi/digital/posibrain))
+				return FBP_POSI
+			else if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi/digital/robot))
+				return FBP_DRONE
+			else if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi)) // This needs to come last because inheritence.
+				return FBP_CYBORG
+
+	return FBP_NONE
+
+/mob/living/carbon/human/make_hud_overlays()
+	hud_list[HEALTH_HUD]      = gen_hud_image(ingame_hud_med, src, "100", plane = PLANE_CH_HEALTH)
+	if(isSynthetic())
+		hud_list[STATUS_HUD]  = gen_hud_image(ingame_hud, src, "hudrobo", plane = PLANE_CH_STATUS)
+		hud_list[LIFE_HUD]	  = gen_hud_image(ingame_hud, src, "hudrobo", plane = PLANE_CH_LIFE)
+	else
+		hud_list[STATUS_HUD]  = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_STATUS)
+		hud_list[LIFE_HUD]    = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_LIFE)
+	hud_list[ID_HUD]          = gen_hud_image(using_map.id_hud_icons, src, "hudunknown", plane = PLANE_CH_ID)
+	hud_list[WANTED_HUD]      = gen_hud_image(ingame_hud, src, "hudblank", plane = PLANE_CH_WANTED)
+	hud_list[IMPLOYAL_HUD]    = gen_hud_image(ingame_hud, src, "hudblank", plane = PLANE_CH_IMPLOYAL)
+	hud_list[IMPCHEM_HUD]     = gen_hud_image(ingame_hud, src, "hudblank", plane = PLANE_CH_IMPCHEM)
+	hud_list[IMPTRACK_HUD]    = gen_hud_image(ingame_hud, src, "hudblank", plane = PLANE_CH_IMPTRACK)
+	hud_list[SPECIALROLE_HUD] = gen_hud_image(ingame_hud, src, "hudblank", plane = PLANE_CH_SPECIAL)
+	hud_list[STATUS_HUD_OOC]  = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_STATUS_OOC)
+	add_overlay(hud_list)
+
+/mob/living/carbon/human/recalculate_vis()
+	if(!vis_enabled || !plane_holder)
+		return
+
+	//These things are allowed to add vision flags.
+	//If you code some crazy item that goes on your feet that lets you see ghosts, you need to add a slot here.
+	var/tmp/list/slots = list(slot_glasses,slot_head)
+	var/tmp/list/compiled_vis = list()
+
+	for(var/slot in slots)
+		var/obj/item/clothing/O = get_equipped_item(slot) //Change this type if you move the vision stuff to item or something.
+		if(istype(O) && O.enables_planes && (slot in O.plane_slots))
+			compiled_vis |= O.enables_planes
+
+	//Check to see if we have a rig (ugh, blame rigs, desnowflake this)
+	var/obj/item/weapon/rig/rig = back
+	if(istype(rig) && rig.visor)
+		if(!rig.helmet || (head && rig.helmet == head))
+			if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
+				var/obj/item/clothing/glasses/V = rig.visor.vision.glasses
+				compiled_vis |= V.enables_planes
+
+	if(!compiled_vis.len && !vis_enabled.len)
+		return //Nothin' doin'.
+
+	var/tmp/list/oddities = vis_enabled ^ compiled_vis
+	if(!oddities.len)
+		return //Same thing in both lists!
+
+	var/tmp/list/to_enable = oddities - vis_enabled
+	var/tmp/list/to_disable = oddities - compiled_vis
+
+	for(var/vis in to_enable)
+		plane_holder.set_vis(vis,TRUE)
+		vis_enabled += vis
+	for(var/vis in to_disable)
+		plane_holder.set_vis(vis,FALSE)
+		vis_enabled -= vis
 
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH

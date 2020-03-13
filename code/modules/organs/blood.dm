@@ -1,11 +1,12 @@
 /****************************************************
 				BLOOD SYSTEM
 ****************************************************/
-//Blood levels. These are percentages based on the species blood_volume far.
+//Blood levels. These are percentages based on the species blood_volume var.
 var/const/BLOOD_VOLUME_SAFE =    85
 var/const/BLOOD_VOLUME_OKAY =    75
 var/const/BLOOD_VOLUME_BAD =     60
 var/const/BLOOD_VOLUME_SURVIVE = 40
+var/const/CE_STABLE_THRESHOLD = 0.5
 
 /mob/living/carbon/human/var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 /mob/living/carbon/human/var/var/pale = 0          // Should affect how mob sprite is drawn, but currently doesn't.
@@ -16,6 +17,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	if(vessel)
 		return
 
+	if(species.flags & NO_BLOOD)
+		return
+
 	vessel = new/datum/reagents(species.blood_volume)
 	vessel.my_atom = src
 
@@ -23,8 +27,6 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 		return
 
 	vessel.add_reagent("blood",species.blood_volume)
-	spawn(1)
-		fixblood()
 
 //Resets blood data
 /mob/living/carbon/human/proc/fixblood()
@@ -36,7 +38,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/handle_blood()
-	if(in_stasis)
+	if(inStasisNow())
 		return
 
 	if(!should_have_organ(O_HEART))
@@ -68,53 +70,65 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 
 			if(!heart)
 				blood_volume = 0
-			else if(heart.damage > 1 && heart.damage < heart.min_bruised_damage)
-				blood_volume *= 0.8
-			else if(heart.damage >= heart.min_bruised_damage && heart.damage < heart.min_broken_damage)
-				blood_volume *= 0.6
-			else if(heart.damage >= heart.min_broken_damage && heart.damage < INFINITY)
+			else if(heart.is_broken())
 				blood_volume *= 0.3
+			else if(heart.is_bruised())
+				blood_volume *= 0.7
+			else if(heart.damage)
+				blood_volume *= 0.8
 
 		//Effects of bloodloss
+		var/dmg_coef = 1				//Lower means less damage taken
+		var/threshold_coef = 1			//Lower means the damage caps off lower
+
+		if(CE_STABLE in chem_effects)
+			dmg_coef = 0.5
+			threshold_coef = 0.75
+//	These are Bay bits, do some sort of calculation.
+//			dmg_coef = min(1, 10/chem_effects[CE_STABLE]) //TODO: add effect for increased damage
+//			threshold_coef = min(dmg_coef / CE_STABLE_THRESHOLD, 1)
+
 		if(blood_volume >= BLOOD_VOLUME_SAFE)
 			if(pale)
 				pale = 0
-				update_body()
+				update_icons_body()
 		else if(blood_volume >= BLOOD_VOLUME_OKAY)
 			if(!pale)
 				pale = 1
-				update_body()
+				update_icons_body()
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel [word]"
+				to_chat(src, "<font color='red'>You feel [word]</font>")
 			if(prob(1))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel [word]"
-			if(oxyloss < 20)
-				oxyloss += 3
+				to_chat(src, "<font color='red'>You feel [word]</font>")
+			if(getOxyLoss() < 20 * threshold_coef)
+				adjustOxyLoss(3 * dmg_coef)
 		else if(blood_volume >= BLOOD_VOLUME_BAD)
 			if(!pale)
 				pale = 1
-				update_body()
+				update_icons_body()
 			eye_blurry = max(eye_blurry,6)
-			if(oxyloss < 50)
-				oxyloss += 10
-			oxyloss += 1
+			if(getOxyLoss() < 50 * threshold_coef)
+				adjustOxyLoss(10 * dmg_coef)
+			adjustOxyLoss(1 * dmg_coef)
 			if(prob(15))
 				Paralyse(rand(1,3))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel extremely [word]"
+				to_chat(src, "<font color='red'>You feel extremely [word]</font>")
 		else if(blood_volume >= BLOOD_VOLUME_SURVIVE)
-			oxyloss += 5
-			toxloss += 3
+			adjustOxyLoss(5 * dmg_coef)
+//			adjustToxLoss(3 * dmg_coef)
 			if(prob(15))
 				var/word = pick("dizzy","woosey","faint")
-				src << "\red You feel extremely [word]"
-		else
-			// There currently is a strange bug here. If the mob is not below -100 health
-			// when death() is called, apparently they will be just fine, and this way it'll
-			// spam deathgasp. Adjusting toxloss ensures the mob will stay dead.
-			toxloss += 300 // just to be safe!
-			death()
+				to_chat(src, "<font color='red'>You feel extremely [word]</font>")
+		else //Not enough blood to survive (usually)
+			if(!pale)
+				pale = 1
+				update_icons_body()
+			eye_blurry = max(eye_blurry,6)
+			Paralyse(3)
+			adjustToxLoss(3 * dmg_coef)
+			adjustOxyLoss(75 * dmg_coef) // 15 more than dexp fixes (also more than dex+dexp+tricord)
 
 		// Without enough blood you slowly go hungry.
 		if(blood_volume < BLOOD_VOLUME_SAFE)
@@ -125,26 +139,69 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 
 		//Bleeding out
 		var/blood_max = 0
-		for(var/obj/item/organ/external/temp in organs)
+		var/blood_loss_divisor = 30.01	//lower factor = more blood loss
+
+		// Some species bleed out differently
+		blood_loss_divisor /= species.bloodloss_rate
+
+		// Some modifiers can make bleeding better or worse.  Higher multiplers = more bleeding.
+		var/blood_loss_modifier_multiplier = 1.0
+		for(var/datum/modifier/M in modifiers)
+			if(!isnull(M.bleeding_rate_percent))
+				blood_loss_modifier_multiplier += (M.bleeding_rate_percent - 1.0)
+
+		blood_loss_divisor /= blood_loss_modifier_multiplier
+
+
+		//This 30 is the "baseline" of a cut in the "vital" regions (head and torso).
+		for(var/obj/item/organ/external/temp in bad_external_organs)
 			if(!(temp.status & ORGAN_BLEEDING) || (temp.robotic >= ORGAN_ROBOT))
 				continue
-			for(var/datum/wound/W in temp.wounds) if(W.bleeding())
-				blood_max += W.damage / 40
-			if (temp.open)
-				blood_max += 2  //Yer stomach is cut open
+			for(var/datum/wound/W in temp.wounds)
+				if(W.bleeding())
+					if(W.damage_type == PIERCE) //gunshots and spear stabs bleed more
+						blood_loss_divisor = max(blood_loss_divisor - 5, 1)
+					else if(W.damage_type == BRUISE) //bruises bleed less
+						blood_loss_divisor = max(blood_loss_divisor + 5, 1)
+					//the farther you get from those vital regions, the less you bleed
+					//depending on how dangerous bleeding turns out to be, it might be better to only apply the reduction to hands and feet
+					if((temp.organ_tag == BP_L_ARM) || (temp.organ_tag == BP_R_ARM) || (temp.organ_tag == BP_L_LEG) || (temp.organ_tag == BP_R_LEG))
+						blood_loss_divisor = max(blood_loss_divisor + 5, 1)
+					else if((temp.organ_tag == BP_L_HAND) || (temp.organ_tag == BP_R_HAND) || (temp.organ_tag == BP_L_FOOT) || (temp.organ_tag == BP_R_FOOT))
+						blood_loss_divisor = max(blood_loss_divisor + 10, 1)
+					if(CE_STABLE in chem_effects)	//Inaprov slows bloodloss
+						blood_loss_divisor = max(blood_loss_divisor + 10, 1)
+					if(temp.applied_pressure)
+						if(ishuman(temp.applied_pressure))
+							var/mob/living/carbon/human/H = temp.applied_pressure
+							H.bloody_hands(src, 0)
+						//somehow you can apply pressure to every wound on the organ at the same time
+						//you're basically forced to do nothing at all, so let's make it pretty effective
+						var/min_eff_damage = max(0, W.damage - 10) / (blood_loss_divisor / 5) //still want a little bit to drip out, for effect
+						blood_max += max(min_eff_damage, W.damage - 30) / blood_loss_divisor
+					else
+						blood_max += W.damage / blood_loss_divisor
+
+			if(temp.open)
+				blood_max += 2 //Yer stomach is cut open
 		drip(blood_max)
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/human/proc/drip(var/amt as num)
+/mob/living/carbon/human/proc/drip(var/amt)
+	if(remove_blood(amt))
+		blood_splatter(src,src)
 
+/mob/living/carbon/human/proc/remove_blood(var/amt)
 	if(!should_have_organ(O_HEART)) //TODO: Make drips come from the reagents instead.
-		return
+		return 0
 
 	if(!amt)
-		return
+		return 0
 
-	vessel.remove_reagent("blood",amt)
-	blood_splatter(src,src)
+	if(amt > vessel.get_reagent_amount("blood"))
+		amt = vessel.get_reagent_amount("blood") - 1	// Bit of a safety net; it's impossible to add blood if there's not blood already in the vessel.
+
+	return vessel.remove_reagent("blood",amt * (src.mob_size/MOB_MEDIUM))
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -154,7 +211,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
 
 	var/datum/reagent/B = get_blood(container.reagents)
-	if(!B) B = new /datum/reagent/blood
+	if(!B)
+		B = new /datum/reagent/blood
 	B.holder = container
 	B.volume += amount
 
@@ -245,8 +303,8 @@ proc/blood_incompatible(donor,receiver,donor_species,receiver_species)
 		if(donor_species != receiver_species)
 			return 1
 
-	var/donor_antigen = copytext(donor,1,lentext(donor))
-	var/receiver_antigen = copytext(receiver,1,lentext(receiver))
+	var/donor_antigen = copytext(donor,1,length(donor))
+	var/receiver_antigen = copytext(receiver,1,length(receiver))
 	var/donor_rh = (findtext(donor,"+")>0)
 	var/receiver_rh = (findtext(receiver,"+")>0)
 

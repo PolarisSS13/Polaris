@@ -1,6 +1,5 @@
 /obj/structure/closet/secure_closet/guncabinet
 	name = "gun cabinet"
-	req_access = list(access_armory)
 	icon = 'icons/obj/guncabinet.dmi'
 	icon_state = "base"
 	icon_off ="base"
@@ -8,9 +7,10 @@
 	icon_locked ="base"
 	icon_closed ="base"
 	icon_opened = "base"
+	req_one_access = list(access_armory)
 
-/obj/structure/closet/secure_closet/guncabinet/New()
-	..()
+/obj/structure/closet/secure_closet/guncabinet/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/structure/closet/secure_closet/guncabinet/toggle()
@@ -27,23 +27,24 @@
 		for (var/obj/item/weapon/gun/G in contents)
 			if (istype(G, /obj/item/weapon/gun/energy))
 				lazors++
-			if (istype(G, /obj/item/weapon/gun/projectile/))
+			if (istype(G, /obj/item/weapon/gun/projectile))
 				shottas++
-		if (lazors || shottas)
-			for (var/i = 0 to 2)
+		for (var/i = 0 to 2)
+			if(lazors || shottas) // only make icons if we have one of the two types.
 				var/image/gun = image(icon(src.icon))
-
-				if (lazors > 0 && (shottas <= 0 || prob(50)))
+				if (lazors > shottas)
 					lazors--
 					gun.icon_state = "laser"
-				else if (shottas > 0)
+				else if (shottas)
 					shottas--
 					gun.icon_state = "projectile"
-
 				gun.pixel_x = i*4
 				overlays += gun
 
-		overlays += icon(src.icon,"door")
+		overlays += icon(src.icon, "door")
+
+		if(sealed)
+			overlays += icon(src.icon,"sealed")
 
 		if(broken)
 			overlays += icon(src.icon,"broken")
@@ -51,3 +52,4 @@
 			overlays += icon(src.icon,"locked")
 		else
 			overlays += icon(src.icon,"open")
+

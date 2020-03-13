@@ -2,6 +2,10 @@
 	iterations = 5
 	descriptor = "moon caves"
 	var/list/ore_turfs = list()
+	var/make_cracked_turfs = TRUE
+
+/datum/random_map/automata/cave_system/no_cracks
+	make_cracked_turfs = FALSE
 
 /datum/random_map/automata/cave_system/get_appropriate_path(var/value)
 	return
@@ -45,7 +49,10 @@
 	var/turf/simulated/mineral/T = locate((origin_x-1)+x,(origin_y-1)+y,origin_z)
 	if(istype(T) && !T.ignore_mapgen)
 		if(map[current_cell] == FLOOR_CHAR)
-			T.make_floor()
+			if(prob(90))
+				T.make_floor()
+			else if(make_cracked_turfs)
+				T.ChangeTurf(/turf/space/cracked_asteroid)
 		else
 			T.make_wall()
 			if(map[current_cell] == DOOR_CHAR)

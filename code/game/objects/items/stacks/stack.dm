@@ -12,6 +12,9 @@
 /obj/item/stack
 	gender = PLURAL
 	origin_tech = list(TECH_MATERIAL = 1)
+	icon = 'icons/obj/stacks.dmi'
+	randpixel = 7
+	center_of_mass = null
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
 	var/amount = 1
@@ -21,6 +24,10 @@
 	var/uses_charge = 0
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
+	var/no_variants = TRUE // Determines whether the item should update it's sprites based on amount.
+
+	var/pass_color = FALSE // Will the item pass its own color var to the created item? Dyed cloth, wood, etc.
+	var/strict_color_stacking = FALSE // Will the stack merge with other stacks that are different colors? (Dyed cloth, wood, etc)
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
@@ -28,6 +35,7 @@
 		stacktype = type
 	if (amount)
 		src.amount = amount
+	update_icon()
 	return
 
 /obj/item/stack/Destroy()
@@ -37,12 +45,24 @@
 		usr << browse(null, "window=stack")
 	return ..()
 
+/obj/item/stack/update_icon()
+	if(no_variants)
+		icon_state = initial(icon_state)
+	else
+		if(amount <= (max_amount * (1/3)))
+			icon_state = initial(icon_state)
+		else if (amount <= (max_amount * (2/3)))
+			icon_state = "[initial(icon_state)]_2"
+		else
+			icon_state = "[initial(icon_state)]_3"
+		item_state = initial(icon_state)
+
 /obj/item/stack/examine(mob/user)
 	if(..(user, 1))
 		if(!uses_charge)
-			user << "There are [src.amount] [src.singular_name]\s in the stack."
+			to_chat(user, "There are [src.amount] [src.singular_name]\s in the stack.")
 		else
-			user << "There is enough charge for [get_amount()]."
+			to_chat(user, "There is enough charge for [get_amount()].")
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -108,21 +128,21 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			user << "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>"
+			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>")
 		else
-			user << "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>"
+			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>")
 		return
 
 	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		user << "<span class='warning'>There is another [recipe.title] here!</span>"
+		to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
 		return
 
 	if (recipe.on_floor && !isfloor(user.loc))
-		user << "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>"
+		to_chat(user, "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>")
 		return
 
 	if (recipe.time)
-		user << "<span class='notice'>Building [recipe.title] ...</span>"
+		to_chat(user, "<span class='notice'>Building [recipe.title] ...</span>")
 		if (!do_after(user, recipe.time))
 			return
 
@@ -143,6 +163,17 @@
 		if (istype(O, /obj/item/weapon/storage)) //BubbleWrap - so newly formed boxes are empty
 			for (var/obj/item/I in O)
 				qdel(I)
+
+		if ((pass_color || recipe.pass_color))
+			if(!color)
+				if(recipe.use_material)
+					var/material/MAT = get_material_by_name(recipe.use_material)
+					if(MAT.icon_colour)
+						O.color = MAT.icon_colour
+				else
+					return
+			else
+				O.color = color
 
 /obj/item/stack/Topic(href, href_list)
 	..()
@@ -189,6 +220,7 @@
 			if(usr)
 				usr.remove_from_mob(src)
 			qdel(src) //should be safe to qdel immediately since if someone is still using this stack it will persist for a little while longer
+		update_icon()
 		return 1
 	else
 		if(get_amount() < used)
@@ -205,6 +237,7 @@
 			return 0
 		else
 			amount += extra
+		update_icon()
 		return 1
 	else if(!synths || synths.len < uses_charge)
 		return 0
@@ -225,6 +258,9 @@
 		return 0
 	if ((stacktype != S.stacktype) && !type_verified)
 		return 0
+	if ((strict_color_stacking || S.strict_color_stacking) && S.color != color)
+		return 0
+
 	if (isnull(tamount))
 		tamount = src.get_amount()
 
@@ -292,20 +328,22 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			user << "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>"
+			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
 		if(!amount)
 			break
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = src.split(1)
-		if (F)
-			user.put_in_hands(F)
-			src.add_fingerprint(user)
-			F.add_fingerprint(user)
-			spawn(0)
-				if (src && usr.machine==src)
-					src.interact(usr)
+		var/N = input("How many stacks of [src] would you like to split off?  There are currently [amount].", "Split stacks", 1) as num|null
+		if(N)
+			var/obj/item/stack/F = src.split(N)
+			if (F)
+				user.put_in_hands(F)
+				src.add_fingerprint(user)
+				F.add_fingerprint(user)
+				spawn(0)
+					if (src && usr.machine==src)
+						src.interact(usr)
 	else
 		..()
 	return
@@ -313,10 +351,7 @@
 /obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
-		if (user.get_inactive_hand()==src)
-			src.transfer_to(S, 1)
-		else
-			src.transfer_to(S)
+		src.transfer_to(S)
 
 		spawn(0) //give the stacks a chance to delete themselves if necessary
 			if (S && usr.machine==S)
@@ -339,8 +374,9 @@
 	var/one_per_turf = 0
 	var/on_floor = 0
 	var/use_material
+	var/pass_color
 
-	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null)
+	New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, pass_stack_color)
 		src.title = title
 		src.result_type = result_type
 		src.req_amount = req_amount
@@ -350,6 +386,7 @@
 		src.one_per_turf = one_per_turf
 		src.on_floor = on_floor
 		src.use_material = supplied_material
+		src.pass_color = pass_stack_color
 
 /*
  * Recipe list datum

@@ -1,7 +1,7 @@
 /datum/preferences
 	//The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
-	var/datum/species/current_species = all_species[species ? species : "Human"]
+	var/datum/species/current_species = GLOB.all_species[species ? species : "Human"]
 	set_biological_gender(pick(current_species.genders))
 
 	h_style = random_hair_style(biological_gender, species)
@@ -29,8 +29,8 @@
 			all_underwear[WRC.name] = WRI.name
 
 
-	backbag = rand(1,4)
-	pdachoice = rand(1,3)
+	backbag = rand(1,5)
+	pdachoice = rand(1,5)
 	age = rand(current_species.min_age, current_species.max_age)
 	b_type = RANDOM_BLOOD_TYPE
 	if(H)
@@ -194,12 +194,13 @@
 	b_skin = blue
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
-	copy_to(mannequin)
-	if(!dress_mob)
+	copy_to(mannequin, TRUE)
+
+	if(!equip_preview_mob)
 		return
 
-	// Determine what job is marked as 'High' priority, and dress them up as such.
 	var/datum/job/previewJob
+	// Determine what job is marked as 'High' priority, and dress them up as such.
 	if(job_civilian_low & ASSISTANT)
 		previewJob = job_master.GetJob("Assistant")
 	else
@@ -216,20 +217,20 @@
 				previewJob = job
 				break
 
-	if(previewJob)
-		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
+	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		var/list/equipped_slots = list() //If more than one item takes the same slot only spawn the first
 		for(var/thing in gear)
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
-				if(G.allowed_roles)
+				if(!G.allowed_roles)
+					permitted = 1
+				else if(!previewJob)
+					permitted = 0
+				else
 					for(var/job_name in G.allowed_roles)
 						if(previewJob.title == job_name)
 							permitted = 1
-				else
-					permitted = 1
 
 				if(G.whitelisted && (G.whitelisted != mannequin.species.name))
 					permitted = 0
@@ -238,29 +239,51 @@
 					continue
 
 				if(G.slot && !(G.slot in equipped_slots))
-					equipped_slots += G.slot
 					var/metadata = gear[G.display_name]
-					mannequin.equip_to_slot_or_del(G.spawn_item(mannequin, metadata), G.slot)
-		mannequin.update_icons()
+					if(mannequin.equip_to_slot_or_del(G.spawn_item(mannequin, metadata), G.slot))
+						equipped_slots += G.slot
+
+	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
+		mannequin.job = previewJob.title
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)
+	COMPILE_OVERLAYS(mannequin)
 
-	preview_icon = icon('icons/effects/effects.dmi', "nothing")
+	preview_icon = icon('icons/effects/128x48.dmi', bgstate)
 	preview_icon.Scale(48+32, 16+32)
 
-	mannequin.dir = NORTH
-	var/icon/stamp = getFlatIcon(mannequin)
+	var/icon/stamp = getFlatIcon(mannequin, defdir=NORTH)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
 
-	mannequin.dir = WEST
-	stamp = getFlatIcon(mannequin)
+	stamp = getFlatIcon(mannequin, defdir=WEST)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
 
-	mannequin.dir = SOUTH
-	stamp = getFlatIcon(mannequin)
+	stamp = getFlatIcon(mannequin, defdir=SOUTH)
 	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+
+/datum/preferences/proc/get_highest_job()
+	var/datum/job/highJob
+	// Determine what job is marked as 'High' priority, and dress them up as such.
+	if(job_civilian_low & ASSISTANT)
+		highJob = job_master.GetJob("Assistant")
+	else
+		for(var/datum/job/job in job_master.occupations)
+			var/job_flag
+			switch(job.department_flag)
+				if(CIVILIAN)
+					job_flag = job_civilian_high
+				if(MEDSCI)
+					job_flag = job_medsci_high
+				if(ENGSEC)
+					job_flag = job_engsec_high
+			if(job.flag == job_flag)
+				highJob = job
+				break
+
+	return highJob

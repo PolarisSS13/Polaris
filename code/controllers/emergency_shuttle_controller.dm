@@ -22,7 +22,11 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	var/datum/announcement/priority/emergency_shuttle_called = new(0, new_sound = sound('sound/AI/shuttlecalled.ogg'))
 	var/datum/announcement/priority/emergency_shuttle_recalled = new(0, new_sound = sound('sound/AI/shuttlerecalled.ogg'))
 
-/datum/emergency_shuttle_controller/proc/process()
+/datum/emergency_shuttle_controller/New()
+	escape_pods = list()
+	..()
+
+/datum/emergency_shuttle_controller/process()
 	if (wait_for_launch)
 		if (evac && auto_recall && world.time >= auto_recall_time)
 			recall()
@@ -31,7 +35,12 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 			if (!shuttle.location)	//leaving from the station
 				//launch the pods!
-				for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+				for (var/EP in escape_pods)
+					var/datum/shuttle/ferry/escape_pod/pod
+					if(istype(escape_pods[EP], /datum/shuttle/ferry/escape_pod))
+						pod = escape_pods[EP]
+					else
+						continue
 					if (!pod.arming_controller || pod.arming_controller.armed)
 						pod.launch(src)
 
@@ -44,15 +53,21 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	if (!shuttle.location)	//at station
 		if (autopilot)
 			set_launch_countdown(SHUTTLE_LEAVETIME)	//get ready to return
+			var/estimated_time = round(estimate_launch_time()/60,1)
 
 			if (evac)
-				emergency_shuttle_docked.Announce("The Emergency Shuttle has docked with the station at docks one and two. You have approximately [round(estimate_launch_time()/60,1)] minutes to board the Emergency Shuttle.")
+				emergency_shuttle_docked.Announce(replacetext(replacetext(using_map.emergency_shuttle_docked_message, "%dock_name%", "[using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
 			else
-				priority_announcement.Announce("The scheduled shuttle to the [dock_name] has docked with the station at docks one and two. It will depart in approximately [round(emergency_shuttle.estimate_launch_time()/60,1)] minutes.")
+				priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_docked_message, "%dock_name%", "[using_map.dock_name]"),  "%ETD%", "[estimated_time] minute\s"))
 
 		//arm the escape pods
 		if (evac)
-			for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+			for (var/EP in escape_pods)
+				var/datum/shuttle/ferry/escape_pod/pod
+				if(istype(escape_pods[EP], /datum/shuttle/ferry/escape_pod))
+					pod = escape_pods[EP]
+				else
+					continue
 				if (pod.arming_controller)
 					pod.arming_controller.arm()
 
@@ -75,12 +90,15 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
+	var/estimated_time = round(estimate_arrival_time()/60,1)
 
 	evac = 1
-	emergency_shuttle_called.Announce("An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately [round(estimate_arrival_time()/60)] minutes.")
-	for(var/area/A in world)
+	emergency_shuttle_called.Announce(replacetext(using_map.emergency_shuttle_called_message, "%ETA%", "[estimated_time] minute\s"))
+	for(var/area/A in all_areas)
 		if(istype(A, /area/hallway))
 			A.readyalert()
+
+	atc.reroute_traffic(yes = 1)
 
 //calls the shuttle for a routine crew transfer
 /datum/emergency_shuttle_controller/proc/call_transfer()
@@ -93,8 +111,10 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 	//reset the shuttle transit time if we need to
 	shuttle.move_time = SHUTTLE_TRANSIT_DURATION
+	var/estimated_time = round(estimate_arrival_time()/60,1)
 
-	priority_announcement.Announce("The regularly scheduled shuttle to the [dock_name] will arrive in in approximately [round(estimate_arrival_time()/60)] minutes. Those leaving should proceed to docks one and two.")
+	priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_called_message, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[estimated_time] minute\s"))
+	atc.shift_ending()
 
 //recalls the shuttle
 /datum/emergency_shuttle_controller/proc/recall()
@@ -104,14 +124,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	shuttle.cancel_launch(src)
 
 	if (evac)
-		emergency_shuttle_recalled.Announce("The emergency shuttle has been recalled.")
+		emergency_shuttle_recalled.Announce(using_map.emergency_shuttle_recall_message)
 
-		for(var/area/A in world)
+		for(var/area/A in all_areas)
 			if(istype(A, /area/hallway))
 				A.readyreset()
 		evac = 0
 	else
-		priority_announcement.Announce("The scheduled transfer shuttle has been cancelled.")
+		priority_announcement.Announce(using_map.shuttle_recall_message)
 
 /datum/emergency_shuttle_controller/proc/can_call()
 	if (!universe.OnShuttleCall(null))
@@ -185,6 +205,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 
 //returns 1 if the shuttle is not idle at centcom
 /datum/emergency_shuttle_controller/proc/online()
+	if(!shuttle)
+		return FALSE
 	if (!shuttle.location)	//not at centcom
 		return 1
 	if (wait_for_launch || shuttle.moving_status != SHUTTLE_IDLE)
@@ -224,7 +246,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	name = "star"
 	var/speed = 10
 	var/direction = SOUTH
-	layer = 2 // TURF_LAYER
+	layer = TURF_LAYER
+	plane = TURF_PLANE
 
 /obj/effect/bgstar/New()
 	..()

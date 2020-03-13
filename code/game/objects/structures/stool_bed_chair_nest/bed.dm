@@ -20,6 +20,7 @@
 	var/material/material
 	var/material/padding_material
 	var/base_icon = "bed"
+	var/applies_material_colour = 1
 
 /obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
 	..(newloc)
@@ -41,14 +42,15 @@
 /obj/structure/bed/update_icon()
 	// Prep icon.
 	icon_state = ""
-	overlays.Cut()
+	cut_overlays()
 	// Base icon.
 	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
-		var/image/I = image('icons/obj/furniture.dmi', base_icon)
-		I.color = material.icon_colour
+		var/image/I = image(icon, base_icon)
+		if(applies_material_colour) //VOREStation Add - Goes with added var
+			I.color = material.icon_colour
 		stool_cache[cache_key] = I
-	overlays |= stool_cache[cache_key]
+	add_overlay(stool_cache[cache_key])
 	// Padding overlay.
 	if(padding_material)
 		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
@@ -56,7 +58,7 @@
 			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
-		overlays |= stool_cache[padding_cache_key]
+		add_overlay(stool_cache[padding_cache_key])
 	// Strings.
 	desc = initial(desc)
 	if(padding_material)
@@ -66,11 +68,10 @@
 		name = "[material.display_name] [initial(name)]"
 		desc += " It's made of [material.use_name]."
 
-/obj/structure/bed/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+/obj/structure/bed/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
-	else
-		return ..()
+		return TRUE
+	return ..()
 
 /obj/structure/bed/ex_act(severity)
 	switch(severity)
@@ -87,13 +88,13 @@
 				return
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	if(W.is_wrench())
+		playsound(src, W.usesound, 50, 1)
 		dismantle()
 		qdel(src)
 	else if(istype(W,/obj/item/stack))
 		if(padding_material)
-			user << "\The [src] is already padded."
+			to_chat(user, "\The [src] is already padded.")
 			return
 		var/obj/item/stack/C = W
 		if(C.get_amount() < 1) // How??
@@ -108,32 +109,32 @@
 			if(M.material && (M.material.flags & MATERIAL_PADDING))
 				padding_type = "[M.material.name]"
 		if(!padding_type)
-			user << "You cannot pad \the [src] with that."
+			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
-		user << "You add padding to \the [src]."
+		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
 
-	else if (istype(W, /obj/item/weapon/wirecutters))
+	else if(W.is_wirecutter())
 		if(!padding_material)
-			user << "\The [src] has no padding to remove."
+			to_chat(user, "\The [src] has no padding to remove.")
 			return
-		user << "You remove the padding from \the [src]."
-		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
+		to_chat(user, "You remove the padding from \the [src].")
+		playsound(src.loc, W.usesound, 100, 1)
 		remove_padding()
 
 	else if(istype(W, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = W
 		var/mob/living/affecting = G.affecting
-		if(buckled_mob) //Handles trying to buckle someone else to a chair when someone else is on it
-			user  << "<span class='notice'>\The [src] already has someone buckled to it.</span>"
+		if(has_buckled_mobs()) //Handles trying to buckle someone else to a chair when someone else is on it
+			to_chat(user, "<span class='notice'>\The [src] already has someone buckled to it.</span>")
 			return
 		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
-		if(do_after(user, 20))
+		if(do_after(user, 20, G.affecting))
 			affecting.loc = loc
 			spawn(0)
 				if(buckle_mob(affecting))
@@ -172,13 +173,6 @@
 /obj/structure/bed/padded/New(var/newloc)
 	..(newloc,"plastic","cotton")
 
-/obj/structure/bed/alien
-	name = "resting contraption"
-	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
-
-/obj/structure/bed/alien/New(var/newloc)
-	..(newloc,"resin")
-
 /obj/structure/bed/double
 	name = "double bed"
 	icon_state = "doublebed"
@@ -188,7 +182,7 @@
 	..(newloc,"wood","cotton")
 
 /obj/structure/bed/double/post_buckle_mob(mob/living/M as mob)
-	if(M == buckled_mob)
+	if(M.buckled == src)
 		M.pixel_y = 13
 		M.old_y = 13
 	else
@@ -200,22 +194,33 @@
  */
 /obj/structure/bed/roller
 	name = "roller bed"
+	desc = "A portable bed-on-wheels made for transporting medical patients."
 	icon = 'icons/obj/rollerbed.dmi'
-	icon_state = "down"
+	icon_state = "rollerbed"
 	anchored = 0
+	surgery_odds = 75
+	var/bedtype = /obj/structure/bed/roller
+	var/rollertype = /obj/item/roller
+
+/obj/structure/bed/roller/adv
+	name = "advanced roller bed"
+	icon_state = "rollerbedadv"
+	bedtype = /obj/structure/bed/roller/adv
+	rollertype = /obj/item/roller/adv
 
 /obj/structure/bed/roller/update_icon()
-	return // Doesn't care about material or anything else.
+	return
 
 /obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench) || istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+	if(W.is_wrench() || istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	else if(istype(W,/obj/item/roller_holder))
-		if(buckled_mob)
-			user_unbuckle_mob(user)
+		if(has_buckled_mobs())
+			for(var/A in buckled_mobs)
+				user_unbuckle_mob(A, user)
 		else
 			visible_message("[user] collapses \the [src.name].")
-			new/obj/item/roller(get_turf(src))
+			new rollertype(get_turf(src))
 			spawn(0)
 				qdel(src)
 		return
@@ -225,31 +230,43 @@
 	name = "roller bed"
 	desc = "A collapsed roller bed that can be carried around."
 	icon = 'icons/obj/rollerbed.dmi'
-	icon_state = "folded"
-	w_class = 4.0 // Can't be put in backpacks. Oh well.
+	icon_state = "folded_rollerbed"
+	center_of_mass = list("x" = 17,"y" = 7)
+	slot_flags = SLOT_BACK
+	w_class = ITEMSIZE_LARGE
+	var/rollertype = /obj/item/roller
+	var/bedtype = /obj/structure/bed/roller
 
 /obj/item/roller/attack_self(mob/user)
-		var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
-		R.add_fingerprint(user)
-		qdel(src)
+	var/obj/structure/bed/roller/R = new bedtype(user.loc)
+	R.add_fingerprint(user)
+	qdel(src)
 
 /obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
 		if(!RH.held)
-			user << "<span class='notice'>You collect the roller bed.</span>"
+			to_chat(user, "<span class='notice'>You collect the roller bed.</span>")
 			src.loc = RH
 			RH.held = src
 			return
 
 	..()
 
+/obj/item/roller/adv
+	name = "advanced roller bed"
+	desc = "A high-tech, compact version of the regular roller bed."
+	icon_state = "folded_rollerbedadv"
+	w_class = ITEMSIZE_NORMAL
+	rollertype = /obj/item/roller/adv
+	bedtype = /obj/structure/bed/roller/adv
+
 /obj/item/roller_holder
 	name = "roller bed rack"
 	desc = "A rack for carrying a collapsed roller bed."
 	icon = 'icons/obj/rollerbed.dmi'
-	icon_state = "folded"
+	icon_state = "rollerbed"
 	var/obj/item/roller/held
 
 /obj/item/roller_holder/New()
@@ -259,11 +276,11 @@
 /obj/item/roller_holder/attack_self(mob/user as mob)
 
 	if(!held)
-		user << "<span class='notice'>The rack is empty.</span>"
+		to_chat(user, "<span class='notice'>The rack is empty.</span>")
 		return
 
-	user << "<span class='notice'>You deploy the roller bed.</span>"
-	var/obj/structure/bed/roller/R = new /obj/structure/bed/roller(user.loc)
+	to_chat(user, "<span class='notice'>You deploy the roller bed.</span>")
+	var/obj/structure/bed/roller/R = new held.bedtype(user.loc)
 	R.add_fingerprint(user)
 	qdel(held)
 	held = null
@@ -271,33 +288,63 @@
 
 /obj/structure/bed/roller/Move()
 	..()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)
-			buckled_mob.loc = src.loc
-		else
-			buckled_mob = null
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+
+			if(L.buckled == src)
+				L.loc = src.loc
 
 /obj/structure/bed/roller/post_buckle_mob(mob/living/M as mob)
-	if(M == buckled_mob)
+	if(M.buckled == src)
 		M.pixel_y = 6
 		M.old_y = 6
 		density = 1
-		icon_state = "up"
+		icon_state = "[initial(icon_state)]_up"
 	else
 		M.pixel_y = 0
 		M.old_y = 0
 		density = 0
-		icon_state = "down"
-
+		icon_state = "[initial(icon_state)]"
+	update_icon()
 	return ..()
 
 /obj/structure/bed/roller/MouseDrop(over_object, src_location, over_location)
 	..()
 	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
 		if(!ishuman(usr))	return
-		if(buckled_mob)	return 0
+		if(has_buckled_mobs())	return 0
 		visible_message("[usr] collapses \the [src.name].")
-		new/obj/item/roller(get_turf(src))
+		new rollertype(get_turf(src))
 		spawn(0)
 			qdel(src)
 		return
+
+/datum/category_item/catalogue/anomalous/precursor_a/alien_bed
+	name = "Precursor Alpha Object - Resting Contraption"
+	desc = "This appears to be a relatively long and flat object, with the top side being made of \
+	an soft material, giving it very similar characteristics to an ordinary bed. If this object was \
+	designed to act as a bed, this carries several implications for whatever species had built it, such as;\
+	<br><br>\
+	Being capable of experiencing comfort, or at least being able to suffer from some form of fatigue.<br>\
+	Developing while under the influence of gravitational forces, to be able to 'lie' on the object.<br>\
+	Being within a range of sizes in order for the object to function as a bed. Too small, and the species \
+	would be unable to reach the top of the object. Too large, and they would have little room to contact \
+	the top side of the object.<br>\
+	<br><br>\
+	As a note, the size of this object appears to be within the bounds for an average human to be able to \
+	rest comfortably on top of it."
+	value = CATALOGUER_REWARD_EASY
+
+/obj/structure/bed/alien
+	name = "resting contraption"
+	desc = "Whatever species designed this must've enjoyed relaxation as well. Looks vaguely comfy."
+	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_bed)
+	icon = 'icons/obj/abductor.dmi'
+	icon_state = "bed"
+
+/obj/structure/bed/alien/update_icon()
+	return // Doesn't care about material or anything else.
+
+/obj/structure/bed/alien/attackby(obj/item/weapon/W, mob/user)
+	return // No deconning.

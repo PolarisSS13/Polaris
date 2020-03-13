@@ -26,20 +26,20 @@
 	if(!usr || usr.stat || usr.lying)	return
 
 	if(scan)
-		usr << "You remove \the [scan] from \the [src]."
+		to_chat(usr, "You remove \the [scan] from \the [src].")
 		scan.loc = get_turf(src)
 		if(!usr.get_active_hand() && istype(usr,/mob/living/carbon/human))
 			usr.put_in_hands(scan)
 		scan = null
 	else
-		usr << "There is nothing to remove from the console."
+		to_chat(usr, "There is nothing to remove from the console.")
 	return
 
 /obj/machinery/computer/med_data/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
-		user << "You insert \the [O]."
+		to_chat(user, "You insert \the [O].")
 	else
 		..()
 
@@ -85,6 +85,7 @@
 					if ((istype(src.active1, /datum/data/record) && data_core.general.Find(src.active1)))
 						dat += "<table><tr><td>Name: [active1.fields["name"]] \
 								ID: [active1.fields["id"]]<BR>\n	\
+								Entity Classification: <A href='?src=\ref[src];field=brain_type'>[active1.fields["brain_type"]]</A><BR>\n	\
 								Sex: <A href='?src=\ref[src];field=sex'>[active1.fields["sex"]]</A><BR>\n"
 						if ((istype(src.active2, /datum/data/record) && data_core.medical.Find(src.active2)))
 							dat += "Gender identity: <A href='?src=\ref[src];field=id_gender'>[active2.fields["id_gender"]]</A><BR>"
@@ -121,7 +122,7 @@
 					dat += "<a href='?src=\ref[src];screen=1'>Back</a>"
 					dat += "<br><b>Medical Robots:</b>"
 					var/bdat = null
-					for(var/mob/living/bot/medbot/M in world)
+					for(var/mob/living/bot/medbot/M in mob_list)
 
 						if(M.z != src.z)	continue	//only find medibots on the same z-level as the computer
 						var/turf/bl = get_turf(M)
@@ -314,7 +315,7 @@
 							src.active2.fields["cdi_d"] = t1
 					if("notes")
 						if (istype(src.active2, /datum/data/record))
-							var/t1 = sanitize(input("Please summarize notes:", "Med. records", html_decode(src.active2.fields["notes"]), null)  as message, extra = 0)
+							var/t1 = sanitize(input("Please summarize notes:", "Med. records", html_decode(src.active2.fields["notes"]), null)  as message, extra = 0, max_length = MAX_RECORD_LENGTH)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active2 != a2))
 								return
 							src.active2.fields["notes"] = t1
@@ -454,7 +455,7 @@
 				var/counter = 1
 				while(src.active2.fields[text("com_[]", counter)])
 					counter++
-				src.active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD")] [worldtime2text()], [game_year]<BR>[t1]")
+				src.active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD")] [stationtime2text()], [game_year]<BR>[t1]")
 
 			if (href_list["del_c"])
 				if ((istype(src.active2, /datum/data/record) && src.active2.fields[text("com_[]", href_list["del_c"])]))
@@ -548,7 +549,9 @@
 
 /obj/machinery/computer/med_data/laptop
 	name = "Medical Laptop"
-	desc = "A cheap laptop."
+	desc = "A cheap laptop. It seems to have only the medical records program."
 	icon_state = "laptop"
 	icon_keyboard = "laptop_key"
 	icon_screen = "medlaptop"
+	circuit = /obj/item/weapon/circuitboard/med_data/laptop
+	density = 0

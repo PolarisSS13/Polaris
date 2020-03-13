@@ -91,7 +91,7 @@ var/global/list/additional_antag_types = list()
 			message_admins("Admin [key_name_admin(usr)] is debugging the [antag.role_text] template.")
 	else if(href_list["remove_antag_type"])
 		if(antag_tags && (href_list["remove_antag_type"] in antag_tags))
-			usr << "Cannot remove core mode antag type."
+			to_chat(usr, "Cannot remove core mode antag type.")
 			return
 		var/datum/antagonist/antag = all_antag_types[href_list["remove_antag_type"]]
 		if(antag_templates && antag_templates.len && antag && (antag in antag_templates) && (antag.id in additional_antag_types))
@@ -117,9 +117,11 @@ var/global/list/additional_antag_types = list()
 				return
 
 /datum/game_mode/proc/announce() //to be called when round starts
-	world << "<B>The current game mode is [capitalize(name)]!</B>"
-	if(round_description) world << "[round_description]"
-	if(round_autoantag) world << "Antagonists will be added to the round automagically as needed."
+	to_world("<B>The current game mode is [capitalize(name)]!</B>")
+	if(round_description)
+		to_world("[round_description]")
+	if(round_autoantag)
+		to_world("Antagonists will be added to the round automagically as needed.")
 	if(antag_templates && antag_templates.len)
 		var/antag_summary = "<b>Possible antagonist types:</b> "
 		var/i = 1
@@ -133,7 +135,7 @@ var/global/list/additional_antag_types = list()
 			i++
 		antag_summary += "."
 		if(antag_templates.len > 1 && master_mode != "secret")
-			world << "[antag_summary]"
+			to_world("[antag_summary]")
 		else
 			message_admins("[antag_summary]")
 
@@ -146,10 +148,10 @@ var/global/list/additional_antag_types = list()
 			playerC++
 
 	if(master_mode=="secret")
-		if(playerC < required_players_secret)
+		if(playerC < config.player_requirements_secret[config_tag])
 			return 0
 	else
-		if(playerC < required_players)
+		if(playerC < config.player_requirements[config_tag])
 			return 0
 
 	if(!(antag_templates && antag_templates.len))
@@ -176,12 +178,12 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
-		event_manager.report_at_round_end = 1
+		SSevents.report_at_round_end = TRUE
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EModerate = event_manager.event_containers[EVENT_LEVEL_MODERATE]
+			var/datum/event_container/EModerate = SSevents.event_containers[EVENT_LEVEL_MODERATE]
 			EModerate.delay_modifier = event_delay_mod_moderate
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EMajor = event_manager.event_containers[EVENT_LEVEL_MAJOR]
+			var/datum/event_container/EMajor = SSevents.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
@@ -340,7 +342,7 @@ var/global/list/additional_antag_types = list()
 		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [emergency_shuttle.evac ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-	world << text
+	to_world(text)
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
@@ -372,7 +374,7 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/check_win() //universal trigger to be called at mob death, nuke explosion, etc. To be called from everywhere.
 	return 0
 
-/datum/game_mode/proc/get_players_for_role(var/role, var/antag_id)
+/datum/game_mode/proc/get_players_for_role(var/role, var/antag_id, var/ghosts_only)
 	var/list/players = list()
 	var/list/candidates = list()
 
@@ -386,6 +388,8 @@ var/global/list/additional_antag_types = list()
 			if(!player.client)
 				continue
 			if(istype(player, /mob/new_player))
+				continue
+			if(istype(player, /mob/observer/dead) && !ghosts_only)
 				continue
 			if(!role || (player.client.prefs.be_special & role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")
@@ -403,6 +407,8 @@ var/global/list/additional_antag_types = list()
 				candidates += player.mind
 				players -= player
 
+		// Below is commented out as an attempt to solve an issue of too little people wanting to join the round due to wanting to have cake and eat it too.
+		/*
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
@@ -411,6 +417,7 @@ var/global/list/additional_antag_types = list()
 					candidates += player.mind
 					players -= player
 					break
+		*/
 
 	return candidates		// Returns: The number of people who had the antagonist role set to yes, regardless of recomended_enemies, if that number is greater than required_enemies
 							//			required_enemies if the number of people with that role set to yes is less than recomended_enemies,
@@ -459,7 +466,7 @@ proc/display_roundstart_logout_report()
 
 		if(L.ckey)
 			var/found = 0
-			for(var/client/C in clients)
+			for(var/client/C in GLOB.clients)
 				if(C.ckey == L.ckey)
 					found = 1
 					break
@@ -503,15 +510,15 @@ proc/display_roundstart_logout_report()
 
 	for(var/mob/M in mob_list)
 		if(M.client && M.client.holder)
-			M << msg
+			to_chat(M,msg)
 
 proc/get_nt_opposed()
 	var/list/dudes = list()
 	for(var/mob/living/carbon/human/man in player_list)
 		if(man.client)
-			if(man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED)
+			if(man.client.prefs.economic_status == CLASS_LOWER)
 				dudes += man
-			else if(man.client.prefs.nanotrasen_relation == COMPANY_SKEPTICAL && prob(50))
+			else if(man.client.prefs.economic_status == CLASS_LOWMID && prob(50))
 				dudes += man
 	if(dudes.len == 0) return null
 	return pick(dudes)
@@ -521,9 +528,9 @@ proc/get_nt_opposed()
 	if(!player || !player.current) return
 
 	var/obj_count = 1
-	player.current << "<span class='notice'>Your current objectives:</span>"
+	to_chat(player.current, "<span class='notice'>Your current objectives:</span>")
 	for(var/datum/objective/objective in player.objectives)
-		player.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++
 
 /mob/verb/check_round_info()
@@ -531,15 +538,15 @@ proc/get_nt_opposed()
 	set category = "OOC"
 
 	if(!ticker || !ticker.mode)
-		usr << "Something is terribly wrong; there is no gametype."
+		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
 	if(master_mode != "secret")
-		usr << "<b>The roundtype is [capitalize(ticker.mode.name)]</b>"
+		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
 		if(ticker.mode.round_description)
-			usr << "<i>[ticker.mode.round_description]</i>"
+			to_chat(usr, "<i>[ticker.mode.round_description]</i>")
 		if(ticker.mode.extended_round_description)
-			usr << "[ticker.mode.extended_round_description]"
+			to_chat(usr, "[ticker.mode.extended_round_description]")
 	else
-		usr << "<i>Shhhh</i>. It's a secret."
+		to_chat(usr, "<i>Shhhh</i>. It's a secret.")
 	return

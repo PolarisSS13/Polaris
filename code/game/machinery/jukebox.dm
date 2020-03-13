@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
-
 datum/track
 	var/title
 	var/sound
@@ -10,6 +8,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/
 	name = "space jukebox"
+	desc = "Filled with songs both past and present!"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
 	var/state_base = "jukebox2"
@@ -20,8 +19,14 @@ datum/track/New(var/title_name, var/audio)
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/weapon/circuitboard/jukebox
+	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
+
+	// Vars for hacking
+	var/datum/wires/jukebox/wires = null
+	var/hacked = 0 // Whether to show the hidden songs or not
+	var/freq = 0
 
 	var/datum/track/current_track
 	var/list/datum/track/tracks = list(
@@ -34,20 +39,59 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
+		new/datum/track("Stellar Transit", 'sound/ambience/space/space_serithi.ogg'),
+	)
+
+	// Only visible if hacked
+	var/list/datum/track/secret_tracks = list(
+		new/datum/track("Clown", 'sound/music/clown.ogg'),
+		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
+		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
+		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
 	)
 
 /obj/machinery/media/jukebox/New()
 	..()
-	circuit = new circuit(src)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 5)
-	RefreshParts()
+	default_apply_parts()
+	wires = new/datum/wires/jukebox(src)
+	update_icon()
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
+	qdel(wires)
+	wires = null
 	..()
+
+/obj/machinery/media/jukebox/proc/set_hacked(var/newhacked)
+	if (hacked == newhacked) return
+	hacked = newhacked
+	if (hacked)
+		tracks.Add(secret_tracks)
+	else
+		tracks.Remove(secret_tracks)
+	updateDialog()
+
+/obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
+	src.add_fingerprint(user)
+
+	if(default_deconstruction_screwdriver(user, W))
+		return
+	if(default_deconstruction_crowbar(user, W))
+		return
+	if(W.is_wirecutter())
+		return wires.Interact(user)
+	if(istype(W, /obj/item/device/multitool))
+		return wires.Interact(user)
+	if(W.is_wrench())
+		if(playing)
+			StopPlaying()
+		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
+		anchored = !anchored
+		playsound(src, W.usesound, 50, 1)
+		power_change()
+		update_icon()
+		return
+	return ..()
 
 /obj/machinery/media/jukebox/power_change()
 	if(!powered(power_channel) || !anchored)
@@ -73,17 +117,19 @@ datum/track/New(var/title_name, var/audio)
 			overlays += "[state_base]-emagged"
 		else
 			overlays += "[state_base]-running"
+	if (panel_open)
+		overlays += "panel_open"
 
 /obj/machinery/media/jukebox/Topic(href, href_list)
 	if(..() || !(Adjacent(usr) || istype(usr, /mob/living/silicon)))
 		return
 
 	if(!anchored)
-		usr << "<span class='warning'>You must secure \the [src] first.</span>"
+		to_chat(usr, "<span class='warning'>You must secure \the [src] first.</span>")
 		return
 
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	if(href_list["change_track"])
@@ -112,7 +158,7 @@ datum/track/New(var/title_name, var/audio)
 			spawn(15)
 				explode()
 		else if(current_track == null)
-			usr << "No track selected."
+			to_chat(usr, "No track selected.")
 		else
 			StartPlaying()
 
@@ -120,7 +166,7 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/interact(mob/user)
 	if(stat & (NOPOWER|BROKEN))
-		usr << "\The [src] doesn't appear to function."
+		to_chat(usr, "\The [src] doesn't appear to function.")
 		return
 
 	ui_interact(user)
@@ -140,7 +186,7 @@ datum/track/New(var/title_name, var/audio)
 		data["tracks"] = nano_tracks
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -176,12 +222,12 @@ datum/track/New(var/title_name, var/audio)
 		return
 	if(default_deconstruction_crowbar(user, W))
 		return
-	if(istype(W, /obj/item/weapon/wrench))
+	if(W.is_wrench())
 		if(playing)
 			StopPlaying()
 		user.visible_message("<span class='warning'>[user] has [anchored ? "un" : ""]secured \the [src].</span>", "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
 		anchored = !anchored
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		playsound(src, W.usesound, 50, 1)
 		power_change()
 		update_icon()
 		return
@@ -213,7 +259,13 @@ datum/track/New(var/title_name, var/audio)
 		return
 
 	var/area/main_area = get_area(src)
-	main_area.forced_ambience = list(current_track.sound)
+	if(freq)
+		var/sound/new_song = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+		new_song.frequency = freq
+		main_area.forced_ambience = list(new_song)
+	else
+		main_area.forced_ambience = list(current_track.sound)
+
 	for(var/mob/living/M in mobs_in_area(main_area))
 		if(M.mind)
 			main_area.play_ambience(M)
@@ -221,3 +273,23 @@ datum/track/New(var/title_name, var/audio)
 	playing = 1
 	update_use_power(2)
 	update_icon()
+
+// Advance to the next track - Don't start playing it unless we were already playing
+/obj/machinery/media/jukebox/proc/NextTrack()
+	if(!tracks.len) return
+	var/curTrackIndex = max(1, tracks.Find(current_track))
+	var/newTrackIndex = (curTrackIndex % tracks.len) + 1  // Loop back around if past end
+	current_track = tracks[newTrackIndex]
+	if(playing)
+		StartPlaying()
+	updateDialog()
+
+// Advance to the next track - Don't start playing it unless we were already playing
+/obj/machinery/media/jukebox/proc/PrevTrack()
+	if(!tracks.len) return
+	var/curTrackIndex = max(1, tracks.Find(current_track))
+	var/newTrackIndex = curTrackIndex == 1 ? tracks.len : curTrackIndex - 1
+	current_track = tracks[newTrackIndex]
+	if(playing)
+		StartPlaying()
+	updateDialog()

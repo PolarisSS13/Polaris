@@ -6,6 +6,8 @@
 	var/code = "electronic"
 	origin_tech = list(TECH_BLUESPACE = 1)
 
+GLOBAL_LIST_BOILERPLATE(all_beacons, /obj/item/device/radio/beacon)
+
 /obj/item/device/radio/beacon/hear_talk()
 	return
 
@@ -42,7 +44,7 @@
 
 /obj/item/device/radio/beacon/syndicate/attack_self(mob/user as mob)
 	if(user)
-		user << "<span class='notice'>Locked In</span>"
+		to_chat(user, "<span class='notice'>Locked In</span>")
 		new /obj/machinery/power/singularity_beacon/syndicate( user.loc )
 		playsound(src, 'sound/effects/pop.ogg', 100, 1, 1)
 		qdel(src)

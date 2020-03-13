@@ -1,26 +1,22 @@
 //#define AMAP
-
 /obj/machinery/computer/security/verb/station_map()
 	set name = ".map"
 	set category = "Object"
 	set src in view(1)
 	usr.set_machine(src)
 	if(!mapping)	return
-
 	log_game("[usr]([usr.key]) used station map L[z] in [src.loc.loc]")
-
-	src.drawmap(usr)
+	drawmap(usr)
 
 /obj/machinery/computer/security/proc/drawmap(var/mob/user as mob)
 
 	var/icx = round(world.maxx/16) + 1
 	var/icy = round(world.maxy/16) + 1
 
-	var/xoff = round( (icx*16-world.maxx)-2)
-	var/yoff = round( (icy*16-world.maxy)-2)
+	var/xoff = round((icx*16-world.maxx)-2)
+	var/yoff = round((icy*16-world.maxy)-2)
 
 	var/icount = icx * icy
-
 
 	var/list/imap = list()
 
@@ -30,8 +26,7 @@
 		imap += icon('icons/misc/imap.dmi', "blank")
 		imap += icon('icons/misc/imap.dmi', "blank")
 
-	//world << "[icount] images in list"
-
+	//to_world("[icount] images in list")
 
 	for(var/wx = 1 ; wx <= world.maxx; wx++)
 
@@ -41,8 +36,6 @@
 
 			var/colour
 			var/colour2
-
-
 
 			if(!T)
 				colour = rgb(0,0,0)
@@ -78,9 +71,6 @@
 
 					else
 						colour = rgb(0,40,0)
-
-
-
 
 				if(sense)
 
@@ -127,9 +117,7 @@
 				var/turf_total = environment.total_moles()
 				//var/turf_total = T.co2 + T.oxygen + T.poison + T.sl_gas + T.n2
 
-
 				var/t1 = turf_total / MOLES_CELLSTANDARD * 150
-
 
 				if(t1<=100)
 					colour2 = rgb(t1*2.55,0,0)
@@ -146,29 +134,26 @@
 			var/rx = ((wx*2+xoff)%32) + 1
 			var/ry = ((wy*2+yoff)%32) + 1
 
-			//world << "trying [ix],[iy] : [ix+icx*iy]"
+			//to_world("trying [ix],[iy] : [ix+icx*iy]")
 			var/icon/I = imap[1+(ix + icx*iy)*2]
 			var/icon/I2 = imap[2+(ix + icx*iy)*2]
 
-
-			//world << "icon: \icon[I]"
+			//to_world("icon: \icon[I]")
 
 			I.DrawBox(colour, rx, ry, rx+1, ry+1)
 
 			I2.DrawBox(colour2, rx, ry, rx+1, ry+1)
 
-
 	user.clearmap()
 
 	user.mapobjs = list()
-
 
 	for(var/i=0; i<icount;i++)
 		var/obj/screen/H = new /obj/screen()
 
 		H.screen_loc = "[5 + i%icx],[6+ round(i/icx)]"
 
-		//world<<"\icon[I] at [H.screen_loc]"
+		//to_world("\icon[I] at [H.screen_loc]")
 
 		H.name = (i==0)?"maprefresh":"map"
 
@@ -183,7 +168,7 @@
 		qdel(I)
 		qdel(J)
 		H.icon = HI
-		H.layer = 25
+		H.hud_layerise()
 		usr.mapobjs += H
 #else
 
@@ -217,7 +202,7 @@
 							colour = rgb(0,0,t1*2.55)
 						else
 							t1 = min(100, t1-100)
-							colour = rgb( t1*2.55, t1*2.55, 255)
+							colour = rgb(t1*2.55, t1*2.55, 255)
 
 					if("/turf/simulated/wall")
 						colour = rgb(96,96,96)
@@ -233,7 +218,6 @@
 
 					else
 						colour = rgb(0,40,0)
-
 
 				if(sense)
 
@@ -268,7 +252,6 @@
 					var/green = getg(colour)
 					var/blue = getb(colour)
 
-
 					green = min(255, green+40)
 					blue = min(255, blue+40)
 
@@ -280,26 +263,23 @@
 			var/rx = ((wx*2+xoff)%32) + 1
 			var/ry = ((wy*2+yoff)%32) + 1
 
-			//world << "trying [ix],[iy] : [ix+icx*iy]"
+			//to_world("trying [ix],[iy] : [ix+icx*iy]")
 			var/icon/I = imap[1+(ix + icx*iy)]
 
-
-			//world << "icon: \icon[I]"
+			//to_world("icon: \icon[I]")
 
 			I.DrawBox(colour, rx, ry, rx, ry)
-
 
 	user.clearmap()
 
 	user.mapobjs = list()
-
 
 	for(var/i=0; i<icount;i++)
 		var/obj/screen/H = new /obj/screen()
 
 		H.screen_loc = "[5 + i%icx],[6+ round(i/icx)]"
 
-		//world<<"\icon[I] at [H.screen_loc]"
+		//to_world("\icon[I] at [H.screen_loc]")
 
 		H.name = (i==0)?"maprefresh":"map"
 
@@ -307,7 +287,7 @@
 
 		H.icon = I
 		qdel(I)
-		H.layer = 25
+		H.hud_layerise()
 		usr.mapobjs += H
 
 #endif
@@ -322,8 +302,6 @@
 				user.clearmap()*/
 	return
 
-
-
 /obj/machinery/computer/security/proc/close(mob/user)
 	spawn(20)
 		var/using = null
@@ -337,18 +315,16 @@
 			else
 				user.clearmap()
 
-
 		return
 
 proc/getr(col)
-	return hex2num( copytext(col, 2,4))
+	return hex2num(copytext(col, 2,4))
 
 proc/getg(col)
-	return hex2num( copytext(col, 4,6))
+	return hex2num(copytext(col, 4,6))
 
 proc/getb(col)
-	return hex2num( copytext(col, 6))
-
+	return hex2num(copytext(col, 6))
 
 /mob/proc/clearmap()
 	src.client.screen -= src.mapobjs
@@ -357,4 +333,3 @@ proc/getb(col)
 
 	mapobjs = null
 	src.unset_machine()
-

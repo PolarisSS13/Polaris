@@ -8,11 +8,11 @@
 	if(!holder)	return
 
 	if(!xenobio_controller || !xenobio_controller.gene_tag_masks)
-		usr << "Gene masks not set."
+		to_chat(usr, "Gene masks not set.")
 		return
 
 	for(var/mask in xenobio_controller.gene_tag_masks)
-		usr << "[mask]: [xenobio_controller.gene_tag_masks[mask]]"
+		to_chat(usr, "[mask]: [xenobio_controller.gene_tag_masks[mask]]")
 
 var/global/datum/controller/xenobio/xenobio_controller // Set in New().
 
@@ -34,10 +34,10 @@ var/global/datum/controller/xenobio/xenobio_controller // Set in New().
 	var/list/xenobio_traits = ALL_XENO_GENES
 	while(xenobio_traits && xenobio_traits.len)
 		var/gene_tag = pick(xenobio_traits)
-		var/gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+		var/gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		while(gene_mask in used_masks)
-			gene_mask = "[uppertext(num2hex(rand(0,255)))]"
+			gene_mask = "[uppertext(num2hex(rand(0,255), 2))]"
 
 		used_masks += gene_mask
 		xenobio_traits -= gene_tag

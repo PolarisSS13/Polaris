@@ -127,7 +127,7 @@
 /var/const/access_captain = 20
 /datum/access/captain
 	id = access_captain
-	desc = "Captain"
+	desc = "Colony Director"
 	region = ACCESS_REGION_COMMAND
 
 /var/const/access_all_personal_lockers = 21
@@ -256,7 +256,12 @@
 	desc = "Quartermaster"
 	region = ACCESS_REGION_SUPPLY
 
-// /var/const/free_access_id = 43
+/var/const/access_network = 42
+/datum/access/network
+	id = access_network
+	desc = "Station Network"
+	region = ACCESS_REGION_RESEARCH
+
 // /var/const/free_access_id = 43
 // /var/const/free_access_id = 44
 
@@ -457,3 +462,14 @@
 /datum/access/crate_cash
 	id = access_crate_cash
 	access_type = ACCESS_TYPE_NONE
+
+/var/const/access_trader = 160//General Beruang Trader Access
+/datum/access/trader
+	id = access_trader
+	access_type = ACCESS_TYPE_PRIVATE
+
+/var/const/access_alien = 300 // For things like crashed ships.
+/datum/access/alien
+	id = access_alien
+	desc = "#%_^&*@!"
+	access_type = ACCESS_TYPE_PRIVATE

@@ -64,7 +64,7 @@ log transactions
 		break
 
 /obj/machinery/atm/emag_act(var/remaining_charges, var/mob/user)
-	if(!emagged)
+	if(emagged)
 		return
 
 	//short out the machine, shoot sparks, spew money!
@@ -76,33 +76,16 @@ log transactions
 
 	//display a message to the user
 	var/response = pick("Initiating withdraw. Have a nice day!", "CRITICAL ERROR: Activating cash chamber panic siphon.","PIN Code accepted! Emptying account balance.", "Jackpot!")
-	user << "<span class='warning'>\icon[src] The [src] beeps: \"[response]\"</span>"
+	to_chat(user, "<span class='warning'>\icon[src] The [src] beeps: \"[response]\"</span>")
 	return 1
 
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		user << "<span class='notice'>You start disconnecting the monitor.</span>"
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			var/obj/structure/frame/A = new /obj/structure/frame( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.frame_type = "atm"
-			A.pixel_x = pixel_x
-			A.pixel_y = pixel_y
-			A.circuit = M
-			A.anchored = 1
-			for (var/obj/C in src)
-				C.forceMove(loc)
-			user << "<span class='notice'>You disconnect the monitor.</span>"
-			A.state = 4
-			A.icon_state = "atm_4"
-			M.deconstruct(src)
-			qdel(src)
+	if(computer_deconstruction_screwdriver(user, I))
 		return
 	if(istype(I, /obj/item/weapon/card))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
-			user << "\red \icon[src] CARD READER ERROR. This system has been compromised!"
+			to_chat(user, "<font color='red'>\icon[src] CARD READER ERROR. This system has been compromised!</font>")
 			return
 		else if(istype(I,/obj/item/weapon/card/emag))
 			I.resolve_attackby(src, user)
@@ -131,10 +114,10 @@ log transactions
 			T.amount = I:worth
 			T.source_terminal = machine_id
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			authenticated_account.transaction_log.Add(T)
 
-			user << "<span class='info'>You insert [I] into [src].</span>"
+			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
 			src.attack_hand(user)
 			qdel(I)
 	else
@@ -142,7 +125,7 @@ log transactions
 
 /obj/machinery/atm/attack_hand(mob/user as mob)
 	if(istype(user, /mob/living/silicon))
-		user << "\red \icon[src] Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per system banking regulation #1005."
+		to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 		return
 	if(get_dist(src,user) <= 1)
 
@@ -160,7 +143,7 @@ log transactions
 				dat += "<span class='alert'>Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.</span>"
 			else if(authenticated_account)
 				if(authenticated_account.suspended)
-					dat += "\red<b>Access to this account has been suspended, and the funds within frozen.</b>"
+					dat += "<font color='red'><b>Access to this account has been suspended, and the funds within frozen.</b></font>"
 				else
 					switch(view_screen)
 						if(CHANGE_SECURITY_LEVEL)
@@ -251,7 +234,7 @@ log transactions
 						var/target_account_number = text2num(href_list["target_acc_number"])
 						var/transfer_purpose = href_list["purpose"]
 						if(charge_to_account(target_account_number, authenticated_account.owner_name, transfer_purpose, machine_id, transfer_amount))
-							usr << "\icon[src]<span class='info'>Funds transfer successful.</span>"
+							to_chat(usr, "\icon[src]<span class='info'>Funds transfer successful.</span>")
 							authenticated_account.money -= transfer_amount
 
 							//create an entry in the account transaction log
@@ -260,14 +243,14 @@ log transactions
 							T.purpose = transfer_purpose
 							T.source_terminal = machine_id
 							T.date = current_date_string
-							T.time = worldtime2text()
+							T.time = stationtime2text()
 							T.amount = "([transfer_amount])"
 							authenticated_account.transaction_log.Add(T)
 						else
-							usr << "\icon[src]<span class='warning'>Funds transfer failed.</span>"
+							to_chat(usr, "\icon[src]<span class='warning'>Funds transfer failed.</span>")
 
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("view_screen")
 				view_screen = text2num(href_list["view_screen"])
 			if("change_security_level")
@@ -302,14 +285,14 @@ log transactions
 									T.purpose = "Unauthorised login attempt"
 									T.source_terminal = machine_id
 									T.date = current_date_string
-									T.time = worldtime2text()
+									T.time = stationtime2text()
 									failed_account.transaction_log.Add(T)
 							else
-								usr << "\red \icon[src] Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining."
+								to_chat(usr, "<font color='red'>\icon[src] Incorrect pin/account combination entered, [max_pin_attempts - number_incorrect_tries] attempts remaining.</font>")
 								previous_account_number = tried_account_num
 								playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 1)
 						else
-							usr << "\red \icon[src] incorrect pin/account combination entered."
+							to_chat(usr, "<font color='red'>\icon[src] incorrect pin/account combination entered.</font>")
 							number_incorrect_tries = 0
 					else
 						playsound(src, 'sound/machines/twobeep.ogg', 50, 1)
@@ -322,10 +305,10 @@ log transactions
 						T.purpose = "Remote terminal access"
 						T.source_terminal = machine_id
 						T.date = current_date_string
-						T.time = worldtime2text()
+						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 
-						usr << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
+						to_chat(usr, "<font color='blue'>\icon[src] Access granted. Welcome user '[authenticated_account.owner_name].</font>'")
 
 					previous_account_number = tried_account_num
 			if("e_withdrawal")
@@ -350,10 +333,10 @@ log transactions
 						T.amount = "([amount])"
 						T.source_terminal = machine_id
 						T.date = current_date_string
-						T.time = worldtime2text()
+						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("withdrawal")
 				var/amount = max(text2num(href_list["funds_amount"]),0)
 				amount = round(amount, 0.01)
@@ -375,10 +358,10 @@ log transactions
 						T.amount = "([amount])"
 						T.source_terminal = machine_id
 						T.date = current_date_string
-						T.time = worldtime2text()
+						T.time = stationtime2text()
 						authenticated_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>"
+						to_chat(usr, "\icon[src]<span class='warning'>You don't have enough funds to do that!</span>")
 			if("balance_statement")
 				if(authenticated_account)
 					var/obj/item/weapon/paper/R = new(src.loc)
@@ -387,7 +370,7 @@ log transactions
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
 					R.info += "<i>Balance:</i> $[authenticated_account.money]<br>"
-					R.info += "<i>Date and time:</i> [worldtime2text()], [current_date_string]<br><br>"
+					R.info += "<i>Date and time:</i> [stationtime2text()], [current_date_string]<br><br>"
 					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
 
 					//stamp the paper
@@ -410,7 +393,7 @@ log transactions
 					R.info = "<b>Transaction logs</b><br>"
 					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
 					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
-					R.info += "<i>Date and time:</i> [worldtime2text()], [current_date_string]<br><br>"
+					R.info += "<i>Date and time:</i> [stationtime2text()], [current_date_string]<br><br>"
 					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
 					R.info += "<table border=1 style='width:100%'>"
 					R.info += "<tr>"
@@ -450,7 +433,7 @@ log transactions
 				if(!held_card)
 					//this might happen if the user had the browser window open when somebody emagged it
 					if(emagged > 0)
-						usr << "\red \icon[src] The ATM card reader rejected your ID because this machine has been sabotaged!"
+						to_chat(usr, "<font color='red'>\icon[src] The ATM card reader rejected your ID because this machine has been sabotaged!</font>")
 					else
 						var/obj/item/I = usr.get_active_hand()
 						if (istype(I, /obj/item/weapon/card/id))
@@ -478,7 +461,7 @@ log transactions
 			if(I)
 				authenticated_account = attempt_account_access(I.associated_account_number)
 				if(authenticated_account)
-					human_user << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
+					to_chat(human_user, "<font color='blue'>\icon[src] Access granted. Welcome user '[authenticated_account.owner_name].</font>'")
 
 					//create a transaction log entry
 					var/datum/transaction/T = new()
@@ -486,7 +469,7 @@ log transactions
 					T.purpose = "Remote terminal access"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					authenticated_account.transaction_log.Add(T)
 
 					view_screen = NO_SCREEN

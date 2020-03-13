@@ -5,9 +5,8 @@
 	icon_state = "grille"
 	density = 1
 	anchored = 1
-	flags = CONDUCT
 	pressure_resistance = 5*ONE_ATMOSPHERE
-	layer = 2.9
+	layer = TABLE_LAYER
 	explosion_resistance = 1
 	var/health = 10
 	var/destroyed = 0
@@ -27,7 +26,7 @@
 
 /obj/structure/grille/attack_hand(mob/user as mob)
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(user.get_attack_speed())
 	playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 	user.do_attack_animation(src)
 
@@ -49,15 +48,12 @@
 
 	attack_generic(user,damage_dealt,attack_message)
 
-/obj/structure/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
+/obj/structure/grille/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.checkpass(PASSGRILLE))
-		return 1
-	else
-		if(istype(mover, /obj/item/projectile))
-			return prob(30)
-		else
-			return !density
+		return TRUE
+	if(istype(mover, /obj/item/projectile))
+		return prob(30)
+	return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
@@ -65,7 +61,7 @@
 	//Flimsy grilles aren't so great at stopping projectiles. However they can absorb some of the impact
 	var/damage = Proj.get_structure_damage()
 	var/passthrough = 0
-	
+
 	if(!damage) return
 
 	//20% chance that the grille provides a bit more cover than usual. Support structure for example might take up 20% of the grille's area.
@@ -93,21 +89,25 @@
 	src.health -= damage*0.2
 	spawn(0) healthcheck() //spawn to make sure we return properly if the grille is deleted
 
-/obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(iswirecutter(W))
+/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
+	if(!istype(W))
+		return
+	if(istype(W, /obj/item/weapon/rcd)) // To stop us from hitting the grille when building windows, because grilles don't let parent handle it properly.
+		return FALSE
+	else if(W.is_wirecutter())
 		if(!shock(user, 100))
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			PoolOrNew(/obj/item/stack/rods, list(get_turf(src), destroyed ? 1 : 2))
+			playsound(src, W.usesound, 100, 1)
+			new /obj/item/stack/rods(get_turf(src), destroyed ? 1 : 2)
 			qdel(src)
-	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
+	else if((W.is_screwdriver()) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
-			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
+			playsound(src, W.usesound, 100, 1)
 			anchored = !anchored
 			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] the grille.</span>", \
-								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
+								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grille from"] the floor.</span>")
 			return
 
-//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
+	//window placing begin //TODO CONVERT PROPERLY TO MATERIAL DATUM
 	else if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(!ST.material.created_window)
@@ -129,29 +129,29 @@
 					else
 						dir_to_set = 4
 			else
-				user << "<span class='notice'>You can't reach.</span>"
+				to_chat(user, "<span class='notice'>You can't reach.</span>")
 				return //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)
-				user << "<span class='notice'>There is already a window facing this way there.</span>"
+				to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
 				return
-		user << "<span class='notice'>You start placing the window.</span>"
+		to_chat(user, "<span class='notice'>You start placing the window.</span>")
 		if(do_after(user,20))
 			for(var/obj/structure/window/WINDOW in loc)
 				if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
-					user << "<span class='notice'>There is already a window facing this way there.</span>"
+					to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")
 					return
 
 			var/wtype = ST.material.created_window
 			if (ST.use(1))
 				var/obj/structure/window/WD = new wtype(loc, dir_to_set, 1)
-				user << "<span class='notice'>You place the [WD] on [src].</span>"
+				to_chat(user, "<span class='notice'>You place the [WD] on [src].</span>")
 				WD.update_icon()
 		return
 //window placing end
 
-	else if(!(W.flags & CONDUCT) || !shock(user, 70))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	else if((W.flags & NOCONDUCT) || !shock(user, 70))
+		user.setClickCooldown(user.get_attack_speed(W))
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
@@ -170,11 +170,11 @@
 			density = 0
 			destroyed = 1
 			update_icon()
-			PoolOrNew(/obj/item/stack/rods, get_turf(src))
+			new /obj/item/stack/rods(get_turf(src))
 
 		else
 			if(health <= -6)
-				PoolOrNew(/obj/item/stack/rods, get_turf(src))
+				new /obj/item/stack/rods(get_turf(src))
 				qdel(src)
 				return
 	return
@@ -231,11 +231,58 @@
 
 /obj/structure/grille/cult
 	name = "cult grille"
-	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
+	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it."
 	icon_state = "grillecult"
-	health = 40 //Make it strong enough to avoid people breaking in too easily
+	health = 40 // Make it strong enough to avoid people breaking in too easily.
+	can_atmos_pass = ATMOS_PASS_NO // Make sure air doesn't drain.
 
-/obj/structure/grille/cult/CanPass(atom/movable/mover, turf/target, height = 1.5, air_group = 0)
-	if(air_group)
-		return 0 //Make sure air doesn't drain
-	..()
+/obj/structure/grille/broken/cult
+	icon_state = "grillecult-b"
+
+/obj/structure/grille/rustic
+	name = "rustic grille"
+	desc = "A lattice of metal, arranged in an old, rustic fashion."
+	icon_state = "grillerustic"
+
+/obj/structure/grille/broken/rustic
+	icon_state = "grillerustic-b"
+
+
+/obj/structure/grille/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_WINDOWGRILLE)
+			// A full tile window costs 4 glass sheets.
+			return list(
+				RCD_VALUE_MODE = RCD_WINDOWGRILLE,
+				RCD_VALUE_DELAY = 2 SECONDS,
+				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 4
+			)
+
+		if(RCD_DECONSTRUCT)
+			return list(
+				RCD_VALUE_MODE = RCD_DECONSTRUCT,
+				RCD_VALUE_DELAY = 2 SECONDS,
+				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 2
+			)
+	return FALSE
+
+/obj/structure/grille/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+	switch(passed_mode)
+		if(RCD_DECONSTRUCT)
+			to_chat(user, span("notice", "You deconstruct \the [src]."))
+			qdel(src)
+			return TRUE
+		if(RCD_WINDOWGRILLE)
+			if(locate(/obj/structure/window) in loc)
+				return FALSE
+			to_chat(user, span("notice", "You construct a window."))
+			var/obj/structure/window/WD = new the_rcd.window_type(loc)
+			WD.anchored = TRUE
+			return TRUE
+	return FALSE
+
+/obj/structure/grille/take_damage(var/damage)
+	health -= damage
+	spawn(1) healthcheck()
+	return 1
+

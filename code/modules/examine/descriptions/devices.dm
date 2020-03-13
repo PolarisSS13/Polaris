@@ -8,7 +8,7 @@
 	that while in space, across star systems, and that the consumer can afford and use without training, is much more recent, and is thanks to the backbone \
 	that is the Exonet.<br>\
 	<br>\
-	The Exonet is the predominant interstellar telecom system, servicing trillions of devices across a large portion of human-controlled space.  \
+	The Exonet is the predominant interstellar telecomm system, servicing trillions of devices across a large portion of human-controlled space.  \
 	It is distributed by a massive network of telecommunication satellites, some privately owned and others owned by the systems’ local governments, \
 	that utilize FTL technologies to bounce data between satellites at speeds that would not be possible at sub-light technology.  This communicator \
 	uses a protocol called Exonet Protocol Version 2, generally shortened to EPv2.<br>\
@@ -20,3 +20,13 @@
 
 	description_antag = "Electromagnetic pulses will cause the device to disconnect all linked communicators.  Turning off the Exonet node at the Telecomms \
 	satellite will also accomplish this, but for all communicators on and near the station.  This may be needed to allow for a quiet kill or capture."
+
+/obj/item/device/electronic_assembly/device
+	description_info = "This is the guts of a 'device' type electronic assembly, and can either be used in this form or can be used inside of the assembly to \
+	allow it to interact with other assembly type devices (igniter, signaler, proximity sensor, etc). This device has unique inputs that allow it to either send \
+	or receive pulsed signals from an attached items when inside an electronic assembly device frame (looks not unlike a signaler). Ensure the assembly is closed \
+	before placing it inside the frame."
+
+/obj/item/device/assembly/electronic_assembly
+	description_info = "This is the casing for the 'device' type of electronic assembly. It behaves like any other 'assembly' type device such as an igniter or signaler \
+	and can be attached to others in the same way. Use the 'toggle-open' verb (right click) or a crowbar to pop the electronic device open to add components and close when finished."

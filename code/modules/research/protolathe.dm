@@ -15,11 +15,12 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, "gold" = 0, "silver" = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0)
+	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, MAT_PLASTEEL = 0, "plastic" = 0, MAT_GRAPHITE = 0, "gold" = 0, "silver" = 0, "osmium" = 0, MAT_LEAD = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
 
-/obj/machinery/r_n_d/protolathe/New()
-	..()
-	circuit = new circuit()
+	hidden_materials = list(MAT_PLASTEEL, MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM, MAT_METALHYDROGEN, MAT_SUPERMATTER)
+
+/obj/machinery/r_n_d/protolathe/Initialize()
+	. = ..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -72,7 +73,7 @@
 	T = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += M.rating
-	mat_efficiency = 1 - (T - 2) / 8
+	mat_efficiency = max(1 - (T - 2) / 8, 0.2)
 	speed = T / 2
 
 /obj/machinery/r_n_d/protolathe/dismantle()
@@ -86,11 +87,13 @@
 	else if(busy)
 		icon_state = "protolathe_n"
 	else
+		if(icon_state == "protolathe_n")
+			flick("protolathe_u", src) // If lid WAS closed, show opening animation
 		icon_state = "protolathe"
 
 /obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
-		user << "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
 	if(default_deconstruction_screwdriver(user, O))
 		if(linked_console)
@@ -103,47 +106,53 @@
 		return
 	if(O.is_open_container())
 		return 1
+	if(istype(O, /obj/item/weapon/gripper/no_use/loader))
+		return 0		//Sheet loaders weren't finishing attack(), this prevents the message "You can't stuff that gripper into this" without preventing the rest of the attack sequence from finishing
 	if(panel_open)
-		user << "<span class='notice'>You can't load \the [src] while it's opened.</span>"
+		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
 		return 1
 	if(!linked_console)
-		user << "<span class='notice'>\The [src] must be linked to an R&D console first!</span>"
+		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first!</span>")
 		return 1
 	if(!istype(O, /obj/item/stack/material))
-		user << "<span class='notice'>You cannot insert this item into \the [src]!</span>"
+		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
 		return 1
 	if(stat)
 		return 1
 
-	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
-		user << "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>"
-		return 1
-
-	var/obj/item/stack/material/stack = O
-	var/amount = round(input("How many sheets do you want to add?") as num)//No decimals
-	if(!O)
+	var/obj/item/stack/material/S = O
+	if(!(S.material.name in materials))
+		to_chat(user, "<span class='warning'>The [src] doesn't accept [S.material]!</span>")
 		return
-	if(amount <= 0)//No negative numbers
-		return
-	if(amount > stack.get_amount())
-		amount = stack.get_amount()
-		if(max_material_storage - TotalMaterials() < (amount * SHEET_MATERIAL_AMOUNT)) //Can't overfill
-			amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
 
-	var/stacktype = stack.type
+	busy = 1
+	var/sname = "[S.name]"
+	var/amnt = S.perunit
+	var/max_res_amount = max_material_storage
+	for(var/mat in materials)
+		max_res_amount -= materials[mat]
+
+	if(materials[S.material.name] + amnt <= max_res_amount)
+		if(S && S.get_amount() >= 1)
+			var/count = 0
+			overlays += "fab-load-metal"
+			spawn(10)
+				overlays -= "fab-load-metal"
+			while(materials[S.material.name] + amnt <= max_res_amount && S.get_amount() >= 1)
+				materials[S.material.name] += amnt
+				S.use(1)
+				count++
+			to_chat(user, "You insert [count] [sname] into the fabricator.")
+	else
+		to_chat(user, "The fabricator cannot hold more [sname].")
+	busy = 0
+
+	var/stacktype = S.type
 	var/t = getMaterialName(stacktype)
 	overlays += "protolathe_[t]"
 	spawn(10)
 		overlays -= "protolathe_[t]"
 
-	busy = 1
-	use_power(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
-	if(t)
-		if(do_after(user, 16))
-			if(stack.use(amount))
-				user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
-				materials[t] += amount * SHEET_MATERIAL_AMOUNT
-	busy = 0
 	updateUsrDialog()
 	return
 
@@ -157,10 +166,10 @@
 
 /obj/machinery/r_n_d/protolathe/proc/canBuild(var/datum/design/D)
 	for(var/M in D.materials)
-		if(materials[M] < D.materials[M])
+		if(materials[M] < (D.materials[M] * mat_efficiency))
 			return 0
 	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
+		if(!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
 			return 0
 	return 1
 
@@ -200,24 +209,17 @@
 /obj/machinery/r_n_d/protolathe/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
 	var/recursive = amount == -1 ? 1 : 0
 	material = lowertext(material)
-	var/mattype
-	switch(material)
-		if(DEFAULT_WALL_MATERIAL)
-			mattype = /obj/item/stack/material/steel
-		if("glass")
-			mattype = /obj/item/stack/material/glass
-		if("gold")
-			mattype = /obj/item/stack/material/gold
-		if("silver")
-			mattype = /obj/item/stack/material/silver
-		if("diamond")
-			mattype = /obj/item/stack/material/diamond
-		if("phoron")
-			mattype = /obj/item/stack/material/phoron
-		if("uranium")
-			mattype = /obj/item/stack/material/uranium
-		else
-			return
+	var/obj/item/stack/material/mattype
+	var/material/MAT = get_material_by_name(material)
+
+	if(!MAT)
+		return
+
+	mattype = MAT.stack_type
+
+	if(!mattype)
+		return
+
 	var/obj/item/stack/material/S = new mattype(loc)
 	if(amount <= 0)
 		amount = S.max_amount

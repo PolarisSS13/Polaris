@@ -6,7 +6,8 @@
 	var/is_adult = 0
 	speak_emote = list("chirps")
 
-	layer = 5
+	plane = MOB_PLANE
+	layer = ABOVE_MOB_LAYER
 	maxHealth = 150
 	health = 150
 	gender = NEUTER
@@ -81,7 +82,7 @@
 
 	var/tally = 0
 
-	var/health_deficiency = (maxHealth - health)
+	var/health_deficiency = (getMaxHealth() - health)
 	if(health_deficiency >= 30) tally += (health_deficiency / 25)
 
 	if (bodytemperature < 183.222)
@@ -146,7 +147,7 @@
 	..()
 
 	statpanel("Status")
-	stat(null, "Health: [round((health / maxHealth) * 100)]%")
+	stat(null, "Health: [round((health / getMaxHealth()) * 100)]%")
 	stat(null, "Intent: [a_intent]")
 
 	if (client.statpanel == "Status")
@@ -309,7 +310,7 @@
 	if(W.force > 0)
 		attacked += 10
 		if(prob(25))
-			user << "<span class='danger'>[W] passes right through [src]!</span>"
+			to_chat(user, "<span class='danger'>[W] passes right through [src]!</span>")
 			return
 		if(Discipline && prob(50)) // wow, buddy, why am I getting attacked??
 			Discipline = 0
@@ -381,8 +382,3 @@
 			powerlevel = 10
 			adjustToxLoss(-10)
 	nutrition = max(nutrition, get_max_nutrition())
-
-/mob/living/carbon/slime/cannot_use_vents()
-	if(Victim)
-		return "You cannot ventcrawl while feeding."
-	..()

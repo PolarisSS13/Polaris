@@ -3,6 +3,7 @@
 	desc = "We evolve the ability to shoot our stingers at humans, with some preperation."
 	helptext = "Allows us to prepare the next sting to have a range of two tiles."
 	enhancedtext = "The range is extended to five tiles."
+	ability_icon_state = "ling_sting_boost_range"
 	genomecost = 1
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_boost_range
@@ -17,12 +18,11 @@
 	if(!changeling)
 		return 0
 	changeling.chem_charges -= 10
-	src << "<span class='notice'>Your throat adjusts to launch the sting.</span>"
+	to_chat(src, "<span class='notice'>Your throat adjusts to launch the sting.</span>")
 	var/range = 2
 	if(src.mind.changeling.recursive_enhancement)
 		range = range + 3
-		src << "<span class='notice'>We can fire our next sting from five squares away.</span>"
-		src.mind.changeling.recursive_enhancement = 0
+		to_chat(src, "<span class='notice'>We can fire our next sting from five squares away.</span>")
 	changeling.sting_range = range
 	src.verbs -= /mob/proc/changeling_boost_range
 	spawn(5)

@@ -1,3 +1,5 @@
+GLOBAL_LIST_BOILERPLATE(all_mops, /obj/item/weapon/mop)
+
 /obj/item/weapon/mop
 	desc = "The world of janitalia wouldn't be complete without a mop."
 	name = "mop"
@@ -7,20 +9,21 @@
 	throwforce = 10.0
 	throw_speed = 5
 	throw_range = 10
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
+	flags = NOCONDUCT
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
 
-
 /obj/item/weapon/mop/New()
 	create_reagents(30)
+	..()
 
 /obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
 	if(istype(A, /turf) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/rune))
 		if(reagents.total_volume < 1)
-			user << "<span class='notice'>Your mop is dry!</span>"
+			to_chat(user, "<span class='notice'>Your mop is dry!</span>")
 			return
 
 		user.visible_message("<span class='warning'>[user] begins to clean \the [get_turf(A)].</span>")
@@ -29,7 +32,7 @@
 			var/turf/T = get_turf(A)
 			if(T)
 				T.clean(src, user)
-			user << "<span class='notice'>You have finished mopping!</span>"
+			to_chat(user, "<span class='notice'>You have finished mopping!</span>")
 
 
 /obj/effect/attackby(obj/item/I, mob/user)

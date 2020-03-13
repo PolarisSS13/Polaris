@@ -68,19 +68,21 @@
 		if (4.0) return EAST
 		if (8.0) return WEST
 		else
-			world.log << "UNKNOWN DIRECTION: [direction]"
+			to_world_log("UNKNOWN DIRECTION: [direction]")
 
 // Turns a direction into text
 /proc/dir2text(direction)
 	switch (direction)
-		if (1.0)  return "north"
-		if (2.0)  return "south"
-		if (4.0)  return "east"
-		if (8.0)  return "west"
-		if (5.0)  return "northeast"
-		if (6.0)  return "southeast"
-		if (9.0)  return "northwest"
-		if (10.0) return "southwest"
+		if (NORTH)  return "north"
+		if (SOUTH)  return "south"
+		if (EAST)  return "east"
+		if (WEST)  return "west"
+		if (NORTHEAST)  return "northeast"
+		if (SOUTHEAST)  return "southeast"
+		if (NORTHWEST)  return "northwest"
+		if (SOUTHWEST)  return "southwest"
+		if (UP)  return "up"
+		if (DOWN)  return "down"
 
 // Turns text into proper directions
 /proc/text2dir(direction)
@@ -146,7 +148,7 @@
 	if (rights & R_SOUNDS)      . += "[seperator]+SOUND"
 	if (rights & R_SPAWN)       . += "[seperator]+SPAWN"
 	if (rights & R_MOD)         . += "[seperator]+MODERATOR"
-	if (rights & R_MENTOR)      . += "[seperator]+MENTOR"
+	if (rights & R_EVENT)       . += "[seperator]+EVENT"
 	return .
 
 // Converts a hexadecimal color (e.g. #FF0050) to a list of numbers for red, green, and blue (e.g. list(255,0,80) ).
@@ -240,3 +242,42 @@
 
 /proc/isLeap(y)
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
+
+//Takes a string and a datum
+//The string is well, obviously the string being checked
+//The datum is used as a source for var names, to check validity
+//Otherwise every single word could technically be a variable!
+/proc/string2listofvars(var/t_string, var/datum/var_source)
+	if(!t_string || !var_source)
+		return list()
+
+	. = list()
+
+	var/var_found = findtext(t_string,"\[") //Not the actual variables, just a generic "should we even bother" check
+	if(var_found)
+		//Find var names
+
+		// "A dog said hi [name]!"
+		// splittext() --> list("A dog said hi ","name]!"
+		// jointext() --> "A dog said hi name]!"
+		// splittext() --> list("A","dog","said","hi","name]!")
+
+		t_string = replacetext(t_string,"\[","\[ ")//Necessary to resolve "word[var_name]" scenarios
+		var/list/list_value = splittext(t_string,"\[")
+		var/intermediate_stage = jointext(list_value, null)
+
+		list_value = splittext(intermediate_stage," ")
+		for(var/value in list_value)
+			if(findtext(value,"]"))
+				value = splittext(value,"]") //"name]!" --> list("name","!")
+				for(var/A in value)
+					if(var_source.vars.Find(A))
+						. += A
+
+/proc/get_end_section_of_type(type)
+	var/strtype = "[type]"
+	var/delim_pos = findlasttext(strtype, "/")
+	if(delim_pos == 0)
+		return strtype
+	return copytext(strtype, delim_pos)
+

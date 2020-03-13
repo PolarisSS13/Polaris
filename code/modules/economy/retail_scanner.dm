@@ -3,10 +3,10 @@
 	desc = "Swipe your ID card to make purchases electronically."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "retail_idle"
-	flags = NOBLUDGEON|CONDUCT
+	flags = NOBLUDGEON
 	slot_flags = SLOT_BELT
 	req_access = list(access_heads)
-	w_class = 2.0
+	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1)
 
 	var/locked = 1
@@ -56,6 +56,11 @@
 		user.set_machine(src)
 		interact(user)
 
+/obj/item/device/retail_scanner/examine(mob/user as mob)
+	..(user)
+	if(transaction_amount)
+		to_chat(user, "It has a purchase of [transaction_amount] pending[transaction_purpose ? " for [transaction_purpose]" : ""].")
+
 
 /obj/item/device/retail_scanner/interact(mob/user as mob)
 	var/dat = "<h2>Retail Scanner<hr></h2>"
@@ -95,7 +100,7 @@
 				if(allowed(usr))
 					locked = !locked
 				else
-					usr << "\icon[src]<span class='warning'>Insufficient access.</span>"
+					to_chat(usr, "\icon[src]<span class='warning'>Insufficient access.</span>")
 			if("link_account")
 				var/attempt_account_num = input("Enter account number", "New account number") as num
 				var/attempt_pin = input("Enter PIN", "Account PIN") as num
@@ -105,7 +110,7 @@
 						linked_account = null
 						src.visible_message("\icon[src]<span class='warning'>Account has been suspended.</span>")
 				else
-					usr << "\icon[src]<span class='warning'>Account not found.</span>"
+					to_chat(usr, "\icon[src]<span class='warning'>Account not found.</span>")
 			if("custom_order")
 				var/t_purpose = sanitize(input("Enter purpose", "New purpose") as text)
 				if (!t_purpose || !Adjacent(usr)) return
@@ -120,7 +125,7 @@
 			if("set_amount")
 				var/item_name = locate(href_list["item"])
 				var/n_amount = round(input("Enter amount", "New amount") as num)
-				n_amount = Clamp(n_amount, 0, 20)
+				n_amount = CLAMP(n_amount, 0, 20)
 				if (!item_list[item_name] || !Adjacent(usr)) return
 				transaction_amount += (n_amount - item_list[item_name]) * price_list[item_name]
 				if(!n_amount)
@@ -153,7 +158,7 @@
 					price_list.Cut()
 			if("reset_log")
 				transaction_logs.Cut()
-				usr << "\icon[src]<span class='notice'>Transaction log reset.</span>"
+				to_chat(usr, "\icon[src]<span class='notice'>Transaction log reset.</span>")
 	updateDialog()
 
 
@@ -167,7 +172,7 @@
 		var/obj/item/weapon/spacecash/ewallet/E = O
 		scan_wallet(E)
 	else if (istype(O, /obj/item/weapon/spacecash))
-		usr << "<span class='warning'>This device does not accept cash.</span>"
+		to_chat(usr, "<span class='warning'>This device does not accept cash.</span>")
 
 	else if(istype(O, /obj/item/weapon/card/emag))
 		return ..()
@@ -231,7 +236,7 @@
 					T.amount = "([transaction_amount])"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					D.transaction_log.Add(T)
 
 					// Create log entry in owner's account
@@ -241,7 +246,7 @@
 					T.amount = "[transaction_amount]"
 					T.source_terminal = machine_id
 					T.date = current_date_string
-					T.time = worldtime2text()
+					T.time = stationtime2text()
 					linked_account.transaction_log.Add(T)
 
 					// Save log
@@ -274,7 +279,7 @@
 			T.amount = "[transaction_amount]"
 			T.source_terminal = machine_id
 			T.date = current_date_string
-			T.time = worldtime2text()
+			T.time = stationtime2text()
 			linked_account.transaction_log.Add(T)
 
 			// Save log
@@ -348,7 +353,7 @@
 	<tr></tr>
 	<tr><td class="tx-name">Customer</td><td class="tx-data">[c_name]</td></tr>
 	<tr><td class="tx-name">Pay Method</td><td class="tx-data">[p_method]</td></tr>
-	<tr><td class="tx-name">Station Time</td><td class="tx-data">[worldtime2text()]</td></tr>
+	<tr><td class="tx-name">Station Time</td><td class="tx-data">[stationtime2text()]</td></tr>
 	</table>
 	<table width=300>
 	"}
@@ -392,7 +397,7 @@
 
 /obj/item/device/retail_scanner/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		user << "<span class='danger'>You stealthily swipe the cryptographic sequencer through \the [src].</span>"
+		to_chat(user, "<span class='danger'>You stealthily swipe the cryptographic sequencer through \the [src].</span>")
 		playsound(src, "sparks", 50, 1)
 		req_access = list()
 		emagged = 1
@@ -401,28 +406,21 @@
 
 /obj/item/device/retail_scanner/command
 	account_to_connect = "Command"
-	..()
 
 /obj/item/device/retail_scanner/medical
 	account_to_connect = "Medical"
-	..()
 
 /obj/item/device/retail_scanner/engineering
 	account_to_connect = "Engineering"
-	..()
 
 /obj/item/device/retail_scanner/science
 	account_to_connect = "Science"
-	..()
 
 /obj/item/device/retail_scanner/security
 	account_to_connect = "Security"
-	..()
 
 /obj/item/device/retail_scanner/cargo
 	account_to_connect = "Cargo"
-	..()
 
 /obj/item/device/retail_scanner/civilian
 	account_to_connect = "Civilian"
-	..()

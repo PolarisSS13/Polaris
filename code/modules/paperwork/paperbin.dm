@@ -1,10 +1,15 @@
 /obj/item/weapon/paper_bin
 	name = "paper bin"
+	desc = "A plastic bin full of paper. It seems to have both regular and carbon-copy paper to choose from."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper_bin1"
+	item_icons = list(
+			slot_l_hand_str = 'icons/mob/items/lefthand_material.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_material.dmi',
+			)
 	item_state = "sheet-metal"
 	throwforce = 1
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 	throw_speed = 3
 	throw_range = 7
 	pressure_resistance = 10
@@ -15,7 +20,7 @@
 
 /obj/item/weapon/paper_bin/MouseDrop(mob/user as mob)
 	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
-		if(!istype(usr, /mob/living/carbon/slime) && !istype(usr, /mob/living/simple_animal))
+		if(!istype(usr, /mob/living/simple_mob))
 			if( !usr.get_active_hand() )		//if active hand is empty
 				var/mob/living/carbon/human/H = user
 				var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
@@ -23,10 +28,10 @@
 				if (H.hand)
 					temp = H.organs_by_name["l_hand"]
 				if(temp && !temp.is_usable())
-					user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+					to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 					return
 
-				user << "<span class='notice'>You pick up the [src].</span>"
+				to_chat(user, "<span class='notice'>You pick up the [src].</span>")
 				user.put_in_hands(src)
 
 	return
@@ -38,7 +43,7 @@
 		if (H.hand)
 			temp = H.organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.name], but cannot!</span>"
+			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return
 	var/response = ""
 	if(!papers.len > 0)
@@ -68,9 +73,9 @@
 
 		P.loc = user.loc
 		user.put_in_hands(P)
-		user << "<span class='notice'>You take [P] out of the [src].</span>"
+		to_chat(user, "<span class='notice'>You take [P] out of the [src].</span>")
 	else
-		user << "<span class='notice'>[src] is empty!</span>"
+		to_chat(user, "<span class='notice'>[src] is empty!</span>")
 
 	add_fingerprint(user)
 	return
@@ -82,7 +87,7 @@
 
 	user.drop_item()
 	i.loc = src
-	user << "<span class='notice'>You put [i] in [src].</span>"
+	to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
 	papers.Add(i)
 	update_icon()
 	amount++
@@ -91,9 +96,9 @@
 /obj/item/weapon/paper_bin/examine(mob/user)
 	if(get_dist(src, user) <= 1)
 		if(amount)
-			user << "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
-			user << "<span class='notice'>There are no papers in the bin.</span>"
+			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
 	return
 
 

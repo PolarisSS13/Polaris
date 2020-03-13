@@ -3,8 +3,7 @@
 	desc = "Some rods. Can be used for building, or something."
 	singular_name = "metal rod"
 	icon_state = "rods"
-	flags = CONDUCT
-	w_class = 3.0
+	w_class = ITEMSIZE_NORMAL
 	force = 9.0
 	throwforce = 15.0
 	throw_speed = 5
@@ -21,14 +20,30 @@
 	uses_charge = 1
 	charge_costs = list(500)
 	stacktype = /obj/item/stack/rods
+	no_variants = TRUE
+
+/obj/item/stack/rods/New()
+	..()
+	recipes = rods_recipes
+	update_icon()
+
+/obj/item/stack/rods/update_icon()
+	var/amount = get_amount()
+	if((amount <= 5) && (amount > 0))
+		icon_state = "rods-[amount]"
+	else
+		icon_state = "rods"
+
+var/global/list/datum/stack_recipe/rods_recipes = list( \
+	new/datum/stack_recipe("grille", /obj/structure/grille, 2, time = 10, one_per_turf = 1, on_floor = 0),
+	new/datum/stack_recipe("catwalk", /obj/structure/catwalk, 2, time = 80, one_per_turf = 1, on_floor = 1))
 
 /obj/item/stack/rods/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
 
 		if(WT.remove_fuel(0,user))
@@ -43,9 +58,19 @@
 			if (!R && replace)
 				user.put_in_hands(new_item)
 		return
+
+	if (istype(W, /obj/item/weapon/tape_roll))
+		var/obj/item/stack/medical/splint/ghetto/new_splint = new(get_turf(user))
+		new_splint.add_fingerprint(user)
+
+		user.visible_message("<span class='notice'>\The [user] constructs \a [new_splint] out of a [singular_name].</span>", \
+				"<span class='notice'>You use make \a [new_splint] out of a [singular_name].</span>")
+		src.use(1)
+		return
+
 	..()
 
-
+/*
 /obj/item/stack/rods/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
 
@@ -64,16 +89,17 @@
 
 	else if(!in_use)
 		if(get_amount() < 2)
-			user << "<span class='warning'>You need at least two rods to do this.</span>"
+			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
 			return
-		usr << "<span class='notice'>Assembling grille...</span>"
+		to_chat(usr, "<span class='notice'>Assembling grille...</span>")
 		in_use = 1
 		if (!do_after(usr, 10))
 			in_use = 0
 			return
 		var/obj/structure/grille/F = new /obj/structure/grille/ ( usr.loc )
-		usr << "<span class='notice'>You assemble a grille</span>"
+		to_chat(usr, "<span class='notice'>You assemble a grille</span>")
 		in_use = 0
 		F.add_fingerprint(usr)
 		use(2)
 	return
+*/

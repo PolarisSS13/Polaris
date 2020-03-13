@@ -42,12 +42,9 @@
 
 	name = "light replacer"
 	desc = "A device to automatically replace lights. Refill with working lightbulbs or sheets of glass."
-
+	force = 8
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
-	item_state = "electronic"
-
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_MAGNET = 3, TECH_MATERIAL = 2)
 
@@ -57,39 +54,81 @@
 	var/failmsg = ""
 	var/charge = 0
 
+	// Eating used bulbs gives us bulb shards
+	var/bulb_shards = 0
+	// when we get this many shards, we get a free bulb.
+	var/shards_required = 4
+
 /obj/item/device/lightreplacer/New()
 	failmsg = "The [name]'s refill light blinks red."
 	..()
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	if(..(user, 2))
-		user << "It has [uses] lights remaining."
+		to_chat(user, "It has [uses] lights remaining.")
 
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
-			user << "<span class='warning'>[src.name] is full.</span>"
+			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
 			return
 		else if(G.use(1))
-			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
-			user << "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>"
+			add_uses(16) //Autolathe converts 1 sheet into 16 lights.
+			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
 			return
 		else
-			user << "<span class='warning'>You need one sheet of glass to replace lights.</span>"
+			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
 
 	if(istype(W, /obj/item/weapon/light))
+		var/new_bulbs = 0
 		var/obj/item/weapon/light/L = W
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
-				AddUses(1)
-				user << "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining."
-				user.drop_item()
+				if(!user.unEquip(W))
+					return
+				add_uses(1)
 				qdel(L)
-				return
 		else
-			user << "You need a working light."
+			if(!user.unEquip(W))
+				return
+			new_bulbs += AddShards(1)
+			qdel(L)
+		if(new_bulbs != 0)
+			playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
+		to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
+		return
+
+	if(istype(W, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = W
+		var/found_lightbulbs = FALSE
+		var/replaced_something = TRUE
+
+		for(var/obj/item/I in S.contents)
+			if(istype(I,/obj/item/weapon/light))
+				var/obj/item/weapon/light/L = I
+				found_lightbulbs = TRUE
+				if(src.uses >= max_uses)
+					break
+				if(L.status == LIGHT_OK)
+					replaced_something = TRUE
+					add_uses(1)
+					qdel(L)
+
+				else if(L.status == LIGHT_BROKEN || L.status == LIGHT_BURNED)
+					replaced_something = TRUE
+					AddShards(1)
+					qdel(L)
+
+		if(!found_lightbulbs)
+			to_chat(user, "<span class='warning'>\The [S] contains no bulbs.</span>")
 			return
+
+		if(!replaced_something && src.uses == max_uses)
+			to_chat(user, "<span class='warning'>\The [src] is full!</span>")
+			return
+
+		to_chat(user, "<span class='notice'>You fill \the [src] with lights from \the [S].</span>")
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.
@@ -97,10 +136,10 @@
 		var/mob/living/silicon/robot/R = user
 		if(R.emagged)
 			src.Emag()
-			usr << "You shortcircuit the [src]."
+			to_chat(usr, You short circuit the [src].")
 			return
 	*/
-	usr << "It has [uses] lights remaining."
+	to_chat(usr, "It has [uses] lights remaining.")
 
 /obj/item/device/lightreplacer/update_icon()
 	icon_state = "lightreplacer[emagged]"
@@ -109,17 +148,26 @@
 /obj/item/device/lightreplacer/proc/Use(var/mob/user)
 
 	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-	AddUses(-1)
+	add_uses(-1)
 	return 1
 
 // Negative numbers will subtract
-/obj/item/device/lightreplacer/proc/AddUses(var/amount = 1)
+/obj/item/device/lightreplacer/proc/add_uses(var/amount = 1)
 	uses = min(max(uses + amount, 0), max_uses)
+
+
+/obj/item/device/lightreplacer/proc/AddShards(amount = 1)
+	bulb_shards += amount
+	var/new_bulbs = round(bulb_shards / shards_required)
+	if(new_bulbs > 0)
+		add_uses(new_bulbs)
+	bulb_shards = bulb_shards % shards_required
+	return new_bulbs
 
 /obj/item/device/lightreplacer/proc/Charge(var/mob/user, var/amount = 1)
 	charge += amount
 	if(charge > 6)
-		AddUses(1)
+		add_uses(1)
 		charge = 0
 
 /obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
@@ -127,20 +175,13 @@
 	if(target.status != LIGHT_OK)
 		if(CanUse(U))
 			if(!Use(U)) return
-			U << "<span class='notice'>You replace the [target.fitting] with the [src].</span>"
+			to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
 			if(target.status != LIGHT_EMPTY)
-
-				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)
-				L1.status = target.status
-				L1.rigged = target.rigged
-				L1.brightness_range = target.brightness_range
-				L1.brightness_power = target.brightness_power
-				L1.brightness_color = target.brightness_color
-				L1.switchcount = target.switchcount
-				target.switchcount = 0
-				L1.update()
-
+				var/new_bulbs = AddShards(1)
+				if(new_bulbs != 0)
+					to_chat(U, "<span class='notice'>\The [src] has fabricated a new bulb from the broken bulbs it has stored. It now has [uses] uses.</span>")
+					playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 				target.status = LIGHT_EMPTY
 				target.update()
 
@@ -161,10 +202,10 @@
 			return
 
 		else
-			U << failmsg
+			to_chat(U, failmsg)
 			return
 	else
-		U << "There is a working [target.fitting] already inserted."
+		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 		return
 
 /obj/item/device/lightreplacer/emag_act(var/remaining_charges, var/mob/user)

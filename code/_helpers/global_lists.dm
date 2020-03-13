@@ -1,6 +1,4 @@
-var/list/clients = list()							//list of all clients
 var/list/admins = list()							//list of all clients whom are admins
-var/list/directory = list()							//list of all ckeys with associated client
 
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
@@ -9,13 +7,12 @@ var/global/list/player_list = list()				//List of all mobs **with clients attach
 var/global/list/mob_list = list()					//List of all mobs, including clientless
 var/global/list/human_mob_list = list()				//List of all human mobs and sub-types, including clientless
 var/global/list/silicon_mob_list = list()			//List of all silicon mobs, including clientless
+var/global/list/ai_list = list()					//List of all AIs, including clientless
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
 var/global/list/listening_objects = list()			//List of all objects which care about receiving messages (communicators, radios, etc)
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
-var/global/list/chemical_reactions_list				//list of all /datum/chemical_reaction datums. Used during chemical reactions
-var/global/list/chemical_reagents_list				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
 var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
@@ -27,17 +24,11 @@ var/global/list/turfs = list()						//list of all turfs
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
-//Languages/species/whitelist.
-var/global/list/all_species[0]
-var/global/list/all_languages[0]
-var/global/list/language_keys[0]					// Table of say codes for all languages
-var/global/list/whitelisted_species = list("Human") // Species that require a whitelist check.
-var/global/list/playable_species = list("Human")    // A list of ALL playable species, whitelisted, latejoin or otherwise.
-
 var/list/mannequins_
 
 // Posters
 var/global/list/poster_designs = list()
+var/global/list/NT_poster_designs = list()
 
 // Uplinks
 var/list/obj/item/device/uplink/world_uplinks = list()
@@ -51,12 +42,13 @@ var/global/list/facial_hair_styles_list = list()	//stores /datum/sprite_accessor
 var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
+var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
 	//Backpacks
-var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
-var/global/list/pdachoicelist = list("Default", "Slim", "Old")
+var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag")
+var/global/list/pdachoicelist = list("Default", "Slim", "Old", "Rugged", "Holographic")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets
@@ -141,6 +133,12 @@ var/global/list/string_slot_flags = list(
 				facial_hair_styles_male_list += H.name
 				facial_hair_styles_female_list += H.name
 
+	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
+	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
+	for(var/path in paths)
+		var/datum/sprite_accessory/marking/M = new path()
+		body_marking_styles_list[M.name] = M
+
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = typesof(/datum/surgery_step)-/datum/surgery_step
 	for(var/T in paths)
@@ -159,12 +157,12 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/language)-/datum/language
 	for(var/T in paths)
 		var/datum/language/L = new T
-		all_languages[L.name] = L
+		GLOB.all_languages[L.name] = L
 
-	for (var/language_name in all_languages)
-		var/datum/language/L = all_languages[language_name]
+	for (var/language_name in GLOB.all_languages)
+		var/datum/language/L = GLOB.all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[lowertext(L.key)] = L
+			GLOB.language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)
@@ -178,18 +176,24 @@ var/global/list/string_slot_flags = list(
 
 		S = new T
 		S.race_key = rkey //Used in mob icon caching.
-		all_species[S.name] = S
+		GLOB.all_species[S.name] = S
 
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			playable_species += S.name
+			GLOB.playable_species += S.name
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
-			whitelisted_species += S.name
+			GLOB.whitelisted_species += S.name
 
 	//Posters
 	paths = typesof(/datum/poster) - /datum/poster
+	paths -= typesof(/datum/poster/nanotrasen)
 	for(var/T in paths)
 		var/datum/poster/P = new T
 		poster_designs += P
+
+	paths = typesof(/datum/poster/nanotrasen)
+	for(var/T in paths)
+		var/datum/poster/P = new T
+		NT_poster_designs += P
 
 	return 1
 
@@ -202,7 +206,7 @@ var/global/list/string_slot_flags = list(
 			var/list/L = chemical_reactions_list[reaction]
 			for(var/t in L)
 				. += "    has: [t]\n"
-	world << .
+	to_world(.)
 */
 //Hexidecimal numbers
 var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")

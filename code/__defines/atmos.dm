@@ -21,8 +21,6 @@
 #define HUMAN_NEEDED_OXYGEN (MOLES_CELLSTANDARD * BREATH_PERCENTAGE * 0.16)
 #define HUMAN_HEAT_CAPACITY 280000 //J/K For 80kg person
 
-#define SOUND_MINIMUM_PRESSURE 10
-
 #define PRESSURE_DAMAGE_COEFFICIENT 4 // The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE.
 #define    MAX_HIGH_PRESSURE_DAMAGE 4 // This used to be 20... I got this much random rage for some retarded decision by polymorph?! Polymorph now lies in a pool of blood with a katana jammed in his spleen. ~Errorage --PS: The katana did less than 20 damage to him :(
 #define         LOW_PRESSURE_DAMAGE 2 // The amount of damage someone takes when in a low pressure area. (The pressure threshold is so low that it doesn't make sense to do any calculations, so it just applies this flat value).
@@ -74,6 +72,7 @@
 #define XGM_GAS_FUEL        1
 #define XGM_GAS_OXIDIZER    2
 #define XGM_GAS_CONTAMINANT 4
+#define XGM_GAS_FUSION_FUEL 8
 
 #define TANK_LEAK_PRESSURE     (30.*ONE_ATMOSPHERE) // Tank starts leaking.
 #define TANK_RUPTURE_PRESSURE  (40.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere.
@@ -94,3 +93,9 @@
 #define ATMOSTANK_CO2           25000 // CO2 and PH are not critically important for station, only for toxins and alternative coolants, no need to store a lot of those.
 #define ATMOSTANK_PHORON        25000
 #define ATMOSTANK_NITROUSOXIDE  10000 // N2O doesn't have a real useful use, i guess it's on station just to allow refilling of sec's riot control canisters?
+
+// Used for quickly making certain things allow airflow or not.
+// More complicated, conditional airflow should override CanZASPass().
+#define ATMOS_PASS_YES		1
+#define ATMOS_PASS_NO		0
+#define ATMOS_PASS_DENSITY	-1 // Just checks density.

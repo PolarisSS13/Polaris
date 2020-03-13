@@ -67,14 +67,10 @@
 
 /mob/living/carbon/slime/handle_chemicals_in_body()
 	chem_effects.Cut()
-	analgesic = 0
 
 	if(touching) touching.metabolize()
 	if(ingested) ingested.metabolize()
 	if(bloodstr) bloodstr.metabolize()
-
-	if(CE_PAINKILLER in chem_effects)
-		analgesic = chem_effects[CE_PAINKILLER]
 
 	src.updatehealth()
 
@@ -84,7 +80,7 @@
 
 	src.blinded = null
 
-	health = maxHealth - (getOxyLoss() + getToxLoss() + getFireLoss() + getBruteLoss() + getCloneLoss())
+	health = getMaxHealth() - (getOxyLoss() + getToxLoss() + getFireLoss() + getBruteLoss() + getCloneLoss())
 
 	if(health < 0 && stat != DEAD)
 		death()
@@ -104,7 +100,7 @@
 		src.lying = 1
 		src.blinded = 1
 	else
-		if (src.paralysis || src.stunned || src.weakened || (status_flags && FAKEDEATH)) //Stunned etc.
+		if (src.paralysis || src.stunned || src.weakened || (status_flags & FAKEDEATH)) //Stunned etc.
 			if (src.stunned > 0)
 				src.stat = 0
 			if (src.weakened > 0)
@@ -122,7 +118,7 @@
 	if (src.stuttering) src.stuttering = 0
 
 	if (src.eye_blind)
-		src.eye_blind = 0
+		SetBlinded(0)
 		src.blinded = 1
 
 	if (src.ear_deaf > 0) src.ear_deaf = 0
@@ -153,7 +149,7 @@
 		nutrition = 0
 		adjustToxLoss(rand(1,3))
 		if (client && prob(5))
-			src << "<span class='danger'>You are starving!</span>"
+			to_chat(src, "<span class='danger'>You are starving!</span>")
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < 10)
 		nutrition -= 20

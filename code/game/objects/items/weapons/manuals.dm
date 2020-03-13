@@ -98,11 +98,11 @@
 				<br>
 				<h2>OPERATING PRINCIPLES</h2>
 				<br>
-				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out. NOTE: Supermatter radiation will not charge radiation collectors.</li>
+				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction and reacts with phoron to start a fire, it must be filtered out. It's recommended to filter out all gases besides nitrogen for standard operation. </li>
 				<br>
-				<li>Air in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
+				<li>Gas in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
 				<br>
-				<li>Air in the radiator loop is circulated through the radiator bank, located in space. This rapidly cools the air, preserving the temperature differential needed for power generation.</li>
+				<li>Gas in the radiator loop is circulated through the radiator bank, located in space. This rapidly cools the air, preserving the temperature differential needed for power generation.</li>
 				<br>
 				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 3000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
 				<br>
@@ -110,22 +110,28 @@
 				<br>
 				<h2>SUPERMATTER HANDLING</h2>
 				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not <del>touch supermatter</del> <del>without gloves</del> <del>without exosuit protection</del> allow supermatter to contact any solid object apart from specially-designed supporting pallet.</li>
+				<li>Do not allow supermatter to contact any solid object apart from specially-designed supporting pallet.</li>
 				<li>Do not directly view supermatter without meson goggles.</li>
 				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
+				<li>Note that prosthetics do not protect against radiation or viewing the supermatter.</li>
 				<br>
-				<h2>STARTUP PROCEDURE</h2>
+				<h2>STANDARD STARTUP PROCEDURE</h2>
 				<ol>
-				<li>Fill reactor loop and radiator loop with two (2) standard canisters of nitrogen gas each.</li>
-				<li>Ensure that pumps and filters are on and operating at maximum power.</li>
-				<li>Fire <del>5</del> <del>15</del> <del>2</del> <del>UNKNOWN</del> 8-12 pulses from emitter at supermatter crystal. Reactor blast doors must be open for this procedure.</li>
+				<li>Fill reactor loop and radiator loop with three (3) standard canisters of nitrogen gas each.</li>
+				<li>Fill the waste handling radiator loop with one (1) standard canister of carbon dioxide gas.</li>
+				<li>Enable both the high power gas pumps near the thermo-electric generators and maximize the desired output.</li>
+				<li>Enable both the omni-filters and ensure they are set to filter nitrogen back into the system.</li>
+				<li>Enable the gas pump from the filters to waste handling and maximize the desired output.</li>
+				<li>Close the monitoring room blast doors and open the reactor blast doors,</li>
+				<li>Fire 8-9 pulses from emitter at supermatter crystal. The expected power output is around a megawatt. NOTE: It will take a few minutes to heat up.</li>
+				<li>Close the reactor blast doors and keep the monitoring room blast doors closed to prevent radiation leaking.</li>
 				</ol>
 				<br>
 				<h2>OPERATION AND MAINTENANCE</h2>
 				<ol>
 				<li>Ensure that radiation protection and meson goggles are worn at all times while working in the engine room.</li>
 				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
-				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
+				<li>Ensure that, in a standard setup, only nitrogen is being filtered back into the system. Do not allow exhaust pressure to exceed 4500 kPa.</li>
 				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
 				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, see EMERGENCY COOLING PROCEDURE.</li>
 				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
@@ -135,15 +141,128 @@
 				<ol>
 				<li>Open Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
 				<li>When reactor temperature returns to safe operating levels, close Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
+				<li>Adding additional gas to the loops can have a positive effect in reducing reactor temperature.</li>
 				<li>If reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
 				</ol>
 				<br>
 				<h2>EJECTION PROCEDURE</h2>
 				<ol>
-				<li>Press Engine Ventilatory Control button to open engine core vent to space.</li>
+				<li>Ensure the engine room has power. The blast doors and ejection platform are unresponsive without power.</li>
+				<li>Press Engine Ventilatory Control button to open engine core blast door to space.</li>
 				<li>Press Emergency Core Eject button to eject supermatter crystal. NOTE: Attempting crystal ejection while engine core vent is closed will result in ejection failure.</li>
 				<li>In event of ejection failure, <i>pending</i></li>
 				</ol>
+				</body>
+			</html>"}
+
+// TESLA Engine
+
+/obj/item/weapon/book/manual/tesla_engine
+	name = "Tesla Operating Manual"
+	icon_state ="bookTesla"
+	author = "Engineering Encyclopedia"
+	title = "Tesla Engine User's Guide"
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+				<h1>OPERATING MANUAL FOR MK 2 PROTOTYPE TESLA ENGINE &apos;EDISON&apos;S BANE&apos;</h1>
+				<br>
+				<h2>OPERATING PRINCIPLES</h2>
+				<p>This big floaty ball of pure electricity can only be contained by the containment field. It periodically will discharge energy in the form of an electric shock which can be harvested for energy.</p>
+				<p>When you shoot the energy ball with the Particle Accelerator, it gains energy, and when enough energy is accumulated a mini-energy ball that orbits the big energy ball will be formed. This can happen as many times as you let it, each mini-ball will send off an extra shock when the energy ball pulses. Be warned, the more mini-balls the energy ball has, the more shocks it sends out at once and the further it can travel each move.</p>
+				<p>An energy ball will shoot bolts of electricity off at conductors, which it prioritizes in this order:
+				<ol>
+					<li>Tesla coils</li>
+					<li>Grounding rods</li>
+					<li>People and animals</li>
+					<li>Machines</li>
+				</ol>
+				</p>
+				<p>Tesla Coils will attract the energy ball&apos;s bolts. They will take half the power of the bolt (if they are connected to a wire node), pump it into the powernet it is hooked to, and then will send the other half of the power to the next available conductor, which follows the criteria listed above. Preferably, this will be another coil to harness more of the power and pump it into the grid.</p>
+				<p>Grounding Rods are safety precautions to prevent the tesla bolts from hitting machinery or personnel. If the tesla is loose, being near one will usually keep you safe from direct shocks.</p>
+				<br>
+				<h2>STARTUP PROCEDURE</h2>
+				<ol>
+				<li>Bolt and weld down the Field Generators, ensuring they form a complete rectangle.</li>
+				<li>Bolt and weld down the Emitters, ensuring their fire will strike the corner Field Generators</li>
+				<li>Bolt down the Tesla Generator inside the rectangle formed by the Field Generators in a spot where it will be struck by fire from the Particle Accelerator</li>
+				<li>Bolt down Telsa Coils and Grounding Rods</li>
+				<li>Activate the Emitters</li>
+				<li>Activate each of the Field Generators, then wait until the containment field has completely formed.</li>
+				<li>Setup the Particle Accelerator (see our best seller <i>&quot;Particle Accelerator User&apos;s Guide&quot;</i>!) and activate it.</li>
+				<li>After a short time the Telsa Generator will create an energy ball, being consumed in the process.</li>
+				</ol>
+				<br>
+				<h2>OPERATION AND MAINTENANCE</h2>
+				<ol>
+				<li>Ensure that electrical protection and meson goggles are worn at all times while working in the engine room.</li>
+				<li>Ensure that Telsa Coils and/or Grounding Rods are placed to safely collect or ground any and all shock.</li>
+				<li>Ensure that all Emitters remain activated and have unobstructed lines of fire to the Field Generators.</li>
+				<li>Do <b>not</b> let the Emitters run out of power.</li>
+				</ol>
+				<br>
+				<h2>SHUTDOWN PROCEDURE</h2>
+				<ol>
+				<li>De-activate the Particle Accelerator.  The energy ball will begin to shrink and lose mini-balls.</li>
+				<li>When the energy ball has completely dissipated, the Emitters can be de-activated.</li>
+				</ol>
+				<br>
+				<h2>ENERGY BALL ESCAPE PROCEDURE</h2>
+				<ol>
+				<li>Do not let it escape.</li>
+				<li>Have someone ready to blame when it does escape.</li>
+				<li>Buy our forthcoming manual &quot;<i>Celebrity Grounding Rod Shelters of the Galaxy</i>&quot;</li>
+				</ol>
+				</body>
+			</html>"}
+
+//R-UST port
+/obj/item/weapon/book/manual/rust_engine
+	name = "R-UST Operating Manual"
+	icon_state = "bookSupermatter"
+	author = "Cindy Crawfish"
+	title = "R-UST Operating Manual"
+
+/obj/item/weapon/book/manual/rust_engine/New()
+	..()
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+				<br><br>
+				<ol>
+				<li>Put uranium in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core.</li>
+				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
+				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 501. Any bigger and it will start EMPing the doors. Any smaller and the fuel pellets might miss.</li>
+				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 4, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
+				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
+				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
+				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop). Turn the gyrotron power down until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium instability isn't a problem and you can turn the gyrotron off.</li>
+				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
+				</ol>
+				<br>
+				<b>NOTES FOR NEWBIES</b>
+				<br>
+				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the engine on unstable fuel.
+				<br><br>
+				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the engine room on fire.
 				</body>
 			</html>"}
 
@@ -751,7 +870,7 @@
 				<br>
 				<h1>The Oath</h1>
 
-				<i>The Medical Oath sworn by recognised medical practitioners in the employ of [company_name]</i><br>
+				<i>The Medical Oath sworn by recognised medical practitioners in the employ of [using_map.company_name]</i><br>
 
 				<ol>
 					<li>Now, as a new doctor, I solemnly promise that I will, to the best of my ability, serve humanity-caring for the sick, promoting good health, and alleviating pain and suffering.</li>
@@ -857,6 +976,7 @@
 
 /obj/item/weapon/book/manual/barman_recipes
 	name = "Barman Recipes"
+	desc = "For the enterprising drink server."
 	icon_state = "barbook"
 	author = "Sir John Rose"
 	title = "Barman Recipes"
@@ -997,7 +1117,7 @@
 
 				Remember the order:<br>
 				<b>Disk, Code, Safety, Timer, Disk, RUN!</b><br><br>
-				Intelligence Analysts believe that normal corporate procedure is for the Captain to secure the nuclear authentication disk.<br><br>
+				Intelligence Analysts believe that normal corporate procedure is for the Colony Director to secure the nuclear authentication disk.<br><br>
 
 				Good luck!
 				</body>
@@ -1113,10 +1233,10 @@
 			"}
 
 /obj/item/weapon/book/manual/evaguide
-	name = "EVA Gear and You: Not Spending All Day Inside"
+	name = "EVA Gear and You: Not Spending All Day Inside, 2nd Edition"
 	icon_state = "evabook"
 	author = "Maria Crash, Senior Atmospherics Technician"
-	title = "EVA Gear and You: Not Spending All Day Inside"
+	title = "EVA Gear and You: Not Spending All Day Inside, 2nd Edition"
 	dat = {"<html>
 				<head>
 				<style>
@@ -1130,27 +1250,32 @@
 				</head>
 				<body>
 
-				<h1><a name="Foreword">EVA Gear and You: Not Spending All Day Inside</a></h1>
+				<h1><a name="Foreword">EVA Gear and You: Not Spending All Day Inside, 2nd Edition</a></h1>
 				<I>Or: How not to suffocate because there's a hole in your shoes</I><BR>
 
 				<h2><a name="Contents">Contents</a></h2>
 				<ol>
 					<li><a href="#Foreword">A foreword on using EVA gear</a></li>
-					<li><a href="#Civilian">Donning a Civilian Suit</a></li>
-					<li><a href="#Hardsuit">Putting on a Hardsuit</a></li>
+					<li><a href="#Softsuits">Use of Softsuits</a></li>
+					<li><a href="#Voidsuits">Putting on a Voidsuit</a></li>
+					<li><a href="#Hardsuits">Operation of Hardsuits</a></li>
 					<li><a href="#Equipment">Cyclers and Other Modification Equipment</a></li>
+					<li><a href="#Advice">Miscellaneous Advice</a></li>
 					<li><a href="#Final">Final Checks</a></li>
 				</ol>
 				<br>
 
 				EVA gear. Wonderful to use. It's useful for mining, engineering, and occasionally just surviving, if things are that bad. Most people have EVA training,
-				but apparently there are some on a space station who don't. This guide should give you a basic idea of how to use this gear, safely. It's split into two sections:
-				 Civilian suits and hardsuits.<BR><BR>
+				but apparently there are some on a space station who don't. This guide should give you a basic idea of how to use this gear, safely. It's split into three main sections:
+				softsuits, voidsuits, and hardsuits. General advice and instructions for modification are present as well.<BR><BR>
 
-				<h2><a name="Civilian">Civilian Suits</a></h2>
+				One important point for synthetics and people using full-body prosthetics: You obviously don't need oxygen, but you do run the risk of overheating in vacuum.
+				Rather than oxygen, use a suit cooling unit. Many emergency equipment stores don't hold them, unfortunately, but dedicated EVA stores will. Be aware of your heat tolerances.<BR><BR>
+
+				<h2><a name="Softsuits">Softsuits and Emergency Equipment</a></h2>
 				<I>The bulkiest things this side of Alpha Centauri</I><BR>
-				These suits are the grey ones that are stored in EVA. They're the more simple to get on, but are also a lot bulkier, and provide less protection from environmental hazards such as radiation or physical impact.
-				As Medical, Engineering, Security, and Mining all have hardsuits of their own, these don't see much use, but knowing how to put them on is quite useful anyways.<BR><BR>
+				These suits are the both grey ones that are stored in EVA and orange emergency suits in emergency lockers. They're the more simple to get on, but are also a lot bulkier, and provide less protection from environmental hazards such as radiation or physical impact.
+				As Medical, Engineering, Security, and Mining all have voidsuits of their own, these don't see much use outside of emergencies. In an emergency, knowing how to put one on can save your life.<BR><BR>
 
 				First, take the suit. It should be in three pieces: A top, a bottom, and a helmet. Put the bottom on first, shoes and the like will fit in it. If you have magnetic boots, however,
 				put them on on top of the suit's feet. Next, get the top on, as you would a shirt. It can be somewhat awkward putting these pieces on, due to the makeup of the suit,
@@ -1160,35 +1285,68 @@
 				There is a small slot on the side of the suit where an emergency oxygen tank or extended emergency oxygen tank will fit,
 				but it is recommended to have a full-sized tank on your back for EVA.<BR><BR>
 
+				Important note: When using these, especially in emergencies, be aware of your surroundings! These suits can tear or breach more easily than any other type, especially in an environment with broken glass and metal everywhere.
+				If your suit is breached, you will be in deep trouble. Pressure issues can inhibit breathing even with internals.<BR><BR>
+
 				These suits tend to be wearable by most species. They're large and flexible. They might be pretty uncomfortable for some, though, so keep that in mind.<BR><BR>
 
-				<h2><a name="Hardsuit">Hardsuits</a></h2>
+				<h2><a name="Voidsuits">Voidsuits</a></h2>
 				<I>Heavy, uncomfortable, still the best option.</I><BR>
-				These suits come in Engineering, Mining, and the Armory. There's also a couple Medical Hardsuits in EVA. These provide a lot more protection than the standard suits.<BR><BR>
+				These suits come in many specialized varieties. The most common are engineering, atmospherics, security, medical, and mining varieties.
+				These provide a lot more protection than the standard suits, and depending on the specialization, can offer different protections.
+				For example, security suits have armor plating, engineering suits have radiation protection, and atmospherics suits are rated for extremely high temperatures.<BR><BR>
 
-				Similarly to the other suits, these are split into three parts. Fastening the pant and top are mostly the same as the other spacesuits, with the exception that these are a bit heavier,
+				Similarly to the softsuits, these are split into three parts. Fastening the pant and top are mostly the same as the softsuits, with the exception that these are a bit heavier,
 				though not as bulky. The helmet goes on differently, with the air tube feeding into the suit and out a hole near the left shoulder, while the helmet goes on turned ninety degrees counter-clockwise,
-				and then is screwed in for one and a quarter full rotations clockwise, leaving the faceplate directly in front of you. There is a small button on the right side of the helmet that activates the helmet light.
+				and then is turned to face the front and sealed. There is a small button on the right side of the helmet that activates the helmet light.
 				The tanks that fasten onto the side slot are emergency tanks, as well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
 
 				These suits generally only fit one species. NanoTrasen's are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
 
+				Later-model voidsuits can have magboots and helmets installed into the suit and deployed when needed. Check the operator's manual for individual suits to see how the helmets are installed.
+				If a helmet is installed, you can skip it while putting the suit on, obviously. When deployed, it will deploy from the back of your neck, covering the head and sealing at the front.<BR><BR>
+
+				<h2><a name="Hardsuits">Hardsuits/Rigs</a></h2>
+				<I>The fancy stuff.</I><BR>
+				Proper hardsuits are the most complex sort of EVA equipment available, and blur the line between spacesuits and smaller exosuits. They're sometimes known as 'rigs' or 'powered armor'.
+				These are the suits with the widest variety of uses, owing to the wide variety of equipment that can be installed on them. Like voidsuits, they come in different, specialized varieties, each one offering different protections and different equipment.
+				Equipment that can be installed includes weapons, power tools, mining equipment, medical equipment, AI assistants, and more.<BR><BR>
+
+				Putting these on is relatively simple. They come as compact packs, worn like a backpack and secured with a harness. Activating them, though, is a more complex process. The suit deploys from the module similarly to helmets deploying from voidsuits.
+				After it covers the whole body, the suit can be started. The startup sequence takes some time. The suit will automatically fit itself to your body, sealing each section individually - boots, gloves, pants, torso, and helmet - then connecting them.<BR><BR>
+
+				Operating a hardsuit is a much more complicated proposal than operating other EVA equipment. While putting them on is relatively simple, and operating basic functions like oxygen and magboots is the same as other suits, the rest is far more complex.
+				Consult the operator's manual for invidual pieces of equipment that you plan to use. Use of these for heavy work is only reccomended for people who have specialized training and extensive EVA experience.
+				The potential of a suit breach is always there, and the use of powered equipment raises it significantly.<BR><BR>
+
+				<h2><a name="Advice">Miscellaneous Advice</a></h2>
+				<I>Pro tip: Safety first.</I><BR>
+				There's a lot of general advice that can be helpful for people who haven't taken a long-form instruction course. Much of this is going to be fairly obvious safety advice, but it's never bad to remind yourself of that.<BR><BR>
+
+				<ul>
+					<li>Magboots are important. They can be the difference between keeping your footing and needing a rescue team. A tie-off or a jetpack can substitute if necessary.</li>
+					<li>Be aware of breach hazards, especially in softsuits. Loss of suit pressure can be a fatal disaster.</li>
+					<li>Keep an eye on your internals. Having to make two trips outside is better than running out of air.</li>
+					<li>Similarly, keep an eye on the battery status of cooling units and other equipment.</li>
+					<li>In vacuum, sound doesn't carry. Use a radio or sign language for communication.</li><BR><BR>
+				</ul>
+
 				<h2><a name="Equipment">Modification Equipment</a></h2>
-				<I>How to actually make hardsuits fit you.</I><BR>
+				<I>How to actually make voidsuits fit you.</I><BR>
 				There's a variety of equipment that can modify hardsuits to fit species that can't fit into them, making life quite a bit easier.<BR><BR>
 
 				The first piece of equipment is a suit cycler. This is a large machine resembling the storage pods that are in place in some places. These are machines that will automatically tailor a suit to certain specifications.
-				The largest uses of them are for their cleaning functions and their ability to tailor suits for a species. Do not enter them physically. You will die from any of the functions being activated, and it will be painful.
+				The largest uses of them are for their cleaning functions and their ability to tailor suits for a species. Do not enter them physically. You will die from any of the functions being activated, and it will hurt the whole time you're dying.
 				These machines can both tailor a suit between species, and between types. This means you can convert engineering hardsuits to atmospherics, or the other way. This is useful. Use it if you can.<BR><BR>
 
-				There's also modification kits that let you modify suits yourself. These are extremely difficult to use unless you understand the actual construction of the suit. I do not reccomend using them unless no other option is available.
+				There's also modification kits that let you modify suits yourself. These are extremely difficult to use unless you understand the actual construction of the suit. I do not reccomend using them unless no other option is available.<BR><BR>
 
 				<h2><a name="Final">Final Checks</a></h2>
 				<ul>
 					<li>Are all seals fastened correctly?</li>
 					<li>If you have modified it manually, is absolutely everything sealed perfectly?</li>
 					<li>Do you either have shoes on under the suit, or magnetic boots on over it?</li>
-					<li>Do you have a mask on and internals on the suit or your back?</li>
+					<li>Do you have internals connected and activated?</li>
 					<li>Do you have a way to communicate with the station in case something goes wrong?</li>
 					<li>Do you have a second person watching if this is a training session?</li><BR>
 				</ul>

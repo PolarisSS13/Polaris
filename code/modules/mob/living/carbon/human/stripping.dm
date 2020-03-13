@@ -33,7 +33,7 @@
 			return
 		if("tie")
 			var/obj/item/clothing/under/suit = w_uniform
-			if(!istype(suit) || !suit.accessories.len)
+			if(!istype(suit) || !LAZYLEN(suit.accessories))
 				return
 			var/obj/item/clothing/accessory/A = suit.accessories[1]
 			if(!istype(A))
@@ -48,8 +48,7 @@
 
 			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
 				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
-			attack_log += "\[[time_stamp()]\] <font color='orange'>Has had \the [A] removed by [user.name] ([user.ckey])</font>"
-			user.attack_log += "\[[time_stamp()]\] <font color='red'>Attempted to remove [name]'s ([ckey]) [A.name]</font>"
+			add_attack_logs(user,src,"Stripped [A.name] off [suit.name]")
 			A.on_removed(user)
 			suit.accessories -= A
 			update_inv_w_uniform()
@@ -62,7 +61,7 @@
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return
 		if(!target_slot.canremove)
-			user << "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>"
+			to_chat(user, "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>")
 			return
 		stripping = 1
 
@@ -81,7 +80,7 @@
 		return
 
 	if(stripping)
-		admin_attack_log(user, src, "Attempted to remove \a [target_slot]", "Target of an attempt to remove \a [target_slot].", "attempted to remove \a [target_slot] from")
+		add_attack_logs(user,src,"Removed equipment from slot [target_slot]")
 		unEquip(target_slot)
 	else if(user.unEquip(held))
 		equip_to_slot_if_possible(held, text2num(slot_to_strip), 0, 1, 1)
@@ -91,7 +90,7 @@
 // Empty out everything in the target's pockets.
 /mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
 	if(!r_store && !l_store)
-		user << "<span class='warning'>\The [src] has nothing in their pockets.</span>"
+		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
 		return
 	if(r_store)
 		unEquip(r_store)
@@ -103,13 +102,12 @@
 /mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
 	if(!suit)
-		user << "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>"
+		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
 		return
 	if (suit.has_sensor >= 2)
-		user << "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>"
+		to_chat(user, "<span class='warning'>\The [src]'s suit sensor controls are locked.</span>")
 		return
-	attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their sensors toggled by [user.name] ([user.ckey])</font>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to toggle [name]'s ([ckey]) sensors</font>")
+	add_attack_logs(user,src,"Adjusted suit sensor level")
 	suit.set_sensors(user)
 
 // Remove all splints.
@@ -119,22 +117,23 @@
 	if(istype(wear_suit,/obj/item/clothing/suit/space))
 		var/obj/item/clothing/suit/space/suit = wear_suit
 		if(suit.supporting_limbs && suit.supporting_limbs.len)
-			user << "<span class='warning'>You cannot remove the splints - [src]'s [suit] is supporting some of the breaks.</span>"
+			to_chat(user, "<span class='warning'>You cannot remove the splints - [src]'s [suit] is supporting some of the breaks.</span>")
 			can_reach_splints = 0
 
 	if(can_reach_splints)
 		var/removed_splint
-		for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/o = get_organ(organ)
-			if (o && o.status & ORGAN_SPLINTED)
-				var/obj/item/W = new /obj/item/stack/medical/splint(get_turf(src), 1)
-				o.status &= ~ORGAN_SPLINTED
-				W.add_fingerprint(user)
-				removed_splint = 1
+		for(var/obj/item/organ/external/o in organs)
+			if (o && o.splinted)
+				var/obj/item/S = o.splinted
+				if(istype(S) && S.loc == o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
+					S.add_fingerprint(user)
+					if(o.remove_splint())
+						user.put_in_active_hand(S)
+						removed_splint = 1
 		if(removed_splint)
 			visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
 		else
-			user << "<span class='warning'>\The [src] has no splints to remove.</span>"
+			to_chat(user, "<span class='warning'>\The [src] has no splints to remove.</span>")
 
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)

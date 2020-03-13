@@ -10,14 +10,13 @@
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 5
-	w_class = 3.0
-	flags = CONDUCT
+	w_class = ITEMSIZE_NORMAL
 	matter = list(DEFAULT_WALL_MATERIAL = 3000)
 	var/list/carrying = list() // List of things on the tray. - Doohl
 	var/max_carry = 10
 
 /obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-
+	user.setClickCooldown(user.get_attack_speed(src))
 	// Drop all the things. All of them.
 	overlays.Cut()
 	for(var/obj/item/I in carrying)
@@ -32,7 +31,7 @@
 
 
 	if((CLUMSY in user.mutations) && prob(50))              //What if he's a clown?
-		M << "<span class='warning'>You accidentally slam yourself with the [src]!</span>"
+		to_chat(M, "<span class='warning'>You accidentally slam yourself with the [src]!</span>")
 		M.Weaken(1)
 		user.take_organ_damage(2)
 		if(prob(50))
@@ -52,9 +51,7 @@
 			if (istype(location, /turf/simulated))
 				location.add_blood(H)     ///Plik plik, the sound of blood
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] to attack [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+		add_attack_logs(user,M,"Hit with [src]")
 
 		if(prob(15))
 			M.Weaken(3)
@@ -81,7 +78,7 @@
 			break
 
 	if(protected)
-		M << "<span class='warning'>You get slammed in the face with the tray, against your mask!</span>"
+		to_chat(M, "<span class='warning'>You get slammed in the face with the tray, against your mask!</span>")
 		if(prob(33))
 			src.add_blood(H)
 			if (H.wear_mask)
@@ -111,7 +108,7 @@
 			return
 
 	else //No eye or head protection, tough luck!
-		M << "<span class='warning'>You get slammed in the face with the tray!</span>"
+		to_chat(M, "<span class='warning'>You get slammed in the face with the tray!</span>")
 		if(prob(33))
 			src.add_blood(M)
 			var/turf/location = H.loc
@@ -160,9 +157,9 @@
 	var/val = 0 // value to return
 
 	for(var/obj/item/I in carrying)
-		if(I.w_class == 1.0)
+		if(I.w_class == ITEMSIZE_TINY)
 			val ++
-		else if(I.w_class == 2.0)
+		else if(I.w_class == ITEMSIZE_SMALL)
 			val += 3
 		else
 			val += 5
@@ -177,9 +174,9 @@
 	for(var/obj/item/I in loc)
 		if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
 			var/add = 0
-			if(I.w_class == 1.0)
+			if(I.w_class == ITEMSIZE_TINY)
 				add = 1
-			else if(I.w_class == 2.0)
+			else if(I.w_class == ITEMSIZE_SMALL)
 				add = 3
 			else
 				add = 5
@@ -190,7 +187,7 @@
 			carrying.Add(I)
 			Img.icon = I.icon
 			Img.icon_state = I.icon_state
-			Img.layer = 30 + I.layer
+			Img.layer = layer + I.layer*0.01
 			if(istype(I, /obj/item/weapon/material))
 				var/obj/item/weapon/material/O = I
 				if(O.applies_material_colour)
@@ -199,11 +196,11 @@
 
 /obj/item/weapon/tray/dropped(mob/user)
 	var/noTable = null
-	
+
 	spawn() //Allows the tray to udpate location, rather than just checking against mob's location
 		if(isturf(src.loc) && !(locate(/obj/structure/table) in src.loc))
 			noTable = 1
-		
+
 		if(isturf(loc) && !(locate(/mob/living) in src.loc))
 			overlays.Cut()
 			for(var/obj/item/I in carrying)

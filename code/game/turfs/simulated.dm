@@ -12,25 +12,42 @@
 	nitrogen = MOLES_N2STANDARD
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
+	var/can_dirty = TRUE	// If false, tile never gets dirty
+	var/can_start_dirty = TRUE	// If false, cannot start dirty roundstart
+	var/dirty_prob = 2	// Chance of being dirty roundstart
 	var/dirt = 0
 
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1)
+	if(wet > 2)	//Can't mop up ice
+		return
 	spawn(0)
-		if(wet_val <= wet)
-			return
 		wet = wet_val
 		if(wet_overlay)
-			overlays -= wet_overlay
-			wet_overlay = null
-		wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
-		overlays += wet_overlay
+			cut_overlay(wet_overlay)
+		wet_overlay = image('icons/effects/water.dmi', icon_state = "wet_floor")
+		add_overlay(wet_overlay)
 		sleep(800)
-		if(wet >= 2)
-			return
+		if(wet == 2)
+			sleep(3200)
 		wet = 0
 		if(wet_overlay)
-			overlays -= wet_overlay
+			cut_overlay(wet_overlay)
+			wet_overlay = null
+
+/turf/simulated/proc/freeze_floor()
+	if(!wet) // Water is required for it to freeze.
+		return
+	wet = 3 // icy
+	if(wet_overlay)
+		cut_overlay(wet_overlay)
+		wet_overlay = null
+	wet_overlay = image('icons/turf/overlays.dmi',src,"snowfloor")
+	add_overlay(wet_overlay)
+	spawn(5 MINUTES)
+		wet = 0
+		if(wet_overlay)
+			cut_overlay(wet_overlay)
 			wet_overlay = null
 
 /turf/simulated/clean_blood()
@@ -44,19 +61,6 @@
 		holy = 1
 	levelupdate()
 
-/turf/simulated/proc/initialize()
-	return
-
-/turf/simulated/proc/check_destroy_override()
-	if(destroy_floor_override) //Don't bother doing the additional checks if we don't have to.
-		var/area/my_area = get_area(src)
-//		my_area = my_area.master
-		if(is_type_in_list(my_area, destroy_floor_override_ignore_areas))
-			return 0
-		if(z in destroy_floor_override_z_levels)
-			return 1
-	return 0
-
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor="#A10808")
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
@@ -64,16 +68,17 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
-	dirt = min(dirt++, 101)
-	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-	if (dirt > 50)
-		if (!dirtoverlay)
-			dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-		dirtoverlay.alpha = min((dirt - 50) * 5, 255)
+	if(can_dirty)
+		dirt = min(dirt+1, 101)
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
+		if (dirt > 50)
+			if (!dirtoverlay)
+				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
+			dirtoverlay.alpha = min((dirt - 50) * 5, 255)
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
-		usr << "<span class='danger'>Movement is admin-disabled.</span>" //This is to identify lag problems
+		to_chat(usr, "<span class='danger'>Movement is admin-disabled.</span>") //This is to identify lag problems
 		return
 
 	if (istype(A,/mob/living))
@@ -81,12 +86,9 @@
 		if(M.lying)
 			return ..()
 
-		// Ugly hack :( Should never have multiple plants in the same tile.
-		var/obj/effect/plant/plant = locate() in contents
-		if(plant) plant.trodden_on(M)
-
-		// Dirt overlays.
-		update_dirt()
+		if(M.dirties_floor())
+			// Dirt overlays.
+			update_dirt()
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
@@ -108,10 +110,10 @@
 					H.track_blood--
 
 			if (bloodDNA)
-				src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,H.dir,0,bloodcolor) // Coming
+				src.AddTracks(H.species.get_move_trail(H),bloodDNA,H.dir,0,bloodcolor) // Coming
 				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
 				if(istype(from) && from)
-					from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,0,H.dir,bloodcolor) // Going
+					from.AddTracks(H.species.get_move_trail(H),bloodDNA,0,H.dir,bloodcolor) // Going
 
 				bloodDNA = null
 
@@ -132,9 +134,10 @@
 				if(3) // Ice
 					floor_type = "icy"
 					slip_stun = 4
+					slip_dist = 2
 
-			if(M.slip("the [floor_type] floor",slip_stun))
-				for(var/i = 0;i<slip_dist;i++)
+			if(M.slip("the [floor_type] floor", slip_stun))
+				for(var/i = 1 to slip_dist)
 					step(M, M.dir)
 					sleep(1)
 			else
@@ -168,3 +171,5 @@
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/blood/oil(src)
+	else if(ishuman(M))
+		add_blood(M)

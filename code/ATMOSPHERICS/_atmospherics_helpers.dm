@@ -19,7 +19,7 @@
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
-	usr << "[M]: Debug messages toggled [M.debug? "on" : "off"]."
+	to_chat(usr, "[M]: Debug messages toggled [M.debug? "on" : "off"].")
 
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
@@ -455,3 +455,40 @@
 	var/sink_pressure = sink.return_pressure()
 
 	return (source_pressure - sink_pressure)/(R_IDEAL_GAS_EQUATION * (source.temperature/source_volume + sink.temperature/sink_volume))
+
+//
+// Debugging helper procs
+//
+
+/proc/atmos_piping_layer_str(piping_layer)
+	switch(piping_layer)
+		if(PIPING_LAYER_SUPPLY)
+			return "SUPPLY"
+		if(PIPING_LAYER_REGULAR)
+			return "REGULAR"
+		if(PIPING_LAYER_SCRUBBER)
+			return "SCRUBBER"
+
+/proc/atmos_pipe_flags_str(pipe_flags)
+	var/list/dat = list()
+	if(pipe_flags & PIPING_ALL_LAYER)
+		dat += "ALL_LAYER"
+	if(pipe_flags & PIPING_ONE_PER_TURF)
+		dat += "ONE_PER_TURF"
+	if(pipe_flags & PIPING_DEFAULT_LAYER_ONLY)
+		dat += "DEFAULT_LAYER_ONLY"
+	if(pipe_flags & PIPING_CARDINAL_AUTONORMALIZE)
+		dat += "CARDINAL_AUTONORMALIZE"
+	return dat.Join("|")
+
+/proc/atmos_connect_types_str(connect_types)
+	var/list/dat = list()
+	if(connect_types & CONNECT_TYPE_REGULAR)
+		dat += "REGULAR"
+	if(connect_types & CONNECT_TYPE_SUPPLY)
+		dat += "SUPPLY"
+	if(connect_types & CONNECT_TYPE_SCRUBBER)
+		dat += "SCRUBBER"
+	if(connect_types & CONNECT_TYPE_HE)
+		dat += "HE"
+	return dat.Join("|")

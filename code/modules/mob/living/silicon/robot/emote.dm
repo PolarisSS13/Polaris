@@ -12,7 +12,7 @@
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "You cannot send IC messages (muted)."
+					to_chat(src, "You cannot send IC messages (muted).")
 					return
 			if (stat)
 				return
@@ -72,11 +72,11 @@
 				m_type = 2
 
 		if ("twitch")
-			message = "twitches violently."
+			message = "twitches."
 			m_type = 1
 
-		if ("twitch_s")
-			message = "twitches."
+		if ("twitch_v")
+			message = "twitches violently."
 			m_type = 1
 
 		if ("nod")
@@ -185,7 +185,7 @@
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 			m_type = 1
 
-		if("yes")
+		if("yes", "ye")
 			var/M = null
 			if(param)
 				for (var/mob/A in view(null, null))
@@ -201,6 +201,23 @@
 				message = "emits an affirmative blip."
 			playsound(src.loc, 'sound/machines/synth_yes.ogg', 50, 0)
 			m_type = 1
+
+		if("dwoop")
+			var/M = null
+			if(param)
+				for (var/mob/A in view(null, null))
+					M = A
+					break
+			if(!M)
+				param = null
+
+			if (param)
+				message = "chirps happily at [param]"
+			else
+				message = "chirps happily."
+			playsound(src.loc, 'sound/machines/dwoop.ogg', 50, 0)
+			m_type = 1
+
 
 		if("no")
 			var/M = null
@@ -220,27 +237,27 @@
 			m_type = 1
 
 		if("law")
-			if (istype(module,/obj/item/weapon/robot_module/security))
+			if (istype(module,/obj/item/weapon/robot_module/robot/security))
 				message = "shows its legal authorization barcode."
 
 				playsound(src.loc, 'sound/voice/biamthelaw.ogg', 50, 0)
 				m_type = 2
 			else
-				src << "You are not THE LAW, pal."
+				to_chat(src, "You are not THE LAW, pal.")
 
 		if("halt")
-			if (istype(module,/obj/item/weapon/robot_module/security))
-				message = "<B>[src]</B>'s speakers skreech, \"Halt! Security!\"."
+			if (istype(module,/obj/item/weapon/robot_module/robot/security))
+				message = "<B>'s</B> speakers skreech, \"Halt! Security!\"."
 
 				playsound(src.loc, 'sound/voice/halt.ogg', 50, 0)
 				m_type = 2
 			else
-				src << "You are not security."
+				to_chat(src, "You are not security.")
 
 		if ("help")
-			src << "salute, bow-(none)/mob, clap, flap, aflap, twitch, twitch_s, nod, deathgasp, glare-(none)/mob, stare-(none)/mob, look, beep, ping, \nbuzz, law, halt, yes, no"
+			to_chat(src, "salute, bow-(none)/mob, clap, flap, aflap, twitch, twitch_s, nod, deathgasp, glare-(none)/mob, stare-(none)/mob, look, beep, ping, \nbuzz, law, halt, yes, dwoop, no")
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
+			to_chat(src, "<font color='blue'>Unusable emote '[act]'. Say *help for a list.</font>")
 
 	if ((message && src.stat == 0))
 		custom_emote(m_type,message)

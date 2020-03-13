@@ -4,6 +4,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/list/datum/absorbed_dna/absorbed_dna = list()
 	var/list/absorbed_languages = list() // Necessary because of set_species stuff
 	var/absorbedcount = 0
+	var/lingabsorbedcount = 1	//Starts at one, because that's us
 	var/chem_charges = 20
 	var/chem_recharge_rate = 0.5
 	var/chem_storage = 50
@@ -11,14 +12,18 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/changelingID = "Changeling"
 	var/geneticdamage = 0
 	var/isabsorbing = 0
-	var/geneticpoints = 5
-	var/max_geneticpoints = 5
+	var/geneticpoints = 7
+	var/max_geneticpoints = 7
+	var/readapts = 1
+	var/max_readapts = 2
 	var/list/purchased_powers = list()
 	var/mimicing = ""
 	var/cloaked = 0
 	var/armor_deployed = 0 //This is only used for changeling_generic_equip_all_slots() at the moment.
 	var/recursive_enhancement = 0 //Used to power up other abilities from the ling power with the same name.
 	var/list/purchased_powers_history = list() //Used for round-end report, includes respec uses too.
+	var/last_shriek = null // world.time when the ling last used a shriek.
+	var/next_escape = 0	// world.time when the ling can next use Escape Restraints
 
 /datum/changeling/New(var/gender=FEMALE)
 	..()
@@ -60,6 +65,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
 	verbs += /datum/changeling/proc/EvolutionMenu
+	verbs += /mob/proc/changeling_respec
 	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
@@ -79,6 +85,16 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 			if(lesser_form && !P.allowduringlesserform)	continue
 			if(!(P in src.verbs))
 				src.verbs += P.verbpath
+			if(P.make_hud_button)
+				if(!src.ability_master)
+					src.ability_master = new /obj/screen/movable/ability_master(src)
+				src.ability_master.add_ling_ability(
+					object_given = src,
+					verb_given = P.verbpath,
+					name_given = P.name,
+					ability_icon_given = P.ability_icon_state,
+					arguments = list()
+					)
 
 	for(var/language in languages)
 		mind.changeling.absorbed_languages |= language
@@ -96,6 +112,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	for(var/datum/power/changeling/P in mind.changeling.purchased_powers)
 		if(P.isVerb)
 			verbs -= P.verbpath
+			var/obj/screen/ability/verb_based/changeling/C = ability_master.get_ability_by_proc_ref(P.verbpath)
+			if(C)
+				ability_master.remove_ability(C)
 
 
 //Helper proc. Does all the checks and stuff for us to avoid copypasta
@@ -106,23 +125,23 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/changeling/changeling = src.mind.changeling
 	if(!changeling)
-		world.log << "[src] has the changeling_transform() verb but is not a changeling."
+		to_world_log("[src] has the changeling_transform() verb but is not a changeling.")
 		return
 
 	if(src.stat > max_stat)
-		src << "<span class='warning'>We are incapacitated.</span>"
+		to_chat(src, "<span class='warning'>We are incapacitated.</span>")
 		return
 
 	if(changeling.absorbed_dna.len < required_dna)
-		src << "<span class='warning'>We require at least [required_dna] samples of compatible DNA.</span>"
+		to_chat(src, "<span class='warning'>We require at least [required_dna] samples of compatible DNA.</span>")
 		return
 
 	if(changeling.chem_charges < required_chems)
-		src << "<span class='warning'>We require at least [required_chems] units of chemicals to do that!</span>"
+		to_chat(src, "<span class='warning'>We require at least [required_chems] units of chemicals to do that!</span>")
 		return
 
 	if(changeling.geneticdamage > max_genetic_damage)
-		src << "<span class='warning'>Our genomes are still reassembling. We need time to recover first.</span>"
+		to_chat(src, "<span class='warning'>Our genomes are still reassembling. We need time to recover first.</span>")
 		return
 
 	return changeling
@@ -140,15 +159,56 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	//STINGS//	//They get a pretty header because there's just so fucking many of them ;_;
 	//////////
 
+turf/proc/AdjacentTurfsRangedSting()
+	//Yes this is snowflakey, but I couldn't get it to work any other way.. -Luke
+	var/list/allowed = list(
+		/obj/structure/table,
+		/obj/structure/closet,
+		/obj/structure/frame,
+		/obj/structure/target_stake,
+		/obj/structure/cable,
+		/obj/structure/disposalpipe,
+		/obj/machinery,
+		/mob
+	)
+
+	var/L[] = new()
+	for(var/turf/simulated/t in oview(src,1))
+		var/add = 1
+		if(t.density)
+			add = 0
+		if(add && LinkBlocked(src,t))
+			add = 0
+		if(add && TurfBlockedNonWindow(t))
+			add = 0
+			for(var/obj/O in t)
+				if(!O.density)
+					add = 1
+					break
+				if(istype(O, /obj/machinery/door))
+					//not sure why this doesn't fire on LinkBlocked()
+					add = 0
+					break
+				for(var/type in allowed)
+					if (istype(O, type))
+						add = 1
+						break
+				if(!add)
+					break
+		if(add)
+			L.Add(t)
+	return L
+
+
 /mob/proc/sting_can_reach(mob/M as mob, sting_range = 1)
 	if(M.loc == src.loc)
 		return 1 //target and source are in the same thing
 	if(!isturf(src.loc) || !isturf(M.loc))
-		src << "<span class='warning'>We cannot reach \the [M] with a sting!</span>"
+		to_chat(src, "<span class='warning'>We cannot reach \the [M] with a sting!</span>")
 		return 0 //One is inside, the other is outside something.
 	// Maximum queued turfs set to 25; I don't *think* anything raises sting_range above 2, but if it does the 25 may need raising
-	if(!AStar(src.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, max_nodes=25, max_node_depth=sting_range)) //If we can't find a path, fail
-		src << "<span class='warning'>We cannot find a path to sting \the [M] by!</span>"
+	if(!AStar(src.loc, M.loc, /turf/proc/AdjacentTurfsRangedSting, /turf/proc/Distance, max_nodes=25, max_node_depth=sting_range)) //If we can't find a path, fail
+		to_chat(src, "<span class='warning'>We cannot find a path to sting \the [M] by!</span>")
 		return 0
 	return 1
 
@@ -162,7 +222,11 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		victims += C
 	var/mob/living/carbon/T = input(src, "Who will we sting?") as null|anything in victims
 
-	if(!T) return
+	if(!T)
+		return
+	if(T.isSynthetic())
+		to_chat(src, "<span class='notice'>We are unable to pierce the outer shell of [T].</span>")
+		return
 	if(!(T in view(changeling.sting_range))) return
 	if(!sting_can_reach(T, changeling.sting_range)) return
 	if(!changeling_power(required_chems)) return
@@ -172,7 +236,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	src.verbs -= verb_path
 	spawn(10)	src.verbs += verb_path
 
-	src << "<span class='notice'>We stealthily sting [T].</span>"
+	to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
 	if(!T.mind || !T.mind.changeling)	return T	//T will be affected by the sting
-	T << "<span class='warning'>You feel a tiny prick.</span>"
+	to_chat(T, "<span class='warning'>You feel a tiny prick.</span>")
 	return
