@@ -39,7 +39,7 @@
 	w_class = ITEMSIZE_SMALL
 	root_type = /datum/lore/codex/category/main_news
 	libcategory = "Reference"
-
+	drop_sound = 'sound/items/drop/device.ogg'
 // Combines SOP/Regs/Law
 /obj/item/weapon/book/codex/corp_regs
 	name = "NanoTrasen Regulatory Compendium"

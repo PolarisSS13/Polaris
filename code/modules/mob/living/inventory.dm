@@ -50,7 +50,7 @@
 		return
 
 	if(I.drop_sound)
-		playsound(I, I.drop_sound, 25, 0)
+		playsound(I, I.drop_sound, 25, 0, preference = /datum/client_preference/drop_sounds)
 
 
 //Drops the item in our left hand

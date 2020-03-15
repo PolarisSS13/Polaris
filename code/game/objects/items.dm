@@ -278,8 +278,8 @@
 
 /obj/item/throw_impact(atom/hit_atom)
 	..()
-	if(drop_sound && usr.is_preference_enabled(/datum/client_preference/drop_sounds))
-		playsound(src, drop_sound, 50, 0)
+	if(drop_sound)
+		playsound(src, drop_sound, 50, 0, preference = /datum/client_preference/drop_sounds)
 
 // apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
