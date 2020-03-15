@@ -20,6 +20,11 @@
 	body_parts_covered = HEAD
 	attack_verb = list("bapped")
 	drop_sound = 'sound/items/drop/paper.ogg'
+	var/list/stamp_sounds = list(
+		'sound/items/stamp1.ogg',
+		'sound/items/stamp2.ogg',
+		'sound/items/stamp3.ogg'
+		)
 
 	var/info		//What's actually written on the paper.
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
@@ -646,3 +651,11 @@
 /obj/item/weapon/paper/manifest
 	name = "supply manifest"
 	var/is_copy = 1
+
+/obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
+	. = ..()
+	if(istype(P, /obj/item/weapon/stamp))
+		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
+			return
+		playsound(P, pick(stamp_sounds), 30, 1, -1)
+	return

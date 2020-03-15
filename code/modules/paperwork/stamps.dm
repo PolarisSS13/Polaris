@@ -12,6 +12,11 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
 	pressure_resistance = 2
 	attack_verb = list("stamped")
+	var/list/stamp_sounds = list(
+		'sound/items/stamp1.ogg',
+		'sound/items/stamp2.ogg',
+		'sound/items/stamp3.ogg'
+		)
 
 /obj/item/weapon/stamp/captain
 	name = "colony director's rubber stamp"
@@ -44,6 +49,7 @@
 /obj/item/weapon/stamp/denied
 	name = "\improper DENIED rubber stamp"
 	icon_state = "stamp-deny"
+	attack_verb = list("DENIED")
 
 /obj/item/weapon/stamp/clown
 	name = "clown's rubber stamp"
@@ -92,3 +98,7 @@
 		if(chosen_stamp)
 			name = chosen_stamp.name
 			icon_state = chosen_stamp.icon_state
+
+/obj/item/weapon/stamp/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	. = ..()
+	playsound(M, pick(stamp_sounds), 30, 1, -1)
