@@ -585,9 +585,6 @@ function start_vue() {
 					textToSave += "<br>\n";
 				});
 				textToSave += "</body></html>";
-				var hiddenElement = document.createElement('a');
-				hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
-				hiddenElement.target = '_blank';
 
 				var fileprefix = "log";
 				var extension =".html";
@@ -615,14 +612,17 @@ function start_vue() {
 				var filename = fileprefix+datesegment+extension;
 
 				//Unlikely to work unfortunately, not supported in any version of IE, only Edge
+				var hiddenElement = document.createElement('a');
 				if (hiddenElement.download !== undefined) {
-            		hiddenElement.download = filename;
-            		hiddenElement.click();
+					hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave); //Has a problem in byond 512 due to weird unicode handling
+					hiddenElement.target = '_blank';
+					hiddenElement.download = filename;
+					hiddenElement.click();
         		//Probably what will end up getting used
-        		} else {
-        			let blob = new Blob([textToSave], {type: 'text/html;charset=utf8;'});
-        			saved = window.navigator.msSaveOrOpenBlob(blob, filename);
-        		}
+				} else {
+					var blob = new Blob([textToSave], {type: 'text/html;charset=utf8;'});
+					saved = window.navigator.msSaveOrOpenBlob(blob, filename);
+				}
 			},
 			do_latency_test: function() {
 				send_latency_check();
