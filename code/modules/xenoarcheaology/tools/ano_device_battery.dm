@@ -105,7 +105,6 @@
 			//handle charge
 			if(world.time - last_activation > interval)
 				if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
-					world << "Effect Touch"
 					if(interval > 0)
 						//apply the touch effect to the holder
 						if(holder)
@@ -117,7 +116,6 @@
 						inserted_battery.use_power(energy_consumed_on_touch)
 					else
 						//consume power equal to time passed
-						world << world.time - last_process
 						inserted_battery.use_power(world.time - last_process)
 
 					inserted_battery.battery_effect.DoEffectTouch(holder)
@@ -126,12 +124,10 @@
 					inserted_battery.battery_effect.chargelevel = inserted_battery.battery_effect.chargelevelmax
 
 					//consume power relative to the time the artifact takes to charge and the effect range
-					world << (inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax) / 2
 					inserted_battery.use_power((inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax) / 2)
 
 				else
 					//consume power equal to time passed
-					world << world.time - last_process
 					inserted_battery.use_power(world.time - last_process)
 
 				last_activation = world.time
