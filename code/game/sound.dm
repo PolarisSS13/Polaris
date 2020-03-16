@@ -185,6 +185,12 @@
 					'sound/weapons/effects/ric5.ogg')
 			if("bullet_miss")
 				soundin = pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg')
+			if ("pickaxe")
+				soundin = pick(
+					'sound/weapons/mine/pickaxe1.ogg',
+					'sound/weapons/mine/pickaxe2.ogg',
+					'sound/weapons/mine/pickaxe3.ogg',
+					'sound/weapons/mine/pickaxe4.ogg')
 	return soundin
 
 //Are these even used?

@@ -115,7 +115,7 @@
 	if(incapacitated())
 		return FALSE
 
-	if(hovering)
+	if(hovering || is_incorporeal())
 		return TRUE
 
 	if(Process_Spacemove())
