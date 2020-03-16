@@ -3,12 +3,18 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
 	var/datum/artifact_effect/battery_effect
-	var/capacity = 300
+	var/capacity = 500
 	var/stored_charge = 0
 	var/effect_id = ""
 
+/obj/item/weapon/anobattery/advanced
+	name = "advanced anomaly battery"
+	capacity = 3000
+
+/*
 /obj/item/weapon/anobattery/New()
 	battery_effect = new()
+*/
 
 /obj/item/weapon/anobattery/proc/UpdateSprite()
 	var/p = (stored_charge/capacity)*100
@@ -99,28 +105,33 @@
 			//handle charge
 			if(world.time - last_activation > interval)
 				if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
+					world << "Effect Touch"
 					if(interval > 0)
 						//apply the touch effect to the holder
 						if(holder)
 							to_chat(holder, "the \icon[src] [src] held by [holder] shudders in your grasp.")
 						else
 							src.loc.visible_message("the \icon[src] [src] shudders.")
-						inserted_battery.battery_effect.DoEffectTouch(holder)
 
 						//consume power
 						inserted_battery.use_power(energy_consumed_on_touch)
 					else
 						//consume power equal to time passed
+						world << world.time - last_process
 						inserted_battery.use_power(world.time - last_process)
+
+					inserted_battery.battery_effect.DoEffectTouch(holder)
 
 				else if(inserted_battery.battery_effect.effect == EFFECT_PULSE)
 					inserted_battery.battery_effect.chargelevel = inserted_battery.battery_effect.chargelevelmax
 
 					//consume power relative to the time the artifact takes to charge and the effect range
-					inserted_battery.use_power(inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax)
+					world << (inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax) / 2
+					inserted_battery.use_power((inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax) / 2)
 
 				else
 					//consume power equal to time passed
+					world << world.time - last_process
 					inserted_battery.use_power(world.time - last_process)
 
 				last_activation = world.time
@@ -167,6 +178,7 @@
 			if(!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 			time_end = world.time + duration
+			last_process = world.time
 	if(href_list["shutdown"])
 		activated = 0
 	if(href_list["ejectbattery"])

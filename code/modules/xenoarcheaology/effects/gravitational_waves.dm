@@ -14,12 +14,12 @@
 	if(prob(10 + seconds_since_last_pull))
 		holder.visible_message("<span class='alien'>\The [holder] distorts as local gravity intensifies, and shifts toward it.</span>")
 		last_wave_pull = world.time
-		gravwave(holder, effectrange, STAGE_TWO)
+		gravwave(get_turf(holder), effectrange, STAGE_TWO)
 
 /datum/artifact_effect/gravity_wave/DoEffectPulse()
 	holder.visible_message("<span class='alien'>\The [holder] distorts as local gravity intensifies, and shifts toward it.</span>")
-	gravwave(holder, effectrange, STAGE_TWO)
+	gravwave(get_turf(holder), effectrange, STAGE_TWO)
 
 proc/gravwave(var/atom/target, var/pull_range = 7, var/pull_power = STAGE_TWO)
-	for(var/atom/A in view(pull_range, target))
+	for(var/atom/A in oview(pull_range, target))
 		A.singularity_pull(target, pull_power)
