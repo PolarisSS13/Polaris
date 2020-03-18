@@ -70,7 +70,6 @@
 /datum/ai_holder/proc/melee_attack(atom/A)
 	pre_melee_attack(A)
 	. = holder.IAttack(A)
-	world.log << "melee_attack: [.]"
 	if(. == ATTACK_SUCCESSFUL)
 		post_melee_attack(A)
 
