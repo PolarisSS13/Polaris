@@ -1,5 +1,5 @@
 SUBSYSTEM_DEF(events)
-	name = "Events"
+	name = "Events (Legacy)"
 	wait = 20
 
 	var/list/datum/event/active_events = list()

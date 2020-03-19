@@ -40,7 +40,6 @@ var/list/overminds = list()
 	color = blob_type.complementary_color
 	if(blob_core)
 		blob_core.update_icon()
-		level_seven_blob_announcement(blob_core)
 
 	..(newloc)
 

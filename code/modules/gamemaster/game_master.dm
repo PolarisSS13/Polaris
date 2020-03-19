@@ -3,7 +3,7 @@
 // individual player (IC) skill, and such, in order to try to choose the best actions to take in order to add spice or variety to
 // the round.
 
-/datum/game_master
+/datum/game_master_old
 	var/suspended = TRUE 				// If true, it will not do anything.
 	var/ignore_time_restrictions = FALSE// Useful for debugging without needing to wait 20 minutes each time.
 	var/list/available_actions = list()	// A list of 'actions' that the GM has access to, to spice up a round, such as events.
@@ -15,7 +15,7 @@
 	var/next_action = 0					// Minimum amount of time of nothingness until the GM can pick something again.
 	var/last_department_used = null		// If an event was done for a specific department, it is written here, so it doesn't do it again.
 
-/datum/game_master/New()
+/datum/game_master_old/New()
 	..()
 	available_actions = init_subtypes(/datum/gm_action)
 	for(var/datum/gm_action/action in available_actions)
@@ -32,7 +32,7 @@
 			else
 				sleep(30 SECONDS)
 
-/datum/game_master/process()
+/datum/game_master_old/process()
 	if(ticker && ticker.current_state == GAME_STATE_PLAYING && !suspended)
 		adjust_staleness(1)
 		adjust_danger(-1)
@@ -49,7 +49,7 @@
 			start_action()
 
 // This is run before committing to an action/event.
-/datum/game_master/proc/pre_action_checks()
+/datum/game_master_old/proc/pre_action_checks()
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 		log_debug("Game Master unable to start event: Ticker is nonexistant, or the game is not ongoing.")
 		return FALSE
@@ -73,7 +73,7 @@
 		return FALSE
 	return TRUE
 
-/datum/game_master/proc/start_action()
+/datum/game_master_old/proc/start_action()
 	if(!pre_action_checks()) // Make sure we're not doing last minute events, or early events.
 		return
 	log_debug("Game Master now starting action decision.")
@@ -92,7 +92,7 @@
 			log_debug("[choice.name] was chosen by the Game Master, and is now being ran.")
 			run_action(choice)
 
-/datum/game_master/proc/run_action(var/datum/gm_action/action)
+/datum/game_master_old/proc/run_action(var/datum/gm_action/action)
 	action.set_up()
 	action.start()
 	action.announce()
@@ -105,7 +105,7 @@
 	last_department_used = action.departments[1]
 
 
-/datum/game_master/proc/decide_best_action(var/list/most_active_departments)
+/datum/game_master_old/proc/decide_best_action(var/list/most_active_departments)
 	if(!most_active_departments.len) // Server's empty?
 		log_debug("Game Master failed to find any active departments.")
 		return list()
