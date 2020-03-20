@@ -117,12 +117,12 @@
 
 /obj/machinery/recharger/process()
 	if(stat & (NOPOWER|BROKEN) || !anchored)
-		update_use_power(0)
+		update_use_power(USE_POWER_OFF)
 		icon_state = icon_state_idle
 		return
 
 	if(!charging)
-		update_use_power(1)
+		update_use_power(USE_POWER_IDLE)
 		icon_state = icon_state_idle
 	else
 		var/obj/item/weapon/cell/C = charging.get_cell()
@@ -130,10 +130,10 @@
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(CELLRATE*efficiency)
-				update_use_power(2)
+				update_use_power(USE_POWER_ACTIVE)
 			else
 				icon_state = icon_state_charged
-				update_use_power(1)
+				update_use_power(USE_POWER_IDLE)
 
 /obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)

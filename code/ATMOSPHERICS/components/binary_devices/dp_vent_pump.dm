@@ -214,10 +214,10 @@
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
 	if(signal.data["power"])
-		use_power = text2num(signal.data["power"])
+		update_use_power(text2num(signal.data["power"]))
 
 	if(signal.data["power_toggle"])
-		use_power = !use_power
+		update_use_power(!use_power)
 
 	if(signal.data["direction"])
 		pump_direction = text2num(signal.data["direction"])

@@ -57,7 +57,7 @@
 		update_icon()
 		return
 	enabled = !enabled
-	use_power = enabled + 1
+	update_use_power(enabled ? USE_POWER_ACTIVE : USE_POWER_IDLE)
 	update_icon()
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 

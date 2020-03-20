@@ -52,11 +52,11 @@
 	if(stat)
 		return
 	if(busy)
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 		progress += speed
 		check_build()
 	else
-		use_power = 1
+		update_use_power(USE_POWER_IDLE)
 	update_icon()
 
 /obj/machinery/pros_fabricator/update_icon()

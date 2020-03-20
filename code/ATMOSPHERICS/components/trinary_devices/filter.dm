@@ -73,7 +73,7 @@
 		icon_state += use_power ? "on" : "off"
 	else
 		icon_state += "off"
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 
 /obj/machinery/atmospherics/trinary/atmos_filter/process()
 	..()

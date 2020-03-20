@@ -173,7 +173,7 @@
 		return 1
 
 	if (!node)
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 	if(!can_pump())
 		return 0
 
@@ -295,10 +295,10 @@
 		pump_direction = 1
 
 	if(signal.data["power"] != null)
-		use_power = text2num(signal.data["power"])
+		update_use_power(text2num(signal.data["power"]))
 
 	if(signal.data["power_toggle"] != null)
-		use_power = !use_power
+		update_use_power(!use_power)
 
 	if(signal.data["checks"] != null)
 		if (signal.data["checks"] == "default")

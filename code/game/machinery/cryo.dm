@@ -291,7 +291,7 @@
 	unbuckle_mob(occupant, force = TRUE)
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
-	update_use_power(1)
+	update_use_power(USE_POWER_IDLE)
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if(stat & (NOPOWER|BROKEN))
@@ -322,7 +322,7 @@
 	vis_contents |= occupant
 	occupant.pixel_y += 19
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
-	update_use_power(2)
+	update_use_power(USE_POWER_ACTIVE)
 //	M.metabslow = 1
 	add_fingerprint(usr)
 	update_icon()

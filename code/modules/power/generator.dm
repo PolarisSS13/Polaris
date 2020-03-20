@@ -156,7 +156,7 @@
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet.")
-		use_power = anchored
+		update_use_power(anchored ? USE_POWER_IDLE : USE_POWER_ACTIVE)
 		if(anchored) // Powernet connection stuff.
 			connect_to_network()
 		else

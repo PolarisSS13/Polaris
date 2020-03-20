@@ -142,10 +142,10 @@
 
 	// Update power usage:
 	if(on)
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 		active_power_usage = electricity_level*15
 	else
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 
 	// Overload conditions:
 	/* // Eeeehhh kinda stupid

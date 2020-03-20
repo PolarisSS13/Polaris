@@ -67,7 +67,7 @@
 	last_flow_rate = 0
 
 	if(error_check())
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return 0

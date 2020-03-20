@@ -319,14 +319,14 @@ var/list/ai_verbs_default = list(
 		qdel(src)
 		return
 	if(powered_ai.APU_power)
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 		return
 	if(!powered_ai.anchored)
 		loc = powered_ai.loc
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 		use_power(50000) // Less optimalised but only called if AI is unwrenched. This prevents usage of wrenching as method to keep AI operational without power. Intellicard is for that.
 	if(powered_ai.anchored)
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 
 /mob/living/silicon/ai/proc/pick_icon()
 	set category = "AI Settings"

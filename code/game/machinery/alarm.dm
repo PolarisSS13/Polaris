@@ -192,7 +192,7 @@
 	if(!regulating_temperature)
 		//check for when we should start adjusting temperature
 		if(!get_danger_level(target_temperature, TLV["temperature"]) && abs(environment.temperature - target_temperature) > 2.0)
-			update_use_power(2)
+			update_use_power(USE_POWER_ACTIVE)
 			regulating_temperature = 1
 			audible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click and a faint electronic hum.")
@@ -200,7 +200,7 @@
 	else
 		//check for when we should stop adjusting temperature
 		if(get_danger_level(target_temperature, TLV["temperature"]) || abs(environment.temperature - target_temperature) <= 0.5)
-			update_use_power(1)
+			update_use_power(USE_POWER_IDLE)
 			regulating_temperature = 0
 			audible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 			"You hear a click as a faint electronic humming stops.")
