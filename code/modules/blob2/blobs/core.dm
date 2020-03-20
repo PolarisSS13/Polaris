@@ -78,6 +78,15 @@ var/list/blob_cores = list()
 /obj/structure/blob/core/volatile_alluvium
 	desired_blob_type = /datum/blob_type/volatile_alluvium
 
+/obj/structure/blob/core/ravenous_macrophage
+	desired_blob_type = /datum/blob_type/ravenous_macrophage
+
+/obj/structure/blob/core/roiling_mold
+	desired_blob_type = /datum/blob_type/roiling_mold
+
+/obj/structure/blob/core/ectoplasmic_horror
+	desired_blob_type = /datum/blob_type/ectoplasmic_horror
+
 /obj/structure/blob/core/classic
 	desired_blob_type = /datum/blob_type/classic
 

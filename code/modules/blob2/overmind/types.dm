@@ -595,6 +595,7 @@
 /datum/blob_type/radioactive_ooze/on_pulse(var/obj/structure/blob/B)
 	SSradiation.radiate(B, 200)
 
+// A blob that steals your weapon.
 /datum/blob_type/volatile_alluvium
 	name = "volatile alluvium"
 	desc = "A churning, earthy mass that moves in waves."
@@ -642,3 +643,161 @@
 		B.adjust_integrity(-(damage))
 		if(B && prob(damage))
 			B.visible_message("<span class='danger'>The [name] begins to crumble!</span>")
+
+// A blob that produces noxious smoke-clouds and recycles its dying parts.
+/datum/blob_type/ravenous_macrophage
+	name = "ravenous macrophage"
+	desc = "A disgusting gel that reeks of death."
+	ai_desc = "resourceful"
+	effect_desc = "Produces noxious fumes, and melts prey with acidic attacks. Weak to brute damage."
+	difficulty = BLOB_DIFFICULTY_MEDIUM
+	color = "#639b3f"
+	complementary_color = "#d1ec3c"
+	damage_type = BIOACID
+	damage_lower = 20
+	damage_upper = 30
+	armor_check = "bio"
+	brute_multiplier = 0.8
+	burn_multiplier = 0.3
+	spread_modifier = 0.8
+	ai_aggressiveness = 70
+	attack_message = "The macrophage splashes you"
+	attack_message_living = ", and you feel a horrible burning"
+	attack_message_synth = ", and your body begins to corrode"
+	attack_verb = "splashes"
+
+/datum/blob_type/ravenous_macrophage/on_pulse(var/obj/structure/blob/B)
+	var/mob/living/L = locate() in range(world.view, B)
+	if(prob(1) && L.mind && !L.stat)	// There's some active living thing nearby, produce offgas.
+		var/turf/T = get_turf(B)
+		var/datum/effect/effect/system/smoke_spread/noxious/BS = new /datum/effect/effect/system/smoke_spread/noxious
+		BS.attach(T)
+		BS.set_up(3, 0, T)
+		playsound(T, 'sound/effects/smoke.ogg', 50, 1, -3)
+		BS.start()
+
+/datum/blob_type/ravenous_macrophage/on_death(obj/structure/blob/B)
+	var/obj/structure/blob/other = locate() in oview(2, B)
+	if(other)
+		B.visible_message("<span class='danger'>The dying mass is rapidly consumed by the nearby [other]!</span>")
+		if(other.overmind)
+			other.overmind.add_points(rand(1,4))
+
+// Blob that fires biological mortar shells from its factories.
+/datum/blob_type/roiling_mold
+	name = "roiling mold"
+	desc = "A bubbling, creeping mold."
+	ai_desc = "bombarding"
+	effect_desc = "Bombards nearby organisms with toxic spores. Weak to all damage."
+	difficulty = BLOB_DIFFICULTY_MEDIUM
+	color = "#571509"
+	complementary_color = "#ec4940"
+	damage_type = BRUTE
+	damage_lower = 5
+	damage_upper = 20
+	armor_check = "melee"
+	brute_multiplier = 1.2
+	burn_multiplier = 1.2
+	spread_modifier = 0.8
+	can_build_factories = TRUE
+	ai_aggressiveness = 50
+	attack_message = "The mold whips you"
+	attack_message_living = ", and you feel a searing pain"
+	attack_message_synth = ", and your shell buckles"
+	attack_verb = "lashes"
+	spore_projectile = /obj/item/projectile/arc/spore
+
+/datum/blob_type/roiling_mold/proc/find_target(var/obj/structure/blob/B, var/tries = 0, var/list/previous_targets = null)
+	if(tries > 3)
+		return
+	var/mob/living/L = locate() in (view(world.view + 3, get_turf(B)) - view(2,get_turf(B)) - previous_targets)	// No adjacent mobs.
+
+	if(!check_trajectory(L, B, PASSTABLE))
+		if(!LAZYLEN(previous_targets))
+			previous_targets = list()
+
+		previous_targets |= L
+
+		L = find_target(B, tries + 1, previous_targets)
+
+	return L
+
+/datum/blob_type/roiling_mold/on_pulse(var/obj/structure/blob/B)
+	var/mob/living/L = find_target(B)
+
+	if(!istype(L))
+		return
+
+	if(istype(B, /obj/structure/blob/factory) && L.stat != DEAD && prob(ai_aggressiveness) && L.faction != "blob")
+		var/obj/item/projectile/arc/spore/P = new(get_turf(B))
+		P.launch_projectile(L, BP_TORSO, B)
+
+// A blob that drains energy from nearby mobs in order to fuel itself, and 'negates' some attacks extradimensionally.
+/datum/blob_type/ectoplasmic_horror
+	name = "ectoplasmic horror"
+	desc = "A disgusting translucent slime that feels out of place."
+	ai_desc = "dodging"
+	effect_desc = "Drains energy from nearby life-forms in order to expand itself. Weak to all damage."
+	difficulty = BLOB_DIFFICULTY_MEDIUM
+	color = "#72109eaa"
+	complementary_color = "#1a9de8"
+	damage_type = HALLOSS
+	damage_lower = 10
+	damage_upper = 30
+	armor_check = "energy"
+	brute_multiplier = 1.5
+	burn_multiplier = 1.5
+	spread_modifier = 0.9
+	ai_aggressiveness = 50
+	attack_message = "The horror strikes you"
+	attack_message_living = ", and you feel a wave of exhaustion"
+	attack_message_synth = ", and your systems begin to slow"
+	attack_verb = "strikes"
+	can_build_factories = TRUE
+	factory_type = /obj/structure/blob/factory/sluggish
+	spore_type = /mob/living/simple_mob/blob/spore/weak
+
+	var/list/active_beams = list()
+
+/datum/blob_type/ectoplasmic_horror/on_pulse(var/obj/structure/blob/B)
+	if(B.type == /obj/structure/blob && (locate(/obj/structure/blob/node) in oview(2, get_turf(B))))
+		B.visible_message("<span class='alien'>The [name] quakes, before hardening.</span>")
+		new/obj/structure/blob/shield(get_turf(B), B.overmind)
+		qdel(B)
+
+	if(istype(B, /obj/structure/blob/factory))
+		listclearnulls(active_beams)
+		var/atom/movable/beam_origin = B
+		for(var/mob/living/L in oview(world.view, B))
+			if(L.stat == DEAD || L.faction == "blob")
+				continue
+			if(prob(5))
+				var/beamtarget_exists = FALSE
+
+				if(active_beams.len)
+					for(var/datum/beam/Beam in active_beams)
+						if(Beam.target == L)
+							beamtarget_exists = TRUE
+							break
+
+				if(!beamtarget_exists && GetAnomalySusceptibility(L) >= 0.5)
+					B.visible_message("<span class='danger'>\The [B] lashes out at \the [L]!</span>")
+					var/datum/beam/drain_beam = beam_origin.Beam(L, icon_state = "drain_life", time = 10 SECONDS)
+					active_beams |= drain_beam
+					spawn(9 SECONDS)
+						if(B && drain_beam)
+							B.visible_message("<span class='alien'>\The [B] siphons energy from \the [L]</span>")
+							L.add_modifier(/datum/modifier/berserk_exhaustion, 60 SECONDS)
+							B.overmind.add_points(rand(10,30))
+							if(!QDELETED(drain_beam))
+								qdel(drain_beam)
+
+/datum/blob_type/ectoplasmic_horror/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
+	if(prob(round(damage * 0.5)))
+		B.visible_message("<span class='alien'>\The [B] shimmers, distorting through some unseen dimension.</span>")
+		var/initial_alpha = B.alpha
+		spawn()
+			animate(B,alpha = initial_alpha, alpha = 10, time = 10)
+			animate(B,alpha = 10, alpha = initial_alpha, time = 10)
+		return 0
+	return ..()

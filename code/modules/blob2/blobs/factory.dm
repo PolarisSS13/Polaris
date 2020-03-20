@@ -51,3 +51,8 @@
 	name = "sluggish factory blob"
 	max_spores = 4
 	spore_cooldown = 16 SECONDS
+
+/obj/structure/blob/factory/turret	// Produces a single spore slowly, but is intended to be used as a 'mortar' by the blob type.
+	name = "volatile factory blob"
+	max_spores = 1
+	spore_cooldown = 10 SECONDS
