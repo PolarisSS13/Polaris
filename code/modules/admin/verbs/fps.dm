@@ -19,5 +19,5 @@
 	var/msg = "[key_name(src)] has modified world.fps to [new_fps]"
 	log_admin(msg, 0)
 	message_admins(msg, 0)
-	world.fps = new_fps
+	world.change_fps(new_fps)
 	feedback_add_details("admin_verb", "SETFPS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
