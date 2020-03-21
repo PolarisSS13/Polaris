@@ -75,12 +75,14 @@ var/global/list/light_type_cache = list()
 		to_chat(user, "<span class='danger'>This casing doesn't support power cells for backup power.</span>")
 
 /obj/machinery/light_construct/attack_hand(mob/user)
+	. = ..()
+	if(.) 
+		return . // obj/machinery/attack_hand returns 1 if user can't use the machine
 	if(cell)
 		user.visible_message("[user] removes [cell] from [src]!","<span class='notice'>You remove [cell].</span>")
 		user.put_in_hands(cell)
 		cell.update_icon()
 		cell = null
-		add_fingerprint(user)
 
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
