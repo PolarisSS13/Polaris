@@ -7,7 +7,7 @@
 
 	idle_power_usage = 100
 	active_power_usage = 1000
-	use_power = 1
+	use_power = USE_POWER_IDLE
 
 	var/spawn_progress_time = 0
 	var/max_spawn_time = 50

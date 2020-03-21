@@ -10,7 +10,7 @@
 	density = 1
 	var/previous_power_state = 0
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	active_power_usage = 2000
 	idle_power_usage = 1000
 

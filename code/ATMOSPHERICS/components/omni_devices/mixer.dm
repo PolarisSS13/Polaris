@@ -6,7 +6,7 @@
 	icon_state = "map_mixer"
 	pipe_state = "omni_mixer"
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 3700			//3700 W ~ 5 HP
 

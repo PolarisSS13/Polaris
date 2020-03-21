@@ -5,7 +5,7 @@
 	icon = 'icons/obj/holosign.dmi'
 	icon_state = "sign_off"
 	plane = MOB_PLANE
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 2
 	active_power_usage = 4
 	anchored = 1

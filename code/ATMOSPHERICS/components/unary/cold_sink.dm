@@ -8,7 +8,7 @@
 	icon_state = "freezer_0"
 	density = 1
 	anchored = 1
-	use_power = 0
+	use_power = USE_POWER_OFF
 	idle_power_usage = 5			// 5 Watts for thermostat related circuitry
 	circuit = /obj/item/weapon/circuitboard/unary_atmos/cooler
 

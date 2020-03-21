@@ -11,7 +11,7 @@
 	var/datum/omni_port/input
 	var/datum/omni_port/output
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 

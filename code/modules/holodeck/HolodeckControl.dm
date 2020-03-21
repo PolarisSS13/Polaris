@@ -4,7 +4,7 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
 	var/item_power_usage = 500
 
@@ -301,7 +301,7 @@
 
 	last_change = world.time
 	active = 1
-	use_power = 2
+	use_power = USE_POWER_ACTIVE
 
 	for(var/item in holographic_objs)
 		derez(item)
@@ -362,7 +362,7 @@
 
 	last_gravity_change = world.time
 	active = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 
 	if(A.has_gravity)
 		A.gravitychange(0)
@@ -377,4 +377,4 @@
 		linkedholodeck.gravitychange(1)
 
 	active = 0
-	use_power = 1
+	use_power = USE_POWER_IDLE

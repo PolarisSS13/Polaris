@@ -18,7 +18,7 @@
 
 	var/mirror_first_occupant = TRUE	// Do we force the newly produced body to look like the occupant?
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 15
 	active_power_usage = 200
 	light_color = "#FF0000"

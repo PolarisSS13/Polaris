@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 0
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 100 //Watts, I hope.  Just enough to do the computer and display things.
 
 	var/max_power = 500000

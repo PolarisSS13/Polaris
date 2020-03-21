@@ -7,7 +7,7 @@ var/list/floor_light_cache = list()
 	desc = "A backlit floor panel."
 	layer = TURF_LAYER+0.001
 	anchored = 0
-	use_power = 2
+	use_power = USE_POWER_ACTIVE
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = LIGHT
@@ -91,7 +91,7 @@ var/list/floor_light_cache = list()
 		update_brightness()
 
 /obj/machinery/floor_light/proc/update_brightness()
-	if(on && use_power == 2)
+	if(on && use_power == USE_POWER_ACTIVE)
 		if(light_range != default_light_range || light_power != default_light_power || light_color != default_light_colour)
 			set_light(default_light_range, default_light_power, default_light_colour)
 	else
