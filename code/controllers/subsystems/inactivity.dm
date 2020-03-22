@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(inactivity)
 	while(client_list.len)
 		var/client/C = client_list[client_list.len]
 		client_list.len--
-		if(!C.holder && C.is_afk(config.kick_inactive MINUTES) && !isobserver(C.mob))
+		if(!C.holder && C.is_afk(config.kick_inactive MINUTES))
 
 			to_chat(C, "<span class='warning'>You have been inactive for more than [config.kick_inactive] minute\s and have been disconnected.</span>")
 
@@ -33,6 +33,9 @@ SUBSYSTEM_DEF(inactivity)
 						job = H.job
 					if(job)
 						information = " while [job]."
+
+				else if(isobserver(C.mob))
+					information = "while a ghost."
 
 				else if(issilicon(C.mob))
 					information = " while a silicon."
