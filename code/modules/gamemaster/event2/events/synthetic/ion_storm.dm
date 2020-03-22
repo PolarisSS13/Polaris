@@ -7,7 +7,7 @@
 
 /datum/event2/meta/ion_storm/get_weight()
 	var/bots = metric.count_people_in_department(DEPARTMENT_SYNTHETIC)
-	var/weight = 5 + (bots * 20)
+	var/weight = 5 + (bots * 40) // A small chance even if no synths are on, since it can still emag beepsky.
 	return weight
 
 
@@ -28,6 +28,8 @@
 			if(istype(target, /mob/living/silicon/robot))
 				var/mob/living/silicon/robot/R = target
 				if(R.connected_ai)
+					continue
+				if(R.shell)
 					continue
 
 			// Crew member names, and excluding off station antags, are handled by `generate_ion_law()` automatically.

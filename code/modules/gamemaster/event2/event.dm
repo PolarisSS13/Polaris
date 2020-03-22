@@ -65,6 +65,58 @@ This allows for events that have their announcement happen after the end itself.
 /datum/event2/event/proc/get_location_z_levels()
 	return using_map.station_levels
 
+// Returns a list of empty turfs in the same area.
+/datum/event2/event/proc/find_random_turfs(minimum_free_space = 5, ignore_occupancy = FALSE)
+	// In the future it might be better to have areas themselves have a 'dont put event stuff here' var instead.
+	var/list/excluded_areas = list(
+			/area/submap,
+			/area/shuttle,
+			/area/crew_quarters,
+			/area/holodeck,
+			/area/engineering/engine_room
+		)
+	var/list/area/grand_list_of_areas = get_station_areas(excluded_areas)
+	if(!LAZYLEN(grand_list_of_areas))
+		return list()
+	for(var/i = 1 to 10)
+		var/area/A = pick(grand_list_of_areas)
+		if(!ignore_occupancy && is_area_occupied(A))
+			continue // Occupied.
+		var/list/turfs = list()
+		for(var/turf/T in A)
+			if(turf_clear(T))
+				turfs += T
+		if(turfs.len < minimum_free_space)
+			continue // Not enough free space.
+		return turfs
+	return list()
+
+
+/*
+	var/list/area/grand_list_of_areas = get_station_areas(excluded)
+	if(grand_list_of_areas.len)
+		for(var/i in 1 to 10)
+			var/area/A = pick(grand_list_of_areas)
+			if(is_area_occupied(A))
+				log_debug("Blob infestation event: Rejected [A] because it is occupied.")
+				continue
+			var/list/turfs = list()
+			for(var/turf/simulated/floor/F in A)
+				if(turf_clear(F))
+					turfs += F
+			if(turfs.len < 5 + number_of_blobs)
+				log_debug("Blob infestation event: Rejected [A] because it has too little clear turfs.")
+				continue
+			open_turfs = turfs.Copy()
+			target_area = A
+			log_debug("Blob infestation event: Going to place blob at [A].")
+			break
+
+	if(!open_turfs.len)
+		log_debug("Blob infestation event: Giving up after too many failures to pick a blob spot.")
+		abort()
+*/
+
 // Starts the event.
 /datum/event2/event/proc/execute()
 	time_started = world.time

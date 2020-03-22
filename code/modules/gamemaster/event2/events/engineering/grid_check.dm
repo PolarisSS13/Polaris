@@ -23,7 +23,11 @@
 	return highest_overpower
 
 /datum/event2/meta/grid_check/get_weight()
-	return 50 + (metric.count_people_in_department(DEPARTMENT_ENGINEERING) * 20) + (50 * get_overpower())
+	var/population_factor = metric.count_people_in_department(DEPARTMENT_ENGINEERING) * 10
+	var/overpower_factor = 50 * get_overpower() // Will be 0 if not overloaded at all, and 50 if turbines are outputting twice as much as rated.
+	return (20 + population_factor + overpower_factor) / (times_ran + 1)
+
+
 
 /datum/event2/event/grid_check
 	var/obj/machinery/power/generator/engine // The turbine that will send a power spike.

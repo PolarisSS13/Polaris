@@ -26,6 +26,15 @@
 	// If true, the event won't have it's `enabled` var set to FALSE when ran by the GM system.
 	var/reusable = FALSE
 
+	// A string used to identify a 'class' of similar events.
+	// If the event is not reusable, than all events sharing the same class are disabled.
+	// Useful if you only ever want one event per round while having a lot of different subtypes of the event.
+	var/event_class = null
+
+	// Counter for how many times this event has been picked by the GM.
+	// Can be used to make event repeats discouraged but not forbidden by adjusting the weight based on it.
+	var/times_ran = 0
+
 	// A reference to the system that initialized us.
 	var/datum/controller/subsystem/game_master/GM = null
 
@@ -42,13 +51,10 @@
 	return ..()
 
 
-// Called by the GM system to actually start an event,
-// and makes it so events that should only be ran once are made to not be usable again.
+// Called by the GM system to actually start an event.
 /datum/event2/meta/proc/make_event()
 	var/datum/event2/event/E = new event_type(GM)
 	E.execute()
-	if(!reusable)
-		enabled = FALSE
 	return E
 
 // Returns a TRUE or FALSE for if the GM system should be able to pick this event.

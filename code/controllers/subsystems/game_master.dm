@@ -69,6 +69,19 @@ SUBSYSTEM_DEF(game_master)
 
 /datum/controller/subsystem/game_master/proc/run_event(datum/event2/meta/chosen_event)
 	var/datum/event2/event/E = chosen_event.make_event()
+
+	chosen_event.times_ran++
+
+	if(!chosen_event.reusable)
+		// Disable this event, so it only gets picked once.
+		chosen_event.enabled = FALSE
+		if(chosen_event.event_class)
+			// Disable similar events, too.
+			for(var/M in available_events)
+				var/datum/event2/meta/meta = M
+				if(meta.event_class == chosen_event.event_class)
+					meta.enabled = FALSE
+
 	SSevent_ticker.event_started(E)
 	adjust_danger(chosen_event.chaos)
 	adjust_staleness(-(10 + chosen_event.chaos)) // More chaotic events reduce staleness more, e.g. a 25 chaos event will reduce it by 35.
@@ -171,7 +184,11 @@ SUBSYSTEM_DEF(game_master)
 
 		for(var/E in best_events)
 			var/datum/event2/meta/event = E
-			weighted_events[event] = event.get_weight()
+			var/weight = event.get_weight()
+			if(weight <= 0)
+				continue
+			weighted_events[event] = weight
+		log_game_master("Filtered down to [weighted_events.len] choice\s.")
 
 		var/datum/event2/meta/choice = pickweight(weighted_events)
 
@@ -237,10 +254,10 @@ SUBSYSTEM_DEF(game_master)
 			. += event
 
 
-// The `old_like` game master tries to act like the old system, choosing events without any specific goals.
+// The `classic` game master tries to act like the old system, choosing events without any specific goals.
 // * Has no goals, and instead operates purely off of the weights of the events it has.
 // * Does not react to danger at all.
-/datum/game_master/old_like/choose_event()
+/datum/game_master/classic/choose_event()
 	var/list/weighted_events = list()
 	for(var/E in ticker.available_events)
 		var/datum/event2/meta/event = E
@@ -377,7 +394,8 @@ SUBSYSTEM_DEF(game_master)
 	dat += "<th>Event Name</th>"
 	dat += "<th>Involved Departments</th>"
 	dat += "<th>Chaos</th>"
-	dat += "<th>Current Weight</th>"
+	dat += "<th>Chaotic Threshold</th>"
+	dat += "<th>Weight</th>"
 	dat += "<th>Buttons</th>"
 	dat += "</tr>"
 
@@ -390,6 +408,7 @@ SUBSYSTEM_DEF(game_master)
 			dat += "<td>[event.name]</td>"
 		dat += "<td>[english_list(event.departments)]</td>"
 		dat += "<td>[event.chaos]</td>"
+		dat += "<td>[event.chaotic_threshold]</td>"
 		dat += "<td>[event.get_weight()]</td>"
 		dat += "<td>[href(event, list("force" = 1), "\[Force\]")] [href(event, list("toggle" = 1), "\[Toggle\]")]</td>"
 		dat += "</tr>"
