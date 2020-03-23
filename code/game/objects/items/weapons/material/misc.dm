@@ -71,15 +71,15 @@
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list("mushed", "splatted", "splooshed", "splushed") // Words that totally exist.
 
-/obj/item/weapon/material/snow/snowball/attack_self(mob/user as mob)
+/obj/item/weapon/material/snow/snowball/attack_self(mob/user as mob)	//TFF 22/33/20 - changes to to_chat line to be show only to self. ToDo: proper fix for the thing.
 	if(user.a_intent == I_HURT)
-		visible_message("[user] has smashed the snowball in their hand!")
+		//visible_message("[user] has smashed the snowball in their hand!", "You smash the snowball in your hand.")
 		to_chat(user, "<span class='notice'>You smash the snowball in your hand.</span>")
 		var/atom/S = new /obj/item/stack/material/snow(user.loc)
 		del(src)
 		user.put_in_hands(S)
 	else
-		visible_message("[user] starts compacting the snowball.")
+		//visible_message("[user] starts compacting the snowball.", "You start compacting the snowball.")
 		to_chat(user, "<span class='notice'>You start compacting the snowball.</span>")
 		if(do_after(user, 2 SECONDS))
 			var/atom/S = new /obj/item/weapon/material/snow/snowball/reinforced(user.loc)
