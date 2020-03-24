@@ -252,19 +252,39 @@
 	if(!powered())
 		on = FALSE
 
-	if(!on || (use_atmos && (!connected_port || avg_pressure < 1000)))
+	if(!on || (use_atmos && (!connected_port || (avg_pressure / avg_temp) < (1000 / T20C)))) // This mostly respects gas laws by ignoring volume but it should make it usable at low temps
 		current_temp = round((current_temp + T20C) / 2)
 
 	else if(on)
 		if(!use_atmos)
 			if(current_temp != round(target_temp))
-				var/shift_mod = 0
-				if(current_temp < target_temp)
-					shift_mod = 1
-				else if(current_temp > target_temp)
-					shift_mod = -1
-				current_temp = CLAMP(round((current_temp + 1 * shift_mod) + (rand(-5, 5) / 10)), min_temp, max_temp)
+				// Some horrible bastardized attempt at approximating the values of a logistic function, bounded by (max_temp, target_temp, min_temp)
+				// So we can attempt to estimate the change in temperature for this process() step
+
+				// Apply inverse of the logistic function to fetch our x value
+				var/x = -1 * log((current_temp < target_temp ? (target_temp - min_temp) / (current_temp - min_temp) : (max_temp - target_temp) / (max_temp - current_temp)) - 1)
+				if(!x)
+					x = 0 // Keep null from propagating into the temp
+
+				// Apply the derivative of the logistic function to get the slope
+				var/dy = (NUM_E ** (-1 * x)) / ((1 + (NUM_E ** (-1 * x))) ** 2)
+
+				// Compute temperature diff, being farther from the target should result in larger steps
+				// IMPORTANT: If you want to tweak how quickly this changes, tweak this *10!
+				// As of initial testing, a *10 gives ~5-6 minutes to go from room temp to 500C (+/-0.5C)
+				var/temp_diff = (current_temp < target_temp ? dy * 10 * target_temp / current_temp : dy * -10 * current_temp / target_temp)
+
+				world << "t [current_temp]\tdt [temp_diff]\tL [L]\tk [k]\ty [y]\tx [x]\tdy [dy]"
+
+
+				current_temp = CLAMP(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
 				use_power(power_rating * CELLRATE)
+
+				if(target_temp == round(current_temp, 1.0))
+					current_temp = target_temp // Hard set it so we don't need to worry about exact decimals any more, after we've been keeping track of it all this time
+					playsound(src, 'sound/machines/ping.ogg', 50, 0)
+					src.visible_message("<span class='notice'>\The [src] pings as it reaches the target temperature.</span>")
+
 		else if(connected_port && avg_pressure > 1000)
 			current_temp = round((current_temp + avg_temp) / 2)
 		else if(!run_pump)
