@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(inactivity)
 						information = " while [job]."
 
 				else if(isobserver(C.mob))
-					information = "while a ghost."
+					information = " while a ghost."
 
 				else if(issilicon(C.mob))
 					information = " while a silicon."
