@@ -92,7 +92,7 @@
 				to_chat(user, "You feel as if you just narrowly avoided a terrible fate...")
 				for(var/mob/living/simple_mob/faithless/F in living_mob_list)
 					F.health = -10
-					F.stat = 2
+					F.set_stat(DEAD)
 					F.icon_state = "faithless_dead"
 
 
@@ -156,7 +156,7 @@
 		if(C.stat == DEAD)
 			dead_mob_list -= C
 			living_mob_list += C
-		C.stat = CONSCIOUS
+		C.set_stat(CONSCIOUS)
 		C.tod = null
 		C.setToxLoss(0)
 		C.setOxyLoss(0)
