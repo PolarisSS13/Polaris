@@ -108,6 +108,57 @@
 
 	..()
 
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/examine(mob/user)
+	..()
+	if(get_dist(user, src) < 3)
+		to_chat(user, "<span class='notice'>\The [src] is powered [on ? "on" : "off"].</span>")
+
+		to_chat(user, "<span class='notice'>\The [src]'s gauges read:</span>")
+		if(!use_atmos)
+			to_chat(user, "<span class='notice'>- Target Temperature:</span> <span class='warning'>[target_temp]</span>")
+		to_chat(user, "<span class='notice'>- Temperature:</span> <span class='warning'>[current_temp]</span>")
+
+		if(InputBeaker)
+			if(InputBeaker.reagents.reagent_list.len)
+				to_chat(user, "<span class='notice'>\The [src]'s input beaker holds [InputBeaker.reagents.total_volume] units of liquid.</span>")
+			else
+				to_chat(user, "<span class='notice'>\The [src]'s input beaker is empty!</span>")
+
+		if(Reservoir.reagents.reagent_list.len)
+			to_chat(user, "<span class='notice'>\The [src]'s internal buffer holds [Reservoir.reagents.total_volume] units of liquid.</span>")
+		else
+			to_chat(user, "<span class='notice'>\The [src]'s internal buffer is empty!</span>")
+
+		if(OutputBeaker)
+			if(OutputBeaker.reagents.reagent_list.len)
+				to_chat(user, "<span class='notice'>\The [src]'s output beaker holds [OutputBeaker.reagents.total_volume] units of liquid.</span>")
+			else
+				to_chat(user, "<span class='notice'>\The [src]'s output beaker is empty!</span>")
+
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/verb/toggle_power(mob/user = usr)
+	set name = "Toggle Distillery Heating"
+	set category = "Object"
+	set src in view(1)
+
+	if(powered())
+		on = !on
+		to_chat(user, "<span class='notice'>You turn \the [src] [on ? "on" : "off"].</span>")
+	else
+		to_chat(user, "<span class='notice'> Nothing happens.</span>")
+
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/verb/toggle_mixing(mob/user = usr)
+	set name = "Start Distillery Mixing"
+	set category = "Object"
+	set src in view(1)
+
+	to_chat(user, "<span class='notice'>You press \the [src]'s chamber agitator button.</span>")
+	if(on)
+		visible_message("<span class='notice'>\The [src] rattles to life.</span>")
+		Reservoir.reagents.handle_reactions()
+	else
+		spawn(1 SECOND)
+			to_chat(user, "<span class='notice'>Nothing happens..</span>")
+
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/attack_hand(mob/user)
 	var/list/options = list()
 	options["examine"] = radial_examine
@@ -138,9 +189,7 @@
 			examine(user)
 
 		if("use")
-			if(powered())
-				on = !on
-				to_chat(user, "<span class='notice'>You turn \the [src] [on ? "on" : "off"].</span>")
+			toggle_power(user)
 
 		if("inspect gauges")
 			to_chat(user, "<span class='notice'>\The [src]'s gauges read:</span>")
@@ -149,13 +198,7 @@
 			to_chat(user, "<span class='notice'>- Temperature:</span> <span class='warning'>[current_temp]</span>")
 
 		if("pulse agitator")
-			to_chat(user, "<span class='notice'>You press \the [src]'s chamber agitator button.</span>")
-			if(on)
-				visible_message("<span class='notice'>\The [src] rattles to life.</span>")
-				Reservoir.reagents.handle_reactions()
-			else
-				spawn(1 SECOND)
-					to_chat(user, "<span class='notice'>Nothing happens..</span>")
+			toggle_mixing(user)
 
 		if("eject input")
 			if(InputBeaker)
@@ -273,9 +316,6 @@
 				// IMPORTANT: If you want to tweak how quickly this changes, tweak this *10!
 				// As of initial testing, a *10 gives ~5-6 minutes to go from room temp to 500C (+/-0.5C)
 				var/temp_diff = (current_temp < target_temp ? dy * 10 * target_temp / current_temp : dy * -10 * current_temp / target_temp)
-
-				world << "t [current_temp]\tdt [temp_diff]\tL [L]\tk [k]\ty [y]\tx [x]\tdy [dy]"
-
 
 				current_temp = CLAMP(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
 				use_power(power_rating * CELLRATE)
