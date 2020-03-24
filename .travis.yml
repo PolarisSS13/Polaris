@@ -48,4 +48,5 @@ script:
   - DreamMaker polaris.dme
   - if [ $RUN -eq 1 ]; then DreamDaemon polaris.dmb -invisible -trusted -core 2>&1 | tee log.txt; fi
   - if [ $RUN -eq 1 ]; then grep "All Unit Tests Passed" log.txt; fi
+  - if [ $RUN -eq 1 ]; then grep "Caught 0 Runtimes" log.txt; fi
 
