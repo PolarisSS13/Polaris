@@ -1426,6 +1426,7 @@
 #include "code\modules\awaymissions\zlevel.dm"
 #include "code\modules\blob2\_defines.dm"
 #include "code\modules\blob2\announcement.dm"
+#include "code\modules\blob2\core_chunk.dm"
 #include "code\modules\blob2\blobs\base_blob.dm"
 #include "code\modules\blob2\blobs\core.dm"
 #include "code\modules\blob2\blobs\factory.dm"

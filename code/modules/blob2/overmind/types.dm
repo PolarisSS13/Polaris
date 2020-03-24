@@ -37,11 +37,18 @@
 	var/spore_firesound = 'sound/effects/slime_squish.ogg'
 	var/spore_range = 7					// The range the spore can fire.
 	var/spore_projectile = /obj/item/projectile/energy/blob
+	var/spore_accuracy = 0	// Projectile accuracy
+	var/spore_dispersion = 0	// Dispersion.
 
 	var/factory_type = /obj/structure/blob/factory
 	var/resource_type = /obj/structure/blob/resource
 	var/node_type = /obj/structure/blob/node
 	var/shield_type = /obj/structure/blob/shield
+
+	var/list/core_tech = list(TECH_BIO = 4, TECH_MATERIAL = 3)	// Tech for the item created when a core is destroyed.
+	var/chunk_active_type = BLOB_CHUNK_TOGGLE
+	var/chunk_active_ability_cooldown = 20 SECONDS
+	var/chunk_passive_ability_cooldown = 5 SECONDS
 
 // Called when a blob receives damage.  This needs to return the final damage or blobs will be immortal.
 /datum/blob_type/proc/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
@@ -63,6 +70,14 @@
 /datum/blob_type/proc/on_pulse(var/obj/structure/blob/B)
 	return
 
+// Called when the core processes.
+/datum/blob_type/proc/on_core_process(var/obj/structure/blob/B)
+	return
+
+// Called when a node processes.
+/datum/blob_type/proc/on_node_process(var/obj/structure/blob/B)
+	return
+
 // Called when hit by EMP.
 /datum/blob_type/proc/on_emp(obj/structure/blob/B, severity)
 	return
@@ -71,10 +86,29 @@
 /datum/blob_type/proc/on_water(obj/structure/blob/B, amount)
 	return
 
-// Spore things
+// Spore death
 /datum/blob_type/proc/on_spore_death(mob/living/simple_mob/blob/spore/S)
 	return
 
+// Spore handle_special call.
+/datum/blob_type/proc/on_spore_lifetick(mob/living/simple_mob/blob/spore/S)
+	return
+
+// Blob core chunk process.
+/datum/blob_type/proc/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	return
+
+// Blob core chunk use in-hand.
+/datum/blob_type/proc/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/user)
+	return
+
+// Proc that is unique to the blob type.
+/datum/blob_type/proc/chunk_unique(obj/item/weapon/blobcore_chunk/B, var/list/extra_args = null)
+	return
+
+// Set up the blob type for the chunk.
+/datum/blob_type/proc/chunk_setup(obj/item/weapon/blobcore_chunk/B)
+	return
 
 // Subtypes
 
@@ -97,6 +131,14 @@
 
 /datum/blob_type/grey_goo/on_emp(obj/structure/blob/B, severity)
 	B.adjust_integrity(-(20 / severity))
+
+/datum/blob_type/grey_goo/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/turf/T = get_turf(B)
+	for(var/mob/living/L in view(world.view, T))
+		if(L.stat != DEAD)
+			L.adjustBruteLoss(-1)
+			L.adjustFireLoss(-1)
+	return
 
 // Slow, tanky blobtype which uses not spores, but hivebots, as its soldiers.
 /datum/blob_type/fabrication_swarm
@@ -135,6 +177,14 @@
 /datum/blob_type/fabrication_swarm/on_emp(obj/structure/blob/B, severity)
 	B.adjust_integrity(-(30 / severity))
 
+/datum/blob_type/fabrication_swarm/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/turf/T = get_turf(B)
+	for(var/mob/living/L in view(world.view, T))
+		if(L.stat != DEAD && L.isSynthetic())
+			L.adjustBruteLoss(-1)
+			L.adjustFireLoss(-1)
+	return
+
 // A blob meant to be fought like a fire.
 /datum/blob_type/blazing_oil
 	name = "blazing oil"
@@ -148,6 +198,7 @@
 	ai_aggressiveness = 50
 	damage_type = BURN
 	burn_multiplier = 0 // Fire immunity
+	chunk_active_ability_cooldown = 4 MINUTES
 	attack_message = "The blazing oil splashes you with its burning oil"
 	attack_message_living = ", and you feel your skin char and melt"
 	attack_message_synth = ", and your external plating melts"
@@ -168,6 +219,17 @@
 	if(env)
 		env.add_thermal_energy(10 * 1000)
 
+/datum/blob_type/blazing_oil/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/turf/T = get_turf(B)
+	if(!T)
+		return
+	var/datum/gas_mixture/env = T.return_air()
+	if(env)
+		env.add_thermal_energy(10 * 1000)
+
+/datum/blob_type/blazing_oil/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	user.add_modifier(/datum/modifier/exothermic, 5 MINUTES)
+	return
 
 // Mostly a classic blob.  No nodes, no other blob types.
 /datum/blob_type/classic
@@ -182,6 +244,30 @@
 	spread_modifier = 1.0
 	ai_aggressiveness = 0
 
+/datum/blob_type/classic/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	var/turf/T = get_turf(B)
+
+	to_chat(user, "<span class='alien'>\The [B] produces a soothing ooze!</span>")
+
+	T.visible_message("<span class='alium'>\The [B] shudders at \the [user]'s touch, before disgorging a disgusting ooze.</span>")
+
+	for(var/turf/simulated/floor/F in view(2, T))
+		spawn()
+			var/obj/effect/effect/water/splash = new(T)
+			splash.create_reagents(15)
+			splash.reagents.add_reagent("blood", 10,list("blood_colour" = color))
+			splash.set_color()
+
+			splash.set_up(F, 2, 3)
+
+		var/obj/effect/decal/cleanable/chemcoating/blood = locate() in T
+		if(!istype(blood))
+			blood = new(T)
+			blood.reagents.add_reagent("blood", 10,list("blood_colour" = color))
+			blood.reagents.add_reagent("tricorlidaze", 5)
+			blood.update_icon()
+
+	return
 
 // Makes robots cry.  Really weak to brute damage.
 /datum/blob_type/electromagnetic_web
@@ -198,6 +284,7 @@
 	brute_multiplier = 3
 	burn_multiplier = 2
 	ai_aggressiveness = 60
+	chunk_active_type = BLOB_CHUNK_CONSTANT
 	attack_message = "The web lashes you"
 	attack_message_living = ", and you hear a faint buzzing"
 	attack_message_synth = ", and your electronics get badly damaged"
@@ -209,6 +296,13 @@
 /datum/blob_type/electromagnetic_web/on_attack(obj/structure/blob/B, mob/living/victim)
 	victim.emp_act(2)
 
+/datum/blob_type/electromagnetic_web/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/turf/T = get_turf(B)
+	if(!T)
+		return
+
+	for(var/mob/living/L in view(2, T))
+		L.add_modifier(/datum/modifier/faraday, 30 SECONDS)
 
 // Makes spores that spread the blob and infest dead people.
 /datum/blob_type/fungal_bloom
@@ -228,6 +322,7 @@
 	ai_aggressiveness = 40
 	can_build_factories = TRUE
 	spore_type = /mob/living/simple_mob/blob/spore/infesting
+	chunk_active_ability_cooldown = 2 MINUTES
 
 /datum/blob_type/fungal_bloom/on_spore_death(mob/living/simple_mob/blob/spore/S)
 	if(S.is_infesting)
@@ -239,6 +334,13 @@
 	else
 		B = new /obj/structure/blob/normal(T, S.overmind) // Otherwise spread it.
 		B.visible_message("<span class='danger'>\A [B] forms on \the [T] as \the [S] bursts!</span>")
+
+/datum/blob_type/fungal_bloom/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	var/mob/living/simple_mob/blob/spore/S = new spore_type(get_turf(B))
+	S.faction = user.faction
+	S.blob_type = src
+	S.update_icons()
+	S.ai_holder.forget_everything()
 
 // Makes tons of weak spores whenever it spreads.
 /datum/blob_type/fulminant_organism
@@ -259,6 +361,7 @@
 	ai_aggressiveness = 30 // The spores do most of the fighting.
 	can_build_factories = TRUE
 	spore_type = /mob/living/simple_mob/blob/spore/weak
+	chunk_active_ability_cooldown = 60 SECONDS
 
 /datum/blob_type/fulminant_organism/on_expand(var/obj/structure/blob/B, var/obj/structure/blob/new_B, var/turf/T, var/mob/observer/blob/O)
 	if(prob(10)) // 10% chance to make a weak spore when expanding.
@@ -281,6 +384,14 @@
 			S.faction = "blob"
 		S.update_icons()
 
+/datum/blob_type/fulminant_organism/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	for(var/I = 1 to rand(3,4))
+		var/mob/living/simple_mob/blob/spore/S = new spore_type(get_turf(B))
+		S.faction = user.faction
+		S.blob_type = src
+		S.update_icons()
+		S.ai_holder.forget_everything()
+		S.add_modifier(/datum/modifier/doomed, 2 MINUTES)
 
 // Auto-retaliates against melee attacks.  Weak to projectiles.
 /datum/blob_type/reactive_spines
@@ -300,10 +411,12 @@
 	brute_multiplier = 2.0
 	spread_modifier = 0.35 // Ranged projectiles tend to have a higher material cost, so ease up on the spreading.
 	ai_aggressiveness = 40
+	chunk_passive_ability_cooldown = 0.5 SECONDS
 	attack_message = "The blob stabs you"
 	attack_message_living = ", and you feel sharp spines pierce your flesh"
 	attack_message_synth = ", and your external plating is pierced by sharp spines"
 	attack_verb = "stabs"
+	spore_projectile = /obj/item/projectile/bullet/thorn
 
 // Even if the melee attack is enough to one-shot this blob, it gets to retaliate at least once.
 /datum/blob_type/reactive_spines/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
@@ -313,6 +426,32 @@
 		attacker.blob_act(B)
 	return ..()
 
+// We're expecting 1 to be a target, 2 to be an old move loc, and 3 to be a new move loc.
+/datum/blob_type/reactive_spines/chunk_unique(obj/item/weapon/blobcore_chunk/B, var/list/extra_data = null)
+	if(!LAZYLEN(extra_data))
+		return
+
+	var/atom/movable/A = extra_data[1]
+
+	if(istype(A, /mob/living) && world.time > (B.last_passive_use + B.passive_ability_cooldown) && B.should_tick)
+		B.last_passive_use = world.time
+		var/mob/living/L = A
+
+		var/mob/living/carrier = B.get_carrier()
+
+		if(!istype(carrier) || L.z != carrier.z || L == carrier || get_dist(L, carrier) > 3)
+			return
+
+		var/obj/item/projectile/P = new spore_projectile(get_turf(B))
+
+		carrier.visible_message("<span class='danger'>\The [B] fires a spine at \the [L]!</span>")
+		P.launch_projectile(L, BP_TORSO, carrier)
+
+	return
+
+/datum/blob_type/reactive_spines/chunk_setup(obj/item/weapon/blobcore_chunk/B)
+	GLOB.moved_event.register_global(B, /obj/item/weapon/blobcore_chunk/proc/call_chunk_unique)
+	return
 
 // Spreads damage to nearby blobs, and attacks with the force of all nearby blobs.
 /datum/blob_type/synchronous_mesh
@@ -359,6 +498,34 @@
 
 	return damage / max(blobs_to_hurt.len, 1) // To hurt the blob that got hit.
 
+/datum/blob_type/synchronous_mesh/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/mob/living/carrier = B.get_carrier()
+
+	if(!carrier)
+		return
+
+	var/list/nearby_mobs = list()
+	for(var/mob/living/L in oview(world.view, carrier))
+		if(L.stat != DEAD)
+			nearby_mobs |= L
+
+	if(nearby_mobs.len)
+		for(var/mob/living/victim in nearby_mobs)
+			var/need_beam = FALSE
+
+			if(carrier.getBruteLoss())
+				need_beam = TRUE
+				victim.adjustBruteLoss(3 / nearby_mobs.len)
+				carrier.adjustBruteLoss(-3 / nearby_mobs.len)
+
+			if(carrier.getFireLoss())
+				need_beam = TRUE
+				victim.adjustFireLoss(3 / nearby_mobs.len)
+				carrier.adjustFireLoss(-3 / nearby_mobs.len)
+
+			if(need_beam)
+				carrier.visible_message("<span class='alien'>\icon [B] \The [B] sends noxious spores toward \the [victim]!</span>")
+				carrier.Beam(victim, icon_state = "lichbeam", time = 2 SECONDS)
 
 /datum/blob_type/shifting_fragments
 	name = "shifting fragments"
@@ -375,6 +542,7 @@
 	burn_multiplier = 0.5
 	spread_modifier = 0.5
 	ai_aggressiveness = 30
+	chunk_active_ability_cooldown = 3 MINUTES
 	attack_message = "A fragment strikes you"
 	attack_verb = "strikes"
 
@@ -396,6 +564,10 @@
 		new_B.forceMove(get_turf(B))
 		B.forceMove(T)
 
+/datum/blob_type/shifting_fragments/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	user.add_modifier(/datum/modifier/sprinting, 2 MINUTES)
+	return
+
 // A very cool blob, literally.
 /datum/blob_type/cryogenic_goo
 	name = "cryogenic goo"
@@ -412,6 +584,7 @@
 	burn_multiplier = 1.2
 	spread_modifier = 0.5
 	ai_aggressiveness = 50
+	chunk_active_ability_cooldown = 4 MINUTES
 	attack_message = "The goo stabs you"
 	attack_message_living = ", and you feel an intense chill from within"
 	attack_message_synth = ", and your system reports lower internal temperatures"
@@ -442,6 +615,19 @@
 	if(env)
 		env.add_thermal_energy(-10 * 1000)
 
+/datum/blob_type/cryogenic_goo/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/turf/simulated/T = get_turf(B)
+	if(!istype(T))
+		return
+	T.freeze_floor()
+	var/datum/gas_mixture/env = T.return_air()
+	if(env)
+		env.add_thermal_energy(-10 * 1000)
+
+/datum/blob_type/cryogenic_goo/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	user.add_modifier(/datum/modifier/endothermic, 5 MINUTES)
+	return
+
 // Electric blob that stuns.
 /datum/blob_type/energized_jelly
 	name = "energized jelly"
@@ -462,11 +648,25 @@
 	attack_message_living = ", and your flesh burns as electricity arcs into you"
 	attack_message_synth = ", and your internal circuity is overloaded as electricity arcs into you"
 	attack_verb = "prods"
+	spore_projectile = /obj/item/projectile/beam/shock
 
 /datum/blob_type/energized_jelly/on_attack(obj/structure/blob/B, mob/living/victim, def_zone)
 	victim.electrocute_act(10, src, 1, def_zone)
 	victim.stun_effect_act(0, 40, BP_TORSO, src)
 
+/datum/blob_type/energized_jelly/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	for(var/mob/living/L in oview(world.view, get_turf(B)))
+		var/mob/living/carrier = B.get_carrier()
+
+		if(istype(carrier) && carrier == L)
+			continue
+
+		var/obj/item/projectile/P = new spore_projectile(get_turf(B))
+
+		carrier.visible_message("<span class='danger'>\The [B] discharges energy toward \the [L]!</span>")
+		P.launch_projectile(L, BP_TORSO, carrier)
+
+	return
 
 // A blob with area of effect attacks.
 /datum/blob_type/explosive_lattice
@@ -563,12 +763,19 @@
 	wet_surroundings(B, 50)
 
 /datum/blob_type/pressurized_slime/proc/wet_surroundings(var/obj/structure/blob/B, var/probability = 50)
-	for(var/turf/simulated/T in range(1, B))
+	for(var/turf/simulated/T in range(1, get_turf(B)))
 		if(prob(probability))
 			T.wet_floor()
 		for(var/atom/movable/AM in T)
 			AM.water_act(2)
 
+/datum/blob_type/pressurized_slime/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	wet_surroundings(B, 10)
+
+/datum/blob_type/pressurized_slime/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)	// Drenches you in water.
+	if(user)
+		user.ExtinguishMob()
+		user.fire_stacks = CLAMP(user.fire_stacks - 1, -25, 25)
 
 // A blob that irradiates everything.
 /datum/blob_type/radioactive_ooze
@@ -595,6 +802,9 @@
 /datum/blob_type/radioactive_ooze/on_pulse(var/obj/structure/blob/B)
 	SSradiation.radiate(B, 200)
 
+/datum/blob_type/radioactive_ooze/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	SSradiation.radiate(B, rand(25,100))
+
 // A blob that steals your weapon.
 /datum/blob_type/volatile_alluvium
 	name = "volatile alluvium"
@@ -619,8 +829,11 @@
 	ranged_spores = TRUE
 	spore_range = 3
 	spore_projectile = /obj/item/projectile/energy/blob/splattering
+	spore_accuracy = 15
+	spore_dispersion = 45
 	factory_type = /obj/structure/blob/factory/sluggish
 	resource_type = /obj/structure/blob/resource/sluggish
+	chunk_active_ability_cooldown = 2 MINUTES
 
 /datum/blob_type/volatile_alluvium/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
 	if(damage > 0 && attacker && get_dist(B, attacker) <= 2 && prob(min(damage, 70)) && istype(attacker, /mob/living/carbon/human)) // Melee weapons of any type carried by a human will have a high chance of being stolen.
@@ -639,10 +852,14 @@
 
 /datum/blob_type/volatile_alluvium/on_water(obj/structure/blob/B, amount)
 	spawn(1)
-		var/damage = amount * 2
+		var/damage = amount * 4
 		B.adjust_integrity(-(damage))
 		if(B && prob(damage))
 			B.visible_message("<span class='danger'>The [name] begins to crumble!</span>")
+
+/datum/blob_type/volatile_alluvium/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	if(user)
+		user.add_modifier(/datum/modifier/fortify, 60 SECONDS)
 
 // A blob that produces noxious smoke-clouds and recycles its dying parts.
 /datum/blob_type/ravenous_macrophage
@@ -657,6 +874,7 @@
 	damage_lower = 20
 	damage_upper = 30
 	armor_check = "bio"
+	armor_pen = 50
 	brute_multiplier = 0.8
 	burn_multiplier = 0.3
 	spread_modifier = 0.8
@@ -682,6 +900,17 @@
 		B.visible_message("<span class='danger'>The dying mass is rapidly consumed by the nearby [other]!</span>")
 		if(other.overmind)
 			other.overmind.add_points(rand(1,4))
+
+/datum/blob_type/ravenous_macrophage/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/mob/living/L = locate() in range(world.view, B)
+	if(prob(5) && !L.stat)	// There's some active living thing nearby, produce offgas.
+		B.visible_message("<span class='alien'>\icon [B] \The [B] disgorches a cloud of noxious gas!</span>")
+		var/turf/T = get_turf(B)
+		var/datum/effect/effect/system/smoke_spread/noxious/BS = new /datum/effect/effect/system/smoke_spread/noxious
+		BS.attach(T)
+		BS.set_up(3, 0, T)
+		playsound(T, 'sound/effects/smoke.ogg', 50, 1, -3)
+		BS.start()
 
 // Blob that fires biological mortar shells from its factories.
 /datum/blob_type/roiling_mold
@@ -731,6 +960,21 @@
 	if(istype(B, /obj/structure/blob/factory) && L.stat != DEAD && prob(ai_aggressiveness) && L.faction != "blob")
 		var/obj/item/projectile/arc/spore/P = new(get_turf(B))
 		P.launch_projectile(L, BP_TORSO, B)
+
+/datum/blob_type/roiling_mold/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+	for(var/mob/living/L in oview(world.view, get_turf(B)))
+		if(istype(user) && user == L)
+			continue
+
+		if(!check_trajectory(L, B, PASSTABLE))	// Can't fire at things on the other side of walls / windows.
+			continue
+
+		var/obj/item/projectile/P = new spore_projectile(get_turf(B))
+
+		user.visible_message("<span class='danger'>\icon [B] \The [B] discharges energy toward \the [L]!</span>")
+		P.launch_projectile(L, BP_TORSO, user)
+
+	return
 
 // A blob that drains energy from nearby mobs in order to fuel itself, and 'negates' some attacks extradimensionally.
 /datum/blob_type/ectoplasmic_horror
@@ -801,3 +1045,62 @@
 			animate(B,alpha = 10, alpha = initial_alpha, time = 10)
 		return 0
 	return ..()
+
+/datum/blob_type/ectoplasmic_horror/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+	var/mob/living/carrier = B.get_carrier()
+
+	if(!carrier)
+		return
+
+	var/list/nearby_mobs = list()
+	for(var/mob/living/L in oview(world.view, carrier))
+		if(L.stat != DEAD)
+			nearby_mobs |= L
+
+	if(nearby_mobs.len)
+		listclearnulls(active_beams)
+		for(var/mob/living/L in nearby_mobs)
+			if(L.stat == DEAD || L.faction == "blob")
+				continue
+			if(prob(5))
+				var/beamtarget_exists = FALSE
+
+				if(active_beams.len)
+					for(var/datum/beam/Beam in active_beams)
+						if(Beam.target == L)
+							beamtarget_exists = TRUE
+							break
+
+				if(!beamtarget_exists && GetAnomalySusceptibility(L) >= 0.5)
+					carrier.visible_message("<span class='danger'>\icon [B] \The [B] lashes out at \the [L]!</span>")
+					var/datum/beam/drain_beam = carrier.Beam(L, icon_state = "drain_life", time = 10 SECONDS)
+					active_beams |= drain_beam
+					spawn(9 SECONDS)
+						if(B && drain_beam)
+							carrier.visible_message("<span class='alien'>\The [B] siphons energy from \the [L]</span>")
+							L.add_modifier(/datum/modifier/berserk_exhaustion, 30 SECONDS)
+							var/total_heal = 0
+
+							if(carrier.getBruteLoss())
+								carrier.adjustBruteLoss(-5)
+								total_heal += 5
+
+							if(carrier.getFireLoss())
+								carrier.adjustFireLoss(-5)
+								total_heal += 5
+
+							if(carrier.getToxLoss())
+								carrier.adjustToxLoss(-5)
+								total_heal += 5
+
+							if(carrier.getOxyLoss())
+								carrier.adjustOxyLoss(-5)
+								total_heal += 5
+
+							if(carrier.getCloneLoss())
+								carrier.adjustCloneLoss(-5)
+								total_heal += 5
+
+							carrier.add_modifier(/datum/modifier/berserk_exhaustion, total_heal SECONDS)
+							if(!QDELETED(drain_beam))
+								qdel(drain_beam)

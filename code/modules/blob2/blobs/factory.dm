@@ -42,6 +42,8 @@
 			if(overmind.blob_type.ranged_spores)
 				S.projectiletype = overmind.blob_type.spore_projectile
 				S.projectilesound = overmind.blob_type.spore_firesound
+				S.projectile_accuracy = overmind.blob_type.spore_accuracy
+				S.projectile_dispersion = overmind.blob_type.spore_dispersion
 		else //Other mobs don't add themselves in New. Ew.
 			S.nest = src
 			spores += S

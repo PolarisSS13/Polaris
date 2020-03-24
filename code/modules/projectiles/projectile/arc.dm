@@ -189,6 +189,7 @@
 				splash.create_reagents(15)
 				splash.reagents.add_reagent("stomacid", 5)
 				splash.reagents.add_reagent("blood", 10,list("blood_colour" = "#ec4940"))
+				splash.set_color()
 
 				splash.set_up(F, 2, 3)
 
@@ -196,3 +197,4 @@
 			if(!istype(acid))
 				acid = new(T)
 				acid.reagents.add_reagent("stomacid", 5)
+				acid.update_icon()
