@@ -193,7 +193,7 @@
 		if(slot_flags & SLOT_TWOEARS)
 			var/obj/item/clothing/ears/O = (H.l_ear == src ? H.r_ear : H.l_ear)
 			if(istype(src, /obj/item/clothing/ears/offear))
-				. = O.MouseDrop.(over_object)
+				. = O.MouseDrop(over_object)
 				H.drop_from_inventory(src)
 				qdel(src)
 			else
