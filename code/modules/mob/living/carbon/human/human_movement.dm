@@ -163,8 +163,8 @@
 	if(back)
 		if(istype(back,/obj/item/weapon/tank/jetpack))
 			thrust = back
-		else if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/rig = back
+		else if(istype(get_rig(),/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/rig = get_rig()
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				thrust = module.jets
 				break
@@ -204,6 +204,8 @@
 
 // Handle footstep sounds
 /mob/living/carbon/human/handle_footstep(var/turf/T)
+	if(is_incorporeal())
+		return
 	if(!config.footstep_volume || !T.footstep_sounds || !T.footstep_sounds.len)
 		return
 	// Future Upgrades - Multi species support

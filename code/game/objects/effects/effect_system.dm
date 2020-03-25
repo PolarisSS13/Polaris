@@ -185,6 +185,8 @@ steam.start() -- spawns the effect
 				qdel(src)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
+	if(M.is_incorporeal())
+		return
 	..()
 	if(istype(M))
 		affect(M)

@@ -77,6 +77,7 @@
 #define COLOR_PURPLE_GRAY 		"#A2819E"
 #define COLOR_RED_LIGHT         "#FF3333"
 #define COLOR_DEEP_SKY_BLUE     "#00e1ff"
+#define COLOR_DARK_GRAY 		"#404040"
 
 
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : null))
@@ -105,6 +106,7 @@
 #define FORCE_LAUNCH 2
 #define WAIT_ARRIVE  3
 #define WAIT_FINISH  4
+#define DO_AUTOPILOT 5
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
 #define MAX_MESSAGE_LEN       1024
@@ -177,6 +179,7 @@
 #define MAT_SUPERMATTER		"supermatter"
 #define MAT_METALHYDROGEN	"mhydrogen"
 #define MAT_OSMIUM			"osmium"
+#define MAT_GRAPHITE		"graphite"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"

@@ -25,9 +25,9 @@ var/const/WIRE_NEXT = 1024
 /datum/wires/jukebox/GetInteractWindow()
 	var/obj/machinery/media/jukebox/A = holder
 	. += ..()
-	. += "<BR>The power light is [(A.stat & (BROKEN|NOPOWER)) ? "off" : "on"].<BR>"
-	. += "The parental guidance light is [A.hacked ? "off" : "on"].<BR>"
-	. += "The data light is [IsIndexCut(WIRE_REVERSE) ? "hauntingly dark" : "glowing sloftly"].<BR>"
+	. += show_hint(0x1, A.stat & (BROKEN|NOPOWER), "The power light is off.", "The power light is on.")
+	. += show_hint(0x2, A.hacked, "The parental guidance light is off.", "The parental guidance light is on.")
+	. += show_hint(0x4, IsIndexCut(WIRE_REVERSE), "The data light is hauntingly dark.", "The data light is glowing softly.")
 
 // Give a hint as to what each wire does
 /datum/wires/jukebox/UpdatePulsed(var/index)

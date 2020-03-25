@@ -4,9 +4,12 @@
 	icon_state = "autolathe"
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 2000
+	clicksound = "keyboard"
+	clickvol = 30
+
 	circuit = /obj/item/weapon/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
 	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
@@ -107,12 +110,6 @@
 			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=\ref[R];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string.Join()]</td><td align = right>[material_string.Join()]</tr>"
 
 		dat += "</table><hr>"
-	//Hacking.
-	if(panel_open)
-		dat += "<h2>Maintenance Panel</h2>"
-		dat += wires.GetInteractWindow()
-
-		dat += "<hr>"
 
 	user << browse(dat.Join(), "window=autolathe")
 	onclose(user, "autolathe")
@@ -135,8 +132,8 @@
 
 	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
-		if(istype(O, /obj/item/device/multitool) || O.is_wirecutter())
-			attack_hand(user)
+		if(O.is_multitool() || O.is_wirecutter())
+			wires.Interact(user)
 			return
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
@@ -249,7 +246,7 @@
 			return
 
 		busy = 1
-		update_use_power(2)
+		update_use_power(USE_POWER_ACTIVE)
 
 		//Check if we still have the materials.
 		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
@@ -268,7 +265,7 @@
 		sleep(build_time)
 
 		busy = 0
-		update_use_power(1)
+		update_use_power(USE_POWER_IDLE)
 		update_icon() // So lid opens
 
 		//Sanity check.

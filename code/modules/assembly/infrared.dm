@@ -242,6 +242,8 @@
 	return
 
 /obj/effect/beam/i_beam/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	if(istype(AM, /obj/effect/beam))
 		return
 	spawn(0)

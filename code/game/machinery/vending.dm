@@ -8,12 +8,13 @@
 	icon_state = "generic"
 	anchored = 1
 	density = 1
+	clicksound = "button"
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access
 
 	// Power
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
@@ -25,6 +26,7 @@
 	var/datum/stored_item/vending_product/currently_vending = null // What we're requesting payment for right now
 	var/status_message = "" // Status screen messages like "insufficient funds", displayed in NanoUI
 	var/status_error = 0 // Set to 1 if status_message is an error
+	var/vending_sound = "machines/vending/vending_drop.ogg"
 
 	/*
 		Variables used to initialize the product list
@@ -253,6 +255,7 @@
  */
 /obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
+	playsound(src.loc, 'sound/machines/id_swipe.ogg', 50, 1)
 	if(currently_vending.price > wallet.worth)
 		status_message = "Insufficient funds on chargecard."
 		status_error = 1
@@ -273,6 +276,7 @@
 		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
 	else
 		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
+	playsound(src.loc, 'sound/machines/id_swipe.ogg', 50, 1)
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if(!customer_account)
 		status_message = "Error: Unable to access account. Please contact technical support if problem persists."
@@ -505,8 +509,7 @@
 			sleep(3)
 			if(R.get_product(get_turf(src)))
 				visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
-
-		playsound(src, 'sound/items/vending.ogg', 50, 1, 1)
+		playsound(src.loc, "sound/[vending_sound]", 100, 1, 1)
 
 		status_message = ""
 		status_error = 0
@@ -692,6 +695,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
+					/obj/item/weapon/reagent_containers/food/condiment/cornoil = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/peppermintschnapps = 5,
@@ -735,6 +739,7 @@
 	req_access = list(access_bar)
 	req_log_access = access_bar
 	has_logs = 1
+	vending_sound = "machines/vending/vending_cans.ogg"
 
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
@@ -754,6 +759,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3, /obj/item/weapon/reagent_containers/food/drinks/tea = 3, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3)
+	vending_sound = "machines/vending/vending_coffee.ogg"
 
 /obj/machinery/vending/snack
 	name = "Getmore Chocolate Corp"
@@ -787,6 +793,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vending_sound = "machines/vending/vending_cans.ogg"
 
 /obj/machinery/vending/fitness
 	name = "SweatMAX"
@@ -842,7 +849,19 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 5,
 					/obj/item/weapon/storage/rollingpapers = 5,
 					/obj/item/weapon/storage/box/matches = 10,
-					/obj/item/weapon/flame/lighter/random = 4)
+					/obj/item/weapon/flame/lighter/random = 4,
+					/obj/item/clothing/mask/smokable/ecig/util = 2,
+					///obj/item/clothing/mask/smokable/ecig/deluxe = 2,
+					/obj/item/clothing/mask/smokable/ecig/simple = 2,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 5,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 2)
 	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/carcinomas = 5,
@@ -855,7 +874,20 @@
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 18,
 					/obj/item/weapon/storage/rollingpapers = 10,
 					/obj/item/weapon/storage/box/matches = 1,
-					/obj/item/weapon/flame/lighter/random = 2)
+					/obj/item/weapon/flame/lighter/random = 2,
+					/obj/item/clothing/mask/smokable/ecig/util = 100,
+					///obj/item/clothing/mask/smokable/ecig/deluxe = 300,
+					/obj/item/clothing/mask/smokable/ecig/simple = 150,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/med_nicotine = 10,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/high_nicotine = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/orange = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/mint = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/watermelon = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/grape = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 15,
+					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 15)
+
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
@@ -992,6 +1024,8 @@
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
 	products = list(
+	/obj/item/weapon/reagent_containers/food/condiment/yeast = 5,
+	/obj/item/weapon/reagent_containers/food/condiment/cornoil = 5,
 	/obj/item/weapon/tray = 8,
 	/obj/item/weapon/material/kitchen/utensil/fork = 6,
 	/obj/item/weapon/material/knife = 6,
@@ -1022,6 +1056,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vending_sound = "machines/vending/vending_cans.ogg"
 
 /obj/machinery/vending/tool
 	name = "YouTool"

@@ -411,7 +411,7 @@
 	set category = "OOC"
 	var/is_admin = 0
 
-	if(client.holder && (client.holder.rights & R_ADMIN))
+	if(client.holder && (client.holder.rights & R_ADMIN|R_EVENT))
 		is_admin = 1
 	else if(stat != DEAD || istype(src, /mob/new_player))
 		to_chat(usr, "<font color='blue'>You must be observing to use this!</font>")
@@ -995,6 +995,11 @@ mob/proc/yank_out_object()
 
 /mob/proc/updateicon()
 	return
+
+// Please always use this proc, never just set the var directly.
+/mob/proc/set_stat(var/new_stat)
+	. = (stat != new_stat)
+	stat = new_stat
 
 /mob/verb/face_direction()
 

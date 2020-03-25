@@ -15,6 +15,10 @@
 /mob/proc/zMove(direction)
 	if(eyeobj)
 		return eyeobj.zMove(direction)
+	if(istype(loc,/obj/mecha))
+		var/obj/mecha/mech = loc
+		return mech.relaymove(src,direction)
+
 	if(!can_ztravel())
 		to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
 		return
@@ -28,6 +32,10 @@
 	if(!destination)
 		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
 		return 0
+
+	if(is_incorporeal())
+		forceMove(destination)
+		return 1
 
 	if(!start.CanZPass(src, direction))
 		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
@@ -105,13 +113,13 @@
 /mob/living/can_ztravel()
 	if(incapacitated())
 		return FALSE
-	return hovering
+	return (hovering || is_incorporeal())
 
 /mob/living/carbon/human/can_ztravel()
 	if(incapacitated())
 		return FALSE
 
-	if(hovering)
+	if(hovering || is_incorporeal())
 		return TRUE
 
 	if(Process_Spacemove())
@@ -219,6 +227,8 @@
 		return FALSE
 
 /mob/living/can_fall()
+	if(is_incorporeal())
+		return FALSE
 	if(hovering)
 		return FALSE
 	return ..()

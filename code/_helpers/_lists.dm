@@ -308,6 +308,13 @@ proc/listclearnulls(list/list)
 		else
 			L[key] = temp[key]
 
+// Return a list of the values in an assoc list (including null)
+/proc/list_values(var/list/L)
+	var/list/V  = list()
+	V.len = L.len // Preallocate!
+	for(var/i in 1 to L.len)
+		V[i] = L[L[i]]  // We avoid += in case the value is itself a list
+	return V
 
 //Mergesort: divides up the list into halves to begin the sort
 /proc/sortKey(var/list/client/L, var/order = 1)

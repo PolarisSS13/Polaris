@@ -46,8 +46,9 @@ var/global/datum/controller/gameticker/ticker
 
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
 
+
 	do
-		pregame_timeleft = 180
+		pregame_timeleft = config.pregame_time
 		to_chat(world, "<B><FONT color='blue'>Welcome to the pregame lobby!</FONT></B>")
 		to_chat(world, "Please set up your character and select ready. The round will start in [pregame_timeleft] seconds.")
 		while(current_state == GAME_STATE_PREGAME)
@@ -200,10 +201,10 @@ var/global/datum/controller/gameticker/ticker
 						var/turf/T = get_turf(M)
 						if(T && T.z in using_map.station_levels)				//we don't use M.death(0) because it calls a for(/mob) loop and
 							M.health = 0
-							M.stat = DEAD
+							M.set_stat(DEAD)
 					if(1)	//on a z-level 1 turf.
 						M.health = 0
-						M.stat = DEAD
+						M.set_stat(DEAD)
 
 		//Now animate the cinematic
 		switch(station_missed)

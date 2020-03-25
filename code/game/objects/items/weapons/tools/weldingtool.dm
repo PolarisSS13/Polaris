@@ -37,6 +37,7 @@
 	var/burned_fuel_for = 0 // Keeps track of how long the welder's been on, used to gradually empty the welder if left one, without RNG.
 	var/always_process = FALSE // If true, keeps the welder on the process list even if it's off.  Used for when it needs to regenerate fuel.
 	toolspeed = 1
+	drop_sound = 'sound/items/drop/scrap.ogg'
 
 /obj/item/weapon/weldingtool/Initialize()
 	. = ..()
@@ -643,6 +644,10 @@
 				var/obj/item/weapon/rig/suit = H.back
 				if(istype(suit))
 					return suit.cell
+	if(istype(src.loc, /obj/item/mecha_parts/mecha_equipment))
+		var/obj/item/mecha_parts/mecha_equipment/mounting = src.loc
+		if(mounting.chassis && mounting.chassis.cell)
+			return mounting.chassis.cell
 	return null
 
 /obj/item/weapon/weldingtool/electric/mounted
@@ -650,5 +655,27 @@
 
 /obj/item/weapon/weldingtool/electric/mounted/cyborg
 	toolspeed = 0.5
+
+/obj/item/weapon/weldingtool/electric/mounted/exosuit
+	var/obj/item/mecha_parts/mecha_equipment/equip_mount = null
+	flame_intensity = 1
+	eye_safety_modifier = 2
+	always_process = TRUE
+
+/obj/item/weapon/weldingtool/electric/mounted/exosuit/Initialize()
+	..()
+
+	if(istype(loc, /obj/item/mecha_parts/mecha_equipment))
+		equip_mount = loc
+
+/obj/item/weapon/weldingtool/electric/mounted/exosuit/process()
+	..()
+
+	if(equip_mount && equip_mount.chassis)
+		var/obj/mecha/M = equip_mount.chassis
+		if(M.selected == equip_mount && get_fuel())
+			setWelding(TRUE, M.occupant)
+		else
+			setWelding(FALSE, M.occupant)
 
 #undef WELDER_FUEL_BURN_INTERVAL

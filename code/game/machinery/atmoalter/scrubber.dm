@@ -151,7 +151,7 @@
 	volume = 50000
 	volume_rate = 5000
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	active_power_usage = 100000	//100 kW ~ 135 HP
 
