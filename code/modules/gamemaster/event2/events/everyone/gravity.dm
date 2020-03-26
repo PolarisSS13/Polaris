@@ -24,11 +24,11 @@
 /datum/event2/event/gravity/start()
 	for(var/area/A in all_areas)
 		if(A.z in get_location_z_levels())
-			A.gravitychange(FALSE, A)
+			A.gravitychange(FALSE)
 
 /datum/event2/event/gravity/end()
 	for(var/area/A in all_areas)
 		if(A.z in get_location_z_levels())
-			A.gravitychange(TRUE, A)
+			A.gravitychange(TRUE)
 
 	command_announcement.Announce("Gravity generators are again functioning within normal parameters. Sorry for any inconvenience.", "Gravity Restored")

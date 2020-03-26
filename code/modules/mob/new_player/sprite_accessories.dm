@@ -119,6 +119,11 @@
 		icon_state = "hair_long_bedhead"
 		flags = HAIR_TIEABLE
 
+	bedheadlongest
+		name = "Bedhead Longest"
+		icon_state = "hair_longest_bedhead"
+		flags = HAIR_TIEABLE
+
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
@@ -743,6 +748,11 @@
 		icon_state = "hair_rowbraid"
 		flags = HAIR_TIEABLE
 
+	sabitsuki
+		name = "Sabitsuki"
+		icon_state = "hair_sabitsuki"
+		flags = HAIR_VERY_SHORT
+
 	scully
 		name = "Scully"
 		icon_state = "hair_scully"
@@ -1292,6 +1302,11 @@
 	teshari_mushroom
 		name = "Teshari Mushroom"
 		icon_state = "teshari_mushroom"
+		species_allowed = list(SPECIES_TESHARI)
+
+	teshari_bald
+		name = "Bald (use with FBP)"
+		icon_state = "bald"
 		species_allowed = list(SPECIES_TESHARI)
 
 // Vox things

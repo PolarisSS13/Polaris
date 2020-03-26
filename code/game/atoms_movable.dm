@@ -44,7 +44,7 @@
 		pulledby = null
 
 /atom/movable/vv_edit_var(var_name, var_value)
-	if(GLOB.VVpixelmovement[var_name])			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
+	if(var_name in GLOB.VVpixelmovement)			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
 		return FALSE
 	return ..()
 
@@ -446,7 +446,7 @@
 	if(z in using_map.sealed_levels)
 		return
 
-	if(config.use_overmap)
+	if(using_map.use_overmap)
 		overmap_spacetravel(get_turf(src), src)
 		return
 

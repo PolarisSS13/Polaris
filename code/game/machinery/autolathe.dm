@@ -4,7 +4,7 @@
 	icon_state = "autolathe"
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 2000
 	clicksound = "keyboard"
@@ -246,7 +246,7 @@
 			return
 
 		busy = 1
-		update_use_power(2)
+		update_use_power(USE_POWER_ACTIVE)
 
 		//Check if we still have the materials.
 		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
@@ -265,7 +265,7 @@
 		sleep(build_time)
 
 		busy = 0
-		update_use_power(1)
+		update_use_power(USE_POWER_IDLE)
 		update_icon() // So lid opens
 
 		//Sanity check.
