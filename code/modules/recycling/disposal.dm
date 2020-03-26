@@ -1321,10 +1321,8 @@
 
 /obj/structure/disposalpipe/trunk/Destroy()
 	if(linked)
-		if(istype(linked, /obj/structure/disposaloutlet))
-			var/obj/structure/disposaloutlet/D = linked
-			D.trunk = null
-		else if(istype(linked, /obj/machinery/disposal))
+		if(istype(linked, /obj/machinery/disposal))
+
 			var/obj/machinery/disposal/D = linked
 			D.trunk = null
 	linked = null
