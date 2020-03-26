@@ -49,8 +49,19 @@
 	return num
 
 // Like above, but for all FBPs.
-/datum/metric/proc/count_all_FBPs(desired_FBP_class, cutoff = 75, respect_z = TRUE)
+/datum/metric/proc/count_all_FBPs(cutoff = 75, respect_z = TRUE)
 	var/num = count_all_FBPs_of_kind(FBP_CYBORG, cutoff, respect_z)
 	num += count_all_FBPs_of_kind(FBP_POSI, cutoff, respect_z)
 	num += count_all_FBPs_of_kind(FBP_DRONE, cutoff, respect_z)
 	return num
+
+
+/datum/metric/proc/get_all_antags(cutoff = 75)
+	. = list()
+	for(var/mob/living/L in player_list)
+		if(L.mind && player_is_antag(L.mind) && assess_player_activity(L) >= cutoff)
+			. += L
+
+/datum/metric/proc/count_all_antags(cutoff = 75)
+	var/list/L = get_all_antags(cutoff)
+	return L.len

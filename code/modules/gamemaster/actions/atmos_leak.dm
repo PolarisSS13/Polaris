@@ -40,7 +40,7 @@
 		// A good area, great! Lets try and pick a turf
 		var/list/turfs = list()
 		for(var/turf/simulated/floor/F in A)
-			if(turf_clear(F))
+			if(!check_density(F))
 				turfs += F
 		if(turfs.len == 0)
 			log_debug("atmos_leak event: Rejected [A] because it has no clear turfs.")

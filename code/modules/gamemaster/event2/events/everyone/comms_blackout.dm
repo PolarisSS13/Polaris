@@ -12,13 +12,18 @@
 
 
 /datum/event2/event/comms_blackout/announce()
+	var/alert = pick("Ionospheric anomalies detected. Temporary telecommunication failure imminent. Please contact you*%fj00)`5vc-BZZT", \
+					"Ionospheric anomalies detected. Temporary telecommunication failu*3mga;b4;'1v¬-BZZZT", \
+					"Ionospheric anomalies detected. Temporary telec#MCi46:5.;@63-BZZZZT", \
+					"Ionospheric anomalies dete'fZ\\kg5_0-BZZZZZT", \
+					"Ionospheri:%£ MCayj^j<.3-BZZZZZZT", \
+					"#4nd%;f4y6,>£%-BZZZZZZZT")
 	if(prob(33))
-		command_announcement.Announce("Ionospheric anomalies detected. \
-		Temporary telecommunication failure imminent. Please contact you-BZZT", new_sound = 'sound/misc/interference.ogg')
+		command_announcement.Announce(alert, new_sound = 'sound/misc/interference.ogg')
 	// AIs will always know if there's a comm blackout, rogue AIs could then lie about comm blackouts in the future while they shutdown comms
 	for(var/mob/living/silicon/ai/A in player_list)
 		to_chat(A, "<br>")
-		to_chat(A, "<span class='warning'><b>Ionospheric anomalies detected. Temporary telecommunication failure imminent. Please contact you-BZZT</b></span>")
+		to_chat(A, "<span class='warning'><b>[alert]</b></span>")
 		to_chat(A, "<br>")
 
 /datum/event2/event/comms_blackout/start()
@@ -32,3 +37,7 @@
 		log_debug("Doing complete outage of telecomms.")
 		for(var/obj/machinery/telecomms/T in telecomms_list)
 			T.emp_act(1)
+
+	// Communicators go down no matter what.
+	for(var/obj/machinery/exonet_node/N in machines)
+		N.emp_act(1)

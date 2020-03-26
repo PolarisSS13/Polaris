@@ -106,7 +106,7 @@
 				continue
 			var/list/turfs = list()
 			for(var/turf/simulated/floor/F in A)
-				if(turf_clear(F))
+				if(!F.check_density())
 					turfs += F
 			if(turfs.len < 5 + number_of_blobs)
 				log_debug("Blob infestation event: Rejected [A] because it has too little clear turfs.")

@@ -71,6 +71,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	flags = RAD_SHIELDED
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
+	forbid_events = TRUE
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -952,6 +953,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Construction Area"
 	icon_state = "construction"
 
+/area/hallway/secondary/entry
+	forbid_events = TRUE
+
 /area/hallway/secondary/entry/fore
 	name = "\improper Shuttle Dock Hallway - Mid"
 	icon_state = "entry_1"
@@ -1126,6 +1130,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Sleep"
 	flags = RAD_SHIELDED
 	ambience = AMBIENCE_GENERIC
+	forbid_events = TRUE
 
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"
@@ -1425,6 +1430,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Holodeck"
 	dynamic_lighting = 0
 	sound_env = LARGE_ENCLOSED
+	forbid_events = TRUE
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
@@ -1524,6 +1530,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Engine Room"
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
+	forbid_events = TRUE
 
 /area/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"

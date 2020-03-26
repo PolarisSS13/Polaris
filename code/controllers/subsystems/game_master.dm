@@ -36,9 +36,6 @@ SUBSYSTEM_DEF(game_master)
 	if(config && !config.enable_game_master)
 		can_fire = FALSE
 
-	// Remove when finished.
-	debug_gm()
-
 	return ..()
 
 /datum/controller/subsystem/game_master/fire(resumed)

@@ -15,6 +15,7 @@
 	announce_delay_lower_bound = 7 MINUTES
 	announce_delay_upper_bound = 15 MINUTES
 	var/bot_emag_chance = 30 // This is rolled once, instead of once a second for a minute like the old version.
+	var/announce_odds = 50 // Probability of an announcement actually happening after the delay.
 
 /datum/event2/event/ion_storm/start()
 	// Ion laws.
@@ -55,6 +56,16 @@
 						"director", "Hello", "Hi!"," ","nuke","crate","taj","xeno")
 
 /datum/event2/event/ion_storm/announce()
-	if(prob(50))
-		command_announcement.Announce("An ion storm was detected within proximity to \the [location_name()]. \
+	if(prob(announce_odds))
+		command_announcement.Announce("An ion storm was detected within proximity to \the [location_name()] recently. \
 		Check all AI controlled equipment for corruption.", "Anomaly Alert", new_sound = 'sound/AI/ionstorm.ogg')
+
+// Fake variant used by traitors.
+/datum/event2/event/ion_storm/fake
+	// Fake ion storms announce instantly, so the traitor can time it to make the AI look suspicious.
+	announce_delay_lower_bound = 0
+	announce_delay_upper_bound = 0
+	announce_odds = 100
+
+/datum/event2/event/ion_storm/fake/start()
+	return

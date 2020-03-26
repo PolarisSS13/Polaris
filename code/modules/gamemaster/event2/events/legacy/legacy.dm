@@ -51,7 +51,8 @@
 	legacy_event.kill(external_use = TRUE)
 	..()
 
-// Testing.
+// Proof of concept.
+/*
 /datum/event2/meta/legacy_gravity
 	name = "gravity (legacy)"
 	reusable = TRUE
@@ -59,3 +60,4 @@
 
 /datum/event2/event/legacy/gravity
 	legacy_event = /datum/event/gravity
+*/

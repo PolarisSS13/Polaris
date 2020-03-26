@@ -55,6 +55,11 @@ This allows for events that have their announcement happen after the end itself.
 	var/time_to_announce = null
 	var/time_to_end = null
 
+	// These are also set automatically, and are provided for events to know what RNG decided for the various durations.
+	var/start_delay = null
+	var/announce_delay = null
+	var/length = null
+
 // Returns the name of where the event is taking place.
 // In the future this might be handy for off-station events.
 /datum/event2/event/proc/location_name()
@@ -66,69 +71,57 @@ This allows for events that have their announcement happen after the end itself.
 	return using_map.station_levels
 
 // Returns a list of empty turfs in the same area.
-/datum/event2/event/proc/find_random_turfs(minimum_free_space = 5, ignore_occupancy = FALSE)
-	// In the future it might be better to have areas themselves have a 'dont put event stuff here' var instead.
-	var/list/excluded_areas = list(
-			/area/submap,
-			/area/shuttle,
-			/area/crew_quarters,
-			/area/holodeck,
-			/area/engineering/engine_room
-		)
-	var/list/area/grand_list_of_areas = get_station_areas(excluded_areas)
+/datum/event2/event/proc/find_random_turfs(minimum_free_space = 5, list/specific_areas = list(), ignore_occupancy = FALSE)
+	var/list/area/grand_list_of_areas = find_random_areas(specific_areas)
+
 	if(!LAZYLEN(grand_list_of_areas))
 		return list()
-	for(var/i = 1 to 10)
-		var/area/A = pick(grand_list_of_areas)
-		if(!ignore_occupancy && is_area_occupied(A))
-			continue // Occupied.
+
+	for(var/thing in grand_list_of_areas)
+		var/list/A = thing
 		var/list/turfs = list()
 		for(var/turf/T in A)
-			if(turf_clear(T))
+			if(!T.check_density())
 				turfs += T
+
 		if(turfs.len < minimum_free_space)
 			continue // Not enough free space.
 		return turfs
+
 	return list()
 
+/datum/event2/event/proc/find_random_areas(list/specific_areas = list(), ignore_occupancy = FALSE)
+	if(!LAZYLEN(specific_areas))
+		specific_areas = global.the_station_areas.Copy()
 
-/*
-	var/list/area/grand_list_of_areas = get_station_areas(excluded)
-	if(grand_list_of_areas.len)
-		for(var/i in 1 to 10)
-			var/area/A = pick(grand_list_of_areas)
-			if(is_area_occupied(A))
-				log_debug("Blob infestation event: Rejected [A] because it is occupied.")
-				continue
-			var/list/turfs = list()
-			for(var/turf/simulated/floor/F in A)
-				if(turf_clear(F))
-					turfs += F
-			if(turfs.len < 5 + number_of_blobs)
-				log_debug("Blob infestation event: Rejected [A] because it has too little clear turfs.")
-				continue
-			open_turfs = turfs.Copy()
-			target_area = A
-			log_debug("Blob infestation event: Going to place blob at [A].")
-			break
-
-	if(!open_turfs.len)
-		log_debug("Blob infestation event: Giving up after too many failures to pick a blob spot.")
-		abort()
-*/
+	var/list/area/grand_list_of_areas = get_all_existing_areas_of_types(specific_areas)
+	. = list()
+	for(var/thing in shuffle(grand_list_of_areas))
+		var/area/A = thing
+		if(A.forbid_events)
+			continue
+		if(!(A.z in get_location_z_levels()))
+			continue
+		if(!ignore_occupancy && is_area_occupied(A))
+			continue // Occupied.
+		. += A
 
 // Starts the event.
 /datum/event2/event/proc/execute()
 	time_started = world.time
 
 	if(announce_delay_lower_bound)
-		time_to_announce = world.time + rand(announce_delay_lower_bound, announce_delay_upper_bound ? announce_delay_upper_bound : announce_delay_lower_bound)
+		announce_delay = rand(announce_delay_lower_bound, announce_delay_upper_bound ? announce_delay_upper_bound : announce_delay_lower_bound)
+		time_to_announce = world.time + announce_delay
 
 	if(start_delay_lower_bound)
-		time_to_start = world.time + rand(start_delay_lower_bound, start_delay_upper_bound ? start_delay_upper_bound : start_delay_lower_bound)
+		start_delay = rand(start_delay_lower_bound, start_delay_upper_bound ? start_delay_upper_bound : start_delay_lower_bound)
+		time_to_start = world.time + start_delay
 
 	if(length_lower_bound)
-		time_to_end = world.time + rand(length_lower_bound, length_upper_bound ? length_upper_bound : length_lower_bound)
+		var/starting_point = time_to_start ? time_to_start : world.time
+		length = rand(length_lower_bound, length_upper_bound ? length_upper_bound : length_lower_bound)
+		time_to_end = starting_point + length
 
 	set_up()
 
@@ -150,21 +143,21 @@ This allows for events that have their announcement happen after the end itself.
 /datum/event2/event/process()
 	// Handle announcement track.
 	if(!announced && should_announce())
-		announce()
 		announced = TRUE
+		announce()
 
 	// Handle event track.
 	if(!started)
 		if(should_start())
-			start()
 			started = TRUE
+			start()
 		else
 			wait_tick()
 
 	if(started && !ended)
 		if(should_end())
-			end()
 			ended = TRUE
+			end()
 		else
 			event_tick()
 
