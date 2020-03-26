@@ -30,9 +30,6 @@ var/list/mannequins_
 var/global/list/poster_designs = list()
 var/global/list/NT_poster_designs = list()
 
-// Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
-
 //Preferences stuff
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
