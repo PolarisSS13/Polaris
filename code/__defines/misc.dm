@@ -80,7 +80,7 @@
 #define COLOR_DARK_GRAY 		"#404040"
 
 
-
+#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : null))
 
 //	Shuttles.
 
