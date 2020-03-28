@@ -48,19 +48,15 @@
 			message = "We are very interested in learning where [round(money_at_start, 1000)] thaler went in \
 			just half an hour. We highly recommend rectifying this issue before the end of the shift, otherwise a \
 			discussion regarding your future employment prospects will occur.<br><br>\
-			Your facility's current balance of requisition tokens has been revoked, and the rate of further \
-			tokens will be severely slowed."
-			supply_controller.points = 0
-			supply_controller.points_per_process = max(supply_controller.points_per_process - 1, 0.5)
+			Your facility's current balance of requisition tokens has been revoked."
+			SSsupply.points = 0
 			log_debug("Funding Drive event ended with an abyssmal response, and the loss of all cargo points.")
 
 		if(0.02 to 0.98) // Bad response.
 			message = "We're very disappointed that \the [location_name()] has ran a deficit since our request. \
-			As such, we will be taking away some requisition tokens to cover the cost of operating your facility, \
-			as well as decreasing the amount of tokens your facility will receive over time.."
-			var/points_lost = round(supply_controller.points * rand(0.5, 0.8))
-			supply_controller.points -= points_lost
-			supply_controller.points_per_process = max(supply_controller.points_per_process - 0.5, 0.5)
+			As such, we will be taking away some requisition tokens to cover the cost of operating your facility."
+			var/points_lost = round(SSsupply.points * rand(0.5, 0.8))
+			SSsupply.points -= points_lost
 			log_debug("Funding Drive event ended with a bad response, and [points_lost] cargo points was taken away.")
 
 		if(0.98 to 1.02) // Neutral response.
@@ -73,14 +69,12 @@
 			message = "We appreciate the efforts made by \the [location_name()] to run at a surplus. \
 			Together, along with the other facilities present in the [using_map.starsys_name] system, \
 			the company is expected to meet the quota.<br><br>\
-			We will allocate additional requisition tokens for the cargo department as a reward. The rate \
-			of further tokens has also been increased."
+			We will allocate additional requisition tokens for the cargo department as a reward."
 
 			// If cargo is ever made to use station funds instead of cargo points, then a new kind of reward will be needed.
 			// Otherwise it would be weird for centcom to go 'thanks for not spending money, your reward is money to spend'.
 			var/point_reward = rand(100, 200)
-			supply_controller.points += point_reward
-			supply_controller.points_per_process += 0.5
+			SSsupply.points += point_reward
 			log_debug("Funding Drive event ended with a good response and a bonus of [point_reward] cargo points.")
 
 	send_command_report("Budget Followup", message)
