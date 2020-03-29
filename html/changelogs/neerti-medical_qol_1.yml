@@ -36,4 +36,4 @@ changes:
   - tweak: "The eject button on both the Chemical Dispenser and Chem Master will place the ejected beaker into your hands, instead of on top of the machine, if possible. (Requested by Nalarac.)"
   - tweak: "Suit sensor consoles now display a friendly textual indicator of what z-level someone is on, instead of a number. They will also now avoid spoiling the names of Points of Interest."
   - tweak: "The beakers containing Cryoxadone near cryogenics are now labeled. (Requested by Nalarac.)"
-  - bugfix: "The sleeper consoles now finally face towards the sleepers, at least. It only took a year for someone to fix it."
+  - bugfix: "The sleeper consoles now finally face towards the sleepers, at last. It only took a year for someone to fix it."
