@@ -149,6 +149,7 @@
 
 				if("Item")
 					var/datum/objective/steal/itemlist
+					itemlist = itemlist
 					var/targetitem = input("Select item to search for.", "Item Mode Select","") as null|anything in itemlist.possible_items
 					if(!targetitem)
 						return
@@ -204,10 +205,8 @@
 	switch(mode)
 		if(0)
 			workdisk()
-			to_chat(user, "<span class='notice'>Authentication Disk Locator active.</span>")
 		if(1)
 			worklocation()
-			to_chat(user, "<span class='notice'>Shuttle Locator active.</span>")
 
 /obj/item/weapon/pinpointer/nukeop/proc/workdisk()
 	if(bomb_set)	//If the bomb is set, lead to the shuttle
