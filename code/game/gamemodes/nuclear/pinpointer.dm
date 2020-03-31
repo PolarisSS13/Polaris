@@ -213,7 +213,7 @@
 	if(bomb_set)	//If the bomb is set, lead to the shuttle
 		mode = 1	//Ensures worklocation() continues to work
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)	//Plays a beep
-		visible_message("Shuttle Locator active.")			//Lets the mob holding it know that the mode has changed
+		visible_message("<span class='notice'>Shuttle Locator active.</span>")			//Lets the mob holding it know that the mode has changed
 		return		//Get outta here
 
 	if(!the_disk)
