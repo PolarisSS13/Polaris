@@ -446,7 +446,7 @@
 
 /obj/item/toy/waterflower/examine(mob/user)
 	if(..(user, 0))
-		to_chat(user, "\icon[src] [src.reagents.total_volume] units of water left!")
+		to_chat(user, "[bicon(src)] [src.reagents.total_volume] units of water left!")
 
 /*
  * Bosun's whistle
@@ -902,7 +902,7 @@
 /obj/structure/plushie/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
-	if(stored_item && !searching)
+	if(stored_item && opened && !searching)
 		searching = TRUE
 		if(do_after(user, 10))
 			to_chat(user, "You find \icon[stored_item] [stored_item] in [src]!")
@@ -999,7 +999,7 @@
 			to_chat(user, "<i>You can see something in there...</i>")
 
 /obj/item/toy/plushie/attack_self(mob/user as mob)
-	if(stored_item && !searching)
+	if(stored_item && opened && !searching)
 		searching = TRUE
 		if(do_after(user, 10))
 			to_chat(user, "You find \icon[stored_item] [stored_item] in [src]!")

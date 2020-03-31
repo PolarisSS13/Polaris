@@ -15,7 +15,7 @@ datum/track/New(var/title_name, var/audio)
 	anchored = 1
 	density = 1
 	power_channel = EQUIP
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/weapon/circuitboard/jukebox
@@ -249,7 +249,7 @@ datum/track/New(var/title_name, var/audio)
 
 		main_area.forced_ambience = null
 	playing = 0
-	update_use_power(1)
+	update_use_power(USE_POWER_IDLE)
 	update_icon()
 
 
@@ -271,7 +271,7 @@ datum/track/New(var/title_name, var/audio)
 			main_area.play_ambience(M)
 
 	playing = 1
-	update_use_power(2)
+	update_use_power(USE_POWER_ACTIVE)
 	update_icon()
 
 // Advance to the next track - Don't start playing it unless we were already playing
