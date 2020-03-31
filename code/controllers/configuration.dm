@@ -267,6 +267,9 @@ var/list/gamemode_cache = list()
 	var/defib_timer = 10 // How long until someone can't be defibbed anymore, in minutes.
 	var/defib_braindamage_timer = 2 // How long until someone will get brain damage when defibbed, in minutes. The closer to the end of the above timer, the more brain damage they get.
 
+	// disables the annoying "You have already logged in this round, disconnect or be banned" popup for multikeying, because it annoys the shit out of me when testing.
+	var/disable_cid_warn_popup = FALSE
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -882,7 +885,8 @@ var/list/gamemode_cache = list()
 				if("defib_braindamage_timer")
 					config.defib_braindamage_timer = text2num(value)
 
-
+				if("disable_cid_warn_popup")
+					config.disable_cid_warn_popup = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
