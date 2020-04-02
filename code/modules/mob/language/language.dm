@@ -233,36 +233,36 @@
 	return prefix in config.language_prefixes
 
 //TBD
+/mob/proc/check_lang_data()
+	. = ""
+	
+	for(var/datum/language/L in languages)
+		if(!(L.flags & NONGLOBAL))
+			. += "<b>[L.name] ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
+
+/mob/living/check_lang_data()
+	. = ""
+
+	if(default_language)
+		. += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
+
+	for(var/datum/language/L in languages)
+		if(!(L.flags & NONGLOBAL))
+			if(L == default_language)
+				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
+			else if (can_speak(L))
+				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
+			else
+				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
+
 /mob/verb/check_languages()
 	set name = "Check Known Languages"
 	set category = "IC"
 	set src = usr
 
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
-	for(var/datum/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
-			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
-
-	src << browse(dat, "window=checklanguage")
-	return
-
-/mob/living/check_languages()
-	var/dat = "<b><font size = 5>Known Languages</font></b><br/><br/>"
-
-	if(default_language)
-		dat += "Current default language: [default_language] - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/><br/>"
-
-	for(var/datum/language/L in languages)
-		if(!(L.flags & NONGLOBAL))
-			if(L == default_language)
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
-			else if (can_speak(L))
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
-			else
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
-
-	src << browse(dat, "window=checklanguage")
+	var/datum/browser/popup = new(src, "checklanguage", "Known Languages", 420, 470)
+	popup.set_content(check_lang_data())
+	popup.open()
 
 /mob/living/Topic(href, href_list)
 	if(href_list["default_lang"])
