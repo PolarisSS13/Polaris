@@ -1,10 +1,9 @@
-/mob/living/carbon/human/say(var/message,var/whispering=0)
-	var/alt_name = ""
+/mob/living/carbon/human/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
 
 	message = sanitize(message)
-	..(message, alt_name = alt_name, whispering = whispering)
+	..()
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -122,20 +121,6 @@
    There is no language handling build into it however there is at the /mob level so we accept the call
    for it but just ignore it.
 */
-
-/mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
-	var/verb = "says"
-	var/ending = copytext(message, length(message))
-
-	if(speaking)
-		verb = speaking.get_spoken_verb(ending)
-	else
-		if(ending == "!")
-			verb=pick("exclaims","shouts","yells")
-		else if(ending == "?")
-			verb="asks"
-
-	return verb
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
 	if(silent || (sdisabilities & MUTE))

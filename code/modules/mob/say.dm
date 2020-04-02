@@ -1,4 +1,4 @@
-/mob/proc/say()
+/mob/proc/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
 	return
 
 /mob/verb/whisper(message as text)
@@ -26,7 +26,7 @@
 
 	set_typing_indicator(FALSE)
 	if(use_me)
-		usr.emote("me",usr.emote_type,message)
+		custom_emote(usr.emote_type, message)
 	else
 		usr.emote(message)
 
@@ -82,24 +82,18 @@
 
 	return 0
 
-/*
-   ***Deprecated***
-   let this be handled at the hear_say or hear_radio proc
-   This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
-   robot_talk() proc.
-   There is no language handling build into it however there is at the /mob level so we accept the call
-   for it but just ignore it.
-*/
-
 /mob/proc/say_quote(var/message, var/datum/language/speaking = null)
-        var/verb = "says"
-        var/ending = copytext(message, length(message))
-        if(ending=="!")
-                verb=pick("exclaims","shouts","yells")
-        else if(ending=="?")
-                verb="asks"
+	var/verb = "says"
+	var/ending = copytext(message, length(message))
 
-        return verb
+	if(speaking)
+		verb = speaking.get_spoken_verb(ending)
+	else
+		if(ending == "!")
+			verb = pick("exclaims", "shouts", "yells")
+		else if(ending == "?")
+			verb = "asks"
+	return verb
 
 
 /mob/proc/emote(var/act, var/type, var/message)

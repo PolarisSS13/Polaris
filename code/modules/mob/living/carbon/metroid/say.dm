@@ -1,23 +1,13 @@
-/mob/living/carbon/slime/say(var/message)
-
-	message = sanitize(message)
-
-	var/verb = say_quote(message)
-
-	if(copytext(message,1,2) == "*")
-		return emote(copytext(message,2))
-
-	return ..(message, null, verb)
-
-/mob/living/carbon/slime/say_quote(var/text)
+/mob/living/carbon/slime/say_quote(var/text, var/datum/language/speaking)
+	var/verb = "chirps"
 	var/ending = copytext(text, length(text))
 
-	if (ending == "?")
-		return "asks";
-	else if (ending == "!")
-		return "cries";
+	if(ending == "?")
+		verb = "asks";
+	else if(ending == "!")
+		verb = "cries";
 
-	return "chirps";
+	return verb;
 
 /mob/living/carbon/slime/say_understands(var/other)
 	if (istype(other, /mob/living/carbon/slime))

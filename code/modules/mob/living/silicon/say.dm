@@ -1,9 +1,3 @@
-/mob/living/silicon/say(var/message, var/sanitize = 1, var/whispering = 0)
-	return ..((sanitize ? sanitize(message) : message), whispering = whispering)
-
-/mob/living/silicon/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	log_say(message, src)
-
 /mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	..()
 	if(message_mode)
@@ -147,11 +141,11 @@
 	return 1
 
 /mob/living/silicon/ai/emote(var/act, var/type, var/message)
-	var/obj/machinery/hologram/holopad/T = src.holo
+	var/obj/machinery/hologram/holopad/T = holo
 	if(T && T.masters[src]) //Is the AI using a holopad?
-		src.holopad_emote(message)
+		. = holopad_emote(message)
 	else //Emote normally, then.
-		..()
+		. = ..()
 
 #undef IS_AI
 #undef IS_ROBOT

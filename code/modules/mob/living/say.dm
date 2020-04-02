@@ -134,7 +134,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return "asks"
 	return verb
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering = 0)
+/mob/living/say(var/message, var/datum/language/speaking = null, var/alt_name="", var/whispering = 0)
 	//If you're muted for IC chat
 	if(client)
 		if(message)
@@ -212,6 +212,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/w_adverb				//An adverb prepended to the verb in whispers
 	var/w_not_heard				//The message for people in watching range
 
+	var/verb = ""
 	//Handle language-specific verbs and adverb setup if necessary
 	if(!whispering) //Just doing normal 'say' (for now, may change below)
 		verb = say_quote(message, speaking)
@@ -409,6 +410,29 @@ proc/get_radio_key_from_channel(var/channel)
 
 /mob/living/proc/GetVoice()
 	return name
+
+/mob/living/emote(var/act, var/type, var/message) //emote code is terrible, this is so that anything that isn't
+	if(stat)			                          //already snowflaked to shit can call the parent and handle emoting sanely
+		return FALSE
+
+	if(..(act, type, message))
+		return TRUE
+
+	if(act && type && message)
+		log_emote("[name]/[key]: [message]")
+
+		switch(type)
+			if(1) // Visible
+				visible_message(message)
+				return TRUE
+			if(2) // Audible
+				audible_message(message)
+				return TRUE
+	else
+		if(act == "help")
+			return // Mobs handle this individually
+		to_chat(src, "<span class='warning'>Unusable emote '[act]'. Say *help for a list.</span>")
+
 
 /mob/proc/speech_bubble_appearance()
 	return "normal"

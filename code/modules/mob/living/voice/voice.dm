@@ -104,7 +104,7 @@
 // Proc: say()
 // Parameters: 4 (generic say() arguments)
 // Description: Adds a speech bubble to the communicator device, then calls ..() to do the real work.
-/mob/living/voice/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/whispering=0)
+/mob/living/voice/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
 	//Speech bubbles.
 	if(comm)
 		var/speech_bubble_test = say_test(message)
@@ -117,7 +117,7 @@
 			M << speech_bubble
 		src << speech_bubble
 
-	..(message, speaking, verb, alt_name, whispering) //mob/living/say() can do the actual talking.
+	..() //mob/living/say() can do the actual talking.
 
 // Proc: speech_bubble_appearance()
 // Parameters: 0
