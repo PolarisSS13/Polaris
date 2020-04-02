@@ -1,6 +1,6 @@
 // At minimum every mob has a hear_say proc.
 
-/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	if(!client && !teleop)
 		return FALSE
 
@@ -62,13 +62,13 @@
 			if(speaker == src)
 				to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
 			else
-				to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear.")
+				to_chat(src, "<span class='name'>[speaker_name]</span>[speaker.GetAltName()] talks but you cannot hear.")
 	else
 		var/message_to_send = null
 		if(language)
-			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][language.format_message(message, verb)]</span>"
+			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[speaker.GetAltName()] [track][language.format_message(message, verb)]</span>"
 		else
-			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>"
+			message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[speaker.GetAltName()] [track][verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>"
 		if(check_mentioned(message) && is_preference_enabled(/datum/client_preference/check_mention))
 			message_to_send = "<font size='3'><b>[message_to_send]</b></font>"
 
@@ -79,7 +79,7 @@
 			playsound_local(source, speech_sound, sound_vol, 1)
 
 // Done here instead of on_hear_say() since that is NOT called if the mob is clientless (which includes most AI mobs).
-/mob/living/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/living/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	..()
 	if(has_AI()) // Won't happen if no ai_holder exists or there's a player inside w/o autopilot active.
 		ai_holder.on_hear_say(speaker, message)

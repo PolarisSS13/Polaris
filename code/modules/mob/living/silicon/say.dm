@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/silicon/robot/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode)
 		if(!is_component_functioning("radio"))
@@ -11,7 +11,7 @@
 /mob/living/silicon/speech_bubble_appearance()
 	return "synthetic"
 
-/mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/silicon/ai/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode == "department")
 		return holopad_talk(message, verb, speaking)
@@ -23,7 +23,7 @@
 			message_mode = null
 		return aiRadio.talk_into(src,message,message_mode,verb,speaking)
 
-/mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/silicon/pai/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode)
 		if(message_mode == "general")

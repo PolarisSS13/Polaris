@@ -1,9 +1,8 @@
-/mob/living/carbon/human/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
+/mob/living/carbon/human/GetAltName()
 	if(name != GetVoice())
-		alt_name = "(as [get_id_name("Unknown")])"
+		return " (as [get_id_name("Unknown")])"
 
-	message = sanitize(message)
-	..()
+	return ..()
 
 /mob/living/carbon/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
@@ -119,7 +118,7 @@
 	else
 		. = ..(message_data)
 
-/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	switch(message_mode)
 		if("intercom")
 			if(!src.restrained())

@@ -1,4 +1,4 @@
-/mob/proc/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
+/mob/proc/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	return
 
 /mob/verb/whisper(message as text)

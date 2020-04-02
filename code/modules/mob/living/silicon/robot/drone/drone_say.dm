@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/drone/say(var/message, var/datum/language/speaking = null, var/alt_name = "", var/whispering = 0)
+/mob/living/silicon/robot/drone/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	if(local_transmit)
 		if (src.client)
 			if(client.prefs.muted & MUTE_IC)

@@ -99,7 +99,7 @@ proc/get_radio_key_from_channel(var/channel)
 	message_data[2] = verb
 	message_data[3] = whispering
 
-/mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	if(message_mode == "intercom")
 		for(var/obj/item/device/radio/intercom/I in view(1, null))
 			I.talk_into(src, message, verb, speaking)
@@ -119,7 +119,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return "asks"
 	return verb
 
-/mob/living/say(var/message, var/datum/language/speaking = null, var/alt_name="", var/whispering = 0)
+/mob/living/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	//If you're muted for IC chat
 	if(client)
 		if(message)
@@ -230,7 +230,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//Radio message handling
 	var/list/used_radios = new
-	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name, whispering))
+	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, whispering))
 		return 1
 
 	//For languages with actual speech sounds
@@ -336,14 +336,14 @@ proc/get_radio_key_from_channel(var/channel)
 						var/image/I1 = listening[M] || speech_bubble
 						images_to_clients[I1] |= M.client
 						M << I1
-					M.hear_say(message, verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+					M.hear_say(message, verb, speaking, italics, src, speech_sound, sound_vol)
 				if(whispering) //Don't even bother with these unless whispering
 					if(dst > message_range && dst <= w_scramble_range) //Inside whisper scramble range
 						if(M.client)
 							var/image/I2 = listening[M] || speech_bubble
 							images_to_clients[I2] |= M.client
 							M << I2
-						M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol*0.2)
+						M.hear_say(stars(message), verb, speaking, italics, src, speech_sound, sound_vol*0.2)
 					if(dst > w_scramble_range && dst <= world.view) //Inside whisper 'visible' range
 						M.show_message("<span class='game say'><span class='name'>[name]</span> [w_not_heard].</span>", 2)
 

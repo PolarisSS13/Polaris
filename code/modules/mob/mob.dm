@@ -1217,3 +1217,6 @@ mob/proc/yank_out_object()
 	selfimage.loc = src
 
 	return selfimage
+
+/mob/proc/GetAltName()
+	return ""
