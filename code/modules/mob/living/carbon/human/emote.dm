@@ -137,7 +137,7 @@
 			else
 				alert("Unable to use this emote, must be either hearable or visible.")
 				return
-			return custom_emote(m_type, message)
+			return custom_emote(m_type, input)
 
 		if ("me")
 

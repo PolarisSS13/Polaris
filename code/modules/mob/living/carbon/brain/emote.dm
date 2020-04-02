@@ -42,6 +42,6 @@
 		if("help")
 			to_chat(src, "alarm, alert, notice, flash, blink, whistle, beep, boop")
 
-	if(message && !stat)
+	if(!stat)
 		..(act, m_type, message)
 		

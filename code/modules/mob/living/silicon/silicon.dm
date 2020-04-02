@@ -193,7 +193,14 @@
 //Silicon mob language procs
 
 /mob/living/silicon/can_speak(datum/language/speaking)
-	return universal_speak || (speaking in src.speech_synthesizer_langs) || (speaking.name == "Noise")	//need speech synthesizer support to vocalize a language
+	if(universal_speak)
+		return TRUE
+	//need speech synthesizer support to vocalize a language
+	if(speaking in speech_synthesizer_langs)
+		return TRUE
+	if(speaking && speaking.flags & INNATE)
+		return TRUE
+	return FALSE
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
 	var/var/datum/language/added_language = GLOB.all_languages[language]

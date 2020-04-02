@@ -68,22 +68,7 @@ proc/get_radio_key_from_channel(var/channel)
 	return key
 
 /mob/living/proc/binarycheck()
-
-	if (istype(src, /mob/living/silicon/pai))
-		return
-
-	if (!ishuman(src))
-		return
-
-	var/mob/living/carbon/human/H = src
-	if (H.l_ear || H.r_ear)
-		var/obj/item/device/radio/headset/dongle
-		if(istype(H.l_ear,/obj/item/device/radio/headset))
-			dongle = H.l_ear
-		else
-			dongle = H.r_ear
-		if(!istype(dongle)) return
-		if(dongle.translate_binary) return 1
+	return FALSE
 
 /mob/living/proc/get_default_language()
 	return default_language
@@ -153,20 +138,20 @@ proc/get_radio_key_from_channel(var/channel)
 	var/message_mode = parse_message_mode(message, "headset")
 
 	//Maybe they are using say/whisper to do a quick emote, so do those
-	switch(copytext(message,1,2))
-		if("*") return emote(copytext(message,2))
-		if("^") return custom_emote(1, copytext(message,2))
+	switch(copytext(message, 1, 2))
+		if("*") return emote(copytext(message, 2))
+		if("^") return custom_emote(1, copytext(message, 2))
 
 	//Parse the radio code and consume it
-	if (message_mode)
-		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
-		else if (message_mode == "whisper")
+	if(message_mode)
+		if(message_mode == "headset")
+			message = copytext(message, 2)	//it would be really nice if the parse procs could do this for us.
+		else if(message_mode == "whisper")
 			whispering = 1
 			message_mode = null
-			message = copytext(message,3)
+			message = copytext(message, 3)
 		else
-			message = copytext(message,3)
+			message = copytext(message, 3)
 
 	//Clean up any remaining space on the left
 	message = trim_left(message)
@@ -193,7 +178,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//HIVEMIND languages always send to all people with that language
 	if(speaking && (speaking.flags & HIVEMIND))
-		speaking.broadcast(src,trim(message))
+		speaking.broadcast(src, trim(message))
 		return 1
 
 	//Self explanatory.
@@ -244,7 +229,7 @@ proc/get_radio_key_from_channel(var/channel)
 		return 0
 
 	//Radio message handling
-	var/list/obj/item/used_radios = new
+	var/list/used_radios = new
 	if(handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name, whispering))
 		return 1
 
@@ -252,6 +237,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/list/handle_v = handle_speech_sound()
 	var/sound/speech_sound = handle_v[1]
 	var/sound_vol = handle_v[2]
+
 
 	//Default range and italics, may be overridden past here
 	var/message_range = world.view
@@ -265,12 +251,14 @@ proc/get_radio_key_from_channel(var/channel)
 			message_range = speaking.get_talkinto_msg_range(message)
 		var/msg
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]]</span>"
-		for(var/mob/living/M in hearers(5, src))
-			if((M != src) && msg)
+			msg = "<span class='notice'>[src] talks into [used_radios[1]]</span>"
+
+		if(msg)
+			for(var/mob/living/M in hearers(5, src) - src)
 				M.show_message(msg)
-			if (speech_sound)
-				sound_vol *= 0.5
+
+		if(speech_sound)
+			sound_vol *= 0.5
 
 	//Set vars if we're still whispering by this point
 	if(whispering)
@@ -279,14 +267,14 @@ proc/get_radio_key_from_channel(var/channel)
 		sound_vol *= 0.5
 
 	//Handle nonverbal and sign languages here
-	if (speaking)
-		if (speaking.flags & SIGNLANG)
+	if(speaking)
+		if(speaking.flags & SIGNLANG)
 			log_say("(SIGN) [message]", src)
 			return say_signlang(message, pick(speaking.signlang_verb), speaking)
 
-		if (speaking.flags & NONVERBAL)
-			if (prob(30))
-				src.custom_emote(1, "[pick(speaking.signlang_verb)].")
+		if(speaking.flags & NONVERBAL)
+			if(prob(30))
+				custom_emote(1, "[pick(speaking.signlang_verb)].")
 
 	//These will contain the main receivers of the message
 	var/list/listening = list()
@@ -297,12 +285,12 @@ proc/get_radio_key_from_channel(var/channel)
 	if(T)
 		//Air is too thin to carry sound at all, contact speech only
 		var/datum/gas_mixture/environment = T.return_air()
-		var/pressure = (environment)? environment.return_pressure() : 0
+		var/pressure = environment ? environment.return_pressure() : 0
 		if(pressure < SOUND_MINIMUM_PRESSURE)
 			message_range = 1
 
 		//Air is nearing minimum levels, make text italics as a hint, and muffle sound
-		if (pressure < ONE_ATMOSPHERE*0.4)
+		if(pressure < ONE_ATMOSPHERE * 0.4)
 			italics = 1
 			sound_vol *= 0.5
 
@@ -357,7 +345,7 @@ proc/get_radio_key_from_channel(var/channel)
 							M << I2
 						M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol*0.2)
 					if(dst > w_scramble_range && dst <= world.view) //Inside whisper 'visible' range
-						M.show_message("<span class='game say'><span class='name'>[src.name]</span> [w_not_heard].</span>", 2)
+						M.show_message("<span class='game say'><span class='name'>[name]</span> [w_not_heard].</span>", 2)
 
 	//Object message delivery
 	for(var/obj/O in listening_obj)
@@ -419,7 +407,17 @@ proc/get_radio_key_from_channel(var/channel)
 		return TRUE
 
 	if(act && type && message)
-		log_emote("[name]/[key]: [message]")
+		log_emote(message, src)
+
+		for(var/mob/M in dead_mob_list)
+			if(!M.client)
+				continue
+
+			if(isnewplayer(M))
+				continue
+
+			if(isobserver(M) && M.is_preference_enabled(/datum/client_preference/ghost_sight))
+				M.show_message(message)
 
 		switch(type)
 			if(1) // Visible

@@ -259,10 +259,10 @@
 
 
 /mob/living/simple_mob/say_quote(var/message, var/datum/language/speaking = null)
-	var/verb = "says"
 	if(speak_emote.len)
-		verb = pick(speak_emote)
-	return verb
+		. = pick(speak_emote)
+	else if(speaking)
+		. = ..()
 
 /mob/living/simple_mob/get_speech_ending(verb, var/ending)
 	return verb

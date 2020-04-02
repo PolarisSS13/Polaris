@@ -31,7 +31,12 @@
 			else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
+/mob/living/captive_brain/me_verb(message as text)
+	to_chat(src, "<span class='danger'>You cannot emote as a captive mind.</span>")
+	return
+
 /mob/living/captive_brain/emote(var/message)
+	to_chat(src, "<span class='danger'>You cannot emote as a captive mind.</span>")
 	return
 
 /mob/living/captive_brain/process_resist()

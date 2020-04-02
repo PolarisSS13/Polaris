@@ -1,5 +1,4 @@
-/mob/living/carbon/alien/emote(var/act,var/m_type=1,var/message = null)
-
+/mob/living/carbon/alien/emote(var/act, var/m_type=1, var/message = null)
 	var/param = null
 	if(findtext(act, "-", 1, null))
 		var/t1 = findtext(act, "-", 1, null)
@@ -104,5 +103,5 @@
 		if("help")
 			to_chat(src, "burp, chirp, choke, collapse, dance, drool, gasp, shiver, gnarl, jump, moan, nod, roll, scratch,\nscretch, shake, sign-#, sulk, sway, tail, twitch, whimper")
 
-	if(message && !stat)
+	if(!stat)
 		..(act, m_type, message)

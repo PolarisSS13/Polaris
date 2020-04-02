@@ -44,19 +44,19 @@
 #define IS_ROBOT 2
 #define IS_PAI 3
 
-/mob/living/silicon/say_understands(var/other,var/datum/language/speaking = null)
+/mob/living/silicon/say_understands(var/other, var/datum/language/speaking = null)
 	//These only pertain to common. Languages are handled by mob/say_understands()
-	if (!speaking)
-		if (istype(other, /mob/living/carbon))
-			return 1
-		if (istype(other, /mob/living/silicon))
-			return 1
-		if (istype(other, /mob/living/carbon/brain))
-			return 1
+	if(!speaking)
+		if(iscarbon(other))
+			return TRUE
+		if(issilicon(other))
+			return TRUE
+		if(isbrain(other))
+			return TRUE
 	return ..()
 
 //For holopads only. Usable by AI.
-/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking)
+/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking = null)
 
 	log_say("(HPAD) [message]",src)
 
@@ -87,7 +87,7 @@
 		var/list/listening_obj = listeners["objs"]
 		for(var/mob/M in listening)
 			spawn(0)
-				if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
+				if(M.say_understands(src, speaking))//If they understand AI speak. Humans and the like will be able to.
 					M.show_message(rendered_a, 2)
 				else//If they do not.
 					M.show_message(rendered_b, 2)

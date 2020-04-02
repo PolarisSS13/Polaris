@@ -143,6 +143,9 @@
 	var/obj/item/organ/external/hand/hands = locate() in speaker //you can't sign without hands
 	return (hands || !iscarbon(speaker))
 
+/datum/language/sign/scramble(var/input, var/list/known_languages)
+	return stars(input)
+
 // Silly language for those times when you try to talk a languague you normally can't
 /datum/language/gibberish
 	name = LANGUAGE_GIBBERISH

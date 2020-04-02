@@ -16,11 +16,8 @@
 	. = say_dead(message)
 
 
-/mob/observer/dead/emote(var/act, var/type, var/message)
+/mob/observer/dead/me_verb(message as text)
 	if(!message)
-		return
-
-	if(act != "me")
 		return
 
 	log_ghostemote(message, src)
