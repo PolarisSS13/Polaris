@@ -113,13 +113,13 @@
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+	return "<span class='message'><span class='[colour]'>[message]</span></span>"
 
 /datum/language/proc/format_message_plain(message, verb)
-	return "[verb], \"[capitalize(message)]\""
+	return "[capitalize(message)]"
 
 /datum/language/proc/format_message_radio(message, verb)
-	return "[verb], <span class='[colour]'>\"[capitalize(message)]\"</span>"
+	return "<span class='[colour]'>[capitalize(message)]</span>"
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
@@ -129,7 +129,7 @@
 	log_say("(HIVE) [message]", speaker)
 
 	if(!speaker_mask) speaker_mask = speaker.name
-	message = format_message(message, get_spoken_verb(message))
+	message = "[get_spoken_verb(message)], \"[format_message(message, get_spoken_verb(message))]\""
 
 	for(var/mob/player in player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)

@@ -56,59 +56,32 @@
 	return ..()
 
 //For holopads only. Usable by AI.
-/mob/living/silicon/ai/proc/holopad_talk(var/message, verb, datum/language/speaking = null)
-
-	log_say("(HPAD) [message]",src)
-
-	message = trim(message)
-
-	if (!message)
-		return
+/mob/living/silicon/ai/proc/holopad_talk(list/message_pieces, verb)
+	log_say("(HPAD) [multilingual_to_message(message_pieces)]",src)
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])//If there is a hologram and its master is the user.
-
-		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a
-		//Speech distorted, heard by those who do not understand AIs.
-		var/message_stars = stars(message)
-		var/rendered_b
-
-		if(speaking)
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [speaking.format_message(message, verb)]</span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [speaking.format_message(message_stars, verb)]</span>"
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>") //The AI can "hear" its own message.
-		else
-			rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
-			rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>") //The AI can "hear" its own message.
 		var/list/listeners = get_mobs_and_objs_in_view_fast(get_turf(T), world.view)
 		var/list/listening = listeners["mobs"]
 		var/list/listening_obj = listeners["objs"]
 		for(var/mob/M in listening)
-			spawn(0)
-				if(M.say_understands(src, speaking))//If they understand AI speak. Humans and the like will be able to.
-					M.show_message(rendered_a, 2)
-				else//If they do not.
-					M.show_message(rendered_b, 2)
+			M.hear_holopad_talk(message_pieces, verb, src)
 		for(var/obj/O in listening_obj)
 			if(O == T) //Don't recieve your own speech
 				continue
-			spawn(0)
-				if(O && src) //If we still exist, when the spawn processes
-					O.hear_talk(src, message, verb, speaking)
+			O.hear_talk(src, message_pieces, verb)
 		/*Radios "filter out" this conversation channel so we don't need to account for them.
 		This is another way of saying that we won't bother dealing with them.*/
+		to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [combine_message(message_pieces, verb, src)]</span></i>")
 	else
 		to_chat(src, "No holopad connected.")
 		return 0
 	return 1
 
 /mob/living/silicon/ai/proc/holopad_emote(var/message) //This is called when the AI uses the 'me' verb while using a holopad.
-
 	message = trim(message)
 
-	if (!message)
+	if(!message)
 		return
 
 	var/obj/machinery/hologram/holopad/T = src.holo

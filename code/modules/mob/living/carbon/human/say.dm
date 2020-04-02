@@ -118,25 +118,25 @@
 	else
 		. = ..(message_data)
 
-/mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios)
+/mob/living/carbon/human/handle_message_mode(message_mode, list/message_pieces, verb, used_radios)
 	switch(message_mode)
 		if("intercom")
-			if(!src.restrained())
+			if(!restrained())
 				for(var/obj/item/device/radio/intercom/I in view(1))
-					I.talk_into(src, message, null, verb, speaking)
+					I.talk_into(src, message_pieces, null, verb)
 					I.add_fingerprint(src)
 					used_radios += I
 		if("headset")
 			var/obj/item/device/radio/R = null
 			if(isradio(l_ear))
 				R = l_ear
-				if(R.talk_into(src, message, null, verb, speaking))
+				if(R.talk_into(src, message_pieces, null, verb))
 					used_radios += R
 					return
 
 			if(isradio(r_ear))
 				R = r_ear
-				if(R.talk_into(src, message, null, verb, speaking))
+				if(R.talk_into(src, message_pieces, null, verb))
 					used_radios += R
 					return
 		if("right ear")
@@ -146,7 +146,7 @@
 			if(isradio(r_hand))
 				R = r_hand
 			if(istype(R))
-				if(R.talk_into(src, message, null, verb, speaking))
+				if(R.talk_into(src, message_pieces, null, verb))
 					used_radios += R
 		if("left ear")
 			var/obj/item/device/radio/R = null
@@ -155,17 +155,17 @@
 			if(isradio(l_hand))
 				R = l_hand
 			if(istype(R))
-				if(R.talk_into(src, message, null, verb, speaking))
+				if(R.talk_into(src, message_pieces, null, verb))
 					used_radios += R
 		else
 			if(message_mode)
 				if(isradio(l_ear))
-					if(l_ear.talk_into(src, message, message_mode, verb, speaking))
+					if(l_ear.talk_into(src, message_pieces, message_mode, verb))
 						used_radios += l_ear
 						return
 
 				if(isradio(r_ear))
-					if(r_ear.talk_into(src, message, message_mode, verb, speaking))
+					if(r_ear.talk_into(src, message_pieces, message_mode, verb))
 						used_radios += r_ear
 
 /mob/living/carbon/human/handle_speech_sound()
