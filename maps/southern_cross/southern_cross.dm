@@ -33,6 +33,7 @@
 	#include "structures/closets/research.dm"
 	#include "structures/closets/security.dm"
 	#include "turfs/outdoors.dm"
+	#include "overmap/sectors.dm"
 
 	#include "southern_cross-1.dmm"
 	#include "southern_cross-2.dmm"

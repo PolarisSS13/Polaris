@@ -5,7 +5,7 @@
 	name = "map object"
 	scannable = TRUE
 
-	var/list/map_z = list()
+	var/list/map_z = null
 
 	var/list/initial_generic_waypoints //store landmark_tag of landmarks that should be added to the actual lists below on init.
 	var/list/initial_restricted_waypoints //For use with non-automatic landmarks (automatic ones add themselves).
@@ -29,7 +29,8 @@
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 
-	find_z_levels()     // This populates map_z and assigns z levels to the ship.
+	if(!map_z)			// If map_z is already defined, we don't need to find where we are
+		find_z_levels() // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
 	if(!global.using_map.overmap_z)
