@@ -191,7 +191,6 @@
 #include "code\controllers\Processes\alarm.dm"
 #include "code\controllers\Processes\emergencyShuttle.dm"
 #include "code\controllers\Processes\game_master.dm"
-#include "code\controllers\Processes\supply.dm"
 #include "code\controllers\Processes\ticker.dm"
 #include "code\controllers\ProcessScheduler\core\process.dm"
 #include "code\controllers\ProcessScheduler\core\processScheduler.dm"
