@@ -195,25 +195,28 @@
 	name = "crowd control voidsuit helmet"
 	icon_state = "rig0-sec_riot"
 	item_state_slots = list(slot_r_hand_str = "sec_helm_riot", slot_l_hand_str = "sec_helm_riot")
+	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
+	siemens_coefficient = 0.5
 
 /obj/item/clothing/suit/space/void/security/riot
 	name = "crowd control voidsuit"
 	icon_state = "rig-sec_riot"
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuit_riot", slot_l_hand_str = "sec_voidsuit_riot")
+	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
+	siemens_coefficient = 0.5
 
 //Security Surplus Voidsuit
 /obj/item/clothing/head/helmet/space/void/security/alt
-	name = "riot security voidsuit helmet"
-	desc = "A somewhat tacky voidsuit helmet, a fact mitigated by heavy armor plating."
+	name = "security EVA voidsuit helmet"
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. The plating appears to provide greater protection against projectiles, lasers, shrapnel, and radiation."
 	icon_state = "rig0-secalt"
-	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
+	armor = list(melee = 30, bullet = 40, laser = 40, energy = 20, bomb = 50, bio = 100, rad = 40)
 
 /obj/item/clothing/suit/space/void/security/alt
 	icon_state = "rig-secalt"
-	name = "riot security voidsuit"
-	desc = "A heavily armored voidsuit, designed to intimidate people who find black intimidating. Surprisingly slimming."
-	armor = list(melee = 70, bullet = 20, laser = 30, energy = 5, bomb = 35, bio = 100, rad = 10)
-	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
+	name = "security EVA voidsuit"
+	desc = "A special helmet designed for work in a hazardous, low pressure environment. The plating appears to provide greater protection against projectiles, lasers, shrapnel, and radiation."
+	armor = list(melee = 30, bullet = 40, laser = 40, energy = 20, bomb = 50, bio = 100, rad = 40)
 
 //Atmospherics
 /obj/item/clothing/head/helmet/space/void/atmos
