@@ -360,6 +360,18 @@ the artifact triggers the rage.
 
 	emp_modifier = 5
 
+// Nullifies explosions.
+/datum/modifier/blastshield
+	name = "Blast Shielding"
+	desc = "You are protected from explosions somehow."
+	mob_overlay_state = "electricity"
+
+	on_created_text = "<span class='notice'>You feel a surge of energy, that fades to a stalwart hum.</span>"
+	on_expired_text = "<span class='warning'>You feel a longing for the flow of energy.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+	explosion_modifier = 3
+
 // Kills on expiration.
 /datum/modifier/doomed
 	name = "Doomed"
