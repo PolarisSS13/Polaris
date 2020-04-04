@@ -11,7 +11,7 @@
 		if(!shuttle)
 			message2 = "Error"
 		else if(shuttle.has_arrive_time())
-			message2 = "[shuttle.eta_minutes()]:"
+			message2 = "[round(shuttle.eta_seconds() / 60)]:"
 			if((shuttle.eta_seconds() % 60) < 10)
 				message2 += "0" // Pad to two characters
 			message2 += "[shuttle.eta_seconds() % 60]"
