@@ -93,6 +93,10 @@
 	name = "POI - Lost Government Patrol"
 	ambience = AMBIENCE_GHOSTLY
 
+/area/submap/KururakDen
+	name = "POI - Kururak Den"
+	ambience = AMBIENCE_SIF
+
 /area/submap/DecoupledEngine
 	name = "POI - Decoupled Engine"
 	ambience = AMBIENCE_FOREBODING
@@ -136,3 +140,7 @@
 /area/submap/ChemSpill2
 	name = "POI - Acrid Lake"
 	ambience = AMBIENCE_FOREBODING
+
+/area/submap/FrostflyNest
+	name = "POI - Frostfly Nest"
+	ambience = AMBIENCE_SIF

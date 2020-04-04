@@ -253,8 +253,8 @@
 
 /datum/map_template/surface/mountains/deep/crashed_ufo_frigate
 	name = "Crashed UFO Frigate"
-	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet its combat protocols still seem to be running..."
-	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
+	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet the combat protocols still seem to be running..."
+	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo_frigate.dmm'
 	cost = 60
 	discard_prob = 50
 
