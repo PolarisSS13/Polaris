@@ -80,5 +80,5 @@
 	return round((arrive_time - world.time) / (1 MINUTE)) // Floor, so it's an actual timer
 
 // returns the ETA in seconds
-/datum/shuttle/autodock/ferry/supply/proc/eta_ms()
+/datum/shuttle/autodock/ferry/supply/proc/eta_seconds()
 	return round((arrive_time - world.time) / (1 SECOND)) // Floor, so it's an actual timer
