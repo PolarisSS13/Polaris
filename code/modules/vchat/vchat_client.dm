@@ -101,7 +101,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 		return
 
 	owner << browse(file2text("code/modules/vchat/html/vchat.html"), "window=htmloutput")
-	
+
+	// Yell at neerti if this gets left in when PR is opened.
+	become_broken()
+	return
+
 	//Check back later
 	spawn(60 SECONDS)
 		if(!src)
@@ -118,12 +122,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	loaded = TRUE
 	broken = FALSE
 	owner.chatOutputLoadedAt = world.time
-	
+
 	//update_vis() //It does it's own winsets
 	ping_cycle()
 	send_playerinfo()
 	load_database()
-	
+
 //Perform DB shenanigans
 /datum/chatOutput/proc/load_database()
 	set waitfor = FALSE
@@ -144,12 +148,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	if(!owner)
 		qdel(src)
 		return
-	
+
 	update_vis()
-	
+
 	spawn()
 		alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
-	
+
 //Provide the JS with who we are
 /datum/chatOutput/proc/send_playerinfo()
 	if(!owner)
@@ -342,7 +346,7 @@ var/to_chat_src
 			if(C.chatOutput.broken)
 				DIRECT_OUTPUT(C, original_message)
 				return
-			
+
 			// // Client still loading, put their messages in a queue - Actually don't, logged already in database.
 			// if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
 			// 	C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = list("time" = time, "message" = message)

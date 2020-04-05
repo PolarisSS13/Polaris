@@ -39,23 +39,26 @@
 			s1.start()
 			s2.start()
 			I.visible_message("<span class='danger'>\The [I] vanishes into thin air!</span>")
+			playsound(get_turf(I), 'sound/effects/magic/technomancer/teleport_diss.ogg', 75, 1)
 			I.forceMove(get_turf(user))
 			user.drop_item(src)
 			src.loc = null
 			user.put_in_hands(I)
 			user.visible_message("<span class='notice'>\A [I] appears in \the [user]'s hand!</span>")
+			playsound(get_turf(user), 'sound/effects/magic/technomancer/teleport_app.ogg', 75, 1)
 			log_and_message_admins("has stolen [I] with [src].")
 			qdel(src)
 		//Now let's try to teleport a living mob.
 		else if(istype(hit_atom, /mob/living))
 			var/mob/living/L = hit_atom
-			to_chat(L, "<span class='danger'>You are teleported towards \the [user].</span>")
+			to_chat(L, "<span class='danger'>You are pulled towards \the [user].</span>")
 			var/datum/effect/effect/system/spark_spread/s1 = new /datum/effect/effect/system/spark_spread
 			var/datum/effect/effect/system/spark_spread/s2 = new /datum/effect/effect/system/spark_spread
 			s1.set_up(2, 1, user)
 			s2.set_up(2, 1, L)
 			s1.start()
 			s2.start()
+			playsound(get_turf(L), 'sound/effects/magic/technomancer/repulse.ogg', 75, 1)
 			L.throw_at(get_step(get_turf(src),get_turf(L)), 4, 1, src)
 			user.drop_item(src)
 			src.loc = null

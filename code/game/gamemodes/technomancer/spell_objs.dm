@@ -42,6 +42,13 @@
 	var/cooldown = 0 				// If set, will add a cooldown overlay and adjust click delay.  Must be a multiple of 5 for overlays.
 	var/cast_sound = null			// Sound file played when this is used.
 
+// Proc: on_spell_given()
+// Parameters: 1 (user - the technomancer who was just given the spell)
+// Description: Override this to do something as soon as the technomancer has the spell in their hand,
+// as Initialize() can be too early to do certain things.
+/obj/item/weapon/spell/proc/on_spell_given(mob/user)
+	return
+
 // Proc: on_use_cast()
 // Parameters: 1 (user - the technomancer casting the spell)
 // Description: Override this for clicking the spell in your hands.
@@ -130,11 +137,10 @@
 		return core
 	return null
 
-// Proc: New()
+// Proc: Initialize()
 // Parameters: 0
 // Description: Sets owner to equal its loc, links to the owner's core, then applies overlays if needed.
-/obj/item/weapon/spell/New()
-	..()
+/obj/item/weapon/spell/Initialize()
 	if(isliving(loc))
 		owner = loc
 	if(owner)
@@ -143,9 +149,8 @@
 			to_chat(owner, "<span class='warning'>You need a Core to do that.</span>")
 			qdel(src)
 			return
-//		if(istype(/obj/item/weapon/technomancer_core, owner.back))
-//			core = owner.back
 	update_icon()
+	return ..()
 
 // Proc: Destroy()
 // Parameters: 0
@@ -297,6 +302,7 @@
 
 	if(S.run_checks())
 		put_in_hands(S)
+		S.on_spell_given(src)
 		return 1
 	else
 		qdel(S)

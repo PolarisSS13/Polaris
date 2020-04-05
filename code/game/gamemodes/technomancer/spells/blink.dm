@@ -17,42 +17,6 @@
 	cast_methods = CAST_RANGED | CAST_MELEE | CAST_USE
 	aspect = ASPECT_TELE
 
-/proc/safe_blink(atom/movable/AM, var/range = 3)
-	if(AM.anchored || !AM.loc)
-		return
-	var/turf/starting = get_turf(AM)
-	var/list/targets = list()
-
-	if(starting.block_tele)
-		return
-
-	valid_turfs:
-		for(var/turf/simulated/T in range(AM, range))
-			if(T.density || T.block_tele || istype(T, /turf/simulated/mineral)) //Don't blink to vacuum or a wall
-				continue
-			for(var/atom/movable/stuff in T.contents)
-				if(stuff.density)
-					continue valid_turfs
-			targets.Add(T)
-
-	if(!targets.len)
-		return
-	var/turf/simulated/destination = null
-
-	destination = pick(targets)
-
-	if(destination)
-		if(ismob(AM))
-			var/mob/living/L = AM
-			if(L.buckled)
-				L.buckled.unbuckle_mob()
-		AM.forceMove(destination)
-		AM.visible_message("<span class='notice'>\The [AM] vanishes!</span>")
-		to_chat(AM, "<span class='notice'>You suddenly appear somewhere else!</span>")
-		new /obj/effect/effect/sparks(destination)
-		new /obj/effect/effect/sparks(starting)
-	return
-
 /obj/item/weapon/spell/blink/on_ranged_cast(atom/hit_atom, mob/user)
 	if(istype(hit_atom, /atom/movable))
 		var/atom/movable/AM = hit_atom
@@ -67,6 +31,7 @@
 				safe_blink(AM, calculate_spell_power(6))
 			else
 				safe_blink(AM, calculate_spell_power(3))
+			blink_confusion(AM)
 			adjust_instability(3)
 			log_and_message_admins("has blinked [AM] away.")
 		else
@@ -98,7 +63,16 @@
 				safe_blink(AM, 10)
 			else
 				safe_blink(AM, 6)
+			blink_confusion(AM)
 			adjust_instability(2)
 			log_and_message_admins("has blinked [AM] away.")
 		else
 			to_chat(user, "<span class='warning'>You need more energy to blink [AM] away!</span>")
+
+/obj/item/weapon/spell/blink/proc/blink_confusion(mob/living/L)
+	if(!istype(L))
+		return
+	if(L.mind && technomancers.is_antagonist(L.mind))
+		return // Technomancers are well trained to not get disoriented by blinks.
+	L.Confuse(1) // A very short confuse.
+	to_chat(L, span("warning", "You feel disoriented after your surroundings suddenly shifted."))

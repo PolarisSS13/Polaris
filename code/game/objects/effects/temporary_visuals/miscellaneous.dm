@@ -91,3 +91,13 @@
 /obj/effect/temp_visual/impact_effect/ion
 	icon_state = "shieldsparkles"
 	duration = 6
+
+/obj/effect/temp_visual/phase_in
+	icon_state = "phase_in"
+	plane = PLANE_LIGHTING_ABOVE
+	duration = 5
+
+/obj/effect/temp_visual/phase_out
+	icon_state = "phase_out"
+	plane = PLANE_LIGHTING_ABOVE
+	duration = 5

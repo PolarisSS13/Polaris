@@ -36,6 +36,7 @@
 	if(T)
 		new /obj/effect/chroma(T, color_to_use)
 		to_chat(user, "<span class='notice'>You shift the light onto \the [T].</span>")
+		playsound(user, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
 		qdel(src)
 
 /obj/item/weapon/spell/chroma/on_use_cast(mob/user)

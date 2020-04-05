@@ -82,6 +82,12 @@
 // Returns the nth root of x.
 #define ROOT(n, x) ((x) ** (1 / (n)))
 
+// Will filter out extra rotations and negative rotations
+// E.g: 540 becomes 180. -180 becomes 180.
+#define SIMPLIFY_DEGREES(degrees) (MODULUS((degrees), 360))
+
+#define GET_ANGLE_OF_INCIDENCE(face, input) (MODULUS((face) - (input), 360))
+
 /proc/Mean(...)
 	var/sum = 0
 	for(var/val in args)

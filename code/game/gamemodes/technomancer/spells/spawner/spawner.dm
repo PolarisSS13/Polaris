@@ -5,11 +5,15 @@
 	cast_methods = CAST_RANGED
 	aspect = null
 	var/obj/effect/spawner_type = null
+	var/spawn_sound = null
 
 /obj/item/weapon/spell/spawner/on_ranged_cast(atom/hit_atom, mob/user)
 	var/turf/T = get_turf(hit_atom)
 	if(T)
 		new spawner_type(T)
+		playsound(get_turf(src), 'sound/effects/magic/technomancer/generic_cast.ogg', 50, 1)
+		if(spawn_sound)
+			playsound(T, spawn_sound, 100, 1)
 		to_chat(user, "<span class='notice'>You shift \the [src] onto \the [T].</span>")
 		log_and_message_admins("has casted [src] at [T.x],[T.y],[T.z].")
 		qdel(src)

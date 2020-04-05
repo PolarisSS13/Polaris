@@ -37,6 +37,7 @@
 			give_new_spell(biased_random_spell())
 		else
 			give_new_spell(random_spell())
+		playsound(get_turf(src), 'sound/effects/magic/technomancer/swap.ogg', 75, 1)
 		qdel(src)
 
 /obj/item/weapon/spell/gambit/proc/give_new_spell(var/spell_type)

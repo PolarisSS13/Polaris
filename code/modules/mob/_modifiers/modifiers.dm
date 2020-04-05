@@ -48,6 +48,7 @@
 	var/pain_immunity					// Makes the holder not care about pain while this is on. Only really useful to human mobs.
 	var/pulse_modifier					// Modifier for pulse, will be rounded on application, then added to the normal 'pulse' multiplier which ranges between 0 and 5 normally. Only applied if they're living.
 	var/pulse_set_level					// Positive number. If this is non-null, it will hard-set the pulse level to this. Pulse ranges from 0 to 5 normally.
+	var/block_tele = FALSE				// If true, most forms of teleportation will fail for the holder.
 
 /datum/modifier/New(var/new_holder, var/new_origin)
 	holder = new_holder
@@ -242,6 +243,9 @@
 
 	if(!isnull(attack_speed_percent))
 		effects += "The delay between attacking is [multipler_to_percentage(attack_speed_percent, TRUE)] [disable_duration_percent > 1.0 ? "longer" : "shorter"]."
+
+	if(block_tele)
+		effects += "You are unable to be affected by most forms of teleportation."
 
 	return jointext(effects, "<br>")
 

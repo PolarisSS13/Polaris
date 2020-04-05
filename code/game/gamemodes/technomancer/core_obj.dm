@@ -25,6 +25,7 @@
 	var/spell_power_modifier = 1.0	// Multiplier on how strong spells are.
 	var/cooldown_modifier 	 = 1.0	// Multiplier on cooldowns for spells.
 	var/list/spells = list()		// This contains the buttons used to make spells in the user's hand.
+	var/list/spell_metas = list()	// Assoc list containing `/datum/spell_metadata`s, with the path being the key, and the instance being the value.
 	var/list/appearances = list(	// Assoc list containing possible icon_states that the wiz can change the core to.
 		"default"			= "technomancer_core",
 		"wizard's cloak"	= "wizard_cloak"
@@ -201,11 +202,11 @@
 		spells.Remove(spell)
 		qdel(spell)
 
-/obj/item/weapon/technomancer_core/proc/has_spell(var/datum/technomancer/spell_to_check)
-	for(var/obj/spellbutton/spell in spells)
-		if(spell.spellpath == spell_to_check.obj_path)
-			return 1
-	return 0
+/obj/item/weapon/technomancer_core/proc/get_spell_metadata(spell_meta_path)
+	var/datum/spell_metadata/meta = spell_metas[spell_meta_path]
+	if(!istype(meta))
+		return FALSE
+	return meta
 
 /mob/living/carbon/human/proc/wiz_energy_update_hud()
 	if(client && hud_used)

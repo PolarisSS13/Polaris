@@ -13,6 +13,7 @@
 	cast_methods = CAST_RANGED
 	aspect = ASPECT_FIRE
 	spawner_type = /obj/effect/temporary_effect/fire_blast
+	spawn_sound = 'sound/effects/magic/technomancer/fireball.ogg'
 
 /obj/item/weapon/spell/spawner/fire_blast/on_ranged_cast(atom/hit_atom, mob/user)
 	if(within_range(hit_atom) && pay_energy(2000))
@@ -22,7 +23,7 @@
 /obj/effect/temporary_effect/fire_blast
 	name = "fire blast"
 	desc = "Run!"
-	icon_state = "at_shield1"
+	icon_state = "fire_blast"
 	time_to_die = 2.5 SECONDS // After which we go boom.
 	light_range = 4
 	light_power = 5

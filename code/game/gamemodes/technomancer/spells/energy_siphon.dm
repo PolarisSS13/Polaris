@@ -1,9 +1,10 @@
 /datum/technomancer/spell/energy_siphon
 	name = "Energy Siphon"
-	desc = "This creates a link to a target that drains electricity, converts it to energy that the Core can use, then absorbs it.  \
-	Every second, electricity is stolen until the link is broken by the target moving too far away, or having no more energy left.  \
-	Can drain from powercells, microbatteries, and other Cores.  The beam created by the siphoning is harmful to touch."
-	enhancement_desc = "Rate of siphoning is doubled."
+	desc = "This creates a link to a target that drains electricity, converts it to energy that the Core can use, then absorbs it. \
+	Every few seconds, electricity is stolen until the link is broken by the target moving too far away, or having no more energy left. \
+	Can drain from powercells, FPB microbatteries, and other Cores. The beam created by the siphoning is harmful to touch."
+	enhancement_desc = "Range of siphoning is increased to seven meters, and you receive a small speed boost while the siphon beam \
+	is draining something."
 	spell_power_desc = "Rate of siphoning is scaled up based on spell power."
 	cost = 100
 	obj_path = /obj/item/weapon/spell/energy_siphon
@@ -19,15 +20,26 @@
 	var/atom/movable/siphoning = null // What the spell is currently draining.  Does nothing if null.
 	var/list/things_to_siphon = list() //Things which are actually drained as a result of the above not being null.
 	var/flow_rate = 1000 // Limits how much electricity can be drained per second.  Measured by default in god knows what.
+	var/range = 4 // Measured in tiles.
+	var/datum/beam/the_beam = null
+	var/datum/looping_sound/generator/soundloop
 
-/obj/item/weapon/spell/energy_siphon/New()
-	..()
+/obj/item/weapon/spell/energy_siphon/Initialize()
 	START_PROCESSING(SSobj, src)
+	soundloop = new(list(src), FALSE)
+	return ..()
 
 /obj/item/weapon/spell/energy_siphon/Destroy()
 	stop_siphoning()
 	STOP_PROCESSING(SSobj, src)
+	QDEL_NULL(soundloop)
+	QDEL_NULL(the_beam)
 	return ..()
+
+// Because Initialize() happens before the spell is put in hand.
+/obj/item/weapon/spell/energy_siphon/on_spell_given(mob/living/user)
+	if(check_for_scepter())
+		range = 7
 
 /obj/item/weapon/spell/energy_siphon/process()
 	if(!siphoning)
@@ -36,7 +48,7 @@
 		to_chat(owner, "<span class='warning'>You can't afford to maintain the siphon link!</span>")
 		stop_siphoning()
 		return
-	if(get_dist(siphoning, get_turf(src)) > 4)
+	if(get_dist(siphoning, get_turf(src)) > range)
 		to_chat(owner, "<span class='warning'>\The [siphoning] is too far to drain from!</span>")
 		stop_siphoning()
 		return
@@ -49,7 +61,7 @@
 
 
 /obj/item/weapon/spell/energy_siphon/on_ranged_cast(atom/hit_atom, mob/user)
-	if(istype(hit_atom, /atom/movable) && within_range(hit_atom, 4))
+	if(istype(hit_atom, /atom/movable) && within_range(hit_atom, range))
 		var/atom/movable/AM = hit_atom
 		populate_siphon_list(AM)
 		if(!things_to_siphon.len)
@@ -58,6 +70,9 @@
 		siphoning = AM
 		update_icon()
 		log_and_message_admins("is siphoning energy from \a [AM].")
+		soundloop.start()
+		soundloop.volume = 80
+		the_beam = owner.Beam(AM, icon_state = "nzcrentrs_power", maxdistance = range+1, time = INFINITY, beam_type = /obj/effect/ebeam/reactive/electric/weak)
 	else
 		stop_siphoning()
 
@@ -75,8 +90,11 @@
 
 /obj/item/weapon/spell/energy_siphon/proc/stop_siphoning()
 	siphoning = null
+	soundloop.stop()
+	QDEL_NULL(the_beam)
 	things_to_siphon.Cut()
 	update_icon()
+	owner.remove_modifiers_of_type(/datum/modifier/technomancer/siphon_speed_boost)
 
 #define SIPHON_CELL_TO_ENERGY	0.5
 #define SIPHON_FBP_TO_ENERGY	5.0
@@ -93,10 +111,8 @@
 
 	update_icon()
 
-	//playsound(source = src, soundin = 'TODO', vol = 30, vary = 0, extrarange = 0, falloff = 0, is_global = 0)
-
 	if(check_for_scepter())
-		flow_remaining = flow_remaining * 2
+		owner.add_modifier(/datum/modifier/technomancer/siphon_speed_boost)
 
 	// First, we drain normal batteries.
 	if(things_to_drain.len)
@@ -131,8 +147,7 @@
 					charge_to_give += flow_remaining * SIPHON_CORE_TO_ENERGY
 					flow_remaining = 0
 
-	if(charge_to_give) // Shock anyone standing in the beam.
-		create_lightning(user, siphoning)
+
 
 	// Now we can actually fill up the core.
 	if(core.energy < core.max_energy)
@@ -145,6 +160,7 @@
 				to_chat(user, "<span class='notice'>Redirected energy to internal microcell.</span>")
 	else
 		to_chat(user, "<span class='notice'>Stolen [charge_to_give * CELLRATE] kJ.</span>")
+	playsound(get_turf(siphoning), 'sound/effects/magic/technomancer/zap_hit.ogg', 75, 1)
 	adjust_instability(2)
 
 	if(flow_remaining == flow_rate) // We didn't drain anything.
@@ -158,47 +174,16 @@
 	else
 		icon_state = "energy_siphon"
 
-/obj/item/weapon/spell/energy_siphon/proc/create_lightning(mob/user, atom/source)
-	if(user && source && user != source)
-		spawn(0)
-			var/i = 7 // process() takes two seconds to tick, this ensures the appearance of a ongoing beam.
-			while(i)
-				var/obj/item/projectile/beam/lightning/energy_siphon/lightning = new(get_turf(source))
-				lightning.firer = user
-				lightning.old_style_target(user)
-				lightning.fire()
-				i--
-				sleep(3)
 
-/obj/item/projectile/beam/lightning/energy_siphon
-	name = "energy stream"
-	icon_state = "lightning"
-	range = 6 // Backup plan in-case the effect somehow misses the Technomancer.
-	power = 5 // This fires really fast, so this may add up if someone keeps standing in the beam.
-	penetrating = 5
+/datum/modifier/technomancer/siphon_speed_boost
+	name = "energized"
+	desc = "Your Core is helping you move quickly while it's receiving energy."
+	mob_overlay_state = "electricity_constant"
 
-/obj/item/projectile/beam/lightning/energy_siphon/Bump(atom/A as mob|obj|turf|area, forced=0)
-	if(A == firer) // For this, you CAN shoot yourself.
-		on_impact(A)
+	on_created_text = "<span class='notice'>Your Core seems to be helping you move as you siphon energy.</span>"
+	on_expired_text = "<span class='warning'>You feel your speed return to normal.</span>"
 
-		density = 0
-		invisibility = 101
-
-		qdel(src)
-		return 1
-	..()
-
-/obj/item/projectile/beam/lightning/energy_siphon/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
-	if(target_mob == firer) // This shouldn't actually occur due to Bump(), but just in-case.
-		return 1
-	if(ishuman(target_mob)) // Otherwise someone else stood in the beam and is going to pay for it.
-		var/mob/living/carbon/human/H = target_mob
-		var/obj/item/organ/external/affected = H.get_organ(check_zone(BP_TORSO))
-		H.electrocute_act(power, src, H.get_siemens_coefficient_organ(affected), affected, 0)
-	else
-		target_mob.electrocute_act(power, src, 0.75, BP_TORSO)
-	return 0 // Since this is a continous beam, it needs to keep flying until it hits the Technomancer.
-
+	slowdown = -0.5
 
 #undef SIPHON_CELL_TO_ENERGY
 #undef SIPHON_FBP_TO_ENERGY

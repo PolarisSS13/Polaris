@@ -12,6 +12,7 @@
 	cast_methods = CAST_RANGED | CAST_THROW
 	aspect = ASPECT_EMP
 	spawner_type = /obj/effect/temporary_effect/pulse/pulsar
+	spawn_sound = 'sound/effects/magic/technomancer/disable_tech.ogg'
 
 /obj/item/weapon/spell/spawner/pulsar/New()
 	..()

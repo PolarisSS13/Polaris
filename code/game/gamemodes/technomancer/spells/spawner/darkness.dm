@@ -12,6 +12,7 @@
 	cast_methods = CAST_RANGED
 	aspect = ASPECT_DARK
 	spawner_type = /obj/effect/temporary_effect/darkness
+	spawn_sound = 'sound/effects/magic/technomancer/smoke.ogg'
 
 /obj/item/weapon/spell/spawner/darkness/on_ranged_cast(atom/hit_atom, mob/user)
 	if(pay_energy(500))

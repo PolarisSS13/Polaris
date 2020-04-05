@@ -13,6 +13,7 @@
 	cast_methods = CAST_RANGED
 	aspect = ASPECT_UNSTABLE
 	spawner_type = /obj/effect/temporary_effect/destablize
+	spawn_sound = 'sound/effects/magic/technomancer/death.ogg'
 
 /obj/item/weapon/spell/spawner/destablize/New()
 	..()

@@ -177,7 +177,13 @@
 /obj/effect/ebeam/reactive/electric
 	var/shock_amount = 25 // Be aware that high numbers may stun and result in dying due to not being able to get out of the beam.
 
+/obj/effect/ebeam/reactive/electric/weak
+	shock_amount = 5
+
 /obj/effect/ebeam/reactive/electric/on_contact(atom/movable/AM)
+	if(AM == owner.origin || AM == owner.target)
+		return
+
 	if(isliving(AM))
 		var/mob/living/L = AM
 		L.inflict_shock_damage(shock_amount)

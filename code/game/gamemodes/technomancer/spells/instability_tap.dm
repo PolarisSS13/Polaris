@@ -3,7 +3,7 @@
 	desc = "Creates a large sum of energy (5,000 at normal spell power), at the cost of a very large amount of instability afflicting you."
 	enhancement_desc = "50% more energy gained, 20% less instability gained."
 	spell_power_desc = "Amount of energy gained scaled with spell power."
-	cost = 100
+	cost = 50
 	obj_path = /obj/item/weapon/spell/instability_tap
 	ability_icon_state = "tech_instabilitytap"
 	category = UTILITY_SPELLS

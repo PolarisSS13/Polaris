@@ -37,8 +37,11 @@
 								frozen.freeze_floor()
 			if(check_for_scepter())
 				log_and_message_admins("has iced the floor with [src] at [T.x],[T.y],[T.z].")
+				playsound(T, 'sound/effects/magic/technomancer/ethereal_exit.ogg', 75, 1) // Sounds kind of like an ice spell.
 			else
 				log_and_message_admins("has wetted the floor with [src] at [T.x],[T.y],[T.z].")
+				playsound(T, 'sound/effects/magic/technomancer/ethereal_enter.ogg', 75, 1)
 		else if(hit_atom.reagents && !ismob(hit_atom))		//TODO: Something for the scepter
 			hit_atom.reagents.add_reagent(id = "water", amount = 60, data = null, safety = 0)
 		adjust_instability(5)
+		playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)

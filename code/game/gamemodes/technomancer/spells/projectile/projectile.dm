@@ -24,7 +24,11 @@
 /obj/item/weapon/spell/projectile/proc/make_projectile(obj/item/projectile/projectile_type, mob/living/user)
 	var/obj/item/projectile/P = new projectile_type(get_turf(user))
 	P.damage = calculate_spell_power(P.damage)
+	tweak_projectile(P, user)
 	return P
+
+// Override to set vars on the projectile or something.
+/obj/item/weapon/spell/projectile/proc/tweak_projectile(obj/item/projectile/P, mob/living/user)
 
 /obj/item/weapon/spell/projectile/proc/set_up(atom/hit_atom, mob/living/user)
 	if(spell_projectile)

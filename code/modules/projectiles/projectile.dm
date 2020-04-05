@@ -74,6 +74,7 @@
 	var/atom/original = null // the original target clicked
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
+	var/ignore_permutations = FALSE // If true, above list becomes meaningless.
 	var/p_x = 16
 	var/p_y = 16			// the pixel location of the tile that the player clicked. Default is the center
 
@@ -508,7 +509,7 @@
 			return FALSE
 	if(!ignore_loc && (loc != target.loc))
 		return FALSE
-	if(target in passthrough)
+	if(!ignore_permutations && (target in passthrough))
 		return FALSE
 	if(target.density)		//This thing blocks projectiles, hit it regardless of layer/mob stuns/etc.
 		return TRUE
@@ -523,7 +524,7 @@
 	return TRUE
 
 /obj/item/projectile/Bump(atom/A)
-	if(A in permutated)
+	if(!ignore_permutations && (A in permutated))
 		trajectory_ignore_forcemove = TRUE
 		forceMove(get_turf(A))
 		trajectory_ignore_forcemove = FALSE
@@ -578,7 +579,8 @@
 	if(passthrough)
 		trajectory_ignore_forcemove = TRUE
 		forceMove(target_turf)
-		permutated.Add(A)
+		if(!ignore_permutations)
+			permutated.Add(A)
 		trajectory_ignore_forcemove = FALSE
 		return FALSE
 

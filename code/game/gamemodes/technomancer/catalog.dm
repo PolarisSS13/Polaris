@@ -4,11 +4,34 @@
 #define UTILITY_SPELLS "Utility"
 #define SUPPORT_SPELLS "Support"
 
-var/list/all_technomancer_spells = typesof(/datum/technomancer/spell) - /datum/technomancer/spell
-var/list/all_technomancer_equipment = typesof(/datum/technomancer/equipment) - /datum/technomancer/equipment
-var/list/all_technomancer_consumables = typesof(/datum/technomancer/consumable) - /datum/technomancer/consumable
-var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) - /datum/technomancer/assistance
+GLOBAL_LIST_INIT(all_technomancer_spells, subtypesof(/datum/technomancer/spell))
+GLOBAL_LIST_INIT(all_technomancer_equipment, subtypesof(/datum/technomancer/equipment))
+GLOBAL_LIST_INIT(all_technomancer_consumables, subtypesof(/datum/technomancer/consumable))
+GLOBAL_LIST_INIT(all_technomancer_assistance, subtypesof(/datum/technomancer/assistance))
 
+GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technomancer_catalog/spell))
+
+// Holds information about what can be bought in the catalog, by the technomancer's version of the traitor uplink.
+// This is a singleton object, unlike the spell metadata objects.
+/datum/technomancer_catalog
+	var/name = "technomancer thing"
+	var/desc = "If you can see this, something broke."
+	var/cost = 100 // How many catalog points this is worth.
+
+// Catalog entries for physical objects.
+/datum/technomancer_catalog/object
+	var/list/object_paths = null // A list of physical objects that will appear when this is bought.
+	var/forbid_apprentices = FALSE // If true, apprentices can't buy this.
+
+// Catalog entries for spells for the core being worn.
+/datum/technomancer_catalog/spell
+	var/category = ALL_SPELLS // Used for filtering in the catalog.
+	var/list/spell_metadata_paths = null // A list of spell metadata paths that someone will get if they buy this thing.
+	var/enhancement_desc = null // Blue colored text that describes what happens if the spell is used with the Scepter of Enhancement.
+	var/spell_power_desc = null // Purple colored text that describes how the spell scales with 'spell power'.
+
+
+// This is deprecated.
 /datum/technomancer
 	var/name = "technomancer thing"
 	var/desc = "If you can see this, something broke."
@@ -40,11 +63,13 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	var/tab = 4 // Info tab, so new players can read it before doing anything.
 	var/spell_tab = ALL_SPELLS
 	var/show_scepter_text = 0
+	var/apprentice_catalog = FALSE
 
 /obj/item/weapon/technomancer_catalog/apprentice
 	name = "apprentice's catalog"
 	budget = 700
 	max_budget = 700
+	apprentice_catalog = TRUE
 
 /obj/item/weapon/technomancer_catalog/master //for badmins, I suppose
 	name = "master's catalog"
@@ -59,28 +84,28 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	if(!owner && technomancers.is_antagonist(new_owner.mind))
 		owner = new_owner
 
-// Proc: New()
+// Proc: Initialize()
 // Parameters: 0
 // Description: Sets up the catalog, as shown below.
-/obj/item/weapon/technomancer_catalog/New()
-	..()
+/obj/item/weapon/technomancer_catalog/Initialize()
 	set_up()
+	return ..()
 
 // Proc: set_up()
 // Parameters: 0
 // Description: Instantiates all the catalog datums for everything that can be bought.
 /obj/item/weapon/technomancer_catalog/proc/set_up()
 	if(!spell_instances.len)
-		for(var/S in all_technomancer_spells)
+		for(var/S in GLOB.all_technomancer_spells)
 			spell_instances += new S()
 	if(!equipment_instances.len)
-		for(var/E in all_technomancer_equipment)
+		for(var/E in GLOB.all_technomancer_equipment)
 			equipment_instances += new E()
 	if(!consumable_instances.len)
-		for(var/C in all_technomancer_consumables)
+		for(var/C in GLOB.all_technomancer_consumables)
 			consumable_instances += new C()
 	if(!assistance_instances.len)
-		for(var/A in all_technomancer_assistance)
+		for(var/A in GLOB.all_technomancer_assistance)
 			assistance_instances += new A()
 
 /obj/item/weapon/technomancer_catalog/apprentice/set_up()
@@ -111,9 +136,12 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 	else if(!owner)
 		bind_to_owner(user)
 
+	var/size_x = 500
+	var/size_y = 700
+
 	switch(tab)
 		if(0) //Functions
-			var/dat = ""
+			var/list/dat = list()
 			user.set_machine(src)
 			dat += "<align='center'><b>Functions</b> | "
 			dat += "<a href='byond://?src=\ref[src];tab_choice=1'>Equipment</a> | "
@@ -125,6 +153,28 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 
 			dat += "[show_categories(ALL_SPELLS)] | [show_categories(OFFENSIVE_SPELLS)] | [show_categories(DEFENSIVE_SPELLS)] | \
 			[show_categories(UTILITY_SPELLS)] | [show_categories(SUPPORT_SPELLS)]<br>"
+			for(var/path in GLOB.technomancer_catalog_spells)
+				var/datum/technomancer_catalog/spell/spell_entry = GLOB.technomancer_catalog_spells[path]
+
+				if(spell_tab != ALL_SPELLS && spell_entry.category != spell_tab)
+					continue
+
+				dat += "<b>[spell_entry.name]</b><br>"
+				dat += "<i>[spell_entry.desc]</i><br>"
+
+				if(spell_entry.spell_power_desc)
+					dat += "<font color='purple'>Spell Power: [spell_entry.spell_power_desc]</font><br>"
+				if(spell_entry.enhancement_desc)
+					dat += "<font color='blue'>Scepter Effect: [spell_entry.enhancement_desc]</font><br>"
+
+				if(spell_entry.cost <= budget)
+					dat += "[href(src, list("spell_choice" = spell_entry), "Purchase")] ([spell_entry.cost])<br><br>"
+				else
+					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
+
+
+			// TODO: Remove.
+			/*
 			for(var/datum/technomancer/spell/spell in spell_instances)
 				if(spell.hidden)
 					continue
@@ -140,8 +190,14 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 					dat += "<a href='byond://?src=\ref[src];spell_choice=[spell.name]'>Purchase</a> ([spell.cost])<br><br>"
 				else
 					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
-			onclose(user, "radio")
+			*/
+
+			var/datum/browser/popup = new(user, "technomancer_catalog", "Catalog - Functions", size_x, size_y, src)
+			popup.set_content(dat.Join())
+			popup.open()
+
+		//	user << browse(dat.Join(), "window=radio")
+		//	onclose(user, "radio")
 		if(1) //Equipment
 			var/dat = ""
 			user.set_machine(src)
@@ -281,11 +337,39 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 
 	if(loc == H || (in_range(src, H) && istype(loc, /turf)))
 		H.set_machine(src)
+		if(href_list["close"])
+			return
 		if(href_list["tab_choice"])
 			tab = text2num(href_list["tab_choice"])
 		if(href_list["spell_category"])
 			spell_tab = href_list["spell_category"]
 		if(href_list["spell_choice"])
+			var/datum/technomancer_catalog/spell/spell_entry = locate(href_list["spell_choice"])
+			if(!istype(spell_entry))
+				return
+
+			var/obj/item/weapon/technomancer_core/core = null
+			if(istype(H.back, /obj/item/weapon/technomancer_core))
+				core = H.back
+
+			if(!core)
+				to_chat(H, span("warning", "You need to be wearing a Manipulation Core in order to buy Functions."))
+				return
+
+			if(spell_entry.cost <= budget)
+				if(!core.get_spell_metadata(spell_entry.spell_metadata_paths[1]))
+					budget -= spell_entry.cost
+					for(var/path in spell_entry.spell_metadata_paths)
+						var/datum/spell_metadata/meta = new path()
+						core.add_spell(meta.spell_path, meta.name, meta.icon_state)
+						core.spell_metas[path] = meta
+						to_chat(H, span("notice", "You have just bought [meta.name]."))
+				else
+					to_chat(H, span("warning", "You already have that!"))
+			else
+				to_chat(H, span("warning", "You can't afford that!"))
+				return
+			/*
 			var/datum/technomancer/new_spell = null
 			//Locate the spell.
 			for(var/datum/technomancer/spell/spell in spell_instances)
@@ -309,6 +393,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 				else //Can't afford.
 					to_chat(H, "<span class='danger'>You can't afford that!</span>")
 					return
+			*/
 
 		// This needs less copypasta.
 		if(href_list["item_choice"])
