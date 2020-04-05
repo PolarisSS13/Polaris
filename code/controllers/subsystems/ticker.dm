@@ -102,14 +102,15 @@ var/global/datum/controller/subsystem/ticker/ticker
 			fire() // Don't wait for next tick, do it now!
 		return
 
-	if(pregame_timeleft <= config.vote_autogamemode_timeleft)
-		SSvote.autogamemode() // Start the game mode vote
+	if(pregame_timeleft <= config.vote_autogamemode_timeleft && !SSvote.gamemode_vote_called)
+		SSvote.autogamemode() // Start the game mode vote (if we haven't had one already)
 
 // Called during GAME_STATE_SETTING_UP (RUNLEVEL_SETUP)
 /datum/controller/subsystem/ticker/proc/setup_tick(resumed = FALSE)
 	if(!setup_choose_gamemode())
 		// It failed, go back to lobby state and re-send the welcome message
 		pregame_timeleft = config.pregame_time
+		SSvote.gamemode_vote_called = FALSE // Allow another autogamemode vote
 		current_state = GAME_STATE_PREGAME
 		Master.SetRunLevel(RUNLEVEL_LOBBY)
 		pregame_welcome()
