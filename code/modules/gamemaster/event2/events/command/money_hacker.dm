@@ -97,7 +97,7 @@
 		"69,420t"
 		))
 
-	var/date1 = "31 December, 1999"
+	var/date1 = "1 January 1970" // Unix epoch.
 	var/date2 = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [rand(1000,3000)]"
 	T.date = pick("", current_date_string, date1, date2,"Nowhen")
 
