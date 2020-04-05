@@ -5,6 +5,8 @@
 	var/list/weighted_events = list()
 	for(var/E in ticker.available_events)
 		var/datum/event2/meta/event = E
+		if(!event.enabled)
+			continue
 		weighted_events[event] = event.get_weight()
 
 	var/datum/event2/meta/choice = pickweight(weighted_events)
@@ -31,7 +33,7 @@
 	var/list/weighted_events = list()
 	for(var/E in ticker.available_events)
 		var/datum/event2/meta/event = E
-		if(!E.enabled)
+		if(!event.enabled)
 			continue
 		weighted_events[event] = event.get_weight() + (event.chaos * 2)
 
