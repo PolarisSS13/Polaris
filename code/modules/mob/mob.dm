@@ -223,6 +223,10 @@
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
+	
+	//Could be gone by the time they finally pick something
+	if(!A)
+		return 1
 
 	face_atom(A)
 	A.examine(src)
@@ -1191,3 +1195,25 @@ mob/proc/yank_out_object()
 /mob/onTransitZ(old_z, new_z)
 	..()
 	update_client_z(new_z)
+
+/mob/cloak()
+	. = ..()
+	if(client && cloaked_selfimage)
+		client.images += cloaked_selfimage
+
+/mob/uncloak()
+	if(client && cloaked_selfimage)
+		client.images -= cloaked_selfimage
+	return ..()
+
+/mob/get_cloaked_selfimage()
+	var/icon/selficon = getCompoundIcon(src)
+	selficon.MapColors(0,0,0, 0,0,0, 0,0,0, 1,1,1) //White
+	var/image/selfimage = image(selficon)
+	selfimage.color = "#0000FF"
+	selfimage.alpha = 100
+	selfimage.layer = initial(layer)
+	selfimage.plane = initial(plane)
+	selfimage.loc = src
+
+	return selfimage

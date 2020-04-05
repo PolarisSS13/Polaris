@@ -1,6 +1,0 @@
-author: Leshana
-delete-after: True
-changes: 
-  - rscadd: "Added skybox parallax background for space."
-  - rscadd: "Baystation12 style Overmap"
-  - tweak: "Make transit turfs (shuttle transit) actually look like they move in the right direction."

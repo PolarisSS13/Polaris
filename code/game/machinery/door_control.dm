@@ -204,3 +204,17 @@
 		icon_state = "launcherbtt"
 	else
 		icon_state = "launcheract"
+
+/*
+	Shieldgen remote control
+*/
+/obj/machinery/button/remote/shields
+	name = "remote shield control"
+	desc = "It controls shields, remotely."
+
+/obj/machinery/button/remote/shields/trigger(var/mob/user)
+	for(var/obj/machinery/shield_gen/SG in machines)
+		if(SG.id == id)
+			spawn(0)
+				if(SG?.anchored)
+					SG.toggle()

@@ -30,6 +30,7 @@
 	var/used_environ = 0
 
 	var/has_gravity = 1
+	var/secret_name = FALSE // This tells certain things that display areas' names that they shouldn't display this area's name.
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
@@ -44,24 +45,17 @@
 	var/forbid_events = FALSE // If true, random events will not start inside this area.
 
 /area/New()
-	icon_state = ""
 	uid = ++global_uid
-	all_areas += src
-
-	if(!requires_power)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
-
-	if(dynamic_lighting)
-		luminosity = 0
-	else
-		luminosity = 1
-
+	all_areas += src //Replace with /area in world? Byond optimizes X in world loops.
+	
 	..()
 
 /area/Initialize()
 	. = ..()
+
+	luminosity = !(dynamic_lighting)
+	icon_state = ""
+	
 	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
 
 /area/LateInitialize()
@@ -84,7 +78,7 @@
 	// NOTE: There probably won't be any atoms in these turfs, but just in case we should call these procs.
 	A.contents.Add(T)
 	if(old_area)
-		// Handle dynamic lighting update if 
+		// Handle dynamic lighting update if
 		if(T.dynamic_lighting && old_area.dynamic_lighting != A.dynamic_lighting)
 			if(A.dynamic_lighting)
 				T.lighting_build_overlay()
@@ -423,3 +417,8 @@ var/list/ghostteleportlocs = list()
 	ghostteleportlocs = sortAssoc(ghostteleportlocs)
 
 	return 1
+
+/area/proc/get_name()
+	if(secret_name)
+		return "Unknown Area"
+	return name
