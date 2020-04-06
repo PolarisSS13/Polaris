@@ -17,12 +17,9 @@
 	var/datum/radio_frequency/radio_connection
 	var/deadman = FALSE
 
-/obj/item/device/assembly/signaler/New()
-	..()
-	spawn(40)
-		set_frequency(frequency)
-	return
-
+/obj/item/device/assembly/signaler/Initialize()
+	. = ..()
+	set_frequency(frequency)
 
 /obj/item/device/assembly/signaler/activate()
 	if(cooldown > 0)	return FALSE
@@ -148,7 +145,7 @@ Code:
 
 	if(!holder)
 		for(var/mob/O in hearers(1, src.loc))
-			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+			O.show_message("[bicon(src)] *beep* *beep*", 3, "*beep* *beep*", 2)
 	return
 
 

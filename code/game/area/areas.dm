@@ -30,6 +30,7 @@
 	var/used_environ = 0
 
 	var/has_gravity = 1
+	var/secret_name = FALSE // This tells certain things that display areas' names that they shouldn't display this area's name.
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
@@ -41,26 +42,20 @@
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 	var/global/global_uid = 0
 	var/uid
+	var/forbid_events = FALSE // If true, random events will not start inside this area.
 
 /area/New()
-	icon_state = ""
 	uid = ++global_uid
-	all_areas += src
-
-	if(!requires_power)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
-
-	if(dynamic_lighting)
-		luminosity = 0
-	else
-		luminosity = 1
-
+	all_areas += src //Replace with /area in world? Byond optimizes X in world loops.
+	
 	..()
 
 /area/Initialize()
 	. = ..()
+
+	luminosity = !(dynamic_lighting)
+	icon_state = ""
+	
 	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
 
 /area/LateInitialize()
@@ -70,6 +65,31 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 	return INITIALIZE_HINT_LATELOAD
+
+// Changes the area of T to A. Do not do this manually.
+// Area is expected to be a non-null instance.
+/proc/ChangeArea(var/turf/T, var/area/A)
+	if(!istype(A))
+		CRASH("Area change attempt failed: invalid area supplied.")
+	var/area/old_area = get_area(T)
+	if(old_area == A)
+		return
+	// NOTE: BayStation calles area.Exited/Entered for the TURF T.  So far we don't do that.s
+	// NOTE: There probably won't be any atoms in these turfs, but just in case we should call these procs.
+	A.contents.Add(T)
+	if(old_area)
+		// Handle dynamic lighting update if
+		if(T.dynamic_lighting && old_area.dynamic_lighting != A.dynamic_lighting)
+			if(A.dynamic_lighting)
+				T.lighting_build_overlay()
+			else
+				T.lighting_clear_overlay()
+		for(var/atom/movable/AM in T)
+			old_area.Exited(AM, A)
+	for(var/atom/movable/AM in T)
+		A.Entered(AM, old_area)
+	for(var/obj/machinery/M in T)
+		M.power_change()
 
 /area/proc/get_contents()
 	return contents
@@ -335,6 +355,8 @@ var/list/mob/living/forced_ambiance_list = new
 			temp_airlock.prison_open()
 		for(var/obj/machinery/door/window/temp_windoor in src)
 			temp_windoor.open()
+		for(var/obj/machinery/door/blast/temp_blast in src)
+			temp_blast.open()
 
 /area/has_gravity()
 	return has_gravity
@@ -395,3 +417,8 @@ var/list/ghostteleportlocs = list()
 	ghostteleportlocs = sortAssoc(ghostteleportlocs)
 
 	return 1
+
+/area/proc/get_name()
+	if(secret_name)
+		return "Unknown Area"
+	return name

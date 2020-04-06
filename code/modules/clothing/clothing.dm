@@ -172,7 +172,7 @@
 	else
 		O = src
 
-	user.u_equip(src)
+	user.unEquip(src)
 
 	if (O)
 		user.put_in_hands(O)
@@ -186,6 +186,24 @@
 		var/mob/M = src.loc
 		M.update_inv_ears()
 
+/obj/item/clothing/ears/MouseDrop(var/obj/over_object)
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		// If this covers both ears, we want to return the result of unequipping the primary object, and kill the off-ear one
+		if(slot_flags & SLOT_TWOEARS)
+			var/obj/item/clothing/ears/O = (H.l_ear == src ? H.r_ear : H.l_ear)
+			if(istype(src, /obj/item/clothing/ears/offear))
+				. = O.MouseDrop(over_object)
+				H.drop_from_inventory(src)
+				qdel(src)
+			else
+				. = ..()
+				H.drop_from_inventory(O)
+				qdel(O)
+		else
+			. = ..()
+
+
 /obj/item/clothing/ears/offear
 	name = "Other ear"
 	w_class = ITEMSIZE_HUGE
@@ -193,7 +211,7 @@
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
-	New(var/obj/O)
+/obj/item/clothing/ears/offear/New(var/obj/O)
 		name = O.name
 		desc = O.desc
 		icon = O.icon
@@ -229,6 +247,7 @@
 		SPECIES_TESHARI = 'icons/mob/species/seromi/gloves.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi'
 		)
+	drop_sound = 'sound/items/drop/gloves.ogg'
 
 /obj/item/clothing/proc/set_clothing_index()
 	return
@@ -362,6 +381,7 @@
 		SPECIES_TESHARI = 'icons/mob/species/seromi/head.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi'
 		)
+	drop_sound = 'sound/items/drop/hat.ogg'
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -517,6 +537,7 @@
 		SPECIES_TESHARI = 'icons/mob/species/seromi/shoes.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi'
 		)
+	drop_sound = 'sound/items/drop/shoes.ogg'
 
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"

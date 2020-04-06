@@ -1,20 +1,45 @@
 /turf/space
 	icon = 'icons/turf/space.dmi'
 	name = "\proper space"
-	icon_state = "0"
+	icon_state = "default"
 	dynamic_lighting = 0
+	plane = SPACE_PLANE
 
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	can_build_into_floor = TRUE
 	var/keep_sprite = FALSE
-//	heat_capacity = 700000 No.
 
 /turf/space/Initialize()
 	. = ..()
+	
 	if(!keep_sprite)
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
-	update_starlight()
+		icon_state = "white"
+	
+	if(config.starlight)
+		update_starlight()
+	
+	toggle_transit() //Add static dust (not passing a dir)
+
+/turf/space/proc/toggle_transit(var/direction)
+	cut_overlays()
+	
+	if(!direction)
+		add_overlay(SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"])
+		return
+
+	if(direction & (NORTH|SOUTH))
+		var/x_shift = SSskybox.phase_shift_by_x[src.x % (SSskybox.phase_shift_by_x.len - 1) + 1]
+		var/transit_state = ((direction & SOUTH ? world.maxy - src.y : src.y) + x_shift)%15
+		add_overlay(SSskybox.speedspace_cache["NS_[transit_state]"])
+	else if(direction & (EAST|WEST))
+		var/y_shift = SSskybox.phase_shift_by_y[src.y % (SSskybox.phase_shift_by_y.len - 1) + 1]
+		var/transit_state = ((direction & WEST ? world.maxx - src.x : src.x) + y_shift)%15
+		add_overlay(SSskybox.speedspace_cache["EW_[transit_state]"])
+	
+	for(var/atom/movable/AM in src)
+		if (AM.simulated && !AM.anchored)
+			AM.throw_at(get_step(src,reverse_direction(direction)), 5, 1)
 
 /turf/space/is_space()
 	return 1
@@ -24,9 +49,10 @@
 	for(var/obj/O in src)
 		O.hide(0)
 
+/turf/space/is_solid_structure()
+	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
+
 /turf/space/proc/update_starlight()
-	if(!config.starlight)
-		return
 	if(locate(/turf/simulated) in orange(src,1))
 		set_light(config.starlight)
 	else

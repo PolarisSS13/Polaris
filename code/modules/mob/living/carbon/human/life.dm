@@ -1089,9 +1089,9 @@
 
 	return 1
 
-/mob/living/carbon/human/proc/set_stat(var/new_stat)
-	stat = new_stat
-	if(stat)
+/mob/living/carbon/human/set_stat(var/new_stat)
+	. = ..()
+	if(. && stat)
 		update_skin(1)
 
 /mob/living/carbon/human/handle_regular_hud_updates()
@@ -1506,7 +1506,6 @@
 	else
 		shock_stage = min(shock_stage, 160)
 		shock_stage = max(shock_stage-1, 0)
-		return
 
 	if(stat)
 		return 0

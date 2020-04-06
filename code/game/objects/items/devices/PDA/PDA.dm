@@ -65,6 +65,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
 
+	var/spam_proof = FALSE // If true, it can't be spammed by random events.
+
 /obj/item/device/pda/examine(mob/user)
 	if(..(user, 1))
 		to_chat(user, "The time [stationtime2text()] is displayed in the corner of the screen.")
@@ -334,6 +336,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/ai/pai
 	ttone = "assist"
 
+/obj/item/device/pda/ai/shell
+	spam_proof = TRUE // Since empty shells get a functional PDA.
 
 // Used for the PDA multicaster, which mirrors messages sent to it to a specific department,
 /obj/item/device/pda/multicaster
@@ -342,6 +346,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	ttone = "data"
 	detonate = 0
 	news_silent = 1
+	spam_proof = TRUE // Spam messages don't actually work and its difficult to disable these.
 	var/list/cartridges_to_send_to = list()
 
 // This is what actually mirrors the message,
@@ -655,8 +660,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	// auto update every Master Controller tick
 	ui.set_auto_update(auto_update)
 
-//NOTE: graphic resources are loaded on client login
 /obj/item/device/pda/attack_self(mob/user as mob)
+	var/datum/asset/assets = get_asset_datum(/datum/asset/simple/pda)
+	assets.send(user)
 
 	user.set_machine(src)
 
@@ -1146,7 +1152,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if (!beep_silent)
 		playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
 		for (var/mob/O in hearers(2, loc))
-			O.show_message(text("\icon[src] *[message_tone]*"))
+			O.show_message(text("[bicon(src)] *[message_tone]*"))
 	//Search for holder of the PDA.
 	var/mob/living/L = null
 	if(loc && isliving(loc))
@@ -1161,7 +1167,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		SSnanoui.update_user_uis(L, src) // Update the receiving user's PDA UI so that they can see the new message
 
 /obj/item/device/pda/proc/new_news(var/message)
-	new_info(news_silent, newstone, news_silent ? "" : "\icon[src] <b>[message]</b>")
+	new_info(news_silent, newstone, news_silent ? "" : "[bicon(src)] <b>[message]</b>")
 
 	if(!news_silent)
 		new_news = 1
@@ -1176,7 +1182,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	new_message(sending_device, sending_device.owner, sending_device.ownjob, message)
 
 /obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message, var/reply = 1)
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply ? "<a href='byond://?src=\ref[src];choice=Message;notap=[istype(loc, /mob/living/silicon)];skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"])"
+	var/reception_message = "[bicon(src)] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply ? "<a href='byond://?src=\ref[src];choice=Message;notap=[istype(loc, /mob/living/silicon)];skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"])"
 	new_info(message_silent, ttone, reception_message)
 
 	log_pda("(PDA: [sending_unit]) sent \"[message]\" to [name]", usr)
@@ -1188,11 +1194,20 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(ismob(sending_unit.loc) && isAI(loc))
 		track = "(<a href='byond://?src=\ref[loc];track=\ref[sending_unit.loc];trackname=[html_encode(sender)]'>Follow</a>)"
 
-	var/reception_message = "\icon[src] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=1;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
+	var/reception_message = "[bicon(src)] <b>Message from [sender] ([sender_job]), </b>\"[message]\" (<a href='byond://?src=\ref[src];choice=Message;notap=1;skiprefresh=1;target=\ref[sending_unit]'>Reply</a>) [track]"
 	new_info(message_silent, newstone, reception_message)
 
 	log_pda("(PDA: [sending_unit]) sent \"[message]\" to [name]",usr)
 	new_message = 1
+
+/obj/item/device/pda/proc/spam_message(sender, message)
+	var/reception_message = "\icon[src] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)"
+	new_info(message_silent, ttone, reception_message)
+
+	if(prob(50)) // Give the AI an increased chance to intercept the message
+		for(var/mob/living/silicon/ai/ai in mob_list)
+			if(ai.aiPDA != src)
+				ai.show_message("<i>Intercepted message from <b>[sender]</b></i> (Unknown / spam?) <i>to <b>[owner]</b>: [message]</i>")
 
 /obj/item/device/pda/verb/verb_reset_pda()
 	set category = "Object"
