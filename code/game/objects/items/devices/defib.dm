@@ -494,6 +494,7 @@
 	M.Weaken(rand(10,25))
 	M.updatehealth()
 	apply_brain_damage(M)
+	SSgame_master.adjust_danger(-20)
 
 /obj/item/weapon/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H)
 	if(!H.should_have_organ(O_BRAIN))
