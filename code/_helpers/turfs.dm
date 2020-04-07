@@ -33,13 +33,6 @@
 		available_turfs = start_turfs
 	return pick(available_turfs)
 
-/proc/is_below_sound_pressure(var/turf/T)
-	var/datum/gas_mixture/environment = T ? T.return_air() : null
-	var/pressure =  environment ? environment.return_pressure() : 0
-	if(pressure < SOUND_MINIMUM_PRESSURE)
-		return TRUE
-	return FALSE
-
 // Picks a turf that is clearance tiles away from the map edge given by dir, on z-level Z
 /proc/pick_random_edge_turf(var/dir, var/Z, var/clearance = TRANSITIONEDGE + 1)
 	if(!dir)
@@ -53,6 +46,13 @@
 			return locate(world.maxx - clearance, rand(clearance, world.maxy - clearance), Z)
 		if(WEST)
 			return locate(clearance, rand(clearance, world.maxy - clearance), Z)
+
+/proc/is_below_sound_pressure(var/turf/T)
+	var/datum/gas_mixture/environment = T ? T.return_air() : null
+	var/pressure =  environment ? environment.return_pressure() : 0
+	if(pressure < SOUND_MINIMUM_PRESSURE)
+		return TRUE
+	return FALSE
 
 /*
 	Turf manipulation
