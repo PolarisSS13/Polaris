@@ -55,12 +55,12 @@
 	if (islist)
 		dropdownoptions = list(
 			"---",
-			"Add Item" = "?_src_=vars;listadd=[refid]",
-			"Remove Nulls" = "?_src_=vars;listnulls=[refid]",
-			"Remove Dupes" = "?_src_=vars;listdupes=[refid]",
-			"Set len" = "?_src_=vars;listlen=[refid]",
-			"Shuffle" = "?_src_=vars;listshuffle=[refid]",
-			"Show VV To Player" = "?_src_=vars;expose=[refid]"
+			"Add Item" = "?_src_=vars;[VV_HK_LIST_ADD]=TRUE;target=[refid]",
+			"Remove Nulls" = "?_src_=vars;[VV_HK_LIST_ERASE_NULLS]=TRUE;target=[refid]",
+			"Remove Dupes" = "?_src_=vars;[VV_HK_LIST_ERASE_DUPES]=TRUE;target=[refid]",
+			"Set len" = "?_src_=vars;[VV_HK_LIST_SET_LENGTH]=TRUE;target=[refid]",
+			"Shuffle" = "?_src_=vars;[VV_HK_LIST_SHUFFLE]=TRUE;target=[refid]",
+			// "Show VV To Player" = "?_src_=vars;[VV_HK_EXPOSE]=TRUE;target=[refid]" // TODO - Not yet implemented for lists
 			)
 		autoconvert_dropdown = TRUE
 	else
