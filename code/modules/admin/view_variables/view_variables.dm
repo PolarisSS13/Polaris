@@ -88,7 +88,7 @@
 		for (var/i in 1 to L.len)
 			var/key = L[i]
 			var/value
-			if (IS_NORMAL_LIST(L) && !isnum(key))
+			if (IS_NORMAL_LIST(L) && IS_VALID_ASSOC_KEY(key))
 				value = L[key]
 			variable_html += debug_variable(i, value, 0, D)
 	else
