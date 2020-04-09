@@ -586,7 +586,7 @@
 	var/electrified = 0
 
 	//Departments that the cycler can paint suits to look like.
-	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Emergency Medical Response","Crowd Control","Sec EVA")
+	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Emergency Medical Response","Crowd Control")
 	//Species that the suits can be configured to fit.
 	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_TAJ, SPECIES_TESHARI)
 
@@ -628,7 +628,7 @@
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
-	departments = list("Security","Crowd Control","Sec EVA")
+	departments = list("Security","Crowd Control")
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
@@ -766,7 +766,7 @@
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
-	departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Crowd Control","Sec EVA","Emergency Medical Response","^%###^%$", "Charring")
+	departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Crowd Control","Emergency Medical Response","^%###^%$", "Charring")
 	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
 
 	emagged = 1
@@ -1042,17 +1042,6 @@
 				suit.name = "crowd control voidsuit"
 				suit.icon_state = "rig-sec_riot"
 				suit.item_state = "rig-sec_riot"
-				suit.item_state_slots[slot_r_hand_str] = "sec_voidsuit_riot"
-				suit.item_state_slots[slot_l_hand_str] = "sec_voidsuit_riot"
-		if("Sec EVA")
-			if(helmet)
-				helmet.name = "security eva voidsuit helmet"
-				helmet.icon_state = "rig0-secalt"
-				helmet.item_state = "rig0-secalt"
-			if(suit)
-				suit.name = "security eva voidsuit"
-				suit.icon_state = "rig-secalt"
-				suit.item_state = "rig-secalt"
 				suit.item_state_slots[slot_r_hand_str] = "sec_voidsuit_riot"
 				suit.item_state_slots[slot_l_hand_str] = "sec_voidsuit_riot"
 		if("Atmos")
