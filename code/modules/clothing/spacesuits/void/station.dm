@@ -200,7 +200,7 @@
 
 /obj/item/clothing/suit/space/void/security/riot
 	name = "crowd control voidsuit"
-	desc = "A heavy-set and ominous looking crowd control suit helmet. Fitted with state of the art shock absorbing materials, to disperse blunt force trauma."
+	desc = "A heavy-set and ominous looking crowd control suit. Fitted with state of the art shock absorbing materials, to disperse blunt force trauma."
 	icon_state = "rig-sec_riot"
 	armor = list(melee = 70, bullet = 15, laser = 15, energy = 5, bomb = 40, bio = 100, rad = 10)
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuit_riot", slot_l_hand_str = "sec_voidsuit_riot")
