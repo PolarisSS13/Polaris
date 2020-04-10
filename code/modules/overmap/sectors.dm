@@ -6,6 +6,7 @@
 	scannable = TRUE
 
 	var/list/map_z = list()
+	var/list/extra_z_levels //if you need to manually insist that these z-levels are part of this sector, for things like edge-of-map step trigger transitions rather than multi-z complexes
 
 	var/list/initial_generic_waypoints //store landmark_tag of landmarks that should be added to the actual lists below on init.
 	var/list/initial_restricted_waypoints //For use with non-automatic landmarks (automatic ones add themselves).
@@ -50,12 +51,16 @@
 //This is called later in the init order by SSshuttles to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
 
-// TODO - Leshana - Implement
-///obj/effect/overmap/visitable/proc/get_areas()
-//	return get_filtered_areas(list(/proc/area_belongs_to_zlevels = map_z))
+/obj/effect/overmap/visitable/proc/get_areas()
+	. = list()
+	for(var/area/A)
+		if (A.z in map_z)
+			. += A
 
 /obj/effect/overmap/visitable/proc/find_z_levels()
 	map_z = GetConnectedZlevels(z)
+	if(LAZYLEN(extra_z_levels))
+		map_z |= extra_z_levels
 
 /obj/effect/overmap/visitable/proc/register_z_levels()
 	for(var/zlevel in map_z)
@@ -68,6 +73,12 @@
 		global.using_map.station_levels |= map_z
 		global.using_map.contact_levels |= map_z
 		global.using_map.map_levels |= map_z
+
+/obj/effect/overmap/visitable/proc/get_space_zlevels()
+	if(in_space)
+		return map_z
+	else
+		return list()
 
 //Helper for init.
 /obj/effect/overmap/visitable/proc/check_ownership(obj/object)
@@ -102,6 +113,21 @@
 /obj/effect/overmap/visitable/proc/generate_skybox()
 	return
 
+/obj/effect/overmap/visitable/MouseEntered(location, control, params)
+	openToolTip(user = usr, tip_src = src, params = params, title = name)
+
+	..()
+
+/obj/effect/overmap/visitable/MouseDown()
+	closeToolTip(usr) //No reason not to, really
+
+	..()
+
+/obj/effect/overmap/visitable/MouseExited()
+	closeToolTip(usr) //No reason not to, really
+
+	..()
+
 /obj/effect/overmap/visitable/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
@@ -117,7 +143,7 @@
 		return 1
 
 	testing("Building overmap...")
-	world.maxz++
+	world.increment_max_z()
 	global.using_map.overmap_z = world.maxz
 
 	testing("Putting overmap on [global.using_map.overmap_z]")

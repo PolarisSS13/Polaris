@@ -24,8 +24,12 @@
 	var/area			= null
 	var/time_died_as_mouse = null //when the client last died as a mouse
 	var/datum/tooltip/tooltips 	= null
+	var/datum/chatOutput/chatOutput
+	var/chatOutputLoadedAt
 
 	var/adminhelped = 0
+	var/examine_text_mode = 0 // Just examine text, include usage (description_info), switch to examine panel.
+
 
 		///////////////
 		//SOUND STUFF//

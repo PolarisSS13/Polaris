@@ -6,10 +6,10 @@
  */
 
 // Determiner constants
-#define DET_NONE		0x00;
-#define DET_DEFINITE	0x01; // the
-#define DET_INDEFINITE	0x02; // a, an, some
-#define DET_AUTO		0x04;
+#define DET_NONE		0x00
+#define DET_DEFINITE	0x01 // the
+#define DET_INDEFINITE	0x02 // a, an, some
+#define DET_AUTO		0x04
 
 /*
  * Misc
@@ -53,7 +53,7 @@
 			// atoms/items/objects can be pretty and whatnot
 			var/atom/A = item
 			if(output_icons && isicon(A.icon) && !ismob(A)) // mobs tend to have unusable icons
-				item_str += "\icon[A]&nbsp;"
+				item_str += "[bicon(A)]&nbsp;"
 			switch(determiners)
 				if(DET_NONE) item_str += A.name
 				if(DET_DEFINITE) item_str += "\the [A]"
@@ -205,6 +205,20 @@ proc/listclearnulls(list/list)
 	else
 		result = first - second
 	return result
+
+/*
+Two lists may be different (A!=B) even if they have the same elements.
+This actually tests if they have the same entries and values.
+*/
+/proc/same_entries(var/list/first, var/list/second)
+	if(!islist(first) || !islist(second))
+		return 0
+	if(length(first) != length(second))
+		return 0
+	for(var/entry in first)
+		if(!(entry in second) || (first[entry] != second[entry]))
+			return 0
+	return 1
 
 /*
  * Returns list containing entries that are in either list but not both.
@@ -831,3 +845,18 @@ proc/dd_sortedTextList(list/incoming)
 	if(L.len)
 		. = L[1]
 		L.Cut(1,2)
+
+//generates a list used to randomize transit animations so they aren't in lockstep
+/proc/get_cross_shift_list(var/size)
+	var/list/result = list()
+
+	result += rand(0, 14)
+	for(var/i in 2 to size)
+		var/shifts = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+		shifts -= result[i - 1] //consecutive shifts should not be equal
+		if(i == size)
+			shifts -= result[1] //because shift list is a ring buffer
+		result += pick(shifts)
+
+	return result
+	
