@@ -9,81 +9,60 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	can_build_into_floor = TRUE
 	var/keep_sprite = FALSE
-//	heat_capacity = 700000 No.
-	var/static/list/dust_cache
-	var/static/list/speedspace_cache
-	var/static/list/phase_shift_by_x
-	var/static/list/phase_shift_by_y
-
-/turf/space/proc/build_dust_cache()
-	//Static
-	LAZYINITLIST(dust_cache)
-	for (var/i in 0 to 25)
-		var/image/im = image('icons/turf/space_dust.dmi', "[i]")
-		im.plane = DUST_PLANE
-		im.alpha = 128 //80
-		im.blend_mode = BLEND_ADD
-		dust_cache["[i]"] = im
-	//Moving
-	LAZYINITLIST(speedspace_cache)
-	for (var/i in 0 to 14)
-		// NORTH/SOUTH
-		var/image/im = image('icons/turf/space_dust_transit.dmi', "speedspace_ns_[i]")
-		im.plane = DUST_PLANE
-		im.blend_mode = BLEND_ADD
-		speedspace_cache["NS_[i]"] = im
-		// EAST/WEST
-		im = image('icons/turf/space_dust_transit.dmi', "speedspace_ew_[i]")
-		im.plane = DUST_PLANE
-		im.blend_mode = BLEND_ADD
-		speedspace_cache["EW_[i]"] = im
+	var/edge = 0
 
 /turf/space/Initialize()
 	. = ..()
+
 	if(!keep_sprite)
 		icon_state = "white"
-	update_starlight()
-	if (!dust_cache)
-		build_dust_cache()
-	toggle_transit() //add static dust
+
+	if(config.starlight)
+		update_starlight()
+
+	build_overedge() //Spread out over the edge of the map if we're an edge
+	toggle_transit() //Add static dust (not passing a dir)
 
 /turf/space/proc/toggle_transit(var/direction)
 	cut_overlays()
-	
+
 	if(!direction)
-		add_overlay(dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"])
+		add_overlay(SSskybox.dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"])
 		return
 
 	if(direction & (NORTH|SOUTH))
-		if(!phase_shift_by_x)
-			phase_shift_by_x = get_cross_shift_list(15)
-		var/x_shift = phase_shift_by_x[src.x % (phase_shift_by_x.len - 1) + 1]
+		var/x_shift = SSskybox.phase_shift_by_x[src.x % (SSskybox.phase_shift_by_x.len - 1) + 1]
 		var/transit_state = ((direction & SOUTH ? world.maxy - src.y : src.y) + x_shift)%15
-		add_overlay(speedspace_cache["NS_[transit_state]"])
+		add_overlay(SSskybox.speedspace_cache["NS_[transit_state]"])
 	else if(direction & (EAST|WEST))
-		if(!phase_shift_by_y)
-			phase_shift_by_y = get_cross_shift_list(15)
-		var/y_shift = phase_shift_by_y[src.y % (phase_shift_by_y.len - 1) + 1]
+		var/y_shift = SSskybox.phase_shift_by_y[src.y % (SSskybox.phase_shift_by_y.len - 1) + 1]
 		var/transit_state = ((direction & WEST ? world.maxx - src.x : src.x) + y_shift)%15
-		add_overlay(speedspace_cache["EW_[transit_state]"])
-	
+		add_overlay(SSskybox.speedspace_cache["EW_[transit_state]"])
+
 	for(var/atom/movable/AM in src)
-		if (AM.simulated && !AM.anchored)
+		if (!AM.simulated)
+			continue
+
+		if(!AM.anchored)
 			AM.throw_at(get_step(src,reverse_direction(direction)), 5, 1)
+		else if (istype(AM, /obj/effect))
+			qdel(AM) //No more space blood coming with the shuttle
 
-//generates a list used to randomize transit animations so they aren't in lockstep
-/turf/space/proc/get_cross_shift_list(var/size)
-	var/list/result = list()
+/turf/space/proc/build_overedge(var/forced_dirs)
+	if(y == world.maxy || forced_dirs & NORTH)
+		edge |= NORTH
+	else if(y == 1 || forced_dirs & SOUTH)
+		edge |= SOUTH
 
-	result += rand(0, 14)
-	for(var/i in 2 to size)
-		var/shifts = list(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
-		shifts -= result[i - 1] //consecutive shifts should not be equal
-		if(i == size)
-			shifts -= result[1] //because shift list is a ring buffer
-		result += pick(shifts)
+	if(x == 1 || forced_dirs & WEST)
+		edge |= WEST
+	else if(x == world.maxx || forced_dirs & EAST)
+		edge |= EAST
 
-	return result
+	if(!edge)
+		return
+
+	add_overlay(SSskybox.mapedge_cache["[edge]"], TRUE)
 
 /turf/space/is_space()
 	return 1
@@ -97,8 +76,6 @@
 	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
 
 /turf/space/proc/update_starlight()
-	if(!config.starlight)
-		return
 	if(locate(/turf/simulated) in orange(src,1))
 		set_light(config.starlight)
 	else
@@ -158,24 +135,16 @@
 		// If that's changed, then you'll want to swipe the rest of the roofing code from code/game/turfs/simulated/floor_attackby.dm
 	return
 
-
-// Ported from unstable r355
-
-/turf/space/Entered(atom/movable/A as mob|obj)
-	if(movement_disabled)
-		to_chat(usr, "<span class='warning'>Movement is admin-disabled.</span>") //This is to identify lag problems
-		return
+/turf/space/Entered(var/atom/movable/A)
 	..()
-	if ((!(A) || src != A.loc))	return
+
+	if (!A || src != A.loc)
+		return
 
 	inertial_drift(A)
 
-	if(ticker && ticker.mode)
-
-		// Okay, so let's make it so that people can travel z levels but not nuke disks!
-		// if(ticker.mode.name == "mercenary")	return
-		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
-			A.touch_map_edge()
+	if(edge && ticker?.mode)
+		A.touch_map_edge()
 
 /turf/space/proc/Sandbox_Spacemove(atom/movable/A as mob|obj)
 	var/cur_x
