@@ -40,7 +40,7 @@
 	if(spawn_locations.len) // Okay we've got landmarks, lets use those!
 		shuffle_inplace(spawn_locations)
 		num_groups = min(num_groups, spawn_locations.len)
-		for (var/i = 0, i <= num_groups, i++)
+		for (var/i = 1, i <= num_groups, i++)
 			var/group_size = rand(group_size_min, group_size_max)
 			for (var/j = 0, j < group_size, j++)
 				spawn_one_carp(spawn_locations[i])
