@@ -176,7 +176,6 @@
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	accuracy = -45 //shooting at the hip
 	scoped_accuracy = 0
-	requires_two_hands = 1
 	one_handed_penalty = 60 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 
 /obj/item/weapon/gun/energy/sniperrifle/ui_action_click()
