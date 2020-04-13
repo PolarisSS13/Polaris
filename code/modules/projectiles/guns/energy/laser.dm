@@ -163,8 +163,8 @@
 	ionized beams, this is a weapon to kill from a distance."
 	icon_state = "sniper"
 	item_state = "sniper"
-	item_state_slots = list(slot_r_hand_str = "psniper", slot_l_hand_str = "psniper")
-	wielded_item_state = "psniper-wielded"
+	item_state_slots = list(slot_r_hand_str = "lsniper", slot_l_hand_str = "lsniper")
+	wielded_item_state = "lsniper-wielded"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
 	projectile_type = /obj/item/projectile/beam/sniper
 	slot_flags = SLOT_BACK
