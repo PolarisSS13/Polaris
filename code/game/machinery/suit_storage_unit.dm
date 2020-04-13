@@ -586,7 +586,7 @@
 	var/electrified = 0
 
 	//Departments that the cycler can paint suits to look like.
-	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Emergency Medical Response","Crowd Control","Sec EVA")
+	var/list/departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Emergency Medical Response","Crowd Control","Security EVA")
 	//Species that the suits can be configured to fit.
 	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_TAJ, SPECIES_TESHARI)
 
@@ -628,7 +628,7 @@
 	name = "Security suit cycler"
 	model_text = "Security"
 	req_access = list(access_security)
-	departments = list("Security","Crowd Control","Sec EVA")
+	departments = list("Security","Crowd Control","Security EVA")
 
 /obj/machinery/suit_cycler/medical
 	name = "Medical suit cycler"
@@ -766,7 +766,7 @@
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
-	departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Crowd Control","Sec EVA","Emergency Medical Response","^%###^%$", "Charring")
+	departments = list("Engineering","Mining","Medical","Security","Atmos","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring")
 	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
 
 	emagged = 1
@@ -980,8 +980,7 @@
 
 //There HAS to be a less bloated way to do this. TODO: some kind of table/icon name coding? ~Z
 //hold onto your hat, this sumbitch just got streamlined -KK
-/obj/machinery/suit_cycler/proc/apply_paintjob(var/obj/item/clothing/head/helmet/parent_helmet as obj,var/obj/item/clothing/suit/space/parent_suit as obj)
-	
+/obj/machinery/suit_cycler/proc/apply_paintjob(var/obj/item/clothing/head/helmet/parent_helmet as obj,var/obj/item/clothing/suit/space/parent_suit as obj)	
 	if(!target_species || !target_department)
 		return
 
@@ -1005,7 +1004,7 @@
 		if("Crowd Control")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/security/riot
 			parent_suit = /obj/item/clothing/suit/space/void/security/riot
-		if("Sec EVA")
+		if("Security EVA")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/security/alt
 			parent_suit = /obj/item/clothing/suit/space/void/security/alt
 		if("Atmos")
@@ -1044,16 +1043,20 @@
 	
 	//look at this! isn't it beautiful? -KK
 	if(helmet)
+		var/obj/item/clothing/H = new parent_helmet
 		helmet.name = "refitted [initial(parent_helmet.name)]"
 		helmet.desc = "refitted [initial(parent_helmet.desc)]"
 		helmet.icon_state = initial(parent_helmet.icon_state)
 		helmet.item_state = initial(parent_helmet.item_state)
 		helmet.light_overlay = initial(parent_helmet.light_overlay)
-		//TODO: figure out how to grab the item state slots too, they're a bit harder
+		helmet.item_state_slots = H.item_state_slots
+		qdel(H)
 
 	if(suit)
+		var/obj/item/clothing/S = new parent_suit
 		suit.name = "refitted [initial(parent_suit.name)]"
 		suit.desc = "refitted [initial(parent_suit.desc)]"
 		suit.icon_state = initial(parent_suit.icon_state)
 		suit.item_state = initial(parent_suit.item_state)
-		//TODO: figure out how to grab the item state slots for these as well
+		suit.item_state_slots = S.item_state_slots
+		qdel(S)
