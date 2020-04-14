@@ -1,0 +1,5 @@
+author: Leshana
+delete-after: True
+changes: 
+  - rscadd: "Admin Start Now verb can be used at any time during startup and it won't actually start the game until initialization is completed."
+  - rscadd: "Lobby stat panel shows time remaining on lobby votes and if the server is done initializing."
