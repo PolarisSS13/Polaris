@@ -216,20 +216,6 @@ function start_vue() {
 					admin: true
 				},
 				{
-					matches: ".ooc.looc, .ooc, .looc", //Dumb game
-					becomes: "vc_looc",
-					pretty: "Local OOC",
-					tooltip: "Local OOC messages, always enabled",
-					required: true
-				},
-				{
-					matches: ".boldannounce, .filter_system",
-					becomes: "vc_system",
-					pretty: "System Messages",
-					tooltip: "Messages from your client, always enabled",
-					required: true
-				},
-				{
 					matches: ".filter_combat, .danger",
 					becomes: "vc_combat",
 					pretty: "Combat Logs",
@@ -260,6 +246,20 @@ function start_vue() {
 					tooltip: "DEBUG: SSPlanets subsystem Recover().",
 					required: false,
 					admin: true
+				},
+				{
+					matches: ".ooc.looc, .ooc, .looc", //Dumb game
+					becomes: "vc_looc",
+					pretty: "Local OOC",
+					tooltip: "Local OOC messages, always enabled",
+					required: true
+				},
+				{
+					matches: ".boldannounce, .filter_system",
+					becomes: "vc_system",
+					pretty: "System Messages",
+					tooltip: "Messages from your client, always enabled",
+					required: true
 				}
 			],
 		},

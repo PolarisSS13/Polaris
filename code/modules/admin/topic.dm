@@ -1522,7 +1522,7 @@
 
 		var/mob/M = locate(href_list["traitor"])
 		if(!ismob(M))
-			to_chat(usr, "<span class='filter_adminlog'>This can only be used on instances of type /mob.</admin>")
+			to_chat(usr, "<span class='filter_adminlog'>This can only be used on instances of type /mob.</span>")
 			return
 		show_traitor_panel(M)
 
