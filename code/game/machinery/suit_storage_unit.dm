@@ -1076,7 +1076,7 @@
 	if(helmet)
 		var/obj/item/clothing/H = new parent_helmet
 		helmet.name = "refitted [initial(parent_helmet.name)]"
-		helmet.desc = "refitted [initial(parent_helmet.desc)]"
+		helmet.desc = initial(parent_helmet.desc)
 		helmet.icon_state = initial(parent_helmet.icon_state)
 		helmet.item_state = initial(parent_helmet.item_state)
 		helmet.light_overlay = initial(parent_helmet.light_overlay)
@@ -1086,7 +1086,7 @@
 	if(suit)
 		var/obj/item/clothing/S = new parent_suit
 		suit.name = "refitted [initial(parent_suit.name)]"
-		suit.desc = "refitted [initial(parent_suit.desc)]"
+		suit.desc = initial(parent_suit.desc)
 		suit.icon_state = initial(parent_suit.icon_state)
 		suit.item_state = initial(parent_suit.item_state)
 		suit.item_state_slots = S.item_state_slots
