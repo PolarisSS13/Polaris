@@ -42,6 +42,15 @@
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
+/datum/teleportation/apportation
+	visible_message_exited = "vanishes into thin air!"
+
+	sound_exited = 'sound/effects/magic/technomancer/teleport_diss.ogg'
+	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
+
+	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
+	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
+
 /datum/teleportation/banish_out
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	sound_exited = 'sound/effects/magic/technomancer/teleport_diss.ogg'

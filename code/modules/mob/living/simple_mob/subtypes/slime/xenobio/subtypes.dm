@@ -164,7 +164,7 @@
 	..()
 
 /obj/item/projectile/beam/lightning/slime
-	power = 10
+	damage = 10
 	fire_sound = 'sound/effects/lightningbolt.ogg'
 
 
@@ -724,7 +724,7 @@
 	for(var/mob/living/L in view(src, 2))
 		if(L.stat == DEAD || !IIsAlly(L))
 			continue
-		L.add_modifier(/datum/modifier/technomancer/haste, 5 SECONDS, src)
+		L.add_modifier(/datum/modifier/haste, 5 SECONDS, src)
 
 
 /mob/living/simple_mob/slime/xenobio/light_pink

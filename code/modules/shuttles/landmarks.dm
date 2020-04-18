@@ -93,7 +93,7 @@
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		for(var/T in list_values(translation))
-			new /obj/effect/temporary_effect/shuttle_landing(T) // It'll delete itself when needed.
+			new /obj/effect/temp_visual/shuttle_landing(T) // It'll delete itself when needed.
 	return
 
 // Should return a readable description of why not if it can't depart.

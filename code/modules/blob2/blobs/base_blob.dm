@@ -194,7 +194,7 @@ var/list/blobs = list()
 	flick("[icon_state]_glow", src)
 
 /obj/structure/blob/proc/blob_attack_animation(atom/A = null, controller) //visually attacks an atom
-	var/obj/effect/temporary_effect/blob_attack/O = new /obj/effect/temporary_effect/blob_attack(src.loc)
+	var/obj/effect/temp_visual/blob_attack/O = new /obj/effect/temp_visual/blob_attack(src.loc)
 	O.set_dir(dir)
 	if(controller)
 		var/mob/observer/blob/BO = controller
@@ -289,13 +289,13 @@ var/list/blobs = list()
 	else
 		update_icon()
 
-/obj/effect/temporary_effect/blob_attack
+/obj/effect/temp_visual/blob_attack
 	name = "blob"
 	desc = "The blob lashing out at something."
 	icon_state = "blob_attack"
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
-	time_to_die = 6
+	duration = 6
 	alpha = 140
 	mouse_opacity = 0
 

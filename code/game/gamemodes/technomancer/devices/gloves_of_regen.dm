@@ -1,12 +1,12 @@
-/datum/technomancer/equipment/gloves_of_regen
+/datum/technomancer_catalog/object/equipment/gloves_of_regen
 	name = "Gloves of Regeneration"
 	desc = "It's a pair of black gloves, with a hypodermic needle on the insides, and a small storage of a secret blend of chemicals \
-	designed to be slowly fed into a living person's system, increasing their metabolism greatly, resulting in accelerated healing.  \
-	A side effect of this healing is that the wearer will generally get hungry a lot faster.  Sliding the gloves on and off also \
-	hurts a lot.  As a bonus, the gloves are more resistant to the elements than most.  It should be noted that synthetics will have \
+	designed to be slowly fed into a living person's system, increasing their metabolism greatly, resulting in accelerated healing. \
+	A side effect of this healing is that the wearer will generally get hungry a lot faster. Sliding the gloves on and off also \
+	hurts a lot.  As a bonus, the gloves are more resistant to the elements than most. It should be noted that synthetics will have \
 	little use for these."
 	cost = 50
-	obj_path = /obj/item/clothing/gloves/regen
+	object_paths = list(/obj/item/clothing/gloves/regen)
 
 /obj/item/clothing/gloves/regen
 	name = "gloves of regeneration"
@@ -36,9 +36,9 @@
 			wearer.custom_pain("Your hands hurt like hell!",1)
 		wearer = null
 
-/obj/item/clothing/gloves/regen/New()
+/obj/item/clothing/gloves/regen/Initialize()
 	START_PROCESSING(SSobj, src)
-	..()
+	return ..()
 
 /obj/item/clothing/gloves/regen/Destroy()
 	wearer = null
@@ -50,17 +50,17 @@
 		return // Robots and dead people don't have a metabolism.
 
 	if(wearer.getBruteLoss())
-		wearer.adjustBruteLoss(-0.1)
-		wearer.nutrition = max(wearer.nutrition - 10, 0)
+		wearer.adjustBruteLoss(-0.5)
+		wearer.nutrition = max(wearer.nutrition - 1, 0)
 	if(wearer.getFireLoss())
-		wearer.adjustFireLoss(-0.1)
-		wearer.nutrition = max(wearer.nutrition - 10, 0)
+		wearer.adjustFireLoss(-0.5)
+		wearer.nutrition = max(wearer.nutrition - 1, 0)
 	if(wearer.getToxLoss())
-		wearer.adjustToxLoss(-0.1)
-		wearer.nutrition = max(wearer.nutrition - 10, 0)
+		wearer.adjustToxLoss(-0.5)
+		wearer.nutrition = max(wearer.nutrition - 1, 0)
 	if(wearer.getOxyLoss())
-		wearer.adjustOxyLoss(-0.1)
-		wearer.nutrition = max(wearer.nutrition - 10, 0)
+		wearer.adjustOxyLoss(-0.5)
+		wearer.nutrition = max(wearer.nutrition - 1, 0)
 	if(wearer.getCloneLoss())
-		wearer.adjustCloneLoss(-0.1)
-		wearer.nutrition = max(wearer.nutrition - 20, 0)
+		wearer.adjustCloneLoss(-0.5)
+		wearer.nutrition = max(wearer.nutrition - 2, 0)

@@ -4,17 +4,26 @@
 #define UTILITY_SPELLS "Utility"
 #define SUPPORT_SPELLS "Support"
 
+#define SPELL_TAB 0
+#define EQUIPMENT_TAB 1
+#define CONSUMABLES_TAB 2
+#define ASSISTANCE_TAB 3
+#define INFO_TAB 4
+
 GLOBAL_LIST_INIT(all_technomancer_spells, subtypesof(/datum/technomancer/spell))
 GLOBAL_LIST_INIT(all_technomancer_equipment, subtypesof(/datum/technomancer/equipment))
 GLOBAL_LIST_INIT(all_technomancer_consumables, subtypesof(/datum/technomancer/consumable))
 GLOBAL_LIST_INIT(all_technomancer_assistance, subtypesof(/datum/technomancer/assistance))
 
 GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technomancer_catalog/spell))
+GLOBAL_LIST_INIT(technomancer_catalog_equipment, init_subtypes_assoc(/datum/technomancer_catalog/object/equipment))
+GLOBAL_LIST_INIT(technomancer_catalog_consumables, init_subtypes_assoc(/datum/technomancer_catalog/object/consumable))
+GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/technomancer_catalog/object/assistance))
 
 // Holds information about what can be bought in the catalog, by the technomancer's version of the traitor uplink.
 // This is a singleton object, unlike the spell metadata objects.
 /datum/technomancer_catalog
-	var/name = "technomancer thing"
+	var/name = null
 	var/desc = "If you can see this, something broke."
 	var/cost = 100 // How many catalog points this is worth.
 
@@ -22,6 +31,10 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 /datum/technomancer_catalog/object
 	var/list/object_paths = null // A list of physical objects that will appear when this is bought.
 	var/forbid_apprentices = FALSE // If true, apprentices can't buy this.
+
+/datum/technomancer_catalog/object/consumable
+
+/datum/technomancer_catalog/object/assistance
 
 // Catalog entries for spells for the core being worn.
 /datum/technomancer_catalog/spell
@@ -124,15 +137,92 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 		else
 			return "<b>[category]</b>"
 
+/obj/item/weapon/technomancer_catalog/proc/show_tab(linked_tab_index, tab_text)
+	if(tab != linked_tab_index)
+		return href(src, list("tab_choice" = linked_tab_index), tab_text)
+	return "<b>[tab_text]</b>"
+
+/obj/item/weapon/technomancer_catalog/proc/get_common_window_header()
+	var/list/dat = list()
+	dat += "<align='center'>"
+	dat += "[show_tab(SPELL_TAB, "Functions")] | "
+	dat += "[show_tab(EQUIPMENT_TAB, "Equipment")] | "
+	dat += "[show_tab(CONSUMABLES_TAB, "Consumables")] | "
+	dat += "[show_tab(ASSISTANCE_TAB, "Assistance")] | "
+	dat += "[show_tab(INFO_TAB, "Info")]"
+	dat += "</align><br>"
+
+	dat += "You currently have a budget of <b>[budget]/[max_budget]</b>.<br><br>"
+	return dat.Join()
+
+/obj/item/weapon/technomancer_catalog/proc/show_spell_window(mob/user, size_x, size_y)
+	var/list/dat = list()
+	dat += get_common_window_header()
+
+	dat += "[href(src, list("refund_functions" = 1), "Refund Functions")]<br><br>"
+
+	dat += "[show_categories(ALL_SPELLS)] | [show_categories(OFFENSIVE_SPELLS)] | [show_categories(DEFENSIVE_SPELLS)] | \
+	[show_categories(UTILITY_SPELLS)] | [show_categories(SUPPORT_SPELLS)]<br>"
+
+	for(var/path in GLOB.technomancer_catalog_spells)
+		var/datum/technomancer_catalog/spell/spell_entry = GLOB.technomancer_catalog_spells[path]
+
+		if(!spell_entry.name)
+			continue
+
+		if(spell_tab != ALL_SPELLS && spell_entry.category != spell_tab)
+			continue
+
+		dat += "<b>[spell_entry.name]</b><br>"
+		dat += "<i>[spell_entry.desc]</i><br>"
+
+		if(spell_entry.spell_power_desc)
+			dat += "<font color='purple'>Spell Power: [spell_entry.spell_power_desc]</font><br>"
+		if(spell_entry.enhancement_desc)
+			dat += span("highlight", "Scepter Effect: [spell_entry.enhancement_desc]<br>")
+
+		if(spell_entry.cost <= budget)
+			dat += "[href(src, list("spell_choice" = spell_entry), "Purchase")] ([spell_entry.cost])<br><br>"
+		else
+			dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
+
+	var/datum/browser/popup = new(user, "technomancer_catalog", "Catalog - Functions", size_x, size_y, src)
+	popup.set_content(dat.Join())
+	popup.open()
+
+/obj/item/weapon/technomancer_catalog/proc/show_item_window(mob/user, list/item_list, size_x, size_y)
+	var/list/dat = list()
+	dat += get_common_window_header()
+
+	for(var/path in item_list)
+		var/datum/technomancer_catalog/object/item_entry = item_list[path]
+
+		if(!item_entry.name)
+			continue
+
+		if(item_entry.forbid_apprentices && apprentice_catalog) // So we don't get apprentices buying apprentices.
+			continue
+
+		dat += "<b>[item_entry.name]</b><br>"
+		dat += "<i>[item_entry.desc]</i><br>"
+		if(item_entry.cost <= budget)
+			dat += "[href(src, list("item_choice" = item_entry), "Purchase")] ([item_entry.cost])<br><br>"
+		else
+			dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
+
+	var/datum/browser/popup = new(user, "technomancer_catalog", "Catalog - Equipment", size_x, size_y, src)
+	popup.set_content(dat.Join())
+	popup.open()
+
 // Proc: attack_self()
 // Parameters: 1 (user - the mob clicking on the catalog)
 // Description: Shows an HTML window, to buy equipment and spells, if the user is the legitimate owner.  Otherwise it cannot be used.
 /obj/item/weapon/technomancer_catalog/attack_self(mob/user)
 	if(!user)
-		return 0
+		return FALSE
 	if(owner && user != owner)
 		to_chat(user, "<span class='danger'>\The [src] knows that you're not the original owner, and has locked you out of it!</span>")
-		return 0
+		return FALSE
 	else if(!owner)
 		bind_to_owner(user)
 
@@ -140,119 +230,15 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 	var/size_y = 700
 
 	switch(tab)
-		if(0) //Functions
-			var/list/dat = list()
-			user.set_machine(src)
-			dat += "<align='center'><b>Functions</b> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=1'>Equipment</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=2'>Consumables</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=3'>Assistance</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=4'>Info</a></align><br>"
-			dat += "You currently have a budget of <b>[budget]/[max_budget]</b>.<br><br>"
-			dat += "<a href='byond://?src=\ref[src];refund_functions=1'>Refund Functions</a><br><br>"
-
-			dat += "[show_categories(ALL_SPELLS)] | [show_categories(OFFENSIVE_SPELLS)] | [show_categories(DEFENSIVE_SPELLS)] | \
-			[show_categories(UTILITY_SPELLS)] | [show_categories(SUPPORT_SPELLS)]<br>"
-			for(var/path in GLOB.technomancer_catalog_spells)
-				var/datum/technomancer_catalog/spell/spell_entry = GLOB.technomancer_catalog_spells[path]
-
-				if(spell_tab != ALL_SPELLS && spell_entry.category != spell_tab)
-					continue
-
-				dat += "<b>[spell_entry.name]</b><br>"
-				dat += "<i>[spell_entry.desc]</i><br>"
-
-				if(spell_entry.spell_power_desc)
-					dat += "<font color='purple'>Spell Power: [spell_entry.spell_power_desc]</font><br>"
-				if(spell_entry.enhancement_desc)
-					dat += "<font color='blue'>Scepter Effect: [spell_entry.enhancement_desc]</font><br>"
-
-				if(spell_entry.cost <= budget)
-					dat += "[href(src, list("spell_choice" = spell_entry), "Purchase")] ([spell_entry.cost])<br><br>"
-				else
-					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-
-
-			// TODO: Remove.
-			/*
-			for(var/datum/technomancer/spell/spell in spell_instances)
-				if(spell.hidden)
-					continue
-				if(spell_tab != ALL_SPELLS && spell.category != spell_tab)
-					continue
-				dat += "<b>[spell.name]</b><br>"
-				dat += "<i>[spell.desc]</i><br>"
-				if(spell.spell_power_desc)
-					dat += "<font color='purple'>Spell Power: [spell.spell_power_desc]</font><br>"
-				if(spell.enhancement_desc)
-					dat += "<font color='blue'>Scepter Effect: [spell.enhancement_desc]</font><br>"
-				if(spell.cost <= budget)
-					dat += "<a href='byond://?src=\ref[src];spell_choice=[spell.name]'>Purchase</a> ([spell.cost])<br><br>"
-				else
-					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			*/
-
-			var/datum/browser/popup = new(user, "technomancer_catalog", "Catalog - Functions", size_x, size_y, src)
-			popup.set_content(dat.Join())
-			popup.open()
-
-		//	user << browse(dat.Join(), "window=radio")
-		//	onclose(user, "radio")
-		if(1) //Equipment
-			var/dat = ""
-			user.set_machine(src)
-			dat += "<align='center'><a href='byond://?src=\ref[src];tab_choice=0'>Functions</a> | "
-			dat += "<b>Equipment</b> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=2'>Consumables</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=3'>Assistance</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=4'>Info</a></align><br>"
-			dat += "You currently have a budget of <b>[budget]/[max_budget]</b>.<br><br>"
-			for(var/datum/technomancer/equipment/E in equipment_instances)
-				dat += "<b>[E.name]</b><br>"
-				dat += "<i>[E.desc]</i><br>"
-				if(E.cost <= budget)
-					dat += "<a href='byond://?src=\ref[src];item_choice=[E.name]'>Purchase</a> ([E.cost])<br><br>"
-				else
-					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
-			onclose(user, "radio")
-		if(2) //Consumables
-			var/dat = ""
-			user.set_machine(src)
-			dat += "<align='center'><a href='byond://?src=\ref[src];tab_choice=0'>Functions</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=1'>Equipment</a> | "
-			dat += "<b>Consumables</b> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=3'>Assistance</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=4'>Info</a></align><br>"
-			dat += "You currently have a budget of <b>[budget]/[max_budget]</b>.<br><br>"
-			for(var/datum/technomancer/consumable/C in consumable_instances)
-				dat += "<b>[C.name]</b><br>"
-				dat += "<i>[C.desc]</i><br>"
-				if(C.cost <= budget)
-					dat += "<a href='byond://?src=\ref[src];item_choice=[C.name]'>Purchase</a> ([C.cost])<br><br>"
-				else
-					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
-			onclose(user, "radio")
-		if(3) //Assistance
-			var/dat = ""
-			user.set_machine(src)
-			dat += "<align='center'><a href='byond://?src=\ref[src];tab_choice=0'>Functions</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=1'>Equipment</a> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=2'>Consumables</a> | "
-			dat += "<b>Assistance</b> | "
-			dat += "<a href='byond://?src=\ref[src];tab_choice=4'>Info</a></align><br>"
-			dat += "You currently have a budget of <b>[budget]/[max_budget]</b>.<br><br>"
-			for(var/datum/technomancer/assistance/A in assistance_instances)
-				dat += "<b>[A.name]</b><br>"
-				dat += "<i>[A.desc]</i><br>"
-				if(A.cost <= budget)
-					dat += "<a href='byond://?src=\ref[src];item_choice=[A.name]'>Purchase</a> ([A.cost])<br><br>"
-				else
-					dat += "<font color='red'><b>Cannot afford!</b></font><br><br>"
-			user << browse(dat, "window=radio")
-			onclose(user, "radio")
-		if(4) //Info
+		if(SPELL_TAB)
+			show_spell_window(user, size_x, size_y)
+		if(EQUIPMENT_TAB)
+			show_item_window(user, GLOB.technomancer_catalog_equipment, size_x, size_y)
+		if(CONSUMABLES_TAB)
+			show_item_window(user, GLOB.technomancer_catalog_consumables, size_x, size_y)
+		if(ASSISTANCE_TAB) //Assistance
+			show_item_window(user, GLOB.technomancer_catalog_assistance, size_x, size_y)
+		if(INFO_TAB)
 			var/dat = ""
 			user.set_machine(src)
 			dat += "<align='center'><a href='byond://?src=\ref[src];tab_choice=0'>Functions</a> | "
@@ -337,7 +323,7 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 
 	if(loc == H || (in_range(src, H) && istype(loc, /turf)))
 		H.set_machine(src)
-		if(href_list["close"])
+		if(href_list["close"]) // So we don't open a new window when the close button is clicked.
 			return
 		if(href_list["tab_choice"])
 			tab = text2num(href_list["tab_choice"])
@@ -357,79 +343,66 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 				return
 
 			if(spell_entry.cost <= budget)
-				if(!core.get_spell_metadata(spell_entry.spell_metadata_paths[1]))
+				if(spell_entry in core.spell_catalog_entries_bought)
+					to_chat(H, span("warning", "You already have [spell_entry.name]!"))
+					return
+				else
 					budget -= spell_entry.cost
+					core.spell_catalog_entries_bought += spell_entry
 					for(var/path in spell_entry.spell_metadata_paths)
 						var/datum/spell_metadata/meta = new path()
 						core.add_spell(meta.spell_path, meta.name, meta.icon_state)
 						core.spell_metas[path] = meta
 						to_chat(H, span("notice", "You have just bought [meta.name]."))
-				else
-					to_chat(H, span("warning", "You already have that!"))
 			else
 				to_chat(H, span("warning", "You can't afford that!"))
 				return
-			/*
-			var/datum/technomancer/new_spell = null
-			//Locate the spell.
-			for(var/datum/technomancer/spell/spell in spell_instances)
-				if(spell.name == href_list["spell_choice"])
-					new_spell = spell
-					break
-
-			var/obj/item/weapon/technomancer_core/core = null
-			if(istype(H.back, /obj/item/weapon/technomancer_core))
-				core = H.back
-
-			if(new_spell && core)
-				if(new_spell.cost <= budget)
-					if(!core.has_spell(new_spell))
-						budget -= new_spell.cost
-						to_chat(H, "<span class='notice'>You have just bought [new_spell.name].</span>")
-						core.add_spell(new_spell.obj_path, new_spell.name, new_spell.ability_icon_state)
-					else //We already own it.
-						to_chat(H, "<span class='danger'>You already have [new_spell.name]!</span>")
-						return
-				else //Can't afford.
-					to_chat(H, "<span class='danger'>You can't afford that!</span>")
-					return
-			*/
 
 		// This needs less copypasta.
-		if(href_list["item_choice"])
-			var/datum/technomancer/desired_object = null
-			for(var/datum/technomancer/O in equipment_instances + consumable_instances + assistance_instances)
-				if(O.name == href_list["item_choice"])
-					desired_object = O
-					break
-
-			if(desired_object)
-				if(desired_object.cost <= budget)
-					budget -= desired_object.cost
-					to_chat(H, "<span class='notice'>You have just bought \a [desired_object.name].</span>")
-					var/obj/O = new desired_object.obj_path(get_turf(H))
-					technomancer_belongings.Add(O) // Used for the Track spell.
-
-				else //Can't afford.
-					to_chat(H, "<span class='danger'>You can't afford that!</span>")
-					return
+//		if(href_list["item_choice"])
+//			var/datum/technomancer/desired_object = null
+//			for(var/datum/technomancer/O in equipment_instances + consumable_instances + assistance_instances)
+//				if(O.name == href_list["item_choice"])
+//					desired_object = O
+//					break
+//
+//			if(desired_object)
+//				if(desired_object.cost <= budget)
+//					budget -= desired_object.cost
+//					to_chat(H, "<span class='notice'>You have just bought \a [desired_object.name].</span>")
+//					var/obj/O = new desired_object.obj_path(get_turf(H))
+//					GLOB.technomancer_belongings.Add(O) // Used for the Track spell.
+//
+//				else //Can't afford.
+//					to_chat(H, "<span class='danger'>You can't afford that!</span>")
+//					return
 
 
 		if(href_list["refund_functions"])
-			var/turf/T = get_turf(H)
-			if(T.z in using_map.player_levels)
-				to_chat(H, "<span class='danger'>You can only refund at your base, it's too late now!</span>")
+	//		var/turf/T = get_turf(H)
+	//		if(T.z in using_map.player_levels)
+	//			to_chat(H, "<span class='danger'>You can only refund at your base, it's too late now!</span>")
+	//			return
+			var/obj/item/weapon/technomancer_core/core = H.get_technomancer_core()
+			if(!core)
+				to_chat(H, span("warning", "You need to be wearing a core to refund its functions."))
 				return
-			var/obj/item/weapon/technomancer_core/core = null
-			if(istype(H.back, /obj/item/weapon/technomancer_core))
-				core = H.back
-			if(core)
-				for(var/obj/spellbutton/spell in core.spells)
-					for(var/datum/technomancer/spell/spell_datum in spell_instances)
-						if(spell_datum.obj_path == spell.spellpath)
-							budget += spell_datum.cost
-							core.remove_spell(spell)
-							break
+
+			for(var/thing in core.spell_catalog_entries_bought)
+				var/datum/technomancer_catalog/spell/spell_entry = thing
+
+				budget += spell_entry.cost
+				core.spell_catalog_entries_bought -= spell_entry
+
+				for(var/path in spell_entry.spell_metadata_paths)
+					var/datum/spell_metadata/meta = core.spell_metas[path]
+
+					for(var/obj/spellbutton/button in core.spells)
+						if(button.spellpath == meta.spell_path)
+							core.remove_spell(button)
+
+					core.spell_metas -= path
+					to_chat(H, span("notice", "You have refunded [meta]."))
 		attack_self(H)
 
 /obj/item/weapon/technomancer_catalog/attackby(var/atom/movable/AM, var/mob/user)
@@ -460,3 +433,9 @@ GLOBAL_LIST_INIT(technomancer_catalog_spells, init_subtypes_assoc(/datum/technom
 				return
 	to_chat(user, "<span class='warn'>\The [src] is unable to refund \the [AM].</span>")
 
+
+#undef SPELL_TAB
+#undef EQUIPMENT_TAB
+#undef CONSUMABLES_TAB
+#undef ASSISTANCE_TAB
+#undef INFO_TAB

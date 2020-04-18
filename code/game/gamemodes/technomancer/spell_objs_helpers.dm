@@ -14,16 +14,16 @@
 	return FALSE
 
 // Used to distinguish friend from foe.
-/obj/item/weapon/spell/proc/is_ally(var/mob/living/L)
+/obj/item/weapon/spell/technomancer/proc/is_ally(var/mob/living/L)
 	if(L == owner) // The best ally is ourselves.
-		return 1
+		return TRUE
 	if(L.mind && technomancers.is_antagonist(L.mind)) // This should be done better since we might want opposing technomancers later.
-		return 1
+		return TRUE
 	if(istype(L, /mob/living/simple_mob)) // Mind controlled simple mobs count as allies too.
 		var/mob/living/simple_mob/SM = L
-		if(owner in SM.friends)
-			return 1
-	return 0
+		if(SM.IIsAlly(owner))
+			return TRUE
+	return FALSE
 
 /obj/item/weapon/spell/proc/allowed_to_teleport()
 	if(owner)
@@ -40,12 +40,8 @@
 		return TRUE
 	return FALSE
 
-/obj/item/weapon/spell/proc/calculate_spell_power(var/amount)
-	if(core)
-		return round(amount * core.spell_power_modifier, 1)
-
 // Returns a 'target' mob from a radius around T.
-/obj/item/weapon/spell/proc/targeting_assist(var/turf/T, radius = 5)
+/obj/item/weapon/spell/technomancer/proc/targeting_assist(var/turf/T, radius = 5)
 	var/chosen_target = null
 	var/potential_targets = view(T,radius)
 	for(var/mob/living/L in potential_targets)

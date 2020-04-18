@@ -26,6 +26,7 @@
 	var/cooldown_modifier 	 = 1.0	// Multiplier on cooldowns for spells.
 	var/list/spells = list()		// This contains the buttons used to make spells in the user's hand.
 	var/list/spell_metas = list()	// Assoc list containing `/datum/spell_metadata`s, with the path being the key, and the instance being the value.
+	var/list/spell_catalog_entries_bought = list()
 	var/list/appearances = list(	// Assoc list containing possible icon_states that the wiz can change the core to.
 		"default"			= "technomancer_core",
 		"wizard's cloak"	= "wizard_cloak"
@@ -141,21 +142,28 @@
 	var/spellpath = null
 	var/obj/item/weapon/technomancer_core/core = null
 	var/ability_icon_state = null
+	var/spell_metadata_path = null
 
-/obj/spellbutton/New(loc, var/path, var/new_name, var/new_icon_state)
-	if(!path || !ispath(path))
-		message_admins("ERROR: /obj/spellbutton/New() was not given a proper path!")
-		qdel(src)
-	src.name = new_name
-	src.spellpath = path
-	src.loc = loc
-	src.core = loc
-	src.ability_icon_state = new_icon_state
+/obj/spellbutton/Initialize(new_loc, datum/spell_metadata/meta)
+	name = meta.name
+	spellpath = meta.spell_path
+	core = new_loc
+	ability_icon_state = meta.icon_state
+	spell_metadata_path = meta.type
+	return ..()
+
+/obj/spellbutton/Destroy()
+	core = null
+	return ..()
 
 /obj/spellbutton/Click()
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		H.place_spell_in_hand(spellpath)
+		var/obj/item/weapon/spell/technomancer/spell = H.place_spell_in_hand(spellpath)
+		if(istype(spell))
+			spell.spell_metadata_path = spell_metadata_path
+			spell.new_spell_icon_visuals()
+			spell.on_spell_given()
 
 /obj/spellbutton/DblClick()
 	return Click()
@@ -178,15 +186,11 @@
 		for(var/obj/spellbutton/button in core.spells)
 			stat(button)
 
-/obj/item/weapon/technomancer_core/proc/add_spell(var/path, var/new_name, var/ability_icon_state)
-	if(!path || !ispath(path))
-		message_admins("ERROR: /obj/item/weapon/technomancer_core/add_spell() was not given a proper path!  \
-		The path supplied was [path].")
-		return
-	var/obj/spellbutton/spell = new(src, path, new_name, ability_icon_state)
-	spells.Add(spell)
+/obj/item/weapon/technomancer_core/proc/add_spell(datum/spell_metadata/meta)
+	var/obj/spellbutton/spell_button = new(src, meta)
+	spells += spell_button
 	if(wearer)
-		wearer.ability_master.add_technomancer_ability(spell, ability_icon_state)
+		wearer.ability_master.add_technomancer_ability(spell_button, meta.icon_state)
 
 /obj/item/weapon/technomancer_core/proc/remove_spell(var/obj/spellbutton/spell_to_remove)
 	if(spell_to_remove in spells)

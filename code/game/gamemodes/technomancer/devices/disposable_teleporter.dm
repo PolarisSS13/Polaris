@@ -1,30 +1,38 @@
 /datum/technomancer/consumable/disposable_teleporter
 	name = "Disposable Teleporter"
 	desc = "An ultra-safe teleportation device that can directly teleport you to a number of locations at minimal risk, however \
-	it has a limited amount of charges."
-	cost = 50
+	it has only three charges."
+	cost = 25
 	obj_path = /obj/item/weapon/disposable_teleporter
+
+/datum/technomancer_catalog/object/equipment/gloves_of_regen
+	name = "Disposable Teleporter"
+	desc = "An ultra-safe teleportation device that can directly teleport you to a number of locations at minimal risk, however \
+	it has only three charges."
+	cost = 25
+	object_paths = list(/obj/item/weapon/disposable_teleporter)
 
 /obj/item/weapon/disposable_teleporter
 	name = "disposable teleporter"
-	desc = "A very compact personal teleportation device.  It's very precise and safe, however it can only be used a few times."
+	desc = "A very compact personal teleportation device.  It's very precise and safe, \
+	however it can only be used a limited number of times."
 	icon = 'icons/obj/device.dmi'
-	icon_state = "hand_tele" //temporary
-	var/uses = 3.0
+	icon_state = "hand_tele" // ""temporary""
 	w_class = ITEMSIZE_TINY
 	item_state = "paper"
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_POWER = 3)
+	var/uses = 3
 
 //This one is what the wizard starts with.  The above is a better version that can be purchased.
 /obj/item/weapon/disposable_teleporter/free
 	name = "complimentary disposable teleporter"
 	desc = "A very compact personal teleportation device.  It's very precise and safe, however it can only be used once.  This \
-	one has been provided to allow you to leave your hideout."
+	one has been provided to act as a one-time emergency teleport."
 	uses = 1
 
 /obj/item/weapon/disposable_teleporter/examine(mob/user)
 	..()
-	to_chat(user, "[uses] uses remaining.")
+	to_chat(user, "[uses] use\s remaining.")
 
 /obj/item/weapon/disposable_teleporter/attack_self(mob/user as mob)
 	if(!uses)

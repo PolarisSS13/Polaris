@@ -324,3 +324,13 @@ the artifact triggers the rage.
 /datum/modifier/homeothermic/tick()
 	..()
 	holder.bodytemperature = round((holder.bodytemperature + T20C) / 2)
+
+/datum/modifier/haste
+	name = "haste"
+	desc = "Moving is almost effortless!"
+	mob_overlay_state = "haste"
+
+	on_created_text = "<span class='notice'>You suddenly find it much easier to move.</span>"
+	on_expired_text = "<span class='warning'>You feel slow again.</span>"
+	haste = TRUE
+	stacks = MODIFIER_STACK_EXTEND

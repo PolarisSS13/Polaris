@@ -98,11 +98,11 @@
 		grabbed_something = TRUE
 
 	if(istype(T,/turf/simulated/wall) && (last_field < world.time + field_cooldown))
-		if(!(locate(/obj/effect/temporary_effect/pulse/disintegrate)))
+		if(!(locate(/obj/effect/temp_visual/pulse/disintegrate)))
 			last_field = world.time
 			to_chat(user, "<span class='alien'>You deploy an energetic field through \the [T], beginning its deconstruction.</span>")
 			to_chat(user, "<span class='warning'>You should stand back.</span>")
-			new /obj/effect/temporary_effect/pulse/disintegrate(T)
+			new /obj/effect/temp_visual/pulse/disintegrate(T)
 		else
 			to_chat(user, "<span class='notice'>There is already a disintigration field affecting \the [T].</span>")
 
@@ -112,7 +112,7 @@
 		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
 	return
 
-/obj/effect/temporary_effect/pulse/disintegrate
+/obj/effect/temp_visual/pulse/disintegrate
 	name = "molecular debonding field"
 	desc = "This is something you do not want to near."
 	icon = 'icons/mob/swarmbot.dmi'
@@ -123,21 +123,21 @@
 	pulses_remaining = 5
 	pulse_delay = 2 SECONDS
 
-/obj/effect/temporary_effect/pulse/disintegrate/emp_act()
+/obj/effect/temp_visual/pulse/disintegrate/emp_act()
 	visible_message("<span class='warning'>\The [src] flickers, before dispersing energetically.</span>")
 	qdel(src)
 
-/obj/effect/temporary_effect/pulse/disintegrate/on_pulse()
+/obj/effect/temp_visual/pulse/disintegrate/on_pulse()
 	var/turf/T = get_turf(src)
 	if(istype(T,/turf/simulated/wall))
 		T.take_damage(rand(20, 50))
 	else
 		qdel(src)
 
-/obj/effect/temporary_effect/pulse/disintegrate/Destroy()
+/obj/effect/temp_visual/pulse/disintegrate/Destroy()
 	if(istype(get_turf(src), /turf/simulated/wall))
 		explosion(get_turf(src), -1, 1, 2, 5, adminlog = 1)
-	..()
+	return ..()
 
 /obj/item/weapon/gun/energy/xray/swarm
 	name = "spectral projector"

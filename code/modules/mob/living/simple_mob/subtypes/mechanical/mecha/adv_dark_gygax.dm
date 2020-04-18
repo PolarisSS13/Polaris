@@ -247,10 +247,10 @@
 	icon_state = "bluespace"
 
 /obj/item/projectile/arc/microsingulo/on_impact(turf/T)
-	new /obj/effect/temporary_effect/pulse/microsingulo(T)
+	new /obj/effect/temp_visual/pulse/microsingulo(T)
 
 
-/obj/effect/temporary_effect/pulse/microsingulo
+/obj/effect/temp_visual/pulse/microsingulo
 	name = "micro singularity"
 	desc = "It's sucking everything in!"
 	icon = 'icons/obj/objects.dmi'
@@ -263,7 +263,7 @@
 	var/pull_radius = 3
 	var/pull_strength = STAGE_THREE
 
-/obj/effect/temporary_effect/pulse/microsingulo/on_pulse()
+/obj/effect/temp_visual/pulse/microsingulo/on_pulse()
 	for(var/atom/A in range(pull_radius, src))
 		A.singularity_pull(src, pull_strength)
 

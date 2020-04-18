@@ -179,22 +179,22 @@
 /mob/living/simple_mob/animal/giant_spider/tunneler/proc/submerge()
 	alpha = 0
 	dig_under_floor(get_turf(src))
-	new /obj/effect/temporary_effect/tunneler_hole(get_turf(src))
+	new /obj/effect/temp_visual/tunneler_hole(get_turf(src))
 
 // Ditto.
 /mob/living/simple_mob/animal/giant_spider/tunneler/proc/emerge()
 	alpha = 255
 	dig_under_floor(get_turf(src))
-	new /obj/effect/temporary_effect/tunneler_hole(get_turf(src))
+	new /obj/effect/temp_visual/tunneler_hole(get_turf(src))
 
 /mob/living/simple_mob/animal/giant_spider/tunneler/proc/dig_under_floor(turf/T)
 	new /obj/item/weapon/ore/glass(T) // This will be rather weird when on station but the alternative is too much work.
 
-/obj/effect/temporary_effect/tunneler_hole
+/obj/effect/temp_visual/tunneler_hole
 	name = "hole"
 	desc = "A collapsing tunnel hole."
 	icon_state = "tunnel_hole"
-	time_to_die = 1 MINUTE
+	duration = 1 MINUTE
 
 /datum/modifier/tunneler_vulnerable
 	name = "Vulnerable"

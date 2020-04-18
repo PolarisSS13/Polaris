@@ -244,7 +244,7 @@
 			return
 	if(user.put_in_active_hand(src))
 		if(isturf(old_loc))
-			var/obj/effect/temporary_effect/item_pickup_ghost/ghost = new(old_loc)
+			var/obj/effect/temp_visual/item_pickup_ghost/ghost = new(old_loc)
 			ghost.assumeform(src)
 			ghost.animate_towards(user)
 	return

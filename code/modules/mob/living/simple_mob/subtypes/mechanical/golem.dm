@@ -35,23 +35,23 @@
 	var/casting = FALSE // Used to ensure the correct animation is played. Testing if a spell exists won't always work as some spells delete themselves upon use.
 
 	var/list/known_spells = list(
-		"beam"				= /obj/item/weapon/spell/projectile/beam,
-		"chain lightning"	= /obj/item/weapon/spell/projectile/chain_lightning,
-		"force missile"		= /obj/item/weapon/spell/projectile/force_missile,
-		"ionic bolt"		= /obj/item/weapon/spell/projectile/ionic_bolt,
-		"lightning"			= /obj/item/weapon/spell/projectile/lightning,
-		"blink"				= /obj/item/weapon/spell/blink,
-		"dispel"			= /obj/item/weapon/spell/dispel,
-		"oxygenate"			= /obj/item/weapon/spell/oxygenate,
-		"mend life"			= /obj/item/weapon/spell/modifier/mend_life,
-		"mend synthetic"	= /obj/item/weapon/spell/modifier/mend_synthetic,
-		"mend organs"		= /obj/item/weapon/spell/mend_organs,
-		"purify"			= /obj/item/weapon/spell/modifier/purify,
-		"resurrect"			= /obj/item/weapon/spell/resurrect,
-		"passwall"			= /obj/item/weapon/spell/passwall,
-		"repel missiles"	= /obj/item/weapon/spell/modifier/repel_missiles,
-		"corona"			= /obj/item/weapon/spell/modifier/corona,
-		"haste"				= /obj/item/weapon/spell/modifier/haste
+		"beam"				= /obj/item/weapon/spell/technomancer/projectile/beam,
+		"chain lightning"	= /obj/item/weapon/spell/technomancer/projectile/chain_lightning,
+		"force missile"		= /obj/item/weapon/spell/technomancer/projectile/force_missile,
+		"ionic bolt"		= /obj/item/weapon/spell/technomancer/projectile/ionic_bolt,
+		"lightning"			= /obj/item/weapon/spell/technomancer/projectile/lightning,
+		"blink"				= /obj/item/weapon/spell/technomancer/blink,
+		"dispel"			= /obj/item/weapon/spell/technomancer/dispel,
+		"oxygenate"			= /obj/item/weapon/spell/technomancer/oxygenate,
+		"mend life"			= /obj/item/weapon/spell/technomancer/modifier/mend_life,
+		"mend synthetic"	= /obj/item/weapon/spell/technomancer/modifier/mend_synthetic,
+		"mend organs"		= /obj/item/weapon/spell/technomancer/mend_organs,
+		"purify"			= /obj/item/weapon/spell/technomancer/modifier/purify,
+		"resurrect"			= /obj/item/weapon/spell/technomancer/resurrect,
+		"passwall"			= /obj/item/weapon/spell/technomancer/passwall,
+		"repel missiles"	= /obj/item/weapon/spell/technomancer/modifier/repel_missiles,
+		"corona"			= /obj/item/weapon/spell/technomancer/modifier/corona,
+		"haste"				= /obj/item/weapon/spell/technomancer/modifier/haste
 		)
 
 /mob/living/simple_mob/mechanical/technomancer_golem/Initialize()

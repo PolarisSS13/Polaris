@@ -15,11 +15,11 @@ GLOBAL_LIST_EMPTY(all_banish_landmarks)
 /datum/spell_metadata/banish
 	name = "Banish"
 	icon_state = "tech_banish"
-	spell_path = /obj/item/weapon/spell/banish
+	spell_path = /obj/item/weapon/spell/technomancer/banish
 
 
 
-/obj/item/weapon/spell/banish
+/obj/item/weapon/spell/technomancer/banish
 	name = "banish"
 	desc = "Bye bye... for a few seconds"
 	icon_state = "banish"
@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(all_banish_landmarks)
 	aspect = ASPECT_TELE
 	var/banish_duration = 5 SECONDS
 
-/obj/item/weapon/spell/banish/on_ranged_cast(atom/hit_atom, mob/user)
+/obj/item/weapon/spell/technomancer/banish/on_ranged_cast(atom/hit_atom, mob/user)
 	if(isliving(hit_atom) && within_range(hit_atom) && pay_energy(500))
 		var/mob/living/L = hit_atom
 		if(!allowed_to_teleport(L))
@@ -42,7 +42,7 @@ GLOBAL_LIST_EMPTY(all_banish_landmarks)
 		return TRUE
 	return FALSE
 
-/obj/item/weapon/spell/banish/proc/banish_mob(mob/living/L)
+/obj/item/weapon/spell/technomancer/banish/proc/banish_mob(mob/living/L)
 	if(!L.mind || !technomancers.is_antagonist(L.mind))
 		L.adjustBrainLoss(3) // This is very unlikely to kill someone due to the 2 minute cooldown.
 

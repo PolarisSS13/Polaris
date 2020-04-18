@@ -12,6 +12,31 @@
 	obj_path = /obj/item/weapon/spell/projectile/ball_lightning
 	category = OFFENSIVE_SPELLS
 
+
+/datum/technomancer_catalog/spell/ball_lightning
+	name = "Ball Lightning"
+	desc = "Fires a small ball of lightning at a targeted tile, which zaps anyone it touches, \
+	and bounces off of solid objects such as walls. When such a bounce happens, a zap is sent \
+	out to anyone nearby. After enough bounces or distance, the ball of lighting explodes in \
+	a final, bigger zap, and a flash of light. Electrical protection is recommended to avoid \
+	unintentional user fatalities."
+	enhancement_desc = "There is a chance for the ball to bounce towards a non-allied entity, \
+	instead of bouncing normally."
+	cost = 100
+	category = OFFENSIVE_SPELLS
+	spell_metadata_paths = list(/datum/spell_metadata/ball_lightning)
+
+/datum/spell_metadata/ball_lightning
+	name = "Banish"
+	icon_state = "tech_ball_lightning"
+	spell_path = /obj/item/weapon/spell/banish
+	cooldown = 1 SECOND
+
+
+
+
+
+
 /obj/item/weapon/spell/projectile/ball_lightning
 	name = "ball lightning"
 	icon_state = "ball_lightning"

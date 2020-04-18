@@ -19,9 +19,3 @@
 	cooldown = 10
 	fire_sound = 'sound/weapons/Laser.ogg'
 
-/obj/item/projectile/beam/blue
-	damage = 30
-
-	muzzle_type = /obj/effect/projectile/muzzle/laser_blue
-	tracer_type = /obj/effect/projectile/tracer/laser_blue
-	impact_type = /obj/effect/projectile/impact/laser_blue

@@ -46,7 +46,7 @@
 
 /obj/item/weapon/grenade/shooter/energy/tesla
 	name = "tesla grenade"
-	projectile_types = list(/obj/item/projectile/beam/chain_lightning/lesser)
+	projectile_types = list(/obj/item/projectile/beam/lightning/chain_lightning/lesser)
 
 
 // This is just fragmentate, but less specific. Don't know how to make either of them less awful, at the moment

@@ -153,6 +153,7 @@
 	var/thick_armor = FALSE // Stops injections and "injections".
 	var/purge = 0					// Cult stuff.
 	var/supernatural = FALSE		// Ditto.
+	var/summoned = FALSE // Technomancer stuff
 
 	// contained in a cage
 	var/in_stasis = 0

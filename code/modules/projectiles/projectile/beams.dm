@@ -261,3 +261,74 @@
 	agony = 15
 	eyeblur = 2
 	hitsound = 'sound/weapons/zapbang.ogg'
+
+/obj/item/projectile/beam/blue
+	damage = 30
+
+	muzzle_type = /obj/effect/projectile/muzzle/laser_blue
+	tracer_type = /obj/effect/projectile/tracer/laser_blue
+	impact_type = /obj/effect/projectile/impact/laser_blue
+
+/obj/item/projectile/beam/lightning
+	name = "lightning"
+	icon_state = "lightning"
+	damage = 60
+	damage_type = ELECTROCUTE
+
+	muzzle_type = /obj/effect/projectile/muzzle/lightning
+	tracer_type = /obj/effect/projectile/tracer/lightning
+	impact_type = /obj/effect/projectile/impact/lightning
+
+	hitsound = 'sound/weapons/zapbang.ogg'
+
+/obj/item/projectile/beam/lightning/chain_lightning
+	damage = 35
+	var/bounces = 3				//How many times it 'chains'.  Note that the first hit is not counted as it counts /bounces/.
+	var/list/hit_mobs = list() 	//Mobs which were already hit.
+
+/obj/item/projectile/beam/lightning/chain_lightning/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
+	//First we shock the guy we just hit.
+	..()
+//	if(ishuman(target_mob))
+//		var/mob/living/carbon/human/H = target_mob
+//		var/obj/item/organ/external/affected = H.get_organ(check_zone(BP_TORSO))
+//		H.electrocute_act(power, src, H.get_siemens_coefficient_organ(affected), affected, 0)
+//	else
+//		target_mob.electrocute_act(power, src, 0.75, BP_TORSO)
+//	hit_mobs |= target_mob
+
+	//Each bounce reduces the damage of the bolt.
+	damage *= 0.80
+	if(bounces)
+		//All possible targets.
+		var/list/potential_targets = view(target_mob, 3)
+
+		//Filtered targets, so we don't hit the same person twice.
+		var/list/filtered_targets = list()
+		for(var/mob/living/L in potential_targets)
+			if(L in permutated)
+				continue
+			filtered_targets |= L
+
+		var/mob/living/new_target = null
+		var/siemens_comparison = 0
+
+		for(var/mob/living/carbon/human/H in filtered_targets)
+			var/obj/item/organ/external/affected = H.get_organ(check_zone(BP_TORSO))
+			var/their_siemens = H.get_siemens_coefficient_organ(affected)
+			if(their_siemens > siemens_comparison) //We want as conductive as possible, so higher is better.
+				new_target = H
+				siemens_comparison = their_siemens
+
+		if(new_target)
+			var/turf/curloc = get_turf(target_mob)
+			curloc.visible_message("<span class='danger'>\The [src] bounces to \the [new_target]!</span>")
+			redirect(new_target.x, new_target.y, curloc, firer)
+			bounces--
+
+			return 0
+	return 1
+
+/obj/item/projectile/beam/lightning/chain_lightning/lesser
+	bounces = 2
+	damage = 20

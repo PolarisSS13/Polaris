@@ -77,7 +77,7 @@
 
 /obj/item/clothing/suit/armor/tesla/proc/shoot_lightning(mob/target, power)
 	var/obj/item/projectile/beam/lightning/lightning = new(get_turf(src))
-	lightning.power = power
+	lightning.damage = power
 	lightning.old_style_target(target)
 	lightning.fire()
 	visible_message("<span class='danger'>\The [src] strikes \the [target] with lightning!</span>")

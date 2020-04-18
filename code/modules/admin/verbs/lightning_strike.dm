@@ -55,7 +55,7 @@
 		T = ground.loc
 
 	// Now make the lightning strike sprite. It will fade and delete itself in a second.
-	new /obj/effect/temporary_effect/lightning_strike(T)
+	new /obj/effect/temp_visual/lightning_strike(T)
 
 	// For those close up.
 	playsound(T, 'sound/effects/lightningbolt.ogg', 100, 1)

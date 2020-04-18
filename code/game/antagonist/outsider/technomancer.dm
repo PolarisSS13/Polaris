@@ -1,5 +1,7 @@
 var/datum/antagonist/technomancer/technomancers
 
+GLOBAL_LIST_EMPTY(technomancer_belongings)
+
 /datum/antagonist/technomancer
 	id = MODE_TECHNOMANCER
 	role_type = BE_WIZARD
@@ -44,7 +46,7 @@ var/datum/antagonist/technomancer/technomancers
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/device/radio/headset(technomancer_mob), slot_l_ear)
 	var/obj/item/weapon/technomancer_core/core = new /obj/item/weapon/technomancer_core(technomancer_mob)
 	technomancer_mob.equip_to_slot_or_del(core, slot_back)
-	technomancer_belongings.Add(core) // So it can be Tracked.
+	GLOB.technomancer_belongings.Add(core) // So it can be Tracked.
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/device/flashlight(technomancer_mob), slot_belt)
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(technomancer_mob), slot_shoes)
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/head/technomancer/master(technomancer_mob), slot_head)
@@ -63,7 +65,7 @@ var/datum/antagonist/technomancer/technomancers
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/device/radio/headset(technomancer_mob), slot_l_ear)
 	var/obj/item/weapon/technomancer_core/core = new /obj/item/weapon/technomancer_core(technomancer_mob)
 	technomancer_mob.equip_to_slot_or_del(core, slot_back)
-	technomancer_belongings.Add(core) // So it can be Tracked.
+	GLOB.technomancer_belongings.Add(core) // So it can be Tracked.
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/device/flashlight(technomancer_mob), slot_belt)
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(technomancer_mob), slot_shoes)
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/head/technomancer/apprentice(technomancer_mob), slot_head)
@@ -82,7 +84,7 @@ var/datum/antagonist/technomancer/technomancers
 
 /datum/antagonist/technomancer/print_player_summary()
 	..()
-	for(var/obj/item/weapon/technomancer_core/core in technomancer_belongings)
+	for(var/obj/item/weapon/technomancer_core/core in GLOB.technomancer_belongings)
 		if(core.wearer)
 			continue // Only want abandoned cores.
 		if(!core.spells.len)
