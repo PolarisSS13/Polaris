@@ -18,37 +18,36 @@
 		if(iteration_count == 1)
 			piece = capitalize(piece)
 
-		if(SP.speaking)
-			if(!say_understands(speaker, SP.speaking))
-				piece = SP.speaking.scramble(piece)
-				if(isliving(speaker))
-					var/mob/living/S = speaker
-					if(istype(S.say_list) && length(S.say_list.speak))
-						piece = pick(S.say_list.speak)
-			if(always_stars)
-				piece = stars(piece)
+		if(always_stars)
+			piece = stars(piece)
+		else if(!say_understands(speaker, SP.speaking))
+			piece = saypiece_scramble(SP)
+			if(isliving(speaker))
+				var/mob/living/S = speaker
+				if(istype(S.say_list) && length(S.say_list.speak))
+					piece = pick(S.say_list.speak)
 
-			if(radio)
-				piece = SP.speaking.format_message_radio(piece)
-			else
-				piece = SP.speaking.format_message(piece)
-		else
-			if(!say_understands(speaker, null))
-				piece = stars(piece)
-				if(isliving(speaker))
-					var/mob/living/S = speaker
-					if(istype(S.say_list) && length(S.say_list.speak))
-						piece = pick(S.say_list.speak)
-			if(always_stars)
-				piece = stars(piece)
-			piece = "<span class='message'><span class='body'>[piece]</span></span>"
+		if(!SP.speaking) // Catch the most generic case first
+			piece = "<span class='message body'>[piece]</span>"
+		else if(radio) // SP.speaking == TRUE enforced by previous !SP.speaking
+			piece = SP.speaking.format_message_radio(piece)
+		else // SP.speaking == TRUE && radio == FALSE
+			piece = SP.speaking.format_message(piece)
+
 		msg += (piece + " ")
+	
 	if(msg == "")
 		// There is literally no content left in this message, we need to shut this shit down
 		. = "" // hear_say will suppress it
 	else
 		. = trim(. + trim(msg))
 		. += "\""
+
+/mob/proc/saypiece_scramble(datum/multilingual_say_piece/SP)
+	if(SP.speaking)
+		return SP.speaking.scramble(SP.message)
+	else
+		return stars(SP.message)
 
 /mob/proc/hear_say(var/list/message_pieces, var/verb = "says", var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	if(!client && !teleop)
@@ -102,9 +101,9 @@
 
 	if(is_deaf())
 		if(speaker == src)
-			to_chat(src, "<span class='warning'>You cannot hear yourself speak!</span>")
+			to_chat(src, "<span class='filter_say'><span class='warning'>You cannot hear yourself speak!</span></span>")
 		else
-			to_chat(src, "<span class='name'>[speaker_name]</span>[speaker.GetAltName()] makes a noise, possibly speech, but you cannot hear them.")
+			to_chat(src, "<span class='filter_say'><span class='name'>[speaker_name]</span>[speaker.GetAltName()] makes a noise, possibly speech, but you cannot hear them.</span>")
 	else
 		var/message_to_send = null
 		message_to_send = "<span class='game say'><span class='name'>[speaker_name]</span>[speaker.GetAltName()] [track][message]</span>"

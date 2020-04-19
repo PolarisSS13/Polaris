@@ -40,7 +40,7 @@
 			message = "<B>[src]</B> boops."
 			m_type = 2
 		if("help")
-			to_chat(src, "alarm, alert, notice, flash, blink, whistle, beep, boop")
+			to_chat(src, "<span class='filter_say'>alarm, alert, notice, flash, blink, whistle, beep, boop</span>")
 
 	if(!stat)
 		..(act, m_type, message)

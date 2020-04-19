@@ -51,21 +51,33 @@
 	if(audio && ((L.sdisabilities & DEAF) || L.ear_deaf))
 		return
 
+	// Using two for loops kinda sucks, but I think it's more efficient
+	// to shortcut past string building if we're just going to discard the string
+	// anyways.
+	if(user_understands(M, L, message_pieces))
+		return
+
+	var/new_message = ""
+
 	for(var/datum/multilingual_say_piece/S in message_pieces)
-		if(!S.speaking)
-			continue
 		if(S.speaking.flags & NONVERBAL)
 			continue
 		if(!S.speaking.machine_understands)
+			new_message += stars(S.message) + " "
 			continue
-		// If our user doesn't understand the language being spoken, translate
-		if(!L.say_understands(M, S.speaking))
-			//They understand the output language
-			if(L.say_understands(null, langset))
-				to_chat(L, "<i><b>[src]</b> translates, </i>\"<span class='[langset.colour]'>[S.message]</span>\"")
-			//They don't understand the output language
-			else
-				to_chat(L, "<i><b>[src]</b> translates, </i>\"<span class='[langset.colour]'>[langset.scramble(S.message)]</span>\"")
+
+		new_message += (S.message + " ")
+
+	if(!L.say_understands(null, langset))
+		new_message = langset.scramble(new_message)
+
+	to_chat(L, "<i><b>[src]</b> translates, </i>\"<span class='[langset.colour]'>[new_message]</span>\"")
+
+/obj/item/device/universal_translator/proc/user_understands(mob/M, mob/living/L, list/message_pieces)
+	for(var/datum/multilingual_say_piece/S in message_pieces)
+		if(S.speaking && !L.say_understands(M, S.speaking))
+			return FALSE
+	return TRUE
 
 //Let's try an ear-worn version
 /obj/item/device/universal_translator/ear
