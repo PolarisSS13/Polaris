@@ -2830,6 +2830,8 @@
 #include "code\modules\xenoarcheaology\artifacts\crystal.dm"
 #include "code\modules\xenoarcheaology\artifacts\gigadrill.dm"
 #include "code\modules\xenoarcheaology\artifacts\replicator.dm"
+#include "code\modules\xenoarcheaology\artifacts\predefined\_predefined.dm"
+#include "code\modules\xenoarcheaology\artifacts\predefined\hungry_statue.dm"
 #include "code\modules\xenoarcheaology\effects\animate_anomaly.dm"
 #include "code\modules\xenoarcheaology\effects\badfeeling.dm"
 #include "code\modules\xenoarcheaology\effects\berserk.dm"
