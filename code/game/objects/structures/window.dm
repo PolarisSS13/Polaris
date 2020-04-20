@@ -3,7 +3,7 @@
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	density = 1
-	can_atmos_pass = ATMOS_PASS_DENSITY
+	can_atmos_pass = ATMOS_PASS_PROC
 	w_class = ITEMSIZE_NORMAL
 
 	layer = WINDOW_LAYER
