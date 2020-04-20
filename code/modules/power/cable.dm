@@ -237,7 +237,7 @@ var/list/possible_cable_coil_colours = list(
 	else if(istype(W, /obj/item/device/multitool))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
-			to_chat(user, "<span class='warning'>[get_wattage()]W in power network.</span>")
+			to_chat(user, "<span class='warning'>[get_wattage()] in power network.</span>")
 
 		else
 			to_chat(user, "<span class='warning'>The cable is not powered.</span>")
@@ -625,6 +625,11 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 	to_chat(user, msg)
 
+/obj/item/stack/cable_coil/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/device/multitool))
+		var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_cable_coil_colours
+		set_cable_color(selected_type, usr)
+		return
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"

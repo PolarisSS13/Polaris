@@ -14,6 +14,8 @@
 	icon_state = "rack"
 	capacity = 0
 	charge = 0
+	output_attempt = FALSE
+	input_attempt = FALSE
 
 	var/max_transfer_rate = 0							// Maximal input/output rate. Determined by used capacitors when building the device.
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode
@@ -259,9 +261,9 @@
 		return
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
-			user << "You insert \the [W] into \the [src]."
+			to_chat(user, "You insert \the [W] into \the [src].")
 		else
-			user << "\The [src] has no empty slot for \the [W]"
+			to_chat(user, "\The [src] has no empty slot for \the [W]")
 
 /obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
 	ui_interact(user)
