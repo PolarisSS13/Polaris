@@ -71,7 +71,7 @@
 	if(!L.say_understands(null, langset))
 		new_message = langset.scramble(new_message)
 
-	to_chat(L, "<i><b>[src]</b> translates, </i>\"<span class='[langset.colour]'>[new_message]</span>\"")
+	to_chat(L, "<span class='filter_say'><i><b>[src]</b> translates, </i>\"<span class='[langset.colour]'>[new_message]</span>\"</span>")
 
 /obj/item/device/universal_translator/proc/user_understands(mob/M, mob/living/L, list/message_pieces)
 	for(var/datum/multilingual_say_piece/S in message_pieces)
