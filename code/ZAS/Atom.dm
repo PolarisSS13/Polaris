@@ -30,8 +30,6 @@
 		else
 			CRASH("Invalid can_atmos_pass = [can_atmos_pass] on [src] ([type])")
 
-/turf/can_atmos_pass = ATMOS_PASS_NO
-
 /turf/CanPass(atom/movable/mover, turf/target)
 	if(!target) return FALSE
 
