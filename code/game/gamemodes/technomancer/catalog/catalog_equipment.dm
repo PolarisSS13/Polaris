@@ -208,7 +208,8 @@
 	var/obj/item/item_to_test = user.get_other_hand(src)
 	if(istype(item_to_test, /obj/item/weapon/spell/technomancer))
 		var/obj/item/weapon/spell/technomancer/S = item_to_test
-		S.on_scepter_use_cast(user)
+		if(S.on_scepter_use_cast(user))
+			S.after_cast(user)
 
 /obj/item/weapon/scepter/afterattack(atom/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(proximity_flag)
@@ -216,7 +217,8 @@
 	var/obj/item/item_to_test = user.get_other_hand(src)
 	if(istype(item_to_test, /obj/item/weapon/spell/technomancer))
 		var/obj/item/weapon/spell/technomancer/S = item_to_test
-		S.on_scepter_ranged_cast(target, user)
+		if(S.on_scepter_ranged_cast(target, user))
+			S.after_cast(user)
 
 
 /datum/technomancer_catalog/object/equipment/spyglass

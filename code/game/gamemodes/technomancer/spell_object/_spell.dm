@@ -119,7 +119,8 @@
 // Tries to call on_use_cast() if it is allowed to do so.  Don't override this, override on_use_cast() instead.
 /obj/item/weapon/spell/attack_self(mob/user)
 	if(run_checks() && (cast_methods & CAST_USE))
-		on_use_cast(user)
+		if(on_use_cast(user))
+			after_cast(user)
 	..()
 
 /obj/item/weapon/spell/dropped()

@@ -48,9 +48,15 @@
 	timerid = addtimer(CALLBACK(src, .proc/pulse), pulse_delay, TIMER_STOPPABLE)
 	return ..()
 
+/obj/effect/temp_visual/pulse/Destroy()
+	if(timerid)
+		deltimer(timerid)
+	return ..()
+
 /obj/effect/temp_visual/pulse/proc/pulse()
 	if(timerid)
 		deltimer(timerid)
+		timerid = null
 	if(pulses_remaining <= 0)
 		qdel(src)
 	else

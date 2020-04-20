@@ -32,6 +32,7 @@
 	var/pref_check
 
 	var/timerid
+	var/start_timerid
 
 /datum/looping_sound/New(list/_output_atoms=list(), start_immediately=FALSE, _direct=FALSE)
 	if(!mid_sounds)
@@ -59,6 +60,9 @@
 /datum/looping_sound/proc/stop(atom/remove_thing)
 	if(remove_thing)
 		output_atoms -= remove_thing
+	if(start_timerid) // Stops `sound_loop()` from running if it stops before the starting sound finishes.
+		deltimer(start_timerid)
+		start_timerid = null
 	if(!timerid)
 		return
 	on_stop()
@@ -104,7 +108,7 @@
 	if(start_sound)
 		play(start_sound)
 		start_wait = start_length
-	addtimer(CALLBACK(src, .proc/sound_loop), start_wait)
+	start_timerid = addtimer(CALLBACK(src, .proc/sound_loop), start_wait, TIMER_STOPPABLE)
 
 /datum/looping_sound/proc/on_stop()
 	if(end_sound)

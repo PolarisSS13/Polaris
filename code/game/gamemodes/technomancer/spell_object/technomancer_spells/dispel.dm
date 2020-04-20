@@ -35,7 +35,9 @@
 	for(var/thing in things)
 		if(isliving(thing))
 			var/mob/living/L = thing
-			L.remove_modifiers_of_type(/datum/modifier/technomancer)
+			for(var/datum/modifier/M in L.modifiers)
+				if(M.technomancer_dispellable)
+					L.remove_specific_modifier(M)
 
 		// If dispel deleting things like microsingulos and angonizing spheres ends up being too strong,
 		// feel free to repath the technomancer ones and target those.

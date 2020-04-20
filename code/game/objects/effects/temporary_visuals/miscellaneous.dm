@@ -101,3 +101,8 @@
 	icon_state = "phase_out"
 	plane = PLANE_LIGHTING_ABOVE
 	duration = 5
+
+/obj/effect/temp_visual/summoning
+	icon_state = "summoning"
+	plane = PLANE_LIGHTING_ABOVE
+	duration = 5 SECONDS

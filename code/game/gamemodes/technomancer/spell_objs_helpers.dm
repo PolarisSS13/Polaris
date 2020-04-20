@@ -25,6 +25,16 @@
 			return TRUE
 	return FALSE
 
+/proc/is_technomancer_ally(mob/living/L)
+	if(L.mind && technomancers.is_antagonist(L.mind)) // This should be done better someday since we might want opposing technomancers in the future.
+		return TRUE
+	if(istype(L, /mob/living/simple_mob)) // Mind controlled simple mobs count as allies too.
+		var/mob/living/simple_mob/SM = L
+		for(var/datum/mind/technomancer_mind in technomancers.current_antagonists)
+			if(SM.IIsAlly(technomancer_mind.current))
+				return TRUE
+	return FALSE
+
 /obj/item/weapon/spell/proc/allowed_to_teleport()
 	if(owner)
 		if(owner.z in using_map.admin_levels)
@@ -45,7 +55,7 @@
 	var/chosen_target = null
 	var/potential_targets = view(T,radius)
 	for(var/mob/living/L in potential_targets)
-		if(is_ally(L)) // Don't shoot our friends.
+		if(is_technomancer_ally(L)) // Don't shoot our friends.
 			continue
 		if(L.invisibility > owner.see_invisible) // Don't target ourselves or people we can't see.
 			continue

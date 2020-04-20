@@ -78,9 +78,44 @@
 		return 1
 	return 0
 
+// Adds energy to the core.
+// Returns how much energy was actually given. E.g. 9900/10000 would return 100 if 100 or more was given.
 /obj/item/weapon/technomancer_core/proc/give_energy(amount)
+	. = min(max_energy - energy, amount)
 	energy = min(energy + amount, max_energy)
-	return 1
+
+// Subtracts energy while ignoring any core modifiers.
+// Also returns how much energy was actually taken.
+/obj/item/weapon/technomancer_core/proc/drain_energy(amount)
+	. = min(energy, amount)
+	energy = between(0, energy - amount, max_energy)
+
+/*
+// recharge the cell
+/obj/item/weapon/cell/proc/give(var/amount)
+	if(rigged && amount > 0)
+		explode()
+		return 0
+
+	if(maxcharge < amount)	return 0
+	var/amount_used = min(maxcharge-charge,amount)
+	charge += amount_used
+	update_icon()
+	if(loc)
+		loc.update_icon()
+	return amount_used
+
+// use power from a cell, returns the amount actually used
+/obj/item/weapon/cell/proc/use(var/amount)
+	if(rigged && amount > 0)
+		explode()
+		return 0
+	var/used = min(charge, amount)
+	charge -= used
+	last_use = world.time
+	update_icon()
+	return used
+*/
 
 /obj/item/weapon/technomancer_core/process()
 	var/old_energy = energy

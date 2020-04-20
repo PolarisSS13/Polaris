@@ -128,6 +128,7 @@
 
 	if(!get_cooldown())
 		icon_state = initial(icon_state)
+		update_icon()
 		return
 
 	var/datum/spell_metadata/meta = get_meta()

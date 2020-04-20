@@ -67,6 +67,16 @@
 	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
 	visible_message_entered = "suddenly re-appears!"
 
+/datum/teleportation/recall
+	visible_message_exited = "vanishes!"
+	visible_message_entered = "suddenly appears!"
+
+	sound_exited = 'sound/effects/magic/technomancer/teleport_diss.ogg'
+	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
+
+	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
+	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
+
 
 /atom/movable/proc/can_teleport()
 	return TRUE
@@ -141,9 +151,9 @@
 	if(visible_message_entered)
 		teleported_AM.visible_message(span("notice", "\The [teleported_AM] [visible_message_entered]"))
 
-/datum/teleportation/proc/choose_destination(turf/destination_epicenter)
-	var/list/candidates = circlerangeturfs(destination_epicenter, inaccuracy)
-	shuffle(candidates)
+/datum/teleportation/proc/choose_destination(turf/destination_epicenter, potential_offset)
+	var/list/candidates = circlerangeturfs(destination_epicenter, potential_offset)
+	candidates = shuffle(candidates)
 	var/turf/final_destination = null // No items, Fox only.
 
 	for(var/thing in candidates)
@@ -162,7 +172,7 @@
 		return FALSE
 
 	if(inaccuracy > 0)
-		choose_destination(destination)
+		choose_destination(destination, inaccuracy)
 
 	if(!can_tele_to_turf(destination))
 		return FALSE

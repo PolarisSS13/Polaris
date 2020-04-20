@@ -1,5 +1,5 @@
 // Holds various procs for teleporting and checking if teleporting should be allowed.
-/proc/safe_blink(atom/movable/AM, var/range = 3)
+/proc/safe_blink(atom/movable/AM, var/range = 3, var/min_distance = 0)
 	if(AM.anchored || !AM.can_teleport())
 		return
 //	var/turf/starting = get_turf(AM)
@@ -7,6 +7,8 @@
 
 	valid_turfs:
 		for(var/turf/simulated/T in range(AM, range))
+			if(min_distance && get_dist(AM, T) < min_distance)
+				continue
 			if(T.density)
 				continue
 			if(T.block_tele)
