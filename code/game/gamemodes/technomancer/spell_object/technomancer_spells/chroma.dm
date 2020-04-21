@@ -23,22 +23,22 @@
 	aspect = ASPECT_LIGHT
 
 /obj/item/weapon/spell/technomancer/chroma/on_spell_given(mob/user)
-	var/datum/spell_metadata/chroma/meta = get_meta()
-	set_light(6, 5, l_color = meta.color_to_use)
+	var/datum/spell_metadata/chroma/chroma_meta = meta
+	set_light(6, 5, l_color = chroma_meta.color_to_use)
 
 /obj/item/weapon/spell/technomancer/chroma/on_use_cast(mob/user)
-	var/datum/spell_metadata/chroma/meta = get_meta()
-	var/new_color = input(user, "Choose the color you want your light to be.", "Color selection", meta.color_to_use) as null|color
+	var/datum/spell_metadata/chroma/chroma_meta = meta
+	var/new_color = input(user, "Choose the color you want your light to be.", "Color selection", chroma_meta.color_to_use) as null|color
 	if(new_color)
-		meta.color_to_use = new_color
+		chroma_meta.color_to_use = new_color
 		set_light(6, 5, l_color = new_color)
 	return TRUE
 
 /obj/item/weapon/spell/technomancer/chroma/on_ranged_cast(atom/hit_atom, mob/user)
 	var/turf/T = get_turf(hit_atom)
 	if(T)
-		var/datum/spell_metadata/chroma/meta = get_meta()
-		new /obj/effect/temp_visual/chroma(T, meta.color_to_use)
+		var/datum/spell_metadata/chroma/chroma_meta = meta
+		new /obj/effect/temp_visual/chroma(T, chroma_meta.color_to_use)
 		to_chat(user, span("notice", "You create some light on \the [T]."))
 		playsound(user, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
 		return TRUE
@@ -50,6 +50,6 @@
 	invisibility = 101
 	duration = 2 MINUTES
 
-/obj/effect/temp_visual/chroma/Initialize(var/newloc, var/new_color = "#FFFFFF")
+/obj/effect/temp_visual/chroma/Initialize(mapload, new_color = "#FFFFFF")
 	set_light(6, 5, l_color = new_color)
 	return ..()

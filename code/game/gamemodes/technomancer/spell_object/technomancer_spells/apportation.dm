@@ -41,7 +41,7 @@
 			if(tele.teleport())
 				dont_qdel_when_dropped = TRUE
 				user.drop_item(src)
-				src.forceMove(null)
+				src.forceMove(owner)
 				user.put_in_hands(I)
 				user.visible_message(span("notice", "\A [I] appears in \the [user]'s hand!"))
 				log_and_message_admins("has stolen [I] with [src].")

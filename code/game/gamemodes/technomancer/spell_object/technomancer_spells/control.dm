@@ -57,8 +57,8 @@
 
 		// Clicking on themselves.
 		if(L == user)
-			var/datum/spell_metadata/control/meta = get_meta()
-			if(!meta.selected_weakrefs.len)
+			var/datum/spell_metadata/control/control_meta = meta
+			if(!control_meta.selected_weakrefs.len)
 				to_chat(user, span("warning", "This function doesn't work on higher-intelligence entities, \
 				however since you're trying to use it on yourself, perhaps you're an exception? \
 				Regardless, nothing happens."))
@@ -97,14 +97,14 @@
 
 // Self casting toggles hostility.
 /obj/item/weapon/spell/technomancer/control/on_use_cast(mob/living/user)
-	var/datum/spell_metadata/control/meta = get_meta()
+	var/datum/spell_metadata/control/control_meta = meta
 
-	meta.set_hostility = !meta.set_hostility
+	control_meta.set_hostility = !control_meta.set_hostility
 
-	for(var/weakref/WR in meta.selected_weakrefs)
+	for(var/weakref/WR in control_meta.selected_weakrefs)
 		var/mob/living/L = WR.resolve()
 		if(!istype(L))
-			WR -= meta.selected_weakrefs
+			WR -= control_meta.selected_weakrefs
 			continue
 
 		var/datum/ai_holder/AI = L.ai_holder
@@ -112,9 +112,9 @@
 			continue
 
 
-		AI.hostile = meta.set_hostility
+		AI.hostile = control_meta.set_hostility
 
-	if(meta.set_hostility)
+	if(control_meta.set_hostility)
 		to_chat(user, span("notice", "You grant your controlled minions autonomy in choosing targets."))
 		playsound(owner, 'sound/effects/magic/technomancer/death.ogg', 75, 1)
 	else
@@ -126,15 +126,15 @@
 // Scepter use casting teleports all selected mobs to you over time.
 /obj/item/weapon/spell/technomancer/control/on_scepter_use_cast(mob/user)
 	. = FALSE
-	var/datum/spell_metadata/control/meta = get_meta()
-	if(!meta.selected_weakrefs.len)
+	var/datum/spell_metadata/control/control_meta = meta
+	if(!control_meta.selected_weakrefs.len)
 		to_chat(user, span("warning", "There's nothing to teleport to you."))
 		return FALSE
 
-	var/mobs_left_to_teleport = meta.selected_weakrefs.len
+	var/mobs_left_to_teleport = control_meta.selected_weakrefs.len
 
 	while(mobs_left_to_teleport)
-		var/weakref/WR = meta.selected_weakrefs[mobs_left_to_teleport]
+		var/weakref/WR = control_meta.selected_weakrefs[mobs_left_to_teleport]
 		var/mob/living/L = WR.resolve()
 		if(!istype(L))
 			mobs_left_to_teleport--
@@ -158,8 +158,8 @@
 
 
 /obj/item/weapon/spell/technomancer/control/proc/is_selected(mob/living/L)
-	var/datum/spell_metadata/control/meta = get_meta()
-	return L.weakref in meta.selected_weakrefs
+	var/datum/spell_metadata/control/control_meta = meta
+	return L.weakref in control_meta.selected_weakrefs
 
 /obj/item/weapon/spell/technomancer/control/proc/select(mob/living/L)
 	if(L.client)
@@ -175,10 +175,10 @@
 		to_chat(owner, span("warning", "\The [L] seems too dim for this to work on them."))
 		return FALSE
 
-	var/datum/spell_metadata/control/meta = get_meta()
+	var/datum/spell_metadata/control/control_meta = meta
 
 	var/datum/ai_holder/AI = L.ai_holder
-	AI.hostile = meta.set_hostility // The Technomancer chooses the target, not the AI.
+	AI.hostile = control_meta.set_hostility // The Technomancer chooses the target, not the AI.
 	AI.retaliate = TRUE
 	AI.wander = FALSE
 	AI.forget_everything()
@@ -192,12 +192,12 @@
 
 	to_chat(owner, span("notice", "\The [L] is now under your (limited) control."))
 
-	L.add_overlay(meta.select_overlay, TRUE)
+	L.add_overlay(control_meta.select_overlay, TRUE)
 	playsound(L, 'sound/effects/magic/technomancer/magic.ogg', 75, 1)
 	playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
-	meta.selected_weakrefs += weakref(L)
-	GLOB.destroyed_event.register(L, meta, /datum/spell_metadata/control/proc/on_selected_mob_deleted)
-	GLOB.stat_set_event.register(L, meta, /datum/spell_metadata/control/proc/on_selected_mob_stat_changed)
+	control_meta.selected_weakrefs += weakref(L)
+	GLOB.destroyed_event.register(L, control_meta, /datum/spell_metadata/control/proc/on_selected_mob_deleted)
+	GLOB.stat_set_event.register(L, control_meta, /datum/spell_metadata/control/proc/on_selected_mob_stat_changed)
 	return TRUE
 
 
@@ -222,22 +222,22 @@
 
 		to_chat(owner, span("notice", "You free \the [L] from your grasp."))
 
-	var/datum/spell_metadata/control/meta = get_meta()
-	L.cut_overlay(meta.select_overlay, TRUE)
+	var/datum/spell_metadata/control/control_meta = meta
+	L.cut_overlay(control_meta.select_overlay, TRUE)
 	playsound(L, 'sound/effects/magic/technomancer/magic.ogg', 75, 1)
 	playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
-	meta.selected_weakrefs -= L.weakref
-	GLOB.destroyed_event.unregister(L, meta, /datum/spell_metadata/control/proc/on_selected_mob_deleted)
-	GLOB.stat_set_event.unregister(L, meta, /datum/spell_metadata/control/proc/on_selected_mob_stat_changed)
+	control_meta.selected_weakrefs -= L.weakref
+	GLOB.destroyed_event.unregister(L, control_meta, /datum/spell_metadata/control/proc/on_selected_mob_deleted)
+	GLOB.stat_set_event.unregister(L, control_meta, /datum/spell_metadata/control/proc/on_selected_mob_stat_changed)
 
 /obj/item/weapon/spell/technomancer/control/proc/relay_command(atom/target, command_string, proc_call)
-	var/datum/spell_metadata/control/meta = get_meta()
+	var/datum/spell_metadata/control/control_meta = meta
 	. = 0
-	for(var/thing in meta.selected_weakrefs)
+	for(var/thing in control_meta.selected_weakrefs)
 		var/weakref/WR = thing
 		var/mob/living/L = WR.resolve()
 		if(!istype(L) || QDELETED(L)) // Prune the list if the reference is gone.
-			meta.selected_weakrefs -= WR
+			control_meta.selected_weakrefs -= WR
 			continue
 		if(L.stat == DEAD)
 			deselect(L)

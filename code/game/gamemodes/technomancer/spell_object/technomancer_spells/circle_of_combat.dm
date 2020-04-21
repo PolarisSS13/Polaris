@@ -29,6 +29,7 @@
 	icon_state = "circle_of_combat"
 	cast_methods = CAST_RANGED | CAST_USE
 	aspect = ASPECT_FORCE
+	delete_after_cast = TRUE
 	var/circle_radius = CIRCLE_OF_COMBAT_RADIUS
 
 

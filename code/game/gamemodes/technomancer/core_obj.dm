@@ -90,32 +90,7 @@
 	. = min(energy, amount)
 	energy = between(0, energy - amount, max_energy)
 
-/*
-// recharge the cell
-/obj/item/weapon/cell/proc/give(var/amount)
-	if(rigged && amount > 0)
-		explode()
-		return 0
 
-	if(maxcharge < amount)	return 0
-	var/amount_used = min(maxcharge-charge,amount)
-	charge += amount_used
-	update_icon()
-	if(loc)
-		loc.update_icon()
-	return amount_used
-
-// use power from a cell, returns the amount actually used
-/obj/item/weapon/cell/proc/use(var/amount)
-	if(rigged && amount > 0)
-		explode()
-		return 0
-	var/used = min(charge, amount)
-	charge -= used
-	last_use = world.time
-	update_icon()
-	return used
-*/
 
 /obj/item/weapon/technomancer_core/process()
 	var/old_energy = energy
@@ -179,10 +154,10 @@
 	var/ability_icon_state = null
 	var/spell_metadata_path = null
 
-/obj/spellbutton/Initialize(new_loc, datum/spell_metadata/meta)
+/obj/spellbutton/Initialize(mapload, datum/spell_metadata/meta)
+	core = loc
 	name = meta.name
 	spellpath = meta.spell_path
-	core = new_loc
 	ability_icon_state = meta.icon_state
 	spell_metadata_path = meta.type
 	return ..()
@@ -194,10 +169,8 @@
 /obj/spellbutton/Click()
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		var/obj/item/weapon/spell/technomancer/spell = H.place_spell_in_hand(spellpath)
-		if(istype(spell))
-			spell.spell_metadata_path = spell_metadata_path
-			spell.new_spell_icon_visuals()
+		var/obj/item/weapon/spell/technomancer/spell = H.place_spell_in_hand(spellpath, core.spell_metas[spell_metadata_path])
+		if(istype(spell) && !QDELETED(spell))
 			spell.on_spell_given()
 
 /obj/spellbutton/DblClick()

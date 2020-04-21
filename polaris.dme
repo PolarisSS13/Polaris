@@ -592,6 +592,8 @@
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\control.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\dispel.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\energy_siphon.dm"
+#include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\flame_tongue.dm"
+#include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\gambit.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\modifier\modifier.dm"
 #include "code\game\gamemodes\traitor\traitor.dm"
 #include "code\game\gamemodes\wizard\wizard.dm"

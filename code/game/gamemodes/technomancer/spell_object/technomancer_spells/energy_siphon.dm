@@ -2,7 +2,7 @@
 	name = "Energy Siphon"
 	desc = "Creates a link between two points, the caster and the target. By default, the target will have its energy drained, \
 	and transferred to the caster over time. Using the function in-hand will allow you to toggle reversing the flow of energy. \
-	Can drain from powercells, FPB microbatteries, and other Cores."
+	Can drain from powercells, FPB microbatteries, and other Cores. Touching the beam will also hurt."
 	cost = 100
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/energy_siphon)
@@ -22,9 +22,9 @@
 	aspect = ASPECT_SHOCK
 	var/atom/movable/source = null // The thing being drained.
 	var/atom/movable/destination = null // The thing getting the energy from the above var.
-	var/flow_rate = 500 // Limits how much electricity can be drained per second.  Measured in technomancer core energy.
-	var/beam_cost = 50 // How much energy is lost per tick.
-	var/instability_per_tick = 1 // How much instability to give every tick.
+	var/flow_rate = 220 // Limits how much electricity can be drained per second.  Measured in technomancer core energy.
+	var/beam_cost = 20 // How much energy is lost per tick.
+	var/instability_per_tick = 0.5 // How much instability to give every tick.
 	var/range = 7 // Measured in tiles.
 	var/datum/beam/the_beam = null
 	var/datum/looping_sound/generator/soundloop
@@ -43,10 +43,10 @@
 /obj/item/weapon/spell/technomancer/energy_siphon/on_use_cast(mob/user)
 	stop_siphoning()
 
-	var/datum/spell_metadata/energy_siphon/meta = get_meta()
-	meta.give_energy = !meta.give_energy
+	var/datum/spell_metadata/energy_siphon/energy_meta = meta
+	energy_meta.give_energy = !energy_meta.give_energy
 
-	to_chat(user, span("notice", "You configure the function so that it will now <b>[meta.give_energy ? "give to" : "take from"]</b> its target."))
+	to_chat(user, span("notice", "You configure the function so that it will now <b>[energy_meta.give_energy ? "give to" : "take from"]</b> its target."))
 	playsound(owner, 'sound/effects/magic/technomancer/charge.ogg', 75, 1)
 	return TRUE
 
@@ -57,9 +57,9 @@
 			to_chat(span("warning", "Using this on yourself would be kind of pointless."))
 			return FALSE
 
-		var/datum/spell_metadata/energy_siphon/meta = get_meta()
+		var/datum/spell_metadata/energy_siphon/energy_meta = meta
 
-		if(meta.give_energy)
+		if(energy_meta.give_energy)
 			start_siphoning(owner, AM)
 		else
 			start_siphoning(AM, owner)

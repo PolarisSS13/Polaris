@@ -13,15 +13,17 @@
 	var/mob/living/owner = null
 	var/cast_methods = null			// Controls how the spell is casted.
 	var/aspect = null				// Used for combining spells.
-	var/toggled = 0					// Mainly used for overlays.
-//	var/cooldown = 0 				// If set, will add a cooldown overlay and adjust click delay.  Must be a multiple of 5 for overlays.
-	var/cast_sound = null			// Sound file played when this is used.
+	var/datum/spell_metadata/meta = null // Ref to the metadata datum that holds information that survives between spell drops.
+	var/toggled = FALSE				// Mainly used for overlays.
 	var/dont_qdel_when_dropped = FALSE // If true, the spell won't delete itself when dropped.
+	var/delete_after_cast = FALSE
+	var/cooldown_visual_timerid = null
 
-/obj/item/weapon/spell/Initialize()
+/obj/item/weapon/spell/Initialize(mapload, datum/spell_metadata/new_meta)
 	if(isliving(loc))
 		owner = loc
-	update_icon()
+	meta = new_meta
+	new_spell_icon_visuals()
 	return ..()
 
 /obj/item/weapon/spell/Destroy()
@@ -32,19 +34,33 @@
 /mob/living/proc/place_spell_in_hand(var/path)
 	return
 
+/*
+	if(get_cooldown())
+		to_chat(owner, span("warning", "It's too soon to invoke this function again. \
+		You have to wait for at least [DisplayTimeText(get_cooldown())]."))
+		return FALSE
+*/
+
 // Gives the spell to the human mob, if it is allowed to have spells, hands are not full, etc.  Otherwise it deletes itself.
 // Returns the newly created spell, in case you want to do things with it.
-/mob/living/carbon/human/place_spell_in_hand(var/path)
+/mob/living/carbon/human/place_spell_in_hand(var/path, datum/spell_metadata/new_meta)
 	if(!path || !ispath(path))
 		return FALSE
 
-	var/obj/item/weapon/spell/S = new path(src)
+	var/obj/item/weapon/spell/S = new path(src, new_meta)
 
 	//No hands needed for innate casts.
 	if(S.cast_methods & CAST_INNATE)
 		if(S.run_checks())
-			S.on_innate_cast(src)
-			return S
+			if(S.get_cooldown())
+				to_chat(src, span("warning", "It's too soon to invoke this function again. \
+				You have to wait for at least [DisplayTimeText(S.get_cooldown())]."))
+				qdel(S)
+				return null
+			else
+				if(S.on_innate_cast(src))
+					S.after_cast(src)
+				return S
 
 	if(l_hand && r_hand) //Make sure our hands aren't full.
 		if(istype(r_hand, /obj/item/weapon/spell)) //If they are full, perhaps we can still be useful.
@@ -94,6 +110,12 @@
 /obj/item/weapon/spell/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!run_checks())
 		return
+
+	if(get_cooldown())
+		to_chat(user, span("warning", "It's too soon to invoke this function again. \
+		You have to wait for at least [DisplayTimeText(get_cooldown())]."))
+		return
+
 	if(!proximity_flag)
 		if(cast_methods & CAST_RANGED)
 			. = on_ranged_cast(target, user)
@@ -109,12 +131,13 @@
 			. = on_ranged_cast(target, user)
 	if(.)
 		after_cast(user)
-//	if(cooldown)
-//		var/effective_cooldown = round(cooldown * core.cooldown_modifier, 5)
-//		user.setClickCooldown(effective_cooldown)
-//		flick("cooldown_[effective_cooldown]",src)
 
 /obj/item/weapon/spell/proc/after_cast(mob/user)
+	apply_cooldown()
+	if(delete_after_cast || QDELETED(src))
+		qdel(src)
+	else
+		handle_cooldown_visuals()
 
 // Tries to call on_use_cast() if it is allowed to do so.  Don't override this, override on_use_cast() instead.
 /obj/item/weapon/spell/attack_self(mob/user)
@@ -128,11 +151,48 @@
 	if(!dont_qdel_when_dropped && !QDELETED(src))
 		qdel(src)
 
+/obj/item/weapon/spell/proc/apply_cooldown()
+	meta.last_cast_time = world.time
+	return TRUE
+
+// Returns the number of seconds a spell is on cooldown for, or 0 if it isn't on cooldown.
+/obj/item/weapon/spell/proc/get_cooldown()
+	return max(0, (meta.last_cast_time + meta.cooldown) - world.time)
+
 /obj/item/weapon/spell/throw_impact(atom/hit_atom)
 	. = ..()
 	if(cast_methods & CAST_THROW)
 		on_throw_cast(hit_atom)
 	qdel(src)
+
+
+#define COOLDOWN_ICON_STATES 9
+
+/obj/item/weapon/spell/proc/handle_cooldown_visuals()
+	cooldown_loop()
+
+/obj/item/weapon/spell/proc/cooldown_loop()
+	if(cooldown_visual_timerid)
+		deltimer(cooldown_visual_timerid)
+		cooldown_visual_timerid = null
+
+	if(!get_cooldown())
+		icon_state = initial(icon_state)
+		update_icon()
+		return
+
+	var/icon_state_to_use = (1 - (get_cooldown() / meta.cooldown)) * COOLDOWN_ICON_STATES
+	icon_state_to_use = CEILING(between(1, icon_state_to_use, COOLDOWN_ICON_STATES), 1)
+	icon_state = "cooldown[icon_state_to_use]"
+
+	if(!cooldown_visual_timerid)
+		var/shortest_period = meta.cooldown / COOLDOWN_ICON_STATES
+		var/next_period = max(FLOOR(shortest_period, 1), 1)
+		// This is deliberately not using TIMER_LOOP because they tend to have `deltimer()` do nothing and loop forever.
+		cooldown_visual_timerid = addtimer(CALLBACK(src, .proc/cooldown_loop), next_period, TIMER_STOPPABLE)
+
+
+#undef COOLDOWN_ICON_STATES
 
 // Should return TRUE if the user can pay for the spell, FALSE otherwise.
 /obj/item/weapon/spell/proc/pay_energy(var/amount)
@@ -142,6 +202,8 @@
 	return TRUE
 
 /obj/item/weapon/spell/proc/new_spell_icon_visuals()
+	// TODO: Add spinny overlay if the spell is toggled/passive/etc.
+	handle_cooldown_visuals() // If the player gets a spell that's still on cooldown, it should be shown.
 
 // Override this to do something as soon as the technomancer has the spell in their hand,
 // as Initialize() can be too early to do certain things.
@@ -166,5 +228,5 @@
 	return
 
 
-// Override this for casting without using hands (and as a result not using spell objects).
+// Override this for casting immediately, without using hands.
 /obj/item/weapon/spell/proc/on_innate_cast(mob/user)

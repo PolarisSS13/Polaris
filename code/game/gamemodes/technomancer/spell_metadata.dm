@@ -3,6 +3,7 @@
 /datum/spell_metadata
 	var/name = null // Shown in UIs.
 	var/spell_path = null // The path to spawn when casting the spell.
+	var/exclude_from_gambit = FALSE // If true, the Gambit spell isn't allowed to choose this spell. Empty names are also implicitly blocked.
 
 	var/icon = null // Icon file to use for HUD elements.
 	var/icon_state = null // Which icon to use in the icon file defined above.

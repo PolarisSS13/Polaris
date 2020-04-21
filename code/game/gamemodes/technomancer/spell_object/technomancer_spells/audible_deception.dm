@@ -73,17 +73,17 @@
 		sound_options["!!AIR HORN!!"] = 'sound/items/AirHorn.ogg'
 	var/new_sound = input("Select the sound you want to make.","Sounds") as null|anything in sound_options
 	if(new_sound)
-		var/datum/spell_metadata/audible_deception/meta = get_meta()
-		meta.selected_sound = sound_options[new_sound]
+		var/datum/spell_metadata/audible_deception/audible_meta = meta
+		audible_meta.selected_sound = sound_options[new_sound]
 
 /obj/item/weapon/spell/technomancer/audible_deception/on_ranged_cast(atom/hit_atom, mob/living/user)
 	var/turf/T = get_turf(hit_atom)
-	var/datum/spell_metadata/audible_deception/meta = get_meta()
-	if(meta.selected_sound && pay_energy(100))
-		playsound(T, meta.selected_sound, 80, 1, -1)
+	var/datum/spell_metadata/audible_deception/audible_meta = meta
+	if(audible_meta.selected_sound && pay_energy(100))
+		playsound(T, audible_meta.selected_sound, 80, 1, -1)
 		adjust_instability(1)
 		// Air Horn time.
-		if(meta.selected_sound == 'sound/items/AirHorn.ogg' && check_for_scepter() && pay_energy(3900))
+		if(audible_meta.selected_sound == 'sound/items/AirHorn.ogg' && check_for_scepter() && pay_energy(3900))
 			adjust_instability(49) // Pay for your sins.
 			for(var/mob/living/carbon/M in ohearers(6, T))
 				if(M.get_ear_protection() >= 2)

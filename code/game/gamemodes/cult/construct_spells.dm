@@ -461,7 +461,7 @@ proc/findNullRod(var/atom/target)
 	aspect = ASPECT_UNHOLY		// Used for combining spells. Pretty much any cult spell is unholy.
 	toggled = 0					// Mainly used for overlays.
 	var/cooldown = 0 				// If set, will add a cooldown overlay and adjust click delay.  Must be a multiple of 5 for overlays.
-	cast_sound = null			// Sound file played when this is used.
+	var/cast_sound = null			// Sound file played when this is used.
 	var/last_castcheck = null	// The last time this spell was cast.
 
 /obj/item/weapon/spell/construct/New()
