@@ -122,8 +122,10 @@
 	// At this point, all other machines have finished using power. Anything left over may be used up to charge SMESs.
 	if(inputting.len && smes_demand)
 		var/smes_input_percentage = between(0, (netexcess / smes_demand) * 100, 100)
-		for(var/obj/machinery/power/smes/S in inputting)
-			S.input_power(smes_input_percentage)
+		for(var/obj/machinery/power/terminal/T in inputting)
+			var/obj/machinery/power/smes/S = T.master
+			if(istype(S))
+				S.input_power(smes_input_percentage, T)
 
 	netexcess = avail - load
 	if(netexcess)

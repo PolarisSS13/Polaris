@@ -1,37 +1,10 @@
-################################
-# Example Changelog File
-#
-# Note: This file, and files beginning with ".", and files that don't end in ".yml" will not be read. If you change this file, you will look really dumb.
-#
-# Your changelog will be merged with a master changelog. (New stuff added only, and only on the date entry for the day it was merged.)
-# When it is, any changes listed below will disappear.
-#
-# Valid Prefixes: 
-#   bugfix
-#   wip (For works in progress)
-#   tweak
-#   soundadd
-#   sounddel
-#   rscadd (general adding of nice things)
-#   rscdel (general deleting of nice things)
-#   imageadd
-#   imagedel
-#   maptweak
-#   spellcheck (typo fixes)
-#   experiment
-#################################
-
-# Your name.  
-author: N3X15
-
-# Optional: Remove this file after generating master changelog.  Useful for PR changelogs that won't get used again.
+author: atlantiscze
 delete-after: True
 
-# Any changes you've made.  See valid prefix list above.
-# INDENT WITH TWO SPACES.  NOT TABS.  SPACES.
-# SCREW THIS UP AND IT WON'T WORK.
-# Also, all entries are changed into a single [] after a master changelog generation. Just remove the brackets when you add new entries.
-# Please surround your changes in  double quotes ("), as certain characters otherwise screws up compiling. The quotes will not show up in the changelog.
 changes: 
-  - rscadd: "Added a changelog editing system that should cause fewer conflicts and more accurate timestamps."
-  - rscdel: "Killed innocent kittens."
+  - rscadd: "SMES units now have automatic load balancing both on inputs and outputs"
+  - rscadd: "SMES units (and derived objects, such as PSUs) can now have more than one input terminal. This allows for input from more otherwise isolated power networks."
+  - tweak: "Completely redesigned cell rack PSUs, removed ghetto variant. Cell rack PSUs now support multiple power cells and hot-swapping of cells during operation. This allows for either charging multiple cells at once in one device (directly from power cable) or for powering up various machinery with only a power cell. They are still inferior to SMESes in pretty much all aspects."
+  - tweak: "Multitool on a cable now shows nicer results with large currents (uses kW or MW accordingly)"
+  - tweak: "Multitool may be now used to change colour of cable coils."
+  

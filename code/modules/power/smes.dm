@@ -76,6 +76,8 @@
 		stat |= BROKEN
 		return
 	update_icon()
+	if(!powernet)
+		connect_to_network()
 	if(!should_be_mapped)
 		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 
@@ -116,20 +118,18 @@
 /obj/machinery/power/smes/proc/chargedisplay()
 	return round(5.5*charge/(capacity ? capacity : 5e6))
 
-/obj/machinery/power/smes/proc/input_power(var/percentage)
+/obj/machinery/power/smes/proc/input_power(var/percentage, var/obj/machinery/power/terminal/term)
 	var/to_input = target_load * (percentage/100)
 	to_input = between(0, to_input, target_load)
-	input_available = 0
 	if(percentage == 100)
 		inputting = 2
 	else if(percentage)
 		inputting = 1
 	// else inputting = 0, as set in process()
 
-	for(var/obj/machinery/power/terminal/term in terminals)
-		var/inputted = term.powernet.draw_power(to_input)
-		add_charge(inputted)
-		input_available += inputted
+	var/inputted = term.powernet.draw_power(min(to_input, input_level - input_available))
+	add_charge(inputted)
+	input_available += inputted
 
 // Mostly in place due to child types that may store power in other way (PSUs)
 /obj/machinery/power/smes/proc/add_charge(var/amount)
@@ -159,7 +159,7 @@
 				continue
 			input_available = TRUE
 			term.powernet.smes_demand += target_load
-			term.powernet.inputting.Add(src)
+			term.powernet.inputting.Add(term)
 		if(!input_available)
 			target_load = 0 // We won't input any power without powernet connection.
 		inputting = 0
