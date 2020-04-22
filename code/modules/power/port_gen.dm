@@ -181,8 +181,8 @@
 
 	//calculate the "target" temperature range
 	//This should probably depend on the external temperature somehow, but whatever.
-	var/lower_limit = 56 + power_output * temperature_gain
-	var/upper_limit = 76 + power_output * temperature_gain
+	var/lower_limit = 56 + (power_output - max_safe_output) * temperature_gain
+	var/upper_limit = 76 + (power_output - max_safe_output) * temperature_gain
 
 	/*
 		Hot or cold environments can affect the equilibrium temperature
