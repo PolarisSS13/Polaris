@@ -623,6 +623,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_cable_coil_colours
 		set_cable_color(selected_type, usr)
 		return
+	return ..()
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"

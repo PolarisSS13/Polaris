@@ -82,6 +82,8 @@
 		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
 
 /obj/machinery/power/smes/Destroy()
+	for(var/obj/machinery/power/terminal/T in terminals)
+		T.master = null
 	terminals = null
 	return ..()
 
@@ -303,7 +305,7 @@
 		return 0
 
 	else if(W.is_wirecutter() && !building_terminal)
-		building_terminal = 1
+		building_terminal = TRUE
 		var/obj/machinery/power/terminal/term
 		for(var/obj/machinery/power/terminal/T in get_turf(user))
 			if(T.master == src)
@@ -311,6 +313,7 @@
 				break
 		if(!term)
 			to_chat(user, "<span class='warning'>There is no terminal on this tile.</span>")
+			building_terminal = FALSE
 			return 0
 		var/turf/tempTDir = get_turf(term)
 		if (istype(tempTDir))
@@ -324,7 +327,7 @@
 						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 						s.set_up(5, 1, src)
 						s.start()
-						building_terminal = 0
+						building_terminal = FALSE
 						if(usr.stunned)
 							return 0
 					new /obj/item/stack/cable_coil(loc,10)
@@ -333,7 +336,7 @@
 						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 					terminals -= term
 					qdel(term)
-		building_terminal = 0
+		building_terminal = FALSE
 		return 0
 	return 1
 

@@ -154,7 +154,7 @@
 	else
 		if(!load)
 			return 0
-		return between(0, (avail / load) * 100, 100)
+		return between(0, (load / avail) * 100, 100)
 
 /datum/powernet/proc/get_electrocute_damage()
 	switch(avail)
