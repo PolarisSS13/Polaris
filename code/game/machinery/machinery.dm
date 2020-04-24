@@ -217,6 +217,21 @@ Class Procs:
 		use_power(active_power_usage, power_channel, 1)
 	return 1
 
+/obj/machinery/vv_edit_var(var/var_name, var/new_value)
+	if(var_name == NAMEOF(src, use_power))
+		update_use_power(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, power_channel))
+		update_power_channel(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, idle_power_usage))
+		update_idle_power_usage(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, active_power_usage))
+		update_active_power_usage(new_value)
+		return TRUE
+	return ..()
+
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)
 
