@@ -58,7 +58,6 @@
 		A.fall()
 	if(GLOB.open_space_initialised)
 		SSopen_space.add_turf(src, TRUE)
-	update_icon()
 
 // override to make sure nothing is hidden
 /turf/simulated/open/levelupdate()
