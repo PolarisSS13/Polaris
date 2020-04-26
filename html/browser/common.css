@@ -328,3 +328,14 @@ div.notice
 	width: 100%;
 	clear: both;
 }
+
+img.sprite64
+{
+	width: 64px;
+	height: 64px;
+}
+
+body.spellBlock
+{
+	color: #000000;
+}

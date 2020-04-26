@@ -5,7 +5,7 @@
 	spell_power_desc = "Amount of energy gained scaled with spell power."
 	cost = 50
 	obj_path = /obj/item/weapon/spell/instability_tap
-	ability_icon_state = "tech_instabilitytap"
+	ability_icon_state = "tech_instability_tap"
 	category = UTILITY_SPELLS
 
 /obj/item/weapon/spell/instability_tap

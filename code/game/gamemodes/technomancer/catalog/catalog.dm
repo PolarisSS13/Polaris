@@ -37,6 +37,64 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 	var/list/spell_metadata_paths = null // A list of spell metadata paths that someone will get if they buy this thing.
 	var/enhancement_desc = null // Blue colored text that describes what happens if the spell is used with the Scepter of Enhancement.
 	var/spell_power_desc = null // Purple colored text that describes how the spell scales with 'spell power'.
+	var/table = null
+
+/datum/technomancer_catalog/spell/proc/get_description()
+	if(!table)
+		table = build_table()
+	return table
+
+/datum/technomancer_catalog/spell/proc/build_table()
+	var/list/dat = list()
+	for(var/thing in spell_metadata_paths)
+		var/datum/spell_metadata/meta = new thing()
+		var/obj/item/weapon/spell/technomancer/spell_path = meta.spell_path
+		var/image/I = image(icon = 'icons/mob/screen_spells.dmi', icon_state = meta.icon_state)
+		var/datum/technomancer_aspect/aspect = GLOB.technomancer_aspects[initial(spell_path.aspect)]
+
+		dat += {"
+
+		<div class='spellBlock'>
+		<table bgcolor='[aspect.secondary_color]' style='width:100%; border: 1px solid black;'>
+			<tr bgcolor='[aspect.primary_color]'>
+				<th colspan=2>[meta.name]</th>
+			</tr>
+			<tr>
+				<td rowspan=2>[bicon(I, TRUE, "sprite64")]</td>
+				<td>ASPECT:<br>[uppertext(initial(spell_path.aspect))]</td>
+			</tr>
+			<tr>
+				<td>[desc]</td>
+			</tr>
+		"}
+		if(spell_power_desc)
+			dat += {"
+			<tr>
+				<td colspan=2>Spell Power: [spell_power_desc]</td>
+			</tr>
+			"}
+		if(enhancement_desc)
+			dat += {"
+			<tr>
+				<td colspan=2>Scepter Effect: [enhancement_desc]</td>
+			</tr>
+			"}
+		var/list/lines = meta.get_spell_info()
+		if(lines.len)
+			for(var/line in lines)
+				dat += {"
+				<tr>
+					<td colspan=2><b>[line]</b>: [lines[line]]</td>
+				</tr>
+				"}
+
+		dat += {"
+			</table>
+			</div>
+
+		"}
+	return dat.Join()
+
 
 
 // This is deprecated.
@@ -52,6 +110,7 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 	var/category = ALL_SPELLS
 	var/enhancement_desc = null
 	var/spell_power_desc = null
+	var/cached_desc = null
 
 // This functions as the traitor uplink for technomancers, letting them buy spells and items for points.
 /obj/item/weapon/technomancer_catalog
@@ -82,6 +141,10 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 /obj/item/weapon/technomancer_catalog/proc/bind_to_owner(var/mob/living/carbon/human/new_owner)
 	if(!owner && technomancers.is_antagonist(new_owner.mind))
 		owner = new_owner
+
+/obj/item/weapon/technomancer_catalog/proc/generate_spell_entry_text(datum/technomancer_catalog/spell/spell_entry)
+
+
 
 // Shows an href link to go to a spell subcategory if the category is not already selected,
 // otherwise it is bold, to reduce code duplicating.
@@ -128,7 +191,8 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 
 		if(spell_tab != ALL_SPELLS && spell_entry.category != spell_tab)
 			continue
-
+		dat += spell_entry.get_description()
+		/*
 		dat += "<b>[spell_entry.name]</b><br>"
 		dat += "<i>[spell_entry.desc]</i><br>"
 
@@ -136,7 +200,7 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 			dat += "<font color='purple'>Spell Power: [spell_entry.spell_power_desc]</font><br>"
 		if(spell_entry.enhancement_desc)
 			dat += span("highlight", "Scepter Effect: [spell_entry.enhancement_desc]<br>")
-
+		*/
 		if(spell_entry.cost <= budget)
 			dat += "[href(src, list("spell_choice" = spell_entry), "Purchase")] ([spell_entry.cost])<br><br>"
 		else

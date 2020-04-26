@@ -142,6 +142,10 @@
 // Tries to call on_use_cast() if it is allowed to do so.  Don't override this, override on_use_cast() instead.
 /obj/item/weapon/spell/attack_self(mob/user)
 	if(run_checks() && (cast_methods & CAST_USE))
+		if(get_cooldown())
+			to_chat(src, span("warning", "It's too soon to invoke this function again. \
+			You have to wait for at least [DisplayTimeText(get_cooldown())]."))
+			return
 		if(on_use_cast(user))
 			after_cast(user)
 	..()

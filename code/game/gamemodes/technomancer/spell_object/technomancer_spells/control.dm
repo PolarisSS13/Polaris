@@ -45,7 +45,7 @@
 	desc = "Now you can command your own army!"
 	cast_methods = CAST_RANGED|CAST_USE
 	aspect = ASPECT_BIOMED //Not sure if this should be something else.
-	var/allowed_mob_classes = MOB_CLASS_ANIMAL|MOB_CLASS_SYNTHETIC
+	var/allowed_mob_classes = MOB_CLASS_ANIMAL|MOB_CLASS_SYNTHETIC|MOB_CLASS_ILLUSION
 	var/scepter_teleport_delay = 1 SECOND
 	var/scepter_teleport_instability = 1
 	var/scepter_teleport_cost = 100

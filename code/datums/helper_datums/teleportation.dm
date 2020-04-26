@@ -77,6 +77,13 @@
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
+/datum/teleportation/recall/bound_object
+	ignore_density = TRUE
+	ignore_admin_z = TRUE // So the technomancer can bring something from home, but only once.
+
+	sound_exited = 'sound/effects/magic/technomancer/teleport.ogg'
+	sound_entered = 'sound/effects/magic/technomancer/summonitems_generic.ogg'
+
 
 /atom/movable/proc/can_teleport()
 	return TRUE

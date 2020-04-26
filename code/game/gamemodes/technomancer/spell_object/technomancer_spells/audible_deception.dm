@@ -8,7 +8,7 @@
 	spell_metadata_paths = list(/datum/spell_metadata/audible_deception)
 
 /datum/spell_metadata/audible_deception
-	name = "Abjuration"
+	name = "Audible Deception"
 	icon_state = "tech_audibledeception"
 	spell_path = /obj/item/weapon/spell/technomancer/audible_deception
 	var/selected_sound = null

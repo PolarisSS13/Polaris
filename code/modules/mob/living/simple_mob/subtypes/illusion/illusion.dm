@@ -30,12 +30,57 @@
 /mob/living/simple_mob/illusion/proc/copy_appearance(atom/movable/thing_to_copy)
 	if(!thing_to_copy)
 		return FALSE
-	appearance = thing_to_copy.appearance
 	copying = thing_to_copy
+
+	// Stolen from Virgo's morph code.
+	// Copying the appearance var isn't sufficent enough nowdays.
+	name = copying.name
+	desc = copying.desc
+	icon = copying.icon
+	icon_state = copying.icon_state
+	alpha = copying.alpha
+	copy_overlays(copying, TRUE)
+
+	pixel_x = initial(copying.pixel_x)
+	pixel_y = initial(copying.pixel_y)
+
 	density = thing_to_copy.density // So you can't bump into objects that aren't supposed to be dense.
-	catalogue_data = thing_to_copy.catalogue_data.Copy()
-	catalogue_delay = thing_to_copy.catalogue_delay
+
+	icon_scale_x = copying.icon_scale_x
+	icon_scale_y = copying.icon_scale_y
+	update_transform()
+
+//	appearance = thing_to_copy.appearance
+
+	if(catalogue_data)
+		catalogue_data = thing_to_copy.catalogue_data.Copy()
+		catalogue_delay = thing_to_copy.catalogue_delay
 	return TRUE
+
+/*
+	name = target.name
+	desc = target.desc
+	icon = target.icon
+	icon_state = target.icon_state
+	alpha = max(target.alpha, 150)
+	copy_overlays(target, TRUE)
+	our_size_multiplier = size_multiplier
+
+	pixel_x = initial(target.pixel_x)
+	pixel_y = initial(target.pixel_y)
+
+	density = target.density
+
+	if(isobj(target))
+		size_multiplier = 1
+		icon_scale_x = target.icon_scale_x
+		icon_scale_y = target.icon_scale_y
+		update_transform()
+
+	else if(ismob(target))
+		var/mob/living/M = target
+		resize(M.size_multiplier)
+*/
 
 // Because we can't perfectly duplicate some examine() output, we directly examine the AM it is copying.  It's messy but
 // this is to prevent easy checks from the opposing force.
@@ -95,11 +140,11 @@
 
 // Try to have the same tooltip, or else it becomes really obvious which one is fake.
 /mob/living/simple_mob/illusion/get_nametag_name(mob/user)
-	if(copying)
+	if(copying && ismob(copying)) // At this time, only mobs have tooltips. If that changes then this will need to be updated.
 		return copying.get_nametag_name(user)
 
 /mob/living/simple_mob/illusion/get_nametag_desc(mob/user)
-	if(copying)
+	if(copying && ismob(copying))
 		return copying.get_nametag_desc(user)
 
 // Cataloguer stuff. I don't think this will actually come up but better safe than sorry.

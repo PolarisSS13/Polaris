@@ -3,7 +3,7 @@
 	desc = "Creates a link between two points, the caster and the target. By default, the target will have its energy drained, \
 	and transferred to the caster over time. Using the function in-hand will allow you to toggle reversing the flow of energy. \
 	Can drain from powercells, FPB microbatteries, and other Cores. Touching the beam will also hurt."
-	cost = 100
+	cost = 200
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/energy_siphon)
 

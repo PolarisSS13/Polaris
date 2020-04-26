@@ -1,7 +1,6 @@
 /datum/technomancer_catalog/spell/gambit
 	name = "Gambit"
 	desc = "This function causes you to receive a random function, including those which you haven't purchased."
-	enhancement_desc = "Instead of a purely random spell, it will give you a \"random\" spell."
 	cost = 100
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/gambit)

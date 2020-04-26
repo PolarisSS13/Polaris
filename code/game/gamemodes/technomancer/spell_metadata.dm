@@ -13,3 +13,8 @@
 
 	var/cooldown = null // If not null, each spell cast is limited by this amount of time.
 	var/last_cast_time = null // world.time of when the spell was last used.
+
+// Returns an assoc list of various stats about a specific spell, e.g. "Range" = "7".
+// This is used to display spell numbers in the spellbook.
+/datum/spell_metadata/proc/get_spell_info()
+	return list()
