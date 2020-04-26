@@ -196,6 +196,18 @@ Class Procs:
 /obj/machinery/proc/update_use_power(var/new_use_power)
 	use_power = new_use_power
 
+// Sets the power_channel var
+/obj/machinery/proc/update_power_channel(var/new_channel)
+	power_channel = new_channel
+
+// Sets the idle_power_usage var
+/obj/machinery/proc/update_idle_power_usage(var/new_power_usage)
+	idle_power_usage = new_power_usage
+
+// Sets the active_power_usage var
+/obj/machinery/proc/update_active_power_usage(var/new_power_usage)
+	active_power_usage = new_power_usage
+
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
 		return 0
@@ -204,6 +216,21 @@ Class Procs:
 	else if(use_power >= USE_POWER_ACTIVE)
 		use_power(active_power_usage, power_channel, 1)
 	return 1
+
+/obj/machinery/vv_edit_var(var/var_name, var/new_value)
+	if(var_name == NAMEOF(src, use_power))
+		update_use_power(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, power_channel))
+		update_power_channel(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, idle_power_usage))
+		update_idle_power_usage(new_value)
+		return TRUE
+	else if(var_name == NAMEOF(src, active_power_usage))
+		update_active_power_usage(new_value)
+		return TRUE
+	return ..()
 
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)
