@@ -86,7 +86,8 @@
 	relevant_areas = list(/area/rnd/xenobiology)
 	irrelevant_areas = list(
 		/area/rnd/xenobiology/xenoflora,
-		/area/rnd/xenobiology/xenoflora_storage
+		/area/rnd/xenobiology/xenoflora_storage,
+		/area/rnd/xenobiology/xenoflora_isolation
 	)
 
 /datum/event2/meta/prison_break/xenobio/get_odds_from_trapped_mobs()
@@ -126,6 +127,7 @@
 	var/list/areas_to_break = list()
 	var/list/area_types_to_break = null // Area types to include.
 	var/list/area_types_to_ignore = null // Area types to exclude, usually due to undesired inclusion from inheritence.
+	var/ignore_blast_doors = FALSE
 
 /datum/event2/event/prison_break/brig
 	area_display_name = "Brig"
@@ -164,8 +166,10 @@
 	area_types_to_break = list(/area/rnd/xenobiology)
 	area_types_to_ignore = list(
 		/area/rnd/xenobiology/xenoflora,
-		/area/rnd/xenobiology/xenoflora_storage
+		/area/rnd/xenobiology/xenoflora_storage,
+		/area/rnd/xenobiology/xenoflora_isolation
 	)
+	ignore_blast_doors = TRUE // Needed to avoid a breach.
 
 /datum/event2/event/prison_break/virology
 	area_display_name = "Virology"
@@ -217,7 +221,7 @@
 /datum/event2/event/prison_break/start()
 	for(var/area/A in areas_to_break)
 		spawn(0) // So we don't block the ticker.
-			A.prison_break()
+			A.prison_break(open_blast_doors = !ignore_blast_doors)
 
 // There's between 40 seconds and one minute before the whole station knows.
 // If there's a baddie engineer, they can choose to keep their early announcement to themselves and get a minute to exploit it.
@@ -225,3 +229,9 @@
 	command_announcement.Announce("[pick("Gr3y.T1d3 virus","Malignant trojan")] was detected \
 	in \the [location_name()] [area_display_name] [containment_display_desc] subroutines. Secure any compromised \
 	areas immediately. AI involvement is recommended.", "[capitalize(containment_display_desc)] Alert")
+
+	global_announcer.autosay(
+		"It is now safe to reactivate the APCs' main breakers inside [area_display_name].",
+		"[location_name()] Firewall Subroutines",
+		DEPARTMENT_ENGINEERING
+	)
