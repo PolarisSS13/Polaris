@@ -456,6 +456,7 @@
 // Called when a mob successfully moves.
 // Would've been an /atom/movable proc but it caused issues.
 /mob/Moved(atom/oldloc)
+	. = ..()
 	for(var/obj/O in contents)
 		O.on_loc_moved(oldloc)
 
