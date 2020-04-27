@@ -86,8 +86,7 @@
 	relevant_areas = list(/area/rnd/xenobiology)
 	irrelevant_areas = list(
 		/area/rnd/xenobiology/xenoflora,
-		/area/rnd/xenobiology/xenoflora_storage,
-		/area/rnd/xenobiology/xenoflora_isolation
+		/area/rnd/xenobiology/xenoflora_storage
 	)
 
 /datum/event2/meta/prison_break/xenobio/get_odds_from_trapped_mobs()
@@ -166,10 +165,8 @@
 	area_types_to_break = list(/area/rnd/xenobiology)
 	area_types_to_ignore = list(
 		/area/rnd/xenobiology/xenoflora,
-		/area/rnd/xenobiology/xenoflora_storage,
-		/area/rnd/xenobiology/xenoflora_isolation
+		/area/rnd/xenobiology/xenoflora_storage
 	)
-	ignore_blast_doors = TRUE // Needed to avoid a breach.
 
 /datum/event2/event/prison_break/virology
 	area_display_name = "Virology"
