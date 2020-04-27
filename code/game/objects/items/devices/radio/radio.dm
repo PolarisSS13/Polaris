@@ -361,6 +361,7 @@ var/global/list/default_medbay_channels = list(
 
 	var/datum/radio_frequency/connection = message_mode
 	var/pos_z = get_z(src)
+	var/datum/radio_frequency/connection = message_mode
 
 	//#### Tagging the signal with all appropriate identity values ####//
 
@@ -475,7 +476,6 @@ var/global/list/default_medbay_channels = list(
 		signal.transmission_method = TRANSMISSION_SUBSPACE
 
 		//#### Sending the signal to all subspace receivers ####//
-
 		for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
 			R.receive_signal(signal)
 
@@ -523,8 +523,13 @@ var/global/list/default_medbay_channels = list(
 
 	//Nothing handled any sort of remote radio-ing and returned before now, just squawk on this zlevel.
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
+<<<<<<< refs/remotes/origin/master
 		  src, message_pieces, displayname, jobname, real_name, M.voice_name,
 		  filter_type, signal.data["compression"], using_map.get_map_levels(pos_z), connection.frequency, verb)
+=======
+		src, message_pieces, displayname, jobname, real_name, M.voice_name,
+		filter_type, signal.data["compression"], using_map.get_map_levels(pos_z), connection.frequency, verb)
+>>>>>>> Various fixes while waiting on PR
 
 
 /obj/item/device/radio/hear_talk(mob/M, list/message_pieces, verb)
