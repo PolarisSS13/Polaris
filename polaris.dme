@@ -598,6 +598,7 @@
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\gambit.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\illusion.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\instability_tap.dm"
+#include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\mark_recall.dm"
 #include "code\game\gamemodes\technomancer\spell_object\technomancer_spells\modifier\modifier.dm"
 #include "code\game\gamemodes\traitor\traitor.dm"
 #include "code\game\gamemodes\wizard\wizard.dm"

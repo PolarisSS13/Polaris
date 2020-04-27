@@ -19,6 +19,7 @@
 
 /obj/item/weapon/spell/technomancer/instability_tap
 	name = "instability tap"
+	icon_state = "instability_tap"
 	desc = "Short term gain for long term consequences never end bad, right?"
 	cast_methods = CAST_INNATE
 	aspect = ASPECT_UNSTABLE
