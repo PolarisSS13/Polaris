@@ -123,12 +123,14 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-	if(circuit)
+	if(ispath(circuit))
 		circuit = new circuit(src)
 
 /obj/machinery/Initialize()
 	. = ..()
 	global.machines += src
+	if(ispath(circuit))
+		circuit = new circuit(src)
 	if(!speed_process)
 		START_MACHINE_PROCESSING(src)
 	else
