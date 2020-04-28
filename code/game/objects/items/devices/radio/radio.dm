@@ -359,7 +359,6 @@ var/global/list/default_medbay_channels = list(
 	if(!istype(message_mode, /datum/radio_frequency)) //if not a special case, it should be returning a radio connection
 		return FALSE
 
-	var/datum/radio_frequency/connection = message_mode
 	var/pos_z = get_z(src)
 	var/datum/radio_frequency/connection = message_mode
 
