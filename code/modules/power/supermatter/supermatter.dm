@@ -25,10 +25,17 @@
 
 // Base variants are applied to everyone on the same Z level
 // Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
-#define DETONATION_RADS 20
-#define DETONATION_HALLUCINATION_BASE 300
-#define DETONATION_HALLUCINATION_RANGE 300
-#define DETONATION_HALLUCINATION 600
+#define DETONATION_RADS 40
+#define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
+
+// Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
+// This does pretty much the same thing as an electrical storm, it just affects the whole Z level instantly.
+#define DETONATION_APC_OVERLOAD_PROB 10		// prob() of overloading an APC's lights.
+#define DETONATION_SHUTDOWN_APC 120			// Regular APC.
+#define DETONATION_SHUTDOWN_CRITAPC 10		// Critical APC. AI core and such. Considerably shorter as we don't want to kill the AI with a single blast. Still a nuisance.
+#define DETONATION_SHUTDOWN_SMES 60			// SMES
+#define DETONATION_SHUTDOWN_RNG_FACTOR 20	// RNG factor. Above shutdown times can be +- X%, where this setting is the percent. Do not set to 100 or more.
+#define DETONATION_SOLAR_BREAK_CHANCE 60	// prob() of breaking solar arrays (this is per-panel, and only affects the Z level SM is on)
 
 
 #define WARNING_DELAY 20			//seconds between warnings.
@@ -142,29 +149,65 @@
 
 
 /obj/machinery/power/supermatter/proc/explode()
+
+	set waitfor = 0
+
 	message_admins("Supermatter exploded at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 	log_game("SUPERMATTER([x],[y],[z]) Exploded. Power:[power], Oxygen:[oxygen], Damage:[damage], Integrity:[get_integrity()]")
 	anchored = 1
 	grav_pulling = 1
 	exploded = 1
-	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
-	if(!TS)
+	sleep(pull_time)
+	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, exosuit, or other container shouldn't block it's effects that way.
+	if(!istype(TS))
 		return
-	for(var/z in GetConnectedZlevels(TS.z))
+
+	var/list/affected_z = GetConnectedZlevels(TS.z)
+
+	// Effect 1: Radiation, weakening to all mobs on Z level
+	for(var/z in affected_z)
 		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
+
 	for(var/mob/living/mob in living_mob_list)
-		var/turf/T = get_turf(mob)
-		if(T && (loc.z == T.z))
-			if(istype(mob, /mob/living/carbon/human))
-				//Hilariously enough, running into a closet should make you get hit the hardest.
-				var/mob/living/carbon/human/H = mob
-				H.hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-	spawn(pull_time)
-		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
-		spawn(5) //to allow the explosion to finish
-		new /obj/item/broken_sm(TS)
+		var/turf/TM = get_turf(mob)
+		if(!TM)
+			continue
+		if(!(TM.z in affected_z))
+			continue
+
+		mob.Weaken(DETONATION_MOB_CONCUSSION)
+		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
+
+	// Effect 2: Z-level wide electrical pulse
+	for(var/obj/machinery/power/apc/A in machines)
+		if(!(A.z in affected_z))
+			continue
+
+		// Overloads lights
+		if(prob(DETONATION_APC_OVERLOAD_PROB))
+			A.overload_lighting()
+		// Causes the APCs to go into system failure mode.
+		var/random_change = rand(100 - DETONATION_SHUTDOWN_RNG_FACTOR, 100 + DETONATION_SHUTDOWN_RNG_FACTOR) / 100
+		if(A.is_critical)
+			A.energy_fail(round(DETONATION_SHUTDOWN_CRITAPC * random_change))
+		else
+			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
+
+	// Effect 3: Break solar arrays
+	for(var/obj/machinery/power/solar/S in machines)
+		if(!(S.z in affected_z))
+			continue
+		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
+			S.health = -1
+			S.broken()
+
+	// Effect 4: Medium scale explosion
+	spawn(0)
+		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
 		qdel(src)
-		return
+		// Allow the explosion to finish
+		spawn(5)
+			new /obj/item/broken_sm(TS)
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
@@ -210,20 +253,6 @@
 		else if(safe_warned && public_alert)
 			global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
-
-
-/obj/machinery/power/supermatter/get_transit_zlevel()
-	//don't send it back to the station -- most of the time
-	if(prob(99))
-		var/list/candidates = using_map.accessible_z_levels.Copy()
-		for(var/zlevel in using_map.station_levels)
-			candidates.Remove("[zlevel]")
-		candidates.Remove("[src.z]")
-
-		if(candidates.len)
-			return text2num(pickweight(candidates))
-
-	return ..()
 
 /obj/machinery/power/supermatter/process()
 
