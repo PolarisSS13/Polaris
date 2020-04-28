@@ -584,7 +584,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		name = "cable piece"
 	else
 		icon_state = "coil"
-		name = "cable coil"
+		name = initial(name)
 
 /obj/item/stack/cable_coil/proc/set_cable_color(var/selected_color, var/user)
 	if(!selected_color)
