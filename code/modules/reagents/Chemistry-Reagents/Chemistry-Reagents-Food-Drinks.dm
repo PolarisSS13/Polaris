@@ -45,7 +45,7 @@
 		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
-	M.nutrition += nutriment_factor * removed // For hunger and fatness
+	M.adjust_nutrition(nutriment_factor * removed)
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 /datum/reagent/nutriment/glucose
@@ -382,10 +382,7 @@
 	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition = max(M.nutrition - 10 * removed, 0)
-	M.overeatduration = 0
-	if(M.nutrition < 0)
-		M.nutrition = 0
+	M.adjust_nutrition(-10 * removed)
 
 /* Non-food stuff like condiments */
 
@@ -653,7 +650,7 @@
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.nutrition += nutrition * removed
+	M.adjust_nutrition(nutrition * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
 	M.sleeping = max(0, M.sleeping + adj_sleepy)
