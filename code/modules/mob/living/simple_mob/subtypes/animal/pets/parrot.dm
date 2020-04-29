@@ -90,9 +90,9 @@
 		my_headset = null
 
 /mob/living/simple_mob/animal/passive/bird/parrot/examine(mob/user)
-	..()
+	. = ..()
 	if(my_headset)
-		to_chat(user, "It is wearing \a [my_headset].")
+		. += "It is wearing \a [my_headset]."
 
 /mob/living/simple_mob/animal/passive/bird/parrot/Initialize()
 	if(my_headset)
