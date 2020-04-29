@@ -45,7 +45,7 @@
 
 		if(!AM.anchored)
 			AM.throw_at(get_step(src,reverse_direction(direction)), 5, 1)
-		else if (istype(AM, /obj/effect))
+		else if (istype(AM, /obj/effect/decal))
 			qdel(AM) //No more space blood coming with the shuttle
 
 /turf/space/proc/build_overedge(var/forced_dirs)

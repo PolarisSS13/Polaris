@@ -41,7 +41,7 @@
 	return say(message)
 
 // Ugly saycode so parrots can use their headsets.
-/mob/living/simple_mob/animal/passive/bird/parrot/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
+/mob/living/simple_mob/animal/passive/bird/parrot/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode)
 		if(my_headset && istype(my_headset, /obj/item/device/radio))
@@ -90,9 +90,9 @@
 		my_headset = null
 
 /mob/living/simple_mob/animal/passive/bird/parrot/examine(mob/user)
-	..()
+	. = ..()
 	if(my_headset)
-		to_chat(user, "It is wearing \a [my_headset].")
+		. += "It is wearing \a [my_headset]."
 
 /mob/living/simple_mob/animal/passive/bird/parrot/Initialize()
 	if(my_headset)

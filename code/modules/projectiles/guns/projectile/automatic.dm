@@ -86,7 +86,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m545)
 	projectile_type = /obj/item/projectile/bullet/rifle/a545
 
-//	one_handed_penalty = 30
+	one_handed_penalty = 30
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
@@ -143,7 +143,7 @@
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
-//	one_handed_penalty = 60
+	one_handed_penalty = 60
 
 	burst_delay = 4
 	firemodes = list(
@@ -189,11 +189,11 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/z8/examine(mob/user)
-	..()
+	. = ..()
 	if(launcher.chambered)
-		to_chat(user, "\The [launcher] has \a [launcher.chambered] loaded.")
+		. += "\The [launcher] has \a [launcher.chambered] loaded."
 	else
-		to_chat(user, "\The [launcher] is empty.")
+		. += "\The [launcher] is empty."
 
 /obj/item/weapon/gun/projectile/automatic/z8/empty
 	magazine_type = null
@@ -203,6 +203,7 @@
 	desc = "A rather traditionally made L6 SAW with a pleasantly lacquered wooden pistol grip. 'Aussec Armoury-2531' is engraved on the reciever. Uses 5.45mm rounds. It's also compatible with magazines from STS-35 assault rifles."
 	icon_state = "l6closed100"
 	item_state = "l6closed"
+	wielded_item_state = "genericLMG-wielded"
 	w_class = ITEMSIZE_LARGE
 	force = 10
 	slot_flags = 0
@@ -215,7 +216,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m545saw, /obj/item/ammo_magazine/m545)
 	projectile_type = /obj/item/projectile/bullet/rifle/a545
 
-//	one_handed_penalty = 90
+	one_handed_penalty = 90
 
 	var/cover_open = 0
 
@@ -284,6 +285,7 @@
 	desc = "The AS-24 is a rugged looking automatic shotgun produced for the military by Gurov Projectile Weapons LLC. For very obvious reasons, it's illegal to own in many juristictions. Uses 12g rounds."
 	icon_state = "ashot"
 	item_state = null
+	wielded_item_state = "woodarifle-wielded" //Placeholder
 	w_class = ITEMSIZE_LARGE
 	force = 10
 	caliber = "12g"
@@ -294,7 +296,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m12gdrum)
 	projectile_type = /obj/item/projectile/bullet/shotgun
 
-//	one_handed_penalty = 60
+	one_handed_penalty = 60
 
 	firemodes = list(
 		list(mode_name="semiauto", burst=1, fire_delay=0),
@@ -381,6 +383,7 @@
 	desc = "The bullpup configured GP3000 is a battle rifle produced by Gurov Projectile Weapons LLC. It is sold almost exclusively to standing armies. Uses 7.62mm rounds."
 	icon_state = "bullpup-small"
 	item_state = "bullpup"
+	wielded_item_state = "sexyrifle-wielded" //Placeholder, this is a bullpup at least
 	w_class = ITEMSIZE_LARGE
 	force = 10
 	caliber = "7.62mm"
@@ -391,7 +394,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762, /obj/item/ammo_magazine/m762m)
 	projectile_type = /obj/item/projectile/bullet/rifle/a762
 
-//	one_handed_penalty = 45
+	one_handed_penalty = 45
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),

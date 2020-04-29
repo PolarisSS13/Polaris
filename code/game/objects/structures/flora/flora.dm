@@ -36,9 +36,9 @@
 		max_harvests = max(0, rand(min_harvests, max_harvests)) // Incase you want to weight it more toward 'not harvestable', set min_harvests to a negative value.
 
 /obj/structure/flora/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(harvest_count < max_harvests)
-		to_chat(user, get_harvestable_desc())
+		. += get_harvestable_desc()
 
 /obj/structure/flora/proc/get_harvestable_desc()
 	return "<span class='notice'>\The [src] seems to have something hanging from it.</span>"
@@ -228,9 +228,9 @@
 	var/obj/item/stored_item
 
 /obj/structure/flora/pottedplant/examine(mob/user)
-	..()
+	. = ..()
 	if(in_range(user, src) && stored_item)
-		to_chat(user, "<i>You can see something in there...</i>")
+		. += "<span class='filter_notice'><i>You can see something in there...</i></span>"
 
 /obj/structure/flora/pottedplant/attackby(obj/item/I, mob/user)
 	if(stored_item)
@@ -245,7 +245,7 @@
 		user.drop_from_inventory(I, src)
 		I.forceMove(src)
 		stored_item = I
-		src.visible_message("\icon[src] \icon[I] [user] places [I] into [src].")
+		src.visible_message("[bicon(src)] [bicon(I)] [user] places [I] into [src].")
 		return
 	else
 		to_chat(user, "<span class='notice'>You refrain from putting things into the plant pot.</span>")
@@ -255,10 +255,10 @@
 
 /obj/structure/flora/pottedplant/attack_hand(mob/user)
 	if(!stored_item)
-		to_chat(user, "<b>You see nothing of interest in [src]...</b>")
+		to_chat(user, "<span class='filter_notice'><b>You see nothing of interest in [src]...</b></span>")
 	else
 		if(do_after(user, 10))
-			to_chat(user, "You find \icon[stored_item] [stored_item] in [src]!")
+			to_chat(user, "You find [bicon(stored_item)] [stored_item] in [src]!")
 			stored_item.forceMove(get_turf(src))
 			stored_item = null
 	..()
@@ -413,10 +413,10 @@
 /obj/structure/flora/sif/attack_hand(mob/user)
 	if (user.a_intent == I_HURT)
 		if(do_after(user, 5 SECONDS))
-			user.visible_message("\The [user] digs up \the [src.name].", "You dig up \the [src.name].")
+			user.visible_message("<span class='filter_notice'>\The [user] digs up \the [src.name].", "You dig up \the [src.name].</span>")
 			qdel(src)
 	else
-		user.visible_message("\The [user] pokes \the [src.name].", "You poke \the [src.name].")
+		user.visible_message("<span class='filter_notice'>\The [user] pokes \the [src.name].", "You poke \the [src.name].</span>")
 
 /datum/category_item/catalogue/flora/subterranean_bulbs
 	name = "Sivian Flora - Subterranean Bulbs"
