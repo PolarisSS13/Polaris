@@ -4,7 +4,7 @@
 "d" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "e" = (/turf/simulated/floor/outdoors/rocks,/area/submap/CaveTrench)
 "f" = (/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
-"g" = (/mob/living/simple_mob/mechanical/combat_drone/lesser,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
+"g" = (/obj/random/mob/robotic/drone,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "h" = (/mob/living/simple_mob/animal/passive/fish/trout{faction = "malf_drone"},/turf/simulated/floor/water{outdoors = 0},/area/submap/CaveTrench)
 "i" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/CaveTrench)
 "j" = (/turf/simulated/wall,/area/submap/CaveTrench)
