@@ -258,7 +258,7 @@
 		to_chat(user, "<span class='filter_notice'><b>You see nothing of interest in [src]...</b></span>")
 	else
 		if(do_after(user, 10))
-			to_chat(user, "You find [bicon(stored_item)] [stored_item] in [src]!")
+			to_chat(user, "<span class='filter_notice'>You find [bicon(stored_item)] [stored_item] in [src]!</span>")
 			stored_item.forceMove(get_turf(src))
 			stored_item = null
 	..()
