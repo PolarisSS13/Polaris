@@ -16,7 +16,7 @@
 	var/list/harvest_results
 
 /mob/living/simple_mob/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(user && harvest_tool && (get_dist(user, src) <= 3))
 		. += "<span class='notice'>\The [src] can be [harvest_verb] with a [initial(harvest_tool.name)] every [round(harvest_cooldown, 0.1)] minutes.</span>"
 		var/time_to_harvest = (harvest_recent + harvest_cooldown) - world.time
