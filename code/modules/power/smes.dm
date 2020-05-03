@@ -207,7 +207,7 @@
 //Will return 1 on failure
 /obj/machinery/power/smes/proc/make_terminal(const/mob/user)
 	if (user.loc == loc)
-		to_chat(user, "<span class='warning'>You must not be on the same tile as the [src].</span>")
+		to_chat(user, "<span class='filter_notice'><span class='warning'>You must not be on the same tile as the [src].</span></span>")
 		return 1
 
 	//Direction the terminal will face to
@@ -219,15 +219,15 @@
 			tempDir = WEST
 	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
 	if (istype(tempLoc, /turf/space))
-		to_chat(user, "<span class='warning'>You can't build a terminal on space.</span>")
+		to_chat(user, "<span class='filter_notice'><span class='warning'>You can't build a terminal on space.</span></span>")
 		return 1
 	else if (istype(tempLoc))
 		if(!tempLoc.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
+			to_chat(user, "<span class='filter_notice'><span class='warning'>You must remove the floor plating first.</span></span>")
 			return 1
 	if(check_terminal_exists(tempLoc, user, tempDir))
 		return 1
-	to_chat(user, "<span class='notice'>You start adding cable to the [src].</span>")
+	to_chat(user, "<span class='filter_notice'><span class='notice'>You start adding cable to the [src].</span></span>")
 	if(do_after(user, 50))
 		if(check_terminal_exists(tempLoc, user, tempDir))
 			return 1
@@ -242,7 +242,7 @@
 /obj/machinery/power/smes/proc/check_terminal_exists(var/turf/location, var/mob/user, var/direction)
 	for(var/obj/machinery/power/terminal/term in location)
 		if(term.dir == direction)
-			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")
+			to_chat(user, "<span class='filter_notice'><span class='notice'>There is already a terminal here.</span></span>")
 			return 1
 	return 0
 
@@ -268,41 +268,41 @@
 
 /obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(default_deconstruction_screwdriver(user, W))
-		return
+		return FALSE
 
 	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
-		return 0
+		to_chat(user, "<span class='filter_notice'><span class='warning'>You need to open access hatch on [src] first!</span></span>")
+		return FALSE
 
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(!WT.isOn())
-			to_chat(user, "Turn on \the [WT] first!")
-			return 0
+			to_chat(user, "<span class='filter_notice'>Turn on \the [WT] first!</span>")
+			return FALSE
 		if(!damage)
-			to_chat(user, "\The [src] is already fully repaired.")
-			return 0
+			to_chat(user, "<span class='filter_notice'>\The [src] is already fully repaired.</span>")
+			return FALSE
 		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
-			to_chat(user, "You repair all structural damage to \the [src]")
+			to_chat(user, "<span class='filter_notice'>You repair all structural damage to \the [src]</span>")
 			damage = 0
-		return 0
+		return FALSE
 	else if(istype(W, /obj/item/stack/cable_coil) && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
 		if (CC.get_amount() < 10)
-			to_chat(user, "<span class='warning'>You need more cables.</span>")
+			to_chat(user, "<span class='filter_notice'><span class='warning'>You need more cables.</span></span>")
 			building_terminal = 0
-			return 0
+			return FALSE
 		if (make_terminal(user))
 			building_terminal = 0
-			return 0
+			return FALSE
 		building_terminal = 0
 		CC.use(10)
 		user.visible_message(\
-				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
-				"<span class='notice'>You added cables to the [src].</span>")
+				"<span class='filter_notice'><span class='notice'>[user.name] has added cables to the [src].</span></span>",\
+				"<span class='filter_notice'><span class='notice'>You added cables to the [src].</span></span>")
 		stat = 0
-		return 0
+		return FALSE
 
 	else if(W.is_wirecutter() && !building_terminal)
 		building_terminal = TRUE
@@ -312,15 +312,15 @@
 				term = T
 				break
 		if(!term)
-			to_chat(user, "<span class='warning'>There is no terminal on this tile.</span>")
+			to_chat(user, "<span class='filter_notice'><span class='warning'>There is no terminal on this tile.</span></span>")
 			building_terminal = FALSE
-			return 0
+			return FALSE
 		var/turf/tempTDir = get_turf(term)
 		if (istype(tempTDir))
 			if(!tempTDir.is_plating())
-				to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
+				to_chat(user, "<span class='filter_notice'><span class='warning'>You must remove the floor plating first.</span></span>")
 			else
-				to_chat(user, "<span class='notice'>You begin to cut the cables...</span>")
+				to_chat(user, "<span class='filter_notice'><span class='notice'>You begin to cut the cables...</span></span>")
 				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 50 * W.toolspeed))
 					if (prob(50) && electrocute_mob(usr, term.powernet, term))
@@ -329,16 +329,16 @@
 						s.start()
 						building_terminal = FALSE
 						if(usr.stunned)
-							return 0
+							return FALSE
 					new /obj/item/stack/cable_coil(loc,10)
 					user.visible_message(\
-						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
-						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+						"<span class='filter_notice'><span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span></span>",\
+						"<span class='filter_notice'><span class='notice'>You cut the cables and dismantle the power terminal.</span></span>")
 					terminals -= term
 					qdel(term)
 		building_terminal = FALSE
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 
@@ -427,7 +427,7 @@
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)
-		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
+		visible_message("<span class='filter_notice'><span class='danger'>\The [src] explodes in large shower of sparks and smoke!</span></span>")
 		// Depending on stored charge percentage cause damage.
 		switch(Percentage())
 			if(75 to INFINITY)
@@ -460,16 +460,16 @@
 
 /obj/machinery/power/smes/examine(var/mob/user)
 	..()
-	user << "The service hatch is [panel_open ? "open" : "closed"]."
+	to_chat(user, "<span class='filter_notice'>The service hatch is [panel_open ? "open" : "closed"].</span>")
 	if(!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)
 	switch(damage_percentage)
 		if(75 to INFINITY)
-			to_chat(user, "<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>")
+			to_chat(user, "<span class='filter_notice'><span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span></span>")
 		if(50 to 74)
-			to_chat(user, "<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>")
+			to_chat(user, "<span class='filter_notice'><span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span></span>")
 		if(25 to 49)
-			to_chat(user, "<span class='notice'>It's casing is quite seriously damaged.</span>")
+			to_chat(user, "<span class='filter_notice'><span class='notice'>It's casing is quite seriously damaged.</span></span>")
 		if(0 to 24)
-			to_chat(user, "It's casing has some minor damage.")
+			to_chat(user, "<span class='filter_notice'>It's casing has some minor damage.</span>")

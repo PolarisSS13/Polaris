@@ -12,15 +12,15 @@
 
 /obj/machinery/power/debug_items/proc/show_info(var/mob/user)
 	if(!powernet)
-		to_chat(user, "This device is not connected to a powernet")
+		to_chat(user, "<span class='filter_notice'>This device is not connected to a powernet</span>")
 		return
 
-	to_chat(user, "Connected to powernet: [powernet]")
-	to_chat(user, "Available power: [num2text(powernet.avail, 20)] W")
-	to_chat(user, "Load: [num2text(powernet.viewload, 20)] W")
-	to_chat(user, "Has alert: [powernet.problem ? "YES" : "NO"]")
-	to_chat(user, "Cables: [powernet.cables.len]")
-	to_chat(user, "Nodes: [powernet.nodes.len]")
+	to_chat(user, "<span class='filter_notice'>Connected to powernet: [powernet]</span>")
+	to_chat(user, "<span class='filter_notice'>Available power: [num2text(powernet.avail, 20)] W</span>")
+	to_chat(user, "<span class='filter_notice'>Load: [num2text(powernet.viewload, 20)] W</span>")
+	to_chat(user, "<span class='filter_notice'>Has alert: [powernet.problem ? "YES" : "NO"]</span>")
+	to_chat(user, "<span class='filter_notice'>Cables: [powernet.cables.len]</span>")
+	to_chat(user, "<span class='filter_notice'>Nodes: [powernet.nodes.len]</span>")
 
 
 // An infinite power generator. Adds energy to connected cable.
@@ -34,7 +34,7 @@
 
 /obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
 	..()
-	to_chat(user, "Generator is providing [num2text(power_generation_rate, 20)] W")
+	to_chat(user, "<span class='filter_notice'>Generator is providing [num2text(power_generation_rate, 20)] W</span>")
 
 
 // A cable powersink, without the explosion/network alarms normal powersink causes.
@@ -49,8 +49,8 @@
 
 /obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)
 	..()
-	to_chat(user, "Power sink is demanding [num2text(power_usage_rate, 20)] W")
-	to_chat(user, "[num2text(last_used, 20)] W was actually used last tick")
+	to_chat(user, "<span class='filter_notice'>Power sink is demanding [num2text(power_usage_rate, 20)] W</span>")
+	to_chat(user, "<span class='filter_notice'>[num2text(last_used, 20)] W was actually used last tick</span>")
 
 
 /obj/machinery/power/debug_items/infinite_apc_powersink
@@ -61,5 +61,5 @@
 
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)
 	..()
-	to_chat(user, "Dummy load is using [num2text(active_power_usage, 20)] W")
-	to_chat(user, "Powered: [powered() ? "YES" : "NO"]")
+	to_chat(user, "<span class='filter_notice'>Dummy load is using [num2text(active_power_usage, 20)] W</span>")
+	to_chat(user, "<span class='filter_notice'>Powered: [powered() ? "YES" : "NO"]</span>")
