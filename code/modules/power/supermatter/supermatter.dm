@@ -37,6 +37,9 @@
 #define DETONATION_SHUTDOWN_RNG_FACTOR 20	// RNG factor. Above shutdown times can be +- X%, where this setting is the percent. Do not set to 100 or more.
 #define DETONATION_SOLAR_BREAK_CHANCE 60	// prob() of breaking solar arrays (this is per-panel, and only affects the Z level SM is on)
 
+// If power level is between these two, explosion strength will be scaled accordingly between min_explosion_power and max_explosion_power
+#define DETONATION_EXPLODE_MIN_POWER 200	// If power level is this or lower, minimal detonation strength will be used
+#define DETONATION_EXPLODE_MAX_POWER 2000	// If power level is this or higher maximal detonation strength will be used
 
 #define WARNING_DELAY 20			//seconds between warnings.
 
@@ -72,7 +75,8 @@
 	var/pull_radius = 14
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
 	var/pull_time = 100
-	var/explosion_power = 8
+	var/min_explosion_power = 8
+	var/max_explosion_power = 16
 
 	var/emergency_issued = 0
 
@@ -203,7 +207,13 @@
 
 	// Effect 4: Medium scale explosion
 	spawn(0)
-		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
+		var/explosion_power = min_explosion_power
+		if(power > 0)
+			// 0-100% where 0% is at DETONATION_EXPLODE_MIN_POWER or lower and 100% is at DETONATION_EXPLODE_MAX_POWER or higher
+			var/strength_percentage = between(0, (power - DETONATION_EXPLODE_MIN_POWER) / ((DETONATION_EXPLODE_MAX_POWER - DETONATION_EXPLODE_MIN_POWER) / 100), 100)
+			explosion_power = between(min_explosion_power, (((max_explosion_power - min_explosion_power) * (strength_percentage / 100)) + min_explosion_power), max_explosion_power)
+
+		explosion(TS, explosion_power/2, explosion_power, max_explosion_power, explosion_power * 4, 1)
 		qdel(src)
 		// Allow the explosion to finish
 		spawn(5)
@@ -494,7 +504,8 @@
 
 	pull_radius = 5
 	pull_time = 45
-	explosion_power = 3
+	min_explosion_power = 3
+	max_explosion_power = 6
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
