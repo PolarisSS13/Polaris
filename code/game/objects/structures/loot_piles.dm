@@ -42,7 +42,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 /obj/structure/loot_pile/attack_ai(var/mob/user)
 	if(isrobot(user) && Adjacent(user))
-		attack_hand(user)
+		return attack_hand(user)
 
 /obj/structure/loot_pile/attack_hand(mob/user)
 	//Human mob
