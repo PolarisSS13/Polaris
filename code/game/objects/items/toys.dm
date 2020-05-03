@@ -154,8 +154,9 @@
 	drop_sound = 'sound/items/drop/gun.ogg'
 
 	examine(mob/user)
-		if(..(user, 2) && bullets)
-			to_chat(user, "<span class='notice'>It is loaded with [bullets] foam darts!</span>")
+		. = ..()
+		if(bullets && get_dist(user, src) <= 2)
+			. += "<span class='notice'>It is loaded with [bullets] foam darts!</span>"
 
 	attackby(obj/item/I as obj, mob/user as mob)
 		if(istype(I, /obj/item/toy/ammo/crossbow))
@@ -315,8 +316,8 @@
 		update_icon()
 
 /obj/item/toy/sword/examine(mob/user)
-	..()
-	to_chat(user, "<span class='notice'>Alt-click to recolor it.</span>")
+	. = ..()
+	. += "<span class='notice'>Alt-click to recolor it.</span>"
 
 /obj/item/toy/sword/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/device/multitool) && !active)
@@ -378,75 +379,6 @@
 			src.visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='warning'>You hear a snap!</span>")
 			playsound(src, 'sound/effects/snap.ogg', 50, 1)
 			qdel(src)
-
-/*
- * Water flower
- */
-/obj/item/toy/waterflower
-	name = "water flower"
-	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/device.dmi'
-	drop_sound = 'sound/items/drop/food.ogg'
-	icon_state = "sunflower"
-	item_state = "sunflower"
-	var/empty = 0
-	slot_flags = SLOT_HOLSTER
-
-/obj/item/toy/waterflower/New()
-	var/datum/reagents/R = new/datum/reagents(10)
-	reagents = R
-	R.my_atom = src
-	R.add_reagent("water", 10)
-
-/obj/item/toy/waterflower/attack(mob/living/carbon/human/M as mob, mob/user as mob)
-	return
-
-/obj/item/toy/waterflower/afterattack(atom/A as mob|obj, mob/user as mob)
-
-	if (istype(A, /obj/item/weapon/storage/backpack ))
-		return
-
-	else if (locate (/obj/structure/table, src.loc))
-		return
-
-	else if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
-		A.reagents.trans_to_obj(src, 10)
-		to_chat(user, "<span class='notice'>You refill your flower!</span>")
-		return
-
-	else if (src.reagents.total_volume < 1)
-		src.empty = 1
-		to_chat(user, "<span class='notice'>Your flower has run dry!</span>")
-		return
-
-	else
-		src.empty = 0
-
-
-		var/obj/effect/decal/D = new/obj/effect/decal/(get_turf(src))
-		D.name = "water"
-		D.icon = 'icons/obj/chemical.dmi'
-		D.icon_state = "chempuff"
-		D.create_reagents(5)
-		src.reagents.trans_to_obj(D, 1)
-		playsound(src.loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-
-		spawn(0)
-			for(var/i=0, i<1, i++)
-				step_towards(D,A)
-				D.reagents.touch_turf(get_turf(D))
-				for(var/atom/T in get_turf(D))
-					D.reagents.touch(T)
-					if(ismob(T) && T:client)
-						to_chat(T:client, "<span class='warning'>\The [user] has sprayed you with water!</span>")
-				sleep(4)
-			qdel(D)
-
-		return
-
-/obj/item/toy/waterflower/examine(mob/user)
-	if(..(user, 0))
-		to_chat(user, "[bicon(src)] [src.reagents.total_volume] units of water left!")
 
 /*
  * Bosun's whistle
@@ -893,11 +825,11 @@
 	var/obj/item/stored_item	// Note: Stored items can't be bigger than the plushie itself.
 
 /obj/structure/plushie/examine(mob/user)
-	..()
+	. = ..()
 	if(opened)
-		to_chat(user, "<i>You notice an incision has been made on [src].</i>")
+		. += "<i>You notice an incision has been made on [src].</i>"
 		if(in_range(user, src) && stored_item)
-			to_chat(user, "<i>You can see something in there...</i>")
+			. += "<i>You can see something in there...</i>"
 
 /obj/structure/plushie/attack_hand(mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -992,11 +924,11 @@
 
 
 /obj/item/toy/plushie/examine(mob/user)
-	..()
+	. = ..()
 	if(opened)
-		to_chat(user, "<i>You notice an incision has been made on [src].</i>")
+		. += "<i>You notice an incision has been made on [src].</i>"
 		if(in_range(user, src) && stored_item)
-			to_chat(user, "<i>You can see something in there...</i>")
+			. += "<i>You can see something in there...</i>"
 
 /obj/item/toy/plushie/attack_self(mob/user as mob)
 	if(stored_item && opened && !searching)

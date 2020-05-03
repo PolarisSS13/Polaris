@@ -57,12 +57,12 @@
 		master.update_icon()
 
 /obj/item/device/assembly_holder/examine(mob/user)
-	..(user)
+	. = ..()
 	if ((in_range(src, user) || src.loc == user))
 		if (src.secured)
-			to_chat(user, "\The [src] is ready!")
+			. += "\The [src] is ready!"
 		else
-			to_chat(user, "\The [src] can be attached!")
+			. += "\The [src] can be attached!"
 
 /obj/item/device/assembly_holder/HasProximity(atom/movable/AM as mob|obj)
 	if(a_left)
@@ -155,11 +155,11 @@
 		master.receive_signal()
 	return 1
 
-/obj/item/device/assembly_holder/hear_talk(mob/living/M as mob, msg, verb, datum/language/speaking)
+/obj/item/device/assembly_holder/hear_talk(mob/M, list/message_pieces, verb)
 	if(a_right)
-		a_right.hear_talk(M,msg,verb,speaking)
+		a_right.hear_talk(M, message_pieces, verb)
 	if(a_left)
-		a_left.hear_talk(M,msg,verb,speaking)
+		a_left.hear_talk(M, message_pieces, verb)
 
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"

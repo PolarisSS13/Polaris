@@ -229,7 +229,10 @@
 		return 1
 
 	face_atom(A)
-	A.examine(src)
+	var/list/results = A.examine(src)
+	if(!results || !results.len)
+		results = list("You were unable to examine that. Tell a developer!")
+	to_chat(src, jointext(results, "<br>"))
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
@@ -1217,3 +1220,6 @@ mob/proc/yank_out_object()
 	selfimage.loc = src
 
 	return selfimage
+
+/mob/proc/GetAltName()
+	return ""
