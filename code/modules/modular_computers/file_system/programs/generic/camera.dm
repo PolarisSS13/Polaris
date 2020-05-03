@@ -62,7 +62,7 @@
 
 	data["networks"] = all_networks
 
-	var/list/map_levels = using_map.get_map_levels(get_z(nano_host()), TRUE)
+	var/list/map_levels = ntnet_global.check_coverage(using_map.get_map_levels(get_z(nano_host()), TRUE))
 
 	if(current_network)
 		data["cameras"] = camera_repository.cameras_in_network(current_network, map_levels)

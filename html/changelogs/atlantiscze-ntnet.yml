@@ -1,0 +1,6 @@
+author: atlantiscze
+
+delete-after: True
+
+changes: 
+  - rscadd: "NTNet relays now allow programs to read data from Z levels regardless of distance (as long as both sides have a relay). A NTNet relay has been mapped-in to the outpost."

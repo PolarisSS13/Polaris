@@ -181,5 +181,19 @@ var/global/datum/ntnet/ntnet_global = new()
 			return 1
 	return 0
 
+// NTNet relays can "jump" between otherwise unconnected Z levels. If both sides contain a NTNet relay, they are considered connected regardless of distance.
+// If any of passed Z levels contains a relay, returns a combination of origin_levels and all Z levels covered by relays.
+// If not, returns only origin_levels.
+/datum/ntnet/proc/check_coverage(var/list/origin_levels)
+	var/signal = FALSE					// Whether any of the origin_levels contains a relay
+	var/list/relay_levels = list()		// Z-levels covered by relays.
+	for(var/obj/machinery/ntnet_relay/R in relays)
+		if(!R.operable())
+			continue
+		if(R.z in origin_levels)
+			signal = TRUE
+		relay_levels |= using_map.get_map_levels(R.z)
 
-
+	if(signal)
+		return relay_levels | origin_levels
+	return origin_levels

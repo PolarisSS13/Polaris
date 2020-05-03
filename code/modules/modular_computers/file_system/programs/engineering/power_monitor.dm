@@ -54,8 +54,7 @@
 	// Focus: If it remains null if no sensor is selected and UI will display sensor list, otherwise it will display sensor reading.
 	var/obj/machinery/power/sensor/focus = null
 
-	var/z = get_z(nano_host())
-	var/list/map_levels = using_map.get_map_levels(z)
+	var/list/map_levels = ntnet_global.check_coverage(using_map.get_map_levels(get_z(nano_host())))
 	data["map_levels"] = map_levels
 
 	// Build list of data from sensor readings.
@@ -93,8 +92,9 @@
 	var/list/levels = list()
 	if(!T) // Safety check
 		return
-	if(T)
-		levels += using_map.get_map_levels(T.z, FALSE)
+
+	levels += ntnet_global.check_coverage(using_map.get_map_levels(T.z, FALSE))
+
 	for(var/obj/machinery/power/sensor/S in machines)
 		if(T && (S.loc.z == T.z) || (S.loc.z in levels) || (S.long_range)) // Consoles have range on their Z-Level. Sensors with long_range var will work between Z levels.
 			if(S.name_tag == "#UNKN#") // Default name. Shouldn't happen!
