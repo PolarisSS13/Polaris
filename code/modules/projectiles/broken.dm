@@ -33,7 +33,7 @@
 				to_chat(user, "<span class='notice'>\The [src] can possibly be restored with:</span>")
 				for(var/resource in material_needs)
 					if(material_needs[resource] > 0)
-						to_chat(user, "<span class='notice'>- \icon [resource] x [material_needs[resource]] [resource]</span>")
+						to_chat(user, "<span class='notice'>- [bicon(resource)] x [material_needs[resource]] [resource]</span>")
 
 /obj/item/weapon/broken_gun/proc/setup_gun(var/obj/item/weapon/gun/path)
 	if(ispath(path))
