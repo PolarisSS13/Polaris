@@ -11,7 +11,7 @@
 		. += show_info(user)
 
 /obj/machinery/power/debug_items/proc/show_info(var/mob/user)
-	var/list/exra_info = list()
+	var/list/extra_info = list()
 	if(!powernet)
 		extra_info += "<span class='filter_notice'>This device is not connected to a powernet</span>"
 		return
