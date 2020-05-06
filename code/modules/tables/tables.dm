@@ -28,6 +28,9 @@
 
 	var/item_place = 1 //allows items to be placed on the table, but not on benches.
 
+/obj/structure/table/examine_icon()
+	return icon(icon=initial(icon), icon_state=initial(icon_state)) //Basically the map preview version
+
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
 	if(!material)
