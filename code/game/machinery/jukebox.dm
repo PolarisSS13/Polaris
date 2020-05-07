@@ -50,8 +50,8 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
 	)
 
-/obj/machinery/media/jukebox/New()
-	..()
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
 	default_apply_parts()
 	wires = new/datum/wires/jukebox(src)
 	update_icon()
@@ -60,7 +60,7 @@ datum/track/New(var/title_name, var/audio)
 	StopPlaying()
 	qdel(wires)
 	wires = null
-	..()
+	return ..()
 
 /obj/machinery/media/jukebox/proc/set_hacked(var/newhacked)
 	if (hacked == newhacked) return
