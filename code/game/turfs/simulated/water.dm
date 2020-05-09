@@ -20,6 +20,8 @@
 
 /turf/simulated/floor/water/Initialize()
 	. = ..()
+	var/decl/flooring/F = get_flooring_data(/decl/flooring/water)
+	footstep_sounds = F?.footstep_sounds
 	update_icon()
 	handle_fish()
 
@@ -145,6 +147,18 @@
 	inflict_water_damage(20 * amount) // Only things vulnerable to water will actually be harmed (slimes/prommies).
 
 var/list/shoreline_icon_cache = list()
+
+/turf/simulated/floor/water/beach
+	name = "beach shoreline"
+	desc = "The waves look calm and inviting."
+	icon_state = "beach"
+	depth = 0
+
+/turf/simulated/floor/water/beach/update_icon()
+	return
+
+/turf/simulated/floor/water/beach/corner
+	icon_state = "beachcorner"
 
 /turf/simulated/floor/water/shoreline
 	name = "shoreline"
