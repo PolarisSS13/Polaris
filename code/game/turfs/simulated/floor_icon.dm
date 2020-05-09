@@ -101,5 +101,4 @@ var/image/no_ceiling_image = null
 		var/image/I = image(icon = flooring.icon, icon_state = icon_base, dir = icon_dir)
 		I.layer = layer
 		GLOB.flooring_cache[cache_key] = I
-	world << "[cache_key], [icon_base]"
 	return GLOB.flooring_cache[cache_key]
