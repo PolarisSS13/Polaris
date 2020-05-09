@@ -16,44 +16,54 @@ GLOBAL_LIST_INIT(technomancer_aspects, build_technomancer_aspect_list())
 
 /datum/technomancer_aspect/fire
 	name = ASPECT_FIRE
-	primary_color = "#FF6262" // Darkish red.
-	secondary_color = "#C40000" // Lighter red.
+	primary_color = "#FDB768"
+	secondary_color = "#FEEEDC"
 
 /datum/technomancer_aspect/frost
 	name = ASPECT_FROST
+	primary_color = "#DEE9FC"
+	secondary_color = "#6395F2"
 
 /datum/technomancer_aspect/shock
 	name = ASPECT_SHOCK
-	primary_color = "#FFDD66" // Yellow but not eye-bleeding.
-	secondary_color = "#FFEE88" // Lighter version of above.
+	primary_color = "#FEEC86"
+	secondary_color = "#FFF9DC"
 
 /datum/technomancer_aspect/air
 	name = ASPECT_AIR
+	primary_color = "#67AFCB"
+	secondary_color = "#E4F1F6"
 
 /datum/technomancer_aspect/tele
 	name = ASPECT_TELE
-	primary_color = "#FF99FF"
-	secondary_color = "#FF33FF"
+	primary_color = "#F033B4"
+	secondary_color = "#FDDEF3"
 
 /datum/technomancer_aspect/force
 	name = ASPECT_FORCE
-	primary_color = "#66EEEE"
-	secondary_color = "#00CCFF"
+	primary_color = "#678FFE"
+	secondary_color = "#DBE5FF"
 
 /datum/technomancer_aspect/dark
 	name = ASPECT_DARK
 
 /datum/technomancer_aspect/light
 	name = ASPECT_LIGHT
+	primary_color = "#CCCCCC"
+	secondary_color = "#EEEEEE"
 
 /datum/technomancer_aspect/bio
 	name = ASPECT_BIOMED
+	primary_color = "#9BD770"
+	secondary_color = "#EBF7E3"
 
 /datum/technomancer_aspect/emp
 	name = ASPECT_EMP
 
 /datum/technomancer_aspect/unstable
 	name = ASPECT_UNSTABLE
+	primary_color = "#C91BFE"
+	secondary_color = "#F7DBFF"
 
 /datum/technomancer_aspect/chromatic
 	name = ASPECT_CHROMATIC

@@ -2,6 +2,12 @@
 
 /datum/technomancer_catalog/spell/circle_of_combat
 	name = "Circle of Combat"
+	cost = 50
+	category = UTILITY_SPELLS
+	spell_metadata_paths = list(/datum/spell_metadata/circle_of_combat)
+
+/datum/spell_metadata/circle_of_combat
+	name = "Circle of Combat"
 	desc = "Forms a circular wall around the caster. \
 	The walls block movement, but can be destroyed in a few hits. Anyone intersecting a wall when \
 	the circle is created will be nudged towards the outside if possible. If that isn't possible, \
@@ -13,24 +19,29 @@
 	Additionally, any allied entities inside the circle will receive an aura effect that improves combat performance."
 	enhancement_desc = "When cast on a specific entity, all other non-allied entities inside the circle \
 	are teleported outside of it."
-	cost = 50
-	category = UTILITY_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/circle_of_combat)
-
-/datum/spell_metadata/circle_of_combat
-	name = "Circle of Combat"
+	aspect = ASPECT_FORCE
 	icon_state = "tech_circle_of_combat"
 	spell_path = /obj/item/weapon/spell/technomancer/circle_of_combat
 	cooldown = 30 SECONDS
+
+/datum/spell_metadata/circle_of_combat/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/circle_of_combat/spell = spell_path
+	. = list()
+	.["Circle Radius"] = initial(spell.circle_radius)
+	.["Energy Cost"] = initial(spell.circle_energy_cost)
+	.["Instability Cost"] = initial(spell.circle_instability_cost)
+
 
 /obj/item/weapon/spell/technomancer/circle_of_combat
 	name = "circle of combat"
 	desc = "One vee one me."
 	icon_state = "circle_of_combat"
 	cast_methods = CAST_RANGED | CAST_USE
-	aspect = ASPECT_FORCE
 	delete_after_cast = TRUE
 	var/circle_radius = CIRCLE_OF_COMBAT_RADIUS
+	var/circle_energy_cost = 2000
+	var/circle_instability_cost = 10
+
 
 
 /obj/item/weapon/spell/technomancer/circle_of_combat/on_ranged_cast(atom/hit_atom, mob/living/user)
@@ -46,20 +57,20 @@
 	if(istype(L))
 		T = get_turf(L)
 
-	if(!within_range(T) || !pay_energy(2000))
+	if(!within_range(T) || !pay_energy(circle_energy_cost))
 		return FALSE
 
 	make_circle(T, L)
 
-	user.adjust_instability(10)
+	user.adjust_instability(circle_instability_cost)
 	playsound(owner, 'sound/effects/magic/technomancer/repulse.ogg', 75, 1)
 	return TRUE
 
 /obj/item/weapon/spell/technomancer/circle_of_combat/on_use_cast(mob/living/user)
-	if(pay_energy(2000))
+	if(pay_energy(circle_energy_cost))
 		make_circle(get_turf(user), user)
 
-		user.adjust_instability(10)
+		user.adjust_instability(circle_instability_cost)
 		playsound(owner, 'sound/effects/magic/technomancer/repulse.ogg', 75, 1)
 		return TRUE
 	return FALSE

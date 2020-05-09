@@ -1,27 +1,36 @@
 /datum/technomancer_catalog/spell/flame_tongue
 	name = "Flame Tongue"
-	desc = "Using a miniturized flamethrower in your gloves, \
-	you can emit a flame strong enough immolate anyone close by. \
-	When used on an entity up close, it will ignite them for a period of time. \
-	If this is repeated while they are on fire, they will explode in \
-	a burst of fire, igniting nearby entities. You and your allies are protected \
-	from the blast."
 	cost = 100
 	category = OFFENSIVE_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/flame_tongue)
 
 /datum/spell_metadata/flame_tongue
 	name = "Flame Tongue"
+	desc = "Using a miniturized flamethrower in your gloves, \
+	you can emit a flame strong enough immolate anyone close by. \
+	When used on an entity up close, it will ignite them for a period of time. \
+	If this is repeated while they are on fire, they will explode in \
+	a burst of fire, igniting nearby entities. You and your allies are protected \
+	from the blast."
+	aspect = ASPECT_FIRE
 	icon_state = "tech_flame_tongue"
 	spell_path = /obj/item/weapon/spell/technomancer/flame_tongue
 	cooldown = 1 SECOND
 
+/datum/spell_metadata/flame_tongue/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/flame_tongue/spell = spell_path
+	. = list()
+	.["Flame Burst Radius"] = initial(spell.burst_radius)
+	.["Energy Cost"] = initial(spell.ignite_energy_cost)
+	.["Instability Cost"] = initial(spell.ignite_instability_cost)
+
+
+
 /obj/item/weapon/spell/technomancer/flame_tongue
 	name = "flame tongue"
-	icon_state = "flame_tongue"
 	desc = "Burn!"
+	icon_state = "flame_tongue"
 	cast_methods = CAST_MELEE
-	aspect = ASPECT_FIRE
 	var/ignite_energy_cost = 1000
 	var/ignite_instability_cost = 10
 	var/burst_radius = 3
@@ -56,31 +65,3 @@
 		if(is_technomancer_ally(victim))
 			continue // It's science, I don't have to explain.
 		ignite_target(victim)
-
-/*
-
-/obj/item/weapon/spell/flame_tongue/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
-	if(isliving(hit_atom) && user.a_intent != I_HELP)
-		var/mob/living/L = hit_atom
-		if(pay_energy(1000))
-			visible_message("<span class='danger'>\The [user] reaches out towards \the [L] with the flaming hand, and they ignite!</span>")
-			to_chat(L, "<span class='danger'>You ignite!</span>")
-			L.fire_act()
-			log_and_message_admins("has ignited [L] with [src].")
-			adjust_instability(12)
-	else
-		//This is needed in order for the welder to work, and works similarly to grippers.
-		welder.loc = user
-		var/resolved = hit_atom.attackby(welder, user)
-		if(!resolved && welder && hit_atom)
-			if(pay_energy(500))
-				welder.attack(hit_atom, user, def_zone)
-				adjust_instability(4)
-		if(welder && user && (welder.loc == user))
-			welder.loc = src
-		else
-			welder = null
-			qdel(src)
-			return
-
-*/

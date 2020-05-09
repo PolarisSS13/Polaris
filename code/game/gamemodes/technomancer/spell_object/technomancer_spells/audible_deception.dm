@@ -1,24 +1,35 @@
 /datum/technomancer_catalog/spell/audible_deception
 	name = "Audible Deception"
-	desc = "Allows you to create a specific sound at a location of your choosing."
-	enhancement_desc = "An extremely loud airhorn sound that costs a large amount of energy and instability becomes available, \
-	which will deafen and can stun all who are near the targeted tile, including yourself if unprotected."
 	cost = 25
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/audible_deception)
 
 /datum/spell_metadata/audible_deception
 	name = "Audible Deception"
+	desc = "Allows you to create a specific sound at a location of your choosing."
+	enhancement_desc = "An extremely loud airhorn sound that costs a large amount of energy and instability becomes available, \
+	which will deafen and can stun all who are near the targeted tile, including yourself if unprotected."
+	aspect = ASPECT_AIR
 	icon_state = "tech_audibledeception"
 	spell_path = /obj/item/weapon/spell/technomancer/audible_deception
 	var/selected_sound = null
+
+/datum/spell_metadata/audible_deception/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/audible_deception/spell = spell_path
+	. = list()
+	.["Energy Cost"] = initial(spell.sound_energy_cost)
+	.["Instability Cost"] = initial(spell.sound_instability_cost)
+	.["Scepter Airhorn Instability Cost"] = initial(spell.sound_instability_cost) + initial(spell.airhorn_instability_cost)
+
 
 /obj/item/weapon/spell/technomancer/audible_deception
 	name = "audible deception"
 	icon_state = "audible_deception"
 	desc = "Make them all paranoid!"
 	cast_methods = CAST_RANGED | CAST_USE
-	aspect = ASPECT_AIR
+	var/sound_energy_cost = 100
+	var/sound_instability_cost = 1
+	var/airhorn_instability_cost = 49
 	var/list/available_sounds = list(
 		"Blade Slice"			=	'sound/weapons/bladeslice.ogg',
 		"Energy Blade Slice"	=	'sound/weapons/blade1.ogg',
@@ -79,12 +90,12 @@
 /obj/item/weapon/spell/technomancer/audible_deception/on_ranged_cast(atom/hit_atom, mob/living/user)
 	var/turf/T = get_turf(hit_atom)
 	var/datum/spell_metadata/audible_deception/audible_meta = meta
-	if(audible_meta.selected_sound && pay_energy(100))
+	if(audible_meta.selected_sound && pay_energy(sound_energy_cost))
 		playsound(T, audible_meta.selected_sound, 80, 1, -1)
-		adjust_instability(1)
+		adjust_instability(sound_instability_cost)
 		// Air Horn time.
 		if(audible_meta.selected_sound == 'sound/items/AirHorn.ogg' && check_for_scepter() && pay_energy(3900))
-			adjust_instability(49) // Pay for your sins.
+			adjust_instability(airhorn_instability_cost) // Pay for your sins.
 			for(var/mob/living/carbon/M in ohearers(6, T))
 				if(M.get_ear_protection() >= 2)
 					continue

@@ -1,18 +1,26 @@
 /datum/technomancer_catalog/spell/condensation
 	name = "Condensation"
-	desc = "This causes rapid formation of liquid at the target, causing floors to become wet, \
-	entities to be soaked, and fires to be extinguished. \
-	You can also fill contains with water if they are targeted directly."
-	enhancement_desc = "Clouds of mist that spread outward will also be created."
 	cost = 50
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/condensation)
 
 /datum/spell_metadata/condensation
 	name = "Condensation"
+	desc = "This causes rapid formation of liquid at the target, causing floors to become wet, \
+	entities to be soaked, and fires to be extinguished. \
+	You can also fill contains with water if they are targeted directly."
+	enhancement_desc = "Clouds of mist that spread outward will also be created."
+	aspect = ASPECT_AIR
 	icon_state = "tech_condensation"
 	spell_path = /obj/item/weapon/spell/technomancer/condensation
 	cooldown = 2 SECONDS
+
+/datum/spell_metadata/condensation/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/condensation/spell = spell_path
+	. = list()
+	.["Scepter Mist Cloud Amount"] = initial(spell.scepter_cloud_amount)
+	.["Energy Cost"] = initial(spell.condensation_energy_cost)
+	.["Instability Cost"] = initial(spell.condensation_instability_cost)
 
 
 /obj/item/weapon/spell/technomancer/condensation
@@ -20,15 +28,16 @@
 	icon_state = "condensation"
 	desc = "Stronger than it appears."
 	cast_methods = CAST_RANGED
-	aspect = ASPECT_AIR
 	var/scepter_cloud_amount = 10
+	var/condensation_energy_cost = 200
+	var/condensation_instability_cost = 5
 
 // /datum/effect/effect/system/smoke_spread/mist
 
 /obj/item/weapon/spell/technomancer/condensation/on_ranged_cast(atom/hit_atom, mob/user)
 	. = FALSE
 	if(within_range(hit_atom))
-		if(istype(hit_atom, /turf/simulated) && pay_energy(200))
+		if(istype(hit_atom, /turf/simulated) && pay_energy(condensation_energy_cost))
 			var/turf/simulated/T = hit_atom
 			make_water_splash(T)
 			if(check_for_scepter())
@@ -39,11 +48,11 @@
 			playsound(T, 'sound/effects/magic/technomancer/ethereal_enter.ogg', 75, 1)
 			. = TRUE
 
-		else if(hit_atom.reagents && !ismob(hit_atom) && pay_energy(200))
+		else if(hit_atom.reagents && !ismob(hit_atom) && pay_energy(condensation_energy_cost))
 			hit_atom.reagents.add_reagent(id = "water", amount = 60, data = null, safety = 0)
 			. = TRUE
 		if(.)
-			adjust_instability(5)
+			adjust_instability(condensation_instability_cost)
 			playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
 
 /obj/item/weapon/spell/technomancer/condensation/proc/make_water_splash(turf/simulated/T)

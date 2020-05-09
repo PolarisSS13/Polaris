@@ -15,7 +15,7 @@
 #define ASPECT_TELE			"tele"		//Teleportation of self, other objects, or other people.
 #define ASPECT_DARK			"dark"		//Makes all those photons vanish using magic-- WITH SCIENCE.  Used for sneaky stuff.
 #define ASPECT_LIGHT		"light"		//The opposite of dark, usually blinds, makes holo-illusions, or makes laser lightshows.
-#define ASPECT_BIOMED		"biomed"	//Mainly concerned with healing and restoration.
+#define ASPECT_BIOMED		"bio"	//Mainly concerned with healing and restoration.
 #define ASPECT_EMP			"emp"		//Unused now.
 #define ASPECT_UNSTABLE		"unstable"	//Heavily RNG-based, causes instability to the victim.
 #define ASPECT_CHROMATIC	"chromatic"	//Used to combine with other spells.

@@ -171,7 +171,7 @@
 		var/mob/living/carbon/human/H = usr
 		var/obj/item/weapon/spell/technomancer/spell = H.place_spell_in_hand(spellpath, core.spell_metas[spell_metadata_path])
 		if(istype(spell) && !QDELETED(spell))
-			spell.on_spell_given()
+			spell.on_spell_given(usr)
 
 /obj/spellbutton/DblClick()
 	return Click()

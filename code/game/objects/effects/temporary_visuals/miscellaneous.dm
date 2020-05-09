@@ -106,3 +106,40 @@
 	icon_state = "summoning"
 	plane = PLANE_LIGHTING_ABOVE
 	duration = 5 SECONDS
+
+/obj/effect/temp_visual/heal //color is white by default, set to whatever is needed
+	name = "healing glow"
+	icon_state = "heal"
+	plane = ABOVE_PLANE
+	duration = 15
+
+/obj/effect/temp_visual/heal/Initialize(mapload, set_color)
+	if(set_color)
+		color = set_color
+	. = ..()
+	pixel_x = rand(-12, 12)
+	pixel_y = rand(-9, 0)
+
+/obj/effect/temp_visual/love_heart
+	name = "love heart"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "heart"
+	plane = ABOVE_PLANE
+	duration = 25
+
+/obj/effect/temp_visual/love_heart/Initialize(mapload)
+	. = ..()
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
+	animate(src, pixel_y = pixel_y + 32, alpha = 0, time = duration)
+
+
+/obj/effect/temp_visual/medical_holosign
+	name = "medical holosign"
+	desc = "A small holographic glow in the shape of a medical cross."
+	icon_state = "medi_holo_blue"
+	plane = ABOVE_PLANE
+	duration = 30
+
+/obj/effect/temp_visual/medical_holosign/green
+	icon_state = "medi_holo_green"

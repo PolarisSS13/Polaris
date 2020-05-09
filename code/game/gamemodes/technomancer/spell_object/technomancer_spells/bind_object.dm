@@ -2,19 +2,27 @@
 
 /datum/technomancer_catalog/spell/bind_object
 	name = "Bind Object"
-	desc = "Binds a specific object that is adjacent to you, with an undetectable mark, allowing you to \
-	teleport that object to yourself from almost anywhere. Only one object can be bound at a time."
-	enhancement_desc = "If the bound object is inside a container, the whole container, along with its contents, will also be teleported to you if possible."
 	cost = 100
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/bind_object)
 
 /datum/spell_metadata/bind_object
 	name = "Bind Object"
+	desc = "Binds a specific object that is adjacent to you, with an undetectable mark, allowing you to \
+	teleport that object to yourself from almost anywhere. Only one object can be bound at a time."
+	enhancement_desc = "If the bound object is inside a container, the whole container, along with its contents, will also be teleported to you if possible."
+	aspect = ASPECT_TELE
 	icon_state = "tech_bind_object"
 	spell_path = /obj/item/weapon/spell/technomancer/bind_object
 	cooldown = 1 SECOND
 	var/obj/bound_object = null // The thing to teleport back.
+
+/datum/spell_metadata/bind_object/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/bind_object/spell = spell_path
+	. = list()
+	.["Energy Cost"] = initial(spell.teleport_energy_cost)
+	.["Instability Cost"] = initial(spell.teleport_instability_cost)
+
 
 // Sets a specific object to be tracked by the spell, and tells the spell if the object gets deleted for whatever reason.
 /datum/spell_metadata/bind_object/proc/set_bind(obj/O)
@@ -32,8 +40,9 @@
 	name = "bind object"
 	icon_state = "bind_object"
 	desc = "Never lose your Scepter again!"
-	aspect = ASPECT_TELE
 	cast_methods = CAST_MELEE | CAST_USE
+	var/teleport_energy_cost = 1000
+	var/teleport_instability_cost = 10
 
 /obj/item/weapon/spell/technomancer/bind_object/on_melee_cast(atom/hit_atom, mob/living/user)
 	var/datum/spell_metadata/bind_object/bind_meta = meta
@@ -62,7 +71,7 @@
 		to_chat(user, span("warning", "You never marked an object, or if you did, the object that was bound was destroyed entirely."))
 		return FALSE
 
-	if(!pay_energy(1000))
+	if(!pay_energy(teleport_energy_cost))
 		to_chat(user, span("warning", "You don't have the energy reserves to do that."))
 		return FALSE
 
@@ -103,7 +112,7 @@
 		to_chat(user, span("warning", "Something seems to be interfering with the teleport..."))
 		return FALSE
 
-	adjust_instability(10)
+	adjust_instability(teleport_instability_cost)
 	delete_after_cast = TRUE
 
 	// If possible, put the thing we got into our hands.

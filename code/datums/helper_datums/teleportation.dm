@@ -42,6 +42,7 @@
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
+
 /datum/teleportation/apportation
 	visible_message_exited = "vanishes into thin air!"
 
@@ -51,12 +52,14 @@
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
+
 /datum/teleportation/banish_out
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	sound_exited = 'sound/effects/magic/technomancer/teleport_diss.ogg'
 	visible_message_exited = "disappears in an instant!"
 
 	ignore_block_tele_turf = TRUE
+
 
 /datum/teleportation/banish_in
 	teleport_all_unanchored = TRUE // So things don't get left behind in the 'void'.
@@ -66,6 +69,7 @@
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
 	visible_message_entered = "suddenly re-appears!"
+
 
 /datum/teleportation/recall
 	visible_message_exited = "vanishes!"
@@ -77,12 +81,34 @@
 	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
+
 /datum/teleportation/recall/bound_object
 	ignore_density = TRUE
 	ignore_admin_z = TRUE // So the technomancer can bring something from home, but only once.
 
 	sound_exited = 'sound/effects/magic/technomancer/teleport.ogg'
 	sound_entered = 'sound/effects/magic/technomancer/summonitems_generic.ogg'
+
+// This one doesn't actually move you, but is mostly for visuals and so teleblock stops it.
+// Entering phase shift.
+/datum/teleportation/phase_shift_in
+	ignore_admin_z = TRUE
+	ignore_density = TRUE
+
+	visible_message_exited = "shifts towards a transparent purple hue!"
+	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
+	sound_exited = 'sound/effects/magic/technomancer/teleport_diss.ogg'
+
+// Exiting it.
+/datum/teleportation/phase_shift_out
+	ignore_admin_z = TRUE
+	ignore_density = TRUE
+	ignore_block_tele_turf = TRUE
+	ignore_block_tele_mob = TRUE
+
+	visible_message_entered = "reverts back to their normal form."
+	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
+	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
 
 
 /atom/movable/proc/can_teleport()

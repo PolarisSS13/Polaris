@@ -17,6 +17,7 @@
 	var/toggled = FALSE				// Mainly used for overlays.
 	var/dont_qdel_when_dropped = FALSE // If true, the spell won't delete itself when dropped.
 	var/delete_after_cast = FALSE
+	var/forbid_innate_incapacitation = TRUE // Being `incapaitated()` will stop innate spells from working, if TRUE.
 	var/cooldown_visual_timerid = null
 
 /obj/item/weapon/spell/Initialize(mapload, datum/spell_metadata/new_meta)
@@ -34,13 +35,6 @@
 /mob/living/proc/place_spell_in_hand(var/path)
 	return
 
-/*
-	if(get_cooldown())
-		to_chat(owner, span("warning", "It's too soon to invoke this function again. \
-		You have to wait for at least [DisplayTimeText(get_cooldown())]."))
-		return FALSE
-*/
-
 // Gives the spell to the human mob, if it is allowed to have spells, hands are not full, etc.  Otherwise it deletes itself.
 // Returns the newly created spell, in case you want to do things with it.
 /mob/living/carbon/human/place_spell_in_hand(var/path, datum/spell_metadata/new_meta)
@@ -51,6 +45,10 @@
 
 	//No hands needed for innate casts.
 	if(S.cast_methods & CAST_INNATE)
+		if(S.forbid_innate_incapacitation && incapacitated(INCAPACITATION_DISABLED|INCAPACITATION_DEFAULT))
+			to_chat(src, span("warning", "You're incapacitated, and this function can't work because of it!"))
+			qdel(S)
+			return null
 		if(S.run_checks())
 			if(S.get_cooldown())
 				to_chat(src, span("warning", "It's too soon to invoke this function again. \
@@ -134,7 +132,7 @@
 
 /obj/item/weapon/spell/proc/after_cast(mob/user)
 	apply_cooldown()
-	if(delete_after_cast || QDELETED(src))
+	if(delete_after_cast)
 		qdel(src)
 	else
 		handle_cooldown_visuals()
@@ -206,6 +204,10 @@
 	return TRUE
 
 /obj/item/weapon/spell/proc/new_spell_icon_visuals()
+	if(toggled)
+		add_overlay("toggled")
+	else
+		cut_overlay("toggled")
 	// TODO: Add spinny overlay if the spell is toggled/passive/etc.
 	handle_cooldown_visuals() // If the player gets a spell that's still on cooldown, it should be shown.
 

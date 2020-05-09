@@ -655,6 +655,15 @@
 			playsound(target_mob, "bullet_miss", 75, 1)
 		return FALSE
 
+	//admin logs
+	if(!no_attack_log)
+		if(istype(firer, /mob) && istype(target_mob))
+			add_attack_logs(firer,target_mob,"Shot with \a [src.type] projectile")
+
+	//sometimes bullet_act() will want the projectile to continue flying
+	if (result == PROJECTILE_CONTINUE)
+		return FALSE
+
 	//hit messages
 	if(silenced)
 		playsound(target_mob, hitsound, 5, 1, -1)
@@ -667,15 +676,6 @@
 			span("danger", "\The [target_mob] was hit in the [parse_zone(def_zone)] by \the [src]!"),
 			span("critical", "You've been hit in the [parse_zone(def_zone)] by \the [src]!")
 		)
-
-	//admin logs
-	if(!no_attack_log)
-		if(istype(firer, /mob) && istype(target_mob))
-			add_attack_logs(firer,target_mob,"Shot with \a [src.type] projectile")
-
-	//sometimes bullet_act() will want the projectile to continue flying
-	if (result == PROJECTILE_CONTINUE)
-		return FALSE
 
 	return TRUE
 

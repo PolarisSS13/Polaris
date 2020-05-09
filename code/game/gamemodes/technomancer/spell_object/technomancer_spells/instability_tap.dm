@@ -1,12 +1,13 @@
 /datum/technomancer_catalog/spell/instability_tap
 	name = "Instability Tap"
-	desc = "Creates a large sum of energy, at the cost of a very large amount of instability afflicting you."
 	cost = 50
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/instability_tap)
 
 /datum/spell_metadata/instability_tap
 	name = "Instability Tap"
+	desc = "Creates a large sum of energy, at the cost of a very large amount of instability afflicting you."
+	aspect = ASPECT_UNSTABLE
 	icon_state = "tech_instability_tap"
 	spell_path = /obj/item/weapon/spell/technomancer/instability_tap
 	cooldown = 1 SECOND
@@ -22,7 +23,6 @@
 	icon_state = "instability_tap"
 	desc = "Short term gain for long term consequences never end bad, right?"
 	cast_methods = CAST_INNATE
-	aspect = ASPECT_UNSTABLE
 	var/instability_cost = 40
 	var/energy_gain = 5000
 

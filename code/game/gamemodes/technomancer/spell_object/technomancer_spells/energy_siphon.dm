@@ -1,25 +1,34 @@
 /datum/technomancer_catalog/spell/energy_siphon
 	name = "Energy Siphon"
-	desc = "Creates a link between two points, the caster and the target. By default, the target will have its energy drained, \
-	and transferred to the caster over time. Using the function in-hand will allow you to toggle reversing the flow of energy. \
-	Can drain from powercells, FPB microbatteries, and other Cores. Touching the beam will also hurt."
 	cost = 200
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/energy_siphon)
 
 /datum/spell_metadata/energy_siphon
 	name = "Energy Siphon"
+	desc = "Creates a link between two points, the caster and the target. By default, the target will have its energy drained, \
+	and transferred to the caster over time. Using the function in-hand will allow you to toggle reversing the flow of energy. \
+	Can drain from powercells, FPB microbatteries, and other Cores. Touching the beam will also hurt."
+	aspect = ASPECT_SHOCK
 	icon_state = "tech_energy_siphon"
 	spell_path = /obj/item/weapon/spell/technomancer/energy_siphon
 	cooldown = 1 SECOND
 	var/give_energy = FALSE // If TRUE, the spell gives energy to the target instead of taking it.
+
+/datum/spell_metadata/energy_siphon/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/energy_siphon/spell = spell_path
+	. = list()
+	var/tick_rate = SSobj.wait
+	.["Energy Flow Rate"] = "[initial(spell.flow_rate)] every [DisplayTimeText(tick_rate)]"
+	.["Energy Cost"] = "[initial(spell.beam_cost)] every [DisplayTimeText(tick_rate)]"
+	.["Instability Cost"] = "[initial(spell.instability_per_tick)] every [DisplayTimeText(tick_rate)]"
+
 
 /obj/item/weapon/spell/technomancer/energy_siphon
 	name = "energy siphon"
 	desc = "Now you are an energy vampire."
 	icon_state = "energy_siphon"
 	cast_methods = CAST_RANGED | CAST_USE
-	aspect = ASPECT_SHOCK
 	var/atom/movable/source = null // The thing being drained.
 	var/atom/movable/destination = null // The thing getting the energy from the above var.
 	var/flow_rate = 220 // Limits how much electricity can be drained per second.  Measured in technomancer core energy.

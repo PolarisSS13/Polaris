@@ -27,7 +27,7 @@
 	spell_metadata_paths = list(/datum/spell_metadata/ball_lightning)
 
 /datum/spell_metadata/ball_lightning
-	name = "Banish"
+	name = "Ball Lightning"
 	icon_state = "tech_ball_lightning"
 	spell_path = /obj/item/weapon/spell/banish
 	cooldown = 1 SECOND

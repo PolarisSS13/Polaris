@@ -2,6 +2,10 @@
 // These live inside each Technomancer's core.
 /datum/spell_metadata
 	var/name = null // Shown in UIs.
+	var/desc = null // Shown in the spellbook.
+	var/enhancement_desc = null // Ditto.
+	var/aspect = null // Mostly flavor.
+
 	var/spell_path = null // The path to spawn when casting the spell.
 	var/exclude_from_gambit = FALSE // If true, the Gambit spell isn't allowed to choose this spell. Empty names are also implicitly blocked.
 
@@ -18,3 +22,8 @@
 // This is used to display spell numbers in the spellbook.
 /datum/spell_metadata/proc/get_spell_info()
 	return list()
+
+// Similar to above but is common to all spells
+/datum/spell_metadata/proc/get_common_spell_info()
+	. = list()
+	.["Cooldown"] = cooldown ? DisplayTimeText(cooldown) : "None"

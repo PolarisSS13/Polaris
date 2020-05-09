@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 // This is a singleton object, unlike the spell metadata objects.
 /datum/technomancer_catalog
 	var/name = null
-	var/desc = "If you can see this, something broke."
+	var/desc = null // For spells, you should use the spell metadata's desc instead, unless you're describing a bundle of spells.
 	var/cost = 100 // How many catalog points this is worth.
 
 // Catalog entries for physical objects.
@@ -46,40 +46,36 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 
 /datum/technomancer_catalog/spell/proc/build_table()
 	var/list/dat = list()
+	dat += "[desc]<br>"
+
 	for(var/thing in spell_metadata_paths)
 		var/datum/spell_metadata/meta = new thing()
-		var/obj/item/weapon/spell/technomancer/spell_path = meta.spell_path
 		var/image/I = image(icon = 'icons/mob/screen_spells.dmi', icon_state = meta.icon_state)
-		var/datum/technomancer_aspect/aspect = GLOB.technomancer_aspects[initial(spell_path.aspect)]
+		var/datum/technomancer_aspect/aspect = GLOB.technomancer_aspects[meta.aspect]
+
 
 		dat += {"
 
-		<div class='spellBlock'>
+		<font color='black'>
 		<table bgcolor='[aspect.secondary_color]' style='width:100%; border: 1px solid black;'>
 			<tr bgcolor='[aspect.primary_color]'>
-				<th colspan=2>[meta.name]</th>
+				<th colspan=2><b>[meta.name]</b></th>
 			</tr>
 			<tr>
 				<td rowspan=2>[bicon(I, TRUE, "sprite64")]</td>
-				<td>ASPECT:<br>[uppertext(initial(spell_path.aspect))]</td>
+				<td>ASPECT:<br>[uppertext(aspect.name)]</td>
 			</tr>
 			<tr>
-				<td>[desc]</td>
+				<td>[meta.desc]</td>
 			</tr>
 		"}
-		if(spell_power_desc)
+		if(meta.enhancement_desc)
 			dat += {"
 			<tr>
-				<td colspan=2>Spell Power: [spell_power_desc]</td>
+				<td colspan=2>Scepter Effect: [meta.enhancement_desc]</td>
 			</tr>
 			"}
-		if(enhancement_desc)
-			dat += {"
-			<tr>
-				<td colspan=2>Scepter Effect: [enhancement_desc]</td>
-			</tr>
-			"}
-		var/list/lines = meta.get_spell_info()
+		var/list/lines = meta.get_spell_info() + meta.get_common_spell_info()
 		if(lines.len)
 			for(var/line in lines)
 				dat += {"
@@ -90,7 +86,7 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 
 		dat += {"
 			</table>
-			</div>
+			</font>
 
 		"}
 	return dat.Join()

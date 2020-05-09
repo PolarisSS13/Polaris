@@ -1,24 +1,35 @@
 /datum/technomancer_catalog/spell/gambit
 	name = "Gambit"
-	desc = "This function causes you to receive a random function, including those which you haven't purchased."
 	cost = 100
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/gambit)
 
 /datum/spell_metadata/gambit
 	name = "Gambit"
+	desc = "This function causes you to receive a random function, including those which you haven't purchased."
+	aspect = ASPECT_UNSTABLE
 	icon_state = "tech_gambit"
 	spell_path = /obj/item/weapon/spell/technomancer/gambit
 	cooldown = 30 SECONDS
 	exclude_from_gambit = TRUE
+
+
+/datum/spell_metadata/gambit/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/gambit/spell = spell_path
+	. = list()
+	.["Energy Cost"] = initial(spell.gambit_energy_cost)
+	.["Instability Cost"] = initial(spell.gambit_instability_cost)
+
+
 
 /obj/item/weapon/spell/technomancer/gambit
 	name = "gambit"
 	desc = "Do you feel lucky?"
 	icon_state = "gambit"
 	cast_methods = CAST_INNATE
-	aspect = ASPECT_UNSTABLE
 	delete_after_cast = TRUE
+	var/gambit_energy_cost = 200
+	var/gambit_instability_cost = 5
 
 /obj/item/weapon/spell/technomancer/gambit/on_innate_cast(mob/living/user)
 	if(pay_energy(200))
@@ -43,9 +54,10 @@
 		core.spell_metas[random_meta.type] = random_meta
 		existing_meta = core.spell_metas[random_meta.type]
 
+	// This code is baaaaaad.
 	var/obj/item/weapon/spell/technomancer/spell = owner.place_spell_in_hand(existing_meta.spell_path, existing_meta)
 	if(istype(spell) && !QDELETED(spell))
-		spell.on_spell_given()
+		spell.on_spell_given(owner)
 
 	to_chat(owner, span("notice", "You've been randomly given <b>[random_meta.name]</b>!"))
 

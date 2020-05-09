@@ -1,23 +1,34 @@
 /datum/technomancer_catalog/spell/control
 	name = "Control"
-	desc = "This function allows you to exert control over simple-minded entities to an extent, such as spiders and carp.  \
-	Controlled entities will not be hostile towards you, and you may direct them to move to specific areas or to attack specific \
-	targets. This function will have no effect on entities of higher intelligence, such as humans and similar alien species, as it's \
-	not true mind control, but merely pheromone synthesis for living animals, and electronic hacking for simple robots. The green web \
-	around the entity is merely a hologram used to allow the user to know if the creature is safe or not."
-	enhancement_desc = "Using the scepter inhand alongside Control will teleport all controlled entities to you over time."
 	cost = 100
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/control)
 
 /datum/spell_metadata/control
 	name = "Control"
+	desc = "This function allows you to exert control over simple-minded entities to an extent, such as spiders and carp.  \
+	Controlled entities will not be hostile towards you, and you may direct them to move to specific areas or to attack specific \
+	targets. This function will have no effect on entities of higher intelligence, such as humans and similar alien species, as it's \
+	not true mind control, but merely pheromone synthesis for living animals, and electronic hacking for simple robots. The green web \
+	around the entity is merely a hologram used to allow the user to know if the creature is safe or not."
+	enhancement_desc = "Using the scepter inhand alongside Control will teleport all controlled entities to you, \
+	one at a time."
+	aspect = ASPECT_BIOMED
 	icon_state = "tech_control"
 	spell_path = /obj/item/weapon/spell/technomancer/control
 	cooldown = 1 SECOND
 	var/list/selected_weakrefs = list()
 	var/set_hostility = FALSE // If true, selected mobs become hostile and attack like regular simplemobs.
 	var/static/image/select_overlay = null
+
+/datum/spell_metadata/control/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/control/spell = spell_path
+	. = list()
+	.["Selection Energy Cost"] = initial(spell.select_energy_cost)
+	.["Scepter Teleport Delay"] = "[DisplayTimeText(initial(spell.scepter_teleport_delay))] per selected entity"
+	.["Scepter Teleport Energy Cost"] = initial(spell.scepter_teleport_cost)
+	.["Scepter Teleport Instability Cost"] = initial(spell.scepter_teleport_instability)
+
 
 /datum/spell_metadata/control/New()
 	if(!select_overlay)
@@ -44,8 +55,8 @@
 	icon_state = "control"
 	desc = "Now you can command your own army!"
 	cast_methods = CAST_RANGED|CAST_USE
-	aspect = ASPECT_BIOMED //Not sure if this should be something else.
 	var/allowed_mob_classes = MOB_CLASS_ANIMAL|MOB_CLASS_SYNTHETIC|MOB_CLASS_ILLUSION
+	var/select_energy_cost = 200
 	var/scepter_teleport_delay = 1 SECOND
 	var/scepter_teleport_instability = 1
 	var/scepter_teleport_cost = 100
@@ -74,7 +85,7 @@
 		if(L.mob_class & allowed_mob_classes)
 			if(is_selected(L))
 				return deselect(L) // Deselects are free.
-			if(pay_energy(200))
+			if(pay_energy(select_energy_cost))
 				return select(L)
 
 		else // Can't be selected, meaning they could be attacked.

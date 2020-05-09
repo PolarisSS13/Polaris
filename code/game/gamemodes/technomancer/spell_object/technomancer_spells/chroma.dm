@@ -1,14 +1,15 @@
 /datum/technomancer_catalog/spell/chroma
 	name = "Chroma"
-	desc = "Creates light around you, or in a location of your choosing. \
-	You can choose what color the light is. This could be useful to trick someone into \
-	believing you're casting a different spell, or perhaps just for fun."
 	cost = 25
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/chroma)
 
 /datum/spell_metadata/chroma
 	name = "Chroma"
+	desc = "Creates light around you, or in a location of your choosing. \
+	You can choose what color the light is. This could be useful to trick someone into \
+	believing you're casting a different spell, or perhaps just for fun."
+	aspect = ASPECT_LIGHT
 	icon_state = "tech_chroma"
 	spell_path = /obj/item/weapon/spell/technomancer/chroma
 	cooldown = 2 SECONDS
@@ -20,7 +21,6 @@
 	icon_state = "chroma"
 	desc = "The colors are dazzling."
 	cast_methods = CAST_RANGED | CAST_USE
-	aspect = ASPECT_LIGHT
 
 /obj/item/weapon/spell/technomancer/chroma/on_spell_given(mob/user)
 	var/datum/spell_metadata/chroma/chroma_meta = meta
