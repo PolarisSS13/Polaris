@@ -107,6 +107,14 @@
 	cutoff_number = 1
 	wait_time = 10 SECONDS
 
+/datum/ghost_query/soulstone
+	role_name = "Soulstone"
+	question = "A cultist is trying to summon a shade. Would you like to play as it?"
+	be_special_flag = BE_CULTIST
+	cutoff_number = 1
+	check_bans = list("Syndicate", "cult")
+	wait_time = 60 SECONDS
+
 /datum/ghost_query/syndicate_drone
 	role_name = "Mercenary Drone"
 	question = "A team of dubious mercenaries have purchased a powerful drone, and they are attempting to activate it.  Would you like to play as the drone?"

@@ -9,6 +9,16 @@
 	impact_sound = 'sound/effects/Glasshit.ogg'
 	shatter_sound = 'sound/effects/phasein.ogg'
 
+	activation_cooldown = 2 SECONDS
+
+	primary_color = null
+	secondary_color = null
+	base_color = null
+
+	crystal_state = "node"
+	base_state = "pod"
+	surge_state = "pulse"
+
 	var/list/active_beams
 
 /obj/structure/cult/pylon/swarm/CanPass(atom/movable/mover, turf/target)
@@ -40,7 +50,7 @@
 			playsound(get_turf(src),shatter_sound, 75, 1)
 			isbroken = 1
 			density = 0
-			icon_state = "[initial(icon_state)]-broken"
+			update_icon()
 			set_light(0)
 
 /obj/structure/cult/pylon/swarm/attackpylon(mob/user as mob, var/damage)
@@ -56,7 +66,7 @@
 			playsound(get_turf(src),shatter_sound, 75, 1)
 			isbroken = 1
 			density = 0
-			icon_state = "[initial(icon_state)]-broken"
+			update_icon()
 			set_light(0)
 		else
 			to_chat(user, "You hit \the [src]!")
@@ -78,11 +88,13 @@
 	name = "Zero Point Well"
 	desc = "Infinite cosmic power, itty bitty usability."
 
-	icon_state = "trap"
+	icon_state = "pod"
 
 	description_info = "An infinitely small point in space that may or may not be used to supply power to some form of advanced machine."
 
 	activation_cooldown = 0	// These things run constantly.
+
+	surge_state = "nova"
 
 /obj/structure/cult/pylon/swarm/zp_well/pylon_unique()
 	. = ..()
@@ -108,7 +120,10 @@
 	name = "Zero Point Wall"
 	desc = "Infinite cosmic power, itty bitty passability."
 
-	icon_state = "barricade"
+	icon_state = "pod"
+
+	surge_state = "hexfield"
+	crystal_state = "node"
 
 	description_info = "An infinitely small point in space spread upon infinitely many finitely-bounded points in space. Nice."
 
@@ -120,8 +135,10 @@
 			playsound(get_turf(src),shatter_sound, 75, 1)
 			isbroken = 1
 			density = 0
-			icon_state = "[initial(icon_state)]-broken"
+			update_icon()
 			set_light(0)
+		else
+			surge()
 
 /obj/structure/cult/pylon/swarm/defender/attackpylon(mob/user as mob, var/damage)
 	if(!isbroken)
@@ -136,9 +153,10 @@
 			playsound(get_turf(src),shatter_sound, 75, 1)
 			isbroken = 1
 			density = 0
-			icon_state = "[initial(icon_state)]-broken"
+			update_icon()
 			set_light(0)
 		else
+			surge()
 			to_chat(user, "You hit \the [src]!")
 			playsound(get_turf(src),impact_sound, 75, 1)
 	else

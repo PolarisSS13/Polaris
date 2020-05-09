@@ -1016,6 +1016,27 @@ var/list/name_to_material
 /material/cult/reinf/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/remains/human(target)
 
+/material/bloodsteel
+	name = MAT_BLOODSTEEL
+	stack_type = /obj/item/stack/material/bloodsteel
+	integrity = 300
+	conductivity = 5
+	negation = 10
+	weight = 25
+	hardness = 65
+	protectiveness = 60 // 75%
+	reflectivity = 0.7
+	icon_base = "solid"
+	icon_colour = "#402821"
+	icon_reinf = "reinf_cult"
+	pass_stack_colors = TRUE
+
+/material/bloodsteel/place_dismantled_girder(var/turf/target)
+	new /obj/structure/girder/cult(target, "cult")
+
+/material/bloodsteel/place_dismantled_product(var/turf/target)
+	new /obj/effect/decal/cleanable/blood(target)
+
 //TODO PLACEHOLDERS:
 /material/leather
 	name = "leather"

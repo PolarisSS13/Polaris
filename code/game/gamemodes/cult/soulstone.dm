@@ -14,27 +14,75 @@
 	var/imprinted = "empty"
 	var/possible_constructs = list("Juggernaut","Wraith","Artificer","Harvester")
 
+	// Charge soulstones only require a corpse to be drained, and then they can be used similar to a Posi to summon a ghost.
+	var/charged = FALSE
+	var/charge_only = FALSE
+
+	var/ghost_query_type = /datum/ghost_query/soulstone
+
+	var/searching = FALSE
+
 /obj/item/device/soulstone/cultify()
 	return
+
+/obj/item/device/soulstone/cult
+	charge_only = TRUE
 
 //////////////////////////////Capturing////////////////////////////////////////////////////////
 
 /obj/item/device/soulstone/attack(mob/living/carbon/human/M as mob, mob/user as mob)
-	if(!istype(M, /mob/living/carbon/human))//If target is not a human.
-		return ..()
-	if(istype(M, /mob/living/carbon/human/dummy))
-		return..()
-	if(jobban_isbanned(M, "cultist"))
-		to_chat(user, "<span class='warning'>This person's soul is too corrupt and cannot be captured!</span>")
-		return..()
+	if(!charge_only)
+		if(!istype(M, /mob/living/carbon/human))//If target is not a human.
+			return ..()
+		if(istype(M, /mob/living/carbon/human/dummy))
+			return..()
+		if(jobban_isbanned(M, "cultist"))
+			to_chat(user, "<span class='warning'>This person's soul is too corrupt and cannot be captured!</span>")
+			return..()
 
-	if(M.has_brain_worms()) //Borer stuff - RR
-		to_chat(user, "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>")
-		return..()
+		if(M.has_brain_worms()) //Borer stuff - RR
+			to_chat(user, "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>")
+			return..()
 
-	add_attack_logs(user,M,"Soulstone'd with [src.name]")
-	transfer_soul("VICTIM", M, user)
-	return
+		add_attack_logs(user,M,"Soulstone'd with [src.name]")
+		transfer_soul("VICTIM", M, user)
+
+	else if(isliving(M))
+
+		if(imprinted != "empty")
+			to_chat(user, "<span class='notice'>This stone is already bound to \the [imprinted]!</span>")
+			return ..()
+
+		if(charged)
+			to_chat(user, "<span class='notice'>This stone already holds enough power to summon a spirit!</span>")
+			return ..()
+
+		if(M.has_modifier_of_type(/datum/modifier/soul_drain))
+			to_chat(user, "<span class='notice'>This individual has already pawned their soul to another!</span>")
+			return ..()
+
+		else if(M.stat == DEAD && M.mob_size > MOB_TINY)
+			user.Beam(M,icon_state="drain_life",icon='icons/effects/beam.dmi',time=5 SECONDS, maxdistance=2,beam_type=/obj/effect/ebeam,beam_sleep_time=3)
+			M.add_modifier(/datum/modifier/soul_drain, 0)
+			charged = TRUE
+			if(M.client)
+				if(jobban_isbanned(M, "cultist") || M.has_brain_worms())
+					return..()
+
+				var/client/C = M.client
+				window_flash(C)
+				var/response = alert(C, "Do you want to play as a shade?", "Soulstone request", "Yes", "No")
+				if(response == "Yes")
+					response = alert(C, "Are you sure you want to play as a shade?", "Soulstone request", "Yes", "No") // Protection from a misclick.
+				if(!C || !src)
+					return
+				if(response == "Yes")
+					add_attack_logs(user,M,"Soulstone'd willingly with [src.name]")
+					transfer_soul("VICTIM", M, user)
+
+			return
+
+	return ..()
 
 
 ///////////////////Options for using captured souls///////////////////////////////////////
@@ -49,6 +97,13 @@
 		dat += {"<A href='byond://?src=\ref[src];choice=Summon'>Summon Shade</A>"}
 		dat += "<br>"
 		dat += {"<a href='byond://?src=\ref[src];choice=Close'> Close</a>"}
+
+	if(imprinted == "empty" && charged)
+		dat += "<br>"
+		dat += "<hr>"
+		dat += "This stone has enough power to tear a spirit from the aether.<br>"
+		dat += {"<A href='byond://?src=\ref[src];choice=Capture'>Capture Spirit</A>"}
+
 	user << browse(dat, "window=aicard")
 	onclose(user, "aicard")
 	return
@@ -80,7 +135,69 @@
 				A.forceMove(U.loc)
 				A.cancel_camera()
 				src.icon_state = "soulstone"
+
+		if ("Capture")
+			if(!ghost_query_type)
+				return
+			searching = 1
+
+			var/datum/ghost_query/Q = new ghost_query_type()
+			var/list/winner = Q.query()
+			if(winner.len)
+				var/mob/observer/dead/D = winner[1]
+				transfer_personality(D)
+			else
+				reset_search()
+
 	attack_self(U)
+
+/*
+ * Handling ghost joining.
+ */
+
+/obj/item/device/soulstone/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
+	if(imprinted != "empty")
+		return
+
+	src.searching = 0
+
+	visible_message("<font color='blue'>\The [src] hisses quietly. Perhaps you can try again?</font>")
+
+/obj/item/device/soulstone/proc/transfer_personality(var/mob/candidate)
+	announce_ghost_joinleave(candidate, 0, "They are occupying a soulstone now.")
+	src.searching = 0
+
+	var/mob/living/simple_mob/construct/shade/S = new /mob/living/simple_mob/construct/shade(src)
+
+	S.real_name = "Shade of [candidate.name]"
+	S.name = "Shade of [candidate.name]"
+	if(candidate.icon_state != "blank")
+		S.icon = candidate.icon
+		S.icon_state = candidate.icon_state
+		S.overlays = candidate.overlays
+
+	if(candidate.mind)
+		S.mind = candidate.mind
+		S.mind.reset()
+
+	S.forceMove(src) //put shade in stone
+	S.status_flags |= GODMODE //So they won't die inside the stone somehow
+	S.canmove = 0//Can't move out of the soul stone
+	S.color = rgb(254,0,0)
+	S.alpha = 127
+	if (candidate.client)
+		candidate.client.mob = S
+	S.cancel_camera()
+	S.invisibility = 0
+
+
+	src.icon_state = "soulstone2"
+	src.name = "Soul Stone: [S.real_name]"
+	to_chat(S, "Your soul has been captured! You are now bound to your summoner's will, help them suceed in their goals at all costs.")
+	src.imprinted = "[S.name]"
+	S.mind.assigned_role = "Shade"
+
+	visible_message("<span class='cult'>\The [src] shimmers, as a visage appears refracted on the surface.</span>")
 
 ///////////////////////////Transferring to constructs/////////////////////////////////////////////////////
 /obj/structure/constructshell

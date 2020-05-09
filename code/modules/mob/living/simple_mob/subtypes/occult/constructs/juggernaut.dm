@@ -7,9 +7,8 @@
 	real_name = "Juggernaut"
 	construct_type = "juggernaut"
 	desc = "A possessed suit of armour driven by the will of the restless dead"
-	icon = 'icons/mob/mob.dmi'
-	icon_state = "behemoth"
-	icon_living = "behemoth"
+	icon_state = "juggernaut"
+	icon_living = "juggernaut"
 	maxHealth = 300
 	health = 300
 	response_harm   = "harmlessly punches"
@@ -89,6 +88,9 @@
 
 	return (..(P))
 
+/mob/living/simple_mob/construct/juggernaut/npc
+	ai_holder_type = /datum/ai_holder/simple_mob/melee
+
 /*
  * The Behemoth. Admin-allowance only, still try to keep it in some guideline of 'Balanced', even if it means Security has to be fully geared to be so.
  */
@@ -96,6 +98,8 @@
 /mob/living/simple_mob/construct/juggernaut/behemoth
 	name = "Behemoth"
 	real_name = "Behemoth"
+	icon_state = "tg_juggernaut"
+	icon_living = "tg_juggernaut"
 	desc = "The pinnacle of occult technology, Behemoths are nothing shy of both an Immovable Object, and Unstoppable Force."
 	maxHealth = 750
 	health = 750
@@ -122,6 +126,10 @@
 							/spell/targeted/fortify,
 							/spell/targeted/construct_advanced/slam
 							)
+
+/mob/living/simple_mob/construct/juggernaut/behemoth/Initialize()
+	..()
+	flick("make_[icon_living]",src)
 
 /mob/living/simple_mob/construct/juggernaut/behemoth/bullet_act(var/obj/item/projectile/P)
 	var/reflectchance = 80 - round(P.damage/3)

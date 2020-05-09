@@ -238,3 +238,10 @@
 	recipes += new/datum/stack_recipe("[display_name] net", /obj/item/weapon/material/fishing_net, 10, time = 5 SECONDS, supplied_material = "[name]", pass_stack_color = TRUE)
 	recipes += new/datum/stack_recipe("[display_name] membrane", /obj/effect/alien/resin/membrane, 1, time = 2 SECONDS, pass_stack_color = TRUE)
 	recipes += new/datum/stack_recipe("[display_name] node", /obj/effect/alien/weeds/node, 1, time = 4 SECONDS)
+
+/material/bloodsteel/generate_recipes()
+	..()
+	recipes += new/datum/stack_recipe("whetstone", /obj/item/weapon/whetstone, 2, time = 10)
+	recipes += new/datum/stack_recipe("tuning fork", /obj/item/weapon/material/kitchen/utensil/fork/tuning, 2, time = 30, supplied_material = "[name]")
+	recipes += new/datum/stack_recipe("cult robes, red", /obj/item/clothing/suit/cultrobes, 10, time = 5 SECONDS)
+	recipes += new/datum/stack_recipe("cult hood, red", /obj/item/clothing/head/culthood, 3, time = 2 SECONDS)

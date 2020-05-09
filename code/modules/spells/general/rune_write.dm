@@ -19,7 +19,7 @@
 /spell/rune_write/cast(null, mob/user = usr)
 	if(!cultwords["travel"])
 		runerandom()
-	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Communicate", "Stun")
+	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "Summon Armor", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Burning Blood", "Communicate", "Stun")
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
 	if(istype(user.loc,/turf))
@@ -51,6 +51,12 @@
 					R.word3=cultwords["hell"]
 					R.check_icon()
 			if("Change Construct Type")
+				if(cast_check(1))
+					R.word1=cultwords["technology"]
+					R.word2=cultwords["join"]
+					R.word3=cultwords["self"]
+					R.check_icon()
+			if("Summon Armor")
 				if(cast_check(1))
 					R.word1=cultwords["hell"]
 					R.word2=cultwords["destroy"]
@@ -157,6 +163,12 @@
 					R.word1=cultwords["destroy"]
 					R.word2=cultwords["see"]
 					R.word3=cultwords["blood"]
+					R.check_icon()
+			if("Burning Blood")
+				if(cast_check(1))
+					R.word1=cultwords["blood"]
+					R.word2=cultwords["destroy"]
+					R.word3=cultwords["other"]
 					R.check_icon()
 			if("Communicate")
 				if(cast_check(1))

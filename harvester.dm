@@ -7,6 +7,7 @@
 	real_name = "Harvester"
 	construct_type = "harvester"
 	desc = "A tendril-laden construct piloted by a chained mind."
+	icon = 'icons/mob/mob.dmi'
 	icon_state = "harvester"
 	icon_living = "harvester"
 	maxHealth = 150
@@ -39,6 +40,6 @@
 		)
 
 /mob/living/simple_mob/construct/harvester/npc
-	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting
+	ai_holder_type = /datum/ai_holder/simple_mob/melee
 	projectiletype = /obj/item/projectile/beam/inversion
 	projectilesound = 'sound/weapons/spiderlunge.ogg'

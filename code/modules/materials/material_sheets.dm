@@ -204,6 +204,13 @@
 	default_type = DEFAULT_WALL_MATERIAL
 	no_variants = FALSE
 
+/obj/item/stack/material/bloodsteel
+	name = MAT_BLOODSTEEL
+	icon_state = "sheet-plasteel"
+	default_type = MAT_BLOODSTEEL
+	no_variants = FALSE
+	apply_colour = TRUE
+
 /obj/item/stack/material/steel/hull
 	name = MAT_STEELHULL
 	default_type = MAT_STEELHULL

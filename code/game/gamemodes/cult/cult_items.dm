@@ -121,3 +121,19 @@
 
 /obj/item/clothing/suit/space/cult/cultify()
 	return
+
+// This is a fork, used to modify cult objects. It can also be used as a regular fork, that is just weirdly pronged. Stealthy.
+/obj/item/weapon/material/kitchen/utensil/fork/tuning
+	name = "tuning fork"
+	desc = "It's a tuning fork. Sure is loud."
+	icon_state = "tuning_fork"
+	item_state = "fork"
+	force_divisor = 0.33
+	sharp = 0
+	edge = 0
+
+	unbreakable = TRUE
+
+	usesound = 'sound/effects/deskbell.ogg'
+	drop_sound = 'sound/effects/deskbell_rude.ogg'
+	hitsound = 'sound/effects/deskbell_rude.ogg'

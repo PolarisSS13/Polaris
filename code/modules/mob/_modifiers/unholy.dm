@@ -198,3 +198,10 @@
 			H.adjustToxLoss(-healing_amount * 0.25)
 
 	..()
+
+/datum/modifier/soul_drain
+	name = "soul drain"
+	desc = "Your soul has been torn asunder to fuel an unholy ritual."
+
+	on_created_text = "<span class='critical'>You feel empty inside.</span>"
+	on_expired_text = "<span class='notice'>A wholeness returns to you, like a long lost friend.</span>"

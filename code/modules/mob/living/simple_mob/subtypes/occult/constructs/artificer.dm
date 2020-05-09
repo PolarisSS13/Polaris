@@ -7,7 +7,6 @@
 	real_name = "Artificer"
 	construct_type = "artificer"
 	desc = "A bulbous construct dedicated to building and maintaining temples to their otherworldly lords."
-	icon = 'icons/mob/mob.dmi'
 	icon_state = "artificer"
 	icon_living = "artificer"
 	maxHealth = 150
@@ -28,3 +27,6 @@
 							/spell/targeted/occult_repair_aura,
 							/spell/targeted/construct_advanced/mend_acolyte
 							)
+
+/mob/living/simple_mob/construct/artificer/npc
+	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive

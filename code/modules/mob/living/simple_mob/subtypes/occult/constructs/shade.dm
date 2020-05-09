@@ -6,7 +6,6 @@
 	name = "Shade"
 	real_name = "Shade"
 	desc = "A bound spirit"
-	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
 	icon_living = "shade"
 	icon_dead = "shade_dead"
@@ -29,6 +28,9 @@
 	universal_speak = 1
 
 	loot_list = list(/obj/item/weapon/ectoplasm = 100)
+
+/mob/living/simple_mob/construct/shade/npc
+	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 
 /mob/living/simple_mob/construct/shade/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/device/soulstone))

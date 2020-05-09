@@ -114,7 +114,7 @@ proc/findNullRod(var/atom/target)
 	invocation_type = SpI_NONE
 	range = 0
 
-	summon_type = list(/obj/item/device/soulstone)
+	summon_type = list(/obj/item/device/soulstone/cult)
 
 	hud_state = "const_stone"
 	override_base = "const"
@@ -260,10 +260,10 @@ proc/findNullRod(var/atom/target)
 	return
 
 /*
- * Harvest has been disabled due to the lack of Nar'Sie. Here for posterity / future rework.
+ * Harvest has been re-enabled with the genesis of pylons that can act as a home point.
  */
 
-/*
+
 /spell/targeted/harvest
 	name = "Harvest"
 	desc = "Back to where I come from, and you're coming with me."
@@ -300,7 +300,7 @@ proc/findNullRod(var/atom/target)
 		to_chat(user, "<span class='sinister'>You warp back to Nar-Sie[prey ? " along with your prey":""].</span>")
 	else
 		to_chat(user, "<span class='danger'>...something's wrong!</span>") //There shouldn't be an instance of Harvesters when Nar-Sie isn't in the world.
-*/
+
 
 /spell/targeted/fortify
 	name = "Fortify Shell"
@@ -464,6 +464,8 @@ proc/findNullRod(var/atom/target)
 	cast_sound = null			// Sound file played when this is used.
 	var/last_castcheck = null	// The last time this spell was cast.
 
+	var/bloodcost = 20
+
 /obj/item/weapon/spell/construct/New()
 	//..() //This kills the spell, because super on this calls the default spell's New, which checks for a core. Can't have that.
 	if(isliving(loc))
@@ -484,16 +486,34 @@ proc/findNullRod(var/atom/target)
 
 /obj/item/weapon/spell/construct/pay_energy(var/amount)
 	if(owner)
-		if(istype(owner, /mob/living/simple_mob/construct))
+		var/datum/bloodnet/owner_net = owner.getBloodnet()
+
+		if(!owner_net)
+			return pay_blood(amount * 2)	// Double cost for non-cultist non-constructs.
+
+		if(handle_network_payment(owner_net,-1 * amount))
 			return 1
-		if(iscultist(owner) && pay_blood(amount))
+
+		if(iscultist(owner) && pay_blood(round(amount * 0.25)))
 			return 1
+
 	return 0
+
+// Override this to provide unique effects based on the level of payment from a blood network.
+/obj/item/weapon/spell/construct/proc/handle_network_payment(var/datum/bloodnet/bank_net,var/amount)
+	if(!bank_net)
+		return FALSE
+
+	if(amount == 0)
+		return TRUE
+
+	return bank_net.adjustBlood(amount, TRUE)
 
 /obj/item/weapon/spell/construct/proc/pay_blood(var/amount) //If, for some reason, this is put into the hands of a cultist, by a talisnam or whatever.
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(!H.should_have_organ(O_HEART))
+		if(!H.should_have_organ(O_HEART) || H.isSynthetic())
+			H.adjustToxLoss(amount * 2)
 			return 1
 		if(H.vessel.remove_reagent("blood", amount))
 			return 1
@@ -528,7 +548,7 @@ proc/findNullRod(var/atom/target)
 	var/obj/item/projectile/spell_projectile = null
 	var/pre_shot_delay = 0
 	var/fire_sound = null
-	var/energy_cost_per_shot = 5
+	var/energy_cost_per_shot = 20
 
 /obj/item/weapon/spell/construct/projectile/on_ranged_cast(atom/hit_atom, mob/living/user)
 	if(set_up(hit_atom, user))
@@ -569,7 +589,7 @@ proc/findNullRod(var/atom/target)
 
 /obj/item/weapon/spell/construct/spawner/on_ranged_cast(atom/hit_atom, mob/user)
 	var/turf/T = get_turf(hit_atom)
-	if(T)
+	if(T && pay_energy(bloodcost))
 		new spawner_type(T)
 		to_chat(user, "<span class='cult'>You shift \the [src] onto \the [T].</span>")
 		log_and_message_admins("has casted [src] at [T.x],[T.y],[T.z].")
@@ -652,7 +672,7 @@ proc/findNullRod(var/atom/target)
 	light_power = -2
 
 /obj/item/weapon/spell/construct/mend_occult/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
-	if(isliving(hit_atom))
+	if(isliving(hit_atom) && pay_energy(bloodcost))
 		var/mob/living/L = hit_atom
 		L.add_modifier(/datum/modifier/mend_occult, 150)
 	qdel(src)
@@ -667,30 +687,44 @@ proc/findNullRod(var/atom/target)
 	light_color = "#FF5C5C"
 	light_power = -2
 	cooldown = 15
+	bloodcost = 30
 
 /obj/item/weapon/spell/construct/slam/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
 	var/attack_message = "slams"
-	if(istype(user, /mob/living/simple_mob))
-		var/mob/living/simple_mob/S = user
-		attack_message = pick(S.attacktext)
-	if(isliving(hit_atom))
-		var/mob/living/L = hit_atom
-		L.visible_message("<span class='danger'>\The [user] [attack_message] \the [L], sending them flying!</span>")
-		playsound(src, "punch", 50, 1)
-		L.Weaken(2)
-		L.adjustBruteLoss(rand(30, 50))
-		var/throwdir = get_dir(src, L)
-		L.throw_at(get_edge_target_turf(L, throwdir), 3, 1, src)
-	if(istype(hit_atom, /turf/simulated/wall))
-		var/turf/simulated/wall/W = hit_atom
-		user.visible_message("<span class='warning'>\The [user] rears its fist, preparing to hit \the [W]!</span>")
-		var/windup = cooldown
-		if(W.reinf_material)
-			windup = cooldown * 2
-		if(do_after(user, windup))
-			W.visible_message("<span class='danger'>\The [user] [attack_message] \the [W], obliterating it!</span>")
-			W.dismantle_wall(1)
-		else
-			user.visible_message("<span class='notice'>\The [user] lowers its fist.</span>")
-			return
+	if(pay_energy(bloodcost))
+		if(istype(user, /mob/living/simple_mob))
+			var/mob/living/simple_mob/S = user
+			attack_message = pick(S.attacktext)
+		if(isliving(hit_atom))
+			var/mob/living/L = hit_atom
+			L.visible_message("<span class='danger'>\The [user] [attack_message] \the [L], sending them flying!</span>")
+			playsound(src, "punch", 50, 1)
+			L.Weaken(2)
+			L.adjustBruteLoss(rand(30, 50))
+			var/throwdir = get_dir(src, L)
+			L.throw_at(get_edge_target_turf(L, throwdir), 3, 1, src)
+		if(istype(hit_atom, /obj/mecha))
+			var/obj/mecha/M = hit_atom
+			user.visible_message("<span class='danger'>\The [user] [attack_message] \the [M], sending it tumbling backwards!</span>")
+			M.take_damage(rand(30,50))
+			if(ishuman(M.occupant))
+				to_chat(M.occupant, "<span class='danger'>\The [M]'s sudden movement throws you against the compartment!.</span>")
+				var/blocked = M.occupant.run_armor_check(BP_TORSO,"melee")
+				var/soaked = M.occupant.get_armor_soak(BP_TORSO,"melee")
+				M.occupant.apply_damage(rand(20,30),BRUTE, BP_TORSO, blocked, soaked, src)
+				M.occupant.apply_effect(rand(1 SECOND, 3 SECONDS), STUN, blocked, 1)
+			var/throwdir = get_dir(src, M)
+			M.throw_at(get_edge_target_turf(M, throwdir), 2, 1, src)
+		if(istype(hit_atom, /turf/simulated/wall))
+			var/turf/simulated/wall/W = hit_atom
+			user.visible_message("<span class='warning'>\The [user] rears its fist, preparing to hit \the [W]!</span>")
+			var/windup = cooldown
+			if(W.reinf_material)
+				windup = cooldown * 2
+			if(do_after(user, windup))
+				W.visible_message("<span class='danger'>\The [user] [attack_message] \the [W], obliterating it!</span>")
+				W.dismantle_wall(1)
+			else
+				user.visible_message("<span class='notice'>\The [user] lowers its fist.</span>")
+				return
 	qdel(src)

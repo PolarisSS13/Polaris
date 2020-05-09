@@ -7,7 +7,6 @@
 	real_name = "Wraith"
 	construct_type = "wraith"
 	desc = "A wicked bladed shell contraption piloted by a bound spirit."
-	icon = 'icons/mob/mob.dmi'
 	icon_state = "floating"
 	icon_living = "floating"
 	maxHealth = 200
@@ -24,6 +23,9 @@
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift,
 							/spell/targeted/ambush_mode
 							)
+
+/mob/living/simple_mob/construct/wraith/npc
+	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 
 //	environment_smash = 1	// Whatever this gets renamed to, Wraiths need to break things
 

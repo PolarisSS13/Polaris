@@ -8,6 +8,8 @@
 	desc = ""
 	tt_desc = "Error"
 
+	icon = 'icons/mob/cult.dmi'
+
 	icon_living = "shade"
 	icon_dead = "shade_dead"
 
