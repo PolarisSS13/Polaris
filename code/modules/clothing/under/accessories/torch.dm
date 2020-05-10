@@ -615,13 +615,13 @@ ranks - marines
 /obj/item/clothing/accessory/solgov/rank/marine
 	name = "marine ranks"
 	desc = "Insignia denoting marine rank of some kind. These appear blank."
-	icon_state = "marinerank_enlisted"
+	icon_state = "armyrank_enlisted"
 	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/solgov/rank/marine/enlisted
 	name = "ranks (E-1 private)"
 	desc = "Insignia denoting the rank of Private."
-	icon_state = "marinerank_enlisted"
+	icon_state = "armyrank_enlisted"
 
 /obj/item/clothing/accessory/solgov/rank/marine/enlisted/e2
 	name = "ranks (E-2 private second class)"
@@ -670,7 +670,7 @@ ranks - marines
 /obj/item/clothing/accessory/solgov/rank/marine/officer
 	name = "ranks (O-1 second lieutenant)"
 	desc = "Insignia denoting the rank of Second Lieutenant."
-	icon_state = "marinerank_officer"
+	icon_state = "armyrank_officer"
 
 /obj/item/clothing/accessory/solgov/rank/marine/officer/o2
 	name = "ranks (O-2 first lieutenant)"
@@ -695,7 +695,7 @@ ranks - marines
 /obj/item/clothing/accessory/solgov/rank/marine/flag
 	name = "ranks (O-7 brigadier general)"
 	desc = "Insignia denoting the rank of Brigadier General."
-	icon_state = "marinerank_command"
+	icon_state = "armyrank_command"
 
 /obj/item/clothing/accessory/solgov/rank/marine/flag/o8
 	name = "ranks (O-8 major general)"

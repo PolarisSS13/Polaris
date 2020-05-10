@@ -234,3 +234,21 @@
 	name = "fleet command beret"
 	desc = "An SCG Fleet beret with a command crest. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_command"
+
+//Terran
+
+/obj/item/clothing/head/terran/navy/service
+	name = "ICCGN service cover"
+	desc = "A service uniform cover, worn by low-ranking crew within the Independent Navy."
+	icon_state = "terranservice"
+	item_state = "terranservice"
+	item_state_slots = list(
+		slot_l_hand_str = "helmet",
+		slot_r_hand_str = "helmet")
+	body_parts_covered = 0
+
+/obj/item/clothing/head/terran/navy/service/command
+	name = "ICCGN command service cover"
+	desc = "A service uniform cover, worn by high-ranking crew within the Independent Navy."
+	icon_state = "terranservice_comm"
+	item_state = "terranservice_comm"
