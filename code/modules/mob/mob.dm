@@ -209,7 +209,7 @@
 			else
 				client.perspective = EYE_PERSPECTIVE
 				client.eye = loc
-	return
+		return 1
 
 
 /mob/proc/show_inv(mob/user as mob)
