@@ -117,6 +117,7 @@ ribbons
 	icon_state = "ribbon_marksman"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_MEDAL
+	w_class = ITEMSIZE_TINY
 
 /obj/item/clothing/accessory/ribbon/solgov/marksman
 	name = "marksmanship ribbon"
@@ -294,7 +295,7 @@ department tags
 	desc = "Insignia denoting assignment to a department. These appear blank."
 	icon_state = "dept_exped"
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
-	slot = ACCESSORY_SLOT_DECOR
+	slot = ACCESSORY_SLOT_DEPT
 	//removable = FALSE
 
 /obj/item/clothing/accessory/solgov/department/command
@@ -440,7 +441,7 @@ ranks - ec
 	desc = "Insignia denoting rank of some kind. These appear blank."
 	icon_state = "fleetrank"
 	on_rolled = list("down" = "none")
-	slot = ACCESSORY_SLOT_DECOR
+	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
 	//high_visibility = 1
 
