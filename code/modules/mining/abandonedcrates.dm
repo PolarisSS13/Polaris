@@ -9,6 +9,8 @@
 	var/attempts = 10
 	var/codelen = 4
 	locked = 1
+	can_breach = FALSE	//disabled by default
+	breach_time = 300	//on the other hand if you really wanna enable it, default time is jacked up
 
 /obj/structure/closet/crate/secure/loot/New()
 	..()
