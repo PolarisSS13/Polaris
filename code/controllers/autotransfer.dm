@@ -12,6 +12,6 @@ datum/controller/transfer_controller/Destroy()
 
 datum/controller/transfer_controller/process()
 	currenttick = currenttick + 1
-	if (round_duration_in_ticks >= timerbuffer - 1 MINUTE)
+	if (round_duration_in_ds >= timerbuffer - 1 MINUTE)
 		SSvote.autotransfer()
 		timerbuffer = timerbuffer + config.vote_autotransfer_interval
