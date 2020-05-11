@@ -134,7 +134,7 @@
 	if(materials[S.material.name] + amnt <= max_res_amount)
 		if(S && S.get_amount() >= 1)
 			var/count = 0
-			flick("protolathe_loading", src)
+			flick("[initial(icon_state)]_loading", src)
 			while(materials[S.material.name] + amnt <= max_res_amount && S.get_amount() >= 1)
 				materials[S.material.name] += amnt
 				S.use(1)
