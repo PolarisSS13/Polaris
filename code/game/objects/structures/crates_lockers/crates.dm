@@ -134,6 +134,8 @@
 	var/emag = "securecrateemag"
 	var/broken = 0
 	var/locked = 1
+	var/can_breach = TRUE	//if false, the crate can't be cut open with welders or saws
+	var/breach_time = 100	//time to cut open, in deciseconds (why the fuck does byond use deciseconds?)
 
 /obj/structure/closet/crate/secure/New()
 	..()
@@ -195,6 +197,47 @@
 		return ..()
 	if(istype(W, /obj/item/weapon/melee/energy/blade))
 		emag_act(INFINITY, user)
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(opened)
+			return ..()
+		if(!can_breach)
+			to_chat(user, "It doesn't look like you can cut through the lock.")
+			return		
+		if(!locked)
+			to_chat(user, "You don't need to cut it open if it's not locked.")
+			return
+		if (WT.remove_fuel(0,user))
+			playsound(loc, WT.usesound, 50, 1)
+			user.visible_message("[user.name] starts to cut through the crate's locking mechanism.", \
+				"You start to cut through the crate's locking mechanism.", \
+				"You hear welding.")
+			if (do_after(user,breach_time * WT.toolspeed))
+				if(!src || !WT.isOn()) return
+				to_chat(user, "<span class='warning'>You cut through the crate's locking mechanism with your welder.</span>")
+				emag_act(INFINITY, user)
+				desc = "[desc] It looks like it's been cut open with a welder."
+			else
+				to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+	if(istype(W, /obj/item/weapon/surgical/circular_saw))
+		var/obj/item/weapon/surgical/circular_saw/CS = W
+		if(opened)
+			return ..()
+		if(!can_breach)
+			to_chat(user, "It doesn't look like you can cut through the lock.")
+			return
+		if(!locked)
+			to_chat(user, "You don't need to cut it open if it's not locked.")
+			return
+		playsound(loc, CS.hitsound, 50, 1)
+		user.visible_message("[user.name] starts to saw through the crate's locking mechanism.", \
+				"You start to saw through the crate's locking mechanism.", \
+				"You hear sawing.")
+		if (do_after(user,breach_time * 1.5 * CS.toolspeed)) //circular saws are a fair bit slower at the job, but don't require fuel
+			if(!src) return
+			to_chat(user, "<span class='warning'>You saw through the crate's locking mechanism with your... you know, <i>saw</i>.</span>")
+			emag_act(INFINITY, user)
+			desc = "[desc] It looks like it's been cut open with a saw."
 	if(!opened)
 		src.togglelock(user)
 		return
@@ -372,7 +415,7 @@
 	icon_state = "weaponcrate"
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
-
+	breach_time = 200
 
 /obj/structure/closet/crate/secure/phoron
 	name = "phoron crate"
@@ -380,7 +423,7 @@
 	icon_state = "phoroncrate"
 	icon_opened = "phoroncrateopen"
 	icon_closed = "phoroncrate"
-
+	breach_time = 200
 
 /obj/structure/closet/crate/secure/gear
 	name = "gear crate"
@@ -388,7 +431,7 @@
 	icon_state = "secgearcrate"
 	icon_opened = "secgearcrateopen"
 	icon_closed = "secgearcrate"
-
+	breach_time = 200
 
 /obj/structure/closet/crate/secure/hydrosec
 	name = "secure hydroponics crate"
@@ -484,12 +527,13 @@
 	return
 
 
-//fluff variant
+//fluff variant (mostly, made it impossible to breach with tools -KK)
 /obj/structure/closet/crate/secure/large/reinforced
-	desc = "A hefty, reinforced metal crate with an electronic locking system."
+	desc = "A hefty, reinforced metal crate with a hardened electronic locking system."
 	icon_state = "largermetal"
 	icon_opened = "largermetalopen"
 	icon_closed = "largermetal"
+	can_breach = FALSE
 
 /obj/structure/closet/crate/engineering
 	name = "engineering crate"
