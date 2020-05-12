@@ -34,7 +34,7 @@
 				entry += " as [C.mob.real_name]"
 
 			else if(isnewplayer(C.mob))
-				entry += "<span class='blue'>In lobby</b></span>"
+				entry += "<span class='blue'><b>In lobby</b></span>"
 
 			entry += "</td><td>"
 
