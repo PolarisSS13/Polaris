@@ -286,10 +286,8 @@
 
 	if(panel_open)
 		overlays.Add(image(icon, "[icon_state]_panel"))
-
 	if(stat & NOPOWER)
 		return
-
 	if(busy)
 		icon_state = "[icon_state]_work"
 
