@@ -32,13 +32,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 /obj/machinery/telecomms/processor/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser/high(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 1)
+	default_apply_parts()
 
 /obj/machinery/telecomms/broadcaster/proc/link_radio(var/obj/item/device/radio/R)
 	if(!istype(R))
@@ -139,7 +133,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 /obj/machinery/telecomms/allinone
 	name = "Telecommunications Mainframe"
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "comm_server"
+	icon_state = "allinone"
 	desc = "A compact machine used for portable subspace telecommuniations processing."
 	density = 1
 	use_power = USE_POWER_IDLE
@@ -353,7 +347,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	for(var/obj/item/device/radio/R in forced_radios)
 		//Cursory check to ensure they are 'on' and stuff
-		if(R.receive_range(display_freq, list(0)))
+		if(R.receive_range(display_freq, list(0)) > -1)
 			radios |= R
 
 	// --- Broadcast only to intercom devices ---
