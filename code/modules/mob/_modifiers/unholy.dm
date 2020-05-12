@@ -205,3 +205,15 @@
 
 	on_created_text = "<span class='critical'>You feel empty inside.</span>"
 	on_expired_text = "<span class='notice'>A wholeness returns to you, like a long lost friend.</span>"
+
+/datum/modifier/soul_burn
+	name = "burning soul"
+	desc = "Your soul is being burned by an (un)holy flame!"
+
+	on_created_text = "<span class='critical'>You feel an intense burning at your very core, but there are no flames.</span>"
+	on_expired_text = "<span class='cult'>The torment ebbs.</span>"
+
+	incoming_healing_percent = 0.75
+	outgoing_melee_damage_percent = 0.8
+
+	max_health_flat = -15

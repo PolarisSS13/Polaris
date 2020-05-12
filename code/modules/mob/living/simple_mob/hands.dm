@@ -141,6 +141,7 @@
 		target = src.loc
 	if(.)
 		W.forceMove(src.loc)
+		W.dropped(src)
 
 /mob/living/simple_mob/is_holding_item_of_type(typepath)
 	for(var/obj/item/I in list(l_hand, r_hand))

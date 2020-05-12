@@ -1,6 +1,8 @@
 
 GLOBAL_LIST_INIT(cultforge_conversion_list, list(\
-	/obj/item/stack/material/steel = /obj/item/stack/material/bloodsteel\
+	/obj/item/stack/material/steel = /obj/item/stack/material/bloodsteel,\
+	/obj/item/clothing/suit/space = /obj/item/clothing/suit/space/cult,\
+	/obj/item/clothing/head/helmet/space = /obj/item/clothing/head/helmet/space/cult\
 	))
 
 /obj/structure/cult/forge
