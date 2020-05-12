@@ -68,7 +68,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		var/datum/signal/copy
 		if(copysig)
 			copy = new
-			copy.transmission_method = 2
+			copy.transmission_method = TRANSMISSION_SUBSPACE
 			copy.frequency = signal.frequency
 			copy.data = signal.data.Copy()
 
@@ -141,9 +141,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 // Used in auto linking
 /obj/machinery/telecomms/proc/add_link(var/obj/machinery/telecomms/T)
-	var/turf/position = get_turf(src)
-	var/turf/T_position = get_turf(T)
-	if((position.z == T_position.z) || (src.long_range_link && T.long_range_link))
+	var/pos_z = get_z(src)
+	var/tpos_z = get_z(T)
+	if((pos_z == tpos_z) || (src.long_range_link && T.long_range_link))
 		for(var/x in autolinkers)
 			if(T.autolinkers.Find(x))
 				if(src != T)
@@ -256,19 +256,23 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	machinetype = 1
 	produces_heat = 0
 	circuit = /obj/item/weapon/circuitboard/telecomms/receiver
+	//Vars only used if you're using the overmap
+	var/overmap_range = 0
+	var/overmap_range_min = 0
+	var/overmap_range_max = 5
+
+	var/list/linked_radios_weakrefs = list()
 
 /obj/machinery/telecomms/receiver/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	RefreshParts()
+	default_apply_parts()
+
+/obj/machinery/telecomms/receiver/proc/link_radio(var/obj/item/device/radio/R)
+	if(!istype(R))
+		return
+	linked_radios_weakrefs |= weakref(R)
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
-
 	if(!on) // has to be on to receive messages
 		return
 	if(!signal)
@@ -276,7 +280,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(!check_receive_level(signal))
 		return
 
-	if(signal.transmission_method == 2)
+	if(signal.transmission_method == TRANSMISSION_SUBSPACE)
 
 		if(is_freq_listening(signal)) // detect subspace signals
 
@@ -288,14 +292,31 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				relay_information(signal, "/obj/machinery/telecomms/bus") // Send it to a bus instead, if it's linked to one
 
 /obj/machinery/telecomms/receiver/proc/check_receive_level(datum/signal/signal)
+	// If it's a direct message from a bluespace radio, we eat it and convert it into a subspace signal locally
+	if(signal.transmission_method == TRANSMISSION_BLUESPACE)
+		var/obj/item/device/radio/R = signal.data["radio"]
 
-	if(signal.data["level"] != listening_level)
+		//Who're you?
+		if(!(weakref(R) in linked_radios_weakrefs))
+			signal.data["reject"] = 1
+			return 0
+
+		//We'll resend this for you
+		signal.data["level"] = z
+		signal.transmission_method = TRANSMISSION_SUBSPACE
+		return 1
+
+	//Where can we hear?
+	var/list/listening_levels = using_map.get_map_levels(listening_level, TRUE, overmap_range)
+
+	// We couldn't 'hear' it, maybe a relay linked to our hub can 'hear' it
+	if(!(signal.data["level"] in listening_levels))
 		for(var/obj/machinery/telecomms/hub/H in links)
-			var/list/connected_levels = list()
+			var/list/relayed_levels = list()
 			for(var/obj/machinery/telecomms/relay/R in H.links)
 				if(R.can_receive(signal))
-					connected_levels |= R.listening_level
-			if(signal.data["level"] in connected_levels)
+					relayed_levels |= R.listening_level
+			if(signal.data["level"] in relayed_levels)
 				return 1
 		return 0
 	return 1
@@ -324,32 +345,10 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuit = /obj/item/weapon/circuitboard/telecomms/hub
 	long_range_link = 1
 	netspeed = 40
-	var/list/telecomms_map
 
 /obj/machinery/telecomms/hub/Initialize()
 	. = ..()
-	LAZYINITLIST(telecomms_map)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
-
-/obj/machinery/telecomms/hub/process()
-	. = ..()
-	telecomms_map.Cut()
-
-	if(!on)
-		return
-
-	for(var/M in links)
-		if(istype(M,/obj/machinery/telecomms/receiver) || istype(M,/obj/machinery/telecomms/relay))
-			var/obj/machinery/telecomms/R = M
-			if(!R.on)
-				continue
-			telecomms_map |= R.listening_level
+	default_apply_parts()
 
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
@@ -389,13 +388,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/relay/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/telecomms/relay/forceMove(var/newloc)
 	. = ..(newloc)
@@ -405,7 +398,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	// Add our level and send it back
 	if(can_send(signal))
-		signal.data["level"] |= listening_level
+		signal.data["level"] |= using_map.get_map_levels(listening_level)
 
 // Checks to see if it can send/receive.
 
@@ -452,12 +445,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/bus/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 1)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/telecomms/bus/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -513,17 +501,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/processor/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/amplifier(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/analyzer(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -584,12 +562,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms/server/Initialize()
 	. = ..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 1)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -601,7 +574,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				totaltraffic += traffic // add current traffic to total traffic
 
 			//Is this a test signal? Bypass logging
-			if(signal.data["type"] != 4)
+			if(signal.data["type"] != SIGNAL_TEST)
 
 				// If signal has a message and appropriate frequency
 
@@ -723,17 +696,10 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return FALSE
 
 	//Items don't have a Z when inside an object or mob
-	var/turf/src_turf = get_turf(A)
-	var/turf/dst_turf = get_turf(B)
+	var/turf/src_z = get_z(A)
+	var/turf/dst_z = get_z(B)
 
 	//Nullspace, probably.
-	if(!src_turf || !dst_turf)
-		return FALSE
-
-	var/src_z = src_turf.z
-	var/dst_z = dst_turf.z
-
-	//Mysterious!
 	if(!src_z || !dst_z)
 		return FALSE
 
@@ -741,11 +707,4 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	if(ad_hoc && src_z == dst_z)
 		return TRUE
 
-	//Let's look at hubs and see what we got.
-	var/can_comm = FALSE
-	for(var/obj/machinery/telecomms/hub/H in telecomms_list)
-		if((src_z in H.telecomms_map) && (dst_z in H.telecomms_map))
-			can_comm = TRUE
-			break
-
-	return can_comm
+	return src_z in using_map.get_map_levels(dst_z)

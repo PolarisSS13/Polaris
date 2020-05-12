@@ -364,6 +364,7 @@
 
 	var/turf/T = join_props["turf"]
 	var/join_message = join_props["msg"]
+	var/announce_channel = join_props["channel"] || "Common"
 
 	if(!T || !join_message)
 		return 0
@@ -377,10 +378,10 @@
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 
-	// AIs don't need a spawnpoint, they must spawn at an empty core
-	if(character.mind.assigned_role == "AI")
+	var/datum/job/J = SSjob.get_job(rank)
 
-		character = character.AIize(move=0) // AIize the character, but don't move them yet
+	// AIs don't need a spawnpoint, they must spawn at an empty core
+	if(J.mob_type & JOB_SILICON_AI)
 
 		// IsJobAvailable for AI checks that there is an empty core available in this list
 		var/obj/structure/AIcore/deactivated/C = empty_playable_ai_cores[1]
@@ -388,11 +389,14 @@
 
 		character.loc = C.loc
 
+		// AIize the character, but don't move them yet
+		character = character.AIize(move = FALSE) // Dupe of code in /datum/controller/subsystem/ticker/proc/create_characters() for non-latespawn, unify?
+
 		AnnounceCyborg(character, rank, "has been transferred to the empty core in \the [character.loc.loc]")
 		ticker.mode.latespawn(character)
 
-		qdel(C)
-		qdel(src)
+		qdel(C) //Deletes empty core (really?)
+		qdel(src) //Deletes new_player
 		return
 
 	// Equip our custom items only AFTER deploying to spawn points eh?
@@ -406,25 +410,23 @@
 		character.buckled.set_dir(character.dir)
 
 	ticker.mode.latespawn(character)
-
-	if(character.mind.assigned_role != "Cyborg")
+	
+	if(J.mob_type & JOB_SILICON)
+		AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
+	else
+		AnnounceArrival(character, rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
+		
+	qdel(src) // Delete new_player mob
 
-		//Grab some data from the character prefs for use in random news procs.
-
-		AnnounceArrival(character, rank, join_message)
-	else
-		AnnounceCyborg(character, rank, join_message)
-
-	qdel(src)
-
-/mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
+/mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message, var/channel, var/zlevel)
 	if (ticker.current_state == GAME_STATE_PLAYING)
+		var/list/zlevels = zlevel ? using_map.get_map_levels(zlevel, TRUE) : null
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
-		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
+		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer", channel, zlevels)
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name
@@ -584,6 +586,9 @@
 
 // Prevents lobby players from seeing say, even with ghostears
 /mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/italics = 0, var/mob/speaker = null)
+	return
+
+/mob/new_player/hear_holopad_talk(list/message_pieces, var/verb = "says", var/mob/speaker = null)
 	return
 
 // Prevents lobby players from seeing emotes, even with ghosteyes

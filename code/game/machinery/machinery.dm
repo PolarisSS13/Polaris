@@ -123,16 +123,20 @@ Class Procs:
 	..(l)
 	if(d)
 		set_dir(d)
-	if(circuit)
+	if(ispath(circuit))
 		circuit = new circuit(src)
 
-/obj/machinery/Initialize()
+/obj/machinery/Initialize(var/mapload)
 	. = ..()
 	global.machines += src
+	if(ispath(circuit))
+		circuit = new circuit(src)
 	if(!speed_process)
 		START_MACHINE_PROCESSING(src)
 	else
 		START_PROCESSING(SSfastprocess, src)
+	if(!mapload)
+		power_change()
 
 /obj/machinery/Destroy()
 	if(!speed_process)

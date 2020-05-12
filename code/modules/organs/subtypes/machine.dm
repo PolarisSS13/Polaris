@@ -19,7 +19,7 @@
 
 /obj/item/organ/internal/cell/emp_act(severity)
 	..()
-	owner.nutrition = max(0, owner.nutrition - rand(10/severity, 50/severity))
+	owner.adjust_nutrition(-rand(10 / severity, 50 / severity))
 
 // Used for an MMI or posibrain being installed into a human.
 /obj/item/organ/internal/mmi_holder

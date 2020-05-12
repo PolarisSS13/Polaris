@@ -38,6 +38,7 @@
 #include "Geyser2.dmm"
 #include "Geyser3.dmm"
 #include "Cliff1.dmm"
+#include "excavation1.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -253,8 +254,8 @@
 
 /datum/map_template/surface/mountains/deep/crashed_ufo_frigate
 	name = "Crashed UFO Frigate"
-	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet its combat protocols still seem to be running..."
-	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
+	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet the combat protocols still seem to be running..."
+	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo_frigate.dmm'
 	cost = 60
 	discard_prob = 50
 
@@ -337,4 +338,10 @@
 	name = "Crashed Med Shuttle"
 	desc = "A medical response shuttle that went missing some time ago. So this is where they went."
 	mappath = 'maps/submaps/surface_submaps/mountains/CrashedMedShuttle1.dmm'
+	cost = 20
+
+/datum/map_template/surface/mountains/deep/excavation1
+	name = "Excavation Site"
+	desc = "An abandoned mining site."
+	mappath = 'maps/submaps/surface_submaps/mountains/excavation1.dmm'
 	cost = 20

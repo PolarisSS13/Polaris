@@ -39,6 +39,10 @@
 #define POWERCHAN_ON       2
 #define POWERCHAN_ON_AUTO  3
 
+#define NIGHTSHIFT_AUTO 1
+#define NIGHTSHIFT_NEVER 2
+#define NIGHTSHIFT_ALWAYS 3
+
 //NOTE: STUFF STOLEN FROM AIRLOCK.DM thx
 
 /obj/machinery/power/apc/critical
@@ -119,6 +123,10 @@
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
 	var/alarms_hidden = FALSE //If power alarms from this APC are visible on consoles
+	
+	var/nightshift_lights = FALSE
+	var/nightshift_setting = NIGHTSHIFT_AUTO
+	var/last_nightshift_switch = 0
 
 /obj/machinery/power/apc/updateDialog()
 	if (stat & (BROKEN|MAINT))
@@ -251,29 +259,30 @@
 		src.update()
 
 /obj/machinery/power/apc/examine(mob/user)
-	if(..(user, 1))
+	. = ..()
+	if(Adjacent(user))
 		if(stat & BROKEN)
-			to_chat(user, "This APC is broken.")
-			return
-		if(opened)
+			. += "This APC is broken."
+
+		else if(opened)
 			if(has_electronics && terminal)
-				to_chat(user, "The cover is [opened==2?"removed":"open"] and [ cell ? "a power cell is installed" : "the power cell is missing"].")
+				. += "The cover is [opened == 2 ? "removed" : "open"] and [ cell ? "a power cell is installed" : "the power cell is missing"]."
 			else if (!has_electronics && terminal)
-				to_chat(user, "The frame is wired, but the electronics are missing.")
+				. += "The frame is wired, but the electronics are missing."
 			else if (has_electronics && !terminal)
-				to_chat(user, "The electronics are installed, but not wired.")
+				. += "The electronics are installed, but not wired."
 			else /* if (!has_electronics && !terminal) */
-				to_chat(user, "It's just an empty metal frame.")
+				. += "It's just an empty metal frame."
 
 		else
 			if (wiresexposed)
-				to_chat(user, "The cover is closed and the wires are exposed.")
+				. += "The cover is closed and the wires are exposed."
 			else if ((locked && emagged) || hacker) //Some things can cause locked && emagged. Malf AI causes hacker.
-				to_chat(user, "The cover is closed, but the panel is unresponsive.")
+				. += "The cover is closed, but the panel is unresponsive."
 			else if(!locked && emagged) //Normal emag does this.
-				to_chat(user, "The cover is closed, but the panel is flashing an error.")
+				. += "The cover is closed, but the panel is flashing an error."
 			else
-				to_chat(user, "The cover is closed.")
+				. += "The cover is closed."
 
 
 // update the APC icon to show the three base states
@@ -797,6 +806,8 @@
 		"coverLocked" = coverlocked,
 		"siliconUser" = issilicon(user) || isobserver(user), //I add observer here so admins can have more control, even if it makes 'siliconUser' seem inaccurate.
 		"emergencyLights" = !emergency_lights,
+		"nightshiftLights" = nightshift_lights,
+		"nightshiftSetting" = nightshift_setting,
 
 		"powerChannels" = list(
 			list(
@@ -914,6 +925,15 @@
 		return 1
 
 	if(!can_use(usr, 1))
+		return 1
+
+	if(href_list["nightshift"])
+		if(last_nightshift_switch > world.time - 10 SECONDS) // don't spam...
+			to_chat(usr, "<span class='warning'>[src]'s night lighting circuit breaker is still cycling!</span>")
+			return 0
+		last_nightshift_switch = world.time
+		nightshift_setting = text2num(href_list["nightshift"])
+		update_nightshift()
 		return 1
 
 	if(locked && !issilicon(usr) )
@@ -1255,7 +1275,7 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 					cell.ex_act(3)
 	return
 
-/obj/machinery/power/apc/disconnect_terminal()
+/obj/machinery/power/apc/disconnect_terminal(var/obj/machinery/power/terminal/term)
 	if(terminal)
 		terminal.master = null
 		terminal = null
@@ -1365,5 +1385,25 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	spawn(15 MINUTES) // Protection against someone deconning the grid checker after a grid check happens, preventing infinte blackout.
 		if(src && grid_check == TRUE)
 			grid_check = FALSE
+
+/obj/machinery/power/apc/proc/set_nightshift(on, var/automated)
+	set waitfor = FALSE
+	if(automated && istype(area, /area/shuttle))
+		return
+	nightshift_lights = on
+	update_nightshift()
+
+/obj/machinery/power/apc/proc/update_nightshift()
+	var/new_state = nightshift_lights
+
+	switch(nightshift_setting)
+		if(NIGHTSHIFT_NEVER)
+			new_state = FALSE
+		if(NIGHTSHIFT_ALWAYS)
+			new_state = TRUE
+
+	for(var/obj/machinery/light/L in area)
+		L.nightshift_mode(new_state)
+		CHECK_TICK
 
 #undef APC_UPDATE_ICON_COOLDOWN

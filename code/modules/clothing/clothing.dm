@@ -59,7 +59,7 @@
 		user.recalculate_vis()
 
 //BS12: Species-restricted clothing check.
-/obj/item/clothing/mob_can_equip(M as mob, slot)
+/obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
@@ -95,6 +95,42 @@
 			if(check != 0)	// Projectiles sometimes use negatives IIRC, 0 is only returned if something is not blocked.
 				. = check
 				break
+
+// For now, these two temp procs only return TRUE or FALSE if they can provide resistance to a given temperature.
+/obj/item/clothing/proc/handle_low_temperature(var/tempcheck = T20C)
+	. = FALSE
+	if(LAZYLEN(accessories))
+		for(var/obj/item/clothing/C in accessories)
+			if(C.handle_low_temperature(tempcheck))
+				. = TRUE
+
+	if(min_cold_protection_temperature && min_cold_protection_temperature <= tempcheck)
+		. = TRUE
+
+/obj/item/clothing/proc/handle_high_temperature(var/tempcheck = T20C)
+	. = FALSE
+	if(LAZYLEN(accessories))
+		for(var/obj/item/clothing/C in accessories)
+			if(C.handle_low_temperature(tempcheck))
+				. = TRUE
+
+	if(max_heat_protection_temperature && max_heat_protection_temperature >= tempcheck)
+		. = TRUE
+
+// Returns the relative flag-vars for covered protection.
+/obj/item/clothing/proc/get_cold_protection_flags()
+	. = cold_protection
+
+	if(LAZYLEN(accessories))
+		for(var/obj/item/clothing/C in accessories)
+			. |= C.get_cold_protection_flags()
+
+/obj/item/clothing/proc/get_heat_protection_flags()
+	. = heat_protection
+
+	if(LAZYLEN(accessories))
+		for(var/obj/item/clothing/C in accessories)
+			. |= C.get_heat_protection_flags()
 
 /obj/item/clothing/proc/refit_for_species(var/target_species)
 	if(!species_restricted)
@@ -827,16 +863,16 @@
 
 
 /obj/item/clothing/under/examine(mob/user)
-	..(user)
+	. = ..()
 	switch(src.sensor_mode)
 		if(0)
-			to_chat(user, "Its sensors appear to be disabled.")
+			. += "Its sensors appear to be disabled."
 		if(1)
-			to_chat(user, "Its binary life sensors appear to be enabled.")
+			. += "Its binary life sensors appear to be enabled."
 		if(2)
-			to_chat(user, "Its vital tracker appears to be enabled.")
+			. += "Its vital tracker appears to be enabled."
 		if(3)
-			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
+			. += "Its vital tracker and tracking beacon appear to be enabled."
 
 /obj/item/clothing/under/proc/set_sensors(mob/usr as mob)
 	var/mob/M = usr
