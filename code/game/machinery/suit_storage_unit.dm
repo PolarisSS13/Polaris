@@ -657,6 +657,15 @@
 	model_text = "Pilot"
 	departments = list("Pilot Blue","Pilot")
 
+/obj/machinery/suit_cycler/vintage
+	name = "Vintage suit cycler"
+	model_text = "Vintage Crewman's"
+	departments = list("Vintage Crewman's","Vintage Engineer's","Vintage Medic's","Vintage Marine's","Vintage Officer's")
+
+/obj/machinery/suit_cycler/vintage/Initialize()
+	species -= SPECIES_TESHARI
+	return ..()
+
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
@@ -1068,6 +1077,22 @@
 		if("Gem-Encrusted" || "Wizard")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/wizard
 			parent_suit = /obj/item/clothing/suit/space/void/wizard
+		//Special or Event suits
+		if("Vintage Crewman's")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb
+			parent_suit = /obj/item/clothing/suit/space/void/refurb
+		if("Vintage Engineer's")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/engineering
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/engineering
+		if("Vintage Medic's")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical
+		if("Vintage Guard's")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/marine
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/marine
+		if("Vintage Officer's")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/officer
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/officer
 		//BEGIN: Space for additional downstream variants
 		
 		//END: downstream variant space
