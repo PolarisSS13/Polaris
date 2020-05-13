@@ -30,7 +30,7 @@
 /obj/item/clothing/suit/space/void/refurb/engineering
 	name = "vintage engineering voidsuit"
 	desc = "A refurbished early contact era voidsuit of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. This one in particular seems to be an ode to the Ship of Theseus, but the insulation and radiation proofing are top-notch. The chestplate bears the logo of an old shipyard - though you don't recognize the name."
-	icon_state = "rig-vintageengineering"
+	icon_state = "rig-vintageengi"
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 1
 	armor = list(melee = 40, bullet = 20, laser = 20, energy = 5, bomb = 35, bio = 100, rad = 100)
@@ -42,14 +42,14 @@
 /obj/item/clothing/head/helmet/space/void/refurb/medical
 	name = "vintage medical voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. The green and white markings indicate this as a medic's suit."
-	icon_state = "rig0-vintagemedical"
+	icon_state = "rig0-vintagemedic"
 	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
 	armor = list(melee = 30, bullet = 15, laser = 15, energy = 5, bomb = 25, bio = 100, rad = 75)
 
 /obj/item/clothing/suit/space/void/refurb/medical
 	name = "vintage medical voidsuit"
 	desc = "A refurbished early contact era voidsuit of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. Many old-timer spacers swear by these old things, even if new powered hardsuits have more features and better armor. The green and white markings indicate this as a medic's suit."
-	icon_state = "rig-vintagemedical"
+	icon_state = "rig-vintagemedic"
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 0.5
 	armor = list(melee = 30, bullet = 15, laser = 15, energy = 5, bomb = 25, bio = 100, rad = 75)
