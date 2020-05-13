@@ -1,5 +1,9 @@
 //Refurbished Set
-//Standard Crewsuit
+//Voidsuits from old Terran exploration vessels and naval ships.
+
+//Standard Crewsuit (GRAY)
+//Nothing really special here. Some light resists for mostly-non-combat purposes. The rad protection ain't bad?
+//The reduced slowdown is an added bonus - something to make it worth considering using if you do find it.
 /obj/item/clothing/head/helmet/space/void/refurb
 	name = "vintage crewman's voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. This one is devoid of any identifying markings or rank indicators."
@@ -16,7 +20,9 @@
 	slowdown = 0.5
 	armor = list(melee = 30, bullet = 15, laser = 15,energy = 5, bomb = 20, bio = 100, rad = 50)
 
-//Engineering Crewsuit
+//Engineering Crewsuit (ORANGE, RING)
+//This is probably the most appealing to get your hands on for basic protection and the specialist stuff
+//Don't expect it to stand up to modern assault/laser rifles, but it'll make you a fair bit tougher against most low-end pistols and SMGs
 /obj/item/clothing/head/helmet/space/void/refurb/engineering
 	name = "vintage engineering voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. This one in particular seems to be an ode to the Ship of Theseus, but the insulation and radiation proofing are top-notch, and it has several oily stains that seem to be impossible to scrub off."
@@ -38,7 +44,9 @@
 	max_pressure_protection = 15 * ONE_ATMOSPHERE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-//Medical Crewsuit
+//Medical Crewsuit (GREEN, CROSS)
+//This thing is basically tissuepaper, but it has very solid rad protection for its age
+//It also has the bonus of not slowing you down quite as much as other suits, same as the crew suit
 /obj/item/clothing/head/helmet/space/void/refurb/medical
 	name = "vintage medical voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. The green and white markings indicate this as a medic's suit."
@@ -54,7 +62,8 @@
 	slowdown = 0.5
 	armor = list(melee = 30, bullet = 15, laser = 15, energy = 5, bomb = 25, bio = 100, rad = 75)
 
-//Guard Crewsuit
+//Marine Crewsuit (BLUE, SHIELD)
+//Really solid, balance between Sec and Sec EVA, but it has slightly worse shock protection
 /obj/item/clothing/head/helmet/space/void/refurb/marine
 	name = "vintage marine's voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. The blue markings indicate this as the marine/guard variant, likely from a merchant ship."
@@ -72,7 +81,9 @@
 	armor = list(melee = 40, bullet = 35, laser = 35, energy = 5, bomb = 40, bio = 100, rad = 50)
 	siemens_coefficient = 0.8
 
-//Guard Crewsuit
+//Officer Crewsuit (GOLD, X)
+//The best of the bunch - at the time, this would have been almost cutting edge
+//Now it's good, but it's badly outclassed by the hot shit that the TSCs and such can get 
 /obj/item/clothing/head/helmet/space/void/refurb/officer
 	name = "vintage officer's voidsuit helmet"
 	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. This variant appears to be an officer's, and has the best protection of all the old models."
