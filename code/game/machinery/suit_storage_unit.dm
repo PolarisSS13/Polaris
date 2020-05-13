@@ -659,8 +659,8 @@
 
 /obj/machinery/suit_cycler/vintage
 	name = "Vintage suit cycler"
-	model_text = "Vintage Crewman's"
-	departments = list("Vintage Crewman's","Vintage Engineer's","Vintage Medic's","Vintage Marine's","Vintage Officer's")
+	model_text = "Vintage"
+	departments = list("Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer")
 
 /obj/machinery/suit_cycler/vintage/Initialize()
 	species -= SPECIES_TESHARI
@@ -775,7 +775,7 @@
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
-	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring")
+	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring","Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer")
 	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
 
 	emagged = 1
@@ -1078,19 +1078,19 @@
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/wizard
 			parent_suit = /obj/item/clothing/suit/space/void/wizard
 		//Special or Event suits
-		if("Vintage Crewman's")
+		if("Vintage Crew")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb
 			parent_suit = /obj/item/clothing/suit/space/void/refurb
-		if("Vintage Engineer's")
+		if("Vintage Engineering")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/engineering
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/engineering
-		if("Vintage Medic's")
+		if("Vintage Medical")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical
-		if("Vintage Guard's")
+		if("Vintage Marine")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/marine
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/marine
-		if("Vintage Officer's")
+		if("Vintage Officer")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/officer
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/officer
 		//BEGIN: Space for additional downstream variants
