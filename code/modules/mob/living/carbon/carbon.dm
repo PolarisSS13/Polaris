@@ -37,9 +37,10 @@
 	. = ..()
 	if(.)
 		if(src.nutrition && src.stat != 2)
-			src.nutrition -= DEFAULT_HUNGER_FACTOR/10
+			adjust_nutrition(-DEFAULT_HUNGER_FACTOR / 10)
 			if(src.m_intent == "run")
-				src.nutrition -= DEFAULT_HUNGER_FACTOR/10
+				adjust_nutrition(-DEFAULT_HUNGER_FACTOR / 10)
+
 		if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
 
@@ -109,7 +110,7 @@
 	src.apply_damage(0.4 * shock_damage, BURN, BP_TORSO, used_weapon="Electrocution") //shock the torso more
 	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
 	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
-	
+
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(

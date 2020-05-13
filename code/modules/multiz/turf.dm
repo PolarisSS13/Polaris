@@ -65,11 +65,12 @@
 		O.hide(0)
 
 /turf/simulated/open/examine(mob/user, distance, infix, suffix)
-	if(..(user, 2))
+	. = ..()
+	if(Adjacent(user))
 		var/depth = 1
 		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
 			depth += 1
-		to_chat(user, "It is about [depth] levels deep.")
+		. += "It is about [depth] levels deep."
 
 /**
 * Update icon and overlays of open space to be that of the turf below, plus any visible objects on that turf.
@@ -77,8 +78,13 @@
 /turf/simulated/open/update_icon()
 	cut_overlays() // Edit - Overlays are being crashy when modified.
 	update_icon_edge()// Add - Get grass into open spaces and whatnot.
-	var/turf/below = GetBelow(src)
 	if(below)
+		// Skybox lives on its own plane, if we don't set it to see that, then open space tiles over true space tiles see white nothingness below
+		if(is_space())
+			plane = SPACE_PLANE
+		else
+			plane = OPENSPACE_PLANE + src.z
+
 		var/below_is_open = isopenspace(below)
 
 		if(below_is_open)

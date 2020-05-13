@@ -130,8 +130,8 @@
 	create_reagents(volume)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
-	..()
-	to_chat(user, "The cartridge has [reagents.total_volume] units of liquid remaining.")
+	. = ..()
+	. += "The cartridge has [reagents.total_volume] units of liquid remaining."
 
 //flavours
 /obj/item/weapon/reagent_containers/ecig_cartridge/blank

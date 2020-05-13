@@ -16,18 +16,14 @@
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
-/obj/machinery/photocopier/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/motor(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	RefreshParts()
+/obj/machinery/photocopier/Initialize()
+	. = ..()
+	default_apply_parts()
 
 /obj/machinery/photocopier/examine(mob/user as mob)
-	if(..(user, 1))
-		to_chat(user, "The screen shows there's [toner ? "[toner]" : "no"] toner left in the printer.")
+	. = ..()
+	if(Adjacent(user))
+		. += "The screen shows there's [toner ? "[toner]" : "no"] toner left in the printer."
 
 /obj/machinery/photocopier/attack_ai(mob/user as mob)
 	return attack_hand(user)

@@ -1039,7 +1039,7 @@ default behaviour is:
 						if(getBruteLoss() < 50)
 							adjustBruteLoss(3)
 					else
-						nutrition -= 40
+						adjust_nutrition(-40)
 						adjustToxLoss(-3)
 
 		spawn(350)
@@ -1301,6 +1301,9 @@ default behaviour is:
 
 /mob/living/proc/needs_to_breathe()
 	return !isSynthetic()
+
+/mob/living/proc/adjust_nutrition(amount)
+	nutrition = between(0, nutrition + amount, max_nutrition)
 
 /mob/living/vv_get_header()
 	. = ..()

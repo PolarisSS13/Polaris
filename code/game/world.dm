@@ -16,7 +16,7 @@
 	if(config && config.log_runtime)
 		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
 
-	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
+	GLOB.timezoneOffset = get_timezone_offset()
 
 	callHook("startup")
 	init_vchat()
@@ -51,7 +51,7 @@
 	processScheduler = new
 	master_controller = new /datum/controller/game_controller()
 
-	processScheduler.deferSetupFor(/datum/controller/process/ticker)
+	// processScheduler.deferSetupFor(/datum/controller/process/ticker) // Ticker is now a real subsystem!
 	processScheduler.setup()
 	Master.Initialize(10, FALSE)
 
@@ -655,6 +655,6 @@ proc/establish_old_db_connection()
 
 // Called whenver world.tick_lag or world.fps are changed.
 /world/proc/on_tickrate_change()
-	SStimer?.reset_buckets() 
+	SStimer?.reset_buckets()
 
 #undef FAILED_DB_CONNECTION_CUTOFF

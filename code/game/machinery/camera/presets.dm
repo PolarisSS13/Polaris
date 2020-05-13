@@ -102,6 +102,7 @@ var/global/list/engineering_networks = list(
 /obj/machinery/camera/network/thunder
 	network = list(NETWORK_THUNDER)
 	invuln = 1
+	always_visible = TRUE
 
 // EMP
 
@@ -222,4 +223,4 @@ var/global/list/engineering_networks = list(
 		mult++
 	if (isMotion())
 		mult++
-	active_power_usage = mult*initial(active_power_usage)
+	update_active_power_usage(mult * initial(active_power_usage))
