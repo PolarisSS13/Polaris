@@ -19,6 +19,15 @@
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 0.5
 	armor = list(melee = 30, bullet = 15, laser = 15,energy = 5, bomb = 20, bio = 100, rad = 50)
+	allowed = list(/obj/item/device/flashlight,
+			/obj/item/weapon/tank,
+			/obj/item/device/suit_cooling_unit,
+			/obj/item/weapon/storage/briefcase/inflatable,
+			/obj/item/device/gps,
+			/obj/item/device/radio/beacon,
+			/obj/item/weapon/pickaxe,
+			/obj/item/weapon/shovel
+			)
 
 //Engineering Crewsuit (ORANGE, RING)
 //This is probably the most appealing to get your hands on for basic protection and the specialist stuff
@@ -43,6 +52,22 @@
 	min_pressure_protection = 0  * ONE_ATMOSPHERE
 	max_pressure_protection = 15 * ONE_ATMOSPHERE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	allowed = list(/obj/item/device/flashlight,
+			/obj/item/weapon/tank,
+			/obj/item/device/suit_cooling_unit,
+			/obj/item/device/t_scanner,
+			/obj/item/weapon/rcd,
+			/obj/item/weapon/rcd_ammo,
+			/obj/item/weapon/storage/toolbox,
+			/obj/item/weapon/storage/briefcase/inflatable,
+			/obj/item/device/gps,
+			/obj/item/device/radio/beacon,
+			/obj/item/weapon/tool,
+			/obj/item/weapon/weldingtool,
+			/obj/item/weapon/cell,
+			/obj/item/weapon/pickaxe,
+			/obj/item/weapon/shovel
+			)
 
 //Medical Crewsuit (GREEN, CROSS)
 //This thing is basically tissuepaper, but it has very solid rad protection for its age
@@ -61,6 +86,16 @@
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 0.5
 	armor = list(melee = 30, bullet = 15, laser = 15, energy = 5, bomb = 25, bio = 100, rad = 75)
+	allowed = list(/obj/item/device/flashlight,
+			/obj/item/weapon/tank,
+			/obj/item/device/suit_cooling_unit,
+			/obj/item/weapon/storage/firstaid,
+			/obj/item/device/healthanalyzer,
+			/obj/item/stack/medical,
+			/obj/item/device/gps,
+			/obj/item/device/radio/beacon,
+			/obj/item/weapon/cell
+			)
 
 //Marine Crewsuit (BLUE, SHIELD)
 //Really solid, balance between Sec and Sec EVA, but it has slightly worse shock protection
@@ -80,6 +115,17 @@
 	slowdown = 1
 	armor = list(melee = 40, bullet = 35, laser = 35, energy = 5, bomb = 40, bio = 100, rad = 50)
 	siemens_coefficient = 0.8
+	allowed = list(/obj/item/weapon/gun,
+			/obj/item/device/flashlight,
+			/obj/item/weapon/tank,
+			/obj/item/device/suit_cooling_unit,
+			/obj/item/weapon/melee,
+			/obj/item/device/gps,
+			/obj/item/device/radio/beacon,
+			/obj/item/weapon/handcuffs,
+			/obj/item/ammo_magazine,
+			/obj/item/weapon/cell
+			)
 
 //Officer Crewsuit (GOLD, X)
 //The best of the bunch - at the time, this would have been almost cutting edge
@@ -100,3 +146,14 @@
 	slowdown = 1
 	armor = list(melee = 50, bullet = 45, laser = 45, energy = 10, bomb = 30, bio = 100, rad = 60)
 	siemens_coefficient = 0.7
+	allowed = list(/obj/item/weapon/gun,
+			/obj/item/device/flashlight,
+			/obj/item/weapon/tank,
+			/obj/item/device/suit_cooling_unit,
+			/obj/item/weapon/melee,
+			/obj/item/device/gps,
+			/obj/item/device/radio/beacon,
+			/obj/item/weapon/handcuffs,
+			/obj/item/ammo_magazine,
+			/obj/item/weapon/cell
+			)
