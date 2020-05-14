@@ -1218,13 +1218,7 @@
 		var/hungry_alert = /obj/screen/alert/hungry
 		var/starving_alert = /obj/screen/alert/starving
 
-		if(get_species() == SPECIES_CUSTOM)
-			var/datum/species/custom/C = species
-			if(/datum/trait/bloodsucker in C.traits)
-				fat_alert = /obj/screen/alert/fat/vampire
-				hungry_alert = /obj/screen/alert/hungry/vampire
-				starving_alert = /obj/screen/alert/starving/vampire
-		else if(isSynthetic())
+		if(isSynthetic())
 			fat_alert = /obj/screen/alert/fat/synth
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth

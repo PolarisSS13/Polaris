@@ -253,30 +253,6 @@
 		mymob.healths.screen_loc = ui_health
 		hud_elements |= mymob.healths
 
-	if(hud_data.has_pressure)
-		mymob.pressure = new /obj/screen()
-		mymob.pressure.icon = ui_style
-		mymob.pressure.icon_state = "pressure0"
-		mymob.pressure.name = "pressure"
-		mymob.pressure.screen_loc = ui_pressure
-		hud_elements |= mymob.pressure
-
-	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new /obj/screen()
-		mymob.bodytemp.icon = ui_style
-		mymob.bodytemp.icon_state = "temp1"
-		mymob.bodytemp.name = "body temperature"
-		mymob.bodytemp.screen_loc = ui_temp
-		hud_elements |= mymob.bodytemp
-
-	if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen()
-		mymob.nutrition_icon.icon = ui_style
-		mymob.nutrition_icon.icon_state = "nutrition0"
-		mymob.nutrition_icon.name = "nutrition"
-		mymob.nutrition_icon.screen_loc = ui_nutrition
-		hud_elements |= mymob.nutrition_icon
-
 	mymob.ling_chem_display = new /obj/screen/ling/chems()
 	mymob.ling_chem_display.screen_loc = ui_ling_chemical_display
 	mymob.ling_chem_display.icon_state = "ling_chems"
