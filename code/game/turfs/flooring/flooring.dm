@@ -290,7 +290,7 @@ var/list/flooring_types
 	icon_base = "lino"
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
-	flags = TURF_REMOVE_SCREWDRIVER
+	flags = TURF_REMOVE_SCREWDRIVER | TURF_CAN_BREAK | TURF_CAN_BURN
 
 /decl/flooring/tiling/red
 	name = "floor"
@@ -313,7 +313,6 @@ var/list/flooring_types
 	name = "floor"
 	icon_base = "asteroidfloor"
 	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor/steel
 
 /decl/flooring/tiling/white
@@ -326,7 +325,6 @@ var/list/flooring_types
 	name = "floor"
 	icon_base = "white"
 	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor/yellow
 
 /decl/flooring/tiling/dark
@@ -334,7 +332,6 @@ var/list/flooring_types
 	desc = "How ominous."
 	icon_base = "dark"
 	has_damage_range = null
-	flags = TURF_REMOVE_CROWBAR
 	build_type = /obj/item/stack/tile/floor/dark
 
 /decl/flooring/tiling/hydro
@@ -382,7 +379,7 @@ var/list/flooring_types
 	desc = "Heavily reinforced with steel rods."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "reinforced"
-	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
+	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE | TURF_CAN_BURN | TURF_CAN_BREAK
 	build_type = /obj/item/stack/rods
 	build_cost = 2
 	build_time = 30
@@ -401,7 +398,7 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/circuit.dmi'
 	icon_base = "bcircuit"
 	build_type = null
-	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_CAN_BURN | TURF_REMOVE_CROWBAR
 	can_paint = 1
 
 /decl/flooring/reinforced/circuit/green
